@@ -1,39 +1,37 @@
-### VERSION ###
-DKSET(WEBSOCKETS_MAJOR 2)
-DKSET(WEBSOCKETS_MINOR 2)
-DKSET(WEBSOCKETS_BUILD 0)
-DKSET(WEBSOCKETS_VERSION ${WEBSOCKETS_MAJOR}.${WEBSOCKETS_MINOR}.${WEBSOCKETS_BUILD})
-DKSET(WEBSOCKETS_NAME libwebsockets-${WEBSOCKETS_VERSION})
-DKSET(WEBSOCKETS ${3RDPARTY}/${WEBSOCKETS_NAME})
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### INSTALL ###
-DKINSTALL(https://github.com/warmcat/libwebsockets/archive/v${WEBSOCKETS_MAJOR}.${WEBSOCKETS_MINOR}.${WEBSOCKETS_BUILD}.zip libwebsockets ${WEBSOCKETS})
+############ libwebsockets ############
+# https://libwebsockets.org
+# https://github.com/warmcat/libwebsockets
+# https://github.com/warmcat/libwebsockets/archive/v2.2.0.zip
+dk_load(dk_builder)
 
+### DEPEND ###
+#dk_depend(openssl)
+
+### IMPORT ###
+dk_import(https://github.com/warmcat/libwebsockets/archive/6b950e86.zip)
 
 ### LINK ###
-DKINCLUDE(${WEBSOCKETS}/lib)
-DKINCLUDE(${WEBSOCKETS}/${OS})
-WIN_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/websockets_static.lib)
-WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.lib)
-## APPLE_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/libwebsockets.a)
-## APPLE_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/libwebsockets.a)
-LINUX_DEBUG_LIB(${WEBSOCKETS}/${OS}/${DEBUG_DIR}/lib/libwebsockets.a)
-LINUX_RELEASE_LIB(${WEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
-## ANDROID_DEBUG_LIB(${WEBSOCKETS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
-## ANDROID_RELEASE_LIB(${WEBSOCKETS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
+dk_include			(${LIBWEBSOCKETS}/lib)
+dk_include			(${LIBWEBSOCKETS}/${triple})
+if(MSVC)
+	dk_libDebug		(${LIBWEBSOCKETS}/${triple}/lib/${DEBUG_DIR}/websockets_static.lib)
+	dk_libRelease	(${LIBWEBSOCKETS}/${triple}/lib/${RELEASE_DIR}/websockets_static.lib)
+else()
+	dk_libDebug		(${LIBWEBSOCKETS_DEBUG_DIR}/lib/libwebsockets_static.a)
+	dk_libRelease	(${LIBWEBSOCKETS_RELEASE_DIR}/lib/libwebsockets_static.a)
+endif()
 
+### GENERATE ###
+dk_configure(${LIBWEBSOCKETS} 
+		-DLWS_WITH_MINIMAL_EXAMPLES=OFF
+		-DLWS_WITH_SSL=OFF)
 
 ### COMPILE ###
-WIN_PATH(${WEBSOCKETS}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} -LWS_WITH_SSL=OFF ${WEBSOCKETS})
-WIN64_COMMAND(${DKCMAKE_WIN64} -LWS_WITH_SSL=OFF ${WEBSOCKETS})
-WIN_VS(${WEBSOCKETS_NAME} libwebsockets.sln websockets)
-
-DKSETPATH(${WEBSOCKETS}/${OS}/Debug)
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} -DLWS_WITH_SSL=OFF ${WEBSOCKETS})
-LINUX_DEBUG_COMMAND(make)
-
-DKSETPATH(${WEBSOCKETS}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} -DLWS_WITH_SSL=OFF ${WEBSOCKETS})
-LINUX_RELEASE_COMMAND(make)
+dk_build(${LIBWEBSOCKETS} websockets)

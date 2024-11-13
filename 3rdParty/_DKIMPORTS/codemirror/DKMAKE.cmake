@@ -1,10 +1,12 @@
-# https://codemirror.net/codemirror.zip
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
-### VERSION ###
-DKSET(CODEMIRROR_VERSION 5.60.0)
-DKSET(CODEMIRROR_NAME codemirror-${CODEMIRROR_VERSION})
-DKSET(CODEMIRROR_DL https://codemirror.net/codemirror.zip)
-DKSET(CODEMIRROR ${3RDPARTY}/${CODEMIRROR_NAME})
 
-### INSTALL ###
-DKINSTALL(${CODEMIRROR_DL} codemirror ${CODEMIRROR})
+############ codemirror ############
+# https://github.com/codemirror/CodeMirror.git
+dk_load(dk_builder)
+
+dk_import(https://github.com/codemirror/codemirror5/archive/998f328.zip)

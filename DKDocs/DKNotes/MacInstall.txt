@@ -1,0 +1,192 @@
+*** UPDATE 1/27/17 ***
+This is an old file about how to build Mac from scratch.
+Much of this is outdated, but the same rules apply with the correct libraries from _DKIMPORTS
+
+
+
+DKApp should compile on Mac. Testing and development for OSX/iOS are a little behind. my mac crashed :(
+
+Here are the step by step instruction and commands to get each tool for the toolchain and compiling of each libraries. The libraries necessary for DKApp are working, but untested. 
+
+
+MAC OSX install
+---------------
+
+OSX 10.7.5 (LION) x64
+
+**MACPORTS**
+* install MacPorts https://www.macports.org/install.php
+
+**SUBVERSION**
+* sudo port install subversion
+* cd Desktop
+* svn checkout https://github.com/aquawicket/DigitalKnob/trunk/ digitalknob
+
+**XCODE**
+* https://developer.apple.com/downloads/
+* install XCode
+* run XCode to finish setting up environment 
+
+**CMAKE**
+* install CMake http://DigitalKnob.com/Download/Tools/cmake-3.4.0-rc1-Darwin-x86_64.dmg
+* sudo port install cmake
+
+
+**Single commands to build all libraries**
+
+(In Terminal)
+cd into /digitalknob/DKPlugins (each library command assumes you are here)
+In order, copy and paste each command.
+
+FATAL: all occurences of /"username"/ must be replaced with your correct directory name. 
+      It's best to just copy this document and do a "replace all" ;)
+
+	  
+
+**BOOST** (paste these individually)
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/boost_1_57_0.zip; unzip -a -o boost_1_57_0.zip; cp -RfXv "_patches/boost_1_57_0" "."; cd boost_1_57_0; sudo ./bootstrap.sh
+
+sudo ./bjam --toolset=darwin address-model=64 link=static variant=debug runtime-debugging=on runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --stagedir=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/boost_1_57_0/mac/Debug
+
+sudo ./bjam --toolset=darwin address-model=64 link=static variant=release runtime-debugging=off runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --stagedir=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/boost_1_57_0/mac/Release; cd ../../
+
+
+**ZLIB**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/zlib128.zip; unzip -a -o zlib128.zip; cp -RfXv "_patches/zlib-1.2.8" "."; cd zlib-1.2.8; mkdir mac; cd mac; cmake -G "Xcode" ../../zlib-1.2.8 -DCMAKE_OSX_ARCHITECTURES="x86_64"; xcodebuild -target zlibstatic -configuration Debug build; xcodebuild -target zlibstatic -configuration Release build; cd ../../../
+
+
+**THREADPOOL**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/threadpool-0_2_5-src.zip; unzip -a -o threadpool-0_2_5-src.zip; cd ../
+
+
+**DUKTAPE**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/duktape-1.2.2.tar; tar xopf duktape-1.2.2.tar; cp -RfXv "_patches/duktape-1.2.2" "."; cd ../
+
+
+**FREETYPE**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/freetype-2.5.5.tar.gz; gunzip -c freetype-2.5.5.tar.gz | tar xopf -; cp -RfXv "_patches/freetype-2.5.5" "."; cd freetype-2.5.5; mkdir mac; cd mac; cmake -G "Xcode" ../../freetype-2.5.5 -DCMAKE_OSX_ARCHITECTURES="x86_64"; xcodebuild -target freetype -configuration Debug build; xcodebuild -target freetype -configuration Release build; cd ../../../
+
+
+**BZIP2**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/bzip2-1.0.6.tar.gz; gunzip -c bzip2-1.0.6.tar.gz | tar xopf -; cp -RfXv "_patches/bzip2-1.0.6" "."; cp -RfXv "bzip2-1.0.6" "bzip_temp"; mv bzip_temp bzip2-1.0.6/mac; cd bzip2-1.0.6; cd mac; make CXXFLAGS="-arch x86_64" CFLAGS="-arch x86_64" LDFLAGS="-arch x86_64"; cd ../../../
+
+
+**XZ**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/xz-5.2.0.tar.gz; gunzip -c xz-5.2.0.tar.gz | tar xopf -; cd xz-5.2.0; mkdir mac; cd mac; mkdir Debug; cd Debug; ../../configure --disable-shared --enable-static; make CXXFLAGS="-arch x86_64" CFLAGS="-arch x86_64" LDFLAGS="-arch x86_64"; cd ../; mkdir Release; cd Release; ../../configure --disable-shared --enable-static; make CXXFLAGS="-arch x86_64" CFLAGS="-arch x86_64" LDFLAGS="-arch x86_64"; cd ../../../../
+
+
+**ARCHIVE**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/libarchive-2.8.5.zip; unzip -a -o libarchive-2.8.5.zip; cp -RfXv "_patches/libarchive-2.8.5" "."; cd libarchive-2.8.5; mkdir mac; cd mac; cmake -G "Xcode" ../../libarchive-2.8.5 -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_C_FLAGS="-I/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8/mac" -DBUILD_TESTING=OFF -DENABLE_TEST=OFF -DENABLE_ACL=OFF -DENABLE_CPIO=OFF -DENABLE_CNG=OFF -DENABLE_ICONV=OFF -DENABLE_NETTLE=OFF -DENABLE_OPENSSL=OFF -DENABLE_TAR=ON -DENABLE_XATTR=OFF -DLIBXML2_INCLUDE_DIR="" -DLIBXML2_LIBRARIES="" -DLIBXML2_XMLLINT_EXECUTABLE="" -DLZO2_INCLUDE_DIR="" -DLZO2_LIBRARY="" -DEXPAT_INCLUDE_DIR="" -DEXPAT_LIBRARY="" -DICONV_INCLUDE_DIR="" -DZLIB_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8 -DZLIB_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8/mac/Release/libz.a -DLZMA_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/xz-5.2.0/src/liblzma/api -DLZMA_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/xz-5.2.0/mac/Release/src/liblzma/.libs/liblzma.a -DBZIP2_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/bzip2-1.0.6 -DBZIP2_LIBRARY_DEBUG=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/bzip2-1.0.6/mac/libbz2.a -DBZIP2_LIBRARY_RELEASE=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/bzip2-1.0.6/mac/libbz2.a; xcodebuild -target archive_static -configuration Debug build; xcodebuild -target archive_static -configuration Release build; cd ../../../
+
+
+**GIF**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/giflib-5.1.1.tar.gz; gunzip -c giflib-5.1.1.tar.gz | tar xopf -; cp -RfXv "_patches/giflib-5.1.1" "."; cd giflib-5.1.1; mkdir mac; cd mac; mkdir Debug; cd Debug; ../../configure --disable-shared --enable-static; make CXXFLAGS="-arch x86_64" CFLAGS="-arch x86_64" LDFLAGS="-arch x86_64"; cd ../; mkdir Release; cd Release; ../../configure --disable-shared --enable-static; make CXXFLAGS="-arch x86_64" CFLAGS="-arch x86_64" LDFLAGS="-arch x86_64"; cd ../../../../
+
+
+**JPEG**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/jpegsr6b.zip; unzip -a -o jpegsr6b.zip; cp -RfXv "_patches/jpeg-6b" "."; cd jpeg-6b; mkdir mac; cd mac; cmake -G "Xcode" ../../jpeg-6b -DCMAKE_OSX_ARCHITECTURES="x86_64"; xcodebuild -target jpeg-static -configuration Debug build; xcodebuild -target jpeg-static -configuration Release build; cd ../../../
+
+
+**TIFF**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/tiff-4.0.3.zip; unzip -a -o tiff-4.0.3.zip; cp -RfXv "_patches/tiff-4.0.3" "."; cd tiff-4.0.3; mkdir mac; cd mac; cmake -G "Xcode" ../../tiff-4.0.3 -DCMAKE_OSX_ARCHITECTURES="x86_64"; xcodebuild -target tiff-static -configuration Debug build; xcodebuild -target tiff-static -configuration Release build; cd ../../../
+
+
+**PNG**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/libpng-1.7.0beta34.tar.gz; gunzip -c libpng-1.7.0beta34.tar.gz | tar xopf -; cp -RfXv "_patches/libpng-1.7.0beta34" "."; cd libpng-1.7.0beta34; mkdir mac; cd mac; cmake -G "Xcode" ../../libpng-1.7.0beta34 -DCMAKE_OSX_ARCHITECTURES="x86_64"; -DCMAKE_C_FLAGS="-I/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8/mac" -DPNG_SHARED=OFF -DPNG_TESTS=OFF -DZLIB_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8 -DZLIB_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8/mac/Release/libz.a ; xcodebuild -target png17_static -configuration Debug build; xcodebuild -target png17_static -configuration Release build; cd ../../../
+
+
+**OPENSSL**
+
+* TODO
+
+
+**CURL**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/curl-7.34.0.zip; unzip -a -o curl-7.34.0.zip; cp -RfXv "_patches/curl-7.34.0" "."; cd curl-7.34.0; mkdir mac; cd mac; cmake -G "Xcode" ../../curl-7.34.0 -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_C_FLAGS="-I/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8/mac" -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCMAKE_USE_OPENSSL=OFF -DCURL_STATICLIB=ON -DCURL_DISABLE_LDAP=ON -DZLIB_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8 -DZLIB_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8/mac/Release/libz.a; xcodebuild -target libcurl -configuration Debug build; xcodebuild -target libcurl -configuration Release build; cd ../../../
+
+
+**PUGIXML**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/pugixml-1.6.zip; unzip -a -o pugixml-1.6.zip; cd ../
+
+
+**ROCKET**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/libRocket-master.zip; unzip -a -o libRocket-master.zip; cp -RfXv "_patches/libRocket-master" "."; cd libRocket-master; mkdir mac; cd mac; cmake -G "Xcode" ../../libRocket-master -DCMAKE_OSX_ARCHITECTURES="x86_64" -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freetype-2.5.5/include -DFREETYPE_INCLUDE_DIR_ft2build=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freetype-2.5.5/include -DFREETYPE_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freetype-2.5.5/mac/Release/libfreetype.a; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../
+
+
+**CEF**
+
+* TODO
+
+
+**OPENAL**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/openal-1.15.1.zip; unzip -a -o openal-1.15.1.zip; cp -RfXv "_patches/openal" "."; cd openal; mkdir mac; cd mac; cmake -G "Xcode" ../../openal -DCMAKE_OSX_ARCHITECTURES="x86_64" -DLIBTYPE=STATIC -DEXAMPLES=OFF -DFORCE_STATIC_VCRT=ON; xcodebuild -target openal -configuration Debug build; xcodebuild -target openal -configuration Release build; cd ../../../
+
+
+**FREEALUT**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/freealut-1.1.0-src.zip; unzip -a -o freealut-1.1.0-src.zip; cp -RfXv "_patches/freealut-1.1.0-src" "."; cd freealut-1.1.0-src; mkdir mac; cd mac; cmake -G "Xcode" ../../freealut-1.1.0-src -DCMAKE_OSX_ARCHITECTURES="x86_64" -DOPENAL_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/openal/include -DOPENAL_LIB_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/openal/mac; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../
+
+
+**OGG**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/libogg-1.3.2.zip; unzip -a -o libogg-1.3.2.zip; cp -RfXv "_patches/libogg-1.3.2" "."; cd libogg-1.3.2; mkdir mac; cd mac; mkdir Debug; cd Debug; ../../configure --disable-shared --enable-static --build=x86_64; make CXXFLAGS="-arch x86_64" CFLAGS="-arch x86_64" LDFLAGS="-arch x86_64"; cd ../; mkdir Release; cd Release; ../../configure --disable-shared --enable-static --build=x86_64; make CXXFLAGS="-arch x86_64" CFLAGS="-arch x86_64" LDFLAGS="-arch x86_64"; sudo make install; cd ../../../../
+
+
+**VORBIS**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/libvorbis-1.3.5.zip; unzip -a -o libvorbis-1.3.5.zip; cp -RfXv "_patches/libvorbis-1.3.5" "."; cd libvorbis-1.3.5; mkdir mac; cd mac; mkdir Debug; cd Debug; ../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libogg-1.3.2/mac/Debug/src/.libs --with-ogg-includes=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libogg-1.3.2/include; make CXXFLAGS="-arch x86_64" CFLAGS="-arch x86_64" LDFLAGS="-arch x86_64"; cd ../; mkdir Release; cd Release; ../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libogg-1.3.2/mac/Release/src/.libs --with-ogg-includes=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libogg-1.3.2/include; make CXXFLAGS="-arch x86_64" CFLAGS="-arch x86_64" LDFLAGS="-arch x86_64"; cd ../../../../
+
+
+**RTMIDI**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/rtmidi-2.1.0.tar.gz; gunzip -c rtmidi-2.1.0.tar.gz | tar xopf -; cp -RfXv "_patches/rtmidi-2.1.0" "."; cd rtmidi-2.1.0; mkdir mac; cd mac; cmake -G "Xcode" -DCMAKE_OSX_ARCHITECTURES="x86_64" ../../rtmidi-2.1.0 ; xcodebuild -target RtMidi -configuration Debug build; xcodebuild -target RtMidi -configuration Release build; cd ../../../
+
+
+**BULLET**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/bullet-2.82-r2704.zip; unzip -a -o bullet-2.82-r2704.zip; cp -RfXv "_patches/bullet-2.82-r2704" "."; cd bullet-2.82-r2704; mkdir mac; cd mac; cmake -G "Xcode" ../../bullet-2.82-r2704 -DCMAKE_OSX_ARCHITECTURES="x86_64" -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../
+
+
+**OSG**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/OpenSceneGraph-3.4.0.zip; unzip -a -o OpenSceneGraph-3.4.0.zip; cp -RfXv "_patches/OpenSceneGraph-3.4.0" "."; cd OpenSceneGraph-3.4.0; mkdir mac; cd mac; cmake -G "Xcode" ../../OpenSceneGraph-3.4.0 -DCMAKE_CXX_FLAGS="-I/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8/mac -I/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libpng-1.7.0beta34/mac -I/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/tiff-4.0.3/mac -I/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/jpeg-6b/mac" -DCMAKE_OSX_ARCHITECTURES="x86_64" -DOSG_CXX_LANGUAGE_STANDARD="C++98" -DBUILD_OSG_APPLICATIONS=OFF -DDYNAMIC_OPENTHREADS=OFF -DDYNAMIC_OPENSCENEGRAPH=OFF -DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF -DOSG_GL_MATRICES_AVAILABLE=ON -DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON -DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON -DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON -DOSG_CPP_EXCEPTIONS_AVAILABLE=ON -DOSG_GL1_AVAILABLE=ON -DOSG_GL2_AVAILABLE=ON -DOSG_GL3_AVAILABLE=OFF -DOSG_GLES1_AVAILABLE=OFF -DOSG_GLES2_AVAILABLE=OFF -DOSG_GL_LIBRARY_STATIC=OFF -DOSG_MSVC_VERSIONED_DLL=OFF -DOSG_USE_QT=OFF -DCURL_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/curl-7.34.0/include -DCURL_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/curl-7.34.0/mac/lib/Release/libcurl.a -DFREETYPE_INCLUDE_DIR_freetype2=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freetype-2.5.5/include -DFREETYPE_INCLUDE_DIR_ft2build=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freetype-2.5.5/include -DFREETYPE_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freetype-2.5.5/mac/Release/libfreetype.a -DJPEG_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/jpeg-6b -DJPEG_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/jpeg-6b/mac/Release/libjpeg-static.a -DTIFF_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/tiff-4.0.3/libtiff -DTIFF_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/tiff-4.0.3/mac/Release/libtiff-static.a -DZLIB_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8 -DZLIB_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/zlib-1.2.8/mac/Release/libz.a -DPNG_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libpng-1.7.0beta34/mac/Release/libpng17.a -DPNG_LIBRARY_DEBUG=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libpng-1.7.0beta34/mac/Debug/libpng17d.a -DPNG_PNG_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libpng-1.7.0beta34 -DGIFLIB_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/giflib-5.1.1/lib -DGIFLIB_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/giflib-5.1.1/mac/Release/lib/.libs/libgif.a -DBoost_INCLUDE_DIR=""; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../
+
+
+**OSGWORKS**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/osgworks-master.zip; unzip -a -o osgworks-master.zip; cp -RfXv "_patches/osgworks-master" "."; cd osgworks-master; mkdir mac; cd mac; cmake -G "Xcode" ../../osgworks-master -DCMAKE_OSX_ARCHITECTURES="x86_64" -DOSGInstallType="Source And Build Tree" -DOSGBuildRoot="/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/OpenSceneGraph-3.4.0/mac" -DOSGSourceRoot="/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/OpenSceneGraph-3.4.0" -DBUILD_SHARED_LIBS=OFF -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=""; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../
+
+
+**OSGAUDIO**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/osgaudio-master.zip; unzip -a -o osgaudio-master.zip; cp -RfXv "_patches/osgaudio-master" "."; cd osgaudio-master; mkdir mac; cd mac; cmake  -G "Xcode" ../../osgaudio-master -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_CXX_FLAGS="-I/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/openal/include -I/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freealut-1.1.0-src/include" -DOSGInstallType="Source And Build Tree" -DOSGBuildRoot=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/OpenSceneGraph-3.4.0/mac -DOSGSourceRoot=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/OpenSceneGraph-3.4.0 -DALUT_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freealut-1.1.0-src/include -DALUT_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freealut-1.1.0-src/mac/Release/libalut_static.a -DALUT_LIBRARY_DEBUG=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/freealut-1.1.0-src/mac/Debug/libalut_static.a -D0_BUILD_EXAMPLES_OALPP=OFF -D0_BUILD_EXAMPLES_OSGAUDIO=OFF -D0_BUILD_EXAMPLES_OSGAUDIO_LOWLEVEL=OFF -D0_ENABLE_SUBSYSTEM_OPENAL=ON -D0_ENABLE_SUBSYSTEM_FMOD=OFF -DFMOD_INCLUDE_DIR="" -DFMOD_LIBRARY="" -DOSGAUDIO_INSTALL_DATA=OFF -DOPENAL_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/openal/include/AL -DOPENAL_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/openal/mac/Release/libopenal.a -DOGG_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libogg-1.3.2/include -DOGG_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libogg-1.3.2/mac/Release/src/.libs/libogg.a -DOGG_LIBRARY_DEBUG=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libogg-1.3.2/mac/Debug/src/.libs/libogg.a -DVORBIS_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libvorbis-1.3.5/include -DVORBIS_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libvorbis-1.3.5/mac/Release/lib/.libs/libvorbis.a -DVORBIS_LIBRARY_DEBUG=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libvorbis-1.3.5/mac/Debug/lib/.libs/libvorbis.a -DVORBISFILE_INCLUDE_DIR=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libvorbis-1.3.5/include -DVORBISFILE_LIBRARY=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libvorbis-1.3.5/mac/Release/lib/.libs/libvorbisfile.a -DVORBISFILE_LIBRARY_DEBUG=/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/libvorbis-1.3.5/mac/Debug/lib/.libs/libvorbisfile.a /Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/osgaudio-master; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../
+
+
+**OSGBULLET**
+
+cd 3rdParty; curl -O http://digitalknob.com/Download/Libs/osgbullet-master.zip; unzip -a -o osgbullet-master.zip; cp -RfXv "_patches/osgbullet-master" "."; cd osgbullet-master; mkdir mac; cd mac; cmake -G "Xcode" ../../osgbullet-master -DCMAKE_OSX_ARCHITECTURES="x86_64" -DOSGInstallType="Source And Build Tree" -DOSGBuildRoot="/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/OpenSceneGraph-3.4.0/mac" -DOSGSourceRoot="/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/OpenSceneGraph-3.4.0" -DBulletInstallType="Source And Build Tree" -DBulletBuildRoot="/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/bullet-2.82-r2704/mac" -DBulletSourceRoot="/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/bullet-2.82-r2704" -DosgWorks_DIR="/Users/"username"/Desktop/digitalknob/DKPlugins/3rdParty/osgworks-master/mac/lib" -DBUILD_SHARED_LIBS=OFF -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../
+
+
+**DIGITALKNOB**
+
+mkdir mac; cd mac; cmake -G "Xcode" ../../DKPlugins -DCMAKE_OSX_ARCHITECTURES="x86_64" -DMAC=ON; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../
+
+
+**DKTest1**
+
+cd ..; cd DKApps; cd DKTest1; mkdir mac; cd mac; cmake -G "Xcode" ../../DKTest1 -DCMAKE_OSX_ARCHITECTURES="x86_64" -DMAC=ON; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../DKPlugins

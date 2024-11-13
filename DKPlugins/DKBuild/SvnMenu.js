@@ -1,7 +1,7 @@
 function SvnMenu_init() {
     dk.create("DKBuild/SvnMenu.html");
-    byId("SvnMenu.html").style.top = DKWindow_GetMouseY() + "px";
-    byId("SvnMenu.html").style.left = DKWindow_GetMouseX() + "px";
+    byId("SvnMenu.html").style.top = CPP_DKWindow_GetMouseY() + "px";
+    byId("SvnMenu.html").style.left = CPP_DKWindow_GetMouseX() + "px";
     document.addEventListener("mousedown", SvnMenu_onevent);
     byId("Svn Update").addEventListener("click", SvnMenu_onevent);
     byId("Svn Commit").addEventListener("click", SvnMenu_onevent);

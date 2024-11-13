@@ -1,19 +1,30 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+###### android-sdk-tools ######
 # https://developer.android.com/studio/releases/sdk-tools
-#
-# https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip
-# https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
-# https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+# https://androidsdkoffline.blogspot.com/p/android-sdk-tools.html
 
+dk_depend(android-sdk)
+dk_validate(host_triple "dk_host_triple()")
+if(WIN_HOST)
+	dk_getFileParam	(${DKIMPORTS_DIR}/android-sdk-tools/android-sdk-tools.txt ANDROID_SDK_TOOLS_WIN_DL)
+	dk_import		(${ANDROID_SDK_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/tools PATCH)
+elseif(MAC_HOST)
+	dk_getFileParam	(${DKIMPORTS_DIR}/android-sdk-tools/android-sdk-tools.txt ANDROID_SDK_TOOLS_MAC_DL)
+	dk_import		(${ANDROID_SDK_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/tools PATCH)
+elseif(LINUX_HOST)
+	dk_getFileParam	(${DKIMPORTS_DIR}/android-sdk-tools/android-sdk-tools.txt ANDROID_SDK_TOOLS_LINUX_DL)
+	dk_import		(${ANDROID_SDK_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/tools PATCH)
+endif()
 
-### VERSION ###
-DKSET(ANDROIDSDKTOOLS_VERSION 26.2.0) #revision
-DKSET(ANDROIDSDKTOOLS_BUILD 4333796)
-WIN_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-${ANDROIDSDKTOOLS_BUILD}.zip)
-MAC_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-darwin-${ANDROIDSDKTOOLS_BUILD}.zip)
-LINUX_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROIDSDKTOOLS_BUILD}.zip)
-DKSET(ANDROIDSDKTOOLS ${ANDROIDSDK}/sdk-tools/${ANDROIDSDKTOOLS_VERSION})
-
-
-### INSTALL ###
-file(MAKE_DIRECTORY ${ANDROIDSDK}/sdk-tools)
-DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS})
+# TODO
+#In tools/bin/sdkmanager.bat
+#replace this ...
+#%DEFAULT_JVM_OPTS%
+#with this
+#%DEFAULT_JVM_OPTS% --add-modules java.xml.bind %JAVA_OPTS%

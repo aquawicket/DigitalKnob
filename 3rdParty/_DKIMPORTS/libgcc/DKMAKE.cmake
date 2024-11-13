@@ -1,13 +1,42 @@
-### VERSION ###
-if(WIN_32)
-	DKDEPEND(mingw32)
-elseif(WIN_64)
-	DKDEPEND(mingw64)
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### LINK ###
-WIN32_DEBUG_LIB(${MINGW32}/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a)
-WIN32_RELEASE_LIB(${MINGW32}/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a)
-WIN64_DEBUG_LIB(${MINGW64}/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a)
-WIN64_RELEASE_LIB(${MINGW64}/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a)
+dk_load(dk_builder)
+# https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+
+
+if(MSYSTEM)
+	dk_depend(msys2)
+	#set(LIBGCC_VERSION "13.2.0")
+	set(LIBGCC_VERSION "14.2.0")
+	
+	#if(WIN_X86)
+	#	WIN_dk_libDebug(${MSYS2_DIR}/mingw32/lib/gcc/i686-w64-mingw32/${LIBGCC_VERSION}/libgcc.a		LIBGCC_LIBRARY_DEBUG)
+	#	WIN_dk_libRelease(${MSYS2_DIR}/mingw32/lib/gcc/i686-w64-mingw32/${LIBGCC_VERSION}/libgcc.a		LIBGCC_LIBRARY_RELEASE)
+	#elseif(WIN_X86_64)
+	#	WIN_dk_libDebug(${MSYS2_DIR}/mingw64/lib/gcc/x86_64-w64-mingw32/${LIBGCC_VERSION}/libgcc.a		LIBGCC_LIBRARY_DEBUG)
+	#	WIN_dk_libRelease(${MSYS2_DIR}/mingw64/lib/gcc/x86_64-w64-mingw32/${LIBGCC_VERSION}/libgcc.a	LIBGCC_LIBRARY_RELEASE)
+	if(win_x86_clang)
+		# TODO
+	elseif(win_x86_64_clang)
+		# TODO
+	elseif(win_arm64_clang)
+		# TODO
+	elseif(win_x86_mingw)
+		WIN_dk_libDebug(${MSYS2_DIR}/mingw32/lib/gcc/i686-w64-mingw32/${LIBGCC_VERSION}/libgcc.a		LIBGCC_LIBRARY_DEBUG)
+		WIN_dk_libRelease(${MSYS2_DIR}/mingw32/lib/gcc/i686-w64-mingw32/${LIBGCC_VERSION}/libgcc.a		LIBGCC_LIBRARY_RELEASE)
+	elseif(win_x86_64_mingw)
+		WIN_dk_libDebug(${MSYS2_DIR}/mingw64/lib/gcc/x86_64-w64-mingw32/${LIBGCC_VERSION}/libgcc.a		LIBGCC_LIBRARY_DEBUG)
+		WIN_dk_libRelease(${MSYS2_DIR}/mingw64/lib/gcc/x86_64-w64-mingw32/${LIBGCC_VERSION}/libgcc.a	LIBGCC_LIBRARY_RELEASE)
+	elseif(win_x86_64_ucrt)
+		# TODO
+	endif()
+
+	### 3RDPARTY LINK ###
+	WIN_dk_set(LIBGCC_CMAKE -DLIBGCC_LIBRARIES=${LIBGCC})
+	#WIN_dk_set(LIBGCC_CMAKE -DLIBGCC_LIBRARIES="${LIBGCC_LIBRARY_DEBUG} ${LIBGCC_LIBRARY_RELEASE}")
+endif()

@@ -1,14 +1,26 @@
-# https://dl.google.com/android/repository/sources-24_r01.zip
-# https://dl.google.com/android/repository/sources-26_r01.zip
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### VERSION ###
-DKSET(ANDROIDSOURCES_FOLDER android-26)
-DKSET(ANDROIDSOURCES_VERSION 26_r01)
-DKSET(ANDROIDSOURCES_DL https://dl.google.com/android/repository/sources-${ANDROIDSOURCES_VERSION}.zip)
-DKSET(ANDROIDSOURCES ${ANDROIDSDK}/sources/${ANDROIDSOURCES_FOLDER})
+###### android-sources ######
+# https://github.com/AndroidSDKSources
+# https://androidsdkoffline.blogspot.com/p/android-sdk-sources-download.html
 
 
-### INSTALL ###
-file(MAKE_DIRECTORY ${ANDROIDSDK}/sources)
-DKINSTALL(${ANDROIDSOURCES_DL} android-sources ${ANDROIDSOURCES})
+dk_depend(android-sdk)
+dk_makeDirectory(${ANDROID_SDK}/sources)
+dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam	(${DKIMPORTS_DIR}/android-sources/android-sources.txt ANDROID_SOURCES_DL)
+dk_getFileParam	(${DKIMPORTS_DIR}/android-sources/android-sources.txt ANDROID_SOURCES_VERSION)
+dk_import(${ANDROID_SOURCES_DL} PATH ${ANDROID_SDK}/sources/android-${ANDROID_SOURCES_VERSION})
+
+#dk_import(https://dl.google.com/android/repository/sources-27_r01.zip PATH ${ANDROID_SDK}/sources/android-27)
+#dk_import(https://dl.google.com/android/repository/sources-28_r01.zip PATH ${ANDROID_SDK}/sources/android-28)
+#dk_import(https://dl.google.com/android/repository/sources-29_r01.zip PATH ${ANDROID_SDK}/sources/android-29)
+#dk_import(https://dl.google.com/android/repository/sources-30_r01.zip PATH ${ANDROID_SDK}/sources/android-30)
+#dk_import(https://dl.google.com/android/repository/sources-31_r01.zip PATH ${ANDROID_SDK}/sources/android-31)
+#dk_import(https://dl.google.com/android/repository/sources-32_r01.zip PATH ${ANDROID_SDK}/sources/android-32)
+#dk_import(https://dl.google.com/android/repository/sources-33_r01.zip PATH ${ANDROID_SDK}/sources/android-33)

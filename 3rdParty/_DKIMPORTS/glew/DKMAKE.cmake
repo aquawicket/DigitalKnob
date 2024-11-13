@@ -1,56 +1,78 @@
-# http://glew.sourceforge.net/
-#
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ glew #############
+# https://github.com/nigels-com/glew.git
+# http://glew.sourceforge.net
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
+dk_load(dk_builder)
+if(IOS OR IOSSIM OR ANDROID)
+	dk_disable(glew)
+	dk_return()
+endif()
 
-### VERSION ###
-DKSET(GLEW_VERSION 2.2.0)
-DKSET(GLEW_NAME glew-${GLEW_VERSION})
-DKSET(GLEW_DL https://github.com/nigels-com/glew/releases/download/${GLEW_NAME}/${GLEW_NAME}.zip)
-DKSET(GLEW ${3RDPARTY}/${GLEW_NAME})
+### DEPEND ###
+dk_depend(libglu1-mesa-dev)
 
-
-### INSTALL ###
-DKINSTALL(${GLEW_DL} glew ${GLEW})
-DKCOPY(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew TRUE)
-
+### IMPORT ###
+dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
+dk_copy(${GLEW_DIR}/build/cmake ${GLEW_TRIPLE_DIR}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
 
 ### LINK ###
-#DKDEFINE(GLEW_USE_STATIC_LIBS)
-#DKDEFINE(GLEW_STATIC)
-DKINCLUDE(${GLEW}/include)
-WIN_DEBUG_LIB(${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib)
-WIN_RELEASE_LIB(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
-##WIN_DEBUG_SHARED_LIB(${GLEW}/${OS}/bin/${DEBUG_DIR}/glew32d.lib)
-##WIN_RELEASE_SHARED_LIB(${GLEW}/${OS}/bin/${RELEASE_DIR}/glew32.lib)
+dk_define			(GLEW_STATIC)
+dk_include			(${GLEW_DIR}/include									GLEW_INCLUDE_DIR)
+if(APPLE)
+	dk_libDebug		(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libGLEWd.a			GLEW_DEBUG_LIBRARY)
+	dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libGLEW.a		GLEW_RELEASE_LIBRARY)
+elseif(MSVC)
+	dk_libDebug		(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libglew32d.lib		GLEW_DEBUG_LIBRARY)
+	dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libglew32.lib	GLEW_RELEASE_LIBRARY)
+elseif(WIN)
+	dk_libDebug		(${GLEW_DEBUG_DIR}/lib/libglew32d.a						GLEW_DEBUG_LIBRARY)
+	dk_libRelease	(${GLEW_RELEASE_DIR}/lib/libglew32.a					GLEW_RELEASE_LIBRARY)
+else()
+	dk_libDebug		(${GLEW_DEBUG_DIR}/lib/libGLEWd.a						GLEW_DEBUG_LIBRARY)
+	dk_libRelease	(${GLEW_RELEASE_DIR}/lib/libGLEW.a						GLEW_RELEASE_LIBRARY)
+endif()
+DEBUG_dk_set		(GLEW_LIBRARY											${GLEW_DEBUG_LIBRARY})
+RELEASE_dk_set		(GLEW_LIBRARY											${GLEW_RELEASE_LIBRARY})
+
+### 3RDPARTY LINK ###
+# dk_set(GLEW_CMAKE
+#	-DGLEW_USE_STATIC_LIB=ON
+#	-DGLEW_DIR=${GLEW}/${triple}/CMakeFiles/Export/lib/cmake/glew
+#	-DGLEW_LIBRARY=${GLEW_LIBRARY_DEBUG}
+#	-DGLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}
+#	-DGLEW_SHARED_LIBRARY_DEBUG=${GLEW}/${triple}/lib/${DEBUG_DIR}/libglew32d.lib
+#	-DGLEW_SHARED_LIBRARY_RELEASE=${GLEW}/${triple}/lib/${RELEASE_DIR}/libglew32.lib
+#	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${triple}/lib/${DEBUG_DIR}/glew32d.lib
+#	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${triple}/lib/${RELEASE_DIR}/glew32.lib
+#	-DGLEW_LIBRARIES=${GLEW_LIBRARY_DEBUG} ${GLEW_LIBRARY_RELEASE})
+dk_set(GLEW_CMAKE 
+	-DGLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}
+	-DGLEW_LIBRARY=${GLEW_LIBRARY})
+if(MSVC)
+	WIN_dk_append(GLEW_CMAKE 
+		"-DCMAKE_C_FLAGS=/I${GLEW}/include /DGLEW_STATIC" 
+		"-DCMAKE_CXX_FLAGS=/I${GLEW_INCLUDE_DIR} /DGLEW_STATIC")
+else()
+	dk_append(GLEW_CMAKE 
+		"-DCMAKE_C_FLAGS=-I${GLEW}/include -DGLEW_STATIC" 
+		"-DCMAKE_CXX_FLAGS=-I${GLEW_INCLUDE_DIR} -DGLEW_STATIC")
+endif()
 
 
-### INJECT ###
-DKSET(GLEW_WIN32 
-	-DGLEW_USE_STATIC_LIB=ON
-	-DGLEW_DIR=${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew
-	-DGLEW_LIBRARY=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32.lib
-	-DGLEW_INCLUDE_DIR=${GLEW}
-	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib
-	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib
-	-DGLEW_SHARED_LIBRARY_DEBUG=${GLEW}/${OS}/lib/${DEBUG_DIR}/glew32d.lib
-	-DGLEW_SHARED_LIBRARY_RELEASE=${GLEW}/${OS}/lib/${RELEASE_DIR}/glew32.lib
-	-DGLEW_LIBRARIES=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib ${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
-	
-	
+### GENERATE ###
+dk_configure(${GLEW_DIR}/build/cmake)
+#dk_copy(${GLEW}/${triple}/lib/${DEBUG_DIR} ${GLEW}/${triple}/CMakeFiles/Export/lib/ OVERWRITE)
+#dk_copy(${GLEW}/${triple}/lib/${RELEASE_DIR} ${GLEW}/${triple}/CMakeFiles/Export/lib/ OVERWRITE)
+#dk_copy(${GLEW}/${triple}/bin/${DEBUG_DIR} ${GLEW}/${triple}/CMakeFiles/Export/bin/ OVERWRITE)
+#dk_copy(${GLEW}/${triple}/bin/${RELEASE_DIR} ${GLEW}/${triple}/CMakeFiles/Export/bin/ OVERWRITE)
 
-##You need to link to other Windows libraries if you use GLFW as static library - gdi32.lib and user32.lib. Either add them in project properties for linker â€œAdditional Dependenciesâ€? setting. Or put #pragma comment (lib, "gdi32.lib") in your .c/.cpp source.
-
-# -DGLEW_STATIC=ON -DGLEW_USE_STATIC_LIBS=ON
 
 ### COMPILE ###
-WIN_PATH(${GLEW}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${GLEW}/build/cmake)
-WIN64_COMMAND(${DKCMAKE_WIN64} ${GLEW}/build/cmake)
-WIN_VS_DEBUG(${GLEW_NAME} glew.sln glew)
-WIN_VS_RELEASE(${GLEW_NAME} glew.sln glew)
-WIN_VS_DEBUG(${GLEW_NAME} glew.sln glew_s)
-WIN_VS_RELEASE(${GLEW_NAME} glew.sln glew_s)
-DKCOPY(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
-DKCOPY(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
-DKCOPY(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
-DKCOPY(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
+dk_build(${GLEW_DIR} glew_s)

@@ -1,81 +1,52 @@
-### VERSION ###
-DKSET(TIDY_MAJOR 5)
-DKSET(TIDY_MINOR 8)
-DKSET(TIDY_BUILD 0)
-DKSET(TIDY_VERSION ${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD})
-DKSET(TIDY_NAME tidy-html5-${TIDY_VERSION})
-DKSET(TIDY ${3RDPARTY}/${TIDY_NAME})
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### INSTALL ###
-## https://github.com/htacg/tidy-html5/archive/5.7.28.zip
-DKINSTALL(https://github.com/htacg/tidy-html5/archive/refs/tags/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip tidy-html5 ${TIDY})
-#DKRENAME(${DKDOWNLOAD}/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip ${DKDOWNLOAD}/${TIDY_NAME})
+dk_load(dk_builder)
 
 
+### DEPEND ###
+dk_depend(zlib)
+
+
+### IMPORT ###
+dk_import(https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
+
+
+### PATCH FILES ###
+dk_fileReplace			(${TIDY_HTML5_DIR}/CMakeLists.txt "add_definitions \\( -DLIBTIDY_VERSION" 	"#add_definitions ( -DLIBTIDY_VERSION")
+dk_fileReplace			(${TIDY_HTML5_DIR}/CMakeLists.txt "add_definitions \\( -DRELEASE_DATE"    	"#add_definitions ( -DRELEASE_DATE")
 
 ### LINK ###
-DKINCLUDE(${TIDY})
-DKINCLUDE(${TIDY}/include)
-DKINCLUDE(${TIDY}/${OS})
-ANDROID_INCLUDE(${TIDY}/${OS}/$(BUILD_TYPE)/jni)
-WIN_DEBUG_LIB(${TIDY}/${OS}/${DEBUG_DIR}/tidy_staticd.lib)
-WIN_RELEASE_LIB(${TIDY}/${OS}/${RELEASE_DIR}/tidy_static.lib)
-APPLE_DEBUG_LIB(${TIDY}/${OS}/${DEBUG_DIR}/libtidys.a)
-APPLE_RELEASE_LIB(${TIDY}/${OS}/${RELEASE_DIR}/libtidys.a)
-LINUX_DEBUG_LIB(${TIDY}/${OS}/${DEBUG_DIR}/libtidys.a)
-LINUX_RELEASE_LIB(${TIDY}/${OS}/${RELEASE_DIR}/libtidys.a)
-RASPBERRY_DEBUG_LIB(${TIDY}/${OS}/${DEBUG_DIR}/libtidys.a)
-RASPBERRY_RELEASE_LIB(${TIDY}/${OS}/${RELEASE_DIR}/libtidys.a)
-#ANDROID_DEBUG_LIB(${TIDY}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtidys.a)
-#ANDROID_RELEASE_LIB(${TIDY}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtidys.a)
-ANDROID_DEBUG_LIB(${TIDY}/${OS}/${DEBUG_DIR}/libtidys.a)
-ANDROID_RELEASE_LIB(${TIDY}/${OS}/${RELEASE_DIR}/libtidys.a)
+if(EMSCRIPTEN)
+	dk_define			(HAS_FUTIME=0)
+endif()
+dk_include				(${TIDY_HTML5_DIR})
+dk_include				(${TIDY_HTML5_DIR}/include)
+dk_include				(${TIDY_HTML5_CONFIG_DIR})
+
+if(MSVC AND WIN)
+	dk_libDebug			(${TIDY_HTML5_DEBUG_DIR}/tidy_staticd.lib)
+	dk_libRelease		(${TIDY_HTML5_RELEASE_DIR}/tidy_static.lib)
+elseif(MINGW AND WIN)
+	dk_libDebug			(${TIDY_HTML5_DEBUG_DIR}/libtidy_static.a)
+	dk_libRelease		(${TIDY_HTML5_RELEASE_DIR}/libtidy_static.a)
+else()
+	dk_libDebug			(${TIDY_HTML5_DEBUG_DIR}/libtidy.a)
+	dk_libRelease		(${TIDY_HTML5_RELEASE_DIR}/libtidy.a)
+endif()
+
+
+### GENERATE ###
+if(EMSCRIPTEN)
+	dk_configure		(${TIDY_HTML5_DIR} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0")
+else()
+	dk_configure		(${TIDY_HTML5_DIR} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE})
+endif()
 
 
 ### COMPILE ###
-WIN_PATH(${TIDY}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/${OS}" ${TIDY})
-WIN64_COMMAND(${DKCMAKE_WIN64} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo /I${ZLIB}/${OS}" ${TIDY})
-WIN_VS(${TIDY_NAME} tidy.sln tidy-static)
-
-
-MAC_PATH(${TIDY}/${OS})
-MAC64_COMMAND(${DKCMAKE_MAC64} ${TIDY})
-MAC_XCODE(${TIDY_NAME} tidy)
-
-
-IOS_PATH(${TIDY}/${OS})
-IOS64_COMMAND(${DKCMAKE_IOS64} ${TIDY})
-IOS_XCODE(${TIDY_NAME} tidy)
-
-
-IOSSIM_PATH(${TIDY}/${OS})
-IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${TIDY})
-IOSSIM_XCODE(${TIDY_NAME} tidy)
-
-
-LINUX_DEBUG_PATH(${TIDY}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${TIDY})
-LINUX_DEBUG_COMMAND(make tidy)
-
-LINUX_RELEASE_PATH(${TIDY}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${TIDY})
-LINUX_RELEASE_COMMAND(make tidy)
-
-
-RASPBERRY_DEBUG_PATH(${TIDY}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_COMMAND(${DKCMAKE_RASPBERRY_DEBUG} ${TIDY})
-RASPBERRY_DEBUG_COMMAND(make tidy)
-
-RASPBERRY_RELEASE_PATH(${TIDY}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_COMMAND(${DKCMAKE_RASPBERRY_RELEASE}${TIDY})
-RASPBERRY_RELEASE_COMMAND(make tidy)
-
-
-#ANDROID_NDK(${TIDY_NAME})
-
-ANDROID_PATH(${TIDY}/${OS})
-ANDROID32_COMMAND(${DKCMAKE_WIN32} "-DANDROID_COMPILER_FLAGS=-DANDROID32 -D_ANDROID -I${ZLIB}/${OS}" ${TIDY})
-ANDROID64_COMMAND(${DKCMAKE_WIN64} "-DANDROID_COMPILER_FLAGS=-DANDROID64 -D_ANDROID -I${ZLIB}/${OS}" ${TIDY})
-ANDROID_VS(${TIDY_NAME} tidy.sln tidy-static)
+dk_build				(${TIDY_HTML5_DIR} tidy-static)

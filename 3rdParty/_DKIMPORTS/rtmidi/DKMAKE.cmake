@@ -1,48 +1,42 @@
-### VERSION ###
-DKSET(RTMIDI_VERSION 2.1.0)
-DKSET(RTMIDI ${3RDPARTY}/rtmidi-${RTMIDI_VERSION})
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### INSTALL ###
-DKINSTALL(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-${RTMIDI_VERSION}.tar.gz rtmidi ${RTMIDI})
+############ rtmidi ############
+# https://github.com/thestk/rtmidi
 
+dk_validate(triple "dk_TARGET_TRIPLE()")
+
+### DEPEND ###
+if(WIN)
+	dk_depend(winmm)
+endif()
+
+### IMPORT ###
+dk_import(https://github.com/thestk/rtmidi/archive/24b3a3bf.zip)
 
 ### LINK ###
-DKINCLUDE(${RTMIDI})
-if(WIN)
-	DKDEFINE(__WINDOWS_MM__)
-	LIST(APPEND WIN_LIBS winmm.lib)
+if(APPLE)
+	dk_define		(__MACOSX_CORE__)
 endif()
-if(MAC)
-	DKDEFINE(__MACOSX_CORE__)
+if(LINUX OR RASPBERRY OR ANDROID)
+	dk_define		(__LINUX_ALSA__)
 endif()
-if(LINUX)
-	DKDEFINE(__LINUX_ALSA__)
+dk_include			(${RTMIDI})
+if(MSVC)
+	dk_libDebug		(${RTMIDI_DEBUG_DIR}/RtMidi.lib)
+	dk_libRelease	(${RTMIDI_RELEASE_DIR}/RtMidi.lib)
+else()
+	dk_libDebug		(${RTMIDI_DEBUG_DIR}/librtmidi.a)
+	dk_libRelease	(${RTMIDI_RELEASE_DIR}/librtmidi.a)
 endif()
-WIN_DEBUG_LIB(${RTMIDI}/${OS}/${DEBUG_DIR}/RtMidi.lib)
-WIN_RELEASE_LIB(${RTMIDI}/${OS}/${RELEASE_DIR}/RtMidi.lib)
-APPLE_DEBUG_LIB(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
-APPLE_RELEASE_LIB(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
-LINUX_DEBUG_LIB(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
-LINUX_RELEASE_LIB(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
 
+
+### GENERATE ###
+dk_configure(${RTMIDI})
 
 ### COMPILE ###
-WIN_PATH(${RTMIDI}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${RTMIDI})
-WIN64_COMMAND(${DKCMAKE_WIN64} ${RTMIDI})
-WIN_VS(rtmidi-${RTMIDI_VERSION} Project.sln RtMidi)
-
-
-MAC_PATH(${RTMIDI}/${OS})
-MAC64_COMMAND(${DKCMAKE_MAC64} ${RTMIDI})
-MAC_XCODE(rtmidi-${RTMIDI_VERSION} RtMidi)
-
-
-LINUX_DEBUG_PATH(${RTMIDI}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${RTMIDI})
-LINUX_DEBUG_COMMAND(make RtMidi)
-
-LINUX_RELEASE_PATH(${RTMIDI}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${RTMIDI})
-LINUX_RELEASE_COMMAND(make RtMidi)
+dk_build(${RTMIDI} rtmidi)

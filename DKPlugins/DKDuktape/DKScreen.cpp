@@ -1,13 +1,37 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+
 //https://developer.mozilla.org/en-US/docs/Web/API/Screen
 
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDuktape/DKScreen.h"
 
 
-/////////////////////
-bool DKScreen::Init()
-{
+bool DKScreen::Init(){
 	DKDEBUGFUNC();
 
 	//Properties
@@ -35,107 +59,102 @@ bool DKScreen::Init()
 
 
 //Properties
-////////////////////////////////////////
-int DKScreen::availTop(duk_context* ctx)
-{
+int DKScreen::availTop(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-int DKScreen::availLeft(duk_context* ctx)
-{
+int DKScreen::availLeft(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-int DKScreen::availHeight(duk_context* ctx)
-{
+int DKScreen::availHeight(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-int DKScreen::availWidth(duk_context* ctx)
-{
+int DKScreen::availWidth(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-int DKScreen::colorDepth(duk_context* ctx)
-{
+int DKScreen::colorDepth(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-//////////////////////////////////////
-int DKScreen::height(duk_context* ctx)
-{
+int DKScreen::height(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int height;
 	if(!DKUtil::GetScreenHeight(height)){ return 0; }
 	duk_push_number(ctx, height);
 	return 1;
 }
 
-int DKScreen::left(duk_context* ctx)
-{
+int DKScreen::left(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-int DKScreen::orientation(duk_context* ctx)
-{
+int DKScreen::orientation(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-int DKScreen::pixelDepth(duk_context* ctx)
-{
+int DKScreen::pixelDepth(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-int DKScreen::top(duk_context* ctx)
-{
+int DKScreen::top(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-/////////////////////////////////////
-int DKScreen::width(duk_context* ctx)
-{
+int DKScreen::width(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int width;
 	if(!DKUtil::GetScreenWidth(width)) { return 0; }
 	duk_push_number(ctx, width);
 	return 1;
 }
 
-int DKScreen::mozEnabled(duk_context* ctx)
-{
+int DKScreen::mozEnabled(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-int DKScreen::mozBrightness(duk_context* ctx)
-{
+int DKScreen::mozBrightness(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 
 
 //Methods
-///////////////////////////////////////////////
-int DKScreen::lockOrientation(duk_context* ctx) 
-{
+int DKScreen::lockOrientation(duk_context* ctx) {
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/lockOrientation
+	DKDEBUGFUNC(ctx);
 	DKString orientation = duk_require_string(ctx, 0);
 	return false;
 }
 
-/////////////////////////////////////////////////
-int DKScreen::unlockOrientation(duk_context* ctx)
-{
+int DKScreen::unlockOrientation(duk_context* ctx){
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/unlockOrientation
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

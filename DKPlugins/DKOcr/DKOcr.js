@@ -1,6 +1,5 @@
-/////////////////////
-function DKOcr_init()
-{
+
+function DKOcr_init(){
 	dk.create("DKOcr");
 	dk.create("DKOcr/DKOcr.html");
 	dk.create("DKNotepad/DKNotepad.js", function(){
@@ -10,16 +9,12 @@ function DKOcr_init()
 	});
 }
 
-////////////////////
-function DKOcr_end()
-{
+function DKOcr_end(){
 	byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKOcr_onevent);
 	dk.close("DKNotepad/DKNotepad.js");
 }
 
-/////////////////////////////
-function DKOcr_OnEvent(event)
-{
+function DKOcr_OnEvent(event){
 	if(event.type === "OpenFile"){
 		var file = DK_GetValue(event);
 		console.log("OpenFile: "+file+"\n");

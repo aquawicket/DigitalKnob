@@ -1,0 +1,4 @@
+https://wiki.unvanquished.net/wiki/MinGW
+https://stackoverflow.com/a/19791995/688352
+https://wiki.gentoo.org/wiki/Mingw#OpenSSL
+http://www.tinc-vpn.org/examples/cross-compiling-64-bit-windows-binary/

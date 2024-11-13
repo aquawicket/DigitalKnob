@@ -1,0 +1,74 @@
+def buildAsLibrary = project.hasProperty('BUILD_AS_LIBRARY');
+def buildAsApplication = !buildAsLibrary
+if (buildAsApplication) {
+    apply plugin: 'com.android.application'
+}
+else {
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion 31
+	ndkVersion "23.1.7779620"
+	ndkPath 'C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/23.1.7779620'
+    defaultConfig {
+        if (buildAsApplication) {
+            applicationId "org.libsdl.app"
+        }
+        minSdkVersion 26
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+        externalNativeBuild {
+            cmake {
+				arguments "-DANDROID_APP_PLATFORM=android-26", "-DANDROID_STL=c++_static"
+                abiFilters 'armeabi-v7a' //, 'arm64-v8a', 'x86', 'x86_64'
+            }
+			//ndkBuild {
+            //    arguments "APP_PLATFORM=android-26"
+            //    abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            //}
+        }
+    }
+	sourceSets {
+        main {
+            assets.srcDirs = ['assets']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
+        externalNativeBuild {
+			cmake {
+				path 'jni/CMakeLists.txt'
+            }
+			//ndkBuild {
+            //    path 'jni/Android.mk'
+            //}
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    /*
+    if (buildAsLibrary) {
+        libraryVariants.all { variant ->
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith(".aar")) {
+                    def fileName = "org.libsdl.app.aar";
+                    output.outputFile = new File(outputFile.parent, fileName);
+                }
+            }
+        }
+    }
+    */
+}
+
+dependencies {
+	implementation fileTree(include: ['*.jar'], dir: 'libs')
+}

@@ -1,9 +1,34 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
 #include "DK/stdafx.h"
-#include "DKTorrent.h"
+#include "DKTorrent/DKTorrent.h"
+
 
 // return the name of a torrent status enum
-char const* state(lt::torrent_status::state_t s)
-{
+char const* state(lt::torrent_status::state_t s){
 	switch (s) {
 	case lt::torrent_status::checking_files: return "checking";
 	case lt::torrent_status::downloading_metadata: return "dl metadata";
@@ -16,24 +41,17 @@ char const* state(lt::torrent_status::state_t s)
 	}
 }
 
-//////////////////////
-bool DKTorrent::Init()
-{
+bool DKTorrent::Init(){
 	DKApp::AppendLoopFunc(&DKTorrent::Loop, this);
-
 	AddTorrent("magnet:?xt=urn:btih:b2a0b542ee6a1c0b693a92908502345e6c079f2c&dn=test+video&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969"); //Test
 	return true;
 }
 
-/////////////////////
-bool DKTorrent::End()
-{
+bool DKTorrent::End(){
 	return true;
 }
 
-//////////////////////
-void DKTorrent::Loop()
-{
+void DKTorrent::Loop(){
 	std::vector<lt::alert*> alerts;
 	ses->pop_alerts(&alerts);
 
@@ -85,9 +103,7 @@ void DKTorrent::Loop()
 	}
 }
 
-///////////////////////////////////////////////
-void DKTorrent::AddTorrent(const DKString& url)
-{
+void DKTorrent::AddTorrent(const DKString& url){
 	lt::settings_pack pack;
 
 	pack.set_int(lt::settings_pack::alert_mask

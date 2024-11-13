@@ -1,8 +1,7 @@
 "use strict";
 
+function DKDrag(){}
 dk.drag = DKPlugin(DKDrag, "singleton")
-
-function DKDrag() {}
 
 /*
 DKDrag.prototype.create = function DKDrag_create(){
@@ -41,18 +40,18 @@ DKDrag.prototype.start = function DKDrag_start(event, element) {
     else
         this.positionY = parseInt(element.style.bottom);
     document.body.onmousemove = document.body.ontouchmove = function(event) {
-        instance.move(event, element);
+		instance.move(event, element);
     }
     document.body.onmouseup = document.body.ontouchend = function(event) {
-        instance.stop(event);
+		instance.stop(event);
     }
 }
 
 DKDrag.prototype.move = function DKDrag_move(event, element) {
     if (!event)
         event = window.event;
-    let x;
-    let y;
+    var x;
+    var y;
     if (dk.iE()) {
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
@@ -97,7 +96,7 @@ DKDrag.prototype.stop = function DKDrag_stop() {
 /*
 DKDrag.prototype.attachDrags = function DKDrag_attachDrags(parent) {
     const elements = parent.getElementsByTagName('*');
-    for (let n = 0; n < elements.length; n++) {
+    for (var n = 0; n < elements.length; n++) {
         const element = elements[n];
         if (!dk.iE() && dk.getBrowser() !== "RML")
             element.style.setProperty("pointer-events", "all");

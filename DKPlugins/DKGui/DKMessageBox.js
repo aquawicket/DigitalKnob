@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 function DKMessageBox(){}
    
@@ -17,11 +17,15 @@ DKMessageBox.prototype.create = function create(create_callback) {
         if (!html)
             return error("invalid html", create_callback);
         instance.html = html;
-        instance.message = html.querySelector("[dkmessagebox='message']");
-        instance.input = html.querySelector("[dkmessagebox='input']");
-        instance.cancel = html.querySelector("[dkmessagebox='cancel']");
-        instance.ok = html.querySelector("[dkmessagebox='ok']");
-        instance.dkframe = DKFrame.prototype.create(instance);
+        //instance.message = html.querySelector("[dkmessagebox='message']");
+        instance.message = byId("dkmessagebox_message");
+		//instance.input = html.querySelector("[dkmessagebox='input']");
+		instance.input = byId("dkmessagebox_input");
+        //instance.cancel = html.querySelector("[dkmessagebox='cancel']");
+		instance.cancel = byId("dkmessagebox_cancel");
+        //instance.ok = html.querySelector("[dkmessagebox='ok']");
+        instance.ok = byId("dkmessagebox_ok");
+		instance.dkframe = DKFrame.prototype.create(instance);
         create_callback && create_callback(instance);
         return instance;
     });

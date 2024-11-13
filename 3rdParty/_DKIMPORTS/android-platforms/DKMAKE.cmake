@@ -1,12 +1,17 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+###### android-platforms ######
 # https://dl.google.com/android/repository/platform-26_r02.zip
 
-### VERSION ###
-DKSET(ANDROIDPLATFORMS_FOLDER android-26)
-DKSET(ANDROIDPLATFORMS_VERSION 26_r02)
-DKSET(ANDROIDPLATFORMS_DL https://dl.google.com/android/repository/platform-${ANDROIDPLATFORMS_VERSION}.zip)
-DKSET(ANDROIDPLATFORMS ${ANDROIDSDK}/platforms/${ANDROIDPLATFORMS_FOLDER})
+dk_depend(android-sdk)
+dk_makeDirectory(${ANDROID_SDK}/platforms)
 
-
-### INSTALL ###
-file(MAKE_DIRECTORY ${ANDROIDSDK}/platforms)
-DKINSTALL(${ANDROIDPLATFORMS_DL} android-platforms ${ANDROIDPLATFORMS})
+dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+dk_getFileParam(${DKIMPORTS_DIR}/android-platforms/android-platforms.txt ANDROID_PLATFORMS_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-platforms/android-platforms.txt ANDROID_PLATFORMS_FOLDER)
+dk_import(${ANDROID_PLATFORMS_DL} PATH ${ANDROID_SDK}/platforms/${ANDROID_PLATFORMS_FOLDER})

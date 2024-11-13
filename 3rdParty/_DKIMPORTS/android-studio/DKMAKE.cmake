@@ -1,41 +1,54 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+###### android-studio ######
 # https://developer.android.com/studio/archive
+# https://developer.android.com/studio#downloads
 #
-# https://r5---sn-a5meknsy.gvt1.com/edgedl/android/studio/install/4.2.2.0/android-studio-ide-202.7486908-windows.exe?cms_redirect=yes&mh=2R&mip=47.148.227.149&mm=28&mn=sn-a5meknsy&ms=nvh&mt=1627334431&mv=m&mvi=5&pl=16&rmhost=r2---sn-a5meknsy.gvt1.com&shardbypass=yes&smhost=r6---sn-a5mekner.gvt1.com
+#	windows uninstall registry location
+#   HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Android Studio
+#
 
-DKDEPEND(jdk)
-DKDEPEND(android-sdk)
-DKDEPEND(android-ndk)
+### DEPEND ###
+dk_depend(openjdk-8u41)
+dk_depend(android-ndk)
 
-
-### VERSION ###
-DKSET(ANDROIDSTUDIO_VERSION 202.7486908-windows)
-DKSET(ANDROIDSTUDIO_NAME android-studio-ide-${ANDROIDSTUDIO_VERSION})
-WIN_DKSET(ANDROIDSTUDIO_DL https://r5---sn-a5meknsy.gvt1.com/edgedl/android/studio/install/4.2.2.0/android-studio-ide-202.7486908-windows.exe?cms_redirect=yes&mh=2R&mip=47.148.227.149&mm=28&mn=sn-a5meknsy&ms=nvh&mt=1627334431&mv=m&mvi=5&pl=16&rmhost=r2---sn-a5meknsy.gvt1.com&shardbypass=yes&smhost=r6---sn-a5mekner.gvt1.com)
-WIN_DKSET(ANDROIDSTUDIO "C:/Program Files/Android/Android Studio/bin")
-WIN_DKSET(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/studio.exe")
-MAC_DKSET(ANDROIDSTUDIO "/Applications")
-MAC_DKSET(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
-LINUX_DKSET(ANDROIDSTUDIO "${DIGITALKNOB}/3rdParty/android-studio/bin")
-LINUX_DKSET(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
-
-DKSETENV("STUDIO_JDK" ${JDK})
-DKSETENV("STUDIO_GRADLE_JDK" ${JDK})
-
-
-### INSTALL ###
-#DKINSTALL(${ANDROIDSTUDIO_DL} android-sdk ${ANDROIDSTUDIO_EXE})
-
-if(NOT EXISTS ${ANDROIDSTUDIO_EXE})
-	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${ANDROIDSTUDIO_DL})
-	DKSET(QUEUE_BUILD ON)
-	if(CMAKE_HOST_WIN32)
-		ANDROID_COMMAND(${DIGITALKNOB}/Download/android-studio-ide-${ANDROIDSDK_VERSION}-windows.exe)
+### IMPORT ###
+if(WIN_X86_64_HOST)
+	if(NOT EXISTS "${ProgramFiles}/Android/Android Studio/bin/studio64.exe")
+		dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+		dk_getFileParam	(${DKIMPORTS_DIR}/android-studio/android-studio.txt ANDROID_STUDIO_WIN_DL)
+		dk_basename		(${ANDROID_STUDIO_WIN_DL} ANDROID_STUDIO_DL_NAME)
+		dk_download		(${ANDROID_STUDIO_WIN_DL} ${DKDOWNLOAD_DIR}/${ANDROID_STUDIO_DL_NAME})
+		dk_command		(${DKDOWNLOAD_DIR}/${ANDROID_STUDIO_DL_NAME})
 	endif()
-	if(CMAKE_HOST_APPLE)
-		ANDROID_COMMAND(${DIGITALKNOB}/Download/android-studio-ide-${ANDROIDSDK_VERSION}-mac.dmg)
+elseif(MAC_HOST)
+	if(NOT EXISTS "/Applications/Android Studio.app")
+		dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+		dk_getFileParam	(${DKIMPORTS_DIR}/android-studio/android-studio.txt ANDROID_STUDIO_MAC_DL)
+		dk_basename		(${ANDROID_STUDIO_MAC_DL} ANDROID_STUDIO_DL_NAME)
+		dk_download		(${ANDROID_STUDIO_MAC_DL} ${DKDOWNLOAD_DIR}/${ANDROID_STUDIO_DL_NAME})
+		# https://apple.stackexchange.com/a/73931
+		dk_depend		(sudo)
+		dk_command		(${SUDO_EXE} hdiutil attach ${DKDOWNLOAD_DIR}/${ANDROID_STUDIO_DL_NAME})
+		dk_copy			("/Volumes/Android\ Studio\ -\ Dolphin\ \|\ 2021.3.1\ Patch\ 1/Android\ Studio.app" "/Applications/Android\ Studio.app")
+		dk_command		(${SUDO_EXE} hdiutil detach "/Volumes/Android\ Studio\ -\ Dolphin\ \|\ 2021.3.1\ Patch\ 1")
 	endif()
-	if(CMAKE_HOST_LINUX)
-		ANDROID_COMMAND(${DIGITALKNOB}/Download/android-studio-ide-${ANDROIDSDK_VERSION}-linux.zip)
+elseif(LINUX_HOST)
+	dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
+	if(NOT EXISTS "${DK3RDPARTY_DIR}/android-studio/bin/studio.sh")
+		dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+		dk_getFileParam	(${DKIMPORTS_DIR}/android-studio/android-studio.txt ANDROID_STUDIO_LINUX_DL)
+		dk_basename		(${ANDROID_STUDIO_LINUX_DL} ANDROID_STUDIO_DL_NAME)
+		dk_download		(${ANDROID_STUDIO_LINUX_DL} ${DKDOWNLOAD_DIR}/${ANDROID_STUDIO_DL_NAME})
+		dk_extract		(${DKDOWNLOAD_DIR}/${ANDROID_STUDIO_DL_NAME} ${DK3RDPARTY_DIR})
 	endif()
 endif()
+
+### SET ENVIRONMENT VARIABLES ###
+dk_setEnv("STUDIO_JDK" ${OPENJDK_8U41})
+dk_setEnv("STUDIO_GRADLE_JDK" ${OPENJDK_8U41})

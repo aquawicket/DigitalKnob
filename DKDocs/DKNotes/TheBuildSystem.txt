@@ -1,0 +1,26 @@
+**** The Build System ****
+
+DigitalKnob depends on GIT and CMake
+
+GIT will always be installed
+CMake will always be installed
+
+On certain platfroms, other Tools will be installed.
+For example, Visual Studio needs to be installed before CMake.
+So CMake can find Visual Studio when it runs. 
+
+For resons like this, we cannot rely soley on CMake to do everything.
+
+We need a prep app that will install GIT, CMAKE, VisualStudio, and anything technically required by CMake.
+
+
+So far...   on all platforms, 
+Before we can run CMake..
+we need GIT
+we need CMake
+for Windows we need Visual Studio
+for Mac we need Xcode
+and for Linux we need build-essentials
+
+Android = etc.
+iOS = etc.

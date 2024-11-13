@@ -138,7 +138,7 @@ dk.openfile.updatepath = function dk_openfile_updatepath(path) {
     var files = temp.split(",");
     dk.openfile.menu1.innerHTML = "";
     dk.openfile.menu2.innerHTML = "";
-    for (let n = 0; n < files.length; n++) {
+    for (var n = 0; n < files.length; n++) {
         if (dk.file.isDir(aPath + "/" + files[n])) {
             //Folders
             var folder = DK_CreateElement(dk.openfile.menu1, "option", "DKOpenFileFolder");

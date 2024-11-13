@@ -2,325 +2,387 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Window
 
 // https://html.spec.whatwg.org/multipage/window-object.html#the-window-object
-var Window = function(pointer) {
+var Window = function Window(pointer) 
+{
     // Properties
     Object.defineProperty(this, "closed", {
-        get: function() {/* return CPP_DKDomWindow_closed(pointer); */
+        get: function closed() {
+			return CPP_DKDomWindow_closed(pointer)
         }
-    });
+    })
     Object.defineProperty(this, "console", {
-        get: function() {
-            return console;
+        get: function console() {
+            return console
         }
-    });
+    })
     Object.defineProperty(this, "controllers", {
-        get: function() {/* return CPP_DKDomWindow_controllers(pointer); */
+        get: function controllers() {
+			return CPP_DKDomWindow_controllers(pointer)
         }
-    });
+    })
     Object.defineProperty(this, "customElements", {
-        get: function() {/* return CPP_DKDomWindow_customElements(pointer); */
+        get: function customElements() {
+			return CPP_DKDomWindow_customElements(pointer)
         }
-    });
+    })
     Object.defineProperty(this, "crypto", {
-        get: function() {/* return CPP_DKDomWindow_crypto(pointer); */
+        get: function crypto() {
+			return CPP_DKDomWindow_crypto(pointer)
         }
-    });
+    })
     Object.defineProperty(this, "devicePixelRatio", {
-        get: function() {
-            return CPP_DKDomWindow_devicePixelRatio(pointer);
+        get: function devicePixelRatio() {
+            return CPP_DKDomWindow_devicePixelRatio(pointer)
         },
-        set: function(val) {
-            return CPP_DKDomWindow_devicePixelRatio(pointer, val);
+        set: function devicePixelRatio(val) {
+            return CPP_DKDomWindow_devicePixelRatio(pointer, val)
         }
-    });
+    })
     Object.defineProperty(this, "dialogArguments", {
-        get: function() {/* return CPP_DKDomWindow_dialogArguments(pointer); */
+        get: function dialogArguments() {
+			return CPP_DKDomWindow_dialogArguments(pointer)
         }
-    });
+    })
     Object.defineProperty(this, "document", {
-        get: function() {
-            return document;
+        get: function document() {
+            return document
         }
-    });
+    })
     Object.defineProperty(this, "event", {
-        get: function() {/* return CPP_DKDomWindow_event(pointer); */
+        get: function event() {
+			return CPP_DKDomWindow_event(pointer)
         }
-    });
+    })
     Object.defineProperty(this, "frameElement", {
-        get: function() {/* return CPP_DKDomWindow_frameElement(pointer); */
+        get: function frameElement() {
+			return CPP_DKDomWindow_frameElement(pointer)
         }
-    });
+    })
     Object.defineProperty(this, "frames", {
-        get: function() {/* return CPP_DKDomWindow_frames(pointer); */
+        get: function frames() {
+			return CPP_DKDomWindow_frames(pointer)
         }
-    });
+    })
     Object.defineProperty(this, "fullScreen", {
-        get: function() {/* return CPP_DKDomWindow_fullScreen(pointer); */
+        get: function fullScreen() {
+			return CPP_DKDomWindow_fullScreen(pointer)
         },
-        set: function(val) {/* return CPP_DKDomWindow_fullScreen(pointer, val); */
+        set: function fullScreen(val) {
+			return CPP_DKDomWindow_fullScreen(pointer, val)
         }
-    });
+    })
+	
+	// getComputedStyle: https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+	Object.defineProperty(this, "getComputedStyle", {
+        get: function getComputedStyle() {
+			return CPP_DKDomWindow_getComputedStyle(pointer)
+        }
+    })
+	
     Object.defineProperty(this, "history", {
-        get: function() {/* return CPP_DKDomWindow_history(pointer); */
+        get: function history() {
+			return CPP_DKDomWindow_history(pointer)
         }
-    });
+    })
     Object.defineProperty(this, "innerHeight", {
-        get: function() {
-            return CPP_DKDomWindow_innerHeight();
+        get: function innerHeight() {
+            return CPP_DKDomWindow_innerHeight()
         }
-    });
+    })
     Object.defineProperty(this, "innerWidth", {
-        get: function() {
-            return CPP_DKDomWindow_innerWidth();
+        get: function innerWidth() {
+            return CPP_DKDomWindow_innerWidth()
         }
-    });
+    })
     Object.defineProperty(this, "isSecureContext", {
-        get: function() {/* return CPP_DKDomWindow_isSecureContext(); */
+        get: function isSecureContext() {
+			return CPP_DKDomWindow_isSecureContext()
         }
-    });
+    })
     Object.defineProperty(this, "length", {
-        get: function() {/* return CPP_DKDomWindow_length(); */
+        get: function length() {
+			return CPP_DKDomWindow_length()
         }
-    });
+    })
     Object.defineProperty(this, "location", {
-        get: function() {
-            return location;
+        get: function location() {
+            return location
         }
-    });
+    })
     Object.defineProperty(this, "locationbar", {
-        get: function() {/* return CPP_DKDomWindow_locationbar(); */
+        get: function locationbar() {
+			return CPP_DKDomWindow_locationbar()
         }
-    });
+    })
     Object.defineProperty(this, "localStorage", {
-        get: function() {/* return CPP_DKDomWindow_localStorage(); */
+        get: function localStorage() {
+			return CPP_DKDomWindow_localStorage()
         }
-    });
+    })
     Object.defineProperty(this, "menubar", {
-        get: function() {/* return CPP_DKDomWindow_menubar(); */
+        get: function menubar() {
+			return CPP_DKDomWindow_menubar()
         }
-    });
+    })
     Object.defineProperty(this, "messageManager", {
-        get: function() {/* return CPP_DKDomWindow_messageManager(); */
+        get: function messageManager() {
+			return CPP_DKDomWindow_messageManager()
         }
-    });
+    })
     Object.defineProperty(this, "mozAnimationStartTime", {
-        get: function() {/* return CPP_DKDomWindow_mozAnimationStartTime(); */
+        get: function mozAnimationStartTime() {
+			return CPP_DKDomWindow_mozAnimationStartTime()
         }
-    });
+    })
     Object.defineProperty(this, "mozInnerScreenX", {
-        get: function() {/* return CPP_DKDomWindow_mozInnerScreenX(); */
+        get: function mozInnerScreenX() {
+			return CPP_DKDomWindow_mozInnerScreenX()
         }
-    });
+    })
     Object.defineProperty(this, "mozInnerScreenY", {
-        get: function() {/* return CPP_DKDomWindow_mozInnerScreenX(); */
+        get: function mozInnerScreenY() {
+			return CPP_DKDomWindow_mozInnerScreenX()
         }
-    });
+    })
     Object.defineProperty(this, "mozPaintCount", {
-        get: function() {/* return CPP_DKDomWindow_mozPaintCount(); */
+        get: function mozPaintCount() {
+			return CPP_DKDomWindow_mozPaintCount()
         }
-    });
+    })
     Object.defineProperty(this, "name", {
-        get: function() {
-            return CPP_DKDomWindow_name();
+        get: function name() {
+            return CPP_DKDomWindow_name()
         },
-        set: function(val) {
-            return CPP_DKDomWindow_name(val);
+        set: function name(val) {
+            return CPP_DKDomWindow_name(val)
         }
-    });
+    })
     Object.defineProperty(this, "navigator", {
-        get: function() {
-            return navigator;
+        get: function navigator() {
+            return navigator
         }
-    });
+    })
     Object.defineProperty(this, "opener", {
-        get: function() {/* return CPP_DKDomWindow_opener(); */
+        get: function opener() {
+			return CPP_DKDomWindow_opener()
         }
-    });
+    })
     Object.defineProperty(this, "orientation", {
-        get: function() {/* return CPP_DKDomWindow_orientation(); */
+        get: function orientation() {
+			return CPP_DKDomWindow_orientation()
         }
-    });
+    })
     Object.defineProperty(this, "outerHeight", {
-        get: function() {/* return CPP_DKDomWindow_outerHeight(); */
+        get: function outerHeight() {
+			return CPP_DKDomWindow_outerHeight()
         }
-    });
+    })
     Object.defineProperty(this, "outerWidth", {
-        get: function() {/* return CPP_DKDomWindow_outerWidth(); */
+        get: function outerWidth() {
+			return CPP_DKDomWindow_outerWidth()
         }
-    });
+    })
     Object.defineProperty(this, "pageXOffset", {
-        get: function() {/* return CPP_DKDomWindow_pageXOffset(); */
+        get: function pageXOffset() {
+			return CPP_DKDomWindow_pageXOffset()
         }
-    });
+    })
     Object.defineProperty(this, "pageYOffset", {
-        get: function() {/* return CPP_DKDomWindow_pageYOffset(); */
+        get: function pageYOffset() {
+			return CPP_DKDomWindow_pageYOffset()
         }
-    });
+    })
     Object.defineProperty(this, "parent", {
-        get: function() {/* return CPP_DKDomWindow_parent(); */
+        get: function parent() {
+			return CPP_DKDomWindow_parent()
         }
-    });
+    })
     Object.defineProperty(this, "performance", {
-        get: function() {/* return CPP_DKDomWindow_performance(); */
+        get: function performance() {
+			return CPP_DKDomWindow_performance()
         }
-    });
+    })
     Object.defineProperty(this, "personalbar", {
-        get: function() {/* return CPP_DKDomWindow_personalbar(); */
+        get: function personalbar() {
+			return CPP_DKDomWindow_personalbar()
         }
-    });
+    })
     Object.defineProperty(this, "returnValue", {
-        get: function() {/* return CPP_DKDomWindow_returnValue(); */
+        get: function returnValue() {
+			return CPP_DKDomWindow_returnValue()
         }
-    });
+    })
     Object.defineProperty(this, "screen", {
-        get: function() {
-            return screen;
+        get: function screen() {
+            return screen
         }
-    });
+    })
     Object.defineProperty(this, "screenX", {
-        get: function() {/* return CPP_DKDomWindow_screenX(); */
+        get: function screenX() {
+			return CPP_DKDomWindow_screenX()
         }
-    });
+    })
     Object.defineProperty(this, "screenY", {
-        get: function() {/* return CPP_DKDomWindow_screenY(); */
+        get: function screenY() {
+			return CPP_DKDomWindow_screenY()
         }
-    });
+    })
     Object.defineProperty(this, "scrollbars", {
-        get: function() {/* return CPP_DKDomWindow_scrollbars(); */
+        get: function scrollbars() {
+			return CPP_DKDomWindow_scrollbars()
         }
-    });
+    })
     Object.defineProperty(this, "scrollMaxX", {
-        get: function() {/* return CPP_DKDomWindow_scrollMaxX(); */
+        get: function scrollMaxX() {
+			return CPP_DKDomWindow_scrollMaxX()
         }
-    });
+    })
     Object.defineProperty(this, "scrollMaxY", {
-        get: function() {/* return CPP_DKDomWindow_scrollMaxY(); */
+        get: function scrollMaxY() {
+			return CPP_DKDomWindow_scrollMaxY()
         }
-    });
+    })
     Object.defineProperty(this, "scrollX", {
-        get: function() {/* return CPP_DKDomWindow_scrollX(); */
+        get: function scrollX() {
+			return CPP_DKDomWindow_scrollX()
         }
-    });
+    })
     Object.defineProperty(this, "scrollY", {
-        get: function() {/* return CPP_DKDomWindow_scrollY(); */
+        get: function scrollY() {
+			return CPP_DKDomWindow_scrollY()
         }
-    });
+    })
     Object.defineProperty(this, "self", {
-        get: function() {/* return CPP_DKDomWindow_self(); */
+        get: function self() {
+			return CPP_DKDomWindow_self()
         }
-    });
+    })
     Object.defineProperty(this, "sessionStorage", {
-        get: function() {/* return CPP_DKDomWindow_sessionStorage(); */
+        get: function sessionStorage() {
+			return CPP_DKDomWindow_sessionStorage()
         }
-    });
+    })
     Object.defineProperty(this, "sidebar", {
-        get: function() {/* return CPP_DKDomWindow_sidebar(); */
+        get: function sidebar() {
+			return CPP_DKDomWindow_sidebar()
         }
-    });
+    })
     Object.defineProperty(this, "speechSynthesis", {
-        get: function() {/* return CPP_DKDomWindow_speechSynthesis(); */
+        get: function speechSynthesis() {
+			return CPP_DKDomWindow_speechSynthesis()
         }
-    });
+    })
     Object.defineProperty(this, "status", {
-        get: function() {/* return CPP_DKDomWindow_status(); */
+        get: function status() {
+			return CPP_DKDomWindow_status()
         },
-        set: function(val) {/* return CPP_DKDomWindow_setStatus(); */
+        set: function status(val) {
+			return CPP_DKDomWindow_setStatus()
         }
-    });
+    })
     Object.defineProperty(this, "statusbar", {
-        get: function() {/* return CPP_DKDomWindow_statusbar(); */
+        get: function statusbar() {
+			return CPP_DKDomWindow_statusbar()
         }
-    });
+    })
     Object.defineProperty(this, "toolbar", {
-        get: function() {/* return CPP_DKDomWindow_toolbar(); */
+        get: function toolbar() {
+			return CPP_DKDomWindow_toolbar()
         }
-    });
+    })
     Object.defineProperty(this, "top", {
-        get: function() {
-            return this;
+        get: function top() {
+            return this
         }
-    });
+    })
     Object.defineProperty(this, "visualViewport", {
-        get: function() {/* return CPP_DKDomWindow_visualViewport(); */
+        get: function visualViewport() {
+			return CPP_DKDomWindow_visualViewport()
         }
-    });
+    })
     Object.defineProperty(this, "window", {
-        get: function() {/* return CPP_DKDomWindow_window(); */
+        get: function window() {
+			return CPP_DKDomWindow_window()
         }
-    });
+    })
 
     // Methods
-    Window.prototype.alert = function(msg) {
-        console.warn("alert: " + msg);
+    Window.prototype.alert = function alert(msg) {
+        console.warn("alert: " + msg)
     }
-    Window.prototype.blur = function() {}
-    Window.prototype.cancelAnimationFrame = function() {}
-    Window.prototype.cancelIdleCallback = function() {}
-    Window.prototype.captureEvents = function() {}
-    Window.prototype.clearImmediate = function() {}
-    Window.prototype.close = function() {}
-    Window.prototype.confirm = function() {}
-    Window.prototype.dispatchEvent = function() {}
-    Window.prototype.dump = function() {}
-    Window.prototype.find = function() {}
-    Window.prototype.focus = function() {}
-    Window.prototype.getAttentionWithCycleCount = function() {}
-    Window.prototype.getComputedStyle = function(element) {
-        return new CSSStyleDeclaration(element.pointer);
-        //var style = CPP_DKDomWindow_getComputedStyle(element.pointer); //TODO
+    Window.prototype.blur = function blur() {}
+    Window.prototype.cancelAnimationFrame = function cancelAnimationFrame() {}
+    Window.prototype.cancelIdleCallback = function cancelIdleCallback() {}
+    Window.prototype.captureEvents = function captureEvents() {}
+    Window.prototype.clearImmediate = function clearImmediate() {}
+    Window.prototype.close = function close() {}
+    Window.prototype.confirm = function confirm() {}
+    Window.prototype.dispatchEvent = function dispatchEvent() {}
+    Window.prototype.dump = function dump() {}
+    Window.prototype.find = function find() {}
+    Window.prototype.focus = function focus() {}
+    Window.prototype.getAttentionWithCycleCount = function getAttentionWithCycleCount() {}
+    Window.prototype.getComputedStyle = function getComputedStyle(element) {
+        return new CSSStyleDeclaration(element.pointer)
+        //var style = CPP_DKDomWindow_getComputedStyle(element.pointer) //TODO
     }
-    Window.prototype.getDefaultComputedStyle = function() {}
-    Window.prototype.getSelection = function() {}
-    Window.prototype.matchMedia = function() {}
-    Window.prototype.maximize = function() {}
-    Window.prototype.minimize = function() {}
-    Window.prototype.moveBy = function() {}
-    Window.prototype.moveTo = function(x, y) {
-        CPP_DKWindow_moveTo(x, y);
+    Window.prototype.getDefaultComputedStyle = function getDefaultComputedStyle() {}
+    Window.prototype.getSelection = function getSelection() {}
+    Window.prototype.matchMedia = function matchMedia() {}
+    Window.prototype.maximize = function maximize() {}
+    Window.prototype.minimize = function minimize() {}
+    Window.prototype.moveBy = function moveBy() {}
+    Window.prototype.moveTo = function moveTo(x, y) {
+        CPP_DKWindow_moveTo(x, y)
     }
-    Window.prototype.open = function() {}
-    Window.prototype.postMessage = function() {}
-    Window.prototype.print = function() {}
-    Window.prototype.prompt = function() {}
-    Window.prototype.releaseEvents = function() {}
-    Window.prototype.requestAnimationFrame = function() {}
-    Window.prototype.requestIdleCallback = function() {}
-    Window.prototype.resizeBy = function() {}
-    Window.prototype.resizeTo = function(width, height) {
-        CPP_DKWindow_resizeTo(width, height);
+    Window.prototype.open = function open() {}
+    Window.prototype.postMessage = function postMessage() {}
+    Window.prototype.print = function print() {}
+    Window.prototype.prompt = function prompt() {}
+    Window.prototype.releaseEvents = function releaseEvents() {}
+    Window.prototype.requestAnimationFrame = function requestAnimationFrame() {}
+    Window.prototype.requestIdleCallback = function requestIdleCallback() {}
+    Window.prototype.resizeBy = function resizeBy() {}
+    Window.prototype.resizeTo = function resizeTo(width, height) {
+        CPP_DKWindow_resizeTo(width, height)
     }
-    Window.prototype.scroll = function() {}
-    Window.prototype.scrollBy = function() {}
-    Window.prototype.scrollByLines = function() {}
-    Window.prototype.scrollByPages = function() {}
-    Window.prototype.scrollTo = function() {}
-    Window.prototype.setCursor = function() {}
-    Window.prototype.setImmediate = function() {}
-    Window.prototype.setResizable = function() {}
-    Window.prototype.sizeToContent = function() {}
-    Window.prototype.stop = function() {}
-    Window.prototype.updateCommands = function() {}
-    Window.prototype.XMLHttpRequest = function(client) {
-        return new XMLHttpRequest(client.pointer);
+    Window.prototype.scroll = function scroll() {}
+    Window.prototype.scrollBy = function scrollBy() {}
+    Window.prototype.scrollByLines = function scrollByLines() {}
+    Window.prototype.scrollByPages = function scrollByPages() {}
+    Window.prototype.scrollTo = function scrollTo() {}
+    Window.prototype.setCursor = function setCursor() {}
+    Window.prototype.setImmediate = function setImmediate() {}
+    Window.prototype.setResizable = function setResizable() {}
+    Window.prototype.sizeToContent = function sizeToContent() {}
+    Window.prototype.stop = function stop() {}
+	/*
+	Window.prototype.toString = function toString(){
+		return "[object Window]"
+	}
+	*/
+    Window.prototype.updateCommands = function updateCommands() {}
+    Window.prototype.XMLHttpRequest = function XMLHttpRequest(client) {
+        return new XMLHttpRequest(client.pointer)
     }
-
-    return EventTarget.call(this, pointer);
+    return EventTarget.call(this, pointer)
 }
 
 // https://html.spec.whatwg.org/multipage/window-object.html#the-window-object
 // interface Window : EventTarget
-Window.prototype = EventTarget.prototype;
-//Window includes GlobalEventHandlers;
-Object.assign(Window.prototype, GlobalEventHandlers);
-//Window includes WindowEventHandlers;
-Object.assign(Window.prototype, WindowEventHandlers);
+Window.prototype = EventTarget.prototype
+Object.assign(Window.prototype, GlobalEventHandlers)
+Object.assign(Window.prototype, WindowEventHandlers)
 
+/*
 //Create the global window object
-var window = new Window("window");
+var window = new Window("window")
+globalThis.window = window
 
 //Duktape miscellaneous
-var dk = new Object;
-window.dk = dk;
-const DUKTAPE = true;
-window.DUKTAPE = true;
-console.log("DUKTAPE = "+DUKTAPE);
+var dk = new Object
+window.dk = dk
+const DUKTAPE = true
+window.DUKTAPE = DUKTAPE
+console.log("DUKTAPE = "+DUKTAPE)
+*/

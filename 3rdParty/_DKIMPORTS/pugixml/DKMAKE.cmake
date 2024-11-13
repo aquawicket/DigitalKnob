@@ -1,8 +1,19 @@
-### VERSION ###
-DKSET(PUGIXML_MAJOR 1)
-DKSET(PUGIXML_MINOR 6)
-DKSET(PUGIXML_VERSION pugixml-${PUGIXML_MAJOR}.${PUGIXML_MINOR})
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
-### INSTALL ###
-DKINSTALL(https://github.com/zeux/pugixml/releases/download/v${PUGIXML_MAJOR}.${PUGIXML_MINOR}/${PUGIXML_VERSION}.zip pugixml ${PUGIXML})
-DKSET(PUGIXML ${3RDPARTY}/${PUGIXML_VERSION})
+
+dk_load(dk_builder)
+# https://github.com/zeux/pugixml
+
+
+### IMPORT ###
+#dk_import(https://github.com/zeux/pugixml.git)
+dk_import(https://github.com/zeux/pugixml/releases/download/v1.6/pugixml-1.6.zip PATCH)
+
+
+if(ANDROID)
+	dk_define(PUGIXML_NO_EXCEPTIONS)
+endif()

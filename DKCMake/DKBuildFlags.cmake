@@ -1,0 +1,834 @@
+#!/usr/bin/cmake -P
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+dk_validate(host_triple   "dk_host_triple()")
+dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
+#include_guard()
+
+# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+#
+# For the latest information, see https://github.com/aquawicket/DigitalKnob
+#
+# Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files(the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions :
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+# Reference docs
+# Get the definition of any shell command		https://explainshell.com 
+# Clang command line argument reference			https://clang.llvm.org/docs/ClangCommandLineReference.html
+# Cross-compilation using Clang					https://clang.llvm.org/docs/CrossCompilation.html
+# GCC Options Controlling C++ Dialect			https://gcc.gnu.org/onlinedocs/gcc/C_002b_002b-Dialect-Options.html
+# GCC ARM Options								https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html
+# Getting Started with the LLVM System			https://llvm.org/docs/GettingStarted.html
+# How To Cross-Compile Clang/LLVM				https://llvm.org/docs/HowToCrossCompileLLVM.html
+# GCC flags on RPi4								https://forums.raspberrypi.com/viewtopic.php?t=244095
+# compile LLVM with enabling RTTI, ABI 11		https://bibouh123.wordpress.com/2014/10/13/compile-llvm-with-enabling-rtti/
+# Chromium CMakeLists.txt						https://chromium.googlesource.com/external/github.com/google/crc32c/+/refs/tags/1.0.5/CMakeLists.txt
+# Visual Studio Exception handling model		https://docs.microsoft.com/en-us/cpp/build/reference/eh-exception-handling-model?view=msvc-170
+# Difference between Clang LLVM GCC G++			https://stackoverflow.com/a/24836566/688352
+# CRT and C++ STL .lib files 					https://docs.microsoft.com/en-us/cpp/c-runtime-library/crt-library-features?view=msvc-170
+# Get started with the NDK						https://developer.android.com/ndk/guides
+# target XP										https://tedwvc.wordpress.com/2014/01/01/how-to-target-xp-with-vc2012-or-vc2013-and-continue-to-use-the-windows-8-x-sdk
+# GCC optimizations								https://gcc.gnu.org/onlinedocs/gcc-3.4.6/gcc/Optimize-Options.html
+# LLVM optimizations							https://www.incredibuild.com/blog/compiling-with-clang-optimization-flags
+# MSVC optimizations							https://learn.microsoft.com/en-us/cpp/build/reference/o-options-optimize-code?view=msvc-170
+
+
+# Target Operating Systems
+# https://en.wikipedia.org/wiki/Comparison_of_operating_systems
+# android
+# ios
+# linux
+# macos
+# raspberry
+# windows
+
+# CPU Architectures
+# https://en.wikipedia.org/wiki/Comparison_of_instruction_set_architectures
+# x86
+# x86_64
+# arm32
+# arm64
+
+# C/C++ Compilers
+# https://en.wikipedia.org/wiki/List_of_compilers#C_compilers
+# https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers
+# clang
+# gcc
+# msvc
+
+# Javascript Engines
+# https://en.wikipedia.org/wiki/List_of_ECMAScript_engines
+# duktape
+# v8
+         
+# helpful terminal commands
+# lscpu                                     see details about the cpu                 https://explainshell.com/explain?cmd=lscpu
+# uname -a                                  system identifier                         https://explainshell.com/explain?cmd=uname+-a
+# gcc -c -Q -march=native --help=target     target specific compiler gcc flags        https://explainshell.com/explain?cmd=gcc+-c+-Q+-march%3Dnative+--help%3Dtarget
+# gcc --version                             the version of gcc on the host machine    https://explainshell.com/explain?cmd=gcc+--version
+# gcc --help                                general gcc help                          https://explainshell.com/explain?cmd=gcc+--help
+# clang --version                           the version of clang on the host machine  https://explainshell.com/explain?cmd=clang+--version 
+# clang--help                               general clang help                        https://explainshell.com/explain?cmd=clang+--help
+# gcc-fpu                                   ARM processor floating point math         https://explainshell.com/explain?cmd=gcc+-fpu
+
+# common flags for compilers
+#										GCC					CLANG/LLVM			MSVC													NOTES
+# Enable runtime type information		-frtti				-frtti				/GR                                                         
+# Disable runtime type information		-fno-rtti			-fno-rtti			/GR-                                                         
+# Standard C++ exception handling		-fexceptions		-fexceptions		/EHsc													#https://stackoverflow.com/a/4574319/688352
+# No Exceptions							-fno-exceptions		-fno-exceptions		/D_HAS_EXCEPTIONS=0										#https://stackoverflow.com/a/65513682/688352
+# Use address sanatizer					-fsanitize=address	-fsanitize=address	/fsanitize=address										incompatable with /RTC1 
+# Suppress Startup Banner														/nologo     
+# Enable updated __cplusplus macro												/Zc:__cplusplus       
+# Precompiled Header Memory Limit												/Zm<factor>												<factor> = memory size  EXAMPLE: /Zm500  
+# No Experimental filesystem warning											/D_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+# Enable CRT Secure functions extension											/D__STDC_WANT_LIB_EXT1__
+# supress CRT Secure function warnings											/D_CRT_SECURE_NO_WARNINGS
+# precompiled headers															/Yu<file>												<file> = file name  EXAMPLE: /Yustdafx.h																
+
+
+
+#set(DKCMAKE_COMMAND_LINE_TOOLCHAIN 0)
+#set(DKCMAKE_LOAD_FILE_TOOLCHAIN 0)
+#set(DKCMAKE_INTERNAL_TOOLCHAIN 1)
+#dk_info("DKCMAKE_COMMAND_LINE_TOOLCHAIN = ${DKCMAKE_COMMAND_LINE_TOOLCHAIN}")
+#dk_info("DKCMAKE_LOAD_FILE_TOOLCHAIN = ${DKCMAKE_LOAD_FILE_TOOLCHAIN}")
+#dk_info("DKCMAKE_INTERNAL_TOOLCHAIN = ${DKCMAKE_INTERNAL_TOOLCHAIN}")
+#if(NOT ${DKCMAKE_COMMAND_LINE_TOOLCHAIN})
+#	dk_info("UNSET CMAKE_TOOLCHAIN_FILE")
+#	dk_unset(CMAKE_TOOLCHAIN_FILE)
+#endif()
+#dk_info("CMAKE_TOOLCHAIN_FILE = ${CMAKE_TOOLCHAIN_FILE}")
+#if(DKCMAKE_COMMAND_LINE_TOOLCHAIN)
+#	dk_printVar("DKCMAKE_COMMAND_LINE_TOOLCHAIN")
+#	dk_printVar(CMAKE_TOOLCHAIN_FILE)
+#elseif(DKCMAKE_LOAD_FILE_TOOLCHAIN)
+#	dk_printVar("DKCMAKE_LOAD_FILE_TOOLCHAIN")
+#	#dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_64_clang_toolchain.cmake)
+#elseif(DKCMAKE_INTERNAL_TOOLCHAIN)
+#	dk_printVar("DKCMAKE_INTERNAL_TOOLCHAIN")
+#else()
+#	dk_fatal("NONE OF THE DKCMAKE TOOLCHAIN TYPES ARE SET")
+#endif()
+
+dk_validate(DKIMPORTS_DIR	"dk_DKIMPORTS_DIR()")
+
+########### CORE DEPENDENCIES ############
+dk_validate(CMAKE_EXE 		"dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)")
+
+if(MINGW)
+#	#dk_set(PROJECT_INCLUDE_DKPLUGINS 0)
+	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
+endif()
+if(MSYS)
+	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
+endif()
+if(LINUX_HOST)
+	dk_load(${DKIMPORTS_DIR}/build-essential/DKMAKE.cmake)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+endif()
+if(DEFINED ENV{WSLENV})
+	dk_load(${DKIMPORTS_DIR}/wsl/DKMAKE.cmake)
+endif()
+dk_validate(CMAKE_MAKE_PROGRAM		"dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)")
+
+
+
+
+### User Friendly Options ###
+dk_set(BUILD_SHARED_LIBS				0)
+dk_set(BUILD_STATIC_LIBS				1)
+dk_set(BUILD_TESTING					0)
+dk_set(ENABLE_EXCEPTIONS				1)    
+dk_set(ENABLE_RTTI						1)
+dk_set(POSITION_INDEPENDENT_CODE 		1)
+dk_set(POSITION_INDEPENDENT_EXECUTABLE 	1)                                        
+dk_set(WARNINGS_AS_ERRORS				0)
+dk_set(WARNING_4244						0)	# /wd4244 - Warning: possible loss of data 
+dk_set(WARNING_5105						0)	# /wd5105 - macro producing defined is undefined behaviour
+dk_set(WARNING_LEVEL 					4)
+#dk_set(STATIC							1)
+#dk_set(SHARED							0)
+dk_set(CMAKE_VERBOSE_MAKEFILE			1)
+
+if(ANDROID)
+	dk_set(POSITION_INDEPENDENT_EXECUTABLE 0) 
+endif()
+
+
+
+
+dk_append		(DKCMAKE_FLAGS -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
+dk_append		(DKCMAKE_FLAGS -DBUILD_STATIC_LIBS=${BUILD_STATIC_LIBS})
+dk_append		(DKCMAKE_FLAGS -DBUILD_TESTING=${BUILD_TESTING})
+if(${BUILD_SHARED_LIBS})
+	dk_append	(DKCONFIGURE_FLAGS --enable-shared)
+else()
+	dk_append	(DKCONFIGURE_FLAGS --disable-shared)
+endif()
+if(${BUILD_STATIC_LIBS})
+	dk_append	(DKCONFIGURE_FLAGS --enable-static)
+else()
+	dk_append	(DKCONFIGURE_FLAGS --disable-static)
+endif()
+
+if(MSVC)
+	dk_append(CMAKE_C_FLAGS_DEBUG			/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG)
+	dk_append(CMAKE_C_FLAGS_RELEASE			/MT /O2 /Ob2 /DNDEBUG)
+	dk_append(CMAKE_CXX_FLAGS_DEBUG			/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG)
+	dk_append(CMAKE_CXX_FLAGS_RELEASE		/MT /O2 /Ob2 /DNDEBUG)
+else()
+	dk_append(CMAKE_C_FLAGS_DEBUG			-DDEBUG -D_DEBUG -g)
+	dk_append(CMAKE_C_FLAGS_RELEASE			-O3 -DNDEBUG)
+	
+	dk_append(CMAKE_CXX_FLAGS_DEBUG			-DDEBUG -D_DEBUG -g)
+	dk_append(CMAKE_CXX_FLAGS_RELEASE		-O3 -DNDEBUG)
+endif()
+dk_set(DKCONFIGURE_CFLAGS_DEBUG				-DDEBUG -D_DEBUG -g)
+dk_set(DKCONFIGURE_CFLAGS_RELEASE			-O3 -DNDEBUG)
+dk_set(DKCONFIGURE_CXXFLAGS_DEBUG			-DDEBUG -D_DEBUG -g)
+dk_set(DKCONFIGURE_CXXFLAGS_RELEASE			-O3 -DNDEBUG)
+
+
+###### Flags FMT LIBRARY ######
+if(MSVC)
+	dk_append(CMAKE_C_FLAGS /utf-8)
+	dk_append(CMAKE_CXX_FLAGS /utf-8)
+endif()
+
+
+###### POSITION_INDEPENDENT_CODE ######
+# https://stackoverflow.com/a/3544211/688352   -fPIC vs -fpic
+# https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fPIC
+if(WIN_HOST)
+	dk_set(POSITION_INDEPENDENT_CODE 0)
+endif()
+if(POSITION_INDEPENDENT_CODE)
+	if(WIN AND MSVC)
+		
+	else()
+		dk_append(CMAKE_C_FLAGS -fPIC)
+		dk_append(CMAKE_CXX_FLAGS -fPIC)
+	endif()
+	dk_append(DKCONFIGURE_CFLAGS -fPIC) 
+	dk_append(DKCONFIGURE_CXXFLAGS -fPIC) 
+else()	
+	if(WIN AND MSVC)
+		
+	else()
+#		dk_append(CMAKE_C_FLAGS -fno-pic)
+#		dk_append(CMAKE_CXX_FLAGS -fno-pic)
+	endif()
+#	dk_append(DKCONFIGURE_CFLAGS -fno-pic) 
+#	dk_append(DKCONFIGURE_CXXFLAGS -fno-pic) 
+endif()
+dk_printVar(POSITION_INDEPENDENT_CODE)
+
+###### POSITION_INDEPENDENT_EXECUTABLE ######
+# https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fpie
+if(POSITION_INDEPENDENT_EXECUTABLE)
+	if(WIN AND MSVC)
+	
+	else()
+#		dk_append(CMAKE_C_FLAGS -fPIE)
+#		dk_append(CMAKE_CXX_FLAGS -fPIE)
+	endif()
+#	dk_append(DKCONFIGURE_CFLAGS -fPIE)
+#	dk_append(DKCONFIGURE_CXXFLAGS -fPIE)
+else()
+	if(WIN AND MSVC)
+	
+	else()
+		dk_append(CMAKE_C_FLAGS -fno-pie)
+		dk_append(CMAKE_CXX_FLAGS -fno-pie)
+	endif()
+	dk_append(DKCONFIGURE_CFLAGS -fno-pie) 
+	dk_append(DKCONFIGURE_CXXFLAGS -fno-pie) 
+endif()
+dk_printVar(POSITION_INDEPENDENT_EXECUTABLE)
+
+###### RUN-TIME TYPE IDENTIFICATION ######
+if(ENABLE_RTTI)
+	if(WIN AND MSVC)
+		dk_append(CMAKE_CXX_FLAGS /GR)
+	else()
+		dk_append(CMAKE_CXX_FLAGS -frtti)
+	endif()
+	dk_append(DKCONFIGURE_CXXFLAGS -frtti)
+else()
+	if(WIN AND MSVC)
+		dk_append(CMAKE_C_FLAGS /GR-)
+		dk_append(CMAKE_CXX_FLAGS /GR-)
+	else()
+		# https://gcc.gnu.org/onlinedocs/gcc/C_002b_002b-Dialect-Options.html#index-fno-rtti
+		dk_append(CMAKE_C_FLAGS -fno-rtti)
+		dk_append(CMAKE_CXX_FLAGS -fno-rtti)
+	endif()
+	dk_append(DKCONFIGURE_CFLAGS -fno-rtti) 
+	dk_append(DKCONFIGURE_CXXFLAGS -fno-rtti)
+endif()
+dk_printVar(ENABLE_RTTI )
+
+###### EXCEPTIONS ######
+if(ENABLE_EXCEPTIONS)
+	if(WIN AND MSVC)
+		dk_append(CMAKE_C_FLAGS /EHsc)
+		dk_append(CMAKE_CXX_FLAGS /EHsc)
+	else()
+#		dk_append(CMAKE_C_FLAGS -fexceptions)
+#		dk_append(CMAKE_CXX_FLAGS -fexceptions)
+	endif()
+#	dk_append(DKCONFIGURE_CFLAGS -fexceptions) 
+#	dk_append(DKCONFIGURE_CXXFLAGS -fexceptions)
+else()
+	if(WIN AND MSVC)
+		dk_append(CMAKE_C_FLAGS /D_HAS_EXCEPTIONS=0)
+		dk_append(CMAKE_CXX_FLAGS /D_HAS_EXCEPTIONS=0)
+	else()
+		dk_append(CMAKE_C_FLAGS -fno-exceptions)
+		dk_append(CMAKE_CXX_FLAGS -fno-exceptions)
+	endif()
+	dk_append(DKCONFIGURE_CFLAGS -fno-exceptions) 
+	dk_append(DKCONFIGURE_CXXFLAGS -fno-exceptions)
+endif()
+dk_printVar(ENABLE_EXCEPTIONS)
+
+
+
+
+
+
+#### android_arm32
+if(ANDROID_ARM32)
+	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_ARM32 -std=c17)
+	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_ARM32 -std=c++1z)
+	dk_append(DKCONFIGURE_CFLAGS					-DANDROID -DANDROID_ARM32 -std=c17)
+	dk_append(DKCONFIGURE_CXXFLAGS					-DANDROID -DANDROID_ARM32 -std=c++1z)
+	dk_set(ANDROID_ABI								armeabi-v7a)
+	dk_set(ANDROID_CPP_FEATURES						rtti exceptions)
+	dk_set(ANDROID_STL								c++_static)
+	dk_set(ANDROID_STL_FORCE_FEATURES				1)
+	dk_set(ANDROID_TOOLCHAIN						clang)
+	dk_set(CMAKE_ANDROID_STL_TYPE					c++_static)
+	dk_append(DKCMAKE_FLAGS
+		"-DANDROID_CPP_FEATURES=rtti exceptions"
+		-DANDROID_ABI=${ANDROID_ABI}
+		-DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL}
+		-DANDROID_NDK=${ANDROID_NDK}
+		-DANDROID_PLATFORM=${ANDROID_PLATFORM}
+		-DANDROID_STL=${ANDROID_STL}
+		-DANDROID_STL_FORCE_FEATURES=${ANDROID_STL_FORCE_FEATURES}
+		-DANDROID_TOOLCHAIN=${ANDROID_TOOLCHAIN}
+		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
+	)
+endif()
+#### Android arm32 MSVC
+#if(ANDROID_ARM32 AND MSVC) #android_arm32_msvc
+	#dk_set(CMAKE_GENERATOR_PLATFORM			ARM)
+#endif()
+
+
+### android_arm64
+if(ANDROID_ARM64)
+	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_ARM64 -std=c17)
+	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_ARM64 -std=c++1z)
+	dk_append(DKCONFIGURE_CFLAGS					-DANDROID -DANDROID_ARM64 -std=c17)
+	dk_append(DKCONFIGURE_CXXFLAGS					-DANDROID -DANDROID_ARM64 -std=c++1z)
+	dk_set(ANDROID_ABI 								arm64-v8a)
+	dk_set(ANDROID_CPP_FEATURES						rtti exceptions)
+	dk_set(ANDROID_STL								c++_static)
+	dk_set(ANDROID_STL_FORCE_FEATURES				1)
+	dk_set(ANDROID_TOOLCHAIN						clang)
+	dk_set(CMAKE_ANDROID_STL_TYPE					c++_static)
+	dk_append(DKCMAKE_FLAGS 
+		"-DANDROID_CPP_FEATURES=rtti exceptions"
+		-DANDROID_ABI=${ANDROID_ABI}
+		-DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL}
+		-DANDROID_NDK=${ANDROID_NDK}
+		-DANDROID_PLATFORM=${ANDROID_PLATFORM}
+		-DANDROID_STL=${ANDROID_STL}
+		-DANDROID_STL_FORCE_FEATURES=${ANDROID_STL_FORCE_FEATURES}
+		-DANDROID_TOOLCHAIN=${ANDROID_TOOLCHAIN}
+		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
+	)
+endif()
+#### Android arm64 MSVC
+#if(ANDROID_ARM64 AND MSVC)
+	#dk_set(CMAKE_GENERATOR_PLATFORM			ARM64)
+#endif()
+
+
+### Android x86
+if(ANDROID_X86)
+	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)	#(CMAKE_GENERATOR)
+	
+	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_X86 -std=c17)
+	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_X86 -std=c++1z)
+	dk_append(DKCONFIGURE_CFLAGS					-DANDROID -DANDROID_X86 -std=c17)
+	dk_append(DKCONFIGURE_CXXFLAGS					-DANDROID -DANDROID_X86 -std=c++1z)
+	dk_set(ANDROID_ABI								x86)
+	dk_set(ANDROID_CPP_FEATURES						rtti exceptions)
+	dk_set(ANDROID_STL								c++_static)
+	dk_set(ANDROID_STL_FORCE_FEATURES				1)
+	dk_set(ANDROID_TOOLCHAIN						clang)
+	dk_set(CMAKE_ANDROID_STL_TYPE					c++_static)
+	dk_append(DKCMAKE_FLAGS 
+		"-DANDROID_CPP_FEATURES=rtti exceptions"
+		-DANDROID_ABI=${ANDROID_ABI}
+		-DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL}
+		-DANDROID_NDK=${ANDROID_NDK}
+		-DANDROID_PLATFORM=${ANDROID_PLATFORM}
+		-DANDROID_STL=${ANDROID_STL}
+		-DANDROID_STL_FORCE_FEATURES=${ANDROID_STL_FORCE_FEATURES}
+		-DANDROID_TOOLCHAIN=${ANDROID_TOOLCHAIN}
+		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
+	)
+endif()
+
+
+### Android x86_64
+if(ANDROID_X86_64)
+	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)	#(CMAKE_GENERATOR)
+	
+	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_X86_64 -std=c17)
+	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_X86_64 -std=c++1z)
+	dk_append(DKCONFIGURE_CFLAGS					-DANDROID -DANDROID_X86_64 -std=c17)
+	dk_append(DKCONFIGURE_CXXFLAGS					-DANDROID -DANDROID_X86_64 -std=c++1z)
+	dk_set(ANDROID_ABI								x86_64)
+	dk_set(ANDROID_CPP_FEATURES						rtti exceptions)
+	dk_set(ANDROID_STL								c++_static)
+	dk_set(ANDROID_STL_FORCE_FEATURES				1)
+	dk_set(ANDROID_TOOLCHAIN						clang)
+	dk_set(CMAKE_ANDROID_STL_TYPE					c++_static)
+	dk_append(DKCMAKE_FLAGS 
+		"-DANDROID_CPP_FEATURES=rtti exceptions"
+		-DANDROID_ABI=${ANDROID_ABI}
+		-DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL}
+		-DANDROID_NDK=${ANDROID_NDK}
+		-DANDROID_PLATFORM=${ANDROID_PLATFORM}
+		-DANDROID_STL=${ANDROID_STL}
+		-DANDROID_STL_FORCE_FEATURES=${ANDROID_STL_FORCE_FEATURES}
+		-DANDROID_TOOLCHAIN=${ANDROID_TOOLCHAIN}
+		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
+	)
+endif()
+
+
+### Emscripten ###
+if(EMSCRIPTEN)
+	dk_load(${DKIMPORTS_DIR}/emsdk/DKMAKE.cmake)
+	dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
+
+	dk_append(CMAKE_C_FLAGS							-DEMSCRIPTEN -std=gnu11)
+	dk_append(CMAKE_CXX_FLAGS						-DEMSCRIPTEN -std=gnu++17)
+	dk_append(DKCONFIGURE_CFLAGS					-DEMSCRIPTEN -std=gnu11)
+	dk_append(DKCONFIGURE_CXXFLAGS					-DEMSCRIPTEN -std=gnu++17)
+	dk_append(DKCMAKE_FLAGS							-DEMSCRIPTEN=1)
+endif()
+
+
+### iOS arm32 - XCODE ###
+if(IOS_ARM32)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	
+	dk_set	 (CMAKE_TOOLCHAIN_FILE					${IOS_TOOLCHAIN_FILE})
+	dk_append(CMAKE_C_FLAGS							-DIOS -DIOS_ARM32 -std=c17 -x objective-c)
+	dk_append(CMAKE_CXX_FLAGS						-DIOS -DIOS_ARM32 -std=c++17 -x objective-c++)
+	dk_append(DKCONFIGURE_FLAGS						--host arm-apple-${IOS_DARWIN})
+	dk_append(DKCONFIGURE_CFLAGS					-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
+	dk_append(DKCONFIGURE_CXXFLAGS					-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
+	dk_append(DKCMAKE_FLAGS							-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm)
+endif()
+
+
+### iOS_ARM64 - XCODE ###
+if(IOS_ARM64)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	
+	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
+	dk_append(CMAKE_C_FLAGS							-DIOS -DIOS_ARM64 -std=c17 -x objective-c)
+	dk_append(CMAKE_CXX_FLAGS						-DIOS -DIOS_ARM64 -std=c++17 -x objective-c++)
+	dk_append(DKCONFIGURE_FLAGS						--host arm64-apple-${IOS_DARWIN})
+	dk_append(DKCONFIGURE_CFLAGS					-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
+	dk_append(DKCONFIGURE_CXXFLAGS					-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
+	dk_append(DKCMAKE_FLAGS							-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS64 -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm64)
+endif()
+
+
+### iOS Simulator x86 - XCODE ###
+if(IOSSIM_X86)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	
+	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
+	dk_append(CMAKE_C_FLAGS							-DIOS -DIOSSIM -DIOSSIM_X86 -std=c17 -x objective-c)
+	dk_append(CMAKE_CXX_FLAGS						-DIOS -DIOSSIM -DIOSSIM_X86 -std=c++17 -x objective-c++)
+	dk_append(DKCONFIGURE_FLAGS						--host i686-apple-${IOS_DARWIN})
+	dk_append(DKCONFIGURE_CFLAGS					-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
+	dk_append(DKCONFIGURE_CXXFLAGS					-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
+	dk_append(DKCMAKE_FLAGS							-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=SIMULATOR -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator -DCMAKE_OSX_ARCHITECTURES=i686)
+endif()
+
+
+### iOS Simulator x86_64 - XCODE ###
+if(IOSSIM_X86_64)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	
+	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
+	dk_append(CMAKE_C_FLAGS							-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c17 -x objective-c)
+	dk_append(CMAKE_CXX_FLAGS						-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c++17 -x objective-c++)
+	dk_append(DKCONFIGURE_FLAGS						--host x86_64-apple-${IOS_DARWIN})
+	dk_append(DKCONFIGURE_CFLAGS					-arch x86_64 -DIOS -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
+	dk_append(DKCONFIGURE_CXXFLAGS					-arch x86_64 -DIOS -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
+	dk_append(DKCMAKE_FLAGS							-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=SIMULATOR64 -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator -DCMAKE_OSX_ARCHITECTURES=x86_64)
+endif()
+
+
+### Linux x86 ###
+if(LINUX_X86)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
+	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
+	dk_append(DKCONFIGURE_CFLAGS					-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
+	dk_append(DKCONFIGURE_CXXFLAGS					-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
+endif()
+
+
+#### Linux x86_64 ###
+if(LINUX_X86_64)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
+	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
+	dk_append(DKCONFIGURE_CFLAGS					-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
+	dk_append(DKCONFIGURE_CXXFLAGS					-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
+endif()
+
+
+### Mac x86 - XCODE ###
+if(MAC_X86)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-DMAC i686 -DMAC_X86 -std=c17 -x objective-c)
+	dk_append(CMAKE_CXX_FLAGS						-DMAC i686 -DMAC_X86 -std=c++17 -x objective-c++)
+	dk_append(DKCONFIGURE_CFLAGS					-arch i686 -DMAC -DMAC_X86 -std=c17) #-x objective-c) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	dk_append(DKCONFIGURE_CXXFLAGS					-arch i686 -DMAC -DMAC_X86 -std=c++17) #-x objective-c++) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	dk_append(DKCMAKE_FLAGS							-DCMAKE_OSX_ARCHITECTURES=x86)
+endif()
+
+
+### Mac x86_64 - XCODE ###
+if(MAC_X86_64)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-DMAC -DMAC_X86_64 -std=c17 -x objective-c)
+	dk_append(CMAKE_CXX_FLAGS						-DMAC -DMAC_X86_64 -std=c++17 -x objective-c++)
+	dk_append(DKCONFIGURE_CFLAGS					-DMAC -DMAC_X86_64 -std=c17) #-x objective-c) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	dk_append(DKCONFIGURE_CXXFLAGS					-DMAC -DMAC_X86_64 -std=c++17) #-x objective-c++) #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	dk_append(DKCMAKE_FLAGS							-DCMAKE_OSX_ARCHITECTURES=x86_64)
+endif()
+
+
+### Raspbery arm32 ###
+if(RASPBERRY_ARM32)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
+	dk_append(CMAKE_CXX_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
+	dk_append(DKCONFIGURE_CFLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l 
+	dk_append(DKCONFIGURE_CXXFLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
+endif()
+
+
+### Raspbery arm64 ###
+if(RASPBERRY_ARM64)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l
+	dk_append(CMAKE_CXX_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
+	dk_append(DKCONFIGURE_CFLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l 
+	dk_append(DKCONFIGURE_CXXFLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
+endif()
+
+
+### Windows x86 - MSVC ###
+if(win_x86_msvc)
+	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_CXX_FLAGS						/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
+endif()
+
+
+### Windows x86 - MINGW32 ###
+if(win_x86_mingw)
+	dk_set(MSYSTEM									MINGW32)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
+	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
+	dk_append(DKCMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_append(DKCONFIGURE_FLAGS						--build=i686-w64-mingw32)
+	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+endif()
+
+
+### Windows x86 - CLANG32 ###
+if(win_x86_clang)
+	dk_set(MSYSTEM 									CLANG32)
+	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
+	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
+	dk_append(DKCMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_append(DKCONFIGURE_FLAGS						--build=i686-w64-mingw32)
+	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+endif()
+
+
+### Windows x86_64 - MSVC ###
+if(win_x86_64_msvc)
+	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_CXX_FLAGS						/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
+endif()
+
+
+### Windows x86_64 - CLANG64 ###
+if(win_x86_64_clang)
+	dk_set(MSYSTEM 									CLANG64)
+	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
+	
+	dk_append(DKFLAGS 								-DMSYSTEM=CLANG64)
+	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=CLANG64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DMSYSTEM=CLANG64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64-mingw32)
+	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+endif()
+
+
+### Windows x86_64 - COSMOPOLITAN ###
+if(win_x86_64_cosmo)
+	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
+	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
+	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64)
+	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+endif()
+
+
+### Windows x86_64 - MINGW64 ###
+if(win_x86_64_mingw)
+	dk_set(MSYSTEM 									MINGW64)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	
+	dk_append(DKFLAGS 								-DMSYSTEM=MINGW64)
+	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64-mingw32)
+	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+endif()
+
+
+### Windows x86_64 - UCRT64 ###
+if(win_x86_64_ucrt)
+	dk_set(MSYSTEM 									UCRT64)
+	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) #-D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64-mingw32)
+	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+endif()
+
+
+### Windows arm64 - CLANGARM64 ###
+if(win_arm64_clang)
+	dk_set(MSYSTEM 									CLANGARM64)
+	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
+
+	dk_append(CMAKE_C_FLAGS							-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_ARM64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_CXX_FLAGS						-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_ARM64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_append(DKCONFIGURE_FLAGS						--build=aarch64-w64-mingw32)
+	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+endif()
+
+
+
+
+#dk_printVar(MSYSTEM)
+#dk_printVar(CMAKE_GENERATOR)
+#dk_printVar(CMAKE_MAKE_PROGRAM)
+#dk_printVar(CMAKE_C_FLAGS)
+#dk_printVar(CMAKE_CXX_FLAGS)
+#dk_printVar(CMAKE_EXE_LINKER_FLAGS)
+
+
+######### Extra Flags and Settings #########
+if(WARNINGS_AS_ERRORS)
+	if(MSVC)
+		dk_append	(CMAKE_C_FLAGS		/WX)
+		dk_append	(CMAKE_CXX_FLAGS	/WX)
+	else()
+		dk_append	(CMAKE_C_FLAGS		-Werror)
+		dk_append	(CMAKE_CXX_FLAGS	-Werror)
+	endif()
+endif()
+if(WARNING_LEVEL)
+	if(MSVC)
+		dk_append	(CMAKE_C_FLAGS		/W${WARNING_LEVEL})
+		dk_append	(CMAKE_CXX_FLAGS	/W${WARNING_LEVEL})
+	endif()
+endif()
+if(WARNING_4244) # /wd4244 - Warning: possible loss of data 
+	if(MSVC)
+		dk_append	(CMAKE_C_FLAGS		/wd4244)
+		dk_append	(CMAKE_CXX_FLAGS	/wd4244)
+	endif()
+endif()
+if(WARNING_5105) # /wd5105 - macro producing defined is undefined behaviour
+	if(MSVC)
+		dk_append	(CMAKE_C_FLAGS		/wd5105)
+		dk_append	(CMAKE_CXX_FLAGS	/wd5105)
+	endif()
+endif()
+
+
+
+
+# GENERATOR			CONFIG_PATH		    BUILD_PATH
+# -----------------------------------------------
+# Visual Studio  	${triple}			${triple}/${TYPE}		
+# XCODE			    ${triple}			${triple}/${TYPE} 
+# MinGW Makefiles   ${triple}/${TYPE}	${triple}/${TYPE} 
+# Unix Makefiles    ${triple}/${TYPE}   ${triple}/${TYPE}  
+# ./configure       ${triple}/${TYPE}   ${triple}/${TYPE}
+
+# https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
+# https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
+# https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html
+
+
+
+############## Setup continued by cmake from here ##############
+if(CMAKE_GENERATOR_PLATFORM)
+	dk_append				(DKCMAKE_FLAGS 		-A ${CMAKE_GENERATOR_PLATFORM})
+endif()
+if(CMAKE_BUILD_TYPE)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE})
+endif()
+if(CMAKE_TOOLCHAIN_FILE)
+	# FIXME: make sure the path uses foward slashes
+	dk_replaceAll(${CMAKE_TOOLCHAIN_FILE}  "\\"  "/"  CMAKE_TOOLCHAIN_FILE)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE})
+endif()
+if(CMAKE_MAKE_PROGRAM)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM})
+endif()
+if(CMAKE_AR)
+	dk_append				(DKCMAKE_FLAGS		-DCMAKE_AR=${CMAKE_AR})
+endif()
+if(CMAKE_C_COMPILER)
+	dk_append				(DKCMAKE_FLAGS		-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER})
+endif()
+if(CMAKE_C_FLAGS)
+	dk_replaceAll("${CMAKE_C_FLAGS}"  ";"  " "  CMAKE_C_FLAGS)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_C_FLAGS=${CMAKE_C_FLAGS})
+endif()
+if(CMAKE_C_FLAGS_DEBUG)
+	dk_replaceAll("${CMAKE_C_FLAGS_DEBUG}"  ";"  " "  CMAKE_C_FLAGS_DEBUG)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_C_FLAGS_DEBUG=${CMAKE_C_FLAGS_DEBUG})
+endif()
+if(CMAKE_C_FLAGS_RELEASE)
+	dk_replaceAll("${CMAKE_C_FLAGS_RELEASE}"  ";"  " "  CMAKE_C_FLAGS_RELEASE)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_C_FLAGS_RELEASE=${CMAKE_C_FLAGS_RELEASE})
+endif()
+if(CMAKE_CXX_COMPILER)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER})
+endif()
+if(CMAKE_CXX_FLAGS)
+	dk_replaceAll("${CMAKE_CXX_FLAGS}"  ";"  " "  CMAKE_CXX_FLAGS)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS})
+endif()
+if(CMAKE_CXX_FLAGS_DEBUG)
+	dk_replaceAll("${CMAKE_CXX_FLAGS_DEBUG}"  ";"  " "  CMAKE_CXX_FLAGS_DEBUG)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_CXX_FLAGS_DEBUG=${CMAKE_CXX_FLAGS_DEBUG})
+endif()
+if(CMAKE_CXX_FLAGS_RELEASE)
+	dk_replaceAll("${CMAKE_CXX_FLAGS_RELEASE}"  ";"  " "  CMAKE_CXX_FLAGS_RELEASE)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_CXX_FLAGS_RELEASE=${CMAKE_CXX_FLAGS_RELEASE})
+endif()
+if(CMAKE_EXE_LINKER_FLAGS)
+	dk_replaceAll("${CMAKE_EXE_LINKER_FLAGS}"  ";"  " "  CMAKE_EXE_LINKER_FLAGS)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_EXE_LINKER_FLAGS=${CMAKE_EXE_LINKER_FLAGS})
+endif()
+
+
+if(DKCONFIGURE_CC)
+	dk_append		(DKCONFIGURE_FLAGS CC=${DKCONFIGURE_CC})
+endif()
+if(DKCONFIGURE_CXX)
+	dk_append		(DKCONFIGURE_FLAGS CXX=${DKCONFIGURE_CXX})
+endif()
+if(DKCONFIGURE_CFLAGS)
+	dk_replaceAll("${DKCONFIGURE_CFLAGS}"  ";"  " "  DKCONFIGURE_CFLAGS)
+	dk_append		(DKCONFIGURE_FLAGS CFLAGS=${DKCONFIGURE_CFLAGS})
+endif()
+if(DKCONFIGURE_CXXFLAGS)
+	dk_replaceAll("${DKCONFIGURE_CXXFLAGS}"  ";"  " "  DKCONFIGURE_CXXFLAGS)
+	dk_append		(DKCONFIGURE_FLAGS CXXFLAGS=${DKCONFIGURE_CXXFLAGS})
+endif()
+
+
+
+
+
+
+
+
+###### Set DKCMAKE_BUILD variable ######
+dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
+dk_printVar(DKCMAKE_BUILD)
+
+
+###### Set DKCONFIGURE_BUILD variable ######
+if(EMSCRIPTEN)
+	dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+else()
+	dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+endif()

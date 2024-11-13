@@ -1,17 +1,22 @@
-DKDEPEND(boost Boost_Thread)
-
-### VERSION ###
-DKSET(THREADPOOL_MAJOR 0)
-DKSET(THREADPOOL_MINOR 2)
-DKSET(THREADPOOL_BUILD 5)
-DKSET(THREADPOOL_VERSION 0_2_5-src)
-DKSET(THREADPOOL ${3RDPARTY}/threadpool-${THREADPOOL_VERSION})
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### INSTALL ###
+dk_load(dk_builder)
 ## https://sourceforge.net/projects/threadpool/files/threadpool/0.2.5%20%28Stable%29/threadpool-0_2_5-src.zip/download
-DKINSTALL(https://sourceforge.net/projects/threadpool/files/threadpool/${THREADPOOL_MAJOR}.${THREADPOOL_MINOR}.${THREADPOOL_BUILD}%20%28Stable%29/threadpool-${THREADPOOL_VERSION}.zip threadpool ${THREADPOOL})
+
+
+### DEPEND ###
+dk_depend(boost boost_system)
+dk_depend(boost boost_thread)
+
+
+### IMPORT ###
+dk_import(https://sourceforge.net/projects/threadpool/files/threadpool/0.2.5%20%28Stable%29/threadpool-0_2_5-src.zip)
 
 
 ### LINK ###
-DKINCLUDE(${THREADPOOL})
+dk_include(${THREADPOOL})

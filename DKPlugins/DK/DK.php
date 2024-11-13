@@ -11,10 +11,10 @@ if(!isset($_SESSION[$clientIp])){
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
-function header_status($statusCode) {
+function header_status($statusCode){
     static $status_codes = null;
 
-    if ($status_codes === null) {
+    if ($status_codes === null){
         $status_codes = array (
             100 => 'Continue',
             101 => 'Switching Protocols',
@@ -69,7 +69,7 @@ function header_status($statusCode) {
         );
     }
 
-    if ($status_codes[$statusCode] !== null) {
+    if ($status_codes[$statusCode] !== null){
         $status_string = $statusCode . ' ' . $status_codes[$statusCode];
         header($_SERVER['SERVER_PROTOCOL'] . ' ' . $status_string, true, $statusCode);
     }
@@ -229,7 +229,7 @@ function sendEmail($address, $subject, $msg){
 function stringToBinary($string){
     $characters = str_split($string);
     $binary = [];
-    foreach ($characters as $character) {
+    foreach ($characters as $character){
         $data = unpack('H*', $character);
         $binary[] = base_convert($data[1], 16, 2);
     }
@@ -239,7 +239,7 @@ function stringToBinary($string){
 function binaryToString($binary){
     $binaries = explode(' ', $binary);
     $string = null;
-    foreach ($binaries as $binary) {
+    foreach ($binaries as $binary){
         $string .= pack('H*', dechex(bindec($binary)));
     }
     return $string;    

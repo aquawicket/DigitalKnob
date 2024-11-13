@@ -1,11 +1,10 @@
-"use strict";
+//"use strict";
 
+function DKClipboard(){}
 dk.clipboard = DKPlugin(DKClipboard, "singleton")
 
-function DKClipboard() {}
-
 DKClipboard.prototype.cut = function DKClipboard_cut(ele) {
-    let text = "";
+    var text = "";
     if (window.getSelection)
         text = window.getSelection().toString();
     else if (document.selection && document.selection.type !== "Control")

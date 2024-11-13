@@ -1,12 +1,36 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+
 #include "DK/stdafx.h"
-#include "DKSDLVideo.h"
-#include "DKFile.h"
-#include "DKSDLWindow.h"
+#include "DKSDLVideo/DKSDLVideo.h"
+#include "DK/DKFile.h"
+#include "DKSDLWindow/DKSDLWindow.h"
 
 
-///////////////////////
-void DKSDLVideo::Init()
-{
+void DKSDLVideo::Init(){
 	DKDebug();
 	stream = NULL;
 	streamObj = NULL;
@@ -14,9 +38,7 @@ void DKSDLVideo::Init()
 	DKClass::RegisterFunc("DKSDLVideo::Play", &DKSDLVideo::Play, this);
 }
 
-//////////////////////
-void DKSDLVideo::End()
-{
+void DKSDLVideo::End(){
 	DKDebug();
 	if(stream)
 		WV_closeStream(stream);
@@ -29,11 +51,7 @@ void DKSDLVideo::End()
 	WV_waaveClose();
 }
 
-
-
-/////////////////////////////////////////
-bool DKSDLVideo::Handle(SDL_Event *event)
-{
+bool DKSDLVideo::Handle(SDL_Event *event){
 	DKDebug(event);
 	if(event->type == WV_REFRESH_EVENT){
 		WV_refreshVideoFrame(event);
@@ -55,9 +73,7 @@ bool DKSDLVideo::Handle(SDL_Event *event)
 	return false;
 }
 
-//////////////////////////////////////////////////////
-bool DKSDLVideo::Play(const void* input, void* output)
-{
+bool DKSDLVideo::Play(const void* input, void* output){
 	DKDebug(input, output);
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)) { return false; }

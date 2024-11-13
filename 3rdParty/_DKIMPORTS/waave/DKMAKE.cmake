@@ -1,62 +1,36 @@
-### DEPENDS ###
-DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-dev)
-DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-shared)
-DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-dev)
-DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-shared)
-DKDEPEND(SDL2)
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### VERSION ###
-DKSET(WAAVE_VERSION 3.01)
-DKSET(WAAVE_NAME waave-${WAAVE_VERSION})
-DKSET(WAAVE ${3RDPARTY}/${WAAVE_NAME})
+dk_load(dk_builder)
+# https://sourceforge.net/projects/waave
+# https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz
 
 
-### INSTALL ###
-## DKINSTALL(www.internet.com/${WAAVE_NAME}.tar ${WAAVE})
+### DEPEND ###
+dk_depend(ffmpeg)
+dk_depend(sdl)
+
+
+### IMPORT ###
+dk_import(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz PATCH)
+#dk_import(git://git.code.sf.net/p/waave/code)
 
 
 ### LINK ###
-DKINCLUDE(${WAAVE}/src)
-WIN_DEBUG_LIB(${WAAVE}/${OS}/${DEBUG_DIR}/waave.lib)
-WIN_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE_DIR}/waave.lib)
-APPLE_DEBUG_LIB(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
-APPLE_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
-LINUX_DEBUG_LIB(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
-LINUX_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
-ANDROID_DEBUG_LIB(${WAAVE}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwaave.a)
-ANDROID_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwaave.a)
+dk_include			(${WAAVE_DIR}/src)
+UNIX_dk_libDebug	(${WAAVE_DEBUG_DIR}/libwaave.a)
+UNIX_dk_libRelease	(${WAAVE_RELEASE_DIR}/libwaave.a)
+WIN_dk_libDebug		(${WAAVE_DEBUG_DIR}/waave.lib)
+WIN_dk_libRelease	(${WAAVE_RELEASE_DIR}/waave.lib)
+
+
+### GENERATE ###
+dk_configure(${WAAVE_DIR} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE})
 
 
 ### COMPILE ###
-WIN_PATH(${WAAVE}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})
-WIN64_COMMAND(${DKCMAKE_WIN64} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})
-WIN_VS(${WAAVE_NAME} waave.sln waave)
-
-
-MAC_PATH(${WAAVE}/${OS})
-MAC64_COMMAND(${DKCMAKE_MAC64} ${WAAVE})
-MAC_XCODE(${WAAVE_NAME} waave)
-
-
-IOS_PATH(${WAAVE}/${OS})
-IOS64_COMMAND(${DKCMAKE_IOS64} ${WAAVE})
-IOS_XCODE(${WAAVE_NAME} waave)
-
-
-IOSSIM_PATH(${WAAVE}/${OS})
-IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${WAAVE})
-IOSSIM_XCODE(${WAAVE_NAME} waave)
-
-
-LINUX_DEBUG_PATH(${WAAVE}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${WAAVE})
-LINUX_DEBUG_COMMAND(make waave)
-
-LINUX_RELEASE_PATH(${WAAVE}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${WAAVE})
-LINUX_RELEASE_COMMAND(make waave)
-
-
-ANDROID_NDK(${WAAVE_NAME})
+dk_build(${WAAVE_DIR} waave)

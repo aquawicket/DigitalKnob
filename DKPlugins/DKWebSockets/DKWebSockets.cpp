@@ -1,7 +1,32 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
-
 #include "DK/stdafx.h"
 #include "DKWebSockets/DKWebSockets.h"
+
 
 //SERVER
 DKString DKWebSockets::serverAddress;
@@ -15,9 +40,7 @@ uWS::WebSocket<uWS::CLIENT>* DKWebSockets::clientWebSocket = NULL;
 uWS::Hub DKWebSockets::clientHub;
 
 
-/////////////////////////
-bool DKWebSockets::Init()
-{
+bool DKWebSockets::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKWebSocketsJS");
 	DKClass::DKCreate("DKWebSocketsV8");
@@ -25,54 +48,44 @@ bool DKWebSockets::Init()
 	return true;
 }
 
-////////////////////////
-bool DKWebSockets::End()
-{
+bool DKWebSockets::End(){
 	DKDEBUGFUNC();
 	serverHub.getDefaultGroup<uWS::SERVER>().close();
 	clientHub.getDefaultGroup<uWS::CLIENT>().close();
 	return true;
 }
 
-////////////////////////////////
-bool DKWebSockets::CloseClient()
-{
+bool DKWebSockets::CloseClient(){
 	DKDEBUGFUNC();
 	clientHub.getDefaultGroup<uWS::CLIENT>().close();
 	clientWebSocket = NULL;
-	DKINFO("DKWebSockets::CloseClient(): Client closed\n");
-	return true;
+	return DKINFO("Client closed \n");
 }
 
-////////////////////////////////
-bool DKWebSockets::CloseServer()
-{
+bool DKWebSockets::CloseServer(){
 	DKDEBUGFUNC();
 	serverHub.getDefaultGroup<uWS::SERVER>().close();
 	serverPort = NULL;
 	serverWebSocket = NULL;
-	DKINFO("DKWebSockets::CloseServer(): Server closed\n");
-	return true;
+	return DKINFO("Server closed \n");
 }
 
-////////////////////////////////////////////////////////
-bool DKWebSockets::CreateClient(const DKString& address)
-{
+bool DKWebSockets::CreateClient(const DKString& address){
 	DKDEBUGFUNC(address);
 	clientAddress = address;
 
 	clientHub.onConnection([](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
-		DKINFO("DKWebSockets::CreateClient(): clientHub.onConnection\n");
+		DKDEBUGFUNC(ws, req);
 		clientWebSocket = ws;
 	});
 
 	clientHub.onDisconnection([](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
-		DKINFO("DKWebSockets::CreateClient(): clientHub.onDisconnection\n");
+		DKDEBUGFUNC(ws, code, message, length);
 		clientWebSocket = NULL;
 	});
 
 	clientHub.onError([](void *user){
-		DKERROR("DKWebSockets::CreateClient(): clientHub.onError: "+toString((long)user)+"\n");
+		DKDEBUGFUNC(user);
 		clientWebSocket = NULL;
 		switch ((long) user){
 		case 1:
@@ -112,26 +125,23 @@ bool DKWebSockets::CreateClient(const DKString& address)
 	});
 
 	clientHub.onMessage([](uWS::WebSocket<uWS::CLIENT> *ws, char *message, size_t length, uWS::OpCode opCode){
-		DKINFO("DKWebSockets::CreateClient(): clientHub.onMessage\n");
+		DKDEBUGFUNC(ws, message, length, opCode);
 		MessageFromServer(ws, message, length, opCode);
 	});
 
 	clientHub.poll();
 	clientHub.connect(address, NULL);
 	
-	DKINFO("DKWebSockets::CreateClient(): Client started...\n");
-	return true;
+	return DKINFO("DKWebSockets::CreateClient(): Client started...\n");
 }
 
-/////////////////////////////////////////////////////////////////////////
-bool DKWebSockets::CreateServer(const DKString& address, const int& port)
-{
+bool DKWebSockets::CreateServer(const DKString& address, const int& port){
 	DKDEBUGFUNC(address, port);
 	serverAddress = address;
 	serverPort = port;
 
 	serverHub.onError([](void *user){
-		DKERROR("DKWebSockets::CreateServer(): serverHub.onError\n");
+		DKDEBUGFUNC(user);
 		serverWebSocket = NULL;
 		switch ((long) user){
 		case 1:
@@ -171,7 +181,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 	});
 
 	serverHub.onConnection([](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req){
-		DKINFO("DKWebSockets::CreateServer(): serverHub.onConnection\n");
+		DKDEBUGFUNC(ws, req);
 		serverWebSocket = ws;
 		switch ((long) ws->getUserData()) {
 		case 8:
@@ -186,78 +196,61 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 	});
 
 	serverHub.onDisconnection([](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
+		DKDEBUGFUNC(ws, code, message, length);
 		serverWebSocket = NULL;
 		DKINFO("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+">\n");
 	});
 
 	serverHub.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
-		DKINFO("DKWebSockets::CreateServer(): serverHub.serverHub.onMessage\n");
+		DKDEBUGFUNC(ws, message, length, opCode);
 		MessageFromClient(ws, message, length, opCode);
 	});
 
-	DKINFO("DKWebSockets::CreateServer(): Server started...\n");
-	return true;
+	return DKINFO("DKWebSockets::CreateServer(): Server started...\n");
 }
 
-/////////////////////////
-void DKWebSockets::Loop()
-{
-	//DKDEBUGFUNC();
-	if(!serverAddress.empty() && serverPort && serverHub.listen(serverAddress.c_str(), serverPort)){
+void DKWebSockets::Loop(){
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
+	if(!serverAddress.empty() && serverPort && serverHub.listen(serverAddress.c_str(), serverPort))
 		serverHub.poll();
-	}
-	if(serverAddress.empty() && serverPort && serverHub.listen(serverPort)){
+	if(serverAddress.empty() && serverPort && serverHub.listen(serverPort))
 		serverHub.poll();
-	}
-	if(!clientAddress.empty()){
+	if(!clientAddress.empty())
 		clientHub.poll();
-	}
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode)
-{
+bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
 	DKEvents::SendEvent("window", "DKWebSockets_OnMessageFromClient", message_);
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKWebSockets::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode)
-{
+bool DKWebSockets::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
 	DKEvents::SendEvent("window", "DKWebSockets_OnMessageFromServer", message_);
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-bool DKWebSockets::MessageToClient(const DKString& message)
-{
+bool DKWebSockets::MessageToClient(const DKString& message){
 	DKDEBUGFUNC(message);
 	std::vector<std::string> messages = {message};
 	std::vector<int> excludes;
-	if(!serverWebSocket){
-		DKERROR("DKWebSockets::MessageToServer("+message+"): serverWebSocket is invalid\n");
-		return false;
-	}
+	if(!serverWebSocket)
+		return DKERROR("serverWebSocket is invalid! \n");
 	uWS::WebSocket<uWS::SERVER>::PreparedMessage *prepared = serverWebSocket->prepareMessageBatch(messages, excludes, uWS::OpCode::TEXT, false, nullptr);
 	serverWebSocket->sendPrepared(prepared, nullptr);
 	serverWebSocket->finalizeMessage(prepared);
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-bool DKWebSockets::MessageToServer(const DKString& message)
-{
+bool DKWebSockets::MessageToServer(const DKString& message){
 	DKDEBUGFUNC(message);
 	std::vector<std::string> messages = {message};
 	std::vector<int> excludes;
-	if(!clientWebSocket){
-		DKERROR("DKWebSockets::MessageToServer("+message+"): clientWebSocket is invalid\n");
-		return false;
-	}
+	if(!clientWebSocket)
+		return DKERROR("clientWebSocket is invalid! \n");
 	uWS::WebSocket<uWS::CLIENT>::PreparedMessage *prepared = clientWebSocket->prepareMessageBatch(messages, excludes, uWS::OpCode::TEXT, false, nullptr);
 	clientWebSocket->sendPrepared(prepared, nullptr);
 	clientWebSocket->finalizeMessage(prepared);

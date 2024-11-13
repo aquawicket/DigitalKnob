@@ -4,9 +4,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 // https://developer.chrome.com/docs/devtools/console/api/
 
-dk.console = DKPlugin(DKConsole, "singleton")
-
 function DKConsole() {}
+dk.console = DKPlugin(DKConsole, "singleton")
 
 //intercept console and reroute it to xconsole and dk.console
 //Example:
@@ -170,12 +169,15 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     dk.console.container.setAttribute("dk_console", "container");
 
     dk.console.toolbar = dk.gui.createTag("div", dk.console.container, {});
+	dk.console.toolbar.setAttribute("id", "dk_console_toolbar");
     dk.console.toolbar.setAttribute("dk_console", "toolbar");
 
     dk.console.logDiv = dk.gui.createTag("div", dk.console.container, {});
+	dk.console.logDiv.setAttribute("id", "dk_console_logDiv");
     dk.console.logDiv.setAttribute("dk_console", "logDiv");
 
     dk.console.commandDiv = dk.gui.createTag("div", dk.console.logDiv, {});
+	dk.console.commandDiv.setAttribute("id", "dk_console_commandDiv");
     dk.console.commandDiv.setAttribute("dk_console", "commandDiv");
 
     dk.console.command = dk.gui.createTag("input", dk.console.commandDiv, {
@@ -197,6 +199,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             }
         }
     }).setAttribute("dk_console", "command");
+	dk.console.command.setAttribute("id", "dk_console_command")
 
     //FIXME: initiating before dk.console.commandDiv
     /*
@@ -207,9 +210,10 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
     */
 
-    dk.gui.createTag("img", dk.console.commandDiv, {
+    dk.console.cmnd = dk.gui.createTag("img", dk.console.commandDiv, {
         src: "DKGui/cmndArrow.png",
     }).setAttribute("dk_console", "cmnd");
+	dk.console.cmnd.setAttribute("id", "dk_console_cmnd")
 
     function _toArray(arr) {
         return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
@@ -273,7 +277,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     DKConsole.prototype.Formatter = function DKConsole_Formatter(args) {
         if (!args.length)
             return;
-        let target = args[0];
+        var target = args[0];
         if (!target.indexOf)
             return args;
         const current = args[1];
@@ -281,7 +285,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         if (index <= -1)
             return args;
         const specifier = target.substring(index, index + 2);
-        let converted = undefined;
+        var converted = undefined;
         if (specifier === "%s")
             converted = current.toString();
         if (specifier === "%d" || specifier === "%i") {
@@ -315,7 +319,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             target = target.replace(specifier, converted);
         const result = [];
         result.push(target);
-        let n = 2;
+        var n = 2;
         while (args[n]) {
             result.push(args[n]);
             n++;
@@ -336,6 +340,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         else
             dk.console.logDiv.scroll = false;
         const msgDiv = document.createElement("div");
+		msgDiv.setAttribute("id", "dk_console_msgDiv");
         msgDiv.setAttribute("dk_console", "msgDiv");
         if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
             msgDiv.setAttribute("group", dk.console.currentGroup.id);
@@ -350,8 +355,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             }
         })
 
-        const msgSpan = document.createElement("span");
-        msgSpan.setAttribute("dk_console", "msgSpan");
+        const msgSpan = document.createElement("span")
+		msgSpan.setAttribute("id", "dk_console_msgSpan")
+        msgSpan.setAttribute("dk_console", "msgSpan")
 
         //If the message is the same as the last, just increase a count next to the original.
         const lastMsgDiv = dk.console.logDiv.lastChild.previousSibling;
@@ -384,6 +390,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                 return;
             }
         }
+		
 
         if (arguments[1] && arguments[1].includes && arguments[1].includes("<anonymous>")) {
             arguments[1] = arguments[1].replace("<anonymous>", "&lt;anonymous&gt;");
@@ -413,31 +420,41 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                     group.display = "block";
                 }
                 const elements = dk.console.logDiv.querySelectorAll("[group='" + group.id + "']");
-                for (let n = 0; n < elements.length; n++)
+                for (var n = 0; n < elements.length; n++)
                     elements[n].style.display = group.display;
             }
 
-        } else {
+        } 
+
+		else {
             msgSpan.innerHTML = arguments[1];
         }
 
         if (logLevel === "error") {
+			msgDiv.setAttribute("id", "dk_console_msgDivError");
             msgDiv.setAttribute("dk_console", "msgDivError");
+			msgSpan.setAttribute("id", "dk_console_msgSpanError");
             msgSpan.setAttribute("dk_console", "msgSpanError");
         }
         if (logLevel === "warn") {
+			msgDiv.setAttribute("id", "dk_console_msgDivWarn");
             msgDiv.setAttribute("dk_console", "msgDivWarn");
+			msgSpan.setAttribute("id", "dk_console_msgSpanWarn");
             msgSpan.setAttribute("dk_console", "msgSpanWarn");
         }
         if (logLevel === "debug") {
+			msgDiv.setAttribute("id", "dk_console_msgDivDebug");
             msgDiv.setAttribute("dk_console", "msgDivDebug");
+			msgSpan.setAttribute("id", "dk_console_msgSpanDebug");
             msgSpan.setAttribute("dk_console", "msgSpanDebug");
         }
         if (logLevel === "green") {
+			msgDiv.setAttribute("id", "dk_console_msgDivGreen");
             msgDiv.setAttribute("dk_console", "msgDivGreen");
+			msgSpan.setAttribute("id", "dk_console_msgSpanGreen");
             msgSpan.setAttribute("dk_console", "msgSpanGreen");
         }
-
+		
         dk.console.logDiv.appendChild(msgDiv);
         dk.console.logDiv.appendChild(dk.console.commandDiv);
         msgDiv.appendChild(msgSpan);
@@ -723,7 +740,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     dk.console.record = dk.x.record
     delete dk.x;
     //restore the record of messages from the program beginning
-    for (let n = 0; n < dk.console.record.length; n++) {
+    for (var n = 0; n < dk.console.record.length; n++) {
         const lvl = Object.keys(dk.console.record[n])[0];
         const msg = dk.console.record[n][lvl];
         dk.console[lvl](msg);
@@ -733,11 +750,11 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 }
 
 DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
-    let argArray = [];
+    var argArray = [];
     if (args.length) {
         const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
         const endTagRe = /<\/span>/gi;
-        let reResultArray;
+        var reResultArray;
         if (typeof args[0].replace !== "function")
             return args;
         argArray.push(args[0].replace(startTagRe, '%c').replace(endTagRe, '%c'));
@@ -746,7 +763,7 @@ DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
             argArray.push('');
         }
         // pass through subsequent args since chrome dev tools does not (yet) support console.log styling of the following form: console.log('%cBlue!', 'color: blue;', '%cRed!', 'color: red;');
-        for (let n = 1; n < args.length; n++)
+        for (var n = 1; n < args.length; n++)
             argArray.push(args[n]);
     }
     return argArray;
@@ -754,7 +771,7 @@ DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
 
 /*
 DKConsole.prototype.ColorChromeConsole = function DKConsole_ColorChromeConsole(args) {
-    let argArray = [];
+    var argArray = [];
     argArray.push("%c " + args[0]);
     if (args[1] === "red")
         argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(41,0,0)", "color: rgb(255,128,128)"].join(";"));
@@ -767,3 +784,4 @@ DKConsole.prototype.ColorChromeConsole = function DKConsole_ColorChromeConsole(a
     return argArray;
 }
 */
+

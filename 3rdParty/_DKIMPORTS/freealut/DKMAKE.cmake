@@ -1,54 +1,60 @@
-# https://github.com/vancegroup/freealut
-#
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ freealut ############
+# https://github.com/vancegroup/freealut.git
 # http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/freealut-1.1.0.tar.gz
+dk_load(dk_builder)
 
 ### DEPENDS ###
-DKDEPEND(msinttypes)
-DKDEPEND(openal)
+dk_depend(msinttypes)
+dk_depend(openal)
 
-
-
-### VERSION ###
-DKSET(FREEALUT_VERSION 1.1.0)
-DKSET(FREEALUT_NAME freealut-${FREEALUT_VERSION})
-DKSET(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
-DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
-
-
-
-### INSTALL ###
-DKINSTALL(${FREEALUT_DL} freealut ${FREEALUT})
-
-
+### IMPORT ###
+dk_import(https://github.com/vancegroup/freealut/archive/8abb4207.zip PATCH)
 
 ### LINK ###
-DKDEFINE(AL_LIBTYPE_STATIC)
-DKINCLUDE(${FREEALUT}/include)
-WIN_DEBUG_LIB(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
-WIN_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
-APPLE_DEBUG_LIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-APPLE_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
-LINUX_DEBUG_LIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-LINUX_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
+dk_define			(AL_LIBTYPE_STATIC)
+dk_include			(${FREEALUT}/include										ALUT_INCLUDE_DIR)
+if(MSVC)
+	dk_libDebug		(${FREEALUT}/${triple}/src/${DEBUG_DIR}/alut_static.lib		ALUT_LIBRARY_DEBUG)
+	dk_libRelease	(${FREEALUT}/${triple}/src/${RELEASE_DIR}/alut_static.lib	ALUT_LIBRARY_RELEASE)
+elseif(APPLE OR ANDROID)
+	dk_libDebug		(${FREEALUT}/${triple}/src/${DEBUG_DIR}/libalut_static.a	ALUT_LIBRARY_DEBUG)
+	dk_libRelease	(${FREEALUT}/${triple}/src/${RELEASE_DIR}/libalut_static.a	ALUT_LIBRARY_RELEASE)
+else()
+	dk_libDebug		(${FREEALUT_DEBUG_DIR}/src/libalut_static.a					ALUT_LIBRARY_DEBUG)
+	dk_libRelease	(${FREEALUT_RELEASE_DIR}/src/libalut_static.a				ALUT_LIBRARY_RELEASE)
+endif()
+if(DEBUG)
+	set(ALUT_LIBRARY	${ALUT_LIBRARY_DEBUG})
+endif()
+if(RELEASE)
+	set(ALUT_LIBRARY	${ALUT_LIBRARY_RELEASE})
+endif()
 
+### 3RDPARTY LINK ###
+if(MSVC)
+	WIN_dk_set	(FREEALUT_CMAKE "-DCMAKE_CXX_FLAGS=/I${ALUT_INCLUDE_DIR}" -DALUT_INCLUDE_DIR=${ALUT_INCLUDE_DIR} -DALUT_LIBRARY_DEBUG=${ALUT_LIBRARY_DEBUG} -DALUT_LIBRARY=${ALUT_LIBRARY})
+else()
+	dk_set		(FREEALUT_CMAKE "-DCMAKE_CXX_FLAGS=-I${ALUT_INCLUDE_DIR}" -DALUT_INCLUDE_DIR=${ALUT_INCLUDE_DIR} -DALUT_LIBRARY_DEBUG=${ALUT_LIBRARY_DEBUG} -DALUT_LIBRARY=${ALUT_LIBRARY})
+endif()
 
+### GENERATE ###
+if(MSVC)
+	dk_configure(${FREEALUT_DIR} ${OPENAL_CMAKE} ${MSINTTYPES_CMAKE})
+else()
+	dk_configure(${FREEALUT_DIR} ${OPENAL_CMAKE})
+endif()
 
 ### COMPILE ###
-WIN_PATH(${FREEALUT}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${MSINTTYPES} /DAL_LIBTYPE_STATIC" ${OPENAL_WIN} ${FREEALUT})
-WIN64_COMMAND(${DKCMAKE_WIN64} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${MSINTTYPES} /DAL_LIBTYPE_STATIC" ${OPENAL_WIN} ${FREEALUT})
-WIN_VS(${FREEALUT_NAME} Alut.sln alut_static)
-
-
-MAC_PATH(${FREEALUT}/${OS})
-MAC64_COMMAND(${DKCMAKE_MAC64} ${OPENAL_MAC} ${FREEALUT})
-MAC_XCODE(${FREEALUT_NAME} alut_static)
-
-
-LINUX_DEBUG_PATH(${FREEALUT}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${OPENAL_LINUX} ${FREEALUT})
-LINUX_DEBUG_COMMAND(make alut_static)
-
-LINUX_RELEASE_PATH(${FREEALUT}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${OPENAL_LINUX} ${FREEALUT})
-LINUX_RELEASE_COMMAND(make alut_static)
+ANDROID_dk_build	(${FREEALUT_DIR} alut_static)
+APPLE_dk_build		(${FREEALUT_DIR} alut_static)
+EMSCRIPTEN_dk_build	(${FREEALUT_DIR})
+LINUX_dk_build		(${FREEALUT_DIR})
+RASPBERRY_dk_build	(${FREEALUT_DIR})
+WIN_dk_build		(${FREEALUT_DIR} alut_static)

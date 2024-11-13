@@ -1,0 +1,15 @@
+Rob van der Woude's Scripting Pages   https://www.robvanderwoude.com
+Batch file debugging                  https://www.robvanderwoude.com/battech_debugging.php
+https://blog.sevagas.com/PE-injection-explained
+C to Bash and Batch script translator https://batsh.org/#   
+
+
+Batch Scripts https://github.com/npocmaka/batch.scripts
+
+Building an operating system https://wiki.osdev.org/Main_Page
+
+Windows App in MinGW https://www.transmissionzero.co.uk/computing/win32-apps-with-mingw/
+
+Github MinGW Win32 Application  https://github.com/TransmissionZero/MinGW-Win32-Application
+
+Writing Win32 Applications with MinGW and Wine  https://eggplant.pro/blog/writing-win32-applications-with-mingw-and-wine/

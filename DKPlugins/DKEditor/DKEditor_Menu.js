@@ -96,11 +96,11 @@ function DKEditor_Menu_OnEvent(event)
 		return;
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_DevTools"){
-		if(typeof DKCef_ShowDevTools === 'function'){
-			DKCef_ShowDevTools(0);
+		if(typeof CPP_DKCef_ShowDevTools === 'function'){
+			CPP_DKCef_ShowDevTools(0);
 		}
-		if(typeof DKRocket_ToggleDebugger === 'function'){
-			DKRocket_ToggleDebugger();
+		if(typeof CPP_DKRml_ToggleDebugger === 'function'){
+			CPP_DKRml_ToggleDebugger();
 		}
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_ClearConsole"){
@@ -166,14 +166,14 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Web"){
 		console.log("DKEditor_Menu_Web()\n");
-		//TODO - Create an iFrame and display digitalknob.com
+		//TODO - Create an iFrame and display TODO.com
 		var div = DK_CreateElement(document.body, "div", "DKIframe.html");
 		div.style.position = "absolute";
 		div.style.width = "100%";
 		div.style.height = "100%";
 		
 		var iframe = DK_CreateElement(div, "iframe", "iframe");
-		iframe.src = "http://digitalknob.com";
+		iframe.src = "http://TODO.com";
 		iframe.width = "100%";
 		iframe.height = "100%";
 		iframe.style.borderWidth = "0px";

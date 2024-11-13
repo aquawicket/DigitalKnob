@@ -1,0 +1,1 @@
+LIBUV_DL=https://github.com/libuv/libuv/archive/2bc22c40.zip

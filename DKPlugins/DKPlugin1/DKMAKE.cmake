@@ -1,11 +1,19 @@
-DKDEPEND(DK)
-DKDLL(DKPlugin1)
-DKASSETS(DKPlugin1)
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
-IF(WIN_32)
-	DKCOPY(${DKPLUGINS}/DKPlugin1/win32/Release/DKPlugin1.dll ${DKPROJECT}/assets/DKPlugin1 TRUE)
-ENDIF()
 
-IF(WIN_64)
-	DKCOPY(${DKPLUGINS}/DKPlugin1/win64/Release/DKPlugin1.dll ${DKPROJECT}/assets/DKPlugin1 TRUE)
-ENDIF()
+############ DKPlugin1 ############
+dk_depend(DK)
+dk_dll(DKPlugin1)
+dk_assets(DKPlugin1)
+
+if(WIN_X86)
+	dk_copy(${DKPLUGINS_DIR}/DKPlugin1/win_x86/Release/DKPlugin1.dll ${DK_PROJECT_DIR}/assets/DKPlugin1 OVERWRITE)
+endif()
+
+if(WIN_X86_64)
+	dk_copy(${DKPLUGINS_DIR}/DKPlugin1/win_x86_64/Release/DKPlugin1.dll ${DK_PROJECT_DIR}/assets/DKPlugin1 OVERWRITE)
+endif()

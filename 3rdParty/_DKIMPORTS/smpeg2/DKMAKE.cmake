@@ -1,85 +1,61 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+###### smpeg2 ######
+## https://github.com/icculus/smpeg.git
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
 
-### DEPENDS ###
-DKDEPEND(SDL2)
+dk_load(dk_builder)
 
+### DEPEND ###
+dk_depend(sdl)
+dk_depend(git)
 
-### VERSION ###
-DKSET(SMPEG2_VERSION 2.0.0)
-DKSET(SMPEG2_NAME smpeg2-${SMPEG2_VERSION})
+### IMPORT ###
+dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
+dk_cd(${SMPEG2_DEBUG_DIR})
 
-### INSTALL ###
-## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
-DKINSTALL(https://www.libsdl.org/projects/smpeg/release/${SMPEG2_NAME}.tar.gz smpeg2 ${SMPEG2})
-DKSET(SMPEG2 ${3RDPARTY}/${SMPEG2_NAME})
+### PATCH ###
+dk_gitApplyPatch(${SMPEG2} ${DKIMPORTS_DIR}/smpeg2/gcc6.patch)
+dk_cd(${SMPEG2_DEBUG_DIR})
 
+### LINK ###
+dk_include				(${SMPEG2})
+if(MSVC)
+	WIN_dk_libDebug		(${SMPEG2}/${triple}/lib/${DEBUG_DIR}/libsmpeg2.lib)
+	WIN_dk_libRelease	(${SMPEG2}/${triple}/lib/${RELEASE_DIR}/libsmpeg2.lib)
+elseif(APPLE)
+	dk_libDebug			(${SMPEG2}/${triple}/lib/${DEBUG_DIR}/libsmpeg2.a)
+	dk_libRelease		(${SMPEG2}/${triple}/lib/${RELEASE_DIR}/libsmpeg2.a)
+else()
+	dk_libDebug			(${SMPEG2_DEBUG_DIR}/lib/libsmpeg2.a)
+	dk_libRelease		(${SMPEG2_RELEASE_DIR}/lib/libsmpeg2.a)
+endif()
 
-### DKPLUGINS LINK ###
-DKINCLUDE(${SMPEG2}/src)
-WIN_DEBUG_LIB(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.lib)
-WIN_RELEASE_LIB(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.lib)
-APPLE_DEBUG_LIB(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.a)
-APPLE_RELEASE_LIB(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.a)
-LINUX_DEBUG_LIB(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-LINUX_RELEASE_LIB(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
-RASPBERRY_DEBUG_LIB(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-RASPBERRY_RELEASE_LIB(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
-##ANDROID_DEBUG_LIB(${SMPEG2}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSMPEG.a)
-##ANDROID_RELEASE_LIB(${SMPEG2}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSMPEG.a)
-ANDROID_DEBUG_LIB(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-ANDROID_RELEASE_LIB(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
 
 
 ### 3RDPARTY LINK ###
-DKSET(SMPEG2_WIN -DSMPEG_INCLUDE_DIR=${SMPEG2})
-DKSET(SMPEG2_MAC -DSMPEG_INCLUDE_DIR=${SMPEG2})
-DKSET(SMPEG2_LINUX -DSMPEG_INCLUDE_DIR=${SMPEG2})
-DKSET(SMPEG2_RASPBERRY -DSMPEG_INCLUDE_DIR=${SMPEG2})
-DKSET(SMPEG2_ANDROID -DSMPEG_INCLUDE_DIR=${SMPEG2})
+dk_set(SMPEG2_CMAKE -DSMPEG_INCLUDE_DIR=${SMPEG2})
 	
 	
+### GENERATE ###
+dk_replaceAll("${DKCMAKE_BUILD}" "-std=c17"   ""  DKCMAKE_BUILD)
+dk_replaceAll("${DKCMAKE_BUILD}" "-std=c++1z" ""  DKCMAKE_BUILD)
+dk_replaceAll("${DKCMAKE_BUILD}" "  "         " " DKCMAKE_BUILD)
+
+if(MSVC)
+	#dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE})
+	dk_configure(${SMPEG2_DIR} ${SDL_CMAKE})
+else()
+	#dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} -DCMAKE_CXX_FLAGS=-Wno-narrowing)
+	dk_configure(${SMPEG2_DIR} ${SDL_CMAKE} -DCMAKE_CXX_FLAGS=-Wno-narrowing)
+endif()
+
+
+
 ### COMPILE ###
-WIN_PATH(${SMPEG2}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${SDL2_WIN} ${SMPEG2})
-WIN64_COMMAND(${DKCMAKE_WIN64} ${SDL2_WIN} ${SMPEG2})
-WIN_VS(${SMPEG2_NAME} SMPEG.sln SMPEG)
-
-
-MAC_PATH(${SMPEG2}/${OS})
-MAC64_COMMAND(${DKCMAKE_MAC64} ${SDL2_APPLE} ${SMPEG2})
-MAC_XCODE(${SMPEG2_NAME} SMPEG)
-
-
-IOS_PATH(${SMPEG2}/${OS})
-IOS64_COMMAND(${DKCMAKE_IOS64} ${SDL2_APPLE} ${SMPEG2})
-IOS_XCODE(${SMPEG2_NAME} SMPEG)
-
-
-IOSSIM_PATH(${SMPEG2}/${OS})
-IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${SDL2_APPLE} ${SMPEG2})
-IOSSIM_XCODE(${SMPEG2_NAME} SMPEG)
-
-
-LINUX_DEBUG_PATH(${SMPEG2}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL2_LINUX} ${SMPEG2})
-LINUX_DEBUG_COMMAND(make SMPEG)
-
-LINUX_RELEASE_PATH(${SMPEG2}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL2_LINUX} ${SMPEG2})
-LINUX_RELEASE_COMMAND(make SMPEG)
-
-
-RASPBERRY_DEBUG_PATH(${SMPEG2}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_COMMAND(${DKCMAKE_RASPBERRY_DEBUG} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL2_RASPBERRY} ${SMPEG2})
-RASPBERRY_DEBUG_COMMAND(make SMPEG)
-
-RASPBERRY_RELEASE_PATH(${SMPEG2}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_COMMAND(${DKCMAKE_RASPBERRY_RELEASE} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL2_RASPBERRY} ${SMPEG2})
-RASPBERRY_RELEASE_COMMAND(make SMPEG)
-
-
-##ANDROID_NDK(${SMPEG2_NAME})
-ANDROID_PATH(${SMPEG2}/${OS})
-ANDROID32_COMMAND(${DKCMAKE_ANDROID32} ${SDL2_ANDROID} ${SMPEG2})
-ANDROID64_COMMAND(${DKCMAKE_ANDROID64} ${SDL2_ANDROID} ${SMPEG2})
-ANDROID_VS(${SMPEG2_NAME} SMPEG.sln SMPEG)
+dk_build(${SMPEG2} SMPEG)

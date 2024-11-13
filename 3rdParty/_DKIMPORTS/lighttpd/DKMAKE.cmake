@@ -1,37 +1,32 @@
-### VERSION ###
-DKSET(LIGHTTPD_VERSION 1.4.45)
-DKSET(LIGHTTPD_NAME lighttpd-${LIGHTTPD_VERSION})
-DKSET(LIGHTTPD ${3RDPARTY}/lighttpd-${LIGHTTPD_VERSION})
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### INSTALL ###
-## DKINSTALL(www.internet.com/${LIGHTTPD_VERSION}.zip ${LIGHTTPD}) ## find an online link
+dk_load(dk_builder)
+# https://github.com/lighttpd/lighttpd1.4.git
+
+
+### IMPORT ###
+#dk_import(https://github.com/lighttpd/lighttpd1.4.git)
+dk_import(https://github.com/lighttpd/lighttpd1.4/archive/refs/heads/master.zip)
 
 
 ### LINK ###
-DKINCLUDE(${LIGHTTPD}/lib)
-DKINCLUDE(${LIGHTTPD}/${OS}/${RELEASE_DIR})
-WIN_DEBUG_LIB(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.lib)
-WIN_RELEASE_LIB(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.lib)
-APPLE_DEBUG_LIB(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.a)
-APPLE_RELEASE_LIB(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.a)
-LINUX_DEBUG_LIB(${LIGHTTPD}/${OS}/${DEBUG_DIR}/lib/liblighttpd.a)
-LINUX_RELEASE_LIB(${LIGHTTPD}/${OS}/${RELEASE_DIR}/lib/liblighttpd.a)
-ANDROID_DEBUG_LIB(${LIGHTTPD}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/liblighttpd.a)
-ANDROID_RELEASE_LIB(${LIGHTTPD}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/liblighttpd.a)
+dk_include			(${LIGHTTPD}/lib)
+DEBUG_dk_include	(${LIGHTTPD_DEBUG_DIR})
+RELEASE_dk_include	(${LIGHTTPD_RELEASE_DIR})
+UNIX_dk_libDebug	(${LIGHTTPD}/${triple}/lib/${DEBUG_DIR}/liblighttpd.a)
+UNIX_dk_libRelease	(${LIGHTTPD}/${triple}/lib/${RELEASE_DIR}/liblighttpd.a)
+WIN_dk_libDebug		(${LIGHTTPD}/${triple}/lib/${DEBUG_DIR}/liblighttpd.lib)
+WIN_dk_libRelease	(${LIGHTTPD}/${triple}/lib/${RELEASE_DIR}/liblighttpd.lib)
+
+
+### GENERATE ###
+dk_configure(${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
 
 
 ### COMPILE ###
-WIN_PATH(${LIGHTTPD}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${LIGHTTPD})
-WIN64_COMMAND(${DKCMAKE_WIN64} ${LIGHTTPD})
-WIN_VS(liblighttpd liblighttpd.sln LIGHTTPD)
-
-
-LINUX_DEBUG_PATH(${LIGHTTPD}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DLWS_WITH_SSL=OFF ${LIGHTTPD})
-LINUX_DEBUG_COMMAND(make)
-
-LINUX_RELEASE_PATH(${LIGHTTPD}/${OS}/${RELEASE_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DLWS_WITH_SSL=OFF ${LIGHTTPD})
-LINUX_RELEASE_COMMAND(make)
+dk_build(${LIGHTTPD} LIGHTTPD)

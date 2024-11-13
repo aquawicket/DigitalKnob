@@ -1,0 +1,1 @@
+BULLET3_DL=https://github.com/bulletphysics/bullet3/archive/e9c461b0.zip

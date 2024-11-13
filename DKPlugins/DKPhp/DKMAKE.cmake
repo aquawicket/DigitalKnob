@@ -1,6 +1,17 @@
-DKDEPEND(php-Win32-vs16-x64)
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
-DKCOPY(${PHP}/php.exe ${DKPLUGINS}/DKPhp/php.exe TRUE)
-DKCOPY(${PHP}/php8ts.dll ${DKPLUGINS}/DKPhp/php8ts.dll TRUE)
 
-DKASSETS(DKPhp)
+############ DKPhp ############
+#dk_depend(php_binary)
+#dk_copy(${PHP_BINARY}/php.exe ${DKPLUGINS_DIR}/DKPhp/php.exe OVERWRITE)
+#dk_copy(${PHP_BINARY}/php8ts.dll ${DKPLUGINS_DIR}/DKPhp/php8ts.dll OVERWRITE)
+
+dk_depend(php-src)
+dk_copy(${PHP_SRC}/php.exe ${DKPLUGINS_DIR}/DKPhp/php.exe OVERWRITE)
+dk_copy(${PHP_SRC}/php8ts.dll ${DKPLUGINS_DIR}/DKPhp/php8ts.dll OVERWRITE)
+
+dk_assets(DKPhp)

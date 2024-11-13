@@ -1,3 +1,16 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ libgl1-mesa-dev ############
+dk_load(dk_builder)
+if(NOT LINUX AND NOT RASPBERRY)
+	dk_undepend(libgl1-mesa-dev)
+	dk_return()
+endif()
+
 ### INSTALL ###
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt install libgl1-mesa-dev)
+dk_installPackage(libgl1-mesa-dev)

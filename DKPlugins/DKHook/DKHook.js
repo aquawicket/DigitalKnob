@@ -1,6 +1,5 @@
-//////////////////////
-function DKHook_init()
-{
+
+function DKHook_init(){
 	dk.create("DKHook");
 	window.addEventListener("mousemove", DKHook_onevent);
 	window.addEventListener("mousedown", DKHook_onevent);
@@ -10,9 +9,7 @@ function DKHook_init()
 	window.addEventListener("keyup", DKHook_onevent);
 }
 
-/////////////////////
-function DKHook_end()
-{
+function DKHook_end(){
 	window.removeEventListener("mousemove", DKHook_onevent);
 	window.removeEventListener("mousedown", DKHook_onevent);
 	window.removeEventListener("mouseup", DKHook_onevent);
@@ -21,8 +18,6 @@ function DKHook_end()
 	window.removeEventListener("keyup", DKHook_onevent);
 }
 
-//////////////////////////////
-function DKHook_OnEvent(event)
-{
+function DKHook_OnEvent(event){
 
 }

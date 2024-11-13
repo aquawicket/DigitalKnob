@@ -1,0 +1,4 @@
+ANDROID_PLATFORM_TOOLS_WIN_DL=https://dl.google.com/android/repository/platform-tools_r33.0.3-windows.zip
+ANDROID_PLATFORM_TOOLS_MAC_DL=https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r33.0.3-darwin.zip
+ANDROID_PLATFORM_TOOLS_ANDROID_DL=https://github.com/lzhiyong/android-sdk-tools/releases/download/33.0.3/android-sdk-tools-static-aarch64.zip
+ANDROID_PLATFORM_TOOLS_LINUX_DL=https://dl.google.com/android/repository/platform-tools_r33.0.3-linux.zip

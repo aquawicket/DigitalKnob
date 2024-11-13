@@ -2,14 +2,17 @@
 // https://xhr.spec.whatwg.org/
 
 // https://xhr.spec.whatwg.org/#interface-xmlhttprequest
-var XMLHttpRequest = function(pointer) {
-    XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+
+//IDL: [Exposed=(Window,DedicatedWorker,SharedWorker)]
+
+var XMLHttpRequest = function XMLHttpRequest(pointer) {
+    XMLHttpRequest.prototype.open = function open(method, url, async, user, password) {
         //console.warn("XMLHttpRequest.open("+method+","+url+","+async+")");
         this.method = method;
         this.url = url;
         this.async = async;
     }
-    XMLHttpRequest.prototype.send = function() {
+    XMLHttpRequest.prototype.send = function send() {
         //console.warn("XMLHttpRequest.send()");
         this.readyState = 4;
         this.status = 200;
@@ -18,7 +21,7 @@ var XMLHttpRequest = function(pointer) {
         this.onreadystatechange();
     }
 
-    XMLHttpRequest.prototype.onreadystatechange = function() {
+    XMLHttpRequest.prototype.onreadystatechange = function onreadystatechange() {
         console.log("TODO: XMLHttpRequest.prototype.onreadystatechange()");
     }
 

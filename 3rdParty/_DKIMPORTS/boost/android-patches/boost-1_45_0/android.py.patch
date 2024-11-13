@@ -282,7 +282,7 @@
 +
 +flags('android.compile', 'OPTIONS', ['<debug-symbols>on'], ['-g'])
 +flags('android.compile', 'OPTIONS', ['<profiling>on'], ['-pg'])
-+flags('android.compile', 'OPTIONS', ['<rtti>off'], ['-fno-rtti'])
++flags('android.compile', 'OPTIONS', ['<rtti>off'], ['-frtti'])
 +
 +# On cygwin and mingw, android generates position independent code by default, and
 +# warns if -fPIC is specified. This might not be the right way of checking if

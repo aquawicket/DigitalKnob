@@ -1,12 +1,22 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ DKEmscripten ############
 ## https://emscripten.org/docs/getting_started/downloads.html
 
-DKDEPEND(emsdk-portable)
+dk_depend(emsdk)
 
-##DKPLUGIN(DKEmscripten)
-##DKASSETS(DKEmscripten)
+##dk_generateCmake(DKEmscripten)
+##dk_assets(DKEmscripten)
 
-DKSET(CURRENT_DIR ${DKPLUGINS}/DKEmscripten)
-DKSET(QUEUE_BUILD ON)
-##WIN32_COMMAND(${EMSCRIPTEN}/emscripten/1.37.33/emcc ${DKPLUGINS}/DKEmscripten/hello.c -o hello.html)
+dk_cd(${DKPLUGINS_DIR}/DKEmscripten)
+dk_set(QUEUE_BUILD ON)
+##WIN_X86_dk_queueCommand(${EMSCRIPTEN}/emscripten/1.37.33/emcc ${DKPLUGINS_DIR}/DKEmscripten/hello.c -o hello.html)
 
-WIN32_COMMAND(${EMSCRIPTEN}/emscripten/1.37.33/emcc --bind -o test.js ${DKPLUGINS}/DKEmscripten/test.cpp)
+if(EXISTS ${EMSCRIPTEN}/emscripten/1.37.33/emcc)
+	WIN_X86_dk_queueCommand(${EMSCRIPTEN}/emscripten/1.37.33/emcc --bind -o test.js ${DKPLUGINS_DIR}/DKEmscripten/test.cpp)
+endif()

@@ -1,76 +1,30 @@
-# https://github.com/nlohmann/json
-#
-# https://github.com/nlohmann/json/archive/refs/tags/v3.9.1.zip
-
-### VERSION ###
-DKSET(JSON_MAJOR 3)
-DKSET(JSON_MINOR 9)
-DKSET(JSON_BUILD 1)
-DKSET(JSON_VERSION ${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD})
-DKSET(JSON_NAME json-${JSON_VERSION})
-DKSET(JSON_DL https://github.com/nlohmann/json/archive/refs/tags/v${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD}.zip)
-DKSET(JSON ${3RDPARTY}/${JSON_NAME})
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### INSTALL ###
-DKINSTALL(JSON_DL json ${JSON})
+############ json ############
+# https://github.com/nlohmann/json.git
 
+dk_load(dk_builder)
+
+### NOTES ###
+# This is a header only library, the compileable stuff below is unit testing
+# include "json.hpp" to use this library 
+
+### IMPORT ###
+dk_import(https://github.com/nlohmann/json/archive/63258397.zip)
 
 ### LINK ###
-DKINCLUDE(${JSON})
-DKINCLUDE(${JSON}/${OS})
-DKINCLUDE(${JSON}/${OS}/${RELEASE_DIR})
-WIN_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/libjson_unitd.lib)
-WIN_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/libjson_unit.lib)
-APPLE_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}d.a)
-APPLE_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}.a)
-LINUX_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}d.a)
-LINUX_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}.a)
-RASPBERRY_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}d.a)
-RASPBERRY_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}.a)
-ANDROID_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libJSON.a)
-ANDROID_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libJSON.a)
+dk_include(${JSON}/include/nlohmann)
 
+#dk_set(JSON_TESTS ON)
+if(JSON_TESTS)
+	### GENERATE ###
+	dk_configure(${JSON_DIR})
 
-
-### COMPILE ###
-WIN_PATH(${JSON}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${JSON})
-WIN64_COMMAND(${DKCMAKE_WIN64} ${JSON})
-WIN_VS(${JSON_NAME} nlohmann_json.sln json_unit)
-
-
-MAC_PATH(${JSON}/${OS})
-MAC64_COMMAND(${DKCMAKE_MAC64} ${JSON})
-MAC_XCODE(${JSON_NAME} json_unit)
-
-
-IOS_PATH(${JSON}/${OS})
-IOS64_COMMAND(${DKCMAKE_IOS64} ${JSON})
-IOS_XCODE(${JSON_NAME} json_unit)
-
-
-IOSSIM_PATH(${JSON}/${OS})
-IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${JSON})
-IOSSIM_XCODE(${JSON_NAME} json_unit)
-
-
-LINUX_DEBUG_PATH(${JSON}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${JSON})
-LINUX_DEBUG_COMMAND(make all)
-
-LINUX_RELEASE_PATH(${JSON}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${JSON})
-LINUX_RELEASE_COMMAND(make all)
-
-
-RASPBERRY_DEBUG_PATH(${JSON}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_COMMAND(${DKCMAKE_RASPBERRY_DEBUG} ${JSON})
-RASPBERRY_DEBUG_COMMAND(make all)
-
-RASPBERRY_RELEASE_PATH(${JSON}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_COMMAND(${DKCMAKE_RASPBERRY_RELEASE} ${JSON})
-RASPBERRY_RELEASE_COMMAND(make all)
-
-
-ANDROID_NDK(${JSON_NAME})
+	### COMPILE ###
+	dk_build(${JSON} json_unit)
+endif()

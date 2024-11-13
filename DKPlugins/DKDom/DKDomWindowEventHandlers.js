@@ -3,170 +3,169 @@
 // https://javascript.info/mixins
 
 //https://html.spec.whatwg.org/multipage/webappapis.html#windoweventhandlers
-var WindowEventHandlers = function(pointer) {
-    this.pointer = pointer;
-
-    this.afterprint_func = null;
+var WindowEventHandlers = function WindowEventHandlers(pointer)
+{
+    this.pointer = pointer
+    this.afterprint_func = null
     Object.defineProperty(this, "onafterprint", {
-        get: function() {
-            return this.afterprint_func;
+        get: function onafterprint() {
+            return this.afterprint_func
         },
-        set: function(func) {
-            this.addEventListener("afterprint", func);
+        set: function onafterprint(func) {
+            this.addEventListener("afterprint", func)
             this.afterprint_func = func
         }
-    });
-    this.beforeprint_func = null;
+    })
+    this.beforeprint_func = null
     Object.defineProperty(this, "onbeforeprint", {
-        get: function() {
-            return this.beforeprint_func;
+        get: function onbeforeprint() {
+            return this.beforeprint_func
         },
-        set: function(func) {
-            this.addEventListener("beforeprint", func);
-            this.beforeprint_func = func;
+        set: function onbeforeprint(func) {
+            this.addEventListener("beforeprint", func)
+            this.beforeprint_func = func
         }
-    });
-    this.beforeunload_func = null;
+    })
+    this.beforeunload_func = null
     Object.defineProperty(this, "onbeforeunload", {
-        get: function() {
-            return this.beforeunload_func;
+        get: function onbeforeunload() {
+            return this.beforeunload_func
         },
-        set: function(func) {
-            this.addEventListener("beforeunload", func);
-            this.beforeunload_func = func;
+        set: function onbeforeunload(func) {
+            this.addEventListener("beforeunload", func)
+            this.beforeunload_func = func
         }
-    });
-    this.hashchange_func = null;
+    })
+    this.hashchange_func = null
     Object.defineProperty(this, "onhashchange", {
-        get: function() {
-            return this.hashchange_func;
+        get: function onhashchange() {
+            return this.hashchange_func
         },
-        set: function(func) {
-            this.addEventListener("hashchange", func);
-            this.hashchange_func = func;
+        set: function onhashchange(func) {
+            this.addEventListener("hashchange", func)
+            this.hashchange_func = func
         }
-    });
-    this.languagechange_func = null;
+    })
+    this.languagechange_func = null
     Object.defineProperty(this, "onlanguagechange", {
-        get: function() {
-            return this.languagechange_func;
+        get: function onlanguagechange() {
+            return this.languagechange_func
         },
-        set: function(func) {
-            this.addEventListener("languagechange", func);
-            this.languagechange_func = func;
+        set: function onlanguagechange(func) {
+            this.addEventListener("languagechange", func)
+            this.languagechange_func = func
         }
-    });
-    this.message_func = null;
+    })
+    this.message_func = null
     Object.defineProperty(this, "onmessage", {
-        get: function() {
-            return this.message_func;
+        get: function onmessage() {
+            return this.message_func
         },
-        set: function(func) {
-            this.addEventListener("message", func);
-            this.message_func = func;
+        set: function onmessage(func) {
+            this.addEventListener("message", func)
+            this.message_func = func
         }
-    });
-    this.messageerror_func = null;
+    })
+    this.messageerror_func = null
     Object.defineProperty(this, "onmessageerror", {
-        get: function() {
-            return this.messageerror_func;
+        get: function onmessageerror() {
+            return this.messageerror_func
         },
-        set: function(func) {
-            this.addEventListener("messageerror", func);
-            this.messageerror_func = func;
+        set: function onmessageerror(func) {
+            this.addEventListener("messageerror", func)
+            this.messageerror_func = func
         }
-    });
-    this.offline_func = null;
+    })
+    this.offline_func = null
     Object.defineProperty(this, "onoffline", {
-        get: function() {
-            return this.offline_func;
+        get: function onoffline() {
+            return this.offline_func
         },
-        set: function(func) {
-            this.addEventListener("offline", func);
-            this.offline_func = func;
+        set: function onoffline(func) {
+            this.addEventListener("offline", func)
+            this.offline_func = func
         }
-    });
-    this.online_func = null;
+    })
+    this.online_func = null
     Object.defineProperty(this, "ononline", {
-        get: function() {
-            return this.online_func;
+        get: function ononline() {
+            return this.online_func
         },
-        set: function(func) {
-            this.addEventListener("online", func);
-            this.online_func = func;
+        set: function ononline(func) {
+            this.addEventListener("online", func)
+            this.online_func = func
         }
-    });
-    this.pagehide_func = null;
+    })
+    this.pagehide_func = null
     Object.defineProperty(this, "onpagehide", {
-        get: function() {
-            return this.pagehide_func;
+        get: function onpagehide() {
+            return this.pagehide_func
         },
-        set: function(func) {
-            this.addEventListener("pagehide", func);
-            this.pagehide_func = func;
+        set: function onpagehide(func) {
+            this.addEventListener("pagehide", func)
+            this.pagehide_func = func
         }
-    });
-    this.pageshow_func = null;
+    })
+    this.pageshow_func = null
     Object.defineProperty(this, "onpageshow", {
-        get: function() {
-            return this.pageshow_func;
+        get: function onpageshow() {
+            return this.pageshow_func
         },
-        set: function(func) {
-            this.addEventListener("pageshow", func);
-            this.pageshow_func = func;
+        set: function onpageshow(func) {
+            this.addEventListener("pageshow", func)
+            this.pageshow_func = func
         }
-    });
-    this.popstate_func = null;
+    })
+    this.popstate_func = null
     Object.defineProperty(this, "onpopstate", {
-        get: function() {
-            return this.popstate_func;
+        get: function onpopstate() {
+            return this.popstate_func
         },
-        set: function(func) {
-            this.addEventListener("popstate", func);
-            this.popstate_func = func;
+        set: function onpopstate(func) {
+            this.addEventListener("popstate", func)
+            this.popstate_func = func
         }
-    });
-    this.rejectionhandled_func = null;
+    })
+    this.rejectionhandled_func = null
     Object.defineProperty(this, "onrejectionhandled", {
-        get: function() {
-            return this.rejectionhandled_func;
+        get: function onrejectionhandled() {
+            return this.rejectionhandled_func
         },
-        set: function(func) {
-            this.addEventListener("rejectionhandled", func);
-            this.rejectionhandled_func = func;
+        set: function onrejectionhandled(func) {
+            this.addEventListener("rejectionhandled", func)
+            this.rejectionhandled_func = func
         }
-    });
-    this.storage_func = null;
+    })
+    this.storage_func = null
     Object.defineProperty(this, "onstorage", {
-        get: function() {
-            return this.storage_func;
+        get: function onstorage() {
+            return this.storage_func
         },
-        set: function(func) {
-            this.addEventListener("storage", func);
-            this.storage_func = func;
+        set: function onstorage(func) {
+            this.addEventListener("storage", func)
+            this.storage_func = func
         }
-    });
-    this.unhandledrejection_func = null;
+    })
+    this.unhandledrejection_func = null
     Object.defineProperty(this, "onunhandledrejection", {
-        get: function() {
-            return this.unhandledrejection_func;
+        get: function onunhandledrejection() {
+            return this.unhandledrejection_func
         },
-        set: function(func) {
-            this.addEventListener("unhandledrejection", func);
-            this.unhandledrejection_func = func;
+        set: function onunhandledrejection(func) {
+            this.addEventListener("unhandledrejection", func)
+            this.unhandledrejection_func = func
         }
-    });
-    this.unload_func = null;
+    })
+    this.unload_func = null
     Object.defineProperty(this, "onunload", {
-        get: function() {
-            return this.unload_func;
+        get: function onunload() {
+            return this.unload_func
         },
-        set: function(func) {
-            this.addEventListener("unload", func);
-            this.unload_func = func;
+        set: function onunload(func) {
+            this.addEventListener("unload", func)
+            this.unload_func = func
         }
-    });
-
-    return this;
+    })
+    return this
 }
-WindowEventHandlers.prototype = EventTarget.prototype;
+WindowEventHandlers.prototype = EventTarget.prototype

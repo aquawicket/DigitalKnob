@@ -12,7 +12,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
 LIBDIR := obj/local/armeabi-v7a
 endif
-LOCAL_SRC_FILES := ../../../../$(ZLIB)/android32/Release/$(LIBDIR)/libzlib.a
+LOCAL_SRC_FILES := ../../../../$(ZLIB)/android_arm32/Release/$(LIBDIR)/libzlib.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -148,7 +148,7 @@ LOCAL_SRC_FILES := \
 #FILE_LIST := $(wildcard $(LOCAL_PATH)/../../../libarchive/*.c)
 #LOCAL_SRC_FILES += $(FILE_LIST:$(LOCAL_PATH)/%=%)
 
-#LOCAL_SRC_FILES += ../../../android32/Release/jni/mbtowc.c
+#LOCAL_SRC_FILES += ../../../android_arm32/Release/jni/mbtowc.c
 
 libarchive_config := $(LOCAL_PATH)/../../../contrib/android/config/android.h
 

@@ -1,32 +1,65 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+
 // http://tommy.chheng.com/post/123568080616/encode-opengl-to-video-with-opencv
 
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
-#include "DKScreenRecorder.h"
+#include "DKScreenRecorder/DKScreenRecorder.h"
 
-#ifdef WIN32
-#define sleep Sleep
-#include <WS2tcpip.h>
+#if WIN
+	#define sleep Sleep
+//WARNING_DISABLE
+	#include <WS2tcpip.h>
+//WARNING_ENABLE
 #endif
 
-#ifdef LINUX
-#include <unistd.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-Display* DKScreenRecorder::disp;
-Window DKScreenRecorder::root;
-XImage* DKScreenRecorder::image;
+#if LINUX
+//WARNING_DISABLE
+	#include <unistd.h>
+	#include <X11/Xlib.h>
+	#include <X11/Xutil.h>
+//WARNING_ENABLE
+	Display* DKScreenRecorder::disp;
+	Window DKScreenRecorder::root;
+	XImage* DKScreenRecorder::image;
 #endif
 
-#ifdef MAC
-CGImageRef DKScreenRecorder::image_ref;
-CGDataProviderRef DKScreenRecorder::provider;
-CFDataRef DKScreenRecorder::dataref;
+#if MAC
+	CGImageRef DKScreenRecorder::image_ref;
+	CGDataProviderRef DKScreenRecorder::provider;
+	CFDataRef DKScreenRecorder::dataref;
 #endif
 
 #ifdef __IRIX__
-#include <netdb.h>
+//WARNING_DISABLE
+	#include <netdb.h>
+//WARNING_ENABLE
 #endif
+
 
 static int fps = 30;
 static int bpp = 4;
@@ -42,78 +75,60 @@ static long now = 0;
 static long lastFrame = 0;
 static int ticksPerFrame = 1000 / fps;
 
-
-
-/////////////////////////////
-bool DKScreenRecorder::Init()
-{
+bool DKScreenRecorder::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKScreenRecorderJS");
 	DKClass::DKCreate("DKScreenRecorderV8");
-
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CAPTURE]", capture);
-	if(capture.empty()){ capture = "GDI"; } //or DIRECTX
-
+	if(capture.empty())
+		capture = "GDI"; //or DIRECTX
 	DKUtil::GetScreenWidth(desktopWidth);
 	DKUtil::GetScreenHeight(desktopHeight);
 
 /*
-#ifdef MAC
+#if MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
 	provider = CGImageGetDataProvider(image_ref);
 	dataref = CGDataProviderCopyData(provider);
 #endif
 */
-#ifdef LINUX
+#if LINUX
 	disp = XOpenDisplay(NULL);
 	root = XDefaultRootWindow(disp);
 #endif
  
 	frameBuffer = (char*)malloc(desktopHeight * desktopWidth * bpp);
- 
 	DKApp::AppendLoopFunc(&DKScreenRecorder::Loop, this);
 
 	//Record("out.avi"); //TEST
 	return true;
 }
 
-////////////////////////////
-bool DKScreenRecorder::End()
-{
+bool DKScreenRecorder::End(){
 	DKDEBUGFUNC();
 	brgMat.release();
 	videoWriter.release();
 	return true;
 }
 
-
-///////////////////////////////////////////////////
-bool DKScreenRecorder::Record(const DKString& file)
-{
+bool DKScreenRecorder::Record(const DKString& file){
 	DKDEBUGFUNC(file);
-	//OpenCV
-	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cvSize(desktopWidth, desktopHeight), true);
-	//videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('I', 'Y', 'U', 'V'), fps, cvSize(desktopWidth, desktopHeight), true);
-	if(!videoWriter.isOpened()){
-		DKWARN("DKScreenRecorder::Init(): Could not open the output video for write\n");
-		return false;
-	}
+	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cv::Size(desktopWidth, desktopHeight), true);
+	//videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('I', 'Y', 'U', 'V'), fps, cv::Size(desktopWidth, desktopHeight), true);
+	if(!videoWriter.isOpened())
+		return DKERROR("videoWriter.isOpened() failed! \n");
 	return true;
 }
 
-/////////////////////////////
-bool DKScreenRecorder::Stop()
-{
+bool DKScreenRecorder::Stop(){
 	DKDEBUGFUNC();
 	brgMat.release();
 	videoWriter.release();
 	return true;
 }
 
-/////////////////////////////
-void DKScreenRecorder::Loop()
-{
-	//DKDEBUGFUNC();
+void DKScreenRecorder::Loop(){
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	//https://stackoverflow.com/questions/17575455/video-recording-is-too-fast#_=_
 	if(videoWriter.isOpened()){
 		//DrawBuffer(); //TODO: slow computers can't keep up with 30fps. Videos play too fast. 
@@ -147,16 +162,13 @@ void DKScreenRecorder::Loop()
 	}
 }
 
-///////////////////////////////////
-void DKScreenRecorder::DrawBuffer()
-{  
-	//DKDEBUGFUNC();
-#ifdef WIN32
+void DKScreenRecorder::DrawBuffer(){
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
+#if WIN
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
 		//DKINFO("DIRECTX\n");
 		//https://stackoverflow.com/questions/30021274/capture-screen-using-directx
-
 		HRESULT hr = S_OK;
 		IDirect3D9 *d3d = nullptr;
 		IDirect3DDevice9 *device = nullptr;
@@ -174,7 +186,6 @@ void DKScreenRecorder::DrawBuffer()
 			return;
 		}
 		HRCHECK(d3d->GetAdapterDisplayMode(adapter, &mode));
-
 		parameters.Windowed = TRUE;
 		parameters.BackBufferCount = 1;
 		parameters.BackBufferHeight = mode.Height;
@@ -197,7 +208,6 @@ void DKScreenRecorder::DrawBuffer()
 		HRCHECK(surface->LockRect(&rc, NULL, 0));
 		CopyMemory(frameBuffer, rc.pBits, mode.Height * mode.Width * bpp);
 		HRCHECK(surface->UnlockRect());
-
 
 		RELEASE(surface);
 		RELEASE(device);
@@ -248,7 +258,7 @@ void DKScreenRecorder::DrawBuffer()
 	}
 #endif
 
-#ifdef MAC
+#if MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
 	provider = CGImageGetDataProvider(image_ref);
 	dataref = CGDataProviderCopyData(provider);
@@ -261,7 +271,7 @@ void DKScreenRecorder::DrawBuffer()
 	//CGImageRelease(image_ref); 
 #endif
 
-#ifdef LINUX
+#if LINUX
 	image = XGetImage(disp, root, 0, 0, desktopWidth, desktopHeight, AllPlanes, ZPixmap);
 	int w,h;
 	for(h=0; h<desktopHeight; ++h) {
@@ -270,7 +280,6 @@ void DKScreenRecorder::DrawBuffer()
 			unsigned int red   = (xpixel & 0x00ff0000) >> 16;
 			unsigned int green = (xpixel & 0x0000ff00) >> 8;
 			unsigned int blue  = (xpixel & 0x000000ff);
-
 			frameBuffer[(h*desktopWidth+w)*bpp+0]=blue;
 			frameBuffer[(h*desktopWidth+w)*bpp+1]=green;
 			frameBuffer[(h*desktopWidth+w)*bpp+2]=red;

@@ -1,10 +1,14 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ js-yaml ############
+# https://github.com/nodeca/js-yaml.git
 # https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 
+dk_load(dk_builder)
 
-### VERSION ###
-DKSET(JSYAML_VERSION 3.14.1)
-DKSET(JSYAML_NAME js-yaml-${JSYAML_VERSION})
-DKSET(JSYAML_DL https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/${JSYAML_VERSION})
-DKSET(JSYAML ${3RDPARTY}/${JSYAML_NAME})
-
-### INSTALL ###
-DKINSTALL(${JSYAML_DL} js-yaml ${JSYAML})
+### IMPORT ###
+dk_import(https://github.com/nodeca/js-yaml/archive/0d3ca7a2.zip)

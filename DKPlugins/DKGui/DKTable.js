@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 function DKTable() {}
 
@@ -84,10 +84,10 @@ DKTable.prototype.addRow = function DKTable_addRow(table, rowName, cellName) {
     row.id = "row" + table.rows.length;
     //console.debug("DKTable.prototype.addRow() -> row.id = "+row.id);
     const row_count = table.rows.length;
-    let cell_count = table.rows[0].cells.length;
+    var cell_count = table.rows[0].cells.length;
     !cell_count && (cell_count = 1);
 
-    for (let n = 0; n < cell_count; n++) {
+    for (var n = 0; n < cell_count; n++) {
         //Grab the name of the cell from the root column cell if it exists
 
         //if(!table.rows[0])
@@ -102,7 +102,7 @@ DKTable.prototype.addRow = function DKTable_addRow(table, rowName, cellName) {
 }
 
 DKTable.prototype.addColumn = function DKTable_addColumn(table, name) {
-    let row_count = table.rows.length;
+    var row_count = table.rows.length;
     if (!row_count) {
         //FIXME: no name attribute for the row
         const row = DKTable.prototype.insertRow(table /*, name*/
@@ -110,7 +110,7 @@ DKTable.prototype.addColumn = function DKTable_addColumn(table, name) {
         row_count = 1;
     }
     const cell_count = table.rows[0].cells.length;
-    for (let n = 0; n < row_count; n++) {
+    for (var n = 0; n < row_count; n++) {
         const cell = DKTable.prototype.insertCell(table, table.rows[n], name);
     }
     //return the created column number
@@ -119,7 +119,7 @@ DKTable.prototype.addColumn = function DKTable_addColumn(table, name) {
 
 DKTable.prototype.addRows = function DKTable_addRows(table, count) {
     //The rows added will have no name
-    for (let n = 0; n < count; n++) {
+    for (var n = 0; n < count; n++) {
         DKTable.prototype.addRow(table);
     }
     return table.rows.length;
@@ -127,7 +127,7 @@ DKTable.prototype.addRows = function DKTable_addRows(table, count) {
 
 DKTable.prototype.addColumns = function DKTable_addColumns(table, count) {
     //The columns added will have no name
-    for (let n = 0; n < count; n++) {
+    for (var n = 0; n < count; n++) {
         DKTable.prototype.addColumn(table);
     }
     return table.rows[0].cells.length;
@@ -139,7 +139,7 @@ DKTable.prototype.deleteRow = function DKTable_deleteRow(table, number) {
 }
 
 DKTable.prototype.deleteColumn = function DKTable_deleteColumn(table, number) {
-    for (let n = 0; n < table.rows.length; n++) {
+    for (var n = 0; n < table.rows.length; n++) {
         const row = table.rows[n];
         if (row.cells[number])
             row.deleteCell(number - 1);
@@ -148,10 +148,10 @@ DKTable.prototype.deleteColumn = function DKTable_deleteColumn(table, number) {
 }
 
 DKTable.prototype.updateIds = function DKTable_updateIds(table) {
-    for (let n = 0; n < table.rows.length; n++) {
-        let row = table.rows[n];
+    for (var n = 0; n < table.rows.length; n++) {
+        var row = table.rows[n];
         row.id = "row" + (n + 1);
-        for (let nn = 0; nn < row.cells.length; nn++) {
+        for (var nn = 0; nn < row.cells.length; nn++) {
             const cell = row.cells[nn];
             cell.id = String.fromCharCode(65 + (cell.cellIndex)) + (row.rowIndex + 1);
             //cell.innerHTML = cell.id; //For debug
@@ -182,7 +182,7 @@ DKTable.prototype.getIndex = function DKTable_getIndex(cell) {
 DKTable.prototype.getRowByName = function DKTable_getRowByName(table, rowName) {
     return DKTable.prototype.getCellByName(table, rowName);
     /*
-    for (let n = 0; n < table.rows.length; n++) {
+    for (var n = 0; n < table.rows.length; n++) {
         if (!table.rows[n].getAttribute("name")) {
             console.warn("row" + n + " has no name attribute");
             return;
@@ -215,17 +215,17 @@ DKTable.prototype.getCellByName = function DKTable_getCellByName(table, rowName,
     // The rowName is set to Peter on the <tr> element
     // The columnName is set to address on the <td> element
 
-    for (let n = 0; n < table.rows.length; n++) {
+    for (var n = 0; n < table.rows.length; n++) {
         if (!table.rows[n].getAttribute("name"))
             return warn("row" + n + " has no name attribute");
 
         if (table.rows[n].getAttribute("name") == rowName) {
-            let row = table.rows[n];
+            var row = table.rows[n];
             //if the column name wasn't requested, return the row 
             if (!columnName)
                 return row;
 
-            for (let nn = 0; nn < row.cells.length; nn++) {
+            for (var nn = 0; nn < row.cells.length; nn++) {
                 if (!row.cells[nn].getAttribute("name"))
                     return warn("row" + n + ", cell" + nn + " has no name attribute");
 
@@ -239,8 +239,8 @@ DKTable.prototype.getCellByName = function DKTable_getCellByName(table, rowName,
 
 DKTable.prototype.sort = function DKTable_sort(table_id, columnName, reverse) {
     const table = byId(table_id);
-    let col = -1;
-    for (let n = 0; n < table.rows[0].cells.length; n++) {
+    var col = -1;
+    for (var n = 0; n < table.rows[0].cells.length; n++) {
         if (table.rows[0].cells[n].getAttribute("name") == columnName) {
             col = n;
             break;
@@ -251,7 +251,7 @@ DKTable.prototype.sort = function DKTable_sort(table_id, columnName, reverse) {
 
     const tb = table.tBodies[0];
     // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
-    let tr = Array.prototype.slice.call(tb.rows, 1);
+    var tr = Array.prototype.slice.call(tb.rows, 1);
     // put rows into array, 1 to skip the header
     reverse = -((+reverse) || -1);
     tr = tr.sort(function(a, b) {
@@ -260,7 +260,7 @@ DKTable.prototype.sort = function DKTable_sort(table_id, columnName, reverse) {
         * (a.cells[col].textContent.trim()// using `.textContent.trim()` for test
         .localeCompare(b.cells[col].textContent.trim()));
     });
-    for (let i = 1; i < tr.length; ++i)
+    for (var i = 1; i < tr.length; ++i)
         tb.appendChild(tr[i]);
     // append each row in order
 }
@@ -270,7 +270,7 @@ DKTable.prototype.sort = function DKTable_sort(table_id, columnName, reverse) {
 DKTable.prototype.sortRow = function DKTable_sortRow(table_id, row, col, reverse) {
     const table = byId(table_id);
     const tb = table.tBodies[0]; // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
-    let tr = Array.prototype.slice.call(tb.rows, 1); // put rows into array, 1 to skip the header
+    var tr = Array.prototype.slice.call(tb.rows, 1); // put rows into array, 1 to skip the header
     reverse = -((+reverse) || -1);
     tr = tr.sort(function (a, b) { // sort rows
         return reverse * (a.cells[col].textContent.trim().localeCompare(b.cells[col].textContent.trim()));

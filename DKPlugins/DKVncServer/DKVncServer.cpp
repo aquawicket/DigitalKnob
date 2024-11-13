@@ -1,33 +1,67 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
-#include "DKVncServer.h"
+#include "DKVncServer/DKVncServer.h"
 
-#ifdef WIN32
-#define sleep Sleep
-#include <WS2tcpip.h>
+#if WIN
+	#define sleep Sleep
 #endif
 
-#ifdef LINUX
-#include <unistd.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-Display* DKVncServer::disp;
-Window DKVncServer::root;
-XImage* DKVncServer::image;
+//WARNING_DISABLE
+#if WIN
+	#include <WS2tcpip.h>
+#endif
+#if LINUX
+	#include <unistd.h>
+	#include <X11/Xlib.h>
+	#include <X11/Xutil.h>
+#endif
+//WARNING_ENABLE
+
+#if LINUX
+	Display* DKVncServer::disp;
+	Window DKVncServer::root;
+	XImage* DKVncServer::image;
 #endif
 
-#ifdef MAC
-CGImageRef DKVncServer::image_ref;
-CGDataProviderRef DKVncServer::provider;
-CFDataRef DKVncServer::dataref;
+#if MAC
+	CGImageRef DKVncServer::image_ref;
+	CGDataProviderRef DKVncServer::provider;
+	CFDataRef DKVncServer::dataref;
 #endif
 
+//WARNING_DISABLE
 #ifdef __IRIX__
-#include <netdb.h>
+	#include <netdb.h>
 #endif
-
 #include <rfb/keysym.h>
-#include "radon.h"
+#include "examples/server/radon.h"
+//WARNING_ENABLE
+
 
 static rfbScreenInfoPtr rfbScreen;
 static int bpp = 4;
@@ -55,9 +89,7 @@ const rfbPixelFormat vnc16bitFormat =
 const rfbPixelFormat vnc24bitFormat =
 { 32, 24, 0, 1, 255, 255, 255, 16, 8, 0, 0, 0 };
 
-/////////////////////////
-typedef struct ClientData
-{
+typedef struct ClientData{
 	//int key = 0;
 	int buttonMask = 0;
 	DKString ipaddress;
@@ -67,41 +99,35 @@ std::vector<ClientLog> DKVncServer::clientLog;
 DKString DKVncServer::capture;
 
 
-////////////////////////
-bool DKVncServer::Init()
-{
+bool DKVncServer::Init() {
 	DKDEBUGFUNC();
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CAPTURE]", capture);
-	if(capture.empty()){ capture = "GDI"; } //DIRECT X
-
+	if(capture.empty())
+		capture = "GDI"; //DIRECT X
 	static DKString password;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PASSWORD]", password);
-	if(password.empty()){
+	if(password.empty())
 		DKWARN("WARNING! No password set in settings file!\n");
-	}
-
 	int desktopWidth;
 	int desktopHeight;
 	DKUtil::GetScreenWidth(desktopWidth);
 	DKUtil::GetScreenHeight(desktopHeight);
 
 /*
-#ifdef MAC
+#if MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
 	provider = CGImageGetDataProvider(image_ref);
 	dataref = CGDataProviderCopyData(provider);
 #endif
 */
-#ifdef LINUX
+#if LINUX
 	disp = XOpenDisplay(NULL);
 	root = XDefaultRootWindow(disp);
 #endif
 
 	rfbScreen = rfbGetScreen(&DKApp::argc, DKApp::argv, desktopWidth, desktopHeight, 8, 3, bpp);
-	if(!rfbScreen){
-		DKERROR("DKVncServer::Init(): rfbScreen is invalid\n");
-		return false;
-	}
+	if(!rfbScreen)
+		return DKERROR("rfbScreen is invalid\n");
 	rfbScreen->desktopName = "DKVncServer";
 	rfbScreen->frameBuffer = (char*)malloc(desktopHeight * desktopWidth * bpp);
 	rfbScreen->alwaysShared = TRUE;
@@ -111,29 +137,23 @@ bool DKVncServer::Init()
 	rfbScreen->httpDir = (char*)DKFile::local_assets.c_str(); //+"DKVncServer";
 	rfbScreen->httpEnableProxyConnect = TRUE;
 	rfbScreen->serverFormat = vnc24bitFormat;
-
 	if(!password.empty()){
 		static const char* pass = password.c_str(); 
 		static const char* passwords[2]={pass, 0};
 		rfbScreen->authPasswdData = (void*)passwords;
 		rfbScreen->passwordCheck = rfbCheckPasswordByList2;
 	}
-
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);
 	return true;
 }
 
-///////////////////////
-bool DKVncServer::End()
-{
+bool DKVncServer::End() {
 	DKDEBUGFUNC();
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
-{
+enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl) {
 	DKDEBUGFUNC(cl);
 	cl->clientData = (void*)calloc(sizeof(ClientData), 1);
 	cl->clientGoneHook = clientgone;
@@ -147,7 +167,6 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 	ClientData* cd = (ClientData*)cl->clientData;
 	cd->ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
 	DKINFO("Client ip address: "+cd->ipaddress+"\n");
-
 	for(unsigned int i=0; i<clientLog.size(); i++){
 		if(same(cd->ipaddress, clientLog[i].ipaddress)){
 			if(clientLog[i].failed_attempts > 2){
@@ -156,30 +175,22 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 			}
 		}
 	}
-
 	return RFB_CLIENT_ACCEPT;
 }
 
-/////////////////////////////////////////////
-void DKVncServer::clientgone(rfbClientPtr cl)
-{
+void DKVncServer::clientgone(rfbClientPtr cl) {
 	DKDEBUGFUNC(cl);
 	free(cl->clientData);
 	cl->clientData = NULL;
 }
 
-////////////////////////
-void DKVncServer::Loop()
-{
-	//DKDEBUGFUNC();
-	if(rfbProcessEvents(rfbScreen, 1)){
+void DKVncServer::Loop() {
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
+	if(rfbProcessEvents(rfbScreen, 1))
 		DrawBuffer();
-	}
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
-rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* response, int len)
-{
+rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* response, int len) {
 	DKDEBUGFUNC(cl, response, len);
 	char **passwds;
 	int i=0;
@@ -199,7 +210,6 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 		clientLog.push_back(cl);
 		current_client = clientLog.size()-1;
 	}
-
 	for(passwds=(char**)cl->screen->authPasswdData; *passwds; passwds++,i++){
 		uint8_t auth_tmp[CHALLENGESIZE];
 		memcpy((char *)auth_tmp, (char *)cl->authChallenge, CHALLENGESIZE);
@@ -211,17 +221,14 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 			return(TRUE);
 		}
 	}
-	
 	rfbErr("authProcessClientMessage: authentication failed from %s\n", cl->host);
 	clientLog[current_client].failed_attempts++;
 	return(FALSE);
 }
 
-//////////////////////////////
-void DKVncServer::DrawBuffer()
-{  
-	//DKDEBUGFUNC();
-#ifdef WIN32
+void DKVncServer::DrawBuffer() {  
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
+#if WIN
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
 		//DKINFO("DIRECTX\n");
@@ -320,7 +327,7 @@ void DKVncServer::DrawBuffer()
 	}
 #endif
 
-#ifdef MAC
+#if MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
 	provider = CGImageGetDataProvider(image_ref);
 	dataref = CGDataProviderCopyData(provider);
@@ -334,7 +341,7 @@ void DKVncServer::DrawBuffer()
 	//CGImageRelease(image_ref); 
 #endif
 
-#ifdef LINUX
+#if LINUX
 	image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);
 	int w,h;
 	for(h=0;h<rfbScreen->height;++h) {
@@ -343,7 +350,6 @@ void DKVncServer::DrawBuffer()
 			unsigned int red   = (xpixel & 0x00ff0000) >> 16;
 			unsigned int green = (xpixel & 0x0000ff00) >> 8;
 			unsigned int blue  = (xpixel & 0x000000ff);
-
 			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=blue;
 			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=green;
 			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=red;
@@ -380,9 +386,7 @@ void DKVncServer::DrawBuffer()
 	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
-{
+void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height) {
 	DKDEBUGFUNC(screen, width, height);
 	char *oldfb, *newfb;
 	oldfb = (char*)screen->frameBuffer;
@@ -391,51 +395,38 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 	free(oldfb);
 }
 
-///////////////////////////////////////////////////////////////////////////
-void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
-{
+void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl) {
 	DKDEBUGFUNC(buttonMask, x, y, cl);
 	ClientData* cd = (ClientData*)cl->clientData;
-	if(same(cd->ipaddress,"127.0.0.1")){ return; }
-	
+	if(same(cd->ipaddress,"127.0.0.1"))
+		return;
 	DKUtil::SetMousePos(x, y);
 	if(buttonMask && !cd->buttonMask){
 		cd->buttonMask = buttonMask;
-		if(cd->buttonMask == 1){
+		if(cd->buttonMask == 1)
 			DKUtil::LeftPress();
-		}
-		if(cd->buttonMask == 2){
+		if(cd->buttonMask == 2)
 			DKUtil::MiddlePress();
-		}
-		if(cd->buttonMask == 4){
+		if(cd->buttonMask == 4)
 			DKUtil::RightPress();
-		}
-		if(cd->buttonMask == 8){
+		if(cd->buttonMask == 8)
 			DKUtil::WheelUp();
-		}
-		if(cd->buttonMask == 16){
+		if(cd->buttonMask == 16)
 			DKUtil::WheelDown();
-		}
 	}
 	if(!buttonMask && cd->buttonMask){
-		if(cd->buttonMask == 1){
+		if(cd->buttonMask == 1)
 			DKUtil::LeftRelease();
-		}
-		if(cd->buttonMask == 2){
+		if(cd->buttonMask == 2)
 			DKUtil::MiddleRelease();
-		}
-		if(cd->buttonMask == 4){
+		if(cd->buttonMask == 4)
 			DKUtil::RightRelease();
-		}
 		cd->buttonMask = 0;
 	}
-
 	rfbDefaultPtrAddEvent(buttonMask, x, y, cl);
 }
 
-////////////////////////////////////////////////////////////////////////
-void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
-{
+void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl) {
 	DKDEBUGFUNC(down, key, cl);
 	int k = key;
 	switch(key){

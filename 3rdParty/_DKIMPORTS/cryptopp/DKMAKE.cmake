@@ -1,25 +1,70 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+dk_load(dk_builder)
 # https://www.cryptopp.com/
-#
-# https://github.com/webstorage119/website-1/raw/master/cryptopp600.zip
-
-### VERSION ###
-DKSET(CRYPTO_VERSION 600)
-DKSET(CRYPTO_NAME cryptopp${CRYPTO_VERSION})
-DKSET(CRYPTO_DL https://github.com/webstorage119/website-1/raw/master/${CRYPTO_NAME}.zip)
-DKSET(CRYPTO ${3RDPARTY}/${CRYPTO_NAME})
+# https://github.com/weidai11/cryptopp
 
 
-### INSTALL ###
-DKINSTALL(${CRYPTO_DL} cryptopp ${CRYPTO})
+### DEPEND ###
+if(IOS OR IOSSIM)
+	#dk_depend(libmd)
+	#dk_depend(macports)
+endif()
+
+
+### IMPORT ###
+UNIX_dk_import		(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
+if(MINGW)
+	WIN_dk_import	(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
+else()
+	WIN_dk_import	(https://github.com/weidai11/cryptopp/archive/60f81a77e0c9a0e7ffc1ca1bc438ddfa2e43b78e.zip)
+	#WIN_dk_import	(https://github.com/weidai11/cryptopp/archive/refs/heads/master.zip)
+endif()
 
 
 ### LINK ###
-WIN_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
-WIN_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
+ANDROID_dk_libDebug		(${CRYPTOPP_DEBUG_DIR}/libcryptopp.a)
+ANDROID_dk_libRelease	(${CRYPTOPP_RELEASE_DIR}/libcryptopp.a)
+APPLE_dk_libDebug		(${CRYPTOPP_TRIPLE_DIR}/cryptopp.build/${DEBUG_DIR}/cryptopp-object.build/libcryptopp-object.a)
+APPLE_dk_libRelease		(${CRYPTOPP_TRIPLE_DIR}/cryptopp.build/${RELEASE_DIR}/cryptopp-object.build/libcryptopp-object.a)
+EMSCRIPTEN_dk_libDebug	(${CRYPTOPP_DEBUG_DIR}/libcryptopp.a)
+EMSCRIPTEN_dk_libRelease(${CRYPTOPP_RELEASE_DIR}/libcryptopp.a)
+LINUX_dk_libDebug		(${CRYPTOPP_DEBUG_DIR}/libcryptopp.a)
+LINUX_dk_libRelease		(${CRYPTOPP_RELEASE_DIR}/libcryptopp.a)
+RASPBERRY_dk_libDebug	(${CRYPTOPP_DEBUG_DIR}/libcryptopp.a)
+RASPBERRY_dk_libRelease	(${CRYPTOPP_RELEASE_DIR}/libcryptopp.a)
+if(MSVC)
+	WIN_dk_libDebug		(${CRYPTOPP_DEBUG_DIR}/cryptopp-static.lib)
+	WIN_dk_libRelease	(${CRYPTOPP_RELEASE_DIR}/cryptopp-static.lib)
+else()
+	WIN_dk_libDebug		(${CRYPTOPP_DEBUG_DIR}/libcryptopp.a)
+	WIN_dk_libRelease	(${CRYPTOPP_RELEASE_DIR}/libcryptopp.a)
+endif()
+
+
+### GENERATE ###
+if(ANDROID OR MAC)
+	dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
+	string(REPLACE "-DANDROID_CPP_FEATURES=\"rtti exceptions\""	"" DKCMAKE_BUILD "${DKCMAKE_BUILD}")
+	string(REPLACE "-std=c++1z" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
+	string(REPLACE "-DMAC " " " 	DKCMAKE_BUILD "${DKCMAKE_BUILD}") #fix for class named MAC in cryptopp
+	string(REPLACE "  " 		" " DKCMAKE_BUILD "${DKCMAKE_BUILD}")
+endif()
+
+ANDROID_dk_configure		(${CRYPTOPP_DIR} "-DCMAKE_CXX_FLAGS=/I${ANDROID_NDK}/sources/android/cpufeatures" -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
+EMSCRIPTEN_dk_configure		(${CRYPTOPP_DIR} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
+IOS_dk_configure			(${CRYPTOPP_DIR} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ${LIBMD_CMAKE})
+IOSSIM_dk_configure			(${CRYPTOPP_DIR} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ${LIBMD_CMAKE})
+LINUX_dk_configure			(${CRYPTOPP_DIR} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
+MAC_dk_configure			(${CRYPTOPP_DIR} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DCRYPTOPP_DISABLE_MIXED_ASM=ON)
+RASPBERRY_dk_configure		(${CRYPTOPP_DIR} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
+WIN_dk_configure			(${CRYPTOPP_DIR} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
 
 
 ### COMPILE ###
-WIN_PATH(${CRYPTO}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${CRYPTO})
-WIN64_COMMAND(${DKCMAKE_WIN64} ${CRYPTO})
-WIN_VS(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
+dk_build(${CRYPTOPP} cryptopp-static)

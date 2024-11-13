@@ -15,18 +15,18 @@ function AndroidImport_Import() {
     }
 
     var appdir = "";
-    var contents = DKFile_DirectoryContents(DKPATH);
+    var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
     var files = contents.split(",");
 
     for (var i = 0; i < files.length; i++) {
-        if (dk.file.extist(DKPATH + "/" + files[i] + "/DKApps/" + APP)) {
-            appdir = DKPATH + "/" + files[i] + "/DKApps/" + APP;
+        if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP)) {
+            appdir = DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP;
         }
     }
 
     /*
-	if(dk.file.extist(DKPATH+"/DKApps/"+APP)){
-		appdir = DKPATH+"/DKApps/"+APP;
+	if(dk.file.extist(DIGITALKNOB_DIR+"/DKApps/"+APP)){
+		appdir = DIGITALKNOB_DIR+"/DKApps/"+APP;
 	}
 	*/
 
@@ -66,15 +66,15 @@ function AndroidImport_Import() {
 
     //Multipe user folders
     /*
-	var contents = DKFile_DirectoryContents(DKPATH);
+	var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DKPATH);
+		DKFile_ChDir(DIGITALKNOB_DIR);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
-			if(dk.file.extist(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKMAKE.cmake")){
+			if(dk.file.extist(DIGITALKNOB_DIR+"/"+folder+"/DKApps/"+APP+"/DKMAKE.cmake")){
 				appdir = folder+"/DKApps";
 			}
 		}
@@ -83,9 +83,9 @@ function AndroidImport_Import() {
 
     //Get app path
     if (TYPE === "Debug") {
-        path = appdir + "/android32/Debug";
+        path = appdir + "/android_arm32/Debug";
     } else {
-        path = appdir + "/android32/Release";
+        path = appdir + "/android_arm32/Release";
     }
 
     console.log(path + "\n");
@@ -172,9 +172,9 @@ function AndroidImport_Import() {
     dk.file.makeDir(WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs");
     dk.file.makeDir(WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a");
     if (TYPE === "Debug") {
-        DKFile_Copy(appdir + "/android32/Debug/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
+        DKFile_Copy(appdir + "/android_arm32/Debug/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
     } else {
-        DKFile_Copy(appdir + "/android32/Release/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
+        DKFile_Copy(appdir + "/android_arm32/Release/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
     }
 
     console.log("Import finished\n");

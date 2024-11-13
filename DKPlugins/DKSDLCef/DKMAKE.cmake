@@ -1,18 +1,26 @@
-IF(NOT USE_DKCef)
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ DKSDLCef ############
+if(NOT HAVE_DKCef)
 	RETURN()
-ENDIF()
+endif()
 
-IF(ANDROID)
+if(ANDROID)
 	RETURN()
-ENDIF()
+endif()
 
-IF(IOSSIM)
+if(IOSSIM)
 	RETURN()
-ENDIF()
+endif()
 
-DKDEPEND(DKSDLWindow)
-DKDEPEND(DKCef)
-DKDEPEND(DKCefChild)
-DKDEPEND(DKAssets)
+dk_depend(DKSDLWindow)
+dk_depend(DKCef)
+dk_depend(DKCefChild)
+dk_depend(DKAssets)
 
-DKPLUGIN(DKSDLCef)
+dk_generateCmake(DKSDLCef)

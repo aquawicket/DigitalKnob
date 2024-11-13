@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Controls</title>
+</head>
+
+<body>
+	<h1>Controls</h1>
+	
+	<form action="" method="get" name="controls">
+		<label for="CustomerID">CustomerID</label>
+		<input type="hidden" id="CustomerID" name="CustomerID">
+		<br />
+		<label for="UserName">UserName:</label>
+		<input type="text" value="Alex" size="30" id="UserName" name="UserName">
+		<br />
+		<label for="Password">Password</label>
+		<input type="password" id="Password" name="Password">
+		<br />
+		<label for="MailingList">Mailing List</label>
+		<input type="checkbox" id="MailingList" name="MailingList">
+		<br />
+		<label for="CV">CV</label>
+		<input type="file" id="CV" name="CV">
+		<br />
+		<label for="courses">Courses</label>
+		<select id="courses" name="courses">
+			<optgroup label="Access">
+				<option value="AB1">Access Beginner 1</option>
+				<option value="AB2">Access Beginner 2</option>
+			</optgroup>
+			<optgroup label="Excel">
+				<option value="EB1">Excel Beginner 1</option>
+				<option value="EB2">Excel Beginner 2</option>
+			</optgroup>
+		</select>
+		<br />
+		<label for="info">Info: </label>
+		<textarea rows="5" cols="30" name="info" id="info">Lots of information.</textarea>
+		<br />
+		<fieldset>
+			<legend>Gender</legend>
+			<label for="Male">Male</label>
+			<input type="radio" name="radio" id="Male" value="Male">
+			<br />
+			<label for="Female">Female</label>
+			<input type="radio" name="radio" id="Female" value="Female">
+		</fieldset>
+		<br />
+		<input type="reset" value="Reset">
+		<input type="submit" value="Submit">
+		<label for="TestButton">TestButton</label>
+		<input type="button" id="TestButton" name="TestButton" value="Test Button">
+	</form>
+	
+</body>
+
+</html>

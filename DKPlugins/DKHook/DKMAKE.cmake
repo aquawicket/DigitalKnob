@@ -1,25 +1,39 @@
-IF(USE_DKCef)
-	DKDEPEND(DKCef)
-ENDIF()
-DKPLUGIN(DKHook)
-DKASSETS(DKHook)
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
-## hookdll windows
-IF(WIN)
-	DKAPPEND_CMAKE("\n\n")
-	DKAPPEND_CMAKE("FILE(GLOB hookdll_SRC \n")
-	DKAPPEND_CMAKE("	${DKPLUGINS}/DKHook/hookdll/*.cpp \n")
-	DKAPPEND_CMAKE(") \n")
-	DKAPPEND_CMAKE("ADD_LIBRARY(hookdll SHARED \${hookdll_SRC}) \n")
-	DKAPPEND_CMAKE("SET_TARGET_PROPERTIES(hookdll PROPERTIES LINK_FLAGS_DEBUG \"/NODEFAULTLIB:libc.lib\" LINK_FLAGS \"/NODEFAULTLIB:libc.lib\") \n")
-	DKAPPEND_CMAKE("SET_TARGET_PROPERTIES(hookdll PROPERTIES DEFINE_SYMBOL \"DKHook\") \n")
-	DKAPPEND_CMAKE("SET_TARGET_PROPERTIES(hookdll PROPERTIES LINKER_LANGUAGE CPP) \n")
-ENDIF()
 
-IF(WIN_32)
-	DKCOPY(${DKPLUGINS}/DKHook/win32/Release/hookdll.dll ${DKPROJECT}/assets/DKHook TRUE)
-ENDIF()
+############ DKHook ############
 
-IF(WIN_64)
-	DKCOPY(${DKPLUGINS}/DKHook/win64/Release/hookdll.dll ${DKPROJECT}/assets/DKHook TRUE)
-ENDIF()
+#if(NOT WIN AND NOT LINUX)
+#	dk_return()
+#endif()
+
+if(HAVE_DKCef)
+	dk_depend(DKCef)
+endif()
+dk_generateCmake(DKHook)
+dk_assets(DKHook)
+
+## add hoodll.dll to CMakeLists.txt on windows
+dk_appendCmake("\n\n")
+dk_appendCmake("FILE(GLOB hookdll_SRC \n")
+dk_appendCmake("	${DKPLUGINS_DIR}/DKHook/hookdll/*.* \n")
+dk_appendCmake(") \n")
+dk_appendCmake("ADD_LIBRARY(hookdll SHARED \${hookdll_SRC}) \n")
+if(MSVC)
+	dk_appendCmake("SET_TARGET_PROPERTIES(hookdll PROPERTIES LINK_FLAGS_DEBUG \"/NODEFAULTLIB:libc.lib\" LINK_FLAGS \"/NODEFAULTLIB:libc.lib\") \n")
+endif()
+dk_appendCmake("SET_TARGET_PROPERTIES(hookdll PROPERTIES DEFINE_SYMBOL \"DKHook\") \n")
+dk_appendCmake("SET_TARGET_PROPERTIES(hookdll PROPERTIES LINKER_LANGUAGE CPP) \n")
+
+
+# FIXME - these should be post built operations. hookdll.dll will not exist yet
+if(EXISTS ${DKPLUGINS_DIR}/DKHook/win_x86_msvc/Release/hookdll.dll)
+	dk_copy(${DKPLUGINS_DIR}/DKHook/win_x86_msvc/Release/hookdll.dll ${DK_PROJECT_DIR}/assets/DKHook OVERWRITE)
+endif()
+if(EXISTS ${DKPLUGINS_DIR}/DKHook/win_x86_64_msvc/Release/hookdll.dll)
+	dk_copy(${DKPLUGINS_DIR}/DKHook/win_x86_64_msvc/Release/hookdll.dll ${DK_PROJECT_DIR}/assets/DKHook OVERWRITE)
+endif()

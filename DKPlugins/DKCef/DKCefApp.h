@@ -1,10 +1,39 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
 #pragma once
 #ifndef DKCefApp_H
 #define DKCefApp_H
-#include <boost/function.hpp>
-#include <boost/bind/bind.hpp>
-#include <include/cef_app.h>
-#include <include/wrapper/cef_helpers.h>
+
+//WARNING_DISABLE
+	//#include <boost/function.hpp>
+	//#include <boost/bind/bind.hpp>
+	#include <include/cef_app.h>
+	#include <include/wrapper/cef_helpers.h>
+//WARNING_ENABLE
+
 #include "DK/DKFile.h"
 
 
@@ -13,13 +42,9 @@ typedef CefRefPtr<CefListValue> CefReturn;
 class DKCefApp;
 class DKCefV8Handler;
 
-#ifdef MAC
-typedef std::map<DKString, boost::function2<bool, CefArgs, CefReturn> >::iterator it_type;
-#else
-typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
-#endif
+//typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
+typedef std::map<DKString, std::function<bool(CefArgs, CefReturn)>>::iterator it_type;
 
-//////////
 class DKV8
 {
 public:
@@ -27,16 +52,13 @@ public:
 	static bool AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn));
 	static bool GetFunctions(CefRefPtr<CefBrowser> browser);
 	static bool Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args);
-
 	static CefRefPtr<CefBrowser> _browser;
 	static CefRefPtr<DKCefV8Handler> v8handler;
 	static CefRefPtr<CefV8Value> ctx;
 	static bool singleprocess;
-#ifdef MAC
-	static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
-#else
-	static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
-#endif
+
+	//static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
+	static std::map<DKString, std::function<bool(CefArgs, CefReturn)>> functions;
 	static std::vector<std::string> funcs;
 
 	//Flags
@@ -59,39 +81,101 @@ public:
 	static DKString sandbox;
 };
 
-//////////////////////////////////////////
 class DKCefV8Handler : public CefV8Handler
 {
 public:
-	DKCefV8Handler(){}
-
-	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE;
+	DKCefV8Handler(){
+		DKDEBUGFUNC();
+	}
+	bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) override;
 	void SetBrowser(CefRefPtr<CefBrowser> _browser);
-	
 	CefRefPtr<CefBrowser> browser;
-
 	IMPLEMENT_REFCOUNTING(DKCefV8Handler);
 };
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRenderProcessHandler
+// CefV8Accessor
+//bool Get(const CefString& name, const CefRefPtr<CefV8Value> object, CefRefPtr<CefV8Value>& retval, CefString& exception) override;
+
+class DKCefApp : public CefApp,
+					//public CefResourceBundleHandler,  //Error: cannot instantiate abstract class
+					public CefBrowserProcessHandler, 
+					public CefRenderProcessHandler
 {
 public:
-	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
-	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
 
+	// CefApp
+	void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line) override;
+	/*
+	void OnRegisterCustomSchemes(CefRawPtr<CefSchemeRegistrar> registrar) override {
+		DKDEBUGFUNC(registrar);
+		//DK_UNUSED(registrar);
+	}
+	*/
+	//CefRefPtr<CefResourceBundleHandler> GetResourceBundleHandler() override;
+	CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override {
+		DKDEBUGFUNC();
+		return this; 
+	}
+	CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() override {
+		DKDEBUGFUNC();
+		return this; 
+	}
+
+	// CefResourceBundleHandler
+	//bool GetLocalizedString(int string_id, CefString& string) override;
+	//bool GetDataResource(int resource_id, void*& data, size_t& data_size) override;
+	//bool GetDataResourceForScale(int resource_id, ScaleFactor scale_factor, void*& data, size_t& data_size) override;
+	
+	// CefBrowserProcessHandler
+	void OnContextInitialized() override;
+	void OnBeforeChildProcessLaunch(CefRefPtr<CefCommandLine> command_line) override {
+		DKDEBUGFUNC(command_line);
+		//DK_UNUSED(command_line);
+	}
+	void OnRenderProcessThreadCreated(CefRefPtr<CefListValue> extra_info) override {
+		DKDEBUGFUNC(extra_info);
+		//DK_UNUSED(extra_info);
+	}
+	//CefRefPtr<CefPrintHandler> GetPrintHandler() override;
+	void OnScheduleMessagePumpWork(int64 delay_ms) override {
+		DKDEBUGFUNC(delay_ms);
+		//DK_UNUSED(delay_ms);
+	}
+
+	// CefRenderProcessHandler
+	void OnRenderThreadCreated(CefRefPtr<CefListValue> extra_info) override {
+		DKDEBUGFUNC();
+		//DK_UNUSED(extra_info);
+	}
+	void OnWebKitInitialized() override {
+		DKDEBUGFUNC();
+	}
+	void OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) override;
+	void OnBrowserDestroyed(CefRefPtr<CefBrowser> browser) override {
+		DKDEBUGFUNC(browser);
+		//DK_UNUSED(browser);
+	}
+	//CefRefPtr<CefLoadHandler> GetLoadHandler() override;
+	void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override;
+	void OnContextReleased(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override {
+		DKDEBUGFUNC(browser, frame, context);
+		//DK_UNUSED(browser);
+		//DK_UNUSED(frame); 
+		//DK_UNUSED(context);
+	}
+	void OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace) override;
+	void OnFocusedNodeChanged(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefDOMNode> node) override {
+		DKDEBUGFUNC(browser, frame, node);
+		//DK_UNUSED(browser);
+		//DK_UNUSED(frame);
+		//DK_UNUSED(node);
+	}
+	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) override;
+
+	// DKCef
 	//bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
-
-	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line);
-	virtual void OnBrowserCreated(CefRefPtr<CefBrowser> browser);
-	virtual void OnContextInitialized();
-	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE;
-	virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message);
-	virtual void OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace);
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);
 };
-
-
 
 #endif //DKCefApp_H

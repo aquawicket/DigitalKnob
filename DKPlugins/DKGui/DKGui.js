@@ -1,7 +1,8 @@
-"use strict";
+//"use strict";
 
-dk.gui = DKPlugin(DKGui, "singleton")
-function DKGui() {}
+function DKGui(){}
+dk.gui = DKPlugin(DKGui)//, "singleton")
+
 
 DKGui.prototype.createElement = function DKGui_createElement(parent, tag, id, top, bottom, left, right, width, height, onclick) {
     var ele = document.createElement(tag);
@@ -24,7 +25,7 @@ DKGui.prototype.createTag = function DKGui_createTag(tag, parent, props, callbac
     style && delete props.style;
     const element = Object.assign(document.createElement(tag), props);
     style && Object.assign(element.style, style);
-    //for(let attr in props)
+    //for(var attr in props)
     //    element.setAttribute("dk", "");
     parent.appendChild(element);
     callback && callback(element);

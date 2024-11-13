@@ -56,29 +56,29 @@ function RunMenu_onevent(event) {
         OS = byId("OSList").value;
         APP = byId("AppList").value;
         if (DK_GetOS() === "Win32" || DK_GetOS() === "Win64") {
-            if (OS === "win32") {
-                DK_Run(DKPATH + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".exe");
-                var contents = DKFile_DirectoryContents(DKPATH);
+            if (OS === "win_x86") {
+                DK_Run(DIGITALKNOB_DIR + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".exe");
+                var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
                 var files = contents.split(",");
                 for (var i = 0; i < files.length; i++) {
-                    if (dk.file.extist(DKPATH + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".exe")) {
-                        //console.log(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n");
-                        DK_Run(DKPATH + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".exe");
+                    if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".exe")) {
+                        //console.log(DIGITALKNOB_DIR+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n");
+                        DK_Run(DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".exe");
                         return;
                     }
                 }
             }
-            if (OS === "win64") {
-                DK_Run(DKPATH + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
-                DK_Run(DKPATH + "/USER/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
+            if (OS === "win_x86_64") {
+                DK_Run(DIGITALKNOB_DIR + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
+                DK_Run(DIGITALKNOB_DIR + "/USER/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
 
-                DK_Run(DKPATH + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
-                var contents = DKFile_DirectoryContents(DKPATH);
+                DK_Run(DIGITALKNOB_DIR + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
+                var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
                 var files = contents.split(",");
                 for (var i = 0; i < files.length; i++) {
-                    if (dk.file.extist(DKPATH + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe")) {
-                        //console.log(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe\n");
-                        DK_Run(DKPATH + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
+                    if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe")) {
+                        //console.log(DIGITALKNOB_DIR+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe\n");
+                        DK_Run(DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
                         return;
                     }
                 }
@@ -99,17 +99,17 @@ function RunMenu_onevent(event) {
             }
         }
         if (DK_GetOS() === "Linux") {
-            //if(OS === "linux64"){
+            //if(OS === "linux_x86_64"){
             //console.log("TODO: Run linux apps from Linux\n");
-            if (dk.file.extist(DKPATH + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")) {
-                DK_Run(DKPATH + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop");
+            if (dk.file.extist(DIGITALKNOB_DIR + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")) {
+                DK_Run(DIGITALKNOB_DIR + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop");
             }
-            var contents = DKFile_DirectoryContents(DKPATH);
+            var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
             var files = contents.split(",");
             for (var i = 0; i < files.length; i++) {
-                if (dk.file.extist(DKPATH + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")) {
-                    //console.log(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop\n");
-                    DK_Run(DKPATH + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop");
+                if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")) {
+                    //console.log(DIGITALKNOB_DIR+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop\n");
+                    DK_Run(DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop");
                     return;
                 }
             }
@@ -121,9 +121,9 @@ function RunMenu_onevent(event) {
     if (event.currentTarget.id === "Generate Docs") {
         console.log("Generate Docs: TODO\n");
         var doxy_path = "C:/Program Files/doxygen/bin/doxygen.exe";
-        var doxy_file = DKPATH + "/DKDocs/Doxyfile";
+        var doxy_file = DIGITALKNOB_DIR + "/DKDocs/Doxyfile";
         var doxy_exe = DKFile_GetShortName(doxy_path);
-        DKFile_ChDir(DKPATH + "/DKDocs/");
+        DKFile_ChDir(DIGITALKNOB_DIR + "/DKDocs/");
         DK_Execute(doxy_exe + " " + doxy_file);
     }
 

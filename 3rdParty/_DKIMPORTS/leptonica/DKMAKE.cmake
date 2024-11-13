@@ -1,85 +1,75 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ leptonica ############
+# https://github.com/DanBloomberg/leptonica
+# README: https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
 # http://www.leptonica.org
-#
+# https://github.com/DanBloomberg/leptonica/archive/refs/tags/1.82.0.zip
 # http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
 
-### DEPENDS ###
-DKDEPEND(zlib)
-DKDEPEND(tiff)
-DKDEPEND(libpng)
-IF(ANDROID)
-	DKDEPEND(jpeg)
-ELSE()
-	DKDEPEND(libjpeg-turbo)
-ENDIF()
-DKDEPEND(giflib)
+dk_load(dk_builder)
 
+### DEPEND ###
+dk_depend(giflib)
+dk_depend(libjpeg-turbo)
+dk_depend(libpng)
+dk_depend(libwebp)
+#dk_depend(sw)
+dk_depend(tiff)
+dk_depend(zlib)
 
-### VERSION ###
-DKSET(LEPTONICA_MAJOR 1)
-DKSET(LEPTONICA_MINOR 74)
-DKSET(LEPTONICA_BUILD 4)
-DKSET(LEPTONICA_VERSION ${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD})
-DKSET(LEPTONICA_NAME leptonica-${LEPTONICA_VERSION})
-DKSET(LEPTONICA_DL http://www.leptonica.org/source/leptonica-${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD}.tar.gz)
-DKSET(LEPTONICA ${3RDPARTY}/${LEPTONICA_NAME})
-
-
-### INSTALL ###
-DKINSTALL(${LEPTONICA_DL} leptonica ${LEPTONICA})
-
+### IMPORT ###
+dk_import(https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip)
 
 ### LINK ###
-DKINCLUDE(${LEPTONICA})
-DKINCLUDE(${LEPTONICA}/${OS}/src)
-DKINCLUDE(${LEPTONICA}/${OS}/${RELEASE_DIR}/src)
-WIN_DEBUG_LIB(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/${LEPTONICA_NAME}d.lib)
-WIN_RELEASE_LIB(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/${LEPTONICA_NAME}.lib)
-APPLE_DEBUG_LIB(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
-APPLE_RELEASE_LIB(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
-LINUX_DEBUG_LIB(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
-LINUX_RELEASE_LIB(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
-ANDROID_DEBUG_LIB(${LEPTONICA}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libleptonica.a)
-ANDROID_RELEASE_LIB(${LEPTONICA}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libleptonica.a)
+dk_include					(${LEPTONICA})
+dk_include					(${LEPTONICA}/${triple}/src)
+dk_include					(${LEPTONICA_RELEASE_DIR}/src)
+if(MULTI_CONFIG)
+ if(MSVC)
+	WIN_dk_libDebug			(${LEPTONICA}/${triple}/src/${DEBUG_DIR}/leptonica-1.84.0d.lib)
+	WIN_dk_libRelease		(${LEPTONICA}/${triple}/src/${RELEASE_DIR}/leptonica-1.84.0.lib)
+	ANDROID_dk_libDebug		(${LEPTONICA}/${triple}/src/${DEBUG_DIR}/libleptonica.a)
+	ANDROID_dk_libRelease	(${LEPTONICA}/${triple}/src/${RELEASE_DIR}/libleptonica.a)
+ else()
+	dk_libDebug				(${LEPTONICA}/${triple}/src/${DEBUG_DIR}/libleptonica.a)
+	dk_libRelease			(${LEPTONICA}/${triple}/src/${RELEASE_DIR}/libleptonica.a)
+ endif()
+else()
+	dk_libDebug				(${LEPTONICA_DEBUG_DIR}/src/libleptonica.a)
+	dk_libRelease			(${LEPTONICA_RELEASE_DIR}/src/libleptonica.a)
+endif()
 
+### 3RDPARTY LINK ###
+dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_CONFIG_DIR})
+
+### GENERATE ###
+#dk_configure(${LEPTONICA_DIR} 
+#	"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO}/${triple} /I${LIBPNG} /I${LIBPNG}/${triple} /I${TIFF}/${triple}/libtiff" 
+#	-DSTATIC=ON 
+#	-DCMAKE_INSTALL_PREFIX=${LEPTONICA} 
+#	-DSW_BUILD=OFF 
+#	${GIFLIB_CMAKE} 
+#	${LIBJPEG_TURBO_CMAKE} 
+#	${LIBPNG_CMAKE} 
+#	${TIFF_CMAKE} 
+#	${ZLIB_CMAKE})
+	
+dk_configure(${LEPTONICA_DIR} 
+	-DSTATIC=ON 
+	-DCMAKE_INSTALL_PREFIX=${LEPTONICA}
+	-DSW_BUILD=OFF
+	${GIFLIB_CMAKE}
+	${LIBJPEG_TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LIBWEBP_CMAKE}
+	${TIFF_CMAKE}
+	${ZLIB_CMAKE})
 
 ### COMPILE ###
-WIN_PATH(${LEPTONICA}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} -DSTATIC=ON ${ZLIB_WIN} ${TIFF_WIN} ${PNG_WIN} ${JPEG_WIN} ${GIF_WIN} ${LEPTONICA})
-WIN64_COMMAND(${DKCMAKE_WIN64} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_WIN} ${TIFF_WIN} ${PNG_WIN} ${JPEG_WIN} ${LEPTONICA})
-WIN_VS(${LEPTONICA_NAME} LEPTONICA.sln leptonica)
-
-
-MAC_PATH(${LEPTONICA}/${OS})
-MAC64_COMMAND(${DKCMAKE_MAC64} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_APPLE} ${TIFF_APPLE} ${PNG_APPLE} ${JPEG_APPLE} ${LEPTONICA})
-MAC_XCODE(${LEPTONICA_NAME} leptonica)
-
-
-IOS_PATH(${LEPTONICA}/${OS})
-IOS64_COMMAND(${DKCMAKE_IOS64} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_APPLE} ${TIFF_APPLE} ${PNG_APPLE} ${JPEG_APPLE} ${LEPTONICA})
-IOS_XCODE(${LEPTONICA_NAME} leptonica)
-
-
-IOSSIM_PATH(${LEPTONICA}/${OS})
-IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${SDL2_APPLE} ${TIFF_APPLE} ${PNG_APPLE} ${JPEG_APPLE} ${LEPTONICA})
-IOSSIM_XCODE(${LEPTONICA_NAME} leptonica)
-
-
-LINUX_DEBUG_PATH(${LEPTONICA}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_LINUX} ${TIFF_LINUX} ${PNG_APPLE} ${JPEG_LINUX} ${LEPTONICA})
-LINUX_DEBUG_COMMAND(make leptonica)
-
-LINUX_RELEASE_PATH(${LEPTONICA}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_LINUX} ${TIFF_LINUX} ${PNG_APPLE} ${JPEG_LINUX} ${LEPTONICA})
-LINUX_RELEASE_COMMAND(make leptonica)
-
-
-RASPBERRY_DEBUG_PATH(${LEPTONICA}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_COMMAND(${DKCMAKE_RASPBERRY_DEBUG} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_RASPBERRY} ${TIFF_RASPBERRY} ${PNG_APPLE} ${JPEG_RASPBERRY} ${LEPTONICA})
-RASPBERRY_DEBUG_COMMAND(make leptonica)
-
-RASPBERRY_RELEASE_PATH(${LEPTONICA}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_COMMAND(${DKCMAKE_RASPBERRY_RELEASE} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_RASPBERRY} ${TIFF_RASPBERRY} ${PNG_APPLE} ${JPEG_RASPBERRY} ${LEPTONICA})
-RASPBERRY_RELEASE_COMMAND(make leptonica)
-
-
-ANDROID_NDK(${LEPTONICA_NAME})
+dk_build(${LEPTONICA_DIR} leptonica)

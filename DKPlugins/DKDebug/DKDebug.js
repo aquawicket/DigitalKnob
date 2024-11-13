@@ -1,8 +1,7 @@
-"use strict";
+//"use strict";
 
-dk.debug = new DKPlugin(DKDebug, "singleton")
-
-function DKDebug() {}
+function DKDebug(){}
+dk.debug = DKPlugin(DKDebug)
 
 /*
 //Error-first callbacks
@@ -106,12 +105,12 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
         console.debug(objstrings.length + " suspected objects in the path");
 
         const objs = [window];
-        for (let n = 0; n < objstrings.length; n++) {
+        for (var n = 0; n < objstrings.length; n++) {
             //objs.push()
             objs.push(objs[n][objstrings[n]]);
             if (objs[n + 1] === undefined) {
-                let errmsg = "";
-                for (let nn = 0; nn < n + 1; nn++) {
+                var errmsg = "";
+                for (var nn = 0; nn < n + 1; nn++) {
                     if (nn === n)
                         errmsg += "(";
                     errmsg += objstrings[nn];
@@ -186,19 +185,19 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     //dk.php.call('GET', "/DKFile/DKFile.php", "DirectoryContents", ".", console.log);
 
     /*
-    let address = "aquawicket@hotmail.com";
-    let subject = "Test PHP email";
-    let msg = "testing if php mail sending is still successful";
+    var address = "aquawicket@hotmail.com";
+    var subject = "Test PHP email";
+    var msg = "testing if php mail sending is still successful";
     dk.php.call('GET',"/DK/DK.php", "sendEmail", address, subject, msg, console.log);
     */
 
     /*
-    let path = ".";
+    var path = ".";
     dk.php.call('GET','/DKFile/DKFile.php', 'IsDirectory', path, console.log);
     */
 
     /*
-    let path = ".";
+    var path = ".";
     dk.php.call('GET','/DKFile/DKFile.php', 'IsDirectory', path, function dk_php_call_callback(rval){
         rval && console.debug("true");
         !rval && console.debug("false");
@@ -206,17 +205,17 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     */
 
     /*
-    let path = "";
+    var path = "";
     dk.php.call('GET','/DKFile/DKFile.php', 'GetAbsolutePath', path, console.log);
     */
 
     /*
-    let path = "../DK/../";
+    var path = "../DK/../";
     dk.php.call('GET','/DKFile/DKFile.php', 'GetRelativePath', path, console.log);
     */
 
     /*
-    let path = ".";
+    var path = ".";
     dk.php.call('GET','/DKFile/DKFile.php', 'PathExists', path, function dk_php_call_callback(rval){
         rval && console.debug("true");
         !rval && console.debug("false");
@@ -353,7 +352,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     /*
     //Update time on all Tasmota devices
     const dateInMilliseconds = GetDateInMilliseconds();
-    for (let n = 0; n < devices.length; n++) {
+    for (var n = 0; n < devices.length; n++) {
         const cmnd = "timezone -7";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
         DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {//console.log("DK_SendRequest("+success+","+url+","+data+")");
@@ -369,7 +368,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
 
     /*
     //Get time from all Tasmota devices
-    for (let n = 0; n < devices.length; n++) {
+    for (var n = 0; n < devices.length; n++) {
         const cmnd = "time";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
         DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {
@@ -380,7 +379,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     */
 
     /*
-    DKCreateFramedWindow("testWindow", 300, 300);
+    CPP_DK_CreateFramedWindow("testWindow", 300, 300);
     */
 
     /*
@@ -427,11 +426,11 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
         f: null
     };
 
-    let myData = [];
+    var myData = [];
     const onDataReceived = function onDataReceived(input) {
         if (myData.length) {
-            for (let value in input) {
-                let skipUndefineds = (myData.length - 1);
+            for (var value in input) {
+                var skipUndefineds = (myData.length - 1);
                 while (skipUndefineds && !myData[skipUndefineds][value]) {
                     skipUndefineds--;
                 }
@@ -463,32 +462,26 @@ DKDebug.prototype.onevent = function DKDebug_onevent(event) {
         dk.debug.logKey(event.code);
         dk.debug.checkKeys();
     }
-
     if (event.type === "keydown" && event.code === "F12") {
         if (dk.hasCPP()) {
-            if (typeof dkcef.showDevTools === 'function') {
+            if (typeof dkcef.showDevTools === 'function')
                 dkcef.showDevTools(0);
-            }
-            if (typeof dkrml.debuggerOn === 'function') {
+            if (typeof dkrml.debuggerOn === 'function')
                 dkrml.debuggerOn();
-            }
         }
     }
 }
 
 DKDebug.prototype.logKey = function DKDebug_logKey(code) {
-    if (dk.debug.keyHistory.length > 20) {
+    if (dk.debug.keyHistory.length > 20)
         dk.debug.keyHistory.shift();
-    }
     dk.debug.keyHistory[dk.debug.keyHistory.length] = code;
 }
 
 DKDebug.prototype.checkKeys = function DKDebug_checkKeys() {
-    let string = "";
-    for (let n = 0; n < dk.debug.keyHistory.length; n++) {
+    var string = "";
+    for (var n = 0; n < dk.debug.keyHistory.length; n++)
         string += dk.debug.keyToChar(dk.debug.keyHistory[n]);
-    }
-
     //check for commands
     if (string.includes("dkreload")) {
         console.log("*** dk.debug.reload() ***");
@@ -623,7 +616,7 @@ DKDebug.prototype.pushDKFiles = function DKDebug_pushDKFiles() {
     }
     console.log("assets = " + assets);
     var search = assets;
-    while (!CPP_DKFile_Exists(search + "/DK/DKPlugins")) {
+    while (!CPP_DKFile_Exists(search + "/Development/DKPlugins")) {
         var n = search.lastIndexOf("/");
         if (n === -1) {
             return error("could not locate a DKPlugins folder");
@@ -631,21 +624,21 @@ DKDebug.prototype.pushDKFiles = function DKDebug_pushDKFiles() {
         search = search.substring(0, n);
         console.log(search + "");
     }
-    DKPATH = search;
-    if (!CPP_DKFile_Exists(DKPATH)) {
+    DIGITALKNOB_DIR = search;
+    if (!CPP_DKFile_Exists(DIGITALKNOB_DIR)) {
         return error("Could not find search");
     }
-    var temp = CPP_DKFile_DirectoryContents(DKPATH);
+    var temp = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR);
     if (!temp) {
         console.log("dk.debug.PushDKFiles() variable temp is invalid");
         return false;
     }
     var folders = temp.split(",");
     var plugin_folders = [];
-    plugin_folders.push(DKPATH + "/DK/DKPlugins");
+    plugin_folders.push(DIGITALKNOB_DIR + "/Development/DKPlugins");
     for (var n = 0; n < folders.length; n++) {
-        if (CPP_DKFile_Exists(DKPATH + "/" + folders[n] + "/DKPlugins"))
-            plugin_folders.push(DKPATH + "/" + folders[n] + "/DKPlugins");
+        if (CPP_DKFile_Exists(DIGITALKNOB_DIR + "/" + folders[n] + "/DKPlugins"))
+            plugin_folders.push(DIGITALKNOB_DIR + "/" + folders[n] + "/DKPlugins");
     }
     for (var n = 0; n < plugin_folders.length; n++) {
         plugin_folders[n] = CPP_DKFile_GetAbsolutePath(plugin_folders[n]);
@@ -695,25 +688,22 @@ DKDebug.prototype.printInfo = function DKDebug_printInfo() {
     var objects = dk.getObjects();
     var arry = objects.split(",");
     for (var n = 0; n < arry.length; n++) {
-        if (!arry[n]) {
+        if (!arry[n])
             continue;
-        }
         console.log(arry[n]);
     }
-    console.log("\n");
-
+    console.log("\n")
     console.log("**** DKEVENTS ****");
     var events = dk.getEvents();
     var arry = events.split(",");
     for (var n = 0; n < arry.length; n++) {
-        if (!arry[n]) {
+        if (!arry[n])
             continue;
-        }
         console.log(arry[n]);
     }
     console.log("\n");
 
-    console.log("**** DKEVENTS ****");
+    console.log("**** DKFUNCTIONS ****");
     var events = dk.getFunctions();
     var arry = events.split(",");
     for (var n = 0; n < arry.length; n++) {
@@ -755,10 +745,9 @@ DKDebug.prototype.editor = function DKDebug_editor() {
 }
 
 DKDebug.prototype.debugger = function DKDebug_debugger() {
-    if (dk.getBrowser() === "RML" || dk.getJSEngine() === "Duktape") {
+    if (dk.getBrowser() === "RML" || dk.getJSEngine() === "Duktape")
         dkrml.debuggerToggle();
-    }
-    if (dk.getBrowser() === "CEF") {
+    if (dk.getBrowser() === "CEF")
         dkcef.showDevTools(0);
-    }
 }
+

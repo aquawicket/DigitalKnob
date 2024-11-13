@@ -1,96 +1,46 @@
-# https://dist.libuv.org/dist/1.37.0/libuv-1.37.0.tar.gz
-
-### VERSION ###
-DKSET(UV_MAJOR 1)
-DKSET(UV_MINOR 37)
-DKSET(UV_BUILD 0)
-DKSET(UV_VERSION v${UV_MAJOR}.${UV_MINOR}.${UV_BUILD})
-DKSET(UV_NAME libuv-${UV_VERSION})
-DKSET(UV_DL https://dist.libuv.org/dist/${UV_VERSION}/${UV_NAME}.tar.gz)
-DKSET(UV ${3RDPARTY}/${UV_NAME})
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### INSTALL ###
-DKINSTALL(${UV_NAME} libuv ${UV})
+############ libuv ############
+# https://github.com/libuv/libuv.git
 
+dk_load				(dk_builder)
 
+### DEPEND ###
+dk_depend			(iphlpapi)
+dk_depend			(userenv)
 
-### DKPLUGINS LINK ###
-LIST(APPEND WIN_LIBS Iphlpapi.lib)
-LIST(APPEND WIN_LIBS Userenv.lib)
-DKINCLUDE(${UV}/include)
-DKINCLUDE(${UV}/${OS})
-WIN_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/uv_a.lib)
-WIN_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/uv_a.lib)
-MAC_DEBUG_LIB(${UV}/${OS}/lib/${DEBUG_DIR}/libuv_a.a)
-MAC_RELEASE_LIB(${UV}/${OS}/lib/${RELEASE_DIR}/libuv_a.a)
-IOSSIM_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/lib/.libs/libuv_a.a)
-IOSSIM_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/lib/.libs/libuv_a.a)
-LINUX_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/libuv_a.a)
-LINUX_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/libuv_a.a)
-RASPBERRY_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/libuv_a.a)
-RASPBERRY_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/libuv_a.a)
-## ANDROID_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libuv_a.a)
-## ANDROID_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libuv_a.a)
-ANDROID_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/libuv_a.a)
-ANDROID_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/libuv_a.a)
+### IMPORT ###
+dk_validate			(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam 	("${DKIMPORTS_DIR}/libuv/libuv.txt" LIBUV_DL)
+dk_import			(${LIBUV_DL})
 
-
+### LINK ###
+dk_include			(${LIBUV}/include					LIBUV_INCLUDE_DIR)
+dk_include			(${LIBUV}/${triple})
+if(MSVC)
+	dk_libDebug		(${LIBUV_DEBUG_DIR}/uv_a.lib		LIBUV_DEBUG_LIBRARY)
+	dk_libRelease	(${LIBUV_RELEASE_DIR}/uv_a.lib		LIBUV_RELEASE_LIBRARY)
+else()
+	dk_libDebug		(${LIBUV_DEBUG_DIR}/libuv_a.a		LIBUV_DEBUG_LIBRARY)
+	dk_libRelease	(${LIBUV_RELEASE_DIR}/libuv_a.a		LIBUV_RELEASE_LIBRARY)
+endif()
+if(DEBUG)
+	set				(LIBUV_LIBRARY ${LIBUV_DEBUG_LIBRARY})
+endif()
+if(RELEASE)
+	set				(LIBUV_LIBRARY ${LIBUV_RELEASE_LIBRARY})
+endif()
 
 ### 3RDPARTY LINK ###
-DKSET(LIBUV_WIN -DLIBUV_INCLUDE_DIR=${UV} -DLIBUV_LIBRARY=${UV}/${OS}/${RELEASE_DIR}/uv_a.lib)
-DKSET(LIBUV_APPLE -DLIBUV_INCLUDE_DIR=${UV} -DLIBUV_LIBRARY=${UV}/${OS}/${RELEASE_DIR}/uv_a.a)
-DKSET(LIBUV_LINUX -DLIBUV_INCLUDE_DIR=${UV} -DLIBUV_LIBRARY=${UV}/${OS}/${RELEASE_DIR}/uv_a.a)
-DKSET(LIBUV_RASPBERRY -DLIBUV_INCLUDE_DIR=${UV} -DLIBUV_LIBRARY=${UV}/${OS}/${RELEASE_DIR}/uv_a.a)
-DKSET(LIBUV_ANDROID -DLIBUV_INCLUDE_DIR=${UV} -DLIBUV_LIBRARY=${UV}/${OS}/${RELEASE_DIR}/uv_a.a)
+dk_set				(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV_INCLUDE_DIR} -DLIBUV_LIBRARY=${LIBUV_LIBRARY})
 
-
+### GENERATE ###
+dk_configure		(${LIBUV})
 
 ### COMPILE ###
-WIN_PATH(${UV}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${UV})
-WIN64_COMMAND(${DKCMAKE_WIN64} ${UV})
-WIN_VS( libuv.sln uv_a)
-
-
-MAC_PATH(${UV}/${OS})
-MAC64_COMMAND(${DKCMAKE_MAC64} ${UV})
-MAC64_XCODE_DEBUG(${UV_NAME} uv_a)
-MAC64_XCODE_RELEASE(${UV_NAME} uv_a)
-
-
-IOS_PATH(${UV}/${OS})
-IOS_COMMAND(${DKCMAKE_IOS64} ${UV})
-IOS_XCODE_DEBUG(${UV_NAME} uv_a)
-IOS_XCODE_RELEASE(${UV_NAME} uv_a)
-
-
-IOSSIM_PATH(${UV}/${OS})
-IOSSIM_COMMAND(${DKCMAKE_IOSSIM64} ${UV})
-IOSSIM_XCODE_DEBUG(${UV_NAME} uv_a)
-IOSSIM_XCODE_RELEASE(${UV_NAME} uv_a)
-
-
-LINUX_DEBUG_PATH(${UV}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${UV})
-LINUX_DEBUG_COMMAND(make uv_a)
-
-LINUX_RELEASE_PATH(${UV}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${UV})
-LINUX_RELEASE_COMMAND(make uv_a)
-
-
-RASPBERRY_DEBUG_PATH(${UV}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_COMMAND(${DKCMAKE_RASPBERRY_DEBUG} ${UV})
-RASPBERRY_DEBUG_COMMAND(make uv_a)
-
-RASPBERRY_RELEASE_PATH(${UV}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_COMMAND(${DKCMAKE_RASPBERRY_RELEASE} ${UV})
-RASPBERRY_RELEASE_COMMAND(make uv_a)
-
-
-## ANDROID_NDK(${UV_NAME})
-ANDROID_PATH(${UV}/${OS})
-ANDROID32_COMMAND(${DKCMAKE_ANDROID32} ${UV})
-ANDROID64_COMMAND(${DKCMAKE_ANDROID64} ${UV})
-ANDROID_VS(${UV_NAME} libuv.sln uv_a)
+dk_build			(${LIBUV} uv_a)

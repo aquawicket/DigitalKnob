@@ -79,7 +79,7 @@ function DKAdminMenu_OnEvent(event)
 	if(event.currentTarget.id === "Git"){
 		dk.create("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
-			byId("DKGit/GitMenu.html").style.top = DKWindow_GetMouseY()-30+"px";
+			byId("DKGit/GitMenu.html").style.top = CPP_DKWindow_GetMouseY()-30+"px";
 		});
 	}
 	if(event.currentTarget.id === "OpenSource"){
@@ -95,8 +95,8 @@ function DKAdminMenu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id === "OpenDebug"){
-		//DKRocket_ToggleDebugger();
-		DKCef_ShowDevTools(0);
+		//CPP_DKRml_ToggleDebugger();
+		CPP_DKCef_ShowDevTools(0);
 	}
 	if(event.currentTarget.id === "PushDKFiles"){
 		DKDebug_PushDKFiles();
@@ -165,6 +165,6 @@ function DKAdminMenu_Run(command)
 		DK_RunDuktape(command);
 	}
 	else{
-		DKCef_RunJavascript(0,command);
+		CPP_DKCef_RunJavascript(0,command);
 	}
 }

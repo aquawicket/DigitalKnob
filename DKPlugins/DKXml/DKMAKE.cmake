@@ -1,14 +1,23 @@
-DKDEPEND(libxml2)
-DKDEPEND(pugixml)
-IF(USE_DKDuktape)
-	DKDEPEND(DKDuktape)
-ENDIF()
-IF(USE_DKCef)
-	DKDEPEND(DKCef)
-ENDIF()
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-DKCOPY(${PUGIXML}/src/pugixml.cpp ${DKPLUGINS}/DKXml/pugixml.cpp FALSE)
-DKINCLUDE(${PUGIXML}/src)
-DKINCLUDE(${XML2}/include)
-DKPLUGIN(DKXml)
+############ DKXml ############
+dk_depend(libxml2)
+dk_depend(pugixml)
+if(HAVE_DKDuktape)
+	dk_depend(DKDuktape)
+endif()
+if(HAVE_DKCef)
+	dk_depend(DKCef)
+endif()
+
+
+#dk_copy(${PUGIXML}/src/pugixml.hpp ${DKPLUGINS_DIR}/DKXml/pugixml.hpp)
+dk_copy(${PUGIXML}/src/pugixml.cpp ${DKPLUGINS_DIR}/DKXml/pugixml.cpp)
+dk_include(${PUGIXML}/src)
+dk_include(${LIBXML2}/include)
+dk_generateCmake(DKXml)

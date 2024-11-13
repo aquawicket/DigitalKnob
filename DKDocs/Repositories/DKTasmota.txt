@@ -1,0 +1,5 @@
+// Copy this file to the root digitalknob directory (next to the /DK folder) 
+// The repository will then be detected in the DKBuilder App
+
+[MYGIT] https://github.com/aquawicket/DKTasmota.git
+[MYSVN] https://github.com/aquawicket/DKTasmota/trunk/

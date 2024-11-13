@@ -1,0 +1,106 @@
+#!/usr/bin/cmake -P
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+#include_guard()
+
+###############################################################################
+# dk_createIcons(image)
+#
+#	@image		- Full path of the image file to use (.png)
+#	@outpath	- Full path of the output file to save to (.ico)
+#
+function(dk_createIcons)
+	dk_debugFunc(1)
+	
+	set(image ${ARGV0})
+	if(NOT EXISTS ${image})
+		dk_warning("dk_createIcons(): image:${image} not found.")
+		return()
+	endif()
+
+	dk_assertVar(APP_NAME)
+	dk_assertVar(OS)
+	dk_info("Building ${OS} icons for ${APP_NAME} . . .")
+	
+	dk_assertPath(${DK_PROJECT_DIR})
+	dk_makeDirectory(${DK_PROJECT_DIR}/assets)
+	dk_copy(${image} ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
+	
+	
+	if(ANDROID)
+		if(DEBUG)
+			dk_resizeImage(${image} 36 36 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+			dk_resizeImage(${image} 48 48 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+			dk_resizeImage(${image} 72 72 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+			dk_resizeImage(${image} 96 96 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+			dk_resizeImage(${image} 144 144 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+			dk_resizeImage(${image} 192 192 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+		endif()
+		if(RELEASE)
+			dk_resizeImage(${image}/icons/icon.png 36 36 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+			dk_resizeImage(${image}/icons/icon.png 48 48 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+			dk_resizeImage(${image}/icons/icon.png 72 72 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+			dk_resizeImage(${image}/icons/icon.png 96 96 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+			dk_resizeImage(${image}/icons/icon.png 144 144 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+			dk_resizeImage(${image}/icons/icon.png 192 192 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+		endif()
+		#dk_createFavIcon(${image} ${DK_PROJECT_DIR}/assets/favicon.ico)
+	endif()
+	
+	if(WIN)
+		dk_createWindowsIcon(${image} ${DK_PROJECT_DIR}/icons/windows/icon.ico)
+		dk_copy(${DK_PROJECT_DIR}/icons/windows/icon.ico ${DK_PROJECT_DIR}/assets/icon.ico OVERWRITE)
+		dk_createFavIcon(${image} ${DK_PROJECT_DIR}/assets/favicon.ico)
+	endif()
+	
+	if(MAC)
+		dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac)
+		dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac/icons.iconset)
+		dk_resizeImage(${image} 16 16 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16.png)
+		dk_resizeImage(${image} 32 32 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16@2x.png)
+		dk_resizeImage(${image} 32 32 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32.png)
+		dk_resizeImage(${image} 64 64 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32@2x.png)
+		dk_resizeImage(${image} 128 128 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128.png)
+		dk_resizeImage(${image} 256 256 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128@2x.png)
+		dk_resizeImage(${image} 256 256 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256.png)
+		dk_resizeImage(${image} 512 512 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256@2x.png)
+		dk_resizeImage(${image} 512 512 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512.png)
+		dk_resizeImage(${image} 1024 1024 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512@2x.png)
+		dk_executeProcess(iconutil -c icns -o ${DK_PROJECT_DIR}/icons/mac/icons.icns ${DK_PROJECT_DIR}/icons/mac/icons.iconset)
+		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
+		set(app_ICONS ${DK_PROJECT_DIR}/icons/mac/icons.icns)
+		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+		#dk_createFavIcon(${image} ${DK_PROJECT_DIR}/assets/favicon.ico)
+	endif()
+	
+	if(IOS OR IOSSIM)
+		dk_makeDirectory(${DK_PROJECT_DIR}/icons/ios)
+		dk_makeDirectory(${DK_PROJECT_DIR}/icons/ios/icons.iconset)
+		dk_resizeImage(${image} 16 16 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_16x16.png)
+		dk_resizeImage(${image} 32 32 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_16x16@2x.png)
+		dk_resizeImage(${image} 32 32 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_32x32.png)
+		dk_resizeImage(${image} 64 64 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_32x32@2x.png)
+		dk_resizeImage(${image} 128 128 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_128x128.png)
+		dk_resizeImage(${image} 256 256 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_128x128@2x.png)
+		dk_resizeImage(${image} 256 256 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_256x256.png)
+		dk_resizeImage(${image} 512 512 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_256x256@2x.png)
+		dk_resizeImage(${image} 512 512 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_512x512.png)
+		dk_resizeImage(${image} 1024 1024 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_512x512@2x.png)
+		dk_executeProcess(iconutil -c icns -o ${DK_PROJECT_DIR}/icons/ios/icons.icns ${DK_PROJECT_DIR}/icons/ios/icons.iconset)
+		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
+		set(app_ICONS ${DK_PROJECT_DIR}/icons/ios/icons.icns)
+		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+		#dk_createFavIcon(${image} ${DK_PROJECT_DIR}/assets/favicon.ico)
+	endif()
+endfunction()
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc()
+	
+	
+	dk_validate(triple "dk_builder()")
+	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+endfunction()

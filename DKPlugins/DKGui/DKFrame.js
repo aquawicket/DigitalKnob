@@ -1,30 +1,33 @@
-"use strict";
+//"use strict";
 
 function DKFrame() {}
+
 DKFrame.prototype.init = function DKFrame_init() {
     dk.create("DKGui/DKFrame.css");
 }
-DKFrame.prototype.end = function DKFrame_end() {//dk.close("DKGui/DKFrame.css");
+DKFrame.prototype.end = function DKFrame_end() {
+	//dk.close("DKGui/DKFrame.css");
 }
 
 DKFrame.prototype.create = function DKFrame_create(obj) {
     //dk.dumpVariable(obj);
 
-    let instance;
-    let type;
-    let element;
-    if (obj instanceof DKFrame)
+    var instance;
+    var type;
+    var element;
+    if (obj && obj instanceof DKFrame)
         type = "DKFrame"
-    else if (obj instanceof HTMLElement) {
+    else if (obj && obj instanceof HTMLElement) {
         type = "HTMLElement"
         element = obj;
-    } else if (obj instanceof DKPlugin)
+    } 
+	else if (obj && obj instanceof DKPlugin)
         type = "DKPlugin"
-    else if (obj.dkplugin)
+    else if (obj && obj.dkplugin)
         type = "DKPlugin"
-    else if (typeof obj === "string")
+    else if (obj && typeof obj === "string")
         type = "string"
-    else if (obj.constructor.name)
+    else if (obj && obj.constructor.name)
         type = obj.constructor.name
     else
         return error("Could not determine argument type")
@@ -36,9 +39,8 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     if (obj instanceof HTMLElement)
         element = obj;
     else {
-        for (let key in obj) {
+        for (var key in obj) {
             if (obj[key]instanceof HTMLElement) {
-                //obj.id && (id = obj.id);
                 element = obj[key];
                 if (element.id && element.id.includes(".html"))
                     break;
@@ -65,26 +67,33 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
         width: "unset",
         height: "unset"
     })
+	instance.frame.content.setAttribute("id", "dk_frame_content");
     instance.frame.content.setAttribute("dk_frame", "content");
     instance.frame.appendChild(instance.frame.content);
-    DKPlugin("DKGui/DKResize.js", function(DKClass) {
-        instance.resize = DKClass.prototype.createBox(instance.frame);
+	DKPlugin("DKGui/DKResize.js", function(DKClass) {
+		if(!DKClass)
+			return error("DKClass invalid")
+		console.log("DKClass = "+DKClass)
+		
+		//if(!DKClass.prototype)
+		//	return error("DKClass.prototype invalid")
+        
+		//instance.resize = DKClass.prototype.createBox(instance.frame);
+		this.resize = null
     })
-
     return instance;
-
 }
 
 DKFrame.prototype.close = function DKFrame_close() {
     this.resize && this.resize.close && this.resize.close();
-    this.dkplugin.close && this.dkplugin.close();
+    this.dkplugin && this.dkplugin.close && this.dkplugin.close();
 }
 
 DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, height) {
-    const instance = this;
+    var instance = this;
     if (typeof title !== "string")
         return error("title invalid\n");
-    const scale = 200;
+    var scale = 200;
     (width === "100%") && (width = window.innerWidth - scale);
     (height === "100%") && (height = window.innerHeight - 21 - scale);
     !width && (width = window.innerWidth / 2);
@@ -93,12 +102,14 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     var newheight = parseFloat(height) + 21;
     var newtop = parseFloat((window.innerHeight / 2) - (newheight / 2) - 1);
     var newleft = parseFloat((window.innerWidth / 2) - (width / 2) - 1)
-    let frame = dk.gui.createElement(document.body, "div", "dk_frame_box");
+    var frame = dk.gui.createElement(document.body, "div", "dk_frame_box");
     this.frame = frame;
 
-    //See DKFrame.css for styling    
+    //See DKFrame.css for styling
+	frame.setAttribute("id", "dk_frame_frame");
     frame.setAttribute("dk_frame", "frame");
-    frame.style.top = newtop + "px";
+    frame.style.position = "absolute";
+	frame.style.top = newtop + "px";
     frame.style.left = newleft + "px";
     frame.style.width = width + "rem";
     frame.style.height = newheight + "rem";
@@ -113,6 +124,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
 
     //See DKFrame.css for styling
     frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
+	frame.titlebar.setAttribute("id", "dk_frame_titlebar");
     frame.titlebar.setAttribute("dk_frame", "titlebar");
     frame.titlebar.ondblclick = function DKFrame_titlebar_ondblclick(event) {
         event.stopPropagation();
@@ -120,16 +132,18 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     }
     dk.drag.addHandle(frame.titlebar, frame);
 
-    frame.titlebaricon = dk.gui.createElement(frame.titlebar, "img", "dk_frame_titlebaricon");
-    frame.titlebaricon.src = "DKGui/window.png";
-    frame.titlebaricon.setAttribute("dk_frame", "titlebaricon");
+    //frame.titlebaricon = dk.gui.createElement(frame.titlebar, "img", "dk_frame_titlebaricon");
+    //frame.titlebaricon.src = "DKGui/window.png";
+    //frame.titlebaricon.setAttribute("dk_frame", "titlebaricon");
 
     //See DKFrame.css for styling
     frame.titlebartext = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
+	frame.titlebartext.setAttribute("id", "dk_frame_titlebartext");
     frame.titlebartext.setAttribute("dk_frame", "titlebartext");
     frame.titlebartext.innerHTML = title;
 
     frame.reload = dk.gui.createElement(frame.titlebar, "img", "dk_frame_reload");
+	frame.reload.setAttribute("id", "dk_frame_reload");
     frame.reload.setAttribute("dk_frame", "reload");
     frame.reload.setAttribute("src", "DKGui/reload.png");
     frame.reload.onmousedown = function DKFrame_reload_onmousedown(event) {
@@ -138,6 +152,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     }
 
     frame.minimize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_minimize");
+	frame.minimize.setAttribute("id", "dk_frame_minimize");
     frame.minimize.setAttribute("dk_frame", "minimize");
     frame.minimize.setAttribute("src", "DKGui/minimize.png");
     frame.minimize.onmousedown = function DKFrame_minimize_onmousedown(event) {
@@ -146,6 +161,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     }
 
     frame.maximize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_maximize");
+	frame.maximize.setAttribute("id", "dk_frame_maximize");
     frame.maximize.setAttribute("dk_frame", "maximize");
     frame.maximize.setAttribute("src", "DKGui/maximize.png");
     frame.maximize.onmousedown = function DKFrame_maximize_onmousedown(event) {
@@ -154,6 +170,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     }
 
     frame.close = dk.gui.createElement(frame.titlebar, "img", "dk_frame_close");
+	frame.close.setAttribute("id", "dk_frame_close");
     frame.close.setAttribute("dk_frame", "close");
     frame.close.setAttribute("src", "DKGui/close.png");
     frame.close.onmousedown = function DKFrame_close_onmousedown(event) {
@@ -208,7 +225,7 @@ DKFrame.prototype.minimize = function DKFrame_minimize() {
         this.frame.close.style.visibility = "hidden";
         this.frame.resize.image.style.visibility = "hidden";
         this.frame.resize.corner.style.visibility = "hidden";
-        const instance = this;
+        var instance = this;
         this.frame.titlebar.onclick = function DKFrame_titlebar_onclick(event) {
             event.stopPropagation();
             instance.minimize(instance.frame.minimize);
@@ -229,13 +246,13 @@ DKFrame.prototype.minimize = function DKFrame_minimize() {
 
 DKFrame.prototype.reload = function DKFrame_reload() {
     console.log("DKFrame.prototype.reload()");
-    const url = this.dkplugin.prototype.url
+    var url = this.dkplugin.prototype.url
     this.dkplugin.close();
     this.frame.parentNode.removeChild(this.frame);
     DKPlugin.prototype.close.call(this);
 
     //open everything back up
-    const instance = this;
+    var instance = this;
     DKPlugin(url, function() {
         instance.dkplugin.create();
     });
@@ -273,7 +290,7 @@ DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
 }
 
 DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url) {
-    const instance = DKPlugin(DKFrame, title)
+    var instance = DKPlugin(DKFrame, title)
     //if (!instance.ok) {
     //    instance.frame && DKFrame.prototype.bringToFront(instance.frame);
     //    return false;
@@ -314,10 +331,10 @@ DKFrame.prototype.iFrame = function DKFrame_Iframe(title, url, width, height) {
 
     this.createResize(frame);
 
-    //var currentBrowser = DKCef_GetCurrentBrowser();
-    //DKCef_SetUrl(currentBrowser, url);
+    //var currentBrowser = CPP_DKCef_GetCurrentBrowser();
+    //CPP_DKCef_SetUrl(currentBrowser, url);
     //this.createResize(frame);
-    //DKCef_SetFocus();
+    //CPP_DKCef_SetFocus();
     return iframe;
 }
 */

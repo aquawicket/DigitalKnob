@@ -1,0 +1,73 @@
+Output Window Class
+
+  The script here provides a class that can be pasted at the
+end of any script to provide an output window. Text can be added
+to the window at any point while a script is running. The window
+can also be closed and recreated. It works by setting up a TEXTAREA
+control in an HTA. The basic mechanism is the same as the custom 
+MsgBox.
+
+  The output window is simpler than the MsgBox class. The following 
+options are available:
+
+ Property Title - Text in window title bar.
+ 
+ Property OutputFontColor - Color of output text as HTML hex code. Defaults to "000000".
+ 
+ Property OutputBackColor - Color of output background as HTML hex code. Defaults to "FFFFFF".
+  
+ Property MsgStyle - Boolean. If set to true the output window displays with the system
+                             colors of a MsgBox and the TEXTAREA has no border.
+  
+ Property Width - Number of columns.
+ 
+ Property Height - Number of rows vertically.
+
+ Sub Show - Show the output window.
+ 
+ Sub Output(outText) - Adds text to the output window.
+ 
+ Sub ClearOutput - Clears output window text.
+ 
+ Sub CloseWindow - Closes output window.
+
+  The window background and title bar match the system colors.
+The adjustable properties need only be set once for the life of
+the class, but may also be changed between displays. 
+
+  The output window is meant for use with long scripts, when some
+kind of updating display is needed. When the script ends, any
+open output window will close. But while the script is running
+an output window can be left open without any looping
+required because it's an IE window.
+
+  As written, the window can be closed by the script or by clicking
+on the x at upper right of the output window. The class does not
+provide a check to make sure the window is open before writing
+to it. If the window has been closed the write will simply fail.
+If desired, the Output sub could be changed to a Boolean function,
+so that one could show a new window is the existing one is
+closed through the GUI. Alternatively, the webpage code for the
+window can be changed to remove the "x" by changing sysmenu=yes
+(in APage(0)) to sysmenu=no. That would prevent the window being
+closed except by the script.
+
+--------------------------------------------------------------------
+
+License:
+   You use all script code and components from JSWare at your own risk.
+
+   The components (compiled DLL and EXE files) may be used for personal or commercial purposes. No payment or attribution is required for either use. The components may be redistributed if they are required as support files for scripts or software that you have written.
+   Also, the script code may be used freely, in part or as whole scripts, for any purpose, personal or commercial, without payment or attribution.
+
+   I ask only that you not redistribute these scripts and components, except as required for your direct use. Instead, please direct others to obtain copies of JSWare scripts and components directly from www.jsware.net.
+
+   Also, none of the code here may be redistributed under another license. If a work using code from JSWare is distributed with restrictions of any kind the code from JSWare must be kept exempt from those restrictions. This includes, but is not limited to, code sold for profit, code with usage restrictions and code distributed as so-called "Open Source" with redistribution restrictions. 
+
+    Joe Priestley
+
+
+--------------------------------------------------------------------------------
+
+JSWare  •  www.jsware.net  •  jsware@jsware.net
+

@@ -1,18 +1,38 @@
-### VERSION ###
-DKSET(DOXYGEN_MAJOR 1)
-DKSET(DOXYGEN_MINOR 8)
-DKSET(DOXYGEN_BUILD 13)
-DKSET(DOXYGEN_VERSION ${DOXYGEN_MAJOR}.${DOXYGEN_MINOR}.${DOXYGEN_BUILD})
-DKSET(DOXYGEN_NAME doxygen-${DOXYGEN_VERSION})
-DKSET(DOXYGEN_DL https://sourceforge.net/projects/doxygen/files/rel-${DOXYGEN_VERSION}/${DOXYGEN_NAME}-setup.exe)
-DKSET(DOXYGEN "C:/Program Files/doxygen/bin")
-DKSET(DOXYGEN_EXE ${DOXYGEN}/doxygen.exe)
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
-### INSTALL ###
-IF(NOT EXISTS ${DOXYGEN_EXE})
-	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DOXYGEN_DL})
-	DKSET(QUEUE_BUILD ON)
-	WIN32_COMMAND(${DIGITALKNOB}/Download/${DOXYGEN_NAME}-setup.exe)
-ENDIF()
 
+############ doxygen ############
+# https://github.com/doxygen/doxygen.git
+# https://sourceforge.net/projects/doxygen
+# FIXME:  Install to /3rdParty only
+dk_load(dk_builder)
+
+if(NOT WIN_HOST)
+	dk_undepend(doxygen)
+	dk_return()
+endif()
+
+### IMPORT ###
+if(WIN_HOST)
+	dk_set(DOXYGEN_EXE "${ProgramFiles}/doxygen/bin/doxygen.exe")
+else()
+	dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
+endif()
+
+
+if(NOT EXISTS ${DOXYGEN_EXE})
+	if(WIN_HOST)
+		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6-setup.exe)
+		dk_command(${DKDOWNLOAD_DIR}/doxygen-1.9.6-setup.exe)
+	elseif(MAC_HOST)
+		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/Doxygen-1.9.6.dmg) #FIXME:  The Downloaded file is a BYPASS file .dmg
+		dk_command(${DKDOWNLOAD_DIR}/Doxygen-1.9.6.dmg)
+	else()
+		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6.linux.bin.tar.gz)
+		#dk_command(${DKDOWNLOAD_DIR}/doxygen-1.9.6.linux.bin.tar.gz) #FIXME
+	endif()
+endif()

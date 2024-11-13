@@ -1,7 +1,7 @@
 
-/////////////////////////
-function DKFpsTest_init()
-{
+function DKFpsTest(){}
+
+dk.fpstest.init function dk_fpstest_init(){
 	dk.create("DKFpsTest/DKFpsTest.html", function(){});
 
 	samplePoints = 10 //number of points to average for the red curve
@@ -60,10 +60,4 @@ function DKFpsTest_init()
     requestAnimationFrame(loop);
   });
 });
-}
-
-////////////////////////
-function DKFpsTest_end()
-{
-	
 }

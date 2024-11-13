@@ -1,0 +1,5 @@
+https://developer.android.com/studio/releases/gradle-plugin
+
+
+Change AndroidManifest.xml location
+https://diamantidis.github.io/tips/2020/07/11/specify-alternative-location-for-android-manifest-xml#:~:text=By%20default%2C%20Gradle%20expects%20an,set%20of%20every%20Android%20project.

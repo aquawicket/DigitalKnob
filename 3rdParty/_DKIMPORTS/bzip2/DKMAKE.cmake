@@ -1,121 +1,42 @@
-# https://github.com/philr/bzip2-windows
-
-DKDEPEND(mingw32)
-DKDEPEND(mingw64)
-DKDEPEND(msys)
-DKDEPEND(libgcc)
-
-### VERSION ###
-DKSET(BZIP2_VERSION 2-1.0.8)
-DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip${BZIP2_VERSION}.tar.gz)
-DKSET(BZIP2 ${3RDPARTY}/bzip${BZIP2_VERSION})
-
-
-### INSTALL ###
-if(0)
-	DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
-	DKCOPY(${BZIP2} ${BZIP2}/${OS} TRUE)
-else()
-	DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
-	if(NOT EXISTS ${3RDPARTY}/bzip2-temp)
-		DKCOPY(${BZIP2} ${3RDPARTY}/bzip2-temp TRUE)
-	endif()
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### DKPLUGINS LINK ###
-DKINCLUDE(${BZIP2})
-##WIN_DEBUG_LIB(${BZIP2}/${OS}/libgcc.a)
-##WIN_RELEASE_LIB(${BZIP2}/${OS}/libgcc.a)
-#WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2-static.lib)
-#WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2-static.lib)
-WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
-WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
-MAC_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
-MAC_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
-LINUX_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
-LINUX_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
-RASPBERRY_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
-RASPBERRY_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
-ANDROID_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
-ANDROID_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
+############ bzip2 ############
+dk_load(dk_builder)
+# https://www.sourceware.org/bzip2
+# https://gitlab.com/bzip2/bzip2
+# https://github.com/kiyolee/bzip2-win-build
+# https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
+# https://gitlab.com/bzip2/bzip2/-/archive/bzip2-1.0.8/bzip2-bzip2-1.0.8.zip
+# https://gist.github.com/DanAlbert/c7b6b2d93d4f6d672707803a6715095e			# ANDROID COMPILE
 
+### DEPEND ###
+#dk_depend(libgcc)
+dk_depend(python3)
+dk_depend(msys2)
+
+### IMPORT ###
+dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+dk_getFileParam("${DKIMPORTS_DIR}/bzip2/bzip2.txt" BZIP2_DL)
+dk_import(${BZIP2_DL})
+
+dk_include		(${BZIP2_DIR}/							BZIP2_INCLUDE_DIR)
+dk_libDebug		(${BZIP2_DEBUG_DIR}/libbz2_static.a		BZIP2_LIBRARY_DEBUG)
+dk_libRelease	(${BZIP2_RELEASE_DIR}/libbz2_static.a	BZIP2_LIBRARY_RELEASE)
 
 ### 3RDPARTY LINK ###
-DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
-DKSET(BZIP2_APPLE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
-DKSET(BZIP2_LINUX -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
-DKSET(BZIP2_RASPBERRY -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
-DKSET(BZIP2_ANDROID -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
+dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
 	
-
-### COMPILE ###
-if(WIN_32)
-	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
-	endif()
-
-WIN32_BASH("#!/bin/bash\;
-cd /${BZIP2}/${OS}\;
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-make CFLAGS='-static-libgcc'\;
-exit\;")
-
-	##DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
-	##TODO: look at _DKIMPORTS/libgcc
-	DKCOPY(${3RDPARTY}/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
-	##DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
+### CONFIGURE ###
+if(LINUX_HOST)
+	dk_configure(${BZIP2_DIR} -DENABLE_SHARED_LIB=OFF -DENABLE_STATIC_LIB=ON)
+else()
+	dk_configure(${BZIP2_DIR} -DENABLE_SHARED_LIB=OFF -DENABLE_STATIC_LIB=ON ${PYTHON3_CMAKE}) #-DPython3_EXECUTABLE=${PYTHON3_EXE})
 endif()
-
-
-IF(WIN_64)
-	IF(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
-	ENDIF()
-
-WIN64_BASH("#!/bin/bash\;
-cd /${BZIP2}/${OS}\;
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-make CFLAGS='-m64 -static-libgcc'\;
-exit\;")
-
-	##DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
-	DKCOPY(${3RDPARTY}/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
-	##DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
-ENDIF()
-
-IF(MAC_64)
-	IF(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
-	ENDIF()
-	DKSETPATH(${BZIP2}/${OS})
-	MAC_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
-ENDIF()
-
-IF(LINUX)
-	IF(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
-	ENDIF()
-	DKSETPATH(${BZIP2}/${OS})
-	LINUX_COMMAND(make)
-ENDIF()
-
-
-IF(RASPBERRY)
-	IF(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
-	ENDIF()
-	DKSETPATH(${BZIP2}/${OS})
-	RASPBERRY_COMMAND(make)
-ENDIF()
-
-
-IF(ANDROID)
-	IF(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
-	ENDIF()
-	DKSETPATH(${BZIP2}/${OS})
-	ANDROID_COMMAND(make)
-ENDIF()
+	
+### COMPILE ###
+dk_build(${BZIP2_DIR})

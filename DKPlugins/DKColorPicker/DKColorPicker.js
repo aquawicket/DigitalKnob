@@ -1,8 +1,8 @@
-"use_strict";
-
-dk.colorpicker = DKPlugin(DKColorPicker)
+//"use_strict";
 
 function DKColorPicker() {}
+dk.colorpicker = DKPlugin(DKColorPicker)
+
 
 //var event_type;
 //var event_id;

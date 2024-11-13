@@ -1,0 +1,373 @@
+https://4sysops.com/wiki/list-of-ms-settings-uri-commands-to-open-specific-settings-in-windows-10/history/?revision=1558411
+
+How to use the URI commands
+Here some different examples for using ms-setting commands:
+Press Win+R to open the Run dialog and type the ms-settings command
+Press WIN+I keys or from Start menu and type the ms-settings command
+Open a command prompt or Powershell and type "Start ms-settings:URI command"
+In the Windows Explorer address bar, type the ms-settings command
+Create a Windows shortcut and in the create shortcut window type "ms-settings:URI command"
+Windows 10 URI commands
+Page	Command (URI)
+Settings home page
+Settings home page	ms-settings:
+System
+Display	ms-settings:display
+Night light settings	ms-settings:nightlight
+Advanced scaling settings	ms-settings:display-advanced
+Connect to a wireless display	ms-settings-connectabledevices:devicediscovery
+Graphics settings	ms-settings:display-advancedgraphics
+Display orientation	ms-settings:screenrotation
+Sound	ms-settings:sound
+Manage sound devices	ms-settings:sound-devices
+App volume and device preferences	ms-settings:apps-volume
+Notifications & actions	ms-settings:notifications
+Focus assist	ms-settings:quiethours, OR ms-settings:quietmomentshome
+During these hours	ms-settings:quietmomentsscheduled
+Duplicating my display (When I'm duplicating my display)	ms-settings:quietmomentspresentation
+Playing a game full screen (When I'm playing a game)	ms-settings:quietmomentsgame
+Power & sleep	ms-settings:powersleep
+Battery	ms-settings:batterysaver
+See which apps are affecting your battery life	ms-settings:batterysaver-usagedetails
+Battery Saver settings	ms-settings:batterysaver-settings
+Storage	ms-settings:storagesense
+Configure Storage Sense or run it now	ms-settings:storagepolicies
+Change where new content is saved	ms-settings:savelocations
+Tablet mode	ms-settings:tabletmode
+Multitasking	ms-settings:multitasking
+Projecting to this PC	ms-settings:project
+Shared experiences	ms-settings:crossdevice
+Clipboard	ms-settings:clipboard
+Remote Desktop	ms-settings:remotedesktop
+Device Encryption (where available)	ms-settings:deviceencryption
+About	ms-settings:about
+Devices
+Bluetooth & other devices	ms-settings:bluetooth, OR ms-settings:connecteddevices
+Printers & scanners	ms-settings:printers
+Mouse	ms-settings:mousetouchpad
+Touchpad	ms-settings:devices-touchpad
+Typing	ms-settings:typing
+Hardware keyboard - Text suggestions	ms-settings:devicestyping-hwkbtextsuggestions
+Wheel (where available)	ms-settings:wheel
+Pen & Windows Ink	ms-settings:pen
+AutoPlay	ms-settings:autoplay
+USB	ms-settings:usb
+Phone
+Phone	ms-settings:mobile-devices
+Add a phone	ms-settings:mobile-devices-addphone
+Your Phone (opens app)	ms-settings:mobile-devices-addphone-direct
+Network & Internet
+Network & Internet	ms-settings:network
+Status	ms-settings:network-status
+Show available networks	ms-availablenetworks:
+Cellular & SIM	ms-settings:network-cellular
+Wi-Fi	ms-settings:network-wifi
+Show available networks	ms-availablenetworks:
+Manage known networks	ms-settings:network-wifisettings
+Wi-Fi Calling	ms-settings:network-wificalling
+Ethernet	ms-settings:network-ethernet
+Dial-up	ms-settings:network-dialup
+DirectAccess (where available)	ms-settings:network-directaccess
+VPN	ms-settings:network-vpn
+Airplane mode	ms-settings:network-airplanemode, OR ms-settings:proximity
+Mobile hotspot	ms-settings:network-mobilehotspot
+NFC	ms-settings:nfctransactions
+Data usage	ms-settings:datausage
+Proxy	ms-settings:network-proxy
+Personalization
+Personalization	ms-settings:personalization
+Background	ms-settings:personalization-background
+Colors	ms-settings:personalization-colors, OR ms-settings:colors
+Lock screen	ms-settings:lockscreen
+Themes	ms-settings:themes
+Fonts (build 17083+)	ms-settings:fonts
+Start	ms-settings:personalization-start
+Choose which folders appear on Start	ms-settings:personalization-start-places
+Taskbar	ms-settings:taskbar
+Apps
+Apps & features	ms-settings:appsfeatures OR ms-settings:appsfeatures-app
+Manage optional features	ms-settings:optionalfeatures
+Default apps	ms-settings:defaultapps
+Offline maps	ms-settings:maps
+Download maps	ms-settings:maps-downloadmaps
+Apps for websites	ms-settings:appsforwebsites
+Video playback	ms-settings:videoplayback
+Startup	ms-settings:startupapps
+Accounts
+Your info	ms-settings:yourinfo
+Email & accounts	ms-settings:emailandaccounts
+Sign-in options	ms-settings:signinoptions
+Windows Hello face setup	ms-settings:signinoptions-launchfaceenrollment
+Windows Hello fingerprint setup	ms-settings:signinoptions-launchfingerprintenrollment
+Security Key setup	ms-settings:signinoptions-launchsecuritykeyenrollment
+Dynamic Lock	ms-settings:signinoptions-dynamiclock
+Access work or school	ms-settings:workplace
+Family & other people	ms-settings:otherusers
+Set up a kiosk	ms-settings:assignedaccess
+Sync your settings	ms-settings:sync
+Time & language
+Date & time	ms-settings:dateandtime
+Region	ms-settings:regionformatting
+Japan IME settings (where available)	ms-settings:regionlanguage-jpnime
+Pinyin IME settings (where available)	ms-settings:regionlanguage-chsime-pinyin
+Wubi IME settings (where available)	ms-settings:regionlanguage-chsime-wubi
+Korea IME settings (where available)	ms-settings:regionlanguage-korime
+Language	ms-settings:regionlanguage OR ms-settings:regionlanguage-languageoptions
+Windows Display language	ms-settings:regionlanguage-setdisplaylanguage
+Add Display language	ms-settings:regionlanguage-adddisplaylanguage
+Keyboard (removed in build 17083+)	ms-settings:keyboard
+Speech	ms-settings:speech
+Gaming
+Game bar	ms-settings:gaming-gamebar
+Captures	ms-settings:gaming-gamedvr
+Broadcasting	ms-settings:gaming-broadcasting
+Game Mode	ms-settings:gaming-gamemode
+TruePlay (removed in version 1809+)	ms-settings:gaming-trueplay
+Xbox Networking	ms-settings:gaming-xboxnetworking
+Extras
+Extras (available only when Settings app extensions installed)	ms-settings:extras
+Ease of Access
+Display	ms-settings:easeofaccess-display
+Mouse Pointer	ms-settings:easeofaccess-cursorandpointersize
+Text Cursor	ms-settings:easeofaccess-cursor
+Magnifier	ms-settings:easeofaccess-magnifier
+Color Filters	ms-settings:easeofaccess-colorfilter
+Adaptive Color Filters Link	ms-settings:easeofaccess-colorfilter-adaptivecolorlink
+Night Light Link	ms-settings:easeofaccess-colorfilter-bluelightlink
+High Contrast	ms-settings:easeofaccess-highcontrast
+Narrator	ms-settings:easeofaccess-narrator
+Start Narratorafter sign-in for me	ms-settings:easeofaccess-narrator-isautostartenabled
+Audio	ms-settings:easeofaccess-audio
+Closed captions	ms-settings:easeofaccess-closedcaptioning
+Speech	ms-settings:easeofaccess-speechrecognition
+Keyboard	ms-settings:easeofaccess-keyboard
+Mouse	ms-settings:easeofaccess-mouse
+Eye Control	ms-settings:easeofaccess-eyecontrol
+Other options (removed in version 1809+)	ms-settings:easeofaccess-otheroptions
+Search (version 1903+)
+Permissions & history	ms-settings:search-permissions
+Searching Windows	ms-settings:cortana-windowssearch
+More details	ms-settings:search-moredetails
+Cortana
+Cortana	ms-settings:cortana
+Talk to Cortana	ms-settings:cortana-talktocortana
+Permissions	ms-settings:cortana-permissions
+More details	ms-settings:cortana-moredetails
+Privacy
+General	ms-settings:privacy
+Speech	ms-settings:privacy-speech
+Inking & typing personalization	ms-settings:privacy-speechtyping
+Diagnostics & feedback	ms-settings:privacy-feedback
+View Diagnostic Data	ms-settings:privacy-feedback-telemetryviewergroup
+Activity history (build 17040+)	ms-settings:privacy-activityhistory
+Location	ms-settings:privacy-location
+Camera	ms-settings:privacy-webcam
+Microphone	ms-settings:privacy-microphone
+Voice activation	ms-settings:privacy-voiceactivation
+Notifications	ms-settings:privacy-notifications
+Account info	ms-settings:privacy-accountinfo
+Contacts	ms-settings:privacy-contacts
+Calendar	ms-settings:privacy-calendar
+Phone calls (removed in version 1809+)	ms-settings:privacy-phonecalls
+Call history	ms-settings:privacy-callhistory
+Email	ms-settings:privacy-email
+Eye tracker (requires eyetracker hardware)	ms-settings:privacy-eyetracker
+Tasks	ms-settings:privacy-tasks
+Messaging	ms-settings:privacy-messaging
+Radios	ms-settings:privacy-radios
+Other devices	ms-settings:privacy-customdevices
+Background apps	ms-settings:privacy-backgroundapps
+App diagnostics	ms-settings:privacy-appdiagnostics
+Automatic file downloads	ms-settings:privacy-automaticfiledownloads
+Documents	ms-settings:privacy-documents
+Pictures	ms-settings:privacy-pictures
+Videos	ms-settings:privacy-documents
+File system	ms-settings:privacy-broadfilesystemaccess
+Update & security
+Windows Update	ms-settings:windowsupdate
+Check for updates	ms-settings:windowsupdate-action
+View update history	ms-settings:windowsupdate-history
+Restart options	ms-settings:windowsupdate-restartoptions
+Advanced options	ms-settings:windowsupdate-options
+Change active hours	ms-settings:windowsupdate-activehours
+Optional updates	ms-settings:windowsupdate-optionalupdates OR ms-settings:windowsupdate-seekerondemand
+Delivery Optimization	ms-settings:delivery-optimization
+Windows Security / Windows Defender	ms-settings:windowsdefender
+Open Windows Security	windowsdefender:
+Backup	ms-settings:backup
+Troubleshoot	ms-settings:troubleshoot
+Recovery	ms-settings:recovery
+Activation	ms-settings:activation
+Find My Device	ms-settings:findmydevice
+For developers	ms-settings:developers
+Windows Insider Program	ms-settings:windowsinsider, OR ms-settings:windowsinsider-optin
+Mixed reality
+Mixed reality	ms-settings:holographic
+Audio and speech	ms-settings:holographic-audio
+Environment	ms-settings:privacy-holographic-environment
+Headset display	ms-settings:holographic-headset
+Uninstall	ms-settings:holographic-management
+Surface Hub
+Accounts	ms-settings:surfacehub-accounts
+Team Conferencing	ms-settings:surfacehub-calling
+Team device management	ms-settings:surfacehub-devicemanagenent
+Session cleanup	ms-settings:surfacehub-sessioncleanup
+Welcome screen	ms-settings:surfacehub-welcome
+Windows 10 RUN commands
+Press Win+R to open the Run dialog and type the command followed by Enter
+Open Documents Folder	documents
+Open Videos folder	videos
+Open Downloads Folder	downloads
+Open Favorites Folder	favorites
+Open Recent Folder	recent
+Open Pictures Folder	pictures
+Adding a new Device	devicepairingwizard
+About Windows dialog	winver
+Add Hardware Wizard	hdwwiz
+Advanced User Accounts	netplwiz
+Advanced User Accounts	azman.msc
+Backup and Restore	sdclt
+Bluetooth File Transfer	fsquirt
+Calculator	calc
+Certificates	certmgr.msc
+Change Computer Performance Settings	systempropertiesperformance
+Change Data Execution Prevention Settings	systempropertiesdataexecutionprevention
+Change Data Execution Prevention Settings	printui
+Character Map	charmap
+ClearType Tuner	cttune
+Color Management	colorcpl
+Command Prompt	cmd
+Component Services	comexp.msc
+Component Services	dcomcnfg
+Computer Management	compmgmt.msc
+Computer Management	compmgmtlauncher
+Connect to a Projector	displayswitch
+Control Panel	control
+Create A Shared Folder Wizard	shrpubw
+Create a System Repair Disc	recdisc
+Data Execution Prevention	systempropertiesdataexecutionprevention
+Date and Time	timedate.cpl
+Default Location	locationnotifications
+Device Manager	devmgmt.msc
+Device Manager	hdwwiz.cpl
+Device Pairing Wizard	devicepairingwizard
+Diagnostics Troubleshooting Wizard	msdt
+Digitizer Calibration Tool	tabcal
+DirectX Diagnostic Tool	dxdiag
+Disk Cleanup	cleanmgr
+Disk Defragmenter	dfrgui
+Disk Management	diskmgmt.msc
+Display	dpiscaling
+Display Color Calibration	dccw
+Display Switch	displayswitch
+DPAPI Key Migration Wizard	dpapimig
+Driver Verifier Manager	verifier
+Ease of Access Center	utilman
+EFS Wizard	rekeywiz
+Event Viewer	eventvwr.msc
+Fax Cover Page Editor	fxscover
+File Signature Verification	sigverif
+Font Viewer	fontview
+Game Controllers	joy.cpl
+IExpress Wizard	iexpress
+Internet Explorer	iexplore
+Internet Options	inetcpl.cpl
+iSCSI Initiator Configuration Tool	iscsicpl
+Language Pack Installer	lpksetup
+Local Group Policy Editor	gpedit.msc
+Local Security Policy	secpol.msc
+Local Users and Groups	lusrmgr.msc
+Location Activity	locationnotifications
+Magnifier	magnify
+Malicious Software Removal Tool	mrt
+Manage Your File Encryption Certificates	rekeywiz
+Microsoft Management Console	mmc
+Microsoft Support Diagnostic Tool	msdt
+Mouse	main.cpl
+NAP Client Configuration	napclcfg.msc
+Narrator	narrator
+Network Connections	ncpa.cpl
+New Scan Wizard	wiaacmgr
+Notepad	notepad
+ODBC Data Source Administrator	odbcad32
+ODBC Driver Configuration	odbcconf
+On-Screen Keyboard	osk
+Paint	mspaint
+Pen and Touch	tabletpc.cpl
+People Near Me	collab.cpl
+Performance Monitor	perfmon.msc
+Performance Options	systempropertiesperformance
+Phone and Modem	telephon.cpl
+Phone Dialer	dialer
+Power Options	powercfg.cpl
+Presentation Settings	presentationsettings
+Print Management	printmanagement.msc
+Printer Migration	printbrmui
+Printer User Interface	printui
+Private Character Editor	eudcedit
+Problem Steps Recorder	psr
+Programs and Features	appwiz.cpl
+Protected Content Migration	dpapimig
+Region and Language	intl.cpl
+Registry Editor	regedit
+Registry Editor 32	regedt32
+Remote Access Phonebook	rasphone
+Remote Desktop Connection	mstsc
+Resource Monitor	resmon
+Resultant Set of Policy	rsop.msc
+SAM Lock Tool	syskey
+Screen Resolution	desk.cpl
+Securing the Windows Account Database	syskey
+Services	services.msc
+Set Program Access and Computer Defaults	computerdefaults
+Share Creation Wizard	shrpubw
+Shared Folders	fsmgmt.msc
+Signout	logoff
+Snipping Tool	snippingtool
+Sound	mmsys.cpl
+Sound recorder	soundrecorder
+SQL Server Client Network Utility	cliconfg
+Sticky Notes	stikynot
+Stored User Names and Passwords	credwiz
+Sync Center	mobsync
+System Configuration	msconfig
+System Configuration Editor	sysedit
+System Information	msinfo32
+System Properties	sysdm.cpl
+System Properties (Advanced Tab)	systempropertiesadvanced
+System Properties (Computer Name Tab)	systempropertiescomputername
+System Properties (Hardware Tab)	systempropertieshardware
+System Properties (Remote Tab)	systempropertiesremote
+System Properties (System Protection Tab)	systempropertiesprotection
+System Restore	rstrui
+Task Manager	taskmgr
+Task Scheduler	taskschd.msc
+Trusted Platform Module (TPM) Management	tpm.msc
+Turn Windows features on or off	optionalfeatures
+User Account Control Settings	useraccountcontrolsettings
+Utility Manager	utilman
+Volume Mixer	sndvol
+Windows Action Center	wscui.cpl
+Windows Activation Client	slui
+Windows Anytime Upgrade Results	windowsanytimeupgraderesults
+Windows Disc Image Burning Tool	isoburn
+Windows Explorer	explorer
+Windows Fax and Scan	wfs
+Windows Firewall	firewall.cpl
+Windows Firewall with Advanced Security	wf.msc
+Windows Journal	journal
+Windows Media Player	wmplayer
+Windows Memory Diagnostic Scheduler	mdsched
+Windows Mobility Center	mblctr
+Windows Picture Acquisition Wizard	wiaacmgr
+Windows PowerShell	powershell
+Windows PowerShell ISE	powershell_ise
+Windows Remote Assistance	msra
+Windows Repair Disc	recdisc
+Windows Script Host	wscript
+Windows Update	wuapp
+Windows Update Standalone Installer	wusa
+Versione Windows	winver
+WMI Management	wmimgmt.msc
+WordPad	write
+XPS Viewer	xpsrchvw

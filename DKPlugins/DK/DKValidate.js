@@ -1,6 +1,6 @@
 "use strict";
 
-dk.validate = DKPlugin(DKValidate, "singleton");
+
 function DKValidate() {}
 
 //https://stackoverflow.com/a/9337047/688352
@@ -18,3 +18,5 @@ DKValidate.prototype.isValidCallStack = function DKValidate_isValidCallStack(sta
 
 DKValidate.prototype.isValidEmail = function DKValidate_isValidEmail(email) {//TODO
 }
+
+dk.validate = DKPlugin(DKValidate, "singleton");

@@ -1,10 +1,37 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
 #include "DK/stdafx.h"
-#include "DKSDLWav.h"
+#include "DKSDLWave/DKSDLWav.h"
 #include "DK/DKFile.h"
 
+//WARNING_DISABLE
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+//WARNING_ENABLE
 
 #define AUDIO_FORMAT AUDIO_S16LSB
 #define AUDIO_FREQUENCY 48000;
@@ -18,7 +45,6 @@ static Sound* createSound(const char* filename, uint8_t loop, int volume);
 static inline void audioCallback(void* userdata, uint8_t* stream, int len);
 static PrivateAudioDevice* gDevice;
 
-////////////////////
 typedef struct sound
 {
     uint32_t length;
@@ -32,41 +58,28 @@ typedef struct sound
     struct sound * next;
 } Sound;
 
-/////////////////////////////////
-typedef struct privateAudioDevice
-{
+typedef struct privateAudioDevice{
     SDL_AudioDeviceID device;
     SDL_AudioSpec want;
     uint8_t audioEnabled;
 } PrivateAudioDevice;
 
 
-/////////////////////
-bool DKSDLWav::Init()
-{
-	if(SDL_Init(SDL_INIT_AUDIO) < 0){
-		DKERROR("Could not Init SDL_Audio\n");
-		return false;
-	}	
-
+bool DKSDLWav::Init(){
+	if(SDL_Init(SDL_INIT_AUDIO) < 0)
+		return DKERROR("Could not Init SDL_Audio\n");
 	InitAudio();
 	DKClass::RegisterFunc("DKSDLWav::PlaySound", &DKSDLWav::PlaySound, this);
 	DKClass::RegisterFunc("DKSDLWav::OpenMusic", &DKSDLWav::OpenMusic, this);
 	return true;
 }
 
-////////////////////
-bool DKSDLWav::End()
-{
+bool DKSDLWav::End(){
 	endAudio();
 	return true;
 }
 
-
-
-//////////////////////////
-bool DKSDLWav::InitAudio()
-{
+bool DKSDLWav::InitAudio(){
     Sound* global;
     gDevice = static_cast<PrivateAudioDevice*>(calloc(1, sizeof(PrivateAudioDevice)));
 
@@ -85,14 +98,12 @@ bool DKSDLWav::InitAudio()
     }
 
     SDL_memset(&(gDevice->want), 0, sizeof(gDevice->want));
-
     (gDevice->want).freq = AUDIO_FREQUENCY;
     (gDevice->want).format = AUDIO_FORMAT;
     (gDevice->want).channels = AUDIO_CHANNELS;
     (gDevice->want).samples = AUDIO_SAMPLES;
     (gDevice->want).callback = audioCallback;
     (gDevice->want).userdata = calloc(1, sizeof(Sound));
-
     global = (Sound*)(gDevice->want).userdata;
 
     if(global == NULL){
@@ -114,9 +125,7 @@ bool DKSDLWav::InitAudio()
 	return true;
 }
 
-/////////////////////////
-bool DKSDLWav::EndAudio()
-{
+bool DKSDLWav::EndAudio(){
     if(gDevice->audioEnabled){
         SDL_PauseAudioDevice(gDevice->device, 1);
         freeSound((Sound *) (gDevice->want).userdata);
@@ -128,15 +137,12 @@ bool DKSDLWav::EndAudio()
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKSDLWav::playSound(const char* filename, int volume)
-{
+bool DKSDLWav::playSound(const char* filename, int volume){
     Sound * snd;
 
-    if(!gDevice->audioEnabled){
+    if(!gDevice->audioEnabled)
         return false;
-    }
-
+    
     snd = createSound(filename, 0, volume);
 
     SDL_LockAudioDevice(gDevice->device);
@@ -146,16 +152,13 @@ bool DKSDLWav::playSound(const char* filename, int volume)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKSDLWav::OpenMusic(const char* filename, int volume)
-{
+bool DKSDLWav::OpenMusic(const char* filename, int volume){
     Sound * global;
     Sound * snd;
     uint8_t music;
 
-    if(!gDevice->audioEnabled){
+    if(!gDevice->audioEnabled)
         return false;
-    }
 
     music = 0;
 
@@ -188,18 +191,14 @@ bool DKSDLWav::OpenMusic(const char* filename, int volume)
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKSDLWav::PlaySound(const void* input, void* output)
-{
+bool DKSDLWav::PlaySound(const void* input, void* output){
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return false; }
 	playSound(path.c_str(), SDL_MIX_MAXVOLUME);
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKSDLWav::OpenMusic(const void* input, void* output)
-{
+bool DKSDLWav::OpenMusic(const void* input, void* output){
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return false; }
 	OpenMusic(path.c_str(), SDL_MIX_MAXVOLUME);
@@ -207,12 +206,8 @@ bool DKSDLWav::OpenMusic(const void* input, void* output)
 }
 
 
-
-
 //////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-static Sound* createSound(const char * filename, uint8_t loop, int volume)
-{
+static Sound* createSound(const char * filename, uint8_t loop, int volume){
     Sound* snd = static_cast<Sound*>(calloc(1, sizeof(Sound)));
 
     if(snd == NULL){
@@ -239,9 +234,7 @@ static Sound* createSound(const char * filename, uint8_t loop, int volume)
     return snd;
 }
 
-////////////////////////////////////////////////////////////////////////////
-static inline void audioCallback(void * userdata, uint8_t * stream, int len)
-{
+static inline void audioCallback(void * userdata, uint8_t * stream, int len){
     Sound * sound = (Sound *) userdata;
     Sound * previous = sound;
     int tempLength;
@@ -295,23 +288,16 @@ static inline void audioCallback(void * userdata, uint8_t * stream, int len)
     }
 }
 
-/////////////////////////////////////////////
-static void addSound(Sound* root, Sound* snd)
-{
-    if(root == NULL){
+static void addSound(Sound* root, Sound* snd){
+    if(root == NULL)
         return;
-    }
-
     while(root->next != NULL){
         root = root->next;
     }
-
     root->next = snd;
 }
 
-///////////////////////////////////
-static void freeSound(Sound *sound)
-{
+static void freeSound(Sound *sound){
     Sound* temp;
 
     while(sound != NULL){

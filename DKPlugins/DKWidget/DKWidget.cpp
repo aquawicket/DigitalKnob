@@ -1,4 +1,30 @@
-#ifdef USE_DKRocket
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+
+#ifdef HAVE_DKRocket
 #include "DK/stdafx.h"
 #include "Controls/ElementTextSelection.h"
 #include "Controls/WidgetTextInput.h"
@@ -448,7 +474,7 @@ void DKWidget::GetAvailableId(const DKString& id, DKString& out)
 	
 	while(GetElementById(out)){
 		//if there is a .  the number must come before
-		std::size_t found = id.find_last_of(".");
+		std::string::size_type found = id.find_last_of(".");
 		if(found != -1){
 		    out = id.substr(0,found)+toString(i)+id.substr(found);
 		}
@@ -1138,9 +1164,9 @@ bool DKWidget::SetProperty(Rocket::Core::Element* element, const DKString& name,
 		if(has(value,"rgba")){
 			//DKINFO("DKWidget::SetProperty() background-color has rgba()\n");
 			//DKINFO(value+"\n");
-			std::size_t start = value.find_last_of(",")+1;
+			std::string::size_type start = value.find_last_of(",")+1;
 			//DKINFO("start:"+toString(start)+"\n");
-			std::size_t end = value.find_last_of(")");
+			std::string::size_type end = value.find_last_of(")");
 			//DKINFO("end:"+toString(end)+"\n");
 			int newvalue = (int)(toFloat(value.substr(start,end-start)) * 255);
 			finalValue.replace(start,end-start,toString(newvalue));
@@ -1435,7 +1461,7 @@ bool DKWidget::GetMouseWindowX(int& x_out)
 	//Dynamic cast a DKOject to it's class
 	//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
 	//mouseX -= window->traits->x;
-#ifdef DESKTOP
+#if DESKTOP
 	//mouseX -= DKOSGWindow::Get("DKOSGWindow")->traits->x;
 	int x;
 	if(!DKWindow::GetX(x)){ return 0; }
@@ -1457,7 +1483,7 @@ bool DKWidget::GetMouseWindowY(int& y_out)
 	//Dynamic cast a DKOject to it's class
 	//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
 	//mouseY -= window->traits->y;
-#ifdef DESKTOP
+#if DESKTOP
 	//mouseY -= DKOSGWindow::Get("DKOSGWindow")->traits->y;
 	int y;
 	if(!DKWindow::GetY(y)){ return false; }
@@ -2017,4 +2043,4 @@ bool DKWidget::BuildOptionsString(const DKString& id, DKString &options)
 }
 
 
-#endif //USE_DKRocket
+#endif //HAVE_DKRocket

@@ -1,0 +1,2 @@
+############ Windows application uninstall location ############
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall

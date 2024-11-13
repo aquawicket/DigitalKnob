@@ -1,153 +1,96 @@
-# http://giflib.sourceforge.net/
-#
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ giflib ############
+# http://giflib.sourceforge.net
+# https://github.com/mirrorer/giflib.git
+# https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip
 # https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
+# https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
 
-if(WIN_32)
-	DKDEPEND(mingw32)
+dk_load(dk_builder)
+
+### DEPEND ###
+if(WIN)
+	dk_depend(msys2)
 endif()
-if(WIN_64)
-	DKDEPEND(mingw64)
+dk_depend(autotools)
+#dk_depend(gcc)
+
+### IMPORT ###
+dk_import(https://github.com/nesbox/giflib/archive/1aa11b06.zip PATCH)
+
+set(GIFLIB_USE_CMAKE ON)
+if(GIFLIB_USE_CMAKE)
+
+	### LINK ###
+	dk_include			(${GIFLIB_DIR}							GIF_INCLUDE_DIR)
+	#dk_include			(${GIFLIB_DIR}/lib						GIF_INCLUDE_DIR)
+	dk_include			(${GIFLIB_CONFIG_DIR}					GIF_INCLUDE_DIR2)
+	if(WIN AND MSVC)
+		dk_libDebug		(${GIFLIB_DEBUG_DIR}/giflibd.lib		GIF_LIBRARY_DEBUG)
+		dk_libRelease	(${GIFLIB_RELEASE_DIR}/giflib.lib		GIF_LIBRARY_RELEASE)
+	else()
+		dk_libDebug		(${GIFLIB_DEBUG_DIR}/libgiflib.a		GIF_LIBRARY_DEBUG)
+		dk_libRelease	(${GIFLIB_RELEASE_DIR}/libgiflib.a		GIF_LIBRARY_RELEASE)
+	endif()
+	
+	### 3RDPARTY LINK ###
+	dk_append			(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2})
+	if(DEBUG)
+		dk_append		(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
+	endif()
+	if(RELEASE)
+		dk_append		(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
+	endif()
+	dk_configure		(${GIFLIB_DIR})
+	dk_build			(${GIFLIB_DIR} giflib)	
+	
+	
+else()
+	### LINK ###
+	dk_include			(${GIFLIB_DIR}/lib							GIF_INCLUDE_DIR)
+	#dk_include			(${GIFLIB}/${triple}						GIF_INCLUDE_DIR2)
+	dk_include			(${GIFLIB_CONFIG_DIR}						GIF_INCLUDE_DIR2)
+	dk_libDebug			(${GIFLIB_DEBUG_DIR}/lib/.libs/libgif.a		GIF_LIBRARY_DEBUG)
+	dk_libRelease		(${GIFLIB_RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
+
+	### 3RDPARTY LINK ###
+	if(DEBUG)
+		dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
+	endif()
+	if(RELEASE)
+		dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
+	endif()
+	
+	### GENERATE / CONFIGURE ###
+	dk_cd			(${GIFLIB_DIR})
+	dk_depend(bash)
+	dk_queueCommand	(${BASH_EXE} -c "autoreconf -f -i")
+
+	string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
+	string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
+	string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
+
+	dk_configure		(${GIFLIB})
+	if(ANDROID)
+		if(MSVC)
+			dk_visualStudio		(${GIFLIB} giflib)
+		else()
+			dk_queueCommand		(make -C lib)
+		endif()
+	else()
+		if(EMSCRIPTEN)
+			dk_build			(${GIFLIB})
+		else()
+			dk_queueCommand		(make -C lib)
+		endif()
+	endif()
 endif()
-DKDEPEND(msys)
 
-
-
-### VERSION ###
-DKSET(GIF_VERSION 5.1.1)
-DKSET(GIF_NAME giflib-${GIF_VERSION})
-DKSET(GIF_DL https://sourceforge.net/projects/giflib/files/${GIF_NAME}.tar.gz)
-DKSET(GIF ${3RDPARTY}/${GIF_NAME})
-
-
-
-### INSTALL ###
-DKINSTALL(${GIF_DL} giflib ${GIF})
-
-
-
-### DKPLUGINS LINK ###
-DKINCLUDE(${GIF}/lib)
-WIN_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-WIN_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-APPLE_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-APPLE_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-LINUX_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-LINUX_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-RASPBERRY_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-RASPBERRY_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-ANDROID_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libgif.a)
-ANDROID_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libgif.a)
-
-
-
-### 3RDPARTY LINK ###
-DKSET(GIF_WIN -DGIF_INCLUDE_DIR=${GIF} -DGIF_INCLUDE_DIR2=${GIF}/${OS} -DGIF_INCLUDE_DIR=${GIF}/lib -DGIF_LIBRARY=${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.lib)
-DKSET(GIF_APPLE -DGIF_INCLUDE_DIR=${GIF} -DGIF_INCLUDE_DIR2=${GIF}/${OS} -DGIF_INCLUDE_DIR=${GIF}/lib -DGIF_LIBRARY=${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-DKSET(GIF_LINUX -DGIF_INCLUDE_DIR=${GIF} -DGIF_INCLUDE_DIR2=${GIF}/${OS} -DGIF_INCLUDE_DIR=${GIF}/lib -DGIF_LIBRARY=${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-DKSET(GIF_RASPBERRY -DGIF_INCLUDE_DIR=${GIF} -DGIF_INCLUDE_DIR2=${GIF}/${OS} -DGIF_INCLUDE_DIR=${GIF}/lib -DGIF_LIBRARY=${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-DKSET(GIF_ANDROID -DGIF_INCLUDE_DIR=${GIF} -DGIF_INCLUDE_DIR2=${GIF}/${OS} -DGIF_INCLUDE_DIR=${GIF}/lib -DGIF_LIBRARY=${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)	
-
-
-### COMPILE ###
-WIN32_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_BASH("#!/bin/bash 
-cd /${GIF}/${OS}/${DEBUG_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static 
-make 
-exit \n")
-#if(WIN_32 AND DEBUG)
-	#DKRENAME(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.lib)
-#endif()
-
-WIN32_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_BASH("#!/bin/bash 
-cd /${GIF}/${OS}/${RELEASE_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static 
-make 
-exit\n ")
-#if(WIN_32 AND RELEASE)
-#	DKRENAME(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.lib)
-#endif()
-
-
-
-WIN64_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_BASH("#!/bin/bash 
-cd /${GIF}/${OS}/${DEBUG_DIR} 
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static 
-make 
-exit \n")
-#if(WIN_64 AND DEBUG)
-#DKRENAME(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.lib)
-#endif()
-
-WIN64_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-WIN64_RELEASE_BASH("#!/bin/bash 
-cd /${GIF}/${OS}/${RELEASE_DIR} 
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static 
-make 
-exit\n ")
-#if(WIN_64 AND RELEASE)
-#	DKRENAME(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.lib)
-#endif()
-
-
-MAC_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
-
-MAC_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
-
-
-
-IOS_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static --arch-"armv7 armv7s")
-IOS_DEBUG_COMMAND(make)
-
-IOS_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static --arch-"armv7 armv7s")
-IOS_RELEASE_COMMAND(make)
-
-
-
-IOSSIM_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-IOSSIM_DEBUG_COMMAND(make "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
-
-IOSSIM_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
-
-
-
-LINUX_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-LINUX_DEBUG_COMMAND(make)
-
-LINUX_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-LINUX_RELEASE_COMMAND(make)
-
-
-
-RASPBERRY_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-RASPBERRY_DEBUG_COMMAND(make)
-
-RASPBERRY_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-RASPBERRY_RELEASE_COMMAND(make)
-
-
-
-ANDROID_NDK(${GIF_NAME})
+# FIX for other searchers
+#dk_copy(${GIFLIB_DIR}/gif_lib.h ${GIFLIB_DIR}/lib/gif_lib.h)
