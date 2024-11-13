@@ -42,7 +42,7 @@ endforeach()
 
 
 #dk_set(CMAKE_CXX_FLAGS_INIT 			"-fexceptions -frtti")
-dk_validate(DKIMPORTS_DIR				"dk_IMPORTS_DIR()")
+dk_validate(DKIMPORTS_DIR				"dk_DKIMPORTS_DIR()")
 dk_set(CMAKE_USER_MAKE_RULES_OVERRIDE 	${DKIMPORTS_DIR}/comocc/cosmo_toolchain.cmake)
 dk_set(CMAKE_ASM_OUTPUT_EXTENSION 		.o)
 dk_set(CMAKE_C_OUTPUT_EXTENSION 		.o)
