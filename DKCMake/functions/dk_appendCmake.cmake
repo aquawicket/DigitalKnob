@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	<str>	- TODO
 #
 function(dk_appendCmake str)
-	dk_debugFunc()
+	dk_debugFunc(1)
 	
 	dk_fileAppend(${plugin_path}/CMakeLists.txt "${str}")
 	
@@ -24,7 +24,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_todo()
 endfunction()

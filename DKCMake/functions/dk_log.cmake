@@ -176,7 +176,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_log("test dk_log message")
 	dk_log(VERBOSE "test dk_log VERBOSE message")

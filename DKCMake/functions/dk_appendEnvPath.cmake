@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	<inputPath>	- The CMake / style full path to append the the Environment Path variable
 #
 function(dk_appendEnvPath inputPath)
-	dk_debugFunc()
+	dk_debugFunc(1)
 	
 	dk_assertPath(inputPath)
 	#if(WIN32)
@@ -40,7 +40,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_todo()
 endfunction()

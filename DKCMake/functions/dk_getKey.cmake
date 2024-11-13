@@ -7,10 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_getKey rtn_var)
-	dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 0)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+	dk_debugFunc(1)
 
 	dk_depend(cmd)
 	#find_program(CMD_EXE cmd.exe)
@@ -37,7 +34,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_getKey(result)
 	dk_info("result = ${result}")

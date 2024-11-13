@@ -19,7 +19,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
 function(dk_arrayAt array index rtn_var)
-	dk_debugFunc()
+	dk_debugFunc(2 3)
 	
 	list(GET ${array} ${index} arrayAt)
 	set(${rtn_var} ${arrayAt} PARENT_SCOPE)
@@ -33,7 +33,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	list(APPEND myArray "a")
 	list(APPEND myArray "b")

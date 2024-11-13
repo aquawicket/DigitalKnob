@@ -48,7 +48,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	set(TEST_VAR 0)
 	dk_if(TRUE					"message('dk_if(TRUE) = true')")

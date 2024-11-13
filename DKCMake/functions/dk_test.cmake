@@ -52,7 +52,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_test("arg 1" "arg 2" rtn_var)
     dk_echo("rtn_var = ${rtn_var}")	

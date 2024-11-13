@@ -34,7 +34,7 @@ dk_createOsMacros("dk_unset")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	set(myVar "value of myVar")
 	dk_printVar(myVar)

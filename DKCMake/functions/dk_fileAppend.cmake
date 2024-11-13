@@ -7,10 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_fileAppend filepath str) 
-	dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 2)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+	dk_debugFunc(2)
 	
 	file(APPEND ${filepath} "${str}")
 endfunction()
@@ -20,7 +17,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_fileAppend("dk_fileAppend_TEST.txt" "string written by dk_fileAppend")
 endfunction()

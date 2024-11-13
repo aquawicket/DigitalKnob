@@ -32,7 +32,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
 	dk_cd(${DKDOWNLOAD_DIR})

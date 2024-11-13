@@ -43,7 +43,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_set(myPath "/test/test2/xfile.exten")
     dk_getExtension("${myPath}" extension)

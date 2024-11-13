@@ -181,7 +181,7 @@ dk_color(1)
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_echo()
 	dk_echo("${black}${bg_lblack}           Styles            ${clr}")

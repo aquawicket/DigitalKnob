@@ -8,10 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_stacktrace)
-    dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 0)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+    dk_debugFunc(0)
 
 	string(TIMESTAMP __TIME__ "%M:%S:%f")
 	string(SUBSTRING "${__TIME__}" 0 10 __TIME__)
@@ -90,7 +87,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_info("called a function")
 	dk_stacktrace()

@@ -18,8 +18,11 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc()
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST) 
+	dk_debugFunc(0)
 	
 	dk_basename("/path/to/a/filename.txt" basename)
 	dk_info("basename of /path/to/a/filename.txt = ${basename}")

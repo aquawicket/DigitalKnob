@@ -31,7 +31,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	list(APPEND myList "myList item 0")
 	list(APPEND myList "myList item 1")

@@ -9,10 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@code	   - The code to run if the variable is invalid. Like a function "dk_DIGITALKNOB_DIR()"
 #
 macro(dk_validate variable code)
-	dk_debugFunc()
-#	if(NOT ${ARGC} EQUAL 2)
-#		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-#	endif()
+	dk_debugFunc(2)
 	
 #	if(NOT variable)
 #		dk_warning("dk_append(${variable} ${code}) variable is invalid")
@@ -41,7 +38,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_todo()
 endfunction()

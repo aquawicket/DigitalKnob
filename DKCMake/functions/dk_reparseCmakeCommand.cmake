@@ -75,7 +75,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	set(myCmakeCommand "COMMAND;cmd;/c;C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20240727/clang32/bin/cmake.exe;-G;MinGW Makefiles;-DBUILD_SHARED_LIBS=0;-DBUILD_STATIC_LIBS=1;-DBUILD_TESTING=0;-DCMAKE_BUILD_TYPE=Debug;-DCMAKE_MAKE_PROGRAM=C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20240727/clang32/bin/mingw32-make.exe;-DCMAKE_C_COMPILER=C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20240727/clang32/bin/clang.exe;-DCMAKE_C_FLAGS=-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17;-DCMAKE_C_FLAGS_DEBUG=-DDEBUG -D_DEBUG -g;-DCMAKE_C_FLAGS_RELEASE=-O3 -DNDEBUG;-DCMAKE_CXX_COMPILER=C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20240727/clang32/bin/clang++.exe;-DCMAKE_CXX_FLAGS=-frtti -march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17;-DCMAKE_CXX_FLAGS_DEBUG=-DDEBUG -D_DEBUG -g;-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG;-DAOM_TARGET_CPU=generic;-S;C:/Users/Administrator/digitalknob/Development/3rdParty/aom-c2fe6bf;-B;C:/Users/Administrator/digitalknob/Development/3rdParty/aom-c2fe6bf/win_x86_clang/Debug;OUTPUT_VARIABLE;echo_output;ERROR_VARIABLE;echo_output;WORKING_DIRECTORY;C:/Users/Administrator/digitalknob/Development/3rdParty/aom-c2fe6bf/win_x86_clang/Debug;RESULT_VARIABLE;result_variable;COMMAND_ECHO;STDOUT;OUTPUT_STRIP_TRAILING_WHITESPACE")
 	

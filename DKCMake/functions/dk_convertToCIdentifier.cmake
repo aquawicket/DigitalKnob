@@ -7,11 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_convertToCIdentifier input output)
-	dk_debugFunc()
-	
-	if(NOT ${ARGC} EQUAL 2)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+	dk_debugFunc(2)
 		
 	string(MAKE_C_IDENTIFIER ${input} c_identifier)	
 	

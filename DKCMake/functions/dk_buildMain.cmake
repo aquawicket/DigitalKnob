@@ -7,10 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_buildMain)
-	dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 0)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+	dk_debugFunc(0)
 
 	# log to stdout and file
 	# exec > >(tee DKBuilder.log)
@@ -78,7 +75,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_buildMain()
 endfunction()

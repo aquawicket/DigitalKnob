@@ -7,10 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_readCache APP target_triple TYPE)
-	dk_debugFunc()
-#	if(NOT ${ARGC} EQUAL 3)
-#		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-#	endif()
+	dk_debugFunc(3)
 	
 	dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")
 	if(NOT EXISTS "${DKCACHE_DIR}/cache")
@@ -54,7 +51,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_readCache(APP target_triple TYPE)
 	#dk_printVar(APP)

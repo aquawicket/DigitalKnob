@@ -70,7 +70,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 
 	set(test "test")
 	dk_eval([[message("test = ${test}")]])

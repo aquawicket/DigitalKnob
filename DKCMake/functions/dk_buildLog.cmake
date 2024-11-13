@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@entry			- TODO
 #
 function(dk_buildLog entry)
-	dk_debugFunc()
+	dk_debugFunc(1 2)
 	
 	dk_getOptionValue(PATH ${ARGV})
 	
@@ -29,7 +29,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_todo()
 endfunction()

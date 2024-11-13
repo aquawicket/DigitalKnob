@@ -36,7 +36,7 @@ function(test_function)
 endfunction()
 
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_isFunction(isFunction "test_function")
 	if(isFunction)

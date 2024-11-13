@@ -41,7 +41,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
 	dk_extract("${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64.zip" "${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64")

@@ -10,11 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@app_name	- TODO
 #
 function(dk_updateInfoPlist app_name)
-	dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 1)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
-	
+	dk_debugFunc(1)
 	
 	if(MAC)
 		# FIXME
@@ -57,7 +53,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_todo()
 	dk_updateInfoPlist()

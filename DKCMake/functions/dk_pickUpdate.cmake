@@ -8,10 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	Pause execution and wait for keypress to continue
 #
 function(dk_pickUpdate) 
-	dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 0)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+	dk_debugFunc(0)
 
 	dk_readCache(_APP_ _target_triple_ _TYPE_)
 	#dk_printVar(_APP_)
@@ -104,7 +101,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_pickUpdate()
 endfunction()

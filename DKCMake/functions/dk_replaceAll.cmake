@@ -8,10 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_replaceAll input searchValue newValue rtn_var)
-	dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 4)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments:${ARGC}")
-	endif()
+	dk_debugFunc(4)
 		
 	string(REPLACE "${searchValue}" "${newValue}" replaceAll "${input}")
 	

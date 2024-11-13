@@ -28,7 +28,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	#dk_watch(CMAKE_CURRENT_FUNCTION_LIST_FILE)
 	dk_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE)

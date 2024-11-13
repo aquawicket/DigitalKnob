@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@msg	- The message to print
 #
 function(dk_echo)
-	dk_debugFunc()
+	dk_debugFunc(1 2)
 	if(${ARGC} EQUAL 0)
 		message("") # newline
 		return()
@@ -38,7 +38,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	message("This is a normal message commmand")
 	dk_echo()

@@ -54,7 +54,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_callDKBash(dk_test rtn_var "FROM DKCmake" "dk_callDKBash.cmake")
     dk_echo()

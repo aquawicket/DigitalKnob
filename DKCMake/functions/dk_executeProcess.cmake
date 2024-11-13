@@ -279,7 +279,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_executeProcess(echo "Hello World" ERROR_VARIABLE test_error OUTPUT_VARIABLE test_output)
 endfunction()

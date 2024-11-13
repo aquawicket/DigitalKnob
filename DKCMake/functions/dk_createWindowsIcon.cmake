@@ -34,7 +34,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_validate(DKAPPS_DIR "dk_DKBRANCH_DIR()")
 	dk_createWindowsIcon(${DKAPPS_DIR}/DKCore/icons/icon.png ${DKAPPS_DIR}/DKCore/icons/icon.ico)

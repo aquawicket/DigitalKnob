@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@plugin		- TODO
 #
 function(dk_assets plugin)
-	dk_debugFunc()
+	dk_debugFunc(1)
 	
 	if(NOT DKAPP)
 		return()
@@ -73,7 +73,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_assets(DK)
 endfunction()

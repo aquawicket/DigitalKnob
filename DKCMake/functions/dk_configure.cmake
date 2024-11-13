@@ -128,7 +128,7 @@ dk_createOsMacros("dk_configure")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_depend(zlib)
 	dk_configure(${ZLIB_DIR})

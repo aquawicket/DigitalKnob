@@ -8,10 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_getFullPath path rtn_var)
-	dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 2)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+	dk_debugFunc(2)
 	
 	get_filename_component(fullpath ${path} ABSOLUTE)    # ABSOLUTE = Full path to file
 	#get_filename_component(fullpath ${path} REALPATH)	 # REALPATH = Full path to existing file with symlinks resolved

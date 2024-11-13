@@ -175,7 +175,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_validate(DKAPPS_DIR "dk_DKAPPS_DIR()")
 	dk_configureApp("${DKAPPS_DIR}/DKCore")

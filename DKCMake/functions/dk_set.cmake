@@ -35,7 +35,7 @@ dk_createOsMacros("dk_set")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_set(myVariable "this is the string value of myVariable")
 	dk_info("myVariable = ${myVariable}")

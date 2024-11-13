@@ -7,10 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_getNativePath input output)
-	dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 2)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments:${ARGC}")
-	endif()
+	dk_debugFunc(2)
 	
 	file(TO_NATIVE_PATH "${input}" native_path)
 	dk_debug("Converted ${input} to NATIVE_PATH:${native_path}")

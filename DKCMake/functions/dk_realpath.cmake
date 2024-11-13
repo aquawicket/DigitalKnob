@@ -8,10 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    CMAKE: https://cmake.org/cmake/help/latest/command/get_filename_component.html
 #
 function(dk_realpath path rtn_var)
-	dk_debugFunc()
-	if(NOT ${ARGC} EQUAL 2)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+	dk_debugFunc(2)
 	
 	get_filename_component(_realpath_ ${path} REALPATH)
 	#dk_printVar(_realpath_)

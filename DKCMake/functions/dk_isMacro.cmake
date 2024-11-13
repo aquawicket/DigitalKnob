@@ -34,7 +34,7 @@ macro(test_macro)
 endmacro()
 
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_isMacro(isMacro "test_macro")
 	if(isMacro)

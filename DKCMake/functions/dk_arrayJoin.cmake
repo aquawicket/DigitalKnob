@@ -20,7 +20,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
 function(dk_arrayJoin array separator rtn_val)
-	dk_debugFunc()
+	dk_debugFunc(2 3)
 	
 	list(JOIN ${array} "," arrayJoin)
 	set(${rtn_val} ${arrayJoin} PARENT_SCOPE)
@@ -35,7 +35,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	list(APPEND myArray "a")
 	list(APPEND myArray "b")

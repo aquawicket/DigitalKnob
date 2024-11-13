@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_buildApp)
-	dk_debugFunc()
+	dk_debugFunc(0)
 
 	dk_echo()
 	dk_echo("##################################################################")
@@ -49,7 +49,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_buildApp()
 endfunction()

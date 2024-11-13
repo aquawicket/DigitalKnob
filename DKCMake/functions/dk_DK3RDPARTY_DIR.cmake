@@ -23,7 +23,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	dk_DK3RDPARTY_DIR()
 	dk_printVar(DKBRANCH_DIR)
