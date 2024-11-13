@@ -21,8 +21,4 @@ endforeach()
 
 set(CMAKE_CXX_FLAGS_INIT "-fexceptions -frtti")
 
-set(CMAKE_USER_MAKE_RULES_OVERRIDE ${CMAKE_CURRENT_LIST_FILE})
-set(CMAKE_ASM_OUTPUT_EXTENSION .o)
-set(CMAKE_C_OUTPUT_EXTENSION .o)
-set(CMAKE_CXX_OUTPUT_EXTENSION .o)
-
+set(CMAKE_USER_MAKE_RULES_OVERRIDE "${COSMOCPP_BIN_DIR}/cosmo_user_make_rules_override.cmake")

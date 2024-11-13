@@ -451,7 +451,7 @@ if(cosmo)
 	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
 	dk_validate(DKIMPORTS_DIR						"dk_DKIMPORTS_DIR()")
 	dk_append(DKCMAKE_FLAGS
-		-DCMAKE_USER_MAKE_RULES_OVERRIDE=${DKIMPORTS_DIR}/cosmocc/cosmo_toolchain.cmake
+		-DCMAKE_USER_MAKE_RULES_OVERRIDE=${DKIMPORTS_DIR}/cosmocc/cosmo_user_make_rules_override.cmake
 		-DCMAKE_C_COMPILER_WORKS=1
 		-DCMAKE_CXX_COMPILER_WORKS=1
 	)
