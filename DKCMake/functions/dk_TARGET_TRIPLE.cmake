@@ -21,7 +21,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 #
 function(dk_TARGET_TRIPLE)
-	dk_debugFunc()
+	dk_debugFunc(0 1)
+
 
 	### Get TARGET_DIR ###
 	dk_getFullPath("${CMAKE_BINARY_DIR}" TARGET_DIR)
@@ -41,12 +42,29 @@ function(dk_TARGET_TRIPLE)
 		dk_set(${TYPE} 1)								# 			RELEASE = 1	
 		#dk_set(TARGET_TYPE Release)					# 		TARGET_TYPE = Release
 		dk_dirname(${TARGET_DIR} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
-	else()
-	
-		dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR})			# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+	endif()
+		if( (TARGET_DIR MATCHES "android") 		OR
+			(TARGET_DIR MATCHES "emscripten") 	OR
+			(TARGET_DIR MATCHES "ios") 			OR
+			(TARGET_DIR MATCHES "iossim")		OR		 
+			(TARGET_DIR MATCHES "linux") 		OR
+			(TARGET_DIR MATCHES "mac") 			OR
+			(TARGET_DIR MATCHES "raspberry") 	OR
+			(TARGET_DIR MATCHES "windows")		OR
+			(TARGET_DIR MATCHES "cosmo"))
+			dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR})			# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		else()
+			dk_setTargetTriple()
+			dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR}/${triple})
+		endif()
+
+	if(NOT EXISTS ${TARGET_TRIPLE_DIR})
+		dk_warning("TARGET_TRIPLE_DIR:${TARGET_TRIPLE_DIR} does not exits.")
+		dk_debug("Creating directory . . .${TARGET_TRIPLE_DIR} ")
+		dk_makeDirectory(${TARGET_TRIPLE_DIR})
 	endif()
 	dk_assertPath(TARGET_TRIPLE_DIR)
-
+		
 	### Set DK_PROJECT_DIR ###
 	dk_dirname(${TARGET_TRIPLE_DIR} DK_PROJECT_DIR)
 	dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
@@ -84,6 +102,8 @@ function(dk_TARGET_TRIPLE)
 		dk_set(os windows)
 	elseif(triple MATCHES "win")
 		dk_set(os win)
+	elseif(triple MATCHES "cosmo")
+		dk_set(os cosmo)	
 	else()
 		dk_warning("The target triple:${triple} does not contain a valid os")
 		dk_unset(triple)
@@ -111,6 +131,8 @@ function(dk_TARGET_TRIPLE)
 		dk_set(arch x86_64)
 	elseif(triple MATCHES "x86")
 		dk_set(arch x86)
+	elseif(triple MATCHES "cosmo")
+		dk_set(arch cosmo)	
 	else()
 		dk_warning("The target triple:${triple} does not contain a valid arch")
 		dk_setTargetTriple()
@@ -130,14 +152,14 @@ function(dk_TARGET_TRIPLE)
 	### Set evn / ENV 
 	if(triple MATCHES "clang")
 		dk_set(env clang)
-	elseif(triple MATCHES "cosmo")
-		dk_set(env mingw)
 	elseif(triple MATCHES "mingw")
 		dk_set(env mingw)
 	elseif(triple MATCHES "ucrt")
 		dk_set(env ucrt)
 	elseif(triple MATCHES "msvc")
 		dk_set(env msvc)
+	elseif(triple MATCHES "cosmo")
+		dk_set(env cosmo)
 	else()
 		dk_warning("The target triple:${triple} does not contain a valid env")
 	endif()
@@ -155,11 +177,20 @@ function(dk_TARGET_TRIPLE)
 	### Set MSYSTEM
 	if(${ENV})
 		if(CLANG AND ARM64)
+			dk_set(msystem "${env}${arch}")	# msystem = clangarm64
 			dk_set(MSYSTEM "${ENV}${ARCH}")	# MSYSTEM = CLANGARM64
 		elseif(X86_64)
+			dk_set(msystem "${env}64")		# msystem = clang64, mingw64, ucrt64
 			dk_set(MSYSTEM "${ENV}64")		# MSYSTEM = CLANG64, MINGW64, UCRT64
 		elseif(X86)
+			dk_set(msystem "${env}32")		# msystem = clang32, mingw32
 			dk_set(MSYSTEM "${ENV}32")		# MSYSTEM = CLANG32, MINGW32
+		elseif(cosmo OR COSMO)
+		#	dk_set(msystem "${env}")		# cosmo
+		#	dk_set(MSYSTEM "${ENV}")		# COSMO
+		elseif(msvc OR MSVC)
+		#	dk_set(msystem "msvc")			# cosmo
+		#	dk_set(MSYSTEM "MSVC")			# COSMO
 		else()
 			dk_fatal("The target triple:${triple} does not contain a valid env or msystem")
 		endif()
