@@ -92,12 +92,8 @@ dk_generate() {
 	#dk_call dk_arrayPush CMAKE_ARGS "--warn-unused-vars"
 	#dk_call dk_arrayPush CMAKE_ARGS "--check-system-vars"
 	
-	if [ "${triple}" = "cosmo" ]; then
-		#set -- "-G Unix Makefiles" "${@}"
-		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
-	fi
-	
 	if [ "${triple}" = "android_arm32" ]; then
+		#set -- "-G Unix Makefiles" "${@}"
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 

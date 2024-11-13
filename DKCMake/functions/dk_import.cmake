@@ -56,7 +56,8 @@ function(dk_import url)
 		###### Import from Download File ######
 		else()
 			dk_printVar(CURRENT_PLUGIN)
-			dk_verbose("dk_install(${CURRENT_PLUGIN} ${ARGN})")
+			dk_printVar(${CURRENT_PLUGIN}_IMPORT_NAME)
+			dk_verbose("dk_install(${${CURRENT_PLUGIN}_IMPORT_NAME} ${ARGN})")
 			
 			dk_install(${CURRENT_PLUGIN} ${ARGN} ${NO_HALT})
 		endif()
@@ -68,7 +69,7 @@ function(dk_import url)
 	endif()
 	
 endfunction()
-#dk_createOsMacros("dk_import")
+dk_createOsMacros("dk_import")
 
 
 

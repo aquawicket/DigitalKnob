@@ -3,9 +3,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_findProgram (<VAR> filename [path1 path2 ...]) NO_HALT
+# dk_findProgram (<VAR> filename [path1 path2 ...])
 #
-#	Search for a program and return it's path
+#	TODO
 #
 #	<VAR>				- TODO
 #	filename			- TODO
@@ -13,8 +13,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_findProgram VAR filename)
 	dk_debugFunc()
-	
-	dk_getOption(NO_HALT ${ARGV})
 	
 	if(EXISTS ${${VAR}})
 		dk_debug("already FOUND ${filename} at ${${VAR}}")
@@ -26,7 +24,7 @@ function(dk_findProgram VAR filename)
 	#endif()
 	
 	if(${VAR})
-		dk_fatal("error {VAR} already set to ${VAR}" ${NO_HALT})
+		dk_fatal("error {VAR} already set to ${VAR}")
 	endif()
 	
 	if(ARGN)
@@ -34,25 +32,28 @@ function(dk_findProgram VAR filename)
 		list(REMOVE_DUPLICATES SEARCH_DIRS)
 	endif()
 	if(SEARCH_DIRS)
-		#dk_info("find_program(${VAR} ${filename} ${ARGN};${SEARCH_DIRS} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)")
+		dk_info("find_program(${VAR} ${filename} ${ARGN};${SEARCH_DIRS} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)")
 		find_program(${VAR} ${filename} ${ARGN};${SEARCH_DIRS} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)
 	elseif(ARGN)
-		#dk_info("find_program(${VAR} ${filename} ${ARGN} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)")
+		dk_info("find_program(${VAR} ${filename} ${ARGN} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)")
 		find_program(${VAR} ${filename} ${ARGN} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)
 	else()
 		dk_info("find_program(${VAR} ${filename})")
 		find_program(${VAR} ${filename})
 	endif()
 	
-	if(NOT EXISTS ${${VAR}})
-		dk_notice("COULD NOT FIND ${filename}")
-		dk_unset(${VAR})
+	if(EXISTS ${${VAR}})
+		dk_info("FOUND ${filename} at ${${VAR}}")
+		dk_set(${VAR} "${${VAR}}")
 		return()
+	#elseif(${VAR}_second_pass)
+	#	dk_error("COULD NOT FIND ${filename}")
+	#	dk_unset(${VAR})
+	#	return()
 	endif()
 	
-	dk_success("FOUND ${filename} at ${${VAR}}")
-	dk_set(${VAR} "${${VAR}}")
-
+	#dk_notice("COULD NOT FIND ${filename}")
+	#dk_set(${VAR} "${${VAR}}")
 endfunction()
 
 

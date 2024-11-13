@@ -8,13 +8,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ############ libbcrypt ############
 dk_load(dk_builder)
 if(NOT MINGW)
-#	dk_undepend(libbcrypt)
-#	dk_return()
+	dk_undepend(libbcrypt)
+	dk_return()
 endif()
 
-
-#dk_append(CMAKE_EXE_LINKER_FLAGS -lbcrypt)
-#if(MSYSTEM)
-	dk_appemd(LIBBCRYPT_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lbcrypt")
-#endif()
-
+#dynamic linking
+SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lbcrypt")
+#dk_findLibrary(bcrypt.lib)

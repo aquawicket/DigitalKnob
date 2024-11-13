@@ -1,8 +1,6 @@
 #!/usr/bin/cmake -P
-
-#message("${ESC}[46m ${ESC}[30m ***${CMAKE_CURRENT_LIST_FILE}*** ${ESC}[0m")
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-include_guard()
+include_guard()		# include_guard
 
 ### Print Version Info ###
 message("")
@@ -73,21 +71,10 @@ function(DKINIT)
 	set(ENABLE_DKTEST 1 CACHE INTERNAL "")
 
 	############ LOAD FUNCTION FILES ############
-	
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
-	dk_load(${DKSCRIPT_PATH})
-	
-	if(ENABLE_DKTEST)
-		if(("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}") OR
-		   ("${DKSCRIPT_DIR}/" STREQUAL "${DKCMAKE_FUNCTIONS_DIR_}"))
-			include(${DKSCRIPT_PATH})
-		endif()
-	endif()
-	
-	dk_load(dk_dumpAllVariables)
-	dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 	dk_load(dk_dirname)
 	dk_load(dk_basename)
+	dk_load(${DKSCRIPT_PATH})
 	#dk_load(__TIME__)
 	dk_load(dk_createOsMacros)
 	dk_load(__FILE__)
@@ -100,16 +87,8 @@ function(DKINIT)
 	dk_load(dk_logo)
 	dk_load(dk_watch)
 	
-	#dk_load(dk_messageBox)
-	#variable_watch(CURRENT_PLUGIN dk_onVariableWatch)
-
-	############ DK_PROJECT_DIR ############
-	if(NOT DK_PROJECT_DIR)
-		dk_set(DK_PROJECT_DIR ${CMAKE_SOURCE_DIR})
-		dk_load(dk_CONFIG_PATH)
-		dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
-	endif()
-	dk_printVar(DK_PROJECT_DIR)
+#	dk_load(dk_messageBox)
+#	variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
 	
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)

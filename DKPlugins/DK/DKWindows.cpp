@@ -41,10 +41,8 @@
 #include <cstdlib>          //DKUtil::GetUsername() std::getenv()
 //#include <Lmcons.h>       //DKUtil::GetUsername() GetUserName()
 //Monitor brightness
-#ifdef HAVE_pdh
-	#include "PhysicalMonitorEnumerationAPI.h"
-	#include "HighLevelMonitorConfigurationAPI.h"
-#endif
+#include "PhysicalMonitorEnumerationAPI.h"
+#include "HighLevelMonitorConfigurationAPI.h"
 //WARNING_ENABLE
 
 
@@ -80,7 +78,6 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type){
 bool DKWindows::CpuInit(){
 	DKDEBUGFUNC();
 	//Init for DKWindows::CpuUsed()
-#ifdef HAVE_pdh
 	PdhOpenQuery(NULL, 0, &cpuQuery);
 	// You can also use L"\\Processor(*)\\% Processor Time" and get individual CPU values with PdhGetFormattedCounterArray()
 	PdhAddEnglishCounter(cpuQuery, "\\Processor(_Total)\\% Processor Time", 0, &cpuTotal);
@@ -97,7 +94,6 @@ bool DKWindows::CpuInit(){
 	memcpy(&lastSysCPU, &fsys, sizeof(FILETIME));
 	memcpy(&lastUserCPU, &fuser, sizeof(FILETIME));
 	cpuInit = true;
-#endif	
 	Sleep(1000);
 	return true;
 }
@@ -105,12 +101,10 @@ bool DKWindows::CpuInit(){
 bool DKWindows::CpuUsed(int& cpu){
 	DKDEBUGFUNC(cpu);
 	if(!cpuInit){ CpuInit(); }
-#ifdef HAVE_pdh	
 	PDH_FMT_COUNTERVALUE counterVal;
 	PdhCollectQueryData(cpuQuery);
 	PdhGetFormattedCounterValue(cpuTotal, PDH_FMT_DOUBLE, NULL, &counterVal);
 	cpu = (int)counterVal.doubleValue;
-#endif
 	return true;
 }
 

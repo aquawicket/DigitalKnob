@@ -1,6 +1,6 @@
-include_guard()
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
+include_guard()
 
 ### CMakeLists.txt for DKCMake ###
 ###
@@ -24,7 +24,7 @@ include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
 ### *** building from the command line **
 ### DKCmake works a bit differenct than traditional CMake in that this CMakeFile.txt location is always used as the source directory.
 ### The app, platform and architecture are chosen by where the build directory is set to. For examples: say we want to build an app
-### in the DKApps directory called "MyApp" for linux x32_86 Debug.  The cmake source directory will be set here, /Use  rs/username/digitalknob/Development ,
+### in the DKApps directory called "MyApp" for linux x32_86 Debug.  The cmake source directory will be set here, /Users/username/digitalknob/Development ,
 ### and the build directy will be set to /Users/username/digitalknob/Development/DKApps/MyApp/linux_x86_64/Debug. The set build directoy tells DKCMake everything 
 ### it needs to know to begine to process, acuire all dependencies and build the project. 
 ###
@@ -52,24 +52,25 @@ message("##############################################################")
 message("################# DigitalKnob CMakeLists.txt #################")
 message("##############################################################")
 
-dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
 
-dk_validate(DK_PROJECT_DIR "dk_TARGET_TRIPLE()")
-dk_assertPath(${DK_PROJECT_DIR})
-#dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
+dk_load(dk_dumpAllVariables)
 
-#dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
-
-dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)
+		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
-	#Load all cmake flags prior to calling PROJECT()
-	dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
-	dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 
-	message("################# PROJECT(DigitalKnob) #################")
-	PROJECT(DigitalKnob)
+#Load all cmake flags prior to calling PROJECT()
+dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
+dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 
-			
-	dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
-		
+		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
+
+
+message("################# PROJECT(DigitalKnob) #################")
+PROJECT(DigitalKnob)
+
+		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
+
+dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
+
+		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)

@@ -5,48 +5,19 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-### Depends ###
-dk_depend(psapi)
-dk_depend(pdh)
-dk_depend(dxva2)
-dk_depend(zlib)
-dk_depend(DK)
-
-
-
-
-
-
-
-
-
-
-
-if(TODO__WORK_IN_PROGRESS)
 ############ CLEAR CMAKE CACHE ############
-dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeCache.txt)
-dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
 dk_clearCmakeCache()
 dk_deleteTempFiles()
 
+
 ############ GENERATE APP CMAKE ############
-if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
-dk_generateAppCmake(${DK_PROJECT_DIR}
-	psapi
-	pdh
-	dxva2
-	zlib
-	DK)
-endif()
+set(DK_PROJECT_DIR ${CMAKE_SOURCE_DIR})
+dk_generateAppCmake(${DK_PROJECT_DIR} "zlib;DK")
+
 
 ############ CONFIGURE APP ############
-dk_configure(${DK_PROJECT_DIR} 
-	-DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} 
-	-DTRIPLE=${TRIPLE} 
-	${PSAPI_CMAKE} 
-	${PDHLIB_CMAKE} 
-	${DXVA2_CMAKE})
+dk_configure(${DK_PROJECT_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
+
 
 ############ BUILD APP ############
 dk_build(${DK_PROJECT_DIR})
-endif()

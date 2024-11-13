@@ -33,69 +33,69 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_executeProcess)
 	dk_debugFunc()
 	
-	#set(copyable_output							${ARGV})
+	set(cmd1 										${ARGV})
 	dk_getOptionValues(COMMAND 						${ARGV})
-	#list(REMOVE_ITEM copyable_output COMMAND)
+	list(REMOVE_ITEM cmd1 COMMAND)
 	dk_getOptionValue(WORKING_DIRECTORY 			${ARGV})
-	#list(REMOVE_ITEM copyable_output WORKING_DIRECTORY)
-	#list(REMOVE_ITEM copyable_output ${WORKING_DIRECTORY})
+	list(REMOVE_ITEM cmd1 WORKING_DIRECTORY)
+	list(REMOVE_ITEM cmd1 ${WORKING_DIRECTORY})
 	dk_getOptionValue(TIMEOUT 						${ARGV})
-	#list(REMOVE_ITEM copyable_output TIMEOUT)
-	#list(REMOVE_ITEM copyable_output ${TIMEOUT})
+	list(REMOVE_ITEM cmd1 TIMEOUT)
+	list(REMOVE_ITEM cmd1 ${TIMEOUT})
 	dk_getOptionValue(RESULT_VARIABLE 				${ARGV})
-	#list(REMOVE_ITEM copyable_output RESULT_VARIABLE)
-	#list(REMOVE_ITEM copyable_output ${RESULT_VARIABLE})
+	list(REMOVE_ITEM cmd1 RESULT_VARIABLE)
+	list(REMOVE_ITEM cmd1 ${RESULT_VARIABLE})
 	dk_getOptionValue(RESULTS_VARIABLE 				${ARGV})
-	#list(REMOVE_ITEM copyable_output RESULTS_VARIABLE)
-	#list(REMOVE_ITEM copyable_output ${RESULTS_VARIABLE})
+	list(REMOVE_ITEM cmd1 RESULTS_VARIABLE)
+	list(REMOVE_ITEM cmd1 ${RESULTS_VARIABLE})
 	dk_getOptionValue(OUTPUT_VARIABLE 				${ARGV})
-	#list(REMOVE_ITEM copyable_output OUTPUT_VARIABLE)
-	#list(REMOVE_ITEM copyable_output ${OUTPUT_VARIABLE})
+	list(REMOVE_ITEM cmd1 OUTPUT_VARIABLE)
+	list(REMOVE_ITEM cmd1 ${OUTPUT_VARIABLE})
 	dk_getOptionValue(ERROR_VARIABLE 				${ARGV})
-	#list(REMOVE_ITEM copyable_output ERROR_VARIABLE)
-	#list(REMOVE_ITEM copyable_output ${ERROR_VARIABLE})
+	list(REMOVE_ITEM cmd1 ERROR_VARIABLE)
+	list(REMOVE_ITEM cmd1 ${ERROR_VARIABLE})
 	dk_getOptionValue(INPUT_FILE 					${ARGV})
-	#list(REMOVE_ITEM copyable_output INPUT_FILE)
-	#list(REMOVE_ITEM copyable_output ${INPUT_FILE})
+	list(REMOVE_ITEM cmd1 INPUT_FILE)
+	list(REMOVE_ITEM cmd1 ${INPUT_FILE})
 	dk_getOptionValue(OUTPUT_FILE 					${ARGV})
-	#list(REMOVE_ITEM copyable_output OUTPUT_FILE)
-	#list(REMOVE_ITEM copyable_output ${OUTPUT_FILE})
+	list(REMOVE_ITEM cmd1 OUTPUT_FILE)
+	list(REMOVE_ITEM cmd1 ${OUTPUT_FILE})
 	dk_getOptionValue(ERROR_FILE 					${ARGV})
-	#list(REMOVE_ITEM copyable_output ERROR_FILE)
-	#list(REMOVE_ITEM copyable_output ${ERROR_FILE})
+	list(REMOVE_ITEM cmd1 ERROR_FILE)
+	list(REMOVE_ITEM cmd1 ${ERROR_FILE})
 	dk_getOption(OUTPUT_QUIET						${ARGV})
-	#list(REMOVE_ITEM copyable_output OUTPUT_QUIET)
+	list(REMOVE_ITEM cmd1 OUTPUT_QUIET)
 	dk_getOption(ERROR_QUIET						${ARGV})
-	#list(REMOVE_ITEM copyable_output ERROR_QUIET)
+	list(REMOVE_ITEM cmd1 ERROR_QUIET)
 	if(CMAKE_VERSION VERSION_GREATER "3.15")
 		dk_getOptionValue(COMMAND_ECHO 				${ARGV})
 	endif()
-	#list(REMOVE_ITEM copyable_output COMMAND_ECHO)
-	#list(REMOVE_ITEM copyable_output ${COMMAND_ECHO})
+	list(REMOVE_ITEM cmd1 COMMAND_ECHO)
+	list(REMOVE_ITEM cmd1 ${COMMAND_ECHO})
 	dk_getOption(OUTPUT_STRIP_TRAILING_WHITESPACE 	${ARGV})
-	#list(REMOVE_ITEM copyable_output OUTPUT_STRIP_TRAILING_WHITESPACE)
+	list(REMOVE_ITEM cmd1 OUTPUT_STRIP_TRAILING_WHITESPACE)
 	dk_getOption(ERROR_STRIP_TRAILING_WHITESPACE 	${ARGV})
-	#list(REMOVE_ITEM copyable_output ERROR_STRIP_TRAILING_WHITESPACE)
+	list(REMOVE_ITEM cmd1 ERROR_STRIP_TRAILING_WHITESPACE)
 	if(CMAKE_VERSION VERSION_GREATER "3.8")
 		dk_getOptionValue(ENCODING 					${ARGV})
 	endif()
-	#list(REMOVE_ITEM copyable_output ENCODING)
-	#list(REMOVE_ITEM copyable_output ${ENCODING})
+	list(REMOVE_ITEM cmd1 ENCODING)
+	list(REMOVE_ITEM cmd1 ${ENCODING})
 	if(CMAKE_VERSION VERSION_GREATER "3.18")
 		dk_getOption(ECHO_OUTPUT_VARIABLE			${ARGV})
 		dk_getOption(ECHO_ERROR_VARIABLE			${ARGV})
 	endif()
-	#list(REMOVE_ITEM copyable_output ECHO_OUTPUT_VARIABLE)
-	#list(REMOVE_ITEM copyable_output ECHO_ERROR_VARIABLE)
+	list(REMOVE_ITEM cmd1 ECHO_OUTPUT_VARIABLE)
+	list(REMOVE_ITEM cmd1 ECHO_ERROR_VARIABLE)
 	if(CMAKE_VERSION VERSION_GREATER "3.19")
 		dk_getOptionValue(COMMAND_ERROR_IS_FATAL 	${ARGV})
 	endif()
-	#list(REMOVE_ITEM copyable_output COMMAND_ERROR_IS_FATAL)
-	#list(REMOVE_ITEM copyable_output ${COMMAND_ERROR_IS_FATAL})
+	list(REMOVE_ITEM cmd1 COMMAND_ERROR_IS_FATAL)
+	list(REMOVE_ITEM cmd1 ${COMMAND_ERROR_IS_FATAL})
 	dk_getOption(NO_HALT 							${ARGV} REMOVE)
-	#list(REMOVE_ITEM copyable_output NO_HALT)
+	list(REMOVE_ITEM cmd1 NO_HALT)
 	dk_getOption(NOECHO 							${ARGV} REMOVE)
-	#list(REMOVE_ITEM copyable_output NOECHO)
+	list(REMOVE_ITEM cmd1 NOECHO)
 
 	if(NOT COMMAND)
 		list(INSERT ARGV 0 COMMAND)  # insert COMMAND if missing
@@ -122,19 +122,19 @@ function(dk_executeProcess)
 		list(APPEND ARGV WORKING_DIRECTORY "${PWD}") # add WORKING_DIRECTORY if missing
 	endif()
 	
-	############ TIMEOUT ############
+	### TIMEOUT ###
 #	if(NOT TIMEOUT)
 #		set(TIMEOUT 5)
 #		list(APPEND ARGV TIMEOUT ${TIMEOUT})
 #	endif()
 	
-	############ RESULT_VARIABLE ############
+	### RESULT_VARIABLE ###
 	if(NOT RESULT_VARIABLE)
 		set(RESULT_VARIABLE result_variable)
 		list(APPEND ARGV RESULT_VARIABLE ${RESULT_VARIABLE})
 	endif()
 	
-	############ RESULTS_VARIABLE ############
+	### RESULTS_VARIABLE ###
 	if(CMAKE_VERSION VERSION_GREATER "3.10")
 		if(NOT RESULTS_VARIABLE)
 			set(RESULTS_VARIABLE results_variable)
@@ -142,102 +142,100 @@ function(dk_executeProcess)
 		endif()
 	endif()
 	
-	############ OUTPUT_VARIABLE ############
+	### OUTPUT_VARIABLE ###
 	if(NOT OUTPUT_VARIABLE)
 		set(OUTPUT_VARIABLE output_variable)
 		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	
-	############ ERROR_VARIABLE ############
+	### ERROR_VARIABLE ###
 	if(NOT ERROR_VARIABLE)
 		set(ERROR_VARIABLE error_variable)
 		list(APPEND ARGV ERROR_VARIABLE ${ERROR_VARIABLE})
 	endif()
 	
-#	############ INPUT_FILE ############
+#	### INPUT_FILE ###
 #	if(NOT INPUT_FILE)
 #		set(INPUT_FILE input_file,txt)
 #		list(APPEND ARGV INPUT_FILE ${INPUT_FILE})
 #	endif()
 	
-#	############ OUTPUT_FILE ############
+#	### OUTPUT_FILE ###
 #	if(NOT OUTPUT_FILE)
 #		set(OUTPUT_FILE output_file.txt)
 #		list(APPEND ARGV OUTPUT_FILE ${OUTPUT_FILE})
 #	endif()
 	
-	############ ERROR_FILE ############
+	### ERROR_FILE ###
 #	if(NOT ERROR_FILE)
 #		set(ERROR_FILE error_file.txt)
 #		list(APPEND ARGV ERROR_FILE ${ERROR_FILE})
 #	endif()
 	
-	############ OUTPUT_QUIET ############
+	### OUTPUT_QUIET ###
 #	if(NOT OUTPUT_QUIET)
 #		list(APPEND ARGV OUTPUT_QUIET)
 #	endif()
 	
-	############ ERROR_QUIET ############
+	### ERROR_QUIET ###
 #	if(NOT ERROR_QUIET)
 #		list(APPEND ARGV ERROR_QUIET)
 #	endif()
 	
-	############ COMMAND_ECHO ############
-	if(CMAKE_VERSION VERSION_GREATER "3.15")
-		if(NOT COMMAND_ECHO)
-			set(COMMAND_ECHO STDOUT)
-			list(APPEND ARGV COMMAND_ECHO ${COMMAND_ECHO})
-		endif()
-	endif()
+#	### COMMAND_ECHO ###
+#	if(CMAKE_VERSION VERSION_GREATER "3.15")
+#		if(NOT COMMAND_ECHO)
+#			set(COMMAND_ECHO STDOUT)
+#			list(APPEND ARGV COMMAND_ECHO ${COMMAND_ECHO})
+#		endif()
+#	endif()
 	
-	############ OUTPUT_STRIP_TRAILING_WHITESPACE ############
+	### OUTPUT_STRIP_TRAILING_WHITESPACE ###
 	if(NOT OUTPUT_STRIP_TRAILING_WHITESPACE)
 		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
-	############ ERROR_STRIP_TRAILING_WHITESPACE ############
+	### ERROR_STRIP_TRAILING_WHITESPACE ###
 	if(NOT ERROR_STRIP_TRAILING_WHITESPACE)
 		list(APPEND ARGV ERROR_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
-	############ ENCODING ############
+	### ENCODING ###
 #	if(CMAKE_VERSION VERSION_GREATER "3.8")
 #		if(NOT ENCODING)
 #			list(APPEND ARGV ENCODING UTF-8)
 #		endif()
 #	endif()
 	
-	############ ECHO_OUTPUT_VARIABLE ############
+	### ECHO_OUTPUT_VARIABLE ###
 	if(CMAKE_VERSION VERSION_GREATER "3.18")
 		if(NOT ECHO_OUTPUT_VARIABLE)
 			list(APPEND ARGV ECHO_OUTPUT_VARIABLE)
 		endif()
 	endif()
 	
-	############ ECHO_ERROR_VARIABLE ############
+	### ECHO_ERROR_VARIABLE ###
 	if(CMAKE_VERSION VERSION_GREATER "3.18")
 		if(NOT ECHO_ERROR_VARIABLE)
 			list(APPEND ARGV ECHO_ERROR_VARIABLE)
 		endif()
 	endif()
 	
-	############ VERSION_GREATER ############
-#	if(CMAKE_VERSION VERSION_GREATER "3.19")
-#		if(NOT COMMAND_ERROR_IS_FATAL)
-#			list(APPEND ARGV COMMAND_ERROR_IS_FATAL ANY)
-#		endif()
-#	endif()
+	### VERSION_GREATER ###
+	if(CMAKE_VERSION VERSION_GREATER "3.19")
+		if(NOT COMMAND_ERROR_IS_FATAL)
+			list(APPEND ARGV COMMAND_ERROR_IS_FATAL ANY)
+		endif()
+	endif()
 	
 	###################################################
 	
-	set(exe_output ${ARGV})
-	dk_reparseCmakeCommand(exe_output) # support longer command lines
+	dk_reparseCmakeCommand(ARGV) # support longer command lines
 	
 #	if(NOT NOECHO)
-		dk_replaceAll("${exe_output}"  ";"  " "  copyable_output)
-		dk_echo("${cyan}exact> ${lmagenta}${exe_output}${clr}")
-		#dk_echo("${lblue}cmnd> ${lcyan}${copyable_output}${clr}")
-		execute_process(${exe_output})
+		dk_replaceAll("${cmd1}"  ";"  " "  cmd1)	
+		dk_echo("${lblue}exec> ${lcyan}${cmd1}${clr}")
+		execute_process(${ARGV})
 #	endif()
 	
 #	if(NOT ${result_variable} EQUAL 0)
@@ -254,7 +252,7 @@ function(dk_executeProcess)
 		if(${ERROR_VARIABLE})
 			dk_printVar(${ERROR_VARIABLE})
 		endif()
-		if(${RESULT_VARIABLE})
+		if(${${RESULT_VARIABLE}})
 			dk_fatal("${${RESULT_VARIABLE}}" ${NO_HALT})
 		endif()
 #	else()
@@ -273,10 +271,7 @@ function(dk_executeProcess)
 	endif()
 	
 endfunction()
-
-
-
-
+#dk_createOsMacros("dk_executeProcess")
 
 
 

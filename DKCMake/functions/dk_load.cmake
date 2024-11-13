@@ -17,21 +17,19 @@ set(indent_count 0 CACHE INTERNAL "")
 #
 #	@var  - The name of an eisting function/file or a full file path to a .cmake file.
 #
-#	NOTE: dk_load should not use any dk_ functions. It may attempt to use said function before it has loaded it.
-#		  Only use raw cmake functions here.
-#
 macro(dk_load var)
 	#dk_debugFunc()
-	message("dk_load(${ARGV})")
+	#dk_echo("dk_load(${var})")
 	
 	string(STRIP ${var} fn)
 	get_filename_component(name_we "${fn}" NAME_WE)
 	if("${name_we}" STREQUAL "DKMAKE")
-		get_filename_component(fnDir "${fn}" DIRECTORY)
+		#TESTME
+		dk_dirname("${fn}" fnDir)
 		if(fnDir)
 			set(fn ${fnDir})
 		endif()
-		get_filename_component(fnName "${fn}" NAME)
+		dk_basename("${fn}" fnName)
 		if(fnName)
 			set(fn ${fnName})
 		endif()
@@ -92,7 +90,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	#elseif(EXISTS ${fpath}.cmake)
 	#	set(${fn}_file ${fpath}.cmake)
 	else()
-		dk_fatal("fpath:${fpath} file not found")   # FIXME: do not use dk_ functions in dk_load.cmake, only use raw cmake functions.
+		dk_fatal("fpath:${fpath} file not found")
 	endif()
 	
 	

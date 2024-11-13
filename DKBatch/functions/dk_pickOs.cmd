@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_echo
     echo  1) %host_triple%
     %dk_call% dk_echo
-	echo  2) cosmopolitan
+	echo  2) ALL (cosmopolitan)
     echo  3) Android arm32
     echo  4) Android arm64
     echo  5) Android x86
@@ -98,12 +98,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="32" endlocal & set "%1=win_x86_msvc"        & %return%
     if "%choice%"=="33" endlocal & set "%1=win_x86_64_mingw"    & %return%
     if "%choice%"=="34" endlocal & set "%1=win_x86_64_clang"    & %return%
-    if "%choice%"=="35" endlocal & set "%1=win_x86_64_ucrt"     & %return%
-    if "%choice%"=="36" endlocal & set "%1=win_x86_64_msvc"     & %return%
-    if "%choice%"=="37" endlocal & set "%1=none"                & %return%
-    if "%choice%"=="38" %dk_call% dk_clearScreen                & %return%
-    if "%choice%"=="39" %dk_call% dk_unset APP                  & %return%
-    if "%choice%"=="40" %dk_call% dk_exit                       & %return%
+	if "%choice%"=="35" endlocal & set "%1=win_x86_64_cosmo"    & %return%
+    if "%choice%"=="36" endlocal & set "%1=win_x86_64_ucrt"     & %return%
+    if "%choice%"=="37" endlocal & set "%1=win_x86_64_msvc"     & %return%
+    if "%choice%"=="38" endlocal & set "%1=none"                & %return%
+    if "%choice%"=="39" %dk_call% dk_clearScreen                & %return%
+    if "%choice%"=="40" %dk_call% dk_unset APP                  & %return%
+    if "%choice%"=="41" %dk_call% dk_exit                       & %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
     %dk_call% dk_unset triple

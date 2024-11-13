@@ -4,6 +4,7 @@
 
 #include "DK.hpp"
 
+
 //################################################################################
 //# dk_info(message)
 //#
@@ -11,5 +12,6 @@
 void dk_info(const char* message){
 	dk_log(INFO, message);
 };
+
 
 #endif //dk_info_hpp
