@@ -18,9 +18,7 @@ function(dk_getDirectory path rtn_var)
 		return() # no path dividers found
 	endif()
 	string(SUBSTRING ${path} 0 ${index} directory)
-	#dk_printVar(directory)
     set(${rtn_var} ${directory} PARENT_SCOPE)
-	#dk_printVar(rtn_var)
 endfunction()
 
 

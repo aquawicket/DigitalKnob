@@ -1,4 +1,4 @@
-include_guard()	
+#include_guard()	
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
