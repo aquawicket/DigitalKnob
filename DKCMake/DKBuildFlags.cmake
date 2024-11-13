@@ -638,7 +638,7 @@ endif()
 
 
 ### Windows x86_64 - COSMOPOLITAN ###
-if(win_x86_64_cosmo)
+if(cosmo)
 	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
 	
 	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)

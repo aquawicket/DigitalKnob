@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_info "##################################################################"
     %dk_call% dk_echo
     
-    ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
+	::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
 	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKBRANCH_DIR"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     if not exist "%TARGET_PATH%\%triple%"   %dk_call% dk_makeDirectory "%TARGET_PATH%\%triple%"
@@ -90,7 +90,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 	
-	if "%triple%"=="cosmo"   			%dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+	if "%triple%"=="cosmo"   			%dk_call% dk_prependArgs CMAKE_ARGS -G "MSYS Makefiles"
     if "%triple%"=="android_arm32"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%triple%"=="android_arm64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%triple%"=="android_x86" 	    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
@@ -148,6 +148,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
 	::###### Delete Cmake Cache files ######
 	%dk_call% dk_clearCmakeCache %APP% %triple% %TYPE%
+	%dk_call% dk_deleteTempFiles
 	
     %dk_call% dk_info "****** CMAKE COMMAND ******"
     echo %CMAKE_EXE% %CMAKE_ARGS%

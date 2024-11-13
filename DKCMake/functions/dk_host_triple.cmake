@@ -149,6 +149,18 @@ function(dk_host_triple)
 		dk_printVar(${HOST_TRIPLE}_HOST)
 	endif()
 		
+		
+	if((NOT host_triple) AND (cosmo OR COSMO))
+		dk_set(host_triple "cosmo")
+		dk_set(HOST_TRIPLE "COSMO")
+		dk_set(${host_triple}_host 1)	
+		dk_set(${HOST_TRIPLE}_HOST 1)
+		dk_printVar(${host_triple}_host)
+		dk_printVar(${HOST_TRIPLE}_HOST)
+	endif()
+	if((NOT HOST_TRIPLE) AND COSMO)
+	
+	endif()
 	dk_printVar(host_triple)
 	dk_printVar(HOST_TRIPLE)
 	dk_printVar(${host_triple}_host)
