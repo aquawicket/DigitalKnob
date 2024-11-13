@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 int main() {
-	printf("Hello World! from printf\n");
     std::cout << "Hello World! from std::cout" << std::endl;
 	
 	//std::cout << "(press enter to exit)" << std::endl;
