@@ -27,7 +27,8 @@ dk_set(COSMOPOLITAN 					1)
 dk_set(CMAKE_GENERATOR					"MSYS Makefiles")
 #dk_set(CMAKE_GENERATOR					"MinGW Makefiles")
 dk_set(CMAKE_FORCE_UNIX_PATHS 1)
-	
+
+dk_validate(MSYS2 						"include(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)")
 dk_set(COSMO_MAKE_PROGRAM 				"${MSYS2}/clang64/bin/mingw32-make.exe")
 dk_set(COSMO_ASM_COMPILER 				"${COSMOCC}/bin/cosmocc")
 dk_set(COSMO_C_COMPILER 				"${COSMOCC}/bin/cosmocc")
