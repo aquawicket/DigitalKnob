@@ -17,7 +17,7 @@ dk_load(dk_builder)
 #dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
-	dk_return()
+	continue()
 endif()
 
 
@@ -33,27 +33,24 @@ if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
 	dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
 endif()
 
-### Return if MSYS2_EXE is already set
-if(EXISTS ${MSYS2_EXE})
-	dk_return()
-endif()
 
-
-### INSTALL ###
+### Get Variables ###
 dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
 dk_importVariables(${MSYS2_DL})
-
 dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
+#if(EXISTS ${MSYS2_EXE})
+	#dk_return() ### Return if MSYS2_EXE is already set
+#endif()
+
+### INSTALL ###
 dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
 dk_assertPath(DKDOWNLOAD_DIR)
 
-### Install Msys2 ###
 if(NOT EXISTS ${MSYS2_EXE})
 	dk_info("Installing ${MSYS2_FOLDER}")
 	dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
 	dk_command("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2_DIR}" --confirm-command)
 endif()	
-
 
 
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
@@ -69,9 +66,13 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
 		dk_setEnv("${MSYSTEM}"	ON)
 		dk_toLower(${MSYSTEM} msystem)
-		dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
-		dk_exportVars(PATH "$ENV{PATH}")
-
+		
+		if(COSMO)
+			# Temporary fix fpr cosmopoiltan
+		else()
+			dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
+			dk_exportVars(PATH "$ENV{PATH}")
+		endif()
 		dk_installPackage(toolchain)
 	else()
 		dk_set(MSYS2_BASH_EXPORTS	"export PATH=${MSYS2_DIR}/usr/bin:$PATH")
@@ -97,5 +98,3 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_set(UCRT64_EXE 		"${MSYS2_DIR}/ucrt64.exe")
 	dk_set(MSYS2_EXE 		"${MSYS2_DIR}/msys2.exe")
 endif()
-
-

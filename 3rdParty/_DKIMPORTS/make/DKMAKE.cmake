@@ -13,7 +13,6 @@ dk_load(dk_builder)
 #	return()
 #endif()
 
-
 if(WIN_HOST)
 	if(DEFINED ENV{MSYSTEM})
 		dk_set(MSYSTEM "$ENV{MSYSTEM}")
@@ -24,7 +23,14 @@ endif()
 
 dk_installPackage(make)
 
-if(android)
+if(cosmo)
+	if(WIN_HOST)
+		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang64/bin")
+	else()
+		dk_findProgram(CMAKE_MAKE_PROGRAM make)
+	endif()
+	
+elseif(android)
 	if(WIN_HOST)
 		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang64/bin")
 	else()
