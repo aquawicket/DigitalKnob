@@ -15,8 +15,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
     :: get a list of the directories in DKApps
 	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	
+	%dk_call% dk_deleteArray options
     %dk_call% dk_getDirectories "%DKAPPS_DIR%" options
-  
+	%dk_call% dk_deleteArray commands
+	
     :: rename the list elements to the folder basename and add a matching command
     set /a "n=0"
     :loop1
