@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 #
 function(dk_arrayLength array rtn_var)
-	dk_debugFunc(1 2)
+	dk_debugFunc()
 	
 	if(DEFINED "${array}")
 		set(_array_ "${array}")

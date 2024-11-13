@@ -8,8 +8,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@variable  - The name of a variable to test
 #	@code	   - The code to run if the variable is invalid. Like a function "dk_DIGITALKNOB_DIR()"
 #
-macro(dk_validate variable code)
-	dk_debugFunc(2)
+macro(dk_validate)# variable code)
+	dk_debugFunc()
 	
 #	if(NOT variable)
 #		dk_warning("dk_append(${variable} ${code}) variable is invalid")
@@ -20,8 +20,8 @@ macro(dk_validate variable code)
 #		dk_return()
 #	endif()
 	
-	if(NOT DEFINED ${variable})
-		dk_eval("${code}")
+	if(NOT DEFINED ${ARGV0})
+		dk_eval("${ARGV1}")
 	endif()
 	
 	

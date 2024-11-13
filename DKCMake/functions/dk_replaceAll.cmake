@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_replaceAll input searchValue newValue rtn_var)
-	dk_debugFunc(4)
+	dk_debugFunc()
 		
 	string(REPLACE "${searchValue}" "${newValue}" replaceAll "${input}")
 	

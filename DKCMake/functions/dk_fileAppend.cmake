@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_fileAppend filepath str) 
-	dk_debugFunc(2)
+	dk_debugFunc()
 	
 	file(APPEND ${filepath} "${str}")
 endfunction()

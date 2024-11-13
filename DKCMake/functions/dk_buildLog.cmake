@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@entry			- TODO
 #
 function(dk_buildLog entry)
-	dk_debugFunc(1 2)
+	dk_debugFunc()
 	
 	dk_getOptionValue(PATH ${ARGV})
 	

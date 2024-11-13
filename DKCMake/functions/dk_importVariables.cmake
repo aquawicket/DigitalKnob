@@ -346,14 +346,13 @@ function(dk_importVariables url)
 	
 	# CURRENT_PLUGIN
 	unset(CURRENT_PLUGIN)
-	#dk_set(CURRENT_PLUGIN ${PLUGIN_IMPORT_NAME_UPPER})
 	dk_convertToCIdentifier(${PLUGIN_IMPORT_NAME_UPPER} CURRENT_PLUGIN)
 	dk_set(CURRENT_PLUGIN ${CURRENT_PLUGIN})
 	if(NOT ${PLUGIN_IMPORT_NAME_UPPER} STREQUAL ${CURRENT_PLUGIN})
 		dk_notice("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to ${CURRENT_PLUGIN}")
 	endif()
 	dk_printVar(CURRENT_PLUGIN)											# CURRENT_PLUGIN			: ZLIB
-	
+		
 	# <PLUGIN>
 	unset(${CURRENT_PLUGIN})
 	dk_set(${CURRENT_PLUGIN} ${PLUGIN_INSTALL_PATH})
@@ -447,8 +446,6 @@ function(dk_importVariables url)
 	
 	#unset(${rtn_var})
 	#set(${rtn_var} ${CURRENT_PLUGIN} PARENT_SCOPE)
-	#dk_printVar(CURRENT_PLUGIN)
-	
 endfunction()
 
 
@@ -459,7 +456,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(0)
+	dk_debugFunc()
 	
 	set(CMAKE_CURRENT_LIST_DIR "C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/git")
 	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe")
