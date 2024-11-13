@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::##############################################################################
-::# dk_haveInternet(name) -> rtn_var
+::# dk_haveInternet(name) -> rtn_bool
 ::# 
 ::#
 :dk_haveInternet
