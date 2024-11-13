@@ -12,8 +12,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "_icon_exe_=%~2"
     set "_command_=%~3"
     
-    %dk_call% dk_info "Adding '%_menuTitle_%' context menu to Registry 
-	%dk_call% dk_info "using %_icon_exe_%" for the icon"
+    %dk_call% dk_info "Adding '%_menuTitle_%' context menu to Registry"
+	%dk_call% dk_info "using %_icon_exe_% for the icon"
     
     ::### delete existing key ###
     %dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%"
