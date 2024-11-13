@@ -641,9 +641,9 @@ endif()
 if(cosmo)
 	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
 	
-#	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
-#	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
-#	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_append(CMAKE_C_FLAGS							-DCOSMOS -DX86_64 -std=gnu17)   # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ 
+	dk_append(CMAKE_CXX_FLAGS						-DCOSMOS -DX86_64 -std=gnu++17) # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_
+	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 #	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64)
 	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
 	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
