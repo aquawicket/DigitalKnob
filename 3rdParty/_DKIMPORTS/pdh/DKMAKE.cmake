@@ -7,11 +7,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_load(dk_builder)
 if(NOT WIN)
-	dk_undepend(pdh.lib)
+	dk_undepend(pdh)
 	dk_return()
 endif()
 
-dk_findLibrary(pdh.lib)
+dk_findLibrary(pdh)
 
 
 
