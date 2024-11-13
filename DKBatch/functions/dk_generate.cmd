@@ -62,7 +62,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_appendArgs CMAKE_ARGS --warn-uninitialized
     %dk_call% dk_appendArgs CMAKE_ARGS --warn-unused-vars
     ::%dk_call% dk_appendArgs CMAKE_ARGS --check-system-vars
-    
+     
+	if "%triple%"=="cosmo"              %dk_call% dk_prependArgs CMAKE_ARGS -DCOSMO=1
     if "%triple%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64
     if "%triple%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
     if "%triple%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32

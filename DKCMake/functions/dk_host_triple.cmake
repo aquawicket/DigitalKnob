@@ -23,7 +23,15 @@ function(dk_host_triple)
 	dk_debugFunc()
 	
 	#### DEFAULT HOST ENVIRONMENT ###
-	dk_set(default_host_env "clang") # clang, cosmo, msvc, gcc
+	if(COSMOS)
+		#set(CMAKE_HOST_UNIX 1)
+		#dk_unset(CMAKE_HOST_WIN32)
+		#dk_unset(CMAKE_HOST_APPLE)
+		#set(CMAKE_HOST_SYSTEM_NAME "COSMOS")
+		dk_set(default_host_env "cosmo") # clang, cosmo, msvc, gcc
+	else()
+		dk_set(default_host_env "clang") # clang, cosmo, msvc, gcc
+	endif()
 	
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
 		set(CMAKE_HOST_WIN32 1)
@@ -79,6 +87,8 @@ function(dk_host_triple)
 		endif()
 	endif()
 	string(STRIP "${CMAKE_HOST_SYSTEM_PROCESSOR}" CMAKE_HOST_SYSTEM_PROCESSOR)
+	#if(COSMO)
+	#	dk_set(host_arch cosmo)
 	if("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "aarch64")
 		dk_set(host_arch arm64)
 	elseif("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "AMD64")

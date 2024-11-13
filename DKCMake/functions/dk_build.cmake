@@ -11,12 +11,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	target (optional)	- The target of the project to build
 #
 function(dk_build path) #target NO_HALT
-	dk_debugFunc(1 2)
+	dk_debugFunc()
 	dk_debug("dk_build(${ARGV})")
-	dk_debug("dk_build(${path})")
-	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-	dk_debug("PWD = ${PWD}")
-	
 	#dk_assertPath(${path})
 	
 	if(NOT QUEUE_BUILD)
@@ -25,7 +21,7 @@ function(dk_build path) #target NO_HALT
 	dk_getOption(NO_HALT ${ARGV})
 
 	#dk_assertPath(${path})	
-	set(target ${ARGV1})
+	set(target ${ARGN})
 	
 	# If we are in MULTI_CONFIG mode, we need to do a second pass to check for build files in SINGLE_CONFIG mode. Some libraries are
 	# still built in SINGLE_CONFIG mode event though the main project isn't 
@@ -34,49 +30,38 @@ function(dk_build path) #target NO_HALT
 	#endif()
 	#list(APPEND BUILD_MODE single_config)
 		#dk_assertVar(CONFIG_PATH)
-		dk_cd(${path}/${CONFIG_PATH})
 
 		# Build with CMake		(multi_config / single_config)
 		if(EXISTS ${path}/${CONFIG_PATH}/cmake_install.cmake)
-			dk_info("Building with CMake")
-			if(${ARGC} GREATER 1)
-				#dk_fileAppend(${PWD}/DKBUILD.log "${CMAKE_EXE} --build . --config Debug --target ${target} \n\n")
-				dk_if(DEBUG  "dk_command(${CMAKE_EXE} --build . --config Debug --target ${target})")# ${NO_HALT} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-				#dk_fileAppend(${PWD}/DKBUILD.log "${echo_output}\n\n\n")
-				
-				dk_if(RELEASE "dk_command(${CMAKE_EXE} --build . --config Release --target ${target})")# ${NO_HALT})
+			dk_info("Building with CMake (single_config)")
+			if(target)
+				dk_if(DEBUG  "dk_command(${CMAKE_EXE} --build ${path}/${CONFIG_PATH} --config Debug --target ${target} --verbose)")
+				dk_if(RELEASE "dk_command(${CMAKE_EXE} --build ${path}/${CONFIG_PATH} --config Release --target ${target} --verbose)")
 			else()
-				#dk_fileAppend(${PWD}/DKBUILD.log "${CMAKE_EXE} --build . --config Debug --target ${target} \n\n")
-				dk_if(DEBUG "dk_command(${CMAKE_EXE} --build . --config Debug)") # ${NO_HALT} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)")
-				#dk_fileAppend(${PWD}/DKBUILD.log "${echo_output}\n\n\n")
-				
-				dk_if(RELEASE "dk_command(${CMAKE_EXE} --build . --config Release)") # ${NO_HALT})")
+				dk_if(DEBUG "dk_command(${CMAKE_EXE} --build ${path}/${CONFIG_PATH} --config Debug --verbose)")
+				dk_if(RELEASE "dk_command(${CMAKE_EXE} --build ${path}/${CONFIG_PATH} --config Release --verbose)")
 			endif()
 			dk_return()
 		endif()
 		if(MULTI_CONFIG)
 			if(DEBUG)
 				if(EXISTS ${path}/${triple}/${DEBUG_DIR}/cmake_install.cmake)
-					dk_cd(${path}/${triple}/${DEBUG_DIR})
-					dk_info("Building with CMake")
-					if(${ARGC} GREATER 1)
-						dk_if(DEBUG "dk_command(${CMAKE_EXE} --build . --config Debug --target ${target})") # ${NO_HALT})
+					dk_info("Building with CMake (multi_config)")
+					if(target)
+						dk_command(${CMAKE_EXE} --build ${path}/${triple}/${DEBUG_DIR} --config Debug --target ${target} --verbose)
 					else()
-						dk_if(DEBUG "dk_command(${CMAKE_EXE} --build . --config Debug)") # ${NO_HALT})
+						dk_command(${CMAKE_EXE} --build ${path}/${triple}/${DEBUG_DIR} --config Debug --verbose)
 					endif()
-					dk_cd(${path}/${CONFIG_PATH})
 					dk_return()
 				endif()
 			elseif(RELEASE)
 				if(EXISTS ${path}/${triple}/${RELEASE_DIR}/cmake_install.cmake)
-					dk_cd(${path}/${triple}/${RELEASE_DIR})
-					dk_info("Building with CMake")
-					if(${ARGC} GREATER 1)
-						dk_if(RELEASE "dk_command(${CMAKE_EXE} --build . --config Release --target ${target})") # ${NO_HALT})
+					dk_info("Building with CMake (multi_config)")
+					if(target)
+						dk_command(${CMAKE_EXE} --build ${path}/${triple}/${RELEASE_DIR} --config Release --target ${target} --verbose)
 					else()
-						dk_if(RELEASE "dk_command(${CMAKE_EXE} --build . --config Release)") # ${NO_HALT})
+						dk_command(${CMAKE_EXE} --build ${path}/${triple}/${RELEASE_DIR} --config Release --verbose)
 					endif()
-					dk_cd(${path}/${CONFIG_PATH})
 					dk_return()
 				endif()
 			endif()
@@ -160,7 +145,6 @@ function(dk_build path) #target NO_HALT
 			endif()
 		endif()
 		
-		
 	#endforeach()
 	
 	dk_fatal("dk_build(): ${path}/${CONFIG_PATH} has no buildable files")
@@ -175,7 +159,7 @@ dk_createOsMacros("dk_build")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(0)
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

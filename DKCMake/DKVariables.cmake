@@ -86,12 +86,27 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 endif()
 
 
+if(DEFINED "ENV{COSMO}")
+	dk_set(COSMO "$ENV{COSMO}")
+	dk_set(cosmo "cosmo")
+endif()
+if(COSMO)
+	message(COSMO)
+	#dk_set(CMAKE_HOST_SYSTEM_NAME "COSMOS")
+	#dk_set(CMAKE_HOST_UNIX 1)
+	#dk_unset(CMAKE_HOST_WIN32)
+	#dk_unset(CMAKE_HOST_APPLE)
+	#dk_unset(WIN32)
+endif()
+
+
 ###### Set MSYSTEM and ${MSYSTEM} variables ######
 if(DEFINED "ENV{MSYSTEM}")
 	dk_set(MSYSTEM "$ENV{MSYSTEM}")		
 endif()
 if(MSYSTEM)
 	dk_set(${MSYSTEM} TRUE)
+	message(MSYSTEM)
 endif()
 
 
@@ -302,6 +317,6 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT triple)
 		#dk_printVar(CMAKE_BINARY_DIR)	
-		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
+		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are cosmo,android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
 	endif()
 endif()

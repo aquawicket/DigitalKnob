@@ -8,6 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_smartExtract src dest)
     dk_debugFunc()
+	dk_debug("dk_smartExtract(${ARGV})")
  
 	dk_getOptionValues(NO_HALT 			${ARGV})
 	#dk_getOptionValues(EXTRACT_PATH 	${ARGV})

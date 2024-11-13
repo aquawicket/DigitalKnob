@@ -295,8 +295,8 @@ if(ENABLE_EXCEPTIONS)
 		dk_append(CMAKE_C_FLAGS /EHsc)
 		dk_append(CMAKE_CXX_FLAGS /EHsc)
 	else()
-#		dk_append(CMAKE_C_FLAGS -fexceptions)
-#		dk_append(CMAKE_CXX_FLAGS -fexceptions)
+		dk_append(CMAKE_C_FLAGS -fexceptions)
+		dk_append(CMAKE_CXX_FLAGS -fexceptions)
 	endif()
 #	dk_append(DKCONFIGURE_CFLAGS -fexceptions) 
 #	dk_append(DKCONFIGURE_CXXFLAGS -fexceptions)
@@ -436,6 +436,27 @@ if(ANDROID_X86_64)
 		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
 	)
 endif()
+
+
+
+### COSMOPOLITAN ###
+if(cosmo)
+	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-DCOSMOS)# -std=gnu17)   # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ 
+	dk_append(CMAKE_CXX_FLAGS						-DCOSMOS)# -std=gnu++17) # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_
+	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+#	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64)
+	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+	dk_validate(DKIMPORTS_DIR						"dk_DKIMPORTS_DIR()")
+	dk_append(DKCMAKE_FLAGS
+		-DCMAKE_USER_MAKE_RULES_OVERRIDE=${DKIMPORTS_DIR}/cosmocc/cosmo_toolchain.cmake
+		-DCMAKE_C_COMPILER_WORKS=1
+		-DCMAKE_CXX_COMPILER_WORKS=1
+	)
+endif()
+
 
 
 ### Emscripten ###
@@ -632,19 +653,6 @@ if(win_x86_64_clang)
 	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DMSYSTEM=CLANG64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64-mingw32)
-	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
-	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
-endif()
-
-
-### Windows x86_64 - COSMOPOLITAN ###
-if(cosmo)
-	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
-	
-	dk_append(CMAKE_C_FLAGS							-DCOSMOS -DX86_64 -std=gnu17)   # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ 
-	dk_append(CMAKE_CXX_FLAGS						-DCOSMOS -DX86_64 -std=gnu++17) # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_
-	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
-#	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64)
 	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
 	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
 endif()
