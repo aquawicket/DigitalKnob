@@ -557,6 +557,27 @@ if(ANDROID)
 endif(ANDROID)
 
 
+#############
+if(COSMO)
+	####################### Create Executable Target ###################
+	add_executable(${APP_NAME} ${App_SRC})
+	
+	########################### Add libraries ##########################
+	if(DEBUG)
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
+	elseif(RELEASE)
+		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
+	endif()
+
+	########################## Add Dependencies ########################
+	foreach(plugin ${dkdepend_list})
+		if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
+			add_dependencies(${APP_NAME} ${plugin})
+		endif()	
+	endforeach()
+endif(RASPBERRY)
+
+
 ##############
 if(EMSCRIPTEN)
 	# TODO: https://schellcode.github.io/webassembly-without-emscripten
