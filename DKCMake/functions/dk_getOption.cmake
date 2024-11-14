@@ -31,7 +31,7 @@ function(dk_getOption name)
 			list(REMOVE_ITEM ARG_LIST REMOVE)	# remove item from the functions ARGV list
 			set(ARGV ${ARG_LIST} PARENT_SCOPE)
 			#dk_notice("${CMAKE_CURRENT_FUNCTION}(${name}) REMOVED")
-			dk_notice("${name} REMOVED")
+			#dk_notice("${name} REMOVED")
 		endif()
 	else()
 		dk_unset(${name} PARENT_SCOPE)
