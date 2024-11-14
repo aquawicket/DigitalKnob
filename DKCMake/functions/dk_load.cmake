@@ -22,7 +22,6 @@ set(indent_count 0 CACHE INTERNAL "")
 #
 macro(dk_load var)
 	#dk_debugFunc()
-	message("dk_load(${ARGV})")
 	
 	string(STRIP ${var} fn)
 	get_filename_component(name_we "${fn}" NAME_WE)
@@ -46,23 +45,15 @@ macro(dk_load var)
 		if(CMAKE_VERSION VERSION_GREATER "3.15")
 			string(REPEAT "-" ${indent_count} indent)
 		endif()
-		message("${indent}> dk_load(${var})")	
 		
-		#NOTE: Loading a file with the name of an existing function will cause this to fail
-		#if(COMMAND ${fn})
-		#	dk_echo("fn:${fn}  dk_load(${fn}) function already loaded")
-		#if(COMMAND ${var})
-		#	dk_echo("var:${var}    dk_load(${var}) function already loaded")
-		#else()
-			dk_parseFunctionsAndLoad(${fn} ${var})
-		#endif()
-		
-		message("${indent}< dk_load(${var})")
+#		message("${indent}> dk_load(${var})")	
+		dk_parseFunctionsAndLoad(${fn} ${var})	#NOTE: Loading a file with the name of an existing function will cause this to fail
+#		message("${indent}< dk_load(${var})")
+
 		math(EXPR indent_count "${indent_count}-1")
 		if(CMAKE_VERSION VERSION_GREATER "3.15")
 			string(REPEAT "-" ${indent_count} indent)
 		endif()
-		
 	else()
 		#message("${var} already loading")
 	endif()
@@ -72,7 +63,7 @@ endmacro()
 
 
 macro(dk_parseFunctionsAndLoad fn fpath)
-	#dk_echo("dk_parseFunctionsAndLoad(${fn})")
+	#dk_debugFunc()
 	
 	if(NOT dk_load_list)
 		set(dk_load_list "" CACHE INTERNAL "")
@@ -94,7 +85,6 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	else()
 		dk_fatal("fpath:${fpath} file not found")   # FIXME: do not use dk_ functions in dk_load.cmake, only use raw cmake functions.
 	endif()
-	
 	
 	#if(${${fn}_file} IN_LIST dk_load_list)
 		#dk_debug("dk_load(${fn}) function already in list @ ${${fn}_file}")
@@ -166,7 +156,6 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 		#if(NOT ${fn} IN_LIST dk_loading_list)
 			include(${${fn}_file})
 		endif()
-		
 		
 		### variable clean-up ###
 		unset(${fn}_file)
