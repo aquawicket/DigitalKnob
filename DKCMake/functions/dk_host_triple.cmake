@@ -24,10 +24,6 @@ function(dk_host_triple)
 	
 	#### DEFAULT HOST ENVIRONMENT ###
 	if(COSMOS)
-		#set(CMAKE_HOST_UNIX 1)
-		#dk_unset(CMAKE_HOST_WIN32)
-		#dk_unset(CMAKE_HOST_APPLE)
-		#set(CMAKE_HOST_SYSTEM_NAME "COSMOS")
 		dk_set(default_host_env "cosmo") # clang, cosmo, msvc, gcc
 	else()
 		dk_set(default_host_env "clang") # clang, cosmo, msvc, gcc
@@ -68,11 +64,10 @@ function(dk_host_triple)
 	dk_toUpper(${host_os} HOST_OS)      # HOST_OS = WIN
 	dk_set(HOST_OS ${HOST_OS})
 	dk_set(${HOST_OS}_HOST 1)			# WIN_HOST = 1
-	dk_printVar(host_os)
-	dk_printVar(HOST_OS)
-	dk_printVar(${host_os}_host)
-	dk_printVar(${HOST_OS}_HOST)
-	
+#	dk_printVar(host_os)
+#	dk_printVar(HOST_OS)
+#	dk_printVar(${host_os}_host)
+#	dk_printVar(${HOST_OS}_HOST)
 	
 	### Set host_arch/HOST_ARCH
 	if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
@@ -111,14 +106,13 @@ function(dk_host_triple)
 	dk_toUpper(${host_arch} HOST_ARCH)      # HOST_ARCH = ARM64
 	dk_set(HOST_ARCH ${HOST_ARCH})
 	dk_set(${HOST_ARCH}_HOST 1)				# ARM64_HOST = 1
-	dk_printVar(host_arch)
-	dk_printVar(HOST_ARCH)
-	dk_printVar(${host_arch}_host)
-	dk_printVar(${HOST_ARCH}_HOST)
-	
+#	dk_printVar(host_arch)
+#	dk_printVar(HOST_ARCH)
+#	dk_printVar(${host_arch}_host)
+#	dk_printVar(${HOST_ARCH}_HOST)
 	
 	#### Set Default host_env, HOST_ENV ###
-	dk_printVar(CMAKE_HOST_SYSTEM_NAME)
+#	dk_printVar(CMAKE_HOST_SYSTEM_NAME)
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
 		dk_set(host_env 	"${default_host_env}")
 	elseif("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MINGW")
@@ -134,12 +128,11 @@ function(dk_host_triple)
 		dk_toUpper(${host_env} HOST_ENV)		# HOST_ENV = MSVC
 		dk_set(HOST_ENV ${HOST_ENV})
 		dk_set(${HOST_ENV}_HOST 1)				# MSVC_HOST = 1
-		dk_printVar(host_env)
-		dk_printVar(HOST_ENV)
-		dk_printVar(${host_env}_host)
-		dk_printVar(${HOST_ENV}_HOST)
+#		dk_printVar(host_env)
+#		dk_printVar(HOST_ENV)
+#		dk_printVar(${host_env}_host)
+#		dk_printVar(${HOST_ENV}_HOST)
 	endif()
-	
 	
 	### set host_triple ###
 	if(host_arch)
@@ -147,36 +140,35 @@ function(dk_host_triple)
 		dk_set(HOST_TRIPLE "${HOST_OS}_${HOST_ARCH}")
 		dk_set(${host_triple}_host 1)	
 		dk_set(${HOST_TRIPLE}_HOST 1)
-		dk_printVar(${host_triple}_host)
-		dk_printVar(${HOST_TRIPLE}_HOST)
+#		dk_printVar(${host_triple}_host)
+#		dk_printVar(${HOST_TRIPLE}_HOST)
 	endif()
 	if(host_env)
 		dk_set(host_triple "${host_os}_${host_arch}_${host_env}")
 		dk_set(HOST_TRIPLE "${HOST_OS}_${HOST_ARCH}_${HOST_ENV}")
 		dk_set(${host_triple}_host 1)	
 		dk_set(${HOST_TRIPLE}_HOST 1)
-		dk_printVar(${host_triple}_host)
-		dk_printVar(${HOST_TRIPLE}_HOST)
+#		dk_printVar(${host_triple}_host)
+#		dk_printVar(${HOST_TRIPLE}_HOST)
 	endif()
-		
 		
 	if((NOT host_triple) AND (cosmo OR COSMO))
 		dk_set(host_triple "cosmo")
 		dk_set(HOST_TRIPLE "COSMO")
 		dk_set(${host_triple}_host 1)	
 		dk_set(${HOST_TRIPLE}_HOST 1)
-		dk_printVar(${host_triple}_host)
-		dk_printVar(${HOST_TRIPLE}_HOST)
+#		dk_printVar(${host_triple}_host)
+#		dk_printVar(${HOST_TRIPLE}_HOST)
 	endif()
-	if((NOT HOST_TRIPLE) AND COSMO)
-	
-	endif()
-	dk_printVar(host_triple)
+
+#	dk_printVar(host_triple)
 	dk_printVar(HOST_TRIPLE)
-	dk_printVar(${host_triple}_host)
-	dk_printVar(${HOST_TRIPLE}_HOST)	
-	
+#	dk_printVar(${host_triple}_host)
+#	dk_printVar(${HOST_TRIPLE}_HOST)	
 endfunction()
+
+
+
 
 
 
