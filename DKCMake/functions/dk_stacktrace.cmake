@@ -7,9 +7,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_stacktrace()
 #
 #
-function(dk_stacktrace)
+macro(dk_stacktrace)
     dk_debugFunc(0)
 
+	message(WARNING)
+
+#[[
 	string(TIMESTAMP __TIME__ "%M:%S:%f")
 	string(SUBSTRING "${__TIME__}" 0 10 __TIME__)
 	list(PREPEND CMAKE_TIME ${__TIME__})
@@ -42,6 +45,7 @@ function(dk_stacktrace)
 		dk_echo("${cyan}[${_TIME_}]${indent} ${_FILE_}:${_LINE_}   ${blue}${_FUNCTION_}()")
 		math(EXPR n "${n}+1")
 	endwhile()
+]]
 
 #	while [ "${i}" -lt "${stack_size}" ]; do
 #		i=$(( i + 1 ))
@@ -81,7 +85,7 @@ function(dk_stacktrace)
 #		echo >&2 [${i}] ${file}:${line} ${func}(): $(sed -n ${line}p ${file})
 #		((i++))
 #	done
-endfunction()
+endmacro()
 
 
 

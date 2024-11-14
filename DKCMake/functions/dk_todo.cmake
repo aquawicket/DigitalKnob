@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 macro(dk_todo)
 	dk_debugFunc()
 
-	dk_builtinStacktrace()
+	dk_stacktrace()
 	dk_log(TODO "'${ARGV0}'")
 endmacro()
 
