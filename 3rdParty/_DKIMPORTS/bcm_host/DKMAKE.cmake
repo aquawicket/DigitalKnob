@@ -8,4 +8,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 # bcm_host
 
-RASPBERRY_dk_lib	(bcm_host)
+if(RASPBERRY)
+	dk_lib	(bcm_host)
+endif()
