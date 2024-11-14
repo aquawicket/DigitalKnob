@@ -575,7 +575,7 @@ if(COSMO)
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-endif(RASPBERRY)
+endif(COSMO)
 
 
 ##############

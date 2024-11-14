@@ -44,13 +44,7 @@ bool same(const DKString& str, const DKString& str2) {
 bool samei(const DKString& str, const DKString& str2) {
 	//DKDEBUGFUNC(str, str2);
 	DKString strA = toLower(str);
-	//std::transform(strA.begin(), strA.end(), strA.begin(), [](unsigned char c) {
-	//	return static_cast<char>(std::tolower(c));
-	//});
 	DKString strB = toLower(str2);
-	//std::transform(strB.begin(), strB.end(), strB.begin(), [](unsigned char c) {
-	//	return static_cast<char>(std::tolower(c));
-	//});
 	if(same(strA, strB))
 		return true;
 	return false;
@@ -126,7 +120,8 @@ DKString toString(const double& _double) {
 	*/
 	
 	// https://stackoverflow.com/a/13709929/688352
-	std::string str = std::to_string(_double); //C11
+	// C11
+	std::string str = std::to_string(_double);
 	str.erase(str.find_last_not_of('0') + 1, std::string::npos); // Strip the 0's trailing after .
 	str.erase(str.find_last_not_of('.') + 1, std::string::npos); // Strip the . if whole number
 	return str;
@@ -202,17 +197,7 @@ DKString toString(void* _voidptr) {
 DKString toString(const std::wstring& wstr) {
 	//DKDEBUGFUNC(_wstring);
 
-	//return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(_wstring);
-	
-    /*
-    size_t len = std::wcstombs(nullptr, _wstring.c_str(), 0) + 1;	// Calculating the length of the multibyte string
-    char* buffer = new char[len];								// Creating a buffer to hold the multibyte string
-    std::wcstombs(buffer, _wstring.c_str(), len);					// Converting wstring to string
-    std::string str(buffer);											// Creating std::string from char buffer
-    delete[] buffer;											// Cleaning up the buffer
-	return str;
-	*/
-	
+	// c11
 	std::string str;
 	size_t size;
 	str.resize(wstr.length());
@@ -320,7 +305,7 @@ unsigned long long int toULongLong(const DKString& str) {
 std::wstring toWString(const DKString& str) {
 	//DKDEBUGFUNC(str);
 	
-	//return std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(str);
+	// c11
 	std::wstring wstr;
 	size_t size;
 	wstr.resize(str.length());
@@ -422,7 +407,6 @@ bool toStringArray(DKStringArray& output, const DKString& str, const DKString& s
 	//DKDEBUGFUNC(output, str, seperator);
 	DKString text = str + seperator; //add a seperator at the end, or we won't get the last variable
 	size_t begin = 0;
-	//int end;
 	while(1){ //FIXME - while(1) loops are dangerous 
 	//while(end != std::string::npos){
 		std::string::size_type end = text.find(seperator, begin);
