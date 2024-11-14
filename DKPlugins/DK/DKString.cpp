@@ -199,20 +199,25 @@ DKString toString(void* _voidptr) {
 
 // https://stackoverflow.com/a/65863170/688352
 // https://riptutorial.com/cplusplus/example/4190/conversion-to-std--wstring
-DKString toString(const std::wstring& _wstring) {
+DKString toString(const std::wstring& wstr) {
 	//DKDEBUGFUNC(_wstring);
-/*
-#if WIN
-	int len;
-    int slength = (int)_wstring.length();
-    len = WideCharToMultiByte(CP_ACP, 0, _wstring.c_str(), slength, 0, 0, 0, 0); 
-    std::string s(len, '\0');
-    WideCharToMultiByte(CP_ACP, 0, _wstring.c_str(), slength, &s[0], len, 0, 0); 
-    return s;
-#else
-*/
-	return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(_wstring);
-//#endif
+
+	//return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(_wstring);
+	
+    /*
+    size_t len = std::wcstombs(nullptr, _wstring.c_str(), 0) + 1;	// Calculating the length of the multibyte string
+    char* buffer = new char[len];								// Creating a buffer to hold the multibyte string
+    std::wcstombs(buffer, _wstring.c_str(), len);					// Converting wstring to string
+    std::string str(buffer);											// Creating std::string from char buffer
+    delete[] buffer;											// Cleaning up the buffer
+	return str;
+	*/
+	
+	std::string str;
+	size_t size;
+	str.resize(wstr.length());
+	wcstombs_s(&size, &str[0], str.size() + 1, wstr.c_str(), wstr.size());
+	return str;
 }
 
 DKString toString(const DKStringArray& arry, const char* seperator) {
@@ -314,20 +319,13 @@ unsigned long long int toULongLong(const DKString& str) {
 // https://riptutorial.com/cplusplus/example/4190/conversion-to-std--wstring
 std::wstring toWString(const DKString& str) {
 	//DKDEBUGFUNC(str);
-/*
-#if WIN
-	int len;
-	int slength = (int)str.length() + 1;
-	len = MultiByteToWideChar(CP_ACP, 0, str.c_str(), slength, 0, 0);
-	wchar_t* buf = new wchar_t[len];
-	MultiByteToWideChar(CP_ACP, 0, str.c_str(), slength, buf, len);
-	std::wstring r(buf);
-	delete[] buf;
-	return r;
-#else
-*/
-	return std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(str);
-//#endif
+	
+	//return std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(str);
+	std::wstring wstr;
+	size_t size;
+	wstr.resize(str.length());
+	mbstowcs_s(&size,&wstr[0],wstr.size()+1,str.c_str(),str.size());
+	return wstr;
 }
 
 #if WIN

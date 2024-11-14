@@ -134,7 +134,7 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output){
 
 bool DKUtil::C2Bin(const DKString hex, std::streamsize size, const char* fileOut) {
 	DKDEBUGFUNC(hex, size, fileOut);
-#	ifndef MAC
+#	ifdef ISSUE_111424_FIXED
 		//NOTES: 
 		//https://caiorss.github.io/C-Cpp-Notes/resources-executable.html
 		//https://stackoverflow.com/questions/27878495/ofstream-not-working-on-linux
