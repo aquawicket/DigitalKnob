@@ -7,27 +7,29 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_clearCmakeCache)
-	dk_debugFunc()
+	dk_debugFunc(0)
 
+	dk_todo("finish coding dk_clearCmakeCache")
+
+	
     dk_info("Deleting CMake cache files. . .")
 
-
 	dk_validate(DK3RDARTY_DIR "dk_DKBRANCH_DIR()")
-	file(GLOB_RECURSE cmakecache_files LIST_DIRECTORIES true "${DK3RDARTY_DIR}/" "*CMakeCache*")
+	file(GLOB_RECURSE cmakecache_files LIST_DIRECTORIES true "${DK3RDARTY_DIR}/" "CMakeCache.*")
 	foreach(item ${cmakecache_files})
 		message("deleting ${item}...")
 		#dk_delete("${item}")
 	endforeach()
 	
 	dk_validate(DKAPPS_DIR "dk_DKBRANCH_DIR()")
-	file(GLOB_RECURSE cmakecache_files LIST_DIRECTORIES true "${DKAPPS_DIR}/" "*CMakeCache*")
+	file(GLOB_RECURSE cmakecache_files LIST_DIRECTORIES true "${DKAPPS_DIR}/" "CMakeCache.*")
 	foreach(item ${cmakecache_files})
 		message("deleting ${item}...")
 		#dk_delete("${item}")
 	endforeach()
 	
 	dk_validate(DKPLUGINS_DIR "dk_DKPLUGINS_DIR()")
-	file(GLOB_RECURSE cmakecache_files LIST_DIRECTORIES true "${DKPLUGINS_DIR}/" "*CMakeCache*")
+	file(GLOB_RECURSE cmakecache_files LIST_DIRECTORIES true "${DKPLUGINS_DIR}/" "CMakeCache.*")
 	foreach(item ${cmakecache_files})
 		message("deleting ${item}...")
 		#dk_delete("${item}")

@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-include_guard()		# include_guard
+include_guard()
 
 ### Print Version Info ###
 message("")
@@ -8,8 +8,7 @@ set(DKSHELL "CMake")
 set(DKSHELL_VERSION ${CMAKE_VERSION})
 set(DKSHELL_PATH ${CMAKE_COMMAND})
 string(ASCII 27 ESC)
-message("${ESC}[46m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m")
-message("  ${DKSHELL_PATH}")
+message("${ESC}[46m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} - ${DKSHELL_PATH} ${ESC}[0m")
 message("")
 
 
@@ -20,7 +19,7 @@ cmake_policy(SET CMP0011 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP00
 cmake_policy(SET CMP0012 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0012.html	cmake 2.8.0
 cmake_policy(SET CMP0054 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0054.html	cmake 3.1.0
 cmake_policy(SET CMP0057 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0057.html	cmake 3.3.0
-if(CMAKE_VERSION VERSION_GREATER "3.20.")
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.21.0")
 cmake_policy(SET CMP0126 NEW)   # https://cmake.org/cmake/help/latest/policy/CMP0126.html   cmake 3.21.0
 endif()
 
@@ -31,7 +30,6 @@ endif()
 #
 function(DKINIT)
 	#dk_echo("DKINIT()")
-	message(STATUS "CMake version ${CMAKE_VERSION}")
 	
 	###### Get Privledges ahead of time ######
 	if(CMAKE_HOST_UNIX)

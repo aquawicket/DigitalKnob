@@ -9,18 +9,10 @@ function(dk_urlExists url rtn_var)
     dk_debugFunc()
     
 	if(CMAKE_VERSION VERSION_LESS 3.19)
-		file(DOWNLOAD 
-			"${url}"
-			"${DKCACHE_DIR}/dk_urlExists.temp"
-			STATUS status
-			##TIMEOUT 2
-		)
+		file(DOWNLOAD "${url}" "${DKCACHE_DIR}/dk_urlExists.temp" STATUS status)
 		dk_delete("${DKCACHE_DIR}/dk_urlExists.temp")
 	else()
-		file(DOWNLOAD 
-			"${url}"
-			STATUS status
-		)
+		file(DOWNLOAD "${url}" STATUS status)
 	endif()
 	dk_printVar(status)
 

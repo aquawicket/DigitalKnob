@@ -16,8 +16,8 @@ macro(dk_if)
 	unset(argv)
 	list(APPEND argv ${ARGV})
 	
-	if(CMAKE_VERSION VERSION_GREATER "3.15")
-		list(POP_BACK argv code)	# POP_BACK cmake 3.15.
+	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
+		list(POP_BACK argv code)
 	else()
 		list(LENGTH argv argv_length)
 		math(EXPR argv_last_index "${argv_length} - 1")

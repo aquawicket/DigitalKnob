@@ -19,7 +19,7 @@ function(dk_extract src dest)
 		dk_makeDirectory(${dest})
 	endif()
 	
-	if(CMAKE_VERSION VERSION_GREATER "3.18")
+	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")
 		file(ARCHIVE_EXTRACT INPUT ${src} DESTINATION ${dest} VERBOSE)
 	else()
 		if(NOT EXISTS ${CMAKE_COMMAND})
