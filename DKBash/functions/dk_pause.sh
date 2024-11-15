@@ -10,7 +10,7 @@
 dk_pause() {
 	dk_debugFunc 0 1
 
-	[ -z "${1-}" ] && pause_msg="Press and any to continue..." || pause_msg="${1}"
+	[ -z "${1-}" ] && pause_msg="Press enter to continue..." || pause_msg="${1}"
 	#read -rp 'Press enter to continue...'; # key; echo ${key}
 	echo "${pause_msg}"
 	read -rp ''
