@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 
 if((NOT WIN_HOST) OR (NOT COSMO))
-	dk_undepend(msys2)
+	dk_undepend(cross9)
 	dk_return()
 endif()
 
