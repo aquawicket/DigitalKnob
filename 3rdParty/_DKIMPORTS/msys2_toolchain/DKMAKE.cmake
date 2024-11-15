@@ -5,9 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+###### msys2_toolchain ######
 # https://www.msys2.org
-
+dk_load(dk_builder)
 
 if(NOT WIN_HOST)
 	dk_undepend(msys2)

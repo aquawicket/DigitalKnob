@@ -1,0 +1,1 @@
+reg ADD "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel" /v obcaseinsensitive /t REG_DWORD /d 0 /f
