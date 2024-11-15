@@ -71,7 +71,9 @@ dk_generate() {
 	#dk_call dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_call dk_defined WSLENV; then
+	if ! dk_call dk_defined CYGWIN; then
 		dk_call dk_arrayPush CMAKE_ARGS "-S" "${CMAKE_SOURCE_DIR}"
+	fi
 	fi
 	dk_call dk_arrayPush CMAKE_ARGS "-B" "${CMAKE_BINARY_DIR}"
 	
@@ -93,6 +95,11 @@ dk_generate() {
 	#dk_call dk_arrayPush CMAKE_ARGS "--check-system-vars"
 	
 	if [ "${triple}" = "cosmo" ]; then
+		#set -- "-G Unix Makefiles" "${@}"
+		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
+	fi
+	
+	if [ "${triple}" = "cygwin" ]; then
 		#set -- "-G Unix Makefiles" "${@}"
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
@@ -199,6 +206,11 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "."
 	fi
 	
+	###### Cygwin CMake Fix ######
+	if dk_call dk_defined CYGWIN; then 
+		cd "${DKCMAKE_DIR}"
+		dk_call dk_arrayPush CMAKE_ARGS "."
+	fi
 	
 	dk_call dk_clearCmakeCache
 	dk_call dk_deleteTempFiles
