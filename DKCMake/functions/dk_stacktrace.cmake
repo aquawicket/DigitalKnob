@@ -8,10 +8,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 macro(dk_stacktrace)
-    dk_debugFunc(0)
+    #dk_debugFunc(0)
 
 	message(WARNING)
-
+	continue()
 #[[
 	string(TIMESTAMP __TIME__ "%M:%S:%f")
 	string(SUBSTRING "${__TIME__}" 0 10 __TIME__)

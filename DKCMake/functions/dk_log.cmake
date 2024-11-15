@@ -124,7 +124,7 @@ dk_if(NOT DEFINED FATAL_HALT      [[ set(FATAL_HALT 		1 				CACHE INTERNAL '') ]
 #    @message	- The message to print
 #
 function(dk_log)
-	dk_debugFunc()
+	#dk_debugFunc()
 	
 	dk_getOption(NO_HALT  ${ARGV} REMOVE)
 	
