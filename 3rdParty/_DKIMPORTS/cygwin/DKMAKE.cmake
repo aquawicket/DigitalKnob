@@ -7,6 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ############ cgywin ############
 # https://www.cygwin.com
+# https://cygwin.com/faq/faq.html#faq.setup.cli
 
 dk_host_triple()
 if(NOT WIN_HOST)
@@ -28,3 +29,6 @@ if(NOT EXISTS ${CYGWIN_EXE})
 	dk_command("${DKDOWNLOAD_DIR}/${CYGWIN_DL_FILE}" --quiet-mode --root ${CYGWIN_DIR})
 	dk_copy("${DKDOWNLOAD_DIR}/${CYGWIN_DL_FILE}" "${CYGWIN_DIR}/${CYGWIN_DL_FILE}")   # copy the installer to use as a package manager
 endif()	
+
+# Install Packages
+# setup-x86.exe -q -P <packagename>

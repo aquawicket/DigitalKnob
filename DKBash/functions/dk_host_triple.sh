@@ -199,6 +199,8 @@ dk_host_triple() {
 		HOST_OS="linux"
 	elif dk_call dk_stringContains "${UNAME_a}" "Msys"; then			# win
 		HOST_OS="win"
+	elif dk_call dk_stringContains "${UNAME_a}" "cygwin"; then			# win
+		HOST_OS="win"
 	else
 		dk_call dk_error "Unsupported HOST_OS: ${UNAME_a}"
 	fi
