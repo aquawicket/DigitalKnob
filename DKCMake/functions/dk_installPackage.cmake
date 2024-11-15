@@ -89,6 +89,13 @@ function(dk_installPackage package)
 		return()
 	endif()
 
+	### Cygwin ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v setup-x86_64.exe" OUTPUT_VARIABLE CYGPKG_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+	if(CYGPKG_EXE)
+		execute_process(COMMAND ${CYGPKG_EXE} -q -P ${package})
+		return()
+	endif()
+
 	### Msys2 ###
 	if(NOT PACMAN_EXE)
 		dk_validate(MSYS2 "dk_depend(msys2)")
