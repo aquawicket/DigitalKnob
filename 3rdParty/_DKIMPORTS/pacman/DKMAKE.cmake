@@ -18,7 +18,7 @@ endif()
 
 
 dk_validate(MSYS2 "dk_depend(msys2)")
-dk_installPackage(pacman)
+#dk_installPackage(pacman)
 dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 #dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 #dk_printVar(PACMAN_EXE)
