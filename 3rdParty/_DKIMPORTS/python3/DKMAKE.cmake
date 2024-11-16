@@ -31,8 +31,7 @@ endif()
 
 if(NOT EXISTS ${PYTHON3_EXE})
 	if(MAC_HOST OR WIN_HOST)
-		dk_import		("${PYTHON3_IMPORT}")
-		dk_rename		("${PYTHON3_DIR}/python.exe" "${PYTHON3_DIR}/python3.exe")
+		dk_import	("${PYTHON3_IMPORT}")
 	else()
 		dk_installPackage("${PYTHON3_IMPORT}")
 	endif()
@@ -50,7 +49,8 @@ if(NOT EXISTS "${PYTHON3_DIR}")
 endif()
 dk_assertPath(${PYTHON3_DIR})
 dk_prependEnvPath("${PYTHON3_DIR}")
+dk_exportVars(PATH "${PYTHON3_DIR};$ENV{PATH}")
 
-
+dk_copy		("${PYTHON3_DIR}/python3.exe" "${PYTHON3_DIR}/python.exe")
 ### 3RDPARTY LINK ###
 dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interpreter=${PYTHON3_EXE})
