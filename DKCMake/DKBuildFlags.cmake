@@ -455,6 +455,10 @@ if(cosmo)
 		-DCMAKE_C_COMPILER_WORKS=1
 		-DCMAKE_CXX_COMPILER_WORKS=1
 	)
+	dk_validate(GIT "dk_installGit()")
+
+
+	#dk_exportVars(PATH "C:\\Users\\Administrator\\digitalknob\\DKTools\\PortableGit-2.46.2-64-bit\\bin;$ENV{PATH}")
 endif()
 
 

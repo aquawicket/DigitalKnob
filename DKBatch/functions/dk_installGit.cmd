@@ -1,4 +1,5 @@
 @echo off
+echo dk_installGit.cmd
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
@@ -28,7 +29,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     
 	%dk_call% dk_basename %GIT_DL% GIT_DL_FILE
 	%dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
-    ::%dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
+    %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
 	::%dk_call% dk_importVariables %GIT_DL%
 	
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly

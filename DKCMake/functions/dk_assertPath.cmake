@@ -15,29 +15,11 @@ function(dk_assertPath)
 	set(path ${ARGV0})
 	
 	dk_varToString(path path_value)
-	#dk_debug("dk_assertPath(${path}) = ${path_value}")
 	if(EXISTS "${path}" OR EXISTS "${${path}}")
 		return()
 	endif()
 	
-	dk_fatal("Assertion failed: Path Not Found ${path}:${path_value}  CMAKE_PARENT_LIST_FILE:${CMAKE_PARENT_LIST_FILE}")
-
-# DEBUG		
-#	dk_printVar(CMAKE_SOURCE_DIR)
-#	dk_printVar(PROJECT_BINARY_DIR)
-#	dk_printVar(PROJECT_SOURCE_DIR)
-#	dk_printVar(CMAKE_TOOLCHAIN_FILE)
-#	dk_printVar(CMAKE_PARENT_LIST_FILE)
-#	dk_printVar(CMAKE_CURRENT_BINARY_DIR)
-#	dk_printVar(CMAKE_CURRENT_FUNCTION)
-#	dk_printVar(CMAKE_CURRENT_FUNCTION_LIST_DIR)
-#	dk_printVar(CMAKE_CURRENT_FUNCTION_LIST_FILE)
-#	dk_printVar(CMAKE_CURRENT_FUNCTION_LIST_LINE)
-#	dk_printVar(CMAKE_CURRENT_LIST_DIR)
-#	dk_printVar(CMAKE_CURRENT_LIST_FILE)
-#	dk_printVar(CMAKE_CURRENT_LIST_LINE)
-#	dk_printVar(CMAKE_SCRIPT_MODE_FILE)
-#	dk_printVar(CMAKE_CURRENT_SOURCE_DIR)
+	dk_fatal("${bg_red}${white}Assertion failed: Path Not Found path:'${path}'")
 endfunction()
 
 

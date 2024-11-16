@@ -60,7 +60,7 @@ function(dk_importVariables url)
 #	dk_printVar(PATH)
 	
 	unset(ROOT)
-	dk_getOptionValue(ROOT		${ARGV})							# C:/Users/Administrator/digitalknob/Development/3rdParty
+	dk_getOptionValue(ROOT		${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty
 #	dk_printVar(ROOT)
 	
 	unset(TAG)
@@ -170,14 +170,14 @@ function(dk_importVariables url)
 	############### PLUGIN_IMPORT VARIABLES ###############
 	#######################################################
 	dk_assertPath(CMAKE_CURRENT_LIST_DIR)
-	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	
 	# PLUGIN_IMPORT
 	unset(PLUGIN_IMPORT)
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	if(CMAKE_CURRENT_LIST_DIR MATCHES "${DKIMPORTS_DIR}")
 		set(PLUGIN_IMPORT 1)
 	endif()	
-	dk_assertVar(PLUGIN_IMPORT)
+#	dk_assertVar(PLUGIN_IMPORT)
 #	dk_printVar(PLUGIN_IMPORT)											# PLUGIN_IMPORT			 	: 1
 	
 	# PLUGIN_IMPORT_PATH
@@ -187,7 +187,16 @@ function(dk_importVariables url)
 
 	# PLUGIN_IMPORT_NAME
 	unset(PLUGIN_IMPORT_NAME)
-	dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)					
+	dk_dirname(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_DIR)
+	#dk_printVar(PLUGIN_IMPORT_DIR)
+	if("${PLUGIN_IMPORT_DIR}" STREQUAL "${DKIMPORTS_DIR}")
+		dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)		
+	elseif(NAME)
+		#dk_fixme("PLUGIN_IMPORT_NAME is the parent folder name only if the next parent folder is _DKIMPORTS")
+		set(PLUGIN_IMPORT_NAME ${NAME})
+	else()
+		set(PLUGIN_IMPORT_NAME ${PLUGIN_URL_FILE})
+	endif()
 #	dk_printVar(PLUGIN_IMPORT_NAME)										# PLUGIN_IMPORT_NAME		: zLib
 
 	# PLUGIN_IMPORT_NAME_LOWER
