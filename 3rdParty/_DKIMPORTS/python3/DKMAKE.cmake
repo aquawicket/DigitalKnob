@@ -20,7 +20,9 @@ elseif(WIN_HOST)
 else()
 	set(PYTHON3_IMPORT python3)
 endif()
-dk_importVariables	("${PYTHON3_IMPORT}" PLUGIN_VAR_PREFIX)
+
+
+dk_importVariables	("${PYTHON3_IMPORT}")
 
 if(WIN_HOST)
 	dk_findProgram(PYTHON3_EXE python3.exe "${PYTHON3_DIR}")
@@ -42,15 +44,27 @@ if(NOT EXISTS ${PYTHON3_EXE})
 		dk_findProgram(PYTHON3_EXE python3)
 	endif()
 endif()
-dk_assertPath(${PYTHON3_EXE})
+if(NOT EXISTS "${PYTHON3_DIR}/python.exe")
+	dk_copy("${PYTHON3_DIR}/python3.exe" "${PYTHON3_DIR}/python.exe")
+endif()
+
 
 if(NOT EXISTS "${PYTHON3_DIR}")
 	dk_dirname("${PYTHON3_EXE}" PYTHON3_DIR)
 endif()
-dk_assertPath(${PYTHON3_DIR})
+
 dk_prependEnvPath("${PYTHON3_DIR}")
 dk_exportVars(PATH "${PYTHON3_DIR};$ENV{PATH}")
 
-dk_copy		("${PYTHON3_DIR}/python3.exe" "${PYTHON3_DIR}/python.exe")
+
+
 ### 3RDPARTY LINK ###
 dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interpreter=${PYTHON3_EXE})
+
+
+
+
+dk_assertPath(${PYTHON3_EXE})
+dk_assertPath(${PYTHON3_DIR})
+
+message("end of python3/DKCMAKE.cmake")
