@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_clearCmakeCache
-    call dk_debugFunc 3
+    call dk_debugFunc 0 3
  setlocal
  
     %dk_call% dk_info "Deleting CMake cache files. . ."

@@ -43,7 +43,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="6" %dk_call% dk_resetAll
     if "%choice%"=="7" %dk_call% dk_removeAll
     if "%choice%"=="8" %dk_call% dk_clearScreen
-    if "%choice%"=="9" %dk_call% dk_clearCmakeCache & %dk_call% dk_deleteTempFiles
+    if "%choice%"=="9" %dk_call% dk_clearCmakeCache && %dk_call% dk_deleteTempFiles
     if "%choice%"=="10" %dk_call% dk_reload
     if "%choice%"=="11" %dk_call% dk_exit 0
        

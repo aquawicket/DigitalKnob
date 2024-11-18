@@ -27,18 +27,13 @@ function(dk_buildMain)
 #	#dk_printVar DKSCRIPT_NAME
 	
 	### Get the host_triple and other HOST variables
-	dk_host_triple()
-	
-	dk_DIGITALKNOB_DIR()
-	
-	#dk_installGit()
-	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-	dk_validate(GIT_EXE "dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
-	
-	dk_DKBRANCH_DIR()
+	dk_validate(host_triple 	"dk_host_triple()")
+	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
+	dk_validate(DKIMPORTS_DIR 	"dk_DKIMPORTS_DIR()")
+	dk_validate(GIT_EXE 		"dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
+	dk_validate(DKBRANCH_DIR 	"dk_DKBRANCH_DIR()")
 
 	dk_assertPath(DKSCRIPT_DIR)
-	dk_assertPath(DKBRANCH_DIR)
 	
 	while(1)
 		if(NOT DEFINED UPDATE)
