@@ -22,18 +22,18 @@ function(dk_gitCheckRemote)
 		dk_validate(GIT_EXE "dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
 
 #		${GIT_EXE} remote update
-		execute_process(COMMAND ${GIT_EXE} remote update WORKING_DIRECTORY ${PWD} OUTPUT_STRIP_TRAILING_WHITESPACE COMMAND_ECHO STDOUT)
+		execute_process(COMMAND ${GIT_EXE} remote update)
 		
-#		branch = $(${GIT_EXE} rev-parse --abbrev-ref HEAD)
-		execute_process(COMMAND ${GIT_EXE} rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${PWD} OUTPUT_VARIABLE branch OUTPUT_STRIP_TRAILING_WHITESPACE COMMAND_ECHO STDOUT)
+#		branch = git rev-parse --abbrev-ref HEAD
+		execute_process(COMMAND ${GIT_EXE} rev-parse --abbrev-ref HEAD 						OUTPUT_VARIABLE branch 	OUTPUT_STRIP_TRAILING_WHITESPACE)
 		
-#		ahead = $(${GIT_EXE} rev-list --count origin/${branch}..${branch})
-		execute_process(COMMAND ${GIT_EXE} rev-list --count origin/${branch}..${branch} WORKING_DIRECTORY ${PWD} OUTPUT_VARIABLE ahead OUTPUT_STRIP_TRAILING_WHITESPACE COMMAND_ECHO STDOUT)
+#		ahead = git rev-list --count origin/${branch}..${branch}
+		execute_process(COMMAND ${GIT_EXE} rev-list --count origin/${branch}..${branch} 	OUTPUT_VARIABLE ahead 	OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-#		behind = $(${GIT_EXE} rev-list --count ${branch}..origin/${branch})
-		execute_process(COMMAND ${GIT_EXE} rev-list --count ${branch}..origin/${branch} WORKING_DIRECTORY ${PWD} OUTPUT_VARIABLE behind OUTPUT_STRIP_TRAILING_WHITESPACE COMMAND_ECHO STDOUT)
+#		behind = git rev-list --count ${branch}..origin/${branch}
+		execute_process(COMMAND ${GIT_EXE} rev-list --count ${branch}..origin/${branch} 	OUTPUT_VARIABLE behind 	OUTPUT_STRIP_TRAILING_WHITESPACE)
 		
-		dk_info("${ahead} commits ahead, ${behind} commits behind")
+		dk_info("${branch} is ${ahead} commits ahead, ${behind} commits behind")
 		dk_set(behind ${behind})
 	endif()
 endfunction()
