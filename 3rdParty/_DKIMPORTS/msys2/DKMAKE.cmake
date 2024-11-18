@@ -11,10 +11,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	windows uninstall registry location
 #	HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\{060aa283-cf16-4aad-9250-bd91ab4c3d2f}
 #
-dk_load(dk_builder)
 
 ### only accept windows hosts
-#dk_validate(host_triple "dk_host_triple()")
+dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
 	continue()
@@ -25,9 +24,9 @@ endif()
 ### Set CMAKE_GENERATOR ###
 dk_validate(CMD_EXE "dk_depend(cmd)")
 if(CMD_EXE OR MINGW)
-	dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in Cmd
+	dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in CMD shell
 else()
-	dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in Shell
+	dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in SH shell
 endif()
 if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
 	dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
@@ -44,7 +43,6 @@ dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
 
 ### INSTALL ###
 dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
-dk_assertPath(DKDOWNLOAD_DIR)
 
 if(NOT EXISTS ${MSYS2_EXE})
 	dk_info("Installing ${MSYS2_FOLDER}")
@@ -53,7 +51,8 @@ if(NOT EXISTS ${MSYS2_EXE})
 endif()	
 
 
-if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
+dk_validate(target_triple "dk_TARGET_TRIPLE()")
+if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
 	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")	
 	### Update with pacman ###
 	#dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
@@ -79,7 +78,7 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	endif()
 	
 	### Create Bash Exports ###
-	dk_depend(cygpath)
+	dk_validate(CYGPATH_EXE "dk_depend(cygpath)")
 	dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
 	
 	dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")

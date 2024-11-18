@@ -3,9 +3,7 @@
 #define DK_h
 
 //#include <cstdio>
-#include <string>
 #include <stdio.h>
-#include <iostream>
 
 /*
 #if defined(__GNUC__)
@@ -28,7 +26,7 @@ int main() {
 }
 */
 
-?/*
+/*
 //################################################################################
 //# DK()
 //#

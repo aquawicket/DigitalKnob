@@ -41,7 +41,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 :: install via CMake
 ::	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
-::	%dk_call% dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/powershell/DKMAKE.cmake')" "POWERSHELL_EXE"
+::	%dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/powershell/DKMAKE.cmake)" "POWERSHELL_EXE"
 ::	%dk_call% dk_printVar POWERSHELL_EXE
 
 	::%dk_call% dk_checkError

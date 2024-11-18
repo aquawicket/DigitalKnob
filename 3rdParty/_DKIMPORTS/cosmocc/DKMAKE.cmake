@@ -11,8 +11,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###### [cosmocc] ######
 # https://cosmo.zip
 
-dk_load(dk_builder)
-
 dk_import(https://cosmo.zip/pub/cosmocc/cosmocc.zip)
 
 
@@ -22,6 +20,7 @@ dk_set(COSMOPOLITAN 					1)
 dk_set(CMAKE_SKIP_RPATH 				ON)
 dk_set(CMAKE_CROSSCOMPILING 			OFF)
 
+dk_validate(host_triple "dk_host_triple()")
 if(WIN_HOST)
 	dk_set(CMAKE_GENERATOR				"MSYS Makefiles")
 else()

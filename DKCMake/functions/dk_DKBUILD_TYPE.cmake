@@ -9,6 +9,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_DKBUILD_TYPE)
 	dk_debugFunc()
 	
+	dk_stacktrace()
+	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		dk_echo()
 		dk_echo(" 1) Debug")

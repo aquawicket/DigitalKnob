@@ -49,7 +49,7 @@ if "%~1" neq ""    goto runDKC
 :installDKC
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmo, gcc, msvc 
-	set "default_host_env=clang"
+	set "default_host_env=cosmo"
 	
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -59,12 +59,12 @@ if "%~1" neq ""    goto runDKC
 	%dk_call% dk_echo "Installing DKC . . ."
 	
 	::###### OS ######
-	if not defined host_os %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	%dk_call% dk_validate host_os "%dk_call% dk_host_triple"
 	if not defined OS set "OS=%host_os%"
 	%dk_call% dk_printVar OS
 	
 	::###### arch ######
-	if not defined host_arch %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
 	if not defined arch set "arch=%host_arch%"
 	%dk_call% dk_printVar arch
 	
@@ -85,11 +85,12 @@ if "%~1" neq ""    goto runDKC
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
+	if "%host_env%"=="cosmo"  %dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_installSh.cmd"
 	if "%host_env%"=="cosmo"  call %DKIMPORTS_DIR%\cosmocc\dk_installCosmoCC.cmd
 	if "%host_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
 	if "%host_env%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
 
-	if "%host_env%"=="cosmo"  set "COMPILER_EXE=%COSMO_C_COMPILER%"
+	if "%host_env%"=="cosmo"  set "COMPILER_EXE=%SH_EXE% %COSMO_C_COMPILER%"
 	if "%host_env%"=="clang"  set "COMPILER_EXE=%CLANG_C_COMPILER%"
 	if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_C_COMPILER%"
 	%dk_call% dk_assertVar COMPILER_EXE
@@ -126,7 +127,7 @@ if "%~1" neq ""    goto runDKC
 	echo compiling ...
 	if exist %APP_FILE%  del %APP_FILE%
 
-	set "COMPILE_COMMAND=sh.exe %COMPILER_EXE% -DDKTEST=1 -o %APP_FILE% -static %DKC_FILE%"
+	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP_FILE% -static %DKC_FILE%"
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 	

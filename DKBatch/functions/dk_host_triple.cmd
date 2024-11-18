@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
 :: setlocal
 	:: ###### DEFAULT ENVIRONMENT
-	set "default_host_env=clang"
+	::set "default_host_env=clang"
  
  
 	::###### host_os and <os>_host ######
