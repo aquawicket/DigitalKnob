@@ -18,22 +18,27 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_push
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 #
-function(dk_arrayPush array element1) # rtn_length)
+function(dk_arrayPush array)
 	dk_debugFunc()
 	
-	if(DEFINED "${ARGV}")
-		set(_array_ "${ARGV}")
-		set(name ${_array_})
-	elseif(DEFINED "ARGV")
-		set(_array_ "ARGV")
-		set(name ${_array_})
-	else()
-		dk_fatal("arguments invalid: ${_array_}")
-	endif()
+#	if(DEFINED "${ARGV}")
+#		set(_array_ "${ARGV}")
+#		set(name ${_array_})
+#	elseif(DEFINED "ARGV")
+#		set(_array_ "ARGV")
+#		set(name ${_array_})
+#	else()
+#		dk_fatal("arguments invalid: ${_array_}")
+#	endif()
 	
 	#dk_fixme("${CMAKE_CURRENT_FUNCTION}")
 	#list(APPEND ${name} ${element1})
-	dk_append(${name} ${element1})
+#	dk_append(${name} ${element1})
+
+
+	list(APPEND ${array} ${ARGN})
+	set(${array} ${${array}} PARENT_SCOPE)
+
 	
 # DEBUG
 #	TODO
@@ -46,19 +51,30 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_append(myArray "a")
+	dk_arrayPush(myArrayA "a b c") # new_lengthA
+	dk_printVar(myArrayA)
+	# dk_printVar(new_lengthA)
 	
-	dk_printArray(myArray)
+	dk_arrayPush(myArrayA "1 2 3" "d e f") # new_lengthA
+	dk_printVar(myArrayA)
+	# dk_printVar(new_lengthA)
 	
-	dk_arrayPush(myArray a)
-	dk_printArray(myArray)
+	dk_arrayPush(myArrayA "4 5 6" "h i j") # new_lengthA
+	dk_printVar(myArrayA)
+	# dk_printVar(new_lengthA)
 	
-	dk_arrayPush(myArray b)
-	dk_printArray(myArray)
 	
-	dk_arrayPush(myArray c)
-	dk_printArray(myArray)
 	
-	dk_arrayPush(myArray d)
-	dk_printArray(myArray)
+	# FIXME: the new array does not get assigned in command substitution.
+	dk_arrayPush('myArrayB' "h i j" new_lengthB)
+	dk_printVar(myArrayB)
+	dk_printVar(new_lengthB)
+	
+	dk_arrayPush('myArrayB' "4 5 6" "d e f" new_lengthB)
+	dk_printVar(myArrayB)
+	dk_printVar(new_lengthB)
+	
+	dk_arrayPush('myArrayB' "1 2 3" "a b c" new_lengthB)
+	dk_printVar(myArrayB)
+	dk_printVar(new_lengthB)
 endfunction()
