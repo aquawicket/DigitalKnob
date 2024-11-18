@@ -22,6 +22,7 @@ set(indent_count 0 CACHE INTERNAL "")
 #
 macro(dk_load var)
 	#dk_debugFunc()
+	#message("dk_load(${var})")
 	
 	string(STRIP ${var} fn)
 	get_filename_component(name_we "${fn}" NAME_WE)
@@ -64,6 +65,7 @@ endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
 	#dk_debugFunc()
+	#message("dk_parseFunctionsAndLoad(${ARGV})")
 	
 	if(NOT dk_load_list)
 		set(dk_load_list "" CACHE INTERNAL "")
@@ -79,11 +81,11 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	elseif(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 	elseif(EXISTS ${fpath})
-		set(${fn}_file ${fpath})
+		set(${fn}_file "${fpath}")
 	#elseif(EXISTS ${fpath}.cmake)
 	#	set(${fn}_file ${fpath}.cmake)
 	else()
-		dk_fatal("fpath:${fpath} file not found")   # FIXME: do not use dk_ functions in dk_load.cmake, only use raw cmake functions.
+		dk_fatal("could not locate fpath:${fpath}")   # FIXME: do not use dk_ functions in dk_load.cmake, only use raw cmake functions.
 	endif()
 	
 	#if(${${fn}_file} IN_LIST dk_load_list)

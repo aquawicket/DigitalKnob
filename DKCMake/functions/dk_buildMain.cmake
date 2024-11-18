@@ -33,7 +33,7 @@ function(dk_buildMain)
 	
 	#dk_installGit()
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-	dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")
+	dk_validate(GIT_EXE "dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
 	
 	dk_DKBRANCH_DIR()
 
@@ -60,7 +60,7 @@ function(dk_buildMain)
 		
 		dk_createCache()
 		dk_generate()
-		dk_buildApp()
+		#dk_buildApp()
 		
 		dk_unset(UPDATE)
 		dk_unset(APP)

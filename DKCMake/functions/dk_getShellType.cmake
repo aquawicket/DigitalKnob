@@ -48,7 +48,7 @@ function(dk_getShellType)
 	execute_process(COMMAND bash -c "echo $0" OUTPUT_VARIABLE BASH_PATH)
 	message(STATUS "BASH_PATH = ${BASH_PATH}")
 	
-#	dk_fileWrite(dkpstemp.cmake "message('CMAKE_COMMAND = ${CMAKE_COMMAND}')")
+#	dk_fileWrite(dkpstemp.cmake "message(\"CMAKE_COMMAND = ${CMAKE_COMMAND}\")")
 #	execute_process(COMMAND ${CMAKE_COMMAND} -p ${dkpstemp.cmake} OUTPUT_VARIABLE CMAKE_PATH)
 #	message(STATUS "CMAKE_PATH = ${CMAKE_PATH}")
 endfunction()

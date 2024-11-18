@@ -19,7 +19,7 @@ function(dk_gitCheckRemote)
 		#dk_printVar(PWD)
 		
 		dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-		dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")
+		dk_validate(GIT_EXE "dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
 
 #		${GIT_EXE} remote update
 		execute_process(COMMAND ${GIT_EXE} remote update WORKING_DIRECTORY ${PWD} OUTPUT_STRIP_TRAILING_WHITESPACE COMMAND_ECHO STDOUT)

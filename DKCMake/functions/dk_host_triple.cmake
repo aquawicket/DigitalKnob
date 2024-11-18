@@ -21,13 +21,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_host_triple)
 	dk_debugFunc()
-	
-	#### DEFAULT HOST ENVIRONMENT ###
+
+
+#	FIXME: default environment should be set in dk_target_triple
+#	#### DEFAULT HOST ENVIRONMENT ###
 	if(COSMOS)
 		dk_set(default_host_env "cosmo") # clang, cosmo, msvc, gcc
 	else()
 		dk_set(default_host_env "clang") # clang, cosmo, msvc, gcc
 	endif()
+
+
 	
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
 		set(CMAKE_HOST_WIN32 1)
