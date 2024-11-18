@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
 # dk_if(condition... "code")
 #
 #	@condition  - The input args to be evaluated
-#	@code	   - The code to run if the condition is true."
+#	@code	    - The code to run if the condition is true."
 #
 macro(dk_if)
 	dk_debugFunc()

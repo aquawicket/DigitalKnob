@@ -9,10 +9,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  ::setlocal
  
-    %dk_call% dk_setTitle Generating %APP% - %triple% - %TYPE% - %LEVEL% . . .
+    %dk_call% dk_setTitle Generating %APP% - %triple% - %DKBUILD_TYPE% - %LEVEL% . . .
     %dk_call% dk_echo
     %dk_call% dk_info "##################################################################"
-    %dk_call% dk_info "      Generating %APP% - %triple% - %TYPE% - %LEVEL%"
+    %dk_call% dk_info "      Generating %APP% - %triple% - %DKBUILD_TYPE% - %LEVEL%"
     %dk_call% dk_info "##################################################################"
     %dk_call% dk_echo
     
@@ -32,9 +32,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "DKLINK=Static"
 
     set "CMAKE_ARGS="
-    if "%TYPE%"=="Debug"             %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON
-    if "%TYPE%"=="Release"           %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
-    if "%TYPE%"=="All"               %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    if "%DKBUILD_TYPE%"=="Debug"             %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON
+    if "%DKBUILD_TYPE%"=="Release"           %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    if "%DKBUILD_TYPE%"=="All"               %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%DKLEVEL%"=="Build"          %dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON
     if "%DKLEVEL%"=="Rebuild"        %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON
     if "%DKLEVEL%"=="RebuildAll"     %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON
@@ -86,7 +86,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%triple%"=="linux_x86_64"       set "WSL_EXE=wsl"
 	
 	if defined MULTI_CONFIG             set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%"
-	if defined SINGLE_CONFIG            set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%/%TYPE%"
+	if defined SINGLE_CONFIG            set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%/%DKBUILD_TYPE%"
 	if not defined CMAKE_BINARY_DIR  %dk_call% dk_fatal "CMAKE_BINARY_DIR:%CMAKE_BINARY_DIR% is invalid"
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
@@ -140,7 +140,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::###### linux_x86_64 (WSL) ######
 	if defined WSL_EXE %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR
 	if defined WSL_EXE %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "\" "/" DKSCRIPT_DIR
-	if defined WSL_EXE %WSL_EXE% sh -c "export UPDATE=1 && export APP=%APP% && export triple=%triple% && export TYPE=%TYPE% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
+	if defined WSL_EXE %WSL_EXE% sh -c "export UPDATE=1 && export APP=%APP% && export triple=%triple% && export DKBUILD_TYPE=%DKBUILD_TYPE% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
 	if defined WSL_EXE %return%
 	
 	::###### CMake Configure ######
@@ -148,7 +148,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
     
 	::###### Delete Cmake Cache files ######
-	%dk_call% dk_clearCmakeCache %APP% %triple% %TYPE%
+	%dk_call% dk_clearCmakeCache %APP% %triple% %DKBUILD_TYPE%
 	%dk_call% dk_deleteTempFiles
 	
     %dk_call% dk_info "****** CMAKE COMMAND ******"

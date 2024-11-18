@@ -6,7 +6,7 @@ set "APP_PATH=%APP_ROOT%app/src/main"
 
 echo 1. Set and map all variables and environment variables
 :: Build architecture and type
-set "BUILD_TYPE=Debug"
+set "DKBUILD_TYPE=Debug"
 ::set "ABI=armeabi-v7a"
 set "ABI=arm64-v8a"
 
@@ -26,7 +26,7 @@ echo #############  BUILD SETTINGS ###############
 echo      compiler = %compiler%
 echo        GRADLE = %GRADLE%
 echo           ABI = %ABI%
-echo    BUILD_TYPE = %BUILD_TYPE%
+echo    DKBUILD_TYPE = %DKBUILD_TYPE%
 echo #############################################
 TITLE %compiler% %GRADLE%
 

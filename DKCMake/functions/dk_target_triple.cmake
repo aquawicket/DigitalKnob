@@ -32,15 +32,15 @@ function(dk_target_triple)
 	### Set target_type / TARGET_TYPE ###
 	if(TARGET_DIR MATCHES "Debug")	
 		### Get DEBUG ###
-		dk_set(TYPE DEBUG)						        # 			   TYPE	= DEBUG
-		dk_set(${TYPE} 1)								# 			  DEBUG = 1	
+		dk_set(DKBUILD_TYPE DEBUG)						# 			   DKBUILD_TYPE	= DEBUG
+		dk_set(${DKBUILD_TYPE} 1)						# 			  DEBUG = 1	
 		#dk_set(TARGET_TYPE Debug)						# 		TARGET_TYPE	= Debug
 		dk_dirname(${TARGET_DIR} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 
 	elseif(TARGET_DIR MATCHES "Release")
 		### Get RELEASE ###
-		dk_set(TYPE RELEASE)						    # 			   TYPE = RELEASE
-		dk_set(${TYPE} 1)								# 			RELEASE = 1	
+		dk_set(DKBUILD_TYPE RELEASE)					# 			   DKBUILD_TYPE = RELEASE
+		dk_set(${DKBUILD_TYPE} 1)						#			RELEASE = 1	
 		#dk_set(TARGET_TYPE Release)					# 		TARGET_TYPE = Release
 		dk_dirname(${TARGET_DIR} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	endif()

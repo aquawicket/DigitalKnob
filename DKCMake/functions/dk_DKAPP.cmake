@@ -3,11 +3,14 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ##################################################################################
-# dk_pickApp()
+# dk_DKAPP()
 #
 #
-function(dk_pickApp)
+function(dk_DKAPP)
 	dk_debugFunc()
+
+	dk_validate(target_triple "dk_target_triple()")
+	dk_validate(DKBUILD_TYPE "dk_DKBUILD_TYPE()")
 
 	dk_echo()
 	dk_echo("${APP} ${target_triple} ${DKBUILD_TYPE}")
@@ -71,5 +74,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_pickApp()
+	dk_DKAPP()
 endfunction()

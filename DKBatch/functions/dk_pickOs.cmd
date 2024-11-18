@@ -11,9 +11,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	set "default_target_env=clang"
 	
-    %dk_call% dk_setTitle DigitalKnob - %APP% %triple% %TYPE%
+    %dk_call% dk_setTitle DigitalKnob - %APP% %triple% %DKBUILD_TYPE%
     %dk_call% dk_echo
-    %dk_call% dk_echo %APP% %triple% %TYPE%
+    %dk_call% dk_echo %APP% %triple% %DKBUILD_TYPE%
        
     :: TODO: this list can be created using the DKCMake/toolchains files.
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple" 

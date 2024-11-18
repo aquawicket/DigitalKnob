@@ -2,16 +2,16 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#####################################################################
-::# dk_pickType(rtn_var:TYPE)
+::# dk_pickType(rtn_var:DKBUILD_TYPE)
 ::#
 ::#
 :dk_pickType
     call dk_debugFunc 0 1
  ::setlocal
  
-    %dk_call% dk_setTitle DigitalKnob - %APP% %triple% %TYPE%
+    %dk_call% dk_setTitle DigitalKnob - %APP% %triple% %DKBUILD_TYPE%
     %dk_call% dk_echo
-    %dk_call% dk_echo "%APP% %triple% %TYPE%"
+    %dk_call% dk_echo "%APP% %triple% %DKBUILD_TYPE%"
     %dk_call% dk_echo
     echo 1) Debug
     echo 2) Release
@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="7" %dk_call% dk_exit             && %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
-    %dk_call% dk_unset TYPE
+    %dk_call% dk_unset DKBUILD_TYPE
 %endfunction%
 
 

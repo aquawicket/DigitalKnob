@@ -9,15 +9,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0 1
  ::setlocal
  
-    %dk_call% dk_setTitle DigitalKnob - %APP% %triple% %TYPE%
+    %dk_call% dk_setTitle DigitalKnob - %APP% %triple% %DKBUILD_TYPE%
     
     %dk_call% dk_echo
     %dk_call% dk_commandExists "git" && %dk_call% dk_gitCheckRemote
 
-    %dk_call% dk_readCache _APP_ _triple_ _TYPE
+    %dk_call% dk_readCache _APP_ _triple_ _DKBUILD_TYPE_
     
     %dk_call% dk_echo
-    if exist "%DKCACHE_DIR%\cache" if "%_APP_%" neq "" if "%_triple_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_triple_% - %_TYPE_%]
+    if exist "%DKCACHE_DIR%\cache" if "%_APP_%" neq "" if "%_triple_%" neq "" if "%_BUILD_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_triple_% - %_BUILD_TYPE_%]
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Download DigitalKnob
@@ -34,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_keyboardInput choice
     ::%dk_call% dk_keyboardInputTimeout choice 13 60
     
-    if "%choice%"=="0" %dk_call% dk_set APP %_APP_% & %dk_call% dk_set triple %_triple_% & %dk_call% dk_set TYPE %_TYPE_%
+    if "%choice%"=="0" %dk_call% dk_set APP %_APP_% & %dk_call% dk_set triple %_triple_% & %dk_call% dk_set DKBUILD_TYPE %_BUILD_TYPE_%
     if "%choice%"=="1" %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
     if "%choice%"=="2" %dk_call% dk_gitCommit
     if "%choice%"=="3" %dk_call% dk_downloadDK

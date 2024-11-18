@@ -33,14 +33,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::### Set target_type / TARGET_TYPE ###
 	if "!TARGET_DIR!" equ "Debug" (	
 		rem ### Get DEBUG ###
-		!dk_call! dk_set TYPE DEBUG						        &rem 			   TYPE	= DEBUG
-		!dk_call! dk_set !TYPE! 1								&rem 			  DEBUG = 1	
+		!dk_call! dk_set DKBUILD_TYPE DEBUG						&rem 	     DKBUILD_TYPE	= DEBUG
+		!dk_call! dk_set !DKBUILD_TYPE! 1							&rem 			  DEBUG = 1	
 		rem !dk_call! dk_set TARGET_TYPE Debug					&rem 		TARGET_TYPE	= Debug
 		!dk_call! dk_dirname TARGET_DIR TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	) else if "!TARGET_DIR!" equ "Release" (
 		rem ### Get RELEASE ###
-		!dk_call! dk_set TYPE RELEASE 						    &rem 			   TYPE = RELEASE
-		!dk_call! dk_set !TYPE! 1								&rem 			RELEASE = 1	
+		!dk_call! dk_set DKBUILD_TYPE RELEASE 					&rem 	     DKBUILD_TYPE = RELEASE
+		!dk_call! dk_set !DKBUILD_TYPE! 1							&rem 			RELEASE = 1	
 		rem !dk_call! dk_set TARGET_TYPE Release				&rem 		TARGET_TYPE = Release
 		!dk_call! dk_dirname !TARGET_DIR! TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	)
