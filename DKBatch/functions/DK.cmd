@@ -161,7 +161,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
             echo:
             echo Exit code: %exit_code%
             echo:
-            ::pause
+            if "%exit_code%" neq "0" pause
             exit %ERRORLEVEL%
     :end_dk_reload
 %endfunction%

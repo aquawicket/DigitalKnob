@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::if not defined dk_target_triple (set "dk_target_triple=1") else (goto:eof)
 
 ::###############################################################################
@@ -23,9 +23,11 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 :dk_target_triple
 	call dk_debugFunc 0
 
+	set "CMAKE_BINARY_DIR=C:\Users\Administrator\digitalknob\Development\DKApps\HelloWorld\win_x86_64_clang\Debug"
+
 	::### Get TARGET_DIR ###
 	!dk_call! dk_getFullPath "!CMAKE_BINARY_DIR!" TARGET_DIR
-	!dk_call! dk_printVar TARGET_DIR 								&:: TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
+	!dk_call! dk_printVar TARGET_DIR 							&:: TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
 
 	::### Set target_type / TARGET_TYPE ###
 	if "!TARGET_DIR!" equ "Debug" (	
@@ -225,7 +227,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	dk_debugFunc 0
+	call dk_debugFunc 0
 
-	dk_TARGET_TRIPLE
+	%dk_call% dk_TARGET_TRIPLE
 %endfunction%
