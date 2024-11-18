@@ -3,13 +3,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_TARGET_TRIPLE()
+# dk_target_triple()
 #
 #	Set the cached target variables
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 #   i.e.  win_x86_64_clang
 #
-#	If the CMAKE_BINARY_DIR is missing the <OS> or the <ARCH>, dk_setTargetTriple will be called to get those variables
+#	If the CMAKE_BINARY_DIR is missing the <OS> or the <ARCH>, dk_target_triple2 will be called to get those variables
 #
 #	os   				= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
 #	OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
@@ -20,10 +20,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   <os>_<arch>			= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
 #   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 #
-function(dk_TARGET_TRIPLE)
+function(dk_target_triple)
 	dk_debugFunc(0 1)
 
-
+	set(default_target_env "clang")
+	
 	### Get TARGET_DIR ###
 	dk_getFullPath("${CMAKE_BINARY_DIR}" TARGET_DIR)
 	dk_printVar(TARGET_DIR)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
@@ -54,7 +55,7 @@ function(dk_TARGET_TRIPLE)
 			(TARGET_DIR MATCHES "cosmo"))
 			dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR})			# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 		else()
-			dk_setTargetTriple()
+			dk_target_triple2()
 			dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR}/${triple})
 		endif()
 
@@ -108,7 +109,7 @@ function(dk_TARGET_TRIPLE)
 		dk_warning("The target triple:${triple} does not contain a valid os")
 		dk_unset(triple)
 		dk_unset(TRIPLE)
-		dk_setTargetTriple()
+		dk_target_triple2()
 	endif()
 	if(os)
 		dk_toUpper(${os} OS)
@@ -135,7 +136,7 @@ function(dk_TARGET_TRIPLE)
 		dk_set(arch cosmo)	
 	else()
 		dk_warning("The target triple:${triple} does not contain a valid arch")
-		dk_setTargetTriple()
+		dk_target_triple2()
 	endif()
 	if(arch)
 		dk_toUpper(${arch} ARCH)
@@ -162,6 +163,7 @@ function(dk_TARGET_TRIPLE)
 		dk_set(env cosmo)
 	else()
 		dk_warning("The target triple:${triple} does not contain a valid env")
+		dk_set(env ${default_target_env})
 	endif()
 	if(env)
 		dk_toUpper(${env} ENV)
@@ -229,5 +231,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 
-	dk_TARGET_TRIPLE()
+	dk_target_triple()
 endfunction()

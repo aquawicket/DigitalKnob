@@ -171,7 +171,7 @@ function(dk_generate)
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
 		# TODO: export MSYSTEM=CLANG64
 		#dk_arrayUnshift(CMAKE_ARGS "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole")
-		dk_arrayUnshift(CMAKE_ARGS "-G" '"MinGW Makefiles"' "-DMSYSTEM=CLANG64")
+		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64")
 	endif()
 	
 	if("${triple}" STREQUAL "win_x86_64_mingw")

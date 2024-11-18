@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_CMAKE_GENERATOR)
     dk_debugFunc()
 
-	dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
+	dk_validate(TARGET_TRIPLE "dk_target_triple()")
 	
 	if(android_arm32)    
 		set(CMAKE_GENERATOR "Unix Makefiles")

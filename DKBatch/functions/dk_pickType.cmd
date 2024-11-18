@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_pickType(rtn_var:TYPE)
 ::#
 ::#
-:dk_pickType TYPE
+:dk_pickType
     call dk_debugFunc 0 1
  ::setlocal
  

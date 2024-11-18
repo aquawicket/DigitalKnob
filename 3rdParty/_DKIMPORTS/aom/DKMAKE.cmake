@@ -17,7 +17,7 @@ dk_getFileParam		(${DKIMPORTS_DIR}/aom/aom.txt AOM_DL)
 dk_import			(${AOM_DL})
 
 ### LINK ###
-dk_validate			(triple "dk_TARGET_TRIPLE()")
+dk_validate			(triple "dk_target_triple()")
 dk_include			(${AOM_DIR})
 if(MSVC)
 	dk_libDebug		(${AOM_DEBUG_DIR}/aom.lib)

@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
 
-dk_validate(triple "dk_TARGET_TRIPLE()")
+dk_validate(triple "dk_target_triple()")
 ### DEPEND ###
 #dk_depend(openssl-cmake)
 #if(EMSCRIPTEN)

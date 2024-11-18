@@ -51,7 +51,7 @@ if(NOT EXISTS ${MSYS2_EXE})
 endif()	
 
 
-dk_validate(target_triple "dk_TARGET_TRIPLE()")
+dk_validate(target_triple "dk_target_triple()")
 if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
 	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")	
 	### Update with pacman ###

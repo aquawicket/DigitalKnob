@@ -17,6 +17,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ###### Load Main Program ######
-## [ $# -gt 0 ] && "$@" || dk_buildMain
-dk_source(dk_buildMain)
-dk_buildMain()
+## [ $# -gt 0 ] && "$@" || dk_buildMain2
+dk_source(dk_buildMain2)
+dk_buildMain2()

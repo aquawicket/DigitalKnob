@@ -34,7 +34,7 @@ dk_info("######################  DigitalKnob  #######################")
 dk_info("############################################################")
 dk_info("\n")
 
-dk_validate(DK_PROJECT_DIR "dk_TARGET_TRIPLE()")
+dk_validate(DK_PROJECT_DIR "dk_target_triple()")
 dk_assertPath(${DK_PROJECT_DIR})
 #dk_printVar(DK_PROJECT_DIR)
 dk_basename(${DK_PROJECT_DIR} APP_NAME)

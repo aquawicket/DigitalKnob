@@ -250,7 +250,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_printVar DEBUG_DIR
 	%dk_call% dk_printVar RELEASE_DIR
 	rem #else
-	rem #	%dk_call% dk_TARGET_TRIPLE
+	rem #	%dk_call% dk_target_triple
 	
 %endfunction%
 
