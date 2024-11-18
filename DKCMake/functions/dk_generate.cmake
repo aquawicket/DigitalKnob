@@ -64,7 +64,7 @@ function(dk_generate)
 		dk_arrayPush(CMAKE_ARGS "-DSHARED=ON")
 	endif()
 	
-	set(CMAKE_BINARY_DIR "${CMAKE_TARGET_PATH}/${triple}/${TYPE}")
+	set(CMAKE_BINARY_DIR "${CMAKE_TARGET_PATH}/${target_triple}/${TYPE}")
 	#dk_printVar(CMAKE_BINARY_DIR)
 	
 	if(NOT DEFINED ENV{WSLENV})
@@ -207,17 +207,18 @@ function(dk_generate)
 		dk_arrayPush(CMAKE_ARGS ".")
 	endif()
 	
-	dk_clearCmakeCache()
-	dk_deleteTempFiles()
+	# TODO: dk_clearCmakeCache()
+	# TODO: dk_deleteTempFiles()
 	
 	###### CMake Configure ######
-	dk_installCmake()
+	# TODO: d_k_installCmake() 
 	
 	dk_echo("")
 	dk_echo("****** CMAKE COMMAND ******")
 	#dk_getNativePath(${CMAKE_EXE} NATIVE_CMAKE_EXE)
 	dk_printVar(CMAKE_ARGS)
 	#TODO: ${CMAKE_EXE} "${CMAKE_ARGS[@]}" && dk_echo "CMake Generation Successful" || dk_error("CMake Generation Failed"
+	execute_process(COMMAND ${CMAKE_COMMAND} ${CMAKE_ARGS})
 	dk_echo("")
 	
 endfunction()
