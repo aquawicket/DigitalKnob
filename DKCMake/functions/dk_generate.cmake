@@ -211,14 +211,15 @@ function(dk_generate)
 	# TODO: dk_deleteTempFiles()
 	
 	###### CMake Configure ######
-	# TODO: d_k_installCmake() 
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+    dk_validate(CMAKE_EXE "dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)")
 	
 	dk_echo("")
 	dk_echo("****** CMAKE COMMAND ******")
 	#dk_getNativePath(${CMAKE_EXE} NATIVE_CMAKE_EXE)
 	dk_printVar(CMAKE_ARGS)
 	#TODO: ${CMAKE_EXE} "${CMAKE_ARGS[@]}" && dk_echo "CMake Generation Successful" || dk_error("CMake Generation Failed"
-	execute_process(COMMAND ${CMAKE_COMMAND} ${CMAKE_ARGS})
+	execute_process(COMMAND ${CMAKE_EXE} ${CMAKE_ARGS})
 	dk_echo("")
 	
 endfunction()
