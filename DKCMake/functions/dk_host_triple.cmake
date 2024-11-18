@@ -23,18 +23,12 @@ function(dk_host_triple)
 	dk_debugFunc()
 
 
-#	FIXME: default environment should be set in dk_target_triple
+#:: NOTICE: default environment moved to dk_target_triple()
 #	#### DEFAULT HOST ENVIRONMENT ###
-	if(DEFINED ENV{host_env})
-		dk_set(default_host_env $ENV{host_env})
-		dk_set(host_env $ENV{host_env})
-#	else(COSMO OR ENV{COSMO})
-#		dk_set(default_host_env "cosmo") # clang, cosmo, msvc, gcc
+#	if(DEFINED ENV{host_env})
+#		dk_set(default_host_env $ENV{host_env})
+#		dk_set(host_env $ENV{host_env})
 #	endif()
-#	
-#	if(NOT default_host_env)		
-#		dk_set(default_host_env "clang") # clang, cosmo, msvc, gcc
-	endif()
 
 
 	

@@ -52,7 +52,7 @@ if "%~1" neq ""    goto runDKCpp
 :installDKCpp
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmo, gcc, msvc 
-	set "default_host_env=cosmo"
+	set "default_target_env=cosmo"
 	
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -62,42 +62,41 @@ if "%~1" neq ""    goto runDKCpp
 	%dk_call% dk_echo "Installing DKCpp . . ."
 	
 	::###### OS ######
-	%dk_call% dk_validate host_os "%dk_call% dk_host_triple"
-	%dk_call% dk_validate OS      "set OS=%host_os%"
+	%dk_call% dk_validate target_os "%dk_call% dk_target_triple"
+	%dk_call% dk_validate OS      "set OS=%target_os%"
 	%dk_call% dk_printVar OS
 	
-	::###### arch ######
-	%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
-	%dk_call% dk_validate arch      "set arch=%host_arch%"
+	::###### target_arch ######
+	%dk_call% dk_validate target_arch "%dk_call% dk_target_triple"
+	%dk_call% dk_validate arch      "set arch=%target_arch%"
 	%dk_call% dk_printVar arch
 	
-	%dk_call% dk_printVar host_env
-	::###### host_env ######
-	set "host_env=%default_host_env%"
-	%dk_call% dk_validate env      "set env=%host_env%"
-	%dk_call% dk_printVar host_env
+	::###### target_env ######
+	set "target_env=%default_target_env%"
+	%dk_call% dk_validate env      "set env=%target_env%"
+	%dk_call% dk_printVar env
 	
 	::###### MSYSTEM ######
-	if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86"    set "MSYSTEM=CLANG32"
-	if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86_64" set "MSYSTEM=CLANG64"
-	if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="arm64"  set "MSYSTEM=CLANGARM64"
-	if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86"    set "MSYSTEM=MINGW32"
-	if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86_64" set "MSYSTEM=MINGW64"
+	if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="x86"    set "MSYSTEM=CLANG32"
+	if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="x86_64" set "MSYSTEM=CLANG64"
+	if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="arm64"  set "MSYSTEM=CLANGARM64"
+	if not defined MSYSTEM  if "%target_env%"=="gcc"   if "%target_arch%"=="x86"    set "MSYSTEM=MINGW32"
+	if not defined MSYSTEM  if "%target_env%"=="gcc"   if "%target_arch%"=="x86_64" set "MSYSTEM=MINGW64"
 	%dk_call% dk_printVar MSYSTEM
 
 	
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
-	if "%host_env%"=="cosmo"  %dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_installSh.cmd"
+	if "%target_env%"=="cosmo"  %dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_installSh.cmd"
 	set "SH_EXE=%SH_EXE:/=\%"
-	if "%host_env%"=="cosmo"  call %DKIMPORTS_DIR%\cosmocc\dk_installCosmoCC.cmd
-	if "%host_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
-	if "%host_env%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
+	if "%target_env%"=="cosmo"  call %DKIMPORTS_DIR%\cosmocc\dk_installCosmoCC.cmd
+	if "%target_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
+	if "%target_env%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
 
-	if "%host_env%"=="cosmo"  set "COMPILER_EXE=%SH_EXE% %COSMO_CXX_COMPILER%"
-	if "%host_env%"=="clang"  set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
-	if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_CXX_COMPILER%"
+	if "%target_env%"=="cosmo"  set "COMPILER_EXE=%SH_EXE% %COSMO_CXX_COMPILER%"
+	if "%target_env%"=="clang"  set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
+	if "%target_env%"=="gcc"	set "COMPILER_EXE=%GCC_CXX_COMPILER%"
 	%dk_call% dk_assertVar COMPILER_EXE
 	%dk_call% dk_printVar COMPILER_EXE
 
