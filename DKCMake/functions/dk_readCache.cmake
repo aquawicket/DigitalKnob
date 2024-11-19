@@ -42,9 +42,9 @@ function(dk_readCache APP target_triple build_type)
 	endforeach()
 	
 	#dk_echo("_APP_ = ${_APP_}, _target_triple_ = ${_target_triple_}, _BUILD_TYPE_ = ${_BUILD_TYPE_}")
-	set(${APP}		${_APP_}	PARENT_SCOPE)
-	set(${target_triple} 	${_target_triple_}	PARENT_SCOPE)
-	set(${DKBUILD_TYPE}		${_BUILD_TYPE_}	PARENT_SCOPE)
+	set(${APP}				${_APP_})
+	set(${target_triple} 	${_target_triple_})
+	set(${build_type}		${_BUILD_TYPE_})
 endfunction()
 
 
