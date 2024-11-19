@@ -1,9 +1,9 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
- if defined %~1 (%return%)
+if defined %~1 (%return%)
 ::################################################################################
-::# dk_validate(variable, code)
+::# dk_validate(variable, code) NO_HALT
 ::#
 ::#    Check if a variable is valid, otherwise run code to validate the variable
 ::#
@@ -14,6 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_stringContains "%~2" "call" || %dk_call% dk_error "dk_validate parameter 2 requires the use of call"
     %~2
     
+	if "%~3" equ "NO_HALT" %return%
     if not defined %~1 dk_error "dk_validate was unable to set the variable:%~1 with the code provided"
     
 ::%DEBUG%
