@@ -12,18 +12,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_assertVar variable)
 	dk_debugFunc(1)	
 	
-#	if(NOT ${variable})
-#		dk_echo("\n\n${bg_red}Assertion failed: at ${variable}${clr}")
-#		
-#		if("${var}")
-#			dk_fatal("${bg_red}${white} { \"${var}\" : \"${${var}}\" } ${clr}")
-#		else()
-#			dk_fatal("${bg_red}${white} ${variable} ${clr}")
-#		endif()
-#	endif()
-	
-	if(NOT DEFINED ENV{${variable}})
-		dk_echo("\n\n${bg_red}Assertion failed: at $ENV{${variable}}${clr}")
+	if(NOT ${variable})
+		dk_echo("\n\n${bg_red}Assertion failed: at ${variable}${clr}")
 		
 		if("${var}")
 			dk_fatal("${bg_red}${white} { \"${var}\" : \"${${var}}\" } ${clr}")
