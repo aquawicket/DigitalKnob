@@ -31,7 +31,7 @@ function(dk_gitUpdate)
 	execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} pull --all)
     execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} checkout -- .)
 	
-	execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} checkout ${branch} ^& echo "%ERRORLEVEL%" == "0" OUTPUT_VARIABLE ERRORLEVEL)
+	execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} checkout ${branch} COMMAND echo "%ERRORLEVEL%" == "0" OUTPUT_VARIABLE ERRORLEVEL ECHO_OUTPUT_VARIABLE)
 	if(NOT ${ERRORLEVEL} EQUAL 0)
 		dk_echo("Remote has no %branch% branch. Creating...")
 		#execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} checkout -b ${branch} main)
