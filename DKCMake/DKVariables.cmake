@@ -87,7 +87,8 @@ endif()
 
 
 if(DEFINED "ENV{COSMO}")
-	dk_toLower("$ENV{COSMO}" ENV{cosmo})
+	dk_set(COSMO "$ENV{COSMO}")
+	dk_set(cosmo "cosmo")
 endif()
 if(COSMO)
 	message(COSMO)
@@ -101,10 +102,10 @@ endif()
 
 ###### Set MSYSTEM and ${MSYSTEM} variables ######
 if(DEFINED "ENV{MSYSTEM}")
-	dk_toLower("$ENV{MSYSTEM}" ENV{msystem})
+	dk_set(MSYSTEM "$ENV{MSYSTEM}")		
 endif()
 if(MSYSTEM)
-	set(ENV{${MSYSTEM}} TRUE)
+	dk_set(${MSYSTEM} TRUE)
 	message(MSYSTEM)
 endif()
 
