@@ -1,0 +1,121 @@
+# dk_triple
+
+
+########################################
+#
+#
+function dk_tripleAppend(<triple> <id> value)
+	
+
+endfunction()
+
+
+dk_tripleAppend(HOST OS "WIN")
+	HOST_OS = WIN
+	WIN_HOST = 1
+	
+dk_tripleAppend(HOST ARCH "ARM64")
+	HOST_OS = WIN
+	WIN_HOST = 1
+	HOST_ARCH = ARM64
+	ARM64_HOST = 1
+	HOST_OS_ARCH = WIN_ARM64
+	WIN_ARM64_HOST = 1
+	
+dk_tripleAppend(HOST ENV "MSVC")
+	HOST_OS = WIN
+	WIN_HOST = 1
+	HOST_ARCH = ARM64
+	ARM64_HOST = 1
+	HOST_ENV = MSVC
+	MSVC_HOST = 1
+	HOST_OS_ARCH = WIN_ARM64
+	WIN_ARM64_HOST = 1
+	HOST_OS_ENV = WIN_MSVC
+	WIN_MSVC_HOST = 1
+	HOST_ARCH_ENV = ARM64_MSVC
+	ARM64_MSVC_HOST = 1
+	
+dk_tripleAppend(HOST YEAR "2024")
+	HOST_OS = WIN						WIN_HOST                = 1
+	HOST_OS_ARCH = WIN_ARM64			WIN_ARM64_HOST          = 1
+	HOST_OS_ENV = WIN_MSVC				WIN_MSVC_HOST           = 1
+	HOST_OS_YEAR = WIN_2024				WIN_2024_HOST           = 1
+		HOST_ARCH = ARM64					ARM64_HOST          = 1	 
+		HOST_ARCH_ENV = ARM64_MSVC			ARM64_MSVC_HOST     = 1
+		HOST_ARCH_YEAR = ARM64_2024			ARM64_2024_HOST     = 1		
+			HOST_ENV = MSVC						MSVC_HOST       = 1
+			HOST_ENV_YEAR = MSVC_2024   		MSVC_2024_HOST  = 1
+				HOST_YEAR = 2024					2024_HOST   = 1  
+				
+				
+dk_tripleAppend(NAME ABCDE "12345")
+	NAME_A     			= 1				              			
+	NAME_A_B			= 1_2	
+	NAME_A_C			= 1_3
+	NAME_A_D			= 1_4
+	NAME_A_E			= 1_5
+	NAME_A_B_C			= 1_2_3
+	NAME_A_B_D			= 1_2_4
+	NAME_A_B_E			= 1_2_5
+	NAME_A_C_D			= 1_3_4
+	NAME_A_C_E			= 1_3_5
+	NAME_A_D_E			= 1_4_5
+	NAME_A_B_C_D  		= 1_2_3_4
+	NAME_A_B_C_E  		= 1_2_3_5
+	NAME_A_B_D_E  		= 1_2_4_5
+	NAME_A_C_D_E  		= 1_3_4_5	
+	NAME_A_B_C_D_E  	= 1_2_3_4_5
+	NAME_B     			= 2				              			
+	NAME_B_C			= 2_3
+	NAME_B_D			= 2_4
+	NAME_B_E			= 2_5
+	NAME_B_C_D			= 2_3_4
+	NAME_B_C_E			= 2_3_5
+	NAME_B_D_E			= 2_4_5
+	NAME_B_C_D_E		= 2_3_4_5
+	NAME_C		  		= 3	
+	NAME_C_D		  	= 3_4
+	NAME_C_E		  	= 3_5
+	NAME_C_D_E			= 3_4_5
+	NAME_D				= 4
+	NAME_D_E			= 4_5
+	NAME_E				= 5	
+				
+	
+dk_tripleAppend(DATE YEAR   "2024")
+dk_tripleAppend(DATE MONTH  "FEB")
+dk_tripleAppend(DATE DAY    "WED")
+dk_tripleAppend(DATE TIME   "12:32")
+dk_tripleAppend(DATE MIDDAY "AM")
+	DATE_YEAR     					= 2024				              			
+	DATE_YEAR_MONTH					= 2024_FEB	
+	DATE_YEAR_DAY					= 2024_WED
+	DATE_YEAR_TIME					= 2024_12:32
+	DATE_YEAR_MIDDAY				= 2024_AM
+	DATE_YEAR_MONTH_DAY				= 2024_FEB_WED
+	DATE_YEAR_MONTH_TIME			= 2024_FEB_12:32
+	DATE_YEAR_MONTH_MIDDAY			= 2024_FEB_AM
+	DATE_YEAR_DAY_TIME				= 2024_WED_12:32
+	DATE_YEAR_DAY_MIDDAY			= 2024_WED_AM
+	DATE_YEAR_TIME_MIDDAY			= 2024_12:32_AM
+	DATE_YEAR_MONTH_DAY_TIME  		= 2024_FEB_WED_12:32
+	DATE_YEAR_MONTH_DAY_MIDDAY  	= 2024_FEB_WED_AM
+	DATE_YEAR_MONTH_TIME_MIDDAY  	= 2024_FEB_12:32_AM
+	DATE_YEAR_DAY_TIME_MIDDAY  		= 2024_WED_12:32_AM	
+	DATE_YEAR_MONTH_DAY_TIME_MIDDAY = 2024_FEB_WED_12:32_AM
+	DATE_MONTH     					= FEB				              			
+	DATE_MONTH_DAY					= FEB_WED
+	DATE_MONTH_TIME					= FEB_12:32
+	DATE_MONTH_MIDDAY				= FEB_AM
+	DATE_MONTH_DAY_TIME				= FEB_WED_12:32
+	DATE_MONTH_DAY_MIDDAY			= FEB_WED_AM
+	DATE_MONTH_TIME_MIDDAY			= FEB_12:32_AM
+	DATE_MONTH_DAY_TIME_MIDDAY		= FEB_WED_12:32_AM
+	DATE_DAY	  					= WED	
+	DATE_DAY_TIME		  			= WED_12:32
+	DATE_DAY_MIDDAY		  			= WED_AM
+	DATE_DAY_TIME_MIDDAY			= WED_12:32_AM
+	DATE_TIME						= 12:32
+	DATE_TIME_MIDDAY				= 12:32_AM
+	DATE_MIDDAY						= AM		  
