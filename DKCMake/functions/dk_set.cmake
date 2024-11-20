@@ -24,7 +24,8 @@ function(dk_set variable)# value)
 	#	dk_warning("dk_set(${ARGV}): expecting less arguments")
 	#endif()
 	
-	set(${ARGV} CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
+	#set(${ARGV} CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
+	set(ENV{${ARGV0}} ${ARGV1})
 	#dk_printVar(${ARGV0})
 endfunction()
 dk_createOsMacros("dk_set")
