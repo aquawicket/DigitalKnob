@@ -31,27 +31,11 @@ function(dk_gitUpdate)
 	execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} pull --all)
     execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} checkout -- .)
 	
-	execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} checkout ${branch} COMMAND echo "%ERRORLEVEL%" == "0" OUTPUT_VARIABLE ERRORLEVEL OUTPUT_STRIP_TRAILING_WHITESPACE)
-	
-	### process the return value ###
-    string(FIND "${ERRORLEVEL}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
-    if(last_newline_pos GREATER -1)
-        string(SUBSTRING "${ERRORLEVEL}" ${last_newline_pos} -1 ERRORLEVEL) # Extract the last line
-    endif()
-    string(STRIP "${ERRORLEVEL}" ERRORLEVEL)
-    dk_echo("ERRORLEVEL = ${ERRORLEVEL}")  
-    #set(${rtn_var} "${rtn_value}" PARENT_SCOPE)
-    #execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${rtn_value}")
-
-	
-	
-	
+	execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} checkout ${branch} RESULT_VARIABLE ERRORLEVEL)	
 	if(NOT ${ERRORLEVEL} EQUAL 0)
 		dk_echo("Remote has no %branch% branch. Creating...")
 		#execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} checkout -b ${branch} main)
 		#execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} push --set-upstream origin ${branch})
-	else()
-		dk_echo("Updated ${branch} branch.")
 	endif()
 endfunction()
 
