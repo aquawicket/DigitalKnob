@@ -11,9 +11,9 @@ function(dk_pickUpdate)
 	dk_debugFunc(0)
 
 	dk_readCache(ENV{_APP_} ENV{_target_triple_} ENV{_BUILD_TYPE_})
-	#dk_printVar(ENV{_APP_})
-	#dk_printVar(ENV{_target_triple_}) 
-	#dk_printVar(ENV{_BUILD_TYPE_})
+	dk_printVar(ENV{_APP_})
+	dk_printVar(ENV{_target_triple_}) 
+	dk_printVar(ENV{_BUILD_TYPE_})
 	
 	dk_echo()
 	dk_gitCheckRemote()
