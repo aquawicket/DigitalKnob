@@ -36,6 +36,8 @@ function(dk_gitUpdate)
 		dk_echo("Remote has no %branch% branch. Creating...")
 		#execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} checkout -b ${branch} main)
 		#execute_process(COMMAND "${GIT_EXE}" -C ${DKBRANCH_DIR} push --set-upstream origin ${branch})
+	else()
+		dk_echo("Updated %branch% branch.")
 	endif()
 endfunction()
 
