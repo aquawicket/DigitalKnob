@@ -19,12 +19,25 @@ endlocal & set "%~1=%rtn_var%"
 echo %rtn_var%
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     call dk_debugFunc 0 99
  setlocal
  
-    %dk_call% dk_multiSelect rtn_var "one;two;three"
+    %dk_call% dk_multiSelect rtn_var "one, two, three"
     %dk_call% dk_printVar rtn_var
 %endfunction%
 
@@ -63,14 +76,15 @@ echo %rtn_var%
     <script language='javascript' >
         window.resizeTo(200,400);
         function load(e){
-		
+			
 			//######### Pass batch variable into HTA ######################################
 			var input= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(0);
 			var line=input.ReadLine();
-			
-			//#############################################################################
 		
 			addSelection(line);
+			for (let i = 0; i < line.length; i++) {
+				addSelection(line[i]);
+			}
 		}
 		function addSelection(name){
 			var input = document.getElementById("input");
