@@ -8,22 +8,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_multiSelect
     call dk_debugFunc 0 99
- ::setlocal
-    for /f "tokens=* delims=" %%p in ('cmd /c mshta.exe "%~f0"') do (
-        set "rtn_var=%%p"
-    )
-    endlocal & set "%~1=%rtn_var%"
-	echo %rtn_var%
-%endfunction%
 
-
-
-
+::######## Pass batch variable into HTA
+set "selections=One;Two;Three"
+for /f "tokens=* delims=" %%a in ('echo %%selections%%^|mshta.exe "%~f0"') do (
+    ::########## Pass Hta variable back to Batch 
+	set "rtn_var=%%a"
+)
+endlocal & set "%~1=%rtn_var%"
+echo %rtn_var%
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    call dk_debugFunc 0 99
  setlocal
  
     %dk_call% dk_multiSelect rtn_var "one;two;three"
@@ -56,33 +54,33 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 <body onLoad='load(event)' onkeypress='keyPress(event)'>
 	<div class="wrapper" style="width:100%">
-	<select size="15" name="" id="input" class="form-control" style="Width:100%;top:0px">
-        <!--
-		<option value="">One</option>
-        <option value="">Two</option>
-        <option value="">Three</option>
-        <option value="">Four</option>
-        <option value="">Five</option>
-        <option value="">Six</option>
-        <option value="">Seven</option>
-        <option value="">Eight</option>
-        <option value="">Nine</option>
-        <option value="">Ten</option>
-		-->
-    </select></div>
+		<select size="15" name="" id="input" class="form-control" style="Width:100%;top:0px">
+		</select>
+	</div>
     <button onclick='submit()'>Submit</button>
     <button onclick='cancel()'>Cancel</button>
+	
     <script language='javascript' >
         window.resizeTo(200,400);
         function load(e){
+		
+			//######### Pass batch variable into HTA ######################################
+			var input= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(0);
+			var line=input.ReadLine();
+			
+			//#############################################################################
+		
+			addSelection(line);
+		}
+		function addSelection(name){
 			var input = document.getElementById("input");
 			var option = document.createElement("option");
-			option.setAttribute("value", "One");
-			option.innerHTML = "One";
+			option.setAttribute("value", name);
+			option.innerHTML = name;
 			input.appendChild(option);
 		}
 		function keyPress(e){
-            if (e.keyCode == 13) {
+            if (e.keyCode == 13){
                 submit();
             }
         }
