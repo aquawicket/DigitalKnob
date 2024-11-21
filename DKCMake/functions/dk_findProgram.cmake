@@ -24,7 +24,7 @@ function(dk_findProgram VAR filename)
 	#endif()
 	
 	if(${VAR})
-		dk_fatal("error {VAR} already set to ${VAR}")
+		dk_error("error {VAR} already set to ${VAR}")
 	endif()
 	
 	if(ARGN)

@@ -46,7 +46,6 @@ dk_importVariables(${CMAKE_DL})
 
 ###### IMPORT ######
 if(ANDROID_HOST)
-	#dk_command(pkg install cmake -y)
 	dk_installPackage(cmake)
 	dk_findProgram(CMAKE_EXE cmake)
 elseif(WIN_HOST)
@@ -95,8 +94,8 @@ if(NOT CMAKE_EXE)
 endif()
 
 execute_process(COMMAND ${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)
-dk_set(CMAKE_VERSION "${CMAKE_VERSION}")
+#string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)
+#dk_set(CMAKE_VERSION "${CMAKE_VERSION}")
 
 dk_return()
 
