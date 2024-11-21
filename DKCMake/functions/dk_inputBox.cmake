@@ -21,6 +21,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_inputBox(myValue)
-	dk_printVar(myValue)
+	dk_inputBox(result)
+	dk_printVar(result)
 endfunction()
