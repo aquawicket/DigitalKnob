@@ -76,7 +76,7 @@ function(dk_generate)
 	
 	############ CMake Options ############
     #dk_arrayPush(CMAKE_ARGS "-DCMAKE_VERBOSE_MAKEFILE=1")
-	#dk_arrayPush(CMAKE_ARGS "-DCMAKE_COLOR_DIAGNOSTICS=ON")
+	dk_arrayPush(CMAKE_ARGS "-DCMAKE_COLOR_DIAGNOSTICS=ON")
 	#dk_arrayPush(CMAKE_ARGS "-Wdev")
 	#dk_arrayPush(CMAKE_ARGS "-Werror=dev")
 	#dk_arrayPush(CMAKE_ARGS "-Wdeprecated")
