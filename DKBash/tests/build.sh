@@ -178,9 +178,8 @@ dk_pickUpdate() {
 		dk_echo " 5) Reset All"
 		dk_echo " 6) Remove All"
 		dk_echo " 7) Clear Screen"
-		dk_echo " 8) Clear cmake cache and .tmp files"
-		dk_echo " 9) Reload"
-		dk_echo "10) Exit"
+		dk_echo " 8) Reload"
+		dk_echo " 9) Exit"
 		dk_echo
 		dk_echo " Press Enter To Skip"
 	else
@@ -199,9 +198,8 @@ dk_pickUpdate() {
 		dk_echo " 5) Reset All"
 		dk_echo " 6) Remove All"
 		dk_echo " 7) Clear Screen"
-		dk_echo " 8) Clear cmake cache and .tmp files"
-		dk_echo " 9) Reload"
-		dk_echo "10) Exit"
+		dk_echo " 8) Reload"
+		dk_echo " 9) Exit"
 		dk_echo
 		dk_echo "Press Enter To Skip"
 		dk_echo "${clr}"
@@ -229,11 +227,8 @@ dk_pickUpdate() {
 	elif [ "${input}" = "7" ]; then
 		clear
 	elif [ "${input}" = "8" ]; then
-		dk_clearCmakeCache
-		dk_deleteTempFiles
-	elif [ "${input}" = "9" ]; then
 		dk_reload
-	elif [ "${input}" = "10" ]; then
+	elif [ "${input}" = "9" ]; then
 		exit 0	
 	elif [ "${input}" = "" ]; then
 		UPDATE=1

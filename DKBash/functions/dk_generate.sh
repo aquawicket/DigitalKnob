@@ -212,8 +212,8 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "."
 	fi
 	
-	dk_call dk_clearCmakeCache
-	dk_call dk_deleteTempFiles
+	###### Clear CMake Cache ######
+	dk_call dk_clearCmakeCache "${CMAKE_BINARY_DIR}"
 	
 	###### CMake Configure ######
 	dk_call dk_installCmake
