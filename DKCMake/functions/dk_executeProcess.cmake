@@ -235,8 +235,9 @@ function(dk_executeProcess)
 #	if(NOT NOECHO)
 		dk_replaceAll("${cmd1}"  ";"  " "  cmd1)	
 		dk_echo("${lblue}exec> ${lcyan}${cmd1}${clr}")
-		execute_process(${ARGV})
 #	endif()
+
+	execute_process(${ARGV})
 	
 #	if(NOT ${result_variable} EQUAL 0)
 		dk_sleep(1) # wait 1 second1 for the stdout to flush before printing
@@ -269,9 +270,7 @@ function(dk_executeProcess)
 	if(${ERROR_VARIABLE})
 		set(${ERROR_VARIABLE} ${${ERROR_VARIABLE}} PARENT_SCOPE)
 	endif()
-	
 endfunction()
-#dk_createOsMacros("dk_executeProcess")
 
 
 
