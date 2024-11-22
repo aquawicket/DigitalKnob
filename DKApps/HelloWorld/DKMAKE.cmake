@@ -38,10 +38,7 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "endif() \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")	
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt "target_link_libraries(${APP_NAME} dbghelp.lib version.lib winmm.lib ws2_32.lib psapi.lib) \n")
 
-
-
-#dk_clearCmakeCache()  
-#dk_deleteTempFiles()
+#dk_clearCmakeCache()
 
 dk_set(CURRENT_PLUGIN ${APP_NAME})
 dk_set(${CURRENT_PLUGIN} ${CMAKE_SOURCE_DIR})

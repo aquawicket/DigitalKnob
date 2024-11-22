@@ -207,9 +207,6 @@ function(dk_generate)
 		dk_arrayPush(CMAKE_ARGS ".")
 	endif()
 	
-	# TODO: dk_clearCmakeCache()
-	# TODO: dk_deleteTempFiles()
-	
 	###### CMake Configure ######
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
     dk_validate(CMAKE_EXE "dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)")

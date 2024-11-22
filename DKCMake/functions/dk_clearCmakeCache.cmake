@@ -15,12 +15,6 @@ function(dk_clearCmakeCache)
 	dk_delete("${ARGV0}/CMakeFiles")
 	dk_delete("${ARGV0}/CMakeCache.txt")
 	dk_delete("${ARGV0}/cmake_install.cmake")
-	
-	#dk_delete("${path}/DKCMAKE_END_VARIABLES.temp")
-	#dk_delete("${path}/DKCMAKE_FLAG_VARIABLES.temp")
-	#dk_delete("${path}/DKCMAKE_PROJECT_VARIABLES.temp")
-	#dk_delete("${path}/DKCMAKE_START_VARIABLES.temp")
-	#dk_delete("${path}/DKBUILD.log")
 endfunction()
 
 

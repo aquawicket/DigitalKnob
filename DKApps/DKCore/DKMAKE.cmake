@@ -15,8 +15,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ############ CLEAR CMAKE CACHE ############
-dk_clearCmakeCache()
-dk_deleteTempFiles()
+#dk_clearCmakeCache()
 
 
 ############ GENERATE APP CMAKE ############

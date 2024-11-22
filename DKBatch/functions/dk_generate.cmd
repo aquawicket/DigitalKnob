@@ -148,8 +148,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
     
 	::###### Delete Cmake Cache files ######
-	%dk_call% dk_clearCmakeCache %APP% %triple% %DKBUILD_TYPE%
-	%dk_call% dk_deleteTempFiles
+	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"
 	
     %dk_call% dk_info "****** CMAKE COMMAND ******"
     echo %CMAKE_EXE% %CMAKE_ARGS%
