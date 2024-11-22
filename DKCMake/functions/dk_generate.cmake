@@ -215,6 +215,10 @@ function(dk_generate)
     dk_validate(CMAKE_EXE "dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)")
 	
 	dk_echo("")
+	dk_echo("****** CLEAR CMAKE CACHE ******")
+	dk_clearCmakeCache(${CMAKE_BINARY_DIR})
+	
+	dk_echo("")
 	dk_echo("****** CMAKE COMMAND ******")
 	#dk_getNativePath(${CMAKE_EXE} NATIVE_CMAKE_EXE)
 	dk_printVar(CMAKE_ARGS)
