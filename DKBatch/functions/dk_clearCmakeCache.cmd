@@ -17,14 +17,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     ::for /r %~1 %%i in (CMakeCache.*) do @if exist "%%i" del "%%i"
 	::for /d /r "%~1" %%i in (CMakeFiles) do if exist "%%i" rd /s/q "%%i"
-	
-	::for /f "tokens=*" %%G in ('dir /b /s /a:d "C:\Users\Administrator\digitalknob\3rdParty*"') do echo Found %%G
-	::for /f "tokens=*" %%G in ('dir /b /s /a:d "%~1*"') do echo Found %%G
-	
-::	for /f "tokens=*" %%G in ('dir /b /a:d %DK3RDPARTY_DIR%') do (
-::      if exist "!DK3RDPARTY_DIR!\%%G\%~2\CMakeFiles"           rd /s/q "!DK3RDPARTY_DIR!\%%G\%~2\CMakeFiles"
-::		if exist "!DK3RDPARTY_DIR!\%%G\%~2\CMakeCache.txt"       del "!DK3RDPARTY_DIR!\%%G\%~2\CMakeCache.txt"
-::	)
 %endfunction%
 
 
