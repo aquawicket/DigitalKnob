@@ -1362,7 +1362,7 @@ endif(WIN_X86)
 ##########
 if(WIN_X86_64)
 	########################## CREATE ICONS ###############################
-	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+	dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
