@@ -9,11 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_firewallAllow
 	call dk_debugFunc 2
-	
-	::%dk_call% dk_replaceAll "%~2" "/" "\\\\" executable
 
-	netsh advfirewall firewall add rule name=%~1 dir=in action=allow program="%~2" enable=yes profile=any
-	netsh advfirewall firewall add rule name=%~1 dir=out action=allow program="%~2" enable=yes profile=any
+	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%~2" enable=yes profile=any
+	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%~2" enable=yes profile=any
 %endfunction%
 
 
@@ -25,5 +23,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_firewallAllow CMD "C:\Windows\System32\cmd.exe"
+	%dk_call% dk_firewallAllow "CMD" "C:\Windows\System32\cmd.exe"
 %endfunction%
