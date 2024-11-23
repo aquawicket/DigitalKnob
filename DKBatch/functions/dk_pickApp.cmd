@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_readCache _APP_ _triple_ _BUILD_TYPE_
 	
     :: get a list of the directories in DKApps
-	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
 	
 	%dk_call% dk_deleteArray options
     %dk_call% dk_getDirectories "%DKAPPS_DIR%" options

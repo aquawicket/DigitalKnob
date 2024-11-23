@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
 	
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_set DKAPPS_DIR "%dk_call% %DKBRANCH_DIR%\DKApps"
+	%dk_call% dk_set DKAPPS_DIR "%DKBRANCH_DIR%\DKApps"
 %endfunction%
 
 

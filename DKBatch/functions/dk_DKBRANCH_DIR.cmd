@@ -34,8 +34,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::			set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
 ::			::%dk_call% dk_printVar DKIMPORTS_DIR
 		
-		set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
-		::%dk_call% dk_printVar DKAPPS_DIR
+::		set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
+::		::%dk_call% dk_printVar DKAPPS_DIR
 		
 		set "DKBASH_DIR=%DKBRANCH_DIR%\DKBash"
 		::%dk_call% dk_printVar DKBASH_DIR
@@ -86,7 +86,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			set "DKHTA_FUNCTIONS_DIR_=%DKHTA_DIR%\functions\"
 			::%dk_call% dk_printVar DKHTA_FUNCTIONS_DIR_
 		
-		set "DKHTML_DIR=%DKBRANCH_DIR%\DKHta"
+		set "DKHTML_DIR=%DKBRANCH_DIR%\DKHtml"
 		::%dk_call% dk_printVar DKHTML_DIR
 			set "DKHTML_FUNCTIONS_DIR=%DKHTML_DIR%\functions"
 			::%dk_call% dk_printVar DKHTML_FUNCTIONS_DIR
@@ -141,4 +141,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_DKBRANCH_DIR
+	%dk_call% dk_printVar DKBRANCH_DIR
 %endfunction%
