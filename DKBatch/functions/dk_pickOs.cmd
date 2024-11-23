@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	set "default_target_env=clang"
 	
-    %dk_call% dk_setTitle DigitalKnob - %APP% %triple% %DKBUILD_TYPE%
+    %dk_call% dk_title DigitalKnob - %APP% %triple% %DKBUILD_TYPE%
     %dk_call% dk_echo
     %dk_call% dk_echo %APP% %triple% %DKBUILD_TYPE%
        

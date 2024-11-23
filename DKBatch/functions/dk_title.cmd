@@ -2,10 +2,10 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_setTitle(string)
+::# dk_title(string)
 ::#
 ::#
-:dk_setTitle
+:dk_title
     call dk_debugFunc 0 99
  setlocal
  
@@ -20,5 +20,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_setTitle "DKTEST()"
+    %dk_call% dk_title "testing dk_title"
 %endfunction%

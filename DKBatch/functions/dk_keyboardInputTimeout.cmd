@@ -31,17 +31,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set /a "timeout-=1"
     ::<nul set /p "=.!ASCII_13!     %timeout%" <NUL
     <nul set /p "="<NUL
-    %dk_call% dk_setTitle %timeout%
+    %dk_call% dk_title %timeout%
 
     ping -n 2 localhost %NO_OUTPUT%
     if !timeout! GTR 0 (
-        %dk_call% dk_setTitle %timeout%
+        %dk_call% dk_title %timeout%
         if not exist %cache_file% goto keyboard_input_timeout_loop
     )
 
     :: clear line and console title
     ::<nul set /p "=.!ASCII_13!    %timeout% " <NUL
-    %dk_call% dk_setTitle
+    %dk_call% dk_title
     
     :keyboard_input_timeout_result
     del %thread_file% %NO_OUTPUT%

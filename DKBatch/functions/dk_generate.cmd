@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  ::setlocal
  
-    %dk_call% dk_setTitle Generating %APP% - %triple% - %DKBUILD_TYPE% - %LEVEL% . . .
+    %dk_call% dk_title Generating %APP% - %triple% - %DKBUILD_TYPE% - %LEVEL% . . .
     %dk_call% dk_echo
     %dk_call% dk_info "##################################################################"
     %dk_call% dk_info "      Generating %APP% - %triple% - %DKBUILD_TYPE% - %LEVEL%"
