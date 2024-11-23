@@ -15,7 +15,9 @@ mkdir "!DKF!" 2>nul
 set "DK=!DKF!\DK.cmd" 
 
 :: firewall
-netsh advfirewall firewall add rule name="Powershell" dir=in action=allow program="C:\windows\system32\windowspowershell\v1.0\powershell.exe" enable=yes profile=any
+netsh advfirewall firewall add rule name="powershell" dir=in action=allow program="C:\windows\system32\windowspowershell\v1.0\powershell.exe" enable=yes profile=any
+netsh advfirewall firewall add rule name="curl" dir=in action=allow program="C:\windows\system32\curl.exe" enable=yes profile=any
+netsh advfirewall firewall add rule name="git" dir=in action=allow program="C:\users\administrator\digitalknob\dktools\portablegit-2.46.2-64-bit\mingw64\libexec\git-core\git-remote-https.exe" enable=yes profile=any
 
 if not exist !DK! powershell -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1||certutil -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1||curl -f "!HDK!" -o "!DK!" >nul 2>&1||echo DKINIT Failed
 
