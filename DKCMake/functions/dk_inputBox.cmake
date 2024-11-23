@@ -6,11 +6,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_inputBox(msg, rtn_var)
 #
 #
-function(dk_inputBox input)
+function(dk_inputBox rtn_var)
 	dk_debugFunc()
 	
 	dk_callDKBatch(dk_inputBox output)
-	set(${input} ${output} PARENT_SCOPE)
+	set(${rtn_var} ${output} PARENT_SCOPE)
 endfunction()
 
 

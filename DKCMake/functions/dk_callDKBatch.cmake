@@ -3,11 +3,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ##################################################################################
-# dk_callDKBatch(function, arguments..., rtn_var)
+# dk_callDKBatch(function, rtn_var, arguments...)
 #
 #
 function(dk_callDKBatch func rtn_var)
-#function(dk_callDKBatch func)
 	dk_debugFunc()
 	
     ### get required variables ###
@@ -35,7 +34,6 @@ function(dk_callDKBatch func rtn_var)
     endif()
     string(STRIP "${_output_}" _output_)
 	
-	#dk_echo("LAST_ARG = ${LAST_ARG}")
     set(${rtn_var} "${_output_}" PARENT_SCOPE)
     
 # DEBUG
