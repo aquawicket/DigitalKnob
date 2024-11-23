@@ -5,10 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-#dk_load(dk_builder)
+############ pacman ############
 # https://wiki.archlinux.org/title/Pacman
 # https://walterteng.com/using-zsh-on-windows
-
+#dk_load(dk_builder)
 
 if(EXISTS ${PACMAN_EXE})
 	dk_return()

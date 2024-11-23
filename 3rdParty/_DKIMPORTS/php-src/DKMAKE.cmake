@@ -5,11 +5,11 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ php-src ############
 # https://github.com/php/php-src.git
 # https://www.php.net
 # https://windows.php.net/downloads/releases
-
+dk_load(dk_builder)
 
 if(NOT WIN_HOST)
 	dk_undepend(php-src)
