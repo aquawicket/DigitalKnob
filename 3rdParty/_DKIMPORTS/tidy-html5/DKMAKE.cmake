@@ -17,8 +17,8 @@ dk_import(https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
 
 
 ### PATCH FILES ###
-dk_fileReplace			(${TIDY_HTML5_DIR}/CMakeLists.txt "add_definitions \\( -DLIBTIDY_VERSION" 	"#add_definitions ( -DLIBTIDY_VERSION")
-dk_fileReplace			(${TIDY_HTML5_DIR}/CMakeLists.txt "add_definitions \\( -DRELEASE_DATE"    	"#add_definitions ( -DRELEASE_DATE")
+dk_fileReplace			("${TIDY_HTML5_DIR}/CMakeLists.txt" "add_definitions ( -DLIBTIDY_VERSION" 	"#add_definitions ( -DLIBTIDY_VERSION")
+dk_fileReplace			("${TIDY_HTML5_DIR}/CMakeLists.txt" "add_definitions ( -DRELEASE_DATE"    	"#add_definitions ( -DRELEASE_DATE")
 
 ### LINK ###
 if(EMSCRIPTEN)
