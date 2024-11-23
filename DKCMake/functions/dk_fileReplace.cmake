@@ -3,24 +3,21 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_fileReplace("input" "searchValue" "newValue" rtn_var)
+# dk_fileReplace("filePath, find, replace)
 #
 #	TODO
 #
 #	@filePath	- TODO
 #	@find		- TODO
 #	@replace	- TODO
-#   NO_HALT (optional)	- if any of the parameters equals NO_HALT, dk_fatal() messages will not be displayed
 #
 function(dk_fileReplace)
-	dk_debugFunc(3 4)
-	
-	#dk_getOption(NO_HALT ${ARGV})
+	dk_debugFunc(3)
 	
 	file(READ ${ARGV0} fileString)
 	string(FIND "${fileString}" "${ARGV1}" found)
 	if(${found} GREATER -1)
-		dk_replaceAll("${ARGV0}" "${ARGV1}" "${ARGV2}" fileString)
+		dk_replaceAll("${fileString}" "${ARGV1}" "${ARGV2}" fileString)
 		dk_fileWrite(${ARGV0} "${fileString}")
 	else()
 		dk_error("cannot find \"${ARGV1}\"  in  (${ARGV0})")
