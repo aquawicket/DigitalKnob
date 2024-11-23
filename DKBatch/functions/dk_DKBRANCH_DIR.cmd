@@ -114,8 +114,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			set "DKPHP_FUNCTIONS_DIR_=%DKPHP_DIR%\functions\"
 			::%dk_call% dk_printVar DKPHP_FUNCTIONS_DIR_
 		
-		set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
-		::%dk_call% dk_printVar DKPLUGINS_DIR
+::		set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
+::		::%dk_call% dk_printVar DKPLUGINS_DIR
 		
 		set "DKPOWERSHELL_DIR=%DKBRANCH_DIR%\DKPowershell"
 		::%dk_call% dk_printVar DKPOWERSHELL_DIR
