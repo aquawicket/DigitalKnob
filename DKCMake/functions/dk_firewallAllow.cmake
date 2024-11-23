@@ -11,7 +11,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_firewallAllow)
 	dk_debugFunc(2)
 	
-	dk_callDKBatch(dk_firewallAllow ${ARGV})
+	dk_callDKBatch(dk_firewallAllow output "CMD" "C:\\Windows\\System32\\cmd.exe")
+	#dk_callDKBatch(dk_firewallAllow ${ARGV0} ${ARGV1})
 endfunction()
 
 

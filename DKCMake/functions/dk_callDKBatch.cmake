@@ -24,7 +24,9 @@ function(dk_callDKBatch func rtn_var)
     
     ### Call DKBatch function ###
    # ${CMD_EXE_WIN}
-	dk_set(DKBATCH_COMMAND COMMAND cmd /V:ON /c call "${DKBATCH_FUNCTIONS_DIR_WIN}\\${func}.cmd" OUTPUT_VARIABLE _output_ WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
+	dk_set(DKBATCH_COMMAND COMMAND cmd /V:ON /c call "${DKBATCH_FUNCTIONS_DIR_WIN}\\${func}.cmd" ${ARGN} OUTPUT_VARIABLE _output_ WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
+	
+	message("${DKBATCH_COMMAND}")
     execute_process(${DKBATCH_COMMAND})
 
     ### process the return value ###
