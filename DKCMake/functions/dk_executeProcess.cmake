@@ -233,10 +233,11 @@ function(dk_executeProcess)
 	dk_reparseCmakeCommand(ARGV) # support longer command lines
 	
 #	if(NOT NOECHO)
-		dk_replaceAll("${cmd1}"  ";"  " "  cmd1)	
-		dk_echo("${lblue}exec> ${lcyan}${cmd1}${clr}")
+#		dk_replaceAll("${ARGV}"  ";"  " "  cmd1)	
+#		dk_echo("${lblue}command> ${lcyan}${cmd1}${clr}")
 #	endif()
 
+	dk_echo("${lblue}execute_process> ${lcyan}${ARGV}${clr}")
 	execute_process(${ARGV})
 	
 #	if(NOT ${result_variable} EQUAL 0)
@@ -259,16 +260,16 @@ function(dk_executeProcess)
 #	else()
 	
 	if(${RESULT_VARIABLE})
-		set(${RESULT_VARIABLE} ${${RESULT_VARIABLE}} PARENT_SCOPE)
+		set(${RESULT_VARIABLE}  ${${RESULT_VARIABLE}}  PARENT_SCOPE)
 	endif()
 	if(${RESULTS_VARIABLE})
 		set(${RESULTS_VARIABLE} ${${RESULTS_VARIABLE}} PARENT_SCOPE)
 	endif()
 	if(${OUTPUT_VARIABLE})
-		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
+		set(${OUTPUT_VARIABLE}  ${${OUTPUT_VARIABLE}}  PARENT_SCOPE)
 	endif()
 	if(${ERROR_VARIABLE})
-		set(${ERROR_VARIABLE} ${${ERROR_VARIABLE}} PARENT_SCOPE)
+		set(${ERROR_VARIABLE}   ${${ERROR_VARIABLE}}   PARENT_SCOPE)
 	endif()
 endfunction()
 
