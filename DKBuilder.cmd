@@ -51,7 +51,7 @@ call "%DK%" %~0 %*
 
 :dk_registryContains
 	setlocal EnableDelayedExpansion
-	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
+	for /f "usebackq delims=" %%a in (`reg query "%~1"`) do (
 		set "str=%%a"
 		if not "x!str:%~2=!" == "x!str!" exit /b 0
 	)
