@@ -27,8 +27,8 @@ call dk_load dk_pause
 call dk_load dk_exit
 
 ::###### Run Program ######
-%dk_call% dk_validate DKBRANCH_DIR "call dk_DKBRANCH_DIR"
-%dk_call% dk_validate GIT_EXE "call dk_installGit"
+%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 if NOT exist "%DKBRANCH_DIR%\.git" (
 	"%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
 	cd "%DKBRANCH_DIR%"
