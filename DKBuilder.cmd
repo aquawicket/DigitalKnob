@@ -43,13 +43,17 @@ call "%DK%" %~0 %*
 
 
 :dk_firewallAllow
-	::call dk_debugFunc 2
-
-	%dk_call% dk_registryContains "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%~2" && (
-		%dk_call% dk_warning "registry already contains a firewall rule for %~2"
-		%return%
-	)
-	
+	call :dk_registryContains "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%~2" && exit /b 0
 	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%~2" enable=yes profile=any
 	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%~2" enable=yes profile=any
+%endfunction%
+
+
+:dk_registryContains
+	setlocal EnableDelayedExpansion
+	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
+		set "str=%%a"
+		if not "x!str:%~2=!" == "x!str!" exit /b 0
+	)
+    exit /b 1
 %endfunction%
