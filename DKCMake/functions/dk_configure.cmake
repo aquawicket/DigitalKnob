@@ -117,10 +117,10 @@ function(dk_configure SOURCE_DIR) #ARGN
 			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 		endif()
 		return()
-		
 	endif()
+	
 endfunction()
-dk_createOsMacros("dk_configure")
+#dk_createOsMacros("dk_configure")
 
 
 
