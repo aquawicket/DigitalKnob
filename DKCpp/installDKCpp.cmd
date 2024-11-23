@@ -86,7 +86,7 @@ if "%~1" neq ""    goto runDKCpp
 
 	
 	::###### COMPILER_EXE ######
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	
 	if "%target_env%"=="cosmo"  %dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_installSh.cmd"
 	set "SH_EXE=%SH_EXE:/=\%"

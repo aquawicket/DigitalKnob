@@ -8,7 +8,7 @@ if "%~1" neq "" goto runDKJavascript
 	
 	::###### Install DKJavascript ######
 	%dk_call% dk_echo "Installing DKJavascript . . ."
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate NODEJS_EXE "call %DKIMPORTS_DIR%\nodejs\dk_installNodeJs"
 	
 	

@@ -68,7 +68,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 if NOT exist %VISUALSTUDIO% (
 	%dk_call% dk_info "Installing Visual Studio . . ."
 	if exist "%DKDOWNLOAD_DIR%\VisualStudio\vs_setup.exe" (
-		%dk_call% dk_validate DK3RDPARTY_DIR "dk_DKBRANCH_DIR"
+		%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 		"%DK3RDPARTY_DIR%\_DKIMPORTS\visualstudio\InstallVisualStudio.cmd"              &:: offline installer
 	) else (
 		%dk_call% dk_download "%VISUALSTUDIO_DL%" "%DKDOWNLOAD_DIR%/vs_Community.exe"   &:: online installer

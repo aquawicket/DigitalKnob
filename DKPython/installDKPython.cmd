@@ -8,7 +8,7 @@ if "%~1" neq "" goto runDKPython
 	
 	::###### Install DKPython ######
 	%dk_call% dk_echo "Installing DKPython . . ."
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	::%dk_call% dk_validate PYTHON_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPython.cmd"
 	%dk_call% dk_validate PYTHON_EXE "call dk_PYTHON_EXE"
 	

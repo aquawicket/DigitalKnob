@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_toLower %PYTHON3_FOLDER% PYTHON3_FOLDER
 	%dk_call% dk_importVariables %PYTHON3_DL% rtn_var
 	
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	%dk_call% dk_set PYTHON3 "%DK3RDPARTY_DIR%\%PYTHON3_FOLDER%"
 	%dk_call% dk_set PYTHON3_EXE "%PYTHON3%\python3.exe"
 

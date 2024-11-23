@@ -56,7 +56,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	%dk_call% dk_fileSearch "%DK3RDPARTY_DIR%" "\usr\bin\bash.exe" 4 BASH_EXE
 	%dk_call% dk_printVar BASH_EXE
 %endfunction%

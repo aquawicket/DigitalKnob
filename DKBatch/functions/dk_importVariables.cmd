@@ -171,7 +171,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	)
 	if [%CMAKE_CURRENT_LIST_DIR:~-1%] == [\] set "CMAKE_CURRENT_LIST_DIR=%CMAKE_CURRENT_LIST_DIR:~0,-1%"
 ::	::# PLUGIN_IMPORT
-::	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKBRANCH_DIR"
+::	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKIMPORTS_DIR"
 ::	if defined CMAKE_CURRENT_LIST_DIR !dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"
 ::	!dk_call! dk_printVar PLUGIN_IMPORT 										&:: PLUGIN_IMPORT			 : 1
 		

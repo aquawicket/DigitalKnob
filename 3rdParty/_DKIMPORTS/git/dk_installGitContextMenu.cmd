@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_installGitContextMenu
 	call dk_debugFunc 0
 	
-	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate GIT_EXE          "%dk_call% dk_installGit"
 	%dk_call% dk_validate GITBASH_EXE      "%dk_call% dk_installGit"
 	%dk_call% dk_installContextMenu "GIT ADD" "%GITBASH_EXE%" "\"%GIT_EXE%\" add \"%%%%%%%%1\""

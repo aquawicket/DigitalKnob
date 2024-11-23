@@ -83,7 +83,7 @@ if "%~1" neq ""    goto runDKC
 
 	
 	::###### COMPILER_EXE ######
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
 	if "%host_env%"=="cosmo"  %dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_installSh.cmd"
 	if "%host_env%"=="cosmo"  call %DKIMPORTS_DIR%\cosmocc\dk_installCosmoCC.cmd

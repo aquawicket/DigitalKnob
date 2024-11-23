@@ -34,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::FIXME: kill git.exe process
     %dk_call% dk_delete "%GIT%"
         
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	
 	::### Uninstall Context Menu ###
 	call %DKIMPORTS_DIR%\git\dk_uninstallGitContextMenu.cmd

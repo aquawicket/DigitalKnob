@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			%dk_call% dk_set WINPE_DIR "%DKTOOLS_DIR%\WindowsPE"
 			%dk_call% dk_set WINPE_IMG "%WINPE_DIR%\winpe.img"
 			%dk_call% dk_set WINPE_QCOW "%WINPE_DIR%\winpe.qcow"
-			%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
+			%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 			%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\dk_installQemu.cmd"
 
 ::		if not exist "%WINPE_QCOW%" %QEMU_IMG_EXE% convert -O qcow2 "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "%WINPE_QCOW%"
