@@ -12,7 +12,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_killProcess name)
 	dk_debugFunc()
 	
-	dk_executeProcess("taskkill /f /im ${name}" NO_HALT)
+	dk_findProgram(TASKKILL_EXE taskkill.exe "C:/Windows/System32")
+	dk_executeProcess("${TASKKILL_EXE} /f /im ${name}" NO_HALT)
 endfunction()
 
 
