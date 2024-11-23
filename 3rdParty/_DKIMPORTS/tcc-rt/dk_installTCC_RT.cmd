@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_removeExtension %TCC_RT_DL_FILE% TCC_RT_FOLDER
 	::%dk_call% dk_convertToCIdentifier %TCC_RT_FOLDER% TCC_RT_FOLDER
 	%dk_call% dk_toLower %TCC_RT_FOLDER% TCC_RT_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set TCC_RT_DIR "%DKTOOLS_DIR%\%TCC_RT_FOLDER%"
 	
 	

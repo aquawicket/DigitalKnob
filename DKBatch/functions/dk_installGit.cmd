@@ -34,7 +34,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::### DO NOT USE GIT_DIR ###
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	::### DO NOT USE GIT_DIR ###
 	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
 	

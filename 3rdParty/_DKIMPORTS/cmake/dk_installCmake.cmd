@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
 	::%dk_call% dk_importVariables %CMAKE_DL%
  	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	set "CMAKE_DIR=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
     set "CMAKE_EXE=%CMAKE_DIR%\bin\cmake.exe"
 

@@ -3,7 +3,7 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 %dk_call% dk_validate DK3RDPARTY_DIR     "%dk_call% dk_DKBRANCH_DIR"
-%dk_call% dk_validate DKTOOLS_DIR        "%dk_call% dk_DIGITALKNOB"
+%dk_call% dk_validate DKTOOLS_DIR        "%dk_call% dk_DKTOOLS_DIR"
 %dk_call% dk_validate COSMO_C_COMPILER   "call %DK3RDPARTY_DIR%\_DKIMPORTS\cosmocc\dk_installCosmoCC.cmd"
 %dk_call% dk_validate COSMO_CXX_COMPILER "call %DK3RDPARTY_DIR%\_DKIMPORTS\cosmocc\dk_installCosmoCC.cmd"
 

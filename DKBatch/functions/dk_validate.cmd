@@ -34,7 +34,7 @@ if defined %~1 (%return%)
     %dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
     %dk_call% dk_echo "DIGITALKNOB_DIR = %DIGITALKNOB_DIR%"
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
     %dk_call% dk_echo "DKTOOLS_DIR = %DKTOOLS_DIR%"
 	
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"

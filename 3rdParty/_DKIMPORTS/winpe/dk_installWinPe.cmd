@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			set "WINPE_DL=https://UseTheAddressAbove/Win10TinyPEx64.iso"
 			
 
-			%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+			%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 			%dk_call% dk_set WINPE_DIR "%DKTOOLS_DIR%\WindowsPE"
 			%dk_call% dk_set WINPE_IMG "%WINPE_DIR%\winpe.img"
 			%dk_call% dk_set WINPE_QCOW "%WINPE_DIR%\winpe.qcow"

@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_removeExtension %MACROPACK_DL_FILE% MACROPACK_FOLDER
 	::%dk_call% dk_convertToCIdentifier %MACROPACK_FOLDER% MACROPACK_FOLDER
 	%dk_call% dk_toLower %MACROPACK_FOLDER% MACROPACK_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set MACROPACK_DIR "%DKTOOLS_DIR%\%MACROPACK_FOLDER%"
 	
 	%dk_call% dk_set MACROPACK_EXE "%MACROPACK_DIR%\%MACROPACK_DL_FILE%"

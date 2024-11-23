@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_removeExtension %NODEJS_DL_FILE% NODEJS_FOLDER
     ::%dk_call% dk_convertToCIdentifier %NODEJS_FOLDER% NODEJS_FOLDER
     %dk_call% dk_toLower %NODEJS_FOLDER% NODEJS_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set NODEJS_DIR %DKTOOLS_DIR%\%NODEJS_FOLDER%
 	
 	

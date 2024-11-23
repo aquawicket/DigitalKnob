@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::%dk_call% dk_convertToCIdentifier %NUGET_FOLDER% NUGET_FOLDER
 	%dk_call% dk_toLower %NUGET_FOLDER% NUGET_FOLDER
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set NUGET %DKTOOLS_DIR%\%NUGET_FOLDER%
 	%dk_call% dk_set NUGET_EXE %NUGET%\nuget.exe
 	

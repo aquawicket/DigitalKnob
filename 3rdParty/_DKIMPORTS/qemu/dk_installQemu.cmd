@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if defined win_x86_64_host  set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe"
     if not defined QEMU_DL %dk_call% dk_error "QEMU_DL is invalid"
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	
 	%dk_call% dk_importVariables %QEMU_DL% %~0 ROOT %DKTOOLS_DIR%
 	

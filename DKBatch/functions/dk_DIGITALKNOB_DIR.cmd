@@ -24,10 +24,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		if not exist "%DKDOWNLOAD_DIR%" %dk_call% dk_makeDirectory "%DKDOWNLOAD_DIR%"
 		::%dk_call% dk_printVar DKDOWNLOAD_DIR
 		
-		::### DKTOOLS_DIR ###
-		set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
-		if not exist "%DKTOOLS_DIR%" %dk_call% dk_makeDirectory "%DKTOOLS_DIR%"
-		::%dk_call% dk_printVar DKTOOLS_DIR
+::		::### DKTOOLS_DIR ###
+::		set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
+::		if not exist "%DKTOOLS_DIR%" %dk_call% dk_makeDirectory "%DKTOOLS_DIR%"
+::		::%dk_call% dk_printVar DKTOOLS_DIR
 %endfunction%
 
 

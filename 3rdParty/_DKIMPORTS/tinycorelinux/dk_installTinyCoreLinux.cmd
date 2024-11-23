@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "TINYCORELINUX_X86_64=http://www.tinycorelinux.net/15.x/x86_64/release/CorePure64-current.iso"
 	set "TINYCORELINUX_DL=%TINYCORELINUX_X86_64%"
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set TINYCORELINUX_DIR "%DKTOOLS_DIR%\TinyCoreLinux"
 	%dk_call% dk_set TINYCORELINUX_IMG %TINYCORELINUX_DIR%\tinycore.img
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
