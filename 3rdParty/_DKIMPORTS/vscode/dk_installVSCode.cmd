@@ -38,7 +38,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_makeDirectory %DKTOOLS_DIR%
 ::	%dk_call% dk_import %VSCODE_DL% PATH %VSCODE_DIR%
 	%dk_call% dk_download %VSCODE_DL%
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%VSCODE_DL_FILE%" "%VSCODE_DIR%"
 	%dk_call% dk_makeDirectory %VSCODE_DIR%\data
 	if not exist %VSCODE_EXE% %dk_call% dk_error "cannot find %VSCODE_EXE%"

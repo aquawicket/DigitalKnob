@@ -31,7 +31,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if exist "%PHP_EXE%" %return%
 	
 	%dk_call% dk_download "%PHP_DL%"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%PHP_DL_FILE%" "%PHP%"
 	
 	if NOT exist "%PHP_EXE%"  %dk_call% dk_error "cannot find PHP_EXE:%PHP_EXE%"

@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		%dk_call% dk_info "Installing ReactOS . . ."
 		%dk_call% dk_basename %REACTOS_DL% REACTOS_DL_FILE
 		%dk_call% dk_download %REACTOS_DL%
-		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 		%dk_call% dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE%
 		
 		:: create and cd into install directory

@@ -30,7 +30,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_download %TCC_RT_DL%
     
 	%dk_call% dk_getNativePath %TCC_RT_DIR% TCC_RT_INSTALL_PATH
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% %command_string% "%DKDOWNLOAD_DIR%\%TCC_RT_DL_FILE%"
 	::%dk_call% MSIExec /i "%DKDOWNLOAD_DIR%\tcc-rt.msi" INSTALLDIR="%TCC_RT_DIR%"
 	

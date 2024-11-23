@@ -48,7 +48,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-	::%dk_call% dk_validate DKDOWNLOAD_DIR "call dk_DIGITALKNOB_DIR"
+	::%dk_call% dk_validate DKDOWNLOAD_DIR "call dk_DKDOWNLOAD_DIR"
     ::%dk_call% dk_extract "%DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"
     ::%dk_call% dk_extract "%DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip" "%DKDOWNLOAD_DIR%\REACTOS_DL"
     

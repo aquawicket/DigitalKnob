@@ -46,7 +46,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     if exist "%GIT_EXE%" %return%
     %dk_call% dk_echo   
     %dk_call% dk_info "Installing git . . ."
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_download %GIT_DL%
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT%"
        

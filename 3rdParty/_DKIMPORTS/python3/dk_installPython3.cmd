@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if exist "%PYTHON3_EXE%" %return%
 	
 	%dk_call% dk_download "%PYTHON3_DL%"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%PYTHON3_DL_FILE%" "%PYTHON3%"
 	
 	if NOT exist "%PYTHON3_EXE%"  %dk_call% dk_error "cannot find PYTHON3_EXE:%PYTHON3_EXE%"
