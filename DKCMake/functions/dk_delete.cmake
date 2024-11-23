@@ -3,30 +3,30 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_delete(path [NO_HALT])
+# dk_delete(path) [NO_HALT]
 #
 #	Remove a file or directory
 #
 #	@path		- The full path to the file or direcotory to remove
 #   NO_HALT     - if NO_HALT is specified in the parameters, dk_fatal() messages will not be displayed
 #
-function(dk_delete path)
-	dk_debugFunc()
+function(dk_delete)
+	dk_debugFunc(1 2)
 	
 	dk_getOption(NO_HALT ${ARGV})
 
-	if(NOT EXISTS ${path})
+	if(NOT EXISTS "${ARGV0}")
 		if(NOT NO_HALT)
-			dk_warning("${path} does not exist")
+			dk_warning("${ARGV0} does not exist")
 		endif()
 		return()
 	endif()
-	file(REMOVE_RECURSE ${path})
-	#execute_process(COMMAND -E rm ${path})
+	file(REMOVE_RECURSE "${ARGV0}")
+	#execute_process(COMMAND -E rm "${ARGV0}")
 	dk_sleep(1)	# give the path a second to delete
-	if(EXISTS ${path})
+	if(EXISTS "${ARGV0}")
 		if(NOT NO_HALT)
-			dk_fatal("failed to remove ${path}")
+			dk_fatal("failed to remove ${ARGV0}")
 		endif()
 	endif()
 endfunction()

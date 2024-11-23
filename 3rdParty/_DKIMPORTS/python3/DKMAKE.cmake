@@ -63,8 +63,8 @@ dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interprete
 
 
 
+dk_assertPath("${PYTHON3_DIR}")
+dk_assertPath("${PYTHON3_EXE}")
 
-dk_assertPath(${PYTHON3_EXE})
-dk_assertPath(${PYTHON3_DIR})
 
 message("end of python3/DKCMAKE.cmake")
