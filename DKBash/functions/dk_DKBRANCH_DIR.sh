@@ -6,7 +6,7 @@
 #
 #
 dk_DKBRANCH_DIR() {
-	dk_debugFunc 0
+	dk_debugFunc 0 1
 
 	#[ -n "${DKBRANCH_DIR}" ] && return 0
 	

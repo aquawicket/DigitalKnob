@@ -36,15 +36,15 @@ dk_DKHOME_DIR() {
 	[ ! -e "${DKHOME_DIR}" ] 	&& 	dk_call dk_fatal "DKHOME_DIR not found"
 	dk_call dk_printVar DKHOME_DIR
 	
-	### DKCACHE_DIR ###
-	export DKCACHE_DIR="${DKHOME_DIR}/.dk"
-	[ ! -e "${DKCACHE_DIR}" ]	&& dk_call dk_makeDirectory "${DKCACHE_DIR}"
-	dk_call dk_printVar DKCACHE_DIR
+#	### DKCACHE_DIR ###
+#	export DKCACHE_DIR="${DKHOME_DIR}/.dk"
+#	[ ! -e "${DKCACHE_DIR}" ]	&& dk_call dk_makeDirectory "${DKCACHE_DIR}"
+#	dk_call dk_printVar DKCACHE_DIR
 	
-	### DKDESKTOP_DIR ###
-	export DKDESKTOP_DIR="${DKHOME_DIR}/Desktop"
-    [ ! -e "${DKDESKTOP_DIR}" ]	&& dk_call dk_warning "DKDESKTOP_DIR:${DKDESKTOP_DIR} does not exist"
-	dk_call dk_printVar DKDESKTOP_DIR
+#	### DKDESKTOP_DIR ###
+#	export DKDESKTOP_DIR="${DKHOME_DIR}/Desktop"
+#   [ ! -e "${DKDESKTOP_DIR}" ]	&& dk_call dk_warning "DKDESKTOP_DIR:${DKDESKTOP_DIR} does not exist"
+#	dk_call dk_printVar DKDESKTOP_DIR
 
 	### DKTEMP_DIR ###
 #	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMP}"

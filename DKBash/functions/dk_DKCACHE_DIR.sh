@@ -2,25 +2,24 @@
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
 ####################################################################
-# dk_DKTOOLS_DIR()
+# dk_DKCACHE_DIR()
 #
 #
-dk_DKTOOLS_DIR() {
+dk_DKCACHE_DIR() {
     dk_debugFunc 0 1
 
 	############ SET ############
 	if [ -n "${1-}" ]; then  
-		export DKTOOLS_DIR="${1}" 
+		export DKCACHE_DIR="${1}" 
 
 	############ GET ############
 	else
-		dk_call dk_validate DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR" 
-		export DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"  
+		dk_call dk_validate DKHOME_DIR "dk_DKHOME_DIR" 
+		export DKCACHE_DIR="${DKHOME_DIR}/.dk"  
+	fi 
+	if [ ! -e "${DKCACHE_DIR}" ]; then
+		dk_call dk_makeDirectory "${DKCACHE_DIR}" 
 	fi
-	
-	if [ ! -e "${DKTOOLS_DIR}" ]; then
-		dk_call dk_makeDirectory "${DKTOOLS_DIR}" 
-	fi  
 }
 
 
@@ -33,6 +32,6 @@ DKTEST() {
     dk_debugFunc 0 
    
 	###### GET ######
-	dk_call dk_DKTOOLS_DIR  
-    dk_call dk_printVar DKTOOLS_DIR 
+	dk_call dk_DKCACHE_DIR  
+    dk_call dk_printVar DKCACHE_DIR 
 }

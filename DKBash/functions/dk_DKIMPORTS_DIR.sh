@@ -15,12 +15,8 @@ dk_DKIMPORTS_DIR() {
 	############ GET ############
 	else
 		dk_call dk_validate DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR" 
-		set DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
-		export DKIMPORTS_DIR
-		if [ ! -e "${DKIMPORTS_DIR}" ]; then
-			dk_call dk_makeDirectory "${DKIMPORTS_DIR}" 
-		fi  
-	fi  
+		export DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
+	fi
 }
 
 

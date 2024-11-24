@@ -15,11 +15,8 @@ dk_DKPLUGINS_DIR() {
 	############ GET ############
 	else
 		dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR" 
-		export DKPLUGINS_DIR "${DKBRANCH_DIR}/DKPlugins"  
-		if [ ! -e "${DKPLUGINS_DIR}" ]; then
-			dk_call dk_makeDirectory "${DKPLUGINS_DIR}" 
-		fi  
-	fi 
+		export DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"   
+	fi
 }
 
 
@@ -29,7 +26,7 @@ dk_DKPLUGINS_DIR() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc(0)
+	dk_debugFunc 0
 	
 	dk_call dk_DKPLUGINS_DIR
 	dk_call dk_printVar DKPLUGINS_DIR
