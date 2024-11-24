@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_DKHOME_DIR)
-    dk_debugFunc()
+    dk_debugFunc(0 1)
 
 	if(EXISTS "${DKHOME_DIR}")
 		dk_debug("DKHOME_DIR:${DKHOME_DIR} already set")
@@ -103,38 +103,7 @@ function(dk_DKHOME_DIR)
 		file(TO_CMAKE_PATH "${DKHOME_DIR}" DKHOME_DIR)
 		
 		dk_set(DKHOME_DIR "${DKHOME_DIR}")				# Globalize the variable
-		dk_printVar(DKHOME_DIR)
 		set(ENV{DKHOME_DIR} "${DKHOME_DIR}")			# Set Environment Varible
-		dk_printVar(ENV{DKHOME_DIR})
-	endif()
-	
-	###### DKCACHE_DIR ######
-	if(NOT EXISTS "${DKCACHE_DIR}")
-		set(DKCACHE_DIR "${DKHOME_DIR}/.dk")
-	endif()
-	if(NOT EXISTS "${DKCACHE_DIR}")
-		dk_makeDirectory("${DKCACHE_DIR}")
-	endif()
-	if(NOT EXISTS "${DKCACHE_DIR}")
-		dk_fatal("DKCACHE_DIR:${DKCACHE_DIR} not found")
-	else()
-		dk_set(DKCACHE_DIR "${DKCACHE_DIR}")			# Globalize the variable
-		dk_printVar(DKCACHE_DIR)
-		set(ENV{DKCACHE_DIR} "${DKCACHE_DIR}")			# Set Environment Varible
-		dk_printVar(ENV{DKCACHE_DIR})
-	endif()
-	
-	###### DKDESKTOP_DIR ######
-	if(NOT EXISTS "${DKDESKTOP_DIR}") 
-		set(DKDESKTOP_DIR "${DKHOME_DIR}/Desktop")
-	endif()
-	if(NOT EXISTS "${DKDESKTOP_DIR}") 
-		dk_warning("DKDESKTOP_DIR:${DKDESKTOP_DIR} not found")
-	else()
-		dk_set(DKDESKTOP_DIR "${DKDESKTOP_DIR}")		# Globalize the variable
-		dk_printVar(DKDESKTOP_DIR)
-		set(ENV{DKDESKTOP_DIR} "${DKDESKTOP_DIR}")		# Set Environment Varible
-		dk_printVar(ENV{DKDESKTOP_DIR})
 	endif()
 endfunction()
 
@@ -145,10 +114,8 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc()
+    dk_debugFunc(0)
  
     dk_DKHOME_DIR()
     dk_printVar(DKHOME_DIR)
-	dk_printVar(DKCACHE_DIR)
-	dk_printVar(DKDESKTOP_DIR)
 endfunction()

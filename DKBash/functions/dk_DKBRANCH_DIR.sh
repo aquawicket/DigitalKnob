@@ -27,10 +27,10 @@ dk_DKBRANCH_DIR() {
 	[ -z "${DKBRANCH_DIR-}" ] && export DKBRANCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}"
 	#dk_call dk_printVar DKBRANCH_DIR
 	
-		[ -z "${DK3RDPARTY_DIR-}" ] && export DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"
-		#dk_call dk_printVar DK3RDPARTY_DIR
-			[ -z "${DKIMPORTS_DIR-}" ] && export DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
-			#dk_call dk_printVar DKIMPORTS_DIR
+#		[ -z "${DK3RDPARTY_DIR-}" ] && export DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"
+#		#dk_call dk_printVar DK3RDPARTY_DIR
+#			[ -z "${DKIMPORTS_DIR-}" ] && export DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
+#			#dk_call dk_printVar DKIMPORTS_DIR
 		
 		[ -z "${DKAPPS_DIR-}" ] && export DKAPPS_DIR="${DKBRANCH_DIR}/DKApps"
 		#dk_call dk_printVar DKAPPS_DIR
@@ -112,8 +112,8 @@ dk_DKBRANCH_DIR() {
 			[ -z "${DKPHP_FUNCTIONS_DIR_-}" ] && export DKPHP_FUNCTIONS_DIR_="${DKPHP_DIR}/functions/"
 			#dk_call dk_printVar DKPHP_FUNCTIONS_DIR_
 		
-		[ -z "${DKPLUGINS_DIR-}" ] && export DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
-		#dk_call dk_printVar DKPLUGINS_DIR
+#		[ -z "${DKPLUGINS_DIR-}" ] && export DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
+#		#dk_call dk_printVar DKPLUGINS_DIR
 		
 		[ -z "${DKPOWERSHELL_DIR-}" ] && export DKPOWERSHELL_DIR="${DKBRANCH_DIR}/DKPowershell"
 		#dk_call dk_printVar DKPOWERSHELL_DIR

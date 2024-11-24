@@ -16,7 +16,7 @@ dk_DKTOOLS_DIR() {
 	else
 		dk_call dk_validate DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR" 
 		export DKTOOLS_DIR "${DIGITALKNOB_DIR}/DKTools"  
-		if [ ! -n "${DKTOOLS_DIR}" ]; then
+		if [ ! -e "${DKTOOLS_DIR}" ]; then
 			dk_call dk_makeDirectory "${DKTOOLS_DIR}" 
 		fi  
 	fi  

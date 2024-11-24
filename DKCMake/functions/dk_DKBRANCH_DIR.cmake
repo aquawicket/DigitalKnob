@@ -25,11 +25,7 @@ function(dk_DKBRANCH_DIR)
 	dk_set(DKBRANCH_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}")
 	set(ENV{DKBRANCH_DIR} "${DIGITALKNOB_DIR}/${DKBRANCH}")
 	#dk_printVar(DKBRANCH_DIR)
-		
 
-		
-		
-		
 		
 		dk_set(DKBATCH_DIR "${DKBRANCH_DIR}/DKBatch")
 		set(ENV{DKBATCH_DIR} "${DKBRANCH_DIR}/DKBatch")
@@ -121,8 +117,8 @@ function(dk_DKBRANCH_DIR)
 			set(ENV{DKJAVASCRIPT_FUNCTIONS_DIR_} "${DKJAVASCRIPT_DIR}/functions/")
 			#dk_printVar(DKJAVASCRIPT_FUNCTIONS_DIR_)
 			
-		dk_set(DKPHP_DIR "${DKBRANCH_DIR}/DKJavascript")
-		set(ENV{DKPHP_DIR} "${DKBRANCH_DIR}/DKJavascript")
+		dk_set(DKPHP_DIR "${DKBRANCH_DIR}/DKPhp")
+		set(ENV{DKPHP_DIR} "${DKBRANCH_DIR}/DKPhp")
 		#dk_printVar(DKPHP_DIR)
 			dk_set(DKPHP_FUNCTIONS_DIR "${DKPHP_DIR}/functions")
 			set(ENV{DKPHP_FUNCTIONS_DIR} "${DKPHP_DIR}/functions")
@@ -141,8 +137,8 @@ function(dk_DKBRANCH_DIR)
 			set(ENV{DKPOWERSHELL_FUNCTIONS_DIR_} "${DKPOWERSHELL_DIR}/functions/")
 			#dk_printVar(DKPOWERSHELL_FUNCTIONS_DIR_)
 			
-		dk_set(DKPYTHON_DIR "${DKBRANCH_DIR}/DKPowershell")
-		set(ENV{DKPYTHON_DIR} "${DKBRANCH_DIR}/DKPowershell")
+		dk_set(DKPYTHON_DIR "${DKBRANCH_DIR}/DKPython")
+		set(ENV{DKPYTHON_DIR} "${DKBRANCH_DIR}/DKPython")
 		#dk_printVar(DKPYTHON_DIR)
 			dk_set(DKPYTHON_FUNCTIONS_DIR "${DKPYTHON_DIR}/functions")
 			set(ENV{DKPYTHON_FUNCTIONS_DIR} "${DKPYTHON_DIR}/functions")

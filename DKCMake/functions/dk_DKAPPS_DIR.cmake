@@ -9,11 +9,15 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_DKAPPS_DIR)
 	dk_debugFunc()
 	
-	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
-	
+	###### SET ######
+	if(ARGV0)
+		dk_set(DKAPPS_DIR "${ARGV0}")
+		
+	###### GET ######
+	else()
+		dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
 		dk_set(DKAPPS_DIR "${DKBRANCH_DIR}/DKApps")
-		set(ENV{DKAPPS_DIR} "${DKBRANCH_DIR}/DKApps")
-		#dk_printVar(DKAPPS_DIR)
+	endif()
 endfunction()
 
 

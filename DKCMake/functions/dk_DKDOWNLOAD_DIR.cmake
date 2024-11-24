@@ -9,12 +9,16 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_DKDOWNLOAD_DIR)
     dk_debugFunc()
             
-	### DIGITALKNOB_DIR ###
-	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
+	###### SET ######
+	if(ARGV0)
+		dk_set(DKDOWNLOAD_DIR "${ARGV0}")
+		
+	###### GET ######
+	else()
+		dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
+		dk_set(DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download")
+	endif()
 	
-	### DKDOWNLOAD_DIR ###
-	dk_set(DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download")
-	set(ENV{DKDOWNLOAD_DIR} "${DIGITALKNOB_DIR}/download")
 	if(NOT EXISTS "${DKDOWNLOAD_DIR}") 
 		dk_makeDirectory("${DKDOWNLOAD_DIR}")
 	endif()

@@ -14,9 +14,9 @@ dk_DKDOWNLOAD_DIR() {
 
 	############ GET ############
 	else
-		dk_call dk_validate DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR" 
+		dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR" 
 		export DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download"  
-		if [ ! -n "${DKDOWNLOAD_DIR}" ]; then
+		if [ ! -e "${DKDOWNLOAD_DIR}" ]; then
 			dk_call dk_makeDirectory "${DKDOWNLOAD_DIR}" 
 		fi  
 	fi  

@@ -9,11 +9,15 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_DKIMPORTS_DIR)
 	dk_debugFunc()
 	
-	dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
-	
+	###### SET ######
+	if(ARGV0)
+		dk_set(DKIMPORTS_DIR "${ARGV0}")
+		
+	###### GET ######
+	else()
+		dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
 		dk_set(DKIMPORTS_DIR "${DK3RDPARTY_DIR}/_DKIMPORTS")
-		set(ENV{DKIMPORTS_DIR} "${DK3RDPARTY_DIR}/_DKIMPORTS")
-		#dk_printVar(DKIMPORTS_DIR)
+	endif()
 endfunction()
 
 
