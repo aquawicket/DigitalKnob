@@ -6,32 +6,27 @@ if(!$dk_DKHOME_DIR){ $dk_DKHOME_DIR = 1 } else{ return }
 #
 #
 function Global:dk_DKHOME_DIR() {
-	dk_debugFunc 0
+	dk_debugFunc 0 1
 
+	############ SET ############
+	if($($args[0])){  
+		$global:DKHOME_DIR = "$($args[0])" 
+		return 0
+	}
+	
+	############ GET ############
 	### DKHOME_DIR ###
 	$global:DKHOME_DIR = "$env:USERPROFILE"
 	$global:DKHOME_DIR = $DKHOME_DIR -replace '\\', '/';
 	dk_call dk_assertPath DKHOME_DIR
-    #dk_call dk_printVar DKHOME_DIR
 	
-	### DKCACHE_DIR ###
-	$global:DKCACHE_DIR = "${DKHOME_DIR}/.dk"
-    dk_call dk_makeDirectory $DKCACHE_DIR
-	dk_call dk_assertPath DKCACHE_DIR
-    #dk_call dk_printVar DKCACHE_DIR
+#	### DKCACHE_DIR ###
+#	$global:DKCACHE_DIR = "${DKHOME_DIR}/.dk"
+#   dk_call dk_makeDirectory $DKCACHE_DIR
+#	dk_call dk_assertPath DKCACHE_DIR
 	
-	### DKDESKTOP_DIR ###
-	$global:DKDESKTOP_DIR = "${DKHOME_DIR}/Desktop"
-    #dk_call dk_printVar DKDESKTOP_DIR
-	
-	### DKTEMP_DIR ###
-#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMP}"
-#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMPDIR}"
-#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMP_DIR%}"
-#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR" && dk_call dk_set DKTEMP_DIR "${DIGITALKNOB_DIR}"
-#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_fatal "unable to set .dk directory"
-#	DKTEMP_DIR="${DKTEMP_DIR}/.dk"
-#	[ -e "${DKTEMP_DIR}" ] ||  dk_makeDirectory "${DKTEMP_DIR}"
+#	### DKDESKTOP_DIR ###
+#	$global:DKDESKTOP_DIR = "${DKHOME_DIR}/Desktop"
 }
 
 
@@ -45,9 +40,13 @@ function Global:dk_DKHOME_DIR() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_DKHOME_DIR
-	dk_call dk_echo "DKHOME_DIR = $DKHOME_DIR"
-	dk_call dk_echo "DKCACHE_DIR = $DKCACHE_DIR"
-	dk_call dk_echo "DKDESKTOP_DIR = $DKDESKTOP_DIR"
-	#dk_call dk_echo "DKTEMP_DIR = $DKTEMP_DIR"
+	dk_call dk_echo
+	dk_call dk_echo "Test Getting DKHOME_DIR . . ."
+    dk_call dk_DKHOME_DIR
+    dk_call dk_printVar DKHOME_DIR
+	
+	dk_call dk_echo
+	dk_call dk_echo "Test Setting DKHOME_DIR . . ."
+	dk_call dk_DKHOME_DIR "C:/"
+	dk_call dk_printVar DKHOME_DIR 
 }

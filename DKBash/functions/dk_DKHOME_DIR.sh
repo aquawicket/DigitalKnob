@@ -14,6 +14,7 @@ dk_DKHOME_DIR() {
 		return 0
 	fi
 		
+	############ GET ############
     [ -e "${DKHOME_DIR-}" ] 	&& return 0 	# already exists
     	
 	###### CMD_EXE ######
