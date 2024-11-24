@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_DKDOWNLOAD_DIR)
-    dk_debugFunc()
+    dk_debugFunc(0 1)
             
 	###### SET ######
 	if(ARGV0)
@@ -33,6 +33,13 @@ endfunction()
 function(DKTEST)
     dk_debugFunc()
    
+	dk_echo()
+	dk_echo("Test Getting DKDOWNLOAD_DIR . . .")
 	dk_DKDOWNLOAD_DIR()
-    dk_printVar(DKDOWNLOAD_DIR)
+	dk_printVar(DKDOWNLOAD_DIR)
+	
+	dk_echo()
+	dk_echo("Test Setting DKDOWNLOAD_DIR . . .")
+	dk_DKDOWNLOAD_DIR("C:/DK/download")
+	dk_printVar(DKDOWNLOAD_DIR)
 endfunction()

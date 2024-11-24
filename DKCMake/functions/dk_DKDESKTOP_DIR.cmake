@@ -11,7 +11,7 @@ function(dk_DKDESKTOP_DIR)
 
 	###### SET ######
 	if(ARGV0)
-		dk_set(dk_DKDESKTOP_DIR "${ARGV0}")
+		dk_set(DKDESKTOP_DIR "${ARGV0}")
 		
 	###### GET ######
 	else()
@@ -29,6 +29,13 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
  
-    dk_DKDESKTOP_DIR()
-    dk_printVar(DKDESKTOP_DIR)
+	dk_echo()
+	dk_echo("Test Getting DKDESKTOP_DIR . . .")
+	dk_DKDESKTOP_DIR()
+	dk_printVar(DKDESKTOP_DIR)
+	
+	dk_echo()
+	dk_echo("Test Setting DKDESKTOP_DIR . . .")
+	dk_DKDESKTOP_DIR("C:/Desktop")
+	dk_printVar(DKDESKTOP_DIR)
 endfunction()

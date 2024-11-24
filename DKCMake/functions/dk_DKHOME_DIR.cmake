@@ -9,6 +9,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_DKHOME_DIR)
     dk_debugFunc(0 1)
 
+	###### SET ######
+	if(ARGV0)
+		dk_set(DKHOME_DIR "${ARGV0}")
+		return()
+	endif()
+	
 	if(EXISTS "${DKHOME_DIR}")
 		dk_debug("DKHOME_DIR:${DKHOME_DIR} already set")
 		return()
@@ -116,6 +122,13 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
  
-    dk_DKHOME_DIR()
-    dk_printVar(DKHOME_DIR)
+	dk_echo()
+	dk_echo("Test Getting DKHOME_DIR . . .")
+	dk_DKHOME_DIR()
+	dk_printVar(DKHOME_DIR)
+	
+	dk_echo()
+	dk_echo("Test Setting DKHOME_DIR . . .")
+	dk_DKHOME_DIR("C:/")
+	dk_printVar(DKHOME_DIR)
 endfunction()

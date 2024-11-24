@@ -29,6 +29,13 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
+	dk_echo()
+	dk_echo("Test Getting DKAPPS_DIR . . .")
 	dk_DKAPPS_DIR()
+	dk_printVar(DKAPPS_DIR)
+	
+	dk_echo()
+	dk_echo("Test Setting DKAPPS_DIR . . .")
+	dk_DKAPPS_DIR("C:/DK/DKApps")
 	dk_printVar(DKAPPS_DIR)
 endfunction()

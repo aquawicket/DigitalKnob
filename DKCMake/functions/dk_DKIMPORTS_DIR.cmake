@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_DKIMPORTS_DIR)
-	dk_debugFunc()
+	dk_debugFunc(0 1)
 	
 	###### SET ######
 	if(ARGV0)
@@ -29,6 +29,13 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
+	dk_echo()
+	dk_echo("Test Getting DKIMPORTS_DIR . . .")
 	dk_DKIMPORTS_DIR()
+	dk_printVar(DKIMPORTS_DIR)
+	
+	dk_echo()
+	dk_echo("Test Setting DKIMPORTS_DIR . . .")
+	dk_DKIMPORTS_DIR("C:/DK/DKImports")
 	dk_printVar(DKIMPORTS_DIR)
 endfunction()

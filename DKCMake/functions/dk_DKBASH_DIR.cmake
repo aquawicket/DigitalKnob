@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_DKBASH_DIR)
-	dk_debugFunc()
+	dk_debugFunc(0 1)
 
 	###### SET ######
 	if(ARGV0)
@@ -32,8 +32,13 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
+	dk_echo()
+	dk_echo("Test Getting DKBASH_DIR . . .")
 	dk_DKBASH_DIR()
 	dk_printVar(DKBASH_DIR)
-	dk_printVar(DKBASH_FUNCTIONS_DIR)
-	dk_printVar(DKBASH_FUNCTIONS_DIR_)
+	
+	dk_echo()
+	dk_echo("Test Setting DKBASH_DIR . . .")
+	dk_DKBASH_DIR("C:/DK/DKBash")
+	dk_printVar(DKBASH_DIR)
 endfunction()

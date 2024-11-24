@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_DK3RDPARTY_DIR)
-	dk_debugFunc()
+	dk_debugFunc(0 1)
 	
 	if(ARGV0)
 		dk_set(DK3RDPARTY_DIR "${ARGV0}")
@@ -26,6 +26,13 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
+	dk_echo()
+	dk_echo("Test Getting DK3RDPARTY_DIR . . .")
 	dk_DK3RDPARTY_DIR()
+	dk_printVar(DK3RDPARTY_DIR)
+	
+	dk_echo()
+	dk_echo("Test Setting DK3RDPARTY_DIR . . .")
+	dk_DK3RDPARTY_DIR("C:/.dk")
 	dk_printVar(DK3RDPARTY_DIR)
 endfunction()
