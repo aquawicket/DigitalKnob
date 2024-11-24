@@ -31,8 +31,14 @@ dk_DKTOOLS_DIR() {
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
     dk_debugFunc 0 
-   
-	###### GET ######
-	dk_call dk_DKTOOLS_DIR  
-    dk_call dk_printVar DKTOOLS_DIR 
+	
+	dk_call dk_echo
+	dk_call dk_echo "Test Getting DKTOOLS_DIR . . ."
+    dk_call dk_DKTOOLS_DIR
+    dk_call dk_printVar DKTOOLS_DIR
+	
+	dk_call dk_echo
+	dk_call dk_echo "Test Setting DKTOOLS_DIR . . ."
+	dk_call dk_DKTOOLS_DIR "/C/DK/DKTools"
+	dk_call dk_printVar DKTOOLS_DIR 
 }

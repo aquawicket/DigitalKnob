@@ -28,7 +28,13 @@ dk_DKDESKTOP_DIR() {
 DKTEST() {
     dk_debugFunc 0 
    
-	###### GET ######
-	dk_call dk_DKDESKTOP_DIR  
-    dk_call dk_printVar DKDESKTOP_DIR 
+	dk_call dk_echo
+	dk_call dk_echo "Test Getting DKDESKTOP_DIR . . ."
+	dk_call dk_DKDESKTOP_DIR
+	dk_call dk_printVar DKDESKTOP_DIR
+	
+	dk_call dk_echo
+	dk_call dk_echo "Test Setting DKDESKTOP_DIR . . ."
+	dk_call dk_DKDESKTOP_DIR "/C/Desktop"
+	dk_call dk_printVar DKDESKTOP_DIR 
 }

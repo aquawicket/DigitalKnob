@@ -28,6 +28,13 @@ dk_DKPLUGINS_DIR() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_DKPLUGINS_DIR
-	dk_call dk_printVar DKPLUGINS_DIR
+	dk_call dk_echo
+	dk_call dk_echo "Test Getting DKPLUGINS_DIR . . ."
+    dk_call dk_DKPLUGINS_DIR
+    dk_call dk_printVar DKPLUGINS_DIR
+	
+	dk_call dk_echo
+	dk_call dk_echo "Test Setting DKPLUGINS_DIR . . ."
+	dk_call dk_DKPLUGINS_DIR "/C/DK/DKPlugins"
+	dk_call dk_printVar DKPLUGINS_DIR 
 }

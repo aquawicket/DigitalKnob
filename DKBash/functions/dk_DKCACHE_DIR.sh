@@ -31,7 +31,13 @@ dk_DKCACHE_DIR() {
 DKTEST() {
     dk_debugFunc 0 
    
-	###### GET ######
-	dk_call dk_DKCACHE_DIR  
-    dk_call dk_printVar DKCACHE_DIR 
+	dk_call dk_echo
+	dk_call dk_echo "Test Getting DKCACHE_DIR . . ."
+	dk_call dk_DKCACHE_DIR
+	dk_call dk_printVar DKCACHE_DIR
+	
+	dk_call dk_echo
+	dk_call dk_echo "Test Setting DKCACHE_DIR . . ."
+	dk_call dk_DKCACHE_DIR "/C/.dk"
+	dk_call dk_printVar DKCACHE_DIR 
 }

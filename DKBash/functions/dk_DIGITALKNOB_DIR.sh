@@ -6,7 +6,7 @@
 #
 #
 dk_DIGITALKNOB_DIR() {
-	dk_debugFunc 0
+	dk_debugFunc 0 1
 
 	### DIGITALKNOB_DIR ###
 	[ -n "${DIGITALKNOB-}" ] || DIGITALKNOB="digitalknob"
@@ -31,6 +31,13 @@ dk_DIGITALKNOB_DIR() {
 DKTEST() { 
 	dk_debugFunc 0
 	
+	dk_call dk_echo
+	dk_call dk_echo "Test Getting DIGITALKNOB_DIR . . ."
 	dk_call dk_DIGITALKNOB_DIR
 	dk_call dk_printVar DIGITALKNOB_DIR
+	
+	dk_call dk_echo
+	dk_call dk_echo "Test Setting DIGITALKNOB_DIR . . ."
+	dk_call dk_DIGITALKNOB_DIR "/C/DK"
+	dk_call dk_printVar DIGITALKNOB_DIR 
 }

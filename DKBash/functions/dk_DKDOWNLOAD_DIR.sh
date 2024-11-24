@@ -32,6 +32,13 @@ dk_DKDOWNLOAD_DIR() {
 DKTEST() {
     dk_debugFunc 0
    
+	dk_call dk_echo
+	dk_call dk_echo "Test Getting DKDOWNLOAD_DIR . . ."
 	dk_call dk_DKDOWNLOAD_DIR
-    dk_call dk_printVar DKDOWNLOAD_DIR
+	dk_call dk_printVar DKDOWNLOAD_DIR
+	
+	dk_call dk_echo
+	dk_call dk_echo "Test Setting DKDOWNLOAD_DIR . . ."
+	dk_call dk_DKDOWNLOAD_DIR "/C/DK/download"
+	dk_call dk_printVar DKDOWNLOAD_DIR 
 }
