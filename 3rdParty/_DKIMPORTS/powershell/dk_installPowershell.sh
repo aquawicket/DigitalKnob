@@ -40,7 +40,7 @@ dk_installPwsh() {
 	dk_removeExtension "${PWSH_DL_FILE}" PWSH_FOLDER
 	#dk_convertToCIdentifier "${PWSH_FOLDER}" PWSH_FOLDER
 	dk_toLower "${PWSH_FOLDER}" PWSH_FOLDER
-	dk_validate DKTOOLS_DIR "dk_DIGITALKNOB_DIR"
+	dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
 	PWSH=${DKTOOLS_DIR}/${PWSH_FOLDER}
 	
 	[ "${HOST_OS}" = "win" ]       && PWSH_EXE=${PWSH}/pwsh.exe

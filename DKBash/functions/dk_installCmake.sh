@@ -47,7 +47,7 @@ dk_installCmake() {
 		dk_call dk_toLower ${CMAKE_FOLDER} CMAKE_FOLDER
 		CMAKE_DIR="${DKTOOLS_DIR}/${CMAKE_FOLDER}"
 		
-		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DIGITALKNOB_DIR"
+		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
 		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${CMAKE_DIR}/bin/cmake.exe
 		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${CMAKE_DIR}/CMake.app/Contents/bin/cmake
 		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
