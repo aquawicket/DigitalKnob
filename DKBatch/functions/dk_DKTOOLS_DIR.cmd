@@ -15,11 +15,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	rem ############ GET ############
 	) else (
-		dk_validate DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR"
-		dk_set DKTOOLS_DIR "!DIGITALKNOB_DIR!\DKTools"
-		if NOT exist "!DKTOOLS_DIR!" (
-			dk_makeDirectory "!DKTOOLS_DIR!"
-		)
+		%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+		%dk_call% dk_set DKTOOLS_DIR "!DIGITALKNOB_DIR!\DKTools"
+	)
+	
+	if NOT exist "!DKTOOLS_DIR!" (
+		dk_makeDirectory "!DKTOOLS_DIR!"
 	)
 %endfunction%
 
@@ -31,21 +32,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     call dk_debugFunc 0
- ::setlocal
+ setlocal
  
-	::###### GET ######
+	%dk_call% dk_echo
+	%dk_call% dk_echo "Test Getting DKTOOLS_DIR . . ."
 	%dk_call% dk_DKTOOLS_DIR
-    %dk_call% dk_printVar DKTOOLS_DIR
+	%dk_call% dk_printVar DKTOOLS_DIR
 	
-::	::###### SET ######
-::	%dk_call% dk_DKTOOLS_DIR "C:\Dummy\DKTools"
-::	%dk_call% dk_printVar DKTOOLS_DIR
-::	
-::	::###### GET ######
-::	%dk_call% dk_DKTOOLS_DIR
-::  %dk_call% dk_printVar DKTOOLS_DIR
-::	
-::	::###### SET ######
-::	%dk_call% dk_DKTOOLS_DIR "C:\dk2\DKTools"
-::	%dk_call% dk_printVar DKTOOLS_DIR
+	%dk_call% dk_echo
+	%dk_call% dk_echo "Test Setting DKTOOLS_DIR . . ."
+	%dk_call% dk_DKTOOLS_DIR "C:\DK\DKTools"
+	%dk_call% dk_printVar DKTOOLS_DIR 
 %endfunction%

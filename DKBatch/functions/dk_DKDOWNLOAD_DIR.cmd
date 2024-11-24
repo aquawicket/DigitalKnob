@@ -31,10 +31,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     call dk_debugFunc 0
- ::setlocal
+ setlocal
  
-	::###### GET ######
+	%dk_call% dk_echo
+	%dk_call% dk_echo "Test Getting DKDOWNLOAD_DIR . . ."
 	%dk_call% dk_DKDOWNLOAD_DIR
-    %dk_call% dk_printVar DKDOWNLOAD_DIR
-
+	%dk_call% dk_printVar DKDOWNLOAD_DIR
+	
+	%dk_call% dk_echo
+	%dk_call% dk_echo "Test Setting DKDOWNLOAD_DIR . . ."
+	%dk_call% dk_DKDOWNLOAD_DIR "C:\DK\download"
+	%dk_call% dk_printVar DKDOWNLOAD_DIR 
 %endfunction%
