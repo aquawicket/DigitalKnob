@@ -1,5 +1,7 @@
 @echo off
 
+set "ENABLE_dk_debug=1"
+
 setlocal enableDelayedExpansion
 
 set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"

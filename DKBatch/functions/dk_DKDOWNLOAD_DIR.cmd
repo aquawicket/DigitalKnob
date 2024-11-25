@@ -21,6 +21,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			dk_makeDirectory "!DKDOWNLOAD_DIR!"
 		)
 	)
+	
+	!dk_call! dk_assertPath DKDOWNLOAD_DIR
+	!dk_call! dk_printVar DKDOWNLOAD_DIR
 %endfunction%
 
 

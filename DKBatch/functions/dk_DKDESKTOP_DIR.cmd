@@ -2,27 +2,26 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_DKTOOLS_DIR()
+::# dk_DKDESKTOP_DIR()
 ::#
 ::#
-:dk_DKTOOLS_DIR
+:dk_DKDESKTOP_DIR
     call dk_debugFunc 0 1
  ::setlocal enableDelayedExpansion
  
 	::############ SET ############
 	if "%~1" neq "" ( 
-		dk_set DKTOOLS_DIR "%~1"
+		dk_set DKDESKTOP_DIR "%~1"
 
 	rem ############ GET ############
 	) else (
-		%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-		%dk_call% dk_set DKTOOLS_DIR "!DIGITALKNOB_DIR!\DKTools"
+		%dk_call% dk_validate DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
+		%dk_call% dk_set DKDESKTOP_DIR "!DKHOME_DIR!\Desktop"
 	)
 	
-	if NOT exist "!DKTOOLS_DIR!" (
-		dk_makeDirectory "!DKTOOLS_DIR!"
+	if NOT exist "!DKDESKTOP_DIR!" (
+		dk_makeDirectory "!DKDESKTOP_DIR!"
 	)
-	
 	
 	!dk_call! dk_assertPath DIGITALKNOB_DIR
 	!dk_call! dk_printVar DIGITALKNOB_DIR
@@ -39,12 +38,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
 	%dk_call% dk_echo
-	%dk_call% dk_echo "Test Getting DKTOOLS_DIR . . ."
-	%dk_call% dk_DKTOOLS_DIR
-	%dk_call% dk_printVar DKTOOLS_DIR
+	%dk_call% dk_echo "Test Getting DKDESKTOP_DIR . . ."
+	%dk_call% dk_DKDESKTOP_DIR
+	%dk_call% dk_printVar DKDESKTOP_DIR
 	
 	%dk_call% dk_echo
-	%dk_call% dk_echo "Test Setting DKTOOLS_DIR . . ."
-	%dk_call% dk_DKTOOLS_DIR "C:\DK\DKTools"
-	%dk_call% dk_printVar DKTOOLS_DIR 
+	%dk_call% dk_echo "Test Setting DKDESKTOP_DIR . . ."
+	%dk_call% dk_DKDESKTOP_DIR "C:\Desktop"
+	%dk_call% dk_printVar DKDESKTOP_DIR 
 %endfunction%
