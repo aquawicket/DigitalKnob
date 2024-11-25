@@ -27,7 +27,7 @@ if(PYTHON_DL)
 endif()
 
 ###### PYTHON_EXE (first check) ######
-dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
+dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 if(EXISTS "${PYTHON_DIR}")
 	dk_findProgram(PYTHON_EXE python "${PYTHON_DIR}")
 elseif(EXISTS "/usr/local/bin")

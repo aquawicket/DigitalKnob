@@ -36,7 +36,7 @@ installPacman() {
 		"
 		zstd=zstd-1.5.2-1-x86_64.pkg.tar.xz
 	fi
-	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
 	
 	dk_call dk_download https://raw.githubusercontent.com/msys2/MSYS2-packages/7858ee9c236402adf569ac7cff6beb1f883ab67c/pacman/pacman.conf ${DKDOWNLOAD_DIR}/pacman.conf
 	dk_call dk_copy "${DKDOWNLOAD_DIR}/pacman.conf" "/etc/pacman.conf" OVERWRITE

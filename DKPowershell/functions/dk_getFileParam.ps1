@@ -34,7 +34,7 @@ function Global:dk_getFileParam() {
 function Global:DKTEST() {
     dk_debugFunc 0
   
-	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKBRANCH_DIR"
+	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
     $VERSION = $(dk_getFileParam ${DKIMPORTS_DIR}/git/version.txt VERSION)
 	#dk_call dk_getFileParam "${DKIMPORTS_DIR}/git/version.txt" VERSION
 	dk_call dk_printVar VERSION

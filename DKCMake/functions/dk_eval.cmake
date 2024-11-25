@@ -25,7 +25,7 @@ macro(dk_eval)
 		# eval will not modify ans (the code evaluated may modify ans)
 		# vars starting with __eval should not be used in code
 
-		dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")
+		dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
 		set(dk_evel_temp ${DKCACHE_DIR}/dk_evel_temp.cmake)
 		dk_fileWrite("${dk_evel_temp}" "
 			function(eval code)

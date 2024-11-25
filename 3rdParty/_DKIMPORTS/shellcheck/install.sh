@@ -15,7 +15,7 @@ dk_printVar HOST_ARCH
 dk_assertVar SHELLCHECK_DL_FILE
 dk_printVar SHELLCHECK_DL_FILE
 
-dk_validate DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR"
+dk_validate DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR"
 dk_download "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION}/${SHELLCHECK_DL_FILE}" "${DKDOWNLOAD_DIR}/${SHELLCHECK_DL_FILE}"
 
 dest_path="${DKTOOLS_DIR}/shellcheck-${SHELLCHECK_VERSION}"

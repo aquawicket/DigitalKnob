@@ -19,7 +19,7 @@ function(dk_reparseCmakeCommand CMD_LIST)
 		dk_return()
 	endif()
 	
-	dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")
+	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
 	file(REMOVE ${DKCACHE_DIR}/cmake_reparsed.txt)
 	list(REMOVE_ITEM ARGV COMMAND)
 	foreach(item IN LISTS ARGV)

@@ -19,7 +19,7 @@ if(CYGWIN)
 	dk_importVariables(${CYGWIN_DL})
 	dk_set(CYGWIN_EXE "${CYGWIN_DIR}/Cygwin.bat")
 
-	dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 
 	if(NOT EXISTS "${CYGWIN_DIR}/bin/${CYGWIN_DL_FILE}")
 		dk_echo("Installing ${CYGWIN_FOLDER}")

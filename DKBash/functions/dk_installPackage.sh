@@ -49,7 +49,7 @@ dk_installPackage() {
 		dk_run ${SUDO_EXE} pkg install "${1}"				# Termux
 		return
 	elif (command -v pacman); then
-		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
 		dk_run ${SUDO_EXE} pacman -S "${1}" --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}	# Pacman
 		return
 	elif (command -v swupd); then

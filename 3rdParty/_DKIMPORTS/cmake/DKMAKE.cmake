@@ -26,7 +26,7 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 endif()
 
 ###### DOWNLOAD ######
-dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam ("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_LINUX_AARCH64_DL)
 dk_getFileParam	("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_LINUX_X86_64_DL)
 dk_getFileParam	("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_MAC_10_DL)

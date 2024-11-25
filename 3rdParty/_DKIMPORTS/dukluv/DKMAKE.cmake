@@ -16,7 +16,7 @@ dk_depend(duktape)
 dk_depend(libuv)
 
 ### IMPORT ###
-dk_validate				(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate				(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam 		("${DKIMPORTS_DIR}/dukluv/dukluv.txt" DUKLUV_DL)
 dk_import				(${DUKLUV_DL})
 

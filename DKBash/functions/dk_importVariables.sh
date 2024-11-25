@@ -141,7 +141,7 @@ dk_importVariables() {
 	############### PLUGIN_IMPORT VARIABLES ###############
 	#######################################################
 	dk_call dk_assertPath CMAKE_CURRENT_LIST_DIR
-	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKBRANCH_DIR" 
+	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR" 
 	$(dk_call dk_includes "${CMAKE_CURRENT_LIST_DIR}" "${DKIMPORTS_DIR}") && PLUGIN_IMPORT=1 || PLUGIN_IMPORT=0		
 	
 	# PLUGIN_IMPORT

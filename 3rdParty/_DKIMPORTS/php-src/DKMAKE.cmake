@@ -17,7 +17,7 @@ if(NOT WIN_HOST)
 endif()
 
 
-dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam ("${DKIMPORTS_DIR}/php-src/php-src.txt" PHP_SRC_UNIX)
 dk_getFileParam ("${DKIMPORTS_DIR}/php-src/php-src.txt" PHP_SRC_WIN_X86_DL)
 dk_getFileParam ("${DKIMPORTS_DIR}/php-src/php-src.txt" PHP_SRC_WIN_X86_64_DL)

@@ -15,7 +15,7 @@ dk_depend			(iphlpapi)
 dk_depend			(userenv)
 
 ### IMPORT ###
-dk_validate			(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam 	("${DKIMPORTS_DIR}/libuv/libuv.txt" LIBUV_DL)
 dk_import			(${LIBUV_DL})
 

@@ -22,7 +22,7 @@ function Global:dk_installCmake() {
 	${CMAKE_FOLDER} = dk_call dk_removeExtension ${CMAKE_DL_FILE}
     #${CMAKE_FOLDER} = dk_call dk_convertToCIdentifier ${CMAKE_FOLDER} 
     #${CMAKE_FOLDER} = dk_call dk_toLower ${CMAKE_FOLDER}
-	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DIGITALKNOB_DIR"
+	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
 	$global:CMAKE_DIR = "$DKTOOLS_DIR/$CMAKE_FOLDER"
     $global:CMAKE_EXE = "$CMAKE_DIR/bin/cmake.exe"
         

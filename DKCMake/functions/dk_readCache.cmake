@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_readCache APP target_triple DKBUILD_TYPE)
 	dk_debugFunc(3)
 	
-	dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")
+	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
 	if(NOT EXISTS "${DKCACHE_DIR}/cache")
 		dk_return()
 	endif()

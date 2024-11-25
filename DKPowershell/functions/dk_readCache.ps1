@@ -8,7 +8,7 @@ if(!$dk_readCache){ $dk_readCache = 1 } else{ return }
 function Global:dk_readCache($APP, $triple, $TYPE) {
 	dk_debugFunc 3
 	
-	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKHOME_DIR"
+	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
 
 	if(!(dk_call dk_pathExists "${DKCACHE_DIR}/cache")){ return }
 	

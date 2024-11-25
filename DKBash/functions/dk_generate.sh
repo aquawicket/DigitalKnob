@@ -14,7 +14,7 @@ dk_generate() {
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
-	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKBRANCH_DIR"
+	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKAPPS_DIR"
 	TARGET_PATH="${DKAPPS_DIR}/${APP}"
 	#dk_call dk_printVar TARGET_PATH
 	dk_call dk_makeDirectory "${TARGET_PATH}/${triple}"
@@ -157,7 +157,7 @@ dk_generate() {
 	fi
 	
 	if [ "${triple}" = "win_arm64_clang" ]; then
-		dk_call dk_validate DK3RDPARTY_DIR "dk_DKBRANCH_DIR"
+		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64"
 	fi

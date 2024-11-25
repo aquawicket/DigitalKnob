@@ -14,7 +14,7 @@ dk_buildApp() {
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 	
-	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKBRANCH_DIR"
+	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKAPPS_DIR"
 	if [ "${TYPE}" = "Debug" ] || [ "${TYPE}" = "All" ]; then	
 		if dk_call dk_pathExists "${DKAPPS_DIR}/${APP}/${triple}/Debug/CMakeCache.txt"; then
 			${CMAKE_EXE} --build "${DKAPPS_DIR}/${APP}/${triple}/Debug" --verbose #--config Debug

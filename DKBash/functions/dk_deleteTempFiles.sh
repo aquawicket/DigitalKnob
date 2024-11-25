@@ -10,9 +10,9 @@ dk_deleteTempFiles() {
 
 	dk_call dk_info "Deleting .TMP files . . ."
 	
-	dk_call dk_validate DK3RDPARTY_DIR	"dk_call dk_DKBRANCH_DIR"
-	dk_call dk_validate DKAPPS_DIR		"dk_call dk_DKBRANCH_DIR"
-	dk_call dk_validate DKPLUGINS_DIR	"dk_call dk_DKBRANCH_DIR"
+	dk_call dk_validate DK3RDPARTY_DIR	"dk_call dk_DK3RDPARTY_DIR"
+	dk_call dk_validate DKAPPS_DIR		"dk_call dk_DKAPPS_DIR"
+	dk_call dk_validate DKPLUGINS_DIR	"dk_call dk_DKPLUGINS_DIR"
 	
 	[ ! -e "${DK3RDPARTY_DIR}" ] && return
 	rm -rf $(find "${DK3RDPARTY_DIR}" -type d -name *.tmp)

@@ -42,7 +42,7 @@ dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
 #endif()
 
 ### INSTALL ###
-dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
+dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 
 if(NOT EXISTS ${MSYS2_EXE})
 	dk_info("Installing ${MSYS2_FOLDER}")

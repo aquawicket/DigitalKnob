@@ -152,7 +152,7 @@ function(dk_generate)
 	endif()
 	
 	if("${triple}" STREQUAL "win_arm64_clang")
-		dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR")
+		dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR")
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64")
 	endif()

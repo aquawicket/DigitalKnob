@@ -56,38 +56,38 @@ function Global:dk_generate() {
 	elseif($triple -eq "raspberry_arm32"){ $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($triple -eq "raspberry_arm64"){ $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($triple -eq "win_arm64_clang"){ 
-		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
+		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 	    $env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clangarm64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANGARM64"
 	}
 	elseif($triple -eq "win_x86_clang"){
-		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
+		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG32"
 	}
 	elseif($triple -eq "win_x86_mingw"){
-		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
+		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW32"
 	}
 	elseif($triple -eq "win_x86_64_clang"){
-		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
+		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang64\bin;$env:PATH"
 		#$CMAKE_ARGS += "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG64"
 	}
 	elseif($triple -eq "win_x86_64_mingw"){
-		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
+		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW64"
 	}
 	elseif($triple -eq "win_x86_64_ucrt"){
-		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
+		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\ucrt64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=UCRT64"

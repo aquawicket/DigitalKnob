@@ -19,7 +19,7 @@ if(APPLE)
 endif()
 
 ### IMPORT ###
-dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam ("${DKIMPORTS_DIR}/fontconfig/fontconfig.txt" 			FONTCONFIG_DL)
 dk_import		(${FONTCONFIG_DL}										FONTCONFIG_INCLUDE_DIR)
 
