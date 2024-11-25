@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_depend			(nasm)
 
 ### IMPORT ###
-dk_validate			(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam		(${DKIMPORTS_DIR}/aom/aom.txt AOM_DL)
 dk_import			(${AOM_DL})
 

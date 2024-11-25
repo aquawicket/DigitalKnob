@@ -18,7 +18,7 @@ dk_generate() {
 	TARGET_PATH="${DKAPPS_DIR}/${APP}"
 	#dk_call dk_printVar TARGET_PATH
 	dk_call dk_makeDirectory "${TARGET_PATH}/${triple}"
-	dk_cd "${TARGET_PATH}/${triple}"
+	dk_call dk_cd "${TARGET_PATH}/${triple}"
 	dk_call dk_assertPath DKCMAKE_DIR
 	#dk_call dk_assertPath ${DKCMAKE_DIR}
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
