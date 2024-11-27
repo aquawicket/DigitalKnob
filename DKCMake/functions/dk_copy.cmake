@@ -60,7 +60,7 @@ function(dk_copy from to) # OVERWRITE NO_HALT
 		endif()
 	endif()
 endfunction()
-dk_createOsMacros("dk_copy")
+#dk_createOsMacros("dk_copy")
 
 
 

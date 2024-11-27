@@ -9,12 +9,20 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_DIGITALKNOB_DIR)
     dk_debugFunc()
 
-    if(DEFINED DIGITALKNOB_DIR)
+# 	if(DEFINED DIGITALKNOB_DIR)
+#		return()
+#	endif()
+
+	###### SET ######
+	if(ARGN0)
+		dk_set(DIGITALKNOB_DIR "${ARGN0}")
 		return()
 	endif()
             
 	### DIGITALKNOB_DIR ###
 	dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
+	dk_printVar(DKHOME_DIR)
+	
 	#if(NOT DEFINED DIGITALKNOB set "DIGITALKNOB=D i g i t a l K n o b")
     if(NOT DEFINED DIGITALKNOB)
 		dk_set(DIGITALKNOB "digitalknob")

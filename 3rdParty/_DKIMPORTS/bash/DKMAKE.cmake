@@ -81,7 +81,7 @@ endif()
 
 ### Git bash ###
 dk_validate(GIT "dk_depend(git)")
-dk_findProgram(GIT_BASH_EXE bash "${GIT}/bin")
+dk_findProgram(GIT_BASH_EXE bash.exe "${GIT}/bin")
 if(EXISTS "${GIT_BASH_EXE}")
 	dk_printVar(GIT_BASH_EXE)
 	if(NOT BASH_EXE)

@@ -30,6 +30,7 @@ function(dk_buildMain)
 	dk_validate(host_triple 	"dk_host_triple()")
 	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 	dk_validate(DKIMPORTS_DIR 	"dk_DKIMPORTS_DIR()")
+	dk_printVar(DKIMPORTS_DIR)
 	dk_validate(GIT_EXE 		"dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
 	dk_validate(DKBRANCH_DIR 	"dk_DKBRANCH_DIR()")
 

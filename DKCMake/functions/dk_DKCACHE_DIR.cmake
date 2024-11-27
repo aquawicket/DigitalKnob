@@ -3,12 +3,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ####################################################################
-# dk_DKCACHE_DIR()
+# dk_DKCACHE_DIR() <set_var>
 #
 #
 function(dk_DKCACHE_DIR)
     dk_debugFunc(0 1)
-
+	
 	###### SET ######
 	if(ARGV0)
 		dk_set(DKCACHE_DIR "${ARGV0}")

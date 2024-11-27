@@ -10,8 +10,8 @@ function(dk_DKHOME_DIR)
     dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
-		dk_set(DKHOME_DIR "${ARGV0}")
+	if(ARGN0)
+		dk_set(DKHOME_DIR "${ARGN0}")
 		return()
 	endif()
 	
@@ -70,7 +70,7 @@ function(dk_DKHOME_DIR)
 #		dk_printVar(ENV{WSLPATH_EXE})
 #	endif()
 	
-	dk_validate(CMD_EXE "dk_CMD_EXE()")
+#	dk_validate(CMD_EXE "dk_CMD_EXE()")
 	
 	###### DKHOME_DIR ######
 	if(NOT EXISTS "${DKHOME_DIR}")
@@ -109,7 +109,7 @@ function(dk_DKHOME_DIR)
 		file(TO_CMAKE_PATH "${DKHOME_DIR}" DKHOME_DIR)
 		
 		dk_set(DKHOME_DIR "${DKHOME_DIR}")				# Globalize the variable
-		set(ENV{DKHOME_DIR} "${DKHOME_DIR}")			# Set Environment Varible
+		#set(ENV{DKHOME_DIR} "${DKHOME_DIR}")			# Set Environment Varible
 	endif()
 endfunction()
 
@@ -124,7 +124,7 @@ function(DKTEST)
  
 	dk_echo()
 	dk_echo("Test Getting DKHOME_DIR . . .")
-	dk_DKHOME_DIR()
+	dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
 	dk_printVar(DKHOME_DIR)
 	
 	dk_echo()

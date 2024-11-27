@@ -52,11 +52,14 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	execute_process(COMMAND cmd /c echo "Hello World" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE)
-    dk_echo("output = ${output}")
+	#execute_process(COMMAND cmd /c echo "Hello World" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE)
+    #dk_echo("output = ${output}")
 	
-    #dk_callDKBatch(dk_test rtn_var "FROM DKCmake" "dk_callDKBatch.cmake")
-	#dk_echo("rtn_var = ${rtn_var}")
+	#execute_process(COMMAND cmd /V:ON /c "set /p input=& echo !input!" OUTPUT_VARIABLE input)
+    #dk_echo("input = ${input}")
+	
+    dk_callDKBatch(dk_test rtn_var "FROM DKCmake" "dk_callDKBatch.cmake")
+	dk_echo("rtn_var = ${rtn_var}")
 	
 	#dk_callDKBatch(dk_registryKeyExists rtn_var "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\QEMU")
 	#dk_echo("rtn_var = ${rtn_var}")

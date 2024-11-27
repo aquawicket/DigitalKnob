@@ -10,18 +10,18 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_pickUpdate) 
 	dk_debugFunc(0)
 
-	dk_readCache(ENV{_APP_} ENV{_target_triple_} ENV{_DKBUILD_TYPE_})
-	dk_printVar(ENV{_APP_})
-	dk_printVar(ENV{_target_triple_}) 
-	dk_printVar(ENV{_DKBUILD_TYPE_})
-	
-	dk_echo()
+
 	dk_gitCheckRemote()
-	dk_echo()
+
+	
+	unset(APP)
+	unset(target_triple)
+	unset(DKBUILD_TYPE)
+	dk_readCache(APP target_triple DKBUILD_TYPE)
 	
 	if(${behind} LESS 1)
-		if(DEFINED ENV{_APP_} AND DEFINED ENV{_target_triple_} AND DEFINED ENV{_DKBUILD_TYPE_})
-			dk_echo(" 0) Repeat cache [$ENV{_APP_} - $ENV{_target_triple_} - $ENV{_DKBUILD_TYPE_}]")
+		if((DEFINED APP) AND (DEFINED target_triple) AND (DEFINED DKBUILD_TYPE))
+			dk_echo(" 0) Repeat cache $APP - $target_triple - $DKBUILD_TYPE")
 		endif()
 		dk_echo(" 1) Git Update") 
 		dk_echo(" 2) Git Commit")
@@ -57,6 +57,7 @@ function(dk_pickUpdate)
 		dk_echo("Press Enter To Skip")
 		dk_echo("$ENV{clr}")
 	endif()
+	
 	
 	dk_keyboardInput(input)
 	if("${input}" EQUAL "0")

@@ -76,6 +76,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	#	dk_echo(WARNING "${fn} is NOT a valid function name")
 	#endif()
 	
+	#message("fpath = ${fpath}")
 	if(EXISTS ${DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake)
 		set(${fn}_file ${DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake)
 	elseif(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)

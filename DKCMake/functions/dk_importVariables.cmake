@@ -250,6 +250,7 @@ function(dk_importVariables url)
 	##################################################
 	############ PLUGIN_INSTALL VARIABLES ############
 	##################################################
+	message("############ PLUGIN_INSTALL VARIABLES ############")
 	# PLUGIN_INSTALL_NAME
 	unset(PLUGIN_INSTALL_NAME)
 	if(NAME)
@@ -315,18 +316,18 @@ function(dk_importVariables url)
 		dk_assertPath(DK3RDPARTY_DIR)
 		set(PLUGIN_INSTALL_ROOT ${DK3RDPARTY_DIR})
 	endif()
-#	dk_printVar(PLUGIN_INSTALL_ROOT)									# PLUGIN_INSTALL_ROOT		: C:/Users/Administrator/digitalknob/Development/3rdParty
+	dk_printVar(PLUGIN_INSTALL_ROOT)									# PLUGIN_INSTALL_ROOT		: C:/Users/Administrator/digitalknob/Development/3rdParty
 
 	# PLUGIN_INSTALL_PATH
 	unset(PLUGIN_INSTALL_PATH)
 	if(PATH)
 		set(PLUGIN_INSTALL_PATH ${PATH})
 	else()
-		dk_assertPath(${PLUGIN_INSTALL_ROOT})
-		dk_assertVar(PLUGIN_INSTALL_FOLDER)
+		#dk_assertPath(PLUGIN_INSTALL_ROOT)	
+		#dk_assertVar(PLUGIN_INSTALL_FOLDER)
 		set(PLUGIN_INSTALL_PATH ${PLUGIN_INSTALL_ROOT}/${PLUGIN_INSTALL_FOLDER})			
 	endif()
-#	dk_printVar(PLUGIN_INSTALL_PATH)									# PLUGIN_INSTALL_PATH		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	dk_printVar(PLUGIN_INSTALL_PATH)									# PLUGIN_INSTALL_PATH		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 
 	
 	
@@ -334,7 +335,7 @@ function(dk_importVariables url)
 	##############################################
 	############# <PLUGIN>_VARIABLES #############
 	##############################################
-	
+	message("############# <PLUGIN>_VARIABLES #############")
 	if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_GIT_NAME_LOWER)
 		if(NOT "${PLUGIN_IMPORT_NAME_LOWER}" STREQUAL "${PLUGIN_GIT_NAME_LOWER}")
 			dk_warning("PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match ")
