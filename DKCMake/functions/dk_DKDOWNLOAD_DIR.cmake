@@ -10,8 +10,8 @@ function(dk_DKDOWNLOAD_DIR)
     dk_debugFunc(0 1)
             
 	###### SET ######
-	if(ARGV0)
-		dk_set(DKDOWNLOAD_DIR "${ARGV0}")
+	if(ARGN)
+		dk_set(DKDOWNLOAD_DIR "${ARGN}")
 		
 	###### GET ######
 	else()

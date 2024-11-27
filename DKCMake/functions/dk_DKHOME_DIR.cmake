@@ -10,8 +10,8 @@ function(dk_DKHOME_DIR)
     dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGN0)
-		dk_set(DKHOME_DIR "${ARGN0}")
+	if(ARGN)
+		dk_set(DKHOME_DIR "${ARGN}")
 		return()
 	endif()
 	

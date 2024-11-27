@@ -10,8 +10,8 @@ function(dk_DKAPPS_DIR)
 	dk_debugFunc()
 	
 	###### SET ######
-	if(ARGV0)
-		dk_set(DKAPPS_DIR "${ARGV0}")
+	if(ARGN)
+		dk_set(DKAPPS_DIR "${ARGN}")
 		
 	###### GET ######
 	else()

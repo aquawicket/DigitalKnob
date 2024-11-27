@@ -10,8 +10,8 @@ function(dk_DKDESKTOP_DIR)
     dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
-		dk_set(DKDESKTOP_DIR "${ARGV0}")
+	if(ARGN)
+		dk_set(DKDESKTOP_DIR "${ARGN}")
 		
 	###### GET ######
 	else()

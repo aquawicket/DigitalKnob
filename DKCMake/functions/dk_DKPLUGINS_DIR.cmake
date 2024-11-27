@@ -10,8 +10,8 @@ function(dk_DKPLUGINS_DIR)
 	dk_debugFunc(0 1)
 	
 	###### SET ######
-	if(ARGV0)
-		dk_set(DKPLUGINS_DIR "${ARGV0}")
+	if(ARGN)
+		dk_set(DKPLUGINS_DIR "${ARGN}")
 		
 	###### GET ######
 	else()

@@ -25,7 +25,8 @@ function(dk_set variable)# value)
 	#endif()
 	
 	set(${ARGV} CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used todo direct cache entry lookups
-	set(ENV{${ARGV0}} ${ARGN})
+	
+	set(ENV{${ARGV0}} "${ARGN}")
 	#dk_printVar(${ARGV0})
 endfunction()
 dk_createOsMacros("dk_set")

@@ -10,8 +10,8 @@ function(dk_DKIMPORTS_DIR)
 	dk_debugFunc(0 1)
 	
 	###### SET ######
-	if(ARGN0)
-		dk_set(DKIMPORTS_DIR "${ARGN0}")
+	if(ARGN)
+		dk_set(DKIMPORTS_DIR "${ARGN}")
 		
 	###### GET ######
 	else()
