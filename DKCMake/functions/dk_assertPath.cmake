@@ -12,14 +12,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_assertPath)
 	dk_debugFunc(1)
 
-	set(path ${ARGV0})
+	set(_path_ "${ARGV0}")
+	dk_printVar(_path_)
 	
-	dk_varToString(path path_value)
-	if(EXISTS "${path}" OR EXISTS "${${path}}")
+	dk_varToString(_path_ path_value)
+	dk_printVar(path_value)
+	
+	if(EXISTS "${_path_}" OR EXISTS "${${_path_}}")
 		return()
 	endif()
 	
-	dk_fatal("${bg_red}${white}Assertion failed: Path Not Found path:'${path}'")
+	dk_fatal("${bg_red}${white}Assertion failed: Path Not Found path:'${_path_}'")
 endfunction()
 
 
