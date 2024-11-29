@@ -32,9 +32,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "DKLINK=Static"
 
     set "CMAKE_ARGS="
-    if "%DKBUILD_TYPE%"=="Debug"             %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON
-    if "%DKBUILD_TYPE%"=="Release"           %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
-    if "%DKBUILD_TYPE%"=="All"               %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    if "%DKBUILD_TYPE%"=="Debug"     %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON
+    if "%DKBUILD_TYPE%"=="Release"   %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    if "%DKBUILD_TYPE%"=="All"       %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%DKLEVEL%"=="Build"          %dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON
     if "%DKLEVEL%"=="Rebuild"        %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON
     if "%DKLEVEL%"=="RebuildAll"     %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON
