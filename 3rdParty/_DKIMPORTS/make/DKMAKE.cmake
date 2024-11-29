@@ -27,6 +27,7 @@ dk_load(dk_builder)
 if(android)
 	if(WIN_HOST)
 		dk_validate(MSYS2 "dk_depend(msys2)")
+		dk_installPackage("make")
 		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang64/bin")
 	else()
 		dk_findProgram(CMAKE_MAKE_PROGRAM make)
@@ -53,10 +54,12 @@ elseif(emscripten)
 	
 elseif(win_arm64_clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_installPackage("make")
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clangarm64/bin")
 	
 elseif(win_x86_clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_installPackage("make")
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang32/bin")
 	
 elseif(win_x86_64_clang)
@@ -66,14 +69,17 @@ elseif(win_x86_64_clang)
 	
 elseif(win_x86_mingw)
 	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_installPackage("make")
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/mingw32/bin")
 	
 elseif(win_x86_64_mingw)
 	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_installPackage("make")
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/mingw64/bin")
 	
 elseif(win_x86_64_ucrt)
 	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_installPackage("make")
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/ucrt64/bin")
 
 elseif(win_x86_msvc)

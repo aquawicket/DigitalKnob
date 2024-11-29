@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+########### msys2 ###########
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 #
@@ -37,15 +38,11 @@ endif()
 dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
 dk_importVariables(${MSYS2_DL})
 dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
-#if(EXISTS ${MSYS2_EXE})
-	#dk_return() ### Return if MSYS2_EXE is already set
-#endif()
 
 ### INSTALL ###
-dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-
 if(NOT EXISTS ${MSYS2_EXE})
 	dk_info("Installing ${MSYS2_FOLDER}")
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 	dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
 	dk_command("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2_DIR}" --confirm-command)
 endif()	
@@ -59,7 +56,6 @@ if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
 	#execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 	#dk_installPackage(update)
 	
-#	### Install toolchain ###
 	if(MSYSTEM)
 		# Set PATH environment  variables
 		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
@@ -67,15 +63,13 @@ if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
 		dk_toLower(${MSYSTEM} msystem)
 		
 		if(COSMO)
-			# Temporary fix fpr cosmopoiltan
+			# Temporary fix for cosmopoiltan
 		else()
 			dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
 			dk_exportVars(PATH "$ENV{PATH}")
 		endif()
-#		dk_installPackage(toolchain)
-	else()
-		dk_set(MSYS2_BASH_EXPORTS	"export PATH=${MSYS2_DIR}/usr/bin:$PATH")
 	endif()
+	
 	
 	### Create Bash Exports ###
 	dk_validate(CYGPATH_EXE "dk_depend(cygpath)")
