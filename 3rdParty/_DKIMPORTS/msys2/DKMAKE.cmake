@@ -59,7 +59,7 @@ if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
 	#execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 	#dk_installPackage(update)
 	
-	### Install toolchain ###
+#	### Install toolchain ###
 	if(MSYSTEM)
 		# Set PATH environment  variables
 		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
@@ -72,7 +72,7 @@ if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
 			dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
 			dk_exportVars(PATH "$ENV{PATH}")
 		endif()
-		dk_installPackage(toolchain)
+#		dk_installPackage(toolchain)
 	else()
 		dk_set(MSYS2_BASH_EXPORTS	"export PATH=${MSYS2_DIR}/usr/bin:$PATH")
 	endif()
