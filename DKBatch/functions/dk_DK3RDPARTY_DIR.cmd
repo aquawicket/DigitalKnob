@@ -10,10 +10,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	if "%~1" neq "" (
 		%dk_call% dk_set DK3RDPARTY_DIR "%~1"
-	) else (
-		%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-		%dk_call% dk_set DK3RDPARTY_DIR "%DKBRANCH_DIR%\3rdParty"
+		%return%
 	)
+	
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_set DK3RDPARTY_DIR "%DKBRANCH_DIR%\3rdParty"
 %endfunction%
 
 

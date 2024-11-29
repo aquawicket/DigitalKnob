@@ -14,7 +14,6 @@ function(dk_buildLog entry)
 	
 	dk_getOptionValue(PATH ${ARGV})
 	
-	#dk_printVar(entry)
 	set(msg "${entry} = ${${entry}}")
 	dk_info("${msg}")
 	
@@ -31,5 +30,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_buildLog(todo)
 endfunction()

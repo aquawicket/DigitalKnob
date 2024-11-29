@@ -32,7 +32,7 @@ function(dk_copy from to) # OVERWRITE NO_HALT
 				set(destinationfile "${to}/${each_file}")
 				if(OVERWRITE)
 					execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files ${sourcefile} ${destinationfile} RESULT_VARIABLE compare_result)
-					if(compare_result EQUAL 1)
+					if(${compare_result} EQUAL 1)
 						execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
 						dk_info("COPIED: ${sourcefile} to ${destinationfile}")
 					elseif(compare_result EQUAL 0)

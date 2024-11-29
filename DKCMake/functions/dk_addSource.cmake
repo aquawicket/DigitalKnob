@@ -9,13 +9,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #	@regex	- TODO
 #
-function(dk_addSource regex)
-	dk_debugFunc()
+function(dk_addSource)
+	dk_debugFunc(1)
 	
-	dk_set(SRC_INCLUDE ${SRC_INCLUDE} ${ARGV})
-	
-# DEBUG
-#	TODO
+	dk_set(SRC_INCLUDE ${SRC_INCLUDE} ${ARGN})
 endfunction()
 
 
@@ -29,5 +26,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_addSource()
+	dk_addSource("todo")
 endfunction()

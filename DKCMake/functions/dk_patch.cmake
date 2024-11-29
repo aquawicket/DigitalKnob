@@ -19,7 +19,7 @@ function(dk_patch import_name dest_path)
 	
 	dk_assertPath(${DKIMPORTS_DIR}/${import_name})
 	dk_assertPath(${dest_path})
-	dk_copy(${DKIMPORTS_DIR}/${import_name}/ ${dest_path}/ OVERWRITE)
+	dk_copy("${DKIMPORTS_DIR}/${import_name}/" "${dest_path}/" OVERWRITE)
 endfunction()
 
 
@@ -30,5 +30,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_patch(todo "todo")
 endfunction()

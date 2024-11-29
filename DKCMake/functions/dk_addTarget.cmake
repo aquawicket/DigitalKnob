@@ -8,8 +8,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	<plugin>	- TODO
 #	<target>	- TODO
 #
-function(dk_addTarget plugin target)
+function(dk_addTarget)# plugin target)
 	dk_debugFunc(2)
+	set(plugin ${ARGN0})
+	set(target ${ARGN1})
+	
 	
 	if(${plugin}_targets_OFF)
 		list(REMOVE_ITEM ${plugin}_targets_OFF ${target})
@@ -23,9 +26,6 @@ function(dk_addTarget plugin target)
 		dk_set(${plugin}_${target} ON)
 		#dk_set(${plugin}::${target} ON) # TESTME
 	endif()
-	
-# DEBUG
-#	TODO
 endfunction()
 
 
@@ -34,6 +34,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
-	#dk_addTarget(plugin target)
+	dk_addTarget(plugin target) # TODO
 endfunction()
