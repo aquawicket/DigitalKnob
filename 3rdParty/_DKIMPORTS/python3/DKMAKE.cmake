@@ -24,7 +24,6 @@ endif()
 dk_importVariables	("${PYTHON3_IMPORT}")
 
 if(WIN_HOST)
-	dk_findProgram(PYTHON3_EXE python3.exe "${PYTHON3_DIR}")
 	dk_findProgram(PYTHON3_EXE python.exe "${PYTHON3_DIR}")
 else()
 	dk_findProgram(PYTHON3_EXE python3)
@@ -65,6 +64,3 @@ dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interprete
 
 dk_assertPath("${PYTHON3_DIR}")
 dk_assertPath("${PYTHON3_EXE}")
-
-
-message("end of python3/DKCMAKE.cmake")
