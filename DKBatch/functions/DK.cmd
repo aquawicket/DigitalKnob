@@ -11,8 +11,6 @@ echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
 echo   %DKSHELL_PATH%
 echo:
 
-
-title %~n1
 if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 
 (set \n=^^^
@@ -23,8 +21,6 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 ::# DK
 ::#
 :DK
-	echo DK()
-	
     set "NO_STDOUT=1>nul"
     set "NO_STDERR=2>nul"
     set "NO_OUTPUT=1>nul 2>nul"
