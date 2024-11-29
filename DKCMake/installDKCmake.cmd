@@ -12,6 +12,8 @@ if not "%~1" == "" (goto runDKCMake)
 	%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_DKIMPORTS_DIR"
 	if not defined CMAKE_EXE                 call "%DKIMPORTS_DIR%\cmake\dk_installCmake"
 	
+	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCmake"
 	ftype DKCmake=cmd /c call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKCmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"
