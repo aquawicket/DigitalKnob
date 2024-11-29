@@ -10,13 +10,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::############ SET ############
 	if "%~1" neq "" ( 
-		dk_set DKPLUGINS_DIR "%~1"
-
-	rem ############ GET ############
-	) else (
-		%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-		%dk_call% dk_set DKPLUGINS_DIR "!DKBRANCH_DIR!\DKPlugins"
+		set "DKPLUGINS_DIR=%~1"
+		%return%
 	)
+
+	::############ GET ############
+	%dk_call% dk_validatePath DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
+	
+	%dk_call% dk_assertPath DKPLUGINS_DIR
 %endfunction%
 
 

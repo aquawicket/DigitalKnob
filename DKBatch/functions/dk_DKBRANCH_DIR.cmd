@@ -15,20 +15,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
 	if "%~1" neq "" (
 		set "DKBRANCH_DIR=%~1"
-	) else (
-		%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-		for %%I in (.) do set "FOLDER=%%~nxI"                          &rem get the current folder
+		%return%
+	)
+	
+	%dk_call% dk_validatePath DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	for %%I in (.) do set "FOLDER=%%~nxI"                          &rem get the current folder
 
-		set "DKBRANCH=Development"                                     &rem set the default branch
-	    rem	if not defined GIT_EXE %dk_call% dk_installGit
-    	rem    if exist "%CD%\.git" (
-    	rem        "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & if ERRORLEVEL 0 (
-    	rem            set "DKBRANCH=%FOLDER%"
-    	rem        )
-    	rem    )
-		rem %dk_call% dk_printVar DKBRANCH
-		set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
-	)		
+	if not defined DKBRANCH  set "DKBRANCH=Development"            &rem set the default branch
+    rem	if not defined GIT_EXE %dk_call% dk_installGit
+   	rem    if exist "%CD%\.git" (
+   	rem        "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & if ERRORLEVEL 0 (
+   	rem            set "DKBRANCH=%FOLDER%"
+   	rem        )
+   	rem    )
+	rem %dk_call% dk_printVar DKBRANCH
+	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"		
 	
 	set "DKBASH_DIR=%DKBRANCH_DIR%\DKBash"
 		set "DKBASH_FUNCTIONS_DIR=%DKBASH_DIR%\functions"
@@ -81,6 +82,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "DKPYTHON_DIR=%DKBRANCH_DIR%\DKPython"
 		set "DKPYTHON_FUNCTIONS_DIR=%DKPYTHON_DIR%\functions"
 		set "DKPYTHON_FUNCTIONS_DIR_=%DKPYTHON_DIR%\functions\"
+		
+	%dk_call% dk_assertPath DKBRANCH_DIR
 %endfunction%
 
 

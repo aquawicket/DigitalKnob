@@ -7,24 +7,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_DKDESKTOP_DIR
     call dk_debugFunc 0 1
- ::setlocal enableDelayedExpansion
+ ::setlocal
  
 	::############ SET ############
 	if "%~1" neq "" ( 
-		dk_set DKDESKTOP_DIR "%~1"
-
-	rem ############ GET ############
-	) else (
-		%dk_call% dk_validate DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
-		%dk_call% dk_set DKDESKTOP_DIR "!DKHOME_DIR!\Desktop"
+		set "DKDESKTOP_DIR=%~1"
+		%return%
 	)
 	
-	if NOT exist "!DKDESKTOP_DIR!" (
-		dk_makeDirectory "!DKDESKTOP_DIR!"
-	)
+	::############ GET ############
+	%dk_call% dk_validatePath DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
+	set "DKDESKTOP_DIR=%DKHOME_DIR%\Desktop"
 	
-	!dk_call! dk_assertPath DIGITALKNOB_DIR
-	!dk_call! dk_printVar DIGITALKNOB_DIR
+	::if NOT exist "%DKDESKTOP_DIR%"   %dk_call% dk_makeDirectory "%DKDESKTOP_DIR%"
+	
+	::%dk_call% dk_assertPath DKDESKTOP_DIR
 %endfunction%
 
 

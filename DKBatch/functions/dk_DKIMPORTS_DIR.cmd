@@ -11,14 +11,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::############ SET ############
 	if "%~1" neq "" ( 
-		dk_set DKIMPORTS_DIR "%~1"
+		set "DKIMPORTS_DIR=%~1"
 		%return%
 	)
 	
 	rem ############ GET ############
 	%dk_call% dk_validatePath DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	%dk_call% dk_set DKIMPORTS_DIR "%DK3RDPARTY_DIR%\_DKIMPORTS"
+	set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
 
+	%dk_call% dk_assertPath DKIMPORTS_DIR
 %endfunction%
 
 

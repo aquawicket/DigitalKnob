@@ -9,11 +9,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0 1
 	
 	if "%~1" neq "" (
-		%dk_call% dk_set DKAPPS_DIR "%~1"
-	) else (
-		%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-		%dk_call% dk_set DKAPPS_DIR "%DKBRANCH_DIR%\DKApps"
+		set "DKAPPS_DIR=%~1"
+		%return%
 	)
+	
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
+	
+	%dk_call% dk_assertPath DKAPPS_DIR
 %endfunction%
 
 
