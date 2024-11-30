@@ -24,7 +24,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	dk_getOption(NO_HALT ${ARGV})
 
-	set(dest_path ${ARGV1})						# C:/Users/Administrator/Downloads
+	set(dest_path ${ARGN0})						# C:/Users/Administrator/Downloads
 	message("dest_path = ${dest_path}")
 	
 	# Setup all src_path variables
