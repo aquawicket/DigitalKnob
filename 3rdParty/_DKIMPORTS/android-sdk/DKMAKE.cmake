@@ -71,9 +71,10 @@ if(NOT DEFINED ENV{VS_AndroidHome})
 	dk_printVar(ENV{VS_AndroidHome})
 endif()
 
-
+### FIXME - temporarily disabled
 ###### SignLicenses ######
-if(NOT EXISTS "${ANDROID_SDK_DIR}/licenses")
+#if(NOT EXISTS "${ANDROID_SDK_DIR}/licenses")
+if(0)
 	# FIXME:  more work to be done on killing tasks
 	#if(WIN_HOST)
 	#	dk_killProcess(java.exe NO_HALT)
