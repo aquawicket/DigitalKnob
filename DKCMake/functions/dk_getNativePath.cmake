@@ -9,11 +9,15 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_getNativePath input output)
 	dk_debugFunc(2)
 	
-	file(TO_NATIVE_PATH "${input}" native_path)
+	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.20")
+		cmake_path(NATIVE_PATH input NORMALIZE native_path)
+	else()
+		file(TO_NATIVE_PATH "${input}" native_path)
+	endif()
 	dk_debug("Converted ${input} to NATIVE_PATH:${native_path}")
 	
 	if("${output}" MATCHES "ENV{") 
-		set(${output} "${native_path}")				# ENV variable
+		set(${output} "${native_path}")					# ENV variable
 	else()
 		set(${output} "${native_path}" PARENT_SCOPE)	# regular variable
 	endif()

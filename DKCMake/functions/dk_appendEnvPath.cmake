@@ -12,8 +12,7 @@ function(dk_appendEnvPath inputPath)
 	
 	dk_assertPath(inputPath)
 	#if(WIN32)
-		cmake_path(NATIVE_PATH inputPath NORMALIZE nativePath)
-		dk_debug("Converted ${inputPath} to NATIVE_PATH:${nativePath}")
+		dk_getNativePath("${inputPath}" nativePath)
 	#endif()
 	
 	#dk_printVar(ENV{PATH})

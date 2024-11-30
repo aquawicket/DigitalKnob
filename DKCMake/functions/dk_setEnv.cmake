@@ -16,7 +16,6 @@ function(dk_setEnv name value)
 	
 	#dk_debug("dk_setEnv(${ARGV})")
 	if(EXISTS "${value}")
-		dk_debug("Converting value to NATIVE_PATH")
 		dk_getNativePath("${value}" value)
 	endif()
 	if(DEFINED ENV{${name}})
