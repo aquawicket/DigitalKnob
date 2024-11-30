@@ -34,8 +34,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ) > %DKCACHE_DIR%\file-y.txt
 
 %dk_call% dk_validatePath DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-set "SDKMANAGER=%DK3RDPARTY_DIR%\android-sdk\cmdline-tools\latest\bin\sdkmanager.bat
+set "SDKMANAGER=%DK3RDPARTY_DIR%\android-sdk\cmdline-tools\latest\bin\sdkmanager.bat"
+
+::%dk_call% dk_assertPath SDKMANAGER
+if not exist "%SDKMANAGER%"    %return%
+
 %SDKMANAGER% --licenses < %DKCACHE_DIR%\file-y.txt
 ::%SDKMANAGER% --licenses
 
-call "%DKIMPORTS_DIR%\jdk\registerJDK.cmd" 
+::if exist "%DKIMPORTS_DIR%\openjdk\registerJDK.cmd"  call "%DKIMPORTS_DIR%\openjdk\registerJDK.cmd" 
