@@ -83,7 +83,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		set "DKPYTHON_FUNCTIONS_DIR=%DKPYTHON_DIR%\functions"
 		set "DKPYTHON_FUNCTIONS_DIR_=%DKPYTHON_DIR%\functions\"
 		
-	%dk_call% dk_assertPath DKBRANCH_DIR
+	::%dk_call% dk_assertPath DKBRANCH_DIR
 %endfunction%
 
 
