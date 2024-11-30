@@ -11,6 +11,7 @@ function(dk_MSYSTEM)
 
 	### Set MSYSTEM
 	dk_validate(ENV "dk_target_triple()")
+	
 	if(${ENV})
 		if(CLANG AND ARM64)
 			dk_set(msystem "${env}${arch}")	# msystem = clangarm64
@@ -30,7 +31,9 @@ function(dk_MSYSTEM)
 		else()
 			dk_warning("The target triple:${triple} does not contain a valid env or msystem")
 		endif()
-		dk_set(${MSYSTEM} 1)				# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
+		if(MSYSTEM)
+			dk_set(${MSYSTEM} 1)				# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
+		endif()
 	endif()
 	
 	dk_printVar(MSYSTEM)

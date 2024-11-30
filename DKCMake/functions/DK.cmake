@@ -87,6 +87,7 @@ function(DKINIT)
 	
 #	dk_load(dk_messageBox)
 #	variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
+#	variable_watch(CMAKE_SYSTEM_VERSION dk_onVariableWatch)
 	
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
@@ -106,7 +107,8 @@ endfunction()
 #
 macro(dk_onVariableWatch variable access value current_list_file stack)
 	if("${access}" STREQUAL "MODIFIED_ACCESS")
-		message("dk_variableWatch(${variable} ${access} ${value} ${current_list_file} ${stack})")
+		#message("dk_variableWatch(${variable} ${access} ${value} ${current_list_file} ${stack})")
+		dk_stacktrace()
 		dk_messageBox("${variable} = ${value}")
 	endif()
 endmacro()

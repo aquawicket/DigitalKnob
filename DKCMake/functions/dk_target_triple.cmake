@@ -180,25 +180,26 @@ function(dk_target_triple)
 
 	### Set MSYSTEM
 	if(${ENV})
-		if(CLANG AND ARM64)
-			dk_set(msystem "${env}${arch}")	# msystem = clangarm64
-			dk_set(MSYSTEM "${ENV}${ARCH}")	# MSYSTEM = CLANGARM64
-		elseif(X86_64)
-			dk_set(msystem "${env}64")		# msystem = clang64, mingw64, ucrt64
-			dk_set(MSYSTEM "${ENV}64")		# MSYSTEM = CLANG64, MINGW64, UCRT64
-		elseif(X86)
-			dk_set(msystem "${env}32")		# msystem = clang32, mingw32
-			dk_set(MSYSTEM "${ENV}32")		# MSYSTEM = CLANG32, MINGW32
-		elseif(cosmo OR COSMO)
-		#	dk_set(msystem "${env}")		# cosmo
-		#	dk_set(MSYSTEM "${ENV}")		# COSMO
-		elseif(msvc OR MSVC)
-		#	dk_set(msystem "msvc")			# cosmo
-		#	dk_set(MSYSTEM "MSVC")			# COSMO
-		else()
-			dk_warning("The target triple:${triple} does not contain a valid env or msystem")
-		endif()
-		dk_set(${MSYSTEM} 1)				# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
+		dk_MSYSTEM()
+#		if(CLANG AND ARM64)
+#			dk_set(msystem "${env}${arch}")	# msystem = clangarm64
+#			dk_set(MSYSTEM "${ENV}${ARCH}")	# MSYSTEM = CLANGARM64
+#		elseif(X86_64)
+#			dk_set(msystem "${env}64")		# msystem = clang64, mingw64, ucrt64
+#			dk_set(MSYSTEM "${ENV}64")		# MSYSTEM = CLANG64, MINGW64, UCRT64
+#		elseif(X86)
+#			dk_set(msystem "${env}32")		# msystem = clang32, mingw32
+#			dk_set(MSYSTEM "${ENV}32")		# MSYSTEM = CLANG32, MINGW32
+#		elseif(cosmo OR COSMO)
+#		#	dk_set(msystem "${env}")		# cosmo
+#		#	dk_set(MSYSTEM "${ENV}")		# COSMO
+#		elseif(msvc OR MSVC)
+#		#	dk_set(msystem "msvc")			# cosmo
+#		#	dk_set(MSYSTEM "MSVC")			# COSMO
+#		else()
+#			dk_warning("The target triple:${triple} does not contain a valid env or msystem")
+#		endif()
+#		dk_set(${MSYSTEM} 1)				# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32 or UCRT64 = 1
 	endif()
 		
 	### Set os_arch / OS_ARCH ###
