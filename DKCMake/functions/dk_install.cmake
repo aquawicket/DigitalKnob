@@ -78,7 +78,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	endif()
 	
 	dk_download(${PLUGIN_URL} "${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}" NO_HALT)
-	dk_assertPath("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}") # "The download file does not exist")
+	dk_assertPath("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}") # "The download file does not exist"
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${PLUGIN_URL_EXTENSION} STREQUAL "")
