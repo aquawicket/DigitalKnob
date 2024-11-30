@@ -16,10 +16,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	)
 	
 	rem ############ GET ############
-	%dk_call% dk_validatePath DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
+	::%dk_call% dk_validatePath DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
+	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
 
-	%dk_call% dk_assertPath DKIMPORTS_DIR
+	::%dk_call% dk_assertPath DKIMPORTS_DIR
 %endfunction%
 
 
