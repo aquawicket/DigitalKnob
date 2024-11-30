@@ -19,25 +19,19 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 	:: check that the path has quotes
 	set "_path_=%1"
 	if "" neq %_path_:~0,1%%_path_:~-1% (
-		if not defined %~1 (
-			!dk_call! dk_error "dk_assertPath(%*): path is not quoted"
-		)
+		if not defined %~1 	%dk_call% dk_error "dk_assertPath(%*): path is not quoted"
 	) else (
-		if defined %~1 (
-			!dk_call! dk_error "dk_assertPath(%*): don't quote variable names"
-		)
+		if defined %~1  %dk_call% dk_error "dk_assertPath(%*): don't quote variable names"
 	)
 	
 	:: check that we only recieved 1 argument
-	if "%~2" neq "" (
-		!dk_call! dk_error "dk_assertPath(%*): too many arguments"
-	)
+	if "%~2" neq ""  %dk_call% dk_error "dk_assertPath(%*): too many arguments"
 	
 	:: Without Delayed Expansion
     ::set "_var_=%~1"
     ::if "!DE!" neq "" call set "_value_=%%%_var_%%%"
 	::echo dk_assertPath %_value_%
-    !dk_call! dk_error "ASSERTION: dk_assertPath(%*): path not found!"
+    %dk_call% dk_error "ASSERTION: dk_assertPath(%*): path not found!"
 %endfunction%
 
 
@@ -68,7 +62,9 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 	::# As a variable name
     %dk_call% dk_assertPath myPath									&::OK
 	
-::	%return%
+	
+	
+	%return%
 	::# As a variable name quoted
     %dk_call% dk_assertPath "myPath"								&::NOT OK
 	::# unquoted
