@@ -1,3 +1,4 @@
+
 public class APP {
         	
 	//############################################################################
@@ -16,5 +17,4 @@ public class APP {
 	public static void DKTEST(){
 		dk_echo("DKTEST() dk_echo()");
 	}
-
 }

@@ -4,7 +4,6 @@ using Microsoft.CSharp;			// https://learn.microsoft.com/en-us/dotnet/api/micros
 using System.Reflection;		// https://learn.microsoft.com/en-us/dotnet/api/system.reflection?view=net-8.0
 
 
-
 namespace DKAPP{ 
 public class APP{
 
