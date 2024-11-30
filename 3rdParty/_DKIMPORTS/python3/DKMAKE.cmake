@@ -38,14 +38,14 @@ if(NOT EXISTS ${PYTHON3_EXE})
 	endif()
 	
 	if(WIN_HOST)
-		dk_findProgram(PYTHON3_EXE python3.exe "${PYTHON3_DIR}")
+		dk_findProgram(PYTHON3_EXE python.exe "${PYTHON3_DIR}")
 	else()
 		dk_findProgram(PYTHON3_EXE python3)
 	endif()
 endif()
-if(NOT EXISTS "${PYTHON3_DIR}/python.exe")
-	dk_copy("${PYTHON3_DIR}/python3.exe" "${PYTHON3_DIR}/python.exe")
-endif()
+#if(NOT EXISTS "${PYTHON3_DIR}/python.exe")
+#	dk_copy("${PYTHON3_DIR}/python3.exe" "${PYTHON3_DIR}/python.exe")
+#endif()
 
 
 if(NOT EXISTS "${PYTHON3_DIR}")
