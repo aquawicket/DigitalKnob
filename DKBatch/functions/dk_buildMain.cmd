@@ -9,8 +9,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
 
+	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%"   &::OVERWRITE
+	
+	if not exist "%DKDESKTOP_DIR%\digitalknob.lnk" (
+        %dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" &rem OVERWRITE
+	)
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
 
 	%dk_call% dk_assertPath DKSCRIPT_DIR
