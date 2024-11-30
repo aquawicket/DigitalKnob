@@ -10,7 +10,7 @@ function(dk_MSYSTEM)
 	dk_debugFunc()
 
 	### Set MSYSTEM
-	dk_validate(ENV "dk_target_triple2()")
+	dk_validate(ENV "dk_target_triple()")
 	if(${ENV})
 		if(CLANG AND ARM64)
 			dk_set(msystem "${env}${arch}")	# msystem = clangarm64

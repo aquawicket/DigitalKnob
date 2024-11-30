@@ -33,7 +33,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	#if(NOT ${PLUGIN_IMPORT_NAME} STREQUAL ${plugin_lower})
 	#	dk_fatal("ERROR:  dk_install() (${PLUGIN_IMPORT_NAME}) must be all lowercase")
 	#endif()
-	dk_assertPath(${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}) # "dk_install():36")
+	dk_assertPath(${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME})
 	
 	if(EXISTS ${PLUGIN_DIR}/installed)
 		dk_info("${PLUGIN_IMPORT_NAME} already installed")

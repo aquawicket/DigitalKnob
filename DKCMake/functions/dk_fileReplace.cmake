@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@replace	- TODO
 #
 function(dk_fileReplace)
-	dk_debugFunc(3)
+	dk_debugFunc(3 4)
 	
 	file(READ ${ARGV0} fileString)
 	string(FIND "${fileString}" "${ARGV1}" found)
@@ -20,7 +20,7 @@ function(dk_fileReplace)
 		dk_replaceAll("${fileString}" "${ARGV1}" "${ARGV2}" fileString)
 		dk_fileWrite(${ARGV0} "${fileString}")
 	else()
-		dk_error("cannot find \"${ARGV1}\"  in  (${ARGV0})")
+		dk_warning("cannot find \"${ARGV1}\"  in  (${ARGV0})")
 	endif()
 endfunction()
 
