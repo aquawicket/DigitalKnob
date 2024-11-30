@@ -194,7 +194,7 @@ function(dk_target_triple)
 		#	dk_set(msystem "msvc")			# cosmo
 		#	dk_set(MSYSTEM "MSVC")			# COSMO
 		else()
-			dk_error("The target triple:${triple} does not contain a valid env or msystem")
+			dk_warning("The target triple:${triple} does not contain a valid env or msystem")
 		endif()
 		dk_set(${MSYSTEM} 1)				# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
 	endif()
