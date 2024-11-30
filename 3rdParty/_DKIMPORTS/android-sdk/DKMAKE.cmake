@@ -13,9 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_depend(openjdk-8u41)
 #dk_depend(android-cmdline-tools)
 
-#dk_load(dk_builder)
 dk_validate(host_triple "dk_host_triple()")
-
 if(ANDROID_HOST)
 	dk_set(ANDROID_SDK "$ENV{HOME}/digitalknob/3rdParty/android-sdk")
 	dk_set(ANDROID_SDK_DIR "$ENV{HOME}/digitalknob/3rdParty/android-sdk")
@@ -24,6 +22,8 @@ else()
 	dk_set(ANDROID_SDK "${DK3RDPARTY_DIR}/android-sdk")
 	dk_set(ANDROID_SDK_DIR "${DK3RDPARTY_DIR}/android-sdk")
 endif()
+
+### INSTALL ###
 if(NOT EXISTS ${ANDROID_SDK_DIR})
 	dk_info("Installing android-sdk")
 	dk_makeDirectory("${ANDROID_SDK_DIR}")
