@@ -20,12 +20,11 @@ function(dk_delete)
 		return()
 	endif()
 	
-	message("file(REMOVE_RECURSE ${ARGN})")
+	message("deleting ${ARGN}")
 	file(REMOVE_RECURSE "${ARGN}")
-	#execute_process(COMMAND -E rm "${ARGV0}")
-	dk_sleep(1)	# give the path a second to delete
+	#execute_process(COMMAND -E rm "${ARGN}")
+	dk_sleep(1)	# give the path a 1 second to delete
 	if(EXISTS "${ARGN}")
-	message("if(EXISTS ${ARGN})")
 		if(NOT NO_HALT)
 			dk_error("failed to remove ${ARGN}")
 		endif()
