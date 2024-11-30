@@ -9,17 +9,17 @@ if(NOT TEST_BACKUP_DL_SERVER)
 	dk_set(TEST_BACKUP_DL_SERVER 0)
 endif()
 ###############################################################################
-# dk_download(src_path dest_path) #NO_HALT
+# dk_download(url) dest_path NO_HALT
 #
 #	Download a file
 #
-#	@src_path	- The url of the file to download
+#	@url		- The url of the file to download
 #	@dest_path	- The path to download the file to
 #   NO_HALT     - if any of the parameters equals NO_HALT, dk_fatal() messages will not be displayed
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
-function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
+function(dk_download url) # ARGV1 = dest_path #NO_HALT
 	dk_debugFunc()
 	
 	dk_getOption(NO_HALT ${ARGV})
@@ -27,30 +27,31 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	set(dest_path ${ARGN0})						# C:/Users/Administrator/Downloads
 	message("dest_path = ${dest_path}")
 	
-	# Setup all src_path variables
-	#if(NOT src_path)
-	#	dk_fatal("src_path is invalid")
+	# Setup all url variables
+	#if(NOT url)
+	#	dk_fatal("url:${url} is invalid")
 	#endif()
-    #dk_assertVar(src_path)
-	#dk_printVar(src_path)						# https://aquawicket.com/download/myFile.txt
+    #dk_assertVar(url)
+	#dk_printVar(url)							# https://aquawicket.com/download/myFile.txt
 	
-	dk_dirname(${src_path} src_dir)
-	if(NOT src_dir)
-		dk_fatal("src_dir:${src_dir} is invalid")
+	dk_dirname(${url} url_dir)
+	if(NOT url_dir)
+		dk_fatal("url_dir:${url_dir} is invalid")
 	endif()
-	#dk_printVar(src_dir)						# https://aquawicket.com/download
+	#dk_printVar(url_dir)						# https://aquawicket.com/download
 	
-	dk_basename(${src_path} src_filename)
-	if(NOT src_filename)
-		dk_fatal("src_filename:${src_filename} is invalid")
+	dk_basename(${url} url_filename)
+	if(NOT url_filename)
+		dk_fatal("url_filename:${url_filename} is invalid")
 	endif()
-	#dk_printVar(src_filename)					# myFile.txt
+	#dk_printVar(url_filename)					# myFile.txt
 	
-	dk_getExtension(${src_path} src_ext)	
-	if(NOT src_ext)
-		dk_fatal("src_ext:${src_ext} is invalid")
+	dk_getExtension(${url} url_ext)	
+	if(NOT url_ext)
+		dk_fatal("url_ext:${url_ext} is invalid")
 	endif()
-	#dk_printVar(src_ext)						# .txt
+	#dk_printVar(url_ext)						# .txt
+	
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)
@@ -60,7 +61,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 		dk_fatal("dest_path:${dest_path} is invalid")
 	endif()	
 	if(IS_DIRECTORY ${dest_path})
-		set(dest_path "${dest_path}/${src_filename}")
+		set(dest_path "${dest_path}/${url_filename}")
 	endif()
 	#dk_printVar(dest_path)						# C:/Users/Administrator/Downloads/myFile.txt
 	
@@ -99,21 +100,21 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	# Use BACKUP_DL_SERVER only
 	if(TEST_BACKUP_DL_SERVER)
-		set(src_path "${BACKUP_DL_SERVER}/${src_filename}")
-		dk_info("Using Backup Server src_path:${src_path} . . .")
+		set(url "${BACKUP_DL_SERVER}/${url_filename}")
+		dk_info("Using Backup Server url:${url} . . .")
 	
 	# Test that url exists, if not try BACKUP_DL_SERVER
 	else()
-		dk_assertVar(src_path)
-		dk_urlExists(${src_path} result)
+		dk_assertVar(url)
+		dk_urlExists(${url} result)
 		if(NOT result)
-			dk_warning("src_path:${src_path} NOT FOUND")
-			set(src_path "${BACKUP_DL_SERVER}/${src_filename}")
-			dk_info("Trying Backup Server src_path:${src_path} . . .")
+			dk_warning("url:${url} NOT FOUND")
+			set(url "${BACKUP_DL_SERVER}/${url_filename}")
+			dk_info("Trying Backup Server url:${url} . . .")
 		endif()
 	endif()
 
-	dk_debug("Downloading ${src_path}")
+	dk_debug("Downloading ${url}")
 	dk_debug("      To -> ${dest_path}")
 	
 	# setup temp_path variables
@@ -129,8 +130,8 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	set(FETCHCONTENT_QUIET FALSE) #FIX download progress 
 	
-	dk_info("Downloading ${src_filename}. . . please wait")
-	file(DOWNLOAD ${src_path} "${temp_path}"
+	dk_info("Downloading ${url_filename}. . . please wait")
+	file(DOWNLOAD ${url} "${temp_path}"
 		SHOW_PROGRESS 
 		STATUS status 
 	)
@@ -138,7 +139,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	list(GET status 1 status_string)
 	if(NOT status_code EQUAL 0)
 		dk_delete(${temp_path})
-		dk_fatal("error: downloading ${src_path} \nstatus_code: ${status_code} \nstatus_string: ${status_string}")
+		dk_fatal("error: downloading ${url} \nstatus_code: ${status_code} \nstatus_string: ${status_string}")
 	else()
 		if(NOT EXISTS ${temp_path})
 			dk_fatal("temp_path:${temp_path} could not locate temporary download file")

@@ -20,7 +20,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_import url)
 	dk_debugFunc()
 	
-	dk_getOption(NO_HALT  ${ARGV} REMOVE)
+	dk_getOption(NO_HALT ${ARGV} REMOVE)
 	
 	dk_importVariables(${url} ${ARGN})
 	dk_assertVar(CURRENT_PLUGIN)

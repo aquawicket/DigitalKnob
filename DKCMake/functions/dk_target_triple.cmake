@@ -72,7 +72,9 @@ function(dk_target_triple)
 	dk_assertPath(DK_PROJECT_DIR)
 
 	### Set triple/TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
+	message("TARGET_TRIPLE_DIR = ${TARGET_TRIPLE_DIR}")
 	dk_basename(${TARGET_TRIPLE_DIR} triple)	# 			triple 	= win_x86_64_clang
+	message("triple = ${triple}")
 	dk_set(triple ${triple})					# 					  Globalize the variable
 	dk_set(target_triple ${triple})				# 	  target_triple	= win_x86_64_clang
 	dk_toUpper(${triple} TRIPLE)				# 			 TRIPLE	= WIN_X86_64_CLANG
