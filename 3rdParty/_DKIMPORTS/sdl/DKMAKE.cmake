@@ -75,9 +75,9 @@ if(WIN)
 endif()
 
 ### IMPORT ###
+#dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip)
+dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.30.9.zip)
 #dk_import(https://github.com/libsdl-org/SDL.git BRANCH main) # SDL3
-dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip)
-
 
 
 ### LINK ###
@@ -124,16 +124,16 @@ endif()
 #ANDROID_dk_libRelease(${SDL_RELEASE_DIR}/libhidapi.a)
 
 #if(SDL_SDL2main)
-	#ANDROID_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2main.a			SDL2MAIN_LIBRARY_DEBUG)
-	#ANDROID_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
-	#LINUX_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
-	#LINUX_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
-	#MAC_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
-	#MAC_dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
-	#RASPBERRY_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
-	#RASPBERRY_dk_libRelease(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
-	#WIN_dk_libDebug		(${SDL_DEBUG_DIR}/SDL2maind.lib			SDL2MAIN_LIBRARY_DEBUG)
-	#WIN_dk_libRelease		(${SDL_RELEASE_DIR}/SDL2main.lib		SDL2MAIN_LIBRARY_RELEASE)
+	#ANDROID_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_DEBUG)
+	#ANDROID_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#LINUX_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
+	#LINUX_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#MAC_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
+	#MAC_dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#RASPBERRY_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
+	#RASPBERRY_dk_libRelease(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#WIN_dk_libDebug		(${SDL_DEBUG_DIR}/SDL2maind.lib		SDL2MAIN_LIBRARY_DEBUG)
+	#WIN_dk_libRelease		(${SDL_RELEASE_DIR}/SDL2main.lib	SDL2MAIN_LIBRARY_RELEASE)
 	if(IOS OR IOSSIM)
 		dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
 		dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
