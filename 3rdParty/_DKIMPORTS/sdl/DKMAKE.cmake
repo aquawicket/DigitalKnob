@@ -75,25 +75,25 @@ if(WIN)
 endif()
 
 ### IMPORT ###
-#dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip)
-dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.30.9.zip)
+dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip)
+#dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.30.9.zip)
 #dk_import(https://github.com/libsdl-org/SDL.git BRANCH main) # SDL3
 
 
 ### LINK ###
-dk_include			(${SDL_DIR}/include						SDL2_INCLUDE_DIR)
+dk_include		(${SDL_DIR}/include			SDL2_INCLUDE_DIR)
 if(ANDROID)
-	dk_include		(${ANDROID_NDK}/sources/android/cpufeatures)
-	dk_include		(${SDL_DIR}/src)
+	dk_include	(${ANDROID_NDK}/sources/android/cpufeatures)
+	dk_include	(${SDL_DIR}/src)
 endif()
 if(DEBUG)
-	dk_include		(${SDL_DEBUG_DIR}/include)
+	dk_include	(${SDL_DEBUG_DIR}/include)
 endif()
 if(RELEASE)
-	dk_include		(${SDL_RELEASE_DIR}/include)
+	dk_include	(${SDL_RELEASE_DIR}/include)
 endif()
 if(RASPBERRY)
-	dk_include		(/opt/vc/lib)
+	dk_include	(/opt/vc/lib)
 endif()
 #dk_addTarget(sdl SDL2static)	# TODO
 #dk_addTarget(sdl SDL2main)		# TODO
@@ -180,8 +180,8 @@ if(MULTI_CONFIG)
 	endif()
 	
 	dk_set(SDLMAIN_CMAKE
-	-DSDL2MAIN_LIBRARY_DEBUG=${SDL2MAIN_LIBRARY_DEBUG}
-	-DSDL2MAIN_LIBRARY_RELEASE=${SDL2MAIN_LIBRARY_RELEASE})
+		-DSDL2MAIN_LIBRARY_DEBUG=${SDL2MAIN_LIBRARY_DEBUG}
+		-DSDL2MAIN_LIBRARY_RELEASE=${SDL2MAIN_LIBRARY_RELEASE})
 else()
 	if(DEBUG)
 		dk_set(SDL_CMAKE
