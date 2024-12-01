@@ -18,9 +18,11 @@ dk_set(VISUAL_CPP_BUILD_TOOLS_VERSION 	17)
 #dk_set(VISUAL_CPP_BUILD_TOOLS_DL 		"https://aka.ms/vs/${VISUAL_CPP_BUILD_TOOLS_VERSION}/release/vs_community.exe")
 dk_set(VISUAL_CPP_BUILD_TOOLS_DL 		"https://aka.ms/vs/17/release/vs_BuildTools.exe")
 dk_assertPath(ProgramFiles)
-dk_set(VISUAL_CPP_BUILD_TOOLS 			"${ProgramFiles}/Microsoft Visual Studio")
+dk_set(VISUAL_CPP_BUILD_TOOLS 			"C:/Program Files (x86)/Microsoft Visual Studio")
+#dk_set(VISUAL_CPP_BUILD_TOOLS 			"$ENV{ProgramFiles (x86)}/Microsoft Visual Studio")
 dk_printVar(VISUAL_CPP_BUILD_TOOLS)
 
+# C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC
 macro(get_visualstudio_year result)
 	file(GLOB children RELATIVE "${VISUAL_CPP_BUILD_TOOLS}" "${VISUAL_CPP_BUILD_TOOLS}/*")
 	foreach(child ${children})
