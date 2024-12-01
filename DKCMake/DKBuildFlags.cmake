@@ -618,7 +618,8 @@ endif()
 
 ### Windows x86 - MSVC ###
 if(win_x86_msvc)
-	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+	#dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+	dk_load(${DKIMPORTS_DIR}/visual-cpp-build-tools/DKMAKE.cmake)
 	
 	dk_append(CMAKE_C_FLAGS							/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS						/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
@@ -656,7 +657,8 @@ endif()
 
 ### Windows x86_64 - MSVC ###
 if(win_x86_64_msvc)
-	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+	#dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+	dk_load(${DKIMPORTS_DIR}/visual-cpp-build-tools/DKMAKE.cmake)
 	
 	dk_append(CMAKE_C_FLAGS							/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS						/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600

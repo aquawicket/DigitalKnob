@@ -34,13 +34,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "!TARGET_DIR!" equ "Debug" (	
 		rem ### Get DEBUG ###
 		!dk_call! dk_set DKBUILD_TYPE DEBUG						&rem 	     DKBUILD_TYPE	= DEBUG
-		!dk_call! dk_set !DKBUILD_TYPE! 1							&rem 			  DEBUG = 1	
+		!dk_call! dk_set !DKBUILD_TYPE! 1						&rem 			  DEBUG = 1	
 		rem !dk_call! dk_set TARGET_TYPE Debug					&rem 		TARGET_TYPE	= Debug
 		!dk_call! dk_dirname TARGET_DIR TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	) else if "!TARGET_DIR!" equ "Release" (
 		rem ### Get RELEASE ###
 		!dk_call! dk_set DKBUILD_TYPE RELEASE 					&rem 	     DKBUILD_TYPE = RELEASE
-		!dk_call! dk_set !DKBUILD_TYPE! 1							&rem 			RELEASE = 1	
+		!dk_call! dk_set !DKBUILD_TYPE! 1						&rem 			RELEASE = 1	
 		rem !dk_call! dk_set TARGET_TYPE Release				&rem 		TARGET_TYPE = Release
 		!dk_call! dk_dirname !TARGET_DIR! TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	)
@@ -107,12 +107,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	) else (
 		!dk_call! dk_toUpper !os! OS
 		!dk_call! dk_set OS !OS! 
-		rem !dk_call! dk_set target_os !os!
-		rem !dk_call! dk_set TARGET_OS !OS!
+		!dk_call! dk_set target_os !os!
+		!dk_call! dk_set TARGET_OS !OS!
 		!dk_call! dk_set !os! 1
 		!dk_call! dk_set !OS! 1
-		rem !dk_call! dk_set !os!_target 1
-		rem !dk_call! dk_set !OS!_TARGET 1
+		!dk_call! dk_set !os!_target 1
+		!dk_call! dk_set !OS!_TARGET 1
 	)
 	::### Get arch / ARCH
 	%dk_call% dk_stringContains "!triple!" "arm64" 	&& !dk_call! dk_set arch arm64
@@ -126,12 +126,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	) else (
 		!dk_call! dk_toUpper !arch! ARCH
 		!dk_call! dk_set ARCH !ARCH!
-		rem !dk_call! dk_set target_arch !arch!)
-		rem !dk_call! dk_set TARGET_ARCH !ARCH!)
+		!dk_call! dk_set target_arch !arch!)
+		!dk_call! dk_set TARGET_ARCH !ARCH!)
 		!dk_call! dk_set !arch! 1
 		!dk_call! dk_set !ARCH! 1
-		rem !dk_call! dk_set !arch!_target 1)
-		rem !dk_call! dk_set !ARCH!_TARGET 1)
+		!dk_call! dk_set !arch!_target 1)
+		!dk_call! dk_set !ARCH!_TARGET 1)
 	)
 
 	::### Set evn / ENV 
@@ -146,12 +146,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	) else (
 		!dk_call! dk_toUpper !env! ENV
 		!dk_call! dk_set ENV !ENV!
-		rem !dk_call! dk_set target_env !env!
-		rem !dk_call! dk_set TARGET_ENV !ENV!
+		!dk_call! dk_set target_env !env!
+		!dk_call! dk_set TARGET_ENV !ENV!
 		!dk_call! dk_set !env! 1
 		!dk_call! dk_set !ENV! 1
-		rem !dk_call! dk_set !env!_target 1
-		rem !dk_call! dk_set !ENV!_TARGET 1
+		!dk_call! dk_set !env!_target 1
+		!dk_call! dk_set !ENV!_TARGET 1
 	)
 
 	::### Set MSYSTEM
@@ -165,12 +165,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		) else if defined X86 (
 			!dk_call! dk_set msystem "!env!32"		&rem msystem = clang32, mingw32
 			!dk_call! dk_set MSYSTEM "!ENV!32"		&rem MSYSTEM = CLANG32, MINGW32
-		) else if defined COSMO (
-		    rem	!dk_call! dk_set msystem "!env!"	&rem cosmo
-		    rem	!dk_call! dk_set MSYSTEM "!ENV!"	&rem COSMO
-		) else if defined MSVC (
-		    rem	!dk_call! dk_set msystem "msvc"		&rem cosmo
-		    rem	!dk_call! dk_set MSYSTEM "MSVC"		&rem COSMO
 		) else (
 			!dk_call! dk_fatal "The target triple:!triple! does not contain a valid env or msystem"
 		)
@@ -180,12 +174,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::### Set os_arch / OS_ARCH ###
 	!dk_call! dk_set os_arch "!os!_!arch!"
 	!dk_call! dk_set OS_ARCH "!OS!_!ARCH!"
-	rem !dk_call! dk_set target_os_arch "!os_arch!"
-	rem !dk_call! dk_set TARGET_OS_ARCH "!OS_ARCH!"
+	!dk_call! dk_set target_os_arch "!os_arch!"
+	!dk_call! dk_set TARGET_OS_ARCH "!OS_ARCH!"
 	!dk_call! dk_set !os_arch! 1
 	!dk_call! dk_set !OS_ARCH! 1
-	rem !dk_call! dk_set !os_arch!_target 1
-	rem !dk_call! dk_set !OS_ARCH!_TARGET 1
+	!dk_call! dk_set !os_arch!_target 1
+	!dk_call! dk_set !OS_ARCH!_TARGET 1
 
 	::### Set DEBUG_DIR and RELEASE_DIR variables
 	if defined IOS (

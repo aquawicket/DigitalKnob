@@ -18,7 +18,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # VS2019  https://aka.ms/vs/16/release/vs_community.exe
 # VS2022  https://aka.ms/vs/17/release/vs_community.exe
 
-dk_load(dk_builder)
+dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
 	dk_undepend(visualstudio)
 	dk_return()
