@@ -6,49 +6,35 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ############ cygpath ############
-#dk_load(dk_builder)
-#if(NOT WIN_HOST)
-#	dk_undepend(cygpath)
-#	dk_return()
-#endif()
+if(NOT WIN_HOST)
+	dk_undepend(cygpath)
+	dk_return()
+endif()
 
 if(EXISTS "${CYGPATH_EXE}")
 	dk_return()
 endif()
 
-###### CYGPATH_EXE ######
-dk_printVar(CYGPATH_EXE)
-
-dk_printVar(DKSHELL)
+###### GET CYGPATH_EXE ######
 if(NOT EXISTS "${CYGPATH_EXE}")
-	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-	dk_depend(msys2)
-	dk_debug("Looking in ${MSYS2_DIR}/usr/bin/cygpath.exe")
-	set(CYGPATH_EXE "${MSYS2_DIR}/usr/bin/cygpath.exe")
-endif()
-
-if(NOT EXISTS "${CYGPATH_EXE}")
-	dk_depend(msys2)
+	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_findProgram(CYGPATH_EXE cygpath.exe "${MSYS2_DIR}/usr/bin")
 endif()
 if(NOT EXISTS "${CYGPATH_EXE}")
-	dk_depend(git)
+	dk_validate(GIT "dk_depend(git)")
 	dk_findProgram(CYGPATH_EXE cygpath.exe "${GIT_DIR_}/../../../")
 endif()
 if(NOT EXISTS "${CYGPATH_EXE}")
 	dk_findProgram(CYGPATH_EXE cygpath)
 endif()
 if(NOT EXISTS "${CYGPATH_EXE}")
+	dk_printVar(DKSHELL)
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v cygpath" OUTPUT_VARIABLE CYGPATH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif()
-if(NOT EXISTS "${CYGPATH_EXE}")
-	dk_warning("CYGPATH_EXE:${CYGPATH_EXE} not found")
+
+####### CHECK CYGPATH_EXE ######
+if(EXISTS "${CYGPATH_EXE}")
+	dk_set(CYGPATH_EXE "${CYGPATH_EXE}")
 else()
-	dk_set(CYGPATH_EXE "${CYGPATH_EXE}")		# Globalize the variable
-	dk_printVar(CYGPATH_EXE)
-	set(ENV{CYGPATH_EXE} "${CYGPATH_EXE}")		# Set Environment Varible
-	dk_printVar(ENV{CYGPATH_EXE})
+	dk_fatal("CYGPATH_EXE:${CYGPATH_EXE} not found")
 endif()
-	
-	
-dk_assertPath("${CYGPATH_EXE}")
