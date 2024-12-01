@@ -14,7 +14,7 @@ dk_load(dk_builder)
 
 ### DEPEND ###
 if(WIN)
-	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_depend(msys2)
 endif()
 
 ### IMPORT ###

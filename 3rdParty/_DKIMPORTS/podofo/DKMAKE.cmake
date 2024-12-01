@@ -18,7 +18,7 @@ dk_depend(libjpeg-turbo)
 dk_depend(libpng)
 dk_depend(lua)
 dk_depend(tiff)
-dk_validate(ZLIB "dk_depend(zlib)")
+dk_depend(zlib)
 
 
 ### IMPORT ###

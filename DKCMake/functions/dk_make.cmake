@@ -33,7 +33,7 @@ function(dk_make path) #lib
 	else()
 		set(lib ${ARGV1})
 		#dk_cd(${path}/${CONFIG_PATH})
-		#dk_validate(CMAKE_MAKE_PROGRAM "dk_depend(make)")
+		#dk_depend(make)
 		
 		dk_assertVar(CMAKE_MAKE_PROGRAM)
 		dk_printVar(CMAKE_MAKE_PROGRAM)

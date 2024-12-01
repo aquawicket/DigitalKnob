@@ -18,7 +18,7 @@ dk_load(dk_builder)
 dk_depend(libjpeg-turbo)
 #dk_depend(libwebp) ERROR: circular reference
 dk_depend(xz)
-dk_validate(ZLIB "dk_depend(zlib)")
+dk_depend(zlib)
 dk_depend(zstd)
 
 #-- Could NOT find Deflate (missing: Deflate_LIBRARY Deflate_INCLUDE_DIR)

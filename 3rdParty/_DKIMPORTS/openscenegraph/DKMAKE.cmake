@@ -30,7 +30,7 @@ dk_depend(msinttypes)
 dk_depend(opengl)
 dk_depend(sdl)
 dk_depend(tiff)
-dk_validate(ZLIB "dk_depend(zlib)")
+dk_depend(zlib)
 dk_depend(zstd)
 
 

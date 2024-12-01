@@ -15,6 +15,6 @@ if(DEFINED ENV{MSYSTEM})
 endif()
 
 
-#dk_validate(MSYS2 "dk_depend(msys2)")
+#dk_depend(msys2)
 
 dk_installPackage(gdb)

@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ############ libmingwex ############
 dk_load(dk_builder)
-dk_validate(MSYS2 "dk_depend(msys2)")
+dk_depend(msys2)
 
 if(WIN_X86_CLANG)
 	dk_set(LIBMINGWEX ${MSYS2_DIR}/clang32/lib)

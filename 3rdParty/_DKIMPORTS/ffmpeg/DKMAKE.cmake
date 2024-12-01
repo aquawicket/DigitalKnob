@@ -27,7 +27,7 @@ dk_depend(video_toolbox)
 dk_depend(ws2_32)
 dk_depend(x264)
 dk_depend(xz)
-dk_validate(ZLIB "dk_depend(zlib)")
+dk_depend(zlib)
 
 #FIXME:  WIN_X86 - 9 unresolved externals
 

@@ -130,6 +130,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(ZLIB "dk_depend(zlib)")
+	dk_depend(zlib)
 	dk_configure(${ZLIB_DIR})
 endfunction()

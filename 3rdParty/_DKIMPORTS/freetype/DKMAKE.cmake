@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ### DEPEND ###
-dk_validate(ZLIB "dk_depend(zlib)")
+dk_depend(zlib)
 
 
 ### IMPORT ###

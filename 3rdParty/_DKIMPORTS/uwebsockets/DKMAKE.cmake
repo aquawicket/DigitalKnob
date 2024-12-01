@@ -11,7 +11,7 @@ dk_load(dk_builder)
 ### DEPEND ###
 dk_depend(libuv)
 dk_depend(openssl)
-dk_validate(ZLIB "dk_depend(zlib)")
+dk_depend(zlib)
 
 ### IMPORT ###
 dk_import(https://github.com/uNetworking/uWebSockets/archive/refs/tags/v0.14.8.zip PATCH)

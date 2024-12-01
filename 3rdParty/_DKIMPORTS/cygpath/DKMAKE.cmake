@@ -17,11 +17,11 @@ endif()
 
 ###### GET CYGPATH_EXE ######
 if(NOT EXISTS "${CYGPATH_EXE}")
-	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_depend(msys2)
 	dk_findProgram(CYGPATH_EXE cygpath.exe "${MSYS2_DIR}/usr/bin")
 endif()
 if(NOT EXISTS "${CYGPATH_EXE}")
-	dk_validate(GIT "dk_depend(git)")
+	dk_depend(git)
 	dk_findProgram(CYGPATH_EXE cygpath.exe "${GIT_DIR_}/../../../")
 endif()
 if(NOT EXISTS "${CYGPATH_EXE}")

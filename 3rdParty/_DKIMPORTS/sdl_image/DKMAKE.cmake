@@ -37,7 +37,7 @@ dk_depend(libwebp)
 dk_depend(mobile_core_services)
 dk_depend(sdl)
 dk_depend(tiff)
-dk_validate(ZLIB "dk_depend(zlib)")
+dk_depend(zlib)
 
 
 ### IMPORT ###

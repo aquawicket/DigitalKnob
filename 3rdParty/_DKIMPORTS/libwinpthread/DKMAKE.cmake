@@ -12,7 +12,7 @@ dk_load(dk_builder)
 #elseif(WIN_X86_64)
 #	dk_depend(mingw64)
 #endif()
-dk_validate(MSYS2 "dk_depend(msys2)")
+dk_depend(msys2)
 
 if(WIN_X86_CLANG)
 	dk_set(LIBWINPTHREAD ${MSYS2_DIR}/clang32/lib)

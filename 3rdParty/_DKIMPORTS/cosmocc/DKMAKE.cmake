@@ -29,7 +29,7 @@ endif()
 dk_set(CMAKE_FORCE_UNIX_PATHS 1)
 
 #dk_validate(MSYS2 						"include(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)")
-#dk_validate(MSYS2 						"dk_depend(msys2)")
+dk_depend(msys2)
 #dk_set(COSMO_MAKE_PROGRAM 				"${COSMOCC}/bin/make")
 #set(ENV{PATH} 							"${MSYS2}/usr/bin;$ENV{PATH}")
 dk_set(COSMO_ASM_COMPILER 				"${COSMOCC}/bin/cosmocc")

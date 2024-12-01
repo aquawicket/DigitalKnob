@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 
 if(MSYSTEM)
-	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_depend(msys2)
 	
 	dk_installPackage(diffutils)
 endif()

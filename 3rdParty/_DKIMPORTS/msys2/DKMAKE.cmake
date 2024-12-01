@@ -23,7 +23,7 @@ endif()
 
 
 ### Set CMAKE_GENERATOR ###
-dk_validate(CMD_EXE "dk_depend(cmd)")
+dk_depend(cmd)
 if(CMD_EXE OR MINGW)
 	dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in CMD shell
 else()
@@ -72,7 +72,7 @@ if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
 	
 	
 	### Create Bash Exports ###
-	dk_validate(CYGPATH_EXE "dk_depend(cygpath)")
+	dk_depend(cygpath)
 	dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
 	
 	dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")

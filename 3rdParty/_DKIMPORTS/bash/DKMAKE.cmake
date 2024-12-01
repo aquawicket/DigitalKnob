@@ -54,7 +54,7 @@ endif()
 
 ### Msys2 bash ###
 if(MSYSTEM)
-	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_depend(msys2)
 	dk_findProgram(MSYS2_BASH_EXE bash "${MSYS2_DIR}/usr/bin")
 	if(EXISTS "${MSYS2_BASH_EXE}")
 		dk_printVar(MSYS2_BASH_EXE)
@@ -80,7 +80,7 @@ endif()
 
 
 ### Git bash ###
-dk_validate(GIT "dk_depend(git)")
+dk_depend(git)
 dk_findProgram(GIT_BASH_EXE bash.exe "${GIT}/bin")
 if(EXISTS "${GIT_BASH_EXE}")
 	dk_printVar(GIT_BASH_EXE)

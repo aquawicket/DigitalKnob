@@ -11,7 +11,7 @@ function(dk_callDKCmake func rtn_var)
     
     ### get required variables ###
     dk_validate(DKIMPORTS_DIR           "dk_DKBRANCH_DIR()")
-    dk_validate(CMAKE_EXE               "dk_depend(cmake)")
+	dk_depend(cmake)
 	dk_validate(DKCMAKE_DIR             "dk_DKBRANCH_DIR()")
     dk_validate(DKCMAKE_FUNCTIONS_DIR   "dk_DKBRANCH_DIR()")
 	set(DKCMAKE_FUNCTIONS_DIR           "${DKCMAKE_FUNCTIONS_DIR:\=/%")

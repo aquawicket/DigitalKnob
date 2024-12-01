@@ -17,7 +17,7 @@ endif()
 #dk_validate(host_triple "dk_host_triple()")
 
 
-dk_validate(MSYS2 "dk_depend(msys2)")
+dk_depend(msys2)
 #dk_installPackage(pacman)
 dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 

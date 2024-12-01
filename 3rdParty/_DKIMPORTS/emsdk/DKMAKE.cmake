@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_validate(host_triple "dk_host_triple()")
 if(WIN_HOST)
-	dk_validate(PYTHON3_DIR "dk_depend(python3)")
+	dk_depend(python3)
 	dk_getNativePath("${PYTHON3_DIR}" PYTHON3_DIR_WIN)
 	set(bat ".bat")
 	dk_assertVar(bat)
@@ -31,7 +31,7 @@ dk_import(https://github.com/emscripten-core/emsdk/archive/861ce44b.zip)
 
 # Download and install the latest SDK tools.
 if(WIN_HOST)
-	dk_validate(CMAKE_EXE   "dk_depend(cmake)")
+	dk_depend(cmake)
 	execute_process(COMMAND cmd /c ${CMAKE_EXE} -E env PATH=${PYTHON3_DIR_WIN}	"${EMSDK_DIR}/emsdk.bat"  install latest 			COMMAND_ECHO STDOUT)
 else()
 	execute_process(COMMAND                                         			"${EMSDK_DIR}/emsdk"      install latest 			COMMAND_ECHO STDOUT)

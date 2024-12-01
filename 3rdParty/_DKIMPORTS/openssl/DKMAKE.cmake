@@ -25,7 +25,7 @@ dk_depend(ws2_32)
 dk_depend(crypt32)
 dk_depend(perl)
 if(WIN_HOST)
-	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_depend(msys2)
 endif()
 dk_depend(nasm)
 

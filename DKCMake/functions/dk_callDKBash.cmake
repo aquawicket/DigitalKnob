@@ -10,7 +10,7 @@ function(dk_callDKBash func rtn_var)
 	dk_debugFunc()
 	
     ### get required variables ###
-	dk_validate(BASH_EXE                "dk_depend(bash)")
+	dk_depend(bash)
 	dk_validate(DKBASH_FUNCTIONS_DIR    "dk_DKBRANCH_DIR()")
     
     

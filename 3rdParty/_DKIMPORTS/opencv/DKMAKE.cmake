@@ -19,7 +19,7 @@ dk_depend(nasm)
 dk_depend(python3)
 dk_depend(tiff)
 dk_depend(vfw32)
-dk_validate(ZLIB "dk_depend(zlib)")
+dk_depend(zlib)
 
 ### IMPORT ###
 dk_import(https://github.com/opencv/opencv/archive/94d5ad09.zip)

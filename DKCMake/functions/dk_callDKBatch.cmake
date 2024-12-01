@@ -10,7 +10,7 @@ function(dk_callDKBatch func rtn_var)
 	dk_debugFunc()
 	
     ### get required variables ###
-	dk_validate(CMD_EXE                     "dk_depend(cmd)")
+	dk_depend(cmd)
     dk_replaceAll("${CMD_EXE}" "/" "\\" CMD_EXE_WIN)
 	dk_validate(DKBATCH_FUNCTIONS_DIR       "dk_DKBRANCH_DIR()")
     dk_replaceAll("${DKBATCH_FUNCTIONS_DIR}" "/" "\\" DKBATCH_FUNCTIONS_DIR_WIN)

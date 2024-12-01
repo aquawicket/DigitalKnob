@@ -16,7 +16,7 @@ endif()
 
 ### DEPEND ###
 dk_depend(libgcc)
-dk_validate(MSYS2 "dk_depend(msys2)")
+dk_depend(msys2)
 
 ### IMPORT ###
 dk_import(https://github.com/kiyolee/bzip2-win-build/archive/8baa40cf.zip)
