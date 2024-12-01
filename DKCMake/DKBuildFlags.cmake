@@ -345,6 +345,7 @@ if(ANDROID_ARM32)
 		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
 	)
 endif()
+
 #### Android arm32 MSVC
 #if(ANDROID_ARM32 AND MSVC) #android_arm32_msvc
 	#dk_set(CMAKE_GENERATOR_PLATFORM			ARM)
@@ -378,6 +379,8 @@ if(ANDROID_ARM64)
 		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
 	)
 endif()
+
+
 #### Android arm64 MSVC
 #if(ANDROID_ARM64 AND MSVC)
 	#dk_set(CMAKE_GENERATOR_PLATFORM			ARM64)
@@ -460,10 +463,6 @@ if(cosmo)
 		-DCMAKE_C_COMPILER_WORKS=1
 		-DCMAKE_CXX_COMPILER_WORKS=1
 	)
-	dk_validate(GIT "dk_installGit()")
-
-
-	#dk_exportVars(PATH "C:\\Users\\Administrator\\digitalknob\\DKTools\\PortableGit-2.46.2-64-bit\\bin;$ENV{PATH}")
 endif()
 
 

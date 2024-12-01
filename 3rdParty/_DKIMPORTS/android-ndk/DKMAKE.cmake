@@ -180,7 +180,7 @@ dk_set(ANDROID_BASH_EXPORTS			"export ANDROID_NDK_ROOT=${ANDROID_NDK};"
 ###### ANDROID ENVIRONMENT VARIABLES ######
 if(ANDROID)
 	dk_set(CMAKE_GENERATOR 				"Unix Makefiles")
-	#dk_set(CMAKE_GENERATOR_PLATRORM 	ARM;ARM64;X86;X64)
+	#dk_set(CMAKE_GENERATOR_PLATRORM 	ARM;ARM64;X86;X64) # MSVC
 	dk_set(CMAKE_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
 	dk_set(CMAKE_MAKE_PROGRAM 			"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make${exe}")
 	dk_set(CMAKE_AR						"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}")
