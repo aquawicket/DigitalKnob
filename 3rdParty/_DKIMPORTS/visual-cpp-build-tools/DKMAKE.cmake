@@ -19,6 +19,7 @@ dk_set(VISUAL_CPP_BUILD_TOOLS_VERSION 	17)
 dk_set(VISUAL_CPP_BUILD_TOOLS_DL 		"https://aka.ms/vs/17/release/vs_BuildTools.exe")
 dk_assertPath(ProgramFiles)
 dk_set(VISUAL_CPP_BUILD_TOOLS 			"C:/Program Files (x86)/Microsoft Visual Studio")
+dk_assertPath(VISUAL_CPP_BUILD_TOOLS)
 #dk_set(VISUAL_CPP_BUILD_TOOLS 			"$ENV{ProgramFiles (x86)}/Microsoft Visual Studio")
 dk_printVar(VISUAL_CPP_BUILD_TOOLS)
 
@@ -36,6 +37,7 @@ macro(get_visualstudio_year result)
 	if(NOT ${result})
 		dk_fatal("get_visualstudio_year() Could not locate year.")
 	endif()
+	dk_printVar(${result})
 endmacro()
 
 macro(get_visualstudio_edition result)
@@ -51,16 +53,14 @@ macro(get_visualstudio_edition result)
 	if(NOT ${result})
 		dk_fatal("get_visualstudio_edition() Could not locate edition.")
 	endif()
+	dk_printVar(${result})
 endmacro()
 
 ###### INSTALL Visual Studio ######	
 if(NOT EXISTS ${VISUAL_CPP_BUILD_TOOLS})
 	dk_info("Installing Visual Studio . . .")
-	if(EXISTS ${DKDOWNLOAD_DIR}/VisualStudio/vs_setup.exe)
-		dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
-		dk_command(${DK3RDPARTY_DIR}/_DKIMPORTS/visualstudio/InstallVisualStudio.cmd)	# offline installer
-	else()
-		dk_download(${VISUAL_CPP_BUILD_TOOLS_DL} ${DKDOWNLOAD_DIR}/vs_BuildTools.exe)				# online installer
+	if(${VISUAL_CPP_BUILD_TOOLS_DL} ${DKDOWNLOAD_DIR}/vs_BuildTools.exe)
+		dk_download(${VISUAL_CPP_BUILD_TOOLS_DL} ${DKDOWNLOAD_DIR}/vs_BuildTools.exe)	# online installer
 		dk_command(${DKDOWNLOAD_DIR}/vs_BuildTools.exe)
 	endif()
 else()
