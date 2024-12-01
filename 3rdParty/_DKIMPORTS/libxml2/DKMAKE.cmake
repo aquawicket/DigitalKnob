@@ -18,7 +18,7 @@ dk_load(dk_builder)
 dk_depend(libiconv)
 dk_depend(python3)
 dk_depend(xz)
-dk_depend(zlib)
+dk_validate(ZLIB "dk_depend(zlib)")
 
 
 ### IMPORT ###

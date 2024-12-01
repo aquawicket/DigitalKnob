@@ -16,8 +16,8 @@ dk_load(dk_builder)
 
 ### DEPEND ###
 #dk_depend(libgcc)
-dk_depend(python3)
-dk_depend(msys2)
+dk_validate(PYTHON3 "dk_depend(python3)")
+dk_validate(MSYS2 "dk_depend(msys2)")
 
 ### IMPORT ###
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")

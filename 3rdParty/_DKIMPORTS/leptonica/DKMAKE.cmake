@@ -21,7 +21,7 @@ dk_depend(libpng)
 dk_depend(libwebp)
 #dk_depend(sw)
 dk_depend(tiff)
-dk_depend(zlib)
+dk_validate(ZLIB "dk_depend(zlib)")
 
 ### IMPORT ###
 dk_import(https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip)

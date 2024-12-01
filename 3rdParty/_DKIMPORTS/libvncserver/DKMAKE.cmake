@@ -19,7 +19,7 @@ dk_depend(libpng)
 dk_depend(libsystemd-dev)
 dk_depend(openssl)
 dk_depend(sdl)
-dk_depend(zlib)
+dk_validate(ZLIB "dk_depend(zlib)")
 
 ### IMPORT ###
 dk_import(https://github.com/LibVNC/libvncserver/archive/f7735c48.zip)

@@ -21,7 +21,7 @@ if(MAC_HOST)
 	dk_depend(automake)
 elseif(CLANG OR MINGW OR UCRT)
 	dk_installPackage	(autotools)
-	dk_validate			(MSYS2_DIR "dk_depend(msys2)")
+	dk_validate			(MSYS2 "dk_depend(msys2)")
 	set					(ENV{ACLOCAL_PATH} "${MSYS2_DIR}/usr/share/aclocal")
 endif()
 

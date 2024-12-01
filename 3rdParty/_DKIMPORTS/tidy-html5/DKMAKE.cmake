@@ -9,7 +9,7 @@ dk_load(dk_builder)
 
 
 ### DEPEND ###
-dk_depend(zlib)
+dk_validate(ZLIB "dk_depend(zlib)")
 
 
 ### IMPORT ###

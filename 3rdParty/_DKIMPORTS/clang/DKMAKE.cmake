@@ -12,7 +12,7 @@ dk_load(dk_builder)
 #dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 #dk_getFileParam("${DKIMPORTS_DIR}/clang/clang.txt" VERSION)
 if(clang OR mingw OR ucrt)
-	dk_validate(MSYS2  		"dk_depend(msys2)")
+	dk_validate(MSYS2 "dk_depend(msys2)")
 endif()
 dk_installPackage(clang)
 	

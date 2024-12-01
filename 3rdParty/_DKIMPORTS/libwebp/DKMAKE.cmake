@@ -15,7 +15,7 @@ dk_depend(libjpeg-turbo)
 dk_depend(libpng)
 dk_depend(sdl)
 dk_depend(tiff)
-dk_depend(zlib)
+dk_validate(ZLIB "dk_depend(zlib)")
 
 ### IMPORT ###
 dk_import(https://github.com/webmproject/libwebp/archive/84b118c9.zip)

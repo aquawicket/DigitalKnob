@@ -10,7 +10,7 @@ dk_load(dk_builder)
 
 
 if(MSYSTEM)
-	dk_depend(msys2)
+	dk_validate(MSYS2 "dk_depend(msys2)")
 	#set(LIBGCC_VERSION "13.2.0")
 	set(LIBGCC_VERSION "14.2.0")
 	

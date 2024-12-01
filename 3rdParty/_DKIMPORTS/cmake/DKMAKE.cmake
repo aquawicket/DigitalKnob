@@ -54,7 +54,7 @@ elseif(WIN_HOST)
 		dk_set(CMAKE_DIR "${DKTOOLS_DIR}/${CMAKE_FOLDER}")
 		dk_findProgram(CMAKE_EXE cmake ${CMAKE_DIR})
 	elseif(CLANG OR MINGW OR UCRT)
-		dk_depend(msys2)
+		dk_validate(MSYS2 "dk_depend(msys2)")
 		dk_validate(MSYSTEM "dk_MSYSTEM()")
 		if(MSYSTEM)
 			dk_toLower(${MSYSTEM} msystem)
@@ -194,7 +194,7 @@ endif()
 	
 ### INSTALL PREBUILT CMAKE ###
 if(MSYSTEM)
-	dk_depend(msys2)
+	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_assertPath(MSYS2_DIR)
 	
 	dk_depend(bash)

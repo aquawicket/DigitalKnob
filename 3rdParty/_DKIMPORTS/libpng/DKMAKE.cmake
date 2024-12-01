@@ -14,7 +14,7 @@ dk_load(dk_builder)
 if(EMSCRIPTEN)
 	dk_depend(m)
 endif()
-dk_depend(zlib)
+dk_validate(ZLIB "dk_depend(zlib)")
 
 
 ### IMPORT ###

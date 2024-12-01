@@ -1,4 +1,4 @@
-dk_depend(zlib)
+dk_validate(ZLIB "dk_depend(zlib)")
 dk_depend(DK)
 
 

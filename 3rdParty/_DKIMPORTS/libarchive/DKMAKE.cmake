@@ -28,7 +28,7 @@ dk_depend(lz4)
 dk_depend(lzo)
 dk_depend(pcre2)
 dk_depend(xz)
-dk_depend(zlib)
+dk_validate(ZLIB "dk_depend(zlib)")
 dk_depend(zstd)
 
 

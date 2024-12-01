@@ -84,7 +84,7 @@ dk_return()
 
 
 #if(MSYSTEM)
-#	dk_depend(msys2)
+#	dk_validate(MSYS2 "dk_depend(msys2)")
 #	if(NOT EXISTS ${MSYS2_DIR})
 #		dk_fatal("MSYS2:${MSYS2_DIR} does not exist")
 #	endif()

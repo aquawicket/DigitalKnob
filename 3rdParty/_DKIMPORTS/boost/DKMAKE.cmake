@@ -20,7 +20,7 @@ dk_load(dk_builder)
 
 if(ANDROID)
 	dk_depend(android-ndk)	#version 21e or newer required
-	dk_depend(msys2)
+	dk_validate(MSYS2 "dk_depend(msys2)")
 endif()
 
 #dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
