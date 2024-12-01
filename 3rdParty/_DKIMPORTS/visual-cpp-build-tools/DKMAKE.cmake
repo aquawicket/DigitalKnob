@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ###### visual-cpp-build-tools ######
 dk_validate(host_triple "dk_host_triple()")
-if(NOT WIN_HOST)
+if(NOT MSVC)
 	dk_undepend(visual-cpp-build-tools)
 	dk_return()
 endif()
@@ -19,8 +19,8 @@ dk_set(VISUAL_CPP_BUILD_TOOLS_VERSION 	17)
 dk_set(VISUAL_CPP_BUILD_TOOLS_DL 		"https://aka.ms/vs/17/release/vs_BuildTools.exe")
 dk_assertPath(ProgramFiles)
 dk_set(VISUAL_CPP_BUILD_TOOLS 			"C:/Program Files (x86)/Microsoft Visual Studio")
-dk_assertPath(VISUAL_CPP_BUILD_TOOLS)
 #dk_set(VISUAL_CPP_BUILD_TOOLS 			"$ENV{ProgramFiles (x86)}/Microsoft Visual Studio")
+dk_assertPath(VISUAL_CPP_BUILD_TOOLS)
 dk_printVar(VISUAL_CPP_BUILD_TOOLS)
 
 # C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC
