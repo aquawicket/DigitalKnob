@@ -27,7 +27,8 @@ if(WIN)
 endif()
 
 ###### IMPORT ######
-dk_depend			(visualstudio)
+#dk_depend			(visualstudio)
+dk_depend			(visual-cpp-build-tools)
 dk_depend			(appkit)
 dk_depend			(build-essential)
 dk_depend			(libgtk2.0-dev)
