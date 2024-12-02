@@ -24,13 +24,6 @@ macro(dk_getOptionValue)
 		list(APPEND PARGV ${arg})
 	endforeach()
 	#message("PARGV = ${PARGV}")
-	
-	###### PARGN - Parent Function args ######
-	unset(PARGN)
-	foreach(arg IN LISTS ARGN)
-		list(APPEND PARGN ${arg})
-	endforeach()
-	#message("PARGN = ${PARGN}")
 
 	#########################################
 	
