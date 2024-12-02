@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_createFavIcon inpath outpath)
 	dk_debugFunc()
 	
-	dk_load(${DKIMPORTS_DIR}/imagemagick/DKMAKE.cmake)
+	dk_depend(imagemagick)
 	if(IMAGEMAGICK_CONVERT_EXE)
 		dk_executeProcess(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -define icon:auto-resize=16 ${outpath})
 	else()

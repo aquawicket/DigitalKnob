@@ -16,7 +16,7 @@ if(NOT DKCMAKE_DIR)
 	set(DKIMPORTS_DIR ${DK3RDPARTY}/_DKIMPORTS)
 endif()
 
-#dk_load(${DKIMPORTS_DIR}/msbuild/DKMAKE.cmake)
+#dk_depend(msbuild)
 #set(MSVC64_DIR "${MSVC}/Studio")
 #set(CMAKE_MAKE_PROGRAM ${MSVC64_DIR}/bin/make.exe CACHE FILEPATH "")
 #set(CMAKE_C_COMPILER ${MSVC64_DIR}/bin/vc)

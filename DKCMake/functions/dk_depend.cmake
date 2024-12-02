@@ -12,9 +12,16 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   to fill fill ZLIB with the path zlib is installed to.
 #
 function(dk_depend plugin)
+	dk_debugFunc(1)
+	
 	dk_toUpper("${plugin}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
-	dk_validate(${PLUGIN} "dk_dependB(${plugin})")
+	if((NOT ${PLUGIN}) OR NOT (${PLUGIN}_DIR))
+		dk_notice("loading ${PLUGIN} . . .")
+		dk_dependB(${plugin})
+	else()
+		#dk_notice("${PLUGIN} is already loaded")
+	endif()
 endfunction()
 
 

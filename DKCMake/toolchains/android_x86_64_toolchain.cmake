@@ -14,7 +14,7 @@ endif()
 
 include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 dk_load(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
+dk_depend(android-ndk)
 dk_load(${ANDROID_TOOLCHAIN_FILE})
 
 

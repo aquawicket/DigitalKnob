@@ -10,8 +10,7 @@ function(dk_gitCheckout)
 	message("dk_gitCheckout(${ARGV+})")
 	dk_debugFunc()
 	
-	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-	dk_validate(GIT_EXE "dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
+	dk_depend(git)
 	
 	execute_process(COMMAND "${GIT_EXE}" checkout ${ARGV0})
 endfunction()

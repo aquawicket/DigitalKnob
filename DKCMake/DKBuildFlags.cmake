@@ -131,26 +131,25 @@ dk_validate(TARGET_TRIPLE "dk_target_triple()")
 dk_validate(DKIMPORTS_DIR	"dk_DKIMPORTS_DIR()")
 
 ########### CORE DEPENDENCIES ############
-dk_validate(CMAKE_EXE 		"dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)")
+dk_depend(cmake)
 
 if(COSMO)
-	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
+	dk_depend(cosmocc)
 endif()
 if(MINGW)
-#	#dk_set(PROJECT_INCLUDE_DKPLUGINS 0)
 	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
 endif()
 if(MSYS)
 	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
 endif()
 if(LINUX_HOST)
-	dk_load(${DKIMPORTS_DIR}/build-essential/DKMAKE.cmake)
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	dk_depend(build-essential)
+	dk_depend(gcc)
 endif()
 if(DEFINED ENV{WSLENV})
-	dk_load(${DKIMPORTS_DIR}/wsl/DKMAKE.cmake)
+	dk_depend(wsl)
 endif()
-dk_validate(CMAKE_MAKE_PROGRAM		"dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)")
+dk_depend(make)
 
 
 
@@ -320,7 +319,7 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 #### android_arm32
 if(ANDROID_ARM32)
-	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
+	dk_depend(android-ndk)
 	
 	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_ARM32 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_ARM32 -std=c++1z)
@@ -354,7 +353,7 @@ endif()
 
 ### android_arm64
 if(ANDROID_ARM64)
-	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
+	dk_depend(android-ndk)
 	
 	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_ARM64 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_ARM64 -std=c++1z)
@@ -389,7 +388,7 @@ endif()
 
 ### Android x86
 if(ANDROID_X86)
-	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)	#(CMAKE_GENERATOR)
+	dk_depend(android-ndk)
 	
 	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_X86 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_X86 -std=c++1z)
@@ -418,7 +417,7 @@ endif()
 
 ### Android x86_64
 if(ANDROID_X86_64)
-	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)	#(CMAKE_GENERATOR)
+	dk_depend(android-ndk)
 	
 	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_X86_64 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_X86_64 -std=c++1z)
@@ -448,7 +447,7 @@ endif()
 
 ### COSMOPOLITAN ###
 if(cosmo)
-	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
+	dk_depend(cosmocc)
 	
 	dk_append(CMAKE_C_FLAGS							-DCOSMOS)# -std=gnu17)   # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ 
 	dk_append(CMAKE_CXX_FLAGS						-DCOSMOS)# -std=gnu++17) # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_
@@ -469,9 +468,8 @@ endif()
 
 ### Emscripten ###
 if(EMSCRIPTEN)
-	dk_load(${DKIMPORTS_DIR}/emsdk/DKMAKE.cmake)
-	#dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
-
+	dk_depend(emsdk)
+	
 	dk_append(CMAKE_C_FLAGS							-DEMSCRIPTEN -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS						-DEMSCRIPTEN -std=gnu++17)
 	dk_append(DKCONFIGURE_CFLAGS					-DEMSCRIPTEN -std=gnu11)
@@ -483,7 +481,7 @@ endif()
 
 ### iOS arm32 - XCODE ###
 if(IOS_ARM32)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	dk_depend(xcode)
 	
 	dk_set	 (CMAKE_TOOLCHAIN_FILE					${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOS_ARM32 -std=c17 -x objective-c)
@@ -498,7 +496,7 @@ endif()
 
 ### iOS_ARM64 - XCODE ###
 if(IOS_ARM64)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	dk_depend(xcode)
 	
 	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOS_ARM64 -std=c17 -x objective-c)
@@ -513,7 +511,7 @@ endif()
 
 ### iOS Simulator x86 - XCODE ###
 if(IOSSIM_X86)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	dk_depend(xcode)
 	
 	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOSSIM -DIOSSIM_X86 -std=c17 -x objective-c)
@@ -528,7 +526,7 @@ endif()
 
 ### iOS Simulator x86_64 - XCODE ###
 if(IOSSIM_X86_64)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	dk_depend(xcode)
 	
 	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c17 -x objective-c)
@@ -543,7 +541,7 @@ endif()
 
 ### Linux x86 ###
 if(LINUX_X86)
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	dk_depend(gcc)
 	
 	dk_append(CMAKE_C_FLAGS							-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
@@ -555,7 +553,7 @@ endif()
 
 #### Linux x86_64 ###
 if(LINUX_X86_64)
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	dk_depend(gcc)
 	
 	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
@@ -567,7 +565,7 @@ endif()
 
 ### Mac x86 - XCODE ###
 if(MAC_X86)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	dk_depend(xcode)
 	
 	dk_append(CMAKE_C_FLAGS							-DMAC i686 -DMAC_X86 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS						-DMAC i686 -DMAC_X86 -std=c++17 -x objective-c++)
@@ -580,7 +578,7 @@ endif()
 
 ### Mac x86_64 - XCODE ###
 if(MAC_X86_64)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
+	dk_depend(xcode)
 	
 	dk_append(CMAKE_C_FLAGS							-DMAC -DMAC_X86_64 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS						-DMAC -DMAC_X86_64 -std=c++17 -x objective-c++)
@@ -593,7 +591,7 @@ endif()
 
 ### Raspbery arm32 ###
 if(RASPBERRY_ARM32)
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	dk_depend(gcc)
 	
 	dk_append(CMAKE_C_FLAGS							-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
@@ -605,7 +603,7 @@ endif()
 
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	dk_depend(gcc)
 	
 	dk_append(CMAKE_C_FLAGS							-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
@@ -617,8 +615,8 @@ endif()
 
 ### Windows x86 - MSVC ###
 if(win_x86_msvc)
-	#dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
-	dk_load(${DKIMPORTS_DIR}/visual-cpp-build-tools/DKMAKE.cmake)
+	#dk_depend(visualstudio)
+	dk_depend(visual-cpp-build-tools)
 	
 	dk_append(CMAKE_C_FLAGS							/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS						/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
@@ -629,7 +627,7 @@ endif()
 ### Windows x86 - MINGW32 ###
 if(win_x86_mingw)
 	dk_set(MSYSTEM									MINGW32)
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	dk_depend(gcc)
 	
 	dk_append(CMAKE_C_FLAGS							-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
 	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
@@ -643,7 +641,7 @@ endif()
 ### Windows x86 - CLANG32 ###
 if(win_x86_clang)
 	dk_set(MSYSTEM 									CLANG32)
-	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
+	dk_depend(clang)
 	
 	dk_append(CMAKE_C_FLAGS							-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
 	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
@@ -656,8 +654,8 @@ endif()
 
 ### Windows x86_64 - MSVC ###
 if(win_x86_64_msvc)
-	#dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
-	dk_load(${DKIMPORTS_DIR}/visual-cpp-build-tools/DKMAKE.cmake)
+	#dk_depend(visualstudio)
+	dk_depend(visual-cpp-build-tools)
 	
 	dk_append(CMAKE_C_FLAGS							/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS						/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
@@ -669,7 +667,7 @@ endif()
 if(win_x86_64_clang)
 	dk_set(msystem 									clang64)
 	dk_set(MSYSTEM 									CLANG64)
-	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
+	dk_depend(clang)
 	
 	dk_append(DKFLAGS 								-DMSYSTEM=CLANG64)
 	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=CLANG64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
@@ -684,7 +682,7 @@ endif()
 ### Windows x86_64 - MINGW64 ###
 if(win_x86_64_mingw)
 	dk_set(MSYSTEM 									MINGW64)
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	dk_depend(gcc)
 	
 	dk_append(DKFLAGS 								-DMSYSTEM=MINGW64)
 	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
@@ -699,7 +697,7 @@ endif()
 ### Windows x86_64 - UCRT64 ###
 if(win_x86_64_ucrt)
 	dk_set(MSYSTEM 									UCRT64)
-	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
+	dk_depend(clang)
 	
 	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) #-D_WIN32_WINNT=0x0600
@@ -713,8 +711,8 @@ endif()
 ### Windows arm64 - CLANGARM64 ###
 if(win_arm64_clang)
 	dk_set(MSYSTEM 									CLANGARM64)
-	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
-
+	dk_depend(clang)
+	
 	dk_append(CMAKE_C_FLAGS							-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_ARM64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS						-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_ARM64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
@@ -855,13 +853,7 @@ endif()
 
 
 
-
-###### Set DKCMAKE_BUILD variable ######
-
-dk_printVar(DKCMAKE_BUILD)
-
-
-###### Set DKCONFIGURE_BUILD variable ######
+###### Set DKCMAKE_BUILD and DKCONFIGURE_BUILD variables ######
 if(EMSCRIPTEN)
 	dk_set(DKCMAKE_BUILD ${CMAKE_COMMAND} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 	dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
@@ -870,6 +862,6 @@ else()
 	dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 endif()
 
-
+dk_printVar(DKCMAKE_BUILD)
 #dk_printVar(CMAKE_C_FLAGS)
 #dk_printVar(CMAKE_CXX_FLAGS)

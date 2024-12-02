@@ -209,7 +209,7 @@ function(dk_generate)
 	
 	###### CMake Configure ######
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-    dk_validate(CMAKE_EXE "dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)")
+    dk_depend(cmake)
 	
 	dk_echo("")
 	dk_echo("****** CLEAR CMAKE CACHE ******")

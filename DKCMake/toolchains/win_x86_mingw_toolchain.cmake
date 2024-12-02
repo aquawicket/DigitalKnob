@@ -15,7 +15,7 @@ if(NOT DKCMAKE_DIR)
 	set(DKIMPORTS_DIR ${DK3RDPARTY}/_DKIMPORTS)
 endif()
 
-dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
+dk_depend(msys2)
 set(MINGW32_DIR "${MSYS2_DIR}/mingw32")
 set(CMAKE_MAKE_PROGRAM ${MINGW32_DIR}/bin/mingw32-make.exe CACHE FILEPATH "")
 set(CMAKE_C_COMPILER ${MINGW32_DIR}/bin/gcc.exe)

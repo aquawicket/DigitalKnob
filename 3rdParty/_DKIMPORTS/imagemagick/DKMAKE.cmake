@@ -13,8 +13,7 @@ dk_load(dk_builder)
 #dk_depend(ghostscript)
 
 if(WIN_HOST)
-	#dk_load	(${DKIMPORTS_DIR}/vc_redist/DKMAKE.cmake)
-	dk_depend	(vc_redist)
+	dk_depend(vc_redist)
 endif()
 
 
