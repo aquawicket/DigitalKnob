@@ -5,13 +5,14 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ imagemagick ############
 # https://github.com/ImageMagick/ImageMagick.git
 # https://imagemagick.org/index.php
 
 ### DEPEND ###
 #dk_depend(ghostscript)
 
+dk_validate(host_triple "dk_host_triple()")
 if(WIN_HOST)
 	dk_depend(vc_redist)
 endif()

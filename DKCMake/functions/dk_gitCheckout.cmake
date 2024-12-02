@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_gitCheckout)
 	message("dk_gitCheckout(${ARGV+})")
-	dk_debugFunc()
+	dk_debugFunc(1)
 	
 	dk_depend(git)
 	

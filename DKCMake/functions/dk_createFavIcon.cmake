@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@outpath	- Full path of the output file to save to (.ico)
 #
 function(dk_createFavIcon inpath outpath)
-	dk_debugFunc()
+	dk_debugFunc(2)
 	
 	dk_depend(imagemagick)
 	if(IMAGEMAGICK_CONVERT_EXE)
@@ -26,5 +26,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_createFavIcon(todo)
 endfunction()

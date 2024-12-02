@@ -21,19 +21,6 @@ function(dk_buildMain)
 #	endif()
 
 #	dk_printVar SHLVL		# https://stackoverflow.com/a/4511483/688352
-#	dk_printVar MSYSTEM
-#	#dk_printVar DKSCRIPT_PATH
-#	#dk_printVar DKSCRIPT_DIR
-#	#dk_printVar DKSCRIPT_NAME
-	
-	### Get the host_triple and other HOST variables
-#	dk_validate(host_triple 	"dk_host_triple()")
-#	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-#	dk_validate(DKIMPORTS_DIR 	"dk_DKIMPORTS_DIR()")
-#	dk_printVar(DKIMPORTS_DIR)
-#	dk_depend(git)
-#	dk_validate(DKBRANCH_DIR 	"dk_DKBRANCH_DIR()")
-
 	dk_assertPath(DKSCRIPT_DIR)
 	
 	while(1)

@@ -14,9 +14,7 @@ function(dk_gitCheckRemote)
 		#set(ahead -1)
 		#set(behind -1)
 		
-		#dk_printVar(DKBRANCH_DIR)
 		dk_cd("${DKBRANCH_DIR}")
-		#dk_printVar(PWD)
 		
 		dk_depend(git)
 

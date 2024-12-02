@@ -5,10 +5,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###############################################################################
 # dk_dependAll()
 #
-#	TODO
+#	Add ALL 3rdParty imports to the project. 'Used for testing'
 #
 function(dk_dependAll)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
 	set(DEPENDALL_FILE "")
 	

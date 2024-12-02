@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	https://stackoverflow.com/a/66755317/688352
 #
 function(dk_gitApplyPatch directory patch_file)
-	dk_debugFunc()
+	dk_debugFunc(2)
 	
 	dk_depend(git) # dk_import will push to the PLUGIN stack
 	if("${CURRENT_PLUGIN}" STREQUAL "GIT" AND PREV_PLUGIN)				
