@@ -14,7 +14,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_removeExtension path ret_var)
 	dk_debugFunc()
 	
-	dk_getOption2(NO_HALT)
+	dk_getOption(NO_HALT)
 	
 	string(FIND ${path} "." includes REVERSE)
 	if(${includes} EQUAL -1)

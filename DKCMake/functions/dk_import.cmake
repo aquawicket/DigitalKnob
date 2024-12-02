@@ -20,7 +20,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_import url)
 	dk_debugFunc()
 	
-	dk_getOption2(NO_HALT REMOVE)
+	dk_getOption(NO_HALT REMOVE)
 	
 	dk_importVariables(${url} ${ARGN})
 	dk_assertVar(CURRENT_PLUGIN)
@@ -64,7 +64,7 @@ function(dk_import url)
 	endif()
 	
 	#dk_getOption(PATCH ${ARGV})
-	dk_getOption2(PATCH)
+	dk_getOption(PATCH)
 	if(PATCH)
 		dk_patch(${${CURRENT_PLUGIN}_IMPORT_NAME} ${${CURRENT_PLUGIN}_DIR})
 	endif()

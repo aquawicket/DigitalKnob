@@ -17,7 +17,7 @@ function(dk_build path) #target NO_HALT
 		dk_return()
 	endif()
 	
-	dk_getOption2(NO_HALT)
+	dk_getOption(NO_HALT)
 
 	#dk_assertPath(${path})	
 	set(target ${ARGN})

@@ -10,8 +10,8 @@ function(dk_smartExtract src dest)
     dk_debugFunc()
 	dk_debug("dk_smartExtract(${ARGV})")
  
-	dk_getOptionValues2(NO_HALT)
-	#dk_getOptionValues2(EXTRACT_PATH)
+	dk_getOptionValues(NO_HALT)
+	#dk_getOptionValues(EXTRACT_PATH)
 	
     #set(src ${ARGV1})
     #set(dest ${ARGV2})

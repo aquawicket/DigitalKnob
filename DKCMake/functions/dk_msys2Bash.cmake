@@ -16,9 +16,9 @@ function(dk_msys2Bash)
 	dk_assertVar(MSYSTEM)
 	dk_assertVar(MSYS2)
 	
-	dk_getOption2(NO_HALT)
-	dk_getOption2(NOECHO)
-	dk_getOptionValue2(OUTPUT_VARIABLE)
+	dk_getOption(NO_HALT)
+	dk_getOption(NOECHO)
+	dk_getOptionValue(OUTPUT_VARIABLE)
 	
 	set(EXTRA_ARGS "")
 	

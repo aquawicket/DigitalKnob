@@ -11,7 +11,7 @@ function(dk_getDirectories path rtn_var)
     dk_debugFunc()
 	#dk_verbose("dk_getDirectories(${path}, ${rtn_var})")
     
-	dk_getOption2(RECURSIVE)
+	dk_getOption(RECURSIVE)
 	
 	if(RECURSIVE)
 		file(GLOB_RECURSE children LIST_DIRECTORIES true ${path}/*)

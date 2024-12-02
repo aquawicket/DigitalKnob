@@ -34,85 +34,85 @@ function(dk_executeProcess)
 	dk_debugFunc()
 	
 	set(cmd1 										${ARGV})
-	dk_getOptionValues2(COMMAND)
+	dk_getOptionValues(COMMAND)
 	#list(REMOVE_ITEM cmd1 COMMAND)
 	
-	dk_getOptionValue2(WORKING_DIRECTORY)
+	dk_getOptionValue(WORKING_DIRECTORY)
 	#list(REMOVE_ITEM cmd1 WORKING_DIRECTORY)
 	#list(REMOVE_ITEM cmd1 ${WORKING_DIRECTORY})
 	
-	dk_getOptionValue2(TIMEOUT)
+	dk_getOptionValue(TIMEOUT)
 	#list(REMOVE_ITEM cmd1 TIMEOUT)
 	#list(REMOVE_ITEM cmd1 ${TIMEOUT})
 	
-	dk_getOptionValue2(RESULT_VARIABLE)
+	dk_getOptionValue(RESULT_VARIABLE)
 	#list(REMOVE_ITEM cmd1 RESULT_VARIABLE)
 	#list(REMOVE_ITEM cmd1 ${RESULT_VARIABLE})
 	
-	dk_getOptionValue2(RESULTS_VARIABLE)
+	dk_getOptionValue(RESULTS_VARIABLE)
 	#list(REMOVE_ITEM cmd1 RESULTS_VARIABLE)
 	#list(REMOVE_ITEM cmd1 ${RESULTS_VARIABLE})
 	
-	dk_getOptionValue2(OUTPUT_VARIABLE)
+	dk_getOptionValue(OUTPUT_VARIABLE)
 	#list(REMOVE_ITEM cmd1 OUTPUT_VARIABLE)
 	#list(REMOVE_ITEM cmd1 ${OUTPUT_VARIABLE})
 	
-	dk_getOptionValue2(ERROR_VARIABLE)
+	dk_getOptionValue(ERROR_VARIABLE)
 	#list(REMOVE_ITEM cmd1 ERROR_VARIABLE)
 	#list(REMOVE_ITEM cmd1 ${ERROR_VARIABLE})
 	
-	dk_getOptionValue2(INPUT_FILE)
+	dk_getOptionValue(INPUT_FILE)
 	#list(REMOVE_ITEM cmd1 INPUT_FILE)
 	#list(REMOVE_ITEM cmd1 ${INPUT_FILE})
 	
-	dk_getOptionValue2(OUTPUT_FILE)
+	dk_getOptionValue(OUTPUT_FILE)
 	#list(REMOVE_ITEM cmd1 OUTPUT_FILE)
 	#list(REMOVE_ITEM cmd1 ${OUTPUT_FILE})
 	
-	dk_getOptionValue2(ERROR_FILE)
+	dk_getOptionValue(ERROR_FILE)
 	#list(REMOVE_ITEM cmd1 ERROR_FILE)
 	#list(REMOVE_ITEM cmd1 ${ERROR_FILE})
 	
-	dk_getOption2(OUTPUT_QUIET)
+	dk_getOption(OUTPUT_QUIET)
 	#list(REMOVE_ITEM cmd1 OUTPUT_QUIET)
 	
-	dk_getOption2(ERROR_QUIET)
+	dk_getOption(ERROR_QUIET)
 	#list(REMOVE_ITEM cmd1 ERROR_QUIET)
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
-		dk_getOptionValue2(COMMAND_ECHO)
+		dk_getOptionValue(COMMAND_ECHO)
 	endif()
 	#list(REMOVE_ITEM cmd1 COMMAND_ECHO)
 	#list(REMOVE_ITEM cmd1 ${COMMAND_ECHO})
 	
-	dk_getOption2(OUTPUT_STRIP_TRAILING_WHITESPACE)
+	dk_getOption(OUTPUT_STRIP_TRAILING_WHITESPACE)
 	#list(REMOVE_ITEM cmd1 OUTPUT_STRIP_TRAILING_WHITESPACE)
 	
-	dk_getOption2(ERROR_STRIP_TRAILING_WHITESPACE)
+	dk_getOption(ERROR_STRIP_TRAILING_WHITESPACE)
 	#list(REMOVE_ITEM cmd1 ERROR_STRIP_TRAILING_WHITESPACE)
 	
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.8")
-		dk_getOptionValue2(ENCODING)
+		dk_getOptionValue(ENCODING)
 	endif()
 	#list(REMOVE_ITEM cmd1 ENCODING)
 	#list(REMOVE_ITEM cmd1 ${ENCODING})
 	
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")
-		dk_getOption2(ECHO_OUTPUT_VARIABLE)
-		dk_getOption2(ECHO_ERROR_VARIABLE)
+		dk_getOption(ECHO_OUTPUT_VARIABLE)
+		dk_getOption(ECHO_ERROR_VARIABLE)
 	endif()
 	#list(REMOVE_ITEM cmd1 ECHO_OUTPUT_VARIABLE)
 	#list(REMOVE_ITEM cmd1 ECHO_ERROR_VARIABLE)
 	
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.19")
-		dk_getOptionValue2(COMMAND_ERROR_IS_FATAL)
+		dk_getOptionValue(COMMAND_ERROR_IS_FATAL)
 	endif()
 	#list(REMOVE_ITEM cmd1 COMMAND_ERROR_IS_FATAL)
 	#list(REMOVE_ITEM cmd1 ${COMMAND_ERROR_IS_FATAL})
 	
-	dk_getOption2(NO_HALT REMOVE)
+	dk_getOption(NO_HALT REMOVE)
 	#list(REMOVE_ITEM cmd1 NO_HALT)
 	
-	dk_getOption2(NOECHO  REMOVE)
+	dk_getOption(NOECHO  REMOVE)
 	#list(REMOVE_ITEM cmd1 NOECHO)
 
 

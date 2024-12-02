@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_buildLog entry)
 	dk_debugFunc()
 	
-	dk_getOptionValue2(PATH)
+	dk_getOptionValue(PATH)
 	
 	set(msg "${entry} = ${${entry}}")
 	dk_info("${msg}")

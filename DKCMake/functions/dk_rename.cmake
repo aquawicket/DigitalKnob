@@ -15,8 +15,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_rename from to) # FLAGS: OVERWRITE, NO_HALT
 	dk_debugFunc()
 	
-	dk_getOption2(OVERWRITE)
-	dk_getOption2(NO_HALT)
+	dk_getOption(OVERWRITE)
+	dk_getOption(NO_HALT)
 	
 	dk_info("Renameing ${from} to ${to}")
 	if(NOT EXISTS ${from})

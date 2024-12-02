@@ -44,31 +44,31 @@ function(dk_importVariables url)
 	message("dk_importVariables(${ARGV})")
 	
 	unset(BRANCH)
-	dk_getOptionValue2(BRANCH) 	# master
+	dk_getOptionValue(BRANCH) 	# master
 	#dk_printVar(BRANCH)
 	
 	unset(FOLDER)
-	dk_getOptionValue2(FOLDER)	# zlib-master
+	dk_getOptionValue(FOLDER)	# zlib-master
 	#dk_printVar(FOLDER)
 	
 	unset(NAME)
-	dk_getOptionValue2(NAME)	# zlib
+	dk_getOptionValue(NAME)	# zlib
 	#dk_printVar(NAME)
 	
 	unset(PATH)
-	dk_getOptionValue2(PATH)	# C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	dk_getOptionValue(PATH)	# C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	#dk_printVar(PATH)
 	
 	unset(ROOT)
-	dk_getOptionValue2(ROOT)	# C:/Users/Administrator/digitalknob/Development/3rdParty
+	dk_getOptionValue(ROOT)	# C:/Users/Administrator/digitalknob/Development/3rdParty
 	#dk_printVar(ROOT)
 	
 	unset(TAG)
-	dk_getOptionValue2(TAG)		# v1.3.1
+	dk_getOptionValue(TAG)		# v1.3.1
 	#dk_printVar(TAG)
 	
 	unset(VERSION)
-	dk_getOptionValue2(VERSION)	# master
+	dk_getOptionValue(VERSION)	# master
 	#dk_printVar(VERSION)
 	
 	

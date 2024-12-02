@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_findLibrary name)
 	dk_debugFunc()
 	
-	dk_getOption2(NO_HALT)
+	dk_getOption(NO_HALT)
 	
 	find_library(${name}_LIBRARY ${name} ${ARGN})
 	if(NOT WIN)

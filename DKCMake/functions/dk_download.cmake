@@ -22,7 +22,7 @@ endif()
 function(dk_download url) # dest_path #NO_HALT
 	dk_debugFunc(1 3)
 	
-	dk_getOption2(NO_HALT REMOVE)
+	dk_getOption(NO_HALT REMOVE)
 	
 	set(dest_path ${ARGN})						# C:/Users/Administrator/Downloads
 	message("dest_path = ${dest_path}")

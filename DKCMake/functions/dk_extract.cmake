@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_extract src dest)
 	dk_debugFunc()
 	
-	dk_getOption2(NO_HALT  REMOVE)
+	dk_getOption(NO_HALT  REMOVE)
 	
 	if(NOT EXISTS ${dest})
 		dk_makeDirectory(${dest})
