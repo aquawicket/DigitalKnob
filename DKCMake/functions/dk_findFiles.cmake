@@ -15,7 +15,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_findFiles path pattern rtn_var)
 	dk_debugFunc()
 	
-	dk_getOption(RECURSE ${ARGV})
+	dk_getOption2(RECURSE)
 
 	if(RECURSE)
 		file(GLOB_RECURSE findFiles "${path}/" "${path}/${pattern}")

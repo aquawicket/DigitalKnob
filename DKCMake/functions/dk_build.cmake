@@ -12,14 +12,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_build path) #target NO_HALT
 	dk_debugFunc()
-	dk_debug("dk_build(${ARGV})")
-	#dk_assertPath(${path})
 	
 	if(NOT QUEUE_BUILD)
 		dk_return()
 	endif()
 	
-	#dk_getOption(NO_HALT ${ARGV})
 	dk_getOption2(NO_HALT)
 
 	#dk_assertPath(${path})	

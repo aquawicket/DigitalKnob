@@ -15,10 +15,10 @@ function(dk_queueCommand)
 		dk_return()
 	endif()
 	
-	dk_getOptionValue(RESULT_VARIABLE	${ARGV})
-	dk_getOptionValue(RESULTS_VARIABLE 	${ARGV})
-	dk_getOptionValue(OUTPUT_VARIABLE 	${ARGV})
-	dk_getOptionValue(ERROR_VARIABLE 	${ARGV})
+	dk_getOptionValue2(RESULT_VARIABLE)
+	dk_getOptionValue2(RESULTS_VARIABLE)
+	dk_getOptionValue2(OUTPUT_VARIABLE)
+	dk_getOptionValue2(ERROR_VARIABLE)
 	
 	dk_command(${ARGV})
 	

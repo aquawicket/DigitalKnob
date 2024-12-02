@@ -15,9 +15,11 @@ function(dk_msys2Bash)
 	dk_assertVar(MINGW)
 	dk_assertVar(MSYSTEM)
 	dk_assertVar(MSYS2)
-	dk_getOption(NO_HALT ${ARGV})
-	dk_getOption(NOECHO ${ARGV})
-	dk_getOptionValue(OUTPUT_VARIABLE ${ARGV})
+	
+	dk_getOption2(NO_HALT)
+	dk_getOption2(NOECHO)
+	dk_getOptionValue2(OUTPUT_VARIABLE)
+	
 	set(EXTRA_ARGS "")
 	
 	if(OUTPUT_VARIABLE)

@@ -17,7 +17,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	dk_debugFunc()
 	
-	dk_getOption(NO_HALT  ${ARGV} REMOVE)
+	dk_getOption2(NO_HALT  REMOVE)
 	
 	set(PLUGIN_IMPORT_NAME 	${${PLUGIN_VAR_PREFIX}_IMPORT_NAME})
 	set(PLUGIN_URL 			${${PLUGIN_VAR_PREFIX}_URL})

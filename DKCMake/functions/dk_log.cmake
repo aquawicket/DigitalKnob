@@ -126,7 +126,7 @@ dk_if(NOT DEFINED FATAL_HALT      [[ set(FATAL_HALT 		1 				CACHE INTERNAL '') ]
 function(dk_log)
 	#dk_debugFunc()
 	
-	dk_getOption(NO_HALT  ${ARGV} REMOVE)
+	dk_getOption2(NO_HALT REMOVE)
 	
 	if(NOT ENABLE_dk_log)
 		dk_return()

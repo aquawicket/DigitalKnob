@@ -15,6 +15,7 @@ macro(dk_getParameter name rtn_var)
 	dk_debugFunc()
 	
 	dk_getOptionValue(${name} ${ARGN})
+	#dk_getOptionValue2(${name})
 	set(${rtn_var} ${${name}})
 	
 # DEBUG

@@ -13,7 +13,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_delete)
 	dk_debugFunc(1 2)
 	
-	#dk_getOption(NO_HALT ${ARGV} REMOVE)
 	dk_getOption2(NO_HALT REMOVE)
 
 	if(NOT EXISTS "${ARGN}")
