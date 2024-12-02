@@ -14,7 +14,7 @@ dk_DKCACHE_DIR() {
 
 	############ GET ############
 	else
-		dk_call dk_validate DKHOME_DIR "dk_DKHOME_DIR" 
+		dk_call dk_validate DKHOME_DIR "dk_call dk_DKHOME_DIR" 
 		export DKCACHE_DIR="${DKHOME_DIR}/.dk"  
 	fi 
 	if [ ! -e "${DKCACHE_DIR}" ]; then

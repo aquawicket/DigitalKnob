@@ -18,7 +18,7 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NO_HALT
 	dk_getOption(OVERWRITE)
 	dk_getOption(NO_HALT)
 	
-	dk_info("Renameing ${from} to ${to}")
+	dk_debug("Renameing ${from} to ${to}")
 	if(NOT EXISTS ${from})
 		if(NOT NO_HALT)
 			dk_fatal("from:${from} not found")
@@ -38,7 +38,6 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NO_HALT
 	
 	file(RENAME ${from} ${to})
 endfunction()
-dk_createOsMacros("dk_rename")
 
 
 
@@ -47,5 +46,5 @@ dk_createOsMacros("dk_rename")
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_rename(todo)
 endfunction()
