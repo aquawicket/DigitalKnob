@@ -21,15 +21,13 @@ endif()
 #
 function(dk_download url) # dest_path #NO_HALT
 	dk_debugFunc(1 3)
-	message("dk_download(${ARGV})")
-	dk_getOption(NO_HALT ${ARGV} REMOVE)
-	list(REMOVE_ITEM ARGN NO_HALT)
+	
+	#dk_getOption(NO_HALT ${ARGV} REMOVE)
+	#list(REMOVE_ITEM ARGN NO_HALT)
+	dk_getOption2(NO_HALT REMOVE)
 	
 	set(dest_path ${ARGN})						# C:/Users/Administrator/Downloads
 	message("dest_path = ${dest_path}")
-	
-	
-	
 	
 	# Setup all url variables
 	#if(NOT url)
