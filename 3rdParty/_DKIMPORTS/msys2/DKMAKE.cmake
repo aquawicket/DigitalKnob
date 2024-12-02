@@ -13,13 +13,22 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\{060aa283-cf16-4aad-9250-bd91ab4c3d2f}
 #
 
+
 ### only accept windows hosts
 dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
-	continue()
+	return()
 endif()
 
+### Get Variables ###
+dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
+dk_importVariables(${MSYS2_DL})
+dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
+if((NOT DKUPDATE) AND (EXISTS ${MSYS2_EXE}))
+	dk_notice("MSYS2_EXE is already installed, returning")
+	return()
+endif()
 
 
 ### Set CMAKE_GENERATOR ###
@@ -33,11 +42,6 @@ if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
 	dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
 endif()
 
-
-### Get Variables ###
-dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
-dk_importVariables(${MSYS2_DL})
-dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
 
 ### INSTALL ###
 if(NOT EXISTS ${MSYS2_EXE})

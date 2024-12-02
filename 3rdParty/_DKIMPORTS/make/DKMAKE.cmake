@@ -8,11 +8,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ############ make #############
 # https://packages.msys2.org/base/make
-dk_load(dk_builder)
+if((NOT DKUPDATE) AND (EXISTS ${CMAKE_MAKE_PROGRAM}))
+	dk_notice("CMAKE_MAKE_PROGRAM is already set, returning")
+	dk_return()
+endif()
 
-#if(CMAKE_MAKE_PROGRAM)
-#	return()
-#endif()
 
 #if(WIN_HOST)
 #	if(DEFINED ENV{MSYSTEM})
@@ -23,12 +23,12 @@ dk_load(dk_builder)
 #endif()
 
 
-
+dk_validate(target_triple "dk_target_triple()")
 if(android)
 	if(WIN_HOST)
+		#dk_depend(pacman)
+		#dk_installPackage("make")
 		dk_depend(msys2)
-		dk_depend(pacman)
-		dk_installPackage("make")
 		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang64/bin")
 	else()
 		dk_findProgram(CMAKE_MAKE_PROGRAM make)
@@ -36,10 +36,9 @@ if(android)
 
 elseif(cosmo)
 	if(WIN_HOST)
-		dk_depend(pacman)
-		dk_installPackage(make)
-		dk_findProgram(CMAKE_MAKE_PROGRAM make "${MSYS2_DIR}/usr/bin")
+		dk_depend(msys2)
 		dk_exportVars(PATH "${MSYS2_DIR}/usr/bin;$ENV{PATH}")
+		dk_findProgram(CMAKE_MAKE_PROGRAM make "${MSYS2_DIR}/usr/bin")
 	else()
 		dk_findProgram(CMAKE_MAKE_PROGRAM make)
 	endif()
@@ -47,7 +46,6 @@ elseif(cosmo)
 elseif(emscripten)
 #	if(WIN_HOST)
 #		dk_depend(msys2)
-#		dk_depend(pacman)
 #		dk_installPackage(make)
 #		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang64/bin")
 #	else()
@@ -85,19 +83,12 @@ elseif(win_x86_64_ucrt)
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/ucrt64/bin")
 
 elseif(win_x86_msvc)
-	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-	#dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visual-cpp-build-tools/DKMAKE.cmake)")
 	dk_depend(visual-cpp-build-tools)
 	dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUAL_CPP_BUILD_TOOLS})
 	
 elseif(win_x86_64_msvc)
-	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-	#dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visual-cpp-build-tools/DKMAKE.cmake)")
 	dk_depend(visual-cpp-build-tools)
 	dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUAL_CPP_BUILD_TOOLS})
-	
-#else()
-#	dk_findProgram(CMAKE_MAKE_PROGRAM make) #/usr/bin)
 	
 endif()
 

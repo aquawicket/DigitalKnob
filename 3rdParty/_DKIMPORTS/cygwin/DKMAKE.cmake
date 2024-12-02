@@ -4,7 +4,7 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
-
+set(CYGWIN 1)
 ############ cgywin ############
 # https://www.cygwin.com
 # https://cygwin.com/faq/faq.html#faq.setup.cli
