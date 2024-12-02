@@ -15,17 +15,18 @@ dk_load(dk_builder)
 #  cmake gui to get everything to compile.
 #
 #  CMAKE_C_STANDARD_LIBRARIES
-#  -lshlwapi -lCfgmgr32 -lSetupapi -lwinmm
+#      -lshlwapi -lCfgmgr32 -lSetupapi -lwinmm
 #
 #  CMAKE_EXE_LINKER_FLAGS 
-#  C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2maind.a
-#  C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2d.a
+#      C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2maind.a
+#      C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2d.a
 #
-# freetype also needed a folder moved up one heirarchy level
+#  freetype also needed a folder moved up one heirarchy level
 # 
-# -DSDL2_DIR=${SDL}/${triple}/Debug
+#  -DSDL2_DIR=${SDL}/${triple}/Debug
 ######################################################################################################################## 
- 
+
+
 ### rmlui dependencies ###
 dk_depend(freetype)
 dk_depend(glfw)
@@ -35,30 +36,8 @@ dk_depend(harfbuzz)
 dk_depend(lunasvg)
 dk_depend(rlottie)
 
-# rmlui sample dependencies
-set(RMLUI_SAMPLES OFF)
-if(RMLUI_SAMPLES)
-	dk_depend(cfgmgr32)
-	dk_depend(imm32)
-	dk_depend(libjpeg-turbo)
-	dk_depend(libpng)
-	dk_depend(pthread)
-	dk_depend(sdl)
-	dk_depend(sdl_image)
-	dk_depend(setupapi)
-	dk_depend(sfml)
-	dk_depend(shlwapi)
-	dk_depend(tiff)
-	dk_depend(version)
-	dk_depend(winmm)
-	dk_depend(xz)
-	dk_depend(zlib)
-	dk_depend(zstd)
-	set(RMLUI_BACKEND "-DRMLUI_BACKEND=${RMLUI_BACKEND}")
-endif()
 
 set(rmlui_all 0)
-
 set(rmlui_core 1)
 set(rmlui_debugger 1)
 set(rmlui_shell 0)
@@ -82,69 +61,105 @@ set(rmlui_UnitTests 0)
 set(rmlui_VisualTests 0)
 set(rmlui_Benchmarks 0)
 
+
+# rmlui sample dependencies
+set(RMLUI_SAMPLES OFF)
+if(RMLUI_SAMPLES)
+	dk_depend(cfgmgr32)
+	dk_depend(imm32)
+	dk_depend(libjpeg-turbo)
+	dk_depend(libpng)
+	dk_depend(pthread)
+	dk_depend(sdl)
+	dk_depend(sdl_image)
+	dk_depend(setupapi)
+	dk_depend(sfml)
+	dk_depend(shlwapi)
+	dk_depend(tiff)
+	dk_depend(version)
+	dk_depend(winmm)
+	dk_depend(xz)
+	dk_depend(zlib)
+	dk_depend(zstd)
+	set(RMLUI_BACKEND "-DRMLUI_BACKEND=${RMLUI_BACKEND}")
+endif()
+
+
 ### IMPORT ###
 dk_import(https://github.com/mikke89/RmlUi/archive/a903d8f7.zip)
 
+
 ### PATCH ###
 dk_gitApplyPatch("${RMLUI_DIR}" "${DKIMPORTS_DIR}/rmlui/rmlui.patch")
+
 
 ### LINK ###
 dk_define		(RMLUI_STATIC_LIB)
 dk_include		(${RMLUI_DIR}/Include	RML_INCLUDE_DIR)
 dk_include		(${RMLUI_DIR}/Source 	RML_INCLUDE_DIR2)
+
 dk_addTarget	(rmlui core)
 dk_addTarget	(rmlui debugger)
 dk_addTarget	(rmlui shell)
 dk_addTarget	(rmlui treeview)
 dk_addTarget	(rmlui invaders)
 
-if(rmlui_core OR rmlui_all)
+if(rmlui_all OR rmlui_core)
+	dk_define				(HAVE_rmlui_core)
 	if(MSVC)
-		WIN_dk_libDebug		(${RMLUI_CONFIG_DIR}/Source/Core/${DEBUG_DIR}/rmlui.lib)
-		WIN_dk_libRelease	(${RMLUI_CONFIG_DIR}/Source/Core/${RELEASE_DIR}/rmlui.lib)
+		dk_libDebug			(${RMLUI_CONFIG_DIR}/Source/Core/${DEBUG_DIR}/rmlui.lib)
+		dk_libRelease		(${RMLUI_CONFIG_DIR}/Source/Core/${RELEASE_DIR}/rmlui.lib)
 	else()
 		dk_libDebug			(${RMLUI_DEBUG_DIR}/Source/Core/librmlui.a)
 		dk_libRelease		(${RMLUI_RELEASE_DIR}/Source/Core/librmlui.a)
 	endif()
 endif()
 
-if(rmlui_debugger OR rmlui_all)
+if(rmlui_all OR rmlui_debugger)
 	dk_define				(HAVE_rmlui_RmlDebugger)
 	dk_define				(HAVE_rmlui_debugger)
 	if(MSVC)
-		WIN_dk_libDebug		(${RMLUI_CONFIG_DIR}/Source/Debugger/${DEBUG_DIR}/rmlui_debugger.lib)
-		WIN_dk_libRelease	(${RMLUI_CONFIG_DIR}/Source/Debugger/${RELEASE_DIR}/rmlui_debugger.lib)
+		dk_libDebug			(${RMLUI_CONFIG_DIR}/Source/Debugger/${DEBUG_DIR}/rmlui_debugger.lib)
+		dk_libRelease		(${RMLUI_CONFIG_DIR}/Source/Debugger/${RELEASE_DIR}/rmlui_debugger.lib)
 	else()
 		dk_libDebug			(${RMLUI_DEBUG_DIR}/Source/Debugger/librmlui_debugger.a)
         dk_libRelease		(${RMLUI_RELEASE_DIR}/Source/Debugger/librmlui_debugger.a)
 	endif()
 endif()
 
-if(rmlui_shell OR rmlui_all)
+if(rmlui_all OR rmlui_shell)
 	dk_define				(HAVE_rmlui_shell)
 	if(MSVC)
-		WIN_dk_libDebug		(${RMLUI_DEBUG_DIR}/Samples/shell/librmlui_shell.lib)
-		WIN_dk_libRelease	(${RMLUI_RELEASE_DIR}/Samples/shell/librmlui_shell.lib)
+		dk_libDebug			(${RMLUI_DEBUG_DIR}/Samples/shell/librmlui_shell.lib)
+		dk_libRelease		(${RMLUI_RELEASE_DIR}/Samples/shell/librmlui_shell.lib)
 	else()
 		dk_libDebug			(${RMLUI_DEBUG_DIR}/Samples/shell/librmlui_shell.a)
 		dk_libRelease		(${RMLUI_RELEASE_DIR}/Samples/shell/librmlui_shell.a)
 	endif()
 endif()
 
-if(rmlui_treeview OR rmlui_all)
+if(rmlui_all OR rmlui_treeview)
 	dk_define				(HAVE_rmlui_treeview)
-	WIN_dk_libDebug			(${RMLUI_DEBUG_DIR}/rmlui_sample_tree_view.exe)
-	WIN_dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_tree_view.exe)
-	UNIX_dk_libDebug		(${RMLUI_DEBUG_DIR}/rmlui_sample_tree_view)
-	UNIX_dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_tree_view)
+	if(WIN)
+		dk_libDebug			(${RMLUI_DEBUG_DIR}/rmlui_sample_tree_view.exe)
+		dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_tree_view.exe)
+	endif()
+	if(UNIX)
+		dk_libDebug			(${RMLUI_DEBUG_DIR}/rmlui_sample_tree_view)
+		dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_tree_view)
+	endif()
 endif()
 
-if(rmlui_invaders OR rmlui_all)
+if(rmlui_all OR rmlui_invaders)
 	dk_define				(HAVE_rmlui_invaders)
-	WIN_dk_libDebug			(${RMLUI_DEBUG_DIR}/rmlui_sample_invaders.exe)
-	WIN_dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_invaders.exe)
-	UNIX_dk_libDebug		(${RMLUI_DEBUG_DIR}/rmlui_sample_invaders)
-	UNIX_dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_invaders)
+	if(WIN)
+		dk_libDebug			(${RMLUI_DEBUG_DIR}/rmlui_sample_invaders.exe)
+		dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_invaders.exe)
+	endif()
+	if(UNIX)
+		dk_libDebug			(${RMLUI_DEBUG_DIR}/rmlui_sample_invaders)
+		dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_invaders)
+	endif()
 endif()
 
 ### GENERATE ###								
@@ -183,19 +198,15 @@ else()
 	if(rmlui_core)
 		dk_build(${RMLUI} rmlui_core)
 	endif()
-
 	if(rmlui_debugger)
 		dk_build(${RMLUI} rmlui_debugger)
 	endif()
-	
 	if(rmlui_shell)
 		dk_build(${RMLUI} shell)
 	endif()
-	
 	if(rmlui_treeview)
 		dk_build(${RMLUI} treeview)
 	endif()
-	
 	if(rmlui_invaders)
 		dk_build(${RMLUI} invaders)
 	endif()

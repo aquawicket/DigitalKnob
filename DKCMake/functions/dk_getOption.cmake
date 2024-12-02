@@ -46,5 +46,19 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	TEST_dk_getOption(OPTION1 OPTION2 OPTION3)
+endfunction()
+
+
+function(TEST_dk_getOption)
+	dk_debugFunc()
+	
+	dk_getOption(OPTION1 ${ARGV})
+	dk_getOption(OPTION2 ${ARGV} REMOVE)
+	#dk_getOption(OPTION3 ${ARGV})
+	
+	message("ARGV = ${ARGV}")
+	message("OPTION1 = ${OPTION1}")
+	message("OPTION2 = ${OPTION2}")
+	message("OPTION3 = ${OPTION3}")
 endfunction()
