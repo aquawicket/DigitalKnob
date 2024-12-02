@@ -19,24 +19,24 @@ macro(dk_getOption2)
 	dk_debugFunc()
 	
 	###### ARGV - dk_getOption2 args ######
-	message("ARGV  = ${ARGV}")
+	#message("ARGV  = ${ARGV}")
 	
 	###### ARGN - dk_getOption2 extra args ######
-	message("ARGN  = ${ARGN}")
+	#message("ARGN  = ${ARGN}")
 	
 	###### PARGV - Parent Function args ######
 	unset(PARGV)
 	foreach(arg IN LISTS ARGV)
 		list(APPEND PARGV ${arg})
 	endforeach()
-	message("PARGV = ${PARGV}")
+	#message("PARGV = ${PARGV}")
 	
 	###### PARGN - Parent Function args ######
 	unset(PARGN)
 	foreach(arg IN LISTS ARGN)
 		list(APPEND PARGN ${arg})
 	endforeach()
-	message("PARGN = ${PARGN}")
+	#message("PARGN = ${PARGN}")
 
 	#########################################
 	
@@ -46,20 +46,20 @@ macro(dk_getOption2)
 	cmake_parse_arguments(ARG REMOVE "" "" ${ARGV})
 
 	if(ARG_${NAME})
-		dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} set to 1")
 		set(${NAME} 1)
+		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} set to 1")
+		
 		if(ARG_REMOVE)
 			list(REMOVE_ITEM ARGV ${NAME})	# remove arg from the functions ARGV list
-			dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} REMOVED from ARGV")
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} REMOVED from ARGV")
+			
 			list(REMOVE_ITEM ARGN ${NAME})	# remove arg from the functions ARGN list
-			dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} REMOVED from ARGN")
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} REMOVED from ARGN")
 		endif()
 	else()
-		dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} unset")
 		unset(${NAME})
+		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} unset")
 	endif()
-	
-	message("")
 endmacro()
 
 
