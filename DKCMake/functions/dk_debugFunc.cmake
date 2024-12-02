@@ -17,13 +17,19 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #		endfunction()
 #
 macro(dk_debugFunc)
-	unset(DKARGC)
+	
+	#message("ARGV = ${ARGV}")
+	#message("ARGN = ${ARGN}")
+	
 	unset(DKARGV)
 	foreach(arg IN LISTS ARGV)
 		list(APPEND DKARGV ${arg})
 	endforeach()
+	#message("DKARGV = ${DKARGV}")	
+	
+	unset(DKARGC)
 	list(LENGTH DKARGV DKARGC)
-	#message("${DKARGC} ${DKARGV}")	
+	#message("DKARGC = ${DKARGC}")	
   
 	set(__FILE__ "${CMAKE_CURRENT_FUNCTION_LIST_FILE}" CACHE INTERNAL "")
     get_filename_component(__FILE__ "${__FILE__}" NAME CACHE INTERNAL "")
