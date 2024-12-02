@@ -66,10 +66,8 @@ endmacro()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	#TEST_function(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
-	#TEST_macro(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
-	TEST_function2(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
-	TEST_macro2(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
+	TEST_function(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
+	TEST_macro(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
 endfunction()
 
 function(TEST_function param1)
@@ -87,27 +85,5 @@ macro(TEST_macro param1)
 	dk_arguments(arg1 arg2 arg3)
 	message("")
 endmacro()
-
-macro(TEST_macro2 param1)
-	#dk_debugFunc()
-	
-	message("TEST_macro2(${ARGV})")
-	dk_arguments(arg1 arg2 arg3 arg4)
-	message("")
-	
-	TEST_function(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
-	TEST_macro(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
-endmacro()
-
-function(TEST_function2 param1)
-	#dk_debugFunc()
-	
-	message("TEST_function2(${ARGV})")
-	dk_arguments(arg1 arg2 arg3 arg4 arg5)
-	message("")
-	
-	TEST_function(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
-	TEST_macro(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
-endfunction()
 
 DKTEST()

@@ -34,30 +34,30 @@ macro(dk_getOptionValue)
 
 	#########################################
 	
-	set(NAME ${ARGV0})
-	cmake_parse_arguments(ARG "" "${NAME}" "" ${PARGV})
+	set(dk_getOptionValue_NAME ${ARGV0})
+	cmake_parse_arguments(ARG "" "${dk_getOptionValue_NAME}" "" ${PARGV})
 	cmake_parse_arguments(ARG REMOVE "" "" ${ARGN})
 	
-	if(ARG_${NAME})
-		set(${NAME} ${ARG_${NAME}})
-		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} set to ${ARG_${NAME}}")
+	if(ARG_${dk_getOptionValue_NAME})
+		set(${dk_getOptionValue_NAME} ${ARG_${dk_getOptionValue_NAME}})
+		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOptionValue_NAME} set to ${ARG_${dk_getOptionValue_NAME}}")
 		
 		if(ARG_REMOVE)
-			list(REMOVE_ITEM ARGV ${NAME})	# remove arg from the functions ARGV list
-			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} REMOVED from ARGV")
+			list(REMOVE_ITEM ARGV ${dk_getOptionValue_NAME})	# remove arg from the functions ARGV list
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOptionValue_NAME} REMOVED from ARGV")
 			
-			list(REMOVE_ITEM ARGV ${ARG_${NAME}})	# remove arg from the functions ARGV list
-			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${ARG_${NAME}} REMOVED from ARGV")
+			list(REMOVE_ITEM ARGV ${ARG_${dk_getOptionValue_NAME}})	# remove arg from the functions ARGV list
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${ARG_${dk_getOptionValue_NAME}} REMOVED from ARGV")
 			
-			list(REMOVE_ITEM ARGN ${NAME})	# remove arg from the functions ARGN list
-			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} REMOVED from ARGN")
+			list(REMOVE_ITEM ARGN ${dk_getOptionValue_NAME})	# remove arg from the functions ARGN list
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOptionValue_NAME} REMOVED from ARGN")
 			
-			list(REMOVE_ITEM ARGN ${ARG_${NAME}})	# remove arg from the functions ARGN list
-			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${ARG_${NAME}} REMOVED from ARGN")
+			list(REMOVE_ITEM ARGN ${ARG_${dk_getOptionValue_NAME}})	# remove arg from the functions ARGN list
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${ARG_${dk_getOptionValue_NAME}} REMOVED from ARGN")
 		endif()
 	else()
-		unset(${NAME})
-		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${NAME} unset")
+		unset(${dk_getOptionValue_NAME})
+		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOptionValue_NAME} unset")
 	endif()
 endmacro()
 
