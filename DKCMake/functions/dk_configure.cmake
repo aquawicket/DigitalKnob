@@ -43,6 +43,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		unset(configure_path)
 	endif()
 	
+	###### Configure with CMAKE ######
 	if(EXISTS ${cmakelists_path})
 		dk_info("Configuring with CMake")
 		dk_assertPath(DKCMAKE_DIR)
@@ -53,6 +54,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S" "${SOURCE_DIR}" "-B" "${BINARY_DIR}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
+		
 		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
 		dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
@@ -67,7 +69,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		return()
 	
 	
-	
+	###### Configure with ../../configure ######
 	#elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${SOURCE_DIR}/configure)
 	elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${configure_path})
 		# Configure with Autotools	(single_config)
@@ -96,6 +98,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		endif()
 		return()
 		
+	###### configure with command ######
 	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
 	else()
 		dk_notice("configure type not detected. running argument in bash environment")

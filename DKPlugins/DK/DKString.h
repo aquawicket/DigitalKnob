@@ -48,6 +48,7 @@
 #include <locale>
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstdlib> // mbstowcs_s, wcstombs_s
 //WARNING_ENABLE
 
 /*

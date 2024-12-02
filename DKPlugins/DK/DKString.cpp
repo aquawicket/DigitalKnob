@@ -31,7 +31,7 @@
 //WARNING_DISABLE
 #include <codecvt> //string <--> wsting conversion
 #include <cstdint>
-#include <cstdlib>  // mbstowcs_s, wcstombs_s
+
 //WARNING_ENABLE
 
 
@@ -202,9 +202,10 @@ DKString toString(const std::wstring& wstr) {
 	std::string str;
 	size_t size;
 	str.resize(wstr.length());
-#ifndef ANDROID	
-	wcstombs_s(&size, &str[0], str.size() + 1, wstr.c_str(), wstr.size());
-#endif
+
+	// wcstombs_s(&size, &str[0], str.size() + 1, wstr.c_str(), wstr.size());
+	size = wcstombs(&str[0], wstr.c_str(), wstr.size());
+
 	return str;
 }
 
@@ -312,9 +313,10 @@ std::wstring toWString(const DKString& str) {
 	std::wstring wstr;
 	size_t size;
 	wstr.resize(str.length());
-#ifndef ANDROID
-	mbstowcs_s(&size,&wstr[0],wstr.size()+1,str.c_str(),str.size());
-#endif
+
+	//mbstowcs_s(&size,&wstr[0],wstr.size()+1,str.c_str(),str.size());	
+	size = mbstowcs(&wstr[0], str.c_str(), str.size());
+
 	return wstr;
 }
 

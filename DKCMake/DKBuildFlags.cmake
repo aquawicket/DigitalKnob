@@ -470,7 +470,7 @@ endif()
 ### Emscripten ###
 if(EMSCRIPTEN)
 	dk_load(${DKIMPORTS_DIR}/emsdk/DKMAKE.cmake)
-	dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
+	#dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
 
 	dk_append(CMAKE_C_FLAGS							-DEMSCRIPTEN -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS						-DEMSCRIPTEN -std=gnu++17)
@@ -857,14 +857,16 @@ endif()
 
 
 ###### Set DKCMAKE_BUILD variable ######
-dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
+
 dk_printVar(DKCMAKE_BUILD)
 
 
 ###### Set DKCONFIGURE_BUILD variable ######
 if(EMSCRIPTEN)
+	dk_set(DKCMAKE_BUILD ${CMAKE_COMMAND} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 	dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
 else()
+	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 	dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 endif()
 

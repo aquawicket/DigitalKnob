@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_fileReplace("filePath, find, replace)
+# dk_fileReplace(filePath, find, replace)
 #
 #	TODO
 #
@@ -14,13 +14,22 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_fileReplace)
 	dk_debugFunc(3 4)
 	
-	file(READ ${ARGV0} fileString)
-	string(FIND "${fileString}" "${ARGV1}" found)
+	dk_assertVar(ARGV0)
+	set(filepath ${ARGV0})
+	
+	dk_assertVar(ARGV1)
+	set(find ${ARGV1})
+	
+	dk_assertVar(ARGV2)
+	set(replace ${ARGV2})
+	
+	file(READ ${filepath} fileString)
+	string(FIND "${fileString}" "${find}" found)
 	if(${found} GREATER -1)
-		dk_replaceAll("${fileString}" "${ARGV1}" "${ARGV2}" fileString)
-		dk_fileWrite(${ARGV0} "${fileString}")
+		dk_replaceAll("${fileString}" "${find}" "${replace}" fileString)
+		dk_fileWrite("${filepath}" "${fileString}")
 	else()
-		dk_warning("cannot find \"${ARGV1}\"  in  (${ARGV0})")
+		dk_warning("cannot find \"${find}\"  in  (${filepath})")
 	endif()
 endfunction()
 
@@ -32,7 +41,10 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	set(file "C:/Users/Administrator/digitalknob/Development/3rdParty/rlottie-e3026b1e/CMakeLists.txt")
-	dk_fileReplace(${filepath} "set(CMAKE_CXX_FLAGS_RELEASE" "#set(CMAKE_CXX_FLAGS_RELEASE")
-	dk_fileReplace(${filepath} "set(CMAKE_CXX_FLAGS_DEBUG" "#set(CMAKE_CXX_FLAGS_DEBUG")
+	dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0\;" 			"var USE_SDL = false\;")
+	#dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NO_HALT)
+	
+	set(filepath "C:/Users/Administrator/digitalknob/Development/3rdParty/rlottie-e3026b1e/CMakeLists.txt")
+	dk_fileReplace("${filepath}" "set(CMAKE_CXX_FLAGS_RELEASE" "#set(CMAKE_CXX_FLAGS_RELEASE")
+	dk_fileReplace("${filepath}" "set(CMAKE_CXX_FLAGS_DEBUG" "#set(CMAKE_CXX_FLAGS_DEBUG")
 endfunction()
