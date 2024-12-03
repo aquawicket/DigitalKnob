@@ -97,10 +97,7 @@ function(dk_installPackage package)
 	endif()
 
 	### Msys2 ###
-	if(NOT PACMAN_EXE)
-		dk_depend(msys2)
-		dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
-	endif()
+	dk_depend(pacman)
 	if(PACMAN_EXE)
 		dk_assertPath(PACMAN_EXE)
 		dk_validate(DKDONWLOAD_DIR "dk_DIGITALKNOB_DIR()")

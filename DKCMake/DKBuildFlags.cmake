@@ -128,23 +128,16 @@ dk_validate(TARGET_TRIPLE "dk_target_triple()")
 #	dk_fatal("NONE OF THE DKCMAKE TOOLCHAIN TYPES ARE SET")
 #endif()
 
-dk_validate(DKIMPORTS_DIR	"dk_DKIMPORTS_DIR()")
+
 
 ########### CORE DEPENDENCIES ############
 dk_depend(cmake)
 
-if(COSMO)
-	dk_depend(cosmocc)
-endif()
 if(MINGW)
 	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
 endif()
 if(MSYS)
 	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
-endif()
-if(LINUX_HOST)
-	dk_depend(build-essential)
-	dk_depend(gcc)
 endif()
 if(DEFINED ENV{WSLENV})
 	dk_depend(wsl)
@@ -320,6 +313,7 @@ dk_printVar(ENABLE_EXCEPTIONS)
 #### android_arm32
 if(ANDROID_ARM32)
 	dk_depend(android-ndk)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_ARM32 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_ARM32 -std=c++1z)
@@ -354,6 +348,7 @@ endif()
 ### android_arm64
 if(ANDROID_ARM64)
 	dk_depend(android-ndk)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_ARM64 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_ARM64 -std=c++1z)
@@ -389,6 +384,7 @@ endif()
 ### Android x86
 if(ANDROID_X86)
 	dk_depend(android-ndk)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_X86 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_X86 -std=c++1z)
@@ -418,6 +414,7 @@ endif()
 ### Android x86_64
 if(ANDROID_X86_64)
 	dk_depend(android-ndk)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_X86_64 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_X86_64 -std=c++1z)
@@ -448,6 +445,7 @@ endif()
 ### COSMOPOLITAN ###
 if(cosmo)
 	dk_depend(cosmocc)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DCOSMOS)# -std=gnu17)   # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ 
 	dk_append(CMAKE_CXX_FLAGS						-DCOSMOS)# -std=gnu++17) # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_
@@ -469,6 +467,7 @@ endif()
 ### Emscripten ###
 if(EMSCRIPTEN)
 	dk_depend(emsdk)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DEMSCRIPTEN -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS						-DEMSCRIPTEN -std=gnu++17)
@@ -482,6 +481,7 @@ endif()
 ### iOS arm32 - XCODE ###
 if(IOS_ARM32)
 	dk_depend(xcode)
+	dk_depend(make)
 	
 	dk_set	 (CMAKE_TOOLCHAIN_FILE					${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOS_ARM32 -std=c17 -x objective-c)
@@ -497,6 +497,7 @@ endif()
 ### iOS_ARM64 - XCODE ###
 if(IOS_ARM64)
 	dk_depend(xcode)
+	dk_depend(make)
 	
 	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOS_ARM64 -std=c17 -x objective-c)
@@ -512,6 +513,7 @@ endif()
 ### iOS Simulator x86 - XCODE ###
 if(IOSSIM_X86)
 	dk_depend(xcode)
+	dk_depend(make)
 	
 	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOSSIM -DIOSSIM_X86 -std=c17 -x objective-c)
@@ -527,6 +529,7 @@ endif()
 ### iOS Simulator x86_64 - XCODE ###
 if(IOSSIM_X86_64)
 	dk_depend(xcode)
+	dk_depend(make)
 	
 	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c17 -x objective-c)
@@ -541,7 +544,9 @@ endif()
 
 ### Linux x86 ###
 if(LINUX_X86)
+	#dk_depend(build-essential)
 	dk_depend(gcc)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
@@ -553,7 +558,9 @@ endif()
 
 #### Linux x86_64 ###
 if(LINUX_X86_64)
+	#dk_depend(build-essential)
 	dk_depend(gcc)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
@@ -566,6 +573,7 @@ endif()
 ### Mac x86 - XCODE ###
 if(MAC_X86)
 	dk_depend(xcode)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DMAC i686 -DMAC_X86 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS						-DMAC i686 -DMAC_X86 -std=c++17 -x objective-c++)
@@ -579,6 +587,7 @@ endif()
 ### Mac x86_64 - XCODE ###
 if(MAC_X86_64)
 	dk_depend(xcode)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DMAC -DMAC_X86_64 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS						-DMAC -DMAC_X86_64 -std=c++17 -x objective-c++)
@@ -591,7 +600,9 @@ endif()
 
 ### Raspbery arm32 ###
 if(RASPBERRY_ARM32)
+	#dk_depend(build-essential)
 	dk_depend(gcc)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
@@ -603,7 +614,9 @@ endif()
 
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
+	#dk_depend(build-essential)
 	dk_depend(gcc)
+	dk_depend(make)
 	
 	dk_append(CMAKE_C_FLAGS							-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
@@ -626,6 +639,7 @@ endif()
 
 ### Windows x86 - MINGW32 ###
 if(win_x86_mingw)
+	dk_set(msystem									mingw32)
 	dk_set(MSYSTEM									MINGW32)
 	dk_depend(gcc)
 	
@@ -640,6 +654,7 @@ endif()
 
 ### Windows x86 - CLANG32 ###
 if(win_x86_clang)
+	dk_set(msystem 									clang32)
 	dk_set(MSYSTEM 									CLANG32)
 	dk_depend(clang)
 	
@@ -681,6 +696,7 @@ endif()
 
 ### Windows x86_64 - MINGW64 ###
 if(win_x86_64_mingw)
+	dk_set(msystem 									mingw64)
 	dk_set(MSYSTEM 									MINGW64)
 	dk_depend(gcc)
 	
@@ -696,6 +712,7 @@ endif()
 
 ### Windows x86_64 - UCRT64 ###
 if(win_x86_64_ucrt)
+	dk_set(msystem 									ucrt64)
 	dk_set(MSYSTEM 									UCRT64)
 	dk_depend(clang)
 	
@@ -710,6 +727,7 @@ endif()
 
 ### Windows arm64 - CLANGARM64 ###
 if(win_arm64_clang)
+	dk_set(msystem 									clangarm64)
 	dk_set(MSYSTEM 									CLANGARM64)
 	dk_depend(clang)
 	
