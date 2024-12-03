@@ -3,7 +3,6 @@ message(STATUS "################ android_arm32_toolchain.cmake ###############")
 message(STATUS "##############################################################")
 
 dk_depend(android-ndk)
-#dk_load("${ANDROID_TOOLCHAIN_FILE}")
 set(CMAKE_TOOLCHAIN_FILE			"${ANDROID_TOOLCHAIN_FILE}")
 set(CMAKE_GENERATOR					"Unix Makefiles")
 set(ANDROID_PLATFORM				31)

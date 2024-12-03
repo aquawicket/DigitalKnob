@@ -305,152 +305,31 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 
 
-#################################################################
-## 
-##	This may be a good place to inject toolchains for the target
-##  Systems. This file runs before PROJECT(), it may work as an inline
-##	code set here, as well as an external toolchain.
-##
-#### android_arm32
+#################### TOOLCHAINS ##########################
+### android_arm32
 if(ANDROID_ARM32)
 	dk_load(${DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
-	
-	dk_depend(android-ndk)
-	dk_depend(make)
-	
-	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_ARM32 -std=c17)
-	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_ARM32 -std=c++1z)
-	dk_append(DKCONFIGURE_CFLAGS					-DANDROID -DANDROID_ARM32 -std=c17)
-	dk_append(DKCONFIGURE_CXXFLAGS					-DANDROID -DANDROID_ARM32 -std=c++1z)
-	dk_set(ANDROID_ABI								armeabi-v7a)
-	dk_set(ANDROID_CPP_FEATURES						rtti exceptions)
-	dk_set(ANDROID_STL								c++_static)
-	dk_set(ANDROID_STL_FORCE_FEATURES				1)
-	dk_set(ANDROID_TOOLCHAIN						clang)
-	dk_set(CMAKE_ANDROID_STL_TYPE					c++_static)
-	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
-	dk_append(DKCMAKE_FLAGS
-		"-DANDROID_CPP_FEATURES=rtti exceptions"
-		-DANDROID_ABI=${ANDROID_ABI}
-		-DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL}
-		-DANDROID_NDK=${ANDROID_NDK}
-		-DANDROID_PLATFORM=${ANDROID_PLATFORM}
-		-DANDROID_STL=${ANDROID_STL}
-		-DANDROID_STL_FORCE_FEATURES=${ANDROID_STL_FORCE_FEATURES}
-		-DANDROID_TOOLCHAIN=${ANDROID_TOOLCHAIN}
-		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
-	)
 endif()
-
-#### Android arm32 MSVC
-#if(ANDROID_ARM32 AND MSVC) #android_arm32_msvc
-	#dk_set(CMAKE_GENERATOR_PLATFORM			ARM)
-#endif()
-
 
 ### android_arm64
 if(ANDROID_ARM64)
-	dk_depend(android-ndk)
-	dk_depend(make)
-	
-	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_ARM64 -std=c17)
-	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_ARM64 -std=c++1z)
-	dk_append(DKCONFIGURE_CFLAGS					-DANDROID -DANDROID_ARM64 -std=c17)
-	dk_append(DKCONFIGURE_CXXFLAGS					-DANDROID -DANDROID_ARM64 -std=c++1z)
-	dk_set(ANDROID_ABI 								arm64-v8a)
-	dk_set(ANDROID_CPP_FEATURES						rtti exceptions)
-	dk_set(ANDROID_STL								c++_static)
-	dk_set(ANDROID_STL_FORCE_FEATURES				1)
-	dk_set(ANDROID_TOOLCHAIN						clang)
-	dk_set(CMAKE_ANDROID_STL_TYPE					c++_static)
-	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
-	dk_append(DKCMAKE_FLAGS 
-		"-DANDROID_CPP_FEATURES=rtti exceptions"
-		-DANDROID_ABI=${ANDROID_ABI}
-		-DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL}
-		-DANDROID_NDK=${ANDROID_NDK}
-		-DANDROID_PLATFORM=${ANDROID_PLATFORM}
-		-DANDROID_STL=${ANDROID_STL}
-		-DANDROID_STL_FORCE_FEATURES=${ANDROID_STL_FORCE_FEATURES}
-		-DANDROID_TOOLCHAIN=${ANDROID_TOOLCHAIN}
-		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
-	)
+	dk_load(${DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
 endif()
-
-
-#### Android arm64 MSVC
-#if(ANDROID_ARM64 AND MSVC)
-	#dk_set(CMAKE_GENERATOR_PLATFORM			ARM64)
-#endif()
-
 
 ### Android x86
 if(ANDROID_X86)
-	dk_depend(android-ndk)
-	dk_depend(make)
-	
-	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_X86 -std=c17)
-	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_X86 -std=c++1z)
-	dk_append(DKCONFIGURE_CFLAGS					-DANDROID -DANDROID_X86 -std=c17)
-	dk_append(DKCONFIGURE_CXXFLAGS					-DANDROID -DANDROID_X86 -std=c++1z)
-	dk_set(ANDROID_ABI								x86)
-	dk_set(ANDROID_CPP_FEATURES						rtti exceptions)
-	dk_set(ANDROID_STL								c++_static)
-	dk_set(ANDROID_STL_FORCE_FEATURES				1)
-	dk_set(ANDROID_TOOLCHAIN						clang)
-	dk_set(CMAKE_ANDROID_STL_TYPE					c++_static)
-	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
-	dk_append(DKCMAKE_FLAGS 
-		"-DANDROID_CPP_FEATURES=rtti exceptions"
-		-DANDROID_ABI=${ANDROID_ABI}
-		-DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL}
-		-DANDROID_NDK=${ANDROID_NDK}
-		-DANDROID_PLATFORM=${ANDROID_PLATFORM}
-		-DANDROID_STL=${ANDROID_STL}
-		-DANDROID_STL_FORCE_FEATURES=${ANDROID_STL_FORCE_FEATURES}
-		-DANDROID_TOOLCHAIN=${ANDROID_TOOLCHAIN}
-		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
-	)
+	dk_load(${DKCMAKE_DIR}/toolchains/android_x86_toolchain.cmake)
 endif()
-
 
 ### Android x86_64
 if(ANDROID_X86_64)
-	dk_depend(android-ndk)
-	dk_depend(make)
-	
-	dk_append(CMAKE_C_FLAGS							-DANDROID -DANDROID_X86_64 -std=c17)
-	dk_append(CMAKE_CXX_FLAGS						-DANDROID -DANDROID_X86_64 -std=c++1z)
-	dk_append(DKCONFIGURE_CFLAGS					-DANDROID -DANDROID_X86_64 -std=c17)
-	dk_append(DKCONFIGURE_CXXFLAGS					-DANDROID -DANDROID_X86_64 -std=c++1z)
-	dk_set(ANDROID_ABI								x86_64)
-	dk_set(ANDROID_CPP_FEATURES						rtti exceptions)
-	dk_set(ANDROID_STL								c++_static)
-	dk_set(ANDROID_STL_FORCE_FEATURES				1)
-	dk_set(ANDROID_TOOLCHAIN						clang)
-	dk_set(CMAKE_ANDROID_STL_TYPE					c++_static)
-	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
-	dk_append(DKCMAKE_FLAGS 
-		"-DANDROID_CPP_FEATURES=rtti exceptions"
-		-DANDROID_ABI=${ANDROID_ABI}
-		-DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL}
-		-DANDROID_NDK=${ANDROID_NDK}
-		-DANDROID_PLATFORM=${ANDROID_PLATFORM}
-		-DANDROID_STL=${ANDROID_STL}
-		-DANDROID_STL_FORCE_FEATURES=${ANDROID_STL_FORCE_FEATURES}
-		-DANDROID_TOOLCHAIN=${ANDROID_TOOLCHAIN}
-		-DCMAKE_ANDROID_STL_TYPE=${CMAKE_ANDROID_STL_TYPE}
-	)
+	dk_load(${DKCMAKE_DIR}/toolchains/android_x86_64_toolchain.cmake)
 endif()
-
-
 
 ### COSMOPOLITAN ###
 if(cosmo)
 	dk_load(${DKCMAKE_DIR}/toolchains/cosmopolitan_toolchain.cmake)
 endif()
-
-
 
 ### Emscripten ###
 if(EMSCRIPTEN)
@@ -464,7 +343,6 @@ if(EMSCRIPTEN)
 	dk_append(DKCMAKE_FLAGS							-DEMSCRIPTEN=1)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
-
 
 ### iOS arm32 - XCODE ###
 if(IOS_ARM32)
@@ -481,7 +359,6 @@ if(IOS_ARM32)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
 
-
 ### iOS_ARM64 - XCODE ###
 if(IOS_ARM64)
 	dk_depend(xcode)
@@ -496,7 +373,6 @@ if(IOS_ARM64)
 	dk_append(DKCMAKE_FLAGS							-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS64 -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm64)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
-
 
 ### iOS Simulator x86 - XCODE ###
 if(IOSSIM_X86)
@@ -513,7 +389,6 @@ if(IOSSIM_X86)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
 
-
 ### iOS Simulator x86_64 - XCODE ###
 if(IOSSIM_X86_64)
 	dk_depend(xcode)
@@ -529,7 +404,6 @@ if(IOSSIM_X86_64)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
 
-
 ### Linux x86 ###
 if(LINUX_X86)
 	#dk_depend(build-essential)
@@ -542,7 +416,6 @@ if(LINUX_X86)
 	dk_append(DKCONFIGURE_CXXFLAGS					-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
-
 
 #### Linux x86_64 ###
 if(LINUX_X86_64)
@@ -557,7 +430,6 @@ if(LINUX_X86_64)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
 
-
 ### Mac x86 - XCODE ###
 if(MAC_X86)
 	dk_depend(xcode)
@@ -570,7 +442,6 @@ if(MAC_X86)
 	dk_append(DKCMAKE_FLAGS							-DCMAKE_OSX_ARCHITECTURES=x86)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
-
 
 ### Mac x86_64 - XCODE ###
 if(MAC_X86_64)
@@ -585,7 +456,6 @@ if(MAC_X86_64)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
 
-
 ### Raspbery arm32 ###
 if(RASPBERRY_ARM32)
 	#dk_depend(build-essential)
@@ -599,7 +469,6 @@ if(RASPBERRY_ARM32)
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
 
-
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
 	#dk_depend(build-essential)
@@ -612,7 +481,6 @@ if(RASPBERRY_ARM64)
 	dk_append(DKCONFIGURE_CXXFLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 endif()
-
 
 ### Windows arm64 - CLANGARM64 ###
 if(win_arm64_clang)
