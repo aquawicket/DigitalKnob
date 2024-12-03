@@ -26,8 +26,19 @@
 
 #include <iostream>
 #include <stdio.h>
+#include "DKPreprocessor.h"
 
 int main() {
+	DKPreprocessor::PrintPreprocessor();
+	printf("OS          = %s \n", DKOS);
+	//printf("OS Version  = %s \n", DKOS_VERSION);
+	printf("Processor   = %s \n", DKARCH);
+	//printf("Bits        = %s \n", DKBITS);
+	//printf("Compiler    = %s %s \n", DKCOMPILER, DKCOMPILER_VERSION);
+	printf("C Version   = %s \n", DKC_LANGUAGE_VERSION);
+	printf("C++ Version = %s \n", DKCPP_LANGUAGE_VERSION);
+	printf("Build type  = %s \n", DKBUILD_TYPE);
+	
 	printf("Hello World! from printf\n");
     std::cout << "Hello World! from std::cout" << std::endl;
 	std::cout << "(press enter to exit)" << std::endl;

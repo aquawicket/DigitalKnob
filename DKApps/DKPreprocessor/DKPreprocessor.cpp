@@ -37,7 +37,7 @@ WARNING_ENABLE
 
 
 bool DKPreprocessor::PrintPreprocessor(){
-	DKINFO("DKPreprocessor::PrintPreprocessor()\n");
+	printf("DKPreprocessor::PrintPreprocessor()\n");
 
 #ifdef RTTI_ENABLED
 	printf("RTTI_ENABLED = TRUE\n");
