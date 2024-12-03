@@ -119,7 +119,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	dk_printVar(CMAKE_TOOLCHAIN_FILE)
 #elseif(DKCMAKE_LOAD_FILE_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_LOAD_FILE_TOOLCHAIN")
-#	#dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_64_clang_toolchain.cmake)
+#	#dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
 #elseif(DKCMAKE_INTERNAL_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_INTERNAL_TOOLCHAIN")
 #else()
@@ -313,6 +313,8 @@ dk_printVar(ENABLE_EXCEPTIONS)
 ##
 #### android_arm32
 if(ANDROID_ARM32)
+	dk_load(${DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
+	
 	dk_depend(android-ndk)
 	dk_depend(make)
 	
@@ -445,22 +447,7 @@ endif()
 
 ### COSMOPOLITAN ###
 if(cosmo)
-	dk_depend(cosmocc)
-	dk_depend(make)
-	
-	dk_append(CMAKE_C_FLAGS							-DCOSMOS)# -std=gnu17)   # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ 
-	dk_append(CMAKE_CXX_FLAGS						-DCOSMOS)# -std=gnu++17) # -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_
-	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
-#	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64)
-	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
-	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
-	dk_validate(DKIMPORTS_DIR						"dk_DKIMPORTS_DIR()")
-	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
-	dk_append(DKCMAKE_FLAGS
-		-DCMAKE_USER_MAKE_RULES_OVERRIDE=${DKIMPORTS_DIR}/cosmocc/cosmo_user_make_rules_override.cmake
-		-DCMAKE_C_COMPILER_WORKS=1
-		-DCMAKE_CXX_COMPILER_WORKS=1
-	)
+	dk_load(${DKCMAKE_DIR}/toolchains/cosmopolitan_toolchain.cmake)
 endif()
 
 
@@ -629,47 +616,47 @@ endif()
 
 ### Windows arm64 - CLANGARM64 ###
 if(win_arm64_clang)
-	dk_load(${DKCMAKE_DIR}/toolchains/windows_arm64_clang_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_arm64_clang_toolchain.cmake)
 endif()
 
 ### Windows x86 - MSVC ###
 if(win_x86_msvc)
-	dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_msvc_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_msvc_toolchain.cmake)
 endif()
 
 ### Windows x86 - MINGW32 ###
 if(win_x86_mingw)
-	dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_mingw_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_mingw_toolchain.cmake)
 endif()
 
 ### Windows x86 - CLANG32 ###
 if(win_x86_clang)
-	dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_clang_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_clang_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MSVC ###
 if(win_x86_64_msvc)
-	dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_64_msvc_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_msvc_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - CLANG64 ###
 if(win_x86_64_clang)
-	dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_64_clang_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MINGW64 ###
 if(win_x86_64_mingw)
-	dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_64_mingw_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_mingw_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - UCRT64 ###
 if(win_x86_64_ucrt)
-	dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_64_ucrt_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_ucrt_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MSYS ###
 if(win_x86_64_msys)
-	dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_64_msys_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_msys_toolchain.cmake)
 endif()
 
 

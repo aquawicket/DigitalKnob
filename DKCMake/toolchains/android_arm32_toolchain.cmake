@@ -1,8 +1,6 @@
-#include_guard()
-
-dk_echo(STATUS "##############################################################")
-dk_echo(STATUS "################ android_arm32_toolchain.cmake ###############")
-dk_echo(STATUS "##############################################################")
+message(STATUS "##############################################################")
+message(STATUS "################ android_arm32_toolchain.cmake ###############")
+message(STATUS "##############################################################")
 
 ###### Get DKCMAKE_DIR ######
 if(NOT DKCMAKE_DIR)
@@ -12,28 +10,25 @@ if(NOT DKCMAKE_DIR)
 	set(DKIMPORTS_DIR ${DK3RDPARTY}/_DKIMPORTS)
 endif()
 
-include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
-dk_load(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+#dk_load(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+
 dk_depend(android-ndk)
 dk_load(${ANDROID_TOOLCHAIN_FILE})
-
-
-
 dk_load(dk_append)
 
-dk_set(CMAKE_GENERATOR					${ANDROID_GENERATOR})
-dk_set(CMAKE_TOOLCHAIN_FILE				${ANDROID_TOOLCHAIN_FILE})
-dk_load(${ANDROID_TOOLCHAIN_FILE})
-dk_set(ANDROID_PLATFORM					${ANDROID_API})
-dk_set(CMAKE_MAKE_PROGRAM				${ANDROID_MAKE_PROGRAM})
-dk_set(CMAKE_C_COMPILER					${ANDROID_C_COMPILER})
-dk_set(CMAKE_CXX_COMPILER				${ANDROID_CXX_COMPILER})
-dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM32 -std=c17)
-dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM32 -std=c++1z)
-dk_set(DKCONFIGURE_CC					${ANDROID_C_COMPILER})
-dk_set(DKCONFIGURE_CXX					${ANDROID_CXX_COMPILER})
-dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_ARM32 -std=c17)
-dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_ARM32 -std=c++1z)
+set(CMAKE_GENERATOR					${ANDROID_GENERATOR})
+set(CMAKE_TOOLCHAIN_FILE			${ANDROID_TOOLCHAIN_FILE})
+set(ANDROID_PLATFORM				${ANDROID_API})
+set(CMAKE_MAKE_PROGRAM				${ANDROID_MAKE_PROGRAM})
+set(CMAKE_C_COMPILER				${ANDROID_C_COMPILER})
+set(CMAKE_CXX_COMPILER				${ANDROID_CXX_COMPILER})
+dk_append(CMAKE_C_FLAGS				-DANDROID -DANDROID_ARM32 -std=c17)
+dk_append(CMAKE_CXX_FLAGS			-DANDROID -DANDROID_ARM32 -std=c++1z)
+dk_set(DKCONFIGURE_CC				${ANDROID_C_COMPILER})
+dk_set(DKCONFIGURE_CXX				${ANDROID_CXX_COMPILER})
+dk_append(DKCONFIGURE_CFLAGS		-DANDROID -DANDROID_ARM32 -std=c17)
+dk_append(DKCONFIGURE_CXXFLAGS		-DANDROID -DANDROID_ARM32 -std=c++1z)
 	
 dk_append(DKCMAKE_FLAGS
 	-DANDROID_ABI=armeabi-v7a
@@ -46,4 +41,3 @@ dk_append(DKCMAKE_FLAGS
 	-DANDROID_TOOLCHAIN=clang
 	-DCMAKE_ANDROID_STL_TYPE=c++_static
 )
-
