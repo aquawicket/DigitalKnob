@@ -333,49 +333,23 @@ endif()
 
 ### Emscripten ###
 if(EMSCRIPTEN)
-	dk_depend(emsdk)
-	dk_depend(make)
-	
-	dk_append(CMAKE_C_FLAGS							-DEMSCRIPTEN -std=gnu11)
-	dk_append(CMAKE_CXX_FLAGS						-DEMSCRIPTEN -std=gnu++17)
-	dk_append(DKCONFIGURE_CFLAGS					-DEMSCRIPTEN -std=gnu11)
-	dk_append(DKCONFIGURE_CXXFLAGS					-DEMSCRIPTEN -std=gnu++17)
-	dk_append(DKCMAKE_FLAGS							-DEMSCRIPTEN=1)
-	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_load(${DKCMAKE_DIR}/toolchains/emscripten_toolchain.cmake)
 endif()
 
 ### iOS arm32 - XCODE ###
 if(IOS_ARM32)
-	dk_depend(xcode)
-	dk_depend(make)
-	
-	dk_set	 (CMAKE_TOOLCHAIN_FILE					${IOS_TOOLCHAIN_FILE})
-	dk_append(CMAKE_C_FLAGS							-DIOS -DIOS_ARM32 -std=c17 -x objective-c)
-	dk_append(CMAKE_CXX_FLAGS						-DIOS -DIOS_ARM32 -std=c++17 -x objective-c++)
-	dk_append(DKCONFIGURE_FLAGS						--host arm-apple-${IOS_DARWIN})
-	dk_append(DKCONFIGURE_CFLAGS					-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
-	dk_append(DKCONFIGURE_CXXFLAGS					-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
-	dk_append(DKCMAKE_FLAGS							-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm)
-	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_load(${DKCMAKE_DIR}/toolchains/ios_arm32_toolchain.cmake)
 endif()
 
 ### iOS_ARM64 - XCODE ###
 if(IOS_ARM64)
-	dk_depend(xcode)
-	dk_depend(make)
-	
-	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
-	dk_append(CMAKE_C_FLAGS							-DIOS -DIOS_ARM64 -std=c17 -x objective-c)
-	dk_append(CMAKE_CXX_FLAGS						-DIOS -DIOS_ARM64 -std=c++17 -x objective-c++)
-	dk_append(DKCONFIGURE_FLAGS						--host arm64-apple-${IOS_DARWIN})
-	dk_append(DKCONFIGURE_CFLAGS					-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
-	dk_append(DKCONFIGURE_CXXFLAGS					-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
-	dk_append(DKCMAKE_FLAGS							-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS64 -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm64)
-	#dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_load(${DKCMAKE_DIR}/toolchains/ios_arm64_toolchain.cmake)
 endif()
 
 ### iOS Simulator x86 - XCODE ###
 if(IOSSIM_X86)
+	dk_load(${DKCMAKE_DIR}/toolchains/iossim_x86_toolchain.cmake)
+	
 	dk_depend(xcode)
 	dk_depend(make)
 	
@@ -391,6 +365,8 @@ endif()
 
 ### iOS Simulator x86_64 - XCODE ###
 if(IOSSIM_X86_64)
+	dk_load(${DKCMAKE_DIR}/toolchains/iossim_x86_64_toolchain.cmake)
+	
 	dk_depend(xcode)
 	dk_depend(make)
 	
@@ -406,6 +382,8 @@ endif()
 
 ### Linux x86 ###
 if(LINUX_X86)
+	dk_load(${DKCMAKE_DIR}/toolchains/linux_x86_toolchain.cmake)
+	
 	#dk_depend(build-essential)
 	dk_depend(gcc)
 	dk_depend(make)
@@ -419,6 +397,8 @@ endif()
 
 #### Linux x86_64 ###
 if(LINUX_X86_64)
+	dk_load(${DKCMAKE_DIR}/toolchains/linux_x86_64_toolchain.cmake)
+	
 	#dk_depend(build-essential)
 	dk_depend(gcc)
 	dk_depend(make)
@@ -432,6 +412,8 @@ endif()
 
 ### Mac x86 - XCODE ###
 if(MAC_X86)
+	dk_load(${DKCMAKE_DIR}/toolchains/mac_x86_toolchain.cmake)
+	
 	dk_depend(xcode)
 	dk_depend(make)
 	
@@ -445,6 +427,8 @@ endif()
 
 ### Mac x86_64 - XCODE ###
 if(MAC_X86_64)
+	dk_load(${DKCMAKE_DIR}/toolchains/mac_x86_64_toolchain.cmake)
+	
 	dk_depend(xcode)
 	dk_depend(make)
 	
@@ -458,6 +442,8 @@ endif()
 
 ### Raspbery arm32 ###
 if(RASPBERRY_ARM32)
+	dk_load(${DKCMAKE_DIR}/toolchains/raspberry_arm32_toolchain.cmake)
+	
 	#dk_depend(build-essential)
 	dk_depend(gcc)
 	dk_depend(make)
@@ -471,6 +457,8 @@ endif()
 
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
+	dk_load(${DKCMAKE_DIR}/toolchains/raspberry_arm64_toolchain.cmake)
+	
 	#dk_depend(build-essential)
 	dk_depend(gcc)
 	dk_depend(make)
