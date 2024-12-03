@@ -58,16 +58,16 @@ function(dk_printVar)
 	endif()	
 		
 	###### MACRO ######
-	dk_isMacro(isMacro "${ARGV}")
-	if(isMacro)
-		dk_echo("${cyan}MACRO:${ARGV}()${white} is a MACRO${clr}")
-	endif()
+#	dk_isMacro(isMacro "${ARGV}")
+#	if(isMacro)
+#		dk_echo("${cyan}MACRO:${ARGV}()${white} is a MACRO${clr}")
+#	endif()
 	
 	###### FUNCTION ######
-	dk_isFunction(isFunction "${ARGV}")
-	if(isFunction)
-		dk_echo("${cyan}FUNC:${ARGV}()${white} is a FUNCTION${clr}")
-	endif()		
+#	dk_isFunction(isFunction "${ARGV}")
+#	if(isFunction)
+#		dk_echo("${cyan}FUNC:${ARGV}()${white} is a FUNCTION${clr}")
+#	endif()		
 		
 
 #	if(DEFINED "${${ARGV}}")

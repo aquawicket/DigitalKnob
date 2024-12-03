@@ -1,23 +1,21 @@
-#!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+message("######################################################################")
+message("################ windoows_x86_64_msvc_toolchain.cmake ################")
+message("######################################################################")
 
+############ CMAKE COMPILER VARIABLES ############
+#dk_depend(visualstudio)
+dk_depend(visual-cpp-build-tools)
 
-dk_echo(STATUS "####################################################################")
-dk_echo(STATUS "################ win_x86_64_msvc_toolchain.cmake ##################")
-dk_echo(STATUS "####################################################################")
+dk_set(CMAKE_C_COMPILER				${VISUAL_CPP_BUILD_TOOLS_C_COMPILER})
+dk_set(CMAKE_CXX_COMPILER			${VISUAL_CPP_BUILD_TOOLS_CXX_COMPILER})
+dk_set(CMAKE_DUMPBIN				${VISUAL_CPP_BUILD_TOOLS_DUMPBIN})
+dk_set(CMAKE_GENERATOR				${VISUAL_CPP_BUILD_TOOLS_GENERATOR})
+dk_set(CMAKE_GENERATOR_PLATFORM		${VISUAL_CPP_BUILD_TOOLS_GENERATOR_PLATFORM})
+dk_set(CMAKE_LINKER					${VISUAL_CPP_BUILD_TOOLS_LINKER})
+dk_set(CMAKE_MAKE_PROGRAM 			${VISUAL_CPP_BUILD_TOOLS_MAKE_PROGRAM})
+#dk_append(DKCONFIGURE_FLAGS		--build=x86_64-w64-msvc)
+#dk_append(DKCONFIGURE_CFLAGS		${CMAKE_C_FLAGS})
+#dk_append(DKCONFIGURE_CXXFLAGS		${CMAKE_CXX_FLAGS})
 
-###### Get DKCMAKE_DIR ######
-if(NOT DKCMAKE_DIR)
-	dk_dirname(${CMAKE_CURRENT_LIST_DIR} DKCMAKE_DIR)
-	set(DKCMAKE_FUNCTIONS_DIR ${DKCMAKE_DIR}/functions)
-	dk_dirname(${DKCMAKE_DIR} DKBRANCH_DIR)
-	set(DK3RDPARTY ${DKBRANCH_DIR}/3rdParty)
-	set(DKIMPORTS_DIR ${DK3RDPARTY}/_DKIMPORTS)
-endif()
-
-#dk_depend(msbuild)
-#set(MSVC64_DIR "${MSVC}/Studio")
-#set(CMAKE_MAKE_PROGRAM ${MSVC64_DIR}/bin/make.exe CACHE FILEPATH "")
-#set(CMAKE_C_COMPILER ${MSVC64_DIR}/bin/vc)
-#set(CMAKE_CXX_COMPILER ${MSVC64_DIR}/bin/vc)
+dk_append(CMAKE_C_FLAGS				/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj)   #/MACHINE:X64 /D_WIN32_WINNT=0x0600
+dk_append(CMAKE_CXX_FLAGS			/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600

@@ -12,27 +12,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	windows uninstall registry location
 #	HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\{060aa283-cf16-4aad-9250-bd91ab4c3d2f}
 #
-### Create Bash Exports ###
-dk_depend(cygpath)
-dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
-	
-dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")
-dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/clang64/bin:$PATH")
-dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2_UNIXPATH}/clangarm64/bin:$PATH")
-dk_set(MINGW32_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/mingw32/bin:$PATH")
-dk_set(MINGW64_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/mingw64/bin:$PATH")
-dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/ucrt64/bin:$PATH")
-dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/usr/bin:$PATH")
-	
-dk_set(CLANG32_EXE 		"${MSYS2_DIR}/clang32.exe")
-dk_set(CLANG64_EXE 		"${MSYS2_DIR}/clang64.exe")
-dk_set(CLANGARM64_EXE 	"${MSYS2_DIR}/clangarm64.exe")
-dk_set(MINGW32_EXE 		"${MSYS2_DIR}/mingw32.exe")
-dk_set(MINGW64_EXE 		"${MSYS2_DIR}/mingw64.exe")
-dk_set(UCRT64_EXE 		"${MSYS2_DIR}/ucrt64.exe")
-dk_set(MSYS2_EXE 		"${MSYS2_DIR}/msys2.exe")
-
-
 ### only accept windows hosts
 dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
@@ -50,7 +29,24 @@ if((NOT DKUPDATE) AND (EXISTS ${MSYS2_EXE}))
 endif()
 
 
+### Create Bash Exports ###
+#dk_depend(cygpath)
+#dk_command(${CYGPATH_EXE} -m 	"${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
+#dk_set(CLANG32_BASH_EXPORTS	"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")
+#dk_set(CLANG64_BASH_EXPORTS	"export PATH=${MSYS2_UNIXPATH}/clang64/bin:$PATH")
+#dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2_UNIXPATH}/clangarm64/bin:$PATH")
+#dk_set(MINGW32_BASH_EXPORTS	"export PATH=${MSYS2_UNIXPATH}/mingw32/bin:$PATH")
+#dk_set(MINGW64_BASH_EXPORTS	"export PATH=${MSYS2_UNIXPATH}/mingw64/bin:$PATH")
+#dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/ucrt64/bin:$PATH")
+#dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/usr/bin:$PATH")
 	
+#dk_set(CLANG32_EXE 			"${MSYS2_DIR}/clang32.exe")
+#dk_set(CLANG64_EXE 			"${MSYS2_DIR}/clang64.exe")
+#dk_set(CLANGARM64_EXE 			"${MSYS2_DIR}/clangarm64.exe")
+#dk_set(MINGW32_EXE 			"${MSYS2_DIR}/mingw32.exe")
+#dk_set(MINGW64_EXE 			"${MSYS2_DIR}/mingw64.exe")
+#k_set(UCRT64_EXE 				"${MSYS2_DIR}/ucrt64.exe")
+#dk_set(MSYS2_EXE 				"${MSYS2_DIR}/msys2.exe")
 	
 ### NOTE: moved to DKBuildFlags.cmake
 #### Set CMAKE_GENERATOR ###

@@ -1,23 +1,33 @@
-#!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+message("######################################################################")
+message("################ windoows_x86_64_ucrt_toolchain.cmake ###############")
+message("######################################################################")
 
-
-dk_echo(STATUS "####################################################################")
-dk_echo(STATUS "################ win_x86_64_ucrt_toolchain.cmake ###############")
-dk_echo(STATUS "####################################################################")
-
-###### Get DKCMAKE_DIR ######
-if(NOT DKCMAKE_DIR)
-	dk_dirname(${CMAKE_CURRENT_LIST_DIR} DKCMAKE_DIR)
-	set(DKCMAKE_FUNCTIONS_DIR ${DKCMAKE_DIR}/functions)
-	dk_dirname(${DKCMAKE_DIR} DKBRANCH_DIR)
-	set(DK3RDPARTY ${DKBRANCH_DIR}/3rdParty)
-	set(DKIMPORTS_DIR ${DK3RDPARTY}/_DKIMPORTS)
-endif()
-
+############ CMAKE COMPILER VARIABLES ############
 dk_depend(msys2)
-set(UCRT64_DIR "${MSYS2_DIR}/ucrt64")
-set(CMAKE_MAKE_PROGRAM ${UCRT64_DIR}/bin/mingw32-make.exe CACHE FILEPATH "")
-set(CMAKE_C_COMPILER ${UCRT64_DIR}/bin/gcc.exe)
-set(CMAKE_CXX_COMPILER ${UCRT64_DIR}/bin/g++.exe)
+dk_set(msystem 						ucrt64)
+dk_set(MSYSTEM 						UCRT64)
+
+dk_depend(gcc)
+
+dk_depend(cmd)
+if(CMD_EXE OR UCRT)
+	set(CMAKE_GENERATOR				"MinGW Makefiles")	# if in CMD shell
+else()
+	set(CMAKE_GENERATOR 			"MSYS Makefiles")	# if in SH shell
+endif()
+set(CMAKE_MAKE_PROGRAM 				${MSYS2_DIR}/ucrt64/bin/mingw32-make.exe CACHE FILEPATH "")
+set(CMAKE_C_COMPILER				${MSYS2_DIR}/ucrt64/bin/gcc.exe)
+set(CMAKE_CXX_COMPILER 				${MSYS2_DIR}/ucrt64/bin/g++.exe)
+dk_append(DKFLAGS 					-DMSYSTEM=UCRT64)
+dk_append(CMAKE_C_FLAGS				-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
+dk_append(CMAKE_CXX_FLAGS			-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
+dk_append(CMAKE_EXE_LINKER_FLAGS	-static) # -s)
+dk_append(DKCONFIGURE_FLAGS			--build=x86_64-w64-mingw32)
+dk_append(DKCONFIGURE_CFLAGS		${CMAKE_C_FLAGS})
+dk_append(DKCONFIGURE_CXXFLAGS		${CMAKE_CXX_FLAGS})
+
+############ Bash Variable Exports ############
+dk_depend(cygpath)
+dk_command(${CYGPATH_EXE} -m 		"${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
+dk_set(UCRT64_BASH_EXPORTS			"export PATH=${MSYS2_UNIXPATH}/ucrt64/bin:$PATH")
+dk_set(UCRT64_EXE 					"${MSYS2_DIR}/ucrt64.exe")

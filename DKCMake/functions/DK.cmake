@@ -2,6 +2,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include_guard()
 
+#set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
+
 ### Print Version Info ###
 message("")
 set(DKSHELL "CMake")
@@ -56,6 +58,7 @@ function(DKINIT)
 	dk_setupCallstack()
 	#d k_callStack()
 	#:dk_callStackReturn
+	
 	
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS()
