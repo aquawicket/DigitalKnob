@@ -27,7 +27,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	
 	dk_assertPath(${CURRENT_PLUGIN})
 	dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
-	dk_makeDirectory(${BINARY_DIR})
+	dk_makeDirectory("${BINARY_DIR}")
 	dk_assertPath(${BINARY_DIR})
 	dk_cd(${BINARY_DIR})
 	# Configure with CMake		(multi_config / single_config)

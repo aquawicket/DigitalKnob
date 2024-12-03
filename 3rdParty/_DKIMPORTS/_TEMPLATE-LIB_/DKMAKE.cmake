@@ -20,20 +20,22 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ### INSTALL ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	(${DKIMPORTS_DIR}/[lib_name]/[lib_name].txt [LIB_NAME]_IMPORT)
-dk_import		(${[LIB_NAME]})
+dk_getFileParam	(${DKIMPORTS_DIR}/[_lib_name_]/[_lib_name_].txt _LIB_NAME_._IMPORT)
+dk_import		(${_LIB_NAME_})
 
 ### LINK ###
-dk_include			(${[LIB_NAME]}/include)
-UNIX_dk_libDebug	(${[LIB_NAME]_DEBUG_DIR}/libpackage.a)
-UNIX_dk_libRelease	(${[LIB_NAME]_RELEASE_DIR}/libpackage.a)
-WIN_dk_libDebug		(${[LIB_NAME]_DEBUG_DIR}/package.lib)
-WIN_dk_libRelease	(${[LIB_NAME]_RELEASE_DIR}/package.lib)
-
+dk_include			(${_LIB_NAME_}/include)
+if(UNIX)
+	dk_libDebug		(${_LIB_NAME_._DEBUG_DIR}/libpackage.a)
+	dk_libRelease	(${_LIB_NAME_._RELEASE_DIR}/libpackage.a)
+else()
+	dk_libDebug		(${_LIB_NAME_._DEBUG_DIR}/package.lib)
+	dk_libRelease	(${_LIB_NAME_._RELEASE_DIR}/package.lib)
+endif()
 
 ### GENERATE ###
-dk_configure(${[LIB_NAME]})
+dk_configure(${_LIB_NAME_})
 
 
 ### COMPILE ###
-dk_build(${[LIB_NAME]} package)
+dk_build(${_LIB_NAME_} package)

@@ -1,0 +1,4 @@
+_LIB_NAME_._VERSION 1.0
+_LIB_NAME_._NAME=_LIB_NAME_.exe
+_LIB_NAME_._DL=https://_LIB_NAME_.com
+_LIB_NAME_=${ProgramFiles_x86}/_LIB_NAME_

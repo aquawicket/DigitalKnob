@@ -1,7 +1,5 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_validate(host_triple   "dk_host_triple()")
-dk_validate(TARGET_TRIPLE "dk_target_triple()")
 #include_guard()
 
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
@@ -129,7 +127,8 @@ dk_validate(TARGET_TRIPLE "dk_target_triple()")
 #endif()
 
 
-
+dk_validate(host_triple   "dk_host_triple()")
+dk_validate(TARGET_TRIPLE "dk_target_triple()")
 ########### CORE DEPENDENCIES ############
 dk_depend(cmake)
 
@@ -166,9 +165,6 @@ dk_set(CMAKE_VERBOSE_MAKEFILE			1)
 if(ANDROID)
 	dk_set(POSITION_INDEPENDENT_EXECUTABLE 0) 
 endif()
-
-
-
 
 dk_append		(DKCMAKE_FLAGS -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
 dk_append		(DKCMAKE_FLAGS -DBUILD_STATIC_LIBS=${BUILD_STATIC_LIBS})
@@ -309,7 +305,12 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 
 
-
+#################################################################
+## 
+##	This may be a good place to inject toolchains for the target
+##  Systems. This file runs before PROJECT(), it may work as an inline
+##	code set here, as well as an external toolchain.
+##
 #### android_arm32
 if(ANDROID_ARM32)
 	dk_depend(android-ndk)
@@ -643,6 +644,17 @@ if(win_x86_mingw)
 	dk_set(MSYSTEM									MINGW32)
 	dk_depend(gcc)
 	
+	### Set CMAKE_GENERATOR ###
+	dk_depend(cmd)
+	if(CMD_EXE OR MINGW)
+		dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in CMD shell
+	else()
+		dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in SH shell
+	endif()
+	if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
+		dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
+	endif()
+	
 	dk_append(CMAKE_C_FLAGS							-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
 	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
 	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
@@ -657,6 +669,17 @@ if(win_x86_clang)
 	dk_set(msystem 									clang32)
 	dk_set(MSYSTEM 									CLANG32)
 	dk_depend(clang)
+	
+	### Set CMAKE_GENERATOR ###
+	dk_depend(cmd)
+	if(CMD_EXE OR MINGW)
+		dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in CMD shell
+	else()
+		dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in SH shell
+	endif()
+	if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
+		dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
+	endif()
 	
 	dk_append(CMAKE_C_FLAGS							-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
 	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
@@ -678,19 +701,35 @@ if(win_x86_64_msvc)
 endif()
 
 
+
 ### Windows x86_64 - CLANG64 ###
 if(win_x86_64_clang)
-	dk_set(msystem 									clang64)
-	dk_set(MSYSTEM 									CLANG64)
-	dk_depend(clang)
-	
-	dk_append(DKFLAGS 								-DMSYSTEM=CLANG64)
-	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=CLANG64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
-	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DMSYSTEM=CLANG64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
-	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
-	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64-mingw32)
-	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
-	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+	message("after toolchain")
+	dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_64_clang_toolchain.cmake)
+	message("after toolchain")
+#	dk_depend(msys2)
+#	dk_set(msystem 									clang64)
+#	dk_set(MSYSTEM 									CLANG64)
+#	dk_depend(clang)
+#	
+#	### Set CMAKE_GENERATOR ###
+#	dk_depend(cmd)
+#	if(CMD_EXE OR MINGW)
+#		dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in CMD shell
+#	else()
+#		dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in SH shell
+#	endif()
+#	if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
+#		dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
+#	endif()
+#	
+#	dk_append(DKFLAGS 								-DMSYSTEM=CLANG64)
+#	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=CLANG64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
+#	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DMSYSTEM=CLANG64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
+#	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+#	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64-mingw32)
+#	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+#	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
 endif()
 
 
@@ -699,6 +738,17 @@ if(win_x86_64_mingw)
 	dk_set(msystem 									mingw64)
 	dk_set(MSYSTEM 									MINGW64)
 	dk_depend(gcc)
+	
+	### Set CMAKE_GENERATOR ###
+	dk_depend(cmd)
+	if(CMD_EXE OR MINGW)
+		dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in CMD shell
+	else()
+		dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in SH shell
+	endif()
+	if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
+		dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
+	endif()
 	
 	dk_append(DKFLAGS 								-DMSYSTEM=MINGW64)
 	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
@@ -716,6 +766,17 @@ if(win_x86_64_ucrt)
 	dk_set(MSYSTEM 									UCRT64)
 	dk_depend(clang)
 	
+	### Set CMAKE_GENERATOR ###
+	dk_depend(cmd)
+	if(CMD_EXE OR MINGW)
+		dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in CMD shell
+	else()
+		dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in SH shell
+	endif()
+	if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
+		dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
+	endif()
+	
 	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) #-D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
@@ -730,6 +791,17 @@ if(win_arm64_clang)
 	dk_set(msystem 									clangarm64)
 	dk_set(MSYSTEM 									CLANGARM64)
 	dk_depend(clang)
+	
+	### Set CMAKE_GENERATOR ###
+	dk_depend(cmd)
+	if(CMD_EXE OR MINGW)
+		dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in CMD shell
+	else()
+		dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in SH shell
+	endif()
+	if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
+		dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
+	endif()
 	
 	dk_append(CMAKE_C_FLAGS							-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_ARM64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS						-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_ARM64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
