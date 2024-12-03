@@ -59,29 +59,31 @@ if "%~1" neq ""    goto runDKC
 	%dk_call% dk_echo "Installing DKC . . ."
 	
 	::###### OS ######
-	%dk_call% dk_validate host_os "%dk_call% dk_host_triple"
-	if not defined OS set "OS=%host_os%"
+	::%dk_call% dk_validate host_os "%dk_call% dk_host_triple"
+	::if not defined OS set "OS=%host_os%"
+	set "OS=cosmo"
 	%dk_call% dk_printVar OS
 	
 	::###### arch ######
-	%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
-	if not defined arch set "arch=%host_arch%"
+	::%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
+	::if not defined arch set "arch=%host_arch%"
+	set "host_arch=cosmo"
 	%dk_call% dk_printVar arch
 	
 	::###### host_env ######
-	if not defined host_env set "host_env=%default_host_env%"
-	if not defined env set "env=%host_env%"
+	::if not defined host_env set "host_env=%default_host_env%"
+	::if not defined env set "env=%host_env%"
+	set "host_env=cosmo"
 	%dk_call% dk_printVar host_env
 	
 	::###### MSYSTEM ######
-	if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86"    set "MSYSTEM=CLANG32"
-	if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86_64" set "MSYSTEM=CLANG64"
-	if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="arm64"  set "MSYSTEM=CLANGARM64"
-	if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86"    set "MSYSTEM=MINGW32"
-	if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86_64" set "MSYSTEM=MINGW64"
-	%dk_call% dk_printVar MSYSTEM
+	::if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86"    set "MSYSTEM=CLANG32"
+	::if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86_64" set "MSYSTEM=CLANG64"
+	::if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="arm64"  set "MSYSTEM=CLANGARM64"
+	::if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86"    set "MSYSTEM=MINGW32"
+	::if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86_64" set "MSYSTEM=MINGW64"
+	::%dk_call% dk_printVar MSYSTEM
 
-	
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 

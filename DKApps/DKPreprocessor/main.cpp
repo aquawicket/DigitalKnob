@@ -30,6 +30,8 @@
 
 int main() {
 	DKPreprocessor::PrintPreprocessor();
+	printf("DKDATE      = %s \n", DKDATE);
+	printf("DKTIME      = %s \n", DKTIME);
 	printf("OS          = %s \n", DKOS);
 	//printf("OS Version  = %s \n", DKOS_VERSION);
 	printf("Processor   = %s \n", DKARCH);

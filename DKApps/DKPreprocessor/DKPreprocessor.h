@@ -94,6 +94,8 @@
 // https://stackoverflow.com/questions/471935/user-warnings-on-msvc-and-gcc
 // https://stackoverflow.com/questions/171435/portability-of-warning-preprocessor-directive
 
+#define DKDATE __DATE__
+#define DKTIME __TIME__
 
 #if __x86_64__ || _M_X64
 #	define DKARCH "x86_64"

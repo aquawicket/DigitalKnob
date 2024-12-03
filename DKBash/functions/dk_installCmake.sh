@@ -59,6 +59,7 @@ dk_installCmake() {
 		
 		dk_call dk_echo
 		dk_call dk_info "Installing cmake . . ."
+		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
 		dk_call dk_download "${CMAKE_IMPORT}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
 		#dk_call dk_extract "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
 		dk_call dk_smartExtract	"${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${CMAKE_DIR}"
