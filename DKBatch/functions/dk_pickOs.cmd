@@ -47,14 +47,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     echo 26) Raspberry x86
     echo 27) Raspberry x86_64
     echo 28) Windows arm32
-    echo 29) Windows arm64 (clang)
-    echo 30) Windows x86 (gcc)
-    echo 31) Windows x86 (clang)
-    echo 32) Windows x86 (msvc)
-    echo 33) Windows x86_64 (gcc)
-    echo 34) Windows x86_64 (clang)
-    echo 35) Windows x86_64 (ucrt)
-    echo 36) Windows x86_64 (msvc)
+    echo 29) Windows arm64     (clang)
+    echo 30) Windows x86       (mingw)
+    echo 31) Windows x86       (clang)
+    echo 32) Windows x86       (msvc)
+    echo 33) Windows x86_64    (mingw)
+    echo 34) Windows x86_64    (clang)
+    echo 35) Windows x86_64    (ucrt)
+    echo 36) Windows x86_64    (msvc)
     echo 37) none
     echo 38) Clear Screen
     echo 39) Go Back
@@ -66,15 +66,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_keyboardInput choice
     ::%dk_call% dk_keyboardInputTimeout choice 1 60
         
-    if "%choice%"=="1" endlocal & set "%1=%host_triple%_%default_target_env%"	& %return%
-	if "%choice%"=="2" endlocal & set "%1=cosmo"		        				& %return%
-    if "%choice%"=="3" endlocal & set "%1=android_arm32"        				& %return%
-    if "%choice%"=="4" endlocal & set "%1=android_arm64"        				& %return%
-    if "%choice%"=="5" endlocal & set "%1=android_x86"          				& %return%
-    if "%choice%"=="6" endlocal & set "%1=android_x86_64"       				& %return%
-    if "%choice%"=="7" endlocal & set "%1=emscripten"          				 	& %return%
-    if "%choice%"=="8" endlocal & set "%1=ios_arm32"            				& %return%
-    if "%choice%"=="9" endlocal & set "%1=ios_arm64"            				& %return%
+    if "%choice%"=="1"  endlocal & set "%1=%host_triple%_%default_target_env%"	& %return%
+	if "%choice%"=="2"  endlocal & set "%1=cosmo"		        				& %return%
+    if "%choice%"=="3"  endlocal & set "%1=android_arm32"        				& %return%
+    if "%choice%"=="4"  endlocal & set "%1=android_arm64"        				& %return%
+    if "%choice%"=="5"  endlocal & set "%1=android_x86"          				& %return%
+    if "%choice%"=="6"  endlocal & set "%1=android_x86_64"       				& %return%
+    if "%choice%"=="7"  endlocal & set "%1=emscripten"          				& %return%
+    if "%choice%"=="8"  endlocal & set "%1=ios_arm32"            				& %return%
+    if "%choice%"=="9"  endlocal & set "%1=ios_arm64"            				& %return%
     if "%choice%"=="10" endlocal & set "%1=ios_x86"              				& %return%
     if "%choice%"=="11" endlocal & set "%1=ios_x86_64"          				& %return%
     if "%choice%"=="12" endlocal & set "%1=iossim_arm32"        				& %return%
