@@ -73,7 +73,7 @@ if "%~1" neq ""    goto runDKC
 	::###### host_env ######
 	::if not defined host_env set "host_env=%default_host_env%"
 	::if not defined env set "env=%host_env%"
-	set "host_env=cosmo"
+	set "host_env=%default_host_env%"
 	%dk_call% dk_printVar host_env
 	
 	::###### MSYSTEM ######
@@ -122,8 +122,11 @@ if "%~1" neq ""    goto runDKC
 	::###### APP_NAME ######
 	for %%Z in ("%DKC_FILE%") do set "APP_NAME=%%~nZ"	
 	
+	::###### Setup build directory
+	if not exist "%CD%\build" mkdir "%CD%\build"
+	
 	::###### APP_FILE ######
-	set "APP_FILE=%APP_NAME%.exe"
+	set "APP_FILE=%CD%\build\%APP_NAME%.exe"
 	
 	::###### Compile Code ######
 	echo compiling ...

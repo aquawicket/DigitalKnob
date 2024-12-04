@@ -36,7 +36,6 @@ dk_info("\n")
 
 dk_validate(DK_PROJECT_DIR "dk_target_triple()")
 dk_assertPath(${DK_PROJECT_DIR})
-#dk_printVar(DK_PROJECT_DIR)
 dk_basename(${DK_PROJECT_DIR} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
 set(APP_NAME ${APP_NAME}_APP)
@@ -68,7 +67,6 @@ dk_buildLog("##############################################")
 list(REMOVE_DUPLICATES dkdepend_list)
 foreach(plugin ${dkdepend_list})
 	if(NOT plugin IN_LIST dk_disabled_list)
-		#dk_verbose("if(NOT ${plugin} IN_LIST dk_disabled_list) = true")
 		dk_buildLog("${plugin}")
 	endif()
 endforeach()
@@ -109,8 +107,6 @@ foreach(plugin ${dkdepend_list})
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	if(NOT ${plugin})
 		if(plugin IN_LIST dk_disabled_list)
-			#dk_verbose("if(NOT ${plugin} IN_LIST dk_disabled_list) = true")
-			#dk_buildLog("${plugin}")
 			dk_notice("plugin:${plugin} disabled, skipping...")
 			continue()
 		endif()
@@ -206,6 +202,7 @@ foreach(plugin ${dkdepend_list})
 				dk_cd(${plugin_path}/${CONFIG_PATH})
 				
 				if(MULTI_CONFIG)
+					###### Configure ######
 					ANDROID_ARM32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})
 					ANDROID_ARM64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON ${plugin_path})
 					ANDROID_X86_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_X86=ON ${plugin_path})
@@ -223,10 +220,13 @@ foreach(plugin ${dkdepend_list})
 					RASPBERRY_ARM64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DRASPBERRY_ARM64=ON ${plugin_path})
 					WIN_X86_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DWIN_X86=ON ${plugin_path})
 					WIN_X86_64_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DWIN_X86_64=ON ${plugin_path})
+					
+					###### Build ######
 					DEBUG_dk_queueCommand			(${CMAKE_COMMAND} --build . --config Debug)
 					RELEASE_dk_queueCommand			(${CMAKE_COMMAND} --build . --config Release)
 				else()
 					if(DEBUG)
+						###### Configure ######
 						ANDROID_ARM32_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})
 						ANDROID_ARM64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM64=ON ${plugin_path})
 						ANDROID_X86_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_X86=ON ${plugin_path})
@@ -244,8 +244,12 @@ foreach(plugin ${dkdepend_list})
 						RASPBERRY_ARM64_DEBUG_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DRASPBERRY_ARM64=ON ${plugin_path})
 						WIN_X86_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DWIN_X86=ON ${plugin_path})
 						WIN_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DWIN_X86_64=ON ${plugin_path})
+						
+						###### Build ######
 						DEBUG_dk_queueCommand					(${CMAKE_COMMAND} --build . --config Debug)
+						
 					elseif(RELEASE)
+						###### Configure ######
 						ANDROID_ARM32_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})
 						ANDROID_ARM64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON ${plugin_path})
 						ANDROID_X86_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_X86=ON ${plugin_path})
@@ -263,7 +267,10 @@ foreach(plugin ${dkdepend_list})
 						RASPBERRY_ARM64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DRASPBERRY_ARM64=ON ${plugin_path})
 						WIN_X86_RELEASE_dk_queueCommand			(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DWIN_X86=ON ${plugin_path})
 						WIN_X86_64_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DWIN_X86_64=ON ${plugin_path})
+						
+						###### Build ######
 						RELEASE_dk_queueCommand					(${CMAKE_COMMAND} --build . --config Release)
+						
 					endif()
 				endif()
 
@@ -378,24 +385,6 @@ if(ANDROID)
 		########################## CREATE ICONS ###############################
 		dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
 		#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
-		#	dk_info("Creating android icons for ${APP_NAME} . . .")
-		#	if(DEBUG)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 36 36 ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 48 48 ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 72 72 ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 96 96 ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 144 144 ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 192 192 ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-		#	endif()
-		#	if(RELEASE)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 36 36 ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 48 48 ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 72 72 ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 96 96 ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 144 144 ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-		#		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 192 192 ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-		#	endif()
-		#
 		#	dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
 		#endif()
 	
@@ -545,16 +534,13 @@ if(ANDROID)
 	#################### Install apk to device ################
 	#dk_set(INSTALL_APK ON)
 	if(NOT ANDROID_HOST AND INSTALL_APK)
-		if(WIN_HOST)
-			set(CMD "cmd /c")
-		endif()
-		
+		dk_depend(cmd)	
 		if(DEBUG)		
 			add_custom_command(
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
-				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND ${CMD_EXE} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
 		if(RELEASE)
 		endif()
@@ -562,7 +548,7 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
-				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk
+				COMMAND ${CMD_EXE} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 	endif()
@@ -602,16 +588,13 @@ if(EMSCRIPTEN)
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
-		# backup files not going in the package
-		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NO_HALT)
-		# Remove excluded files and folders before packaging
-		dk_delete(${DK_PROJECT_DIR}/assets/USER)
+		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NO_HALT)  # backup files not going in the package
+		dk_delete(${DK_PROJECT_DIR}/assets/USER)		# Remove excluded files and folders before packaging
 		dk_info("Creating assets.zip . . .")
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		#dk_info("Creating assets.h . . .")
 		dk_bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
-		# Restore the backed up assets
-		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/)
+		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/) # Restore the backed up assets
 		dk_delete(${DK_PROJECT_DIR}/Backup)
 	endif()
 	
@@ -754,22 +737,6 @@ if(IOS OR IOSSIM)
 	
 	########################## ICONS ###############################
 	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
-	#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 16 16 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_16x16.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_16x16@2x.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_32x32.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 64 64 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_32x32@2x.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 128 128 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_128x128.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_128x128@2x.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_256x256.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_256x256@2x.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_512x512.png)
-	#	dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 1024 1024 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_512x512@2x.png)
-	#	dk_executeProcess(iconutil -c icns -o ${DK_PROJECT_DIR}/icons/ios/icons.icns ${DK_PROJECT_DIR}/icons/ios/icons.iconset)
-	#	set(MACOSX_BUNDLE_ICON_FILE icons.icns)
-	#	set(app_ICONS ${DK_PROJECT_DIR}/icons/ios/icons.icns)
-	#	set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-	#endif()
 	
 	####################### Storyboards ############################
 	#TODO
