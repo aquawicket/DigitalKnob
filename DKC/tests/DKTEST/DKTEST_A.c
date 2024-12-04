@@ -7,6 +7,7 @@ void DKTEST_A(void){ printf("DKTEST_A"); }
 #include "DK.h"
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
 int DKTEST(){
 	DKTEST_A();
 	return 0;
