@@ -61,10 +61,10 @@ extern const char* BUILD_TIME;
 	//TODO: https://en.cppreference.com/w/cpp/utility/program/exit
 	static void DKApp_Exit();
 
-	static bool   active;
-	static bool   paused;
-	static int    argc;
-	static char** argv;
+	bool   DKApp_active;
+	bool   DKApp_paused;
+	int    DKApp_argc;
+	char** DKApp_argv;
 
 	/*
 	template<class T>

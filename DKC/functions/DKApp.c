@@ -78,7 +78,7 @@ DKApp_DKApp(int _argc, char** _argv){
 	DKApp_argc = _argc;
 	DKApp_argv = _argv;
 	//DKUtil_SetMainThreadNow();
-}
+
 	//DKPreprocessor_PrintPreprocessor();
 /*
 	if (argc)
@@ -147,12 +147,13 @@ DKApp_DKApp(int _argc, char** _argv){
 	//}
 	DKClass_DKCreate("DKDuktape");
 	DKClass_DKCreate("DKDebug");
-*/
-//}
+*/	
+	return 0;
+}
 
 void DKApp_Init(){
 	//DKDEBUGFUNC();
-	active = true;
+	DKApp_active = true;
 }
 
 #if EMSCRIPTEN
@@ -173,13 +174,13 @@ void DKApp_Loop(){
 	// Receives a function to call and some user data to provide it.
 	emscripten_request_animation_frame_loop(DKApp_EM_DoFrame, 0);
 #else
-	while(active)
+	while(DKApp_active)
 		DKApp_DoFrame();
 #endif
 }
 
 void DKApp_DoFrame(){
-	if(paused){ 
+	if(DKApp_paused){ 
 		//DKUtil_Sleep(100);
 		return;
 	}
@@ -198,7 +199,7 @@ void DKApp_CallLoops(){
 
 void DKApp_Exit(){
 	//DKDEBUGFUNC();
-	active = false;
+	DKApp_active = false;
 	//DKUtil_CallExit();
 	//exit(0);
 }
