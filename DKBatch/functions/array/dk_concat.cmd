@@ -1,4 +1,5 @@
 @echo off
+if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
@@ -21,7 +22,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_concat
     call dk_debugFunc 2 3
 :: setlocal
-
     set "_arrayA_=%~1"
     set "_arrayB_=%~2"
     set "_arrayC_=%~3"
@@ -47,9 +47,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::### return value ###
     if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%_arrayC_%"
     if "!DE!" equ "" endlocal & set "%3=!_arrayC_!"
-	
-::debug
-::	%dk_call% dk_printVar %3
 %endfunction%
 
 

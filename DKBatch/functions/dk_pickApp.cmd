@@ -34,8 +34,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     :: prepend cache selection if available
     if exist "%DKCACHE_DIR%\cache" if "%_APP_%" neq "" if "%_triple_%" neq "" if "%_BUILD_TYPE_%" neq "" (
-        %dk_call% dk_arrayUnshift options "re-run [%_APP_% - %_triple_% - %_BUILD_TYPE_%]"
-        %dk_call% dk_arrayUnshift commands "call:runCache"
+        %dk_call% array.dk_unshift options "re-run [%_APP_% - %_triple_% - %_BUILD_TYPE_%]"
+        %dk_call% array.dk_unshift commands "call:runCache"
     )
     goto end_runCache
     :runCache
@@ -44,20 +44,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     :end_runCache
     
     :: append remaining options with commands
-    %dk_call% dk_arrayPush options "Enter Manually"
-    %dk_call% dk_arrayPush commands "%dk_call% dk_enterManually"
+    %dk_call% array.dk_push options "Enter Manually"
+    %dk_call% array.dk_push commands "%dk_call% dk_enterManually"
     
-    %dk_call% dk_arrayPush options "Clear Screen"
-    %dk_call% dk_arrayPush commands "%dk_call% dk_clearScreen"
+    %dk_call% array.dk_push options "Clear Screen"
+    %dk_call% array.dk_push commands "%dk_call% dk_clearScreen"
     
-    %dk_call% dk_arrayPush options "Reload"
-    %dk_call% dk_arrayPush commands "%dk_call% dk_reload"
+    %dk_call% array.dk_push options "Reload"
+    %dk_call% array.dk_push commands "%dk_call% dk_reload"
     
-    %dk_call% dk_arrayPush options "Go Back"
-    %dk_call% dk_arrayPush commands "%dk_call% dk_unset UPDATE"
+    %dk_call% array.dk_push options "Go Back"
+    %dk_call% array.dk_push commands "%dk_call% dk_unset UPDATE"
     
-    %dk_call% dk_arrayPush options "Exit"
-    %dk_call% dk_arrayPush commands "%dk_call% dk_exit"
+    %dk_call% array.dk_push options "Exit"
+    %dk_call% array.dk_push commands "%dk_call% dk_exit"
 
 	::%dk_call% dk_printVar options
 	::%dk_call% dk_printVar commands
