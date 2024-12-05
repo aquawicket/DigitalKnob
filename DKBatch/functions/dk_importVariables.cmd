@@ -153,7 +153,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 
 	::# PLUGIN_URL_LENGTH
 	set "PLUGIN_URL_LENGTH="
-	!dk_call! dk_arrayLength PLUGIN_URL_ARRAY PLUGIN_URL_LENGTH
+	!dk_call! array.dk_length PLUGIN_URL_ARRAY PLUGIN_URL_LENGTH
 	!dk_call! dk_printVar PLUGIN_URL_LENGTH 									&:: PLUGIN_URL_LENGTH		: 8
 	
 

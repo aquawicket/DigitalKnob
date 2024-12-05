@@ -47,13 +47,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_getDirectories "%src_extractPath%" directories
     ::%dk_call% dk_printVar directories
 	
-    %dk_call% dk_arrayLength directories dir_count
+    %dk_call% array.dk_length directories dir_count
     ::%dk_call% dk_printVar dir_count
     
 	%dk_call% dk_getFiles "%src_extractPath%" files
 	::%dk_call% dk_printVar files
 	
-    %dk_call% dk_arrayLength files file_count
+    %dk_call% array.dk_length files file_count
     ::%dk_call% dk_printVar file_count
     
     if %dir_count% equ 1 if %file_count% equ 0 (

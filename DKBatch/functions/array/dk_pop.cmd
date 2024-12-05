@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1 2
  setlocal
     
-    %dk_call% dk_arrayLength %~1 _length_
+    %dk_call% array.dk_length %~1 _length_
     set /a _length_-=1
     set "removedElement=!%~1[%_length_%]!"
     endlocal & set "%~2=%removedElement%" & %dk_call% dk_unset %~1[%_length_%]

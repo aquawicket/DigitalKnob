@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2 3
  setlocal
 
-    %dk_call% dk_arrayLength %~1 end_index
+    %dk_call% array.dk_length %~1 end_index
     endlocal & set "%~1[%end_index%]=%~2"
 
 :: debug

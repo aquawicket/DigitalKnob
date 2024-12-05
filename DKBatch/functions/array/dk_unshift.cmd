@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     set "_arry_=%~1"
     ::set "_element_=%~2"
-    %dk_call% dk_arrayLength %~1 count
+    %dk_call% array.dk_length %~1 count
     set /a "prev=count-1"
     
     :array\dk_unshift_loop
