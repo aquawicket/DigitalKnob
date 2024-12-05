@@ -2,10 +2,10 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_arrayIndexOf(array, searchElement)
-::# dk_arrayIndexOf(array, searchElement, rtn_val)
-::# dk_arrayIndexOf(array, searchElement, fromIndex)
-::# dk_arrayIndexOf(array, searchElement, fromIndex, rtn_val)
+::# array\dk_indexOf(array, searchElement)
+::# array\dk_indexOf(array, searchElement, rtn_val)
+::# array\dk_indexOf(array, searchElement, fromIndex)
+::# array\dk_indexOf(array, searchElement, fromIndex, rtn_val)
 ::#
 ::#    The indexOf() method of Array instances returns the first index at which a given element can be found in the array, or -1 if it is not present.
 ::#
@@ -26,12 +26,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 ::#
-:dk_arrayIndexOf
+:dk_indexOf
     call dk_debugFunc 3
  setlocal
  
     set _count_=0
-    :dk_arrayIndexOf_loop
+    :array\dk_indexOf_loop
         if not defined %~1[%_count_%] (
             endlocal & %dk_call% dk_set %3 -1
             rem %return%
@@ -47,7 +47,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         )
 
         set /a _count_+=1
-    goto dk_arrayIndexOf_loop
+    goto array\dk_indexOf_loop
 
 :end_arrayIndexOf
 ::debug
@@ -68,21 +68,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "myArrayA[3]=4 5 6"
     set "myArrayA[4]=h i j"
 
-    %dk_call% dk_arrayIndexOf myArrayA "a b c" indexABC
+    %dk_call% array\dk_indexOf myArrayA "a b c" indexABC
     %dk_call% dk_printVar indexABC
 
-    %dk_call% dk_arrayIndexOf myArrayA "1 2 3" index123
+    %dk_call% array\dk_indexOf myArrayA "1 2 3" index123
     %dk_call% dk_printVar index123
 
-    %dk_call% dk_arrayIndexOf myArrayA "d e f" indexDEF
+    %dk_call% array\dk_indexOf myArrayA "d e f" indexDEF
     %dk_call% dk_printVar indexDEF
 
-    %dk_call% dk_arrayIndexOf myArrayA "4 5 6" index456
+    %dk_call% array\dk_indexOf myArrayA "4 5 6" index456
     %dk_call% dk_printVar index456
 
-    %dk_call% dk_arrayIndexOf myArrayA "h i j" indexGHI
+    %dk_call% array\dk_indexOf myArrayA "h i j" indexGHI
     %dk_call% dk_printVar indexGHI
 
-    %dk_call% dk_arrayIndexOf myArray "nonExistant" indexN
+    %dk_call% array\dk_indexOf myArray "nonExistant" indexN
     %dk_call% dk_printVar indexN
 %endfunction%

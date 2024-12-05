@@ -2,8 +2,8 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_arrayPop(array)
-::# dk_arrayPop(array, rtn_var)
+::# array\dk_pop(array)
+::# array\dk_pop(array, rtn_var)
 ::#
 ::#    The pop() method of Array instances removes the last element from an array and returns that element. This method changes the length of the array.
 ::#
@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 ::#
-:dk_arrayPop
+:dk_pop
     call dk_debugFunc 1 2
  setlocal
     
@@ -47,33 +47,33 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_printVar myArrayA 
     %dk_call% dk_echo
     
-    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% array\dk_pop myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% array\dk_pop myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% array\dk_pop myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% array\dk_pop myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% array\dk_pop myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
 ::  FIXME:  out of array bounds past here
-::  %dk_call% dk_arrayPop myArrayA removedA
+::  %dk_call% array\dk_pop myArrayA removedA
 ::  %dk_call% dk_printVar myArrayA
 ::  %dk_call% dk_printVar removedA
     %dk_call% dk_echo

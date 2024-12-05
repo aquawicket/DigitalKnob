@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_arrayFlat(array depth)
+::# array\dk_flat(array depth)
 ::#
 ::#    The flat() method of Array instances creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
 ::#
@@ -16,11 +16,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 ::#
-:dk_arrayFlat
+:dk_flat
     call dk_debugFunc 2
  setlocal
  
-    %dk_call% dk_todo "dk_arrayFlat"
+    %dk_call% dk_todo "array\dk_flat"
 %endfunction%
 
 
@@ -31,5 +31,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_arrayFlat "array" "depth"
+    %dk_call% array\dk_flat "array" "depth"
 %endfunction%

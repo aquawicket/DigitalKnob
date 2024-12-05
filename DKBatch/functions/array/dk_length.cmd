@@ -2,8 +2,8 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_arrayLength(array)
-::# dk_arrayLength(array rtn_var)
+::# array\dk_length(array)
+::# array\dk_length(array rtn_var)
 ::#
 ::#    The length data property of an Array instance represents the number of elements in that array. 
 ::#    The value is an unsigned, 32-bit integer that is always numerically greater than the highest index in the array.
@@ -11,15 +11,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 ::#
-:dk_arrayLength
+:dk_length
     call dk_debugFunc 2
  setlocal
  
     set _length_=0
-    :dk_arrayLength_loop
+    :array\dk_length_loop
     if defined %~1[%_length_%] ( 
        set /a _length_+=1
-       goto dk_arrayLength_loop 
+       goto array\dk_length_loop 
     )
     endlocal & set "%2=%_length_%"
 	
@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::	%dk_call% dk_printVar %2
 %endfunction%
 
-set "dk_arrayLength=%~f0"
+set "array\dk_length=%~f0"
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
@@ -42,6 +42,6 @@ set "dk_arrayLength=%~f0"
     set "myArrayA[4]=h i j"
     
 	
-    %dk_call% dk_arrayLength myArrayA myArrayLengthA
+    %dk_call% array\dk_length myArrayA myArrayLengthA
     %dk_call% dk_debug "myArrayLengthA = %myArrayLengthA%"
 %endfunction%

@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_arraySlice(array, start, end)
+::# array\dk_slice(array, start, end)
 ::#
 ::#    The slice() method of Array instances returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) 
 ::#    where start and end represent the index of items in that array. The original array will not be modified.
@@ -27,11 +27,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 ::#
-:dk_arraySlice
+:dk_slice
     call dk_debugFunc 2
  setlocal
  
-    %dk_call% dk_todo "dk_arraySlice"
+    %dk_call% dk_todo "array\dk_slice"
 %endfunction%
 
 
