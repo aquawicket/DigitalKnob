@@ -1,4 +1,5 @@
 @echo off
+if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 echo base64\dk_decode
@@ -37,9 +38,9 @@ echo base64\dk_decode
     ::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     ::set "input=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
     ::set "output=%DKBRANCH_DIR%\DKBuilder_decoded.cmd"
-    ::%dk_call% dk_decode "%input%" "%output%"
+    ::%dk_call% base64\dk_decode "%input%" "%output%"
     
     %dk_call% dk_selectFile input
     %dk_call% base64\dk_decode "%input%"
-    ::%dk_call% dk_decode "%input%"
+    ::%dk_call% base64\dk_decode "%input%"
 %endfunction%
