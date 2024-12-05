@@ -199,7 +199,7 @@ function(dk_importVariables url)
 	
 	
 	###### Print the current plugin to the window title bar ######
-	dk_title("Processing: ${PLUGIN_IMPORT_NAME}")
+	dk_title(" >>> ${PLUGIN_IMPORT_NAME}")
 	
 	
 	

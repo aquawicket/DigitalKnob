@@ -38,10 +38,6 @@ function(dk_dependB plugin)
 		return()
 	endif()
 	
-# 	TODO TODO TODO TODO 
-# 	dk_createSmartObject(${plugin}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
-# 	TODO TODO TODO TODO 
-	
 #	If dk_depend had second variable (a sub library), set that variable to ON
 #	if(${ARGC} GREATER 1)
 #	if(dkdepend_list MATCHES "${plugin} ${args}")
@@ -67,7 +63,6 @@ function(dk_dependB plugin)
 #		dk_runDepends(${plugin}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 #	endif()
 endfunction()
-dk_createOsMacros("dk_depend")
 
 
 

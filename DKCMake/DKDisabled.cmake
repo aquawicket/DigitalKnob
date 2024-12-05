@@ -35,6 +35,7 @@ dk_disable(dukluv)
 dk_disable(fontconfig)
 dk_disable(openal)
 dk_disable(freealut)
+dk_disable(glfw)
 dk_disable(gzip)
 dk_disable(jasper)
 dk_disable(jerryscript)
@@ -72,8 +73,13 @@ dk_disable(x264)
 dk_disable(x265)
 dk_disable(DKDOM_Window)
 dk_disable(DKHook)
+dk_disable(DKPlugin1)			# TODO
+dk_disable(DKPlugin2)			# TODO
 dk_disable(DKRestart)
+dk_disable(DKRmlAudio)			# build errors
+dk_disable(DKRmlIframe)			# build errors
 dk_disable(DKRmlTestElements)
+dk_disable(DKThread)
 dk_disable(DKWebSockets)
 ###########################
 
@@ -81,14 +87,12 @@ dk_disable(DKWebSockets)
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_disable(libxml2)
 endif()
-dk_disable(glfw)
+
 #dk_disable(smpeg2)				# smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier
 
 # DISABLED FOR ALL TARGETS
-dk_disable(DKPlugin1)			# TODO
-dk_disable(DKPlugin2)			# TODO
-dk_disable(DKRmlAudio)			# build errors
-dk_disable(DKRmlIframe)			# build errors
+
+
 
 dk_disable(DKTemplateEventTest)	# DEPRECATED: using DKEventTargetTest instead
 dk_disable(DKWidget)			# DEPRECATED
