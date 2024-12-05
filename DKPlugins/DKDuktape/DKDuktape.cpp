@@ -122,7 +122,10 @@ bool DKDuktape::Init(){
 #if DEBUG 
 		//FIXME: This should work as DKDEBUGFUNC() does. By Default, in DEBUG mode, DKDuktapeDebugger should
 		//display function calls. And /assets/settings.txt should have a [LOG_JS_DEBUG] entry allowing setting overwrite. etc.
-		DKClass::DKCreate("DKDuktapeDebugger");
+
+
+//  TODO - the debugger works. just needs an interface
+//		DKClass::DKCreate("DKDuktapeDebugger");
 #endif
 		DKClass::DKCreate("DKDuktapeJS");
 

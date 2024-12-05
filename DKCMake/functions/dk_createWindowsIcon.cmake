@@ -12,11 +12,8 @@ function(dk_createWindowsIcon)
 	dk_debugFunc(2)
 	
 	dk_assertPath("${ARGV0}")
-	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	dk_depend(imagemagick)
-	if(NOT EXISTS "${IMAGEMAGICK_CONVERT_EXE}")
-		dk_fatal("IMAGEMAGICK_CONVERT_EXE is invalid!")
-	endif()
+	dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
 	dk_dirname("${ARGV1}" dirname)
 	dk_makeDirectory("${dirname}")
 	

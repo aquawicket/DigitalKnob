@@ -20,14 +20,15 @@ endif()
 
 ### IMPORT LIBRARY ###
 if(UNIX_HOST)
-		dk_import		(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
+	dk_import		(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
 elseif(WIN_X86_HOST)
-		dk_import		(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-38-portable-Q16-x86.zip)
+	dk_import		(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-38-portable-Q16-x86.zip)
 elseif(WIN_X86_64_HOST)
-		dk_import		(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-38-portable-Q16-x64.zip)
+	dk_import		(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-38-portable-Q16-x64.zip)
 endif()
 if(WIN_HOST)
-		dk_findProgram	(IMAGEMAGICK_CONVERT_EXE magick.exe ${IMAGEMAGICK_DIR})
+	dk_findProgram	(IMAGEMAGICK_CONVERT_EXE magick.exe "${IMAGEMAGICK_DIR}")
+	dk_assertPath	(IMAGEMAGICK_CONVERT_EXE)
 endif()
 
 
