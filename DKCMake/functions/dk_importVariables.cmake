@@ -196,7 +196,13 @@ function(dk_importVariables url)
 		set(PLUGIN_IMPORT_NAME ${PLUGIN_URL_FILE})
 	endif()
 	dk_printVar(PLUGIN_IMPORT_NAME)										# PLUGIN_IMPORT_NAME		: zLib
-
+	
+	
+	###### Print the current plugin to the window title bar ######
+	dk_title("Processing: ${PLUGIN_IMPORT_NAME}")
+	
+	
+	
 	# PLUGIN_IMPORT_NAME_LOWER
 	unset(PLUGIN_IMPORT_NAME_LOWER)
 	dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)

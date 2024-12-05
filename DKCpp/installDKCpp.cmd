@@ -84,7 +84,6 @@ if "%~1" neq ""    goto runDKCpp
 	if not defined MSYSTEM  if "%target_env%"=="gcc"   if "%target_arch%"=="x86_64" set "MSYSTEM=MINGW64"
 	%dk_call% dk_printVar MSYSTEM
 
-	
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	

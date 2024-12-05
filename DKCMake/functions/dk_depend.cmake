@@ -16,7 +16,7 @@ function(dk_depend plugin)
 	
 	dk_toUpper("${plugin}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
-	if((NOT ${PLUGIN}) OR NOT (${PLUGIN}_DIR))
+	if((NOT EXISTS ${PLUGIN}) OR (NOT EXISTS ${${PLUGIN}_DIR}))
 		dk_notice("loading ${PLUGIN} . . .")
 		dk_dependB(${plugin})
 	else()
