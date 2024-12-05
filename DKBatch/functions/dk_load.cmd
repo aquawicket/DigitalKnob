@@ -1,5 +1,5 @@
 @echo off
-if exist "%DKBATCH_FUNCTIONS_DIR%\%~n1.cmd" (goto:eof)
+if exist "%DKBATCH_FUNCTIONS_DIR_%%~n1.cmd" (goto:eof)
 if exist "%~1" (goto:eof)
 ::if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
@@ -31,7 +31,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         for %%Z in ("%funcPath%") do set "funcName=%%~nZ"
     ) else (
         set "funcName=%~n1"
-        set "funcPath=%DKBATCH_FUNCTIONS_DIR%\%~n1.cmd"
+        set "funcPath=%DKBATCH_FUNCTIONS_DIR_%%~n1.cmd"
     )
 
     if not exist "%funcPath%" echo Downloading %funcName%

@@ -14,6 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1 2
  setlocal
  
+	
     set "inputFile=%~1"
     set "outputFile=%inputFile%.b64"
     if %__ARGC__% equ 2 set "outputFile=%~2"
@@ -40,6 +41,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::set "output=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
     
     %dk_call% dk_selectFile input
-    %dk_call% base64\dk_encode "%input%"
-    ::%dk_call% base64\dk_encode "%input%" "test.b64"
+    %dk_call% base64.dk_encode "%input%"
+    ::%dk_call% base64.dk_encode "%input%" "test.b64"
 %endfunction%

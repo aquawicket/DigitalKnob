@@ -7,25 +7,24 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_call
-    ::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" call dk_debugFunc 1 99
+    ::if exist "%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd" call dk_debugFunc 1 99
  ::setlocal
-   
-    if "%~1"=="dk_debugFunc" echo [31m ERROR: dk_call cannot be used with dk_debugFunc [0m & %return%
-
-    set "arg=%~1"
+	set "arg=%~1"
+	set "arg=%arg:.=\%"       &:: replace '.' with '\'
+	
+    if "%arg%"=="dk_debugFunc" echo [31m ERROR: dk_call cannot be used with dk_debugFunc [0m & %return%
     if "%arg:dk_=%"=="%arg%"  echo [31m ERROR: dk_call[%arg%]: dk_call can only be used with dk_ functions [0m & %return%
-
-    if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" (
-        call dk_source "%~1"
-        if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" echo [31m ERROR: failed to download %~1.cmd [0m & %return%
-        if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_isCRLF.cmd" call dk_source dk_isCRLF
-        if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
-        rem if exist "%DKBATCH_FUNCTIONS_DIR%\dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR%\dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
+	
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%%arg%.cmd" (
+        call dk_source "%arg%"
+        if not exist "%DKBATCH_FUNCTIONS_DIR_%%arg%.cmd" echo [31m ERROR: failed to download %arg%.cmd [0m & %return%
+		if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_source dk_isCRLF
+        if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
+        rem if exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR_%%arg%.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR_%%arg%.cmd"
     )
 
 	set /a "frame=%DKSTACK_length%-1"
 	call set "THIS=%%DKSTACK[%frame%].__FILE__%% %*"
-	::echo %THIS%
 	
 	if ERRORLEVEL 1 %dk_call% set "EXIT_CODE=%ERRORLEVEL%"
     if not defined EXIT_CODE (
@@ -61,7 +60,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::if defined EXIT_CODE (echo ERROR ERROR ERROR ERROR ERROR)
 	::if not defined EXIT_CODE (title "%DKSTACK[0].__FILE__%")
 
-    call %*
+	::echo %*
+	set args=%*
+	set "args=!args:%~1=%arg%!"
+    call %DKBATCH_FUNCTIONS_DIR_%%args%
     exit /b %errorlevel%
 %endfunction%
 
@@ -71,13 +73,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    ::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" call dk_debugFunc 0
+    ::if exist "%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd" call dk_debugFunc 0
  setlocal
     %dk_call% dk_color
     call dk_call dk_color
     %dk_call% dk_color
     call dk_call dk_color
     %dk_call% dk_color
-	
 	%dk_call% dk_set myVarB "dk_info('test dk_info message')"
 %endfunction%

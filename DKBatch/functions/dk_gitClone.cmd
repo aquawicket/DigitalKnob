@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_isEmptyDirectory "%~2" || %dk_call% dk_copy "%~2" "%~2_BACKUP"
 	if not exist "%~2_BACKUP" %dk_call% dk_fatal "dk_copy failed" && %return%
 	%dk_call% dk_set DKBATCH_FUNCTIONS_DIR "%~2_BACKUP\DKBatch\functions"
-	%dk_call% dk_set DKBATCH_FUNCTIONS_DIR_ "%DKBATCH_FUNCTIONS_DIR%\"
+	%dk_call% dk_set DKBATCH_FUNCTIONS_DIR_ "%DKBATCH_FUNCTIONS_DIR_%"
 	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	
 	::%dk_call% dk_cd %DKCACHE_DIR%
