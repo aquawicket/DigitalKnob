@@ -424,9 +424,10 @@ function(dk_importVariables url)
 	############# TARGET <PLUGIN>_VARIABLES #############
 	#####################################################
 	# These variables require a target_triple
-	if(NOT triple)
-		return()
-	endif()
+#	if(NOT triple)
+#		return()
+#	endif()
+	dk_assertVar(triple)
 	
 	# <PLUGIN>_TRIPLE_DIR
 	unset(${CURRENT_PLUGIN}_TRIPLE_DIR)

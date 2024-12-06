@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(duktape)
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-file(GLOB duktape_SRC ${CMAKE_SOURCE_DIR}/src/*.c)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+file(GLOB duktape_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
 add_library(duktape STATIC ${duktape_SRC})
 
 #### BUILD EXAMPLES ###

@@ -20,7 +20,7 @@ function(dk_depend plugin)
 		dk_notice("loading ${PLUGIN} . . .")
 		dk_dependB(${plugin})
 	else()
-		#dk_notice("${PLUGIN} is already loaded")
+		dk_notice("${PLUGIN} is already loaded")
 	endif()
 endfunction()
 

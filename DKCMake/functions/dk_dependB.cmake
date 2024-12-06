@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_dependB plugin)
 	dk_debugFunc()
 	
-	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
+	#if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		if(plugin IN_LIST init_list)
 			#dk_debug("${plugin} is allready in init_list")
 			return()  #plugin is already in the init_list
@@ -23,7 +23,7 @@ function(dk_dependB plugin)
 		dk_getPathToPlugin(${plugin} plugin_path)
 		dk_load(${plugin_path}/DKMAKE.cmake)
 		#return()
-	endif()
+	#endif()
 	
 #	if(${ARGC} GREATER 1)
 #		dk_info(ARGV)
