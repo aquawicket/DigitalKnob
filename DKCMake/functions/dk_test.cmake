@@ -55,5 +55,7 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_test("arg 1" "arg 2" rtn_var)
-    dk_echo("rtn_var = ${rtn_var}")	
+    dk_echo("rtn_var = ${rtn_var}")
+	
+	include("array/dk_copyWithin.cmake")
 endfunction()

@@ -13,10 +13,10 @@ function(dk_assertPath)
 	dk_debugFunc(1)
 
 	set(_path_ "${ARGV0}")
-	dk_printVar(_path_)
+	#dk_printVar(_path_)
 	
 	dk_varToString(_path_ path_value)
-	dk_printVar(path_value)
+	#dk_printVar(path_value)
 	
 	if(EXISTS "${_path_}" OR EXISTS "${${_path_}}")
 		return()

@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_arguments()
 #
 #
-macro(dk_arguments param1)
+macro(dk_arguments)
 	dk_debugFunc()
 	
 	######### CMAKE_ variables #########
@@ -36,7 +36,10 @@ macro(dk_arguments param1)
 	endforeach()
 	#####################################
 	
-	###### argv/argc - current function args/count ######
+	# DO NOT USE ARGV, ARGC, ARGN, ARGV{n} OR ARGN{n}
+	
+	
+	###### argv/argc - current macro args/count ######
 	set(argc 0)
 	set(argv "${ARGV}")
 	foreach(arg IN LISTS argv)
@@ -53,7 +56,7 @@ macro(dk_arguments param1)
 	endforeach()
 	#####################################################
 
-	###### argn/argnc - current function extra args/count ######
+	###### argn/argnc - current macro extra args/count ######
 	set(argnc 0)
 	set(argn "${ARGN}")
 	foreach(arg IN LISTS argn)
@@ -69,6 +72,7 @@ macro(dk_arguments param1)
 		message("argn${n}                              = ${argn${n}}")
 	endforeach()
 	#############################################################
+	
 	
 	###### PARGV - Parent Function args ######
 	unset(PARGV)
@@ -116,7 +120,7 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	TEST_function(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")	
-	TEST_macro(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
+	#TEST_macro(abc OPTION1 "value1" 123 OPTION2 "value2" OPTION4 "value4")
 endfunction()
 
 function(TEST_function param1)

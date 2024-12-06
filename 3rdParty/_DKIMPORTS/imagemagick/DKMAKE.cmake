@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 if(NOT DKCMAKE_FUNCTIONS_DIR_)
-	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+	set(DKCMAKE_FUNCTIONS_DIR_ "${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/")
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
@@ -13,22 +13,24 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_depend(ghostscript)
 
 dk_validate(host_triple "dk_host_triple()")
-if(WIN_HOST)
-	dk_depend(vc_redist)
-endif()
-
+#if(WIN_HOST)
+#	dk_depend(vc_redist)
+#endif()
 
 ### IMPORT LIBRARY ###
 if(UNIX_HOST)
-	dk_import		("https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip")
+	dk_import("https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip")
 elseif(WIN_X86_HOST)
-	dk_import		("https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-41-portable-Q16-x86.zip")
+	dk_import("https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-41-portable-Q16-x86.zip")
 elseif(WIN_X86_64_HOST)
-	dk_import		("https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-41-portable-Q16-x86.zip")
+	dk_import("https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-41-portable-Q16-x86.zip")
 endif()
-if(WIN_HOST)
-	dk_findProgram	(IMAGEMAGICK_CONVERT_EXE magick.exe "${IMAGEMAGICK}")
-	dk_assertPath	(IMAGEMAGICK_CONVERT_EXE)
+
+if(NOT EXISTS "${IMAGEMAGICK_CONVERT_EXE}")
+	if(WIN_HOST)
+		dk_findProgram	(IMAGEMAGICK_CONVERT_EXE magick.exe "${IMAGEMAGICK}")
+		dk_assertPath	(IMAGEMAGICK_CONVERT_EXE)
+	endif()
 endif()
 
 

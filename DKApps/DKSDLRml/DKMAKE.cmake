@@ -1,7 +1,7 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
 
+dk_depend(imagemagick)
 dk_depend(sdl)	#FIX for DK/DKAndroid.cpp, line:35
 dk_depend(DK)
 dk_depend(DKArchive)
