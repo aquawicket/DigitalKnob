@@ -5,7 +5,11 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ gradle ############
 # https://gradle.org
 
+dk_validate(host_triple "dk_host_triple()")
+if(WIN_HOST)
+	dk_set(bat ".bat")
+endif()
 dk_set(GRADLE_USER_HOME ${DIGITALKNOB_DIR}/.gradle)
