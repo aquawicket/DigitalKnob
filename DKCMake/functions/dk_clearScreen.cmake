@@ -21,7 +21,7 @@ function(dk_clearScreen)
 	#find_program(CMD_EXE cmd.exe)
 	dk_depend(cmd)
 	if(CMD_EXE)
-		execute_process(COMMAND cmd /c clear)  # FIXME: only clears 1 line
+		execute_process(COMMAND ${CMD_EXE} /c clear)  # FIXME: only clears 1 line
 		return()
 	endif()
 	

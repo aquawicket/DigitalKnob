@@ -32,29 +32,29 @@ dk_import(https://github.com/emscripten-core/emsdk/archive/861ce44b.zip)
 # Download and install the latest SDK tools.
 if(WIN_HOST)
 	dk_depend(cmake)
-	execute_process(COMMAND cmd /c ${CMAKE_EXE} -E env PATH=${PYTHON3_DIR_WIN}	"${EMSDK_DIR}/emsdk.bat"  install latest 			COMMAND_ECHO STDOUT)
+	execute_process(COMMAND ${CMD_EXE} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_DIR_WIN}	"${EMSDK_DIR}/emsdk.bat"  install latest 			COMMAND_ECHO STDOUT)
 else()
 	execute_process(COMMAND                                         			"${EMSDK_DIR}/emsdk"      install latest 			COMMAND_ECHO STDOUT)
 endif()
 
 # Make the "latest" SDK "active" for the current user. (writes .emscripten file)
 if(WIN_HOST)
-	execute_process(COMMAND cmd /c ${CMAKE_EXE} -E env PATH=${PYTHON3_DIR_WIN}	"${EMSDK_DIR}/emsdk.bat" activate latest 			COMMAND_ECHO STDOUT)  # --permanent
+	execute_process(COMMAND ${CMD_EXE} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_DIR_WIN}	"${EMSDK_DIR}/emsdk.bat" activate latest 			COMMAND_ECHO STDOUT)  # --permanent
 else()
 	execute_process(COMMAND                                         			"${EMSDK_DIR}/emsdk"     activate latest 			COMMAND_ECHO STDOUT)
 endif()
 
 # Activate PATH and other environment variables in the current terminal
 if(WIN_HOST)
-	execute_process(COMMAND cmd /c call											"${EMSDK_DIR}/emsdk_env.bat" 						COMMAND_ECHO STDOUT)
+	execute_process(COMMAND ${CMD_EXE} /c call											"${EMSDK_DIR}/emsdk_env.bat" 						COMMAND_ECHO STDOUT)
 else()
 	execute_process(COMMAND chmod 777 											"${EMSDK_DIR}/emsdk_env.sh"  						COMMAND_ECHO STDOUT)
 	execute_process(COMMAND                                         			"${EMSDK_DIR}/emsdk_env"     						COMMAND_ECHO STDOUT)
 endif()
 
 #if(WIN_HOST)
-#	execute_process(COMMAND cmd /c call 									"${EMSDK_DIR}/emsdk.bat" install mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
-#	execute_process(COMMAND cmd /c call 									"${EMSDK_DIR}/emsdk.bat" activate mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
+#	execute_process(COMMAND ${CMD_EXE} /c call 									"${EMSDK_DIR}/emsdk.bat" install mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
+#	execute_process(COMMAND ${CMD_EXE} /c call 									"${EMSDK_DIR}/emsdk.bat" activate mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
 #endif()
 
 if(EXISTS "${EMSDK_DIR}/upstream/emscripten/src/settings.js")

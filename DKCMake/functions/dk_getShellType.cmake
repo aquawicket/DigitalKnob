@@ -36,7 +36,7 @@ function(dk_getShellType)
 	execute_process(COMMAND dk_polyglot OUTPUT_VARIABLE RAW_ECHO)
 	message(STATUS "RAW_ECHO = ${RAW_ECHO}")
 	
-	execute_process(COMMAND cmd /c echo %COMSPEC% OUTPUT_VARIABLE CMD_PATH)
+	execute_process(COMMAND ${CMD_EXE} /c echo %COMSPEC% OUTPUT_VARIABLE CMD_PATH)
 	message(STATUS "CMD_PATH = ${CMD_PATH}")
 	
 	execute_process(COMMAND powershell -c Write-Host "(Get-Process -Id $pid).Path" OUTPUT_VARIABLE POWERSHELL_PATH)

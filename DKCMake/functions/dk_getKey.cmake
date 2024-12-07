@@ -13,7 +13,7 @@ function(dk_getKey rtn_var)
 	#find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
 		dk_fixme("${CMAKE_CURRENT_FUNCTION}")
-		execute_process(COMMAND cmd /c pause)
+		execute_process(COMMAND ${CMD_EXE} /c pause)
 		return()
 	endif()
 	

@@ -24,25 +24,25 @@ WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x
 if(WIN_HOST)
 	###### JAVA_VERSION ######
 	set(ENV{JAVA_VERSION} 11)
-	execute_process(COMMAND cmd /c setx JAVA_VERSION "$ENV{JAVA_VERSION}")
+	execute_process(COMMAND ${CMD_EXE} /c setx JAVA_VERSION "$ENV{JAVA_VERSION}")
 	
 	###### JAVA_HOME ######
 	set(ENV{JAVA_HOME} "${OPENJDK_DIR}")
 	#dk_getNativePath("$ENV{JAVA_HOME}" ENV{JAVA_HOME})
 	dk_replaceAll("$ENV{JAVA_HOME}" "/" "\\" ENV{JAVA_HOME})
-#	execute_process(COMMAND cmd /c setx JAVA_HOME "$ENV{JAVA_HOME}")
+#	execute_process(COMMAND ${CMD_EXE} /c setx JAVA_HOME "$ENV{JAVA_HOME}")
 	
 	###### VS_JavaHome ######
 	set(ENV{VS_JavaHome} "$ENV{JAVA_HOME}")
-	execute_process(COMMAND cmd /c setx VS_JavaHome "$ENV{VS_JavaHome}")
+	execute_process(COMMAND ${CMD_EXE} /c setx VS_JavaHome "$ENV{VS_JavaHome}")
 	
 	###### STUDIO_JDK ######
 	set(ENV{STUDIO_JDK} "$ENV{JAVA_HOME}")
-	execute_process(COMMAND cmd /c setx STUDIO_JDK "$ENV{STUDIO_JDK}")
+	execute_process(COMMAND ${CMD_EXE} /c setx STUDIO_JDK "$ENV{STUDIO_JDK}")
 	
 	###### STUDIO_GRADLE_JDK ######
 	set(ENV{STUDIO_GRADLE_JDK} "$ENV{JAVA_HOME}")
-	execute_process(COMMAND cmd /c setx STUDIO_GRADLE_JDK "$ENV{STUDIO_GRADLE_JDK}")
+	execute_process(COMMAND ${CMD_EXE} /c setx STUDIO_GRADLE_JDK "$ENV{STUDIO_GRADLE_JDK}")
 	
 	
 	###### registerJDK.cmd ######

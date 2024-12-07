@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_registryKeyExists)
     dk_debugFunc()
 	
-	set(cmnd cmd /c "reg.exe" query %~1)
+	set(cmnd ${CMD_EXE} /c "reg.exe" query %~1)
 	execute_process(COMMAND echo ${cmnd} RESULT_VARIABLE result)
 	message("result = ${result}")
 endfunction()

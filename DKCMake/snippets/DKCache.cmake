@@ -23,22 +23,22 @@ set(DK3RDPARTY_DIR "C:/Users/$ENV{USERNAME}/digitalknob/Development/3rdParty" CA
 
 set(ZLIB ${DK3RDPARTY_DIR}/zlib-1.2.11 CACHE PATH "" FORCE)
 if(EXISTS ${ZLIB}/${triple}/Release/zlibstatic.lib)
-	SET(ZLIB_INCLUDE_DIR ${ZLIB} CACHE PATH "" FORCE)
-	SET(ZLIB_LIBRARY ${ZLIB}/${triple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
-	SET(ZLIB_LIBRARY_DEBUG ${ZLIB}/${triple}/Debug/zlibstatic.lib CACHE FILEPATH "" FORCE)
-	SET(ZLIB_LIBRARY_RELEASE ${ZLIB}/${triple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
+	set(ZLIB_INCLUDE_DIR ${ZLIB} CACHE PATH "" FORCE)
+	set(ZLIB_LIBRARY ${ZLIB}/${triple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
+	set(ZLIB_LIBRARY_DEBUG ${ZLIB}/${triple}/Debug/zlibstatic.lib CACHE FILEPATH "" FORCE)
+	set(ZLIB_LIBRARY_RELEASE ${ZLIB}/${triple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
 endif()
 
-#EXECUTE_PROCESS(COMMAND cmd /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
+#execute_process(COMMAND ${CMD_EXE} /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
 
 set(BZIP2 ${DK3RDPARTY_DIR}/bzip2-1.0.6 CACHE PATH "" FORCE)
 if(EXISTS ${BZIP2}/${triple}/libbz2.lib)
-set(BZIP2_ROOT ${BZIP2} CACHE PATH "" FORCE)
-set(BZIP2_INCLUDE_DIR ${BZIP2} CACHE PATH "" FORCE)
-set(BZIP2_LIBRARY ${BZIP2}/${triple}/libbz2.lib CACHE FILEPATH "" FORCE)
-set(BZIP2_LIBRARY_DEBUG ${BZIP2}/${triple}/libbz2.lib CACHE FILEPATH "" FORCE)
-set(BZIP2_LIBRARY_RELEASE ${BZIP2}/${triple}/libbz2.lib CACHE FILEPATH "" FORCE)
-set(LIBGCC_LIBRARY ${BZIP2}/${triple}/libgcc.lib CACHE FILEPATH "" FORCE)
+	set(BZIP2_ROOT ${BZIP2} CACHE PATH "" FORCE)
+	set(BZIP2_INCLUDE_DIR ${BZIP2} CACHE PATH "" FORCE)
+	set(BZIP2_LIBRARY ${BZIP2}/${triple}/libbz2.lib CACHE FILEPATH "" FORCE)
+	set(BZIP2_LIBRARY_DEBUG ${BZIP2}/${triple}/libbz2.lib CACHE FILEPATH "" FORCE)
+	set(BZIP2_LIBRARY_RELEASE ${BZIP2}/${triple}/libbz2.lib CACHE FILEPATH "" FORCE)
+	set(LIBGCC_LIBRARY ${BZIP2}/${triple}/libgcc.lib CACHE FILEPATH "" FORCE)
 endif()
 
 
