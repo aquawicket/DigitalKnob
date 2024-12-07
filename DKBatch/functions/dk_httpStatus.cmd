@@ -9,7 +9,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2
  setlocal
  
-    for /f "tokens=*" %%a in ('curl -sI -o nul -w "%%{http_code}" "%~1"') do (
+	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
+    for /f "tokens=*" %%a in ('%CURL_EXE% -sI -o nul -w "%%{http_code}" "%~1"') do (
  	    Set "httpCode=%%a"
  	    rem If [!httpcode!] EQU [503] (set "Status_URL=Service Unavailable")
  	    rem If [!httpcode!] EQU [500] (set "Status_URL=Internal Server Error")

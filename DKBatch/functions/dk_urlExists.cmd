@@ -8,9 +8,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1 2
  setlocal
  
+   
     :curl
+	    %dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
         if defined DISABLE_curl goto end_curl_exists
-        for /f "usebackq tokens=*" %%f in (`curl -sI -o nul -w "%%{http_code}" "%~1"`) do set "httpCode=%%f"
+        for /f "usebackq tokens=*" %%f in (`%CURL_EXE% -sI -o nul -w "%%{http_code}" "%~1"`) do set "httpCode=%%f"
 
         :: if !httpCode! equ 503 echo !httpCode! Service Unavailable
         :: if !httpCode! equ 500 echo !httpCode! Internal Server Error

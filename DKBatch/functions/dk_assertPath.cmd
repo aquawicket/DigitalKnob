@@ -66,11 +66,11 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 	
 	%return%
 	::# As a variable name quoted
-    %dk_call% dk_assertPath "myPath"								&::NOT OK
+    %dk_call% dk_assertPath "myPath"								&::NOT OK - no "quotes" around variable names
 	::# unquoted
-	%dk_call% dk_assertPath C:\Windows							    &::NOT OK
+	%dk_call% dk_assertPath C:\Windows							    &::NOT OK - must be wrapped in "quotes"
 	::# As a variable unquoted
-    %dk_call% dk_assertPath %myPath%								&::NOT OK
+    %dk_call% dk_assertPath %myPath%								&::NOT OK - must have "quotes around vaiables"
 	::# Non Existent Path
     %dk_call% dk_assertPath "C:\NonExistentPath"					&::ASSERT
 %endfunction%

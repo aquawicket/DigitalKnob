@@ -89,7 +89,8 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     :curl_dl
     if defined DISABLE_curl goto end_curl_dl
     %dk_call% dk_echo "Downloading via dk_curl"
-    if not exist "%destination%_DOWNLOADING" curl --help %NO_OUTPUT% && curl -L "%url%" -o "%destination%_DOWNLOADING"
+	%dk_call% dk_validate CURL_EXE "dk_CURL_EXE"
+    if not exist "%destination%_DOWNLOADING" %CURL_EXE% --help %NO_OUTPUT% && curl -L "%url%" -o "%destination%_DOWNLOADING"
     %dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
     if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
     if exist "%destination%_DOWNLOADING" goto download_done
