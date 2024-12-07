@@ -3,8 +3,7 @@
 cd C:\Users\Administrator\digitalknob\Development\3rdParty\openssl-2f362e9\win_x86_64_clang\Debug && set "PATH=C:\Users\Administrator\digitalknob\Development\3rdParty\msys2-x86_64-20240727\usr\bin;%PATH%" & C:\Users\Administrator\digitalknob\Development\3rdParty\msys2-x86_64-20240727\usr\bin\perl ../../Configure no-shared --debug mingw64 CC=clang
 
 ::############ CMD review configuration ############
-cd C:\Users\Administrator\digitalknob\Development\3rdParty\openssl-2f362e9\win_x86_64_clang\Debug && set "PATH=C:\Users\Administrator\digitalknob\Development\3rdParty\msys2-x86_64-20240727\usr\bin;%PATH%" & C:\Users\Administrator\digitalknob\Development\3rdParty\msys2-x86_64-20240727\usr\bin\perl configdata.pm --dump
-
+::cd C:\Users\Administrator\digitalknob\Development\3rdParty\openssl-2f362e9\win_x86_64_clang\Debug && set "PATH=C:\Users\Administrator\digitalknob\Development\3rdParty\msys2-x86_64-20240727\usr\bin;%PATH%" & C:\Users\Administrator\digitalknob\Development\3rdParty\msys2-x86_64-20240727\usr\bin\perl configdata.pm --dump
 cd C:\Users\Administrator\digitalknob\Development\3rdParty\openssl-2f362e9\win_x86_64_clang\Debug && C:\Users\Administrator\digitalknob\Development\3rdParty\msys2-x86_64-20240727\usr\bin\perl configdata.pm --dump
 
 ::############ CMD CLANG64 make ############ WORKS
