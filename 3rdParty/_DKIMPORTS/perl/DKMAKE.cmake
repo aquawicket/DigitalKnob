@@ -6,12 +6,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 
+############ pearl ############
 # https://packages.msys2.org/package/mingw-w64-x86_64-perl
 
 
-#if(PERL_EXE)
-#	return()
-#endif()
+if(EXISTS "${PERL_EXE}")
+	dk_return()
+endif()
 
 
 if(WIN_HOST)
@@ -56,8 +57,8 @@ elseif(win_x86_64_msvc)
 	
 else()
 	dk_findProgram(PERL_EXE perl)
-	
+
 endif()
 
 
-#dk_assertVar(PERL_EXE)
+dk_assertPath(PERL_EXE)

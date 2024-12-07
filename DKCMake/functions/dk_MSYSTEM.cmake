@@ -26,7 +26,7 @@ function(dk_MSYSTEM)
 			dk_warning("The target triple:${triple} does not contain a valid msystem")
 		endif()
 		if(MSYSTEM)
-			dk_set(${MSYSTEM} 1)				# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
+			dk_set(${MSYSTEM} 1)			# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
 		endif()
 	endif()
 	
