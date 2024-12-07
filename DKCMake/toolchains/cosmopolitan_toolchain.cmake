@@ -68,4 +68,4 @@ endforeach()
 
 
 ############ COSMO BASH EXPORTS ############
-dk_set(COSMO_BASH_EXPORTS					"export PATH=${COSMOCC}/bin:$PATH")
+dk_set(COSMO_BIN					"export PATH=${COSMOCC}/bin:$PATH")

@@ -28,8 +28,8 @@ dk_append(DKCONFIGURE_CXXFLAGS		${CMAKE_CXX_FLAGS})
 
 ############ Bash Variable Exports ############
 dk_depend(cygpath)
-dk_command(${CYGPATH_EXE} -m 		"${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
-dk_set(MSYS2_BASH_EXPORTS			"export PATH=${MSYS2_UNIXPATH}/usr/bin:$PATH")
-dk_set(MSYS2_EXE 					"${MSYS2_DIR}/msys2.exe")
-dk_set(CLANG32_BASH_EXPORTS			"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")
-dk_set(CLANG32_EXE 					"${MSYS2_DIR}/clang32.exe")
+dk_command(${CYGPATH_EXE} -m 	"${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
+dk_set(MSYS2_BIN				"export PATH=${MSYS2_UNIXPATH}/usr/bin:$PATH")
+dk_set(MSYS2_EXE 				"${MSYS2_DIR}/msys2.exe")
+dk_set(CLANG32_BIN				"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")
+dk_set(CLANG32_EXE 				"${MSYS2_DIR}/clang32.exe")

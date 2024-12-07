@@ -172,7 +172,7 @@ dk_set(ANDROID_NATIVE_API_LEVEL		31)
 dk_set(ANDROID_PLATFORM				31)
 dk_set(ANDROID_API 					31)
 dk_set(ANDROID_MIN_API 				19)
-dk_set(ANDROID_BASH_EXPORTS			"export ANDROID_NDK_ROOT=${ANDROID_NDK};"
+dk_set(ANDROID_BIN					"export ANDROID_NDK_ROOT=${ANDROID_NDK};"
 									"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
 									"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH;")
 
