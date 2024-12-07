@@ -17,6 +17,10 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 %= This creates an escaped Line Feed - DO NOT ALTER =%
 )
 
+(set LF=^
+%= This creates a Line Feed - DO NOT ALTER =%
+)
+
 ::####################################################################
 ::# DK
 ::#
