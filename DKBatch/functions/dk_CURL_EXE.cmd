@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
    
     if defined CURL_EXE %return%
     
-	%dk_call% dk_findProgram CURL_EXE "curl.exe" "%windir%\system32"
+	%dk_call% dk_findProgram CURL_EXE "curl.exe" "%WINDIR%\system32"
 
 %endfunction%
 

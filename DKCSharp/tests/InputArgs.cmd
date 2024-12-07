@@ -27,7 +27,7 @@ for /f "usebackq delims=|" %%Z in (`%command% ^& call echo %%^^ERRORLEVEL%%`) do
 set /A numLines=i-1
 rem Final errorlevel is stored in last line
 if !line[%i%]! gtr 0 (
-   set /a lastline = !line[%i%]! 2>nul && cmd /c exit %lastline%
+   set /a lastline = !line[%i%]! 2>nul && %COMSPEC% /c exit %lastline%
 ) else (
    rem Process output lines
    for /L %%a in (1,1,%numLines%) do (

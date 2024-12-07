@@ -30,4 +30,4 @@ FOR /L %%G IN (0) DO (
 
 
 :checkify
-cmd /c exit -1073741510
+%COMSPEC% /c exit -1073741510

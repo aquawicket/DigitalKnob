@@ -12,7 +12,7 @@ if "%~1" neq "" goto runDKJScript
 	set "WSCRIPT_EXE=wscript.exe"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKJScript"
-	ftype DKJScript=cmd /c call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
+	ftype DKJScript=%COMSPEC% /c call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKJScript\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.js"
@@ -27,9 +27,10 @@ if "%~1" neq "" goto runDKJScript
 	set "CSCRIPT_EXE=%~1"
 	set "WSCRIPT_EXE=%~2"
 	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3
-	set "DKSCRIPT_PATH=%~4"	
+	set "DKSCRIPT_PATH=%~4"
+	set "CMD_EXE=%COMSPEC%"
 	
-    cmd /c %CSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
-	::cmd /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
+    %CMD_EXE% /c %CSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
+	::%COMSPEC% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
 	pause
 %endfunction%

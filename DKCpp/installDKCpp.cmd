@@ -100,7 +100,7 @@ if "%~1" neq ""    goto runDKCpp
 	%dk_call% dk_printVar COMPILER_EXE
 
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
-	ftype DKCpp=cmd /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
+	ftype DKCpp=%COMSPEC% /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cpp"
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
@@ -151,7 +151,7 @@ if "%~1" neq ""    goto runDKCpp
 	echo:
 	echo ######## start %APP_FILE% ############
 	echo:
-    cmd /v:on /c "%APP_FILE%"
+    %COMSPEC% /v:on /c "%APP_FILE%"
 	echo:
 	echo:
 	echo ######### end %APP_FILE% ############

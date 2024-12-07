@@ -7,7 +7,7 @@ rem Use %SendKeys% to send keys to the keyboard buffer
 set SendKeys=CScript //nologo //E:JScript "%~F0"
 
 rem Start the other program in the same Window
-start "" /B cmd
+start "" /B %COMSPEC%
 
 %SendKeys% "echo off{ENTER}"
 

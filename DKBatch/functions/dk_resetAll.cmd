@@ -48,7 +48,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     :wipe   
     ::do we need admin rights?
-    ::runas /user:Administrator cmd
+    ::runas /user:Administrator %COMSPEC%
     ::do we need to uninstall any apps?
     ::do we need to remove any environment variables?
       

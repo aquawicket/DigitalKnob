@@ -19,4 +19,4 @@ goto function
 
 :: When a batch file is interrupted via Ctrl-C, AKA STATUS_CONTROL_C_EXIT, it returns ErrorLevel -1073741510 or ExitCode C000013A. We can take advantage of this.
 :checkify
-cmd /c exit -1073741510
+%COMSPEC% /c exit -1073741510

@@ -15,7 +15,8 @@ if "%~1" neq "" goto runDKPowershell
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
 	
-	ftype DKPowershell=cmd /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
+	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
+	ftype DKPowershell="%CMD_EXE%" /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKPowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.ps1"
@@ -33,7 +34,7 @@ if "%~1" neq "" goto runDKPowershell
 	
 	
 	::###### run script ######
-	cmd /V:ON /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	%COMSPEC% /V:ON /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause

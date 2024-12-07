@@ -41,4 +41,4 @@ set save_TEMP=
 set TMP=%TEMP%
 
 REM start some command...
-start cmd /d /k set
+start %COMSPEC% /d /k set

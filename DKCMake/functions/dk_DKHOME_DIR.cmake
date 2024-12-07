@@ -21,9 +21,7 @@ function(dk_DKHOME_DIR)
 	endif()
     
 #	###### CMD_EXE ######
-#	if(NOT EXISTS "${CMD_EXE}")
-#		dk_findProgram(CMD_EXE cmd.exe)
-#	endif()
+#	dk_validate(CMD_EXE "dk_CMD_EXE()")
 #	if(NOT EXISTS "${CMD_EXE}")
 #		dk_set(CMD_EXE "/mnt/c/Windows/System32/cmd.exe")
 #	endif()

@@ -12,7 +12,7 @@ function(dk_queueCommand)
 	dk_debugFunc()
 	
 	if(NOT QUEUE_BUILD)
-#		dk_return()        TEMPORARY TEST
+		dk_return()
 	endif()
 	
 	dk_getOptionValue(RESULT_VARIABLE)

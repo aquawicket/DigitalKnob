@@ -10,8 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1 99
  setlocal
     
-    set "CMD_EXE=cmd.exe"
-    
+	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
     
 	:: get ALL_BUT_FIRST_ARGS
 	for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST_ARGS=%%b

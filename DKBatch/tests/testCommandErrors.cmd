@@ -4,7 +4,7 @@
 	call call_command :true 
 	call call_command :false
 
-	cmd /k
+	%COMSPEC% /k
 %endfunction%
 
 :call_command <command> <args>

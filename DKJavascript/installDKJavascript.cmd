@@ -10,10 +10,10 @@ if "%~1" neq "" goto runDKJavascript
 	%dk_call% dk_echo "Installing DKJavascript . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate NODEJS_EXE "call %DKIMPORTS_DIR%\nodejs\dk_installNodeJs"
-	
-	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
-	ftype DKJavascript=cmd /c call "%~f0" "%NODEJS_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
+	
+	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
+	ftype DKJavascript="%CMD_EXE%" /c call "%~f0" "%NODEJS_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKJavascript\DefaultIcon" "" "REG_SZ" "%NODEJS_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.js"

@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     :: <_extension_>  i.e. ".txt"
     set "_extension_=%~1"
     
-    :: <_exe_>  i.e. "C:\Windows\System32\calc.exe"
+    :: <_exe_>  i.e. "%WINDIR%\System32\calc.exe"
     set "_exe_=%~2"
     if not exist %_exe_% %dk_call% dk_error "%_exe_% does not exist"
     %dk_call% dk_basename "%~2" _exeName_

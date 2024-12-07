@@ -3,7 +3,7 @@ if not "%~1"=="" goto %~1
 :MAIN
 	setlocal
 	echo Here I am in the MAIN thread
-	start "" /B cmd /D /C "%~f0" :ASYNC
+	start "" /B %COMSPEC% /D /C "%~f0" :ASYNC
 	echo Here I am in the MAIN thread again
 	endlocal
 	

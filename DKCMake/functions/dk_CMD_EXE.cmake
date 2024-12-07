@@ -16,10 +16,10 @@ function(dk_CMD_EXE)
 	
 	###### CMD_EXE ######
 	if(NOT EXISTS "${CMD_EXE}")
-		dk_findProgram(CMD_EXE cmd.exe)
+		dk_set(CMD_EXE "$ENV{COMSPEC}")
 	endif()
 	if(NOT EXISTS "${CMD_EXE}")
-		dk_set(CMD_EXE "$ENV{COMSPEC}")
+		dk_findProgram(CMD_EXE "cmd.exe")
 	endif()
 	if(NOT EXISTS "${CMD_EXE}")
 		dk_set(CMD_EXE "$ENV{CMD_EXE}")

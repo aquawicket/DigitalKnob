@@ -2,6 +2,6 @@
 
 echo running NotBatch.txt as a batch script
 
-cmd < NotBatch.txt > NUL
+%COMSPEC% < NotBatch.txt > NUL
 
 pause

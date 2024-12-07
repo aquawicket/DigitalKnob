@@ -19,7 +19,7 @@ if "%~1" neq ""    goto runDKCSharp
 	%dk_call% dk_printVar COMPILER_EXE
 
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCSharp"
-	ftype DKCSharp=cmd /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
+	ftype DKCSharp=%COMSPEC% /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cs"
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cs
@@ -58,7 +58,7 @@ if "%~1" neq ""    goto runDKCSharp
 	::###### run executable ######
 	cls
 	title %DKCSharp_FILE%
-    cmd /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
+    %COMSPEC% /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause

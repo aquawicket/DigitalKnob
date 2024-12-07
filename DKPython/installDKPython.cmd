@@ -15,7 +15,8 @@ if "%~1" neq "" goto runDKPython
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPython"
 	
-	ftype DKPython=cmd /c call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON_EXE%" "%%1" %*
+	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
+	ftype DKPython=%COMSPEC% /c call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKPython\DefaultIcon" "" "REG_SZ" "%PYTHON_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.py"
@@ -33,7 +34,7 @@ if "%~1" neq "" goto runDKPython
 	
 	
 	::###### run script ######
-	cmd /V:ON /K call %PYTHON_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	%COMSPEC% /V:ON /K call %PYTHON_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause

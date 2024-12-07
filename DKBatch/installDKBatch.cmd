@@ -10,14 +10,13 @@ if "%~1" neq ""    goto runDKBatch
 	::###### Install DKBatch ######
 	%dk_call% dk_echo "Installing DKBatch . . ."
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%windir%\system32"
-	%dk_call% dk_set ComSpec %CMD_EXE%
+	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
 	
 	:: Set the registry entry for the exxtension
-	ftype DKBatch="%ComSpec%" /c if exist "%~f0" ^
-	(echo installed ^& "%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%DKCACHE_DIR%" "%%1" %%*) else ^
+	ftype DKBatch="%COMSPEC%" /c if exist "%~f0" ^
+	(echo installed ^& "%COMSPEC%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%COMSPEC%" "%DKCACHE_DIR%" "%%1" %%*) else ^
 	(echo not installed ^& "%%1" %%*)
 	
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "%ComSpec%"

@@ -41,4 +41,4 @@ set
 ::echo userpath = %userpath%
 ::echo USERPROFILE = %USERPROFILE%
 ::echo VSEDEFLOGDIR = %VSEDEFLOGDIR%
-::echo windir = %windir%
+::echo windir = %WINDIR%
