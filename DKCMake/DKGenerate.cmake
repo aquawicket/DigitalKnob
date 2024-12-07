@@ -507,6 +507,7 @@ if(ANDROID)
 			dk_command(${OPENJDK}/registerJDK.cmd)
 		endif()
 		dk_depend(gradle)
+		
 		if(DEBUG)
 			add_custom_command(
 				TARGET main

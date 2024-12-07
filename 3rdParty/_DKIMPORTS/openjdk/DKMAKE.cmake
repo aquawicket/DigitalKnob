@@ -30,7 +30,7 @@ if(WIN_HOST)
 	set(ENV{JAVA_HOME} "${OPENJDK_DIR}")
 	#dk_getNativePath("$ENV{JAVA_HOME}" ENV{JAVA_HOME})
 	dk_replaceAll("$ENV{JAVA_HOME}" "/" "\\" ENV{JAVA_HOME})
-	execute_process(COMMAND cmd /c setx JAVA_HOME "$ENV{JAVA_HOME}")
+#	execute_process(COMMAND cmd /c setx JAVA_HOME "$ENV{JAVA_HOME}")
 	
 	###### VS_JavaHome ######
 	set(ENV{VS_JavaHome} "$ENV{JAVA_HOME}")

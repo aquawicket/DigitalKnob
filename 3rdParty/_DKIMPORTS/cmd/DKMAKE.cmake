@@ -20,15 +20,11 @@ if(NOT WIN_HOST)
 	dk_return()
 endif()
 
-if(WIN_HOST)
-	dk_findProgram(CMD_EXE cmd.exe)
-	
-	if(EXISTS ${CMD_EXE})
-		dk_set(CMD_EXE ${CMD_EXE})   # set it globally
-		dk_return()
-	endif()
-endif()
+dk_findProgram(CMD_EXE cmd.exe)
 
 if(NOT EXISTS ${CMD_EXE})
 	dk_fatal("Could not file CMD_EXE:${CMD_EXE}")
 endif()
+
+
+dk_set(CMD_EXE ${CMD_EXE})   # set it globally

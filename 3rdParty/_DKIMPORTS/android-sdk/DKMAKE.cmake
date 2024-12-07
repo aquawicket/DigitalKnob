@@ -43,6 +43,7 @@ endif()
 	
 ###### ANDROID_USER_HOME ######
 if(NOT DEFINED ENV{ANDROID_USER_HOME})
+	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
 	set(ENV{ANDROID_USER_HOME} "${DKCACHE_DIR}/.android")
 	if(WIN_HOST)
 		dk_replaceAll("$ENV{ANDROID_USER_HOME}" "/" "\\" ENV{ANDROID_USER_HOME})
