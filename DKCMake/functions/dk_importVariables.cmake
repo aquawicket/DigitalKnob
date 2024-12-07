@@ -195,13 +195,7 @@ function(dk_importVariables url)
 	else()
 		set(PLUGIN_IMPORT_NAME ${PLUGIN_URL_FILE})
 	endif()
-	dk_printVar(PLUGIN_IMPORT_NAME)										# PLUGIN_IMPORT_NAME		: zLib
-	
-	
-	###### Print the current plugin to the window title bar ######
-	dk_title(" >>> ${PLUGIN_IMPORT_NAME}")
-	
-	
+	dk_printVar(PLUGIN_IMPORT_NAME)										# PLUGIN_IMPORT_NAME		: zLib	
 	
 	# PLUGIN_IMPORT_NAME_LOWER
 	unset(PLUGIN_IMPORT_NAME_LOWER)
@@ -366,7 +360,11 @@ function(dk_importVariables url)
 		dk_notice("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to ${CURRENT_PLUGIN}")
 	endif()
 	dk_printVar(CURRENT_PLUGIN)											# CURRENT_PLUGIN			: ZLIB
-		
+	
+	###### Print the current plugin to the window title bar ######
+	dk_title("CURRENT_PLUGIN -> ${CURRENT_PLUGIN}")
+	
+	
 	# <PLUGIN>
 	unset(${CURRENT_PLUGIN})
 	dk_set(${CURRENT_PLUGIN} ${PLUGIN_INSTALL_PATH})
