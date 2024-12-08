@@ -17,13 +17,31 @@ endif()
 dk_installPackage(clang)
 	
 if(win_x86_clang)
-	dk_set(CLANG_C_COMPILER   ${MSYS2_DIR}/clang32/bin/clang.exe)
-	dk_set(CLANG_CXX_COMPILER ${MSYS2_DIR}/clang32/bin/clang++.exe)
-	dk_set(CLANG_RC_COMPILER  ${MSYS2_DIR}/clang32/bin/windres.exe)
+	dk_set(CLANG_C_COMPILER   	"${MSYS2_DIR}/clang32/bin/clang.exe")
+	dk_set(CLANG_CXX_COMPILER	"${MSYS2_DIR}/clang32/bin/clang++.exe")
+	dk_set(CLANG_RC_COMPILER  	"${MSYS2_DIR}/clang32/bin/windres.exe")
 elseif(win_x86_64_clang)
-	dk_set(CLANG_C_COMPILER   ${MSYS2_DIR}/clang64/bin/clang.exe)
-	dk_set(CLANG_CXX_COMPILER ${MSYS2_DIR}/clang64/bin/clang++.exe)
-	dk_set(CLANG_RC_COMPILER  ${MSYS2_DIR}/clang64/bin/windres.exe)
+	dk_depend(msys2)
+	dk_set(MSYS2_BIN		 	"${MSYS2}/usr/bin")
+	dk_assertPath(MSYS2_BIN)
+	dk_set(CLANG64_BIN		  	"${MSYS2}/clang64/bin")
+	dk_assertPath(CLANG64_BIN)
+	dk_set(CLANG_C_COMPILER   	"${CLANG64_BIN}/clang.exe")
+	dk_assertPath(CLANG_C_COMPILER)
+	dk_set(CLANG_CXX_COMPILER 	"${CLANG64_BIN}/clang++.exe")
+	dk_assertPath(CLANG_CXX_COMPILER)
+	dk_set(CLANG_RC_COMPILER  	"${CLANG64_BIN}/windres.exe")
+	dk_assertPath(CLANG_RC_COMPILER)
+	
+	dk_replaceAll("${MSYS2}" 	"/" "\\" 	MSYS2_WIN)
+	dk_set(MSYS2_WIN "${MSYS2_WIN}") # globalize
+	
+	dk_replaceAll("${CLANG64_BIN}" 	"/" "\\" 	CLANG64_BIN_WIN)
+	dk_set(CLANG64_BIN_WIN "${CLANG64_BIN_WIN}") # globalize
+	
+	dk_replaceAll("${MSYS2_BIN}" 	"/" "\\"	MSYS2_BIN_WIN)
+	dk_set(MSYS2_BIN_WIN "${MSYS2_BIN_WIN}")	# globalize
+	
 elseif(win_arm64_clang)
 	dk_set(CLANG_C_COMPILER   ${MSYS2_DIR}/clangarm64/bin/clang.exe)
 	dk_set(CLANG_CXX_COMPILER ${MSYS2_DIR}/clangarm64/bin/clang++.exe)
@@ -64,7 +82,9 @@ endif()
 if(NOT CMAKE_CXX_COMPILER)
 	dk_set(CMAKE_CXX_COMPILER	${CLANG_CXX_COMPILER})
 endif()
-dk_set(CMAKE_RC_COMPILER		${CLANG_RC_COMPILER})
+if(NOT CMAKE_RC_COMPILER)
+	dk_set(CMAKE_RC_COMPILER	${CLANG_RC_COMPILER})
+endif()
 
 dk_set(DKCONFIGURE_CC			${CMAKE_C_COMPILER})
 dk_set(DKCONFIGURE_CXX			${CMAKE_CXX_COMPILER})

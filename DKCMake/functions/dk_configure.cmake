@@ -104,13 +104,13 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_notice("configure type not detected. running argument in bash environment")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
 		
-		if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
-			dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
-		else()
+		#f(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
+		#	dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+		#	dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+		#else()
 			dk_queueCommand(${ARGN} OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
-		endif()
+		#endif()
 		
 		#### restore any altered flags ####
 		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  

@@ -127,13 +127,30 @@ if(DEBUG)
 		else()
 			dk_configure	(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug mingw CC=clang)
 		endif()
-	elseif(WIN_X86_64)
+	elseif(win_x86_64_clang)
 		if(MSVC)
 			dk_configure	(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug msvc64 CC=clang)
 		else()
-			dk_configure	(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug mingw64 CC=clang)
-			#dk_command(cygpath -m ${CMAKE_CXX_COMPILER} OUTPUT_VARIABLE CMAKE_CXX_COMPILER_UNIX)
-			#execute_process(COMMAND ${PERL_EXE} ../../Configure no-shared --release mingw64 CC=${CMAKE_CXX_COMPILER_UNIX})
+			dk_depend		(clang)
+			dk_depend		(cygpath)
+			
+			dk_printVar(CLANG_CXX_COMPILER)
+			dk_command		(${CYGPATH_EXE} --unix ${CLANG_CXX_COMPILER} OUTPUT_VARIABLE CLANG_CXX_COMPILER_UNIX)
+			
+			
+			#dk_printVar(MSYS2_BIN_WIN)
+			#dk_printVar(CLANG64_BIN_WIN)
+			#dk_printVar(CLANG_CXX_COMPILER)
+			dk_printVar(MSYS2_WIN)
+			
+			#${CMD_EXE} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_DIR_WIN}
+			
+			#dk_replaceAll("${PERL_EXE}" "/" "\\" PERL_EXE_WIN)
+			#dk_configure(${OPENSSL_DIR} "${CMAKE_COMMAND} -E env PATH=${MSYS2_WIN}  ${PERL_EXE_WIN} ../../Configure no-shared --debug mingw64 CC=${CLANG_CXX_COMPILER_UNIX}")
+			
+			execute_process(COMMAND cd C:\\Users\\Administrator\\digitalknob\\Development\\3rdParty\\openssl-2f362e9\\win_x86_64_clang\\Debug && set "PATH=C:\\Users\\Administrator\\digitalknob\\Development\\3rdParty\\msys2-x86_64-20240727\\clang64\\bin;%PATH%" & set "PATH=C:\\Users\\Administrator\\digitalknob\\Development\\3rdParty\\msys2-x86_64-20240727\\usr\\bin;%PATH%" & "C:\\Users\\Administrator\\digitalknob\\Development\\3rdParty\\msys2-x86_64-20240727\\usr\\bin\\perl" ../../Configure no-shared --debug mingw64 CC=/C/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20240727/clang64/bin/clang)
+			
+			#execute_process	(COMMAND "${PERL_EXE} ../../Configure no-shared --debug mingw64 CC=${CMAKE_CXX_COMPILER_UNIX}" WORKING_DIRECTORY ${OPENSSL_CONFIG_DIR})
 		endif()
 	endif()
 endif()
@@ -172,7 +189,7 @@ if(RELEASE)
 	endif()
 endif()
 
-dk_bashEnv(perl configdata.pm --dump)
+execute_process(COMMAND ${PERL_EXE} configdata.pm --dump WORKING_DIRECTORY ${OPENSSL_CONFIG_DIR})
 
 ### COMPILE ###
 dk_build(${OPENSSL_DIR})
