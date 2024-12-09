@@ -3,18 +3,18 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::##################################################################################
-::# base64\dk_embedExe(inputFile)
-::# base64\dk_embedExe(inputFile, outputFile)
+::# base64\dk_embedFile(inputFile)
+::# base64\dk_embedFile(inputFile, outputFile)
 ::#
 ::#    Encode input to base-64 output
 ::#    https://github.com/base64code/examples
 ::#
-:dk_embedExe
+:dk_embedFile
     call dk_debugFunc 0 99
  setlocal
 	
     set "inputFile=%~1"
-    set "outputFile=%inputFile%.cmd"
+	set "outputFile=%~nx1.cmd"
     if %__ARGC__% equ 2 set "outputFile=%~2"
     
     if not exist "%inputFile%" %dk_call% dk_error "%inputFile% not found"
@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	echo @echo off
 	echo setlocal enabledelayedexpansion
 	echo:
-	echo set FN=%%TEMP%%\evil.tmp
+	echo set FN=%%TEMP%%\%~nx1
 	echo call :extract-embedded-bin "%%FN%%"
 	echo start %%FN%%
 	echo goto :eof
@@ -77,7 +77,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::set "output=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
 	
     %dk_call% dk_selectFile input
-    call dk_embedExe "%input%"
+    call dk_embedFile "%input%"
 	
     ::%dk_call% base64.dk_encode "%input%" "test.b64"
 %endfunction%
