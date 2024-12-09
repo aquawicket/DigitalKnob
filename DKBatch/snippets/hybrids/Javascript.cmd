@@ -1,48 +1,23 @@
 0</* :
-::########################## BATCH ############################
-
 @echo off
-echo ---------- Begin Batch ----------
-echo:
-echo:
+@cscript /nologo /E:jscript "%~f0" "%~nx0" %*
+set exit_code=%ERRORLEVEL%
 
-echo 0 = %~0
-echo * = %*
+//###### exit_code ######
+echo exit_code = %exit_code%
+pause
+exit /b %exit_code% & */0;
 
-echo:
-echo:
-echo ----------- End Batch ----------
+//########################################## Jscript ##################################################
+var argc = WScript.Arguments.length;
+var argv = [];
+for (var i = 0; i < argc; i++){ argv.push(WScript.Arguments.Item(i)) }
+main(argc, argv);
 
-::########################## BATCH ############################
-@cscript /nologo /E:jscript "%~f0" "%~nx0" %* & goto :EOF & */0;
-//######################### Jscript ###########################
-
-WScript.Echo('--------- Begin jscript---------');
-WScript.Echo('');
-WScript.Echo('');
-
-//var name = 'ARGV';
-//var num = 0;
-//var value = 'value';
-//eval('var '+name+num+' = '+value+';');
-//WScript.Echo('ARGV0 = '+ARGV0);
-
-var ARGC = WScript.Arguments.length;
-var ARGV = [];
-for (var i = 0; i < ARGC; i++){
-	ARGV.push(WScript.Arguments.Item(i));
+//######### main ##########
+function main(argc, argv) {
+	
+	WScript.Echo("Javascript: main("+argc+", "+argv+")");
+	WScript.Quit(13);
 }
-WScript.Echo("ARGV = "+ARGV);
-WScript.Echo("ARGC = "+ARGC);
 
-
-
-//WScript.Echo("ARGVC = "+WScript.Arguments.Named.length);
-//WScript.Echo("ARGNC = "+WScript.Arguments.Unnamed.length);
-
-
-WScript.Echo('');
-WScript.Echo('');
-WScript.Echo('---------- End jscript!--------- ');
-
-//######################### Jscript ###########################
