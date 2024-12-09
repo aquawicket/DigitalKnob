@@ -93,7 +93,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     ::%DK% dk_load %DKSCRIPT_PATH%
 
     ::###### DKTEST MODE ######
-	%dk_call% dk_isChildPathOf "%DKSCRIPT_DIR%" "%DKBATCH_FUNCTIONS_DIR%" || %return%
+	%dk_call% dk_isChildPathOf "%DKSCRIPT_DIR%" "%DKBATCH_DIR%" || %return%
     ::if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" %return%
     if "%DKSCRIPT_EXT%" neq ".cmd" %return%
     %dk_call% dk_echo

@@ -23,6 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
     
     certutil -encode -f "%inputFile%" "%outputFile%.tmp" 1>nul
+	
     type "%outputFile%.tmp"|find /v "CERTIFICATE-----">"%outputFile%"
     del "%outputFile%.tmp"
 %endfunction%

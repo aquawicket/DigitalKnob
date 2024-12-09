@@ -9,6 +9,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_call
     ::if exist "%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd" call dk_debugFunc 1 99
  ::setlocal
+	if exist "%~1" (
+		set args=%*
+		set "args=!args:%~1=%arg%!"
+		call %DKBATCH_FUNCTIONS_DIR_%%args%
+		exit /b %errorlevel%
+	)
+ 
 	set "arg=%~1"
 	set "arg=%arg:.=\%"       &:: replace '.' with '\'
 	
