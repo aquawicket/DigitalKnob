@@ -1,3 +1,5 @@
+:: http://lallouslab.net/2016/05/30/batchography-embedding-an-executable-file-in-a-batch-script
+
 @echo off
 setlocal enabledelayedexpansion
 
