@@ -6,8 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# base64\dk_embedBin(inputFile)
 ::# base64\dk_embedBin(inputFile, outputFile)
 ::#
-::#    Encode input to base-64 output
-::#    https://github.com/base64code/examples
+::#    https://stackoverflow.com/a/19596027/688352
 ::#
 :dk_embedBin
     call dk_debugFunc 1 2
@@ -25,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "tempCmd=%inputFile%.tmp"
 	(
 	echo ;;;===,,,@echo off
-	echo ;;;===,,,echo line2
+	echo ;;;===,,,echo decoding . . .
 	echo ;;;===,,,findstr /v "^;;;===,,," "%%~f0" ^> %inputFilename%
 	echo ;;;===,,,%inputFilename%
 	echo ;;;===,,,exit /b
@@ -33,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	) >"%tempCmd%"
 	
     copy /a %tempCmd% + /b %inputFile% /b %outputFile%
-	::del %tempCmd%
+	del %tempCmd%
 %endfunction%
 
 
