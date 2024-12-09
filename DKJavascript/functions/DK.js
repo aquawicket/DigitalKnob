@@ -2,6 +2,7 @@
 var HOST = "unknown"
 if(typeof ActiveXObject === "function"){
 	if(typeof WScript === "object"){
+		WScript.Echo("DK.js()");
 		HOST = "jscript";
 	}
 	else{
