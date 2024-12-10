@@ -1,5 +1,5 @@
 
-eval((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile("dk_echo.js", 1).ReadAll());
+eval((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile("DK.js", 1).ReadAll());
 
 
 dk_log = function(msg){

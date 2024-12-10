@@ -1,5 +1,6 @@
 @echo off
 
+
 if "%~1" equ "%~0" goto installDKBat
 if "%~1" neq ""    goto runDKBat
 :installDKBat

@@ -1,7 +1,8 @@
+WScript.Echo("dk_echo()");
 
 // https://stackoverflow.com/questions/3054321/how-to-reference-a-jscript-file-from-another-one
 // A object to which library functions can be attached
-//var library = new Object;
+var library = new Object;
 eval((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile("DK.js", 1).ReadAll());
 
 
@@ -41,5 +42,3 @@ DKTEST = function() {
 	
 	dk_echo("Hello World")
 }
-
-DKTEST();

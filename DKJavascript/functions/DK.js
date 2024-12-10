@@ -1,8 +1,21 @@
+WScript.Echo("DK.js()");
+
+if(typeof ActiveXObject === "function"){
+	var XMLHttpRequest = function(){ return new ActiveXObject("MSXML2.XMLHTTP.6.0"); }
+}
+WScript.Echo("DK.js():6");
+dk_source = function(url){
+	var xmlHttpRequest = new XMLHttpRequest;
+	xmlHttpRequest.open("GET", url, false);
+	xmlHttpRequest.send();
+	(1, eval)(xmlHttpRequest.responseText); 
+}
+dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js");
+WScript.Echo("after dk_source");
 
 var HOST = "unknown"
 if(typeof ActiveXObject === "function"){
 	if(typeof WScript === "object"){
-		WScript.Echo("DK.js()");
 		HOST = "jscript";
 	}
 	else{
@@ -11,10 +24,9 @@ if(typeof ActiveXObject === "function"){
 } else {
 	HOST = "browser"
 }
+WScript.Echo("DK.js()");
 
-if(typeof ActiveXObject === "function"){
-	var XMLHttpRequest = function(){ return new ActiveXObject("MSXML2.XMLHTTP.6.0"); }
-}
+
 //if(typeof WScript === "object"){
 //	var DKSCRIPT_PATH = WScript.ScriptFullName;
 //	var DKSCRIPT_DIR = new ActiveXObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName);
@@ -90,12 +102,7 @@ var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
 
 var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 
-dk_source = function(url){
-	var xmlHttpRequest = new XMLHttpRequest;
-	xmlHttpRequest.open("GET", url, false);
-	xmlHttpRequest.send();
-	(1, eval)(xmlHttpRequest.responseText); 
-}
+
 
 dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
 dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
@@ -107,7 +114,8 @@ dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
 dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
 
 
-
+dk_echo("DKTEST()");
+DKTEST();
 /*
 if(typeof WScript === "object"){
 	console.log("Using Windows Scriting Host")
