@@ -12,10 +12,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_hasLabel
-    call dk_debugFunc 1
+    call dk_debugFunc 2 3
  setlocal
  
-    findstr /i /r /c:"^[ ]*:%~2\>" "%~1" >nul 2>nul && (
+	findstr /ri /c:"^ *:%~2 " /c:"^ *:%~2$" "%~1" >nul 2>nul && (
         if "%~3" neq "" (endlocal & set "%3=true")
         exit /b 0
     )
