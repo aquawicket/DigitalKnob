@@ -1,8 +1,8 @@
-11/20/24 Development
+12/12/24 Development
 
 *******************
 *** DIGITALKNOB ***
-*******************
+********************
 
 There are currently 2 branches that implement the DOM.
 1. Javascript DOM, (located in the main and Development branches)
