@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	
-	%dk_call% dk_importVariables %QEMU_DL% %~0 ROOT %DKTOOLS_DIR%
+	%dk_call% dk_importVariables %QEMU_DL% IMPORT_PATH %~0 ROOT %DKTOOLS_DIR%
 	
     ::%dk_call% dk_basename %QEMU_DL% QEMU_DL_FILE
     ::%dk_call% dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER

@@ -11,6 +11,9 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 ::#															https://zlib.net/zlib-1.3.1.tar.gz								* library sourcecode download
 ::#															https://website.com/executable.exe              				* executable file
 ::#
+::#	IMPORT_PATH  optional 
+::#															C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+::#
 ::#	BRANCH  optional 
 ::#															develop
 ::#															master
@@ -42,34 +45,39 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::dk_debugFunc 1 9
 	
 	set "url=%~1"
-	set "import_path=%~2"
+	!dk_call! dk_printVar url
+	
+	
+	set "IMPORT_PATH="
+	!dk_call! dk_getOptionValue  IMPORT_PATH %* 	&:: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+	!dk_call! dk_printVar IMPORT_PATH
 	
 	set "BRANCH="
-	!dk_call! dk_getOptionValue  BRANCH     %*      &:: master
+	!dk_call! dk_getOptionValue  BRANCH      %*     &:: master
 	!dk_call! dk_printVar BRANCH
 	
 	set "FOLDER="
-	!dk_call! dk_getOptionValue  FOLDER     %*      &:: zlib-master
+	!dk_call! dk_getOptionValue  FOLDER      %*     &:: zlib-master
 	!dk_call! dk_printVar FOLDER
 	
 	set "NAME="
-	!dk_call! dk_getOptionValue  NAME       %*      &:: zlib
+	!dk_call! dk_getOptionValue  NAME        %*     &:: zlib
 	!dk_call! dk_printVar NAME
 	
 	set "DIR="
-	!dk_call! dk_getOptionValue  DIR       %*      &:: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	!dk_call! dk_getOptionValue  DIR         %*     &:: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
 	!dk_call! dk_printVar DIR
 	
 	set "ROOT="
-	!dk_call! dk_getOptionValue  ROOT       %*      &:: C:\Users\Administrator\digitalknob\Development\3rdParty
+	!dk_call! dk_getOptionValue  ROOT        %*     &:: C:\Users\Administrator\digitalknob\Development\3rdParty
 	!dk_call! dk_printVar ROOT
 	
 	set "TAG="
-	!dk_call! dk_getOptionValue  TAG        %*      &:: v1.3.1
+	!dk_call! dk_getOptionValue  TAG         %*     &:: v1.3.1
 	!dk_call! dk_printVar TAG
 	
 	set "VERSION="
-	!dk_call! dk_getOptionValue  VERSION    %*      &:: master
+	!dk_call! dk_getOptionValue  VERSION     %*     &:: master
 	!dk_call! dk_printVar VERSION
 
 	::### POPULATE VARIABLES ###
@@ -161,7 +169,9 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::############### PLUGIN_IMPORT VARIABLES ###############
 	::#######################################################
 	if not defined CMAKE_CURRENT_LIST_DIR (
-		if defined import_path  for %%Z in ("%import_path%") do set "CMAKE_CURRENT_LIST_DIR=%%~dpZ"
+		!dk_call! dk_printVar import_path
+		::if defined import_path  for %%Z in ("!import_path!") do set "CMAKE_CURRENT_LIST_DIR=%%~dpZ"
+		if defined import_path set "CMAKE_CURRENT_LIST_DIR=!import_path!\"
 		!dk_call! dk_printVar CMAKE_CURRENT_LIST_DIR	
 	)
 	if not defined CMAKE_CURRENT_LIST_DIR (
@@ -169,7 +179,11 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 		set "CMAKE_CURRENT_LIST_DIR=!DKSTACK[%length%].__FILE__!"
 		!dk_call! dk_printVar CMAKE_CURRENT_LIST_DIR
 	)
+
+	!dk_call! dk_assertPath "%CMAKE_CURRENT_LIST_DIR%"
 	if [%CMAKE_CURRENT_LIST_DIR:~-1%] == [\] set "CMAKE_CURRENT_LIST_DIR=%CMAKE_CURRENT_LIST_DIR:~0,-1%"
+
+
 ::	::# PLUGIN_IMPORT
 ::	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKIMPORTS_DIR"
 ::	if defined CMAKE_CURRENT_LIST_DIR !dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"

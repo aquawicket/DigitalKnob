@@ -1,7 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-if "%~1" equ ":dk_runThread.Loop" goto %1
+if "%~1" equ "dk_runThread.LoopFunc" goto %1
 
 
 ::################################################################################
@@ -15,22 +15,18 @@ if "%~1" equ ":dk_runThread.Loop" goto %1
 	echo dk_runThread
  
     :: Start dk_runThread.Loop in a parallel process
-    ::start "" /B %ComSpec% /C "call :dk_runThread.LoopFunc" || echo dk_runThread.Loop returned error
-
+    start "" /B %ComSpec% /C call :dk_runThread.LoopFunc
     ::call :dk_runThread.LoopFunc
+	pause
 %endfunction%
 
 :dk_runThread.LoopFunc
 	:loop
-		call :echoInPlace %TIME%
+		::%dk_call% dk_echoReplace %TIME%
+		title %TIME%
 	goto :loop
 %endfunction%	
 	
-
-:echoInPlace
-	if not defined CR  for /f %%a in ('copy /Z "%~dpf0" nul') do set "CR=%%a"
-	set /P "=%~1                                                                        " <nul
-%endfunction%
 
 
 
