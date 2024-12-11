@@ -19,6 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if [%_input_:~-1%] == [\] set "_input_=%_input_:~0,-1%"
     if [%_input_:~-1%] == [/] set "_input_=%_input_:~0,-1%"
 	
+	set "_extension_="
 	for /L %%i in (1,1,10) do (
 		set "_input_=!_input_:*.=!"
 		for /L %%i in (1,1,3) do if /I "!_input_!" equ "!ext[%%i]!" (

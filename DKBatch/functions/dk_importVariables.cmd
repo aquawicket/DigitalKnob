@@ -168,20 +168,19 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::#######################################################
 	::############### PLUGIN_IMPORT VARIABLES ###############
 	::#######################################################
-	if not defined CMAKE_CURRENT_LIST_DIR (
-		!dk_call! dk_printVar import_path
-		::if defined import_path  for %%Z in ("!import_path!") do set "CMAKE_CURRENT_LIST_DIR=%%~dpZ"
-		if defined import_path set "CMAKE_CURRENT_LIST_DIR=!import_path!\"
-		!dk_call! dk_printVar CMAKE_CURRENT_LIST_DIR	
-	)
-	if not defined CMAKE_CURRENT_LIST_DIR (
-		set /a length=DKSTACK_length-11
-		set "CMAKE_CURRENT_LIST_DIR=!DKSTACK[%length%].__FILE__!"
-		!dk_call! dk_printVar CMAKE_CURRENT_LIST_DIR
-	)
+::	!dk_call! dk_printVar IMPORT_PATH
+::	::if defined import_path  for %%Z in ("!import_path!") do set "CMAKE_CURRENT_LIST_DIR=%%~dpZ"
+::	if defined import_path set "CMAKE_CURRENT_LIST_DIR=!IMPORT_PATH!\"
+::	!dk_call! dk_printVar CMAKE_CURRENT_LIST_DIR	
 
-	!dk_call! dk_assertPath "%CMAKE_CURRENT_LIST_DIR%"
-	if [%CMAKE_CURRENT_LIST_DIR:~-1%] == [\] set "CMAKE_CURRENT_LIST_DIR=%CMAKE_CURRENT_LIST_DIR:~0,-1%"
+::	if not defined CMAKE_CURRENT_LIST_DIR (
+::		set /a length=DKSTACK_length-11
+::		set "CMAKE_CURRENT_LIST_DIR=!DKSTACK[%length%].__FILE__!"
+::		!dk_call! dk_printVar CMAKE_CURRENT_LIST_DIR
+::	)
+
+::	!dk_call! dk_assertPath "%CMAKE_CURRENT_LIST_DIR%"
+::	if [%CMAKE_CURRENT_LIST_DIR:~-1%] == [\] set "CMAKE_CURRENT_LIST_DIR=%CMAKE_CURRENT_LIST_DIR:~0,-1%"
 
 
 ::	::# PLUGIN_IMPORT
@@ -191,7 +190,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 		
 	rem # PLUGIN_IMPORT_PATH
 	set "PLUGIN_IMPORT_PATH="
-	set "PLUGIN_IMPORT_PATH=!CMAKE_CURRENT_LIST_DIR!" 						
+	set "PLUGIN_IMPORT_PATH=!IMPORT_PATH!" 						
 	!dk_call! dk_printVar PLUGIN_IMPORT_PATH 								& rem PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 
 	rem # PLUGIN_IMPORT_NAME
