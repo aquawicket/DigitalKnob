@@ -8,9 +8,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_echoAlign
     call dk_debugFunc 2
  setlocal enabledelayedexpansion  
-    
+
     if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
-    
     (set^ tmp=%~2)
     if defined tmp (
         set "len=1"
@@ -21,12 +20,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
             )
             if "!DE!" neq "" if "%tmp:~%%p,1%" neq "" (
                 set /a "len+=%%p"
-                call set "tmp=%%tmp:~%%p%%" &:: FIXME: remove the need for call here
+                call set "tmp=%%tmp:~%%p%%" &rem FIXME: remove the need for call here
             )
         )
     ) else (
-        set len=0
-    )
+	    set len=0
+	)
 
     for /f "skip=4 tokens=2 delims=:" %%i in ('mode con') do (
         set /a cols=%%i
@@ -56,11 +55,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
     call dk_debugFunc 0
  setlocal
- 
+
     %dk_call% dk_echoAlign center "centered text"
     %dk_call% dk_echoAlign right "right aligned text"
     %dk_call% dk_echo "text on the left side"
     set "prep_text="
+
     for /l %%Z in (1 1 7) do (
         if "!DE!" equ "" set "prep_text=!prep_text!aR"
         if "!DE!" equ "" %dk_call% dk_echoAlign center "!prep_text!"

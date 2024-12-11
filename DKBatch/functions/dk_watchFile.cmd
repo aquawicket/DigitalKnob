@@ -20,8 +20,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         if not "%last_fdate%"=="%fdate%" (
             cls
 			echo Monitoring %FN% for changes
-			echo    last file info = %last_fdate%
-			echo current file info = %fdate%
+			echo    last file info = !last_fdate!
+			echo current file info = !fdate!
 			echo press 'q' to quit
         )
 

@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     set "spaces=                                        "
     set "col1=%~2%spaces%"
-    set col1=%col1:~0,10%
+    set col1=%col1:~0,15%
     
     set "col2=%~3%spaces%"
     set col2=%col2:~0,30%
@@ -38,6 +38,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_textFormat output "column1" "column2" "column3" "column4"
+    %dk_call% dk_textFormat output "column1[15]" "column2[30]" "column3[20]" "column4[100]"
     %dk_call% dk_echo "%output%"
 %endfunction%

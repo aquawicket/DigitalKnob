@@ -6,8 +6,8 @@
 ::echo 3 - %~3
 
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
-if "%~1" equ "dk_keyboard.BeginReceiving" goto %1
-if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
+if "%~1" equ ":dk_keyboard.BeginReceiving" goto %1
+if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
 
 ::################################################################################
 ::# dk_keyboard()
@@ -29,7 +29,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 
 :dk_keyboard.Keyboard_Loop
     ::call dk_debugFunc 0
- setlocal
+ ::setlocal
     ::echo dk_keyboard.Keyboard_Loop %*
     
     :: Read keys via PowerShell
@@ -44,7 +44,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 
 :dk_keyboard.BeginReceiving
     ::call dk_debugFunc 0
- setlocal
+ ::setlocal
  
     echo dk_keyboard.BeginReceiving %*
     
@@ -58,7 +58,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
     
 :dk_keyboard.pollKeys
     ::call dk_debugFunc 0
- setlocal
+ ::setlocal
     ::echo dk_keyboard.pollKeys %*
 
     :: Process keys in Batch
@@ -73,8 +73,8 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 
 
 :dk_keyboard.onKeyDown
-    ::call dk_debugFunc 0
- setlocal
+    call dk_debugFunc 0
+ ::setlocal
     ::echo dk_keyboard.onKeyDown %*
     
     set "keyCode=%1"

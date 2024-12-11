@@ -1,4 +1,3 @@
-@if (@X) == (@Y) @end /*
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
@@ -11,6 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2
  setlocal
 
+	
 	for /F %%# in ('copy /Z "%~dpf0" NUL') do set "CR=%%#"
 	
 	:Timer
