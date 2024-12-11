@@ -12,6 +12,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #										https://zlib.net/zlib-1.3.1.tar.gz								* library sourcecode download
 #										https://website.com/executable.exe              				* executable file
 #
+#	IMPORT_PATH (optional)
+#										C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
+#
 #	BRANCH (optional)
 #										develop
 #										master
@@ -42,32 +45,36 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_importVariables url)
 	#dk_debugFunc()
 	
+	unset(IMPORT_PATH)
+	dk_getOptionValue(IMPORT_PATH) 	# C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
+	dk_printVar(IMPORT_PATH)
+	
 	unset(BRANCH)
-	dk_getOptionValue(BRANCH) 	# master
+	dk_getOptionValue(BRANCH) 		# master
 	dk_printVar(BRANCH)
 	
 	unset(FOLDER)
-	dk_getOptionValue(FOLDER)	# zlib-master
+	dk_getOptionValue(FOLDER)		# zlib-master
 	dk_printVar(FOLDER)
 	
 	unset(NAME)
-	dk_getOptionValue(NAME)		# zlib
+	dk_getOptionValue(NAME)			# zlib
 	dk_printVar(NAME)
 	
 	unset(PATH)
-	dk_getOptionValue(PATH)		# C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+	dk_getOptionValue(PATH)			# C:/Users/name/digitalknob/Development/3rdParty/zlib-master
 	dk_printVar(PATH)
 	
 	unset(ROOT)
-	dk_getOptionValue(ROOT)		# C:/Users/name/digitalknob/Development/3rdParty
+	dk_getOptionValue(ROOT)			# C:/Users/name/digitalknob/Development/3rdParty
 	dk_printVar(ROOT)
 	
 	unset(TAG)
-	dk_getOptionValue(TAG)		# v1.3.1
+	dk_getOptionValue(TAG)			# v1.3.1
 	dk_printVar(TAG)
 	
 	unset(VERSION)
-	dk_getOptionValue(VERSION)	# master
+	dk_getOptionValue(VERSION)		# master
 	dk_printVar(VERSION)
 	
 	
@@ -180,7 +187,11 @@ function(dk_importVariables url)
 	
 	# PLUGIN_IMPORT_PATH
 	unset(PLUGIN_IMPORT_PATH)
-	set(PLUGIN_IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})						
+	if(IMPORT_PATH)
+		set(PLUGIN_IMPORT_PATH ${IMPORT_PATH})	
+	else()
+		set(PLUGIN_IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})						
+	endif()
 	dk_printVar(PLUGIN_IMPORT_PATH)										# PLUGIN_IMPORT_PATH: C:\Users\name\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 
 	# PLUGIN_IMPORT_NAME
