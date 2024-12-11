@@ -10,6 +10,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_bashEnv)
 	dk_debugFunc()
 	
+	dk_notice("#################################################################################################################################")
+	dk_notice("dk_bashEnv SHOULD NOT BE USED!  take a look at how /_DKIMPORTS/openssl/DKMAKE.cmake runs configure for win_x86_64_clang from cmd.")
+	dk_notice("#################################################################################################################################")
+	dk_pause()
+	return()
+	
 	###### set WORKING DIRECTORY ######
 	if(${CURRENT_PLUGIN})
 		dk_verbose("dk_bashEnv() CURRENT_PLUGIN = ${CURRENT_PLUGIN}")

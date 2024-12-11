@@ -8,8 +8,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ############ clang ############
 # https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
 
-dk_load(dk_builder)
-#dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+#dk_load(dk_builder)
+dk_validate(host_triple "dk_host_triple()")
+dk_validate(target_triple "dk_target_triple()")
+
 #dk_getFileParam("${DKIMPORTS_DIR}/clang/clang.txt" VERSION)
 if(clang OR mingw OR ucrt)
 	dk_depend(msys2)
