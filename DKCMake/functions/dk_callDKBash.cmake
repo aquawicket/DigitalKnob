@@ -6,8 +6,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_callDKBash(function, arguments..., rtn_var)
 #
 #
-function(dk_callDKBash func rtn_var)
+function(dk_callDKBash)# func rtn_var)
 	dk_debugFunc()
+	set(func 	${ARGV0})
+	set(RTN_var ${ARGV1})
 	
     ### get required variables ###
 	dk_depend(bash)
@@ -29,21 +31,22 @@ function(dk_callDKBash func rtn_var)
    
     ### process the return value ###
     #dk_echo("output = ${output}")
-    #if("${LAST_ARG}" STREQUAL "rtn_var")
+    #if("${LAST_ARG}" STREQUAL "RTN_var")
         string(FIND "${output}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
         if(last_newline_pos GREATER -1)
-            string(SUBSTRING "${output}" ${last_newline_pos} -1 rtn_value) # Extract the last line
+            string(SUBSTRING "${output}" ${last_newline_pos} -1 RTN_value) # Extract the last line
         else()
-            set(rtn_value "${output}") # If no newline character was found, the whole string is the last line
+            set(RTN_value "${output}") # If no newline character was found, the whole string is the last line
         endif()
-        string(STRIP "${rtn_value}" rtn_value)
+        string(STRIP "${RTN_value}" RTN_value)
         
-        set(${rtn_var} "${rtn_value}" PARENT_SCOPE)
-        execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${rtn_value}")
+        set(${RTN_var} "${RTN_value}" PARENT_SCOPE)
+        execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${RTN_value}")
     #endif()
     
-# DEBUG
-#	dk_printVar(rtn_value)
+#if(DEBUG_CMAKE)
+	dk_printVar(RTN_value)
+#endif()
 endfunction()
 
 
@@ -56,9 +59,9 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_callDKBash(dk_test rtn_var "FROM DKCmake" "dk_callDKBash.cmake")
+	dk_callDKBash(dk_test result "FROM DKCmake" "dk_callDKBash.cmake")
     dk_echo()
-	dk_echo("rtn_var = ${rtn_var}")
+	dk_echo("result = ${result}")
 	
 	dk_callDKBash(dk_extract "${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64.zip" "${HOME}")
 endfunction()

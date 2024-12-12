@@ -11,17 +11,26 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@find		- The substring to search for
 #	@rtn_var		- Returns true if the str contains the substr. Otherwise returns false
 #
-function(dk_includes variable find rtn_var)
-	#dk_debugFunc()
+function(dk_includes)
+	dk_debugFunc(3 99)
+	#dk_debugFunc(string, string, int)
 	
-	if(variable MATCHES "${find}")
-		set(includes 1)
+	set(variable 	"${ARGV0}")
+	set(find 		"${ARGV1}")
+	set(rtn_var 	${ARGV2})
+	
+	string(FIND "${variable}" "${find}" index)
+	
+	math(EXPR index "${index}+1")
+	set(${rtn_var} ${index} PARENT_SCOPE)
+	
+#if(DEBUG_CMAKE)	
+	if(${index})
+		dk_debug("dk_includes(${ARGV}): rtn_var:${rtn_var}:${index}:isTure")
 	else()
-		set(includes 0)
+		dk_debug("dk_includes(${ARGV}): rtn_var:${rtn_var}:${index}:isFalse")
 	endif()
-	
-	#dk_printVar(includes)
-	set(${rtn_var} ${includes} PARENT_SCOPE)
+#endif()
 endfunction()
 
 
@@ -34,14 +43,14 @@ function(DKTEST)
 	
 	set(myString "There is a needle in this haystack")
 	set(mySubstring "needle")
-	dk_includes(${myString} ${mySubstring} result)
+	dk_includes("${myString}" "${mySubstring}" result)
 	if(result)
 		dk_info("myString contains mySubstring")
 	else()
 		dk_info("myString does NOT contain mySubstring")
 	endif()
 	
-	dk_includes(${myString} "nonexistant" result)
+	dk_includes("${myString}" "nonexistant" result)
 	if(result)
 		dk_info("myString contains nonexistant")
 	else()
