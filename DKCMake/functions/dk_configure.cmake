@@ -50,7 +50,11 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_assertPath(SOURCE_DIR)
 		dk_assertPath(BINARY_DIR)
 		
+
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
+		dk_validate(CMAKE_GENERATOR "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
+		#dk_assertVar(CMAKE_GENERATOR)
+		
 		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S" "${SOURCE_DIR}" "-B" "${BINARY_DIR}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)

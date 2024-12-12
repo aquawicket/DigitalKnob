@@ -433,7 +433,7 @@ endif()
 
 
 #dk_printVar(MSYSTEM)
-#dk_printVar(CMAKE_GENERATOR)
+dk_assertVar(CMAKE_GENERATOR)
 #dk_printVar(CMAKE_MAKE_PROGRAM)
 #dk_printVar(CMAKE_C_FLAGS)
 #dk_printVar(CMAKE_CXX_FLAGS)
