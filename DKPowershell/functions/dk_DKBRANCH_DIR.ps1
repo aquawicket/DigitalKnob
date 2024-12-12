@@ -43,70 +43,70 @@ function Global:dk_DKBRANCH_DIR() {
 		dk_call dk_assertPath DKBASH_DIR
 			$global:DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 			dk_call dk_assertPath DKBASH_FUNCTIONS_DIR
-			$global:DKBASH_FUNCTIONS_DIR_="${DKBASH_DIR}/functions/"
+			$global:DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKBASH_FUNCTIONS_DIR_
 			
 		$global:DKBATCH_DIR="${DKBRANCH_DIR}/DKBatch"
 		dk_call dk_assertPath DKBATCH_DIR
 			$global:DKBATCH_FUNCTIONS_DIR="${DKBATCH_DIR}/functions"
 			dk_call dk_assertPath DKBATCH_FUNCTIONS_DIR
-			$global:DKBATCH_FUNCTIONS_DIR_="${DKBATCH_DIR}/functions/"
+			$global:DKBATCH_FUNCTIONS_DIR_="${DKBATCH_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKBATCH_FUNCTIONS_DIR_
 			
 		$global:DKC_DIR="${DKBRANCH_DIR}/DKC"
 		dk_call dk_assertPath DKC_DIR
 			$global:DKC_FUNCTIONS_DIR="${DKC_DIR}/functions"
 			dk_call dk_assertPath DKC_FUNCTIONS_DIR
-			$global:DKC_FUNCTIONS_DIR_="${DKC_DIR}/functions/"
+			$global:DKC_FUNCTIONS_DIR_="${DKC_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKC_FUNCTIONS_DIR_
 		
 		$global:DKCMAKE_DIR="${DKBRANCH_DIR}/DKCMake"
 		dk_call dk_assertPath DKCMAKE_DIR
 			$global:DKCMAKE_FUNCTIONS_DIR="${DKCMAKE_DIR}/functions"
 			dk_call dk_assertPath DKCMAKE_FUNCTIONS_DIR
-			$global:DKCMAKE_FUNCTIONS_DIR_="${DKCMAKE_DIR}/functions/"
+			$global:DKCMAKE_FUNCTIONS_DIR_="${DKCMAKE_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKCMAKE_FUNCTIONS_DIR_
 			
 		$global:DKCPP_DIR="${DKBRANCH_DIR}/DKCpp"
 		dk_call dk_assertPath DKCPP_DIR
 			$global:DKCPP_FUNCTIONS_DIR="${DKCPP_DIR}/functions"
 			dk_call dk_assertPath DKCPP_FUNCTIONS_DIR
-			$global:DKCPP_FUNCTIONS_DIR_="${DKCPP_DIR}/functions/"
+			$global:DKCPP_FUNCTIONS_DIR_="${DKCPP_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKCPP_FUNCTIONS_DIR_
 			
 		$global:DKCSHARP_DIR="${DKBRANCH_DIR}/DKCSharp"
 		dk_call dk_assertPath DKCSHARP_DIR
 			$global:DKCSHARP_FUNCTIONS_DIR="${DKCSHARP_DIR}/functions"
 			dk_call dk_assertPath DKCSHARP_FUNCTIONS_DIR
-			$global:DKCSHARP_FUNCTIONS_DIR_="${DKCSHARP_DIR}/functions/"
+			$global:DKCSHARP_FUNCTIONS_DIR_="${DKCSHARP_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKCSHARP_FUNCTIONS_DIR_
 			
 		$global:DKHTA_DIR="${DKBRANCH_DIR}/DKHta"
 		dk_call dk_assertPath DKHTA_DIR
-			#$global:DKHTA_FUNCTIONS_DIR="${DKHTA_DIR}/functions"
+			$global:DKHTA_FUNCTIONS_DIR="${DKHTA_DIR}/functions"
 			#dk_call dk_assertPath DKHTA_FUNCTIONS_DIR
-			#$global:DKHTA_FUNCTIONS_DIR_="${DKHTA_DIR}/functions/"
+			$global:DKHTA_FUNCTIONS_DIR_="${DKHTA_FUNCTIONS_DIR}/"
 			#dk_call dk_assertPath DKHTA_FUNCTIONS_DIR_
 		
 		$global:DKJAVA_DIR="${DKBRANCH_DIR}/DKJava"
 		dk_call dk_assertPath DKJAVA_DIR
 			$global:DKJAVA_FUNCTIONS_DIR="${DKJAVA_DIR}/functions"
 			dk_call dk_assertPath DKJAVA_FUNCTIONS_DIR
-			$global:DKJAVA_FUNCTIONS_DIR_="${DKJAVA_DIR}/functions/"
+			$global:DKJAVA_FUNCTIONS_DIR_="${DKJAVA_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKJAVA_FUNCTIONS_DIR_
 		
 		$global:DKJAVASCRIPT_DIR="${DKBRANCH_DIR}/DKJavascript"
 		dk_call dk_assertPath DKJAVASCRIPT_DIR
 			$global:DKJAVASCRIPT_FUNCTIONS_DIR="${DKJAVASCRIPT_DIR}/functions"
 			dk_call dk_assertPath DKJAVASCRIPT_FUNCTIONS_DIR
-			$global:DKJAVASCRIPT_FUNCTIONS_DIR_="${DKJAVASCRIPT_DIR}/functions/"
+			$global:DKJAVASCRIPT_FUNCTIONS_DIR_="${DKJAVASCRIPT_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKJAVASCRIPT_FUNCTIONS_DIR_
 		
 		$global:DKPHP_DIR="${DKBRANCH_DIR}/DKPhp"
 		dk_call dk_assertPath DKPHP_DIR
 			$global:DKPHP_FUNCTIONS_DIR="${DKPHP_DIR}/functions"
 			dk_call dk_assertPath DKPHP_FUNCTIONS_DIR
-			$global:DKPHP_FUNCTIONS_DIR_="${DKPHP_DIR}/functions/"
+			$global:DKPHP_FUNCTIONS_DIR_="${DKPHP_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKPHP_FUNCTIONS_DIR_
 		
 		$global:DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
@@ -116,14 +116,14 @@ function Global:dk_DKBRANCH_DIR() {
 		dk_call dk_assertPath DKPOWERSHELL_DIR
 			$global:DKPOWERSHELL_FUNCTIONS_DIR="${DKPOWERSHELL_DIR}/functions"
 			dk_call dk_assertPath DKPOWERSHELL_FUNCTIONS_DIR
-			$global:DKPOWERSHELL_FUNCTIONS_DIR_="${DKPOWERSHELL_DIR}/functions/"
+			$global:DKPOWERSHELL_FUNCTIONS_DIR_="${DKPOWERSHELL_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKPOWERSHELL_FUNCTIONS_DIR_
 		
 		$global:DKPYTHON_DIR="${DKBRANCH_DIR}/DKPython"
 		dk_call dk_assertPath DKPYTHON_DIR
 			$global:DKPYTHON_FUNCTIONS_DIR="${DKPYTHON_DIR}/functions"
 			dk_call dk_assertPath DKPYTHON_FUNCTIONS_DIR
-			$global:DKPYTHON_FUNCTIONS_DIR_="${DKPYTHON_DIR}/functions/"
+			$global:DKPYTHON_FUNCTIONS_DIR_="${DKPYTHON_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKPYTHON_FUNCTIONS_DIR_
 }
 

@@ -3,18 +3,18 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ##################################################################################
-# dk_callDKBash(function, arguments..., rtn_var)
+# dk_callDKBash(function, arguments...)
 #
 #
-function(dk_callDKBash)# func rtn_var)
+function(dk_callDKBash)
 	dk_debugFunc()
+	set(RTN_var ${ARGV0})
 	set(func 	${ARGV0})
-	set(RTN_var ${ARGV1})
 	
     ### get required variables ###
 	dk_depend(bash)
-	dk_validate(DKBASH_FUNCTIONS_DIR    "dk_DKBRANCH_DIR()")
-    
+	dk_validate(DKBASH_FUNCTIONS_DIR_    "dk_DKBRANCH_DIR()")
+    dk_assertPath("{DKBASH_FUNCTIONS_DIR_})
     
     ### get ALL_BUT_FIRST_ARGS ###
 	#set(ALL_BUT_FIRST_ARGS              ${ARGN})
@@ -24,7 +24,7 @@ function(dk_callDKBash)# func rtn_var)
     
     
     ### Call DKBash function ###
-    dk_set(DKBASH_COMMAND "${BASH_EXE}" -c "${DKBASH_FUNCTIONS_DIR}/${func}.sh ${ARGN}")
+    dk_set(DKBASH_COMMAND "${BASH_EXE}" -c "${DKBASH_FUNCTIONS_DIR_}${func}.sh ${ARGN}")
 	#dk_echo("${DKBASH_COMMAND}")
     execute_process(COMMAND ${DKBASH_COMMAND} WORKING_DIRECTORY "${DKBASH_FUNCTIONS_DIR}" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
    
@@ -59,9 +59,8 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_callDKBash(dk_test result "FROM DKCmake" "dk_callDKBash.cmake")
-    dk_echo()
-	dk_echo("result = ${result}")
+	dk_callDKBash(dk_test "FROM DKCmake" "dk_callDKBash.cmake")
+	dk_echo("dk_test = ${dk_test}")
 	
-	dk_callDKBash(dk_extract "${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64.zip" "${HOME}")
+	#dk_callDKBash(result dk_test)
 endfunction()
