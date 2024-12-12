@@ -3,16 +3,16 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ################################################################################
-# dk_group()
+# dk_groupEnd()
 #
 #
-function(dk_group)
+function(dk_groupEnd)
 	dk_debugFunc(0)
   
 	if(NOT DEFINED group_level)
 		dk_set(group_level 0)
 	else()
-		math(EXPR level "${group_level}+1")
+		math(EXPR group_level "${group_level}-1")
 	endif()
 endfunction()
 

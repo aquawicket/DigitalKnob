@@ -250,7 +250,7 @@ function(dk_executeProcess)
 	
 	###################################################
 	
-#	dk_reparseCmakeCommand(ARGV) # support longer command lines
+	dk_reparseCmakeCommand(ARGV) # support longer command lines
 	
 #	if(NOT NOECHO)
 #		dk_replaceAll("${ARGV}"  ";"  " "  cmd1)	

@@ -12,7 +12,7 @@ function(dk_group)
 	if(NOT DEFINED group_level)
 		dk_set(group_level 0)
 	else()
-		math(EXPR level "${group_level}+1")
+		math(EXPR group_level "${group_level}+1")
 	endif()
 endfunction()
 

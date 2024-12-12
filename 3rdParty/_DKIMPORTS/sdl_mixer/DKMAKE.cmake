@@ -20,7 +20,8 @@ dk_depend(vorbis)
 
 ### IMPORT ###
 #dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.2.zip PATCH)
-dk_import(https://github.com/libsdl-org/SDL_mixer/archive/497f149.zip PATCH)
+dk_import(https://github.com/libsdl-org/SDL_mixer/archive/a90b86e.zip PATCH) 					# SDL2
+#dk_import(https://github.com/libsdl-org/SDL_mixer/archive/497f149.zip PATCH) 					# SDL3
 
 ### LINK ###
 dk_include			(${SDL_MIXER_DIR}/include							SDL_MIXER_INCLUDE_DIR)

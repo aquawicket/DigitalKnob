@@ -24,8 +24,7 @@ else()
 	dk_libRelease	(${OPUS_RELEASE_DIR}/libopus.a		opusfile_LIBRARY)
 endif()
 
-dk_set(OPUS_CMAKE -Dopusfile_INCLUDE_PATH=${opusfile_INCLUDE_PATH}  -Dopusfile_LIBRARY=${opusfile_LIBRARY}) 
-
+dk_set(OPUS_CMAKE -DOpusFile_INCLUDE_PATH=${OpusFile_INCLUDE_PATH}  -DOpusFile_LIBRARY=${OpusFile_LIBRARY}) 
 
 
 ### GENERATE ###
