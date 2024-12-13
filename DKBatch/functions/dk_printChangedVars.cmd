@@ -20,52 +20,42 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	echo:
 	echo ################## Variable Changes ##################
 
-	for /f "delims= eol==" %%c in ('set') do (
-		for /f "delims==" %%A in ("%%c") do set "cname=%%A"
-		set "%%same="
-		set "%%bothExist="
-		set "%%deleted="
-		set "%%new="
-		
-		for /f "usebackq delims= eol==" %%o in ("%DKCACHE_DIR%\vars.tmp") do (	
-			for /f "delims==" %%A in ("%%o") do set "oname=%%A"
-		
-			if "%%c"=="%%o" (
-				set "%%same=1"
-			) 
-		
-			if "!cname!"=="!oname!" (
-				set "%%bothExist=1"
-			) 
-				
-			if not defined !oname! (
-				set "%%deleted=1"
-			)
-			
-		)
-		
-		if not defined %%bothExist    set "%%new=1"
+	rem We need two flag variables. Prepare two names that "should" not collide
+    for /f "tokens=1,2" %%d in ("_&d&%random%%random%_ _&m&%random%%random%_") do (
 
-		rem echo !cname!  same:!%%same!    bothExist:!%%bothExist!    deleted:!%%deleted!      new:!%%new!
-		
-		rem ### NEW ###
-		if defined %%new                              echo      NEW: %%c
-		if not defined %%same if defined %%bothExist  echo MODIFIED: %%c
-		if defined %%deleted                          echo  DELETED: %%c
-		rem ### MODIFIED ###
-		
-		rem ### DELETED ###
-		
-		set "%%same="
-		set "%%bothExist="
-		set "%%deleted="
-		set "%%new="
-	)
+        rem %%d will be used to determine if we will check for variable deletion 
+        rem     on the first inner pass
+        rem %%e will be used for matching variables between existing/original variables
+        set "%%d="
 
-	set "%%same="
-	set "%%bothExist="
-	set "%%deleted="
-	set "%%new="
+        rem Retrieve the current environment contents
+        for /f "delims= eol==" %%a in ('set') do (
+
+            rem We have not found matching variables
+            set "%%e="
+
+            rem Search a match in original set of variables 
+            for /f "usebackq delims= eol==" %%o in ("%DKCACHE_DIR%\vars.tmp") do (
+
+                rem If variables match, flag it, else check for variable 
+                rem deletion is this is the first loop over the original file
+                if %%a==%%o ( set "%%e=1" ) else if not defined %%d (
+                    for /f "delims==" %%V in ("%%~o") do if not defined %%V (echo(  DELETED: %%V)
+                )
+            )
+
+            rem If no match found, output changed value
+            if not defined %%e (echo(MODIFIED: %%a)
+
+        rem Now all the variable deletion has been checked.
+        ) & if not defined %%d set "%%d=1"
+
+    rem Cleanup flag variables
+    ) & set "%%d=" & set "%%e="
+
+    rem Cleanup temporary file
+)
+
 	set > %DKCACHE_DIR%\vars.tmp
 %endfunction%
 
