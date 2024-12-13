@@ -38,7 +38,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_getNativePath %QEMU_DIR% QEMU_INSTALL_PATH
 	%dk_call% dk_echo "Installing %QEMU_DL_FILE% . . ."
 	%dk_call% dk_set command_string ""%DKDOWNLOAD_DIR%\%QEMU_DL_FILE%" /S /D=%QEMU_INSTALL_PATH%"
-	call %command_string%
+	%dk_call% %command_string%
 	
 	if NOT exist "%QEMU_IMG_EXE%"  %dk_call% dk_error "cannot find qemu"
 %endfunction%

@@ -22,5 +22,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
  setlocal
  
-	call dk_installMake
+	%dk_call% dk_installMake
 %endfunction%

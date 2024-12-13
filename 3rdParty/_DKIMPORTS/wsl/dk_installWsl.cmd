@@ -17,15 +17,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: https://learn.microsoft.com/en-us/windows/wsl/install-manual
 	
 	:: Step 1 - Enable the Windows Subsystem for Linux
-	call dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Windows-Subsystem-Linux | find "Disabled" && (
+	%dk_call% dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Windows-Subsystem-Linux | find "Disabled" && (
 		echo:
 		echo enabling Microsoft-Windows-Subsystem-Linux . . .
-		call dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+		%dk_call% dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 	)
-	call dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Hyper-V | find "Disabled" && (
+	%dk_call% dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Hyper-V | find "Disabled" && (
 		echo:
 		echo enabling Microsoft-Hyper-V . . .
-		call dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
+		%dk_call% dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
 	)
 
 	
@@ -33,10 +33,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: TODO
 	
 	:: Step 3 - Enable Virtual Machine feature
-	call dism.exe /online /Get-FeatureInfo /featurename:VirtualMachinePlatform | find "Disabled" && (
+	%dk_call% dism.exe /online /Get-FeatureInfo /featurename:VirtualMachinePlatform | find "Disabled" && (
 		echo:
 		echo enabling VirtualMachinePlatform . . .
-		call dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+		%dk_call% dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 		shutdown /r /t 3
 	)
 	
@@ -79,5 +79,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_installWsl
+	%dk_call% dk_installWsl
 %endfunction%

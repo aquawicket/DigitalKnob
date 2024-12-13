@@ -10,8 +10,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
 
     %dk_call% dk_validate DKIMPORTS_DIR         "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_validate CMAKE_EXE             "call %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
-	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
+    %dk_call% dk_validate CMAKE_EXE             "%dk_call% %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
+	%dk_call% dk_validate DKCMAKE_DIR           "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
 	set "DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR%/"

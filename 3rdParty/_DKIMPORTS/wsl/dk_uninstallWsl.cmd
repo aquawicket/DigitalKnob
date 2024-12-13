@@ -17,24 +17,24 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	)
 	
 	:: Uninstall VirtualMachinePlatform
-	call dism.exe /online /Get-FeatureInfo /featurename:VirtualMachinePlatform | find "Enabled" && (
+	%dk_call% dism.exe /online /Get-FeatureInfo /featurename:VirtualMachinePlatform | find "Enabled" && (
 		echo:
 		echo disabling VirtualMachinePlatform . . .
-		call dism.exe /online /disable-feature /featurename:VirtualMachinePlatform /norestart
+		%dk_call% dism.exe /online /disable-feature /featurename:VirtualMachinePlatform /norestart
 	)
 	
 	:: Uninstall Microsoft-Hyper-V 
-	call dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Hyper-V | find "Enabled" && (
+	%dk_call% dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Hyper-V | find "Enabled" && (
 		echo:
 		echo disabling Microsoft-Hyper-V . . .
-		call dism.exe /online /disable-feature /featurename:Microsoft-Hyper-V /norestart
+		%dk_call% dism.exe /online /disable-feature /featurename:Microsoft-Hyper-V /norestart
 	)
 	
 	:: Uninstall Microsoft-Windows-Subsystem-Linux
-	call dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Windows-Subsystem-Linux | find "Enabled" && (
+	%dk_call% dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Windows-Subsystem-Linux | find "Enabled" && (
 		echo:
 		echo disabling Microsoft-Windows-Subsystem-Linux . . .
-		call dism.exe /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux /norestart
+		%dk_call% dism.exe /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux /norestart
 	)
 	
 	:: restart

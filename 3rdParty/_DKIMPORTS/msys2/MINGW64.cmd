@@ -4,7 +4,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 ::https://www.msys2.org/wiki/Launchers
-call dk_installMsys2.cmd
+%dk_call% dk_installMsys2.cmd
 ::set "MSYS2=%DKBRANCH_DIR%\3rdParty\msys2-x86_64-20221216"
 
 goto main

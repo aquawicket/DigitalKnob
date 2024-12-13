@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate NOTEPADPP_EXE "call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadpp"
+	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% %DKIMPORTS_DIR%\notepadpp\dk_installNotepadpp"
 	%dk_call% dk_installFileAssoc .1 %NOTEPADPP_EXE%
 	%dk_call% dk_installFileAssoc .2 %NOTEPADPP_EXE%
 	%dk_call% dk_installFileAssoc .3 %NOTEPADPP_EXE%
@@ -61,5 +61,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-    call dk_installNotepadppFileAssociations
+    %dk_call% dk_installNotepadppFileAssociations
 %endfunction%

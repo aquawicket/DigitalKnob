@@ -136,5 +136,5 @@ if defined android (
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_installVisualStudio
+	%dk_call% dk_installVisualStudio
 %endfunction%

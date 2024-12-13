@@ -2,11 +2,11 @@
 if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-::call dk_source dk_convertToCIdentifier
-::call dk_source dk_basename
-::call dk_source dk_removeExtension
-::call dk_source dk_toLower
-::call dk_source dk_validate
+::%dk_call% dk_source dk_convertToCIdentifier
+::%dk_call% dk_source dk_basename
+::%dk_call% dk_source dk_removeExtension
+::%dk_call% dk_source dk_toLower
+::%dk_call% dk_source dk_validate
 ::####################################################################
 ::# dk_uninstallGit()
 ::#
@@ -37,10 +37,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	
 	::### Uninstall Context Menu ###
-	call %DKIMPORTS_DIR%\git\dk_uninstallGitContextMenu.cmd
+	%dk_call% %DKIMPORTS_DIR%\git\dk_uninstallGitContextMenu.cmd
 
 	::### Uninstall File Associations ###
-	call %DKIMPORTS_DIR%\git\dk_uninstallGitFileAssociations.cmd
+	%dk_call% %DKIMPORTS_DIR%\git\dk_uninstallGitFileAssociations.cmd
 	
 	::### Remove PATH variable
 	:: TODO
@@ -56,5 +56,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
  setlocal
 	
-    call dk_uninstallGit
+    %dk_call% dk_uninstallGit
 %endfunction%

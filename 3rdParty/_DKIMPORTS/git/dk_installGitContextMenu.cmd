@@ -27,5 +27,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-    call dk_installGitContextMenu
+    %dk_call% dk_installGitContextMenu
 %endfunction%
