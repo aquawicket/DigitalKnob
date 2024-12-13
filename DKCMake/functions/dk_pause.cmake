@@ -14,7 +14,7 @@ function(dk_pause)
 	if(ARGN)
 		set(pause_msg "${ARGN}")
 	else()
-		set(pause_msg "Press any key to continue...")
+		set(pause_msg "Press Enter to continue...")
 	endif()
 	dk_echo("${pause_msg}")
 	
