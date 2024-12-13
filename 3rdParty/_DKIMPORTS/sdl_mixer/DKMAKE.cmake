@@ -45,7 +45,7 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_INSTALL=OFF						# "Enable SDL2mixer install target"
 	-DSDL2MIXER_DEPS_SHARED=OFF					# "Default value for loading dependencies dynamically" ON
 	-DSDL2MIXER_SAMPLES=OFF						# "Build the SDL2_mixer sample program(s)" ON
-	-DSDL2MIXER_CMD=ON							# "Support an external music player" ${sdl2mixer_cmd_default}
+	-DSDL2MIXER_CMD=OFF							# "Support an external music player" ${sdl2mixer_cmd_default}
 	-DSDL2MIXER_FLAC=${FLAC}					# "Enable FLAC music" ON
 	-DSDL2MIXER_FLAC_LIBFLAC=ON					# "Enable FLAC music using libFLAC"
 	-DSDL2MIXER_FLAC_LIBFLAC_SHARED=OFF			# "Dynamically load LIBFLAC" OFF
