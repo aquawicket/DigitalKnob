@@ -1,5 +1,5 @@
 ########################################################################################
-# Remove these lines and rename all instaces of _TEMPLATE-APP_ to the name of your library
+# Remove these lines and rename all instaces of [_LIB_NAME_] to the name of your library
 dk_undepend(_TEMPLATE-LIB_)
 dk_return()
 ########################################################################################
@@ -11,9 +11,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-###### [lib_name] ######
-# http://www.[lib_name].com
-# https://github.com/organization/[lib_name]
+###### [_lib_name_] ######
+# http://www.[_lib_name_].com
+# https://github.com/organization/[_lib_name_]
 
 ### DEPENDS ###
 #dk_depend(libname)

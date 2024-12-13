@@ -1,0 +1,1 @@
+GME_DL=https://github.com/libgme/game-music-emu/archive/cb2c1cc.zip

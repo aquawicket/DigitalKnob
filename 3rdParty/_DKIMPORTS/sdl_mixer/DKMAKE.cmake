@@ -45,9 +45,9 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_INSTALL=OFF						# "Enable SDL2mixer install target"
 	-DSDL2MIXER_DEPS_SHARED=OFF					# "Default value for loading dependencies dynamically" ON
 	-DSDL2MIXER_SAMPLES=OFF						# "Build the SDL2_mixer sample program(s)" ON
-	-DSDL2MIXER_CMD=OFF							# "Support an external music player" ${sdl2mixer_cmd_default}
+	-DSDL2MIXER_CMD=ON							# "Support an external music player" ${sdl2mixer_cmd_default}
 	-DSDL2MIXER_FLAC=${FLAC}					# "Enable FLAC music" ON
-	-DSDL2MIXER_FLAC_LIBFLAC=OFF				# "Enable FLAC music using libFLAC"
+	-DSDL2MIXER_FLAC_LIBFLAC=ON					# "Enable FLAC music using libFLAC"
 	-DSDL2MIXER_FLAC_LIBFLAC_SHARED=OFF			# "Dynamically load LIBFLAC" OFF
 	-DSDL2MIXER_FLAC_DRFLAC=OFF					# "Enable FLAC music using drflac"
 	-DSDL2MIXER_GME=OFF							# "Support loading GME music via game-music-emu" OFF
@@ -67,7 +67,7 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_MIDI_FLUIDSYNTH_SHARED=OFF  	# "Dynamically load libfluidsynth" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_MIDI_FLUIDSYNTH OFF
 	-DSDL2MIXER_MIDI_NATIVE=OFF					# "Support native MIDI output" ON SDL2MIXER_MIDI OFF
 	-DSDL2MIXER_MIDI_TIMIDITY=OFF				# "Support timidity MIDI output" ON SDL2MIXER_MIDI OFF
-	-DSDL2MIXER_OPUS=OFF							# "Enable Opus music" ON
+	-DSDL2MIXER_OPUS=OFF						# "Enable Opus music" ON
 	-DSDL2MIXER_OPUS_SHARED=OFF					# "Dynamically load libopus" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_OPUS OFF
 	-DSDL2MIXER_VORBIS_TREMOR_SHARED=OFF 		# "Dynamically load tremor library" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_VORBIS_TREMOR OFF
 	-DSDL2MIXER_VORBIS_VORBISFILE_SHARED=OFF	# "Dynamically load vorbisfile library" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_VORBIS_VORBISFILE OFF
