@@ -11,17 +11,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ### INSTALL ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	(${DKIMPORTS_DIR}/gme/gme.txt GME_IMPORT)
-dk_import		(${GME_IMPORT})
+dk_getFileParam	("${DKIMPORTS_DIR}/gme/gme.txt" GME_DL)
+dk_import		(${GME_DL})
 
 ### LINK ###
 dk_include			(${GME}/include)
 if(UNIX)
-	dk_libDebug		(${GME_DEBUG_DIR}/libgme.a)
-	dk_libRelease	(${GME_RELEASE_DIR}/libgme.a)
+	dk_libDebug		(${GME_DEBUG_DIR}/gme/libgme.a)
+	dk_libRelease	(${GME_RELEASE_DIR}/gme/libgme.a)
 else()
-	dk_libDebug		(${GME_DEBUG_DIR}/gme.lib)
-	dk_libRelease	(${GME_RELEASE_DIR}/gme.lib)
+	dk_libDebug		(${GME_DEBUG_DIR}/gme/gme.lib)
+	dk_libRelease	(${GME_RELEASE_DIR}/gme/gme.lib)
 endif()
 
 ### GENERATE ###
