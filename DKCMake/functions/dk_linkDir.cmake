@@ -10,17 +10,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@path	The path to add to the compiler library paths
 #
 function(dk_linkDir path)
-	dk_debugFunc()
+	dk_debugFunc(1)
 	
 	if(path IN_LIST DKLINKDIRS_LIST)
 		continue()  # already in the list
 	endif()
-	#dk_append(DKLINKDIRS_LIST ${item})
+
 	dk_append(DKLINKDIRS_LIST ${path})
-	#link_directories(${item})
-	link_directories(${path})
+	if(NOT CMAKE_SCRIPT_MODE_FILE)
+		link_directories(${path})
+	endif()
 endfunction()
-dk_createOsMacros("dk_linkDir")
 
 
 
@@ -29,5 +29,5 @@ dk_createOsMacros("dk_linkDir")
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_linkDir(todo)
 endfunction()
