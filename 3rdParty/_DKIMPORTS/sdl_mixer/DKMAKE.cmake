@@ -46,7 +46,7 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_DEPS_SHARED=OFF					# "Default value for loading dependencies dynamically" ON
 	-DSDL2MIXER_SAMPLES=OFF						# "Build the SDL2_mixer sample program(s)" ON
 	-DSDL2MIXER_CMD=OFF							# "Support an external music player" ${sdl2mixer_cmd_default}
-	-DSDL2MIXER_FLAC=${FLAC}					# "Enable FLAC music" ON
+	-DSDL2MIXER_FLAC=ON							# "Enable FLAC music" ON
 	-DSDL2MIXER_FLAC_LIBFLAC=ON					# "Enable FLAC music using libFLAC"
 	-DSDL2MIXER_FLAC_LIBFLAC_SHARED=OFF			# "Dynamically load LIBFLAC" OFF
 	-DSDL2MIXER_FLAC_DRFLAC=OFF					# "Enable FLAC music using drflac"
@@ -76,7 +76,7 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_WAVPACK_DSD=OFF 				# "Enable WavPack DSD music support" OFF SDL2MIXER_WAVPACK OFF
 	-DSDL2MIXER_WAVPACK_SHARED=OFF 				# "Dynamically load WavPack library" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_WAVPACK OFF
 	-DGME_ZLIB=OFF 								# "Enable GME to support compressed sound formats" OFF
-	${FLAC_CMAKE} 
+	${FLAC_CMAKE}
 	${OGG_CMAKE} 
 	${OPUS_CMAKE}
 	${SDL_CMAKE} 
