@@ -6,12 +6,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ###### WavPack ######
-# https://github.com/dbry/WavPack/archive/d9c4a35e822bb274b8c94fc95ff16c5b4c04d346.zip
+# https://github.com/dbry/WavPack/archive/d9c4a35.zip
 
 
 ### INSTALL ###
 dk_import(https://github.com/dbry/WavPack/archive/d9c4a35.zip)
-dk_assertPath(WAVPACK)
+
 
 ### LINK ###
 dk_include			(${WAVPACK}/include)

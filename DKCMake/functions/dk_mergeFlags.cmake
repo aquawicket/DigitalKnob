@@ -13,7 +13,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_mergeFlags args rtn_var)
 	dk_debugFunc()
 	
-	#dk_debug("BEFORE: dk_mergeFlags(${ARGV})")
 	set(args ${args} ${rtn_var} ${ARGN})
 	list(GET args -1 rtn_var)
 	list(REMOVE_AT args -1)
