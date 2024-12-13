@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_pause) 
 	dk_debugFunc()
-
+	
 	###### ${pause_msg} ######
 	if(ARGN)
 		set(pause_msg "${ARGN}")
@@ -18,41 +18,42 @@ function(dk_pause)
 	endif()
 	dk_echo("${pause_msg}")
 	
-	###### Cmd ######
-	if(DEFINED ENV{COMSPEC})
-		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
-		execute_process(COMMAND ${CMD_EXE} /c pause >nul)
+	###### BASH ######
+	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+	if(BASH_EXE)
+		set(cmnd ${BASH_EXE} -c "read -p ''")
+		#message("${cmnd}")
+		execute_process(COMMAND ${cmnd})
+		dk_return()
+	endif()
+	
+	###### SH ######
+	execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE SH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+	if(SH_EXE)			
+		set(cmnd ${SH_EXE} -c "read -p ''")
+		#message("${cmnd}")
+		execute_process(COMMAND ${cmnd})
 		dk_return()
 	endif()
 	
 	###### Powershell ######
 	find_program(POWERSHELL_EXE powershell.exe)
 	if(POWERSHELL_EXE)
-		execute_process(COMMAND ${POWERSHELL_EXE} Read-Host)
+		set(cmnd ${POWERSHELL_EXE} Read-Host)
+		#message("${cmnd}")
+		execute_process(COMMAND ${cmnd})
 		dk_return()
 	endif()
 	
-	###### Bash ######
-	if(DEFINED ENV{BASH})
-		execute_process(COMMAND $ENV{BASH} read -p)
-		dk_return()
-	elseif(EXISTS $ENV{BASH})
-		execute_process(COMMAND $ENV{BASH} read -p)
-		dk_return()
-	elseif(EXISTS "/bin/bash")
-		execute_process(COMMAND "/bin/bash" read -p)
-		dk_return()
-	elseif(DEFINED ENV{SHELL})
-		execute_process(COMMAND $ENV{SHELL} read -p)
-		dk_return()
-	elseif(EXISTS $ENV{SHELL})
-		execute_process(COMMAND $ENV{SHELL} read -p)
-		dk_return()
-	else()	
-		execute_process(COMMAND sh read -p)
+	###### Cmd ######
+	if(DEFINED ENV{COMSPEC})
+		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
+		set(cmnd ${CMD_EXE} /c pause >nul)
+		#message("${cmnd}")
+		execute_process(COMMAND ${cmnd})
 		dk_return()
 	endif()
-		
+	
 	dk_fatal("dk_pause() failed:   both CMD_EXE and BASH_EXE are invalid!")
 endfunction()
 
