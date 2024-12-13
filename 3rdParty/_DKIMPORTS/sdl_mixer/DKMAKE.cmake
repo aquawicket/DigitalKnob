@@ -58,7 +58,7 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_MOD_XMP=OFF 					# "Support loading MOD music via libxmp" ON SDL2MIXER_MOD OFF
 	-DSDL2MIXER_MOD_XMP_LITE=OFF 				# "Use libxmp-lite instead of libxmp" OFF "SDL2MIXER_MOD_XMP;NOT SDL2MIXER_VENDORED" OFF
 	-DSDL2MIXER_MOD_XMP_SHARED=OFF 				# "Dynamically load libxmp(-lite)" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_MOD_XMP OFF
-	-DSDL2MIXER_MP3=ON 							# "Enable MP3 music" ON
+	-DSDL2MIXER_MP3=OFF 						# "Enable MP3 music" ON
 	-DSDL2MIXER_MP3_MINIMP3=OFF 				# "Support loading MP3 music via minimp3" ON SDL2MIXER_MP3 OFF
 	-DSDL2MIXER_MP3_MPG123=OFF 					# "Support loading MP3 music via MPG123" OFF SDL2MIXER_MP3 OFF
 	-DSDL2MIXER_MP3_MPG123_SHARED=OFF 			# "Dynamically load mpg123" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_MP3_MPG123 OFF
