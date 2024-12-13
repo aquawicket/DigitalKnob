@@ -35,6 +35,7 @@ else()
 endif()
 
 
+
 ### 3rd Party Link ###
 if(MULTI_CONFIG)
 	dk_set(FLAC_CMAKE
@@ -70,17 +71,20 @@ endif()
 
 ### GENERATE ###
 dk_configure(${FLAC_DIR}
-	-DBUILD_CXXLIBS=ON					# "Build libFLAC++" ON
-	-DBUILD_DOCS=OFF					# "Build and install doxygen documents" ON
-	-DBUILD_EXAMPLES=OFF				# "Build and install examples" ON
-	-DBUILD_PROGRAMS=OFF 				# "Build and install programs" ON
-	-DINSTALL_CMAKE_CONFIG_MODULE=ON	# "Install CMake package-config module" ON
-	-DINSTALL_MANPAGES=OFF				# "Install MAN pages" ON
-	-DINSTALL_PKGCONFIG_MODULES=ON		# "Install PkgConfig modules" ON
-	-DWITH_FORTIFY_SOURCE=ON			# "Enable protection against buffer overflows" ON
-	-DWITH_OGG=ON						# "ogg support (default: test for libogg)" ON
+	-DBUILD_CXXLIBS=ON 					# "Build libFLAC++" ON
+	-DBUILD_PROGRAMS=ON					# "Build and install programs" ON
+	-DBUILD_EXAMPLES=ON					# "Build and install examples" ON
+	-DBUILD_TESTING=ON					# "Build tests" ON
+	-DBUILD_DOCS=ON						# "Build and install doxygen documents" ON
+	-DWITH_FORTIFY_SOURCE=ON 			# "Enable protection against buffer overflows" ON
 	-DWITH_STACK_PROTECTOR=ON			# "Enable GNU GCC stack smash protection" ON
+	-DINSTALL_MANPAGES=ON				# "Install MAN pages" ON
+	-DINSTALL_PKGCONFIG_MODULES=ON 		# "Install PkgConfig modules" ON
+	-DINSTALL_CMAKE_CONFIG_MODULE=ON	# "Install CMake package-config module" ON
+	-DWITH_OGG=ON						# "ogg support (default: test for libogg)" ON
+	-DBUILD_SHARED_LIBS=OFF				# "Build shared instead of static libraries" OFF
 	${OGG_CMAKE})
+	
 
 
 
