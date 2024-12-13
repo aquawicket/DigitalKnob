@@ -42,7 +42,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_printVar varC
 	echo varC = %varC%
     ::%dk_call% dk_replaceAll %varC% "_" " " varC
-	call dk_replaceAll "%varC%" "_" " " varC
+	%dk_call% dk_replaceAll "%varC%" "_" " " varC
     ::%dk_call% dk_printVar varC
 	echo varC = %varC%
 %endfunction%

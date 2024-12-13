@@ -1,7 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-::call dk_source dk_log
+::%dk_call% dk_source dk_log
 ::################################################################################
 ::# dk_notice(message)
 ::#

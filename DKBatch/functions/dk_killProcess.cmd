@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#     process:  the name of the task to kill.  I.E. cale.exe
 ::#
-::#     Example:  call dk_endProcess iexplore.exe
+::#     Example:  %dk_call% dk_killProcess iexplore.exe
 ::#    
 :dk_killProcess
     call dk_debugFunc 1

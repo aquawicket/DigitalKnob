@@ -10,7 +10,7 @@ if "%~1" neq "" goto runDKPython
 	%dk_call% dk_echo "Installing DKPython . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	::%dk_call% dk_validate PYTHON_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPython.cmd"
-	%dk_call% dk_validate PYTHON_EXE "call dk_PYTHON_EXE"
+	%dk_call% dk_validate PYTHON_EXE "%dk_call% dk_PYTHON_EXE"
 	
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPython"

@@ -127,7 +127,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::##############################################					################################# EXAMPLE ##########################
 	::# PLUGIN_URL
 	set "PLUGIN_URL="
-	::call dk_assertVar(url)
+	::%dk_call% dk_assertVar(url)
 	set "PLUGIN_URL=%~1"
 	!dk_call! dk_printVar PLUGIN_URL 											&:: PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	::# PLUGIN_URL_FILENAME

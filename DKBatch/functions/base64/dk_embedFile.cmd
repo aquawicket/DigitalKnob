@@ -77,7 +77,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::set "output=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
 	
     %dk_call% dk_selectFile input
-    call dk_embedFile "%input%"
+    %dk_call% dk_embedFile "%input%"
 	
     ::%dk_call% base64.dk_encode "%input%" "test.b64"
 %endfunction%

@@ -155,5 +155,5 @@ echo 18. Start app
 %IF_ERROR% "Failed to Start app"
 
 
-call EndProcess adb.exe
-call EndProcess java.exe
+%dk_call% dk_killProcess adb.exe
+%dk_call% dk_killProcess java.exe

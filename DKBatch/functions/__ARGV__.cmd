@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::	::for (( i=((_ARGC_)); i>=1; i-- )); do
 ::	::	if not defined "%_ARGV_%" (set "_ARGV_=%BATCH_ARGV[%i%]%") else (set "_ARGV_=%_ARGV_%, %BATCH_ARGV[%i%]%")
 ::	::done
-::	::call dk_return "%_ARGV_%"
+::	::%dk_call% dk_return "%_ARGV_%"
 ::%endfunction%
 
 

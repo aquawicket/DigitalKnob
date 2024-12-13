@@ -2,7 +2,7 @@
 set "ENABLE_dk_log=0"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-call dk_set VERSION_dk_messageBox 3
+%dk_call% dk_set VERSION_dk_messageBox 3
 ::################################################################################
 ::# dk_messageBox(<title> rtn_var <message>)
 ::#

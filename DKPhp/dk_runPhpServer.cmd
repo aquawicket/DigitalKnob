@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_runPhpServer
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate PHP "call %DKIMPORTS_DIR%\php-src\dk_installPhp.cmd"
+	%dk_call% dk_validate PHP "%dk_call% %DKIMPORTS_DIR%\php-src\dk_installPhp.cmd"
 	
 	%dk_call% dk_validate DKPHP_DIR "%dk_call% dk_DKPHP_DIR"
 	%dk_call% dk_copy %PHP%\php.exe %DKPHP_DIR%\php_local.exe OVERWRITE

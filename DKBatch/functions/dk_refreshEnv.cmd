@@ -16,8 +16,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
 	
 	cscript.exe //nologo "%~f0?.wsf"
-	if not exist "%TEMP%\refreshEnv.bat" call dk_error "%TEMP%\refreshEnv.bat does not exist"
-	call "%TEMP%\refreshEnv.bat"
+	if not exist "%TEMP%\refreshEnv.bat" %dk_call% dk_error "%TEMP%\refreshEnv.bat does not exist"
+	%dk_call% "%TEMP%\refreshEnv.bat"
 		
 	exit /b %errorlevel%
 %endfunction%
