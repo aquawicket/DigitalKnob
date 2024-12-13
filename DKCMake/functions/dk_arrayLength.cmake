@@ -43,7 +43,7 @@ function(DKTEST)
 	dk_arrayLength("myArray")
 	dk_info("dk_arrayLength = ${dk_arrayLength}")
 	
-#	dk_arrayLength(${myArray})    #unable to send expanded arrays
+#	dk_arrayLength(${myArray})    #ERROR: returns incorrect value
 #	dk_info("dk_arrayLength = ${dk_arrayLength}")
 	
 	dk_arrayLength("${myArray}")

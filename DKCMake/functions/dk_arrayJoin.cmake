@@ -20,20 +20,23 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_arrayJoin)
 	dk_debugFunc(2)
+	
+	###### array ######
 	if(DEFINED "${ARGV0}")
 		set(array 	"${${ARGV0}}")
 	elseif(DEFINED ARGV0)
 		set(array 	"${ARGV0}")
 	else()
-		dk_fatal("dk_arrayLength(${ARGV}): array is invalid.")
+		dk_fatal("dk_arrayJoin(${ARGV}): array is invalid.")
 	endif()
 	
+	###### seperator ######
 	if(DEFINED "${ARGV1}")
 		set(separator 	"${${ARGV1}}")
 	elseif(DEFINED ARGV0)
 		set(separator 	"${ARGV1}")
 	else()
-		dk_fatal("dk_arrayLength(${ARGV}): separator is invalid.")
+		dk_fatal("dk_arrayJoin(${ARGV}): separator is invalid.")
 	endif()
 	
 	list(JOIN array "${separator}" dk_arrayJoin)

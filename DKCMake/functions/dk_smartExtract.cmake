@@ -60,13 +60,15 @@ function(dk_smartExtract src dest)
 	dk_getDirectories("${src_extractPath}" directories)
     dk_printVar(directories)
 	
-    dk_arrayLength("${directories}" dir_count)
+    dk_arrayLength("${directories}")
+	set(dir_count ${dk_arrayLength})
     dk_printVar(dir_count)
     
 	dk_getFiles("${src_extractPath}" files)
 	dk_printVar(files)
 	
-    dk_arrayLength("${files}" file_count)
+    dk_arrayLength("${files}")
+	set(file_count ${dk_arrayLength})
     dk_printVar(file_count)
 	
     if("${dir_count}" STREQUAL "1") 
