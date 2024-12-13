@@ -28,6 +28,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	
 	if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${CONFIG_PATH}")
+		dk_makeDirectory("${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	endif()
 	dk_assertPath(${CURRENT_PLUGIN}_CONFIG_DIR)
 	

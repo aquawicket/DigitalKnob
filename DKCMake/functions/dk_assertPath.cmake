@@ -22,7 +22,7 @@ function(dk_assertPath)
 		return()
 	endif()
 	
-	dk_fatal("${bg_red}${white}Assertion failed: Path Not Found path:'${_path_}'")
+	dk_fatal("${bg_red}${white}Assertion failed: Path Not Found path:'${_path_}:${${_path_}}'")
 endfunction()
 
 
@@ -41,5 +41,8 @@ function(DKTEST)
 	dk_assertPath(${myPathVar})
 	dk_assertPath("${myPathVar}")
 	dk_assertPath(myPathVar)
-	dk_assertPath("C:/Non/Existent/path")
+	
+	set(myPathVarB "C:/NonExistentPath")
+	#dk_assertPath(myPathVarB)
+	dk_assertPath(myPathVarB)
 endfunction()

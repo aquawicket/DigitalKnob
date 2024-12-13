@@ -36,19 +36,30 @@ endfunction()
 function(DKTEST)
     dk_debugFunc()
 
-    dk_echo()
-    #set(url http://www.google.com/index.html)
-	set(url https://dl.google.com/android/repository/android-ndk-r23c-windows.zip)
+	dk_echo()
+    set(url http://www.google.com/index.html)
     dk_urlExists(${url} url_exists)
     if(url_exists)
 		dk_echo("${url} exists") 
 	else()
 		dk_echo("${url} does NOT exists") 
 	endif()
-    
+	
+	
+	 dk_echo()
+    set(url http://www.nXoXnXeXxXiXsXtXiXnXg.com/nofile.no)
+    dk_urlExists(${url} url_exists)
+    if(url_exists)
+		dk_echo("${url} exists") 
+	else()
+		dk_echo("${url} does NOT exists") 
+	endif()
+	
+	
 	
     dk_echo()
-    set(url http://www.nXoXnXeXxXiXsXtXiXnXg.com/nofile.no)
+    #set(url http://www.google.com/index.html)
+	set(url https://dl.google.com/android/repository/android-ndk-r23c-windows.zip)
     dk_urlExists(${url} url_exists)
     if(url_exists)
 		dk_echo("${url} exists") 
