@@ -30,7 +30,7 @@
 #define DKSDLAudio_H
 
 //WARNING_DISABLE
-#ifdef HAVE_sdl2
+#ifdef HAVE_sdl
 	#include "SDL.h"
 #endif
 #ifdef HAVE_sdl_mixer
