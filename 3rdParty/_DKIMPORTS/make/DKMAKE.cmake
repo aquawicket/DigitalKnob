@@ -93,9 +93,9 @@ elseif(win_x86_64_msvc)
 	
 endif()
 
-#if(NOT CMAKE_MAKE_PROGRAM)
-#	dk_findProgram(CMAKE_MAKE_PROGRAM make)
-#endif()
+if(NOT CMAKE_MAKE_PROGRAM)
+	dk_findProgram(CMAKE_MAKE_PROGRAM make)
+endif()
 
 
 dk_assertVar(CMAKE_MAKE_PROGRAM)

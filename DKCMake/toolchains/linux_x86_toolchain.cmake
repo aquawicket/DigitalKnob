@@ -5,7 +5,12 @@ message("#######################################################################
 #dk_depend(build-essential)
 dk_depend(gcc)
 dk_depend(make)
-	
+
+dk_findProgram(CMAKE_MAKE_PROGRAM 	make)
+dk_set(CMAKE_GENERATOR 				"Unix Makefiles")
+dk_set(CMAKE_C_COMPILER				${GCC_C_COMPILER})
+dk_set(CMAKE_CXX_COMPILER			${GCC_CXX_COMPILER})
+dk_set(CMAKE_RC_COMPILER			${GCC_RC_COMPILER})
 dk_append(CMAKE_C_FLAGS				-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
 dk_append(CMAKE_CXX_FLAGS			-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
 dk_append(DKCONFIGURE_CFLAGS		-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
