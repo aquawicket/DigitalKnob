@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_depend(plugin)
+# dk_depend(plugin) target
 #
 #	Each plugin invoked will fill a a varaible or it's name to the path where it
 #   is installed..   
@@ -11,8 +11,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   Which says, "if ZLIB variable is not set,  call  3rdParty/_DKIMPORTS/zlib/DKMAKE.cmake
 #   to fill fill ZLIB with the path zlib is installed to.
 #
-function(dk_depend plugin)
-	dk_debugFunc(1)
+function(dk_depend plugin) #target
+	dk_debugFunc(1 2)
 	
 	dk_toUpper("${plugin}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
