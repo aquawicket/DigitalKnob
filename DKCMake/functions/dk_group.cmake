@@ -23,24 +23,21 @@ function(dk_group)
 	set(group_level ${group_level} PARENT_SCOPE)
 	set(group_label ${group_label} PARENT_SCOPE)
 
-	foreach(func in group_funcs)
-		message("group_func: ${func}")
+	foreach(func IN LISTS group_funcs)
+		cmake_language(CALL ${func} ${args})
 	endforeach()
 endfunction()
 
-function(addGroupFunction func)
-	list(APPEND group_funcs ${func})
+function(addGroupFunction)
+	list(APPEND group_funcs "${ARGV0}")
+	set(group_funcs ${group_funcs} PARENT_SCOPE)
 endfunction()
 
 
 
 
 function(onGroup)
-	message("onGroup()")
-endfunction()
-
-function(dk_echo)
-	dk_debugFunc(1)
+	dk_debugFunc(0)
 	
 	unset(indent)
 	foreach(i RANGE ${group_level})
@@ -48,6 +45,17 @@ function(dk_echo)
 			set(indent "${indent}    ")
 		endif()
 	endforeach()
+endfunction()
+
+function(dk_echo)
+	dk_debugFunc(1)
+	
+#	unset(indent)
+#	foreach(i RANGE ${group_level})
+#		if(${i} GREATER 0)
+#			set(indent "${indent}    ")
+#		endif()
+#	endforeach()
 	
 	message("${indent}${ARGV}")
 endfunction()
@@ -82,8 +90,9 @@ function(DKTEST)
 			dk_echo("Group ${group_level}")
 				dk_group()
 				dk_echo("Group ${group_level}")
+				dk_groupEnd()
 			dk_groupEnd()
-		dk_groupEnd()	
+		dk_groupEnd()
 
 	dk_echo("/ROOT")
 endfunction()
