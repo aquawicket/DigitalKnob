@@ -4,7 +4,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ################################################################################
 # dk_arrayAt(array, index)
-# dk_arrayAt(array, index, rtn_var)
 #
 #	 Takes an array instance with an integer value and returns the item at that index, 
 #	 allowing for positive and negative integers. Negative integers count back from the last item in the array.  <-- TODO
@@ -18,14 +17,14 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
-function(dk_arrayAt array index rtn_var)
-	dk_debugFunc(2 3)
+function(dk_arrayAt array index)
+	dk_debugFunc(2)
 	
-	list(GET ${array} ${index} arrayAt)
-	set(${rtn_var} ${arrayAt} PARENT_SCOPE)
-
-# DEBUG
-#	dk_printVar(rtn_var)
+	set(array ${ARGV0})
+	set(index ${ARGV1})
+	
+	list(GET ${array} ${index} dk_arrayAt)
+	set(dk_arrayAt ${dk_arrayAt} PARENT_SCOPE)
 endfunction()
 
 
@@ -41,6 +40,6 @@ function(DKTEST)
 	list(APPEND myArray "d")
 	list(APPEND myArray "e")
 	
-	dk_arrayAt(myArray 3 element)
-	dk_info("element = ${element}")
+	dk_arrayAt(myArray 3)
+	dk_info("dk_arrayAt = ${dk_arrayAt}")
 endfunction()

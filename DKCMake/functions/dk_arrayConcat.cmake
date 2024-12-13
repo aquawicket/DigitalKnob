@@ -4,7 +4,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ################################################################################
 # dk_arrayConcat(array, {value1, value2, /* …, */ valueN})
-# dk_arrayConcat(array, {value1, value2, /* …, */ valueN}, rtn_var)
 #
 #	 Merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
 #

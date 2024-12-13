@@ -3,36 +3,44 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_includes(variable find rtn_var)
+# dk_includes(variable find)
 #
 #	Check if a string contains a substring
 #
-#	@variable	- The variable
-#	@find		- The substring to search for
-#	@rtn_var		- Returns true if the str contains the substr. Otherwise returns false
+#	@variable		- The variable
+#	@find			- The substring to search for
+#	${dk_includes}	- Returns index: Returns the index of the string if located
 #
 function(dk_includes)
-	dk_debugFunc(3 99)
+	dk_debugFunc(2 99)
 	
-	
+	### variable ###
 	if(DEFINED "${ARGV0}")
 		set(variable 	"${${ARGV0}}")
-	else()
+	elseIF(DEFINED ARGV0)
 		set(variable 	"${ARGV0}")
+	else()
+		dk_fatal("dk_includes(${ARGV}): ARGV0:${ARGV0} is invalid.")
 	endif()
-	set(find 			"${ARGV1}")
-	set(rtn_var 		${ARGV2})
 	
-	string(FIND "${variable}" "${find}" index)
-	
-	math(EXPR index "${index}+1")
-	set(${rtn_var} ${index} PARENT_SCOPE)
+	### find ###
+	if(DEFINED "${ARGV1}")
+		set(find 		"${${ARGV1}}")
+	elseif(DEFINED ARGV1)
+		set(find 		"${ARGV1}")
+	else()
+		dk_fatal("dk_includes(${ARGV}): ARGV1:${ARGV1} is invalid.")
+	endif()
+
+	string(FIND "${variable}" "${find}" dk_includes)
+	math(EXPR dk_includes "${dk_includes}+1")
+	set(dk_includes ${dk_includes} PARENT_SCOPE)
 	
 #if(DEBUG_CMAKE)	
 	if(${index})
-		dk_debug("dk_includes(${ARGV}): rtn_var:${rtn_var}:${index}:isTure")
+		dk_debug("dk_includes(${ARGV}): RTN:${dk_includes}:isTure")
 	else()
-		dk_debug("dk_includes(${ARGV}): rtn_var:${rtn_var}:${index}:isFalse")
+		dk_debug("dk_includes(${ARGV}): RTN:${dk_includes}:isFalse")
 	endif()
 #endif()
 endfunction()
@@ -47,8 +55,8 @@ function(DKTEST)
 	
 	set(myString "There is a needle in this haystack")
 	set(mySubstring "needle")
-	dk_includes("${myString}" "${mySubstring}" result)
-	if(result)
+	dk_includes("${myString}" "${mySubstring}")
+	if(dk_includes)
 		dk_info("myString contains mySubstring")
 	else()
 		dk_info("myString does NOT contain mySubstring")
@@ -56,15 +64,15 @@ function(DKTEST)
 	
 	set(myString "There is a needle in this haystack")
 	set(mySubstring "needle")
-	dk_includes(myString "${mySubstring}" result)
-	if(result)
+	dk_includes(myString "${mySubstring}")
+	if(dk_includes)
 		dk_info("myString contains mySubstring")
 	else()
 		dk_info("myString does NOT contain mySubstring")
 	endif()
 	
-	dk_includes("${myString}" "nonexistant" result)
-	if(result)
+	dk_includes("${myString}" "nonexistant")
+	if(dk_includes)
 		dk_info("myString contains nonexistant")
 	else()
 		dk_info("myString does NOT contain nonexistant")
@@ -73,8 +81,8 @@ function(DKTEST)
 	list(APPEND myList "one")
 	list(APPEND myList "two")
 	list(APPEND myList "three")
-	dk_includes("${myList}" "two" result)
-	if(result)
+	dk_includes("${myList}" "two")
+	if(dk_includes)
 		dk_info("myList contains two")
 	else()
 		dk_info("myList does NOT contain two")

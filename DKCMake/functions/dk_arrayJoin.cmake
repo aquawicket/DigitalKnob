@@ -4,7 +4,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ################################################################################
 # dk_arrayJoin(array, separator)
-# dk_arrayJoin(array, separator, rtn_var)
 #
 #    The join() method of Array instances creates and returns a new string by concatenating all of the elements in this array, separated by commas or a specified separator string. 
 #    If the array has only one item, then that item will be returned without using the separator.
@@ -19,14 +18,26 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    REFERENCE
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
-function(dk_arrayJoin array separator rtn_val)
-	dk_debugFunc(2 3)
+function(dk_arrayJoin)
+	dk_debugFunc(2)
+	if(DEFINED "${ARGV0}")
+		set(array 	"${${ARGV0}}")
+	elseif(DEFINED ARGV0)
+		set(array 	"${ARGV0}")
+	else()
+		dk_fatal("dk_arrayLength(${ARGV}): array is invalid.")
+	endif()
 	
-	list(JOIN ${array} "," arrayJoin)
-	set(${rtn_val} ${arrayJoin} PARENT_SCOPE)
-
-# debug
-	#dk_printVar(rtn_val)
+	if(DEFINED "${ARGV1}")
+		set(separator 	"${${ARGV1}}")
+	elseif(DEFINED ARGV0)
+		set(separator 	"${ARGV1}")
+	else()
+		dk_fatal("dk_arrayLength(${ARGV}): separator is invalid.")
+	endif()
+	
+	list(JOIN array "${separator}" dk_arrayJoin)
+	set(dk_arrayJoin ${dk_arrayJoin} PARENT_SCOPE)
 endfunction()
 
 
@@ -43,6 +54,6 @@ function(DKTEST)
 	list(APPEND myArray "d")
 	list(APPEND myArray "e")
 	
-	dk_arrayJoin(myArray "," myString)
-	dk_info("myString = ${myString}")
+	dk_arrayJoin(myArray ",")
+	dk_info("dk_arrayJoin = ${dk_arrayJoin}")
 endfunction()
