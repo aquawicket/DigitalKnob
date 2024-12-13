@@ -46,7 +46,7 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_DEPS_SHARED=OFF					# "Default value for loading dependencies dynamically" ON
 	-DSDL2MIXER_SAMPLES=OFF						# "Build the SDL2_mixer sample program(s)" ON
 	-DSDL2MIXER_CMD=OFF							# "Support an external music player" ${sdl2mixer_cmd_default}
-	-DSDL2MIXER_FLAC=${FLAC} 					# "Enable FLAC music" ON
+	-DSDL2MIXER_FLAC=${FLAC}					# "Enable FLAC music" ON
 	-DSDL2MIXER_FLAC_LIBFLAC=OFF				# "Enable FLAC music using libFLAC"
 	-DSDL2MIXER_FLAC_LIBFLAC_SHARED=OFF			# "Dynamically load LIBFLAC" OFF
 	-DSDL2MIXER_FLAC_DRFLAC=OFF					# "Enable FLAC music using drflac"
@@ -54,7 +54,7 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_GME_SHARED=OFF					# "Dynamically load libgme" "${SDL2MIXER_DEPS_SHARED}"
 	-DSDL2MIXER_MOD=OFF							# "Support loading MOD music" ON
 	-DSDL2MIXER_MOD_MODPLUG=OFF					# "Support loading MOD music via modplug" OFF
-	-DSDL2MIXER_MOD_MODPLUG_SHARED 				# "Dynamically load modplug" OFF
+	-DSDL2MIXER_MOD_MODPLUG_SHARED=OFF			# "Dynamically load modplug" OFF
 	-DSDL2MIXER_MOD_XMP=OFF 					# "Support loading MOD music via libxmp" ON SDL2MIXER_MOD OFF
 	-DSDL2MIXER_MOD_XMP_LITE=OFF 				# "Use libxmp-lite instead of libxmp" OFF "SDL2MIXER_MOD_XMP;NOT SDL2MIXER_VENDORED" OFF
 	-DSDL2MIXER_MOD_XMP_SHARED=OFF 				# "Dynamically load libxmp(-lite)" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_MOD_XMP OFF
