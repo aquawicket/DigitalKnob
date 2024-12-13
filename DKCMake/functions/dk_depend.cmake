@@ -14,6 +14,14 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_depend plugin) #target
 	dk_debugFunc(1 2)
 	
+	if(plugin IN_LIST dk_disabled_list)
+		if(DISABLED_LIBS MATCHES "${plugin}")
+			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
+		endif()
+		dk_notice("${plugin} IS DISABLED")
+		return()
+	endif()
+	
 	dk_toUpper("${plugin}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
 	if((NOT EXISTS ${PLUGIN}) OR (NOT EXISTS ${${PLUGIN}_DIR}))

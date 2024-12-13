@@ -26,7 +26,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-dk_load(${DKCMAKE_DIR}/DKDisabled.cmake)
+dk_assertPath("${DKCMAKE_DIR}/DKDisabled.cmake")
+dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
 
 dk_info("\n")
 dk_info("############################################################")
