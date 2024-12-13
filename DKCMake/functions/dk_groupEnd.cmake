@@ -14,6 +14,7 @@ function(dk_groupEnd)
 	else()
 		math(EXPR group_level "${group_level}-1")
 	endif()
+	set(group_level ${group_level} PARENT_SCOPE)
 endfunction()
 
 
