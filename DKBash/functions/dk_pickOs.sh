@@ -32,27 +32,28 @@ dk_pickOs() {
 	dk_echo "16) Linux arm32"
 	dk_echo "17) Linux arm64"
 	dk_echo "18) Linux x86"
-	dk_echo "19) Linux x86_64"
-	dk_echo "20) Mac arm32"
-	dk_echo "21) Mac arm64"
-	dk_echo "22) Mac x86"
-	dk_echo "23) Mac x86_64"
-	dk_echo "24) Raspberry arm32"
-	dk_echo "25) Raspberry arm64"
-	dk_echo "26) Raspberry x86"
-	dk_echo "27) Raspberry x86_64"
-	dk_echo "28) Windows arm32"
-	dk_echo "29) Windows arm64  (clang)"
-	dk_echo "30) Windows x86    (mingw)"
-	dk_echo "31) Windows x86    (clang)"
-	dk_echo "32) Windows x86    (msvc)"
-	dk_echo "33) Windows x86_64 (mingw)"
-    dk_echo "34) Windows x86_64 (clang)"
-    dk_echo "35) Windows x86_64 (ucrt)"
-    dk_echo "36) Windows x86_64 (msvc)"
-	dk_echo "37) Clear Screen"
-	dk_echo "38) Go Back"
-	dk_echo "39) Exit"
+	dk_echo "19) Linux x86_64  (clang)"
+	dk_echo "20) Linux x86_64  (gcc)"
+	dk_echo "21) Mac arm32"
+	dk_echo "22) Mac arm64"
+	dk_echo "23) Mac x86"
+	dk_echo "24) Mac x86_64"
+	dk_echo "25) Raspberry arm32"
+	dk_echo "26) Raspberry arm64"
+	dk_echo "27) Raspberry x86"
+	dk_echo "28) Raspberry x86_64"
+	dk_echo "29) Windows arm32"
+	dk_echo "30) Windows arm64  (clang)"
+	dk_echo "31) Windows x86    (mingw)"
+	dk_echo "32) Windows x86    (clang)"
+	dk_echo "33) Windows x86    (msvc)"
+	dk_echo "34) Windows x86_64 (mingw)"
+    dk_echo "35) Windows x86_64 (clang)"
+    dk_echo "36) Windows x86_64 (ucrt)"
+    dk_echo "37) Windows x86_64 (msvc)"
+	dk_echo "38) Clear Screen"
+	dk_echo "39) Go Back"
+	dk_echo "40) Exit"
 	dk_echo
 	
 	#dk_call dk_keyboardInput choice
@@ -95,46 +96,48 @@ dk_pickOs() {
 	elif [ "${choice}" = "18" ]; then
 		triple="linux_x86"
 	elif [ "${choice}" = "19" ]; then
-		triple="linux_x86_64"
+		triple="linux_x86_64_clang"
 	elif [ "${choice}" = "20" ]; then
-		triple="mac_arm32"
+		triple="linux_x86_64_gcc"
 	elif [ "${choice}" = "21" ]; then
-		triple="mac_arm64"
+		triple="mac_arm32"
 	elif [ "${choice}" = "22" ]; then
-		triple="mac_x86"
+		triple="mac_arm64"
 	elif [ "${choice}" = "23" ]; then
-		triple="mac_x86_64"
+		triple="mac_x86"
 	elif [ "${choice}" = "24" ]; then
-		triple="raspberry_arm32"
+		triple="mac_x86_64"
 	elif [ "${choice}" = "25" ]; then
-		triple="raspberry_arm64"
+		triple="raspberry_arm32"
 	elif [ "${choice}" = "26" ]; then
-		triple="raspberry_x86"
+		triple="raspberry_arm64"
 	elif [ "${choice}" = "27" ]; then
-		triple="raspberry_x64"
+		triple="raspberry_x86"
 	elif [ "${choice}" = "28" ]; then
-		triple="win_arm32"
+		triple="raspberry_x64"
 	elif [ "${choice}" = "29" ]; then
-		triple="win_arm64_clang"
+		triple="win_arm32"
 	elif [ "${choice}" = "30" ]; then
-		triple="win_x86_mingw"
+		triple="win_arm64_clang"
 	elif [ "${choice}" = "31" ]; then
-		triple="win_x86_clang"
+		triple="win_x86_mingw"
 	elif [ "${choice}" = "32" ]; then
-		triple="win_x86_msvc"
+		triple="win_x86_clang"
 	elif [ "${choice}" = "33" ]; then
-		triple="win_x86_64_mingw"
+		triple="win_x86_msvc"
 	elif [ "${choice}" = "34" ]; then
-		triple="win_x86_64_clang"
+		triple="win_x86_64_mingw"
 	elif [ "${choice}" = "35" ]; then
-		triple="win_x86_64_ucrt"
+		triple="win_x86_64_clang"
 	elif [ "${choice}" = "36" ]; then
-		triple="win_x86_64_msvc"
+		triple="win_x86_64_ucrt"
 	elif [ "${choice}" = "37" ]; then
-		dk_call dk_clearScreen
+		triple="win_x86_64_msvc"
 	elif [ "${choice}" = "38" ]; then
-		unset APP
+		dk_call dk_clearScreen
 	elif [ "${choice}" = "39" ]; then
+		unset APP
+	elif [ "${choice}" = "40" ]; then
 		dk_call dk_exit 0
 	else
 		dk_call dk_warning "invalid selection"

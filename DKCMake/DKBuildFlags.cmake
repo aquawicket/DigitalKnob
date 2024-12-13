@@ -361,9 +361,14 @@ if(LINUX_X86)
 	dk_load(${DKCMAKE_DIR}/toolchains/linux_x86_toolchain.cmake)
 endif()
 
-#### Linux x86_64 ###
-if(LINUX_X86_64)
-	dk_load(${DKCMAKE_DIR}/toolchains/linux_x86_64_toolchain.cmake)
+#### Linux x86_64 - clang ###
+if(LINUX_X86_64_CLANG)
+	dk_load(${DKCMAKE_DIR}/toolchains/linux_x86_64_clang_toolchain.cmake)
+endif()
+
+#### Linux x86_64 - gcc ###
+if(LINUX_X86_64_GCC)
+	dk_load(${DKCMAKE_DIR}/toolchains/linux_x86_64_gcc_toolchain.cmake)
 endif()
 
 ### Mac x86 - XCODE ###

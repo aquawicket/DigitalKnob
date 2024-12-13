@@ -136,7 +136,11 @@ dk_generate() {
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
-	if [ "${triple}" = "linux_x86_64" ]; then
+	if [ "${triple}" = "linux_x86_64_clang" ]; then
+		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
+	fi
+	
+	if [ "${triple}" = "linux_x86_64_gcc" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
