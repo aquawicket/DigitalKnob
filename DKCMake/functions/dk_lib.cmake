@@ -13,7 +13,9 @@ function(dk_lib lib_path)
 	dk_debugFunc()
 	
 	foreach(item ${ARGV})
-		if(LIBS MATCHES "${item}")
+		#if(LIBS MATCHES "${item}")
+		dk_includes(LIBS "${item}" inList)
+		if(inList)
 			continue() # item is already in the list
 		endif()
 		dk_append(LIBS "${item}")

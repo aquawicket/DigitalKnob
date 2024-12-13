@@ -5,8 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
-# libstdc++fs
+###### libstdc++fs ######
+dk_validate(triple "dk_target_triple()")
+
 
 if(LINUX OR RASPBERRY)
 	dk_lib(libstdc++fs.a)
