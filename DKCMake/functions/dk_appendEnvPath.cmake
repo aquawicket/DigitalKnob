@@ -7,8 +7,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #	<inputPath>	- The CMake / style full path to append the the Environment Path variable
 #
-function(dk_appendEnvPath inputPath)
+function(dk_appendEnvPath)
 	dk_debugFunc(1)
+	set(inputPath ${ARGV0})
 	
 	dk_assertPath(inputPath)
 	#if(WIN32)
@@ -28,9 +29,6 @@ function(dk_appendEnvPath inputPath)
 		endif()
 		dk_info("appended \${nativePath} to the PATH environment list\n")
 	endif()
-	
-# DEBUG
-#	dk_printVar(ENV{PATH})
 endfunction()
 
 

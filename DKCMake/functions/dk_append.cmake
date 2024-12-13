@@ -13,8 +13,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #		   If the variable does not exist, we need to define if we are creating a list 
 #		   or a string.
 #
-function(dk_append variable) #value
+function(dk_append variable)
 	dk_debugFunc()
+	#set(variable ${ARGV0})
 	
 	if(NOT ARGN)
 		dk_warning("dk_append(${variable}) ARGN:${ARGN} is invalid")
@@ -25,11 +26,8 @@ function(dk_append variable) #value
 	else()
 		dk_set(${variable} ${ARGN})
 	endif()
-
-# DEBUG
-#	dk_printVar(variable)
 endfunction()
-dk_createOsMacros("dk_append")
+
 
 
 

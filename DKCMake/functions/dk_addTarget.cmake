@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	<plugin>	- TODO
 #	<target>	- TODO
 #
-function(dk_addTarget)# plugin target)
+function(dk_addTarget)
 	dk_debugFunc(2)
 	set(plugin ${ARGN0})
 	set(target ${ARGN1})

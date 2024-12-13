@@ -5,14 +5,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###############################################################################
 # dk_addSource(<regex>)
 #
-#	TODO
-#
-#	@regex	- TODO
+#	Add a file or file pattern to the SRC_INCLUDE list variable
 #
 function(dk_addSource)
 	dk_debugFunc(1)
 	
-	dk_set(SRC_INCLUDE ${SRC_INCLUDE} ${ARGN})
+	set(regex ${ARGV})
+	dk_set(SRC_INCLUDE ${SRC_INCLUDE} ${regex})
 endfunction()
 
 
