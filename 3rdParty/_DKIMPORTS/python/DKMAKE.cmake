@@ -16,11 +16,15 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ###### IMPORT ######
 dk_validate(host_triple "dk_host_triple()")
-LINUX_HOST_dk_set	   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
-MAC_HOST_dk_set		   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
-WIN_X86_HOST_dk_set	   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
-WIN_X86_64_HOST_dk_set (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi)
-
+if(LINUX_HOST)	
+	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
+elseif(MAC_HOST)
+	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
+elseif(WIN_X86_HOST)
+	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
+elseif(WIN_X86_64_HOST)
+	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi)
+endif()
 ###### PYTHON_VARIABLES ######
 if(PYTHON_DL)
 	dk_importVariables(${PYTHON_DL})
@@ -83,7 +87,9 @@ if(EXISTS "${PYTHON_DIR}/libs")
 endif()
 
 dk_assertPath("${PYTHON_DIR}")
-dk_assertPath("${PYTHON_EXE}")
+if(NOT LINUX)
+	dk_assertPath("${PYTHON_EXE}")
+endif()
 dk_prependEnvPath("${PYTHON_DIR}")
 
 ###### PIP_EXE ######
