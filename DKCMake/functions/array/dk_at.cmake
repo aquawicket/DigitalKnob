@@ -1,4 +1,7 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ "../")
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
@@ -17,7 +20,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/array/at
 #
-function(array.at array index)
+function(array.dk_at array index)
 	dk_debugFunc(2 99)
 	if(DEFINED "${ARGV0}")
 		set(array 	"${${ARGV0}}")
@@ -56,31 +59,31 @@ function(DKTEST)
 	list(APPEND myArray "h")
 	list(APPEND myArray "i")
 	
-	array.at(myArray 0)
+	dk_at(myArray 0)
 	dk_info("dk_at = ${dk_at}")
 	
-	array.at("myArray" 1)
+	dk_at("myArray" 1)
 	dk_info("dk_at = ${dk_at}")
 	
-	array.at(${myArray} 2)				# FIXME: Variables revieved by array value exceed allowed argument count
+	dk_at(${myArray} 2)				# FIXME: Variables revieved by array value exceed allowed argument count
 	dk_info("dk_at = ${dk_at}")
 	
-	array.at("${myArray}" 3)				# FIXME: Variables revieved by array value exceed allowed argument count
+	dk_at("${myArray}" 3)				# FIXME: Variables revieved by array value exceed allowed argument count
 	dk_info("dk_at = ${dk_at}")
 	
 	set(at 4)
-	array.at(myArray at)
+	dk_at(myArray at)
 	dk_info("dk_at = ${dk_at}")
 	
 	set(at 5)
-	array.at(myArray "at")
+	dk_at(myArray "at")
 	dk_info("dk_at = ${dk_at}")
 	
 	set(at 6)
-	array.at(myArray ${at})
+	dk_at(myArray ${at})
 	dk_info("dk_at = ${dk_at}")
 	
 	set(at 7)
-	array.at(myArray "${at}")
+	dk_at(myArray "${at}")
 	dk_info("dk_at = ${dk_at}")
 endfunction()
