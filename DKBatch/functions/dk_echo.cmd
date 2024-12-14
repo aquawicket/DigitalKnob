@@ -23,6 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 
+set "dk_echo=echo"
 
 
 
@@ -35,6 +36,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_echo
     %dk_call% dk_echo ""
     %dk_call% dk_echo "This is a dk_echo line"
-    ::%dk_call% dk_echo ""This is a dk_echo line with quotes""
+    %dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
+	
+	echo This is a normal echo commmand
+    %dk_call% dk_echo
+    %dk_call% dk_echo ""
+    %dk_call% dk_echo "This is a dk_echo line"
     %dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
 %endfunction%

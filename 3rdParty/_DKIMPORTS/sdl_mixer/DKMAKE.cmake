@@ -46,10 +46,10 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_DEPS_SHARED=OFF					# "Default value for loading dependencies dynamically" ON
 	-DSDL2MIXER_SAMPLES=OFF						# "Build the SDL2_mixer sample program(s)" ON
 	-DSDL2MIXER_CMD=OFF							# "Support an external music player" ${sdl2mixer_cmd_default}
-	-DSDL2MIXER_FLAC=${FLAC}					# "Enable FLAC music" ON
-	-DSDL2MIXER_FLAC_LIBFLAC=${FLAC}			# "Enable FLAC music using libFLAC"
-	-DSDL2MIXER_FLAC_LIBFLAC_SHARED=OFF			# "Dynamically load LIBFLAC" OFF
-	-DSDL2MIXER_FLAC_DRFLAC=OFF					# "Enable FLAC music using drflac"
+#	-DSDL2MIXER_FLAC=${FLAC}					# "Enable FLAC music" ON
+#	-DSDL2MIXER_FLAC_LIBFLAC=${FLAC}			# "Enable FLAC music using libFLAC"
+#	-DSDL2MIXER_FLAC_LIBFLAC_SHARED=OFF			# "Dynamically load LIBFLAC" OFF
+#	-DSDL2MIXER_FLAC_DRFLAC=OFF					# "Enable FLAC music using drflac"
 	-DSDL2MIXER_GME=${GME}						# "Support loading GME music via game-music-emu" OFF
 	-DSDL2MIXER_GME_SHARED=OFF					# "Dynamically load libgme" "${SDL2MIXER_DEPS_SHARED}"
 	-DSDL2MIXER_MOD=OFF							# "Support loading MOD music" ON
