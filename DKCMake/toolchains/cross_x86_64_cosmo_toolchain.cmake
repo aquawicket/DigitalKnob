@@ -1,6 +1,6 @@
-message("######################################################################")
-message("################## cosmopolitan_toolchain.cmake ######################")
-message("######################################################################")
+message("############################################################################")
+message("################## cross_x86_64_cosmo_toolchain.cmake ######################")
+message("############################################################################")
 
 dk_depend(cosmopolitan)
 #dk_depend(make)
@@ -29,13 +29,13 @@ dk_append(DKCONFIGURE_CXXFLAGS				${CMAKE_CXX_FLAGS})
 
 dk_validate(DKIMPORTS_DIR					"dk_DKIMPORTS_DIR()")
 dk_append(DKCMAKE_FLAGS
-	-DCMAKE_USER_MAKE_RULES_OVERRIDE=${DKIMPORTS_DIR}/COSMOPOLITAN/cosmopolitan_user_make_rules_override.cmake
+	-DCMAKE_USER_MAKE_RULES_OVERRIDE=${DKIMPORTS_DIR}/COSMOPOLITAN/cosmo_user_make_rules_override.cmake
 	-DCMAKE_C_COMPILER_WORKS=1
 	-DCMAKE_CXX_COMPILER_WORKS=1)
 set(CMAKE_C_COMPILER_WORKS					1)
 set(CMAKE_CXX_COMPILER_WORKS        		1)
 set(CMAKE_CXX_FLAGS_INIT 					-fexceptions -frtti)
-set(CMAKE_USER_MAKE_RULES_OVERRIDE 			${DKIMPORTS_DIR}/cosmopolitan/cosmopolitan_user_make_rules_override.cmake)
+set(CMAKE_USER_MAKE_RULES_OVERRIDE 			${DKIMPORTS_DIR}/COSMOPOLITAN/cosmo_user_make_rules_override.cmake)
 set(CMAKE_ASM_OUTPUT_EXTENSION 				.o)
 set(CMAKE_C_OUTPUT_EXTENSION   				.o)
 set(CMAKE_CXX_OUTPUT_EXTENSION 				.o)
@@ -48,7 +48,7 @@ set(CMAKE_CXX_LINK_LIBRARY_PREFIX   		lib)
 set(CMAKE_IMPORT_LIBRARY_SUFFIX      		.a)
 set(CMAKE_IMPORT_LIBRARY_PREFIX     		lib)
 
-###### set GLOBAL CMAKE VARIABLES ######
+###### set CMAKE VARIABLES ######
 set(CMAKE_MAKE_PROGRAM						${COSMOPOLITAN_MAKE_PROGRAM})
 set(CMAKE_C_COMPILER						${COSMOPOLITAN_C_COMPILER})
 set(CMAKE_CXX_COMPILER						${COSMOPOLITAN_CXX_COMPILER})
@@ -67,4 +67,4 @@ endforeach()
 
 
 ############ COSMOPOLITAN BASH EXPORTS ############
-dk_set(COSMOCC_BIN					"export PATH=${COSMOPOLITAN}/tool/cosmocc/bin:$PATH")
+dk_set(COSMOPOLITAN_BIN						"export PATH=${COSMOPOLITAN}/tool/cosmocc/bin:$PATH")

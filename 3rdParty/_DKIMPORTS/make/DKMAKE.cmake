@@ -34,7 +34,7 @@ if(android)
 		dk_findProgram(CMAKE_MAKE_PROGRAM make)
 	endif()
 
-elseif(cosmo)
+elseif(cosmopolitan)
 	if(WIN_HOST)
 		dk_depend(msys2)
 		dk_installPackage(make)

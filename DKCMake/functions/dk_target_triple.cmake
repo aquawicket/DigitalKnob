@@ -15,8 +15,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
 #	arch				= arm32, arm64, x86, x86_64
 #	ARCH				= ARM32, ARM64, X86, X86_64
-#	env					= clang, cosmo, mingw, msvc, ucrt
-#	ENV					= CLANG, COSMO, MINGW, MSVC, UCRT
+#	env					= clang, cosmopolitan, mingw, msvc, ucrt
+#	ENV					= CLANG, COSMOPOLITAN, MINGW, MSVC, UCRT
 #   <os>_<arch>			= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
 #   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 #
@@ -52,7 +52,7 @@ function(dk_target_triple)
 			(TARGET_DIR MATCHES "mac") 			OR
 			(TARGET_DIR MATCHES "raspberry") 	OR
 			(TARGET_DIR MATCHES "windows")		OR
-			(TARGET_DIR MATCHES "cosmo"))
+			(TARGET_DIR MATCHES "cosmopolitan"))
 			dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR})			# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 		else()
 			dk_target_triple2()
@@ -103,8 +103,8 @@ function(dk_target_triple)
 		dk_set(os windows)
 	elseif(triple MATCHES "win")
 		dk_set(os win)
-	elseif(triple MATCHES "cosmo")
-		dk_set(os cosmo)	
+	elseif(triple MATCHES "cosmopolitan")
+		dk_set(os cosmopolitan)	
 	else()
 		dk_error("The target triple:${triple} does not contain a valid os")
 		dk_unset(triple)
@@ -132,8 +132,8 @@ function(dk_target_triple)
 		dk_set(arch x86_64)
 	elseif(triple MATCHES "x86")
 		dk_set(arch x86)
-	elseif(triple MATCHES "cosmo")
-		dk_set(arch cosmo)	
+	elseif(triple MATCHES "cosmopolitan")
+		dk_set(arch cosmopolitan)	
 	else()
 		dk_warning("The target triple:${triple} does not contain a valid arch")
 		dk_target_triple2()
@@ -159,8 +159,8 @@ function(dk_target_triple)
 		dk_set(env ucrt)
 	elseif(triple MATCHES "msvc")
 		dk_set(env msvc)
-	elseif(triple MATCHES "cosmo")
-		dk_set(env cosmo)
+	elseif(triple MATCHES "cosmopolitan")
+		dk_set(env cosmopolitan)
 	else()
 		dk_warning("The target triple:${triple} does not contain a valid env")
 		dk_set(env ${default_target_env})

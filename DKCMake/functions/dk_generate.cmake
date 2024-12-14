@@ -91,7 +91,7 @@ function(dk_generate)
 	#dk_arrayPush(CMAKE_ARGS "--warn-unused-vars")
 	#dk_arrayPush(CMAKE_ARGS "--check-system-vars")
 	
-	if("${triple}" STREQUAL "cosmo")
+	if("${triple}" STREQUAL "cosmopolitan")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	

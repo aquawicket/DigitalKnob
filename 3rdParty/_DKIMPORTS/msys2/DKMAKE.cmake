@@ -84,9 +84,9 @@ if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
 		# Set PATH environment  variables
 		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
 		dk_setEnv("${MSYSTEM}"	ON)
-		dk_toLower(${MSYSTEM} msystem)
+		dk_toLower(${MSYSTEM} 	msystem)
 		
-		if(COSMO)
+		if(COSMOPOLITAN)
 			# Temporary fix for cosmopoiltan
 		else()
 			dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")

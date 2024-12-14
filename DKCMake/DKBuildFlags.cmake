@@ -327,7 +327,7 @@ if(ANDROID_X86_64)
 endif()
 
 ### cosmopolitan ###
-if(COSMO)
+if(COSMOPOLITAN)
 	dk_load(${DKCMAKE_DIR}/toolchains/cosmopolitan_toolchain.cmake)
 endif()
 
