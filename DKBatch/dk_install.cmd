@@ -1,8 +1,8 @@
 @echo off
 
-if "%~1" equ "%~0" goto installDKBatch
+if "%~1" equ "%~0" goto dk_install
 if "%~1" neq ""    goto runDKBatch
-:installDKBatch
+:dk_install
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
 	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
