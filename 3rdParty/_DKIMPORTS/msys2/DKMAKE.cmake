@@ -19,36 +19,43 @@ if(NOT WIN_HOST)
 	return()
 endif()
 
-### Get Variables ###
+############ MSYS2 variables ############
 #dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam		("${DKIMPORTS_DIR}/msys2/msys2.txt" MSYS2_DL)
 dk_importVariables	(${MSYS2_DL})
-dk_set				(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
-if((NOT DKUPDATE) AND (EXISTS ${MSYS2_EXE}))
-	dk_notice("MSYS2_EXE is already installed, returning")
+dk_set				(MSYS2_BIN 		"${MSYS2}/usr/bin")
+dk_set				(CLANGARM64_BIN	"${MSYS2}/clangarm64/bin")
+dk_set				(CLANG32_BIN	"${MSYS2}/clang32/bin")
+dk_set				(CLANG64_BIN	"${MSYS2}/clang64/bin")
+dk_set				(MINGW32_BIN	"${MSYS2}/mingw32/bin")
+dk_set				(MINGW64_BIN	"${MSYS2}/mingw64/bin")
+dk_set				(UCRT64_BIN		"${MSYS2}/ucrt64/bin")
+
+
+############ INSTALL ############
+if((NOT DKUPDATE) AND (EXISTS "${MSYS2}/msys2.exe"))
+	dk_notice("${MSYS2_FOLDER} is already installed, returning")
 	return()
-endif()
+else()
+	dk_info("Installing ${MSYS2_FOLDER}")
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+	dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
+	dk_command("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2}" --confirm-command)
+endif()	
+
 
 
 ### Create Bash Exports ###
 #dk_depend(cygpath)
-#dk_command(${CYGPATH_EXE} -m 	"${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
-#dk_set(CLANG32_BIN	"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")
-#dk_set(CLANG64_BIN	"export PATH=${MSYS2_UNIXPATH}/clang64/bin:$PATH")
-#dk_set(CLANGARM64_BIN	"export PATH=${MSYS2_UNIXPATH}/clangarm64/bin:$PATH")
-#dk_set(MINGW32_BIN	"export PATH=${MSYS2_UNIXPATH}/mingw32/bin:$PATH")
-#dk_set(MINGW64_BIN	"export PATH=${MSYS2_UNIXPATH}/mingw64/bin:$PATH")
-#dk_set(UCRT64_BIN		"export PATH=${MSYS2_UNIXPATH}/ucrt64/bin:$PATH")
-#dk_set(MSYS2_BIN		"export PATH=${MSYS2_UNIXPATH}/usr/bin:$PATH")
-	
-#dk_set(CLANG32_EXE 			"${MSYS2_DIR}/clang32.exe")
-#dk_set(CLANG64_EXE 			"${MSYS2_DIR}/clang64.exe")
-#dk_set(CLANGARM64_EXE 			"${MSYS2_DIR}/clangarm64.exe")
-#dk_set(MINGW32_EXE 			"${MSYS2_DIR}/mingw32.exe")
-#dk_set(MINGW64_EXE 			"${MSYS2_DIR}/mingw64.exe")
-#k_set(UCRT64_EXE 				"${MSYS2_DIR}/ucrt64.exe")
-#dk_set(MSYS2_EXE 				"${MSYS2_DIR}/msys2.exe")
+#dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
+#dk_set(CLANG32_BIN				"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")
+#dk_set(CLANG64_BIN				"export PATH=${MSYS2_UNIXPATH}/clang64/bin:$PATH")
+#dk_set(CLANGARM64_BIN			"export PATH=${MSYS2_UNIXPATH}/clangarm64/bin:$PATH")
+#dk_set(MINGW32_BIN				"export PATH=${MSYS2_UNIXPATH}/mingw32/bin:$PATH")
+#dk_set(MINGW64_BIN				"export PATH=${MSYS2_UNIXPATH}/mingw64/bin:$PATH")
+#dk_set(UCRT64_BIN				"export PATH=${MSYS2_UNIXPATH}/ucrt64/bin:$PATH")
+#dk_set(MSYS2_BIN				"export PATH=${MSYS2_UNIXPATH}/usr/bin:$PATH")
 	
 ### NOTE: moved to DKBuildFlags.cmake
 #### Set CMAKE_GENERATOR ###
@@ -63,37 +70,28 @@ endif()
 #endif()
 
 
-### INSTALL ###
-if(NOT EXISTS ${MSYS2_EXE})
-	dk_info("Installing ${MSYS2_FOLDER}")
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
-	dk_command("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2_DIR}" --confirm-command)
-endif()	
-
-
-dk_validate(target_triple "dk_target_triple()")
-if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
-	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")	
-	### Update with pacman ###
-	#dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
-	#execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-	#dk_installPackage(update)
-	
-	if(MSYSTEM)
-		# Set PATH environment  variables
-		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
-		dk_setEnv("${MSYSTEM}"	ON)
-		dk_toLower(${MSYSTEM} 	msystem)
-		
-		if(COSMOPOLITAN)
-			# Temporary fix for cosmopoiltan
-		else()
-			dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
-			dk_exportVars(PATH "$ENV{PATH}")
-		endif()
-	endif()
-endif()	
+#dk_validate(target_triple "dk_target_triple()")
+#if(MSYSTEM OR ANDROID OR EMSCRIPTEN)
+#	dk_prependEnvPath("${MSYS2_BIN}")	
+#	### Update with pacman ###
+#	#dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
+#	#execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
+#	#dk_installPackage(update)
+#	
+#	if(MSYSTEM)
+#		# Set PATH environment  variables
+#		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
+#		dk_setEnv("${MSYSTEM}"	ON)
+#		dk_toLower(${MSYSTEM} 	msystem)
+#		
+#		if(COSMOPOLITAN)
+#			# Temporary fix for cosmopoiltan
+#		else()
+#			dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
+#			dk_exportVars(PATH "$ENV{PATH}")
+#		endif()
+#	endif()
+#endif()	
 	
 
 

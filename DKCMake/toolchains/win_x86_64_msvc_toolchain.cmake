@@ -6,8 +6,8 @@ message("######################################################################"
 #dk_depend(visualstudio)
 dk_depend(visual-cpp-build-tools)
 
-dk_set(CMAKE_C_COMPILER				${VISUAL_CPP_BUILD_TOOLS_C_COMPILER})
 dk_set(CMAKE_CXX_COMPILER			${VISUAL_CPP_BUILD_TOOLS_CXX_COMPILER})
+dk_set(CMAKE_C_COMPILER				${VISUAL_CPP_BUILD_TOOLS_C_COMPILER})
 dk_set(CMAKE_DUMPBIN				${VISUAL_CPP_BUILD_TOOLS_DUMPBIN})
 dk_set(CMAKE_GENERATOR				${VISUAL_CPP_BUILD_TOOLS_GENERATOR})
 dk_set(CMAKE_GENERATOR_PLATFORM		${VISUAL_CPP_BUILD_TOOLS_GENERATOR_PLATFORM})

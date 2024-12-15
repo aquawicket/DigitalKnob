@@ -10,9 +10,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/cosmocc/DKMAKE.cmake)" "COSMO_C_COMPILER;COSMO_CXX_COMPILER"
-	%dk_call% dk_printVar COSMO_C_COMPILER
-	%dk_call% dk_printVar COSMO_CXX_COMPILER
+    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/cosmocc/DKMAKE.cmake)" "COSMOCC_C_COMPILER;COSMOCC_CXX_COMPILER"
+	%dk_call% dk_printVar COSMOCC_C_COMPILER
+	%dk_call% dk_printVar COSMOCC_CXX_COMPILER
 %endfunction%
 
 
