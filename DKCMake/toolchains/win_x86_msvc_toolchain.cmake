@@ -3,6 +3,10 @@ message("################ windoows_x86_msvc_toolchain.cmake ###################"
 message("######################################################################")
 
 ############ CMAKE COMPILER VARIABLES ############
+
+
+set(CMAKE_GENERATOR					${VISUAL_CPP_BUILD_TOOLS_GENERATOR})
+
 #dk_depend(visualstudio)
 dk_depend(visual-cpp-build-tools)
 
@@ -13,6 +17,7 @@ set(CMAKE_GENERATOR					${VISUAL_CPP_BUILD_TOOLS_GENERATOR})
 set(CMAKE_GENERATOR_PLATFORM		${VISUAL_CPP_BUILD_TOOLS_GENERATOR_PLATFORM})
 set(CMAKE_LINKER					${VISUAL_CPP_BUILD_TOOLS_LINKER})
 set(CMAKE_MAKE_PROGRAM 				${VISUAL_CPP_BUILD_TOOLS_MAKE_PROGRAM})
+
 #dk_append(DKCONFIGURE_FLAGS		--build=i686-msvc)
 #dk_append(DKCONFIGURE_CFLAGS		${CMAKE_C_FLAGS})
 #dk_append(DKCONFIGURE_CXXFLAGS		${CMAKE_CXX_FLAGS})
