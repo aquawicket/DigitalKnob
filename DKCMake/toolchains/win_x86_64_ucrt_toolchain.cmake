@@ -4,18 +4,12 @@ message("######################################################################"
 
 ############ CMAKE COMPILER VARIABLES ############
 dk_depend(msys2)
+dk_depend(gcc)
+
 dk_set(msystem 						ucrt64)
 dk_set(MSYSTEM 						UCRT64)
 
-dk_depend(gcc)
-
-#dk_depend(cmd)
-#if(CMD_EXE OR UCRT)
-	set(CMAKE_GENERATOR				"MinGW Makefiles")	# if in CMD shell
-#else()
-#	set(CMAKE_GENERATOR 			"MSYS Makefiles")	# if in SH shell
-#endif()
-
+dk_set(CMAKE_GENERATOR				"MinGW Makefiles")
 dk_set(CMAKE_MAKE_PROGRAM 			"${MSYS2_DIR}/ucrt64/bin/mingw32-make.exe")
 dk_set(CMAKE_C_COMPILER				"${MSYS2_DIR}/ucrt64/bin/gcc.exe")
 dk_set(CMAKE_CXX_COMPILER 			"${MSYS2_DIR}/ucrt64/bin/g++.exe")
