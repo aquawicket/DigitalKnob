@@ -9,6 +9,8 @@ dk_depend(gcc)
 dk_set(msystem 						mingw64)
 dk_set(MSYSTEM 						MINGW64)
 
+dk_prependEnvPath("${MSYS2}/mingw64/bin")
+
 dk_set(CMAKE_GENERATOR				"MinGW Makefiles")
 dk_set(CMAKE_MAKE_PROGRAM 			"${MSYS2_DIR}/mingw64/bin/mingw32-make.exe")
 dk_set(CMAKE_C_COMPILER				"${MSYS2_DIR}/mingw64/bin/gcc.exe")
@@ -25,11 +27,3 @@ dk_set(DKCONFIGURE_CXX				${CMAKE_CXX_COMPILER})
 dk_append(DKCONFIGURE_FLAGS			--build=x86_64-w64-mingw32)
 dk_append(DKCONFIGURE_CFLAGS		${CMAKE_C_FLAGS})
 dk_append(DKCONFIGURE_CXXFLAGS		${CMAKE_CXX_FLAGS})
-
-############ Bash Variable Exports ############
-#dk_depend(cygpath)
-#dk_command(${CYGPATH_EXE} -m 	"${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
-#dk_set(MSYS2_BIN				"export PATH=${MSYS2_UNIXPATH}/usr/bin:$PATH")
-#dk_set(MSYS2_EXE 				"${MSYS2_DIR}/msys2.exe")
-#dk_set(MINGW64_BIN				"export PATH=${MSYS2_UNIXPATH}/mingw64/bin:$PATH")
-#dk_set(MINGW64_EXE 			"${MSYS2_DIR}/mingw64.exe")
