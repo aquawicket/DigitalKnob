@@ -2,8 +2,8 @@
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
 ################################################################################
-# dk_arrayAt(array, index)
-# dk_arrayAt(array, index, rtn_var)
+# dk_at(array, index)
+# dk_at(array, index, rtn_var)
 #
 #	 Takes an array instance with an integer value and returns the item at that index, 
 #	 allowing for positive and negative integers. Negative integers count back from the last item in the array.  <-- TODO
@@ -17,7 +17,7 @@
 #
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
-dk_arrayAt() {
+dk_at() {
 	dk_debugFunc 2 3
 	#dk_call dk_validateArgs array int optional:rtn_var
 	
@@ -46,7 +46,7 @@ DKTEST() {
 	myArrayA[3]="4 5 6"
 	myArrayA[4]="h i j"
 	dk_call dk_printVar myArrayA
-	dk_call dk_arrayAt myArrayA 2 arrayAtA	# returned value using return variable
+	dk_call dk_at myArrayA 2 arrayAtA	# returned value using return variable
 	dk_call dk_printVar arrayAtA
 	dk_call dk_echo "dk_arrayAt(MyArrayA 2) = ${arrayAtA}"
 	[ "${arrayAtA}" = "d e f" ] || dk_call dk_error "dk_arrayAt() failed"
@@ -58,7 +58,7 @@ DKTEST() {
 	myArrayB[3]="1 2 3"
 	myArrayB[4]="a b c"
 	dk_call dk_printVar myArrayB
-	arrayAtB=$(dk_call dk_arrayAt myArrayB 3)	# returned value using command substitution
+	arrayAtB=$(dk_call dk_at myArrayB 3)	# returned value using command substitution
 	dk_call dk_printVar arrayAtB
 	dk_call dk_echo "dk_arrayAt(MyArrayB 3) = ${arrayAtB}"
 	[ "${arrayAtB}" = "1 2 3" ] || dk_call dk_error "dk_arrayAt() failed"

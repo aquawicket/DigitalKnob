@@ -2,9 +2,9 @@
 if(!$installDKBash){ $installDKBash = 1 } else{ return }
 
 ####################################################################
-# installDKBash()
+# dk_install()
 #
-#function Global:installDKBash() {
+#function Global:dk_install() {
 	#dk_debugFunc 0
 
 	if(${args}.count -ne 0){ 
