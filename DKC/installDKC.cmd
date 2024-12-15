@@ -5,9 +5,9 @@ if "%~1" neq ""    goto runDKC
 :installDKC
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmopolitan, gcc, msvc 
-	set "default_host_os=cosmopolitan"
-	set "default_host_arch=cosmopolitan"
-	set "default_host_env=cosmopolitan"
+	set "default_host_os=cosmocc"
+	set "default_host_arch=cosmocc"
+	set "default_host_env=cosmocc"
 	
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -45,12 +45,12 @@ if "%~1" neq ""    goto runDKC
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-	if "%host_env%"=="cosmopolitan" %dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_installSh.cmd"
-	if "%host_env%"=="cosmopolitan" call %DKIMPORTS_DIR%\cosmopolitan\dk_installCosmopolitan.cmd
-	if "%host_env%"=="clang"  		call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
-	if "%host_env%"=="gcc"    		call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
+	if "%host_env%"=="cosmocc"      %dk_call% dk_validate SH_EXE               "%dk_call% %DKIMPORTS_DIR%\sh\dk_install.cmd"
+	if "%host_env%"=="cosmocc"      %dk_call% dk_validate COSMOCC_C_COMPILER   "%dk_call% %DKIMPORTS_DIR%\cosmocc\dk_install.cmd"
+	if "%host_env%"=="clang"  		%dk_call% dk_validate CLANG_C_COMPILER     "%dk_call% %DKIMPORTS_DIR%\clang\dk_install.cmd"
+	if "%host_env%"=="gcc"    		%dk_call% dk_validate GCC_C_COMPILER       "%dk_call% %DKIMPORTS_DIR%\gcc\dk_install.cmd"
 
-	if "%host_env%"=="cosmopolitan" set "COMPILER_EXE=%SH_EXE% %COSMOPOLITAN_C_COMPILER%"
+	if "%host_env%"=="cosmocc"      set "COMPILER_EXE=%SH_EXE% %COSMOCC_C_COMPILER%"
 	if "%host_env%"=="clang"  		set "COMPILER_EXE=%CLANG_C_COMPILER%"
 	if "%host_env%"=="gcc"	  		set "COMPILER_EXE=%GCC_C_COMPILER%"
 	%dk_call% dk_assertVar COMPILER_EXE

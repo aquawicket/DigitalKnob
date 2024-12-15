@@ -3,15 +3,15 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_installGcc()
+::# dk_install()
 ::#
-:dk_installGcc
+:dk_install
 	call dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/gcc/DKMAKE.cmake)" "GCC_EXE;GXX_EXE"
-	%dk_call% dk_printVar GCC_EXE
-	%dk_call% dk_printVar GXX_EXE
+	%dk_call% dk_assertVar GCC_EXE
+	%dk_call% dk_assertVar GXX_EXE
 %endfunction%
 
 
@@ -23,5 +23,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-    %dk_call% dk_installGcc
+    %dk_call% dk_install
 %endfunction%

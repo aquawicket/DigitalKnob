@@ -1,0 +1,1 @@
+PACKAGE=https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
