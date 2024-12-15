@@ -2,7 +2,7 @@
 if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-:uninstallDKBatch
+:dk_uninstall_bat
 	ftype DKBat=
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBat"
 	
