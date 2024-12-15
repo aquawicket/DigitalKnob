@@ -15,8 +15,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#	OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
 ::#	arch				= arm32, arm64, x86, x86_64
 ::#	ARCH				= ARM32, ARM64, X86, X86_64
-::#	env					= clang, cosmo, mingw, msvc, ucrt
-::#	ENV					= CLANG, COSMO, MINGW, MSVC, UCRT
+::#	env					= clang, cosmopolitan, mingw, msvc, ucrt
+::#	ENV					= CLANG, cosmopolitan, MINGW, MSVC, UCRT
 ::#   <os>_<arch>			= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
 ::#   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 ::#
@@ -45,16 +45,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		!dk_call! dk_dirname !TARGET_DIR! TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	)
 
-	%dk_call% dk_stringContains "!TARGET_DIR!" "android" 	&& goto if
-	%dk_call% dk_stringContains "!TARGET_DIR!" "android" 	&& goto if
-	%dk_call% dk_stringContains "!TARGET_DIR!" "emscripten" && goto if
-	%dk_call% dk_stringContains "!TARGET_DIR!" "ios" 		&& goto if
-	%dk_call% dk_stringContains "!TARGET_DIR!" "iossim"		&& goto if
-	%dk_call% dk_stringContains "!TARGET_DIR!" "linux" 		&& goto if
-	%dk_call% dk_stringContains "!TARGET_DIR!" "mac"		&& goto if
-	%dk_call% dk_stringContains "!TARGET_DIR!" "raspberry" 	&& goto if
-	%dk_call% dk_stringContains "!TARGET_DIR!" "windows"	&& goto if
-	%dk_call% dk_stringContains "!TARGET_DIR!" "cosmo"		&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "android" 		&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "android" 		&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "emscripten" 	&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "ios" 			&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "iossim"			&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "linux" 			&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "mac"			&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "raspberry" 		&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "windows"		&& goto if
+	%dk_call% dk_stringContains "!TARGET_DIR!" "cosmopolitan"	&& goto if
 	goto else
 	:if
 		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!			&:: TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
@@ -89,16 +89,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 	::### Set os / OS / <os>_target / <OS>_TARGET
-	%dk_call% dk_stringContains "!TRIPLE!" "android" 	&& !dk_call! dk_set os android
-	%dk_call% dk_stringContains "!TRIPLE!" "emscripten" && !dk_call! dk_set os emscripten
-	%dk_call% dk_stringContains "!TRIPLE!" "iossim" 	&& !dk_call! dk_set os iossim 
-	%dk_call% dk_stringContains "!TRIPLE!" "ios" 		&& !dk_call! dk_set os ios
-	%dk_call% dk_stringContains "!TRIPLE!" "linux" 		&& !dk_call! dk_set os linux
-	%dk_call% dk_stringContains "!TRIPLE!" "mac" 		&& !dk_call! dk_set os mac
-	%dk_call% dk_stringContains "!TRIPLE!" "raspberry" 	&& !dk_call! dk_set os raspberry
-	%dk_call% dk_stringContains "!TRIPLE!" "windows" 	&& !dk_call! dk_set os windows
-	%dk_call% dk_stringContains "!TRIPLE!" "win"		&& !dk_call! dk_set os win
-	%dk_call% dk_stringContains "!TRIPLE!" "cosmo" 		&& !dk_call! dk_set os cosmo
+	%dk_call% dk_stringContains "!TRIPLE!" "android" 		&& !dk_call! dk_set os android
+	%dk_call% dk_stringContains "!TRIPLE!" "emscripten" 	&& !dk_call! dk_set os emscripten
+	%dk_call% dk_stringContains "!TRIPLE!" "iossim" 		&& !dk_call! dk_set os iossim 
+	%dk_call% dk_stringContains "!TRIPLE!" "ios" 			&& !dk_call! dk_set os ios
+	%dk_call% dk_stringContains "!TRIPLE!" "linux" 			&& !dk_call! dk_set os linux
+	%dk_call% dk_stringContains "!TRIPLE!" "mac" 			&& !dk_call! dk_set os mac
+	%dk_call% dk_stringContains "!TRIPLE!" "raspberry" 		&& !dk_call! dk_set os raspberry
+	%dk_call% dk_stringContains "!TRIPLE!" "windows" 		&& !dk_call! dk_set os windows
+	%dk_call% dk_stringContains "!TRIPLE!" "win"			&& !dk_call! dk_set os win
+	%dk_call% dk_stringContains "!TRIPLE!" "cosmopolitan"	&& !dk_call! dk_set os cosmopolitan
 	if not defined os (
 		!dk_call! dk_warning "The target triple:!triple! does not contain a valid os"
 		!dk_call! dk_unset triple
@@ -115,11 +115,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		!dk_call! dk_set !OS!_TARGET 1
 	)
 	::### Get arch / ARCH
-	%dk_call% dk_stringContains "!triple!" "arm64" 	&& !dk_call! dk_set arch arm64
-	%dk_call% dk_stringContains "!triple!" "arm32" 	&& !dk_call! dk_set arch arm32
-	%dk_call% dk_stringContains "!triple!" "x86_64" && !dk_call! dk_set arch x86_64
-	%dk_call% dk_stringContains "!triple!" "x86" 	&& !dk_call! dk_set arch x86
-	%dk_call% dk_stringContains "!triple!" "cosmo" 	&& !dk_call! dk_set arch cosmo	
+	%dk_call% dk_stringContains "!triple!" "arm64" 			&& !dk_call! dk_set arch arm64
+	%dk_call% dk_stringContains "!triple!" "arm32" 			&& !dk_call! dk_set arch arm32
+	%dk_call% dk_stringContains "!triple!" "x86_64" 		&& !dk_call! dk_set arch x86_64
+	%dk_call% dk_stringContains "!triple!" "x86" 			&& !dk_call! dk_set arch x86
+	%dk_call% dk_stringContains "!triple!" "cosmopolitan" 	&& !dk_call! dk_set arch cosmopolitan	
 	if not defined arch (
 		!dk_call! dk_warning "The target triple:!triple! does not contain a valid arch"
 		!dk_call! dk_setTargetTriple
@@ -135,11 +135,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	)
 
 	::### Set evn / ENV 
-	%dk_call% dk_stringContains "!triple!" "clang" && !dk_call! dk_set env clang
-	%dk_call% dk_stringContains "!triple!" "mingw" && !dk_call! dk_set env mingw
-	%dk_call% dk_stringContains "!triple!" "ucrt"  && !dk_call! dk_set env ucrt
-	%dk_call% dk_stringContains "!triple!" "msvc"  && !dk_call! dk_set env msvc
-	%dk_call% dk_stringContains "!triple!" "cosmo" && !dk_call! dk_set env cosmo
+	%dk_call% dk_stringContains "!triple!" "clang" 			&& !dk_call! dk_set env clang
+	%dk_call% dk_stringContains "!triple!" "mingw" 			&& !dk_call! dk_set env mingw
+	%dk_call% dk_stringContains "!triple!" "ucrt"  			&& !dk_call! dk_set env ucrt
+	%dk_call% dk_stringContains "!triple!" "msvc"  			&& !dk_call! dk_set env msvc
+	%dk_call% dk_stringContains "!triple!" "cosmopolitan" 	&& !dk_call! dk_set env cosmopolitan
 	if not defined env (
 		!dk_call! dk_warning "The target triple:!triple! does not contain a valid env"
 		!dk_call! dk_set env !default_target_env!

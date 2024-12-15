@@ -67,9 +67,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			%dk_call% dk_set env  	!host_env!
 		)
 	) else if "!input!" equ "2" (
-		%dk_call% dk_set os "cosmo"
-		%dk_call% dk_set arch "cosmo"
-		%dk_call% dk_set env "cosmo"
+		%dk_call% dk_set os "cosmopolitan"
+		%dk_call% dk_set arch "cosmopolitan"
+		%dk_call% dk_set env "cosmopolitan"
 	) else if "!input!" equ "3" (
 		%dk_call% dk_set os "android"
 		%dk_call% dk_set arch "arm32"

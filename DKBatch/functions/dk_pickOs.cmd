@@ -67,7 +67,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_keyboardInputTimeout choice 1 60
         
     if "%choice%"=="1"  endlocal & set "%1=%host_triple%_%default_target_env%"	& %return%
-	if "%choice%"=="2"  endlocal & set "%1=cosmo"		        				& %return%
+	if "%choice%"=="2"  endlocal & set "%1=cosmopolitan"	    				& %return%
     if "%choice%"=="3"  endlocal & set "%1=android_arm32"        				& %return%
     if "%choice%"=="4"  endlocal & set "%1=android_arm64"        				& %return%
     if "%choice%"=="5"  endlocal & set "%1=android_x86"          				& %return%

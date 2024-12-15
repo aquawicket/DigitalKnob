@@ -4,8 +4,8 @@
 	cls
 	echo compiling %~n0.exe. . .																							 
 	set "SH_EXE=C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\bash.exe"
-	#set "COSMO_C_COMPILER=/C/Users/Administrator/digitalknob/Development/3rdParty/cosmocc-master/bin/cosmocc"
-	set "COSMO_C_COMPILER=/C/Users/Administrator/digitalknob/Development/3rdParty/cosmocc-master/bin/x86_64-unknown-cosmo-c++"
+	#set "COSMO_C_COMPILER=/C/Users/Administrator/digitalknob/Development/3rdParty/cosmopolitan-e4d6eb3/bin/cosmocc"
+	set "COSMO_C_COMPILER=/C/Users/Administrator/digitalknob/Development/3rdParty/cosmopolitan-e4d6eb3/bin/x86_64-unknown-cosmo-c++"
 
 	for %%Z in ("%~0") do set "APP_NAME=%%~nZ"
 	copy %~0 "%~n0.c"

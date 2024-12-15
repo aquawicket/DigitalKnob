@@ -21,7 +21,7 @@
 ::### COMPILER ###
 ::default = clang
 ::set "host_env=clang"
-::set "host_env=cosmo"
+::set "host_env=cosmopolitan"
 ::set "host_env=gcc"
 ::set "host_env=msvc"
 
@@ -38,21 +38,21 @@
 ::CLANG32		/clang32	llvm		i686		ucrt		libc++
 ::CLANG64		/clang64	llvm		x86_64		ucrt		libc++
 ::CLANGARM64	/clangarm64	llvm		aarch64		ucrt		libc++
-::COSMO			?			?			?			?			?
+::COSMOPOLITAN	?			?			?			?			?
 ::MINGW32		/mingw32	gcc			i686		msvcrt		libstdc++
 ::MINGW64		/mingw64	gcc			x86_64		msvcrt		libstdc++
 ::msvc			?			?			?			?			?
 ::MSYS			/usr		gcc			x86_64		cygwin		libstdc++
 ::UCRT64		/ucrt64		gcc			x86_64		ucrt		libstdc++
-set "default_compiler=cosmo"
+set "default_compiler=cosmopolitan"
 
 
 if "%~1" equ "%~0" goto installDKCpp
 if "%~1" neq ""    goto runDKCpp
 :installDKCpp
 	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmo, gcc, msvc 
-	set "default_target_env=cosmo"
+	:: clang, cosmopolitan, gcc, msvc 
+	set "default_target_env=cosmopolitan"
 	
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -87,23 +87,23 @@ if "%~1" neq ""    goto runDKCpp
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	
-	if "%target_env%"=="cosmo"  %dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_installSh.cmd"
+	if "%target_env%"=="cosmopolitan"  	%dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_installSh.cmd"
 	set "SH_EXE=%SH_EXE:/=\%"
-	if "%target_env%"=="cosmo"  call %DKIMPORTS_DIR%\cosmocc\dk_installCosmoCC.cmd
-	if "%target_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
-	if "%target_env%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
+	if "%target_env%"=="cosmopolitan"	call %DKIMPORTS_DIR%\cosmocc\dk_installCosmopolitan.cmd
+	if "%target_env%"=="clang"			call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
+	if "%target_env%"=="gcc"    		call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
 
-	if "%target_env%"=="cosmo"  set "COMPILER_EXE=%SH_EXE% %COSMO_CXX_COMPILER%"
-	if "%target_env%"=="clang"  set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
-	if "%target_env%"=="gcc"	set "COMPILER_EXE=%GCC_CXX_COMPILER%"
-	%dk_call% dk_assertVar COMPILER_EXE
-	%dk_call% dk_printVar COMPILER_EXE
+	if "%target_env%"=="cosmopolitan"  	set "COMPILER_EXE=%SH_EXE% %COSMO_CXX_COMPILER%"
+	if "%target_env%"=="clang"  		set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
+	if "%target_env%"=="gcc"			set "COMPILER_EXE=%GCC_CXX_COMPILER%"
+	%dk_call% dk_assertVar 				COMPILER_EXE
+	%dk_call% dk_printVar 				COMPILER_EXE
 
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
+	%dk_call% dk_registryDeleteKey 		"HKEY_CLASSES_ROOT\DKCpp"
 	ftype DKCpp=%COMSPEC% /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cpp"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
+	%dk_call% dk_registryDeleteKey 		"HKEY_CLASSES_ROOT\.cpp"
+	%dk_call% dk_registryDeleteKey 		"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
 	assoc .cpp=DKCpp
 	
 	%dk_call% dk_success "DKCpp install complete"

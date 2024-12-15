@@ -63,7 +63,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_appendArgs CMAKE_ARGS --warn-unused-vars
     ::%dk_call% dk_appendArgs CMAKE_ARGS --check-system-vars
      
-	if "%triple%"=="cosmo"              %dk_call% dk_prependArgs CMAKE_ARGS -DCOSMO=1
+	if "%triple%"=="cosmopolitan"       %dk_call% dk_prependArgs CMAKE_ARGS -DCOSMOPOLITAN=1
     if "%triple%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64
     if "%triple%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
     if "%triple%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32
@@ -91,7 +91,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 	
-	if "%triple%"=="cosmo"   			%dk_call% dk_prependArgs CMAKE_ARGS -G "MSYS Makefiles"
+	if "%triple%"=="cosmopolitan"   	%dk_call% dk_prependArgs CMAKE_ARGS -G "MSYS Makefiles"
     if "%triple%"=="android_arm32"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%triple%"=="android_arm64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%triple%"=="android_x86" 	    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
