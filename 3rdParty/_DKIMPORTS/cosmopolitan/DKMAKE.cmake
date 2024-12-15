@@ -14,7 +14,7 @@ dk_import(https://github.com/jart/cosmopolitan/archive/e4d6eb3.zip)
 
 
 #dk_set(COSMOPOLITAN 							1)
-#dk_set(COSMOPOLITAN_SYSTEM_NAME 				Generic)
+##dk_set(COSMOPOLITAN_SYSTEM_NAME 				Generic)
 #dk_set(COSMOPOLITAN_SKIP_RPATH 				ON)
 #dk_set(COSMOPOLITAN_CROSSCOMPILING 			OFF)
 
@@ -28,8 +28,8 @@ dk_import(https://github.com/jart/cosmopolitan/archive/e4d6eb3.zip)
 
 #dk_set(COSMOPOLITAN_MAKE_PROGRAM 				"${COSMOPOLITAN}/tool/cosmocc/bin/make")
 #dk_set(COSMOPOLITAN_AR 						"${COSMOPOLITAN}/tool/cosmocc/bin/cosmoar")
-#dk_set(COSMOPOLITAN_C_COMPILER 				"${COSMOPOLITAN}/tool/cosmocc/bin/cosmocc")
-#dk_set(COSMOPOLITAN_CXX_COMPILER 				"${COSMOPOLITAN}/tool/cosmocc/bin/cosmoc++")
+dk_set(COSMOPOLITAN_C_COMPILER 					"${COSMOPOLITAN}/tool/cosmocc/bin/cosmocc")
+dk_set(COSMOPOLITAN_CXX_COMPILER 				"${COSMOPOLITAN}/tool/cosmocc/bin/cosmoc++")
 #dk_set(COSMOPOLITAN_C_COMPILER 				"${COSMOPOLITAN}/tool/cosmocc/bin/x86_64-unknown-cosmo-cc")
 #dk_set(COSMOPOLITAN_CXX_COMPILER 				"${COSMOPOLITAN}/tool/cosmocc/bin/x86_64-unknown-cosmo-c++")
 #dk_set(COSMOPOLITAN_??			 				"${COSMOPOLITAN}/tool/cosmocc/bin/x86_64-unknown-cosmo-addr2line")
@@ -45,10 +45,18 @@ dk_import(https://github.com/jart/cosmopolitan/archive/e4d6eb3.zip)
 
 dk_set(COSMOPOLITAN_RANLIB 						"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-ranlib")
 dk_set(COSMOPOLITAN_LINKER 						"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-ld")
-foreach(lang ASM C CXX)
-  dk_set(COSMOPOLITAN_${lang}_COMPILER_AR 		"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
-  dk_set(COSMOPOLITAN_${lang}_COMPILER_RANLIB 	"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
-endforeach()
+#foreach(lang ASM C CXX)
+#  dk_set(COSMOPOLITAN_${lang}_COMPILER_AR 		"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
+#  dk_set(COSMOPOLITAN_${lang}_COMPILER_RANLIB 	"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
+#endforeach()
+
+dk_set(CMAKE_ASM_COMPILER_AR 					"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
+dk_set(CMAKE_C_COMPILER_AR 						"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
+dk_set(CMAKE_CXX_COMPILER_AR 					"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
+dk_set(CMAKE_ASM_COMPILER_RANLIB				"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
+dk_set(CMAKE_C_COMPILER_RANLIB 					"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
+dk_set(CMAKE_CXX_COMPILER_RANLIB				"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
+
 
 #dk_set(CMAKE_C_COMPILER_WORKS           		1)
 #dk_set(CMAKE_CXX_COMPILER_WORKS         		1)

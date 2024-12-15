@@ -1,54 +1,12 @@
 @echo off
 
-::### OS ###
-::default = host_os
-::set "OS=Android"
-::set "OS=Emscripten"
-::set "OS=iOS"
-::set "OS=iOS_Simulator"
-::set "OS=Linux"
-::set "OS=Mac"
-::set "OS=Raspberry"
-::set "OS=Windows"
-
-::### arch ###
-::default = host_arch
-::set "arch=arm"
-::set "arch=arm64"
-::set "arch=x86"
-::set "arch=x86_64"
-
-::### COMPILER ###
-::default = clang
-::set "host_env=clang"
-::set "host_env=cosmopolitan"
-::set "host_env=gcc"
-::set "host_env=msvc"
-
-::### MSYSTEM ###
-::set "MSYSTEM=CLANG32"
-::set "MSYSTEM=CLANG64"
-::set "MSYSTEM=CLANGARM64"
-::set "MSYSTEM=MINGW32"
-::set "MSYSTEM=MINGW64"
-::set "MSYSTEM=MSYS"
-::set "MSYSTEM=UCRT64"
-
-::Name			Prefix		Toolchain	Arch		C Library	C++ Library
-::CLANG32		/clang32	llvm		i686		ucrt		libc++
-::CLANG64		/clang64	llvm		x86_64		ucrt		libc++
-::CLANGARM64	/clangarm64	llvm		aarch64		ucrt		libc++
-::MINGW32		/mingw32	gcc			i686		msvcrt		libstdc++
-::MINGW64		/mingw64	gcc			x86_64		msvcrt		libstdc++
-::msvc			/?			?			?			?			?
-::MSYS			/usr		gcc			x86_64		cygwin		libstdc++
-::UCRT64		/ucrt64		gcc			x86_64		ucrt		libstdc++
-
 if "%~1" equ "%~0" goto installDKC
 if "%~1" neq ""    goto runDKC
 :installDKC
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmopolitan, gcc, msvc 
+	set "default_host_os=cosmopolitan"
+	set "default_host_arch=cosmopolitan"
 	set "default_host_env=cosmopolitan"
 	
 	::###### DKINIT ######
@@ -61,13 +19,13 @@ if "%~1" neq ""    goto runDKC
 	::###### OS ######
 	::%dk_call% dk_validate host_os "%dk_call% dk_host_triple"
 	::if not defined OS set "OS=%host_os%"
-	set "OS=cosmopolitan"
+	set "OS=%default_host_os%"
 	%dk_call% dk_printVar OS
 	
 	::###### arch ######
 	::%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
 	::if not defined arch set "arch=%host_arch%"
-	set "host_arch=cosmopolitan"
+	set "host_arch=%default_host_arch%"
 	%dk_call% dk_printVar arch
 	
 	::###### host_env ######
