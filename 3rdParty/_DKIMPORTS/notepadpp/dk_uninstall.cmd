@@ -4,9 +4,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 ::####################################################################
-::# dk_installNotepadpp()
+::# dk_install()
 ::#
-:dk_installNotepadpp
+:dk_install
 	call dk_debugFunc 0
 ::setlocal
 	
@@ -42,5 +42,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_uninstallNotepadpp
+    %dk_call% dk_uninstall
 %endfunction%

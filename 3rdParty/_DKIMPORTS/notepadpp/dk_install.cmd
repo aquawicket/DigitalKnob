@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_installNotepadpp()
+::# dk_install()
 ::#
-:dk_installNotepadpp
+:dk_install
 	call dk_debugFunc 0
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
@@ -23,14 +23,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 	%dk_call% dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
 	
-	if exist "%NOTEPADPP_EXE%" goto notepadpp_installed
-	%dk_call% dk_echo   
-    %dk_call% dk_info "Installing notepad++ . . ."
-    %dk_call% dk_download %NOTEPADPP_DL%
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-    %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%NOTEPADPP_DIR%"
+	if exist "%NOTEPADPP_EXE%" goto installed
+	    %dk_call% dk_echo   
+        %dk_call% dk_info "Installing notepad++ . . ."
+        %dk_call% dk_download %NOTEPADPP_DL%
+	    %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+        %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%NOTEPADPP_DIR%"
 	if NOT exist "%NOTEPADPP_EXE%" %dk_call% dk_error "cannot find NOTEPADPP_EXE:%NOTEPADPP_EXE%"
-	:notepadpp_installed
+	:installed
 	
 	::### Add Dark Mode ###
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
@@ -52,5 +52,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_installNotepadpp
+	%dk_call% dk_install
 %endfunction%

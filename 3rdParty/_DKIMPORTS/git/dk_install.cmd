@@ -11,10 +11,10 @@ if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSyste
 if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal" && setx GIT_CONFIG_GLOBAL "!GIT_CONFIG_GLOBAL!"
 
 ::####################################################################
-::# dk_installGit()
+::# dk_install
 ::#
 ::#
-:dk_installGit
+:dk_install
     call dk_debugFunc 0
 :: setlocal	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
@@ -60,5 +60,5 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_installGit
+    %dk_call% dk_install
 %endfunction%

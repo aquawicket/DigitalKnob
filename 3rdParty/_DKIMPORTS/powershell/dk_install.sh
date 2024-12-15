@@ -14,10 +14,10 @@ PWSH_DL_WIN_x86_64=https://github.com/PowerShell/PowerShell/releases/download/v7
 
 
 ##################################################################################
-# dk_installPwsh()
+# dk_install()
 #
 #
-dk_installPwsh() {
+dk_install() {
 	dk_debugFunc 0
 
 	
@@ -58,7 +58,7 @@ dk_installPwsh() {
 	dk_download "${PWSH_DL}" "${DKDOWNLOAD_DIR}/${PWSH_DL_FILE}"
 	dk_smartExtract "${DKDOWNLOAD_DIR}/${PWSH_DL_FILE}" "${PWSH}"
 }
-dk_installPwsh
+dk_install
 exit
 exit
 exit
