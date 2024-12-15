@@ -3,11 +3,11 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_installWindowsTerminal()
+::# dk_install()
 ::#
 ::#     https://github.com/microsoft/terminal
 ::# 
-:dk_installWindowsTerminal
+:dk_install
 	call dk_debugFunc 0	
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
@@ -45,6 +45,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_installWindowsTerminal
+	%dk_call% dk_install
 %endfunction%
 
