@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_installMacroPack()
+::# dk_install
 ::#
-:dk_installMacroPack
+:dk_install
 	call dk_debugFunc 0
 :: setlocal
  
@@ -40,5 +40,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
  setlocal
  
-	%dk_call% dk_installMacroPack
+	%dk_call% dk_install
 %endfunction%
