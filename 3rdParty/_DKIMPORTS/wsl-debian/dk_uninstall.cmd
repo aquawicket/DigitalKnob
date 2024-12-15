@@ -3,13 +3,13 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_uninstallWslDebian()
+::# dk_uninstall()
 ::#
-:dk_uninstallWslDebian
+:dk_uninstall
 	call dk_debugFunc 0
 	
 	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%\wsl\dk_installWsl.cmd"
+	::%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%\wsl\dk_install.cmd"
 	
 	%dk_call% dk_echo   
     %dk_call% dk_info "UnInstalling WSL-Debian Linux . . ."
@@ -28,5 +28,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_uninstallWslDebian
+	%dk_call% dk_uninstall
 %endfunction%

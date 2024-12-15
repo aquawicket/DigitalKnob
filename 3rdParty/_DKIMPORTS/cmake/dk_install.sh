@@ -12,10 +12,10 @@ CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/c
 
 
 ##################################################################################
-# dk_installCmake()
+# dk_install()
 #
 #
-dk_installCmake() {
+dk_install() {
 	dk_debugFunc 0
 
 	

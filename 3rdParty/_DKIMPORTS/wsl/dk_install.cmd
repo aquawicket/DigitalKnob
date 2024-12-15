@@ -3,11 +3,11 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_installWsl()
+::# dk_install()
 ::#
 ::#    Troubleshooting: https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
 ::#    Custom Distro:   https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro
-:dk_installWsl
+:dk_install
 	call dk_debugFunc 0
 	
 	%dk_call% dk_findProgram WSL_EXE wsl.exe
@@ -79,5 +79,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_installWsl
+	%dk_call% dk_install
 %endfunction%

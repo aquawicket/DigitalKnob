@@ -3,18 +3,18 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_installAndroidNdk()
+::# dk_install()
 ::#
-:dk_installAndroidNdk
+:dk_install
 	call dk_debugFunc 0
  ::setlocal
  
 	%dk_call% dk_validatePath DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake)" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
-    %dk_call% dk_printVar ANDROID_GENERATOR
-    %dk_call% dk_printVar ANDROID_API
-    %dk_call% dk_printVar ANDROID_NDK
-    %dk_call% dk_printVar ANDROID_TOOLCHAIN_FILE
+    %dk_call% dk_assertVar ANDROID_GENERATOR
+    %dk_call% dk_assertVar ANDROID_API
+    %dk_call% dk_assertVar ANDROID_NDK
+    %dk_call% dk_assertVar ANDROID_TOOLCHAIN_FILE
 %endfunction%
 
 
@@ -26,5 +26,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
  setlocal
  
-	%dk_call% dk_installAndroidNdk
+	%dk_call% dk_install
 %endfunction%

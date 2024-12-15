@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_installCmake()
+::# dk_install()
 ::#
-:dk_installCmake
+:dk_install
 	call dk_debugFunc 0
 
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
@@ -28,7 +28,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "CMAKE_DIR=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
     set "CMAKE_EXE=%CMAKE_DIR%\bin\cmake.exe"
 
-    if exist "%CMAKE_EXE%" goto cmake_installed
+    if exist "%CMAKE_EXE%" goto installed
     %dk_call% dk_echo
     %dk_call% dk_info "Installing CMake . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_download "%CMAKE_DL%" "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%"
 	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%CMAKE_DIR%"
     if NOT exist "%CMAKE_EXE%" %dk_call% dk_error "cannot find CMAKE_EXE:%CMAKE_EXE%"
-	:cmake_installed	
+	:installed	
 	::### install DKCMake
 	:: TODO
 	
@@ -54,5 +54,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_installCmake
+	%dk_call% dk_install
 %endfunction%

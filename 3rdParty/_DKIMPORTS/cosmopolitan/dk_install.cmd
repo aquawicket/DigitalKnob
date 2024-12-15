@@ -3,16 +3,15 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_installCosmopolitan()
+::# dk_install()
 ::#
-:dk_installCosmopolitan
+:dk_install
 	call dk_debugFunc 0
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-
     %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/cosmopolitan/DKMAKE.cmake)" "COSMOPOLITAN_C_COMPILER;COSMOPOLITAN_CXX_COMPILER"
-	%dk_call% dk_printVar COSMOPOLITAN_C_COMPILER
-	%dk_call% dk_printVar COSMOPOLITAN_CXX_COMPILER
+	%dk_call% dk_assertVar COSMOPOLITAN_C_COMPILER
+	%dk_call% dk_assertVar COSMOPOLITAN_CXX_COMPILER
 %endfunction%
 
 
@@ -24,5 +23,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_installCosmopolitan
+	%dk_call% dk_install
 %endfunction%

@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_validate DKCMAKE_DIR      "%dk_call% dk_DKBRANCH_DIR"
     if not exist "%DKCMAKE_DIR%"            %dk_call% dk_error "%__FUNCTION__%: could not locate DKCMAKE_DIR"
 
-    %dk_call% dk_validate CMAKE_EXE        "%dk_call% %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
+    %dk_call% dk_validate CMAKE_EXE        "%dk_call% %DKIMPORTS_DIR%\cmake\dk_install.cmd"
  	echo ##############TEST####################	
     if not exist "%CMAKE_EXE%"              %dk_call% dk_error "%__FUNCTION__%: could not locate CMAKE_EXE" 
 

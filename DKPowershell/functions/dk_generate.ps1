@@ -175,8 +175,8 @@ function Global:dk_generate() {
 	}
 	
 	###### CMake Configure ######
-	dk_call dk_source $DKIMPORTS_DIR/cmake/dk_installCmake.ps1
-	dk_call dk_installCmake
+	dk_call dk_source $DKIMPORTS_DIR/cmake/dk_install.ps1
+	dk_call dk_install
 	
 	dk_call dk_echo
 	dk_call dk_echo "****** CMAKE COMMAND ******"
