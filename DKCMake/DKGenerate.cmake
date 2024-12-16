@@ -386,7 +386,9 @@ if(ANDROID)
 	
 	if(CMAKE_ANDROID_GUI)
 		########################## CREATE ICONS ###############################
-		dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+		if(EXISTS "${DK_PROJECT_DIR}/icons/icon.png")
+			dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
+		endif()
 		#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 		#	dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
 		#endif()
@@ -585,7 +587,9 @@ if(EMSCRIPTEN)
 	# TODO: https://schellcode.github.io/webassembly-without-emscripten
 	
 	########################## CREATE ICONS ###############################
-	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+	if(EXISTS "${DK_PROJECT_DIR}/icons/icon.png")
+		dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
+	endif()
 	#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 	#	dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
 	#endif()
@@ -740,7 +744,9 @@ if(IOS OR IOSSIM)
 	#	dk_delete(${DK_PROJECT_DIR}/Backup)
 	
 	########################## ICONS ###############################
-	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+	if(EXISTS "${DK_PROJECT_DIR}/icons/icon.png")
+		dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
+	endif()
 	
 	####################### Storyboards ############################
 	#TODO
@@ -848,7 +854,9 @@ if(NOT RASPBERRY)
 	endif()
 	
 	########################## CREATE ICONS ###############################
-	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+	if(EXISTS "${DK_PROJECT_DIR}/icons/icon.png")
+		dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
+	endif()
 	#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 	#	dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
 	#endif()
@@ -962,7 +970,9 @@ if(MAC)
 	endif()
 		
 	########################## CREATE ICONS ###############################
-	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+	if(EXISTS "${DK_PROJECT_DIR}/icons/icon.png")
+		dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
+	endif()
 	#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 	#	dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac)
 	#	dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac/icons.iconset)
@@ -1121,10 +1131,9 @@ endif(MAC)
 #############
 if(RASPBERRY)
 	########################## CREATE ICONS ###############################
-	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
-	#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
-	#	dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
-	#endif()
+	if(EXISTS "${DK_PROJECT_DIR}/icons/icon.png")
+		dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
+	endif()
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -1218,7 +1227,9 @@ endif(RASPBERRY)
 ##########
 if(WIN_X86)
 	########################## CREATE ICONS ###############################
-	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+	if(EXISTS "${DK_PROJECT_DIR}/icons/icon.png")
+		dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
+	endif()
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
@@ -1345,7 +1356,9 @@ endif(WIN_X86)
 ##########
 if(WIN_X86_64)
 	########################## CREATE ICONS ###############################
-	dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
+	if(EXISTS "${DK_PROJECT_DIR}/icons/icon.png")
+		dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
+	endif()
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)

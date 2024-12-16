@@ -37,7 +37,7 @@ function(dk_includes)
 	set(dk_includes ${dk_includes} PARENT_SCOPE)
 	
 #if(DEBUG_CMAKE)	
-	if(${index})
+	if(${dk_includes})
 		dk_debug("dk_includes(${ARGV}): RTN:${dk_includes}:isTure")
 	else()
 		dk_debug("dk_includes(${ARGV}): RTN:${dk_includes}:isFalse")

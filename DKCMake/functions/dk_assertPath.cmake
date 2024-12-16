@@ -15,14 +15,15 @@ function(dk_assertPath)
 	set(_path_ "${ARGV0}")
 	#dk_printVar(_path_)
 	
-	dk_varToString(_path_ path_value)
+	#dk_varToString(_path_ path_value)
 	#dk_printVar(path_value)
 	
-	if(EXISTS "${_path_}" OR EXISTS "${${_path_}}")
+	if((EXISTS "${_path_}") OR (EXISTS "${${_path_}}"))
 		return()
 	endif()
-	
+		
 	dk_fatal("${bg_red}${white}Assertion failed: Path Not Found path:'${_path_}:${${_path_}}'")
+
 endfunction()
 
 

@@ -22,13 +22,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if defined win_x86_64_host         set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
     if not defined GIT_DL              %dk_call% dk_error "GIT_DL is invalid"
 	
-    %dk_call% dk_basename %GIT_DL% GIT_DL_FILE
-    %dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
-	%dk_call% dk_removeExtension %GIT_FOLDER% GIT_FOLDER
-    ::%dk_call% dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
-    %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
-    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+::  %dk_call% dk_basename %GIT_DL% GIT_DL_FILE
+::  %dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
+::	%dk_call% dk_removeExtension %GIT_FOLDER% GIT_FOLDER
+::  %dk_call% dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
+::  %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
+    %dk_call% dk_importVariables %GIT_DL%
+	
+	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::### DO NOT USE GIT_DIR ###
+	if defined GIT_DIR  %dk_call% dk_fatal "ERROR: GIT_DIR should not be set."
+	::### DO NOT USE GIT_DIR ###
+	
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
 
 	::FIXME: kill git.exe process

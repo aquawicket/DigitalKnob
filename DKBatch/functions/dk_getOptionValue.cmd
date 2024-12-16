@@ -1,12 +1,11 @@
 @echo off
-if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#################################################################################
 ::# dk_getOptionValue(OPTION)
 ::#
-:dk_getOptionValue OPTION
+:dk_getOptionValue
 	call dk_debugFunc 0 99
-	echo dk_getOptionValue
  setlocal
 	
     :getParameter_loop
@@ -15,7 +14,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	)
 	if "%~1" == "%~2" (
 	
-		::set "_value_=%~3"
+		rem set "_value_=%~3"
 		endlocal & set "%1=%~3"
 		%return%
 	)
@@ -46,7 +45,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	call dk_debugFunc 0 99
  setlocal
 	
-	!dk_call! dk_getOptionValue INPUT %*
-	!dk_call! dk_printVar INPUT
-	!DUMP_VARS!
+	call :dk_getOptionValue INPUT %*
+	%dk_call% dk_printVar INPUT
+	%DUMP_VARS%
 %endfunction%

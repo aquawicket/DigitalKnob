@@ -3,9 +3,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 #################################################################################
-# dk_importVariables(PLUGIN_URL rtn_var) BRANCH FOLDER NAME PATH ROOT TAG VERSION
+# dk_importVariables(PLUGIN_URL) BRANCH FOLDER NAME PATH ROOT TAG VERSION
 #
-#	PLUGIN_URL							###### EXAMPLES ######
+#	PLUGIN_URL (arg0)					###### EXAMPLES ######
 #	This url of the plugin to import.	https://github.com/madler/zlib.git     							* github repository link
 #										https://github.com/madler/zlib/archive/refs/heads/master.zip	* github sourcecode download
 #										https://github.com/madler/zlib        							* github page
@@ -42,8 +42,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	VERSION (optional)
 #										master
 #
-function(dk_importVariables url)
+function(dk_importVariables)
 	#dk_debugFunc()
+	
+	set(URL ${ARGV0})
+	dk_assertVar(URL)
+	dk_printVar(URL)
 	
 	unset(IMPORT_PATH)
 	dk_getOptionValue(IMPORT_PATH) 	# C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
@@ -79,8 +83,8 @@ function(dk_importVariables url)
 	
 	
 ### POPULATE VARIABLES ###
-# PLUGIN_URL				- from arg:url														: https://github.com/madler/zlib/archive/refs/heads/master.zip
-# PLUGIN_URL_LIST			- from PLUGIN_URL													: https:;github.com;madler;zlib;archive;refs;heads;master.zip
+# PLUGIN_URL				- from arg:URL													  	: https://github.com/madler/zlib/archive/refs/heads/master.zip
+# PLUGIN_URL_LIST			- from PLUGIN_URL											 		: https:;github.com;madler;zlib;archive;refs;heads;master.zip
 # PLUGIN_URL_LENGTH			- from PLUGIN_URL_LIST												: 8
 # PLUGIN_URL_NODE(n)		- from PLUGIN_URL_LIST												: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
 # PLUGIN_URL_FILENAME   	- from PLUGIN_URL													: master.zip
@@ -125,8 +129,7 @@ function(dk_importVariables url)
 	##############################################						################################# EXAMPLE ##########################
 	# PLUGIN_URL
 	unset(PLUGIN_URL)
-	dk_assertVar(url)
-	set(PLUGIN_URL ${url})	
+	set(PLUGIN_URL ${URL})	
 	dk_printVar(PLUGIN_URL)												# PLUGIN_URL: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
 	# PLUGIN_URL_FILENAME
@@ -141,7 +144,9 @@ function(dk_importVariables url)
 	
 	# PLUGIN_GIT
 	unset(PLUGIN_GIT)
-	if(PLUGIN_URL MATCHES "https://github.com")
+	dk_includes(PLUGIN_URL "https://github.com")
+	if(${dk_includes})
+	#if(PLUGIN_URL MATCHES "https://github.com")
 		set(PLUGIN_GIT 1)
 	endif()		
 	dk_printVar(PLUGIN_GIT)												# PLUGIN_GIT: 1
@@ -175,12 +180,15 @@ function(dk_importVariables url)
 	#######################################################
 	############### PLUGIN_IMPORT VARIABLES ###############
 	#######################################################
-	dk_assertPath(CMAKE_CURRENT_LIST_DIR)
+	if(NOT IMPORT_PATH)
+		set(IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}")
+	endif()
+	dk_printVar(IMPORT_PATH)
 	
 	# PLUGIN_IMPORT
 	unset(PLUGIN_IMPORT)
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-	if(CMAKE_CURRENT_LIST_DIR MATCHES "${DKIMPORTS_DIR}")
+	if(IMPORT_PATH MATCHES "${DKIMPORTS_DIR}")
 		set(PLUGIN_IMPORT 1)
 	endif()	
 	dk_printVar(PLUGIN_IMPORT)											# PLUGIN_IMPORT: 1
@@ -188,9 +196,7 @@ function(dk_importVariables url)
 	# PLUGIN_IMPORT_PATH
 	unset(PLUGIN_IMPORT_PATH)
 	if(IMPORT_PATH)
-		set(PLUGIN_IMPORT_PATH ${IMPORT_PATH})	
-	else()
-		set(PLUGIN_IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})						
+		set(PLUGIN_IMPORT_PATH "${IMPORT_PATH}")		
 	endif()
 	dk_printVar(PLUGIN_IMPORT_PATH)										# PLUGIN_IMPORT_PATH: C:\Users\name\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 
@@ -474,8 +480,6 @@ function(dk_importVariables url)
 		dk_printVar(${CURRENT_PLUGIN}_RELEASE_DIR)						# ZLIB_RELEASE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
 	endif()
 	
-	#unset(${rtn_var})
-	#set(${rtn_var} ${CURRENT_PLUGIN} PARENT_SCOPE)
 endfunction()
 
 
@@ -493,8 +497,8 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
-	set(CMAKE_CURRENT_LIST_DIR "C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/git")
-	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe")
+	#dk_set(IMPORT_PATH "C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/git")
+	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" NAME git)
 endfunction()

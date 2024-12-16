@@ -11,6 +11,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 dk_depend(msys2)
+dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck")		# delete the database lock file
+
+
 dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 if((NOT DKUPDATE) AND (EXISTS ${PACMAN_EXE}))
 	dk_notice("PACMAN_EXE is already installed, returning")
@@ -18,7 +21,8 @@ if((NOT DKUPDATE) AND (EXISTS ${PACMAN_EXE}))
 endif()
 
 
-dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck")		# delete the database lock file
+
+#dk_installPackage(pacman)
 #dk_firewallAllow("pacman" "${PACMAN_EXE}")
 	
 dk_assertPath(PACMAN_EXE)

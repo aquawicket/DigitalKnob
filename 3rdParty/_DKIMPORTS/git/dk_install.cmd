@@ -24,10 +24,10 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     if defined win_x86_64_host set "GIT_DL=%GIT_DL_WIN_X86_64%"
     if not defined GIT_DL %dk_call% dk_error "GIT_DL is invalid"
     
-	%dk_call% dk_basename %GIT_DL% GIT_DL_FILE
-	%dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
-    ::%dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
-	::%dk_call% dk_importVariables %GIT_DL%
+::	%dk_call% dk_basename %GIT_DL% GIT_DL_FILE
+::	%dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
+::  %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
+	%dk_call% dk_importVariables %GIT_DL% NAME git
 	
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::### DO NOT USE GIT_DIR ###
