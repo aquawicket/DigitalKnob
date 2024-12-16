@@ -443,10 +443,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
  ::setlocal
- 
-::	%dk_call% dk_set CMAKE_CURRENT_LIST_DIR "C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\qemu"
-::	%dk_call% dk_importVariables "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe" PLUGIN 
 	
-	::set "IMPORT_PATH=C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\git"
-	%dk_call% dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" NAME git
+::	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+::	%dk_call% dk_importVariables "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe" NAME qemu ROOT %DKTOOLS_DIR%
+	
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+	%dk_call% dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"    NAME git    ROOT %DKTOOLS_DIR%
 !endfunction!
