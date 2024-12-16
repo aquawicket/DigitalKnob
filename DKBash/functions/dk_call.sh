@@ -11,14 +11,14 @@ dk_call(){
 	if ! (command -v ${1} &>/dev/null); then
 		
 		# Is it a dk_ prefixed function?
-		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then
+#	if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then
 			dk_source ${1}	
 		
 		# Not a dk_ prefixed function
-		else								
-			(command -v dk_installPackage &>/dev/null) || dk_source dk_installPackage
-			dk_installPackage ${1}
-		fi
+#		else								
+#			(command -v dk_installPackage &>/dev/null) || dk_source dk_installPackage
+#			dk_installPackage ${1}
+#		fi
 		
 		
 		if ! (command -v ${1} &>/dev/null); then

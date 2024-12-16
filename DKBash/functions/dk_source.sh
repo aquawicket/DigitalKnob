@@ -8,6 +8,7 @@
 #
 dk_source(){
 	#(command -v dk_debugFunc &>/dev/null) && dk_debugFunc 1
+	echo "dk_source $*"
 
 	# load if it's an existing full path file
 	[ -e ${1} ] && . ${1} && return ${?}
