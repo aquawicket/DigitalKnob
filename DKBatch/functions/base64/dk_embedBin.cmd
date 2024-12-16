@@ -3,8 +3,8 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::##################################################################################
-::# base64::dk_embedBin(inputFile)
-::# base64::dk_embedBin(inputFile, outputFile)
+::# Base64::dk_embedBin(inputFile)
+::# Base64::dk_embedBin(inputFile, outputFile)
 ::#
 ::#    https://stackoverflow.com/a/19596027/688352
 ::#
@@ -51,5 +51,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_selectFile input
     %dk_call% dk_embedBin "%input%"
 	
-    ::%dk_call% base64::dk_encode "%input%" "test.b64"
+    ::%dk_call% Base64::dk_encode "%input%" "test.b64"
 %endfunction%

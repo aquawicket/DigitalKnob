@@ -3,8 +3,8 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array::dk_shift(array)
-::# array::dk_shift(array, rtn_var)
+::# Array::dk_shift(array)
+::# Array::dk_shift(array, rtn_var)
 ::#
 ::#  Removes the first element from an array and returns that removed element. 
 ::#    This method changes the length of the array
@@ -60,33 +60,33 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_echo
     
-    %dk_call% array::dk_shift myArrayA removedA
+    %dk_call% Array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% array::dk_shift myArrayA removedA
+    %dk_call% Array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% array::dk_shift myArrayA removedA
+    %dk_call% Array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% array::dk_shift myArrayA removedA
+    %dk_call% Array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% array::dk_shift myArrayA removedA
+    %dk_call% Array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
     :: FIXME:  out of array bounds past here
-::  %dk_call% array::dk_shift myArrayA removedA
+::  %dk_call% Array::dk_shift myArrayA removedA
 ::  %dk_call% dk_printVar myArrayA
 ::  %dk_call% dk_printVar removedA
     %dk_call% dk_echo

@@ -3,10 +3,10 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array::dk_indexOf(array, searchElement)
-::# array::dk_indexOf(array, searchElement, rtn_val)
-::# array::dk_indexOf(array, searchElement, fromIndex)
-::# array::dk_indexOf(array, searchElement, fromIndex, rtn_val)
+::# Array::dk_indexOf(array, searchElement)
+::# Array::dk_indexOf(array, searchElement, rtn_val)
+::# Array::dk_indexOf(array, searchElement, fromIndex)
+::# Array::dk_indexOf(array, searchElement, fromIndex, rtn_val)
 ::#
 ::#    The indexOf() method of Array instances returns the first index at which a given element can be found in the array, or -1 if it is not present.
 ::#
@@ -16,10 +16,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#    fromIndex :optional
 ::#        Zero-based index at which to start searching, converted to an integer.
-::#            Negative index counts back from the end of the array — if -array::length <= fromIndex < 0, fromIndex + array::length is used. 
+::#            Negative index counts back from the end of the array — if -Array::length <= fromIndex < 0, fromIndex + Array::length is used. 
 ::#            Note, the array is still searched from front to back in this case.
-::#            If fromIndex < -array::length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
-::#            If fromIndex >= array::length, the array is not searched and -1 is returned.
+::#            If fromIndex < -Array::length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
+::#            If fromIndex >= Array::length, the array is not searched and -1 is returned.
 ::#
 ::#    RETURN VALUE
 ::#    The first index of searchElement in the array; -1 if not found.
@@ -69,21 +69,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "myArrayA[3]=4 5 6"
     set "myArrayA[4]=h i j"
 
-    %dk_call% array::dk_indexOf myArrayA "a b c" indexABC
+    %dk_call% Array::dk_indexOf myArrayA "a b c" indexABC
     %dk_call% dk_printVar indexABC
 
-    %dk_call% array::dk_indexOf myArrayA "1 2 3" index123
+    %dk_call% Array::dk_indexOf myArrayA "1 2 3" index123
     %dk_call% dk_printVar index123
 
-    %dk_call% array::dk_indexOf myArrayA "d e f" indexDEF
+    %dk_call% Array::dk_indexOf myArrayA "d e f" indexDEF
     %dk_call% dk_printVar indexDEF
 
-    %dk_call% array::dk_indexOf myArrayA "4 5 6" index456
+    %dk_call% Array::dk_indexOf myArrayA "4 5 6" index456
     %dk_call% dk_printVar index456
 
-    %dk_call% array::dk_indexOf myArrayA "h i j" indexGHI
+    %dk_call% Array::dk_indexOf myArrayA "h i j" indexGHI
     %dk_call% dk_printVar indexGHI
 
-    %dk_call% array::dk_indexOf myArray "nonExistant" indexN
+    %dk_call% Array::dk_indexOf myArray "nonExistant" indexN
     %dk_call% dk_printVar indexN
 %endfunction%

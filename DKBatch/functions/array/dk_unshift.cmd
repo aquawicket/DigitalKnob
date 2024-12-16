@@ -3,8 +3,8 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array::dk_unshift(array, element)
-::# array::dk_unshift(array, element, rtn_var)
+::# Array::dk_unshift(array, element)
+::# Array::dk_unshift(array, element, rtn_var)
 ::#
 ::#    Adds the specified elements to the beginning of an array and returns the new length of the array
 ::#
@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     set "_arry_=%~1"
     ::set "_element_=%~2"
-    %dk_call% array::dk_length %~1 count
+    %dk_call% Array::dk_length %~1 count
     set /a "prev=count-1"
     
     :unshift_loop
@@ -50,27 +50,27 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_echo
-    %dk_call% array::dk_unshift myArrayA "a b c" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "a b c" ::new_lengthA
     %dk_call% dk_printVar myArrayA
     ::%dk_call% dk_printVar new_lengthA
     
     %dk_call% dk_echo
-    %dk_call% array::dk_unshift myArrayA "1 2 3" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "1 2 3" ::new_lengthA
     %dk_call% dk_printVar myArrayA
     ::%dk_call% dk_printVar new_lengthA
     
     %dk_call% dk_echo
-    %dk_call% array::dk_unshift myArrayA "d e f" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "d e f" ::new_lengthA
     %dk_call% dk_printVar myArrayA
     ::%dk_call% dk_printVar new_lengthA
     
     %dk_call% dk_echo
-    %dk_call% array::dk_unshift myArrayA "4 5 6" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "4 5 6" ::new_lengthA
     %dk_call% dk_printVar myArrayA
     ::%dk_call% dk_printVar new_lengthA
     
     %dk_call% dk_echo
-    %dk_call% array::dk_unshift myArrayA "h i j" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "h i j" ::new_lengthA
     %dk_call% dk_printVar myArrayA
     ::%dk_call% dk_printVar new_lengthA
 %endfunction%

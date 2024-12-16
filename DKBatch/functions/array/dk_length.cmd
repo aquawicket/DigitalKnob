@@ -3,8 +3,8 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array::dk_length(array)
-::# array::dk_length(array rtn_var)
+::# Array::dk_length(array)
+::# Array::dk_length(array rtn_var)
 ::#
 ::#    The length data property of an Array instance represents the number of elements in that array
 ::#    The value is an unsigned, 32-bit integer that is always numerically greater than the highest index in the array
@@ -42,6 +42,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "myArrayA[4]=h i j"
     
 	
-    %dk_call% array::dk_length myArrayA myArrayLengthA
+    %dk_call% Array::dk_length myArrayA myArrayLengthA
     %dk_call% dk_debug "myArrayLengthA = %myArrayLengthA%"
 %endfunction%
