@@ -4,8 +4,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 ::##################################################################################
-::# base64\dk_encode(inputFile)
-::# base64\dk_encode(inputFile, outputFile)
+::# base64::dk_encode(inputFile)
+::# base64::dk_encode(inputFile, outputFile)
 ::#
 ::#    Encode input to base-64 output
 ::#    https://github.com/base64code/examples
@@ -42,6 +42,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::set "output=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
     
     %dk_call% dk_selectFile input
-    %dk_call% base64.dk_encode "%input%"
-    ::%dk_call% base64.dk_encode "%input%" "test.b64"
+    %dk_call% base64::dk_encode "%input%"
+    ::%dk_call% base64::dk_encode "%input%" "test.b64"
 %endfunction%

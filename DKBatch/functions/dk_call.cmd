@@ -9,6 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_call
     ::if exist "%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd" call dk_debugFunc 1 99
  ::setlocal
+	::echo dk_call %*
 	
 	set "comand=%~1"
 	set "comand=%comand:::=\%"
@@ -19,15 +20,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%func%"=="dk_debugFunc" echo [31m ERROR: dk_call cannot be used with dk_debugFunc [0m & %return%
 	::if "%func:dk_=%"=="%func%"  echo [31m ERROR: dk_call[%func%]: dk_call can only be used with dk_ functions [0m & %return%
 	
-::	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%" ( 
-::		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%"       &rem replace '.' with '\'
-::	)
-::	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%.cmd" ( 
-::		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%.cmd"   &rem replace '.' with '\'
-::	)
-::	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (
-::		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd"
-::	)
+	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (
+		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd"
+	)
 	
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (
 	if not exist "%comand%" (
@@ -37,6 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
 		rem if exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd"
     )
+	:dk_exists
 
 	:dk_call_stack
 	set /a "frame=%DKSTACK_length%-1"
