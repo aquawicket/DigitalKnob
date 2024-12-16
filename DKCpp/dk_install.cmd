@@ -44,14 +44,14 @@
 ::msvc			?			?			?			?			?
 ::MSYS			/usr		gcc			x86_64		cygwin		libstdc++
 ::UCRT64		/ucrt64		gcc			x86_64		ucrt		libstdc++
-set "default_compiler=cosmopolitan"
+set "default_compiler=cosmopoitan"
 
 
-if "%~1" equ "%~0" goto installDKCpp
+if "%~1" equ "%~0" goto dk_install
 if "%~1" neq ""    goto runDKCpp
-:installDKCpp
+:dk_install
 	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmopolitan, gcc, msvc 
+	:: clang, cosmo, gcc, msvc 
 	set "default_target_env=cosmopolitan"
 	
 	::###### DKINIT ######
@@ -87,11 +87,11 @@ if "%~1" neq ""    goto runDKCpp
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	
-	if "%target_env%"=="cosmopolitan"  	%dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_installSh.cmd"
+	if "%target_env%"=="cosmopolitan"  	%dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_install.cmd"
 	set "SH_EXE=%SH_EXE:/=\%"
-	if "%target_env%"=="cosmopolitan"	call %DKIMPORTS_DIR%\cosmocc\dk_installCosmopolitan.cmd
-	if "%target_env%"=="clang"			call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
-	if "%target_env%"=="gcc"    		call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
+	if "%target_env%"=="cosmopolitan"	call %DKIMPORTS_DIR%\cosmocc\dk_install.cmd
+	if "%target_env%"=="clang"			call %DKIMPORTS_DIR%\clang\dk_install.cmd
+	if "%target_env%"=="gcc"    		call %DKIMPORTS_DIR%\gcc\dk_install.cmd
 
 	if "%target_env%"=="cosmopolitan"  	set "COMPILER_EXE=%SH_EXE% %COSMO_CXX_COMPILER%"
 	if "%target_env%"=="clang"  		set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
