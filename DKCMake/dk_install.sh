@@ -2,15 +2,14 @@
 [ -z "${DKINIT-}" ] && . ../../DKBash/functions/DK.sh
 
 ##################################################################################
-# installDKCmake()
+# dk_install()
 #
 #
-installDKCmake() {
+dk_install() {
 	dk_debugFunc 0
 
-	
 	dk_validate DKCMAKE_FUNCTIONS_DIR "dk_DKBRANCH_DIR"
 	echo "export DKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR}" >> /etc/profile
 }
 
-installDKCmake
+dk_install
