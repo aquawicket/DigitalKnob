@@ -1,6 +1,6 @@
 @echo off
 
-if "%~1" neq "" goto runDKPowershell
+if "%*" neq "" goto runDKPowershell
 :dk_install
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -12,11 +12,9 @@ if "%~1" neq "" goto runDKPowershell
 	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% %DKIMPORTS_DIR%\powershell\dk_install.cmd"
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
 	
-	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
 	
-	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
-	ftype DKPowershell="%CMD_EXE%" /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
+	ftype DKPowershell="%COMSPEC%" /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKPowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.ps1"
@@ -34,14 +32,14 @@ if "%~1" neq "" goto runDKPowershell
 	
 	
 	::###### run script ######
-	%COMSPEC% /V:ON /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	%COMSPEC% /v:on /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
 	
 	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKPowershell
+::	if not exist %~dp0\reload goto:eof
+::	del %~dp0\reload
+::	cls
+::	goto runDKPowershell
 %endfunction%
