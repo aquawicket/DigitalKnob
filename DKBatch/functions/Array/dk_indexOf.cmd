@@ -50,7 +50,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         set /a _count_+=1
     goto indexOf_loop
 
-:end_indexOf
+	:end_indexOf
 ::debug
 ::	%dk_call% dk_printVar %3
 %endfunction%
