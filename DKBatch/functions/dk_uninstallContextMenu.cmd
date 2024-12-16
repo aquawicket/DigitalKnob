@@ -43,6 +43,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_validate GIT_EXE "%dk_call% %DKIMPORTS_DIR%\git\dk_installGit"
+    %dk_call% dk_validate GIT_EXE "%dk_call% %DKIMPORTS_DIR%\git\dk_install.cmd"
     %dk_call% dk_uninstallContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"%GIT_EXE%\" add \"%%1\""
 %endfunction%

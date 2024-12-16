@@ -50,7 +50,7 @@ if "%~1" neq ""    goto runDKCpp
 	if "%host_env%"=="clang"  		%dk_call% dk_validate CLANG_CXX_COMPILER       "%dk_call% %DKIMPORTS_DIR%\clang\dk_install.cmd"
 	if "%host_env%"=="gcc"    		%dk_call% dk_validate GCC_CXX_COMPILER         "%dk_call% %DKIMPORTS_DIR%\gcc\dk_install.cmd"
 
-	if "%host_env%"=="cosmocc"      set "COMPILER_EXE=%SH_EXE% %COSMOCC_CXX_COMPILER%"
+	if "%host_env%"=="cosmocc"      set "COMPILER_EXE=%COSMOCC_CXX_COMPILER%"
 	if "%host_env%"=="clang"  		set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
 	if "%host_env%"=="gcc"	  		set "COMPILER_EXE=%GCC_CXX_COMPILER%"
 	%dk_call% dk_assertVar COMPILER_EXE
@@ -90,7 +90,7 @@ if "%~1" neq ""    goto runDKCpp
 	echo compiling ...
 	if exist %APP_FILE%  del %APP_FILE%
 
-	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
+	set "COMPILE_COMMAND=%SH_EXE% %COMPILER_EXE% -mclang -mcosmo -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 	

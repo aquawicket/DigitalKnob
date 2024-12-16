@@ -4,8 +4,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 %dk_call% dk_validate DK3RDPARTY_DIR     	"%dk_call% dk_DK3RDPARTY_DIR"
 %dk_call% dk_validate DKTOOLS_DIR        	"%dk_call% dk_DKTOOLS_DIR"
-%dk_call% dk_validate COSMO_C_COMPILER   	"call %DK3RDPARTY_DIR%\_DKIMPORTS\cosmocc\dk_installCosmoCC.cmd"
-%dk_call% dk_validate COSMO_CXX_COMPILER 	"call %DK3RDPARTY_DIR%\_DKIMPORTS\cosmocc\dk_installCosmoCC.cmd"
+%dk_call% dk_validate COSMO_C_COMPILER   	"call %DK3RDPARTY_DIR%\_DKIMPORTS\cosmocc\dk_install.cmd"
+%dk_call% dk_validate COSMO_CXX_COMPILER 	"call %DK3RDPARTY_DIR%\_DKIMPORTS\cosmocc\dk_install.cmd"
 
 @RD /S /Q "build"
 

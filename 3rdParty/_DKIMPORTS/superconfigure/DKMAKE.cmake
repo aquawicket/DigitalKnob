@@ -1,5 +1,13 @@
-### https://github.com/ahgamut/superconfigure?tab=readme-ov-file ###
-# superconfigure
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_import(https://github.com/ahgamut/superconfigure/archive/dd04d27c780832318962efbc6d140743ebff617b.zip)
+############ superconfigure ############
+# https://github.com/ahgamut/superconfigure?tab=readme-ov-file
+
+
+
+dk_import(https://github.com/ahgamut/superconfigure/archive/42c2388d28ebc0982c7b313d33104022df39eecb.zip)

@@ -7,8 +7,8 @@
 //################################################################################
 //# dk_warning(message)
 //#
-#include "dk_error_hpp.hpp"
-void dk_error_hpp(const char* message){
+#include "dk_log.hpp"
+void dk_error(const char* message){
 	dk_log(ERROR, message);
 };
 
