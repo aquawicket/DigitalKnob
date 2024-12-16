@@ -1,7 +1,7 @@
 @echo off
 
 if "%~1" neq "" goto runDKPython
-:installDKPython
+:dk_install
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
 	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
@@ -9,7 +9,7 @@ if "%~1" neq "" goto runDKPython
 	::###### Install DKPython ######
 	%dk_call% dk_echo "Installing DKPython . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% dk_validate PYTHON_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPython.cmd"
+	::%dk_call% dk_validate PYTHON_EXE "call %DKIMPORTS_DIR%\powershell\dk_install.cmd"
 	%dk_call% dk_validate PYTHON_EXE "%dk_call% dk_PYTHON_EXE"
 	
 	
