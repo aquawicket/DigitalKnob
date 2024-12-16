@@ -52,6 +52,7 @@ DK(){
 	dk_source dk_realpath
 	dk_source dk_call
 	dk_source dk_download
+	dk_source dk_isChildPathOf
     dk_call dk_color
     dk_call dk_logo
     
@@ -70,7 +71,10 @@ DK(){
 	echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
 	echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
 	echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
-    [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return 0
+#    [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return 0
+	if ! dk_isChildPathOf "$DKSCRIPT_DIR" "$DKBASH_FUNCTIONS_DIR"; then 
+		return 0;
+	fi
     [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
         dk_call dk_echo
         dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
