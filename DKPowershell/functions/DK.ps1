@@ -68,8 +68,9 @@ function DK() {
 	#. DKPOWERSHELL_FUNCTIONS_DIR/dk_thisFunction
 	
 	###### DKTEST MODE ######
-	if(!("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIR}")){ return }
 	if(!("${DKSCRIPT_EXT}" -eq ".ps1")){ return }
+	#if(!("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIR}")){ return }
+	if(dk_call dk_isChildPathOf $DKSCRIPT_DIR $DKPOWERSHELL_FUNCTIONS_DIR){
 		Write-Output "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
 		Write-Output ""
 		Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
@@ -83,6 +84,7 @@ function DK() {
 		Write-Output ""
 		Read-Host -Prompt "Press Enter to exit" 
 		exit
+	}
 }
 
 

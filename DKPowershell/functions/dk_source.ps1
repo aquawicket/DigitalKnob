@@ -17,7 +17,8 @@ function Global:dk_source($func) {
 	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/${func}.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1" }
 	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1")){ Write-Host "ERROR: Failed to download ${func}."; return }
 	
-	. ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1
+	Write-Host "func = ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1";
+	. ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;
 }
 
 
