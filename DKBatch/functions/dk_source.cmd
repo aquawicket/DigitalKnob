@@ -21,8 +21,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     echo downloading %~1.cmd to %DKBATCH_FUNCTIONS_DIR_%%~1.cmd
     
-	%dk_call% dk_dirname %DKBATCH_FUNCTIONS_DIR_%%~1.cmd source_dir
-	%dk_call% dk_makeDirectory %source_dir%
+	::%dk_call% dk_dirname %DKBATCH_FUNCTIONS_DIR_%%~1.cmd source_dir
+	for %%Z in ("%DKBATCH_FUNCTIONS_DIR_%%~1.cmd") do set "_dirname_=%%~dpZ"
+	if not exist %_dirname_%   mkdir %_dirname_%
+	::%dk_call% dk_makeDirectory %source_dir%
 	
     :: FIXME: causes infinate recursion loop
     :: Try dk_download
