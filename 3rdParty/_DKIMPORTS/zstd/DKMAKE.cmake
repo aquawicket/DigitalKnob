@@ -10,7 +10,7 @@ dk_load(dk_builder)
 
 ### IMPORT ###
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/zstd/zstd.txt" ZSTD_DL)
+dk_getFileParam("${DKIMPORTS_DIR}/zstd/dkconfig.txt" ZSTD_DL)
 dk_import(${ZSTD_DL})
 
 ### LINK ###
