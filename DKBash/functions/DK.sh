@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
-
+echo "0 = $0"
 ### Print Shell Path ad Version ###
 export ESC=""  # escape character
 [ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
@@ -31,8 +31,9 @@ DK(){
 	############ load dk_source ######
 	export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
     export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
-    [ -e "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR}/dk_source.sh
-    [ -e "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" ] && . "${DKBASH_FUNCTIONS_DIR}/dk_source.sh"
+	export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/"
+    [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
+    [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] && . "${DKBASH_FUNCTIONS_DIR_}dk_source.sh"
     
     ############ LOAD FUNCTION FILES ############
 	#dk_source dk_callStack
@@ -68,6 +69,7 @@ DK(){
     ###### DKTEST MODE ######
 	echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
 	echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
+	echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
     [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return 0
     [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
         dk_call dk_echo

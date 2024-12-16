@@ -1,14 +1,14 @@
 #!/bin/sh
-echo "########## dk_test.sh ##########"
-echo "                    0 = $0"
-echo "                    * = $*"
-echo " DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
+#echo "########## dk_test.sh ##########"
+#echo "                    0 = $0"
+#echo "                    * = $*"
+#echo " DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR-}"
 echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
-echo "        DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-echo "         DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-echo "        DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
-echo "         DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
-echo "        DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
+#echo "        DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+#echo "         DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+#echo "        DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+#echo "         DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+#echo "        DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
 
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
