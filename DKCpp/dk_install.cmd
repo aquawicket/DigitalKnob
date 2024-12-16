@@ -1,109 +1,66 @@
 @echo off
 
-::### OS ###
-::default = host_os
-::set "OS=Android"
-::set "OS=Emscripten"
-::set "OS=iOS"
-::set "OS=iOS_Simulator"
-::set "OS=Linux"
-::set "OS=Mac"
-::set "OS=Raspberry"
-::set "OS=Windows"
-
-::### arch ###
-::default = host_arch
-::set "arch=arm"
-::set "arch=arm64"
-::set "arch=x86"
-::set "arch=x86_64"
-
-::### COMPILER ###
-::default = clang
-::set "host_env=clang"
-::set "host_env=cosmopolitan"
-::set "host_env=gcc"
-::set "host_env=msvc"
-
-::### MSYSTEM ###
-::set "MSYSTEM=CLANG32"
-::set "MSYSTEM=CLANG64"
-::set "MSYSTEM=CLANGARM64"
-::set "MSYSTEM=MINGW32"
-::set "MSYSTEM=MINGW64"
-::set "MSYSTEM=MSYS"
-::set "MSYSTEM=UCRT64"
-
-::Name			Prefix		Toolchain	Arch		C Library	C++ Library
-::CLANG32		/clang32	llvm		i686		ucrt		libc++
-::CLANG64		/clang64	llvm		x86_64		ucrt		libc++
-::CLANGARM64	/clangarm64	llvm		aarch64		ucrt		libc++
-::COSMOPOLITAN	?			?			?			?			?
-::MINGW32		/mingw32	gcc			i686		msvcrt		libstdc++
-::MINGW64		/mingw64	gcc			x86_64		msvcrt		libstdc++
-::msvc			?			?			?			?			?
-::MSYS			/usr		gcc			x86_64		cygwin		libstdc++
-::UCRT64		/ucrt64		gcc			x86_64		ucrt		libstdc++
-set "default_compiler=cosmopoitan"
-
-
 if "%~1" equ "%~0" goto dk_install
 if "%~1" neq ""    goto runDKCpp
 :dk_install
 	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmo, gcc, msvc 
-	set "default_target_env=cosmopolitan"
+	:: clang, cosmopolitan, gcc, msvc 
+	set "default_host_os=cosmocc"
+	set "default_host_arch=cosmocc"
+	set "default_host_env=cosmocc"
 	
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
 	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
-	::###### Install DKCpp ######
+	::###### Install DKC ######
 	%dk_call% dk_echo "Installing DKCpp . . ."
 	
 	::###### OS ######
-	%dk_call% dk_validate target_os "%dk_call% dk_target_triple"
-	%dk_call% dk_validate OS      "set OS=%target_os%"
+	::%dk_call% dk_validate host_os "%dk_call% dk_host_triple"
+	::if not defined OS set "OS=%host_os%"
+	set "OS=%default_host_os%"
 	%dk_call% dk_printVar OS
 	
-	::###### target_arch ######
-	%dk_call% dk_validate target_arch "%dk_call% dk_target_triple"
-	%dk_call% dk_validate arch      "set arch=%target_arch%"
+	::###### arch ######
+	::%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
+	::if not defined arch set "arch=%host_arch%"
+	set "host_arch=%default_host_arch%"
 	%dk_call% dk_printVar arch
 	
-	::###### target_env ######
-	set "target_env=%default_target_env%"
-	%dk_call% dk_validate env      "set env=%target_env%"
-	%dk_call% dk_printVar env
+	::###### host_env ######
+	::if not defined host_env set "host_env=%default_host_env%"
+	::if not defined env set "env=%host_env%"
+	set "host_env=%default_host_env%"
+	%dk_call% dk_printVar host_env
 	
 	::###### MSYSTEM ######
-	if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="x86"    set "MSYSTEM=CLANG32"
-	if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="x86_64" set "MSYSTEM=CLANG64"
-	if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="arm64"  set "MSYSTEM=CLANGARM64"
-	if not defined MSYSTEM  if "%target_env%"=="gcc"   if "%target_arch%"=="x86"    set "MSYSTEM=MINGW32"
-	if not defined MSYSTEM  if "%target_env%"=="gcc"   if "%target_arch%"=="x86_64" set "MSYSTEM=MINGW64"
-	%dk_call% dk_printVar MSYSTEM
+	::if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86"    set "MSYSTEM=CLANG32"
+	::if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86_64" set "MSYSTEM=CLANG64"
+	::if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="arm64"  set "MSYSTEM=CLANGARM64"
+	::if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86"    set "MSYSTEM=MINGW32"
+	::if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86_64" set "MSYSTEM=MINGW64"
+	::%dk_call% dk_printVar MSYSTEM
 
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	
-	if "%target_env%"=="cosmopolitan"  	%dk_call% dk_validate SH_EXE "call %DKIMPORTS_DIR%\sh\dk_install.cmd"
-	set "SH_EXE=%SH_EXE:/=\%"
-	if "%target_env%"=="cosmopolitan"	call %DKIMPORTS_DIR%\cosmocc\dk_install.cmd
-	if "%target_env%"=="clang"			call %DKIMPORTS_DIR%\clang\dk_install.cmd
-	if "%target_env%"=="gcc"    		call %DKIMPORTS_DIR%\gcc\dk_install.cmd
 
-	if "%target_env%"=="cosmopolitan"  	set "COMPILER_EXE=%SH_EXE% %COSMO_CXX_COMPILER%"
-	if "%target_env%"=="clang"  		set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
-	if "%target_env%"=="gcc"			set "COMPILER_EXE=%GCC_CXX_COMPILER%"
-	%dk_call% dk_assertVar 				COMPILER_EXE
-	%dk_call% dk_printVar 				COMPILER_EXE
+	if "%host_env%"=="cosmocc"      %dk_call% dk_validate SH_EXE                   "%dk_call% %DKIMPORTS_DIR%\sh\dk_install.cmd"
+	if "%host_env%"=="cosmocc"      %dk_call% dk_validate COSMOCC_CXX_COMPILER     "%dk_call% %DKIMPORTS_DIR%\cosmocc\dk_install.cmd"
+	if "%host_env%"=="clang"  		%dk_call% dk_validate CLANG_CXX_COMPILER       "%dk_call% %DKIMPORTS_DIR%\clang\dk_install.cmd"
+	if "%host_env%"=="gcc"    		%dk_call% dk_validate GCC_CXX_COMPILER         "%dk_call% %DKIMPORTS_DIR%\gcc\dk_install.cmd"
 
-	%dk_call% dk_registryDeleteKey 		"HKEY_CLASSES_ROOT\DKCpp"
+	if "%host_env%"=="cosmocc"      set "COMPILER_EXE=%SH_EXE% %COSMOCC_CXX_COMPILER%"
+	if "%host_env%"=="clang"  		set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
+	if "%host_env%"=="gcc"	  		set "COMPILER_EXE=%GCC_CXX_COMPILER%"
+	%dk_call% dk_assertVar COMPILER_EXE
+	%dk_call% dk_printVar COMPILER_EXE
+
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
 	ftype DKCpp=%COMSPEC% /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
-	%dk_call% dk_registryDeleteKey 		"HKEY_CLASSES_ROOT\.cpp"
-	%dk_call% dk_registryDeleteKey 		"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cpp"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
 	assoc .cpp=DKCpp
 	
 	%dk_call% dk_success "DKCpp install complete"
@@ -114,27 +71,26 @@ if "%~1" neq ""    goto runDKCpp
 :runDKCpp
 	::###### COMPILER_EXE ######
 	set "COMPILER_EXE=%~1"
-	::set "COMPILER_EXE=%COMPILER_EXE:/=\%"
-	if not defined COMPILER_EXE   echo ERROR: COMPILER_EXE is invalid
+	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
 	
-	::###### DKCPP_FILE ######
+	::###### DKC_FILE ######
 	set "DKCPP_FILE=%~2"
-	if not defined DKCPP_FILE     echo ERROR: DKCPP_FILE is invalid
-
+	if not defined DKCPP_FILE    echo ERROR: DKCPP_FILE is invalid
+	
 	::###### APP_NAME ######
-	for %%Z in ("%DKCPP_FILE%") do set "APP_NAME=%%~nZ"
+	for %%Z in ("%DKCPP_FILE%") do set "APP_NAME=%%~nZ"	
+	
+	::###### Setup build directory
+	if not exist "%CD%\build" mkdir "%CD%\build"
 	
 	::###### APP_FILE ######
-	set "APP_FILE=%APP_NAME%.exe"
-	
-	::##### Remove lingering files ######
-	echo compiling ...
-	if exist %APP_FILE%				del %APP_FILE%
-	if exist %APP_FILE%.com.dbg 	del %APP_FILE%.com.dbg
-	if exist %APP_FILE%.aarch64.elf	del %APP_FILE%.aarch64.elf
+	set "APP_FILE=%CD%\build\%APP_NAME%.exe"
 	
 	::###### Compile Code ######
-	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -static -o %APP_FILE% -static %DKCPP_FILE%"
+	echo compiling ...
+	if exist %APP_FILE%  del %APP_FILE%
+
+	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 	
@@ -152,7 +108,6 @@ if "%~1" neq ""    goto runDKCpp
 	echo ######## start %APP_FILE% ############
 	echo:
     %COMSPEC% /v:on /c "%APP_FILE%"
-	echo:
 	echo:
 	echo ######### end %APP_FILE% ############
 	echo:
