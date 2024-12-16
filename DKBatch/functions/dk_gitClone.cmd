@@ -36,6 +36,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
     call dk_debugFunc 0
  setlocal
- 
-    %dk_call% dk_gitClone https://github.com/aquawicket/DigitalKnob.git "%USERPROFILE%\digitalknob\main"
+	
+    %dk_call% dk_gitClone https://github.com/aquawicket/DigitalKnob.git "D:\digitalknob\Development"
 %endfunction%
