@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2 3
  setlocal
  
-    if "%~1" neq "" (set "url=%~1") else (set "url=https://github.com/aquawicket/DigitalKnob.git")
+    if "%~1" neq "" (set "_url_=%~1") else (set "_url_=https://github.com/aquawicket/DigitalKnob.git")
     if "%~2" neq "" (set "branch=%~2") else (set "branch=Development")
     
     ::if "%3" neq "NO_CONFIRM" (
@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
     
-    if NOT exist "%DKBRANCH_DIR%\.git" ("%GIT_EXE%" clone %url% "%DKBRANCH_DIR%")
+    if NOT exist "%DKBRANCH_DIR%\.git" ("%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%")
 
     ::%dk_call% dk_cd "%DKBRANCH_DIR%"
     "%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
