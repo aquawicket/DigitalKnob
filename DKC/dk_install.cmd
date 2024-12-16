@@ -1,8 +1,8 @@
 @echo off
 
-if "%~1" equ "%~0" goto installDKC
+if "%~1" equ "%~0" goto dk_install
 if "%~1" neq ""    goto runDKC
-:installDKC
+:dk_install
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmopolitan, gcc, msvc 
 	set "default_host_os=cosmocc"
