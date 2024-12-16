@@ -161,7 +161,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	::# PLUGIN_URL_LENGTH
 	set "PLUGIN_URL_LENGTH="
-	%dk_call% array.dk_length PLUGIN_URL_ARRAY PLUGIN_URL_LENGTH
+	%dk_call% array::dk_length PLUGIN_URL_ARRAY PLUGIN_URL_LENGTH
 	%dk_call% dk_printVar PLUGIN_URL_LENGTH 									&:: PLUGIN_URL_LENGTH		: 8
 	
 
@@ -207,7 +207,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if defined PLUGIN_GIT (
 		rem # PLUGIN_GIT_FILENAME
 		set "PLUGIN_GIT_FILENAME="
-        %dk_call% array\dk_at PLUGIN_URL_ARRAY 3 PLUGIN_GIT_FILENAME									
+        %dk_call% array::dk_at PLUGIN_URL_ARRAY 3 PLUGIN_GIT_FILENAME									
 		%dk_call% dk_printVar PLUGIN_GIT_FILENAME 								&rem PLUGIN_GIT_FILENAME		: zlib
 		
 		rem # PLUGIN_GIT_NAME

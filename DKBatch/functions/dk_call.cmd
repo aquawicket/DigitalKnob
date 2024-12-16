@@ -11,6 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  ::setlocal
 	
 	set "comand=%~1"
+	set "comand=%comand:::=\%"
 	set "func=%~n1"
 	set "args=%*"
 	set "args=!args:%~1=!"
@@ -18,20 +19,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%func%"=="dk_debugFunc" echo [31m ERROR: dk_call cannot be used with dk_debugFunc [0m & %return%
 	::if "%func:dk_=%"=="%func%"  echo [31m ERROR: dk_call[%func%]: dk_call can only be used with dk_ functions [0m & %return%
 	
-	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%" ( 
-		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%"       &rem replace '.' with '\'
-	)
-	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%.cmd" ( 
-		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%.cmd"   &rem replace '.' with '\'
-	)
-	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (
-		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd"
-	)
+::	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%" ( 
+::		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%"       &rem replace '.' with '\'
+::	)
+::	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%.cmd" ( 
+::		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand:.=\%.cmd"   &rem replace '.' with '\'
+::	)
+::	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (
+::		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd"
+::	)
 	
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (
 	if not exist "%comand%" (
-		call dk_source "%func%"
-		if not exist "%DKBATCH_FUNCTIONS_DIR_%%func%.cmd" echo [31m ERROR: failed to download %func%.cmd [0m & %return%
+		call dk_source "%comand%"
+		if not exist "%DKBATCH_FUNCTIONS_DIR_%%func%.cmd" echo [31m ERROR: failed to download %comand%.cmd [0m & %return%
 		if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_source dk_isCRLF
 		if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
 		rem if exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd"

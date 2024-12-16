@@ -3,13 +3,13 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array\dk_push(array, element1, element2, /* …, */ elementN)
+::# array::dk_push(array, element1, element2, /* …, */ elementN)
 ::#
-::#    The push() method of Array instances adds the specified elements to the end of an array and returns the new length of the array.
+::#    The push() method of Array instances adds the specified elements to the end of an array and returns the new length of the array
 ::#
 ::#    PARAMETERS
 ::#    element1, …, elementN
-::#        The element(s) to add to the end of the array.
+::#        The element(s) to add to the end of the array
 ::#
 ::#    RETURN VALUE
 ::#    The new length property of the object upon which the method was called.
@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2 3
  setlocal
 
-    %dk_call% array.dk_length %~1 end_index
+    %dk_call% array::dk_length %~1 end_index
     endlocal & set "%~1[%end_index%]=%~2"
 
 :: debug
@@ -37,17 +37,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% array\dk_push myArrayA "a b c"          &:: new_lengthA
+    %dk_call% array::dk_push myArrayA "a b c"          &:: new_lengthA
     %dk_call% dk_printVar myArrayA
     :: dk_printVar new_lengthA
     %dk_call% dk_echo
     
-    %dk_call% array\dk_push myArrayA "1 2 3" "d e f"  &:: new_lengthA
+    %dk_call% array::dk_push myArrayA "1 2 3" "d e f"  &:: new_lengthA
     %dk_call% dk_printVar myArrayA
     :: dk_printVar new_lengthA
     %dk_call% dk_echo
     
-    %dk_call% array\dk_push myArrayA "4 5 6" "h i j"  &:: new_lengthA
+    %dk_call% array::dk_push myArrayA "4 5 6" "h i j"  &:: new_lengthA
     %dk_call% dk_printVar myArrayA
     :: dk_printVar new_lengthA
     %dk_call% dk_echo

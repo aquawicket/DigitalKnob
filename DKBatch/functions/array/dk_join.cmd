@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array\dk_join(array, separator, rtn_var)
+::# array::dk_join(array, separator, rtn_var)
 ::#
 ::#    The join() method of Array instances creates and returns a new string by concatenating all of the elements in this array, separated by commas or a specified separator string. 
 ::#    If the array has only one item, then that item will be returned without using the separator.
@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#        A string to separate each pair of adjacent elements of the array. If omitted, the array elements are separated with a comma (",").
 ::#
 ::#    RETURN VALUE
-::#    A string with all array elements joined. If array.length is 0, the empty string is returned.
+::#    A string with all array elements joined. If array::length is 0, the empty string is returned.
 ::#
 ::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::set "_arry_=%~1"
     ::set "_separator_=%~2"
     set _count_=0
-    :array\dk_join_loop
+    :join_loop
     if defined %~1[%_count_%] (
         if defined _string_ (
             if "!DE!" equ "" set "_string_=%_string_%%~2!%~1[%_count_%]!"
@@ -35,7 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
             if "!DE!" neq "" call set "_string_=%%%~1[%_count_%]%%"
         )
         set /a _count_+=1
-        goto array\dk_join_loop
+        goto join_loop
     )
     endlocal & set "%3=%_string_%"
 	
@@ -57,7 +57,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "myArrayA[3]=4 5 6"
     set "myArrayA[4]=h i j"
 
-    %dk_call% array\dk_join myArrayA ";" myStringA
+    %dk_call% array::dk_join myArrayA ";" myStringA
     %dk_call% dk_info "myStringA = %myStringA%"
 
 
@@ -67,7 +67,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "myArrayB[3]=1 2 3"
     set "myArrayB[4]=a b c"
 
-    %dk_call% array\dk_join myArrayB ";" myStringB
-    ::myStringB=$(array\dk_join myArrayB ",")
+    %dk_call% array::dk_join myArrayB ";" myStringB
+    ::myStringB=$(array::dk_join myArrayB ",")
     %dk_call% dk_info "myStringB = %myStringB%"
 %endfunction%

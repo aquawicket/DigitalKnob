@@ -3,14 +3,14 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array\dk_concat(array, {value1, value2, /* …, */ valueN})
-::# array\dk_concat(array, {value1, value2, /* …, */ valueN}, rtn_var)
+::# array::dk_concat(array, {value1, value2, /* …, */ valueN})
+::# array::dk_concat(array, {value1, value2, /* …, */ valueN}, rtn_var)
 ::#
-::#  Merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
+::#  Merge two or more arrays. This method does not change the existing arrays, but instead returns a new array
 ::#
 ::#    PARAMETERS
 ::#    value1, …, valueN Optional
-::#        Arrays and/or values to concatenate into a new array.
+::#        Arrays and/or values to concatenate into a new array
 ::#        If all valueN parameters are omitted, concat returns a shallow copy of the existing array on which it is called. See the description below for more details.
 ::#
 ::#    RETURN VALUE
@@ -28,20 +28,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     set /a countA=0
     set /a countB=0
-    :array\dk_concat_loop1
+    :concat_loop1
     if defined %_arrayA_%[%countA%] (
         call set "%_arrayC_%[%countB%]=%%%_arrayA_%[%countA%]%%"  &:: FIXME: remove the need for call here
         set /a countA+=1
         set /a countB+=1
-        goto array\dk_concat_loop1
+        goto concat_loop1
     )
     set /a countA=0
-    :array\dk_concat_loop2
+    :concat_loop2
     if defined %_arrayB_%[%countA%] (
         call set "%_arrayC_%[%countB%]=%%%_arrayB_%[%countA%]%%"  &:: FIXME: remove the need for call here
         set /a countA+=1
         set /a countB+=1
-        goto array\dk_concat_loop2
+        goto concat_loop2
     )
 
     ::### return value ###
@@ -65,7 +65,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "myArray2[1]=4 5 6"
     set "myArray2[2]=7 8 9"
 
-    %dk_call% array\dk_concat myArray1 myArray2 myNewArrayA
+    %dk_call% array::dk_concat myArray1 myArray2 myNewArrayA
     %dk_call% dk_printVar myNewArrayA
 
     if ^
@@ -74,5 +74,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     "%myNewArrayA[2]%" == "g h i" if ^
     "%myNewArrayA[3]%" == "1 2 3" if ^
     "%myNewArrayA[4]%" == "4 5 6" if ^
-    "%myNewArrayA[5]%" == "7 8 9" %dk_call% dk_success "array\dk_concat succeeded"
+    "%myNewArrayA[5]%" == "7 8 9" %dk_call% dk_success "array::dk_concat succeeded"
 %endfunction%

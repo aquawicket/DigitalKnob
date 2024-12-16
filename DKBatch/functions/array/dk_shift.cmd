@@ -3,11 +3,11 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array\dk_shift(array)
-::# array\dk_shift(array, rtn_var)
+::# array::dk_shift(array)
+::# array::dk_shift(array, rtn_var)
 ::#
 ::#  Removes the first element from an array and returns that removed element. 
-::#    This method changes the length of the array.
+::#    This method changes the length of the array
 ::#
 ::#    PARAMETERS
 ::#    array
@@ -26,12 +26,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "_arry_=%~1"
     set prev=0
     set count=1
-    :array\dk_shift_loop
+    :shift_loop
     if defined %_arry_%[%count%] (
         call set "%_arry_%[%prev%]=%%%_arry_%[%count%]%%"  &:: FIXME: remove the need for call here
         set /a count+=1
         set /a prev+=1
-        goto array\dk_shift_loop
+        goto shift_loop
     )
     endlocal & %dk_call% dk_unset %_arry_%[%prev%]
     ::endlocal & set "%_arry_%[%prev%]="
@@ -60,33 +60,33 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_echo
     
-    %dk_call% array\dk_shift myArrayA removedA
+    %dk_call% array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% array\dk_shift myArrayA removedA
+    %dk_call% array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% array\dk_shift myArrayA removedA
+    %dk_call% array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% array\dk_shift myArrayA removedA
+    %dk_call% array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
-    %dk_call% array\dk_shift myArrayA removedA
+    %dk_call% array::dk_shift myArrayA removedA
     %dk_call% dk_printVar myArrayA
     %dk_call% dk_printVar removedA
     %dk_call% dk_echo
     
     :: FIXME:  out of array bounds past here
-::  %dk_call% array\dk_shift myArrayA removedA
+::  %dk_call% array::dk_shift myArrayA removedA
 ::  %dk_call% dk_printVar myArrayA
 ::  %dk_call% dk_printVar removedA
     %dk_call% dk_echo

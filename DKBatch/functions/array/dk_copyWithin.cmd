@@ -3,8 +3,8 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array\dk_copyWithin(array, target, start)
-::# array\dk_copyWithin(array, target, start, end)
+::# array::dk_copyWithin(array, target, start)
+::# array::dk_copyWithin(array, target, start, end)
 ::#
 ::#  The copyWithin() method of Array instances shallow copies part of this array to another location in the same array and returns this array without modifying its length.
 ::#
@@ -12,20 +12,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    target
 ::#        Zero-based index at which to copy the sequence to, converted to an integer. This corresponds to where the element at start will be copied to, 
 ::#        and all elements between start and end are copied to succeeding indices.
-::#           Negative index counts back from the end of the array — if -array.length <= target < 0, target + array.length is used.
-::#           If target < -array.length, 0 is used.
-::#           If target >= array.length, nothing is copied.
-::#           If target is positioned after start after normalization, copying only happens until the end of array.length (in other words, copyWithin() never extends the array).
+::#           Negative index counts back from the end of the array — if -array::length <= target < 0, target + array::length is used.
+::#           If target < -array::length, 0 is used.
+::#           If target >= array::length, nothing is copied.
+::#           If target is positioned after start after normalization, copying only happens until the end of array::length (in other words, copyWithin() never extends the array).
 ::#    start
 ::#        Zero-based index at which to start copying elements from, converted to an integer.
-::#            Negative index counts back from the end of the array — if -array.length <= start < 0, start + array.length is used.
-::#            If start < -array.length, 0 is used.
-::#            If start >= array.length, nothing is copied.
+::#            Negative index counts back from the end of the array — if -array::length <= start < 0, start + array::length is used.
+::#            If start < -array::length, 0 is used.
+::#            If start >= array::length, nothing is copied.
 ::#    end :optional
 ::#        Zero-based index at which to end copying elements from, converted to an integer. copyWithin() copies up to but not including end.
-::#            Negative index counts back from the end of the array — if -array.length <= end < 0, end + array.length is used.
-::#            If end < -array.length, 0 is used.
-::#            If end >= array.length or end is omitted, array.length is used, causing all elements until the end to be copied.
+::#            Negative index counts back from the end of the array — if -array::length <= end < 0, end + array::length is used.
+::#            If end < -array::length, 0 is used.
+::#            If end >= array::length or end is omitted, array::length is used, causing all elements until the end to be copied.
 ::#            If end implies a position before or at the position that start implies, nothing is copied.
 ::#
 ::#    RETURN VALUE
@@ -49,5 +49,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% array\dk_copyWithin array target start end
+    %dk_call% array::dk_copyWithin array target start end
 %endfunction%

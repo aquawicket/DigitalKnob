@@ -3,8 +3,8 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# array\dk_includes(array, searchElement)
-::# array\dk_includes(array, searchElement, fromIndex)
+::# array::dk_includes(array, searchElement)
+::# array::dk_includes(array, searchElement, fromIndex)
 ::#
 ::#    The includes() method of Array instances determines whether an array includes a certain value among its entries, returning true or false as appropriate.
 ::#
@@ -14,10 +14,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#    fromIndex :optional
 ::#        Zero-based index at which to start searching, converted to an integer.
-::#            Negative index counts back from the end of the array — if -array.length <= fromIndex < 0, fromIndex + array.length is used. However, 
+::#            Negative index counts back from the end of the array — if -array::length <= fromIndex < 0, fromIndex + array::length is used. However, 
 ::#            the array is still searched from front to back in this case.
-::#            If fromIndex < -array.length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
-::#            If fromIndex >= array.length, the array is not searched and false is returned.
+::#            If fromIndex < -array::length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
+::#            If fromIndex >= array::length, the array is not searched and false is returned.
 ::#
 ::#    RETURN VALUE
 ::#    A boolean value which is true if the value searchElement is found within the array (or the part of the array indicated by the index fromIndex, if specified).
@@ -31,14 +31,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     set "_arry_=%~1"
     set /a count=0
-    :array\dk_includes_loop
+    :includes_loop
     if defined %_arry_%[%count%] (
         if "!%_arry_%[%count%]!" == "%~2" (
             if "%~3" neq "" (endlocal & set "%3=true")
             exit /b 0
         )
         set /a count+=1
-        goto array\dk_includes_loop
+        goto includes_loop
     )
     if "%~3" neq "" (endlocal & set "%3=false")
     exit /b 1
@@ -61,26 +61,26 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "array123[1]=2"
     set "array123[2]=3"
     %dk_call% dk_printVar array123
-    %dk_call% dk_info "array\dk_includes array123 2"
-    %dk_call% array\dk_includes array123 2      && echo true || echo false  &:: true
-    %dk_call% dk_info "array\dk_includes array123 4"
-    %dk_call% array\dk_includes array123 4      && echo true || echo false  &:: false
-    ::%dk_call% array\dk_includes array123 3 3  && echo true || echo false  &:: false
-    ::%dk_call% array\dk_includes array123 3 -1 && echo true || echo false  &:: true
+    %dk_call% dk_info "array::dk_includes array123 2"
+    %dk_call% array::dk_includes array123 2      && echo true || echo false  &:: true
+    %dk_call% dk_info "array::dk_includes array123 4"
+    %dk_call% array::dk_includes array123 4      && echo true || echo false  &:: false
+    ::%dk_call% array::dk_includes array123 3 3  && echo true || echo false  &:: false
+    ::%dk_call% array::dk_includes array123 3 -1 && echo true || echo false  &:: true
 
     %dk_call% dk_echo
     set "array12NaN[0]=1"
     set "array12Nan[1]=2"
     set "array12Nan[2]=NaN"
     %dk_call% dk_printVar array12Nan
-    %dk_call% dk_info "array\dk_includes array12NaN NaN"
-    %dk_call% array\dk_includes array12NaN NaN  && echo true || echo false  &:: true
+    %dk_call% dk_info "array::dk_includes array12NaN NaN"
+    %dk_call% array::dk_includes array12NaN NaN  && echo true || echo false  &:: true
 
     %dk_call% dk_echo
     set "array123q[0]="1""
     set "array123q[1]="2""
     set "array123q[2]="3""
     %dk_call% dk_printVar array123q
-    %dk_call% dk_info "array\dk_includes array123q 3"
-    %dk_call% array\dk_includes array123q 3     && echo true || echo false  &::# false
+    %dk_call% dk_info "array::dk_includes array123q 3"
+    %dk_call% array::dk_includes array123q 3     && echo true || echo false  &::# false
 %endfunction%
