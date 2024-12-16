@@ -7,16 +7,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_startPackage
     call dk_debugFunc 1
- ::setlocal disableDelayedExpansion
+ ::setlocal
  
 	::%dk_call% dk_callDKPowershell dk_startPackage %*
 	%dk_call% dk_callDKPowershell dk_getPackagePath %* rtn_var
 
 	:: Expand html escape codes
 	setlocal disableDelayedExpansion
-	%dk_call% dk_replaceAll "%rtn_var%" "#33" "!" rtn_var
-	::echo %rtn_var%
+	set "rtn_var=%rtn_var:#33=!%
 	start %rtn_var%
+	
 %endfunction%
 
 
