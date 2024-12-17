@@ -2,6 +2,9 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include_guard()
 
+
+
+file(TO_CMAKE_PATH "$ENV{DKSCRIPT_PATH}" DKSCRIPT_PATH)
 #set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 
 ### Print Version Info ###
@@ -10,7 +13,9 @@ set(DKSHELL "CMake")
 set(DKSHELL_VERSION ${CMAKE_VERSION})
 set(DKSHELL_PATH ${CMAKE_COMMAND})
 string(ASCII 27 ESC)
-message("${ESC}[46m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} - ${DKSHELL_PATH} ${ESC}[0m")
+message("${ESC}[46m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m")
+message("DKSHELL_PATH = ${DKSHELL_PATH}")
+message("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
 message("")
 
 
@@ -80,10 +85,7 @@ function(DKINIT)
 	dk_load(dk_color)
 	dk_load(dk_logo)
 	dk_load(dk_watch)
-	
-#	dk_load(dk_messageBox)
-#	variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
-#	variable_watch(CMAKE_SYSTEM_VERSION dk_onVariableWatch)
+	dk_load(dk_messageBox)
 	
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
@@ -98,16 +100,6 @@ function(DKINIT)
 	
 endfunction()
 
-##################################################################################
-# dk_variableWatch()
-#
-macro(dk_onVariableWatch variable access value current_list_file stack)
-	if("${access}" STREQUAL "MODIFIED_ACCESS")
-		#message("dk_variableWatch(${variable} ${access} ${value} ${current_list_file} ${stack})")
-		dk_stacktrace()
-		dk_messageBox("${variable} = ${value}")
-	endif()
-endmacro()
 
 ##################################################################################
 # dk_echo()
@@ -243,6 +235,8 @@ function(dk_setupCallstack)
 	
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onCallstack)
 	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onCallstack)
+	#variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
+	#variable_watch(CMAKE_SYSTEM_VERSION dk_onVariableWatch)
 endfunction()
 
 ##################################################################################

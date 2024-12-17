@@ -8,7 +8,8 @@ for /f "tokens=2 delims=[]" %%v in ('ver') do set "DKSHELL_VERSION=%%v"
 set "DKSHELL_PATH=%ComSpec%"
 set "ESC="                         &:: escape character
 echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
-echo   %DKSHELL_PATH%
+echo DKSHELL_PATH = %DKSHELL_PATH%
+echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 echo:
 
 if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
