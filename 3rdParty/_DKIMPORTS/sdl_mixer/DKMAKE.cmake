@@ -21,8 +21,8 @@ dk_depend(wavpack)
 
 ### IMPORT ###
 #dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.2.zip PATCH)
-dk_import(https://github.com/libsdl-org/SDL_mixer/archive/a90b86e.zip PATCH) 					# SDL2
-#dk_import(https://github.com/libsdl-org/SDL_mixer/archive/497f149.zip PATCH) 					# SDL3
+dk_import(https://github.com/libsdl-org/SDL_mixer/archive/a90b86e.zip PATCH) 		# SDL2
+#dk_import(https://github.com/libsdl-org/SDL_mixer/archive/497f149.zip PATCH) 		# SDL3
 
 ### LINK ###
 dk_include			(${SDL_MIXER_DIR}/include							SDL_MIXER_INCLUDE_DIR)
@@ -41,7 +41,7 @@ endif()
 ### GENERATE ###
 dk_configure(${SDL_MIXER_DIR} 
 	-DCMAKE_POSITION_INDEPENDENT_CODE=OFF		# "Build static libraries with -fPIC" ON
-	-DBUILD_SHARED_LIBS=OFF						# "Build the library as a shared library" ON
+	#-DBUILD_SHARED_LIBS=OFF					# "Build the library as a shared library" ON
 	-DSDL2MIXER_INSTALL=OFF						# "Enable SDL2mixer install target"
 	-DSDL2MIXER_DEPS_SHARED=OFF					# "Default value for loading dependencies dynamically" ON
 	-DSDL2MIXER_SAMPLES=OFF						# "Build the SDL2_mixer sample program(s)" ON

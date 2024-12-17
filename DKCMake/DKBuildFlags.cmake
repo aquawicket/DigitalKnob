@@ -144,8 +144,6 @@ endif()
 dk_depend(make)
 
 
-
-
 ### User Friendly Options ###
 dk_set(BUILD_SHARED_LIBS				0)
 dk_set(BUILD_STATIC_LIBS				1)
@@ -158,8 +156,6 @@ dk_set(WARNINGS_AS_ERRORS				0)
 dk_set(WARNING_4244						0)	# /wd4244 - Warning: possible loss of data 
 dk_set(WARNING_5105						0)	# /wd5105 - macro producing defined is undefined behaviour
 dk_set(WARNING_LEVEL 					4)
-#dk_set(STATIC							1)
-#dk_set(SHARED							0)
 dk_set(CMAKE_VERBOSE_MAKEFILE			1)
 
 if(ANDROID)

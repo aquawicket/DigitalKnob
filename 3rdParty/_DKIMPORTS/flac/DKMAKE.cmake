@@ -68,9 +68,8 @@ dk_configure(${FLAC_DIR}
 	-DINSTALL_PKGCONFIG_MODULES=ON 		# "Install PkgConfig modules" ON
 	-DINSTALL_CMAKE_CONFIG_MODULE=ON	# "Install CMake package-config module" ON
 	-DWITH_OGG=ON						# "ogg support (default: test for libogg)" ON
-	-DBUILD_SHARED_LIBS=OFF				# "Build shared instead of static libraries" OFF
+	#-DBUILD_SHARED_LIBS=OFF			# "Build shared instead of static libraries" OFF
 	${OGG_CMAKE})
-	
 
 
 
