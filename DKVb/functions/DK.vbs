@@ -1,3 +1,5 @@
+' TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
+
 if DKINIT = 1 then
 	'WScript.Echo "DK.vbs already loaded"
 else

@@ -1,3 +1,4 @@
+// TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
 WScript.Echo("DK.js()");
 
 if(typeof ActiveXObject === "function"){

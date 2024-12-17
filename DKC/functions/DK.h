@@ -5,6 +5,9 @@
 //#include <cstdio>
 #include <stdio.h>
 
+// TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
+//printf("DK()\n");
+
 /*
 #if defined(__GNUC__)
     #if defined(__clang__)

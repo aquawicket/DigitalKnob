@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <iostream>
 
+// TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
+//printf("DK()\n");
 
 #define STR(x) #x
 #define VERSION(major, minor, patch) STR(major) "." STR(minor) "." STR(patch)

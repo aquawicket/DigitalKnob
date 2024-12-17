@@ -33,6 +33,8 @@
 #ifndef DKPreprocessor_H
 #define DKPreprocessor_H
 
+#include "DK.h"
+
 // https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
 // Fix for DKVncServer
 #if HAVE_DKVncServer
