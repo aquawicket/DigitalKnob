@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://github.com/aubio/aubio.git
 
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam		(${DKIMPORTS_DIR}/aubio/aubio.txt AUBIO_DL)
+dk_getFileParam		(${DKIMPORTS_DIR}/aubio/dkconfig.txt AUBIO_DL)
 dk_import			(${AUBIO_DL})
 
 dk_include			(${AUBIO_DIR}/src)

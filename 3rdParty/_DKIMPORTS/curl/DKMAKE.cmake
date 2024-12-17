@@ -27,8 +27,8 @@ dk_depend(zstd)
 
 ### IMPORT ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam ("${DKIMPORTS_DIR}/curl/curl.txt" CURL_WIN_DL)
-dk_getFileParam ("${DKIMPORTS_DIR}/curl/curl.txt" CURL_UNIX_DL)
+dk_getFileParam ("${DKIMPORTS_DIR}/curl/dkconfig.txt" CURL_WIN_DL)
+dk_getFileParam ("${DKIMPORTS_DIR}/curl/dkconfig.txt" CURL_UNIX_DL)
 if(WIN)
 	dk_import	(${CURL_WIN_DL})
 else()

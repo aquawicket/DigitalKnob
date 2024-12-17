@@ -22,7 +22,7 @@ endif()
 ############ MSYS2 variables ############
 #dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam		("${DKIMPORTS_DIR}/msys2/msys2.txt" MSYS2_DL)
+dk_getFileParam		("${DKIMPORTS_DIR}/msys2/dkconfig.txt" MSYS2_DL)
 dk_importVariables	(${MSYS2_DL})
 dk_set				(MSYS2_BIN 		"${MSYS2}/usr/bin")
 dk_set				(CLANGARM64_BIN	"${MSYS2}/clangarm64/bin")

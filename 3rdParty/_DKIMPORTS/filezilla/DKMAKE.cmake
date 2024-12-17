@@ -13,6 +13,6 @@ dk_set(FILEZILLA_EXE "C:\\Program Files\\FileZilla FTP Client\\filezilla.exe")
 ### IMPORT ###
 if(NOT EXISTS ${FILEZILLA_EXE})
 	dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-	dk_getFileParam 	("${DKIMPORTS_DIR}/filezilla/filezilla.txt" FILEZILLA_DL)
+	dk_getFileParam 	("${DKIMPORTS_DIR}/filezilla/dkconfig.txt" FILEZILLA_DL)
 	dk_import			(${FILEZILLA_DL})
 endif()

@@ -1,1 +1,0 @@
-AUBIO_DL=https://github.com/aubio/aubio/archive/152d6819b360c2e7b379ee3f373d444ab3df0895.zip

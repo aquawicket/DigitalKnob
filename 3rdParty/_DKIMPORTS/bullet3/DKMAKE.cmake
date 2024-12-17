@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ### IMPORT ###
 dk_load(dk_builder)
 
-dk_getFileParam(${DKIMPORTS_DIR}/bullet3/bullet3.txt BULLET3_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/bullet3/dkconfig.txt BULLET3_DL)
 dk_import("${BULLET3_DL}")
 
 ### LINK ###

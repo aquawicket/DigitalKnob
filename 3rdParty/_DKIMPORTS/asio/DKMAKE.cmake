@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ###### asio ######
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	(${DKIMPORTS_DIR}/asio/asio.txt ANT_DL)
+dk_getFileParam	(${DKIMPORTS_DIR}/asio/dkconfig.txt ANT_DL)
 dk_import		(${ANT_DL})
 
 # TODO

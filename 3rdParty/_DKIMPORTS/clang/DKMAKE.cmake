@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_validate(host_triple   "dk_host_triple()")
 dk_validate(target_triple "dk_target_triple()")
 
-#dk_getFileParam("${DKIMPORTS_DIR}/clang/clang.txt" VERSION)
+#dk_getFileParam("${DKIMPORTS_DIR}/clang/dkconfig.txt" VERSION)
 if(clang OR mingw OR ucrt)
 	dk_depend(msys2)
 endif()

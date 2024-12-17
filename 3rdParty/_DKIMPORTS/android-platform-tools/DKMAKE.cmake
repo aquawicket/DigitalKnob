@@ -24,13 +24,13 @@ dk_depend(android-sdk)
 
 # 33.0.3
 if(WIN_HOST)
-	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/android-platform-tools.txt ANDROID_PLATFORM_TOOLS_WIN_DL)
+	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/dkconfig.txt ANDROID_PLATFORM_TOOLS_WIN_DL)
 	dk_import(${ANDROID_PLATFORM_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/platform-tools)
 elseif(MAC_HOST)
-	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/android-platform-tools.txt ANDROID_PLATFORM_TOOLS_MAC_DL)
+	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/dkconfig.txt ANDROID_PLATFORM_TOOLS_MAC_DL)
 	dk_import(${ANDROID_PLATFORM_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/platform-tools)
 elseif(ANDROID_HOST)
-	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/android-platform-tools.txt ANDROID_PLATFORM_TOOLS_ANDROID_DL)
+	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/dkconfig.txt ANDROID_PLATFORM_TOOLS_ANDROID_DL)
 	dk_import(${ANDROID_PLATFORM_TOOLS_ANDROID_DL} PATH ${ANDROID_SDK}/termux)
 	dk_copy(${ANDROID_SDK}/termux/build-tools ${ANDROID_SDK}/build-tools/30.0.3 OVERWRITE)		# copy termux/build-tools to android-sdk
 	dk_copy(${ANDROID_SDK}/termux/platform-tools ${ANDROID_SDK}/platform-tools OVERWRITE)		# copy termux/platform-tools to android-sdk
@@ -60,7 +60,7 @@ elseif(ANDROID_HOST)
 		dk_executeProcess(rm -rf META-INF NOTICE aapt2 WORKING_DIRECTORY ${AAPT2})
 	endif()
 elseif(LINUX_HOST)
-	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/android-platform-tools.txt ANDROID_PLATFORM_TOOLS_LINUX_DL)
+	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/dkconfig.txt ANDROID_PLATFORM_TOOLS_LINUX_DL)
 	dk_import(${ANDROID_PLATFORM_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/platform-tools)
 endif()
 

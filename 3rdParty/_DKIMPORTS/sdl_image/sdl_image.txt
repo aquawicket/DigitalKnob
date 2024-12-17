@@ -1,1 +1,0 @@
-SDL_IMAGE_DL=https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.2.zip

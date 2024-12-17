@@ -12,6 +12,6 @@ dk_depend(android-sdk)
 dk_makeDirectory(${ANDROID_SDK}/platforms)
 
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam(${DKIMPORTS_DIR}/android-platforms/android-platforms.txt ANDROID_PLATFORMS_DL)
-dk_getFileParam(${DKIMPORTS_DIR}/android-platforms/android-platforms.txt ANDROID_PLATFORMS_FOLDER)
+dk_getFileParam(${DKIMPORTS_DIR}/android-platforms/dkconfig.txt ANDROID_PLATFORMS_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-platforms/dkconfig.txt ANDROID_PLATFORMS_FOLDER)
 dk_import(${ANDROID_PLATFORMS_DL} PATH ${ANDROID_SDK}/platforms/${ANDROID_PLATFORMS_FOLDER})

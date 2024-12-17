@@ -1,2 +1,0 @@
-ANDROID_SYSTEM_IMAGES_VERSION=24
-ANDROID_SYSTEM_IMAGES_DL=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-24_r07.zip

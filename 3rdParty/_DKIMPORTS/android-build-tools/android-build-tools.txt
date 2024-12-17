@@ -1,4 +1,0 @@
-ANDROID_BUILD_TOOLS_VERSION=30.0.3
-ANDROID_BUILD_TOOLS_WIN_DL=https://dl.google.com/android/repository/91936d4ee3ccc839f0addd53c9ebf087b1e39251.build-tools_r30.0.3-windows.zip
-ANDROID_BUILD_TOOLS_MAC_DL=https://dl.google.com/android/repository/f6d24b187cc6bd534c6c37604205171784ac5621.build-tools_r30.0.3-macosx.zip
-ANDROID_BUILD_TOOLS_LINUX_DL=https://dl.google.com/android/repository/build-tools_r30.0.3-linux.zip

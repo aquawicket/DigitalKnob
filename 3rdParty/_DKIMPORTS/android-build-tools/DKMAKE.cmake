@@ -16,10 +16,10 @@ dk_makeDirectory(${ANDROID_SDK}/build-tools)
 
 # 30.0.3
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_VERSION)
-dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_WIN_DL)
-dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_MAC_DL)
-dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_LINUX_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_VERSION)
+dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_WIN_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_MAC_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_LINUX_DL)
 
 dk_validate(host_triple "dk_host_triple()")
 if(WIN_HOST)

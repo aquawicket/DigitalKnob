@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ### IMPORT ###
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam(${DKIMPORTS_DIR}/astyle/astyle.txt ASTYLE_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/astyle/dkconfig.txt ASTYLE_DL)
 dk_import(${ASTYLE_DL})
 
 ### LINK ###

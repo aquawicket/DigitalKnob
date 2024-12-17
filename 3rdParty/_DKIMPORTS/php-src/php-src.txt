@@ -1,3 +1,0 @@
-PHP_SRC_WIN_X86_DL=https://windows.php.net/downloads/releases/php-8.3.13-Win32-vs16-x32.zip
-PHP_SRC_WIN_X86_64_DL=https://windows.php.net/downloads/releases/php-8.3.13-Win32-vs16-x64.zip
-PHP_SRC_UNIX=https://www.php.net/distributions/php-8.3.13.tar.gz

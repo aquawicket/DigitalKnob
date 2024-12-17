@@ -1,1 +1,0 @@
-XZ_DL=https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz

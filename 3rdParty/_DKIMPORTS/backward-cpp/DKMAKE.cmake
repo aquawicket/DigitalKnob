@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ### IMPORT ###
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/backward-cpp/backward-cpp.txt" BACKWARD_CPP_DL)
+dk_getFileParam("${DKIMPORTS_DIR}/backward-cpp/dkconfig.txt" BACKWARD_CPP_DL)
 dk_import("${BACKWARD_CPP_DL}")
 
 ### LINK ###

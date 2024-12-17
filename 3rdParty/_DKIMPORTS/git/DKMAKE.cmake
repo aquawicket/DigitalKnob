@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_validate(host_triple "dk_host_triple()")
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/git/git.txt" GIT_DL_VERSION)
+dk_getFileParam("${DKIMPORTS_DIR}/git/dkconfig.txt" GIT_DL_VERSION)
 
 ### DOWNLOAD ###
 if(WIN_X86_HOST)

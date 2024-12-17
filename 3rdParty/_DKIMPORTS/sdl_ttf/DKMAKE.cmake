@@ -19,7 +19,7 @@ dk_depend(sdl)
 
 ### IMPORT ###
 #dk_import(https://github.com/libsdl-org/SDL_ttf.git BRANCH main PATCH) # SDL3
-dk_getFileParam("${DKIMPORTS_DIR}/sdl_ttf/sdl_ttf.txt" SDL_TTF_DL)
+dk_getFileParam("${DKIMPORTS_DIR}/sdl_ttf/dkconfig.txt" SDL_TTF_DL)
 dk_import("${SDL_TTF_DL}" PATCH)
 
 

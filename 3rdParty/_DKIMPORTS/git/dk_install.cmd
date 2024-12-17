@@ -2,7 +2,7 @@
 if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-%dk_call% dk_getFileParam git.txt GIT_DL_VERSION
+%dk_call% dk_getFileParam dkconfig.txt GIT_DL_VERSION
 set "GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-32-bit.7z.exe"
 set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-64-bit.7z.exe"
 
