@@ -103,7 +103,8 @@ foreach(plugin ${dkdepend_list})
 
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKPlugins
 	dk_info("dk_load(${plugin_path}/DKMAKE.cmake)")
-	dk_load(${plugin_path}/DKMAKE.cmake)
+	#dk_load(${plugin_path}/DKMAKE.cmake)
+	dk_depend(${plugin})
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	if(NOT ${plugin})

@@ -379,6 +379,7 @@ function(dk_importVariables)
 #	dk_printVar(CURRENT_PLUGIN)											# CURRENT_PLUGIN: ZLIB
 	
 	###### Print the current plugin to the window title bar ######
+	dk_assertVar(ENV{CURRENT_PLUGIN})
 	dk_title("CURRENT_PLUGIN -> $ENV{CURRENT_PLUGIN}")
 	
 	
