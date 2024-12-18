@@ -49,7 +49,7 @@ DK(){
     dk_source __CALLER__
     dk_source dk_debugFunc
     dk_source dk_onExit        # EXIT handler
-    dk_source dk_onError       # ERR handler
+	dk_source dk_onError       # ERR handler
 	dk_source dk_realpath
 	dk_source dk_call
 	dk_source dk_download
@@ -145,14 +145,14 @@ dk_download() {
 # WSLPATH_EXE()
 #
 WSLPATH_EXE(){
-	(command -v wslpath) || echo "wslpath Not Found"  >&2
+	(command -v wslpath >&2) || echo "wslpath Not Found"  >&2
 }
 
 ##################################################################################
 # CYGPATH_EXE()
 #
 CYGPATH_EXE(){
-	(command -v cygpath) || echo "cygpath Not Found"  >&2
+	(command -v cygpath >&2) || echo "cygpath Not Found"  >&2
 }
 
 ##################################################################################
