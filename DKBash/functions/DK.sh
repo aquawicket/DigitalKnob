@@ -9,7 +9,7 @@ export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
 echo ""
 echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
 echo "DKSHELL_PATH  ${DKSHELL_PATH}"
-echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH}"
+echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}"
 echo ""
 
 ##################################################################################
