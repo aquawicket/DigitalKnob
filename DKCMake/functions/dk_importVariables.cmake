@@ -365,18 +365,6 @@ function(dk_importVariables)
 	#   So we need to pop zlib off of the stack when it completes so out CURRENT_PLUGIN points back to libpng. Currently dk_importVariables is how we
 	#   push the current plugin to the stack, we just need to find a good place to pop from the stack.
 	
-#	# PREV_PLUGIN
-#	unset(PREV_PLUGIN)
-#	dk_set(PREV_PLUGIN $ENV{CURRENT_PLUGIN})
-	
-#	# CURRENT_PLUGIN
-#	unset(CURRENT_PLUGIN)
-#	dk_convertToCIdentifier(${PLUGIN_IMPORT_NAME_UPPER} CURRENT_PLUGIN)
-#	dk_set(CURRENT_PLUGIN $ENV{CURRENT_PLUGIN})
-#	if(NOT ${PLUGIN_IMPORT_NAME_UPPER} STREQUAL $ENV{CURRENT_PLUGIN})
-#		dk_notice("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to $ENV{CURRENT_PLUGIN}")
-#	endif()
-#	dk_printVar(CURRENT_PLUGIN)											# CURRENT_PLUGIN: ZLIB
 	
 	###### Print the current plugin to the window title bar ######
 	dk_assertVar(ENV{CURRENT_PLUGIN})

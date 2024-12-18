@@ -30,7 +30,6 @@ function(dk_depend plugin) #target
 
 		###### Push Plugin to the PLUGIN_STACK ######
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
-		#dk_notice("PUSH ENV{CURRENT_PLUGIN} = $ENV{CURRENT_PLUGIN}")
 		#############################################
 	
 		

@@ -15,18 +15,13 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_validate(DKBUILD_TYPE "dk_DKBUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 	
-	#if(NOT CURRENT_PLUGIN)
 	if(NOT DEFINED ENV{CURRENT_PLUGIN})
 		#### THIS CODE BLOCK MAY BE REMOVABLE ####
-		dk_fixme("dk_configure.cmake:21   You CANNOT remove this code block.")
+		dk_fatal("dk_configure.cmake:21   You CANNOT remove this code block.")
 		
 		if(NOT EXISTS ${SOURCE_DIR}/DKMAKE.cmake)
 			dk_fatal("dk_configure(): The SOURCE_DIR:${SOURCE_DIR} does not contain a DKMAKE.cmake file.")
 		endif()
-		#dk_basename(${SOURCE_DIR} CURRENT_PLUGIN)
-		#dk_set(CURRENT_PLUGIN ${CURRENT_PLUGIN})
-		#dk_set(${CURRENT_PLUGIN} ${SOURCE_DIR})
-		#dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${SOURCE_DIR}/${CONFIG_PATH})
 		dk_basename(${SOURCE_DIR} ENV{CURRENT_PLUGIN})
 		dk_set(ENV{CURRENT_PLUGIN} $ENV{CURRENT_PLUGIN})
 		dk_set($ENV{CURRENT_PLUGIN} ${SOURCE_DIR})
@@ -34,20 +29,12 @@ function(dk_configure SOURCE_DIR) #ARGN
 	endif()
 	dk_assertPath($ENV{CURRENT_PLUGIN})
 	
-	#if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
-	#	set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${CONFIG_PATH}")
-	#	dk_makeDirectory("${${CURRENT_PLUGIN}_CONFIG_DIR}")
-	#endif()
-	#dk_assertPath(${CURRENT_PLUGIN}_CONFIG_DIR)
-	
 	if(NOT EXISTS "${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
 		set($ENV{CURRENT_PLUGIN}_CONFIG_DIR "${$ENV{CURRENT_PLUGIN}}/${CONFIG_PATH}")
 		dk_makeDirectory("${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
 	endif()
 	dk_assertPath($ENV{CURRENT_PLUGIN}_CONFIG_DIR)
 	
-	
-	#dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	dk_set(BINARY_DIR "${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
 	dk_assertVar(BINARY_DIR)
 	
