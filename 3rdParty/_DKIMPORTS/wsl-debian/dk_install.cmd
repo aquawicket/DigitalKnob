@@ -12,6 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%\wsl\dk_install.cmd"
 	
 	%dk_call% dk_set DEBIAN_DL "https://wslstorestorage.blob.core.windows.net/wslblob/TheDebianProject.DebianGNULinux_1.12.2.0_neutral___76v4gfsz19hv4.AppxBundle"
+	%dk_call% dk_importVariables %DEBIAN_DL% IMPORT_PATH %DKIMPORTS_DIR%\wsl-debian ROOT %DKTOOLS_DIR%	
 	%dk_call% dk_download %DEBIAN_DL%
 	
 	%dk_call% dk_echo   

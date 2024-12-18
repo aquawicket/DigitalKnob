@@ -8,7 +8,7 @@ function Global:dk_source($func) {
 	#if(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1"){ dk_debugFunc 1 }
 
 	# load if it's an existing full path file
-	if(Test-Path "${func}"){
+	if((${func}) -and (Test-Path "${func}")){
 		. "${func}"
 		return
 	}

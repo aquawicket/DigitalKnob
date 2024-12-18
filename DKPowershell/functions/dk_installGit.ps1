@@ -24,6 +24,8 @@ function Global:dk_installGit() {
     #$GIT_FOLDER = dk_call dk_convertToCIdentifier $GIT_FOLDER 
     #$GIT_FOLDER = dk_call dk_toLower $GIT_FOLDER
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
+	
+	
 	### DO NOT USE GIT_DIR ###
 	$global:GIT = "$DKTOOLS_DIR/$GIT_FOLDER"
 	
@@ -39,7 +41,7 @@ function Global:dk_installGit() {
     dk_call dk_info "Installing git . . ."
     dk_call dk_download ${GIT_DL} $DKDOWNLOAD_DIR/$GIT_DL_FILE
 	dk_call dk_info "$DKDOWNLOAD_DIR/$GIT_DL_FILE -y -o $GIT"
-    dk_call dk_call cmd /c "$DKDOWNLOAD_DIR/$GIT_DL_FILE" -y -o $GIT
+    dk_call $ENV{COMSPEC} /c "$DKDOWNLOAD_DIR/$GIT_DL_FILE" -y -o $GIT
 	   
     if(!(dk_call dk_pathExists $GIT_EXE)){ dk_call dk_error "cannot find git" }
 }
