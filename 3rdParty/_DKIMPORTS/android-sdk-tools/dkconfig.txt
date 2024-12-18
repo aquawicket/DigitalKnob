@@ -1,0 +1,3 @@
+ANDROID_SDK_TOOLS_WIN_DL=https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip
+ANDROID_SDK_TOOLS_MAC_DL=https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
+ANDROID_SDK_TOOLS_LINUX_DL=https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
