@@ -1,12 +1,12 @@
 #!/usr/bin/cmake -P
 if(NOT DKCMAKE_FUNCTIONS_DIR_)
-	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+	set(DKCMAKE_FUNCTIONS_DIR_ ../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ ghidra ############
 # https://ghidra-sre.org
 
 
-# TODO
+dk_import(https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_11.2.1_build/ghidra_11.2.1_PUBLIC_20241105.zip)
