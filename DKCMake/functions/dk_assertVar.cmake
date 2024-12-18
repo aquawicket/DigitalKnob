@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_assertVar variable)
 	dk_debugFunc(1)	
 	
-	if(NOT ${variable})
+	if(NOT DEFINED ${variable})
 		dk_echo("\n\n${bg_red}Assertion failed: at ${variable}${clr}")
 		
 		if("${var}")

@@ -365,72 +365,72 @@ function(dk_importVariables)
 	#   So we need to pop zlib off of the stack when it completes so out CURRENT_PLUGIN points back to libpng. Currently dk_importVariables is how we
 	#   push the current plugin to the stack, we just need to find a good place to pop from the stack.
 	
-	# PREV_PLUGIN
-	unset(PREV_PLUGIN)
-	dk_set(PREV_PLUGIN ${CURRENT_PLUGIN})
+#	# PREV_PLUGIN
+#	unset(PREV_PLUGIN)
+#	dk_set(PREV_PLUGIN $ENV{CURRENT_PLUGIN})
 	
-	# CURRENT_PLUGIN
-	unset(CURRENT_PLUGIN)
-	dk_convertToCIdentifier(${PLUGIN_IMPORT_NAME_UPPER} CURRENT_PLUGIN)
-	dk_set(CURRENT_PLUGIN ${CURRENT_PLUGIN})
-	if(NOT ${PLUGIN_IMPORT_NAME_UPPER} STREQUAL ${CURRENT_PLUGIN})
-		dk_notice("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to ${CURRENT_PLUGIN}")
-	endif()
-	dk_printVar(CURRENT_PLUGIN)											# CURRENT_PLUGIN: ZLIB
+#	# CURRENT_PLUGIN
+#	unset(CURRENT_PLUGIN)
+#	dk_convertToCIdentifier(${PLUGIN_IMPORT_NAME_UPPER} CURRENT_PLUGIN)
+#	dk_set(CURRENT_PLUGIN $ENV{CURRENT_PLUGIN})
+#	if(NOT ${PLUGIN_IMPORT_NAME_UPPER} STREQUAL $ENV{CURRENT_PLUGIN})
+#		dk_notice("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to $ENV{CURRENT_PLUGIN}")
+#	endif()
+#	dk_printVar(CURRENT_PLUGIN)											# CURRENT_PLUGIN: ZLIB
 	
 	###### Print the current plugin to the window title bar ######
-	dk_title("CURRENT_PLUGIN -> ${CURRENT_PLUGIN}")
+	dk_title("CURRENT_PLUGIN -> $ENV{CURRENT_PLUGIN}")
 	
 	
 	# <PLUGIN>
-	unset(${CURRENT_PLUGIN})
-	dk_set(${CURRENT_PLUGIN} ${PLUGIN_INSTALL_PATH})
-	dk_printVar(${CURRENT_PLUGIN})										# ZLIB: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+	unset($ENV{CURRENT_PLUGIN})
+	dk_set($ENV{CURRENT_PLUGIN} ${PLUGIN_INSTALL_PATH})
+	dk_printVar($ENV{CURRENT_PLUGIN})										# ZLIB: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
 	
 	# <PLUGIN>_DIR      ### DO NOT USE GIT_DIR ###
-	unset(${CURRENT_PLUGIN}_DIR)
-	if(NOT "${CURRENT_PLUGIN}" STREQUAL "GIT")
-		dk_set(${CURRENT_PLUGIN}_DIR ${PLUGIN_INSTALL_PATH})
-		dk_printVar(${CURRENT_PLUGIN}_DIR)								# ZLIB_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+	unset($ENV{CURRENT_PLUGIN}_DIR)
+	if(NOT "$ENV{CURRENT_PLUGIN}" STREQUAL "GIT")
+		dk_set($ENV{CURRENT_PLUGIN}_DIR ${PLUGIN_INSTALL_PATH})
+		dk_printVar($ENV{CURRENT_PLUGIN}_DIR)								# ZLIB_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
 	endif()
 	
 	# <PLUGIN>_URL
-	unset(${CURRENT_PLUGIN}_URL)
-	dk_set(${CURRENT_PLUGIN}_URL ${PLUGIN_URL})
-	dk_printVar(${CURRENT_PLUGIN}_URL)									# ZLIB_URL: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	unset($ENV{CURRENT_PLUGIN}_URL)
+	dk_set($ENV{CURRENT_PLUGIN}_URL ${PLUGIN_URL})
+	dk_printVar($ENV{CURRENT_PLUGIN}_URL)									# ZLIB_URL: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
 	# <PLUGIN>_DL_FILE
-	unset(${CURRENT_PLUGIN}_DL_FILE)
-	dk_set(${CURRENT_PLUGIN}_DL_FILE ${PLUGIN_URL_FILENAME})
-	dk_printVar(${CURRENT_PLUGIN}_DL_FILE)								# ZLIB_DL_FILE: master.zip
+	unset($ENV{CURRENT_PLUGIN}_DL_FILE)
+	dk_set($ENV{CURRENT_PLUGIN}_DL_FILE ${PLUGIN_URL_FILENAME})
+	dk_printVar($ENV{CURRENT_PLUGIN}_DL_FILE)								# ZLIB_DL_FILE: master.zip
 	
 	# <PLUGIN>_VERSION
-	unset(${CURRENT_PLUGIN}_VERSION)
-	dk_set(${CURRENT_PLUGIN}_VERSION ${PLUGIN_INSTALL_VERSION})
-	dk_printVar(${CURRENT_PLUGIN}_VERSION)								# ZLIB_VERSION: master
+	unset($ENV{CURRENT_PLUGIN}_VERSION)
+	dk_set($ENV{CURRENT_PLUGIN}_VERSION ${PLUGIN_INSTALL_VERSION})
+	dk_printVar($ENV{CURRENT_PLUGIN}_VERSION)								# ZLIB_VERSION: master
 
 	# <PLUGIN>_FOLDER
-	unset(${CURRENT_PLUGIN}_FOLDER)
-	dk_set(${CURRENT_PLUGIN}_FOLDER ${PLUGIN_INSTALL_FOLDER})
-	dk_printVar(${CURRENT_PLUGIN}_FOLDER)								# ZLIB_FOLDER: zlib-master	
+	unset($ENV{CURRENT_PLUGIN}_FOLDER)
+	dk_set($ENV{CURRENT_PLUGIN}_FOLDER ${PLUGIN_INSTALL_FOLDER})
+	dk_printVar($ENV{CURRENT_PLUGIN}_FOLDER)								# ZLIB_FOLDER: zlib-master	
 	
 	# <PLUGIN>_IMPORT_NAME
-	unset(${CURRENT_PLUGIN}_IMPORT_NAME)
-	dk_set(${CURRENT_PLUGIN}_IMPORT_NAME ${PLUGIN_IMPORT_NAME_LOWER})
-	dk_printVar(${CURRENT_PLUGIN}_IMPORT_NAME)							# ZLIB_IMPORT_NAME: zlib
+	unset($ENV{CURRENT_PLUGIN}_IMPORT_NAME)
+	dk_set($ENV{CURRENT_PLUGIN}_IMPORT_NAME ${PLUGIN_IMPORT_NAME_LOWER})
+	dk_printVar($ENV{CURRENT_PLUGIN}_IMPORT_NAME)							# ZLIB_IMPORT_NAME: zlib
 		
 	# <PLUGIN>_BRANCH
-	unset(${CURRENT_PLUGIN}_BRANCH)
+	unset($ENV{CURRENT_PLUGIN}_BRANCH)
 	if(PLUGIN_GIT_BRANCH)
-		dk_set(${CURRENT_PLUGIN}_BRANCH ${PLUGIN_GIT_BRANCH})
-		dk_printVar(${CURRENT_PLUGIN}_BRANCH)							# ZLIB_BRANCH: master
+		dk_set($ENV{CURRENT_PLUGIN}_BRANCH ${PLUGIN_GIT_BRANCH})
+		dk_printVar($ENV{CURRENT_PLUGIN}_BRANCH)							# ZLIB_BRANCH: master
 	endif()
 	
 	# <PLUGIN>_TAG
-	unset(${CURRENT_PLUGIN}_TAG)
+	unset($ENV{CURRENT_PLUGIN}_TAG)
 	if(PLUGIN_GIT_TAG)
-		dk_set(${CURRENT_PLUGIN}_TAG ${PLUGIN_GIT_TAG})
-		dk_printVar(${CURRENT_PLUGIN}_TAG)								# ZLIB_TAG:
+		dk_set($ENV{CURRENT_PLUGIN}_TAG ${PLUGIN_GIT_TAG})
+		dk_printVar($ENV{CURRENT_PLUGIN}_TAG)								# ZLIB_TAG:
 	endif()
 	
 	
@@ -445,39 +445,39 @@ function(dk_importVariables)
 	dk_validate(triple "dk_target_triple()")
 	
 	# <PLUGIN>_TRIPLE_DIR
-	unset(${CURRENT_PLUGIN}_TRIPLE_DIR)
+	unset($ENV{CURRENT_PLUGIN}_TRIPLE_DIR)
 	if(triple)
-		dk_set(${CURRENT_PLUGIN}_TRIPLE_DIR ${PLUGIN_INSTALL_PATH}/${triple})
-		dk_printVar(${CURRENT_PLUGIN}_TRIPLE_DIR)						# ZLIB_TRIPLE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
+		dk_set($ENV{CURRENT_PLUGIN}_TRIPLE_DIR ${PLUGIN_INSTALL_PATH}/${triple})
+		dk_printVar($ENV{CURRENT_PLUGIN}_TRIPLE_DIR)						# ZLIB_TRIPLE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
 	endif()
 	
 	# <PLUGIN>_CONFIG_DIR
-	unset(${CURRENT_PLUGIN}_CONFIG_DIR)
+	unset($ENV{CURRENT_PLUGIN}_CONFIG_DIR)
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 	if(CONFIG_PATH)
-		dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${CONFIG_PATH})
-		dk_printVar(${CURRENT_PLUGIN}_CONFIG_DIR)						# ZLIB_CONFIG_DIR: C:/Users/user/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+		dk_set($ENV{CURRENT_PLUGIN}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${CONFIG_PATH})
+		dk_printVar($ENV{CURRENT_PLUGIN}_CONFIG_DIR)						# ZLIB_CONFIG_DIR: C:/Users/user/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	endif()
 	
 	# <PLUGIN>_BUILD_DIR
-	unset(${CURRENT_PLUGIN}_BUILD_DIR)
+	unset($ENV{CURRENT_PLUGIN}_BUILD_DIR)
 	if(BUILD_PATH)
-		dk_set(${CURRENT_PLUGIN}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${BUILD_PATH})
-		dk_printVar(${CURRENT_PLUGIN}_BUILD_DIR)						# ZLIB_BUILD_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+		dk_set($ENV{CURRENT_PLUGIN}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${BUILD_PATH})
+		dk_printVar($ENV{CURRENT_PLUGIN}_BUILD_DIR)						# ZLIB_BUILD_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	endif()
 	
 	# <PLUGIN>_DEBUG_DIR
-	unset(${CURRENT_PLUGIN}_DEBUG_DIR)
+	unset($ENV{CURRENT_PLUGIN}_DEBUG_DIR)
 	if(DEBUG_DIR)
-		dk_set(${CURRENT_PLUGIN}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${DEBUG_DIR})
-		dk_printVar(${CURRENT_PLUGIN}_DEBUG_DIR)						# ZLIB_DEBUG_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+		dk_set($ENV{CURRENT_PLUGIN}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${DEBUG_DIR})
+		dk_printVar($ENV{CURRENT_PLUGIN}_DEBUG_DIR)						# ZLIB_DEBUG_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	endif()
 	
 	# <PLUGIN>_RELEASE_DIR
-	unset(${CURRENT_PLUGIN}_RELEASE_DIR)
+	unset($ENV{CURRENT_PLUGIN}_RELEASE_DIR)
 	if(RELEASE_DIR)
-		dk_set(${CURRENT_PLUGIN}_RELEASE_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${RELEASE_DIR})
-		dk_printVar(${CURRENT_PLUGIN}_RELEASE_DIR)						# ZLIB_RELEASE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
+		dk_set($ENV{CURRENT_PLUGIN}_RELEASE_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${RELEASE_DIR})
+		dk_printVar($ENV{CURRENT_PLUGIN}_RELEASE_DIR)						# ZLIB_RELEASE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
 	endif()
 	
 endfunction()
