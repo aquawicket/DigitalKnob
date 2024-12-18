@@ -8,6 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ############ mpg123 ############
 # https://www.mpg123.de
 
+variable_watch(TEST_CURRENT_PLUGIN dk_onVariableWatch)
 dk_depend(bash)
 dk_depend(autotools)
 
@@ -26,8 +27,7 @@ else()
 	dk_libRelease	(${MPG123_RELEASE_DIR}/libmpg123.a)
 endif()
 
-
-dk_queueCommand(${BASH_EXE} -c "autoreconf -f -i")
+dk_queueCommand(${BASH_EXE} -c "${AUTORECONF} -f -i")
 
 
 ### GENERATE ###

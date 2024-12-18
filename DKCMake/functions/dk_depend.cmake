@@ -1,6 +1,7 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
+
 
 ###############################################################################
 # dk_depend(plugin) target
@@ -25,8 +26,25 @@ function(dk_depend plugin) #target
 	dk_toUpper("${plugin}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
 	if((NOT EXISTS ${PLUGIN}) OR (NOT EXISTS ${${PLUGIN}_DIR}))
+		
+
+		###### Push Plugin to the PLUGIN_STACK ######
+		dk_envList(PLUGIN PUSH "${PLUGIN}")
+		#dk_notice("PUSH ENV{CURRENT_PLUGIN} = $ENV{CURRENT_PLUGIN}")
+		#############################################
+	
+		
+	
 		dk_notice("dk_depend(): loading ${PLUGIN} . . .")
 		dk_dependB(${plugin})
+	
+		
+	
+		###### Pop Plugin from the PLUGIN_STACK######
+		dk_envList(PLUGIN POP)
+		#dk_notice("POP ENV{CURRENT_PLUGIN} = $ENV{CURRENT_PLUGIN}")
+		#############################################
+		
 	else()
 		dk_notice("dk_depend(): ${PLUGIN} is already loaded")
 	endif()

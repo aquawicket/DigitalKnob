@@ -23,5 +23,7 @@ elseif(CLANG OR MINGW OR UCRT)
 	dk_installPackage	(autotools)
 	dk_depend(msys2)
 	set					(ENV{ACLOCAL_PATH} "${MSYS2_DIR}/usr/share/aclocal")
+	
+	dk_set(AUTORECONF "${MSYS2_DIR}/usr/bin/autoreconf")
 endif()
 

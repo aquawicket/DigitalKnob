@@ -49,6 +49,9 @@ function(DKINIT)
 	#dk_echo("DKCMAKE_DIR = ${DKCMAKE_DIR}")
 	#dk_echo("DKCMAKE_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
 	
+	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	dk_load("dk_fatal")
+	
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS()
 	#dk_echo("DKHTTP_DKCMAKE_FUNCTIONS_DIR = ${DKHTTP_DKCMAKE_FUNCTIONS_DIR}")
@@ -71,7 +74,7 @@ function(DKINIT)
 	set(ENABLE_DKTEST 1 CACHE INTERNAL "")
 
 	############ LOAD FUNCTION FILES ############
-	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	#include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 	dk_load(dk_dirname)
 	dk_load(dk_basename)
 	if("${DKSCRIPT_EXT}" STREQUAL ".cmake")
@@ -152,13 +155,15 @@ endfunction()
 function(dk_setupCallstack)
 	dk_echo("dk_setupCallstack()")
 	
-	#include("${DKCMAKE_FUNCTIONS_DIR_}dk_onVariableWatch.cmake")
+	dk_load("dk_onVariableWatch")
 	#variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onVariableWatch)
+	#variable_watch(CMAKE_CURRENT_LIST_DIR dk_onVariableWatch)
 	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onCallstack)
 	#variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
 	#variable_watch(CMAKE_SYSTEM_VERSION dk_onVariableWatch)
 endfunction()
+
 
 ##################################################################################
 # dk_DKSCRIPT_VARS()
