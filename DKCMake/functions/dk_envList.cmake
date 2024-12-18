@@ -10,6 +10,8 @@ include_guard()
 # dk_envList(<name> PUSH value)
 # dk_envList(<name> POP)
 #
+#	Create a Global 'stack like" list variable. You can push to, and pop from the stack.
+#   use $ENV{CURRENT_<name>} to get the topmost item.
 #
 function(dk_envList)
 	dk_debugFunc()
@@ -24,7 +26,7 @@ function(dk_envList)
 		set(ENV{${NAME}_STACK} "$ENV{CURRENT_${NAME}};$ENV{${NAME}_STACK}")
 		set(${NAME}_list $ENV{${NAME}_STACK})
 		list(LENGTH ${NAME}_list ${NAME}_length)
-		dk_notice("TOP=$ENV{CURRENT_${NAME}}       STACK=$ENV{${NAME}_STACK}     LENGTH=${${NAME}_length}")
+		#dk_notice("TOP=$ENV{CURRENT_${NAME}}       STACK=$ENV{${NAME}_STACK}     LENGTH=${${NAME}_length}")
 	endif()
 
 	# Pop the CURRENT_<THING> and drop it fom the list. Update CURRENT_<THING>
@@ -41,7 +43,7 @@ function(dk_envList)
 		endif()
 		set(ENV{${NAME}_STACK} "${${NAME}_list}")
 				
-		dk_notice("TOP=$ENV{CURRENT_${NAME}}       STACK=$ENV{${NAME}_STACK}     LENGTH=${${NAME}_length}")
+		#dk_notice("TOP=$ENV{CURRENT_${NAME}}       STACK=$ENV{${NAME}_STACK}     LENGTH=${${NAME}_length}")
 	endif()
 endfunction()
 

@@ -17,6 +17,9 @@ function(dk_configure SOURCE_DIR) #ARGN
 	
 	#if(NOT CURRENT_PLUGIN)
 	if(NOT DEFINED ENV{CURRENT_PLUGIN})
+		#### THIS CODE BLOCK MAY BE REMOVABLE ####
+		dk_fixme("dk_configure.cmake:21   You CANNOT remove this code block.")
+		
 		if(NOT EXISTS ${SOURCE_DIR}/DKMAKE.cmake)
 			dk_fatal("dk_configure(): The SOURCE_DIR:${SOURCE_DIR} does not contain a DKMAKE.cmake file.")
 		endif()
