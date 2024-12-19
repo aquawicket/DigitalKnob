@@ -9,8 +9,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #	@variable:  The variable to be evaluated. If this variable evaluates to false, this causes an assertion
 #
-function(dk_assertVar variable)
-	dk_debugFunc(1)	
+function(dk_assertVar)
+	dk_debugFunc(1)
+	set(variable ${ARGV0})
 	
 	if(NOT DEFINED ${variable})
 		dk_echo("\n\n${bg_red}Assertion failed: at ${variable}${clr}")

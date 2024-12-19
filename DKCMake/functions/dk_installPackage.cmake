@@ -8,8 +8,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###############################################################################
 # dk_installPackage(package)
 #
-function(dk_installPackage package)
-	dk_debugFunc()
+function(dk_installPackage)
+	dk_debugFunc(1)
+	set(package ${ARGV0})
 
 	dk_toUpper(${package} PACKAGE)
 	execute_process(COMMAND command -v ${package} OUTPUT_VARIABLE ${PACKAGE}_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -121,7 +122,9 @@ function(dk_installPackage package)
 	if(PACMAN_EXE)
 		dk_assertPath(PACMAN_EXE)
 		dk_validate(DKDONWLOAD_DIR "dk_DIGITALKNOB_DIR()")
-		#dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck")
+		if(EXISTS "${MSYS2_DIR}/var/lib/pacman/db.lck")
+			dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck")
+		endif()
 		set(comand ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		if(win_x86_clang)
 			set(comand ${PACMAN_EXE} -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
@@ -188,8 +191,12 @@ function(dk_installPackage package)
 		return()
 	endif()
 	
-	dk_error("ERROR: no package managers found")
+	dk_fatal("no package managers found")
 endfunction()
+
+
+
+
 
 
 
