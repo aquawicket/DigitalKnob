@@ -19,7 +19,7 @@ function(dk_depend plugin) #target
 		if(DISABLED_LIBS MATCHES "${plugin}")
 			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
 		endif()
-		dk_notice("${plugin} IS DISABLED")
+		#dk_notice("${plugin} IS DISABLED")
 		return()
 	endif()
 	
@@ -31,17 +31,13 @@ function(dk_depend plugin) #target
 		###### Push Plugin to the PLUGIN_STACK ######
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
 		#############################################
-	
-		
-	
-		dk_notice("dk_depend(): loading ${PLUGIN} . . .")
+
+		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
 		dk_dependB(${plugin})
 	
-		
 	
 		###### Pop Plugin from the PLUGIN_STACK######
 		dk_envList(PLUGIN POP)
-		#dk_notice("POP ENV{CURRENT_PLUGIN} = $ENV{CURRENT_PLUGIN}")
 		#############################################
 		
 	else()

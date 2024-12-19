@@ -14,7 +14,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 
 ### DEPEND ###
-dk_depend(bzip2)
 dk_depend(dl)
 dk_depend(libbcrypt)
 dk_depend(libpsl)
@@ -144,7 +143,6 @@ if(MSVC AND WIN)
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
-		${BZIP2_CMAKE}
 		${LIBBCRYPT_CMAKE}
 		${LIBPSL_CMAKE}
 		${LIBSSH2_CMAKE}
@@ -165,7 +163,7 @@ elseif(ANDROID)
 		-DHAVE_GLIBC_STRERROR_R=advanced
 		-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DHAVE_POSIX_STRERROR_R=0	#ANDROID_HOST
-		${BZIP2_CMAKE}
+		${LIBBCRYPT_CMAKE}
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
@@ -185,7 +183,7 @@ elseif(IOS OR IOSSIM)
 		-DHAVE_POLL_FINE_EXITCODE=advanced
 		-DHAVE_POLL_FINE_EXITCODE__TRYRUN_OUTPUT=advanced
 		-DHAVE_POSIX_STRERROR_R=0
-		${BZIP2_CMAKE}
+		${LIBBCRYPT_CMAKE}
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
@@ -259,7 +257,7 @@ elseif(MAC)
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
-		${BZIP2_CMAKE}
+		${LIBBCRYPT_CMAKE}
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
@@ -333,7 +331,7 @@ elseif(LINUX)
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
-		${BZIP2_CMAKE}
+		${LIBBCRYPT_CMAKE}
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
@@ -406,7 +404,7 @@ else()
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
-		${BZIP2_CMAKE}
+		${LIBBCRYPT_CMAKE}
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
