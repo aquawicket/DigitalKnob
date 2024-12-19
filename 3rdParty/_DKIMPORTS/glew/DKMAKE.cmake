@@ -38,8 +38,12 @@ else()
 	dk_libDebug		(${GLEW_DEBUG_DIR}/lib/libGLEWd.a						GLEW_DEBUG_LIBRARY)
 	dk_libRelease	(${GLEW_RELEASE_DIR}/lib/libGLEW.a						GLEW_RELEASE_LIBRARY)
 endif()
-DEBUG_dk_set		(GLEW_LIBRARY											${GLEW_DEBUG_LIBRARY})
-RELEASE_dk_set		(GLEW_LIBRARY											${GLEW_RELEASE_LIBRARY})
+if(DEBUG)
+	dk_set			(GLEW_LIBRARY											${GLEW_DEBUG_LIBRARY})
+endif()
+if(RELEASE)
+	dk_set			(GLEW_LIBRARY											${GLEW_RELEASE_LIBRARY})
+endif()
 
 ### 3RDPARTY LINK ###
 # dk_set(GLEW_CMAKE
@@ -56,7 +60,7 @@ dk_set(GLEW_CMAKE
 	-DGLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}
 	-DGLEW_LIBRARY=${GLEW_LIBRARY})
 if(MSVC)
-	WIN_dk_append(GLEW_CMAKE 
+	dk_append(GLEW_CMAKE 
 		"-DCMAKE_C_FLAGS=/I${GLEW}/include /DGLEW_STATIC" 
 		"-DCMAKE_CXX_FLAGS=/I${GLEW_INCLUDE_DIR} /DGLEW_STATIC")
 else()

@@ -52,14 +52,10 @@ endif()
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
-
-
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
-
 dk_assertVar(triple)
 dk_delete(${DK_PROJECT_DIR}/${triple}/DKBUILD.log NO_HALT)
 dk_printSettings()
-
 
 dk_buildLog("##############################################")
 dk_buildLog("######  Enabled Dependencies (sorted)  #######")
@@ -136,8 +132,7 @@ foreach(plugin ${dkdepend_list})
 			#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Release)
 			#	endif()
 			#endif()
-			message("adding ${${PLUGIN_NAME}}")
-			dk_pause()
+			dk_debug("adding ${${PLUGIN_NAME}}")
 			add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${CONFIG_PATH})
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
@@ -151,7 +146,6 @@ foreach(plugin ${dkdepend_list})
 	dk_toLower("${plugin}" plugin_lower)
 	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
 	
-	
 	# Install 3rd Party Libs
 	if(INSTALL_DKLIBS)
 		if(${isDKPlugin} EQUAL -1)
@@ -160,7 +154,6 @@ foreach(plugin ${dkdepend_list})
 			endif()
 		endif()
 	endif(INSTALL_DKLIBS)
-	
 	
 	if(${isDKPlugin} GREATER -1)
 		# Install header files for DKPlugin
@@ -206,23 +199,23 @@ foreach(plugin ${dkdepend_list})
 				
 				if(MULTI_CONFIG)
 					###### Configure ######
-					ANDROID_ARM32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})
-					ANDROID_ARM64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON ${plugin_path})
-					ANDROID_X86_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_X86=ON ${plugin_path})
-					ANDROID_X86_64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_X86_64=ON ${plugin_path})
-					EMSCRIPTEN_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DEMSCRIPTEN=ON ${plugin_path})
-					IOS_ARM32_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOS_ARM32=ON ${plugin_path})
-					IOS_ARM64_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOS_ARM64=ON ${plugin_path})
-					IOSSIM_X86_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOSSIM_X86=ON ${plugin_path})
-					IOSSIM_X86_64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOSSIM_X86_64=ON ${plugin_path})
-					LINUX_X86_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DLINUX_X86=ON ${plugin_path})
-					LINUX_X86_64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DLINUX_X86_64=ON ${plugin_path})
-					MAC_X86_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DMAC_X86=ON ${plugin_path})
-					MAC_X86_64_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DMAC_X86_64=ON ${plugin_path})
+					ANDROID_ARM32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON 	${plugin_path})
+					ANDROID_ARM64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON 	${plugin_path})
+					ANDROID_X86_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_X86=ON 	${plugin_path})
+					ANDROID_X86_64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_X86_64=ON 	${plugin_path})
+					EMSCRIPTEN_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DEMSCRIPTEN=ON 		${plugin_path})
+					IOS_ARM32_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOS_ARM32=ON 		${plugin_path})
+					IOS_ARM64_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOS_ARM64=ON 		${plugin_path})
+					IOSSIM_X86_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOSSIM_X86=ON 		${plugin_path})
+					IOSSIM_X86_64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOSSIM_X86_64=ON 	${plugin_path})
+					LINUX_X86_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DLINUX_X86=ON 		${plugin_path})
+					LINUX_X86_64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DLINUX_X86_64=ON 	${plugin_path})
+					MAC_X86_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DMAC_X86=ON 		${plugin_path})
+					MAC_X86_64_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DMAC_X86_64=ON 		${plugin_path})
 					RASPBERRY_ARM32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DRASPBERRY_ARM32=ON ${plugin_path})
 					RASPBERRY_ARM64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DRASPBERRY_ARM64=ON ${plugin_path})
-					WIN_X86_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DWIN_X86=ON ${plugin_path})
-					WIN_X86_64_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DWIN_X86_64=ON ${plugin_path})
+					WIN_X86_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DWIN_X86=ON 		${plugin_path})
+					WIN_X86_64_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DWIN_X86_64=ON 		${plugin_path})
 					
 					###### Build ######
 					DEBUG_dk_queueCommand			(${CMAKE_COMMAND} --build . --config Debug)
@@ -230,50 +223,49 @@ foreach(plugin ${dkdepend_list})
 				else()
 					if(DEBUG)
 						###### Configure ######
-						ANDROID_ARM32_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})
-						ANDROID_ARM64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM64=ON ${plugin_path})
-						ANDROID_X86_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_X86=ON ${plugin_path})
-						ANDROID_X86_64_DEBUG_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_X86_64=ON ${plugin_path})
-						EMSCRIPTEN_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DEMSCRIPTEN=ON ${plugin_path})
-						IOS_ARM32_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOS_ARM32=ON ${plugin_path})
-						IOS_ARM64_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOS_ARM64=ON ${plugin_path})
-						IOSSIM_X86_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOSSIM_X86=ON ${plugin_path})
-						IOSSIM_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOSSIM_X86_64=ON ${plugin_path})
-						LINUX_X86_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DLINUX_X86=ON ${plugin_path})
-						LINUX_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DLINUX_X86_64=ON ${plugin_path})
-						MAC_X86_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DMAC_X86=ON ${plugin_path})
-						MAC_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DMAC_X86_64=ON ${plugin_path})
-						RASPBERRY_ARM32_DEBUG_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DRASPBERRY_ARM32=ON ${plugin_path})
-						RASPBERRY_ARM64_DEBUG_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DRASPBERRY_ARM64=ON ${plugin_path})
-						WIN_X86_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DWIN_X86=ON ${plugin_path})
-						WIN_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DWIN_X86_64=ON ${plugin_path})
+						ANDROID_ARM32_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM32=ON 	${plugin_path})
+						ANDROID_ARM64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM64=ON 	${plugin_path})
+						ANDROID_X86_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_X86=ON 		${plugin_path})
+						ANDROID_X86_64_DEBUG_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_X86_64=ON 	${plugin_path})
+						EMSCRIPTEN_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DEMSCRIPTEN=ON 		${plugin_path})
+						IOS_ARM32_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOS_ARM32=ON 		${plugin_path})
+						IOS_ARM64_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOS_ARM64=ON 		${plugin_path})
+						IOSSIM_X86_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOSSIM_X86=ON 		${plugin_path})
+						IOSSIM_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOSSIM_X86_64=ON 	${plugin_path})
+						LINUX_X86_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DLINUX_X86=ON 		${plugin_path})
+						LINUX_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DLINUX_X86_64=ON 	${plugin_path})
+						MAC_X86_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DMAC_X86=ON 			${plugin_path})
+						MAC_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DMAC_X86_64=ON 		${plugin_path})
+						RASPBERRY_ARM32_DEBUG_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DRASPBERRY_ARM32=ON 	${plugin_path})
+						RASPBERRY_ARM64_DEBUG_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DRASPBERRY_ARM64=ON 	${plugin_path})
+						WIN_X86_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DWIN_X86=ON 			${plugin_path})
+						WIN_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DWIN_X86_64=ON 		${plugin_path})
 						
 						###### Build ######
 						DEBUG_dk_queueCommand					(${CMAKE_COMMAND} --build . --config Debug)
 						
 					elseif(RELEASE)
 						###### Configure ######
-						ANDROID_ARM32_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})
-						ANDROID_ARM64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON ${plugin_path})
-						ANDROID_X86_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_X86=ON ${plugin_path})
-						ANDROID_X86_64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_X86_64=ON ${plugin_path})
-						EMSCRIPTEN_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DEMSCRIPTEN=ON ${plugin_path})
-						IOS_ARM32_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOS_ARM32=ON ${plugin_path})
-						IOS_ARM64_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOS_ARM64=ON ${plugin_path})
-						IOSSIM_X86_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOSSIM_X86=ON ${plugin_path})
-						IOSSIM_X86_64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOSSIM_X86_64=ON ${plugin_path})
-						LINUX_X86_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DLINUX_X86=ON ${plugin_path})
-						LINUX_X86_64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DLINUX_X86_64=ON ${plugin_path})
-						MAC_X86_RELEASE_dk_queueCommand			(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DMAC_X86=ON ${plugin_path})
-						MAC_X86_64_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DMAC_X86_64=ON ${plugin_path})
-						RASPBERRY_ARM32_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DRASPBERRY_ARM32=ON ${plugin_path})
-						RASPBERRY_ARM64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DRASPBERRY_ARM64=ON ${plugin_path})
-						WIN_X86_RELEASE_dk_queueCommand			(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DWIN_X86=ON ${plugin_path})
-						WIN_X86_64_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DWIN_X86_64=ON ${plugin_path})
+						ANDROID_ARM32_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON 		${plugin_path})
+						ANDROID_ARM64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON 		${plugin_path})
+						ANDROID_X86_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_X86=ON 		${plugin_path})
+						ANDROID_X86_64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_X86_64=ON 	${plugin_path})
+						EMSCRIPTEN_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DEMSCRIPTEN=ON 		${plugin_path})
+						IOS_ARM32_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOS_ARM32=ON 			${plugin_path})
+						IOS_ARM64_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOS_ARM64=ON 			${plugin_path})
+						IOSSIM_X86_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOSSIM_X86=ON 		${plugin_path})
+						IOSSIM_X86_64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOSSIM_X86_64=ON 		${plugin_path})
+						LINUX_X86_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DLINUX_X86=ON 			${plugin_path})
+						LINUX_X86_64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DLINUX_X86_64=ON 		${plugin_path})
+						MAC_X86_RELEASE_dk_queueCommand			(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DMAC_X86=ON 			${plugin_path})
+						MAC_X86_64_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DMAC_X86_64=ON 		${plugin_path})
+						RASPBERRY_ARM32_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DRASPBERRY_ARM32=ON 	${plugin_path})
+						RASPBERRY_ARM64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DRASPBERRY_ARM64=ON 	${plugin_path})
+						WIN_X86_RELEASE_dk_queueCommand			(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DWIN_X86=ON 			${plugin_path})
+						WIN_X86_64_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DWIN_X86_64=ON 		${plugin_path})
 						
 						###### Build ######
 						RELEASE_dk_queueCommand					(${CMAKE_COMMAND} --build . --config Release)
-						
 					endif()
 				endif()
 
@@ -282,14 +274,12 @@ foreach(plugin ${dkdepend_list})
 					if(NOT EXISTS ${lib})
 						dk_fatal("\n\n\n****************************\nFAILED to find: ${lib} \n****************************")
 					else()
-					
 						# Install DKPlugin Libs
 						if(INSTALL_DKLIBS)
 							if(EXISTS ${plugin_path}/${CONFIG_PATH}/cmake_install.cmake)
 								dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${CONFIG_PATH})
 							endif()
 						endif()
-						
 					endif()
 				endforeach()
 
@@ -372,7 +362,6 @@ if(SRC_EXCLUDE)
 	endforeach()
 endif()
 
-	
 add_definitions(-DDKAPP)
 include_directories(${DK_PROJECT_DIR})
 include_directories(${DKPLUGINS_DIR})
@@ -381,10 +370,7 @@ include_directories(${DKPLUGINS_DIR})
 ###########
 if(ANDROID)
 	################################ CMAKE_ANDROID_GUI ########################################
-	#set(CMAKE_ANDROID_GUI 1)
-	# CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake
-	
-	if(CMAKE_ANDROID_GUI)
+	if(CMAKE_ANDROID_GUI) # CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake
 		########################## CREATE ICONS ###############################
 		if(EXISTS "${DK_PROJECT_DIR}/icons/icon.png")
 			dk_createIcons("${DK_PROJECT_DIR}/icons/icon.png")
@@ -470,9 +456,6 @@ if(ANDROID)
 	endforeach()
 	
 	######################### Link Libraries ###########################
-	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	#target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
-	
 	#if(MSVC)
 	#	target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	#else()
@@ -680,7 +663,6 @@ if(EMSCRIPTEN)
 		endif()
 	endif()
 
-	
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
