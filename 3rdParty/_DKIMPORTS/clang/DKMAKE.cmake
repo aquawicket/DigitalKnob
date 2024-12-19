@@ -74,5 +74,3 @@ dk_installPackage(clang)
 #		dk_set(CLANG_CXX_COMPILER	/usr/local/bin/clang++)
 #	endif()
 #endif()
-
-

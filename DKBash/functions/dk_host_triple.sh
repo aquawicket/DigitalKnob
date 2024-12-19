@@ -171,7 +171,7 @@ dk_host_triple() {
 		elif dk_call dk_stringContains "$(try uname -o)" "Android"; then
 			UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
 		else
-			UNAME_ENV=""
+			UNAME_ENV="gcc" # Default
 		fi
 
 		#UNAME_ObjectFormat=""
