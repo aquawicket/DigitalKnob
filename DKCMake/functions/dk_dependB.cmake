@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 
 ###############################################################################
@@ -12,7 +12,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_dependB plugin)
 	dk_debugFunc()
-	message("dk_dependB ${ARGV}")
 	
 	#if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		if(plugin IN_LIST init_list)
@@ -75,5 +74,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_dependB(todo)
+	dk_dependB(todo) #TODO
 endfunction()
