@@ -3,14 +3,14 @@ message("################ windoows_x86_64_clang_toolchain.cmake ###############"
 message("######################################################################")
 
 dk_depend(msys2)
+dk_assertVar(MSYS2)
 dk_depend(clang)
 
 dk_set(MSYSTEM 						CLANG64)
-dk_prependEnvPath("${MSYS2}")
-dk_prependEnvPath("${MSYS2}/usr")
-dk_prependEnvPath("${MSYS2}/usr/bin")
-dk_prependEnvPath("${${MSYSTEM}_BIN}")
-set(ENV{ACLOCAL_PATH} "${MSYS2_DIR}/usr/share/aclocal")
+dk_prependEnvPath(					"${MSYS2}/usr/bin")
+dk_prependEnvPath(					"${${MSYSTEM}_BIN}")
+set(ENV{ACLOCAL_PATH} 				"${MSYS2_DIR}/usr/share/aclocal")
+
 dk_set(CMAKE_GENERATOR				"MinGW Makefiles")
 dk_set(CMAKE_MAKE_PROGRAM 			"${${MSYSTEM}_BIN}/mingw32-make.exe")
 dk_set(CMAKE_C_COMPILER				"${${MSYSTEM}_BIN}/clang.exe")

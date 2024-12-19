@@ -32,5 +32,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_assertVar(todo) # TODO
 endfunction()

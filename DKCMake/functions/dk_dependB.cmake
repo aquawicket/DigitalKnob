@@ -12,6 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_dependB plugin)
 	dk_debugFunc()
+	message("dk_dependB ${ARGV}")
 	
 	#if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		if(plugin IN_LIST init_list)
@@ -21,8 +22,8 @@ function(dk_dependB plugin)
 		dk_append(init_list "${plugin}")
 		
 		dk_getPathToPlugin(${plugin} plugin_path)
-		#dk_load(${plugin_path}/DKMAKE.cmake)
-		dk_depend(${plugin})
+		dk_load(${plugin_path}/DKMAKE.cmake)
+		#dk_depend(${plugin})
 		#return()
 	#endif()
 	

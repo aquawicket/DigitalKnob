@@ -14,16 +14,19 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 ### only accept windows hosts
 dk_validate(host_triple "dk_host_triple()")
-if(NOT WIN_HOST)
+dk_assertVar(host_triple)
+
+if(NOT DEFINED WIN_HOST)
 	dk_undepend(msys2)
 	return()
 endif()
+dk_pause()
 
 ############ MSYS2 variables ############
 #dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam		("${DKIMPORTS_DIR}/msys2/dkconfig.txt" MSYS2_DL)
-dk_importVariables	(${MSYS2_DL})
+dk_importVariables	("${MSYS2_DL}")
 dk_set				(MSYS2_BIN 		"${MSYS2}/usr/bin")
 dk_set				(CLANGARM64_BIN	"${MSYS2}/clangarm64/bin")
 dk_set				(CLANG32_BIN	"${MSYS2}/clang32/bin")
@@ -34,7 +37,7 @@ dk_set				(UCRT64_BIN		"${MSYS2}/ucrt64/bin")
 
 
 ############ INSTALL ############
-if((NOT DKUPDATE) AND (EXISTS "${MSYS2}/msys2.exe"))
+if((NOT DEFINED DKUPDATE) AND (EXISTS "${MSYS2}/msys2.exe"))
 	dk_notice("${MSYS2_FOLDER} is already installed, returning")
 	return()
 else()

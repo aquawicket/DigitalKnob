@@ -35,6 +35,8 @@ dk_getFileParam	("${DKIMPORTS_DIR}/cmake/dkconfig.txt" CMAKE_WIN_ARM64_DL)
 dk_getFileParam	("${DKIMPORTS_DIR}/cmake/dkconfig.txt" CMAKE_WIN_X86_DL)
 dk_getFileParam	("${DKIMPORTS_DIR}/cmake/dkconfig.txt" CMAKE_WIN_X86_64_DL)
 dk_validate		(host_triple 		"dk_host_triple()")
+
+dk_assertVar(CMAKE_WIN_X86_64_DL)
 dk_if			(ANDROID_HOST		"dk_set(CMAKE_DL ${CMAKE_LINUX_AARCH64_DL})")
 dk_if			(LINUX_ARM64_HOST	"dk_set(CMAKE_DL ${CMAKE_LINUX_AARCH64_DL})")
 dk_if			(LINUX_X86_64_HOST	"dk_set(CMAKE_DL ${CMAKE_LINUX_X86_64_DL})")
@@ -42,6 +44,7 @@ dk_if			(MAC_HOST			"dk_set(CMAKE_DL ${CMAKE_MAC_10_DL})")
 dk_if			(WIN_ARM64_HOST		"dk_set(CMAKE_DL ${CMAKE_WIN_ARM64_DL})")
 dk_if			(WIN_X86_HOST		"dk_set(CMAKE_DL ${CMAKE_WIN_X86_DL})")
 dk_if			(WIN_X86_64_HOST	"dk_set(CMAKE_DL ${CMAKE_WIN_X86_64_DL})")
+dk_assertVar(CMAKE_DL)
 dk_importVariables(${CMAKE_DL})
 
 ###### IMPORT ######
