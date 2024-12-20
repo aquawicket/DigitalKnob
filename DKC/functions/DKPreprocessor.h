@@ -33,7 +33,7 @@
 #ifndef DKPreprocessor_H
 #define DKPreprocessor_H
 
-#include "DK.h"
+//#include "DK.h"
 
 // https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
 // Fix for DKVncServer
@@ -272,6 +272,9 @@
 #	define DKCOMPILER_VERSION STR(__clang_major__) "." STR(__clang_minor__) "." STR(__clang_patchlevel__)
 #elif __clang__
 #	define DKCOMPILER "clang"
+#	define DKCOMPILER_VERSION STR(__clang_major__) "." STR(__clang_minor__) "." STR(__clang_patchlevel__)
+#elif __clang__ && __COSMOCC__
+#	define DKCOMPILER "COSMOCC clang"
 #	define DKCOMPILER_VERSION STR(__clang_major__) "." STR(__clang_minor__) "." STR(__clang_patchlevel__)
 #elif __llvm__
 #	define DKCOMPILER "llvm"

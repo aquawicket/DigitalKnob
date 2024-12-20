@@ -7,6 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ############ gradle ############
 # https://gradle.org
+# https://services.gradle.org/distributions/gradle-7.3-bin.zip
 
 ###### set ${bat} variable for windows ######
 dk_validate(host_triple "dk_host_triple()")
@@ -15,5 +16,7 @@ if(WIN_HOST)
 endif()
 
 ###### set GRADLE_USER_HOME environment variable ######
-dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
-dk_set(GRADLE_USER_HOME ${DKCACHE_DIR}/.gradle)
+#dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
+#dk_set(GRADLE_USER_HOME ${DKCACHE_DIR}/.gradle)
+dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+dk_set(GRADLE_USER_HOME ${DKDOWNLOAD_DIR}/.gradle)
