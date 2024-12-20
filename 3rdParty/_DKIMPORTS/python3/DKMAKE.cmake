@@ -21,7 +21,10 @@ else()
 	set(PYTHON3_IMPORT python3)
 endif()
 
-dk_importVariables	("${PYTHON3_IMPORT}")
+isUrl(${PYTHON3_IMPORT} isUrl)
+if(isUrl)
+	dk_importVariables("${PYTHON3_IMPORT}")
+endif()
 
 if(WIN_HOST)
 	dk_findProgram(PYTHON3_EXE python.exe "${PYTHON3_DIR}")
