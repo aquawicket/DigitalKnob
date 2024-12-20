@@ -25,7 +25,11 @@
 */
 
 #include "DKPreprocessor.h"
-//#include "DKLog.h"
+
+
+DKMESSAGE(test DKMESSAGE)
+DKWARNING(test DKWARNING)
+//DKERROR(test DKERROR)
 
 WARNING_DISABLE
 #include <stdio.h>

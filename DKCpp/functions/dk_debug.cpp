@@ -1,9 +1,9 @@
 #include "dk_debug.hpp"
 
 
-
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-#ifdef DKTEST
+#ifndef DKMAIN
+#define DKMAIN 1
 int main() {
 	dk_debug("test dk_debug()");
     return 0;

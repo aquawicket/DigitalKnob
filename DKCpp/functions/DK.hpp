@@ -5,6 +5,7 @@
 #include <string>
 #include <stdio.h>
 #include <iostream>
+#include "DKPreprocessor.hpp"
 
 // TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
 //printf("DK()\n");
@@ -39,6 +40,20 @@
 	std::string compiler         = "UNKNOWN";
 	std::string compiler_version = "UNKNOWN";
 #endif
+
+
+//################################################################################
+//# DK()
+//#
+int DK(){
+	printf("\x1B[104m \x1B[30m %s %s \x1B[0m \n\n", DKCOMPILER, DKCOMPILER_VERSION);
+	return 0;
+};
+
+
+int rtn = DK();
+
+
 
 
 

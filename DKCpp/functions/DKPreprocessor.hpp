@@ -33,6 +33,8 @@
 #ifndef DKPreprocessor_H
 #define DKPreprocessor_H
 
+#include "DK.hpp"
+
 // https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
 // Fix for DKVncServer
 #if HAVE_DKVncServer
@@ -49,12 +51,15 @@
 //#define JOIN_TWO(_1, _2) STR(_1) "." STR(_2)
 //#define JOIN_THREE(_1, _2, _3) STR(_1) "." STR(_2) "." STR(_3)
 
+// Pragma alias
+#if defined(__GNUC__) || defined(__clang__) && !defined(DO_PRAGMA)
+	#define DO_PRAGMA(x) _Pragma(#x)
+#endif
 
 // DKMESSAGE(<string>): pass a message string to the compiler
 #if defined(_MSC_VER)
     #define DKMESSAGE(x) __pragma(message(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
-	#define DO_PRAGMA(x) _Pragma(#x)
 	#define DKMESSAGE(x) DO_PRAGMA(message (#x))
 #else
 	#define DKMESSAGE(X)
@@ -268,8 +273,14 @@
 #if __clang__ && __GNUG__
 #	define DKCOMPILER "clang++"
 #	define DKCOMPILER_VERSION STR(__clang_major__) "." STR(__clang_minor__) "." STR(__clang_patchlevel__)
-#elif __clang__
+#elif __clang__ && __GNUC__
 #	define DKCOMPILER "clang"
+#	define DKCOMPILER_VERSION STR(__clang_major__) "." STR(__clang_minor__) "." STR(__clang_patchlevel__)
+#elif __clang__ && __GNUG__ && __COSMOCC__
+#	define DKCOMPILER "COSMOCC clang++"
+#	define DKCOMPILER_VERSION STR(__clang_major__) "." STR(__clang_minor__) "." STR(__clang_patchlevel__)
+#elif __GNUC__ && __COSMOCC__
+#	define DKCOMPILER "COSMOCC clang"
 #	define DKCOMPILER_VERSION STR(__clang_major__) "." STR(__clang_minor__) "." STR(__clang_patchlevel__)
 #elif __llvm__
 #	define DKCOMPILER "llvm"
@@ -420,7 +431,6 @@
     #define DISABLE_WARNING_UNREFERENCED_FUNCTION			DISABLE_WARNING(4505)
     // other warnings you want to deactivate... 
 #elif defined(__GNUC__) || defined(__clang__)
-   // #define DO_PRAGMA(X) _Pragma(#X)
     #define DISABLE_WARNING_PUSH							DO_PRAGMA(GCC diagnostic push)
     #define DISABLE_WARNING_POP								DO_PRAGMA(GCC diagnostic pop) 
     #define DISABLE_WARNING(warningName)					DO_PRAGMA(GCC diagnostic ignored #warningName)

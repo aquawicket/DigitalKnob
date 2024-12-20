@@ -32,8 +32,8 @@
 #define FATAL 9
 
 // DEFAULT
-#ifndef DEFAULT_ENABLE
-	#define DEFAULT_ENABLE 1
+#ifndef DEFAULT_ENABLED
+	#define DEFAULT_ENABLED 1
 #endif	
 #ifndef DEFAULT_COLOR
 	#define DEFAULT_COLOR white
@@ -55,8 +55,8 @@
 #endif
 
 // VERBOSE
-#ifndef VERBOSE_ENABLE
-	#define VERBOSE_ENABLE 1
+#ifndef VERBOSE_ENABLED
+	#define VERBOSE_ENABLED 1
 #endif	
 #ifndef VERBOSE_COLOR
 	#define VERBOSE_COLOR magenta
@@ -78,8 +78,8 @@
 #endif
 
 // DEBUG
-#ifndef DEBUG_ENABLE
-	#define DEBUG_ENABLE 1
+#ifndef DEBUG_ENABLED
+	#define DEBUG_ENABLED 1
 #endif	
 #ifndef DEBUG_COLOR
 	#define DEBUG_COLOR blue
@@ -101,8 +101,8 @@
 #endif
 
 // INFO
-#ifndef INFO_ENABLE
-	#define INFO_ENABLE 1
+#ifndef INFO_ENABLED
+	#define INFO_ENABLED 1
 #endif	
 #ifndef INFO_COLOR
 	#define INFO_COLOR white
@@ -124,8 +124,8 @@
 #endif
 
 // SUCCESS
-#ifndef SUCCESS_ENABLE
-	#define SUCCESS_ENABLE 1
+#ifndef SUCCESS_ENABLED
+	#define SUCCESS_ENABLED 1
 #endif	
 #ifndef SUCCESS_COLOR
 	#define SUCCESS_COLOR green
@@ -147,8 +147,8 @@
 #endif
 
 // TODO
-#ifndef TODO_ENABLE
-	#define TODO_ENABLE 1
+#ifndef TODO_ENABLED
+	#define TODO_ENABLED 1
 #endif	
 #ifndef TODO_COLOR
 	#define TODO_COLOR lblue
@@ -170,8 +170,8 @@
 #endif
 
 // NOTICE
-#ifndef NOTICE_ENABLE
-	#define NOTICE_ENABLE 1
+#ifndef NOTICE_ENABLED
+	#define NOTICE_ENABLED 1
 #endif	
 #ifndef NOTICE_COLOR
 	#define NOTICE_COLOR lyellow
@@ -193,8 +193,8 @@
 #endif
 
 // FIXME
-#ifndef FIXME_ENABLE
-	#define FIXME_ENABLE 1
+#ifndef FIXME_ENABLED
+	#define FIXME_ENABLED 1
 #endif	
 #ifndef FIXME_COLOR
 	#define FIXME_COLOR lyellow
@@ -216,8 +216,8 @@
 #endif
 
 // WARNING
-#ifndef WARNING_ENABLE
-	#define WARNING_ENABLE 1
+#ifndef WARNING_ENABLED
+	#define WARNING_ENABLED 1
 #endif	
 #ifndef WARNING_COLOR
 	#define WARNING_COLOR yellow
@@ -239,8 +239,8 @@
 #endif
 
 // ERROR
-#ifndef ERROR_ENABLE
-	#define ERROR_ENABLE 1
+#ifndef ERROR_ENABLED
+	#define ERROR_ENABLED 1
 #endif	
 #ifndef ERROR_COLOR
 	#define ERROR_COLOR lred
@@ -262,8 +262,8 @@
 #endif
 
 // FATAL
-#ifndef FATAL_ENABLE
-	#define FATAL_ENABLE 1
+#ifndef FATAL_ENABLED
+	#define FATAL_ENABLED 1
 #endif	
 #ifndef FATAL_COLOR
 	#define FATAL_COLOR red
@@ -295,7 +295,7 @@ void dk_log(int level, const char* message)
 		return;
 	#endif
 	
-	int level_enable        = DEFAULT_ENABLE;
+	int level_enable        = DEFAULT_ENABLED;
 	std::string level_color = DEFAULT_COLOR;
 	std::string level_tag   = DEFAULT_TAG;
 	int level_pause	        = DEFAULT_PAUSE;
@@ -303,7 +303,7 @@ void dk_log(int level, const char* message)
 	int level_line          = DEFAULT_LINE;
 	int level_halt          = DEFAULT_HALT;
 	if(level == VERBOSE){
-		level_enable  = VERBOSE_ENABLE;
+		level_enable  = VERBOSE_ENABLED;
 		level_color   = VERBOSE_COLOR;
 		level_tag     = VERBOSE_TAG;
 		level_pause	  = VERBOSE_PAUSE;
@@ -312,7 +312,7 @@ void dk_log(int level, const char* message)
 		level_halt    = VERBOSE_HALT;
 	}
 	if(level == DEBUG){
-		level_enable  = DEBUG_ENABLE;
+		level_enable  = DEBUG_ENABLED;
 		level_color   = DEBUG_COLOR;
 		level_tag     = DEBUG_TAG;
 		level_pause	  = DEBUG_PAUSE;
@@ -321,7 +321,7 @@ void dk_log(int level, const char* message)
 		level_halt    = DEBUG_HALT;
 	}
 	if(level == INFO){
-		level_enable  = INFO_ENABLE;
+		level_enable  = INFO_ENABLED;
 		level_color   = INFO_COLOR;
 		level_tag     = INFO_TAG;
 		level_pause	  = INFO_PAUSE;
@@ -330,7 +330,7 @@ void dk_log(int level, const char* message)
 		level_halt    = INFO_HALT;
 	}
 	if(level == SUCCESS){
-		level_enable  = SUCCESS_ENABLE;
+		level_enable  = SUCCESS_ENABLED;
 		level_color   = SUCCESS_COLOR;
 		level_tag     = SUCCESS_TAG;
 		level_pause	  = SUCCESS_PAUSE;
@@ -339,7 +339,7 @@ void dk_log(int level, const char* message)
 		level_halt    = SUCCESS_HALT;
 	}
 	if(level == TODO){
-		level_enable  = TODO_ENABLE;
+		level_enable  = TODO_ENABLED;
 		level_color   = TODO_COLOR;
 		level_tag     = TODO_TAG;
 		level_pause	  = TODO_PAUSE;
@@ -348,7 +348,7 @@ void dk_log(int level, const char* message)
 		level_halt    = TODO_HALT;
 	}
 	if(level == NOTICE){
-		level_enable  = NOTICE_ENABLE;
+		level_enable  = NOTICE_ENABLED;
 		level_color   = NOTICE_COLOR;
 		level_tag     = NOTICE_TAG;
 		level_pause	  = NOTICE_PAUSE;
@@ -357,7 +357,7 @@ void dk_log(int level, const char* message)
 		level_halt    = NOTICE_HALT;
 	}
 	if(level == FIXME){
-		level_enable  = FIXME_ENABLE;
+		level_enable  = FIXME_ENABLED;
 		level_color   = FIXME_COLOR;
 		level_tag     = FIXME_TAG;
 		level_pause	  = FIXME_PAUSE;
@@ -366,7 +366,7 @@ void dk_log(int level, const char* message)
 		level_halt    = FIXME_HALT;
 	}
 	if(level == WARNING){
-		level_enable  = WARNING_ENABLE;
+		level_enable  = WARNING_ENABLED;
 		level_color   = WARNING_COLOR;
 		level_tag     = WARNING_TAG;
 		level_pause	  = WARNING_PAUSE;
@@ -375,7 +375,7 @@ void dk_log(int level, const char* message)
 		level_halt    = WARNING_HALT;
 	}
 	if(level == ERROR){
-		level_enable  = ERROR_ENABLE;
+		level_enable  = ERROR_ENABLED;
 		level_color   = ERROR_COLOR;
 		level_tag     = ERROR_TAG;
 		level_pause	  = ERROR_PAUSE;
@@ -384,7 +384,7 @@ void dk_log(int level, const char* message)
 		level_halt    = ERROR_HALT;
 	}
 	if(level == FATAL){
-		level_enable  = FATAL_ENABLE;
+		level_enable  = FATAL_ENABLED;
 		level_color   = FATAL_COLOR;
 		level_tag     = FATAL_TAG;
 		level_pause	  = FATAL_PAUSE;
