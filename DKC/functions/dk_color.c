@@ -2,7 +2,8 @@
 #include "dk_echo.h"
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-#ifdef DKTEST
+#ifndef DKMAIN
+#define DKMAIN = 1
 int main() {
     dk_echo("\n");
 

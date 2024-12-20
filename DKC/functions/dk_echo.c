@@ -2,7 +2,8 @@
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-#ifdef DKTEST
+#ifndef DKMAIN
+#define DKMAIN = 1
 int main() {
 	dk_echo("test dk_echo");
     return 0;

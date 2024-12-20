@@ -219,7 +219,8 @@ void DKApp_Exit(){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-#ifdef DKTEST
+#ifndef DKMAIN
+#define DKMAIN = 1
 #include <stdio.h>
 int main(int argc, char** argv) {
 	return DKApp_DKApp(argc, argv);

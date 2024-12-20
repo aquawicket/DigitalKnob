@@ -36,7 +36,8 @@ int endianness(void) {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-#ifdef DKTEST
+#ifndef DKMAIN
+#define DKMAIN = 1
 #include <stdio.h>
 int main() {
 	switch(endianness()){

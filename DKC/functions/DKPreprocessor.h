@@ -51,13 +51,16 @@
 //#define JOIN_TWO(_1, _2) STR(_1) "." STR(_2)
 //#define JOIN_THREE(_1, _2, _3) STR(_1) "." STR(_2) "." STR(_3)
 
+// Pragma alias
+//#elif defined(__GNUC__) || defined(__clang__) && !defined(DO_PRAGMA)
+//	#define DO_PRAGMA(x) _Pragma(#x)
+//#endf
 
 // DKMESSAGE(<string>): pass a message string to the compiler
 #if defined(_MSC_VER)
     #define DKMESSAGE(x) __pragma(message(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
-	#define DO_PRAGMA(x) _Pragma(#x)
-	#define DKMESSAGE(x) DO_PRAGMA(message (#x))
+	#define DKMESSAGE(x) DO_PRAGMA(GCC message #x)
 #else
 	#define DKMESSAGE(X)
 #endif
@@ -67,7 +70,8 @@
 #if defined(_MSC_VER)
     #define DKWARNING(x) __pragma(warning(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
-	#define DKWARNING(x) DO_PRAGMA(GCC warning #x)
+	#define DO_PRAGMA(x) _Pragma("#x")
+	#define DKWARNING(x) DO_PRAGMA(GCC warning "#x")
 #else
 	#define DKWARNING(X)
 #endif
@@ -425,7 +429,7 @@
     #define DISABLE_WARNING_UNREFERENCED_FUNCTION			DISABLE_WARNING(4505)
     // other warnings you want to deactivate... 
 #elif defined(__GNUC__) || defined(__clang__)
-   // #define DO_PRAGMA(X) _Pragma(#X)
+    //#define DO_PRAGMA(X) _Pragma(#X)
     #define DISABLE_WARNING_PUSH							DO_PRAGMA(GCC diagnostic push)
     #define DISABLE_WARNING_POP								DO_PRAGMA(GCC diagnostic pop) 
     #define DISABLE_WARNING(warningName)					DO_PRAGMA(GCC diagnostic ignored #warningName)
@@ -441,6 +445,12 @@
 #endif
 # define WARNING_DISABLE	DISABLE_WARNING_PUSH
 # define WARNING_ENABLE		DISABLE_WARNING_POP
+
+
+
+
+
+
 
 
 static int PrintPreprocessor();

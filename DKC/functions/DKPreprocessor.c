@@ -85,7 +85,8 @@ int PrintPreprocessor(){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-#ifdef DKTEST
+#ifndef DKMAIN
+#define DKMAIN = 1
 int main() {
 	PrintPreprocessor();
     return 0;
