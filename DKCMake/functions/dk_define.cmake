@@ -22,7 +22,6 @@ function(dk_define str)
 	dk_append(DKDEFINES_LIST ${str})
 	add_definitions(-D${str})
 endfunction()
-#dk_createOsMacros("dk_define")
 
 
 
@@ -32,5 +31,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_define(todo) #TODO
 endfunction()

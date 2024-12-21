@@ -1,6 +1,5 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include(${DKCMAKE_FUNCTIONS_DIR}/dk_createOsMacros.cmake)
 include_guard()
 
 ###############################################################################
@@ -23,7 +22,7 @@ function(dk_set variable) #, value)
 	
 #	dk_printVar(${ARGV0})
 endfunction()
-#dk_createOsMacros("dk_set")
+
 
 
 

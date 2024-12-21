@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_move(from to) OVERWRITE NO_HALT
@@ -38,7 +38,8 @@ function(dk_move from to) # FLAGS: OVERWRITE, NO_HALT
 	
 	file(RENAME ${from} ${to})
 endfunction()
-#dk_createOsMacros("dk_move")
+
+
 
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_makeDirectory(path)
@@ -12,10 +12,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_makeDirectory)
 	dk_debugFunc(1)
 	
-	set(path ${ARGV0})
+	set(path "${ARGV0}")
 	make_directory("${path}")  # requires full path
 endfunction()
-#dk_createOsMacros("dk_makeDirectory")
+
 
 
 

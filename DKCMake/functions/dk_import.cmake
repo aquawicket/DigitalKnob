@@ -70,7 +70,6 @@ function(dk_import url)
 	endif()
 	
 endfunction()
-#dk_createOsMacros("dk_import")
 
 
 

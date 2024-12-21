@@ -139,7 +139,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	endif()
 	
 endfunction()
-#dk_createOsMacros("dk_configure")
+
 
 
 

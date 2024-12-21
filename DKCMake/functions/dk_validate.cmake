@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_validate(variable "code")
@@ -27,7 +27,7 @@ function(dk_validate)# variable code)
 	#dk_echo("${variable} = ${${variable}}")
 	#dk_printVar(${variable})
 endfunction()
-#dk_createOsMacros("dk_validate")
+
 
 
 

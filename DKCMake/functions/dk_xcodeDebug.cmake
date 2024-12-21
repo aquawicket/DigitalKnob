@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_xcodeDebug(path) #target
@@ -29,7 +29,7 @@ function(dk_xcodeDebug path)
 		endif()
 	endif()
 endfunction()
-#dk_createOsMacros("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
+
 
 
 

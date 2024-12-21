@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_install(PLUGIN_IMPORT_NAME)
@@ -202,7 +202,6 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		dk_delete(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
 	endif()
 endfunction()
-#dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
 
 
@@ -212,5 +211,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_install(todo)	#TODO
 endfunction()

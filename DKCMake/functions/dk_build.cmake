@@ -148,7 +148,6 @@ function(dk_build path) #target NO_HALT
 	
 	dk_fatal("dk_build(): ${path}/${CONFIG_PATH} has no buildable files")
 endfunction()
-#dk_createOsMacros("dk_build")
 
 
 
@@ -158,7 +157,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_build(todo) #TODO
 endfunction()

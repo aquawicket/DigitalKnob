@@ -28,7 +28,6 @@ function(dk_findLibrary name)
 		dk_lib(${name})
 	endif()
 endfunction()
-#dk_createOsMacros("dk_findLibrary")
 
 
 
@@ -39,5 +38,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_findLibrary(todo) # TODO
 endfunction()

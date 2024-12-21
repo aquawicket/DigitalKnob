@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_libDebug(lib_path)
@@ -45,7 +45,7 @@ function(dk_libDebug lib_path)
 	endif()
 	
 endfunction()
-#dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
+
 
 
 
@@ -55,5 +55,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_libDebug(todo) #TODO
 endfunction()

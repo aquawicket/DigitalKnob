@@ -72,7 +72,7 @@ function(dk_msys2Bash)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
 	endif()
 endfunction()
-#dk_createOsMacros("dk_msys2Bash")
+
 
 
 
@@ -83,5 +83,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_msys2Bash(todo) # TODO
 endfunction()

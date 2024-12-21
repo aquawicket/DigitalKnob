@@ -60,7 +60,6 @@ function(dk_copy from to) # OVERWRITE NO_HALT
 		endif()
 	endif()
 endfunction()
-#dk_createOsMacros("dk_copy")
 
 
 
@@ -70,5 +69,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_copy(todo) #TODO
 endfunction()

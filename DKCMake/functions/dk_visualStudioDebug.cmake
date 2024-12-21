@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_visualStudioDebug(path) #target #arch
@@ -41,7 +41,7 @@ function(dk_visualStudioDebug path) #target #arch
 		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${triple})
 	endif()
 endfunction()
-#dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
+
 
 
 

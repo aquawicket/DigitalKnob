@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_ndkDebug(path)
@@ -25,7 +25,7 @@ function(dk_ndkDebug path)
 		endif()
 	endif()
 endfunction()
-#dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
+
 
 
 
