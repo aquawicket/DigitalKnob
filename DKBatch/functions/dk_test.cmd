@@ -1,5 +1,7 @@
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+echo 0 = %~f0
+echo * = %*
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~f0 %*
 
 ::####################################################################
 ::# dk_test(args1 arg2 rtn_var)
