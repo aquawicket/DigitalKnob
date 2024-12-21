@@ -16,7 +16,7 @@ function(dk_xcode)
 	dk_xcodeDebug(${ARGV})
 	dk_xcodeRelease(${ARGV})
 endfunction()
-dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
 
 
 

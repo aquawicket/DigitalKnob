@@ -17,9 +17,15 @@ dk_load(dk_builder)
 # https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java11/java110151/jdk-11.0.15.1_windows-x64_bin.zip
 # https://gist.github.com/douglarek/bbda8cc23a562cb5d5798717d57bc9e9
 
-WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
-#MAC_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz)
-#LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz)
+if(WIN_HOST)
+	dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
+endif()
+#if(MAC_HOST)
+#	dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz)
+#endif()
+#if(LINUX_HOST)
+#	dk_import	(https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz)
+#endif()
 
 if(WIN_HOST)
 	###### JAVA_VERSION ######

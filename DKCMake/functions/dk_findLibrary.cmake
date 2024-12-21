@@ -28,7 +28,7 @@ function(dk_findLibrary name)
 		dk_lib(${name})
 	endif()
 endfunction()
-dk_createOsMacros("dk_findLibrary")
+#dk_createOsMacros("dk_findLibrary")
 
 
 

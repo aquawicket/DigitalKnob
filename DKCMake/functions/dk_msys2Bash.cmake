@@ -72,7 +72,7 @@ function(dk_msys2Bash)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
 	endif()
 endfunction()
-dk_createOsMacros("dk_msys2Bash")
+#dk_createOsMacros("dk_msys2Bash")
 
 
 

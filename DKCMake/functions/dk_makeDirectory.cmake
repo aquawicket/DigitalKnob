@@ -15,7 +15,7 @@ function(dk_makeDirectory)
 	set(path ${ARGV0})
 	make_directory("${path}")  # requires full path
 endfunction()
-dk_createOsMacros("dk_makeDirectory")
+#dk_createOsMacros("dk_makeDirectory")
 
 
 

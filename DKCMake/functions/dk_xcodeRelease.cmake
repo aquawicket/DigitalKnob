@@ -29,7 +29,7 @@ function(dk_xcodeRelease path)
 		endif()
 	endif()
 endfunction()
-dk_createOsMacros("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 

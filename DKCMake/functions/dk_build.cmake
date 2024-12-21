@@ -148,7 +148,7 @@ function(dk_build path) #target NO_HALT
 	
 	dk_fatal("dk_build(): ${path}/${CONFIG_PATH} has no buildable files")
 endfunction()
-dk_createOsMacros("dk_build")
+#dk_createOsMacros("dk_build")
 
 
 

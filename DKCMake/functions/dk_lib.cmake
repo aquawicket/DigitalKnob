@@ -29,7 +29,7 @@ function(dk_lib lib_path)
 		endif()	
 	endforeach()
 endfunction()
-dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 
 
 

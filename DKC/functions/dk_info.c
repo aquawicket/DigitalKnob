@@ -1,7 +1,5 @@
 #include "dk_info.h"
 
-
-
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN = 1

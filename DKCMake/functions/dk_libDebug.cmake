@@ -45,7 +45,7 @@ function(dk_libDebug lib_path)
 	endif()
 	
 endfunction()
-dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 

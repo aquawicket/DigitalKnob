@@ -22,7 +22,7 @@ function(dk_define str)
 	dk_append(DKDEFINES_LIST ${str})
 	add_definitions(-D${str})
 endfunction()
-dk_createOsMacros("dk_define")
+#dk_createOsMacros("dk_define")
 
 
 

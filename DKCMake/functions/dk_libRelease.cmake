@@ -45,7 +45,7 @@ function(dk_libRelease lib_path)
 	endif()
 	
 endfunction()
-dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 

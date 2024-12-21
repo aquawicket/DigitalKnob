@@ -1,15 +1,15 @@
 // https://sourceforge.net/p/predef/wiki/Endianness/
 
-#include "endianness.h"
+#include "dk_endianness.h"
 #include <stdint.h>
 
 
 //##########################################################################
-// int endianness()
+// int dk_endianness()
 //
 //	Get the endianness of the system at run time.
 //
-int endianness(void) {
+int dk_endianness(void) {
 	union{
 		uint32_t value;
 		uint8_t data[sizeof(uint32_t)];
@@ -40,7 +40,7 @@ int endianness(void) {
 #define DKMAIN = 1
 #include <stdio.h>
 int main() {
-	switch(endianness()){
+	switch(dk_endianness()){
 		case ENDIAN_BIG:			printf("endianness = ENDIAN_BIG\n"); 			break;
 		case ENDIAN_LITTLE:			printf("endianness = ENDIAN_LITTLE\n"); 		break;
 		case ENDIAN_BIG_WORD:		printf("endianness = ENDIAN_BIG_WORD\n"); 		break;

@@ -15,7 +15,7 @@ function(dk_ndk)
 	dk_ndkDebug(${ARGV})
 	dk_ndkRelease(${ARGV})
 endfunction()
-dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
 
 

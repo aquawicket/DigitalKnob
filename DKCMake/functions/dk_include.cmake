@@ -39,7 +39,7 @@ function(dk_include path)
 	endif()
 
 endfunction()
-dk_createOsMacros("dk_include")
+#dk_createOsMacros("dk_include")
 
 
 

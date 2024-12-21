@@ -42,7 +42,7 @@ function(dk_visualStudioRelease path) #target #arch
 		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${triple})
 	endif()
 endfunction()
-dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 

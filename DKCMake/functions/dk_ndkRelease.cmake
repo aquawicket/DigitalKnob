@@ -25,7 +25,7 @@ function(dk_ndkRelease path)
 		endif()
 	endif()
 endfunction()
-dk_createOsMacros("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 

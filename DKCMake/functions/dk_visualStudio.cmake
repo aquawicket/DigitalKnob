@@ -15,7 +15,7 @@ function(dk_visualStudio)
 	dk_visualStudioDebug(${ARGV})
 	dk_visualStudioRelease(${ARGV})
 endfunction()
-dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 
 
 

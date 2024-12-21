@@ -27,7 +27,7 @@ function(dk_unset variable)
 	unset(${variable} PARENT_SCOPE)
 	
 endfunction()
-dk_createOsMacros("dk_unset")
+#dk_createOsMacros("dk_unset")
 
 
 
