@@ -25,7 +25,7 @@
 */
 
 //#include "DK/stdafx.h"
-#include "DKApp.h"
+#include "dk_app.h"
 //#include "DK/DKOsInfo.h"
 //#include "DK/DKFile.h"
 
@@ -41,11 +41,11 @@
 #endif
 //WARNING_ENABLE
 
-int    DKApp_argc;
-char** DKApp_argv;
-bool   DKApp_active = false;
-bool   DKApp_paused = false;
-//std_vector<std_function<void()> > DKApp_loop_funcs;
+int    dk_app_argc;
+char** dk_app_argv;
+bool   dk_app_active = false;
+bool   dk_app_paused = false;
+//std_vector<std_function<void()> > dk_app_loop_funcs;
 
 
 /*
@@ -59,7 +59,7 @@ catch (...){
 		DKClass_CallFunc("DKDebug_ShowStackTrace");
 		boxer_Selection sel = boxer_show("An exception in the main thread has occured.\n", "EXCEPTION", boxer_Style_Error, boxer_Buttons_YesNo);
 		if(sel == boxer_Selection_Yes){
-			DKApp_Exit();
+			dk_app_Exit();
 			return false;
 		}
 	}
@@ -68,15 +68,15 @@ catch (...){
 
 
 /*
-DKApp_DKApp(_argc, _argv)
+dk_app_dk_app(_argc, _argv)
 	(Main entry point)
 	_argc: (int) The number of arguments provided
 	_argv: (char**) The values of the arguments
 */
-DKApp_DKApp(int _argc, char** _argv){
+dk_app_dk_app(int _argc, char** _argv){
 	//DKDEBUGFUNC(_argc, _argv);
-	DKApp_argc = _argc;
-	DKApp_argv = _argv;
+	dk_app_argc = _argc;
+	dk_app_argv = _argv;
 	//DKUtil_SetMainThreadNow();
 
 	//DKPreprocessor_PrintPreprocessor();
@@ -127,9 +127,9 @@ DKApp_DKApp(int _argc, char** _argv){
 	DKString time;
 	DKUtil_GetTime(time);
 	DKINFO(date + " " + time + "\n");
-	if (DKApp_argc > 1){
-		for (int i = 1; i < DKApp_argc; ++i){
-			DKINFO("argv[" + toString(i) + "] = " + toString(DKApp_argv[i]) + "\n"); //print args
+	if (dk_app_argc > 1){
+		for (int i = 1; i < dk_app_argc; ++i){
+			DKINFO("argv[" + toString(i) + "] = " + toString(dk_app_argv[i]) + "\n"); //print args
 		}
 	}
 	//Display app path information
@@ -151,44 +151,44 @@ DKApp_DKApp(int _argc, char** _argv){
 	return 0;
 }
 
-void DKApp_Init(){
+void dk_app_Init(){
 	//DKDEBUGFUNC();
-	DKApp_active = true;
+	dk_app_active = true;
 }
 
 #if EMSCRIPTEN
-EM_BOOL DKApp_EM_DoFrame(double time, void* userData) {
+EM_BOOL dk_app_EM_DoFrame(double time, void* userData) {
 	if (paused) {
 		DKUtil_Sleep(100);
 		return EM_TRUE; // Return true to keep the loop running.
 	}
 	DKUtil_LimitFramerate();
-	DKApp_CallLoops(); //Call loop functions
+	dk_app_CallLoops(); //Call loop functions
 	return EM_TRUE; // Return true to keep the loop running.
 }
 #endif
 
-void DKApp_Loop(){
+void dk_app_Loop(){
 	//DKDEBUGFUNC();
 #if EMSCRIPTEN
 	// Receives a function to call and some user data to provide it.
-	emscripten_request_animation_frame_loop(DKApp_EM_DoFrame, 0);
+	emscripten_request_animation_frame_loop(dk_app_EM_DoFrame, 0);
 #else
-	while(DKApp_active)
-		DKApp_DoFrame();
+	while(dk_app_active)
+		dk_app_DoFrame();
 #endif
 }
 
-void DKApp_DoFrame(){
-	if(DKApp_paused){ 
+void dk_app_DoFrame(){
+	if(dk_app_paused){ 
 		//DKUtil_Sleep(100);
 		return;
 	}
 	//DKUtil_LimitFramerate();
-	DKApp_CallLoops(); //Call loop functions
+	dk_app_CallLoops(); //Call loop functions
 }
 
-void DKApp_CallLoops(){
+void dk_app_CallLoops(){
 	/*
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
 		//if(active)
@@ -197,9 +197,9 @@ void DKApp_CallLoops(){
 	*/
 }
 
-void DKApp_Exit(){
+void dk_app_Exit(){
 	//DKDEBUGFUNC();
-	DKApp_active = false;
+	dk_app_active = false;
 	//DKUtil_CallExit();
 	//exit(0);
 }
@@ -223,6 +223,6 @@ void DKApp_Exit(){
 #define DKMAIN = 1
 #include <stdio.h>
 int main(int argc, char** argv) {
-	return DKApp_DKApp(argc, argv);
+	return dk_app_dk_app(argc, argv);
 }
 #endif

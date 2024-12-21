@@ -32,8 +32,8 @@
 // https://stackoverflow.com/questions/471935/user-warnings-on-msvc-and-gcc
 // https://stackoverflow.com/questions/171435/portability-of-warning-preprocessor-directive
 #pragma once
-#ifndef DKPreprocessor_H
-#define DKPreprocessor_H
+#ifndef dk_preprocessor_h
+#define dk_preprocessor_h
 
 #include <stdio.h>
 
@@ -535,4 +535,4 @@
 static int PrintPreprocessor();
 
 
-#endif //DKPreprocessor_H
+#endif //dk_preprocessor_h

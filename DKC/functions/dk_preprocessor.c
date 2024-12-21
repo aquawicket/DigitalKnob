@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#include "DKPreprocessor.h"
+#include "dk_preprocessor.h"
 
 
 DKMESSAGE(test DKMESSAGE)
@@ -39,7 +39,7 @@ WARNING_ENABLE
 
 
 int PrintPreprocessor(){
-	printf("DKPreprocessor::PrintPreprocessor()\n");
+	printf("dk_preprocessor::PrintPreprocessor()\n");
 
 #ifdef RTTI_ENABLED
 	printf("RTTI_ENABLED = TRUE\n");

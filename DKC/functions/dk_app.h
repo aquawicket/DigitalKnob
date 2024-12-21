@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKApp_H
-#define DKApp_H
+#ifndef dk_app_h
+#define dk_app_h
 
 #include "DK.h"
 #include <stdbool.h>
@@ -34,11 +34,11 @@
 extern const char* BUILD_DATE;
 extern const char* BUILD_TIME;
 
-//class DKApp{
+//class dk_app{
 //public:
 
 /**
-*	@function DKApp(argc, argv) - This is the entry point for digitalknob
+*	@function dk_app(argc, argv) - This is the entry point for digitalknob
 *
 *	@param argc ::  Non-negative value representing the number of arguments passed to the program from the environment in which the program is run.
 *	@param argv ::	Pointer to the first element of an array of argc + 1 pointers, of which the last one is null and the previous ones, if any, 
@@ -48,23 +48,23 @@ extern const char* BUILD_TIME;
 *	@returns    ::	void
 *	https://en.cppreference.com/w/cpp/language/main_function
 */
-	int DKApp_DKApp(int argc, char** argv);
-	static void DKApp_Init();
-	static void DKApp_Load(){};
-	static void DKApp_Loop();
+	int dk_app_dk_app(int argc, char** argv);
+	static void dk_app_Init();
+	static void dk_app_Load(){};
+	static void dk_app_Loop();
 #if EMSCRIPTEN
 	static EM_BOOL EM_DoFrame(double time, void* userData);
 #endif
-	static void DKApp_DoFrame();
-	static void DKApp_CallLoops();
+	static void dk_app_DoFrame();
+	static void dk_app_CallLoops();
 	
 	//TODO: https://en.cppreference.com/w/cpp/utility/program/exit
-	static void DKApp_Exit();
+	static void dk_app_Exit();
 
-	bool   DKApp_active;
-	bool   DKApp_paused;
-	int    DKApp_argc;
-	char** DKApp_argv;
+	bool   dk_app_active;
+	bool   dk_app_paused;
+	int    dk_app_argc;
+	char** dk_app_argv;
 
 	/*
 	template<class T>
@@ -99,4 +99,4 @@ extern const char* BUILD_TIME;
 	//static std::vector<std::function<void()> > loop_funcs;
 //};
 
-#endif //DKApp_H
+#endif //dk_app_h

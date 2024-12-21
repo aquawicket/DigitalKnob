@@ -1,7 +1,7 @@
-//###### endianness.h ######
+//###### dk_endianness_h ######
 #pragma once
-#ifndef endianness_H
-#define endianness_H
+#ifndef dk_endianness_h
+#define dk_endianness_h
 
 enum {
 	ENDIAN_UNKNOWN,
@@ -11,6 +11,6 @@ enum {
 	ENDIAN_LITTLE_WORD /* Middle-endian, PDP-11 style */
 };
 
-int endianness(void);
+int dk_endianness(void);
 
-#endif //endianness_H
+#endif //dk_endianness_h
