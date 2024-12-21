@@ -5,7 +5,7 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main() {
-	dk_echo(compiler+" "+compiler_version);
+	dk_echo(STR(DKCOMPILER DKCOMPILER_VERSION));
     return 0;
 }
 #endif
