@@ -15,25 +15,37 @@
 #include <stdio.h>
 void dk_callDKBatch(char* func, char* args, char* rtn_var){
 	printf("%s(%s)\n", func, args);
-	
-	// %dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
+// main( int argc, char *argv[] )
+
 	char* CMD_EXE = "cmd.exe";
 	char* DKSCRIPT_PATH = "C:\\Users\\Administrator\\digitalknob\\Development\\DKC\\functions\\dk_callDKBatch.h";
 	char* DKBATCH_FUNCTIONS_DIR_ = "C:\\Users\\Administrator\\digitalknob\\Development\\DKBatch\\functions\\";
-	
-	//:: Call DKBatch function
+
 	char DKBATCH_COMMAND[512];
 	int err = sprintf(DKBATCH_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKBATCH_FUNCTIONS_DIR_=%s) & (set PATH=!DKBATCH_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKBATCH_FUNCTIONS_DIR_, func, args);
     printf("%s\n", DKBATCH_COMMAND);
-	int exit_code = system(DKBATCH_COMMAND);
-
-
-	//for /f "delims=" %%Z in ('%DKBATCH_COMMAND%') do (
-    //    echo %%Z                &rem  Display the other shell's stdout
-    //    set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
-	//)
-    //::echo rtn_value = !rtn_value!
 	
+	FILE *fp;
+	char path[1035];
+
+	/* Open the command for reading. */
+	//int exit_code = system(DKBATCH_COMMAND);
+	fp = popen(DKBATCH_COMMAND, "r");
+	if (fp == NULL) {
+		printf("Failed to run command\n" );
+		exit(1);
+	}
+
+	/* Read the output a line at a time - output it. */
+	while (fgets(path, sizeof(path), fp) != NULL) {
+		strcpy(rtn_var, path);
+		printf("> %s", rtn_var);
+	}
+
+	/* close */
+	pclose(fp);
+
+	printf("> %s", rtn_var);
 	//if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
 };
 
