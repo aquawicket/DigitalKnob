@@ -264,7 +264,6 @@ function(dk_importVariables)
 	##################################################
 	############ PLUGIN_INSTALL VARIABLES ############
 	##################################################
-	message("############ PLUGIN_INSTALL VARIABLES ############")
 	# PLUGIN_INSTALL_NAME
 	unset(PLUGIN_INSTALL_NAME)
 	if(NAME)
@@ -349,7 +348,12 @@ function(dk_importVariables)
 	##############################################
 	############# <PLUGIN>_VARIABLES #############
 	##############################################
-	message("############# <PLUGIN>_VARIABLES #############")
+	###### Print the current plugin to the window title bar ######
+	dk_assertVar(ENV{CURRENT_PLUGIN})
+	dk_title("CURRENT_PLUGIN -> $ENV{CURRENT_PLUGIN}")
+	
+	
+	message("############# $ENV{CURRENT_PLUGIN}_VARIABLES #############")
 	if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_GIT_NAME_LOWER)
 		if(NOT "${PLUGIN_IMPORT_NAME_LOWER}" STREQUAL "${PLUGIN_GIT_NAME_LOWER}")
 			dk_warning("PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match ")
@@ -363,12 +367,6 @@ function(dk_importVariables)
 	#   Now the CURRENT_PLUGIN is ZLIB. Zlib get's configured and built and returns back the libpng to configure, problem is CURRENT_PLUGIN is still ZLIB.
 	#   So we need to pop zlib off of the stack when it completes so out CURRENT_PLUGIN points back to libpng. Currently dk_importVariables is how we
 	#   push the current plugin to the stack, we just need to find a good place to pop from the stack.
-	
-	
-	###### Print the current plugin to the window title bar ######
-	dk_assertVar(ENV{CURRENT_PLUGIN})
-	dk_title("CURRENT_PLUGIN -> $ENV{CURRENT_PLUGIN}")
-	
 	
 	# <PLUGIN>
 	unset($ENV{CURRENT_PLUGIN})
@@ -427,9 +425,9 @@ function(dk_importVariables)
 	############# TARGET <PLUGIN>_VARIABLES #############
 	#####################################################
 	# These variables require a target_triple
-	if(NOT triple)
-		return()
-	endif()
+#	if(NOT triple)
+#		return()
+#	endif()
 	dk_validate(triple "dk_target_triple()")
 	
 	# <PLUGIN>_TRIPLE_DIR
@@ -451,14 +449,14 @@ function(dk_importVariables)
 	unset($ENV{CURRENT_PLUGIN}_BUILD_DIR)
 	if(BUILD_PATH)
 		dk_set($ENV{CURRENT_PLUGIN}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${BUILD_PATH})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_BUILD_DIR)						# ZLIB_BUILD_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+#		dk_printVar($ENV{CURRENT_PLUGIN}_BUILD_DIR)							# ZLIB_BUILD_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	endif()
 	
 	# <PLUGIN>_DEBUG_DIR
 	unset($ENV{CURRENT_PLUGIN}_DEBUG_DIR)
 	if(DEBUG_DIR)
 		dk_set($ENV{CURRENT_PLUGIN}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${DEBUG_DIR})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_DEBUG_DIR)						# ZLIB_DEBUG_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+#		dk_printVar($ENV{CURRENT_PLUGIN}_DEBUG_DIR)							# ZLIB_DEBUG_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	endif()
 	
 	# <PLUGIN>_RELEASE_DIR
@@ -487,6 +485,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	#dk_set(IMPORT_PATH "C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/git")
 	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"  NAME git   ROOT ${DKTOOLS_DIR})
 endfunction()
