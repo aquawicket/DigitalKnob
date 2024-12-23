@@ -12,6 +12,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://github.com/openssl/openssl/issues/14131 # iOS & iOS-Simulator
 # https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
+#if(NOT DEFINED ENV{CURRENT_PLUGIN})
+#	dk_envList(PLUGIN PUSH "OPENSSL")
+#endif()
 
 dk_validate(triple "dk_target_triple()")
 ### DEPEND ###
@@ -53,7 +56,13 @@ if(MSVC)
 		dk_libRelease	(${OPENSSL_DIR}/lib64/libeay32MT.lib			LIB_EAY_RELEASE)
 		dk_libDebug		(${OPENSSL_DIR}/lib64/ssleay32MTd.lib			SSL_EAY_DEBUG)
 		dk_libRelease	(${OPENSSL_DIR}/lib64/ssleay32MT.lib			SSL_EAY_RELEASE)
-	endif()	
+	endif()
+	dk_libDebug			(${OPENSSL_CONFIG_DIR}/libcrypto.lib			OPENSSL_CRYPTO_DEBUG_LIBRARY)
+	dk_libRelease		(${OPENSSL_CONFIG_DIR}/libcrypto.lib			OPENSSL_CRYPTO_RELEASE_LIBRARY)
+	dk_libDebug			(${OPENSSL_CONFIG_DIR}/libssl.lib				OPENSSL_SSL_DEBUG_LIBRARY)
+	dk_libRelease		(${OPENSSL_CONFIG_DIR}/libssl.lib				OPENSSL_SSL_RELEASE_LIBRARY)
+	dk_libDebug			(${OPENSSL_CONFIG_DIR}/providers/liblegacy.lib	OPENSSL_LEGACY_DEBUG_LIBRARY)
+	dk_libRelease		(${OPENSSL_CONFIG_DIR}/providers/liblegacy.lib	OPENSSL_LEGACY_RELEASE_LIBRARY)
 else()
 	dk_libDebug			(${OPENSSL_CONFIG_DIR}/libcrypto.a				OPENSSL_CRYPTO_DEBUG_LIBRARY)
 	dk_libRelease		(${OPENSSL_CONFIG_DIR}/libcrypto.a				OPENSSL_CRYPTO_RELEASE_LIBRARY)
@@ -79,7 +88,9 @@ dk_set(OPENSSL_CMAKE
 	-DOPENSSL_USE_STATIC_LIBS=ON
 	-DOPENSSL_ROOT_DIR=${OPENSSL_ROOT_DIR}
 	-DOPENSSL_INCLUDE_DIR=${OPENSSL_INCLUDE_DIR}
-	-DOPENSSL_LIBRARIES=${OPENSSL_LIBRARIES})
+	-DOPENSSL_LIBRARIES=${OPENSSL_LIBRARIES}
+	-DOPENSSL_CRYPTO_LIBRARY=${OPENSSL_CRYPTO_LIBRARY}
+	-DOPENSSL_SSL_LIBRARY=${OPENSSL_SSL_LIBRARY})
 if(MSVC)
 	dk_append(OPENSSL_CMAKE
 		-DOPENSSL_MSVC_STATIC_RT=ON
@@ -91,9 +102,6 @@ if(MSVC)
 		"-DCMAKE_CXX_FLAGS=/I${OPENSSL_INCLUDE_DIR} /I${OPENSSL_INCLUDE_DIR2}")
 else()
 	dk_append(OPENSSL_CMAKE 
-		-DOPENSSL_LIBRARIES=${OPENSSL_LIBRARIES}
-		-DOPENSSL_CRYPTO_LIBRARY=${OPENSSL_CRYPTO_LIBRARY}
-		-DOPENSSL_SSL_LIBRARY=${OPENSSL_SSL_LIBRARY}
 		"-DCMAKE_C_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_INCLUDE_DIR2}"
 		"-DCMAKE_CXX_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_INCLUDE_DIR2}")
 endif()
@@ -130,7 +138,9 @@ if(DEBUG)
 		dk_prependEnvPath	(${MSYS2}/usr/bin)
 		dk_configure		(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug mingw CC=gcc)
 	elseif(win_x86_msvc)
-		dk_configure		(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug msvc)
+		dk_validate(VISUAL_CPP_BUILD_TOOLS_MAKE_VCVARSALL "dk_depend(visual-cpp-build-tools)")
+		execute_process		(COMMAND cmd /c call ${VISUAL_CPP_BUILD_TOOLS_MAKE_VCVARSALL} "x64_x86")
+		dk_configure		(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug VC-WIN32)
 	elseif(win_x86_64_clang)
 		dk_prependEnvPath	(${MSYS2}/clang64/bin)
 		dk_prependEnvPath	(${MSYS2}/usr/bin)
@@ -140,7 +150,7 @@ if(DEBUG)
 		dk_prependEnvPath	(${MSYS2}/usr/bin)
 		dk_configure		(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug mingw64 CC=gcc)
 	elseif(win_x86_64_msvc)
-		dk_configure		(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug msvc64)
+		dk_configure		(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug VC-WIN64)
 	endif()
 endif()
 

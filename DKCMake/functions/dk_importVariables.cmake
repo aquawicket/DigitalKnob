@@ -349,6 +349,9 @@ function(dk_importVariables)
 	############# <PLUGIN>_VARIABLES #############
 	##############################################
 	###### Print the current plugin to the window title bar ######
+	if(NOT DEFINED ENV{CURRENT_PLUGIN})
+		dk_envList(PLUGIN PUSH "${PLUGIN_IMPORT_NAME_UPPER}")
+	endif()
 	dk_assertVar(ENV{CURRENT_PLUGIN})
 	dk_title("CURRENT_PLUGIN -> $ENV{CURRENT_PLUGIN}")
 	
