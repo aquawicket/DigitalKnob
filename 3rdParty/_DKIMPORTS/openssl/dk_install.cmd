@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBat
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_installOpenSSL()
+::# dk_install()
 ::#
-:dk_installOpenSSL
+:dk_install
 	call dk_debugFunc 0
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
