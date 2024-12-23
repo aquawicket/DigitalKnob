@@ -43,11 +43,11 @@ elseif(win_x86_64_ucrt)
 	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/ucrt64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
-#elseif(win_x86_msvc)
-	# TODO
+elseif(win_x86_msvc)
+	dk_depend(strawberry-perl)
 	
-#elseif(win_x86_64_msvc)
-	# TODO
+elseif(win_x86_64_msvc)
+	dk_depend(strawberry-perl)
 	
 else()
 	#dk_findProgram(PERL_EXE perl)

@@ -188,6 +188,7 @@ if(RELEASE)
 	endif()
 endif()
 
+message("execute_process > ${PERL_EXE} configdata.pm --dump WORKING_DIRECTORY ${OPENSSL_CONFIG_DIR}")
 execute_process(COMMAND ${PERL_EXE} configdata.pm --dump WORKING_DIRECTORY ${OPENSSL_CONFIG_DIR})
 
 ### COMPILE ###
