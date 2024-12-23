@@ -10,16 +10,18 @@
 //#
 #include <stdio.h>
 #include <unistd.h>
-void dk_getCurrentDirectory(){
+#include <string.h>
+int dk_getCurrentDirectory(char** cwdb){
+	//dk_debugFunc(1);
 	
-	char cwd[1024]; // Buffer to store the current working directory
-    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-        printf("Current working directory: %s\n", cwd);
-    } else {
+	char cwd[1024];
+    if (getcwd(cwd, sizeof(cwd)) == NULL) {
         perror("getcwd() error");
-        return;
-    }	
+        return 13;
+    }
+	
+	*cwdb = strdup(cwd);
+	return 0;
 };
-
 
 #endif //dk_getCurrentDirectory_h

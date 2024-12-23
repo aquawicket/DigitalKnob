@@ -24,8 +24,10 @@ dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freety
 dk_include				(${FREETYPE_DIR}/include					FREETYPE_INCLUDE_DIR)
 dk_include				(${FREETYPE_CONFIG_DIR}/include/freetype2	FREETYPE_INCLUDE_DIR2)
 if(MSVC)
-	WIN_dk_libDebug		(${FREETYPE_DEBUG_DIR}/freetype.lib			FREETYPE_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${FREETYPE_RELEASE_DIR}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
+	if(WIN)
+		dk_libDebug		(${FREETYPE_DEBUG_DIR}/freetype.lib			FREETYPE_LIBRARY_DEBUG)
+		dk_libRelease	(${FREETYPE_RELEASE_DIR}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
+	endif()
 else()
 	dk_libDebug			(${FREETYPE_DEBUG_DIR}/libfreetype.a		FREETYPE_LIBRARY_DEBUG)
 	dk_libRelease		(${FREETYPE_RELEASE_DIR}/libfreetype.a		FREETYPE_LIBRARY_RELEASE)
@@ -44,11 +46,9 @@ dk_append(FREETYPE_CMAKE
 	-DFREETYPE_LIBRARY_RELEASE=${FREETYPE_LIBRARY_RELEASE})
 if(DEBUG)
 	dk_append(FREETYPE_CMAKE
-		-DFREETYPE_INCLUDE_DIRS=${FREETYPE_INCLUDE_DIR}
 		-DFREETYPE_LIBRARY=${FREETYPE_LIBRARY_DEBUG})
 elseif(RELEASE)
 	dk_append(FREETYPE_CMAKE
-		-DFREETYPE_INCLUDE_DIRS=${FREETYPE_INCLUDE_DIR}
 		-DFREETYPE_LIBRARY=${FREETYPE_LIBRARY_RELEASE})
 endif()	
 	
