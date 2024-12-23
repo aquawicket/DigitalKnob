@@ -10,9 +10,11 @@
 //#
 #include <filesystem>
 #include <iostream>
-void dk_getCurrentDirectory(){
-	std::filesystem::path currentDirectory = std::filesystem::current_path();
-	printf("currentDirectory = %s", currentDirectory.string().c_str());
+int dk_getCurrentDirectory(std::string& cwd) {
+	//dk_debugFunc();
+	
+	cwd = std::filesystem::current_path().string();
+	return 0;
 };
 
 
