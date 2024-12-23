@@ -94,7 +94,9 @@ function(DKINIT)
 	
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
-		if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
+		#if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
+		string(FIND "${DKSCRIPT_DIR}" "${DKCMAKE_FUNCTIONS_DIR}" isChildOf)
+		if(${isChildOf} GREATER -1)
 			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
 			include(${DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
 			DKTEST()

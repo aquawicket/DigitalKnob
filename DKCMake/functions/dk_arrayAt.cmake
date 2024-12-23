@@ -17,8 +17,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
-function(dk_arrayAt array index)
+function(dk_arrayAt)
 	dk_debugFunc(2 99)
+	
 	if(DEFINED "${ARGV0}")
 		set(array 	"${${ARGV0}}")
 	elseif(DEFINED ARGV0)
@@ -26,6 +27,7 @@ function(dk_arrayAt array index)
 	else()
 		dk_fatal("dk_arrayLength(${ARGV}): array is invalid.")
 	endif()
+	#dk_printVar(array)
 	
 	if(DEFINED "${ARGV1}")
 		set(index 	"${${ARGV1}}")
@@ -57,30 +59,30 @@ function(DKTEST)
 	list(APPEND myArray "i")
 	
 	dk_arrayAt(myArray 0)
-	dk_info("dk_arrayAt = ${dk_arrayAt}")
+	dk_info("dk_arrayAt 0 = ${dk_arrayAt}")
 	
 	dk_arrayAt("myArray" 1)
-	dk_info("dk_arrayAt = ${dk_arrayAt}")
+	dk_info("dk_arrayAt 1 = ${dk_arrayAt}")
 	
-	dk_arrayAt(${myArray} 2)				# FIXME: Variables revieved by array value exceed allowed argument count
-	dk_info("dk_arrayAt = ${dk_arrayAt}")
+	dk_arrayAt("${myArray}" 2)
+	dk_info("dk_arrayAt 2 = ${dk_arrayAt}")
 	
-	dk_arrayAt("${myArray}" 3)				# FIXME: Variables revieved by array value exceed allowed argument count
-	dk_info("dk_arrayAt = ${dk_arrayAt}")
+#	dk_arrayAt(${myArray} 3)				# FIXME: Variables revieved by array without quotes fail
+#	dk_info("dk_arrayAt 3 = ${dk_arrayAt}")
 	
 	set(at 4)
 	dk_arrayAt(myArray at)
-	dk_info("dk_arrayAt = ${dk_arrayAt}")
+	dk_info("dk_arrayAt 4 = ${dk_arrayAt}")
 	
 	set(at 5)
 	dk_arrayAt(myArray "at")
-	dk_info("dk_arrayAt = ${dk_arrayAt}")
+	dk_info("dk_arrayAt 5 = ${dk_arrayAt}")
 	
 	set(at 6)
 	dk_arrayAt(myArray ${at})
-	dk_info("dk_arrayAt = ${dk_arrayAt}")
+	dk_info("dk_arrayAt 6 = ${dk_arrayAt}")
 	
 	set(at 7)
 	dk_arrayAt(myArray "${at}")
-	dk_info("dk_arrayAt = ${dk_arrayAt}")
+	dk_info("dk_arrayAt 7 = ${dk_arrayAt}")
 endfunction()

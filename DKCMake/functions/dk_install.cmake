@@ -198,7 +198,6 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	dk_fileWrite(${PLUGIN_DIR}/installed "${dest_filename} ")
 	
 	if(DELETE_DOWNLOADS) # conserve disk space 
-		dk_info("deleting ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}. . .")
 		dk_delete(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
 	endif()
 endfunction()

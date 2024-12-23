@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ################################################################################
-# dk_arrayConcat(array, {value1, value2, /* …, */ valueN})
+# Array::dk_arrayConcat(array, {value1, value2, /* …, */ valueN})
 #
 #	 Merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
 #
@@ -21,10 +21,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    REFERENCE
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 #
-function(dk_arrayConcat array)
+function(Array::dk_arrayConcat array)
 	dk_debugFunc()
 	
-	dk_todo("dk_arrayConcat")
+	dk_todo("Array::dk_arrayConcat")
 
 # DEBUG
 #	TODO
@@ -37,5 +37,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_arrayConcat(MyArray)
+	dk_call(Array::dk_arrayConcat(MyArray))
 endfunction()

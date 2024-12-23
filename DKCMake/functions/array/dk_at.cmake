@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ################################################################################
-# array.dk_at(array, index)
+# Array::dk_at(array, index)
 #
 #	 Takes an array instance with an integer value and returns the item at that index, 
 #	 allowing for positive and negative integers. Negative integers count back from the last item in the array.  <-- TODO
@@ -20,8 +20,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/array/at
 #
-function(array.dk_at array index)
+function(Array::dk_at)
 	dk_debugFunc(2 99)
+	
 	if(DEFINED "${ARGV0}")
 		set(array 	"${${ARGV0}}")
 	elseif(DEFINED ARGV0)
@@ -59,31 +60,40 @@ function(DKTEST)
 	list(APPEND myArray "h")
 	list(APPEND myArray "i")
 	
-	dk_at(myArray 0)
-	dk_info("dk_at = ${dk_at}")
+	#Array::dk_at(myArray 0)
+	dk_call(Array::dk_at(myArray 0))
+	dk_info("dk_at 0 = ${dk_at}")
 	
-	dk_at("myArray" 1)
-	dk_info("dk_at = ${dk_at}")
+	#Array::dk_at("myArray" 1)
+	dk_call(Array::dk_at("myArray" 1))
+	dk_info("dk_at 1 = ${dk_at}")
 	
-	dk_at(${myArray} 2)				# FIXME: Variables revieved by array value exceed allowed argument count
-	dk_info("dk_at = ${dk_at}")
+#	#Array::dk_at("${myArray}" 2)
+#	dk_call(Array::dk_at "${myArray}" 2)
+#	dk_info("dk_at 2 = ${dk_at}")
 	
-	dk_at("${myArray}" 3)				# FIXME: Variables revieved by array value exceed allowed argument count
-	dk_info("dk_at = ${dk_at}")
+	# FIXME: Variables revieved by array value exceed allowed argument count
+#	#Array::dk_at(${myArray} 3)				
+#	dk_call(Array::dk_at ${myArray} 3)
+#	dk_info("dk_at 3 = ${dk_at}")
 	
 	set(at 4)
-	dk_at(myArray at)
-	dk_info("dk_at = ${dk_at}")
+	#Array::dk_at(myArray at)
+	dk_call(Array::dk_at myArray at)
+	dk_info("dk_at 4 = ${dk_at}")
 	
 	set(at 5)
-	dk_at(myArray "at")
-	dk_info("dk_at = ${dk_at}")
+	#Array::dk_at(myArray "at")
+	dk_call(Array::dk_at myArray "at")
+	dk_info("dk_at 5 = ${dk_at}")
 	
 	set(at 6)
-	dk_at(myArray ${at})
-	dk_info("dk_at = ${dk_at}")
+	#Array::dk_at(myArray ${at})
+	dk_call(Array::dk_at myArray ${at})
+	dk_info("dk_at 6 = ${dk_at}")
 	
 	set(at 7)
-	dk_at(myArray "${at}")
-	dk_info("dk_at = ${dk_at}")
+	#Array::dk_at(myArray "${at}")
+	dk_call(Array::dk_at myArray "${at}")
+	dk_info("dk_at 7 = ${dk_at}")
 endfunction()

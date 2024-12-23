@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_delete(path) [NO_HALT]
@@ -13,21 +13,22 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_delete)
 	dk_debugFunc(1 2)
 	
-	dk_getOption(NO_HALT REMOVE)
+	dk_getOption(NO_HALT)
 
-	if(NOT EXISTS "${ARGN}")
-		dk_warning("${ARGN} does not exist")
+	if(NOT EXISTS "${ARGV0}")
+		dk_warning("${ARGV0} does not exist")
 		return()
 	endif()
 	
-	message("deleting ${ARGN}")
-	file(REMOVE_RECURSE "${ARGN}")
+	### delete the path ###
+	dk_info("deleting ${ARGV0}")
+	file(REMOVE_RECURSE "${ARGV0}")
 	#execute_process(COMMAND -E rm "${ARGN}")
+	
+	### verify that the path was deleted ###
 	dk_sleep(1)	# give the path a 1 second to delete
-	if(EXISTS "${ARGN}")
-		if(NOT NO_HALT)
-			dk_error("failed to remove ${ARGN}")
-		endif()
+	if(EXISTS "${ARGV0}")
+		dk_fatal("failed to remove ${ARGV0}" ${NO_HALT})
 	endif()
 endfunction()
 
