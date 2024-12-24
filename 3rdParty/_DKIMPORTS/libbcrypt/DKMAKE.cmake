@@ -6,8 +6,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ############ libbcrypt ############
-
 dk_validate(target_triple "dk_target_triple()")
+if(NOT win)
+	dk_undepend(libbcrypt)
+	dk_disable(libbcrypt)
+	dk_return()
+endif()
+
 
 if(win_arm_msvc)
 	dk_set(LIBBCRYPT_LIB "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/arm/bcrypt.lib")
