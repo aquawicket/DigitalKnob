@@ -51,6 +51,6 @@ if(DKRETURN)
 #	endforeach()
 
 	foreach(item ${DKRETURN})
-		dk_exportVars(${item} "${${item}}")
+		dk_call dk_exportVars(${item} "${${item}}")
 	endforeach()
 endif()

@@ -4,7 +4,7 @@ if "%~1" equ "%~0" goto dk_install
 if "%~1" neq ""    goto runDKC
 :dk_install
 	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmopolitan, gcc, msvc 
+	:: clang, cosmocc, gcc, msvc 
 	set "default_host_os=cosmocc"
 	set "default_host_arch=cosmocc"
 	set "default_host_env=cosmocc"
