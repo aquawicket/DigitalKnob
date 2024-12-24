@@ -13,88 +13,87 @@
 //#   https://en.wikipedia.org/wiki/ANSI_escape_code
 //#
 dk_color = function() {
-	/*
-	dk_debugFunc 0 1
+	//dk_debugFunc 0 1
 	
-	var USE_COLOR = 1
-	if [ ${#} -gt 0 ]; then
+	var USE_COLOR = 1;
+	
+/*	if [ ${#} -gt 0 ]; then
 		if [ ${1-} -eq 0 ]; then
-			dk_call dk_unset USE_COLOR
+			delete this.USE_COLOR
 		fi
 	fi
-	
-	if [ -n ${USE_COLOR-} ]; then
-	#if dk_call dk_defined USE_COLOR; then
-	*/
-		var ESC = "\x1b"    		 	// escape character
+*/
+
+	if(USE_COLOR) {
+		var ESC = "\x1b";    		 	// escape character
 		
 		// Attributes on
-		this.clr = ESC+"[0m"   			// Default						- Returns all attributes to the default state prior to modification
-		this.bold = ESC+"[1m"			// Bold/Bright 					- Applies brightness/intensity flag to foreground color
-		this.dim = ESC+"[2m"			// Dim
-		this.italic = ESC+"[3m"			// Italic
-		this.underline = ESC+"[4m"		// Underline       				- Adds underline
-		this.blink = ESC+"[5m"			// Blink
-		this.fblink = ESC+"[6m"			// Rapid Blink
-		this.negative = ESC+"[7m"   	// Negative	    				- Swaps foreground and background colors
-		this.invisible = ESC+"[8m"		// Invisible
-		this.strike = ESC+"[9m"			// Strike Through
+		this.clr = ESC+"[0m";   		// Default						- Returns all attributes to the default state prior to modification
+		this.bold = ESC+"[1m";			// Bold/Bright 					- Applies brightness/intensity flag to foreground color
+		this.dim = ESC+"[2m";			// Dim
+		this.italic = ESC+"[3m";		// Italic
+		this.underline = ESC+"[4m";		// Underline       				- Adds underline
+		this.blink = ESC+"[5m";			// Blink
+		this.fblink = ESC+"[6m";		// Rapid Blink
+		this.negative = ESC+"[7m";   	// Negative	    				- Swaps foreground and background colors
+		this.invisible = ESC+"[8m";		// Invisible
+		this.strike = ESC+"[9m";		// Strike Through
 		
 		// Attributes off
-		//this.20m = ESC+"[20m"			// 20
-		//this.21m = ESC+"[21m"			// 21
-		this.nobold = ESC+"[22m"		// No bold/bright				- Removes brightness/intensity flag from foreground color
-		this.noitalic = ESC+"[23m"		// No Italic
-		this.nounderline = ESC+"[24m"	// No underline					- Removes underline
-		this.noblink = ESC+"[25m"		// No Blink
-		//this.26m = ESC+"[26m"			// 26
-		this.nonegative = ESC+"[27m"  	// Positive(No negative)		- Returns foreground/background to normal
-		this.visible = ESC+"[28m"		// Visible(No invisible)
-		this.nostrike = ESC+"[29m"		// No Strike Through
+		//this.20m = ESC+"[20m";		// 20
+		//this.21m = ESC+"[21m";		// 21
+		this.nobold = ESC+"[22m";		// No bold/bright				- Removes brightness/intensity flag from foreground color
+		this.noitalic = ESC+"[23m";		// No Italic
+		this.nounderline = ESC+"[24m";	// No underline					- Removes underline
+		this.noblink = ESC+"[25m";		// No Blink
+		//this.26m = ESC+"[26m";		// 26
+		this.nonegative = ESC+"[27m";  	// Positive(No negative)		- Returns foreground/background to normal
+		this.visible = ESC+"[28m";		// Visible(No invisible)
+		this.nostrike = ESC+"[29m";		// No Strike Through
 		
 		// Foreground Colors
-		this.black = ESC+"[30m"			// Foreground Black				- Applies non-bold/bright black to foreground
-		this.red = ESC+"[31m"			// Foreground Red				- Applies non-bold/bright red to foreground
-		this.green = ESC+"[32m"			// Foreground Green				- Applies non-bold/bright green to foreground
-		this.yellow = ESC+"[33m"		// Foreground Yellow			- Applies non-bold/bright yellow to foreground
-		this.blue = ESC+"[34m"			// Foreground Blue				- Applies non-bold/bright blue to foreground
-		this.magenta = ESC+"[35m"		// Foreground Magenta			- Applies non-bold/bright magenta to foreground
-		this.cyan = ESC+"[36m"			// Foreground Cyan				- Applies non-bold/bright cyan to foreground
-		this.white = ESC+"[37m"			// Foreground White				- Applies non-bold/bright white to foreground
-		this.extended = ESC+"[38m"		// Foreground Extended			- Applies extended color value to the foreground
-		//this.default = ESC+"[39m"		// Foreground Default			- Applies only the foreground portion of the defaults
+		this.black = ESC+"[30m";		// Foreground Black				- Applies non-bold/bright black to foreground
+		this.red = ESC+"[31m";			// Foreground Red				- Applies non-bold/bright red to foreground
+		this.green = ESC+"[32m";		// Foreground Green				- Applies non-bold/bright green to foreground
+		this.yellow = ESC+"[33m";		// Foreground Yellow			- Applies non-bold/bright yellow to foreground
+		this.blue = ESC+"[34m";			// Foreground Blue				- Applies non-bold/bright blue to foreground
+		this.magenta = ESC+"[35m";		// Foreground Magenta			- Applies non-bold/bright magenta to foreground
+		this.cyan = ESC+"[36m";			// Foreground Cyan				- Applies non-bold/bright cyan to foreground
+		this.white = ESC+"[37m";		// Foreground White				- Applies non-bold/bright white to foreground
+		this.extended = ESC+"[38m";		// Foreground Extended			- Applies extended color value to the foreground
+		//this.default = ESC+"[39m";	// Foreground Default			- Applies only the foreground portion of the defaults
 		
 		// Background Colors
-		this.bg_black = ESC+"[40m"		// Background Black				- Applies non-bold/bright black to background
-		this.bg_red = ESC+"[41m"		// Background Red				- Applies non-bold/bright red to background
-		this.bg_green = ESC+"[42m"		// Background Green				- Applies non-bold/bright green to background
-		this.bg_yellow = ESC+"[43m"		// Background Yellow			- Applies non-bold/bright yellow to background
-		this.bg_blue = ESC+"[44m"		// Background Blue				- Applies non-bold/bright blue to background
-		this.bg_magenta = ESC+"[45m"	// Background Magenta			- Applies non-bold/bright magenta to background
-		this.bg_cyan = ESC+"[46m"		// Background Cyan				- Applies non-bold/bright cyan to background
-		this.bg_white = ESC+"[47m"		// Background White				- Applies non-bold/bright white to background
-		this.bg_extended = ESC+"[48m"	// Background Extended			- Applies extended color value to the background
-		this.bg_default = ESC+"[49m"	// Background Default			- Applies only the background portion of the defaults
+		this.bg_black = ESC+"[40m";		// Background Black				- Applies non-bold/bright black to background
+		this.bg_red = ESC+"[41m";		// Background Red				- Applies non-bold/bright red to background
+		this.bg_green = ESC+"[42m";		// Background Green				- Applies non-bold/bright green to background
+		this.bg_yellow = ESC+"[43m";	// Background Yellow			- Applies non-bold/bright yellow to background
+		this.bg_blue = ESC+"[44m";		// Background Blue				- Applies non-bold/bright blue to background
+		this.bg_magenta = ESC+"[45m";	// Background Magenta			- Applies non-bold/bright magenta to background
+		this.bg_cyan = ESC+"[46m";		// Background Cyan				- Applies non-bold/bright cyan to background
+		this.bg_white = ESC+"[47m";		// Background White				- Applies non-bold/bright white to background
+		this.bg_extended = ESC+"[48m";	// Background Extended			- Applies extended color value to the background
+		this.bg_default = ESC+"[49m";	// Background Default			- Applies only the background portion of the defaults
 		
 		// Foreground Colors (light)
-		this.lblack = ESC+"[90m"		// Bright Foreground Black		- Applies bold/bright black to foreground
-		this.lred = ESC+"[91m"			// Bright Foreground Red		- Applies bold/bright red to foreground
-		this.lgreen = ESC+"[92m"		// Bright Foreground Green		- Applies bold/bright green to foreground
-		this.lyellow = ESC+"[93m"		// Bright Foreground Yellow		- Applies bold/bright yellow to foreground
-		this.lblue = ESC+"[94m"			// Bright Foreground Blue		- Applies bold/bright blue to foreground
-		this.lmagenta = ESC+"[95m"		// Bright Foreground Magenta	- Applies bold/bright magenta to foreground
-		this.lcyan = ESC+"[96m"			// Bright Foreground Cyan		- Applies bold/bright cyan to foreground
-		this.lwhite = ESC+"[97m"		// Bright Foreground White		- Applies bold/bright white to foreground
+		this.lblack = ESC+"[90m";		// Bright Foreground Black		- Applies bold/bright black to foreground
+		this.lred = ESC+"[91m";			// Bright Foreground Red		- Applies bold/bright red to foreground
+		this.lgreen = ESC+"[92m";		// Bright Foreground Green		- Applies bold/bright green to foreground
+		this.lyellow = ESC+"[93m";		// Bright Foreground Yellow		- Applies bold/bright yellow to foreground
+		this.lblue = ESC+"[94m";		// Bright Foreground Blue		- Applies bold/bright blue to foreground
+		this.lmagenta = ESC+"[95m";		// Bright Foreground Magenta	- Applies bold/bright magenta to foreground
+		this.lcyan = ESC+"[96m";		// Bright Foreground Cyan		- Applies bold/bright cyan to foreground
+		this.lwhite = ESC+"[97m";		// Bright Foreground White		- Applies bold/bright white to foreground
 
 		// Background Colors (light)
-		this.bg_lblack = ESC+"[100m"	// Bright Background Black		- Applies bold/bright black to background
-		this.bg_lred = ESC+"[101m"		// Bright Background Red		- Applies bold/bright red to background
-		this.bg_lgreen = ESC+"[102m"	// Bright Background Green		- Applies bold/bright green to background
-		this.bg_lyellow = ESC+"[103m"	// Bright Background Yellow		- Applies bold/bright yellow to background
-		this.bg_lblue = ESC+"[104m"		// Bright Background Blue		- Applies bold/bright blue to background
-		this.bg_lmagenta = ESC+"[105m"	// Bright Background Magenta	- Applies bold/bright magenta to background
-		this.bg_lcyan = ESC+"[106m"		// Bright Background Cyan		- Applies bold/bright cyan to background
-		this.bg_lwhite = ESC+"[107m"	// Bright Background White		- Applies bold/bright white to background
+		this.bg_lblack = ESC+"[100m";	// Bright Background Black		- Applies bold/bright black to background
+		this.bg_lred = ESC+"[101m";		// Bright Background Red		- Applies bold/bright red to background
+		this.bg_lgreen = ESC+"[102m";	// Bright Background Green		- Applies bold/bright green to background
+		this.bg_lyellow = ESC+"[103m";	// Bright Background Yellow		- Applies bold/bright yellow to background
+		this.bg_lblue = ESC+"[104m";	// Bright Background Blue		- Applies bold/bright blue to background
+		this.bg_lmagenta = ESC+"[105m";	// Bright Background Magenta	- Applies bold/bright magenta to background
+		this.bg_lcyan = ESC+"[106m";	// Bright Background Cyan		- Applies bold/bright cyan to background
+		this.bg_lwhite = ESC+"[107m";	// Bright Background White		- Applies bold/bright white to background
 		
 		// Foreground RGB Colors
 		this.RGB = ESC+"[38;2;"			// ${RGB}50;100;150m        	= ${ESC}[38;2;50;100;150m
@@ -103,79 +102,77 @@ dk_color = function() {
 		this.bg_RGB = ESC+"[48;2;"		// ${bg_RGB}150;100;50m     	= ${ESC}[38;2;150;100;50m
 		
 		console.log(blue+"C"+green+"O"+red+"L"+magenta+"O"+cyan+"R"+blue+" O"+green+"N"+clr)
-	/*
-	else
-		//dk_call dk_unset ESC
-		//dk_call dk_unset clr
+
+	} else {
+		delete this.ESC;
+		delete this.clr;
 		
 		// Attributes on
-		dk_call dk_unset bold
-		dk_call dk_unset dim
-		dk_call dk_unset italic
-		dk_call dk_unset underline
-		dk_call dk_unset blink
-		dk_call dk_unset fblink
-		dk_call dk_unset negative
-		dk_call dk_unset invisible
-		dk_call dk_unset strike
+		delete this.bold;
+		delete this.dim;
+		delete this.italic;
+		delete this.underline;
+		delete this.blink;
+		delete this.fblink;
+		delete this.negative;
+		delete this.invisible;
+		delete this.strike;
 		
 		// Attributes off
-		dk_call dk_unset nobold
-		dk_call dk_unset noitalic
-		dk_call dk_unset nounderline
-		dk_call dk_unset noblink
-		dk_call dk_unset nonegative
-		dk_call dk_unset visible
-		dk_call dk_unset nostrike
+		delete this.nobold;
+		delete this.noitalic;
+		delete this.nounderline;
+		delete this.noblink;
+		delete this.nonegative;
+		delete this.visible;
+		delete this.nostrike;
 		
 		// Foreground Colors
-		dk_call dk_unset black
-		dk_call dk_unset red
-		dk_call dk_unset green
-		dk_call dk_unset yellow
-		dk_call dk_unset blue
-		dk_call dk_unset magenta
-		dk_call dk_unset cyan
-		dk_call dk_unset white
+		delete this.black;
+		delete this.red;
+		delete this.green;
+		delete this.yellow;
+		delete this.blue;
+		delete this.magenta;
+		delete this.cyan;
+		delete this.white;
 		
 		// Background Colors
-		dk_call dk_unset bg_black
-		dk_call dk_unset bg_red
-		dk_call dk_unset bg_green
-		dk_call dk_unset bg_yellow
-		dk_call dk_unset bg_blue
-		dk_call dk_unset bg_magenta
-		dk_call dk_unset bg_cyan
-		dk_call dk_unset bg_white
+		delete this.bg_black;
+		delete this.bg_red;
+		delete this.bg_green;
+		delete this.bg_yellow;
+		delete this.bg_blue;
+		delete this.bg_magenta;
+		delete this.bg_cyan;
+		delete this.bg_white;
 		
 		// Foreground Colors (Bright)
-		dk_call dk_unset lblack
-		dk_call dk_unset lred
-		dk_call dk_unset lgreen
-		dk_call dk_unset lyellow
-		dk_call dk_unset lblue
-		dk_call dk_unset lmagenta
-		dk_call dk_unset lcyan
-		dk_call dk_unset lwhite
+		delete this.lblack;
+		delete this.lred;
+		delete this.lgreen;
+		delete this.lyellow;
+		delete this.lblue;
+		delete this.lmagenta;
+		delete this.lcyan;
+		delete this.lwhite;
 		
 		// Background Colors (Bright)
-		dk_call dk_unset bg_lblack
-		dk_call dk_unset bg_lred
-		dk_call dk_unset bg_lgreen
-		dk_call dk_unset bg_lyellow
-		dk_call dk_unset bg_lblue
-		dk_call dk_unset bg_lmagenta
-		dk_call dk_unset bg_lcyan
-		dk_call dk_unset bg_lwhite
+		delete this.bg_lblack;
+		delete this.bg_lred;
+		delete this.bg_lgreen;
+		delete this.bg_lyellow;
+		delete this.bg_lblue;
+		delete this.bg_lmagenta;
+		delete this.bg_lcyan;
+		delete this.bg_lwhite;
 		
-		dk_call dk_unset RGB
-		dk_call dk_unset bg_RGB
+		delete this.RGB;
+		delete this.bg_RGB;
 	
-		console.log(clr+" COLOR OFF"
-	fi
-	*/
+		console.log(clr+" COLOR OFF");
+	}
 }
-//dk_call dk_color 1
 dk_color();
 
 
