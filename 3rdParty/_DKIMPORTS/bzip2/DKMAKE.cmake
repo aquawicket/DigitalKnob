@@ -25,8 +25,13 @@ dk_getFileParam("${DKIMPORTS_DIR}/bzip2/dkconfig.txt" BZIP2_DL)
 dk_import(${BZIP2_DL})
 
 dk_include		(${BZIP2_DIR}/							BZIP2_INCLUDE_DIR)
-dk_libDebug		(${BZIP2_DEBUG_DIR}/libbz2_static.a		BZIP2_LIBRARY_DEBUG)
-dk_libRelease	(${BZIP2_RELEASE_DIR}/libbz2_static.a	BZIP2_LIBRARY_RELEASE)
+if(MSVC)
+	dk_libDebug		(${BZIP2_DEBUG_DIR}/bz2_static.lib		BZIP2_LIBRARY_DEBUG)
+	dk_libRelease	(${BZIP2_RELEASE_DIR}/bz2_static.lib	BZIP2_LIBRARY_RELEASE)
+else()
+	dk_libDebug		(${BZIP2_DEBUG_DIR}/libbz2_static.a		BZIP2_LIBRARY_DEBUG)
+	dk_libRelease	(${BZIP2_RELEASE_DIR}/libbz2_static.a	BZIP2_LIBRARY_RELEASE)
+endif()
 
 ### 3RDPARTY LINK ###
 dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
