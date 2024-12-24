@@ -125,21 +125,22 @@ function(dk_installPackage)
 		if(EXISTS "${MSYS2_DIR}/var/lib/pacman/db.lck")
 			dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck")
 		endif()
-		set(comand ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
+		dk_set(MSYS2_CACHE_DIR "${DKDOWNlOADS_DIR}")
+		execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${MSYS2_CACHE_DIR})
 		if(win_x86_clang)
-			set(comand ${PACMAN_EXE} -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
+			set(comand ${PACMAN_EXE} -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir ${MSYS2_CACHE_DIR})		# CLANG32
 		elseif(win_x86_64_clang)
-			set(comand ${PACMAN_EXE} -S mingw-w64-clang-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
+			set(comand ${PACMAN_EXE} -S mingw-w64-clang-x86_64-${package} --needed --noconfirm --cachedir ${MSYS2_CACHE_DIR})	# CLANG64
 		elseif(win_arm64_clang)
-			set(comand ${PACMAN_EXE} -S mingw-w64-clang-aarch64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
+			set(comand ${PACMAN_EXE} -S mingw-w64-clang-aarch64-${package} --needed --noconfirm --cachedir ${MSYS2_CACHE_DIR})	# CLANGARM64
 		elseif(win_x86_mingw)
-			set(comand ${PACMAN_EXE} -S mingw-w64-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
+			set(comand ${PACMAN_EXE} -S mingw-w64-i686-${package} --needed --noconfirm --cachedir ${MSYS2_CACHE_DIR})			# MINGW32
 		elseif(win_x86_64_mingw)
-			set(comand ${PACMAN_EXE} -S mingw-w64-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
+			set(comand ${PACMAN_EXE} -S mingw-w64-x86_64-${package} --needed --noconfirm --cachedir ${MSYS2_CACHE_DIR})			# MINGW64
 		elseif(win_x86_64_ucrt)
-			set(comand ${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
+			set(comand ${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm --cachedir ${MSYS2_CACHE_DIR})		# UCRT64
 		else()
-			set(comand ${PACMAN_EXE} -S ${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})							# DEFAULT
+			set(comand ${PACMAN_EXE} -S ${package} --needed --noconfirm --cachedir ${MSYS2_CACHE_DIR})							# DEFAULT
 		endif()
 		dk_echo(${comand})
 		execute_process(COMMAND ${comand})

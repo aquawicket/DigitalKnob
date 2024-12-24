@@ -12,7 +12,6 @@ dk_installPackage(wget)
 
 ### Msys2 ###
 if(MSYSTEM)
-	#dk_command(${PACMAN_EXE} -S wget --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 	dk_findProgram(WGET_EXE wget "${MSYS2_DIR}/usr/bin")
 endif()
 

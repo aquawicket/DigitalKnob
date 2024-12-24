@@ -28,7 +28,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     echo  7) Emscripten
     echo  8) Ios arm32
     echo  9) Ios arm64
-    echo  10) Ios x86
+    echo 10) Ios x86
     echo 11) Ios x86_64
     echo 12) Iossim arm32
     echo 13) Iossim arm64

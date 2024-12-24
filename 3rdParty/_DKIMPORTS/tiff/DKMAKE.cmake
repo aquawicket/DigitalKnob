@@ -36,8 +36,8 @@ dk_include					(${TIFF_CONFIG_DIR}/libtiff								TIFF_INCLUDE_DIRS)
 #RELEASE_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}				TIFF_INCLUDE_DIRS)
 if(MULTI_CONFIG)
 	if(MSVC)
-		WIN_dk_libDebug		(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}/tiffd.lib		TIFF_LIBRARY_DEBUG)
-		WIN_dk_libRelease	(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}/tiff.lib		TIFF_LIBRARY_RELEASE)
+		dk_libDebug			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}/tiffd.lib		TIFF_LIBRARY_DEBUG)
+		dk_libRelease		(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}/tiff.lib		TIFF_LIBRARY_RELEASE)
 	else()
 		dk_libDebug			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}/libtiff.a		TIFF_LIBRARY_DEBUG)
 		dk_libRelease		(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}/libtiff.a	TIFF_LIBRARY_RELEASE)
@@ -58,7 +58,7 @@ dk_set(TIFF_CMAKE
 	-DTIFF_LIBRARIES=${TIFF_LIBRARIES}
 	"-DCMAKE_EXE_LINKER_FLAGS=${TIFF_LIBRARIES}")	
 if(MSVC)
-	WIN_dk_append(TIFF_CMAKE
+	dk_append(TIFF_CMAKE
 		"-DCMAKE_C_FLAGS=/I${TIFF_INCLUDE_DIR} /I${TIFF_INCLUDE_DIRS}"
 		"-DCMAKE_CXX_FLAGS=/I${TIFF_INCLUDE_DIR} /I${TIFF_INCLUDE_DIRS}")
 else()	

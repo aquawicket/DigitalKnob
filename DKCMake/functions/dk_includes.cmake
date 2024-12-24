@@ -38,7 +38,7 @@ function(dk_includes)
 	
 #if(DEBUG_CMAKE)	
 	if(${dk_includes})
-		dk_debug("dk_includes(${ARGV}): RTN:${dk_includes}:isTure")
+		dk_debug("dk_includes(${ARGV}): RTN:${dk_includes}:isTrue")
 	else()
 		dk_debug("dk_includes(${ARGV}): RTN:${dk_includes}:isFalse")
 	endif()

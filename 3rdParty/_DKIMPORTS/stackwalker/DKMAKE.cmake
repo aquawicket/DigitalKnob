@@ -14,8 +14,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
 dk_load(dk_builder)
 if(NOT MSVC)
-	dk_disable(stackwalker)
-	dk_return()
+	dk_undepend	(stackwalker)
+	dk_disable	(stackwalker)
+	dk_return	()
 endif()
 
 ### IMPORT ###

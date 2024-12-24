@@ -15,11 +15,13 @@ dk_import("${BACKWARD_CPP_DL}")
 
 ### LINK ###
 dk_include			(${BACKWARD_CPP_DIR})
-#UNIX_dk_libDebug	(${BACKWARD_CPP_DEBUG_DIR}/libbackward.a)
-#UNIX_dk_libRelease	(${BACKWARD_CPP_RELEASE_DIR}/libbackward.a)
-#WIN_dk_libDebug	(${BACKWARD_CPP_DEBUG_DIR}/backward.lib)
-#WIN_dk_libRelease	(${BACKWARD_CPP_RELEASE_DIR}/backward.lib)
-
+#if(UNIX)
+#	dk_libDebug	(${BACKWARD_CPP_DEBUG_DIR}/libbackward.a)
+#	dk_libRelease	(${BACKWARD_CPP_RELEASE_DIR}/libbackward.a)
+#elseif(WIN)
+#	dk_libDebug		(${BACKWARD_CPP_DEBUG_DIR}/backward.lib)
+#	dk_libRelease	(${BACKWARD_CPP_RELEASE_DIR}/backward.lib)
+#endif()
 
 
 
