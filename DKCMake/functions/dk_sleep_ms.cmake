@@ -3,16 +3,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_sleepMs(milliseconds)
+# dk_sleep_ms(milliseconds)
 #
 #	TODO
 #
-function(dk_sleepMs)
+function(dk_sleep_ms)
 	dk_debugFunc()
-	
-	set(milliseconds "${ARGV0}")
-	#message("milliseconds = ${milliseconds}")
-	
 	###### Convert milliseconds to seconds ######
 	# 1		    =      0.001
 	# 12		=      0.012
@@ -23,11 +19,9 @@ function(dk_sleepMs)
 	# 1234567   =   1234.567
 	# 12345678  =  12345.678
 	# 123456789 = 123456.789
-	string(LENGTH "${milliseconds}" length)
-	while(${length} LESS 4)
-		set(milliseconds 0${milliseconds})
-		math(EXPR length "${length} + 1")
-	endwhile()
+	
+	set(milliseconds "00${ARGV0}")
+	#message("milliseconds = ${milliseconds}")
 	string(LENGTH "${milliseconds}" length)
 	math(EXPR length "${length} - 3")
 	string(SUBSTRING ${milliseconds} ${length} -1 right)
@@ -45,5 +39,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_sleepMs(500)
+	set(milliseconds 3500)
+	message("sleeping for ${milliseconds} milliseconds...")
+	dk_sleep_ms(${milliseconds})
 endfunction()

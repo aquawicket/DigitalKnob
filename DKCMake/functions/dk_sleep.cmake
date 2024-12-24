@@ -21,5 +21,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_sleep(5)
+	dk_sleep(3)
 endfunction()

@@ -26,7 +26,7 @@ function(dk_delete)
 	#execute_process(COMMAND -E rm "${ARGN}")
 	
 	### verify that the path was deleted ###
-	dk_sleep(1)	# give the path a 1 second to delete
+	#dk_sleep(1)	# give the path a 1 second to delete
 	if(EXISTS "${ARGV0}")
 		dk_fatal("failed to remove ${ARGV0}" ${NO_HALT})
 	endif()
