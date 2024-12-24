@@ -8,6 +8,7 @@ Copy-Item "$DKSCRIPT_PATH" -Destination "$env:TMP"
 $DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/functions"
 $DKPOWERHELL_DIR = "$PWD/DKPowershell"
 $DKPOWERHELL_FUNCTIONS_DIR = "${DKPOWERHELL_DIR}/functions"
+$DKPOWERHELL_FUNCTIONS_DIR_ = "${DKPOWERHELL_DIR}/functions/"
 if(!(Test-Path $DKPOWERHELL_DIR)){ New-Item -Path $DKPOWERHELL_DIR -ItemType Directory }
 if(!(Test-Path $DKPOWERHELL_FUNCTIONS_DIR)){ New-Item -Path $DKPOWERHELL_FUNCTIONS_DIR -ItemType Directory }
 if(!(Test-Path $DKPOWERHELL_FUNCTIONS_DIR/DK.ps1)){ 

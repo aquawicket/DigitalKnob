@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!$dk_installGit){ $dk_installGit = 1 } else{ return }
+if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
 
 ####################################################################
 # dk_installGit()
@@ -8,8 +8,8 @@ if(!$dk_installGit){ $dk_installGit = 1 } else{ return }
 function Global:dk_installGit() {
 	dk_debugFunc 0
 	
-	$GIT_DL_WIN_X86    = "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe"
-	$GIT_DL_WIN_X86_64 = "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
+	$GIT_DL_WIN_X86    = "https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-32-bit.7z.exe"
+	$GIT_DL_WIN_X86_64 = "https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe"
 
 	dk_call dk_validate "HOST_ARCH" "dk_call dk_host_triple"
     if($HOST_ARCH -eq "arm32") { ${GIT_DL} = "" }
@@ -39,6 +39,7 @@ function Global:dk_installGit() {
         
     dk_call dk_info ""  
     dk_call dk_info "Installing git . . ."
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
     dk_call dk_download ${GIT_DL} $DKDOWNLOAD_DIR/$GIT_DL_FILE
 	dk_call dk_info "$DKDOWNLOAD_DIR/$GIT_DL_FILE -y -o $GIT"
     dk_call $ENV{COMSPEC} /c "$DKDOWNLOAD_DIR/$GIT_DL_FILE" -y -o $GIT

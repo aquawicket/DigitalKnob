@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!$dk_convertToCIdentifier){ $dk_convertToCIdentifier = 1 } else{ return }
+if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
 
 ##################################################################################
 # dk_convertToCIdentifier(str) -> rtn_var

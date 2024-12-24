@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-#if(!$DK_ARGV){ $DK_ARGV = 1 } else{ return }
+#if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.2
 
 ##################################################################################

@@ -2,31 +2,21 @@ if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 
 if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
 
 ####################################################################
-# dk_makeDirectory(path)
+# dk_sleep_ms(milliseconds)
 #
-#
-function Global:dk_makeDirectory ($_path_) {
+function Global:dk_sleep_ms($milliseconds) {
 	dk_debugFunc 1
 	
-	if(!(Test-Path $_path_)){ 
-		New-Item -Path "$_path_" -ItemType Directory 
-	}
+	Start-Sleep -Milliseconds $milliseconds
 }
 
 
 
-
-
-
-
-
-
-
-
-
-###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_makeDirectory "MadeDirectory"
+	$milliseconds = 3500;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
 }

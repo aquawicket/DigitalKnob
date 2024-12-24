@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!$dk_buildMain){ $dk_buildMain = 1 } else{ return }
+if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
 
 ####################################################################
 # dk_buildMain()
@@ -41,10 +41,10 @@ function Global:dk_buildMain() {
 	
 	$running=1
 	while($running){  
-		if(!${UPDATE})    { dk_call dk_pickUpdate;  continue; }
-		if(!${APP})       { dk_call dk_pickApp;     continue; }
+		if(!${UPDATE}) { dk_call dk_pickUpdate;  continue; }
+		if(!${APP})    { dk_call dk_pickApp;     continue; }
 		if(!${triple}) { dk_call dk_pickOs;      continue; }
-		if(!${TYPE})      { dk_call dk_pickType;    continue; }
+		if(!${TYPE})   { dk_call dk_pickType;    continue; }
 		
 		dk_call dk_createCache
 		dk_call dk_generate	

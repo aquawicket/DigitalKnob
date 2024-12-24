@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!$dk_debugFunc){ $dk_debugFunc = 1 } else{ return }
+if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
 
 if(!$ENABLE_dk_debugFunc)	{ $global:ENABLE_dk_debugFunc = 0 }
 if(!$MAX_STACK_LINES)		{ $global:MAX_STACK_LINES = 200 }
