@@ -1,20 +1,18 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_sleep(seconds)
 #
 #	TODO
 #
-function(dk_sleep seconds)
+function(dk_sleep)
 	dk_debugFunc()
 	
-	if(ARGN)
-		dk_info("...${ARGN}")
-	endif()
+	set(seconds ${ARGV0})
 	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
-endfunction(dk_sleep)
+endfunction()
 
 
 

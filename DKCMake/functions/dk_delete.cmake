@@ -17,11 +17,11 @@ function(dk_delete)
 
 	if(NOT EXISTS "${ARGV0}")
 		dk_warning("${ARGV0} does not exist")
-		return()
+		dk_return()
 	endif()
 	
 	### delete the path ###
-	dk_info("deleting ${ARGV0}")
+	dk_debug("deleting ${ARGV0}")
 	file(REMOVE_RECURSE "${ARGV0}")
 	#execute_process(COMMAND -E rm "${ARGN}")
 	

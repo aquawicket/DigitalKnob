@@ -9,12 +9,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://www.gnu.org/software/sh
 # https://packages.msys2.org/package/sh
 
-#if(EXISTS "${SH_EXE}")
-#	dk_undepend(sh)
-#	dk_return()
-#endif()
+if(EXISTS "${SH_EXE}")
+	dk_return()
+endif()
 
-dk_validate(triple "dk_target_triple()")
+#dk_validate(triple "dk_target_triple()")
 
 ### shell command sh ###
 execute_process(COMMAND command -v sh OUTPUT_VARIABLE SHELL_SH)
