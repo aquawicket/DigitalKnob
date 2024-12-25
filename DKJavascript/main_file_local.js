@@ -1,5 +1,16 @@
+ARGV = WScript.Arguments;
+ARGC = WScript.Arguments.Count();
+for (i=0; i<ARGV.length; i++){
+    WScript.Echo(ARGV(i));
+}
+
 var index = "../DKHtml/index.html";
 var assets = "file:///C:/Users/Administrator/digitalknob/Development";
+
+//###### dk_check (function) ######
+dk_check = function(object){
+	if(typeof this[object] !== 'undefined'){WScript.StdOut.Write(object+" is valid\n");} else {WScript.StdOut.Write(object+" is invalid\n");}
+}
 
 //###### globalThis (variable) ######
 var globalThis = (function () {  
@@ -37,23 +48,19 @@ if(objXMLDoc.parseError.errorCode !== 0){
 var document = objXMLDoc.documentElement;
 WScript.StdOut.Write("document: "+document.xml+"\n\n");
 
+//###### alert (function) ######
+dk_source(assets+"/DKJavascript/JScript/alert.js");
+//alert("test");
+
 //###### console (class) ######
 dk_source(assets+"/DKJavascript/JScript/console.js");
 console.log("console.log test\n");
 
-//###### alert ######
-dk_source(assets+"/DKJavascript/JScript/alert.js");
-//alert("test");
-
-//###### alert ######
+//###### dk_color (function) ######
 dk_source(assets+"/DKJavascript/functions/dk_color.js");
-//dk_color();
 DKTEST();
 
 
-dk_check = function(object){
-	if(typeof this[object] !== 'undefined'){console.log(object+" is valid");} else {console.log(object+" is invalid");}
-}
 
 
 dk_check('alert');

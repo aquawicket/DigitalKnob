@@ -1,14 +1,6 @@
-WScript.Echo("dk_echo()");
-
-// https://stackoverflow.com/questions/3054321/how-to-reference-a-jscript-file-from-another-one
-// A object to which library functions can be attached
-var library = new Object;
-eval((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile("DK.js", 1).ReadAll());
-
-
+//console.log("dk_echo()");
 
 // https://stackoverflow.com/a/950146/688352
-/*
 function loadScript(url, callback) {
     // Adding the script tag to the head as suggested before
     var head = document.head;
@@ -20,16 +12,20 @@ function loadScript(url, callback) {
     // There are several events for cross browser compatibility.
     script.onreadystatechange = callback;
     script.onload = callback;
-
     head.appendChild(script);
 }
-*/
 
 
 
-
+//################################################################################
+//# dk_echo(message)
+//#
+//#     Print a message to the console
+//#
+//#     @msg    - The message to print
+//#
 dk_echo = function(msg) {
-	WScript.Echo(msg);
+	console.log(msg);
 }
 
 

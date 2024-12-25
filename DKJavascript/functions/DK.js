@@ -1,10 +1,6 @@
 // TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
-WScript.Echo("DK.js()");
+console.log("DK.js");
 
-if(typeof ActiveXObject === "function"){
-	var XMLHttpRequest = function(){ return new ActiveXObject("MSXML2.XMLHTTP.6.0"); }
-}
-WScript.Echo("DK.js():6");
 dk_source = function(url){
 	var xmlHttpRequest = new XMLHttpRequest;
 	xmlHttpRequest.open("GET", url, false);
@@ -12,7 +8,7 @@ dk_source = function(url){
 	(1, eval)(xmlHttpRequest.responseText); 
 }
 dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js");
-WScript.Echo("after dk_source");
+console.log("after dk_source");
 
 var HOST = "unknown"
 if(typeof ActiveXObject === "function"){
@@ -25,7 +21,7 @@ if(typeof ActiveXObject === "function"){
 } else {
 	HOST = "browser"
 }
-WScript.Echo("DK.js()");
+console.log("DK.js()");
 
 
 //if(typeof WScript === "object"){

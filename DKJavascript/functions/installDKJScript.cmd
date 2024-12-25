@@ -31,7 +31,7 @@ if "%~1" neq "" goto runDKJScript
 	set "DKSCRIPT_PATH=%~4"
 	set "CMD_EXE=%COMSPEC%"
 	
-    %CMD_EXE% /c %CSCRIPT_EXE% //d //nologo //e:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%/main_file_local.js" "%DKSCRIPT_PATH%"
+    %CMD_EXE% /c %CSCRIPT_EXE% //d //nologo //e:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%/DKJSCRIPT.js" "%DKSCRIPT_PATH%"
 	::%COMSPEC% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
 	pause
 %endfunction%

@@ -13,7 +13,7 @@
 //#   https://en.wikipedia.org/wiki/ANSI_escape_code
 //#
 dk_color = function() {
-	//dk_debugFunc 0 1
+	//dk_debugFunc(0 1)
 	
 	var USE_COLOR = 1;
 	
@@ -180,9 +180,9 @@ dk_color();
 
 
 
-//### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST = function() {
-	//dk_debugFunc 0
+	//dk_debugFunc(0)
 	
 	console.log("");
 	console.log("");
