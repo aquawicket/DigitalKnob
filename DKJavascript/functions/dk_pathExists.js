@@ -26,4 +26,5 @@ DKTEST = function() {
 	} else {
 	    console.log("path does not exist");
 	}
+	return;
 }

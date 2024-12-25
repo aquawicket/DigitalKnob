@@ -1,6 +1,7 @@
 //################################################################################
 //# dk_dirname(path)
 //#
+//#    https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/filesystemobject-object
 //#
 dk_dirname = function(path) {
 	//dk_debugFunc(1);
