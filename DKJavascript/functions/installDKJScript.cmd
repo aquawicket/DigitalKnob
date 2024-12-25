@@ -27,11 +27,13 @@ if "%~1" neq "" goto runDKJScript
 :runDKJScript
 	set "CSCRIPT_EXE=%~1"
 	set "WSCRIPT_EXE=%~2"
-	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3
+	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3"
 	set "DKSCRIPT_PATH=%~4"
 	set "CMD_EXE=%COMSPEC%"
-	
-    %CMD_EXE% /c %CSCRIPT_EXE% //d //nologo //e:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%/DKJSCRIPT.js" "%DKSCRIPT_PATH%"
+
+   %CMD_EXE% /c %CSCRIPT_EXE% //D //nologo //E:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%\DKJSCRIPT.js" "%DKSCRIPT_PATH%" && (echo success) || (echo failed)
 	::%COMSPEC% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
+
+	echo pause
 	pause
 %endfunction%
