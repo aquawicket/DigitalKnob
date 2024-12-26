@@ -11,7 +11,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	set "path=%~1"
 
-	powershell.exe -windowstyle hidden -command "$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \"%path%\" /r /d ' + $Y + ' && icacls \"%path%\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs"
+	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
+	::"%POWERSHELL_EXE%" -windowstyle hidden -command "$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \"%path%\" /r /d ' + $Y + ' && icacls \"%path%\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs"
+	%ComSpec% /c "C:\Windows\System32\takeown.exe" /f "%path%"
 
 %endfunction%
 
@@ -24,5 +26,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-	%dk_call% dk_takeOwnership %DIGITALKNOB_DIR%
+	
+	%dk_call% dk_takeOwnership "%DIGITALKNOB_DIR%"
 %endfunction%

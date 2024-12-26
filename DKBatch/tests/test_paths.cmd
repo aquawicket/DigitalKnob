@@ -1,13 +1,14 @@
 @echo off
+if not defined DKBATCH_FUNCTIONS_DIR_  set "DKBATCH_FUNCTIONS_DIR_=../functions/"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::# http://cplusplus.bordoon.com/cmd_exe_variables.html
 
 
-::###### DK_Init ######
-call "../functions/DK.cmd"
 
 :main
-	set IN=%0
+::	set IN=%0
+set "IN=C:\Windows\NonExistent.file
 ::	set "IN=%0"
 ::	set IN=%~0
 ::	set "IN=%~0"
@@ -28,51 +29,47 @@ call "../functions/DK.cmd"
 ::	set "IN=..\..\DKBatch\functions\DK.cmd"
 ::	set "IN=..\..\DKBatch\..\Batch\functions\DK.cmd"
 ::	set IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\
-::	set "IN=C:/Users/aquawicket/digitalknob/Development/DKBatch/"
+::	set "IN=C:/Users/aquawicket/digitalknob/Development/DKBatch/DK.cmd"
 ::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch"
 
 	echo IN         = "%IN%"
 
+	%dk_call% dk_pathExists "%IN%"
+	%dk_call% dk_pathExists "%IN%" && (echo "%IN%" exists) || (echo "%IN%" does NOT exists)
+	
 	call :get_variable "%IN%" variable
 	echo variable   = %variable%
 
-	call dk_getUnquoted "%IN%" unquoted
+	%dk_call% dk_getUnquoted "%IN%" unquoted
 	echo unquoted   = %unquoted%
 
-	call dk_getDrive "%IN%" drive
+	%dk_call% dk_realpath "%IN%" realpath
+	echo realpath   = %realpath%
+	
+	%dk_call% dk_dirname "%IN%" dirname
+	echo dirname   = %dirname%
+	
+	%dk_call% dk_basename "%IN%" basename
+	echo basename   = %basename%
+	
+	%dk_call% dk_getDrive "%IN%" drive
 	echo drive      = %drive%
 
-	call dk_getPath "%IN%" pathOnly
-	echo pathOnly   = %pathOnly%
-
-	%dk_call% dk_basename "%IN%" nameOnly
-	echo nameOnly   = %nameOnly%
-
-	call dk_getExtension "%IN%" extension
+	%dk_call% dk_getExtension "%IN%" extension
 	echo extension  = %extension%
 
-	call dk_getFullPath "%IN%" fullPath
-	echo fullPath   = %fullPath%
-
-	call dk_getShortPath "%IN%" shortPath
+	%dk_call% dk_getShortPath "%IN%" shortPath
 	echo shortPath  = %shortPath%
 
-	call dk_getAttributes "%IN%" attributes
+	%dk_call% dk_getAttributes "%IN%" attributes
 	echo attributes = %attributes%
 
-	call dk_getFileTime "%IN%" fileTime
+	%dk_call% dk_getFileTime "%IN%" fileTime
 	echo fileTime   = %fileTime%
 
-	call dk_getFileSize "%IN%" filesize
+	%dk_call% dk_getFileSize "%IN%" filesize
 	echo filesize   = %filesize% bytes
 	
-	%dk_call% dk_basename "%IN%" fullname
-	echo fullname   = %fullname%
-	
-	call dk_dirname "%IN%" directory
-	echo directory  = %directory%
-	
-	pause
 %endfunction%
 
 

@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if defined POWERSHELL_EXE %return%
     
     :: try powershell.exe
-    %dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
+    %dk_call% dk_findProgram POWERSHELL_EXE powershell.exe
     if defined POWERSHELL_EXE %return%
 %endfunction%
 
@@ -32,6 +32,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_POWERSHELL_EXE
+	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
     %dk_call% dk_printVar POWERSHELL_EXE
 %endfunction%

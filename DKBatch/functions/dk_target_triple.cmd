@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "default_target_env=clang"
 
 	::### Get TARGET_DIR ###
-	!dk_call! dk_getFullPath "!CMAKE_BINARY_DIR!" TARGET_DIR
+	!dk_call! dk_realpath "!CMAKE_BINARY_DIR!" TARGET_DIR
 	!dk_call! dk_printVar TARGET_DIR 							&:: TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
 
 	::### Set target_type / TARGET_TYPE ###

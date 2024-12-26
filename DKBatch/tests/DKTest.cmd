@@ -1,14 +1,13 @@
 @echo off
+if not defined DKBATCH_FUNCTIONS_DIR_  set "DKBATCH_FUNCTIONS_DIR_=../functions/"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+
 setlocal EnableDelayedExpansion
 
 echo DKTest.cmd()
 
 call dk_clearScreen
 call dk_clearScreen
-
-::############ Load Function files ############
-call functions\DK.cmd
-
 
 call dk_info dk_info
 call dk_debug dk_debug

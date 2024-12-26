@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     if not exist "%funcPath%" echo Downloading %funcName%
     call dk_source dk_set
-    call dk_source dk_getFullPath
+    call dk_source dk_realpath
     call dk_source dk_download
     if not exist "%funcPath%" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName%.cmd" "%funcPath%"
     if not exist "%funcPath%" call dk_error "ERROR: %funcPath%: file not found"

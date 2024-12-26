@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         %return%
     )
 
-    %dk_call% dk_getFullPath "%_path_%" _path_ 
+    %dk_call% dk_realpath "%_path_%" _path_ 
 
     del /F /Q "%_path_%" %NO_OUTPUT%
     rd /s /q "%_path_%" %NO_OUTPUT%
