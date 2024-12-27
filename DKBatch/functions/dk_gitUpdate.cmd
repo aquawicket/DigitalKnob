@@ -27,11 +27,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
 
     "%GIT_EXE%" -C %DKBRANCH_DIR% checkout %_branch_%
-    if NOT "%ERRORLEVEL%" == "0" (
-        %dk_call% dk_echo "Remote has no %_branch_% branch. Creating..."
-        "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
-        "%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
-    )
+    if "%ERRORLEVEL%" == "0" (%return%)
+
+    %dk_call% dk_echo "Remote has no %_branch_% branch. Creating..."
+    "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
+    "%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
+
 %endfunction%
 
 
