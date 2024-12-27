@@ -30,7 +30,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" init -b %_branch_%
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" remote add origin %_url_%
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" fetch
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout -t origin/%_branch_% -f -- && %return%
+	"%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout -t origin/%_branch_% -f -- && pause
 	
 	:cloned
     "%GIT_EXE%" -C "%DKBRANCH_DIR%"	pull --all
