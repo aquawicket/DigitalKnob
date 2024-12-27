@@ -20,9 +20,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
     
-    ::if NOT exist "%DKBRANCH_DIR%\.git" ("%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%")
-	if NOT exist "%DKBRANCH_DIR%\.git" (%dk_call% dk_gitClone %_url_% "%DKBRANCH_DIR%")
-pause
+	if NOT exist "%DKBRANCH_DIR%\.git" (%dk_call% dk_gitClone %_url_% %_branch_% "%DKBRANCH_DIR%")
+
     ::%dk_call% dk_cd "%DKBRANCH_DIR%"
     "%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
     "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
