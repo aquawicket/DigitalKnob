@@ -1,21 +1,12 @@
 echo DKBuilder.cmd
-
 @echo off
-
-set "ENABLE_dk_debug=1"
-
 setlocal enableDelayedExpansion
 
 set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"
-
 set "DKF=%USERPROFILE%\digitalknob\Development\DKBatch\functions"
-
-::if not exist "!DKF!" set "DKF=%USERPROFILE%\.dk\DKBatch\functions"
-
-::attrib +h %USERPROFILE%\.dk
-
-set "DK=%DKF%\DK.cmd"
 mkdir "%DKF%" 2>nul 
+set "DK=%DKF%\DK.cmd"
+
 
 :: firewall
 call :dk_firewallAllow powershell "%WINDIR%\system32\windowspowershell\v1.0\powershell.exe"
