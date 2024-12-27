@@ -18,16 +18,27 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::)
         
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-    %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
     
-	if NOT exist "%DKBRANCH_DIR%\.git" (%dk_call% dk_gitClone %_url_% %_branch_% "%DKBRANCH_DIR%")
+	::if NOT exist "%DKBRANCH_DIR%\.git" (%dk_call% dk_gitClone %_url_% %_branch_% "%DKBRANCH_DIR%")
+	
+	if exist "%DKBRANCH_DIR%\.git" goto:cloned
+	%dk_call% dk_isEmptyDirectory "%~3" || %dk_call% dk_copy "%~3" "%~3_BACKUP" OVERWRITE
+	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+	
+	if not exist "%~3" ("%GIT_EXE%" -C "%~3" clone %~1 "%~3" && goto:cloned)
+	%dk_call% dk_isEmptyDirectory "%~3" && ("%GIT_EXE%" -C "%~3" clone %~1 "%~3" && goto:cloned)
 
-    ::%dk_call% dk_cd "%DKBRANCH_DIR%"
-    "%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
-    "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
-
-    "%GIT_EXE%" -C %DKBRANCH_DIR% checkout %_branch_%
-    if "%ERRORLEVEL%" == "0" (%return%)
+	::###### Fetch and checkout if directory already exists and is not empty
+	"%GIT_EXE%" -C "%DKBRANCH_DIR%" init -b %~2
+	"%GIT_EXE%" -C "%DKBRANCH_DIR%" remote add origin %~1
+	"%GIT_EXE%" -C "%DKBRANCH_DIR%" fetch
+	"%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout -t origin/%~2 -f
+	
+	:cloned
+    "%GIT_EXE%" -C "%DKBRANCH_DIR%"	pull --all
+    "%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout -- .
+    "%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout %_branch_% && %return%
+    ::if "%ERRORLEVEL%" == "0" (%return%)
 
     %dk_call% dk_echo "Remote has no %_branch_% branch. Creating..."
     "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
