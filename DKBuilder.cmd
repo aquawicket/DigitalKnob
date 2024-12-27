@@ -8,13 +8,12 @@ set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DK
 
 set "DKF=%USERPROFILE%\digitalknob\Development\DKBatch\functions"
 
-if not exist "!DKF!" set "DKF=%USERPROFILE%\.dk\DKBatch\functions"
+::if not exist "!DKF!" set "DKF=%USERPROFILE%\.dk\DKBatch\functions"
 
-attrib +h %USERPROFILE%\.dk
+::attrib +h %USERPROFILE%\.dk
 
-set "DK=!DKF!\DK.cmd"
-mkdir "!DKF!" 2>nul
-set "DK=!DKF!\DK.cmd" 
+set "DK=%DKF%\DK.cmd"
+mkdir "%DKF%" 2>nul 
 
 :: firewall
 call :dk_firewallAllow powershell "%WINDIR%\system32\windowspowershell\v1.0\powershell.exe"
