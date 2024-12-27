@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_gitClone
-    call dk_debugFunc 2
+    call dk_debugFunc 2 3
  setlocal
     
 	::###### error if repository already exists
