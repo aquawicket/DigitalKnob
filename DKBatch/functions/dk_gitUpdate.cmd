@@ -35,25 +35,25 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:cloned
     "%GIT_EXE%" -C "%DKBRANCH_DIR%"	pull --all
     "%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout -- .
-    "%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout %_branch_% && %return%
+    "%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout %_branch_%
     ::if "%ERRORLEVEL%" == "0" (%return%)
 
-    %dk_call% dk_echo "Remote has no %_branch_% branch. Creating..."
-    "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
-    "%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
+    ::%dk_call% dk_echo "Remote has no %_branch_% branch. Creating..."
+    ::"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
+    ::"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
 
-%endfunction%
-
+::%endfunction%
+exit /b 0
 
 
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-    call dk_debugFunc 0
- setlocal
- 
-    ::%dk_call% dk_gitUpdate
-    %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
-%endfunction%
+:::DKTEST
+::    call dk_debugFunc 0
+:: setlocal
+:: 
+::    ::%dk_call% dk_gitUpdate
+::    %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
+::%endfunction%
