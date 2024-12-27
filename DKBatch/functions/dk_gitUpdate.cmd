@@ -1,3 +1,5 @@
+echo dk_gitUpdate.cmd
+
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 

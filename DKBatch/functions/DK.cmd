@@ -1,3 +1,5 @@
+echo DK.cmd
+
 @echo off
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
 

@@ -1,3 +1,5 @@
+echo DKBuilder.cmd
+
 @echo off
 
 set "ENABLE_dk_debug=1"

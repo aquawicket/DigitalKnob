@@ -1,3 +1,5 @@
+echo dk_validateDK.cmd
+
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
@@ -19,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if not exist "%DKBRANCH_DIR%\.git" (%dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git %DKBRANCH%)
 	
 	if "%DKSCRIPT_NAME%" == "DKBuilder" set "DKSCRIPT_PATH=%DKBRANCH_DIR%\%DKSCRIPT_NAME%%DKSCRIPT_EXT%"
-	if not exist %DKSCRIPT_PATH%  %dk_call% dk_fatal "DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist"
+	if not exist "%DKSCRIPT_PATH%"  %dk_call% dk_fatal "DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist"
 	
 	if "%DKSCRIPT_NAME%" == "DKBuilder" set "DKSCRIPT_ARGS=%DKSCRIPT_PATH%"
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
