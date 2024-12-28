@@ -29,7 +29,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     :keyboard_input_timeout_loop
     set /a "timeout-=1"
-    ::<nul set /p "=.!ASCII_13!     %timeout%" <NUL
+    <nul set /p "=.!ASCII_13!     %timeout%" <NUL
     <nul set /p "="<NUL
     %dk_call% dk_title %timeout%
 

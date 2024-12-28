@@ -1,4 +1,3 @@
-echo DKBuilder.cmd
 @echo off
 setlocal enableDelayedExpansion
 

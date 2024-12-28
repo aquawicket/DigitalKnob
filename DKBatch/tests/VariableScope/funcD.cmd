@@ -6,13 +6,8 @@
 
 :DifferentName
 setlocal enableDelayedExpansion
-	call debugFunc
-
-	call dumpStackLine
-	
-	call setGlobal myVar reverse
-	::call funcE E
-	
 	call dumpvariables
-	
+	call setGlobal myVar reverse
+	echo:
+	call dumpvariables
 exit /b 0

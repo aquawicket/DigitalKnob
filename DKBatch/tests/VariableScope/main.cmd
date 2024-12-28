@@ -1,28 +1,17 @@
 @echo off
+set "dkcall=call dkcall"
+if not defined lvl (set /a lvl=0)
+
+
 setlocal enableDelayedExpansion
-call debugFunc
-
-call dumpStackLine
-::set "global=call:getGlobal $"
-::echo %global:$=myVar%
-
-
-::call set_test:main args
-::call:main && exit /b 0
-
+call setGlobal myVar main
+call dumpvariables
 
 :main
 setlocal enableDelayedExpansion
-	call debugFunc
-
-	call dumpStackLine
-	
-	call setGlobal myVar main
-	
-	call funcA A
-	
 	call dumpvariables
-
+	%dkcall% funcA A
+	call dumpvariables
 pause
 exit /b 0
 

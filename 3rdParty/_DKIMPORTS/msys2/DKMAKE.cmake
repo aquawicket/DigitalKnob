@@ -20,7 +20,6 @@ if(NOT DEFINED WIN_HOST)
 	dk_undepend(msys2)
 	return()
 endif()
-dk_pause()
 
 ############ MSYS2 variables ############
 #dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)

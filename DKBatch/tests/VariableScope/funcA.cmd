@@ -2,12 +2,7 @@
 
 :funcA
 setlocal enableDelayedExpansion
-	call debugFunc
-
-	call dumpStackLine
-	
-	call funcB B
-	
 	call dumpvariables
-	
+	%dkcall% funcB.cmd B
+	call dumpvariables
 exit /b 0
