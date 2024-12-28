@@ -1,5 +1,3 @@
-echo dk_gitUpdate.cmd
-
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
@@ -20,42 +18,32 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::)
         
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+    %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
     
-	if exist "%DKBRANCH_DIR%\.git" goto:cloned
-	%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" || %dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
-	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
-	
-	if not exist "%DKBRANCH_DIR%" ("%GIT_EXE%" -C "%DKBRANCH_DIR%" clone %_url_% "%DKBRANCH_DIR%" && goto:cloned)
-	%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" && ("%GIT_EXE%" -C "%DKBRANCH_DIR%" clone %_url_% "%DKBRANCH_DIR%" && goto:cloned)
+    if NOT exist "%DKBRANCH_DIR%\.git" ("%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%")
 
-	::###### Fetch and checkout if directory already exists and is not empty
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" init -b %_branch_%
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" remote add origin %_url_%
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" fetch
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout -t origin/%_branch_% -f && exit /b 0
-	
-	:cloned
-    "%GIT_EXE%" -C "%DKBRANCH_DIR%"	pull --all
-    "%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout -- .
-    "%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout %_branch_%
-    ::if "%ERRORLEVEL%" == "0" (%return%)
+    ::%dk_call% dk_cd "%DKBRANCH_DIR%"
+    "%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
+    "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
 
-    ::%dk_call% dk_echo "Remote has no %_branch_% branch. Creating..."
-    ::"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
-    ::"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
+    "%GIT_EXE%" -C %DKBRANCH_DIR% checkout %_branch_%
+    if NOT "%ERRORLEVEL%" == "0" (
+        %dk_call% dk_echo "Remote has no %_branch_% branch. Creating..."
+        "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
+        "%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
+    )
+%endfunction%
 
-::%endfunction%
-exit /b 0
 
 
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:::DKTEST
-::    call dk_debugFunc 0
-:: setlocal
-:: 
-::    ::%dk_call% dk_gitUpdate
-::    %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
-::%endfunction%
+:DKTEST
+    call dk_debugFunc 0
+ setlocal
+ 
+    ::%dk_call% dk_gitUpdate
+    %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
+%endfunction%

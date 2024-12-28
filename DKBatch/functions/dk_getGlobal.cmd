@@ -9,7 +9,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1
  setlocal
  
-	for /F "tokens=1,2* skip=2" %%a in ('%SystemRoot%\System32\reg.exe QUERY HKCU\Environment /v %~1 2^>nul') do if /I "%%a" == "%~1" endlocal & set "%1=%%c"
+	::for /F "tokens=1,2* skip=2" %%a in ('%SystemRoot%\System32\reg.exe QUERY HKCU\Environment /v %~1 2^>nul') do if /I "%%a" == "%~1" endlocal & set "%1=%%c"
+	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
+	set /p value=< "%DKCACHE_DIR%\%~1.var"
+	endlocal & set "%~1=%value%"
 	
 ::debug
 ::    %dk_call% dk_printVar %1

@@ -10,7 +10,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     ::%SystemRoot%\System32\reg.exe ADD HKCU\Environment /f /v %~1 /d "%~2" >nul
-	setx %~1 "%~2" >nul
+	::setx %~1 "%~2" >nul
+	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
+	echo %~2 > %DKCACHE_DIR%\%~1.var
 	endlocal & set "%~1=%~2"
 	
 ::debug
