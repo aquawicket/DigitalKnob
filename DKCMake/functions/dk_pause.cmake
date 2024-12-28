@@ -18,11 +18,20 @@ function(dk_pause)
 	endif()
 	dk_echo("${pause_msg}")
 	
+	###### Cmd ######
+	if(DEFINED ENV{COMSPEC})
+		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
+		set(cmnd ${CMD_EXE} /c pause >nul)
+		dk_debug("${cmnd}")
+		execute_process(COMMAND ${cmnd})
+		dk_return()
+	endif()
+	
 	###### BASH ######
 	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(BASH_EXE)
 		set(cmnd ${BASH_EXE} -c "read -p ''")
-		#message("${cmnd}")
+		dk_debug("${cmnd}")
 		execute_process(COMMAND ${cmnd})
 		dk_return()
 	endif()
@@ -31,7 +40,7 @@ function(dk_pause)
 	execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE SH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(SH_EXE)			
 		set(cmnd ${SH_EXE} -c "read -p ''")
-		#message("${cmnd}")
+		dk_debug("${cmnd}")
 		execute_process(COMMAND ${cmnd})
 		dk_return()
 	endif()
@@ -40,21 +49,12 @@ function(dk_pause)
 	find_program(POWERSHELL_EXE powershell.exe)
 	if(POWERSHELL_EXE)
 		set(cmnd ${POWERSHELL_EXE} Read-Host)
-		#message("${cmnd}")
+		dk_debug("${cmnd}")
 		execute_process(COMMAND ${cmnd})
 		dk_return()
 	endif()
 	
-	###### Cmd ######
-	if(DEFINED ENV{COMSPEC})
-		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
-		set(cmnd ${CMD_EXE} /c pause >nul)
-		#message("${cmnd}")
-		execute_process(COMMAND ${cmnd})
-		dk_return()
-	endif()
-	
-	dk_fatal("dk_pause() failed:   both CMD_EXE and BASH_EXE are invalid!")
+	dk_fatal("dk_pause() failed:  cant find CMD_EXE, BASH_EXE or SH_EXE!")
 endfunction()
 
 

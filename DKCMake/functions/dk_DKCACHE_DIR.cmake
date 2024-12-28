@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ####################################################################
 # dk_DKCACHE_DIR() <set_var>
@@ -10,8 +10,8 @@ function(dk_DKCACHE_DIR)
     dk_debugFunc(0 1)
 	
 	###### SET ######
-	if(ARGN)
-		dk_set(DKCACHE_DIR "${ARGN}")
+	if(ARGV)
+		dk_set(DKCACHE_DIR "${ARGV}")
 		
 	###### GET ######
 	else()
@@ -21,6 +21,7 @@ function(dk_DKCACHE_DIR)
 	if(NOT EXISTS "${DKCACHE_DIR}")
 		dk_makeDirectory("${DKCACHE_DIR}")
 	endif()
+	dk_assertPath(DKCACHE_DIR)
 endfunction()
 
 
