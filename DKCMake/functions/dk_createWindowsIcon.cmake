@@ -17,13 +17,15 @@ function(dk_createWindowsIcon)
 	dk_dirname("${ARGV1}" dirname)
 	dk_makeDirectory("${dirname}")
 	
-	#dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
+	dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
 	dk_getNativePath("${IMAGEMAGICK_CONVERT_EXE}" IMAGEMAGICK_CONVERT_EXE_WIN)
 	dk_getNativePath("${ARGV0}" inpath_WIN)
 	dk_getNativePath("${ARGV1}" outpath_WIN)
-	set(CONVERT_COMMAND ${IMAGEMAGICK_CONVERT_EXE_WIN} ${inpath_WIN} -define icon:auto-resize=256,128,64,48,32,16 ${outpath_WIN})
+	set(CONVERT_COMMAND "${IMAGEMAGICK_CONVERT_EXE_WIN} ${inpath_WIN} -define icon:auto-resize=256,128,64,48,32,16 ${outpath_WIN}")
 	dk_replaceAll("${CONVERT_COMMAND}" "/" "\\" CONVERT_COMMAND)
-	execute_process(COMMAND ${CONVERT_COMMAND})
+	dk_debug(${CONVERT_COMMAND})
+	#execute_process(COMMAND ${CONVERT_COMMAND})
+	dk_command(${CONVERT_COMMAND})
 endfunction()
 
 

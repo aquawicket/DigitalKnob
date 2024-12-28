@@ -13,9 +13,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_depend(ghostscript)
 
 dk_validate(host_triple "dk_host_triple()")
-#if(WIN_HOST)
-#	dk_depend(vc_redist)
-#endif()
+if(WIN_HOST)
+	dk_depend(vc_redist)
+endif()
 
 ### IMPORT LIBRARY ###
 if(UNIX_HOST)
