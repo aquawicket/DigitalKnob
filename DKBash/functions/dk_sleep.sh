@@ -17,7 +17,7 @@ dk_sleep() {
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
 
-	seconds=5)
+	seconds=5
 	echo "sleeping for ${seconds} seconds . . ."
 	dk_sleep ${seconds}
 }

@@ -70,6 +70,7 @@ dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_ANDROID_DL
 ###### INSTALL ######
 dk_set(ANDROID_NDK "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
 #dk_set(ANDROID_NDK_DIR "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
+#dk_assertPath(ANDROID_NDK)
 
 dk_makeDirectory	("${ANDROID_SDK_DIR}/ndk")
 if(WIN_HOST)

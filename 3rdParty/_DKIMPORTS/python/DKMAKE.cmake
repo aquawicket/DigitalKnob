@@ -86,9 +86,9 @@ if(EXISTS "${PYTHON_DIR}/libs")
 	dk_set(Python_LIBRARIES 	"${PYTHON_DIR}/libs")
 endif()
 
-dk_assertPath("${PYTHON_DIR}")
+dk_assertPath(PYTHON)
 if(NOT LINUX)
-	dk_assertPath("${PYTHON_EXE}")
+	dk_assertPath(PYTHON_EXE)
 endif()
 dk_prependEnvPath("${PYTHON_DIR}")
 
@@ -100,7 +100,7 @@ if(WIN_HOST)
 	endif()
 	dk_findProgram(PIP_EXE pip ${PYTHON_DIR}/Scripts)
 	
-	dk_assertPath(${PIP_EXE})
+	dk_assertPath(PIP_EXE)
 	dk_executeProcess(${PYTHON_EXE} -m pip install --upgrade pip)
 endif()
 
