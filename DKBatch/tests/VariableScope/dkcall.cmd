@@ -1,14 +1,15 @@
 @echo off
 
+:: defaults
+if not defined dkcall  set "dkcall=call dkcall"
+if not defined lvl (set /a lvl=0)
+	
 :dkcall
 
 	set "comand=%~1"
 	set "args=%*"
 	set "args=!args:%~1=!"
-	
-	
-	
-	
+
 	
 	(set _1=%~1)
 	(set f1=%~f1)
@@ -21,18 +22,41 @@
 	(set indent=)
 	for /l %%x in (1, 1, %lvl%) do set "indent=!indent!%mark%"
 	
-	
 	echo:
 	echo %indent%^> %comand%(%args%)
+	
+	echo %indent% lvl = %lvl%
+	echo %indent% _1 = %_1%
+	echo %indent% f1 = %f1%
+	echo %indent% n1 = %n1%
+	echo %indent% x1 = %x1%
+	echo %indent% p1 = %p1%
+	echo %indent% ALL = %ALL%
+	echo %indent% globalVar = %globalVar%
+	
+	
+	
+	
 	:::::::::::::::::::::::::::::
 	call %comand% %args%
 	:::::::::::::::::::::::::::::
-	echo ^<%indent% %comand%(%args%)
-	echo:
+	
+	
 	
 	(set /a lvl-=1)
 	call GLOBAL.cmd
 	
+	echo:
+	echo ^<%indent% %comand%(%args%)
+	
+	echo %indent% lvl = %lvl%
+	echo %indent% _1 = %_1%
+	echo %indent% f1 = %f1%
+	echo %indent% n1 = %n1%
+	echo %indent% x1 = %x1%
+	echo %indent% p1 = %p1%
+	echo %indent% ALL = %ALL%
+	echo %indent% globalVar = %globalVar%
 	
 	
 	

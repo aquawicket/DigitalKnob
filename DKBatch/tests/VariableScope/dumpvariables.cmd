@@ -7,6 +7,4 @@ echo %indent%n1 = %n1%
 echo %indent%x1 = %x1%
 echo %indent%p1 = %p1%
 echo %indent%ALL = %ALL%
-	
-::call getGlobal myVar
 echo %indent%myvar = %myVar%

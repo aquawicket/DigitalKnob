@@ -6,8 +6,7 @@
 
 :DifferentName
 setlocal enableDelayedExpansion
-	call dumpvariables
-	call setGlobal myVar reverse
-	echo:
-	call dumpvariables
+
+	call setGlobal globalVar "STILL GLOBAL"
+
 exit /b 0
