@@ -5,7 +5,6 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
 # https://github.com/bkaradzic/bgfx.git
 
 ### DEPENDS ###
@@ -20,7 +19,7 @@ dk_import(https://github.com/bkaradzic/bgfx/archive/f8b20616def6ee7e82a3c14361c8
 
 ### LINK ###
 dk_include			(${BGFX_DIR}/include)
-if(UNIX
+if(UNIX)
 	dk_libDebug		(${BGFX_DEBUG_DIR}/libbgfx.a)
 	dk_libRelease	(${BGFX_RELEASE_DIR}/libbgfx.a)
 elseif()

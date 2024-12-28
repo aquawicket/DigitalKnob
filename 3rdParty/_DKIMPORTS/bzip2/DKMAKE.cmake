@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ############ bzip2 ############
-dk_load(dk_builder)
+dk_validate(host_triple "dk_host_triple()")
 # https://www.sourceware.org/bzip2
 # https://gitlab.com/bzip2/bzip2
 # https://github.com/kiyolee/bzip2-win-build

@@ -17,7 +17,6 @@ dk_getFileParam(${DKIMPORTS_DIR}/bullet3/dkconfig.txt BULLET3_DL)
 dk_import("${BULLET3_DL}")
 
 ### LINK ###
-dk_enable(ALL_LIBS)
 if(ALL_LIBS)
 	dk_enable(Bullet3Collision)
 	dk_enable(Bullet3Common)

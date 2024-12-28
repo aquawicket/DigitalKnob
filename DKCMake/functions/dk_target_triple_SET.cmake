@@ -3,10 +3,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_target_triple2()
+# dk_target_triple_SET()
 #
 #
-function(dk_target_triple2)
+function(dk_target_triple_SET)
 	dk_debugFunc()
 
 	set(default_target_env "clang")
@@ -268,5 +268,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_target_triple2()
+	dk_target_triple_SET()
 endfunction()

@@ -23,11 +23,18 @@ dk_import(https://github.com/kiyolee/bzip2-win-build/archive/8baa40cf.zip)
 
 ### LINK ###
 dk_include				(${BZIP2_WIN_BUILD_DIR}												BZIP2_INCLUDE_DIR)
-WIN_X86_dk_libDebug		(${BZIP2_WIN_BUILD_TRIPLE_DIR}/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
-WIN_X86_dk_libRelease	(${BZIP2_WIN_BUILD_TRIPLE_DIR}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
-WIN_X86_64_dk_libDebug	(${BZIP2_WIN_BUILD_TRIPLE_DIR}/x64/${DEBUG_DIR}/libbz2-static.lib	BZIP2_LIBRARY_DEBUG)
-WIN_X86_64_dk_libRelease(${BZIP2_WIN_BUILD_TRIPLE_DIR}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
-
+if(WIN_X86)
+	dk_libDebug		(${BZIP2_WIN_BUILD_TRIPLE_DIR}/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
+endif()
+if(WIN_X86)	
+	dk_libRelease	(${BZIP2_WIN_BUILD_TRIPLE_DIR}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
+endif()
+if(WIN_X86_64)
+	dk_libDebug	(${BZIP2_WIN_BUILD_TRIPLE_DIR}/x64/${DEBUG_DIR}/libbz2-static.lib	BZIP2_LIBRARY_DEBUG)
+endif()
+if(WIN_X86_64)	
+	dk_libRelease(${BZIP2_WIN_BUILD_TRIPLE_DIR}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
+endif()
 ### 3RDPARTY LINK ###
 dk_set(BZIP2_WIN_BUILD_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
 	

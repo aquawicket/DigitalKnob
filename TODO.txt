@@ -1,8 +1,24 @@
-12/12/24 Development
+12/128/24 Development
 
 *******************
 *** DIGITALKNOB ***
 ********************
+
+Merge dk_target_triple.cmake and dk_target_triple_SET.cmake into one file.
+
+Finish coding dk_target_triple.sh
+
+Start coding dk_target_triple.ps1
+
+remove all dk_load(dk_builder) lines from /_DKIMPORTS/lib/DKMAKE.cmake
+
+
+
+
+
+
+
+
 
 There are currently 2 branches that implement the DOM.
 1. Javascript DOM, (located in the main and Development branches)
@@ -18,7 +34,6 @@ Move all github wiki into DK.Readme.md and remove all wiki
 Remove github Wiki and create an example just like /DKPlugins/index.html
 Create a fork of RmlUi with a javascript folder for the document object, then dom
 
-Go over DKFile.js and alphabatize functions
 
 Move all gui related javascript into DKGui.js
 DK.js will have access to a C++ EventTarget
