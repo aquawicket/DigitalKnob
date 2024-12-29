@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 ::#   i.e.  win_x86_64_clang
 ::#
-::#	If the CMAKE_BINARY_DIR is missing the <OS> or the <ARCH>, dk_setTargetTriple will be called to get those variables
+::#	If the CMAKE_BINARY_DIR is missing the <OS> or the <ARCH>, dk_target_triple_SET will be called to get those variables
 ::#
 ::#	os   				= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
 ::#	OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
@@ -59,7 +59,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:if
 		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!			&:: TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	:else
-		!dk_call! dk_setTargetTriple
+		!dk_call! dk_target_triple_SET
 		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!/!triple!
 	:endif
 
@@ -103,7 +103,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		!dk_call! dk_warning "The target triple:!triple! does not contain a valid os"
 		!dk_call! dk_unset triple
 		!dk_call! dk_unset TRIPLE 
-		!dk_call! dk_setTargetTriple
+		!dk_call! dk_target_triple_SET
 	) else (
 		!dk_call! dk_toUpper !os! OS
 		!dk_call! dk_set OS !OS! 
@@ -122,7 +122,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_stringContains "!triple!" "cosmopolitan" 	&& !dk_call! dk_set arch cosmopolitan	
 	if not defined arch (
 		!dk_call! dk_warning "The target triple:!triple! does not contain a valid arch"
-		!dk_call! dk_setTargetTriple
+		!dk_call! dk_target_triple_SET
 	) else (
 		!dk_call! dk_toUpper !arch! ARCH
 		!dk_call! dk_set ARCH !ARCH!

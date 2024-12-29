@@ -1,12 +1,12 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
-::if not defined dk_setTargetTriple (set "dk_setTargetTriple=1") else (goto:eof)
+::if not defined dk_target_triple_SET (set "dk_target_triple_SET=1") else (goto:eof)
 
 ::###############################################################################
-::# dk_setTargetTriple()
+::# dk_target_triple_SET()
 ::#
 ::#
-:dk_setTargetTriple
+:dk_target_triple_SET
 	call dk_debugFunc 0
 
 
@@ -263,5 +263,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_setTargetTriple
+	%dk_call% dk_target_triple_SET
 %endfunction%
