@@ -1,11 +1,11 @@
 @echo off
+echo %CD%
+if not defined DKBATCH_FUNCTIONS_DIR_    set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%\digitalknob\Development\DKBatch\functions\"
+if not defined DKINIT                    call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+pause
 
 if not "%~1" == "" (goto runDKCMake)
 :dk_install
-	::###### DKINIT ######
-	if not defined DKBATCH_FUNCTIONS_DIR_    set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
-	if not defined DKINIT                    call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
-	
 	::###### Install DKBash ######
 	%dk_call% dk_echo "Installing DKCmake . . ."
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake"
@@ -37,6 +37,7 @@ if not "%~1" == "" (goto runDKCMake)
 	::###### run script ######
     ::"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%" -P "%DKSCRIPT_PATH%"
 	::"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_="%DKCMAKE_FUNCTIONS_DIR_%" -P "%DKSCRIPT_PATH%"
+	%dk_call% dk_validate CMAKE_EXE "%dk_call% dk_CMAKE_EXE"
 	"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -P "%DKSCRIPT_PATH%"
 
 	::###### exit_code ######

@@ -47,7 +47,7 @@ echo "DKTEST ${0} (${*})"
 # No comments
 #
 if ( [ "$DKTEST" = "" ]                  ||
-     [ "$DKTEST" = "${0}" ]                ||
+     [ "$DKTEST" = "${0}" ]              ||
      [ "$DKTEST" = "${BASH_SOURCE[0]}" ] ||
      [ "$DKTEST" = "${BASH_SOURCE[1]}" ] ||
      [ "$DKTEST" = "${BASH_SOURCE[2]}" ] ); then

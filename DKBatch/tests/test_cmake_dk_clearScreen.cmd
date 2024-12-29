@@ -9,4 +9,3 @@ call ../functions/DK.cmd
 
 call dk_cmakeEval "dk_clearScreen()"
 
-call dk_pause
