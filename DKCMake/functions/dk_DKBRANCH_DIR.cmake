@@ -10,8 +10,8 @@ function(dk_DKBRANCH_DIR)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGN)
-		dk_set(DKBRANCH_DIR "${ARGN}")
+	if(ARGV)
+		dk_set(DKBRANCH_DIR "${ARGV}")
 		return()
 	endif()
 		

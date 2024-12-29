@@ -2,6 +2,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
+dk_fatal("dk_pickOS.cmake is discontinued")
 ##################################################################################
 # dk_pickOS()
 #

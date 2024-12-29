@@ -1,11 +1,12 @@
 @echo off
-echo %CD%
-if not defined DKBATCH_FUNCTIONS_DIR_    set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%\digitalknob\Development\DKBatch\functions\"
-if not defined DKINIT                    call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
-pause
 
+
+echo 1 = %~1
 if not "%~1" == "" (goto runDKCMake)
 :dk_install
+	if not defined DKBATCH_FUNCTIONS_DIR_    set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%\digitalknob\Development\DKBatch\functions\"
+	if not defined DKINIT                    call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+
 	::###### Install DKBash ######
 	%dk_call% dk_echo "Installing DKCmake . . ."
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake"

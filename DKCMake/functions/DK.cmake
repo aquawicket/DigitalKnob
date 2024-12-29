@@ -2,8 +2,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include_guard()
 
-
-
 file(TO_CMAKE_PATH "$ENV{DKSCRIPT_PATH}" DKSCRIPT_PATH)
 #set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 
@@ -18,7 +16,15 @@ message("DKSHELL_PATH = ${DKSHELL_PATH}")
 message("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
 message("")
 
+get_filename_component(DKCMAKE_FUNCTIONS_DIR_ ${DKCMAKE_FUNCTIONS_DIR_} REALPATH)
+set(DKCMAKE_FUNCTIONS_DIR_ "${DKCMAKE_FUNCTIONS_DIR_}/")
+message("DKCMAKE_FUNCTIONS_DIR_ = ${DKCMAKE_FUNCTIONS_DIR_}")
+if(NOT EXISTS "${DKCMAKE_FUNCTIONS_DIR_}")
+	message(FATAL_ERROR "DKCMAKE_FUNCTIONS_DIR_:${DKCMAKE_FUNCTIONS_DIR_} does not exist")
+endif()
+	
 message("CMAKE_GENERATOR = ${CMAKE_GENERATOR}")
+
 
 ############ dk_cmakePolicies ############
 include("${CMAKE_CURRENT_LIST_DIR}/dk_cmakePolicies.cmake")
