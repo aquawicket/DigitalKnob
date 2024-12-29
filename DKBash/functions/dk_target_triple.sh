@@ -8,7 +8,7 @@
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 #   i.e.  win_x86_64_clang
 #
-#	If the CMAKE_BINARY_DIR is missing the <OS> or the <ARCH>, dk_setTargetTriple will be called to get those variables
+#	If the CMAKE_BINARY_DIR is missing the <OS> or the <ARCH>, dk_target_triple_SET will be called to get those variables
 #
 #	os   				= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
 #	OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
@@ -56,7 +56,7 @@ dk_target_triple() {
 		 ( dk_call dk_stringContains "${TARGET_DIR}" "cosmopolitan"	) ); then
 		     dk_call dk_set TARGET_TRIPLE_DIR ${TARGET_DIR}
 	else
-		dk_call dk_setTargetTriple
+		dk_call dk_target_triple_SET
 		dk_call dk_set TARGET_TRIPLE_DIR ${TARGET_DIR}/${triple}
 	fi
 
@@ -67,7 +67,7 @@ dk_target_triple() {
 		dk_call dk_debug "Creating directory . . .${TARGET_TRIPLE_DIR}"
 		dk_call dk_makeDirectory "${TARGET_TRIPLE_DIR}"
 	fi
-: '	
+
 	#### Set DK_PROJECT_DIR ###
 	dk_call dk_dirname "${TARGET_TRIPLE_DIR}" DK_PROJECT_DIR
 	dk_call dk_set DK_PROJECT_DIR "${DK_PROJECT_DIR}"
@@ -96,11 +96,11 @@ dk_target_triple() {
 	dk_call dk_stringContains "${TRIPLE}" "windows" 		&& dk_call dk_set os windows
 	dk_call dk_stringContains "${TRIPLE}" "win"				&& dk_call dk_set os win
 	dk_call dk_stringContains "${TRIPLE}" "cosmopolitan"	&& dk_call dk_set os cosmopolitan
-	if [ -z os ]; then
+	if [ -z "${os-}" ]; then
 		# dk_call dk_warning "The target triple:${triple} does not contain a valid os"
 		dk_call dk_unset triple
 		dk_call dk_unset TRIPLE 
-		dk_call dk_setTargetTriple
+		dk_call dk_target_triple_SET
 	else
 		dk_call dk_toUpper ${os} OS
 		dk_call dk_set OS ${OS} 
@@ -119,9 +119,9 @@ dk_target_triple() {
 	dk_call dk_stringContains "${triple}" "x86" 			&& dk_call dk_set arch x86
 	dk_call dk_stringContains "${triple}" "cosmopolitan" 	&& dk_call dk_set arch cosmopolitan	
 	
-	if [ -z arch ]; then
+	if [ -z "${arch-}" ]; then
 		dk_call dk_warning "The target triple:${triple} does not contain a valid arch"
-		dk_call dk_setTargetTriple
+		dk_call dk_target_triple_SET
 	else
 		dk_call dk_toUpper ${arch} ARCH
 		dk_call dk_set ARCH ${ARCH}
@@ -139,7 +139,7 @@ dk_target_triple() {
 	dk_call dk_stringContains "${triple}" "ucrt"  			&& dk_call dk_set env ucrt
 	dk_call dk_stringContains "${triple}" "msvc"  			&& dk_call dk_set env msvc
 	dk_call dk_stringContains "${triple}" "cosmopolitan" 	&& dk_call dk_set env cosmopolitan
-	if [ -z env ]; then
+	if [ -z "${env-}" ]; then
 		dk_call dk_warning "The target triple:${triple} does not contain a valid env"
 		dk_call dk_set env ${default_target_env}
 	else
@@ -154,19 +154,20 @@ dk_target_triple() {
 	fi
 
 	#### Set MSYSTEM
-	if [ -n ${ENV} ]; then
-		if [ -n CLANG ]; then 
-			if [ -n ARM64 ]; then
+	if [ -n "${ENV-}" ]; then
+		if [ -n "${CLANG-}" ]; then 
+			if [ -n "${ARM64-}" ]; then
 				dk_call dk_set msystem "${env}${arch}"	# msystem = clangarm64
 				dk_call dk_set MSYSTEM "${ENV}${ARCH}"	# MSYSTEM = CLANGARM64
-			elif [ -n X86_64 ]; then
+			elif [ -n "${X86_64-}" ]; then
 				dk_call dk_set msystem "${env}64"		# msystem = clang64, mingw64, ucrt64
 				dk_call dk_set MSYSTEM "${ENV}64"		# MSYSTEM = CLANG64, MINGW64, UCRT64
-			elif [ -n X86 ]; then
+			elif [ -n "${X86-}" ]; then
 				dk_call dk_set msystem "${env}32"		# msystem = clang32, mingw32
 				dk_call dk_set MSYSTEM "${ENV}32"		# MSYSTEM = CLANG32, MINGW32
 			else
 				dk_call dk_fatal "The target triple:${triple} does not contain a valid env or msystem"
+			fi
 		fi
 		dk_call dk_set ${MSYSTEM} 1						# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
 	fi
@@ -182,16 +183,16 @@ dk_target_triple() {
 	dk_call dk_set ${OS_ARCH}_TARGET 1
 
 	#### Set DEBUG_DIR and RELEASE_DIR variables
-	if [ -n IOS ]; then
+	if [ -n "${IOS-}" ]; then
 		dk_call dk_set DEBUG_DIR Debug-iphoneos
 		dk_call dk_set RELEASE_DIR Release-iphoneos
-	elif [ -n IOSSIM ]; then
+	elif [ -n "${IOSSIM-}" ]; then
 		dk_call dk_set DEBUG_DIR Debug-iphonesimulator
 		dk_call dk_set RELEASE_DIR Release-iphonesimulator
 	else
 		dk_call dk_set DEBUG_DIR Debug
 		dk_call dk_set RELEASE_DIR Release
-	fi'
+	fi
 }
 
 
