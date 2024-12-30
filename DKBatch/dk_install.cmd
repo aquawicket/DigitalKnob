@@ -1,32 +1,5 @@
 @echo off
-
-if "%~1" equ "%~0" goto dk_install
-if "%~1" neq ""    goto runDKBatch
-:dk_install
-	::###### DKINIT ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
-	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
-
-	::###### Install DKBatch ######
-	%dk_call% dk_echo "Installing DKBatch . . ."
-	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
-	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
-	
-	:: Set the registry entry for the exxtension
-	ftype DKBatch="%COMSPEC%" /c if exist "%~f0" ^
-	(echo installed ^& "%COMSPEC%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%COMSPEC%" "%DKCACHE_DIR%" "%%1" %%*) else ^
-	(echo not installed ^& "%%1" %%*)
-	
-	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "%ComSpec%"
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
-	assoc .cmd=DKBatch
-	
-	%dk_call% dk_success "DKBatch install complete"
-%endfunction%
-
+if "%*" == "" (goto dk_install)
 
 :runDKBatch
 	if not exist "%DKBATCH_FUNCTIONS_DIR%"   set "DKBATCH_FUNCTIONS_DIR=%~1"
@@ -51,4 +24,41 @@ if "%~1" neq ""    goto runDKBatch
 	if not exist "%DKCACHE_DIR%\reload" goto:eof
 	del "%DKCACHE_DIR%\reload"
 	goto runDKBatch
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+:dk_install
+	::###### DKINIT ######
+	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
+	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+
+	::###### Install DKBatch ######
+	%dk_call% dk_echo "Installing DKBatch . . ."
+	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
+	
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
+	
+	:: Set the registry entry for the exxtension
+	ftype DKBatch="%COMSPEC%" /c if exist "%~f0" ^
+	(echo installed ^& "%COMSPEC%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%COMSPEC%" "%DKCACHE_DIR%" "%%1" %%*) else ^
+	(echo not installed ^& "%%1" %%*)
+	
+	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "%ComSpec%"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
+	assoc .cmd=DKBatch
+	
+	%dk_call% dk_success "DKBatch install complete"
 %endfunction%

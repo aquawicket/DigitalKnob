@@ -1,6 +1,43 @@
 @echo off
+if "%*" == "" (goto dk_install)
 
-if "%~1" neq "" goto runDKPython
+:runDKPython
+	set "DKPYTHON_FUNCTIONS_DIR=%~1"
+	set "PYTHON_EXE=%~2"
+	set "DKSCRIPT_PATH=%~3"
+	
+	::###### run script ######
+	%COMSPEC% /V:ON /K call %PYTHON_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	
+	::###### exit_code ######
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	
+	::###### reload ######
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto runDKPython
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :dk_install
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -24,24 +61,4 @@ if "%~1" neq "" goto runDKPython
 	assoc .py=DKPython
 	
 	%dk_call% dk_success "DKPython install complete"
-%endfunction%
-
-
-:runDKPython
-	set "DKPYTHON_FUNCTIONS_DIR=%~1"
-	set "PYTHON_EXE=%~2"
-	set "DKSCRIPT_PATH=%~3"
-	
-	
-	::###### run script ######
-	%COMSPEC% /V:ON /K call %PYTHON_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
-	
-	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
-	
-	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKPython
 %endfunction%

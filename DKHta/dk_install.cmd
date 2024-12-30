@@ -1,4 +1,30 @@
 @echo off
+if "%*" == "" (goto dk_install)
+
+:runDKHta
+
+	:: TODO
+
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 :dk_install
     ::###### DKINIT ######

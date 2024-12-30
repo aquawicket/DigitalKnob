@@ -1,7 +1,77 @@
 @echo off
+if "%*" == "" (goto dk_install)
 
-if "%~1" equ "%~0" goto dk_install
-if "%~1" neq ""    goto runDKCpp
+:runDKCpp
+	::###### COMPILER_EXE ######
+	set "COMPILER_EXE=%~1"
+	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
+	
+	::###### DKC_FILE ######
+	set "DKCPP_FILE=%~2"
+	if not defined DKCPP_FILE    echo ERROR: DKCPP_FILE is invalid
+	
+	::###### APP_NAME ######
+	for %%Z in ("%DKCPP_FILE%") do set "APP_NAME=%%~nZ"	
+	
+	::###### Setup build directory
+	if not exist "%CD%\build" mkdir "%CD%\build"
+	
+	::###### APP_FILE ######
+	set "APP_FILE=%CD%\build\%APP_NAME%.exe"
+	
+	::###### Compile Code ######
+	echo compiling ...
+	if exist %APP_FILE%  del %APP_FILE%
+
+	set "COMPILE_COMMAND=%SH_EXE% %COMPILER_EXE% -mclang -mcosmo -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
+	echo %COMPILE_COMMAND%
+	%COMPILE_COMMAND%
+	
+	if not exist "%APP_FILE%" (
+		echo: 
+		echo ERROR: compilation of %DKCPP_FILE% failed.
+		pause
+		goto:eof
+	)
+	
+	::###### run executable ######
+	::cls
+	title %DKCPP_FILE%
+	echo:
+	echo ######## start %APP_FILE% ############
+	echo:
+    %COMSPEC% /v:on /c "%APP_FILE%"
+	echo:
+	echo ######### end %APP_FILE% ############
+	echo:
+	
+	set "return_code=%ERRORLEVEL%"
+	echo return_code = %return_code%
+	pause
+	
+	::###### reload ######
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto runDKCpp
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :dk_install
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmopolitan, gcc, msvc 
@@ -64,61 +134,4 @@ if "%~1" neq ""    goto runDKCpp
 	assoc .cpp=DKCpp
 	
 	%dk_call% dk_success "DKCpp install complete"
-%endfunction%
-
-
-
-:runDKCpp
-	::###### COMPILER_EXE ######
-	set "COMPILER_EXE=%~1"
-	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
-	
-	::###### DKC_FILE ######
-	set "DKCPP_FILE=%~2"
-	if not defined DKCPP_FILE    echo ERROR: DKCPP_FILE is invalid
-	
-	::###### APP_NAME ######
-	for %%Z in ("%DKCPP_FILE%") do set "APP_NAME=%%~nZ"	
-	
-	::###### Setup build directory
-	if not exist "%CD%\build" mkdir "%CD%\build"
-	
-	::###### APP_FILE ######
-	set "APP_FILE=%CD%\build\%APP_NAME%.exe"
-	
-	::###### Compile Code ######
-	echo compiling ...
-	if exist %APP_FILE%  del %APP_FILE%
-
-	set "COMPILE_COMMAND=%SH_EXE% %COMPILER_EXE% -mclang -mcosmo -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
-	echo %COMPILE_COMMAND%
-	%COMPILE_COMMAND%
-	
-	if not exist "%APP_FILE%" (
-		echo: 
-		echo ERROR: compilation of %DKCPP_FILE% failed.
-		pause
-		goto:eof
-	)
-	
-	::###### run executable ######
-	::cls
-	title %DKCPP_FILE%
-	echo:
-	echo ######## start %APP_FILE% ############
-	echo:
-    %COMSPEC% /v:on /c "%APP_FILE%"
-	echo:
-	echo ######### end %APP_FILE% ############
-	echo:
-	
-	set "return_code=%ERRORLEVEL%"
-	echo return_code = %return_code%
-	pause
-	
-	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKCpp
 %endfunction%

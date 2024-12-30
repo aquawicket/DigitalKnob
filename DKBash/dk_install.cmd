@@ -1,35 +1,5 @@
 @echo off
-
-::if "%~1" neq "" (goto runDKBash)
-:dk_install
-	::###### DKINIT ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
-	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
-	
-	::###### Install DKBash ######
-	%dk_call% dk_echo "Installing DKBash . . ."
-	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	::%dk_call% dk_validate GITBASH_EXE "%dk_call% dk_installGit"
-	%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
-	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"
-
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
-	ftype DKBash="C:\Windows\system32\cmd.exe" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
-
-	::ftype DKBash=%COMSPEC% /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%BASH_EXE%" "%%1" %*
-	
-	::%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
-	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"
-	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.sh"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
-	assoc .sh=DKBash
-	
-	%dk_call% dk_success "DKBash install complete"
-%endfunction%
-
+if "%*" == "" (goto dk_install)
 
 :runDKBash
 	set "DKBASH_FUNCTIONS_DIR=%~1"
@@ -57,4 +27,42 @@
 	del %~dp0\reload
 	cls
 	goto runDKBash
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+:dk_install
+	::###### DKINIT ######
+	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
+	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+	
+	::###### Install DKBash ######
+	%dk_call% dk_echo "Installing DKBash . . ."
+	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	::%dk_call% dk_validate GITBASH_EXE "%dk_call% dk_installGit"
+	%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
+	
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"
+
+	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
+	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
+	ftype DKBash="C:\Windows\system32\cmd.exe" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
+
+	::ftype DKBash=%COMSPEC% /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%BASH_EXE%" "%%1" %*
+	
+	::%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
+	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"
+	
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.sh"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
+	assoc .sh=DKBash
+	
+	%dk_call% dk_success "DKBash install complete"
 %endfunction%

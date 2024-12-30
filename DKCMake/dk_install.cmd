@@ -1,8 +1,43 @@
 @echo off
+if "%*" == "" (goto dk_install)
+
+:runDKCMake
+	set "CMAKE_EXE=%~1"
+	set "DKCMAKE_FUNCTIONS_DIR=%~2"
+	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
+	set "DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR%/"
+	set "DKSCRIPT_PATH=%~3"
+	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
+	
+	::###### run script ######
+    ::"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%" -P "%DKSCRIPT_PATH%"
+	::"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_="%DKCMAKE_FUNCTIONS_DIR_%" -P "%DKSCRIPT_PATH%"
+	::%dk_call% dk_validate CMAKE_EXE "%dk_call% dk_CMAKE_EXE"
+	"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -P "%DKSCRIPT_PATH%"
+
+	::###### exit_code ######
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	
+	::###### reload ######
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto runDKCMake
+%endfunction%
 
 
-echo 1 = %~1
-if not "%~1" == "" (goto runDKCMake)
+
+
+
+
+
+
+
+
+
+
+
+
 :dk_install
 	if not defined DKBATCH_FUNCTIONS_DIR_    set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%\digitalknob\Development\DKBatch\functions\"
 	if not defined DKINIT                    call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
@@ -27,26 +62,4 @@ if not "%~1" == "" (goto runDKCMake)
 %endfunction%
 
 
-:runDKCMake
-	set "CMAKE_EXE=%~1"
-	set "DKCMAKE_FUNCTIONS_DIR=%~2"
-	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
-	set "DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR%/"
-	set "DKSCRIPT_PATH=%~3"
-	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
-	
-	::###### run script ######
-    ::"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%" -P "%DKSCRIPT_PATH%"
-	::"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_="%DKCMAKE_FUNCTIONS_DIR_%" -P "%DKSCRIPT_PATH%"
-	%dk_call% dk_validate CMAKE_EXE "%dk_call% dk_CMAKE_EXE"
-	"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -P "%DKSCRIPT_PATH%"
 
-	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
-	
-	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKCMake
-%endfunction%

@@ -1,6 +1,43 @@
 @echo off
+if "%*" == "" (goto dk_install)
 
-if "%*" neq "" goto runDKPowershell
+:runDKPowershell
+	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
+	set "POWERSHELL_EXE=%~2"
+	set "DKSCRIPT_PATH=%~3"
+	
+	
+	::###### run script ######
+	%COMSPEC% /v:on /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	
+	::###### exit_code ######
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	
+	::###### reload ######
+::	if not exist %~dp0\reload goto:eof
+::	del %~dp0\reload
+::	cls
+::	goto runDKPowershell
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :dk_install
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -22,24 +59,4 @@ if "%*" neq "" goto runDKPowershell
 	assoc .ps1=DKPowershell
 	
 	%dk_call% dk_success "DKPowershell install complete"
-%endfunction%
-
-
-:runDKPowershell
-	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
-	set "POWERSHELL_EXE=%~2"
-	set "DKSCRIPT_PATH=%~3"
-	
-	
-	::###### run script ######
-	%COMSPEC% /v:on /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
-	
-	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
-	
-	::###### reload ######
-::	if not exist %~dp0\reload goto:eof
-::	del %~dp0\reload
-::	cls
-::	goto runDKPowershell
 %endfunction%

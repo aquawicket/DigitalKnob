@@ -1,7 +1,84 @@
 @echo off
+if "%*" == "" (goto dk_install)
 
-if "%~1" equ "%~0" goto dk_install
-if "%~1" neq ""    goto runDKC
+:runDKC
+	::###### COMPILER_EXE ######
+	set "COMPILER_EXE=%~1"
+	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
+	
+	::###### DKC_FILE ######
+	set "DKC_FILE=%~2"
+	if not defined DKC_FILE    echo ERROR: DKC_FILE is invalid
+	
+	::###### APP_NAME ######
+	for %%Z in ("%DKC_FILE%") do set "APP_NAME=%%~nZ"	
+	
+	::###### Setup build directory
+	if not exist "%CD%\build" mkdir "%CD%\build"
+	
+	::###### APP_FILE ######
+	set "APP_FILE=%CD%\build\%APP_NAME%.exe"
+	
+	::###### Compile Code ######
+	echo compiling ...
+	if exist %APP_FILE%  del %APP_FILE%
+
+	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP_FILE% -static %DKC_FILE%"
+	echo %COMPILE_COMMAND%
+	%COMPILE_COMMAND%
+	
+	if not exist "%APP_FILE%" (
+		echo: 
+		echo ERROR: compilation of %DKC_FILE% failed.
+		pause
+		goto:eof
+	)
+	
+	::###### run executable ######
+	::cls
+	title %DKCPP_FILE%
+	echo:
+	echo ######## start %APP_FILE% ############
+	echo:
+    %COMSPEC% /v:on /c "%APP_FILE%"
+	echo:
+	echo ######### end %APP_FILE% ############
+	echo:
+	
+	set "return_code=%ERRORLEVEL%"
+	echo return_code = %return_code%
+	pause
+	
+	::###### reload ######
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto runDKC
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :dk_install
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
@@ -64,61 +141,4 @@ if "%~1" neq ""    goto runDKC
 	assoc .c=DKC
 	
 	%dk_call% dk_success "DKC install complete"
-%endfunction%
-
-
-
-:runDKC
-	::###### COMPILER_EXE ######
-	set "COMPILER_EXE=%~1"
-	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
-	
-	::###### DKC_FILE ######
-	set "DKC_FILE=%~2"
-	if not defined DKC_FILE    echo ERROR: DKC_FILE is invalid
-	
-	::###### APP_NAME ######
-	for %%Z in ("%DKC_FILE%") do set "APP_NAME=%%~nZ"	
-	
-	::###### Setup build directory
-	if not exist "%CD%\build" mkdir "%CD%\build"
-	
-	::###### APP_FILE ######
-	set "APP_FILE=%CD%\build\%APP_NAME%.exe"
-	
-	::###### Compile Code ######
-	echo compiling ...
-	if exist %APP_FILE%  del %APP_FILE%
-
-	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP_FILE% -static %DKC_FILE%"
-	echo %COMPILE_COMMAND%
-	%COMPILE_COMMAND%
-	
-	if not exist "%APP_FILE%" (
-		echo: 
-		echo ERROR: compilation of %DKC_FILE% failed.
-		pause
-		goto:eof
-	)
-	
-	::###### run executable ######
-	::cls
-	title %DKCPP_FILE%
-	echo:
-	echo ######## start %APP_FILE% ############
-	echo:
-    %COMSPEC% /v:on /c "%APP_FILE%"
-	echo:
-	echo ######### end %APP_FILE% ############
-	echo:
-	
-	set "return_code=%ERRORLEVEL%"
-	echo return_code = %return_code%
-	pause
-	
-	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKC
 %endfunction%

@@ -1,6 +1,43 @@
 @echo off
+if "%*" == "" (goto dk_install)
 
-if "%~1" neq "" (goto runDKVb)
+:runDKVb
+	set "DKVB_FUNCTIONS_DIR=%~1"
+	set "CSCRIPT_EXE=%~2"
+	set "DKSCRIPT_PATH=%~3"
+	set "CMD_EXE=%COMSPEC%"
+	%CMD_EXE% /V:ON /K %CSCRIPT_EXE% //E:vbscript //H:CScript %DKSCRIPT_PATH%
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :dk_install
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -23,13 +60,4 @@ if "%~1" neq "" (goto runDKVb)
 	assoc .vbs=DKVb
 	
 	%dk_call% dk_success "DKVb install complete"
-%endfunction%
-
-
-:runDKVb
-	set "DKVB_FUNCTIONS_DIR=%~1"
-	set "CSCRIPT_EXE=%~2"
-	set "DKSCRIPT_PATH=%~3"
-	set "CMD_EXE=%COMSPEC%"
-	%CMD_EXE% /V:ON /K %CSCRIPT_EXE% //E:vbscript //H:CScript %DKSCRIPT_PATH%
 %endfunction%
