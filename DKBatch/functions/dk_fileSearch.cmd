@@ -11,7 +11,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
 	set "base_path=%~1"
+	set "base_path=%base_path:/=\%"
 	set "file_pattern=%~2"
+	set "file_pattern=%file_pattern:/=\%"
 	set "search_depth=%~3"
 
 	::set file_pattern=%file_pattern:/=\%

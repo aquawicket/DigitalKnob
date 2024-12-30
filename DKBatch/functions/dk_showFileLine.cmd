@@ -10,15 +10,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2
  setlocal enableDelayedExpansion
  
+	set "_filepath_=%~f1"
+	set "_filepath_=%_filepath_:/=\%"
+ 
     if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     
-    set /a "line=%~2" || for /f "delims=:" %%a in ('findstr /n /c:"%~2" "%~f1"') do set "line=%%a"
+    set /a "line=%~2" || for /f "delims=:" %%a in ('findstr /n /c:"%~2" "%_filepath_%"') do set "line=%%a"
     
-    echo [91m  File: %~f1: !line! [0m
+    echo [91m  File: %_filepath_%: !line! [0m
     set /A n=1
     set /A min=!line!-15
     set /A max=!line!+15
-    for /f "delims=" %%a in ('findstr /n /r /c:"^" "%~f1"') do (
+    for /f "delims=" %%a in ('findstr /n /r /c:"^" "%_filepath_%"') do (
         if !n! LSS !max! (
             if !n! GTR !min! (
                 set str=%%a

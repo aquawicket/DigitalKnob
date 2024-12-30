@@ -15,6 +15,7 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     ::%dk_call% dk_printVar url
     
     set "destination=%~2"
+	set "destination=%destination:/=\%"
     ::%dk_call% dk_printVar destination
     
     %dk_call% dk_basename "%url%" url_filename

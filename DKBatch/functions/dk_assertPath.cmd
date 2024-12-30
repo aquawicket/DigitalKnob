@@ -13,11 +13,12 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 	:: check that ARG1 is valid
 	if "%~1" equ "" %dk_call% dk_fatal "dk_assertPath(%*): ARG1 is invalid"
 	
-	:: get the name of the variable
+	:: get the name if it's a variable
 	if defined %~1 (set "_name_=%1:") else (set "_name_=path:")
 	
 	:: check that the path has quotes
 	set "_path_=%1"
+	set "_path_=%_path_:/=\%"
 	if "" neq %_path_:~0,1%%_path_:~-1% (
 		if not defined %~1 	%dk_call% dk_error "dk_assertPath(%*): path is not quoted"
 	) else (
@@ -46,15 +47,15 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
  setlocal
  
 	::# correct path
-	%dk_call% dk_assertPath "C:\Program Files\Common Files"			&::OK
-	::# forward slashes 
 	%dk_call% dk_assertPath "C:/Program Files/Common Files"			&::OK
+	::# back slashes 
+	%dk_call% dk_assertPath "C:\Program Files\Common Files"			&::OK
 	::# lower case
-	%dk_call% dk_assertPath "c:\program files\common files"			&::OK
+	%dk_call% dk_assertPath "c:/program files/common files"			&::OK
 	::# UPPER CASE
-	%dk_call% dk_assertPath "C:\PROGRAM FILES\COMMON FILES"			&::OK
+	%dk_call% dk_assertPath "C:/PROGRAM FILES/COMMON FILES"			&::OK
 	
-    %dk_call% dk_set myPath "C:\Program Files\Common Files"
+    %dk_call% dk_set myPath "C:/Program Files/Common Files"
 	::# As a variable with %'s
     %dk_call% dk_assertPath "%myPath%"								&::OK		
 	::# As a variable with !'s
@@ -68,9 +69,9 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 	::# As a variable name quoted
     %dk_call% dk_assertPath "myPath"								&::NOT OK - no "quotes" around variable names
 	::# unquoted
-	%dk_call% dk_assertPath C:\Windows							    &::NOT OK - must be wrapped in "quotes"
+	%dk_call% dk_assertPath C:/Windows							    &::NOT OK - must be wrapped in "quotes"
 	::# As a variable unquoted
     %dk_call% dk_assertPath %myPath%								&::NOT OK - must have "quotes around vaiables"
 	::# Non Existent Path
-    %dk_call% dk_assertPath "C:\NonExistentPath"					&::ASSERT
+    %dk_call% dk_assertPath "C:/NonExistentPath"					&::ASSERT
 %endfunction%

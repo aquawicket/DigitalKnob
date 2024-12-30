@@ -8,7 +8,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_createSoftlink
     call dk_debugFunc 2
  setlocal
- 
+	
+	set "softlink_path=%~1"
+	set "softlink_path=%softlink_path:/=\%"
+	set "pointed_to_path=%~2"
+	set "pointed_to_path=%pointed_to_path:/=\%"
+	
     %dk_call% dk_todo "dk_createSoftlink not implemented"
 %endfunction%
 
@@ -20,5 +25,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_createSoftlink "C:\Users\Administrator\Desktop\digitalknob" "C:\Users\Administrator\digitalknob"
+    %dk_call% dk_createSoftlink "C:/Users/Administrator/Desktop/digitalknob" "C:/Users/Administrator/digitalknob"
 %endfunction%

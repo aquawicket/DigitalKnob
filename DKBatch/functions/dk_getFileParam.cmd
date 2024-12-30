@@ -9,7 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2
  setlocal
     
-	for /f "delims== tokens=1,2" %%A in (%~1) do (
+	set "_file_=%~1"
+	set "_file_=%_file_:/=\%"
+	for /f "delims== tokens=1,2" %%A in (%_file_%) do (
 		rem echo %%A = %%B
 		if "%%A" == "%~2" endlocal & set %~2=%%B
 	)
@@ -25,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_getFileParam %DKIMPORTS_DIR%\git\dkconfig.txt VERSION
+    %dk_call% dk_getFileParam %DKIMPORTS_DIR%/git/dkconfig.txt VERSION
 	%dk_call% dk_printVar VERSION
 	
 %endfunction%

@@ -8,18 +8,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1
  setlocal
  
-	%dk_call% dk_assertPath "%~1"
-	set "FN=%~1"
+	set "_file_=%~1"
+	set "_file_=%_file_:/=\%"
+	
+	%dk_call% dk_assertPath "%_file_%"
 	set "last_fdate=x"
 	
 	:watchFile_loop
         :: Get the file date/time, size and attributes
-        for %%a in (%FN%) do set fdate=%%~ta.%%~za.%%~aa
+        for %%a in (%_file_%) do set fdate=%%~ta.%%~za.%%~aa
 
         :: Different attributes found?
         if not "%last_fdate%"=="%fdate%" (
             cls
-			echo Monitoring %FN% for changes
+			echo Monitoring %_file_% for changes
 			echo    last file info = !last_fdate!
 			echo current file info = !fdate!
 			echo press 'q' to quit

@@ -10,7 +10,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     set "src=%~1"
+	set "src=%src:/=\%"
     set "dest=%~2"
+	set "dest=%dest:/=\%"
     
     %dk_call% dk_realpath "%src%" src_realpath
 	::%dk_call% dk_printVar src_realpath

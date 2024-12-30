@@ -9,7 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2
  setlocal
  
-    >nul findstr /c:"%~2" "%~1" &&  (
+	set "_file_=%~1"
+	set "_file_=%_file_:/=\%"
+    >nul findstr /c:"%~2" "%_file_%" &&  (
         if "%~3" neq "" (endlocal & set "%3=true")
         exit /b 0
     )

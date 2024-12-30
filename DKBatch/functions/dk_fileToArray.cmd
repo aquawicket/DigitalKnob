@@ -12,9 +12,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2
  setlocal
  
-    ::set "file=%~1"
+    set "_file_=%~f1"
+	set "_file_=%_file_:/=\%"
     set /a i=0
-    for /F "usebackq delims=" %%a in ("%~f1") do (
+    for /F "usebackq delims=" %%a in ("%_file_%") do (
         %if_NDK% call set "%~2[%%i%%]=%%a"      &:: FIXME: remove the need for call here
         %if_DK% set "%~2[!i!]=%%a"
         set /a i+=1

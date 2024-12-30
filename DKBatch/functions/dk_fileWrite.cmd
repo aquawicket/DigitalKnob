@@ -9,7 +9,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2
  setlocal
  
-    echo %~2 > "%~1"
+	set "_file_=%~1"
+	set "_file_=%_file_:/=\%"
+	
+    echo %~2 > "%_file_%"
 %endfunction%
 
 
