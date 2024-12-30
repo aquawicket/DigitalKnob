@@ -1,15 +1,22 @@
 @echo off
+echo ^@echo off > GLOBAL.cmd
+setlocal enableDelayedExpansion
+
+call :main
+exit /b 0
+
 
 
 :main
 setlocal enableDelayedExpansion
-	call printStack
+	if not defined dkcall  set "dkcall=call dkcall"
+	if not defined lvl (set /a lvl=0)
+	call setGlobal "STACK_0" "main"
 	
 	call setGlobal globalVarA GLOBALA
 	call setGlobal globalVarB GLOBALB
-	call dkcall funcA A
+	%dkcall% funcA A
 	
-	call printStack
 pause
 exit /b 0
 

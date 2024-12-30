@@ -2,10 +2,10 @@
 
 :funcA
 setlocal enableDelayedExpansion
-	call printStack
+	::call printStack
 	
 	set "LOCAL_VAR=local A"
 	%dkcall% funcB.cmd B
 
-	call printStack
+	::call printStack
 exit /b 0

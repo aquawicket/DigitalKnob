@@ -6,10 +6,10 @@
 
 :funcD
 setlocal enableDelayedExpansion
-	call printStack
+	::call printStack
 	
 	set "LOCAL_VAR=local D"
 	call setGlobal globalVarA "STILL A GLOBAL"
 	
-	call printStack
+	::call printStack
 exit /b 0
