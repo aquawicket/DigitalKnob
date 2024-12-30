@@ -31,8 +31,8 @@ function(DKTEST)
 		"Type=Application\n"
 		"Terminal=true\n"
 		"Name=\${APP_NAME}\n"
-		"Exec=\${DK_PROJECT_DIR}/\${triple}/Debug/\${APP_NAME}\n"
-		"Icon=\${DK_PROJECT_DIR}/icons/icon.png\n")
+		"Exec=\${DK_Project_Dir}/\${triple}/Debug/\${APP_NAME}\n"
+		"Icon=\${DK_Project_Dir}/icons/icon.png\n")
 
 	list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 	dk_fileWrite("APP_NAME.desktop" "${DESKTOP_FILE}")

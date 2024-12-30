@@ -62,7 +62,7 @@ function(dk_assets plugin)
 		PATTERN emscripten EXCLUDE
 		PATTERN dktest EXCLUDE)
 	
-	file(COPY ${plugin_path} DESTINATION ${DK_PROJECT_DIR}/assets ${ASSETS})
+	file(COPY ${plugin_path} DESTINATION ${DK_Project_Dir}/assets ${ASSETS})
 endfunction()
 
 

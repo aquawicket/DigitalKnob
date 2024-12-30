@@ -93,9 +93,9 @@ math(EXPR after_underscore "${first_underscore}+1" OUTPUT_FORMAT DECIMAL)
 string(SUBSTRING "${DK_BINARY_OSARCH}" ${after_underscore} -1 DK_BINARY_ARCH)
 dk_info("DK_BINARY_ARCH = ${DK_BINARY_ARCH}")
 
-### Set DK_PROJECT_DIR ###
-dk_dirname(${DK_BINARY_OSARCH_DIR} DK_PROJECT_DIR)
-dk_info("DK_PROJECT_DIR = ${DK_PROJECT_DIR}")
+### Set DK_Project_Dir ###
+dk_dirname(${DK_BINARY_OSARCH_DIR} DK_Project_Dir)
+dk_info("DK_Project_Dir = ${DK_Project_Dir}")
 	
 	
 if(1)

@@ -112,7 +112,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%triple%"=="WIN_ARM64_CLANG"    set CMAKE_GENERATOR="MinGW Makefiles"
 	if "%triple%"=="WIN_ARM64_MSVC"     set CMAKE_GENERATOR="Visual Studio 17 2022" -A arm64
 	if "%triple%"=="WIN_X86"  		    set CMAKE_GENERATOR="NMake Makefiles"
-	if "%triple%"=="WIN_X86_CLANG"      set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%triple%"=="WIN_X86_CLANG"      set "CMAKE_GENERATOR=MinGW Makefiles"
     if "%triple%"=="WIN_X86_MINGW"      set CMAKE_GENERATOR="MinGW Makefiles"
 	if "%triple%"=="WIN_X86_MSVC"       set CMAKE_GENERATOR="Visual Studio 17 2022" -A Win32
     if "%triple%"=="WIN_X86_64"         set CMAKE_GENERATOR="NMake Makefiles"

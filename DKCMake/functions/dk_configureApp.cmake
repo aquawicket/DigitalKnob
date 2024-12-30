@@ -3,14 +3,14 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_configureApp(DK_PROJECT_DIR)
+# dk_configureApp(DK_Project_Dir)
 #
 #
 function(dk_configureApp)
 	dk_debugFunc()
 	
-	set(DK_PROJECT_DIR ${ARGV0})
-	dk_basename(${DK_PROJECT_DIR} APP_NAME)
+	set(DK_Project_Dir ${ARGV0})
+	dk_basename(${DK_Project_Dir} APP_NAME)
 	
 	dk_info("\n")
 	dk_info("##############################################")
@@ -28,31 +28,31 @@ function(dk_configureApp)
 		dk_replaceAll("${PLUGINS_FILE}" "#include \"DKWindow.h\""  ""  PLUGINS_FILE)
 		dk_replaceAll("${PLUGINS_FILE}"  "\\n"  "\n"  PLUGINS_FILE)
 		dk_replaceAll("${PLUGINS_FILE}"  ";"  ""  PLUGINS_FILE)
-		dk_fileWrite("${DK_PROJECT_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
+		dk_fileWrite("${DK_Project_Dir}/DKPlugins.h" "${PLUGINS_FILE}")
 	endif()
 
 	dk_validate(DKPLUGINS_DIR "dk_DKPLUGINS_DIR()")
 	if(HAVE_DK)
 		## copy app default files without overwrite
 		dk_info("Copying DKPlugins/_DKIMPORT/ to App...")
-		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/icons ${DK_PROJECT_DIR}/icons) 
-		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h)
-		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/main.cpp ${DK_PROJECT_DIR}/main.cpp)
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/icons ${DK_Project_Dir}/icons) 
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_Project_Dir}/assets.h)
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/main.cpp ${DK_Project_Dir}/main.cpp)
 	endif()
 
 	# Copy VSCode project files to app
-	dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/DKApp.code-workspace ${DK_PROJECT_DIR}/DKApp.code-workspace)
-	dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/.vscode ${DK_PROJECT_DIR}/.vscode)
+	dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/DKApp.code-workspace ${DK_Project_Dir}/DKApp.code-workspace)
+	dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/.vscode ${DK_Project_Dir}/.vscode)
 
 	### Include all source files from the app folder for the compilers
 	#file(GLOB_RECURSE App_SRC
 	file(GLOB App_SRC
-		${DK_PROJECT_DIR}/*.h
-		${DK_PROJECT_DIR}/*.c
-		${DK_PROJECT_DIR}/*.hpp
-		${DK_PROJECT_DIR}/*.cpp)
-	list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/assets/*")
-	list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/${triple}/*")
+		${DK_Project_Dir}/*.h
+		${DK_Project_Dir}/*.c
+		${DK_Project_Dir}/*.hpp
+		${DK_Project_Dir}/*.cpp)
+	list(FILTER App_SRC EXCLUDE REGEX "${DK_Project_Dir}/assets/*")
+	list(FILTER App_SRC EXCLUDE REGEX "${DK_Project_Dir}/${triple}/*")
 	if(SRC_INCLUDE)
 		file(GLOB App_SRC_INCLUDE ${SRC_INCLUDE})
 		list(APPEND App_SRC ${App_SRC_INCLUDE})
@@ -64,47 +64,47 @@ function(dk_configureApp)
 	endif()
 
 	add_definitions(-DDKAPP)
-	include_directories(${DK_PROJECT_DIR})
+	include_directories(${DK_Project_Dir})
 	include_directories(${DKPLUGINS_DIR})
 
 	##############
 	if(WIN_X86_64)
 		########################## CREATE ICONS ###############################
-		dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+		dk_createIcons(${DK_Project_Dir}/icons/icon.png)
 		
 		################# BACKUP USERDATA / INJECT ASSETS #####################
 		if(HAVE_DK)
-			dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NO_HALT)
-			dk_delete(${DK_PROJECT_DIR}/assets/USER NO_HALT)
+			dk_copy(${DK_Project_Dir}/assets/USER ${DK_Project_Dir}/Backup/USER OVERWRITE NO_HALT)
+			dk_delete(${DK_Project_Dir}/assets/USER NO_HALT)
 			#Compress the assets, they will be included by resource.rc
 			dk_info("Creating assets.zip . . .")
-			dk_compressAssets(${DK_PROJECT_DIR}/assets)
+			dk_compressAssets(${DK_Project_Dir}/assets)
 			# Restore the backed up files
-			dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NO_HALT)
-			dk_delete(${DK_PROJECT_DIR}/Backup NO_HALT)
+			dk_copy(${DK_Project_Dir}/Backup/ ${DK_Project_Dir}/assets/ OVERWRITE NO_HALT)
+			dk_delete(${DK_Project_Dir}/Backup NO_HALT)
 			#dummy assets.h file, or the builder wil complain about assets.h missing
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE NO_HALT)
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_Project_Dir}/assets.h OVERWRITE NO_HALT)
 		endif()
 		
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
 			if(DEBUG)
-				dk_rename(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+				dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 			endif()
 			if(RELEASE)
-				dk_rename(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+				dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 			endif()
 		endif()
 		
 		####################### Create Executable Target ###################
 		if(HAVE_DK)
 			##set_source_files_properties(${DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_PROJECT_DIR}/resource.h)
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_PROJECT_DIR}/resource.rc)
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_Project_Dir}/resource.h)
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_Project_Dir}/resource.rc)
 			file(GLOB_RECURSE resources_SRC 
-				${DK_PROJECT_DIR}/*.manifest
-				${DK_PROJECT_DIR}/*.rc
-				${DK_PROJECT_DIR}/icons/windows/*.rc)
+				${DK_Project_Dir}/*.manifest
+				${DK_Project_Dir}/*.rc
+				${DK_Project_Dir}/icons/windows/*.rc)
 			list(APPEND App_SRC ${resources_SRC})
 		endif()
 

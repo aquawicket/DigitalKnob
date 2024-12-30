@@ -3,22 +3,22 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_generateAppCmake(DK_PROJECT_DIR) + DEPENDENCIES
+# dk_generateAppCmake(DK_Project_Dir) + DEPENDENCIES
 #
 #
-function(dk_generateAppCmake DK_PROJECT_DIR)
+function(dk_generateAppCmake DK_Project_Dir)
 	dk_debugFunc()
-	set(DK_PROJECT_DIR ${ARGV0})
+	set(DK_Project_Dir ${ARGV0})
 	set(DK_DEPENDENCIES ${ARGN})
 	
-	if(DK_PROJECT_DIR MATCHES "DKCMake")
+	if(DK_Project_Dir MATCHES "DKCMake")
 		return()
 	endif()
 	dk_load(dk_builder)
 	
-	dk_basename(${DK_PROJECT_DIR} APP_NAME)
+	dk_basename(${DK_Project_Dir} APP_NAME)
 	
-	dk_fileWrite(${DK_PROJECT_DIR}/CMakeLists.txt
+	dk_fileWrite(${DK_Project_Dir}/CMakeLists.txt
 ####################################################
 ################## CMakeLists.txt ##################
 
@@ -39,7 +39,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 project(${APP_NAME}_PROJECT)
 
 dk_set(APP_NAME	${APP_NAME})
-dk_configureApp(${DK_PROJECT_DIR})
+dk_configureApp(${DK_Project_Dir})
 
 ###################################################
 ###################################################

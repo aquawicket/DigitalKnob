@@ -11,7 +11,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 dk_depend(msys2)
-dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck")		# delete the database lock file
 
 
 dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
