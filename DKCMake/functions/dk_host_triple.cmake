@@ -63,9 +63,11 @@ function(dk_host_triple)
 		dk_fatal("CMAKE_HOST: Unknown host")
 	endif()
 	dk_assertVar(host_os)
+	dk_toLower(${host_os} host_os)      # host_os = win
+	dk_set(host_os ${host_os})			# Globalize
 	dk_set(${host_os}_host 1)			# win_host = 1
 	dk_toUpper(${host_os} HOST_OS)      # HOST_OS = WIN
-	dk_set(HOST_OS ${HOST_OS})
+	dk_set(HOST_OS ${HOST_OS})			# Globalize
 	dk_set(${HOST_OS}_HOST 1)			# WIN_HOST = 1
 #	dk_printVar(host_os)
 #	dk_printVar(HOST_OS)
@@ -105,9 +107,11 @@ function(dk_host_triple)
 		dk_fatal("CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
 	endif()
 	dk_assertVar(host_arch)
+	dk_toLower(${host_arch} host_arch)      # host_arch = ARM64
+	dk_set(host_arch ${host_arch})			# Globalize
 	dk_set(${host_arch}_host 1)				# arm64_host = 1
 	dk_toUpper(${host_arch} HOST_ARCH)      # HOST_ARCH = ARM64
-	dk_set(HOST_ARCH ${HOST_ARCH})
+	dk_set(HOST_ARCH ${HOST_ARCH})			# Globalize
 	dk_set(${HOST_ARCH}_HOST 1)				# ARM64_HOST = 1
 #	dk_printVar(host_arch)
 #	dk_printVar(HOST_ARCH)
@@ -127,9 +131,11 @@ function(dk_host_triple)
 	endif()
 	#dk_assertVar(host_env)
 	if(host_env)
+		dk_toLower(${host_env} host_env)		# host_env = msvc
+		dk_set(host_env ${host_env})			# Globalize
 		dk_set(${host_env}_host 1)				# msvc_host = 1
 		dk_toUpper(${host_env} HOST_ENV)		# HOST_ENV = MSVC
-		dk_set(HOST_ENV ${HOST_ENV})
+		dk_set(HOST_ENV ${HOST_ENV})			# Globalize
 		dk_set(${HOST_ENV}_HOST 1)				# MSVC_HOST = 1
 #		dk_printVar(host_env)
 #		dk_printVar(HOST_ENV)
