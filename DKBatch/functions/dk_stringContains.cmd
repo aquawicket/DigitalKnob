@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "_haystack_=%~1"
     set "_needle_=%~2"
 	
-	if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
+	if not "XXX!_haystack_:%_needle_%=!XXX"=="XXX%_haystack_%XXX" (
         if "%~3" neq "" (endlocal & set "%3=true")
 		set "_haystack_="
 		set "_needle_="

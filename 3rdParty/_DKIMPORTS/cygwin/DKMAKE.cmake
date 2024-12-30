@@ -12,7 +12,7 @@ if(CYGWIN)
 	dk_validate(host_triple "dk_host_triple()")
 	if(NOT WIN_HOST)
 		dk_undepend(cygwin)
-		continue()
+		return()
 	endif()
 
 	dk_set(CYGWIN_DL https://www.cygwin.com/setup-x86_64.exe)
