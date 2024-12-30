@@ -1,5 +1,9 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
+if(NOT EXISTS ${DKCMAKE_FUNCTIONS_DIR_})
+	set(DKCMAKE_FUNCTIONS_DIR_ "${CMAKE_SOURCE_DIR}/functions/" CACHE INTERNAL "")
+endif()
+set(DKSCRIPT_PATH "${CMAKE_SOURCE_DIR}/CMakeLists.txt" CACHE INTERNAL "")
+include("${DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ### CMakeLists.txt for DKCMake ###

@@ -65,9 +65,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
      
 	if "%triple%"=="cosmopolitan"       %dk_call% dk_prependArgs CMAKE_ARGS -DCOSMOPOLITAN=1
     if "%triple%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64
+	::if "%triple%"=="win_x86"		    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
     if "%triple%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
     if "%triple%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32
-    if "%triple%"=="win_x86_64_clang"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
+    ::if "%triple%"=="win_x86_64      "   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
+	if "%triple%"=="win_x86_64_clang"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
     if "%triple%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64
     if "%triple%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
    
@@ -91,32 +93,36 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 	
-	if "%triple%"=="cosmopolitan"   	%dk_call% dk_prependArgs CMAKE_ARGS -G "MSYS Makefiles"
-    if "%triple%"=="android_arm32"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-    if "%triple%"=="android_arm64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-    if "%triple%"=="android_x86" 	    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-	if "%triple%"=="android_x86_64"     %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-    if "%triple%"=="emscripten"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"  
-    if "%triple%"=="ios_arm32"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-    if "%triple%"=="ios_arm64"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-    if "%triple%"=="iossim_x86"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-    if "%triple%"=="iossim_x86_64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-    if "%triple%"=="linux_x86"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-    if "%triple%"=="linux_x86_64"       %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-    if "%triple%"=="mac_x86"            %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-    if "%triple%"=="mac_x86_64"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-    if "%triple%"=="raspberry_arm32"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-    if "%triple%"=="raspberry_arm64"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-    if "%triple%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%triple%"=="win_arm64_msvc"     %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022" -A arm64
-	if "%triple%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-    if "%triple%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%triple%"=="win_x86_msvc"       %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022" -A Win32
-    if "%triple%"=="win_x86_64_clang"   %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%triple%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-    if "%triple%"=="win_x86_64_msvc"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022" -A x64
-    if "%triple%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+	if "%triple%"=="COSMOPOLITAN"   	set CMAKE_GENERATOR="MSYS Makefiles"
+    if "%triple%"=="ANDROID_ARM32"      set CMAKE_GENERATOR="Unix Makefiles"
+    if "%triple%"=="ANDROID_ARM64"      set CMAKE_GENERATOR="Unix Makefiles"
+    if "%triple%"=="ANDROID_X86" 	    set CMAKE_GENERATOR="Unix Makefiles"
+	if "%triple%"=="ANDROID_X86_64"     set CMAKE_GENERATOR="Unix Makefiles"
+    if "%triple%"=="EMSCRIPTEN"         set CMAKE_GENERATOR="Unix Makefiles"  
+    if "%triple%"=="IOS_ARM32"          set CMAKE_GENERATOR="Xcode"
+    if "%triple%"=="IOS_ARM64"          set CMAKE_GENERATOR="Xcode"
+    if "%triple%"=="IOSSIM_X86"         set CMAKE_GENERATOR="Xcode"
+    if "%triple%"=="IOSSIM_X86_64"      set CMAKE_GENERATOR="Xcode"
+    if "%triple%"=="LINUX_X86"          set CMAKE_GENERATOR="Unix Makefiles"
+    if "%triple%"=="LINUX_X86_64"       set CMAKE_GENERATOR="Unix Makefiles"
+    if "%triple%"=="MAC_X86"            set CMAKE_GENERATOR="Xcode"
+    if "%triple%"=="MAC_X86_64"         set CMAKE_GENERATOR="Xcode"
+    if "%triple%"=="RASPBERRY_ARM32"    set CMAKE_GENERATOR="Unix Makefiles"
+    if "%triple%"=="RASPBERRY_ARM64"    set CMAKE_GENERATOR="Unix Makefiles"
+    if "%triple%"=="WIN_ARM64_CLANG"    set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%triple%"=="WIN_ARM64_MSVC"     set CMAKE_GENERATOR="Visual Studio 17 2022" -A arm64
+	if "%triple%"=="WIN_X86"  		    set CMAKE_GENERATOR="NMake Makefiles"
+	if "%triple%"=="WIN_X86_CLANG"      set CMAKE_GENERATOR="MinGW Makefiles"
+    if "%triple%"=="WIN_X86_MINGW"      set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%triple%"=="WIN_X86_MSVC"       set CMAKE_GENERATOR="Visual Studio 17 2022" -A Win32
+    if "%triple%"=="WIN_X86_64"         set CMAKE_GENERATOR="NMake Makefiles"
+	if "%triple%"=="WIN_X86_64_CLANG"   set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%triple%"=="WIN_X86_64_MINGW"   set CMAKE_GENERATOR="MinGW Makefiles"
+    if "%triple%"=="WIN_X86_64_MSVC"    set CMAKE_GENERATOR="Visual Studio 17 2022" -A x64
+    if "%triple%"=="WIN_X86_64_UCRT"    set CMAKE_GENERATOR="MinGW Makefiles"
 
+	
+	if defined CMAKE_GENERATOR  %dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%
 ::  ###### CMAKE_TOOLCHAIN_FILE ######
 ::  %dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%triple%_toolchain.cmake"
 ::  %dk_call% dk_assertPath TOOLCHAIN

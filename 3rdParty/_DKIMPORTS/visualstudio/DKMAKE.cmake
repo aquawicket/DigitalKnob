@@ -20,8 +20,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
-	#dk_undepend(visualstudio)
-	dk_undepend(visual_cpp_build_tools)
+	dk_undepend(visualstudio)
 	dk_return()
 endif()
 

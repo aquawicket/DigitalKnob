@@ -184,6 +184,13 @@ elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 	dk_set(GNU 1)
 	message(GNU)
 	
+elseif(CMAKE_GENERATOR STREQUAL "NMake Makefiles")
+	if(MSVC)
+		dk_fatal("MSVC was allready set")
+	endif()
+	dk_set(MSVC 1)
+	message(MSVC)
+
 else()
 	dk_fatal("Could not determin Environment Variable")
 endif()

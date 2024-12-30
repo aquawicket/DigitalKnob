@@ -44,15 +44,15 @@ function(dk_target_triple)
 		#dk_set(TARGET_TYPE Release)					# 		TARGET_TYPE = Release
 		dk_dirname(${TARGET_DIR} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	endif()
-		if( (TARGET_DIR MATCHES "android") 		OR
-			(TARGET_DIR MATCHES "emscripten") 	OR
-			(TARGET_DIR MATCHES "ios") 			OR
-			(TARGET_DIR MATCHES "iossim")		OR		 
-			(TARGET_DIR MATCHES "linux") 		OR
-			(TARGET_DIR MATCHES "mac") 			OR
-			(TARGET_DIR MATCHES "raspberry") 	OR
-			(TARGET_DIR MATCHES "windows")		OR
-			(TARGET_DIR MATCHES "cosmopolitan"))
+		if( (target_dir MATCHES "android") 		OR	(TARGET_DIR MATCHES "ANDROID") 		OR
+			(target_dir MATCHES "emscripten") 	OR	(TARGET_DIR MATCHES "EMSCRIPTEN")	OR
+			(target_dir MATCHES "ios") 			OR	(TARGET_DIR MATCHES "IOS")			OR
+			(target_dir MATCHES "iossim")		OR	(TARGET_DIR MATCHES "IOSSIM")	 	OR
+			(target_dir MATCHES "linux") 		OR	(TARGET_DIR MATCHES "LINUX")		OR
+			(target_dir MATCHES "mac") 			OR	(TARGET_DIR MATCHES "MAC")			OR
+			(target_dir MATCHES "raspberry") 	OR	(TARGET_DIR MATCHES "RASPBERRY")	OR
+			(target_dir MATCHES "windows")		OR	(TARGET_DIR MATCHES "WINDOWS")		OR
+			(target_dir MATCHES "cosmopolitan") OR	(TARGET_DIR MATCHES "COSMOPOLITAN"))
 			dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR})			# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 		else()
 			dk_target_triple_SET()
@@ -85,25 +85,25 @@ function(dk_target_triple)
 
 
 	### Set os / OS / <os>_target / <OS>_TARGET
-	if(triple MATCHES "android")
+		if((triple MATCHES "android")		OR (TRIPLE MATCHES "ANDROID"))
 		dk_set(os android)
-	elseif(triple MATCHES "emscripten")
+	elseif((triple MATCHES "emscripten")	OR (TRIPLE MATCHES "EMSCRIPTEN"))
 		dk_set(os emscripten)
-	elseif(triple MATCHES "iossim")
+	elseif((triple MATCHES "iossim")		OR (TRIPLE MATCHES "IOSSIM"))
 		dk_set(os iossim)
-	elseif(triple MATCHES "ios")
+	elseif((triple MATCHES "ios")			OR (TRIPLE MATCHES "IOS"))
 		dk_set(os ios)
-	elseif(triple MATCHES "linux")
+	elseif((triple MATCHES "linux") 		OR (TRIPLE MATCHES "LINUX"))
 		dk_set(os linux)
-	elseif(triple MATCHES "mac")
+	elseif((triple MATCHES "mac") 			OR (TRIPLE MATCHES "MAC"))
 		dk_set(os mac)
-	elseif(triple MATCHES "raspberry")
+	elseif((triple MATCHES "raspberry") 	OR (TRIPLE MATCHES "RASPBERRY"))
 		dk_set(os raspberry)
-	elseif(triple MATCHES "windows")
+	elseif((triple MATCHES "windows") 		OR (TRIPLE MATCHES "WINDOWS"))
 		dk_set(os windows)
-	elseif(triple MATCHES "win")
+	elseif((triple MATCHES "win") 			OR (TRIPLE MATCHES "WIN"))
 		dk_set(os win)
-	elseif(triple MATCHES "cosmopolitan")
+	elseif((triple MATCHES "cosmopolitan")	OR (TRIPLE MATCHES "COSMOPOLITAN"))
 		dk_set(os cosmopolitan)	
 	else()
 		dk_error("The target triple:${triple} does not contain a valid os")
@@ -124,15 +124,15 @@ function(dk_target_triple)
 
 
 	### Get arch / ARCH
-	if(triple MATCHES "arm64")
+		if((triple MATCHES "arm64") 		OR (TRIPLE MATCHES "ARM64"))
 		dk_set(arch arm64)
-	elseif(triple MATCHES "arm32")
+	elseif((triple MATCHES "arm32") 		OR (TRIPLE MATCHES "ARM32"))
 		dk_set(arch arm32)
-	elseif(triple MATCHES "x86_64")
+	elseif((triple MATCHES "x86_64")		OR (TRIPLE MATCHES "X86_64"))
 		dk_set(arch x86_64)
-	elseif(triple MATCHES "x86")
+	elseif((triple MATCHES "x86")			OR (TRIPLE MATCHES "X86"))
 		dk_set(arch x86)
-	elseif(triple MATCHES "cosmopolitan")
+	elseif((triple MATCHES "cosmopolitan")	OR (TRIPLE MATCHES "COSMOPOLITAN"))
 		dk_set(arch cosmopolitan)	
 	else()
 		dk_warning("The target triple:${triple} does not contain a valid arch")
@@ -151,15 +151,15 @@ function(dk_target_triple)
 
 
 	### Set evn / ENV 
-	if(triple MATCHES "clang")
+		if((triple MATCHES "clang")			OR (TRIPLE MATCHES "CLANG"))
 		dk_set(env clang)
-	elseif(triple MATCHES "mingw")
+	elseif((triple MATCHES "mingw")			OR (TRIPLE MATCHES "MINGW"))
 		dk_set(env mingw)
-	elseif(triple MATCHES "ucrt")
+	elseif((triple MATCHES "ucrt")			OR (TRIPLE MATCHES "UCRT"))
 		dk_set(env ucrt)
-	elseif(triple MATCHES "msvc")
+	elseif((triple MATCHES "msvc")			OR (TRIPLE MATCHES "MSVC"))
 		dk_set(env msvc)
-	elseif(triple MATCHES "cosmopolitan")
+	elseif((triple MATCHES "cosmopolitan")	OR (TRIPLE MATCHES "COSMOPOLITAN"))
 		dk_set(env cosmopolitan)
 	else()
 		dk_warning("The target triple:${triple} does not contain a valid env")

@@ -40,7 +40,7 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt "target_link_libraries(${
 
 #dk_clearCmakeCache()
 
-dk_set(ENV{CURRENT_PLUGIN} ${APP_NAME})
+set(ENV{CURRENT_PLUGIN} ${APP_NAME})
 dk_set($ENV{CURRENT_PLUGIN} ${CMAKE_SOURCE_DIR})
 dk_set($ENV{CURRENT_PLUGIN}_CONFIG_DIR ${CMAKE_SOURCE_DIR}/${CONFIG_PATH})
 dk_printVar($ENV{CURRENT_PLUGIN}_CONFIG_DIR)

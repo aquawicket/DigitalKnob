@@ -1,6 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
+%dk_call% dk_fatal "dk_pickOs.cmd is discontinued"
 ::####################################################################
 ::# dk_pickOs(rtn_var:triple)
 ::#
