@@ -4,9 +4,12 @@
 ::call :DifferentName
 
 
-:DifferentName
+:funcD
 setlocal enableDelayedExpansion
-
-	call setGlobal globalVar "STILL GLOBAL"
-
+	call printStack
+	
+	set "LOCAL_VAR=local D"
+	call setGlobal globalVarA "STILL A GLOBAL"
+	
+	call printStack
 exit /b 0
