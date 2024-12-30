@@ -302,6 +302,12 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 
 #################### TOOLCHAINS ##########################
+if(NOT EXISTS "${DKCMAKE_DIR}/toolchains/${triple}_toolchain.cmake")
+	dk_error("${DKCMAKE_DIR}/toolchains/${triple}_toolchain.cmake Not Found")
+endif()
+dk_load(${DKCMAKE_DIR}/toolchains/${triple}_toolchain.cmake)
+
+#[[
 ### android_arm32
 if(ANDROID_ARM32)
 	dk_load(${DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
@@ -431,7 +437,7 @@ endif()
 if(win_x86_64_msys)
 	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_msys_toolchain.cmake)
 endif()
-
+]]
 
 #dk_printVar(MSYSTEM)
 dk_assertVar(CMAKE_GENERATOR)
