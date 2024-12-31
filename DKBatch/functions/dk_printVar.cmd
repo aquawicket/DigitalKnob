@@ -13,8 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  ::setlocal disableDelayedExpansion
  ::if "!DE!" equ "" (echo delayed expansion ON) else (echo delayed expansion OFF)
 	
-    if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
-    if "%ENABLE_dk_printVar%" neq "1" %return%
+    if not defined dk_printVar set "dk_printVar=1"
+    if "%dk_printVar%" neq "1" %return%
     
     %dk_call% dk_isVariableName "%~1" || %return%
     
