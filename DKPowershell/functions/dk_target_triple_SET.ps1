@@ -9,7 +9,7 @@ function Global:dk_target_triple_SET() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "${APP} ${target_triple} ${target_type}"
+	dk_call dk_echo "${target_app} ${target_triple} ${target_type}"
 	dk_call dk_echo	
     dk_call dk_echo " 1) ${host_triple}"
 	dk_call dk_echo
@@ -89,7 +89,7 @@ function Global:dk_target_triple_SET() {
 	elseif(${input} -eq "34"){ $global:target_triple = "win_x86_64_ucrt" }
 	elseif(${input} -eq "35"){ $global:target_triple = "win_x86_64_msvc" }
 	elseif(${input} -eq "36"){ dk_call dk_clearScreen }
-	elseif(${input} -eq "37"){ dk_call dk_unset APP }
+	elseif(${input} -eq "37"){ dk_call dk_unset target_app }
 	elseif(${input} -eq "38"){ dk_call dk_exit 0 }
 	else{ dk_call dk_warning "invalid selection" }
 }

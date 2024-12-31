@@ -9,7 +9,7 @@ function Global:dk_target_app() {
 	dk_debugFunc 0
 	
 	dk_call dk_echo
-	dk_call dk_echo "${APP} ${target_triple} ${target_type}"
+	dk_call dk_echo "${target_app} ${target_triple} ${target_type}"
 	
 	dk_call dk_echo
     dk_call dk_echo " 1) HelloWorld"
@@ -27,13 +27,13 @@ function Global:dk_target_app() {
     dk_call dk_echo 
 	
 	$input = Read-Host
-	    if($input -eq  "1"){ $global:APP = "HelloWorld" }
-	elseif($input -eq  "2"){ $global:APP = "DKCore" }
-	elseif($input -eq  "3"){ $global:APP = "DKJavascript" }
-	elseif($input -eq  "4"){ $global:APP = "DKSDL" }
-	elseif($input -eq  "5"){ $global:APP = "DKSDLRml" }
-	elseif($input -eq  "6"){ $global:APP = "DKDomTest" }
-	elseif($input -eq  "7"){ $global:APP = "DKTestAll" }
+	    if($input -eq  "1"){ $global:target_app = "HelloWorld" }
+	elseif($input -eq  "2"){ $global:target_app = "DKCore" }
+	elseif($input -eq  "3"){ $global:target_app = "DKJavascript" }
+	elseif($input -eq  "4"){ $global:target_app = "DKSDL" }
+	elseif($input -eq  "5"){ $global:target_app = "DKSDLRml" }
+	elseif($input -eq  "6"){ $global:target_app = "DKDomTest" }
+	elseif($input -eq  "7"){ $global:target_app = "DKTestAll" }
 	elseif($input -eq  "8"){ dk_call dk_enterManually }
 	elseif($input -eq  "9"){ dk_call dk_clearScreen }
 	elseif($input -eq "10"){ dk_call dk_unset UPDATE }

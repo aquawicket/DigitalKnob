@@ -10,14 +10,14 @@ function Global:dk_generate() {
 	
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "     Generating $APP - $target_triple - $target_type - $DKLEVEL"
+	dk_call dk_echo "     Generating $target_app - $target_triple - $target_type - $DKLEVEL"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
 	dk_call dk_clearCmakeCache
 	dk_call dk_deleteTempFiles
 
-	$TARGET_PATH = "$DKAPPS_DIR/$APP"
+	$TARGET_PATH = "$DKAPPS_DIR/$target_app"
 	dk_call dk_printVar TARGET_PATH
 	dk_call dk_makeDirectory "$TARGET_PATH/$target_triple"
 	cd "$TARGET_PATH/$target_triple"
@@ -132,7 +132,7 @@ function Global:dk_generate() {
 	::###### linux (WSL) ######
 	if($DK_SHELL){ $DKSCRIPT_DIR = $DKSCRIPT_DIR -replace "C:", "/mnt/c" }
 	if($DK_SHELL){ $DKSCRIPT_DIR = $DKSCRIPT_DIR -replace '\\', '/' }
-	if($DK_SHELL){ dk_call "C:\Windows\System32\wsl.exe" bash -c "export UPDATE=1 && export APP=${APP} && export target_triple=${target_triple} && export target_type=${target_type} && ${DKSCRIPT_DIR}/DKBuilder.sh && exit $(true)" }
+	if($DK_SHELL){ dk_call "C:\Windows\System32\wsl.exe" bash -c "export UPDATE=1 && export target_app=${target_app} && export target_triple=${target_triple} && export target_type=${target_type} && ${DKSCRIPT_DIR}/DKBuilder.sh && exit $(true)" }
 	if($DK_SHELL){ return }
 	
 	

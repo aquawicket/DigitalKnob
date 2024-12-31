@@ -41,8 +41,8 @@ function Global:dk_buildMain() {
 	
 	$running=1
 	while($running){  
-		if(!${UPDATE}) { dk_call dk_pickUpdate;  		continue; }
-		if(!${APP})    { dk_call dk_target_app;     	continue; }
+		if(!${UPDATE}) 		  { dk_call dk_pickUpdate;  		continue; }
+		if(!${target_app})    { dk_call dk_target_app;     	continue; }
 		if(!${target_triple}) { dk_call dk_target_triple_SET;  continue; }
 		if(!${target_type})   { dk_call dk_target_type;    	continue; }
 		
@@ -51,7 +51,7 @@ function Global:dk_buildMain() {
 		dk_call dk_buildApp
 		
 		dk_call dk_unset UPDATE
-		dk_call dk_unset APP
+		dk_call dk_unset target_app
 		dk_call dk_unset target_triple
 		dk_call dk_unset target_type
 	}  
