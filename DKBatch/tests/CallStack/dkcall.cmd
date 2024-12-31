@@ -25,11 +25,8 @@ if "%~1" == ":init" goto:init
 	if defined ARGV (echo ARGV: %ARGV%)
 	if defined ARGC (echo ARGC: %ARGC%)
 	if defined CALLER (echo CALLER: %CALLER%)
-	if defined STACK_0 (echo 0: !STACK%_0!)
-	if defined STACK_1 (echo 1: !STACK%_1!)
-	if defined STACK_2 (echo 2: !STACK%_2!)
-	if defined STACK_3 (echo 3: !STACK%_3!)
-	if defined STACK_4 (echo 4: !STACK%_4!)
+
+	call PrintCallStack
 	
 	:::::::::::::::::::::::::::::
 	call %FUNC% %ARGV%
@@ -40,18 +37,15 @@ if "%~1" == ":init" goto:init
 	(set /a lvl-=1)
 	
 	echo:
-	echo %indent%^> %FUNC%(%ARGV%)
+	echo ^<%indent% %FUNC%(%ARGV%)
 	if defined LVL (echo LVL: %LVL%) 
 	if defined FILE (echo FILE: %FILE%)
 	if defined FUNC (echo FUNC: %FUNC%)
 	if defined ARGV (echo ARGV: %ARGV%)
 	if defined ARGC (echo ARGC: %ARGC%)
 	if defined CALLER (echo CALLER: %CALLER%)
-	if defined STACK_0 (echo 0: !STACK%_0!)
-	if defined STACK_1 (echo 1: !STACK%_1!)
-	if defined STACK_2 (echo 2: !STACK%_2!)
-	if defined STACK_3 (echo 3: !STACK%_3!)
-	if defined STACK_4 (echo 4: !STACK%_4!)
+
+	call PrintCallStack
 exit /b 0
 
 
