@@ -2,14 +2,14 @@ if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 
 if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
 
 ##################################################################################
-# dk_pickApp()
+# dk_target_app()
 #
 #
-function Global:dk_pickApp() {
+function Global:dk_target_app() {
 	dk_debugFunc 0
 	
 	dk_call dk_echo
-	dk_call dk_echo "${APP} ${triple} ${TYPE}"
+	dk_call dk_echo "${APP} ${target_triple} ${target_type}"
 	
 	dk_call dk_echo
     dk_call dk_echo " 1) HelloWorld"
@@ -48,5 +48,5 @@ function Global:dk_pickApp() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_pickApp
+	dk_call dk_target_app
 }

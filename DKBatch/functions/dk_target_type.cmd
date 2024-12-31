@@ -2,10 +2,10 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#####################################################################
-::# dk_pickType(rtn_var:target_type)
+::# dk_target_type(rtn_var:target_type)
 ::#
 ::#
-:dk_pickType
+:dk_target_type
     call dk_debugFunc 0 1
  ::setlocal
  
@@ -47,5 +47,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
 
-    %dk_call% dk_pickType
+    %dk_call% dk_target_type
 %endfunction%

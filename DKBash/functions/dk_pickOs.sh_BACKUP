@@ -11,7 +11,7 @@ dk_pickOs() {
 	dk_call dk_validate host_triple "dk_call dk_host_triple" 
 	
 	dk_call dk_echo
-	dk_echo "${APP-} ${triple-} ${TYPE-}"
+	dk_echo "${APP-} ${target_triple-} ${TYPE-}"
 	dk_echo	""
     dk_echo " 1) ${host_triple}"
 	dk_echo
@@ -60,79 +60,79 @@ dk_pickOs() {
 	dk_call dk_keyboardInputTimeout choice 1 60
 	
 	if [ "${choice}" = "1" ]; then
-		triple="${host_triple-}"
+		target_triple="${host_triple-}"
 	elif [ "${choice}" = "2" ]; then
-		triple="cosmo"
+		target_triple="cosmo"
 	elif [ "${choice}" = "3" ]; then
-		triple="android_arm32"
+		target_triple="android_arm32"
 	elif [ "${choice}" = "4" ]; then
-		triple="android_arm64"
+		target_triple="android_arm64"
 	elif [ "${choice}" = "5" ]; then
-		triple="android_x86"
+		target_triple="android_x86"
 	elif [ "${choice}" = "6" ]; then
-		triple="android_x86_64"
+		target_triple="android_x86_64"
 	elif [ "${choice}" = "7" ]; then
-		triple="emscripten"
+		target_triple="emscripten"
 	elif [ "${choice}" = "8" ]; then
-		triple="ios_arm32"
+		target_triple="ios_arm32"
 	elif [ "${choice}" = "9" ]; then
-		triple="ios_arm64"
+		target_triple="ios_arm64"
 	elif [ "${choice}" = "10" ]; then
-		triple="ios_x86"
+		target_triple="ios_x86"
 	elif [ "${choice}" = "11" ]; then
-		triple="ios_x86_64"
+		target_triple="ios_x86_64"
 	elif [ "${choice}" = "12" ]; then
-		triple="iossim_arm32"
+		target_triple="iossim_arm32"
 	elif [ "${choice}" = "13" ]; then
-		triple="iossim_arm64"
+		target_triple="iossim_arm64"
 	elif [ "${choice}" = "14" ]; then
-		triple="iossim_x86"
+		target_triple="iossim_x86"
 	elif [ "${choice}" = "15" ]; then
-		triple="iossim_x86_64"
+		target_triple="iossim_x86_64"
 	elif [ "${choice}" = "16" ]; then
-		triple="linux_arm32"
+		target_triple="linux_arm32"
 	elif [ "${choice}" = "17" ]; then
-		triple="linux_arm64"
+		target_triple="linux_arm64"
 	elif [ "${choice}" = "18" ]; then
-		triple="linux_x86"
+		target_triple="linux_x86"
 	elif [ "${choice}" = "19" ]; then
-		triple="linux_x86_64_clang"
+		target_triple="linux_x86_64_clang"
 	elif [ "${choice}" = "20" ]; then
-		triple="linux_x86_64_gcc"
+		target_triple="linux_x86_64_gcc"
 	elif [ "${choice}" = "21" ]; then
-		triple="mac_arm32"
+		target_triple="mac_arm32"
 	elif [ "${choice}" = "22" ]; then
-		triple="mac_arm64"
+		target_triple="mac_arm64"
 	elif [ "${choice}" = "23" ]; then
-		triple="mac_x86"
+		target_triple="mac_x86"
 	elif [ "${choice}" = "24" ]; then
-		triple="mac_x86_64"
+		target_triple="mac_x86_64"
 	elif [ "${choice}" = "25" ]; then
-		triple="raspberry_arm32"
+		target_triple="raspberry_arm32"
 	elif [ "${choice}" = "26" ]; then
-		triple="raspberry_arm64"
+		target_triple="raspberry_arm64"
 	elif [ "${choice}" = "27" ]; then
-		triple="raspberry_x86"
+		target_triple="raspberry_x86"
 	elif [ "${choice}" = "28" ]; then
-		triple="raspberry_x64"
+		target_triple="raspberry_x64"
 	elif [ "${choice}" = "29" ]; then
-		triple="win_arm32"
+		target_triple="win_arm32"
 	elif [ "${choice}" = "30" ]; then
-		triple="win_arm64_clang"
+		target_triple="win_arm64_clang"
 	elif [ "${choice}" = "31" ]; then
-		triple="win_x86_mingw"
+		target_triple="win_x86_mingw"
 	elif [ "${choice}" = "32" ]; then
-		triple="win_x86_clang"
+		target_triple="win_x86_clang"
 	elif [ "${choice}" = "33" ]; then
-		triple="win_x86_msvc"
+		target_triple="win_x86_msvc"
 	elif [ "${choice}" = "34" ]; then
-		triple="win_x86_64_mingw"
+		target_triple="win_x86_64_mingw"
 	elif [ "${choice}" = "35" ]; then
-		triple="win_x86_64_clang"
+		target_triple="win_x86_64_clang"
 	elif [ "${choice}" = "36" ]; then
-		triple="win_x86_64_ucrt"
+		target_triple="win_x86_64_ucrt"
 	elif [ "${choice}" = "37" ]; then
-		triple="win_x86_64_msvc"
+		target_triple="win_x86_64_msvc"
 	elif [ "${choice}" = "38" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "39" ]; then

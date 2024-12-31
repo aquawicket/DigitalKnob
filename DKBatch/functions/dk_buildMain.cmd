@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_buildMain
     call dk_debugFunc 0
- setlocal
+ setlocal enableDelayedExpansion
 
 	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
@@ -29,13 +29,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_unset target_type
         
     :while_loop   
-        ::%dk_call% dk_echo "UPDATE-%UPDATE% - target_app-%target_app% - target_triple-%target_triple% - target_type-%target_type%"
-        
-        if not defined UPDATE       %dk_call% dk_pickUpdate UPDATE     & goto while_loop
-        if not defined target_app          %dk_call% dk_pickApp target_app           & goto while_loop
-        ::if not defined target_triple       %dk_call% dk_pickOs target_triple       & goto while_loop
-        if not defined target_triple       %dk_call% dk_target_triple_SET     & goto while_loop
-		if not defined target_type %dk_call% dk_pickType target_type & goto while_loop
+        if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE			& goto while_loop
+        if not defined target_app		%dk_call% dk_target_app target_app		& goto while_loop
+        if not defined target_triple	%dk_call% dk_target_triple_SET			& goto while_loop
+		if not defined target_type		%dk_call% dk_target_type target_type	& goto while_loop
 		
         %dk_call% dk_createCache
         %dk_call% dk_generate
@@ -57,7 +54,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     call dk_debugFunc 0
- setlocal
+ setlocal enableDelayedExpansion
  
     %dk_call% dk_buildMain
 %endfunction%

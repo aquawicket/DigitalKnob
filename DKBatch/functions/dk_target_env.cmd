@@ -2,10 +2,10 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#####################################################################
-::# dk_pickEnvironment(rtn_var:DKBUILD_ENV)
+::# dk_target_env(rtn_var:DKBUILD_ENV)
 ::#
 ::#
-:dk_pickEnvironment
+:dk_target_env
     call dk_debugFunc 0 1
  ::setlocal
  
@@ -57,5 +57,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
 
-    %dk_call% dk_pickEnvironment
+    %dk_call% dk_target_env
 %endfunction%

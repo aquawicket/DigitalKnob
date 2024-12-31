@@ -10,7 +10,7 @@ function Global:dk_generate() {
 	
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "     Generating $APP - $triple - $TYPE - $DKLEVEL"
+	dk_call dk_echo "     Generating $APP - $target_triple - $target_type - $DKLEVEL"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
@@ -19,8 +19,8 @@ function Global:dk_generate() {
 
 	$TARGET_PATH = "$DKAPPS_DIR/$APP"
 	dk_call dk_printVar TARGET_PATH
-	dk_call dk_makeDirectory "$TARGET_PATH/$triple"
-	cd "$TARGET_PATH/$triple"
+	dk_call dk_makeDirectory "$TARGET_PATH/$target_triple"
+	cd "$TARGET_PATH/$target_triple"
 	$CMAKE_SOURCE_DIR = "$DKCMAKE_DIR"
 	$CMAKE_SOURCE_DIR = $CMAKE_SOURCE_DIR -replace '\\', '/';
 	dk_call dk_printVar CMAKE_SOURCE_DIR
@@ -36,79 +36,79 @@ function Global:dk_generate() {
 	$DKLINK = "Static"
 	
 	$CMAKE_ARGS = @()
-	if($triple -eq "android_arm32")  { $CMAKE_ARGS += "-G Unix Makefiles" }
-	elseif($triple -eq "android_arm64")  { $CMAKE_ARGS += "-G Unix Makefiles" }
-	elseif($triple -eq "emscripten")     { $CMAKE_ARGS += "-G Unix Makefiles" }
-	elseif($triple -eq "ios_arm32")      { $CMAKE_ARGS += "-G Xcode" }
-	elseif($triple -eq "ios_arm64")      { $CMAKE_ARGS += "-G Xcode" }
-	elseif($triple -eq "iossim_x86")     { $CMAKE_ARGS += "-G Xcode" }
-	elseif($triple -eq "iossim_x86_64")  { $CMAKE_ARGS += "-G Xcode" }
-	elseif($triple -eq "linux_x86")      { 
+	if($target_triple -eq "android_arm32")  { $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($target_triple -eq "android_arm64")  { $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($target_triple -eq "emscripten")     { $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($target_triple -eq "ios_arm32")      { $CMAKE_ARGS += "-G Xcode" }
+	elseif($target_triple -eq "ios_arm64")      { $CMAKE_ARGS += "-G Xcode" }
+	elseif($target_triple -eq "iossim_x86")     { $CMAKE_ARGS += "-G Xcode" }
+	elseif($target_triple -eq "iossim_x86_64")  { $CMAKE_ARGS += "-G Xcode" }
+	elseif($target_triple -eq "linux_x86")      { 
 		$CMAKE_ARGS += "-G Unix Makefiles" 
 		$DK_SHELL = "wsl"
 	}
-	elseif($triple -eq "linux_x86_64")   { 
+	elseif($target_triple -eq "linux_x86_64")   { 
 		$CMAKE_ARGS += "-G Unix Makefiles"
 		$DK_SHELL = "wsl"
 	}
-	elseif($triple -eq "mac_x86")        { $CMAKE_ARGS += "-G Xcode" }
-	elseif($triple -eq "mac_x86_64")     { $CMAKE_ARGS += "-G Xcode" }
-	elseif($triple -eq "raspberry_arm32"){ $CMAKE_ARGS += "-G Unix Makefiles" }
-	elseif($triple -eq "raspberry_arm64"){ $CMAKE_ARGS += "-G Unix Makefiles" }
-	elseif($triple -eq "win_arm64_clang"){ 
+	elseif($target_triple -eq "mac_x86")        { $CMAKE_ARGS += "-G Xcode" }
+	elseif($target_triple -eq "mac_x86_64")     { $CMAKE_ARGS += "-G Xcode" }
+	elseif($target_triple -eq "raspberry_arm32"){ $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($target_triple -eq "raspberry_arm64"){ $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($target_triple -eq "win_arm64_clang"){ 
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 	    $env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clangarm64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANGARM64"
 	}
-	elseif($triple -eq "win_x86_clang"){
+	elseif($target_triple -eq "win_x86_clang"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG32"
 	}
-	elseif($triple -eq "win_x86_mingw"){
+	elseif($target_triple -eq "win_x86_mingw"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW32"
 	}
-	elseif($triple -eq "win_x86_64_clang"){
+	elseif($target_triple -eq "win_x86_64_clang"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang64\bin;$env:PATH"
 		#$CMAKE_ARGS += "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG64"
 	}
-	elseif($triple -eq "win_x86_64_mingw"){
+	elseif($target_triple -eq "win_x86_64_mingw"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW64"
 	}
-	elseif($triple -eq "win_x86_64_ucrt"){
+	elseif($target_triple -eq "win_x86_64_ucrt"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\ucrt64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=UCRT64"
 	}
-	elseif($triple -eq "win_x86_64_msvc"){ 
+	elseif($target_triple -eq "win_x86_64_msvc"){ 
 		$CMAKE_ARGS += "-G Visual Studio 17 2022"
 	}
 	else{
-		dk_call dk_error "Unrecognized triple:${triple}"	
+		dk_call dk_error "Unrecognized target_triple:${target_triple}"	
 	}
 
 	
-	if($TYPE -eq "Debug"){
+	if($target_type -eq "Debug"){
 		$CMAKE_ARGS += "-DDEBUG=ON"
 		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
-	if($TYPE -eq "Release"){ 
+	if($target_type -eq "Release"){ 
 		$CMAKE_ARGS += "-DDEBUG=OFF"
 		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
-	if($TYPE -eq "All"){ 
+	if($target_type -eq "All"){ 
 		$CMAKE_ARGS += "-DDEBUG=ON"
 		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
@@ -132,11 +132,11 @@ function Global:dk_generate() {
 	::###### linux (WSL) ######
 	if($DK_SHELL){ $DKSCRIPT_DIR = $DKSCRIPT_DIR -replace "C:", "/mnt/c" }
 	if($DK_SHELL){ $DKSCRIPT_DIR = $DKSCRIPT_DIR -replace '\\', '/' }
-	if($DK_SHELL){ dk_call "C:\Windows\System32\wsl.exe" bash -c "export UPDATE=1 && export APP=${APP} && export triple=${triple} && export TYPE=${TYPE} && ${DKSCRIPT_DIR}/DKBuilder.sh && exit $(true)" }
+	if($DK_SHELL){ dk_call "C:\Windows\System32\wsl.exe" bash -c "export UPDATE=1 && export APP=${APP} && export target_triple=${target_triple} && export target_type=${target_type} && ${DKSCRIPT_DIR}/DKBuilder.sh && exit $(true)" }
 	if($DK_SHELL){ return }
 	
 	
-	$CMAKE_BINARY_DIR = "$CMAKE_TARGET_PATH\$triple\$TYPE"
+	$CMAKE_BINARY_DIR = "$CMAKE_TARGET_PATH\$target_triple\$target_type"
 	$CMAKE_BINARY_DIR = $CMAKE_BINARY_DIR -replace '\\', '/';
 	dk_call dk_printVar CMAKE_BINARY_DIR
 	
@@ -163,7 +163,7 @@ function Global:dk_generate() {
 	#$CMAKE_ARGS += "--check-system-vars"
 	
 #	###### CMAKE_TOOLCHAIN_FILE ######
-#	$TOOLCHAIN = "${DKCMAKE_DIR}\toolchains\${triple}_toolchain.cmake"
+#	$TOOLCHAIN = "${DKCMAKE_DIR}\toolchains\${target_triple}_toolchain.cmake"
 #	$TOOLCHAIN = $TOOLCHAIN -replace '\\', '/';
 #	dk_call dk_echo "TOOLCHAIN = $TOOLCHAIN"
 #	if(dk_call dk_pathExists "$TOOLCHAIN"){ $CMAKE_ARGS += "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" }

@@ -56,7 +56,7 @@ try() {
 dk_host_triple() {
 	dk_debugFunc 0
 
-	# currently, our host triple consists of only 2 variable needed
+	# currently, our host_triple consists of only 2 variable needed
 	# host_triple=${HOST_OS}_${HOST_ARCH}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc

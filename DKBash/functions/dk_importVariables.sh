@@ -85,7 +85,7 @@ dk_importVariables() {
 	# <PLUGIN>_IMPORT_NAME		- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
 	# <PLUGIN>_BRANCH			- from PLUGIN_GIT_BRANCH						:ZLIB_BRANCH		: master
 	# <PLUGIN>_TAG				- from PLUGIN_GIT_TAG							:ZLIB_TAG			: 
-	# <PLUGIN>_TRIPLE_DIR		- from PLUGIN_INSTALL_PATH and triple			:ZLIB_TRIPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
+	# <PLUGIN>_TRIPLE_DIR		- from PLUGIN_INSTALL_PATH and target_triple			:ZLIB_TRIPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
 	# <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	# <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
@@ -330,8 +330,8 @@ dk_importVariables() {
 	############# TARGET <PLUGIN>_VARIABLES #############
 	#####################################################
 	# <PLUGIN>_TRIPLE_DIR
-	if [ -n "${triple-}" ]; then 
-		dk_call dk_set ${PLUGIN_PREFIX}_TRIPLE_DIR "${PLUGIN_INSTALL_PATH}/${triple}" 
+	if [ -n "${target_triple-}" ]; then 
+		dk_call dk_set ${PLUGIN_PREFIX}_TRIPLE_DIR "${PLUGIN_INSTALL_PATH}/${target_triple}" 
 		dk_call dk_printVar ${PLUGIN_PREFIX}_TRIPLE_DIR 						# ZLIB_TRIPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
 	fi  
 	
@@ -349,13 +349,13 @@ dk_importVariables() {
 	
 	# <PLUGIN>_DEBUG_DIR
 	if [ -n "${DEBUG_DIR-}" ]; then 
-		dk_call dk_set ${PLUGIN_PREFIX}_DEBUG_DIR "${PLUGIN_INSTALL_PATH}/${triple}/${DEBUG_DIR}" 
+		dk_call dk_set ${PLUGIN_PREFIX}_DEBUG_DIR "${PLUGIN_INSTALL_PATH}/${target_triple}/${DEBUG_DIR}" 
 		dk_call dk_printVar ${PLUGIN_PREFIX}_DEBUG_DIR 							# ZLIB_DEBUG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	fi  
 	
 	# <PLUGIN>_RELEASE_DIR
 	if [ -n "${RELEASE_DIR-}" ]; then 
-		dk_call dk_set ${PLUGIN_PREFIX}_RELEASE_DIR "${PLUGIN_INSTALL_PATH}/${triple}/${RELEASE_DIR}" 
+		dk_call dk_set ${PLUGIN_PREFIX}_RELEASE_DIR "${PLUGIN_INSTALL_PATH}/${target_triple}/${RELEASE_DIR}" 
 		dk_call dk_printVar ${PLUGIN_PREFIX}_RELEASE_DIR 						# ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
 	fi  
 	

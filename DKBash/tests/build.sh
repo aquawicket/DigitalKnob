@@ -133,18 +133,18 @@ dk_buildMain() {
 	while :
 	do
 		if [ -z "${UPDATE-}" ];     then dk_pickUpdate;  continue; fi
-		if [ -z "${APP-}" ];        then dk_pickApp;     continue; fi
-		if [ -z "${triple-}" ];  then dk_pickOs;      continue; fi
-		if [ -z "${TYPE-}" ];       then dk_pickType;    continue; fi
+		if [ -z "${target_app-}" ];        then dk_target_app;     continue; fi
+		if [ -z "${target_triple-}" ];  then dk_pickOs;      continue; fi
+		if [ -z "${target_type-}" ];       then dk_target_type;    continue; fi
 		
 		dk_createCache
 		dk_generate	
 		dk_buildApp
 		
 		unset UPDATE
-		unset APP
-		unset triple
-		unset TYPE
+		unset target_app
+		unset target_triple
+		unset target_type
 	done
 }
 
@@ -208,9 +208,9 @@ dk_pickUpdate() {
 	read input
 	if [ "${input}" = "0" ]; then
 		dk_echo "repeating last selection"
-		APP=$_APP_
-		triple=$_triple_
-		TYPE=$_TYPE_
+		target_app=$_APP_
+		target_triple=$_triple_
+		target_type=$_TYPE_
 		UPDATE=1
 	elif [ "${input}" = "1" ]; then
 		dk_gitUpdate
@@ -239,15 +239,15 @@ dk_pickUpdate() {
 
 
 ##################################################################################
-# dk_pickApp()
+# dk_target_app()
 #
 #
-dk_pickApp() {
+dk_target_app() {
 	dk_debugFunc 0
 
 
 	dk_echo
-	dk_echo "${APP-}  ${triple-} ${TYPE-}"
+	dk_echo "${target_app-}  ${target_triple-} ${target_type-}"
 	
 	dk_echo
     dk_echo " 1) HelloWorld"
@@ -266,19 +266,19 @@ dk_pickApp() {
 	
 	read input
 	if [ "${input}" = "1" ]; then
-		APP="HelloWorld"
+		target_app="HelloWorld"
 	elif [ "${input}" = "2" ]; then
-		APP="DKCore"
+		target_app="DKCore"
 	elif [ "${input}" = "3" ]; then
-		APP="DKJavascript"
+		target_app="DKJavascript"
 	elif [ "${input}" = "4" ]; then
-		APP="DKSDL"
+		target_app="DKSDL"
 	elif [ "${input}" = "5" ]; then
-		APP="DKSDLRml"
+		target_app="DKSDLRml"
 	elif [ "${input}" = "6" ]; then
-		APP="DKDomTest"
+		target_app="DKDomTest"
 	elif [ "${input}" = "7" ]; then
-		APP="DKTestAll"
+		target_app="DKTestAll"
 	elif [ "${input}" = "8" ]; then
 		dk_enterManually
 	elif [ "${input}" = "9" ]; then
@@ -303,7 +303,7 @@ dk_pickOs() {
 
 
 	dk_echo
-	dk_echo "${APP} ${triple-} ${TYPE-}"
+	dk_echo "${target_app} ${target_triple-} ${target_type-}"
 	dk_echo	""
     dk_echo " 1) ${host_triple-}"
 	dk_echo
@@ -348,79 +348,79 @@ dk_pickOs() {
 	
 	read input
 	if [ "${input}" = "1" ]; then
-		triple="${host_triple-}"
+		target_triple="${host_triple-}"
 	elif [ "${input}" = "2" ]; then
-		triple="android_arm32"
+		target_triple="android_arm32"
 	elif [ "${input}" = "3" ]; then
-		triple="android_arm64"
+		target_triple="android_arm64"
 	elif [ "${input}" = "4" ]; then
-		triple="android_x86"
+		target_triple="android_x86"
 	elif [ "${input}" = "5" ]; then
-		triple="android_x86_64"
+		target_triple="android_x86_64"
 	elif [ "${input}" = "6" ]; then
-		triple="emscripten"
+		target_triple="emscripten"
 	elif [ "${input}" = "7" ]; then
-		triple="ios_arm32"
+		target_triple="ios_arm32"
 	elif [ "${input}" = "8" ]; then
-		triple="ios_arm64"
+		target_triple="ios_arm64"
 	elif [ "${input}" = "9" ]; then
-		triple="ios_x86"
+		target_triple="ios_x86"
 	elif [ "${input}" = "10" ]; then
-		triple="ios_x86_64"
+		target_triple="ios_x86_64"
 	elif [ "${input}" = "11" ]; then
-		triple="iossim_arm32"
+		target_triple="iossim_arm32"
 	elif [ "${input}" = "12" ]; then
-		triple="iossim_arm64"
+		target_triple="iossim_arm64"
 	elif [ "${input}" = "13" ]; then
-		triple="iossim_x86"
+		target_triple="iossim_x86"
 	elif [ "${input}" = "14" ]; then
-		triple="iossim_x86_64"
+		target_triple="iossim_x86_64"
 	elif [ "${input}" = "15" ]; then
-		triple="linux_arm32"
+		target_triple="linux_arm32"
 	elif [ "${input}" = "16" ]; then
-		triple="linux_arm64"
+		target_triple="linux_arm64"
 	elif [ "${input}" = "17" ]; then
-		triple="linux_x86"
+		target_triple="linux_x86"
 	elif [ "${input}" = "18" ]; then
-		triple="linux_x86_64"
+		target_triple="linux_x86_64"
 	elif [ "${input}" = "19" ]; then
-		triple="mac_arm32"
+		target_triple="mac_arm32"
 	elif [ "${input}" = "20" ]; then
-		triple="mac_arm64"
+		target_triple="mac_arm64"
 	elif [ "${input}" = "21" ]; then
-		triple="mac_x86"
+		target_triple="mac_x86"
 	elif [ "${input}" = "22" ]; then
-		triple="mac_x86_64"
+		target_triple="mac_x86_64"
 	elif [ "${input}" = "23" ]; then
-		triple="raspberry_arm32"
+		target_triple="raspberry_arm32"
 	elif [ "${input}" = "24" ]; then
-		triple="raspberry_arm64"
+		target_triple="raspberry_arm64"
 	elif [ "${input}" = "25" ]; then
-		triple="raspberry_x86"
+		target_triple="raspberry_x86"
 	elif [ "${input}" = "26" ]; then
-		triple="raspberry_x64"
+		target_triple="raspberry_x64"
 	elif [ "${input}" = "27" ]; then
-		triple="win_arm32"
+		target_triple="win_arm32"
 	elif [ "${input}" = "28" ]; then
-		triple="win_arm64_clang"
+		target_triple="win_arm64_clang"
 	elif [ "${input}" = "29" ]; then
-		triple="win_x86_mingw"
+		target_triple="win_x86_mingw"
 	elif [ "${input}" = "30" ]; then
-		triple="win_x86_clang"
+		target_triple="win_x86_clang"
 	elif [ "${input}" = "31" ]; then
-		triple="win_x86_msvc"
+		target_triple="win_x86_msvc"
 	elif [ "${input}" = "32" ]; then
-		triple="win_x86_64_mingw"
+		target_triple="win_x86_64_mingw"
 	elif [ "${input}" = "33" ]; then
-		triple="win_x86_64_clang"
+		target_triple="win_x86_64_clang"
 	elif [ "${input}" = "34" ]; then
-		triple="win_x86_64_ucrt"
+		target_triple="win_x86_64_ucrt"
 	elif [ "${input}" = "35" ]; then
-		triple="win_x86_64_msvc"
+		target_triple="win_x86_64_msvc"
 	elif [ "${input}" = "36" ]; then
 		clear
 	elif [ "${input}" = "37" ]; then
-		APP=
+		target_app=
 	elif [ "${input}" = "38" ]; then
 		exit 0
 	else
@@ -430,15 +430,15 @@ dk_pickOs() {
 
 
 ##################################################################################
-# dk_pickType()
+# dk_target_type()
 #
 #
-dk_pickType() {
+dk_target_type() {
 	dk_debugFunc 0
 
 
 	dk_echo
-	dk_echo "${APP} ${triple} ${TYPE-}"
+	dk_echo "${target_app} ${target_triple} ${target_type-}"
 	dk_echo	""
     dk_echo " 1) Debug"
 	dk_echo " 2) Release"
@@ -450,15 +450,15 @@ dk_pickType() {
 	
 	read input
 	if [ "${input}" = "1" ]; then
-		TYPE="Debug"
+		target_type="Debug"
 	elif [ "${input}" = "2" ]; then
-		TYPE="Release"
+		target_type="Release"
 	elif [ "${input}" = "3" ]; then
-		TYPE="All"
+		target_type="All"
 	elif [ "${input}" = "4" ]; then
 		clear
 	elif [ "${input}" = "5" ]; then
-		triple=
+		target_triple=
 	elif [ "${input}" = "6" ]; then
 		exit 0
 	else
@@ -503,17 +503,17 @@ dk_generate() {
 	
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "     Generating ${APP} - ${triple} - ${TYPE} - ${DKLEVEL-}"
+	dk_echo "     Generating ${target_app} - ${target_triple} - ${target_type} - ${target_level-}"
 	dk_echo "##################################################################"
 	dk_echo
 
 	dk_clearCmakeCache
 	dk_deleteTempFiles
 
-	TARGET_PATH="${DKAPPS_DIR}"/"${APP}"
+	TARGET_PATH="${DKAPPS_DIR}"/"${target_app}"
 	dk_printVar TARGET_PATH
-	mkdir -p "${TARGET_PATH}"/"${triple}"
-	cd "${TARGET_PATH}"/"${triple}"
+	mkdir -p "${TARGET_PATH}"/"${target_triple}"
+	cd "${TARGET_PATH}"/"${target_triple}"
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
 	dk_printVar CMAKE_SOURCE_DIR
 	if ! dk_pathExists "${CMAKE_SOURCE_DIR}"; then
@@ -524,31 +524,31 @@ dk_generate() {
 	dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
-	DKLEVEL="RebuildAll"
+	target_level="RebuildAll"
 	DKLINK="Static"
 	
 	#declare -a CMAKE_ARGS
 	set --											#clear the positional parameters
-	if [ "${TYPE}" = "Debug" ]; then
+	if [ "${target_type}" = "Debug" ]; then
 		#set -- "-DDEBUG=ON" )
 		set -- "${@}" "-DDEBUG=ON"
 		set -- "${@}" "-DRELEASE=OFF"
 	fi
-	if [ "${TYPE}" = "Release" ]; then
+	if [ "${target_type}" = "Release" ]; then
 		set -- "${@}" "-DDEBUG=OFF"
 		set -- "${@}" "-DRELEASE=ON"
 	fi
-	if [ "${TYPE}" = "All" ]; then
+	if [ "${target_type}" = "All" ]; then
 		set -- "${@}" "-DDEBUG=ON"
 		set -- "${@}" "-DRELEASE=ON"
 	fi
-	if [ "${DKLEVEL}" = "Build" ]; then
+	if [ "${target_level}" = "Build" ]; then
 		set -- "${@}" "-DBUILD=ON"
 	fi
-	if [ "${DKLEVEL}" = "Rebuild" ]; then
+	if [ "${target_level}" = "Rebuild" ]; then
 		set -- "${@}" "-DREBUILD=ON"
 	fi
-	if [ "${DKLEVEL}" = "RebuildAll" ]; then
+	if [ "${target_level}" = "RebuildAll" ]; then
 		set -- "${@}" "-DREBUILDALL=ON"
 	fi
 	if [ "$DKLINK" = "Static" ]; then
@@ -558,7 +558,7 @@ dk_generate() {
 		set -- "${@}" "-DSHARED=ON"
 	fi
 	
-	CMAKE_BINARY_DIR=${CMAKE_TARGET_PATH}/${triple}/${TYPE}
+	CMAKE_BINARY_DIR=${CMAKE_TARGET_PATH}/${target_triple}/${target_type}
 	dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
@@ -583,91 +583,91 @@ dk_generate() {
 	#set -- "${@}" "--warn-unused-vars"
 	#set -- "${@}" "--check-system-vars"
 	
-	if [ "${triple}" = "android_arm32" ]; then
+	if [ "${target_triple}" = "android_arm32" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 
-	if [ "${triple}" = "android_arm64" ]; then
+	if [ "${target_triple}" = "android_arm64" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "emscripten" ]; then
+	if [ "${target_triple}" = "emscripten" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "ios_arm32" ]; then
+	if [ "${target_triple}" = "ios_arm32" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${triple}" = "ios_arm64" ]; then
+	if [ "${target_triple}" = "ios_arm64" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${triple}" = "iossim_x86" ]; then
+	if [ "${target_triple}" = "iossim_x86" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${triple}" = "iossim_x86_64" ]; then
+	if [ "${target_triple}" = "iossim_x86_64" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${triple}" = "linux_x86" ]; then
+	if [ "${target_triple}" = "linux_x86" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "linux_x86_64" ]; then
+	if [ "${target_triple}" = "linux_x86_64" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "mac_x86" ]; then
+	if [ "${target_triple}" = "mac_x86" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${triple}" = "mac_x86_64" ]; then
+	if [ "${target_triple}" = "mac_x86_64" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${triple}" = "raspberry_arm32" ]; then
+	if [ "${target_triple}" = "raspberry_arm32" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "raspberry_arm64" ]; then
+	if [ "${target_triple}" = "raspberry_arm64" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "win_arm64_clang" ]; then
+	if [ "${target_triple}" = "win_arm64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "win_x86_clang" ]; then
+	if [ "${target_triple}" = "win_x86_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "win_x86_mingw" ]; then
+	if [ "${target_triple}" = "win_x86_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
 	#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
-	if [ "${triple}" = "win_x86_64_clang" ]; then
+	if [ "${target_triple}" = "win_x86_64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "win_x86_64_mingw" ]; then
+	if [ "${target_triple}" = "win_x86_64_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${triple}" = "win_x86_64_ucrt" ]; then
+	if [ "${target_triple}" = "win_x86_64_ucrt" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 
 	###### CMAKE_TOOLCHAIN_FILE ######
-#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${triple}_toolchain.cmake"
+#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake"
 #	dk_echo "TOOLCHAIN = $TOOLCHAIN"
 #	if dk_pathExists "$TOOLCHAIN"; then
 #		set -- "${@}" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
@@ -700,32 +700,32 @@ dk_buildApp() {
 
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "****** Building ${APP} - ${triple} - ${TYPE} - ${DKLEVEL} ******"
+	dk_echo "****** Building ${target_app} - ${target_triple} - ${target_type} - ${target_level} ******"
 	dk_echo "##################################################################"
 	dk_echo
 	
-	if [ "${TYPE}" = "Debug" ] || [ "${TYPE}" = "All" ]; then
-		if dk_pathExists "${DKAPPS_DIR}/${APP}/${triple}/Debug/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKAPPS_DIR}/${APP}/${triple}/Debug" "--config Debug" "--verbose"
-		elif dk_pathExists "${DKAPPS_DIR}/${APP}/${triple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKAPPS_DIR}/${APP}/${triple}" "--config Debug" "--verbose"
+	if [ "${target_type}" = "Debug" ] || [ "${target_type}" = "All" ]; then
+		if dk_pathExists "${DKAPPS_DIR}/${target_app}/${target_triple}/Debug/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" "--build" "${DKAPPS_DIR}/${target_app}/${target_triple}/Debug" "--config Debug" "--verbose"
+		elif dk_pathExists "${DKAPPS_DIR}/${target_app}/${target_triple}/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" "--build" "${DKAPPS_DIR}/${target_app}/${target_triple}" "--config Debug" "--verbose"
 		else
-			dk_error "Could not find CMakeCache.txt in ${APP}/${triple}/Debug or ${APP}/${triple}"
+			dk_error "Could not find CMakeCache.txt in ${target_app}/${target_triple}/Debug or ${target_app}/${target_triple}"
 		fi
 	fi
-	if [ "${TYPE}" = "Release" ] || [ "${TYPE}" = "All" ]; then
-		if dk_pathExists "${DKAPPS_DIR}/${APP}/${triple}/Release/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKAPPS_DIR}/${APP}/${triple}/Release" --config Release --verbose
-		elif dk_pathExists "${DKAPPS_DIR}/${APP}/${triple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKAPPS_DIR}/${APP}/${triple}" --config Release --verbose
+	if [ "${target_type}" = "Release" ] || [ "${target_type}" = "All" ]; then
+		if dk_pathExists "${DKAPPS_DIR}/${target_app}/${target_triple}/Release/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" --build "${DKAPPS_DIR}/${target_app}/${target_triple}/Release" --config Release --verbose
+		elif dk_pathExists "${DKAPPS_DIR}/${target_app}/${target_triple}/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" --build "${DKAPPS_DIR}/${target_app}/${target_triple}" --config Release --verbose
 		else
-			dk_error "Could not find CMakeCache.txt in ${APP}/${triple}/Release or ${APP}/${triple}"
+			dk_error "Could not find CMakeCache.txt in ${target_app}/${target_triple}/Release or ${target_app}/${target_triple}"
 		fi
 	fi
 	
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "****** Done Building ${APP} - ${triple} - ${TYPE} - ${DKLEVEL} ******"
+	dk_echo "****** Done Building ${target_app} - ${target_triple} - ${target_type} - ${target_level} ******"
 	dk_echo "##################################################################"
 	dk_echo
 }
@@ -790,13 +790,13 @@ dk_installCmake() {
 	if [ "${host_triple}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
 	if [ "${host_triple}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
 	if [ "${host_triple}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${triple}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
-	if [ "${triple}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
-	if [ "${triple}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
-	if [ "${triple}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
-	if [ "${triple}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
-	if [ "${triple}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
-	if [ "${triple}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
+	if [ "${target_triple}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
+	if [ "${target_triple}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
+	if [ "${target_triple}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
+	if [ "${target_triple}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
+	if [ "${target_triple}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
+	if [ "${target_triple}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
+	if [ "${target_triple}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
 	
 	dk_printVar CMAKE_IMPORT
 	if dk_url ${CMAKE_IMPORT}; then
@@ -1985,7 +1985,7 @@ dk_enterManually() {
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
 	
-	APP="_${input}_"
+	target_app="_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
 	if test -f "${DKIMPORTS_DIR}"/"${input}"/DKMAKE.cmake; then
@@ -2000,15 +2000,15 @@ dk_enterManually() {
 	fi
 	dk_printVar TARGET_PATH
 	
-	if [ ! -d "${DKAPPS_DIR}"/"${APP}" ]; then
-		mkdir -p "${DKAPPS_DIR}"/"${APP}";
+	if [ ! -d "${DKAPPS_DIR}"/"${target_app}" ]; then
+		mkdir -p "${DKAPPS_DIR}"/"${target_app}";
 	fi
 	
-	# create DKApps/<APP>/DKMAKE.cmake 
-	echo "dk_depend(${input})" > "${DKAPPS_DIR}"/"${APP}"/DKMAKE.cmake
+	# create DKApps/<target_app>/DKMAKE.cmake 
+	echo "dk_depend(${input})" > "${DKAPPS_DIR}"/"${target_app}"/DKMAKE.cmake
 	
-	# create DKApps/<APP>/main.cpp
-	echo "int main(int argc, char** argv) { return 0; }" > "${DKAPPS_DIR}"/"${APP}"/main.cpp
+	# create DKApps/<target_app>/main.cpp
+	echo "int main(int argc, char** argv) { return 0; }" > "${DKAPPS_DIR}"/"${target_app}"/main.cpp
 }
 
 
@@ -2023,9 +2023,9 @@ dk_createCache() {
 	dk_echo "creating cache..."
 	
 	# write variable values line by line
-	echo "${APP}">"${DKCACHE_DIR}/cache"
-	echo "${triple}">>"${DKCACHE_DIR}/cache"
-	echo "${TYPE}">>"${DKCACHE_DIR}/cache"
+	echo "${target_app}">"${DKCACHE_DIR}/cache"
+	echo "${target_triple}">>"${DKCACHE_DIR}/cache"
+	echo "${target_type}">>"${DKCACHE_DIR}/cache"
 	#echo "$DKENV">>"${DKCACHE_DIR}/cache"
 }
 
@@ -2122,7 +2122,7 @@ dk_host_triple() {
 	dk_verbose "dk_host_triple(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
-	# currently, our host triple consists of only 2 variable needed
+	# currently, our host target_triple consists of only 2 variable needed
 	# host_triple=${HOST_OS}_${HOST_ARCH}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
@@ -2130,10 +2130,10 @@ dk_host_triple() {
 	
 	# g++ -dumpmachine
 	# gcc -print-multiarch
-	# clang -print-effective-triple
-	# clang -print-target-triple
-	# clang++ -print-effective-triple
-	# clang++ -print-target-triple
+	# clang -print-effective-target_triple
+	# clang -print-target-target_triple
+	# clang++ -print-effective-target_triple
+	# clang++ -print-target-target_triple
 
 	#[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
 	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"

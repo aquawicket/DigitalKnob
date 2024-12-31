@@ -11,7 +11,7 @@ dk_enterManually() {
 	dk_call dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	dk_call dk_keyboardInput input
 	
-	APP="_${input}_"
+	target_app="_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
 	if test -f "${DKIMPORTS_DIR}/${input}/DKMAKE.cmake"; then
@@ -28,15 +28,15 @@ dk_enterManually() {
 	fi
 	dk_call dk_printVar TARGET_PATH
 	
-	if [ ! -d "${DKAPPS_DIR}/${APP}" ]; then
-		dk_call dk_makeDirectory "${DKAPPS_DIR}/${APP}";
+	if [ ! -d "${DKAPPS_DIR}/${target_app}" ]; then
+		dk_call dk_makeDirectory "${DKAPPS_DIR}/${target_app}";
 	fi
 	
-	# create DKApps/<APP>/DKMAKE.cmake 
-	dk_call dk_fileWrite "${DKAPPS_DIR}/${APP}/DKMAKE.cmake" "dk_depend(${input})"
+	# create DKApps/<target_app>/DKMAKE.cmake 
+	dk_call dk_fileWrite "${DKAPPS_DIR}/${target_app}/DKMAKE.cmake" "dk_depend(${input})"
 	
-	# create DKApps/<APP>/main.cpp
-	dk_call dk_fileWrite "${DKAPPS_DIR}/${APP}/main.cpp" "int main(int argc, char** argv) { return 0; }"
+	# create DKApps/<target_app>/main.cpp
+	dk_call dk_fileWrite "${DKAPPS_DIR}/${target_app}/main.cpp" "int main(int argc, char** argv) { return 0; }"
 }
 
 

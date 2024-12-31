@@ -60,9 +60,9 @@ dk_pickUpdate() {
 	
 	if [ "${choice}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
-		APP=${_APP_}
-		triple=${_triple_}
-		TYPE=${_TYPE_}
+		target_app=${_APP_}
+		target_triple=${_triple_}
+		target_type=${_TYPE_}
 		UPDATE=1
 	elif [ "${choice}" = "1" ]; then
 		dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development

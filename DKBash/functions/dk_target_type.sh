@@ -2,14 +2,14 @@
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
 ##################################################################################
-# dk_pickType()
+# dk_target_type()
 #
 #
-dk_pickType() {
+dk_target_type() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_echo "${APP-} ${triple-} ${TYPE-}"
+	dk_echo "${target_app-} ${target_triple-} ${target_type-}"
 	dk_echo	
     dk_echo " 1) Debug"
 	dk_echo " 2) Release"
@@ -23,15 +23,15 @@ dk_pickType() {
 	dk_call dk_keyboardInputTimeout choice 1 60 
 	
 	if [ "${choice}" = "1" ]; then
-		TYPE="Debug"
+		target_type="Debug"
 	elif [ "${choice}" = "2" ]; then
-		TYPE="Release"
+		target_type="Release"
 	elif [ "${choice}" = "3" ]; then
-		TYPE="All"
+		target_type="All"
 	elif [ "${choice}" = "4" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "5" ]; then
-		unset triple
+		unset target_triple
 	elif [ "${choice}" = "6" ]; then
 		dk_call dk_exit 0
 	else
@@ -48,5 +48,5 @@ dk_pickType() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_pickType
+	dk_call dk_target_type
 }

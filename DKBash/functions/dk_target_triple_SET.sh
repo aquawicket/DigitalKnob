@@ -59,7 +59,7 @@ dk_target_triple_SET() {
 		#dk_call dk_set os 		${_os_}
 		#dk_call dk_set type 	${_type_}
 	elif [ "${input}" = "1" ]; then
-		dk_call dk_set triple 	${host_triple}
+		dk_call dk_set target_triple 	${host_triple}
 		dk_call dk_set os     	${HOST_OS}
 		dk_call dk_set arch  	${HOST_ARCH}
 		if [ -n "${host_env-}" ]; then
@@ -218,19 +218,19 @@ dk_target_triple_SET() {
 	fi
 		
 	if [ -n "${env-}" ]; then
-		dk_call dk_set triple "${os}_${arch}_${env}"
+		dk_call dk_set target_triple "${os}_${arch}_${env}"
 		dk_call dk_set TRIPLE "${OS}_${ARCH}_${ENV}"
 	else
-		dk_call dk_set triple "${os}_${arch}"
+		dk_call dk_set target_triple "${os}_${arch}"
 		dk_call dk_set TRIPLE "${OS}_${ARCH}"
 	fi
-	dk_call dk_assertVar triple
+	dk_call dk_assertVar target_triple
 	dk_call dk_assertVar TRIPLE
-	dk_call dk_set ${triple} 1	
+	dk_call dk_set ${target_triple} 1	
 	dk_call dk_set ${TRIPLE} 1	
-	dk_call dk_printVar triple
+	dk_call dk_printVar target_triple
 	dk_call dk_printVar TRIPLE
-	dk_call dk_printVar ${triple}
+	dk_call dk_printVar ${target_triple}
 	dk_call dk_printVar ${TRIPLE}	
 
 	### Set DEBUG_DIR and RELEASE_DIR variables

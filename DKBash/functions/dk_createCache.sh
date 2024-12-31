@@ -12,10 +12,9 @@ dk_createCache() {
 	
 	# write variable values line by line
 	dk_call dk_validate DKCACHE_DIR "dk_DKCACHE_DIR"
-	dk_call dk_fileWrite "${DKCACHE_DIR}/cache" "${APP-}"
-	dk_call dk_fileAppend "${DKCACHE_DIR}/cache" "${triple-}"
-	dk_call dk_fileAppend "${DKCACHE_DIR}/cache" "${TYPE-}"
-	#dk_call dk_fileAppend "${DKCACHE_DIR}/cache" "${DKENV-}"
+	dk_call dk_fileWrite "${DKCACHE_DIR}/cache" "${target_app-}"
+	dk_call dk_fileAppend "${DKCACHE_DIR}/cache" "${target_triple-}"
+	dk_call dk_fileAppend "${DKCACHE_DIR}/cache" "${target_type-}"
 }
 
 

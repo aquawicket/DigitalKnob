@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_setGlobal
     call dk_debugFunc 1 2
- setlocal
+ setlocal enableDelayedExpansion
  
     ::%SystemRoot%\System32\reg.exe ADD HKCU\Environment /f /v %~1 /d "%~2" >nul
 	::setx %~1 "%~2" >nul
@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST 
     call dk_debugFunc 0
- setlocal
+ setlocal enableDelayedExpansion
 	
     %dk_call% dk_echo "initial value of myGlobalVar"
 	%dk_call% dk_echo "myGlobalVar = %myGlobalVar%"

@@ -21,19 +21,19 @@ dk_buildMain() {
 	
 	while :
 	do
-		[ -z "${UPDATE-}" ] && dk_call dk_pickUpdate
-		[ -z "${APP-}" ]    && dk_call dk_pickApp
-		[ -z "${triple-}" ] && dk_call dk_pickOs
-		[ -z "${TYPE-}" ]   && dk_call dk_pickType
+		[ -z "${UPDATE-}" ] 		&& dk_call dk_pickUpdate
+		[ -z "${target_app-}" ]    		&& dk_call dk_target_app
+		[ -z "${target_triple-}" ] 	&& dk_call dk_target_triple_SET
+		[ -z "${target_type-}" ]    && dk_call dk_target_type
 		
 		dk_call dk_createCache
 		dk_call dk_generate	
 		dk_call dk_buildApp
 		
 		dk_call dk_unset UPDATE
-		dk_call dk_unset APP
-		dk_call dk_unset triple
-		dk_call dk_unset TYPE
+		dk_call dk_unset target_app
+		dk_call dk_unset target_triple
+		dk_call dk_unset target_type
 	done
 }
 

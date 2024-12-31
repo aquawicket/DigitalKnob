@@ -55,7 +55,7 @@ endmacro()
 
 ###### INSTALL Visual Studio ######	
 if(NOT EXISTS ${VS_YEAR})
-	dk_info("Installing Visual Studio . . .")
+	dk_info("Installing Visual Studio BuildTools . . .")
 	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 	dk_download(${VS_BUILDTOOLS_DL} ${DKDOWNLOAD_DIR}/vs_BuildTools.exe)	# online installer
 	dk_command(${DKDOWNLOAD_DIR}/vs_BuildTools.exe)

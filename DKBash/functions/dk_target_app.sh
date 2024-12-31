@@ -2,14 +2,14 @@
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
 ##################################################################################
-# dk_pickApp()
+# dk_target_app()
 #
 #
-dk_pickApp() {
+dk_target_app() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_echo "${APP-} ${triple-} ${TYPE-}"
+	dk_echo "${target_app-} ${target_triple-} ${target_type-}"
 	dk_echo
     dk_echo " 1) HelloWorld"
 	dk_echo " 2) DKPreprocessor"
@@ -30,21 +30,21 @@ dk_pickApp() {
 	dk_call dk_keyboardInputTimeout choice 23 60 
 	
 	if [ "${choice}" = "1" ]; then
-		APP="HelloWorld"
+		target_app="HelloWorld"
 	elif [ "${choice}" = "2" ]; then
-		APP="DKPreprocessor"
+		target_app="DKPreprocessor"
 	elif [ "${choice}" = "3" ]; then
-		APP="DKCore"
+		target_app="DKCore"
 	elif [ "${choice}" = "4" ]; then
-		APP="DKJavascript"
+		target_app="DKJavascript"
 	elif [ "${choice}" = "5" ]; then
-		APP="DKSDL"
+		target_app="DKSDL"
 	elif [ "${choice}" = "6" ]; then
-		APP="DKSDLRml"
+		target_app="DKSDLRml"
 	elif [ "${choice}" = "7" ]; then
-		APP="DKDomTest"
+		target_app="DKDomTest"
 	elif [ "${choice}" = "8" ]; then
-		APP="DKTestAll"
+		target_app="DKTestAll"
 	elif [ "${choice}" = "9" ]; then
 		dk_call dk_enterManually
 	elif [ "${choice}" = "10" ]; then
@@ -69,5 +69,5 @@ dk_pickApp() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_pickApp
+	dk_call dk_target_app
 }

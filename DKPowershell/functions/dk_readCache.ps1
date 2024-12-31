@@ -5,7 +5,7 @@ if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
 # dk_readCache()
 #
 #
-function Global:dk_readCache($APP, $triple, $TYPE) {
+function Global:dk_readCache($APP, $target_triple, $target_type) {
 	dk_debugFunc 3
 	
 	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
@@ -20,10 +20,10 @@ function Global:dk_readCache($APP, $triple, $TYPE) {
 			Set-Variable -scope global -Name "$APP" -Value $line
 		}
 		if("${count}" -eq "1"){
-			Set-Variable -scope global -Name "$triple" -Value $line
+			Set-Variable -scope global -Name "$target_triple" -Value $line
 		}
 		if("${count}" -eq "2"){
-			Set-Variable -scope global -Name "$TYPE" -Value $line
+			Set-Variable -scope global -Name "$target_type" -Value $line
 		}
 		$count++
 	}

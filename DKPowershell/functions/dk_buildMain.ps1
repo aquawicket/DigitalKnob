@@ -41,10 +41,10 @@ function Global:dk_buildMain() {
 	
 	$running=1
 	while($running){  
-		if(!${UPDATE}) { dk_call dk_pickUpdate;  continue; }
-		if(!${APP})    { dk_call dk_pickApp;     continue; }
-		if(!${triple}) { dk_call dk_pickOs;      continue; }
-		if(!${TYPE})   { dk_call dk_pickType;    continue; }
+		if(!${UPDATE}) { dk_call dk_pickUpdate;  		continue; }
+		if(!${APP})    { dk_call dk_target_app;     	continue; }
+		if(!${target_triple}) { dk_call dk_target_triple_SET;  continue; }
+		if(!${target_type})   { dk_call dk_target_type;    	continue; }
 		
 		dk_call dk_createCache
 		dk_call dk_generate	
@@ -52,8 +52,8 @@ function Global:dk_buildMain() {
 		
 		dk_call dk_unset UPDATE
 		dk_call dk_unset APP
-		dk_call dk_unset triple
-		dk_call dk_unset TYPE
+		dk_call dk_unset target_triple
+		dk_call dk_unset target_type
 	}  
 }
 

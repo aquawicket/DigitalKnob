@@ -63,8 +63,8 @@ function Global:dk_pickUpdate() {
 	if($input -eq "0"){
 		dk_call dk_echo "repeating last selection"
 		$global:APP = ${_APP_}
-		$global:triple = ${_triple_}
-		$global:TYPE = ${_TYPE_}
+		$global:target_triple = ${_triple_}
+		$global:target_type = ${_TYPE_}
 		$global:UPDATE = 1
 	}
 	elseif($input -eq  "1"){ dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development }

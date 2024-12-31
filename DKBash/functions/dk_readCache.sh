@@ -3,7 +3,7 @@
 
 
 ##################################################################################
-# dk_readCache(rtn:APP, rtn:triple, rtn:TYPE)
+# dk_readCache(rtn:target_app, rtn:target_triple, rtn:target_type)
 #
 #
 dk_readCache() {
@@ -36,8 +36,8 @@ dk_readCache() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_readCache APP triple TYPE
-	dk_call dk_printVar APP
-	dk_call dk_printVar triple
-	dk_call dk_printVar TYPE
+	dk_call dk_readCache target_app target_triple target_type
+	dk_call dk_printVar target_app
+	dk_call dk_printVar target_triple
+	dk_call dk_printVar target_type
 }

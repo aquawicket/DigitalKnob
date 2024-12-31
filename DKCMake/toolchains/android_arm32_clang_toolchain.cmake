@@ -1,6 +1,6 @@
-message(STATUS "##############################################################")
-message(STATUS "################ android_arm32_toolchain.cmake ###############")
-message(STATUS "##############################################################")
+message(STATUS "####################################################################")
+message(STATUS "################ android_arm32_clang_toolchain.cmake ###############")
+message(STATUS "####################################################################")
 
 dk_depend(android-ndk)
 set(ANDROID_ABI					armeabi-v7a)

@@ -31,13 +31,13 @@ dk_install() {
 	[ "${host_triple}" = "linux_x86_64" ]        && CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
 	[ "${host_triple}" = "linux_arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${host_triple}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
-	#[ "${triple}" = "android_arm32" ]        	 && CMAKE_IMPORT=cmake
-	[ "${triple}" = "win_arm64_clang" ]       	 && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
-	[ "${triple}" = "win_x86_clang" ]         	 && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	[ "${triple}" = "win_x86_mingw" ]         	 && CMAKE_IMPORT=mingw-w64-i686-cmake
-	[ "${triple}" = "win_x86_64_clang" ]      	 && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	[ "${triple}" = "win_x86_64_mingw" ]      	 && CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	[ "${triple}" = "win_x86_64_ucrt" ]       	 && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+	#[ "${target_triple}" = "android_arm32" ]    && CMAKE_IMPORT=cmake
+	[ "${target_triple}" = "win_arm64_clang" ]   && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	[ "${target_triple}" = "win_x86_clang" ]     && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+	[ "${target_triple}" = "win_x86_mingw" ]     && CMAKE_IMPORT=mingw-w64-i686-cmake
+	[ "${target_triple}" = "win_x86_64_clang" ]  && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	[ "${target_triple}" = "win_x86_64_mingw" ]  && CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	[ "${target_triple}" = "win_x86_64_ucrt" ]   && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	dk_printVar CMAKE_IMPORT
 	
 	[ -z "${CMAKE_IMPORT}" ] && dk_error "CMAKE_IMPORT is invalid"

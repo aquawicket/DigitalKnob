@@ -2,14 +2,14 @@ if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 
 if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
 
 ##################################################################################
-# dk_pickType()
+# dk_target_type()
 #
 #
-function Global:dk_pickType() {
+function Global:dk_target_type() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "${APP} ${triple} ${TYPE}"
+	dk_call dk_echo "${APP} ${target_triple} ${target_type}"
 	dk_call dk_echo	
     dk_call dk_echo " 1) Debug"
 	dk_call dk_echo " 2) Release"
@@ -20,11 +20,11 @@ function Global:dk_pickType() {
 	dk_call dk_echo
 	
 	$input = Read-Host
-	    if(${input} -eq "1"){ $global:TYPE = "Debug" }
-	elseif(${input} -eq "2"){ $global:TYPE = "Release" }
-	elseif(${input} -eq "3"){ $global:TYPE = "All" }
+	    if(${input} -eq "1"){ $global:target_type = "Debug" }
+	elseif(${input} -eq "2"){ $global:target_type = "Release" }
+	elseif(${input} -eq "3"){ $global:target_type = "All" }
 	elseif(${input} -eq "4"){ dk_call dk_clearScreen }
-	elseif(${input} -eq "5"){ dk_call dk_unset triple }
+	elseif(${input} -eq "5"){ dk_call dk_unset target_triple }
 	elseif(${input} -eq "6"){ dk_call dk_exit 0 }
 	else{ dk_call dk_warning "invalid selection" }
 }
@@ -35,5 +35,5 @@ function Global:dk_pickType() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_pickType
+	dk_call dk_target_type
 }

@@ -2,10 +2,10 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#####################################################################
-::# dk_pickApp(rtn_var:target_app)
+::# dk_target_app(RTN:target_app)
 ::#
 ::#
-:dk_pickApp target_app
+:dk_target_app
     call dk_debugFunc 0 1
  ::setlocal 
     
@@ -105,6 +105,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :: setlocal
     call dk_debugFunc 0
 
-    %dk_call% dk_pickApp target_app
+    %dk_call% dk_target_app target_app
 	%dk_call% dk_echo "target_app = %target_app%"
 %endfunction%
