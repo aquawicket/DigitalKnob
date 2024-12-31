@@ -34,14 +34,14 @@ function(dk_target_triple)
 	### Set target_type / TARGET_TYPE ###
 	if(Target_Dir MATCHES "Debug")	
 		### Get DEBUG ###
-		dk_set(DKBUILD_TYPE DEBUG)						# 	   DKBUILD_TYPE = DEBUG
-		dk_set(${DKBUILD_TYPE} 1)						# 			  DEBUG = 1	
+		dk_set(target_type DEBUG)						# 	   target_type = DEBUG
+		dk_set(${target_type} 1)						# 			  DEBUG = 1	
 		dk_dirname(${Target_Dir} Target_Triple_Dir)		# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 
 	elseif(Target_Dir MATCHES "Release")
 		### Get RELEASE ###
-		dk_set(DKBUILD_TYPE RELEASE)					# 	   DKBUILD_TYPE = RELEASE
-		dk_set(${DKBUILD_TYPE} 1)						#			RELEASE = 1	
+		dk_set(target_type RELEASE)					# 	   target_type = RELEASE
+		dk_set(${target_type} 1)						#			RELEASE = 1	
 		dk_dirname(${Target_Dir} Target_Triple_Dir)		# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	endif()
 		if( (target_dir MATCHES "android")		OR

@@ -8,17 +8,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_title Done Building %APP%_%triple%_%DKBUILD_TYPE% %DKLEVEL% . . .
+    %dk_call% dk_title Done Building %target_app%_%target_triple%_%target_type% %DKLEVEL% . . .
     %dk_call% dk_echo
     %dk_call% dk_info "####################################################################"
-    %dk_call% dk_info "****** Done Building %APP% - %triple% - %DKBUILD_TYPE% - %DKLEVEL% ******"
+    %dk_call% dk_info "****** Done Building %target_app% - %target_triple% - %target_type% - %DKLEVEL% ******"
     %dk_call% dk_info "####################################################################"
     %dk_call% dk_echo
         
     set "UPDATE="
-    set "APP="
-    set "triple="
-    set "DKBUILD_TYPE="
+    set "target_app="
+    set "target_triple="
+    set "target_type="
 %endfunction%
 
 

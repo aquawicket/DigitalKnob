@@ -60,7 +60,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		#%dk_call% dk_set os 		!_os_!
 		#%dk_call% dk_set type 		!_type_!
 	) else if "!input!" equ "1" (
-		%dk_call% dk_set triple 	!host_triple!
+		%dk_call% dk_set target_triple 	!host_triple!
 		%dk_call% dk_set os     	!host_os!
 		%dk_call% dk_set arch  		!host_arch!
 		if defined host_env (
@@ -207,6 +207,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_printVar !arch!
 	%dk_call% dk_printVar !ARCH!
 
+	if not defined env (
+		%dk_call% dk_set env clang
+	)
 	if defined env (
 		%dk_call% dk_toUpper !env! ENV
 		%dk_call% dk_set ENV !ENV!
@@ -219,20 +222,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	)
 		
 	if defined env (
-		%dk_call% dk_set triple "!os!_!arch!_!env!"
-		%dk_call% dk_set TRIPLE "!OS!_!ARCH!_!ENV!"
+		%dk_call% dk_set target_triple "!os!_!arch!_!env!"
+		%dk_call% dk_set TARGET_TRIPLE "!OS!_!ARCH!_!ENV!"
 	) else (
-		%dk_call% dk_set triple "!os!_!arch!"
-		%dk_call% dk_set TRIPLE "!OS!_!ARCH!"
+		%dk_call% dk_set target_triple "!os!_!arch!"
+		%dk_call% dk_set TARGET_TRIPLE "!OS!_!ARCH!"
 	)
-	%dk_call% dk_assertVar triple
-	%dk_call% dk_assertVar TRIPLE
-	%dk_call% dk_set !triple! 1	
-	%dk_call% dk_set !TRIPLE! 1	
-	%dk_call% dk_printVar triple
-	%dk_call% dk_printVar TRIPLE
-	%dk_call% dk_printVar !triple!
-	%dk_call% dk_printVar !TRIPLE!	
+	%dk_call% dk_assertVar target_triple
+	%dk_call% dk_assertVar TARGET_TRIPLE
+	%dk_call% dk_set !target_triple! 1	
+	%dk_call% dk_set !TARGET_TRIPLE! 1	
+	%dk_call% dk_printVar target_triple
+	%dk_call% dk_printVar TARGET_TRIPLE
+	%dk_call% dk_printVar !target_triple!
+	%dk_call% dk_printVar !TARGET_TRIPLE!	
 
 	::### Set DEBUG_DIR and RELEASE_DIR variables
 	if defined IOS (

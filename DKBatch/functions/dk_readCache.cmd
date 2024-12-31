@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_readCache(rtn:APP, rtn:triple, rtn:DKBUILD_TYPE)
+::# dk_readCache(rtn:target_app, rtn:target_triple, rtn:target_type)
 ::#
 ::#
 :dk_readCache
@@ -18,16 +18,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     set /a count=0
     for /f "tokens=*" %%a in (%DKCACHE_DIR%\cache) do (
-        if !count! equ 0 set "_APP_=%%a"
-        if !count! equ 1 set "_triple_=%%a"
-        if !count! equ 2 set "_BUILD_TYPE_=%%a"
+        if !count! equ 0 set "_target_app_=%%a"
+        if !count! equ 1 set "_target_triple_=%%a"
+        if !count! equ 2 set "_target_type_=%%a"
         set /a count+=1
     )
     
-    endlocal && set "%1=%_APP_%" && set "%2=%_triple_%" && set "%3=%_BUILD_TYPE_%"
-    ::%dk_call% dk_printVar APP
-    ::%dk_call% dk_printVar triple
-    ::%dk_call% dk_printVar DKBUILD_TYPE
+    endlocal && set "%1=%_target_app_%" && set "%2=%_target_triple_%" && set "%3=%_target_type_%"
+    ::%dk_call% dk_printVar target_app
+    ::%dk_call% dk_printVar target_triple
+    ::%dk_call% dk_printVar target_type
 %endfunction%
 
 
@@ -42,8 +42,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
     
-    %dk_call% dk_readCache APP triple DKBUILD_TYPE
-    %dk_call% dk_printVar APP
-    %dk_call% dk_printVar triple
-    %dk_call% dk_printVar DKBUILD_TYPE
+    %dk_call% dk_readCache target_app target_triple target_type
+    %dk_call% dk_printVar target_app
+    %dk_call% dk_printVar target_triple
+    %dk_call% dk_printVar target_type
 %endfunction%

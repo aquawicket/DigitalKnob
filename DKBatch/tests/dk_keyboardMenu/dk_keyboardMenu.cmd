@@ -42,7 +42,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="40" %dk_call% dk_exit             & %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
-    %dk_call% dk_unset triple
+    %dk_call% dk_unset target_triple
 %endfunction%
 
 

@@ -481,11 +481,11 @@ endif()
 
 # GENERATOR			CONFIG_PATH		  		  	BUILD_PATH
 # -----------------------------------------------------------------------
-# Visual Studio  	${triple}					${triple}/${DKBUILD_TYPE}		
-# XCODE			    ${triple}					${triple}/${DKBUILD_TYPE} 
-# MinGW Makefiles   ${triple}/${DKBUILD_TYPE}	${triple}/${DKBUILD_TYPE} 
-# Unix Makefiles    ${triple}/${DKBUILD_TYPE}   ${triple}/${DKBUILD_TYPE}  
-# ./configure       ${triple}/${DKBUILD_TYPE}   ${triple}/${DKBUILD_TYPE}
+# Visual Studio  	${triple}					${triple}/${target_type}		
+# XCODE			    ${triple}					${triple}/${target_type} 
+# MinGW Makefiles   ${triple}/${target_type}	${triple}/${target_type} 
+# Unix Makefiles    ${triple}/${target_type}   ${triple}/${target_type}  
+# ./configure       ${triple}/${target_type}   ${triple}/${target_type}
 
 # https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
 # https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html

@@ -9,17 +9,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  ::setlocal
  
-    %dk_call% dk_title Generating %APP% - %triple% - %DKBUILD_TYPE% - %LEVEL% . . .
+    %dk_call% dk_title Generating %target_app% - %target_triple% - %target_type% - %LEVEL% . . .
     %dk_call% dk_echo
     %dk_call% dk_info "##################################################################"
-    %dk_call% dk_info "      Generating %APP% - %triple% - %DKBUILD_TYPE% - %LEVEL%"
+    %dk_call% dk_info "      Generating %target_app% - %target_triple% - %target_type% - %LEVEL%"
     %dk_call% dk_info "##################################################################"
     %dk_call% dk_echo
     
-	::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
+	::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%target_app%"
 	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
-    set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
-    if not exist "%TARGET_PATH%\%triple%"   %dk_call% dk_makeDirectory "%TARGET_PATH%\%triple%"
+    set "TARGET_PATH=%DKAPPS_DIR%\%target_app%"
+    if not exist "%TARGET_PATH%\%target_triple%"   %dk_call% dk_makeDirectory "%TARGET_PATH%\%target_triple%"
     ::call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"         &:: FIXME: remove the need for call here
 	
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
@@ -32,15 +32,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "DKLINK=Static"
 
     set "CMAKE_ARGS="
-    if "%DKBUILD_TYPE%"=="Debug"     %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON
-    if "%DKBUILD_TYPE%"=="Release"   %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
-    if "%DKBUILD_TYPE%"=="All"       %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    if "%target_type%"=="Debug"     %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON
+    if "%target_type%"=="Release"   %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    if "%target_type%"=="All"       %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%DKLEVEL%"=="Build"          %dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON
     if "%DKLEVEL%"=="Rebuild"        %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON
     if "%DKLEVEL%"=="RebuildAll"     %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON
     if "%DKLINK%"=="Static"          %dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON
     if "%DKLINK%"=="Shared"          %dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF
-    ::if "%triple%==emscripten" %dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON
+    ::if "%target_triple%==emscripten" %dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON
 
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
 	set "DKCMAKE_FUNCTIONS_DIR_=!DKCMAKE_FUNCTIONS_DIR_:\=/!"   
@@ -63,67 +63,67 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_appendArgs CMAKE_ARGS --warn-unused-vars
     ::%dk_call% dk_appendArgs CMAKE_ARGS --check-system-vars
      
-	if "%triple%"=="cosmopolitan"       %dk_call% dk_prependArgs CMAKE_ARGS -DCOSMOPOLITAN=1
-    if "%triple%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64
-	if "%triple%"=="win_x86"		    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
-    if "%triple%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
-    if "%triple%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32
-    if "%triple%"=="WIN_X86_64"         %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
-	if "%triple%"=="WIN_X86_64_CLANG"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
-    if "%triple%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64
-    if "%triple%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
+	if "%target_triple%"=="cosmopolitan"       %dk_call% dk_prependArgs CMAKE_ARGS -DCOSMOPOLITAN=1
+    if "%target_triple%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64
+	if "%target_triple%"=="win_x86"		    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
+    if "%target_triple%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
+    if "%target_triple%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32
+    if "%target_triple%"=="WIN_X86_64"         %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
+	if "%target_triple%"=="WIN_X86_64_CLANG"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
+    if "%target_triple%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64
+    if "%target_triple%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
    
-	if "%triple%"=="ios_arm32"          set "MULTI_CONFIG=1"
-	if "%triple%"=="ios_arm64"          set "MULTI_CONFIG=1"
-    if "%triple%"=="iossim_x86"         set "MULTI_CONFIG=1"
-    if "%triple%"=="iossim_x86_64"      set "MULTI_CONFIG=1"
-	if "%triple%"=="mac_x86"            set "MULTI_CONFIG=1"
-    if "%triple%"=="mac_x86_64"         set "MULTI_CONFIG=1"
-	if "%triple%"=="win_arm64_msvc"     set "MULTI_CONFIG=1"
-	if "%triple%"=="win_x86_msvc"       set "MULTI_CONFIG=1"
-	if "%triple%"=="win_x86_64_msvc"    set "MULTI_CONFIG=1"
+	if "%target_triple%"=="ios_arm32"          set "MULTI_CONFIG=1"
+	if "%target_triple%"=="ios_arm64"          set "MULTI_CONFIG=1"
+    if "%target_triple%"=="iossim_x86"         set "MULTI_CONFIG=1"
+    if "%target_triple%"=="iossim_x86_64"      set "MULTI_CONFIG=1"
+	if "%target_triple%"=="mac_x86"            set "MULTI_CONFIG=1"
+    if "%target_triple%"=="mac_x86_64"         set "MULTI_CONFIG=1"
+	if "%target_triple%"=="win_arm64_msvc"     set "MULTI_CONFIG=1"
+	if "%target_triple%"=="win_x86_msvc"       set "MULTI_CONFIG=1"
+	if "%target_triple%"=="win_x86_64_msvc"    set "MULTI_CONFIG=1"
 	if not defined MULTI_CONFIG         set "SINGLE_CONFIG=1"
 	
-	if "%triple%"=="linux_x86"          set "WSL_EXE=wsl"
-    if "%triple%"=="linux_x86_64"       set "WSL_EXE=wsl"
+	if "%target_triple%"=="linux_x86"          set "WSL_EXE=wsl"
+    if "%target_triple%"=="linux_x86_64"       set "WSL_EXE=wsl"
 	
-	if defined MULTI_CONFIG             set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%"
-	if defined SINGLE_CONFIG            set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%/%DKBUILD_TYPE%"
+	if defined MULTI_CONFIG             set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%target_triple%"
+	if defined SINGLE_CONFIG            set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%target_triple%/%target_type%"
 	if not defined CMAKE_BINARY_DIR  %dk_call% dk_fatal "CMAKE_BINARY_DIR:%CMAKE_BINARY_DIR% is invalid"
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 	
-	if "%triple%"=="COSMOPOLITAN"   	set CMAKE_GENERATOR="MSYS Makefiles"
-    if "%triple%"=="ANDROID_ARM32"      set CMAKE_GENERATOR="Unix Makefiles"
-    if "%triple%"=="ANDROID_ARM64"      set CMAKE_GENERATOR="Unix Makefiles"
-    if "%triple%"=="ANDROID_X86" 	    set CMAKE_GENERATOR="Unix Makefiles"
-	if "%triple%"=="ANDROID_X86_64"     set CMAKE_GENERATOR="Unix Makefiles"
-    if "%triple%"=="EMSCRIPTEN"         set CMAKE_GENERATOR="Unix Makefiles"  
-    if "%triple%"=="IOS_ARM32"          set CMAKE_GENERATOR="Xcode"
-    if "%triple%"=="IOS_ARM64"          set CMAKE_GENERATOR="Xcode"
-    if "%triple%"=="IOSSIM_X86"         set CMAKE_GENERATOR="Xcode"
-    if "%triple%"=="IOSSIM_X86_64"      set CMAKE_GENERATOR="Xcode"
-    if "%triple%"=="LINUX_X86"          set CMAKE_GENERATOR="Unix Makefiles"
-    if "%triple%"=="LINUX_X86_64"       set CMAKE_GENERATOR="Unix Makefiles"
-    if "%triple%"=="MAC_X86"            set CMAKE_GENERATOR="Xcode"
-    if "%triple%"=="MAC_X86_64"         set CMAKE_GENERATOR="Xcode"
-    if "%triple%"=="RASPBERRY_ARM32"    set CMAKE_GENERATOR="Unix Makefiles"
-    if "%triple%"=="RASPBERRY_ARM64"    set CMAKE_GENERATOR="Unix Makefiles"
-    if "%triple%"=="WIN_ARM64_CLANG"    set CMAKE_GENERATOR="MinGW Makefiles"
-	if "%triple%"=="WIN_ARM64_MSVC"     set CMAKE_GENERATOR="Visual Studio 17 2022" -A arm64
-	if "%triple%"=="WIN_X86"  		    set CMAKE_GENERATOR="MinGW Makefiles"
-	if "%triple%"=="WIN_X86_CLANG"      set CMAKE_GENERATOR="MinGW Makefiles"
-    if "%triple%"=="WIN_X86_MINGW"      set CMAKE_GENERATOR="MinGW Makefiles"
-	if "%triple%"=="WIN_X86_MSVC"       set CMAKE_GENERATOR="Visual Studio 17 2022" -A Win32
-    if "%triple%"=="WIN_X86_64"         set CMAKE_GENERATOR="MinGW Makefiles"
-	if "%triple%"=="WIN_X86_64_CLANG"   set CMAKE_GENERATOR="MinGW Makefiles"
-	if "%triple%"=="WIN_X86_64_MINGW"   set CMAKE_GENERATOR="MinGW Makefiles"
-    if "%triple%"=="WIN_X86_64_MSVC"    set CMAKE_GENERATOR="Visual Studio 17 2022" -A x64
-    if "%triple%"=="WIN_X86_64_UCRT"    set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%target_triple%"=="COSMOPOLITAN"   	set CMAKE_GENERATOR="MSYS Makefiles"
+    if "%target_triple%"=="ANDROID_ARM32"      set CMAKE_GENERATOR="Unix Makefiles"
+    if "%target_triple%"=="ANDROID_ARM64"      set CMAKE_GENERATOR="Unix Makefiles"
+    if "%target_triple%"=="ANDROID_X86" 	    set CMAKE_GENERATOR="Unix Makefiles"
+	if "%target_triple%"=="ANDROID_X86_64"     set CMAKE_GENERATOR="Unix Makefiles"
+    if "%target_triple%"=="EMSCRIPTEN"         set CMAKE_GENERATOR="Unix Makefiles"  
+    if "%target_triple%"=="IOS_ARM32"          set CMAKE_GENERATOR="Xcode"
+    if "%target_triple%"=="IOS_ARM64"          set CMAKE_GENERATOR="Xcode"
+    if "%target_triple%"=="IOSSIM_X86"         set CMAKE_GENERATOR="Xcode"
+    if "%target_triple%"=="IOSSIM_X86_64"      set CMAKE_GENERATOR="Xcode"
+    if "%target_triple%"=="LINUX_X86"          set CMAKE_GENERATOR="Unix Makefiles"
+    if "%target_triple%"=="LINUX_X86_64"       set CMAKE_GENERATOR="Unix Makefiles"
+    if "%target_triple%"=="MAC_X86"            set CMAKE_GENERATOR="Xcode"
+    if "%target_triple%"=="MAC_X86_64"         set CMAKE_GENERATOR="Xcode"
+    if "%target_triple%"=="RASPBERRY_ARM32"    set CMAKE_GENERATOR="Unix Makefiles"
+    if "%target_triple%"=="RASPBERRY_ARM64"    set CMAKE_GENERATOR="Unix Makefiles"
+    if "%target_triple%"=="WIN_ARM64_CLANG"    set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%target_triple%"=="WIN_ARM64_MSVC"     set CMAKE_GENERATOR="Visual Studio 17 2022" -A arm64
+	if "%target_triple%"=="WIN_X86"  		    set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%target_triple%"=="WIN_X86_CLANG"      set CMAKE_GENERATOR="MinGW Makefiles"
+    if "%target_triple%"=="WIN_X86_MINGW"      set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%target_triple%"=="WIN_X86_MSVC"       set CMAKE_GENERATOR="Visual Studio 17 2022" -A Win32
+    if "%target_triple%"=="WIN_X86_64"         set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%target_triple%"=="WIN_X86_64_CLANG"   set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%target_triple%"=="WIN_X86_64_MINGW"   set CMAKE_GENERATOR="MinGW Makefiles"
+    if "%target_triple%"=="WIN_X86_64_MSVC"    set CMAKE_GENERATOR="Visual Studio 17 2022" -A x64
+    if "%target_triple%"=="WIN_X86_64_UCRT"    set CMAKE_GENERATOR="MinGW Makefiles"
 	if defined CMAKE_GENERATOR  %dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%
 	
 ::  ###### CMAKE_TOOLCHAIN_FILE ######
-::  %dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%triple%_toolchain.cmake"
+::  %dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%target_triple%_toolchain.cmake"
 ::  %dk_call% dk_assertPath TOOLCHAIN
 ::  %dk_call% dk_printVar TOOLCHAIN
 ::  %dk_call% dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
@@ -145,7 +145,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::###### linux_x86_64 (WSL) ######
 	if defined WSL_EXE %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR
 	if defined WSL_EXE %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "\" "/" DKSCRIPT_DIR
-	if defined WSL_EXE %WSL_EXE% sh -c "export UPDATE=1 && export APP=%APP% && export triple=%triple% && export DKBUILD_TYPE=%DKBUILD_TYPE% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
+	if defined WSL_EXE %WSL_EXE% sh -c "export UPDATE=1 && export target_app=%target_app% && export target_triple=%target_triple% && export target_type=%target_type% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
 	if defined WSL_EXE %return%
 	
 	::###### CMake Configure ######

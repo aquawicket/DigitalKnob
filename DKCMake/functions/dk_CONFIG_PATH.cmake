@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_CONFIG_PATH)
 	dk_debugFunc()
 	
-	dk_validate(DKBUILD_TYPE  "dk_DKBUILD_TYPE()")      # get {DEBUG} {RELEASE}
+	dk_validate(target_type  "dk_target_type()")      # get {DEBUG} {RELEASE}
 	dk_validate(triple        "dk_target_triple()")		# get {triple}
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######

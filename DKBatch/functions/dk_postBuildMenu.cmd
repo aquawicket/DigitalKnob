@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
     call dk_debugFunc 0
     
-    %dk_call% dk_title DigitalKnob - %APP% %triple% %DKBUILD_TYPE%
+    %dk_call% dk_title DigitalKnob - %target_app% %target_triple% %target_type%
     %dk_call% dk_echo
-    echo %APP% %triple% %DKBUILD_TYPE%
+    echo %target_app% %target_triple% %target_type%
         
     %dk_call% dk_echo
 %endfunction%

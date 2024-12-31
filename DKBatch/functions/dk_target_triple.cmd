@@ -33,14 +33,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::### Set target_type / TARGET_TYPE ###
 	if "!TARGET_DIR!" equ "Debug" (	
 		rem ### Get DEBUG ###
-		!dk_call! dk_set DKBUILD_TYPE DEBUG						&rem 	     DKBUILD_TYPE	= DEBUG
-		!dk_call! dk_set !DKBUILD_TYPE! 1						&rem 			  DEBUG = 1	
+		!dk_call! dk_set target_type DEBUG						&rem 	     target_type	= DEBUG
+		!dk_call! dk_set !target_type! 1						&rem 			  DEBUG = 1	
 		rem !dk_call! dk_set TARGET_TYPE Debug					&rem 		TARGET_TYPE	= Debug
 		!dk_call! dk_dirname TARGET_DIR TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	) else if "!TARGET_DIR!" equ "Release" (
 		rem ### Get RELEASE ###
-		!dk_call! dk_set DKBUILD_TYPE RELEASE 					&rem 	     DKBUILD_TYPE = RELEASE
-		!dk_call! dk_set !DKBUILD_TYPE! 1						&rem 			RELEASE = 1	
+		!dk_call! dk_set target_type RELEASE 					&rem 	     target_type = RELEASE
+		!dk_call! dk_set !target_type! 1						&rem 			RELEASE = 1	
 		rem !dk_call! dk_set TARGET_TYPE Release				&rem 		TARGET_TYPE = Release
 		!dk_call! dk_dirname !TARGET_DIR! TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	)
@@ -60,7 +60,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!			&:: TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	:else
 		!dk_call! dk_target_triple_SET
-		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!/!triple!
+		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!/!target_triple!
 	:endif
 
 	if exist !TARGET_TRIPLE_DIR! goto TARGET_TRIPLE_DIR_EXISTS
@@ -75,34 +75,34 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	!dk_call! dk_set DK_PROJECT_DIR !DK_PROJECT_DIR!
 	!dk_call! dk_assertPath DK_PROJECT_DIR
 
-	::### Set triple/TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
-	!dk_call! dk_basename !TARGET_TRIPLE_DIR! triple	&:: triple 	= win_x86_64_clang
-	!dk_call! dk_set triple !triple!					&:: Globalize the variable
-	!dk_call! dk_set target_triple !triple!				&:: target_triple	= win_x86_64_clang
-	!dk_call! dk_toUpper !triple! TRIPLE				&:: TRIPLE	= WIN_X86_64_CLANG
-	!dk_call! dk_set TRIPLE !TRIPLE!					&:: Globalize the variable
-	!dk_call! dk_set TARGET_TRIPLE !TRIPLE!				&::	TARGET_TRIPLE = WIN_X86_64_CLANG
-	!dk_call! dk_set !triple! 1						    &:: win_x86_64_clang = 1
-	!dk_call! dk_set !TRIPLE! 1						    &:: WIN_X86_64_CLANG = 1
-	!dk_call! dk_printVar triple 
-	!dk_call! dk_printVar TRIPLE 
+	::### Set target_triple/TARGET_TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
+	!dk_call! dk_basename !TARGET_TRIPLE_DIR! target_triple	&:: target_triple 	= win_x86_64_clang
+	!dk_call! dk_set target_triple !target_triple!					&:: Globalize the variable
+	!dk_call! dk_set target_triple !target_triple!				&:: target_triple	= win_x86_64_clang
+	!dk_call! dk_toUpper !target_triple! TARGET_TRIPLE				&:: TARGET_TRIPLE	= WIN_X86_64_CLANG
+	!dk_call! dk_set TARGET_TRIPLE !TARGET_TRIPLE!					&:: Globalize the variable
+	!dk_call! dk_set TARGET_TRIPLE !TARGET_TRIPLE!				&::	TARGET_TRIPLE = WIN_X86_64_CLANG
+	!dk_call! dk_set !target_triple! 1						    &:: win_x86_64_clang = 1
+	!dk_call! dk_set !TARGET_TRIPLE! 1						    &:: WIN_X86_64_CLANG = 1
+	!dk_call! dk_printVar target_triple 
+	!dk_call! dk_printVar TARGET_TRIPLE 
 
 
 	::### Set os / OS / <os>_target / <OS>_TARGET
-	%dk_call% dk_stringContains "!TRIPLE!" "android" 		&& !dk_call! dk_set os android
-	%dk_call% dk_stringContains "!TRIPLE!" "emscripten" 	&& !dk_call! dk_set os emscripten
-	%dk_call% dk_stringContains "!TRIPLE!" "iossim" 		&& !dk_call! dk_set os iossim 
-	%dk_call% dk_stringContains "!TRIPLE!" "ios" 			&& !dk_call! dk_set os ios
-	%dk_call% dk_stringContains "!TRIPLE!" "linux" 			&& !dk_call! dk_set os linux
-	%dk_call% dk_stringContains "!TRIPLE!" "mac" 			&& !dk_call! dk_set os mac
-	%dk_call% dk_stringContains "!TRIPLE!" "raspberry" 		&& !dk_call! dk_set os raspberry
-	%dk_call% dk_stringContains "!TRIPLE!" "windows" 		&& !dk_call! dk_set os windows
-	%dk_call% dk_stringContains "!TRIPLE!" "win"			&& !dk_call! dk_set os win
-	%dk_call% dk_stringContains "!TRIPLE!" "cosmopolitan"	&& !dk_call! dk_set os cosmopolitan
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "android" 		&& !dk_call! dk_set os android
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "emscripten" 	&& !dk_call! dk_set os emscripten
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "iossim" 		&& !dk_call! dk_set os iossim 
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "ios" 			&& !dk_call! dk_set os ios
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "linux" 			&& !dk_call! dk_set os linux
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "mac" 			&& !dk_call! dk_set os mac
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "raspberry" 		&& !dk_call! dk_set os raspberry
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "windows" 		&& !dk_call! dk_set os windows
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "win"			&& !dk_call! dk_set os win
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "cosmopolitan"	&& !dk_call! dk_set os cosmopolitan
 	if not defined os (
-		!dk_call! dk_warning "The target triple:!triple! does not contain a valid os"
-		!dk_call! dk_unset triple
-		!dk_call! dk_unset TRIPLE 
+		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid os"
+		!dk_call! dk_unset target_triple
+		!dk_call! dk_unset TARGET_TRIPLE 
 		!dk_call! dk_target_triple_SET
 	) else (
 		!dk_call! dk_toUpper !os! OS
@@ -115,13 +115,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		!dk_call! dk_set !OS!_TARGET 1
 	)
 	::### Get arch / ARCH
-	%dk_call% dk_stringContains "!triple!" "arm64" 			&& !dk_call! dk_set arch arm64
-	%dk_call% dk_stringContains "!triple!" "arm32" 			&& !dk_call! dk_set arch arm32
-	%dk_call% dk_stringContains "!triple!" "x86_64" 		&& !dk_call! dk_set arch x86_64
-	%dk_call% dk_stringContains "!triple!" "x86" 			&& !dk_call! dk_set arch x86
-	%dk_call% dk_stringContains "!triple!" "cosmopolitan" 	&& !dk_call! dk_set arch cosmopolitan	
+	%dk_call% dk_stringContains "!target_triple!" "arm64" 			&& !dk_call! dk_set arch arm64
+	%dk_call% dk_stringContains "!target_triple!" "arm32" 			&& !dk_call! dk_set arch arm32
+	%dk_call% dk_stringContains "!target_triple!" "x86_64" 		&& !dk_call! dk_set arch x86_64
+	%dk_call% dk_stringContains "!target_triple!" "x86" 			&& !dk_call! dk_set arch x86
+	%dk_call% dk_stringContains "!target_triple!" "cosmopolitan" 	&& !dk_call! dk_set arch cosmopolitan	
 	if not defined arch (
-		!dk_call! dk_warning "The target triple:!triple! does not contain a valid arch"
+		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid arch"
 		!dk_call! dk_target_triple_SET
 	) else (
 		!dk_call! dk_toUpper !arch! ARCH
@@ -135,13 +135,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	)
 
 	::### Set evn / ENV 
-	%dk_call% dk_stringContains "!triple!" "clang" 			&& !dk_call! dk_set env clang
-	%dk_call% dk_stringContains "!triple!" "mingw" 			&& !dk_call! dk_set env mingw
-	%dk_call% dk_stringContains "!triple!" "ucrt"  			&& !dk_call! dk_set env ucrt
-	%dk_call% dk_stringContains "!triple!" "msvc"  			&& !dk_call! dk_set env msvc
-	%dk_call% dk_stringContains "!triple!" "cosmopolitan" 	&& !dk_call! dk_set env cosmopolitan
+	%dk_call% dk_stringContains "!target_triple!" "clang" 			&& !dk_call! dk_set env clang
+	%dk_call% dk_stringContains "!target_triple!" "mingw" 			&& !dk_call! dk_set env mingw
+	%dk_call% dk_stringContains "!target_triple!" "ucrt"  			&& !dk_call! dk_set env ucrt
+	%dk_call% dk_stringContains "!target_triple!" "msvc"  			&& !dk_call! dk_set env msvc
+	%dk_call% dk_stringContains "!target_triple!" "cosmopolitan" 	&& !dk_call! dk_set env cosmopolitan
 	if not defined env (
-		!dk_call! dk_warning "The target triple:!triple! does not contain a valid env"
+		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid env"
 		!dk_call! dk_set env !default_target_env!
 	) else (
 		!dk_call! dk_toUpper !env! ENV
@@ -166,7 +166,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			!dk_call! dk_set msystem "!env!32"		&rem msystem = clang32, mingw32
 			!dk_call! dk_set MSYSTEM "!ENV!32"		&rem MSYSTEM = CLANG32, MINGW32
 		) else (
-			!dk_call! dk_fatal "The target triple:!triple! does not contain a valid env or msystem"
+			!dk_call! dk_fatal "The target target_triple:!target_triple! does not contain a valid env or msystem"
 		)
 		!dk_call! dk_set !MSYSTEM! 1				&rem CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
 	)

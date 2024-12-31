@@ -934,7 +934,7 @@ if(NOT RASPBERRY)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
-	#CPP_Execute("chmod +x "+app_path+OS+"/${DEBUG_DIR}/"+APP)
+	#CPP_Execute("chmod +x "+app_path+OS+"/${DEBUG_DIR}/"+target_app)
 endif()
 endif(LINUX)
 
@@ -1075,34 +1075,34 @@ if(MAC)
 		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
 	endif()
 	
-	#CPP_Execute("chmod +x "+app_path+OS+"/${DEBUG_DIR}/"+APP)
+	#CPP_Execute("chmod +x "+app_path+OS+"/${DEBUG_DIR}/"+target_app)
 #			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework")){
-#				CPP_DKFile_MkDir(app_path+"mac_x86_64/${DEBUG_DIR}/"+APP+".app/Contents/Frameworks")
-#				CPP_DKFile_Copy(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework", app_path+"mac_x86_64/${DEBUG_DIR}/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
+#				CPP_DKFile_MkDir(app_path+"mac_x86_64/${DEBUG_DIR}/"+target_app+".app/Contents/Frameworks")
+#				CPP_DKFile_Copy(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework", app_path+"mac_x86_64/${DEBUG_DIR}/"+target_app+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
 #				if(CPP_DKFile_Exists(DIGITALKNOB_DIR+"DK/DKPlugins/DKCefChild/mac_x86_64/${DEBUG_DIR}/DKCefChild.app")){
-#					CPP_DKFile_Copy(DIGITALKNOB_DIR+"DK/DKPlugins/DKCefChild/mac_x86_64/${DEBUG_DIR}/DKCefChild.app", app_path+"mac_x86_64/${DEBUG_DIR}/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
-#					CPP_DKFile_Rename(app_path+"mac_x86_64/${DEBUG_DIR}/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/DKCefChild", app_path+"mac_x86_64/${DEBUG_DIR}/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper", true)
+#					CPP_DKFile_Copy(DIGITALKNOB_DIR+"DK/DKPlugins/DKCefChild/mac_x86_64/${DEBUG_DIR}/DKCefChild.app", app_path+"mac_x86_64/${DEBUG_DIR}/"+target_app+".app/Contents/Frameworks/"+target_app+" Helper.app", true)
+#					CPP_DKFile_Rename(app_path+"mac_x86_64/${DEBUG_DIR}/"+target_app+".app/Contents/Frameworks/"+target_app+" Helper.app/Contents/MacOS/DKCefChild", app_path+"mac_x86_64/${DEBUG_DIR}/"+target_app+".app/Contents/Frameworks/"+target_app+" Helper.app/Contents/MacOS/"+target_app+" Helper", true)
 #				}
 #			}
 #			//update the info.plist to include the logo icon
-#			if(CPP_DKFile_Exists(app_path+OS+"/${DEBUG_DIR}/"+APP+".app/Contents/info.plist")){
-#				let info_plist = CPP_DKFile_FileToString(app_path+OS+"/${DEBUG_DIR}/"+APP+".app/Contents/info.plist")
+#			if(CPP_DKFile_Exists(app_path+OS+"/${DEBUG_DIR}/"+target_app+".app/Contents/info.plist")){
+#				let info_plist = CPP_DKFile_FileToString(app_path+OS+"/${DEBUG_DIR}/"+target_app+".app/Contents/info.plist")
 #				info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
-#				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/${DEBUG_DIR}/"+APP+".app/Contents/info.plist")
+#				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/${DEBUG_DIR}/"+target_app+".app/Contents/info.plist")
 #			}
 #			//update install_name_tool if cef present
-#			if(CPP_DKFile_Exists(app_path+OS+"/${DEBUG_DIR}/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
+#			if(CPP_DKFile_Exists(app_path+OS+"/${DEBUG_DIR}/"+target_app+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
 #				console.log("USING CHROMIUM EMBEDDED FRAMEWORK")
-#				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/${DEBUG_DIR}/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
+#				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/${DEBUG_DIR}/"+target_app+".app/Contents/Frameworks/"+target_app+" Helper.app/Contents/MacOS/"+target_app+" Helper\""
 #				console.log(command)
 #				CPP_Execute(command)
-#				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+app_path+OS+"/${DEBUG_DIR}/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
+#				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+app_path+OS+"/${DEBUG_DIR}/"+target_app+".app/Contents/Frameworks/"+target_app+" Helper.app/Contents/MacOS/"+target_app+" Helper\""
 #				console.log(command)
 #				CPP_Execute(command)
-#				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/${DEBUG_DIR}/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\""
+#				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/${DEBUG_DIR}/"+target_app+".app/Contents/Frameworks/"+target_app+" Helper.app/Contents/MacOS/"+target_app+"\""
 #				console.log(command)
 #				CPP_Execute(command)
-#				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+app_path+OS+"/${DEBUG_DIR}/"+APP+".app/Contents/MacOS/"+APP+"\""
+#				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+app_path+OS+"/${DEBUG_DIR}/"+target_app+".app/Contents/MacOS/"+target_app+"\""
 #				console.log(command)
 #				CPP_Execute(command)
 #			}
@@ -1202,7 +1202,7 @@ if(RASPBERRY)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
-	#CPP_Execute("chmod +x "+app_path+OS+"/${DEBUG_DIR}/"+APP)
+	#CPP_Execute("chmod +x "+app_path+OS+"/${DEBUG_DIR}/"+target_app)
 endif(RASPBERRY)
 
 
@@ -1330,8 +1330,8 @@ if(WIN_X86)
     #COMMENT "Adding manifest..."
     #)
 	
-	#CPP_DKFile_Copy(app_path+OS+"/${RELEASE_DIR}/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${RELEASE_DIR}/"+APP+".exe")
+	#CPP_DKFile_Copy(app_path+OS+"/${RELEASE_DIR}/"+target_app+".pdb", app_path+"assets/"+target_app+".pdb", true)
+	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${RELEASE_DIR}/"+target_app+".exe")
 endif(WIN_X86)
 	
 	
@@ -1441,8 +1441,8 @@ if(WIN_X86_64)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
-	#CPP_DKFile_Copy(app_path+OS+"/${RELEASE_DIR}/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${RELEASE_DIR}/"+APP+".exe")
+	#CPP_DKFile_Copy(app_path+OS+"/${RELEASE_DIR}/"+target_app+".pdb", app_path+"assets/"+target_app+".pdb", true)
+	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${RELEASE_DIR}/"+target_app+".exe")
 endif(WIN_X86_64)
 
 

@@ -2,16 +2,16 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#####################################################################
-::# dk_pickApp(rtn_var:APP)
+::# dk_pickApp(rtn_var:target_app)
 ::#
 ::#
-:dk_pickApp APP
+:dk_pickApp target_app
     call dk_debugFunc 0 1
  ::setlocal 
     
-    %dk_call% dk_title DigitalKnob - %APP% %triple% %DKBUILD_TYPE%
+    %dk_call% dk_title DigitalKnob - %target_app% %target_triple% %target_type%
     
-    %dk_call% dk_readCache _APP_ _triple_ _BUILD_TYPE_
+    %dk_call% dk_readCache _target_app_ _target_triple_ _target_type_
 	
     :: get a list of the directories in DKApps
 	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
@@ -26,21 +26,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         if not defined options[%n%] goto endloop1
         ::if "!DE!" neq "" for %%Z in ("%%%options%[%n%]%%") do set "options[%n%]=%%~nxZ"
         if "!DE!" equ "" for %%Z in ("!options[%n%]!") do set "options[%n%]=%%~nxZ"
-        set "commands[%n%]=%dk_call% dk_set APP !options[%n%]!"
+        set "commands[%n%]=%dk_call% dk_set target_app !options[%n%]!"
         set /a n+=1
         goto loop1 
     :endloop1
     ::%dk_call% dk_printVar commands
 
     :: prepend cache selection if available
-    if exist "%DKCACHE_DIR%\cache" if "%_APP_%" neq "" if "%_triple_%" neq "" if "%_BUILD_TYPE_%" neq "" (
-        %dk_call% Array::dk_unshift options "re-run [%_APP_% - %_triple_% - %_BUILD_TYPE_%]"
+    if exist "%DKCACHE_DIR%\cache" if "%_target_app_%" neq "" if "%_target_triple_%" neq "" if "%_target_type_%" neq "" (
+        %dk_call% Array::dk_unshift options "re-run [%_target_app_% - %_target_triple_% - %_target_type_%]"
         %dk_call% Array::dk_unshift commands "call:runCache"
     )
     goto end_runCache
     :runCache
         %dk_call% dk_info "re-running cached options..."
-        %dk_call% dk_set APP %_APP_% & call dk_set triple %_triple_% & call dk_set DKBUILD_TYPE %_BUILD_TYPE_% & %return%
+        %dk_call% dk_set target_app %_target_app_% & call dk_set target_triple %_target_triple_% & call dk_set target_type %_target_type_% & %return%
     :end_runCache
     
     :: append remaining options with commands
@@ -81,21 +81,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     if not defined commands[%choice%] (
         %dk_call% dk_echo "%choice%: invalid selection, please try again"
-        %dk_call% dk_unset APP
+        %dk_call% dk_unset target_app
         %return%
     )
     
     if "!DE!" neq "" %dk_call% dk_error "delayed expansion is required"
     
     endlocal & !commands[%choice%]!
-    if "%~1" neq "" endlocal & set "%1=%APP%"
+    if "%~1" neq "" endlocal & set "%1=%target_app%"
     %dk_call% dk_deleteArray options
     %dk_call% dk_deleteArray commands
     %return%
     
 	:: TODO
 	:: %dk_call% dk_echo "%choice%: invalid selection, please try again"
-	:: %dk_call% dk_unset APP
+	:: %dk_call% dk_unset target_app
 %endfunction%
 
 
@@ -105,6 +105,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :: setlocal
     call dk_debugFunc 0
 
-    %dk_call% dk_pickApp APP
-	%dk_call% dk_echo "APP = %APP%"
+    %dk_call% dk_pickApp target_app
+	%dk_call% dk_echo "target_app = %target_app%"
 %endfunction%

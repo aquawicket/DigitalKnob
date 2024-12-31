@@ -3,18 +3,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 %dk_call% dk_fatal "dk_pickOs.cmd is discontinued"
 ::####################################################################
-::# dk_pickOs(rtn_var:triple)
+::# dk_pickOs(rtn_var:target_triple)
 ::#
 ::#
-:dk_pickOs triple
+:dk_pickOs target_triple
     call dk_debugFunc 0 1
  ::setlocal
 	
 	set "default_target_env=clang"
 	
-    %dk_call% dk_title DigitalKnob - %APP% %triple% %DKBUILD_TYPE%
+    %dk_call% dk_title DigitalKnob - %target_app% %target_triple% %target_type%
     %dk_call% dk_echo
-    %dk_call% dk_echo %APP% %triple% %DKBUILD_TYPE%
+    %dk_call% dk_echo %target_app% %target_triple% %target_type%
        
     :: TODO: this list can be created using the DKCMake/toolchains files.
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple" 
@@ -105,11 +105,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="36" endlocal & set "%1=win_x86_64_msvc"     				& %return%
     if "%choice%"=="37" endlocal & set "%1=none"                				& %return%
     if "%choice%"=="38" %dk_call% dk_clearScreen                				& %return%
-    if "%choice%"=="39" %dk_call% dk_unset APP                  				& %return%
+    if "%choice%"=="39" %dk_call% dk_unset target_app                  				& %return%
     if "%choice%"=="40" %dk_call% dk_exit                       				& %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
-    %dk_call% dk_unset triple
+    %dk_call% dk_unset target_triple
 %endfunction%
 
 
