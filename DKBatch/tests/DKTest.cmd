@@ -170,7 +170,7 @@ call dk_printVar TEST_VAR
 ::	$echo "\n############################################################\n"
 ::	
 ::	print_stack
-::	dk_stacktrace
+::	dk_printCallStack
 %endfunction%
 ::
 ::::::::: print_stack() :::::::

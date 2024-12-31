@@ -11,6 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~f0 %*
     %dk_call% dk_debugFunc 0 99
  setlocal
   
+	set "TESTABC=123"
     %dk_call% dk_echo "################# dk_test.cmd ################"
     %dk_call% dk_echo "                    0 = %~0"
                  echo "                    * = %*

@@ -1,7 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-if not defined dk_call  goto:init
+if not defined dk_call call :init
 ::####################################################################
 ::# dk_call(command args)
 ::#
@@ -87,8 +87,8 @@ if not defined dk_call  goto:init
 
 	call dk_setGlobal STACK_%lvl% ""
 	
-	:: get all variables from GLOBAL.txt and apply them with GLOBAL_ prefixes removed
-	if exist "GLOBAL.txt" for /F "usebackq delims=" %%a in ("GLOBAL.txt") do (
+	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
+	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
 		set "line=%%a"
 		set "!line:GLOBAL_=!"
     )
@@ -98,11 +98,12 @@ if not defined dk_call  goto:init
 	
 	
 	::FIXME: I think %endfunction% covers this
-    ::exit /b %errorlevel%
+    exit /b %errorlevel%
 %endfunction%
 
 :init
-	echo. 2>GLOBAL.txt
+	set "GLOBAL_FILE=C:\GLOBAL.txt"
+	echo. 2>"%GLOBAL_FILE%"
 	set "dk_call=call dk_call"
 	(set /a lvl=0)
 	call setGlobal "STACK_0" "main"

@@ -8,11 +8,13 @@ if defined %~1 (%return%)
 ::#    Check if a variable is valid, otherwise run code to validate the variable
 ::#
 :dk_validate
+ ::setlocal
     %dk_call% dk_debugFunc 2
-:: setlocal
+
 
     ::%dk_call% dk_stringContains "%~2" "call" || %dk_call% dk_error "dk_validate parameter 2 requires the use of call"
-    %~2
+    echo %~2
+	%~2
     
 	if "%~3" equ "NO_HALT" %return%
     if not defined %~1    %dk_call% dk_error "dk_validate was unable to set the variable:%~1 with the code provided"
@@ -25,8 +27,9 @@ if defined %~1 (%return%)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
     %dk_call% dk_debugFunc 0
- setlocal
+
  
     %dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
     %dk_call% dk_echo "DIGITALKNOB_DIR = %DIGITALKNOB_DIR%"
@@ -36,4 +39,8 @@ if defined %~1 (%return%)
 	
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_echo "DKDOWNLOAD_DIR = %DKDOWNLOAD_DIR%"
+	
+	
+	%dk_call% dk_validate TESTABC "%dk_call% dk_testB"
+	
 %endfunction%
