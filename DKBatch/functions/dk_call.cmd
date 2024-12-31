@@ -88,11 +88,11 @@ if not defined dk_call  goto:init
 	call dk_setGlobal STACK_%lvl% ""
 	
 	:: get all variables from GLOBAL.txt and apply them with GLOBAL_ prefixes removed
-	for /F "usebackq delims=" %%a in ("GLOBAL.txt") do (
+	if exist "GLOBAL.txt" for /F "usebackq delims=" %%a in ("GLOBAL.txt") do (
 		set "line=%%a"
 		set "!line:GLOBAL_=!"
     )
-
+	
 	(set /a lvl-=1)
 	
 	
@@ -102,7 +102,7 @@ if not defined dk_call  goto:init
 %endfunction%
 
 :init
-	echo ^@echo off > GLOBAL.cmd
+	echo. 2>GLOBAL.txt
 	set "dk_call=call dk_call"
 	(set /a lvl=0)
 	call setGlobal "STACK_0" "main"

@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "GLOBAL_%~1=%~2"
 	
 	:: place all vairable with a GLOBAL_ prefix into GLOBAL.txt
-	if defined GLOBAL_ (set GLOBAL_> GLOBAL.txt)
+	if defined GLOBAL_ (set GLOBAL_ > GLOBAL.txt)
 
 	(set %~1=%~2)
 %endfunction%
