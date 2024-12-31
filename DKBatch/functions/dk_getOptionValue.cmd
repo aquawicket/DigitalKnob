@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_getOptionValue(OPTION)
 ::#
 :dk_getOptionValue
-	call dk_debugFunc 0 99
+	%dk_call% dk_debugFunc 0 99
  setlocal
 	
     :getParameter_loop
@@ -34,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
  setlocal
  
 	call :TEST_getOptionValue ARG1 "some data" ARG3 INPUT "input value" some_data "more data"
@@ -42,7 +42,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 :TEST_getOptionValue ARG1 ARG2 ARG3 ARG4
-	call dk_debugFunc 0 99
+	%dk_call% dk_debugFunc 0 99
  setlocal
 	
 	call :dk_getOptionValue INPUT %*

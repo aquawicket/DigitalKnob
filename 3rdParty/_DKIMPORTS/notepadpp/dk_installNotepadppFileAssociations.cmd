@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_installNotepadppFileAssociations()
 ::#
 :dk_installNotepadppFileAssociations
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% %DKIMPORTS_DIR%\notepadpp\dk_install.cmd"
@@ -59,7 +59,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
     %dk_call% dk_installNotepadppFileAssociations
 %endfunction%

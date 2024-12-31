@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    Call a command after timeout
 ::#
 :dk_timeoutCall
-    call dk_debugFunc 2
+    %dk_call% dk_debugFunc 2
  setlocal
 
 	
@@ -40,7 +40,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
     
     %dk_call% dk_timeoutCall "ver" 3

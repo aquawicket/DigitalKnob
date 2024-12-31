@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_install
 ::#
 :dk_install
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 	if defined win_x86_host           set "PYTHON3_DL=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip"
@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_install
 %endfunction%

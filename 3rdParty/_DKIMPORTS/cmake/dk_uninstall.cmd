@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_uninstall()
 ::#
 :dk_uninstall
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate host_triple   "%dk_call% dk_host_triple.cmd"
   ::if defined win_arm32    	 set "CMAKE_DL="
@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_uninstall
 %endfunction%

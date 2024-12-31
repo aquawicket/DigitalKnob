@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_generate
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  ::setlocal
  
     %dk_call% dk_title Generating %target_app% - %target_triple% - %target_type% . . .
@@ -167,7 +167,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_generate

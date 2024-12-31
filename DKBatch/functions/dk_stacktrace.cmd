@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_stacktrace
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     ::echo DKSTACK_length = %DKSTACK_length%
@@ -41,7 +41,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_debug "test putting a function on the stack"
@@ -52,7 +52,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :func1
-    call dk_debugFunc 1
+    %dk_call% dk_debugFunc 1
     echo 0 = %0
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0
@@ -60,7 +60,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :func2 
-    call dk_debugFunc 1
+    %dk_call% dk_debugFunc 1
     echo 0 = %0
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0
@@ -68,7 +68,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :func3
-    call dk_debugFunc 3
+    %dk_call% dk_debugFunc 3
     echo 0 = %0
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0

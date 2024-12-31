@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_installGitContextMenu()
 ::#
 :installContextMenuTest
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	set "TITLE=TEST"
 	set "ICON=cmd.exe"
@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
     call installContextMenuTest
 %endfunction%

@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_escapeSequences
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
 ::  set ASCII_length=0
@@ -132,7 +132,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :ASCII_ADD
-    call dk_debugFunc 7
+    %dk_call% dk_debugFunc 7
  setlocal
  
     if "%~1" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 1 is invalid"
@@ -157,7 +157,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :ASCII_SHOW
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_info "%%ASCII[%~1].DEC%%   %%ASCII[%~1].SYMBOL%%   %%ASCII[%~1].DEC%%  %%ASCII[%~1].OCT%%  %%ASCII[%~1].HEX%%  %%ASCII[%~1].HTML%% %%ASCII[%~1].INFO%%"
@@ -168,7 +168,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_escapeSequences

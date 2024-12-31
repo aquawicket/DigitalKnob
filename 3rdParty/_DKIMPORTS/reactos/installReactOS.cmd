@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_installReactOS()
 ::#
 :dk_installReactOS
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	set "REACTOS_DL=https://sourceforge.net/projects/reactos/files/ReactOS/0.4.14/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"
 	
@@ -56,7 +56,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_installReactOS
 %endfunction%

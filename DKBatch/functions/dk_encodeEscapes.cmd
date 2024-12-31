@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#  https://www.robvanderwoude.com/escapechars.php
 ::#
 :dk_encodeEscapes
-    call dk_debugFunc 1 2
+    %dk_call% dk_debugFunc 1 2
 :: setlocal
    
     set org=%*
@@ -124,7 +124,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :replaceEqualSign variable replaceWith
-    ::call dk_debugFunc 0
+    ::%dk_call% dk_debugFunc 0
  setlocal enableDelayedExpansion
         set "equal=="
         set "with=%~2"
@@ -143,7 +143,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
 
     

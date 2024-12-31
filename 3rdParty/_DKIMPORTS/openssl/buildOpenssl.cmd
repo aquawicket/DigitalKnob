@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# buildOpenSSL()
 ::#
 :buildOpenSSL
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	::set "TARGET_TRIPLE=win_x86_64_clang"
 	set "TARGET_TRIPLE=win_x86_msvc"

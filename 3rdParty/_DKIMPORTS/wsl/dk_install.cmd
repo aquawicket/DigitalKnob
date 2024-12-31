@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    Troubleshooting: https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
 ::#    Custom Distro:   https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro
 :dk_install
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_findProgram WSL_EXE wsl.exe
 	if exist "%WSL_EXE%" %dk_call% dk_info "WSL already installed" && goto:step4
@@ -78,7 +78,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_install
 %endfunction%

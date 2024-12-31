@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_multiSelect(rtn_var)
 ::#
 :dk_multiSelect
-    call dk_debugFunc 0 99
+    %dk_call% dk_debugFunc 0 99
 
 ::######## Pass batch variable into HTA
 set "selections=One;Two;Three"
@@ -34,7 +34,7 @@ echo %rtn_var%
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0 99
+    %dk_call% dk_debugFunc 0 99
  setlocal
  
     %dk_call% dk_multiSelect rtn_var "one, two, three"

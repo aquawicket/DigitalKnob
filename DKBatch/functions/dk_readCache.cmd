@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_readCache
  setlocal enableDelayedExpansion
-    call dk_debugFunc 3
+    %dk_call% dk_debugFunc 3
     
     if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     
@@ -39,7 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
     
     %dk_call% dk_readCache target_app target_triple target_type

@@ -7,7 +7,7 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 ::# dk_assertPath(path)
 ::#
 :dk_assertPath
-    call dk_debugFunc 0 99
+    %dk_call% dk_debugFunc 0 99
  setlocal
 	
 	:: check that ARG1 is valid
@@ -43,7 +43,7 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
 	::# correct path

@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#	  @rtn_var	- The returned string w/padding
 ::#
 :dk_pad
-    call dk_debugFunc 1 99
+    %dk_call% dk_debugFunc 1 99
  setlocal
 	
 	set "str=%~1"
@@ -54,7 +54,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
 	%dk_call% dk_pad "padded string A" " " 3 18 L strA 

@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_callDKCmake
-    call dk_debugFunc 1 4
+    %dk_call% dk_debugFunc 1 4
  setlocal
 
     %dk_call% dk_validate DKIMPORTS_DIR         "%dk_call% dk_DKIMPORTS_DIR"
@@ -44,7 +44,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_callDKCmake dk_test "FROM DKBatch" "dk_callDKCmake.cmd" rtn_var

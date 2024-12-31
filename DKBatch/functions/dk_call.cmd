@@ -112,7 +112,7 @@ exit /b 0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    ::if exist "%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd" call dk_debugFunc 0
+    ::if exist "%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd" %dk_call% dk_debugFunc 0
  setlocal
     %dk_call% dk_color
     call dk_call dk_color

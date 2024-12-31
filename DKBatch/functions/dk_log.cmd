@@ -124,7 +124,7 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
 ::#    @message - The message to print
 ::#
 :dk_log
-    call dk_debugFunc 1 2
+    %dk_call% dk_debugFunc 1 2
     if "%ENABLE_dk_log%" neq "1"  %return%
   setlocal   
     
@@ -146,7 +146,7 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
     
     %dk_call% dk_log "test dk_log message"

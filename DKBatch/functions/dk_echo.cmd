@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#     @msg    - The message to print
 ::#
 :dk_echo
-    call dk_debugFunc 0 1
+    %dk_call% dk_debugFunc 0 1
  setlocal
  
     if "%~1" equ "" (echo: & goto:eof)   
@@ -29,7 +29,7 @@ set "dk_echo=echo"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     echo This is a normal echo commmand

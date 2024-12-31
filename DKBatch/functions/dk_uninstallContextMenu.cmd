@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_uninstallContextMenu(menuTitle, exe, command)
 ::#
 :dk_uninstallContextMenu
-    call dk_debugFunc 1 3
+    %dk_call% dk_debugFunc 1 3
  setlocal
  
     set "_menuTitle_=%~1"
@@ -39,7 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"

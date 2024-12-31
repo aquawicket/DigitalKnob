@@ -7,7 +7,7 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
 ::#
 ::#
 :dk_exit
-    call dk_debugFunc 0 1
+    %dk_call% dk_debugFunc 0 1
  ::setlocal
  
 	if "%~1" gtr "%EXIT_CODE%" %dk_call% dk_set EXIT_CODE %~1
@@ -31,7 +31,7 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     ::%dk_call% dk_exit

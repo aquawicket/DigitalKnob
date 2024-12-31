@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   @executable	- The path to the executable to allow
 ::#
 :dk_firewallAllow
-	call dk_debugFunc 2
+	%dk_call% dk_debugFunc 2
 
 	%dk_call% dk_registryContains "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%~2" && (
 		%dk_call% dk_warning "registry already contains a firewall rule for %~2"
@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_firewallAllow "CMD" "C:\Windows\System32\cmd.exe"
 %endfunction%

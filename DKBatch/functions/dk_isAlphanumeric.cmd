@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#  https://stackoverflow.com/a/17584764
 ::#
 :dk_isAlphanumeric
-    call dk_debugFunc 1 2
+    %dk_call% dk_debugFunc 1 2
  setlocal
  
     ::set "arg1=%~1"
@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_isAlphanumeric 69         && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"

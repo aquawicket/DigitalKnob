@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_importVars
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
 :: setlocal
 	echo IMPORTING VARIABLES ......
 	%dk_call% dk_assertPath DKCACHE_DIR
@@ -27,7 +27,7 @@ endlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
 	%dk_call% dk_importVars

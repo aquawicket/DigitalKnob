@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_install
 ::#
 :dk_install
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 	if defined win_x86_host           set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip"
@@ -37,7 +37,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_install
 %endfunction%

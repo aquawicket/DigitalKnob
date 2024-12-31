@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_move
  setlocal
-    call dk_debugFunc 2 3
+    %dk_call% dk_debugFunc 2 3
     
     %dk_call% dk_replaceAll "%~1" "/" "\" _from_
     %dk_call% dk_replaceAll "%~2" "/" "\" _to_
@@ -48,7 +48,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
     
     %dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"    

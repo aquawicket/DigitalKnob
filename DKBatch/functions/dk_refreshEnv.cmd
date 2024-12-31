@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_refreshEnv
 :: setloal
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	cscript.exe //nologo "%~f0?.wsf"
 	if not exist "%TEMP%\refreshEnv.bat" %dk_call% dk_error "%TEMP%\refreshEnv.bat does not exist"
@@ -28,7 +28,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
     
 	set "MYVAR="

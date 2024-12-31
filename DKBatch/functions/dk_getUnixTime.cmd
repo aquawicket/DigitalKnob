@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
 :dk_getUnixTime
-    call dk_debugFunc 1
+    %dk_call% dk_debugFunc 1
  setlocal
  
     for /f %%x in ('wmic path win32_utctime get /format:list ^| findstr "="') do (set %%x)
@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_getUnixTime unixTime

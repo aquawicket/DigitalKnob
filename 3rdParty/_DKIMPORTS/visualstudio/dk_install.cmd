@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_install
-	call dk_debugFunc 0	
+	%dk_call% dk_debugFunc 0	
 	
 	::### VERSION ###
 	%dk_call% dk_set 	   VISUALSTUDIO_VERSION 17
@@ -134,7 +134,7 @@ if defined android (
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_install
 %endfunction%

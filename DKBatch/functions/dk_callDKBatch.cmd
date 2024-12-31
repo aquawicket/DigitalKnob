@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   Reference: https://stackoverflow.com/questions/34451444/how-to-get-a-returned-value-from-powershell-and-get-it-in-a-batch-file
 ::#
 :dk_callDKBatch
-    call dk_debugFunc 1 99
+    %dk_call% dk_debugFunc 1 99
  setlocal
     
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
@@ -35,7 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
 	%dk_call% dk_callDKBatch dk_test "FROM DKBatch" "dk_callDKBatch.cmd" rtn_var

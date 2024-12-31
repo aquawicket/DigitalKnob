@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\QEMU
 ::#
 :dk_uninstall
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	if defined win_x86_host      set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
 	if defined win_x86_64_host   set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
@@ -32,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_uninstall
 %endfunction%

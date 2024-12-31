@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dkgetGlobal
-    call dk_debugFunc 1
+    %dk_call% dk_debugFunc 1
  setlocal
  
 	::for /F "tokens=1,2* skip=2" %%a in ('%SystemRoot%\System32\reg.exe QUERY HKCU\Environment /v %~1 2^>nul') do if /I "%%a" == "%~1" endlocal & set "%1=%%c"
@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST 
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
 	
 	%dk_call% dk_echo "initial value of myGlobalVar"

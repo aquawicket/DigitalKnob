@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#     https://github.com/microsoft/terminal
 ::# 
 :dk_install
-	call dk_debugFunc 0	
+	%dk_call% dk_debugFunc 0	
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 	if defined win_arm64_host   set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_arm64.zip"
@@ -43,7 +43,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_install
 %endfunction%

@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   reference: https://stackoverflow.com/a/138581
 ::#
 :dk_getFiles
-    call dk_debugFunc 2
+    %dk_call% dk_debugFunc 2
  setlocal
  
     set /a i=0
@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_set myPath "C:\Windows"

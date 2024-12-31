@@ -246,7 +246,7 @@ echo:
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
 
     %DKSCRIPT_NAME%
 %endfunction%

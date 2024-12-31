@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   
 ::#
 :dk_textFormat
-    call dk_debugFunc 4 99
+    %dk_call% dk_debugFunc 4 99
  setlocal
  
     set "spaces=                                        "
@@ -35,7 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_textFormat output "column1[15]" "column2[30]" "column3[20]" "column4[100]"

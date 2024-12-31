@@ -15,7 +15,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 ::#
 ::#
 :dk_install
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
 :: setlocal	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
     if defined win_arm32_host  set "GIT_DL="
@@ -57,7 +57,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_install

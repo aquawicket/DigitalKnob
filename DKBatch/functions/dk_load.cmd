@@ -13,18 +13,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# @funcName OR funcPath  - The name of an existing "functions/funcname.cmd" file, or a full filepath to a .cmd file.
 ::#
 :dk_load
-    ::call dk_debugFunc 0
+    ::%dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_notice "dk_load is temporarily disabled. Use dk_call and dk_source to download, load and run functions."
     goto:eof
-    ::call dk_debugFunc
+    ::%dk_call% dk_debugFunc
     
     call dk_source dk_echo
     call dk_source dk_info
     call dk_source dk_error
     call dk_source dk_debugFunc
-    call dk_debugFunc 1
+    %dk_call% dk_debugFunc 1
     
     if exist "%~1" (
         set "funcPath=%~1"
@@ -94,7 +94,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-    call dk_debugFunc
+    %dk_call% dk_debugFunc
     
     call dk_load dk_printVar
 %endfunction%

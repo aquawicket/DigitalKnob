@@ -6,7 +6,7 @@ if not defined DKINIT if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 ::#
 :dk_printSeconds
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	for /f "tokens=1-3 delims=1234567890 " %%a in ("%time%") do set "delims=%%a%%b%%c" 
 	for /f "tokens=1-4 delims=%delims%" %%A in ("%time%") do (set /a "hour=%%A" & set /a "minute=%%B" & set /a "second=%%C" & set /a "centisecond=%%D")
@@ -33,7 +33,7 @@ if not defined DKINIT if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	call dk_printSeconds
 %endfunction%

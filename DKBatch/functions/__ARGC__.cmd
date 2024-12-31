@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# __ARGC__(frame)
 ::#
 :::__ARGC__
-::	call dk_debugFunc 0 1
+::	%dk_call% dk_debugFunc 0 1
 :: setlocal
 :: 
 ::	if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
  setlocal
  
 	call :DKTEST_func abc 123
@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 :DKTEST_func
-	call dk_debugFunc 2
+	%dk_call% dk_debugFunc 2
  setlocal
  
 	echo __ARGC__ = %__ARGC__%

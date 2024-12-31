@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_isEmptyDirectory
-    call dk_debugFunc 1 2
+    %dk_call% dk_debugFunc 1 2
  setlocal
 	
 	if not exist %~1\* %dk_call% dk_error "%~1 is not a directory" && exit /b 13
@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
     
     ::###### Using if return value

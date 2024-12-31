@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#   Example:  %dk_call% dk_fileSearch "C:\Users\Administrator\digitalknob" "\bin\bash.exe" 7 BASH_EXE
 :dk_fileSearch
-    call dk_debugFunc 4
+    %dk_call% dk_debugFunc 4
  setlocal
  
 	set "base_path=%~1"
@@ -55,7 +55,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"

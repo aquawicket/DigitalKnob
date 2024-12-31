@@ -7,7 +7,7 @@ if not defined DKINIT if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :myFunction
 	if defined myFunction (goto:eof) else (set "myFunction=1")   &::disallow recursion for this function
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	setlocal
 
 		call myFunction
@@ -21,7 +21,7 @@ if not defined DKINIT if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 
 	call myFunction
 %endfunction%

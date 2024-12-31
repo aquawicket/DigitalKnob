@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_includes
-    call dk_debugFunc 2 3
+    %dk_call% dk_debugFunc 2 3
  setlocal enableDelayedExpansion
  
     if "!d!" neq "" %dk_call% dk_error "%__FUNCTION__%: requires delayed expansion"
@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
   setlocal   
     ::###### Using if return value
     %dk_call% dk_echo

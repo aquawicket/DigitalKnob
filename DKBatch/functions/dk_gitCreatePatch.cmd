@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#	  patchFile is the file created, it can be created to anywhere.
 ::#
 :dk_gitCreatePatch
-    call dk_debugFunc 3
+    %dk_call% dk_debugFunc 3
  ::setlocal
  
     echo dk_gitCreatePatch %*
@@ -42,7 +42,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
 	%dk_call% dk_selectFile fileA

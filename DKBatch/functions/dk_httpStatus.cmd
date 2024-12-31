@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_httpStatus
-    call dk_debugFunc 2
+    %dk_call% dk_debugFunc 2
  setlocal
  
 	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
@@ -30,7 +30,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_httpStatus "http://www.google.com" result

@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# 
 ::#
 :dk_haveInternet
-    call dk_debugFunc 0 1
+    %dk_call% dk_debugFunc 0 1
  setlocal
  
     %ComSpec% /c ping -n 1 8.8.8.8 > nul 2> nul"
@@ -29,7 +29,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
     
     %dk_call% dk_haveInternet && %dk_call% dk_echo "Connected" || %dk_call% dk_echo "Dissconected"

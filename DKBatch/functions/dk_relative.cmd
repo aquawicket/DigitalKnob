@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://www.stevebreese.com/Relative-Path-Calculator
 ::#
 :dk_relative
-    call dk_debugFunc 3
+    %dk_call% dk_debugFunc 3
  setlocal
  
 	set src=%~1
@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
 	set "get_path=C:\Users\Administrator\digitalknob\file.txt"

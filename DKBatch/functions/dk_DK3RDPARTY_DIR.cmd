@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_DK3RDPARTY_DIR
-	call dk_debugFunc 0 1
+	%dk_call% dk_debugFunc 0 1
 	
 	if "%~1" neq "" (
 		set "DK3RDPARTY_DIR=%~1"
@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Getting DK3RDPARTY_DIR . . ."

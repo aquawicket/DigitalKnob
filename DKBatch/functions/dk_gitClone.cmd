@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_gitClone
-    call dk_debugFunc 2 3
+    %dk_call% dk_debugFunc 2 3
  setlocal
     
 	::###### error if repository already exists
@@ -38,7 +38,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	echo dk_gitClone :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
 	
     %dk_call% dk_gitClone https://github.com/aquawicket/DigitalKnob.git "D:\digitalknob\Development"

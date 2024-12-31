@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_callDKC
-    call dk_debugFunc 1 99
+    %dk_call% dk_debugFunc 1 99
  setlocal
 
 	::### Get DKC_FUNCTIONS_DIR
@@ -99,7 +99,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
 	::%dk_call% dk_callDKC dk_test "FROM DKC" "dk_callDKC.cmd" rtn_var

@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_inputBox(rtn_var)
 ::#
 :dk_inputBox
-    call dk_debugFunc 0 1
+    %dk_call% dk_debugFunc 0 1
  ::setlocal
     for /f "tokens=* delims=" %%p in ('cmd /c mshta.exe "%~f0"') do (
         set "rtn_var=%%p"
@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
  setlocal
  
     %dk_call% dk_inputBox rtn_var
