@@ -1,22 +1,30 @@
 @echo off
+if "%~1" == ":init" goto:init
 
 :dkcall
 	(set /a lvl+=1)
-	(set comand=%~1)
-	(set args=%*)
-	(set args=!args:%~1=!)
-	(set _1=%~1)
-	(set f1=%~f1)
-	(set n1=%~n1)
-	(set x1=%~x1)
-	(set np=%~p1)
+	(set FILE=%~dpnx1)
+	(set FUNC=%~n1)
+	(set ARGV=%*)
+	(call set ARGV=%%ARGV:%~1=!%%)
+	set ARGC=0
+	for %%a in (%ARGV%) do (set /a ARGC+=1)
+	(set /a clvl=lvl-1)
+	(set CALLER=!STACK_%clvl%!)
+	
 	(set mark=-----)
 	(set indent=)
 	for /l %%x in (1, 1, %lvl%) do set "indent=!indent!%mark%"
-	call setGlobal "STACK_%lvl%" "%comand% %args%"
+	call setGlobal "STACK_%lvl%" "%FUNC%"
 	
 	echo:
-	echo %indent%^> %comand%(!args!)
+	echo %indent%^> %FUNC%(%ARGV%)
+	if defined LVL (echo LVL: %LVL%) 
+	if defined FILE (echo FILE: %FILE%)
+	if defined FUNC (echo FUNC: %FUNC%)
+	if defined ARGV (echo ARGV: %ARGV%)
+	if defined ARGC (echo ARGC: %ARGC%)
+	if defined CALLER (echo CALLER: %CALLER%)
 	if defined STACK_0 (echo 0: !STACK%_0!)
 	if defined STACK_1 (echo 1: !STACK%_1!)
 	if defined STACK_2 (echo 2: !STACK%_2!)
@@ -24,7 +32,7 @@
 	if defined STACK_4 (echo 4: !STACK%_4!)
 	
 	:::::::::::::::::::::::::::::
-	call %comand% %args%
+	call %FUNC% %ARGV%
 	:::::::::::::::::::::::::::::
 	
 	call setGlobal STACK_%lvl% ""
@@ -32,10 +40,25 @@
 	(set /a lvl-=1)
 	
 	echo:
-	echo ^<%indent% %comand%(%args%)
+	echo %indent%^> %FUNC%(%ARGV%)
+	if defined LVL (echo LVL: %LVL%) 
+	if defined FILE (echo FILE: %FILE%)
+	if defined FUNC (echo FUNC: %FUNC%)
+	if defined ARGV (echo ARGV: %ARGV%)
+	if defined ARGC (echo ARGC: %ARGC%)
+	if defined CALLER (echo CALLER: %CALLER%)
 	if defined STACK_0 (echo 0: !STACK%_0!)
 	if defined STACK_1 (echo 1: !STACK%_1!)
 	if defined STACK_2 (echo 2: !STACK%_2!)
 	if defined STACK_3 (echo 3: !STACK%_3!)
 	if defined STACK_4 (echo 4: !STACK%_4!)
+exit /b 0
+
+
+
+:init
+	echo ^@echo off > GLOBAL.cmd
+	if not defined dkcall  set "dkcall=call dkcall"
+	(set /a lvl=0)
+	call setGlobal "STACK_0" "main"
 exit /b 0

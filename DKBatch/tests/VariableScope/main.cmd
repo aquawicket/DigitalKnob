@@ -1,7 +1,7 @@
 @echo off
-echo ^@echo off > GLOBAL.cmd
-if not defined dkcall  set "dkcall=call dkcall"
-if not defined lvl (set /a lvl=0)
+
+
+call dkcall :init
 
 :main
 setlocal enableDelayedExpansion
