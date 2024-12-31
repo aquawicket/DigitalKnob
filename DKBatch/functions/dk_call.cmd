@@ -29,9 +29,7 @@ if not defined dk_call  goto:init
 	if "%FUNC%"=="dk_debugFunc" echo [31m ERROR: dk_call cannot be used with dk_debugFunc [0m & %return%
 	::if "%FUNC:dk_=%"=="%FUNC%"  echo [31m ERROR: dk_call[%FUNC%]: dk_call can only be used with dk_ FUNCtions [0m & %return%
 	
-	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (
-		set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd"
-	)
+	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd")
 	
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (
 	if not exist "%comand%" (
@@ -100,7 +98,7 @@ if not defined dk_call  goto:init
 	
 	
 	::FIXME: I think %endfunction% covers this
-    exit /b %errorlevel%
+    ::exit /b %errorlevel%
 %endfunction%
 
 :init
