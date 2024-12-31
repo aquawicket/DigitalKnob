@@ -1,4 +1,3 @@
-exit /b 0
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
@@ -10,12 +9,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 ::set "ENABLE_dk_debugFunc=1"
-if not defined MAX_STACK_LINES         set "MAX_STACK_LINES=200"
-if not defined DKSTACK[0].__FILE__     set "DKSTACK[0].__FILE__=DK.cmd"
-if not defined DKSTACK[0].__FUNCTION__ set "DKSTACK[0].__FUNCTION__=DK"
-if not defined DKSTACK[0].__ARGS__     set "DKSTACK[0].__ARGS__= "
-if not defined DKSTACK_length          set /a "DKSTACK_length=1"
-if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
+::if not defined MAX_STACK_LINES         set "MAX_STACK_LINES=200"
+::if not defined DKSTACK[0].__FILE__     set "DKSTACK[0].__FILE__=DK.cmd"
+::if not defined DKSTACK[0].FUNC set "DKSTACK[0].FUNC=DK"
+::if not defined DKSTACK[0].ARGV     set "DKSTACK[0].ARGV= "
+::if not defined DKSTACK_length          set /a "DKSTACK_length=1"
+::if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::################################################################################
 ::# dk_debugFunc()
 ::#
@@ -49,6 +48,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::#   <TIMESTAMP>
 ::#   
 :dk_debugFunc
+	
     ::if "%~3" neq "" call dk_error "dk_debugFunc: too many arguments (%*)"
  ::setlocal
 
@@ -60,26 +60,28 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
     ::     TODO
 
     ::2: ###### CREATE CALLSTACK ENTRY ######
-    call dk_callStack
-    :dk_callStackReturn
+::    call dk_callStack
+::    :dk_callStackReturn
     
-    set "DKSTACK[%DKSTACK_marker%].__TIME__=%__TIME__%"
-    set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
-    ::set "DKSTACK[%DKSTACK_marker%].__LINE__=%__LINE__%"
-    set "DKSTACK[%DKSTACK_marker%].__FUNCTION__=%__FUNCTION__%"
-    set "DKSTACK[%DKSTACK_marker%].__ARGC__=%__ARGC__%"
-	set "DKSTACK[%DKSTACK_marker%].__ARGS__=%__ARGS__%"
-	set "DKSTACK[%DKSTACK_marker%].__ARGV__=%__ARGV__%"
-    set /a DKSTACK_length+=1
-    set /a DKSTACK_marker=%DKSTACK_length%  
-    ::echo %__TIME__%:%__FILE__%: %__FUNCTION__%:%__ARGC__%(%__ARGS__%)
-
-
+::    set "DKSTACK[%DKSTACK_marker%].__TIME__=%__TIME__%"
+::    set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
+::    ::set "DKSTACK[%DKSTACK_marker%].__LINE__=%__LINE__%"
+::    set "DKSTACK[%DKSTACK_marker%].FUNC=%FUNC%"
+::    set "DKSTACK[%DKSTACK_marker%].ARGC=%ARGC%"
+::	set "DKSTACK[%DKSTACK_marker%].ARGV=%ARGV%"
+::	set "DKSTACK[%DKSTACK_marker%].__ARGV__=%__ARGV__%"
+::   set /a DKSTACK_length+=1
+::    set /a DKSTACK_marker=%DKSTACK_length%  
+::    ::echo %__TIME__%:%__FILE__%: %FUNC%:%ARGC%(%ARGV%)
+	
+	if "%FUNC%"=="dk_debugFunc" goto:eof
+	if not defined FUNC goto:eof
+	
     ::3: ###### VALIDATE ARGUMENTS ######
-    if "%~1" == ""                                                echo %red%"ERROR: %__FUNCTION__%(%__ARGS__%): dk_debugFunc ArgsMin ArgsMax is not set."%clr%               && %dk_call% dk_exit 13
-    if not "%~1" == "" if defined __ARGC__ if %__ARGC__% lss %~1  echo %red%"ERROR: %__FUNCTION__%(%__ARGS__%): not enough arguments. Minimum is %~1, got %__ARGC__%"%clr%   && %dk_call% dk_exit 13
-    if "%~2" == "" if %__ARGC__% gtr %~1                          echo %red%"ERROR: %__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~1, got %__ARGC__%"%clr%     && %dk_call% dk_exit 13
-    if not "%~2" == "" if %__ARGC__% gtr %~2                      echo %red%"ERROR: %__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~2, got %__ARGC__%"%clr%     && %dk_call% dk_exit 13
+    if "%~1" == ""                                            %dk_call% dk_fatal "%FUNC%(%ARGV%): dk_debugFunc ArgsMin ArgsMax is not set."
+    if not "%~1" == "" if defined ARGC if %ARGC% lss %~1      %dk_call% dk_fatal "%FUNC%(%ARGV%): not enough arguments. Minimum is %~1, got %ARGC%"
+    if "%~2" == "" if %ARGC% gtr %~1                          %dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~1, got %ARGC%"
+    if not "%~2" == "" if %ARGC% gtr %~2                      %dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~2, got %ARGC%"
 
     ::NOTE: determin when we need to remove the topmost DKStack_marker 
     ::Example
@@ -130,8 +132,8 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 
     set "__LINE__=0"
     for %%Z in ("%__FILE__%") do set "basename=%%~nxZ"
-    echo %indent%%cyan%%basename%:%__LINE__%    %blue%%__FUNCTION__%:%__ARGS__%%clr%
-    ::echo %indent%%blue%%__FUNCTION__%%clr%
+    echo %indent%%cyan%%basename%:%__LINE__%    %blue%%FUNC%:%ARGV%%clr%
+    ::echo %indent%%blue%%FUNC%%clr%
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  
 %endfunction%
 

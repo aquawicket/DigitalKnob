@@ -66,9 +66,9 @@ echo:
     call :dk_initFiles
 
     ::############ Setup dk_callStack ############
-    call dk_source dk_callStack
-    call dk_callStack
-    :dk_callStackReturn
+::    call dk_source dk_callStack
+::    call dk_callStack
+::    :dk_callStackReturn
 
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS

@@ -14,8 +14,8 @@ if not defined dk_call  goto:init
 	(set FUNC=%~n1)
 	(set ARGV=%*)
 	(set ARGV=!ARGV:%~1=!)
-	(set ARGC=0)
-	for %%a in (%ARGV%) do (set /a ARGC+=1)
+	(set /a ARGC=0)
+	for %%a in (!ARGV!) do (set /a ARGC+=1)
 	(set /a clvl=lvl-1)
 	(set CALLER=!STACK_%clvl%!)
 	
@@ -26,7 +26,7 @@ if not defined dk_call  goto:init
 	
 
 	
-	if "%FUNC%"=="dk_debugFunc" echo [31m ERROR: dk_call cannot be used with dk_debugFunc [0m & %return%
+	::if "%FUNC%"=="dk_debugFunc" echo [31m ERROR: dk_call cannot be used with dk_debugFunc [0m & %return%
 	::if "%FUNC:dk_=%"=="%FUNC%"  echo [31m ERROR: dk_call[%FUNC%]: dk_call can only be used with dk_ FUNCtions [0m & %return%
 	
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" (set "comand=%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd")
