@@ -32,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
     %dk_call% dk_keyboardInput choice
     ::%dk_call% dk_keyboardInputTimeout choice 13 60
-    
+	
     if "%choice%"=="0"  %dk_call% dk_set target_app %_target_app_% & %dk_call% dk_set target_triple %_target_triple_% & %dk_call% dk_set target_type %_target_type_%
     if "%choice%"=="1"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
     if "%choice%"=="2"  %dk_call% dk_gitCommit

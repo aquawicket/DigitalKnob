@@ -9,8 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
     call dk_debugFunc 1
     
-    %dk_call% dk_unset %~1
-    set /p "%~1=" 
+    endlocal & set /p "%~1="
 %endfunction%
 
 

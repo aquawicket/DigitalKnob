@@ -1,13 +1,15 @@
 @echo off
-if "%~1" == ":init" goto:init
+if not defined dkcall  goto:init
 
 :dkcall
 	(set /a lvl+=1)
+	(set comand=%~1)
+	(set comand=%comand:::=\%)
 	(set FILE=%~dpnx1)
 	(set FUNC=%~n1)
 	(set ARGV=%*)
-	(call set ARGV=%%ARGV:%~1=!%%)
-	set ARGC=0
+	(set ARGV=!ARGV:%~1=!)
+	(set ARGC=0)
 	for %%a in (%ARGV%) do (set /a ARGC+=1)
 	(set /a clvl=lvl-1)
 	(set CALLER=!STACK_%clvl%!)
@@ -28,12 +30,19 @@ if "%~1" == ":init" goto:init
 
 	call PrintCallStack
 	
-	:::::::::::::::::::::::::::::
-	call %FUNC% %ARGV%
-	:::::::::::::::::::::::::::::
+::###### Entry ############################################################################################
+	call %comand% %ARGV%
+::###### Exit #############################################################################################
 	
 	call setGlobal STACK_%lvl% ""
-	call GLOBAL.cmd
+	
+	:: get all variables from GLOBAL.txt and apply them with GLOBAL_ prefixes removed
+	for /F "usebackq delims=" %%a in ("GLOBAL.txt") do (
+		echo line = %%a
+		set "line=%%a"
+		set "!line:GLOBAL_=!"
+    )
+
 	(set /a lvl-=1)
 	
 	echo:
@@ -46,12 +55,11 @@ if "%~1" == ":init" goto:init
 	if defined CALLER (echo CALLER: %CALLER%)
 
 	call PrintCallStack
-exit /b 0
+exit /b %errorlevel%
 
 
 
 :init
-	echo ^@echo off > GLOBAL.cmd
 	if not defined dkcall  set "dkcall=call dkcall"
 	(set /a lvl=0)
 	call setGlobal "STACK_0" "main"

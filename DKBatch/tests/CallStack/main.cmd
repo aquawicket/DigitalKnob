@@ -1,11 +1,9 @@
 @echo off
-call dkcall :init
+call dkcall
 
 :main
 setlocal enableDelayedExpansion
 
-	
-	
 	call setGlobal globalVarA GLOBALA
 	call setGlobal globalVarB GLOBALB
 	%dkcall% funcA A

@@ -6,23 +6,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_setGlobal
-    call dk_debugFunc 1 2
- setlocal enableDelayedExpansion
- 
-    ::%SystemRoot%\System32\reg.exe ADD HKCU\Environment /f /v %~1 /d "%~2" >nul
-	::setx %~1 "%~2" >nul
-	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-	echo %~2 > %DKCACHE_DIR%\%~1.var
-	endlocal & set "%~1=%~2"
+::    call dk_debugFunc 1 2
+
+	:: prefix the variable name with GLOBAL_ and assign a value
+	set "GLOBAL_%~1=%~2"
 	
-::debug
-::    %dk_call% dk_printVar %1
+	:: place all vairable with a GLOBAL_ prefix into GLOBAL.txt
+	if defined GLOBAL_ (set GLOBAL_> GLOBAL.txt)
+
+	(set %~1=%~2)
 %endfunction%
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST 
-    call dk_debugFunc 0
+:DKTEST
+::    call dk_debugFunc 0
  setlocal enableDelayedExpansion
 	
     %dk_call% dk_echo "initial value of myGlobalVar"
