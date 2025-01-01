@@ -28,6 +28,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     echo  8) Clear Screen
     echo  9) Reload
     echo 10) Exit
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if exist "%DKBRANCH_DIR%\build_list.txt"  echo 11) Run 'build_list.txt'
     
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
@@ -45,7 +46,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="8"  %dk_call% dk_clearScreen
     if "%choice%"=="9"  %dk_call% dk_reload
     if "%choice%"=="10" %dk_call% dk_exit 0
-	if "%choice%"=="11" (set "BUILD_LIST_FILE=%DKCACHE_DIR%\build_list.txt" && %return%)
+	if "%choice%"=="11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%\build_list.txt" && %return%)
        
     endlocal & set "UPDATE=1"
 %endfunction%

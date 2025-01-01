@@ -30,8 +30,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not exist "%comand%" (
 		call dk_source "%comand%"
 		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%%FUNC%.cmd" echo [31m ERROR: failed to download %comand%.cmd [0m & %return%
-		if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_source dk_isCRLF
-		if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
+		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_source dk_isCRLF
+		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
 		rem if exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR_%%comand%.cmd"
     )
 	:dk_exists
@@ -93,16 +93,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	
 	::FIXME: I think %endfunction% covers this
-    exit /b %errorlevel%
+    ::exit /b %errorlevel%
 %endfunction%
 
-:init
-	set "GLOBAL_FILE=C:\GLOBAL.txt"
-	echo. 2>"%GLOBAL_FILE%"
-	set "dk_call=call dk_call"
-	(set /a lvl=0)
+::init
+::	set "GLOBAL_FILE=C:\GLOBAL.txt"
+::	echo. 2>"%GLOBAL_FILE%"
+::	set "dk_call=call dk_call"
+::	(set /a lvl=0)
 ::	call setGlobal "STACK_0" "main"
-exit /b 0
+::exit /b 0
 
 
 
@@ -114,7 +114,7 @@ exit /b 0
 	if defined GLOBAL_FILE (echo %padB% GLOBAL_FILE = %GLOBAL_FILE%)
 	if defined indent        (echo %padB% indent        = %indent%)
 	if defined pad      (echo %padB% pad      = %pad%)
-exit /b %errorlevel%
+%endfunction%
 
 :printStackVariables
 	                    ::  (echo:)
@@ -125,7 +125,7 @@ exit /b %errorlevel%
 	if defined FUNC_%LVL% (echo %padB% FUNC_%LVL% = !FUNC_%LVL%!)
 	if defined ARGV_%LVL% (echo %padB% ARGV_%LVL% = !ARGV_%LVL%!)
 	if defined ARGC_%LVL% (echo %padB% ARGC_%LVL% = !ARGC_%LVL%!)
-exit /b %errorlevel%
+%endfunction%
 
 :printDirectVariables
 	               :: (echo:)
@@ -136,7 +136,7 @@ exit /b %errorlevel%
 	if defined FUNC (echo %padB% FUNC  = %FUNC%)
 	if defined ARGV (echo %padB% ARGV  = %ARGV%)
 	if defined ARGC (echo %padB% ARGC  = %ARGC%)
-exit /b %errorlevel%
+%endfunction%
 
 :printParentStackVariables
 	                      :: (echo:)
@@ -147,7 +147,7 @@ exit /b %errorlevel%
 	if defined FUNC_%PLVL% (echo %padB% FUNC_%PLVL% = !FUNC_%PLVL%!)
 	if defined ARGV_%PLVL% (echo %padB% ARGV_%PLVL% = !ARGV_%PLVL%!)
 	if defined ARGC_%PLVL% (echo %padB% ARGC_%PLVL% = !ARGC_%PLVL%!)
-exit /b %errorlevel%
+%endfunction%
 
 :printParentDirectVariables
 	                :: (echo:)
@@ -157,10 +157,9 @@ exit /b %errorlevel%
 	if defined PFUNC (echo %padB% PFUNC = %PFUNC%)
 	if defined PARGV (echo %padB% PARGV = %PARGV%)
 	if defined PARGC (echo %padB% PARGC = %PARGC%)
-exit /b %errorlevel%
+%endfunction%
 
 :setGlobal name value
-
 	::echo set "%~1=%~2" >> GLOBAL.cmd
 	::echo %~1 >> GLOBAL.cmd
 	set "%~1=%~2"
@@ -172,7 +171,7 @@ exit /b %errorlevel%
 	set GLOBAL_ > "%GLOBAL_FILE%"
 
 	::endlocal & set "%~1=%~2"
-exit /b 0
+%endfunction%
 
 :dk_printCallStack
 	echo:
@@ -184,7 +183,7 @@ exit /b 0
 		)
 	)
 	echo:
-exit /b 0
+%endfunction%
 
 
 

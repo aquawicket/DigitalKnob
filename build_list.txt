@@ -1,14 +1,98 @@
-HelloWorld ANDROID_ARM32_CLANG Debug
-HelloWorld ANDROID_ARM64_CLANG Debug
-HelloWorld COSMOPOLITAN Debug
-HelloWorld EMSCRIPTEN Debug
-HelloWorld WIN_X86_MINGW Debug
-HelloWorld WIN_X86_MSVC Debug
-HelloWorld WIN_X86_64_CLANG Debug
-HelloWorld WIN_X86_64_MINGW Debug
-HelloWorld WIN_X86_64_MSVC Debug
-HelloWorld WIN_X86_64_UCRT Debug
+HelloWorld 			ANDROID_ARM32_CLANG			Debug
+HelloWorld 			ANDROID_ARM64_CLANG 		Debug
+# HelloWorld 		ANDROID_X86_CLANG			Debug
+# HelloWorld 		ANDROID_X86_64_CLANG 		Debug
+HelloWorld 			COSMOPOLITAN 				Debug
+# HelloWorld 		EMSCRIPTEN_ARM32_CLANG		Debug
+# HelloWorld 		EMSCRIPTEN_ARM64_64_CLANG	Debug
+HelloWorld 			EMSCRIPTEN_X86_CLANG		Debug
+# HelloWorld 		EMSCRIPTEN_X86_64_CLANG		Debug
+# HelloWorld		IOS_ARM32_CLANG				Debug
+# HelloWorld		IOS_ARM64_CLANG				Debug
+# HelloWorld		IOS_X86_CLANG				Debug
+# HelloWorld		IOS_X86_64_CLANG			Debug
+# HelloWorld		IOSSIM_ARM32_CLANG			Debug
+# HelloWorld		IOSSIM_ARM64_CLANG			Debug
+# HelloWorld		IOSSIM_X86_CLANG			Debug
+# HelloWorld		IOSSIM_X86_64_CLANG			Debug
+# HelloWorld		LINUX_ARM32_CLANG			Debug
+# HelloWorld		LINUX_ARM64_CLANG			Debug
+# HelloWorld		LINUX_X86_CLANG				Debug
+# HelloWorld		LINUX_X86_64_CLANG			Debug
+# HelloWorld		MAC_ARM32_CLANG				Debug
+# HelloWorld		MAC_ARM64_CLANG				Debug
+# HelloWorld		MAC_X86_CLANG				Debug
+# HelloWorld		MAC_X86_64_CLANG			Debug
+# HelloWorld		RASPBERRY_ARM32_CLANG		Debug
+# HelloWorld		RASPBERRY_ARM64_CLANG		Debug
+# HelloWorld		RASPBERRY_X86_CLANG			Debug
+# HelloWorld		RASPBERRY_X86_64_CLANG		Debug
+# HelloWorld 		WIN_ARM32_CLANG				Debug
+# HelloWorld 		WIN_ARM64_CLANG				Debug
+# HelloWorld 		WIN_X86_CLANG				Debug
+HelloWorld 			WIN_X86_64_CLANG			Debug
+HelloWorld 			WIN_X86_MINGW 				Debug
+HelloWorld 			WIN_X86_64_MINGW 			Debug
+HelloWorld 			WIN_X86_64_UCRT 			Debug
+# HelloWorld 		WIN_ARM32_GCC				Debug
+# HelloWorld 		WIN_ARM64_GCC				Debug
+# HelloWorld 		WIN_X86_GCC					Debug
+# HelloWorld 		WIN_X86_64_GCC				Debug
+# HelloWorld 		WIN_ARM32_MSVC				Debug
+# HelloWorld 		WIN_ARM64_MSVC				Debug
+HelloWorld 			WIN_X86_MSVC					Debug
+HelloWorld 			WIN_X86_64_MSVC					Debug
 
 
-## FIXME ##
-HelloWorld WIN_X86_CLANG Debug
+
+
+DKCore 			ANDROID_ARM32_CLANG 		Debug
+DKCore 			ANDROID_ARM64_CLANG 		Debug
+DKCore 			COSMOPOLITAN 				Debug
+DKCore 			EMSCRIPTEN 					Debug
+DKCore 			WIN_X86_MINGW 				Debug
+DKCore 			WIN_X86_MSVC 				Debug
+DKCore 			WIN_X86_64_CLANG 			Debug
+DKCore 			WIN_X86_64_MINGW 			Debug
+DKCore 			WIN_X86_64_MSVC 			Debug
+DKCore 			WIN_X86_64_UCRT 			Debug
+DKJavascript 	ANDROID_ARM32_CLANG 		Debug
+DKJavascript 	ANDROID_ARM64_CLANG 		Debug
+DKJavascript 	COSMOPOLITAN 				Debug
+DKJavascript 	EMSCRIPTEN 					Debug
+DKJavascript 	WIN_X86_MINGW 				Debug
+DKJavascript 	WIN_X86_MSVC 				Debug
+DKJavascript 	WIN_X86_64_CLANG 			Debug
+DKJavascript 	WIN_X86_64_MINGW 			Debug
+DKJavascript 	WIN_X86_64_MSVC 			Debug
+DKJavascript 	WIN_X86_64_UCRT 			Debug
+DKSDL 			ANDROID_ARM32_CLANG 		Debug
+DKSDL 			ANDROID_ARM64_CLANG 		Debug
+DKSDL 			COSMOPOLITAN 				Debug
+DKSDL 			EMSCRIPTEN 					Debug
+DKSDL 			WIN_X86_MINGW 				Debug
+DKSDL 			WIN_X86_MSVC 				Debug
+DKSDL 			WIN_X86_64_CLANG 			Debug
+DKSDL 			WIN_X86_64_MINGW 			Debug
+DKSDL 			WIN_X86_64_MSVC 			Debug
+DKSDL 			WIN_X86_64_UCRT 			Debug
+DKSDLRml	 	ANDROID_ARM32_CLANG 		Debug
+DKSDLRml 		ANDROID_ARM64_CLANG 		Debug
+DKSDLRml 		COSMOPOLITAN 				Debug
+DKSDLRml 		EMSCRIPTEN 					Debug
+DKSDLRml 		WIN_X86_MINGW 				Debug
+DKSDLRml 		WIN_X86_MSVC 				Debug
+DKSDLRml 		WIN_X86_64_CLANG 			Debug
+DKSDLRml 		WIN_X86_64_MINGW 			Debug
+DKSDLRml 		WIN_X86_64_MSVC 			Debug
+DKSDLRml 		WIN_X86_64_UCRT 			Debug
+
+
+################### FIXME ###################
+HelloWorld 		WIN_X86_CLANG 			Debug
+DKCore		 	WIN_X86_CLANG 			Debug
+DKJavascript 	WIN_X86_CLANG 			Debug
+DKSDL		 	WIN_X86_CLANG 			Debug
+DKSDLRML	 	WIN_X86_CLANG 			Debug
+
+

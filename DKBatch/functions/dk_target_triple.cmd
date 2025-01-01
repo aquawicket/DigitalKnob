@@ -90,14 +90,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	::### Set os / OS / <os>_target / <OS>_TARGET
 	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "android" 		&& !dk_call! dk_set os android
-	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "emscripten" 	&& !dk_call! dk_set os emscripten
-	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "iossim" 		&& !dk_call! dk_set os iossim 
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "emscripten" 		&& !dk_call! dk_set os emscripten
 	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "ios" 			&& !dk_call! dk_set os ios
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "iossim" 			&& !dk_call! dk_set os iossim 
 	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "linux" 			&& !dk_call! dk_set os linux
 	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "mac" 			&& !dk_call! dk_set os mac
 	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "raspberry" 		&& !dk_call! dk_set os raspberry
 	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "windows" 		&& !dk_call! dk_set os windows
-	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "win"			&& !dk_call! dk_set os win
+	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "win"				&& !dk_call! dk_set os win
 	%dk_call% dk_stringContains "!TARGET_TRIPLE!" "cosmopolitan"	&& !dk_call! dk_set os cosmopolitan
 	if not defined os (
 		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid os"
