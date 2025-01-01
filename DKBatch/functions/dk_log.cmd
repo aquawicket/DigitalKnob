@@ -111,6 +111,7 @@ if not defined FATAL_TAG       set "FATAL_TAG=FATAL: "
 ::if not defined FATAL_PAUSE     set "FATAL_PAUSE=1"
 if not defined FATAL_TRACE     set "FATAL_TRACE=1"
 ::if not defined FATAL_LINE    set "FATAL_LINE=1"
+if not defined FATAL_SOUND     set "FATAL_SOUND=1"
 if not defined FATAL_HALT      set "FATAL_HALT=1"
 
 
@@ -136,6 +137,27 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
 
         %dk_call% dk_echo "!%_level_%_COLOR!!%_level_%_TAG!%_message_%%clr%"
         if "!%_level_%_TRACE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  && %dk_call% dk_printCallStack
+		if "!%_level_%_SOUND!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** SOUND_ON_%_level_% ***%clr%"  && (
+			%dk_call% Array::dk_push errorBeeps "440,500"
+			%dk_call% Array::dk_push errorBeeps "440,500"
+			%dk_call% Array::dk_push errorBeeps "440,500" 
+			%dk_call% Array::dk_push errorBeeps "349,350" 
+			%dk_call% Array::dk_push errorBeeps "523,150" 
+			%dk_call% Array::dk_push errorBeeps "440,500" 
+			%dk_call% Array::dk_push errorBeeps "349,350" 
+			%dk_call% Array::dk_push errorBeeps "523,150" 
+			%dk_call% Array::dk_push errorBeeps "440,1000"
+			%dk_call% Array::dk_push errorBeeps "659,500" 
+			%dk_call% Array::dk_push errorBeeps "659,500" 
+			%dk_call% Array::dk_push errorBeeps "659,500" 
+			%dk_call% Array::dk_push errorBeeps "698,350" 
+			%dk_call% Array::dk_push errorBeeps "523,150" 
+			%dk_call% Array::dk_push errorBeeps "415,500" 
+			%dk_call% Array::dk_push errorBeeps "349,350" 
+			%dk_call% Array::dk_push errorBeeps "523,150" 
+			%dk_call% Array::dk_push errorBeeps "440,1000"
+			%dk_call% dk_beeps errorBeeps
+		)
         if "!%_level_%_LINE!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** LINE_ON_%_level_% ***%crl%"   && %dk_call% dk_showFileLine "%_callerpath%" "%_message_%"
 		if "!%_level_%_PAUSE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"  && %dk_call% dk_pause
         if "!%_level_%_HALT!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"   && %dk_call% dk_exit 13

@@ -11,8 +11,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_beeps
     ::%dk_call% dk_debugFunc 0 2
  ::setlocal
-	(set array=%~1)
-	::%dk_call% dk_printVar %array%
 	
 	set n=0
     :loop
@@ -21,7 +19,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         set /a n+=1
         goto loop 
     )
-	echo song = %song%
 	
 	::### Method 1 - powershell beep ###
 	if not defined POWERSHELL_EXE (%dk_call% dk_POWERSHELL_EXE)
@@ -63,22 +60,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	if not defined POWERSHELL_EXE (%dk_call% dk_POWERSHELL_EXE)
 	
-	set "myBeeps[0]=%G#1%, 500"
-	set "myBeeps[1]=%A2%, 500"
-	set "myBeeps[2]=%A#2%, 500"
-	set "myBeeps[3]=%B2%, 500"
-	set "myBeeps[4]=%C2%, 500"
-	set "myBeeps[5]=%C#2%, 500"
-	set "myBeeps[6]=%D2%, 500"
-	set "myBeeps[7]=%D#2%, 500"
-	set "myBeeps[8]=%E2%, 500"
-	set "myBeeps[9]=%F2%, 500"
-	set "myBeeps[10]=%F#2%, 500"
-	set "myBeeps[11]=%G2%, 500"
-	set "myBeeps[12]=%G#2%, 500"
-	set "myBeeps[13]=%A3%, 500"
+	%dk_call% Array::dk_push errorBeeps "200, 1400"
+	%dk_call% Array::dk_push errorBeeps "200, 1400"
+	%dk_call% Array::dk_push errorBeeps "200, 1400"
+	%dk_call% Array::dk_push errorBeeps "200, 1400"
+	%dk_call% Array::dk_push errorBeeps "200, 1400"
 	
 	::%dk_call% dk_printVar myBeeps
-	%dk_call% dk_beeps myBeeps
+	%dk_call% dk_beeps errorBeeps
 
 %endfunction%

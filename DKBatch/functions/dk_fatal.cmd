@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
 	%dk_call% dk_echo "test dk_echo message"
-	%dk_call% dk_sleep 1000
+	%dk_call% dk_sleep 1
 	%dk_call% dk_echo "test dk_echo message"
     %dk_call% dk_fatal "test dk_fatal message"
 	%dk_call% dk_echo "test dk_echo message"
