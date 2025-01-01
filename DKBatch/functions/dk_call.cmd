@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(set /a ARGC=0)
 	for %%a in (!ARGV!) do (set /a ARGC+=1)
 
-::	call dk_setGlobal "STACK_%lvl%" "%FUNC%"
+::	call :setGlobal "STACK_%lvl%" "%FUNC%"
 	
 
 	
@@ -80,7 +80,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call %comand% %ARGV%
 ::###### Exit #############################################################################################
 
-::	call dk_setGlobal STACK_%lvl% ""
+::	call :setGlobal STACK_%lvl% ""
 	
 	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
 ::	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
@@ -103,6 +103,92 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(set /a lvl=0)
 ::	call setGlobal "STACK_0" "main"
 exit /b 0
+
+
+
+
+:printConstantVariables
+	                      :: (echo:)
+                          :: (echo %padB% ###### Constant Variables ######)
+	if defined dk_call      (echo %padB% dk_call      = %dk_call%)
+	if defined GLOBAL_FILE (echo %padB% GLOBAL_FILE = %GLOBAL_FILE%)
+	if defined indent        (echo %padB% indent        = %indent%)
+	if defined pad      (echo %padB% pad      = %pad%)
+exit /b %errorlevel%
+
+:printStackVariables
+	                    ::  (echo:)
+	                    ::  (echo %padB% ###### Stack Variables ######)
+						  (echo %padB% LVL  = %LVL%)
+	if defined CMND_%LVL% (echo %padB% CMND_%LVL% = !CMND_%LVL%!)
+	if defined FILE_%LVL% (echo %padB% FILE_%LVL% = !FILE_%LVL%!)
+	if defined FUNC_%LVL% (echo %padB% FUNC_%LVL% = !FUNC_%LVL%!)
+	if defined ARGV_%LVL% (echo %padB% ARGV_%LVL% = !ARGV_%LVL%!)
+	if defined ARGC_%LVL% (echo %padB% ARGC_%LVL% = !ARGC_%LVL%!)
+exit /b %errorlevel%
+
+:printDirectVariables
+	               :: (echo:)
+	               :: (echo %padB% ###### Direct Variables ######)
+	if defined LVL  (echo %padB% LVL   = %LVL%)
+	if defined CMND (echo %padB% CMND  = %CMND%)
+	if defined FILE (echo %padB% FILE  = %FILE%)
+	if defined FUNC (echo %padB% FUNC  = %FUNC%)
+	if defined ARGV (echo %padB% ARGV  = %ARGV%)
+	if defined ARGC (echo %padB% ARGC  = %ARGC%)
+exit /b %errorlevel%
+
+:printParentStackVariables
+	                      :: (echo:)
+	                      :: (echo %padB% ###### Parent Stack Variables ######)							
+	if defined PLVL        (echo %padB% PLVL  = %PLVL%)
+	if defined CMND_%PLVL% (echo %padB% CMND_%PLVL% = !CMND_%PLVL%!)
+	if defined FILE_%PLVL% (echo %padB% FILE_%PLVL% = !FILE_%PLVL%!)
+	if defined FUNC_%PLVL% (echo %padB% FUNC_%PLVL% = !FUNC_%PLVL%!)
+	if defined ARGV_%PLVL% (echo %padB% ARGV_%PLVL% = !ARGV_%PLVL%!)
+	if defined ARGC_%PLVL% (echo %padB% ARGC_%PLVL% = !ARGC_%PLVL%!)
+exit /b %errorlevel%
+
+:printParentDirectVariables
+	                :: (echo:)
+	                :: (echo %padB% ###### Parent Direct Variables ######)							
+	if defined PCMND (echo %padB% PCMND = %PCMND%)
+	if defined PFILE (echo %padB% PFILE = %PFILE%)
+	if defined PFUNC (echo %padB% PFUNC = %PFUNC%)
+	if defined PARGV (echo %padB% PARGV = %PARGV%)
+	if defined PARGC (echo %padB% PARGC = %PARGC%)
+exit /b %errorlevel%
+
+:setGlobal name value
+
+	::echo set "%~1=%~2" >> GLOBAL.cmd
+	::echo %~1 >> GLOBAL.cmd
+	set "%~1=%~2"
+	
+	:: prefix the variable name with GLOBAL_ and assign a value
+	set "GLOBAL_%~1=%~2"
+	
+	:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
+	set GLOBAL_ > "%GLOBAL_FILE%"
+
+	::endlocal & set "%~1=%~2"
+exit /b 0
+
+:dk_printCallStack
+	echo:
+	echo ############ CALLSTACK ############
+	for /l %%x in (1, 1, 100) do (
+		(set /a num=100-%%x)
+		if defined STACK_!num! (
+			call echo !num!: %%STACK_!num!%%
+		)
+	)
+	echo:
+exit /b 0
+
+
+
+
 
 
 

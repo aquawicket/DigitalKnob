@@ -17,13 +17,13 @@
 	for /l %%x in (1, 1, %LVL%) do (set "pad=!pad!%indent%")
 	for /l %%x in (1, 1, %LVL%) do (set "padB=!padB!%indent%")	
 	(set "CMND=%~1")
-	(call setGlobal "CMND_%LVL%" "%CMND:::=\%")
-	(call setGlobal "FILE_%LVL%" "%~dpnx1")
-	(call setGlobal "FUNC_%LVL%" "%~n1")
+	(call :setGlobal "CMND_%LVL%" "%CMND:::=\%")
+	(call :setGlobal "FILE_%LVL%" "%~dpnx1")
+	(call :setGlobal "FUNC_%LVL%" "%~n1")
 	(set "ARGV=%*")
-	(call setGlobal "ARGV_%LVL%" "%ARGV%")
+	(call :setGlobal "ARGV_%LVL%" "%ARGV%")
 	(set ARGC=0) && for %%a in (%ARGV%) do (set /a ARGC+=1)
-	(call setGlobal "ARGC_%LVL%" "%ARGC%")
+	(call :setGlobal "ARGC_%LVL%" "%ARGC%")
 	
 	::###### Direct Variables ######
 ::	(set "CMND=!CMND_%LVL%!")
@@ -55,11 +55,11 @@
 	
 	::for /l %%x in (1, 1, %LVL%) do (set "pad=!pad!%indent%")
 	::for /l %%x in (1, 1, %LVL%) do (set "padB=!padB!%indent%")	
-	(call setGlobal "CMND_%LVL%" "")
-	(call setGlobal "FILE_%LVL%" "")
-	(call setGlobal "FUNC_%LVL%" "")
-	(call setGlobal "ARGV_%LVL%" "")
-	(call setGlobal "ARGC_%LVL%" "")
+	(call :setGlobal "CMND_%LVL%" "")
+	(call :setGlobal "FILE_%LVL%" "")
+	(call :setGlobal "FUNC_%LVL%" "")
+	(call :setGlobal "ARGV_%LVL%" "")
+	(call :setGlobal "ARGC_%LVL%" "")
 	(set /a LVL-=1)
 	::echo lvl = %lvl%
 	
@@ -132,3 +132,18 @@ exit /b %errorlevel%
 	if defined PARGV (echo %padB% PARGV = %PARGV%)
 	if defined PARGC (echo %padB% PARGC = %PARGC%)
 exit /b %errorlevel%
+
+:setGlobal name value
+
+	::echo set "%~1=%~2" >> GLOBAL.cmd
+	::echo %~1 >> GLOBAL.cmd
+	set "%~1=%~2"
+	
+	:: prefix the variable name with GLOBAL_ and assign a value
+	set "GLOBAL_%~1=%~2"
+	
+	:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
+	set GLOBAL_ > "%GLOBAL_FILE%"
+
+	::endlocal & set "%~1=%~2"
+exit /b 0

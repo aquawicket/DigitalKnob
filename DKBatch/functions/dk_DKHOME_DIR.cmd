@@ -12,8 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	::############ SET ############
 	if "%~1" neq "" ( 
-		rem set "DKHOME_DIR=%~1"
-		%dk_call% dk_setGlobal DKHOME_DIR "%~1"
+		set "DKHOME_DIR=%~1"
 		%return%
 	)
 
@@ -24,8 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	rem if not defined HOMEDRIVE        !dk_call! dk_warning "HOMEDRIVE is invalid"
 	rem if not defined HOMEPATH         !dk_call! dk_warning "HOMEPATH is invalid"
-	rem set "DKHOME_DIR=%USERPROFILE%"
-	%dk_call% dk_setGlobal DKHOME_DIR %USERPROFILE%
+	set "DKHOME_DIR=%USERPROFILE%"
 	rem	if exist "!WSLPATH_EXE!"        !dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
 
 	%dk_call% dk_assertPath DKHOME_DIR
