@@ -16,18 +16,28 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::if not exist "%DKCACHE_DIR%\cache" %dk_call% dk_warning "%DKCACHE_DIR%\cache does not exist" && %return%
     if not exist "%DKCACHE_DIR%\cache" %return%
     
-    set /a count=0
+	:: get the line
+	::set /a row=0
     for /f "tokens=*" %%a in (%DKCACHE_DIR%\cache) do (
-        if !count! equ 0 set "_target_app_=%%a"
-        if !count! equ 1 set "_target_triple_=%%a"
-        if !count! equ 2 set "_target_type_=%%a"
-        set /a count+=1
+        set "_line_=%%a"
+		rem set /a row+=1
     )
+	
+	:: get each word from the line in their respective variables
+	set /a column=0
+	for %%a IN (%_line_%) do (
+		echo %%a
+		if !column! equ 0 set "_target_app_=%%a"
+        if !column! equ 1 set "_target_triple_=%%a"
+        if !column! equ 2 set "_target_type_=%%a"
+        set /a column+=1
+	)
     
     endlocal && set "%1=%_target_app_%" && set "%2=%_target_triple_%" && set "%3=%_target_type_%"
-    ::%dk_call% dk_printVar target_app
-    ::%dk_call% dk_printVar target_triple
-    ::%dk_call% dk_printVar target_type
+    
+	%dk_call% dk_printVar target_app
+    %dk_call% dk_printVar target_triple
+    %dk_call% dk_printVar target_type
 %endfunction%
 
 
