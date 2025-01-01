@@ -1,0 +1,11 @@
+HelloWorld ANDROID_ARM32_CLANG Debug
+HelloWorld ANDROID_ARM64_CLANG Debug
+HelloWorld COSMOPOLITAN Debug
+HelloWorld EMSCRIPTEN Debug
+HelloWorld WIN_X86_CLANG Debug
+HelloWorld WIN_X86_MINGW Debug
+HelloWorld WIN_X86_MSVC Debug
+HelloWorld WIN_X86_64_CLANG Debug
+HelloWorld WIN_X86_64_MINGW Debug
+HelloWorld WIN_X86_64_MSVC Debug
+HelloWorld WIN_X86_64_UCRT Debug
