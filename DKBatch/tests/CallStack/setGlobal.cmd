@@ -1,7 +1,7 @@
 @echo off
 
 :setGlobal name value
-::setlocal enableDelayedExpansion
+setlocal enableDelayedExpansion
 
 	::echo set "%~1=%~2" >> GLOBAL.cmd
 	::echo %~1 >> GLOBAL.cmd
@@ -13,5 +13,5 @@
 	:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
 	set GLOBAL_ > "%GLOBAL_FILE%"
 
-	
+	endlocal & set "%~1=%~2"
 exit /b 0
