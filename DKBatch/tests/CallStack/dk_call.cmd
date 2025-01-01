@@ -1,10 +1,10 @@
 @echo off
 
-:dkcall
-	if "%~1"=="" (echo ERROR: use 'call dkcall %%0' at the top of your script to initialize dkcall. & pause & exit 13 )
+:dk_call
+	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
 	::### Constant Variables ###
-	if not defined dkcall 		(set "dkcall=call dkcall")
+	if not defined dk_call 		(set "dk_call=call dk_call")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
 	(set "pad=")
 	(set "padB=      ")
@@ -26,23 +26,24 @@
 	(call setGlobal "ARGC_%LVL%" "%ARGC%")
 	
 	::###### Direct Variables ######
-	(set "CMND=!CMND_%LVL%!")
-	(set "FILE=!FILE_%LVL%!")
-	(set "FUNC=!FUNC_%LVL%!")
-	(set "ARGV=!ARGV_%LVL%!")
-	(set "ARGC=!ARGC_%LVL%!")
+::	(set "CMND=!CMND_%LVL%!")
+::	(set "FILE=!FILE_%LVL%!")
+::	(set "FUNC=!FUNC_%LVL%!")
+::	(set "ARGV=!ARGV_%LVL%!")
+::	(set "ARGC=!ARGC_%LVL%!")
 	
 	::###### Parent Stack Variables ######	
 	(set /a "PLVL=LVL-1")
 	
 	::###### Parent Direct Variables ######
-	(set "PCMND=!CMND_%PLVL%!")
-	(set "PFILE=!FILE_%PLVL%!")
-	(set "PFUNC=!FUNC_%PLVL%!")
-	(set "PARGV=!ARGV_%PLVL%!")
-	(set "PARGC=!ARGC_%PLVL%!")
+::	(set "PCMND=!CMND_%PLVL%!")
+::	(set "PFILE=!FILE_%PLVL%!")
+::	(set "PFUNC=!FUNC_%PLVL%!")
+::	(set "PARGV=!ARGV_%PLVL%!")
+::	(set "PARGC=!ARGC_%PLVL%!")
+
 	:: https://en.wikipedia.org/wiki/Code_page_437
-	echo %pad%║
+::  echo %pad%║
 	echo %pad%╚═► !FUNC_%LVL%!(!ARGV_%LVL%!)
 	call :printStackVariables
 	::call :printParentStackVariables
@@ -86,7 +87,7 @@ exit /b %errorlevel%
 :printConstantVariables
 	                      :: (echo:)
                           :: (echo %padB% ###### Constant Variables ######)
-	if defined dkcall      (echo %padB% dkcall      = %dkcall%)
+	if defined dk_call      (echo %padB% dk_call      = %dk_call%)
 	if defined GLOBAL_FILE (echo %padB% GLOBAL_FILE = %GLOBAL_FILE%)
 	if defined indent        (echo %padB% indent        = %indent%)
 	if defined pad      (echo %padB% pad      = %pad%)

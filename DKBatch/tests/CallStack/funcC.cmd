@@ -4,7 +4,7 @@
 setlocal enableDelayedExpansion
 	
 	::set "LOCAL_VAR=local C"
-	%dkcall% funcC2 C2 C2
-	%dkcall% funcD D D D D
+	%dk_call% funcC2 C2 C2
+	%dk_call% funcD D D D D
 
 exit /b 0

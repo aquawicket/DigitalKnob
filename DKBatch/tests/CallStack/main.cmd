@@ -1,14 +1,13 @@
 @echo off
 Chcp 65001>nul
 setlocal enableDelayedExpansion
-
-call dkcall %0
+call dk_call %0
 :main
 
 
-	%dkcall% setGlobal globalVarA GLOBALA
-	%dkcall% setGlobal globalVarB GLOBALB
-	%dkcall% funcA A
+	%dk_call% setGlobal globalVarA GLOBALA
+	%dk_call% setGlobal globalVarB GLOBALB
+	%dk_call% funcA A
 	
 pause
 exit /b 0
