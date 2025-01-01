@@ -83,10 +83,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::	call dk_setGlobal STACK_%lvl% ""
 	
 	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
-	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
-		set "line=%%a"
-		set "!line:GLOBAL_=!"
-	)
+::	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
+::		set "line=%%a"
+::		set "!line:GLOBAL_=!"
+::	)
 	
 	(set /a lvl-=1)
 	

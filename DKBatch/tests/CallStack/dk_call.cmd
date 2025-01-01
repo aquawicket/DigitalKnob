@@ -71,9 +71,6 @@
 	
 	call :printStackVariables
 	::call :printParentStackVariables
-	::echo %pad% !FUNC_%LVL%!(!ARGV_%LVL%!)
-	::echo %pad%╔═╝
-	::echo %pad%▼
 	
 	:: https://en.wikipedia.org/wiki/Code_page_437
 	echo %pad%╔══ !FUNC_%LVL%!(!ARGV_%LVL%!)
