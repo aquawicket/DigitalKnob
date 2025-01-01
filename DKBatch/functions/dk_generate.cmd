@@ -8,33 +8,30 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_generate
     %dk_call% dk_debugFunc 0
  ::setlocal
- 
+
     %dk_call% dk_title Generating %target_app% - %target_triple% - %target_type% . . .
     %dk_call% dk_echo
     %dk_call% dk_info "##################################################################"
     %dk_call% dk_info "      Generating %target_app% - %target_triple% - %target_type%"
     %dk_call% dk_info "##################################################################"
     %dk_call% dk_echo
-    
-	::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%target_app%"
+
 	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
     set "TARGET_PATH=%DKAPPS_DIR%\%target_app%"
     if not exist "%TARGET_PATH%\%target_triple%"   %dk_call% dk_makeDirectory "%TARGET_PATH%\%target_triple%"
-    ::call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"         &:: FIXME: remove the need for call here
 	
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
-    set "CMAKE_SOURCE_DIR=!DKCMAKE_DIR:\=/!"                    
-    ::call set "CMAKE_TARGET_PATH=%TARGET_PATH:^\=^/%"          &:: FIXME: remove the need for call here
-    set "CMAKE_TARGET_PATH=!TARGET_PATH:\=/!"   
-        
+    set "CMAKE_SOURCE_DIR=!DKCMAKE_DIR:\=/!"
+    set "CMAKE_TARGET_PATH=!TARGET_PATH:\=/!"
+
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set "DKLEVEL=RebuildAll"
     set "DKLINK=Static"
 
     set "CMAKE_ARGS="
-    if "%target_type%"=="Debug"     %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON
-    if "%target_type%"=="Release"   %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
-    if "%target_type%"=="All"       %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    if "%target_type%"=="Debug"      (%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
+    if "%target_type%"=="Release"    %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    if "%target_type%"=="All"        (%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
     if "%DKLEVEL%"=="Build"          %dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON
     if "%DKLEVEL%"=="Rebuild"        %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON
     if "%DKLEVEL%"=="RebuildAll"     %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON
@@ -45,7 +42,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
 	set "DKCMAKE_FUNCTIONS_DIR_=!DKCMAKE_FUNCTIONS_DIR_:\=/!"   
 	%dk_call% dk_appendArgs CMAKE_ARGS -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
-	
+
     ::############ CMake Options ############
     %dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_VERBOSE_MAKEFILE=1
     ::%dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_COLOR_DIAGNOSTICS=ON
@@ -62,7 +59,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_appendArgs CMAKE_ARGS --warn-uninitialized
     ::%dk_call% dk_appendArgs CMAKE_ARGS --warn-unused-vars
     ::%dk_call% dk_appendArgs CMAKE_ARGS --check-system-vars
-     
+
 	if "%target_triple%"=="cosmopolitan"       %dk_call% dk_prependArgs CMAKE_ARGS -DCOSMOPOLITAN=1
     if "%target_triple%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64
 	if "%target_triple%"=="win_x86"		       %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
@@ -72,7 +69,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%target_triple%"=="WIN_X86_64_CLANG"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
     if "%target_triple%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64
     if "%target_triple%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
-   
+
 	if "%target_triple%"=="ios_arm32"          set "MULTI_CONFIG=1"
 	if "%target_triple%"=="ios_arm64"          set "MULTI_CONFIG=1"
     if "%target_triple%"=="iossim_x86"         set "MULTI_CONFIG=1"
@@ -82,23 +79,23 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%target_triple%"=="win_arm64_msvc"     set "MULTI_CONFIG=1"
 	if "%target_triple%"=="win_x86_msvc"       set "MULTI_CONFIG=1"
 	if "%target_triple%"=="win_x86_64_msvc"    set "MULTI_CONFIG=1"
-	if not defined MULTI_CONFIG         set "SINGLE_CONFIG=1"
-	
+	if not defined MULTI_CONFIG                set "SINGLE_CONFIG=1"
+
 	if "%target_triple%"=="linux_x86"          set "WSL_EXE=wsl"
     if "%target_triple%"=="linux_x86_64"       set "WSL_EXE=wsl"
-	
-	if defined MULTI_CONFIG             set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%target_triple%"
-	if defined SINGLE_CONFIG            set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%target_triple%/%target_type%"
+
+	if defined MULTI_CONFIG                    set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%target_triple%"
+	if defined SINGLE_CONFIG                   set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%target_triple%/%target_type%"
 	if not defined CMAKE_BINARY_DIR  %dk_call% dk_fatal "CMAKE_BINARY_DIR:%CMAKE_BINARY_DIR% is invalid"
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
-	
+
 	if "%target_triple%"=="COSMOPOLITAN"   	     set CMAKE_GENERATOR="MSYS Makefiles"
     if "%target_triple%"=="ANDROID_ARM32_CLANG"  set CMAKE_GENERATOR="Unix Makefiles"
     if "%target_triple%"=="ANDROID_ARM64_CLANG"  set CMAKE_GENERATOR="Unix Makefiles"
     if "%target_triple%"=="ANDROID_X86_CLANG" 	 set CMAKE_GENERATOR="Unix Makefiles"
 	if "%target_triple%"=="ANDROID_X86_64_CLANG" set CMAKE_GENERATOR="Unix Makefiles"
-    if "%target_triple%"=="EMSCRIPTEN"           set CMAKE_GENERATOR="Unix Makefiles"  
+    if "%target_triple%"=="EMSCRIPTEN"           set CMAKE_GENERATOR="Unix Makefiles"
     if "%target_triple%"=="IOS_ARM32"            set CMAKE_GENERATOR="Xcode"
     if "%target_triple%"=="IOS_ARM64"            set CMAKE_GENERATOR="Xcode"
     if "%target_triple%"=="IOSSIM_X86"           set CMAKE_GENERATOR="Xcode"
@@ -116,20 +113,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%target_triple%"=="WIN_X86_MINGW"        set CMAKE_GENERATOR="MinGW Makefiles"
 	if "%target_triple%"=="WIN_X86_MSVC"         set CMAKE_GENERATOR="Visual Studio 17 2022" -A Win32
     if "%target_triple%"=="WIN_X86_64"           set CMAKE_GENERATOR="MinGW Makefiles"
-	if "%target_triple%"=="WIN_X86_64_CLANG"     set CMAKE_GENERATOR="MinGW Makefiles"
+	if "%target_triple%"=="WIN_X86_64_CLANG"     (set CMAKE_GENERATOR="MinGW Makefiles")
 	if "%target_triple%"=="WIN_X86_64_MINGW"     set CMAKE_GENERATOR="MinGW Makefiles"
     if "%target_triple%"=="WIN_X86_64_MSVC"      set CMAKE_GENERATOR="Visual Studio 17 2022" -A x64
     if "%target_triple%"=="WIN_X86_64_UCRT"      set CMAKE_GENERATOR="MinGW Makefiles"
-	if defined CMAKE_GENERATOR  %dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%
-	
+	if defined CMAKE_GENERATOR %dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%
+    echo CMAKE_GENERATOR = %CMAKE_GENERATOR%
+	echo CMAKE_ARGS = %CMAKE_ARGS%
+
 ::  ###### CMAKE_TOOLCHAIN_FILE ######
 ::  %dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%target_triple%_toolchain.cmake"
 ::  %dk_call% dk_assertPath TOOLCHAIN
 ::  %dk_call% dk_printVar TOOLCHAIN
 ::  %dk_call% dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
 ::  if exist %TOOLCHAIN% %dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
-    
-    
+
 ::  ###### WSL CMake Fix ######
 ::  if defined WSLENV; then 
 ::      %dk_call% dk_cd "$DKCMAKE_DIR"
@@ -139,26 +137,24 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::	%dk_call% dk_replaceAll "!CMAKE_ARGS!" "C:" "/mnt/c" WSL_CMAKE_ARGS
 	::	%dk_call% dk_replaceAll "!WSL_CMAKE_ARGS!" "\" "/" WSL_CMAKE_ARGS
 	::)
-	
-	
-	
+
 	::###### linux_x86_64 (WSL) ######
 	if defined WSL_EXE %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR
 	if defined WSL_EXE %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "\" "/" DKSCRIPT_DIR
 	if defined WSL_EXE %WSL_EXE% sh -c "export UPDATE=1 && export target_app=%target_app% && export target_triple=%target_triple% && export target_type=%target_type% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
 	if defined WSL_EXE %return%
-	
+
 	::###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
     if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_install.cmd"
-    
+
 	::###### Delete Cmake Cache files ######
 	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"
-	
+
     %dk_call% dk_info "****** CMAKE COMMAND ******"
     echo %CMAKE_EXE% %CMAKE_ARGS%
     %dk_call% %CMAKE_EXE% %CMAKE_ARGS% && %dk_call% dk_echo "CMake Generation Successful" || %dk_call% dk_error "CMake Generation Failed"
-	
+
 ::	###### IMPORT VARIABLES ######
 	%dk_call% dk_importVars
 %endfunction%
