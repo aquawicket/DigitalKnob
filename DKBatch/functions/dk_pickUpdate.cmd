@@ -45,7 +45,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="8"  %dk_call% dk_clearScreen
     if "%choice%"=="9"  %dk_call% dk_reload
     if "%choice%"=="10" %dk_call% dk_exit 0
-	if "%choice%"=="11" %dk_call% (set "BUILD_LIST_FILE=%DKCACHE_DIR%\build_list.txt" && %return%)
+	if "%choice%"=="11" (set "BUILD_LIST_FILE=%DKCACHE_DIR%\build_list.txt" && %return%)
        
     endlocal & set "UPDATE=1"
 %endfunction%

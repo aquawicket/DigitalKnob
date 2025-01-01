@@ -167,7 +167,7 @@ function(dk_setupCallstack)
 	dk_echo("dk_setupCallstack()")
 	
 	dk_load("dk_onVariableWatch")
-	variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
+	#variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onVariableWatch)
 	#variable_watch(CMAKE_CURRENT_LIST_DIR dk_onVariableWatch)
 	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onCallstack)

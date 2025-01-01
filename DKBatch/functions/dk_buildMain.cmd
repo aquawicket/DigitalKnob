@@ -30,14 +30,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         
 	::set "BUILD_LIST_FILE=%DKCACHE_DIR%\build_list.txt"
     :while_loop
-		if exist "%BUILD_LIST_FILE%" (%dk_call% dk_fileToGrid "%BUILD_LIST_FILE%" BUILD_LIST)
-		if not defined line (set /a "line=0")
-		if defined BUILD_LIST[!line!][2] (
-			set "UPDATE=1"
-			call set "target_app=%%BUILD_LIST[!line!][0]%%"
-			call set "target_triple=%%BUILD_LIST[!line!][1]%%"
-			call set "target_type=%%BUILD_LIST[!line!][2]%%"
-			set /a line+=1
+		if exist "%BUILD_LIST_FILE%" (
+			%dk_call% dk_fileToGrid "%BUILD_LIST_FILE%" BUILD_LIST
+			if not defined line (set /a "line=0")
+			if defined BUILD_LIST[!line!][2] (
+				set "UPDATE=1"
+				call set "target_app=%%BUILD_LIST[!line!][0]%%"
+				call set "target_triple=%%BUILD_LIST[!line!][1]%%"
+				call set "target_type=%%BUILD_LIST[!line!][2]%%"
+				set /a line+=1
+			) else (
+				set "BUILD_LIST_FILE="
+			)
 		)
 
 		
