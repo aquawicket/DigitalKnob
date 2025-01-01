@@ -2,7 +2,7 @@ HelloWorld 			ANDROID_ARM32_CLANG			Debug
 HelloWorld 			ANDROID_ARM64_CLANG 		Debug
 # HelloWorld 		ANDROID_X86_CLANG			Debug
 # HelloWorld 		ANDROID_X86_64_CLANG 		Debug
-HelloWorld 			COSMOPOLITAN 				Debug
+# HelloWorld 		COSMOPOLITAN 				Debug
 # HelloWorld 		EMSCRIPTEN_ARM32_CLANG		Debug
 # HelloWorld 		EMSCRIPTEN_ARM64_64_CLANG	Debug
 HelloWorld 			EMSCRIPTEN_X86_CLANG		Debug
