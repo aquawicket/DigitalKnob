@@ -1,7 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-if not defined dk_call call :init
+::if not defined dk_call call :init
 ::####################################################################
 ::# dk_call(command args)
 ::#
@@ -16,13 +16,8 @@ if not defined dk_call call :init
 	(set ARGV=!ARGV:%~1=!)
 	(set /a ARGC=0)
 	for %%a in (!ARGV!) do (set /a ARGC+=1)
-	(set /a clvl=lvl-1)
-	(set CALLER=!STACK_%clvl%!)
-	
-	(set mark=-----)
-	(set indent=)
-	for /l %%x in (1, 1, %lvl%) do set "indent=!indent!%mark%"
-	call dk_setGlobal "STACK_%lvl%" "%FUNC%"
+
+::	call dk_setGlobal "STACK_%lvl%" "%FUNC%"
 	
 
 	
@@ -85,13 +80,13 @@ if not defined dk_call call :init
     call %comand% %ARGV%
 ::###### Exit #############################################################################################
 
-	call dk_setGlobal STACK_%lvl% ""
+::	call dk_setGlobal STACK_%lvl% ""
 	
 	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
 	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
 		set "line=%%a"
 		set "!line:GLOBAL_=!"
-    )
+  )
 	
 	(set /a lvl-=1)
 	
@@ -106,7 +101,7 @@ if not defined dk_call call :init
 	echo. 2>"%GLOBAL_FILE%"
 	set "dk_call=call dk_call"
 	(set /a lvl=0)
-	call setGlobal "STACK_0" "main"
+::	call setGlobal "STACK_0" "main"
 exit /b 0
 
 
