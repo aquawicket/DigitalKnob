@@ -120,6 +120,7 @@ dk_if(NOT DEFINED ERROR_HALT      [[ set(ERROR_HALT 		0           	CACHE INTERNA
 dk_if(NOT DEFINED FATAL_ENABLE    [[ set(FATAL_ENABLE 		1 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_COLOR     [[ set(FATAL_COLOR 		"${red}" 		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_TAG       [[ set(FATAL_TAG 			"FATAL: " 		CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED FATAL_SOUND     [[ set(FATAL_SOUND 		1 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_PAUSE     [[ set(FATAL_PAUSE 		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_TIMEOUT   [[ set(FATAL_TIMEOUT		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_TRACE     [[ set(FATAL_TRACE 		1 				CACHE INTERNAL '') ]])
@@ -167,6 +168,29 @@ function(dk_log)
 		dk_echo("${${_level_}_COLOR}*** LINE_ON_${_level_} ***")
 		#d_k_showFileLine("${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}")
 		message("${clr}")
+	endif()
+	if(${_level_}_SOUND) #OR SOUND AND NOT NO_SOUND)
+		dk_echo("${${_level_}_COLOR}*** SOUND_ON_${_level_} ***${clr}")
+		set(imperial_march 
+			"440,500"
+			"440,500"
+			"440,500" 
+			"349,350" 
+			"523,150" 
+			"440,500" 
+			"349,350" 
+			"523,150" 
+			"440,1000"
+			"659,500" 
+			"659,500" 
+			"659,500" 
+			"698,350" 
+			"523,150" 
+			"415,500" 
+			"349,350" 
+			"523,150" 
+			"440,1000")
+		dk_beeps(imperial_march)
 	endif()
 	if(${_level_}_PAUSE) #OR PAUSE AND NOT NO_PAUSE)
 		dk_echo("${${_level_}_COLOR}*** PAUSE_ON_${_level_} ***${clr}")
