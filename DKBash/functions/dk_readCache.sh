@@ -16,9 +16,9 @@ dk_readCache() {
 	line=$(head -n 1 "${DKCACHE_DIR}"/cache)
 	IFS=', ' read -r -a array <<< "$line"
 	
-	eval "${1}=${array[0]}"
-	eval "${2}=${array[1]}"
-	eval "${3}=${array[2]}"
+	eval "${1}=${array[0]-}"
+	eval "${2}=${array[1]-}"
+	eval "${3}=${array[2]-}"
 }
 
 

@@ -21,31 +21,51 @@ dk_buildMain() {
 	
 	while :
 	do
+		[ -z "${UPDATE-}" ] && dk_call dk_pickUpdate || true
+		
 		if [ -e "${BUILD_LIST_FILE-}" ]; then
+			UPDATE=1
 			declare -A BUILD_LIST
 			dk_call dk_fileToGrid "${BUILD_LIST_FILE}" BUILD_LIST
-			[ -n ${line-} ] || line=0
-			comment_check="${BUILD_LIST[${line-},0]}"			
-			if [ "${comment_check:0:1}" = "#" ]; then
-				(($line+=1))
+			[ -n "${_line-}" ] || _line=0
+			
+			echo ""
+			echo "_line = ${_line}"
+			echo "0 = ${BUILD_LIST[${_line},0]-}"
+			echo "1 = ${BUILD_LIST[${_line},1]-}"
+			echo "2 = ${BUILD_LIST[${_line},2]-}"
+			echo ""			
+			
+			if [ "${BUILD_LIST[${_line},0]:0:1}" = "#" ]; then
+				_line=$(( _line + 1 ))
 				echo "skipping line . . ."
+				continue
 			else
-				if [ -n "${BUILD_LIST[${line},2]}" ]; then
-					UPDATE=1
-					target_app="${BUILD_LIST[${line},0]}"
-					target_triple="${BUILD_LIST[${line},1]}"
-					target_type="${BUILD_LIST[${line},2]}"
-					(($line+=1))
+				if [ -n "${BUILD_LIST[${_line},2]-}" ]; then
+					target_app="${BUILD_LIST[${_line},0]}"
+					target_triple="${BUILD_LIST[${_line},1]}"
+					target_type="${BUILD_LIST[${_line},2]}"
+#					echo ""
+#					echo "UPDATE = ${UPDATE-}"
+#					echo "_line = ${_line}"
+#					echo "0 = ${BUILD_LIST[${_line},0]-}"
+#					echo "1 = ${BUILD_LIST[${_line},1]-}"
+#					echo "2 = ${BUILD_LIST[${_line},2]-}"
+#					echo ""				
+					_line=$(( _line + 1 ))
 				else
 					BUILD_LIST_FILE=""
 				fi
 			fi
 		fi
+		echo "UPDATE = ${UPDATE-}"
+		echo "target_app = ${target_app-}"
+		echo "target_triple = ${target_triple-}"
+		echo "target_type = ${target_type-}"
 		
-		[ -z "${UPDATE-}" ] 		&& dk_call dk_pickUpdate || continue
-		[ -z "${target_app-}" ]    	&& dk_call dk_target_app || continue
-		[ -z "${target_triple-}" ] 	&& dk_call dk_target_triple_SET || continue
-		[ -z "${target_type-}" ]    && dk_call dk_target_type || continue
+		[ -z "${target_app-}" ] && dk_call dk_target_app
+		[ -z "${target_triple-}" ] && dk_call dk_target_triple_SET
+		[ -z "${target_type-}" ] && dk_call dk_target_type
 		
 		# save selections to cache file
 		dk_call dk_echo "creating cache..."

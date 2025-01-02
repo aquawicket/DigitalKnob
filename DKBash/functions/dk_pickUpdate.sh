@@ -89,6 +89,7 @@ dk_pickUpdate() {
 		dk_call dk_exit 0
 	elif [ "${choice}" = "11" ]; then
 		BUILD_LIST_FILE="${DKBRANCH_DIR}/build_list.txt"
+		UPDATE=1
 		return 1
 	elif [ "${choice}" = "" ]; then
 		UPDATE=1

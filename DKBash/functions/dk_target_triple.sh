@@ -75,13 +75,13 @@ dk_target_triple() {
 
 	#### Set target_triple/TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
 	dk_call dk_basename ${TARGET_TRIPLE_DIR} target_triple		# target_triple 	= win_x86_64_clang
-	dk_call dk_set target_triple ${target_triple}						# Globalize the variable
+	dk_call dk_set target_triple ${target_triple}				# Globalize the variable
 	dk_call dk_set target_triple ${target_triple}				# target_triple	= win_x86_64_clang
 	dk_call dk_toUpper ${target_triple} TRIPLE					# TRIPLE	= WIN_X86_64_CLANG
-	dk_call dk_set TRIPLE ${TRIPLE}						# Globalize the variable
-	dk_call dk_set TARGET_TRIPLE ${TRIPLE}				#	TARGET_TRIPLE = WIN_X86_64_CLANG
+	dk_call dk_set TRIPLE ${TRIPLE}								# Globalize the variable
+	dk_call dk_set TARGET_TRIPLE ${TRIPLE}						# TARGET_TRIPLE = WIN_X86_64_CLANG
 	dk_call dk_set ${target_triple} 1							# win_x86_64_clang = 1
-	dk_call dk_set ${TRIPLE} 1							# WIN_X86_64_CLANG = 1
+	dk_call dk_set ${TRIPLE} 1									# WIN_X86_64_CLANG = 1
 	dk_call dk_printVar target_triple 
 	dk_call dk_printVar TRIPLE 
 
@@ -116,7 +116,7 @@ dk_target_triple() {
 	dk_call dk_stringContains "${target_triple}" "arm64" 			&& dk_call dk_set arch arm64
 	dk_call dk_stringContains "${target_triple}" "arm32" 			&& dk_call dk_set arch arm32
 	dk_call dk_stringContains "${target_triple}" "x86_64" 			&& dk_call dk_set arch x86_64
-	dk_call dk_stringContains "${target_triple}" "x86" 			&& dk_call dk_set arch x86
+	dk_call dk_stringContains "${target_triple}" "x86" 				&& dk_call dk_set arch x86
 	dk_call dk_stringContains "${target_triple}" "cosmopolitan" 	&& dk_call dk_set arch cosmopolitan	
 	
 	if [ -z "${arch-}" ]; then
