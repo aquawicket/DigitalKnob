@@ -25,7 +25,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
 dk_assertPath("${DKCMAKE_DIR}/DKDisabled.cmake")
 dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
 
@@ -1515,3 +1514,4 @@ dk_info("\n\n")
 dk_info("******************************************************")
 dk_info("****** Generated ${APP_NAME} - ${triple}  ************")
 dk_info("******************************************************\n")
+
