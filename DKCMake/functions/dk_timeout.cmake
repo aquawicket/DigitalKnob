@@ -10,18 +10,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_timeout) 
 	dk_debugFunc(0 1)
 	
-	###### ${timeout_seconds} ######
-	if(ARGV)
-		set(timeout_seconds ${ARGV})
-	else()
-		set(timeout_seconds 10)
+	###### ${timeout_seconds} #####
+	set(timeout_seconds ${ARGV})
+	if(NOT timeout_seconds)
+		set(timeout_seconds "10")
 	endif()
 
 	
 	###### Cmd ######
 	if(DEFINED ENV{COMSPEC})
 		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
-		set(cmnd ${CMD_EXE} /c timeout /t ${timeout_seconds})
+		set(cmnd ${CMD_EXE} /c timeout /T ${timeout_seconds})
 		#dk_debug("${cmnd}")
 		execute_process(COMMAND ${cmnd})
 		dk_return()
