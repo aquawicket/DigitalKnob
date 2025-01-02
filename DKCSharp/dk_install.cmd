@@ -15,8 +15,8 @@ if "%*" == "" (goto dk_install)
 	echo compiling ...
 	if exist %APP%.exe  del %APP%.exe
 
-	%COMPILER_EXE% /nologo /out:%APP%.exe  %DKCSharp_FILE%
-	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKCSharp_FILE%
+	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKCSharp_FILE%
+	%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKCSharp_FILE%
 	::%COMPILER_EXE% /nologo /out:%APP%.exe *.cs
 	
 	if not exist "%APP%.exe" (

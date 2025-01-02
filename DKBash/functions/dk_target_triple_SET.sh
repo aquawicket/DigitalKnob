@@ -49,7 +49,8 @@ dk_target_triple_SET() {
 	dk_call dk_echo "34) Windows x86_64 (clang)"
 	dk_call dk_echo "35) Windows x86_64 (ucrt)"
 	dk_call dk_echo "36) Windows x86_64 (msvc)"
-	dk_call dk_echo "37) Exit"
+	dk_call dk_echo "37) Go Back"
+	dk_call dk_echo "38) Exit"
 	dk_call dk_echo ""
 
 	dk_call dk_keyboardInput input
@@ -180,6 +181,9 @@ dk_target_triple_SET() {
 		dk_call dk_set arch "x86_64"
 		dk_call dk_set env "msvc"
 	elif [ "${input}" = "37" ]; then
+		unset target_app
+		return 1
+	elif [ "${input}" = "38" ]; then
 		dk_call dk_exit 0
 	else
 		dk_call dk_warning "invalid selection"

@@ -32,6 +32,7 @@ dk_target_type() {
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "5" ]; then
 		unset target_triple
+		return 1
 	elif [ "${choice}" = "6" ]; then
 		dk_call dk_exit 0
 	else

@@ -21,7 +21,7 @@ dk_buildMain() {
 	
 	while :
 	do
-		if [ -e "${BUILD_LIST_FILE}" ]; then
+		if [ -e "${BUILD_LIST_FILE-}" ]; then
 			declare -A BUILD_LIST
 			dk_call dk_fileToGrid "${BUILD_LIST_FILE}" BUILD_LIST
 			[ -n ${line-} ] || line=0
@@ -42,10 +42,10 @@ dk_buildMain() {
 			fi
 		fi
 		
-		[ -z "${UPDATE-}" ] 		&& dk_call dk_pickUpdate
-		[ -z "${target_app-}" ]    	&& dk_call dk_target_app
-		[ -z "${target_triple-}" ] 	&& dk_call dk_target_triple_SET
-		[ -z "${target_type-}" ]    && dk_call dk_target_type
+		[ -z "${UPDATE-}" ] 		&& dk_call dk_pickUpdate || continue
+		[ -z "${target_app-}" ]    	&& dk_call dk_target_app || continue
+		[ -z "${target_triple-}" ] 	&& dk_call dk_target_triple_SET || continue
+		[ -z "${target_type-}" ]    && dk_call dk_target_type || continue
 		
 		# save selections to cache file
 		dk_call dk_echo "creating cache..."

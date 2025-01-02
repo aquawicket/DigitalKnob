@@ -51,6 +51,7 @@ dk_target_app() {
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "11" ]; then
 		unset UPDATE
+		return 1
 	elif [ "${choice}" = "12" ]; then
 		dk_call dk_reload
 	elif [ "${choice}" = "13" ]; then
