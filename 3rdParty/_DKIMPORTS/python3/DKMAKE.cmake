@@ -27,7 +27,7 @@ if(isUrl)
 endif()
 
 if(WIN_HOST)
-	dk_findProgram(PYTHON3_EXE python.exe "${PYTHON3_DIR}")
+	dk_findProgram(PYTHON3_EXE python.exe "${PYTHON3}")
 else()
 	dk_findProgram(PYTHON3_EXE python3)
 endif()
@@ -41,22 +41,22 @@ if(NOT EXISTS ${PYTHON3_EXE})
 	endif()
 	
 	if(WIN_HOST)
-		dk_findProgram(PYTHON3_EXE python.exe "${PYTHON3_DIR}")
+		dk_findProgram(PYTHON3_EXE python.exe "${PYTHON3}")
 	else()
 		dk_findProgram(PYTHON3_EXE python3)
 	endif()
 endif()
-#if(NOT EXISTS "${PYTHON3_DIR}/python.exe")
-#	dk_copy("${PYTHON3_DIR}/python3.exe" "${PYTHON3_DIR}/python.exe")
+#if(NOT EXISTS "${PYTHON3}/python.exe")
+#	dk_copy("${PYTHON3}/python3.exe" "${PYTHON3}/python.exe")
 #endif()
 
 
-if(NOT EXISTS "${PYTHON3_DIR}")
-	dk_dirname("${PYTHON3_EXE}" PYTHON3_DIR)
+if(NOT EXISTS "${PYTHON3}")
+	dk_dirname("${PYTHON3_EXE}" PYTHON3)
 endif()
 
-dk_prependEnvPath("${PYTHON3_DIR}")
-dk_exportVars(PATH "${PYTHON3_DIR};$ENV{PATH}")
+dk_prependEnvPath("${PYTHON3}")
+dk_exportVars(PATH "${PYTHON3};$ENV{PATH}")
 
 
 
@@ -65,5 +65,5 @@ dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interprete
 
 
 
-dk_assertPath("${PYTHON3_DIR}")
+dk_assertPath("${PYTHON3}")
 dk_assertPath("${PYTHON3_EXE}")

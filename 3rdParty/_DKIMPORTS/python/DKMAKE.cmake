@@ -90,7 +90,9 @@ dk_assertPath(PYTHON)
 if(NOT LINUX)
 	dk_assertPath(PYTHON_EXE)
 endif()
-dk_prependEnvPath("${PYTHON_DIR}")
+
+### FIXME: we can't have both python2 and python3 in the environment path 
+#dk_prependEnvPath("${PYTHON_DIR}")
 
 ###### PIP_EXE ######
 if(WIN_HOST)
