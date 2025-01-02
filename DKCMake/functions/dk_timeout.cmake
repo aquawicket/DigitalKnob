@@ -20,10 +20,8 @@ function(dk_timeout)
 	###### Cmd ######
 	if(DEFINED ENV{COMSPEC})
 		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
-		#set(cmnd ${CMD_EXE} /c timeout /T ${timeout_seconds})
 		set(cmnd "${CMD_EXE} /c timeout /T ${timeout_seconds}")
 		message("cmnd = ${cmnd}")
-		#dk_debug("${cmnd}")
 		execute_process(COMMAND ${cmnd})
 		dk_return()
 	endif()
