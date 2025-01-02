@@ -1,0 +1,102 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\.html]
+@="htmlfile"
+"Content Type"="text/html"
+"PerceivedType"="text"
+
+[HKEY_CLASSES_ROOT\.html\OpenWithProgids]
+"AppX4hxtad77fbk3jkkeerkrm0ze94wjf3s9"=hex(0):
+"ChromeHTML"=""
+"IE.AssocFile.HTM"=""
+"OperaStable"=hex(0):
+
+[HKEY_CLASSES_ROOT\.html\PersistentHandler]
+@="{eec97550-47a9-11cf-b952-00aa0051fe20}"
+
+[HKEY_CLASSES_ROOT\htmlfile]
+@="HTML Document"
+"AppUserModelID"="Microsoft.InternetExplorer.Default"
+"EditFlags"=dword:00200000
+"FriendlyTypeName"="@C:\\Windows\\System32\\ieframe.dll,-912"
+
+[HKEY_CLASSES_ROOT\htmlfile\CLSID]
+@="{25336920-03F9-11cf-8FD0-00AA00686F13}"
+
+[HKEY_CLASSES_ROOT\htmlfile\DefaultIcon]
+@=hex(2):25,00,50,00,72,00,6f,00,67,00,72,00,61,00,6d,00,46,00,69,00,6c,00,65,\
+  00,73,00,25,00,5c,00,49,00,6e,00,74,00,65,00,72,00,6e,00,65,00,74,00,20,00,\
+  45,00,78,00,70,00,6c,00,6f,00,72,00,65,00,72,00,5c,00,69,00,65,00,78,00,70,\
+  00,6c,00,6f,00,72,00,65,00,2e,00,65,00,78,00,65,00,2c,00,2d,00,31,00,37,00,\
+  00,00
+
+[HKEY_CLASSES_ROOT\htmlfile\ScriptHostEncode]
+@="{0CF774D0-F077-11D1-B1BC-00C04F86C324}"
+
+[HKEY_CLASSES_ROOT\htmlfile\shell]
+@="open"
+
+[HKEY_CLASSES_ROOT\htmlfile\shell\Edit]
+@="@C:\\Program Files (x86)\\Microsoft Office\\Root\\VFS\\ProgramFilesCommonX86\\Microsoft Shared\\Office16\\oregres.dll,-1"
+
+[HKEY_CLASSES_ROOT\htmlfile\shell\open]
+@="Open in S&ame Window"
+"CommandId"="IE.File"
+"MUIVerb"="@C:\\Windows\\System32\\ieframe.dll,-5732"
+
+[HKEY_CLASSES_ROOT\htmlfile\shell\open\command]
+@="\"C:\\Program Files\\Internet Explorer\\iexplore.exe\" %1"
+"DelegateExecute"="{17FE9752-0B5A-4665-84CD-569794602F5C}"
+
+[HKEY_CLASSES_ROOT\htmlfile\shell\open\ddeexec\Application]
+@="IExplore"
+
+[HKEY_CLASSES_ROOT\htmlfile\shell\print]
+@="@C:\\Program Files (x86)\\Microsoft Office\\Root\\VFS\\ProgramFilesCommonX86\\Microsoft Shared\\Office16\\oregres.dll,-5"
+
+[HKEY_CLASSES_ROOT\htmlfile\shell\print\command]
+@=hex(2):22,00,25,00,73,00,79,00,73,00,74,00,65,00,6d,00,72,00,6f,00,6f,00,74,\
+  00,25,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,72,00,\
+  75,00,6e,00,64,00,6c,00,6c,00,33,00,32,00,2e,00,65,00,78,00,65,00,22,00,20,\
+  00,22,00,25,00,73,00,79,00,73,00,74,00,65,00,6d,00,72,00,6f,00,6f,00,74,00,\
+  25,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,6d,00,73,\
+  00,68,00,74,00,6d,00,6c,00,2e,00,64,00,6c,00,6c,00,22,00,2c,00,50,00,72,00,\
+  69,00,6e,00,74,00,48,00,54,00,4d,00,4c,00,20,00,22,00,25,00,31,00,22,00,00,\
+  00
+
+[HKEY_CLASSES_ROOT\htmlfile\shell\printto\command]
+@=hex(2):22,00,25,00,73,00,79,00,73,00,74,00,65,00,6d,00,72,00,6f,00,6f,00,74,\
+  00,25,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,72,00,\
+  75,00,6e,00,64,00,6c,00,6c,00,33,00,32,00,2e,00,65,00,78,00,65,00,22,00,20,\
+  00,22,00,25,00,73,00,79,00,73,00,74,00,65,00,6d,00,72,00,6f,00,6f,00,74,00,\
+  25,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,6d,00,73,\
+  00,68,00,74,00,6d,00,6c,00,2e,00,64,00,6c,00,6c,00,22,00,2c,00,50,00,72,00,\
+  69,00,6e,00,74,00,48,00,54,00,4d,00,4c,00,20,00,22,00,25,00,31,00,22,00,20,\
+  00,22,00,25,00,32,00,22,00,20,00,22,00,25,00,33,00,22,00,20,00,22,00,25,00,\
+  34,00,22,00,00,00
+
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\.html]
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.html]
+"PerceivedType"="document"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.html\ShellEx\{8895b1c6-b41f-4c1c-a562-0d564250836f}]
+@="{f8b8412b-dea3-4130-b36c-5e8be73106ac}"
+
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html]
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList]
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithProgids]
+"htmlfile"=hex(0):
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice]
+"Hash"="yL9FPZzdBcs="
+"ProgId"="AppX4hxtad77fbk3jkkeerkrm0ze94wjf3s9"
+
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Roaming\OpenWith\FileExts\.html]
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Roaming\OpenWith\FileExts\.html\UserChoice]
+"Hash"="C4Ff4g/YxME="
+"ProgId"="htmlfile"
+
