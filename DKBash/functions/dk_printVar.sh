@@ -7,8 +7,8 @@
 #
 dk_printVar() {
 	dk_debugFunc 1
-	[ -z ${dk_printVar-} ] && dk_printVar=1
-	( ${dk_printVar} eq 1 ) || return 0
+	#[ -z ${dk_printVar-} ] && dk_printVar=1
+	#( ${dk_printVar} eq 1 ) || return 0
 	
 	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 	
