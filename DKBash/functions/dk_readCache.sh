@@ -16,18 +16,21 @@ dk_readCache() {
 	#_TYPE_=
 	
 	dk_call dk_echo "reading cache..."
-	count=0
-	while read p; do
-		[ "${count}" = "0" ] && _APP_=$(builtin echo "${p}" | tr -d '\r')
-		[ "${count}" = "1" ] && _triple_=$(builtin echo "${p}" | tr -d '\r')
-		[ "${count}" = "2" ] &&	_TYPE_=$(builtin echo "${p}" | tr -d '\r')
-		#[ "${count}" = "3" ] && DKENV=$(echo ${p} | tr -d '\r')
-		count=$((count + 1))
-	done < "${DKCACHE_DIR}"/cache
+#	count=0
+#	while read p; do
+#		[ "${count}" = "0" ] && _APP_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "1" ] && _triple_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "2" ] &&	_TYPE_=$(builtin echo "${p}" | tr -d '\r')
+#		#[ "${count}" = "3" ] && DKENV=$(echo ${p} | tr -d '\r')
+#		count=$((count + 1))
+#	done < "${DKCACHE_DIR}"/cache
+
+	line=$(head -n 1 "${DKCACHE_DIR}"/cache)
+	IFS=', ' read -r -a array <<< "$line"
 	
-	eval "${1}=${_APP_}"
-	eval "${2}=${_triple_}"
-	eval "${3}=${_TYPE_}"
+	eval "${1}=${array[0]}"
+	eval "${2}=${array[1]}"
+	eval "${3}=${array[2]}"
 }
 
 

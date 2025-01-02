@@ -11,11 +11,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_debugFunc 2
  setlocal
  
-	echo dk_fileToGrid(%*)
     set "_file_=%~1"
-	echo _file_ = %_file_%
 	set "_file_=%_file_:/=\%"
-	echo _file_ = %_file_%
 	
 	set /a row=0
 	for /F "usebackq delims=" %%r in ("%_file_%") do (

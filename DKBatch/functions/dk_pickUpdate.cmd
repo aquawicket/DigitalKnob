@@ -14,7 +14,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_echo
     %dk_call% dk_commandExists "git" && %dk_call% dk_gitCheckRemote
 
-    %dk_call% dk_readCache _target_app_ _target_triple_ _DKBUILD_TYPE_
+	:: read cache file
+	if exist "%DKCACHE_DIR%\cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%\cache" words)
+	set "_target_app_=%words[0][0]%"
+	set "_target_triple_=%words[0][1]%"
+	set "_target_type_=%words[0][2]%"
     
     %dk_call% dk_echo
     if exist "%DKCACHE_DIR%\cache" if "%_target_app_%" neq "" if "%_target_triple_%" neq "" if "%_target_type_%" neq "" echo  0) Repeat cache [%_target_app_% - %_target_triple_% - %_target_type_%]

@@ -11,7 +11,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     %dk_call% dk_title DigitalKnob - %target_app% %target_triple% %target_type%
     
-    %dk_call% dk_readCache _target_app_ _target_triple_ _target_type_
+    :: read cache file
+	if exist "%DKCACHE_DIR%\cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%\cache" words)
+	set "_target_app_=%words[0][0]%"
+	set "_target_triple_=%words[0][1]%"
+	set "_target_type_=%words[0][2]%"
 	
     :: get a list of the directories in DKApps
 	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
