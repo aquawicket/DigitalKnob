@@ -1,98 +1,233 @@
-HelloWorld 			ANDROID_ARM32_CLANG			Debug
-HelloWorld 			ANDROID_ARM64_CLANG 		Debug
-# HelloWorld 		ANDROID_X86_CLANG			Debug
-# HelloWorld 		ANDROID_X86_64_CLANG 		Debug
-# HelloWorld 		COSMOPOLITAN 				Debug
-# HelloWorld 		EMSCRIPTEN_ARM32_CLANG		Debug
-# HelloWorld 		EMSCRIPTEN_ARM64_64_CLANG	Debug
-HelloWorld 			EMSCRIPTEN_X86_CLANG		Debug
-# HelloWorld 		EMSCRIPTEN_X86_64_CLANG		Debug
-# HelloWorld		IOS_ARM32_CLANG				Debug
-# HelloWorld		IOS_ARM64_CLANG				Debug
-# HelloWorld		IOS_X86_CLANG				Debug
-# HelloWorld		IOS_X86_64_CLANG			Debug
-# HelloWorld		IOSSIM_ARM32_CLANG			Debug
-# HelloWorld		IOSSIM_ARM64_CLANG			Debug
-# HelloWorld		IOSSIM_X86_CLANG			Debug
-# HelloWorld		IOSSIM_X86_64_CLANG			Debug
-# HelloWorld		LINUX_ARM32_CLANG			Debug
-# HelloWorld		LINUX_ARM64_CLANG			Debug
-# HelloWorld		LINUX_X86_CLANG				Debug
-# HelloWorld		LINUX_X86_64_CLANG			Debug
-# HelloWorld		MAC_ARM32_CLANG				Debug
-# HelloWorld		MAC_ARM64_CLANG				Debug
-# HelloWorld		MAC_X86_CLANG				Debug
-# HelloWorld		MAC_X86_64_CLANG			Debug
-# HelloWorld		RASPBERRY_ARM32_CLANG		Debug
-# HelloWorld		RASPBERRY_ARM64_CLANG		Debug
-# HelloWorld		RASPBERRY_X86_CLANG			Debug
-# HelloWorld		RASPBERRY_X86_64_CLANG		Debug
-# HelloWorld 		WIN_ARM32_CLANG				Debug
-# HelloWorld 		WIN_ARM64_CLANG				Debug
-# HelloWorld 		WIN_X86_CLANG				Debug
-HelloWorld 			WIN_X86_64_CLANG			Debug
-HelloWorld 			WIN_X86_MINGW 				Debug
-HelloWorld 			WIN_X86_64_MINGW 			Debug
-HelloWorld 			WIN_X86_64_UCRT 			Debug
-# HelloWorld 		WIN_ARM32_GCC				Debug
-# HelloWorld 		WIN_ARM64_GCC				Debug
-# HelloWorld 		WIN_X86_GCC					Debug
-# HelloWorld 		WIN_X86_64_GCC				Debug
-# HelloWorld 		WIN_ARM32_MSVC				Debug
-# HelloWorld 		WIN_ARM64_MSVC				Debug
-HelloWorld 			WIN_X86_MSVC					Debug
-HelloWorld 			WIN_X86_64_MSVC					Debug
+############ HelloWorld ############
+HelloWorld 		ANDROID_ARM32_CLANG			Debug
+HelloWorld 		ANDROID_ARM64_CLANG 		Debug
+# HelloWorld 	ANDROID_X86_CLANG			Debug
+# HelloWorld 	ANDROID_X86_64_CLANG 		Debug
+# HelloWorld 	COSMOPOLITAN 				Debug
+# HelloWorld 	EMSCRIPTEN_ARM32_CLANG		Debug
+# HelloWorld 	EMSCRIPTEN_ARM64_64_CLANG	Debug
+HelloWorld 		EMSCRIPTEN_X86_CLANG		Debug
+# HelloWorld 	EMSCRIPTEN_X86_64_CLANG		Debug
+# HelloWorld	IOS_ARM32_CLANG				Debug
+# HelloWorld	IOS_ARM64_CLANG				Debug
+# HelloWorld	IOS_X86_CLANG				Debug
+# HelloWorld	IOS_X86_64_CLANG			Debug
+# HelloWorld	IOSSIM_ARM32_CLANG			Debug
+# HelloWorld	IOSSIM_ARM64_CLANG			Debug
+# HelloWorld	IOSSIM_X86_CLANG			Debug
+# HelloWorld	IOSSIM_X86_64_CLANG			Debug
+# HelloWorld	LINUX_ARM32_CLANG			Debug
+# HelloWorld	LINUX_ARM64_CLANG			Debug
+# HelloWorld	LINUX_X86_CLANG				Debug
+# HelloWorld	LINUX_X86_64_CLANG			Debug
+# HelloWorld	MAC_ARM32_CLANG				Debug
+# HelloWorld	MAC_ARM64_CLANG				Debug
+# HelloWorld	MAC_X86_CLANG				Debug
+# HelloWorld	MAC_X86_64_CLANG			Debug
+# HelloWorld	RASPBERRY_ARM32_CLANG		Debug
+# HelloWorld	RASPBERRY_ARM64_CLANG		Debug
+# HelloWorld	RASPBERRY_X86_CLANG			Debug
+# HelloWorld	RASPBERRY_X86_64_CLANG		Debug
+# HelloWorld 	WIN_ARM32_CLANG				Debug
+# HelloWorld 	WIN_ARM64_CLANG				Debug
+# HelloWorld 	WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
+HelloWorld 		WIN_X86_64_CLANG			Debug
+# HelloWorld 	WIN_ARM32_GCC				Debug
+# HelloWorld 	WIN_ARM64_GCC				Debug
+# HelloWorld 	WIN_X86_GCC					Debug
+# HelloWorld 	WIN_X86_64_GCC				Debug
+# HelloWorld 	WIN_ARM32_MSVC				Debug
+# HelloWorld 	WIN_ARM64_MSVC				Debug
+HelloWorld 		WIN_X86_MSVC				Debug
+HelloWorld 		WIN_X86_64_MSVC				Debug
+HelloWorld 		WIN_X86_MINGW 				Debug	#FIXME: Change to WIN_X86_GCC_MINGW32
+HelloWorld 		WIN_X86_64_MINGW 			Debug	#FIXME: Change to WIN_X86_64_GCC_MINGW64
+HelloWorld 		WIN_X86_64_UCRT 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
 
 
-
-
-DKCore 			ANDROID_ARM32_CLANG 		Debug
+############ DKCore ############
+DKCore 			ANDROID_ARM32_CLANG			Debug
 DKCore 			ANDROID_ARM64_CLANG 		Debug
-DKCore 			COSMOPOLITAN 				Debug
-DKCore 			EMSCRIPTEN 					Debug
-DKCore 			WIN_X86_MINGW 				Debug
-DKCore 			WIN_X86_MSVC 				Debug
-DKCore 			WIN_X86_64_CLANG 			Debug
-DKCore 			WIN_X86_64_MINGW 			Debug
-DKCore 			WIN_X86_64_MSVC 			Debug
-DKCore 			WIN_X86_64_UCRT 			Debug
-DKJavascript 	ANDROID_ARM32_CLANG 		Debug
+# DKCore 		ANDROID_X86_CLANG			Debug
+# DKCore 		ANDROID_X86_64_CLANG 		Debug
+# DKCore 		COSMOPOLITAN 				Debug
+# DKCore 		EMSCRIPTEN_ARM32_CLANG		Debug
+# DKCore 		EMSCRIPTEN_ARM64_64_CLANG	Debug
+DKCore 			EMSCRIPTEN_X86_CLANG		Debug
+# DKCore 		EMSCRIPTEN_X86_64_CLANG		Debug
+# DKCore		IOS_ARM32_CLANG				Debug
+# DKCore		IOS_ARM64_CLANG				Debug
+# DKCore		IOS_X86_CLANG				Debug
+# DKCore		IOS_X86_64_CLANG			Debug
+# DKCore		IOSSIM_ARM32_CLANG			Debug
+# DKCore		IOSSIM_ARM64_CLANG			Debug
+# DKCore		IOSSIM_X86_CLANG			Debug
+# DKCore		IOSSIM_X86_64_CLANG			Debug
+# DKCore		LINUX_ARM32_CLANG			Debug
+# DKCore		LINUX_ARM64_CLANG			Debug
+# DKCore		LINUX_X86_CLANG				Debug
+# DKCore		LINUX_X86_64_CLANG			Debug
+# DKCore		MAC_ARM32_CLANG				Debug
+# DKCore		MAC_ARM64_CLANG				Debug
+# DKCore		MAC_X86_CLANG				Debug
+# DKCore		MAC_X86_64_CLANG			Debug
+# DKCore		RASPBERRY_ARM32_CLANG		Debug
+# DKCore		RASPBERRY_ARM64_CLANG		Debug
+# DKCore		RASPBERRY_X86_CLANG			Debug
+# DKCore		RASPBERRY_X86_64_CLANG		Debug
+# DKCore 		WIN_ARM32_CLANG				Debug
+# DKCore 		WIN_ARM64_CLANG				Debug
+# DKCore 		WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
+DKCore 			WIN_X86_64_CLANG			Debug
+# DKCore 		WIN_ARM32_GCC				Debug
+# DKCore 		WIN_ARM64_GCC				Debug
+# DKCore 		WIN_X86_GCC					Debug
+# DKCore 		WIN_X86_64_GCC				Debug
+# DKCore 		WIN_ARM32_MSVC				Debug
+# DKCore 		WIN_ARM64_MSVC				Debug
+DKCore 			WIN_X86_MSVC				Debug
+DKCore 			WIN_X86_64_MSVC				Debug
+DKCore 			WIN_X86_MINGW 				Debug	#FIXME: Change to WIN_X86_GCC_MINGW32
+DKCore 			WIN_X86_64_MINGW 			Debug	#FIXME: Change to WIN_X86_64_GCC_MINGW64
+DKCore 			WIN_X86_64_UCRT 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
+
+
+############ DKJavascript ############
+DKJavascript 	ANDROID_ARM32_CLANG			Debug
 DKJavascript 	ANDROID_ARM64_CLANG 		Debug
-DKJavascript 	COSMOPOLITAN 				Debug
-DKJavascript 	EMSCRIPTEN 					Debug
-DKJavascript 	WIN_X86_MINGW 				Debug
-DKJavascript 	WIN_X86_MSVC 				Debug
-DKJavascript 	WIN_X86_64_CLANG 			Debug
-DKJavascript 	WIN_X86_64_MINGW 			Debug
-DKJavascript 	WIN_X86_64_MSVC 			Debug
-DKJavascript 	WIN_X86_64_UCRT 			Debug
-DKSDL 			ANDROID_ARM32_CLANG 		Debug
+# DKJavascript 	ANDROID_X86_CLANG			Debug
+# DKJavascript 	ANDROID_X86_64_CLANG 		Debug
+# DKJavascript 	COSMOPOLITAN 				Debug
+# DKJavascript 	EMSCRIPTEN_ARM32_CLANG		Debug
+# DKJavascript 	EMSCRIPTEN_ARM64_64_CLANG	Debug
+DKJavascript 	EMSCRIPTEN_X86_CLANG		Debug
+# DKJavascript 	EMSCRIPTEN_X86_64_CLANG		Debug
+# DKJavascript	IOS_ARM32_CLANG				Debug
+# DKJavascript	IOS_ARM64_CLANG				Debug
+# DKJavascript	IOS_X86_CLANG				Debug
+# DKJavascript	IOS_X86_64_CLANG			Debug
+# DKJavascript	IOSSIM_ARM32_CLANG			Debug
+# DKJavascript	IOSSIM_ARM64_CLANG			Debug
+# DKJavascript	IOSSIM_X86_CLANG			Debug
+# DKJavascript	IOSSIM_X86_64_CLANG			Debug
+# DKJavascript	LINUX_ARM32_CLANG			Debug
+# DKJavascript	LINUX_ARM64_CLANG			Debug
+# DKJavascript	LINUX_X86_CLANG				Debug
+# DKJavascript	LINUX_X86_64_CLANG			Debug
+# DKJavascript	MAC_ARM32_CLANG				Debug
+# DKJavascript	MAC_ARM64_CLANG				Debug
+# DKJavascript	MAC_X86_CLANG				Debug
+# DKJavascript	MAC_X86_64_CLANG			Debug
+# DKJavascript	RASPBERRY_ARM32_CLANG		Debug
+# DKJavascript	RASPBERRY_ARM64_CLANG		Debug
+# DKJavascript	RASPBERRY_X86_CLANG			Debug
+# DKJavascript	RASPBERRY_X86_64_CLANG		Debug
+# DKJavascript 	WIN_ARM32_CLANG				Debug
+# DKJavascript 	WIN_ARM64_CLANG				Debug
+# DKJavascript 	WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
+DKJavascript 	WIN_X86_64_CLANG			Debug
+# DKJavascript 	WIN_ARM32_GCC				Debug
+# DKJavascript 	WIN_ARM64_GCC				Debug
+# DKJavascript 	WIN_X86_GCC					Debug
+# DKJavascript 	WIN_X86_64_GCC				Debug
+# DKJavascript 	WIN_ARM32_MSVC				Debug
+# DKJavascript 	WIN_ARM64_MSVC				Debug
+DKJavascript 	WIN_X86_MSVC				Debug
+DKJavascript 	WIN_X86_64_MSVC				Debug
+DKJavascript 	WIN_X86_MINGW 				Debug	#FIXME: Change to WIN_X86_GCC_MINGW32
+DKJavascript 	WIN_X86_64_MINGW 			Debug	#FIXME: Change to WIN_X86_64_GCC_MINGW64
+DKJavascript 	WIN_X86_64_UCRT 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
+
+
+############ DKSDL ############
+DKSDL 			ANDROID_ARM32_CLANG			Debug
 DKSDL 			ANDROID_ARM64_CLANG 		Debug
-DKSDL 			COSMOPOLITAN 				Debug
-DKSDL 			EMSCRIPTEN 					Debug
-DKSDL 			WIN_X86_MINGW 				Debug
-DKSDL 			WIN_X86_MSVC 				Debug
-DKSDL 			WIN_X86_64_CLANG 			Debug
-DKSDL 			WIN_X86_64_MINGW 			Debug
-DKSDL 			WIN_X86_64_MSVC 			Debug
-DKSDL 			WIN_X86_64_UCRT 			Debug
-DKSDLRml	 	ANDROID_ARM32_CLANG 		Debug
+# DKSDL 		ANDROID_X86_CLANG			Debug
+# DKSDL 		ANDROID_X86_64_CLANG 		Debug
+# DKSDL 		COSMOPOLITAN 				Debug
+# DKSDL 		EMSCRIPTEN_ARM32_CLANG		Debug
+# DKSDL 		EMSCRIPTEN_ARM64_64_CLANG	Debug
+DKSDL 			EMSCRIPTEN_X86_CLANG		Debug
+# DKSDL 		EMSCRIPTEN_X86_64_CLANG		Debug
+# DKSDL			IOS_ARM32_CLANG				Debug
+# DKSDL			IOS_ARM64_CLANG				Debug
+# DKSDL			IOS_X86_CLANG				Debug
+# DKSDL			IOS_X86_64_CLANG			Debug
+# DKSDL			IOSSIM_ARM32_CLANG			Debug
+# DKSDL			IOSSIM_ARM64_CLANG			Debug
+# DKSDL			IOSSIM_X86_CLANG			Debug
+# DKSDL			IOSSIM_X86_64_CLANG			Debug
+# DKSDL			LINUX_ARM32_CLANG			Debug
+# DKSDL			LINUX_ARM64_CLANG			Debug
+# DKSDL			LINUX_X86_CLANG				Debug
+# DKSDL			LINUX_X86_64_CLANG			Debug
+# DKSDL			MAC_ARM32_CLANG				Debug
+# DKSDL			MAC_ARM64_CLANG				Debug
+# DKSDL			MAC_X86_CLANG				Debug
+# DKSDL			MAC_X86_64_CLANG			Debug
+# DKSDL			RASPBERRY_ARM32_CLANG		Debug
+# DKSDL			RASPBERRY_ARM64_CLANG		Debug
+# DKSDL			RASPBERRY_X86_CLANG			Debug
+# DKSDL			RASPBERRY_X86_64_CLANG		Debug
+# DKSDL 		WIN_ARM32_CLANG				Debug
+# DKSDL 		WIN_ARM64_CLANG				Debug
+# DKSDL 		WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
+DKSDL 			WIN_X86_64_CLANG			Debug
+# DKSDL 		WIN_ARM32_GCC				Debug
+# DKSDL 		WIN_ARM64_GCC				Debug
+# DKSDL 		WIN_X86_GCC					Debug
+# DKSDL 		WIN_X86_64_GCC				Debug
+# DKSDL 		WIN_ARM32_MSVC				Debug
+# DKSDL 		WIN_ARM64_MSVC				Debug
+DKSDL 			WIN_X86_MSVC				Debug
+DKSDL 			WIN_X86_64_MSVC				Debug
+DKSDL 			WIN_X86_MINGW 				Debug	#FIXME: Change to WIN_X86_GCC_MINGW32
+DKSDL 			WIN_X86_64_MINGW 			Debug	#FIXME: Change to WIN_X86_64_GCC_MINGW64
+DKSDL 			WIN_X86_64_UCRT 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
+
+
+############ DKSDLRml ############
+DKSDLRml 		ANDROID_ARM32_CLANG			Debug
 DKSDLRml 		ANDROID_ARM64_CLANG 		Debug
-DKSDLRml 		COSMOPOLITAN 				Debug
-DKSDLRml 		EMSCRIPTEN 					Debug
-DKSDLRml 		WIN_X86_MINGW 				Debug
-DKSDLRml 		WIN_X86_MSVC 				Debug
-DKSDLRml 		WIN_X86_64_CLANG 			Debug
-DKSDLRml 		WIN_X86_64_MINGW 			Debug
-DKSDLRml 		WIN_X86_64_MSVC 			Debug
-DKSDLRml 		WIN_X86_64_UCRT 			Debug
-
-
-################### FIXME ###################
-HelloWorld 		WIN_X86_CLANG 			Debug
-DKCore		 	WIN_X86_CLANG 			Debug
-DKJavascript 	WIN_X86_CLANG 			Debug
-DKSDL		 	WIN_X86_CLANG 			Debug
-DKSDLRML	 	WIN_X86_CLANG 			Debug
-
-
+# DKSDLRml 		ANDROID_X86_CLANG			Debug
+# DKSDLRml 		ANDROID_X86_64_CLANG 		Debug
+# DKSDLRml 		COSMOPOLITAN 				Debug
+# DKSDLRml 		EMSCRIPTEN_ARM32_CLANG		Debug
+# DKSDLRml 		EMSCRIPTEN_ARM64_64_CLANG	Debug
+DKSDLRml 		EMSCRIPTEN_X86_CLANG		Debug
+# DKSDLRml 		EMSCRIPTEN_X86_64_CLANG		Debug
+# DKSDLRml		IOS_ARM32_CLANG				Debug
+# DKSDLRml		IOS_ARM64_CLANG				Debug
+# DKSDLRml		IOS_X86_CLANG				Debug
+# DKSDLRml		IOS_X86_64_CLANG			Debug
+# DKSDLRml		IOSSIM_ARM32_CLANG			Debug
+# DKSDLRml		IOSSIM_ARM64_CLANG			Debug
+# DKSDLRml		IOSSIM_X86_CLANG			Debug
+# DKSDLRml		IOSSIM_X86_64_CLANG			Debug
+# DKSDLRml		LINUX_ARM32_CLANG			Debug
+# DKSDLRml		LINUX_ARM64_CLANG			Debug
+# DKSDLRml		LINUX_X86_CLANG				Debug
+# DKSDLRml		LINUX_X86_64_CLANG			Debug
+# DKSDLRml		MAC_ARM32_CLANG				Debug
+# DKSDLRml		MAC_ARM64_CLANG				Debug
+# DKSDLRml		MAC_X86_CLANG				Debug
+# DKSDLRml		MAC_X86_64_CLANG			Debug
+# DKSDLRml		RASPBERRY_ARM32_CLANG		Debug
+# DKSDLRml		RASPBERRY_ARM64_CLANG		Debug
+# DKSDLRml		RASPBERRY_X86_CLANG			Debug
+# DKSDLRml		RASPBERRY_X86_64_CLANG		Debug
+# DKSDLRml 		WIN_ARM32_CLANG				Debug
+# DKSDLRml 		WIN_ARM64_CLANG				Debug
+# DKSDLRml 		WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
+DKSDLRml 		WIN_X86_64_CLANG			Debug
+# DKSDLRml 		WIN_ARM32_GCC				Debug
+# DKSDLRml 		WIN_ARM64_GCC				Debug
+# DKSDLRml 		WIN_X86_GCC					Debug
+# DKSDLRml 		WIN_X86_64_GCC				Debug
+# DKSDLRml 		WIN_ARM32_MSVC				Debug
+# DKSDLRml 		WIN_ARM64_MSVC				Debug
+DKSDLRml 		WIN_X86_MSVC				Debug
+DKSDLRml 		WIN_X86_64_MSVC				Debug
+DKSDLRml 		WIN_X86_MINGW 				Debug	#FIXME: Change to WIN_X86_GCC_MINGW32
+DKSDLRml 		WIN_X86_64_MINGW 			Debug	#FIXME: Change to WIN_X86_64_GCC_MINGW64
+DKSDLRml 		WIN_X86_64_UCRT 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64

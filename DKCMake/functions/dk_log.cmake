@@ -71,7 +71,7 @@ dk_if(NOT DEFINED TODO_ENABLE     [[ set(TODO_ENABLE 		1 				CACHE INTERNAL '') 
 dk_if(NOT DEFINED TODO_COLOR      [[ set(TODO_COLOR 		"${blue}" 		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED TODO_TAG        [[ set(TODO_TAG 			"TODO: " 		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED TODO_PAUSE      [[ set(TODO_PAUSE 		0 				CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED TODO_TIMEOUT    [[ set(TODO_TIMEOUT 		1 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED TODO_TIMEOUT    [[ set(TODO_TIMEOUT 		15 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED TODO_TRACE      [[ set(TODO_TRACE 		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED TODO_LINE       [[ set(TODO_LINE 			0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED TODO_HALT       [[ set(TODO_HALT 			0 				CACHE INTERNAL '') ]])
@@ -91,7 +91,7 @@ dk_if(NOT DEFINED FIXME_ENABLE    [[ set(FIXME_ENABLE 		1 				CACHE INTERNAL '')
 dk_if(NOT DEFINED FIXME_COLOR     [[ set(FIXME_COLOR 		"${lyellow}" 	CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FIXME_TAG       [[ set(FIXME_TAG 			"FIXME: " 		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FIXME_PAUSE     [[ set(FIXME_PAUSE 		0 				CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED FIXME_TIMEOUT   [[ set(FIXME_TIMEOUT 		1 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED FIXME_TIMEOUT   [[ set(FIXME_TIMEOUT 		20 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FIXME_TRACE     [[ set(FIXME_TRACE 		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FIXME_LINE      [[ set(FIXME_LINE 		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FIXME_HALT      [[ set(FIXME_HALT 		0 				CACHE INTERNAL '') ]])
@@ -110,9 +110,10 @@ dk_if(NOT DEFINED WARNING_HALT    [[ set(WARNING_HALT 		0 				CACHE INTERNAL '')
 dk_if(NOT DEFINED ERROR_ENABLE    [[ set(ERROR_ENABLE 		1          		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED ERROR_COLOR     [[ set(ERROR_COLOR 		"${lred}" 		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED ERROR_TAG       [[ set(ERROR_TAG 			"ERROR: "   	CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED ERROR_SOUND     [[ set(ERROR_SOUND 		1 				CACHE INTERNAL '') ]])
+set(error_song	"200,1000" "200,1000" "200,1000" "200,1000"	"200,1000")
+dk_if(NOT DEFINED ERROR_SOUND     [[ set(ERROR_SOUND 		error_song		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED ERROR_PAUSE     [[ set(ERROR_PAUSE 		0           	CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED ERROR_TIMEOUT   [[ set(ERROR_TIMEOUT 		1           	CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED ERROR_TIMEOUT   [[ set(ERROR_TIMEOUT 		30           	CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED ERROR_TRACE     [[ set(ERROR_TRACE 		1           	CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED ERROR_LINE      [[ set(ERROR_LINE 		0           	CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED ERROR_HALT      [[ set(ERROR_HALT 		0           	CACHE INTERNAL '') ]])
@@ -121,7 +122,9 @@ dk_if(NOT DEFINED ERROR_HALT      [[ set(ERROR_HALT 		0           	CACHE INTERNA
 dk_if(NOT DEFINED FATAL_ENABLE    [[ set(FATAL_ENABLE 		1 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_COLOR     [[ set(FATAL_COLOR 		"${red}" 		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_TAG       [[ set(FATAL_TAG 			"FATAL: " 		CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED FATAL_SOUND     [[ set(FATAL_SOUND 		1 				CACHE INTERNAL '') ]])
+set(imperial_march "440,500" "440,500" "440,500" "349,350" "523,150" "440,500" "349,350" "523,150" 
+"440,1000" "659,500" "659,500" "659,500" "698,350" "523,150" "415,500" "349,350" "523,150" "440,1000")
+dk_if(NOT DEFINED FATAL_SOUND     [[ set(FATAL_SOUND 		imperial_march	CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_PAUSE     [[ set(FATAL_PAUSE 		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_TIMEOUT   [[ set(FATAL_TIMEOUT		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_TRACE     [[ set(FATAL_TRACE 		1 				CACHE INTERNAL '') ]])
@@ -172,37 +175,7 @@ function(dk_log)
 	endif()
 	if(${_level_}_SOUND) #OR SOUND AND NOT NO_SOUND)
 		dk_echo("${${_level_}_COLOR}*** SOUND_ON_${_level_} ***${clr}")
-		if("${_level_}" STREQUAL "ERROR")
-			set(error_song
-				"200" "1000"
-				"200" "1000"
-				"200" "1000"
-				"200" "1000"
-				"200" "1000")
-				dk_beeps(error_song)
-		endif()
-		if("${_level_}" STREQUAL "FATAL")
-			set(imperial_march 
-				"440,500"
-				"440,500"
-				"440,500" 
-				"349,350" 
-				"523,150" 
-				"440,500" 
-				"349,350" 
-				"523,150" 
-				"440,1000"
-				"659,500" 
-				"659,500" 
-				"659,500" 
-				"698,350" 
-				"523,150" 
-				"415,500" 
-				"349,350" 
-				"523,150" 
-				"440,1000")
-			dk_beeps(imperial_march)
-		endif()
+		dk_beeps(${${_level_}_SOUND})
 	endif()
 	if(${_level_}_PAUSE) #OR PAUSE AND NOT NO_PAUSE)
 		dk_echo("${${_level_}_COLOR}*** PAUSE_ON_${_level_} ***${clr}")
@@ -210,7 +183,7 @@ function(dk_log)
 	endif()
 	if(${_level_}_TIMEOUT) #OR TIMEOUT AND NOT TIMEOUT)
 		dk_echo("${${_level_}_COLOR}*** TIMEOUT_ON_${_level_} ***${clr}")
-		dk_timeout()
+		dk_timeout(${${_level_}_TIMEOUT})
 	endif()
 	if(${_level_}_HALT) #OR HALT AND NOT NO_HALT)
 		dk_echo("${${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
