@@ -29,6 +29,9 @@ dk_pickUpdate() {
 				dk_echo " 8) Clear Screen"
 				dk_echo " 9) Reload"
 				dk_echo "10) Exit"
+				dk_call dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
+				[ -e "${DKBRANCH_DIR}/build_list.txt" ] && dk_echo "echo 11) Run 'build_list.txt'"
+	
 				dk_echo
 				dk_echo " Press Enter To Skip"
 	else
@@ -83,7 +86,10 @@ dk_pickUpdate() {
 	elif [ "${choice}" = "9" ]; then
 		dk_call dk_reload
 	elif [ "${choice}" = "10" ]; then
-		dk_call dk_exit 0	
+		dk_call dk_exit 0
+	elif [ "${choice}" = "11" ]; then	
+		BUILD_LIST_FILE="${DKBRANCH_DIR}/build_list.txt"
+		return()
 	elif [ "${choice}" = "" ]; then
 		UPDATE=1
 	else

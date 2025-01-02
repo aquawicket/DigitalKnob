@@ -21,8 +21,29 @@ dk_buildMain() {
 	
 	while :
 	do
+		if [ -e "${BUILD_LIST_FILE}" ]; then
+			declare -A BUILD_LIST
+			dk_call dk_fileToGrid "${BUILD_LIST_FILE}" BUILD_LIST
+			[ -n ${line-} ] || line=0
+			comment_check="${BUILD_LIST[${line-},0]}"			
+			if [ "${comment_check:0:1}" = "#" ]; then
+				(($line+=1))
+				echo "skipping line . . ."
+			else
+				if [ -n "${BUILD_LIST[${line},2]}" ]; then
+					UPDATE=1
+					target_app="${BUILD_LIST[${line},0]}"
+					target_triple="${BUILD_LIST[${line},1]}"
+					target_type="${BUILD_LIST[${line},2]}"
+					(($line+=1))
+				else
+					BUILD_LIST_FILE=""
+				fi
+			fi
+		fi
+		
 		[ -z "${UPDATE-}" ] 		&& dk_call dk_pickUpdate
-		[ -z "${target_app-}" ]    		&& dk_call dk_target_app
+		[ -z "${target_app-}" ]    	&& dk_call dk_target_app
 		[ -z "${target_triple-}" ] 	&& dk_call dk_target_triple_SET
 		[ -z "${target_type-}" ]    && dk_call dk_target_type
 		
