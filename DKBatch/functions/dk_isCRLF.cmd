@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_isCRLF
-    %dk_call% dk_debugFunc 1 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 1 2
  
     call type "%~1" | %WINDIR%\System32\find.exe "" /v > "%~1.temp"
     set size1=%~z1

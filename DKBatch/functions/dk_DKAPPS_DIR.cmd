@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_DKAPPS_DIR
+::setlocal
 	%dk_call% dk_debugFunc 0 1
 	
 	if "%~1" neq "" (
@@ -26,8 +27,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
 	%dk_call% dk_debugFunc 0
- setlocal
  
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Getting DKAPPS_DIR . . ."

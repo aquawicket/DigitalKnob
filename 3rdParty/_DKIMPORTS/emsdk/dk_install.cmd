@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_install()
 ::#
 :dk_install
+::setlocal
 	%dk_call% dk_debugFunc 0
-:: setlocal
 	
 	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake)" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
@@ -26,8 +26,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
 	%dk_call% dk_debugFunc 0
- setlocal
  
 	%dk_call% dk_install
 %endfunction%

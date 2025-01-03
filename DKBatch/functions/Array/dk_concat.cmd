@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_concat
     %dk_call% dk_debugFunc 2 3
-:: setlocal
+::setlocal
     set "_arrayA_=%~1"
     set "_arrayB_=%~2"
     set "_arrayC_=%~3"

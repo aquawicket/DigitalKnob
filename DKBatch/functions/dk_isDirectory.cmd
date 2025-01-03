@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_isDirectory
-    %dk_call% dk_debugFunc 1 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 1 2
  
     if exist %~1\* (
         if "%~2" neq "" (endlocal & set "%2=true")

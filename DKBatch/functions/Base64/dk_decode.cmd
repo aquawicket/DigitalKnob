@@ -10,8 +10,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://github.com/base64code/examples
 ::#
 :dk_decode
-    %dk_call% dk_debugFunc 1 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 1 2
 	
     set "inputFile=%~1"
     %dk_call% dk_removeExtension %inputFile% outputFile

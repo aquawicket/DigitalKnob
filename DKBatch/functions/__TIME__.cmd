@@ -111,7 +111,7 @@ setlocal
 %endfunction%
 
 :::dk_getHour
-:::: setlocal
+::::setlocal
 	%dk_call% dk_debugFunc 0
 :: 
 ::    set hour=%time:~0,2%

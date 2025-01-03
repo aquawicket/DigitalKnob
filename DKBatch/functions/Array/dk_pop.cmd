@@ -18,8 +18,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 ::#
 :dk_pop
-    %dk_call% dk_debugFunc 1 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 1 2
     
     %dk_call% Array::dk_length %~1 _length_
     set /a _length_-=1

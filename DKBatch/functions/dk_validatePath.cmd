@@ -9,7 +9,7 @@ if exist "!%~1!" (%return%)
 ::#
 :dk_validatePath
     %dk_call% dk_debugFunc 2
-:: setlocal
+::setlocal
 
     ::%dk_call% dk_stringContains "%~2" "call" || %dk_call% dk_error "dk_validate parameter 2 requires the use of call"
     %~2

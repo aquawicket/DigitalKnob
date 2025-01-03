@@ -7,8 +7,8 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
 ::#
 ::#
 :dk_exit
-    %dk_call% dk_debugFunc 0 1
- ::setlocal
+::setlocal
+	%dk_call% dk_debugFunc 0 1
  
 	if "%~1" gtr "%EXIT_CODE%" %dk_call% dk_set EXIT_CODE %~1
     ::echo dk_exit %~1

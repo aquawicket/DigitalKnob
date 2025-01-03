@@ -7,8 +7,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_install
 ::#
 :dk_install
+::setlocal
 	%dk_call% dk_debugFunc 0
-:: setlocal
  
     set "MACRO_PACK_DL=https://github.com/sevagas/macro_pack/releases/download/v2.2.0/macro_pack.exe"
 	if not defined MACRO_PACK_DL   %dk_call% dk_error "MACRO_PACK_DL is invalid"
@@ -34,8 +34,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
 	%dk_call% dk_debugFunc 0
- setlocal
  
 	%dk_call% dk_install
 %endfunction%

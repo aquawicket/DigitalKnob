@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_POWERSHELL_EXE
-:: setlocal
+::setlocal
 	%dk_call% dk_debugFunc 0
    
     if defined POWERSHELL_EXE %return%

@@ -13,8 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 ::#
 :dk_color
-    %dk_call% dk_debugFunc 0 1
-:: setlocal
+::setlocal
+	%dk_call% dk_debugFunc 0 1
 
     set "USE_COLOR=1"
     if defined %1 if %1 equ 0 set "USE_COLOR=" 

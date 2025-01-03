@@ -7,8 +7,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#  https://stackoverflow.com/a/17584764
 ::#
 :dk_isAlphanumeric
-    %dk_call% dk_debugFunc 1 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 1 2
  
     ::set "arg1=%~1"
     ::if defined "%~1" call set "arg1=%%%arg1%%%"

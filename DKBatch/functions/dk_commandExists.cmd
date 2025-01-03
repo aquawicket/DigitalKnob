@@ -5,8 +5,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_commandExists(<command> rtn_var)
 ::#
 :dk_commandExists
-    %dk_call% dk_debugFunc 1 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 1 2
  
     ::%dk_call% dk_set command "%~1"
     %ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"

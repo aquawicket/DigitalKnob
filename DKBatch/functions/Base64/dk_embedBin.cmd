@@ -9,8 +9,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://stackoverflow.com/a/19596027/688352
 ::#
 :dk_embedBin
-    %dk_call% dk_debugFunc 1 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 1 2
 	
     set "inputFile=%~1"
 	set "inputFilename=%~nx1"

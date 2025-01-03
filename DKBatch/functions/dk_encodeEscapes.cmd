@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_encodeEscapes
     %dk_call% dk_debugFunc 1 2
-:: setlocal
+::setlocal
    
     set org=%*
     if defined %* call set "org=%%%org%%%"  &:: FIXME: remove the need for call here

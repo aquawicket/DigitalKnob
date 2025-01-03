@@ -21,6 +21,7 @@ if not defined DKINIT if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+	setlocal
 	%dk_call% dk_debugFunc 0
 
 	call myFunction
