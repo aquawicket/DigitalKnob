@@ -9,6 +9,7 @@
 	
 	::### Constant Variables ###
 	if not defined dk_call 		(set "dk_call=call dk_call")
+	if not defined endfunction  (set "endfunction=exit /b %errorlevel%")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
 	(set "pad=")
 	(set "padB=      ")
@@ -57,11 +58,7 @@
 		set "line=%%a"
 		set "!line:GLOBAL_=!"
     )
-	
-	::call :printStackVariables
-	
-	
-exit /b %errorlevel%
+%endfunction%
 
 
 :printConstantVariables
@@ -69,7 +66,7 @@ exit /b %errorlevel%
 	if defined GLOBAL_FILE	(echo %padB% GLOBAL_FILE	= %GLOBAL_FILE%)
 	if defined indent		(echo %padB% indent			= %indent%)
 	if defined pad			(echo %padB% pad			= %pad%)
-exit /b %errorlevel%
+%endfunction%
 
 :printStackVariables
 	if defined LVL			(echo %padB% LVL  = %LVL%)
@@ -78,7 +75,7 @@ exit /b %errorlevel%
 	if defined FUNC_%LVL%	(echo %padB% FUNC_%LVL% = !FUNC_%LVL%!)
 	if defined ARGV_%LVL%	(echo %padB% ARGV_%LVL% = !ARGV_%LVL%!)
 	if defined ARGC_%LVL%	(echo %padB% ARGC_%LVL% = !ARGC_%LVL%!)
-exit /b %errorlevel%
+%endfunction%
 
 :printParentStackVariables						
 	if defined PLVL        (echo %padB% PLVL  = %PLVL%)
@@ -87,13 +84,13 @@ exit /b %errorlevel%
 	if defined FUNC_%PLVL% (echo %padB% FUNC_%PLVL% = !FUNC_%PLVL%!)
 	if defined ARGV_%PLVL% (echo %padB% ARGV_%PLVL% = !ARGV_%PLVL%!)
 	if defined ARGC_%PLVL% (echo %padB% ARGC_%PLVL% = !ARGC_%PLVL%!)
-exit /b %errorlevel%
+%endfunction%
 
 :setGlobal name value
 	set "%~1=%~2"
 	set "GLOBAL_%~1=%~2"			&:: prefix the variable name with GLOBAL_ and assign a value
 	set GLOBAL_ > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
-exit /b 0
+%endfunction%
 
 :PrintCallStack
 	echo:
@@ -105,5 +102,4 @@ exit /b 0
 		)
 	)
 	echo:
-	pause
-exit /b 0
+%endfunction%

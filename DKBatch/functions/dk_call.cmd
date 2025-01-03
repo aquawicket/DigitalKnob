@@ -108,10 +108,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 :printConstantVariables
 	if defined dk_call		(echo %padB% dk_call		= %dk_call%)
-	if defined GLOBAL_FILE 	(echo %padB% GLOBAL_FILE	= %GLOBAL_FILE%)
+	if defined GLOBAL_FILE	(echo %padB% GLOBAL_FILE	= %GLOBAL_FILE%)
 	if defined indent		(echo %padB% indent			= %indent%)
 	if defined pad			(echo %padB% pad			= %pad%)
-%endfunction%
+exit /b %errorlevel%
 
 :printStackVariables
 	if defined LVL			(echo %padB% LVL  = %LVL%)
@@ -120,49 +120,35 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if defined FUNC_%LVL%	(echo %padB% FUNC_%LVL% = !FUNC_%LVL%!)
 	if defined ARGV_%LVL%	(echo %padB% ARGV_%LVL% = !ARGV_%LVL%!)
 	if defined ARGC_%LVL%	(echo %padB% ARGC_%LVL% = !ARGC_%LVL%!)
-%endfunction%
+exit /b %errorlevel%
 
-:printDirectVariables
-	if defined LVL	(echo %padB% LVL	= %LVL%)
-	if defined CMND	(echo %padB% CMND	= %CMND%)
-	if defined FILE	(echo %padB% FILE	= %FILE%)
-	if defined FUNC	(echo %padB% FUNC	= %FUNC%)
-	if defined ARGV	(echo %padB% ARGV	= %ARGV%)
-	if defined ARGC	(echo %padB% ARGC	= %ARGC%)
-%endfunction%
-
-:printParentStackVariables					
-	if defined PLVL			(echo %padB% PLVL  = %PLVL%)
-	if defined CMND_%PLVL%	(echo %padB% CMND_%PLVL% = !CMND_%PLVL%!)
-	if defined FILE_%PLVL%	(echo %padB% FILE_%PLVL% = !FILE_%PLVL%!)
-	if defined FUNC_%PLVL%	(echo %padB% FUNC_%PLVL% = !FUNC_%PLVL%!)
-	if defined ARGV_%PLVL%	(echo %padB% ARGV_%PLVL% = !ARGV_%PLVL%!)
-	if defined ARGC_%PLVL%	(echo %padB% ARGC_%PLVL% = !ARGC_%PLVL%!)
-%endfunction%
-
-:printParentDirectVariables						
-	if defined PCMND.(echo %padB% PCMND = %PCMND%)
-	if defined PFILE (echo %padB% PFILE = %PFILE%)
-	if defined PFUNC (echo %padB% PFUNC = %PFUNC%)
-	if defined PARGV (echo %padB% PARGV = %PARGV%)
-	if defined PARGC (echo %padB% PARGC = %PARGC%)
-%endfunction%
+:printParentStackVariables						
+	if defined PLVL        (echo %padB% PLVL  = %PLVL%)
+	if defined CMND_%PLVL% (echo %padB% CMND_%PLVL% = !CMND_%PLVL%!)
+	if defined FILE_%PLVL% (echo %padB% FILE_%PLVL% = !FILE_%PLVL%!)
+	if defined FUNC_%PLVL% (echo %padB% FUNC_%PLVL% = !FUNC_%PLVL%!)
+	if defined ARGV_%PLVL% (echo %padB% ARGV_%PLVL% = !ARGV_%PLVL%!)
+	if defined ARGC_%PLVL% (echo %padB% ARGC_%PLVL% = !ARGC_%PLVL%!)
+exit /b %errorlevel%
 
 :setGlobal name value
 	set "%~1=%~2"
 	set "GLOBAL_%~1=%~2"			&:: prefix the variable name with GLOBAL_ and assign a value
 	set GLOBAL_ > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
-%endfunction%
+exit /b 0
 
-:dk_printCallStack
+:PrintCallStack
 	echo:
 	echo ############ CALLSTACK ############
 	for /l %%x in (1, 1, 100) do (
 		(set /a num=100-%%x)
-		if defined STACK_!num! (call echo !num!: %%STACK_!num!%%)
+		if defined CMND_!num! (
+			call echo !num!: %%CMND_!num!%%
+		)
 	)
 	echo:
-%endfunction%
+	pause
+exit /b 0
 
 
 
