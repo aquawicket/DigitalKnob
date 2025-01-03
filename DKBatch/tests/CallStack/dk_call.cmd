@@ -9,6 +9,7 @@
 	
 	if not defined endfunction  (set "endfunction=exit /b %errorlevel%")
 	
+	:: don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
 	(set "temp=%*")
 	if "!temp:~0,1!"==":" (call %temp% && %endfunction%)
 	
@@ -40,18 +41,18 @@
 	(call :setGlobal "ARGC_%LVL%" "%ARGC%")
 	
 	::###### Print function entry #####
-	echo %pad%╚═► !FUNC_%LVL%!(!ARGV_%LVL%!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	echo %pad%╚═► !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
 	call :printStackVariables
 	::##################################
 	
 	if %LVL% lss 1 (%endfunction%)
 	
 ::###### Entry ############################################################################################
-	call !FUNC_%LVL%! !ARGV_%LVL%!
+	call !FUNC! !ARGV!
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
-	echo %pad%╔══ !FUNC_%LVL%!(!ARGV_%LVL%!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	echo %pad%╔══ !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
 	echo %pad%▼
 	::#################################
 	
@@ -62,7 +63,6 @@
 	(call :setGlobal "ARGC_%LVL%" "")
 	(set /a "PLVL=LVL")
 	(set /a "LVL-=1")
-	
 	
 	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
 	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
@@ -103,7 +103,7 @@
 	set GLOBAL_ > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
 %endfunction%
 
-:PrintCallStack
+:printCallStack
 	echo:
 	echo ############ CALLSTACK ############
 	for /l %%x in (1, 1, 100) do (
