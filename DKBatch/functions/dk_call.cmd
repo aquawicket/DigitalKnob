@@ -1,6 +1,8 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
+::(set LiveCallStack=1)
+
 ::####################################################################
 ::# dk_call(command args)
 ::#
@@ -45,11 +47,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(call :setGlobal __ARGV__%LVL% %__ARGV__%)
 	(call :setGlobal __ARGC__%LVL% %__ARGC__%)
 
-	::###### Print function entry #####
-	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
-	if not "%_codepage_%"=="65001" (chcp 65001>nul)
-	echo %pad%╚═► !__FUNC__!(!__ARGV__!)	&:: https://en.wikipedia.org/wiki/Code_page_437
-	call :printStackVariables
+	::###### Print function entry ####
+	if defined LiveCallStack (call :printEntry)
 	::##################################
 
 	if %LVL% lss 1 (%endfunction%)
@@ -77,8 +76,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
-	echo %pad%╔══ !__FUNC__!(!__ARGV__!)	&:: https://en.wikipedia.org/wiki/Code_page_437
-	echo %pad%▼
+	if defined LiveCallStack (call :printExit)
 	::#################################
 	
 	::###### Globalize the <STACK>_LVL variables
@@ -105,7 +103,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 
+:printEntry
+	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
+	if not "%_codepage_%"=="65001" chcp 65001>nul
+	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
+	call :printStackVariables
+%endfunction%
 
+:printExit
+	echo %pad%╔══ !__FUNC__!(!__ARGV__!)
+	echo %pad%▼
+%endfunction%
 
 :printConstantVariables
 	if defined dk_call		(echo %padB% dk_call		= %dk_call%)
