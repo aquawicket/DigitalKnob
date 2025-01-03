@@ -41,12 +41,16 @@
 	call !FUNC_%LVL%! !ARGV_%LVL%!
 ::###### Exit #############################################################################################
 	
+	echo %pad%╔══ !FUNC_%LVL%!(!ARGV_%LVL%!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	echo %pad%▼
+	
 	(call :setGlobal "CMND_%LVL%" "")
 	(call :setGlobal "FILE_%LVL%" "")
 	(call :setGlobal "FUNC_%LVL%" "")
 	(call :setGlobal "ARGV_%LVL%" "")
 	(call :setGlobal "ARGC_%LVL%" "")
 	(set /a LVL-=1)
+	(set /a PLVL=LVL+1)
 	
 	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
 	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
@@ -54,10 +58,9 @@
 		set "!line:GLOBAL_=!"
     )
 	
-	call :printStackVariables
+	::call :printStackVariables
 	
-	echo %pad%╔══ !FUNC_%LVL%!(!ARGV_%LVL%!)	&:: https://en.wikipedia.org/wiki/Code_page_437
-	echo %pad%▼
+	
 exit /b %errorlevel%
 
 
@@ -90,4 +93,17 @@ exit /b %errorlevel%
 	set "%~1=%~2"
 	set "GLOBAL_%~1=%~2"			&:: prefix the variable name with GLOBAL_ and assign a value
 	set GLOBAL_ > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
+exit /b 0
+
+:PrintCallStack
+	echo:
+	echo ############ CALLSTACK ############
+	for /l %%x in (1, 1, 100) do (
+		(set /a num=100-%%x)
+		if defined CMND_!num! (
+			call echo !num!: %%CMND_!num!%%
+		)
+	)
+	echo:
+	pause
 exit /b 0
