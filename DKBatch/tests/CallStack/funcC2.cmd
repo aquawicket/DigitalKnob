@@ -2,7 +2,10 @@
 
 :funcC2
 setlocal enableDelayedExpansion
-	
+%dk_call% :PrintCallStack
+
+	echo inside funcC2
 	set "LOCAL_VAR=local C2"
 
-exit /b 0
+%dk_call% :PrintCallStack
+%endfunction%

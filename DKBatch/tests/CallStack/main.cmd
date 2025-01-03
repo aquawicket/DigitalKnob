@@ -2,6 +2,7 @@
 Chcp 65001>nul
 setlocal enableDelayedExpansion
 call dk_call %0
+
 :main
 %dk_call% :PrintCallStack
 

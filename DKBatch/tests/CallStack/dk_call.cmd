@@ -7,51 +7,62 @@
 :dk_call
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
+	if not defined endfunction  (set "endfunction=exit /b %errorlevel%")
+	
+	(set "temp=%*")
+	if "!temp:~0,1!"==":" (call %temp% && %endfunction%)
+	
 	::### Constant Variables ###
 	if not defined dk_call 		(set "dk_call=call dk_call")
-	if not defined endfunction  (set "endfunction=exit /b %errorlevel%")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
+	if not defined LVL			(set /a "LVL=-1")
 	(set "pad=")
 	(set "padB=      ")
 	(set "indent=        ")
-	
+
 	::###### Stack Variables ######
-	if not defined LVL 	(set /a "LVL=-1")
+	(set "CMND=%~1") && (set "CMND=!CMND:::=\%!")
+	(set "FILE=%~dpnx1")
+	(set "FUNC=%~n1")
+	(set "ARGV=%*")
+	(set "ARGV=!ARGV:%~1 =!")
+	(set "ARGC=0") && for %%a in (%ARGV%) do (set /a "ARGC+=1")
+	
+	::###### Globalize the <STACK>_LVL variables
+	(set /a "PLVL=LVL")
 	(set /a "LVL+=1")
 	for /l %%x in (1, 1, %LVL%) do (set "pad=!pad!%indent%")
 	for /l %%x in (1, 1, %LVL%) do (set "padB=!padB!%indent%")	
-	(set "CMND=%~1")
-	(call :setGlobal "CMND_%LVL%" "%CMND:::=\%")
-	(call :setGlobal "FILE_%LVL%" "%~dpnx1")
-	(call :setGlobal "FUNC_%LVL%" "%~n1")
-	(set "ARGV=%*")
+	(call :setGlobal "CMND_%LVL%" "%CMND%")
+	(call :setGlobal "FILE_%LVL%" "%FILE%")
+	(call :setGlobal "FUNC_%LVL%" "%FUNC%")
 	(call :setGlobal "ARGV_%LVL%" "%ARGV%")
-	(set ARGC=0) && for %%a in (%ARGV%) do (set /a ARGC+=1)
 	(call :setGlobal "ARGC_%LVL%" "%ARGC%")
 	
-	::###### Parent Stack Variables ######	
-	(set /a "PLVL=LVL-1")
-	
-	:: https://en.wikipedia.org/wiki/Code_page_437║
-	echo %pad%╚═► !FUNC_%LVL%!(!ARGV_%LVL%!)
+	::###### Print function entry #####
+	echo %pad%╚═► !FUNC_%LVL%!(!ARGV_%LVL%!)	&:: https://en.wikipedia.org/wiki/Code_page_437
 	call :printStackVariables
+	::##################################
 	
-	if %LVL% lss 1 (exit /b %errorlevel%)
-	::if "!FUNC_%LVL%!"=="setGlobal" (set FUNC_%LVL%=:setGlobal)
+	if %LVL% lss 1 (%endfunction%)
+	
 ::###### Entry ############################################################################################
 	call !FUNC_%LVL%! !ARGV_%LVL%!
 ::###### Exit #############################################################################################
 	
+	::###### Print function exit ######
 	echo %pad%╔══ !FUNC_%LVL%!(!ARGV_%LVL%!)	&:: https://en.wikipedia.org/wiki/Code_page_437
 	echo %pad%▼
+	::#################################
 	
 	(call :setGlobal "CMND_%LVL%" "")
 	(call :setGlobal "FILE_%LVL%" "")
 	(call :setGlobal "FUNC_%LVL%" "")
 	(call :setGlobal "ARGV_%LVL%" "")
 	(call :setGlobal "ARGC_%LVL%" "")
-	(set /a LVL-=1)
-	(set /a PLVL=LVL+1)
+	(set /a "PLVL=LVL")
+	(set /a "LVL-=1")
+	
 	
 	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
 	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
@@ -97,9 +108,8 @@
 	echo ############ CALLSTACK ############
 	for /l %%x in (1, 1, 100) do (
 		(set /a num=100-%%x)
-		if defined CMND_!num! (
-			call echo !num!: %%CMND_!num!%%
-		)
+		if defined CMND_!num! (call echo !num!: %%CMND_!num!%%)
 	)
+	echo ###################################
 	echo:
 %endfunction%
