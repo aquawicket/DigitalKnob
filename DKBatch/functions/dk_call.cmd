@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not defined dk_call		(set "dk_call=call dk_call")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
 	if not defined LVL			(set /a "LVL=-1")
-	if not defined CODEPAGE		(set CODEPAGE=1 && Chcp 65001>nul)
+	::if not defined CODEPAGE		(set CODEPAGE=1 && Chcp 65001>nul)
 	(set "pad=")
 	(set "padB=      ")
 	(set "indent=        ")
@@ -42,13 +42,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(call :setGlobal "ARGC_%LVL%" "%ARGC%")
 
 	::###### Print function entry #####
-	echo %pad%╚═► !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
-	call :printStackVariables
+::	echo %pad%╚═► !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+::	call :printStackVariables
 	::##################################
 
 	if %LVL% lss 1 (%endfunction%)
 
-::###############################################################################################################################################
+::##### Prepair ###########################################################################################
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%CMND%.cmd" (set "CMND=%DKBATCH_FUNCTIONS_DIR_%%CMND%.cmd")
 	
 	if not exist "%CMND%" (
@@ -72,8 +72,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
-	echo %pad%╔══ !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
-	echo %pad%▼
+::	echo %pad%╔══ !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+::	echo %pad%▼
 	::#################################
 	
 	(call :setGlobal "CMND_%LVL%" "")
