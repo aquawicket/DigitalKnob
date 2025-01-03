@@ -17,16 +17,17 @@
 	if not defined dk_call 		(set "dk_call=call dk_call")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
 	if not defined LVL			(set /a "LVL=-1")
+	if not defined CODEPAGE		(set CODEPAGE=1 && Chcp 65001>nul)
 	(set "pad=")
 	(set "padB=      ")
 	(set "indent=        ")
 
 	::###### Stack Variables ######
-	(set "CMND=%~1") && (set "CMND=!CMND:::=\%!")
+	(set "CMND=%~1") && (set "CMND=!CMND:::=\!")
 	(set "FILE=%~dpnx1")
 	(set "FUNC=%~n1")
 	(set "ARGV=%*")
-	(set "ARGV=!ARGV:%~1 =!")
+	(set ARGV=!ARGV:%~1=!)
 	(set "ARGC=0") && for %%a in (%ARGV%) do (set /a "ARGC+=1")
 	
 	::###### Globalize the <STACK>_LVL variables

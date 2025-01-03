@@ -7,38 +7,50 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_call
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
+	if not defined endfunction  (set "endfunction=exit /b %errorlevel%")
+	
+	:: don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
+	(set "temp=%*")
+	if "!temp:~0,1!"==":" (call %temp% && %endfunction%)
+	
 	::### Constant Variables ###
-	if not defined dk_call 		(set "dk_call=call dk_call")
+	if not defined dk_call		(set "dk_call=call dk_call")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
+	if not defined LVL			(set /a "LVL=-1")
+	if not defined CODEPAGE		(set CODEPAGE=1 && Chcp 65001>nul)
 	(set "pad=")
 	(set "padB=      ")
 	(set "indent=        ")
 	
 	::###### Stack Variables ######
-	if not defined LVL 	(set /a "LVL=-1")
+	(set "CMND=%~1") && (set "CMND=!CMND:::=\!")
+	(set "FILE=%~dpnx1")
+	(set "FUNC=%~n1")
+	(set "ARGV=%*")
+	(set ARGV=!ARGV:%~1=!)
+	(set "ARGC=0") && for %%a in (%ARGV%) do (set /a "ARGC+=1")
+	
+	::###### Globalize the <STACK>_LVL variables
+	(set /a "PLVL=LVL")
 	(set /a "LVL+=1")
 	for /l %%x in (1, 1, %LVL%) do (set "pad=!pad!%indent%")
 	for /l %%x in (1, 1, %LVL%) do (set "padB=!padB!%indent%")	
-	(set "CMND=%~1")
-	::(call :setGlobal "CMND_%LVL%" "%CMND:::=\%")
-	
-::###############################################################################################################################################
-	(set CMND=%CMND:::=\%)
-	(set FILE=%~dpnx1)
-	(set FUNC=%~n1)
-	(set ARGV=%*)
-	(set ARGV=!ARGV:%~1=!)
-	(set /a ARGC=0)
-	for %%a in (!ARGV!) do (set /a ARGC+=1)
+	(call :setGlobal "CMND_%LVL%" "%CMND%")
+	(call :setGlobal "FILE_%LVL%" "%FILE%")
+	(call :setGlobal "FUNC_%LVL%" "%FUNC%")
+	(call :setGlobal "ARGV_%LVL%" "%ARGV%")
+	(call :setGlobal "ARGC_%LVL%" "%ARGC%")
 
-	::call :setGlobal "STACK_%lvl%" "%FUNC%"
-	
-	::if "%FUNC%"=="dk_debugFunc" echo [31m ERROR: dk_call cannot be used with dk_debugFunc [0m & %return%
-	::if "%FUNC:dk_=%"=="%FUNC%"  echo [31m ERROR: dk_call[%FUNC%]: dk_call can only be used with dk_ FUNCtions [0m & %return%
-	
+	::###### Print function entry #####
+	echo %pad%╚═► !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	call :printStackVariables
+	::##################################
+
+	if %LVL% lss 1 (%endfunction%)
+
+::###############################################################################################################################################
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%CMND%.cmd" (set "CMND=%DKBATCH_FUNCTIONS_DIR_%%CMND%.cmd")
 	
-	::if not exist "%DKBATCH_FUNCTIONS_DIR_%%CMND%.cmd" (
 	if not exist "%CMND%" (
 		call dk_source "%CMND%"
 		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%%FUNC%.cmd" echo [31m ERROR: failed to download %CMND%.cmd [0m & %return%
@@ -48,59 +60,35 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     )
 	:dk_exists
 
-::	:dk_call_stack
-::	set /a "frame=%DKSTACK_length%-1"
-::	call set "THIS=%%DKSTACK[%frame%].__FILE__%% %*"
-::	
 	if ERRORLEVEL 1 %dk_call% set "EXIT_CODE=%ERRORLEVEL%"
-	rem if not defined EXIT_CODE (
-		rem set buffer9=%buffer8%
-		rem set buffer8=%buffer7%
-		rem set buffer7=%buffer6%
-		rem set buffer6=%buffer5%
-		rem set buffer5=%buffer4%
-		rem set buffer4=%buffer3%
-		rem set buffer3=%buffer2%
-		rem set buffer2=%buffer1%
-		rem set buffer1=%buffer0%
-		rem set buffer0=%THIS%
-		rem title %buffer%
-	rem )
-
 	if defined EXIT_CODE (
-		rem title %buffer0%
-		rem echo:
-		rem echo ### LAST 10 CALLS - oldest first ###
-		rem echo %buffer9%
-		rem echo %buffer8%
-		rem echo %buffer7%
-		rem echo %buffer6%
-		rem echo %buffer5%
-		rem echo %buffer4%
-		rem echo %buffer3%
-		rem echo %buffer2%
-		rem echo %buffer1%
-		rem echo %buffer0%
-		call dk_printCallStack
+		call :PrintCallStack
 		exit %EXIT_CODE%
 	)
-	::if defined EXIT_CODE (echo ERROR ERROR ERROR ERROR ERROR)
-	::if not defined EXIT_CODE (title "%DKSTACK[0].__FILE__%")
 
 ::###### Entry ############################################################################################
 	::echo dk_call ^> %CMND% %ARGV%
     call %CMND% %ARGV%
 ::###### Exit #############################################################################################
-
-::	call :setGlobal STACK_%lvl% ""
+	
+	::###### Print function exit ######
+	echo %pad%╔══ !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	echo %pad%▼
+	::#################################
+	
+	(call :setGlobal "CMND_%LVL%" "")
+	(call :setGlobal "FILE_%LVL%" "")
+	(call :setGlobal "FUNC_%LVL%" "")
+	(call :setGlobal "ARGV_%LVL%" "")
+	(call :setGlobal "ARGC_%LVL%" "")
+	(set /a "PLVL=LVL")
+	(set /a "LVL-=1")
 	
 	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
-::	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
-::		set "line=%%a"
-::		set "!line:GLOBAL_=!"
-::	)
-	
-	(set /a lvl-=1)
+	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
+		set "line=%%a"
+		set "!line:GLOBAL_=!"
+    )
 %endfunction%
 
 

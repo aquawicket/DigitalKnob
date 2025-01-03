@@ -1,5 +1,4 @@
 @echo off
-Chcp 65001>nul
 setlocal enableDelayedExpansion
 call dk_call %0
 
