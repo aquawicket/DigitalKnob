@@ -11,9 +11,8 @@ if defined %~1 (%return%)
  ::setlocal
     %dk_call% dk_debugFunc 2
 
-
-    ::%dk_call% dk_stringContains "%~2" "call" || %dk_call% dk_error "dk_validate parameter 2 requires the use of call"
-    echo %~2
+    ::%dk_call% dk_stringContains "%~2" "dk_call" || %dk_call% dk_error "dk_validate parameter 2 requires the use of dk_call"
+    ::echo %~2
 	%~2
     
 	if "%~3" equ "NO_HALT" %return%

@@ -17,7 +17,7 @@
 	if not defined dk_call 		(set "dk_call=call dk_call")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
 	if not defined LVL			(set /a "LVL=-1")
-	if not defined CODEPAGE		(set CODEPAGE=1 && Chcp 65001>nul)
+	
 	(set "pad=")
 	(set "padB=      ")
 	(set "indent=        ")
@@ -42,6 +42,8 @@
 	(call :setGlobal "ARGC_%LVL%" "%ARGC%")
 	
 	::###### Print function entry #####
+	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
+	if not "%_codepage_%"=="65001" (chcp 65001>nul)
 	echo %pad%╚═► !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
 	call :printStackVariables
 	::##################################

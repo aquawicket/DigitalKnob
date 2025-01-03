@@ -7,7 +7,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_call
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
-	if not defined endfunction  (set "endfunction=exit /b %errorlevel%")
+	if not defined endfunction  (set endfunction=exit /b %errorlevel%)
+
 	
 	:: don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
 	(set "temp=%*")
@@ -17,78 +18,87 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not defined dk_call		(set "dk_call=call dk_call")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
 	if not defined LVL			(set /a "LVL=-1")
-	::if not defined CODEPAGE		(set CODEPAGE=1 && Chcp 65001>nul)
+	
 	(set "pad=")
 	(set "padB=      ")
 	(set "indent=        ")
 	
 	::###### Stack Variables ######
-	(set "CMND=%~1") && (set "CMND=!CMND:::=\!")
-	(set "FILE=%~dpnx1")
-	(set "FUNC=%~n1")
-	(set "ARGV=%*")
-	(set ARGV=!ARGV:%~1=!)
-	(set "ARGC=0") && for %%a in (%ARGV%) do (set /a "ARGC+=1")
+	(set __TIME__=%time%)
+	(set __CMND__=%~1) && (set __CMND__=!__CMND__:::=\!)
+	(set __FILE__=%~dpnx1)
+	(set __FUNC__=%~n1)
+	for /f "tokens=1,* delims= " %%a in ("%*") do (set __ARGV__=%%b)
+	(set __ARGC__=0) && for %%a in (%__ARGV__%) do (set /a __ARGC__+=1)
 	
 	::###### Globalize the <STACK>_LVL variables
-	(set /a "PLVL=LVL")
-	(set /a "LVL+=1")
-	for /l %%x in (1, 1, %LVL%) do (set "pad=!pad!%indent%")
-	for /l %%x in (1, 1, %LVL%) do (set "padB=!padB!%indent%")	
-	(call :setGlobal "CMND_%LVL%" "%CMND%")
-	(call :setGlobal "FILE_%LVL%" "%FILE%")
-	(call :setGlobal "FUNC_%LVL%" "%FUNC%")
-	(call :setGlobal "ARGV_%LVL%" "%ARGV%")
-	(call :setGlobal "ARGC_%LVL%" "%ARGC%")
+	(set /a PLVL=LVL)
+	(set /a LVL+=1)
+	for /l %%x in (1, 1, %LVL%) do (set pad=!pad!%indent%)
+	for /l %%x in (1, 1, %LVL%) do (set padB=!padB!%indent%)
+	(call :setGlobal __CMND__%LVL% %__CMND__%)
+	(call :setGlobal __FILE__%LVL% %__FILE__%)
+	(call :setGlobal __FUNC__%LVL% %__FUNC__%)
+	(call :setGlobal __ARGV__%LVL% %__ARGV__%)
+	(call :setGlobal __ARGC__%LVL% %__ARGC__%)
 
 	::###### Print function entry #####
-::	echo %pad%╚═► !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+::	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
+::	if not "%_codepage_%"=="65001" (chcp 65001>nul)
+::	echo %pad%╚═► !__FUNC__!(!__ARGV__!)	&:: https://en.wikipedia.org/wiki/Code_page_437
 ::	call :printStackVariables
 	::##################################
 
 	if %LVL% lss 1 (%endfunction%)
 
 ::##### Prepair ###########################################################################################
-	if exist "%DKBATCH_FUNCTIONS_DIR_%%CMND%.cmd" (set "CMND=%DKBATCH_FUNCTIONS_DIR_%%CMND%.cmd")
+	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd)
 	
-	if not exist "%CMND%" (
-		call dk_source "%CMND%"
-		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%%FUNC%.cmd" echo [31m ERROR: failed to download %CMND%.cmd [0m & %return%
+	if not exist "%__CMND__%" (
+		call dk_source "%__CMND__%"
+		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%%__FUNC__%.cmd" echo [31m ERROR: failed to download %__CMND__%.cmd [0m & %return%
 		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_source dk_isCRLF
 		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
-		rem if exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR_%%CMND%.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR_%%CMND%.cmd"
+		rem if exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd"
     )
-	:dk_exists
 
-	if ERRORLEVEL 1 %dk_call% set "EXIT_CODE=%ERRORLEVEL%"
+	if ERRORLEVEL 1 %dk_call% (set EXIT_CODE=%ERRORLEVEL%)
 	if defined EXIT_CODE (
 		call :PrintCallStack
 		exit %EXIT_CODE%
 	)
 
 ::###### Entry ############################################################################################
-	::echo dk_call ^> %CMND% %ARGV%
-    call %CMND% %ARGV%
+::	echo dk_call ^> %__CMND__% !__ARGV__!
+    call %__CMND__% %__ARGV__%
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
-::	echo %pad%╔══ !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+::	echo %pad%╔══ !__FUNC__!(!__ARGV__!)	&:: https://en.wikipedia.org/wiki/Code_page_437
 ::	echo %pad%▼
 	::#################################
 	
-	(call :setGlobal "CMND_%LVL%" "")
-	(call :setGlobal "FILE_%LVL%" "")
-	(call :setGlobal "FUNC_%LVL%" "")
-	(call :setGlobal "ARGV_%LVL%" "")
-	(call :setGlobal "ARGC_%LVL%" "")
-	(set /a "PLVL=LVL")
-	(set /a "LVL-=1")
+	::###### Globalize the <STACK>_LVL variables
+	(call :setGlobal __CMND__%LVL%)
+	(call :setGlobal __FILE__%LVL%)
+	(call :setGlobal __FUNC__%LVL%)
+	(call :setGlobal __ARGV__%LVL%)
+	(call :setGlobal __ARGC__%LVL%)
+	(set /a PLVL=LVL)
+	(set /a LVL-=1)
 	
 	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
 	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
-		set "line=%%a"
-		set "!line:GLOBAL_=!"
+		(set line=%%a)
+		(set !line:#GLOBAL$#=!)
     )
+	
+	::###### Stack Variables ######
+	(set __CMND__=!__CMND__%LVL%!)
+	(set __FILE__=!__FILE__%LVL%!)
+	(set __FUNC__=!__FUNC__%LVL%!)
+	(set __ARGV__=!__ARGV__%LVL%!)
+	(set __ARGC__=!__ARGC__%LVL%!)
 %endfunction%
 
 
@@ -99,44 +109,45 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if defined GLOBAL_FILE	(echo %padB% GLOBAL_FILE	= %GLOBAL_FILE%)
 	if defined indent		(echo %padB% indent			= %indent%)
 	if defined pad			(echo %padB% pad			= %pad%)
-exit /b %errorlevel%
+%endfunction%
 
 :printStackVariables
-	if defined LVL			(echo %padB% LVL  = %LVL%)
-	if defined CMND_%LVL%	(echo %padB% CMND_%LVL% = !CMND_%LVL%!)
-	if defined FILE_%LVL%	(echo %padB% FILE_%LVL% = !FILE_%LVL%!)
-	if defined FUNC_%LVL%	(echo %padB% FUNC_%LVL% = !FUNC_%LVL%!)
-	if defined ARGV_%LVL%	(echo %padB% ARGV_%LVL% = !ARGV_%LVL%!)
-	if defined ARGC_%LVL%	(echo %padB% ARGC_%LVL% = !ARGC_%LVL%!)
-exit /b %errorlevel%
+	if defined LVL				(echo %padB% LVL  = %LVL%)
+	if defined __CMND__%LVL%	(echo %padB% __CMND__%LVL% = !__CMND__%LVL%!)
+	if defined __FILE__%LVL%	(echo %padB% __FILE__%LVL% = !__FILE__%LVL%!)
+	if defined __FUNC__%LVL%	(echo %padB% __FUNC__%LVL% = !__FUNC__%LVL%!)
+	if defined __ARGV__%LVL%	(echo %padB% __ARGV__%LVL% = !__ARGV__%LVL%!)
+	if defined __ARGC__%LVL%	(echo %padB% __ARGC__%LVL% = !__ARGC__%LVL%!)
+%endfunction%
 
 :printParentStackVariables						
-	if defined PLVL        (echo %padB% PLVL  = %PLVL%)
-	if defined CMND_%PLVL% (echo %padB% CMND_%PLVL% = !CMND_%PLVL%!)
-	if defined FILE_%PLVL% (echo %padB% FILE_%PLVL% = !FILE_%PLVL%!)
-	if defined FUNC_%PLVL% (echo %padB% FUNC_%PLVL% = !FUNC_%PLVL%!)
-	if defined ARGV_%PLVL% (echo %padB% ARGV_%PLVL% = !ARGV_%PLVL%!)
-	if defined ARGC_%PLVL% (echo %padB% ARGC_%PLVL% = !ARGC_%PLVL%!)
-exit /b %errorlevel%
+	if defined PLVL        		(echo %padB% PLVL  = %PLVL%)
+	if defined __CMND__%PLVL% 	(echo %padB% __CMND__%PLVL% = !__CMND__%PLVL%!)
+	if defined __FILE__%PLVL% 	(echo %padB% __FILE__%PLVL% = !__FILE__%PLVL%!)
+	if defined __FUNC__%PLVL% 	(echo %padB% __FUNC__%PLVL% = !__FUNC__%PLVL%!)
+	if defined __ARGV__%PLVL% 	(echo %padB% __ARGV__%PLVL% = !__ARGV__%PLVL%!)
+	if defined __ARGC__%PLVL% 	(echo %padB% __ARGC__%PLVL% = !__ARGC__%PLVL%!)
+%endfunction%
 
 :setGlobal name value
-	set "%~1=%~2"
-	set "GLOBAL_%~1=%~2"			&:: prefix the variable name with GLOBAL_ and assign a value
-	set GLOBAL_ > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
-exit /b 0
+	for /f "tokens=1,* delims= " %%a in ("%*") do (set argv=%%b)
+	(set %~1=%argv%)
+	(set #GLOBAL#%~1=%argv%)			&:: prefix the variable name with GLOBAL_ and assign a value
+	set #GLOBAL# > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
+%endfunction%
 
 :PrintCallStack
 	echo:
 	echo ############ CALLSTACK ############
 	for /l %%x in (1, 1, 100) do (
 		(set /a num=100-%%x)
-		if defined CMND_!num! (
-			call echo !num!: %%CMND_!num!%%
+		if defined __CMND__!num! (
+			call echo !num!: %%__CMND__!num!%%
 		)
 	)
 	echo:
 	pause
-exit /b 0
+%endfunction%
 
 
 

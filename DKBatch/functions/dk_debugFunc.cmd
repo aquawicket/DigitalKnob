@@ -1,20 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-::BATCH_SOURCE
-::BATCH_ARGC[]
-::BATCH_ARGV[]
-::BATCH_LINENO[]
-::FUNCNAME[]
-
-
-::set "ENABLE_dk_debugFunc=1"
-::if not defined MAX_STACK_LINES         set "MAX_STACK_LINES=200"
-::if not defined DKSTACK[0].__FILE__     set "DKSTACK[0].__FILE__=DK.cmd"
-::if not defined DKSTACK[0].FUNC set "DKSTACK[0].FUNC=DK"
-::if not defined DKSTACK[0].ARGV     set "DKSTACK[0].ARGV= "
-::if not defined DKSTACK_length          set /a "DKSTACK_length=1"
-::if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::################################################################################
 ::# dk_debugFunc()
 ::#
@@ -48,101 +34,26 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   <TIMESTAMP>
 ::#   
 :dk_debugFunc
-	
-    ::if "%~3" neq "" call dk_error "dk_debugFunc: too many arguments (%*)"
- ::setlocal
+setlocal enableDelayedExpansion	
 
-    ::###<TIMESTAMP> <ELAPSED_TIME>###
-    ::call dk_timer timestamp
-    ::echo timestamp = %timestamp%
-
-    ::1: ###### PREVIOUS FUNCTION EXIT BREAKPOINT / CURRENT FUNCTION PRE-INIT BREAKPOINT ######
-    ::     TODO
-
-    ::2: ###### CREATE CALLSTACK ENTRY ######
-::    call dk_callStack
-::    :dk_callStackReturn
-    
-::    set "DKSTACK[%DKSTACK_marker%].__TIME__=%__TIME__%"
-::    set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
-::    ::set "DKSTACK[%DKSTACK_marker%].__LINE__=%__LINE__%"
-::    set "DKSTACK[%DKSTACK_marker%].FUNC=%FUNC%"
-::    set "DKSTACK[%DKSTACK_marker%].ARGC=%ARGC%"
-::	set "DKSTACK[%DKSTACK_marker%].ARGV=%ARGV%"
-::	set "DKSTACK[%DKSTACK_marker%].__ARGV__=%__ARGV__%"
-::   set /a DKSTACK_length+=1
-::    set /a DKSTACK_marker=%DKSTACK_length%  
-::    ::echo %__TIME__%:%__FILE__%: %FUNC%:%ARGC%(%ARGV%)
-	
 	if "%FUNC%"=="dk_debugFunc" goto:eof
 	if not defined FUNC goto:eof
 	
-    ::3: ###### VALIDATE ARGUMENTS ######
+    :: ###### VALIDATE ARGUMENTS ######
     if "%~1" == ""                                            %dk_call% dk_fatal "%FUNC%(%ARGV%): dk_debugFunc ArgsMin ArgsMax is not set."
     if not "%~1" == "" if defined ARGC if %ARGC% lss %~1      %dk_call% dk_fatal "%FUNC%(%ARGV%): not enough arguments. Minimum is %~1, got %ARGC%"
     if "%~2" == "" if %ARGC% gtr %~1                          %dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~1, got %ARGC%"
     if not "%~2" == "" if %ARGC% gtr %~2                      %dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~2, got %ARGC%"
 
-    ::NOTE: determin when we need to remove the topmost DKStack_marker 
-    ::Example
-    ::
-    ::  main()              0
-    ::      func1()         1
-    ::          func2()     2
-    ::              func3() 3
-    ::              funcA() 4   <-- THIS is where we need to drop func3() from the call stack
-    ::          funcB()     5   <-- THIS is where we need to drop func2() from the call stack
-    ::      funcC()         6   <-- THIS is where we need to drop func1() from the call stack
-    ::
-    ::Example
-    ::
-    ::  main()              0
-    ::      func1()         1
-    ::          func2()     2
-    ::              func3() 3
-    ::      funcC()         6   <-- THIS is where we need to replace func1() with funcC() and remove everything after
-    ::
-
-        
-    
-::  if %DKSTACK_length% LSS %MAX_STACK_LINES% (
-::      set /a DKSTACK_length+=1
-::      echo "growing DKSTACK_length to %DKSTACK_length%"
-::  ) else (
-::      echo "DKSTACK_length is capped at %DKSTACK_length%"
-::  )
-::  if %DKSTACK_marker% LSS %DKSTACK_length% (
-::      set /a DKSTACK_marker+=1
-::      echo "advancing DKSTACK_marker to %DKSTACK_marker%"
-::  ) else (
-::      set /a DKSTACK_marker=0
-::      echo "resetting DKSTACK_marker to %DKSTACK_marker%"
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::@echo on
-    if not defined ENABLE_dk_debugFunc %return%
-
-    ::set "indent="%indent% L "
-    set "indent=-^> "
-
-    set "ESC="
-    set "cyan=%ESC%[36m"
-    set "blue=%ESC%[34m"
-    set "clr=%ESC%[0m"
-
-    set "__LINE__=0"
-    for %%Z in ("%__FILE__%") do set "basename=%%~nxZ"
-    echo %indent%%cyan%%basename%:%__LINE__%    %blue%%FUNC%:%ARGV%%clr%
-    ::echo %indent%%blue%%FUNC%%clr%
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  
 %endfunction%
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal enableDelayedExpansion	
+
     %dk_call% dk_debugFunc 0
- setlocal
-	:::::::::::::::::::::::::
+
 %endfunction%
 
