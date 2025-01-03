@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_buildMain
+setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
- setlocal enableDelayedExpansion
 
 	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
@@ -79,8 +79,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
- setlocal enableDelayedExpansion
+
  
     %dk_call% dk_buildMain
 %endfunction%

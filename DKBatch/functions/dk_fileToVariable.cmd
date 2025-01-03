@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#  reference: https://stackoverflow.com/a/49042678
 ::#
 :dk_fileToVariable
-    %dk_call% dk_debugFunc 2
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 2
+
 	set "_file_=%~1"
 	set "_file_=%_file_:/=\%"
 	
@@ -30,9 +30,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_fileToVariable "dk_cd.cmd" myVar
     %dk_call% dk_echo "myVar = %myVar%"
 %endfunction%

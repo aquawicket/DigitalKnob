@@ -13,8 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   <os>_<arch>_<env>_host  = android_arm64_clang_host, emscripten_arm64_clang_host, ios_arm64_clang_host, iossim_arm64_clang_host, linux_arm64_clang_host, mac_arm64_clang_host, raspberry_arm64_clang_host, windows_arm64_clang_host 
 ::#
 :dk_host_triple
-    %dk_call% dk_debugFunc 0
 :: setlocal
+	%dk_call% dk_debugFunc 0
 
 	:: NOTICE: default environment moved to dk_target_triple()
 	:: ###### DEFAULT ENVIRONMENT
@@ -73,9 +73,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_host_triple
 	
 	%dk_call% dk_printVar host_os

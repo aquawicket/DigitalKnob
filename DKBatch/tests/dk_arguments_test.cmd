@@ -48,9 +48,9 @@ dk_test
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
-    
+setlocal
+	%dk_call% dk_debugFunc 0
+   
     %dk_call% dk_test "functions can recieve strings as arguments"
 
     %dk_call% dk_set myVar "Or they can accept expanded variables"

@@ -27,9 +27,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
-    
+setlocal
+	%dk_call% dk_debugFunc 0
+   
     ::###### Using if return value
     %dk_call% dk_isEmptyDirectory "C:\Windows" result
     if "%result%" equ "true" (%dk_call% dk_info "'C:\Windows' is a directory") else (%dk_call% dk_info "'C:\Windows' is NOT a directory")

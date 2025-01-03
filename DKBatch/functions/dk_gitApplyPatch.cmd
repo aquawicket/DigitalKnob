@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_gitApplyPatch
-    %dk_call% dk_debugFunc 2
- setlocal  
+setlocal
+	%dk_call% dk_debugFunc 2  
 
 	::set "directory=C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master"
 	::set "patchFile=C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master/termux.patch"
@@ -31,9 +31,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
 	::%dk_call% dk_selectFolder directory
 	::%dk_call% dk_selectFile patchFile
     ::%dk_call% dk_gitApplyPatch "%directory%" "%patchFile%"

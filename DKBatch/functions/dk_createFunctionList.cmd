@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_createFunctionList
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     :: create a list of all dk_functions and store them in _functionList_
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     if not exist "%DKBRANCH_DIR%\.git" (goto:eof)    &:: only create functions list when we have a local repository
@@ -31,8 +31,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_createFunctionList
 %endfunction%

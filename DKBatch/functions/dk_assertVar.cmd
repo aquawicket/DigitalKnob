@@ -6,9 +6,9 @@ if defined %~1   %return%
 ::# dk_assertVar(expression)
 ::#
 :dk_assertVar
-    %dk_call% dk_debugFunc 1
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 1
+	
     %dk_call% dk_fatal "ASSERTION: dk_assertVar(%*): %~1 not defined"
 %endfunction%
 
@@ -20,9 +20,9 @@ if defined %~1   %return%
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_set myVar string
     %dk_call% dk_echo "dk_assertVar(myVar)"  && %dk_call% dk_assertVar myVar
 

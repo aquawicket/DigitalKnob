@@ -8,18 +8,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
 	if not defined endfunction  (set endfunction=exit /b %errorlevel%)
-
 	
-	:: don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
-	(set "temp=%*")
-	if "!temp:~0,1!"==":" (call %temp% && %endfunction%)
+	:: don't functions in this file  i.e :setGlobal, :printCallstack
+	::(set "temp=%*")
+	::if "!temp:~0,1!"==":" (call %temp% && %endfunction%)
+	if "%~1"=="setGlobal" 		(call %* && %endfunction%)
+	if "%~1"=="printCallStack" 	(call %* && %endfunction%)
 	
 	::### Constant Variables ###
 	if not defined dk_call		(set "dk_call=call dk_call")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
 	if not defined LVL			(set /a "LVL=-1")
+	if not defined ESC			(set ESC=)
+	if not defined clr			(set clr=%ESC%[0m)
 	
-	(set "pad=")
+	(set "pad=%clr%")
 	(set "padB=      ")
 	(set "indent=        ")
 	
@@ -43,10 +46,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(call :setGlobal __ARGC__%LVL% %__ARGC__%)
 
 	::###### Print function entry #####
-::	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
-::	if not "%_codepage_%"=="65001" (chcp 65001>nul)
-::	echo %pad%╚═► !__FUNC__!(!__ARGV__!)	&:: https://en.wikipedia.org/wiki/Code_page_437
-::	call :printStackVariables
+	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
+	if not "%_codepage_%"=="65001" (chcp 65001>nul)
+	echo %pad%╚═► !__FUNC__!(!__ARGV__!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	call :printStackVariables
 	::##################################
 
 	if %LVL% lss 1 (%endfunction%)
@@ -74,8 +77,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
-::	echo %pad%╔══ !__FUNC__!(!__ARGV__!)	&:: https://en.wikipedia.org/wiki/Code_page_437
-::	echo %pad%▼
+	echo %pad%╔══ !__FUNC__!(!__ARGV__!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	echo %pad%▼
 	::#################################
 	
 	::###### Globalize the <STACK>_LVL variables
@@ -136,7 +139,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set #GLOBAL# > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
 %endfunction%
 
-:PrintCallStack
+:printCallStack
 	echo:
 	echo ############ CALLSTACK ############
 	for /l %%x in (1, 1, 100) do (

@@ -7,8 +7,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    reference: https://stackoverflow.com/a/5807218
 ::#
 :dk_commandToVariable
-    %dk_call% dk_debugFunc 2 3
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 2 3
  
     set i=-1
 
@@ -50,9 +50,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_set myCommand ver
     %dk_call% dk_commandToVariable "%myCommand%" myVariable
     %dk_call% dk_printVar myVariable

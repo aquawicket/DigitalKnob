@@ -5,9 +5,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_installContextMenu(menuTitle, icon_exe, command)
 ::#
 :dk_installContextMenu
-    %dk_call% dk_debugFunc 3
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 3
 	set "_menuTitle_=%~1"
     set "_icon_exe_=%~2"
     set "_command_=%~3"
@@ -41,9 +40,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_validate GIT_EXE "%dk_call% %DKIMPORTS_DIR%\git\dk_install.cmd"
     %dk_call% dk_installContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"%GIT_EXE%\" add \"%%1\""

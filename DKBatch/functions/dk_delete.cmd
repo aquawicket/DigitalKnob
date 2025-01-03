@@ -6,9 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_delete
-    %dk_call% dk_debugFunc 1
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 1
     %dk_call% dk_replaceAll "%~1" "/" "\" _path_
     if not exist "%_path_%" (
         %dk_call% dk_warning "dk_delete %_path_% does not exist"
@@ -32,9 +31,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_fileWrite "removeMe.file" "created file to test dk_delete"
     %dk_call% dk_delete "removeMe.file"
 %endfunction%

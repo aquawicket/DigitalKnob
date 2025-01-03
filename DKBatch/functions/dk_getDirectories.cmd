@@ -7,8 +7,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   reference: https://stackoverflow.com/a/138581
 ::#
 :dk_getDirectories
-    %dk_call% dk_debugFunc 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 2
 	
 	set "_path_=%~1"
 	set "_path_=%_path_:/=\%"
@@ -43,9 +43,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_set myPath "C:\Windows"
     %dk_call% dk_getDirectories "%myPath%" directories
     %dk_call% dk_printVar directories

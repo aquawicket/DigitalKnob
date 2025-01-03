@@ -9,8 +9,8 @@ if "%~1" equ "dk_runThread.LoopFunc" goto %1
 ::#
 ::#
 :dk_runThread
-    %dk_call% dk_debugFunc 0 99
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 0 99
  
 	echo dk_runThread
  
@@ -32,8 +32,8 @@ if "%~1" equ "dk_runThread.LoopFunc" goto %1
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 0
 	echo DKTEST
  
 	%dk_call% dk_runThread

@@ -99,9 +99,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
 	::%dk_call% dk_callDKC dk_test "FROM DKC" "dk_callDKC.cmd" rtn_var
 	%dk_call% dk_callDKC dk_echo "This is a string from c dk_echo" rtn_var
     %dk_call% dk_echo

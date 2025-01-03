@@ -26,8 +26,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 ::#
 :dk_includes
-    %dk_call% dk_debugFunc 2 3
- setlocal enableDelayedExpansion
+setlocal
+	%dk_call% dk_debugFunc 2 3 enableDelayedExpansion
  
     set "_arry_=%~1"
     set /a count=0
@@ -53,9 +53,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_echo
     set "array123[0]=1"
     set "array123[1]=2"

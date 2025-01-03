@@ -8,9 +8,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#            https://stackoverflow.com/a/33206814/688352
 ::#
 :dk_keyboardInputTimeout <result> <default> <timeout>
-    %dk_call% dk_debugFunc 3
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 3
     ::set "result=%1"
     set "default=%2"
     set /a "timeout=%3"
@@ -64,9 +63,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     echo Type some input and press enter, this will time out in 5 seconds
     %dk_call% dk_keyboardInputTimeout  rtn_var "default" 10
     echo result = %rtn_var%

@@ -10,8 +10,10 @@
 	if not defined endfunction  (set "endfunction=exit /b %errorlevel%")
 	
 	:: don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
-	(set "temp=%*")
-	if "!temp:~0,1!"==":" (call %temp% && %endfunction%)
+	::(set "temp=%*")
+	::if "!temp:~0,1!"==":" (call %temp% && %endfunction%)
+	if "%~1"=="setGlobal" 		(call :%* && %endfunction%)
+	if "%~1"=="printCallStack" 	(call :%* && %endfunction%)
 	
 	::### Constant Variables ###
 	if not defined dk_call 		(set "dk_call=call dk_call")

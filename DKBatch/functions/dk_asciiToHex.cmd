@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_asciiToHex
-    %dk_call% dk_debugFunc 2
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 2
+
     :: Store the string in chr.tmp file
     set /P "=%~1" < NUL > chr.tmp
 
@@ -33,9 +33,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_set myAscii x
     %dk_call% dk_asciiToHex myAscii myHex
     %dk_call% dk_info "myHex = %myHex%"

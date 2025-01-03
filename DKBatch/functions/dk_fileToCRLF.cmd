@@ -6,9 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_fileToCRLF
-    %dk_call% dk_debugFunc 1
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 1
     if "%~n1" equ "dk_echo" %return%
     if "%~n1" equ "dk_log" %return%
     if "%~n1" equ "dk_info" %return%
@@ -35,8 +34,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_fileToCRLF dk_appendArgs.cmd
 %endfunction%

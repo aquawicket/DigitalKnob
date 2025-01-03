@@ -14,9 +14,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
-    
+setlocal
+	%dk_call% dk_debugFunc 0
+   
     set "dk_onError=&& (%dk_call% dk_echo "success") || (%dk_call% dk_error "error")"
     set "dk_onError=&& (echo success) || (echo error)"
     

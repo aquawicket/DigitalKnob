@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_echoAlign
-    %dk_call% dk_debugFunc 2
- setlocal enabledelayedexpansion  
+setlocal
+	%dk_call% dk_debugFunc 2 enabledelayedexpansion  
 
     if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     (set^ tmp=%~2)
@@ -53,8 +53,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_echoAlign center "centered text"
     %dk_call% dk_echoAlign right "right aligned text"

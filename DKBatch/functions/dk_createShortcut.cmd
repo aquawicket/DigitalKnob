@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_createShortcut
-    %dk_call% dk_debugFunc 2 3
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 2 3
  
     set "shortcut_path=%~1"
 	set "shortcut_path=%shortcut_path:/=\%"
@@ -45,8 +45,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_createShortcut "C:/Users/Administrator/Desktop/digitalknob.lnk" "C:/Users/Administrator/digitalknob"
 %endfunction%

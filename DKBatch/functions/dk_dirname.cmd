@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   https://en.wikipedia.org/wiki/Dirname
 ::#
 :dk_dirname
-    %dk_call% dk_debugFunc 2
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 2
+
     set "_input_=%1"
     set "_input_=%_input_:"=%"
 	set "_input_=%_input_:/=\%"
@@ -28,9 +28,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_set myPath "C:/Windows/System32"
     %dk_call% dk_dirname "%myPath%" result
     %dk_call% dk_printVar result

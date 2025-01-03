@@ -5,9 +5,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_wifiPass()
 ::#
 :dk_wifiPass
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     set "tempfile=%DKCACHE_DIR%\temp.txt"
     if exist !tempfile! %dk_call% dk_delete !tempfile!
     netsh wlan show profile | findstr All>> "!tempfile!"
@@ -38,8 +38,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_wifiPass
 %endfunction%

@@ -19,8 +19,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 ::#
 :dk_push
-    %dk_call% dk_debugFunc 2 3
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 2 3
 
     %dk_call% Array::dk_length %~1 end_index
     endlocal & set "%~1[%end_index%]=%~2"
@@ -34,9 +34,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% Array::dk_push myArrayA "a b c"          &:: new_lengthA
     %dk_call% dk_printVar myArrayA
     :: dk_printVar new_lengthA

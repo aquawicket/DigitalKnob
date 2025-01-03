@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_convertToCIdentifier
-    %dk_call% dk_debugFunc 2
- setlocal enabledelayedexpansion    
+setlocal
+	%dk_call% dk_debugFunc 2 enabledelayedexpansion    
 
     if "!d!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     
@@ -41,9 +41,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     :: Can't handle these characters yet->    [ ] \ ' . / ~ " ? < >
     %dk_call% dk_set myVar "a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0 ` - = ; , ! @ # $ % ^ & * ( ) _ + { } | :"
     %dk_call% dk_convertToCIdentifier "%myVar%" cIdentifier

@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_getUnquoted
-    %dk_call% dk_debugFunc 2
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 2
+
     set _input=%1
     set _input=%_input:"=%
     if [%_input:~-1%] == [\] set _input=%_input:~0,-1%
@@ -23,9 +23,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_getUnquoted "string" unquoted
     %dk_call% dk_echo "unquoted = %unquoted%"
 %endfunction%

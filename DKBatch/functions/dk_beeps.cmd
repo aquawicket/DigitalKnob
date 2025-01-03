@@ -9,8 +9,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#		duration - The duration of the beep measured in milliseconds.
 ::#
 :dk_beeps
-    ::%dk_call% dk_debugFunc 0 2
- ::setlocal
+::setlocal
+	::%dk_call% dk_debugFunc 0 2
 	
 	set n=0
     :loop
@@ -40,8 +40,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 0
 	
 	(set G#1=196)
     (set A2=220)

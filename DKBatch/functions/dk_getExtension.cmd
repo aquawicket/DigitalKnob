@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_getExtension
-    %dk_call% dk_debugFunc 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 2
 
 	:: array of acceptable multi dot extensions
 	set "ext[1]=7z.exe"
@@ -42,9 +42,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_set myPath "/test/test2/xfile.exten"
     %dk_call% dk_getExtension "%myPath%" extension
     %dk_call% dk_printVar extension

@@ -8,8 +8,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://stackoverflow.com/a/41872317/688352
 ::#
 :dk_saveVars
-    %dk_call% dk_debugFunc 0
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 0
 	
 	::	rem We need a temporary file to store the original environment
 	::for %%f in ("original_vars.tmp") do (
@@ -36,9 +36,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
 	%dk_call% dk_saveVars
 	
 %endfunction%

@@ -7,8 +7,8 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 ::# dk_assertPath(path)
 ::#
 :dk_assertPath
-    %dk_call% dk_debugFunc 0 99
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 0 99
 	
 	:: check that ARG1 is valid
 	if "%~1" equ "" %dk_call% dk_fatal "dk_assertPath(%*): ARG1 is invalid"
@@ -43,9 +43,9 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
 	::# correct path
 	%dk_call% dk_assertPath "C:/Program Files/Common Files"			&::OK
 	::# back slashes 

@@ -31,9 +31,9 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     ::%dk_call% dk_exit
     ::%dk_call% dk_exit 0
     %dk_call% dk_exit 13

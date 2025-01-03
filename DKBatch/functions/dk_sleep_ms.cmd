@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_sleep_ms(milliseconds)
 ::#
 :dk_sleep_ms
-    %dk_call% dk_debugFunc 1
- setlocal  
+setlocal
+	%dk_call% dk_debugFunc 1  
     :: Method 1 - javascript (fastest)
     set /a "milliseconds=%~1"
     cscript /nologo /e:JScript "%~f0" "%milliseconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
@@ -30,9 +30,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::############################ DKTEST ############################
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_echo "sleeping for 3000 milliseconds . . ."
     %dk_call% dk_sleep_ms 3000
 %endfunction%

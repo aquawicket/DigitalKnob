@@ -11,8 +11,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# OVERWRITE   - if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 ::#
 :dk_copy
-    %dk_call% dk_debugFunc 2 3
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 2 3
  
     %dk_call% dk_replaceAll "%~1" "/" "\" _from_
     %dk_call% dk_replaceAll "%~2" "/" "\" _to_
@@ -52,9 +52,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
     
     %dk_call% dk_fileWrite %DKCACHE_DIR%\copyMe.file "dk_copy test"

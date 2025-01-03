@@ -28,9 +28,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 ::#
 :dk_indexOf
-    %dk_call% dk_debugFunc 3
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 3
     set _count_=0
     :indexOf_loop
         if not defined %~1[%_count_%] (
@@ -60,9 +59,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     set "myArrayA[0]=a b c"
     set "myArrayA[1]=1 2 3"
     set "myArrayA[2]=d e f"

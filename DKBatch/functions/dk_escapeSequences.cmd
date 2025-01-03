@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_escapeSequences
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
 ::  set ASCII_length=0
     :: ASCII control characters (character code 0-31)
     ::                  SYMBOL  DEC     OCT     HEX     HTML    Description
@@ -157,9 +157,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :ASCII_SHOW
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_info "%%ASCII[%~1].DEC%%   %%ASCII[%~1].SYMBOL%%   %%ASCII[%~1].DEC%%  %%ASCII[%~1].OCT%%  %%ASCII[%~1].HEX%%  %%ASCII[%~1].HTML%% %%ASCII[%~1].INFO%%"
 %endfunction%
 
@@ -168,8 +168,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_escapeSequences
 %endfunction%

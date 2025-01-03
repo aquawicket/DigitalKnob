@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_appendArgs
-    %dk_call% dk_debugFunc 2 99
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 2 99
+
     for /f "tokens=1,* delims= " %%a in ("%*") do set "ALL_BUT_FIRST=%%b"
 
     if defined %~1 endlocal & call set "%~1=%%%~1%% %ALL_BUT_FIRST%"
@@ -24,9 +24,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_appendArgs myVar 123 abc
     %dk_call% dk_debug "myVar = %myVar%"
 

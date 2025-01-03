@@ -10,9 +10,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#     Example:  %dk_call% dk_killProcess iexplore.exe
 ::#    
 :dk_killProcess
-    %dk_call% dk_debugFunc 1
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 1
     set "process=%~1"
 
     tasklist /fi "imagename eq %process%" |find ":" >nul
@@ -25,9 +24,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
-    
+setlocal
+	%dk_call% dk_debugFunc 0
+   
     start mspaint.exe
     %dk_call% dk_sleep 3
     %dk_call% dk_killProcess mspaint.exe

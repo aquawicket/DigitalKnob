@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     :USE_COLOR_if
     if not defined USE_COLOR goto USE_COLOR_else
-        set "ESC="                         &:: escape character
+        set "ESC="                          &:: escape character
 
         ::# Attributes on
         set "clr=%ESC%[0m"                  &:: Default                     - Returns all attributes to the default state prior to modification
@@ -177,9 +177,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_echo
     %dk_call% dk_echo "%black% %bg_lblack%           Styles            %clr%"
     %dk_call% dk_echo "clr        %clr% default %clr%"

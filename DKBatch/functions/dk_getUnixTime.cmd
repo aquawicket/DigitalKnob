@@ -7,9 +7,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
 :dk_getUnixTime
-    %dk_call% dk_debugFunc 1
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 1
     for /f %%x in ('wmic path win32_utctime get /format:list ^| findstr "="') do (set %%x)
     set /a z=(14-100%Month%%%100)/12, y=10000%Year%%%10000-z
     set /a ut=y*365+y/4-y/100+y/400+(153*(100%Month%%%100+12*z-3)+2)/5+Day-719469
@@ -23,9 +22,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_getUnixTime unixTime
     echo unixTime = %unixTime%
 %endfunction%

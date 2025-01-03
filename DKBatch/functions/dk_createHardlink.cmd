@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_createHardlink
-    %dk_call% dk_debugFunc 2
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 2
 	
 	set "hardlink_path=%~1"
 	set "hardlink_path=%hardlink_path:/=\%"
@@ -22,8 +22,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_createHardlink "C:/Users/Administrator/Desktop/digitalknob" "C:/Users/Administrator/digitalknob"
 %endfunction%

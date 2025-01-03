@@ -29,9 +29,9 @@ if exist "!%~1!" (%return%)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     %dk_call% dk_validatePath DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
     %dk_call% dk_echo "DIGITALKNOB_DIR = %DIGITALKNOB_DIR%"
 	

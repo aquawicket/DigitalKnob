@@ -10,8 +10,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://github.com/base64code/examples
 ::#
 :dk_embedFile
-    %dk_call% dk_debugFunc 0 99
- setlocal
+setlocal
+	%dk_call% dk_debugFunc 0 99
 	
     set "inputFile=%~1"
 	set "outputFile=%~nx1.cmd"
@@ -69,9 +69,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
- setlocal
- 
+setlocal
+	%dk_call% dk_debugFunc 0
+
     ::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     ::set "input=%DKBRANCH_DIR%\DKBuilder.cmd"
     ::set "output=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
