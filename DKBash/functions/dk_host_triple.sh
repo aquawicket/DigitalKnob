@@ -166,9 +166,9 @@ dk_host_triple() {
 			UNAME_OS="-$(try uname -s)" && dk_call dk_toLower "${UNAME_OS}" UNAME_OS
 		fi
 
-		if dk_call dk_stringContainsCICI "$(try uname -o)" "GNU"; then
+		if dk_call dk_stringContainsCI "$(try uname -o)" "GNU"; then
 			UNAME_ENV="-gnu"
-		elif dk_call dk_stringContainsCICI "$(try uname -o)" "Android"; then
+		elif dk_call dk_stringContainsCI "$(try uname -o)" "Android"; then
 			UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
 		else
 			UNAME_ENV="gcc" # Default
