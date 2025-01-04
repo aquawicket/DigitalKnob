@@ -1,4 +1,5 @@
 @echo off
+@echo off
 
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 if not defined BACKUP_DL_SERVER       set "BACKUP_DL_SERVER=http://aquawicket.com/download"
@@ -13,7 +14,7 @@ setlocal
     
     set "url=%~1"
     ::%dk_call% dk_printVar url
-    
+
     set "destination=%~2"
 	set "destination=%destination:/=\%"
     ::%dk_call% dk_printVar destination
@@ -21,10 +22,10 @@ setlocal
     %dk_call% dk_basename "%url%" url_filename
     ::%dk_call% dk_printVar url_filename
     if not defined url_filename %dk_call% dk_error "url_filename invalid"
-   
+
     if defined destination %dk_call% dk_realpath "%destination%" destination
     ::%dk_call% dk_printVar destination
-    
+   
     %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     ::%dk_call% dk_printVar DKDOWNLOAD_DIR
 
@@ -56,7 +57,6 @@ setlocal
     ::set "DISABLE_powershell=1"
     ::set "DISABLE_curl=1"
     ::set "DISABLE_certutil=1"
-    
     goto end_dk_powershell_dl
     :: Try dk_powershell
     :dk_powershell_dl
