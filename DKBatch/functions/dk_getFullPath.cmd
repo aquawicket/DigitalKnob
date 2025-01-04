@@ -11,8 +11,8 @@ setlocal
 
     set "_input_=%1"
     set "_input_=%_input_:"=%"
-    if [%_input_:~-1%] == [\] set "_input_=%_input_:~0,-1%"
-    if [%_input_:~-1%] == [/] set "_input_=%_input_:~0,-1%"
+    if "%_input_:~-1%"=="\" set "_input_=%_input_:~0,-1%"
+    if "%_input_:~-1%"=="/" set "_input_=%_input_:~0,-1%"
     endlocal & for %%Z in ("%_input_%") do set "%2=%%~fZ"
 %endfunction%
 

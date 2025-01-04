@@ -23,8 +23,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	if "%DKSCRIPT_NAME%" == "DKBuilder" set "DKSCRIPT_ARGS=%DKSCRIPT_PATH%"
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
-	if [%DKSCRIPT_DIR:~-1%] == [\] set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
-	if [%DKSCRIPT_DIR:~-1%] == [/] set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+	if "%DKSCRIPT_DIR:~-1%"=="\" set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+	if "%DKSCRIPT_DIR:~-1%"=="/" set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
 	set "RELOADED="
 	
 	::set "DKSCRIPT_DIR=%DKBRANCH_DIR%"

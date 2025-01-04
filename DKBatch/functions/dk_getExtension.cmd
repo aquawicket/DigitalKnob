@@ -17,8 +17,8 @@ setlocal
 	set "_input_=%~nx1"
 	set "_input_=%_input_:/=\%"
 	set "_input_=%_input_:"=%"
-    if [%_input_:~-1%] == [\] set "_input_=%_input_:~0,-1%"
-    if [%_input_:~-1%] == [/] set "_input_=%_input_:~0,-1%"
+    if "%_input_:~-1%"=="\" set "_input_=%_input_:~0,-1%"
+    if "%_input_:~-1%"=="/" set "_input_=%_input_:~0,-1%"
 	
 	set "_extension_="
 	for /L %%i in (1,1,10) do (

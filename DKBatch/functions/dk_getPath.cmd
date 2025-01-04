@@ -12,11 +12,11 @@ setlocal
 
     set "_input=%1"
     set "_input=%_input:"=%"
-    if [%_input:~-1%] == [\] set "_input=%_input:~0,-1%"
-    if [%_input:~-1%] == [/] set "_input=%_input:~0,-1%"
+    if "%_input:~-1%"=="\" set "_input=%_input:~0,-1%"
+    if "%_input:~-1%"=="/" set "_input=%_input:~0,-1%"
     for %%Z in ("%_input%") do set "_getPath_=%%~pZ"
-	if [%_getPath_:~-1%] == [\] set "_getPath_=%_getPath_:~0,-1%"
-	if [%_getPath_:~-1%] == [/] set "_getPath_=%_getPath_:~0,-1%"
+	if "%_getPath_:~-1%"=="\" set "_getPath_=%_getPath_:~0,-1%"
+	if "%_getPath_:~-1%"=="/" set "_getPath_=%_getPath_:~0,-1%"
     endlocal & set "%2=%_getPath_%"
 %endfunction%
 

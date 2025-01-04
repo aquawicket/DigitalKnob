@@ -12,8 +12,8 @@ setlocal
     set "_input_=%~1"
 	set "_input_=%_input_:/=\%"
     set "_input_=%_input_:"=%"
-    if [%_input_:~-1%] == [\] set "_input_=%_input_:~0,-1%"
-    if [%_input_:~-1%] == [/] set "_input_=%_input_:~0,-1%"
+    if "%_input_:~-1%"=="\" set "_input_=%_input_:~0,-1%"
+    if "%_input_:~-1%"=="/" set "_input_=%_input_:~0,-1%"
     for %%Z in ("%_input_%") do set "_drive_=%%~dZ"
     endlocal & set "%2=%_drive_%"
 %endfunction%
