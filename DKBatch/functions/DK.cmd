@@ -34,13 +34,13 @@ echo:
     ::if "!DE!" neq ""  echo delayed expansion = OFF
     if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
     if "!DE!" neq ""  set "return=exit /b %errorlevel%"
-    if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
+    ::if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
     if "!DE!" neq ""  set "DKDEBUG=exit /b %errorlevel%"
 
     ::if "!DE!" == ""   echo delayed expansion = ON
     if "!DE!" == ""   set "endfunction=exit /b !errorlevel!"
     if "!DE!" == ""   set "return=exit /b !errorlevel!"
-    if "!DE!" == ""   set "DEBUG=exit /b !errorlevel!"
+    ::if "!DE!" == ""   set "DEBUG=exit /b !errorlevel!"
     if "!DE!" == ""   set "DKDEBUG=exit /b !errorlevel!"
 
     ::###### set DKSCRIPT_PATH ######

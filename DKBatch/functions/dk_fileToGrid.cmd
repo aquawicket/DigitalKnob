@@ -14,15 +14,15 @@ setlocal
     set "_file_=%~1"
 	set "_file_=%_file_:/=\%"
 	
-	set /a row=0
+	set /a _row_=0
 	for /F "usebackq delims=" %%r in ("%_file_%") do (
     rem for /f "tokens=*" %%r in ("%_file_%") do (
-		set /a column=0
+		set /a _column_=0
 		for %%c IN (%%r) do (
-			set "%~2[!row!][!column!]=%%c"
-			set /a column+=1
+			set "%~2[!_row_!][!_column_!]=%%c"
+			set /a _column_+=1
 		)
-		set /a row+=1
+		set /a _row_+=1
     )
 	
     :: Return the grid to the calling scope
@@ -41,7 +41,10 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_fileToGrid "fileToGrid_TEST.txt" MyGrid
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_fileToGrid "%DKBRANCH_DIR%\build_list.txt" MyGrid
+	
+    ::%dk_call% dk_fileToGrid "fileToGrid_TEST.txt" MyGrid
 
     :: print items individually
     %dk_call% dk_printVar MyGrid[0][0]
