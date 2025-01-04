@@ -2,19 +2,28 @@ dk_echo(STATUS "##############################################################")
 dk_echo(STATUS "################ android_x86_64_toolchain.cmake ###############")
 dk_echo(STATUS "##############################################################")
 
-dk_set(CMAKE_GENERATOR					${ANDROID_GENERATOR})
-dk_set(CMAKE_TOOLCHAIN_FILE				${ANDROID_TOOLCHAIN_FILE})
-dk_load(${ANDROID_TOOLCHAIN_FILE})
-dk_set(ANDROID_PLATFORM					${ANDROID_API})
-dk_set(CMAKE_MAKE_PROGRAM				${ANDROID_MAKE_PROGRAM})
-dk_set(CMAKE_C_COMPILER					${ANDROID_C_COMPILER})
-dk_set(CMAKE_CXX_COMPILER				${ANDROID_CXX_COMPILER})
-dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_X86_64 -std=c17)
-dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_X86_64 -std=c++1z)
-#dk_set(DKCONFIGURE_CC					${ANDROID_C_COMPILER})
-#dk_set(DKCONFIGURE_CXX					${ANDROID_CXX_COMPILER})
-#dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_X86_64 -std=c17)
-#dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_X86_64 -std=c++1z)
+dk_validate(ANDROID_TOOLCHAIN_FILE		"dk_depend(android-ndk)")
+set(CMAKE_TOOLCHAIN_FILE				"${ANDROID_TOOLCHAIN_FILE}")
+
+set(CMAKE_GENERATOR						"Unix Makefiles")
+set(ANDROID_PLATFORM					31)
+
+if(WIN_HOST)
+	dk_validate(MSYS2_MAKE_PROGRAM		"dk_depend(msys2)")
+	dk_set(CMAKE_MAKE_PROGRAM			"${MSYS2_MAKE_PROGRAM}")
+else()
+	dk_set(CMAKE_MAKE_PROGRAM			"make")
+endif()
+
+set(CMAKE_C_COMPILER					"${ANDROID_C_COMPILER}")
+set(CMAKE_CXX_COMPILER					"${ANDROID_CXX_COMPILER}")
+dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM32 -std=c17)
+dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM32 -std=c++1z)
+
+#dk_set(DKCONFIGURE_CC					${CMAKE_C_COMPILER})
+#dk_set(DKCONFIGURE_CXX					${CMAKE_CXX_COMPILER})
+#dk_append(DKCONFIGURE_CFLAGS			${CMAKE_C_FLAGS})
+#dk_append(DKCONFIGURE_CXXFLAGS			${CMAKE_CXX_FLAGS})
 	
 dk_append(DKCMAKE_FLAGS
 	-DANDROID_ABI=x86_64
