@@ -44,16 +44,16 @@ dk_target_triple() {
 		dk_call dk_dirname ${TARGET_DIR} TARGET_TRIPLE_DIR	# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	fi
 
-	if ( ( dk_call dk_stringContains "${TARGET_DIR}" "android"      ) ||
-		 ( dk_call dk_stringContains "${TARGET_DIR}" "android"      ) ||
-		 ( dk_call dk_stringContains "${TARGET_DIR}" "emscripten"   ) ||
-		 ( dk_call dk_stringContains "${TARGET_DIR}" "ios"          ) ||
-		 ( dk_call dk_stringContains "${TARGET_DIR}" "iossim"       ) ||
-		 ( dk_call dk_stringContains "${TARGET_DIR}" "linux"        ) ||
-		 ( dk_call dk_stringContains "${TARGET_DIR}" "mac"          ) ||
-		 ( dk_call dk_stringContains "${TARGET_DIR}" "raspberry"    ) ||
-		 ( dk_call dk_stringContains "${TARGET_DIR}" "windows"      ) ||
-		 ( dk_call dk_stringContains "${TARGET_DIR}" "cosmopolitan"	) ); then
+	if ( ( dk_call dk_stringContainsCI "${TARGET_DIR}" "android"      ) ||
+		 ( dk_call dk_stringContainsCI "${TARGET_DIR}" "android"      ) ||
+		 ( dk_call dk_stringContainsCI "${TARGET_DIR}" "emscripten"   ) ||
+		 ( dk_call dk_stringContainsCI "${TARGET_DIR}" "ios"          ) ||
+		 ( dk_call dk_stringContainsCI "${TARGET_DIR}" "iossim"       ) ||
+		 ( dk_call dk_stringContainsCI "${TARGET_DIR}" "linux"        ) ||
+		 ( dk_call dk_stringContainsCI "${TARGET_DIR}" "mac"          ) ||
+		 ( dk_call dk_stringContainsCI "${TARGET_DIR}" "raspberry"    ) ||
+		 ( dk_call dk_stringContainsCI "${TARGET_DIR}" "windows"      ) ||
+		 ( dk_call dk_stringContainsCI "${TARGET_DIR}" "cosmopolitan"	) ); then
 		     dk_call dk_set TARGET_TRIPLE_DIR ${TARGET_DIR}
 	else
 		dk_call dk_target_triple_SET
@@ -86,16 +86,16 @@ dk_target_triple() {
 	dk_call dk_printVar TRIPLE 
 
 	#### Set os / OS / <os>_target / <OS>_TARGET
-	dk_call dk_stringContains "${TRIPLE}" "android" 		&& dk_call dk_set os android
-	dk_call dk_stringContains "${TRIPLE}" "emscripten" 		&& dk_call dk_set os emscripten
-	dk_call dk_stringContains "${TRIPLE}" "iossim" 			&& dk_call dk_set os iossim 
-	dk_call dk_stringContains "${TRIPLE}" "ios" 			&& dk_call dk_set os ios
-	dk_call dk_stringContains "${TRIPLE}" "linux" 			&& dk_call dk_set os linux
-	dk_call dk_stringContains "${TRIPLE}" "mac" 			&& dk_call dk_set os mac
-	dk_call dk_stringContains "${TRIPLE}" "raspberry" 		&& dk_call dk_set os raspberry
-	dk_call dk_stringContains "${TRIPLE}" "windows" 		&& dk_call dk_set os windows
-	dk_call dk_stringContains "${TRIPLE}" "win"				&& dk_call dk_set os win
-	dk_call dk_stringContains "${TRIPLE}" "cosmopolitan"	&& dk_call dk_set os cosmopolitan
+	dk_call dk_stringContainsCI "${TRIPLE}" "android" 		&& dk_call dk_set os android
+	dk_call dk_stringContainsCI "${TRIPLE}" "emscripten" 		&& dk_call dk_set os emscripten
+	dk_call dk_stringContainsCI "${TRIPLE}" "iossim" 			&& dk_call dk_set os iossim 
+	dk_call dk_stringContainsCI "${TRIPLE}" "ios" 			&& dk_call dk_set os ios
+	dk_call dk_stringContainsCI "${TRIPLE}" "linux" 			&& dk_call dk_set os linux
+	dk_call dk_stringContainsCI "${TRIPLE}" "mac" 			&& dk_call dk_set os mac
+	dk_call dk_stringContainsCI "${TRIPLE}" "raspberry" 		&& dk_call dk_set os raspberry
+	dk_call dk_stringContainsCI "${TRIPLE}" "windows" 		&& dk_call dk_set os windows
+	dk_call dk_stringContainsCI "${TRIPLE}" "win"				&& dk_call dk_set os win
+	dk_call dk_stringContainsCI "${TRIPLE}" "cosmopolitan"	&& dk_call dk_set os cosmopolitan
 	if [ -z "${os-}" ]; then
 		# dk_call dk_warning "The target target_triple:${target_triple} does not contain a valid os"
 		dk_call dk_unset target_triple
@@ -113,11 +113,11 @@ dk_target_triple() {
 	fi
 	
 	#### Get arch / ARCH
-	dk_call dk_stringContains "${target_triple}" "arm64" 			&& dk_call dk_set arch arm64
-	dk_call dk_stringContains "${target_triple}" "arm32" 			&& dk_call dk_set arch arm32
-	dk_call dk_stringContains "${target_triple}" "x86_64" 			&& dk_call dk_set arch x86_64
-	dk_call dk_stringContains "${target_triple}" "x86" 				&& dk_call dk_set arch x86
-	dk_call dk_stringContains "${target_triple}" "cosmopolitan" 	&& dk_call dk_set arch cosmopolitan	
+	dk_call dk_stringContainsCI "${target_triple}" "arm64" 			&& dk_call dk_set arch arm64
+	dk_call dk_stringContainsCI "${target_triple}" "arm32" 			&& dk_call dk_set arch arm32
+	dk_call dk_stringContainsCI "${target_triple}" "x86_64" 			&& dk_call dk_set arch x86_64
+	dk_call dk_stringContainsCI "${target_triple}" "x86" 				&& dk_call dk_set arch x86
+	dk_call dk_stringContainsCI "${target_triple}" "cosmopolitan" 	&& dk_call dk_set arch cosmopolitan	
 	
 	if [ -z "${arch-}" ]; then
 		dk_call dk_warning "The target target_triple:${target_triple} does not contain a valid arch"
@@ -134,11 +134,11 @@ dk_target_triple() {
 	fi
 
 	#### Set evn / ENV 
-	dk_call dk_stringContains "${target_triple}" "clang" 			&& dk_call dk_set env clang
-	dk_call dk_stringContains "${target_triple}" "mingw" 			&& dk_call dk_set env mingw
-	dk_call dk_stringContains "${target_triple}" "ucrt"  			&& dk_call dk_set env ucrt
-	dk_call dk_stringContains "${target_triple}" "msvc"  			&& dk_call dk_set env msvc
-	dk_call dk_stringContains "${target_triple}" "cosmopolitan" 	&& dk_call dk_set env cosmopolitan
+	dk_call dk_stringContainsCI "${target_triple}" "clang" 			&& dk_call dk_set env clang
+	dk_call dk_stringContainsCI "${target_triple}" "mingw" 			&& dk_call dk_set env mingw
+	dk_call dk_stringContainsCI "${target_triple}" "ucrt"  			&& dk_call dk_set env ucrt
+	dk_call dk_stringContainsCI "${target_triple}" "msvc"  			&& dk_call dk_set env msvc
+	dk_call dk_stringContainsCI "${target_triple}" "cosmopolitan" 	&& dk_call dk_set env cosmopolitan
 	if [ -z "${env-}" ]; then
 		dk_call dk_warning "The target target_triple:${target_triple} does not contain a valid env"
 		dk_call dk_set env ${default_target_env}
