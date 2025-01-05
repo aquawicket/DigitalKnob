@@ -180,198 +180,198 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%black% %bg_lblack%           Styles            %clr%"
-    %dk_call% dk_echo "clr        %clr% default %clr%"
-    %dk_call% dk_echo "bold       %bold% bold %clr%"
-    %dk_call% dk_echo "dim        %dim% dim %clr%"
-    %dk_call% dk_echo "italic     %italic% italic %clr%"
-    %dk_call% dk_echo "underline  %underline% underline %clr%"
-    %dk_call% dk_echo "blink      %blink% blink %clr%"
-    %dk_call% dk_echo "fblink     %fblink% fblink %clr%"
-    %dk_call% dk_echo "negative   %negative% negative %clr%"
-    %dk_call% dk_echo "invisible  %invisible% invisible %clr%"
-    %dk_call% dk_echo "strike     %strike% strike %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%black% %bg_lblack%      Foreground Colors      %clr%"
-    %dk_call% dk_echo "black      %black% black %clr%"
-    %dk_call% dk_echo "red        %red% red %clr%"
-    %dk_call% dk_echo "green      %green% green %clr%"
-    %dk_call% dk_echo "yellow     %yellow% yellow %clr%"
-    %dk_call% dk_echo "blue       %blue% blue %clr%"
-    %dk_call% dk_echo "magenta    %magenta% magenta %clr%"
-    %dk_call% dk_echo "cyan       %cyan% cyan %clr%"
-    %dk_call% dk_echo "white      %white% white %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%black% %bg_lblack%      Background Colors      %clr%"
-    %dk_call% dk_echo "bg_black   %bg_black% bg_black %clr%"
-    %dk_call% dk_echo "bg_red     %bg_red% bg_red %clr%"
-    %dk_call% dk_echo "bg_green   %bg_green% bg_green %clr%"
-    %dk_call% dk_echo "bg_yellow  %bg_yellow% bg_yellow %clr%"
-    %dk_call% dk_echo "bg_blue    %bg_blue% bg_blue %clr%"
-    %dk_call% dk_echo "bg_magenta %bg_magenta% bg_magenta %clr%"
-    %dk_call% dk_echo "bg_cyan    %bg_cyan% bg_cyan %clr%"
-    %dk_call% dk_echo "bg_white   %bg_white% bg_white %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%black% %bg_lblack% Foreground Colors  bright  %clr%"
-    %dk_call% dk_echo "lblack      %lblack% lblack %clr%"
-    %dk_call% dk_echo "lred        %lred% lred %clr%"
-    %dk_call% dk_echo "lgreen      %lgreen% lgreen %clr%"
-    %dk_call% dk_echo "lyellow     %lyellow% lyellow %clr%"
-    %dk_call% dk_echo "lblue       %lblue% lblue %clr%"
-    %dk_call% dk_echo "lmagenta    %lmagenta% lmagenta %clr%"
-    %dk_call% dk_echo "lcyan       %lcyan% lcyan %clr%"
-    %dk_call% dk_echo "lwhite      %lwhite% lwhite %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%black% %bg_lblack% Background Colors  bright  %clr%"
-    %dk_call% dk_echo "bg_lblack   %bg_lblack% bg_lblack %clr%"
-    %dk_call% dk_echo "bg_lred     %bg_lred% bg_lred %clr%"
-    %dk_call% dk_echo "bg_lgreen   %bg_lgreen% bg_lgreen %clr%"
-    %dk_call% dk_echo "bg_lyellow  %bg_lyellow% bg_lyellow %clr%"
-    %dk_call% dk_echo "bg_lblue    %bg_lblue% bg_lblue %clr%"
-    %dk_call% dk_echo "bg_lmagenta %bg_lmagenta% bg_lmagenta %clr%"
-    %dk_call% dk_echo "bg_lcyan    %bg_lcyan% bg_lcyan %clr%"
-    %dk_call% dk_echo "bg_lwhite   %bg_lwhite% bg_lwhite %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%black% %bg_lblack%   RGB Foreground Colors   %clr%"
-    %dk_call% dk_echo "%RGB%255;10;10m    RGB test 255;0;10     %clr%"
-    %dk_call% dk_echo "%RGB%10;255;10m    RGB test 0;255;10    %clr%"
-    %dk_call% dk_echo "%RGB%0;0;255m    RGB test 0;0;255     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;250m    RGB test 0;0;250     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;245m    RGB test 0;0;245     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;240m    RGB test 0;0;240     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;235m    RGB test 0;0;235     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;230m    RGB test 0;0;230     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;225m    RGB test 0;0;225     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;220m    RGB test 0;0;220     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;215m    RGB test 0;0;215     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;210m    RGB test 0;0;210     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;205m    RGB test 0;0;205     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;200m    RGB test 0;0;200     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;195m    RGB test 0;0;195     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;190m    RGB test 0;0;190     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;185m    RGB test 0;0;185     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;180m    RGB test 0;0;180     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;175m    RGB test 0;0;175     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;170m    RGB test 0;0;170     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;165m    RGB test 0;0;165     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;160m    RGB test 0;0;160     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;155m    RGB test 0;0;155     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;150m    RGB test 0;0;150     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;145m    RGB test 0;0;145     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;140m    RGB test 0;0;140     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;135m    RGB test 0;0;135     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;130m    RGB test 0;0;130     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;125m    RGB test 0;0;125     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;120m    RGB test 0;0;120     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;115m    RGB test 0;0;115     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;110m    RGB test 0;0;110     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;105m    RGB test 0;0;105     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;100m    RGB test 0;0;100     %clr%"
-    %dk_call% dk_echo "%RGB%0;0;95m    RGB test 0;0;95      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;90m    RGB test 0;0;90      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;85m    RGB test 0;0;85      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;80m    RGB test 0;0;80      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;75m    RGB test 0;0;75      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;70m    RGB test 0;0;70      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;65m    RGB test 0;0;65      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;60m    RGB test 0;0;60      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;55m    RGB test 0;0;55      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;50m    RGB test 0;0;50      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;45m    RGB test 0;0;45      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;40m    RGB test 0;0;40      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;35m    RGB test 0;0;35      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;30m    RGB test 0;0;30      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;25m    RGB test 0;0;25      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;20m    RGB test 0;0;20      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;15m    RGB test 0;0;15      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;10m    RGB test 0;0;10      %clr%"
-    %dk_call% dk_echo "%RGB%0;0;5m    RGB test 0;0;5       %clr%"
-    %dk_call% dk_echo "%RGB%0;0;0m    RGB test 0;0;0       %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%black% %bg_lblack%   RGB Background Colors   %clr%"
-    %dk_call% dk_echo "%bg_RGB%255;10;10m    bg_RGB test 255;0;10    %clr%"
-    %dk_call% dk_echo "%bg_RGB%10;255;10m    bg_RGB test 0;255;10    %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;255m    bg_RGB test 0;0;255     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;250m    bg_RGB test 0;0;250     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;245m    bg_RGB test 0;0;245     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;240m    bg_RGB test 0;0;240     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;235m    bg_RGB test 0;0;235     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;230m    bg_RGB test 0;0;230     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;225m    bg_RGB test 0;0;225     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;220m    bg_RGB test 0;0;220     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;215m    bg_RGB test 0;0;215     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;210m    bg_RGB test 0;0;210     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;205m    bg_RGB test 0;0;205     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;200m    bg_RGB test 0;0;200     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;195m    bg_RGB test 0;0;195     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;190m    bg_RGB test 0;0;190     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;185m    bg_RGB test 0;0;185     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;180m    bg_RGB test 0;0;180     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;175m    bg_RGB test 0;0;175     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;170m    bg_RGB test 0;0;170     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;165m    bg_RGB test 0;0;165     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;160m    bg_RGB test 0;0;160     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;155m    bg_RGB test 0;0;155     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;150m    bg_RGB test 0;0;150     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;145m    bg_RGB test 0;0;145     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;140m    bg_RGB test 0;0;140     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;135m    bg_RGB test 0;0;135     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;130m    bg_RGB test 0;0;130     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;125m    bg_RGB test 0;0;125     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;120m    bg_RGB test 0;0;120     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;115m    bg_RGB test 0;0;115     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;110m    bg_RGB test 0;0;110     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;105m    bg_RGB test 0;0;105     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;100m    bg_RGB test 0;0;100     %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;95m    bg_RGB test 0;0;95      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;90m    bg_RGB test 0;0;90      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;85m    bg_RGB test 0;0;85      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;80m    bg_RGB test 0;0;80      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;75m    bg_RGB test 0;0;75      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;70m    bg_RGB test 0;0;70      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;65m    bg_RGB test 0;0;65      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;60m    bg_RGB test 0;0;60      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;55m    bg_RGB test 0;0;55      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;50m    bg_RGB test 0;0;50      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;45m    bg_RGB test 0;0;45      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;40m    bg_RGB test 0;0;40      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;35m    bg_RGB test 0;0;35      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;30m    bg_RGB test 0;0;30      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;25m    bg_RGB test 0;0;25      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;20m    bg_RGB test 0;0;20      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;15m    bg_RGB test 0;0;15      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;10m    bg_RGB test 0;0;10      %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;5m    bg_RGB test 0;0;5       %clr%"
-    %dk_call% dk_echo "%bg_RGB%0;0;0m    bg_RGB test 0;0;0       %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%black% %bg_lblack%        Combinations         %clr%"
-    %dk_call% dk_echo "negative                            %negative%   inverse foreground <-> background   %clr%"
-    %dk_call% dk_echo "bg_yellow red                     %bg_yellow% %red%   yellow backgroud / red foreground   %clr%"
-    %dk_call% dk_echo "bg_yellow red negative           %bg_yellow% %red% %negative%        yellow / red inversed          %clr%"
-    %dk_call% dk_echo "bg_red.. bg_green.. bg_blue     %bg_red%    nested   %bg_green%    colors    %bg_blue%    text    %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%black% %bg_lblack%        ASCII Color Art       %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%bg_blue% * * * * * * * * * %bg_red%                                  %clr%"
-    %dk_call% dk_echo "%bg_blue%  * * * * * * * *  %bg_white%                                  %clr%"
-    %dk_call% dk_echo "%bg_blue% * * * * * * * * * %bg_red%                                  %clr%" 
-    %dk_call% dk_echo "%bg_blue%  * * * * * * * *  %bg_white%                                  %clr%"
-    %dk_call% dk_echo "%bg_blue% * * * * * * * * * %bg_red%                                  %clr%"
-    %dk_call% dk_echo "%bg_blue%  * * * * * * * *  %bg_white%                                  %clr%"
-    %dk_call% dk_echo "%bg_blue% * * * * * * * * * %bg_red%                                  %clr%"
-    %dk_call% dk_echo "%bg_white%                                                     %clr%"
-    %dk_call% dk_echo "%bg_red%                                                     %clr%"
-    %dk_call% dk_echo "%bg_white%                                                     %clr%"
-    %dk_call% dk_echo "%bg_red%                                                     %clr%"
-    %dk_call% dk_echo "%bg_white%                                                     %clr%"
-    %dk_call% dk_echo "%bg_red%                                                     %clr%"
+    echo:
+    echo %black% %bg_lblack%           Styles            %clr%
+    echo clr        %clr% default %clr%
+    echo bold       %bold% bold %clr%
+    echo dim        %dim% dim %clr%
+    echo italic     %italic% italic %clr%
+    echo underline  %underline% underline %clr%
+    echo blink      %blink% blink %clr%
+    echo fblink     %fblink% fblink %clr%
+    echo negative   %negative% negative %clr%
+    echo invisible  %invisible% invisible %clr%
+    echo strike     %strike% strike %clr%
+    echo:
+    echo:
+    echo %black% %bg_lblack%      Foreground Colors      %clr%
+    echo black      %black% black %clr%
+    echo red        %red% red %clr%
+    echo green      %green% green %clr%
+    echo yellow     %yellow% yellow %clr%
+    echo blue       %blue% blue %clr%
+    echo magenta    %magenta% magenta %clr%
+    echo cyan       %cyan% cyan %clr%
+    echo white      %white% white %clr%
+    echo:
+    echo:
+    echo %black% %bg_lblack%      Background Colors      %clr%
+    echo bg_black   %bg_black% bg_black %clr%
+    echo bg_red     %bg_red% bg_red %clr%
+    echo bg_green   %bg_green% bg_green %clr%
+    echo bg_yellow  %bg_yellow% bg_yellow %clr%
+    echo bg_blue    %bg_blue% bg_blue %clr%
+    echo bg_magenta %bg_magenta% bg_magenta %clr%
+    echo bg_cyan    %bg_cyan% bg_cyan %clr%
+    echo bg_white   %bg_white% bg_white %clr%
+    echo:
+    echo:
+    echo %black% %bg_lblack% Foreground Colors  bright  %clr%
+    echo lblack      %lblack% lblack %clr%
+    echo lred        %lred% lred %clr%
+    echo lgreen      %lgreen% lgreen %clr%
+    echo lyellow     %lyellow% lyellow %clr%
+    echo lblue       %lblue% lblue %clr%
+    echo lmagenta    %lmagenta% lmagenta %clr%
+    echo lcyan       %lcyan% lcyan %clr%
+    echo lwhite      %lwhite% lwhite %clr%
+    echo:
+    echo:
+    echo %black% %bg_lblack% Background Colors  bright  %clr%
+    echo bg_lblack   %bg_lblack% bg_lblack %clr%
+    echo bg_lred     %bg_lred% bg_lred %clr%
+    echo bg_lgreen   %bg_lgreen% bg_lgreen %clr%
+    echo bg_lyellow  %bg_lyellow% bg_lyellow %clr%
+    echo bg_lblue    %bg_lblue% bg_lblue %clr%
+    echo bg_lmagenta %bg_lmagenta% bg_lmagenta %clr%
+    echo bg_lcyan    %bg_lcyan% bg_lcyan %clr%
+    echo bg_lwhite   %bg_lwhite% bg_lwhite %clr%
+    echo:
+    echo:
+    echo %black% %bg_lblack%   RGB Foreground Colors   %clr%
+    echo %RGB%255;10;10m    RGB test 255;0;10     %clr%
+    echo %RGB%10;255;10m    RGB test 0;255;10    %clr%
+    echo %RGB%0;0;255m    RGB test 0;0;255     %clr%
+    echo %RGB%0;0;250m    RGB test 0;0;250     %clr%
+    echo %RGB%0;0;245m    RGB test 0;0;245     %clr%
+    echo %RGB%0;0;240m    RGB test 0;0;240     %clr%
+    echo %RGB%0;0;235m    RGB test 0;0;235     %clr%
+    echo %RGB%0;0;230m    RGB test 0;0;230     %clr%
+    echo %RGB%0;0;225m    RGB test 0;0;225     %clr%
+    echo %RGB%0;0;220m    RGB test 0;0;220     %clr%
+    echo %RGB%0;0;215m    RGB test 0;0;215     %clr%
+    echo %RGB%0;0;210m    RGB test 0;0;210     %clr%
+    echo %RGB%0;0;205m    RGB test 0;0;205     %clr%
+    echo %RGB%0;0;200m    RGB test 0;0;200     %clr%
+    echo %RGB%0;0;195m    RGB test 0;0;195     %clr%
+    echo %RGB%0;0;190m    RGB test 0;0;190     %clr%
+    echo %RGB%0;0;185m    RGB test 0;0;185     %clr%
+    echo %RGB%0;0;180m    RGB test 0;0;180     %clr%
+    echo %RGB%0;0;175m    RGB test 0;0;175     %clr%
+    echo %RGB%0;0;170m    RGB test 0;0;170     %clr%
+    echo %RGB%0;0;165m    RGB test 0;0;165     %clr%
+    echo %RGB%0;0;160m    RGB test 0;0;160     %clr%
+    echo %RGB%0;0;155m    RGB test 0;0;155     %clr%
+    echo %RGB%0;0;150m    RGB test 0;0;150     %clr%
+    echo %RGB%0;0;145m    RGB test 0;0;145     %clr%
+    echo %RGB%0;0;140m    RGB test 0;0;140     %clr%
+    echo %RGB%0;0;135m    RGB test 0;0;135     %clr%
+    echo %RGB%0;0;130m    RGB test 0;0;130     %clr%
+    echo %RGB%0;0;125m    RGB test 0;0;125     %clr%
+    echo %RGB%0;0;120m    RGB test 0;0;120     %clr%
+    echo %RGB%0;0;115m    RGB test 0;0;115     %clr%
+    echo %RGB%0;0;110m    RGB test 0;0;110     %clr%
+    echo %RGB%0;0;105m    RGB test 0;0;105     %clr%
+    echo %RGB%0;0;100m    RGB test 0;0;100     %clr%
+    echo %RGB%0;0;95m    RGB test 0;0;95      %clr%
+    echo %RGB%0;0;90m    RGB test 0;0;90      %clr%
+    echo %RGB%0;0;85m    RGB test 0;0;85      %clr%
+    echo %RGB%0;0;80m    RGB test 0;0;80      %clr%
+    echo %RGB%0;0;75m    RGB test 0;0;75      %clr%
+    echo %RGB%0;0;70m    RGB test 0;0;70      %clr%
+    echo %RGB%0;0;65m    RGB test 0;0;65      %clr%
+    echo %RGB%0;0;60m    RGB test 0;0;60      %clr%
+    echo %RGB%0;0;55m    RGB test 0;0;55      %clr%
+    echo %RGB%0;0;50m    RGB test 0;0;50      %clr%
+    echo %RGB%0;0;45m    RGB test 0;0;45      %clr%
+    echo %RGB%0;0;40m    RGB test 0;0;40      %clr%
+    echo %RGB%0;0;35m    RGB test 0;0;35      %clr%
+    echo %RGB%0;0;30m    RGB test 0;0;30      %clr%
+    echo %RGB%0;0;25m    RGB test 0;0;25      %clr%
+    echo %RGB%0;0;20m    RGB test 0;0;20      %clr%
+    echo %RGB%0;0;15m    RGB test 0;0;15      %clr%
+    echo %RGB%0;0;10m    RGB test 0;0;10      %clr%
+    echo %RGB%0;0;5m    RGB test 0;0;5       %clr%
+    echo %RGB%0;0;0m    RGB test 0;0;0       %clr%
+    echo:
+    echo:
+    echo %black% %bg_lblack%   RGB Background Colors   %clr%
+    echo %bg_RGB%255;10;10m    bg_RGB test 255;0;10    %clr%
+    echo %bg_RGB%10;255;10m    bg_RGB test 0;255;10    %clr%
+    echo %bg_RGB%0;0;255m    bg_RGB test 0;0;255     %clr%
+    echo %bg_RGB%0;0;250m    bg_RGB test 0;0;250     %clr%
+    echo %bg_RGB%0;0;245m    bg_RGB test 0;0;245     %clr%
+    echo %bg_RGB%0;0;240m    bg_RGB test 0;0;240     %clr%
+    echo %bg_RGB%0;0;235m    bg_RGB test 0;0;235     %clr%
+    echo %bg_RGB%0;0;230m    bg_RGB test 0;0;230     %clr%
+    echo %bg_RGB%0;0;225m    bg_RGB test 0;0;225     %clr%
+    echo %bg_RGB%0;0;220m    bg_RGB test 0;0;220     %clr%
+    echo %bg_RGB%0;0;215m    bg_RGB test 0;0;215     %clr%
+    echo %bg_RGB%0;0;210m    bg_RGB test 0;0;210     %clr%
+    echo %bg_RGB%0;0;205m    bg_RGB test 0;0;205     %clr%
+    echo %bg_RGB%0;0;200m    bg_RGB test 0;0;200     %clr%
+    echo %bg_RGB%0;0;195m    bg_RGB test 0;0;195     %clr%
+    echo %bg_RGB%0;0;190m    bg_RGB test 0;0;190     %clr%
+    echo %bg_RGB%0;0;185m    bg_RGB test 0;0;185     %clr%
+    echo %bg_RGB%0;0;180m    bg_RGB test 0;0;180     %clr%
+    echo %bg_RGB%0;0;175m    bg_RGB test 0;0;175     %clr%
+    echo %bg_RGB%0;0;170m    bg_RGB test 0;0;170     %clr%
+    echo %bg_RGB%0;0;165m    bg_RGB test 0;0;165     %clr%
+    echo %bg_RGB%0;0;160m    bg_RGB test 0;0;160     %clr%
+    echo %bg_RGB%0;0;155m    bg_RGB test 0;0;155     %clr%
+    echo %bg_RGB%0;0;150m    bg_RGB test 0;0;150     %clr%
+    echo %bg_RGB%0;0;145m    bg_RGB test 0;0;145     %clr%
+    echo %bg_RGB%0;0;140m    bg_RGB test 0;0;140     %clr%
+    echo %bg_RGB%0;0;135m    bg_RGB test 0;0;135     %clr%
+    echo %bg_RGB%0;0;130m    bg_RGB test 0;0;130     %clr%
+    echo %bg_RGB%0;0;125m    bg_RGB test 0;0;125     %clr%
+    echo %bg_RGB%0;0;120m    bg_RGB test 0;0;120     %clr%
+    echo %bg_RGB%0;0;115m    bg_RGB test 0;0;115     %clr%
+    echo %bg_RGB%0;0;110m    bg_RGB test 0;0;110     %clr%
+    echo %bg_RGB%0;0;105m    bg_RGB test 0;0;105     %clr%
+    echo %bg_RGB%0;0;100m    bg_RGB test 0;0;100     %clr%
+    echo %bg_RGB%0;0;95m    bg_RGB test 0;0;95      %clr%
+    echo %bg_RGB%0;0;90m    bg_RGB test 0;0;90      %clr%
+    echo %bg_RGB%0;0;85m    bg_RGB test 0;0;85      %clr%
+    echo %bg_RGB%0;0;80m    bg_RGB test 0;0;80      %clr%
+    echo %bg_RGB%0;0;75m    bg_RGB test 0;0;75      %clr%
+    echo %bg_RGB%0;0;70m    bg_RGB test 0;0;70      %clr%
+    echo %bg_RGB%0;0;65m    bg_RGB test 0;0;65      %clr%
+    echo %bg_RGB%0;0;60m    bg_RGB test 0;0;60      %clr%
+    echo %bg_RGB%0;0;55m    bg_RGB test 0;0;55      %clr%
+    echo %bg_RGB%0;0;50m    bg_RGB test 0;0;50      %clr%
+    echo %bg_RGB%0;0;45m    bg_RGB test 0;0;45      %clr%
+    echo %bg_RGB%0;0;40m    bg_RGB test 0;0;40      %clr%
+    echo %bg_RGB%0;0;35m    bg_RGB test 0;0;35      %clr%
+    echo %bg_RGB%0;0;30m    bg_RGB test 0;0;30      %clr%
+    echo %bg_RGB%0;0;25m    bg_RGB test 0;0;25      %clr%
+    echo %bg_RGB%0;0;20m    bg_RGB test 0;0;20      %clr%
+    echo %bg_RGB%0;0;15m    bg_RGB test 0;0;15      %clr%
+    echo %bg_RGB%0;0;10m    bg_RGB test 0;0;10      %clr%
+    echo %bg_RGB%0;0;5m    bg_RGB test 0;0;5       %clr%
+    echo %bg_RGB%0;0;0m    bg_RGB test 0;0;0       %clr%
+    echo:
+    echo:
+    echo %black% %bg_lblack%        Combinations         %clr%
+    echo negative                            %negative%   inverse foreground <-> background   %clr%
+    echo bg_yellow red                     %bg_yellow% %red%   yellow backgroud / red foreground   %clr%
+    echo bg_yellow red negative           %bg_yellow% %red% %negative%        yellow / red inversed          %clr%
+    echo bg_red.. bg_green.. bg_blue     %bg_red%    nested   %bg_green%    colors    %bg_blue%    text    %clr%
+    echo:
+    echo:
+    echo %black% %bg_lblack%        ASCII Color Art       %clr%
+    echo:
+    echo %bg_blue% * * * * * * * * * %bg_red%                                  %clr%
+    echo %bg_blue%  * * * * * * * *  %bg_white%                                  %clr%
+    echo %bg_blue% * * * * * * * * * %bg_red%                                  %clr% 
+    echo %bg_blue%  * * * * * * * *  %bg_white%                                  %clr%
+    echo %bg_blue% * * * * * * * * * %bg_red%                                  %clr%
+    echo %bg_blue%  * * * * * * * *  %bg_white%                                  %clr%
+    echo %bg_blue% * * * * * * * * * %bg_red%                                  %clr%
+    echo %bg_white%                                                     %clr%
+    echo %bg_red%                                                     %clr%
+    echo %bg_white%                                                     %clr%
+    echo %bg_red%                                                     %clr%
+    echo %bg_white%                                                     %clr%
+    echo %bg_red%                                                     %clr%
 %endfunction%

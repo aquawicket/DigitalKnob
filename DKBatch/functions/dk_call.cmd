@@ -2,6 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 (set LiveCallStack=1)
+(set _IGNORE_=dk_debugFunc;dk_echo;)
 
 ::####################################################################
 ::# dk_call(command args)
@@ -76,7 +77,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
-	if defined LiveCallStack (call :printExit)
+::	if defined LiveCallStack (call :printExit)
 	::#################################
 	
 	::###### Globalize the <STACK>_LVL variables
@@ -104,6 +105,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 :printEntry
+	if not "XXX!_IGNORE_:%__FUNC__%=!XXX"=="XXX%_IGNORE_%XXX" (%endfunction%)
 	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
 	if not "%_codepage_%"=="65001" chcp 65001>nul
 	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
@@ -111,6 +113,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :printExit
+	if not "XXX!_IGNORE_:%__FUNC__%=!XXX"=="XXX%_IGNORE_%XXX" (%endfunction%)
 	echo %pad%╔══ !__FUNC__!(!__ARGV__!)
 	echo %pad%▼
 %endfunction%
