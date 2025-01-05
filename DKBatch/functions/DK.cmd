@@ -90,7 +90,7 @@ echo:
     ::%DK% dk_load %DKSCRIPT_PATH%
 
     ::###### DKTEST MODE ######
-	::%dk_call% dk_isFunction DKTEST || %return%
+::	%dk_call% dk_isFunction DKTEST || %return%
 	%dk_call% dk_isChildPathOf "%DKSCRIPT_DIR%" "%DKBATCH_DIR%" || %return%
     if "%DKSCRIPT_EXT%" neq ".cmd" %return%
     %dk_call% dk_echo
@@ -151,19 +151,25 @@ echo:
         set "RELOADED=1"
         set "DKINIT="
 
-        ::"%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
-        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%"
-
+        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+	
+		:: Change console settings
+		:: >nul REG ADD HKCU\Console\digitalknob FontSize /t reg_sz /d "Consolas" /f
+		:: start "digitalknob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+		:: exit
+		
         ::####################################
         ::############ EXIT POINT ############
         ::####################################
-            set "exit_code=%ERRORLEVEL%"
-            echo:
-            echo Exit code: %exit_code%
-            echo:
-            if "%exit_code%" neq "0" pause
-            exit %ERRORLEVEL%
+			set "exit_code=%ERRORLEVEL%"
+			echo:
+			echo Exit code: %exit_code%
+			echo:
+			if "%exit_code%" neq "0" pause
+			exit %ERRORLEVEL%
     :end_dk_reload
+	
+	::( >NUL reg delete HKCU\Console\digitalknob /f )
 %endfunction%
 
 
