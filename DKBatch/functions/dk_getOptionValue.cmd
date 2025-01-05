@@ -9,19 +9,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
 	
     :getParameter_loop
-	if "%~2" == "" (
-		%return%
-	)
+	if "%~2" == "" (%endfunction%)
 	if "%~1" == "%~2" (
-	
 		rem set "_value_=%~3"
 		endlocal & set "%1=%~3"
-		%return%
+		%endfunction%
 	)
     shift /2
     goto getParameter_loop 
 	:end_getParameter_loop
-
+	
     endlocal & set "%1=%_value_%"
 
 ::DEBUG

@@ -36,8 +36,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_debugFunc
 setlocal enableDelayedExpansion	
 
-	if "%FUNC%"=="dk_debugFunc" goto:eof
-	if not defined FUNC goto:eof
+	if "%FUNC%"=="dk_debugFunc" %endfunction%
+	if not defined FUNC %endfunction%
 	
     :: ###### VALIDATE ARGUMENTS ######
     if "%~1" == ""                                            %dk_call% dk_fatal "%FUNC%(%ARGV%): dk_debugFunc ArgsMin ArgsMax is not set."

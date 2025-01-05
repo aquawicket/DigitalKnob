@@ -13,7 +13,7 @@ setlocal
     %dk_call% dk_debugFunc 0 1
 
  
-    if "%~1" equ "" (echo: & goto:eof)   
+    if "%~1" equ "" (echo: & %endfunction%)   
     set "_message_=%~1" 
         
     :: if msg starts and ends with quotes, remove the first and last characters

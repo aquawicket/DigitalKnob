@@ -44,7 +44,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     goto end_runCache
     :runCache
         %dk_call% dk_info "re-running cached options..."
-        %dk_call% dk_set target_app %_target_app_% & call dk_set target_triple %_target_triple_% & call dk_set target_type %_target_type_% & %return%
+        %dk_call% dk_set target_app %_target_app_% && call dk_set target_triple %_target_triple_% && call dk_set target_type %_target_type_% && %return%
     :end_runCache
     
     :: append remaining options with commands

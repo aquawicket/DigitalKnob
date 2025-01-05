@@ -15,7 +15,7 @@ if defined %~1 (%return%)
     ::echo %~2
 	%~2
     
-	if "%~3" equ "NO_HALT" %return%
+	if "%~3" equ "NO_HALT" %endfunction%
     if not defined %~1    %dk_call% dk_error "dk_validate was unable to set the variable:%~1 with the code provided"
 %endfunction%
 

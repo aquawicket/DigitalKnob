@@ -1,8 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-if exist !%1!  %return%
-if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 ::################################################################################
 ::# dk_assertPath(path)
 ::#
@@ -10,8 +8,11 @@ if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 setlocal
 	%dk_call% dk_debugFunc 0 99
 	
+	if exist !%1!  %return%
+	if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
+	
 	:: check that ARG1 is valid
-	if "%~1" equ "" %dk_call% dk_fatal "dk_assertPath(%*): ARG1 is invalid"
+	if "%~1" equ "" (%dk_call% dk_fatal dk_assertPath(%*): ARG1 is invalid)
 	
 	:: get the name if it's a variable
 	if defined %~1 (set "_name_=%1:") else (set "_name_=path:")
@@ -20,19 +21,19 @@ setlocal
 	set "_path_=%1"
 	set "_path_=%_path_:/=\%"
 	if "" neq %_path_:~0,1%%_path_:~-1% (
-		if not defined %~1 	%dk_call% dk_error "dk_assertPath(%*): path is not quoted"
+		if not defined %~1 	(%dk_call% dk_error dk_assertPath(%*): path is not quoted)
 	) else (
-		if defined %~1  %dk_call% dk_error "dk_assertPath(%*): don't quote variable names"
+		if defined %~1  (%dk_call% dk_error dk_assertPath(%*): don't quote variable names)
 	)
 	
 	:: check that we only recieved 1 argument
-	if "%~2" neq ""  %dk_call% dk_error "dk_assertPath(%*): too many arguments"
+	if "%~2" neq ""  (%dk_call% dk_error dk_assertPath(%*): too many arguments)
 	
 	:: Without Delayed Expansion
     ::set "_var_=%~1"
     ::if "!DE!" neq "" call set "_value_=%%%_var_%%%"
 	::echo dk_assertPath %_value_%
-    %dk_call% dk_error "ASSERTION: dk_assertPath(%*): path not found!"
+    (%dk_call% dk_error ASSERTION: dk_assertPath(%*): path not found!)
 %endfunction%
 
 

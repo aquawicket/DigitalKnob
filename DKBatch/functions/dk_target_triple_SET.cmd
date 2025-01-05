@@ -12,46 +12,46 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 
-	%dk_call% dk_echo ""
-	%dk_call% dk_echo " 1) !host_triple!"
-	%dk_call% dk_echo ""
-	%dk_call% dk_echo " 2) cosmopolitan"
-	%dk_call% dk_echo " 3) Android arm32"
-	%dk_call% dk_echo " 4) Android arm64"
-	%dk_call% dk_echo " 5) Android x86"
-	%dk_call% dk_echo " 6) Android x86_64"
-	%dk_call% dk_echo " 7) Emscripten"
-	%dk_call% dk_echo " 8) Ios arm32"
-	%dk_call% dk_echo " 9) Ios arm64"
-	%dk_call% dk_echo "10) Ios x86"
-	%dk_call% dk_echo "11) Ios x86_64"
-	%dk_call% dk_echo "12) Iossim arm32"
-	%dk_call% dk_echo "13) Iossim arm64"
-	%dk_call% dk_echo "14) Iossim x86"
-	%dk_call% dk_echo "15) Iossim x86_64"
-	%dk_call% dk_echo "16) Linux arm32"
-	%dk_call% dk_echo "17) Linux arm64"
-	%dk_call% dk_echo "18) Linux x86"
-	%dk_call% dk_echo "19) Linux x86_64"
-	%dk_call% dk_echo "20) Mac arm32"
-	%dk_call% dk_echo "21) Mac arm64"
-	%dk_call% dk_echo "22) Mac x86"
-	%dk_call% dk_echo "23) Mac x86_64"
-	%dk_call% dk_echo "24) Raspberry arm32"
-	%dk_call% dk_echo "25) Raspberry arm64"
-	%dk_call% dk_echo "26) Raspberry x86"
-	%dk_call% dk_echo "27) Raspberry x86_64"
-	%dk_call% dk_echo "28) Windows arm32"
-	%dk_call% dk_echo "29) Windows arm64 (clang)"
-	%dk_call% dk_echo "30) Windows x86 (gcc)"
-	%dk_call% dk_echo "31) Windows x86 (clang)"
-	%dk_call% dk_echo "32) Windows x86 (msvc)"
-	%dk_call% dk_echo "33) Windows x86_64 (gcc)"
-	%dk_call% dk_echo "34) Windows x86_64 (clang)"
-	%dk_call% dk_echo "35) Windows x86_64 (ucrt)"
-	%dk_call% dk_echo "36) Windows x86_64 (msvc)"
-	%dk_call% dk_echo "37) Exit"
-	%dk_call% dk_echo ""
+	echo 
+	echo  1^) !host_triple!
+	echo 
+	echo  2) cosmopolitan
+	echo  3) Android arm32
+	echo  4) Android arm64
+	echo  5) Android x86
+	echo  6) Android x86_64
+	echo  7) Emscripten
+	echo  8) Ios arm32
+	echo  9) Ios arm64
+	echo 10) Ios x86
+	echo 11) Ios x86_64
+	echo 12) Iossim arm32
+	echo 13) Iossim arm64
+	echo 14) Iossim x86
+	echo 15) Iossim x86_64
+	echo 16) Linux arm32
+	echo 17) Linux arm64
+	echo 18) Linux x86
+	echo 19) Linux x86_64
+	echo 20) Mac arm32
+	echo 21) Mac arm64
+	echo 22) Mac x86
+	echo 23) Mac x86_64
+	echo 24) Raspberry arm32
+	echo 25) Raspberry arm64
+	echo 26) Raspberry x86
+	echo 27) Raspberry x86_64
+	echo 28) Windows arm32
+	echo 29) Windows arm64 (clang)
+	echo 30) Windows x86 (gcc)
+	echo 31) Windows x86 (clang)
+	echo 32) Windows x86 (msvc)
+	echo 33) Windows x86_64 (gcc)
+	echo 34) Windows x86_64 (clang)
+	echo 35) Windows x86_64 (ucrt)
+	echo 36) Windows x86_64 (msvc)
+	echo 37) Exit
+	echo 
 
 	%dk_call% dk_keyboardInput input
 	if "!input!" equ "0" (

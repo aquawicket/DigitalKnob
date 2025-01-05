@@ -1,7 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-::(set LiveCallStack=1)
+(set LiveCallStack=1)
 
 ::####################################################################
 ::# dk_call(command args)
@@ -107,7 +107,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
 	if not "%_codepage_%"=="65001" chcp 65001>nul
 	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
-	call :printStackVariables
+::	call :printStackVariables
 %endfunction%
 
 :printExit
