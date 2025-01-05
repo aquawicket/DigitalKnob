@@ -73,7 +73,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### Entry ############################################################################################
 ::	echo dk_call ^> %__CMND__% !__ARGV__!
-    call %__CMND__% %__ARGV__%
+    call %__CMND__% %__ARGV__% || goto error_handler
+	
+	if %ERRORLEVEL% NEQ 0 (set RTN_CODE=%ERRORLEVEL%) else (set RTN_CODE=0)
+	set RTN_BOOL=0
+	goto end_handler
+	
+	:error_handler
+	if %ERRORLEVEL% NEQ 0 (set RTN_CODE=%ERRORLEVEL%) else (set RTN_CODE=0)
+	set RTN_BOOL=1
+	
+	:end_handler
+
+	
+	::(echo %ERRORLEVEL% && set RTN_BOOL=0) || (echo %ERRORLEVEL% && set RTN_BOOL=1)
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
@@ -101,7 +114,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(set __FUNC__=!__FUNC__%LVL%!)
 	(set __ARGV__=!__ARGV__%LVL%!)
 	(set __ARGC__=!__ARGC__%LVL%!)
-%endfunction%
+	
+	::echo RTN_BOOL = %RTN_BOOL% 
+	::echo RTN_CODE = %RTN_CODE%
+exit /b %RTN_CODE%
 
 
 :printEntry

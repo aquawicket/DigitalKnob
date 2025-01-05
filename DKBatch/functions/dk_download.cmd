@@ -16,27 +16,27 @@ setlocal
     ::%dk_call% dk_printVar url
 
     set "destination=%~2"
-	set "destination=%destination:/=\%"
+	::set "destination=%destination:/=\%"
     ::%dk_call% dk_printVar destination
     
     %dk_call% dk_basename "%url%" url_filename
-    ::%dk_call% dk_printVar url_filename
+    %dk_call% dk_printVar url_filename
     if not defined url_filename %dk_call% dk_error "url_filename invalid"
 
     if defined destination %dk_call% dk_realpath "%destination%" destination
-    ::%dk_call% dk_printVar destination
+    %dk_call% dk_printVar destination
    
     %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-    ::%dk_call% dk_printVar DKDOWNLOAD_DIR
+    %dk_call% dk_printVar DKDOWNLOAD_DIR
 
     if not defined destination set "destination=%DKDOWNLOAD_DIR%\%url_filename%"
-    ::%dk_call% dk_printVar destination
+    %dk_call% dk_printVar destination
 
     if not defined destination %dk_call% dk_error "destination is invalid"
-    ::%dk_call% dk_printVar destination
+    %dk_call% dk_printVar destination
     
     %dk_call% dk_isDirectory "%destination%" && set "destination=%destination%\%url_filename%"
-    ::%dk_call% dk_printVar destination
+    %dk_call% dk_printVar destination
     
     if exist "%destination%" %dk_call% dk_info "%destination% already exist" & %return%
  
@@ -127,7 +127,8 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd"
+    ::%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd"
     ::%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "DKBuilder.cmd"
     ::%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "%DKDOWNLOAD_DIR%\dk_download_batch_test\DKBuilder.cmd"
+	%dk_call% dk_download "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip" "C:\Users\Administrator\digitalknob\download\cmake-3.29.5-windows-x86_64.zip" 
 %endfunction%

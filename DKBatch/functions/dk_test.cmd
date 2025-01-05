@@ -55,6 +55,7 @@ setlocal enableDelayedExpansion
     set "return_value=return value from dk_test.cmd"
 	
     endlocal & set "%3=%return_value%"
+	exit /b 13
 %endfunction%
 
 

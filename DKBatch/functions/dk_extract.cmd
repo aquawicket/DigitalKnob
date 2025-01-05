@@ -10,8 +10,7 @@ setlocal
 	%dk_call% dk_debugFunc 1 2
  
 	set "_file_=%~1"
-	set "_file_=%_file_:/=\%"
-	
+	::set "_file_=%_file_:/=\%"
 	
 	if not exist "%_file_%" %dk_call% dk_error "%_file_% does not exist"
 	 
@@ -34,9 +33,10 @@ setlocal
 	::### handle 2 parameters
     :twoParams
     
-	set "_dest_=%~1"
-	set "_dest_=%_dest_:/=\%"
-    :: try dk_powershell
+	set "_dest_=%~2"
+	:set "_dest_=%_dest_:/=\%"
+    
+	:: try dk_powershell
 	%dk_call% dk_info "Extracting %_file_% to %_dest_%. . ."
 	if exist "%_dest_%" %dk_call% dk_error "%_dest_% already exists"
     if not exist "%_dest_%" %dk_call% dk_powershell Expand-Archive '"%_file_%"' -DestinationPath '"%_dest_%"'
