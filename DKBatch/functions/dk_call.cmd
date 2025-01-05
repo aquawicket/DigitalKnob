@@ -123,7 +123,8 @@ exit /b %RTN_CODE%
 :printEntry
 	if not "XXX!_IGNORE_:%__FUNC__%=!XXX"=="XXX%_IGNORE_%XXX" (%endfunction%)
 	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
-	if not "%_codepage_%"=="65001" chcp 65001>nul
+	::if not "%_codepage_%"=="65001" chcp 65001>nul
+	if not "%_codepage_%"=="65001" powershell -C "[console]::InputEncoding = [text.utf8encoding]::UTF8"
 	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
 ::	call :printStackVariables
 %endfunction%
