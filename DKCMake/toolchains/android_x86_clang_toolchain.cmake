@@ -1,6 +1,6 @@
-dk_echo(STATUS "#####################################################################")
-dk_echo(STATUS "################ android_x86_64_clang_toolchain.cmake ###############")
-dk_echo(STATUS "#####################################################################")
+dk_echo(STATUS "##############################################################")
+dk_echo(STATUS "################ android_x86_toolchain.cmake ###############")
+dk_echo(STATUS "##############################################################")
 
 dk_validate(ANDROID_TOOLCHAIN_FILE		"dk_depend(android-ndk)")
 set(CMAKE_TOOLCHAIN_FILE				"${ANDROID_TOOLCHAIN_FILE}")
@@ -26,7 +26,7 @@ dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM32 -std=c++1z)
 #dk_append(DKCONFIGURE_CXXFLAGS			${CMAKE_CXX_FLAGS})
 	
 dk_append(DKCMAKE_FLAGS
-	-DANDROID_ABI=x86_64
+	-DANDROID_ABI=x86
 	"-DANDROID_CPP_FEATURES=rtti exceptions"
 	-DANDROID_NATIVE_API_LEVEL=${ANDROID_API}
 	-DANDROID_NDK=${ANDROID_NDK}

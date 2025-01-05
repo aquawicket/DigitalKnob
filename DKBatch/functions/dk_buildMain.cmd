@@ -35,15 +35,13 @@ setlocal enableDelayedExpansion
 			if not defined _line_ (set /a _line_=0)
 			:skip_comments
 			call set "comment_check=%%BUILD_LIST[!_line_!][0]%%"
-			echo "!comment_check:~0,1!"
 			if "!comment_check:~0,1!"=="#" (
-				echo skipping _line_ . . .
+				rem echo skipping _line_ . . .
 				set /a _line_+=1
 				goto skip_comments
 			)
 			 %dk_call% dk_printVar BUILD_LIST[!_line_!][2]
 			if defined BUILD_LIST[!_line_!][2] (
-				echo running build list _line_
 				set "UPDATE=1"
 				call set "target_app=%%BUILD_LIST[!_line_!][0]%%"
 				call set "target_triple=%%BUILD_LIST[!_line_!][1]%%"
