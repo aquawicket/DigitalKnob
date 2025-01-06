@@ -9,9 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 setlocal
 	%dk_call% dk_debugFunc 2 3 enableDelayedExpansion
  
-    ::if "!d!" neq "" %dk_call% dk_error "%__FUNCTION__%: requires delayed expansion"
-    
-    set "_haystack_=%~1"
+	set "_haystack_=%~1"
     set "_needle_=%~2"
 	
 	if not "XXX!_haystack_:%_needle_%=!XXX"=="XXX%_haystack_%XXX" (
@@ -33,8 +31,9 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    %dk_call% dk_debugFunc 0
   setlocal   
+    %dk_call% dk_debugFunc 0
+
     ::###### Using if return value
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"

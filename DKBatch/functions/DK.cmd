@@ -91,7 +91,7 @@ echo:
 
     ::###### DKTEST MODE ######
 ::	%dk_call% dk_isFunction DKTEST || %return%
-	%dk_call% dk_isChildPathOf "%DKSCRIPT_DIR%" "%DKBATCH_DIR%" || %return%
+::	%dk_call% dk_isChildPathOf "%DKSCRIPT_DIR%" "%DKBATCH_DIR%" || %return%
     if "%DKSCRIPT_EXT%" neq ".cmd" %return%
     %dk_call% dk_echo
     %dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME%.cmd ###### DKTEST MODE ######%clr%"
@@ -249,6 +249,7 @@ echo:
 :DKTEST
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
+	::echo DK.cmd:DKTEST %DKSCRIPT_PATH%
 	
-    %DKSCRIPT_NAME%
+    %DKSCRIPT_PATH%
 %endfunction%

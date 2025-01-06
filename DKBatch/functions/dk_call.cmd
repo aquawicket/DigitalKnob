@@ -48,6 +48,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(call :setGlobal __ARGV__%LVL% %__ARGV__%)
 	(call :setGlobal __ARGC__%LVL% %__ARGC__%)
 
+	::echo:
+	::call :printStackVariables
+	
 	::###### Print function entry ####
 	if defined LiveCallStack (call :printEntry)
 	::##################################
@@ -55,6 +58,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if %LVL% lss 1 (%endfunction%)
 
 ::##### Prepair ###########################################################################################
+	if exist "%__CMND__%.cmd" (set __CMND__=%__CMND__%.cmd)
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd)
 	
 	if not exist "%__CMND__%" (
@@ -72,7 +76,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	)
 
 ::###### Entry ############################################################################################
-::	echo dk_call ^> %__CMND__% !__ARGV__!
+	::echo dk_call ^> %__CMND__% !__ARGV__!
     call %__CMND__% %__ARGV__% || goto error_handler
 	
 	if %ERRORLEVEL% NEQ 0 (set RTN_CODE=%ERRORLEVEL%) else (set RTN_CODE=0)
