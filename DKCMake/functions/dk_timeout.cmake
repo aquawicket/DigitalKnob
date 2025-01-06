@@ -1,29 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
-
-macro(getVar)
-	###### ${ARGV0} #####
-	set(lvl 0)
-	set(value ARGV0)
-	set(default ${ARGV1})
-	while(DEFINED ${value})
-		set(name "${name}-> ${value}")
-		set(value ${${value}})
-		math(EXPR lvl "${lvl} + 1")
-	endwhile()
-
-	message("lvl = ${lvl}")
-	message("name = ${name}")
-	message("value = ${value}")
-	message("default = ${default}")
-	
-	set(${ARGV1} ${value})
-	
-	if(NOT ${lvl})
-		set(${ARGV0} ${default})
-	endif()
-endmacro()
+include_guard()
 
 
 ##############################################################################
@@ -34,11 +11,7 @@ endmacro()
 function(dk_timeout) 
 	dk_debugFunc(0 99)
 	
-	message("\n")
-	message("dk_timeout(${ARGV})")
-	
-	getVar(${ARGV0} seconds 10)
-	message("seconds = ${seconds}")
+	dk_getArg(${ARGV0} seconds 10)
 
 	
 	###### CMD ######

@@ -5,9 +5,7 @@ if "%*" == "" goto:dk_install
 	echo dk_install.cmd %*
 	set "CMAKE_EXE=%~1"
 	set "DKCMAKE_FUNCTIONS_DIR=%~2"
-	pause
 	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
-	pause
 	set "DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR%/"
 	set "DKSCRIPT_PATH=%~3"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
