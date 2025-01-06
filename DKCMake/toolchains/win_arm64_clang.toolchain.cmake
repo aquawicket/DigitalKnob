@@ -2,7 +2,7 @@ message("######################################################################"
 message("################ windoows_arm64_clang_toolchain.cmake ################")
 message("######################################################################")
 
-dk_depend(msys2)
+dk_validate(MSYS2 "dk_depend(msys2)")
 dk_depend(clang)
 
 dk_set(MSYSTEM 						CLANGARM64)

@@ -39,19 +39,19 @@ dk_append(DKCMAKE_FLAGS
 
 
 #dk_depend(android-ndk)
-#set(ANDROID_ABI						armeabi-v7a)
-#set(ANDROID_API						31)
+#set(ANDROID_ABI					armeabi-v7a)
+#set(ANDROID_API					31)
 #set(ANDROID_PLATFORM				31)
 #set(ANDROID_NATIVE_API_LEVEL		31)
 #
 #set(ANDROID_CPP_FEATURES			"rtti exceptions")
-#set(ANDROID_STL						c++_static)
+#set(ANDROID_STL					c++_static)
 #set(ANDROID_STL_FORCE_FEATURES		1)
 #set(ANDROID_TOOLCHAIN				clang)
 #set(CMAKE_ANDROID_STL_TYPE			c++_static)
 #
 #dk_set(CMAKE_GENERATOR				"Unix Makefiles")
-#dk_set(CMAKE_TOOLCHAIN_FILE			"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+#dk_set(CMAKE_TOOLCHAIN_FILE		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
 #dk_set(CMAKE_MAKE_PROGRAM			"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make${exe}")
 #
 #if(ANDROID_HOST)
@@ -61,9 +61,9 @@ dk_append(DKCMAKE_FLAGS
 #	dk_set(CMAKE_MAKE_PROGRAM		"${MSYS2_MAKE_PROGRAM}")
 #endif()
 #
-#dk_set(CMAKE_C_COMPILER				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
+#dk_set(CMAKE_C_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
 #dk_set(CMAKE_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang++${exe}")
-#dk_append(CMAKE_C_FLAGS				-DANDROID -DANDROID_ARM32 -std=c17)
+#dk_append(CMAKE_C_FLAGS			-DANDROID -DANDROID_ARM32 -std=c17)
 #dk_append(CMAKE_CXX_FLAGS			-DANDROID -DANDROID_ARM32 -std=c++1z)
 #
 #dk_set(DKCONFIGURE_CC				"${CMAKE_C_COMPILER}")

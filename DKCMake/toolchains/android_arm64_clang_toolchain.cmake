@@ -1,5 +1,5 @@
 message(STATUS "####################################################################")
-message(STATUS "################ android_arm64_toolchain.cmake ###############")
+message(STATUS "################ android_arm64_clang_toolchain.cmake ###############")
 message(STATUS "####################################################################")
 
 dk_validate(ANDROID_TOOLCHAIN_FILE		"dk_depend(android-ndk)")
@@ -17,8 +17,8 @@ endif()
 
 set(CMAKE_C_COMPILER					"${ANDROID_C_COMPILER}")
 set(CMAKE_CXX_COMPILER					"${ANDROID_CXX_COMPILER}")
-dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM32 -std=c17)
-dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM32 -std=c++1z)
+dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM64 -std=c17)
+dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM64 -std=c++1z)
 
 #dk_set(DKCONFIGURE_CC					${CMAKE_C_COMPILER})
 #dk_set(DKCONFIGURE_CXX					${CMAKE_CXX_COMPILER})

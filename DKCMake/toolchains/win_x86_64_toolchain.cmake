@@ -1,9 +1,8 @@
 message("######################################################################")
-message("################ windoows_x86_64_toolchain.cmake ###############")
+message("################ windoows_x86_64_toolchain.cmake #####################")
 message("######################################################################")
 
-dk_depend(msys2)
-dk_assertVar(MSYS2)
+dk_validate(MSYS2 "dk_depend(msys2)")
 dk_depend(clang)
 
 dk_set(MSYSTEM 						CLANG64)

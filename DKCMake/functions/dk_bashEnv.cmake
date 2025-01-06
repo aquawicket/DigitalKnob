@@ -39,7 +39,7 @@ function(dk_bashEnv)
 		dk_info("\n${clr}${magenta} bash> ${ARGV}\n")
 	endif()
 	
-	dk_depend(msys2)
+	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_depend(cygpath)
 	dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_CYGPATH)
 	

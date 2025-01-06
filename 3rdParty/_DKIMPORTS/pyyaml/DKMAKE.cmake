@@ -5,12 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ pyyaml ############
 # https://github.com/yaml/pyyaml
-
-
-dk_depend(python)
-
-
+dk_validate(PYTHON "dk_depend(python)")
 dk_validate(host_triple "dk_host_triple()")
 
 ### INSTALL ###
@@ -19,8 +16,6 @@ if(WIN_HOST)
 elseif(MAC_HOST)
 	dk_executeProcess(pip install PyYAML)
 else()
-	#LINUX_dk_executeProcess(${SUDO_EXE} apt-get -y install python python-yaml)
-	#RASPBERRY_dk_executeProcess(${SUDO_EXE} apt-get -y install python python-yaml)
-	dk_installPackage(python python-yaml)
+	dk_installPackage(python-yaml)
 endif()
 

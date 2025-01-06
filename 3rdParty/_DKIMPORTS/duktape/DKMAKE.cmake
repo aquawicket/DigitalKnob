@@ -19,7 +19,7 @@ dk_load(dk_builder)
 dk_depend(python3)
 dk_depend(pyyaml)
 #dk_depend(nodejs)
-#dk_depend(msys2)
+#dk_validate(MSYS2 "dk_depend(msys2)")
 
 
 ### IMPORT ###

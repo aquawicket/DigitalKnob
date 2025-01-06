@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::(set LiveCallStack=1)
-::(set _IGNORE_=dk_debugFunc;dk_echo;)
+(set _IGNORE_=dk_debugFunc;dk_echo;)
 
 ::####################################################################
 ::# dk_call(command args)

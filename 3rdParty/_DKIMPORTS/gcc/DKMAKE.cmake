@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_validate(target_triple "dk_target_triple")
 
 if(clang OR mingw OR ucrt)
-	dk_depend(msys2)
+	dk_validate(MSYS2 "dk_depend(msys2)")
 endif()
 
 dk_installPackage(gcc)

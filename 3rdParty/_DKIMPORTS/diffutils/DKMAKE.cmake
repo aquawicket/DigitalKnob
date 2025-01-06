@@ -9,5 +9,5 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://packages.msys2.org/base/diffutils
 
 
-dk_depend(msys2)
+dk_validate(MSYS2 "dk_depend(msys2)")
 dk_installPackage(diffutils)

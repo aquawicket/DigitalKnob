@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://walterteng.com/using-zsh-on-windows
 
 
-dk_depend(msys2)
+dk_validate(MSYS2 "dk_depend(msys2)")
 
 
 dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")

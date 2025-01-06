@@ -8,7 +8,7 @@ dk_set(bat ".bat")
 
 
 if(WIN_HOST)
-	dk_depend(msys2)
+	dk_validate(MSYS2 "dk_depend(msys2)")
 	#dk_installPackage(make)
 	dk_findProgram(CMAKE_MAKE_PROGRAM make "${MSYS2_DIR}/usr/bin")
 else()

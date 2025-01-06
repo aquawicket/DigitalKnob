@@ -28,7 +28,7 @@ function(dk_BASH_EXE)
 	
 	### Msys2 bash ###
 	if(MSYSTEM)
-		dk_depend(msys2)
+		dk_validate(MSYS2 "dk_depend(msys2)")
 		dk_findProgram(MSYS2_BASH_EXE bash "${MSYS2_DIR}/usr/bin")
 		if(EXISTS "${MSYS2_BASH_EXE}")
 			dk_printVar(MSYS2_BASH_EXE)

@@ -14,7 +14,7 @@ dk_validate(target_triple "dk_target_triple()")
 #dk_getFileParam("${DKIMPORTS_DIR}/clang/dkconfig.txt" VERSION)
 #if(clang OR mingw OR ucrt)
 if(MSYSTEM)
-	dk_depend(msys2)
+	dk_validate(MSYS2 "dk_depend(msys2)")
 endif()
 dk_installPackage(clang)
 	

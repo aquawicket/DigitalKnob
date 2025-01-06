@@ -2,7 +2,7 @@ message("######################################################################"
 message("################ windoows_x86_mingw_toolchain.cmake ##################")
 message("######################################################################")
 
-dk_depend(msys2)
+dk_validate(MSYS2 "dk_depend(msys2)")
 dk_depend(gcc)
 
 dk_set(MSYSTEM 						MINGW32)
