@@ -90,6 +90,7 @@ echo:
     ::%DK% dk_load %DKSCRIPT_PATH%
 
     ::###### DKTEST MODE ######
+	
 ::	%dk_call% dk_isFunction DKTEST || %return%
 ::	%dk_call% dk_isChildPathOf "%DKSCRIPT_DIR%" "%DKBATCH_DIR%" || %return%
     if "%DKSCRIPT_EXT%" neq ".cmd" %return%
@@ -151,7 +152,7 @@ echo:
         set "RELOADED=1"
         set "DKINIT="
 
-        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" 			&::%DKSCRIPT_ARGS%
 	
 		:: Change console settings
 		:: >nul REG ADD HKCU\Console\digitalknob FontSize /t reg_sz /d "Consolas" /f
@@ -248,8 +249,8 @@ echo:
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal enableDelayedExpansion
-    %dk_call% dk_debugFunc 0
+    ::%dk_call% dk_debugFunc 0
 	::echo DK.cmd:DKTEST %DKSCRIPT_PATH%
 	
-    %DKSCRIPT_PATH%
+	%DKSCRIPT_PATH%    
 %endfunction%

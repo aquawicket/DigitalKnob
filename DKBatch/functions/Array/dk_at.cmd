@@ -49,9 +49,9 @@ setlocal
     %dk_call% dk_printVar myArrayA
     %dk_call% Array::dk_at MyArrayA 2 arrayAtA
     %dk_call% dk_printVar arrayAtA
-    %dk_call% dk_echo "Array::dk_at(MyArrayA 2) = %arrayAtA%"
-    if "%arrayAtA%" neq "d e f" %dk_call% dk_error "Array::dk_at() failed"
-    if "%arrayAtA%" equ "d e f" %dk_call% dk_success "Array::dk_at() suceeded" 
+    %dk_call% dk_echo "Array::dk_at[MyArrayA 2] = %arrayAtA%"
+    if "%arrayAtA%" neq "d e f" %dk_call% dk_error "Array::dk_at[] failed"
+    if "%arrayAtA%" equ "d e f" %dk_call% dk_success "Array::dk_at[] suceeded" 
 
     set "myArrayB[0]=h i j"
     set "myArrayB[1]=4 5 6"
@@ -61,7 +61,7 @@ setlocal
     %dk_call% dk_printVar myArrayB
     %dk_call% Array::dk_at MyArrayB 3 arrayAtB
     %dk_call% dk_printVar arrayAtB
-    %dk_call% dk_echo "Array::dk_at(MyArrayB 3) = %arrayAtB%"
-    if "%arrayAtB%" neq "1 2 3" %dk_call% dk_error "Array::dk_at() failed"
-    if "%arrayAtB%" equ "1 2 3" %dk_call% dk_success "Array::dk_at() suceeded"
+    %dk_call% dk_echo "Array::dk_at[MyArrayB 3] = %arrayAtB%"
+    if "%arrayAtB%" neq "1 2 3" %dk_call% dk_error "Array::dk_at[] failed"
+    if "%arrayAtB%" equ "1 2 3" %dk_call% dk_success "Array::dk_at[] suceeded"
 %endfunction%

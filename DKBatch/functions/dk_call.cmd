@@ -12,18 +12,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	if not defined endfunction  (set endfunction=exit /b %errorlevel%)
 	
-	:: don't functions in this file  i.e :setGlobal, :printCallstack
-	::(set "temp=%*")
-	::if "!temp:~0,1!"==":" (call %temp% && %endfunction%)
-	if "%~1"=="setGlobal" 		(call %* && %endfunction%)
-	if "%~1"=="printCallStack" 	(call %* && %endfunction%)
+	:: don't process functions in this file  i.e :setGlobal, :printCallstack
+	if "%~1"=="setGlobal" 			(call %* && %endfunction%)
+	if "%~1"=="printCallStack" 		(call %* && %endfunction%)
+	if "%~1"=="printStackVariables"	(call %* && %endfunction%)
 	
 	::### Constant Variables ###
-	if not defined dk_call		(set "dk_call=call dk_call")
-	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
-	if not defined LVL			(set /a "LVL=-1")
-	if not defined ESC			(set ESC=)
-	if not defined clr			(set clr=%ESC%[0m)
+	
+		if not defined dk_call		set "dk_call=call dk_call"
+		if not defined GLOBAL_FILE 	set "GLOBAL_FILE=C:\GLOBAL.txt"
+		if not defined LVL			set /a "LVL=-1"
+		if not defined ESC			set "ESC="
+		if not defined clr			set "clr=%ESC%[0m"
+		
+	if not defined DKCALL_INIT  del %GLOBAL_FILE% && set "DKCALL_INIT=1"
 	
 	(set "pad=%clr%")
 	(set "padB=      ")
