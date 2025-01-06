@@ -22,6 +22,7 @@ function(dk_stringContains)
 	else()
 		dk_fatal("dk_stringContains(${ARGV}): ARGV0:${ARGV0} is invalid.")
 	endif()
+#	dk_getArg(${ARGV0} variable)
 
 	### find ###
 	if(DEFINED "${ARGV1}")
@@ -31,6 +32,7 @@ function(dk_stringContains)
 	else()
 		dk_fatal("dk_stringContains(${ARGV}): ARGV1:${ARGV1} is invalid.")
 	endif()
+#	dk_getArg(${ARGV1} find)
 
 	string(FIND "${variable}" "${find}" dk_stringContains)
 	math(EXPR dk_stringContains "${dk_stringContains}+1")
