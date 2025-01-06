@@ -18,12 +18,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%~1"=="printStackVariables"	(call %* && %endfunction%)
 	
 	::### Constant Variables ###
-	
-		if not defined dk_call		set "dk_call=call dk_call"
-		if not defined GLOBAL_FILE 	set "GLOBAL_FILE=C:\GLOBAL.txt"
-		if not defined LVL			set /a "LVL=-1"
-		if not defined ESC			set "ESC="
-		if not defined clr			set "clr=%ESC%[0m"
+	if not defined dk_call		set "dk_call=call dk_call"
+	if not defined GLOBAL_FILE 	set "GLOBAL_FILE=C:\GLOBAL.txt"
+	if not defined LVL			set /a "LVL=-1"
+	if not defined ESC			set "ESC="
+	if not defined clr			set "clr=%ESC%[0m"
 		
 	if not defined DKCALL_INIT  del %GLOBAL_FILE% && set "DKCALL_INIT=1"
 	
