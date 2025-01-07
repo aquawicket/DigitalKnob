@@ -252,5 +252,5 @@ setlocal enableDelayedExpansion
     ::%dk_call% dk_debugFunc 0
 	::echo DK.cmd:DKTEST %DKSCRIPT_PATH%
 	
-	%DKSCRIPT_PATH%    
+	%DKSCRIPT_PATH% 
 %endfunction%

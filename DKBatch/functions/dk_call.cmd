@@ -10,21 +10,26 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_call
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
-	if not defined endfunction  (set endfunction=exit /b %errorlevel%)
+	if not defined endfunction (set endfunction=exit /b %errorlevel%)
+	set globalize=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^
+	::set globalize=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^
+	::set endfunction=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^&^&exit /b %errorlevel%
+	
 	
 	:: don't process functions in this file  i.e :setGlobal, :printCallstack
-	if "%~1"=="setGlobal" 			(call %* && %endfunction%)
-	if "%~1"=="printCallStack" 		(call %* && %endfunction%)
-	if "%~1"=="printStackVariables"	(call %* && %endfunction%)
+	if "%~1"=="setGlobal" 			(call :%* && %endfunction%)
+	if "%~1"=="printCallStack" 		(call :%* && %endfunction%)
+	if "%~1"=="printStackVariables"	(call :%* && %endfunction%)
+	if "%~1"=="globalize"			(call :%* && %endfunction%)
 	
 	::### Constant Variables ###
 	if not defined dk_call		set "dk_call=call dk_call"
-	if not defined GLOBAL_FILE 	set "GLOBAL_FILE=C:\GLOBAL.txt"
+	::if not defined GLOBAL_FILE 	set "GLOBAL_FILE=C:\GLOBAL.txt"
 	if not defined LVL			set /a "LVL=-1"
 	if not defined ESC			set "ESC="
 	if not defined clr			set "clr=%ESC%[0m"
 		
-	if not defined DKCALL_INIT  del %GLOBAL_FILE% && set "DKCALL_INIT=1"
+	::if not defined DKCALL_INIT  del %GLOBAL_FILE% && set "DKCALL_INIT=1"
 	
 	(set "pad=%clr%")
 	(set "padB=      ")
@@ -98,7 +103,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::	if defined LiveCallStack (call :printExit)
 	::#################################
 	
-	::###### Globalize the <STACK>_LVL variables
+	::###### Unset the Globalized <STACK>_LVL variables
 	(call :setGlobal __CMND__%LVL%)
 	(call :setGlobal __FILE__%LVL%)
 	(call :setGlobal __FUNC__%LVL%)
@@ -107,11 +112,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(set /a PLVL=LVL)
 	(set /a LVL-=1)
 	
-	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
-	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
-		(set line=%%a)
-		(set !line:#GLOBAL$#=!)
-    )
+::	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
+::	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
+::		(set line=%%a)
+::		(set !line:#GLOBAL$#=!)
+::  )
 	
 	::###### Stack Variables ######
 	(set __CMND__=!__CMND__%LVL%!)
@@ -129,8 +134,9 @@ exit /b %RTN_CODE%
 	if not "XXX!_IGNORE_:%__FUNC__%=!XXX"=="XXX%_IGNORE_%XXX" (%endfunction%)
 	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
 	
-	if not "%_codepage_%"=="65001" powershell -C "[console]::InputEncoding = [text.utf8encoding]::UTF8"
+	::if not "%_codepage_%"=="65001" powershell -C "[console]::InputEncoding = [text.utf8encoding]::UTF8"
 	if not "%_codepage_%"=="65001" chcp 65001>nul
+	::%dk_call% dk_codePage 65001
 	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
 ::	call :printStackVariables
 %endfunction%
@@ -143,7 +149,7 @@ exit /b %RTN_CODE%
 
 :printConstantVariables
 	if defined dk_call		(echo %padB% dk_call		= %dk_call%)
-	if defined GLOBAL_FILE	(echo %padB% GLOBAL_FILE	= %GLOBAL_FILE%)
+	::if defined GLOBAL_FILE	(echo %padB% GLOBAL_FILE	= %GLOBAL_FILE%)
 	if defined indent		(echo %padB% indent			= %indent%)
 	if defined pad			(echo %padB% pad			= %pad%)
 %endfunction%
@@ -169,10 +175,13 @@ exit /b %RTN_CODE%
 :setGlobal name value
 	for /f "tokens=1,* delims= " %%a in ("%*") do (set argv=%%b)
 	(set %~1=%argv%)
-	(set #GLOBAL#%~1=%argv%)			&:: prefix the variable name with GLOBAL_ and assign a value
-	set #GLOBAL# > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
+	(set global.%~1=%argv%)			&:: prefix the variable name with GLOBAL_ and assign a value
+	(set globalize_flag=1)
+	::set #GLOBAL# > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
+	
 %endfunction%
 
+	
 :printCallStack
 	echo:
 	echo ############ CALLSTACK ############
@@ -185,11 +194,6 @@ exit /b %RTN_CODE%
 	echo:
 	pause
 %endfunction%
-
-
-
-
-
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######

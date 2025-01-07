@@ -8,7 +8,7 @@ if defined %~1 (%return%)
 ::#    Check if a variable is valid, otherwise run code to validate the variable
 ::#
 :dk_validate
- ::setlocal
+::setlocal
     %dk_call% dk_debugFunc 2
 
     ::%dk_call% dk_stringContains "%~2" "dk_call" || %dk_call% dk_error "dk_validate parameter 2 requires the use of dk_call"

@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  	echo ##############TEST####################	
     if not exist "%CMAKE_EXE%"              %dk_call% dk_error "%__FUNCTION__%: could not locate CMAKE_EXE" 
 
-    %dk_call% dk_replaceAll "%~1" "\" "/" DKCOMMAND
+    call dk_replaceAll "%~1" "\" "/" DKCOMMAND
     ::%dk_call% dk_printVar DKCOMMAND
  
     %dk_call% dk_set DKRETURN "%~2"
@@ -106,6 +106,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal
+	
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_cmakeEval "dk_info('test dk_info message')"

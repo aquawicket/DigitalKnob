@@ -1,6 +1,6 @@
 @echo off
 
-if "%*" == "" (goto dk_install)
+if "%*" == "" (goto :dk_install)
 :runDKC
 	::###### COMPILER_EXE ######
 	set "COMPILER_EXE=%~1"
@@ -102,7 +102,7 @@ if "%*" == "" (goto dk_install)
 	::###### arch ######
 	::%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
 	::if not defined arch set "arch=%host_arch%"
-	set "host_arch=%default_host_arch%"
+	set "arch=%default_host_arch%"
 	%dk_call% dk_printVar arch
 	
 	::###### host_env ######

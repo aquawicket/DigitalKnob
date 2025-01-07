@@ -52,11 +52,18 @@ setlocal enableDelayedExpansion
     echo  DKBASH_FUNCTIONS_DIR = %DKBASH_FUNCTIONS_DIR%
     echo DKBASH_FUNCTIONS_DIR_ = %DKBASH_FUNCTIONS_DIR_%
     
-    set "return_value=return value from dk_test.cmd"
+    
 	
-    endlocal & set "%3=%return_value%"
-	exit /b 13
+	%dk_call% setGlobal GLOBAL_VAR "This is a global variable: globalize is required"
+
+
+	::set "return_value=return value from dk_test.cmd"
+    ::endlocal & set "%3=%return_value%"
+	::exit /b 13
+%globalize%
 %endfunction%
+
+
 
 
 
@@ -72,6 +79,7 @@ setlocal enableDelayedExpansion
     %dk_call% dk_test "arg 1" "arg 2" rtn_var
     echo:
 	echo:
+	echo GLOBAL_VAR = %GLOBAL_VAR%
 
-    %dk_call% dk_echo "rtn_var = %rtn_var%"
+    ::%dk_call% dk_echo "rtn_var = %rtn_var%"
 %endfunction%
