@@ -13,7 +13,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_debug)
 	dk_debugFunc()
 	
-	dk_log(DEBUG "${ARGV0}")
+	dk_getArg(0 message)
+	
+	dk_log(DEBUG "${message}")
 endfunction()
 
 
@@ -25,4 +27,5 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_debug("test dk_debug message" "test")
+	dk_debug()
 endfunction()

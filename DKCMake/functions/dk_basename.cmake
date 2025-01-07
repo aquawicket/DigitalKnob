@@ -1,16 +1,17 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 
 ##################################################################################
 # dk_basename(path, rtn_var)
 #
 #
-function(dk_basename path rtn_var)
+function(dk_basename)# path rtn_var)
 	dk_debugFunc(2)
-	#set(path ${ARGV0})
-	#set(rtn_var ${ARGV1})
+	
+	dk_getArg(0 path)
+	dk_getArg(1 rtn_var)
 	
 	get_filename_component(fullpath ${path} ABSOLUTE)
 	get_filename_component(basename "${fullpath}" NAME)
