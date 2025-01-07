@@ -192,8 +192,8 @@ if(ANDROID)
 	dk_setEnv							("VS_NdkRoot" 		"${ANDROID_NDK}")
 	dk_setEnv							("ANDROID_NDK" 		"${ANDROID_NDK}")
 	dk_setEnv							("ANDROID_NDK_ROOT" "${ANDROID_NDK}")
-	dk_prependEnvPath("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin")
-	dk_prependEnvPath("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include")
+	dk_prependEnvPath					("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin")
+	dk_prependEnvPath					("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include")
 endif()
 
 
