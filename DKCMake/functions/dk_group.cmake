@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 set(group_funcs "")
 set(group_level 0)

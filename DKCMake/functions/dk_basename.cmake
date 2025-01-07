@@ -7,11 +7,11 @@ include_guard()
 # dk_basename(path, rtn_var)
 #
 #
-function(dk_basename)# path rtn_var)
+function(dk_basename path rtn_var)
 	dk_debugFunc(2)
 	
-	dk_getArg(0 path)
-	dk_getArg(1 rtn_var)
+	#dk_getArg(0 path)
+	#dk_getArg(1 rtn_var)
 	
 	get_filename_component(fullpath ${path} ABSOLUTE)
 	get_filename_component(basename "${fullpath}" NAME)

@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 #set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 ##################################################################################

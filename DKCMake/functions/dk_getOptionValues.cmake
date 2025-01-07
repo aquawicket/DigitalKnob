@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 # FIXME: This is not fully functional. It take code from dk_getOptionValue() 
 # but has not yet ben set up to recieve multiple variables, or been tested

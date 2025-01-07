@@ -1,7 +1,7 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include(${DKCMAKE_FUNCTIONS_DIR}/dk_createPrefixMacro.cmake)
-#include_guard()
+include_guard()
 
 
 ###############################################################################

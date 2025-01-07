@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 if(NOT BACKUP_DL_SERVER)
 	dk_set(BACKUP_DL_SERVER "http://aquawicket.com/download")
