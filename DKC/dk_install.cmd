@@ -1,6 +1,6 @@
 @echo off
-if "%*" == "" (goto dk_install)
 
+if "%*" == "" (goto dk_install)
 :runDKC
 	::###### COMPILER_EXE ######
 	set "COMPILER_EXE=%~1"

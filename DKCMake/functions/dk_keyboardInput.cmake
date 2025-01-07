@@ -64,7 +64,7 @@ function(dk_keyboardInput)
 		return()
 	endif()
 	
-	dk_fatal("Could not locate cmd.exe or bash.exe")
+	dk_fatal("Could not locate bash, sh, powershell or cmd")
 endfunction()
 
 

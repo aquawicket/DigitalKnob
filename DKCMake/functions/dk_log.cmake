@@ -164,6 +164,7 @@ function(dk_log)
 		dk_return()
 	endif()
 	
+	#dk_echo("${bg_RGB}0;0;50m${${_level_}_COLOR}${${_level_}_TAG}${_message_}${clr}")
 	dk_echo("${${_level_}_COLOR}${${_level_}_TAG}${_message_}${clr}")
 	
 	if(${_level_}_TRACE) #OR TRACE AND NOT NO_TRACE)
