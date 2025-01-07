@@ -1,14 +1,14 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ##############################################################################
 # dk_beeps(array)
-# 
+#
+#   Play an array of beeps. Each array item is formated as "frequency,dureation" 
 #
 function(dk_beeps)
 	dk_debugFunc()
-	message("dk_beeps(${ARGV})")
 	
 	if(DEFINED "${ARGV}")
 		set(array 	"${${ARGV}}")
@@ -56,9 +56,9 @@ function(dk_beeps)
 	find_program(POWERSHELL_EXE powershell.exe)
 	if(EXISTS "${POWERSHELL_EXE}")
 		set(cmnd ${POWERSHELL_EXE} "${ps_command}")
-		message("cmnd = ${cmnd}")
+		dk_debug("cmnd = ${cmnd}")
 		execute_process(COMMAND ${cmnd})	
-		return()
+		dk_return()
 	endif()
 	
 	

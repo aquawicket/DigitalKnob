@@ -7,10 +7,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # 
 #
 function(dk_beep)
-	dk_debugFunc(2)
+	dk_debugFunc(0 2)
 	
-	set(frequency ${ARGV0})
-	set(duration ${ARGV1})
+	#set(frequency ${ARGV0})
+	#set(duration ${ARGV1})
+	dk_getArg(0 frequency 500)
+	dk_getArg(1 duration 500)
 	
 #	###### BASH ######
 #	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -25,7 +27,6 @@ function(dk_beep)
 #		return()
 #	endif()
 	
-	
 #	###### SH ######
 #	execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE SH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)	
 #	if(EXISTS "${SH_EXE}")
@@ -39,7 +40,6 @@ function(dk_beep)
 #		return()
 #	endif()
 	
-	
 	###### POWERSHELL ######
 	find_program(POWERSHELL_EXE powershell.exe)
 	if(EXISTS "${POWERSHELL_EXE}")
@@ -47,7 +47,6 @@ function(dk_beep)
 		execute_process(COMMAND ${cmnd})	
 		return()
 	endif()
-	
 	
 	###### CMD ######
 #	if(EXISTS "$ENV{COMSPEC}")
@@ -76,4 +75,7 @@ function(DKTEST)
 	
 	dk_echo("Testing dk_beep.cmake")
 	dk_beep(500 500)
+	dk_beep(600 750)
+	dk_beep(700 1000)
+	dk_beep()
 endfunction()

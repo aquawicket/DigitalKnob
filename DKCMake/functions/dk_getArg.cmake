@@ -3,27 +3,40 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include_guard()
 
 ##############################################################################
-# dk_getArg(ARGV(N) toName Default)
-# 
+# dk_getArg(arg_num, var_name, default)
 #
-macro(dk_getArg)
+#	Get a variable within a function by its position.
+#   If the variable points to another variable, it will be expanded until the 
+#   final pointed to value is found. If the variable is non existent, the default
+#	value will be used
+#
+#	Example:  
+#
+#	myFunction(123, abc)
+#
+#	function(myFunction)
+#		
+#		dk_getArg(0 MyFirstArg "XXX")    # MyFirstArg = '123'
+#		dk_getArg(1 MySecondArg "YYY")	 # MySecondArg = 'abc'
+#		dk_getArg(2 MyThirdArg "ZZZ")	 # MyThirdArg = 'ZZZ'
+#
+#	endfunction()
+macro(dk_getArg arg_num)
 	set(lvl 0)
-	set(value ARGV0)
-	set(default ${ARGV1})
+	set(value ARGV${arg_num})
 	while(DEFINED "${value}")
 		set(name "${name}-> ${value}")
 		set(value ${${value}})
 		math(EXPR lvl "${lvl} + 1")
 	endwhile()
 
-	message("lvl = ${lvl}")
-	message("name = ${name}")
-
+	#message("lvl = ${lvl}")
+	#message("name = ${name}")
 	if(NOT ${lvl})
-		message("default = ${default}")
-		set(${ARGV0} ${default})
+		#message("default = ${ARGV2}")
+		set(${ARGV1} ${ARGV2})
 	else()
-		message("value = ${value}")
+		#message("value = ${value}")
 		set(${ARGV1} ${value})
 	endif()
 endmacro()

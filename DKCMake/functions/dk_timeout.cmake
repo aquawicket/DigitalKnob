@@ -11,7 +11,7 @@ include_guard()
 function(dk_timeout) 
 	dk_debugFunc(0 99)
 	
-	dk_getArg(${ARGV0} seconds 10)
+	dk_getArg(0 seconds 10)
 
 	
 	###### CMD ######
