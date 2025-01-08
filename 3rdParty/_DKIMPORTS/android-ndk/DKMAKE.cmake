@@ -68,23 +68,25 @@ dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_LINUX_DL)
 dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_ANDROID_DL)
 
 ###### INSTALL ######
+
+###### ANDROID_NDK ######
 dk_set(ANDROID_NDK "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
-#dk_set(ANDROID_NDK_DIR "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
-#dk_assertPath(ANDROID_NDK)
 
 dk_makeDirectory	("${ANDROID_SDK_DIR}/ndk")
 if(WIN_HOST)
-	dk_import		(${ANDROID_NDK_WIN_DL} PATH ${ANDROID_NDK} VERSION "${ANDROID_NDK_BUILD}" PATCH)
+	dk_import		(${ANDROID_NDK_WIN_DL} 		PATH "${ANDROID_NDK}" VERSION "${ANDROID_NDK_BUILD}" PATCH)
 elseif(MAC_HOST)
-	dk_import		(${ANDROID_NDK_MAC_DL} PATH ${ANDROID_NDK} PATCH)
+	dk_import		(${ANDROID_NDK_MAC_DL} 		PATH "${ANDROID_NDK}" PATCH)
 elseif(ANDROID_HOST OR LINUX_ARM64_HOST)
-	dk_import		(${ANDROID_NDK_ANDROID_DL} PATH ${ANDROID_NDK} NO_HALT) # NO_HALT because file fails to extact under sdcard storage
+	dk_import		(${ANDROID_NDK_ANDROID_DL} 	PATH "${ANDROID_NDK}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage
 elseif(LINUX_ARM64_HOST)
-	dk_import		(${ANDROID_NDK_ANDROID_DL} PATH ${ANDROID_NDK})
+	dk_import		(${ANDROID_NDK_ANDROID_DL} 	PATH "${ANDROID_NDK}")
 elseif(LINUX_HOST)
-	dk_import		(${ANDROID_NDK_LINUX_DL} PATH ${ANDROID_NDK} PATCH)
+	dk_import		(${ANDROID_NDK_LINUX_DL} 	PATH "${ANDROID_NDK}" PATCH)
 endif()
 
+
+###### ANDROID_HOST_TAG ######
 if(APPLE_ARM32_HOST)
 	dk_set(ANDROID_HOST_TAG darwin-armv7a)
 elseif(APPLE_ARM64_HOST)
@@ -101,8 +103,10 @@ elseif(ANDROID_X86_HOST)
 	dk_set(ANDROID_HOST_TAG linux-x86)
 elseif(ANDROID_X86_64_HOST)
 	dk_set(ANDROID_HOST_TAG linux-x86_64)
-#elseif(EMSCRIPTEN_HOST)
-#	dk_set(ANDROID_HOST_TAG ???)
+elseif(EMSCRIPTEN_X86_HOST)
+	dk_set(ANDROID_HOST_TAG linux-x86)
+elseif(EMSCRIPTEN_X86_64_HOST)
+	dk_set(ANDROID_HOST_TAG linux-x86_64)
 elseif(IOS_ARM32_HOST)
 	dk_set(ANDROID_HOST_TAG darwin-armv7a)
 elseif(IOS_ARM64_HOST)
@@ -111,10 +115,10 @@ elseif(IOS_X86_HOST)
 	dk_set(ANDROID_HOST_TAG darwin-x86)
 elseif(IOS_X86_64_HOST)
 	dk_set(ANDROID_HOST_TAG darwin-x86_64)
-#elseif(IOSSIM_X86_HOST)
-#	dk_set(ANDROID_HOST_TAG ???)
-#elseif(IOSSIM_X86_64_HOST)
-#	dk_set(ANDROID_HOST_TAG ???)
+elseif(IOSSIM_X86_HOST)
+	dk_set(ANDROID_HOST_TAG darwin-x86)
+elseif(IOSSIM_X86_64_HOST)
+	dk_set(ANDROID_HOST_TAG darwin-x86_64)
 elseif(LINUX_ARM32_HOST)
 	dk_set(ANDROID_HOST_TAG linux-armv7a)
 elseif(LINUX_ARM64_HOST)
@@ -148,53 +152,52 @@ else()
 endif()
 
 
+###### ANDROID_ CMAKE_ VARIABLES ######
+dk_set(ANDROID_GENERATOR 			"Unix Makefiles")
+#dk_set(ANDROID_GENERATOR_PLATRORM 	"ARM;ARM64;X86;X64") 	# MSVC
+dk_set(ANDROID_NDK_ROOT				"${ANDROID_NDK}")
+dk_set(ANDROID_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+dk_set(ANDROID_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make${exe}")
+dk_set(ANDROID_BIN					"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin")
+dk_set(ANDROID_AR					"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}")
+dk_set(ANDROID_C_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
+dk_set(ANDROID_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang++${exe}")
+dk_set(ANDROID_INCLUDE				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include")
+
+dk_set(VS_NdkRoot					"${ANDROID_NDK}")
+dk_set(NDK_ROOT						"${ANDROID_NDK}")
 
 
+###### ANDROID_ABI ######			# https://developer.android.com/ndk/guides/abis
+#dk_set(ANDROID_ABI					arm64-v8a)
+#dk_set(ANDROID_ABI					armeabi)
+#dk_set(ANDROID_ABI					armeabi-v7a)
+#dk_set(ANDROID_ABI					mips)
+#dk_set(ANDROID_ABI					mips64)
+#dk_set(ANDROID_ABI					x86)
+#dk_set(ANDROID_ABI					x86_64)
 
 
-
-###### set GLOBAL CMAKE VARIABLES ######
-#if(ANDROID_HOST)
-#	dk_set(ANDROID_C_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang-12")
-#	dk_set(ANDROID_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang-12")
-#	dk_set(DKCONFIGURE_CC				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang-12")
-#	dk_set(DKCONFIGURE_CXX				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang-12")
-#else()
-	dk_set(ANDROID_C_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
-	dk_set(ANDROID_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang++${exe}")
-	dk_set(DKCONFIGURE_CC				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
-	dk_set(DKCONFIGURE_CXX				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang++${exe}")
-#endif()
-	
-##### ANDROID VARIABLES #####
-#dk_set(ANDROID_NDK					${ANDROID_NDK})
-#dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
+###### ANDROID_API ######			# https://developer.android.com/reference
+dk_set(ANDROID_MIN_API 				19)
+dk_set(ANDROID_API 					31)
 dk_set(ANDROID_NATIVE_API_LEVEL		31)
 dk_set(ANDROID_PLATFORM				31)
-dk_set(ANDROID_API 					31)
-dk_set(ANDROID_MIN_API 				19)
-dk_set(ANDROID_BIN					"export ANDROID_NDK_ROOT=${ANDROID_NDK};"
-									"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
-									"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH;")
+#dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
+dk_set(ANDROID_BASH					"export ANDROID_NDK_ROOT=${ANDROID_NDK_ROOT};"
+									"export PATH=${ANDROID_BIN}:$PATH;"
+									"export PATH=${ANDROID_INCLUDE}:$PATH;")
 
 
-###### ANDROID ENVIRONMENT VARIABLES ######
+###### ANDROID TARGET ENVIRONMENT VARIABLES ######
 if(ANDROID)
-	dk_set(ANDROID_GENERATOR 			"Unix Makefiles")
-	#dk_set(ANDROID_GENERATOR_PLATRORM 	ARM;ARM64;X86;X64) # MSVC
-	dk_set(ANDROID_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
-	dk_set(ANDROID_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make${exe}")
-	dk_set(ANDROID_AR					"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}")
-	dk_setEnv							("AR"				"${CMAKE_AR}")
-	dk_setEnv							("CC" 				"clang")
-	dk_setEnv							("CXX"				"clang++")
-	dk_setEnv							("NDK_ROOT" 		"${ANDROID_NDK}")
-	dk_setEnv							("VS_NdkRoot" 		"${ANDROID_NDK}")
-	dk_setEnv							("ANDROID_NDK" 		"${ANDROID_NDK}")
-	dk_setEnv							("ANDROID_NDK_ROOT" "${ANDROID_NDK}")
-	dk_prependEnvPath					("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin")
-	dk_prependEnvPath					("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include")
+	dk_setEnv						("AR"				"${ANDROID_AR}")
+	dk_setEnv						("CC" 				"${ANDROID_C_COMPILER}")
+	dk_setEnv						("CXX"				"${ANDROID_CXX_COMPILER}")
+	dk_setEnv						("NDK_ROOT" 		"${NDK_ROOT}")
+	dk_setEnv						("VS_NdkRoot" 		"${VS_NdkRoot}")
+	dk_setEnv						("ANDROID_NDK" 		"${ANDROID_NDK}")
+	dk_setEnv						("ANDROID_NDK_ROOT" "${ANDROID_NDK_ROOT}")
+	dk_prependEnvPath				("${ANDROID_BIN}")
+	dk_prependEnvPath				("${ANDROID_INCLUDE}")
 endif()
-
-
-

@@ -21,8 +21,8 @@ else()
 	set(PYTHON3_IMPORT python3)
 endif()
 
-dk_isUrl(${PYTHON3_IMPORT} isUrl)
-if(isUrl)
+dk_isUrl(${PYTHON3_IMPORT})
+if(dk_isUrl)
 	dk_importVariables("${PYTHON3_IMPORT}")
 endif()
 
