@@ -3,15 +3,15 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=%CD%\..\func
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# GIT_BASH environment
+::# CMD environment
 ::#
-%dk_call% dk_validate GIT "%dk_call% dk_installGit"
-set "PATH=%GIT%\bin;%PATH%"
+
+
 
 
 
 %dk_call% dk_clearScreen
-%dk_call% dk_title "Digitalknob DK_GIT_BASH"
-%dk_call% dk_info "############ DK_GIT_BASH environment ############"
-%dk_call% dk_info ""
-%GIT%/usr/bin/env /usr/bin/bash
+%dk_call% dk_title "Digitalknob DK_CMD"
+%dk_call% dk_echo "############ DK_CMD environment ############"
+%dk_call% dk_echo ""
+
