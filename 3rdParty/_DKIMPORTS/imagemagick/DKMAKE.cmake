@@ -18,7 +18,10 @@ if(WIN_HOST)
 endif()
 
 ### IMPORT LIBRARY ###
-if(UNIX_HOST)
+if(ANDROID_HSOST)
+	dk_installPackage(imagemagick)
+	execute_process(COMMAND command -v convert OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE)	
+elseif(UNIX_HOST)
 	dk_import("https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip")
 elseif(WIN_X86_HOST)
 	dk_import("https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-41-portable-Q16-x86.zip")
