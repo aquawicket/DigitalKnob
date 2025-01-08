@@ -27,6 +27,15 @@ function(dk_installPackage)
 	dk_if(WIN_HOST "dk_depend(msys2)")
 	set(ENV{DKSHELL} sh) # HACK
 
+	### Termux ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pkg" OUTPUT_VARIABLE PKG_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+	if(PKG_EXE)
+		set(comand ${PKG_EXE} install ${package} -y)
+		dk_echo(${comand})
+		execute_process(COMMAND ${comand})
+		return()
+	endif()
+	
 	### Alpine Package Keeper (alpine linux) ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apk" OUTPUT_VARIABLE APK_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(APK_EXE)
@@ -99,15 +108,6 @@ function(dk_installPackage)
 		return()
 	endif()
 	
-	### Termux ###
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pkg" OUTPUT_VARIABLE PKG_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-	if(PKG_EXE)
-		set(comand ${PKG_EXE} install ${package} -y)
-		dk_echo(${comand})
-		execute_process(COMMAND ${comand})
-		return()
-	endif()
-
 	### Cygwin ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v setup-x86_64.exe" OUTPUT_VARIABLE CYGPKG_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(CYGPKG_EXE)
