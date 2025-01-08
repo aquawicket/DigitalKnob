@@ -16,9 +16,6 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_depend(git) # dk_import will push to the PLUGIN stack
 #	if("${CURRENT_PLUGIN}" STREQUAL "GIT" AND PREV_PLUGIN)				
 #		dk_set(CURRENT_PLUGIN ${PREV_PLUGIN})						# so we will pop the stack here
-		
-		###### Print the current plugin to the window title bar ######
-#		dk_title("CURRENT_PLUGIN -> ${CURRENT_PLUGIN}")
 #	endif()
 	
 	dk_unset(COMMAND_ARGS)

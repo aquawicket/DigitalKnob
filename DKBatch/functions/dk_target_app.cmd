@@ -9,8 +9,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::setlocal
 	%dk_call% dk_debugFunc 0 1 
     
-    %dk_call% dk_title DigitalKnob - %target_app% %target_triple% %target_type%
-    
     :: read cache file
 	if exist "%DKCACHE_DIR%\cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%\cache" words)
 	set "_target_app_=%words[0][0]%"

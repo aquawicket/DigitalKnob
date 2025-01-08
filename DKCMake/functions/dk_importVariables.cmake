@@ -356,8 +356,6 @@ function(dk_importVariables)
 		dk_envList(PLUGIN PUSH "${PLUGIN_IMPORT_NAME_UPPER}")
 	endif()
 	dk_assertVar(ENV{CURRENT_PLUGIN})
-	dk_title("CURRENT_PLUGIN -> $ENV{CURRENT_PLUGIN}")
-	
 	
 	message("############# $ENV{CURRENT_PLUGIN}_VARIABLES #############")
 	if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_GIT_NAME_LOWER)
