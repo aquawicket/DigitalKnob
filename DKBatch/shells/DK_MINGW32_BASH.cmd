@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 %dk_call% dk_validate MSYS2 "%dk_call% %DKIMPORTS_DIR%\msys2\dk_install.cmd"
-set "PATH=%MSYS2%\mingw32\bin;%PATH%"
+set "PATH=%MSYS2%\mingw32\bin;%MSYS2%\usr\bin;%PATH%"
 cd %MSYS2%\mingw32
 
 %dk_call% dk_clearScreen
