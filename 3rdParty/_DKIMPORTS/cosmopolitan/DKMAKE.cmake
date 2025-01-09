@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ########### cosmopolitan ############
 # https://github.com/jart/cosmopolitan.git
-dk_load(dk_builder)
+
 
 ### IMPORT ###
 dk_import(https://github.com/jart/cosmopolitan/archive/e4d6eb3.zip)
@@ -50,12 +50,12 @@ dk_set(COSMOPOLITAN_LINKER 						"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_
 #  dk_set(COSMOPOLITAN_${lang}_COMPILER_RANLIB 	"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
 #endforeach()
 
-dk_set(CMAKE_ASM_COMPILER_AR 					"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
-dk_set(CMAKE_C_COMPILER_AR 						"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
-dk_set(CMAKE_CXX_COMPILER_AR 					"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
-dk_set(CMAKE_ASM_COMPILER_RANLIB				"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
-dk_set(CMAKE_C_COMPILER_RANLIB 					"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
-dk_set(CMAKE_CXX_COMPILER_RANLIB				"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
+dk_set(COSMOPOLITAN_ASM_COMPILER_AR 					"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
+dk_set(COSMOPOLITAN_C_COMPILER_AR 						"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
+dk_set(COSMOPOLITAN_CXX_COMPILER_AR 					"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ar")
+dk_set(COSMOPOLITAN_ASM_COMPILER_RANLIB				"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
+dk_set(COSMOPOLITAN_C_COMPILER_RANLIB 					"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
+dk_set(COSMOPOLITAN_CXX_COMPILER_RANLIB				"${COSMOPOLITAN}/tool/cosmocc/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-gcc-ranlib")
 
 
 #dk_set(CMAKE_C_COMPILER_WORKS           		1)

@@ -40,9 +40,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(set __CMND__=%~1) && (set __CMND__=!__CMND__:::=\!)
 	(set __FILE__=%~dpnx1)
 	(set __FUNC__=%~n1)
-	for /f "tokens=1,* delims= " %%a in ("%*") do (set __ARGV__=%%b)
-	(set __ARGC__=0) && for %%a in (%__ARGV__%) do (set /a __ARGC__+=1)
 	
+::	for /f "tokens=1,* delims= " %%a in ("%*") do (set __ARGV__=%%b)	
+	for /F "usebackq tokens=1*" %%a IN ('%*') DO SET __ARGV__=%%b
+	(set __ARGC__=0) && for %%a in (%__ARGV__%) do (set /a __ARGC__+=1)
+
 	::###### Globalize the <STACK>_LVL variables
 	(set /a PLVL=LVL)
 	(set /a LVL+=1)
@@ -51,7 +53,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(call :setGlobal __CMND__%LVL% %__CMND__%)
 	(call :setGlobal __FILE__%LVL% %__FILE__%)
 	(call :setGlobal __FUNC__%LVL% %__FUNC__%)
-	(call :setGlobal __ARGV__%LVL% %__ARGV__%)
+::if "%~1"=="dk_cmakeEval" pause
+::	(call :setGlobal __ARGV__%LVL% "%__ARGV__%")
 	(call :setGlobal __ARGC__%LVL% %__ARGC__%)
 
 	::echo:
@@ -83,6 +86,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### Entry ############################################################################################
 	::echo dk_call ^> %__CMND__% !__ARGV__!
+if "%~1"=="dk_cmakeEval"	echo __ARGV__ = %__ARGV__%	
     call %__CMND__% %__ARGV__% || goto error_handler
 	
 	if %ERRORLEVEL% NEQ 0 (set RTN_CODE=%ERRORLEVEL%) else (set RTN_CODE=0)

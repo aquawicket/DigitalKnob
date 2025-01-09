@@ -9,7 +9,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::setlocal
     %dk_call% dk_debugFunc 1 4
 
-
     %dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
     if not exist "%DKIMPORTS_DIR%"          %dk_call% dk_error "%__FUNCTION__%: could not locate DKIMPORTS_DIR"
     
@@ -17,12 +16,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if not exist "%DKCMAKE_DIR%"            %dk_call% dk_error "%__FUNCTION__%: could not locate DKCMAKE_DIR"
 
     %dk_call% dk_validate CMAKE_EXE        "%dk_call% %DKIMPORTS_DIR%\cmake\dk_install.cmd"
- 	echo ##############TEST####################	
+
     if not exist "%CMAKE_EXE%"              %dk_call% dk_error "%__FUNCTION__%: could not locate CMAKE_EXE" 
 
     call dk_replaceAll "%~1" "\" "/" DKCOMMAND
     ::%dk_call% dk_printVar DKCOMMAND
- 
+	
     %dk_call% dk_set DKRETURN "%~2"
     ::%dk_call% dk_printVar DKRETURN
 
@@ -34,8 +33,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     ::### build CMAKE_ARGS ###
     :: append %DKCOMMAND% to CMAKE_ARGS with quotes removed
-    if defined DKCOMMAND  call set CMAKE_ARGS=%CMAKE_ARGS% -DDKCOMMAND=%%DKCOMMAND:"=%% 
-    
+::    if defined DKCOMMAND  call set CMAKE_ARGS=%CMAKE_ARGS% -DDKCOMMAND=%%DKCOMMAND:"=%% 
+	if defined DKCOMMAND  set CMAKE_ARGS=%CMAKE_ARGS% "-DDKCOMMAND=%DKCOMMAND%"
+	
     :: append %DKRETURN% to CMAKE_ARGS with quotes removed
     if defined DKRETURN   call set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%%DKRETURN:"=%%
     
