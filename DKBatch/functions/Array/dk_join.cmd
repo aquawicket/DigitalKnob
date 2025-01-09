@@ -19,9 +19,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 ::#
 :dk_join
+setlocal
     %dk_call% dk_debugFunc 3
- setlocal
-
+ 
     ::set "_arry_=%~1"
     ::set "_separator_=%~2"
     set _count_=0

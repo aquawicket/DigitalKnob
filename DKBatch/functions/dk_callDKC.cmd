@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_callDKC
+setlocal
     %dk_call% dk_debugFunc 1 99
- setlocal
-
+ 
 	::### Get DKC_FUNCTIONS_DIR
 	%dk_call% dk_validate DKC_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
 	if not exist "%DKC_FUNCTIONS_DIR%"       set "DKC_FUNCTIONS_DIR=%CD%\DKC\functions"
