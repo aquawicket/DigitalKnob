@@ -90,6 +90,10 @@ DKApps/*/resource.h
 DKApps/*/resource.rc
 DKApps/DKCore/assets
 DKApps/DKCore/main.cpp
+DKApps/DKJavascript/assets/DK
+DKApps/DKJavascript/assets/DKAssets
+DKApps/DKJavascript/assets/DKDuktape
+DKApps/DKJavascript/main.cpp
 DKApps/HelloWorld/assets
 
 DKPlugins/*/CMakeLists.txt
