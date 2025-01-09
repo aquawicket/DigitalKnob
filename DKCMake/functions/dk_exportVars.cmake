@@ -9,28 +9,23 @@ include_guard()
 function(dk_exportVars var_name var_value)
 	dk_debugFunc()
 	
-    dk_echo("EXPORTING VARIABLES ......")
-	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
-	
-	if(EXISTS "${DKCACHE_DIR}/DKEXPORT_VARS")
-		dk_fileIncludes("${DKCACHE_DIR}/DKEXPORT_VARS" "SET ${var_name}=${var_value}\n")
-		if(dk_fileIncludes)
-			dk_notice("Path already exists in file")
-			dk_return()
-		endif()
-		dk_fileIncludes("${DKCACHE_DIR}/DKEXPORT_VARS" "export ${var_name}=${var_value}\n")
-		if(dk_fileIncludes)
-			dk_notice("Path already exists in file")
-			dk_return()
-		endif()
-	endif()
-	
-	
+	dk_validate(host_triple "dk_host_triple()")
 	if(WIN_HOST)
-		dk_fileAppend("${DKCACHE_DIR}/DKEXPORT_VARS" "SET ${var_name}=${var_value}\n")
+		set(setVar "set")
 	else()
-		dk_fileAppend("${DKCACHE_DIR}/DKEXPORT_VARS" "export ${var_name}=${var_value}\n")
+		set(setVar "export")
 	endif()
+	
+	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
+	if(EXISTS "${DKCACHE_DIR}/DKEXPORT_VARS")
+		dk_fileIncludes("${DKCACHE_DIR}/DKEXPORT_VARS" "${setVar} ${var_name}=${var_value}\n")
+		if(dk_fileIncludes)
+			dk_notice("${setVar} ${var_name}=${var_value}: already exists in file")
+			dk_return()
+		endif()
+	endif()
+	
+	dk_fileAppend("${DKCACHE_DIR}/DKEXPORT_VARS" "${setVar} ${var_name}=${var_value}\n")
 endfunction()
 
 

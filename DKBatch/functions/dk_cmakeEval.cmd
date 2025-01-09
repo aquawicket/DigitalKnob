@@ -37,10 +37,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if defined DKCOMMAND  set CMAKE_ARGS=%CMAKE_ARGS% "-DDKCOMMAND=%DKCOMMAND%"
 
     :: append %DKRETURN% to CMAKE_ARGS with quotes removed
-    if defined DKRETURN   call set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%%DKRETURN:"=%%
+::    if defined DKRETURN   call set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%%DKRETURN:"=%%
+	if defined DKRETURN   set CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%DKRETURN%"
     
     :: append %DKVARS% to CMAKE_ARGS with quotes removed
-    if defined DKVARS     call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%
+::    if defined DKVARS     call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%
+	if defined DKVARS     call set CMAKE_ARGS=%CMAKE_ARGS% "%DKVARS%"
    
     ::set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
 	set CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
@@ -109,5 +111,8 @@ setlocal
 	
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_cmakeEval "dk_info('test dk_info message')"
+    ::%dk_call% dk_cmakeEval "dk_info('test dk_info message')"
+	%dk_call% dk_cmakeEval "dk_test('test dk_info message')" "return_valueA;return_valueB"
+	echo return_valueA = %return_valueA%
+	echo return_valueB = %return_valueB%
 %endfunction%

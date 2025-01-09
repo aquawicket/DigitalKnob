@@ -32,7 +32,7 @@ dk_parseFunctionsAndLoadFromString("${DKCOMMAND}")
 dk_eval("${DKCOMMAND}")
 
 if(DKRETURN)
-	#dk_info(STATUS "DKRETURN = ${DKRETURN}")
+	#message("DKRETURN = ${DKRETURN}")
 	
 #	## create windows cmd script to set the return variables
 #	dk_delete(${DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
@@ -51,6 +51,7 @@ if(DKRETURN)
 #       dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
 #	endforeach()
 
+	dk_load(dk_exportVars)
 	foreach(item ${DKRETURN})
 		dk_exportVars(${item} "${${item}}")
 	endforeach()

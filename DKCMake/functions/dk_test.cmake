@@ -39,9 +39,13 @@ function(dk_test)
     dk_echo( " DKBASH_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
     dk_echo( "DKBASH_FUNCTIONS_DIR_ = ${DKCMAKE_FUNCTIONS_DIR_}")
     
-    set(return_value "return value from dk_test.cmake")
-    execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${return_value}")
-    #set(${rtn_var} "${return_value}" PARENT_SCOPE)
+    set(return_valueA "return_valueA from dk_test.cmake")
+	set(return_valueB "return_valueB from dk_test.cmake")
+    execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${return_valueA}")
+	execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${return_valueB}")
+	dk_set(return_valueA "${return_valueA}")
+	dk_set(return_valueB "${return_valueB}")
+    #set(dk_test "return_valueA;${return_valueA};return_valueB;${return_valueB}" PARENT_SCOPE)
 endfunction()
 
 
