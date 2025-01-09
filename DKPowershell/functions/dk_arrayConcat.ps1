@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
+if(!$dk_arrayConcat){ $dk_arrayConcat = 1 } else{ return } #include guard
 
 ################################################################################
 # dk_arrayConcat(array, value1, value2, /* …, */ valueN)

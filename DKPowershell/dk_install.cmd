@@ -2,9 +2,15 @@
 if "%*" == "" (goto dk_install)
 
 :runDKPowershell
+	echo runDKPowershell %*
 	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
+	echo DKPOWERSHELL_FUNCTIONS_DIR = %DKPOWERSHELL_FUNCTIONS_DIR%
+	
 	set "POWERSHELL_EXE=%~2"
+	echo POWERSHELL_EXE = %POWERSHELL_EXE%
+	
 	set "DKSCRIPT_PATH=%~3"
+	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	
 	
 	::###### run script ######
@@ -45,17 +51,18 @@ if "%*" == "" (goto dk_install)
 	
 	::###### Install DKPowershell ######
 	%dk_call% dk_echo "Installing DKPowershell . . ."
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% %DKIMPORTS_DIR%\powershell\dk_install.cmd"
-	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
+	%dk_call% dk_validate DKIMPORTS_DIR 				"%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate POWERSHELL_EXE 				"%dk_call% dk_POWERSHELL_EXE"
+	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
 	
+	::###### DKPowershell ######
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
-	
 	ftype DKPowershell="%COMSPEC%" /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKPowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 	
+	::###### .ps1 ######
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.ps1"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1"
 	assoc .ps1=DKPowershell
 	
 	%dk_call% dk_success "DKPowershell install complete"

@@ -1,8 +1,8 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
+if(!$dk_dirname){ $dk_dirname = 1 } else{ return } #include guard
 
 ################################################################################
-# dk_dirname(path)   return -> rtn_var
+# dk_dirname(path)
 #
 #
 function Global:dk_dirname($path) {

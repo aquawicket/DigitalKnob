@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
+if(!$dk_arraySplice){ $dk_arraySplice = 1 } else{ return } #include guard
 
 ################################################################################
 # dk_arraySplice(array, start, deleteCount, item1, item2, /* …, */ itemN)

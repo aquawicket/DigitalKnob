@@ -1,8 +1,8 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
+if(!$dk_DKAPPS_DIR){ $dk_DKAPPS_DIR = 1 } else{ return } #include guard
 
 ###############################################################################
-# dk_DK3RDPARTY_DIR()
+# dk_DKAPPS_DIR()
 #
 #
 function Global:dk_DKAPPS_DIR() {

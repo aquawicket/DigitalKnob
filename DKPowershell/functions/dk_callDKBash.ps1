@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!${$PSCommandPath}){ ${$PSCommandPath} = 1 } else{ return } #include guard
+if(!$dk_callDKBatch){ $dk_callDKBatch = 1 } else{ return } #include guard
 
 ##################################################################################
 # dk_callDKBatch(func) args
