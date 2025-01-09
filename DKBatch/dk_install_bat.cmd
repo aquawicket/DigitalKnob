@@ -1,6 +1,5 @@
 @echo off
 
-
 if "%~1" equ "%~0" goto dk_install_bat
 if "%~1" neq ""    goto runDKBat
 :dk_install_bat
@@ -49,7 +48,7 @@ if "%~1" neq ""    goto runDKBat
 	if %ERRORLEVEL% neq 0 echo exit_code:%ERRORLEVEL% & pause
 	
 	::###### reload ######
-	if not exist "%DKCACHE_DIR%\reload" goto:eof
-	del "%DKCACHE_DIR%\reload"
-	goto runDKBat
+::	if not exist "%DKCACHE_DIR%\reload" goto:eof
+::	del "%DKCACHE_DIR%\reload"
+::	goto runDKBat
 %endfunction%

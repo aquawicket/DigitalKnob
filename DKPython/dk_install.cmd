@@ -1,5 +1,5 @@
 @echo off
-if "%*" == "" (goto dk_install)
+if "%~1" == "" (goto dk_install)
 
 :runDKPython
 	set "DKPYTHON_FUNCTIONS_DIR=%~1"
@@ -13,10 +13,10 @@ if "%*" == "" (goto dk_install)
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
 	
 	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKPython
+::	if not exist %~dp0\reload goto:eof
+::	del %~dp0\reload
+::	cls
+::	goto runDKPython
 %endfunction%
 
 

@@ -20,10 +20,10 @@ if "%~1" == "" goto:dk_install
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
 	
 	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKCMake
+::	if not exist %~dp0\reload goto:eof
+::	del %~dp0\reload
+::	cls
+::	goto runDKCMake
 %endfunction%
 
 

@@ -22,9 +22,9 @@ if "%~1" == "" (goto dk_install)
 	if %ERRORLEVEL% neq 0 echo exit_code:%ERRORLEVEL% & pause
 	
 	::###### reload ######
-	if not exist "%DKCACHE_DIR%\reload" goto:eof
-	del "%DKCACHE_DIR%\reload"
-	goto runDKBatch
+::	if not exist "%DKCACHE_DIR%\reload" goto:eof
+::	del "%DKCACHE_DIR%\reload"
+::	goto runDKBatch
 %endfunction%
 
 

@@ -23,10 +23,10 @@ if "%~1" == "" (goto dk_install)
 	&:: FIXME:  bash only returns 0
 	
 	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKBash
+::	if not exist %~dp0\reload goto:eof
+::	del %~dp0\reload
+::	cls
+::	goto runDKBash
 %endfunction%
 
 
