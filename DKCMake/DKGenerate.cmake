@@ -637,30 +637,30 @@ if(EMSCRIPTEN)
 	if(DEBUG)
 		if(WIN_HOST)
 			set(RUN_SCRIPT_DEBUG
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/emscripten/${DEBUG_DIR}/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_Project_Dir}/emscripten/${DEBUG_DIR}/Run.bat ${RUN_SCRIPT_DEBUG})
+			dk_fileWrite(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/Run.bat ${RUN_SCRIPT_DEBUG})
 		else()
 			set(RUN_SCRIPT_DEBUG
-				"\#!/bin/bash\n${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_Project_Dir}/emscripten/${DEBUG_DIR}/${APP_NAME}.html"
+				"\#!/bin/bash\n${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_Project_Dir}/emscripten/${DEBUG_DIR}/Run.sh "${RUN_SCRIPT_DEBUG}")
-			dk_executeProcess(chmod 777 ${DK_Project_Dir}/emscripten/${DEBUG_DIR}/Run.sh)
+			dk_fileWrite(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/Run.sh "${RUN_SCRIPT_DEBUG}")
+			dk_executeProcess(chmod 777 ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/Run.sh)
 		endif()
 	endif()
 	if(RELEASE)
 		if(WIN_HOST)
 			set(RUN_SCRIPT_RELEASE
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/emscripten/${RELEASE_DIR}/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_Project_Dir}/emscripten/${RELEASE_DIR}/Run.bat ${RUN_SCRIPT_RELEASE})
+			dk_fileWrite(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/Run.bat ${RUN_SCRIPT_RELEASE})
 		else()
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_Project_Dir}/emscripten/${RELEASE_DIR}/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_Project_Dir}/emscripten/${RELEASE_DIR}/Run.sh ${RUN_SCRIPT_RELEASE})
-			dk_executeProcess(chmod 777 ${DK_Project_Dir}/emscripten/${RELEASE_DIR}/Run.sh)
+			dk_fileWrite(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_executeProcess(chmod 777 ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/Run.sh)
 		endif()
 	endif()
 
@@ -681,19 +681,19 @@ if(EMSCRIPTEN)
 	#		TARGET ${APP_NAME} 
 	#		POST_BUILD
 	#		COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Debug wasm files to /assets"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/emscripten/${DEBUG_DIR}/${APP_NAME}.data" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/emscripten/${DEBUG_DIR}/${APP_NAME}.html" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/emscripten/${DEBUG_DIR}/${APP_NAME}.js" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/emscripten/${DEBUG_DIR}/${APP_NAME}.wasm" "${DK_Project_Dir}/assets/")
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.data" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.html" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.js" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.wasm" "${DK_Project_Dir}/assets/")
 	#else()
 	#	add_custom_command(
 	#		TARGET ${APP_NAME} 
 	#		POST_BUILD
 	#		COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Release wasm files to /assets"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/emscripten/${RELEASE_DIR}/${APP_NAME}.data" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/emscripten/${RELEASE_DIR}/${APP_NAME}.html" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/emscripten/${RELEASE_DIR}/${APP_NAME}.js" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/emscripten/${RELEASE_DIR}/${APP_NAME}.wasm" "${DK_Project_Dir}/assets/")
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.data" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.html" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.js" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.wasm" "${DK_Project_Dir}/assets/")
 	#endif()
 endif(EMSCRIPTEN)
 
