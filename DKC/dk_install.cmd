@@ -2,6 +2,12 @@
 if "%~1" == "" (goto :dk_install)
 
 :runDKC
+	set "ESC="
+	set "clr=%ESC%[0m"
+	set "red=%ESC%[31m"
+	set "bg_magenta=%ESC%[45m"
+	set "white=%ESC%[37m"
+	
 	::###### COMPILER_EXE ######
 	set "COMPILER_EXE=%~1"
 	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
@@ -23,37 +29,37 @@ if "%~1" == "" (goto :dk_install)
 	echo compiling ...
 	if exist %APP_FILE%  del %APP_FILE%
 
-	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP_FILE% -static %DKC_FILE%"
+	set "COMPILE_COMMAND=%COMPILER_EXE% -o %APP_FILE% -static %DKC_FILE%"
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 	
 	if not exist "%APP_FILE%" (
-		echo: 
-		echo ERROR: compilation of %DKC_FILE% failed.
+		echo:	
+		echo %red%ERROR: compilation of %DKC_FILE% failed.%clr%
 		pause
-		goto:eof
+		exit /b 13
 	)
 	
 	::###### run executable ######
 	::cls
-	title %DKCPP_FILE%
+	title %DKC_FILE%
 	echo:
-	echo ######## start %APP_FILE% ############
+	echo %bg_magenta%%white%###### DKTEST MODE ###### %APP_NAME%.c ###### DKTEST MODE ######%clr%
 	echo:
     %COMSPEC% /v:on /c "%APP_FILE%"
 	echo:
-	echo ######### end %APP_FILE% ############
+	echo %bg_magenta%%white%######## END TEST ####### %APP_NAME%.c ######## END TEST #######%clr%
 	echo:
 	
 	set "return_code=%ERRORLEVEL%"
 	echo return_code = %return_code%
 	pause
 	
-	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKC
+::	::###### reload ######
+::	if not exist %~dp0\reload goto:eof
+::	del %~dp0\reload
+::	cls
+::	goto runDKC
 %endfunction%
 
 

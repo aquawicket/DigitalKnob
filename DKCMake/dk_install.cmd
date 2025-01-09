@@ -1,5 +1,5 @@
 @echo off
-if "%*" == "" goto:dk_install
+if "%~1" == "" goto:dk_install
 
 :runDKCMake
 	echo dk_install.cmd %*

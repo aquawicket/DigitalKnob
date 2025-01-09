@@ -3,7 +3,7 @@
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
-#define DKMAIN = 1
+#define DKMAIN 1
 #include <string>
 int main(int argc, char **argv) {
 	

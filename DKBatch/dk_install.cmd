@@ -1,5 +1,5 @@
 @echo off
-if "%*" == "" (goto dk_install)
+if "%~1" == "" (goto dk_install)
 
 :runDKBatch
 	if not exist "%DKBATCH_FUNCTIONS_DIR%"  set "DKBATCH_FUNCTIONS_DIR=%~1"

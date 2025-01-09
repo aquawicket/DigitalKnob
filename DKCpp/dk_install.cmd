@@ -1,12 +1,18 @@
 @echo off
-if "%*" == "" (goto dk_install)
+if "%~1" == "" (goto dk_install)
 
 :runDKCpp
+	set "ESC="
+	set "clr=%ESC%[0m"
+	set "red=%ESC%[31m"
+	set "bg_magenta=%ESC%[45m"
+	set "white=%ESC%[37m"
+	
 	::###### COMPILER_EXE ######
 	set "COMPILER_EXE=%~1"
 	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
 	
-	::###### DKC_FILE ######
+	::###### DKCPP_FILE ######
 	set "DKCPP_FILE=%~2"
 	if not defined DKCPP_FILE    echo ERROR: DKCPP_FILE is invalid
 	
@@ -23,7 +29,8 @@ if "%*" == "" (goto dk_install)
 	echo compiling ...
 	if exist %APP_FILE%  del %APP_FILE%
 
-	set "COMPILE_COMMAND=%SH_EXE% %COMPILER_EXE% -mclang -mcosmo -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
+	::set "COMPILE_COMMAND=%COMPILER_EXE% -mclang -mcosmo -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
+	set "COMPILE_COMMAND=%COMPILER_EXE% -o %APP_FILE% -static %DKCPP_FILE%"
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 	
@@ -31,29 +38,29 @@ if "%*" == "" (goto dk_install)
 		echo: 
 		echo ERROR: compilation of %DKCPP_FILE% failed.
 		pause
-		goto:eof
+		exit /b 13
 	)
 	
 	::###### run executable ######
 	::cls
 	title %DKCPP_FILE%
 	echo:
-	echo ######## start %APP_FILE% ############
+	echo %bg_magenta%%white%###### DKTEST MODE ###### %APP_NAME%.cpp ###### DKTEST MODE ######%clr%
 	echo:
     %COMSPEC% /v:on /c "%APP_FILE%"
 	echo:
-	echo ######### end %APP_FILE% ############
+	echo %bg_magenta%%white%######## END TEST ####### %APP_NAME%.cpp ######## END TEST #######%clr%
 	echo:
 	
 	set "return_code=%ERRORLEVEL%"
 	echo return_code = %return_code%
 	pause
 	
-	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
-	goto runDKCpp
+::	::###### reload ######
+::	if not exist %~dp0\reload goto:eof
+::	del %~dp0\reload
+::	cls
+::	goto runDKCpp
 %endfunction%
 
 
@@ -74,7 +81,7 @@ if "%*" == "" (goto dk_install)
 
 :dk_install
 	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmopolitan, gcc, msvc 
+	:: clang, cosmocc, gcc, msvc 
 	set "default_host_os=cosmocc"
 	set "default_host_arch=cosmocc"
 	set "default_host_env=cosmocc"
@@ -83,7 +90,7 @@ if "%*" == "" (goto dk_install)
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
 	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
-	::###### Install DKC ######
+	::###### Install DKCpp ######
 	%dk_call% dk_echo "Installing DKCpp . . ."
 	
 	::###### OS ######
@@ -95,7 +102,7 @@ if "%*" == "" (goto dk_install)
 	::###### arch ######
 	::%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
 	::if not defined arch set "arch=%host_arch%"
-	set "host_arch=%default_host_arch%"
+	set "arch=%default_host_arch%"
 	%dk_call% dk_printVar arch
 	
 	::###### host_env ######
@@ -120,7 +127,7 @@ if "%*" == "" (goto dk_install)
 	if "%host_env%"=="clang"  		%dk_call% dk_validate CLANG_CXX_COMPILER       "%dk_call% %DKIMPORTS_DIR%\clang\dk_install.cmd"
 	if "%host_env%"=="gcc"    		%dk_call% dk_validate GCC_CXX_COMPILER         "%dk_call% %DKIMPORTS_DIR%\gcc\dk_install.cmd"
 
-	if "%host_env%"=="cosmocc"      set "COMPILER_EXE=%COSMOCC_CXX_COMPILER%"
+	if "%host_env%"=="cosmocc"      set "COMPILER_EXE=%SH_EXE% %COSMOCC_CXX_COMPILER%"
 	if "%host_env%"=="clang"  		set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
 	if "%host_env%"=="gcc"	  		set "COMPILER_EXE=%GCC_CXX_COMPILER%"
 	%dk_call% dk_assertVar COMPILER_EXE

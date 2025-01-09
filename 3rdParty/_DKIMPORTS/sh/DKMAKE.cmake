@@ -22,7 +22,6 @@ if(EXISTS ${SHELL_SH})
 	dk_printVar(SHELL_SH)
 	dk_set(SH_EXE "${SHELL_SH}")
 	dk_printVar(SH_EXE)
-	dk_pause()
 endif()
 
 ### environment variable sh ###
@@ -32,13 +31,12 @@ if(DEFINED ENV{SH})
 		if(NOT SH_EXE)
 			dk_set(SH_EXE "$ENV{SH}")
 			dk_printVar(SH_EXE)
-			dk_pause()
 		endif()
 	endif()
 endif()
 
 ### Msys2 sh ###
-if(MSYSTEM)
+#if(MSYSTEM)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_findProgram(MSYS2_SH_EXE sh "${MSYS2_DIR}/usr/bin")
 	if(EXISTS "${MSYS2_SH_EXE}")
@@ -46,10 +44,9 @@ if(MSYSTEM)
 		if(NOT SH_EXE)
 			dk_set(SH_EXE ${MSYS2_SH_EXE})
 			dk_printVar(SH_EXE)
-			dk_pause()
 		endif()
 	endif()
-endif()
+#endif()
 
 
 ## We should be able to find sh while inside a WSL instance
@@ -66,16 +63,13 @@ endif()
 
 
 ### Git sh ###
-if(NOT SH_EXE)
-	dk_depend(git)
-	dk_findProgram(GIT_SH_EXE sh "${GIT}/bin")
-	if(EXISTS "${GIT_SH_EXE}")
-		dk_printVar(GIT_SH_EXE)
-		if(NOT SH_EXE)
-			dk_set(SH_EXE ${GIT_SH_EXE})
-			dk_printVar(SH_EXE)
-			dk_pause()
-		endif()
+dk_depend(git)
+dk_findProgram(GIT_SH_EXE sh "${GIT}/bin")
+if(EXISTS "${GIT_SH_EXE}")
+	dk_printVar(GIT_SH_EXE)
+	if(NOT SH_EXE)
+		dk_set(SH_EXE ${GIT_SH_EXE})
+		dk_printVar(SH_EXE)
 	endif()
 endif()
 

@@ -3,7 +3,7 @@
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
-#define DKMAIN = 1
+#define DKMAIN 1
 int main(int argc, char **argv) {
 	
 	char* from = "/C/Users/Administrator/digitalknob";

@@ -37,7 +37,7 @@ int dk_endianness(void) {
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
-#define DKMAIN = 1
+#define DKMAIN 1
 #include <stdio.h>
 int main() {
 	switch(dk_endianness()){

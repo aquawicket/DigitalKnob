@@ -220,7 +220,7 @@ void dk_app_Exit(){
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
-#define DKMAIN = 1
+#define DKMAIN 1
 #include <stdio.h>
 int main(int argc, char** argv) {
 	return dk_app_dk_app(argc, argv);

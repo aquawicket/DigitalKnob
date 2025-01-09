@@ -1,5 +1,5 @@
 @echo off
-if "%*" == "" (goto dk_install)
+if "%~1" == "" (goto dk_install)
 
 :runDKBash
 	set "DKBASH_FUNCTIONS_DIR=%~1"
