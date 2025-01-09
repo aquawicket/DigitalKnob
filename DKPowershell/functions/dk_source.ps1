@@ -5,8 +5,13 @@ if(!$dk_source){ $dk_source = 1 } else{ return } #include guard
 # dk_source(milliseconds)
 #
 function Global:dk_source($func) {
-		#if(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1"){ dk_debugFunc 1 }
+	#if(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1"){ dk_debugFunc 1 }
 
+	if(!${func}){
+		Write-Host "ERROR: func:${func} is invalid";
+		return;
+	}
+	
 	# load if it's an existing full path file
 	if((${func}) -and (Test-Path "${func}")){
 		. "${func}"

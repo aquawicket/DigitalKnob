@@ -5,10 +5,10 @@ if(!$dk_assertVar){ $dk_assertVar = 1 } else{ return } #include guard
 # dk_assertVar(expression)
 #
 #
-function Global:dk_assertVar($expression) {
+function Global:dk_assertVar($var) {
 	dk_debugFunc 1
 
-	if((${!expression})){
+	if((${!var})){
 		return #${true}
 	}
 	

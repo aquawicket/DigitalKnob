@@ -16,10 +16,10 @@ function Global:dk_call(){
 	$comand = $1 -replace "::", "/"
 	#Write-Host "comand = $comand"
 	
-	#if("$comand" -match "dk_[a-zA-Z0-9]+"){
+	if("$comand" -match "dk_[a-zA-Z0-9]+"){
 #	if("$comand" -match "[a-zA-Z0-9]+"){
 		dk_source $comand
-#	}
+	}
 
 	& $1 $2 $3 $4 $5 $6 $7 $8 $9
 	#Start-Process -WorkingDirectory $env:DKPOWERSHELL_FUNCTIONS_DIR -ArgumentList @args
