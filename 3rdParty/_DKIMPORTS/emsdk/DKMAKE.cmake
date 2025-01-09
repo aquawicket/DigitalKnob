@@ -31,7 +31,7 @@ dk_import(https://github.com/emscripten-core/emsdk/archive/861ce44b.zip)
 
 # Download and install the latest SDK tools.
 if(WIN_HOST)
-	dk_validate(CMD_EXE "dk_depend(cmd")
+	dk_validate(CMD_EXE "dk_depend(cmd)")
 	dk_validate(CMAKE_EXE "dk_depend(cmake)")
 	dk_getNativePath(${CMD_EXE} CMD_EXE)
 	dk_getNativePath(${CMAKE_EXE} CMAKE_EXE)

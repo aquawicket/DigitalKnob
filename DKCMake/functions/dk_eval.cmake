@@ -12,8 +12,8 @@ macro(dk_eval)
 	#dk_debugFunc()
 	
 	set(code "${ARGV}")
-	
 #	message("${lblue}dk_eval> ${lcyan}${code}\n ${clr}")
+
 	#dk_replaceAll("${code}"  ";"  "\n"  code)
 	#dk_replaceAll("${code}"  "'"  "\""  code)
 	
@@ -52,5 +52,5 @@ function(DKTEST)
 	dk_debugFunc(0)
 
 	set(test "test")
-	dk_eval([[message("test = ${test}")]])
+	dk_eval([[  message("test = ${test}")   ]])
 endfunction()
