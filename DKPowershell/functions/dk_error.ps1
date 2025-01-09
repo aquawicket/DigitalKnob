@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-#TODO #include guard
+if(!$dk_error){ $dk_error = 1 } else{ return } #include guard
 
 ################################################################################
 # dk_error(message)

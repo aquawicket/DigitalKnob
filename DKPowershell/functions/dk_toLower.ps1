@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-#TODO #include guard
+if(!$dk_toLower){ $dk_toLower = 1 } else{ return } #include guard
 
 ##################################################################################
 # dk_toLower(str) -> rtn_val

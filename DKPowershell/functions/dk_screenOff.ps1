@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-#TODO #include guard
+if(!$dk_screenOff){ $dk_screenOff = 1 } else{ return } #include guard
 
 
 ################################################################################

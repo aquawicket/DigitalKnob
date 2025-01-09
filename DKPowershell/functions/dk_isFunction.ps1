@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-#TODO #include guard
+if(!$dk_isFunction){ $dk_isFunction = 1 } else{ return } #include guard
 
 ##############################################################################
 # dk_isFunction(name rtn_var)

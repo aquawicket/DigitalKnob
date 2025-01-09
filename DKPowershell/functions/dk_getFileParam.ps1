@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-#TODO #include guard
+if(!$dk_getFileParam){ $dk_getFileParam = 1 } else{ return } #include guard
 
 ################################################################################
 # dk_getFileParam(file, var_name) value

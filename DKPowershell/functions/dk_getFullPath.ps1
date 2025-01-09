@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-#TODO #include guard
+if(!$dk_getFullPath){ $dk_getFullPath = 1 } else{ return } #include guard
 
 ##################################################################################
 # dk_getFullPath(path) -> rtn_var
