@@ -57,7 +57,7 @@ if "%*" == "" (goto dk_install)
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKPython\DefaultIcon" "" "REG_SZ" "%PYTHON_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.py"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.py
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.py"
 	assoc .py=DKPython
 	
 	%dk_call% dk_success "DKPython install complete"

@@ -85,7 +85,7 @@ if "%*" == "" (goto dk_install)
 	ftype DKCSharp=%COMSPEC% /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cs"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cs
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cs"
 	assoc .cs=DKCSharp
 	
 	%dk_call% dk_success "DKCSharp install complete"

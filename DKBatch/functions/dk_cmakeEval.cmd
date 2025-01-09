@@ -43,7 +43,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     :: append %DKVARS% to CMAKE_ARGS with quotes removed
 ::    if defined DKVARS     call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%
 	if defined DKVARS     call set CMAKE_ARGS=%CMAKE_ARGS% "%DKVARS%"
-   
+ 
     ::set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
 	set CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
     set CMAKE_ARGS=%CMAKE_ARGS% -P

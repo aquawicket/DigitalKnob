@@ -1,5 +1,5 @@
 @echo off
-if "%*" == "" (goto :dk_install)
+if "%~1" == "" (goto :dk_install)
 
 :runDKC
 	::###### COMPILER_EXE ######
@@ -137,7 +137,7 @@ if "%*" == "" (goto :dk_install)
 	ftype DKC=%COMSPEC% /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.c"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.c
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.c"
 	assoc .c=DKC
 	
 	%dk_call% dk_success "DKC install complete"

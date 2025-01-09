@@ -429,9 +429,9 @@ function(dk_importVariables)
 	############# TARGET <PLUGIN>_VARIABLES #############
 	#####################################################
 	# These variables require a target_triple
-#	if(NOT triple)
-#		return()
-#	endif()
+	if(NOT triple)
+		return()
+	endif()
 	dk_validate(triple "dk_target_triple()")
 	
 	# <PLUGIN>_TRIPLE_DIR
