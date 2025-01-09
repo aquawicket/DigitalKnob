@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
     
     :: get ALL_BUT_FIRST_ARGS
-	for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST_ARGS=%%b
+	for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST_ARGS=%%b
     set "ALL_BUT_FIRST_ARGS=%ALL_BUT_FIRST_ARGS:"='%"
     
     :: get LAST_ARG

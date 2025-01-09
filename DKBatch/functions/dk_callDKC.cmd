@@ -25,7 +25,7 @@ setlocal
 
 
 	:: get ALL_BUT_FIRST_ARGS
-::	for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST_ARGS=%%b
+::	for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST_ARGS=%%b
 
     :: get LAST_ARG
 ::	for %%a in (%*) do set LAST_ARG=%%a

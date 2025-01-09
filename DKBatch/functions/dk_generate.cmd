@@ -151,8 +151,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"
 
     %dk_call% dk_info "****** CMAKE COMMAND ******"
-    echo %CMAKE_EXE% %CMAKE_ARGS%
-    %dk_call% %CMAKE_EXE% %CMAKE_ARGS% && %dk_call% dk_success "CMake Generation Successful" || %dk_call% dk_error "CMake Generation Failed"
+    echo "%CMAKE_EXE%" %CMAKE_ARGS%
+    %dk_call% "%CMAKE_EXE%" %CMAKE_ARGS% && %dk_call% dk_success "CMake Generation Successful" || %dk_call% dk_error "CMake Generation Failed"
 
 ::	###### IMPORT VARIABLES ######
 	%dk_call% dk_importVars

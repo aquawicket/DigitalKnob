@@ -35,7 +35,7 @@ if "%~1" neq ""    goto runDKBat
 	if not exist "%ComSpec%"                 set "ComSpec=%~2"
 	if not exist "%DKCACHE_DIR%"             set "DKCACHE_DIR=%~3"
 	if not exist "%DKSCRIPT_PATH%"           set "DKSCRIPT_PATH=%~4"
-	if not defined DKSCRIPT_ARGS             for /f "tokens=4,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
+	if not defined DKSCRIPT_ARGS			 for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b
 	
 	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.

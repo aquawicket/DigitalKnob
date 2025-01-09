@@ -9,10 +9,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
     %dk_call% dk_debugFunc 2 99
 
-    for /f "tokens=1,* delims= " %%a in ("%*") do set "ALL_BUT_FIRST=%%b"
+	for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST_ARGS=%%b
 
-    if defined %~1 endlocal & call set "%~1=%ALL_BUT_FIRST% %%%~1%% "
-    if not defined %~1 endlocal & set "%~1=%ALL_BUT_FIRST%"
+    if defined %~1 endlocal & call set "%~1=%ALL_BUT_FIRST_ARGS% %%%~1%% "
+    if not defined %~1 endlocal & set "%~1=%ALL_BUT_FIRST_ARGS%"
 %endfunction%
 
 
