@@ -3,19 +3,19 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include_guard()
 
 ##############################################################################
-# dk_isUrl(variable rtn_var)
+# dk_isUrl(arg)
 # 
-#	Test if a varaible is a url
+#	Test if a string is a url
 #
-#	@string	- The string to test
-#	@dk_isUrl: 	- True if the variable is a url, False if otherwise.
+#	@arg		- The argument to test
+#	@dk_isUrl 	- 1 if arg is a url, 0 if otherwise.
 #
 function(dk_isUrl)
 	dk_debugFunc(1)
 	
-	dk_getArg(0 url)
+	dk_getArg(0 _arg0_)
 	
-	if("${url}" MATCHES "^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS)://")
+	if("${_arg0_}" MATCHES "^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS)://")
 		set(dk_isUrl 1 PARENT_SCOPE)
 	else()
 		set(dk_isUrl 0 PARENT_SCOPE)

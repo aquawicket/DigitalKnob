@@ -14,35 +14,12 @@ include_guard()
 function(dk_includes)
 	dk_debugFunc(2 99)
 	
-	### variable ###
-	if(DEFINED "${ARGV0}")
-		set(variable 	"${${ARGV0}}")
-	elseIF(DEFINED ARGV0)
-		set(variable 	"${ARGV0}")
-	else()
-		dk_fatal("dk_includes(${ARGV}): ARGV0:${ARGV0} is invalid.")
-	endif()
+	dk_getArg(0 variable)
+	dk_getArg(1 find)
 	
-	### find ###
-	if(DEFINED "${ARGV1}")
-		set(find 		"${${ARGV1}}")
-	elseif(DEFINED ARGV1)
-		set(find 		"${ARGV1}")
-	else()
-		dk_fatal("dk_includes(${ARGV}): ARGV1:${ARGV1} is invalid.")
-	endif()
-
 	string(FIND "${variable}" "${find}" dk_includes)
 	math(EXPR dk_includes "${dk_includes}+1")
 	set(dk_includes ${dk_includes} PARENT_SCOPE)
-	
-#if(DEBUG_CMAKE)	
-	if(${dk_includes})
-		dk_debug("dk_includes(${ARGV}): RTN:${dk_includes}:isTrue")
-	else()
-		dk_debug("dk_includes(${ARGV}): RTN:${dk_includes}:isFalse")
-	endif()
-#endif()
 endfunction()
 
 
