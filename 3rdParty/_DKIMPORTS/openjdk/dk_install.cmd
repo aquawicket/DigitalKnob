@@ -45,7 +45,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "JavaHome" "REG_SZ" "\"%OPENJDK_DIR%\""
 	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "RuntimeLib" "REG_SZ" "\"%OPENJDK_DIR%\\bin\\server\\jvm.dll\""
 	
-	:::::: Set Environment Variables ::::::
+	::###### Set Environment Variables ######
 	%dk_call% dk_setEnv JAVA_VERSION %JAVA_VERSION%
 	%dk_call% dk_setEnv JAVA_HOME "%OPENJDK_8U41_WINPATH%"
 	%dk_call% dk_setEnv VS_JavaHome "%OPENJDK_8U41_WINPATH%"

@@ -28,23 +28,23 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 		%dk_call% dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE%
 		
-		:: create and cd into install directory
+		::###### create and cd into install directory ######
 		%dk_call% dk_makeDirectory %REACTOS_DIR% 
 		%dk_call% dk_cd %REACTOS_DIR%
 		
-		:::::: Install the OS to the .img file
-		:: (Install from the running virtual OS)
+		::###### Install the OS to the .img file ######
+		::###### (Install from the running virtual OS) ######
 		%dk_call% dk_info "########### ReactOS -install- ###############"
 		%dk_call% dk_info " "
 		%dk_call% dk_info ". Setup Instructions TODO here"
 		
-		:::::: Create the virtual image (10gb)
+		::###### Create the virtual image (10gb) ######
 		%QEMU_IMG_EXE% create -f qcow2 %REACTOS_IMG% 10G
 
-		:: Launching the VM
+		::###### Launching the VM ######
 		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso/ReactOS-0.4.14-release-119-gce0b4ff.iso -boot menu=on -drive file=%REACTOS_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 		
-		:: create ReactOS Launcher
+		::###### create ReactOS Launcher ######
 		%dk_call% dk_set REACTOS_launcher "%REACTOS_DIR%\LAUNCH.cmd"
 		if exist "%REACTOS_launcher%" %return%	
 		%dk_call% dk_fileWrite "%REACTOS_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%REACTOS_IMG% -cpu max -smp 2 -vga virtio -display sdl"

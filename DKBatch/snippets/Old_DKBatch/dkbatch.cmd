@@ -62,13 +62,13 @@ if not exist "%~1" ( echo [91m cannot find "%~1" [0m & goto :end )
 >nul findstr /i /c:"%%DKEND%%" "%~1" || ( echo.>>"%~1" & echo.>>"%~1" &echo %%DKEND%%>>"%~1" )
 :end
 	
-::: prepareLineNumbers() ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::###### prepareLineNumbers() ######
 >nul 2>nul (
 	call %DKBATCH_PATH%3rdParty\jrepl "(\x25#=\x25)\d*(\x25=#\x25)" "$1+ln+$2" /j /f "%~f1" /o "%~f1.new"
 	fc /b "%~f1" "%~f1.new" && del "%~f1.new" || move /y "%~f1.new" "%~f1"
 )
 
-:::: DKLOADED() ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::###### DKLOADED() ######
 if defined DKLOADED (
 	%DKIN%
 	if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
@@ -84,19 +84,19 @@ if defined DKLOADED (
 ::     DKBATCH first run entry point (NOT LOADED YET)
 ::#########################################################################
 
-::: %TRY_FATAL% :::::::::::::::::::
+::###### %TRY_FATAL% ######
 set "TRY_FATAL=DKERROR ERROR %1 "
 
-::: %IF_ERROR% :::::::::::::::::::::::::
+::###### %IF_ERROR% ######
 set "IF_ERROR=call DKERROR IF_ERROR %1 "
 
-::: %ERROR% ::::::::::::::::::::::
+::###### %ERROR% ######
 set "ERROR=call DKERROR ERROR %1 "
 
-::: %IF_FATAL% :::::::::::::::::::::::::
+::###### %IF_FATAL% ######
 set "IF_FATAL=call DKERROR IF_FATAL %1 "
 
-::: %FATAL% :::::::::::::::::
+::###### %FATAL% ######
 set "FATAL=DKERROR ERROR %1 "
 
 ::set "REQUIRED_1=if [%%1]==[] echo [91m	%~n0(%*): argument 1 is invalid [0m & goto:eof"
@@ -126,12 +126,12 @@ if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 %%* & @setlocal enablee
 
 
 :: Add dkbatch subfolders to the user PATH environment variable
-::: AddDKPaths() ::::::::::::::::::::::::::::::::::::::::::::::::::
+::###### AddDKPaths() ######
 setlocal enabledelayedexpansion
 set "folders=%DKBATCH_PATH%"
 for /d %%D in (%DKBATCH_PATH%*) do ( set "folders=!folders!;%%D" ) 
 endlocal & set "PATH=%PATH%;%folders%"
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::##########################
 
 
 

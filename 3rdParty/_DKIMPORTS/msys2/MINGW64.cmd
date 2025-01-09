@@ -29,7 +29,6 @@ goto main
 
 ::###### MINGW64 ######
 :console
-	TITLE DigitalKnob - CONSOLE
 	cls
 	%dk_call% dk_echo "You are in a Windows console environment"
 	%dk_call% dk_echo ""
@@ -39,7 +38,6 @@ goto main
 
 ::###### MINGW64 ######
 :mingw64
-	TITLE DigitalKnob - MINGW64
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && echo You are in a MINGW64 terminal environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction% 
 

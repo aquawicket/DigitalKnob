@@ -32,20 +32,20 @@ setlocal
 		%dk_call% dk_basename %WINPE_DL% WINPE_DL_FILE
 		%dk_call% dk_download "%WINPE_DL%"
 
-		:: create and cd into install directory
+		::###### create and cd into install directory ######
 		if not exist %WINPE_DIR% %dk_call% dk_makeDirectory "%WINPE_DIR%" 
 		%dk_call% dk_cd "%WINPE_DIR%"
 
-		:::::: Install the OS to the .img file
+		::###### Install the OS to the .img file ######
 		:: (Install from the running virtual OS)
 		:: %dk_call% dk_info "########### Windows PE -install- ###############"
 		:: %dk_call% dk_info " "
 		:: TODO
 
-		:::::: Create the virtual image (10gb)
+		::###### Create the virtual image (10gb) ######
 		%QEMU_IMG_EXE% create -f qcow2 %WINPE_IMG% 5G
 		
-		:: Launching the VM
+		::###### Launching the VM ######
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 		%QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 			

@@ -28,7 +28,6 @@ echo        GRADLE = %GRADLE%
 echo           ABI = %ABI%
 echo    target_type = %target_type%
 echo #############################################
-TITLE %compiler% %GRADLE%
 
 
 :: App package name and lable

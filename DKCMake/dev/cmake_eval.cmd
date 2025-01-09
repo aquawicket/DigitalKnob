@@ -77,7 +77,7 @@ if not defined in_subprocess (%COMSPEC% /k set in_subprocess=y ^& %0 %*) & exit 
 		
 	::echo return code: %ERRORLEVEL%
 	
-	:::: work with cmake return code files ::::
+	::###### work with cmake return code files ######
 	:: std::out
 	set out=
 	if exist "cmake_eval.out" (

@@ -9,16 +9,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#  reference: https://stackoverflow.com/a/49042678
 ::#
 :dk_fileToArray
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2
 
     set "_file_=%~f1"
 	set "_file_=%_file_:/=\%"
     set /a i=0
     for /F "usebackq delims=" %%a in ("%_file_%") do (
-        %if_NDK% call set "%~2[%%i%%]=%%a"      &:: FIXME: remove the need for call here
-        %if_DK% set "%~2[!i!]=%%a"
-        set /a i+=1
+		set "%~2[!i!]=%%a"
+		set /a i+=1
     )
     
     :: Return the array to the calling scope

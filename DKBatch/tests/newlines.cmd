@@ -1,8 +1,7 @@
 @echo off
 :: https://stackoverflow.com/questions/3294599/do-batch-files-support-multiline-variables
 
-::::::::::::::::::::::::::::::::::::
-:::: newline (echo: version) :::::::
+::###### newline (echo: version) ######
 set \n=^&echo:
 
 :: echo text with newlines
@@ -16,8 +15,8 @@ echo first line %\n%second line %\n%third line %\n%
 pause
 
 
-::::::::::::::::::::::::::::::::::::::::::::::::
-:::: newline (delayed expansion version) :::::::
+
+::###### newline (delayed expansion version) ######
 setlocal enableDelayedExpansion
 set \n=^
 
@@ -36,8 +35,7 @@ pause
 
 
 :: https://stackoverflow.com/a/5642300
-::::::::::::::::::::::::::::::::::::::::::::::::
-:::: newline (without delayed expansion) :::::::
+::###### newline (without delayed expansion) ######
 (SET LF=^
 %=this line is empty=%
 )

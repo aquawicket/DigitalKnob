@@ -26,12 +26,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		%dk_call% dk_basename %TINYCORELINUX_DL% TINYCORELINUX_DL_FILE
 		%dk_call% dk_download %TINYCORELINUX_DL%
 		
-		:: create and cd into install directory
+		::###### create and cd into install directory ######
 		%dk_call% dk_makeDirectory %TINYCORELINUX_DIR% 
 		%dk_call% dk_cd %TINYCORELINUX_DIR%
 		
-		:::::: Install the OS to the .img file
-		:: (Install from the running virtual OS)
+		::###### Install the OS to the .img file ######
+		::###### (Install from the running virtual OS) ######
 		%dk_call% dk_info "########### Tiny Core Linux -install- ###############"
 		%dk_call% dk_echo
 		%dk_call% dk_info ". Choose:  Boot Core with X/GUI (TinyCore) - Installation Extension"
@@ -45,14 +45,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		%dk_call% dk_info ". When instal finishes, shut down."
 		%dk_call% dk_info ". A LAUNCH shortcut will be created the int DKTools/TinyCoreLinux directory"
 		
-		:::::: Create the virtual image (10gb)
+		::###### Create the virtual image (10gb) ######
 		%QEMU_IMG_EXE% create -f qcow2 %TINYCORELINUX_IMG% 10G
 		
-		:: Launching the VM
+		::###### Launching the VM ######
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_DL_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	
-		:: create TinyCoreLinux Launcher
+		::###### create TinyCoreLinux Launcher ######
 		%dk_call% dk_set TINYCORELINUX_launcher "%TINYCORELINUX_DIR%\LAUNCH.cmd"
 		if exist "%TINYCORELINUX_launcher%" %return%
 		%dk_call% dk_fileWrite "%TINYCORELINUX_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl"
