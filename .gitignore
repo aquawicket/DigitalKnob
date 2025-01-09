@@ -4,8 +4,8 @@
 *.exe.com.dbg
 *.lib
 */*/backward.cpp
-*/*/android_arm32_clang
-*/*/android_arm64_clang
+android_arm32_clang
+android_arm64_clang
 */*/android_x86_clang
 */*/android_x86_64_clang
 */*/cosmo_cosmo_cosmo
@@ -67,5 +67,6 @@ DKApps/*/resource.h
 DKApps/*/resource.rc
 DKApps/DKCore/assets
 DKApps/DKCore/main.cpp
+DKPlugins/*/CMakeLists.txt
 DKPlugins/DKXml/pugixml.cpp
 
