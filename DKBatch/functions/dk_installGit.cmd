@@ -1,19 +1,20 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_DKIMPORTS_DIR"
+%dk_call% dk_validate DKIMPORTS_DIR     	   "%dk_call% dk_DKIMPORTS_DIR"
 if not exist "%DKIMPORTS_DIR%\git\dkconfig.txt" %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt" %DKCACHE_DIR%
 if exist "%DKCACHE_DIR%\dkconfig.txt"           %dk_call% dk_rename "%DKCACHE_DIR%\dkconfig.txt" "%DKCACHE_DIR%\git.txt"
-if exist "%DKIMPORTS_DIR%\git\dkconfig.txt"     %dk_call% dk_getFileParam "%DKIMPORTS_DIR%\git\dkconfig.txt" GIT_DL_VERSION
-if not exist "%DKIMPORTS_DIR%\git\dkconfig.txt" %dk_call% dk_getFileParam "%DKCACHE_DIR%\git.txt" GIT_DL_VERSION
 
+if exist "%DKCACHE_DIR%\git.txt"			(set GIT_CONFIG_TXT=%DKCACHE_DIR%\git.txt)
+if exist "%DKIMPORTS_DIR%\git\dkconfig.txt"	(set GIT_CONFIG_TXT=%DKIMPORTS_DIR%\git\dkconfig.txt)
 
-set "GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-32-bit.7z.exe"
-set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-64-bit.7z.exe"
+%dk_call% dk_getFileParam %GIT_CONFIG_TXT% GIT_DL_WIN_X86
+%dk_call% dk_getFileParam %GIT_CONFIG_TXT% GIT_DL_WIN_X86_64
 
 :: https://stackoverflow.com/a/67714373
-if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem" && setx GIT_CONFIG_SYSTEM "!GIT_CONFIG_SYSTEM!"
-if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal" && setx GIT_CONFIG_GLOBAL "!GIT_CONFIG_GLOBAL!"
+%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
+if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem" &:: setx GIT_CONFIG_SYSTEM "!GIT_CONFIG_SYSTEM!"
+if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal" &:: setx GIT_CONFIG_GLOBAL "!GIT_CONFIG_GLOBAL!"
 
 ::####################################################################
 ::# dk_installGit()
@@ -21,9 +22,9 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 ::#
 :dk_installGit
 ::setlocal
-	%dk_call% dk_debugFunc 0	
+	%dk_call% dk_debugFunc 0
+	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-    if defined win_arm32_host  set "GIT_DL="
     if defined win_arm64_host  set "GIT_DL=%GIT_DL_WIN_ARM64%"
     if defined win_x86_host    set "GIT_DL=%GIT_DL_WIN_X86%"
     if defined win_x86_64_host set "GIT_DL=%GIT_DL_WIN_X86_64%"
