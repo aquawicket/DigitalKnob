@@ -17,7 +17,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	dk_return()
 #endif()
 
-#dk_depend(openjdk-8u41)
+#dk_depend(openjdk-8)
 
 dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
 dk_set(ANDROID_SDK ${DK3RDPARTY_DIR}/android-sdk)

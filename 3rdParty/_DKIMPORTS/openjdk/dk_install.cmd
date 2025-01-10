@@ -47,10 +47,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::###### Set Environment Variables ######
 	%dk_call% dk_setEnv JAVA_VERSION %JAVA_VERSION%
-	%dk_call% dk_setEnv JAVA_HOME "%OPENJDK_8U41_WINPATH%"
-	%dk_call% dk_setEnv VS_JavaHome "%OPENJDK_8U41_WINPATH%"
-	%dk_call% dk_setEnv STUDIO_JDK "%OPENJDK_8U41_WINPATH%"
-	%dk_call% dk_setEnv STUDIO_GRADLE_JDK "%OPENJDK_8U41_WINPATH%"
+	%dk_call% dk_setEnv JAVA_HOME "%OPENJDK_8_WINPATH%"
+	%dk_call% dk_setEnv VS_JavaHome "%OPENJDK_8_WINPATH%"
+	%dk_call% dk_setEnv STUDIO_JDK "%OPENJDK_8_WINPATH%"
+	%dk_call% dk_setEnv STUDIO_GRADLE_JDK "%OPENJDK_8_WINPATH%"
 %endfunction%
 
 :dk_installOpenJdkMac

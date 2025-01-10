@@ -14,7 +14,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 
 ### DEPEND ###
-dk_depend(openjdk-8u41)
+dk_depend(openjdk-8)
 dk_depend(android-ndk)
 
 ### IMPORT ###
@@ -50,5 +50,5 @@ elseif(LINUX_HOST)
 endif()
 
 ### SET ENVIRONMENT VARIABLES ###
-dk_setEnv("STUDIO_JDK" ${OPENJDK_8U41})
-dk_setEnv("STUDIO_GRADLE_JDK" ${OPENJDK_8U41})
+dk_setEnv("STUDIO_JDK" ${OPENJDK_8})
+dk_setEnv("STUDIO_GRADLE_JDK" ${OPENJDK_8})

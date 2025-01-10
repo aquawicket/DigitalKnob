@@ -57,58 +57,24 @@ if(WIN_HOST)
 	
 	###### JAVA_VERSION ######
 	set(ENV{JAVA_VERSION} 11)
-#	execute_process(COMMAND ${CMD_EXE} /c setx JAVA_VERSION "$ENV{JAVA_VERSION}")
 	
 	###### JAVA_HOME ######
-	set(ENV{JAVA_HOME} "${OPENJDK}")
-	#dk_getNativePath("$ENV{JAVA_HOME}" ENV{JAVA_HOME})
-	dk_replaceAll("$ENV{JAVA_HOME}" "/" "\\" ENV{JAVA_HOME})
-#	execute_process(COMMAND ${CMD_EXE} /c setx JAVA_HOME "$ENV{JAVA_HOME}")
+	dk_getNativePath("${OPENJDK}" ENV{JAVA_HOME})
 	
-	###### VS_JavaHome ######
-	set(ENV{VS_JavaHome} "$ENV{JAVA_HOME}")
-#	execute_process(COMMAND ${CMD_EXE} /c setx VS_JavaHome "$ENV{VS_JavaHome}")
-	
-	###### STUDIO_JDK ######
-	set(ENV{STUDIO_JDK} "$ENV{JAVA_HOME}")
-#	execute_process(COMMAND ${CMD_EXE} /c setx STUDIO_JDK "$ENV{STUDIO_JDK}")
-	
-	###### STUDIO_GRADLE_JDK ######
-	set(ENV{STUDIO_GRADLE_JDK} "$ENV{JAVA_HOME}")
-#	execute_process(COMMAND ${CMD_EXE} /c setx STUDIO_GRADLE_JDK "$ENV{STUDIO_GRADLE_JDK}")
-	
-	###### register openjdk ######
+	###### JAVA Registry ######
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" /v CurrentVersion /t REG_SZ /d "$ENV{JAVA_VERSION}" /f)
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v JavaHome /t REG_SZ /d "$ENV{JAVA_HOME}" /f)
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v RuntimeLib /t REG_SZ /d "$ENV{JAVA_HOME}\\bin\\server\\jvm.dll" /f)
 	
-	###### registerJDK.cmd ######
-#	set(registerJDK11 ${OPENJDK}/registerJDK.cmd)
-#	dk_fileWrite(${registerJDK11} "@echo off\n")
-#	dk_fileAppend(${registerJDK11} "set JAVA_VERSION=$ENV{JAVA_VERSION}\n")
-#	dk_fileAppend(${registerJDK11} "setx JAVA_VERSION $ENV{JAVA_VERSION}\n")
-#	dk_fileAppend(${registerJDK11} "set JAVA_HOME=$ENV{JAVA_HOME}\n")
-#	dk_fileAppend(${registerJDK11} "setx JAVA_HOME $ENV{JAVA_HOME}\n")
-#	dk_fileAppend(${registerJDK11} "set VS_JavaHome=$ENV{VS_JavaHome}\n")
-#	dk_fileAppend(${registerJDK11} "setx VS_JavaHome $ENV{VS_JavaHome}\n")
-#	dk_fileAppend(${registerJDK11} "set STUDIO_JDK=$ENV{STUDIO_JDK}\n")
-#	dk_fileAppend(${registerJDK11} "setx STUDIO_JDK $ENV{STUDIO_JDK}\n")
-#	dk_fileAppend(${registerJDK11} "set STUDIO_GRADLE_JDK=$ENV{STUDIO_GRADLE_JDK}\n")
-#	dk_fileAppend(${registerJDK11} "setx STUDIO_GRADLE_JDK $ENV{STUDIO_GRADLE_JDK}\n")
-#	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\" /v CurrentVersion /t REG_SZ /d $ENV{JAVA_VERSION} /f\n")
-#	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}\" /v JavaHome /t REG_SZ /d \"$ENV{JAVA_HOME}\" /f\n")
-#	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}\" /v RuntimeLib /t REG_SZ /d \"$ENV{JAVA_HOME}\\bin\\server\\jvm.dll\" /f\n")
-#	dk_executeProcess(${registerJDK11})
+	###### VS_JavaHome ######
+#	set(ENV{VS_JavaHome} "$ENV{JAVA_HOME}")
+#	execute_process(COMMAND ${CMD_EXE} /c setx VS_JavaHome "$ENV{VS_JavaHome}")
+	
+	###### STUDIO_JDK ######
+#	set(ENV{STUDIO_JDK} "$ENV{JAVA_HOME}")
+#	execute_process(COMMAND ${CMD_EXE} /c setx STUDIO_JDK "$ENV{STUDIO_JDK}")
+	
+	###### STUDIO_GRADLE_JDK ######
+#	set(ENV{STUDIO_GRADLE_JDK} "$ENV{JAVA_HOME}")
+#	execute_process(COMMAND ${CMD_EXE} /c setx STUDIO_GRADLE_JDK "$ENV{STUDIO_GRADLE_JDK}")
 endif()
-
-
-### LINK ###
-#dk_include(${OPENJDK_11}/)	
-#dk_setEnv("JAVA_HOME" ${OPENJDK_11})
-#dk_setEnv("JAVA_VERSION" ${OPENJDK_11_VERSION})
-#dk_setEnv("VS_JavaHome" ${OPENJDK_11})
-
-#Add registry entries
-#dk_registrySetKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${OPENJDK_11_VERSION}")
-#dk_registrySetKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK_11_VERSION}" "JavaHome" "${OPENJDK_11}")
-#dk_registrySetKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK_11_VERSION}" "RuntimeLib" "${OPENJDK_11}/bin/server/jvm.dll")

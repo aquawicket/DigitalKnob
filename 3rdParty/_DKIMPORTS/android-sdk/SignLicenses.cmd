@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::%dk_call% EndProcess adb.exe
 
 ::%dk_call% dk_validatePath DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-::%dk_call% "%DKIMPORTS_DIR%\openjdk-8u41\registerJDK.cmd"
+::%dk_call% "%DKIMPORTS_DIR%\openjdk-8\registerJDK.cmd"
 
 %dk_call% dk_validatePath DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 :: https://stackoverflow.com/a/48539058/688352

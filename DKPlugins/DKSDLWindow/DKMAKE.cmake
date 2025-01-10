@@ -14,7 +14,7 @@ dk_depend(DKWindow)
 if(ANDROID)
 	dk_set(CMAKE_ANDROID_GUI 1)
 	dk_depend(openjdk)
-	dk_depend(openjdk-8u41)
+	dk_depend(openjdk-8)
 	dk_depend(android-cmdline-tools)
 endif()
 
