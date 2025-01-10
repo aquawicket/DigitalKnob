@@ -100,7 +100,7 @@ if not defined WARNING_COLOR   set "WARNING_COLOR=%yellow%"
 if not defined WARNING_TAG     set "WARNING_TAG=WARNING: "
 ::if not defined WARNING_PAUSE   set "WARNING_PAUSE=1"
 ::if not defined WARNING_TIMEOUT set "WARNING_TIMEOUT=1"
-::if not defined WARNING_TRACE   set "WARNING_TRACE=1"
+if not defined WARNING_TRACE   set "WARNING_TRACE=1"
 ::if not defined WARNING_LINE    set "WARNING_LINE=1"
 ::if not defined WARNING_HALT    set "WARNING_HALT=1"
 
@@ -147,7 +147,7 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
         ::if "" == %_message_:~0,1%%_message_:~-1% %dk_call% dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
 
         %dk_call% dk_echo "!%_level_%_COLOR!!%_level_%_TAG!%_message_%%clr%"
-        if "!%_level_%_TRACE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  && %dk_call% dk_printCallStack
+        if "!%_level_%_TRACE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  && %dk_call% dk_stacktrace
 		if "!%_level_%_SOUND!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** SOUND_ON_%_level_% ***%clr%"  && (
 			%dk_call% Array::dk_push errorBeeps "440,500"
 			%dk_call% Array::dk_push errorBeeps "440,500"
