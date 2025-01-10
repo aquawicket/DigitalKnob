@@ -2,27 +2,30 @@
 if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-%dk_call% dk_getFileParam dkconfig.txt GIT_DL_VERSION
-set "GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-32-bit.7z.exe"
-set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-64-bit.7z.exe"
+::%dk_call% dk_getFileParam dkconfig.txt GIT_DL_VERSION
+::set "GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-32-bit.7z.exe"
+::set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-64-bit.7z.exe"
+
+%dk_call% dk_getFileParam dkconfig.txt GIT_DL_WIN_X86
+%dk_call% dk_getFileParam dkconfig.txt GIT_DL_WIN_X86_64
 
 :: https://stackoverflow.com/a/67714373
-if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem" && setx GIT_CONFIG_SYSTEM "!GIT_CONFIG_SYSTEM!"
-if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal" && setx GIT_CONFIG_GLOBAL "!GIT_CONFIG_GLOBAL!"
+%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
+if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem" &:: setx GIT_CONFIG_SYSTEM "!GIT_CONFIG_SYSTEM!"
+if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal" &:: setx GIT_CONFIG_GLOBAL "!GIT_CONFIG_GLOBAL!"
 
 ::####################################################################
 ::# dk_install
 ::#
-::#
 :dk_install
 ::setlocal
 	%dk_call% dk_debugFunc 0	
+	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-    if defined win_arm32_host  set "GIT_DL="
     if defined win_arm64_host  set "GIT_DL=%GIT_DL_WIN_ARM64%"
     if defined win_x86_host    set "GIT_DL=%GIT_DL_WIN_X86%"
     if defined win_x86_64_host set "GIT_DL=%GIT_DL_WIN_X86_64%"
-    if not defined GIT_DL %dk_call% dk_error "GIT_DL is invalid"
+    %dk_call% dk_assertVar GIT_DL
     
 ::	%dk_call% dk_basename %GIT_DL% GIT_DL_FILE
 ::	%dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
@@ -30,13 +33,10 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	if not defined GIT  %dk_call% dk_importVariables %GIT_DL% NAME git ROOT %DKTOOLS_DIR%
 	
+	::############ DO NOT USE GIT_DIR ############
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
-	::### DO NOT USE GIT_DIR ###
 	if defined GIT_DIR  %dk_call% dk_fatal "ERROR: GIT_DIR should not be set."
-	::### DO NOT USE GIT_DIR ###
-
-	::set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
-	::### DO NOT USE GIT_DIR ###
+	::############ DO NOT USE GIT_DIR ############
 	
     set "GIT_EXE=%GIT%\bin\git.exe"
 	set "BASH_EXE=%GIT%\bin\bash.exe"
