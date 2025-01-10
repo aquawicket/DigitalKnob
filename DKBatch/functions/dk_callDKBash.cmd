@@ -25,12 +25,8 @@ setlocal
 
 	%dk_call% dk_BASH_EXE
 
-	:: get ALL_BUT_FIRST
-	::for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST=%%b
 	set ALL_BUT_FIRST=%*
-	if defined ALL_BUT_FIRST (
-		call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%
-	)
+	if defined ALL_BUT_FIRST (call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%)
 
     :: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a

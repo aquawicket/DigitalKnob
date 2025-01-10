@@ -490,17 +490,24 @@ if(ANDROID)
 	
 	####################### Gradle Build #####################
 	if(CMAKE_ANDROID_GUI)
-		if(WIN_HOST)
-			dk_command(${OPENJDK}/registerJDK.cmd)
-		endif()
+		#if(WIN_HOST)
+		#	dk_command(${OPENJDK}/registerJDK.cmd)
+		#endif()
+		dk_depend(openjdk)
 		dk_depend(gradle)
 		
+		if(WIN_HOST)
+			set(setVar "set")
+		else()
+			set(setVar "export")
+		endif()
+	
 		if(DEBUG)
 			add_custom_command(
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/gradlew${bat} --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_Project_Dir}/${triple}/Debug --info clean build #--offline
+				COMMAND ${setVar} "JAVA_HOME=$ENV{JAVA_HOME}" & ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/gradlew${bat} --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_Project_Dir}/${triple}/Debug --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
@@ -510,7 +517,7 @@ if(ANDROID)
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/gradlew${bat} --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_Project_Dir}/${triple}/Release --info clean build #--offline
+				COMMAND ${setVar} "JAVA_HOME=$ENV{JAVA_HOME}" & ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/gradlew${bat} --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_Project_Dir}/${triple}/Release --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)

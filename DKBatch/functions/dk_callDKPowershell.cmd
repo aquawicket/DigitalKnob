@@ -25,12 +25,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: https://stackoverflow.com/a/4732316/688352
     %dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
 	
-	:: get ALL_BUT_FIRST
-	::for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST=%%b
 	set ALL_BUT_FIRST=%*
-	if defined ALL_BUT_FIRST (
-		call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%
-	)
+	if defined ALL_BUT_FIRST (call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%)
     
     :: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a

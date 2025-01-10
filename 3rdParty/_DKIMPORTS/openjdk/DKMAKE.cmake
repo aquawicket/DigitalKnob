@@ -60,7 +60,7 @@ if(WIN_HOST)
 #	execute_process(COMMAND ${CMD_EXE} /c setx JAVA_VERSION "$ENV{JAVA_VERSION}")
 	
 	###### JAVA_HOME ######
-	set(ENV{JAVA_HOME} "${OPENJDK_DIR}")
+	set(ENV{JAVA_HOME} "${OPENJDK}")
 	#dk_getNativePath("$ENV{JAVA_HOME}" ENV{JAVA_HOME})
 	dk_replaceAll("$ENV{JAVA_HOME}" "/" "\\" ENV{JAVA_HOME})
 #	execute_process(COMMAND ${CMD_EXE} /c setx JAVA_HOME "$ENV{JAVA_HOME}")

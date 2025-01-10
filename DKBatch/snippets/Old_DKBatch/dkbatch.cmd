@@ -36,11 +36,8 @@ if not defined DKBATCH_PATH ( set "DKBATCH_PATH=%~dp0" )
 if not defined DKSETTNGS ( call %DKBATCH_PATH%settings )
 
 ::################## %ALL_BUT_FIRST$ ##################
-::for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST=%%b
 set ALL_BUT_FIRST=%*
-if defined ALL_BUT_FIRST (
-	call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%
-)
+if defined ALL_BUT_FIRST (call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%)
 	
 ::################## %DKIN% ##################
 set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^([0m[35m%ALL_BUT_FIRST%[0m[94m^)[0m"
