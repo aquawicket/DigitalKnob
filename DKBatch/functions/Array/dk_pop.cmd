@@ -4,7 +4,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
 ::# Array::dk_pop(array)
-::# Array::dk_pop(array, rtn_var)
 ::#
 ::#    The pop() method of Array instances removes the last element from an array and returns that element. This method changes the length of the array
 ::#
@@ -19,16 +18,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_pop
 setlocal
-	%dk_call% dk_debugFunc 1 2
+	%dk_call% dk_debugFunc 1
     
-    %dk_call% Array::dk_length %~1 _length_
-    set /a _length_-=1
-    set "removedElement=!%~1[%_length_%]!"
-    endlocal & set "%~2=%removedElement%" & %dk_call% dk_unset %~1[%_length_%]
+    %dk_call% Array::dk_length %~1
+    set /a dk_length-=1
 
-::debug
-::	%dk_call% dk_printVar %2
-::	%dk_call% dk_printVar %1
+    (set dk_pop=!%~1[%dk_length%]!)
+    endlocal & (set dk_pop=%dk_pop%) & (set %~1[%dk_length%]=)
 %endfunction%
 
 
@@ -36,9 +32,9 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
     %dk_call% dk_debugFunc 0
- ::setlocal
- 
+
     set "myArrayA[0]=a b c"
     set "myArrayA[1]=1 2 3"
     set "myArrayA[2]=d e f"
@@ -48,35 +44,35 @@ setlocal
     %dk_call% dk_printVar myArrayA 
     %dk_call% dk_echo
     
-    %dk_call% Array::dk_pop myArrayA removedA
+    %dk_call% Array::dk_pop myArrayA
     %dk_call% dk_printVar myArrayA
-    %dk_call% dk_printVar removedA
+    %dk_call% dk_printVar dk_pop
     %dk_call% dk_echo
     
-    %dk_call% Array::dk_pop myArrayA removedA
+    %dk_call% Array::dk_pop myArrayA
     %dk_call% dk_printVar myArrayA
-    %dk_call% dk_printVar removedA
+    %dk_call% dk_printVar dk_pop
     %dk_call% dk_echo
     
-    %dk_call% Array::dk_pop myArrayA removedA
+    %dk_call% Array::dk_pop myArrayA
     %dk_call% dk_printVar myArrayA
-    %dk_call% dk_printVar removedA
+    %dk_call% dk_printVar dk_pop
     %dk_call% dk_echo
     
-    %dk_call% Array::dk_pop myArrayA removedA
+    %dk_call% Array::dk_pop myArrayA
     %dk_call% dk_printVar myArrayA
-    %dk_call% dk_printVar removedA
+    %dk_call% dk_printVar dk_pop
     %dk_call% dk_echo
     
-    %dk_call% Array::dk_pop myArrayA removedA
+    %dk_call% Array::dk_pop myArrayA
     %dk_call% dk_printVar myArrayA
-    %dk_call% dk_printVar removedA
+    %dk_call% dk_printVar dk_pop
     %dk_call% dk_echo
     
 ::  FIXME:  out of array bounds past here
-::  %dk_call% Array::dk_pop myArrayA removedA
+::  %dk_call% Array::dk_pop myArrayA
 ::  %dk_call% dk_printVar myArrayA
-::  %dk_call% dk_printVar removedA
+::  %dk_call% dk_printVar dk_pop
     %dk_call% dk_echo
     %dk_call% dk_echo
 %endfunction%

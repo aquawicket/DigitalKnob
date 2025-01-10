@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# Array::dk_at(array, index, rtn_var)
+::# Array::dk_at(array, index)
 ::#
 ::#    Takes an array instance with an integer value and returns the item at that index, 
 ::#    allowing for positive and negative integers. Negative integers count back from the last item in the array  <-- TODO
@@ -18,17 +18,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 ::#
 :dk_at
-setlocal
-	%dk_call% dk_debugFunc 3
-    ::%dk_call% dk_validateArgs array int optional:rtn_var
+setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 2
 
     ::### return value ###
-    ::if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%%%~1[%~2]%%"
-    if "!DE!" neq "" endlocal & call set "%3=%%%~1[%~2]%%"
-    if "!DE!" equ "" endlocal & set "%3=!%~1[%~2]!"
-
-::debug
-::	%dk_call% dk_printVar %3
+    endlocal & set "dk_at=!%~1[%~2]!"
+	
 %endfunction%
 
 
@@ -47,11 +42,10 @@ setlocal
     set "myArrayA[3]=4 5 6"
     set "myArrayA[4]=h i j"
     %dk_call% dk_printVar myArrayA
-    %dk_call% Array::dk_at MyArrayA 2 arrayAtA
-    %dk_call% dk_printVar arrayAtA
-    %dk_call% dk_echo "Array::dk_at[MyArrayA 2] = %arrayAtA%"
-    if "%arrayAtA%" neq "d e f" %dk_call% dk_error "Array::dk_at[] failed"
-    if "%arrayAtA%" equ "d e f" %dk_call% dk_success "Array::dk_at[] suceeded" 
+    %dk_call% Array::dk_at MyArrayA 2
+    %dk_call% dk_echo "Array::dk_at[MyArrayA 2] = %dk_at%"
+    if "%dk_at%" neq "d e f" %dk_call% dk_error "Array::dk_at[] failed"
+    if "%dk_at%" equ "d e f" %dk_call% dk_success "Array::dk_at[] suceeded" 
 
     set "myArrayB[0]=h i j"
     set "myArrayB[1]=4 5 6"
@@ -59,9 +53,8 @@ setlocal
     set "myArrayB[3]=1 2 3"
     set "myArrayB[4]=a b c"
     %dk_call% dk_printVar myArrayB
-    %dk_call% Array::dk_at MyArrayB 3 arrayAtB
-    %dk_call% dk_printVar arrayAtB
-    %dk_call% dk_echo "Array::dk_at[MyArrayB 3] = %arrayAtB%"
-    if "%arrayAtB%" neq "1 2 3" %dk_call% dk_error "Array::dk_at[] failed"
-    if "%arrayAtB%" equ "1 2 3" %dk_call% dk_success "Array::dk_at[] suceeded"
+    %dk_call% Array::dk_at MyArrayB 3
+    %dk_call% dk_echo "Array::dk_at[MyArrayB 3] = %dk_at%"
+    if "%dk_at%" neq "1 2 3" %dk_call% dk_error "Array::dk_at[] failed"
+    if "%dk_at%" equ "1 2 3" %dk_call% dk_success "Array::dk_at[] suceeded"
 %endfunction%
