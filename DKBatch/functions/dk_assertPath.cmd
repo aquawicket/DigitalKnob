@@ -22,7 +22,6 @@ setlocal enableDelayedExpansion
 
 
 
-
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal

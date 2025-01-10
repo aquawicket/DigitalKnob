@@ -11,12 +11,9 @@ setlocal
 	%dk_call% dk_debugFunc 2
 	
 	set "_path_=%~1"
-	::set "_path_=%_path_:/=\%"
+	set "_path_=%_path_:/=\%"
 
-	::%dk_call% dk_debug "dk_getDirectories[%~1, %~2]"
-pause
 	%dk_call% dk_assertPath "%_path_%"
-pause 
     %dk_call% dk_replaceAll "%_path_%" "/" "\" _path_
     set /A i=0
 
