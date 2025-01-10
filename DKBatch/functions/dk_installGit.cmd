@@ -1,9 +1,9 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
+%dk_call% dk_validate DKCACHE_DIR 			   "%dk_call% dk_DKCACHE_DIR"
 %dk_call% dk_validate DKIMPORTS_DIR     	   "%dk_call% dk_DKIMPORTS_DIR"
 if not exist "%DKIMPORTS_DIR%\git\dkconfig.txt" %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt" "%DKCACHE_DIR%\git.txt"
-::if exist "%DKCACHE_DIR%\dkconfig.txt"           %dk_call% dk_rename "%DKCACHE_DIR%\dkconfig.txt" "%DKCACHE_DIR%\git.txt"
 
 if exist "%DKCACHE_DIR%\git.txt"			(set GIT_CONFIG_TXT=%DKCACHE_DIR%\git.txt)
 if exist "%DKIMPORTS_DIR%\git\dkconfig.txt"	(set GIT_CONFIG_TXT=%DKIMPORTS_DIR%\git\dkconfig.txt)
@@ -12,9 +12,8 @@ if exist "%DKIMPORTS_DIR%\git\dkconfig.txt"	(set GIT_CONFIG_TXT=%DKIMPORTS_DIR%\
 %dk_call% dk_getFileParam %GIT_CONFIG_TXT% GIT_DL_WIN_X86_64
 
 :: https://stackoverflow.com/a/67714373
-%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem" &:: setx GIT_CONFIG_SYSTEM "!GIT_CONFIG_SYSTEM!"
-if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal" &:: setx GIT_CONFIG_GLOBAL "!GIT_CONFIG_GLOBAL!"
+if not defined GIT_CONFIG_SYSTEM  (set GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem)
+if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal)
 
 ::####################################################################
 ::# dk_installGit()
@@ -28,7 +27,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     if defined win_arm64_host  set "GIT_DL=%GIT_DL_WIN_ARM64%"
     if defined win_x86_host    set "GIT_DL=%GIT_DL_WIN_X86%"
     if defined win_x86_64_host set "GIT_DL=%GIT_DL_WIN_X86_64%"
-    if not defined GIT_DL %dk_call% dk_error "GIT_DL is invalid"
+    %dk_call% dk_assertVar GIT_DL
     
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %GIT_DL% NAME git ROOT %DKTOOLS_DIR%
@@ -38,10 +37,6 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	if defined GIT_DIR  %dk_call% dk_fatal "ERROR: GIT_DIR should not be set."
 	::### DO NOT USE GIT_DIR ###
 	
-	::%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	::### DO NOT USE GIT_DIR ###
-	::set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
-	
     set "GIT_EXE=%GIT%\bin\git.exe"
 	set "BASH_EXE=%GIT%\bin\bash.exe"
     set "GITBASH_EXE=%GIT%\git-bash.exe"
@@ -49,9 +44,9 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
      
     if exist "%GIT_EXE%" %return%
     %dk_call% dk_echo   
-    %dk_call% dk_info "Installing git . . ."
+    %dk_call% dk_echo "Installing git . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-    %dk_call% dk_download %GIT_DL% "%DKDOWNLOAD_DIR%"
+    %dk_call% dk_download %GIT_DL% &::"%DKDOWNLOAD_DIR%"
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT%"
  
     if NOT exist "%GIT_EXE%" %dk_call% dk_error "cannot find git")

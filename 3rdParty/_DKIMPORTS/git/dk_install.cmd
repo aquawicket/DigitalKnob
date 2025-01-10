@@ -2,17 +2,14 @@
 if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-::%dk_call% dk_getFileParam dkconfig.txt GIT_DL_VERSION
-::set "GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-32-bit.7z.exe"
-::set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-64-bit.7z.exe"
 
 %dk_call% dk_getFileParam dkconfig.txt GIT_DL_WIN_X86
 %dk_call% dk_getFileParam dkconfig.txt GIT_DL_WIN_X86_64
 
 :: https://stackoverflow.com/a/67714373
 %dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem" &:: setx GIT_CONFIG_SYSTEM "!GIT_CONFIG_SYSTEM!"
-if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal" &:: setx GIT_CONFIG_GLOBAL "!GIT_CONFIG_GLOBAL!"
+if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem"
+if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal"
 
 ::####################################################################
 ::# dk_install
@@ -27,15 +24,11 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     if defined win_x86_64_host set "GIT_DL=%GIT_DL_WIN_X86_64%"
     %dk_call% dk_assertVar GIT_DL
     
-::	%dk_call% dk_basename %GIT_DL% GIT_DL_FILE
-::	%dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
-::  %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	if not defined GIT  %dk_call% dk_importVariables %GIT_DL% NAME git ROOT %DKTOOLS_DIR%
 	
 	::############ DO NOT USE GIT_DIR ############
-	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
-	if defined GIT_DIR  %dk_call% dk_fatal "ERROR: GIT_DIR should not be set."
+	if defined GIT_DIR  %dk_call% dk_fatal "ERROR: GIT_DIR should not be set."   &:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::############ DO NOT USE GIT_DIR ############
 	
     set "GIT_EXE=%GIT%\bin\git.exe"
