@@ -17,15 +17,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR%/"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
     
-    :: get ALL_BUT_FIRST_ARGS
-	for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST_ARGS=%%b
-    set "ALL_BUT_FIRST_ARGS=%ALL_BUT_FIRST_ARGS:"='%"
+    :: get ALL_BUT_FIRST
+	::for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST=%%b
+	set ALL_BUT_FIRST=%*
+	if defined ALL_BUT_FIRST (
+		call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%
+	)
+    set "ALL_BUT_FIRST=%ALL_BUT_FIRST:"='%"
     
     :: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
     
     ::Create Run function Script
-    set "DKCOMMAND=%~1(%ALL_BUT_FIRST_ARGS%)"
+    set "DKCOMMAND=%~1(%ALL_BUT_FIRST%)"
 
     :: Call DKCmake function
     set "DKCMAKE_COMMAND=%CMAKE_EXE% "-DDKCOMMAND=%DKCOMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DQUEUE_BUILD=ON" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" -P %DKCMAKE_DIR%/DKEval.cmake"

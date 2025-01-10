@@ -25,8 +25,12 @@ setlocal
 
 	%dk_call% dk_BASH_EXE
 
-	:: get ALL_BUT_FIRST_ARGS
-	for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST_ARGS=%%b
+	:: get ALL_BUT_FIRST
+	::for /f "usebackq tokens=1*" %%a in ('%*') do set ALL_BUT_FIRST=%%b
+	set ALL_BUT_FIRST=%*
+	if defined ALL_BUT_FIRST (
+		call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%
+	)
 
     :: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
@@ -48,8 +52,8 @@ setlocal
     if defined USE_WSL set WSLENV=DKSCRIPT_PATH/u:DKINIT/u:RELOAD_WITH_BASH/u:DKBASH_FUNCTIONS_DIR_/u
 	
     :: Call DKBash function
-    if not defined USE_WSL set DKBASH_COMMAND="%BASH_EXE% -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST_ARGS%'"
-	if defined USE_WSL set DKBASH_COMMAND="%WSL_EXE% bash -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST_ARGS%'"
+    if not defined USE_WSL set DKBASH_COMMAND="%BASH_EXE% -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST%'"
+	if defined USE_WSL set DKBASH_COMMAND="%WSL_EXE% bash -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST%'"
 
     ::echo %DKBASH_COMMAND%
 	for /f "delims=" %%Z in ('%DKBASH_COMMAND%') do (

@@ -120,7 +120,11 @@ echo:
     ::if not exist   "%~1"             echo :dk_DKSCRIPT_PATH must be called with %%~0 %%*. I.E.  "call :dk_DKSCRIPT_PATH" %%~0 %%* & pause & exit 1
     if not defined  DKSCRIPT_PATH		set "DKSCRIPT_PATH=%~1"
     if not exist   "%DKSCRIPT_PATH%"	echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && goto:eof
-	if not defined  DKSCRIPT_ARGS		for /F "usebackq tokens=1*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b
+	::if not defined  DKSCRIPT_ARGS		for /F "usebackq tokens=1*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b
+	if not defined  DKSCRIPT_ARGS		set DKSCRIPT_ARGS=%*
+	if defined DKSCRIPT_ARGS (
+		call set DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%1=%%
+	)
 %endfunction%
 
 ::##################################################################################

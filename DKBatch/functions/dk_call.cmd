@@ -37,10 +37,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::###### Stack Variables ######
 	(set __TIME__=%time%)
-	(set __CMND__=%~1) && (set __CMND__=!__CMND__:::=\!)
+	(set __CMND__=%~1)
+	(set __CMND__=!__CMND__:::=\!)
 	(set __FILE__=%~dpnx1)
 	(set __FUNC__=%~n1)
-	for /F "usebackq tokens=1*" %%a in ('%*') do set __ARGV__=%%b
+
+	set __ARGV__=%*
+	if defined __ARGV__ (
+		call set __ARGV__=%%__ARGV__:*%1=%%
+	)
+	
 	(set __ARGC__=0) && for %%a in (%__ARGV__%) do (set /a __ARGC__+=1)
 
 	::###### Globalize the <STACK>_LVL variables
@@ -174,7 +180,13 @@ exit /b %RTN_CODE%
 %endfunction%
 
 :setGlobal name value
-	for /F "usebackq tokens=1*" %%a in ('%*') do set argv=%%b
+
+	::for /F "usebackq tokens=1*" %%a in ('%*') do set argv=%%b
+	set argv=%*
+	if defined argv (
+		(call set argv=%%argv:*%1=%%)
+	)	
+	
 	(set %~1=%argv%)
 	(set global.%~1=%argv%)			&:: prefix the variable name with global. and assign a value
 	(set globalize_flag=1)
