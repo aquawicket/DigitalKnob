@@ -26,8 +26,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 ::#
 :dk_includes
-setlocal
-	%dk_call% dk_debugFunc 2 3 enableDelayedExpansion
+setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 2 3 
  
     set "_arry_=%~1"
     set /a count=0
@@ -43,8 +43,6 @@ setlocal
     if "%~3" neq "" (endlocal & set "%3=false")
     exit /b 1
 	
-::debug
-::	%dk_call% dk_printVar %3
 %endfunction%
 
 
