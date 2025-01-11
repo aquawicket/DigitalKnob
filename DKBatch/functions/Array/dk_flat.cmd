@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# Array::dk_flat(array depth)
+::# Array::dk_flat(array, depth)
 ::#
 ::#    The flat() method of Array instances creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
 ::#

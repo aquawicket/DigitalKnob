@@ -4,7 +4,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
 ::# Array::dk_length(array)
-::# Array::dk_length(array rtn_var)
 ::#
 ::#    The length data property of an Array instance represents the number of elements in that array
 ::#    The value is an unsigned, 32-bit integer that is always numerically greater than the highest index in the array

@@ -219,18 +219,18 @@ setlocal
 	%dk_call% Array::dk_includes ASCII      && echo  = true 		|| echo  = false
 	%dk_call% Array::dk_includes ASCII      && echo  = true 		|| echo  = false
 	%dk_call% Array::dk_includes ASCII      && echo space = true 	|| echo space = false	&:: FIXME
-	%dk_call% Array::dk_includes ASCII !    && echo ! = true 		|| echo ! = false
-	%dk_call% Array::dk_includes ASCII "    && echo " = true 		|| echo " = false
+	%dk_call% Array::dk_includes ASCII !    && echo ! = true 		|| echo ! = false		&:: FIXME
+	%dk_call% Array::dk_includes ASCII ""   && echo "" = true 		|| echo "" = false		&:: FIXME
 	%dk_call% Array::dk_includes ASCII #    && echo # = true 		|| echo # = false
 	%dk_call% Array::dk_includes ASCII $    && echo $ = true 		|| echo $ = false		
-	%dk_call% Array::dk_includes ASCII %    && echo % = true 		|| echo % = false
+	%dk_call% Array::dk_includes ASCII %%   && echo %% = true 		|| echo %% = false		&:: FIXME
 ::	%dk_call% Array::dk_includes ASCII &    && echo & = true 		|| echo & = false		&:: FIXME
 	%dk_call% Array::dk_includes ASCII '    && echo ' = true 		|| echo ' = false
 	%dk_call% Array::dk_includes ASCII (    && echo ( = true 		|| echo ( = false
 ::	%dk_call% Array::dk_includes ASCII )    && echo ) = true 		|| echo ) = false		&:: FIXME
 	%dk_call% Array::dk_includes ASCII *    && echo * = true 		|| echo * = false
 	%dk_call% Array::dk_includes ASCII +    && echo + = true 		|| echo + = false
-	%dk_call% Array::dk_includes ASCII ,    && echo , = true 		|| echo , = false
+	%dk_call% Array::dk_includes ASCII ,    && echo , = true 		|| echo , = false		&:: FIXME
 	%dk_call% Array::dk_includes ASCII -    && echo - = true 		|| echo - = false
 	%dk_call% Array::dk_includes ASCII .    && echo . = true 		|| echo . = false
 	%dk_call% Array::dk_includes ASCII /    && echo / = true 		|| echo / = false
@@ -249,7 +249,7 @@ setlocal
 ::	%dk_call% Array::dk_includes ASCII <	&& echo < = true 		|| echo < = false		&:: FIXME
 	%dk_call% Array::dk_includes ASCII =    && echo = = true 		|| echo = = false		&::	FIXME
 ::	%dk_call% Array::dk_includes ASCII >	&& echo > = true 		|| echo > = false		&:: FIXME
-	%dk_call% Array::dk_includes ASCII ?    && echo ? = true 		|| echo  = false
+	%dk_call% Array::dk_includes ASCII ?    && echo ? = true 		|| echo ? = false
 	%dk_call% Array::dk_includes ASCII @    && echo @ = true 		|| echo @ = false
 	%dk_call% Array::dk_includes ASCII A    && echo A = true 		|| echo A = false
 	%dk_call% Array::dk_includes ASCII B    && echo B = true 		|| echo B = false
@@ -285,7 +285,7 @@ setlocal
 	%dk_call% Array::dk_includes ASCII `    && echo ` = true 		|| echo ` = false
 	%dk_call% Array::dk_includes ASCII a    && echo a = true 		|| echo a = false
 	%dk_call% Array::dk_includes ASCII b    && echo b = true 		|| echo b = false
-	%dk_call% Array::dk_includes ASCII c    && echo c = true 		|| echo c = false
+	%dk_call% Array::dk_includes ASCII c	&& echo c = true		|| echo c = false
 	%dk_call% Array::dk_includes ASCII d    && echo d = true 		|| echo d = false
 	%dk_call% Array::dk_includes ASCII e    && echo e = true 		|| echo e = false
 	%dk_call% Array::dk_includes ASCII f    && echo f = true 		|| echo f = false

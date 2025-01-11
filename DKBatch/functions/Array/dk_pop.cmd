@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 ::#
 :dk_pop
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1
     
     %dk_call% Array::dk_length %~1
@@ -69,10 +69,9 @@ setlocal
     %dk_call% dk_printVar dk_pop
     %dk_call% dk_echo
     
-::  FIXME:  out of array bounds past here
+::  FIXME:  out of array bounds from here on
 ::  %dk_call% Array::dk_pop myArrayA
 ::  %dk_call% dk_printVar myArrayA
 ::  %dk_call% dk_printVar dk_pop
-    %dk_call% dk_echo
     %dk_call% dk_echo
 %endfunction%

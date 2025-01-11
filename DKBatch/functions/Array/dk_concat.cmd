@@ -45,7 +45,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     )
 
     ::### return value ###
-    endlocal & set "dk_concat=!_arrayC_!"
+    endlocal & set "dk_concat=%_arrayC_%"
 %endfunction%
 
 

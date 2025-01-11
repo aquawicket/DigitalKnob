@@ -52,14 +52,14 @@ setlocal
 	%dk_call% dk_getDirectories "%src_extractPath%"
     %dk_call% dk_printVar dk_getDirectories
 
-    %dk_call% Array::dk_length dk_getDirectories dk_length
+    %dk_call% Array::dk_length dk_getDirectories
 	(set dir_count=%dk_length%)
     %dk_call% dk_printVar dir_count
    
 	%dk_call% dk_getFiles "%src_extractPath%"
 	%dk_call% dk_printVar dk_getFiles
 
-    %dk_call% Array::dk_length files dk_length
+    %dk_call% Array::dk_length dk_getFiles
 	(set file_count=%dk_length%)
     %dk_call% dk_printVar file_count
     
