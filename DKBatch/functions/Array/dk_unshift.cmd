@@ -4,7 +4,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
 ::# Array::dk_unshift(array, element)
-::# Array::dk_unshift(array, element, rtn_var)
 ::#
 ::#    Adds the specified elements to the beginning of an array and returns the new length of the array
 ::#
@@ -19,25 +18,25 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
 ::#
 :dk_unshift
-    %dk_call% dk_debugFunc 2 3
- ::setlocal
- 
+::setlocal
+    %dk_call% dk_debugFunc 2
+
     set "_arry_=%~1"
-    ::set "_element_=%~2"
-    %dk_call% Array::dk_length %~1 count
-    set /a "prev=count-1"
-    
+    %dk_call% Array::dk_length %~1
+	set /a "dk_unshift=dk_length+1"
+	
+    set /a "prev=dk_length-1"
+	
     :unshift_loop
-    if %count% gtr 0 (
-        rem if "!DE!" neq "" call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%" &:: FIXME: remove the need for call here
-        if "!DE!" equ "" set "%_arry_%[%count%]=!%_arry_%[%prev%]!"
-        set /a count-=1
+    if %dk_length% gtr 0 (
+        set "%_arry_%[%dk_length%]=!%_arry_%[%prev%]!"
+        set /a dk_length-=1
         set /a prev-=1
         goto unshift_loop
     )
-    endlocal & set "%~1[0]=%~2"
+    endlocal & set "%~1[0]=%~2" & set "dk_unshift=%dk_unshift%"
 	
-:: debug
+::  DEBUG
 ::	%dk_call% dk_printVar %1
 %endfunction%
 
@@ -50,27 +49,27 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_echo
-    %dk_call% Array::dk_unshift myArrayA "a b c" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "a b c"
     %dk_call% dk_printVar myArrayA
-    ::%dk_call% dk_printVar new_lengthA
+    %dk_call% dk_printVar dk_unshift
     
     %dk_call% dk_echo
-    %dk_call% Array::dk_unshift myArrayA "1 2 3" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "1 2 3"
     %dk_call% dk_printVar myArrayA
-    ::%dk_call% dk_printVar new_lengthA
+    %dk_call% dk_printVar dk_unshift
     
     %dk_call% dk_echo
-    %dk_call% Array::dk_unshift myArrayA "d e f" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "d e f"
     %dk_call% dk_printVar myArrayA
-    ::%dk_call% dk_printVar new_lengthA
+    %dk_call% dk_printVar dk_unshift
     
     %dk_call% dk_echo
-    %dk_call% Array::dk_unshift myArrayA "4 5 6" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "4 5 6"
     %dk_call% dk_printVar myArrayA
-    ::%dk_call% dk_printVar new_lengthA
+    %dk_call% dk_printVar dk_unshift
     
     %dk_call% dk_echo
-    %dk_call% Array::dk_unshift myArrayA "h i j" ::new_lengthA
+    %dk_call% Array::dk_unshift myArrayA "h i j"
     %dk_call% dk_printVar myArrayA
-    ::%dk_call% dk_printVar new_lengthA
+    %dk_call% dk_printVar dk_unshift
 %endfunction%
