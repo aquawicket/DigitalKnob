@@ -37,38 +37,38 @@ set "IN=C:\Windows\NonExistent.file
 	%dk_call% dk_pathExists "%IN%"
 	%dk_call% dk_pathExists "%IN%" && (echo "%IN%" exists) || (echo "%IN%" does NOT exists)
 	
-	call :get_variable "%IN%" variable
-	echo variable   = %variable%
+	call :get_variable "%IN%" get_variable
+	echo get_variable   = %get_variable%
 
-	%dk_call% dk_getUnquoted "%IN%" unquoted
-	echo unquoted   = %unquoted%
+	%dk_call% dk_getUnquoted "%IN%" dk_getUnquoted
+	echo dk_getUnquoted   = %dk_getUnquoted%
 
-	%dk_call% dk_realpath "%IN%" realpath
-	echo realpath   = %realpath%
+	%dk_call% dk_realpath "%IN%" dk_realpath
+	echo dk_realpath   = %dk_realpath%
 	
-	%dk_call% dk_dirname "%IN%" dirname
-	echo dirname   = %dirname%
+	%dk_call% dk_dirname "%IN%" dk_dirname
+	echo dk_dirname   = %dk_dirname%
 	
-	%dk_call% dk_basename "%IN%" basename
-	echo basename   = %basename%
+	%dk_call% dk_basename "%IN%" dk_basename
+	echo dk_basename   = %dk_basename%
 	
-	%dk_call% dk_getDrive "%IN%" drive
-	echo drive      = %drive%
+	%dk_call% dk_getDrive "%IN%" dk_getDrive
+	echo dk_getDrive      = %dk_getDrive%
 
-	%dk_call% dk_getExtension "%IN%" extension
-	echo extension  = %extension%
+	%dk_call% dk_getExtension "%IN%" dk_getExtension
+	echo dk_getExtension  = %dk_getExtension%
 
-	%dk_call% dk_getShortPath "%IN%" shortPath
-	echo shortPath  = %shortPath%
+	%dk_call% dk_getShortPath "%IN%" dk_getShortPath
+	echo dk_getShortPath  = %dk_getShortPath%
 
-	%dk_call% dk_getAttributes "%IN%" attributes
-	echo attributes = %attributes%
+	%dk_call% dk_getAttributes "%IN%" dk_getAttributes
+	echo dk_getAttributes = %dk_getAttributes%
 
-	%dk_call% dk_getFileTime "%IN%" fileTime
-	echo fileTime   = %fileTime%
+	%dk_call% dk_getFileTime "%IN%" dk_getFileTime
+	echo dk_getFileTime   = %dk_getFileTime%
 
-	%dk_call% dk_getFileSize "%IN%" filesize
-	echo filesize   = %filesize% bytes
+	%dk_call% dk_getFileSize "%IN%" dk_getFileSize
+	echo dk_getFileSize   = %dk_getFileSize% bytes
 	
 %endfunction%
 
