@@ -65,6 +65,7 @@ echo:
     ::############ get dk_source and dk_call ######
     call :dk_initFiles
 
+	set "dk_call=call dk_call"
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS
 
@@ -81,7 +82,6 @@ echo:
     ::dk_setOptions
 
     ::############ LOAD FUNCTION FILES ############
-    set "dk_call=call dk_call"
     call dk_source dk_debugFunc
     %dk_call% dk_color
     %dk_call% dk_logo
@@ -147,6 +147,38 @@ echo:
 %endfunction%
 
 ::##################################################################################
+::# dk_DKBATCH_VARS
+::#
+:dk_DKBATCH_VARS
+    if defined DKF                           for %%Z in ("%DKF%") do set "DKBATCH_DIR=%%~dpZ"
+    if not exist "%DKBATCH_DIR%"             for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
+    if "%DKBATCH_DIR:~-1%"=="\"              set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
+    if not exist "%DKBATCH_DIR%"             echo ERROR: DKBATCH_DIR:%DKBATCH_DIR% does not exist & pause & exit 1
+    if not exist "%DKBATCH_FUNCTIONS_DIR%"   set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
+    if not exist "%DKBATCH_FUNCTIONS_DIR_%"  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
+    if exist     "%DKBATCH_FUNCTIONS_DIR%"   set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+    if not exist "%DKBATCH_FUNCTIONS_DIR%"   echo ERROR: DKBATCH_FUNCTIONS_DIR:%DKBATCH_FUNCTIONS_DIR% does not exist & pause & exit 1
+%endfunction%
+
+::##################################################################################
+::# dk_DKHTTP_VARS
+::#
+:dk_DKHTTP_VARS
+    if not defined DKHTTP_DIGITALKNOB_DIR        set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+    if not defined DKHTTP_DKBRANCH_DIR           set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
+    if not defined DKHTTP_DKBATCH_DIR            set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
+    if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR  set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
+%endfunction%
+
+::##################################################################################
+::# dk_initFiles
+::#
+:dk_initFiles
+    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"  powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
+    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"    powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
+%endfunction%
+
+::##################################################################################
 ::# dk_reload
 ::#
 :dk_reload
@@ -176,41 +208,6 @@ echo:
 	
 	::( >NUL reg delete HKCU\Console\digitalknob /f )
 %endfunction%
-
-
-::##################################################################################
-::# dk_DKBATCH_VARS
-::#
-:dk_DKBATCH_VARS
-    if defined DKF                           for %%Z in ("%DKF%") do set "DKBATCH_DIR=%%~dpZ"
-    if not exist "%DKBATCH_DIR%"             for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
-    if "%DKBATCH_DIR:~-1%"=="\"              set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
-    if not exist "%DKBATCH_DIR%"             echo ERROR: DKBATCH_DIR:%DKBATCH_DIR% does not exist & pause & exit 1
-    if not exist "%DKBATCH_FUNCTIONS_DIR%"   set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%"  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-    if exist     "%DKBATCH_FUNCTIONS_DIR%"   set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
-    if not exist "%DKBATCH_FUNCTIONS_DIR%"   echo ERROR: DKBATCH_FUNCTIONS_DIR:%DKBATCH_FUNCTIONS_DIR% does not exist & pause & exit 1
-%endfunction%
-
-
-::##################################################################################
-::# dk_DKHTTP_VARS
-::#
-:dk_DKHTTP_VARS
-    if not defined DKHTTP_DIGITALKNOB_DIR        set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
-    if not defined DKHTTP_DKBRANCH_DIR           set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
-    if not defined DKHTTP_DKBATCH_DIR            set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
-    if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR  set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
-%endfunction%
-
-::##################################################################################
-::# dk_initFiles
-::#
-:dk_initFiles
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"  powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"    powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
-%endfunction%
-
 
 ::##################################################################################
 ::# dk_DKSCRIPT_VARS
