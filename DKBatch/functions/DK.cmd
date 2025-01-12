@@ -31,17 +31,17 @@ echo:
     set "NO_STDERR=2>nul"
     set "NO_OUTPUT=1>nul 2>nul"
 
-    ::if "!DE!" neq ""  echo delayed expansion = OFF
-    if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
-    if "!DE!" neq ""  set "return=exit /b %errorlevel%"
-    ::if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
-    if "!DE!" neq ""  set "DKDEBUG=exit /b %errorlevel%"
+::	if "!DE!" neq ""  echo delayed expansion = OFF
+::  if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
+::  if "!DE!" neq ""  set "return=exit /b %errorlevel%"
+::	if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
+::	if "!DE!" neq ""  set "DKDEBUG=exit /b %errorlevel%"
 
-    ::if "!DE!" == ""   echo delayed expansion = ON
-    if "!DE!" == ""   set "endfunction=exit /b !errorlevel!"
-    if "!DE!" == ""   set "return=exit /b !errorlevel!"
-    ::if "!DE!" == ""   set "DEBUG=exit /b !errorlevel!"
-    if "!DE!" == ""   set "DKDEBUG=exit /b !errorlevel!"
+::	if "!DE!" == ""   echo delayed expansion = ON
+	set "endfunction=exit /b !errorlevel!"
+    set "return=exit /b !errorlevel!"
+::	set "DEBUG=exit /b !errorlevel!"
+    set "DKDEBUG=exit /b !errorlevel!"
 
     ::###### set DKSCRIPT_PATH ######
     call :dk_DKSCRIPT_PATH "%~1" %*

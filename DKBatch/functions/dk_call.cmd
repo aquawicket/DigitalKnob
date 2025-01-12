@@ -11,17 +11,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_call
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
-
-	
-
-	if not defined test_endfunction set "test_endfunction=call dk_getError
-	if not defined endfunction set "endfunction=exit /b !errorlevel!"
-	
+	set "endfunction=call dk_getError
+	set "return=call dk_getError
 	
 	set globalize=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^
 	::set globalize=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^
 	::set endfunction=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^&^&exit /b %errorlevel%
-	
 	
 	:: don't process functions in this file  i.e :setGlobal, :printCallstack
 	if "%~1"=="setGlobal" 			(call :%* && %endfunction%)
@@ -98,38 +93,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::echo dk_call ^> %__CMND__% !__ARGV__!
 
 	call %__CMND__% %__ARGV__%
-	if errorlevel 2 %dk_call% dk_error "errorlevel = !errorlevel!"
-
-	
-
-		rem %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]"
-
-
-
-
-::(    
-::	set "foundErr=1"
-::	call %__CMND__% %__ARGV__%
-::	
-::	echo errorlevel = %errorlevel%
-::	if errorlevel 0 if not errorlevel 1 set "foundErr="
-::	if defined foundErr set "ERROR_CODE=!ERRORLEVEL!"
-::	
-::	echo ERROR_CODE = %ERROR_CODE%
-::	if defined ERROR_CODE %dk_call% dk_error "ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]"
-::)
-::(
-::	call %__CMND__% %__ARGV__% || goto error_handler
-::	if %ERRORLEVEL% NEQ 0 set "RTN_CODE=%ERRORLEVEL%" else set"RTN_CODE=0"
-::	set RTN_BOOL=0
-::	goto end_handler
-::	
-::	:error_handler
-::	if %ERRORLEVEL% NEQ 0 set "RTN_CODE=%ERRORLEVEL%" else set"RTN_CODE=0"
-::	set RTN_BOOL=1
-::	%dk_call% dk_error "ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]"
-::	:end_handler
-::)
+::	if errorlevel 2 %dk_call% dk_error "errorlevel = !errorlevel!"
 	
 	::(echo %ERRORLEVEL% && set RTN_BOOL=0) || (echo %ERRORLEVEL% && set RTN_BOOL=1)
 ::###### Exit #############################################################################################
