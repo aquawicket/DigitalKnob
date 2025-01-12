@@ -92,10 +92,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### Entry ############################################################################################
 	::echo dk_call ^> %__CMND__% !__ARGV__!
 
-	call %__CMND__% %__ARGV__%
-::	if errorlevel 2 %dk_call% dk_error "errorlevel = !errorlevel!"
+	call %__CMND__% %__ARGV__% || goto error_handler
 	
-	::(echo %ERRORLEVEL% && set RTN_BOOL=0) || (echo %ERRORLEVEL% && set RTN_BOOL=1)
+	if %ERRORLEVEL% NEQ 0 (set RTN_CODE=%ERRORLEVEL%) else (set RTN_CODE=0)
+	set RTN_BOOL=0
+	goto end_handler
+	
+	:error_handler
+	if %ERRORLEVEL% NEQ 0 (set RTN_CODE=%ERRORLEVEL%) else (set RTN_CODE=0)
+	set RTN_BOOL=1
+	
+	:end_handler
+
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
