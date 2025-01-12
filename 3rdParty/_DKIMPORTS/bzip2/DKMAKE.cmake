@@ -17,6 +17,7 @@ dk_validate(host_triple "dk_host_triple()")
 ### DEPEND ###
 #dk_depend(libgcc)
 dk_depend(python3)
+dk_depend(pytest)
 dk_validate(MSYS2 "dk_depend(msys2)")
 
 ### IMPORT ###
