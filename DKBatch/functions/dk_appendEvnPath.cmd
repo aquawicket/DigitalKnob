@@ -11,8 +11,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#              echo dk_appendEvnPath returned: %result%
 ::#
 :dk_appendEvnPath
-::    %dk_call% dk_debugFunc 1
- ::setlocal
+::setlocal
+	::%dk_call% dk_debugFunc 1
+
  
     set "_path_=%~1"
 	set "_path_=%_path_:/=\%"
@@ -21,10 +22,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "PATH=%PATH%;%_path_%"
 	setx PATH %PATH%
     if "%ERRORLEVEL%" neq "0" dk_error "ERROR: %ERRORLEVEL%"
-	
-::debug
-::	%dk_call% dk_debug "%PATH%"
 %endfunction%
+
+
+
+
+
 
 
 
@@ -32,8 +35,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-::    %dk_call% dk_debugFunc 0
- ::setlocal
+setlocal
+	%dk_call% dk_debugFunc 0
+
  
     ::%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
     ::%dk_call% dk_appendEvnPath "%DKBATCH_FUNCTIONS_DIR%"

@@ -14,10 +14,13 @@ setlocal
 	
     if defined %~1 endlocal & call set "%~1=%%%~1%% %ALL_BUT_FIRST%"
     if not defined %~1 endlocal & set "%~1=%ALL_BUT_FIRST%
-
-::	DEBUG	
-::	%dk_call% dk_printVar %1
 %endfunction%
+
+
+
+
+
+
 
 
 

@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_hexToDecimal(<hex_string> rtn_var)
+::# dk_hexToDecimal(hex_string)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#
@@ -13,8 +13,7 @@ setlocal
     set "hex=%~1"
     set "decimal="
     set /A hexToDecimal=0x%hex:~-2%
-    
-    endlocal & set "%2=%hexToDecimal%"
+    endlocal & set "dk_hexToDecimal=%hexToDecimal%"
 %endfunction%
 
 
@@ -26,6 +25,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_hexToDecimal 0x1b decimal
-    %dk_call% dk_echo "decimal = %decimal%"
+    %dk_call% dk_hexToDecimal 0x1b
+    %dk_call% dk_echo "dk_hexToDecimal = %dk_hexToDecimal%"
 %endfunction%

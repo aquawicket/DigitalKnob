@@ -2,13 +2,13 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_asciiToHex(ascii, rtn_var)
+::# dk_asciiToHex(ascii)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_asciiToHex
 setlocal
-	%dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 1
 
     :: Store the string in chr.tmp file
     set /P "=%~1" < NUL > chr.tmp
@@ -22,10 +22,7 @@ setlocal
     del chr.tmp zero.tmp
     set "hex=0x%hex:~-2%"
     
-    endlocal & set "%2=%hex%"
-
-:: debug
-	%dk_call% dk_printVar %2
+    endlocal & set "dk_asciiToHex=%hex%"
 %endfunction%
 
 
@@ -37,6 +34,6 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_set myAscii x
-    %dk_call% dk_asciiToHex myAscii myHex
-    %dk_call% dk_info "myHex = %myHex%"
+    %dk_call% dk_asciiToHex myAscii
+    %dk_call% dk_info "dk_asciiToHex = %dk_asciiToHex%"
 %endfunction%
