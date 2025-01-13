@@ -13,8 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_call
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
-	if not defined endfunction	set "endfunction=call dk_call dk_getError
-	if not defined return		set "return=call dk_call dk_getError
+	::if not defined endfunction	set "endfunction=call dk_call dk_getError
+	::if not defined return		set "return=call dk_call dk_getError
 	
 	set globalize=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^
 	::set globalize=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^
