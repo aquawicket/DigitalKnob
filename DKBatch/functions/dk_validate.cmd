@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_validate
 ::setlocal
     %dk_call% dk_debugFunc 2
-	::echo dk_validate %*
+
 
 	if defined %~1 (%return%)
 	
@@ -19,7 +19,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_isFunction %~1 && (set %~1=1)
 	(%dk_call% %args%)
 	
-    
 	if "%~3" equ "NO_HALT" %endfunction%
     if not defined %~1    %dk_call% dk_error "dk_validate was unable to set the variable:%~1 with the code provided"
 %endfunction%
@@ -44,7 +43,5 @@ setlocal
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_echo "DKDOWNLOAD_DIR = %DKDOWNLOAD_DIR%"
 	
-	
 	%dk_call% dk_validate TESTABC "%dk_call% dk_testB"
-	
 %endfunction%

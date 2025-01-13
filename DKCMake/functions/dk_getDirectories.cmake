@@ -9,7 +9,6 @@ include_guard()
 #
 function(dk_getDirectories path rtn_var)
     dk_debugFunc()
-	#dk_verbose("dk_getDirectories(${path}, ${rtn_var})")
     
 	dk_getOption(RECURSIVE)
 	
@@ -19,17 +18,13 @@ function(dk_getDirectories path rtn_var)
 		file(GLOB children LIST_DIRECTORIES true ${path}/*)
 	endif()
 	foreach(child ${children})
-        if(IS_DIRECTORY ${child})
-			#dk_echo(${child})
-            list(APPEND _directories_ ${child})
+        if(IS_DIRECTORY "${child}")
+            list(APPEND _directories_ "${child}")
         endif()
     endforeach()
 
     # Return the array to the calling scope
 	set(${rtn_var} ${_directories_} PARENT_SCOPE)
-	
-# DEBUG
-#	dk_printVar(_directories_)
 endfunction()
 
 
