@@ -33,16 +33,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not defined ESC			set "ESC="
 	if not defined clr			set "clr=%ESC%[0m"
 	if not defined LVL			set /a "LVL=0"
-	
-	
 	::if not defined GLOBAL_FILE 	set "GLOBAL_FILE=C:\GLOBAL.txt"
 	::if not defined DKCALL_INIT  del %GLOBAL_FILE% && set "DKCALL_INIT=1"
-	
-	(set "pad=%clr%")
-	(set "padB=      ")
-	(set "indent=        ")
-	
-	
 	
 	if %LVL% lss 1 (
 		(set __CMND__=%DKSCRIPT_PATH%)
@@ -63,6 +55,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(set __FILE__=%__FILE__:.cmd=%.cmd)
 	if defined __ARGV__ (call set __ARGV__=%%__ARGV__:*%1=%%)
 	(set __ARGC__=0) && for %%a in (%__ARGV__%) do (set /a __ARGC__+=1)
+	
+	(set "pad=%clr%")
+	(set "padB=      ")
+	(set "indent=        ")
 
 	::###### Globalize the <STACK>_LVL variables
 	(set /a PLVL=LVL)
@@ -128,7 +124,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(set /a PLVL=LVL)
 	(set /a LVL-=1)
 	
-	
 ::	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
 ::	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
 ::		(set line=%%a)
@@ -164,9 +159,9 @@ exit /b %RTN_CODE%
 
 :printConstantVariables
 	if defined dk_call		(echo %padB% dk_call		= %dk_call%)
-	::if defined GLOBAL_FILE	(echo %padB% GLOBAL_FILE	= %GLOBAL_FILE%)
 	if defined indent		(echo %padB% indent			= %indent%)
 	if defined pad			(echo %padB% pad			= %pad%)
+	::if defined GLOBAL_FILE	(echo %padB% GLOBAL_FILE	= %GLOBAL_FILE%)
 %endfunction%
 
 :printStackVariables
@@ -188,13 +183,8 @@ exit /b %RTN_CODE%
 %endfunction%
 
 :setGlobal name value
-
-	::for /F "usebackq tokens=1*" %%a in ('%*') do set argv=%%b
 	set argv=%*
-	if defined argv (
-		(call set argv=%%argv:*%1=%%)
-	)	
-	
+	if defined argv (call set argv=%%argv:*%1=%%)
 	(set %~1=%argv%)
 	(set global.%~1=%argv%)			&:: prefix the variable name with global. and assign a value
 	(set globalize_flag=1)
@@ -206,12 +196,9 @@ exit /b %RTN_CODE%
 	echo ############ CALLSTACK ############
 	for /l %%x in (1, 1, 100) do (
 		(set /a num=100-%%x)
-		if defined __CMND__!num! (
-			call echo !num!: %%__CMND__!num!%%
-		)
+		if defined __CMND__!num! (call echo !num!: %%__CMND__!num!%%)
 	)
 	echo:
-	pause
 %endfunction%
 
 :dk_getError
