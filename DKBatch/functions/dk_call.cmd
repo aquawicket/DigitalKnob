@@ -27,31 +27,41 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%~1"=="printStackVariables"	(call :%* && %endfunction%)
 	if "%~1"=="globalize"			(call :%* && %endfunction%)
 	
+	
 	::### Constant Variables ###
 	if not defined dk_call		set "dk_call=call dk_call"
-	::if not defined GLOBAL_FILE 	set "GLOBAL_FILE=C:\GLOBAL.txt"
-	if not defined LVL			set /a "LVL=-1"
 	if not defined ESC			set "ESC="
 	if not defined clr			set "clr=%ESC%[0m"
-		
+	if not defined LVL			set /a "LVL=0"
+	
+	
+	::if not defined GLOBAL_FILE 	set "GLOBAL_FILE=C:\GLOBAL.txt"
 	::if not defined DKCALL_INIT  del %GLOBAL_FILE% && set "DKCALL_INIT=1"
 	
 	(set "pad=%clr%")
 	(set "padB=      ")
 	(set "indent=        ")
 	
-	::###### Stack Variables ######
-	(set __TIME__=%time%)
-	(set __CMND__=%~1)
-	(set __CMND__=!__CMND__:::=\!)
-	(set __FILE__=%~dpnx1)
-	(set __FUNC__=%~n1)
-
-	set __ARGV__=%*
-	if defined __ARGV__ (
-		call set __ARGV__=%%__ARGV__:*%1=%%
+	
+	
+	if %LVL% lss 1 (
+		(set __CMND__=%DKSCRIPT_PATH%)
+		(set __FILE__=%DKSCRIPT_PATH%)
+		(set __FUNC__=%DKSCRIPT_NAME%)
+		(set __ARGV__=%DKSCRIPT_ARGS%)
+	) else (
+		(set __CMND__=%~1)
+	rem	(set __FILE__=%~nx1)
+		(set __FILE__=%~dpnx1)
+		(set __FUNC__=%~n1)
+		(set __ARGV__=%*)
 	)
 	
+	::###### Stack Variables ######
+	(set __TIME__=%time%)
+	(set __CMND__=!__CMND__:::=\!)
+	(set __FILE__=%__FILE__:.cmd=%.cmd)
+	if defined __ARGV__ (call set __ARGV__=%%__ARGV__:*%1=%%)
 	(set __ARGC__=0) && for %%a in (%__ARGV__%) do (set /a __ARGC__+=1)
 
 	::###### Globalize the <STACK>_LVL variables
@@ -65,9 +75,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(call :setGlobal __ARGV__%LVL% %__ARGV__%)
 	(call :setGlobal __ARGC__%LVL% %__ARGC__%)
 
-	::echo:
-	::call :printStackVariables
-	
 	::###### Print function entry ####
 	if defined printEntry (call :printEntry)
 	::##################################
@@ -86,12 +93,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		rem if exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd"
     )
 
-::	if ERRORLEVEL 1 %dk_call% (set EXIT_CODE=%ERRORLEVEL%)
-::	if defined EXIT_CODE (
-::		call :PrintCallStack
-::		exit %EXIT_CODE%
-::	)
-
 ::###### Entry ############################################################################################
 	if defined printCalls (echo dk_call ^> %__CMND__% !__ARGV__!)
 
@@ -108,7 +109,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:end_handler
 
 ::###### Exit #############################################################################################
-	
 	::###### update indent padding
 	(set pad=)
 	(set padB=)
