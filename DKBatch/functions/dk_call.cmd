@@ -215,11 +215,9 @@ exit /b %RTN_CODE%
 %endfunction%
 
 :dk_getError
-	if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]"	
-	(
-		(goto) 2>nul
-		exit /b
-	)  
+	if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! in !__FILE__! !___FUNC___![!__ARGV__!]"	
+	((goto) 2>nul
+	exit /b)  
 %endfunction%
 
 
