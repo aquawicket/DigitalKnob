@@ -31,17 +31,10 @@ echo:
     set "NO_STDERR=2>nul"
     set "NO_OUTPUT=1>nul 2>nul"
 
-::	if "!DE!" neq ""  echo delayed expansion = OFF
-::  if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
-::  if "!DE!" neq ""  set "return=exit /b %errorlevel%"
-::	if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
-::	if "!DE!" neq ""  set "DKDEBUG=exit /b %errorlevel%"
-
 ::	if "!DE!" == ""   echo delayed expansion = ON
 	set "endfunction=exit /b !errorlevel!"
     set "return=exit /b !errorlevel!"
-::	set "DEBUG=exit /b !errorlevel!"
-    set "DKDEBUG=exit /b !errorlevel!"
+	set "DKDEBUG=exit /b !errorlevel!"
 
     ::###### set DKSCRIPT_PATH ######
     call :dk_DKSCRIPT_PATH "%~1" %*
@@ -63,8 +56,11 @@ echo:
     call :dk_DKHTTP_VARS
 
     ::############ get dk_source and dk_call ######
+	
     call :dk_initFiles
-
+	
+	set "endfunction=call dk_getError
+	set "return=call dk_getError
 	set "dk_call=call dk_call"
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS
@@ -90,10 +86,8 @@ echo:
     ::%DK% dk_load %DKSCRIPT_PATH%
 
     ::###### DKTEST MODE ######
-	
-::	%dk_call% dk_isFunction DKTEST || %return%
-::	%dk_call% dk_isChildPathOf "%DKSCRIPT_DIR%" "%DKBATCH_DIR%" || %return%
-    if "%DKSCRIPT_EXT%" neq ".cmd" %return%
+	if "%DKSCRIPT_EXT%" neq ".cmd" %return%
+	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || %return%
     %dk_call% dk_echo
     %dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME%.cmd ###### DKTEST MODE ######%clr%"
     %dk_call% dk_echo
@@ -117,33 +111,30 @@ echo:
 ::# dk_DKSCRIPT_PATH
 ::#
 :dk_DKSCRIPT_PATH
-    ::if not exist   "%~1"             echo :dk_DKSCRIPT_PATH must be called with %%~0 %%*. I.E.  "call :dk_DKSCRIPT_PATH" %%~0 %%* & pause & exit 1
+    ::if not exist   "%~1"				echo :dk_DKSCRIPT_PATH must be called with %%~0 %%*. I.E.  "call :dk_DKSCRIPT_PATH" %%~0 %%* & pause & exit 1
     if not defined  DKSCRIPT_PATH		set "DKSCRIPT_PATH=%~1"
     if not exist   "%DKSCRIPT_PATH%"	echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && goto:eof
-	::if not defined  DKSCRIPT_ARGS		for /F "usebackq tokens=1*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b
 	if not defined  DKSCRIPT_ARGS		set DKSCRIPT_ARGS=%*
-	if defined DKSCRIPT_ARGS (
-		call set DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%1=%%
-	)
+	if defined 		DKSCRIPT_ARGS 		(call set DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%1=%%)
 %endfunction%
 
 ::##################################################################################
 ::# dk_DKSCRIPT_DIR
 ::#
 :dk_DKSCRIPT_DIR
-    if not exist "%DKSCRIPT_PATH%"   echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1
-    if not exist "%DKSCRIPT_DIR%"    for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
-    if "%DKSCRIPT_DIR:~-1%"=="\"   set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
-    if not exist "%DKSCRIPT_DIR%"    echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit 1
+    if not exist "%DKSCRIPT_PATH%"	echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1
+    if not exist "%DKSCRIPT_DIR%"	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
+    if "%DKSCRIPT_DIR:~-1%"=="\"	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+    if not exist "%DKSCRIPT_DIR%"	echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit 1
 %endfunction%
 
 ::##################################################################################
 ::# dk_DKSCRIPT_EXT
 ::#
 :dk_DKSCRIPT_EXT
-    if not exist "%DKSCRIPT_PATH%"   echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1
-    if not defined DKSCRIPT_EXT      for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ"
-    if not defined DKSCRIPT_EXT    	 echo DKSCRIPT_EXT:%DKSCRIPT_EXT% not defined & pause & exit 1
+    if not exist "%DKSCRIPT_PATH%"	echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1
+    if not defined DKSCRIPT_EXT		for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ"
+    if not defined DKSCRIPT_EXT		echo DKSCRIPT_EXT:%DKSCRIPT_EXT% not defined & pause & exit 1
 %endfunction%
 
 ::##################################################################################
@@ -174,9 +165,9 @@ echo:
 ::# dk_initFiles
 ::#
 :dk_initFiles
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"  powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"    powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd"    powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_getError.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd')"
+    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"	powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
+    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"		powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd"	powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_getError.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd')"
 %endfunction%
 
 ::##################################################################################

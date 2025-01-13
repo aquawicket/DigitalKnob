@@ -1,7 +1,9 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-::(set LiveCallStack=1)
+::(set printCalls=1) 
+::(set printEntry=1)
+::(set printExit=1)
 (set _IGNORE_=dk_debugFunc;dk_echo;)
 
 
@@ -11,14 +13,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_call
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
-	set "endfunction=call dk_getError
-	set "return=call dk_getError
+	if not defined endfunction	set "endfunction=call dk_call dk_getError
+	if not defined return		set "return=call dk_call dk_getError
 	
 	set globalize=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^
 	::set globalize=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^
 	::set endfunction=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%^&^&exit /b %errorlevel%
 	
 	:: don't process functions in this file  i.e :setGlobal, :printCallstack
+	if "%~1"=="dk_getError"			(call :%* && %endfunction%)
 	if "%~1"=="setGlobal" 			(call :%* && %endfunction%)
 	if "%~1"=="printCallStack" 		(call :%* && %endfunction%)
 	if "%~1"=="printStackVariables"	(call :%* && %endfunction%)
@@ -66,7 +69,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::call :printStackVariables
 	
 	::###### Print function entry ####
-	if defined LiveCallStack (call :printEntry)
+	if defined printEntry (call :printEntry)
 	::##################################
 
 	if %LVL% lss 1 (%endfunction%)
@@ -90,7 +93,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::	)
 
 ::###### Entry ############################################################################################
-	::echo dk_call ^> %__CMND__% !__ARGV__!
+	if defined printCalls (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__% %__ARGV__% || goto error_handler
 	
@@ -106,8 +109,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### Exit #############################################################################################
 	
+	::###### update indent padding
+	(set pad=)
+	(set padB=)
+	for /l %%x in (1, 1, %LVL%) do (set pad=!pad!%indent%)
+	for /l %%x in (1, 1, %LVL%) do (set padB=!padB!%indent%)
+	
 	::###### Print function exit ######
-::	if defined LiveCallStack (call :printExit)
+	if defined printExit (call :printExit)
 	::#################################
 	
 	::###### Unset the Globalized <STACK>_LVL variables
@@ -118,6 +127,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(call :setGlobal __ARGC__%LVL%)
 	(set /a PLVL=LVL)
 	(set /a LVL-=1)
+	
 	
 ::	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
 ::	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
@@ -132,8 +142,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	(set __ARGV__=!__ARGV__%LVL%!)
 	(set __ARGC__=!__ARGC__%LVL%!)
 	
-	::echo RTN_BOOL = %RTN_BOOL% 
-	::echo RTN_CODE = %RTN_CODE%
 exit /b %RTN_CODE%
 
 
@@ -193,7 +201,6 @@ exit /b %RTN_CODE%
 	::set #GLOBAL# > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
 %endfunction%
 
-	
 :printCallStack
 	echo:
 	echo ############ CALLSTACK ############
@@ -205,6 +212,14 @@ exit /b %RTN_CODE%
 	)
 	echo:
 	pause
+%endfunction%
+
+:dk_getError
+	if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]"	
+	(
+		(goto) 2>nul
+		exit /b
+	)  
 %endfunction%
 
 
