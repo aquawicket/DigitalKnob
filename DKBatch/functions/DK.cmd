@@ -58,6 +58,9 @@ echo:
     ::############ get dk_source and dk_call ######
     call :dk_initFiles
 	
+	set "endfunction=call dk_getError
+	set "return=call dk_getError
+	
 	set "dk_call=call dk_call"
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS
