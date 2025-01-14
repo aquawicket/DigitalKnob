@@ -58,9 +58,6 @@ echo:
     ::############ get dk_source and dk_call ######
     call :dk_initFiles
 	
-	set "endfunction=call dk_getError
-	set "return=call dk_getError
-	
 	set "dk_call=call dk_call"
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS
@@ -82,6 +79,9 @@ echo:
     %dk_call% dk_color
     %dk_call% dk_logo
 
+	set "endfunction=call dk_call dk_getError
+	set "return=call dk_call dk_getError
+	
     %dk_call% dk_validateDK || set "RELOADED=" && call :dk_DKSCRIPT_PATH "%~1" %*
     ::%DK% dk_load %DKSCRIPT_PATH%
 
