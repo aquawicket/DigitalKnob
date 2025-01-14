@@ -12,7 +12,6 @@ echo DKSHELL_PATH = %DKSHELL_PATH%
 echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 echo:
 
-
 ::if not exist "%~0.cmd" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 
 (set \n=^^^
@@ -58,10 +57,9 @@ echo:
     ::############ get dk_source and dk_call ######
     call :dk_initFiles
 	
-	set "dk_call=call dk_call"
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS
-
+	
     ::############ Elevate Permissions ############
     ::set "ENABLE_dk_elevate=1"
     if "%ENABLE_dk_elevate%" neq "1" goto skip_elevate
@@ -71,11 +69,10 @@ echo:
             if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
     :skip_elevate
 
-    ::############ Set Options ############
-    ::dk_setOptions
-
+    ::############ create dk_call macro ############
+	set "dk_call=call dk_call"
+	
     ::############ LOAD FUNCTION FILES ############
-    call dk_source dk_debugFunc
     %dk_call% dk_color
     %dk_call% dk_logo
 
