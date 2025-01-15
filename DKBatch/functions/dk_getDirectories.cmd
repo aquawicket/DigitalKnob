@@ -16,7 +16,6 @@ setlocal enableDelayedExpansion
 
 	set /a "n=0"
 	for /d %%a in ("%_path_%\*") do (
-		rem echo %%a
 		set "dk_getDirectories[!n!]=%%a"
 		set /a "n+=1"
 	) 
