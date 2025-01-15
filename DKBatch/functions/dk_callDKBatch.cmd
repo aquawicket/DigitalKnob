@@ -13,7 +13,7 @@ setlocal
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
     
 	set ALL_BUT_FIRST=%*
-	if defined ALL_BUT_FIRST (call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%)
+	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
 	
 	:: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a

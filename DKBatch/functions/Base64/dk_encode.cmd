@@ -17,7 +17,8 @@ setlocal
 	
     set "inputFile=%~1"
     set "outputFile=%inputFile%.b64"
-    if %__ARGC__% equ 2 set "outputFile=%~2"
+    ::if %__ARGC__% equ 2 set "outputFile=%~2"
+	if not "%~2"=="" set "outputFile=%~2"
     
     if not exist "%inputFile%" %dk_call% dk_error "%inputFile% not found"
     if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"

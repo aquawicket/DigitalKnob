@@ -11,7 +11,7 @@ setlocal enableDelayedExpansion
 	set __ALL__=%*
 	if defined __ALL__ (
 		set __CMND__=%1
-		call set __ARGS__=%%__ALL__:*%1=%%
+		set __ARGS__=!__ALL__:*%1=!
 	)
 	
 	echo __ALL__  %__ALL__%

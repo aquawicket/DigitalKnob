@@ -14,14 +14,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_isFunction
 setlocal
 	%dk_call% dk_debugFunc 1
-	
     %ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
     if %ERRORLEVEL% equ 0 (
-        (endlocal & set "dk_isFunction=true")
+        if "%~2" neq "" (endlocal & set "%2=true")
         exit /b 0
     )
     
-    (endlocal & set "dk_isFunction=false")
+    if "%~2" neq "" (endlocal & set "%2=false")
     exit /b 1
 %endfunction%
 

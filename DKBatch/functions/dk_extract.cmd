@@ -6,14 +6,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_extract
-    call dk_debugFunc 1 2
  setlocal
- 
+    call dk_debugFunc 1 2
+
 	if not exist "%~1" %dk_call% dk_error "%~1 does not exist"
 	 
     :: if the dest isn't provided, we should extract to a folder named the same as the file
-    :: in the same diretory the archive file is in.    
-    if "%__ARGC__%" equ "2" goto twoParams
+    :: in the same diretory the archive file is in.
+	if not "%~2"=="" goto twoParams
+    ::if "%__ARGC__%" equ "2" goto twoParams
 
     ::### handle 1 parameter
     %dk_call% dk_basename "%~1" basename
@@ -45,8 +46,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
  setlocal
+    call dk_debugFunc 0
  
 	::%dk_call% dk_validate DKDOWNLOAD_DIR "call dk_DKDOWNLOAD_DIR"
     ::%dk_call% dk_extract "%DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"

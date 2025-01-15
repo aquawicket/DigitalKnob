@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
     
 	set ALL_BUT_FIRST=%*
-	if defined ALL_BUT_FIRST (call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%)
+	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
     set "ALL_BUT_FIRST=%ALL_BUT_FIRST:"='%"
     
     :: get LAST_ARG

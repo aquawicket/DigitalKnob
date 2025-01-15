@@ -38,9 +38,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::  if not exist "%dest_realpath%" %dk_call% dk_makeDirectory "%dest_realpath%"
 
-    ::%dk_call% dk_info "Extracting %src_realpath%  to  %src_extractPath%"
+    %dk_call% dk_info "Extracting %src_realpath%  to  %src_extractPath%"
 	
-	if exist "%src_extractPath%"  %dk_call% dk_delete "%src_extractPath%"
+::	if exist "%src_extractPath%"  %dk_call% dk_delete "%src_extractPath%"
 	
 	%dk_call% dk_extract "%src_realpath%" "%src_extractPath%"
 	

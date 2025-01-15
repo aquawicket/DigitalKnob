@@ -3,10 +3,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 %dk_call% dk_validate DKCACHE_DIR 			   "%dk_call% dk_DKCACHE_DIR"
 %dk_call% dk_validate DKIMPORTS_DIR     	   "%dk_call% dk_DKIMPORTS_DIR"
-if not exist "%DKIMPORTS_DIR%\git\dkconfig.txt" %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt" "%DKCACHE_DIR%\3rdParty\_DKIMPORTS\git\dkconfig.txt"
+if not exist "%DKIMPORTS_DIR%\git\dkconfig.txt" %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt" "%DKCACHE_DIR%\git.txt"
 
-if exist "%DKCACHE_DIR%\3rdParty\_DKIMPORTS\git\dkconfig.txt"	(set GIT_CONFIG_TXT=%DKCACHE_DIR%\3rdParty\_DKIMPORTS\git\dkconfig.txt)
-if exist "%DKIMPORTS_DIR%\git\dkconfig.txt"						(set GIT_CONFIG_TXT=%DKIMPORTS_DIR%\git\dkconfig.txt)
+if exist "%DKCACHE_DIR%\git.txt"			(set GIT_CONFIG_TXT=%DKCACHE_DIR%\git.txt)
+if exist "%DKIMPORTS_DIR%\git\dkconfig.txt"	(set GIT_CONFIG_TXT=%DKIMPORTS_DIR%\git\dkconfig.txt)
 
 %dk_call% dk_getFileParam %GIT_CONFIG_TXT% GIT_DL_WIN_X86
 %dk_call% dk_getFileParam %GIT_CONFIG_TXT% GIT_DL_WIN_X86_64

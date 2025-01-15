@@ -10,11 +10,14 @@ setlocal
 	
 	echo:
 	echo ############ CALLSTACK ############
-	for /l %%x in (1, 1, 100) do (
+	for /l %%x in (0, 1, 100) do (
 		(set /a num=100-%%x)
 		(set /a numb=99-%%x)
-		if defined __FILE__!num! (
-			call echo !num!: %%__FILE__!numb!%% %%__FUNC__!num!%% %%__ARGV__!num!%%
+		rem if defined __FILE__!num! (
+		rem	call echo !num!: %%__FILE__!numb!%% %%__FUNC__!num!%% %%__ARGV__!num!%%
+		rem )
+		if defined __STACK__!num! (
+			call echo !num!: %%__STACK__!num!%%
 		)
 	)
 	echo:

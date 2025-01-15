@@ -12,6 +12,7 @@ echo DKSHELL_PATH = %DKSHELL_PATH%
 echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 echo:
 
+
 ::if not exist "%~0.cmd" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 
 (set \n=^^^
@@ -55,11 +56,14 @@ echo:
     call :dk_DKHTTP_VARS
 
     ::############ get dk_source and dk_call ######
+	
     call :dk_initFiles
 	
-    ::############ Get DKSCRIPT variables ############
-    call :dk_DKSCRIPT_VARS
+	call dk_call init
 	
+    ::############ Get DKSCRIPT variables ############
+    ::call :dk_DKSCRIPT_VARS
+
     ::############ Elevate Permissions ############
     ::set "ENABLE_dk_elevate=1"
     if "%ENABLE_dk_elevate%" neq "1" goto skip_elevate
@@ -69,16 +73,14 @@ echo:
             if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
     :skip_elevate
 
-    ::############ create dk_call macro ############
-	set "dk_call=call dk_call"
-	
+    ::############ Set Options ############
+    ::dk_setOptions
+
     ::############ LOAD FUNCTION FILES ############
+    call dk_source dk_debugFunc
     %dk_call% dk_color
     %dk_call% dk_logo
 
-	set "endfunction=call dk_call dk_getError
-	set "return=call dk_call dk_getError
-	
     %dk_call% dk_validateDK || set "RELOADED=" && call :dk_DKSCRIPT_PATH "%~1" %*
     ::%DK% dk_load %DKSCRIPT_PATH%
 
@@ -112,7 +114,7 @@ echo:
     if not defined  DKSCRIPT_PATH		set "DKSCRIPT_PATH=%~1"
     if not exist   "%DKSCRIPT_PATH%"	echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && goto:eof
 	if not defined  DKSCRIPT_ARGS		set DKSCRIPT_ARGS=%*
-	if defined 		DKSCRIPT_ARGS 		(call set DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%1=%%)
+	if defined 		DKSCRIPT_ARGS 		(set DKSCRIPT_ARGS=!DKSCRIPT_ARGS:*%1=!)
 %endfunction%
 
 ::##################################################################################

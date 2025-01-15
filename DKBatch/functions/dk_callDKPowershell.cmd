@@ -12,15 +12,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	::if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" set "DKPOWERSHELL_FUNCTIONS_DIR=%CD%\DKPowershell\functions"
-	
-	::if not defined DKPOWERSHELL_FUNCTIONS_DIR  if exist %USERPROFILE%\digitalknob\Development\.git  set "DKPOWERSHELL_FUNCTIONS_DIR=%USERPROFILE%\digitalknob\Development\DKPowershell\functions"
-	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	if not defined DKPOWERSHELL_FUNCTIONS_DIR  if exist %DIGITALKNOB_DIR%\Development\.git  set "DKPOWERSHELL_FUNCTIONS_DIR=%DIGITALKNOB_DIR%\Development\DKPowershell\functions"
-	
-	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-	if not defined DKPOWERSHELL_FUNCTIONS_DIR  set "DKPOWERSHELL_FUNCTIONS_DIR=%DKCACHE_DIR%\DKPowershell\functions"
+	if not defined DKPOWERSHELL_FUNCTIONS_DIR  if exist %USERPROFILE%\digitalknob\Development\.git  set "DKPOWERSHELL_FUNCTIONS_DIR=%USERPROFILE%\digitalknob\Development\DKPowershell\functions"
+	if not defined DKPOWERSHELL_FUNCTIONS_DIR  set "DKPOWERSHELL_FUNCTIONS_DIR=%USERPROFILE%\digitalknob\DKTools\DKPowershell\functions"
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%"
-	
 	if not defined DKHTTP_DKPOWERSHELL_DIR            set "DKHTTP_DKPOWERSHELL_DIR=%DKHTTP_DKBRANCH_DIR%/DKPowershell"
 	if not defined DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR  set "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR=%DKHTTP_DKPOWERSHELL_DIR%/functions"
 	if not exist %DKPOWERSHELL_FUNCTIONS_DIR%\DK.ps1 %dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1"
@@ -32,7 +26,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
 	
 	set ALL_BUT_FIRST=%*
-	if defined ALL_BUT_FIRST (call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%)
+	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
     
     :: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
@@ -46,7 +40,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	)
     ::echo rtn_value = !rtn_value!
     
-	if "%LAST_ARG%"=="rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
+	if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
 %endfunction%
 
 

@@ -1,8 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-%dk_call% dk_validate dk_color "%dk_call% dk_color" && (set dk_color=1)
-
 if not defined ENABLE_dk_log   set "ENABLE_dk_log=1"
 
 :: 0 VERBOSE    dk_verbose

@@ -24,7 +24,7 @@ setlocal
 	if not exist %DKC_FUNCTIONS_DIR%\%~1.c   %dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c"
 
 ::	set ALL_BUT_FIRST=%*
-::	if defined ALL_BUT_FIRST (call set ALL_BUT_FIRST=%%ALL_BUT_FIRST:*%1=%%)
+::	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
 	
     :: get LAST_ARG
 ::	for %%a in (%*) do set LAST_ARG=%%a
