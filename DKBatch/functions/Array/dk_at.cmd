@@ -24,6 +24,8 @@ setlocal enableDelayedExpansion
     ::### return value ###
     endlocal & set "dk_at=!%~1[%~2]!"
 	
+::DEBUG
+::	%dk_call% dk_printVar dk_at
 %endfunction%
 
 
