@@ -39,6 +39,7 @@ echo:
     call :dk_DKSCRIPT_PATH "%~1" %*
     call :dk_DKSCRIPT_DIR	
     call :dk_DKSCRIPT_EXT
+	call :dk_DKCACHE_DIR
 
     ::###### Reload Main Script with cmd ######
     if "!DE!" neq "" call :dk_reload 
@@ -71,7 +72,7 @@ echo:
 
     ::###### DKTEST MODE ######
 	if "%DKSCRIPT_EXT%" neq ".cmd" %return%
-	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || %return%
+	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b
     %dk_call% dk_echo
     %dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME%.cmd ###### DKTEST MODE ######%clr%"
     %dk_call% dk_echo
@@ -122,6 +123,15 @@ echo:
 %endfunction%
 
 ::##################################################################################
+::# dk_DKCACHE_DIR
+::#
+:dk_DKCACHE_DIR
+    if not exist   "%DKCACHE_DIR%"     set "DKCACHE_DIR=%USERPROFILE%\.dk"
+    if not exist   "%DKCACHE_DIR%"     mkdir %DKCACHE_DIR%
+    if exist       "%DKCACHE_DIR%"     copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul
+%endfunction%
+
+::##################################################################################
 ::# dk_DKBATCH_VARS
 ::#
 :dk_DKBATCH_VARS
@@ -151,6 +161,7 @@ echo:
 :dk_initFiles
     if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"	powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
     if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"		powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd"		powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_getError.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd')"
 %endfunction%
 
 ::##################################################################################

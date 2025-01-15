@@ -18,7 +18,8 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
 
 	%dk_call% dk_assertPath DKSCRIPT_DIR
-	%dk_call% dk_assertPath DKBRANCH_DIR
+	::%dk_call% dk_assertPath DKBRANCH_DIR
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
         %dk_call% dk_warning "Not running from the DKBRANCH_DIR directory."
     )
