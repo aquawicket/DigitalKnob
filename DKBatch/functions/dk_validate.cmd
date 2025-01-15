@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-if defined %~1 (%return%)
 ::################################################################################
 ::# dk_validate(variable, code) NO_HALT
 ::#
@@ -11,7 +10,8 @@ if defined %~1 (%return%)
 ::setlocal
     %dk_call% dk_debugFunc 2
 
-    ::%dk_call% dk_stringContains "%~2" "dk_call" || %dk_call% dk_error "dk_validate parameter 2 requires the use of dk_call"
+	if defined %~1 (%return%)
+
     ::echo %~2
 	%~2
     
@@ -41,5 +41,4 @@ setlocal
 	
 	
 	%dk_call% dk_validate TESTABC "%dk_call% dk_testB"
-	
 %endfunction%

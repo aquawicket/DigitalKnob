@@ -36,34 +36,22 @@ echo:
     set "return=exit /b !errorlevel!"
 	set "DKDEBUG=exit /b !errorlevel!"
 
-    ::###### set DKSCRIPT_PATH ######
     call :dk_DKSCRIPT_PATH "%~1" %*
-
-    ::###### set DKSCRIPT_DIR ######
     call :dk_DKSCRIPT_DIR	
-
-    ::###### set DKSCRIPT_DIR ######
     call :dk_DKSCRIPT_EXT
 
     ::###### Reload Main Script with cmd ######
     if "!DE!" neq "" call :dk_reload 
     if "!DE!" neq "" echo ERROR: DKBatch requires delayed expansion && pause && exit 13
 
-    ::############ Get DKBATCH variables ############
     call :dk_DKBATCH_VARS
-
-    ::############ Get DKHTTP variables ############
     call :dk_DKHTTP_VARS
 
     ::############ get dk_source and dk_call ######
-	
     call :dk_initFiles
 	
 	call dk_call init
 	
-    ::############ Get DKSCRIPT variables ############
-    ::call :dk_DKSCRIPT_VARS
-
     ::############ Elevate Permissions ############
     ::set "ENABLE_dk_elevate=1"
     if "%ENABLE_dk_elevate%" neq "1" goto skip_elevate
@@ -73,15 +61,12 @@ echo:
             if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
     :skip_elevate
 
-    ::############ Set Options ############
-    ::dk_setOptions
-
     ::############ LOAD FUNCTION FILES ############
-    call dk_source dk_debugFunc
+    ::call dk_source dk_debugFunc
     %dk_call% dk_color
     %dk_call% dk_logo
 
-    %dk_call% dk_validateDK || set "RELOADED=" && call :dk_DKSCRIPT_PATH "%~1" %*
+    ::%dk_call% dk_validateDK || set "RELOADED=" && call :dk_DKSCRIPT_PATH "%~1" %*
     ::%DK% dk_load %DKSCRIPT_PATH%
 
     ::###### DKTEST MODE ######
@@ -218,16 +203,6 @@ echo:
     if not exist   "%DKCACHE_DIR%"     mkdir %DKCACHE_DIR%
     if exist       "%DKCACHE_DIR%"     copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul
 
-::  ::### DKTEMP_DIR ###
-::  if not exist   "%DKTEMP_DIR%"     set "DKTEMP_DIR=%TMP%"
-::  if not exist   "%DKTEMP_DIR%"     set "DKTEMP_DIR=%TMPDIR%"
-::  if not exist   "%DKTEMP_DIR%"     set "DKTEMP_DIR=%TMP_DIR%"
-::  ::if not exist "%DKTEMP_DIR%"     set "DKTEMP_DIR=%DIGITALKNOB_DIR%"
-::  if not exist   "%DKTEMP_DIR%"     for %%Z in ("%~dp0..\..\..\") do set "DKTEMP_DIR=%%~dpZ"
-::  if exist       "%DKTEMP_DIR%"     set "DKTEMP_DIR=%DKTEMP_DIR%\.dk"
-::  if not exist   "%DKTEMP_DIR%"     mkdir %DKTEMP_DIR%
-::  if not exist   "%DKTEMP_DIR%"     echo ERROR: DKTEMP_DIR:%DKTEMP_DIR% does not exist & pause & exit 1
-
     ::### ASSETS ###
     if exist       "%DKASSETS_DIR%"   set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
     if exist       "%DKASSETS_DIR%"   set "PATH=%DKASSETS_DIR%;%PATH%"
@@ -241,7 +216,6 @@ echo:
 :DKTEST
 setlocal enableDelayedExpansion
     ::%dk_call% dk_debugFunc 0
-	::echo DK.cmd:DKTEST %DKSCRIPT_PATH%
 	
 	%DKSCRIPT_PATH% 
 %endfunction%
