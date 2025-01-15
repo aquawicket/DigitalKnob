@@ -27,14 +27,14 @@ echo:
 ::# DK
 ::#
 :DK
+	::if "!DE!" == ""   echo delayed expansion = ON
+	
     set "NO_STDOUT=1>nul"
     set "NO_STDERR=2>nul"
     set "NO_OUTPUT=1>nul 2>nul"
-
-::	if "!DE!" == ""   echo delayed expansion = ON
+	
 	set "endfunction=exit /b !errorlevel!"
     set "return=exit /b !errorlevel!"
-	set "DKDEBUG=exit /b !errorlevel!"
 
     call :dk_DKSCRIPT_PATH "%~1" %*
     call :dk_DKSCRIPT_DIR	
@@ -161,7 +161,7 @@ echo:
 :dk_initFiles
     if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"	powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
     if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"		powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd"		powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_getError.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd"	powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_getError.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_getError.cmd')"
 %endfunction%
 
 ::##################################################################################
@@ -174,7 +174,7 @@ echo:
         set "RELOADED=1"
         set "DKINIT="
 
-        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" 			&::%DKSCRIPT_ARGS%
+        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" 	&::%DKSCRIPT_ARGS%
 	
 		:: Change console settings
 		:: >nul REG ADD HKCU\Console\digitalknob FontSize /t reg_sz /d "Consolas" /f
@@ -184,12 +184,12 @@ echo:
         ::####################################
         ::############ EXIT POINT ############
         ::####################################
-			set "exit_code=%ERRORLEVEL%"
+			set "exit_code=%errorlevel%"
 			echo:
 			echo Exit code: %exit_code%
 			echo:
 			if "%exit_code%" neq "0" pause
-			exit %ERRORLEVEL%
+			exit %exit_code%
     :end_dk_reload
 	
 	::( >NUL reg delete HKCU\Console\digitalknob /f )
