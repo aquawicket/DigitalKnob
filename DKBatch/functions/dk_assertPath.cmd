@@ -8,11 +8,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0 99
 	
+	
 	(set _path_=%*)
-	if exist %_path_:/=\%	(%endfunction%)
+	if exist %_path_:/=\%	(exit /b 0)
 	
 	if defined %~1 (set _path_=!%~1!)
-	if exist "%_path_:/=\%"	(%endfunction%)
+	if exist "%_path_:/=\%"	(exit /b 0)
 	
     %dk_call% dk_error "ASSERTION: dk_assertPath(%*): path not found!"
 %endfunction%
@@ -51,6 +52,8 @@ setlocal
     %dk_call% dk_assertPath myPath									&::OK
 	::# As a variable name quoted
     %dk_call% dk_assertPath "myPath"								&::OK
+	::# CMD.exe
+	%dk_call% dk_assertPath "%COMSPEC%"								&::OK
 	
 	
     %dk_call% dk_assertPath "C:/NonExistentPath"					&::ASSERT

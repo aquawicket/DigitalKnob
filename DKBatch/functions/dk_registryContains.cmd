@@ -12,7 +12,7 @@ setlocal
 	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
 		set "str=%%a"
 		
-		if not "x!str:%~2=!" == "x!str!" (
+		if not "x!str:%~2=!x" == "x!str!x" (
 			exit /b 0
 		)
 	)
@@ -28,5 +28,12 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
    
-    %dk_call% dk_registryContains "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "C:\Users\Administrator\digitalknob\Development\DKApps\HelloWorld\win_x86_64_clang\Debug\HelloWorld.exe" && (%dk_call% dk_echo "registry contains substring") || (%dk_call% dk_echo "registry does NOT contain substring")
+	set "key=HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
+	set "exe=%comspec%"
+   
+    %dk_call% dk_registryContains "%key%" "%exe%" && (
+		%dk_call% dk_echo "FirewallRules contains %exe%"
+	) || (
+		%dk_call% dk_echo "FirewallRules does NOT contain %exe%"
+	)
 %endfunction%
