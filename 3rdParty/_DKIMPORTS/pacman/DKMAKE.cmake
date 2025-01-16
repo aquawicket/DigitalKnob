@@ -14,6 +14,9 @@ dk_validate(MSYS2 "dk_depend(msys2)")
 
 
 dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
+
+dk_FirewallAllow("pacman" "${MSYS2_DIR}/usr/bin/pacman.exe")
+
 if((NOT DKUPDATE) AND (EXISTS ${PACMAN_EXE}))
 	dk_notice("PACMAN_EXE is already installed, returning")
 	dk_return()
