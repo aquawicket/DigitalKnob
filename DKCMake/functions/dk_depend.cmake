@@ -36,7 +36,7 @@ function(dk_depend plugin) #target
 		dk_dependB(${plugin})
 	
 	
-		###### Pop Plugin from the PLUGIN_STACK######
+		###### Pop Plugin from the PLUGIN_STACK ######
 		dk_envList(PLUGIN POP)
 		#############################################
 		

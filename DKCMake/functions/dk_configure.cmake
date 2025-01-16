@@ -28,6 +28,9 @@ function(dk_configure SOURCE_DIR) #ARGN
 #	endif()
 	dk_assertPath($ENV{CURRENT_PLUGIN})
 	
+	message("ENV{CURRENT_PLUGIN} = $ENV{CURRENT_PLUGIN}")
+	message("$ENV{CURRENT_PLUGIN}_CONFIG_DIR = ${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
+	
 	if(NOT EXISTS "${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
 		set($ENV{CURRENT_PLUGIN}_CONFIG_DIR "${$ENV{CURRENT_PLUGIN}}/${CONFIG_PATH}")
 		dk_makeDirectory("${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
@@ -38,9 +41,9 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_assertVar(BINARY_DIR)
 	
 	dk_makeDirectory("${BINARY_DIR}")
-	dk_assertPath(${BINARY_DIR})
+	dk_assertPath("${BINARY_DIR}")
 	
-	dk_cd(${BINARY_DIR})
+	dk_cd("${BINARY_DIR}")
 	# Configure with CMake		(multi_config / single_config)
 	
 	

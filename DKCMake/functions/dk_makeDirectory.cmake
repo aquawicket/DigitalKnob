@@ -12,9 +12,17 @@ include_guard()
 function(dk_makeDirectory)
 	dk_debugFunc(1)
 	
-	set(path "${ARGV0}")
-
+	dk_getArg(0 path)
+	
+	if(EXISTS "${path}")	# the directory already exists
+		dk_return()
+	endif()	
 	make_directory("${path}")  # requires full path
+	
+# DEBUG
+	dk_printVar(path)
+	dk_stacktrace()
+	dk_pause()
 endfunction()
 
 

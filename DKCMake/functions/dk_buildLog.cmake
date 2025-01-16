@@ -17,6 +17,8 @@ function(dk_buildLog entry)
 	set(msg "${entry} = ${${entry}}")
 	dk_info("${msg}")
 	
+	dk_validate(DK_Project_Dir "dk_target_triple()")  #TODO - move to 'dk_DK_Project_Dir.cmake'
+	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 	dk_fileAppend(${DK_Project_Dir}/${CONFIG_PATH}/DKBUILD.log "${msg}\n")
 endfunction()
 

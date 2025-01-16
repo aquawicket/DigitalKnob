@@ -86,7 +86,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	elseif(EXISTS "${fpath}.cmake")
 		set(${fn}_file ${fpath}.cmake)
 	else()
-		dk_fatal("could not locate fpath:${fpath}")   # FIXME: do not use dk_ functions in dk_load.cmake, only use raw cmake functions.
+		message(FATAL_ERROR "could not locate fpath:${fpath}")
 	endif()
 	
 	#if(${${fn}_file} IN_LIST dk_load_list)

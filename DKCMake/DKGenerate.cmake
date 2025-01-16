@@ -36,6 +36,7 @@ dk_info("\n")
 
 dk_validate(DK_Project_Dir "dk_target_triple()")
 dk_assertPath(${DK_Project_Dir})
+
 dk_basename(${DK_Project_Dir} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
 set(APP_NAME ${APP_NAME}_APP)
