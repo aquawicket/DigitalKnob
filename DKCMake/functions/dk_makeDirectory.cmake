@@ -13,8 +13,7 @@ function(dk_makeDirectory)
 	dk_debugFunc(1)
 	
 	set(path "${ARGV0}")
-	message("make_directory("${path}")")
-	dk_pause()
+
 	make_directory("${path}")  # requires full path
 endfunction()
 
