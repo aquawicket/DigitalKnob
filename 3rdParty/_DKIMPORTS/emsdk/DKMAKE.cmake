@@ -60,6 +60,10 @@ endif()
 #	execute_process(COMMAND ${CMD_EXE} /c call 											"${EMSDK}/emsdk.bat" activate mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
 #endif()
 
+if(NOT EXISTS "${EMSDK}/upstream")
+
+endif()
+
 if(EXISTS "${EMSDK}/upstream/emscripten/src/settings.js")
 	dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL = 0" 			"var USE_SDL = false"			NO_HALT)
 	dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_IMAGE = 1" 		"var USE_SDL_IMAGE = false"		NO_HALT)

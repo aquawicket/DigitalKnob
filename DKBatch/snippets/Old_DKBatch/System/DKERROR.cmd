@@ -85,9 +85,9 @@ exit %ERROR_CODE%
 	echo ~3 = %~3
 	for /f "delims=:" %%a in ('findstr /n /c:"%~3" "%~f2"') do set "line=%%a"
 	echo [91m  File: %~f2: !line! [0m
-	set /A n=1
-	set /A min=!line!-6
-	set /A max=!line!+6
+	set /a n=1
+	set /a min=!line!-6
+	set /a max=!line!+6
 	for /f "delims=" %%a in ('findstr /n /r /c:"^" "%~f2"') do (
 		if !n! LSS !max! (
 			if !n! GTR !min! (

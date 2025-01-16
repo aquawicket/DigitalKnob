@@ -15,7 +15,7 @@ setlocal
 	%dk_call% dk_info "using %_icon_exe_% for the icon"
     
     ::### delete existing key ###
-    %dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%"
+ ::   %dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%"
     
     ::### Menu Title ###
     ::%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" "" "" "&%_menuTitle_%"

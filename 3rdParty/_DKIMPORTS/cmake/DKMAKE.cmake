@@ -96,14 +96,16 @@ else()
 	endif()
 endif()
 
-dk_firewallAllow("CMD" "${CMAKE_EXE}")
+
 
 ### VALIDATE ### (second check)
 if(NOT CMAKE_EXE)
 	dk_error("COULD NOT FIND CMAKE_EXE...   defaulting to CMAKE_COMMAND")
 	dk_set(CMAKE_EXE ${CMAKE_COMMAND})
-	dk_return()
 endif()
+
+dk_firewallAllow("CMake" "${CMAKE_EXE}")
+
 
 #execute_process(COMMAND ${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_EXE_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
 #string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)

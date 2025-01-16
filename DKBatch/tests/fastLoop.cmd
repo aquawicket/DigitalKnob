@@ -25,14 +25,14 @@ echo/
 
 echo Calculation of e:
 echo/
-set /A digits=8, one=1
+set /a digits=8, one=1
 for /L %%i in (1,1,%digits%) do set one=!one!0
-set /A num=0, fact=1, term=1, whileResult=0
+set /a num=0, fact=1, term=1, whileResult=0
 echo #- #   term=1/#    summation
 %loop% (
-    set /A term=one/fact, whileResult+=term
+    set /a term=one/fact, whileResult+=term
     echo !num!- !fact!    !term!    !whileResult!
-    set /A num+=1, fact*=num
+    set /a num+=1, fact*=num
     if !term! leq 0 set _break=1
 )
 echo/
@@ -48,7 +48,7 @@ setlocal
 set num=1
 set whileResult=1
 %loop% (
-    set /A whileResult*=num, num+=1
+    set /a whileResult*=num, num+=1
     if !num! gtr %1 set _break=1
 )
 endlocal & if "%2" neq "" (set %2=%whileResult%) else echo %whileResult%

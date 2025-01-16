@@ -747,9 +747,9 @@ goto:eof
 :#                  if .%N%.==.0. (                                           #
 :#                    set RETVAL=1                                            #
 :#                  ) else (                                                  #
-:#                    set /A M=N-1                                            #
+:#                    set /a M=N-1                                            #
 :#                    call :Fact !M!                                          #
-:#                    set /A RETVAL=N*RETVAL                                  #
+:#                    set /a RETVAL=N*RETVAL                                  #
 :#                  )                                                         #
 :#                  %RETURN%					              #
 :#                                                                            #
@@ -2883,7 +2883,7 @@ echo %TIME%
 :# Sleep N seconds. %1 = Number of seconds to wait.
 :Sleep
 %FUNCTION%
-set /A N=%1+1
+set /a N=%1+1
 ping -n %N% 127.0.0.1 >NUL 2>&1
 %RETURN%
 
@@ -3725,8 +3725,8 @@ net localgroup Administrators | more /E +%HeaderLines% | find /V "%FooterLine%"
 :num_ips
 setlocal enableextensions enabledelayedexpansion
 for /f "tokens=1-8 delims=." %%a in ("%1.%2") do (
-  set /A a=%%e-%%a,b=%%f-%%b,c=%%g-%%c,d=%%h-%%d
-  for %%e in (b c d) do set /A a=256*a + !%%e!
+  set /a a=%%e-%%a,b=%%f-%%b,c=%%g-%%c,d=%%h-%%d
+  for %%e in (b c d) do set /a a=256*a + !%%e!
 )
 endlocal & set "RETVAL=%a%" & goto:eof
 
@@ -4374,7 +4374,7 @@ for /F "delims=" %%a in ('echo.^|xcopy /W "%~F0" "%~F0" 2^>NUL') do if not defin
       if %i% gtr 0 (
          set /P "=!BS! !BS!" < NUL
          set "input=!input:~0,-1!"
-         set /A i-=1
+         set /a i-=1
       )
       goto nextKey
    )
@@ -4382,7 +4382,7 @@ for /F "delims=" %%a in ('echo.^|xcopy /W "%~F0" "%~F0" 2^>NUL') do if not defin
    rem Else: show and accept the key
    set /P "=*" < NUL
    set "input=!input!!key!"
-   set /A i+=1
+   set /a i+=1
 
 goto :ReadPassword.nextKey
 
@@ -4452,9 +4452,9 @@ if .%1.==.. set N=0
 if .%N%.==.0. (
   set RETVAL=1
 ) else (
-  set /A M=N-1
+  set /a M=N-1
   call :Fact !M!
-  set /A RETVAL=N*RETVAL
+  set /a RETVAL=N*RETVAL
 )
 %RETURN%
 

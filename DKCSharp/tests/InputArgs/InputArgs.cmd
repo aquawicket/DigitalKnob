@@ -20,11 +20,11 @@ setlocal EnableDelayedExpansion
 set "command=%file%.exe"
 set i=0
 for /f "usebackq delims=|" %%Z in (`%command% ^& call echo %%^^ERRORLEVEL%%`) do (
-	set /A i+=1
+	set /a i+=1
 	rem call set "line[%%i%%]=%%a"
 	set "line[!i!]=%%Z"
 )
-set /A numLines=i-1
+set /a numLines=i-1
 rem Final errorlevel is stored in last line
 if !line[%i%]! gtr 0 (
    set /a lastline = !line[%i%]! 2>nul && %COMSPEC% /c exit %lastline%

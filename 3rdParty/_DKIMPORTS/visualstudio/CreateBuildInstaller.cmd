@@ -4,34 +4,33 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 :: Build a Visual Studio 17 2022 installer from 2022.vsconfig file
+:CreateBuildInstaller
+	setlocal enabledelayedexpansion
 
+	set "dkdownload=%USERPROFILE%\digitalknob\Download"
+	if not exist "%dkdownload%" (
+		set "errorlevel=The folder %dkdownload% does not exist" 
+		goto Error
+	)
 
-setlocal enabledelayedexpansion
+	set "vsconfig=2022.vsconfig"
+	if not exist "%vsconfig%" (
+		set "errorlevel=The file %vsconfig% does not exist" 
+		goto Error
+	)
 
-set "dkdownload=%USERPROFILE%\digitalknob\Download"
-if not exist "%dkdownload%" (
-	set "errorlevel=The folder %dkdownload% does not exist" 
-	goto Error
-)
+	set "vs_community=%dkdownload%\vs_Community.exe"
+	if not exist "%vs_community%" (
+		set "errorlevel=The file %vs_community% does not exist" 
+		goto Error
+	)
 
-set "vsconfig=2022.vsconfig"
-if not exist "%vsconfig%" (
-	set "errorlevel=The file %vsconfig% does not exist" 
-	goto Error
-)
-
-set "vs_community=%dkdownload%\vs_Community.exe"
-if not exist "%vs_community%" (
-	set "errorlevel=The file %vs_community% does not exist" 
-	goto Error
-)
-
-set /A i=0
-%dk_call% dk_echo i = %i%
+	set /a i=0
+	%dk_call% dk_echo i = %i%
 
 :: Loop through file and store lines into an array
 for /F "skip=3 tokens=1" %%a in (%vsconfig%) do (
-	set /A i+=1
+	set /a i+=1
 	%dk_call% dk_echo i = !i!
 	set item=%%a
 	
