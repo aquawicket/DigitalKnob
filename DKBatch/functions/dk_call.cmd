@@ -79,13 +79,17 @@ exit /b %RTN_CODE%
 ::#
 :init
 	set "dk_call=call dk_call"
-::	set globals=(for /F "delims=" %%a in ('set dk.') do endlocal^& call set _line_=%%a^& call set _line_=%%_line_:dk.rtn=%%=^& call set %%_line_%%^& call set %%_line_:dk.gbl.=%%)
+::	set gblsAndRtns=(for /F "delims=" %%a in ('set dk. 2^>nul') do ^
+::		endlocal^
+::		^& call set _line_=%%a^
+::		^& call set _line_=%%_line_:dk.rtn.=%%^
+::		^& call set %%_line_%%^
+::		^& call set %%_line_:dk.gbl.=%%)
 	set globals=(for /F "delims=" %%a in ('set dk.') do ^
 		endlocal^
 		^& call set _line_=%%a^
-		^& call set _line_=%%_line_:dk.rtn.=%%^
 		^& call set %%_line_%%^
-		^& call set %%_line_:dk.gbl.=%%)
+		^& call set %%_line_:dk.gbl.=%%) 2^>nul
 	
 ::	set endfunction=exit /b !errorlevel!)
 ::	set return=exit /b !errorlevel!)
