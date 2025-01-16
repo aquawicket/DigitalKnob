@@ -28,7 +28,7 @@ setlocal enableDelayedExpansion
     %dk_call% dk_unset target_app
     %dk_call% dk_unset target_triple
     %dk_call% dk_unset target_type
-        
+      
 	::set "BUILD_LIST_FILE=%DKCACHE_DIR%\build_list.txt"
     :while_loop
 		if exist "%BUILD_LIST_FILE%" (

@@ -51,7 +51,7 @@ setlocal
     %dk_call% dk_echo
     %dk_call% dk_echo "git commit '%commit_msg%'"
 
-    %dk_call% dk_confirm || %return%
+    %dk_call% dk_confirm || (%return%)
     
     "%GIT_EXE%" commit -a -m "%commit_msg%"
     "%GIT_EXE%" push

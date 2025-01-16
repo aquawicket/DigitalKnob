@@ -5,8 +5,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~f0 %*
 ::####################################################################
 ::# dk_test(args1 arg2 rtn_var)
 ::#
-::#
-
 :dk_test
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0 99
@@ -52,15 +50,15 @@ setlocal enableDelayedExpansion
     echo  DKBASH_FUNCTIONS_DIR = %DKBASH_FUNCTIONS_DIR%
     echo DKBASH_FUNCTIONS_DIR_ = %DKBASH_FUNCTIONS_DIR_%
     
-    
 	
-	%dk_call% setGlobal GLOBAL_VAR "This is a global variable: globalize is required"
+	
+	%dk_call% setGlobal GLOBAL_VAR "This is a global variable"
 
+	::SYNTAX ERROR
 
-	::set "return_value=return value from dk_test.cmd"
-    ::endlocal & set "%3=%return_value%"
-	::exit /b 13
-%globalize%
+:: FIXME: we only want endlocal once
+::endlocal & set "dk_test=return value from dk_test.cmd"
+
 %endfunction%
 
 
@@ -74,12 +72,22 @@ setlocal enableDelayedExpansion
 :DKTEST
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
-	echo dk_test.cmd :DKTEST
 
-    %dk_call% dk_test "arg 1" "arg 2" rtn_var
+    call :DKTESTB
     echo:
 	echo:
 	echo GLOBAL_VAR = %GLOBAL_VAR%
+%endfunction%
+
+:DKTESTB
+setlocal enableDelayedExpansion
+    %dk_call% dk_debugFunc 0
+
+    %dk_call% dk_test "arg 1" "arg 2"
+    echo:
+	echo:
+	::echo dk_test = %dk_test%
+	::echo GLOBAL_VAR = %GLOBAL_VAR%
 
     ::%dk_call% dk_echo "rtn_var = %rtn_var%"
 %endfunction%

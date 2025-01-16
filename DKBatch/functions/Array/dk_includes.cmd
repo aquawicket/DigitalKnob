@@ -28,7 +28,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_includes
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2
- 
+	
     set "_arry_=%~1"
     set /a count=0
     :includes_loop

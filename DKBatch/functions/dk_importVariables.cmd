@@ -326,11 +326,13 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	rem ############# <PLUGIN>_VARIABLES #############
 	rem ##############################################
 	
-	if defined PLUGIN_IMPORT_NAME_LOWER if defined PLUGIN_GIT_NAME_LOWER (
-		if NOT "!PLUGIN_IMPORT_NAME_LOWER!"=="!PLUGIN_GIT_NAME_LOWER!" (
-			%dk_call% dk_warning "PLUGIN_IMPORT_NAME:!PLUGIN_IMPORT_NAME_LOWER! and PLUGIN_GIT_NAME:!PLUGIN_GIT_NAME_LOWER! do not match " 
-		)  
-	)  
+	if defined PLUGIN_IMPORT_NAME_LOWER (
+		if defined PLUGIN_GIT_NAME_LOWER (
+			if NOT "!PLUGIN_IMPORT_NAME_LOWER!"=="!PLUGIN_GIT_NAME_LOWER!" (
+				%dk_call% dk_warning "PLUGIN_IMPORT_NAME:!PLUGIN_IMPORT_NAME_LOWER! and PLUGIN_GIT_NAME:!PLUGIN_GIT_NAME_LOWER! do not match"
+			)
+		)
+	)
 
 	rem ### CURRENT_PLUGIN
 	set "CURRENT_PLUGIN="
@@ -433,7 +435,8 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	)  
 
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN! 
-!endfunction!
+rem !endfunction!
+exit /b !errorlevel!
 
 
 

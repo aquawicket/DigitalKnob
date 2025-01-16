@@ -9,8 +9,8 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     set /P REPLY="%yellow% Are you sure ? [Y/N] %clr%"
-    %dk_call% dk_echo
-    %dk_call% dk_echo
+    echo:
+	echo:
     if /I "%REPLY%" equ "Y" (
         rem if "%~1" neq "" ( endlocal & %dk_call% dk_set %1 "true" )
         exit /b 0
@@ -33,6 +33,6 @@ setlocal
     %dk_call% dk_confirm && (echo "the confimation has passed") || (echo "the confimation has failed")
     
     ::###### abort in not confirmed type code
-    %dk_call% dk_confirm || %return%
+    %dk_call% dk_confirm || (%return%)
     echo "passed the confirmation, executing code after confirm"
 %endfunction%

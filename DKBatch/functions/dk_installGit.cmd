@@ -31,7 +31,7 @@ if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %GIT_DL% NAME git ROOT %DKTOOLS_DIR%
-	
+
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::### DO NOT USE GIT_DIR ###
 	if defined GIT_DIR  %dk_call% dk_fatal "ERROR: GIT_DIR should not be set."
