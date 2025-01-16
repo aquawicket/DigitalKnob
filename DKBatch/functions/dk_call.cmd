@@ -79,8 +79,13 @@ exit /b %RTN_CODE%
 ::#
 :init
 	set "dk_call=call dk_call"
-	set globals=(for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_%%^& call set %%_line_:global.=%%)
-	set returns=(for /F "delims=" %%a in ('set rtn.') do endlocal^& call set _line_=%%a^& call set %%_line_:rtn.=%%)
+::	set globals=(for /F "delims=" %%a in ('set dk.') do endlocal^& call set _line_=%%a^& call set _line_=%%_line_:dk.rtn=%%=^& call set %%_line_%%^& call set %%_line_:dk.gbl.=%%)
+	set globals=(for /F "delims=" %%a in ('set dk.') do ^
+		endlocal^
+		^& call set _line_=%%a^
+		^& call set _line_=%%_line_:dk.rtn.=%%^
+		^& call set %%_line_%%^
+		^& call set %%_line_:dk.gbl.=%%)
 	
 ::	set endfunction=exit /b !errorlevel!)
 ::	set return=exit /b !errorlevel!)
@@ -167,7 +172,7 @@ exit /b %RTN_CODE%
 	set argv=%*
 	if defined argv (set argv=!argv:*%1=!)
 	(set %~1=%argv%)
-	(set global.%~1=%argv%)		&:: prefix the variable name with global. and assign a value
+	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with global. and assign a value
 %endfunction%
 
 ::####################################################################
@@ -177,7 +182,7 @@ exit /b %RTN_CODE%
 	set argv=%*
 	if defined argv (set argv=!argv:*%1=!)
 	(set %~1=%argv%)
-	(set rtn.%~1=%argv%)		&:: prefix the variable name with rtn. and assign a value
+	(set dk.rtn.%~1=%argv%)		&:: prefix the variable name with rtn. and assign a value
 %endfunction%
 
 ::####################################################################
