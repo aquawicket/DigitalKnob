@@ -92,6 +92,8 @@ if((NOT LINUX_HOST) AND (NOT ANDROID_HOST))
 	dk_assertPath(PYTHON_EXE)
 endif()
 
+dk_firewallAllow("Python" "${PYTHON_EXE}")
+
 ### FIXME: we can't have both python2 and python3 in the environment path 
 #dk_prependEnvPath("${PYTHON_DIR}")
 

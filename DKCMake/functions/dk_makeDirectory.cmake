@@ -20,9 +20,7 @@ function(dk_makeDirectory)
 	make_directory("${path}")  # requires full path
 	
 # DEBUG
-	dk_printVar(path)
-	dk_stacktrace()
-	dk_pause()
+#	dk_printVar(path)
 endfunction()
 
 
