@@ -49,7 +49,7 @@ if "%~1" == "" (goto dk_install)
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
+::	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
 	
 	:: Set the registry entry for the exxtension
 	ftype DKBatch="%COMSPEC%" /c if exist "%~f0" ^
@@ -57,8 +57,8 @@ if "%~1" == "" (goto dk_install)
 	(echo not installed ^& "%%1" %%*)
 	
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "%ComSpec%"
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
+::	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
+::	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
 	assoc .cmd=DKBatch
 	
 	%dk_call% dk_success "DKBatch install complete"

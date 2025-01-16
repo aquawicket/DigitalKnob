@@ -7,5 +7,4 @@
 :dk_getError
 	if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]"
 
-exit /b 0
-goto:eof
+exit /b !errorlevel!

@@ -14,13 +14,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_call
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
-	:: don't add these functions to the callstack, just run them
+	:: don't add these functions to the callstack, just call them
 	if "%~1"=="init"				(call :%* && %endfunction%)
 	if "%~1"=="pushStack"			(call :%* && %endfunction%)
 	if "%~1"=="popStack"			(call :%* && %endfunction%)
 	if "%~1"=="setGlobal" 			(call :%* && %endfunction%)
 	if "%~1"=="setReturn" 			(call :%* && %endfunction%)
 	if "%~1"=="printStackVariables"	(call :%* && %endfunction%)
+
 	
 	::###### Stack Variables ######
 	(set __CMND__=%~1)
@@ -85,11 +86,17 @@ exit /b %RTN_CODE%
 ::		^& call set _line_=%%_line_:dk.rtn.=%%^
 ::		^& call set %%_line_%%^
 ::		^& call set %%_line_:dk.gbl.=%%)
-	set globals=(for /F "delims=" %%a in ('set dk.') do ^
+	set globalize=(for /F "delims=" %%a in ('set dk.') do ^
 		endlocal^
 		^& call set _line_=%%a^
 		^& call set %%_line_%%^
 		^& call set %%_line_:dk.gbl.=%%) 2^>nul
+		
+	::set dk_time=(call echo %%time%%)
+	::set checkError=(if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
+
+		
+::	set checkError=(if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
 	
 ::	set endfunction=exit /b !errorlevel!)
 ::	set return=exit /b !errorlevel!)
@@ -106,8 +113,14 @@ exit /b %RTN_CODE%
 ::	set endfunction=(call dk_getError^& !returns!^& exit /b !errorlevel!)
 ::	set return=(call dk_getError^& !returns!^& exit /b !errorlevel!)
 
-	set endfunction=(call dk_getError^& !globals!^& exit /b !errorlevel!)
-	set return=(call dk_getError^& !globals!^& exit /b !errorlevel!)
+	set endfunction=(call dk_getError^& exit /b !errorlevel!)
+	set return=(call dk_getError^& exit /b !errorlevel!)
+	
+::	set endfunction=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
+::	set return=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
+	
+::	set endfunction=(!checkError!^& !globals!^& exit /b !errorlevel!)
+::	set return=(!checkError!^& !globals!^& exit /b !errorlevel!)
 	
 	set /a "LVL=0"
 	set "ESC="
@@ -214,6 +227,7 @@ exit /b %RTN_CODE%
 	(call :setGlobal __STACK__%LVL%)
 	(set /a LVL-=1)
 %endfunction%
+
 
 
 
