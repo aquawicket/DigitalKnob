@@ -96,6 +96,8 @@ else()
 	endif()
 endif()
 
+dk_firewallAllow("CMD" "${CMAKE_EXE}")
+
 ### VALIDATE ### (second check)
 if(NOT CMAKE_EXE)
 	dk_error("COULD NOT FIND CMAKE_EXE...   defaulting to CMAKE_COMMAND")
