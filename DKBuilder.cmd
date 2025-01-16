@@ -48,6 +48,8 @@ call "%DK%" %~0 %*
 	call :dk_registryContains "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%~2" && exit /b 0
 	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%~2" enable=yes profile=any
 	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%~2" enable=yes profile=any
+	set "WFCUI_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe"
+	if exist "%WFCUI_EXE%" call "%WFCUI_EXE%" -allow %2
 %endfunction%
 
 

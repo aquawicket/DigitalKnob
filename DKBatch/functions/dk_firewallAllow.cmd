@@ -23,7 +23,7 @@ setlocal
 	
 	rem Windows Firewall Control
 	set "WFCUI_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe"
-	call "%WFCUI_EXE%" -allow %2
+	if exist "%WFCUI_EXE%" 	call "%WFCUI_EXE%" -allow %2
 %endfunction%
 
 
