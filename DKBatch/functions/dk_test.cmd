@@ -54,8 +54,15 @@ setlocal enableDelayedExpansion
 	
 	%dk_call% setGlobal GLOBAL_VAR "This is a global variable"
 
+	%dk_call% setReturn RETURN_VAR "This is a return variable"
 	::SYNTAX ERROR
 
+	echo global.GLOBAL_VAR = %global.GLOBAL_VAR%
+	echo GLOBAL_VAR = %GLOBAL_VAR%
+	
+	echo rtn.RETURN_VAR = %rtn.RETURN_VAR%
+	echo RETURN_VAR = %RETURN_VAR%
+	
 :: FIXME: we only want endlocal once
 ::endlocal & set "dk_test=return value from dk_test.cmd"
 
@@ -74,12 +81,28 @@ setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
 
     call :DKTESTB
-    echo:
-	echo:
+	
+	echo global.GLOBAL_VAR = %global.GLOBAL_VAR%
 	echo GLOBAL_VAR = %GLOBAL_VAR%
+	
+	echo rtn.RETURN_VAR = %rtn.RETURN_VAR%
+	echo RETURN_VAR = %RETURN_VAR%
 %endfunction%
 
 :DKTESTB
+setlocal enableDelayedExpansion
+    %dk_call% dk_debugFunc 0
+
+    call :DKTESTC
+	
+	echo global.GLOBAL_VAR = %global.GLOBAL_VAR%
+	echo GLOBAL_VAR = %GLOBAL_VAR%
+	
+	echo rtn.RETURN_VAR = %rtn.RETURN_VAR%
+	echo RETURN_VAR = %RETURN_VAR%
+%endfunction%
+
+:DKTESTC
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
 
@@ -87,7 +110,9 @@ setlocal enableDelayedExpansion
     echo:
 	echo:
 	::echo dk_test = %dk_test%
-	::echo GLOBAL_VAR = %GLOBAL_VAR%
-
-    ::%dk_call% dk_echo "rtn_var = %rtn_var%"
+	echo global.GLOBAL_VAR = %global.GLOBAL_VAR%
+	echo GLOBAL_VAR = %GLOBAL_VAR%
+	
+	echo rtn.RETURN_VAR = %rtn.RETURN_VAR%
+	echo RETURN_VAR = %RETURN_VAR%
 %endfunction%

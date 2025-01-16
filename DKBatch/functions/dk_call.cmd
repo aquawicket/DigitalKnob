@@ -19,6 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%~1"=="pushStack"			(call :%* && %endfunction%)
 	if "%~1"=="popStack"			(call :%* && %endfunction%)
 	if "%~1"=="setGlobal" 			(call :%* && %endfunction%)
+	if "%~1"=="setReturn" 			(call :%* && %endfunction%)
 	if "%~1"=="printStackVariables"	(call :%* && %endfunction%)
 	
 	::###### Stack Variables ######
@@ -78,23 +79,27 @@ exit /b %RTN_CODE%
 ::#
 :init
 	set "dk_call=call dk_call"
-	set globalize=for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_:global.=%%
+	set globals=(for /F "delims=" %%a in ('set global.') do endlocal^& call set _line_=%%a^& call set %%_line_%%^& call set %%_line_:global.=%%)
+	set returns=(for /F "delims=" %%a in ('set rtn.') do endlocal^& call set _line_=%%a^& call set %%_line_:rtn.=%%)
 	
-::	(set endfunction=exit /b !errorlevel!)
-::	(set return=exit /b !errorlevel!)
+::	set endfunction=exit /b !errorlevel!)
+::	set return=exit /b !errorlevel!)
 
-::	(set endfunction=echo !errorlevel!^& exit /b !errorlevel!)
-::	(set return=echo !errorlevel!^& exit /b !errorlevel!)
+::	set endfunction=(echo !errorlevel!^& exit /b !errorlevel!)
+::	set return=(echo !errorlevel!^& exit /b !errorlevel!)
 	
-::	(set endfunction=echo !errorlevel!^& call dk_getError)
-::	(set return=echo !errorlevel!^& call dk_getError)
+::	set endfunction=(echo !errorlevel!^& call dk_getError)
+::	set return=(echo !errorlevel!^& call dk_getError)
 	
-	(set endfunction=call dk_getError^& exit /b !errorlevel!)
-	(set return=call dk_getError^& exit /b !errorlevel!)
+::	set endfunction=(call dk_getError^& exit /b !errorlevel!)
+::	set return=(call dk_getError^& exit /b !errorlevel!)
 	
-	::(set endfunction=if not "!errorlevel!"=="0" call dk_getError^& exit /b 0)
-	::set endfunction=call dk_getError^& !globalize!^& exit /b 0
-	::set return=call dk_getError^& !globalize!^& exit /b 0
+::	set endfunction=(call dk_getError^& !returns!^& exit /b !errorlevel!)
+::	set return=(call dk_getError^& !returns!^& exit /b !errorlevel!)
+
+	set endfunction=(call dk_getError^& !globals!^& exit /b !errorlevel!)
+	set return=(call dk_getError^& !globals!^& exit /b !errorlevel!)
+	
 	set /a "LVL=0"
 	set "ESC="
 	set "clr=%ESC%[0m"
@@ -163,6 +168,16 @@ exit /b %RTN_CODE%
 	if defined argv (set argv=!argv:*%1=!)
 	(set %~1=%argv%)
 	(set global.%~1=%argv%)		&:: prefix the variable name with global. and assign a value
+%endfunction%
+
+::####################################################################
+::# :setReturn
+::#
+:setReturn name value
+	set argv=%*
+	if defined argv (set argv=!argv:*%1=!)
+	(set %~1=%argv%)
+	(set rtn.%~1=%argv%)		&:: prefix the variable name with rtn. and assign a value
 %endfunction%
 
 ::####################################################################

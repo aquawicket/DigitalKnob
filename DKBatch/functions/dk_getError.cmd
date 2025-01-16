@@ -6,8 +6,6 @@
 ::#
 :dk_getError
 	if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]"
-rem	(
-rem		(goto) 2>nul
-rem		exit /b
-rem	)  
+
 exit /b 0
+goto:eof
