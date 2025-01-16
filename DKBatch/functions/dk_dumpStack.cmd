@@ -11,8 +11,8 @@ if not defined frame (set /a frame=0)
 if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 
 :dk_dumpStack
+::setlocal
     %dk_call% dk_debugFunc 1 99
- ::setlocal
 (   
     setlocal DisableDelayedExpansion
     if %frame% neq 0 (goto) 2>nul & (goto) 2>nul
@@ -85,15 +85,17 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 %endfunction%
 
 :call_return
+::setlocal
 	::call dk_dkebugFunc 0
- ::setlocal	
+
  
     call :dk_dumpStackReturn
 %endfunction%
 
 :dk_dumpStackReturn
+::setlocal
 	::call dk_dkebugFunc 0
- ::setlocal	
+	
  
     endlocal
     %caller[1].fullpath% %caller[1].args%
@@ -105,8 +107,9 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+::setlocal
     %dk_call% dk_debugFunc 0
- ::setlocal
+
  
     call :DKTEST_main
     %endfunction%

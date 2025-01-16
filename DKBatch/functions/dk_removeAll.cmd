@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_removeAll()
 ::#
 :dk_removeAll
- setlocal
+setlocal
     %dk_call% dk_debugFunc 0
     
     if "%1" equ "wipe" goto wipe

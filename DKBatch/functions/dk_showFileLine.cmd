@@ -18,9 +18,9 @@ setlocal
     set /a "line=%~2" || for /f "delims=:" %%a in ('findstr /n /c:"%~2" "%_filepath_%"') do set "line=%%a"
     
     echo [91m  File: %_filepath_%: !line! [0m
-    set /A n=1
-    set /A min=!line!-15
-    set /A max=!line!+15
+    set /a n=1
+    set /a min=!line!-15
+    set /a max=!line!+15
     for /f "delims=" %%a in ('findstr /n /r /c:"^" "%_filepath_%"') do (
         if !n! LSS !max! (
             if !n! GTR !min! (
@@ -43,8 +43,9 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
     %dk_call% dk_debugFunc 0
-  setlocal
+
   
     %dk_call% dk_showFileLine "../../README.md" 302
     %dk_call% dk_showFileLine "../../README.md" "How to build"

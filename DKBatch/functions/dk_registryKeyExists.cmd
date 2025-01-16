@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :: dk_registryKeyExists() <reg_path>
 ::
 :dk_registryKeyExists
- setlocal
+setlocal
     %dk_call% dk_debugFunc 1 2
 
     "%SystemRoot%\System32\reg.exe" query "%~1" >nul 2>&1

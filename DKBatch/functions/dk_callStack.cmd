@@ -146,14 +146,14 @@ if ":" == "%func:~0,1%" ( goto %func% )
     if not defined BATCH_ARGV[0]   set "BATCH_ARGV[0]=%BATCH_ARGV_B%"
     if not defined BATCH_ARGC[0] (
         set "BATCH_ARGC[0]=0"
-        for %%x in (%BATCH_ARGV[0]%) do set /A BATCH_ARGC[0]+=1
+        for %%x in (%BATCH_ARGV[0]%) do set /a BATCH_ARGC[0]+=1
     )
     if not defined FUNCNAME[1]     call set "FUNCNAME[1]=%%FUNCNAME_A%%"
     if not defined BATCH_SOURCE[1] set "BATCH_SOURCE[1]=%BATCH_SOURCE_A%"
     if not defined BATCH_ARGV[1]   set "BATCH_ARGV[1]=%BATCH_ARGV_A%"
     if not defined BATCH_ARGC[1] (
         set "BATCH_ARGC[1]=0"
-        for %%x in (%BATCH_ARGV[1]%) do set /A BATCH_ARGC[1]+=1
+        for %%x in (%BATCH_ARGV[1]%) do set /a BATCH_ARGC[1]+=1
     )
 
     rem ### Return to :dk_caller_return label in calling function

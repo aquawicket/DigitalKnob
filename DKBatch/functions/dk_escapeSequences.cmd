@@ -132,8 +132,9 @@ setlocal
 %endfunction%
 
 :ASCII_ADD
+setlocal
     %dk_call% dk_debugFunc 7
- setlocal
+
  
     if "%~1" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 1 is invalid"
     if "%~2" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 2 is invalid"

@@ -14,8 +14,9 @@ if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
 ::#
 ::#
 :dk_keyboard
+setlocal
     ::%dk_call% dk_debugFunc 0
- setlocal
+
  
     echo dk_keyboard %*
     
@@ -98,8 +99,9 @@ if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
     ::%dk_call% dk_debugFunc 0
- setlocal
+
  
     %dk_call% dk_debugFunc 0 || call dk_error "%dk_call% dk_debugFunc failed!"
     

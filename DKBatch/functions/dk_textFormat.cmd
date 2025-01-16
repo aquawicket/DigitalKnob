@@ -8,8 +8,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   
 ::#
 :dk_textFormat
+setlocal
     %dk_call% dk_debugFunc 4 99
- setlocal
  
     set "spaces=                                        "
     set "col1=%~2%spaces%"

@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_sudo
- setlocal
+setlocal
     %dk_call% dk_debugFunc 1 99
     
     @echo Set objShell = CreateObject("Shell.Application") > %temp%\sudo.tmp.vbs

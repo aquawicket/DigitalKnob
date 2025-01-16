@@ -8,8 +8,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_messageBox
+setlocal
     %dk_call% dk_debugFunc 3
- setlocal  
+
  
     set "title=%~1"
     set "message=%~3"

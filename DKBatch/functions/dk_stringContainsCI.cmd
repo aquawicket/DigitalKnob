@@ -34,8 +34,9 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
     %dk_call% dk_debugFunc 0
-  setlocal   
+   
     ::###### Using if return value
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a NeEdLe in this haystack"

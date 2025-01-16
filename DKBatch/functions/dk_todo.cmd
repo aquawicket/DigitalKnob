@@ -9,8 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    @message - The message to print
 ::#
 :dk_todo
+setlocal
     %dk_call% dk_debugFunc 0 1
- setlocal
+
  
     %dk_call% dk_log TODO "%~1"
 %endfunction%

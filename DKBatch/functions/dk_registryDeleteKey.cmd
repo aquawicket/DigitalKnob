@@ -38,7 +38,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::    Deletes the registry value MTU under MyCo on ZODIAC
 ::
 :dk_registryDeleteKey
- setlocal
+setlocal
     %dk_call% dk_debugFunc 1
 
     %dk_call% dk_registryKeyExists "%~1" || %dk_call% dk_warning "%~1 does not exist"

@@ -9,8 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#     @msg    - The message to print
 ::#
 :dk_echoNNL
+setlocal
     %dk_call% dk_debugFunc 0 1
- setlocal
+
  
 	if "%~1" equ "" (goto:eof)   
     set "_message_=%~1" 

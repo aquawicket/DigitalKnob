@@ -7,8 +7,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 
 :dk_printVar
+setlocal
     ::%dk_call% dk_debugFunc 1
- setlocal
+
+
  ::setlocal enableDelayedExpansion
  ::setlocal disableDelayedExpansion
  ::if "!DE!" equ "" (echo delayed expansion ON) else (echo delayed expansion OFF)
@@ -30,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			:: delayed expansion ON
 			if "!DE!" equ "" %dk_call% dk_echo "%cyan% ARRAY:%~1[%n%] =%blue% !%~1[%n%]! %clr%"
 
-            set /A n+=1
+            set /a n+=1
         goto :loop1 
 	%return%
 
@@ -72,6 +74,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 setlocal
 	%dk_call% dk_debugFunc 0
+
 
     set "myVarA=This is a variable"
     %dk_call% dk_printVar myVarA

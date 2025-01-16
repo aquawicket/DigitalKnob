@@ -6,8 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_findProgram
+setlocal
     %dk_call% dk_debugFunc 2 9 
- setlocal
+
  
     set "VAR=%~1"
     set "VAL=!%VAR%!"
@@ -34,6 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 setlocal
 	%dk_call% dk_debugFunc 0
+
 
     %dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
     %dk_call% dk_printVar POWERSHELL_EXE

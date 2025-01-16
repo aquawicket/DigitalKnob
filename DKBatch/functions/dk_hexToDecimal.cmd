@@ -12,7 +12,7 @@ setlocal
 
     set "hex=%~1"
     set "decimal="
-    set /A hexToDecimal=0x%hex:~-2%
+    set /a hexToDecimal=0x%hex:~-2%
     endlocal & set "dk_hexToDecimal=%hexToDecimal%"
 %endfunction%
 

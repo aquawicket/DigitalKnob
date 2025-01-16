@@ -5,8 +5,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_getParameter(NAME rtn_var)
 ::#
 :dk_getParameter NAME rtn_var
+setlocal
 	%dk_call% dk_debugFunc 0 99
- setlocal
+
 	
     :getParameter_loop
 	if "%~1" == "%~3" (
@@ -29,17 +30,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
- setlocal
+
  
 	call :TEST_getParameter ARG1 "some data" ARG3 INPUT "input value" some_data "more data"
 !endfunction!
 
 
 :TEST_getParameter ARG1 ARG2 ARG3 ARG4
+setlocal
 	%dk_call% dk_debugFunc 0 99
- setlocal
+
 	
 	!dk_call! dk_getParameter INPUT value %*
 	!dk_call! dk_printVar value

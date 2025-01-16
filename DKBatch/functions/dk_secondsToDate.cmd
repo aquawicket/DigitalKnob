@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_secondsToDate 
+setlocal
     %dk_call% dk_debugFunc 1 7
- setlocal
- 
+
     set /a i=%1
     set /a ss=i%%60
     set /a i/=60

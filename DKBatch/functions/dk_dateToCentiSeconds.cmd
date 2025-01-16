@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_dateToCentiSeconds
+setlocal
     %dk_call% dk_debugFunc 1 9
- setlocal
  
     ::if "%~3" equ "" (set "cs=0")    else (set /a "cs=%~3")
     if "%~3" equ "" (set "cs=0")    else (set /a "cs=100%~3%%100")

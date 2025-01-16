@@ -6,8 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_pinToQuickAccess
+setlocal
     %dk_call% dk_debugFunc 1
-  setlocal
+  
   
 	:: METHOD 1:  call the dk_callDKPowershell function
     %dk_call% dk_callDKPowershell dk_pinToQuickAccess %*

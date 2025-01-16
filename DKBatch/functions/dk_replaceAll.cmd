@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_replaceAll
- setlocal
+setlocal
     %dk_call% dk_debugFunc 4
 
     set "_input_=%~1"

@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# OVERWRITE   - if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 ::#
 :dk_move
- setlocal
+setlocal
     %dk_call% dk_debugFunc 2 3
     
     %dk_call% dk_replaceAll "%~1" "/" "\" _from_

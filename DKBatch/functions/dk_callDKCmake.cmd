@@ -6,8 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_callDKCmake
+setlocal
     %dk_call% dk_debugFunc 1 4
- setlocal
+
 
     %dk_call% dk_validate DKIMPORTS_DIR         "%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_validate CMAKE_EXE             "%dk_call% %DKIMPORTS_DIR%\cmake\dk_install.cmd"

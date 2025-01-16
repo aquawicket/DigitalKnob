@@ -17,8 +17,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::#
 :dk_timer
+setlocal enableDelayedExpansion
 	::%dk_call% dk_debugFunc 0
- setlocal enableDelayedExpansion
 
     ::%dk_call% dk_getTime centisecond second minute hour
     for /f "tokens=1-3 delims=1234567890 " %%a in ("%time%") do set "delims=%%a%%b%%c" 
@@ -52,8 +52,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
     %dk_call% dk_debugFunc 0 
- setlocal
+
  
     %dk_call% dk_timer t1
 

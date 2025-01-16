@@ -6,8 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_cd
+setlocal
     %dk_call% dk_debugFunc 0 1
- setlocal
+
  
 	set "_directory_=%~1"
 	set "_directory_=%_directory_:/=\%"

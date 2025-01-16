@@ -9,11 +9,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_debugFunc 1
  ::setlocal
 
-    set /A "n=0"
+    set /a "n=0"
     :loop1 
     if defined %~1[%n%] (
         set "%~1[%n%]="
-        set /A n+=1
+        set /a n+=1
         goto loop1
     )
 

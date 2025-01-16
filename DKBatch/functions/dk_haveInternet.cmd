@@ -6,8 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# 
 ::#
 :dk_haveInternet
+setlocal
     %dk_call% dk_debugFunc 0 1
- setlocal
+
  
     %ComSpec% /c ping -n 1 8.8.8.8 > nul 2> nul"
     if %ERRORLEVEL% equ 0 (

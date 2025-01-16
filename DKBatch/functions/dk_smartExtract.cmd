@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_smartExtract
-    call dk_debugFunc 2
- setlocal
- 
+setlocal
+    %dk_call% dk_debugFunc 2
+
     set "src=%~1"
     set "dest=%~2"
     
@@ -58,11 +58,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "file_count=%dk_length%"
     ::%dk_call% dk_printVar file_count
     
-    if %dir_count% equ 1 if %file_count% equ 0 (
-        rem rename/move EXTRACTED/root folder to dest path"
-        %dk_call% dk_move "%dk_getDirectories[0]%" "%dest_realpath%" OVERWRITE
-		if exist "%src_extractPath%"  %dk_call% dk_delete "%src_extractPath%"
-        goto:eof
+    if %dir_count% equ 1 (
+		if %file_count% equ 0 (
+			rem rename/move EXTRACTED/root folder to dest path"
+			%dk_call% dk_move "%dk_getDirectories[0]%" "%dest_realpath%" OVERWRITE
+			if exist "%src_extractPath%"  %dk_call% dk_delete "%src_extractPath%"
+			goto:eof
+		)
     )
 
     :: rename/move EXTRACTED folder to dest path"
@@ -75,9 +77,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-    call dk_debugFunc 0
- setlocal
-	
+setlocal
+    %dk_call% dk_debugFunc 0
+
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_download "https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "%DKDOWNLOAD_DIR%\sdl-release-2.26.1.zip"
 	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\sdl-release-2.26.1.zip" "%DKDOWNLOAD_DIR%\sdl-release-2.26.1"

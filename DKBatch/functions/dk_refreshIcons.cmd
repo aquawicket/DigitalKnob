@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_refreshIcons()
 ::#
 :dk_refreshIcons
- setlocal
+setlocal
     echo Refreshing windows icons
 
     :: for window

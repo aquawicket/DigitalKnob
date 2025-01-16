@@ -44,8 +44,10 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+setlocal
     %dk_call% dk_debugFunc 0
-  setlocal   
+
+
     ::###### Using if return value
     %dk_call% dk_echo
     set "childPath=C:\Program Files\Internet Explorer\en-US"
