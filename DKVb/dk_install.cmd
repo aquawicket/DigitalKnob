@@ -45,18 +45,18 @@ if "%*" == "" (goto dk_install)
 	
 	::###### Install DKVb ######
 	%dk_call% dk_echo "Installing DKVb . . ."
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs
 	set "DKVB_FUNCTIONS_DIR=..\DKVb\functions"
 	::set "WSCRIPT_EXE=%SystemRoot%\System32\WScript.exe"
 	set "CSCRIPT_EXE=%SystemRoot%\System32\CScript.exe"
 	
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKVb"
+	%dk_call% dk_registryDeleteKey "HKCR\DKVb"
 	ftype DKVb=%COMSPEC% /c call "%~f0" "%DKVB_FUNCTIONS_DIR%" "%CSCRIPT_EXE%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKVb\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
+	%dk_call% dk_registrySetKey "HKCR\DKVb\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.vbs"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs"
+	%dk_call% dk_registryDeleteKey "HKCR\.vbs"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs"
 	assoc .vbs=DKVb
 	
 	%dk_call% dk_success "DKVb install complete"

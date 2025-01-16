@@ -28,7 +28,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
    
-	set "key=HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
+	set "key=HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
 	set "exe=%comspec%"
    
     %dk_call% dk_registryContains "%key%" "%exe%" && (

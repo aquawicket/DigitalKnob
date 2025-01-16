@@ -50,14 +50,14 @@ if "%~1" == "" (goto dk_install)
 	%dk_call% dk_validate PHP_EXE "%dk_call% dk_PHP_EXE"
 	
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPhp"
+	%dk_call% dk_registryDeleteKey "HKCR\DKPhp"
 	
 ::	%dk_call% dk_validate COMSPEC "%dk_call% dk_COMSPEC"
 	ftype DKPhp=%COMSPEC% /c call "%~f0" "%DKPHP_FUNCTIONS_DIR%" "%PHP_EXE%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKPhp\DefaultIcon" "" "REG_SZ" "%PHP_EXE%"
+	%dk_call% dk_registrySetKey "HKCR\DKPhp\DefaultIcon" "" "REG_SZ" "%PHP_EXE%"
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.php"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.php"
+	%dk_call% dk_registryDeleteKey "HKCR\.php"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.php"
 	assoc .php=DKPhp
 	
 	%dk_call% dk_success "DKPhp install complete"

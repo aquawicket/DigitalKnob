@@ -50,14 +50,14 @@ if "%~1" == "" (goto dk_install)
 	%dk_call% dk_validate PYTHON_EXE "%dk_call% dk_PYTHON_EXE"
 	
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPython"
+	%dk_call% dk_registryDeleteKey "HKCR\DKPython"
 	
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
 	ftype DKPython=%COMSPEC% /c call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON_EXE%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKPython\DefaultIcon" "" "REG_SZ" "%PYTHON_EXE%"
+	%dk_call% dk_registrySetKey "HKCR\DKPython\DefaultIcon" "" "REG_SZ" "%PYTHON_EXE%"
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.py"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.py"
+	%dk_call% dk_registryDeleteKey "HKCR\.py"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.py"
 	assoc .py=DKPython
 	
 	%dk_call% dk_success "DKPython install complete"

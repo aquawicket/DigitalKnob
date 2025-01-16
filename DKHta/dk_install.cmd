@@ -39,7 +39,7 @@ if "%~1" == "" (goto dk_install)
 	%dk_call% dk_printVar MSHTA_EXE
     set "DKHTA_FUNCTIONS_DIR=..\DKHta\functions"
 
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKHta"
+	%dk_call% dk_registryDeleteKey "HKCR\DKHta"
     ::ftype DKHta=%WINDIR%\SysWOW64\mshta.exe "%1" {1E460BD7-F1C3-4B2E-88BF-4E770A288AF5}%U{1E460BD7-F1C3-4B2E-88BF-4E770A288AF5} %*
 	
 	set "CMD_EXE=%COMSPEC%"
@@ -47,10 +47,10 @@ if "%~1" == "" (goto dk_install)
 	%dk_call% dk_printVar CMD_EXE
 ::	ftype DKHta=%CMD_EXE% /c call "%~f0" "%DKHTA_FUNCTIONS_DIR%" "%MSHTA_EXE%" "%%1" %*
 	ftype DKHta=%MSHTA_EXE% "%%1" %*
-    %dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKHta\DefaultIcon" "" "REG_SZ" "%MSHTA_EXE%"
+    %dk_call% dk_registrySetKey "HKCR\DKHta\DefaultIcon" "" "REG_SZ" "%MSHTA_EXE%"
 
-    %dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.hta"
-    %dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.hta"
+    %dk_call% dk_registryDeleteKey "HKCR\.hta"
+    %dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.hta"
     assoc .hta=DKHta
 
     %dk_call% dk_success "DKHta install complete"

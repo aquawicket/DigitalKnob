@@ -11,6 +11,19 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://mirrors.cloud.tencent.com/AndroidSDK/
 # https://android.googlesource.com/platform/ndk/+/refs/heads/ndk-release-r21/docs/BuildSystemMaintainers.md
 # https://androidsdkoffline.blogspot.com/p/android-ndk-side-by-side-direct-download.html
+# https://github.com/jzinferno2/termux-ndk/releases
+
+### r17c ###
+#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r17c-aarch64.zip)
+
+### r18b ###
+#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r18b-aarch64.zip)
+
+### r19c ###
+#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r19c-aarch64.zip)
+
+### r20b ###
+#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r20b-aarch64.zip)
 
 ### r21e ###
 #dk_set(ANDROID_NDK_VERSION 	r21e)
@@ -18,6 +31,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip)
 #dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg)
 #dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip)
+#dk_set(ANDROID_NDK_ANDROID_DL	https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r21e-aarch64.zip)
 
 ### r22b ###
 #dk_set(ANDROID_NDK_VERSION 	r22b)
@@ -25,6 +39,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)
 #dk_set(ANDROID_NDK_MAC_DL 		http://mirrors.cloud.tencent.com/AndroidSDK/android-ndk-r22b-darwin-x86_64.zip)
 #dk_set(ANDROID_NDK_LINUX_DL 	http://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip)
+#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r22b-aarch64.zip)
 
 ### r23b ###
 #dk_set(ANDROID_NDK_VERSION 	r23b)
@@ -32,6 +47,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r23b-windows.zip)
 #dk_set(ANDROID_NDK_MAC_DL 		http://dl.google.com/android/repository/android-ndk-r23b-darwin.zip)
 #dk_set(ANDROID_NDK_LINUX_DL 	http://dl.google.com/android/repository/android-ndk-r23b-linux.zip)
+#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r23b-aarch64.zip)
 
 ### r23c ###
 #dk_set(ANDROID_NDK_VERSION		r23c)
@@ -40,7 +56,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip)
 #dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r23c-linux.zip)
 #dk_set(ANDROID_NDK_ANDROID_DL 	https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip)
-#dk_set(ANDROID_NDK_ANDROID_DL  https://www.aquawicket.com/downloads/android-ndk-r23c-aarch64.zip)
 
 ### r24 ###
 #dk_set(ANDROID_NDK_VERSION 	r24)
@@ -48,6 +63,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r24-windows.zip)
 #dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r24-darwin.zip)
 #dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r24-linux.zip)
+#dk_set(ANDROID_NDK_LINUX_DL 	https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r24-aarch64.zip)
 
 ### r25 ###
 #dk_set(ANDROID_NDK_VERSION 	r25)

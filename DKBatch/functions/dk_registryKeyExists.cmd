@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#################################################################################
-:: dk_registryKeyExists() <reg_path>
+:: dk_registryKeyExists(reg_path) 
 ::
 :dk_registryKeyExists
 setlocal
@@ -28,7 +28,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
    
-    %dk_call% dk_registryKeyExists "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt" && %dk_call% dk_info "key exists" || %dk_call% dk_info "key does NOT exist"
-    %dk_call% dk_registryKeyExists "HKEY_CURRENT_USER\SOFTWARE\NonExistentKey" && %dk_call% dk_info "key exists" || %dk_call% dk_info "key does NOT exist"
-	%dk_call% dk_registryKeyExists "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\QEMU" && %dk_call% dk_info "qemu is installed" || %dk_call% dk_info "qemu is NOT installed"
+    %dk_call% dk_registryKeyExists "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt" 	&& %dk_call% dk_info "key exists" || %dk_call% dk_info "key does NOT exist"
+    %dk_call% dk_registryKeyExists "HKCU\SOFTWARE\NonExistentKey" 											&& %dk_call% dk_info "key exists" || %dk_call% dk_info "key does NOT exist"
+	%dk_call% dk_registryKeyExists "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\QEMU" 			&& %dk_call% dk_info "qemu is installed" || %dk_call% dk_info "qemu is NOT installed"
 %endfunction%

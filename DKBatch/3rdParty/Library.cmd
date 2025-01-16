@@ -3109,13 +3109,13 @@ goto:eof
 
 :# Get the default console code page
 :GetOEMCP %1=variable name
-set "CP_KEY=HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nls\CodePage"
+set "CP_KEY=HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage"
 for /f "tokens=3" %%p in ('reg query "%CP_KEY%" /v "OEMCP" ^| findstr REG_SZ') do set "%1=%%p"
 goto:eof
 
 :# Get the default system code page
 :GetACP %1=variable name
-set "CP_KEY=HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nls\CodePage"
+set "CP_KEY=HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage"
 for /f "tokens=3" %%p in ('reg query "%CP_KEY%" /v "ACP" ^| findstr REG_SZ') do set "%1=%%p"
 goto:eof
 

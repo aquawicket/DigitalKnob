@@ -63,7 +63,7 @@ dk_exportVars(PATH "${PYTHON3};$ENV{PATH}")
 ### 3RDPARTY LINK ###
 dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interpreter=${PYTHON3_EXE})
 
-
+dk_firewallAllow("Python3" "${PYTHON3_EXE}")
 
 dk_assertPath("${PYTHON3}")
 dk_assertPath("${PYTHON3_EXE}")

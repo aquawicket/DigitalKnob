@@ -15,22 +15,22 @@ setlocal
     %dk_call% dk_info "Uninstalling '%_menuTitle_%' context menu"
     
     ::### delete existing key ###
-    %dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%"
+    %dk_call% dk_registryDeleteKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%"
     
     ::### Menu Title ###
-    ::%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" "" "" "&%_menuTitle_%"
-    ::echo REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
-    ::REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
+    ::%dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%" "" "" "&%_menuTitle_%"
+    ::echo REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
+    ::REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
     
     ::### ICON ###
-    ::%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
-::  echo REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
-::  REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
+    ::%dk_call% dk_registrySetKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
+::  echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
+::  REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
     
     ::### COMMAND <args> ###
-    ::%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%\command" "" "" "%_command_%"
-::  echo REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
-::  REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+    ::%dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%\command" "" "" "%_command_%"
+::  echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+::  REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
 %endfunction%
 
 

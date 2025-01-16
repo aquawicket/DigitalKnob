@@ -14,9 +14,14 @@ dk_validate(host_triple "dk_host_triple()")
 dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 
+
+
+
 #############################################################################################################
 # C:/Program Files (x86)/Microsoft Visual Studio    /2022      /BuildTools    /VC/Tools/MSVC   /14.42.34433
 # 				${VS_INSTALL_PATH}               ${VS_YEAR}     ${VS_TYPE}					   ${VS_VERSION}
+#
+# https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history
 
 #dk_set(VS_INSTALL_PATH		"${DKTOOLS_DIR}/VS")
 #dk_set(VS_CACHE_PATH		"${DKDOWNLOAD_DIR}/VS")

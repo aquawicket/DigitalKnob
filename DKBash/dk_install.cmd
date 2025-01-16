@@ -49,7 +49,7 @@ if "%~1" == "" (goto dk_install)
 	::%dk_call% dk_validate GITBASH_EXE "%dk_call% dk_installGit"
 	%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"
+	%dk_call% dk_registryDeleteKey "HKCR\DKBash"
 
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
@@ -57,11 +57,11 @@ if "%~1" == "" (goto dk_install)
 
 	::ftype DKBash=%COMSPEC% /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%BASH_EXE%" "%%1" %*
 	
-	::%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
-	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"
+	::%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
+	%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.sh"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh"
+	%dk_call% dk_registryDeleteKey "HKCR\.sh"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh"
 	assoc .sh=DKBash
 	
 	%dk_call% dk_success "DKBash install complete"

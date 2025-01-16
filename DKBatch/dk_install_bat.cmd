@@ -12,16 +12,16 @@ if "%~1" neq ""    goto runDKBat
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBat"
+	%dk_call% dk_registryDeleteKey "HKCR\DKBat"
 	
 	:: Set the registry entry for the exxtension
 	ftype DKBat="%COMSPEC%" /c if exist "%~f0" ^
 	(echo installed ^& "%COMSPEC%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%COMSPEC%" "%DKCACHE_DIR%" "%%1" %%*) else ^
 	(echo not installed ^& "%%1" %%*)
 	
-	%dk_call% dk_registrySetKey    "HKEY_CLASSES_ROOT\DKBat\DefaultIcon" "" "REG_SZ" "%ComSpec%"
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.bat"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat"
+	%dk_call% dk_registrySetKey    "HKCR\DKBat\DefaultIcon" "" "REG_SZ" "%ComSpec%"
+	%dk_call% dk_registryDeleteKey "HKCR\.bat"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat"
 	assoc .bat=DKBat
 	
 	%dk_call% dk_success "DKBat install complete"

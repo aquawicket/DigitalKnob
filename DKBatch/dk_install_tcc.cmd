@@ -13,11 +13,11 @@ if "%~1" neq "" goto runDKBatch
 	%dk_call% dk_findProgram TCC_EXE "tcc.exe" "%DKTOOLS_DIR%"
 	%dk_call% dk_set ComSpec %TCC_EXE%
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
+	%dk_call% dk_registryDeleteKey "HKCR\DKBatch"
 	ftype DKBatch="%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%%1" %%*
-	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "%ComSpec%"
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
+	%dk_call% dk_registrySetKey "HKCR\DKBatch\DefaultIcon" "" "REG_SZ" "%ComSpec%"
+	%dk_call% dk_registryDeleteKey "HKCR\.cmd"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
 	assoc .cmd=DKBatch
 	
 	%dk_call% dk_success "DKBatch install complete"

@@ -43,12 +43,12 @@ setlocal
 	
 	echo:
 	echo ############ Remove Context menus ############
-	::%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\GIT ADD"
+	::%dk_call% dk_registryDeleteKey "HKCR\AllFilesystemObjects\shell\GIT ADD"
 	
 	echo:
 	echo ############ Remove Other registry entries ############
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\Applications\bash.exe"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\Software\Classes\Applications\bash.exe"
+	%dk_call% dk_registryDeleteKey "HKCR\Applications\bash.exe"
+	%dk_call% dk_registryDeleteKey "HKCU\Software\Classes\Applications\bash.exe"
 	
 	echo:
 	echo ############ Restore Defaults ############
@@ -63,13 +63,13 @@ setlocal
 
 :dk_removeFtype ftype_name
 	(ftype %~1=)
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\%~1"
+	%dk_call% dk_registryDeleteKey "HKCR\%~1"
 %endfunction%
 
 :dk_removeAssoc assoc_ext
 	(assoc %~1=)
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\%~1"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%~1"
+	%dk_call% dk_registryDeleteKey "HKCR\%~1"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%~1"
 	call: dk_restoreDefault %~1
 %endfunction%
 

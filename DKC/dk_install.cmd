@@ -139,11 +139,11 @@ if "%~1" == "" (goto :dk_install)
 	%dk_call% dk_assertVar COMPILER_EXE
 	%dk_call% dk_printVar COMPILER_EXE
 
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKC"
+	%dk_call% dk_registryDeleteKey "HKCR\DKC"
 	ftype DKC=%COMSPEC% /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.c"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.c"
+	%dk_call% dk_registryDeleteKey "HKCR\.c"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.c"
 	assoc .c=DKC
 	
 	%dk_call% dk_success "DKC install complete"

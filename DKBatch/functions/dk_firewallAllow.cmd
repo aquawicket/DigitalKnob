@@ -13,7 +13,7 @@ setlocal
 	
 	%dk_call% dk_assertPath "%~2"
 	
-	%dk_call% dk_registryContains "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%~2" && (
+	%dk_call% dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%~2" && (
 		%dk_call% dk_warning "registry already contains a firewall rule for %~2"
 		exit /b 0
 	)

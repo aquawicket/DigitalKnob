@@ -133,11 +133,11 @@ if "%~1" == "" (goto dk_install)
 	%dk_call% dk_assertVar COMPILER_EXE
 	%dk_call% dk_printVar COMPILER_EXE
 
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
+	%dk_call% dk_registryDeleteKey "HKCR\DKCpp"
 	ftype DKCpp=%COMSPEC% /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cpp"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp"
+	%dk_call% dk_registryDeleteKey "HKCR\.cpp"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp"
 	assoc .cpp=DKCpp
 	
 	%dk_call% dk_success "DKCpp install complete"

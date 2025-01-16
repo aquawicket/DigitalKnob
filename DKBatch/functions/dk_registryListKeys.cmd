@@ -22,5 +22,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
    
-    %dk_call% dk_registryListKeys "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
+    %dk_call% dk_registryListKeys "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
 %endfunction%

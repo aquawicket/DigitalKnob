@@ -1,23 +1,23 @@
 Windows Registry Editor Version 5.00
-;@(cls & %__AppDir__%reg.exe import "%~f0" & goto :eof)
+;@(cls & %__AppDir__%reg.exe import "%~f0" & pause & goto :eof)
 
-[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat]
-[-HKEY_CURRENT_USER\Software\Classes\.bat]
-[-HKEY_CURRENT_USER\SOFTWARE\Classes\batfile]
+[-HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat]
+[-HKCU\Software\Classes\.bat]
+[-HKCU\SOFTWARE\Classes\batfile]
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\.bat]
+[HKLM\SOFTWARE\Classes\.bat]
 @="batfile"
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\batfile\shell\open\command]
+[HKLM\SOFTWARE\Classes\batfile\shell\open\command]
 @="\"%1\" %*"
 
 
-[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd]
-[-HKEY_CURRENT_USER\Software\Classes\.cmd]
-[-HKEY_CURRENT_USER\SOFTWARE\Classes\cmdfile]
+[-HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd]
+[-HKCU\Software\Classes\.cmd]
+[-HKCU\SOFTWARE\Classes\cmdfile]
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\.cmd]
+[HKLM\SOFTWARE\Classes\.cmd]
 @="cmdfile"
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\cmdfile\shell\open\command]
+[HKLM\SOFTWARE\Classes\cmdfile\shell\open\command]
 @="\"%1\" %*"

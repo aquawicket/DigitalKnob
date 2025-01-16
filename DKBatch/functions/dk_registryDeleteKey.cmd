@@ -55,5 +55,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt"
+    %dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt"
 %endfunction%

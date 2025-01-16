@@ -4,9 +4,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 :dk_uninstall
 	ftype DKC=
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKC"
+	%dk_call% dk_registryDeleteKey "HKCR\DKC"
 	
 	assoc .c=
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.c"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.c"
+	%dk_call% dk_registryDeleteKey "HKCR\.c"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.c"
 %endfunction%

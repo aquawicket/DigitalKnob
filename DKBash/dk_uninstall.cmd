@@ -4,9 +4,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 :uninstall
 	ftype DKBash=
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"
+	%dk_call% dk_registryDeleteKey "HKCR\DKBash"
 	
 	assoc .sh=
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.sh"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh"
+	%dk_call% dk_registryDeleteKey "HKCR\.sh"
+	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh"
 %endfunction%
