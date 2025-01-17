@@ -1,7 +1,28 @@
-# TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
-
+#!/bin/python
 import __main__
 import os
+import sys
+import platform
+
+DKSCRIPT_PATH = __main__.__file__
+
+#[ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
+
+### Print Shell Path ad Version ###
+ESC=""  # escape character
+DKSHELL="PYTHON"
+DKSHELL_VERSION = platform.python_version()
+DKSHELL_PATH = sys.executable
+print("")
+print(ESC+"[45m"+ESC+"[10m "+DKSHELL+" Version "+DKSHELL_VERSION+" "+ESC+"[0m")
+print("DKSHELL_PATH  = "+DKSHELL_PATH)
+print("DKSCRIPT_PATH = "+DKSCRIPT_PATH)
+print("")
+
+
+# TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
+
+
 
 DKSCRIPT_PATH = __main__.__file__
 print("DKSCRIPT_PATH = "+DKSCRIPT_PATH)

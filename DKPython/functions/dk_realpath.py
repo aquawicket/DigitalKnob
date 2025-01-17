@@ -1,3 +1,7 @@
+debug = True
+import sys 
+sys.path.append(".")
+
 import DK
 import os 
 

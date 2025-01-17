@@ -3,21 +3,32 @@ if "%~1" == "" (goto dk_install)
 
 :runDKPython
 	set "DKPYTHON_FUNCTIONS_DIR=%~1"
-	set "PYTHON_EXE=%~2"
+	set "PYTHON3_EXE=%~2"
 	set "DKSCRIPT_PATH=%~3"
 	
+	::echo DKPYTHON_FUNCTIONS_DIR = %DKPYTHON_FUNCTIONS_DIR%
+	::echo PYTHON3_EXE = %PYTHON3_EXE%
+	::echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
+	::echo:
+	
 	::###### run script ######
-	%COMSPEC% /V:ON /K call %PYTHON_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	::title %DKSCRIPT_PATH%
+	::(set PATH=%DKPYTHON_FUNCTIONS_DIR%;%PATH% & 
+	(set cmnd=%COMSPEC% /V:ON /k call "%PYTHON3_EXE%" "%DKSCRIPT_PATH%")
+	::echo %cmnd%
+	::echo:
+	::echo:
+	%cmnd%
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
-	
+	pause
 	::###### reload ######
 ::	if not exist %~dp0\reload goto:eof
 ::	del %~dp0\reload
 ::	cls
 ::	goto runDKPython
-%endfunction%
+exit /b 0
 
 
 
@@ -46,18 +57,14 @@ if "%~1" == "" (goto dk_install)
 	::###### Install DKPython ######
 	%dk_call% dk_echo "Installing DKPython . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% dk_validate PYTHON_EXE "call %DKIMPORTS_DIR%\powershell\dk_install.cmd"
-	%dk_call% dk_validate PYTHON_EXE "%dk_call% dk_PYTHON_EXE"
-	
-	
-	%dk_call% dk_registryDeleteKey "HKCR\DKPython"
-	
+	%dk_call% dk_validate PYTHON3_EXE "%dk_call% %DKIMPORTS_DIR%\python3\dk_install.cmd"
+::	echo PYTHON3_EXE = %PYTHON3_EXE%
+::	%dk_call% dk_registryDeleteKey "HKCR\DKPython"
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
-	ftype DKPython=%COMSPEC% /c call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON_EXE%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR\DKPython\DefaultIcon" "" "REG_SZ" "%PYTHON_EXE%"
-	
-	%dk_call% dk_registryDeleteKey "HKCR\.py"
-	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.py"
+	ftype DKPython=%COMSPEC% /c call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON3_EXE%" "%%1" %*
+	%dk_call% dk_registrySetKey "HKCR\DKPython\DefaultIcon" "" "REG_SZ" "%PYTHON3_EXE%"	
+::	%dk_call% dk_registryDeleteKey "HKCR\.py"
+::	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.py"
 	assoc .py=DKPython
 	
 	%dk_call% dk_success "DKPython install complete"

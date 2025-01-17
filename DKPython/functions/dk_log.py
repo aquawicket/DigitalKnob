@@ -1,5 +1,12 @@
+debug = True
+import sys 
+sys.path.append(".")
+
 import DK
 import os 
+
+
+print(os.environ.get('COMSPEC', 'default_value'))
 
 ENABLE_dk_log=1
 
@@ -25,5 +32,4 @@ def dk_log(message):
     
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######   
 def DKTEST():
- 
-DKTEST()
+    DKTEST()

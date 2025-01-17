@@ -171,7 +171,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	rem ############### PLUGIN_IMPORT VARIABLES ###############
 	rem #######################################################
 	if not defined IMPORT_PATH  set "IMPORT_PATH=%CD%"
-	rem %dk_call% dk_printVar IMPORT_PATH
+	if "%IMPORT_PATH:~-1%"=="\" set "IMPORT_PATH=%IMPORT_PATH:~0,-1%"
+	%dk_call% dk_printVar IMPORT_PATH
 
 rem ### PLUGIN_IMPORT ###
 	set "PLUGIN_IMPORT="
