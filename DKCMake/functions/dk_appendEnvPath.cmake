@@ -12,9 +12,8 @@ function(dk_appendEnvPath)
 	set(inputPath ${ARGV0})
 	
 	dk_assertPath(inputPath)
-	#if(WIN32)
-		dk_getNativePath("${inputPath}" nativePath)
-	#endif()
+
+	dk_getNativePath("${inputPath}" nativePath)
 	
 	#dk_printVar(ENV{PATH})
 	string(FIND "$ENV{PATH}" "${nativePath}" hasPath)

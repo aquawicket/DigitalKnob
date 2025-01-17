@@ -10,14 +10,13 @@ setlocal
     %dk_call% dk_debugFunc 4
 
     set "_input_=%~1"
-    if "!DE!" equ "" set "_output_=!_input_:%~2=%~3!"
-    if "!DE!" neq "" call set "_output_=%%_input_:%~2=%~3%%"
-	
-endlocal & set "%4=%_output_%"
-
+    set "_output_=!_input_:%~2=%~3!"
+	endlocal & set "%4=%_output_%"
 ::Debug
 ::	%dk_call% dk_printVar %4
 %endfunction%
+
+
 
 
 
