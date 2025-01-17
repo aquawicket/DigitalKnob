@@ -33,7 +33,7 @@ else()
 endif()
 
 
-if(NOT EXISTS ${PYTHON3_EXE})
+if(NOT EXISTS "${PYTHON3_EXE}")
 	if(MAC_HOST OR WIN_HOST)
 		dk_import("${PYTHON3_IMPORT}")
 	else()

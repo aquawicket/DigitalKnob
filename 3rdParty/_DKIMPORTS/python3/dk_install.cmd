@@ -9,16 +9,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	if defined ANDROID_HOST           set "PYTHON3_IMPORT=python"
+::	if defined ANDROID_HOST           set "PYTHON3_IMPORT=python"
 	if defined WIN_X86_HOST           set "PYTHON3_IMPORT=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip"
 	if defined WIN_X86_64_HOST        set "PYTHON3_IMPORT=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip"
-	if not defined PYTHON3_IMPORT     set "PYTHON3_IMPORT=python3"
+::	if not defined PYTHON3_IMPORT     set "PYTHON3_IMPORT=python3"
 	
-	%dk_call% dk_isUrl %PYTHON3_IMPORT% && (
-		%dk_call% dk_importVariables %PYTHON3_IMPORT% rtn_var
-	)
-	
-	%dk_call% dk_set PYTHON3_EXE "%PYTHON3%\python3.exe"
+	::%dk_call% dk_isUrl %PYTHON3_IMPORT% && (
+		%dk_call% dk_importVariables "%PYTHON3_IMPORT%"
+	::)
+	echo PYTHON3 = %PYTHON3%
+	if exist "%PYTHON3%\python.exe" %dk_call% dk_set PYTHON3_EXE "%PYTHON3%\python.exe"
 	if exist "%PYTHON3_EXE%" %return%
 	
 	::install

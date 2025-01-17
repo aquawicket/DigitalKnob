@@ -129,32 +129,32 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	rem ### PLUGIN_URL
 	set "PLUGIN_URL="
 	set "PLUGIN_URL=%URL%"
-	rem %dk_call% dk_printVar PLUGIN_URL 											&rem PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	%dk_call% dk_printVar PLUGIN_URL 											&rem PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 
 	rem ### PLUGIN_URL_FILENAME
 	set "PLUGIN_URL_FILENAME="
 	%dk_call% dk_basename !PLUGIN_URL! PLUGIN_URL_FILENAME 							
-	rem %dk_call% dk_printVar PLUGIN_URL_FILENAME 									&rem PLUGIN_URL_FILENAME	: master.zip
+	%dk_call% dk_printVar PLUGIN_URL_FILENAME 									&rem PLUGIN_URL_FILENAME	: master.zip
 	
 	rem ### PLUGIN_URL_LIST
 	set "PLUGIN_URL_LIST="
 	%dk_call% dk_replaceAll !PLUGIN_URL!  "/"  ";"  PLUGIN_URL_LIST 					
-	rem %dk_call% dk_printVar PLUGIN_URL_LIST 										&rem PLUGIN_URL_LIST		: https:;github.com;madler;zlib;archive;refs;heads;master.zip
+	%dk_call% dk_printVar PLUGIN_URL_LIST 										&rem PLUGIN_URL_LIST		: https:;github.com;madler;zlib;archive;refs;heads;master.zip
 	
 	rem ### PLUGIN_GIT
 	set "PLUGIN_GIT="
 	%dk_call% dk_includes "!PLUGIN_URL!" "https://github.com" && set "PLUGIN_GIT=1"	
-	rem %dk_call% dk_printVar PLUGIN_GIT 											&rem PLUGIN_GIT				: 1
+	%dk_call% dk_printVar PLUGIN_GIT 											&rem PLUGIN_GIT				: 1
 	
 	rem ### PLUGIN_URL_EXTENSION
 	set "PLUGIN_URL_EXTENSION="
 	%dk_call% dk_getExtension !PLUGIN_URL_FILENAME! PLUGIN_URL_EXTENSION 			
-	rem %dk_call% dk_printVar PLUGIN_URL_EXTENSION 									&rem PLUGIN_URL_EXTENSION	: .zip
+	%dk_call% dk_printVar PLUGIN_URL_EXTENSION 									&rem PLUGIN_URL_EXTENSION	: .zip
 
 	rem ### PLUGIN_URL_FILE
 	set "PLUGIN_URL_FILE="
 	%dk_call% dk_removeExtension !PLUGIN_URL_FILENAME! PLUGIN_URL_FILE 				
-	rem %dk_call% dk_printVar PLUGIN_URL_FILE 										&rem PLUGIN_URL_FILE		: master
+	%dk_call% dk_printVar PLUGIN_URL_FILE 										&rem PLUGIN_URL_FILE		: master
 
 	rem ### PLUGIN_URL_NODE n 
 	%dk_call% dk_listToArray "!PLUGIN_URL_LIST!" PLUGIN_URL_ARRAY
@@ -166,23 +166,23 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "PLUGIN_URL_LENGTH=%dk_length%"
 	rem %dk_call% dk_printVar PLUGIN_URL_LENGTH 									&rem PLUGIN_URL_LENGTH		: 8
 	
-
+		
 	rem #######################################################
 	rem ############### PLUGIN_IMPORT VARIABLES ###############
 	rem #######################################################
 	if not defined IMPORT_PATH  set "IMPORT_PATH=%CD%"
 	rem %dk_call% dk_printVar IMPORT_PATH
-	
+
 rem ### PLUGIN_IMPORT ###
 	set "PLUGIN_IMPORT="
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_includes %IMPORT_PATH% !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1"
-	rem %dk_call% dk_printVar PLUGIN_IMPORT
+	%dk_call% dk_printVar PLUGIN_IMPORT
 	
 rem ### PLUGIN_IMPORT_PATH ###
 	set "PLUGIN_IMPORT_PATH="
 	set "PLUGIN_IMPORT_PATH=%IMPORT_PATH%"				
-	rem %dk_call% dk_printVar PLUGIN_IMPORT_PATH 								& rem PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+	%dk_call% dk_printVar PLUGIN_IMPORT_PATH 								& rem PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 
 rem ### PLUGIN_IMPORT_NAME ###
 	set "PLUGIN_IMPORT_NAME="
@@ -191,18 +191,18 @@ rem ### PLUGIN_IMPORT_NAME ###
 	) else (
 		%dk_call% dk_basename "!PLUGIN_IMPORT_PATH!" PLUGIN_IMPORT_NAME 					
 	)
-	rem %dk_call% dk_printVar PLUGIN_IMPORT_NAME 								& rem PLUGIN_IMPORT_NAME		: zlib
+	%dk_call% dk_printVar PLUGIN_IMPORT_NAME 								& rem PLUGIN_IMPORT_NAME		: zlib
 
 rem ### PLUGIN_IMPORT_NAME_LOWER ###
 	set "PLUGIN_IMPORT_NAME_LOWER="
 	%dk_call% dk_toLower "!PLUGIN_IMPORT_NAME!" PLUGIN_IMPORT_NAME_LOWER
-	rem %dk_call% dk_printVar PLUGIN_IMPORT_NAME_LOWER				         	& rem PLUGIN_IMPORT_NAME_LOWER	: zlib
+	%dk_call% dk_printVar PLUGIN_IMPORT_NAME_LOWER				         	& rem PLUGIN_IMPORT_NAME_LOWER	: zlib
 	
 rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	set "PLUGIN_IMPORT_NAME_UPPER="
 	%dk_call% dk_toUpper "!PLUGIN_IMPORT_NAME!" PLUGIN_IMPORT_NAME_UPPER
-	rem %dk_call% dk_printVar PLUGIN_IMPORT_NAME_UPPER							& rem PLUGIN_IMPORT_NAME_UPPER	: ZLIB
-	
+	%dk_call% dk_printVar PLUGIN_IMPORT_NAME_UPPER							& rem PLUGIN_IMPORT_NAME_UPPER	: ZLIB
+		
 	rem ##############################################
 	rem ############ PLUGIN_GIT VARIABLES ############
 	rem ##############################################
@@ -211,17 +211,17 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 		set "PLUGIN_GIT_FILENAME="
         %dk_call% Array::dk_at PLUGIN_URL_ARRAY 3
 		set "PLUGIN_GIT_FILENAME=!dk_at!"							
-		rem %dk_call% dk_printVar PLUGIN_GIT_FILENAME 							&rem PLUGIN_GIT_FILENAME		: zlib
+		%dk_call% dk_printVar PLUGIN_GIT_FILENAME 							&rem PLUGIN_GIT_FILENAME		: zlib
 		
 		rem ### PLUGIN_GIT_NAME
 		set "PLUGIN_GIT_NAME="
 		%dk_call% dk_replaceAll "!PLUGIN_GIT_FILENAME!" ".git" "" PLUGIN_GIT_NAME 			
-		rem %dk_call% dk_printVar PLUGIN_GIT_NAME 								&rem PLUGIN_GIT_NAME			: zlib
+		%dk_call% dk_printVar PLUGIN_GIT_NAME 								&rem PLUGIN_GIT_NAME			: zlib
 		
 		rem ### PLUGIN_GIT_NAME_LOWER
 		set "PLUGIN_GIT_NAME_LOWER="
 		%dk_call% dk_toLower "!PLUGIN_GIT_NAME!" PLUGIN_GIT_NAME_LOWER
-		rem %dk_call% dk_printVar PLUGIN_GIT_NAME_LOWER						    & rem PLUGIN_GIT_NAME_LOWER		: zlib
+		%dk_call% dk_printVar PLUGIN_GIT_NAME_LOWER						    & rem PLUGIN_GIT_NAME_LOWER		: zlib
 		
 		rem ### PLUGIN_GIT_BRANCH
 		set "PLUGIN_GIT_BRANCH="
@@ -241,7 +241,6 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 		)
 	)
 
-	
 	rem ##################################################
 	rem ############ PLUGIN_INSTALL VARIABLES ############
 	rem ##################################################
@@ -284,7 +283,8 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 			set "PLUGIN_INSTALL_VERSION=!PLUGIN_INSTALL_VERSION:~1!"
 		)  
 	)    
-	:: %dk_call% dk_printVar PLUGIN_INSTALL_VERSION 							&rem PLUGIN_INSTALL_VERSION		: master
+	%dk_call% dk_printVar PLUGIN_INSTALL_VERSION 							&rem PLUGIN_INSTALL_VERSION		: master
+
 
 	rem ### PLUGIN_INSTALL_FOLDER
 	set "PLUGIN_INSTALL_FOLDER="
@@ -295,7 +295,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	) else ( 
 		set "PLUGIN_INSTALL_FOLDER=!PLUGIN_INSTALL_NAME!"
 	)  
-	:: %dk_call% dk_printVar PLUGIN_INSTALL_FOLDER 								&rem PLUGIN_INSTALL_FOLDER		: zlib-master
+	%dk_call% dk_printVar PLUGIN_INSTALL_FOLDER 								&rem PLUGIN_INSTALL_FOLDER		: zlib-master
 
 	rem ### PLUGIN_INSTALL_ROOT
 	set "PLUGIN_INSTALL_ROOT="
@@ -306,7 +306,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 		%dk_call% dk_assertPath DK3RDPARTY_DIR
 		set "PLUGIN_INSTALL_ROOT=!DK3RDPARTY_DIR!"
 	)
-	:: %dk_call% dk_printVar PLUGIN_INSTALL_ROOT 								&rem PLUGIN_INSTALL_ROOT		: C:\Users\Administrator\digitalknob\Development\3rdParty
+	%dk_call% dk_printVar PLUGIN_INSTALL_ROOT 								&rem PLUGIN_INSTALL_ROOT		: C:\Users\Administrator\digitalknob\Development\3rdParty
 	
 	rem ### PLUGIN_INSTALL_PATH
 	set "PLUGIN_INSTALL_PATH="
@@ -317,7 +317,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 		%dk_call% dk_assertVar PLUGIN_INSTALL_FOLDER
 		set "PLUGIN_INSTALL_PATH=!PLUGIN_INSTALL_ROOT!\!PLUGIN_INSTALL_FOLDER!"	
 	)
-	:: %dk_call% dk_printVar PLUGIN_INSTALL_PATH 								&rem PLUGIN_INSTALL_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	%dk_call% dk_printVar PLUGIN_INSTALL_PATH 								&rem PLUGIN_INSTALL_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
 
 	
 	

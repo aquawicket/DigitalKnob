@@ -310,7 +310,7 @@ function(dk_importVariables)
 	if(NOT PLUGIN_INSTALL_VERSION)
 		set(PLUGIN_INSTALL_VERSION "UNKNOWN")
 	endif()
-#	dk_printVar(PLUGIN_INSTALL_VERSION)									# PLUGIN_INSTALL_VERSION: master
+	dk_printVar(PLUGIN_INSTALL_VERSION)									# PLUGIN_INSTALL_VERSION: master
 
 	# PLUGIN_INSTALL_FOLDER
 	unset(PLUGIN_INSTALL_FOLDER)
@@ -321,7 +321,7 @@ function(dk_importVariables)
 	else()
 		set(PLUGIN_INSTALL_FOLDER ${PLUGIN_INSTALL_NAME})
 	endif()
-#	dk_printVar(PLUGIN_INSTALL_FOLDER)									# PLUGIN_INSTALL_FOLDER: zlib-master
+	dk_printVar(PLUGIN_INSTALL_FOLDER)									# PLUGIN_INSTALL_FOLDER: zlib-master
 
 	# PLUGIN_INSTALL_ROOT
 	unset(PLUGIN_INSTALL_ROOT)
@@ -332,7 +332,7 @@ function(dk_importVariables)
 		dk_assertPath(DK3RDPARTY_DIR)
 		set(PLUGIN_INSTALL_ROOT ${DK3RDPARTY_DIR})
 	endif()
-#	dk_printVar(PLUGIN_INSTALL_ROOT)									# PLUGIN_INSTALL_ROOT: C:/Users/name/digitalknob/Development/3rdParty
+	dk_printVar(PLUGIN_INSTALL_ROOT)									# PLUGIN_INSTALL_ROOT: C:/Users/name/digitalknob/Development/3rdParty
 
 	# PLUGIN_INSTALL_PATH
 	unset(PLUGIN_INSTALL_PATH)
@@ -343,7 +343,7 @@ function(dk_importVariables)
 		#dk_assertVar(PLUGIN_INSTALL_FOLDER)
 		set(PLUGIN_INSTALL_PATH ${PLUGIN_INSTALL_ROOT}/${PLUGIN_INSTALL_FOLDER})			
 	endif()
-#	dk_printVar(PLUGIN_INSTALL_PATH)									# PLUGIN_INSTALL_PATH: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+	dk_printVar(PLUGIN_INSTALL_PATH)									# PLUGIN_INSTALL_PATH: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
 
 	
 	
