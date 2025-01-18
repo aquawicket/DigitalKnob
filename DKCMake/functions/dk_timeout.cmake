@@ -9,49 +9,43 @@ include_guard()
 #	Pause execution and wait for <enter> keypress to continue or amount of seconds to pass
 #
 function(dk_timeout) 
-	dk_debugFunc(0 99)
+	dk_debugFunc(0 1)
 	
 	dk_getArg(0 seconds 10)
+	
+	if(NOT seconds)
+		message("\nWaiting for 0 seconds, press a key to continue ..0")
+		return()
+	endif()
 
+	###### POWERSHELL ######
+	find_program(POWERSHELL_EXE powershell.exe)
+	if(EXISTS ${POWERSHELL_EXE})
+		execute_process(COMMAND ${POWERSHELL_EXE} -Command "Write-Host 'Waiting for ${seconds} seconds, press a key to continue ..'; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }")
+		return()
+	endif()
 	
 	###### CMD ######
 	if(EXISTS "$ENV{COMSPEC}")
-		string(REPLACE "/" "\\" CMD_EXE "$ENV{COMSPEC}")  # convert to windows path delimiters
-		set(cmnd "${CMD_EXE}" /V:ON /c "timeout /T ${seconds}")
-		#dk_debug("${cmnd}")
-		execute_process(COMMAND ${cmnd})	
+		execute_process(COMMAND "$ENV{COMSPEC}" /c "timeout /T ${seconds}")
 		return()
 	endif()
 	
 	###### BASH ######
 	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(BASH_EXE)
-		set(cmnd ${BASH_EXE} -c "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
-		#dk_debug("${cmnd}")
-		execute_process(COMMAND ${cmnd})
-		dk_return()
+		execute_process(COMMAND ${BASH_EXE} -c "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
+		return()
 	endif()
 	
 	###### SH ######
 	execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE SH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(SH_EXE)			
-		# TODO
-		#dk_debug("${cmnd}")
-		execute_process(COMMAND ${cmnd})
-		dk_return()
+		execute_process(COMMAND ${SH_EXE} -c "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
+		return()
 	endif()
 	
-	###### Powershell ######
-	find_program(POWERSHELL_EXE powershell.exe)
-	if(POWERSHELL_EXE)
-		# TODO
-		#dk_debug("${cmnd}")
-		execute_process(COMMAND ${cmnd})
-		dk_return()
-	endif()
-	
-	dk_fatal("dk_pause() failed:  cant find CMD_EXE, BASH_EXE or SH_EXE!")
-
+	dk_fatal("dk_pause() failed:  cant find CMD, BASH, SH OR POWERSHELL")
 endfunction()
 
 

@@ -35,3 +35,5 @@ print("DKSCRIPT_NAME = "+DKSCRIPT_NAME)
 
 DKSCRIPT_EXT = os.path.splitext(DKSCRIPT_NAME)[1]
 print("DKSCRIPT_EXT = "+DKSCRIPT_EXT)
+
+
