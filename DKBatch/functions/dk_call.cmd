@@ -190,7 +190,7 @@ exit /b %RTN_CODE%
 	if defined argv (set argv=!argv:*%1=!)
 	(set %~1=%argv%)
 	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with global. and assign a value
-%endfunction%
+exit /b !errorlevel!
 
 ::####################################################################
 ::# :setReturn
@@ -217,7 +217,7 @@ exit /b %RTN_CODE%
 ::#
 :pushStack file args
 	(set /a LVL+=1)
-	(call :setGlobal __STACK__%LVL% %time% %*)
+	call dk_call setGlobal __STACK__%LVL% %time% %*
 %endfunction%
 
 ::####################################################################

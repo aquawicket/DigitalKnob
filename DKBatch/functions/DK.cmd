@@ -72,7 +72,7 @@ echo:
 
     ::###### DKTEST MODE ######
 	if "%DKSCRIPT_EXT%" neq ".cmd" %return%
-	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b
+	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 0
     %dk_call% dk_echo
     %dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME%.cmd ###### DKTEST MODE ######%clr%"
     %dk_call% dk_echo
@@ -135,14 +135,19 @@ echo:
 ::# dk_DKBATCH_VARS
 ::#
 :dk_DKBATCH_VARS
-    if defined DKF                           for %%Z in ("%DKF%") do set "DKBATCH_DIR=%%~dpZ"
-    if not exist "%DKBATCH_DIR%"             for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
-    if "%DKBATCH_DIR:~-1%"=="\"              set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
+    if not exist "%DKBATCH_DIR%"             for %%Z in ("%DKF%") do set "DKBATCH_DIR=%%~dpZ"
+	if not exist "%DKBATCH_DIR%"             for %%Z in ("%~dp0") do set "DKBATCH_DIR=%%~dpZ"
+    echo DKBATCH = %DKBATCH_DIR%
+	if "%DKBATCH_DIR:~-1%"=="\"              set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     if not exist "%DKBATCH_DIR%"             echo ERROR: DKBATCH_DIR:%DKBATCH_DIR% does not exist & pause & exit 1
+	
     if not exist "%DKBATCH_FUNCTIONS_DIR%"   set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%"  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-    if exist     "%DKBATCH_FUNCTIONS_DIR%"   set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
     if not exist "%DKBATCH_FUNCTIONS_DIR%"   echo ERROR: DKBATCH_FUNCTIONS_DIR:%DKBATCH_FUNCTIONS_DIR% does not exist & pause & exit 1
+	
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%"  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%"  echo ERROR: DKBATCH_FUNCTIONS_DIR_:%DKBATCH_FUNCTIONS_DIR_% does not exist & pause & exit 1
+    if exist     "%DKBATCH_FUNCTIONS_DIR%"   set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+    
 %endfunction%
 
 ::##################################################################################
