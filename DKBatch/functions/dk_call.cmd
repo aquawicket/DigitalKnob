@@ -15,12 +15,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
 	:: don't add these functions to the callstack, just call them
-	if "%~1"=="init"				(call :%* && %endfunction%)
-	if "%~1"=="pushStack"			(call :%* && %endfunction%)
-	if "%~1"=="popStack"			(call :%* && %endfunction%)
-	if "%~1"=="setGlobal" 			(call :%* && %endfunction%)
-	if "%~1"=="setReturn" 			(call :%* && %endfunction%)
-	if "%~1"=="printStackVariables"	(call :%* && %endfunction%)
+	if "%~1"=="init"				(call :%* & exit /b !errorlevel!)
+	if "%~1"=="pushStack"			(call :%* & exit /b !errorlevel!)
+	if "%~1"=="popStack"			(call :%* & exit /b !errorlevel!)
+	if "%~1"=="setGlobal" 			(call :%* & exit /b !errorlevel!)
+	if "%~1"=="setReturn" 			(call :%* & exit /b !errorlevel!)
+	if "%~1"=="printStackVariables"	(call :%* & exit /b !errorlevel!)
 
 	
 	::###### Stack Variables ######
@@ -128,7 +128,7 @@ exit /b %RTN_CODE%
 	set "pad=%clr%"
 	set "padB=      "
 	set "indent=        "
-%endfunction%
+exit /b !errorlevel!
 
 ::####################################################################
 ::# :printEntry
@@ -140,7 +140,7 @@ exit /b %RTN_CODE%
 	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
 	if not "%_codepage_%"=="65001" chcp 65001>nul
 	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
-%endfunction%
+exit /b !errorlevel!
 
 ::####################################################################
 ::# :printExit
@@ -151,7 +151,7 @@ exit /b %RTN_CODE%
 	call :updateIndent
 	echo %pad%╔══ !__FUNC__!(!__ARGV__!)
 	echo %pad%▼
-%endfunction%
+exit /b !errorlevel!
 
 ::####################################################################
 ::# :printConstantVariables
@@ -161,7 +161,7 @@ exit /b %RTN_CODE%
 	if defined dk_call		(echo %padB% dk_call		= %dk_call%)
 	if defined indent		(echo %padB% indent			= %indent%)
 	if defined pad			(echo %padB% pad			= %pad%)
-%endfunction%
+exit /b !errorlevel!
 
 ::####################################################################
 ::# :printStackVariables
@@ -170,7 +170,7 @@ exit /b %RTN_CODE%
 	call :updateIndent
 	if defined LVL				(echo %padB% LVL  = %LVL%)
 	if defined __STACK__%LVL%	(echo %padB% __STACK__%LVL% = !__STACK__%LVL%!)
-%endfunction%
+exit /b !errorlevel!
 
 ::####################################################################
 ::# :printParentStackVariables
@@ -180,16 +180,6 @@ exit /b %RTN_CODE%
 	call :updateIndent	
 	if defined PLVL        		(echo %padB% PLVL  = %PLVL%)
 	if defined __STACK__%PLVL% 	(echo %padB% __STACK__%PLVL% = !__STACK__%PLVL%!)
-%endfunction%
-
-::####################################################################
-::# :setGlobal
-::#
-:setGlobal name value
-	set argv=%*
-	if defined argv (set argv=!argv:*%1=!)
-	(set %~1=%argv%)
-	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with global. and assign a value
 exit /b !errorlevel!
 
 ::####################################################################
@@ -200,7 +190,7 @@ exit /b !errorlevel!
 	if defined argv (set argv=!argv:*%1=!)
 	(set %~1=%argv%)
 	(set dk.rtn.%~1=%argv%)		&:: prefix the variable name with rtn. and assign a value
-%endfunction%
+exit /b !errorlevel!
 
 ::####################################################################
 ::# :updateIndent
@@ -210,25 +200,35 @@ exit /b !errorlevel!
 	(set padB=)
 	for /l %%x in (1, 1, %LVL%) do (set pad=!pad!%indent%)
 	for /l %%x in (1, 1, %LVL%) do (set padB=!padB!%indent%)
-%endfunction%
+exit /b !errorlevel!
+
+
+
+::####################################################################
+::# :popStack
+::#
+:popStack
+	call :setGlobal __STACK__%LVL%
+	(set /a LVL-=1)
+exit /b !errorlevel!
 
 ::####################################################################
 ::# :pushStack
 ::#
 :pushStack file args
 	(set /a LVL+=1)
-	call dk_call setGlobal __STACK__%LVL% %time% %*
-%endfunction%
+	call :setGlobal __STACK__%LVL% %time% %*
+exit /b !errorlevel!
 
 ::####################################################################
-::# :popStack
+::# :setGlobal(name value)
 ::#
-:popStack
-	(call :setGlobal __STACK__%LVL%)
-	(set /a LVL-=1)
-%endfunction%
-
-
+:setGlobal
+	set argv=%*
+	if defined argv (set argv=!argv:*%1=!)
+	(set %~1=%argv%)
+	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with global. and assign a value
+exit /b !errorlevel!
 
 
 

@@ -50,7 +50,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="10" %dk_call% dk_exit 0
 	if "%choice%"=="11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%\build_list.txt" && %return%)
       
-    endlocal & set "UPDATE=1"
+    ::endlocal & 
+	set "UPDATE=1"
 %endfunction%
 
 

@@ -3,14 +3,16 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
 ::###### Print Version Info ######
 echo:
-set "DKSHELL=CMD"
+for %%Z in ("%COMSPEC%") do set "DKSHELL=%%~nZ"
 for /f "tokens=2 delims=[]" %%v in ('ver') do set "DKSHELL_VERSION=%%v"
-set "DKSHELL_PATH=%ComSpec%"
+set "DKSHELL_PATH=%COMSPEC%"
 set "ESC="                         &:: escape character
 echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
 echo DKSHELL_PATH = %DKSHELL_PATH%
 echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 echo:
+set "DKBATCH_FUNCTIONS_DIR_=%~dp0"
+set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
 
 
 ::if not exist "%~0.cmd" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
@@ -27,8 +29,7 @@ echo:
 ::# DK
 ::#
 :DK
-	::if "!DE!" == ""   echo delayed expansion = ON
-	
+	if "!DE!" == "" (echo delayed expansion = ON) else (echo delayed expansion = OFF)
     set "NO_STDOUT=1>nul"
     set "NO_STDERR=2>nul"
     set "NO_OUTPUT=1>nul 2>nul"
@@ -45,13 +46,13 @@ echo:
     if "!DE!" neq "" call :dk_reload 
     if "!DE!" neq "" echo ERROR: DKBatch requires delayed expansion && pause && exit 13
 
-    call :dk_DKBATCH_VARS
+    ::call :dk_DKBATCH_VARS
     call :dk_DKHTTP_VARS
 
     ::############ get dk_source and dk_call ######
     call :dk_initFiles
 	
-	call dk_call init
+	call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd init
 	
     ::############ Elevate Permissions ############
     ::set "ENABLE_dk_elevate=1"
@@ -98,7 +99,7 @@ echo:
 :dk_DKSCRIPT_PATH
     ::if not exist   "%~1"				echo :dk_DKSCRIPT_PATH must be called with %%~0 %%*. I.E.  "call :dk_DKSCRIPT_PATH" %%~0 %%* & pause & exit 1
     if not defined  DKSCRIPT_PATH		set "DKSCRIPT_PATH=%~1"
-    if not exist   "%DKSCRIPT_PATH%"	echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && goto:eof
+    if not exist   "%DKSCRIPT_PATH%"	echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && exit /b 13
 	if not defined  DKSCRIPT_ARGS		set DKSCRIPT_ARGS=%*
 	if defined 		DKSCRIPT_ARGS 		(set DKSCRIPT_ARGS=!DKSCRIPT_ARGS:*%1=!)
 %endfunction%
@@ -137,6 +138,8 @@ echo:
 :dk_DKBATCH_VARS
     if not exist "%DKBATCH_DIR%"             for %%Z in ("%DKF%") do set "DKBATCH_DIR=%%~dpZ"
 	if not exist "%DKBATCH_DIR%"             for %%Z in ("%~dp0") do set "DKBATCH_DIR=%%~dpZ"
+	if "%DKBATCH_DIR:~-1%"=="\"              set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
+											 for %%Z in ("%DKBATCH_DIR%") do set "DKBATCH_DIR=%%~dpZ"
     echo DKBATCH = %DKBATCH_DIR%
 	if "%DKBATCH_DIR:~-1%"=="\"              set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     if not exist "%DKBATCH_DIR%"             echo ERROR: DKBATCH_DIR:%DKBATCH_DIR% does not exist & pause & exit 1
@@ -147,7 +150,6 @@ echo:
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%"  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%"  echo ERROR: DKBATCH_FUNCTIONS_DIR_:%DKBATCH_FUNCTIONS_DIR_% does not exist & pause & exit 1
     if exist     "%DKBATCH_FUNCTIONS_DIR%"   set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
-    
 %endfunction%
 
 ::##################################################################################
