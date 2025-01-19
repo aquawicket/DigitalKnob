@@ -10,16 +10,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 setlocal
     %dk_call% dk_debugFunc 1 99
 
-	
 	::%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	::if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" set "DKPOWERSHELL_FUNCTIONS_DIR=%CD%\DKPowershell\functions"
-	if not defined DKPOWERSHELL_FUNCTIONS_DIR  if exist %USERPROFILE%\digitalknob\Development\.git  set "DKPOWERSHELL_FUNCTIONS_DIR=%USERPROFILE%\digitalknob\Development\DKPowershell\functions"
-	if not defined DKPOWERSHELL_FUNCTIONS_DIR  set "DKPOWERSHELL_FUNCTIONS_DIR=%USERPROFILE%\.dk\DKPowershell\functions"
-	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%"
-	if not defined DKHTTP_DKPOWERSHELL_DIR            set "DKHTTP_DKPOWERSHELL_DIR=%DKHTTP_DKBRANCH_DIR%/DKPowershell"
-	if not defined DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR  set "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR=%DKHTTP_DKPOWERSHELL_DIR%/functions"
-	if not exist %DKPOWERSHELL_FUNCTIONS_DIR%\DK.ps1 %dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1"
-	if not exist %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1 %dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1"
+	if not exist "%DKPOWERSHELL_DIR%"					(set "DKPOWERSHELL_DIR=%USERPROFILE%\digitalknob\Development\DKPowershell")
+	if not exist "%DKPOWERSHELL_DIR%" 					(mkdir "%DKPOWERSHELL_DIR%")
+	
+	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(set "DKPOWERSHELL_FUNCTIONS_DIR=%DKPOWERSHELL_DIR%\functions")
+	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" 		(mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%")
+	
+	if not defined DKHTTP_DKPOWERSHELL_DIR				(set "DKHTTP_DKPOWERSHELL_DIR=%DKHTTP_DKBRANCH_DIR%/DKPowershell")
+	if not defined DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR	(set "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR=%DKHTTP_DKPOWERSHELL_DIR%/functions")
+	
+	if not exist %DKPOWERSHELL_FUNCTIONS_DIR%\DK.ps1	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1")
+	if not exist %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1")
+	
 	
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
     
