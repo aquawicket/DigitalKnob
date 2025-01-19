@@ -24,16 +24,26 @@ function(dk_resizeImage)
 	
 	if(ANDROID_HOST)
 		dk_installPackage(imagemagick)
-		execute_process(COMMAND command -v convert OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE)
-		dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
-		dk_executeProcess(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath})
+
+		###### BASH ######
+		execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+		if(EXISTS "${BASH_EXE}")
+			execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+			execute_process(COMMAND ${BASH_EXE} -c "command -v 'convert'" OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)	
+			dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
+			#message("${cmnd}")
+			set(cmnd ${BASH_EXE} -c "${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath}")
+		endif()
+
 	elseif(MAC_HOST)
 		dk_executeProcess(sips -z ${width} ${height} ${inpath} --out ${outpath})
+
 	else()
 		dk_depend(imagemagick)
 		dk_findProgram(IMAGEMAGICK_CONVERT_EXE convert ${IMAGEMAGICK})
 		dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
 		dk_executeProcess(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath})
+	
 	endif()
 endfunction()
 

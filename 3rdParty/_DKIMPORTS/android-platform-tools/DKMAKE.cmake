@@ -47,7 +47,11 @@ elseif(ANDROID_HOST)
 	# rm -rf META-INF NOTICE aapt2
 
 	## Repackage Gradle's aapt2.jar with termux version of aapt2
-	dk_set(GRADLE_USER_HOME ${DIGITALKNOB_DIR}/.gradle) #TODO: move this into _DKIMPORTS as its own dependency
+	if(NOT GRADLE_USER_HOME)
+		dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+		dk_set(GRADLE_USER_HOME ${DKDOWNLOAD_DIR}/.gradle) #TODO: move this into _DKIMPORTS as its own dependency
+		dk_printVar(GRADLE_USER_HOME)
+	endif()
 	dk_set(AAPT2 ${GRADLE_USER_HOME}/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
 	if(EXISTS ${AAPT2}/aapt2-7.0.3-7396180-linux.jar)
 		dk_info("Patching Gradle aapt2 .......")
@@ -58,6 +62,7 @@ elseif(ANDROID_HOST)
 		#dk_executeProcess(zip -r aapt2-7.0.3-7396180-linux.jar * WORKING_DIRECTORY ${AAPT2})
 		dk_executeProcess(jar cvf aapt2-7.0.3-7396180-linux.jar . WORKING_DIRECTORY ${AAPT2})
 		dk_executeProcess(rm -rf META-INF NOTICE aapt2 WORKING_DIRECTORY ${AAPT2})
+		dk_pause()
 	endif()
 elseif(LINUX_HOST)
 	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/dkconfig.txt ANDROID_PLATFORM_TOOLS_LINUX_DL)
