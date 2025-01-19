@@ -21,8 +21,14 @@ setlocal
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
     
     if NOT exist "%DKBRANCH_DIR%\.git" (
-		if exist "%DKBRANCH_DIR%" (
 		
+		rem NOTE: 	This must cloan and update within the parentheses. rd /s /q "%DKBRANCH_DIR%" removes the current DigitalKnob
+		rem			folder, leaving the current running batch process abandoned until it's cloned again. It seems like when we are 
+		rem 		in the scope of called batch files, we loose all references to those deleted file once we leave the parentheses.
+		rem         This includes variables, functions, etc. So to fix this, after we delete the very files our context is running 
+		rem			from, we must stay in parentheses until those files are restored and updated, or we will lose the context.
+		rem ####################################################################		
+		if exist "%DKBRANCH_DIR%" (
 			rem ###### Backup Branch directory and clone ######
 			%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
 			set "PATH=%DKBRANCH_DIR%_BACKUP\DKBatch\functions;%PATH%"
@@ -39,22 +45,13 @@ setlocal
 			)
 			%return%
 		)
+		rem ####################################################################
 		
 		rem ###### Clone into empty branch directory ######
 		"%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%"
-		"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
-		"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
-		"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %_branch_%
-			
-		if NOT "%ERRORLEVEL%" == "0" (
-			%dk_call% dk_echo "Remote has no '%_branch_%' branch. Creating..."
-			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
-			"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
-		)
-		%return%
 	)
 	
-	::###### Simple Update ######
+	::###### Update ######
 	"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
 	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
 	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %_branch_%
