@@ -64,7 +64,7 @@ set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
     :skip_elevate
 
     ::############ LOAD FUNCTION FILES ############
-    ::call dk_source dk_debugFunc
+    ::%dk_call% dk_source dk_debugFunc
     %dk_call% dk_color
     %dk_call% dk_logo
 

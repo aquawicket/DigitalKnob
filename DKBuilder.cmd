@@ -5,10 +5,7 @@ setlocal enableDelayedExpansion
 
 	set "ENABLE_dk_debug=1"
 	set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"
-	::if not exist "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE%\.dk")
-	::if not exist "%DKCACHE_DIR%" (mkdir %DKCACHE_DIR% && attrib +h %DKCACHE_DIR%)
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%\digitalknob\Development\DKBatch\functions")
-	::if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%\.dk\DKBatch\functions")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
 	set "DK=%DKBATCH_FUNCTIONS_DIR_%\DK.cmd"
 
@@ -31,16 +28,6 @@ setlocal enableDelayedExpansion
 exit /b %errorlevel%
 
 
-:dk_firewallAllow
-	call :dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%~2" && exit /b 0
-	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%~2" enable=yes profile=any
-	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%~2" enable=yes profile=any
-	set "WFCUI_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe"
-	if exist "%WFCUI_EXE%" call "%WFCUI_EXE%" -allow %2
-	set "WFC_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfc.exe"
-	if exist "%WFC_EXE%" call "%WFC_EXE%" -allow %2
-exit /b %errorlevel%
-
 :dk_registryContains
 	setlocal EnableDelayedExpansion
 	for /f "usebackq delims=" %%a in (`reg query "%~1"`) do (
@@ -50,3 +37,12 @@ exit /b %errorlevel%
     exit /b 1
 exit /b %errorlevel%
 
+:dk_firewallAllow
+	call :dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%~2" && exit /b 0
+	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%~2" enable=yes profile=any
+	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%~2" enable=yes profile=any
+	set "WFCUI_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe"
+	if exist "%WFCUI_EXE%" call "%WFCUI_EXE%" -allow %2
+	set "WFC_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfc.exe"
+	if exist "%WFC_EXE%" call "%WFC_EXE%" -allow %2
+exit /b %errorlevel%

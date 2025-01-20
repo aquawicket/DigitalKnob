@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   Func: Appends a path to the %PATH% environment variable
 ::#   path: A string containing the new path
 ::#
-::#    Example:  call dk_appendEvnPath C:\Windows\System32 result
+::#    Example:  %dk_call% dk_appendEvnPath C:\Windows\System32 result
 ::#              echo dk_appendEvnPath returned: %result%
 ::#
 :dk_appendEvnPath

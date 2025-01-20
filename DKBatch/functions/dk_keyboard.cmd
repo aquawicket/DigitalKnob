@@ -22,10 +22,10 @@ setlocal
     
     if "%~1" == "callback" set callback=%~2 %~3
     ::if defined callback echo callback = %callback%
-    %dk_call% dk_debugFunc 0 3 || call dk_error "%dk_call% dk_debugFunc failed!"
+    %dk_call% dk_debugFunc 0 3 || %dk_call% dk_error "%dk_call% dk_debugFunc failed!"
     
     rem Start Keyboard_Loop in a parallel process
-    start "" /B %ComSpec% /C "call dk_keyboard :dk_keyboard.Keyboard_Loop" || echo Keyboard_Loop returned error
+    start "" /B %ComSpec% /C "%dk_call% dk_keyboard :dk_keyboard.Keyboard_Loop" || echo Keyboard_Loop returned error
 %endfunction%
 
 :dk_keyboard.Keyboard_Loop
@@ -54,7 +54,7 @@ setlocal
     set /P "="
     
     :: enter keyboard polling loop
-    call :dk_keyboard.pollKeys || call dk_error "call :pollKeys failed!"
+    call :dk_keyboard.pollKeys || %dk_call% dk_error "call :pollKeys failed!"
 %endfunction%
     
 :dk_keyboard.pollKeys
@@ -67,7 +67,7 @@ setlocal
     set /P "="  
     
     if defined callback call %callback% %keyCode% || echo callback returned error && %return%
-    ::if not defined callback call :dk_keyboard.onKeyDown %keyCode% || call dk_error "call :onKeyDown %keyCode% failed!"
+    ::if not defined callback call :dk_keyboard.onKeyDown %keyCode% || %dk_call% dk_error "call :onKeyDown %keyCode% failed!"
     ::if defined stopPollKeys %return%
     goto dk_keyboard.pollKeys
 %endfunction%
@@ -103,9 +103,9 @@ setlocal
     ::%dk_call% dk_debugFunc 0
 
  
-    %dk_call% dk_debugFunc 0 || call dk_error "%dk_call% dk_debugFunc failed!"
+    %dk_call% dk_debugFunc 0 || %dk_call% dk_error "%dk_call% dk_debugFunc failed!"
     
-    dk_call dk_keyboard || call dk_error "call dk_keyboard failed!"
+    dk_call dk_keyboard || %dk_call% dk_error "%dk_call% dk_keyboard failed!"
     
-    %dk_call% dk_echo "press escape to exit keyboard loop" || call dk_error "%dk_call% dk_echo failed!"
+    %dk_call% dk_echo "press escape to exit keyboard loop" || %dk_call% dk_error "%dk_call% dk_echo failed!"
 %endfunction%

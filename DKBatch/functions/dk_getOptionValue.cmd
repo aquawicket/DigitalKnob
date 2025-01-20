@@ -45,7 +45,7 @@ setlocal
 	%dk_call% dk_debugFunc 0 99
 
 	
-	call :dk_getOptionValue INPUT %*
+	%dk_call% :dk_getOptionValue INPUT %*
 	%dk_call% dk_printVar INPUT
 	%DUMP_VARS%
 %endfunction%

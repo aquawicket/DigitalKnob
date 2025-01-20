@@ -44,7 +44,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::echo %ESC%[19;20HF:%~nx0 %*
 	set "DKApp.active=1"
 	
-	call dk_keyboard callback "%~d0\:DKApp.onKeyDown\..%~pnx0"
+	%dk_call% dk_keyboard callback "%~d0\:DKApp.onKeyDown\..%~pnx0"
 	::echo %ESC%[?25l    &:: Hide Cursor
 %endfunction%
 
@@ -62,7 +62,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::echo %ESC%[19;20HF:%~nx0 %*
 	
 	echo dk_exit
-	call dk_exit 0
+	%dk_call% dk_exit 0
 %endfunction%
 
 

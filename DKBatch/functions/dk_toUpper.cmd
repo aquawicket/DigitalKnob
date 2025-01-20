@@ -6,12 +6,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_toUpper
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2
 
         set "_upper_=%~1"
-        if "!DE!" equ "" for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do set "_upper_=!_upper_:%%#=%%#!")           &:: with delayed expansion ON
-        if "!DE!" neq "" for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do call set "_upper_=%%_upper_:%%#=%%#%%")    &:: with delayed expansion OFF
+        for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do set "_upper_=!_upper_:%%#=%%#!")           &:: with delayed expansion ON
     endlocal & set "%2=%_upper_%"
 %endfunction%
 

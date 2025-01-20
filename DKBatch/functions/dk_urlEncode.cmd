@@ -21,7 +21,7 @@ setlocal EnableDelayedExpansion
 	:# Special case for the ! character, which can only be replaced in a set %STRING%
 	set "STRING=%STRING:!= %" & set "STRING=!STRING: =%%21!" &:# Prerequisite: No more " and ^
 	:# Special case for the = character, which cannot be replaced by any set command
-	::set "REPL=%%3D" & call :ReplaceEquals STRING REPL
+	::set "REPL=%%3D" & %dk_call% :ReplaceEquals STRING REPL
 	endlocal & set "%~1=%STRING%"
 %endfunction%
 

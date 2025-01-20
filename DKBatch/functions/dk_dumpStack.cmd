@@ -61,12 +61,12 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
     if "%caller%"=="%DKTEST_caller%" (echo THEY ARE EQUAL!)
     
     if "%caller%"=="" (
-        call dk_debug "CALLER IS EMPTY"
+        %dk_call% dk_debug "CALLER IS EMPTY"
         setlocal DisableDelayedExpansion
         set /a frame+=1
         call "%~d0\:dk_dumpStack\..%~pnx0" %*
     ) else if "%caller%" neq "%DKTEST_caller%" (
-        call dk_debug "CALLER neq DKTEST AND CALLER neq CALLERFUNC"
+        %dk_call% dk_debug "CALLER neq DKTEST AND CALLER neq CALLERFUNC"
         setlocal DisableDelayedExpansion
         set /a frame+=1
         call "%~d0\:dk_dumpStack\..%~pnx0" %*

@@ -16,7 +16,7 @@ setlocal
         set /a count+=1
         set "list_!count!=%%i"
     )
-    call dk_delete !tempfile!
+    %dk_call% dk_delete !tempfile!
 
     for /l %%i in (1,1,!count!) do (
         set list_%%i=!list_%%i:~1!
