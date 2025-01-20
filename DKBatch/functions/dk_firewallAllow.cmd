@@ -21,8 +21,8 @@ setlocal enableDelayedExpansion
 	
 	%dk_call% dk_notice "Adding firewall allow rule for %_file_% . . ."
 	
-	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%_file_%" enable=yes profile=any
-	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%_file_%" enable=yes profile=any
+	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%_file_%" enable=yes profile=any >nul
+	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%_file_%" enable=yes profile=any >nul
 	
 	::###### Windows Firewall Control ######
 	if not exist "%WFC_EXE%" 	(set "WFC_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfc.exe")

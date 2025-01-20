@@ -43,9 +43,10 @@ setlocal enableDelayedExpansion
 	set "_file_=%~2"
 	set "_file_=%_file_:/=\%"
 	%dk_call% :dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%_file_%" && (exit /b 0)
-	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%_file_%" enable=yes profile=any
-	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%_file_%" enable=yes profile=any
+	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%_file_%" enable=yes profile=any >nul
+	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%_file_%" enable=yes profile=any >nul
 	::###### Windows Firewall Control ######
+
 	if not exist "%WFC_EXE%" 	(set "WFC_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfc.exe")
 	if not exist "%WFCUI_EXE%" 	(set "WFCUI_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe")
 	if exist "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
