@@ -19,6 +19,8 @@ setlocal
 		exit /b 0
 	)
 	
+	%dk_call% dk_notice "Adding firewall allow rule for %_file_% . . ."
+	
 	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%_file_%" enable=yes profile=any
 	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%_file_%" enable=yes profile=any
 	
