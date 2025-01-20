@@ -36,6 +36,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     %dk_call% dk_download "%CMAKE_DL%" "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%"
 	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%CMAKE%"
+	
+	%dk_call% dk_firewallAllow "CMake" "%CMAKE%\bin\cmake.exe"
     ::if NOT exist "%CMAKE_EXE%" %dk_call% dk_error "cannot find CMAKE_EXE:%CMAKE_EXE%"
 	:installed
 	::### install DKCMake
