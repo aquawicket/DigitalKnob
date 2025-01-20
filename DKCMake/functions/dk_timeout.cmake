@@ -18,16 +18,17 @@ function(dk_timeout)
 		return()
 	endif()
 
+	###### CMD ######
+	if(EXISTS "$ENV{COMSPEC}")
+		dk_set(CMD_EXE "$ENV{COMSPEC}")
+		execute_process(COMMAND "${CMD_EXE}" /c "timeout /T ${seconds}")
+		return()
+	endif()
+	
 	###### POWERSHELL ######
 	find_program(POWERSHELL_EXE powershell.exe)
 	if(EXISTS ${POWERSHELL_EXE})
 		execute_process(COMMAND ${POWERSHELL_EXE} -Command "Write-Host 'Waiting for ${seconds} seconds, press a key to continue ..'; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }")
-		return()
-	endif()
-	
-	###### CMD ######
-	if(EXISTS "$ENV{COMSPEC}")
-		execute_process(COMMAND "$ENV{COMSPEC}" /c "timeout /T ${seconds}")
 		return()
 	endif()
 	

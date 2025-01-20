@@ -11,7 +11,7 @@ include_guard()
 function(dk_firewallAllow)
 	dk_debugFunc(2)
 	
-	dk_assertPath(${ARGV1})
+	dk_assertPath("${ARGV1}")
 	dk_callDKBatch(dk_firewallAllow output "${ARGV0}" "${ARGV1}")
 endfunction()
 
@@ -24,5 +24,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_firewallAllow("CMD" "C:/Windows/System32/cmd.exe")
+	dk_firewallAllow("CMake-Gui" "C:/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake-gui.exe")
 endfunction()
