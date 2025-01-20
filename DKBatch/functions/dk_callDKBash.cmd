@@ -13,15 +13,15 @@ setlocal
 	::set "USE_WSL=1"
 	
 	if defined USE_WSL   %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if defined USE_WSL   %dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%\wsl\dk_install.cmd"
+	if defined USE_WSL   %dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/dk_install.cmd"
 	
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if not exist "%DKBASH_FUNCTIONS_DIR%" set "DKBASH_FUNCTIONS_DIR=%CD%\DKBash\functions"
+	if not exist "%DKBASH_FUNCTIONS_DIR%" set "DKBASH_FUNCTIONS_DIR=%CD%/DKBash/functions"
 	if not exist "%DKBASH_FUNCTIONS_DIR%" mkdir "%DKBASH_FUNCTIONS_DIR%"
 	if not defined DKHTTP_DKBASH_DIR            set "DKHTTP_DKBASH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBash"
 	if not defined DKHTTP_DKBASH_FUNCTIONS_DIR  set "DKHTTP_DKBASH_FUNCTIONS_DIR=%DKHTTP_DKBASH_DIR%/functions"
-	if not exist %DKBASH_FUNCTIONS_DIR%\DK.sh %dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/DK.sh" "%DKBASH_FUNCTIONS_DIR%/DK.sh"
-	if not exist %DKBASH_FUNCTIONS_DIR%\%~1.sh %dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/%~1.sh" "%DKBASH_FUNCTIONS_DIR%/%~1.sh"
+	if not exist %DKBASH_FUNCTIONS_DIR%/DK.sh %dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/DK.sh" "%DKBASH_FUNCTIONS_DIR%/DK.sh"
+	if not exist %DKBASH_FUNCTIONS_DIR%/%~1.sh %dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/%~1.sh" "%DKBASH_FUNCTIONS_DIR%/%~1.sh"
 
 	%dk_call% dk_BASH_EXE
 

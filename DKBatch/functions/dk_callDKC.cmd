@@ -11,7 +11,7 @@ setlocal
  
 	::### Get DKC_FUNCTIONS_DIR
 	%dk_call% dk_validate DKC_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
-	if not exist "%DKC_FUNCTIONS_DIR%"       set "DKC_FUNCTIONS_DIR=%CD%\DKC\functions"
+	if not exist "%DKC_FUNCTIONS_DIR%"       set "DKC_FUNCTIONS_DIR=%CD%/DKC/functions"
 	if not exist "%DKC_FUNCTIONS_DIR%"       mkdir "%DKC_FUNCTIONS_DIR%"
 	%dk_call% dk_assertPath DKC_FUNCTIONS_DIR
 	
@@ -20,8 +20,8 @@ setlocal
 	if not defined DKHTTP_DKC_FUNCTIONS_DIR  set "DKHTTP_DKC_FUNCTIONS_DIR=%DKHTTP_DKC_DIR%/functions"
 	
 	::### Download any missing
-	if not exist %DKC_FUNCTIONS_DIR%\DK.h    %dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h"
-	if not exist %DKC_FUNCTIONS_DIR%\%~1.c   %dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c"
+	if not exist %DKC_FUNCTIONS_DIR%/DK.h    %dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h"
+	if not exist %DKC_FUNCTIONS_DIR%/%~1.c   %dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c"
 
 ::	set ALL_BUT_FIRST=%*
 ::	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
@@ -70,10 +70,10 @@ setlocal
     ::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-	if "%host_env%"=="cosmocc"      %dk_call% dk_validate SH_EXE               "%dk_call% %DKIMPORTS_DIR%\sh\dk_install.cmd"
-	if "%host_env%"=="cosmocc"      %dk_call% dk_validate COSMOCC_C_COMPILER   "%dk_call% %DKIMPORTS_DIR%\cosmocc\dk_install.cmd"
-	if "%host_env%"=="clang"  		%dk_call% dk_validate CLANG_C_COMPILER     "%dk_call% %DKIMPORTS_DIR%\clang\dk_install.cmd"
-	if "%host_env%"=="gcc"    		%dk_call% dk_validate GCC_C_COMPILER       "%dk_call% %DKIMPORTS_DIR%\gcc\dk_install.cmd"
+	if "%host_env%"=="cosmocc"      %dk_call% dk_validate SH_EXE               "%dk_call% %DKIMPORTS_DIR%/sh/dk_install.cmd"
+	if "%host_env%"=="cosmocc"      %dk_call% dk_validate COSMOCC_C_COMPILER   "%dk_call% %DKIMPORTS_DIR%/cosmocc/dk_install.cmd"
+	if "%host_env%"=="clang"  		%dk_call% dk_validate CLANG_C_COMPILER     "%dk_call% %DKIMPORTS_DIR%/clang/dk_install.cmd"
+	if "%host_env%"=="gcc"    		%dk_call% dk_validate GCC_C_COMPILER       "%dk_call% %DKIMPORTS_DIR%/gcc/dk_install.cmd"
 
 	if "%host_env%"=="cosmocc"      set "COMPILER_EXE=%SH_EXE% %COSMOCC_C_COMPILER%"
 	if "%host_env%"=="clang"  		set "COMPILER_EXE=%CLANG_C_COMPILER%"
