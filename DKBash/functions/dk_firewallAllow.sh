@@ -11,12 +11,11 @@ dk_firewallAllow() {
 	dk_debugFunc 2
 	
 #	local _file_="${2////\\}"	# get path with / converted to \
-
+	(command -v cygpath) && export CYGPATH_EXE=$(command -v cygpath) || echo "cygpath Not Found"  >&2
+	
 	dk_call dk_echo "CYGPATH_EXE = ${CYGPATH_EXE}"
-	dk_call dk_pause
 	local _file_=$($(CYGPATH_EXE) --windows ${2})
 	dk_call dk_echo "_file_ = ${_file_}"
-	dk_call dk_pause
 
 	dk_call dk_assertPath _file_
 	

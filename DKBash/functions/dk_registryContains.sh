@@ -8,13 +8,6 @@
 dk_registryContains() {
 	dk_debugFunc 2
  
-#	for /f "usebackq delims=" %%a in (`reg query $1`) do (
-#		local "str=%%a"
-#		
-#		if not "x!str:%~2=!x" == "x!str!x" (
-#			return 0
-#		)
-#	)
 	export CMD_EXE="/c/Windows/System32/cmd.exe"
 	export REG_EXE="C:\Windows\System32\reg.exe"
 	
@@ -23,8 +16,6 @@ dk_registryContains() {
 		[ "${line#*"${2}"}" != "${line}" ] && return 0
 	done < <(${REG_EXE} query $1)
 
-
-	
     return 1
 }
 

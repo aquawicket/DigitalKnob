@@ -10,9 +10,9 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2 EnableDelayedExpansion
  
 	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
-		set "str=%%a"
+		set "line=%%a"
 		
-		if not "x!str:%~2=!x" == "x!str!x" (
+		if not "x!line:%~2=!x" == "x!line!x" (
 			exit /b 0
 		)
 	)
