@@ -10,9 +10,9 @@ dk_assertPath() {
     [ -e "${1}" ] && return 0
 	
 	# is a valid variable name check
-	[[ "$1" =~ ^[a-z][a-zA-Z0-9_]*$ ]] && [ -e "${!1}" ] && return 0
+	[[ "$1" =~ ^[_a-z][a-zA-Z0-9_]*$ ]] && [ -e "${!1}" ] && return 0
 	
-	[[ "$1" =~ ^[a-z][a-zA-Z0-9_]*$ ]] && dk_call dk_error "Assertion failed: ${1}:${!1} is not found!" || dk_call dk_error "Assertion failed: path:${1} is not found!"
+	[[ "$1" =~ ^[_a-z][a-zA-Z0-9_]*$ ]] && dk_call dk_error "Assertion failed: ${1}:${!1} is not found!" || dk_call dk_error "Assertion failed: path:${1} is not found!"
 	return 13
 }
 
@@ -50,6 +50,13 @@ DKTEST() {
     dk_call dk_assertPath "myPath"								# OK
 	[ $? = 0 ] && dk_call dk_echo "Found myPath"
 	
+	
+	### As _Variable_ ###
+    dk_call dk_set _myPath_ "/c/Program Files/Common Files"
+	
+	# As a variable name
+    dk_call dk_assertPath _myPath_								# OK
+	[ $? = 0 ] && dk_call dk_echo "Found _myPath_"
 	
 	### Windows ###
 	# CMD.exe
