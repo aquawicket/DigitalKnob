@@ -12,7 +12,7 @@ dk_assertPath() {
 	# is a valid variable name check
 	[[ "$1" =~ ^[a-z][a-zA-Z0-9_]*$ ]] && [ -e "${!1}" ] && return 0
 	
-	dk_call dk_error "Assertion failed: ${1} is not found!"
+	[[ "$1" =~ ^[a-z][a-zA-Z0-9_]*$ ]] && dk_call dk_error "Assertion failed: ${1}:${!1} is not found!" || dk_call dk_error "Assertion failed: path:${1} is not found!" 
 }
 
 

@@ -121,7 +121,7 @@ export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
 export DK="${DKF}/DK.sh"
 export HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
 [ ! -e "${DK}" ] && [ -e "$(WGET_EXE)" ] && $(WGET_EXE) -P "${DKF}" "${HDK}"
-[ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && dkFirewallAllow $(CURL_EXE) && "CURL" $(CURL_EXE) -Lo "${DK}" "${HDK}"
+[ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && dk_call dk_firewallAllow "CURL" $(CURL_EXE) && $(CURL_EXE) -Lo "${DK}" "${HDK}"
 [ ! -e "${DK}" ] && echo "DK:${DK} does not exist" && exit 1
 
 $(SUDO_EXE) chmod 777 "${DK}"
