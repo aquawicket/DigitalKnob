@@ -10,7 +10,14 @@
 dk_firewallAllow() {
 	dk_debugFunc 2
 	
-	local _file_="${2////\\}"	# get path with / converted to \
+#	local _file_="${2////\\}"	# get path with / converted to \
+
+	dk_call dk_echo "CYGPATH_EXE = ${CYGPATH_EXE}"
+	dk_call dk_pause
+	local _file_=$($(CYGPATH_EXE) --windows ${2})
+	dk_call dk_echo "_file_ = ${_file_}"
+	dk_call dk_pause
+
 	dk_call dk_assertPath _file_
 	
 	dk_call dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "${_file_}" && (

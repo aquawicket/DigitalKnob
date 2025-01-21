@@ -17,6 +17,8 @@ dk_installGit() {
 	GIT_EXE=$(command -v git)
 	[ -e "${GIT_EXE}" ] || dk_call dk_error "GIT_EXE is invalid"
 	
+	dk_call dk_firewallAllow "Git" "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\mingw64\libexec\git-core\git-remote-https.exe"
+	
 	dk_call dk_printVar GIT_EXE
 }
 

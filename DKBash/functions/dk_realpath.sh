@@ -41,4 +41,6 @@ DKTEST(){
 	
 	dk_realpath "DK.sh" realpathB
 	dk_echo "realpathB = ${realpathB}"
+	
+	C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\usr\bin\cygpath.exe
 }
