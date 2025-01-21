@@ -10,8 +10,7 @@
 dk_firewallAllow() {
 	dk_debugFunc 2
 	
-	local _file_="$2"
-	#local _file_="${_file_:/=\}"
+	local _file_="${2////\\}"	# get path with / converted to \
 	dk_call dk_assertPath _file_
 	
 	dk_call dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "${_file_}" && (
@@ -25,15 +24,11 @@ dk_firewallAllow() {
 	netsh advfirewall firewall add rule name="$1" dir=out action=allow program="${_file_}" enable=yes profile=any >nul
 	
 	###### Windows Firewall Control ######
-	[ -e "${WFC_EXE}" ] 	||	local WFC_EXE="C:\Program Files\Malwarebytes\Windows Firewall Control\wfc.exe"
-	[ -e "${WFCUI_EXE}" ]	||	local WFCUI_EXE="C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe"
-	[ -e "${WFC_EXE}" ]		&&	local WFC_APP="${WFC_EXE}"
-	[ -e "${WFCUI_EXE}"	]	&&	local WFC_APP="${WFCUI_EXE}"
-	[ -e "${WFC_APP}" ]		&&	local cmnd="${WFC_APP}" -allow "${_file_}"
-	[ -e "${CMD_EXE}" ] 	||	local CMD_EXE="${COMSPEC}"
-	[ -e "${CMD_EXE}" ]		||	dk_call dk_error "CMD_EXE is invalid"
-	echo "cmnd > ${CMD_EXE} /c ${cmnd}"
-	${CMD_EXE} /c "${cmnd}"
+	[ -e "${WFC_EXE-}" ] 	||	local WFC_EXE="C:\Program Files\Malwarebytes\Windows Firewall Control\wfc.exe"
+	[ -e "${WFCUI_EXE-}" ]	||	local WFCUI_EXE="C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe"
+	[ -e "${WFC_EXE-}" ]	&&	local WFC_APP="${WFC_EXE}"
+	[ -e "${WFCUI_EXE-}" ]	&&	local WFC_APP="${WFCUI_EXE}"
+	"${WFC_APP}" -allow "${_file_}"
 	######################################
 }
 
@@ -46,5 +41,5 @@ dk_firewallAllow() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_firewallAllow "CMake-Gui" "C:/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake-gui.exe"
+	dk_call dk_firewallAllow "Notepad" "C:/Windows/notepad.exe"
 }

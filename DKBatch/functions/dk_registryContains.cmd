@@ -29,7 +29,7 @@ setlocal
 	%dk_call% dk_debugFunc 0
    
 	set "key=HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
-	set "exe=%comspec%"
+	set "exe=C:\Windows\system32\curl.exe"
    
     %dk_call% dk_registryContains "%key%" "%exe%" && (
 		%dk_call% dk_echo "FirewallRules contains %exe%"

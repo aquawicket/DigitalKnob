@@ -36,7 +36,7 @@ DKTEST() {
 	dk_debugFunc 0
    
 	local key="HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
-	local exe="C:\Windows\notepad.exe"
+	local exe="C:\Windows\system32\curl.exe"
    
     dk_call dk_registryContains "${key}" "${exe}" && (
 		dk_call dk_echo "FirewallRules contains ${exe}"

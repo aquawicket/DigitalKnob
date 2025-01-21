@@ -29,11 +29,12 @@ setlocal enableDelayedExpansion
 	if not exist "%WFCUI_EXE%" 	(set "WFCUI_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe")
 	if exist "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
 	if exist "%WFCUI_EXE%"		(set "WFC_APP=%WFCUI_EXE%")
-	if exist "%WFC_APP%"		(set cmnd="%WFC_APP%" -allow "%_file_%")
-	if not exist "%CMD_EXE%" (set "CMD_EXE=%COMSPEC%")
-	if not exist "%CMD_EXE%" (%dk_call% dk_error "CMD_EXE is invalid")
-	::echo cmnd ^> "%CMD_EXE%" /c "%cmnd%"
-	"%CMD_EXE%" /c "%cmnd%"
+::	if exist "%WFC_APP%"		(set cmnd="%WFC_APP%" -allow "%_file_%")
+::	if not exist "%CMD_EXE%" (set "CMD_EXE=%COMSPEC%")
+::	if not exist "%CMD_EXE%" (%dk_call% dk_error "CMD_EXE is invalid")
+::	::echo cmnd ^> "%CMD_EXE%" /c "%cmnd%"
+::	"%CMD_EXE%" /c "%cmnd%"
+	"%WFC_APP%" -allow "%_file_%"
 	::######################################
 %endfunction%
 
@@ -47,5 +48,5 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_firewallAllow "CMake-Gui" "C:/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake-gui.exe"
+	%dk_call% dk_firewallAllow "Notepad" "C:/Windows/notepad.exe"
 %endfunction%
