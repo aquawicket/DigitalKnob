@@ -1,13 +1,13 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!$dk_arrayPop){ $dk_arrayPop = 1 } else{ return } #include guard
+if(!$Array_dk_Pop){ $Array_dk_Pop = 1 } else{ return } #include guard
 
 ################################################################################
-# dk_arrayPop(array)
+# Array:dk_Pop(array)
 #
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_pop
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 #
-function Global:dk_arrayPop($array) {
+function Global:Array:dk_Pop($array) {
 	dk_debugFunc 1
 
 	#if($array -isnot [System.Object]){ dk_call dk_error "Not a System.Object"; return ${false} }
@@ -30,10 +30,10 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c')
-	dk_call dk_arrayPop $myArray
+	dk_call Array:dk_Pop $myArray
 	dk_call dk_echo "myArray = $myArray"
 	
 	$myArrayB = [System.Collections.ArrayList]('1', '2', '3')
-	dk_call dk_arrayPop $myArrayB
+	dk_call Array:dk_Pop $myArrayB
 	dk_call dk_echo "myArrayB = $myArrayB"
 }

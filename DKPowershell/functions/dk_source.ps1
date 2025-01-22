@@ -6,6 +6,8 @@ if(!$dk_source){ $dk_source = 1 } else{ return } #include guard
 #
 function Global:dk_source($func) {
 	#if(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1"){ dk_debugFunc 1 }
+	$all_args = $PsBoundParameters.Values + ${args}
+	#Write-Host "dk_source($all_args)"
 
 	if(!${func}){
 		Write-Host "ERROR: func:${func} is invalid";

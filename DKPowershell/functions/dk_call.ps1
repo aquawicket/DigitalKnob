@@ -13,11 +13,10 @@ function Global:dk_call(){
 	
 	
 	#Write-Host @args
-	$comand = $1 -replace "::", "/"
+	$comand = $1 -replace ":", "/"
 	#Write-Host "comand = $comand"
 	
 	if("$comand" -match "dk_[a-zA-Z0-9]+"){
-#	if("$comand" -match "[a-zA-Z0-9]+"){
 		dk_source $comand
 	}
 
