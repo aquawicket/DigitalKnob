@@ -2,12 +2,13 @@
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
 ##################################################################################
-# dk_test(args)
+# Test/Test/dk_test(args)
 #
+#Test/Test/dk_test() {
 dk_test() {
     #dk_debugFunc 0 99
     
-    echo "################ dk_test.sh ################"
+    echo "################ Test/Test/dk_test.sh ################"
     echo "                    0 = ${0-}"
 	echo "                    1 = ${1-}"
 	echo "                    2 = ${2-}"
@@ -64,18 +65,18 @@ dk_test() {
 DKTEST() { 
     #dk_call dk_debugFunc 0
 
-    dk_call dk_test "from DKTEST()" "to dk_test()"
+    dk_call dk_test "from Test/Test/DKTEST()" "to dk_test()"
 	echo ""
 	echo "GLOBAL_VAR = ${GLOBAL_VAR}"
 	echo "RETURN_VAR = ${RETURN_VAR}"
 	
-	dk_call Test/dk_test "from DKTEST()" "to Test/dk_test()"
+	dk_call Test/dk_test "from Test/Test/DKTEST()" "to Test/dk_test()"
 	echo ""
 	echo "GLOBAL_VAR = ${GLOBAL_VAR}"
 	echo "RETURN_VAR = ${RETURN_VAR}"
 	
-#	dk_call Test/Test/dk_test "from DKTEST()" "to Test/Test/dk_test()"
-#	echo ""
-#	echo "GLOBAL_VAR = ${GLOBAL_VAR}"
-#	echo "RETURN_VAR = ${RETURN_VAR}"
+	dk_call Test/Test/dk_test "from Test/Test/DKTEST()" "to Test/Test/dk_test()"
+	echo ""
+	echo "GLOBAL_VAR = ${GLOBAL_VAR}"
+	echo "RETURN_VAR = ${RETURN_VAR}"
 }
