@@ -9,8 +9,8 @@ dk_gitUpdate() {
 
 	dk_debugFunc 2 3
 
-	[ -n $1 ] && url="$1"    || url="https://github.com/aquawicket/DigitalKnob.git"
-	[ -n $2 ] && branch="$2" || branch="Development"
+	[ -n $1 ] && _url_="$1"    || _url_="https://github.com/aquawicket/DigitalKnob.git"
+	[ -n $2 ] && _branch_="$2" || _branch_="Development"
 	
 	#if ! [ "${3-}" = "NO_CONFIRM" ]; then
 	#	dk_call dk_info "Git Update? Any local changes will be lost."
@@ -29,7 +29,7 @@ dk_gitUpdate() {
 		#			from, we must stay in parentheses until those files are restored and updated, or we will lose the context.
 		#####################################################################	
 		if [ -e "${DKBRANCH_DIR}" ]; then
-			rem ###### Backup Branch directory and clone ######
+			####### Backup Branch directory and clone ######
 			dk_call dk_copy "${DKBRANCH_DIR}" "${DKBRANCH_DIR}_BACKUP" OVERWRITE
 			set "PATH=${DKBRANCH_DIR}_BACKUP\DKBatch\functions;${PATH}"
 			rm -r -f "${DKBRANCH_DIR}"
