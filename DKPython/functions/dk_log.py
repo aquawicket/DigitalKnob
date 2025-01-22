@@ -1,6 +1,6 @@
 import sys 
 sys.path.append(".")
-import DK
+from dk_echo import *
 
 try: ENABLE_dk_log
 except NameError: ENABLE_dk_log=1
@@ -17,9 +17,10 @@ except NameError: ENABLE_dk_log=1
 # 9 FATAL      dk_fatal
     
 ### DEFAULT
+DEFAULT="DEFAULT"
 DEFAULT_ENABLE=1
 DEFAULT_COLOR=white
-# DEFAULT_TAG=
+DEFAULT_TAG=""
 # DEFAULT_PAUSE=1
 # DEFAULT_TIMEOUT=1
 # DEFAULT_TRACE=1
@@ -27,6 +28,7 @@ DEFAULT_COLOR=white
 # DEFAULT_HALT=1
 
 ### VERBOSE
+VERBOSE="VERBOSE"
 VERBOSE_ENABLE=1
 VERBOSE_COLOR=magenta
 VERBOSE_TAG="VERBOSE: "
@@ -37,6 +39,7 @@ VERBOSE_TAG="VERBOSE: "
 #VERBOSE_HALT=1"
 
 ### DEBUG
+DEBUG="DEBUG"
 DEBUG_ENABLE=1
 DEBUG_COLOR=lblue
 DEBUG_TAG="DEBUG: "
@@ -47,6 +50,7 @@ DEBUG_TAG="DEBUG: "
 # DEBUG_HALT=1
 
 ### INFO
+INFO="INFO"
 INFO_ENABLE=1
 INFO_COLOR=white
 INFO_TAG="INFO: "
@@ -57,6 +61,7 @@ INFO_TAG="INFO: "
 # INFO_HALT=1
 
 ### SUCCESS
+SUCCESS="SUCCESS"
 SUCCESS_ENABLE=1
 SUCCESS_COLOR=green
 SUCCESS_TAG="SUCCESS: "
@@ -67,6 +72,7 @@ SUCCESS_TAG="SUCCESS: "
 # SUCCESS_HALT=1
 
 ### TODO
+TODO="TODO"
 TODO_ENABLE=1
 TODO_COLOR=blue
 TODO_TAG="TODO: "
@@ -77,6 +83,7 @@ TODO_TIMEOUT=1
 #TODO_HALT       set "TODO_HALT=1
 
 ### NOTICE
+NOTICE="NOTICE"
 NOTICE_ENABLE=1
 NOTICE_COLOR=lyellow
 NOTICE_TAG="NOTICE: "
@@ -87,6 +94,7 @@ NOTICE_TAG="NOTICE: "
 # NOTICE_HALT=1
 
 ### FIXME
+FIXME="FIXME"
 FIXME_ENABLE=1
 FIXME_COLOR=lyellow
 FIXME_TAG="FIXME: "
@@ -97,6 +105,7 @@ FIXME_TIMEOUT=1
 # FIXME_HALT=1
 
 ### WARNING
+WARNING="WARNING"
 WARNING_ENABLE=1
 WARNING_COLOR=yellow
 WARNING_TAG="WARNING: "
@@ -107,6 +116,7 @@ WARNING_TRACE=1
 # WARNING_HALT=1
 
 ### ERROR
+ERROR="ERROR"
 ERROR_ENABLE=1
 ERROR_COLOR=lred
 ERROR_TAG="ERROR: "
@@ -117,6 +127,7 @@ ERROR_TRACE=1
 # ERROR_HALT=1
 
 ### FATAL
+FATAL="FATAL"
 FATAL_ENABLE=1
 FATAL_COLOR=red
 FATAL_TAG="FATAL: "
@@ -136,19 +147,28 @@ FATAL_HALT=1
 #
 #	@msg	- The message to print
 #
-def dk_log(message):
+def dk_log(*args):
 #    dk_debugFunc 1 2
-    if ENABLE_dk_log != 1:  return 
-#   
-#        if "%~2" equ "" set "_level_=DEFAULT" && set "_message_=%~1"
-#        if "%~2" neq "" set "_level_=%~1"     && set "_message_=%~2"
-#        if "!%_level_%_ENABLE!" neq "1"  return
-#      
-#        ::if "" == %_message_:~0,1%%_message_:~-1% dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
-#
-#        dk_echo "!%_level_%_COLOR!!%_level_%_TAG!%_message_%%clr%"
-#        if "!%_level_%_TRACE!"=="1" dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  && dk_stacktrace#
-#		if "!%_level_%_SOUND!"=="1" dk_echo "!%_level_%_COLOR!*** SOUND_ON_%_level_% ***%clr%"  && (
+
+    if ENABLE_dk_log != 1:  
+        return 
+   
+    if len(args) == 1 or args[1] == None:
+        _level_=DEFAULT
+        _message_=args[0]
+    
+    if len(args) > 1:
+        _level_=args[0]
+        _message_=args[1]
+    
+    if globals()[f"{_level_}_ENABLE"] != 1:
+        return
+      
+#   ::if "" == %_message_:~0,1%%_message_:~-1% dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
+
+    dk_echo(globals()[f"{_level_}_COLOR"] + globals()[f"{_level_}_TAG"] + _message_ + clr)
+#   if "!%_level_%_TRACE!"=="1" dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  && dk_stacktrace#
+#	if "!%_level_%_SOUND!"=="1" dk_echo "!%_level_%_COLOR!*** SOUND_ON_%_level_% ***%clr%"  && (
 #			Array::dk_push errorBeeps "440,500"
 #			Array::dk_push errorBeeps "440,500"
 #			Array::dk_push errorBeeps "440,500" 
@@ -180,22 +200,22 @@ def dk_log(message):
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 def DKTEST():
 #	dk_debugFunc 0
-#  
+ 
     dk_log("test dk_log message")
-#    
-#    dk_log VERBOSE "test dk_log VERBOSE message"
-#    dk_log DEBUG   "test dk_log DEBUG message"
-#    dk_log INFO    "test dk_log INFO message"
-#    dk_log SUCCESS "test dk_log SUCCESS message"
-#    dk_log TODO    "test dk_log TODO message"
-#    dk_log NOTICE  "test dk_log NOTICE message"
-#    dk_log FIXME   "test dk_log FIXME message"
-#    dk_log WARNING "test dk_log WARNING message"
-#    dk_log ERROR   "test dk_log ERROR message"
-#    dk_log FATAL   "test dk_log FATAL message"
+    
+    dk_log(VERBOSE, "test dk_log VERBOSE message")
+    dk_log(DEBUG,   "test dk_log DEBUG message")
+    dk_log(INFO,    "test dk_log INFO message")
+    dk_log(SUCCESS, "test dk_log SUCCESS message")
+    dk_log(TODO,    "test dk_log TODO message")
+    dk_log(NOTICE,  "test dk_log NOTICE message")
+    dk_log(FIXME,   "test dk_log FIXME message")
+    dk_log(WARNING, "test dk_log WARNING message")
+    dk_log(ERROR,   "test dk_log ERROR message")
+    dk_log(FATAL,   "test dk_log FATAL message")
 ##########################################################################
 
-
+DKTEST()
 
 
 
