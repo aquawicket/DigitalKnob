@@ -32,7 +32,7 @@ exit /b %errorlevel%
 setlocal enableDelayedExpansion
 	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
 		set "str=%%a"
-		if not "x!str:%~2=!x" == "x!str!x" (exit /b 0)
+		if not "x!str:%~2=!x" == "x!str!x" exit /b 0
 	)
     exit /b 1
 %endfunction%
@@ -42,11 +42,11 @@ setlocal enableDelayedExpansion
 setlocal enableDelayedExpansion
 	set "_file_=%~2"
 	set "_file_=%_file_:/=\%"
-	%dk_call% :dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%_file_%" && (exit /b 0)
-	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%_file_%" enable=yes profile=any >nul
-	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%_file_%" enable=yes profile=any >nul
+	call :dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%_file_%" && (exit /b 0)
+	::###### netsh ######
+	netsh advfirewall firewall add rule name="%~1" dir=in action=allow program="%_file_%" enable=yes profile=any 1>nul 2>nul
+	netsh advfirewall firewall add rule name="%~1" dir=out action=allow program="%_file_%" enable=yes profile=any 1>nul 2>nul
 	::###### Windows Firewall Control ######
-
 	if not exist "%WFC_EXE%" 	(set "WFC_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfc.exe")
 	if not exist "%WFCUI_EXE%" 	(set "WFCUI_EXE=C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe")
 	if exist "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
@@ -56,5 +56,4 @@ setlocal enableDelayedExpansion
 	if not exist "%CMD_EXE%" (%dk_call% dk_error "CMD_EXE is invalid")
 	::echo cmnd ^> "%CMD_EXE%" /c "%cmnd%"
 	"%CMD_EXE%" /c "%cmnd%"
-	::######################################
 %endfunction%

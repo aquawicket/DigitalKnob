@@ -1,4 +1,4 @@
-echo \" <<'BATCH_SCRIPT' >/dev/null ">NUL "\" \`" <#"
+@echo \" <<'BATCH_SCRIPT' >/dev/null ">NUL "\" \`" <#"
 @echo OFF
 REM ===== Batch Script Begin =====
 echo I'm PolyShell, a batch script!
