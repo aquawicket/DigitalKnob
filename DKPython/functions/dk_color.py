@@ -13,90 +13,90 @@ import DK
 #   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 #   https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 #
-#def dk_color(*args):
+def dk_color(*args):
     #dk_debugFunc 0 1
 
-global USE_COLOR
-USE_COLOR=1
-#if defined args[0] if args[0] equ 0 USE_COLOR=
+    global USE_COLOR
+    USE_COLOR=1
+    #if defined args[0] if args[0] equ 0 USE_COLOR=
 
-#    if USE_COLOR == 1:
-ESC=""                          # escape character
+    #    if USE_COLOR == 1:
+    ESC=""                          # escape character
 
-### Attributes on ##
-clr=ESC+"[0m"                  # Default                     - Returns all attributes to the default state prior to modification
-bold=ESC+"[1m"                 # Bold/Bright                 - Applies brightness/intensity flag to foreground color
-dim=ESC+"[2m"                  # Dim
-italic=ESC+"[3m"               # Italic
-underline=ESC+"[4m"            # Underline                   - Adds underline
-blink=ESC+"[5m"                # Blink
-fblink=ESC+"[6m"               # Rapid Blink
-negative=ESC+"[7m"             # Negative                    - Swaps foreground and background colors
-invisible=ESC+"[8m"            # Invisible
-strike=ESC+"[9m"               # Strike Through
+    ### Attributes on ##
+    global clr;         clr=ESC+"[0m"                  # Default                     - Returns all attributes to the default state prior to modification
+    global bold;        bold=ESC+"[1m"                 # Bold/Bright                 - Applies brightness/intensity flag to foreground color
+    global dim;         dim=ESC+"[2m"                  # Dim
+    global italic;      italic=ESC+"[3m"               # Italic
+    global underline;   underline=ESC+"[4m"            # Underline                   - Adds underline
+    global blink;       blink=ESC+"[5m"                # Blink
+    global fblink;      fblink=ESC+"[6m"               # Rapid Blink
+    global negative;    negative=ESC+"[7m"             # Negative                    - Swaps foreground and background colors
+    global invisible;   invisible=ESC+"[8m"            # Invisible
+    global strike;      strike=ESC+"[9m"               # Strike Through
 
-### Attributes off ###
-# 20m=ESC+"[20m"               # 20
-# 21m=ESC+"[21m"               # 21
-nobold=ESC+"[22m"              # No bold/bright              - Removes brightness/intensity flag from foreground color
-noitalic=ESC+"[23m"            # No italic
-nounderline=ESC+"[24m"         # No underline                - Removes underline
-noblink=ESC+"[25m"             # No Blink
-# 26m=ESC+"[26m"               # 26
-nonegative=ESC+"[27m"          # Positive(No negative)       - Returns foreground/background to normal
-visible=ESC+"[28m"             # Visible(No invisible)
-nostrike=ESC+"[29m"            # No Strike Through
+    ### Attributes off ###
+    # global 20m;       20m=ESC+"[20m"                  # 20
+    # global 21m;       21m=ESC+"[21m"                  # 21
+    global nobol;       nobold=ESC+"[22m"               # No bold/bright              - Removes brightness/intensity flag from foreground color
+    global noitalic;    noitalic=ESC+"[23m"             # No italic
+    global nounderline; nounderline=ESC+"[24m"          # No underline                - Removes underline
+    global noblink;     noblink=ESC+"[25m"              # No Blink
+    # global 26m;       26m=ESC+"[26m"                  # 26
+    global nonegative;  nonegative=ESC+"[27m"           # Positive(No negative)       - Returns foreground/background to normal
+    global visible;     visible=ESC+"[28m"              # Visible(No invisible)
+    global nostrike;    nostrike=ESC+"[29m"             # No Strike Through
 
-### Foreground Colors ##
-black=ESC+"[30m"               # Foreground Black            - Applies non-bold/bright black to foreground
-red=ESC+"[31m"                 # Foreground Red              - Applies non-bold/bright red to foreground
-green=ESC+"[32m"               # Foreground Green            - Applies non-bold/bright green to foreground
-yellow=ESC+"[33m"              # Foreground Yellow           - Applies non-bold/bright yellow to foreground
-blue=ESC+"[34m"                # Foreground Blue             - Applies non-bold/bright blue to foreground
-magenta=ESC+"[35m"             # Foreground Magenta          - Applies non-bold/bright magenta to foreground
-cyan=ESC+"[36m"                # Foreground Cyan             - Applies non-bold/bright cyan to foreground
-white=ESC+"[37m"               # Foreground White            - Applies non-bold/bright white to foreground
-extended=ESC+"[38m"            # Foreground Extended         - Applies extended color value to the foreground
-default=ESC+"[39m"             # Foreground Default          - Applies only the foreground portion of the defaults
+    ### Foreground Colors ##
+    global black;       black=ESC+"[30m"               # Foreground Black            - Applies non-bold/bright black to foreground
+    global red;         red=ESC+"[31m"                 # Foreground Red              - Applies non-bold/bright red to foreground
+    global green;       green=ESC+"[32m"               # Foreground Green            - Applies non-bold/bright green to foreground
+    global yellow;      yellow=ESC+"[33m"              # Foreground Yellow           - Applies non-bold/bright yellow to foreground
+    global blue;        blue=ESC+"[34m"                # Foreground Blue             - Applies non-bold/bright blue to foreground
+    global magenta;     magenta=ESC+"[35m"             # Foreground Magenta          - Applies non-bold/bright magenta to foreground
+    global cyan;        cyan=ESC+"[36m"                # Foreground Cyan             - Applies non-bold/bright cyan to foreground
+    global white;       white=ESC+"[37m"               # Foreground White            - Applies non-bold/bright white to foreground
+    global extended;    extended=ESC+"[38m"            # Foreground Extended         - Applies extended color value to the foreground
+    global default;     default=ESC+"[39m"             # Foreground Default          - Applies only the foreground portion of the defaults
 
-### Background Colors ###
-bg_black=ESC+"[40m"            # Background Black            - Applies non-bold/bright black to background
-bg_red=ESC+"[41m"              # Background Red              - Applies non-bold/bright red to background
-bg_green=ESC+"[42m"            # Background Green            - Applies non-bold/bright green to background
-bg_yellow=ESC+"[43m"           # Background Yellow           - Applies non-bold/bright yellow to background
-bg_blue=ESC+"[44m"             # Background Blue             - Applies non-bold/bright blue to background
-bg_magenta=ESC+"[45m"          # Background Magenta          - Applies non-bold/bright magenta to background
-bg_cyan=ESC+"[46m"             # Background Cyan             - Applies non-bold/bright cyan to background
-bg_white=ESC+"[47m"            # Background White            - Applies non-bold/bright white to background
-bg_extended=ESC+"[48m"         # Background Extended         - Applies extended color value to the background
-bg_default=ESC+"[49m"          # Background Default          - Applies only the background portion of the defaults
+    ### Background Colors ###
+    global bg_black;    bg_black=ESC+"[40m"            # Background Black            - Applies non-bold/bright black to background
+    global bg_red;      bg_red=ESC+"[41m"              # Background Red              - Applies non-bold/bright red to background
+    global bg_green;    bg_green=ESC+"[42m"            # Background Green            - Applies non-bold/bright green to background
+    global bg_yellow;   bg_yellow=ESC+"[43m"           # Background Yellow           - Applies non-bold/bright yellow to background
+    global bg_blue;     bg_blue=ESC+"[44m"             # Background Blue             - Applies non-bold/bright blue to background
+    global bg_magenta;  bg_magenta=ESC+"[45m"          # Background Magenta          - Applies non-bold/bright magenta to background
+    global bg_cyan;     bg_cyan=ESC+"[46m"             # Background Cyan             - Applies non-bold/bright cyan to background
+    global bg_white;    bg_white=ESC+"[47m"            # Background White            - Applies non-bold/bright white to background
+    global bg_extended; bg_extended=ESC+"[48m"         # Background Extended         - Applies extended color value to the background
+    global bg_default;  bg_default=ESC+"[49m"          # Background Default          - Applies only the background portion of the defaults
 
-### Foreground Colors (light) ###
-lblack=ESC+"[90m"              # Bright Foreground Black     - Applies bold/bright black to foreground
-lred=ESC+"[91m"                # Bright Foreground Red       - Applies bold/bright red to foreground
-lgreen=ESC+"[92m"              # Bright Foreground Green     - Applies bold/bright green to foreground
-lyellow=ESC+"[93m"             # Bright Foreground Yellow    - Applies bold/bright yellow to foreground
-lblue=ESC+"[94m"               # Bright Foreground Blue      - Applies bold/bright blue to foreground
-lmagenta=ESC+"[95m"            # Bright Foreground Magenta   - Applies bold/bright magenta to foreground
-lcyan=ESC+"[96m"               # Bright Foreground Cyan      - Applies bold/bright cyan to foreground
-lwhite=ESC+"[97m"              # Bright Foreground White     - Applies bold/bright white to foreground
+    ### Foreground Colors (light) ###
+    global lblack;      lblack=ESC+"[90m"              # Bright Foreground Black     - Applies bold/bright black to foreground
+    global lred;        lred=ESC+"[91m"                # Bright Foreground Red       - Applies bold/bright red to foreground
+    global lgreen;      lgreen=ESC+"[92m"              # Bright Foreground Green     - Applies bold/bright green to foreground
+    global lyellow;     lyellow=ESC+"[93m"             # Bright Foreground Yellow    - Applies bold/bright yellow to foreground
+    global lblue;       lblue=ESC+"[94m"               # Bright Foreground Blue      - Applies bold/bright blue to foreground
+    global lmagenta;    lmagenta=ESC+"[95m"            # Bright Foreground Magenta   - Applies bold/bright magenta to foreground
+    global lcyan;       lcyan=ESC+"[96m"               # Bright Foreground Cyan      - Applies bold/bright cyan to foreground
+    global lwhite;      lwhite=ESC+"[97m"              # Bright Foreground White     - Applies bold/bright white to foreground
 
-### Background Colors (light) ###
-bg_lblack=ESC+"[100m"          # Bright Background Black     - Applies bold/bright black to background
-bg_lred=ESC+"[101m"            # Bright Background Red       - Applies bold/bright red to background
-bg_lgreen=ESC+"[102m"          # Bright Background Green     - Applies bold/bright green to background
-bg_lyellow=ESC+"[103m"         # Bright Background Yellow    - Applies bold/bright yellow to background
-bg_lblue=ESC+"[104m"           # Bright Background Blue      - Applies bold/bright blue to background
-bg_lmagenta=ESC+"[105m"        # Bright Background Magenta   - Applies bold/bright magenta to background
-bg_lcyan=ESC+"[106m"           # Bright Background Cyan      - Applies bold/bright cyan to background
-bg_lwhite=ESC+"[107m"          # Bright Background White     - Applies bold/bright white to background
+    ### Background Colors (light) ###
+    global bg_lblack;   bg_lblack=ESC+"[100m"          # Bright Background Black     - Applies bold/bright black to background
+    global bg_lred;     bg_lred=ESC+"[101m"            # Bright Background Red       - Applies bold/bright red to background
+    global bg_lgreen;   bg_lgreen=ESC+"[102m"          # Bright Background Green     - Applies bold/bright green to background
+    global bg_lyellow;  bg_lyellow=ESC+"[103m"         # Bright Background Yellow    - Applies bold/bright yellow to background
+    global bg_lblue;    bg_lblue=ESC+"[104m"           # Bright Background Blue      - Applies bold/bright blue to background
+    global bg_lmagenta; bg_lmagenta=ESC+"[105m"        # Bright Background Magenta   - Applies bold/bright magenta to background
+    global bg_lcyan;    bg_lcyan=ESC+"[106m"           # Bright Background Cyan      - Applies bold/bright cyan to background
+    global bg_lwhite;   bg_lwhite=ESC+"[107m"          # Bright Background White     - Applies bold/bright white to background
 
-### Foreground RGB Colors ###
-RGB=ESC+"[38;2;"               # +RGB+50;100;150m         = ESC+"[38;2;50;100;150m
-### Background RGB Colors ###
-bg_RGB=ESC+"[48;2;"            # +bg_RGB+150;100;50m      = ESC+"[38;2;150;100;50m
+    ### Foreground RGB Colors ###
+    global RGB;         RGB=ESC+"[38;2;"               # RGB+50;100;150m         = ESC+"[38;2;50;100;150m"
+    ### Background RGB Colors ###
+    global bg_RGB;      bg_RGB=ESC+"[48;2;"            # bg_RGB+150;100;50m      = ESC+"[38;2;150;100;50m"
 
-print(blue+"C"+green+"O"+red+"L"+magenta+"O"+cyan+"R "+blue+"O"+green+"N"+clr)
+    print(blue+"C"+green+"O"+red+"L"+magenta+"O"+cyan+"R "+blue+"O"+green+"N"+clr)
   
 #    else
 #       # dk_unset ESC
@@ -167,7 +167,7 @@ print(blue+"C"+green+"O"+red+"L"+magenta+"O"+cyan+"R "+blue+"O"+green+"N"+clr)
 #
 #        dk_echo(clr+"COLOR OFF")
 
-#dk_color()
+dk_color()
 
 
 
@@ -177,60 +177,60 @@ def DKTEST():
 
     print()
     print(black+bg_lblack+"           Styles            "+clr)
-    print("clr        "+clr+" default "+clr)
-    print("bold       "+bold+" bold "+clr)
-    print("dim        "+dim+" dim"+clr)
-    print("italic     "+italic+" italic"+clr)
-    print("underline  "+underline+" underline"+clr)
-    print("blink      "+blink+" blink"+clr)
-    print("fblink     "+fblink+" fblink"+clr)
-    print("negative   "+negative+" negative"+clr)
-    print("invisible  "+invisible+" invisible"+clr)
-    print("strike     "+strike+" strike"+clr)
+    print("clr        "+clr+      " default   "+clr)
+    print("bold       "+bold+     " bold      "+clr)
+    print("dim        "+dim+      " dim       "+clr)
+    print("italic     "+italic+   " italic    "+clr)
+    print("underline  "+underline+" underline "+clr)
+    print("blink      "+blink+    " blink     "+clr)
+    print("fblink     "+fblink+   " fblink    "+clr)
+    print("negative   "+negative+ " negative  "+clr)
+    print("invisible  "+invisible+" invisible "+clr)
+    print("strike     "+strike+   " strike    "+clr)
     print()
     print()
     print(black+bg_lblack+"      Foreground Colors      "+clr)
-    print("black      "+black+" black"+clr)
-    print("red        "+red+" red"+clr)
-    print("green      "+green+" green"+clr)
-    print("yellow     "+yellow+" yellow"+clr)
-    print("blue       "+blue+" blue"+clr)
-    print("magenta    "+magenta+" magenta"+clr)
-    print("cyan       "+cyan+" cyan"+clr)
-    print("white      "+white+" white"+clr)
+    print("black      "+black+  " black   "+clr)
+    print("red        "+red+    " red     "+clr)
+    print("green      "+green+  " green   "+clr)
+    print("yellow     "+yellow+ " yellow  "+clr)
+    print("blue       "+blue+   " blue    "+clr)
+    print("magenta    "+magenta+" magenta "+clr)
+    print("cyan       "+cyan+   " cyan    "+clr)
+    print("white      "+white+  " white   "+clr)
     print()
     print()
     print(black+bg_lblack+"      Background Colors      "+clr)
-    print("bg_black   "+bg_black+" bg_black"+clr)
-    print("bg_red     "+bg_red+" bg_red"+clr)
-    print("bg_green   "+bg_green+" bg_green"+clr)
-    print("bg_yellow  "+bg_yellow+" bg_yellow"+clr)
-    print("bg_blue    "+bg_blue+" bg_blue"+clr)
-    print("bg_magenta "+bg_magenta+" bg_magenta"+clr)
-    print("bg_cyan    "+bg_cyan+" bg_cyan"+clr)
-    print("bg_white   "+bg_white+" bg_white"+clr)
+    print("bg_black   "+bg_black+  " bg_black   "+clr)
+    print("bg_red     "+bg_red+    " bg_red     "+clr)
+    print("bg_green   "+bg_green+  " bg_green   "+clr)
+    print("bg_yellow  "+bg_yellow+ " bg_yellow  "+clr)
+    print("bg_blue    "+bg_blue+   " bg_blue    "+clr)
+    print("bg_magenta "+bg_magenta+" bg_magenta "+clr)
+    print("bg_cyan    "+bg_cyan+   " bg_cyan    "+clr)
+    print("bg_white   "+bg_white+  " bg_white   "+clr)
     print()
     print()
     print(black+bg_lblack+" Foreground Colors  bright  "+clr)
-    print("lblack      "+lblack+" lblack"+clr)
-    print("lred        "+lred+" lred"+clr)
-    print("lgreen      "+lgreen+" lgreen"+clr)
-    print("lyellow     "+lyellow+" lyellow"+clr)
-    print("lblue       "+lblue+" lblue"+clr)
-    print("lmagenta    "+lmagenta+" lmagenta"+clr)
-    print("lcyan       "+lcyan+" lcyan"+clr)
-    print("lwhite      "+lwhite+" lwhite"+clr)
+    print("lblack      "+lblack+  " lblack   "+clr)
+    print("lred        "+lred+    " lred     "+clr)
+    print("lgreen      "+lgreen+  " lgreen   "+clr)
+    print("lyellow     "+lyellow+ " lyellow  "+clr)
+    print("lblue       "+lblue+   " lblue    "+clr)
+    print("lmagenta    "+lmagenta+" lmagenta "+clr)
+    print("lcyan       "+lcyan+   " lcyan    "+clr)
+    print("lwhite      "+lwhite+  " lwhite   "+clr)
     print()
     print()
-    print("black+ +bg_lblack+ Background Colors  bright "+clr)
-    print("bg_lblack   "+bg_lblack+" bg_lblack"+clr)
-    print("bg_lred     "+bg_lred+" bg_lred"+clr)
-    print("bg_lgreen   "+bg_lgreen+" bg_lgreen"+clr)
-    print("bg_lyellow  "+bg_lyellow+" bg_lyellow"+clr)
-    print("bg_lblue    "+bg_lblue+" bg_lblue"+clr)
-    print("bg_lmagenta "+bg_lmagenta+" bg_lmagenta"+clr)
-    print("bg_lcyan    "+bg_lcyan+" bg_lcyan"+clr)
-    print("bg_lwhite   "+bg_lwhite+" bg_lwhite"+clr)
+    print(black+bg_lblack+" Background Colors  bright "+clr)
+    print("bg_lblack   "+bg_lblack+  " bg_lblack   "+clr)
+    print("bg_lred     "+bg_lred+    " bg_lred     "+clr)
+    print("bg_lgreen   "+bg_lgreen+  " bg_lgreen   "+clr)
+    print("bg_lyellow  "+bg_lyellow+ " bg_lyellow  "+clr)
+    print("bg_lblue    "+bg_lblue+   " bg_lblue    "+clr)
+    print("bg_lmagenta "+bg_lmagenta+" bg_lmagenta "+clr)
+    print("bg_lcyan    "+bg_lcyan+   " bg_lcyan    "+clr)
+    print("bg_lwhite   "+bg_lwhite+  " bg_lwhite   "+clr)
     print()
     print()
     print(black+bg_lblack+"   RGB Foreground Colors  "+clr)
@@ -290,7 +290,7 @@ def DKTEST():
     print(RGB+"0;0;0m    RGB test 0;0;0      "+clr)
     print()
     print()
-    print(black+bg_lblack+"   RGB Background Colors  "+clr)
+    print(black+bg_lblack+"   RGB Background Colors   "+clr)
     print(bg_RGB+"255;10;10m    bg_RGB test 255;0;10   "+clr)
     print(bg_RGB+"10;255;10m    bg_RGB test 0;255;10   "+clr)
     print(bg_RGB+"0;0;255m    bg_RGB test 0;0;255    "+clr)
@@ -348,9 +348,9 @@ def DKTEST():
     print()
     print()
     print(black+bg_lblack+"        Combinations        "+clr)
-    print("negative                            "+negative+"   inverse foreground <-> background  "+clr)
-    print("bg_yellow red                     "+bg_yellow+red+"  yellow backgroud / red foreground  "+clr)
-    print("bg_yellow red negative           "+bg_yellow+red+negative+"        yellow / red inversed         "+clr)
+    print("negative                        "+negative+"   inverse foreground <-> background  "+clr)
+    print("bg_yellow red                   "+bg_yellow+red+"  yellow backgroud / red foreground   "+clr)
+    print("bg_yellow red negative          "+bg_yellow+red+negative+"        yellow / red inversed         "+clr)
     print("bg_red.. bg_green.. bg_blue     "+bg_red+"    nested   "+bg_green+"    colors    "+bg_blue+"    text   "+clr)
     print()
     print()
@@ -370,3 +370,4 @@ def DKTEST():
     print(bg_white+"                                                    "+clr)
     print(bg_red+"                                                    "+clr)
 
+DKTEST()
