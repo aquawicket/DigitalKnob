@@ -1,16 +1,16 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!$dk_test){ $dk_test = 1 } else{ return } #include guard
+if(!$Test_dk_test){ $Test_dk_test = 1 } else{ return } #include guard
 
 ##################################################################################
-# dk_test()
+# Test:dk_test()
 #
 #
-function GLOBAL:dk_test() {
+function GLOBAL:Test:dk_test() {
 	#dk_debugFunc 0 99
 
     $all_args = $PsBoundParameters.Values + ${args}
     
-    Write-Host "####################### dk_test.ps1 #######################"
+    Write-Host "####################### Test:dk_test.ps1 #######################"
     Write-Host "                          0 = $0"
     Write-Host "                          * = $*"
     Write-Host "                   __TIME__ = $(__TIME__)"
@@ -64,17 +64,17 @@ function GLOBAL:dk_test() {
 function Global:DKTEST() { 
     #dk_call dk_debugFunc 0
 
-    dk_call dk_test "from DKTEST()" "to dk_test()"
+    dk_call dk_test "from Test/DKTEST()" "to dk_test()"
 	Write-Host ""
 	Write-Host "GLOBAL_VAR = ${GLOBAL_VAR}"
 	Write-Host "RETURN_VAR = ${RETURN_VAR}"
 	
-	dk_call Test:dk_test "from DKTEST()" "to Test/dk_test()"
+	dk_call Test:dk_test "from Test/DKTEST()" "to Test/dk_test()"
 	Write-Host ""
 	Write-Host "GLOBAL_VAR = ${GLOBAL_VAR}"
 	Write-Host "RETURN_VAR = ${RETURN_VAR}"
 	
-	dk_call Test:Test:dk_test "from DKTEST()" "to Test/Test/dk_test()"
+	dk_call Test:Test:dk_test "from Test/DKTEST()" "to Test/Test/dk_test()"
 	Write-Host ""
 	Write-Host "GLOBAL_VAR = ${GLOBAL_VAR}"
 	Write-Host "RETURN_VAR = ${RETURN_VAR}"
