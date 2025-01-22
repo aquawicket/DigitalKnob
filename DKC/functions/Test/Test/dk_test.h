@@ -1,8 +1,8 @@
 #pragma once
-#ifndef dk_test_hpp
-#define dk_test_hpp
+#ifndef dk_test_h
+#define dk_test_h
 
-#include "DK.hpp"
+#include "DK.h"
 
 
 //################################################################################
@@ -61,4 +61,4 @@ void dk_test(int argc, ...){
 };
 
 
-#endif //dk_test_hpp
+#endif //dk_test_h
