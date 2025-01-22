@@ -1,7 +1,8 @@
 import sys 
 sys.path.append(".")
-from dk_echo import *
+import DK
 
+from dk_echo import *
 try: ENABLE_dk_log
 except NameError: ENABLE_dk_log=1
 
@@ -165,7 +166,7 @@ def dk_log(*args):
         return
       
 #   ::if "" == %_message_:~0,1%%_message_:~-1% dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
-
+    
     dk_echo(globals()[f"{_level_}_COLOR"] + globals()[f"{_level_}_TAG"] + _message_ + clr)
 #   if "!%_level_%_TRACE!"=="1" dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  && dk_stacktrace#
 #	if "!%_level_%_SOUND!"=="1" dk_echo "!%_level_%_COLOR!*** SOUND_ON_%_level_% ***%clr%"  && (
@@ -215,7 +216,7 @@ def DKTEST():
     dk_log(FATAL,   "test dk_log FATAL message")
 ##########################################################################
 
-DKTEST()
+#DKTEST()
 
 
 

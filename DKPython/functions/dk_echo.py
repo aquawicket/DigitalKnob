@@ -48,4 +48,4 @@ def DKTEST():
     dk_echo(red+"This is "+white+"dk_echo "+blue+"with color "+clr)
 
 ########################################################################
-DKTEST()
+#DKTEST()

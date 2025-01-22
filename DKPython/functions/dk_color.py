@@ -16,11 +16,10 @@ import DK
 def dk_color(*args):
     #dk_debugFunc 0 1
 
-    global USE_COLOR
-    USE_COLOR=1
+    global USE_COLOR;   USE_COLOR=1
     #if defined args[0] if args[0] equ 0 USE_COLOR=
 
-    #    if USE_COLOR == 1:
+    # if USE_COLOR == 1:
     ESC=""                          # escape character
 
     ### Attributes on ##
@@ -38,7 +37,7 @@ def dk_color(*args):
     ### Attributes off ###
     # global 20m;       20m=ESC+"[20m"                  # 20
     # global 21m;       21m=ESC+"[21m"                  # 21
-    global nobol;       nobold=ESC+"[22m"               # No bold/bright              - Removes brightness/intensity flag from foreground color
+    global nobold;      nobold=ESC+"[22m"               # No bold/bright              - Removes brightness/intensity flag from foreground color
     global noitalic;    noitalic=ESC+"[23m"             # No italic
     global nounderline; nounderline=ESC+"[24m"          # No underline                - Removes underline
     global noblink;     noblink=ESC+"[25m"              # No Blink
@@ -370,4 +369,4 @@ def DKTEST():
     print(bg_white+"                                                    "+clr)
     print(bg_red+"                                                    "+clr)
 
-DKTEST()
+#DKTEST()
