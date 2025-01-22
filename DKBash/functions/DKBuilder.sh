@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 ############ dk_onError trap ############
 (set -o posix 		 2>/dev/null)	&& set -o posix			|| echo "'set -o posix' failed"
 (set -o pipefail 	 2>/dev/null)	&& set -o pipefail  	|| echo "'set -o pipefail' failed"  	# trace ERR through pipes
@@ -25,7 +24,7 @@ dk_onError(){
 	read -rp 'Press Enter to continue...'
 	exit ${exitcode}
 }
-#########################################
+############ dk_onError trap ############
 
 ###### SUDO_EXE ######
 SUDO_EXE(){
@@ -59,6 +58,41 @@ DKHOME_DIR(){
 #	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD) 															# Android sdcard
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR=${HOME}
 	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| echo "DKHOME_DIR Not Found"  >&2
+}
+
+###### DKCACHE_DIR ######
+DKCACHE_DIR(){
+	[ ! -e "${DKCACHE_DIR-}" ] && export DKCACHE_DIR="$(DKHOME_DIR)/.dk"
+	[ ! -e "${DKCACHE_DIR-}" ] && mkdir "${DKCACHE_DIR}"
+	[   -e "${DKCACHE_DIR-}" ] && echo "${DKCACHE_DIR-}"   	|| echo "DKCACHE_DIR Not Found"  >&2
+}
+
+###### DIGITALKNOB_DIR ######
+DIGITALKNOB_DIR(){
+	[ ! -e "${DIGITALKNOB_DIR-}" ] && export DIGITALKNOB_DIR="$(DKHOME_DIR)/digitalknob"
+	[ ! -e "${DIGITALKNOB_DIR-}" ] && mkdir "${DIGITALKNOB_DIR}"
+	[   -e "${DIGITALKNOB_DIR-}" ] && echo "${DIGITALKNOB_DIR-}"   	|| echo "DIGITALKNOB_DIR Not Found"  >&2
+}
+
+###### DKBRANCH_DIR ######
+DKBRANCH_DIR(){
+	[ ! -e "${DKBRANCH_DIR-}" ] && export DKBRANCH_DIR="$(DIGITALKNOB_DIR)/Development"
+	[ ! -e "${DKBRANCH_DIR-}" ] && mkdir "${DKBRANCH_DIR}"
+	[   -e "${DKBRANCH_DIR-}" ] && echo "${DKBRANCH_DIR-}"   	|| echo "DKBRANCH_DIR Not Found"  >&2
+}
+
+###### DKBASH_DIR ######
+DKBASH_DIR(){
+	[ ! -e "${DKBASH_DIR-}" ] && export DKBASH_DIR="$(DKBRANCH_DIR)/DKBash"
+	[ ! -e "${DKBASH_DIR-}" ] && mkdir "${DKBASH_DIR}"
+	[   -e "${DKBASH_DIR-}" ] && echo "${DKBASH_DIR-}"   	|| echo "DKBASH_DIR Not Found"  >&2
+}
+
+###### DKBASH_FUNCTIONS_DIR ######
+DKBASH_FUNCTIONS_DIR(){
+	[ ! -e "${DKBASH_FUNCTIONS_DIR-}" ] && export DKBASH_FUNCTIONS_DIR="$(DKBASH_DIR)/functions"
+	[ ! -e "${DKBASH_FUNCTIONS_DIR-}" ] && mkdir "${DKBASH_FUNCTIONS_DIR}"
+	[   -e "${DKBASH_FUNCTIONS_DIR-}" ] && echo "${DKBASH_FUNCTIONS_DIR-}"   	|| echo "DKBASH_FUNCTIONS_DIR Not Found"  >&2
 }
 
 ###### CHATTR_EXE ######
@@ -109,19 +143,16 @@ CURL_EXE(){
 #	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" 				>> "/etc/wsl.conf"'
 #}
 
-export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
-[ -e "${DKF}" ] 					|| export DKF="$(DKHOME_DIR)/.dk/DKBash/functions"
-[ -e "$(DKHOME_DIR)/.dk" ] 			|| mkdir "$(DKHOME_DIR)/.dk"
-[ "$(DKHOME_DIR)/.dk/$(basename $0)" -ef "$0)" ] && [ -e "$(DKHOME_DIR)/.dk" ] 	&& cp "$0" "$(DKHOME_DIR)/.dk/$(basename $0)"
-[ -e "$(DKHOME_DIR)/.dk/DKBash" ] 	|| mkdir "$(DKHOME_DIR)/.dk/DKBash"
-[ -e "$(DKHOME_DIR)/.dk/DKBash" ] 	&& export > "$(DKHOME_DIR)/.dk/DKBash/default_env.sh"
-[ -e "${DKF}" ] 					|| mkdir "${DKF}"
-[ -e "${DKF}" ] 					|| echo "DKF:${DKF} does not exist" || exit 1
 
-export DK="${DKF}/DK.sh"
+[ "$(DKCACHE_DIR)/$(basename $0)" -ef "$0)" ] && [ -e "$(DKCACHE_DIR)" ] 	&& cp "$0" "$(DKCACHE_DIR)/$(basename $0)"
+[ -e "$(DKCACHE_DIR)/DKBash" ] 	&& export > "$(DKCACHE_DIR)/default_env.sh"
+
+
+export DK="$(DKBASH_FUNCTIONS_DIR)/DK.sh"
 export HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
 [ ! -e "${DK}" ] && [ -e "$(WGET_EXE)" ] && $(WGET_EXE) -P "${DKF}" "${HDK}"
-[ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && dk_call dk_firewallAllow "CURL" "$(CURL_EXE)" && $(CURL_EXE) -Lo "${DK}" "${HDK}"
+[ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && $(CURL_EXE) -Lo "${DK}" "${HDK}"
+#[ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && dk_call dk_firewallAllow "CURL" "$(CURL_EXE)" && $(CURL_EXE) -Lo "${DK}" "${HDK}"
 [ ! -e "${DK}" ] && echo "DK:${DK} does not exist" && exit 1
 
 $(SUDO_EXE) chmod 777 "${DK}"
