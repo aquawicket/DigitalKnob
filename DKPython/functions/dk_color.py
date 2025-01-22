@@ -2,112 +2,112 @@ import sys
 sys.path.append(".")
 import DK
 
-::##################################################################################
-::# dk_color(on/off)
-::#
-::# Enable / Disable console text and background coloring
-::#
-::#   on/off:  Default ON
-::#
-::#   https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
-::#   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-::#   https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
-::#
-def dk_color()
+##################################################################################
+# dk_color(on/off)
+#
+# Enable / Disable console text and background coloring
+#
+#   on/off:  Default ON
+#
+#   https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+#   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+#   https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
+#
+def dk_color(*args)
 	 dk_debugFunc 0 1
 
-    set "USE_COLOR=1"
-    if defined %1 if %1 equ 0 set "USE_COLOR=" 
+    USE_COLOR=1
+    if defined args[0] if args[0] equ 0 USE_COLOR=
 
 
-    :USE_COLOR_if
+    #USE_COLOR_if
     if not defined USE_COLOR goto USE_COLOR_else
-        set "ESC="                          &:: escape character
+        ESC=""                          # escape character
 
-        ::# Attributes on
-        set "clr=%ESC%[0m"                  &:: Default                     - Returns all attributes to the default state prior to modification
-        set "bold=%ESC%[1m"                 &:: Bold/Bright                 - Applies brightness/intensity flag to foreground color
-        set "dim=%ESC%[2m"                  &:: Dim
-        set "italic=%ESC%[3m"               &:: Italic
-        set "underline=%ESC%[4m"            &:: Underline                   - Adds underline
-        set "blink=%ESC%[5m"                &:: Blink
-        set "fblink=%ESC%[6m"               &:: Rapid Blink
-        set "negative=%ESC%[7m"             &:: Negative                    - Swaps foreground and background colors
-        set "invisible=%ESC%[8m"            &:: Invisible
-        set "strike=%ESC%[9m"               &:: Strike Through
+        ### Attributes on ##
+        clr=ESC+"[0m"                  # Default                     - Returns all attributes to the default state prior to modification
+        bold=ESC+"[1m"                 # Bold/Bright                 - Applies brightness/intensity flag to foreground color
+        dim=ESC+"[2m"                  # Dim
+        italic=ESC+"[3m"               # Italic
+        underline=ESC+"[4m"            # Underline                   - Adds underline
+        blink=ESC+"[5m"                # Blink
+        fblink=ESC+"[6m"               # Rapid Blink
+        negative=ESC+"[7m"             # Negative                    - Swaps foreground and background colors
+        invisible=ESC+"[8m"            # Invisible
+        strike=ESC+"[9m"               # Strike Through
 
-        ::# Attributes off
-        ::set "20m=%ESC%[20m"               &:: 20
-        ::set "21m=%ESC%[21m"               &:: 21
-        set "nobold=%ESC%[22m"              &:: No bold/bright              - Removes brightness/intensity flag from foreground color
-        set "noitalic=%ESC%[23m"            &:: No italic
-        set "nounderline=%ESC%[24m"         &:: No underline                - Removes underline
-        set "noblink=%ESC%[25m"             &:: No Blink
-        ::set "26m=%ESC%[26m"               &:: 26
-        set "nonegative=%ESC%[27m"          &:: Positive(No negative)       - Returns foreground/background to normal
-        set "visible=%ESC%[28m"             &:: Visible(No invisible)
-        set "nostrike=%ESC%[29m"            &:: No Strike Through
+        ### Attributes off ###
+        # 20m=ESC+"[20m"               # 20
+        # 21m=ESC+"[21m"               # 21
+        nobold=ESC+"[22m"              # No bold/bright              - Removes brightness/intensity flag from foreground color
+        noitalic=ESC+"[23m"            # No italic
+        nounderline=ESC+"[24m"         # No underline                - Removes underline
+        noblink=ESC+"[25m"             # No Blink
+        # 26m=ESC+"[26m"               # 26
+        nonegative=ESC+"[27m"          # Positive(No negative)       - Returns foreground/background to normal
+        visible=ESC+"[28m"             # Visible(No invisible)
+        nostrike=ESC+"[29m"            # No Strike Through
 
-        ::# Foreground Colors
-        set "black=%ESC%[30m"               &:: Foreground Black            - Applies non-bold/bright black to foreground
-        set "red=%ESC%[31m"                 &:: Foreground Red              - Applies non-bold/bright red to foreground
-        set "green=%ESC%[32m"               &:: Foreground Green            - Applies non-bold/bright green to foreground
-        set "yellow=%ESC%[33m"              &:: Foreground Yellow           - Applies non-bold/bright yellow to foreground
-        set "blue=%ESC%[34m"                &:: Foreground Blue             - Applies non-bold/bright blue to foreground
-        set "magenta=%ESC%[35m"             &:: Foreground Magenta          - Applies non-bold/bright magenta to foreground
-        set "cyan=%ESC%[36m"                &:: Foreground Cyan             - Applies non-bold/bright cyan to foreground
-        set "white=%ESC%[37m"               &:: Foreground White            - Applies non-bold/bright white to foreground
-        set "extended=%ESC%[38m"            &:: Foreground Extended         - Applies extended color value to the foreground
-        set "default=%ESC%[39m"             &:: Foreground Default          - Applies only the foreground portion of the defaults
+        ### Foreground Colors ##
+        black=ESC+"[30m"               # Foreground Black            - Applies non-bold/bright black to foreground
+        red=ESC+"[31m"                 # Foreground Red              - Applies non-bold/bright red to foreground
+        green=ESC+"[32m"               # Foreground Green            - Applies non-bold/bright green to foreground
+        yellow=ESC+"[33m"              # Foreground Yellow           - Applies non-bold/bright yellow to foreground
+        blue=ESC+"[34m"                # Foreground Blue             - Applies non-bold/bright blue to foreground
+        magenta=ESC+"[35m"             # Foreground Magenta          - Applies non-bold/bright magenta to foreground
+        cyan=ESC+"[36m"                # Foreground Cyan             - Applies non-bold/bright cyan to foreground
+        white=ESC+"[37m"               # Foreground White            - Applies non-bold/bright white to foreground
+        extended=ESC+"[38m"            # Foreground Extended         - Applies extended color value to the foreground
+        default=ESC+"[39m"             # Foreground Default          - Applies only the foreground portion of the defaults
 
-        ::# Background Colors
-        set "bg_black=%ESC%[40m"            &:: Background Black            - Applies non-bold/bright black to background
-        set "bg_red=%ESC%[41m"              &:: Background Red              - Applies non-bold/bright red to background
-        set "bg_green=%ESC%[42m"            &:: Background Green            - Applies non-bold/bright green to background
-        set "bg_yellow=%ESC%[43m"           &:: Background Yellow           - Applies non-bold/bright yellow to background
-        set "bg_blue=%ESC%[44m"             &:: Background Blue             - Applies non-bold/bright blue to background
-        set "bg_magenta=%ESC%[45m"          &:: Background Magenta          - Applies non-bold/bright magenta to background
-        set "bg_cyan=%ESC%[46m"             &:: Background Cyan             - Applies non-bold/bright cyan to background
-        set "bg_white=%ESC%[47m"            &:: Background White            - Applies non-bold/bright white to background
-        set "bg_extended=%ESC%[48m"         &:: Background Extended         - Applies extended color value to the background
-        set "bg_default=%ESC%[49m"          &:: Background Default          - Applies only the background portion of the defaults
+        ### Background Colors ###
+        bg_black=ESC+"[40m"            # Background Black            - Applies non-bold/bright black to background
+        bg_red=ESC+"[41m"              # Background Red              - Applies non-bold/bright red to background
+        bg_green=ESC+"[42m"            # Background Green            - Applies non-bold/bright green to background
+        bg_yellow=ESC+"[43m"           # Background Yellow           - Applies non-bold/bright yellow to background
+        bg_blue=ESC+"[44m"             # Background Blue             - Applies non-bold/bright blue to background
+        bg_magenta=ESC+"[45m"          # Background Magenta          - Applies non-bold/bright magenta to background
+        bg_cyan=ESC+"[46m"             # Background Cyan             - Applies non-bold/bright cyan to background
+        bg_white=ESC+"[47m"            # Background White            - Applies non-bold/bright white to background
+        bg_extended=ESC+"[48m"         # Background Extended         - Applies extended color value to the background
+        bg_default=ESC+"[49m"          # Background Default          - Applies only the background portion of the defaults
 
-        ::# Foreground Colors (light)
-        set "lblack=%ESC%[90m"              &:: Bright Foreground Black     - Applies bold/bright black to foreground
-        set "lred=%ESC%[91m"                &:: Bright Foreground Red       - Applies bold/bright red to foreground
-        set "lgreen=%ESC%[92m"              &:: Bright Foreground Green     - Applies bold/bright green to foreground
-        set "lyellow=%ESC%[93m"             &:: Bright Foreground Yellow    - Applies bold/bright yellow to foreground
-        set "lblue=%ESC%[94m"               &:: Bright Foreground Blue      - Applies bold/bright blue to foreground
-        set "lmagenta=%ESC%[95m"            &:: Bright Foreground Magenta   - Applies bold/bright magenta to foreground
-        set "lcyan=%ESC%[96m"               &:: Bright Foreground Cyan      - Applies bold/bright cyan to foreground
-        set "lwhite=%ESC%[97m"              &:: Bright Foreground White     - Applies bold/bright white to foreground
+        ### Foreground Colors (light) ###
+        lblack=ESC+"[90m"              # Bright Foreground Black     - Applies bold/bright black to foreground
+        lred=ESC+"[91m"                # Bright Foreground Red       - Applies bold/bright red to foreground
+        lgreen=ESC+"[92m"              # Bright Foreground Green     - Applies bold/bright green to foreground
+        lyellow=ESC+"[93m"             # Bright Foreground Yellow    - Applies bold/bright yellow to foreground
+        lblue=ESC+"[94m"               # Bright Foreground Blue      - Applies bold/bright blue to foreground
+        lmagenta=ESC+"[95m"            # Bright Foreground Magenta   - Applies bold/bright magenta to foreground
+        lcyan=ESC+"[96m"               # Bright Foreground Cyan      - Applies bold/bright cyan to foreground
+        lwhite=ESC+"[97m"              # Bright Foreground White     - Applies bold/bright white to foreground
 
-        ::# Background Colors (light)
-        set "bg_lblack=%ESC%[100m"          &:: Bright Background Black     - Applies bold/bright black to background
-        set "bg_lred=%ESC%[101m"            &:: Bright Background Red       - Applies bold/bright red to background
-        set "bg_lgreen=%ESC%[102m"          &:: Bright Background Green     - Applies bold/bright green to background
-        set "bg_lyellow=%ESC%[103m"         &:: Bright Background Yellow    - Applies bold/bright yellow to background
-        set "bg_lblue=%ESC%[104m"           &:: Bright Background Blue      - Applies bold/bright blue to background
-        set "bg_lmagenta=%ESC%[105m"        &:: Bright Background Magenta   - Applies bold/bright magenta to background
-        set "bg_lcyan=%ESC%[106m"           &:: Bright Background Cyan      - Applies bold/bright cyan to background
-        set "bg_lwhite=%ESC%[107m"          &:: Bright Background White     - Applies bold/bright white to background
+        ### Background Colors (light) ###
+        bg_lblack=ESC+"[100m"          # Bright Background Black     - Applies bold/bright black to background
+        bg_lred=ESC+"[101m"            # Bright Background Red       - Applies bold/bright red to background
+        bg_lgreen=ESC+"[102m"          # Bright Background Green     - Applies bold/bright green to background
+        bg_lyellow=ESC+"[103m"         # Bright Background Yellow    - Applies bold/bright yellow to background
+        bg_lblue=ESC+"[104m"           # Bright Background Blue      - Applies bold/bright blue to background
+        bg_lmagenta=ESC+"[105m"        # Bright Background Magenta   - Applies bold/bright magenta to background
+        bg_lcyan=ESC+"[106m"           # Bright Background Cyan      - Applies bold/bright cyan to background
+        bg_lwhite=ESC+"[107m"          # Bright Background White     - Applies bold/bright white to background
 
-        ::# Foreground RGB Colors
-        set "RGB=%ESC%[38;2;"               &:: %RGB%50;100;150m         = %ESC%[38;2;50;100;150m
+        ### Foreground RGB Colors ###
+        RGB=ESC+"[38;2;"               # %RGB%50;100;150m         = ESC+"[38;2;50;100;150m
 
-        ::# Background RGB Colors
-        set "bg_RGB=%ESC%[48;2;"            &:: %bg_RGB%150;100;50m      = %ESC%[38;2;150;100;50m
+        ### Background RGB Colors ###
+        bg_RGB=ESC+"[48;2;"            # %bg_RGB%150;100;50m      = ESC+"[38;2;150;100;50m
 
 
          dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
     goto USE_COLOR_endif    
     :USE_COLOR_else
-        :: dk_unset ESC
-        :: dk_unset clr
+        # dk_unset ESC
+        # dk_unset clr
 
-        ::# Attributes on
-         dk_unset bold
-         dk_unset dim
+        ### Attributes on ###
+        dk_unset bold
+        dk_unset dim
         dk_unset italic
         dk_unset underline
         dk_unset blink
@@ -116,7 +116,7 @@ def dk_color()
         dk_unset invisible
         dk_unset strike
 
-        ::# Attributes off
+        ### Attributes off ###
         dk_unset nobold
         dk_unset noitalic
         dk_unset nounderline
@@ -125,7 +125,7 @@ def dk_color()
         dk_unset visible
         dk_unset nostrike
 
-        ::# Foreground Colors
+        ### Foreground Colors ###
         dk_unset black
         dk_unset red
         dk_unset green
@@ -135,7 +135,7 @@ def dk_color()
         dk_unset cyan
         dk_unset white
 
-        ::# Background Colors
+        ### Background Colors ###
         dk_unset bg_black
         dk_unset bg_red
         dk_unset bg_green
@@ -145,7 +145,7 @@ def dk_color()
         dk_unset bg_cyan
         dk_unset bg_white
 
-        ::# Foreground Colors (bright)
+        ### Foreground Colors (bright) ###
         dk_unset lblack
         dk_unset lred
         dk_unset lgreen
@@ -155,7 +155,7 @@ def dk_color()
         dk_unset lcyan
         dk_unset lwhite
 
-        ::# Background Colors (bright)
+        ### Background Colors (bright) ###
         dk_unset bg_lblack
         dk_unset bg_lred
         dk_unset bg_lgreen
@@ -169,15 +169,15 @@ def dk_color()
         dk_unset bg_RGB
 
         dk_echo "%clr% COLOR OFF"
-    :USE_COLOR_endif
-%endfunction%
+    #USE_COLOR_endif
+#%endfunction%
 dk_color 1
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 def DKTEST()
-	dk_debugFunc 0
+#	dk_debugFunc 0
 
     echo:
     echo %black% %bg_lblack%           Styles            %clr%
@@ -373,4 +373,4 @@ def DKTEST()
     echo %bg_red%                                                     %clr%
     echo %bg_white%                                                     %clr%
     echo %bg_red%                                                     %clr%
-%endfunction%
+#%endfunction%
