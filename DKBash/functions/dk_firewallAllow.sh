@@ -20,9 +20,9 @@ dk_firewallAllow() {
 	dk_call dk_assertPath _file_
 	
 	dk_call dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "${_file_}" && (
-		dk_call dk_warning "registry already contains a firewall rule for ${_file_}"
-		return 0
+		dk_call dk_warning "registry already contains a firewall rule for ${_file_}" & return 0
 	)
+	
 	
 	dk_call dk_notice "Adding firewall allow rule for ${_file_} . . ."
 	
