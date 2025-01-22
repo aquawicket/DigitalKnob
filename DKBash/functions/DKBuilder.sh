@@ -150,8 +150,8 @@ CURL_EXE(){
 
 export DK="$(DKBASH_FUNCTIONS_DIR)/DK.sh"
 export HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
-[ ! -e "${DK}" ] && [ -e "$(WGET_EXE)" ] && $(WGET_EXE) -P "${DKBASH_FUNCTIONS_DIR}" "${HDK}"
 [ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && $(CURL_EXE) -Lo "${DK}" "${HDK}"
+[ ! -e "${DK}" ] && [ -e "$(WGET_EXE)" ] && $(WGET_EXE) -P "${DK}" "${HDK}"
 #[ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && dk_call dk_firewallAllow "CURL" "$(CURL_EXE)" && $(CURL_EXE) -Lo "${DK}" "${HDK}"
 [ ! -e "${DK}" ] && echo "DK:${DK} does not exist" && exit 1
 
