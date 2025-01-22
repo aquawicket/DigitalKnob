@@ -1,7 +1,7 @@
 import sys 
 sys.path.append(".")
 import DK
-
+from dk_color import *
 
 ################################################################################
 # dk_echo(message)
@@ -35,11 +35,11 @@ def dk_echo(*args):
 def DKTEST():
     #dk_debugFunc 0
 
-    ESC=""
-    clr=ESC+"[0m"
-    red=ESC+"[31m"
-    blue=ESC+"[34m"
-    white=ESC+"[37m"
+#    ESC=""
+#    clr=ESC+"[0m"
+#    red=ESC+"[31m"
+#    blue=ESC+"[34m"
+#    white=ESC+"[37m"
 
     print("This is a normal echo commmand")
     dk_echo()
