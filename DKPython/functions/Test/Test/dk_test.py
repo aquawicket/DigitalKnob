@@ -1,14 +1,16 @@
 import sys 
 sys.path.append(".")
+sys.path.append("../")
+sys.path.append("../../")
 from DK import *
 
 ####################################################################
-# dk_test()
+# Test/Test/dk_test()
 #
-def dk_test(*args):
+def Test_Test_dk_test(*args):
 #   dk_debugFunc 0 99
 
-    print(f" ################# dk_test.cmd ################")
+    print(f" ################# Test/Test/dk_test.cmd ################")
     if len(args) > 0:   print(f"                     0 = {args[0]}")
     if len(args) > 1:   print(f"                     1 = {args[1]}")
     if len(args) > 2:   print(f"                     2 = {args[2]}")
@@ -79,20 +81,19 @@ def dk_test(*args):
 def DKTEST():
 #    dk_debugFunc 0
 
-    dk_test("from DKTEST()", "to dk_test()")
-    print("")
-#    print("GLOBAL_VAR = "+GLOBAL_VAR)
-#    print("RETURN_VAR = "+RETURN_VAR)
+#    dk_test("from Test/Test/DKTEST()", "to dk_test()")
+#	print("")
+#	print("GLOBAL_VAR = "+GLOBAL_VAR)
+#	print("RETURN_VAR = "+RETURN_VAR)
 	
-#   sys.path.append("Test")
-#    Test_dk_test("from DKTEST()", "to Test/dk_test()")
-#    print("")
-#    print("GLOBAL_VAR = "+GLOBAL_VAR)
-#    print("RETURN_VAR = "+RETURN_VAR)
+#	Test_dk_test("from Test/Test/DKTEST()", "to Test/dk_test()")
+#	print("")
+#	print("GLOBAL_VAR = "+GLOBAL_VAR)
+#	print("RETURN_VAR = "+RETURN_VAR)
 	
-#    Test_Test_dk_test("from DKTEST()", "to Test/Test/dk_test()")
-#    print("")
-#    print("GLOBAL_VAR = "+GLOBAL_VAR)
-#    print("RETURN_VAR = "+RETURN_VAR)
+	Test_Test_dk_test("from Test/Test/DKTEST()", "to Test/Test/dk_test()")
+	print("")
+#	print("GLOBAL_VAR = "+GLOBAL_VAR)
+#	print("RETURN_VAR = "+RETURN_VAR)
 #endfunction
 
