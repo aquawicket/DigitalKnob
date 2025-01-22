@@ -1,6 +1,6 @@
 import sys 
 sys.path.append(".")
-import DK
+from DK import *
 
 ##################################################################################
 # dk_color(on/off)
