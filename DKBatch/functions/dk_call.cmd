@@ -31,6 +31,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set __ARGV__=%*
 	if defined __ARGV__ (set __ARGV__=!__ARGV__:*%1=!)
 
+	::TODO - use dk_getFileLine to add the file line to the stack entry
+
 	call :pushStack %*
 
 	::###### Print function entry ####

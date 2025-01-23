@@ -28,22 +28,22 @@ dk_onError(){
 
 ###### SUDO_EXE ######
 SUDO_EXE(){
-	(command -v sudo) && export SUDO_EXE=$(command -v sudo) || echo "sudo Not Found" >&2
+	(command -v sudo) && export SUDO_EXE=$(command -v sudo) || echo "sudo-NOTFOUND" >&2
 }
 
 ###### CMD_EXE ######
 CMD_EXE(){
-	(command -v cmd.exe) && export CMD_EXE=$(command -v cmd.exe) || echo "cmd.exe Not Found" >&2
+	(command -v cmd.exe) && export CMD_EXE=$(command -v cmd.exe) || echo "cmd.exe-NOTFOUND" >&2
 }
 
 ###### CYGPATH_EXE ######
 CYGPATH_EXE(){
-	(command -v cygpath) && export CYGPATH_EXE=$(command -v cygpath) || echo "cygpath Not Found"  >&2
+	(command -v cygpath) && export CYGPATH_EXE=$(command -v cygpath) || echo "cygpath-NOTFOUND"  >&2
 }
 
 ###### WSLPATH_EXE ######
 WSLPATH_EXE(){
-	(command -v wslpath) && export WSLPATH_EXE=$(command -v wslpath) || echo "wslpath Not Found"  >&2
+	(command -v wslpath) && export WSLPATH_EXE=$(command -v wslpath) || echo "wslpath-NOTFOUND"  >&2
 }
 
 ###### WSLPATH_EXE ######
@@ -57,57 +57,57 @@ DKHOME_DIR(){
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")) 	# Git for windows
 #	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD) 															# Android sdcard
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR="${HOME}"
-	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| echo "DKHOME_DIR Not Found"  >&2
+	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| echo "DKHOME_DIR-NOTFOUND"  >&2
 }
 
 ###### DKCACHE_DIR ######
 DKCACHE_DIR(){
 	[ ! -e "${DKCACHE_DIR-}" ] && export DKCACHE_DIR="$(DKHOME_DIR)/.dk"
 	[ ! -e "${DKCACHE_DIR-}" ] && mkdir "${DKCACHE_DIR}"
-	[   -e "${DKCACHE_DIR-}" ] && echo "${DKCACHE_DIR-}"   	|| echo "DKCACHE_DIR Not Found"  >&2
+	[   -e "${DKCACHE_DIR-}" ] && echo "${DKCACHE_DIR-}"   	|| echo "DKCACHE_DIR-NOTFOUND"  >&2
 }
 
 ###### DIGITALKNOB_DIR ######
 DIGITALKNOB_DIR(){
 	[ ! -e "${DIGITALKNOB_DIR-}" ] && export DIGITALKNOB_DIR="$(DKHOME_DIR)/digitalknob"
 	[ ! -e "${DIGITALKNOB_DIR-}" ] && mkdir "${DIGITALKNOB_DIR}"
-	[   -e "${DIGITALKNOB_DIR-}" ] && echo "${DIGITALKNOB_DIR-}"   	|| echo "DIGITALKNOB_DIR Not Found"  >&2
+	[   -e "${DIGITALKNOB_DIR-}" ] && echo "${DIGITALKNOB_DIR-}"   	|| echo "DIGITALKNOB_DIR-NOTFOUND"  >&2
 }
 
 ###### DKBRANCH_DIR ######
 DKBRANCH_DIR(){
 	[ ! -e "${DKBRANCH_DIR-}" ] && export DKBRANCH_DIR="$(DIGITALKNOB_DIR)/Development"
 	[ ! -e "${DKBRANCH_DIR-}" ] && mkdir "${DKBRANCH_DIR}"
-	[   -e "${DKBRANCH_DIR-}" ] && echo "${DKBRANCH_DIR-}"   	|| echo "DKBRANCH_DIR Not Found"  >&2
+	[   -e "${DKBRANCH_DIR-}" ] && echo "${DKBRANCH_DIR-}"   	|| echo "DKBRANCH_DIR-NOTFOUND"  >&2
 }
 
 ###### DKBASH_DIR ######
 DKBASH_DIR(){
 	[ ! -e "${DKBASH_DIR-}" ] && export DKBASH_DIR="$(DKBRANCH_DIR)/DKBash"
 	[ ! -e "${DKBASH_DIR-}" ] && mkdir "${DKBASH_DIR}"
-	[   -e "${DKBASH_DIR-}" ] && echo "${DKBASH_DIR-}"   	|| echo "DKBASH_DIR Not Found"  >&2
+	[   -e "${DKBASH_DIR-}" ] && echo "${DKBASH_DIR-}"   	|| echo "DKBASH_DIR-NOTFOUND"  >&2
 }
 
 ###### DKBASH_FUNCTIONS_DIR ######
 DKBASH_FUNCTIONS_DIR(){
 	[ ! -e "${DKBASH_FUNCTIONS_DIR-}" ] && export DKBASH_FUNCTIONS_DIR="$(DKBASH_DIR)/functions"
 	[ ! -e "${DKBASH_FUNCTIONS_DIR-}" ] && mkdir "${DKBASH_FUNCTIONS_DIR}"
-	[   -e "${DKBASH_FUNCTIONS_DIR-}" ] && echo "${DKBASH_FUNCTIONS_DIR-}"   	|| echo "DKBASH_FUNCTIONS_DIR Not Found"  >&2
+	[   -e "${DKBASH_FUNCTIONS_DIR-}" ] && echo "${DKBASH_FUNCTIONS_DIR-}"   	|| echo "DKBASH_FUNCTIONS_DIR-NOTFOUND"  >&2
 }
 
 ###### CHATTR_EXE ######
 CHATTR_EXE(){
-	(command -v chattr) && export CHATTR_EXE=$(command -v chattr) || echo "chattr Not Found"  >&2
+	(command -v chattr) && export CHATTR_EXE=$(command -v chattr) || echo "chattr-NOTFOUND"  >&2
 }
 
 ###### WGET_EXE ######
 WGET_EXE(){
-	(command -v wget) && export WGET_EXE=$(command -v wget) || echo "wget Not Found"  >&2
+	(command -v wget) && export WGET_EXE=$(command -v wget) || echo "wget-NOTFOUND"  >&2
 }
 
 ###### CURL_EXE ######
 CURL_EXE(){
-	(command -v curl) && export CURL_EXE=$(command -v curl) || echo "curl Not Found"  >&2
+	(command -v curl) && export CURL_EXE=$(command -v curl) || echo "curl-NOTFOUND"  >&2
 }
 
 ###### Net fix for WSL ######
