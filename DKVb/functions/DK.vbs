@@ -22,9 +22,6 @@ else
 	WScript.Echo ESC+"[44m"+ESC+"[10m "+DKSHELL+" Version "+DKSHELL_VERSION+" "+ESC+"[0m"
 	executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("dk_source.vbs").readAll()
 
-	'WScript.StdOut.Write Chr(27) & "[34A" 'move cursor to beggining of cmd screen
-	'WScript.StdOut.Write Chr(27) & "[2J"  'clear screen
-
 	DKSCRIPT_PATH 		= WScript.ScriptFullName
 	DKSCRIPT_DIR 		= CreateObject("Scripting.FileSystemObject").GetParentFolderName(DKSCRIPT_PATH)
 	DKSCRIPT_FILE 		= CreateObject("Scripting.FileSystemObject").GetFileName(DKSCRIPT_PATH)
