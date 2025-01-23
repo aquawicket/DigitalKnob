@@ -20,9 +20,10 @@ if(NOT WIN_HOST)
 endif()
 
 
+### 32Bit ###
 dk_set(VC_REDIST_X86_DL https://aka.ms/vs/16/release/vc_redist.x86.exe)
-dk_set(VCCOMP140_X86_DLL "C:/Windows/System32/vcomp140.dll")
-dk_set(VCCOMP140_X86_DEBUG_DLL "C:/Windows/System32/vcomp140d.dll")
+dk_set(VCCOMP140_X86_DLL "C:/Windows/SysWOW64/vcomp140.dll")
+dk_set(VCCOMP140_X86_DEBUG_DLL "C:/Windows/SysWOW64/vcomp140d.dll")
 ### INSTALL ###
 if((NOT EXISTS "${VCCOMP140_X86_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_DEBUG_DLL}"))
 	dk_basename(${VC_REDIST_X86_DL} VC_REDIST_X86_DL_FILE)
@@ -34,16 +35,17 @@ endif()
 #dk_assertPath(VCCOMP140_X86_DLL)
 
 
-dk_set(VC_REDIST_X64_DL https://aka.ms/vs/16/release/vc_redist.x64.exe)
-dk_set(VCCOMP140_X64_DLL "C:/Windows/SysWOW64/vcomp140.dll")
-dk_set(VCCOMP140_X64_DEBUG_DLL "C:/Windows/SysWOW64/vcomp140d.dll")
+### 64Bit ###
+dk_set(VC_REDIST_X86_64_DL https://aka.ms/vs/16/release/vc_redist.x64.exe)
+dk_set(VCCOMP140_X86_64_DLL "C:/Windows/System32/vcomp140.dll")
+dk_set(VCCOMP140_X86_64_DEBUG_DLL "C:/Windows/System32/vcomp140d.dll")
 ### INSTALL ###
-if((NOT EXISTS "${VCCOMP140_X64_DLL}") AND (NOT EXISTS "${VCCOMP140_X64_DEBUG_DLL}"))
-	dk_basename(${VC_REDIST_X64_DL} VC_REDIST_X64_DL_FILE)
-	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X64_DL_FILE}")
+if((NOT EXISTS "${VCCOMP140_X86_64_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_64_DEBUG_DLL}"))
+	dk_basename(${VC_REDIST_X86_64_DL} VC_REDIST_X86_64_DL_FILE)
+	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_64_DL_FILE}")
 	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	dk_download(${VC_REDIST_X64_DL} ${DKDOWNLOAD_DIR}/${VC_REDIST_X64_DL_FILE})
-	dk_command(${DKDOWNLOAD_DIR}/${VC_REDIST_X64_DL_FILE} /install /quiet /norestart) #/log ${DK3RDPARTY_DIR}/vc_redist_install_log.txt
+	dk_download(${VC_REDIST_X86_64_DL} ${DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_DL_FILE})
+	dk_command(${DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_DL_FILE} /install /quiet /norestart) #/log ${DK3RDPARTY_DIR}/vc_redist_install_log.txt
 endif()
-#dk_assertPath(VCCOMP140_X64_DLL)
+#dk_assertPath(VCCOMP140_X86_64_DLL)
 

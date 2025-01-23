@@ -150,11 +150,11 @@ dk_set(VS_X86_COMPILER 				"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx64/x86/cl
 dk_set(VS_X86_LINKER 				"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx64/x86/link.exe")
 dk_set(VS_X86_DUMPBIN 				"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx86/x86/dumpbin.exe")
 
-dk_set(VS_X64_GENERATOR_PLATFORM	x64)
-dk_set(VS_X64_NMAKE 				"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx64/x64/nmake.exe")
-dk_set(VS_X64_COMPILER 				"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx64/x64/cl.exe")
-dk_set(VS_X64_LINKER 				"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx64/x64/link.exe")
-dk_set(VS_X64_DUMPBIN 				"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx86/x64/dumpbin.exe")
+dk_set(VS_X86_64_GENERATOR_PLATFORM	x64)
+dk_set(VS_X86_64_NMAKE 				"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx64/x64/nmake.exe")
+dk_set(VS_X86_64_COMPILER 			"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx64/x64/cl.exe")
+dk_set(VS_X86_64_LINKER 			"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx64/x64/link.exe")
+dk_set(VS_X86_64_DUMPBIN 			"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx86/x64/dumpbin.exe")
 
 
 

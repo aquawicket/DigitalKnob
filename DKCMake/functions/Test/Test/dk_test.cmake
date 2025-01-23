@@ -9,7 +9,7 @@ include_guard()
 function(dk_test)
 	#dk_debugFunc()   
     
-    dk_echo( "################# dk_test.cmake #################")
+    dk_echo( "################# Test/Test/dk_test.cmake #################")
     dk_echo( "                    0 = $0")
     dk_echo( "                    * = $*")
     dk_echo( "             __TIME__ = ${__TIME__}")

@@ -69,5 +69,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_copy(todo) #TODO
+	dk_copy("C:/Windows/System32/vcomp140d.dll" "C:/Users/Administrator/digitalknob/Development/3rdParty/imagemagick-7.1.1-43-portable-q16-x64/vcomp140.dll")
 endfunction()
