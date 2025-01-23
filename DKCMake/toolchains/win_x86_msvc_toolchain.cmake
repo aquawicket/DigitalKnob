@@ -2,8 +2,7 @@ message("######################################################################"
 message("################ windoows_x86_msvc_toolchain.cmake ###################")
 message("######################################################################")
 
-#dk_depend(visualstudio)
-dk_depend(visual-cpp-build-tools)
+dk_depend(visualstudio)
 
 dk_set(CMAKE_GENERATOR				${VS_GENERATOR})
 dk_set(CMAKE_MAKE_PROGRAM 			${VS_MAKE_PROGRAM})

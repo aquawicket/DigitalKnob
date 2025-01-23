@@ -79,11 +79,11 @@ dk_installPackage("make")
 #	#dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/ucrt64/bin")
 #
 #elseif(win_x86_msvc)
-#	dk_depend(visual-cpp-build-tools)
+#	dk_depend(visualstudio)
 #	#dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUAL_CPP_BUILD_TOOLS})
 #	
 #elseif(win_x86_64_msvc)
-#	dk_depend(visual-cpp-build-tools)
+#	dk_depend(visualstudio)
 #	#dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUAL_CPP_BUILD_TOOLS})
 #	
 #endif()

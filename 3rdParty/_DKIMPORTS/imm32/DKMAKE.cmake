@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ############ imm32 ############
 # https://learn.microsoft.com/en-us/windows/win32/api/imm/nf-imm-immgetcontext
-dk_load(dk_builder)
+dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN)
 	dk_undepend(imm32)
 	dk_return()

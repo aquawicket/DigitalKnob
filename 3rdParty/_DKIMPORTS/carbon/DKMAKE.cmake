@@ -7,7 +7,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ############ carbon ############
 # https://developer.apple.com/documentation/coreservices/carbon_core?language=objc
-dk_load(dk_builder)
+
+
 if(NOT MAC)
 	dk_undepend(carbon)
 	dk_return()

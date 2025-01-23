@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ############ dependencywalker ############
 # https://www.dependencywalker.com
-dk_load(dk_builder)
+dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
 	dk_undepend(dependencywalker)
 	dk_return()

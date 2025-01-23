@@ -5,7 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+dk_validate(target_triple "dk_target_triple()")
 # https://github.com/jasper-software/jasper.git
 
 

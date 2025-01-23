@@ -7,7 +7,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ############ ios-cmake ############
 # https://github.com/leetal/ios-cmake
-dk_load(dk_builder)
 
 dk_import(https://github.com/leetal/ios-cmake/archive/ad96a372.zip)
 

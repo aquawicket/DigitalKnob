@@ -8,7 +8,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ############ ilmerge ############
 # https://github.com/dotnet/ILMerge
 # https://www.nuget.org/packages/ilmerge
-dk_load(dk_builder)
+
+#dk_validate(host_triple "dk_host_triple()")
 
 dk_import(https://github.com/dotnet/ILMerge/archive/9ec1b3f2.zip)
 
