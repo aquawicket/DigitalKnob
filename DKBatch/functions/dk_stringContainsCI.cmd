@@ -7,8 +7,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#		Case insensitive substring search
 ::#
 :dk_stringContainsCI
-setlocal
-	%dk_call% dk_debugFunc 2 3 enableDelayedExpansion
+setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 2 3
  
     ::if "!d!" neq "" %dk_call% dk_error "%__FUNCTION__%: requires delayed expansion"
     

@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_stringContains
-setlocal
-	%dk_call% dk_debugFunc 2 3 enableDelayedExpansion
+setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 2 3
  
 	set "_haystack_=%~1"
     set "_needle_=%~2"

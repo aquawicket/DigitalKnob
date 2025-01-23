@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_convertToCIdentifier
-setlocal
-	%dk_call% dk_debugFunc 2 enabledelayedexpansion    
+setlocal enabledelayedexpansion
+	%dk_call% dk_debugFunc 2    
 
     if "!d!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     

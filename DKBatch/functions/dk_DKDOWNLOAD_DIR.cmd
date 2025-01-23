@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_DKDOWNLOAD_DIR
-::setlocal
-	%dk_call% dk_debugFunc 0 1 enableDelayedExpansion
+::setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 0 1 
  
 	::############ SET ############
 	if "%~1" neq "" ( 

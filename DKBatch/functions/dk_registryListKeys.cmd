@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_registryListKeys
-setlocal
-	%dk_call% dk_debugFunc 1 EnableDelayedExpansion
+setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 1
  
 	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
 		echo %%a

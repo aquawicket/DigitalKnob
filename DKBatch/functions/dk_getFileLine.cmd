@@ -2,18 +2,15 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_showFileLine(filepath, match_string)
-::# dk_showFileLine(filepath, line_number)
+::# dk_getFileLine(filepath, match_string)
 ::#
 ::#
-:dk_showFileLine
+:dk_getFileLine
 setlocal enableDelayedExpansion
-	%dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 2 
  
 	set "_filepath_=%~f1"
 	set "_filepath_=%_filepath_:/=\%"
- 
-    if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     
     set /a "line=%~2" || for /f "delims=:" %%a in ('findstr /n /c:"%~2" "%_filepath_%"') do set "line=%%a"
     
@@ -46,7 +43,5 @@ setlocal enableDelayedExpansion
 setlocal
     %dk_call% dk_debugFunc 0
 
-  
-    %dk_call% dk_showFileLine "../../README.md" 302
-    %dk_call% dk_showFileLine "../../README.md" "How to build"
+    %dk_call% dk_getFileLine "../../README.md" "How to build"
 %endfunction%
