@@ -41,6 +41,7 @@ void dk_test(int __ARGC__, ...){
     printf("           __ARGV__ = %s\n", __ARGV__);
     printf("      DKSCRIPT_PATH = %s\n", DKSCRIPT_PATH);
     printf("       DKSCRIPT_DIR = %s\n", DKSCRIPT_DIR);
+	printf("      DKSCRIPT_FILE = %s\n", DKSCRIPT_FILE);
     printf("      DKSCRIPT_NAME = %s\n", DKSCRIPT_NAME);
     printf("       DKSCRIPT_EXT = %s\n", DKSCRIPT_EXT);
     printf("      DKSCRIPT_ARGS = %s\n", DKSCRIPT_ARGS);

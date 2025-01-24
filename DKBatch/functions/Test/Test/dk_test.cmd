@@ -31,6 +31,7 @@ setlocal enableDelayedExpansion
     echo              __ARGV__ = %__ARGV__%
     echo         DKSCRIPT_PATH = %DKSCRIPT_PATH%
     echo          DKSCRIPT_DIR = %DKSCRIPT_DIR%
+	echo         DKSCRIPT_FILE = %DKSCRIPT_FILE%
     echo         DKSCRIPT_NAME = %DKSCRIPT_NAME%
     echo          DKSCRIPT_EXT = %DKSCRIPT_EXT%
     echo         DKSCRIPT_ARGS = %DKSCRIPT_ARGS%

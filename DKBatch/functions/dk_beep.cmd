@@ -16,7 +16,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%~1"=="" (set frequency=500) else (set frequency=%~1)
 	if "%~2"=="" (set duration=500)  else (set duration=%~1)
 	"%POWERSHELL_EXE%" "[console]::beep(%frequency%,%duration%)"
-
+	::%dk_call% dk_callDKPowershell dk_beep %frequency% %duration%
+	
 	::### Method 3 - echo BELL character ###
 ::	set "BELL="    &::contains a BELL 0x07 character
 ::	echo %BELL%
