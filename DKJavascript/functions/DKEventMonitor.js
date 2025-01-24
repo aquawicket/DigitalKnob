@@ -103,7 +103,7 @@ DKEventMonitor.prototype.monitorEvents = function DKEventMonitor_monitorEvents(o
 	obj.addEventListener("rejectionhandled", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });
 	obj.addEventListener("storage", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });
 	obj.addEventListener("unhandledrejection", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });
-	obj.addEventListener("unload", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });
+	//obj.addEventListener("unload", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });	//deprecated
 }
 
 DKEventMonitor.prototype.supressed = function DKEventMonitor_supressed(str){

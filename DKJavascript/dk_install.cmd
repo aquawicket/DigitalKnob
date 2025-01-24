@@ -8,7 +8,7 @@ if "%~1" == "" (goto dk_install)
 	set "DKSCRIPT_PATH=%~4"
 	set "CMD_EXE=%COMSPEC%"
 	
-    %CMD_EXE% /c %CSCRIPT_EXE% //e:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%/DKJSCRIPT.js" "%DKSCRIPT_PATH%" && (echo: & echo rtncode:true %errorlevel%) || (echo: & echo rtncode:false %errorlevel%)
+    %CMD_EXE% /c %CSCRIPT_EXE% //e:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js" "%DKSCRIPT_PATH%" && (echo: & echo rtncode:true %errorlevel%) || (echo: & echo rtncode:false %errorlevel%)
 	::%COMSPEC% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
 	pause
 exit /b %errorlevel%
