@@ -45,7 +45,10 @@ dk_source = function(url){
 	var IXMLHttpRequest = new XMLHttpRequest();
 	IXMLHttpRequest.open("GET", url, false);
 	IXMLHttpRequest.send();
-	(1, eval)(IXMLHttpRequest.responseText); 
+	(1, eval)(IXMLHttpRequest.responseText);
+//	if(arguments[1] !== "undefined"){
+//		arguments[1]()
+//	}
 }
 dk_check('dk_source');
 
@@ -59,14 +62,22 @@ if(objXMLDoc.parseError.errorCode !== 0){
 	WScript.StdOut.Write("ERROR when loading " + index + ": " + objXMLDoc.parseError.reason);
 }
 
+//###### location ######
+var location = new Object;
+location.href = objXMLDoc.url;
+
+
 //###### document (variable) ######
 var document = objXMLDoc.documentElement;
 dk_check('document');
 //WScript.StdOut.Write("document: "+document.xml+"\n\n");
 
+
+
+
 //###### alert (function) ######
-dk_source(assets+"/DKJavascript/polyfills/alert.js");
-dk_check('alert');
+//dk_source(assets+"/DKJavascript/polyfills/alert.js");
+//dk_check('alert');
 //alert("test");
 
 //###### console (class) ######
@@ -75,9 +86,13 @@ dk_check('console');
 //console.log("console.log test\n");
 
 //###### dk_color (function) ######
-dk_source(assets+"/DKJavascript/functions/dk_color.js");
-dk_check('dk_color');
+//dk_source(assets+"/DKJavascript/functions/dk_color.js");
+//dk_check('dk_color');
 //DKTEST();
+
+
+dk_source(assets+"/DKJavascript/functions/DK.js");
+//dk_check('DK');
 
 /*###### JSON ###### 
 var htmlfile = WSH.CreateObject('htmlfile'), JSON;
@@ -96,8 +111,9 @@ str = JSON.stringify(global);
 
 //###### LOAD FILE (ARGV0) ######
 //WScript.StdOut.Write("dk_source("+ARGV(0)+")");
-dk_source(ARGV(0));
-DKTEST();
+//dk_source(ARGV(0));
+//DKTEST();
+
 
 
 

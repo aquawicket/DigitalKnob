@@ -1,5 +1,14 @@
 // TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
 //console.log("DK.js");
+//console.log("ARGV0 = "+ARGV(0)+"\n");
+
+var HOST = "unknown"
+if(typeof ActiveXObject === "function"){
+	if(typeof WScript === "object"){ HOST = "jscript"; }
+	else{ HOST = "hta" }
+} else { HOST = "browser" }
+console.log("HOST = "+HOST);
+
 
 dk_source = function(url){
 	var xmlHttpRequest = new XMLHttpRequest;
@@ -8,18 +17,9 @@ dk_source = function(url){
 	(1, eval)(xmlHttpRequest.responseText); 
 }
 
-var HOST = "unknown"
-if(typeof ActiveXObject === "function"){
-	if(typeof WScript === "object"){
-		HOST = "jscript";
-	}
-	else{
-		HOST = "hta"
-	}
-} else {
-	HOST = "browser"
-}
-//console.log("DK.js()");
+
+
+
 
 
 //if(typeof WScript === "object"){
@@ -28,7 +28,8 @@ if(typeof ActiveXObject === "function"){
 //}
 
 //###### DKSCRIPT variables ######
-var DKSCRIPT_PATH = location.href
+var DKSCRIPT_PATH = location.href;
+console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
 var DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
 //var DKSCRIPT_FILE = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
 var DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1);
@@ -99,18 +100,24 @@ var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 
 
 
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/console.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/addEventListener.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/console.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/addEventListener.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
 
+if(typeof ARGV(0) === "string"){
+	var jsfile = "file:///"+ARGV(0).replaceAll("\\", "/");
+	dk_source(jsfile);
+	DKTEST();
+}
 
-dk_echo("DKTEST()");
-DKTEST();
+//dk_echo("DKTEST()");
+//DKTEST();
 /*
 if(typeof WScript === "object"){
 	console.log("Using Windows Scriting Host")

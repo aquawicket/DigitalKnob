@@ -4,7 +4,7 @@ for (i=0; i<ARGV.length; i++){
     WScript.Echo(ARGV(i));
 }
 
-var index = "../DKHtml/index.html";
+var index = "../../DKHtml/index.html";
 var assets = "file:///C:/Users/Administrator/digitalknob/Development";
 
 //###### dk_check (function) ######

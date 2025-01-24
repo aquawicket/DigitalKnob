@@ -23,3 +23,14 @@ if(typeof Window.prototype.alert !== "function") {
 	}
 }
 */
+
+
+
+
+
+//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST = function DKTEST() {
+	//dk_debugFunc(0);
+	
+	alert("DKTEST()")
+}
