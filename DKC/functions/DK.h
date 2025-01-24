@@ -4,6 +4,7 @@
 
 char* DKSCRIPT_PATH;
 char* DKSCRIPT_DIR;
+char* DKSCRIPT_FILE;
 char* DKSCRIPT_NAME;
 char* DKSCRIPT_EXT;
 char* DKSCRIPT_ARGS;

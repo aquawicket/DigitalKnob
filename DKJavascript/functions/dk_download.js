@@ -54,10 +54,12 @@ if (fso.FileExists(filepath) == false) {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-function DKTEST() {
+DKTEST = function() {
 	//dk_debugFunc(0);
 	
 	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.js")
 	dk_download("https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.js", "DKBuilder.js")
 	//dk_download("https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.js", DKDOWNLOAD_DIR"+dk_download_batch_test/DKBuilder.sh")
 }
+
+

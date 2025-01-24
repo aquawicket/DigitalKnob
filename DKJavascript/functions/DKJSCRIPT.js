@@ -14,6 +14,7 @@ for (i=0; i<ARGV.length; i++){
 //###### dk_check (function) ######
 dk_check = function(object){
 	if(typeof this[object] == 'undefined'){WScript.StdOut.Write(object+" is invalid\n");}
+	//if(typeof this[object] != 'undefined'){WScript.StdOut.Write(object+" is valid\n");}
 }
 
 //###### globalThis (variable) ######
@@ -64,18 +65,18 @@ dk_check('document');
 //WScript.StdOut.Write("document: "+document.xml+"\n\n");
 
 //###### alert (function) ######
-dk_source(assets+"/DKJavascript/JScript/alert.js");
+dk_source(assets+"/DKJavascript/polyfills/alert.js");
 dk_check('alert');
 //alert("test");
 
 //###### console (class) ######
-dk_source(assets+"/DKJavascript/JScript/console.js");
+dk_source(assets+"/DKJavascript/polyfills/console.js");
 dk_check('console');
 //console.log("console.log test\n");
 
 //###### dk_color (function) ######
-//dk_source(assets+"/DKJavascript/functions/dk_color.js");
-//dk_check('dk_color');
+dk_source(assets+"/DKJavascript/functions/dk_color.js");
+dk_check('dk_color');
 //DKTEST();
 
 /*###### JSON ###### 

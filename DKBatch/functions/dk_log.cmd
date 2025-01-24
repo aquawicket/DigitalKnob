@@ -14,7 +14,7 @@ if not defined ENABLE_dk_log   set "ENABLE_dk_log=1"
 :: 8 ERROR      dk_error
 :: 9 FATAL      dk_fatal
     
-:: DEFAULT
+::### DEFAULT ###
 if not defined DEFAULT_ENABLE		set "DEFAULT_ENABLE=1"
 if not defined DEFAULT_COLOR		set "DEFAULT_COLOR=%white%"
 ::if not defined DEFAULT_TAG		set "DEFAULT_TAG="
@@ -24,7 +24,7 @@ if not defined DEFAULT_COLOR		set "DEFAULT_COLOR=%white%"
 ::if not defined DEFAULT_LINE		set "DEFAULT_LINE=1"
 ::if not defined DEFAULT_HALT		set "DEFAULT_HALT=1"
 
-:: VERBOSE
+::### VERBOSE ###
 if not defined VERBOSE_ENABLE		set "VERBOSE_ENABLE=1"
 if not defined VERBOSE_COLOR		set "VERBOSE_COLOR=%magenta%"
 if not defined VERBOSE_TAG			set "VERBOSE_TAG=VERBOSE: "
@@ -34,7 +34,7 @@ if not defined VERBOSE_TAG			set "VERBOSE_TAG=VERBOSE: "
 ::if not defined VERBOSE_LINE    	set "VERBOSE_LINE=1"
 ::if not defined VERBOSE_HALT    	set "VERBOSE_HALT=1"
 
-:: DEBUG
+::### DEBUG ###
 if not defined DEBUG_ENABLE    		set "DEBUG_ENABLE=1"
 if not defined DEBUG_COLOR     		set "DEBUG_COLOR=%lblue%"
 if not defined DEBUG_TAG       		set "DEBUG_TAG=DEBUG: "
@@ -44,7 +44,7 @@ if not defined DEBUG_TAG       		set "DEBUG_TAG=DEBUG: "
 ::if not defined DEBUG_LINE      	set "DEBUG_LINE=1"
 ::if not defined DEBUG_HALT      	set "DEBUG_HALT=1"
 
-:: INFO
+::### INFO ###
 if not defined INFO_ENABLE     		set "INFO_ENABLE=1"
 if not defined INFO_COLOR      		set "INFO_COLOR=%white%"
 if not defined INFO_TAG        		set "INFO_TAG=INFO: "
@@ -54,7 +54,7 @@ if not defined INFO_TAG        		set "INFO_TAG=INFO: "
 ::if not defined INFO_LINE       	set "INFO_LINE=1"
 ::if not defined INFO_HALT       	set "INFO_HALT=1"
 
-:: SUCCESS
+::### SUCCESS ###
 if not defined SUCCESS_ENABLE   	set "SUCCESS_ENABLE=1"
 if not defined SUCCESS_COLOR    	set "SUCCESS_COLOR=%green%"
 if not defined SUCCESS_TAG      	set "SUCCESS_TAG=SUCCESS: "
@@ -64,7 +64,7 @@ if not defined SUCCESS_TAG      	set "SUCCESS_TAG=SUCCESS: "
 ::if not defined SUCCESS_LINE     	set "SUCCESS_LINE=1"
 ::if not defined SUCCESS_HALT     	set "SUCCESS_HALT=1"
 
-:: TODO
+::### TODO ###
 if not defined TODO_ENABLE     set "TODO_ENABLE=1"
 if not defined TODO_COLOR      set "TODO_COLOR=%blue%"
 if not defined TODO_TAG        set "TODO_TAG=TODO: "
@@ -74,7 +74,7 @@ if not defined TODO_TIMEOUT    set "TODO_TIMEOUT=1"
 ::if not defined TODO_LINE       set "TODO_LINE=1"
 ::if not defined TODO_HALT       set "TODO_HALT=1"
 
-:: NOTICE
+::### NOTICE ###
 if not defined NOTICE_ENABLE   set "NOTICE_ENABLE=1"
 if not defined NOTICE_COLOR    set "NOTICE_COLOR=%lyellow%"
 if not defined NOTICE_TAG      set "NOTICE_TAG=NOTICE: "
@@ -84,17 +84,17 @@ if not defined NOTICE_TAG      set "NOTICE_TAG=NOTICE: "
 ::if not defined NOTICE_LINE     set "NOTICE_LINE=1"
 ::if not defined NOTICE_HALT     set "NOTICE_HALT=1"
 
-:: FIXME
+::### FIXME ###
 if not defined FIXME_ENABLE    set "FIXME_ENABLE=1"
 if not defined FIXME_COLOR     set "FIXME_COLOR=%lyellow%"
 if not defined FIXME_TAG       set "FIXME_TAG=FIXME: "
 if not defined FIXME_PAUSE     set "FIXME_PAUSE=1"
-if not defined FIXME_TIMEOUT   set "FIXME_TIMEOUT=1"
+::if not defined FIXME_TIMEOUT   set "FIXME_TIMEOUT=1"
 ::if not defined FIXME_TRACE     set "FIXME_TRACE=1"
 ::if not defined FIXME_LINE      set "FIXME_LINE=1"
 ::if not defined FIXME_HALT      set "FIXME_HALT=1"
 
-:: WARNING
+::### WARNING ###
 if not defined WARNING_ENABLE  set "WARNING_ENABLE=1"
 if not defined WARNING_COLOR   set "WARNING_COLOR=%yellow%"
 if not defined WARNING_TAG     set "WARNING_TAG=WARNING: "
@@ -104,7 +104,7 @@ if not defined WARNING_TRACE   set "WARNING_TRACE=1"
 ::if not defined WARNING_LINE    set "WARNING_LINE=1"
 ::if not defined WARNING_HALT    set "WARNING_HALT=1"
 
-:: ERROR
+::### ERROR ###
 if not defined ERROR_ENABLE    set "ERROR_ENABLE=1"
 if not defined ERROR_COLOR     set "ERROR_COLOR=%lred%"
 if not defined ERROR_TAG       set "ERROR_TAG=ERROR: "
@@ -114,7 +114,7 @@ if not defined ERROR_TRACE     set "ERROR_TRACE=1"
 ::if not defined ERROR_LINE      set "ERROR_LINE=1"
 ::if not defined ERROR_HALT      set "ERROR_HALT=1"
 
-:: FATAL
+::### FATAL ###
 if not defined FATAL_ENABLE    set "FATAL_ENABLE=1"
 if not defined FATAL_COLOR     set "FATAL_COLOR=%red%"
 if not defined FATAL_TAG       set "FATAL_TAG=FATAL: "

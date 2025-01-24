@@ -1,5 +1,5 @@
 // TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
-console.log("DK.js");
+//console.log("DK.js");
 
 dk_source = function(url){
 	var xmlHttpRequest = new XMLHttpRequest;
@@ -7,8 +7,6 @@ dk_source = function(url){
 	xmlHttpRequest.send();
 	(1, eval)(xmlHttpRequest.responseText); 
 }
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js");
-console.log("after dk_source");
 
 var HOST = "unknown"
 if(typeof ActiveXObject === "function"){
@@ -21,7 +19,7 @@ if(typeof ActiveXObject === "function"){
 } else {
 	HOST = "browser"
 }
-console.log("DK.js()");
+//console.log("DK.js()");
 
 
 //if(typeof WScript === "object"){
@@ -32,6 +30,7 @@ console.log("DK.js()");
 //###### DKSCRIPT variables ######
 var DKSCRIPT_PATH = location.href
 var DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
+//var DKSCRIPT_FILE = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
 var DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1);
 var DKSCRIPT_EXT = DKSCRIPT_NAME.substr(DKSCRIPT_NAME.lastIndexOf("."));
 
@@ -95,7 +94,6 @@ var DKPYTHON_FUNCTIONS_DIR_ = DKPYTHON_DIR+"/functions/"
 var DKVB_DIR = DKBRANCH_DIR+"/DKVb"
 var DKVB_FUNCTIONS_DIR = DKVB_DIR+"/functions"
 var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
-
 
 var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 

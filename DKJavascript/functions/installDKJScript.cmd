@@ -1,7 +1,20 @@
 @echo off
+if "%~1" == "" (goto dk_install)
 
-if "%~1" neq "" goto runDKJScript
-:installDKJScript
+:runDKJScript
+	set "CSCRIPT_EXE=%~1"
+	set "WSCRIPT_EXE=%~2"
+	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3"
+	set "DKSCRIPT_PATH=%~4"
+
+    %COMSPEC% /c %CSCRIPT_EXE% //D //nologo //E:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%\DKJSCRIPT.js" "%DKSCRIPT_PATH%" && (echo success) || (echo failed)
+
+	pause
+%endfunction%
+
+
+
+:install
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\DKBatch\functions\"
 	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
@@ -24,13 +37,4 @@ if "%~1" neq "" goto runDKJScript
 %endfunction%
 
 
-:runDKJScript
-	set "CSCRIPT_EXE=%~1"
-	set "WSCRIPT_EXE=%~2"
-	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3"
-	set "DKSCRIPT_PATH=%~4"
 
-    %COMSPEC% /c %CSCRIPT_EXE% //D //nologo //E:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%\DKJSCRIPT.js" "%DKSCRIPT_PATH%" && (echo success) || (echo failed)
-
-	pause
-%endfunction%
