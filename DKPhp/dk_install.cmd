@@ -46,7 +46,7 @@ if "%~1" == "" (goto dk_install)
 	::###### Install DKPhp ######
 	%dk_call% dk_echo "Installing DKPhp . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% dk_validate PHP_EXE "call %DKIMPORTS_DIR%\php\dk_install.cmd"
+	%dk_call% dk_validate PHP_EXE "call %DKIMPORTS_DIR%\php\dk_install.cmd"
 	%dk_call% dk_validate PHP_EXE "%dk_call% dk_PHP_EXE"
 	
 	

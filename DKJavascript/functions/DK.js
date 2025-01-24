@@ -7,14 +7,30 @@ if(typeof ActiveXObject === "function"){
 	if(typeof WScript === "object"){ HOST = "jscript"; }
 	else{ HOST = "hta" }
 } else { HOST = "browser" }
-console.log("HOST = "+HOST);
+//console.log("HOST = "+HOST);
 
+if(typeof String.prototype.replaceAll === "undefined") {
+	String.prototype.replaceAll = function replaceAll(search, replace) { 
+		return this.split(search).join(replace); 
+	}
+}
 
 dk_source = function(url){
-	var xmlHttpRequest = new XMLHttpRequest;
-	xmlHttpRequest.open("GET", url, false);
-	xmlHttpRequest.send();
-	(1, eval)(xmlHttpRequest.responseText); 
+	if(typeof ActiveXObject === "function"){
+		var url = url.replaceAll("file:///", "");
+		//alert(url);
+		//eval((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(url, 1).ReadAll());
+		(1, eval)((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(url, 1).ReadAll());
+		if(typeof arguments[1] !== "undefined"){
+			arguments[1]();
+		}
+	} else {
+		var jsfile = "file:///"+url.replaceAll("\\", "/");
+		var xmlHttpRequest = new XMLHttpRequest;
+		xmlHttpRequest.open("GET", url, false);
+		xmlHttpRequest.send();
+		(1, eval)(xmlHttpRequest.responseText);
+	}
 }
 
 
@@ -29,7 +45,6 @@ dk_source = function(url){
 
 //###### DKSCRIPT variables ######
 var DKSCRIPT_PATH = location.href;
-console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
 var DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
 //var DKSCRIPT_FILE = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
 var DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1);
@@ -99,25 +114,53 @@ var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
 var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 
 
-
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/console.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/console.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/addEventListener.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
 
-if(typeof ARGV(0) === "string"){
-	var jsfile = "file:///"+ARGV(0).replaceAll("\\", "/");
-	dk_source(jsfile);
-	DKTEST();
+
+if(typeof ARGV !== "undefined"){
+	if(typeof ARGV(0) === "string"){
+		dk_source(ARGV(0));
+		DKTEST();
+	}
 }
 
-//dk_echo("DKTEST()");
-//DKTEST();
+document.addEventListener("DOMContentLoaded", onDOMContentLoaded() );
+function onDOMContentLoaded() {
+	if(!window){ alert("window is invalid"); return; }
+	if(!document){ alert("document is invalid"); return; }
+	if(!window.document){ alert("window.document is invalid"); return; }
+	
+	var DKHtml = 1;
+	dkTitle = "DigitalKnob - " + location.href;
+	document.title = dkTitle;
+
+	console.log(dkTitle);
+	console.log("HOST = "+HOST);
+}
+
+function body_onLoad(){
+	//alert("body_onLoad");
+	if(!window.document.body){ alert("window.document.body is invalid"); return; }
+	dk_source(DKJAVASCRIPT_DIR+"/functions/DKHtmlConsole.js", function(){
+		//alert("DKHtmlConsole callback")
+		dkconsole = new DKHtmlConsole;
+		dkconsole.create("","0px","0px","0px","","25%");
+	});
+	dk_source(DKJAVASCRIPT_DIR+"/functions/DKEventMonitor.js", function(){
+		eventmonitor = new DKEventMonitor;
+		eventmonitor.monitorEvents(window);
+		eventmonitor.monitorEvents(document);
+		eventmonitor.monitorEvents(document.body);
+	});
+}
 /*
 if(typeof WScript === "object"){
 	console.log("Using Windows Scriting Host")

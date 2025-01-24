@@ -81,8 +81,8 @@ dk_check('document');
 //alert("test");
 
 //###### console (class) ######
-dk_source(assets+"/DKJavascript/polyfills/console.js");
-dk_check('console');
+//dk_source(assets+"/DKJavascript/polyfills/console.js");
+//dk_check('console');
 //console.log("console.log test\n");
 
 //###### dk_color (function) ######

@@ -1,8 +1,8 @@
 //"use strict";
-
 function DKHtmlConsole() {}
 
 DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, bottom, left, right, width, height) {
+	//alert("DKHtmlConsole.create");
 	if(!window){ alert("windows is invalid"); return; }
 	if(!window.document){ alert("document is invalid"); return; }
 	var dkhtmlconsole = window.document.createElement("div");
