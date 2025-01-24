@@ -8,7 +8,7 @@ var assets = "file:///C:/Users/Administrator/digitalknob/Development";
 ARGV = WScript.Arguments;
 ARGC = WScript.Arguments.Count();
 for (i=0; i<ARGV.length; i++){
-    WScript.Echo("ARGV"+i+" = "+ARGV(i)+"\n");
+    //WScript.Echo("ARGV"+i+" = "+ARGV(i)+"\n");
 }
 
 //###### dk_check (function) ######
@@ -70,38 +70,43 @@ objXMLDoc.load(index);
 if(objXMLDoc.parseError.errorCode !== 0){
 	WScript.StdOut.Write("ERROR when loading " + index + ": " + objXMLDoc.parseError.reason);
 }
+dk_check('objXMLDoc');
 
 //###### location ######
 var location = new Object;
 location.href = objXMLDoc.url;
+//dk_check('location.href');
+WScript.Echo("location.href = "+location.href);
 
 //###### documentElement ######
 var document = objXMLDoc.documentElement;
 dk_check('document');
 //WScript.StdOut.Write("document: "+document.xml+"\n\n");
 
-
-
-
 //###### alert (function) ######
 dk_source(assets+"/DKJavascript/polyfills/alert.js", function(){
 	dk_check('alert');
-	alert("test");
+	//alert("test");
 });
 
 //###### console (class) ######
-//dk_source(assets+"/DKJavascript/polyfills/console.js");
-//dk_check('console');
-//console.log("console.log test\n");
+dk_source(assets+"/DKJavascript/polyfills/console.js");
+dk_check('console');
+console.log("console.log test\n");
 
 //###### dk_color (function) ######
 //dk_source(assets+"/DKJavascript/functions/dk_color.js");
 //dk_check('dk_color');
 //DKTEST();
 
+dk_source(assets+"/DKJavascript/polyfills/addEventListener.js", function(){
+	//dk_check('document.addEventListener');
+});
 
-dk_source(assets+"/DKJavascript/functions/DK.js");
-dk_check('DK');
+dk_source(assets+"/DKJavascript/functions/DK.js", function(){
+	//dk_check('DK');
+});
+
 
 /*###### JSON ###### 
 var htmlfile = WSH.CreateObject('htmlfile'), JSON;

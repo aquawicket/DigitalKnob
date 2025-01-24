@@ -9,6 +9,7 @@ if(typeof ActiveXObject === "function"){
 } else { HOST = "browser" }
 //console.log("HOST = "+HOST);
 
+
 if(typeof String.prototype.replaceAll === "undefined") {
 	String.prototype.replaceAll = function replaceAll(search, replace) { 
 		return this.split(search).join(replace); 
@@ -34,29 +35,30 @@ dk_source = function(url, callbak){
 	}
 }
 */
-function dk_source(file, callback) {
-  var script = document.createElement("script");
-  script.src = file;
-  // monitor script loading
-  // IE < 7, does not support onload
-  if (callback) {
-    script.onreadystatechange = function () {
-      if (script.readyState === "loaded" || script.readyState === "complete") {
-        // no need to be notified again
-        script.onreadystatechange = null;
-        // notify user
-        callback();
-      }
-    };
- 
-    // other browsers
-    script.onload = function () {
-      callback();
-    };
-  }
- 
-  // append and execute script
-  document.documentElement.firstChild.appendChild(script);
+
+if(dk_source !== "function") {
+	function dk_source(file, callback) {
+	  var script = document.createElement("script");
+	  script.src = file;
+	  
+	  if (callback) {
+			// IE < 7, does not support onload
+			script.onreadystatechange = function () {
+				if (script.readyState === "loaded" || script.readyState === "complete") {
+					script.onreadystatechange = null; // no need to be notified again
+					callback();
+				}
+			};
+	 
+			// other browsers
+			script.onload = function () {
+				callback();
+			};
+		}
+	 
+		// append and execute script
+		document.documentElement.firstChild.appendChild(script);
+	}
 }
 
 
@@ -138,7 +140,6 @@ var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
 
 var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 
-
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
@@ -149,25 +150,26 @@ var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
 
-
 if(typeof ARGV !== "undefined"){
 	if(typeof ARGV(0) === "string"){
-		dk_source(ARGV(0));
-		DKTEST();
+		//dk_source(ARGV(0));
+		//DKTEST();
 	}
 }
+//console.log(location.href);
 
-document.addEventListener("DOMContentLoaded", onDOMContentLoaded() );
-function onDOMContentLoaded() {
-	if(!window){ alert("window is invalid"); return; }
-	if(!document){ alert("document is invalid"); return; }
-	if(!window.document){ alert("window.document is invalid"); return; }
-	
-	var DKHtml = 1;
-	dkTitle = "DigitalKnob - " + location.href;
-	document.title = dkTitle;
-
-	
+if(typeof document.addEventListener !== "undefined"){
+	document.addEventListener("DOMContentLoaded", onDOMContentLoaded() );
+	function onDOMContentLoaded() {
+		//console.log("onDOMContentLoaded");
+		if(!window){ alert("window is invalid"); return; }
+		if(!document){ alert("document is invalid"); return; }
+		if(!window.document){ alert("window.document is invalid"); return; }
+		
+		var DKHtml = 1;
+		dkTitle = "DigitalKnob - " + location.href;
+		document.title = dkTitle;
+	}
 }
 
 function body_onLoad(){
@@ -189,6 +191,23 @@ function body_onLoad(){
 		console.log("HOST = "+HOST);
 	});
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 if(typeof WScript === "object"){
 	console.log("Using Windows Scriting Host")
