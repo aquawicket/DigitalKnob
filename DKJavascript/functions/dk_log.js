@@ -1,3 +1,5 @@
+dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function(){});
+
 var ENABLE_dk_log = 1;
 
 //### DEFAULT ###

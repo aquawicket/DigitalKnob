@@ -145,11 +145,16 @@ if(typeof location === "undefined"){
 
 
 //###### DKSCRIPT variables ######
-var DKSCRIPT_PATH = location.href;
+if(typeof ARGV !== "undefined"){
+	var href = ARGV(0).replaceAll("\\", "/");
+	var DKSCRIPT_PATH = href;
+} else {
+	var DKSCRIPT_PATH = location.href;
+}
 var DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
-//var DKSCRIPT_FILE = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
-var DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1);
-var DKSCRIPT_EXT = DKSCRIPT_NAME.substr(DKSCRIPT_NAME.lastIndexOf("."));
+var DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1);
+var DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1));
+var DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf("."));
 
 //###### DKHOME_DIR variables ######
 var DIGITALKNOB = "digitalknob"
@@ -216,7 +221,7 @@ var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 
 //############ alert ############
 if(typeof alert === "undefined"){
-	dk_source(assets+"/DKJavascript/polyfills/alert.js", function(){
+	dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js", function(){
 		//alert("test");
 	});
 }
@@ -289,14 +294,25 @@ dk_check('body_onLoad');
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
+dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 
 //############ DKTEST ############
-//if(typeof ARGV !== "undefined"){
-//	if(typeof ARGV(0) === "string"){
-//		//dk_source(ARGV(0));
-//		//DKTEST();
-//	}
-//}
+if(typeof ARGV !== "undefined"){
+	if(typeof ARGV(0) === "string"){
+		DKTEST = function(){}
+		dk_source(ARGV(0), function(){
+		//if(DKSCRIPT_EXT !== ".js"){ return }
+		//if(!dk_fileContains(DKSCRIPT_PATH, ":DKTEST")){ return }
+		console.log("")
+		console.log(bg_magenta+white+"###### DKTEST MODE ###### "+DKSCRIPT_FILE+" ###### DKTEST MODE ######"+clr)
+		console.log("")
+			DKTEST();
+		console.log("")
+		console.log(bg_magenta+white+"######## END TEST ####### "+DKSCRIPT_FILE+" ######## END TEST #######"+clr)
+		console.log("")
+		});
+	}
+}
 
 
 
