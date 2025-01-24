@@ -14,8 +14,8 @@ if(typeof String.prototype.replaceAll === "undefined") {
 		return this.split(search).join(replace); 
 	}
 }
-
-dk_source = function(url){
+/*
+dk_source = function(url, callbak){
 	if(typeof ActiveXObject === "function"){
 		var url = url.replaceAll("file:///", "");
 		//alert(url);
@@ -27,12 +27,37 @@ dk_source = function(url){
 	} else {
 		var jsfile = "file:///"+url.replaceAll("\\", "/");
 		var xmlHttpRequest = new XMLHttpRequest;
-		xmlHttpRequest.open("GET", url, false);
+		xmlHttpRequest.open("GET", url, true);
 		xmlHttpRequest.send();
-		(1, eval)(xmlHttpRequest.responseText);
+		//(1, eval)(xmlHttpRequest.responseText);
+		eval(xmlHttpRequest.responseText);
 	}
 }
-
+*/
+function dk_source(file, callback) {
+  var script = document.createElement("script");
+  script.src = file;
+  // monitor script loading
+  // IE < 7, does not support onload
+  if (callback) {
+    script.onreadystatechange = function () {
+      if (script.readyState === "loaded" || script.readyState === "complete") {
+        // no need to be notified again
+        script.onreadystatechange = null;
+        // notify user
+        callback();
+      }
+    };
+ 
+    // other browsers
+    script.onload = function () {
+      callback();
+    };
+  }
+ 
+  // append and execute script
+  document.documentElement.firstChild.appendChild(script);
+}
 
 
 
@@ -114,11 +139,11 @@ var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
 var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 
 
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/console.js");
-dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/console.js");
+//dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/addEventListener.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
@@ -142,8 +167,7 @@ function onDOMContentLoaded() {
 	dkTitle = "DigitalKnob - " + location.href;
 	document.title = dkTitle;
 
-	console.log(dkTitle);
-	console.log("HOST = "+HOST);
+	
 }
 
 function body_onLoad(){
@@ -153,12 +177,16 @@ function body_onLoad(){
 		//alert("DKHtmlConsole callback")
 		dkconsole = new DKHtmlConsole;
 		dkconsole.create("","0px","0px","0px","","25%");
-	});
-	dk_source(DKJAVASCRIPT_DIR+"/functions/DKEventMonitor.js", function(){
-		eventmonitor = new DKEventMonitor;
-		eventmonitor.monitorEvents(window);
-		eventmonitor.monitorEvents(document);
-		eventmonitor.monitorEvents(document.body);
+	
+		dk_source(DKJAVASCRIPT_DIR+"/functions/DKEventMonitor.js", function(){
+			eventmonitor = new DKEventMonitor;
+			eventmonitor.monitorEvents(window);
+			eventmonitor.monitorEvents(document);
+			eventmonitor.monitorEvents(document.body);
+		});
+		
+		console.log(dkTitle);
+		console.log("HOST = "+HOST);
 	});
 }
 /*

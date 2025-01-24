@@ -29,26 +29,35 @@ var window = (function () {
 }());
 dk_check('window');
 
+//###### String.prototype.replaceAll (polyfill) ######
+if(typeof String.prototype.replaceAll === "undefined") {
+	String.prototype.replaceAll = function replaceAll(search, replace) { 
+		return this.split(search).join(replace); 
+	}
+}
+
 //###### XMLHttpRequest (class) ######
 if(typeof XMLHttpRequest == "undefined" || !ie7xmlhttp) {
     XMLHttpRequest = function() {
-		//return new ActiveXObject("Msxml3.XMLHTTP");
 		return new ActiveXObject("Msxml2.XMLHTTP.6.0");
-		//return new ActiveXObject("Msxml2.XMLHTTP.3.0");
-		//return new ActiveXObject("Msxml2.XMLHTTP");
-		//return new ActiveXObject("Microsoft.XMLHTTP");
 	}
 }
-		
+	
 //###### dk_source (function) ######
-dk_source = function(url){
-	var IXMLHttpRequest = new XMLHttpRequest();
-	IXMLHttpRequest.open("GET", url, false);
-	IXMLHttpRequest.send();
-	(1, eval)(IXMLHttpRequest.responseText);
-//	if(arguments[1] !== "undefined"){
-//		arguments[1]()
-//	}
+dk_source = function(url, callback){
+	if(typeof ActiveXObject === "OFF function OFF"){ //<---- turned off
+		var url = url.replaceAll("file:///", "");
+		(1, eval)((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(url, 1).ReadAll());
+	} else {
+		var jsfile = "file:///"+url.replaceAll("\\", "/");
+		var xmlHttpRequest = new XMLHttpRequest;
+		xmlHttpRequest.open("GET", url, true);
+		xmlHttpRequest.send();
+		eval(xmlHttpRequest.responseText);
+	}
+	if(callback){
+		callback();
+	}
 }
 dk_check('dk_source');
 
@@ -66,8 +75,7 @@ if(objXMLDoc.parseError.errorCode !== 0){
 var location = new Object;
 location.href = objXMLDoc.url;
 
-
-//###### document (variable) ######
+//###### documentElement ######
 var document = objXMLDoc.documentElement;
 dk_check('document');
 //WScript.StdOut.Write("document: "+document.xml+"\n\n");
@@ -76,9 +84,10 @@ dk_check('document');
 
 
 //###### alert (function) ######
-//dk_source(assets+"/DKJavascript/polyfills/alert.js");
-//dk_check('alert');
-//alert("test");
+dk_source(assets+"/DKJavascript/polyfills/alert.js", function(){
+	dk_check('alert');
+	alert("test");
+});
 
 //###### console (class) ######
 //dk_source(assets+"/DKJavascript/polyfills/console.js");
@@ -92,7 +101,7 @@ dk_check('document');
 
 
 dk_source(assets+"/DKJavascript/functions/DK.js");
-//dk_check('DK');
+dk_check('DK');
 
 /*###### JSON ###### 
 var htmlfile = WSH.CreateObject('htmlfile'), JSON;
