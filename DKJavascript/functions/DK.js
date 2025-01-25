@@ -72,13 +72,14 @@ dk_check('XMLHttpRequest');
 //############ dk_source ############
 if(typeof dk_source === "undefined") {
 	dk_source = function(url, callback){
+		var url = url.replaceAll("\\", "/");
 		//############ Msxml2.XMLHTTP.6.0 ############
 		if(typeof WScript === "object"){
 			if(USE_FILESYSTEM == 1){
-				var url = url.replaceAll("file:///", "");
+				// C:/Path/Format
 				(1, eval)((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(url, 1).ReadAll());
 			} else {
-				//var url = "file:///"+url.replaceAll("\\", "/");
+				// file:///C:/Path/Format
 				var xmlHttpRequest = new XMLHttpRequest;
 				xmlHttpRequest.open("GET", url, true);
 				xmlHttpRequest.send();
@@ -88,7 +89,7 @@ if(typeof dk_source === "undefined") {
 				callback();
 			}
 		} else { //############ Browsers ############
-			//var url = "file:///"+url.replaceAll("\\", "/");
+			// file:///C:/Path/Format
 			var script = document.createElement("script");
 			script.src = url;  
 			if (callback) {
@@ -113,7 +114,7 @@ dk_check('dk_source');
 if(typeof ActiveXObject === "function"){
 	if(typeof domDocument === "undefined"){ 
 		var domDocument = new ActiveXObject("Msxml2.DOMDocument.6.0");  
-		domDocument.async = false;
+		domDocument.async = true;
 		domDocument.setProperty("ProhibitDTD", false);
 		domDocument.validateOnParse = false;
 		domDocument.load(index);
@@ -323,26 +324,7 @@ if(typeof ARGV !== "undefined"){
 
 
 /*
-if(typeof String.prototype.replaceAll === "undefined") {
-	String.prototype.replaceAll = function replaceAll(search, replace) { 
-		return this.split(search).join(replace); 
-	}
-}
-dk_source = function(url, callbak){
-	if(typeof ActiveXObject === "function"){
-		var url = url.replaceAll("file:///", "");
-		(1, eval)((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(url, 1).ReadAll());
-		if(typeof arguments[1] !== "undefined"){
-			arguments[1]();
-		}
-	} else {
-		var jsfile = "file:///"+url.replaceAll("\\", "/");
-		var xmlHttpRequest = new XMLHttpRequest;
-		xmlHttpRequest.open("GET", url, true);
-		xmlHttpRequest.send();
-		eval(xmlHttpRequest.responseText);
-	}
-}
+
 
 
 if(typeof WScript === "object"){

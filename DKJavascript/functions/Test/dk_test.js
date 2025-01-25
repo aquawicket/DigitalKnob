@@ -2,20 +2,11 @@
 //# dk_test()
 //#
 //#
-dk_test = function(){
+Test::dk_test = function(){
 	//dk_debugFunc(0);
 	
-	console.log("################# dk_test.cmd ################");
+	console.log("################# Test/dk_test.cmd ################");
 	console.log("               ARGV(0) = "+ARGV(0));
-if(typeof ARGV(1)) !== "undefined"){ console.log("              ARGV(1) = "+ARGV(1)); }
-/*	console.log("               ARGV(0) = "+ARGV(2));
-	console.log("               ARGV(0) = "+ARGV(3));
-	console.log("               ARGV(0) = "+ARGV(4));
-	console.log("               ARGV(0) = "+ARGV(5));
-	console.log("               ARGV(0) = "+ARGV(6));
-	console.log("               ARGV(0) = "+ARGV(7));
-	console.log("               ARGV(0) = "+ARGV(8));
-	console.log("               ARGV(0) = "+ARGV(9));
 	console.log("          arguments[0] = "+arguments[0]);
 	console.log("          arguments[1] = "+arguments[1]);
 	console.log("          arguments[2] = "+arguments[2]);
@@ -56,7 +47,7 @@ if(typeof ARGV(1)) !== "undefined"){ console.log("              ARGV(1) = "+ARGV
 	console.log("  DKBASH_FUNCTIONS_DIR = "+DKBASH_FUNCTIONS_DIR);
 	console.log(" DKBASH_FUNCTIONS_DIR_ = "+DKBASH_FUNCTIONS_DIR_);
 
-*/	//setGlobal GLOBAL_VAR "This is a global variable"
+	//setGlobal GLOBAL_VAR "This is a global variable"
 	//setReturn RETURN_VAR "This is a return variable"
 
 	//var GLOBAL_VAR = %GLOBAL_VAR%
@@ -76,9 +67,9 @@ DKTEST = function() {
 	//console.log("GLOBAL_VAR = "+GLOBAL_VAR)
 	//console.log("RETURN_VAR = "+RETURN_VAR)
 
-//	Test::dk_test("from :DKTEST", "to Test::dk_test")
-	console.log("")
-/*	console.log("GLOBAL_VAR = "+GLOBAL_VAR)
+	Test::dk_test("from :DKTEST", "to Test/dk_test")
+/*	console.log("")
+	console.log("GLOBAL_VAR = "+GLOBAL_VAR)
 	console.log("RETURN_VAR = "+RETURN_VAR)
 
 	Test::Test::dk_test("from :DKTEST", "to Test::Test::dk_test")

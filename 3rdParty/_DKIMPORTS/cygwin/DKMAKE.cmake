@@ -27,6 +27,9 @@ if(CYGWIN)
 		### Download ###
 		dk_download(${CYGWIN_DL} ${DKDOWNLOAD_DIR})
 		
+		### FirewallAllow ###
+		dk_firewallAllow("Cygwin_Setup" "${DKDOWNLOAD_DIR}/setup-x86_64.exe")
+		
 		### Install Cygwin ###
 		dk_command("${DKDOWNLOAD_DIR}/${CYGWIN_DL_FILE}" --quiet-mode --root ${CYGWIN_DIR})
 		

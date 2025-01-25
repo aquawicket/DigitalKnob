@@ -69,16 +69,14 @@ DK(){
     DKSCRIPT_VARS
 
     ###### DKTEST MODE ######
-	echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-	echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
-	echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
-#    [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return 0
-	if ! dk_isChildPathOf "$DKSCRIPT_DIR" "$DKBASH_FUNCTIONS_DIR"; then 
-		return 0;
-	fi
+	#echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+	#echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
+	#echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
     [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
+	dk_call dk_fileContains "${DKSCRIPT_PATH}" ":DKTEST" || return 0
         dk_call dk_echo
         dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
+		dk_call dk_echo
         #dk_call dk_echo "${bg_RGB}20;20;20m"
         dk_source "${DKSCRIPT_PATH}"
         #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST() code

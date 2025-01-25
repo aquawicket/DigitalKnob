@@ -6,7 +6,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ############ webview2_in_mingw ############
-#dk_depend(libgcc)
 dk_import("https://github.com/jchv/webview2-in-mingw/archive/c003dd6e.zip" PATCH)
 
 dk_include("${WEBVIEW2_IN_MINGW}/WebView/include")
@@ -24,8 +23,8 @@ set(WEBVIEW2GUID_LIB		"${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Guid.lib")
 set(WEBVIEW2LOADER_DLL_LIB	"${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll.lib")
 set(WEBVIEW2LOADER_DLL		"${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll")
 
+dk_configure(${WEBVIEW2_IN_MINGW} -DARCH=${ARCH})
 
-dk_configure(${WEBVIEW2_IN_MINGW} -DARCH=${ARCH}) 
 dk_build(${WEBVIEW2_IN_MINGW})
 
 dk_copy(${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll ${WEBVIEW2_IN_MINGW_BUILD_DIR}/WebView2Loader.dll)
