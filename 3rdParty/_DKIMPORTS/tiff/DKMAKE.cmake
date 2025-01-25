@@ -30,7 +30,7 @@ dk_depend(zstd)
 dk_import(https://gitlab.com/libtiff/libtiff/-/archive/685c7326/libtiff-685c7326.zip)
 
 ### LINK ###
-dk_include					(${TIFF_DIR}/libtiff									TIFF_INCLUDE_DIR)
+dk_include					(${TIFF}/libtiff										TIFF_INCLUDE_DIR)
 dk_include					(${TIFF_CONFIG_DIR}/libtiff								TIFF_INCLUDE_DIRS)
 #DEBUG_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}				TIFF_INCLUDE_DIRS)
 #RELEASE_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}				TIFF_INCLUDE_DIRS)
@@ -68,7 +68,7 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure(${TIFF_DIR}
+dk_configure(${TIFF}
 	-Dtiff-tools=OFF				# "build TIFF tools" ON
 	-Dtiff-tools-unsupported=OFF	# "build unsupported TIFF tools" OFF
 	-Dtiff-tests=OFF				# "build TIFF tests" ON
@@ -82,4 +82,4 @@ dk_configure(${TIFF_DIR}
 	${ZSTD_CMAKE})
 
 ### COMPILE ###
-dk_build(${TIFF_DIR} tiff)
+dk_build(${TIFF} tiff)
