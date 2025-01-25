@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    Call a command after timeout
 ::#
 :dk_timeoutCall
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2
 
 	

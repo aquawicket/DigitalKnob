@@ -26,13 +26,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_keyboardInput choice
     ::%dk_call% dk_keyboardInputTimeout choice 1 60 
 
-    if "%choice%"=="1" endlocal & set "%1=Debug"     && %return%
-    if "%choice%"=="2" endlocal & set "%1=Release"   && %return%
-    if "%choice%"=="3" endlocal & set "%1=All"       && %return%
-    if "%choice%"=="4" endlocal & set "%1=none"      && %return%
-    if "%choice%"=="5" %dk_call% dk_clearScreen      && %return%
-    if "%choice%"=="6" %dk_call% dk_unset target_triple     && %return%
-    if "%choice%"=="7" %dk_call% dk_exit             && %return%
+    if "%choice%"=="1" endlocal & set "%1=Debug"			&& %return%
+    if "%choice%"=="2" endlocal & set "%1=Release"			&& %return%
+    if "%choice%"=="3" endlocal & set "%1=All"				&& %return%
+    if "%choice%"=="4" endlocal & set "%1=none"				&& %return%
+    if "%choice%"=="5" %dk_call% dk_clearScreen				&& %return%
+    if "%choice%"=="6" %dk_call% dk_unset target_triple		&& %return%
+    if "%choice%"=="7" %dk_call% dk_exit					&& %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
     %dk_call% dk_unset target_type

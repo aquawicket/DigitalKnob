@@ -14,18 +14,12 @@ setlocal
  
 	echo dk_runThread
  
-    :: Start dk_runThread.Loop in a parallel process
-    start "" /B %ComSpec% /C call :dk_runThread.LoopFunc
-    ::call :dk_runThread.LoopFunc
-	pause
+    :: Start dk_timeLoop in a parallel process
+    start "" /B %ComSpec% /C call dk_timeLoop
+	echo Time is displayed in the titlebar in a seperate process
 %endfunction%
 
-:dk_runThread.LoopFunc
-	:loop
-		::%dk_call% dk_echoReplace %TIME%
-		title %TIME%
-	goto :loop
-%endfunction%	
+
 	
 
 
@@ -34,8 +28,6 @@ setlocal
 :DKTEST
 setlocal
 	%dk_call% dk_debugFunc 0
-	echo DKTEST
- 
-	%dk_call% dk_runThread
 	
+	%dk_call% dk_runThread
 %endfunction%

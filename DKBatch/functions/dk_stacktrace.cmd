@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_stacktrace()
 ::#
 :dk_stacktrace
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0
 	
 	echo:

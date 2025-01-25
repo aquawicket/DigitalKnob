@@ -20,7 +20,6 @@ setlocal
 	
 	::note: the /i switch will refresh the environment as well
 	start /i explorer.exe
-
 %endfunction%
 
 

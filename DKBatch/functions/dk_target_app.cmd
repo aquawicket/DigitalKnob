@@ -8,8 +8,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_target_app
 ::setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0 1 
-    
-	if "!DE!" neq "" %dk_call% dk_error "delayed expansion is required"
 	
     :: read cache file
 	if exist "%DKCACHE_DIR%\cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%\cache" words)

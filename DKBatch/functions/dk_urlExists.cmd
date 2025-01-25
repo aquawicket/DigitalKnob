@@ -5,10 +5,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_urlExists(url rtn_var)
 ::#
 :dk_urlExists
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1 2
  
-   
     :curl
 	    %dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
         if defined DISABLE_curl goto end_curl_exists

@@ -11,13 +11,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_replaceEqual
 setlocal enableDelayedExpansion
+
     %dk_call% dk_debugFunc 4
 
 	%dk_call% dk_fixme "TODO"
 	for /F "delims==" %%v in ('set $_ 2^>NUL') do set "%%v=" 						&::# Clear existing $_XXX variables
 																					::# $_=input  $f=Termination flag  $v=output value  $r=replacement var
 	set "$_=!%~1!." & set "$f=1" & set "$v=" & set "$r=%~2"
-::	if /i "!$_:%$_%=%$_%!" equ "!$_!" exit /b 0									&::# No = sign in $_. Return now to save time
+::	if /i "!$_:%$_%=%$_%!" equ "!$_!" exit /b 0										&::# No = sign in $_. Return now to save time
 	if defined $r if not "!$r:~0,1!"=="=" (set "$r=!%~2!") else set "$r=!$r:~1!" 	&::# $r=replacement value
 	set "$o=%~3" & if not defined $o set "$o=%~1"
 	for /L %%i in (0,1,256) do if defined $f (
@@ -28,7 +29,7 @@ setlocal enableDelayedExpansion
 		)
 	)
 	set "!$o!=!$v!!$b:~0,-1!"
-	echo 0 = !0!																					&::# The complete result, with the tail . removed in the end
+	echo 0 = !0!																	&::# The complete result, with the tail . removed in the end
 	endlocal & set %~1=!$o!
 %endfunction%
 

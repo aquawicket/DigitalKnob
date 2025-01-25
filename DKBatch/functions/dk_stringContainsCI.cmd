@@ -9,8 +9,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_stringContainsCI
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2 3
- 
-    ::if "!d!" neq "" %dk_call% dk_error "%__FUNCTION__%: requires delayed expansion"
     
     set "_haystack_=%~1"
     set "_needle_=%~2"

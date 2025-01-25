@@ -21,6 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 ::#
 :dk_target_triple
+::setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0
 
 	set "CMAKE_BINARY_DIR=C:\Users\Administrator\digitalknob\Development\DKApps\HelloWorld\win_x86_64_clang\Debug"
@@ -33,13 +34,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::### Set target_type / TARGET_TYPE ###
 	if "!TARGET_DIR!" equ "Debug" (	
 		rem ### Get DEBUG ###
-		!dk_call! dk_set target_type DEBUG						&rem 	     target_type	= DEBUG
+		!dk_call! dk_set target_type DEBUG						&rem 	    target_type	= DEBUG
 		!dk_call! dk_set !target_type! 1						&rem 			  DEBUG = 1	
 		rem !dk_call! dk_set TARGET_TYPE Debug					&rem 		TARGET_TYPE	= Debug
 		!dk_call! dk_dirname TARGET_DIR TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	) else if "!TARGET_DIR!" equ "Release" (
 		rem ### Get RELEASE ###
-		!dk_call! dk_set target_type RELEASE 					&rem 	     target_type = RELEASE
+		!dk_call! dk_set target_type RELEASE 					&rem 	    target_type = RELEASE
 		!dk_call! dk_set !target_type! 1						&rem 			RELEASE = 1	
 		rem !dk_call! dk_set TARGET_TYPE Release				&rem 		TARGET_TYPE = Release
 		!dk_call! dk_dirname !TARGET_DIR! TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
@@ -77,10 +78,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	::### Set target_triple/TARGET_TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
 	!dk_call! dk_basename !TARGET_TRIPLE_DIR! target_triple	&:: target_triple 	= win_x86_64_clang
-	!dk_call! dk_set target_triple !target_triple!					&:: Globalize the variable
+	!dk_call! dk_set target_triple !target_triple!				&:: Globalize the variable
 	!dk_call! dk_set target_triple !target_triple!				&:: target_triple	= win_x86_64_clang
-	!dk_call! dk_toUpper !target_triple! TARGET_TRIPLE				&:: TARGET_TRIPLE	= WIN_X86_64_CLANG
-	!dk_call! dk_set TARGET_TRIPLE !TARGET_TRIPLE!					&:: Globalize the variable
+	!dk_call! dk_toUpper !target_triple! TARGET_TRIPLE			&:: TARGET_TRIPLE	= WIN_X86_64_CLANG
+	!dk_call! dk_set TARGET_TRIPLE !TARGET_TRIPLE!				&:: Globalize the variable
 	!dk_call! dk_set TARGET_TRIPLE !TARGET_TRIPLE!				&::	TARGET_TRIPLE = WIN_X86_64_CLANG
 	!dk_call! dk_set !target_triple! 1						    &:: win_x86_64_clang = 1
 	!dk_call! dk_set !TARGET_TRIPLE! 1						    &:: WIN_X86_64_CLANG = 1

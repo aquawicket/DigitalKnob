@@ -39,6 +39,5 @@ setlocal
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_echo "DKDOWNLOAD_DIR = %DKDOWNLOAD_DIR%"
 	
-	
 	%dk_call% dk_validate TESTABC "%dk_call% dk_testB"
 %endfunction%

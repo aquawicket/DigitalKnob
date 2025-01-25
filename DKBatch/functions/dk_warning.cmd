@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-::%dk_call% dk_source dk_log
 ::################################################################################
 ::# dk_warning(message)
 ::#
@@ -12,6 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_warning
 setlocal
 	%dk_call% dk_debugFunc 1
+	
     %dk_call% dk_log WARNING "%~1"
 %endfunction%
 

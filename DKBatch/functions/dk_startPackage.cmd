@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_startPackage
+::setlocal
     %dk_call% dk_debugFunc 1
- ::setlocal
  
 	::%dk_call% dk_callDKPowershell dk_startPackage %*
 	%dk_call% dk_callDKPowershell dk_getPackagePath %* rtn_var

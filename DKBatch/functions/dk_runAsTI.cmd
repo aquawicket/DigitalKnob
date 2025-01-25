@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-
 ::##################################################################################
 ::# dk_runAsTI(command)
 ::#
@@ -10,6 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_runAsTI
 setlocal
 	%dk_call% dk_debugFunc 1
+	
     set ^ #=
     set "0=%~f0"
     set 1=%*
@@ -25,7 +25,9 @@ setlocal
 
     ::%dk_call% dk_runAsTI regedit
     ::%dk_call% dk_runAsTI cmd.exe
-	%dk_call% dk_runAsTi services.msc
+	::%dk_call% dk_runAsTI services.msc
+	%dk_call% dk_inputBox rtn_var
+	%dk_call% dk_runAsTi %rtn_var%
 %endfunction%
 
 

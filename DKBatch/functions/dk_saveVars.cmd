@@ -40,5 +40,4 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_saveVars
-	
 %endfunction%

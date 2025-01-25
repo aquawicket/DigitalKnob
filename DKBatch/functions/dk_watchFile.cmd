@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_watchFile(file)
 ::#
 :dk_watchFile
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1
 	set "_file_=%~1"
 	set "_file_=%_file_:/=\%"

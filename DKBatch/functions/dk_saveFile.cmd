@@ -32,7 +32,7 @@ setlocal
 
 
 
-: end begin PowerShell hybrid chimera #>
+: end begin PowerShell hybrid #>
 Add-Type -AssemblyName System.Windows.Forms
 $f = new-object Windows.Forms.SaveFileDialog
 $f.InitialDirectory = pwd
