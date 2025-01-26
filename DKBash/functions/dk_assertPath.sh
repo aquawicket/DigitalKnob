@@ -7,7 +7,8 @@
 dk_assertPath() {
     dk_debugFunc 1
 	
-    [ -e "${1}" ] && return 0
+    [ -e "${1-}" ] && return 0
+	[ -e "${!1-}" ] && return 0
 	
 	# is a valid variable name check
 	[[ "$1" =~ ^[_a-z][a-zA-Z0-9_]*$ ]] && [ -e "${!1}" ] && return 0
