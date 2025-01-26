@@ -41,7 +41,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 setlocal
     %dk_call% dk_debugFunc 1
 
-    %dk_call% dk_registryKeyExists "%~1" || exit /b 0
+    %dk_call% dk_registryKeyExists "%~1" || (
+		exit /b 0
+	)
     
     "%SystemRoot%\System32\reg.exe" delete "%~1" /f
 
