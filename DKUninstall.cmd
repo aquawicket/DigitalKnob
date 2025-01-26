@@ -52,11 +52,11 @@ setlocal
 	
 	echo:
 	echo ############ Restore Defaults ############
-	%windir%\system32\reg.exe import "%DKBATCH_DIR%\default.reg"
-	%windir%\system32\reg.exe import "%DKHTML_DIR%\default.reg"
-	%windir%\system32\reg.exe import "%DKJAVASCRIPT_DIR%\default.reg"
-	%windir%\system32\reg.exe import "%DKPOWERSHELL_DIR%\default.reg"
-	%windir%\system32\reg.exe import "%DKVB_DIR%\default.reg"
+	
+	
+	
+	
+	
 	
 %endfunction%
 
@@ -74,10 +74,95 @@ setlocal
 %endfunction%
 
 :dk_restoreDefault
+	::### DKBatch ###
+	if "%~1"==".bat" (
+		ftype DKBatch=
+		ftype batfile="%%1" %%*
+		assoc .bat=batfile
+	)
+	::### DKC ###
+	if "%~1"==".c" (
+		ftype DKC=
+		assoc .c=
+	)
+	::### DKCmake ###
+	if "%~1"==".cmake" (
+		ftype DKCmake=
+		assoc .cmake=
+	)
+	::### DKBatch ###
 	if "%~1"==".cmd" (
+		rem %windir%\system32\reg.exe import "%DKBATCH_DIR%\default.reg"
+		ftype DKBatch=
 		ftype cmdfile="%%1" %%*
 		assoc .cmd=cmdfile
 	)
+	::### DKCpp ###
+	if "%~1"==".cpp" (
+		ftype DKCpp=
+		assoc .cpp=
+	)
+	::### DKCSharp ###
+	if "%~1"==".cs" (
+		ftype DKCSharp=
+		assoc .cs=
+	)
+	::### DKHta ###
+	if "%~1"==".hta" (
+		ftype DKHta=
+		assoc .hta=
+	)
+	::### DKHtml ###
+	if "%~1"==".html" (
+		rem %windir%\system32\reg.exe import "%DKHTML_DIR%\default.reg"
+		ftype DKHtml=
+		ftype htmlfile="C:\Program Files\Internet Explorer\iexplore.exe" %%1
+		assoc .html=htmlfile
+	)
+	::### DKJava ###
+	if "%~1"==".java" (
+		ftype DKJava=
+		assoc .java=
+	)
+	::### DKJavascript ###
+	if "%~1"==".js" (
+		rem %windir%\system32\reg.exe import "%DKJAVASCRIPT_DIR%\default.reg"
+		ftype DKJavascript=
+		ftype JSFile=C:\Windows\System32\WScript.exe "%%1" %%*
+		assoc .js=JSFile
+	)
+	::### DKPhp ###
+	if "%~1"==".php" (
+		ftype DKPhp=
+		assoc .php=
+	)
+	::### DKPowershell ###
+	if "%~1"==".ps1" (
+		rem %windir%\system32\reg.exe import "%DKPOWERSHELL_DIR%\default.reg"
+		ftype DKPowershell=
+		ftype Microsoft.PowerShellScript.1="C:\Windows\System32\notepad.exe" "%%1"
+		assoc .ps1=Microsoft.PowerShellScript.1
+	)
+	::### DKPython ###
+	if "%~1"==".py" (
+		ftype DKPython=
+		assoc .py=
+	)
+	::### DKBash ###
+	if "%~1"==".sh" (
+		ftype DKBash=
+		assoc .sh=
+	)
+	::### DKVb ###
+	if "%~1"==".vbs" (
+		rem %windir%\system32\reg.exe import "%DKVB_DIR%\default.reg"
+		ftype DKVb=
+		ftype VBSFile="%%SystemRoot%%\System32\WScript.exe" "%%1" %%*
+		assoc .vbs=VBSFile
+	)
+	
+	
+	
 %endfunction%
 
 
