@@ -22,42 +22,56 @@ include_guard()
 #
 function(dk_target_triple)
 	dk_debugFunc(0 1)
+	message("dk_target_triple(${ARGV})")
 
+	#set(default_target_os "${host_os}")
+	#dk_printVar(default_target_os)
+	#set(default_target_arch "${host_arch}")
+	#dk_printVar(default_target_arch)
 	set(default_target_env "clang")
+	dk_printVar(default_target_env)
+	message("")
 	
 	### Get TARGET_DIR ###
 	dk_getFullPath("${CMAKE_BINARY_DIR}" Target_Dir)
 	dk_toLower(${Target_Dir} target_dir)
 	dk_toUpper(${target_dir} TARGET_DIR)
 	dk_printVar(Target_Dir)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
+	message("")
 
 	### Set target_type / TARGET_TYPE ###
 	if(Target_Dir MATCHES "Debug")	
 		### Get DEBUG ###
-		dk_set(target_type DEBUG)						# 	   target_type = DEBUG
+		dk_set(target_type DEBUG)						# 	    target_type = DEBUG
 		dk_set(${target_type} 1)						# 			  DEBUG = 1	
 		dk_dirname(${Target_Dir} Target_Triple_Dir)		# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
-
 	elseif(Target_Dir MATCHES "Release")
 		### Get RELEASE ###
-		dk_set(target_type RELEASE)					# 	   target_type = RELEASE
+		dk_set(target_type RELEASE)						# 	    target_type = RELEASE
 		dk_set(${target_type} 1)						#			RELEASE = 1	
 		dk_dirname(${Target_Dir} Target_Triple_Dir)		# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	endif()
-		if( (target_dir MATCHES "android")		OR
-			(target_dir MATCHES "emscripten")	OR
-			(target_dir MATCHES "ios")			OR
-			(target_dir MATCHES "iossim")		OR
-			(target_dir MATCHES "linux")		OR
-			(target_dir MATCHES "mac")			OR
-			(target_dir MATCHES "raspberry")	OR
-			(target_dir MATCHES "windows")		OR
-			(target_dir MATCHES "cosmopolitan") )
-			dk_set(Target_Triple_Dir ${Target_Dir})			# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
-		else()
-			dk_target_triple_SET()
-			dk_set(Target_Triple_Dir ${Target_Dir}/${Triple})
-		endif()
+	dk_printVar(Target_Triple_Dir)
+	message("")
+	
+	if( (target_dir MATCHES "android")		OR
+		(target_dir MATCHES "emscripten")	OR
+		(target_dir MATCHES "ios")			OR
+		(target_dir MATCHES "iossim")		OR
+		(target_dir MATCHES "linux")		OR
+		(target_dir MATCHES "mac")			OR
+		(target_dir MATCHES "raspberry")	OR
+		(target_dir MATCHES "windows")		OR
+		(target_dir MATCHES "cosmopolitan") )
+		dk_set(Target_Triple_Dir ${Target_Dir})			# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+	else()
+		dk_target_triple_SET()
+		dk_printVar(triple)
+		dk_printVar(Triple)
+		dk_set(Target_Triple_Dir ${Target_Dir}/${Triple})
+	endif()
+	dk_printVar(Target_Triple_Dir)
+	message("")
 
 	if(NOT EXISTS ${Target_Triple_Dir})
 		dk_warning("Target_Triple_Dir:${Target_Triple_Dir} does not exits.")

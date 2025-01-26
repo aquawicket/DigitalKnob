@@ -8,6 +8,7 @@ include_guard()
 #
 function(dk_target_triple_SET)
 	dk_debugFunc()
+	message("dk_target_triple_SET(${ARGV})")
 
 	set(default_target_env "clang")
 
