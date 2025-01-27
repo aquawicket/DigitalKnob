@@ -183,8 +183,9 @@ setlocal
 		if "!%_level_%_PAUSE!"=="1" 		%dk_call% dk_echo "!%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"  	&& %dk_call% dk_pause
 		
 		::###### Timeout for x seconds ######
-		if defined "!%_level_%_TIMEOUT!" 	%dk_call% dk_echo "!%_level_%_COLOR!*** TIMEOUT_ON_%_level_% ***%clr%"  && %dk_call% dk_timeout !%_level_%_TIMEOUT!
-        
+		::if defined "!%_level_%_TIMEOUT!" 	%dk_call% dk_echo "!%_level_%_COLOR!*** TIMEOUT_ON_%_level_% ***%clr%"  && %dk_call% dk_timeout !%_level_%_TIMEOUT!
+        if defined "!%_level_%_TIMEOUT!" 	%dk_call% dk_echo "!%_level_%_COLOR!*** TIMEOUT_ON_%_level_% ***%clr%"  && %dk_call% dk_timeout 10
+		
 		::###### Halt Execution (exit) ######
 		if "!%_level_%_HALT!"=="1"  		%dk_call% dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"   	&& %dk_call% dk_exit 13
 %endfunction%
