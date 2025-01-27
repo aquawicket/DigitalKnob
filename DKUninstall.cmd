@@ -34,38 +34,28 @@ setlocal
 	%dk_call% dk_registryDeleteKey "HKCR\AllFilesystemObjects\shell\GIT ADD"
 	
 	echo:
-	echo ############ Remove Other registry entries ############
-	::%dk_call% dk_registryDeleteKey "HKCR\Applications\bash.exe"
-	::%dk_call% dk_registryDeleteKey "HKCU\Software\Classes\Applications\bash.exe"
-	::%dk_call% dk_registryDeleteKey "HKCR\Local Settings\Software\Microsoft\Windows\Shell\MuiCache\???"
-	::Computer\HKEY_CURRENT_USER\Software\Caphyon
-	::Computer\HKEY_CURRENT_USER\Software\Kitware
-	::Computer\HKEY_CURRENT_USER\Software\Microsoft\Installer\Products\FD405F5A9DE2D2A42A3FD97205DD246D
-	::Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\Python.exe
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Cygwin
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{DAC6B921-1A83-4E0C-9201-69F1C21CA5BD}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{F2A5C4B0-156F-42A6-84E2-37A5F1055E2C}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{F5796163-6EC6-488A-B2DE-E1E94477F6AD}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{0312181A-61FD-4243-9A1E-136130D65400}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{0460C87B-7F4C-3170-FAC9-B7A6AE5CE4E9}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{1851460E-0E63-4117-B5BA-25A2F045801B}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{49727420-70BA-4495-9405-31F8D711CB5A}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{5DB1904E-A0D2-488A-8E10-C94264FCD295}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{731F33C3-7B4A-405C-86FA-DD6FCAB2C4A3}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{88FCEC0E-C47D-47BA-BC19-144AFBF375FB}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{B1AAC1B5-CF8F-4A55-9F96-D74E9D5847C0}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{B362C26A-A729-4FCD-B603-204D66F065D7}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{B75F3157-7A65-4666-B62F-1E29EFC683C9}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{D07657AA-968C-4629-BD6C-1B52AF825EA7}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{D1B99412-81F4-4A2C-8D65-F974A64ACBF9}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{D78E4A11-26C4-4357-AB0D-2B51EEE8C8F2}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{D9782C75-3472-4C8E-B443-8F06DE7EDBF5}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{DC32F9F4-12C7-4219-96D6-3ECD348B4C25}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{ECD9D149-549D-4E0F-9900-B1CB3DDAE9E0}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{F17112B4-706F-4FED-8C99-3443572EB9D2}
-	::Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{F408B665-3667-4FCE-9EF3-A61B159AED56}
+	echo ############ Run Uninstallers ############
+	
+	::### Microsoft Visual Studio BuildTools ###
+	"C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" uninstall --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools"
+	
+	::### Windows Software Development Kit (Uninsall) ###
+	"C:\ProgramData\Package Cache\{71684ad3-afc2-4a65-9d45-92ef58510f18}\winsdksetup.exe" /uninstall /quiet
+	
+	::### vs_CoreEditorFonts (Uninstall) ###
+	MsiExec.exe /uninstall {1851460E-0E63-4117-B5BA-25A2F045801B} /quiet
+	
+	::### Windows SDK AddOn (Uninstall) ###
+	MsiExec.exe /uninstall {F1E37C98-16B7-421F-BA33-6C5B5400012A} /quiet
+	
+	::### Microsoft Visual Studio Installer (Uninstall) ###
+	"C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" /uninstall
+	
+	::### Python 2.7.18 (Uninstall) ###
+	MsiExec.exe /uninstall {A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6} /quiet
+	
+	::### Windows Subsystem for Linux (Uninstall) ###
+	MsiExec.exe /uninstall {AAAA4669-FCEF-4B2A-8355-1E0FA411A269} /quiet
 	
 %endfunction%
 
