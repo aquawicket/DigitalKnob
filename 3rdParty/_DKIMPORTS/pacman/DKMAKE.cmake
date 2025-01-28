@@ -11,25 +11,26 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 dk_validate(MSYS2 "dk_depend(msys2)")
-
-dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
 dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 
+#if((NOT DKUPDATE) AND (EXISTS ${PACMAN_EXE}))
+#	dk_notice("PACMAN_EXE is already installed, returning")
+#	dk_return()
+#endif()
 
-set(ENV{PATH} "$ENV{PATH}:/usr/bin")
+
+###### init the pacman keyring ######
 #dk_delete("${MSYS2_DIR}/etc/pacman.d/gnupg")
-execute_process(COMMAND ${BASH_EXE} -c "pacman-key --init")
-execute_process(COMMAND ${BASH_EXE} -c "pacman-key --populate msys2")
-execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm --cachedir "${MSYS2_CACHE_DIR}")
+if(NOT EXISTS "${MSYS2_DIR}/etc/pacman.d/gnupg")
+	set(ENV{PATH} "$ENV{PATH}:/usr/bin")
+	dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
+	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --init")
+	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --populate msys2")
+	execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm --cachedir "${MSYS2_CACHE_DIR}")
+endif()
+####################################
 
 dk_FirewallAllow("pacman" "${PACMAN_EXE}")
 
-if((NOT DKUPDATE) AND (EXISTS ${PACMAN_EXE}))
-	dk_notice("PACMAN_EXE is already installed, returning")
-	dk_return()
-endif()
-
 #dk_installPackage(pacman)
-#dk_firewallAllow("pacman" "${PACMAN_EXE}")
-	
 dk_assertPath(PACMAN_EXE)
