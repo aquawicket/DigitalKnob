@@ -128,6 +128,21 @@ if(typeof ActiveXObject === "function"){
 dk_check('domDocument');
 
 
+//############ DOMDocument ############
+if(typeof ActiveXObject === "function"){
+	if(typeof wstcript_shell === "undefined"){ 
+		var wstcript_shell = new ActiveXObject("WScript.Shell");
+
+		if(domDocument.parseError.errorCode !== 0){
+			if(typeof WScript !== "undefined"){
+				WScript.StdOut.Write("ERROR when loading " + index + ": " + domDocument.parseError.reason);
+			}
+		}
+	}
+}
+dk_check('domDocument');
+
+
 //############ document ############
 if(typeof document === "undefined"){ 
 	var document = domDocument.documentElement;
@@ -269,6 +284,11 @@ dk_check('onDOMContentLoaded');
 	function body_onLoad(){
 		if(!window.document.body){ alert("window.document.body is invalid"); return; }
 		
+		dk_source("main.js", function(){
+			main();
+		});
+		
+/*
 		dk_source(DKJAVASCRIPT_DIR+"/functions/DKHtmlConsole.js", function(){
 			dkconsole = new DKHtmlConsole;
 			dkconsole.create("","0px","0px","0px","","25%");
@@ -283,6 +303,7 @@ dk_check('onDOMContentLoaded');
 		console.log("loaded console.log");
 		//console.log(dkTitle);
 		console.log("HOST = "+HOST);
+*/
 	}
 //}
 dk_check('body_onLoad');
@@ -295,12 +316,11 @@ dk_check('body_onLoad');
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
+//dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 
 //############ DKTEST ############
 if(typeof ARGV !== "undefined"){
 	if(typeof ARGV(0) === "string"){
-		DKTEST = function(){}
 		dk_source(ARGV(0), function(){
 		//if(DKSCRIPT_EXT !== ".js"){ return }
 		//if(!dk_fileContains(DKSCRIPT_PATH, ":DKTEST")){ return }
@@ -314,46 +334,3 @@ if(typeof ARGV !== "undefined"){
 		});
 	}
 }
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-if(typeof WScript === "object"){
-	console.log("Using Windows Scriting Host")
-	var WshShell = function(){ return new ActiveXObject("WScript.Shell"); }
-	var Document = function(){ return new ActiveXObject("Msxml2.DOMDocument.6.0"); 
-		domDocument.async = false;
-		domDocument.setProperty("ProhibitDTD", false);
-		domDocument.validateOnParse = false;
-		return domDocument;
-	}
-	
-	dk_download = function(url, destination){
-		var filesystem = new FileSystem;
-		if (filesystem.FileExists(destination)){ return; }
-		console.log("downloading "+url+"  to   "+destination+"\n");
-		var xmlHttpRequest = new XMLHttpRequest;
-		xmlHttpRequest.Open('GET', url, false);
-		xmlHttpRequest.Send();
-		if (xmlHttpRequest.Status == 200) {
-			var filestream = new FileStream;
-			filestream.Open();
-			filestream.Type = 1; // adTypeBinary
-			filestream.Write(xmlHttpRequest.ResponseBody);
-			filestream.Position = 0;
-			if (filesystem.FileExists(destination)) { filesystem.DeleteFile(destination); }
-			filestream.SaveToFile(destination, 2); // adSaveCreateOverWrite
-			filestream.Close();
-		}
-	}
-}
-*/

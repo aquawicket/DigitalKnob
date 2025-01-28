@@ -1,7 +1,7 @@
 console.log("dk_XMLHttpRequest.js");
 
 // dk_XMLHttpRequest()
-dk_XMLHttpRequest = function dk_XMLHttpRequest(httpMethod, url, dk_sendRequest_callback){
+dk_XMLHttpRequest = function dk_XMLHttpRequest_f(httpMethod, url, dk_sendRequest_callback){
 
     if (httpMethod){
         switch (httpMethod){
@@ -113,7 +113,7 @@ dk_XMLHttpRequest = function dk_XMLHttpRequest(httpMethod, url, dk_sendRequest_c
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function(){
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	var url = "file:///C:/Users/Administrator/digitalknob/Development/DKJavascript/functions/dk_echo.js"

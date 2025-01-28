@@ -2,12 +2,12 @@
 //# dk_test()
 //#
 //#
-dk_test = function(){
+dk_test = function dk_test_f(){
 	//dk_debugFunc(0);
 	
 	console.log("################# dk_test.cmd ################");
 	console.log("               ARGV(0) = "+ARGV(0));
-if(typeof ARGV(1)) !== "undefined"){ console.log("              ARGV(1) = "+ARGV(1)); }
+//if(typeof ARGV(1)) !== "undefined"){ console.log("              ARGV(1) = "+ARGV(1)); }
 /*	console.log("               ARGV(0) = "+ARGV(2));
 	console.log("               ARGV(0) = "+ARGV(3));
 	console.log("               ARGV(0) = "+ARGV(4));
@@ -68,7 +68,7 @@ if(typeof ARGV(1)) !== "undefined"){ console.log("              ARGV(1) = "+ARGV
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function() {
+DKTEST = function DKTEST_f() {
 	//dk_debugFunc(0);
 	
 	dk_test("from :DKTEST", "to dk_test");

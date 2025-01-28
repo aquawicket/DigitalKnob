@@ -3,7 +3,7 @@
 //#
 //#    https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/filesystemobject-object
 //#
-dk_dirname = function(path) {
+dk_dirname = function dk_dirname_f(path) {
 	//dk_debugFunc(1);
 	
 	if(typeof filesystem === "undefined") { 
@@ -17,7 +17,7 @@ dk_dirname = function(path) {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function() {
+DKTEST = function DKTEST_f() {
 	//dk_debugFunc(0);
 	
 	var myPath = "C:/Windows/System32";

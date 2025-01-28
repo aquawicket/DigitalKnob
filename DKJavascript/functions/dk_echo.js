@@ -24,7 +24,7 @@ function loadScript(url, callback) {
 //#
 //#     @msg    - The message to print
 //#
-dk_echo = function dk_echo() {
+dk_echo = function dk_echo_f() {
 	console.log(arguments[0]);
 }
 
@@ -33,7 +33,7 @@ dk_echo = function dk_echo() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function() {
+DKTEST = function DKTEST_f() {
 	//dk_debugFunc(0);
 	
 	dk_echo("Hello World")

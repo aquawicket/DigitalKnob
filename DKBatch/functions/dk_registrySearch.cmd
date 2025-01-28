@@ -27,7 +27,6 @@ setlocal enableDelayedExpansion
     set "_needle_=%~2"
 	
 	reg query %_haystack_% /s /f "%_needle_%" /k /v /d 
-    
 %endfunction%
 
 

@@ -4,7 +4,7 @@
 //# dk_download(url, destination)
 //#
 //#
-dk_download = function(url, destination){
+dk_download = function dk_download_f(url, destination){
 	if(typeof filesystem === "undefined") { var filesystem = new FileSystem; }
 	if (filesystem.FileExists(destination)){ return; }
 	console.log("downloading "+url+"  to   "+destination+"\n");
@@ -54,7 +54,7 @@ if (fso.FileExists(filepath) == false) {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function() {
+DKTEST = function DKTEST_f() {
 	//dk_debugFunc(0);
 	
 	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.js")
