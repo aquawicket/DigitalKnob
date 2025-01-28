@@ -36,28 +36,27 @@ setlocal
 	echo:
 	echo ############ Run Uninstallers ############
 	
-	::### Microsoft Visual Studio BuildTools ###
+	echo ### Uninstalling Microsoft Visual Studio BuildTools ###
 	"C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" uninstall --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools"
 	
-	::### Windows Software Development Kit (Uninsall) ###
+	echo ### Uninstalling Windows Software Development Kit ###
 	"C:\ProgramData\Package Cache\{71684ad3-afc2-4a65-9d45-92ef58510f18}\winsdksetup.exe" /uninstall /quiet
 	
-	::### vs_CoreEditorFonts (Uninstall) ###
+	echo ### Uninstalling vs_CoreEditorFonts ###
 	MsiExec.exe /uninstall {1851460E-0E63-4117-B5BA-25A2F045801B} /quiet
 	
-	::### Windows SDK AddOn (Uninstall) ###
+	echo ### Uninstalling Windows SDK AddOn ###
 	MsiExec.exe /uninstall {F1E37C98-16B7-421F-BA33-6C5B5400012A} /quiet
 	
-	::### Microsoft Visual Studio Installer (Uninstall) ###
+	echo ### Uninstalling Microsoft Visual Studio Installer ###
 	"C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" /uninstall
 	
-	::### Python 2.7.18 (Uninstall) ###
+	echo ### Uninstalling Python 2.7.18 ###
 	MsiExec.exe /uninstall {A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6} /quiet
 	
-	::### Windows Subsystem for Linux (Uninstall) ###
+	echo ### Uninstalling Windows Subsystem for Linux ###
 	MsiExec.exe /uninstall {AAAA4669-FCEF-4B2A-8355-1E0FA411A269} /quiet
-	
-%endfunction%
+exit /b 0
 
 :DKUninstallExt extension
 	if "%~1"==".bat"	(call :DKRemoveFtype DKBash)
@@ -78,18 +77,18 @@ setlocal
 	
 	(call :DKRemoveAssoc %~1)
 	(call :DKRestoreDefault %~1)
-%endfunction%
+exit /b 0
 
 :DKRemoveFtype ftype_name
 	(ftype %~1 2>nul) && (ftype %~1=)
 	%dk_call% dk_registryDeleteKey "HKCR\%~1"
-%endfunction%
+exit /b 0
 
 :DKRemoveAssoc assoc_ext
 	(assoc %~1=)
 	%dk_call% dk_registryDeleteKey "HKCR\%~1"
 	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%~1"
-%endfunction%
+exit /b 0
 
 :DKRestoreDefault extension
 	::### .bat ###
@@ -136,7 +135,7 @@ setlocal
 		(assoc .vbs=VBSFile)
 		rem %windir%\system32\reg.exe import "%DKVB_DIR%\default.reg"
 	)
-%endfunction%
+exit /b 0
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
