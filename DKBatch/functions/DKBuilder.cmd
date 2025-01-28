@@ -12,7 +12,7 @@ setlocal enableDelayedExpansion
 	:: firewall
 	call :dk_firewallAllow powershell "%WINDIR%\system32\windowspowershell\v1.0\powershell.exe"
 	call :dk_firewallAllow curl "%WINDIR%\system32\curl.exe"
-	call :dk_firewallAllow git "C:\users\administrator\digitalknob\dktools\portablegit-2.46.2-64-bit\mingw64\libexec\git-core\git-remote-https.exe"
+	call :dk_firewallAllow git "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\mingw64\libexec\git-core\git-remote-https.exe"
 
 	if not exist %DK% (
 		powershell -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
