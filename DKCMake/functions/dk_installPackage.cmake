@@ -129,7 +129,7 @@ function(dk_installPackage)
 		dk_set(MSYS2_CACHE_DIR "${DKDOWNLOAD_DIR}/MSYS2")
 		dk_makeDirectory("${MSYS2_CACHE_DIR}")
 		dk_assertPath(MSYS2_CACHE_DIR)
-		execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm --cachedir "${MSYS2_CACHE_DIR}")
+		
 		if(win_x86_clang)
 			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir "${MSYS2_CACHE_DIR}")		# CLANG32
 		elseif(win_x86_64_clang)
