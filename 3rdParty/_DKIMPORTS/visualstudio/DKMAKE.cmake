@@ -22,30 +22,31 @@ dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 # 				${VS_INSTALL_PATH}               ${VS_YEAR}     ${VS_TYPE}					   ${VS_VERSION}
 #
 # https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history
-																				# (~) = Default
-dk_set(VS_INSTALL_PATH		"${DKTOOLS_DIR}/Microsoft Visual Studio")			# (C:/Program Files (x86)/Microsoft Visual Studio)
-#dk_set(VS_CACHE_PATH		"${DKDOWNLOAD_DIR}/MSVS")							# (???) - FIXME: where is the default cache path
-dk_set(VS_YEAR 				2022)												# 2019, (2022)
-#dk_set(VS_TYPE				"BuildTools") 										# (BuildTools), Community			
-dk_set(VS_MAJOR 			17)													# 15, 16, (17)
-#dk_set(VS_DL 				"https://aka.ms/vs/17/release/vs_BuildTools.exe")	# (https://aka.ms/vs/17/release/vs_BuildTools.exe)
+
+#dk_set(VS_INSTALL_PATH		"${DKTOOLS_DIR}/VS")
+#dk_set(VS_CACHE_PATH		"${DKDOWNLOAD_DIR}/VS")
+dk_set(VS_YEAR 				2022)												# 2019, 2022
+#dk_set(VS_TYPE				"BuildTools") 										# BuildTools, Community			
+dk_set(VS_MAJOR 			17)													# 17
+#dk_set(VS_DL 				"https://aka.ms/vs/17/release/vs_BuildTools.exe")
 
 
 
 
 ###### VS_INSTALL_PATH ######
 if(NOT VS_INSTALL_PATH)
-	set(VS_INSTALL_PATH		"C:/Program Files (x86)/Microsoft Visual Studio")
+	set(VS_INSTALL_PATH		"C:\\Program Files (x86)\\Microsoft Visual Studio")
 else()
-	set(VS_INSTALL_FLAG		--path install="${VS_INSTALL_PATH}")
+	set(VS_INSTALL_FLAG		--path install=${VS_INSTALL_PATH})
 endif()
 
 ###### VS_CACHE_PATH ######
 if(NOT VS_CACHE_PATH)
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	set(VS_CACHE_PATH	"${DKDOWNLOAD_DIR}/MSVS")
+	#dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+	#set(VS_CACHE_PATH	"${DKDOWNLOAD_DIR}/VS")
+	set(VS_CACHE_PATH	"C:\\Program Files \(x86\)\\Microsoft Visual Studio\\DL")
 endif()
-set(VS_CACHE_FLAG			--path cache="${VS_CACHE_PATH}")		
+set(VS_CACHE_FLAG			--path cache=${VS_CACHE_PATH})		
 
 ###### VS_TYPE ######
 if(NOT VS_TYPE)
@@ -130,6 +131,8 @@ if(NOT EXISTS "${VS}")
 		dk_firewallAllow("VS_SETUP" "C:/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
 	endif()
 
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+	dk_copy("${VS_CACHE_PATH}" "${DKDOWNLOAD_DIR}/VS")
 else()
 	dk_info("Visual Studio ${VS_TYPE} ${VS_MAJOR} ${VS_YEAR} already installed")
 endif()
