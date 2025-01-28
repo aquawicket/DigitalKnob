@@ -172,6 +172,8 @@ var DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1);
 var DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1));
 var DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf("."));
 
+
+
 //###### DKHOME_DIR variables ######
 var DIGITALKNOB = "digitalknob"
 var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1);
@@ -279,15 +281,19 @@ if(typeof document.addEventListener !== "undefined"){
 dk_check('onDOMContentLoaded');
 
 
-//############ body_onLoad ############
-//if(typeof body_onLoad === "undefined"){
-	function body_onLoad(){
+//############ body_onload ############
+//if(typeof body_onload === "undefined"){
+	function body_onload(){
 		if(!window.document.body){ alert("window.document.body is invalid"); return; }
 		
-		dk_source("main.js", function(){
-			main();
-		});
 		
+		if(DKSCRIPT_FILE === "index.html"){
+			var APP_NAME = DKSCRIPT_DIR.substr(DKSCRIPT_DIR.lastIndexOf("/")+1);
+			dk_source(DKJAVASCRIPT_DIR+"/apps/"+APP_NAME+"/main.js", function(){
+				main();
+			});
+		}
+	
 /*
 		dk_source(DKJAVASCRIPT_DIR+"/functions/DKHtmlConsole.js", function(){
 			dkconsole = new DKHtmlConsole;
@@ -306,7 +312,7 @@ dk_check('onDOMContentLoaded');
 */
 	}
 //}
-dk_check('body_onLoad');
+dk_check('body_onload');
 
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
