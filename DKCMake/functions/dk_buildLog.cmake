@@ -14,7 +14,7 @@ function(dk_buildLog entry)
 	
 	dk_getOptionValue(PATH)
 	
-	if(DEFINED ${entry})
+	if(DEFINED "${entry}")
 		set(msg "${entry} = ${${entry}}")
 	else()
 		set(msg "${entry}")

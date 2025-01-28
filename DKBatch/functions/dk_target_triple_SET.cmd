@@ -16,40 +16,40 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	echo  1^) !host_triple!
 	echo 
 	echo  2) cosmopolitan
-	echo  3) Android arm32
-	echo  4) Android arm64
-	echo  5) Android x86
-	echo  6) Android x86_64
-	echo  7) Emscripten
-	echo  8) Ios arm32
-	echo  9) Ios arm64
-	echo 10) Ios x86
-	echo 11) Ios x86_64
-	echo 12) Iossim arm32
-	echo 13) Iossim arm64
-	echo 14) Iossim x86
-	echo 15) Iossim x86_64
-	echo 16) Linux arm32
-	echo 17) Linux arm64
-	echo 18) Linux x86
-	echo 19) Linux x86_64
-	echo 20) Mac arm32
-	echo 21) Mac arm64
-	echo 22) Mac x86
-	echo 23) Mac x86_64
-	echo 24) Raspberry arm32
-	echo 25) Raspberry arm64
-	echo 26) Raspberry x86
-	echo 27) Raspberry x86_64
-	echo 28) Windows arm32
-	echo 29) Windows arm64 (clang)
-	echo 30) Windows x86 (gcc)
-	echo 31) Windows x86 (clang)
-	echo 32) Windows x86 (msvc)
-	echo 33) Windows x86_64 (gcc)
-	echo 34) Windows x86_64 (clang)
-	echo 35) Windows x86_64 (ucrt)
-	echo 36) Windows x86_64 (msvc)
+	echo  3) android_arm32
+	echo  4) android_arm64
+	echo  5) android_x86
+	echo  6) android_x86_64
+	echo  7) emscripten
+	echo  8) ios_arm32
+	echo  9) ios_arm64
+	echo 10) ios_x86
+	echo 11) ios_x86_64
+	echo 12) iossim_arm32
+	echo 13) iossim_arm64
+	echo 14) iossim_x86
+	echo 15) iossim_x86_64
+	echo 16) linux_arm32
+	echo 17) linux_arm64
+	echo 18) linux_x86
+	echo 19) linux_x86_64
+	echo 20) mac_arm32
+	echo 21) mac_arm64
+	echo 22) mac_x86
+	echo 23) mac_x86_64
+	echo 24) raspberry_arm32
+	echo 25) raspberry_arm64
+	echo 26) raspberry_x86
+	echo 27) raspberry_x86_64
+	echo 28) windows_arm32
+	echo 29) windows_arm64_clang
+	echo 30) windows_x86_gcc
+	echo 31) windows_x86_clang
+	echo 32) windows_x86_msvc
+	echo 33) windows_x86_64_gcc
+	echo 34) windows_x86_64_clang
+	echo 35) windows_x86_64_ucrt
+	echo 36) windows_x86_64_msvc
 	echo 37) Exit
 	echo 
 
