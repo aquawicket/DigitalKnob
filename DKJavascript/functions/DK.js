@@ -1,4 +1,4 @@
-var index = "../../DKHtml/index.html";
+var index = "../../DKHtml/apps/DKTerminal/index.html";
 var assets = "file:///C:/Users/Administrator/digitalknob/Development";
 var USE_FILESYSTEM = 0;
 
@@ -322,7 +322,7 @@ dk_check('body_onload');
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
-//dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
+dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 
 //############ DKTEST ############
 if(typeof ARGV !== "undefined"){

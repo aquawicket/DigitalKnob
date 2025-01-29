@@ -8,7 +8,8 @@ dk_getEnv = function dk_getEnv_f(){
 	
 	if(typeof WScript === "object"){
 		WScript_Shell = new ActiveXObject("WScript.Shell");
-		COMPEC = WScript_Shell.ExpandEnvironmentStrings("%COMSPEC%");
+		var COMSPEC = WScript_Shell.ExpandEnvironmentStrings("%COMSPEC%");
+		return COMSPEC
 	}
 };
 
