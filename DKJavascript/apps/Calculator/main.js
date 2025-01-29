@@ -20,11 +20,11 @@ function evalStatement() {
 	
 function main(){
 
-	window.resizeTo(350, 350);
+	window.resizeTo(275, 350);
 	isClear = true;
 	
 	var calculator_gui =
-	'	<div style="text-align: center">' +
+	'	<div style="text-align: center; background-color: grey; padding-top: 16px; width:240px; height:270px">' +
 	'		<input type="text" id="txtDisplay" style="font-size: 24px; width: 220px; text-align: right" value="0" /><br /><br />' +
 	'		<input type="button" style="height:50px;width:50px" value="7" onclick="insertValue(this.value)"></input>' +
 	'		<input type="button" style="height:50px;width:50px" value="8" onclick="insertValue(this.value)"></input>' +

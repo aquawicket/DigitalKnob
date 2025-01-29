@@ -13,15 +13,16 @@ function(dk_timeout)
 	
 	dk_getArg(0 seconds 10)
 	
-	if(NOT seconds)
-		message("\nWaiting for 0 seconds, press a key to continue ..0")
-		return()
+	if("${seconds}" STREQUAL "")
+		#message("\nWaiting for 0 seconds, press a key to continue ..0")
+		#return()
+		set(seconds 10)
 	endif()
 
 	###### CMD ######
 	if(EXISTS "$ENV{COMSPEC}")
 		dk_set(CMD_EXE "$ENV{COMSPEC}")
-		execute_process(COMMAND "${CMD_EXE}" /c "timeout /T ${seconds}")
+		execute_process(COMMAND "${CMD_EXE}" /c "timeout /t ${seconds}")
 		return()
 	endif()
 	
