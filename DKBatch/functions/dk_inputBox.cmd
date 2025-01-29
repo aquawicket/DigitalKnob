@@ -53,29 +53,29 @@ setlocal
             SYSMENU="no"
             VERSION="1.0"/>
     </head> 
-<body onLoad='load(event)' onkeypress='keyPress(event)'>
-    <input type="text" id="input" value="" style="width:100%">
-    <button onclick='submit()'>Submit</button>
-    <button onclick='cancel()'>Cancel</button>
-    <script language='javascript' >
-        window.resizeTo(500,150);
-        function load(e){
-			var textbox = document.getElementById('input');
-			textbox.select(); 
-		}
-		function keyPress(e){
-            if (e.keyCode == 13) {
-                submit();
-            }
-        }
-        function submit() {
-            var pass=document.getElementById('input').value;
-            var fso= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1);
-            close(fso.Write(pass));
-        }
-        function cancel() {
-            close();
-        }
-    </script>
-</body>
+	<body onLoad='load(event)' onkeypress='keyPress(event)'>
+		<input type="text" id="input" value="" style="width:100%">
+		<button onclick='submit()'>Submit</button>
+		<button onclick='cancel()'>Cancel</button>
+		<script language='javascript' >
+			window.resizeTo(500,150);
+			function load(e){
+				var textbox = document.getElementById('input');
+				textbox.select(); 
+			}
+			function keyPress(e){
+				if (e.keyCode == 13) {
+					submit();
+				}
+			}
+			function submit() {
+				var pass=document.getElementById('input').value;
+				var fso= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1);
+				close(fso.Write(pass));
+			}
+			function cancel() {
+				close();
+			}
+		</script>
+	</body>
 </html> 

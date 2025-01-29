@@ -26,7 +26,8 @@ setlocal enableDelayedExpansion
 	set "_haystack_=%~1"
     set "_needle_=%~2"
 	
-	reg query %_haystack_% /s /f "%_needle_%" /k /v /d 
+	reg query %_haystack_% /s /f "%_needle_%" /k /v /d
+	(call )
 %endfunction%
 
 
@@ -39,5 +40,10 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_registrySearch "HKCU" ".cmd"
+	%dk_call% dk_inputBox rtn_var
+    %dk_call% dk_registrySearch "HKCR" %rtn_var%
+	%dk_call% dk_registrySearch "HKCU" %rtn_var%
+	%dk_call% dk_registrySearch "HKLM" %rtn_var%
+	%dk_call% dk_registrySearch "HKU" %rtn_var%
+	%dk_call% dk_registrySearch "HKCC" %rtn_var%
 %endfunction%
