@@ -8,13 +8,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_inputBox
 setlocal enableDelayedExpansion
-
 	%dk_call% dk_debugFunc 0 1
     for /f "tokens=* delims=" %%p in ('cmd /c mshta.exe "%~f0"') do (
-        set "rtn_var=%%p"
+        set "dk_inputBox=%%p"
     )
-    endlocal & set "%~1=%rtn_var%"
-	echo %rtn_var%
+	if "%~1"=="" (
+		endlocal & set "dk_inputBox=%dk_inputBox%"
+		rem echo dk_inputBox = !dk_inputBox!
+	) else (
+		endlocal & set "dk_inputBox=%dk_inputBox%" & set "%~1=%dk_inputBox%"
+		rem echo dk_inputBox = !dk_inputBox!
+		rem echo %~1 = !%~1!
+	)
 %endfunction%
 
 
@@ -27,8 +32,8 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_inputBox rtn_var
-    %dk_call% dk_printVar rtn_var
+    %dk_call% dk_inputBox
+    %dk_call% dk_printVar dk_inputBox
 %endfunction%
 
 -->
