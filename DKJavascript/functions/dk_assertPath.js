@@ -5,7 +5,7 @@
 //#
 dk_assertPath = function dk_assertPath_f() {
 	//dk_debugFunc(0 99);
-	
+
 	_path_ = arguments[0];
 	console.log("_path_ = "+_path_);
 	
@@ -15,7 +15,6 @@ dk_assertPath = function dk_assertPath_f() {
 	if(fileSystemObject.FolderExists(_path_) || fileSystemObject.FileExists(_path_)){
 		return 0
 	}
-	
 	
 	dk_error("ASSERTION: dk_assertPath("+arguments[0]+"): path not found!")
 }
