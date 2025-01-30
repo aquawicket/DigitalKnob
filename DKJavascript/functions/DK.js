@@ -1,4 +1,7 @@
-var index = "../../DKHtml/apps/DKTerminal/index.html";
+urlp=[];s=location.toString().split('?');s=s[1].split('&');for(i=0;i<s.length;i++){u=s[i].split('=');urlp[u[0]]=u[1];}
+alert(urlp['DKTEST']) 
+
+var index = "../../DKHtml/index.html";
 var assets = "file:///C:/Users/Administrator/digitalknob/Development";
 var USE_FILESYSTEM = 0;
 

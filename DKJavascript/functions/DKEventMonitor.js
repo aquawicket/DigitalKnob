@@ -1,7 +1,7 @@
 // supressed entries will not be logged.
 var supress = ["mousemove", "mouseover", "mouseout", "mouseleave"];
 
-function DKEventMonitor() {
+DKEventMonitor = function DKEventMonitor_j() {
 	document.addEventListener("DOMContentLoaded", function(event){ DKEventMonitor.prototype.debugEvent(event, document); });
 }
 
@@ -117,4 +117,27 @@ DKEventMonitor.prototype.debugEvent = function DKEventMonitor_debugEvent(event, 
 	else{ str = "??? --> on" + event.type; }
 	dkconsole.log(str);
 	//document.title = str;
+}
+
+
+
+
+
+
+
+
+//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST = function DKTEST_f() {
+	//dk_debugFunc(0);
+	
+	dk_source(DKJAVASCRIPT_DIR+"/functions/DKHtmlConsole.js", function(){
+		dkconsole = new DKHtmlConsole;
+		dkconsole.create("","0px","0px","0px","","25%");
+		dk_source(DKJAVASCRIPT_DIR+"/functions/DKEventMonitor.js", function(){
+			eventmonitor = new DKEventMonitor;
+			eventmonitor.monitorEvents(window);
+			eventmonitor.monitorEvents(document);
+			eventmonitor.monitorEvents(document.body);
+		});
+	});	
 }

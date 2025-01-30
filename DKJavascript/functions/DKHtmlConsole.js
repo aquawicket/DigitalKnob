@@ -32,3 +32,15 @@ DKHtmlConsole.prototype.log = function DKHtmlConsole_log(message) {
 	this.dkhtmlconsole.scrollTop = this.dkhtmlconsole.scrollHeight;
 }
 
+
+
+
+
+
+//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST = function DKTEST_f() {
+	//dk_debugFunc(0);
+	
+	dkconsole = new DKHtmlConsole;
+	dkconsole.create("","0px","0px","0px","","25%");
+}

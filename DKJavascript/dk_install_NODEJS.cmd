@@ -1,6 +1,36 @@
 @echo off
+if "%~1" == "" (goto dk_install)
 
-if "%~1" neq "" goto runDKJavascript
+:runDKJavascript
+	set "NODEJS_EXE=%~1"
+	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~2
+	set "DKSCRIPT_PATH=%~3"
+	for %%Z in ("%DKSCRIPT_PATH%") do set "DKJAVASCRIPT_FILE=%%~nxZ"
+	cd C:\
+    start %NODEJS_EXE% %DKJAVASCRIPT_FUNCTIONS_DIR%\DKNodeServer.js
+	explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST=%DKSCRIPT_PATH%"
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :dk_install
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -24,11 +54,4 @@ if "%~1" neq "" goto runDKJavascript
 %endfunction%
 
 
-:runDKJavascript
-	set "NODEJS_EXE=%~1"
-	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~2
-	set "DKSCRIPT_PATH=%~3"
-	for %%Z in ("%DKSCRIPT_PATH%") do set "DKJAVASCRIPT_FILE=%%~nxZ"
-    start %NODEJS_EXE% %DKJAVASCRIPT_FUNCTIONS_DIR%\DKNodeServer.js
-	explorer "http://127.0.0.1:8080/%JAVASCRIPT_FILE%"
-%endfunction%
+
