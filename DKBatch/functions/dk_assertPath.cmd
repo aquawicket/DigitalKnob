@@ -39,7 +39,8 @@ setlocal
 	::# No quotes
 	%dk_call% dk_assertPath C:/PROGRAM FILES/COMMON FILES			&::OK
 	::# as Variable
-    %dk_call% dk_set myPath "C:/Program Files/Common Files"
+   
+   %dk_call% dk_set myPath "C:/Program Files/Common Files"
 	::# As a variable with %_%
     %dk_call% dk_assertPath "%myPath%"								&::OK		
 	::# As a variable with %_% without quotes

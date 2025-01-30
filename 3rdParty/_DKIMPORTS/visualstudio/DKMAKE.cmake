@@ -113,6 +113,7 @@ if(NOT EXISTS "${VS}")
 	dk_info("Installing Visual Studio ${VS_TYPE} ${VS_YEAR} ${VS_VERSION}. . .")
 	dk_basename(${VS_DL} VS_DL_FILE)
 	dk_download(${VS_DL} ${DKDOWNLOAD_DIR}/${VS_DL_FILE})
+	#dk_download(${VS_DL})
 	
 	# Visual Studio Installer Options
 	# https://learn.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2022

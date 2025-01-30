@@ -6,26 +6,26 @@ dk_test = function dk_test_f(){
 	//dk_debugFunc(0);
 	
 	console.log("################# dk_test.cmd ################");
-	console.log("               ARGV(0) = "+ARGV(0));
-//if(typeof ARGV(1)) !== "undefined"){ console.log("              ARGV(1) = "+ARGV(1)); }
-/*	console.log("               ARGV(0) = "+ARGV(2));
-	console.log("               ARGV(0) = "+ARGV(3));
-	console.log("               ARGV(0) = "+ARGV(4));
-	console.log("               ARGV(0) = "+ARGV(5));
-	console.log("               ARGV(0) = "+ARGV(6));
-	console.log("               ARGV(0) = "+ARGV(7));
-	console.log("               ARGV(0) = "+ARGV(8));
-	console.log("               ARGV(0) = "+ARGV(9));
-	console.log("          arguments[0] = "+arguments[0]);
-	console.log("          arguments[1] = "+arguments[1]);
-	console.log("          arguments[2] = "+arguments[2]);
-	console.log("          arguments[3] = "+arguments[3]);
-	console.log("          arguments[4] = "+arguments[4]);
-	console.log("          arguments[5] = "+arguments[5]);
-	console.log("          arguments[6] = "+arguments[6]);
-	console.log("          arguments[7] = "+arguments[7]);
-	console.log("          arguments[8] = "+arguments[8]);
-	console.log("          arguments[9] = "+arguments[9]);
+	if(ARGC > 0)							{ console.log("               ARGV(0) = '"+ARGV(0)+"' "); }
+	if(ARGC > 1)							{ console.log("               ARGV(1) = '"+ARGV(1)+"' "); }
+	if(ARGC > 2)							{ console.log("               ARGV(2) = '"+ARGV(2)+"' "); }
+	if(ARGC > 3)							{ console.log("               ARGV(3) = '"+ARGV(3)+"' "); }
+	if(ARGC > 4)							{ console.log("               ARGV(4) = '"+ARGV(4)+"' "); }
+	if(ARGC > 5)							{ console.log("               ARGV(5) = '"+ARGV(5)+"' "); }
+	if(ARGC > 6)							{ console.log("               ARGV(6) = '"+ARGV(6)+"' "); }
+	if(ARGC > 7)							{ console.log("               ARGV(7) = '"+ARGV(7)+"' "); }
+	if(ARGC > 8)							{ console.log("               ARGV(8) = '"+ARGV(8)+"' "); }
+	if(ARGC > 9)							{ console.log("               ARGV(9) = '"+ARGV(9)+"' "); }
+	if(typeof arguments[0] !== "undefined")	{ console.log("          arguments[0] = '"+arguments[0]+"' "); }
+	if(typeof arguments[1] !== "undefined")	{ console.log("          arguments[1] = '"+arguments[1]+"' "); }
+	if(typeof arguments[2] !== "undefined")	{ console.log("          arguments[2] = '"+arguments[2]+"' "); }
+	if(typeof arguments[3] !== "undefined")	{ console.log("          arguments[3] = '"+arguments[3]+"' "); }
+	if(typeof arguments[4] !== "undefined")	{ console.log("          arguments[4] = '"+arguments[4]+"' "); }
+	if(typeof arguments[5] !== "undefined")	{ console.log("          arguments[5] = '"+arguments[5]+"' "); }
+	if(typeof arguments[6] !== "undefined")	{ console.log("          arguments[6] = '"+arguments[6]+"' "); }
+	if(typeof arguments[7] !== "undefined")	{ console.log("          arguments[7] = '"+arguments[7]+"' "); }
+	if(typeof arguments[8] !== "undefined")	{ console.log("          arguments[8] = '"+arguments[8]+"' "); }
+	if(typeof arguments[9] !== "undefined")	{ console.log("          arguments[9] = '"+arguments[9]+"' "); }
 //	console.log("            ERRORLEVEL = "+ERRORLEVEL);
 //	console.log("                   LVL = "+LVL);
 //	console.log("              __TIME__ = "+__TIME__);
@@ -33,7 +33,7 @@ dk_test = function dk_test_f(){
 //	console.log("              __FILE__ = "+__FILE__);
 //	console.log("              __LINE__ = "+__LINE__);
 //	console.log("              __FUNC__ = "+__FUNC__);
-//	console.log("              __ARGC__ = "+__ARGC__);
+	console.log("              ARGC = "+ARGC);
 //	console.log("              __ARGV__ = "+__ARGV__);
 	console.log("         DKSCRIPT_PATH = "+DKSCRIPT_PATH);
 	console.log("          DKSCRIPT_DIR = "+DKSCRIPT_DIR);
@@ -56,7 +56,7 @@ dk_test = function dk_test_f(){
 	console.log("  DKBASH_FUNCTIONS_DIR = "+DKBASH_FUNCTIONS_DIR);
 	console.log(" DKBASH_FUNCTIONS_DIR_ = "+DKBASH_FUNCTIONS_DIR_);
 
-*/	//setGlobal GLOBAL_VAR "This is a global variable"
+	//setGlobal GLOBAL_VAR "This is a global variable"
 	//setReturn RETURN_VAR "This is a return variable"
 
 	//var GLOBAL_VAR = %GLOBAL_VAR%

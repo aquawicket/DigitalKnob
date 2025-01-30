@@ -22,7 +22,6 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
     
 	::echo exit_code = %exit_code%
 	::echo exit_code:%exit_code%
-	::pause
     exit %EXIT_CODE%
 %endfunction%
 

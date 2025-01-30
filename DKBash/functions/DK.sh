@@ -1,6 +1,7 @@
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
-echo "0 = $0"
+#echo "0 = $0"
+
 ### Print Shell Path ad Version ###
 export ESC=""  # escape character
 [ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
@@ -69,23 +70,19 @@ DK(){
     DKSCRIPT_VARS
 
     ###### DKTEST MODE ######
-	#echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-	#echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
-	#echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
     [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
-	dk_call dk_fileContains "${DKSCRIPT_PATH}" ":DKTEST" || return 0
+	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || return 0
         dk_call dk_echo
         dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 		dk_call dk_echo
         #dk_call dk_echo "${bg_RGB}20;20;20m"
         dk_source "${DKSCRIPT_PATH}"
-        #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST() code
+        #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
         #dk_call dk_echo "${clr}"
         DKTEST
         dk_call dk_echo
         dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
         dk_call dk_echo
-        dk_call dk_pause
         dk_call dk_exit 0
 }
 
@@ -161,7 +158,6 @@ DKSCRIPT_VARS(){
 	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0})) 	# Windows subsystem for linux
 	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}))	# Git for Windows
 	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0})													# Default
-	echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
     [ -e "${DKSCRIPT_PATH}" ]	 && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}" || echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found" || exit 1    
     export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"						
     export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"

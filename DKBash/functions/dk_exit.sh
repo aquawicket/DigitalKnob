@@ -1,7 +1,7 @@
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
-[ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=0
+[ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=1
 ##################################################################################
 # dk_exit(exit_code)
 #
