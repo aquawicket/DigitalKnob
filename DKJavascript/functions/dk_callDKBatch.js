@@ -7,13 +7,14 @@ dk_callDKBatch = function dk_callDKBatch_f() {
 	//dk_debugFunc(0);
 	
 	console.log("dk_callDKBatch("+arguments[0]+")");
-	
+
+	DKBATCH_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKBatch/functions/";
 	COMSPEC = dk_getEnv("%COMSPEC%")
-
-	WshShell = new ActiveXObject("WScript.Shell");
-	WshShell.Run("c:/windows/system32/notepad.exe", 1, false);
+	WShell = new ActiveXObject("WScript.Shell");
+	//WShell.Run("set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/", 1, true);
+	var rtncode = WShell.Run("cmd /V:ON /c set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/& C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
+	console.log("dk_callDKBatch rtncode = "+rtncode)
 }
-
 
 
 

@@ -40,8 +40,11 @@ dk_check = function(object){
 if(USE_NODEJS){
 	dk_validate(DKIMPORTS_DIR, "dk_DKIMPORTS_DIR");
 	dk_validate(NODEJS_EXE, DKIMPORTS_DIR+"/nodejs/dk_install.js")
-	dk_command('start '+NODEJS_EXE+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
-	dk_command('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
+	
+	//COMSPEC = dk_getEnv("%COMSPEC%")
+	WShell = new ActiveXObject("WScript.Shell");
+	WShell.Run('start '+NODEJS_EXE+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
+	WShell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
 }
 
 
@@ -169,13 +172,13 @@ if(typeof ActiveXObject === "function"){
 dk_check('document');
 
 
-//############ wscript_shell ############
+//############ WShell ############
 if(typeof ActiveXObject === "function"){
-	if(typeof wscript_shell === "undefined"){ 
-		var wscript_shell = new ActiveXObject("WScript.Shell");
+	if(typeof WShell === "undefined"){ 
+		var WShell = new ActiveXObject("WScript.Shell");
 	}
 }
-dk_check('wscript_shell');
+dk_check('WShell');
 
 /*
 //############ documentElement ############
@@ -297,9 +300,7 @@ dk_check('alert');
 //############ console ############
 if(typeof console === "undefined"){
 	dk_source(assets+"/DKJavascript/polyfills/console.js", function(){
-		//console.log(dkTitle);
-		console.log("loaded console.log");
-		console.log("HOST = "+HOST);
+		console.log("loaded console.js");
 	});
 }
 dk_check('console');
@@ -330,36 +331,16 @@ dk_check('onDOMContentLoaded');
 
 
 //############ body_onload ############
-//if(typeof body_onload === "undefined"){
-	function body_onload(){
-		if(!window.document.body){ alert("window.document.body is invalid"); return; }
+function body_onload(){
+	if(!window.document.body){ alert("window.document.body is invalid"); return; }
 		
-		
-		if(DKSCRIPT_FILE === "index.html"){
-			var APP_NAME = DKSCRIPT_DIR.substr(DKSCRIPT_DIR.lastIndexOf("/")+1);
-			dk_source(DKJAVASCRIPT_DIR+"/apps/"+APP_NAME+"/main.js", function(){
-				main();
-			});
-		}
-	
-/*
-		dk_source(DKJAVASCRIPT_DIR+"/functions/DKHtmlConsole.js", function(){
-			dkconsole = new DKHtmlConsole;
-			dkconsole.create("","0px","0px","0px","","25%");
-			dk_source(DKJAVASCRIPT_DIR+"/functions/DKEventMonitor.js", function(){
-				eventmonitor = new DKEventMonitor;
-				eventmonitor.monitorEvents(window);
-				eventmonitor.monitorEvents(document);
-				eventmonitor.monitorEvents(document.body);
-			});
+	if(DKSCRIPT_FILE === "index.html"){
+		var APP_NAME = DKSCRIPT_DIR.substr(DKSCRIPT_DIR.lastIndexOf("/")+1);
+		dk_source(DKJAVASCRIPT_DIR+"/apps/"+APP_NAME+"/main.js", function(){
+			main();
 		});
-		
-		console.log("loaded console.log");
-		//console.log(dkTitle);
-		console.log("HOST = "+HOST);
-*/
 	}
-//}
+}
 dk_check('body_onload');
 
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");

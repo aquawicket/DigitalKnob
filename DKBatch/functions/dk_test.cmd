@@ -58,6 +58,7 @@ setlocal enableDelayedExpansion
 
 :: FIXME: we only want endlocal once
 ::endlocal & set "dk_test=return value from dk_test.cmd"
+pause
 %endfunction%
 
 
