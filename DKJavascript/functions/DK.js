@@ -1,7 +1,7 @@
 var index = "../../DKHtml/index.html";
 var assets = "file:///C:/Users/Administrator/digitalknob/Development";
 var USE_FILESYSTEM = 0;
-var USE_NODEJS=1;
+var USE_NODEJS=0;
 
 //###### Console ######
 (function(con) {
@@ -36,6 +36,13 @@ dk_check = function(object){
 }
 
 
+//############ NodeJS ############
+if(USE_NODEJS){
+	dk_validate(DKIMPORTS_DIR, "dk_DKIMPORTS_DIR");
+	dk_validate(NODEJS_EXE, DKIMPORTS_DIR+"/nodejs/dk_install.js")
+	dk_command('start '+NODEJS_EXE+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
+	dk_command('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
+}
 
 
 
@@ -48,9 +55,12 @@ dk_check = function(object){
 var HOST = "unknown"
 if(typeof ActiveXObject === "function"){
 	if(typeof WScript === "object"){ HOST = "jscript"; }
-	else{ HOST = "hta" }
-} else { HOST = "browser" }
+	else{ HOST = "DKHta" }
+} else { 
+	HOST = "Browser" 
+}
 dk_check('HOST');
+console.log("HOST = "+HOST);
 
 
 //############ ARGV, ARGC ############
@@ -152,9 +162,7 @@ if(typeof ActiveXObject === "function"){
 		document.validateOnParse = false;
 		document.load(index);
 		if(document.parseError.errorCode !== 0){
-			if(typeof WScript !== "undefined"){
-				console.error("ERROR when loading " + index + ": " + document.parseError.reason);
-			}
+			console.error("ERROR when loading " + index + ": " + document.parseError.reason);
 		}
 	}
 }
@@ -170,19 +178,19 @@ if(typeof ActiveXObject === "function"){
 dk_check('wscript_shell');
 
 /*
-//############ document ############
-if(typeof document === "undefined"){ 
-	var document = domDocument.documentElement;
-	//console.log("document: "+document.xml+"\n\n");
+//############ documentElement ############
+if(typeof documentElement === "undefined"){ 
+	var documentElement = document.documentElement;
+	//console.log("documentElement: "+documentElement.xml+"\n\n");
 }
-dk_check('document');
+dk_check('documentElement');
 */
 
 
 //############ location ############
 if(typeof location === "undefined"){ 
 	var location = new Object;
-	location.href = domDocument.url;
+	location.href = document.url;
 	console.log("location.href = "+location.href);
 }
 dk_check('location');

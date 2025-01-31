@@ -6,7 +6,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_getEnv.js");
 dk_callDKBatch = function dk_callDKBatch_f() {
 	//dk_debugFunc(0);
 	
-	console.log(arguments[0]);
+	console.log("dk_callDKBatch("+arguments[0]+")");
 	
 	COMSPEC = dk_getEnv("%COMSPEC%")
 
