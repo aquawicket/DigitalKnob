@@ -2,20 +2,30 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_basename(path rtn_var)
+::# dk_basename(<pathname>, <rtn_var>:optional)
 ::#
-::#    https://en.wikipedia.org/wiki/Basename
+::#    Strip directory and suffix from filenames
+::#
+::#    Reference: https://en.wikipedia.org/wiki/Basename
 ::#
 :dk_basename
 setlocal
-	%dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 1 2
 
-    set "_input_=%1"
-    set "_input_=%_input_:"=%"
-	set "_input_=%_input_:/=\%"
-    if "%_input_:~-1%"=="\" set "_input=%_input_:~0,-1%"
-    if "%_input_:~-1%"=="/" set "_input=%_input_:~0,-1%"
-    endlocal & for %%Z in ("%_input_%") do set "%2=%%~nxZ"
+    set "pathname=%1"
+    set "pathname=%pathname:"=%"
+	set "pathname=%pathname:/=\%"
+    if "%pathname:~-1%"=="\" set "pathname=%pathname:~0,-1%"
+	
+	for %%Z in ("%pathname%") do set "dk_basename=%%~nxZ"
+	
+	if "%dk_basename:~-1%"=="\" set "dk_basename=%dk_basename:~0,-1%"
+::	set "dk_basename=%dk_basename:\=/%"
+
+    endlocal & (
+		set "dk_basename=%dk_basename%"
+		if "%2" neq "" set "%2=%dk_basename%"
+	)
 %endfunction%
 
 
@@ -28,14 +38,14 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_set myPath "C:/Windows/System32/test.v123.zip" 
-    %dk_call% dk_basename "%myPath%" basename
-    %dk_call% dk_printVar basename
+    %dk_call% dk_basename "%myPath%"
+    %dk_call% dk_echo "%myPath%: basename = %dk_basename%"
     
-    %dk_call% dk_set myPathB "TEST" 
-    %dk_call% dk_basename "%myPathB%" basenameB
-    %dk_call% dk_printVar basenameB
+    %dk_call% dk_set myPath "TEST" 
+    %dk_call% dk_basename "%myPath%"
+    %dk_call% dk_echo "%myPath%: basename = %dk_basename%"
     
-    set "myPathC=https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
-    %dk_call% dk_basename "%myPathC%" basenameC
-    %dk_call% dk_printVar basenameC
+    %dk_call% dk_set myPath "https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
+    %dk_call% dk_basename "%myPath%"
+    %dk_call% dk_echo "%myPath%: basename = %dk_basename%"
 %endfunction%

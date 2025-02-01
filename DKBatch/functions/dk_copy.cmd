@@ -30,8 +30,8 @@ setlocal
     )
     
     :: the base directory of the %to% path must exist.    
-    %dk_call% dk_dirname "%_to_%" _parent_dir_
-    %dk_call% dk_makeDirectory "%_parent_dir_%"
+    %dk_call% dk_dirname "%_to_%"
+    %dk_call% dk_makeDirectory "%dk_dirname%"
     
     ::copy "%_from_%" "%_to_%"
     if exist "%_from_%\*" (

@@ -1,5 +1,8 @@
 @echo off
-if not defined DKINIT if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+echo %CD%
+if not exist "%DKBATCH_FUNCTIONS_DIR_%" echo "DKBATCH_FUNCTIONS_DIR_=%CD%\..\functions\"
+::if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%\digitalknob\Development\DKBatch\functions\"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#########################################################################################################
 ::# dk_printSeconds()
