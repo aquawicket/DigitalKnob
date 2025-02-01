@@ -167,28 +167,39 @@ function(dk_log)
 	#dk_echo("${bg_RGB}0;0;50m${${_level_}_COLOR}${${_level_}_TAG}${_message_}${clr}")
 	dk_echo("${${_level_}_COLOR}${${_level_}_TAG}${_message_}${clr}")
 	
+	### TRACE ###
 	if(${_level_}_TRACE) #OR TRACE AND NOT NO_TRACE)
 		dk_echo("${${_level_}_COLOR}*** TRACE_ON_${_level_} ***")
 		dk_stacktrace()
 		message("${clr}")
 	endif()
+	
+	### LINE ###
 	if(${_level_}_LINE) #OR HALT AND NOT NO_HALT)
 		dk_echo("${${_level_}_COLOR}*** LINE_ON_${_level_} ***")
 		#d_k_showFileLine("${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}")
 		message("${clr}")
 	endif()
+	
+	### SOUND ###
 	if(${_level_}_SOUND) #OR SOUND AND NOT NO_SOUND)
 		dk_echo("${${_level_}_COLOR}*** SOUND_ON_${_level_} ***${clr}")
 		dk_beeps(${_level_}_SOUND)
 	endif()
+	
+	### PAUSE ###
 	if(${_level_}_PAUSE) #OR PAUSE AND NOT NO_PAUSE)
 		dk_echo("${${_level_}_COLOR}*** PAUSE_ON_${_level_} ***${clr}")
 		dk_pause()
 	endif()
+	
+	### TIMEOUT ###
 	if(${_level_}_TIMEOUT) #OR TIMEOUT AND NOT TIMEOUT)
 		dk_echo("${${_level_}_COLOR}*** TIMEOUT_ON_${_level_} ***${clr}")
 		dk_timeout(${_level_}_TIMEOUT)
 	endif()
+	
+	### HALT ###
 	if(${_level_}_HALT) #OR HALT AND NOT NO_HALT)
 		dk_echo("${${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
 		dk_exit(13)
