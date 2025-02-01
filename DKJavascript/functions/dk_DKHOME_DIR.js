@@ -24,19 +24,12 @@ dk_DKHOME_DIR = function dk_DKHOME_DIR_f(){
 	//if not defined HOMEDRIVE        !dk_call! dk_warning "HOMEDRIVE is invalid"
 	//if not defined HOMEPATH         !dk_call! dk_warning "HOMEPATH is invalid"
 	
-//	if(typeof WScript === "object"){
-//		WScript_Shell = new ActiveXObject("WScript.Shell");
-//		DKHOME_DIR = WScript_Shell.ExpandEnvironmentStrings("%USERPROFILE%");
-//	}
-
-	
-//	console.log("USERPROFILE = "+USERPROFILE);
-//	DKHOME_DIR_B = "empty";
-//	console.log("DKHOME_DIR_B = "+DKHOME_DIR_B);
+	var DKHOME_DIR = dk_getEnv("%USERPROFILE%");
+	console.log("DKHOME_DIR = "+DKHOME_DIR);
 	
 	//if exist "!WSLPATH_EXE!"        !dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
 
-	//dk_assertPath(DKHOME_DIR)
+	dk_assertPath(DKHOME_DIR)
 }
 
 
@@ -48,7 +41,7 @@ dk_DKHOME_DIR = function dk_DKHOME_DIR_f(){
 DKTEST = function DKTEST_f() {
 	//dk_debugFunc(0);
 
-	dk_getEnd();
+	dk_DKHOME_DIR();
 	//console.log("dk_DKHOME_DIR:DKTEST()")
 	//dk_DKHOME_DIR()
 };

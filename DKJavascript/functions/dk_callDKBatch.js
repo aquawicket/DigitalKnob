@@ -11,8 +11,11 @@ dk_callDKBatch = function dk_callDKBatch_f() {
 	DKBATCH_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKBatch/functions/";
 	COMSPEC = dk_getEnv("%COMSPEC%")
 	WShell = new ActiveXObject("WScript.Shell");
-	//WShell.Run("set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/", 1, true);
+	
 	var rtncode = WShell.Run("cmd /V:ON /c set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/& C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
+	
+	//WShell.Exec("cmd /V:ON /c set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/& C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
+	
 	console.log("dk_callDKBatch rtncode = "+rtncode)
 }
 
