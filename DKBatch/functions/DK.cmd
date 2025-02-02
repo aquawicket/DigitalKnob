@@ -38,7 +38,9 @@ set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
     set "return=exit /b !errorlevel!"
 
     call :dk_DKSCRIPT_PATH "%~1" %*
-    call :dk_DKSCRIPT_DIR	
+	call :dk_DKSCRIPT_FILE
+    call :dk_DKSCRIPT_DIR
+	call :dk_DKSCRIPT_NAME
     call :dk_DKSCRIPT_EXT
 	call :dk_DKCACHE_DIR
 
@@ -75,11 +77,11 @@ set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
 	if "%DKSCRIPT_EXT%" neq ".cmd" %return%
 	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 0
     %dk_call% dk_echo
-    %dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME%.cmd ###### DKTEST MODE ######%clr%"
+    %dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%"
     %dk_call% dk_echo
     call :DKTEST || %return%
     %dk_call% dk_echo
-    %dk_call% dk_echo "%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_NAME%.cmd ######## END TEST #######%clr%"
+    %dk_call% dk_echo "%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%"
     %dk_call% dk_echo
     pause
     exit %ERRORLEVEL%
@@ -105,6 +107,15 @@ set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
 %endfunction%
 
 ::##################################################################################
+::# dk_DKSCRIPT_FILE
+::#
+:dk_DKSCRIPT_FILE
+    if not exist "%DKSCRIPT_PATH%"	echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1
+    if not defined DKSCRIPT_FILE	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_FILE=%%~nxZ"
+    if not defined DKSCRIPT_FILE	echo DKSCRIPT_FILE:%DKSCRIPT_FILE% not defined & pause & exit 1
+%endfunction%
+
+::##################################################################################
 ::# dk_DKSCRIPT_DIR
 ::#
 :dk_DKSCRIPT_DIR
@@ -112,6 +123,15 @@ set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
     if not exist "%DKSCRIPT_DIR%"	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
     if "%DKSCRIPT_DIR:~-1%"=="\"	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
     if not exist "%DKSCRIPT_DIR%"	echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit 1
+%endfunction%
+
+::##################################################################################
+::# dk_DKSCRIPT_NAME
+::#
+:dk_DKSCRIPT_NAME
+    if not exist "%DKSCRIPT_PATH%"	echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1
+    if not defined DKSCRIPT_NAME	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ"
+    if not defined DKSCRIPT_NAME	echo DKSCRIPT_NAME:%DKSCRIPT_NAME% not defined & pause & exit 1
 %endfunction%
 
 ::##################################################################################

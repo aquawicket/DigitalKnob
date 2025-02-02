@@ -153,12 +153,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		(set "DEC=%ESC%(0")		&:: Enables DEC Line Drawing Mode
 		(set "ASCII=%ESC%(B")   &:: Enables ASCII Mode (Default)
 		
-		echo ASCII Mode
-		echo %ASCII% a b c d e f g h i j k l m n o p q r s t u v w x y z
-		echo DEC Mode
-		echo %DEC% a b c d e f g h i j k l m n o p q r s t u v w x y z
-		echo %ASCII% 
-		
 		::# Cursor
 		(set cursor_blink_on=%ATT160%h)		&:: Text Cursor Enable Blinking
 		(set cursor_blink_off=%ATT160%l)	&:: Text Cursor Disable Blinking
@@ -697,6 +691,17 @@ setlocal
     echo %bg_red%                                                     %clr%
     echo %bg_white%                                                     %clr%
     echo %bg_red%                                                     %clr%
+	echo:
+	echo:
+	echo %black% %bg_lblack%        ASCII Mode       %clr%
+	echo %ASCII% a b c d e f g h i j k l m n o p q r s t u v w x y z
+	echo:
+	echo:
+	echo %black% %bg_lblack%        DEC Mode       %clr%
+	echo %DEC% a b c d e f g h i j k l m n o p q r s t u v w x y z
+	echo %ASCII%
+	echo:
+	echo:
 %endfunction%
 
 
