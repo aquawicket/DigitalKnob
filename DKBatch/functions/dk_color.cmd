@@ -21,83 +21,177 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
     :USE_COLOR_if
-    if not defined USE_COLOR goto USE_COLOR_else
-        set "ESC="                          &:: escape character
+	if not defined USE_COLOR goto USE_COLOR_else
+		
+		::set "ESC="                          										&:: escape character   BAD: Uncopyable character
+		::for /f %%A in ('echo prompt $E^| cmd') do set "ESC=%%A"					&:: escape character   BAD: cryptic
+		::for /f %%A in ('forfiles /c "%ComSpec% /c echo 0x1B"') do set "ESC=%%A"	&:: escape character   BAD: Very slow
+		::for /l %%A in (27,1,1) do (cmd /c exit %%A & set "ESC=!^=ExitCodeAscii!") &:: escape character   GOOD: Converts DECIMAL to ASCII
+		
+		::############ C0 control codes #############
+		for /l %%A in (0,1,1)   do (cmd /c exit %%A & set "NUL=!^=ExitCodeAscii!")	&:: Null - Does nothing. The code of blank paper tape, and also used for padding to slow transmission
+		for /l %%A in (1,1,1)   do (cmd /c exit %%A & set "SOH=!^=ExitCodeAscii!")	&:: Start of Heading - First character of the heading of a message
+		for /l %%A in (2,1,1)   do (cmd /c exit %%A & set "STX=!^=ExitCodeAscii!")	&:: Start of Text - Terminates the header and starts the message text
+		for /l %%A in (3,1,1)   do (cmd /c exit %%A & set "ETX=!^=ExitCodeAscii!")	&:: End of Text - Ends the message text, starts a footer (up to the next TC character)
+		for /l %%A in (4,1,1)   do (cmd /c exit %%A & set "EOT=!^=ExitCodeAscii!")	&:: End of Transmission - Ends the transmission of one or more messages. May place terminals on standby.
+		for /l %%A in (5,1,1)   do (cmd /c exit %%A & set "EQN=!^=ExitCodeAscii!")	&:: Enquiry - Trigger a response at the receiving end, to see if it is still present.
+		for /l %%A in (6,1,1)   do (cmd /c exit %%A & set "ACK=!^=ExitCodeAscii!")	&:: Acknowledge - Indication of successful receipt of a message.
+		for /l %%A in (7,1,1)   do (cmd /c exit %%A & set "BEL=!^=ExitCodeAscii!")	&:: Bell, Alert	- Call for attention from an operator.
+		for /l %%A in (8,1,1)   do (cmd /c exit %%A & set "BS=!^=ExitCodeAscii!")	&:: Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
+		for /l %%A in (9,1,1)   do (cmd /c exit %%A & set "HT=!^=ExitCodeAscii!")	&:: Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
+		for /l %%A in (10,1,1)  do (cmd /c exit %%A & set "LF=!^=ExitCodeAscii!")	&:: Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
+		for /l %%A in (11,1,1)  do (cmd /c exit %%A & set "VT=!^=ExitCodeAscii!")	&:: Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
+		for /l %%A in (12,1,1)  do (cmd /c exit %%A & set "FF=!^=ExitCodeAscii!")	&:: Form Feed - Move down to the top of the next page.
+		for /l %%A in (13,1,1)  do (cmd /c exit %%A & set "CR=!^=ExitCodeAscii!")	&:: Carriage Return - Move to column zero while staying on the same line.
+		for /l %%A in (14,1,1)  do (cmd /c exit %%A & set "SO=!^=ExitCodeAscii!")	&:: Shift Out - Switch to an alternative character set.
+		for /l %%A in (15,1,1)  do (cmd /c exit %%A & set "SI=!^=ExitCodeAscii!")	&:: Shift In - Return to regular character set after SO.
+		for /l %%A in (16,1,1)  do (cmd /c exit %%A & set "DLE=!^=ExitCodeAscii!")	&:: Data Link Escape - Cause a number of contiguously following characters to be interpreted in some different way
+		for /l %%A in (17,1,1)  do (cmd /c exit %%A & set "DC1=!^=ExitCodeAscii!")	&:: Device Control One - Turn on (DC1 and DC2) or off (DC3 and DC4) devices.
+		for /l %%A in (18,1,1)  do (cmd /c exit %%A & set "DC2=!^=ExitCodeAscii!")	&:: Device Control Two
+		for /l %%A in (19,1,1)  do (cmd /c exit %%A & set "DC3=!^=ExitCodeAscii!")	&:: Device Control Three
+		for /l %%A in (20,1,1)  do (cmd /c exit %%A & set "DC4=!^=ExitCodeAscii!")	&:: Device Control Four
+		for /l %%A in (21,1,1)  do (cmd /c exit %%A & set "NAK=!^=ExitCodeAscii!")	&:: Negative Acknowledge - Negative response to a sender, such as a detected error.
+		for /l %%A in (22,1,1)  do (cmd /c exit %%A & set "SYN=!^=ExitCodeAscii!")	&:: Synchronous Idle - Sent in synchronous transmission systems when no other character is being transmitted.
+		for /l %%A in (23,1,1)  do (cmd /c exit %%A & set "ETB=!^=ExitCodeAscii!")	&:: End of Transmission Block - End of a transmission block of data when data are divided into such blocks.
+		for /l %%A in (24,1,1)  do (cmd /c exit %%A & set "CAN=!^=ExitCodeAscii!")	&:: Cancel - Indicates that the data preceding it are in error or are to be disregarded.
+		for /l %%A in (25,1,1)  do (cmd /c exit %%A & set "EM=!^=ExitCodeAscii!")	&:: End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
+		for /l %%A in (26,1,1)  do (cmd /c exit %%A & set "SUB=!^=ExitCodeAscii!")	&:: Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
+		for /l %%A in (27,1,1)  do (cmd /c exit %%A & set "ESC=!^=ExitCodeAscii!")	&:: Escape - Alters the meaning of a limited number of following bytes.
+		for /l %%A in (28,1,1)  do (cmd /c exit %%A & set "FS=!^=ExitCodeAscii!")	&:: File Separator - Can be used as delimiters to mark fields of data structures. 
+		for /l %%A in (29,1,1)  do (cmd /c exit %%A & set "GS=!^=ExitCodeAscii!")	&:: Group Separator
+		for /l %%A in (30,1,1)  do (cmd /c exit %%A & set "RS=!^=ExitCodeAscii!")	&:: Record Separator
+		for /l %%A in (31,1,1)  do (cmd /c exit %%A & set "US=!^=ExitCodeAscii!")	&:: Unit Separator - US is the lowest level
+		for /l %%A in (32,1,1)  do (cmd /c exit %%A & set "SP=!^=ExitCodeAscii!")	&:: Space - Move right one character position.
+		for /l %%A in (127,1,1) do (cmd /c exit %%A & set "DEL=!^=ExitCodeAscii!")	&:: Delete - Should be ignored. Used to delete characters on punched tape by punching out all the holes.
+
+		::############ C1 control codes #############
+		set "PAD=%ESC%@"	&:: Padding Character
+		set "HOP=%ESC%A"	&:: High Octet Preset
+		set "BPH=%ESC%B"	&:: Break Permitted Here
+		set "NBH=%ESC%C"	&:: No Break Here
+		set "IND=%ESC%D"	&:: Index
+		set "NEL=%ESC%E"	&:: Next Line
+		set "SSA=%ESC%F"	&:: Start of Selected Area
+		set "ESA=%ESC%G"	&:: End of Selected Area
+		set "HTS=%ESC%H"	&:: Horizontal Tabulation Set
+		set "HTJ=%ESC%I"	&:: Horizontal Tabulation With Justification
+		set "VTS=%ESC%J"	&:: Vertical Tabulation Set
+		set "PLD=%ESC%K"	&:: Partial Line Down
+		set "PLU=%ESC%L"	&:: Partial Line Up
+		set "RI=%ESC%M"		&:: Reverse Index
+		set "SS2=%ESC%N"	&:: Single Shift Two
+		set "SS3=%ESC%O"	&:: Single Shift Three
+		set "DCS=%ESC%P"	&:: Device Control String
+		set "PU1=%ESC%Q"	&:: Private Use 1
+		set "PU2=%ESC%R"	&:: Private Use 2
+		set "STS=%ESC%S"	&:: Set Transmit State
+		set "CCH=%ESC%T"	&:: Cancel character
+		set "MW=%ESC%U"		&:: Message Waiting
+		set "SPA=%ESC%V"	&:: Start of Protected Area
+		set "EPA=%ESC%W"	&:: End of Protected Area
+		set "SOS=%ESC%X"	&:: Start of String
+		set "SGC=%ESC%Y"	&:: Single Graphic Character Introducer
+		set "SCI=%ESC%Z"	&:: Single Character Introducer
+		set "CSI=%ESC%["	&:: Control Sequence Introducer
+		set "ST=%ESC%\"		&:: String Terminator
+		set "OSC=%ESC%]"	&:: Operating System Command
+		set "PM=%ESC%^^"	&:: Privacy Message
+		set "APC=%ESC%_"	&:: Application Program Command
+        
+		::############ CSI Commands #############
+		set "CCU=%CSI%1A"	&:: Cursor Up -	Moves the cursor n (default 1) cells in the given direction. If the cursor is already at the edge of the screen, this has no effect.
+		set "CUD=%CSI%1B"	&:: Cursor Down
+		set "CUF=%CSI%1C"	&:: Cursor Forward
+		set "CUB=%CSI%1D"	&:: Cursor Back
+		set "CNL=%CSI%1E"	&:: Cursor Next Line - Moves cursor to beginning of the line n (default 1) lines down. (not ANSI.SYS)
+		set "CPL=%CSI%1F"	&:: Cursor Previous Line - Moves cursor to beginning of the line n (default 1) lines up. (not ANSI.SYS)
+		set "CHA=%CSI%1G"	&:: Cursor Horizontal Absolute - Moves the cursor to column n (default 1). (not ANSI.SYS)
+::		CSI n ; m H	CUP		&:: Cursor Position	- Moves the cursor to row n, column m. The values are 1-based, and default to 1 (top left corner) if omitted. A sequence such as CSI ;5H is a synonym for CSI 1;5H as well as CSI 17;H is the same as CSI 17H and CSI 17;1H
+::		CSI n J	ED			&:: Erase in Display - Clears part of the screen. If n is 0 (or missing), clear from cursor to end of screen. If n is 1, clear from cursor to beginning of the screen. If n is 2, clear entire screen (and moves cursor to upper left on DOS ANSI.SYS). If n is 3, clear entire screen and delete all lines saved in the scrollback buffer.
+::		CSI n K	EL			&:: Erase in Line - Erases part of the line. If n is 0 (or missing), clear from cursor to the end of the line. If n is 1, clear from cursor to beginning of the line. If n is 2, clear entire line. Cursor position does not change.
+::		CSI n S	SU			&:: Scroll Up - Scroll whole page up by n (default 1) lines. New lines are added at the bottom. (not ANSI.SYS)
+::		CSI n T	SD			&:: Scroll Down	- Scroll whole page down by n (default 1) lines. New lines are added at the top. (not ANSI.SYS)
+::		CSI n ; m f	HVP		&:: Horizontal Vertical Position - Same as CUP, but counts as a format effector function (like CR or LF) rather than an editor function (like CUD or CNL).
+::		CSI n m	SGR			&:: Select Graphic Rendition - Sets colors and style of the characters following this code
+::		CSI 5i				&:: AUX Port On	- Enable aux serial port usually for local serial printer
+::		CSI 4i				&:: AUX Port Off - Disable aux serial port usually for local serial printer
+::		CSI 6n	DSR			&:: Device Status Report - Reports the cursor position (CPR) by transmitting ESC[n;mR, where n is the row and m is the column.
+
 
         ::# Attributes on
-        set "clr=%ESC%[0m"                  &:: Default                     - Returns all attributes to the default state prior to modification
-        set "bold=%ESC%[1m"                 &:: Bold/Bright                 - Applies brightness/intensity flag to foreground color
-        set "dim=%ESC%[2m"                  &:: Dim
-        set "italic=%ESC%[3m"               &:: Italic
-        set "underline=%ESC%[4m"            &:: Underline                   - Adds underline
-        set "blink=%ESC%[5m"                &:: Blink
-        set "fblink=%ESC%[6m"               &:: Rapid Blink
-        set "negative=%ESC%[7m"             &:: Negative                    - Swaps foreground and background colors
-        set "invisible=%ESC%[8m"            &:: Invisible
-        set "strike=%ESC%[9m"               &:: Strike Through
+        set "clr=%CSI%0m"             	&:: Default                     - Reset all modes (styles and colors)
+        set "bright=%CSI%1m"			&:: Bright                		- Applies brightness flag to foreground color
+        set "dim=%CSI%2m"               &:: Dim							- Applies dim flag to foreground color
+        set "italic=%CSI%3m"            &:: Italic
+        set "underline=%CSI%4m"         &:: Underline
+        set "blink=%CSI%5m"             &:: Blink
+        set "fblink=%CSI%6m"            &:: Rapid Blink
+        set "negative=%CSI%7m"          &:: Negative                    - Swaps foreground and background colors
+        set "invisible=%CSI%8m"         &:: Invisible
+        set "strike=%CSI%9m"            &:: Strike Through
 
         ::# Attributes off
-        ::set "20m=%ESC%[20m"               &:: 20
-        ::set "21m=%ESC%[21m"               &:: 21
-        set "nobold=%ESC%[22m"              &:: No bold/bright              - Removes brightness/intensity flag from foreground color
-        set "noitalic=%ESC%[23m"            &:: No italic
-        set "nounderline=%ESC%[24m"         &:: No underline                - Removes underline
-        set "noblink=%ESC%[25m"             &:: No Blink
-        ::set "26m=%ESC%[26m"               &:: 26
-        set "nonegative=%ESC%[27m"          &:: Positive(No negative)       - Returns foreground/background to normal
-        set "visible=%ESC%[28m"             &:: Visible(No invisible)
-        set "nostrike=%ESC%[29m"            &:: No Strike Through
+        ::set "20m=%CSI%20m"               &:: 20
+        ::set "21m=%CSI%21m"              	&:: 21
+		set "nodim=%CSI%22m"              	&:: No Dim              		- Removes brightness/intensity flag from foreground color
+        set "nobright=%CSI%22m"            &:: No Bright              		- Removes brightness/intensity flag from foreground color
+        set "noitalic=%CSI%23m"            &:: No Italic
+        set "nounderline=%CSI%24m"         &:: No Underline
+        set "noblink=%CSI%25m"             &:: No Blink
+        ::set "26m=%CSI%26m"               &:: 26
+        set "nonegative=%CSI%27m"          &:: No Negative			       	- Returns foreground/background to normal
+        set "visible=%CSI%28m"             &:: No Invisible
+        set "nostrike=%CSI%29m"            &:: No Strike Through
 
         ::# Foreground Colors
-        set "black=%ESC%[30m"               &:: Foreground Black            - Applies non-bold/bright black to foreground
-        set "red=%ESC%[31m"                 &:: Foreground Red              - Applies non-bold/bright red to foreground
-        set "green=%ESC%[32m"               &:: Foreground Green            - Applies non-bold/bright green to foreground
-        set "yellow=%ESC%[33m"              &:: Foreground Yellow           - Applies non-bold/bright yellow to foreground
-        set "blue=%ESC%[34m"                &:: Foreground Blue             - Applies non-bold/bright blue to foreground
-        set "magenta=%ESC%[35m"             &:: Foreground Magenta          - Applies non-bold/bright magenta to foreground
-        set "cyan=%ESC%[36m"                &:: Foreground Cyan             - Applies non-bold/bright cyan to foreground
-        set "white=%ESC%[37m"               &:: Foreground White            - Applies non-bold/bright white to foreground
-        set "extended=%ESC%[38m"            &:: Foreground Extended         - Applies extended color value to the foreground
-        set "default=%ESC%[39m"             &:: Foreground Default          - Applies only the foreground portion of the defaults
+        set "black=%CSI%30m"               &:: Foreground Black            - Applies non-dim/bright black to foreground
+        set "red=%CSI%31m"                 &:: Foreground Red              - Applies non-dim/bright red to foreground
+        set "green=%CSI%32m"               &:: Foreground Green            - Applies non-dim/bright green to foreground
+        set "yellow=%CSI%33m"              &:: Foreground Yellow           - Applies non-dim/bright yellow to foreground
+        set "blue=%CSI%34m"                &:: Foreground Blue             - Applies non-dim/bright blue to foreground
+        set "magenta=%CSI%35m"             &:: Foreground Magenta          - Applies non-dim/bright magenta to foreground
+        set "cyan=%CSI%36m"                &:: Foreground Cyan             - Applies non-dim/bright cyan to foreground
+        set "white=%CSI%37m"               &:: Foreground White            - Applies non-dim/bright white to foreground
+        set "extended=%CSI%38m"            &:: Foreground Extended         - Applies extended color value to the foreground
+        set "fg_clr=%CSI%39m"				&:: Foreground Default          - Applies only the foreground portion of the defaults
 
         ::# Background Colors
-        set "bg_black=%ESC%[40m"            &:: Background Black            - Applies non-bold/bright black to background
-        set "bg_red=%ESC%[41m"              &:: Background Red              - Applies non-bold/bright red to background
-        set "bg_green=%ESC%[42m"            &:: Background Green            - Applies non-bold/bright green to background
-        set "bg_yellow=%ESC%[43m"           &:: Background Yellow           - Applies non-bold/bright yellow to background
-        set "bg_blue=%ESC%[44m"             &:: Background Blue             - Applies non-bold/bright blue to background
-        set "bg_magenta=%ESC%[45m"          &:: Background Magenta          - Applies non-bold/bright magenta to background
-        set "bg_cyan=%ESC%[46m"             &:: Background Cyan             - Applies non-bold/bright cyan to background
-        set "bg_white=%ESC%[47m"            &:: Background White            - Applies non-bold/bright white to background
-        set "bg_extended=%ESC%[48m"         &:: Background Extended         - Applies extended color value to the background
-        set "bg_default=%ESC%[49m"          &:: Background Default          - Applies only the background portion of the defaults
+        set "bg_black=%CSI%40m"            &:: Background Black            - Applies non-dim/bright black to background
+        set "bg_red=%CSI%41m"              &:: Background Red              - Applies non-dim/bright red to background
+        set "bg_green=%CSI%42m"            &:: Background Green            - Applies non-dim/bright green to background
+        set "bg_yellow=%CSI%43m"           &:: Background Yellow           - Applies non-dim/bright yellow to background
+        set "bg_blue=%CSI%44m"             &:: Background Blue             - Applies non-dim/bright blue to background
+        set "bg_magenta=%CSI%45m"          &:: Background Magenta          - Applies non-dim/bright magenta to background
+        set "bg_cyan=%CSI%46m"             &:: Background Cyan             - Applies non-dim/bright cyan to background
+        set "bg_white=%CSI%47m"            &:: Background White            - Applies non-dim/bright white to background
+        set "bg_extended=%CSI%48m"         &:: Background Extended         - Applies extended color value to the background
+        set "bg_clr=%CSI%49m"     	     	&:: Background Default          - Applies only the background portion of the defaults
 
         ::# Foreground Colors (light)
-        set "lblack=%ESC%[90m"              &:: Bright Foreground Black     - Applies bold/bright black to foreground
-        set "lred=%ESC%[91m"                &:: Bright Foreground Red       - Applies bold/bright red to foreground
-        set "lgreen=%ESC%[92m"              &:: Bright Foreground Green     - Applies bold/bright green to foreground
-        set "lyellow=%ESC%[93m"             &:: Bright Foreground Yellow    - Applies bold/bright yellow to foreground
-        set "lblue=%ESC%[94m"               &:: Bright Foreground Blue      - Applies bold/bright blue to foreground
-        set "lmagenta=%ESC%[95m"            &:: Bright Foreground Magenta   - Applies bold/bright magenta to foreground
-        set "lcyan=%ESC%[96m"               &:: Bright Foreground Cyan      - Applies bold/bright cyan to foreground
-        set "lwhite=%ESC%[97m"              &:: Bright Foreground White     - Applies bold/bright white to foreground
+        set "lblack=%CSI%90m"              &:: Bright Foreground Black     - Applies bright black to foreground
+        set "lred=%CSI%91m"                &:: Bright Foreground Red       - Applies bright red to foreground
+        set "lgreen=%CSI%92m"              &:: Bright Foreground Green     - Applies bright green to foreground
+        set "lyellow=%CSI%93m"             &:: Bright Foreground Yellow    - Applies bright yellow to foreground
+        set "lblue=%CSI%94m"               &:: Bright Foreground Blue      - Applies bright blue to foreground
+        set "lmagenta=%CSI%95m"            &:: Bright Foreground Magenta   - Applies bright magenta to foreground
+        set "lcyan=%CSI%96m"               &:: Bright Foreground Cyan      - Applies bright cyan to foreground
+        set "lwhite=%CSI%97m"              &:: Bright Foreground White     - Applies bright white to foreground
 
         ::# Background Colors (light)
-        set "bg_lblack=%ESC%[100m"          &:: Bright Background Black     - Applies bold/bright black to background
-        set "bg_lred=%ESC%[101m"            &:: Bright Background Red       - Applies bold/bright red to background
-        set "bg_lgreen=%ESC%[102m"          &:: Bright Background Green     - Applies bold/bright green to background
-        set "bg_lyellow=%ESC%[103m"         &:: Bright Background Yellow    - Applies bold/bright yellow to background
-        set "bg_lblue=%ESC%[104m"           &:: Bright Background Blue      - Applies bold/bright blue to background
-        set "bg_lmagenta=%ESC%[105m"        &:: Bright Background Magenta   - Applies bold/bright magenta to background
-        set "bg_lcyan=%ESC%[106m"           &:: Bright Background Cyan      - Applies bold/bright cyan to background
-        set "bg_lwhite=%ESC%[107m"          &:: Bright Background White     - Applies bold/bright white to background
+        set "bg_lblack=%CSI%100m"          &:: Bright Background Black     - Applies bright black to background
+        set "bg_lred=%CSI%101m"            &:: Bright Background Red       - Applies bright red to background
+        set "bg_lgreen=%CSI%102m"          &:: Bright Background Green     - Applies bright green to background
+        set "bg_lyellow=%CSI%103m"         &:: Bright Background Yellow    - Applies bright yellow to background
+        set "bg_lblue=%CSI%104m"           &:: Bright Background Blue      - Applies bright blue to background
+        set "bg_lmagenta=%CSI%105m"        &:: Bright Background Magenta   - Applies bright magenta to background
+        set "bg_lcyan=%CSI%106m"           &:: Bright Background Cyan      - Applies bright cyan to background
+        set "bg_lwhite=%CSI%107m"          &:: Bright Background White     - Applies bright white to background
 
         ::# Foreground RGB Colors
-        set "RGB=%ESC%[38;2;"               &:: %RGB%50;100;150m         = %ESC%[38;2;50;100;150m
+        set "RGB=%CSI%38;2;"               &:: %RGB%50;100;150m         = %CSI%38;2;50;100;150m
 
         ::# Background RGB Colors
-        set "bg_RGB=%ESC%[48;2;"            &:: %bg_RGB%150;100;50m      = %ESC%[38;2;150;100;50m
-
+        set "bg_RGB=%CSI%48;2;"            &:: %bg_RGB%150;100;50m      = %CSI%38;2;150;100;50m
 
         %dk_call% dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
     goto USE_COLOR_endif    
@@ -106,7 +200,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         ::%dk_call% dk_unset clr
 
         ::# Attributes on
-        %dk_call% dk_unset bold
+        %dk_call% dk_unset bright
         %dk_call% dk_unset dim
         %dk_call% dk_unset italic
         %dk_call% dk_unset underline
@@ -117,7 +211,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         %dk_call% dk_unset strike
 
         ::# Attributes off
-        %dk_call% dk_unset nobold
+        %dk_call% dk_unset nobright
         %dk_call% dk_unset noitalic
         %dk_call% dk_unset nounderline
         %dk_call% dk_unset noblink
@@ -134,6 +228,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         %dk_call% dk_unset magenta
         %dk_call% dk_unset cyan
         %dk_call% dk_unset white
+		%dk_call% dk_unset extended
+		::%dk_call% dk_unset fg_clr
 
         ::# Background Colors
         %dk_call% dk_unset bg_black
@@ -144,6 +240,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         %dk_call% dk_unset bg_magenta
         %dk_call% dk_unset bg_cyan
         %dk_call% dk_unset bg_white
+		%dk_call% dk_unset bg_extended
+		::%dk_call% dk_unset bg_clr
 
         ::# Foreground Colors (bright)
         %dk_call% dk_unset lblack
@@ -180,40 +278,220 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 setlocal
 	%dk_call% dk_debugFunc 0
 
+	echo:
+    echo %black% %bg_lblack%          CSI codes          %clr%
+	echo CSI0m         %CSI%0m  CSI0m  %clr%
+	echo CSI1m         %CSI%1m  CSI1m  %clr%
+	echo CSI2m         %CSI%2m  CSI2m  %clr%
+	echo CSI3m         %CSI%3m  CSI3m  %clr%
+	echo CSI4m         %CSI%4m  CSI4m  %clr%
+	echo CSI5m         %CSI%5m  CSI5m  %clr%
+	echo CSI6m         %CSI%6m  CSI6m  %clr%
+	echo CSI7m         %CSI%7m  CSI7m  %clr%
+	echo CSI8m         %CSI%8m  CSI8m  %clr%
+	echo CSI9m         %CSI%9m  CSI9m  %clr%
+	echo CSI10m        %CSI%10m  CSI10m  %clr%
+	echo CSI11m        %CSI%11m  CSI11m  %clr%
+	echo CSI12m        %CSI%12m  CSI12m  %clr%
+	echo CSI13m        %CSI%13m  CSI13m  %clr%
+	echo CSI14m        %CSI%14m  CSI14m  %clr%
+	echo CSI15m        %CSI%15m  CSI15m  %clr%
+	echo CSI16m        %CSI%16m  CSI16m  %clr%
+	echo CSI17m        %CSI%17m  CSI17m  %clr%
+	echo CSI18m        %CSI%18m  CSI18m  %clr%
+	echo CSI19m        %CSI%19m  CSI19m  %clr%
+	echo CSI20m        %CSI%20m  CSI20m  %clr%
+	echo CSI21m        %CSI%21m  CSI21m  %clr%
+	echo CSI22m        %CSI%22m  CSI22m  %clr%
+	echo CSI23m        %CSI%23m  CSI23m  %clr%
+	echo CSI24m        %CSI%24m  CSI24m  %clr%
+	echo CSI25m        %CSI%25m  CSI25m  %clr%
+	echo CSI26m        %CSI%26m  CSI26m  %clr%
+	echo CSI27m        %CSI%27m  CSI27m  %clr%
+	echo CSI28m        %CSI%28m  CSI28m  %clr%
+	echo CSI29m        %CSI%29m  CSI29m  %clr%
+	echo CSI30m        %CSI%30m  CSI30m  %clr%
+	echo CSI31m        %CSI%31m  CSI31m  %clr%
+	echo CSI32m        %CSI%32m  CSI32m  %clr%
+	echo CSI33m        %CSI%33m  CSI33m  %clr%
+	echo CSI34m        %CSI%34m  CSI34m  %clr%
+	echo CSI35m        %CSI%35m  CSI35m  %clr%
+	echo CSI36m        %CSI%36m  CSI36m  %clr%
+	echo CSI37m        %CSI%37m  CSI37m  %clr%
+	echo CSI38m        %CSI%38m  CSI38m  %clr%
+	echo CSI39m        %CSI%39m  CSI39m  %clr%
+	echo CSI40m        %CSI%40m  CSI40m  %clr%
+	echo CSI41m        %CSI%41m  CSI41m  %clr%
+	echo CSI42m        %CSI%42m  CSI42m  %clr%
+	echo CSI43m        %CSI%43m  CSI43m  %clr%
+	echo CSI44m        %CSI%44m  CSI44m  %clr%
+	echo CSI45m        %CSI%45m  CSI45m  %clr%
+	echo CSI46m        %CSI%46m  CSI46m  %clr%
+	echo CSI47m        %CSI%47m  CSI47m  %clr%
+	echo CSI48m        %CSI%48m  CSI48m  %clr%
+	echo CSI49m        %CSI%49m  CSI49m  %clr%
+	echo CSI50m        %CSI%50m  CSI50m  %clr%
+	echo CSI51m        %CSI%51m  CSI51m  %clr%
+	echo CSI52m        %CSI%52m  CSI52m  %clr%
+	echo CSI53m        %CSI%53m  CSI53m  %clr%
+	echo CSI54m        %CSI%54m  CSI54m  %clr%
+	echo CSI55m        %CSI%55m  CSI55m  %clr%
+	echo CSI56m        %CSI%56m  CSI56m  %clr%
+	echo CSI57m        %CSI%57m  CSI57m  %clr%
+	echo CSI58m        %CSI%58m  CSI58m  %clr%
+	echo CSI59m        %CSI%59m  CSI59m  %clr%
+	echo CSI60m        %CSI%60m  CSI60m  %clr%
+	echo CSI61m        %CSI%61m  CSI61m  %clr%
+	echo CSI62m        %CSI%62m  CSI62m  %clr%
+	echo CSI63m        %CSI%63m  CSI63m  %clr%
+	echo CSI64m        %CSI%64m  CSI64m  %clr%
+	echo CSI65m        %CSI%65m  CSI65m  %clr%
+	echo CSI66m        %CSI%66m  CSI66m  %clr%
+	echo CSI67m        %CSI%67m  CSI67m  %clr%
+	echo CSI68m        %CSI%68m  CSI68m  %clr%
+	echo CSI69m        %CSI%69m  CSI69m  %clr%
+	echo CSI70m        %CSI%70m  CSI70m  %clr%
+	echo CSI71m        %CSI%71m  CSI71m  %clr%
+	echo CSI72m        %CSI%72m  CSI72m  %clr%
+	echo CSI73m        %CSI%73m  CSI73m  %clr%
+	echo CSI74m        %CSI%74m  CSI74m  %clr%
+	echo CSI75m        %CSI%75m  CSI75m  %clr%
+	echo CSI76m        %CSI%76m  CSI76m  %clr%
+	echo CSI77m        %CSI%77m  CSI77m  %clr%
+	echo CSI78m        %CSI%78m  CSI78m  %clr%
+	echo CSI79m        %CSI%79m  CSI79m  %clr%
+	echo CSI80m        %CSI%80m  CSI80m  %clr%
+	echo CSI81m        %CSI%81m  CSI81m  %clr%
+	echo CSI82m        %CSI%82m  CSI82m  %clr%
+	echo CSI83m        %CSI%83m  CSI83m  %clr%
+	echo CSI84m        %CSI%84m  CSI84m  %clr%
+	echo CSI85m        %CSI%85m  CSI85m  %clr%
+	echo CSI86m        %CSI%86m  CSI86m  %clr%
+	echo CSI87m        %CSI%87m  CSI87m  %clr%
+	echo CSI88m        %CSI%88m  CSI88m  %clr%
+	echo CSI89m        %CSI%89m  CSI89m  %clr%
+	echo CSI90m        %CSI%90m  CSI90m  %clr%
+	echo CSI91m        %CSI%91m  CSI91m  %clr%
+	echo CSI92m        %CSI%92m  CSI92m  %clr%
+	echo CSI93m        %CSI%93m  CSI93m  %clr%
+	echo CSI94m        %CSI%94m  CSI94m  %clr%
+	echo CSI95m        %CSI%95m  CSI95m  %clr%
+	echo CSI96m        %CSI%96m  CSI96m  %clr%
+	echo CSI97m        %CSI%97m  CSI97m  %clr%
+	echo CSI98m        %CSI%98m  CSI98m  %clr%
+	echo CSI99m        %CSI%99m  CSI99m  %clr%
+	echo CSI100m       %CSI%100m  CSI100m  %clr%
+	echo CSI101m       %CSI%101m  CSI101m  %clr%
+	echo CSI102m       %CSI%102m  CSI102m  %clr%
+	echo CSI103m       %CSI%103m  CSI103m  %clr%
+	echo CSI104m       %CSI%104m  CSI104m  %clr%
+	echo CSI105m       %CSI%105m  CSI105m  %clr%
+	echo CSI106m       %CSI%106m  CSI106m  %clr%
+	echo CSI107m       %CSI%107m  CSI107m  %clr%
+	echo CSI108m       %CSI%108m  CSI108m  %clr%
+	echo CSI109m       %CSI%109m  CSI109m  %clr%
+	echo CSI110m       %CSI%110m  CSI110m  %clr%
+	echo CSI111m       %CSI%111m  CSI111m  %clr%
+	echo CSI112m       %CSI%112m  CSI112m  %clr%
+	echo CSI113m       %CSI%113m  CSI113m  %clr%
+	echo CSI114m       %CSI%114m  CSI114m  %clr%
+	echo CSI115m       %CSI%115m  CSI115m  %clr%
+	echo CSI116m       %CSI%116m  CSI116m  %clr%
+	echo CSI117m       %CSI%117m  CSI117m  %clr%
+	echo CSI118m       %CSI%118m  CSI118m  %clr%
+	echo CSI119m       %CSI%119m  CSI119m  %clr%
+	echo CSI120m       %CSI%120m  CSI120m  %clr%
+	echo CSI121m       %CSI%121m  CSI121m  %clr%
+	echo CSI122m       %CSI%122m  CSI122m  %clr%
+	echo CSI123m       %CSI%123m  CSI123m  %clr%
+	echo CSI124m       %CSI%124m  CSI124m  %clr%
+	echo CSI125m       %CSI%125m  CSI125m  %clr%
+	echo CSI126m       %CSI%126m  CSI126m  %clr%
+	echo CSI127m       %CSI%127m  CSI127m  %clr%
+	echo CSI128m       %CSI%128m  CSI128m  %clr%
+	echo CSI129m       %CSI%129m  CSI129m  %clr%
+	
+	echo CSI?12h       %CSI%?12h  CSI?12h
+	echo CSI?12l       %CSI%?12l  CSI?12l
+	
     echo:
     echo %black% %bg_lblack%           Styles            %clr%
-    echo clr        %clr% default %clr%
-    echo bold       %bold% bold %clr%
-    echo dim        %dim% dim %clr%
-    echo italic     %italic% italic %clr%
-    echo underline  %underline% underline %clr%
-    echo blink      %blink% blink %clr%
-    echo fblink     %fblink% fblink %clr%
-    echo negative   %negative% negative %clr%
-    echo invisible  %invisible% invisible %clr%
-    echo strike     %strike% strike %clr%
+    echo clr            %clr% default %clr%
+    echo bright         %bright% bright %clr%
+	echo nobright       %nobright% nobright %clr%
+    echo dim            %dim% dim %clr%
+	echo nodim          %nodim% nodim %clr%
+    echo italic         %italic% italic %clr%
+	echo noitalic       %noitalic% noitalic %clr%
+    echo underline      %underline% underline %clr%
+	echo nounderline    %nounderline% nounderline %clr%
+    echo blink          %blink% blink %clr%
+	echo noblink        %noblink% noblink %clr%
+    echo fblink         %fblink% fblink %clr%
+	echo nofblink       %nofblink% nofblink %clr%
+    echo negative       %negative% negative %clr%
+	echo nonegative     %nonegative% nonegative %clr%
+    echo invisible      %invisible% invisible %clr%
+	echo noinvisible    %noinvisible% noinvisible %clr%
+    echo strike         %strike% strike %clr%
+	echo nostrike       %nostrike% nostrike %clr%
+	echo %clr%
     echo:
     echo:
-    echo %black% %bg_lblack%      Foreground Colors      %clr%
-    echo black      %black% black %clr%
-    echo red        %red% red %clr%
-    echo green      %green% green %clr%
-    echo yellow     %yellow% yellow %clr%
-    echo blue       %blue% blue %clr%
-    echo magenta    %magenta% magenta %clr%
-    echo cyan       %cyan% cyan %clr%
-    echo white      %white% white %clr%
+	echo %black% %bg_lblack%      Style Combinations     %clr%
+	echo bright,italic       %bright% %italic% bright,italic %clr%
+	echo bright,underline    %bright% %underline% bright,underline %clr%
+	echo bright,negative     %bright% %negative% bright,negative %clr%
+	echo bright,strike       %bright% %strike% bright,strike %clr%
+	echo:
+	echo:
+	echo %black% %bg_lblack%      Color Combinations     %clr%
+	echo dim black      %dim%%black% dim black %clr%
+	echo black          %black% black %clr%
+	echo bright black   %bright%%black% bright black %clr%
+	echo dim red        %dim%%red% dim red %clr%
+	echo red            %red% red %clr%
+	echo bright red     %bright%%red% bright red %clr%
+	echo dim green      %dim%%green% dim green %clr%
+	echo green          %green% green %clr%
+	echo bright green   %bright%%green% bright green %clr%
+	echo dim yellow     %dim%%yellow% dim yellow %clr%
+	echo yellow         %yellow% yellow %clr%
+	echo bright yellow  %bright%%yellow% bright yellow %clr%
+	echo dim blue       %dim%%blue% dim blue %clr%
+	echo blue           %blue% blue %clr%
+	echo bright blue    %bright%%blue% bright blue %clr%
+	echo dim magenta    %dim%%magenta% dim magenta %clr%
+	echo magenta        %magenta% magenta %clr%
+	echo bright magenta %bright%%magenta% bright magenta %clr%
+	echo dim cyan       %dim%%cyan% dim cyan %clr%
+	echo cyan           %cyan% cyan %clr%
+	echo bright cyan    %bright%%cyan% bright cyan %clr%
+	echo dim white      %dim%%white% dim white %clr%
+	echo white          %white% white %clr%
+	echo bright white   %bright%%white% bright white %clr%
+	echo:
+	echo:
+    echo %black% %bg_lblack%     Foreground Colors      %clr%
+    echo black      %black% black %fg_clr%
+    echo red        %red% red %fg_clr%
+    echo green      %green% green %fg_clr%
+    echo yellow     %yellow% yellow %fg_clr%
+    echo blue       %blue% blue %fg_clr%
+    echo magenta    %magenta% magenta %fg_clr%
+    echo cyan       %cyan% cyan %fg_clr%
+    echo white      %white% white %fg_clr%
     echo:
     echo:
     echo %black% %bg_lblack%      Background Colors      %clr%
-    echo bg_black   %bg_black% bg_black %clr%
-    echo bg_red     %bg_red% bg_red %clr%
-    echo bg_green   %bg_green% bg_green %clr%
-    echo bg_yellow  %bg_yellow% bg_yellow %clr%
-    echo bg_blue    %bg_blue% bg_blue %clr%
-    echo bg_magenta %bg_magenta% bg_magenta %clr%
-    echo bg_cyan    %bg_cyan% bg_cyan %clr%
-    echo bg_white   %bg_white% bg_white %clr%
+    echo bg_black   %bg_black% bg_black %bg_clr%
+    echo bg_red     %bg_red% bg_red %bg_clr%
+    echo bg_green   %bg_green% bg_green %bg_clr%
+    echo bg_yellow  %bg_yellow% bg_yellow %bg_clr%
+    echo bg_blue    %bg_blue% bg_blue %bg_clr%
+    echo bg_magenta %bg_magenta% bg_magenta %bg_clr%
+    echo bg_cyan    %bg_cyan% bg_cyan %bg_clr%
+    echo bg_white   %bg_white% bg_white %bg_clr%
     echo:
     echo:
     echo %black% %bg_lblack% Foreground Colors  bright  %clr%
@@ -375,3 +653,5 @@ setlocal
     echo %bg_white%                                                     %clr%
     echo %bg_red%                                                     %clr%
 %endfunction%
+
+
