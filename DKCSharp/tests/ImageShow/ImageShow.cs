@@ -8,11 +8,9 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Threading;
 
-namespace DKConsole
-{
+namespace DKConsole {
     //Image Show Class To Show it in Console
-    class ImageShow
-    {
+    class ConsoleImage {
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr GetConsoleWindow();
 
@@ -33,15 +31,16 @@ namespace DKConsole
             [Out][MarshalAs(UnmanagedType.LPStruct)] ConsoleFontInfo lpConsoleCurrentFont);
 
         [StructLayout(LayoutKind.Sequential)]
-        internal class ConsoleFontInfo
-        {
+        internal class ConsoleFontInfo {
             internal int nFont;
             internal Coord dwFontSize;
         }
+		
+		[DllImport("User32.dll")]
+		public static extern uint GetDpiForWindow([In] IntPtr hwindow);
 
         [StructLayout(LayoutKind.Explicit)]
-        internal struct Coord
-        {
+        internal struct Coord {
             [FieldOffset(0)]
             internal short X;
             [FieldOffset(2)]
@@ -55,17 +54,16 @@ namespace DKConsole
         private const int INVALID_HANDLE_VALUE = -1;
         private const int OPEN_EXISTING = 3;
 
-        
         //Method Of Image Showing
-        public void view_image()
-        {
+        public void view_image() {
             string name = Environment.CurrentDirectory;
 
             int i = 0;
 
-            System.Drawing.Point location = new System.Drawing.Point(5, 5);
-            System.Drawing.Size imageSize = new System.Drawing.Size(20, 10); // desired image size in characters
-                                                                             // draw some placeholders
+            System.Drawing.Point location = new System.Drawing.Point(10, 10);
+            System.Drawing.Size imageSize = new System.Drawing.Size(20, 9); // desired image size in characters
+               
+			// draw some placeholders
             Console.SetCursorPosition(location.X - 1, location.Y);
             Console.Write(">");
             Console.SetCursorPosition(location.X + imageSize.Width, location.Y);
@@ -74,70 +72,54 @@ namespace DKConsole
             Console.Write(">");
             Console.SetCursorPosition(location.X + imageSize.Width, location.Y + imageSize.Height - 1);
             Console.WriteLine("<");
-
             
-            while (true)
-            {
-                try
-                {
+			string path = Path.Combine(name + @"\icon.png");
+        //  while (true) {
+                try {
                     i %= 100;
-                    using (Graphics g = Graphics.FromHwnd(GetConsoleWindow()))
-                    {
-                        //using (Image image = Image.FromFile(name + @"\detectedImage\marked" + i + ".png"))
-						using (Image image = Image.FromFile(name + @"\icon.png"))
-                        {
+                    using (Graphics g = Graphics.FromHwnd(GetConsoleWindow())) {
+						using (Image image = Image.FromFile(path)) {
                             System.Drawing.Size fontSize = GetConsoleFontSize();
-
+							decimal scalingFactor = GetDpiForWindow(GetConsoleWindow()) / 96m;
+							
                             // translating the character positions to pixels
                             System.Drawing.Rectangle imageRect = new System.Drawing.Rectangle(
-                                location.X * fontSize.Width,
-                                location.Y * fontSize.Height,
-                                imageSize.Width * fontSize.Width,
-                                imageSize.Height * fontSize.Height);
+                                (int)(location.X * fontSize.Width * scalingFactor),
+                                (int)(location.Y * fontSize.Height * scalingFactor),
+                                (int)(imageSize.Width * fontSize.Width * scalingFactor),
+                                (int)(imageSize.Height * fontSize.Height * scalingFactor));
                             g.DrawImage(image, imageRect);
                         }
                     }
                     ++i;
                 }
-                catch (Exception e)
-                {
+                catch (Exception e) {
                     Thread t = Thread.CurrentThread;
-                    Thread.Sleep(1300);
-                    
+                    Thread.Sleep(1300); 
                 }
-            }
-        }
-       private static System.Drawing.Size GetConsoleFontSize()
-        {
+        //  }
+       }
+	   
+       private static System.Drawing.Size GetConsoleFontSize() {
             // getting the console out buffer handle
-            IntPtr outHandle = CreateFile("CONOUT$", GENERIC_READ | GENERIC_WRITE,
-                FILE_SHARE_READ | FILE_SHARE_WRITE,
-                IntPtr.Zero,
-                OPEN_EXISTING,
-                0,
-                IntPtr.Zero);
+            IntPtr outHandle = CreateFile("CONOUT$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, IntPtr.Zero, OPEN_EXISTING, 0, IntPtr.Zero);
             int errorCode = Marshal.GetLastWin32Error();
-            if (outHandle.ToInt32() == INVALID_HANDLE_VALUE)
-            {
+            if(outHandle.ToInt32() == INVALID_HANDLE_VALUE) {
                 throw new IOException("Unable to open CONOUT$", errorCode);
             }
 
             ConsoleFontInfo cfi = new ConsoleFontInfo();
-            if (!GetCurrentConsoleFont(outHandle, false, cfi))
-            {
+            if (!GetCurrentConsoleFont(outHandle, false, cfi)) {
                 throw new InvalidOperationException("Unable to get font information.");
             }
             return new System.Drawing.Size(cfi.dwFontSize.X, cfi.dwFontSize.Y);
         }
 		
-		public static void Main(String[] args)
-		{
+		public static void Main(String[] args) {
 			Console.WriteLine("Image printed to console example");
-			
-			ImageShow imageShow = new ImageShow();
-			imageShow.view_image();
+			Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+			ConsoleImage img = new ConsoleImage();
+			img.view_image();
 		}
     }
-	
-	
 }
