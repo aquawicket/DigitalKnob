@@ -3,7 +3,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 if defined %~1   %return%
 ::################################################################################
-::# dk_assertVar(expression)
+::# dk_assertVar(var)
+::#
+::#		Check if a variable is defined and throw an Assertion if it is not.
 ::#
 :dk_assertVar
 setlocal
