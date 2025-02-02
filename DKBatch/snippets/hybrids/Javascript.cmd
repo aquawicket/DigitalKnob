@@ -6,7 +6,8 @@ set exit_code=%ERRORLEVEL%
 //###### exit_code ######
 echo exit_code = %exit_code%
 pause
-exit /b %exit_code% & */0;
+exit /b %exit_code%
+*/0;
 
 //########################################## Jscript ##################################################
 var argc = WScript.Arguments.length;
@@ -16,7 +17,6 @@ main(argc, argv);
 
 //######### main ##########
 function main(argc, argv) {
-	
 	WScript.Echo("Javascript: main("+argc+", "+argv+")");
 	WScript.Quit(13);
 }
