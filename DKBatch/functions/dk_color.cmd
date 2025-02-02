@@ -28,42 +28,120 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		::for /f %%A in ('forfiles /c "%ComSpec% /c echo 0x1B"') do set "ESC=%%A"	&:: escape character   BAD: Very slow
 		::for /l %%A in (27,1,1) do (cmd /c exit %%A & set "ESC=!^=ExitCodeAscii!") &:: escape character   GOOD: Converts DECIMAL to ASCII
 		
+		echo: > ascii.txt
+		::for /l %%A in (0,1,126)   do (cmd /c exit %%A & set /a "C%%A=!^=ExitCodeAscii!" & echo C%%A = !C%%A! >> ascii.txt)
+		
 		::############ C0 control codes #############
-		for /l %%A in (0,1,1)   do (cmd /c exit %%A & set "NUL=!^=ExitCodeAscii!")	&:: Null - Does nothing. The code of blank paper tape, and also used for padding to slow transmission
-		for /l %%A in (1,1,1)   do (cmd /c exit %%A & set "SOH=!^=ExitCodeAscii!")	&:: Start of Heading - First character of the heading of a message
-		for /l %%A in (2,1,1)   do (cmd /c exit %%A & set "STX=!^=ExitCodeAscii!")	&:: Start of Text - Terminates the header and starts the message text
-		for /l %%A in (3,1,1)   do (cmd /c exit %%A & set "ETX=!^=ExitCodeAscii!")	&:: End of Text - Ends the message text, starts a footer (up to the next TC character)
-		for /l %%A in (4,1,1)   do (cmd /c exit %%A & set "EOT=!^=ExitCodeAscii!")	&:: End of Transmission - Ends the transmission of one or more messages. May place terminals on standby.
-		for /l %%A in (5,1,1)   do (cmd /c exit %%A & set "EQN=!^=ExitCodeAscii!")	&:: Enquiry - Trigger a response at the receiving end, to see if it is still present.
-		for /l %%A in (6,1,1)   do (cmd /c exit %%A & set "ACK=!^=ExitCodeAscii!")	&:: Acknowledge - Indication of successful receipt of a message.
-		for /l %%A in (7,1,1)   do (cmd /c exit %%A & set "BEL=!^=ExitCodeAscii!")	&:: Bell, Alert	- Call for attention from an operator.
-		for /l %%A in (8,1,1)   do (cmd /c exit %%A & set "BS=!^=ExitCodeAscii!")	&:: Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
-		for /l %%A in (9,1,1)   do (cmd /c exit %%A & set "HT=!^=ExitCodeAscii!")	&:: Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
-		for /l %%A in (10,1,1)  do (cmd /c exit %%A & set "LF=!^=ExitCodeAscii!")	&:: Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
-		for /l %%A in (11,1,1)  do (cmd /c exit %%A & set "VT=!^=ExitCodeAscii!")	&:: Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
-		for /l %%A in (12,1,1)  do (cmd /c exit %%A & set "FF=!^=ExitCodeAscii!")	&:: Form Feed - Move down to the top of the next page.
-		for /l %%A in (13,1,1)  do (cmd /c exit %%A & set "CR=!^=ExitCodeAscii!")	&:: Carriage Return - Move to column zero while staying on the same line.
-		for /l %%A in (14,1,1)  do (cmd /c exit %%A & set "SO=!^=ExitCodeAscii!")	&:: Shift Out - Switch to an alternative character set.
-		for /l %%A in (15,1,1)  do (cmd /c exit %%A & set "SI=!^=ExitCodeAscii!")	&:: Shift In - Return to regular character set after SO.
-		for /l %%A in (16,1,1)  do (cmd /c exit %%A & set "DLE=!^=ExitCodeAscii!")	&:: Data Link Escape - Cause a number of contiguously following characters to be interpreted in some different way
-		for /l %%A in (17,1,1)  do (cmd /c exit %%A & set "DC1=!^=ExitCodeAscii!")	&:: Device Control One - Turn on (DC1 and DC2) or off (DC3 and DC4) devices.
-		for /l %%A in (18,1,1)  do (cmd /c exit %%A & set "DC2=!^=ExitCodeAscii!")	&:: Device Control Two
-		for /l %%A in (19,1,1)  do (cmd /c exit %%A & set "DC3=!^=ExitCodeAscii!")	&:: Device Control Three
-		for /l %%A in (20,1,1)  do (cmd /c exit %%A & set "DC4=!^=ExitCodeAscii!")	&:: Device Control Four
-		for /l %%A in (21,1,1)  do (cmd /c exit %%A & set "NAK=!^=ExitCodeAscii!")	&:: Negative Acknowledge - Negative response to a sender, such as a detected error.
-		for /l %%A in (22,1,1)  do (cmd /c exit %%A & set "SYN=!^=ExitCodeAscii!")	&:: Synchronous Idle - Sent in synchronous transmission systems when no other character is being transmitted.
-		for /l %%A in (23,1,1)  do (cmd /c exit %%A & set "ETB=!^=ExitCodeAscii!")	&:: End of Transmission Block - End of a transmission block of data when data are divided into such blocks.
-		for /l %%A in (24,1,1)  do (cmd /c exit %%A & set "CAN=!^=ExitCodeAscii!")	&:: Cancel - Indicates that the data preceding it are in error or are to be disregarded.
-		for /l %%A in (25,1,1)  do (cmd /c exit %%A & set "EM=!^=ExitCodeAscii!")	&:: End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
-		for /l %%A in (26,1,1)  do (cmd /c exit %%A & set "SUB=!^=ExitCodeAscii!")	&:: Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
-		for /l %%A in (27,1,1)  do (cmd /c exit %%A & set "ESC=!^=ExitCodeAscii!")	&:: Escape - Alters the meaning of a limited number of following bytes.
-		for /l %%A in (28,1,1)  do (cmd /c exit %%A & set "FS=!^=ExitCodeAscii!")	&:: File Separator - Can be used as delimiters to mark fields of data structures. 
-		for /l %%A in (29,1,1)  do (cmd /c exit %%A & set "GS=!^=ExitCodeAscii!")	&:: Group Separator
-		for /l %%A in (30,1,1)  do (cmd /c exit %%A & set "RS=!^=ExitCodeAscii!")	&:: Record Separator
-		for /l %%A in (31,1,1)  do (cmd /c exit %%A & set "US=!^=ExitCodeAscii!")	&:: Unit Separator - US is the lowest level
-		for /l %%A in (32,1,1)  do (cmd /c exit %%A & set "SP=!^=ExitCodeAscii!")	&:: Space - Move right one character position.
-		for /l %%A in (127,1,1) do (cmd /c exit %%A & set "DEL=!^=ExitCodeAscii!")	&:: Delete - Should be ignored. Used to delete characters on punched tape by punching out all the holes.
+		(set NUL=)	&:: Null - Does nothing. The code of blank paper tape, and also used for padding to slow transmission
+		(set SOH=)	&:: Start of Heading - First character of the heading of a message
+		(set STX=)	&:: Start of Text - Terminates the header and starts the message text
+		(set ETX=)	&:: End of Text - Ends the message text, starts a footer (up to the next TC character)
+		(set EOT=)	&:: End of Transmission - Ends the transmission of one or more messages. May place terminals on standby.
+		(set EQN=)	&:: Enquiry - Trigger a response at the receiving end, to see if it is still present.
+		(set ACK=)	&:: Acknowledge - Indication of successful receipt of a message.
+		(set BEL=)	&:: Bell, Alert	- Call for attention from an operator.
+		(set BS=)	&:: Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
+		(set HT=	)	&:: Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
+		(set LF=^
+%= This creates a Line Feed - DO NOT ALTER =%
+)					&:: Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
+		(set VT=)	&:: Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
+		(set FF=)	&:: Form Feed - Move down to the top of the next page.
+		(set CR=^^^
+%= This creates an escaped Line Feed - DO NOT ALTER =%
+)					&:: Carriage Return - Move to column zero while staying on the same line.
 
+		(set SO=)	&:: Shift Out - Switch to an alternative character set.
+		(set SI=)	&:: Shift In - Return to regular character set after SO.
+		(set DLE=)	&:: Data Link Escape - Cause a number of contiguously following characters to be interpreted in some different way
+		(set DC1=)	&:: Device Control One - Turn on (DC1 and DC2) or off (DC3 and DC4) devices.
+		(set DC2=)	&:: Device Control Two
+		(set DC3=)	&:: Device Control Three
+		(set DC4=)	&:: Device Control Four
+		(set NAK=)	&:: Negative Acknowledge - Negative response to a sender, such as a detected error.
+		(set SYN=)	&:: Synchronous Idle - Sent in synchronous transmission systems when no other character is being transmitted.
+		(set ETB=)	&:: End of Transmission Block - End of a transmission block of data when data are divided into such blocks.
+		(set CAN=)	&:: Cancel - Indicates that the data preceding it are in error or are to be disregarded.
+		(set EM=)	&:: End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
+		(set SUB=)	&:: Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
+		(set ESC=)	&:: Escape - Alters the meaning of a limited number of following bytes.
+		(set FS=)	&:: File Separator - Can be used as delimiters to mark fields of data structures. 
+		(set GS=)	&:: Group Separator
+		(set RS=)	&:: Record Separator
+		(set US=)	&:: Unit Separator - US is the lowest level
+		(set SP= )	&:: Space - Move right one character position.
+		(set DEL=)	&:: Delete - Should be ignored. Used to delete characters on punched tape by punching out all the holes.
+		
+		echo NUL = '%NUL%'
+		echo SOH = '%SOH%'
+		echo STX = '%STX%'
+		echo ETX = '%ETX%'
+		echo EOT = '%EOT%'
+		echo EQN = '%EQN%'
+		echo ACK = '%ACK%'
+		echo BEL = '%BEL%'
+		echo BS  = '%BS%'
+		echo HT  = '%HT%'
+		echo LF  = '%LF%'
+		echo VT  = '%VT%'
+		echo FF  = '%FF%'
+		echo CR  = '%CR%'
+		echo SO  = '%SO%'
+		echo SI  = '%SI%'
+		echo DLE = '%DLE%'
+		echo DC1 = '%DC1%'
+		echo DC2 = '%DC2%'
+		echo DC3 = '%DC3%'
+		echo DC4 = '%DC4%'
+		echo NAK = '%NAK%'
+		echo SYN = '%SYN%'
+		echo ETB = '%ETB%'
+		echo CAN = '%CAN%'
+		echo EM  = '%EM%'
+		echo SUB = '%SUB%'
+		echo ESC = '%ESC%'
+		echo FS  = '%FS%'
+		echo GS  = '%GS%'
+		echo RS  = '%RS%'
+		echo US  = '%US%'
+		echo SP  = '%SP%'
+		echo DEL = '%DEL%'
+		
+		echo NUL = '%NUL%'>> ascii.txt
+		echo SOH = '%SOH%'>> ascii.txt
+		echo STX = '%STX%'>> ascii.txt
+		echo ETX = '%ETX%'>> ascii.txt
+		echo EOT = '%EOT%'>> ascii.txt
+		echo EQN = '%EQN%'>> ascii.txt
+		echo ACK = '%ACK%'>> ascii.txt
+		echo BEL = '%BEL%'>> ascii.txt
+		echo BS  = '%BS%'>> ascii.txt
+		echo HT  = '%HT%'>> ascii.txt
+		::echo LF  = '%LF%'>> ascii.txt
+		echo VT  = '%VT%'>> ascii.txt
+		echo FF  = '%FF%'>> ascii.txt
+		echo CR  = '%CR%'>> ascii.txt
+		echo SO  = '%SO%'>> ascii.txt
+		echo SI  = '%SI%'>> ascii.txt
+		echo DLE = '%DLE%'>> ascii.txt
+		echo DC1 = '%DC1%'>> ascii.txt
+		echo DC2 = '%DC2%'>> ascii.txt
+		echo DC3 = '%DC3%'>> ascii.txt
+		echo DC4 = '%DC4%'>> ascii.txt
+		echo NAK = '%NAK%'>> ascii.txt
+		echo SYN = '%SYN%'>> ascii.txt
+		echo ETB = '%ETB%'>> ascii.txt
+		echo CAN = '%CAN%'>> ascii.txt
+		echo EM  = '%EM%'>> ascii.txt
+		echo SUB = '%SUB%'>> ascii.txt
+		echo ESC = '%ESC%'>> ascii.txt
+		echo FS  = '%FS%'>> ascii.txt
+		echo GS  = '%GS%'>> ascii.txt
+		echo RS  = '%RS%'>> ascii.txt
+		echo US  = '%US%'>> ascii.txt
+		echo SP  = '%SP%'>> ascii.txt
+		echo DEL = '%DEL%'>> ascii.txt
+		
 		::############ C1 control codes #############
 		set "PAD=%ESC%@"	&:: Padding Character
 		set "HOP=%ESC%A"	&:: High Octet Preset
@@ -131,17 +209,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         set "strike=%CSI%9m"            &:: Strike Through
 
         ::# Attributes off
-        ::set "20m=%CSI%20m"               &:: 20
-        ::set "21m=%CSI%21m"              	&:: 21
-		set "nodim=%CSI%22m"              	&:: No Dim              		- Removes brightness/intensity flag from foreground color
-        set "nobright=%CSI%22m"            &:: No Bright              		- Removes brightness/intensity flag from foreground color
-        set "noitalic=%CSI%23m"            &:: No Italic
-        set "nounderline=%CSI%24m"         &:: No Underline
-        set "noblink=%CSI%25m"             &:: No Blink
-        ::set "26m=%CSI%26m"               &:: 26
-        set "nonegative=%CSI%27m"          &:: No Negative			       	- Returns foreground/background to normal
-        set "visible=%CSI%28m"             &:: No Invisible
-        set "nostrike=%CSI%29m"            &:: No Strike Through
+        ::set "20m=%CSI%20m"              &:: 20
+        ::set "21m=%CSI%21m"              &:: 21
+		set "nodim=%CSI%22m"              &:: No Dim              		- Removes brightness/intensity flag from foreground color
+        set "nobright=%CSI%22m"           &:: No Bright              	- Removes brightness/intensity flag from foreground color
+        set "noitalic=%CSI%23m"           &:: No Italic
+        set "nounderline=%CSI%24m"        &:: No Underline
+        set "noblink=%CSI%25m"            &:: No Blink
+        ::set "26m=%CSI%26m"              &:: 26
+        set "nonegative=%CSI%27m"         &:: No Negative			    - Returns foreground/background to normal
+        set "visible=%CSI%28m"            &:: No Invisible
+        set "nostrike=%CSI%29m"           &:: No Strike Through
 
         ::# Foreground Colors
         set "black=%CSI%30m"               &:: Foreground Black            - Applies non-dim/bright black to foreground
@@ -408,8 +486,6 @@ setlocal
 	echo CSI125m       %CSI%125m  CSI125m  %clr%
 	echo CSI126m       %CSI%126m  CSI126m  %clr%
 	echo CSI127m       %CSI%127m  CSI127m  %clr%
-	echo CSI128m       %CSI%128m  CSI128m  %clr%
-	echo CSI129m       %CSI%129m  CSI129m  %clr%
 	
 	echo CSI?12h       %CSI%?12h  CSI?12h
 	echo CSI?12l       %CSI%?12l  CSI?12l
@@ -517,124 +593,124 @@ setlocal
     echo:
     echo:
     echo %black% %bg_lblack%   RGB Foreground Colors   %clr%
-    echo %RGB%255;10;10m    RGB test 255;0;10     %clr%
-    echo %RGB%10;255;10m    RGB test 0;255;10    %clr%
-    echo %RGB%0;0;255m    RGB test 0;0;255     %clr%
-    echo %RGB%0;0;250m    RGB test 0;0;250     %clr%
-    echo %RGB%0;0;245m    RGB test 0;0;245     %clr%
-    echo %RGB%0;0;240m    RGB test 0;0;240     %clr%
-    echo %RGB%0;0;235m    RGB test 0;0;235     %clr%
-    echo %RGB%0;0;230m    RGB test 0;0;230     %clr%
-    echo %RGB%0;0;225m    RGB test 0;0;225     %clr%
-    echo %RGB%0;0;220m    RGB test 0;0;220     %clr%
-    echo %RGB%0;0;215m    RGB test 0;0;215     %clr%
-    echo %RGB%0;0;210m    RGB test 0;0;210     %clr%
-    echo %RGB%0;0;205m    RGB test 0;0;205     %clr%
-    echo %RGB%0;0;200m    RGB test 0;0;200     %clr%
-    echo %RGB%0;0;195m    RGB test 0;0;195     %clr%
-    echo %RGB%0;0;190m    RGB test 0;0;190     %clr%
-    echo %RGB%0;0;185m    RGB test 0;0;185     %clr%
-    echo %RGB%0;0;180m    RGB test 0;0;180     %clr%
-    echo %RGB%0;0;175m    RGB test 0;0;175     %clr%
-    echo %RGB%0;0;170m    RGB test 0;0;170     %clr%
-    echo %RGB%0;0;165m    RGB test 0;0;165     %clr%
-    echo %RGB%0;0;160m    RGB test 0;0;160     %clr%
-    echo %RGB%0;0;155m    RGB test 0;0;155     %clr%
-    echo %RGB%0;0;150m    RGB test 0;0;150     %clr%
-    echo %RGB%0;0;145m    RGB test 0;0;145     %clr%
-    echo %RGB%0;0;140m    RGB test 0;0;140     %clr%
-    echo %RGB%0;0;135m    RGB test 0;0;135     %clr%
-    echo %RGB%0;0;130m    RGB test 0;0;130     %clr%
-    echo %RGB%0;0;125m    RGB test 0;0;125     %clr%
-    echo %RGB%0;0;120m    RGB test 0;0;120     %clr%
-    echo %RGB%0;0;115m    RGB test 0;0;115     %clr%
-    echo %RGB%0;0;110m    RGB test 0;0;110     %clr%
-    echo %RGB%0;0;105m    RGB test 0;0;105     %clr%
-    echo %RGB%0;0;100m    RGB test 0;0;100     %clr%
-    echo %RGB%0;0;95m    RGB test 0;0;95      %clr%
-    echo %RGB%0;0;90m    RGB test 0;0;90      %clr%
-    echo %RGB%0;0;85m    RGB test 0;0;85      %clr%
-    echo %RGB%0;0;80m    RGB test 0;0;80      %clr%
-    echo %RGB%0;0;75m    RGB test 0;0;75      %clr%
-    echo %RGB%0;0;70m    RGB test 0;0;70      %clr%
-    echo %RGB%0;0;65m    RGB test 0;0;65      %clr%
-    echo %RGB%0;0;60m    RGB test 0;0;60      %clr%
-    echo %RGB%0;0;55m    RGB test 0;0;55      %clr%
-    echo %RGB%0;0;50m    RGB test 0;0;50      %clr%
-    echo %RGB%0;0;45m    RGB test 0;0;45      %clr%
-    echo %RGB%0;0;40m    RGB test 0;0;40      %clr%
-    echo %RGB%0;0;35m    RGB test 0;0;35      %clr%
-    echo %RGB%0;0;30m    RGB test 0;0;30      %clr%
-    echo %RGB%0;0;25m    RGB test 0;0;25      %clr%
-    echo %RGB%0;0;20m    RGB test 0;0;20      %clr%
-    echo %RGB%0;0;15m    RGB test 0;0;15      %clr%
-    echo %RGB%0;0;10m    RGB test 0;0;10      %clr%
-    echo %RGB%0;0;5m    RGB test 0;0;5       %clr%
-    echo %RGB%0;0;0m    RGB test 0;0;0       %clr%
+    echo %RGB%255;10;10m    RGB255;0;10m     %clr%
+    echo %RGB%10;255;10m    RGB 0;255;10    %clr%
+    echo %RGB%0;0;255m    RGB 0;0;255     %clr%
+    echo %RGB%0;0;250m    RGB 0;0;250     %clr%
+    echo %RGB%0;0;245m    RGB 0;0;245     %clr%
+    echo %RGB%0;0;240m    RGB 0;0;240     %clr%
+    echo %RGB%0;0;235m    RGB 0;0;235     %clr%
+    echo %RGB%0;0;230m    RGB 0;0;230     %clr%
+    echo %RGB%0;0;225m    RGB 0;0;225     %clr%
+    echo %RGB%0;0;220m    RGB 0;0;220     %clr%
+    echo %RGB%0;0;215m    RGB 0;0;215     %clr%
+    echo %RGB%0;0;210m    RGB 0;0;210     %clr%
+    echo %RGB%0;0;205m    RGB 0;0;205     %clr%
+    echo %RGB%0;0;200m    RGB 0;0;200     %clr%
+    echo %RGB%0;0;195m    RGB 0;0;195     %clr%
+    echo %RGB%0;0;190m    RGB 0;0;190     %clr%
+    echo %RGB%0;0;185m    RGB 0;0;185     %clr%
+    echo %RGB%0;0;180m    RGB 0;0;180     %clr%
+    echo %RGB%0;0;175m    RGB 0;0;175     %clr%
+    echo %RGB%0;0;170m    RGB 0;0;170     %clr%
+    echo %RGB%0;0;165m    RGB 0;0;165     %clr%
+    echo %RGB%0;0;160m    RGB 0;0;160     %clr%
+    echo %RGB%0;0;155m    RGB 0;0;155     %clr%
+    echo %RGB%0;0;150m    RGB 0;0;150     %clr%
+    echo %RGB%0;0;145m    RGB 0;0;145     %clr%
+    echo %RGB%0;0;140m    RGB 0;0;140     %clr%
+    echo %RGB%0;0;135m    RGB 0;0;135     %clr%
+    echo %RGB%0;0;130m    RGB 0;0;130     %clr%
+    echo %RGB%0;0;125m    RGB 0;0;125     %clr%
+    echo %RGB%0;0;120m    RGB 0;0;120     %clr%
+    echo %RGB%0;0;115m    RGB 0;0;115     %clr%
+    echo %RGB%0;0;110m    RGB 0;0;110     %clr%
+    echo %RGB%0;0;105m    RGB 0;0;105     %clr%
+    echo %RGB%0;0;100m    RGB 0;0;100     %clr%
+    echo %RGB%0;0;95m    RGB 0;0;95      %clr%
+    echo %RGB%0;0;90m    RGB 0;0;90      %clr%
+    echo %RGB%0;0;85m    RGB 0;0;85      %clr%
+    echo %RGB%0;0;80m    RGB 0;0;80      %clr%
+    echo %RGB%0;0;75m    RGB 0;0;75      %clr%
+    echo %RGB%0;0;70m    RGB 0;0;70      %clr%
+    echo %RGB%0;0;65m    RGB 0;0;65      %clr%
+    echo %RGB%0;0;60m    RGB 0;0;60      %clr%
+    echo %RGB%0;0;55m    RGB 0;0;55      %clr%
+    echo %RGB%0;0;50m    RGB 0;0;50      %clr%
+    echo %RGB%0;0;45m    RGB 0;0;45      %clr%
+    echo %RGB%0;0;40m    RGB 0;0;40      %clr%
+    echo %RGB%0;0;35m    RGB 0;0;35      %clr%
+    echo %RGB%0;0;30m    RGB 0;0;30      %clr%
+    echo %RGB%0;0;25m    RGB 0;0;25      %clr%
+    echo %RGB%0;0;20m    RGB 0;0;20      %clr%
+    echo %RGB%0;0;15m    RGB 0;0;15      %clr%
+    echo %RGB%0;0;10m    RGB 0;0;10      %clr%
+    echo %RGB%0;0;5m    RGB 0;0;5       %clr%
+    echo %RGB%0;0;0m    RGB 0;0;0       %clr%
     echo:
     echo:
     echo %black% %bg_lblack%   RGB Background Colors   %clr%
-    echo %bg_RGB%255;10;10m    bg_RGB test 255;0;10    %clr%
-    echo %bg_RGB%10;255;10m    bg_RGB test 0;255;10    %clr%
-    echo %bg_RGB%0;0;255m    bg_RGB test 0;0;255     %clr%
-    echo %bg_RGB%0;0;250m    bg_RGB test 0;0;250     %clr%
-    echo %bg_RGB%0;0;245m    bg_RGB test 0;0;245     %clr%
-    echo %bg_RGB%0;0;240m    bg_RGB test 0;0;240     %clr%
-    echo %bg_RGB%0;0;235m    bg_RGB test 0;0;235     %clr%
-    echo %bg_RGB%0;0;230m    bg_RGB test 0;0;230     %clr%
-    echo %bg_RGB%0;0;225m    bg_RGB test 0;0;225     %clr%
-    echo %bg_RGB%0;0;220m    bg_RGB test 0;0;220     %clr%
-    echo %bg_RGB%0;0;215m    bg_RGB test 0;0;215     %clr%
-    echo %bg_RGB%0;0;210m    bg_RGB test 0;0;210     %clr%
-    echo %bg_RGB%0;0;205m    bg_RGB test 0;0;205     %clr%
-    echo %bg_RGB%0;0;200m    bg_RGB test 0;0;200     %clr%
-    echo %bg_RGB%0;0;195m    bg_RGB test 0;0;195     %clr%
-    echo %bg_RGB%0;0;190m    bg_RGB test 0;0;190     %clr%
-    echo %bg_RGB%0;0;185m    bg_RGB test 0;0;185     %clr%
-    echo %bg_RGB%0;0;180m    bg_RGB test 0;0;180     %clr%
-    echo %bg_RGB%0;0;175m    bg_RGB test 0;0;175     %clr%
-    echo %bg_RGB%0;0;170m    bg_RGB test 0;0;170     %clr%
-    echo %bg_RGB%0;0;165m    bg_RGB test 0;0;165     %clr%
-    echo %bg_RGB%0;0;160m    bg_RGB test 0;0;160     %clr%
-    echo %bg_RGB%0;0;155m    bg_RGB test 0;0;155     %clr%
-    echo %bg_RGB%0;0;150m    bg_RGB test 0;0;150     %clr%
-    echo %bg_RGB%0;0;145m    bg_RGB test 0;0;145     %clr%
-    echo %bg_RGB%0;0;140m    bg_RGB test 0;0;140     %clr%
-    echo %bg_RGB%0;0;135m    bg_RGB test 0;0;135     %clr%
-    echo %bg_RGB%0;0;130m    bg_RGB test 0;0;130     %clr%
-    echo %bg_RGB%0;0;125m    bg_RGB test 0;0;125     %clr%
-    echo %bg_RGB%0;0;120m    bg_RGB test 0;0;120     %clr%
-    echo %bg_RGB%0;0;115m    bg_RGB test 0;0;115     %clr%
-    echo %bg_RGB%0;0;110m    bg_RGB test 0;0;110     %clr%
-    echo %bg_RGB%0;0;105m    bg_RGB test 0;0;105     %clr%
-    echo %bg_RGB%0;0;100m    bg_RGB test 0;0;100     %clr%
-    echo %bg_RGB%0;0;95m    bg_RGB test 0;0;95      %clr%
-    echo %bg_RGB%0;0;90m    bg_RGB test 0;0;90      %clr%
-    echo %bg_RGB%0;0;85m    bg_RGB test 0;0;85      %clr%
-    echo %bg_RGB%0;0;80m    bg_RGB test 0;0;80      %clr%
-    echo %bg_RGB%0;0;75m    bg_RGB test 0;0;75      %clr%
-    echo %bg_RGB%0;0;70m    bg_RGB test 0;0;70      %clr%
-    echo %bg_RGB%0;0;65m    bg_RGB test 0;0;65      %clr%
-    echo %bg_RGB%0;0;60m    bg_RGB test 0;0;60      %clr%
-    echo %bg_RGB%0;0;55m    bg_RGB test 0;0;55      %clr%
-    echo %bg_RGB%0;0;50m    bg_RGB test 0;0;50      %clr%
-    echo %bg_RGB%0;0;45m    bg_RGB test 0;0;45      %clr%
-    echo %bg_RGB%0;0;40m    bg_RGB test 0;0;40      %clr%
-    echo %bg_RGB%0;0;35m    bg_RGB test 0;0;35      %clr%
-    echo %bg_RGB%0;0;30m    bg_RGB test 0;0;30      %clr%
-    echo %bg_RGB%0;0;25m    bg_RGB test 0;0;25      %clr%
-    echo %bg_RGB%0;0;20m    bg_RGB test 0;0;20      %clr%
-    echo %bg_RGB%0;0;15m    bg_RGB test 0;0;15      %clr%
-    echo %bg_RGB%0;0;10m    bg_RGB test 0;0;10      %clr%
-    echo %bg_RGB%0;0;5m    bg_RGB test 0;0;5       %clr%
-    echo %bg_RGB%0;0;0m    bg_RGB test 0;0;0       %clr%
+    echo %bg_RGB%255;10;10m    bg_RGB 255;0;10    %clr%
+    echo %bg_RGB%10;255;10m    bg_RGB 0;255;10    %clr%
+    echo %bg_RGB%0;0;255m    bg_RGB 0;0;255     %clr%
+    echo %bg_RGB%0;0;250m    bg_RGB 0;0;250     %clr%
+    echo %bg_RGB%0;0;245m    bg_RGB 0;0;245     %clr%
+    echo %bg_RGB%0;0;240m    bg_RGB 0;0;240     %clr%
+    echo %bg_RGB%0;0;235m    bg_RGB 0;0;235     %clr%
+    echo %bg_RGB%0;0;230m    bg_RGB 0;0;230     %clr%
+    echo %bg_RGB%0;0;225m    bg_RGB 0;0;225     %clr%
+    echo %bg_RGB%0;0;220m    bg_RGB 0;0;220     %clr%
+    echo %bg_RGB%0;0;215m    bg_RGB 0;0;215     %clr%
+    echo %bg_RGB%0;0;210m    bg_RGB 0;0;210     %clr%
+    echo %bg_RGB%0;0;205m    bg_RGB 0;0;205     %clr%
+    echo %bg_RGB%0;0;200m    bg_RGB 0;0;200     %clr%
+    echo %bg_RGB%0;0;195m    bg_RGB 0;0;195     %clr%
+    echo %bg_RGB%0;0;190m    bg_RGB 0;0;190     %clr%
+    echo %bg_RGB%0;0;185m    bg_RGB 0;0;185     %clr%
+    echo %bg_RGB%0;0;180m    bg_RGB 0;0;180     %clr%
+    echo %bg_RGB%0;0;175m    bg_RGB 0;0;175     %clr%
+    echo %bg_RGB%0;0;170m    bg_RGB 0;0;170     %clr%
+    echo %bg_RGB%0;0;165m    bg_RGB 0;0;165     %clr%
+    echo %bg_RGB%0;0;160m    bg_RGB 0;0;160     %clr%
+    echo %bg_RGB%0;0;155m    bg_RGB 0;0;155     %clr%
+    echo %bg_RGB%0;0;150m    bg_RGB 0;0;150     %clr%
+    echo %bg_RGB%0;0;145m    bg_RGB 0;0;145     %clr%
+    echo %bg_RGB%0;0;140m    bg_RGB 0;0;140     %clr%
+    echo %bg_RGB%0;0;135m    bg_RGB 0;0;135     %clr%
+    echo %bg_RGB%0;0;130m    bg_RGB 0;0;130     %clr%
+    echo %bg_RGB%0;0;125m    bg_RGB 0;0;125     %clr%
+    echo %bg_RGB%0;0;120m    bg_RGB 0;0;120     %clr%
+    echo %bg_RGB%0;0;115m    bg_RGB 0;0;115     %clr%
+    echo %bg_RGB%0;0;110m    bg_RGB 0;0;110     %clr%
+    echo %bg_RGB%0;0;105m    bg_RGB 0;0;105     %clr%
+    echo %bg_RGB%0;0;100m    bg_RGB 0;0;100     %clr%
+    echo %bg_RGB%0;0;95m    bg_RGB 0;0;95      %clr%
+    echo %bg_RGB%0;0;90m    bg_RGB 0;0;90      %clr%
+    echo %bg_RGB%0;0;85m    bg_RGB 0;0;85      %clr%
+    echo %bg_RGB%0;0;80m    bg_RGB 0;0;80      %clr%
+    echo %bg_RGB%0;0;75m    bg_RGB 0;0;75      %clr%
+    echo %bg_RGB%0;0;70m    bg_RGB 0;0;70      %clr%
+    echo %bg_RGB%0;0;65m    bg_RGB 0;0;65      %clr%
+    echo %bg_RGB%0;0;60m    bg_RGB 0;0;60      %clr%
+    echo %bg_RGB%0;0;55m    bg_RGB 0;0;55      %clr%
+    echo %bg_RGB%0;0;50m    bg_RGB 0;0;50      %clr%
+    echo %bg_RGB%0;0;45m    bg_RGB 0;0;45      %clr%
+    echo %bg_RGB%0;0;40m    bg_RGB 0;0;40      %clr%
+    echo %bg_RGB%0;0;35m    bg_RGB 0;0;35      %clr%
+    echo %bg_RGB%0;0;30m    bg_RGB 0;0;30      %clr%
+    echo %bg_RGB%0;0;25m    bg_RGB 0;0;25      %clr%
+    echo %bg_RGB%0;0;20m    bg_RGB 0;0;20      %clr%
+    echo %bg_RGB%0;0;15m    bg_RGB 0;0;15      %clr%
+    echo %bg_RGB%0;0;10m    bg_RGB 0;0;10      %clr%
+    echo %bg_RGB%0;0;5m    bg_RGB 0;0;5       %clr%
+    echo %bg_RGB%0;0;0m    bg_RGB 0;0;0       %clr%
     echo:
     echo:
     echo %black% %bg_lblack%        Combinations         %clr%
-    echo negative                            %negative%   inverse foreground <-> background   %clr%
-    echo bg_yellow red                     %bg_yellow% %red%   yellow backgroud / red foreground   %clr%
-    echo bg_yellow red negative           %bg_yellow% %red% %negative%        yellow / red inversed          %clr%
-    echo bg_red.. bg_green.. bg_blue     %bg_red%    nested   %bg_green%    colors    %bg_blue%    text    %clr%
+    echo negative                      %negative%   inverse foreground / background     %clr%
+    echo bg_yellow,red                 %bg_yellow%%red%   yellow backgroud / red foreground   %clr%
+    echo bg_yellow,red,negative        %bg_yellow%%red%%negative%        yellow / red inversed          %clr%
+    echo bg_red,bg_green,bg_blue       %bg_red%    nested   %bg_green%    colors    %bg_blue%    text    %clr%
     echo:
     echo:
     echo %black% %bg_lblack%        ASCII Color Art       %clr%
