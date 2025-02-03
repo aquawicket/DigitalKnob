@@ -16,40 +16,40 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	echo  1^) !host_triple!
 	echo 
 	echo  2) cosmopolitan
-	echo  3) android_arm32
-	echo  4) android_arm64
-	echo  5) android_x86
-	echo  6) android_x86_64
-	echo  7) emscripten
-	echo  8) ios_arm32
-	echo  9) ios_arm64
-	echo 10) ios_x86
-	echo 11) ios_x86_64
-	echo 12) iossim_arm32
-	echo 13) iossim_arm64
-	echo 14) iossim_x86
-	echo 15) iossim_x86_64
-	echo 16) linux_arm32
-	echo 17) linux_arm64
-	echo 18) linux_x86
-	echo 19) linux_x86_64
-	echo 20) mac_arm32
-	echo 21) mac_arm64
-	echo 22) mac_x86
-	echo 23) mac_x86_64
-	echo 24) raspberry_arm32
-	echo 25) raspberry_arm64
-	echo 26) raspberry_x86
-	echo 27) raspberry_x86_64
-	echo 28) windows_arm32
+	echo  3) android_arm32_clang
+	echo  4) android_arm64_clang
+	echo  5) android_x86_clang
+	echo  6) android_x86_64_clang
+	echo  7) emscripten_clang
+	echo  8) ios_arm32_clang
+	echo  9) ios_arm64_clang
+	echo 10) ios_x86_clang
+	echo 11) ios_x86_64_clang
+	echo 12) iossim_arm32_clang
+	echo 13) iossim_arm64_clang
+	echo 14) iossim_x86_clang
+	echo 15) iossim_x86_64_clang
+	echo 16) linux_arm32_clang
+	echo 17) linux_arm64_clang
+	echo 18) linux_x86_clang
+	echo 19) linux_x86_64_clang
+	echo 20) mac_arm32_clang
+	echo 21) mac_arm64_clang
+	echo 22) mac_x86_clang
+	echo 23) mac_x86_64_clang
+	echo 24) raspberry_arm32_clang
+	echo 25) raspberry_arm64_clang
+	echo 26) raspberry_x86_clang
+	echo 27) raspberry_x86_64_clang
+	echo 28) windows_arm32_clang
 	echo 29) windows_arm64_clang
-	echo 30) windows_x86_gcc
-	echo 31) windows_x86_clang
+	echo 30) windows_x86_clang
+	echo 31) windows_x86_gcc
 	echo 32) windows_x86_msvc
-	echo 33) windows_x86_64_gcc
-	echo 34) windows_x86_64_clang
-	echo 35) windows_x86_64_ucrt
-	echo 36) windows_x86_64_msvc
+	echo 33) windows_x86_64_clang
+	echo 34) windows_x86_64_gcc
+	echo 35) windows_x86_64_msvc
+	echo 36) windows_x86_64_ucrt
 	echo 37) Exit
 	echo 
 
@@ -73,81 +73,107 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	) else if "!input!" equ "3" (
 		%dk_call% dk_set os "android"
 		%dk_call% dk_set arch "arm32"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "4" (
 		%dk_call% dk_set os "android"
 		%dk_call% dk_set arch "arm64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "5" (
 		%dk_call% dk_set os "android"
 		%dk_call% dk_set arch "x86"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "6" (
 		%dk_call% dk_set os "android"
 		%dk_call% dk_set arch "x86_64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "7" (
 		%dk_call% dk_set os "emscripten"
 		%dk_call% dk_set arch "x86"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "8" (
 		%dk_call% dk_set os "ios"
 		%dk_call% dk_set arch "arm32"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "9" (
 		%dk_call% dk_set os "ios"
 		%dk_call% dk_set arch "arm64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "10" (
 		%dk_call% dk_set os "ios"
 		%dk_call% dk_set arch "x86"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "11" (
 		%dk_call% dk_set os "ios"
 		%dk_call% dk_set arch "x86_64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "12" (
 		%dk_call% dk_set os "iossim"
 		%dk_call% dk_set arch "arm32"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "13" (
 		%dk_call% dk_set os "iossim"
 		%dk_call% dk_set arch "arm64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "14" (
 		%dk_call% dk_set os "iossim"
 		%dk_call% dk_set arch "x86"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "15" (
 		%dk_call% dk_set os "iossim"
 		%dk_call% dk_set arch "x86_64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "16" (
 		%dk_call% dk_set os "linux"
 		%dk_call% dk_set arch "arm32"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "17" (
 		%dk_call% dk_set os "linux"
 		%dk_call% dk_set arch "arm64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "18" (
 		%dk_call% dk_set os "linux"
 		%dk_call% dk_set arch "x86"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "19" (
 		%dk_call% dk_set os "linux"
 		%dk_call% dk_set arch "x86_64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "20" (
 		%dk_call% dk_set os "mac"
 		%dk_call% dk_set arch "arm32"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "21" (
 		%dk_call% dk_set os "mac"
 		%dk_call% dk_set arch "arm64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "22" (
 		%dk_call% dk_set os "mac"
 		%dk_call% dk_set arch "x86"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "23" (
 		%dk_call% dk_set os "mac"
 		%dk_call% dk_set arch "x86_64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "24" (
 		%dk_call% dk_set os "raspberry"
 		%dk_call% dk_set arch "arm32"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "25" (
 		%dk_call% dk_set os "raspberry"
 		%dk_call% dk_set arch "arm64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "26" (
 		%dk_call% dk_set os "raspberry"
 		%dk_call% dk_set arch "x86"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "27" (
 		%dk_call% dk_set os "raspberry"
 		%dk_call% dk_set arch "x86_64"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "28" (
 		%dk_call% dk_set os "win"
 		%dk_call% dk_set arch "arm32"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "29" (
 		%dk_call% dk_set os "win"
 		%dk_call% dk_set arch "arm64"
@@ -155,11 +181,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	) else if "!input!" equ "30" (
 		%dk_call% dk_set os "win"
 		%dk_call% dk_set arch "x86"
-		%dk_call% dk_set env "mingw"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "31" (
 		%dk_call% dk_set os "win"
 		%dk_call% dk_set arch "x86"
-		%dk_call% dk_set env "clang"
+		%dk_call% dk_set env "mingw"
 	) else if "!input!" equ "32" (
 		%dk_call% dk_set os "win"
 		%dk_call% dk_set arch "x86"
@@ -167,19 +193,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	) else if "!input!" equ "33" (
 		%dk_call% dk_set os "win"
 		%dk_call% dk_set arch "x86_64"
-		%dk_call% dk_set env "mingw"
+		%dk_call% dk_set env "clang"
 	) else if "!input!" equ "34" (
 		%dk_call% dk_set os "win"
 		%dk_call% dk_set arch "x86_64"
-		%dk_call% dk_set env "clang"
+		%dk_call% dk_set env "mingw"
 	) else if "!input!" equ "35" (
 		%dk_call% dk_set os "win"
 		%dk_call% dk_set arch "x86_64"
-		%dk_call% dk_set env "ucrt"
+		%dk_call% dk_set env "msvc"
 	) else if "!input!" equ "36" (
 		%dk_call% dk_set os "win"
 		%dk_call% dk_set arch "x86_64"
-		%dk_call% dk_set env "msvc"
+		%dk_call% dk_set env "ucrt"
 	) else if "!input!" equ "37" (
 		%dk_call% dk_exit 0
 	) else (

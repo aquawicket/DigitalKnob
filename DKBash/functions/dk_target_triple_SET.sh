@@ -42,13 +42,13 @@ dk_target_triple_SET() {
 	dk_call dk_echo "27) raspberry_x86_64_clang"
 	dk_call dk_echo "28) windows_arm32_clang"
 	dk_call dk_echo "29) windows_arm64_clang"
-	dk_call dk_echo "30) windows_x86_gcc"
-	dk_call dk_echo "31) windows_x86_clang"
+	dk_call dk_echo "30) windows_x86_clang"
+	dk_call dk_echo "31) windows_x86_gcc"
 	dk_call dk_echo "32) windows_x86_msvc"
-	dk_call dk_echo "33) windows_x86_64_gcc"
-	dk_call dk_echo "34) windows_x86_64_clang"
-	dk_call dk_echo "35) windows_x86_64_ucrt"
-	dk_call dk_echo "36) windows_x86_64_msvc"
+	dk_call dk_echo "33) windows_x86_64_clang"
+	dk_call dk_echo "34) windows_x86_64_gcc"
+	dk_call dk_echo "35) windows_x86_64_msvc"
+	dk_call dk_echo "36) windows_x86_64_ucrt"
 	dk_call dk_echo "37) Go Back"
 	dk_call dk_echo "38) Exit"
 	dk_call dk_echo ""
@@ -181,11 +181,11 @@ dk_target_triple_SET() {
 	elif [ "${input}" = "30" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86"
-		dk_call dk_set env "mingw"
+		dk_call dk_set env "clang"
 	elif [ "${input}" = "31" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86"
-		dk_call dk_set env "clang"
+		dk_call dk_set env "mingw"
 	elif [ "${input}" = "32" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86"
@@ -193,19 +193,19 @@ dk_target_triple_SET() {
 	elif [ "${input}" = "33" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "mingw"
+		dk_call dk_set env "clang"
 	elif [ "${input}" = "34" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "clang"
+		dk_call dk_set env "mingw"
 	elif [ "${input}" = "35" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "ucrt"
+		dk_call dk_set env "msvc"
 	elif [ "${input}" = "36" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "msvc"
+		dk_call dk_set env "ucrt"
 	elif [ "${input}" = "37" ]; then
 		unset target_app
 		return 1
