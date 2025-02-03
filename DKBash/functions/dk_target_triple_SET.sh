@@ -31,7 +31,7 @@ dk_target_triple_SET() {
 	dk_call dk_echo "16) linux_arm32"
 	dk_call dk_echo "17) linux_arm64"
 	dk_call dk_echo "18) linux_x86"
-	dk_call dk_echo "19) linux_x86_64"
+	dk_call dk_echo "19) linux_x86_64_clang"
 	dk_call dk_echo "20) mac_arm32"
 	dk_call dk_echo "21) mac_arm64"
 	dk_call dk_echo "22) mac_x86"
@@ -121,6 +121,7 @@ dk_target_triple_SET() {
 	elif [ "${input}" = "19" ]; then
 		dk_call dk_set os "linux"
 		dk_call dk_set arch "x86_64"
+		dk_call dk_set env "clang"
 	elif [ "${input}" = "20" ]; then
 		dk_call dk_set os "mac"
 		dk_call dk_set arch "arm32"
