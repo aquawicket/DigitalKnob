@@ -9,7 +9,8 @@ function Global:dk_pinToQuickAccess() {
 	dk_debugFunc 0 99
 	
 	$path = $args[0];
-	dk_echo "dk_pinToQuickAccess($path)"
+	$path = ${path} -replace '/', '\';
+	#dk_echo "dk_pinToQuickAccess($path)"
 	
 	$quickAccess = New-object -com shell.application;
 	#$quickAccess.Namespace("$path").Self.InvokeVerb("pintohome");

@@ -9,8 +9,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_callPowershell
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 1 99
+	
+	%dk_call% dk_validate DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
 
-	if not exist "%DKPOWERSHELL_DIR%"					(set "DKPOWERSHELL_DIR=%USERPROFILE%/digitalknob/Development/DKPowershell")
+	if not exist "%DKPOWERSHELL_DIR%"					(set "DKPOWERSHELL_DIR=%DKHOME_DIR%/digitalknob/Development/DKPowershell")
 	if not exist "%DKPOWERSHELL_DIR%" 					(mkdir "%DKPOWERSHELL_DIR%")
 	
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(set "DKPOWERSHELL_FUNCTIONS_DIR=%DKPOWERSHELL_DIR%/functions")
