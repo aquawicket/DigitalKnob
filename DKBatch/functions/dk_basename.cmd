@@ -14,14 +14,9 @@ setlocal
 
     set "pathname=%1"
     set "pathname=%pathname:"=%"
-	set "pathname=%pathname:/=\%"
-    if "%pathname:~-1%"=="\" set "pathname=%pathname:~0,-1%"
 	
 	for %%Z in ("%pathname%") do set "dk_basename=%%~nxZ"
 	
-	if "%dk_basename:~-1%"=="\" set "dk_basename=%dk_basename:~0,-1%"
-::	set "dk_basename=%dk_basename:\=/%"
-
     endlocal & (
 		set "dk_basename=%dk_basename%"
 		if "%2" neq "" set "%2=%dk_basename%"
@@ -37,6 +32,19 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
+	%dk_call% dk_set myPath "C:\Windows\System32\test.v123.zip" 
+    %dk_call% dk_basename "%myPath%"
+    %dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+    
+    %dk_call% dk_set myPath "TEST" 
+    %dk_call% dk_basename "%myPath%"
+    %dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+    
+    %dk_call% dk_set myPath "https:\\ia802200.us.archive.org\22\items\windows-7-pesuper-lite-50-mb\Windows7PESuper%20Lite50MB.iso"
+    %dk_call% dk_basename "%myPath%"
+    %dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+	
+	
     %dk_call% dk_set myPath "C:/Windows/System32/test.v123.zip" 
     %dk_call% dk_basename "%myPath%"
     %dk_call% dk_echo "%myPath%: basename = %dk_basename%"

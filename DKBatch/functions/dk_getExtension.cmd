@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_getExtension(path rtn_var)
+::# dk_getExtension(<pathname>, <rtn_var>:optional)
 ::#
 ::#
 :dk_getExtension
@@ -14,24 +14,29 @@ setlocal
 	set "ext[2]=tar.gz"
 	set "ext[3]=tar.xz"
 	
-	set "_input_=%~nx1"
-	set "_input_=%_input_:/=\%"
-	set "_input_=%_input_:"=%"
-    if "%_input_:~-1%"=="\" set "_input_=%_input_:~0,-1%"
-    if "%_input_:~-1%"=="/" set "_input_=%_input_:~0,-1%"
+	set "pathname=%~nx1"
+	set "pathname=%pathname:/=\%"
+	set "pathname=%pathname:"=%"
+    if "%pathname:~-1%"=="\" set "pathname=%pathname:~0,-1%"
+    if "%pathname:~-1%"=="/" set "pathname=%pathname:~0,-1%"
 	
-	set "_extension_="
+	set "dk_getExtension="
 	for /L %%i in (1,1,10) do (
-		set "_input_=!_input_:*.=!"
-		for /L %%i in (1,1,3) do if /I "!_input_!" equ "!ext[%%i]!" (
-			set "_extension_=.!ext[%%i]!"
+		set "pathname=!pathname:*.=!"
+		for /L %%i in (1,1,3) do if /I "!pathname!" equ "!ext[%%i]!" (
+			set "dk_getExtension=.!ext[%%i]!"
 			goto endloop
 		)
 	)
 	:endloop
+	
 	:: If a multi-dot extension was not found, just return the single dot extension
-	if not defined _extension_ set "_extension_=.!_input_!"
-    endlocal & set "%2=%_extension_%"
+	if not defined dk_getExtension set "dk_getExtension=.!pathname!"
+	
+    endlocal & (
+		set "dk_getExtension=%dk_getExtension%"
+		if "%2" neq "" set "%2=%dk_getExtension%"
+	)
 %endfunction%
 
 
