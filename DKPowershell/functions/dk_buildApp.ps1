@@ -10,7 +10,7 @@ function Global:dk_buildApp() {
 
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "****** Building $target_app - $target_triple - $target_type - $DKLEVEL ******"
+	dk_call dk_echo "****** Building $target_app - $target_triple - $target_type - $target_level ******"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 	
@@ -35,7 +35,7 @@ function Global:dk_buildApp() {
 	
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "****** Done Building $target_app - $target_triple - $target_type - $DKLEVEL ******"
+	dk_call dk_echo "****** Done Building $target_app - $target_triple - $target_type - $target_level ******"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 }

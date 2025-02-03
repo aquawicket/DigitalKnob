@@ -10,7 +10,7 @@ function Global:dk_generate() {
 	
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "     Generating $target_app - $target_triple - $target_type - $DKLEVEL"
+	dk_call dk_echo "     Generating $target_app - $target_triple - $target_type - $target_level"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
@@ -32,11 +32,11 @@ function Global:dk_generate() {
 	$CMAKE_TARGET_PATH = $CMAKE_TARGET_PATH -replace '\\', '/';
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
-	$DKLEVEL = "RebuildAll"
+	$target_level = "RebuildAll"
 	$DKLINK = "Static"
 	
 	$CMAKE_ARGS = @()
-	if($target_triple -eq "android_arm32")  { $CMAKE_ARGS += "-G Unix Makefiles" }
+	if($target_triple -eq "android_arm32")  	{ $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($target_triple -eq "android_arm64")  { $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($target_triple -eq "emscripten")     { $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($target_triple -eq "ios_arm32")      { $CMAKE_ARGS += "-G Xcode" }
@@ -112,13 +112,13 @@ function Global:dk_generate() {
 		$CMAKE_ARGS += "-DDEBUG=ON"
 		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
-	if($DKLEVEL -eq "Build"){ 
+	if($target_level -eq "Build"){ 
 		$CMAKE_ARGS += "-DBUILD=ON"
 	}
-	if($DKLEVEL -eq "Rebuild"){ 
+	if($target_level -eq "Rebuild"){ 
 		$CMAKE_ARGS += "-DREBUILD=ON"
 	}
-	if($DKLEVEL -eq "RebuildAll"){ 
+	if($target_level -eq "RebuildAll"){ 
 		$CMAKE_ARGS += "-DREBUILDALL=ON"
 	}
 	if($DKLINK -eq "Static"){ 

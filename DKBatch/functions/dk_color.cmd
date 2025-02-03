@@ -46,10 +46,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 )						&:: Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
 		(set VT=)		&:: Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
 		(set FF=)		&:: Form Feed - Move down to the top of the next page.
-		(set CR=^^^
-%= This creates an escaped Line Feed - DO NOT ALTER =%
-)						&:: Carriage Return - Move to column zero while staying on the same line.
-
+		for /f %%a in ('copy /Z "%~dpf0" nul') do (set CR=%%a)	 &:: Carriage Return - Move to column zero while staying on the same line.
 		(set SO=)		&:: Shift Out - Switch to an alternative character set.
 		(set SI=)		&:: Shift In - Return to regular character set after SO.
 		(set DLE=)		&:: Data Link Escape - Cause a number of contiguously following characters to be interpreted in some different way

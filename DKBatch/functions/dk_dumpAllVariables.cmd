@@ -7,7 +7,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_dumpAllVariables
 setlocal
 	%dk_call% dk_debugFunc 1
-	for %%f in ("%~1") do (
+	
+	set "_file_=%~1"
+	set "_file_=%_file_:/=\%"
+	
+	for %%f in ("_file_") do (
         start /i /wait /min "" "%comspec%" /c">""%%~ff"" set "	
     )
 %endfunction%

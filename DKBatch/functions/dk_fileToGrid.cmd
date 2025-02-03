@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_fileToGrid
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2
 
     set "_file_=%~1"

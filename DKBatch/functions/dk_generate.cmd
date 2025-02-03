@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_generate
-    %dk_call% dk_debugFunc 0
  ::setlocal
+    %dk_call% dk_debugFunc 0
 
 	%dk_call% dk_title "Generating %target_app% - %target_triple% - %target_type%"
     %dk_call% dk_echo
@@ -25,18 +25,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "CMAKE_TARGET_PATH=!TARGET_PATH:\=/!"
 
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
-    set "DKLEVEL=RebuildAll"
+    set "target_level=RebuildAll"
     set "DKLINK=Static"
 
     set "CMAKE_ARGS="
-    if "%target_type%"=="Debug"      (%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
-    if "%target_type%"=="Release"    %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
-    if "%target_type%"=="All"        (%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-    if "%DKLEVEL%"=="Build"          %dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON
-    if "%DKLEVEL%"=="Rebuild"        %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON
-    if "%DKLEVEL%"=="RebuildAll"     %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON
-    if "%DKLINK%"=="Static"          %dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON
-    if "%DKLINK%"=="Shared"          %dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF
+    if "%target_type%"=="Debug"      	(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
+    if "%target_type%"=="Release"    	%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    if "%target_type%"=="All"        	(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+    if "%target_level%"=="Build"      	%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON
+    if "%target_level%"=="Rebuild"    	%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON
+    if "%target_level%"=="RebuildAll"   %dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON
+    if "%DKLINK%"=="Static"          	%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON
+    if "%DKLINK%"=="Shared"          	%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF
     ::if "%target_triple%==emscripten" %dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON
 
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"

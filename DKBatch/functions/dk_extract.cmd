@@ -9,7 +9,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 setlocal
     %dk_call% dk_debugFunc 1 2
 
-	if not exist "%~1" %dk_call% dk_error "%~1 does not exist"
+	set "_file_=%~1"
+	set "_file_=%_file_:/=\%"
+	
+	if not exist "%_file_%" %dk_call% dk_error "%~1 does not exist"
 	 
     :: if the dest isn't provided, we should extract to a folder named the same as the file
     :: in the same diretory the archive file is in.
@@ -17,9 +20,9 @@ setlocal
     ::if "%__ARGC__%" equ "2" goto twoParams
 
     ::### handle 1 parameter
-    %dk_call% dk_basename "%~1" basename
+    %dk_call% dk_basename "%_file_%" basename
     %dk_call% dk_removeExtension "%basename%" basename
-    %dk_call% dk_dirname "%~1" dest      &:: extract contents to same directoy
+    %dk_call% dk_dirname "%_file_%" dest      &:: extract contents to same directoy
     set "dest=%dest%\%basename%"         &:: extract contents to folder within same directory
 	
 	%dk_call% dk_info "Extracting %~1 to %dest%. . ."
@@ -38,7 +41,7 @@ setlocal
 	::if not exist "%~2" %dk_call% dk_callDKPowershell dk_extract %*
     
     :: try tar
-    if not exist "%~2" %dk_call% dk_makeDirectory "%2" && tar --help && tar -xf "%~1" -C "%~2"
+    if not exist "%~2" %dk_call% dk_makeDirectory "%2" && tar --help && tar -xf "%_file_%" -C "%~2"
 %endfunction%
 
 

@@ -20,8 +20,10 @@ setlocal
     ::%if_NDE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=%_message_:~1,-1%"
     ::%if_DE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
         
-	if not defined CR  for /f %%a in ('copy /Z "%~dpf0" nul') do set "CR=%%a"
+	::if not defined CR  for /f %%a in ('copy /Z "%~dpf0" nul') do set "CR=%%a"
+	for /f %%a in ('copy /Z "%~dpf0" nul') do set "CR=%%a"
 	set /P "=%_message_%                                          !CR!" <nul
+	(call )
 %endfunction%
 
 
@@ -37,17 +39,17 @@ setlocal
     %dk_call% dk_echoReplace
     %dk_call% dk_echoReplace ""
     %dk_call% dk_echoReplace "This is a dk_echoReplace line"
-	%dk_call% dk_sleep 1000
+	%dk_call% dk_sleep 1
 	%dk_call% dk_echoReplace "Another dk_echoReplace line"
-	%dk_call% dk_sleep 1000
+	%dk_call% dk_sleep 1
 	echo This is a normal echo commmand
-	%dk_call% dk_sleep 1000
+	%dk_call% dk_sleep 1
 	%dk_call% dk_echoReplace "and another dk_echoReplace line"
-	%dk_call% dk_sleep 1000
+	%dk_call% dk_sleep 1
     %dk_call% dk_echoReplace """This is a dk_echoReplace line with quotes"""
-	%dk_call% dk_sleep 1000
+	%dk_call% dk_sleep 1
     %dk_call% dk_echoReplace "This is %red%dk_echoReplace %blue%with color%clr%"
-	%dk_call% dk_sleep 1000
+	%dk_call% dk_sleep 1
 	%dk_call% dk_echoReplace "The last dk_echoReplace line loses it's first character"
-	%dk_call% dk_sleep 3000
+	%dk_call% dk_sleep 3
 %endfunction%

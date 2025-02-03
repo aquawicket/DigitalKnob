@@ -10,7 +10,7 @@ setlocal
 
     %dk_call% dk_echo
     %dk_call% dk_info "####################################################################"
-    %dk_call% dk_info "****** Done Building %target_app% - %target_triple% - %target_type% - %DKLEVEL% ******"
+    %dk_call% dk_info "****** Done Building %target_app% - %target_triple% - %target_type% - %target_level% ******"
     %dk_call% dk_info "####################################################################"
     %dk_call% dk_echo
         

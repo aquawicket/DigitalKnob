@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::dk_findProgram (<VAR> name [path1 path2 ...])
+::dk_findProgram(<VAR> name [path1 path2 ...])
 ::#
 ::#
 :dk_findProgram
@@ -47,7 +47,7 @@ setlocal
     %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
     %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 	
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "C:\Windows\System32"
+	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "C:/Windows/System32"
 	%dk_call% dk_printVar CMD_EXE
 	%dk_call% dk_findProgram CMD_EXE "cmd.exe"
 	%dk_call% dk_printVar CMD_EXE

@@ -215,7 +215,8 @@ set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
 			echo:
 			echo Exit code: %exit_code%
 			echo:
-			if "%exit_code%" neq "0" pause
+			::if "%exit_code%" neq "0" pause
+			pause
 			exit %exit_code%
     :end_dk_reload
 	

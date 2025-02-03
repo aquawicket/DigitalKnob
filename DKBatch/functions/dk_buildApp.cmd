@@ -12,7 +12,7 @@ setlocal
 	%dk_call% dk_title "Generating %target_app% - %target_triple% - %target_type%"
     %dk_call% dk_echo
     %dk_call% dk_echo "###############################################################"
-    %dk_call% dk_echo "****** Building %target_app% - %target_triple% - %target_type% - %DKLEVEL% ******"
+    %dk_call% dk_echo "****** Building %target_app% - %target_triple% - %target_type% - %target_level% ******"
     %dk_call% dk_echo "###############################################################"
     %dk_call% dk_echo
 
@@ -23,7 +23,7 @@ setlocal
 
     %dk_call% dk_echo
     %dk_call% dk_echo "####################################################################"
-    %dk_call% dk_echo "****** Done Building %target_app% - %target_triple% - %target_type% - %DKLEVEL% ******"
+    %dk_call% dk_echo "****** Done Building %target_app% - %target_triple% - %target_type% - %target_level% ******"
     %dk_call% dk_echo "####################################################################"
     %dk_call% dk_echo
 %endfunction%

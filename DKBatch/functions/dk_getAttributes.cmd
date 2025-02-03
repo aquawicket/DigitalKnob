@@ -2,17 +2,24 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_getAttributes(path rtn_var)
+::# dk_getAttributes(<pathname>, <rtn_var>:optional)
 ::#
 :dk_getAttributes
 setlocal
 	%dk_call% dk_debugFunc 2
 
-    set "_input_=%1"
-    set "_input_=%_input_:"=%"
-    if "%_input_:~-1%"=="\" set "_input_=%_input_:~0,-1%"
-    if "%_input_:~-1%"=="/" set "_input_=%_input_:~0,-1%"
-    endlocal & for %%Z in ("%_input_%") do set "%2=%%~aZ"
+    set "pathname=%1"
+	set "pathname=%pathname:"=%"
+	set "pathname=%pathname:/=\%"
+    if "%pathname:~-1%"=="\"   set "pathname=%pathname:~0,-1%"
+    
+	for %%Z in ("%pathname%") do set "dk_getAttributes=%%~aZ"
+::	set "dk_getAttributes=%dk_getAttributes:\=/%"
+	
+    endlocal & (
+		set "dk_getAttributes=%dk_getAttributes%"
+		if "%2" neq "" set "%2=%dk_getAttributes%"
+	)	
 %endfunction%
 
 

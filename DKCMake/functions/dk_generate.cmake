@@ -11,7 +11,7 @@ function(dk_generate)
 
 	dk_echo("")
 	dk_echo("########################################################################")
-	dk_echo("     Generating ${target_app} - ${target_triple} - ${target_type} - ${DKLEVEL}")
+	dk_echo("     Generating ${target_app} - ${target_triple} - ${target_type} - ${target_level}")
 	dk_echo("########################################################################")
 	dk_echo("")
 	
@@ -31,7 +31,7 @@ function(dk_generate)
 	#dk_printVar(CMAKE_TARGET_PATH)
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
-	set(DKLEVEL "RebuildAll")
+	set(target_level "RebuildAll")
 	set(DKLINK "Static")
 	
 	set(CMAKE_ARGS "")
@@ -48,14 +48,14 @@ function(dk_generate)
 	endif()
 	
 	##############################################################
-	if("${DKLEVEL}" STREQUAL "Build")
+	if("${target_level}" STREQUAL "Build")
 		dk_arrayPush(CMAKE_ARGS "-DBUILD=ON")
-	elseif("${DKLEVEL}" STREQUAL "Rebuild")
+	elseif("${target_level}" STREQUAL "Rebuild")
 		dk_arrayPush(CMAKE_ARGS "-DREBUILD=ON")
-	elseif("${DKLEVEL}" STREQUAL "RebuildAll")
+	elseif("${target_level}" STREQUAL "RebuildAll")
 		dk_arrayPush(CMAKE_ARGS "-DREBUILDALL=ON")
 	else()
-		dk_error("DKLEVEL:${DKLEVEL} is invalid")
+		dk_error("target_level:${target_level} is invalid")
 	endif()
 	
 	if("${DKLINK}" STREQUAL "Static")

@@ -11,7 +11,7 @@ function(dk_buildApp)
 
 	dk_echo()
 	dk_echo("###############################################################################")
-	dk_echo("****** Building ${target_app} - ${target_triple} - ${target_type} - ${DKLEVEL} ******")
+	dk_echo("****** Building ${target_app} - ${target_triple} - ${target_type} - ${target_level} ******")
 	dk_echo("###############################################################################")
 	dk_echo()
 	
@@ -37,7 +37,7 @@ function(dk_buildApp)
 	
 	dk_echo()
 	dk_echo("####################################################################################")
-	dk_echo("****** Done Building ${target_app} - ${target_triple} - ${target_type} - ${DKLEVEL} ******")
+	dk_echo("****** Done Building ${target_app} - ${target_triple} - ${target_type} - ${target_level} ******")
 	dk_echo("####################################################################################")
 	dk_echo()
 endfunction()

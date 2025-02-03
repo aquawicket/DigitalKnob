@@ -2,15 +2,16 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::##################################################################################
-::# dk_fileContains(file, string)
+::# dk_fileContains(<file>, <string>, optional:<rtn_var>)
 ::#
 ::#
 :dk_fileContains
 setlocal
-	%dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 2 3
 
 	set "_file_=%~1"
 	set "_file_=%_file_:/=\%"
+	
     >nul findstr /c:"%~2" "%_file_%" &&  (
         if "%~3" neq "" (endlocal & set "%3=true")
         exit /b 0

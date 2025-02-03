@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_decimalToHex
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1
 
     set "_LOOKUP_=0123456789abcdef"

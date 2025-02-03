@@ -24,6 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	rem if not defined HOMEPATH         !dk_call! dk_warning "HOMEPATH is invalid"
 	
 	set "DKHOME_DIR=%USERPROFILE%"
+	set "DKHOME_DIR=%DKHOME_DIR:\=/%"
 	
 	rem	if exist "!WSLPATH_EXE!"        !dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
 
@@ -47,6 +48,6 @@ setlocal
 	
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Setting DKHOME_DIR . . ."
-	%dk_call% dk_DKHOME_DIR "C:\"
+	%dk_call% dk_DKHOME_DIR "C:/"
 	%dk_call% dk_printVar DKHOME_DIR 
 %endfunction%

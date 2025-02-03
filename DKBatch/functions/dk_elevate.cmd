@@ -7,7 +7,6 @@ if %ERRORLEVEL% equ 0 goto elevated
 ::setlocal
 	::%dk_call% dk_debugFunc 0
 	
- 
     if "%~2" == "gotPrivileges" goto gotPrivileges
         echo "elevating permissions . . ."
         setlocal DisableDelayedExpansion

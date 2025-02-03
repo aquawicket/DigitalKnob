@@ -11,7 +11,6 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
 	%dk_call% dk_debugFunc 0 1
  
 	if "%~1" gtr "%EXIT_CODE%" %dk_call% dk_set EXIT_CODE %~1
-    ::echo dk_exit %~1
 	
     ::if "%EXIT_CODE%" equ "" set "EXIT_CODE=0"
 	if ERRORLEVEL 1 set "EXIT_CODE=%errorlevel%"
@@ -20,8 +19,6 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
     
     if "%PAUSE_ON_EXIT%" equ "1" %dk_call% dk_echo "*** PAUSE_ON_EXIT: EXIT_CODE:%EXIT_CODE% ***" && %dk_call% dk_pause "Press any key to exit . . ."
     
-	::echo exit_code = %exit_code%
-	::echo exit_code:%exit_code%
     exit %EXIT_CODE%
 %endfunction%
 

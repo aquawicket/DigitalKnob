@@ -17,7 +17,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::############ GET ############
 	%dk_call% dk_validatePath DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
+	::set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
+	set "DKTOOLS_DIR=%DIGITALKNOB_DIR%/DKTools"
 		
 	if NOT exist "%DKTOOLS_DIR%"    %dk_call% dk_makeDirectory "%DKTOOLS_DIR%"
 	
@@ -41,6 +42,6 @@ setlocal
 	
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Setting DKTOOLS_DIR . . ."
-	%dk_call% dk_DKTOOLS_DIR "C:\DK\DKTools"
+	%dk_call% dk_DKTOOLS_DIR "C:/DK/DKTools"
 	%dk_call% dk_printVar DKTOOLS_DIR 
 %endfunction%

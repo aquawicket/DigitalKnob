@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::##################################################################################
-::# dk_defined(<variable> rtn_var)
+::# dk_defined(<variable>, optional:<rtn_var>)
 ::#
 :dk_defined
 setlocal
@@ -61,5 +61,7 @@ setlocal
     %dk_call% dk_echo
     %dk_call% dk_unset _variable_
     %dk_call% dk_defined _variable_ && (echo _variable_ is defined) || (echo _variable_ is NOT defined)
-    ::FIXME: ERRORLEVEL is still 1
+    
+	::FIXME: ERRORLEVEL is still 1
+	(call )
 %endfunction%

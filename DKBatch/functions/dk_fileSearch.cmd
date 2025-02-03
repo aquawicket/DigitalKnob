@@ -2,13 +2,13 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::##################################################################################
-::# dk_fileSearch(base_path, file_pattern, search_depth, rtn_var)
+::# dk_fileSearch(<base_path>, <file_pattern>, <search_depth>, optional:<rtn_var>)
 ::#
 ::#
 ::#   Example:  %dk_call% dk_fileSearch "C:\Users\Administrator\digitalknob" "\bin\bash.exe" 7 BASH_EXE
 :dk_fileSearch
-setlocal
-	%dk_call% dk_debugFunc 4
+setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 3 4
 	set "base_path=%~1"
 	set "base_path=%base_path:/=\%"
 	set "file_pattern=%~2"
@@ -34,12 +34,15 @@ setlocal
 		set "string=%%g"
 		if not "!string:%file_pattern%=!"=="!string!" (
 			echo *** %%g
-			set "output=%%g"
+			set "dk_fileSearch=%%g"
 		) else (
 			echo %%g
 		)
 	)
-	endlocal & set "%4=%output%"
+	endlocal & (
+		set "dk_fileSearch=%dk_fileSearch%"
+		if "%~4" neq "" set "%4=%dk_fileSearch%"
+	)
 %endfunction%
 
 

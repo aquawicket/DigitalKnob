@@ -17,7 +17,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::############ GET ############
 	%dk_call% dk_validatePath DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
-	set "DKDESKTOP_DIR=%DKHOME_DIR%\Desktop"
+	::set "DKDESKTOP_DIR=%DKHOME_DIR%\Desktop"
+	set "DKDESKTOP_DIR=%DKHOME_DIR%/Desktop"
 	
 	::if NOT exist "%DKDESKTOP_DIR%"   %dk_call% dk_makeDirectory "%DKDESKTOP_DIR%"
 	
@@ -41,6 +42,6 @@ setlocal
 	
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Setting DKDESKTOP_DIR . . ."
-	%dk_call% dk_DKDESKTOP_DIR "C:\Desktop"
+	%dk_call% dk_DKDESKTOP_DIR "C:/Desktop"
 	%dk_call% dk_printVar DKDESKTOP_DIR 
 %endfunction%
