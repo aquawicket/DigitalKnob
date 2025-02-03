@@ -7,15 +7,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 # https://packages.msys2.org/package/mingw-w64-x86_64-gcc?repo=mingw64
 
-dk_validate(target_triple "dk_target_triple")
+dk_validate(target_triple "dk_target_triple()")
 
 if(clang OR mingw OR ucrt)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 endif()
 
 dk_installPackage(gcc)
-dk_installPackage(g++)
+#dk_installPackage(g++)
 
+dk_set(GCC_EXE 					"${${MSYSTEM}_BIN}/gcc.exe")
+dk_set(GXX_EXE 					"${${MSYSTEM}_BIN}/g++.exe")
 #if(win_x86_clang)
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clang32/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clang32/bin/g++.exe)

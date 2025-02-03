@@ -10,14 +10,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_debugFunc 1 4
 
     %dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
-    if not exist "%DKIMPORTS_DIR%"          %dk_call% dk_error "%__FUNCTION__%: could not locate DKIMPORTS_DIR"
+	%dk_call% dk_assertPath DKIMPORTS_DIR
     
     %dk_call% dk_validate DKCMAKE_DIR      "%dk_call% dk_DKBRANCH_DIR"
-    if not exist "%DKCMAKE_DIR%"            %dk_call% dk_error "%__FUNCTION__%: could not locate DKCMAKE_DIR"
+    %dk_call% dk_assertPath DKCMAKE_DIR
 
     %dk_call% dk_validate CMAKE_EXE        "%dk_call% %DKIMPORTS_DIR%\cmake\dk_install.cmd"
-
-    if not exist "%CMAKE_EXE%"              %dk_call% dk_error "%__FUNCTION__%: could not locate CMAKE_EXE" 
+	%dk_call% dk_assertPath CMAKE_EXE
 
     %dk_call% dk_replaceAll "%~1" "\" "/" DKCOMMAND
     ::%dk_call% dk_printVar DKCOMMAND

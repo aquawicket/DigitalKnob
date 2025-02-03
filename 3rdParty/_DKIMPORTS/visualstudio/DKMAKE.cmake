@@ -37,7 +37,7 @@ dk_set(VS_MAJOR 			17)													# 17
 
 ###### VS_INSTALL_PATH ######
 if(NOT VS_INSTALL_PATH)
-	set(VS_INSTALL_PATH		"C:\\Program Files (x86)\\Microsoft Visual Studio")
+	set(VS_INSTALL_PATH		"C:/Program Files (x86)/Microsoft Visual Studio")
 else()
 	set(VS_INSTALL_FLAG		--path install=${VS_INSTALL_PATH})
 endif()
@@ -46,7 +46,7 @@ endif()
 if(NOT VS_CACHE_PATH)
 	#dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 	#set(VS_CACHE_PATH	"${DKDOWNLOAD_DIR}/VS")
-	set(VS_CACHE_PATH	"C:\\Program Files \(x86\)\\Microsoft Visual Studio\\DL")
+	set(VS_CACHE_PATH	"C:/Program Files \(x86\)/Microsoft Visual Studio/DL")
 endif()
 set(VS_CACHE_FLAG			--path cache=${VS_CACHE_PATH})		
 

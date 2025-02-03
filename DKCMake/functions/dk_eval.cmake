@@ -18,6 +18,7 @@ macro(dk_eval)
 	#dk_replaceAll("${code}"  "'"  "\""  code)
 	
 	if(COMMAND cmake_language)
+		message("dk_eval(${code})")
 		cmake_language(EVAL CODE ${code})
 	else()
 		# Evaluate expression (faster version)

@@ -13,7 +13,6 @@ setlocal enableDelayedExpansion
     set /a "i=0"
     for /f "usebackq delims=" %%Z in (`"%~1" %~2 ^& call echo %%^^errorlevel%%`) do (
         set "line[!i!]=%%Z"
-		rem echo !i! = %%Z
 		set /a "i+=1"
     )
 	%COMSPEC% /c exit /b 0
@@ -23,7 +22,7 @@ setlocal enableDelayedExpansion
 	set /a numLines=i-1
 	set /a errorcode = !line[%i%]!
     set "line[%i%]="           &:: delete the error line from the array
-    set "lastline=!line[%numLines%]!"
+    set "dk_commandToVariable=!line[%numLines%]!"
 	
     :: WARNING
     ::%dk_call% dk_todo "dk_commandToVariable only returns the last line, or, array item from the command.
@@ -32,15 +31,20 @@ setlocal enableDelayedExpansion
 					echo ###############################
 	if "%~3" neq "" echo ## command:^> '%~1 %~2'
 	if "%~3" equ "" echo ## command:^> '%~1'
-					echo ##  output: %lastline%
+					echo ##  output: %dk_commandToVariable%
 					echo ## rtncode: %errorcode%
 					echo:##
 	::##################################################
 
-	
     :: return the last line from the programs output
-    if "%~3" neq "" endlocal & set "%3=%lastline%" && %return%
-    endlocal & set "%2=%lastline%"
+	endlocal & (
+		set "dk_commandToVariable=%dk_commandToVariable%"
+		if "%~3" neq "" (
+			set "%3=%dk_commandToVariable%"
+		) else (
+			if "%~2" neq "" set "%2=%dk_commandToVariable%"
+		)
+	)
 %endfunction%
     
     
@@ -57,4 +61,5 @@ setlocal
     %dk_call% dk_set myCommand ver
     %dk_call% dk_commandToVariable "%myCommand%" myVariable
     %dk_call% dk_printVar myVariable
+	%dk_call% dk_printVar dk_commandToVariable
 %endfunction%

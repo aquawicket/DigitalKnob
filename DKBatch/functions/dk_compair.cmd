@@ -10,9 +10,12 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	set "fileA=%~1"
+	set "fileA=%fileA:/=\%"
+	
 	set "fileB=%~2"
+	set "fileB=%fileB:/=\%"
+	
     fc %fileA% %fileB% > nul && (exit /b 0) || (exit /b 1)
-
 %endfunction%
 
 
@@ -25,5 +28,12 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_compair "C:\Windows\notepad.exe" "C:\Windows\splwow64.exe" && (echo files are the same) || (echo files are different)
+	%dk_call% dk_set file1 "C:/Windows/notepad.exe"
+	%dk_call% dk_set file2 "C:/Windows/notepad.exe"
+	%dk_call% dk_compair "%file1%" "%file2%" && (echo %file1% %file2% files are the same) || (echo %file1% %file2% files are different)
+	
+	%dk_call% dk_set file1 "C:/Windows/notepad.exe"
+	%dk_call% dk_set file2 "C:/Windows/regedit.exe"
+    %dk_call% dk_compair "%file1%" "%file2%" && (echo %file1% %file2% files are the same) || (echo %file1% %file2% files are different)
+	(call )
 %endfunction%
