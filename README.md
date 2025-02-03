@@ -305,12 +305,12 @@ zstd
 
 # How to build
 ### Windows Host
-Download and run [DKBuilder.cmd](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder.cmd)
+Download and run [DKBuilder.cmd](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd)
    or
-Download and run [DKBuilder.ps1](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKPowershell/functions/DKBuilder.ps1)
+Download and run [DKBuilder.ps1](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1)
 
 ### Unix Host
-Download [DKBuilder.sh](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DKBuilder.sh) <br>
+Download [DKBuilder.sh](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/apps/DKBuilder/DKBuilder.sh) <br>
 From terminal run 'chmod 777 /path/to/DKBuilder.sh' <br>
 Run '/path/to/DKBuilder.sh'
 
