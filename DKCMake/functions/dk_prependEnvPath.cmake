@@ -12,7 +12,7 @@ function(dk_prependEnvPath)
     dk_assertPath("${ARGV0}")
 	set(inputPath "${ARGV0}")
 	
-	dk_getNativePath("${inputPath}" nativePath)
+	dk_nativePath("${inputPath}" nativePath)
 	if(ENV{PATH} MATCHES "${nativePath}")
 		dk_notice("${nativePath} is already in the PATH environment list\n")
 	else()

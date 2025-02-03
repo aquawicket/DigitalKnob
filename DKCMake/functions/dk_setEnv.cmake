@@ -15,7 +15,7 @@ function(dk_setEnv name value)
 	dk_debugFunc()
 	
 	if(EXISTS "${value}")
-		dk_getNativePath("${value}" value)
+		dk_nativePath("${value}" value)
 	endif()
 	if(DEFINED ENV{${name}})
 		if("$ENV{${name}}" STREQUAL "${value}")

@@ -22,7 +22,7 @@ dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 dk_set(NOTEPADPP_DIR ${DKTOOLS_DIR}/${NOTEPADPP_FOLDER})
 dk_import(${NOTEPADPP_DL} PATH ${NOTEPADPP_DIR})
 dk_set(NOTEPADPP_EXE "${NOTEPADPP_DIR}/notepad++.exe")
-#dk_getNativePath(${NOTEPADPP_EXE} NOTEPADPP_EXE_WINPATH)
+#dk_nativePath(${NOTEPADPP_EXE} NOTEPADPP_EXE_WINPATH)
 
 
 ### dark mode ###

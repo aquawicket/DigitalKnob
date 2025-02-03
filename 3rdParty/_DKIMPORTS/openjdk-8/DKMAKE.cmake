@@ -32,7 +32,7 @@ if(WIN_HOST)
 	set(ENV{JAVA_VERSION} 1.8.0_41)
 	
 	###### JAVA_HOME ######
-	dk_getNativePath("${OPENJDK_8_DIR}" ENV{JAVA_HOME})
+	dk_nativePath("${OPENJDK_8_DIR}" ENV{JAVA_HOME})
 	
 	###### JAVA Registry ######
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" /v CurrentVersion /t REG_SZ /d "$ENV{JAVA_VERSION}" /f)

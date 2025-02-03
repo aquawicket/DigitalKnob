@@ -59,7 +59,7 @@ if(WIN_HOST)
 	set(ENV{JAVA_VERSION} 11)
 	
 	###### JAVA_HOME ######
-	dk_getNativePath("${OPENJDK}" ENV{JAVA_HOME})
+	dk_nativePath("${OPENJDK}" ENV{JAVA_HOME})
 	
 	###### JAVA Registry ######
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" /v CurrentVersion /t REG_SZ /d "$ENV{JAVA_VERSION}" /f)

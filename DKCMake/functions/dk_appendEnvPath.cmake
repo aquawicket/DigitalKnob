@@ -13,7 +13,7 @@ function(dk_appendEnvPath)
 	
 	dk_assertPath(inputPath)
 
-	dk_getNativePath("${inputPath}" nativePath)
+	dk_nativePath("${inputPath}" nativePath)
 	
 	#dk_printVar(ENV{PATH})
 	string(FIND "$ENV{PATH}" "${nativePath}" hasPath)
