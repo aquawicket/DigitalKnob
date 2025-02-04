@@ -65,8 +65,10 @@ if(NOT EXISTS "${PYTHON_EXE}")
 	elseif(LINUX_HOST)
 		dk_import(${PYTHON_DL})
 		####   Code below used To run the command in a fresh environment    ####
-		#### exec env -i HOME="$HOME" PATH="$PATH" bash -l -c '>>COMMAND<<' ####  
-		execute_process(COMMAND exec env -i HOME="$HOME" PATH="$PATH" bash -l -c './configure --enable-optimizations' WORKING_DIRECTORY ${PYTHON_DIR})
+		#### exec env -i HOME="$HOME" PATH="$PATH" bash -l -c '>>COMMAND<<' ####
+		# './configure --enable-optimizations'
+		#execute_process(COMMAND bash -l -c './configure' WORKING_DIRECTORY "${PYTHON_DIR}")
+		execute_process(COMMAND exec env -i HOME="$ENV{HOME}" PATH="$ENV{PATH}" bash -l -c './configure' WORKING_DIRECTORY ${PYTHON_DIR})
 		execute_process(COMMAND make WORKING_DIRECTORY ${PYTHON_DIR})
 	else()
 		dk_installPackage(python)
@@ -94,7 +96,9 @@ if((NOT LINUX_HOST) AND (NOT ANDROID_HOST))
 	dk_assertPath(PYTHON_EXE)
 endif()
 
-dk_firewallAllow("Python" "${PYTHON_EXE}")
+if(WIN_HOST)
+	dk_firewallAllow("Python" "${PYTHON_EXE}")
+endif()
 
 ### FIXME: we can't have both python2 and python3 in the environment path 
 #dk_prependEnvPath("${PYTHON_DIR}")

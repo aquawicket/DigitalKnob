@@ -33,12 +33,23 @@ if(LINUX OR RASPBERRY)
 		endif()
 	endif()
 	
-	#dynamic linking
-	SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lX11")
+	###### DYNAMIC LINKING ######
+	#SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lX11")
 	#SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lXinerama")  # used by openscenegraph, moved to libxinerama-dev
 	
-	#static linking
-	#RASPBERRY_dk_lib(/usr/lib/arm-linux-gnueabihf/libX11.a)
-	#RASPBERRY_dk_lib(/usr/lib/arm-linux-gnueabihf/libxcb.a)
-	#RASPBERRY_dk_lib(/usr/lib/arm-linux-gnueabihf/libXau.a)
+	###### STATIC LINKING ######	
+	if(LINUX)
+		dk_lib(/usr/lib/x86_64-linux-gnu/libX11.a)
+		dk_lib(/usr/lib/x86_64-linux-gnu/libxcb.a)
+		dk_lib(/usr/lib/x86_64-linux-gnu/libXau.a)
+		dk_lib(/usr/lib/x86_64-linux-gnu/libXtst.a)
+		dk_lib(/usr/lib/x86_64-linux-gnu/libXdmcp.a)
+		dk_lib(/usr/lib/x86_64-linux-gnu/libXext.a)
+	endif()
+	if(RASPBERRY_dk_lib)
+		dk_lib(/usr/lib/arm-linux-gnueabihf/libX11.a)
+		dk_lib(/usr/lib/arm-linux-gnueabihf/libxcb.a)
+		dk_lib(/usr/lib/arm-linux-gnueabihf/libXau.a)
+		dk_lib(/usr/lib/arm-linux-gnueabihf/libXtst.a)
+	endif()
 endif()
