@@ -22,8 +22,7 @@ setlocal enableDelayedExpansion
 	if "%dk_realpath:~-1%"=="\" set "dk_realpath=%dk_realpath:~0,-1%"
 	
 ::	if defined fslashes (set dk_realpath=%dk_realpath:\=/%)
-
-	%dk_call% dk_assertPath %dk_realpath%
+::	%dk_call% dk_assertPath %dk_realpath%
 	
     endlocal & (
 		set "dk_realpath=%dk_realpath%"

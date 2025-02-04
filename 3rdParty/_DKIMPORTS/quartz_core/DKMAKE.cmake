@@ -5,8 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ quartz_core ############
 # https://developer.apple.com/documentation/quartzcore?language=objc
+
+dk_load(dk_builder)
 
 if(NOT APPLE)
 	dk_undepend(quartz_core)

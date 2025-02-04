@@ -5,7 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-###### libstdc++fs ######
+############ libstdc++fs ############
 dk_validate(triple "dk_target_triple()")
 
 

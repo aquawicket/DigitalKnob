@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ m ############
 # https://sourceware.org/newlib/libm.html
 
 dk_validate(triple "dk_target_triple()")

@@ -5,9 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ libb2 ############
 # https://github.com/BLAKE2/libb2.git
 
+dk_load(dk_builder)
 
 ### IMPORT ###
 #dk_import(https://github.com/BLAKE2/libb2.git)

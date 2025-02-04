@@ -5,6 +5,8 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ pdh ############
+
 dk_load(dk_builder)
 if(NOT WIN)
 	dk_undepend(pdh)

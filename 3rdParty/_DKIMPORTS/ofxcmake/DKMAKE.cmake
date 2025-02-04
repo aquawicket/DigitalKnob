@@ -6,8 +6,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ############ ofxcmake ############
-dk_load(dk_builder)
 # https://github.com/tedmoore/ofxCMake
+
+dk_load(dk_builder)
 
 dk_import(https://github.com/tedmoore/ofxCMake/archive/8e26e22f.zip)
 

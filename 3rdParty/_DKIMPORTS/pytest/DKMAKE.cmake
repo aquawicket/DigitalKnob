@@ -5,8 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-
-################ PYTEST ################
+############ pytest ############
 
 dk_validate(PYTHON3 "dk_depend(python3)")
 

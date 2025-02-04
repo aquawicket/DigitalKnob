@@ -5,11 +5,11 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ shellcheck ############
 # https://github.com/koalaman/shellcheck.git
 # https://github.com/koalaman/shellcheck/archive/refs/heads/master.zip
 
-
+dk_load(dk_builder)
 
 #pkg install shellcheck
 dk_installPackage(shellcheck)

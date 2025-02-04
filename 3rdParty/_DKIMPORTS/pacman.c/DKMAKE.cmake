@@ -5,8 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ pacman.c ############
 # https://github.com/floooh/pacman.c.git
+
+dk_load(dk_builder)
 
 #dk_import(https://github.com/floooh/pacman.c.git BRANCH main PATCH)
 dk_import(https://github.com/floooh/pacman.c/archive/refs/heads/main.zip PATCH)

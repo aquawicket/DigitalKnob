@@ -5,9 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ openmw ############
 # https://github.com/OpenMW/openmw.git
 
+dk_load(dk_builder)
 
 ### IMPORT ###
 #dk_import(https://github.com/OpenMW/openmw.git BRANCH master)

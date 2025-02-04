@@ -4,14 +4,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::##################################################################################
 ::# dk_timeout(seconds)
 ::#
-::#    Pause execution and wait for <enter> keypress to continue or amount of seconds to pass
+::#    Pause execution and wait for <enter> keypress to continue or until <n> amount of seconds have passed
 ::#
 :dk_timeout
 setlocal
     %dk_call% dk_debugFunc 0 1
     
-	::if "%~1" equ "" (set "pause_msg=Press any key to continue...") else (set "pause_msg=%~1")
-    ::if "%~1" neq " " %dk_call% dk_echo "%pause_msg%"
 	if "%~1" equ "" (set "timeout_seconds=10") else (set "timeout_seconds=%~1")
     timeout /t %timeout_seconds%
 %endfunction%

@@ -5,9 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ gdb ############
 # https://packages.msys2.org/base/gdb
 
+dk_load(dk_builder)
 
 if(DEFINED ENV{MSYSTEM})
 	dk_set(MSYSTEM "$ENV{MSYSTEM}")

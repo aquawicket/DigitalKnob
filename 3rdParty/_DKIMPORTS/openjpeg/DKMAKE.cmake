@@ -5,9 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ openjpeg ############
 # https://github.com/uclouvain/openjpeg
 
+dk_load(dk_builder)
 
 ### IMPORT ###
 #dk_import(https://github.com/uclouvain/openjpeg.git)

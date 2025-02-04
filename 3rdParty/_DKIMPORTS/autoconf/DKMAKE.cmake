@@ -5,7 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-###### autoconf ######
+############ autoconf ############
 # https://www.gnu.org/software/autoconf
 
 dk_installPackage(autoconf)

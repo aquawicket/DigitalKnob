@@ -5,6 +5,8 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ libtool ############
+
 dk_load(dk_builder)
 
 #ANDROID_HOST_dk_command(pkg install libtool)

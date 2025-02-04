@@ -5,9 +5,12 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ jpeg ############
 # http://www.ijg.org/
 # https://www.ijg.org/files/jpegsr9d.zip
+#
+dk_load(dk_builder)
+
 
 
 ### IMPORT ###

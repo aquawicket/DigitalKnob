@@ -5,6 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ log ############
+#
+
 dk_load(dk_builder)
 if(NOT ANDROID)
 	dk_undepend(log)

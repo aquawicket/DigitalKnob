@@ -5,8 +5,11 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ uikit ############
 # https://developer.apple.com/documentation/UIKit
+
+dk_load(dk_builder)
+
 if(NOT IOS)
 	dk_undepend(uikit)
 	dk_return()

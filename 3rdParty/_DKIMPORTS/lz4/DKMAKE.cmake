@@ -5,9 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ lz4 ############
 # https://github.com/lz4/lz4.git
 
+dk_load(dk_builder)
 
 ### IMPORT ###
 #dk_import(https://github.com/lz4/lz4.git BRANCH dev)

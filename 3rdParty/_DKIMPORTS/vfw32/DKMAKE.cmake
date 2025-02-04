@@ -5,8 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ vfw32 ############
+
 dk_load(dk_builder)
-# vfw32
 
 if(NOT WIN)
 	dk_undepend(vfw32)

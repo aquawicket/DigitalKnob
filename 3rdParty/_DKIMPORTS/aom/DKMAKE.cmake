@@ -5,8 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-###### Alliance for Open Media ######
+############ aom ############
+# Alliance for Open Media
 # https://aomedia.googlesource.com/aom.git
+#
 
 ### DEPEND ###
 dk_depend			(nasm)

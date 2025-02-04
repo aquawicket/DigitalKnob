@@ -5,8 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ metalkit ############
 # https://developer.apple.com/documentation/metal?language=objc
+
+dk_load(dk_builder)
 
 if(NOT APPLE)
 	dk_undepend(metalkit)

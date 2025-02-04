@@ -5,8 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ pthread ############
 
+dk_load(dk_builder)
 
 if(LINUX OR RASPBERRY)
 	dk_lib(pthread)

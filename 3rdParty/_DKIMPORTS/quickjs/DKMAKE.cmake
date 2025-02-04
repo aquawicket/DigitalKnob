@@ -5,8 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ quickjs ############
 # https://github.com/bellard/quickjs.git
+
+dk_load(dk_builder)
 
 #dk_import(https://github.com/bellard/quickjs.git)
 dk_import(https://github.com/bellard/quickjs/archive/refs/heads/master.zip)

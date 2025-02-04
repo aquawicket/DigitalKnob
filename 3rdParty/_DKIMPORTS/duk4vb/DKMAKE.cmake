@@ -5,10 +5,11 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ duk4vb ############
 # https://github.com/dzzie/duk4vb.git
 # http://sandsprite.com/tools.php?id=23
 
+dk_load(dk_builder)
 
 ### IMPORT ###
 #dk_import(https://github.com/dzzie/duk4vb.git)

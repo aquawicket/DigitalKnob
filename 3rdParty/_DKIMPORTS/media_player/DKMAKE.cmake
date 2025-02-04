@@ -5,8 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ media_player ############
 # https://developer.apple.com/documentation/MediaPlayer?language=objc
+
+dk_load(dk_builder)
 
 if(NOT APPLE)
 	dk_undepend(media_player)

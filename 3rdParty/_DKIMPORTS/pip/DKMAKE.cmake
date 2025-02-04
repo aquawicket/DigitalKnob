@@ -5,9 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-
 ############ pip ############
+# https://docs.python.org/3/library/ensurepip.html#module-ensurepip
+
 dk_validate(PYTHON3 "dk_depend(python3)")
 
-# https://docs.python.org/3/library/ensurepip.html#module-ensurepip
 execute_process(COMMAND python3 -m ensurepip --upgrade)

@@ -59,6 +59,15 @@ if(NOT EXISTS "${IMAGEMAGICK_CONVERT_EXE}")
 endif()
 
 
+
+
+
+
+
+
+### compiling trmporarily disabled ####
+return()
+
 if(DKAPP)
 if(NOT ANDROID)
 if(NOT WIN)

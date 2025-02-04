@@ -5,8 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ strmiids ############
+
 dk_load(dk_builder)
-# strmiids
 
 if(NOT WIN)
 	dk_undepend(strmiids)
