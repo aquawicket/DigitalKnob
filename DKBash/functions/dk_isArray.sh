@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 #alias dkreturn='x(){ echo "${1}"; return "${1}" }; x'
 ##############################################################################

@@ -1,6 +1,6 @@
 #!/bin/sh
 DKBASH_FUNCTIONS_DIR_="${PWD}/"
-[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ##################################################################################
 # dk_wslInit.sh()

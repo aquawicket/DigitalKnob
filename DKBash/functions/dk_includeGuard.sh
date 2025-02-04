@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -n "$inclue_guard_dk_includeGuard" ] && return || export readonly inclue_guard_dk_includeGuard=1
-[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ##################################################################################
 # dk_includeGuard()

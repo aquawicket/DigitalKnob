@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 # this overwrites the echo command with our own, and call the built-in.
 # https://unix.stackexchange.com/a/241060
