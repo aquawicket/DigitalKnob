@@ -165,6 +165,7 @@ dk_host_triple() {
 		else
 			UNAME_OS="-$(try uname -s)" && dk_call dk_toLower "${UNAME_OS}" UNAME_OS
 		fi
+		dk_call dk_printVar UNAME_OS
 
 		if dk_call dk_stringContainsCI "$(try uname -o)" "GNU"; then
 			UNAME_ENV="-gnu"
@@ -178,28 +179,29 @@ dk_host_triple() {
 
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_call dk_printVar UNAME_TRIPLE
-
+		dk_call dk_printVar HOST_OS
 		[ -z "${host_triple}" ] && host_triple=${UNAME_TRIPLE} && dk_call dk_printVar host_triple
 		[ -z "${HOST_ARCH}" ]   && HOST_ARCH=${UNAME_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z "${HOST_VENDOR}" ] && HOST_VENDOR=${UNAME_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z "${HOST_OS}" ]     && HOST_OS=${UNAME_OS}         && dk_call dk_printVar HOST_OS
 		[ -z "${HOST_ENV}" ]    && HOST_ENV=${UNAME_ENV}       && dk_call dk_printVar HOST_ENV
 	fi
+	dk_call dk_printVar HOST_OS
 	
-	
+	dk_call dk_printVar UNAME_a
 	### Get the HOST_OS ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	if dk_call dk_stringContainsCI "${UNAME_a}" "Android"; then			# android
+	if dk_call dk_stringContainsCI "${UNAME_a}" "Android"; then
 		HOST_OS="android"
-	elif dk_call dk_stringContainsCI "${UNAME_a}" "Darwin"; then			# mac
+	elif dk_call dk_stringContainsCI "${UNAME_a}" "Darwin"; then
 		HOST_OS="mac"
-	elif dk_call dk_stringContainsCI "${UNAME_a}" "raspberrypi"; then		# raspberry
+	elif dk_call dk_stringContainsCI "${UNAME_a}" "raspberrypi"; then
 		HOST_OS="raspberry"
- 	elif dk_call dk_stringContainsCI "${UNAME_a}" "Linux"; then			# linux
+ 	elif dk_call dk_stringContainsCI "${UNAME_a}" "LiNuX"; then
 		HOST_OS="linux"
-	elif dk_call dk_stringContainsCI "${UNAME_a}" "Msys"; then			# win
+	elif dk_call dk_stringContainsCI "${UNAME_a}" "Msys"; then
 		HOST_OS="win"
-	elif dk_call dk_stringContainsCI "${UNAME_a}" "Cygwin"; then			# win
+	elif dk_call dk_stringContainsCI "${UNAME_a}" "Cygwin"; then
 		HOST_OS="win"
 	else
 		dk_call dk_error "Unsupported HOST_OS: ${UNAME_a}"

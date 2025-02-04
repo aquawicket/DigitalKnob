@@ -9,11 +9,13 @@
 dk_stringContainsCI() {
 	dk_debugFunc 2
 
-	
+	local string=$(dk_call dk_toLower "${1}")
+	local substring=$(dk_call dk_toLower "${2}")
 	# https://stackoverflow.com/a/8811800/688352
 	# [[ ${1} == *"${2}"* ]]    							# NON-POSIX    # [[ ${string} == *"${substring}"* ]]
 	# case "${1}" in *${2}*) return 0;; esac; return 1      # POSIX        # case "${string}" in *${substring}*) return 0;; esac; return 1
-	[ "${1#*"${2,,}",,}" != "${1,,}" ]						    # POSIX        # [ "${string#*"$substring"}" != "$string" ]
+	#[ "${1#*"${2,,}",,}" != "${1,,}" ]						# POSIX        # [ "${string#*"$substring"}" != "$string" ]
+	[ "${string#*"$substring"}" != "$string" ]
 }
 
 
