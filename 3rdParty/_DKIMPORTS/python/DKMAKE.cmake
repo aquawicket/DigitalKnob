@@ -64,7 +64,9 @@ if(NOT EXISTS "${PYTHON_EXE}")
 		dk_executeProcess(${PYTHON_DIR}/python_install.cmd)
 	elseif(LINUX_HOST)
 		dk_import(${PYTHON_DL})
-		execute_process(COMMAND ./configure --enable-optimizations WORKING_DIRECTORY ${PYTHON_DIR})
+		####   Code below used To run the command in a fresh environment    ####
+		#### exec env -i HOME="$HOME" PATH="$PATH" bash -l -c '>>COMMAND<<' ####  
+		execute_process(COMMAND exec env -i HOME="$HOME" PATH="$PATH" bash -l -c './configure --enable-optimizations' WORKING_DIRECTORY ${PYTHON_DIR})
 		execute_process(COMMAND make WORKING_DIRECTORY ${PYTHON_DIR})
 	else()
 		dk_installPackage(python)
