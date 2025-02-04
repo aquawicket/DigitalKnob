@@ -3,7 +3,7 @@
 
 
 ##################################################################################
-# dk_stringContains(string, substring)
+# dk_stringContains(<string>, <substring>)
 #
 #
 dk_stringContainsCI() {
@@ -14,8 +14,7 @@ dk_stringContainsCI() {
 	# https://stackoverflow.com/a/8811800/688352
 	# [[ ${1} == *"${2}"* ]]    							# NON-POSIX    # [[ ${string} == *"${substring}"* ]]
 	# case "${1}" in *${2}*) return 0;; esac; return 1      # POSIX        # case "${string}" in *${substring}*) return 0;; esac; return 1
-	#[ "${1#*"${2,,}",,}" != "${1,,}" ]						# POSIX        # [ "${string#*"$substring"}" != "$string" ]
-	[ "${string#*"$substring"}" != "$string" ]
+	[ "${string#*"$substring"}" != "$string" ]				# POSIX        # [ "${string#*"$substring"}" != "$string" ]
 }
 
 
@@ -26,12 +25,12 @@ dk_stringContainsCI() {
 DKTEST() {
 	dk_debugFunc 0
 
-	if dk_stringContainsCI "1one1" "one"; then
-		dk_echo "1one1 contains one"
+	if dk_stringContainsCI "1ONE1" "one"; then
+		dk_echo "1ONE1 contains one"
 	else
-		dk_echo "1one1 does not contains one"
+		dk_echo "1ONE1 does not contain one"
 	fi
 
-	dk_stringContainsCI "1one1" "one" && dk_echo "1one1 contains one" || dk_echo "1one1 does not contain one"
-	dk_stringContainsCI "2two2" "owt" && dk_echo "2two2 contains owt" || dk_echo "2two2 does not contain owt"
+	dk_stringContainsCI "1ONE1" "one" && dk_echo "1ONE1 contains one" || dk_echo "1ONE1 does not contain one"
+	dk_stringContainsCI "2TWO2" "owt" && dk_echo "2TWO2 contains owt" || dk_echo "2TWO2 does not contain owt"
 }
