@@ -41,7 +41,7 @@ if(LINUX OR RASPBERRY)
 	#SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lXinerama")  # used by openscenegraph, moved to libxinerama-dev
 	
 	###### STATIC LINKING ######	
-	if(LINUX)
+	if(LINUX_X86_64)
 		dk_lib(/usr/lib/x86_64-linux-gnu/libX11.a)
 		dk_lib(/usr/lib/x86_64-linux-gnu/libxcb.a)
 		dk_lib(/usr/lib/x86_64-linux-gnu/libXau.a)
@@ -49,7 +49,7 @@ if(LINUX OR RASPBERRY)
 		dk_lib(/usr/lib/x86_64-linux-gnu/libXdmcp.a)
 		dk_lib(/usr/lib/x86_64-linux-gnu/libXext.a)
 	endif()
-	if(RASPBERRY_dk_lib)
+	if(RASPBERRY)
 		dk_lib(/usr/lib/arm-linux-gnueabihf/libX11.a)
 		dk_lib(/usr/lib/arm-linux-gnueabihf/libxcb.a)
 		dk_lib(/usr/lib/arm-linux-gnueabihf/libXau.a)
