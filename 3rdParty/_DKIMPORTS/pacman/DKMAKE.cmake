@@ -21,12 +21,14 @@ dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 
 ###### init the pacman keyring ######
 #dk_delete("${MSYS2_DIR}/etc/pacman.d/gnupg")
-if(NOT EXISTS "${MSYS2_DIR}/etc/pacman.d/gnupg")
+#if(NOT EXISTS "${MSYS2_DIR}/etc/pacman.d/gnupg")
+if(NOT EXISTS "${MSYS2_CACHE_DIR}/gnupg")
 	set(ENV{PATH} "$ENV{PATH}:/usr/bin")
 	dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --init")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --populate msys2")
-	execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm --cachedir "${MSYS2_CACHE_DIR}")
+	#execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm --cachedir "${MSYS2_CACHE_DIR}")
+	execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm)
 endif()
 ####################################
 
