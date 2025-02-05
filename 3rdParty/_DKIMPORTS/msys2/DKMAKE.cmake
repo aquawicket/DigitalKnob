@@ -18,11 +18,11 @@ if(NOT DEFINED WIN_HOST)
 endif()
 
 ############ MSYS2 variables ############
-dk_validate			(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam		("${DKIMPORTS_DIR}/msys2/dkconfig.txt" MSYS2_DL)
 dk_importVariables	("${MSYS2_DL}")
-dk_set				(MSYS2_CACHE_DIR 	"${DIGITALKNOB_DIR}/MSYS2")
+dk_validate			(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+dk_set				(MSYS2_CACHE_DIR 	"${DKDOWNLOAD_DIR}/MSYS2")
 dk_set				(MSYS2_BIN 			"${MSYS2}/usr/bin")
 dk_set				(CLANGARM64_BIN		"${MSYS2}/clangarm64/bin")
 dk_set				(CLANG32_BIN		"${MSYS2}/clang32/bin")
@@ -34,7 +34,7 @@ dk_set				(MSYS2_MAKE_PROGRAM "${MSYS2_BIN}/make.exe")
 
 ############ INSTALL ############
 dk_import(${MSYS2_DL})
-dk_copy("${DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE)
+dk_copy("${DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
 dk_makeDirectory("${MSYS2_CACHE_DIR}/db")
 dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
 
