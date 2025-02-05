@@ -33,6 +33,7 @@ dk_set				(MSYS2_MAKE_PROGRAM "${MSYS2_BIN}/make.exe")
 
 ############ INSTALL ############
 dk_import(${MSYS2_DL})
+dk_copy("${DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE)
 dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
 
 

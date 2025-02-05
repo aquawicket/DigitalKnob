@@ -10,6 +10,8 @@ echo 1. Set and map all variables and environment variables
 set "target_type=Debug"
 ::set "ABI=armeabi-v7a"
 set "ABI=arm64-v8a"
+::set "ABI=i686"
+::set "ABI=x86_64"
 
 :: Choose a C++ Compilers setting
 :: 		options: CMAKE, NDK, CLANG    or GRADLE: must be enabled in build.gradle
@@ -79,6 +81,8 @@ set "CMAKE_BINARY_DIR=%APP_ROOT%"
 
 if "%ABI%"=="armeabi-v7a" (	set "CMAKE_GENERATOR_ARCH=ARM" & goto :end )
 if "%ABI%"=="arm64-v8a" ( set "CMAKE_GENERATOR_ARCH=arm64" & goto :end )
+if "%ABI%"=="x86" ( set "CMAKE_GENERATOR_ARCH=x86" & goto :end )
+if "%ABI%"=="x86_64" ( set "CMAKE_GENERATOR_ARCH=x86_64" & goto :end )
 %FATAL% "ABI is invalid"
 :end
 
@@ -91,11 +95,10 @@ set "PLATFORM=%ANDROID_HOME%/platforms/android-%ANDROID_API%"
 set "NDK_ROOT=%ANDROID_HOME%/ndk/%NDK%"
 
 :::::::::: CLANG  ( ndk_toolchain ) ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if "%ABI%"=="armeabi-v7a" (
-	set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\armv7a-linux-androideabi%ANDROID_API%-clang"
-) else (
-	set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android%ANDROID_API%-clang"
-)
+if "%ABI%"=="armeabi-v7a"	(set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\armv7a-linux-androideabi%ANDROID_API%-clang")
+if "%ABI%"=="arm64-v8a"		(set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android%ANDROID_API%-clang")
+if "%ABI%"=="x86"			( set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\i686-linux-androideabi%ANDROID_API%-clang")
+if "%ABI%"=="x86_64"		( set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\x86_64-linux-androideabi%ANDROID_API%-clang")
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
