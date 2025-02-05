@@ -28,6 +28,9 @@ if(NOT EXISTS "${MSYS2_CACHE_DIR}/gnupg")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --init")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --populate msys2")
 	#execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm --cachedir "${MSYS2_CACHE_DIR}")
+endif()
+
+if(NOT EXISTS "${MSYS2_CACHE_DIR}/db/sync")
 	execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm)
 endif()
 ####################################
