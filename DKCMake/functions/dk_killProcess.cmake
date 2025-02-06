@@ -11,10 +11,10 @@ include_guard()
 #
 function(dk_killProcess)
 	dk_debugFunc(1)
-	#set(name ${ARGN})
+	#set(name ${ARGV0})
 	
 	dk_findProgram(TASKKILL_EXE taskkill.exe "C:/Windows/System32")
-	dk_executeProcess("${TASKKILL_EXE} /f /im ${ARGN}" NO_HALT)
+	dk_executeProcess("${TASKKILL_EXE} /f /im ${ARGV0}" NO_HALT)
 endfunction()
 
 
@@ -25,5 +25,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_killProcess("todo")
+	dk_killProcess("win32calc.exe")
 endfunction()

@@ -39,13 +39,14 @@ dk_set				(MSYS2_MAKE_PROGRAM "${MSYS2_BIN}/make.exe")
 dk_import(${MSYS2_DL})
 dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
 
-### Save Pacman database, keys and cache to downloads ###
+### Save Pacman database, keys and cache to download directory for offline buiding ###
 #dk_copy("${DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
 #dk_set				(MSYS2_DBPath		"${DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
-#dk_set				(MSYS2_CacheDir		"${DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
 #dk_set				(MSYS2_LogFile		"${DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
 #dk_set				(MSYS2_GPGDir		"${DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")
 #dk_makeDirectory("${MSYS2_DBPath}")
+dk_set				(MSYS2_CacheDir		"${DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
+dk_makeDirectory("${MSYS2_CacheDir}")
 
 
 
