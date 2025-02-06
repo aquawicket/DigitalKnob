@@ -9,10 +9,12 @@ setlocal
 	%dk_call% dk_debugFunc 1 2
  
     if defined %~1 (
+		set "dk_defined=true"
         if "%~2" neq "" (endlocal & call set "%2=true")
         exit /b 0
     )
     
+	set "dk_defined=false"
     if "%~2" neq "" (endlocal & call set "%2=false")
     exit /b 1
 %endfunction%
