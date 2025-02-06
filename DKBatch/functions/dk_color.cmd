@@ -69,8 +69,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		(set DEL=)		&:: Delete - Should be ignored. Used to delete characters on punched tape by punching out all the holes.
 		
 		::############ C1 control codes #############
-		(set DECSC=%ESC%7)	&:: Save Cursor Position in Memory**
-		(set DECSR=%ESC%8)	&:: Restore Cursor Position from Memory**
 		(set PAD=%ESC%@)	&:: Padding Character
 		(set HOP=%ESC%A)	&:: High Octet Preset
 		(set BPH=%ESC%B)	&:: Break Permitted Here
@@ -104,6 +102,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		(set PM=%ESC%^^)	&:: Privacy Message
 		(set APC=%ESC%_)	&:: Application Program Command
         
+		
+		(set DECSC=%ESC%7)	&:: Save Cursor Position in Memory**
+		(set DECSR=%ESC%8)	&:: Restore Cursor Position from Memory**
+		
 		(set DECSCUSR0=%ESC%0%SP%q)	&:: User Shape
 		(set DECSCUSR1=%ESC%1%SP%q)	&:: Blinking Block
 		(set DECSCUSR2=%ESC%2%SP%q)	&:: Steady Block

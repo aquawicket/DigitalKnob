@@ -86,6 +86,9 @@ if "%~1" == "" (goto :dk_install)
 
 
 :dk_install
+
+	if "%~1" neq "" (goto :eof)
+	
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
 	set "default_host_os=cosmocc"

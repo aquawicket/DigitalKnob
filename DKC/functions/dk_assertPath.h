@@ -8,10 +8,18 @@
 //####################################################################
 //# dk_assertPath()
 //#
+#include "dk_pathExists.h"
+#include "dk_error.h"
 void dk_assertPath(const char* path){
     //dk_debugFunc(1);
 
-	// TODO
+	if(dk_pathExists(path)){
+		return;
+	}
+	
+	char error_msg[128];
+	sprintf(error_msg, "path:'%s' does not exist.\n", path);
+	dk_error(error_msg);
 }
 
 

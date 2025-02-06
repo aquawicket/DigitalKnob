@@ -5,20 +5,80 @@
 #include "DK.h"
 
 // https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+// https://en.wikipedia.org/wiki/C0_and_C1_control_codes
 
-//Sequences		  Hexadecimal   Unicode   Decimal    Octal    Ctrl-Key:
-const char* ESC   = "\x1B";//   \u001b      27       \033       ^[        - sequence starting with ESC (\x1B)
-const char* CSI   = "\x9B";//                                             - Control Sequence Introducer: sequence starting with ESC [ or CSI (\x9B)
-const char* DCS   = "\x90";//                                             - Device Control String: sequence starting with ESC P or DCS (\x90)
-const char* OSC   = "\x9D";//                                             - Operating System Command: sequence starting with ESC ] or OSC (\x9D)
+//############ C0 control codes #############
+//    Sequences		Hexadecimal   Unicode   Decimal    Octal    Ctrl-Key:
+const char* NUL	= "\x00";	// Null - Does nothing. The code of blank paper tape, and also used for padding to slow transmission
+const char* SOH	= "\x01";	// Start of Heading - First character of the heading of a message
+const char* STX	= "\x02";	// Start of Text - Terminates the header and starts the message text
+const char* ETX	= "\x03";	// End of Text - Ends the message text, starts a footer (up to the next TC character)
+const char* EOT	= "\x04";	// End of Transmission - Ends the transmission of one or more messages. May place terminals on standby.
+const char* EQN	= "\x05";	// Enquiry - Trigger a response at the receiving end, to see if it is still present.
+const char* ACK	= "\x06";	// Acknowledge - Indication of successful receipt of a message.
+const char* BEL	= "\x07";	// Bell, Alert	- Call for attention from an operator.
+const char* BS	= "\x08";	// Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
+const char* HT	= "\x09";	// Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
+const char* LF	= "\x0A";	// Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
+const char* VT	= "\x0B";	// Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
+const char* FF	= "\x0C";	// Form Feed - Move down to the top of the next page.
+const char* CR	= "\x0D";	// Carriage Return - Move to column zero while staying on the same line.
+const char* SO	= "\x0E";	// Shift Out - Switch to an alternative character set.
+const char* SI	= "\x0F";	// Shift In - Return to regular character set after SO.
+const char* DLE	= "\x10";	// Data Link Escape - Cause a number of contiguously following characters to be interpreted in some different way
+const char* DC1	= "\x11";	// Device Control One - Turn on (DC1 and DC2) or off (DC3 and DC4) devices.
+const char* DC2	= "\x12";	// Device Control Two
+const char* DC3	= "\x13";	// Device Control Three
+const char* DC4	= "\x14";	// Device Control Four
+const char* NAK	= "\x15";	// Negative Acknowledge - Negative response to a sender, such as a detected error.
+const char* SYN	= "\x16";	// Synchronous Idle - Sent in synchronous transmission systems when no other character is being transmitted.
+const char* ETB	= "\x17";	// End of Transmission Block - End of a transmission block of data when data are divided into such blocks.
+const char* CAN	= "\x18";	// Cancel - Indicates that the data preceding it are in error or are to be disregarded.
+const char* EM	= "\x19";	// End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
+const char* SUB	= "\x1A";	// Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
+const char* ESC	= "\x1B";	//   \u001b      27       \033       ^[ 		// Escape - Alters the meaning of a limited number of following bytes.
+const char* FS	= "\x1C";	// File Separator - Can be used as delimiters to mark fields of data structures. 
+const char* GS	= "\x1D";	// Group Separator
+const char* RS	= "\x1E";	// Record Separator
+const char* US	= "\x1F";	// Unit Separator - US is the lowest level
+const char* SP	= "\x20";	// Space - Move right one character position.
+const char* DEL	= "\x7F";	// Delete - Should be ignored. Used to delete characters on punched tape by punching out all the holes.
 
-//const char* str(const char *strA, const char *strB){
-	//for (;*str;str++);
-    //*str++ = c; 
-    //*str++ = 0;
-//	return "test";
-//};
-  
+//############ C1 control codes #############
+const char* PAD	= "\x80";	// Padding Character
+const char* HOP	= "\x81";	// High Octet Preset
+const char* BPH	= "\x82";	// Break Permitted Here
+const char* NBH	= "\x83";	// No Break Here
+const char* IND	= "\x84";	// Index
+const char* NEL	= "\x85";	// Next Line
+const char* SSA	= "\x86";	// Start of Selected Area
+const char* ESA	= "\x87";	// End of Selected Area
+const char* HTS	= "\x88";	// Horizontal Tabulation Set
+const char* HTJ	= "\x89";	// Horizontal Tabulation With Justification
+const char* VTS	= "\x8A";	// Vertical Tabulation Set
+const char* PLD	= "\x8B";	// Partial Line Down
+const char* PLU	= "\x8C";	// Partial Line Up
+const char* RI	= "\x8D";	// Reverse Index
+const char* SS2	= "\x8E";	// Single Shift Two
+const char* SS3	= "\x8F";	// Single Shift Three
+const char* DCS	= "\x90";	// Device Control String
+const char* PU1	= "\x91";	// Private Use 1
+const char* PU2	= "\x92";	// Private Use 2
+const char* STS	= "\x93";	// Set Transmit State
+const char* CCH	= "\x94";	// Cancel character
+const char* MW	= "\x95";	// Message Waiting
+const char* SPA	= "\x96";	// Start of Protected Area
+const char* EPA	= "\x97";	// End of Protected Area
+const char* SOS	= "\x98";	// Start of String
+const char* SGC	= "\x99";	// Single Graphic Character Introducer
+const char* SCI	= "\x9A";	// Single Character Introducer
+const char* CSI	= "\x9B";	// Control Sequence Introducer
+const char* ST	= "\x9C";	// String Terminator
+const char* OSC = "\x9D";	// Operating System Command
+const char* PM	= "\x9E";	// Privacy Message
+const char* APC	= "\x9F";	// Application Program Command
+
+//############ CSI Commands #############
 const char* ANSI0   = "\x1B[0m";       const char* clr         = "\x1B[0m";    // Default                   - Returns all attributes to the default state prior to modification
 const char* ANSI1   = "\x1B[1m";       const char* bold        = "\x1B[1m";    // Bold/Bright               - Applies brightness/intensity flag to foreground color
 const char* ANSI2   = "\x1B[2m";       const char* dim         = "\x1B[2m";    // Dim
@@ -146,7 +206,12 @@ const char* ANSI123 = "\x1B[123m";//   const char* ???         = "\x1B[123m";  /
 const char* ANSI124 = "\x1B[124m";//   const char* ???         = "\x1B[124m";  // UNKNOWN
 
 
-
+//const char* str(const char *strA, const char *strB){
+	//for (;*str;str++);
+    //*str++ = c; 
+    //*str++ = 0;
+//	return "test";
+//};
 
 //################################################################################
 //# dk_color()
