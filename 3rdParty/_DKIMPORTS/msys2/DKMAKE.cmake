@@ -21,8 +21,11 @@ endif()
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam		("${DKIMPORTS_DIR}/msys2/dkconfig.txt" MSYS2_DL)
 dk_importVariables	("${MSYS2_DL}")
-dk_validate			(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-dk_set				(MSYS2_CACHE_DIR 	"${DKDOWNLOAD_DIR}/MSYS2")
+dk_validate			(DKDOWNLOAD_DIR 	"dk_DKDOWNLOAD_DIR()")
+dk_set				(MSYS2_DBPath		"${MSYS2_DIR}/var/lib/pacman")
+dk_set				(MSYS2_CacheDir		"${MSYS2_DIR}/var/cache/pacman/pkg")
+dk_set				(MSYS2_LogFile		"${MSYS2_DIR}/var/log/pacman.log")
+dk_set				(MSYS2_GPGDir		"${MSYS2_DIR}/etc/pacman.d/gnupg")
 dk_set				(MSYS2_BIN 			"${MSYS2}/usr/bin")
 dk_set				(CLANGARM64_BIN		"${MSYS2}/clangarm64/bin")
 dk_set				(CLANG32_BIN		"${MSYS2}/clang32/bin")
@@ -34,9 +37,16 @@ dk_set				(MSYS2_MAKE_PROGRAM "${MSYS2_BIN}/make.exe")
 
 ############ INSTALL ############
 dk_import(${MSYS2_DL})
-dk_copy("${DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
-dk_makeDirectory("${MSYS2_CACHE_DIR}/db")
 dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
+
+### Save Pacman database, keys and cache to downloads ###
+#dk_copy("${DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
+#dk_set				(MSYS2_DBPath		"${DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
+#dk_set				(MSYS2_CacheDir		"${DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
+#dk_set				(MSYS2_LogFile		"${DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
+#dk_set				(MSYS2_GPGDir		"${DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")
+#dk_makeDirectory("${MSYS2_DBPath}")
+
 
 
 

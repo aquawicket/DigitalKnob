@@ -9,9 +9,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://wiki.archlinux.org/title/Pacman
 # https://walterteng.com/using-zsh-on-windows
 
-
 dk_validate(MSYS2 "dk_depend(msys2)")
 dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
+
 
 #if((NOT DKUPDATE) AND (EXISTS ${PACMAN_EXE}))
 #	dk_notice("PACMAN_EXE is already installed, returning")
@@ -20,16 +20,15 @@ dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 
 
 ###### init the pacman keyring ######
-#dk_delete("${MSYS2_DIR}/etc/pacman.d/gnupg")
-#if(NOT EXISTS "${MSYS2_DIR}/etc/pacman.d/gnupg")
-if(NOT EXISTS "${MSYS2_CACHE_DIR}/gnupg")
+#dk_delete("${MSYS2_GPGDir}")
+if(NOT EXISTS "${MSYS2_GPGDir}")
 	set(ENV{PATH} "$ENV{PATH}:/usr/bin")
 	dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --init")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --populate msys2")
 endif()
 
-if(NOT EXISTS "${MSYS2_CACHE_DIR}/db/sync")
+if(NOT EXISTS "${MSYS2_DBPath}/sync")
 	execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm)
 endif()
 ####################################

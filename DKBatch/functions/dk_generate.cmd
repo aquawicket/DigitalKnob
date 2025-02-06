@@ -95,7 +95,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%target_triple%"=="ANDROID_ARM64_CLANG"  set CMAKE_GENERATOR="Unix Makefiles"
     if "%target_triple%"=="ANDROID_X86_CLANG" 	 set CMAKE_GENERATOR="Unix Makefiles"
 	if "%target_triple%"=="ANDROID_X86_64_CLANG" set CMAKE_GENERATOR="Unix Makefiles"
-    if "%target_triple%"=="EMSCRIPTEN"           set CMAKE_GENERATOR="Unix Makefiles"
+    if "%target_triple%"=="EMSCRIPTEN_X86_CLANG" set CMAKE_GENERATOR="Unix Makefiles"
     if "%target_triple%"=="IOS_ARM32"            set CMAKE_GENERATOR="Xcode"
     if "%target_triple%"=="IOS_ARM64"            set CMAKE_GENERATOR="Xcode"
     if "%target_triple%"=="IOSSIM_X86"           set CMAKE_GENERATOR="Xcode"
