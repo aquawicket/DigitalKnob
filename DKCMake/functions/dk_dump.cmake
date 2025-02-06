@@ -35,7 +35,7 @@ macro(dk_dump variable)
 		dk_echo("${cyan}   VALUE:   ${${variable}} ${clr}")
 		dk_echo("${cyan}############################################################################################${clr}\n")
 	endif()
-	#dk_wait()
+	#dk_timeout()
 endmacro()
 
 

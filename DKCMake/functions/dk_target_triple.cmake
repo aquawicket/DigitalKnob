@@ -65,7 +65,9 @@ function(dk_target_triple)
 		(target_dir MATCHES "cosmopolitan") )
 		dk_set(Target_Triple_Dir ${Target_Dir})			# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	else()
+		message("######calling dk_target_triple_SET()#####")
 		dk_target_triple_SET()
+		message("######returned from dk_target_triple_SET()#####")
 		dk_printVar(triple)
 		dk_printVar(Triple)
 		dk_set(Target_Triple_Dir ${Target_Dir}/${Triple})
@@ -86,8 +88,8 @@ function(dk_target_triple)
 	dk_assertPath(DK_Project_Dir)
 
 	### Set triple/TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
-	dk_basename(${Target_Triple_Dir} Triple)	# 			Triple 	= Win_x86_64_Clang
-	dk_toLower(${Triple} triple)				# 			 triple	= win_x86_64_clang
+#	dk_basename(${Target_Triple_Dir} Triple)	# 			Triple 	= Win_x86_64_Clang
+#	dk_toLower(${Triple} triple)				# 			 triple	= win_x86_64_clang
 	dk_set(triple ${triple})					# 					  Globalize the variable
 	dk_set(target_triple ${triple})				# 	  target_triple	= win_x86_64_clang
 	dk_toUpper(${triple} TRIPLE)				# 			 TRIPLE	= WIN_X86_64_CLANG
@@ -121,7 +123,7 @@ function(dk_target_triple)
 	elseif(triple MATCHES "cosmopolitan")
 		dk_set(Os Cosmopolitan)	
 	else()
-		dk_error("The target triple:${triple} does not contain a valid os")
+		dk_error("The target triple:'${triple}' does not contain a valid os")
 		dk_unset(triple)
 		dk_unset(TRIPLE)
 		dk_target_triple_SET()

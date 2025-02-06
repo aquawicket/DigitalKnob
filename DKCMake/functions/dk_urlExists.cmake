@@ -6,7 +6,7 @@ include_guard()
 # dk_urlExists(url rtn_var)
 #
 function(dk_urlExists url rtn_var)
-    dk_debugFunc()
+    dk_debugFunc(1 2)
     
 	if(CMAKE_VERSION VERSION_LESS 3.19)
 		file(DOWNLOAD "${url}" "${DKCACHE_DIR}/dk_urlExists.temp" STATUS status)
@@ -19,12 +19,16 @@ function(dk_urlExists url rtn_var)
 	list(GET status 0 httpCode)
 	dk_printVar(httpCode)
     if(${httpCode} EQUAL 0)
+		set(dk_urlExists 1 PARENT_SCOPE)
         set(${rtn_var} 1 PARENT_SCOPE)
 	elseif(${httpCode} EQUAL 28)
+		set(dk_urlExists 1 PARENT_SCOPE)
 		set(${rtn_var} 1 PARENT_SCOPE)
     else()
+		set(dk_urlExists 0 PARENT_SCOPE)
 		set(${rtn_var} 0 PARENT_SCOPE)
 	endif()
+	
 endfunction()
 
 

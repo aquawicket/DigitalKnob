@@ -10,11 +10,12 @@ include_guard()
 #	@path		- The full path to the binary file to compress with UPX
 #
 function(dk_upxCompress path)
-	dk_debugFunc()
+	dk_debugFunc(1)
 	
+	dk_assertPath(path)
 	dk_info("UPX compressing ${path}...")
 	dk_info("Please wait...")
-	dk_executeProcess("${UPX_EXE} -9 -v ${path}")
+	execute_process(COMMAND ${UPX_EXE} -9 -v ${path} ECHO_OUTPUT_VARIABLE)
 endfunction()
 
 
@@ -26,5 +27,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_upxCompress("C:/Windows/HelpPane.exe")
 endfunction()
