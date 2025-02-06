@@ -16,8 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	::############ GET ############
 	%dk_call% dk_validatePath DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	::set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
-	set "DKPLUGINS_DIR=%DKBRANCH_DIR%/DKPlugins"
+	set "DKPLUGINS_DIR=%DKBRANCH_DIR%/DKCpp/DKPlugins"
 	
 	%dk_call% dk_assertPath DKPLUGINS_DIR
 %endfunction%

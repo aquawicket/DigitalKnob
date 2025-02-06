@@ -16,7 +16,7 @@ function(dk_DKPLUGINS_DIR)
 	###### GET ######
 	else()
 		dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
-		dk_set(DKPLUGINS_DIR "${DKBRANCH_DIR}/DKPlugins")
+		dk_set(DKPLUGINS_DIR "${DKBRANCH_DIR}/DKCpp/DKPlugins")
 	endif()
 endfunction()
 

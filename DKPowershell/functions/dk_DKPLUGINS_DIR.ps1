@@ -16,7 +16,7 @@ function Global:dk_DKPLUGINS_DIR() {
 
 	############ GET ############
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR" 
-	$global:DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"   
+	$global:DKPLUGINS_DIR="${DKBRANCH_DIR}/DKCpp/DKPlugins"   
 }
 
 

@@ -16,7 +16,7 @@ function Global:dk_DKAPPS_DIR() {
 
 	############ GET ############
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR" 
-	$global:DKAPPS_DIR="${DKBRANCH_DIR}/DKApps"   
+	$global:DKAPPS_DIR="${DKBRANCH_DIR}/DKCpp/DKApps"   
 }
 
 

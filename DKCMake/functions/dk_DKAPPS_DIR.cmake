@@ -16,7 +16,7 @@ function(dk_DKAPPS_DIR)
 	###### GET ######
 	else()
 		dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
-		dk_set(DKAPPS_DIR "${DKBRANCH_DIR}/DKApps")
+		dk_set(DKAPPS_DIR "${DKBRANCH_DIR}/DKCpp/DKApps")
 	endif()
 endfunction()
 

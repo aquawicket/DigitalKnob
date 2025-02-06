@@ -15,7 +15,7 @@ dk_DKPLUGINS_DIR() {
 	############ GET ############
 	else
 		dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR" 
-		export DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"   
+		export DKPLUGINS_DIR="${DKBRANCH_DIR}/DKCpp/DKPlugins"   
 	fi
 }
 
