@@ -14,9 +14,9 @@ setlocal
 	
     %dk_call% dk_info "Deleting CMake cache files in %_path_%"
 	
-	%dk_call% dk_delete "%_path_%\CMakeFiles"
-	%dk_call% dk_delete "%_path_%\CMakeCache.txt"
-	%dk_call% dk_delete "%_path_%\cmake_install.cmake"
+	if exist "%_path_%\CMakeFiles"			%dk_call% dk_delete "%_path_%\CMakeFiles"
+	if exist "%_path_%\CMakeCache.txt"		%dk_call% dk_delete "%_path_%\CMakeCache.txt"
+	if exist "%_path_%\cmake_install.cmake"	%dk_call% dk_delete "%_path_%\cmake_install.cmake"
 
     ::for /r %_path_% %%i in (CMakeCache.*) do @if exist "%%i" del "%%i"
 	::for /d /r "%_path_%" %%i in (CMakeFiles) do if exist "%%i" rd /s/q "%%i"
