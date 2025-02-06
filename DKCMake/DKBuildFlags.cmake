@@ -333,9 +333,9 @@ if(COSMOPOLITAN)
 	dk_load(${DKCMAKE_DIR}/toolchains/cosmopolitan_toolchain.cmake)
 endif()
 
-### emscripten ###
-if(EMSCRIPTEN)
-	dk_load(${DKCMAKE_DIR}/toolchains/emscripten_toolchain.cmake)
+### emscripten_x86 ###
+if(EMSCRIPTEN_X86)
+	dk_load(${DKCMAKE_DIR}/toolchains/emscripten_x86_toolchain.cmake)
 endif()
 
 ### ios_arm32 - XCODE ###

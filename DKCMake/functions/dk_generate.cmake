@@ -108,7 +108,7 @@ function(dk_generate)
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "emscripten")
+	if("${triple}" STREQUAL "emscripten_x86")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	

@@ -582,9 +582,6 @@ if(EMSCRIPTEN)
 	if(EXISTS "${DK_Project_Dir}/icons/icon.png")
 		dk_createIcons("${DK_Project_Dir}/icons/icon.png")
 	endif()
-	#if(EXISTS ${DK_Project_Dir}/icons/icon.png)
-	#	dk_copy(${DK_Project_Dir}/icons/icon.png ${DK_Project_Dir}/assets/icon.png OVERWRITE)
-	#endif()
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)

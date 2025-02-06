@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	echo  4) android_arm64_clang
 	echo  5) android_x86_clang
 	echo  6) android_x86_64_clang
-	echo  7) emscripten_clang
+	echo  7) emscripten_x86_clang
 	echo  8) ios_arm32_clang
 	echo  9) ios_arm64_clang
 	echo 10) ios_x86_clang

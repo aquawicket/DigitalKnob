@@ -1,4 +1,4 @@
-var index = "../../DKHtml/index.html";
+var index = "file:///C:/Users/Administrator/digitalknob/Development/DKHtml/index.html";
 var assets = "file:///C:/Users/Administrator/digitalknob/Development";
 var USE_FILESYSTEM = 0;
 var USE_NODEJS=0;
