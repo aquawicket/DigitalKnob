@@ -3,13 +3,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_upxCompress(path)
+# dk_upxDecompress(path)
 #
-#	UPX compress an executable or dynamic library file
+#	Decompress a UPX compressed file
 #
-#	@path		- The full path to the binary file to compress with UPX
+#	@path		- The full path to the binary file to decompress with UPX
 #
-function(dk_upxCompress)
+function(dk_upxDecompress)
 	dk_debugFunc(1)
 	
 	set(path "${ARGV0}")
@@ -17,17 +17,17 @@ function(dk_upxCompress)
 	dk_depend(upx)
 	unset(ENV{UPX})
 	
-	dk_info("UPX compressing ${path}, Please wait...")
+	dk_info("UPX decompression ${path}, Please wait...")
 	
 	file(SIZE "${path}" FILESIZE)
-	dk_info("File size before UPX compression ${FILESIZE}")
+	dk_info("File size before UPX decompression ${FILESIZE}")
 	
-	set(comand ${UPX_EXE} -9 -v --force ${path})
+	set(comand ${UPX_EXE} -d ${path})
 	message("comand = ${comand}")
 	execute_process(COMMAND ${comand})
 	
 	file(SIZE "${path}" FILESIZE)
-	dk_info("File size after UPX compression ${FILESIZE}")
+	dk_info("File size after UPX decompression ${FILESIZE}")
 endfunction()
 
 
@@ -39,5 +39,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_upxCompress("C:/Windows/notepad.exe")
+	dk_upxDecompress("C:/Windows/notepad.exe")
 endfunction()

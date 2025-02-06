@@ -2,10 +2,10 @@
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ################################################################################
-# dk_getFileSize(<path> <output>)
+# dk_fileSize(<path> <output>)
 #
 #
-dk_getFileSize() {
+dk_fileSize() {
 	dk_debugFunc 2
 
 	dk_call dk_todo
@@ -19,5 +19,5 @@ dk_getFileSize() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_getFileSize
+	dk_call dk_fileSize
 }

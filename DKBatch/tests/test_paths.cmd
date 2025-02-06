@@ -67,8 +67,8 @@ set "IN=C:\Windows\NonExistent.file
 	%dk_call% dk_getFileTime "%IN%" dk_getFileTime
 	echo dk_getFileTime   = %dk_getFileTime%
 
-	%dk_call% dk_getFileSize "%IN%" dk_getFileSize
-	echo dk_getFileSize   = %dk_getFileSize% bytes
+	%dk_call% dk_fileSize "%IN%" dk_fileSize
+	echo dk_fileSize   = %dk_fileSize% bytes
 	
 %endfunction%
 
