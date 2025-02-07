@@ -127,7 +127,7 @@ const char* ANSI44  = "\x1B[44m";      const char* bg_blue     = "\x1B[44m";   /
 const char* ANSI45  = "\x1B[45m";      const char* bg_magenta  = "\x1B[45m";   // Background Magenta        - Applies non-bold/bright magenta to background
 const char* ANSI46  = "\x1B[46m";      const char* bg_cyan     = "\x1B[46m";   // Background Cyan           - Applies non-bold/bright cyan to background
 const char* ANSI47  = "\x1B[47m";      const char* bg_white    = "\x1B[47m";   // Background White          - Applies non-bold/bright white to background
-const char* ANSI48  = "\x1B[48;2;";    const char* bg_RGB      = "\x1B[48m";   // Background EXTENDED       - Applies exteneded colors to background    bg_RGB+"150;100;50m"
+const char* ANSI48  = "\x1B[48;2;";    const char* bg_RGB      = "\x1B[48;2;"; // Background EXTENDED       - Applies exteneded colors to background    bg_RGB+"150;100;50m"
 const char* ANSI49  = "\x1B[49m";  	   const char* bg_default  = "\x1B[49m";   // Background Default        - Applies only the background portion of the defaults
 const char* ANSI50  = "\x1B[50m";//    const char* ???         = "\x1B[50m";   // UNKNOWN
 const char* ANSI51  = "\x1B[51m";//    const char* ???         = "\x1B[51m";   // UNKNOWN
