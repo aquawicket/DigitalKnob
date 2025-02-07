@@ -45,7 +45,8 @@ set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
 	call :dk_DKCACHE_DIR
 
     ::###### Reload Main Script with cmd ######
-    if "!DE!" neq "" call :dk_reload 
+    ::if "!DE!" neq "" 
+	call :dk_reload 
     if "!DE!" neq "" echo ERROR: DKBatch requires delayed expansion && pause && exit 13
 
     ::call :dk_DKBATCH_VARS
@@ -201,7 +202,9 @@ set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
         set "RELOADED=1"
         set "DKINIT="
 
-        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" 	&::%DKSCRIPT_ARGS%
+        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" | %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
+	
+	&::%DKSCRIPT_ARGS%
 	
 		:: Change console settings
 		:: >nul REG ADD HKCU\Console\digitalknob FontSize /t reg_sz /d "Consolas" /f
