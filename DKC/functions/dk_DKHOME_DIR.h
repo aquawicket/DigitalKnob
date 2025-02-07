@@ -9,7 +9,7 @@ char* DKHOME_DIR = "";
 //####################################################################
 //# dk_DKHOME_DIR()
 //#
-void dk_DKHOME_DIR(){
+int dk_DKHOME_DIR(){
     //dk_debugFunc(0, 1);
 
 	//############ SET ############
@@ -32,6 +32,7 @@ void dk_DKHOME_DIR(){
 	// if exist "!WSLPATH_EXE!"   !dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
 
 //	dk_assertPath(DKHOME_DIR);
+	return 0;
 }
 
 

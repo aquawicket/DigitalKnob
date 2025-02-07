@@ -9,8 +9,8 @@
 //# dk_error(message)
 //#
 #include "dk_log.h"
-void dk_error(const char* message){
-	dk_log(ERROR, message);
+int dk_error(const char* message){
+	return dk_log(ERROR, message);
 };
 
 

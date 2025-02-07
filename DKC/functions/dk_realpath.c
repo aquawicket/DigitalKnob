@@ -10,7 +10,9 @@ int main(int argc, char **argv) {
 	char* RelPath = "../../../";
 	char* AbsPath;
 	int rtn_code = dk_realpath(RelPath, &AbsPath);
-	printf("AbsPath = %s\n", AbsPath);
+	
+#include "dk_echo.h"
+	dk_echo("AbsPath = %s\n", AbsPath);
 	
     return rtn_code;
 }

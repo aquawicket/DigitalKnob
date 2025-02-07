@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
-char* dk_relativePath(const char* from, const char* to) {
+int dk_relativePath(const char* from, const char* to, char** output) {
     char resolved_path[2056];
     char* result;
 
@@ -44,11 +44,12 @@ char* dk_relativePath(const char* from, const char* to) {
 
     // Add the remaining part of the target path
     strcat(result, abs_to);
+	*output = result;
 
     free(abs_from - strlen(common_prefix));
     free(abs_to - strlen(common_prefix));
 
-    return result;
+    return 0;
 }
 
 #endif //dk_relativePath_h

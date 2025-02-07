@@ -10,9 +10,10 @@
 //#
 #include "dk_echo.h"
 #include <stdio.h>
-void dk_pause(){
+int dk_pause(){
 	dk_echo("press Enter to continue..\n");
 	getchar();
+	return 0;
 };
 
 

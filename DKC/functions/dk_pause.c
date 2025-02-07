@@ -5,7 +5,6 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main() {
-	dk_pause();
-    return 0;
+	return dk_pause();
 }
 #endif

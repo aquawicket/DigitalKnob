@@ -11,7 +11,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-void dk_test(int __ARGC__, ...){
+int dk_test(int __ARGC__, ...){
 	//dk_debugFunc 0 99
 	
 	printf("################# dk_test.h ################\n");
@@ -64,6 +64,7 @@ void dk_test(int __ARGC__, ...){
 
 //	printf("GLOBAL_VAR = %s\n", GLOBAL_VAR);
 //	printf("RETURN_VAR = %s\n", RETURN_VAR);
+	return 0;
 };
 
 

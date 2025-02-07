@@ -17,7 +17,7 @@ int dk_currentDirectory(char** cwdb){
 	char cwd[1024];
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
         perror("getcwd() error");
-        return 13;
+        return 1;
     }
 	
 	*cwdb = strdup(cwd);

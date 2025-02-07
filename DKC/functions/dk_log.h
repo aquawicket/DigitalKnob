@@ -286,13 +286,13 @@
 
 
 //################################################################################
-//# dk_log(level, message)
+//# dk_log(level, str)
 //#
 #include "dk_echo.h"
-void dk_log(int level, const char* message)
+int dk_log(int level, const char* str)
 {
 	#if ENABLE_dk_log != 1
-		return;
+		return 1;
 	#endif
 	
 	int level_enable  = DEFAULT_ENABLED;
@@ -393,11 +393,11 @@ void dk_log(int level, const char* message)
 		level_halt    = FATAL_HALT;
 	}
 	if(level_enable != 1)
-		return;
+		return 1;
 
-	printf("%s", level_color);
-	dk_echo(message);
-	printf("%s", clr);
+	char message[1028];
+	sprintf(message, "%s%s%s\n", level_color, str, clr);
+	return dk_echo(message);
 };
 
 

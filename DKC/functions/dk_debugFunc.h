@@ -8,8 +8,9 @@
 //################################################################################
 //# dk_debugFunc()
 //#
-void dk_debugFunc(){
-	printf("dk_debugFunc() TODO");
+#include "dk_echo.h"
+int dk_debugFunc(){
+	return dk_echo("dk_debugFunc() TODO");
 };
 
 

@@ -5,8 +5,8 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main() {
-	dk_DKHOME_DIR();
+	int rtn_code = dk_DKHOME_DIR();
 	dk_echo(DKHOME_DIR);
-    return 0;
+    return rtn_code;
 }
 #endif

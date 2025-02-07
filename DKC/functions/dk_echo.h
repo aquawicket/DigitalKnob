@@ -111,7 +111,6 @@ int dk_echo(const char* str, ...){
     va_end(ptr); 
     return 0; 
 	
-	
 	//printf("%s\n", str);
 };
 

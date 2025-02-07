@@ -5,7 +5,6 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main() {
-	dk_echo("test dk_echo");
-    return 0;
+	return dk_echo("test dk_echo");
 }
 #endif

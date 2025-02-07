@@ -34,53 +34,50 @@ DKWARNING(test DKWARNING)
 WARNING_DISABLE
 #include <stdio.h>
 WARNING_ENABLE
-
+#include "dk_echo.h"
 
 
 
 int PrintPreprocessor(){
-	printf("dk_preprocessor::PrintPreprocessor()\n");
+	dk_echo("dk_preprocessor::PrintPreprocessor()\n");
 
 #ifdef RTTI_ENABLED
-	printf("RTTI_ENABLED = TRUE\n");
+	dk_echo("RTTI_ENABLED = TRUE\n");
 #else
-	printf("RTTI_ENABLED = FALSE\n");
+	dk_echo("RTTI_ENABLED = FALSE\n");
 #endif
 
 #ifdef __has_builtin
-	printf("__has_builtin = TRUE\n");
+	dk_echo("__has_builtin = TRUE\n");
 #else
-	printf("__has_builtin = FALSE\n");
+	dk_echo("__has_builtin = FALSE\n");
 #endif
 
 #ifdef __has_feature
-	printf("__has_feature = TRUE\n");
+	dk_echo("__has_feature = TRUE\n");
 #else
-	printf("__has_feature = FALSE\n");
+	dk_echo("__has_feature = FALSE\n");
 #endif
 
 #ifdef __has_include
-	printf("__has_include = TRUE\n");
+	dk_echo("__has_include = TRUE\n");
 #else
-	printf("__has_include = FALSE\n");
+	dk_echo("__has_include = FALSE\n");
 #endif
 
-	printf("__STDC_VERSION__       = %s \n", __STDC_VERSION__);
+	dk_echo("__STDC_VERSION__       = %s \n", __STDC_VERSION__);
 	
-	
-	
-	
-	printf("DKDATE                 = %s \n", DKDATE);
-	printf("DKTIME                 = %s \n", DKTIME);
-	printf("DKOS                   = %s \n", DKOS);
-	printf("DKOS_VERSION           = %s \n", DKOS_VERSION);
-	printf("DKARCH                 = %s \n", DKARCH);
-	printf("DKBITS                 = %d \n", DKBITS);
-	printf("DKCOMPILER             = %s \n", DKCOMPILER);
-	printf("DKCOMPILER_VERSION     = %s \n", DKCOMPILER_VERSION);
-	printf("DKC_LANGUAGE_VERSION   = %s \n", DKC_LANGUAGE_VERSION);
-	printf("DKCPP_LANGUAGE_VERSION = %s \n", DKCPP_LANGUAGE_VERSION);
-	printf("DKBUILD_TYPE           = %s \n", DKBUILD_TYPE);
+	dk_echo("DKDATE                 = %s \n", DKDATE);
+	dk_echo("DKTIME                 = %s \n", DKTIME);
+	dk_echo("DKOS                   = %s \n", DKOS);
+	dk_echo("DKOS_VERSION           = %s \n", DKOS_VERSION);
+	dk_echo("DKARCH                 = %s \n", DKARCH);
+	dk_echo("DKBITS                 = %d \n", DKBITS);
+	dk_echo("DKCOMPILER             = %s \n", DKCOMPILER);
+	dk_echo("DKCOMPILER_VERSION     = %s \n", DKCOMPILER_VERSION);
+	dk_echo("DKC_LANGUAGE_VERSION   = %s \n", DKC_LANGUAGE_VERSION);
+	dk_echo("DKCPP_LANGUAGE_VERSION = %s \n", DKCPP_LANGUAGE_VERSION);
+	dk_echo("DKBUILD_TYPE           = %s \n", DKBUILD_TYPE);
 	return 0;
 }
 
@@ -92,7 +89,6 @@ int PrintPreprocessor(){
 #ifndef DKMAIN
 #define DKMAIN 1
 int main() {
-	PrintPreprocessor();
-    return 0;
+	return PrintPreprocessor();
 }
 #endif

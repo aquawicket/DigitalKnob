@@ -39,14 +39,15 @@ int dk_endianness(void) {
 #ifndef DKMAIN
 #define DKMAIN 1
 #include <stdio.h>
+#include "dk_echo.h"
 int main() {
 	switch(dk_endianness()){
-		case ENDIAN_BIG:			printf("endianness = ENDIAN_BIG\n"); 			break;
-		case ENDIAN_LITTLE:			printf("endianness = ENDIAN_LITTLE\n"); 		break;
-		case ENDIAN_BIG_WORD:		printf("endianness = ENDIAN_BIG_WORD\n"); 		break;
-		case ENDIAN_LITTLE_WORD:	printf("endianness = ENDIAN_LITTLE_WORD\n"); 	break;
-		case ENDIAN_UNKNOWN: 		printf("endianness = ENDIAN_UNKNOWN\n"); 		break;
-		default:					printf("endianness = ENDIAN_UNKNOWN\n");
+		case ENDIAN_BIG:			dk_echo("endianness = ENDIAN_BIG\n"); 			break;
+		case ENDIAN_LITTLE:			dk_echo("endianness = ENDIAN_LITTLE\n"); 		break;
+		case ENDIAN_BIG_WORD:		dk_echo("endianness = ENDIAN_BIG_WORD\n"); 		break;
+		case ENDIAN_LITTLE_WORD:	dk_echo("endianness = ENDIAN_LITTLE_WORD\n"); 	break;
+		case ENDIAN_UNKNOWN: 		dk_echo("endianness = ENDIAN_UNKNOWN\n"); 		break;
+		default:					dk_echo("endianness = ENDIAN_UNKNOWN\n");
 	}
     return 0;
 }
