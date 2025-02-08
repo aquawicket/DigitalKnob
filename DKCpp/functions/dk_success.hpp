@@ -8,8 +8,8 @@
 //# dk_notice(message)
 //#
 #include "dk_log.hpp"
-void dk_success(const char* message){
-	dk_log(SUCCESS, message);
+int dk_success(const char* message){
+	return dk_log(SUCCESS, message);
 };
 
 #endif //dk_success_hpp

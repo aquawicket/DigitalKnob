@@ -8,8 +8,8 @@
 //# dk_verbose(message)
 //#
 #include "dk_log.hpp"
-void dk_verbose(const char* message){
-	dk_log(FATAL, message);
+int dk_verbose(const char* message){
+	return dk_log(FATAL, message);
 };
 
 #endif //dk_verbose_hpp

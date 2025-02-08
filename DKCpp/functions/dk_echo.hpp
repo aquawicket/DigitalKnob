@@ -10,8 +10,9 @@
 //#
 #include <stdio.h>
 #include <iostream>
-void dk_echo(const std::string message){
+int dk_echo(const std::string message){
 	std::cout << message;
+	return 0;
 };
 
 

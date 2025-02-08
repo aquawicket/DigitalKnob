@@ -8,8 +8,8 @@
 //# dk_info(message)
 //#
 #include "dk_log.hpp"
-void dk_info(const char* message){
-	dk_log(INFO, message);
+int dk_info(const char* message){
+	return dk_log(INFO, message);
 };
 
 #endif //dk_info_hpp

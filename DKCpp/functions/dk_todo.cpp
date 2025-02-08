@@ -5,7 +5,6 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main() {
-	dk_verbose("test dk_verbose()");
-    return 0;
+	return dk_verbose("test dk_verbose()");
 }
 #endif

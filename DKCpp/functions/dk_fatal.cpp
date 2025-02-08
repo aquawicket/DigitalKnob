@@ -5,7 +5,6 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main() {
-	dk_fatal("test dk_fatal()");
-    return 0;
+	return dk_fatal("test dk_fatal()");
 }
 #endif

@@ -289,10 +289,10 @@
 //# dk_log(level, message)
 //#
 #include "dk_echo.hpp"
-void dk_log(int level, const char* message)
+int dk_log(int level, const char* message)
 {
 	#if ENABLE_dk_log != 1
-		return;
+		return 1;
 	#endif
 	
 	int level_enable        = DEFAULT_ENABLED;
@@ -393,12 +393,14 @@ void dk_log(int level, const char* message)
 		level_halt    = FATAL_HALT;
 	}
 	if(level_enable != 1)
-		return;
+		return 1;
 
 	std::cout << level_color;
-	dk_echo(message);
+	int errorlevel = dk_echo(message);
 	std::cout << "\n";
 	std::cout << clr;
+	
+	return errorlevel;
 };
 
 

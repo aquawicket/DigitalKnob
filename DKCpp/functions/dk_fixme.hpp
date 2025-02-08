@@ -8,8 +8,8 @@
 //# dk_verbose(message)
 //#
 #include "dk_log.hpp"
-void dk_fixme(const char* message){
-	dk_log(FIXME, message);
+int dk_fixme(const char* message){
+	return dk_log(FIXME, message);
 };
 
 #endif //dk_fixme_hpp
