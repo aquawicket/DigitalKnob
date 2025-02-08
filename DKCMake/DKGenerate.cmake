@@ -193,11 +193,13 @@ foreach(plugin ${dkdepend_list})
 			endforeach()
 		
 			if(PREBUILD)
+				dk_fatal("This is still being used")
 				dk_set(QUEUE_BUILD ON)
 				dk_info("************* Building ${plugin} *************")
 				dk_cd(${plugin_path}/${CONFIG_PATH})
 				
 				if(MULTI_CONFIG)
+					dk_fatal("This is still being used")
 					###### Configure ######
 					ANDROID_ARM32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON 	${plugin_path})
 					ANDROID_ARM64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON 	${plugin_path})
@@ -221,7 +223,9 @@ foreach(plugin ${dkdepend_list})
 					DEBUG_dk_queueCommand			(${CMAKE_COMMAND} --build . --config Debug)
 					RELEASE_dk_queueCommand			(${CMAKE_COMMAND} --build . --config Release)
 				else()
+					dk_fatal("This is still being used")
 					if(DEBUG)
+						dk_fatal("This is still being used")
 						###### Configure ######
 						ANDROID_ARM32_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM32=ON 	${plugin_path})
 						ANDROID_ARM64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM64=ON 	${plugin_path})
@@ -245,6 +249,7 @@ foreach(plugin ${dkdepend_list})
 						DEBUG_dk_queueCommand					(${CMAKE_COMMAND} --build . --config Debug)
 						
 					elseif(RELEASE)
+						dk_fatal("This is still being used")
 						###### Configure ######
 						ANDROID_ARM32_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON 		${plugin_path})
 						ANDROID_ARM64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON 		${plugin_path})

@@ -3,17 +3,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 if not defined ENABLE_dk_log	set "ENABLE_dk_log=1"
 
-::	0 VERBOSE	dk_verbose
-::	1 DEBUG		dk_debug
-::	  DEFAULT	dk_default
-::	2 INFO		dk_info
-::	3 SUCCESS	dk_success
-::	4 TODO		dk_todo
-::	5 NOTICE	dk_notice
-::	6 FIXME		dk_fixme
-::	7 WARNING	dk_warning
-::	8 ERROR		dk_error
-::	9 FATAL		dk_fatal
+::	0 VERBOSE		dk_verbose
+::	1 DEBUG			dk_debug
+::	  DEFAULT		dk_default
+::	2 INFO			dk_info
+::	3 SUCCESS		dk_success
+::	4 TODO			dk_todo
+::	5 NOTICE		dk_notice
+::	6 FIXME			dk_fixme
+::	7 WARNING		dk_warning
+::	8 DEPRECATED	dk_deprecated
+::	9 ERROR			dk_error
+:: 10 FATAL			dk_fatal
 
 ::### VERBOSE ###
 if not defined VERBOSE_ENABLE		set "VERBOSE_ENABLE=1"
@@ -105,6 +106,17 @@ if not defined WARNING_TRACE		set "WARNING_TRACE=1"
 ::if not defined WARNING_PAUSE		set "WARNING_PAUSE=0"
 ::if not defined WARNING_TIMEOUT	set "WARNING_TIMEOUT=0"
 ::if not defined WARNING_HALT		set "WARNING_HALT=0"
+
+::### DEPRECATED ###
+if not defined DEPRECATED_ENABLE	set "DEPRECATED_ENABLE=1"
+if not defined DEPRECATED_COLOR		set "DEPRECATED_COLOR=%dim%%yellow%"
+if not defined DEPRECATED_TAG		set "DEPRECATED_TAG=DEPRECATED: "
+if not defined DEPRECATED_TRACE		set "DEPRECATED_TRACE=1"
+::if not defined DEPRECATED_LINE	set "DEPRECATED_LINE=0"
+::if not defined DEPRECATED_SOUND	set "DEPRECATED_SOUND=0"
+if not defined DEPRECATED_PAUSE		set "DEPRECATED_PAUSE=1"
+::if not defined DEPRECATED_TIMEOUT	set "DEPRECATED_TIMEOUT=0"
+::if not defined DEPRECATED_HALT	set "DEPRECATED_HALT=0"
 
 ::### ERROR ###
 if not defined ERROR_ENABLE			set "ERROR_ENABLE=1"
@@ -210,6 +222,7 @@ setlocal
 	%dk_call% dk_log NOTICE		"test dk_log NOTICE message"
 	%dk_call% dk_log FIXME		"test dk_log FIXME message"
 	%dk_call% dk_log WARNING	"test dk_log WARNING message"
+	%dk_call% dk_log DEPRECATED	"test dk_log DEPRECATED message"
 	%dk_call% dk_log ERROR		"test dk_log ERROR message"
 	%dk_call% dk_log FATAL		"test dk_log FATAL message"
 %endfunction%
