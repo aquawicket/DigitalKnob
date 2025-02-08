@@ -129,6 +129,7 @@ if(typeof dk_source === "undefined") {
 				var xmlHttpRequest = new XMLHttpRequest;
 				xmlHttpRequest.open("GET", url, true);
 				xmlHttpRequest.send();
+				//console.log(xmlHttpRequest.responseText);
 				eval(xmlHttpRequest.responseText);
 			}
 			if(callback){
@@ -362,7 +363,7 @@ if(typeof ARGV !== "undefined"){
 		console.log("")
 		console.log(bg_magenta+white+"###### DKTEST MODE ###### "+DKSCRIPT_FILE+" ###### DKTEST MODE ######"+clr)
 		console.log("")
-			DKTEST();
+			DKTEST()
 		console.log("")
 		console.log(bg_magenta+white+"######## END TEST ####### "+DKSCRIPT_FILE+" ######## END TEST #######"+clr)
 		console.log("")
