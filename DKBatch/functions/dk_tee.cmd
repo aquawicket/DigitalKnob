@@ -14,7 +14,7 @@ rem As an example of this feature, CLS command is correctly managed
 if "%~1" equ "" (
    echo Duplicate the Stdout output of a command in the screen and a disk file
    echo/
-   echo anyCommand ^| APATee teeFile.txt [/A]
+   echo anyCommand ^| dk_tee log.txt [/A]
    echo/
    echo If /A switch is given, anyCommand output is *appended* to teeFile.txt
    goto :EOF

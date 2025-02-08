@@ -15,12 +15,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_rename "%DKCACHE_DIR%\DKEXPORT_VARS" "%DKCACHE_DIR%\DKEXPORT_VARS.cmd"
 endlocal	
 	%dk_call% "%DKCACHE_DIR%\DKEXPORT_VARS.cmd"
-	type "%DKCACHE_DIR%\DKEXPORT_VARS.cmd"
+	::type "%DKCACHE_DIR%\DKEXPORT_VARS.cmd"
 	
 	set "saveFile=DKEXPORT_VARS.cmd.%TIME%"
 	set "saveFile=%saveFile::=_%"
-	%dk_call% dk_rename "%DKCACHE_DIR%\DKEXPORT_VARS.cmd" "%DKCACHE_DIR%\%saveFile%"
-	::del "%DKCACHE_DIR%\DKEXPORT_VARS.cmd"
+	::%dk_call% dk_rename "%DKCACHE_DIR%\DKEXPORT_VARS.cmd" "%DKCACHE_DIR%\%saveFile%"
+	del "%DKCACHE_DIR%\DKEXPORT_VARS.cmd"
 %endfunction%
 
 

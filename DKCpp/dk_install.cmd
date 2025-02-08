@@ -83,9 +83,9 @@ if "%~1" == "" (goto dk_install)
 	if "%~1" neq "" (goto:eof)
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
-	set "default_host_os=cosmocc"
-	set "default_host_arch=cosmocc"
-	set "default_host_env=cosmocc"
+	::set "default_host_os=cosmocc"
+	::set "default_host_arch=cosmocc"
+	set "default_host_env=clang"
 	
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"

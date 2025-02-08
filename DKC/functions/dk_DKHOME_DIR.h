@@ -4,7 +4,7 @@
 
 #include "DK.h"
 
-char* DKHOME_DIR = "";
+//char* DKHOME_DIR;
 
 //####################################################################
 //# dk_DKHOME_DIR()

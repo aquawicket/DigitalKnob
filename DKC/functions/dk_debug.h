@@ -1,17 +1,17 @@
 #pragma once
-#ifndef dk_error_h
-#define dk_error_h
+#ifndef dk_debug_h
+#define dk_debug_h
 
 #include "DK.h"
 
 
 //################################################################################
-//# dk_error(str)
+//# dk_debug(str)
 //#
 #include "dk_log.h"
-int dk_error(const char* str){
-	return dk_log(ERROR, str);
+int dk_debug(const char* str){
+	return dk_log(DEBUG, str);
 };
 
 
-#endif //dk_error_h
+#endif //dk_debug_h

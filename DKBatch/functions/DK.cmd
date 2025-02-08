@@ -202,7 +202,7 @@ set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
         set "RELOADED=1"
         set "DKINIT="
 
-        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" | %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
+        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" &::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
 	
 	&::%DKSCRIPT_ARGS%
 	
