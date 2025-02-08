@@ -1,4 +1,5 @@
 if(typeof dk_error === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_error.js", function(){}); }
+
 //################################################################################
 //# dk_assertPath(path)
 //#

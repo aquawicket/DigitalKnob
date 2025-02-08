@@ -1,4 +1,5 @@
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_getEnv.js", function(){});
+if(typeof dk_getEnv === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_getEnv.js", function(){}); }
+if(typeof dk_assertPath === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); }
 //(1, eval)(DKJAVASCRIPT_DIR+"/functions/dk_getEnv.js").OpenTextFile(url, 1).ReadAll();
 
 //####################################################################

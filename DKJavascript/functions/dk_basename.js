@@ -9,7 +9,7 @@ dk_basename = function dk_basename_f(path) {
 	if(typeof filesystem === "undefined") { 
 		filesystem = new ActiveXObject("Scripting.FileSystemObject");
 	}
-	return filesystem.GetBaseName (path);
+	return filesystem.GetBaseName(path);
 }
 
 

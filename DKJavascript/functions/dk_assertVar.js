@@ -1,3 +1,8 @@
+if(typeof dk_fatal === "undefined"){ 		dk_source(DKJAVASCRIPT_DIR+"/functions/dk_fatal.js", 		function(){}); }
+if(typeof dk_debugFunc === "undefined"){ 	dk_source(DKJAVASCRIPT_DIR+"/functions/dk_debugFunc.js", 	function(){}); }
+if(typeof dk_set === "undefined"){ 			dk_source(DKJAVASCRIPT_DIR+"/functions/dk_set.js", 			function(){}); }
+if(typeof dk_echo === "undefined"){ 		dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js", 		function(){}); }
+
 //################################################################################
 //# dk_assertVar(expression)
 //#
