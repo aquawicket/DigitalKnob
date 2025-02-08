@@ -169,7 +169,7 @@ dk_pickUpdate() {
 	
 	if [ $behind -lt 1 ]; then
 		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_echo " 0) Repeat cache [$_APP_ - $_triple_ - $_TYPE_]"
+			dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_triple_ - $_TYPE_]"
 		fi
 		dk_echo " 1) Git Update"   
 		dk_echo " 2) Git Commit"
@@ -187,7 +187,7 @@ dk_pickUpdate() {
 		dk_echo
 		dk_echo "${red}" 
 		if [ -n "$_APP_" ] && [ -n "$_triple_" ] && [ -n "$_TYPE_" ]; then
-			dk_echo " 0) Repeat cache [$_APP_ - $_triple_ - $_TYPE_]"
+			dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_triple_ - $_TYPE_]"
 		fi
 		dk_echo "${green}"
 		dk_echo " 1) Git Update"
@@ -2020,13 +2020,13 @@ dk_createCache() {
 	dk_verbose "dk_createCache(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
-	dk_echo "creating cache..."
+	dk_echo "creating DKBuilder.cache..."
 	
 	# write variable values line by line
-	echo "${target_app}">"${DKCACHE_DIR}/cache"
-	echo "${target_triple}">>"${DKCACHE_DIR}/cache"
-	echo "${target_type}">>"${DKCACHE_DIR}/cache"
-	#echo "$DKENV">>"${DKCACHE_DIR}/cache"
+	echo "${target_app}">"${DKCACHE_DIR}/DKBuilder.cache"
+	echo "${target_triple}">>"${DKCACHE_DIR}/DKBuilder.cache"
+	echo "${target_type}">>"${DKCACHE_DIR}/DKBuilder.cache"
+	#echo "$DKENV">>"${DKCACHE_DIR}/DKBuilder.cache"
 }
 
 
@@ -2038,14 +2038,14 @@ dk_readCache() {
 	dk_verbose "dk_readCache(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
-	if ! dk_pathExists "${DKCACHE_DIR}"/cache; then
+	if ! dk_pathExists "${DKCACHE_DIR}"/DKBuilder.cache; then
 		return 0
 	fi
 	_APP_=
 	_triple_=
 	_TYPE_=
 	
-	dk_echo "reading cache..."
+	dk_echo "reading DKBuilder.cache..."
 	count=0
 	while read p; do
 		if [ "${count}" = "0" ]; then 
@@ -2065,7 +2065,7 @@ dk_readCache() {
 		#	#dk_printVar _DKENV_
 		#fi
 		count=$((count + 1))
-	done < "${DKCACHE_DIR}"/cache
+	done < "${DKCACHE_DIR}"/DKBuilder.cache
 }
 
 

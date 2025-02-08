@@ -17,12 +17,8 @@ setlocal enableDelayedExpansion
 	)
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
 
-	%dk_call% dk_assertPath DKSCRIPT_DIR
-	::%dk_call% dk_assertPath DKBRANCH_DIR
-	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-::	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
-::       %dk_call% dk_warning "Not running from the DKBRANCH_DIR directory."
-::    )
+	::%dk_call% dk_assertPath DKSCRIPT_DIR
+	::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     
     %dk_call% dk_unset UPDATE
     %dk_call% dk_unset target_app
@@ -58,10 +54,10 @@ setlocal enableDelayedExpansion
         if not defined target_triple	%dk_call% dk_target_triple_SET			& goto while_loop
 		if not defined target_type		%dk_call% dk_target_type target_type	& goto while_loop
 		
-		:: save selections to cache file
-		%dk_call% dk_echo "creating cache..."
+		:: save selections to DKBuilder.cache file
+		%dk_call% dk_echo "creating DKBuilder.cache..."
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-		%dk_call% dk_fileWrite "%DKCACHE_DIR%\cache" "%target_app% %target_triple% %target_type%"
+		%dk_call% dk_fileWrite "%DKCACHE_DIR%\DKBuilder.cache" "%target_app% %target_triple% %target_type%"
 		
         %dk_call% dk_generate
         %dk_call% dk_buildApp

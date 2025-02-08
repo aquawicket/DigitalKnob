@@ -67,10 +67,10 @@ dk_buildMain() {
 		[ -z "${target_triple-}" ] && dk_call dk_target_triple_SET
 		[ -z "${target_type-}" ] && dk_call dk_target_type
 		
-		# save selections to cache file
-		dk_call dk_echo "creating cache..."
+		# save selections to DKBuilder.cache file
+		dk_call dk_echo "creating DKBuilder.cache..."
 		dk_call dk_validate DKCACHE_DIR "dk_DKCACHE_DIR"
-		dk_call dk_fileWrite "${DKCACHE_DIR}/cache" "${target_app-} ${target_triple-} ${target_type-}"
+		dk_call dk_fileWrite "${DKCACHE_DIR}/DKBuilder.cache" "${target_app-} ${target_triple-} ${target_type-}"
 	
 		dk_call dk_generate	
 		dk_call dk_buildApp

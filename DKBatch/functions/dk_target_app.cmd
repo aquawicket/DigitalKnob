@@ -9,8 +9,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0 1 
 	
-    :: read cache file
-	if exist "%DKCACHE_DIR%\cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%\cache" words)
+    :: read DKBuilder.cache file
+	if exist "%DKCACHE_DIR%\DKBuilder.cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%\DKBuilder.cache" words)
 	set "_target_app_=%words[0][0]%"
 	set "_target_triple_=%words[0][1]%"
 	set "_target_type_=%words[0][2]%"
@@ -40,7 +40,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     :: %dk_call% dk_printVar commands
 
     :: prepend cache selection if available
-    if exist "%DKCACHE_DIR%\cache" if "%_target_app_%" neq "" if "%_target_triple_%" neq "" if "%_target_type_%" neq "" (
+    if exist "%DKCACHE_DIR%\DKBuilder.cache" if "%_target_app_%" neq "" if "%_target_triple_%" neq "" if "%_target_type_%" neq "" (
         %dk_call% Array::dk_unshift dk_getDirectories "re-run [%_target_app_% - %_target_triple_% - %_target_type_%]"
         %dk_call% Array::dk_unshift commands "call:runCache"
     )

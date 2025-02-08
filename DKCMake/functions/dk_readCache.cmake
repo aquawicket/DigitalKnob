@@ -10,14 +10,14 @@ function(dk_readCache)
 #	dk_debugFunc(3)
 	
 	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
-	if(NOT EXISTS "${DKCACHE_DIR}/cache")
+	if(NOT EXISTS "${DKCACHE_DIR}/DKBuilder.cache")
 		dk_return()
 	endif()
 	#dk_unset(_APP_)
 	#dk_unset(_target_triple_)
 	#dk_unset(_DKBUILD_TYPE_)
 	
-	dk_echo("reading cache...")
+	dk_echo("reading DKBuilder.cache...")
 	set(count 0)
 #	while read p; do
 #		[ "${count}" = "0" ] && _APP_=$(builtin echo "${p}" | tr -d '\r')
@@ -25,9 +25,9 @@ function(dk_readCache)
 #		[ "${count}" = "2" ] &&	_DKBUILD_TYPE_=$(builtin echo "${p}" | tr -d '\r')
 #		#[ "${count}" = "3" ] && _DKENV_=$(echo ${p} | tr -d '\r')
 #		count=$((count + 1))
-#	done < "${DKCACHE_DIR}"/cache
+#	done < "${DKCACHE_DIR}"/DKBuilder.cache
 
-#	file(STRINGS "${DKCACHE_DIR}/cache" lines)
+#	file(STRINGS "${DKCACHE_DIR}/DKBuilder.cache" lines)
 #	foreach(line ${lines})
 #		if(${count} EQUAL 0)
 #			set(${ARGV0} ${line})

@@ -17,7 +17,7 @@ dk_pickUpdate() {
 
 	if [ $behind -lt 1 ]; then
 		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_call dk_echo " 0) Repeat cache [$_APP_ - $_triple_ - $_TYPE_]"
+			dk_call dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_triple_ - $_TYPE_]"
 		fi
 		dk_call dk_echo " 1) Git Update"   
 				dk_echo " 2) Git Commit"
@@ -39,7 +39,7 @@ dk_pickUpdate() {
 		dk_call dk_echo
 		dk_echo "${red}" 
 		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_echo " 0) Repeat cache [${_APP_} - ${_triple_} - ${_TYPE_}]"
+			dk_echo " 0) Repeat DKBuilder.cache [${_APP_} - ${_triple_} - ${_TYPE_}]"
 		fi
 		dk_echo "${green}"
 		dk_echo " 1) Git Update"
