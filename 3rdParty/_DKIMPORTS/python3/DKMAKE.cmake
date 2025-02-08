@@ -55,9 +55,9 @@ if(NOT EXISTS "${PYTHON3}")
 	dk_dirname("${PYTHON3_EXE}" PYTHON3)
 endif()
 
-dk_prependEnvPath("${PYTHON3}")
-dk_exportVars(PATH "${PYTHON3};$ENV{PATH}")
 
+dk_prependEnvPath("${PYTHON3}")
+dk_exportVars(PATH "$ENV{PATH}")
 
 
 ### 3RDPARTY LINK ###
