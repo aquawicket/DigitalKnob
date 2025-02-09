@@ -23,7 +23,6 @@ function(dk_import url)
 	dk_getOption(NO_HALT REMOVE)
 	
 	dk_importVariables(${url} ${ARGN})
-	#dk_assertVar(CURRENT_PLUGIN)
 	dk_assertVar(ENV{CURRENT_PLUGIN})
 
 	if(NOT DKOFFLINE)

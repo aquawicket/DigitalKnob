@@ -167,12 +167,9 @@ function(dk_setupCallstack)
 	dk_echo("dk_setupCallstack()")
 	
 	dk_load("dk_onVariableWatch")
-	#variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
+	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onVariableWatch)
+	#variable_watch(CMAKE_CURRENT_FUNCTION_LINE dk_onVariableWatch)
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_LIST_DIR dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onCallstack)
-	#variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
-	#variable_watch(CMAKE_SYSTEM_VERSION dk_onVariableWatch)
 endfunction()
 
 
@@ -189,7 +186,7 @@ function(dk_DKSCRIPT_VARS)
 	endif()
 	if(NOT EXISTS "${DKSCRIPT_PATH}")
 		message(FATAL_ERROR "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found")
-	endif()	
+	endif()
 	###### DKSCRIPT_ARGS ######
 	set(DKSCRIPT_ARGS ${ARGS} CACHE INTERNAL "")
 

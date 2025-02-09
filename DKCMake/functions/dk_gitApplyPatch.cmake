@@ -14,9 +14,6 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc(2)
 	
 	dk_depend(git) # dk_import will push to the PLUGIN stack
-#	if("${CURRENT_PLUGIN}" STREQUAL "GIT" AND PREV_PLUGIN)				
-#		dk_set(CURRENT_PLUGIN ${PREV_PLUGIN})						# so we will pop the stack here
-#	endif()
 	
 	dk_unset(COMMAND_ARGS)
 	dk_append(COMMAND_ARGS ${GIT_EXE})

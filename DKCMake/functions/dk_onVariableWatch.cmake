@@ -11,8 +11,14 @@ macro(dk_onVariableWatch variable access value current_list_file stack)
 	if("${access}" STREQUAL "MODIFIED_ACCESS")
 		message("dk_onVariableWatch(${variable} ${access} ${value} ${current_list_file} ${stack})")
 		dk_stacktrace()
-		#dk_messageBox("${variable} = ${value}")
-		dk_messageBox("${CMAKE_CURRENT_LIST_FILE}")
+		dk_messageBox("\
+		variable = ${variable}\n \
+		access   = ${access}\n \
+		value    = ${value}\n \
+		current_list_file = ${current_list_file}\n \
+		stack = ${stack}\n \
+		")
+		
 	endif()
 endmacro()
 

@@ -3,12 +3,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_libDebug(lib_path)
+# dk_libDebug(<lib_path>, <alias>:optional)
 #
 #	TODO
 #
 #	@lib_path	- TODO
-#	@variable (optional)	- Create a variable to store the lib_path in.
+#	@alias (optional)	- Create a variable to store the lib_path in.
 #
 function(dk_libDebug lib_path)
 	dk_debugFunc()
@@ -35,7 +35,8 @@ function(dk_libDebug lib_path)
 
 	if(INSTALL_DKLIBS)
 		if(EXISTS ${lib_path})
-			dk_basename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+			#dk_basename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME) # if DKMAKE.cmake is run from 3rdParty/lib,  this is ok
+			set(LIB_NAME $ENV{CURRENT_PLUGIN}) # otherwise if DKCMAKE.cmake is run from DKPlugins/lib,
 			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${triple}/Debug)
 		endif()
 	endif()

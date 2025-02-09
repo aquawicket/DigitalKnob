@@ -27,11 +27,11 @@ function(dk_depend plugin) #target
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
 	if((NOT EXISTS ${PLUGIN}) OR (NOT EXISTS ${${PLUGIN}_DIR}))
 		
-
 		###### Push Plugin to the PLUGIN_STACK ######
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
 		#############################################
 
+		
 		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
 		dk_dependB(${plugin})
 	
