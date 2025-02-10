@@ -11,21 +11,22 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ### IMPORT ###
 dk_validate(host_triple "dk_host_triple()")
-dk_validate(triple "dk_target_triple()")
+dk_validate(target_triple "dk_target_triple()")
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam("${DKIMPORTS_DIR}/zlib/dkconfig.txt" ZLIB_DL)
 dk_import(${ZLIB_DL})
 #dk_import(https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz)
 
 ### DKBIN ###
-#set(ZLIB_INC		 "${DIGITALKNOB_DIR}/DKBIN/include/zlib") # C:/Users/Administrator/digitalknob/DKBIN/include/zlib
-#set(ZLIB_CONFIG_DIR	 "${ZLIB_INC}/${CONFIG_PATH}")			  # //DKBIN/include/zlib/win_x86_64_clang (MULTI_CONFIG), //DKBIN/include/zlib/win_x86_64_clang/Debug (SINGLE_CONFIG)
-#set(ZLIB_LIB		 "${DIGITALKNOB_DIR}/DKBIN/lib/zlib")	  # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib
-#set(ZLIB_DEBUG_DIR	 "${ZLIB_LIB}/${triple}/${DEBUG_DIR}")	  # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Debug
-#set(ZLIB_RELEASE_DIR "${ZLIB_LIB}/${triple}/${RELEASE_DIR}")  # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Release
+#set(ZLIB			 "${DIGITALKNOB_DIR}/DKBIN/include/zlib")  # C:/Users/Administrator/digitalknob/DKBIN/include/zlib
+#set(ZLIB_INC		 "${DIGITALKNOB_DIR}/DKBIN/include/zlib")  # C:/Users/Administrator/digitalknob/DKBIN/include/zlib
+#set(ZLIB_CONFIG_DIR  "${ZLIB_INC}/${CONFIG_PATH}")			   # //DKBIN/include/zlib/win_x86_64_clang (MULTI_CONFIG), //DKBIN/include/zlib/win_x86_64_clang/Debug (SINGLE_CONFIG)
+#set(ZLIB_LIB		 "${DIGITALKNOB_DIR}/DKBIN/lib/zlib")	   # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib
+#set(ZLIB_DEBUG_DIR	 "${ZLIB_LIB}/${triple}/${DEBUG_DIR}")	   # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Debug
+#set(ZLIB_RELEASE_DIR "${ZLIB_LIB}/${triple}/${RELEASE_DIR}")   # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Release
 
 ### LINK ###
-dk_include				(${ZLIB}								ZLIB_INCLUDE_DIR)
+dk_include				(${ZLIB_INC}							ZLIB_INCLUDE_DIR)
 dk_include				(${ZLIB_CONFIG_DIR}						ZLIB_INCLUDE_DIR2)
 if(MSVC)
 	if(WIN)	

@@ -50,6 +50,7 @@ exit /b 0
 
 
 :dk_install
+	if "%~1" neq "" (goto:eof)
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
 	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*

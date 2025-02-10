@@ -21,9 +21,10 @@ function(dk_lib lib_path)
 
 		if(INSTALL_DKLIBS)
 			if(EXISTS ${lib_path})
-				dk_assertVar($ENV{CURRENT_PLUGIN}_IMPORT_NAME)
-				set(LIB_NAME ${$ENV{CURRENT_PLUGIN}_IMPORT_NAME}) # get the import folder name of the plugin
-				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${triple})
+				#dk_assertVar($ENV{CURRENT_PLUGIN}_IMPORT_NAME)
+				#set(LIB_NAME ${$ENV{CURRENT_PLUGIN}_IMPORT_NAME}) # get the import folder name of the plugin
+				#file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${triple})
+				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib//${triple})
 			else()
 				dk_warning("DKINSTALL: Could not locate ${lib_path}")
 			endif()
