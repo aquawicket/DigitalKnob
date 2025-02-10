@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 #[ -z "${KEY_WAIT_ON_EXIT-}" ] && dk_export KEY_WAIT_ON_EXIT 1

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 # The reason we are overwriting echo is to try and keep junk echo's out of command substitution returns.

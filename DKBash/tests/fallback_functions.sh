@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 foo(){ echo "foo ${1}"; }
 $(command -v foo) || foo(){ echo "foo_fallback ${1}"; }

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 [ -z ${ENABLE_dk_log-} ]  && ENABLE_dk_log=1

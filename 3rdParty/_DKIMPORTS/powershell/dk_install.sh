@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 [ -z "${DKINIT-}" ] && . ../../../DKBash/functions/DK.sh
 
 # https://github.com/PowerShell/PowerShell/releases

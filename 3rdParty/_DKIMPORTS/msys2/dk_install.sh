@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 . ../../../DKBash/functions/DK.sh
 dk_includeGuard
 

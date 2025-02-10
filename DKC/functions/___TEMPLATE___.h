@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __TEMPLATE__._h
-#define __TEMPLATE__._h
+#ifndef __TEMPLATE___h
+#define __TEMPLATE___h
 
 #include "DK.h"
 
@@ -8,9 +8,11 @@
 //################################################################################
 //# __TEMPLATE__()
 //#
-void __TEMPLATE__(){
+int __TEMPLATE__(){
+	
 	// TODO
+	return 0;
 };
 
 
-#endif //__TEMPLATE__
+#endif //__TEMPLATE___h

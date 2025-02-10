@@ -5,7 +5,6 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main() {
-	__TEMPLATE__();
-    return 0;
+	return __TEMPLATE__();
 }
 #endif

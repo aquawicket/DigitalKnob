@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 ############ dk_onError trap ############
 (set -o posix 		 2>/dev/null)	&& set -o posix			|| echo "'set -o posix' failed"

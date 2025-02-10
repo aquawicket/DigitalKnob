@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
 #echo "0 = $0"
 
