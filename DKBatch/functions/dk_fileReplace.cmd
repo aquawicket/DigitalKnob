@@ -1,50 +1,35 @@
-#!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-include_guard()
+@echo off
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-###############################################################################
-# dk_fileReplace(filePath, find, replace)
-#
-#	TODO
-#
-#	@filePath	- TODO
-#	@find		- TODO
-#	@replace	- TODO
-#
-function(dk_fileReplace)
-	dk_debugFunc(3 4)
+::###############################################################################
+::# dk_fileReplace(filePath, find, replace)
+::#
+::#	TODO
+::#
+::#	@filePath	- TODO
+::#	@find		- TODO
+::#	@replace	- TODO
+::#
+:dk_fileReplace
+setlocal
+	%dk_call% dk_debugFunc 3 4
 	
-	dk_assertVar(ARGV0)
-	set(filepath ${ARGV0})
+	set "filePath=%~1"
+	set "find=%~2"
+	set "replace=%~3"
 	
-	dk_assertVar(ARGV1)
-	set(find ${ARGV1})
-	
-	dk_assertVar(ARGV2)
-	set(replace ${ARGV2})
-	
-	file(READ ${filepath} fileString)
-	string(FIND "${fileString}" "${find}" found)
-	if(${found} GREATER -1)
-		dk_replaceAll("${fileString}" "${find}" "${replace}" fileString)
-		dk_fileWrite("${filepath}" "${fileString}")
-	else()
-		dk_warning("cannot find \"${find}\"  in  (${filepath})")
-	endif()
-endfunction()
+	%dk_call% dk_callDKCMake dk_fileReplace "%filePath%" "%find%" "%replace%"
+%endfunction%
 
 
 
 
 
-###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-function(DKTEST)
-	dk_debugFunc(0)
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+setlocal
+	%dk_call% dk_debugFunc 0
 	
-	dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0\;" 			"var USE_SDL = false\;")
-	#dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NO_HALT)
+	%dk_call% dk_fileReplace "C:/Users/Administrator/digitalknob/Development/README.md" "DigitalKnob" "replaced"
 	
-	set(filepath "C:/Users/Administrator/digitalknob/Development/3rdParty/rlottie-e3026b1e/CMakeLists.txt")
-	dk_fileReplace("${filepath}" "set(CMAKE_CXX_FLAGS_RELEASE" "#set(CMAKE_CXX_FLAGS_RELEASE")
-	dk_fileReplace("${filepath}" "set(CMAKE_CXX_FLAGS_DEBUG" "#set(CMAKE_CXX_FLAGS_DEBUG")
-endfunction()
+%endfunction%

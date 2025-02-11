@@ -18,8 +18,8 @@ setlocal
 	if not defined DKHTTP_DKCMAKE_DIR				(set "DKHTTP_DKCMAKE_DIR=%DKHTTP_DKBRANCH_DIR%/DKCMake")
 	if not defined DKHTTP_DKCMAKE_FUNCTIONS_DIR		(set "DKHTTP_DKCMAKE_FUNCTIONS_DIR=%DKHTTP_DKCMAKE_DIR%/functions")
 	
-	if not exist %DKCMAKE_FUNCTIONS_DIR%/DK.ps1		(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/DK.ps1" "%DKCMAKE_FUNCTIONS_DIR%/DK.ps1")
-	if not exist %DKCMAKE_FUNCTIONS_DIR%/%~1.ps1	(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/%~1.ps1" "%DKCMAKE_FUNCTIONS_DIR%/%~1.ps1")
+	if not exist %DKCMAKE_FUNCTIONS_DIR%/DK.cmake		(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/DK.cmake" "%DKCMAKE_FUNCTIONS_DIR%/DK.cmake")
+	if not exist %DKCMAKE_FUNCTIONS_DIR%/%~1.cmake	(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/%~1.cmake" "%DKCMAKE_FUNCTIONS_DIR%/%~1.cmake")
 	
     %dk_call% dk_validate DKIMPORTS_DIR         "%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_validate CMAKE_EXE             "%dk_call% %DKIMPORTS_DIR%/cmake/dk_install.cmd"
