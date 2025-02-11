@@ -4,11 +4,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###############################################################################
 ::# dk_fileReplace(filePath, find, replace)
 ::#
-::#	TODO
 ::#
-::#	@filePath	- TODO
-::#	@find		- TODO
-::#	@replace	- TODO
+::#	@filePath	- Path to the file to be altered.
+::#	@find		- The string to search for in the file.
+::#	@replace	- The string to replace the found string with
 ::#
 :dk_fileReplace
 setlocal
