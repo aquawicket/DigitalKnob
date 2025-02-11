@@ -18,7 +18,7 @@ setlocal
 	set "find=%~2"
 	set "replace=%~3"
 	
-	%dk_call% dk_callDKCMake dk_fileReplace "%filePath%" "%find%" "%replace%"
+	%dk_call% dk_callDKCMake dk_fileReplace %filePath% %find% %replace%
 %endfunction%
 
 
@@ -30,6 +30,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_fileReplace "C:/Users/Administrator/digitalknob/Development/README.md" "DigitalKnob" "replaced"
+	%dk_call% dk_fileReplace C:/Users/Administrator/digitalknob/Development/README.md Digitalknob replaced
 	
 %endfunction%

@@ -16,12 +16,15 @@ function(dk_fileReplace)
 	
 	dk_assertVar(ARGV0)
 	set(filepath ${ARGV0})
+	dk_replaceAll("${filepath}" "\'" "" filepath)
 	
 	dk_assertVar(ARGV1)
 	set(find ${ARGV1})
+	dk_replaceAll("${find}" "\'" "" find)
 	
 	dk_assertVar(ARGV2)
 	set(replace ${ARGV2})
+	dk_replaceAll("${replace}" "\'" "" replace)
 	
 	file(READ ${filepath} fileString)
 	string(FIND "${fileString}" "${find}" found)
@@ -40,6 +43,8 @@ endfunction()
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
 	dk_debugFunc(0)
+	
+	dk_fileReplace("C:/Users/Administrator/digitalknob/Development/README.md" "replaced" "DigitalKnob")
 	
 	dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0\;" 			"var USE_SDL = false\;")
 	#dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NO_HALT)

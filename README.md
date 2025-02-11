@@ -1,7 +1,7 @@
 ![](http://digitalknob.com/Digitalknob/Digitalknob/logo.png)
-# DigitalKnob
+# Digitalknob
 
-<!-- [![Gitter](https://badges.gitter.im/DigitalKnob/community.svg)](https://gitter.im/DigitalKnob/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
+<!-- [![Gitter](https://badges.gitter.im/Digitalknob/community.svg)](https://gitter.im/Digitalknob/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
 
 ### Digitalknob is a Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS.
 *"Apps should look and act the same on every operating system and browser."* <br><br>
@@ -305,12 +305,12 @@ zstd
 
 # How to build
 ### Windows Host
-Download and run [DKBuilder.cmd](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd)
+Download and run [DKBuilder.cmd](https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd)
    or
-Download and run [DKBuilder.ps1](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1)
+Download and run [DKBuilder.ps1](https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1)
 
 ### Unix Host
-Download [DKBuilder.sh](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/apps/DKBuilder/DKBuilder.sh) <br>
+Download [DKBuilder.sh](https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/apps/DKBuilder/DKBuilder.sh) <br>
 From terminal run 'chmod 777 /path/to/DKBuilder.sh' <br>
 Run '/path/to/DKBuilder.sh'
 
@@ -347,16 +347,16 @@ EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/digitalknob/Devel
 <br><br><br>
 [Forking, Branching and Pull Requests](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)<br>
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-[.](http://aquawicket.github.io/DigitalKnob/DKPlugins/index.html)
+[.](http://aquawicket.github.io/Digitalknob/DKPlugins/index.html)
 
 
 # License
-DigitalKnob is published under the MIT license. 
-This repository references the use of third-party source code and assets with their own licenses. Upon any use of DigitalKnob and/or any part of its code base, you hereby fully agree to, and acknowledge all licensees of said third-party source code.
+Digitalknob is published under the MIT license. 
+This repository references the use of third-party source code and assets with their own licenses. Upon any use of Digitalknob and/or any part of its code base, you hereby fully agree to, and acknowledge all licensees of said third-party source code.
 
 MIT License
 
-Copyright (c) 2010-2025 DigitalKnob, and contributors
+Copyright (c) 2010-2025 Digitalknob, and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
