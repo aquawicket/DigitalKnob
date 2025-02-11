@@ -18,14 +18,15 @@ setlocal
 	if not defined DKHTTP_DKCMAKE_DIR				(set "DKHTTP_DKCMAKE_DIR=%DKHTTP_DKBRANCH_DIR%/DKCMake")
 	if not defined DKHTTP_DKCMAKE_FUNCTIONS_DIR		(set "DKHTTP_DKCMAKE_FUNCTIONS_DIR=%DKHTTP_DKCMAKE_DIR%/functions")
 	
-	if not exist %DKCMAKE_FUNCTIONS_DIR%/DK.cmake		(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/DK.cmake" "%DKCMAKE_FUNCTIONS_DIR%/DK.cmake")
+	if not exist %DKCMAKE_FUNCTIONS_DIR%/DK.cmake	(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/DK.cmake" "%DKCMAKE_FUNCTIONS_DIR%/DK.cmake")
 	if not exist %DKCMAKE_FUNCTIONS_DIR%/%~1.cmake	(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/%~1.cmake" "%DKCMAKE_FUNCTIONS_DIR%/%~1.cmake")
 	
-    %dk_call% dk_validate DKIMPORTS_DIR         "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_validate CMAKE_EXE             "%dk_call% %DKIMPORTS_DIR%/cmake/dk_install.cmd"
+    %dk_call% dk_validate DKIMPORTS_DIR         	"%dk_call% dk_DKIMPORTS_DIR"
+    %dk_call% dk_validate CMAKE_EXE             	"%dk_call% %DKIMPORTS_DIR%/cmake/dk_install.cmd"
 	
-::	%dk_call% dk_validate DKCMAKE_DIR           "%dk_call% dk_DKBRANCH_DIR"
-::  %dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+::	%dk_call% dk_validate DKCMAKE_DIR           	"%dk_call% dk_DKBRANCH_DIR"
+::  %dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR 	"%dk_call% dk_DKBRANCH_DIR"
+
 	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
 	set "DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR%/"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
@@ -44,12 +45,14 @@ setlocal
     set "DKCMAKE_COMMAND=%CMAKE_EXE% "-DDKCOMMAND=%DKCOMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DQUEUE_BUILD=ON" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" -P %DKCMAKE_DIR%/DKEval.cmake"
     ::echo %DKCMAKE_COMMAND%    
     for /f "delims=" %%Z in ('%DKCMAKE_COMMAND%') do (
-        echo %%Z                &rem  Display the other shell's stdout
-        set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
+        echo %%Z                	&rem  Display the other shell's stdout
+        set "dk_callDKCmake=%%Z"	&rem  Set the return value to the last line of output
     )
-    ::echo rtn_value = !rtn_value!
     
-	if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
+	endlocal & (
+		set "dk_callDKCmake=%dk_callDKCmake%""
+		if "%LAST_ARG%" == "rtn_var" set "%LAST_ARG%=%dk_callDKCmake%"
+	)
 %endfunction%
 
 
