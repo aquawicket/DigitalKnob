@@ -2,12 +2,12 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_getDrive(<pathname>, <rtn_var>:optional)
+::# dk_getDrive(<pathname>, <output>:optional)
 ::#
 ::#
 :dk_getDrive
 setlocal
-	%dk_call% dk_debugFunc 2    
+	%dk_call% dk_debugFunc 1 2    
 
 	set "pathname=%1"
     set "pathname=%pathname:"=%"

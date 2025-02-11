@@ -2,16 +2,19 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_hexToVariable(name, hex)
+::# dk_hexToVariable(<name>, <output>:optional)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToVariable
 setlocal
-	%dk_call% dk_debugFunc 1
+	%dk_call% dk_debugFunc 1 2
 
     set "hex=%~1"
-    for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x%hex:~-2%"') do endlocal & set "dk_hexToVariable=%%b"
+    for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x%hex:~-2%"') do endlocal & (
+		set "dk_hexToVariable=%%b"
+		if "%2" neq "" set "%2=%dk_hexToVariable%"
+	)
 %endfunction%
 
 

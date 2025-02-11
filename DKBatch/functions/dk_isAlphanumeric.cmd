@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_isAlphanumeric(string rtn_var)
+::# dk_isAlphanumeric(<string>, <output>:optional)
 ::#
 ::#  https://stackoverflow.com/a/17584764
 ::#
@@ -16,12 +16,18 @@ setlocal
 
     if not defined bad_characters (
         set "bad_characters="
-        if "%~2" neq "" (endlocal & set "%2=true")
+		endlocal & (
+			set "dk_isAlphanumeric=true"
+			if "%~2" neq "" set "%2=%dk_isAlphanumeric%"
+		)
         exit /b 0
     )
     
     set "bad_characters="
-    if "%~2" neq "" (endlocal & call set "%2=false")
+    endlocal & (
+		set "dk_isAlphanumeric=false"
+		if "%~2" neq "" set "%2=%dk_isAlphanumeric%"
+	)
     exit /b 1
 %endfunction%
 

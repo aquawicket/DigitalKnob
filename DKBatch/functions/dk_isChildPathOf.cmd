@@ -14,24 +14,26 @@ setlocal
     set "_haystack_=%_haystack_:/=\%"									&:: replace all '/' with '\'
 	set "_haystack_=%_haystack_::=%"									&:: remove all ':'
     if "%_haystack_:~0,1%" equ "\" set "_haystack_=%_haystack_:~1%"		&:: remove first character if it's a '\'
-	::echo %_haystack_%
 	
     set "_needle_=%~2"
     set "_needle_=%_needle_:/=\%"
     set "_needle_=%_needle_::=%"
     if "%_needle_:~0,1%" equ "\" set "_needle_=%_needle_:~1%"
-	::echo %_needle_%
-   
 
-    ::echo "x!_haystack_:%_needle_%=!"=="x%_haystack_%"
     if not "x!_haystack_:%_needle_%=!x"=="x%_haystack_%x" (
-        if "%~3" neq "" (endlocal & set "%3=true")
+        if "%~3" neq "" endlocal & (
+			set "dk_isChildPathOf=true"
+			if "%~3" neq "" set "%3=%dk_isChildPathOf%"
+		)
         set "_haystack_="
         set "_needle_="
         exit /b 0
     )
     
-    if "%~3" neq "" (endlocal & set "%3=false")
+    if "%~3" neq "" endlocal & (
+		set "dk_isChildPathOf=false"
+		if "%~3" neq "" set "%3=%dk_isChildPathOf%"
+	)
     set "_haystack_="
     set "_needle_="
     exit /b 1

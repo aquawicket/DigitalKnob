@@ -2,13 +2,13 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_hexToAscii(hex_string)
+::# dk_hexToAscii(<hex>, <output>:optional)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToAscii
 setlocal
-	%dk_call% dk_debugFunc 1
+	%dk_call% dk_debugFunc 1 2
 
     set "hex=%~1"
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
@@ -19,11 +19,14 @@ setlocal
 	set "CERTUTIL_EXE=C:\Windows\System32\certutil.exe"
 	::%dk_call% dk_validate CERTUTIL_EXE "%dk_call% d_CERTUTIL_EXE"
     %dk_call% %CERTUTIL_EXE% -decodehex %DKCACHE_DIR%\hex.tmp %DKCACHE_DIR%\ascii.tmp >nul
-    set "ascii="
-    set /p ascii=<%DKCACHE_DIR%\ascii.tmp
+    set "dk_hexToAscii="
+    set /p dk_hexToAscii=<%DKCACHE_DIR%\ascii.tmp
     ( del %DKCACHE_DIR%\hex.tmp & del %DKCACHE_DIR%\ascii.tmp )>nul
     
-    endlocal & set "dk_hexToAscii=%ascii%"
+    endlocal & (
+		set "dk_hexToAscii=%dk_hexToAscii%"
+		if "%2" neq "" set "%2=%dk_hexToAscii%"
+	)
 %endfunction%
 
 

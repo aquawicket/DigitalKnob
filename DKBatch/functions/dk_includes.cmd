@@ -2,7 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_includes(haystack, needle, rtn_var)
+::# dk_includes(<haystack>, <needle>, <output>:optional)
 ::#
 ::#
 :dk_includes
@@ -15,13 +15,19 @@ setlocal enableDelayedExpansion
     set "_needle_=%~2"
 	
 	if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
-        if "%~3" neq "" (endlocal & set "%3=true")
+        if "%~3" neq "" endlocal & (
+			set "dk_includes=true"
+			if "%3" neq "" set "%2=%dk_includes%"
+		)
 		set "_haystack_="
 		set "_needle_="
         exit /b 0
     )
     
-    if "%~3" neq "" (endlocal & set "%3=false")
+    if "%~3" neq "" endlocal & (
+		set "dk_includes=false"
+		if "%3" neq "" set "%2=%dk_includes%"
+	)
 	set "_haystack_="
 	set "_needle_="
     exit /b 1
