@@ -30,7 +30,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     set "CMAKE_ARGS="
     if "%target_type%"=="Debug"      	(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
-    if "%target_type%"=="Release"    	(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON_
+    if "%target_type%"=="Release"    	(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
     if "%target_type%"=="All"        	(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
     if "%target_level%"=="Build"      	(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
     if "%target_level%"=="Rebuild"    	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
