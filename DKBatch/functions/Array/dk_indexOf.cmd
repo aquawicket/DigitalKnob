@@ -1,5 +1,5 @@
 @echo off
-if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
+if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=..\")
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
@@ -38,8 +38,8 @@ setlocal enableDelayedExpansion
 			%endfunction%
         )
 
-        if "!DE!" equ "" set "_value_=!%~1[%_count_%]!"
-        if "!DE!" neq "" call set "_value_=%%%~1[%_count_%]%%"
+        if "!DE!" equ "" (set "_value_=!%~1[%_count_%]!")
+        if "!DE!" neq "" (call set "_value_=%%%~1[%_count_%]%%")
         if "%~2" == "%_value_%" (
             endlocal & set "dk_indexOf=%_count_%"
 			%endfunction%

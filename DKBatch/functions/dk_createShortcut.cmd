@@ -15,8 +15,8 @@ setlocal
 	set "target_path=%target_path:/=\%"
     set "OVERWRITE=%~3"
     
-    if not defined OVERWRITE if exist "%shortcut_path%" %dk_call% dk_warning "%shortcut_path% already exists" && %return%    
-	if exist "%shortcut_path%" %dk_call% dk_delete "%shortcut_path%"
+    if not defined OVERWRITE if exist "%shortcut_path%" (%dk_call% dk_warning "%shortcut_path% already exists" && %return%)
+	if exist "%shortcut_path%" (%dk_call% dk_delete "%shortcut_path%")
 
 	:: Method 1: direct powershell
 	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
@@ -37,7 +37,7 @@ setlocal
 	:: Method 3: call powershell function
 	%dk_call% dk_callDKPowershell dk_createShortcut %*
     
-    if not exist %shortcut_path% %dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%"
+    if not exist %shortcut_path% (%dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%")
 %endfunction%
 
 

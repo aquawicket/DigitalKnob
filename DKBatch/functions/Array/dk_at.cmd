@@ -1,5 +1,5 @@
 @echo off
-if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
+if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=..\")
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
@@ -46,8 +46,8 @@ setlocal
     %dk_call% dk_printVar myArrayA
     %dk_call% Array::dk_at MyArrayA 2
     %dk_call% dk_echo "Array::dk_at[MyArrayA 2] = %dk_at%"
-    if "%dk_at%" neq "d e f" %dk_call% dk_error "Array::dk_at[] failed"
-    if "%dk_at%" equ "d e f" %dk_call% dk_success "Array::dk_at[] suceeded" 
+    if "%dk_at%" neq "d e f" (%dk_call% dk_error "Array::dk_at[] failed")
+    if "%dk_at%" equ "d e f" (%dk_call% dk_success "Array::dk_at[] suceeded") 
 
     set "myArrayB[0]=h i j"
     set "myArrayB[1]=4 5 6"
@@ -57,6 +57,6 @@ setlocal
     %dk_call% dk_printVar myArrayB
     %dk_call% Array::dk_at MyArrayB 3
     %dk_call% dk_echo "Array::dk_at[MyArrayB 3] = %dk_at%"
-    if "%dk_at%" neq "1 2 3" %dk_call% dk_error "Array::dk_at[] failed"
-    if "%dk_at%" equ "1 2 3" %dk_call% dk_success "Array::dk_at[] suceeded"
+    if "%dk_at%" neq "1 2 3" (%dk_call% dk_error "Array::dk_at[] failed")
+    if "%dk_at%" equ "1 2 3" (%dk_call% dk_success "Array::dk_at[] suceeded")
 %endfunction%

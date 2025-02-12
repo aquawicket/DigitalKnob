@@ -56,13 +56,13 @@ setlocal
 	
 	::###### arch ######
 	::%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
-	::if not defined arch set "arch=%host_arch%"
+	::if not defined arch (set "arch=%host_arch%")
 	set "host_arch=%default_host_arch%"
 	%dk_call% dk_printVar arch
 	
 	::###### host_env ######
-	::if not defined host_env set "host_env=%default_host_env%"
-	::if not defined env set "env=%host_env%"
+	::if not defined host_env (set "host_env=%default_host_env%")
+	::if not defined env (set "env=%host_env%")
 	set "host_env=%default_host_env%"
 	%dk_call% dk_printVar host_env
 	
@@ -70,14 +70,14 @@ setlocal
     ::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-	if "%host_env%"=="cosmocc"      %dk_call% dk_validate SH_EXE               "%dk_call% %DKIMPORTS_DIR%/sh/dk_install.cmd"
-	if "%host_env%"=="cosmocc"      %dk_call% dk_validate COSMOCC_C_COMPILER   "%dk_call% %DKIMPORTS_DIR%/cosmocc/dk_install.cmd"
-	if "%host_env%"=="clang"  		%dk_call% dk_validate CLANG_C_COMPILER     "%dk_call% %DKIMPORTS_DIR%/clang/dk_install.cmd"
-	if "%host_env%"=="gcc"    		%dk_call% dk_validate GCC_C_COMPILER       "%dk_call% %DKIMPORTS_DIR%/gcc/dk_install.cmd"
+	if "%host_env%"=="cosmocc"      (%dk_call% dk_validate SH_EXE               "%dk_call% %DKIMPORTS_DIR%/sh/dk_install.cmd")
+	if "%host_env%"=="cosmocc"      (%dk_call% dk_validate COSMOCC_C_COMPILER   "%dk_call% %DKIMPORTS_DIR%/cosmocc/dk_install.cmd")
+	if "%host_env%"=="clang"  		(%dk_call% dk_validate CLANG_C_COMPILER     "%dk_call% %DKIMPORTS_DIR%/clang/dk_install.cmd")
+	if "%host_env%"=="gcc"    		(%dk_call% dk_validate GCC_C_COMPILER       "%dk_call% %DKIMPORTS_DIR%/gcc/dk_install.cmd")
 
-	if "%host_env%"=="cosmocc"      set "COMPILER_EXE=%SH_EXE% %COSMOCC_C_COMPILER%"
-	if "%host_env%"=="clang"  		set "COMPILER_EXE=%CLANG_C_COMPILER%"
-	if "%host_env%"=="gcc"	  		set "COMPILER_EXE=%GCC_C_COMPILER%"
+	if "%host_env%"=="cosmocc"      (set "COMPILER_EXE=%SH_EXE% %COSMOCC_C_COMPILER%")
+	if "%host_env%"=="clang"  		(set "COMPILER_EXE=%CLANG_C_COMPILER%")
+	if "%host_env%"=="gcc"	  		(set "COMPILER_EXE=%GCC_C_COMPILER%")
 	%dk_call% dk_assertVar COMPILER_EXE
 	%dk_call% dk_printVar COMPILER_EXE
 
@@ -90,7 +90,7 @@ setlocal
 	)
     ::echo rtn_value = !rtn_value!
     
-	if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
+	if "%LAST_ARG%" == "rtn_var" (endlocal & set "%LAST_ARG%=%rtn_value%")
 %endfunction%
 
 
@@ -104,5 +104,5 @@ setlocal
 	::%dk_call% dk_callDKC dk_test "FROM DKC" "dk_callDKC.cmd" rtn_var
 	%dk_call% dk_callDKC dk_echo "This is a string from c dk_echo" rtn_var
     %dk_call% dk_echo
-	if defined rtn_var  %dk_call% dk_echo "rtn_var = %rtn_var%"
+	if defined rtn_var  (%dk_call% dk_echo "rtn_var = %rtn_var%")
 %endfunction%

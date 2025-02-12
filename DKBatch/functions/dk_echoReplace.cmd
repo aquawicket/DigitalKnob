@@ -20,8 +20,8 @@ setlocal
     ::%if_NDE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=%_message_:~1,-1%"
     ::%if_DE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
         
-	::if not defined CR  for /f %%a in ('copy /Z "%~dpf0" nul') do set "CR=%%a"
-	for /f %%a in ('copy /Z "%~dpf0" nul') do set "CR=%%a"
+	::if not defined CR  (for /f %%a in ('copy /Z "%~dpf0" nul') do set "CR=%%a")
+	for /f %%a in ('copy /Z "%~dpf0" nul') do (set "CR=%%a")
 	set /P "=%_message_%                                          !CR!" <nul
 	(call )
 %endfunction%

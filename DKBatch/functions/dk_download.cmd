@@ -1,9 +1,9 @@
 @echo off
 @echo off
 
-if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
-if not defined BACKUP_DL_SERVER       set "BACKUP_DL_SERVER=http://aquawicket.com/download"
-if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
+if not defined DKINIT					(call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined BACKUP_DL_SERVER			(set "BACKUP_DL_SERVER=http://aquawicket.com/download")
+if not defined TEST_BACKUP_DL_SERVER	(set "TEST_BACKUP_DL_SERVER=0")
 ::####################################################################
 ::# dk_download(url, destination)
 ::#
@@ -18,16 +18,16 @@ setlocal
     %dk_call% dk_basename "%url%"
 	%dk_call% dk_assertVar dk_basename
 
-    if defined destination %dk_call% dk_realpath "%destination%" destination
+    if defined destination (%dk_call% dk_realpath "%destination%" destination)
    
     %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	if not defined destination set "destination=%DKDOWNLOAD_DIR%/%dk_basename%"
+	if not defined destination (set "destination=%DKDOWNLOAD_DIR%/%dk_basename%")
 	%dk_call% dk_assertVar destination
     
 	%dk_call% dk_isDirectory "%destination%" && set "destination=%destination%/%dk_basename%"
-    if exist "%destination%" %dk_call% dk_info "%destination% already exist" & %return%
+    if exist "%destination%" (%dk_call% dk_info "%destination% already exist" & %return%)
  
-	if "%TEST_BACKUP_DL_SERVER%"=="1"  set "url=%BACKUP_DL_SERVER%/%dk_basename%"
+	if "%TEST_BACKUP_DL_SERVER%"=="1"  (set "url=%BACKUP_DL_SERVER%/%dk_basename%")
 	
 	::### Test that url exists, if not try BACKUP_DL_SERVER ###
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_warning "url:%url% NOT FOUND" && set "url=%BACKUP_DL_SERVER%/%dk_basename%" && %dk_call% dk_info "Trying Backup Server url:%url% . . ."
@@ -36,7 +36,7 @@ setlocal
     
     ::### make sure the destination parent directory exists ###
     %dk_call% dk_dirname "%destination%"
-    if not exist "%dk_dirname%" %dk_call% dk_makeDirectory "%dk_dirname%"
+    if not exist "%dk_dirname%" (%dk_call% dk_makeDirectory "%dk_dirname%")
 
     
     ::set "DISABLE_powershell=1"
@@ -60,7 +60,7 @@ setlocal
     
     :: Try powershell
     :powershell_dl
-    if defined DISABLE_powershell goto end_powershell_dl
+    if defined DISABLE_powershell (goto end_powershell_dl)
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
     %dk_call% dk_echo "Downloading via powershell"
     set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
@@ -68,39 +68,39 @@ setlocal
         "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
         "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
-    if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
-    if exist "%destination%_DOWNLOADING" goto download_done
+    if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+    if exist "%destination%_DOWNLOADING" (goto download_done)
     :end_powershell_dl
     
     :: Try curl
     :curl_dl
-    if defined DISABLE_curl goto end_curl_dl
+    if defined DISABLE_curl (goto end_curl_dl)
     %dk_call% dk_echo "Downloading via dk_curl"
 	%dk_call% dk_validate CURL_EXE "dk_CURL_EXE"
-    if not exist "%destination%_DOWNLOADING" %CURL_EXE% --help %NO_OUTPUT% && curl -L "%url%" -o "%destination%_DOWNLOADING"
+    if not exist "%destination%_DOWNLOADING" (%CURL_EXE% --help %NO_OUTPUT% && curl -L "%url%" -o "%destination%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
-    if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
-    if exist "%destination%_DOWNLOADING" goto download_done
+    if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+    if exist "%destination%_DOWNLOADING" (goto download_done)
     :end_curl_dl
     
     :: Try certutil
     :certitil_dl
-    if defined DISABLE_certutil goto end_certutil_dl
+    if defined DISABLE_certutil (goto end_certutil_dl)
     %dk_call% dk_echo "Downloading via certutil"
-    if not exist "%destination%_DOWNLOADING" certutil.exe %NO_OUTPUT% && certutil.exe -urlcache -split -f "%url%" "%destination%_DOWNLOADING"
+    if not exist "%destination%_DOWNLOADING" (certutil.exe %NO_OUTPUT% && certutil.exe -urlcache -split -f "%url%" "%destination%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
-    if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
-    if exist "%destination%_DOWNLOADING" goto download_done
+    if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+    if exist "%destination%_DOWNLOADING" (goto download_done)
     :end_certutil_dl
     
     :download_done
     :: If Dowload Failed
-    if not exist "%destination%_DOWNLOADING" %dk_call% dk_error "url:%url% DOWNLOAD FAILED"
+    if not exist "%destination%_DOWNLOADING" (%dk_call% dk_error "url:%url% DOWNLOAD FAILED")
     
     :: downloaded as temporary name like myFile.txt_DOWNLOADING
     :: then rename it to it's original upon completion
     %dk_call% dk_rename "%destination%_DOWNLOADING" "%destination%"
-    if not exist "%destination%" %dk_call% dk_error "failed to rename %destination%_DOWNLOADING"
+    if not exist "%destination%" (%dk_call% dk_error "failed to rename %destination%_DOWNLOADING")
     
     %dk_call% dk_log SUCCESS "Download complete"
 %endfunction%

@@ -135,7 +135,7 @@ setlocal enableDelayedExpansion
                 if not defined _r ( set "_r=%%A" ) else ( set "_r=%_r%%~4%with%%%A" )
                 set "_s=%%B"
             )
-        if defined _s goto _replaceEqualSign
+        if defined _s (goto _replaceEqualSign)
     endlocal&set "%~1=%_r:~0,-1%"
 %endfunction%
 

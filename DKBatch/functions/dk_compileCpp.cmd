@@ -13,7 +13,7 @@ setlocal
 	set "filepath=%filepath:/=\%"
 	
     set "appname=%~2"
-    if not defined appname set "appname=temp"
+    if not defined appname (set "appname=temp")
     
     %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_validate GXX_EXE "%dk_call% %DKIMPORTS_DIR%\gcc\dk_install.cmd"

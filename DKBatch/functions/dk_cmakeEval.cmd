@@ -32,16 +32,16 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     
     ::### build CMAKE_ARGS ###
     :: append %DKCOMMAND% to CMAKE_ARGS with quotes removed
-::    if defined DKCOMMAND  call set CMAKE_ARGS=%CMAKE_ARGS% -DDKCOMMAND=%%DKCOMMAND:"=%% 
-	if defined DKCOMMAND  set CMAKE_ARGS=%CMAKE_ARGS% "-DDKCOMMAND=%DKCOMMAND%"
+::    if defined DKCOMMAND  (call set CMAKE_ARGS=%CMAKE_ARGS% -DDKCOMMAND=%%DKCOMMAND:"=%%)
+	if defined DKCOMMAND  (set CMAKE_ARGS=%CMAKE_ARGS% "-DDKCOMMAND=%DKCOMMAND%")
 
     :: append %DKRETURN% to CMAKE_ARGS with quotes removed
-::    if defined DKRETURN   call set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%%DKRETURN:"=%%
-	if defined DKRETURN   set CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%DKRETURN%"
+::    if defined DKRETURN   (call set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%%DKRETURN:"=%%)
+	if defined DKRETURN   (set CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%DKRETURN%")
     
     :: append %DKVARS% to CMAKE_ARGS with quotes removed
-::    if defined DKVARS     call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%
-	if defined DKVARS     call set CMAKE_ARGS=%CMAKE_ARGS% "%DKVARS%"
+::    if defined DKVARS     (call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%)
+	if defined DKVARS     (call set CMAKE_ARGS=%CMAKE_ARGS% "%DKVARS%")
  
     ::set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
 	set DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_:\=/%
@@ -59,7 +59,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 
 ::	###### IMPORT VARIABLES ######
-    if not defined DKRETURN %return%
+    if not defined DKRETURN (%return%)
 	%dk_call% dk_importVars
 	
 	

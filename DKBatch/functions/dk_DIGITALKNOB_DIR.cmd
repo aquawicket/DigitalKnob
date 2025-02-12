@@ -17,8 +17,8 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	)
 	
 	::############ GET ############
-    ::if not defined DIGITALKNOB        set "DIGITALKNOB=D i g i t a l K n o b"
-    if not defined DIGITALKNOB          set "DIGITALKNOB=digitalknob"
+    ::if not defined DIGITALKNOB        (set "DIGITALKNOB=D i g i t a l K n o b")
+    if not defined DIGITALKNOB          (set "DIGITALKNOB=digitalknob")
     
 	::### DIGITALKNOB_DIR ###
 	%dk_call% dk_validatePath DKHOME_DIR    "%dk_call% dk_DKHOME_DIR"

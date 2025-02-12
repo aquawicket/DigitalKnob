@@ -1,5 +1,5 @@
 @echo off
-if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=..\"
+if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=..\")
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 
@@ -17,11 +17,11 @@ setlocal
 	
     set "inputFile=%~1"
     set "outputFile=%inputFile%.b64"
-    ::if %__ARGC__% equ 2 set "outputFile=%~2"
-	if not "%~2"=="" set "outputFile=%~2"
+    ::if %__ARGC__% equ 2 (set "outputFile=%~2")
+	if not "%~2"=="" (set "outputFile=%~2")
     
-    if not exist "%inputFile%" %dk_call% dk_error "%inputFile% not found"
-    if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
+    if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
+    if exist "%outputFile%" (%dk_call% dk_error "%outputFile% already exists and cannot be overwritten")
     
     certutil -encode -f "%inputFile%" "%outputFile%.tmp" 1>nul
 	
