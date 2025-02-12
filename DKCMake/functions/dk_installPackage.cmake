@@ -128,26 +128,26 @@ function(dk_installPackage)
 		dk_assertPath(MSYS2_CacheDir)
 		
 		if(win_x86_clang)
-			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")			# CLANG32
-			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-i686-${package} --needed --noconfirm)											# CLANG32
+			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")		# CLANG32
+			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-i686-${package} --needed --noconfirm)									# CLANG32
 		elseif(win_x86_64_clang)
-			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")		# CLANG64
-			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-x86_64-${package} --needed --noconfirm)										# CLANG64
+			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")	# CLANG64
+			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-x86_64-${package} --needed --noconfirm)									# CLANG64
 		elseif(win_arm64_clang)
-			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-aarch64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")		# CLANGARM64
-			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-aarch64-${package} --needed --noconfirm)										# CLANGARM64
-		elseif(win_x86_mingw)
-			set(comand "${PACMAN_EXE}" -S mingw-w64-i686-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")				# MINGW32
-			#set(comand "${PACMAN_EXE}" -S mingw-w64-i686-${package} --needed --noconfirm)												# MINGW32
-		elseif(win_x86_64_mingw)
-			set(comand "${PACMAN_EXE}" -S mingw-w64-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")				# MINGW64
-			#set(comand "${PACMAN_EXE}" -S mingw-w64-x86_64-${package} --needed --noconfirm)											# MINGW64
+			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-aarch64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")	# CLANGARM64
+			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-aarch64-${package} --needed --noconfirm)									# CLANGARM64
+		elseif(win_x86_gcc)
+			set(comand "${PACMAN_EXE}" -S mingw-w64-i686-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")			# MINGW32
+			#set(comand "${PACMAN_EXE}" -S mingw-w64-i686-${package} --needed --noconfirm)											# MINGW32
+		elseif(win_x86_64_gcc)
+			set(comand "${PACMAN_EXE}" -S mingw-w64-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")			# MINGW64
+			#set(comand "${PACMAN_EXE}" -S mingw-w64-x86_64-${package} --needed --noconfirm)										# MINGW64
 		elseif(win_x86_64_ucrt)
-			set(comand "${PACMAN_EXE}" -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")			# UCRT64
-			#set(comand "${PACMAN_EXE}" -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm)										# UCRT64
+			set(comand "${PACMAN_EXE}" -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")		# UCRT64
+			#set(comand "${PACMAN_EXE}" -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm)									# UCRT64
 		else()
-			set(comand "${PACMAN_EXE}" -S ${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")								# MSYS (DEFAULT)
-			#set(comand "${PACMAN_EXE}" -S ${package} --needed --noconfirm)																# MSYS (DEFAULT)
+			set(comand "${PACMAN_EXE}" -S ${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")							# MSYS (DEFAULT)
+			#set(comand "${PACMAN_EXE}" -S ${package} --needed --noconfirm)															# MSYS (DEFAULT)
 		endif()
 		dk_echo(${comand})
 		execute_process(COMMAND ${comand})
