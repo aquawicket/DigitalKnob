@@ -12,7 +12,9 @@ setlocal
     
 	if "%~1" equ "" (set "timeout_seconds=10") else (set "timeout_seconds=%~1")
 	
-    timeout /t %timeout_seconds%
+	if not defined timeout_seconds (%dk_call% dk_error "timeout_seconds is invalid")
+	
+    (timeout /t %timeout_seconds%)
 	(call )
 %endfunction%
 

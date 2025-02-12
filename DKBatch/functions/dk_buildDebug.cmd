@@ -4,7 +4,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::####################################################################
 ::# dk_buildDebug()
 ::#
-::#
 :dk_buildDebug
 setlocal
 	%dk_call% dk_debugFunc 0
@@ -18,10 +17,11 @@ setlocal
     if exist "%TARGET_PATH%\%target_triple%\%target_type%\CMakeCache.txt" (
 		(set cmnd="%CMAKE_EXE%" --build %TARGET_PATH%/%target_triple%/%target_type% --config %target_type% --verbose)
     )
-	
     if exist "%TARGET_PATH%\%target_triple%\CMakeCache.txt" (
 		(set cmnd="%CMAKE_EXE%" --build %TARGET_PATH%/%target_triple% --config %target_type% --verbose)
     )
+	
+	if "%cmnd%"=="" (%return%)
 	
 	%cmnd% && (
 		%dk_call% dk_success "CMake Build Successful" 
