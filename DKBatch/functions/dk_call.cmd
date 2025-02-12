@@ -139,8 +139,8 @@ exit /b !errorlevel!
 	if defined _IGNORE_ if not "X!_IGNORE_:%__FUNC__%=!X"=="X%_IGNORE_%X" (%endfunction%)
 	
 	call :updateIndent
-	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
-	if not "%_codepage_%"=="65001" chcp 65001>nul
+::	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
+::	if not "%_codepage_%"=="65001" chcp 65001>nul
 	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
 exit /b !errorlevel!
 

@@ -135,8 +135,6 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_assertVar CMAKE_GENERATOR
 	%dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%
 	
-	echo CMAKE_ARGS = %CMAKE_ARGS%
-
 ::  ###### CMAKE_TOOLCHAIN_FILE ######
 ::  %dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%target_triple%_toolchain.cmake"
 ::  %dk_call% dk_assertPath TOOLCHAIN
