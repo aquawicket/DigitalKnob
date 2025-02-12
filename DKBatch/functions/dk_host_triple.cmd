@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::if not defined dk_host_triple (set "dk_host_triple=1") else (goto:eof)
 
 ::#####################################################################

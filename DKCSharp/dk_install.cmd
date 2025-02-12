@@ -3,17 +3,17 @@ if "%~1" == "" (goto dk_install)
 
 :runDKCSharp
 	set "COMPILER_EXE=%~1"
-	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
+	if not defined COMPILER_EXE (echo ERROR: COMPILER_EXE is invalid)
 	
 	set "DKCSharp_FILE=%~2"
-	if not defined DKCSharp_FILE    echo ERROR: DKCSharp_FILE is invalid
+	if not defined DKCSharp_FILE (echo ERROR: DKCSharp_FILE is invalid)
 	
 	:: get the app name
-	for %%Z in ("%DKCSharp_FILE%") do set "APP=%%~nZ"	
+	for %%Z in ("%DKCSharp_FILE%") do (set "APP=%%~nZ")
 	
 	::###### Compile Code ######
 	echo compiling ...
-	if exist %APP%.exe  del %APP%.exe
+	if exist %APP%.exe (del %APP%.exe)
 
 	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKCSharp_FILE%
 	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKCSharp_FILE%
@@ -32,10 +32,13 @@ if "%~1" == "" (goto dk_install)
     %COMSPEC% /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	if %ERRORLEVEL% neq 0 (
+		echo ERROR:%ERRORLEVEL%
+		pause
+	)
 	
 	::###### reload ######
-::	if not exist %~dp0\reload goto:eof
+::	if not exist %~dp0\reload (goto:eof)
 ::	del %~dp0\reload
 ::	cls
 ::	goto runDKCSharp
@@ -67,8 +70,8 @@ if "%~1" == "" (goto dk_install)
 
 :dk_install
 	::###### DKINIT ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
-	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
+	if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Install DKCSharp ######
 	%dk_call% dk_echo "Installing DKCSharp . . ."

@@ -21,10 +21,13 @@ if "%~1" == "" (goto dk_install)
 	%cmnd%
 	
 	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	if %ERRORLEVEL% neq 0 (
+		echo ERROR:%ERRORLEVEL% 
+		pause
+	)
 	pause
 	::###### reload ######
-::	if not exist %~dp0\reload goto:eof
+::	if not exist %~dp0\reload (goto:eof)
 ::	del %~dp0\reload
 ::	cls
 ::	goto runDKPython
@@ -52,8 +55,8 @@ exit /b 0
 :dk_install
 	if "%~1" neq "" (goto:eof)
 	::###### DKINIT ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
-	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
+	if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Install DKPython ######
 	%dk_call% dk_echo "Installing DKPython . . ."

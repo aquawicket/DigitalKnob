@@ -4,8 +4,8 @@ if "%~1" equ "%~0" goto dk_install_bat
 if "%~1" neq ""    goto runDKBat
 :dk_install_bat
 	::###### DKINIT ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
-	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
+	if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	::###### Install DKBat ######
 	%dk_call% dk_echo "Installing DKBat . . ."

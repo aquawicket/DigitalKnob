@@ -7,13 +7,13 @@ REM : The command line argument is expected to be something like foo.cs
 set "file=%~1"
 
 set "file=InputArgs.cs"
-if "%file%"=="" goto USAGE
+if "%file%"=="" (goto USAGE)
 
 :: find csc.exe
 set "csc="
 for /r "%SystemRoot%\Microsoft.NET\Framework\" %%# in ("*csc.exe") do  set "csc=%%#"
 %csc% /nologo /out:%file%.exe  %file%
-if ERRORLEVEL 1 goto EXIT
+if ERRORLEVEL 1 (goto EXIT)
 
 
 setlocal EnableDelayedExpansion
@@ -37,11 +37,11 @@ if !line[%i%]! gtr 0 (
 
 
 echo errorlevel = %errorlevel%
-if ERRORLEVEL -3 echo ERRORLEVEL ^<= -3     'ERRORLEVEL is less than or equal to 3'
-if ERRORLEVEL -2 echo ERRORLEVEL ^<= -2     'ERRORLEVEL is less than or equal to 2'
-if ERRORLEVEL -1 echo ERRORLEVEL ^<= -1     'ERRORLEVEL is less than or equal to 1'
-if ERRORLEVEL  0 echo ERRORLEVEL  =  0
-if ERRORLEVEL  1 echo ERRORLEVEL ^>=  1		'ERRORLEVEL is greater than or equal to 1'
-if ERRORLEVEL  2 echo ERRORLEVEL ^>=  2     'ERRORLEVEL is greater than or equal to 2'
-if ERRORLEVEL  3 echo ERRORLEVEL ^>=  3     'ERRORLEVEL is greater than or equal to 2'
+if ERRORLEVEL -3 (echo ERRORLEVEL ^<= -3     'ERRORLEVEL is less than or equal to 3')
+if ERRORLEVEL -2 (echo ERRORLEVEL ^<= -2     'ERRORLEVEL is less than or equal to 2')
+if ERRORLEVEL -1 (echo ERRORLEVEL ^<= -1     'ERRORLEVEL is less than or equal to 1')
+if ERRORLEVEL  0 (echo ERRORLEVEL  =  0)
+if ERRORLEVEL  1 (echo ERRORLEVEL ^>=  1		'ERRORLEVEL is greater than or equal to 1')
+if ERRORLEVEL  2 (echo ERRORLEVEL ^>=  2     'ERRORLEVEL is greater than or equal to 2')
+if ERRORLEVEL  3 (echo ERRORLEVEL ^>=  3     'ERRORLEVEL is greater than or equal to 2')
 

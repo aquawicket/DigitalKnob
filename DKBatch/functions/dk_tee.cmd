@@ -26,25 +26,25 @@ rem Get the output of CLS command
 for /F %%a in ('cls') do set "cls=%%a"
 
 rem If /A switch is not provided, delete the file that receives Tee output
-if /I "%~2" neq "/A" if exist %1 del %1
+if /I "%~2" neq "/A" if exist %1 (del %1)
 
 rem Create the semaphore-signal file and start the asynchronous Tee process
 echo X > Flag.out
-if exist Flag.in del Flag.in
+if exist Flag.in (del Flag.in)
 Cscript //nologo //E:JScript "%~F0" | "%~F0" %1 :TeeProcess
 del Flag.out
 goto :EOF
 
 :TeeProcess
    rem Wait for "Data Available" signal
-   if not exist Flag.in goto TeeProcess
+   if not exist Flag.in (goto TeeProcess)
    rem Read the input line sent by JScript code
    set line=
    set /P line=
    rem Set "Data Read" acknowledgement
-   ren Flag.in Flag.out
+   rem Flag.in Flag.out
    rem Check for the standard "End Of piped File" mark
-   if "!line!" equ ":_EOF_:" exit /B
+   if "!line!" equ ":_EOF_:" (exit /B)
    rem Correctly manage CLS command
    if "!line:~0,1!" equ "!cls!" (
       cls

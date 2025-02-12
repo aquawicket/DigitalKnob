@@ -17,7 +17,10 @@ if "%~1" == "" (goto dk_install)
 	%COMSPEC% /v:on /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	if %ERRORLEVEL% neq 0 (
+		echo ERROR:%ERRORLEVEL%
+		pause
+	)
 	
 	::###### reload ######
 ::	if not exist %~dp0\reload goto:eof
@@ -46,8 +49,8 @@ if "%~1" == "" (goto dk_install)
 
 :dk_install
 	::###### DKINIT ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
-	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
+	if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Install DKPowershell ######
 	%dk_call% dk_echo "Installing DKPowershell . . ."

@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::if not defined dk_target_triple (set "dk_target_triple=1") else (goto:eof)
 
 ::###############################################################################
@@ -64,7 +64,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!/!target_triple!
 	:endif
 
-	if exist !TARGET_TRIPLE_DIR! goto TARGET_TRIPLE_DIR_EXISTS
+	if exist !TARGET_TRIPLE_DIR! (goto TARGET_TRIPLE_DIR_EXISTS)
 		!dk_call! dk_warning "TARGET_TRIPLE_DIR:!TARGET_TRIPLE_DIR! does not exits."
 		!dk_call! dk_debug "Creating directory . . .!TARGET_TRIPLE_DIR!"
 		!dk_call! dk_makeDirectory !TARGET_TRIPLE_DIR!
