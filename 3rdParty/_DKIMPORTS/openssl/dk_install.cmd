@@ -1,5 +1,5 @@
 @echo off
-if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
+if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\")
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
@@ -21,7 +21,10 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 ::	set "OPENSSL=%DK3RDPARTY_DIR%\openssl-%OPENSSL_FOLDER%"
 	
-	if exist %OPENSSL%\Configure" echo "openssl already installed" && %return%
+	if exist %OPENSSL%\Configure" (
+		echo "openssl already installed"
+		%return%
+	)
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_download %OPENSSL_DL% %DKDOWNLOAD_DIR%\openssl-2f362e9.zip
 	

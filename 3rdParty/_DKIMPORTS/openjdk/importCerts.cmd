@@ -1,5 +1,5 @@
 @echo off
-if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
+if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\")
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 :: NOTE: you'll need to download and install openssl for this, link below
@@ -9,8 +9,8 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 set "GOOGLE_CERT=%JAVA_HOME%\google.cer"
 set "MAVEN_CERT=%JAVA_HOME%\maven.cer"
 set "KEYTOOL_EXE=%JAVA_HOME%\bin\keytool.exe"
-if exist "%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe" set "OPENSSL_EXE=%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe"
-if exist "%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe" set "OPENSSL_EXE=%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe"
+if exist "%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe" (set "OPENSSL_EXE=%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe")
+if exist "%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe" (set "OPENSSL_EXE=%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe")
 
 ::keytool -import -noprompt -file PathToCertificate -alias SomeCertificateAlias -keystore PathToKeyStore -storepass KeyStorePassword
 :: %dk_call% dk_echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf

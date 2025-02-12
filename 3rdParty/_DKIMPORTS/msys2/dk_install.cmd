@@ -1,5 +1,5 @@
 @echo off
-if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
+if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\")
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
@@ -15,7 +15,10 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_importVariables %MSYS2_DL% IMPORT_PATH %DKIMPORTS_DIR%\msys2 ROOT %DK3RDPARTY_DIR%
 	
-	if exist %MSYS2%\msys2.exe" echo "msys2 already installed" && %return%
+	if exist %MSYS2%\msys2.exe" (
+		echo "msys2 already installed"
+		%return%
+	)
 	
 	%dk_call% dk_info "Installing %MSYS2_FOLDER%"
 	%dk_call% dk_download %MSYS2_DL%

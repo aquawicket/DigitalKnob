@@ -1,5 +1,5 @@
 @echo off
-if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
+if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\")
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
@@ -11,11 +11,11 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	if defined android_host      set "OPENJDK_DL=openjdk-17"
-	if defined linux_x86_64_host set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz"
-	if defined mac_x86_64_host   set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
-	if defined win_x86_64_host   set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
-	if not defined OPENJDK_DL %dk_call% dk_error "OPENJDK_DL is invalid"
+	if defined android_host      	(set "OPENJDK_DL=openjdk-17")
+	if defined linux_x86_64_host 	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz")
+	if defined mac_x86_64_host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz")
+	if defined win_x86_64_host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip")
+	if not defined OPENJDK_DL		(%dk_call% dk_error "OPENJDK_DL is invalid")
 	
 	::%dk_call% dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
 	::%dk_call% dk_removeExtension %OPENJDK_DL_FILE% OPENJDK_FOLDER
@@ -23,7 +23,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	::%dk_call% dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	if not defined OPENJDK  %dk_call% dk_importVariables %OPENJDK_DL% NAME openjdk ROOT %DK3RDPARTY_DIR%
+	if not defined OPENJDK (%dk_call% dk_importVariables %OPENJDK_DL% NAME openjdk ROOT %DK3RDPARTY_DIR%)
 	
 	::%dk_call% dk_set OPENJDK %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
 	%dk_call% dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
@@ -56,7 +56,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 %endfunction%
 
 :dk_installOpenJdkMac
-	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" %return%
+	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" (%return%)
 
 	%dk_call% dk_download %OPENJDK_DL%
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"

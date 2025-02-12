@@ -1,5 +1,5 @@
 @echo off
-if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
+if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\")
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
@@ -21,7 +21,10 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 ::	set "NASM=%DK3RDPARTY_DIR%\nasm-%NASM_FOLDER%"
 	
-	if exist %NASM%\Configure" echo "nasm already installed" && %return%
+	if exist %NASM%\Configure" (
+		echo "nasm already installed"
+		%return%
+	)
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_download %NASM_DL% %DKDOWNLOAD_DIR%\nasm-2.16.01-win64.zip
 	
