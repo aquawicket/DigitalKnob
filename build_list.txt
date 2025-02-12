@@ -4,38 +4,35 @@ HelloWorld		ANDROID_ARM64_CLANG			Debug
 HelloWorld		ANDROID_X86_CLANG			Debug
 HelloWorld		ANDROID_X86_64_CLANG 		Debug
 # HelloWorld		COSMOPOLITAN				Debug
-# HelloWorld	EMSCRIPTEN_ARM32_CLANG		Debug
-# HelloWorld	EMSCRIPTEN_ARM64_64_CLANG	Debug
 HelloWorld		EMSCRIPTEN_X86_CLANG		Debug
-# HelloWorld	EMSCRIPTEN_X86_64_CLANG		Debug
-# HelloWorld	IOS_ARM32_CLANG				Debug
-# HelloWorld	IOS_ARM64_CLANG				Debug
-# HelloWorld	IOS_X86_CLANG				Debug
-# HelloWorld	IOS_X86_64_CLANG			Debug
-# HelloWorld	IOSSIM_ARM32_CLANG			Debug
-# HelloWorld	IOSSIM_ARM64_CLANG			Debug
-# HelloWorld	IOSSIM_X86_CLANG			Debug
-# HelloWorld	IOSSIM_X86_64_CLANG			Debug
-# HelloWorld	LINUX_ARM32_CLANG			Debug
-# HelloWorld	LINUX_ARM64_CLANG			Debug
-# HelloWorld	LINUX_X86_CLANG				Debug
-# HelloWorld	LINUX_X86_64_CLANG			Debug
-# HelloWorld	MAC_ARM32_CLANG				Debug
-# HelloWorld	MAC_ARM64_CLANG				Debug
-# HelloWorld	MAC_X86_CLANG				Debug
-# HelloWorld	MAC_X86_64_CLANG			Debug
-# HelloWorld	RASPBERRY_ARM32_CLANG		Debug
-# HelloWorld	RASPBERRY_ARM64_CLANG		Debug
-# HelloWorld	RASPBERRY_X86_CLANG			Debug
-# HelloWorld	RASPBERRY_X86_64_CLANG		Debug
-# HelloWorld	WIN_ARM32_CLANG				Debug
-# HelloWorld	WIN_ARM32_GCC				Debug
-# HelloWorld	WIN_ARM32_MSVC				Debug
-# HelloWorld	WIN_ARM64_CLANG				Debug
-# HelloWorld	WIN_ARM64_GCC				Debug
-# HelloWorld	WIN_ARM64_MSVC				Debug
-# HelloWorld	WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
-# HelloWorld	WIN_X86_GCC					Debug
+HelloWorld	IOS_ARM32_CLANG				Debug
+HelloWorld	IOS_ARM64_CLANG				Debug
+HelloWorld	IOS_X86_CLANG				Debug
+HelloWorld	IOS_X86_64_CLANG			Debug
+HelloWorld	IOSSIM_ARM32_CLANG			Debug
+HelloWorld	IOSSIM_ARM64_CLANG			Debug
+HelloWorld	IOSSIM_X86_CLANG			Debug
+HelloWorld	IOSSIM_X86_64_CLANG			Debug
+HelloWorld	LINUX_ARM32_CLANG			Debug
+HelloWorld	LINUX_ARM64_CLANG			Debug
+HelloWorld	LINUX_X86_CLANG				Debug
+HelloWorld	LINUX_X86_64_CLANG			Debug
+HelloWorld	MAC_ARM32_CLANG				Debug
+HelloWorld	MAC_ARM64_CLANG				Debug
+HelloWorld	MAC_X86_CLANG				Debug
+HelloWorld	MAC_X86_64_CLANG			Debug
+HelloWorld	RASPBERRY_ARM32_CLANG		Debug
+HelloWorld	RASPBERRY_ARM64_CLANG		Debug
+HelloWorld	RASPBERRY_X86_CLANG			Debug
+HelloWorld	RASPBERRY_X86_64_CLANG		Debug
+HelloWorld	WIN_ARM32_CLANG				Debug
+HelloWorld	WIN_ARM32_GCC				Debug
+HelloWorld	WIN_ARM32_MSVC				Debug
+HelloWorld	WIN_ARM64_CLANG				Debug
+HelloWorld	WIN_ARM64_GCC				Debug
+HelloWorld	WIN_ARM64_MSVC				Debug
+HelloWorld	WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
+HelloWorld	WIN_X86_GCC					Debug
 HelloWorld		WIN_X86_MINGW 				Debug	#FIXME: Change to WIN_X86_GCC_MINGW32
 HelloWorld		WIN_X86_MSVC				Debug
 HelloWorld		WIN_X86_64_CLANG			Debug
