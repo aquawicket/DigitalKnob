@@ -20,7 +20,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\dk_install.cmd"
 	
 	setlocal
-		if exist "%TINYCORELINUX_IMG%" %return%
+		if exist "%TINYCORELINUX_IMG%" (%return%)
 		
 		%dk_call% dk_info "Installing tiny-core-linux . . ."
 		%dk_call% dk_basename %TINYCORELINUX_DL% TINYCORELINUX_DL_FILE
@@ -54,7 +54,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 		::###### create TinyCoreLinux Launcher ######
 		%dk_call% dk_set TINYCORELINUX_launcher "%TINYCORELINUX_DIR%\LAUNCH.cmd"
-		if exist "%TINYCORELINUX_launcher%" %return%
+		if exist "%TINYCORELINUX_launcher%" (%return%)
 		%dk_call% dk_fileWrite "%TINYCORELINUX_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl"
 %endfunction%
 	

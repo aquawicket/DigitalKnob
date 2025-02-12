@@ -20,7 +20,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\dk_install.cmd"
 	
 	setlocal
-		if exist "%REACTOS_IMG%" %return%
+		if exist "%REACTOS_IMG%" (%return%)
 		
 		%dk_call% dk_info "Installing ReactOS . . ."
 		%dk_call% dk_basename %REACTOS_DL% REACTOS_DL_FILE
@@ -46,7 +46,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		
 		::###### create ReactOS Launcher ######
 		%dk_call% dk_set REACTOS_launcher "%REACTOS_DIR%\LAUNCH.cmd"
-		if exist "%REACTOS_launcher%" %return%	
+		if exist "%REACTOS_launcher%" (%return%)
 		%dk_call% dk_fileWrite "%REACTOS_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%REACTOS_IMG% -cpu max -smp 2 -vga virtio -display sdl"
 %endfunction%
 

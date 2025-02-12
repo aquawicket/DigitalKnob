@@ -8,8 +8,8 @@
 	:$source https://www.dostips.com
 	Setlocal Disabledelayedexpansion
 	Set "Fmt=%~2"
-	If Not Defined Fmt Set "Fmt=__FILE__(__LINE__): ERROR"
-	For /F "Delims=:" %%A In ('"Findstr /N "%~1" "%~f0""') Do Set /A "lineNr=%%A+%~30/10"
-	call Set "Fmt=%%Fmt:__LINE__=%lineNr%%%"			&:: FIXME: remove the need for call here
-	call Echo.%%Fmt:__FILE__=%~nx0%%
+	if not defined Fmt (Set "Fmt=__FILE__(__LINE__): ERROR")
+	For /F "Delims=:" %%A In ('"Findstr /N "%~1" "%~f0""') Do (set /A "lineNr=%%A+%~30/10")
+	call set "Fmt=%%Fmt:__LINE__=%lineNr%%%"			&:: FIXME: remove the need for call here
+	call echo.%%Fmt:__FILE__=%~nx0%%
 %endfunction%

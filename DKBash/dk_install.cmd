@@ -19,8 +19,12 @@ if "%~1" == "" (goto dk_install)
 	"%BASH_EXE%" -c %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
 	
 	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
-	&:: FIXME:  bash only returns 0
+	if %ERRORLEVEL% neq 0 (
+		echo ERROR:%ERRORLEVEL%
+		pause
+	)
+	
+	:: FIXME:  bash only returns 0
 	
 	::###### reload ######
 ::	if not exist %~dp0\reload goto:eof

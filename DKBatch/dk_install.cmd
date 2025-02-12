@@ -2,12 +2,12 @@
 if "%~1" == "" (goto dk_install)
 
 :runDKBatch
-	if not exist "%DKBATCH_FUNCTIONS_DIR%"  set "DKBATCH_FUNCTIONS_DIR=%~1"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%" set "DKBATCH_FUNCTIONS_DIR_=%~1\"
-	if not exist "%ComSpec%"                set "ComSpec=%~2"
-	if not exist "%DKCACHE_DIR%"            set "DKCACHE_DIR=%~3"
-	if not exist "%DKSCRIPT_PATH%"          set "DKSCRIPT_PATH=%~4"
-	if not defined DKSCRIPT_ARGS			for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b
+	if not exist "%DKBATCH_FUNCTIONS_DIR%"  (set "DKBATCH_FUNCTIONS_DIR=%~1")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%~1\")
+	if not exist "%ComSpec%"                (set "ComSpec=%~2")
+	if not exist "%DKCACHE_DIR%"            (set "DKCACHE_DIR=%~3")
+	if not exist "%DKSCRIPT_PATH%"          (set "DKSCRIPT_PATH=%~4")
+	if not defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
 	
 	
 	::###### run script ######
@@ -16,10 +16,13 @@ if "%~1" == "" (goto dk_install)
 	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 	"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" && pause || pause
 	
-	if ERRORLEVEL 1 pause
+	if ERRORLEVEL 1 (pause)
 	
 	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo exit_code:%ERRORLEVEL% & pause
+	if %ERRORLEVEL% neq 0 (
+		echo exit_code:%ERRORLEVEL%
+		pause
+	)
 	
 	::###### reload ######
 ::	if not exist "%DKCACHE_DIR%\reload" goto:eof

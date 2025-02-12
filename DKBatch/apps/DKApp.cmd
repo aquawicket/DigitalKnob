@@ -2,9 +2,9 @@
 
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
-if ":" == "%func:~0,1%" ( goto %func% )
+if ":" == "%func:~0,1%" (goto %func%)
 
-if "%~1" equ "DKApp.onKeyDown" goto:%~1
+if "%~1" equ "DKApp.onKeyDown" (goto:%~1)
 
 
 ::### get _argc and _argv ###
@@ -17,7 +17,7 @@ for %%x in (%*) do (
 set "ESC="
 set "SPACE= "
 
-if not exist "%DKBATCH_FUNCTIONS_DIR_%"  set "DKBATCH_FUNCTIONS_DIR_=%CD%\..\functions\"
+if not exist "%DKBATCH_FUNCTIONS_DIR_%"  (set "DKBATCH_FUNCTIONS_DIR_=%CD%\..\functions\")
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 
@@ -71,17 +71,20 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	::echo DKApp.onKeyDown %*
 	
 	echo keyCode: %~1
-	if %~1 equ 27 set "callback="
-	if "%~1" == "" (call) & %return%
+	if %~1 equ 27 (set "callback=")
+	if "%~1" == "" (
+		(call)
+		%return%
+	)
 	
 	::echo %ESC%[21;0HDKApp_onKeyDown %*
 	::echo %ESC%[19;70H            &::
 	::echo %ESC%[19;70HKeyCode:%~1
 	
-	::if "%~1"=="13" echo "Enter"
-	::if %~1 equ 35 echo "End" 
-	::if %~1 equ 36 echo "Home" 
-	::if %~1 equ 37 echo "LeftArrow" 
-	::if %~1 equ 39 echo "RightArrow"
+	::if "%~1"=="13" (echo "Enter")
+	::if %~1 equ 35 (echo "End")
+	::if %~1 equ 36 (echo "Home")
+	::if %~1 equ 37 (echo "LeftArrow")
+	::if %~1 equ 39 (echo "RightArrow")
 	
 %endfunction%

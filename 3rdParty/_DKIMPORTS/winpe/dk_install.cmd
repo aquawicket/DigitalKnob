@@ -22,18 +22,21 @@ setlocal
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\dk_install.cmd"
 
-::	if not exist "%WINPE_QCOW%" %QEMU_IMG_EXE% convert -O qcow2 "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "%WINPE_QCOW%"
+::	if not exist "%WINPE_QCOW%" (%QEMU_IMG_EXE% convert -O qcow2 "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "%WINPE_QCOW%")
 ::	%QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_QCOW% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 ::	%return%
 			
 	::###### WINPE_IMG ######
-    if exist "%WINPE_IMG%" %dk_call% dk_info "%WINPE_IMG% already exists" && goto end_WIN_IMG
+    if exist "%WINPE_IMG%" (
+		%dk_call% dk_info "%WINPE_IMG% already exists"
+		goto end_WIN_IMG
+	)
 		%dk_call% dk_info "Installing Windows PE . . ."
 		%dk_call% dk_basename %WINPE_DL% WINPE_DL_FILE
 		%dk_call% dk_download "%WINPE_DL%"
 
 		::###### create and cd into install directory ######
-		if not exist %WINPE_DIR% %dk_call% dk_makeDirectory "%WINPE_DIR%" 
+		if not exist %WINPE_DIR% (%dk_call% dk_makeDirectory "%WINPE_DIR%")
 		%dk_call% dk_cd "%WINPE_DIR%"
 
 		::###### Install the OS to the .img file ######
@@ -52,10 +55,12 @@ setlocal
 		::%QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	:end_WIN_IMG
 		
-		
 	::###### WINPE_launcher ######
 	set "WINPE_launcher=%WINPE_DIR%\LAUNCH.cmd"
-	if exist "%WINPE_launcher%" %dk_call% dk_info "%WINPE_launcher% already exists" && %return%	
+	if exist "%WINPE_launcher%" (
+		%dk_call% dk_info "%WINPE_launcher% already exists"
+		%return%
+	)
 	::%dk_call% dk_fileWrite "%WINPE_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" -boot menu=on -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
 	%dk_call% dk_fileWrite "%WINPE_launcher%" -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "start %QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
 %endfunction%
@@ -65,7 +70,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_install
