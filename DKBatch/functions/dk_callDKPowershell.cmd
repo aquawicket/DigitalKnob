@@ -10,17 +10,18 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 1 99
 	
-	%dk_call% dk_validate DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
-
-	if not exist "%DKPOWERSHELL_DIR%"					(set "DKPOWERSHELL_DIR=%DKHOME_DIR%/digitalknob/Development/DKPowershell")
-	if not exist "%DKPOWERSHELL_DIR%" 					(mkdir "%DKPOWERSHELL_DIR%")
 	
-	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(set "DKPOWERSHELL_FUNCTIONS_DIR=%DKPOWERSHELL_DIR%/functions")
-	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" 		(mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%")
+	::### Get DKC_FUNCTIONS_DIR
+	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(set "DKPOWERSHELL_FUNCTIONS_DIR=%CD%/DKPowershell/functions")
+	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%")
+	%dk_call% dk_assertPath DKPOWERSHELL_FUNCTIONS_DIR
 	
+	::### Get DKHTTP_DKPOWERSHELL_DIR
 	if not defined DKHTTP_DKPOWERSHELL_DIR				(set "DKHTTP_DKPOWERSHELL_DIR=%DKHTTP_DKBRANCH_DIR%/DKPowershell")
 	if not defined DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR	(set "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR=%DKHTTP_DKPOWERSHELL_DIR%/functions")
 	
+	::### Download files if missing
 	if not exist %DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1")
 	if not exist %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1")
 	
@@ -45,7 +46,7 @@ setlocal enableDelayedExpansion
 	)
     ::echo rtn_value = !rtn_value!
     
-	if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
+	if "%LAST_ARG%" == "rtn_var" (endlocal & set "%LAST_ARG%=%rtn_value%")
 %endfunction%
 
 

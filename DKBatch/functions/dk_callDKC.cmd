@@ -11,17 +11,17 @@ setlocal
  
 	::### Get DKC_FUNCTIONS_DIR
 	%dk_call% dk_validate DKC_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
-	if not exist "%DKC_FUNCTIONS_DIR%"       set "DKC_FUNCTIONS_DIR=%CD%/DKC/functions"
-	if not exist "%DKC_FUNCTIONS_DIR%"       mkdir "%DKC_FUNCTIONS_DIR%"
+	if not exist "%DKC_FUNCTIONS_DIR%"       (set "DKC_FUNCTIONS_DIR=%CD%/DKC/functions")
+	if not exist "%DKC_FUNCTIONS_DIR%"       (mkdir "%DKC_FUNCTIONS_DIR%")
 	%dk_call% dk_assertPath DKC_FUNCTIONS_DIR
 	
 	::### Get DKHTTP_DKC_FUNCTIONS_DIR
-	if not defined DKHTTP_DKC_DIR         	 set "DKHTTP_DKC_DIR=%DKHTTP_DKBRANCH_DIR%/DKC"
-	if not defined DKHTTP_DKC_FUNCTIONS_DIR  set "DKHTTP_DKC_FUNCTIONS_DIR=%DKHTTP_DKC_DIR%/functions"
+	if not defined DKHTTP_DKC_DIR         	 (set "DKHTTP_DKC_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
+	if not defined DKHTTP_DKC_FUNCTIONS_DIR  (set "DKHTTP_DKC_FUNCTIONS_DIR=%DKHTTP_DKC_DIR%/functions")
 	
-	::### Download any missing
-	if not exist %DKC_FUNCTIONS_DIR%/DK.h    %dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h"
-	if not exist %DKC_FUNCTIONS_DIR%/%~1.c   %dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c"
+	::### Download files if missing
+	if not exist %DKC_FUNCTIONS_DIR%/DK.h    (%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
+	if not exist %DKC_FUNCTIONS_DIR%/%~1.c   (%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
 ::	set ALL_BUT_FIRST=%*
 ::	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
