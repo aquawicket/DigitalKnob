@@ -19,9 +19,9 @@ __ARGV__() {
 	for (( i=$begin; i>((begin-argc)); i-- )); do
 		argv+=(${BASH_ARGV[${i}]-})
 	done
+	[ ${argc} = 0 ] && return
 	
 	local argv_string=${argv[@]}
-	[ -z "${argv[@]}" ] && return
 	dk_return "${argv_string}"; return
 }
 

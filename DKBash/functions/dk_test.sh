@@ -55,6 +55,8 @@ dk_test() {
 	
 	echo "GLOBAL_VAR = ${GLOBAL_VAR}"
 	echo "RETURN_VAR = ${RETURN_VAR}"
+	echo "? = ${?-}"
+	return 0
 }
 
 
