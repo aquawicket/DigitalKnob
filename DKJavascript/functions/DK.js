@@ -213,7 +213,7 @@ if(typeof location === "object") {
 dk_check('queryString');
 
 //###### DKSCRIPT variables ######
-if(typeof ARGV !== "undefined"){
+if(typeof ARGV !== "undefined" && ARGV.length > 0){
 	var href = ARGV(0).replaceAll("\\", "/");
 	var DKSCRIPT_PATH = href;
 } else {
@@ -355,7 +355,7 @@ dk_check('body_onload');
 dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 
 //############ DKTEST ############
-if(typeof ARGV !== "undefined"){
+if(typeof ARGV !== "undefined" && ARGV.length > 0){
 	if(typeof ARGV(0) === "string"){
 		dk_source(ARGV(0), function(){
 		//if(DKSCRIPT_EXT !== ".js"){ return }
