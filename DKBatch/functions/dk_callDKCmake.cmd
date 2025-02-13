@@ -49,11 +49,17 @@ setlocal
         echo %%Z                	&rem  Display the other shell's stdout
         set "dk_callDKCmake=%%Z"	&rem  Set the return value to the last line of output
     )
-    
 	endlocal & (
-		set "dk_callDKCmake=%dk_callDKCmake%""
+		set "dk_callDKCmake=%dk_commandToVariable%""
 		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKCmake%")
 	)
+	
+::	::echo DKCMAKE_COMMAND = %DKCMAKE_COMMAND%
+::	set DKCOMMAND=%~1(%ALL_BUT_FIRST%)
+::	(set DKCMAKE_COMMAND=%CMAKE_EXE% -DDKCOMMAND=%DKCOMMAND% "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_% -P %DKCMAKE_DIR%/DKEval.cmake)
+::	%dk_call% dk_commandToVariable "%DKCMAKE_COMMAND%"
+::	endlocal & (set dk_callDKCmake=%dk_commandToVariable%)
+
 %endfunction%
 
 
