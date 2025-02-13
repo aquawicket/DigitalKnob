@@ -33,7 +33,7 @@ setlocal enableDelayedExpansion
 		set "dk_commandToVariable[%%x]="
 	)
 	set /a "numLines=numLines+1"
-	set "dk_commandToVariable[%numLines%]="
+	set "dk_commandToVariable[%numLines%]="   &:: create an empty slot at the end of the array
 	
     :: WARNING
     ::%dk_call% dk_todo "dk_commandToVariable only returns the last line, or, array item from the command.

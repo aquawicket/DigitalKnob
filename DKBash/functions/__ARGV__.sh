@@ -21,6 +21,7 @@ __ARGV__() {
 	done
 	
 	local argv_string=${argv[@]}
+	[ -z "${argv[@]}" ] && return
 	dk_return "${argv_string}"; return
 }
 

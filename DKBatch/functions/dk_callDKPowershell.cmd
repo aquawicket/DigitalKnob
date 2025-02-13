@@ -52,7 +52,7 @@ setlocal enableDelayedExpansion
 	::	)
 	
 	
-	::###### run executable ######
+	::###### run command ######
 	(set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1"%ALL_BUT_FIRST%";)
 	
 	::echo DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%

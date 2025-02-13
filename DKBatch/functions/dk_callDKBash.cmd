@@ -19,6 +19,7 @@ setlocal
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if not exist "%DKBASH_FUNCTIONS_DIR%"		(set "DKBASH_FUNCTIONS_DIR=%CD%/DKBash/functions")
 	if not exist "%DKBASH_FUNCTIONS_DIR%"		(mkdir "%DKBASH_FUNCTIONS_DIR%")
+	if not exist "%DKBASH_FUNCTIONS_DIR_%"		(set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR%/")
 	%dk_call% dk_assertPath DKBASH_FUNCTIONS_DIR
 	
 	::### Get DKHTTP_DKBASH_FUNCTIONS_DIR
@@ -43,31 +44,36 @@ setlocal
 	
 	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:\=/%"
     set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:C:=/c%"
-	if defined USE_WSL (set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:/c/=/mnt/c/%")
+	if defined USE_WSL (set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:/c/=/mnt/c/%")	
+    set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR%/"
 	
-    set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
-    set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:=/c%"
-	if defined USE_WSL (set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:/c/=/mnt/c/%")
-	
-    set "DKINIT="
-    set "RELOAD_WITH_BASH=0"
+::   set "DKINIT="
+::    set "RELOAD_WITH_BASH=0"
     if defined USE_WSL (set WSLENV=DKSCRIPT_PATH/u:DKINIT/u:RELOAD_WITH_BASH/u:DKBASH_FUNCTIONS_DIR_/u)
 	
     :: Call DKBash function
-    if not defined USE_WSL (set DKBASH_COMMAND="%BASH_EXE% -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST%'")
-	if defined USE_WSL (set DKBASH_COMMAND="%WSL_EXE% bash -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST%'")
+::  if not defined USE_WSL set DKBASH_COMMAND=%BASH_EXE% -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST%'
+::	if defined USE_WSL (set DKBASH_COMMAND="%WSL_EXE% bash -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST%'")
 
-    ::echo %DKBASH_COMMAND%
-	for /f "delims=" %%Z in ('%DKBASH_COMMAND%') do (
-        echo %%Z                &rem  Display the other shell's stdout
-        set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
-	)
-    ::echo rtn_value = !rtn_value!
-    
-	endlocal & (
-		set "dk_callDKBash=%dk_callDKBash%""
-		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
-	)
+	
+::    ::echo %DKBASH_COMMAND%
+::	for /f "delims=" %%Z in ('%DKBASH_COMMAND%') do (
+::        echo %%Z                &rem  Display the other shell's stdout
+::        set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
+::	)
+::    ::echo rtn_value = !rtn_value!
+::    
+::	endlocal & (
+::		set "dk_callDKBash=%dk_callDKBash%""
+::		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
+::	)
+	
+	::###### run command ######
+	::(set DKBASH_COMMAND=%BASH_EXE% -c export DKSCRIPT_PATH=%DKSCRIPT_PATH%; . %DKBASH_FUNCTIONS_DIR%/%~1.sh; %1.sh)
+	(set DKBASH_COMMAND=%BASH_EXE% -c 'export DKINIT=""; export RELOAD_WITH_BASH=""; . %DKBASH_FUNCTIONS_DIR%/%~1.sh; %1 "%ALL_BUT_FIRST%"')
+	echo DKBASH_COMMAND = %DKBASH_COMMAND%
+	%dk_call% dk_commandToVariable "%DKBASH_COMMAND%"
+	endlocal & (set dk_callDKBash=%dk_commandToVariable%)
 %endfunction%
 
 
@@ -78,7 +84,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKBash dk_test "FROM DKBatch" "dk_callDKBash.cmd" rtn_var
+	%dk_call% dk_callDKBash dk_test "FROM DKBatch" "dk_callDKBash.cmd"
     %dk_call% dk_echo
-	if defined rtn_var (%dk_call% dk_echo "rtn_var = %rtn_var%")
+	if defined rtn_var (%dk_call% dk_echo "dk_callDKBash = %dk_callDKBash%")
 %endfunction%

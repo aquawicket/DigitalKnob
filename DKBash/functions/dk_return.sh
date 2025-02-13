@@ -5,6 +5,7 @@ ORIGINAL_IFS=${IFS}
 ##################################################################################
 # dk_return()
 #
+echo "dk_return($*)"
 alias dk_return='ret_val "${ret_val-}"'
 ret_val() {
 	if [ "${1-}" = "" ]; then
