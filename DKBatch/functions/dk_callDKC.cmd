@@ -81,19 +81,46 @@ setlocal
 	%dk_call% dk_assertVar COMPILER_EXE
 	%dk_call% dk_printVar COMPILER_EXE
 
-	set DKC_COMMAND=%COMSPEC% /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
-
-    echo %DKC_COMMAND%
-	for /f "delims=" %%Z in ('%DKC_COMMAND%') do (
-        echo %%Z                &rem  Display the other shell's stdout
-        set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
-	)
-    ::echo rtn_value = !rtn_value!
 	
-	endlocal & (
-		set "dk_callDKC=%dk_callDKC%""
-		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKC%")
+
+	
+	::###### COMPILER_EXE ######
+	::set "COMPILER_EXE=%~1"
+	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
+	
+	::###### DKC_FILE ######
+	set "DKC_FILE=%~1"
+	if not defined DKC_FILE    echo ERROR: DKC_FILE is invalid
+	
+	::###### APP_NAME ######
+	for %%Z in ("%DKC_FILE%") do set "APP_NAME=%%~nZ"	
+	set "DKC_FILE=%DKC_FUNCTIONS_DIR%/%DKC_FILE%.c"
+	
+	::###### Setup build directory
+	if not exist "%CD%\build" mkdir "%CD%\build"
+	
+	::###### APP_FILE ######
+	set "APP_FILE=%CD%\build\%APP_NAME%.exe"
+	
+	::###### Compile Code ######
+	echo compiling ...
+	if exist %APP_FILE%  del %APP_FILE%
+
+	set "COMPILE_COMMAND=%COMPILER_EXE% -o %APP_FILE% -static %DKC_FILE%"
+	echo %COMPILE_COMMAND%
+	%COMPILE_COMMAND%
+	
+	if not exist "%APP_FILE%" (
+		echo:	
+		echo %red%ERROR: compilation of %DKC_FILE% failed.%clr%
+		pause
+		exit /b 13
 	)
+	
+	::###### run executable ######
+	%dk_call% dk_commandToVariable "%APP_FILE%"
+	endlocal & (set dk_callDKC=%dk_commandToVariable%)
+	
 %endfunction%
 
 
@@ -104,7 +131,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKC dk_test "FROM DKBatch" "dk_callDKC.cmd" rtn_var
+	%dk_call% dk_callDKC dk_test "FROM DKBatch" "dk_callDKC.cmd"
     %dk_call% dk_echo
-	if defined rtn_var  (%dk_call% dk_echo "rtn_var = %rtn_var%")
+	echo dk_callDKC = %dk_callDKC%
 %endfunction%

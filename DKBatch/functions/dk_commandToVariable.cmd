@@ -1,6 +1,7 @@
 @echo off
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
+set "PRINT_COMMANDS=1"
 ::####################################################################
 ::# dk_commandToVariable(command, args, rtn_var)
 ::#
@@ -12,7 +13,8 @@ setlocal enableDelayedExpansion
  
     set /a "i=0"
     for /f "usebackq delims=" %%Z in (`"%~1" %~2 ^& call echo %%^^errorlevel%%`) do (
-        set "line[!i!]=%%Z"
+        rem echo %%Z
+		set "dk_commandToVariable[!i!]=%%Z"
 		set /a "i+=1"
     )
 	%COMSPEC% /c exit /b 0
@@ -20,20 +22,31 @@ setlocal enableDelayedExpansion
 	:: Final errorlevel is stored in last line
 	set /a "i-=1"
 	set /a numLines=i-1
-	set /a errorcode = !line[%i%]!
-    set "line[%i%]="           &:: delete the error line from the array
-    set "dk_commandToVariable=!line[%numLines%]!"
+	set /a errorcode = !dk_commandToVariable[%i%]!
+    set "dk_commandToVariable[%i%]="           &:: delete the error line from the array
+    set "dk_commandToVariable=!dk_commandToVariable[%numLines%]!"
+	
+	:: Print the lines of the command
+	set /a "numLines=numLines-1"
+	for /l %%x in (0, 1, %numLines%) do (
+		echo !dk_commandToVariable[%%x]!
+		set "dk_commandToVariable[%%x]="
+	)
+	set /a "numLines=numLines+1"
+	set "dk_commandToVariable[%numLines%]="
 	
     :: WARNING
     ::%dk_call% dk_todo "dk_commandToVariable only returns the last line, or, array item from the command.
 
 	::############### Print call details ###############
-					echo ###############################
-	if "%~3" neq "" echo ## command:^> '%~1 %~2'
-	if "%~3" equ "" echo ## command:^> '%~1'
-					echo ##  output: %dk_commandToVariable%
-					echo ## rtncode: %errorcode%
-					echo:##
+	if defined PRINT_COMMANDS (
+						echo ###############################
+		if "%~3" neq "" echo ## command:^> '%~1 %~2'
+		if "%~3" equ "" echo ## command:^> '%~1'
+						echo ##  output: %dk_commandToVariable%
+						echo ## rtncode: %errorcode%
+						echo:##
+	)
 	::##################################################
 
     :: return the last line from the programs output

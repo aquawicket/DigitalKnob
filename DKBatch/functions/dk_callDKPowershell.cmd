@@ -38,18 +38,27 @@ setlocal enableDelayedExpansion
 	for %%a in (%*) do set LAST_ARG=%%a
 	
     :: Call DKPowershell function
-    set DKPOWERSHELL_COMMAND="%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH ^= '%DKSCRIPT_PATH%'^; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1^; %~1 %ALL_BUT_FIRST%"
-    ::echo %DKPOWERSHELL_COMMAND%
-	for /f "delims=" %%Z in ('%DKPOWERSHELL_COMMAND%') do (
-		echo %%Z                &rem  Display the other shell's stdout
-        set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
-	)
-    ::echo rtn_value = !rtn_value!
-    
-	endlocal & (
-		set "dk_callDKBash=%dk_callDKPowershell%""
-		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKPowershell%")
-	)
+    ::set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH ^= '%DKSCRIPT_PATH%'^; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1^; %~1 %ALL_BUT_FIRST%
+	::	::echo %DKPOWERSHELL_COMMAND%
+	::	for /f "delims=" %%Z in ('%DKPOWERSHELL_COMMAND%') do (
+	::		echo %%Z                &rem  Display the other shell's stdout
+	::      set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
+	::	)
+	::    ::echo rtn_value = !rtn_value!
+	::    
+	::	endlocal & (
+	::		set "dk_callDKBash=%dk_callDKPowershell%""
+	::		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKPowershell%")
+	::	)
+	
+	
+	::###### run executable ######
+	(set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1"%ALL_BUT_FIRST%";)
+	
+	::echo DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%
+	%dk_call% dk_commandToVariable "%DKPOWERSHELL_COMMAND%"
+	endlocal & (set dk_callPowershell=%dk_commandToVariable%)
+	
 %endfunction%
 
 
@@ -60,7 +69,7 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKPowershell dk_test "FROM DKBatch" "dk_callDKPowershell.cmd" rtn_var
+	%dk_call% dk_callDKPowershell dk_test "FROM DKBatch" "dk_callDKPowershell.cmd"
     %dk_call% dk_echo
-	%dk_call% dk_echo "rtn_var = %rtn_var%"
+	%dk_call% dk_echo "dk_callPowershell = %dk_callPowershell%"
 %endfunction%

@@ -66,6 +66,10 @@ int dk_test(int __ARGC__, ...){
 
 //	printf("GLOBAL_VAR = %s\n", GLOBAL_VAR);
 //	printf("RETURN_VAR = %s\n", RETURN_VAR);
+
+//	dk_echo("rtn_var string");
+	fprintf(stdout, "rtn_var string\n");
+	
 	return 0;
 };
 
