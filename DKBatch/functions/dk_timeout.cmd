@@ -10,10 +10,10 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
     ::%dk_call% dk_debugFunc 0 1
     
-	if "%~1" equ "" (set "timeout_seconds=10") else (set "timeout_seconds=%~1")
-	%dk_call% dk_assertVar timeout_seconds
+	if "%~1" equ "" (set "seconds=10") else (set "seconds=%~1")
+	%dk_call% dk_assertVar seconds
 	
-    (timeout /t %timeout_seconds%)
+    (timeout /t %seconds%)
 	(call )
 %endfunction%
 

@@ -7,7 +7,9 @@
 dk_timeout() {
 	dk_debugFunc 0 1
 	
-    [ -n "${1-}" ] && seconds="${1}" || seconds="5"
+    [ -n "${1-}" ] && seconds="${1}" || seconds="10"
+	dk_call dk_assertVar seconds
+	
 	echo ""
 	read -t ${seconds} -n 1 -s -r -p "waiting ${seconds} seconds. Press any key to continue . . ." && return 0 || return 0
 }

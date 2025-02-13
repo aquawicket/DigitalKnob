@@ -14,10 +14,9 @@ function(dk_timeout)
 	dk_getArg(0 seconds 10)
 	
 	if("${seconds}" STREQUAL "")
-		#message("\nWaiting for 0 seconds, press a key to continue ..0")
-		#return()
 		set(seconds 10)
 	endif()
+	dk_assertVar(seconds)
 
 	###### CMD ######
 	if(EXISTS "$ENV{COMSPEC}")

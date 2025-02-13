@@ -26,7 +26,7 @@ dk_import(${ZLIB_DL})
 #set(ZLIB_RELEASE_DIR "${ZLIB_LIB}/${triple}/${RELEASE_DIR}")   # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Release
 
 ### LINK ###
-dk_include				(${ZLIB_INC}							ZLIB_INCLUDE_DIR)
+dk_include				(${ZLIB}								ZLIB_INCLUDE_DIR)
 dk_include				(${ZLIB_CONFIG_DIR}						ZLIB_INCLUDE_DIR2)
 if(MSVC)
 	if(WIN)	
