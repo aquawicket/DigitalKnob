@@ -89,8 +89,11 @@ setlocal
         set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
 	)
     ::echo rtn_value = !rtn_value!
-    
-	if "%LAST_ARG%" == "rtn_var" (endlocal & set "%LAST_ARG%=%rtn_value%")
+	
+	endlocal & (
+		set "dk_callDKC=%dk_callDKC%""
+		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKC%")
+	)
 %endfunction%
 
 
@@ -101,8 +104,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	::%dk_call% dk_callDKC dk_test "FROM DKC" "dk_callDKC.cmd" rtn_var
-	%dk_call% dk_callDKC dk_echo "This is a string from c dk_echo" rtn_var
+	%dk_call% dk_callDKC dk_test "FROM DKBatch" "dk_callDKC.cmd" rtn_var
     %dk_call% dk_echo
 	if defined rtn_var  (%dk_call% dk_echo "rtn_var = %rtn_var%")
 %endfunction%

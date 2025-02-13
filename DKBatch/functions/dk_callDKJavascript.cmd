@@ -25,6 +25,16 @@ setlocal
 
 	:: TODO
 	%dk_call% dk_todo "dk_callDKJavascript"
+	
+	
+	
+	
+	
+	
+	endlocal & (
+		set "dk_callDKBash=%dk_callDKJavascript%""
+		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKJavascript%")
+	)
 %endfunction%
 
 
@@ -35,7 +45,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKJavascript dk_echo "This is a string from DKJavascript dk_echo" rtn_var
+	%dk_call% dk_callDKJavascript dk_test "FROM DKBatch" "dk_callDKJavascript.cmd" rtn_var
     %dk_call% dk_echo
 	if defined rtn_var (%dk_call% dk_echo "rtn_var = %rtn_var%")
 %endfunction%

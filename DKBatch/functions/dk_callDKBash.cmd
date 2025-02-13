@@ -64,7 +64,10 @@ setlocal
 	)
     ::echo rtn_value = !rtn_value!
     
-	if "%LAST_ARG%" == "rtn_var" (endlocal & set "%LAST_ARG%=%rtn_value%")
+	endlocal & (
+		set "dk_callDKBash=%dk_callDKBash%""
+		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
+	)
 %endfunction%
 
 
