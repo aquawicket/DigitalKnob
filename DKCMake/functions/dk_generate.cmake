@@ -163,7 +163,7 @@ function(dk_generate)
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32")
 	endif()
 	
-	if("${triple}" STREQUAL "win_x86_mingw")
+	if("${triple}" STREQUAL "win_x86_gcc")
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32")
 	endif()
@@ -175,7 +175,7 @@ function(dk_generate)
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64")
 	endif()
 	
-	if("${triple}" STREQUAL "win_x86_64_mingw")
+	if("${triple}" STREQUAL "win_x86_64_gcc")
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64")
 	endif()

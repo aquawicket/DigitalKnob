@@ -18,7 +18,7 @@ function Global:dk_target_triple_SET() {
 	dk_call dk_echo " 4) android_arm64_clang"
 	dk_call dk_echo " 5) android_x86_clang"
 	dk_call dk_echo " 6) android_x86_64_clang"
-	dk_call dk_echo " 7) emscripten_clang"
+	dk_call dk_echo " 7) emscripten_x86_clang"
 	dk_call dk_echo " 8) ios_arm32_clang"
 	dk_call dk_echo " 9) ios_arm64_clang"
 	dk_call dk_echo "10) ios_x86_clang"
@@ -84,10 +84,10 @@ function Global:dk_target_triple_SET() {
 	elseif(${input} -eq "28"){ $global:target_triple = "win_arm32_clang" }
 	elseif(${input} -eq "29"){ $global:target_triple = "win_arm64_clang" }
 	elseif(${input} -eq "30"){ $global:target_triple = "win_x86_clang" }
-	elseif(${input} -eq "31"){ $global:target_triple = "win_x86_mingw" }
+	elseif(${input} -eq "31"){ $global:target_triple = "win_x86_gcc" }
 	elseif(${input} -eq "32"){ $global:target_triple = "win_x86_msvc" }
 	elseif(${input} -eq "33"){ $global:target_triple = "win_x86_64_clang" }
-	elseif(${input} -eq "34"){ $global:target_triple = "win_x86_64_mingw" }
+	elseif(${input} -eq "34"){ $global:target_triple = "win_x86_64_gcc" }
 	elseif(${input} -eq "35"){ $global:target_triple = "win_x86_64_msvc" }
 	elseif(${input} -eq "36"){ $global:target_triple = "win_x86_64_ucrt" }
 	elseif(${input} -eq "37"){ dk_call dk_clearScreen }

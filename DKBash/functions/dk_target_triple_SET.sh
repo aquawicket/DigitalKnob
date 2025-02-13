@@ -9,6 +9,7 @@ dk_target_triple_SET() {
 	dk_debugFunc 0
 
 
+
 	dk_call dk_validate host_triple "dk_call dk_host_triple"
 
 	dk_call dk_echo ""
@@ -19,7 +20,7 @@ dk_target_triple_SET() {
 	dk_call dk_echo " 4) android_arm64_clang"
 	dk_call dk_echo " 5) android_x86_clang"
 	dk_call dk_echo " 6) android_x86_64_clang"
-	dk_call dk_echo " 7) emscripten_clang"
+	dk_call dk_echo " 7) emscripten_x86_clang"
 	dk_call dk_echo " 8) ios_arm32_clang"
 	dk_call dk_echo " 9) ios_arm64_clang"
 	dk_call dk_echo "10) ios_x86_clang"
@@ -185,7 +186,7 @@ dk_target_triple_SET() {
 	elif [ "${input}" = "31" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86"
-		dk_call dk_set env "mingw"
+		dk_call dk_set env "gcc"
 	elif [ "${input}" = "32" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86"
@@ -197,7 +198,7 @@ dk_target_triple_SET() {
 	elif [ "${input}" = "34" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "mingw"
+		dk_call dk_set env "gcc"
 	elif [ "${input}" = "35" ]; then
 		dk_call dk_set os "win"
 		dk_call dk_set arch "x86_64"

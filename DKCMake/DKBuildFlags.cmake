@@ -404,8 +404,8 @@ if(win_x86_msvc)
 endif()
 
 ### Windows x86 - MINGW32 ###
-if(win_x86_mingw)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_mingw_toolchain.cmake)
+if(win_x86_gcc)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86 - CLANG32 ###
@@ -424,8 +424,8 @@ if(win_x86_64_clang)
 endif()
 
 ### Windows x86_64 - MINGW64 ###
-if(win_x86_64_mingw)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_mingw_toolchain.cmake)
+if(win_x86_64_gcc)
+	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - UCRT64 ###
