@@ -23,17 +23,20 @@ setlocal
 	if not exist %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js		(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js" "%DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js")
 	if not exist %DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js	(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js" "%DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js")
 
-
-
-	set "CSCRIPT_EXE=cscript.exe"
-	::(set DKJAVASCRIPT_COMMAND=%COMSPEC% /c %CSCRIPT_EXE% //e:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js" "%DKSCRIPT_PATH%")
-	set DKJAVASCRIPT_COMMAND=%COMSPEC% /c %CSCRIPT_EXE% //e:javascript %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js
+	set ALL_BUT_FIRST=%*
+	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
 	
-	echo DKJAVASCRIPT_COMMAND = %DKJAVASCRIPT_COMMAND%
+	set "CSCRIPT_EXE=cscript.exe"
+	set DKJAVASCRIPT_COMMAND=%COMSPEC% /c %CSCRIPT_EXE% //e:javascript %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %ALL_BUT_FIRST%
+	
+	::echo DKJAVASCRIPT_COMMAND = %DKJAVASCRIPT_COMMAND%
 	for /f "delims=" %%Z in ('%DKJAVASCRIPT_COMMAND%') do (
-        echo %%Z                		&rem  Display the other shell's stdout
-        set "dk_callDKJavascript=%%Z"	&rem  Set the return value to the last line of output
+        echo %%Z                		&rem  Display the command's stdout
+		set "dk_callDKJavascript=%%Z"	&rem  Set the return value to the last line of output
     )
+	endlocal & (
+		set "dk_callDKJavascript=%dk_callDKJavascript%"
+	)
 	
 	
 	::###### run executable ######
@@ -49,7 +52,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKJavascript dk_test "FROM DKBatch" "dk_callDKJavascript.cmd"
+	%dk_call% dk_callDKJavascript dk_test "FROM :DKTEST" "DK_CALLDKJAVASCRIPT.CMD"
     %dk_call% dk_echo
-	if defined rtn_var (%dk_call% dk_echo "dk_callDKJavascript = %dk_callDKJavascript%")
+	echo dk_callDKJavascript = %dk_callDKJavascript%
 %endfunction%

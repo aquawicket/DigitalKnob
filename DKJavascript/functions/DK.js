@@ -49,11 +49,6 @@ if(USE_NODEJS){
 
 
 
-
-
-
-
-
 //############ HOST ############
 var HOST = "unknown"
 if(typeof ActiveXObject === "function"){
@@ -70,9 +65,9 @@ console.log("HOST = "+HOST);
 if(typeof WScript === "object"){
 	ARGV = WScript.Arguments;
 	ARGC = WScript.Arguments.Count();
-	for (i=0; i<ARGV.length; i++){
-		console.log("ARGV"+i+" = "+ARGV(i)+"\n");
-	}
+	//for (i=0; i<ARGV.length; i++){
+	//	console.log("ARGV"+i+" = "+ARGV(i)+"\n");
+	//}
 }
 //dk_check('WScript.Arguments');
 
@@ -213,12 +208,21 @@ if(typeof location === "object") {
 dk_check('queryString');
 
 //###### DKSCRIPT variables ######
-if(typeof ARGV !== "undefined" && ARGV.length > 0){
-	var href = ARGV(0).replaceAll("\\", "/");
-	var DKSCRIPT_PATH = href;
-} else {
-	var DKSCRIPT_PATH = location.href;
-}
+//if(typeof ARGV !== "undefined" && ARGV.length > 0){
+//	if(ARGV.length > 1){
+//		var href = ARGV(1).replaceAll("\\", "/");
+//	} else {
+//		var href = ARGV(0).replaceAll("\\", "/");
+//	}
+//	var DKSCRIPT_PATH = href;
+//} else {
+//	var DKSCRIPT_PATH = location.href;
+//}
+
+//var DKSCRIPT_PATH = location.href;
+WScript_Shell = new ActiveXObject("WScript.Shell");	
+var DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");
+var DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
 var DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
 var DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1);
 var DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1));
@@ -354,19 +358,35 @@ dk_check('body_onload');
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
 dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 
+
+
+
 //############ DKTEST ############
-if(typeof ARGV !== "undefined" && ARGV.length > 0){
-	if(typeof ARGV(0) === "string"){
+//if(typeof DKSCRIPT_PATH !== "string" && DKSCRIPT_EXT === ".js"){
+//if(typeof ARGV !== "undefined" && ARGV.length > 0){
+	//if(typeof ARGV(0) === "string"){
+	if(DKSCRIPT_EXT === ".js"){
 		dk_source(ARGV(0), function(){
-		//if(DKSCRIPT_EXT !== ".js"){ return }
-		//if(!dk_fileContains(DKSCRIPT_PATH, ":DKTEST")){ return }
-		console.log("")
-		console.log(bg_magenta+white+"###### DKTEST MODE ###### "+DKSCRIPT_FILE+" ###### DKTEST MODE ######"+clr)
-		console.log("")
-			DKTEST()
-		console.log("")
-		console.log(bg_magenta+white+"######## END TEST ####### "+DKSCRIPT_FILE+" ######## END TEST #######"+clr)
-		console.log("")
+			//if(DKSCRIPT_EXT !== ".js"){ return }
+			//if(!dk_fileContains(DKSCRIPT_PATH, ":DKTEST")){ return }
+			console.log("")
+			console.log(bg_magenta+white+"###### DKTEST MODE ###### "+DKSCRIPT_FILE+" ###### DKTEST MODE ######"+clr)
+			console.log("")
+				DKTEST()
+			console.log("")
+			console.log(bg_magenta+white+"######## END TEST ####### "+DKSCRIPT_FILE+" ######## END TEST #######"+clr)
+			console.log("")
+		});
+	} else {
+		var JS_PATH = ARGV(0);
+		var JS_ARGS = ARGV(1);
+		var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
+		var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
+		var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
+		var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
+		dk_source(JS_PATH, function(){
+			window[JS_NAME](JS_ARGS);
 		});
 	}
-}
+	//}
+//}
