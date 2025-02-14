@@ -11,10 +11,7 @@ android_x86_clang
 android_x86_64_clang
 cosmo_cosmo_cosmo
 cosmopolitan_cosmopolitan_cosmopolitan
-emscripten_arm32_clang
-emscripten_arm64_clang
 emscripten_x86_clang
-emscripten_x86_64_clang
 ios_arm32_clang
 ios_arm64_clang
 ios_x86_clang
@@ -43,12 +40,13 @@ raspberry_arm32_gcc
 raspberry_arm64_gcc
 raspberry_x86_gcc
 raspberry_x86_64_gcc
+win_arm32_clang
+win_arm64_clang
 win_x86_clang
-win_x86_mingw
+win_x86_gcc
 win_x86_msvc
 win_x86_64_clang
-win_x86_64_clangarm
-win_x86_64_mingw
+win_x86_64_gcc
 win_x86_64_msvc
 win_x86_64_ucrt
 CMakeFiles
