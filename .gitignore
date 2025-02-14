@@ -3,13 +3,12 @@
 *.exe.aarch64.elf
 *.exe.com.dbg
 *.lib
-*/*/backward.cpp
-
 android_arm32_clang
 android_arm64_clang
 android_x86_clang
 android_x86_64_clang
 cosmo_cosmo_cosmo
+cosmopolitan
 cosmopolitan_cosmopolitan_cosmopolitan
 emscripten_x86_clang
 ios_arm32_clang
@@ -41,7 +40,11 @@ raspberry_arm64_gcc
 raspberry_x86_gcc
 raspberry_x86_64_gcc
 win_arm32_clang
+win_arm32_gcc
+win_arm32_msvc
 win_arm64_clang
+win_arm64_gcc
+win_arm64_msvc
 win_x86_clang
 win_x86_gcc
 win_x86_msvc
@@ -50,7 +53,6 @@ win_x86_64_gcc
 win_x86_64_msvc
 win_x86_64_ucrt
 CMakeFiles
-
 DEPENDS.TMP
 DKCMAKE_START_VARIABLES.temp
 DKCMAKE_PROJECT_VARIABLES.temp
@@ -111,14 +113,17 @@ DKCpp/DKApps/*/assets.zip
 DKCpp/DKApps/*/icons/windows
 DKCpp/DKApps/*/resource.h
 DKCpp/DKApps/*/resource.rc
+
 DKCpp/DKApps/DKCore/assets
 DKCpp/DKApps/DKCore/main.cpp
 DKCpp/DKApps/DKJavascript/assets/DK
 DKCpp/DKApps/DKJavascript/assets/DKAssets
 DKCpp/DKApps/DKJavascript/assets/DKDuktape
 DKCpp/DKApps/DKJavascript/main.cpp
+DKCpp/DKApps/DKSDL/main.cpp
+DKCpp/DKApps/DKSDLRml/main.cpp
 DKCpp/DKApps/HelloWorld/assets
 
 DKCpp/DKPlugins/*/CMakeLists.txt
+DKCpp/DKPlugins/DK/backward.cpp
 DKCpp/DKPlugins/DKXml/pugixml.cpp
-
