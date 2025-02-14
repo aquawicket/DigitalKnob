@@ -129,10 +129,10 @@ if(NOT DEFINED FATAL_SOUND)
 	set(FATAL_SOUND 				${imperial_march}   					CACHE INTERNAL '')
 endif()
 dk_if(NOT DEFINED FATAL_PAUSE     [[ set(FATAL_PAUSE 		0 				CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED FATAL_TIMEOUT   [[ set(FATAL_TIMEOUT		0 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED FATAL_TIMEOUT   [[ set(FATAL_TIMEOUT		9 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_TRACE     [[ set(FATAL_TRACE 		1 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED FATAL_LINE      [[ set(FATAL_LINE 		0 				CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED FATAL_HALT      [[ set(FATAL_HALT 		1 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED FATAL_HALT      [[ set(FATAL_HALT 		0 				CACHE INTERNAL '') ]])
 
 
 ################################################################################

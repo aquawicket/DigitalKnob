@@ -137,8 +137,8 @@ if not defined FATAL_TRACE			(set "FATAL_TRACE=1")
 ::if not defined FATAL_LINE			(set "FATAL_LINE=0")
 ::if not defined FATAL_SOUND		(set "FATAL_SOUND=0")
 ::if not defined FATAL_PAUSE		(set "FATAL_PAUSE=0")
-::if not defined FATAL_TIMEOUT		(set "FATAL_TIMEOUT=0")
-if not defined FATAL_HALT			(set "FATAL_HALT=1")
+if not defined FATAL_TIMEOUT		(set "FATAL_TIMEOUT=9")
+::if not defined FATAL_HALT			(set "FATAL_HALT=0")
 
 
 
