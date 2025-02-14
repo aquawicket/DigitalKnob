@@ -1,0 +1,1 @@
+DEMO_IMPORT=https://github.com/denoland/deno/archive/979e2f715836c037316b7f29e96493f46a534b3d.zip
