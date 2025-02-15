@@ -39,9 +39,7 @@ setlocal
 	)
 	
 	
-	::###### run executable ######
-::	%dk_call% dk_commandToVariable "%DKJAVASCRIPT_COMMAND%"
-::	endlocal & (set dk_callDKC=%dk_commandToVariable%)
+
 %endfunction%
 
 
@@ -52,7 +50,12 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
+	echo calling dk_callDKJavascript dk_test "FROM :DKTEST" "DK_CALLDKJAVASCRIPT.CMD" . . .
+	echo:
+	
 	%dk_call% dk_callDKJavascript dk_test "FROM :DKTEST" "DK_CALLDKJAVASCRIPT.CMD"
-    %dk_call% dk_echo
-	echo dk_callDKJavascript = %dk_callDKJavascript%
+
+	
+	echo:
+	echo return value: dk_callDKJavascript = %dk_callDKJavascript%
 %endfunction%
