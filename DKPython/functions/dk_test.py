@@ -45,7 +45,7 @@ def dk_test(*args):
     if 'DKBRANCH' in globals():                 print(f"                DKBRANCH = {DKBRANCH}")
     if 'DKBRANCH_DIR' in globals():             print(f"            DKBRANCH_DIR = {DKBRANCH_DIR}")
     if 'DK3RDPARTY_DIR' in globals():           print(f"          DK3RDPARTY_DIR = {DK3RDPARTY_DIR}")
-    if 'DKAPPS_DIR' in globals():               print(f"              DKAPPS_DIR = {DKAPPS_DIR}")
+    if 'DKCPP_APPS_DIR' in globals():               print(f"              DKCPP_APPS_DIR = {DKCPP_APPS_DIR}")
     if 'DKPYTHON_DIR' in globals():             print(f"            DKPYTHON_DIR = {DKPYTHON_DIR}")
     if 'DKPYTHON_FUNCTIONS_DIR' in globals():   print(f"  DKPYTHON_FUNCTIONS_DIR = {DKPYTHON_FUNCTIONS_DIR}")
     if 'DKPYTHON_FUNCTIONS_DIR_' in globals():  print(f" DKPYTHON_FUNCTIONS_DIR_ = {DKPYTHON_FUNCTIONS_DIR_}")

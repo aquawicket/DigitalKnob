@@ -46,7 +46,7 @@ def DK(*args):
     global DKBRANCH;                DKBRANCH = "Developemnt"
     global DKBRANCH_DIR;            DKBRANCH_DIR = f"{DIGITALKNOB_DIR}\\{DKBRANCH}"
     global DK3RDPARTY_DIR;          DK3RDPARTY_DIR = f"{DKBRANCH_DIR}\\3rdParty"
-    global DKAPPS_DIR;              DKAPPS_DIR = f"{DKBRANCH_DIR}\\DKApps"
+    global DKCPP_APPS_DIR;          DKCPP_APPS_DIR = f"{DKBRANCH_DIR}\\DKCpp\\apps"
     global DKPYTHON_DIR;            DKPYTHON_DIR = f"{DKBRANCH_DIR}\\DKPython"
     global DKPYTHON_FUNCTIONS_DIR;  DKPYTHON_FUNCTIONS_DIR = f"{DKPYTHON_DIR}\\function"
     global DKPYTHON_FUNCTIONS_DIR_; DKPYTHON_FUNCTIONS_DIR_ = f"{DKPYTHON_FUNCTIONS_DIR}\\"

@@ -22,12 +22,12 @@
 dk_target_triple() {
 	dk_debugFunc 0
 
-	CMAKE_BINARY_DIR="C:\Users\Administrator\digitalknob\Development\DKApps\HelloWorld\win_x86_64_clang\Debug"
+	#CMAKE_BINARY_DIR="C:\Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/win_x86_64_clang/Debug"
 	default_target_env="clang"
 
 	### Get TARGET_DIR ###
 	dk_call dk_realpath "${CMAKE_BINARY_DIR}" TARGET_DIR
-	dk_call dk_printVar TARGET_DIR 							# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
+	dk_call dk_printVar TARGET_DIR 							# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
 
 	#### Set target_type / TARGET_TYPE ###
 	if [ "${TARGET_DIR}" = "Debug" ]; then	
@@ -35,13 +35,13 @@ dk_target_triple() {
 		dk_call dk_set DKBUILD_TYPE DEBUG					# DKBUILD_TYPE	= DEBUG
 		dk_call dk_set ${DKBUILD_TYPE} 1					# DEBUG = 1	
 		#dk_call dk_set TARGET_TYPE Debug					# TARGET_TYPE	= Debug
-		dk_call dk_dirname TARGET_DIR TARGET_TRIPLE_DIR		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		dk_call dk_dirname TARGET_DIR TARGET_TRIPLE_DIR		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	elif [ "${TARGET_DIR}" = "Release" ]; then
 		### Get RELEASE ###
 		dk_call dk_set DKBUILD_TYPE RELEASE 				# DKBUILD_TYPE = RELEASE
 		dk_call dk_set ${DKBUILD_TYPE} 1					# RELEASE = 1	
 		#dk_call dk_set TARGET_TYPE Release					# TARGET_TYPE = Release
-		dk_call dk_dirname ${TARGET_DIR} TARGET_TRIPLE_DIR	# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		dk_call dk_dirname ${TARGET_DIR} TARGET_TRIPLE_DIR	# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	fi
 
 	if ( ( dk_call dk_stringContainsCI "${TARGET_DIR}" "android"      ) ||

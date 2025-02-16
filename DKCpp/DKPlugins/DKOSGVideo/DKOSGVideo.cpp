@@ -58,7 +58,7 @@ void DKOSGVideo::loaddlls(){
 #if WIN
 	//delay loading the DLL to move it's locations
 	//DKClass::DKCreate("DKAssets");
-	DKFile::local_assets = "C:/digitalknob/DKApps/DKOS/assets/"; //FIXME
+	DKFile::local_assets = "C:/digitalknob/DKCpp/apps/DKOS/assets/"; //FIXME
 	DKString path = DKFile::local_assets += "DKFfmpeg";
 	
 	DKString avutil = path + "\\avutil-54.dll";

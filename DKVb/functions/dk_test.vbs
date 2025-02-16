@@ -65,7 +65,7 @@ public function dk_test(args)
         WScript.Echo "             DKBRANCH = "+DKBRANCH
         WScript.Echo "         DKBRANCH_DIR = "+DKBRANCH_DIR
         WScript.Echo "       DK3RDPARTY_DIR = "+DK3RDPARTY_DIR
-        WScript.Echo "           DKAPPS_DIR = "+DKAPPS_DIR
+        WScript.Echo "           DKCPP_APPS_DIR = "+DKCPP_APPS_DIR
         WScript.Echo "           DKBASH_DIR = "+DKVB_DIR
         WScript.Echo " DKBASH_FUNCTIONS_DIR = "+DKVB_FUNCTIONS_DIR
         WScript.Echo "DKBASH_FUNCTIONS_DIR_ = "+DKVB_FUNCTIONS_DIR_

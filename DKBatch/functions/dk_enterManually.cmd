@@ -20,26 +20,26 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     ::set "TARGET_PATH=%path:~0,-13%"
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate DKPLUGINS_DIR "%dk_call% dk_DKPLUGINS_DIR"
-    %dk_call% dk_validate DKAPPS_DIR    "%dk_call% dk_DKAPPS_DIR"
+    %dk_call% dk_validate DKCPP_APPS_DIR    "%dk_call% dk_DKAPPS_DIR"
     if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKIMPORTS_DIR%\%input%"
     if exist "%DKPLUGINS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPLUGINS_DIR%\%input%"
-    if exist "%DKAPPS_DIR%\%input%\DKMAKE.cmake"    set "TARGET_PATH=%DKAPPS_DIR%\%input%"
+    if exist "%DKCPP_APPS_DIR%\%input%\DKMAKE.cmake"    set "TARGET_PATH=%DKCPP_APPS_DIR%\%input%"
     %dk_call% dk_printVar TARGET_PATH
     
     
 	%dk_call% dk_getParentFolder "%TARGET_PATH%" parent
     %dk_call% dk_printVar parent
     
-    if "%parent%"=="DKApps" %return%
-    %dk_call% dk_makeDirectory "%DKAPPS_DIR%\%target_app%"
+    if "%parent%"=="apps" %return%
+    %dk_call% dk_makeDirectory "%DKCPP_APPS_DIR%\%target_app%"
     
-    :: create DKApps/<target_app>/DKMAKE.cmake
-	echo dk_depend(%input%) > "%DKAPPS_DIR%\%target_app%\DKMAKE.cmake"
-    ::%dk_call% dk_fileWrite "%DKAPPS_DIR%\%target_app%\DKMAKE.cmake" dk_depend(%input%)
+    :: create apps/<target_app>/DKMAKE.cmake
+	echo dk_depend(%input%) > "%DKCPP_APPS_DIR%\%target_app%\DKMAKE.cmake"
+    ::%dk_call% dk_fileWrite "%DKCPP_APPS_DIR%\%target_app%\DKMAKE.cmake" dk_depend(%input%)
     
-    :: create DKApps/<target_app>/main.cpp
-    echo int main(int argc, char** argv) { return 0; } > "%DKAPPS_DIR%\%target_app%\main.cpp"
-	::%dk_call% dk_fileWrite "%DKAPPS_DIR%\%target_app%\main.cpp" "int main(int argc, char** argv) { return 0; }"
+    :: create apps/<target_app>/main.cpp
+    echo int main(int argc, char** argv) { return 0; } > "%DKCPP_APPS_DIR%\%target_app%\main.cpp"
+	::%dk_call% dk_fileWrite "%DKCPP_APPS_DIR%\%target_app%\main.cpp" "int main(int argc, char** argv) { return 0; }"
 %endfunction%
 
 

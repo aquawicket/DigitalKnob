@@ -195,9 +195,9 @@ bool DKAssets::GetAssetsPath(DKString& path){
     DKStringArray folders;
     DKFile::GetDirectoryContents(userpath + "/digitalknob", folders);
     for(int i=0; i<folders.size(); ++i){
-        if(DKFile::PathExists(userpath + "/digitalknob/"+folders[i]+"/DKApps/" + DKFile::app_name + "/assets/") &&
-            DKFile::PathExists(userpath + "/digitalknob/"+folders[i]+"/DKApps/" + DKFile::app_name + "/DKMAKE.cmake")){
-            path = userpath + "/digitalknob/"+folders[i]+"/DKApps/" + DKFile::app_name + "/assets/";
+        if(DKFile::PathExists(userpath + "/digitalknob/"+folders[i]+"/DKCpp/apps/" + DKFile::app_name + "/assets/") &&
+            DKFile::PathExists(userpath + "/digitalknob/"+folders[i]+"/DKCpp/apps/" + DKFile::app_name + "/DKMAKE.cmake")){
+            path = userpath + "/digitalknob/"+folders[i]+"/DKCpp/apps/" + DKFile::app_name + "/assets/";
             return true;
         }
     }

@@ -26,5 +26,5 @@ dk_clearCmakeCache() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_clearCmakeCache "/C/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/win_x86_64_clang/Debug"
+	dk_call dk_clearCmakeCache "/C/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/win_x86_64_clang/Debug"
 }

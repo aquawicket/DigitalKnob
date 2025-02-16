@@ -14,8 +14,8 @@ dk_generate() {
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
-	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKAPPS_DIR"
-	TARGET_PATH="${DKAPPS_DIR}/${target_app}"
+	dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKAPPS_DIR"
+	TARGET_PATH="${DKCPP_APPS_DIR}/${target_app}"
 	#dk_call dk_printVar TARGET_PATH
 	dk_call dk_makeDirectory "${TARGET_PATH}/${target_triple}"
 	dk_call dk_cd "${TARGET_PATH}/${target_triple}"

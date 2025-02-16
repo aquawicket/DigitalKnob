@@ -15,20 +15,20 @@ function Global:dk_buildApp() {
 	dk_call dk_echo
 	
 	if($target_type -eq "Debug" -or $target_type -eq "All"){
-		if(dk_call dk_pathExists "$DKAPPS_DIR/$target_app/$target_triple/Debug/CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR/$target_app/$target_triple/Debug" "--config Debug" "--verbose"
+		if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_triple/Debug/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" "--build" "$DKCPP_APPS_DIR/$target_app/$target_triple/Debug" "--config Debug" "--verbose"
 		}
-		elseif(dk_call dk_pathExists "$DKAPPS_DIR/$target_app/$target_triple/CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR/$target_app/$target_triple" "--config Debug" "--verbose"
+		elseif(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_triple/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" "--build" "$DKCPP_APPS_DIR/$target_app/$target_triple" "--config Debug" "--verbose"
 		}
 		else{dk_call dk_error "Could not find CMakeCache.txt in $target_app/$target_triple/Debug or $target_app/$target_triple"}
 	}
 	if($target_type -eq "Release" -or $target_type -eq "All"){
-		if(dk_call dk_pathExists "$DKAPPS_DIR/$target_app/$target_triple/Release/CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR/$target_app/$target_triple/Release" --config Release --verbose
+		if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_triple/Release/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" --build "$DKCPP_APPS_DIR/$target_app/$target_triple/Release" --config Release --verbose
 		}
-		elseif(dk_call dk_pathExists "$DKAPPS_DIR/$target_app/$target_triple/CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR/$target_app/$target_triple" --config Release --verbose
+		elseif(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_triple/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" --build "$DKCPP_APPS_DIR/$target_app/$target_triple" --config Release --verbose
 		}
 		else{dk_call dk_error "Could not find CMakeCache.txt in $target_app/$target_triple/Release or $target_app/$target_triple"}
 	}

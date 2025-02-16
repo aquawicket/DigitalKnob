@@ -43,7 +43,7 @@ function GLOBAL:Test:dk_test() {
     Write-Host "                   DKBRANCH = ${DKBRANCH}"
     Write-Host "               DKBRANCH_DIR = ${DKBRANCH_DIR}"
     Write-Host "             DK3RDPARTY_DIR = ${DK3RDPARTY_DIR}"
-    Write-Host "                 DKAPPS_DIR = ${DKAPPS_DIR}"
+    Write-Host "                 DKCPP_APPS_DIR = ${DKCPP_APPS_DIR}"
     Write-Host "                 DKBASH_DIR = ${DKPOWERSHELL_DIR}"
     Write-Host " DKPOWERSHELL_FUNCTIONS_DIR = ${DKPOWERSHELL_FUNCTIONS_DIR}"
     Write-Host "DKPOWERSHELL_FUNCTIONS_DIR_ = ${DKPOWERSHELL_FUNCTIONS_DIR_}"

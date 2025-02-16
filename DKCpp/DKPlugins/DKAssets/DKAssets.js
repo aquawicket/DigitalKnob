@@ -46,8 +46,8 @@ var pathname;
 
 if (!pathname)
     pathname = window.location.pathname;
-if (pathname.lastIndexOf("DKApps") > 0)
-    pathname = pathname.substring(pathname.lastIndexOf("DKApps") + 6, pathname.lastIndexOf("assets"));
+if (pathname.lastIndexOf("apps") > 0)
+    pathname = pathname.substring(pathname.lastIndexOf("apps") + 6, pathname.lastIndexOf("assets"));
 if (pathname.lastIndexOf(".com") > 0)
     pathname = pathname.substr(pathname.lastIndexOf(".com"));
 pathname = pathname.replace("index.html", "");

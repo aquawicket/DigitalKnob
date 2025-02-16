@@ -54,7 +54,7 @@ int dk_test(int __ARGC__, ...){
 	printf("           DKBRANCH = %s\n", DKBRANCH);
 	printf("       DKBRANCH_DIR = %s\n", DKBRANCH_DIR);
 	printf("     DK3RDPARTY_DIR = %s\n", DK3RDPARTY_DIR);
-	printf("         DKAPPS_DIR = %s\n", DKAPPS_DIR);
+	printf("         DKCPP_APPS_DIR = %s\n", DKCPP_APPS_DIR);
 	printf("            DKC_DIR = %s\n", DKC_DIR);
 	printf("  DKC_FUNCTIONS_DIR = %s\n", DKC_FUNCTIONS_DIR);
 	printf(" DKC_FUNCTIONS_DIR_ = %s\n", DKC_FUNCTIONS_DIR_);

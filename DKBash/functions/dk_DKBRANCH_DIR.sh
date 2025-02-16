@@ -32,7 +32,7 @@ dk_DKBRANCH_DIR() {
 		
 		[ -z "${DKBRANCH_DIR-}" ] && export DKBRANCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}"
 	
-		[ -z "${DKAPPS_DIR-}" ] && export DKAPPS_DIR="${DKBRANCH_DIR}/DKApps"
+
 		
 		[ -z "${DKBASH_DIR-}" ] && export DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
 			[ -z "${DKBASH_FUNCTIONS_DIR-}" ] && export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
@@ -51,6 +51,7 @@ dk_DKBRANCH_DIR() {
 			[ -z "${DKCMAKE_FUNCTIONS_DIR_-}" ] && export DKCMAKE_FUNCTIONS_DIR_="${DKCMAKE_FUNCTIONS_DIR}/"
 			
 		[ -z "${DKCPP_DIR-}" ] && export DKCPP_DIR="${DKBRANCH_DIR}/DKCpp"
+			[ -z "${DKCPP_APPS_DIR-}" ] && export DKCPP_APPS_DIR="${DKCPP_DIR}/apps"	
 			[ -z "${DKCPP_FUNCTIONS_DIR-}" ] && export DKCPP_FUNCTIONS_DIR="${DKCPP_DIR}/functions"
 			[ -z "${DKCPP_FUNCTIONS_DIR_-}" ] && export DKCPP_FUNCTIONS_DIR_="${DKCPP_FUNCTIONS_DIR}/"
 			

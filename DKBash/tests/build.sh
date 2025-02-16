@@ -118,7 +118,7 @@ dk_buildMain() {
 	dk_DKBRANCH_DIR
 
 	dk_printVar DKBRANCH_DIR
-	dk_printVar DKAPPS_DIR
+	dk_printVar DKCPP_APPS_DIR
 	dk_printVar DKCMAKE_DIR
 	dk_printVar DK3RDPARTY_DIR
 	dk_printVar DKIMPORTS_DIR
@@ -510,7 +510,7 @@ dk_generate() {
 	dk_clearCmakeCache
 	dk_deleteTempFiles
 
-	TARGET_PATH="${DKAPPS_DIR}"/"${target_app}"
+	TARGET_PATH="${DKCPP_APPS_DIR}"/"${target_app}"
 	dk_printVar TARGET_PATH
 	mkdir -p "${TARGET_PATH}"/"${target_triple}"
 	cd "${TARGET_PATH}"/"${target_triple}"
@@ -705,19 +705,19 @@ dk_buildApp() {
 	dk_echo
 	
 	if [ "${target_type}" = "Debug" ] || [ "${target_type}" = "All" ]; then
-		if dk_pathExists "${DKAPPS_DIR}/${target_app}/${target_triple}/Debug/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKAPPS_DIR}/${target_app}/${target_triple}/Debug" "--config Debug" "--verbose"
-		elif dk_pathExists "${DKAPPS_DIR}/${target_app}/${target_triple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKAPPS_DIR}/${target_app}/${target_triple}" "--config Debug" "--verbose"
+		if dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Debug/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Debug" "--config Debug" "--verbose"
+		elif dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${target_app}/${target_triple}" "--config Debug" "--verbose"
 		else
 			dk_error "Could not find CMakeCache.txt in ${target_app}/${target_triple}/Debug or ${target_app}/${target_triple}"
 		fi
 	fi
 	if [ "${target_type}" = "Release" ] || [ "${target_type}" = "All" ]; then
-		if dk_pathExists "${DKAPPS_DIR}/${target_app}/${target_triple}/Release/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKAPPS_DIR}/${target_app}/${target_triple}/Release" --config Release --verbose
-		elif dk_pathExists "${DKAPPS_DIR}/${target_app}/${target_triple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKAPPS_DIR}/${target_app}/${target_triple}" --config Release --verbose
+		if dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Release/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Release" --config Release --verbose
+		elif dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${target_app}/${target_triple}" --config Release --verbose
 		else
 			dk_error "Could not find CMakeCache.txt in ${target_app}/${target_triple}/Release or ${target_app}/${target_triple}"
 		fi
@@ -1531,8 +1531,8 @@ dk_DKBRANCH_DIR() {
 	DKIMPORTS_DIR="$DK3RDPARTY_DIR/_DKIMPORTS"
 	dk_printVar DKIMPORTS_DIR
 	
-	DKAPPS_DIR="${DIGITALKNOB_DIR}/$DKBRANCH/DKApps"
-	dk_printVar DKAPPS_DIR
+	DKCPP_APPS_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKCpp/apps"
+	dk_printVar DKCPP_APPS_DIR
 	
 	DKPLUGINS_DIR="${DIGITALKNOB_DIR}/$DKBRANCH/DKPlugins"
 	dk_printVar DKPLUGINS_DIR
@@ -1994,21 +1994,21 @@ dk_enterManually() {
 	if test -f "${DKPLUGINS_DIR}"/"${input}"/DKMAKE.cmake; then
 		TARGET_PATH=${DKPLUGINS_DIR}/${input}
 	fi
-	if test -f "${DKAPPS_DIR}"/"${input}"/DKMAKE.cmake; then
-		TARGET_PATH=${DKAPPS_DIR}/${input}
+	if test -f "${DKCPP_APPS_DIR}"/"${input}"/DKMAKE.cmake; then
+		TARGET_PATH=${DKCPP_APPS_DIR}/${input}
 		return $(true)
 	fi
 	dk_printVar TARGET_PATH
 	
-	if [ ! -d "${DKAPPS_DIR}"/"${target_app}" ]; then
-		mkdir -p "${DKAPPS_DIR}"/"${target_app}";
+	if [ ! -d "${DKCPP_APPS_DIR}"/"${target_app}" ]; then
+		mkdir -p "${DKCPP_APPS_DIR}"/"${target_app}";
 	fi
 	
-	# create DKApps/<target_app>/DKMAKE.cmake 
-	echo "dk_depend(${input})" > "${DKAPPS_DIR}"/"${target_app}"/DKMAKE.cmake
+	# create apps/<target_app>/DKMAKE.cmake 
+	echo "dk_depend(${input})" > "${DKCPP_APPS_DIR}"/"${target_app}"/DKMAKE.cmake
 	
-	# create DKApps/<target_app>/main.cpp
-	echo "int main(int argc, char** argv) { return 0; }" > "${DKAPPS_DIR}"/"${target_app}"/main.cpp
+	# create apps/<target_app>/main.cpp
+	echo "int main(int argc, char** argv) { return 0; }" > "${DKCPP_APPS_DIR}"/"${target_app}"/main.cpp
 }
 
 

@@ -19,14 +19,14 @@ function AndroidImport_Import() {
     var files = contents.split(",");
 
     for (var i = 0; i < files.length; i++) {
-        if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP)) {
-            appdir = DIGITALKNOB_DIR + "/" + files[i] + "/DKApps/" + APP;
+        if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP)) {
+            appdir = DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP;
         }
     }
 
     /*
-	if(dk.file.extist(DIGITALKNOB_DIR+"/DKApps/"+APP)){
-		appdir = DIGITALKNOB_DIR+"/DKApps/"+APP;
+	if(dk.file.extist(DIGITALKNOB_DIR+"/DKCpp/apps/"+APP)){
+		appdir = DIGITALKNOB_DIR+"/DKCpp/apps/"+APP;
 	}
 	*/
 
@@ -74,8 +74,8 @@ function AndroidImport_Import() {
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
-			if(dk.file.extist(DIGITALKNOB_DIR+"/"+folder+"/DKApps/"+APP+"/DKMAKE.cmake")){
-				appdir = folder+"/DKApps";
+			if(dk.file.extist(DIGITALKNOB_DIR+"/"+folder+"/DKCpp/apps/"+APP+"/DKMAKE.cmake")){
+				appdir = folder+"/DKCpp/apps";
 			}
 		}
 	}

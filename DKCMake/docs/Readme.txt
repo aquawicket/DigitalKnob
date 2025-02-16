@@ -3,7 +3,7 @@
 * There is only one CMakeLists.txt file in the root of the /digitalknob folder.
 
 * When running Cmake, the source path is always the /digitalknob folder, where the CMakeLists.txt file is located. 
-* The build directory is the path to the app followed by the OS.  i.e  DKApps/DKMyApp/win_x86  
+* The build directory is the path to the app followed by the OS.  i.e  DKCpp/apps/DKMyApp/win_x86  
 	* Output Build OS's are
 		* /android_arm32
 		* /android_arm64
@@ -41,7 +41,7 @@
 /digitalknob      ( I.E.  C:/Users/username/digitalknob for windows.. ,where the digitalknob folder resides on your system )
 
 *** BINARY DIRECTORY ****
-/digitalknob/Development/DKApps/DKCore/win_x86   ( By setting the binary directory to be win_x86, most variables will be casted )
+/digitalknob/Development/DKCpp/apps/DKCore/win_x86   ( By setting the binary directory to be win_x86, most variables will be casted )
 
 
 ****************************************************
@@ -52,7 +52,7 @@ Q. How do I add a 3rdParty library to DigitalKnob
 A. Take a look in the /digitalknob/3rdParty/_DKIMPORTS folder,   there you will find tons of examples of how DK uses DKMAKE.cmake files.
 
 Q. How do I add an App
-A. For now, just rename any of the folders in /DKApps to your desired app name and use it as a template.
+A. For now, just rename any of the folders in /DKCpp/apps to your desired app name and use it as a template.
 
 Q. I'm still having so many issues..  what else can I do.
 A. Contact me..    *email hidden*  just message me here ;)

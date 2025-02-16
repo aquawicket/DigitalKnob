@@ -51,7 +51,7 @@ dk_test = function dk_test_f(){
 	if(typeof DKSCRIPT_ARGS !== "undefined"){ console.log("              DKBRANCH = "+DKBRANCH);				}
 	if(typeof DKSCRIPT_ARGS !== "undefined"){ console.log("          DKBRANCH_DIR = "+DKBRANCH_DIR);			}
 	if(typeof DKSCRIPT_ARGS !== "undefined"){ console.log("        DK3RDPARTY_DIR = "+DK3RDPARTY_DIR);			}
-	if(typeof DKSCRIPT_ARGS !== "undefined"){ console.log("            DKAPPS_DIR = "+DKAPPS_DIR);				}
+	if(typeof DKSCRIPT_ARGS !== "undefined"){ console.log("            DKCPP_APPS_DIR = "+DKCPP_APPS_DIR);				}
 	if(typeof DKSCRIPT_ARGS !== "undefined"){ console.log("            DKBASH_DIR = "+DKBASH_DIR);				}
 	if(typeof DKSCRIPT_ARGS !== "undefined"){ console.log("  DKBASH_FUNCTIONS_DIR = "+DKBASH_FUNCTIONS_DIR);	}
 	if(typeof DKSCRIPT_ARGS !== "undefined"){ console.log(" DKBASH_FUNCTIONS_DIR_ = "+DKBASH_FUNCTIONS_DIR_);	}

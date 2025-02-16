@@ -16,8 +16,8 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     %dk_call% dk_info "##################################################################"
     %dk_call% dk_echo
 
-	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
-    set "TARGET_PATH=%DKAPPS_DIR%\%target_app%"
+	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
+    set "TARGET_PATH=%DKCPP_APPS_DIR%\%target_app%"
     if not exist "%TARGET_PATH%\%target_triple%"   %dk_call% dk_makeDirectory "%TARGET_PATH%\%target_triple%"
 	
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"

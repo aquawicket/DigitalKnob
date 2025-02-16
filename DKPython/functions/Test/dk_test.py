@@ -45,7 +45,7 @@ def Test_dk_test(*args):
 #    print(f"              DKBRANCH = {DKBRANCH}")
 #    print(f"          DKBRANCH_DIR = {DKBRANCH_DIR}")
 #    print(f"        DK3RDPARTY_DIR = {DK3RDPARTY_DIR}")
-#    print(f"            DKAPPS_DIR = {DKAPPS_DIR}")
+#    print(f"            DKCPP_APPS_DIR = {DKCPP_APPS_DIR}")
 #    print(f"            DKBASH_DIR = {DKBASH_DIR}")
 #    print(f"  DKBASH_FUNCTIONS_DIR = {DKBASH_FUNCTIONS_DIR}")
 #    print(f" DKBASH_FUNCTIONS_DIR_ = {DKBASH_FUNCTIONS_DIR_}")

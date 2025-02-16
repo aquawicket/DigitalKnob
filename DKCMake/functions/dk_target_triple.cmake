@@ -36,7 +36,7 @@ function(dk_target_triple)
 	dk_getFullPath("${CMAKE_BINARY_DIR}" Target_Dir)
 	dk_toLower(${Target_Dir} target_dir)
 	dk_toUpper(${target_dir} TARGET_DIR)
-	dk_printVar(Target_Dir)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
+	dk_printVar(Target_Dir)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
 	message("")
 
 	### Set target_type / TARGET_TYPE ###
@@ -44,12 +44,12 @@ function(dk_target_triple)
 		### Get DEBUG ###
 		dk_set(target_type DEBUG)						# 	    target_type = DEBUG
 		dk_set(${target_type} 1)						# 			  DEBUG = 1	
-		dk_dirname(${Target_Dir} Target_Triple_Dir)		# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		dk_dirname(${Target_Dir} Target_Triple_Dir)		# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	elseif(Target_Dir MATCHES "Release")
 		### Get RELEASE ###
 		dk_set(target_type RELEASE)						# 	    target_type = RELEASE
 		dk_set(${target_type} 1)						#			RELEASE = 1	
-		dk_dirname(${Target_Dir} Target_Triple_Dir)		# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		dk_dirname(${Target_Dir} Target_Triple_Dir)		# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	endif()
 	dk_printVar(Target_Triple_Dir)
 	message("")
@@ -63,7 +63,7 @@ function(dk_target_triple)
 		(target_dir MATCHES "raspberry")	OR
 		(target_dir MATCHES "windows")		OR
 		(target_dir MATCHES "cosmopolitan") )
-		dk_set(Target_Triple_Dir ${Target_Dir})			# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		dk_set(Target_Triple_Dir ${Target_Dir})			# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	else()
 		message("######calling dk_target_triple_SET()#####")
 		dk_target_triple_SET()

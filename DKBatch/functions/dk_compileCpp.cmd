@@ -32,6 +32,6 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     set "MSYSTEM=CLANG64"
-    %dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
-    %dk_call% dk_compileCpp "%DKAPPS_DIR%/HelloWorld/main.cpp"
+    %dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
+    %dk_call% dk_compileCpp "%DKCPP_APPS_DIR%/HelloWorld/main.cpp"
 %endfunction%

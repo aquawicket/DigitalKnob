@@ -189,4 +189,4 @@ mkdir mac; cd mac; cmake -G "Xcode" ../../DKPlugins -DCMAKE_OSX_ARCHITECTURES="x
 
 **DKTest1**
 
-cd ..; cd DKApps; cd DKTest1; mkdir mac; cd mac; cmake -G "Xcode" ../../DKTest1 -DCMAKE_OSX_ARCHITECTURES="x86_64" -DMAC=ON; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../DKPlugins
+cd ..; cd DKCpp; cd apps; cd DKTest1; mkdir mac; cd mac; cmake -G "Xcode" ../../DKTest1 -DCMAKE_OSX_ARCHITECTURES="x86_64" -DMAC=ON; xcodebuild -configuration Debug build; xcodebuild -configuration Release build; cd ../../../DKPlugins

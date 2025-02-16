@@ -30,10 +30,8 @@ setlocal
 :DKTEST
 setlocal
 	%dk_call% dk_debugFunc 0
-
-    %dk_call% dk_createShortcut "C:/Users/Administrator/Desktop/digitalknob.lnk" "C:/Users/Administrator/digitalknob"
 	
-	set "imgFile=C:\Users\Administrator\digitalknob\Development\DKCpp\DKApps\DKCore\icons\icon.png"
-	set "icoFile=C:\Users\Administrator\digitalknob\Development\DKCpp\DKApps\DKCore\icons\icon.ico"
+	set "imgFile=C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKCore/icons/icon.png"
+	set "icoFile=C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKCore/icons/icon.ico"
 	%dk_call% dk_imgToIco "%imgFile%" "%icoFile%"
 %endfunction%

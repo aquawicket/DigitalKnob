@@ -24,12 +24,12 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0
 
-	set "CMAKE_BINARY_DIR=C:\Users\Administrator\digitalknob\Development\DKApps\HelloWorld\win_x86_64_clang\Debug"
+	::set "CMAKE_BINARY_DIR=C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/win_x86_64_clang/Debug"
 	set "default_target_env=clang"
 
 	::### Get TARGET_DIR ###
 	!dk_call! dk_realpath "!CMAKE_BINARY_DIR!" TARGET_DIR
-	!dk_call! dk_printVar TARGET_DIR 							&:: TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
+	!dk_call! dk_printVar TARGET_DIR 							&:: TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
 
 	::### Set target_type / TARGET_TYPE ###
 	if "!TARGET_DIR!" equ "Debug" (	
@@ -37,13 +37,13 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		!dk_call! dk_set target_type DEBUG						&rem 	    target_type	= DEBUG
 		!dk_call! dk_set !target_type! 1						&rem 			  DEBUG = 1	
 		rem !dk_call! dk_set TARGET_TYPE Debug					&rem 		TARGET_TYPE	= Debug
-		!dk_call! dk_dirname TARGET_DIR TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		!dk_call! dk_dirname TARGET_DIR TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	) else if "!TARGET_DIR!" equ "Release" (
 		rem ### Get RELEASE ###
 		!dk_call! dk_set target_type RELEASE 					&rem 	    target_type = RELEASE
 		!dk_call! dk_set !target_type! 1						&rem 			RELEASE = 1	
 		rem !dk_call! dk_set TARGET_TYPE Release				&rem 		TARGET_TYPE = Release
-		!dk_call! dk_dirname !TARGET_DIR! TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		!dk_call! dk_dirname !TARGET_DIR! TARGET_TRIPLE_DIR		&rem  TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	)
 
 	%dk_call% dk_stringContainsCI "!TARGET_DIR!" "android" 		&& goto if
@@ -58,7 +58,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_stringContainsCI "!TARGET_DIR!" "cosmopolitan"	&& goto if
 	goto else
 	:if
-		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!			&:: TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!			&:: TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	:else
 		!dk_call! dk_target_triple_SET
 		!dk_call! dk_set TARGET_TRIPLE_DIR !TARGET_DIR!/!target_triple!

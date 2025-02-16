@@ -36,8 +36,8 @@ function Global:dk_DKBRANCH_DIR() {
 			$global:DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
 			dk_call dk_assertPath DKIMPORTS_DIR
 		
-		$global:DKAPPS_DIR="${DKBRANCH_DIR}/DKApps"
-		dk_call dk_assertPath DKAPPS_DIR
+		$global:DKCPP_APPS_DIR="${DKBRANCH_DIR}/DKCpp/apps"
+		dk_call dk_assertPath DKCPP_APPS_DIR
 		
 		$global:DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
 		dk_call dk_assertPath DKBASH_DIR

@@ -17,7 +17,7 @@ function Global:dk_generate() {
 	dk_call dk_clearCmakeCache
 	dk_call dk_deleteTempFiles
 
-	$TARGET_PATH = "$DKAPPS_DIR/$target_app"
+	$TARGET_PATH = "$DKCPP_APPS_DIR/$target_app"
 	dk_call dk_printVar TARGET_PATH
 	dk_call dk_makeDirectory "$TARGET_PATH/$target_triple"
 	cd "$TARGET_PATH/$target_triple"

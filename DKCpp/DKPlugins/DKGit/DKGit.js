@@ -234,7 +234,7 @@ function DKGit_CheckForDiff(){
 	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
 	var files = contents.split(",")
 	for(var i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKApps")){
+		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKCpp/apps")){
 				CPP_DKFile_ChDir(DIGITALKNOB_DIR + files[i])
 				console.log("Checking "+files[i]+" . . . ")
 				
@@ -261,7 +261,7 @@ function DKGit_DiffCount(){
 	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
 	var files = contents.split(",")
 	for(var i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKApps")){
+		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKCpp/apps")){
 			CPP_DKFile_ChDir(DIGITALKNOB_DIR + "/" + files[i])
 			const default_branch = DKGit_GetDefaultBranch()
 			const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/"+default_branch+" --count", "rt")

@@ -20,21 +20,21 @@ function Global:dk_enterManually() {
 	if(dk_call dk_pathExists "$DKPLUGINS_DIR/$input/DKMAKE.cmake"){
 		$global:TARGET_PATH = "$DKPLUGINS_DIR/$input"
 	}
-	if(dk_call dk_pathExists "$DKAPPS_DIR/$input/DKMAKE.cmake"){
-		$global:TARGET_PATH = "$DKAPPS_DIR/$input"
+	if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$input/DKMAKE.cmake"){
+		$global:TARGET_PATH = "$DKCPP_APPS_DIR/$input"
 		return ${true}
 	}
 	dk_call dk_printVar TARGET_PATH
 	
-	if(!(dk_call dk_pathExists "$DKAPPS_DIR/$target_app")){
-		dk_call dk_makeDirectory "$DKAPPS_DIR/$target_app"
+	if(!(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app")){
+		dk_call dk_makeDirectory "$DKCPP_APPS_DIR/$target_app"
 	}
 	
-	# create DKApps/<target_app>/DKMAKE.cmake 
-	echo "dk_call dk_depend($input)" > "$DKAPPS_DIR/$target_app/DKMAKE.cmake"
+	# create DKCpp/apps/<target_app>/DKMAKE.cmake 
+	echo "dk_call dk_depend($input)" > "$DKCPP_APPS_DIR/$target_app/DKMAKE.cmake"
 	
-	# create DKApps/<target_app>/main.cpp
-	echo "int main(int argc, char** argv) { return 0; }" > "$DKAPPS_DIR/$target_app/main.cpp"
+	# create DKCpp/apps/<target_app>/main.cpp
+	echo "int main(int argc, char** argv) { return 0; }" > "$DKCPP_APPS_DIR/$target_app/main.cpp"
 }
 
 

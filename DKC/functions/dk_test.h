@@ -56,7 +56,7 @@ int dk_test(int __ARGC__, ...){
 	dk_echo("           DKBRANCH = %s\n", DKBRANCH);
 	dk_echo("       DKBRANCH_DIR = %s\n", DKBRANCH_DIR);
 	dk_echo("     DK3RDPARTY_DIR = %s\n", DK3RDPARTY_DIR);
-	dk_echo("         DKAPPS_DIR = %s\n", DKAPPS_DIR);
+	dk_echo("         DKCPP_APPS_DIR = %s\n", DKCPP_APPS_DIR);
 	dk_echo("            DKC_DIR = %s\n", DKC_DIR);
 	dk_echo("  DKC_FUNCTIONS_DIR = %s\n", DKC_FUNCTIONS_DIR);
 	dk_echo(" DKC_FUNCTIONS_DIR_ = %s\n", DKC_FUNCTIONS_DIR_);

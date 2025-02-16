@@ -295,13 +295,13 @@ function DKBuild_ResetApps(){
 	var items = contents.split(",")
 	for(var n=0; n<items.length; n++){
 		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[n]+"/.git")){
-			if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[n]+"/DKApps")){
-				var app_contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR+items[n]+"/DKApps")
+			if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[n]+"/DKCpp/apps")){
+				var app_contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR+items[n]+"/DKCpp/apps")
 				var apps = app_contents.split(",")
 				for(var nn=0; nn<apps.length; nn++){
-					if(CPP_DKFile_IsDirectory(DIGITALKNOB_DIR+items[n]+"/DKApps/"+apps[nn])){
+					if(CPP_DKFile_IsDirectory(DIGITALKNOB_DIR+items[n]+"/DKCpp/apps/"+apps[nn])){
 						if(apps[nn] !== "DKBuilder")
-							DKGit_CleanFolder(DIGITALKNOB_DIR+items[n]+"/DKApps/"+apps[nn])
+							DKGit_CleanFolder(DIGITALKNOB_DIR+items[n]+"/DKCpp/apps/"+apps[nn])
 					}
 				}
 			}
@@ -346,12 +346,12 @@ function DKBuild_GetAppList(){
 	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
 	var items = contents.split(",")
 	for(var i=0; i<items.length; i++){
-		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[i]+"/DKApps")){
-			if(CPP_DKFile_IsDirectory(DIGITALKNOB_DIR+items[i]+"/DKApps")){
-				var dkApps = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR+items[i]+"/DKApps")
+		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[i]+"/DKCpp/apps")){
+			if(CPP_DKFile_IsDirectory(DIGITALKNOB_DIR+items[i]+"/DKCpp/apps")){
+				var dkApps = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR+items[i]+"/DKCpp/apps")
 				var dkAppsArray = dkApps.split(",")
 				for(var nn=0; nn < dkAppsArray.length; nn++){
-					if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[i]+"/DKApps/"+dkAppsArray[nn]+"/DKMAKE.cmake")){
+					if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[i]+"/DKCpp/apps/"+dkAppsArray[nn]+"/DKMAKE.cmake")){
 						APP_LIST.push(dkAppsArray[nn])
 					}
 				}
@@ -364,8 +364,8 @@ function DKBuild_FindAppPath(name){
 	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
 	var files = contents.split(",")
 	for(var i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKApps/"+name+"/DKMAKE.cmake"))
-			return DIGITALKNOB_DIR+files[i]+"/DKApps/"+name+"/"
+		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKCpp/apps/"+name+"/DKMAKE.cmake"))
+			return DIGITALKNOB_DIR+files[i]+"/DKCpp/apps/"+name+"/"
 	}
 	return 0;
 }

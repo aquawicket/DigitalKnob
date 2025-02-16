@@ -26,7 +26,7 @@
 su -c pm install <path/to>/some.apk 
 
 ###### Launch an .apk install file ######
-termux-open /DKApps/DKSDL/android_arm64/Debug/app/build/output/apk/debug/app-debug.apk
+termux-open /DKCpp/apps/DKSDL/android_arm64/Debug/app/build/output/apk/debug/app-debug.apk
 
 ###### Launch an installed app ######
 am start --user 0 -n com.digitalknob.dk/.DKApp

@@ -52,7 +52,7 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	#dk_call dk_createShortcut "C:\Users\Administrator\Desktop\digitalknob.lnk" "C:\Users\Administrator\digitalknob"
-#	dk_call dk_createShortcut "C:\Users\Administrator\Desktop\HelloWorld.lnk" "C:\Windows\System32\wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
+#	dk_call dk_createShortcut "C:\Users\Administrator\Desktop\HelloWorld.lnk" "C:\Windows\System32\wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
 	
-	dk_call dk_createShortcut "C:/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP.lnk" "C:/Windows/System32/wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
+	dk_call dk_createShortcut "C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP.lnk" "C:/Windows/System32/wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
 }

@@ -19,11 +19,11 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	:: echo _target_triple_ = %_target_triple_%
 	:: echo _target_type_ = %_target_type_%
 	
-    :: get a list of the directories in DKApps
-	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
+    :: get a list of the directories in DKCpp/apps
+	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
 	%dk_call% dk_deleteArray dk_getDirectories
-    %dk_call% dk_getDirectories "%DKAPPS_DIR%" 
+    %dk_call% dk_getDirectories "%DKCPP_APPS_DIR%" 
 	set "dk_getDirectories=%dk_getDirectories%"
 	%dk_call% dk_deleteArray commands
 	

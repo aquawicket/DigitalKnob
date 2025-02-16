@@ -44,7 +44,7 @@ dk_test() {
     echo "             DKBRANCH = ${DKBRANCH-}"
     echo "         DKBRANCH_DIR = ${DKBRANCH_DIR-}"
     echo "       DK3RDPARTY_DIR = ${DK3RDPARTY_DIR-}"
-    echo "           DKAPPS_DIR = ${DKAPPS_DIR-}"
+    echo "           DKCPP_APPS_DIR = ${DKCPP_APPS_DIR-}"
     echo "           DKBASH_DIR = ${DKBASH_DIR-}"
     echo " DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR-}"
     echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_-}"

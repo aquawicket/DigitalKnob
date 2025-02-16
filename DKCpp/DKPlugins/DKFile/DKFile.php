@@ -307,9 +307,9 @@ function getRelativeDKPluginsPath(){
 function getDKAppAssetsPath(){
 	chdir(getRootPath());
     //FIXME: temporarily using raw user defaults paths
-    if(file_exists("C:/Users/aquawicket/digitalknob/DKTasmota/DKApps/DKTasmota/assets/")){
+    if(file_exists("C:/Users/aquawicket/digitalknob/DKTasmota/DKCpp/apps/DKTasmota/assets/")){
     	$dkAppAssetsPath = "";
-    	$dkAppAssetsPath = "C:/Users/aquawicket/digitalknob/DKTasmota/DKApps/DKTasmota/assets/";
+    	$dkAppAssetsPath = "C:/Users/aquawicket/digitalknob/DKTasmota/DKCpp/apps/DKTasmota/assets/";
     	$dkAppAssetsPath = ValidatePath($dkAppAssetsPath);
     	echo "dkAppsAssetsPath = ".$dkAppAssetsPath."\n";
     	return $dkAppAssetsPath;

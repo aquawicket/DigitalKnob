@@ -21,22 +21,22 @@ dk_enterManually() {
 		TARGET_PATH=${DKPLUGINS_DIR}/${input}
 	fi
 	
-	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKAPPS_DIR"
-	if test -f "${DKAPPS_DIR}/${input}/DKMAKE.cmake"; then
-		TARGET_PATH=${DKAPPS_DIR}/${input}
+	dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKAPPS_DIR"
+	if test -f "${DKCPP_APPS_DIR}/${input}/DKMAKE.cmake"; then
+		TARGET_PATH=${DKCPP_APPS_DIR}/${input}
 		return $(true)
 	fi
 	dk_call dk_printVar TARGET_PATH
 	
-	if [ ! -d "${DKAPPS_DIR}/${target_app}" ]; then
-		dk_call dk_makeDirectory "${DKAPPS_DIR}/${target_app}";
+	if [ ! -d "${DKCPP_APPS_DIR}/${target_app}" ]; then
+		dk_call dk_makeDirectory "${DKCPP_APPS_DIR}/${target_app}";
 	fi
 	
-	# create DKApps/<target_app>/DKMAKE.cmake 
-	dk_call dk_fileWrite "${DKAPPS_DIR}/${target_app}/DKMAKE.cmake" "dk_depend(${input})"
+	# create apps/<target_app>/DKMAKE.cmake 
+	dk_call dk_fileWrite "${DKCPP_APPS_DIR}/${target_app}/DKMAKE.cmake" "dk_depend(${input})"
 	
-	# create DKApps/<target_app>/main.cpp
-	dk_call dk_fileWrite "${DKAPPS_DIR}/${target_app}/main.cpp" "int main(int argc, char** argv) { return 0; }"
+	# create apps/<target_app>/main.cpp
+	dk_call dk_fileWrite "${DKCPP_APPS_DIR}/${target_app}/main.cpp" "int main(int argc, char** argv) { return 0; }"
 }
 
 
