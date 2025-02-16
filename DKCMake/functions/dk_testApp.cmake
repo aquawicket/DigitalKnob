@@ -29,7 +29,7 @@ function(dk_testApp plugin_name)
 	dk_fileAppend(${test_path}/CMakeLists.txt "include(${DKCMAKE_DIR}/DKFunctions.cmake)\n")
 	dk_fileAppend(${test_path}/CMakeLists.txt "include(${DKCMAKE_DIR}/DKVariables.cmake)\n")
 	dk_appendCmake("project(${plugin_name}_test)\n")
-	dk_appendCmake("include_directories(${DKPLUGINS_DIR})\n")
+	dk_appendCmake("include_directories(${DKCPP_PLUGINS_DIR})\n")
 		
 	# TODO		
 	dk_addToPluginList(${plugin_name})

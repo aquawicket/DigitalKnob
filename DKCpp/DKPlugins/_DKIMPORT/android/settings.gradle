@@ -1,8 +1,0 @@
-include ':app'
-
-buildCache {
-    local {
-        // Set local build cache directory.
-        directory = "${settingsDir}/build-cache"
-    }
-}

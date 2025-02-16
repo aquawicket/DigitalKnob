@@ -122,7 +122,7 @@ dk_buildMain() {
 	dk_printVar DKCMAKE_DIR
 	dk_printVar DK3RDPARTY_DIR
 	dk_printVar DKIMPORTS_DIR
-	dk_printVar DKPLUGINS_DIR
+	dk_printVar DKCPP_PLUGINS_DIR
 
 	if [ "$DKSCRIPT_DIR" != "${DKBRANCH_DIR}" ]; then
 		dk_warning "$DKSCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
@@ -1534,8 +1534,8 @@ dk_DKBRANCH_DIR() {
 	DKCPP_APPS_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKCpp/apps"
 	dk_printVar DKCPP_APPS_DIR
 	
-	DKPLUGINS_DIR="${DIGITALKNOB_DIR}/$DKBRANCH/DKPlugins"
-	dk_printVar DKPLUGINS_DIR
+	DKCPP_PLUGINS_DIR="${DIGITALKNOB_DIR}/$DKBRANCH/DKCpp/plugins"
+	dk_printVar DKCPP_PLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "$DKSCRIPT_DIR" = "${DKBRANCH_DIR}" ]; then
@@ -1991,8 +1991,8 @@ dk_enterManually() {
 	if test -f "${DKIMPORTS_DIR}"/"${input}"/DKMAKE.cmake; then
 		TARGET_PATH=${DKIMPORTS_DIR}/${input}
 	fi
-	if test -f "${DKPLUGINS_DIR}"/"${input}"/DKMAKE.cmake; then
-		TARGET_PATH=${DKPLUGINS_DIR}/${input}
+	if test -f "${DKCPP_PLUGINS_DIR}"/"${input}"/DKMAKE.cmake; then
+		TARGET_PATH=${DKCPP_PLUGINS_DIR}/${input}
 	fi
 	if test -f "${DKCPP_APPS_DIR}"/"${input}"/DKMAKE.cmake; then
 		TARGET_PATH=${DKCPP_APPS_DIR}/${input}

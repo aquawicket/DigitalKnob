@@ -31,18 +31,18 @@ function(dk_configureApp)
 		dk_fileWrite("${DK_Project_Dir}/DKPlugins.h" "${PLUGINS_FILE}")
 	endif()
 
-	dk_validate(DKPLUGINS_DIR "dk_DKPLUGINS_DIR()")
+	dk_validate(DKCPP_PLUGINS_DIR "dk_DKBRANCH_DIR()")
 	if(HAVE_DK)
 		## copy app default files without overwrite
-		dk_info("Copying DKPlugins/_DKIMPORT/ to App...")
-		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/icons ${DK_Project_Dir}/icons) 
-		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_Project_Dir}/assets.h)
-		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/main.cpp ${DK_Project_Dir}/main.cpp)
+		dk_info("Copying DKCpp/plugins/_DKIMPORT/ to App...")
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/icons ${DK_Project_Dir}/icons) 
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${DK_Project_Dir}/assets.h)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${DK_Project_Dir}/main.cpp)
 	endif()
 
 	# Copy VSCode project files to app
-	dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/DKApp.code-workspace ${DK_Project_Dir}/DKApp.code-workspace)
-	dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/.vscode ${DK_Project_Dir}/.vscode)
+	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/DKApp.code-workspace ${DK_Project_Dir}/DKApp.code-workspace)
+	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/.vscode ${DK_Project_Dir}/.vscode)
 
 	### Include all source files from the app folder for the compilers
 	#file(GLOB_RECURSE App_SRC
@@ -65,7 +65,7 @@ function(dk_configureApp)
 
 	add_definitions(-DDKAPP)
 	include_directories(${DK_Project_Dir})
-	include_directories(${DKPLUGINS_DIR})
+	include_directories(${DKCPP_PLUGINS_DIR})
 
 	##############
 	if(WIN_X86_64)
@@ -83,7 +83,7 @@ function(dk_configureApp)
 			dk_copy(${DK_Project_Dir}/Backup/ ${DK_Project_Dir}/assets/ OVERWRITE NO_HALT)
 			dk_delete(${DK_Project_Dir}/Backup NO_HALT)
 			#dummy assets.h file, or the builder wil complain about assets.h missing
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_Project_Dir}/assets.h OVERWRITE NO_HALT)
+			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${DK_Project_Dir}/assets.h OVERWRITE NO_HALT)
 		endif()
 		
 		###################### Backup Executable ###########################
@@ -99,8 +99,8 @@ function(dk_configureApp)
 		####################### Create Executable Target ###################
 		if(HAVE_DK)
 			##set_source_files_properties(${DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_Project_Dir}/resource.h)
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_Project_Dir}/resource.rc)
+			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_Project_Dir}/resource.h)
+			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_Project_Dir}/resource.rc)
 			file(GLOB_RECURSE resources_SRC 
 				${DK_Project_Dir}/*.manifest
 				${DK_Project_Dir}/*.rc
@@ -118,7 +118,7 @@ function(dk_configureApp)
 		########################## Add Dependencies ########################
 		if(PROJECT_INCLUDE_DKPLUGINS)
 			foreach(plugin ${dkdepend_list})
-				if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
+				if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
 					add_dependencies(${APP_NAME} ${plugin})
 				endif()	
 			endforeach()

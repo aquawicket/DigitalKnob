@@ -92,7 +92,7 @@ if (!DUKTAPE) {
             return false;
         }
         var search = assets;
-        while (!CPP_DKFile_Exists(search + "/Development/DKPlugins")) {
+        while (!CPP_DKFile_Exists(search + "/Development/DKCpp/plugins")) {
             var n = search.lastIndexOf("/");
             if (n === -1) {
                 return error("could not locate a DKPlugins folder");
@@ -111,7 +111,7 @@ if (!DUKTAPE) {
         }
         var folders = temp.split(",");
         var plugin_folders = [];
-        plugin_folders.push(DIGITALKNOB_DIR + "/Development/DKPlugins");
+        plugin_folders.push(DIGITALKNOB_DIR + "/Development/DKCpp/plugins");
         for (var n = 0; n < folders.length; n++) {
             if (CPP_DKFile_Exists(DIGITALKNOB_DIR + "/" + folders[n] + "/DKPlugins"))
                 plugin_folders.push(DIGITALKNOB_DIR + "/" + folders[n] + "/DKPlugins");

@@ -104,9 +104,9 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/zlib*
 3rdParty/zstd-27bf136
 
-DKCpp/DKPlugins/*/CMakeLists.txt
-DKCpp/DKPlugins/DK/backward.cpp
-DKCpp/DKPlugins/DKXml/pugixml.cpp
+DKCpp/plugins/*/CMakeLists.txt
+DKCpp/plugins/DK/backward.cpp
+DKCpp/plugins/DKXml/pugixml.cpp
 
 DKCpp/apps/*/.vscode
 DKCpp/apps/*/assets.h

@@ -81,6 +81,9 @@ function(dk_DKBRANCH_DIR)
 
 			dk_set(DKCPP_FUNCTIONS_DIR_ "${DKCPP_FUNCTIONS_DIR}/")
 			set(ENV{DKCPP_FUNCTIONS_DIR_} "${DKCPP_FUNCTIONS_DIR}/")
+			
+			dk_set(DKCPP_PLUGINS_DIR "${DKCPP_DIR}/plugins")
+			set(ENV{DKCPP_PLUGINS_DIR} "${DKCPP_DIR}/plugins")
 
 			
 		dk_set(DKCSHARP_DIR "${DKBRANCH_DIR}/DKCSharp")

@@ -21,8 +21,8 @@ setlocal
 	for /r %%Z in (*.tmp) do @if %%~xZ==.tmp del "%%Z"
 	for /r %%Z in (*.TMP) do @if %%~xZ==.TMP del "%%Z"
 	
-	%dk_call% dk_validate DKPLUGINS_DIR  "%dk_call% dk_DKPLUGINS_DIR"
-	%dk_call% dk_cd "%DKPLUGINS_DIR%"
+	%dk_call% dk_validate DKCPP_PLUGINS_DIR  "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_cd "%DKCPP_PLUGINS_DIR%"
 	for /r %%Z in (*.tmp) do @if %%~xZ==.tmp del "%%Z"
 	for /r %%Z in (*.TMP) do @if %%~xZ==.TMP del "%%Z"
 %endfunction%

@@ -75,6 +75,8 @@ function Global:dk_DKBRANCH_DIR() {
 			dk_call dk_assertPath DKCPP_FUNCTIONS_DIR
 			$global:DKCPP_FUNCTIONS_DIR_="${DKCPP_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKCPP_FUNCTIONS_DIR_
+			$global:DKCPP_PLUGINS_DIR="${DKCPP_DIR}/plugins"
+			dk_call dk_assertPath DKCPP_PLUGINS_DIR
 			
 		$global:DKCSHARP_DIR="${DKBRANCH_DIR}/DKCSharp"
 		dk_call dk_assertPath DKCSHARP_DIR
@@ -111,8 +113,8 @@ function Global:dk_DKBRANCH_DIR() {
 			$global:DKPHP_FUNCTIONS_DIR_="${DKPHP_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKPHP_FUNCTIONS_DIR_
 		
-		$global:DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
-		dk_call dk_assertPath DKPLUGINS_DIR
+		$global:DKCPP_PLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
+		dk_call dk_assertPath DKCPP_PLUGINS_DIR
 		
 		$global:DKPOWERSHELL_DIR="${DKBRANCH_DIR}/DKPowershell"
 		dk_call dk_assertPath DKPOWERSHELL_DIR

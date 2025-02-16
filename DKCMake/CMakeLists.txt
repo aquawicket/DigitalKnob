@@ -16,7 +16,7 @@ include_guard()
 ### This is the main CMakeLists.txt file for all projects within the code base.
 ### All Apps, Tools, 3rd party libraries, plugins and executables will be build from here.
 ### All dependencies will be downloaded, aquired and built for the project as needed. 
-### All DKPlugins and DKApp executables will be included into the Generated solution,
+### All DKCpp/plugins and DKApp executables will be included into the Generated solution,
 ### while any 3rd party libraries will be built prior and referenced externally to the project solution.
 ###
 ### *** DKBuilder ***

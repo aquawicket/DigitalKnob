@@ -54,6 +54,7 @@ dk_DKBRANCH_DIR() {
 			[ -z "${DKCPP_APPS_DIR-}" ] && export DKCPP_APPS_DIR="${DKCPP_DIR}/apps"	
 			[ -z "${DKCPP_FUNCTIONS_DIR-}" ] && export DKCPP_FUNCTIONS_DIR="${DKCPP_DIR}/functions"
 			[ -z "${DKCPP_FUNCTIONS_DIR_-}" ] && export DKCPP_FUNCTIONS_DIR_="${DKCPP_FUNCTIONS_DIR}/"
+			[ -z "${DKCPP_PLUGINS_DIR-}" ] && export DKCPP_APPS_DIR="${DKCPP_DIR}/plugins"
 			
 		[ -z "${DKCSHARP_DIR-}" ] && export DKCSHARP_DIR="${DKBRANCH_DIR}/DKCSharp"
 			[ -z "${DKCSHARP_FUNCTIONS_DIR-}" ] && export DKCSHARP_FUNCTIONS_DIR="${DKCSHARP_DIR}/functions"
@@ -78,8 +79,6 @@ dk_DKBRANCH_DIR() {
 		[ -z "${DKPHP_DIR-}" ] && export DKPHP_DIR="${DKBRANCH_DIR}/DKPhp"
 			[ -z "${DKPHP_FUNCTIONS_DIR-}" ] && export DKPHP_FUNCTIONS_DIR="${DKPHP_DIR}/functions"
 			[ -z "${DKPHP_FUNCTIONS_DIR_-}" ] && export DKPHP_FUNCTIONS_DIR_="${DKPHP_FUNCTIONS_DIR}/"
-		
-#		[ -z "${DKPLUGINS_DIR-}" ] && export DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
 		
 		[ -z "${DKPOWERSHELL_DIR-}" ] && export DKPOWERSHELL_DIR="${DKBRANCH_DIR}/DKPowershell"
 			[ -z "${DKPOWERSHELL_FUNCTIONS_DIR-}" ] && export DKPOWERSHELL_FUNCTIONS_DIR="${DKPOWERSHELL_DIR}/functions"

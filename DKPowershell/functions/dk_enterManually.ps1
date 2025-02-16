@@ -17,8 +17,8 @@ function Global:dk_enterManually() {
 	if(dk_call dk_pathExists "$DKIMPORTS_DIR/$input/DKMAKE.cmake"){
 		$global:TARGET_PATH = "$DKIMPORTS_DIR/$input"
 	}
-	if(dk_call dk_pathExists "$DKPLUGINS_DIR/$input/DKMAKE.cmake"){
-		$global:TARGET_PATH = "$DKPLUGINS_DIR/$input"
+	if(dk_call dk_pathExists "$DKCPP_PLUGINS_DIR/$input/DKMAKE.cmake"){
+		$global:TARGET_PATH = "$DKCPP_PLUGINS_DIR/$input"
 	}
 	if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$input/DKMAKE.cmake"){
 		$global:TARGET_PATH = "$DKCPP_APPS_DIR/$input"

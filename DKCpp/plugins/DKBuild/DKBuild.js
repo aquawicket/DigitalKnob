@@ -314,8 +314,8 @@ function DKBuild_ResetPlugins(){
 	var items = contents.split(",")
 	for(var n=0; n<items.length; n++){
 		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[n]+"/.git")){
-			if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[n]+"/DKPlugins"))
-				DKGit_CleanFolder(DIGITALKNOB_DIR+items[n]+"/DKPlugins")
+			if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[n]+"/plugins"))
+				DKGit_CleanFolder(DIGITALKNOB_DIR+items[n]+"/plugins")
 		}
 	}
 }

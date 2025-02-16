@@ -146,7 +146,7 @@ bool DKAssets::Init(){
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty())
-		DKFile::online_assets = "http://aquawicket.github.io/DigitalKnob/DKPlugins/";
+		DKFile::online_assets = "http://aquawicket.github.io/DigitalKnob/DKCpp/plugins/";
 
 	DKINFO("DKFile::online_assets = "+DKFile::online_assets+"\n");
 	//DKINFO("Loaded -> "+DKFile::online_assets+"settings.txt\n");
