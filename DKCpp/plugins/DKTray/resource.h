@@ -1,0 +1,10 @@
+#define IDS_APP_TITLE                   103
+#define IDI_TASKBARDEMO                 107
+#define IDC_TASKBARDEMO                 109
+#define IDR_POPUP_MENU                  130
+#define IDI_ICON1                       140
+#define IDI_ICON2                       141
+#define IDI_ICON3                       142
+#define IDI_ICON4                       143
+#define IDM_ANIMATE                     32773
+#define ASSETS_ZIP                      321

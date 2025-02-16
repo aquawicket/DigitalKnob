@@ -1,0 +1,5 @@
+/*[dk_table="main"] {*/
+#dk_table_main {
+    position: absolute;
+    overflow: auto;
+}

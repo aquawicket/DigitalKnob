@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html style="font-size:1.0px;">
+<head>
+</head>
+<body style="font-size:16em;">
+
+<!-- Home -->
+<a href="index.html" style="font-size:16px;">home</a><br /><br />
+
+<button id="scaleDown" style="position:absolute;top:25px;width:100px;height:100px;font-size:60px;">-</button>
+<button id="scaleUp" style="position:absolute;top:25px;left:110px;width:100px;height:100px;font-size:60px;">+</button>
+<a id="text" style="position:absolute;top:20px;left:220px;font-size:60px;">1.0px</a>
+
+<!-- https://stackoverflow.com/questions/41179357/android-webview-rem-units-scale-way-to-large-for-boxes -->
+<div style="position:absolute;top:130px;width:100rem;height:100rem;background-color:green;">
+    <a style="position:relative;top:30rem;left:16rem;font-size:30rem;">Scale</a>
+</div>
+
+<script>
+var scale = 1.0;//window.devicePixelRatio;
+Update_Scale();
+
+document.getElementById("scaleDown").onclick = ScaleDown;
+document.getElementById("scaleUp").onclick = ScaleUp;
+
+function ScaleDown(){
+    scale -= 0.1;
+    Update_Scale();
+}
+
+function ScaleUp(){
+    scale += 0.1;
+    Update_Scale();
+}
+
+function Update_Scale(){
+    document.documentElement.style.fontSize = parseFloat(scale).toFixed(1)+"px";
+    document.getElementById("text").innerHTML = parseFloat(scale).toFixed(1)+"px";
+}
+</script>
+
+</body>
+</html>

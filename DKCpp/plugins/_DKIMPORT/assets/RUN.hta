@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<HTA:APPLICATION
+	   APPLICATIONNAME="Load HTA"
+	   BORDER="thin"
+	   BORDERSTYLE="normal"
+	   CAPTION="yes"
+	   CONTEXTMENU="yes"
+	   ICON="icon.ico"
+	   ID="oHTA"
+	   INNERBORDER="no"
+	   MAXIMIZEBUTTON="yes"
+	   MINIMIZEBUTTON="yes"
+	   NAVIGABLE="yes"
+	   SCROLL="yes"
+	   SCROLLFLAT="no"
+	   SHOWINTASKBAR="yes"
+	   SINGLEINSTANCE="yes"
+	   SYSMENU="yes"
+	   VERSION="1.0"
+	   WINDOWSTATE="normal"
+	/>
+	<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=9">
+    <title>no title</title>
+	<script type="text/javascript">
+	<!--
+	function loadHTA() {
+		// window size
+		var resW=screen.availWidth
+		var resH=screen.availHeight
+		if (resW <= 800) {
+			myW=resW-30
+			myH=resH-20
+			self.focus()
+			self.moveTo(eval(resW/2-myW/2), eval(resH/2-myH/2))
+			self.resizeTo(eval(myW),eval(myH))
+		} else {
+			self.focus()
+		}
+	}
+
+	// Abort if not IE55+
+	var ie55up=/*@cc_on!@*/!window.createPopup;
+	var abortStr='HTA mode requires Internet Explorer 5.5+ \n';
+	function Aborting() {
+		if (!ie55up) { alert(abortStr);self.close() }
+	}
+	function main(){
+		document.getElementById("main").click();
+	}
+	//-->
+	</script>
+	</head>
+	<body onload="loadHTA();Aborting();main();">
+		<div><a id="main" href="index.html">index.html</a></div>
+	</body>
+</html>
