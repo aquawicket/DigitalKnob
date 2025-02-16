@@ -98,33 +98,33 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
 	elif [ "${target_triple}" = "cygwin" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple}" = "android_arm32" ]; then
+	elif [ "${target_triple}" = "android_arm32_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${target_triple}" = "android_arm64" ]; then
+	elif [ "${target_triple}" = "android_arm64_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${target_triple}" = "emscripten" ]; then
+	elif [ "${target_triple}" = "emscripten_x86_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple}" = "ios_arm32" ]; then
+	elif [ "${target_triple}" = "ios_arm32_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple}" = "ios_arm64" ]; then
+	elif [ "${target_triple}" = "ios_arm64_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple}" = "iossim_x86" ]; then
+	elif [ "${target_triple}" = "iossim_x86_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple}" = "iossim_x86_64" ]; then
+	elif [ "${target_triple}" = "iossim_x86_64_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple}" = "linux_x86" ]; then
+	elif [ "${target_triple}" = "linux_x86_gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
 	elif [ "${target_triple}" = "linux_x86_64_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
 	elif [ "${target_triple}" = "linux_x86_64_gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple}" = "mac_x86" ]; then
+	elif [ "${target_triple}" = "mac_x86_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple}" = "mac_x86_64" ]; then
+	elif [ "${target_triple}" = "mac_x86_64_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple}" = "raspberry_arm32" ]; then
+	elif [ "${target_triple}" = "raspberry_arm32_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple}" = "raspberry_arm64" ]; then
+	elif [ "${target_triple}" = "raspberry_arm64_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
 	elif [ "${target_triple}" = "win_arm64_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64"
@@ -134,7 +134,7 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
-	elif [ "${target_triple}" = "win_x86_mingw" ]; then
+	elif [ "${target_triple}" = "win_x86_gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
@@ -142,7 +142,7 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
-	elif [ "${target_triple}" = "win_x86_64_mingw" ]; then
+	elif [ "${target_triple}" = "win_x86_64_gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}

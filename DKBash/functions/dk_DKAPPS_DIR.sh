@@ -35,6 +35,6 @@ DKTEST() {
 	
 	dk_call dk_echo
 	dk_call dk_echo "Test Setting DKAPPS_DIR . . ."
-	dk_call dk_DKAPPS_DIR "/C/DK/DKApps"
+	dk_call dk_DKAPPS_DIR "/c/DK/DKApps"
 	dk_call dk_printVar DKAPPS_DIR 
 }

@@ -108,8 +108,8 @@
 [ -z ${FATAL_ENABLE-} ]   && FATAL_ENABLE=1
 [ -z ${FATAL_COLOR-} ]    && FATAL_COLOR=${red-}
 [ -z ${FATAL_TAG-} ]      && FATAL_TAG="FATAL: "
-[ -z ${FATAL_PAUSE-} ]    && FATAL_PAUSE=1
-[ -z ${FATAL_TRACE-} ]    && FATAL_TRACE=0
+[ -z ${FATAL_PAUSE-} ]    && FATAL_PAUSE=0
+[ -z ${FATAL_TRACE-} ]    && FATAL_TRACE=1
 [ -z ${FATAL_LINE-} ]     && FATAL_LINE=0
 [ -z ${FATAL_HALT-} ]     && FATAL_HALT=1
 

@@ -35,7 +35,7 @@ function(dk_timeout)
 	###### BASH ######
 	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(BASH_EXE)
-		execute_process(COMMAND ${BASH_EXE} -c "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
+		execute_process(COMMAND ${BASH_EXE} -c "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\n\"")
 		return()
 	endif()
 	

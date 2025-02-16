@@ -5,6 +5,9 @@ include_guard()
 if(NOT EXISTS "${DKSCRIPT_PATH}")
 	file(TO_CMAKE_PATH "$ENV{DKSCRIPT_PATH}" DKSCRIPT_PATH)
 endif()
+if(NOT EXISTS "${DKSCRIPT_PATH}")
+	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}")
+endif()
 #set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 
 ### Print Version Info ###

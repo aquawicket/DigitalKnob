@@ -20,15 +20,9 @@ function(dk_generate)
 	dk_printVar(TARGET_PATH)
 	dk_makeDirectory("${TARGET_PATH}/${triple}")
 	dk_cd("${TARGET_PATH}/${triple}")
-	#dk_assertPath(${DKCMAKE_DIR})
 	set(CMAKE_SOURCE_DIR "${DKCMAKE_DIR}")
 	dk_assertPath(CMAKE_SOURCE_DIR)
-	#dk_assertPath ${CMAKE_SOURCE_DIR}
-	#dk_printVar(CMAKE_SOURCE_DIR)
-	#$(dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_error("CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist")
-	#dk_printVar(CMAKE_SOURCE_DIR)
 	set(CMAKE_TARGET_PATH "${TARGET_PATH}")
-	#dk_printVar(CMAKE_TARGET_PATH)
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	set(target_level "RebuildAll")
@@ -100,55 +94,55 @@ function(dk_generate)
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "android_arm32")
+	if("${triple}" STREQUAL "android_arm32_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 
-	if("${triple}" STREQUAL "android_arm64")
+	if("${triple}" STREQUAL "android_arm64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "emscripten_x86")
+	if("${triple}" STREQUAL "emscripten_x86_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "ios_arm32")
+	if("${triple}" STREQUAL "ios_arm32_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "ios_arm64")
+	if("${triple}" STREQUAL "ios_arm64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "iossim_x86")
+	if("${triple}" STREQUAL "iossim_x86_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "iossim_x86_64")
+	if("${triple}" STREQUAL "iossim_x86_64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "linux_x86")
+	if("${triple}" STREQUAL "linux_x86_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "linux_x86_64")
+	if("${triple}" STREQUAL "linux_x86_64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "mac_x86")
+	if("${triple}" STREQUAL "mac_x86_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "mac_x86_64")
+	if("${triple}" STREQUAL "mac_x86_64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "raspberry_arm32")
+	if("${triple}" STREQUAL "raspberry_arm32_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "raspberry_arm64")
+	if("${triple}" STREQUAL "raspberry_arm64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
