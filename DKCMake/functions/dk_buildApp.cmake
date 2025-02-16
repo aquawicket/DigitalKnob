@@ -15,7 +15,7 @@ function(dk_buildApp)
 	dk_echo("###############################################################################")
 	dk_echo()
 	
-	dk_validate(DKCPP_APPS_DIR "dk_DKAPPS_DIR()")
+	dk_validate(DKCPP_APPS_DIR "dk_DKBRANCH_DIR()")
 	if(("${target_type}" STREQUAL "Debug") OR ("${target_type}" STREQUAL "All"))
 		if(EXISTS "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Debug/CMakeCache.txt")
 			execute_process(COMMAND ${CMAKE_EXE} --build "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Debug" --verbose) #--config Debug

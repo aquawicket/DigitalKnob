@@ -20,7 +20,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     ::set "TARGET_PATH=%path:~0,-13%"
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate DKPLUGINS_DIR "%dk_call% dk_DKPLUGINS_DIR"
-    %dk_call% dk_validate DKCPP_APPS_DIR    "%dk_call% dk_DKAPPS_DIR"
+    %dk_call% dk_validate DKCPP_APPS_DIR    "%dk_call% dk_DKBRANCH_DIR"
     if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKIMPORTS_DIR%\%input%"
     if exist "%DKPLUGINS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPLUGINS_DIR%\%input%"
     if exist "%DKCPP_APPS_DIR%\%input%\DKMAKE.cmake"    set "TARGET_PATH=%DKCPP_APPS_DIR%\%input%"

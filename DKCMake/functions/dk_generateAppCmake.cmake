@@ -55,6 +55,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc()
 	
-	dk_validate(DKCPP_APPS_DIR "dk_DKAPPS_DIR()")
+	dk_validate(DKCPP_APPS_DIR "dk_DKBRANCH_DIR()")
 	dk_generateAppCmake("${DKCPP_APPS_DIR}/DKCore")
 endfunction()
