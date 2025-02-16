@@ -69,6 +69,8 @@ function Global:dk_DKBRANCH_DIR() {
 			
 		$global:DKCPP_DIR="${DKBRANCH_DIR}/DKCpp"
 		dk_call dk_assertPath DKCPP_DIR
+			$global:DKCPP_APPS_DIR="${DKCPP_DIR}/apps"
+			dk_call dk_assertPath DKCPP_APPS_DIR
 			$global:DKCPP_FUNCTIONS_DIR="${DKCPP_DIR}/functions"
 			dk_call dk_assertPath DKCPP_FUNCTIONS_DIR
 			$global:DKCPP_FUNCTIONS_DIR_="${DKCPP_FUNCTIONS_DIR}/"

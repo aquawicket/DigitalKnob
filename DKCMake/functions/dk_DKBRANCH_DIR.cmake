@@ -73,7 +73,9 @@ function(dk_DKBRANCH_DIR)
 		
 		dk_set(DKCPP_DIR "${DKBRANCH_DIR}/DKCpp")
 		set(ENV{DKCPP_DIR} "${DKBRANCH_DIR}/DKCpp")
-
+			dk_set(DKCPP_APPS_DIR "${DKCPP_DIR}/apps")
+			set(ENV{DKCPP_APPS_DIR} "${DKCPP_DIR}/apps")
+			
 			dk_set(DKCPP_FUNCTIONS_DIR "${DKCPP_DIR}/functions")
 			set(ENV{DKCPP_FUNCTIONS_DIR} "${DKCPP_DIR}/functions")
 
