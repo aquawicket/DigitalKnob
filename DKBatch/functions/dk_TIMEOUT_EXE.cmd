@@ -10,7 +10,6 @@ setlocal
 	::%dk_call% dk_debugFunc 0
    
     if defined TIMEOUT_EXE (%return%)
-	echo TIMEOUT_EXE = %TIMEOUT_EXE%
     
     %dk_call% dk_findProgram TIMEOUT_EXE timeout.exe
 	

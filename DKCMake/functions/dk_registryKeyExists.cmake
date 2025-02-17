@@ -8,6 +8,7 @@ include_guard()
 function(dk_registryKeyExists)
     dk_debugFunc()
 	
+	dk_depend(cmd)
 	set(cmnd ${CMD_EXE} /c "reg.exe" query %~1)
 	execute_process(COMMAND echo ${cmnd} RESULT_VARIABLE result)
 	message("result = ${result}")
