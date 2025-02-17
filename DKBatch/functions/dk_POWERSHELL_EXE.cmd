@@ -18,7 +18,6 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     
     :: try powershell.exe
     %dk_call% dk_findProgram POWERSHELL_EXE powershell.exe
-    if defined POWERSHELL_EXE %return%
 %endfunction%
 
 

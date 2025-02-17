@@ -1,0 +1,33 @@
+@echo off
+if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+
+::####################################################################
+::# dk_TIMEOUT_EXE()
+::#
+::#
+:dk_TIMEOUT_EXE
+setlocal
+	::%dk_call% dk_debugFunc 0
+   
+    if defined TIMEOUT_EXE (%return%)
+	echo TIMEOUT_EXE = %TIMEOUT_EXE%
+    
+    %dk_call% dk_findProgram TIMEOUT_EXE timeout.exe
+	
+	endlocal & set "TIMEOUT_EXE=%TIMEOUT_EXE%"
+%endfunction%
+
+
+
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+setlocal
+	%dk_call% dk_debugFunc 0
+
+	%dk_call% dk_validate TIMEOUT_EXE "%dk_call% dk_TIMEOUT_EXE"
+    %dk_call% dk_printVar TIMEOUT_EXE
+%endfunction%

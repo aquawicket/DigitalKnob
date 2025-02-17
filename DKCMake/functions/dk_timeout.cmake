@@ -20,8 +20,9 @@ function(dk_timeout)
 
 	###### CMD ######
 	if(EXISTS "$ENV{COMSPEC}")
-		dk_set(CMD_EXE "$ENV{COMSPEC}")
-		execute_process(COMMAND "${CMD_EXE}" /c "(timeout /t ${seconds})")
+		dk_validate(CMD_EXE "dk_CMD_EXE()")
+		dk_validate(TIMEOUT_EXE "dk_TIMEOUT_EXE()")
+		execute_process(COMMAND "${CMD_EXE}" /c "(${TIMEOUT_EXE} /t ${seconds})")
 		return()
 	endif()
 	
