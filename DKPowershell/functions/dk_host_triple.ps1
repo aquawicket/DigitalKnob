@@ -8,7 +8,7 @@ if(!$dk_host_triple){ $dk_host_triple = 1 } else{ return } #include guard
 function Global:dk_host_triple() {
 	dk_debugFunc 0
 
-	###### host_os and <os>_host ######
+	###### host_os and <host_os>_host ######
 	$global:host_os="win"
 	New-Variable -Name "$($host_os)_host" -Value 1 -Force
 
@@ -20,13 +20,13 @@ function Global:dk_host_triple() {
 	if( $Env:PROCESSOR_ARCHITECTURE -eq "ARM64") { $global:host_arch = "arm64" }
 	New-Variable -Name "$($host_arch)_host" -Value 1 -Force
 	
-	###### host_env and <env>_host ######
+	###### host_env and <host_env>_host ######
 	$global:host_env="clang"
 	if($host_env){
 		New-Variable -Name "$($host_env)_host" -Value 1 -Force
     }
 	
-	###### host_triple and <triple>_host ######
+	###### host_triple and <host_triple>_host ######
 	if($host_arch){
 		$global:host_triple = (-join($host_os, "_", $host_arch))
 		New-Variable -Name "$($host_triple)_host" -Value 1 -Force

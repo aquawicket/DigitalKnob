@@ -37,7 +37,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		set "%host_env%_host=1"
     :end_host_env
 	
-	::###### host_triple and <triple>_host ######
+	::###### host_triple and <host_triple>_host ######
 	if not defined host_arch goto end_host_arch
 		set "host_triple=%host_os%_%host_arch%"
 		set "%host_triple%_host=1"
