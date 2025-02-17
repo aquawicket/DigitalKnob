@@ -316,7 +316,7 @@ endif()
 
 
 if(NOT CMAKE_SCRIPT_MODE_FILE)
-	if(NOT triple)
+	if(NOT target_triple)
 		dk_printVar(CMAKE_BINARY_DIR)	
 		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are cosmopolitan,android_arm32,android_arm64,android_x86,android_x86_64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKCpp/apps/MyApp/win_x86")
 	endif()

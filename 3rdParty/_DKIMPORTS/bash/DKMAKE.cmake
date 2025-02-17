@@ -31,7 +31,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	dk_return()
 #endif()
 
-dk_validate(triple "dk_target_triple()")
+dk_validate(target_triple "dk_target_triple()")
 
 ### shell command bash ###
 execute_process(COMMAND command -v bash OUTPUT_VARIABLE SHELL_BASH)

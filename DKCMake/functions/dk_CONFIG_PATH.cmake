@@ -11,7 +11,7 @@ function(dk_CONFIG_PATH)
 	dk_debugFunc()
 	
 	dk_validate(target_type  	"dk_target_type()")     # get {DEBUG} {RELEASE}
-	dk_validate(target_triple   "dk_target_triple()")	# get {triple}
+	dk_validate(target_triple   "dk_target_triple()")	# get {target_triple}
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)

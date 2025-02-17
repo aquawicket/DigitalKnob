@@ -98,6 +98,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(triple "dk_builder()")
+	dk_validate(target_triple "dk_builder()")
 	dk_createIcons("${DK_Project_Dir}/icons/icon.png")
 endfunction()

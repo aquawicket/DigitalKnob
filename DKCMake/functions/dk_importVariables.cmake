@@ -429,14 +429,14 @@ function(dk_importVariables)
 	############# TARGET <PLUGIN>_VARIABLES #############
 	#####################################################
 	# These variables require a target_triple
-	if(NOT triple)
+	if(NOT target_triple)
 		return()
 	endif()
-	dk_validate(triple "dk_target_triple()")
+	dk_validate(target_triple "dk_target_triple()")
 	
 	# <PLUGIN>_TRIPLE_DIR
 	unset($ENV{CURRENT_PLUGIN}_TRIPLE_DIR)
-	if(triple)
+	if(target_triple)
 		dk_set($ENV{CURRENT_PLUGIN}_TRIPLE_DIR ${PLUGIN_INSTALL_PATH}/${target_triple})
 #		dk_printVar($ENV{CURRENT_PLUGIN}_TRIPLE_DIR)						# ZLIB_TRIPLE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
 	endif()

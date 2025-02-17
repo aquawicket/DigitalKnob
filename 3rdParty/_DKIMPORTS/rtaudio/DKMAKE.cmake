@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://github.com/thestk/rtaudio
 
 
-dk_validate(triple "dk_target_triple()")
+dk_validate(target_triple "dk_target_triple()")
 
 ### DEPEND ###
 if(WIN)

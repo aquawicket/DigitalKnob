@@ -17,7 +17,7 @@ dk_getFileParam(${DKIMPORTS_DIR}/astyle/dkconfig.txt ASTYLE_DL)
 dk_import(${ASTYLE_DL})
 
 ### LINK ###
-dk_validate(triple "dk_target_triple()")
+dk_validate(target_triple "dk_target_triple()")
 dk_include			(${ASTYLE_DIR}/src)
 
 if(WIN)

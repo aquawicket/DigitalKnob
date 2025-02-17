@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###### Secur32 ######
 # https://www.file.net/process/secur32.dll.html
 
-dk_validate(triple "dk_target_triple()")
+dk_validate(target_triple "dk_target_triple()")
 
 if(NOT WIN)
 	dk_undepend(secur32)

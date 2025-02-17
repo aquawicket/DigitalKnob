@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ############ libstdc++fs ############
-dk_validate(triple "dk_target_triple()")
+dk_validate(target_triple "dk_target_triple()")
 
 
 if(LINUX OR RASPBERRY)
