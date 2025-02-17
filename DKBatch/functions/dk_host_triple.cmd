@@ -5,21 +5,19 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#####################################################################
 ::# dk_host_triple()
 ::#
-::#	  host_os 				  = android, emscripten, ios, iossim, linux, mac, raspberry, windows
-::#	  host_arch				  = arm32, arm64, x86, x86_64
-::#	  host_env				  = clang, cosmopolitan, mingw, msvc, ucrt
-::#	  <os>_host 			  = android_host, emscripten_host, ios_host, iossim_host, linux_host, mac_host, raspberry_host, windows_host 
-::#   <os>_<arch>_host		  = android_arm64_host, emscripten_arm64_host, ios_arm64_host, iossim_arm64_host, linux_arm64_host, mac_arm64_host, raspberry_arm64_host, windows_arm64_host 
-::#   <os>_<arch>_<env>_host  = android_arm64_clang_host, emscripten_arm64_clang_host, ios_arm64_clang_host, iossim_arm64_clang_host, linux_arm64_clang_host, mac_arm64_clang_host, raspberry_arm64_clang_host, windows_arm64_clang_host 
+::#	  host_os 				  				= android, emscripten, ios, iossim, linux, mac, raspberry, windows
+::#	  host_arch				  				= arm32, arm64, x86, x86_64
+::#	  host_env				  				= clang, cosmopolitan, mingw, msvc, ucrt
+::#	  <host_os>_host						= android_host, emscripten_host, ios_host, iossim_host, linux_host, mac_host, raspberry_host, windows_host 
+::#   <host_os>_<host_arch>_host		 	= android_arm64_host, emscripten_arm64_host, ios_arm64_host, iossim_arm64_host, linux_arm64_host, mac_arm64_host, raspberry_arm64_host, windows_arm64_host 
+::#   <host_os>_<host_arch>_<host_env>_host = android_arm64_clang_host, emscripten_arm64_clang_host, ios_arm64_clang_host, iossim_arm64_clang_host, linux_arm64_clang_host, mac_arm64_clang_host, raspberry_arm64_clang_host, windows_arm64_clang_host 
 ::#
 :dk_host_triple
 ::setlocal
 	%dk_call% dk_debugFunc 0
 
-	:: NOTICE: default environment moved to dk_target_triple()
 	:: ###### DEFAULT ENVIRONMENT
-	::set "default_host_env=clang"
- 
+	set "default_host_env=clang"
  
 	::###### host_os and <os>_host ######
 	set "host_os=win"

@@ -41,43 +41,43 @@ setlocal
 
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
-	set "default_host_os=cosmocc"
-	set "default_host_arch=cosmocc"
-	set "default_host_env=cosmocc"
+	set "default_target_os=cosmocc"
+	set "default_target_arch=cosmocc"
+	set "default_target_env=cosmocc"
 	
 	::###### Install DKC ######
 ::	%dk_call% dk_echo "Installing DKC . . ."
 	
-	::###### OS ######
+	::###### target_os ######
 	::%dk_call% dk_validate host_os "%dk_call% dk_host_triple"
-	::if not defined OS set "OS=%host_os%"
-	set "OS=%default_host_os%"
-	%dk_call% dk_printVar OS
+	::if not defined target_os set "target_os=%host_os%"
+	set "target_os=%default_target_os%"
+	%dk_call% dk_printVar target_os
 	
-	::###### arch ######
+	::###### target_arch ######
 	::%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
-	::if not defined arch (set "arch=%host_arch%")
-	set "host_arch=%default_host_arch%"
-	%dk_call% dk_printVar arch
+	::if not defined target_arch (set "target_arch=%host_arch%")
+	set "target_arch=%default_target_arch%"
+	%dk_call% dk_printVar target_arch
 	
-	::###### host_env ######
-	::if not defined host_env (set "host_env=%default_host_env%")
-	::if not defined env (set "env=%host_env%")
-	set "host_env=%default_host_env%"
-	%dk_call% dk_printVar host_env
+	::###### target_env ######
+	::%dk_call% dk_validate host_env "%dk_call% dk_host_triple"
+	::if not defined target_env (set "target_env=%host_env%")
+	if not defined target_env (set "target_env=%default_target_env%")
+	%dk_call% dk_printVar target_env
 	
 	
     ::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-	if "%host_env%"=="cosmocc"      (%dk_call% dk_validate SH_EXE               "%dk_call% %DKIMPORTS_DIR%/sh/dk_install.cmd")
-	if "%host_env%"=="cosmocc"      (%dk_call% dk_validate COSMOCC_C_COMPILER   "%dk_call% %DKIMPORTS_DIR%/cosmocc/dk_install.cmd")
-	if "%host_env%"=="clang"  		(%dk_call% dk_validate CLANG_C_COMPILER     "%dk_call% %DKIMPORTS_DIR%/clang/dk_install.cmd")
-	if "%host_env%"=="gcc"    		(%dk_call% dk_validate GCC_C_COMPILER       "%dk_call% %DKIMPORTS_DIR%/gcc/dk_install.cmd")
+	if "%target_env%"=="cosmocc"		(%dk_call% dk_validate SH_EXE               "%dk_call% %DKIMPORTS_DIR%/sh/dk_install.cmd")
+	if "%target_env%"=="cosmocc"		(%dk_call% dk_validate COSMOCC_C_COMPILER   "%dk_call% %DKIMPORTS_DIR%/cosmocc/dk_install.cmd")
+	if "%target_env%"=="clang"			(%dk_call% dk_validate CLANG_C_COMPILER     "%dk_call% %DKIMPORTS_DIR%/clang/dk_install.cmd")
+	if "%target_env%"=="gcc"			(%dk_call% dk_validate GCC_C_COMPILER       "%dk_call% %DKIMPORTS_DIR%/gcc/dk_install.cmd")
 
-	if "%host_env%"=="cosmocc"      (set "COMPILER_EXE=%SH_EXE% %COSMOCC_C_COMPILER%")
-	if "%host_env%"=="clang"  		(set "COMPILER_EXE=%CLANG_C_COMPILER%")
-	if "%host_env%"=="gcc"	  		(set "COMPILER_EXE=%GCC_C_COMPILER%")
+	if "%target_env%"=="cosmocc"		(set "COMPILER_EXE=%SH_EXE% %COSMOCC_C_COMPILER%")
+	if "%target_env%"=="clang"			(set "COMPILER_EXE=%CLANG_C_COMPILER%")
+	if "%target_env%"=="gcc"			(set "COMPILER_EXE=%GCC_C_COMPILER%")
 	%dk_call% dk_assertVar COMPILER_EXE
 	%dk_call% dk_printVar COMPILER_EXE
 
@@ -86,25 +86,25 @@ setlocal
 	
 	::###### COMPILER_EXE ######
 	::set "COMPILER_EXE=%~1"
-	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
+	if not defined COMPILER_EXE    (echo ERROR: COMPILER_EXE is invalid)
 	
 	::###### DKC_FILE ######
 	set "DKC_FILE=%~1"
-	if not defined DKC_FILE    echo ERROR: DKC_FILE is invalid
+	if not defined DKC_FILE    (echo ERROR: DKC_FILE is invalid)
 	
 	::###### APP_NAME ######
-	for %%Z in ("%DKC_FILE%") do set "APP_NAME=%%~nZ"	
+	for %%Z in ("%DKC_FILE%") do (set "APP_NAME=%%~nZ")
 	set "DKC_FILE=%DKC_FUNCTIONS_DIR%/%DKC_FILE%.c"
 	
 	::###### Setup build directory
-	if not exist "%CD%\build" mkdir "%CD%\build"
+	if not exist "%CD%\build" (mkdir "%CD%\build")
 	
 	::###### APP_FILE ######
 	set "APP_FILE=%CD%\build\%APP_NAME%.exe"
 	
 	::###### Compile Code ######
 	echo compiling ...
-	if exist %APP_FILE%  del %APP_FILE%
+	if exist %APP_FILE%  (del %APP_FILE%)
 
 	set "COMPILE_COMMAND=%COMPILER_EXE% -o %APP_FILE% -static %DKC_FILE%"
 	echo %COMPILE_COMMAND%

@@ -79,7 +79,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     :endloop2
     
     %dk_call% dk_echo 
-    %dk_call% dk_echo "Please select an app to build"
+    %dk_call% dk_echo "Please select a target_app to build"
     
     %dk_call% dk_keyboardInput choice
 

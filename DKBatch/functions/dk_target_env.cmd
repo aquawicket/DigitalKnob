@@ -2,7 +2,7 @@
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::#####################################################################
-::# dk_target_env(rtn_var:DKBUILD_ENV)
+::# dk_target_env(rtn_var:target_env)
 ::#
 ::#
 :dk_target_env
@@ -45,7 +45,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     if "%choice%"=="7" %dk_call% dk_exit             	&& %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
-    %dk_call% dk_unset DKBUILD_ENV
+    %dk_call% dk_unset target_env
 %endfunction%
 
 

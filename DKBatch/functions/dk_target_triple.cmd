@@ -9,16 +9,16 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 ::#   i.e.  win_x86_64_clang
 ::#
-::#	If the CMAKE_BINARY_DIR is missing the <OS> or the <ARCH>, dk_target_triple_SET will be called to get those variables
+::#	If the CMAKE_BINARY_DIR is missing the <TARGET_OS> or the <TARGET_ARCH>, dk_target_triple_SET will be called to get those variables
 ::#
-::#	os   				= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
-::#	OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
-::#	arch				= arm32, arm64, x86, x86_64
-::#	ARCH				= ARM32, ARM64, X86, X86_64
-::#	env					= clang, cosmopolitan, mingw, msvc, ucrt
-::#	ENV					= CLANG, cosmopolitan, MINGW, MSVC, UCRT
-::#   <os>_<arch>			= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
-::#   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
+::#	target_os   				= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
+::#	TARGET_OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
+::#	target_arch				= arm32, arm64, x86, x86_64
+::#	TARGET_ARCH				= ARM32, ARM64, X86, X86_64
+::#	target_env					= clang, cosmopolitan, mingw, msvc, ucrt
+::#	TARGET_ENV					= CLANG, cosmopolitan, MINGW, MSVC, UCRT
+::#   <target_os>_<target_arch>			= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
+::#   <target_os>_<target_arch>_<target_env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 ::#
 :dk_target_triple
 ::setlocal enableDelayedExpansion
@@ -76,8 +76,8 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	!dk_call! dk_set DK_PROJECT_DIR !DK_PROJECT_DIR!
 	!dk_call! dk_assertPath DK_PROJECT_DIR
 
-	::### Set target_triple/TARGET_TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
-	!dk_call! dk_basename !TARGET_TRIPLE_DIR! target_triple	&:: target_triple 	= win_x86_64_clang
+	::### Set target_triple/TARGET_TRIPLE, <target_os>_<target_arch>_<target_env>/<TARGET_OS>_<TARGET_ARCH>_<TARGET_ENV> ###
+	!dk_call! dk_basename !TARGET_TRIPLE_DIR! target_triple		&:: target_triple 	= win_x86_64_clang
 	!dk_call! dk_set target_triple !target_triple!				&:: Globalize the variable
 	!dk_call! dk_set target_triple !target_triple!				&:: target_triple	= win_x86_64_clang
 	!dk_call! dk_toUpper !target_triple! TARGET_TRIPLE			&:: TARGET_TRIPLE	= WIN_X86_64_CLANG
@@ -89,98 +89,98 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	!dk_call! dk_printVar TARGET_TRIPLE 
 
 
-	::### Set os / OS / <os>_target / <OS>_TARGET
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "android" 		&& !dk_call! dk_set os android
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "emscripten" 	&& !dk_call! dk_set os emscripten
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "ios" 			&& !dk_call! dk_set os ios
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "iossim" 		&& !dk_call! dk_set os iossim 
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "linux" 		&& !dk_call! dk_set os linux
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "mac" 			&& !dk_call! dk_set os mac
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "raspberry" 	&& !dk_call! dk_set os raspberry
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "windows" 		&& !dk_call! dk_set os windows
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "win"			&& !dk_call! dk_set os win
-	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "cosmopolitan"	&& !dk_call! dk_set os cosmopolitan
-	if not defined os (
-		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid os"
+	::### Set target_os / TARGET_OS / <target_os>_target / <TARGET_OS>_TARGET
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "android" 		&& !dk_call! dk_set target_os android
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "emscripten" 	&& !dk_call! dk_set target_os emscripten
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "ios" 			&& !dk_call! dk_set target_os ios
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "iossim" 		&& !dk_call! dk_set target_os iossim 
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "linux" 		&& !dk_call! dk_set target_os linux
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "mac" 			&& !dk_call! dk_set target_os mac
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "raspberry" 	&& !dk_call! dk_set target_os raspberry
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "windows" 		&& !dk_call! dk_set target_os windows
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "win"			&& !dk_call! dk_set target_os win
+	%dk_call% dk_stringContainsCI "!TARGET_TRIPLE!" "cosmopolitan"	&& !dk_call! dk_set target_os cosmopolitan
+	if not defined target_os (
+		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid target_os"
 		!dk_call! dk_unset target_triple
 		!dk_call! dk_unset TARGET_TRIPLE 
 		!dk_call! dk_target_triple_SET
 	) else (
-		!dk_call! dk_toUpper !os! OS
-		!dk_call! dk_set OS !OS! 
-		!dk_call! dk_set target_os !os!
-		!dk_call! dk_set TARGET_OS !OS!
-		!dk_call! dk_set !os! 1
-		!dk_call! dk_set !OS! 1
-		!dk_call! dk_set !os!_target 1
-		!dk_call! dk_set !OS!_TARGET 1
+		!dk_call! dk_toUpper !target_os! TARGET_OS
+		!dk_call! dk_set TARGET_OS !TARGET_OS! 
+		!dk_call! dk_set target_os !target_os!
+		!dk_call! dk_set TARGET_OS !TARGET_OS!
+		!dk_call! dk_set !target_os! 1
+		!dk_call! dk_set !TARGET_OS! 1
+		!dk_call! dk_set !target_os!_target 1
+		!dk_call! dk_set !TARGET_OS!_TARGET 1
 	)
-	::### Get arch / ARCH
-	%dk_call% dk_stringContainsCI "!target_triple!" "arm64" 		&& !dk_call! dk_set arch arm64
-	%dk_call% dk_stringContainsCI "!target_triple!" "arm32" 		&& !dk_call! dk_set arch arm32
-	%dk_call% dk_stringContainsCI "!target_triple!" "x86_64" 		&& !dk_call! dk_set arch x86_64
-	%dk_call% dk_stringContainsCI "!target_triple!" "x86" 			&& !dk_call! dk_set arch x86
-	%dk_call% dk_stringContainsCI "!target_triple!" "cosmopolitan" 	&& !dk_call! dk_set arch cosmopolitan	
-	if not defined arch (
-		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid arch"
+	::### Get target_arch / TARGET_ARCH
+	%dk_call% dk_stringContainsCI "!target_triple!" "arm64" 		&& !dk_call! dk_set target_arch arm64
+	%dk_call% dk_stringContainsCI "!target_triple!" "arm32" 		&& !dk_call! dk_set target_arch arm32
+	%dk_call% dk_stringContainsCI "!target_triple!" "x86_64" 		&& !dk_call! dk_set target_arch x86_64
+	%dk_call% dk_stringContainsCI "!target_triple!" "x86" 			&& !dk_call! dk_set target_arch x86
+	%dk_call% dk_stringContainsCI "!target_triple!" "cosmopolitan" 	&& !dk_call! dk_set target_arch cosmopolitan	
+	if not defined target_arch (
+		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid target_arch"
 		!dk_call! dk_target_triple_SET
 	) else (
-		!dk_call! dk_toUpper !arch! ARCH
-		!dk_call! dk_set ARCH !ARCH!
-		!dk_call! dk_set target_arch !arch!)
-		!dk_call! dk_set TARGET_ARCH !ARCH!)
-		!dk_call! dk_set !arch! 1
-		!dk_call! dk_set !ARCH! 1
-		!dk_call! dk_set !arch!_target 1)
-		!dk_call! dk_set !ARCH!_TARGET 1)
+		!dk_call! dk_toUpper !target_arch! TARGET_ARCH
+		!dk_call! dk_set TARGET_ARCH !TARGET_ARCH!
+		!dk_call! dk_set target_arch !target_arch!)
+		!dk_call! dk_set TARGET_ARCH !TARGET_ARCH!)
+		!dk_call! dk_set !target_arch! 1
+		!dk_call! dk_set !TARGET_ARCH! 1
+		!dk_call! dk_set !target_arch!_target 1)
+		!dk_call! dk_set !TARGET_ARCH!_TARGET 1)
 	)
 
-	::### Set evn / ENV 
-	%dk_call% dk_stringContainsCI "!target_triple!" "clang" 			&& !dk_call! dk_set env clang
-	%dk_call% dk_stringContainsCI "!target_triple!" "mingw" 			&& !dk_call! dk_set env mingw
-	%dk_call% dk_stringContainsCI "!target_triple!" "ucrt"  			&& !dk_call! dk_set env ucrt
-	%dk_call% dk_stringContainsCI "!target_triple!" "msvc"  			&& !dk_call! dk_set env msvc
-	%dk_call% dk_stringContainsCI "!target_triple!" "cosmopolitan" 	&& !dk_call! dk_set env cosmopolitan
-	if not defined env (
-		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid env"
-		!dk_call! dk_set env !default_target_env!
+	::### Set evn / TARGET_ENV 
+	%dk_call% dk_stringContainsCI "!target_triple!" "clang" 			&& !dk_call! dk_set target_env clang
+	%dk_call% dk_stringContainsCI "!target_triple!" "mingw" 			&& !dk_call! dk_set target_env mingw
+	%dk_call% dk_stringContainsCI "!target_triple!" "ucrt"  			&& !dk_call! dk_set target_env ucrt
+	%dk_call% dk_stringContainsCI "!target_triple!" "msvc"  			&& !dk_call! dk_set target_env msvc
+	%dk_call% dk_stringContainsCI "!target_triple!" "cosmopolitan" 		&& !dk_call! dk_set target_env cosmopolitan
+	if not defined target_env (
+		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid target_env"
+		!dk_call! dk_set target_env !default_target_env!
 	) else (
-		!dk_call! dk_toUpper !env! ENV
-		!dk_call! dk_set ENV !ENV!
-		!dk_call! dk_set target_env !env!
-		!dk_call! dk_set TARGET_ENV !ENV!
-		!dk_call! dk_set !env! 1
-		!dk_call! dk_set !ENV! 1
-		!dk_call! dk_set !env!_target 1
-		!dk_call! dk_set !ENV!_TARGET 1
+		!dk_call! dk_toUpper !target_env! TARGET_ENV
+		!dk_call! dk_set TARGET_ENV !TARGET_ENV!
+		!dk_call! dk_set target_env !target_env!
+		!dk_call! dk_set TARGET_ENV !TARGET_ENV!
+		!dk_call! dk_set !target_env! 1
+		!dk_call! dk_set !TARGET_ENV! 1
+		!dk_call! dk_set !target_env!_target 1
+		!dk_call! dk_set !TARGET_ENV!_TARGET 1
 	)
 
 	::### Set MSYSTEM
-	if defined !ENV! (
+	if defined !TARGET_ENV! (
 		if defined CLANG if defined ARM64 (
-			!dk_call! dk_set msystem "!env!!arch!"	&rem msystem = clangarm64
-			!dk_call! dk_set MSYSTEM "!ENV!!ARCH!"	&rem MSYSTEM = CLANGARM64
+			!dk_call! dk_set msystem "!target_env!!target_arch!"	&rem msystem = clangarm64
+			!dk_call! dk_set MSYSTEM "!TARGET_ENV!!TARGET_ARCH!"	&rem MSYSTEM = CLANGARM64
 		) else if defined X86_64 (
-			!dk_call! dk_set msystem "!env!64"		&rem msystem = clang64, mingw64, ucrt64
-			!dk_call! dk_set MSYSTEM "!ENV!64"		&rem MSYSTEM = CLANG64, MINGW64, UCRT64
+			!dk_call! dk_set msystem "!target_env!64"				&rem msystem = clang64, mingw64, ucrt64
+			!dk_call! dk_set MSYSTEM "!TARGET_ENV!64"				&rem MSYSTEM = CLANG64, MINGW64, UCRT64
 		) else if defined X86 (
-			!dk_call! dk_set msystem "!env!32"		&rem msystem = clang32, mingw32
-			!dk_call! dk_set MSYSTEM "!ENV!32"		&rem MSYSTEM = CLANG32, MINGW32
+			!dk_call! dk_set msystem "!target_env!32"				&rem msystem = clang32, mingw32
+			!dk_call! dk_set MSYSTEM "!TARGET_ENV!32"				&rem MSYSTEM = CLANG32, MINGW32
 		) else (
-			!dk_call! dk_fatal "The target target_triple:!target_triple! does not contain a valid env or msystem"
+			!dk_call! dk_fatal "The target target_triple:!target_triple! does not contain a valid target_env or msystem"
 		)
-		!dk_call! dk_set !MSYSTEM! 1				&rem CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
+		!dk_call! dk_set !MSYSTEM! 1								&rem CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
 	)
 		
-	::### Set os_arch / OS_ARCH ###
-	!dk_call! dk_set os_arch "!os!_!arch!"
-	!dk_call! dk_set OS_ARCH "!OS!_!ARCH!"
-	!dk_call! dk_set target_os_arch "!os_arch!"
-	!dk_call! dk_set TARGET_OS_ARCH "!OS_ARCH!"
-	!dk_call! dk_set !os_arch! 1
-	!dk_call! dk_set !OS_ARCH! 1
-	!dk_call! dk_set !os_arch!_target 1
-	!dk_call! dk_set !OS_ARCH!_TARGET 1
+	::### Set target_os_arch / TARGET_OS_ARCH ###
+	!dk_call! dk_set target_os_arch "!target_os!_!target_arch!"
+	!dk_call! dk_set TARGET_OS_ARCH "!TARGET_OS!_!TARGET_ARCH!"
+	!dk_call! dk_set target_os_arch "!target_os_arch!"
+	!dk_call! dk_set TARGET_OS_ARCH "!TARGET_OS_ARCH!"
+	!dk_call! dk_set !target_os_arch! 1
+	!dk_call! dk_set !TARGET_OS_ARCH! 1
+	!dk_call! dk_set !target_os_arch!_target 1
+	!dk_call! dk_set !TARGET_OS_ARCH!_TARGET 1
 
 	::### Set DEBUG_DIR and RELEASE_DIR variables
 	if defined IOS (

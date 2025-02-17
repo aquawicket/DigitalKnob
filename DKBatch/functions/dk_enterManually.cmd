@@ -6,9 +6,9 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#
 ::#
 :dk_enterManually
-    %dk_call% dk_debugFunc 0
  ::setlocal
- 
+    %dk_call% dk_debugFunc 0
+
     %dk_call% dk_info "Please type the name of the library, tool or app to build. Then press enter."
     %dk_call% dk_keyboardInput input
 
@@ -18,14 +18,13 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     ::%dk_call% dk_cd %DIGITALKNOB_DIR%
     ::for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
     ::set "TARGET_PATH=%path:~0,-13%"
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate DKCPP_PLUGINS_DIR "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_validate DKCPP_APPS_DIR    "%dk_call% dk_DKBRANCH_DIR"
-    if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKIMPORTS_DIR%\%input%"
-    if exist "%DKCPP_PLUGINS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKCPP_PLUGINS_DIR%\%input%"
-    if exist "%DKCPP_APPS_DIR%\%input%\DKMAKE.cmake"    set "TARGET_PATH=%DKCPP_APPS_DIR%\%input%"
+    if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" 	(set "TARGET_PATH=%DKIMPORTS_DIR%\%input%")
+    if exist "%DKCPP_PLUGINS_DIR%\%input%\DKMAKE.cmake" (set "TARGET_PATH=%DKCPP_PLUGINS_DIR%\%input%")
+    if exist "%DKCPP_APPS_DIR%\%input%\DKMAKE.cmake"    (set "TARGET_PATH=%DKCPP_APPS_DIR%\%input%")
     %dk_call% dk_printVar TARGET_PATH
-    
     
 	%dk_call% dk_getParentFolder "%TARGET_PATH%" parent
     %dk_call% dk_printVar parent
