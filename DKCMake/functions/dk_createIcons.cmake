@@ -17,8 +17,8 @@ function(dk_createIcons)
 	endif()
 
 	dk_assertVar(APP_NAME)
-	dk_assertVar(OS)
-	dk_info("Building ${OS} icons for ${APP_NAME} . . .")
+	dk_assertVar(target_os)
+	dk_info("Building ${target_os} icons for ${APP_NAME} . . .")
 	
 	dk_assertPath("${DK_Project_Dir}")
 	dk_makeDirectory("${DK_Project_Dir}/assets")
@@ -98,6 +98,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(target_triple "dk_builder()")
+	dk_validate(target_triple "dk_target_triple()")
 	dk_createIcons("${DK_Project_Dir}/icons/icon.png")
 endfunction()
