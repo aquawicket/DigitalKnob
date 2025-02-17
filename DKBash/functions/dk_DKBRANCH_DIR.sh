@@ -54,7 +54,7 @@ dk_DKBRANCH_DIR() {
 			[ -z "${DKCPP_APPS_DIR-}" ] && export DKCPP_APPS_DIR="${DKCPP_DIR}/apps"	
 			[ -z "${DKCPP_FUNCTIONS_DIR-}" ] && export DKCPP_FUNCTIONS_DIR="${DKCPP_DIR}/functions"
 			[ -z "${DKCPP_FUNCTIONS_DIR_-}" ] && export DKCPP_FUNCTIONS_DIR_="${DKCPP_FUNCTIONS_DIR}/"
-			[ -z "${DKCPP_PLUGINS_DIR-}" ] && export DKCPP_APPS_DIR="${DKCPP_DIR}/plugins"
+			[ -z "${DKCPP_PLUGINS_DIR-}" ] && export DKCPP_PLUGINS_DIR="${DKCPP_DIR}/plugins"
 			
 		[ -z "${DKCSHARP_DIR-}" ] && export DKCSHARP_DIR="${DKBRANCH_DIR}/DKCSharp"
 			[ -z "${DKCSHARP_FUNCTIONS_DIR-}" ] && export DKCSHARP_FUNCTIONS_DIR="${DKCSHARP_DIR}/functions"
