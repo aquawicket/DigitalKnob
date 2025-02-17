@@ -13,17 +13,17 @@ function(dk_readCache)
 	if(NOT EXISTS "${DKCACHE_DIR}/DKBuilder.cache")
 		dk_return()
 	endif()
-	#dk_unset(_APP_)
+	#dk_unset(_target_app_)
 	#dk_unset(_target_triple_)
-	#dk_unset(_DKBUILD_TYPE_)
+	#dk_unset(_target_type_)
 	
 	dk_echo("reading DKBuilder.cache...")
 	set(count 0)
 #	while read p; do
-#		[ "${count}" = "0" ] && _APP_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "0" ] && _target_app_=$(builtin echo "${p}" | tr -d '\r')
 #		[ "${count}" = "1" ] && _target_triple_=$(builtin echo "${p}" | tr -d '\r')
-#		[ "${count}" = "2" ] &&	_DKBUILD_TYPE_=$(builtin echo "${p}" | tr -d '\r')
-#		#[ "${count}" = "3" ] && _DKENV_=$(echo ${p} | tr -d '\r')
+#		[ "${count}" = "2" ] &&	_target_type_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "3" ] && _target_env_=$(echo ${p} | tr -d '\r')
 #		count=$((count + 1))
 #	done < "${DKCACHE_DIR}"/DKBuilder.cache
 
@@ -42,9 +42,9 @@ function(dk_readCache)
 #	endforeach()
 	
 	#dk_echo("target_app = ${target_app}, target_triple = ${target_triple}, target_type = ${target_type}")
-	#set(${target_app}				"${target_app}")
+	#set(${target_app}		"${target_app}")
 	#set(${target_triple} 	"${target_triple}")
-	#set(${target_type}	"${target_type}")
+	#set(${target_type}		"${target_type}")
 endfunction()
 
 

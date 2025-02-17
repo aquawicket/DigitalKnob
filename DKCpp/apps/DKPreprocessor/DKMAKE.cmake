@@ -26,7 +26,7 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "	${CMAKE_CURRENT_LIST_D
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "	${CMAKE_CURRENT_LIST_DIR}/*.hpp \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "	${CMAKE_CURRENT_LIST_DIR}/*.cpp) \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "list(FILTER App_SRC EXCLUDE REGEX \"${CMAKE_CURRENT_LIST_DIR}/assets/*\") \n")
-dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "list(FILTER App_SRC EXCLUDE REGEX \"${CMAKE_CURRENT_LIST_DIR}/${triple}/*\") \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "list(FILTER App_SRC EXCLUDE REGEX \"${CMAKE_CURRENT_LIST_DIR}/${target_triple}/*\") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "dk_validate(TARGET_TRIPLE \"dk_target_triple()\") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")

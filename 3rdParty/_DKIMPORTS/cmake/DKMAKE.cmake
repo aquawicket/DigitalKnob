@@ -155,7 +155,7 @@ if(COMPILE_CMAKE)
 		endif()
 		
 		dk_include				(${CMAKE}									CMAKE_INCLUDE_DIR)
-		dk_include				(${CMAKE}/${triple})
+		dk_include				(${CMAKE}/${target_triple})
 		DEBUG_dk_include		(${CMAKE_DEBUG_DIR})
 		RELEASE_dk_include		(${CMAKE_RELEASE_DIR})
 

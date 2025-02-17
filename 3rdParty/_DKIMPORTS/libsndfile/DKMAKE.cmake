@@ -24,7 +24,7 @@ dk_import(https://github.com/libsndfile/libsndfile/archive/58c05b87.zip)
 
 ### LINK ###
 dk_include			(${LIBSNDFILE}/include)
-dk_include			(${LIBSNDFILE}/${triple})
+dk_include			(${LIBSNDFILE}/${target_triple})
 if(MSVC)
 	dk_libDebug		(${LIBSNDFILE_DEBUG_DIR}/sndfile.lib)
 	dk_libRelease	(${LIBSNDFILE_RELEASE_DIR}/sndfile.lib)

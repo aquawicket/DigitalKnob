@@ -23,7 +23,7 @@ function(dk_MSYSTEM)
 			dk_set(msystem "${env}32")		# msystem = clang32, mingw32
 			dk_set(MSYSTEM "${ENV}32")		# MSYSTEM = CLANG32, MINGW32
 		else()
-			dk_warning("The target triple:${triple} does not contain a valid msystem")
+			dk_warning("The target_triple:${target_triple} does not contain a valid msystem")
 		endif()
 		if(MSYSTEM)
 			dk_set(${MSYSTEM} 1)			# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1

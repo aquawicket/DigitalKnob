@@ -302,10 +302,10 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 
 #################### TOOLCHAINS ##########################
-if(NOT EXISTS "${DKCMAKE_DIR}/toolchains/${triple}_toolchain.cmake")
-	dk_error("${DKCMAKE_DIR}/toolchains/${triple}_toolchain.cmake Not Found")
+if(NOT EXISTS "${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake")
+	dk_error("${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake Not Found")
 endif()
-dk_load(${DKCMAKE_DIR}/toolchains/${triple}_toolchain.cmake)
+dk_load(${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake)
 
 #[[
 ### android_arm32
@@ -481,11 +481,11 @@ endif()
 
 # GENERATOR			CONFIG_PATH		  		  	BUILD_PATH
 # -----------------------------------------------------------------------
-# Visual Studio  	${triple}					${triple}/${target_type}		
-# XCODE			    ${triple}					${triple}/${target_type} 
-# MinGW Makefiles   ${triple}/${target_type}	${triple}/${target_type} 
-# Unix Makefiles    ${triple}/${target_type}   ${triple}/${target_type}  
-# ./configure       ${triple}/${target_type}   ${triple}/${target_type}
+# Visual Studio  	${target_triple}					${target_triple}/${target_type}		
+# XCODE			    ${target_triple}					${target_triple}/${target_type} 
+# MinGW Makefiles   ${target_triple}/${target_type}	${target_triple}/${target_type} 
+# Unix Makefiles    ${target_triple}/${target_type}   ${target_triple}/${target_type}  
+# ./configure       ${target_triple}/${target_type}   ${target_triple}/${target_type}
 
 # https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
 # https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html

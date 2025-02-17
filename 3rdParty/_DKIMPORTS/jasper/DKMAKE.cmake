@@ -16,19 +16,19 @@ dk_import(https://github.com/jasper-software/jasper/archive/refs/heads/master.zi
 
 ### LINK ###
 dk_include				(${JASPER}/include)
-dk_include				(${JASPER}/${triple})
-ANDROID_dk_libDebug		(${JASPER}/${triple}/src/libjasper/jasperd.a)
-ANDROID_dk_libRelease	(${JASPER}/${triple}/src/libjasper/jasper.a)
-APPLE_dk_libDebug		(${JASPER}/${triple}/src/libjasper/libjasper.a)
-APPLE_dk_libRelease		(${JASPER}/${triple}/src/libjasper/libjasper.a)
+dk_include				(${JASPER}/${target_triple})
+ANDROID_dk_libDebug		(${JASPER}/${target_triple}/src/libjasper/jasperd.a)
+ANDROID_dk_libRelease	(${JASPER}/${target_triple}/src/libjasper/jasper.a)
+APPLE_dk_libDebug		(${JASPER}/${target_triple}/src/libjasper/libjasper.a)
+APPLE_dk_libRelease		(${JASPER}/${target_triple}/src/libjasper/libjasper.a)
 EMSCRIPTEN_dk_libDebug	(${JASPER_DEBUG_DIR}/src/libjasper/libjasper.a)
 EMSCRIPTEN_dk_libRelease(${JASPER_RELEASE_DIR}/src/libjasper/libjasper.a)
 LINUX_dk_libDebug		(${JASPER_DEBUG_DIR}/src/libjasper/libjasper.a)
 LINUX_dk_libRelease		(${JASPER_RELEASE_DIR}/src/libjasper/libjasper.a)
 RASPBERRY_dk_libDebug	(${JASPER_DEBUG_DIR}/src/libjasper/libjasper.a)
 RASPBERRY_dk_libRelease	(${JASPER_RELEASE_DIR}/src/libjasper/libjasper.a)
-WIN_dk_libDebug			(${JASPER}/${triple}/src/libjasper/jasperd.lib)
-WIN_dk_libRelease		(${JASPER}/${triple}/src/libjasper/jasper.lib)
+WIN_dk_libDebug			(${JASPER}/${target_triple}/src/libjasper/jasperd.lib)
+WIN_dk_libRelease		(${JASPER}/${target_triple}/src/libjasper/jasper.lib)
 
 
 ### GENERATE ###

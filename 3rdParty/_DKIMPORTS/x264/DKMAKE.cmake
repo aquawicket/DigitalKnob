@@ -18,7 +18,7 @@ dk_import		(https://code.videolan.org/videolan/x264/-/archive/80c1c47c/x264-80c1
 
 ### LINK ###
 dk_include		(${X264}/include)
-dk_include		(${X264}/${triple})
+dk_include		(${X264}/${target_triple})
 dk_libDebug		(${X264_DEBUG_DIR}/libx264.a)
 dk_libRelease	(${X264_RELEASE_DIR}/libx264.a)
 

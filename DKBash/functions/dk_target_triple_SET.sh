@@ -9,7 +9,6 @@ dk_target_triple_SET() {
 	dk_debugFunc 0
 
 
-
 	dk_call dk_validate host_triple "dk_call dk_host_triple"
 
 	dk_call dk_echo ""
@@ -57,156 +56,156 @@ dk_target_triple_SET() {
 	dk_call dk_keyboardInput input
 	if [ "${input}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
-		#dk_call dk_set app 	${_app_)
-		#dk_call dk_set os 		${_os_}
-		#dk_call dk_set type 	${_type_}
+		#dk_call dk_set target_app 	${_target_app_)
+		#dk_call dk_set target_os 	${_target_os_}
+		#dk_call dk_set target_type ${_target_type_}
 	elif [ "${input}" = "1" ]; then
 		dk_call dk_set target_triple 	${host_triple}
-		dk_call dk_set os     	${HOST_OS}
-		dk_call dk_set arch  	${HOST_ARCH}
+		dk_call dk_set target_os     	${HOST_OS}
+		dk_call dk_set target_arch  	${HOST_ARCH}
 		if [ -n "${host_env-}" ]; then
-			dk_call dk_set env  ${HOST_ENV}
+			dk_call dk_set target_env  ${HOST_ENV}
 		fi
 	elif [ "${input}" = "2" ]; then
-		dk_call dk_set os "cosmopolitan"
-		dk_call dk_set arch "cosmopolitan"
-		dk_call dk_set env "cosmopolitan"
+		dk_call dk_set target_os "cosmopolitan"
+		dk_call dk_set target_arch "cosmopolitan"
+		dk_call dk_set target_env "cosmopolitan"
 	elif [ "${input}" = "3" ]; then
-		dk_call dk_set os "android"
-		dk_call dk_set arch "arm32"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "android"
+		dk_call dk_set target_arch "arm32"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "4" ]; then
-		dk_call dk_set os "android"
-		dk_call dk_set arch "arm64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "android"
+		dk_call dk_set target_arch "arm64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "5" ]; then
-		dk_call dk_set os "android"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "android"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "6" ]; then
-		dk_call dk_set os "android"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "android"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "7" ]; then
-		dk_call dk_set os "emscripten"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "emscripten"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "8" ]; then
-		dk_call dk_set os "ios"
-		dk_call dk_set arch "arm32"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "ios"
+		dk_call dk_set target_arch "arm32"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "9" ]; then
-		dk_call dk_set os "ios"
-		dk_call dk_set arch "arm64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "ios"
+		dk_call dk_set target_arch "arm64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "10" ]; then
-		dk_call dk_set os "ios"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "ios"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "11" ]; then
-		dk_call dk_set os "ios"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "ios"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "12" ]; then
-		dk_call dk_set os "iossim"
-		dk_call dk_set arch "arm32"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "iossim"
+		dk_call dk_set target_arch "arm32"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "13" ]; then
-		dk_call dk_set os "iossim"
-		dk_call dk_set arch "arm64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "iossim"
+		dk_call dk_set target_arch "arm64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "14" ]; then
-		dk_call dk_set os "iossim"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "iossim"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "15" ]; then
-		dk_call dk_set os "iossim"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "iossim"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "16" ]; then
-		dk_call dk_set os "linux"
-		dk_call dk_set arch "arm32"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "linux"
+		dk_call dk_set target_arch "arm32"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "17" ]; then
-		dk_call dk_set os "linux"
-		dk_call dk_set arch "arm64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "linux"
+		dk_call dk_set target_arch "arm64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "18" ]; then
-		dk_call dk_set os "linux"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "linux"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "19" ]; then
-		dk_call dk_set os "linux"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "linux"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "20" ]; then
-		dk_call dk_set os "mac"
-		dk_call dk_set arch "arm32"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "mac"
+		dk_call dk_set target_arch "arm32"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "21" ]; then
-		dk_call dk_set os "mac"
-		dk_call dk_set arch "arm64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "mac"
+		dk_call dk_set target_arch "arm64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "22" ]; then
-		dk_call dk_set os "mac"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "mac"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "23" ]; then
-		dk_call dk_set os "mac"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "mac"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "24" ]; then
-		dk_call dk_set os "raspberry"
-		dk_call dk_set arch "arm32"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "raspberry"
+		dk_call dk_set target_arch "arm32"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "25" ]; then
-		dk_call dk_set os "raspberry"
-		dk_call dk_set arch "arm64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "raspberry"
+		dk_call dk_set target_arch "arm64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "26" ]; then
-		dk_call dk_set os "raspberry"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "raspberry"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "27" ]; then
-		dk_call dk_set os "raspberry"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "raspberry"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "28" ]; then
-		dk_call dk_set os "win"
-		dk_call dk_set arch "arm32"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "win"
+		dk_call dk_set target_arch "arm32"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "29" ]; then
-		dk_call dk_set os "win"
-		dk_call dk_set arch "arm64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "win"
+		dk_call dk_set target_arch "arm64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "30" ]; then
-		dk_call dk_set os "win"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "win"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "31" ]; then
-		dk_call dk_set os "win"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "gcc"
+		dk_call dk_set target_os "win"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "gcc"
 	elif [ "${input}" = "32" ]; then
-		dk_call dk_set os "win"
-		dk_call dk_set arch "x86"
-		dk_call dk_set env "msvc"
+		dk_call dk_set target_os "win"
+		dk_call dk_set target_arch "x86"
+		dk_call dk_set target_env "msvc"
 	elif [ "${input}" = "33" ]; then
-		dk_call dk_set os "win"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "clang"
+		dk_call dk_set target_os "win"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "clang"
 	elif [ "${input}" = "34" ]; then
-		dk_call dk_set os "win"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "gcc"
+		dk_call dk_set target_os "win"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "gcc"
 	elif [ "${input}" = "35" ]; then
-		dk_call dk_set os "win"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "msvc"
+		dk_call dk_set target_os "win"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "msvc"
 	elif [ "${input}" = "36" ]; then
-		dk_call dk_set os "win"
-		dk_call dk_set arch "x86_64"
-		dk_call dk_set env "ucrt"
+		dk_call dk_set target_os "win"
+		dk_call dk_set target_arch "x86_64"
+		dk_call dk_set target_env "ucrt"
 	elif [ "${input}" = "37" ]; then
 		unset target_app
 		return 1
@@ -216,53 +215,53 @@ dk_target_triple_SET() {
 		dk_call dk_warning "invalid selection"
 	fi
 
-	dk_call dk_assertVar os
-	dk_call dk_toUpper ${os} OS
-	dk_call dk_set OS ${OS}
-	dk_call dk_set ${os} 1
-	dk_call dk_set ${OS} 1
-	dk_call dk_assertVar OS
-	dk_call dk_printVar os
-	dk_call dk_printVar OS
-	dk_call dk_printVar ${os}
-	dk_call dk_printVar ${OS}
-	dk_call dk_assertVar arch
-	dk_call dk_toUpper ${arch} ARCH
-	dk_call dk_set ARCH ${ARCH}
-	dk_call dk_set ${arch} 1
-	dk_call dk_set ${ARCH} 1
-	dk_call dk_assertVar ARCH
-	dk_call dk_printVar arch
-	dk_call dk_printVar ARCH
-	dk_call dk_printVar ${arch}
-	dk_call dk_printVar ${ARCH}
+	dk_call dk_assertVar target_os
+	dk_call dk_toUpper ${target_os} TARGET_OS
+	dk_call dk_set TARGET_OS ${TARGET_OS}
+	dk_call dk_set ${target_os} 1
+	dk_call dk_set ${TARGET_OS} 1
+	dk_call dk_assertVar TARGET_OS
+	dk_call dk_printVar target_os
+	dk_call dk_printVar TARGET_OS
+	dk_call dk_printVar ${target_os}
+	dk_call dk_printVar ${TARGET_OS}
+	dk_call dk_assertVar target_arch
+	dk_call dk_toUpper ${target_arch} TARGET_ARCH
+	dk_call dk_set TARGET_ARCH ${TARGET_ARCH}
+	dk_call dk_set ${target_arch} 1
+	dk_call dk_set ${TARGET_ARCH} 1
+	dk_call dk_assertVar TARGET_ARCH
+	dk_call dk_printVar target_arch
+	dk_call dk_printVar TARGET_ARCH
+	dk_call dk_printVar ${target_arch}
+	dk_call dk_printVar ${TARGET_ARCH}
 
-	if [ -n "${env-}" ]; then
-		dk_call dk_toUpper ${env} ENV
-		dk_call dk_set ENV ${ENV}
-		dk_call dk_set ${env} 1
-		dk_call dk_set ${ENV} 1
-		dk_call dk_printVar env
-		dk_call dk_printVar ENV
-		dk_call dk_printVar ${env}
-		dk_call dk_printVar ${ENV}
+	if [ -n "${target_env-}" ]; then
+		dk_call dk_toUpper ${target_env} TARGET_ENV
+		dk_call dk_set TARGET_ENV ${TARGET_ENV}
+		dk_call dk_set ${target_env} 1
+		dk_call dk_set ${TARGET_ENV} 1
+		dk_call dk_printVar target_env
+		dk_call dk_printVar TARGET_ENV
+		dk_call dk_printVar ${target_env}
+		dk_call dk_printVar ${TARGET_ENV}
 	fi
 		
-	if [ -n "${env-}" ]; then
-		dk_call dk_set target_triple "${os}_${arch}_${env}"
-		dk_call dk_set TRIPLE "${OS}_${ARCH}_${ENV}"
+	if [ -n "${target_env-}" ]; then
+		dk_call dk_set target_triple "${target_os}_${target_arch}_${target_env}"
+		dk_call dk_set TARGET_TRIPLE "${TARGET_OS}_${TARGET_ARCH}_${TARGET_ENV}"
 	else
-		dk_call dk_set target_triple "${os}_${arch}"
-		dk_call dk_set TRIPLE "${OS}_${ARCH}"
+		dk_call dk_set target_triple "${target_os}_${target_arch}"
+		dk_call dk_set TARGET_TRIPLE "${TARGET_OS}_${TARGET_ARCH}"
 	fi
 	dk_call dk_assertVar target_triple
-	dk_call dk_assertVar TRIPLE
+	dk_call dk_assertVar TARGET_TRIPLE
 	dk_call dk_set ${target_triple} 1	
-	dk_call dk_set ${TRIPLE} 1	
+	dk_call dk_set ${TARGET_TRIPLE} 1	
 	dk_call dk_printVar target_triple
-	dk_call dk_printVar TRIPLE
+	dk_call dk_printVar TARGET_TRIPLE
 	dk_call dk_printVar ${target_triple}
-	dk_call dk_printVar ${TRIPLE}	
+	dk_call dk_printVar ${TARGET_TRIPLE}	
 
 	### Set DEBUG_DIR and RELEASE_DIR variables
 	if [ -n "${IOS-}" ]; then

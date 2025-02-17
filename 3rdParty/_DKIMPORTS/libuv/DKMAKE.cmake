@@ -21,7 +21,7 @@ dk_import			(${LIBUV_DL})
 
 ### LINK ###
 dk_include			(${LIBUV}/include					LIBUV_INCLUDE_DIR)
-dk_include			(${LIBUV}/${triple})
+dk_include			(${LIBUV}/${target_triple})
 if(MSVC)
 	dk_libDebug		(${LIBUV_DEBUG_DIR}/uv_a.lib		LIBUV_DEBUG_LIBRARY)
 	dk_libRelease	(${LIBUV_RELEASE_DIR}/uv_a.lib		LIBUV_RELEASE_LIBRARY)

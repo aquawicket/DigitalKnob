@@ -18,8 +18,8 @@ function(dk_generate)
 	dk_validate(DKCPP_APPS_DIR "dk_DKBRANCH_DIR()")
 	set(TARGET_PATH "${DKCPP_APPS_DIR}/${target_app}")
 	dk_printVar(TARGET_PATH)
-	dk_makeDirectory("${TARGET_PATH}/${triple}")
-	dk_cd("${TARGET_PATH}/${triple}")
+	dk_makeDirectory("${TARGET_PATH}/${target_triple}")
+	dk_cd("${TARGET_PATH}/${target_triple}")
 	set(CMAKE_SOURCE_DIR "${DKCMAKE_DIR}")
 	dk_assertPath(CMAKE_SOURCE_DIR)
 	set(CMAKE_TARGET_PATH "${TARGET_PATH}")
@@ -86,105 +86,105 @@ function(dk_generate)
 	#dk_arrayPush(CMAKE_ARGS "--warn-unused-vars")
 	#dk_arrayPush(CMAKE_ARGS "--check-system-vars")
 	
-	if("${triple}" STREQUAL "cosmopolitan")
+	if("${target_triple}" STREQUAL "cosmopolitan")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "cygwin")
+	if("${target_triple}" STREQUAL "cygwin")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "android_arm32_clang")
+	if("${target_triple}" STREQUAL "android_arm32_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 
-	if("${triple}" STREQUAL "android_arm64_clang")
+	if("${target_triple}" STREQUAL "android_arm64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "emscripten_x86_clang")
+	if("${target_triple}" STREQUAL "emscripten_x86_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "ios_arm32_clang")
+	if("${target_triple}" STREQUAL "ios_arm32_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "ios_arm64_clang")
+	if("${target_triple}" STREQUAL "ios_arm64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "iossim_x86_clang")
+	if("${target_triple}" STREQUAL "iossim_x86_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "iossim_x86_64_clang")
+	if("${target_triple}" STREQUAL "iossim_x86_64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "linux_x86_clang")
+	if("${target_triple}" STREQUAL "linux_x86_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "linux_x86_64_clang")
+	if("${target_triple}" STREQUAL "linux_x86_64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "mac_x86_clang")
+	if("${target_triple}" STREQUAL "mac_x86_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "mac_x86_64_clang")
+	if("${target_triple}" STREQUAL "mac_x86_64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${triple}" STREQUAL "raspberry_arm32_clang")
+	if("${target_triple}" STREQUAL "raspberry_arm32_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "raspberry_arm64_clang")
+	if("${target_triple}" STREQUAL "raspberry_arm64_clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${triple}" STREQUAL "win_arm64_clang")
+	if("${target_triple}" STREQUAL "win_arm64_clang")
 		dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR")
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64")
 	endif()
 	
-	if("${triple}" STREQUAL "win_x86_clang")
+	if("${target_triple}" STREQUAL "win_x86_clang")
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32")
 	endif()
 	
-	if("${triple}" STREQUAL "win_x86_gcc")
+	if("${target_triple}" STREQUAL "win_x86_gcc")
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32")
 	endif()
 	
-	if("${triple}" STREQUAL "win_x86_64_clang")
+	if("${target_triple}" STREQUAL "win_x86_64_clang")
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
 		# TODO: export MSYSTEM=CLANG64
 		#dk_arrayUnshift(CMAKE_ARGS "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64")
 	endif()
 	
-	if("${triple}" STREQUAL "win_x86_64_gcc")
+	if("${target_triple}" STREQUAL "win_x86_64_gcc")
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64")
 	endif()
 	
-	if("${triple}" STREQUAL "win_x86_64_ucrt")
+	if("${target_triple}" STREQUAL "win_x86_64_ucrt")
 		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64")
 	endif()
 	
-	if("${triple}" STREQUAL "win_x86_64_msvc")
+	if("${target_triple}" STREQUAL "win_x86_64_msvc")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Visual Studio 17 2022")
 	endif()
 
 	###### CMAKE_TOOLCHAIN_FILE ######
-#	set(TOOLCHAIN "${DKCMAKE_DIR}/toolchains/${triple}_toolchain.cmake")
+#	set(TOOLCHAIN "${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake")
 #	dk_echo("TOOLCHAIN = ${TOOLCHAIN}")
 #	if(dk_pathExists "${TOOLCHAIN}")
 #		dk_arrayPush(CMAKE_ARGS "-DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN}")

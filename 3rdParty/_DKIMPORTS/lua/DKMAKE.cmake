@@ -17,7 +17,7 @@ dk_import(https://github.com/lua/lua/archive/fd0e1f53.zip PATCH)
 
 ### LINK ###
 dk_include			(${LUA}/include							LUA_INCLUDE_DIR)
-dk_include			(${LUA}/${triple}							LUA_INCLUDE_DIR2)
+dk_include			(${LUA}/${target_triple}							LUA_INCLUDE_DIR2)
 DEBUG_dk_include	(${LUA_DEBUG_DIR}/include		LUA_INCLUDE_DIR2)
 RELEASE_dk_include	(${LUA_RELEASE_DIR}/include	LUA_INCLUDE_DIR2)
 

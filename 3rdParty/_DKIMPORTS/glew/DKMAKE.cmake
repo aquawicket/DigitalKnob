@@ -48,13 +48,13 @@ endif()
 ### 3RDPARTY LINK ###
 # dk_set(GLEW_CMAKE
 #	-DGLEW_USE_STATIC_LIB=ON
-#	-DGLEW_DIR=${GLEW}/${triple}/CMakeFiles/Export/lib/cmake/glew
+#	-DGLEW_DIR=${GLEW}/${target_triple}/CMakeFiles/Export/lib/cmake/glew
 #	-DGLEW_LIBRARY=${GLEW_LIBRARY_DEBUG}
 #	-DGLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}
-#	-DGLEW_SHARED_LIBRARY_DEBUG=${GLEW}/${triple}/lib/${DEBUG_DIR}/libglew32d.lib
-#	-DGLEW_SHARED_LIBRARY_RELEASE=${GLEW}/${triple}/lib/${RELEASE_DIR}/libglew32.lib
-#	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${triple}/lib/${DEBUG_DIR}/glew32d.lib
-#	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${triple}/lib/${RELEASE_DIR}/glew32.lib
+#	-DGLEW_SHARED_LIBRARY_DEBUG=${GLEW}/${target_triple}/lib/${DEBUG_DIR}/libglew32d.lib
+#	-DGLEW_SHARED_LIBRARY_RELEASE=${GLEW}/${target_triple}/lib/${RELEASE_DIR}/libglew32.lib
+#	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${target_triple}/lib/${DEBUG_DIR}/glew32d.lib
+#	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${target_triple}/lib/${RELEASE_DIR}/glew32.lib
 #	-DGLEW_LIBRARIES=${GLEW_LIBRARY_DEBUG} ${GLEW_LIBRARY_RELEASE})
 dk_set(GLEW_CMAKE 
 	-DGLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}
@@ -72,10 +72,10 @@ endif()
 
 ### GENERATE ###
 dk_configure(${GLEW_DIR}/build/cmake)
-#dk_copy(${GLEW}/${triple}/lib/${DEBUG_DIR} ${GLEW}/${triple}/CMakeFiles/Export/lib/ OVERWRITE)
-#dk_copy(${GLEW}/${triple}/lib/${RELEASE_DIR} ${GLEW}/${triple}/CMakeFiles/Export/lib/ OVERWRITE)
-#dk_copy(${GLEW}/${triple}/bin/${DEBUG_DIR} ${GLEW}/${triple}/CMakeFiles/Export/bin/ OVERWRITE)
-#dk_copy(${GLEW}/${triple}/bin/${RELEASE_DIR} ${GLEW}/${triple}/CMakeFiles/Export/bin/ OVERWRITE)
+#dk_copy(${GLEW}/${target_triple}/lib/${DEBUG_DIR} ${GLEW}/${target_triple}/CMakeFiles/Export/lib/ OVERWRITE)
+#dk_copy(${GLEW}/${target_triple}/lib/${RELEASE_DIR} ${GLEW}/${target_triple}/CMakeFiles/Export/lib/ OVERWRITE)
+#dk_copy(${GLEW}/${target_triple}/bin/${DEBUG_DIR} ${GLEW}/${target_triple}/CMakeFiles/Export/bin/ OVERWRITE)
+#dk_copy(${GLEW}/${target_triple}/bin/${RELEASE_DIR} ${GLEW}/${target_triple}/CMakeFiles/Export/bin/ OVERWRITE)
 
 
 ### COMPILE ###

@@ -54,7 +54,7 @@ endif()
 ######################################################
 dk_load(${DK_Project_Dir}/DKMAKE.cmake)
 dk_assertVar(triple)
-dk_delete(${DK_Project_Dir}/${triple}/DKBUILD.log NO_HALT)
+dk_delete(${DK_Project_Dir}/${target_triple}/DKBUILD.log NO_HALT)
 dk_printSettings()
 
 dk_buildLog("##############################################")
@@ -124,12 +124,12 @@ foreach(plugin ${dkdepend_list})
 		dk_toUpper(${plugin} PLUGIN_NAME)
 		if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
 			#if(MULTI_CONFIG)
-			#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${triple})
+			#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${target_triple})
 			#else()
 			#	if(DEBUG)
-			#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Debug)
+			#		add_subdirectory(${plugin_path} ${plugin_path}/${target_triple}/Debug)
 			#	elseif(RELEASE)
-			#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Release)
+			#		add_subdirectory(${plugin_path} ${plugin_path}/${target_triple}/Release)
 			#	endif()
 			#endif()
 			dk_debug("adding ${${PLUGIN_NAME}}")
@@ -137,8 +137,8 @@ foreach(plugin ${dkdepend_list})
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
 	
-	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${triple})
-	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${triple})
+	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${target_triple})
+	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${target_triple})
 	
 	####################### DKCpp/plugins #######################
 	# Libraries in the /DKCpp/plugins folder
@@ -167,12 +167,12 @@ foreach(plugin ${dkdepend_list})
 		if(PROJECT_INCLUDE_DKPLUGINS)
 			if(EXISTS "${plugin_path}/CMakeLists.txt")
 				#if(MULTI_CONFIG)
-				#	add_subdirectory(${plugin_path} ${plugin_path}/${triple})
+				#	add_subdirectory(${plugin_path} ${plugin_path}/${target_triple})
 				#else()
 				#	if(DEBUG)
-				#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Debug)
+				#		add_subdirectory(${plugin_path} ${plugin_path}/${target_triple}/Debug)
 				#	elseif(RELEASE)
-				#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Release)
+				#		add_subdirectory(${plugin_path} ${plugin_path}/${target_triple}/Release)
 				#	endif()
 				#endif()
 				add_subdirectory(${plugin_path} ${plugin_path}/${CONFIG_PATH})
@@ -354,7 +354,7 @@ file(GLOB App_SRC
 	${DK_Project_Dir}/*.hpp
 	${DK_Project_Dir}/*.cpp)
 list(FILTER App_SRC EXCLUDE REGEX "${DK_Project_Dir}/assets/*")
-list(FILTER App_SRC EXCLUDE REGEX "${DK_Project_Dir}/${triple}/*")
+list(FILTER App_SRC EXCLUDE REGEX "${DK_Project_Dir}/${target_triple}/*")
 if(SRC_INCLUDE)
 	file(GLOB App_SRC_INCLUDE ${SRC_INCLUDE})
 	list(APPEND App_SRC ${App_SRC_INCLUDE})
@@ -386,17 +386,17 @@ if(ANDROID)
 		if(BACKUP_APP_EXECUTABLES)
 			if(MULTI_CONFIG)
 				if(DEBUG)
-					dk_rename(${DK_Project_Dir}/${triple}/app/build/outputs/apk/debug/app-debug.apk ${DK_Project_Dir}/${triple}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
+					dk_rename(${DK_Project_Dir}/${target_triple}/app/build/outputs/apk/debug/app-debug.apk ${DK_Project_Dir}/${target_triple}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
 				endif()
 				if(RELEASE)
-					dk_rename(${DK_Project_Dir}/${triple}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_Project_Dir}/${triple}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
+					dk_rename(${DK_Project_Dir}/${target_triple}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_Project_Dir}/${target_triple}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
 				endif()
 			else()
 				if(DEBUG)
-					dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/app/build/outputs/apk/debug/app-debug.apk ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
+					dk_rename(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/app/build/outputs/apk/debug/app-debug.apk ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
 				endif()
 				if(RELEASE)
-					dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
+					dk_rename(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
 				endif()
 			endif()
 		endif()
@@ -415,28 +415,28 @@ if(ANDROID)
 	
 		####### Import Android Gui Build files ############################################
 		if(DEBUG)
-			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/android/ ${DK_Project_Dir}/${triple}/Debug)
-			if(EXISTS ${DKCPP_PLUGINS_DIR}/_DKIMPORT/${triple})
-				dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/${triple}/ ${DK_Project_Dir}/${triple}/Debug)
+			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/android/ ${DK_Project_Dir}/${target_triple}/Debug)
+			if(EXISTS ${DKCPP_PLUGINS_DIR}/_DKIMPORT/${target_triple})
+				dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/${target_triple}/ ${DK_Project_Dir}/${target_triple}/Debug)
 			endif()
-			dk_copy(${DK_Project_Dir}/assets ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/app/src/main/assets OVERWRITE)
-			dk_fileWrite(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/local.properties ${localProperties})
-			dk_fileReplace(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
+			dk_copy(${DK_Project_Dir}/assets ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/app/src/main/assets OVERWRITE)
+			dk_fileWrite(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/local.properties ${localProperties})
+			dk_fileReplace(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
 			if(UNIX_HOST)
-				dk_executeProcess(chmod 777 ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/gradlew)
-				dk_executeProcess(sed -i -e "s/\r$//" "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/gradlew")
+				dk_executeProcess(chmod 777 ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/gradlew)
+				dk_executeProcess(sed -i -e "s/\r$//" "${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/gradlew")
 			endif()
 			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
 		endif()
 		if(RELEASE)
-			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/android/ ${DK_Project_Dir}/${triple}/Release)
-			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/${triple}/ ${DK_Project_Dir}/${triple}/Release)
-			dk_copy(${DK_Project_Dir}/assets ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/app/src/main/assets OVERWRITE)
-			dk_fileWrite(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/local.properties ${localProperties})
-			dk_fileReplace(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
+			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/android/ ${DK_Project_Dir}/${target_triple}/Release)
+			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/${target_triple}/ ${DK_Project_Dir}/${target_triple}/Release)
+			dk_copy(${DK_Project_Dir}/assets ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/app/src/main/assets OVERWRITE)
+			dk_fileWrite(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/local.properties ${localProperties})
+			dk_fileReplace(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
 			if(UNIX_HOST)
-				dk_executeProcess(chmod 777 ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/gradlew)
-				dk_executeProcess(sed -i -e "s/\r$//" "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/gradlew")
+				dk_executeProcess(chmod 777 ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/gradlew)
+				dk_executeProcess(sed -i -e "s/\r$//" "${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/gradlew")
 			endif()
 			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
 		endif()
@@ -511,7 +511,7 @@ if(ANDROID)
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${setVar} JAVA_HOME=$ENV{JAVA_HOME} && ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/gradlew${bat} --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_Project_Dir}/${triple}/Debug --info clean build #--offline
+				COMMAND ${setVar} JAVA_HOME=$ENV{JAVA_HOME} && ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/gradlew${bat} --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_Project_Dir}/${target_triple}/Debug --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
@@ -521,7 +521,7 @@ if(ANDROID)
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${setVar} "JAVA_HOME=$ENV{JAVA_HOME}" & ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/gradlew${bat} --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_Project_Dir}/${triple}/Release --info clean build #--offline
+				COMMAND ${setVar} "JAVA_HOME=$ENV{JAVA_HOME}" & ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/gradlew${bat} --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_Project_Dir}/${target_triple}/Release --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
@@ -541,7 +541,7 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
-				COMMAND ${CMD_EXE} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND ${CMD_EXE} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
 		if(RELEASE)
 		endif()
@@ -549,7 +549,7 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
-				COMMAND ${CMD_EXE} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk
+				COMMAND ${CMD_EXE} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 	endif()
@@ -601,15 +601,15 @@ if(EMSCRIPTEN)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.data ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.html ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.js ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.wasm ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.data ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.html ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.js ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.wasm ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
 		elseif(RELEASE)
-			dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.data ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.html ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.js ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.wasm ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.data ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.html ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.js ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.wasm ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
@@ -645,30 +645,30 @@ if(EMSCRIPTEN)
 	if(DEBUG)
 		if(WIN_HOST)
 			set(RUN_SCRIPT_DEBUG
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/Run.bat ${RUN_SCRIPT_DEBUG})
+			dk_fileWrite(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/Run.bat ${RUN_SCRIPT_DEBUG})
 		else()
 			set(RUN_SCRIPT_DEBUG
-				"\#!/bin/bash\n${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.html"
+				"\#!/bin/bash\n${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/Run.sh "${RUN_SCRIPT_DEBUG}")
-			dk_executeProcess(chmod 777 ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/Run.sh)
+			dk_fileWrite(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/Run.sh "${RUN_SCRIPT_DEBUG}")
+			dk_executeProcess(chmod 777 ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/Run.sh)
 		endif()
 	endif()
 	if(RELEASE)
 		if(WIN_HOST)
 			set(RUN_SCRIPT_RELEASE
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/Run.bat ${RUN_SCRIPT_RELEASE})
+			dk_fileWrite(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/Run.bat ${RUN_SCRIPT_RELEASE})
 		else()
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/Run.sh ${RUN_SCRIPT_RELEASE})
-			dk_executeProcess(chmod 777 ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/Run.sh)
+			dk_fileWrite(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_executeProcess(chmod 777 ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/Run.sh)
 		endif()
 	endif()
 
@@ -689,19 +689,19 @@ if(EMSCRIPTEN)
 	#		TARGET ${APP_NAME} 
 	#		POST_BUILD
 	#		COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Debug wasm files to /assets"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.data" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.html" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.js" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.wasm" "${DK_Project_Dir}/assets/")
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.data" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.html" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.js" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.wasm" "${DK_Project_Dir}/assets/")
 	#else()
 	#	add_custom_command(
 	#		TARGET ${APP_NAME} 
 	#		POST_BUILD
 	#		COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Release wasm files to /assets"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.data" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.html" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.js" "${DK_Project_Dir}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.wasm" "${DK_Project_Dir}/assets/")
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.data" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.html" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.js" "${DK_Project_Dir}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.wasm" "${DK_Project_Dir}/assets/")
 	#endif()
 endif(EMSCRIPTEN)
 
@@ -712,15 +712,15 @@ if(IOS OR IOSSIM)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			if(EXISTS ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.app)
-				dk_delete(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.app.backup)
-				dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
+			if(EXISTS ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.app)
+				dk_delete(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.app.backup)
+				dk_rename(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
 			endif()
 		endif()
 		if(RELEASE)
-			if(EXISTS ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.app)
-				dk_delete(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.app.backup)
-				dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+			if(EXISTS ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.app)
+				dk_delete(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.app.backup)
+				dk_rename(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
 			endif()
 		endif()
 	endif()
@@ -838,9 +838,9 @@ if(NOT RASPBERRY)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_copy(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME} ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
+			dk_copy(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME} ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		elseif(RELEASE)
-			dk_copy(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME} ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
+			dk_copy(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME} ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
@@ -892,10 +892,10 @@ if(NOT RASPBERRY)
 			"Type=Application\n"
 			"Terminal=true\n"
 			"Name=${APP_NAME}\n"
-			"Exec=${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}\n"
+			"Exec=${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}\n"
 			"Icon=${DK_Project_Dir}/icons/icon.png\n")
 		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-		dk_fileWrite("${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.desktop" "${DESKTOP_FILE}")
+		dk_fileWrite("${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.desktop" "${DESKTOP_FILE}")
 	elseif(RELEASE)
 		set(DESKTOP_FILE
 			"[Desktop Entry]\n"
@@ -904,10 +904,10 @@ if(NOT RASPBERRY)
 			"Type=Application\n"
 			"Terminal=true\n"
 			"Name=${APP_NAME}\n"
-			"Exec=${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}\n"
+			"Exec=${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}\n"
 			"Icon=${DK_Project_Dir}/icons/icon.png\n")
 		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-		dk_fileWrite("${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.desktop" "${DESKTOP_FILE}")
+		dk_fileWrite("${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.desktop" "${DESKTOP_FILE}")
 	endif()
 	
 	# Create windows shortcut for WSL
@@ -915,21 +915,21 @@ if(NOT RASPBERRY)
 		dk_info("creating WSL shortcut")
 		dk_depend(wsl)
 		if(DEBUG)
-			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
+			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
 			dk_debug("WSL SHORTCUT_PATH = ${SHORTCUT_PATH}")
-			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}")
+			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}")
 		elseif(RELEASE)
-			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
-			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}")
+			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
+			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}")
 		endif()
 	endif()
 	
 	# Install shortcut of Release build to the apps menu
 	if(NOT TINYCORE)
 		if(DEBUG)
-			#dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_Project_Dir}/${triple}/${DEBUG_DIR})
+			#dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR})
 		elseif(RELEASE)
-			dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_Project_Dir}/${triple}/${RELEASE_DIR})
+			dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR})
 		endif()
 	endif()
 		
@@ -953,10 +953,10 @@ if(MAC)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_copy(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
+			dk_copy(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
 		endif()
 		if(RELEASE)
-			dk_copy(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
+			dk_copy(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 		
@@ -1063,10 +1063,10 @@ if(MAC)
 	endif()
 	
 	# Copy the DKCefChild.app into the app bundle as "DKAppName Helper.app"
-	if(EXISTS "${DKCPP_PLUGINS_DIR}/DKCefChild/${triple}/${RELEASE_DIR}/DKCefChild.app")
+	if(EXISTS "${DKCPP_PLUGINS_DIR}/DKCefChild/${target_triple}/${RELEASE_DIR}/DKCefChild.app")
 		dk_info("Adding ${APP_NAME} Helper to bundle . . .")
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${DKCPP_PLUGINS_DIR}/DKCefChild/${triple}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKCPP_PLUGINS_DIR}/DKCefChild/${triple}/$<CONFIG>/DKCefChild.app/Contents/MacOS/DKCefChild" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app/Contents/MacOS/${APP_NAME} Helper")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${DKCPP_PLUGINS_DIR}/DKCefChild/${target_triple}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKCPP_PLUGINS_DIR}/DKCefChild/${target_triple}/$<CONFIG>/DKCefChild.app/Contents/MacOS/DKCefChild" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app/Contents/MacOS/${APP_NAME} Helper")
 	endif()
 	
 	# Make bundle open with Terminal
@@ -1079,9 +1079,9 @@ if(MAC)
 			#"dir=$(cd \"$( dirname \"\${0}\")\" && pwd ) \n"
 			#"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
 		)
-		dk_fileWrite(${DK_Project_Dir}/${triple}/wrapper ${TERMINAL_SCRIPT})
-		dk_executeProcess(chmod +x ${DK_Project_Dir}/${triple}/wrapper WORKING_DIRECTORY ${DK_Project_Dir}/${triple})
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${triple}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
+		dk_fileWrite(${DK_Project_Dir}/${target_triple}/wrapper ${TERMINAL_SCRIPT})
+		dk_executeProcess(chmod +x ${DK_Project_Dir}/${target_triple}/wrapper WORKING_DIRECTORY ${DK_Project_Dir}/${target_triple})
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${target_triple}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
 	endif()
 	
 	#CPP_Execute("chmod +x "+app_path+OS+"/${DEBUG_DIR}/"+target_app)
@@ -1144,9 +1144,9 @@ if(RASPBERRY)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME} ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME} ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		elseif(RELEASE)
-			dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME} ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME} ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
@@ -1176,10 +1176,10 @@ if(RASPBERRY)
 		"Type=Application\n"
 		"Terminal=true\n"
 		"Name=${APP_NAME}\n"
-		"Exec=${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}\n"
+		"Exec=${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}\n"
 		"Icon=${DK_Project_Dir}/icons/icon.png\n")
 	list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-	dk_fileWrite(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.desktop ${DESKTOP_FILE})
+	dk_fileWrite(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	if(RELEASE)
 	# Create .desktop file for Release
@@ -1190,15 +1190,15 @@ if(RASPBERRY)
 		"Type=Application\n"
 		"Terminal=true\n"
 		"Name=${APP_NAME}\n"
-		"Exec=${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}\n"
+		"Exec=${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}\n"
 		"Icon=${DK_Project_Dir}/icons/icon.png\n")
 	list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-	dk_fileWrite(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.desktop ${DESKTOP_FILE})
+	dk_fileWrite(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	
 	# Install shortcut of Release build to the apps menu
 	if(RELEASE)
-		dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_Project_Dir}/${triple}/Release)
+		dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_Project_Dir}/${target_triple}/Release)
 	endif()
 		
 	####################### Do Post Build Stuff #######################
@@ -1238,10 +1238,10 @@ if(WIN_X86)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 		if(RELEASE)
-			dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 		
@@ -1327,7 +1327,7 @@ if(WIN_X86)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	#	#COMMAND cmd /c ${CMAKE_COMMAND} --build ${DK_Project_Dir}/${triple} --target ${APP_NAME}
+	#	#COMMAND cmd /c ${CMAKE_COMMAND} --build ${DK_Project_Dir}/${target_triple} --target ${APP_NAME}
 	#)
 	
 	#add_custom_command(
@@ -1368,10 +1368,10 @@ if(WIN_X86_64)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 		if(RELEASE)
-			dk_rename(${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${target_triple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 		
@@ -1511,17 +1511,17 @@ endforeach()
 #dk_buildLog("\n")
 #dk_buildLog(" ### Dynamic libraries ###")
 #if(LINUX OR RASPBERRY OR ANDROID)
-#	dk_command(ldd >> ${DK_Project_Dir}/${triple}/DKBUILD.log)
+#	dk_command(ldd >> ${DK_Project_Dir}/${target_triple}/DKBUILD.log)
 #elseif(MAC OR IOS)
 	# TODO
-	#dk_command(otool -L ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.app)
+	#dk_command(otool -L ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.app)
 #elseif(WIN)	
 	# TODO
-	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${DK_Project_Dir}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe
+	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${DK_Project_Dir}/${target_triple}/${DEBUG_DIR}/${APP_NAME}.exe
 #endif()
 
 dk_info("\n\n")
 dk_info("******************************************************")
-dk_info("****** Generated ${APP_NAME} - ${triple}  ************")
+dk_info("****** Generated ${APP_NAME} - ${target_triple}  ************")
 dk_info("******************************************************\n")
 
