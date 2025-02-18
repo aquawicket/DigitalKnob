@@ -26,6 +26,6 @@ DKTEST() {
     dk_debugFunc 0
   
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
-    dk_call dk_getFileParam ${DKIMPORTS_DIR}/git/git.txt VERSION
-	dk_call dk_printVar VERSION
+    dk_call dk_getFileParam ${DKIMPORTS_DIR}/git/dkconfig.txt GIT_DL_VERSION
+	dk_call dk_printVar GIT_DL_VERSION
 }
