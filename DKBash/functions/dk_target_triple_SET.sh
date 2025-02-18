@@ -10,9 +10,10 @@ dk_target_triple_SET() {
 
 
 	dk_call dk_validate host_triple "dk_call dk_host_triple"
+	dk_call dk_set default_target_env clang
 
 	dk_call dk_echo ""
-	dk_call dk_echo " 1) ${host_triple}"
+	dk_call dk_echo " 1) ${host_triple}_${default_target_env}"
 	dk_call dk_echo ""
 	dk_call dk_echo " 2) cosmopolitan"
 	dk_call dk_echo " 3) android_arm32_clang"
@@ -63,8 +64,8 @@ dk_target_triple_SET() {
 		dk_call dk_set target_triple 	${host_triple}
 		dk_call dk_set target_os     	${HOST_OS}
 		dk_call dk_set target_arch  	${HOST_ARCH}
-		if [ -n "${host_env-}" ]; then
-			dk_call dk_set target_env  ${HOST_ENV}
+		if [ -n "${default_target_env-}" ]; then
+			dk_call dk_set target_env  ${default_target_env}
 		fi
 	elif [ "${input}" = "2" ]; then
 		dk_call dk_set target_os "cosmopolitan"
