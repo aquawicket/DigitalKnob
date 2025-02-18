@@ -18,6 +18,7 @@
 *.py		text eol=lf
 *.reg       text eol=crlf
 *.sh        text eol=lf
+*.txt		text eol=lf
 *.vbs       text eol=lf
 #/DKBash/*  text eol=lf
 #/DKBatch/* text eol=crlf
