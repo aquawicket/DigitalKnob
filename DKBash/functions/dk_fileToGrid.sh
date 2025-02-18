@@ -15,13 +15,12 @@ dk_fileToGrid() {
 	row=0
 	for line in "${lines[@]}"
 	do
-		#echo ${line}
-		#IFS=', ' read -r -a words <<< "${line}"
+		# WARNING: This does not get the last word correctly on files with CRLF line endings
 		IFS=$'\t' read -r -a words <<< "${line}"
+		read -a words <<< "${line}"
 		column=0
 		for word in "${words[@]}"
 		do
-			#echo "array[$row,$column]=${word}"
 			array[$row,$column]=${word}
 			((column+=1))
 		done

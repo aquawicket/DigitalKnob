@@ -31,9 +31,9 @@ dk_buildMain() {
 			
 			echo ""
 			echo "_line = ${_line}"
-			echo "0 = ${BUILD_LIST[${_line},0]-}"
-			echo "1 = ${BUILD_LIST[${_line},1]-}"
-			echo "2 = ${BUILD_LIST[${_line},2]-}"
+			echo "0 = '${BUILD_LIST[${_line},0]-}'"
+			echo "1 = '${BUILD_LIST[${_line},1]-}'"
+			echo "2 = '${BUILD_LIST[${_line},2]-}'"
 			echo ""			
 			
 			if [ "${BUILD_LIST[${_line},0]:0:1}" = "#" ]; then
