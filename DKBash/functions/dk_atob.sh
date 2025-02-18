@@ -2,7 +2,7 @@
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ##################################################################################
-# dk_atob(input, output)
+# dk_atob(input_file, output_file)
 #
 #    Decode base-64 input to output
 #    https://github.com/base64code/examples
