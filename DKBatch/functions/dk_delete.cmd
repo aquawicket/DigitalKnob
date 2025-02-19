@@ -10,20 +10,19 @@ setlocal
 	%dk_call% dk_debugFunc 1
 	
 	set "_path_=%~1"
-	set "_path_=%_path_:/=\%"
 	
-	%dk_call% dk_realpath "%_path_%" _path_ 
+	%dk_call% dk_realpath "%_path_%"
 	
-    if not exist "%_path_%" (
-        %dk_call% dk_warning "dk_delete %_path_% does not exist"
+    if not exist "%dk_realpath%" (
+        %dk_call% dk_warning "dk_delete dk_realpath:%dk_realpath% does not exist"
         %return%
     )
 
-    del /F /Q "%_path_%" %NO_OUTPUT%
-    rd /s /q "%_path_%" %NO_OUTPUT%
+    del /F /Q "%_path_:/=\%" %NO_OUTPUT%
+    rd /s /q "%_path_:/=\%" %NO_OUTPUT%
 
     if exist "%_path_%" (
-        %dk_call% dk_error "dk_delete failed to remove %_path_%"
+        %dk_call% dk_error "dk_delete failed to remove _path_:%_path_%"
     )
 %endfunction%
 

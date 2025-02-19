@@ -1,4 +1,6 @@
 @echo off
+echo ERROR: DO NOT USE dk_callStack
+pause
 ::https://stackoverflow.com/a/43123617/688352
 
 ::setlocal DisableDelayedExpansion

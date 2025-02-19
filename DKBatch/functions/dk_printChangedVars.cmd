@@ -13,7 +13,7 @@ setlocal
 	
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	
-	if not exist %DKCACHE_DIR%\vars.tmp (
+	if not exist %DKCACHE_DIR%/vars.tmp (
 		set > %DKCACHE_DIR%\vars.tmp
 	)
 	
@@ -70,7 +70,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_delete "%DKCACHE_DIR%\vars.tmp"
+	%dk_call% dk_delete "%DKCACHE_DIR%/vars.tmp"
 	%dk_call% dk_printChangedVars
 	
 	set "TestVar=abc"

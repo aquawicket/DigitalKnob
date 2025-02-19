@@ -2,7 +2,8 @@
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::##################################################################################
-::# dk_rename(from, to, OVERWRITE:optional)
+::# dk_rename(from, to)
+::# dk_rename(from, to, OVERWRITE)
 ::#
 ::# Rename/Move a file or directory to another name/location
 ::#

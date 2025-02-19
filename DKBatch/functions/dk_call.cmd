@@ -25,8 +25,9 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Stack Variables ######
 	(set __CMND__=%~1)
-	(set __CMND__=!__CMND__:::=\!)
+	(set __CMND__=!__CMND__:::=/!)
 	(set __FILE__=%~dpnx1)
+	(set __FILE__=%__FILE__:\=/%)
 	(set __FUNC__=%~n1)
 	set __ARGV__=%*
 	if defined __ARGV__ (set __ARGV__=!__ARGV__:*%1=!)

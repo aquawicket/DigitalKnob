@@ -13,13 +13,13 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     %dk_call% dk_commandExists "git" && %dk_call% dk_gitCheckRemote
 
 	:: read DKBuilder.cache file
-	if exist "%DKCACHE_DIR%\DKBuilder.cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%\DKBuilder.cache" words)
+	if exist "%DKCACHE_DIR%/DKBuilder.cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%/DKBuilder.cache" words)
 	set "_target_app_=%words[0][0]%"
 	set "_target_triple_=%words[0][1]%"
 	set "_target_type_=%words[0][2]%"
     
     %dk_call% dk_echo
-    if exist "%DKCACHE_DIR%\DKBuilder.cache" if "%_target_app_%" neq "" if "%_target_triple_%" neq "" if "%_target_type_%" neq "" echo  0) Repeat cache [%_target_app_% - %_target_triple_% - %_target_type_%]
+    if exist "%DKCACHE_DIR%/DKBuilder.cache" if "%_target_app_%" neq "" if "%_target_triple_%" neq "" if "%_target_type_%" neq "" echo  0) Repeat cache [%_target_app_% - %_target_triple_% - %_target_type_%]
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Download DigitalKnob
@@ -31,7 +31,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     echo  9) Reload
     echo 10) Exit
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if exist "%DKBRANCH_DIR%\build_list.txt"  echo 11) Run 'build_list.txt'
+	if exist "%DKBRANCH_DIR%/build_list.txt"  echo 11) Run 'build_list.txt'
     
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
     %dk_call% dk_keyboardInput choice
@@ -48,7 +48,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     if "%choice%"=="8"  %dk_call% dk_clearScreen
     if "%choice%"=="9"  %dk_call% dk_reload
     if "%choice%"=="10" %dk_call% dk_exit 0
-	if "%choice%"=="11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%\build_list.txt" && %return%)
+	if "%choice%"=="11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
       
     ::endlocal & 
 	set "UPDATE=1"
