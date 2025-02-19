@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-[ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
+[ -n "${DKINIT-}" ] && return 0 || export DKINIT=1  # include_guard
 #echo "0 = $0"
 
 ### Print Shell Path ad Version ###
@@ -68,22 +68,22 @@ DK(){
 	
 	############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
-
+	
     ###### DKTEST MODE ######
-    [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
-	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || return 0
-        dk_call dk_echo
-        dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
-		dk_call dk_echo
-        #dk_call dk_echo "${bg_RGB}20;20;20m"
-        dk_source "${DKSCRIPT_PATH}"
-        #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
-        #dk_call dk_echo "${clr}"
-        DKTEST
-        dk_call dk_echo
-        dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
-        dk_call dk_echo
-        dk_call dk_exit 0
+    [ ! "${DKSCRIPT_EXT}" = ".sh" ] && exit 0 & exit
+	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || exit 0
+    dk_call dk_echo
+    dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
+	dk_call dk_echo
+    #dk_call dk_echo "${bg_RGB}20;20;20m"
+    dk_source "${DKSCRIPT_PATH}"
+    #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
+    #dk_call dk_echo "${clr}"
+    DKTEST
+    dk_call dk_echo
+    dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
+    dk_call dk_echo
+    dk_call dk_exit 0
 }
 
 ##################################################################################
@@ -233,8 +233,8 @@ dk_installPackage() {
 
 ##################################################################################
 # run DK()
-DK
-
+DK & $(true)
+echo "DK() = $?"
 
 
 
