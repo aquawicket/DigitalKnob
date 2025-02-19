@@ -1,9 +1,9 @@
 message("#########################################################################")
-message("################# raspbery_arm64_gcc_toolchain.cmake ####################")
+message("################# raspbery_arm64_clang_toolchain.cmake ##################")
 message("#########################################################################")
 
 #dk_depend(build-essential)
-dk_depend(gcc)
+dk_depend(clang)
 dk_depend(make)
 	
 dk_append(CMAKE_C_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l

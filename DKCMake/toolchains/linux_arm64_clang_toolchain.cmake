@@ -1,9 +1,9 @@
 message("######################################################################")
-message("#################### linux_arm63_gcc_toolchain.cmake #################")
+message("#################### linux_arm64_clang_toolchain.cmake ###############")
 message("######################################################################")
 
 #dk_depend(build-essential)
-dk_depend(gcc)
+dk_depend(clang)
 dk_depend(make)
 
 dk_findProgram(CMAKE_MAKE_PROGRAM 	make)
