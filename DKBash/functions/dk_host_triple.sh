@@ -323,13 +323,14 @@ dk_host_triple() {
 
 	host_triple=${HOST_OS}_${HOST_ARCH}
 	dk_call dk_printVar host_triple
-	
-	if [ "${HOST_OS}" = "win" ]; then
-		HOST_ENV=clang
-		host_triple=${host_triple}_${HOST_ENV}
-		#host_triple=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
-		dk_call dk_printVar host_triple
-	fi
+
+# OBSOLETE - remove me
+#	if [ "${HOST_OS}" = "win" ]; then
+#		HOST_ENV=clang
+#		host_triple=${host_triple}_${HOST_ENV}
+#		#host_triple=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
+#		dk_call dk_printVar host_triple
+#	fi
 }
 
 
