@@ -4,7 +4,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main() {
+int main(int argc, char **argv) {
 	int rtn_code = dk_DIGITALKNOB_DIR();
 	dk_echo(DIGITALKNOB_DIR);
     return rtn_code;
