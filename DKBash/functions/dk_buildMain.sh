@@ -75,7 +75,9 @@ dk_buildMain() {
 		dk_call dk_generate	
 		dk_call dk_buildApp
 		
-		dk_call dk_unset UPDATE
+		if [ ! -e "${BUILD_LIST_FILE-}" ]; then
+			dk_call dk_unset UPDATE
+		fi
 		dk_call dk_unset target_app
 		dk_call dk_unset target_triple
 		dk_call dk_unset target_type

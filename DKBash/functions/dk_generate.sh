@@ -103,6 +103,10 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
 	elif [ "${target_triple,,}" = "android_arm64_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
+	elif [ "${target_triple,,}" = "android_x86_clang" ]; then
+		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
+	elif [ "${target_triple,,}" = "android_x86_64_clang" ]; then
+		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
 	elif [ "${target_triple,,}" = "emscripten_x86_clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
 	elif [ "${target_triple,,}" = "ios_arm32_clang" ]; then
