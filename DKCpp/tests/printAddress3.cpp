@@ -34,7 +34,7 @@ template< typename T > T addressToObjectB(const std::uintptr_t& address) {
 	return *(T*)v_ptr;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char **argv) {
 	
 	//////// Object -> Address -> Object /////////////////////////
 	std::string myStringA = "String converted to address and back";

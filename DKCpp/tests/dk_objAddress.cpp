@@ -95,7 +95,7 @@ std::string objectToAddress(void* object) {
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifdef DKTEST
-int main() {
+int main(int argc, char **argv) {
 	const std::string str = "000000000018FB74" ;
     const void* pv = as_pointer_to<const void>(str) ;
     std::cout << pv << '\n' ;

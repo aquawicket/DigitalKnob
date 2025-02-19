@@ -58,7 +58,7 @@ std::string* from_hex(std::string& address)
 	return obj;
 }
 
-int main() 
+int main(int argc, char **argv) {
 { 
 	std::string str_var = "simple string";
 	std::cout << "str_var = " << str_var << std::endl;

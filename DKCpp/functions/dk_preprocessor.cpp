@@ -34,7 +34,7 @@ WARNING_ENABLE
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main() {
+int main(int argc, char **argv) {
 	//int PrintPreprocessor(){
 	#ifdef __has_builtin
 		std::cout << "__has_builtin 		= ON\n";
