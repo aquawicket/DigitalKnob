@@ -23,17 +23,20 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	set "reg_backup=%CD%\REG_BACKUP
-	echo reg_backup = %reg_backup%
-	%dk_call% dk_makeDirectory %reg_backup%
+	set "REG_BACKUP_DIR=%CD:\=/%/REGISTRY_BACKUP"
+	%dk_call% dk_echo "REG_BACKUP_DIR = %REG_BACKUP_DIR%"
+	%dk_call% dk_makeDirectory "%REG_BACKUP_DIR%"
 	
-    reg export HKLM %reg_backup%\HKLM.reg
-	reg export HKCU %reg_backup%\HKCU.reg
-	reg export HKCR %reg_backup%\HKCR.reg
-	reg export HKU  %reg_backup%\HKU.reg
-	reg export HKCC %reg_backup%\HKCC.reg
+	set "REG_EXE=%SYSTEMROOT:\=/%/System32/reg.exe"
+	%dk_call% dk_assertPath REG_EXE
 	
-	echo Registry Backup Complete
+    "%REG_EXE:/=\%" export HKLM %REG_BACKUP_DIR:/=\%\HKLM.reg
+	"%REG_EXE:/=\%" export HKCU %REG_BACKUP_DIR:/=\%\HKCU.reg
+	"%REG_EXE:/=\%" export HKCR %REG_BACKUP_DIR:/=\%\HKCR.reg
+	"%REG_EXE:/=\%" export HKU  %REG_BACKUP_DIR:/=\%\HKU.reg
+	"%REG_EXE:/=\%" export HKCC %REG_BACKUP_DIR:/=\%\HKCC.reg
+	
+	%dk_call% dk_success "Registry Backup Complete"
 %endfunction%
 
 

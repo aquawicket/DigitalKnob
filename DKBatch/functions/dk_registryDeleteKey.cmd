@@ -2,7 +2,7 @@
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::#################################################################################
-:: dk_registryDeleteKey() <reg_path>
+:: dk_registryDeleteKey(reg_path)
 ::
 :: reg.exe /? 
 ::  REG DELETE KeyName [/v ValueName | /ve | /va] [/f] [/reg:32 | /reg:64]
@@ -41,14 +41,18 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
     %dk_call% dk_debugFunc 1
 
-    %dk_call% dk_registryKeyExists "%~1" || (
+	set "_reg_path_=%~1"
+	
+    %dk_call% dk_registryKeyExists "%_reg_path_%" || (
+		%dk_call% dk_warning "dk_registryDeleteKey: _reg_path_:%_reg_path_% does not exist"
 		exit /b 0
 	)
     
-    "%SystemRoot%\System32\reg.exe" delete "%~1" /f
+	set "REG_EXE=%SYSTEMROOT:\=/%/System32/reg.exe"
+	%dk_call% dk_assertPath REG_EXE
+	
+    "%REG_EXE:/=\%" delete "%_reg_path_:/=\%" /f
 
-:: DEBUG
-::	echo "%SystemRoot%\System32\reg.exe" delete "%~1" /f
 %endfunction%
 
 
@@ -59,5 +63,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt"
+    %dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.txt"
 %endfunction%
