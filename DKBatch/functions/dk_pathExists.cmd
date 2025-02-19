@@ -32,12 +32,12 @@ setlocal
 
     ::###### Using if return value
     %dk_call% dk_echo
-    set "_path_=C:\Windows"
+    set "_path_=C:/Windows"
     %dk_call% dk_pathExists "%_path_%" result
     if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exists)
     
     %dk_call% dk_echo
-    set "_path_=C:\NonExistent"
+    set "_path_=C:/NonExistent"
     %dk_call% dk_pathExists "%_path_%" result
     if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exists)
     ::FIXME: ERRORLEVEL is still 1 
@@ -45,12 +45,12 @@ setlocal
     
     ::###### Using if ERRORLEVEL
     %dk_call% dk_echo
-    set "_path_=C:\Windows"
+    set "_path_=C:/Windows"
     %dk_call% dk_pathExists "%_path_%"
     if not ERRORLEVEL 1 (echo %_path_% exists) else (echo %_path_% does NOT exists)
     
     %dk_call% dk_echo
-    set "_path_=C:\NonExistent"
+    set "_path_=C:/NonExistent"
     %dk_call% dk_pathExists "%_path_%"
     if not ERRORLEVEL 1 (echo %_path_% exists) else (echo %_path_% does NOT exists)
     ::FIXME: ERRORLEVEL is still 1 
@@ -58,23 +58,23 @@ setlocal
     
     ::###### Using && and || conditionals
     %dk_call% dk_echo
-    set "_path_=C:\Windows" 
+    set "_path_=C:/Windows" 
     %dk_call% dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exists)
     
     %dk_call% dk_echo
-    set "_path_=C:\NonExistent" 
+    set "_path_=C:/NonExistent" 
     %dk_call% dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exists)
     ::FIXME: ERRORLEVEL is still 1 
     
     
     ::###### Experimental
     ::  %dk_call% dk_echo
-    ::  set "_path_=C:\Windows"
+    ::  set "_path_=C:/Windows"
     ::  %dk_call% dk_pathExists "%_path_%"
     ::  if %dk_pathExists% (echo %_path_% exists) else (echo %_path_% does NOT exists)
     ::
     ::  %dk_call% dk_echo
-    ::  set "_path_=C:\NonExistent"
+    ::  set "_path_=C:/NonExistent"
     ::  %dk_call% dk_pathExists "%_path_%"
     ::  if %dk_pathExists% (echo %_path_% exists) else (echo %_path_% does NOT exists)
     ::  if not ERRORLEVEL 1 (echo ERRORLEVEL is 0) else (echo ERRORLEVEL is 1)

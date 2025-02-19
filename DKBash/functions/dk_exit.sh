@@ -14,7 +14,7 @@ dk_exit() {
 	[ $? -gt ${exit_code} ] && export exit_code=$?
 	[ ${1-} -gt ${exit_code} ] && export exit_code=$1
 	
-	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT: exit_code:${exit_code} ***" && dk_call dk_pause
+	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT: exit_code:${exit_code} ***" && dk_call dk_pause || $(true)
 	
 	exit ${exit_code}
 }

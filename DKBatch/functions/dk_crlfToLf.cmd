@@ -14,7 +14,7 @@ setlocal
 
 	set "_file_=%_file_:\=/%"
 	set "_file_=%_file_:C:=/c%"
-	%dk_call% dk_callDKBash dk_crlfToLf %_file_%
+	%dk_call% dk_callDKBash dk_crlfToLf "%_file_%"
 %endfunction%
 
 

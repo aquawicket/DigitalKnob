@@ -52,14 +52,14 @@ setlocal
 
     ::###### Using if return value
     %dk_call% dk_echo
-    set "childPath=C:\Program Files\Internet Explorer\en-US"
-    set "parentPath=C:\Program Files"
+    set "childPath=C:/Program Files/Internet Explorer/en-US"
+    set "parentPath=C:/Program Files"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%" result
     if "%result%" equ "true" (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
     
     %dk_call% dk_echo
-	set "childPath=/C:/Users/Administrator\digitalknob/nonexistant"
-    set "parentPath=Administrator\digitalknob"
+	set "childPath=/C:/Users/Administrator/digitalknob/nonexistant"
+    set "parentPath=Administrator/digitalknob"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%" result
     if "%result%" equ "true" (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
     ::FIXME: ERRORLEVEL is still 1 
@@ -67,14 +67,14 @@ setlocal
     
     ::###### Using if ERRORLEVEL
     %dk_call% dk_echo
-    set "childPath=C:\Users\Administrator\digitalknob\DKPowershell\functions"
+    set "childPath=C:/Users/Administrator/digitalknob/DKPowershell/functions"
     set "parentPath=/C/Users/Administrator/digitalknob"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%"
     if not ERRORLEVEL 1 (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
     
     %dk_call% dk_echo
-    set "childPath=\C:\Users\Administrator/digitalknob\"
-    set "parentPath=C:\"
+    set "childPath=/C:/Users/Administrator/digitalknob/"
+    set "parentPath=C:/"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%"
     if not ERRORLEVEL 1 (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
     ::FIXME: ERRORLEVEL is still 1 
@@ -82,13 +82,13 @@ setlocal
     
     ::###### Using && and || conditionals
     %dk_call% dk_echo
-    set "childPath=C:\Users\"
-    set "parentPath=D:\"
+    set "childPath=C:/Users/"
+    set "parentPath=D:/"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%" && (%dk_call% dk_echo "the path is a child of the parentPath") || (%dk_call% dk_echo "the path is NOT a child of the parentPath")
 
     %dk_call% dk_echo
-    set "childPath=/C:\Users\Administrator\digitalknob\DKBash\functions"
-    set "parentPath=C:\Users\Administrator\digitalknob\DKBash"
+    set "childPath=/C:/Users/Administrator/digitalknob/DKBash/functions"
+    set "parentPath=C:/Users/Administrator/digitalknob/DKBash"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%" && (%dk_call% dk_echo "the path is a child of the parentPath") || (%dk_call% dk_echo "the path is NOT a child of the parentPath")
     ::FIXME: ERRORLEVEL is still 1
 %endfunction%

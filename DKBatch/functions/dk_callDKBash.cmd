@@ -34,7 +34,6 @@ setlocal
 
 	set ALL_BUT_FIRST=%*
 	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
-	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:\=\\!)
 	
     :: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
@@ -70,11 +69,11 @@ setlocal
 ::	)
 	
 	::###### run command ######
-	if not defined USE_WSL (
-		set DKBASH_COMMAND=%BASH_EXE% -c 'export DKINIT=; export RELOAD_WITH_BASH=; . %DKBASH_FUNCTIONS_DIR%/%~1.sh; %1 %ALL_BUT_FIRST%'
-	)
+	set "BASH_FUNCTION=%DKBASH_FUNCTIONS_DIR:\=/%/%~1.sh"
 	if defined USE_WSL (
-		set DKBASH_COMMAND=%WSL_EXE% bash -c 'export DKINIT=""; export RELOAD_WITH_BASH=""; . %DKBASH_FUNCTIONS_DIR%/%~1.sh; %1 %ALL_BUT_FIRST%'
+		set DKBASH_COMMAND=%WSL_EXE% bash -c 'export DKINIT=; export RELOAD_WITH_BASH=; . %BASH_FUNCTION%; %1 %ALL_BUT_FIRST%'
+	) else (
+		set DKBASH_COMMAND=%BASH_EXE% -c 'export DKINIT=; export RELOAD_WITH_BASH=; . %BASH_FUNCTION%; %1 %ALL_BUT_FIRST%'
 	)
 	::echo DKBASH_COMMAND = %DKBASH_COMMAND%
 	echo ############################################
@@ -93,8 +92,8 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKBash dk_blank && echo true || echo error
-	::%dk_call% dk_callDKBash dk_test "#\$*+"
+	%dk_call% dk_callDKBash dk_blank
+	%dk_call% dk_callDKBash dk_test "#\$*+"
 	
     %dk_call% dk_echo
 	if defined rtn_var (%dk_call% dk_echo "dk_callDKBash = %dk_callDKBash%")

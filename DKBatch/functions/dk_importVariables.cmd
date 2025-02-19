@@ -12,7 +12,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#															https://website.com/executable.exe              				* executable file
 ::#
 ::#	IMPORT_PATH  optional 
-::#															C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+::#															C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
 ::#
 ::#	BRANCH  optional 
 ::#															develop
@@ -27,12 +27,12 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#															myZLIB
 ::#
 ::#	PATH  optional 
-::#															C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
-::#															C:\Users\Administrator\digitalknob\Development\3rdParty\myZLIB
+::#															C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+::#															C:/Users/Administrator/digitalknob/Development/3rdParty/myZLIB
 ::#
 ::#	ROOT  optional 
-::#															C:\Users\Administrator\digitalknob\Development\3rdParty
-::#															C:\Users\Administrator\MyLibraries
+::#															C:/Users/Administrator/digitalknob/Development/3rdParty
+::#															C:/Users/Administrator/MyLibraries
 ::#
 ::#	TAG  optional 
 ::#															v1.3.1
@@ -50,7 +50,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	rem %dk_call% dk_printVar URL
 	
 	set "IMPORT_PATH="
-	%dk_call% dk_getOptionValue  IMPORT_PATH %* 	&rem C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+	%dk_call% dk_getOptionValue  IMPORT_PATH %* 	&rem C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
 	rem %dk_call% dk_printVar IMPORT_PATH
 	
 	set "BRANCH="
@@ -66,11 +66,11 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	rem %dk_call% dk_printVar NAME
 	
 	set "DIR="
-	%dk_call% dk_getOptionValue  DIR         %*     &rem C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	%dk_call% dk_getOptionValue  DIR         %*     &rem C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	rem %dk_call% dk_printVar DIR
 	
 	set "ROOT="
-	%dk_call% dk_getOptionValue  ROOT        %*     &rem C:\Users\Administrator\digitalknob\Development\3rdParty
+	%dk_call% dk_getOptionValue  ROOT        %*     &rem C:/Users/Administrator/digitalknob/Development/3rdParty
 	rem %dk_call% dk_printVar ROOT
 	
 	set "TAG="
@@ -91,7 +91,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	rem PLUGIN_URL_FILE      	- from PLUGIN_URL_FILENAME											: master
 	
 	rem PLUGIN_IMPORT			- from CMAKE_CURRENT_LIST_DIR										: 1
-	rem PLUGIN_IMPORT_PATH		- from CMAKE_CURRENT_LIST_DIR										: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+	rem PLUGIN_IMPORT_PATH		- from CMAKE_CURRENT_LIST_DIR										: C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
 	rem PLUGIN_IMPORT_NAME		- from PLUGIN_IMPORT_PATH											: zlib
 	
 	rem PLUGIN_GIT				- from PLUGIN_URL													: 1
@@ -103,12 +103,12 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	rem PLUGIN_INSTALL_NAME		- from PLUGIN_IMPORT_NAME, PLUGIN_GIT_NAME or PLUGIN_URL_NAME		: zlib
 	rem PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE and PLUGIN_IMPORT_NAME						: master
 	rem PLUGIN_INSTALL_FOLDER    - from PLUGIN_INSTALL_NAME amd PLUGIN_INSTALL_VERSION				: zlib-master
-	rem PLUGIN_INSTALL_ROOT		- from default:DK3RDPARTY OR arg:ROOT								: C:\Users\Administrator\digitalknob\Development\3rdParty
-	rem PLUGIN_INSTALL_PATH		- from PLUGIN_INSTALL_ROOT and PLUGIN_INSTALL_FOLDER				: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	rem PLUGIN_INSTALL_ROOT		- from default:DK3RDPARTY OR arg:ROOT								: C:/Users/Administrator/digitalknob/Development/3rdParty
+	rem PLUGIN_INSTALL_PATH		- from PLUGIN_INSTALL_ROOT and PLUGIN_INSTALL_FOLDER				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	
-	rem <PLUGIN>				- from PLUGIN_IMPORT_NAME						:ZLIB   			: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
-	rem <CURRENT_PLUGIN>		- from <PLUGIN>									:ZLIB				: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
-	rem <PLUGIN>_DIR			- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	rem <PLUGIN>				- from PLUGIN_IMPORT_NAME						:ZLIB   			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	rem <CURRENT_PLUGIN>		- from <PLUGIN>									:ZLIB				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	rem <PLUGIN>_DIR			- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	rem <PLUGIN>_URL			- from PLUGIN_URL								:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	rem <PLUGIN>_DL_FILE		- from PLUGIN_URL_FILENAME						:ZLIB_DL_FILE		: master.zip
 	rem <PLUGIN>_VERSION        - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
@@ -116,11 +116,11 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	rem <PLUGIN>_IMPORT_NAME	- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
 	rem <PLUGIN>_BRANCH			- from PLUGIN_GIT_BRANCH						:ZLIB_BRANCH		: master
 	rem <PLUGIN>_TAG			- from PLUGIN_GIT_TAG							:ZLIB_TAG			: 
-	rem <PLUGIN>_TRIPLE_DIR		- from PLUGIN_INSTALL_PATH and target_triple	:ZLIB_TRIPLE_DIR	: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang
-	rem <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang\Debug
-	rem <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang\Debug
-	rem <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang\Debug
-	rem <PLUGIN>_RELEASE_DIR	- from PLUGIN_INSTALL_PATH and RELEASE_DIR		:ZLIB_RELEASE_DIR	: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang\Release
+	rem <PLUGIN>_TRIPLE_DIR		- from PLUGIN_INSTALL_PATH and target_triple	:ZLIB_TRIPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
+	rem <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	rem <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	rem <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	rem <PLUGIN>_RELEASE_DIR	- from PLUGIN_INSTALL_PATH and RELEASE_DIR		:ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
 	
 	
 	rem ##############################################
@@ -170,8 +170,8 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	rem #######################################################
 	rem ############### PLUGIN_IMPORT VARIABLES ###############
 	rem #######################################################
-	if not defined IMPORT_PATH  set "IMPORT_PATH=%CD%"
-	if "%IMPORT_PATH:~-1%"=="\" set "IMPORT_PATH=%IMPORT_PATH:~0,-1%"
+	if not defined IMPORT_PATH  set "IMPORT_PATH=%CD:\=/%"
+	if "%IMPORT_PATH:~-1%"=="/" set "IMPORT_PATH=%IMPORT_PATH:~0,-1%"
 	%dk_call% dk_printVar IMPORT_PATH
 
 rem ### PLUGIN_IMPORT ###
@@ -183,7 +183,7 @@ rem ### PLUGIN_IMPORT ###
 rem ### PLUGIN_IMPORT_PATH ###
 	set "PLUGIN_IMPORT_PATH="
 	set "PLUGIN_IMPORT_PATH=%IMPORT_PATH%"				
-	%dk_call% dk_printVar PLUGIN_IMPORT_PATH 								& rem PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+	%dk_call% dk_printVar PLUGIN_IMPORT_PATH 								& rem PLUGIN_IMPORT_PATH		: C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
 
 rem ### PLUGIN_IMPORT_NAME ###
 	set "PLUGIN_IMPORT_NAME="
@@ -307,7 +307,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 		%dk_call% dk_assertPath DK3RDPARTY_DIR
 		set "PLUGIN_INSTALL_ROOT=!DK3RDPARTY_DIR!"
 	)
-	%dk_call% dk_printVar PLUGIN_INSTALL_ROOT 								&rem PLUGIN_INSTALL_ROOT		: C:\Users\Administrator\digitalknob\Development\3rdParty
+	%dk_call% dk_printVar PLUGIN_INSTALL_ROOT 								&rem PLUGIN_INSTALL_ROOT		: C:/Users/Administrator/digitalknob/Development/3rdParty
 	
 	rem ### PLUGIN_INSTALL_PATH
 	set "PLUGIN_INSTALL_PATH="
@@ -316,9 +316,9 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	) else (
 		%dk_call% dk_assertVar PLUGIN_INSTALL_ROOT 
 		%dk_call% dk_assertVar PLUGIN_INSTALL_FOLDER
-		set "PLUGIN_INSTALL_PATH=!PLUGIN_INSTALL_ROOT!\!PLUGIN_INSTALL_FOLDER!"	
+		set "PLUGIN_INSTALL_PATH=!PLUGIN_INSTALL_ROOT!/!PLUGIN_INSTALL_FOLDER!"	
 	)
-	%dk_call% dk_printVar PLUGIN_INSTALL_PATH 								&rem PLUGIN_INSTALL_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	%dk_call% dk_printVar PLUGIN_INSTALL_PATH 								&rem PLUGIN_INSTALL_PATH		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 
 	
 	
@@ -347,13 +347,13 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	rem ### <PLUGIN>
 	set "!CURRENT_PLUGIN!="
 	%dk_call% dk_set !CURRENT_PLUGIN! !PLUGIN_INSTALL_PATH! 
-	rem %dk_call% dk_printVar !CURRENT_PLUGIN! 									&rem ZLIB					: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	rem %dk_call% dk_printVar !CURRENT_PLUGIN! 									&rem ZLIB					: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	
 	rem ### <PLUGIN>_DIR     ### DO NOT USE GIT_DIR ###
 	set "!CURRENT_PLUGIN!_DIR="
 	if "!CURRENT_PLUGIN!" neq "GIT" ( 
 		%dk_call% dk_set !CURRENT_PLUGIN!_DIR !PLUGIN_INSTALL_PATH! 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DIR 							& rem ZLIB_DIR				: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DIR 							& rem ZLIB_DIR				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	)
 	
 	rem ### <PLUGIN>_URL
@@ -403,36 +403,36 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	rem ### <PLUGIN>_TRIPLE_DIR
 	set "!CURRENT_PLUGIN!_TRIPLE_DIR="
 	if defined target_triple (
-		%dk_call% dk_set !CURRENT_PLUGIN!_TRIPLE_DIR "!PLUGIN_INSTALL_PATH!\!target_triple!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_TRIPLE_DIR 					&rem ZLIB_TRIPLE_DIR	: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang
+		%dk_call% dk_set !CURRENT_PLUGIN!_TRIPLE_DIR "!PLUGIN_INSTALL_PATH!/!target_triple!" 
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_TRIPLE_DIR 					&rem ZLIB_TRIPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
 	)  
 	
 	rem ### <PLUGIN>_CONFIG_DIR
 	set "!CURRENT_PLUGIN!_CONFIG_DIR="
 	if defined CONFIG_PATH (
-		%dk_call% dk_set !CURRENT_PLUGIN!_CONFIG_DIR "!PLUGIN_INSTALL_PATH!\!CONFIG_PATH!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_CONFIG_DIR 					&rem ZLIB_CONFIG_DIR	: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang\Debug
+		%dk_call% dk_set !CURRENT_PLUGIN!_CONFIG_DIR "!PLUGIN_INSTALL_PATH!/!CONFIG_PATH!" 
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_CONFIG_DIR 					&rem ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	)  
 	
 	rem ### <PLUGIN>_BUILD_DIR
 	set "!CURRENT_PLUGIN!_BUILD_DIR="
 	if defined BUILD_PATH (
-		%dk_call% dk_set !CURRENT_PLUGIN!_BUILD_DIR "!PLUGIN_INSTALL_PATH!\!BUILD_PATH!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_BUILD_DIR 					&rem ZLIB_BUILD_DIR	: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang\Debug
+		%dk_call% dk_set !CURRENT_PLUGIN!_BUILD_DIR "!PLUGIN_INSTALL_PATH!/!BUILD_PATH!" 
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_BUILD_DIR 					&rem ZLIB_BUILD_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	)  
 	
 	rem ### <PLUGIN>_DEBUG_DIR
 	set "!CURRENT_PLUGIN!_DEBUG_DIR="
 	if defined DEBUG_DIR (
-		%dk_call% dk_set !CURRENT_PLUGIN!_DEBUG_DIR "!PLUGIN_INSTALL_PATH!\!target_triple!\!DEBUG_DIR!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DEBUG_DIR 					&rem ZLIB_DEBUG_DIR	: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang\Debug
+		%dk_call% dk_set !CURRENT_PLUGIN!_DEBUG_DIR "!PLUGIN_INSTALL_PATH!/!target_triple!/!DEBUG_DIR!" 
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DEBUG_DIR 					&rem ZLIB_DEBUG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 	)  
 	
 	rem ### <PLUGIN>_RELEASE_DIR
 	set "!CURRENT_PLUGIN!_RELEASE_DIR="
 	if defined RELEASE_DIR (
-		%dk_call% dk_set !CURRENT_PLUGIN!_RELEASE_DIR "!PLUGIN_INSTALL_PATH!\!target_triple!\!RELEASE_DIR!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_RELEASE_DIR 					&rem ZLIB_RELEASE_DIR	: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_64_clang\Release
+		%dk_call% dk_set !CURRENT_PLUGIN!_RELEASE_DIR "!PLUGIN_INSTALL_PATH!/!target_triple!/!RELEASE_DIR!" 
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_RELEASE_DIR 					&rem ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
 	)  
 
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN! 

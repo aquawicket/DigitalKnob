@@ -16,7 +16,7 @@ dk_crlfToLf() {
 	
 	#cat ${_file_} | sed 's/\r$//' > ${_file_}
 
-	sed -i 's/\r//g' ${_file_}
+	sed -i 's/\r//g' ${_file_} & $(true)
 }
 
 
