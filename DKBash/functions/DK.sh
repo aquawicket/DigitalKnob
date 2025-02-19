@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
-[ -n "${DKINIT-}" ] && return 0 || export DKINIT=1  # include_guard
+[ -n "${DKINIT-}" ] && return 0
+export DKINIT=1
+$(true)
+
 #echo "0 = $0"
 
 ### Print Shell Path ad Version ###
@@ -65,12 +68,14 @@ DK(){
 #	/mnt/c/Windows/System32/cmd.exe /c 'wsl --shutdown'
 
 	
-	
 	############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
-	
+
     ###### DKTEST MODE ######
-    [ ! "${DKSCRIPT_EXT}" = ".sh" ] && exit 0 & exit
+    if [ ! "${DKSCRIPT_EXT}" = ".sh" ]; then
+		$(true)
+		exit 0
+	fi
 	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || exit 0
     dk_call dk_echo
     dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"

@@ -77,7 +77,10 @@ setlocal
 		set DKBASH_COMMAND=%WSL_EXE% bash -c 'export DKINIT=""; export RELOAD_WITH_BASH=""; . %DKBASH_FUNCTIONS_DIR%/%~1.sh; %1 %ALL_BUT_FIRST%'
 	)
 	::echo DKBASH_COMMAND = %DKBASH_COMMAND%
-	%dk_call% dk_commandToVariable "%DKBASH_COMMAND%" && echo echo "errorlevel = %errorlevel%" || echo echo "errorlevel = %errorlevel%"
+	echo ############################################
+	%dk_call% dk_commandToVariable "%DKBASH_COMMAND%"
+	echo ############################################
+	echo echo "errorlevel = %errorlevel%"
 
 	endlocal & set "dk_callDKBash=%dk_commandToVariable%"
 %endfunction%
