@@ -3,16 +3,22 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 set "PRINT_COMMANDS=1"
 ::####################################################################
-::# dk_commandToVariable(command, args, rtn_var)
+::# dk_commandToVariable(command_string)
+::# dk_commandToVariable(command)
 ::#
 ::#    reference: https://stackoverflow.com/a/5807218
 ::#
 :dk_commandToVariable
 setlocal enableDelayedExpansion
-	%dk_call% dk_debugFunc 2 3
- 
+	%dk_call% dk_debugFunc 1 99
+	
+	set "_command_=%*"
+	
+	::###### _last_arg_ ######
+	for %%A in (%*) do set _last_arg_=%%A
+
     set /a "i=0"
-    for /f "usebackq delims=" %%Z in (`"%~1" %~2 ^& call echo %%^^errorlevel%%`) do (
+    for /f "usebackq delims=" %%Z in (`%_command_% ^& call echo %%^^errorlevel%%`) do (
         rem echo %%Z
 		set "dk_commandToVariable[!i!]=%%Z"
 		set /a "i+=1"
@@ -40,23 +46,20 @@ setlocal enableDelayedExpansion
 
 	::############### Print call details ###############
 	if defined PRINT_COMMANDS (
-						echo ###############################
-		if "%~3" neq "" echo ## command:^> '%~1 %~2'
-		if "%~3" equ "" echo ## command:^> '%~1'
-						echo ##  output: %dk_commandToVariable%
-						echo ## rtncode: %errorcode%
-						echo:##
+		echo ###############################
+		echo ## command:^> %*
+		echo ##  output: %dk_commandToVariable%
+		echo ## rtncode: %errorcode%
+		echo:##
 	)
 	::##################################################
 
     :: return the last line from the programs output
 	endlocal & (
 		set "dk_commandToVariable=%dk_commandToVariable%"
-		if "%~3" neq "" (
-			set "%3=%dk_commandToVariable%"
-		) else (
-			if "%~2" neq "" set "%2=%dk_commandToVariable%"
-		)
+		rem if defined _last_arg_ (
+		rem 	if "%_last_arg_%"=="RTNVAR" (set "%_last_arg_%=%dk_commandToVariable%")
+		rem )
 	)
 %endfunction%
     
@@ -72,7 +75,11 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_set myCommand ver
-    %dk_call% dk_commandToVariable "%myCommand%" myVariable
-    %dk_call% dk_printVar myVariable
+    %dk_call% dk_commandToVariable "%myCommand%" RTNVAR
+	%dk_call% dk_printVar dk_commandToVariable
+	%dk_call% dk_printVar RTNVAR
+	
+	%dk_call% dk_set myCommand "C:\Users\Administrator\.dk\DKC_BUILD_DIR\dk_test.exe" "var one" "var two" "var three"
+    %dk_call% dk_commandToVariable "%myCommand%"
 	%dk_call% dk_printVar dk_commandToVariable
 %endfunction%

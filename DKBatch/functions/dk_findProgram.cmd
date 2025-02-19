@@ -23,9 +23,12 @@ setlocal enableDelayedExpansion
 		set "recursive="
 	)
     
-	%dk_call% dk_commandToVariable "where" "%recursive% %pattern% %name%" value 2>nul
+	%dk_call% dk_commandToVariable where %recursive% %pattern% %name%
 	
-    endlocal & set "%~1=%value%"
+    endlocal & (
+		rem set "dk_findProgram=%dk_commandToVariable%"
+		set "%~1=%dk_commandToVariable%"
+	)
 
 ::DEBUG
 ::	%dk_call% printVar %1

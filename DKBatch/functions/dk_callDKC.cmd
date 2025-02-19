@@ -23,7 +23,6 @@ setlocal enableDelayedExpansion
 	::###### _args_ ######
 	set _args_=%*
 	if defined _args_ (set _args_=!_args_:*%1=!)
-	%dk_call% dk_assertVar _args_
 	
 	::###### _last_arg_ ######
 	for %%a in (%*) do set _last_arg_=%%a

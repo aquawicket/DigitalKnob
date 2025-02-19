@@ -7,6 +7,12 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main(int argc, char **argv) {
-	return dk_test(1, "test dk_test");
+	
+	for(int n=0; n<argc; ++n){
+		printf("main(%d, %s)\n", n, argv[n]);
+	}
+
+	return dk_test(argc, argv);
+	//return dk_test(3, "one", "two", "three");
 }
 #endif

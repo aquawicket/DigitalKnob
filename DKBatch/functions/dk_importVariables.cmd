@@ -346,8 +346,8 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 
 	rem ### <PLUGIN>
 	set "!CURRENT_PLUGIN!="
-	%dk_call% dk_set !CURRENT_PLUGIN! !PLUGIN_INSTALL_PATH! 
-	rem %dk_call% dk_printVar !CURRENT_PLUGIN! 									&rem ZLIB					: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	%dk_call% dk_set !CURRENT_PLUGIN! !PLUGIN_INSTALL_PATH!
+	%dk_call% dk_debug "!CURRENT_PLUGIN! = '!%CURRENT_PLUGIN%!'" 					&rem ZLIB					: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	
 	rem ### <PLUGIN>_DIR     ### DO NOT USE GIT_DIR ###
 	set "!CURRENT_PLUGIN!_DIR="

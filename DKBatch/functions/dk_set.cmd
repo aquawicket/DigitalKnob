@@ -8,9 +8,17 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :dk_set
 ::setlocal
 ::    %dk_call% dk_debugFunc 1 2
- 
-    set "%~1=%~2"
+	::echo dk_set(%*)
+	set "name=%~1"
+	set "_args_=%*"
+	echo _args_ = '%_args_%'
+	if defined _args_ (set "_args_=!_args_:%name% =!")
 	
+	echo _args_ = '%_args_%'
+	if "%_args_:~-1%"==" " set "_args_=%_args_:~0,-1%"
+    set "%name%=%_args_%"
+	
+
 ::DEBUG
 ::    %dk_call% dk_printVar %~1
 %endfunction%

@@ -13,23 +13,29 @@
 #include <string.h>
 #include "dk_DKHOME_DIR.h"
 #include "dk_echo.h"
-int dk_test(int __ARGC__, ...){
+int dk_test(int argc, char **argv){
 	//dk_debugFunc 0 99
 	
 	printf("################# dk_test.h ################\n");
-	
+
+/*	
 	//### args[n] ###
-	va_list ap;
-	va_start(ap, __ARGC__); /* Before C23: Requires the last fixed parameter (to get the address) */
-	char __ARGV__[256];
+	va_list args_ptr;
+	va_start(args_ptr, argc); // Before C23: Requires the last fixed parameter (to get the address)
+	char __ARGV__[1028];
 	strcpy(__ARGV__,"");
-	for (int j = 0; j < __ARGC__; j++) { 
-		char* temp = va_arg(ap, char*);  /* Increments ap to the next argument. */
+	for (int j = 0; j < argc; j++) { 
+		char* temp = va_arg(args_ptr, char*);  // Increments args_ptr to the next argument.
 		printf("               arg%d = %s\n", j, temp);
 		strcat(__ARGV__, temp);
 		strcat(__ARGV__, ";");
 	}
-	va_end(ap);
+	va_end(args_ptr);
+*/	
+	for(int n=0; n<argc; ++n){
+		dk_echo("               arg%d = %s\n", n, argv[n]);
+	}
+	
 //	dk_echo("         ERRORLEVEL = %s\n", ERRORLEVEL);
 //	dk_echo("                LVL = %s\n", LVL);
 	dk_echo("           __DATE__ = %s\n", DKDATE);
@@ -38,8 +44,8 @@ int dk_test(int __ARGC__, ...){
 	dk_echo("           __FILE__ = %s\n", __FILE__);
 	dk_echo("           __LINE__ = %d\n", __LINE__);
 	dk_echo("       __FUNCTION__ = %s\n", __FUNCTION__);
-	dk_echo("           __ARGC__ = %d\n", __ARGC__);
-	dk_echo("           __ARGV__ = %s\n", __ARGV__);
+	dk_echo("               argc = %d\n", argc);
+//	dk_echo("           __ARGV__ = %s\n", __ARGV__);
 	dk_echo("      DKSCRIPT_PATH = %s\n", DKSCRIPT_PATH);
 	dk_echo("       DKSCRIPT_DIR = %s\n", DKSCRIPT_DIR);
 	dk_echo("      DKSCRIPT_FILE = %s\n", DKSCRIPT_FILE);
@@ -56,7 +62,7 @@ int dk_test(int __ARGC__, ...){
 	dk_echo("           DKBRANCH = %s\n", DKBRANCH);
 	dk_echo("       DKBRANCH_DIR = %s\n", DKBRANCH_DIR);
 	dk_echo("     DK3RDPARTY_DIR = %s\n", DK3RDPARTY_DIR);
-	dk_echo("         DKCPP_APPS_DIR = %s\n", DKCPP_APPS_DIR);
+	dk_echo("     DKCPP_APPS_DIR = %s\n", DKCPP_APPS_DIR);
 	dk_echo("            DKC_DIR = %s\n", DKC_DIR);
 	dk_echo("  DKC_FUNCTIONS_DIR = %s\n", DKC_FUNCTIONS_DIR);
 	dk_echo(" DKC_FUNCTIONS_DIR_ = %s\n", DKC_FUNCTIONS_DIR_);

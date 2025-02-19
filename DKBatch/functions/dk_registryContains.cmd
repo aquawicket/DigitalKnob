@@ -9,9 +9,13 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2
  
-	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
+	set "_reg_path_=%~1"
+ 
+	set "REG_EXE=%SYSTEMROOT:\=/%/System32/reg.exe"
+	%dk_call% dk_assertPath REG_EXE
+	
+	for /f "usebackq delims=" %%a in (`"%REG_EXE:/=\%" query "%_reg_path_:/=\%"`) do (
 		set "line=%%a"
-		
 		if not "x!line:%~2=!x" == "x!line!x" (
 			exit /b 0
 		)
