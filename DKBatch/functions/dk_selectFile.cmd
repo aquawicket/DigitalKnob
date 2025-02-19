@@ -3,15 +3,20 @@
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# dk_selectFile(rtn_var)
+::# dk_selectFile(<rtn_var>:optional)
 ::#
 :dk_selectFile
 setlocal
-	%dk_call% dk_debugFunc 1 
+	%dk_call% dk_debugFunc 1
+	
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
     for /f "delims=" %%I in ('%POWERSHELL_EXE% -noprofile "iex (${%~f0} | out-string)"') do (
-		endlocal & set %1=%%~I
+		set "dk_selectFile=%%~I"
     )
+	endlocal & (
+		set "dk_selectFile=%dk_selectFile:\=/%"
+		if not "%~1"=="" (set "%~1=%dk_selectFile:\=/%")
+	)
 %endfunction%
 
 
@@ -23,8 +28,9 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_selectFile myFile
-    %dk_call% dk_echo "myFile = %myFile%"
+    %dk_call% dk_selectFile mySelection
+    %dk_call% dk_echo "dk_selectFile = '%dk_selectFile%'"
+	%dk_call% dk_echo "mySelection = '%mySelection%'"
 %endfunction%
 
 

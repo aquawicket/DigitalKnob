@@ -2,23 +2,29 @@
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# dk_selectFolder(rtn_var)
+::# dk_selectFolder(<rtn_var>:optional)
 ::#
 :dk_selectFolder
 setlocal
 	%dk_call% dk_debugFunc 1
 	
-    %dk_call% dk_assertPath "%systemroot%\system32\mshta.exe"
+	set "MSHTA_EXE=%systemroot%/system32/mshta.exe"
+    %dk_call% dk_assertPath MSHTA_EXE
+	
     for /f "usebackq delims=" %%i in (
-        `@"%systemroot%\system32\mshta.exe" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Select Folder:',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
+        `@"%MSHTA_EXE%" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Select Folder:',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
         1^|more`
-    ) do set "sFolderName=%%i"
-    if not defined sFolderName (
+    ) do set "dk_selectFolder=%%i"
+	
+    if not defined dk_selectFolder (
         %dk_call% dk_echo "no folder selected"
         %return%
     )
     
-    endlocal & set "%~1=%sFolderName%"
+    endlocal & (
+		set "dk_selectFolder=%dk_selectFolder:\=/%"
+		if not "%~1"=="" (set "%~1=%dk_selectFolder:\=/%")
+	)
 %endfunction%
 
 
@@ -32,5 +38,6 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_selectFolder myFolder
-    %dk_call% dk_echo "myFolder = %myFolder%"
+	%dk_call% dk_echo "dk_selectFolder = '%dk_selectFolder%'"
+    %dk_call% dk_echo "myFolder = '%myFolder%'"
 %endfunction%

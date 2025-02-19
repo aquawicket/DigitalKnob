@@ -11,7 +11,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_debugFunc 0 1
     
 	::############ SET ############
-	if "%~1" neq "" ( 
+	if not "%~1"=="" ( 
 		set "DIGITALKNOB_DIR=%~1"
 		%return%
 	)
@@ -22,9 +22,8 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     
 	::### DIGITALKNOB_DIR ###
 	%dk_call% dk_validatePath DKHOME_DIR    "%dk_call% dk_DKHOME_DIR"
-	::set "DIGITALKNOB_DIR=%DKHOME_DIR%\%DIGITALKNOB%"
 	set "DIGITALKNOB_DIR=%DKHOME_DIR%/%DIGITALKNOB%"
-    if not exist "%DIGITALKNOB_DIR%"    %dk_call% dk_makeDirectory "%DIGITALKNOB_DIR%"
+    if not exist "%DIGITALKNOB_DIR%" (%dk_call% dk_makeDirectory "%DIGITALKNOB_DIR%")
 
 	%dk_call% dk_assertPath DIGITALKNOB_DIR
 %endfunction%
@@ -42,10 +41,10 @@ setlocal
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Getting DIGITALKNOB_DIR . . ."
 	%dk_call% dk_DIGITALKNOB_DIR
-	%dk_call% dk_printVar DIGITALKNOB_DIR
+	%dk_call% dk_echo "DIGITALKNOB_DIR = %DIGITALKNOB_DIR%"
 	
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Setting DIGITALKNOB_DIR . . ."
 	%dk_call% dk_DIGITALKNOB_DIR "C:/digitalknob"
-	%dk_call% dk_printVar DIGITALKNOB_DIR 
+	%dk_call% dk_echo "DIGITALKNOB_DIR = %DIGITALKNOB_DIR%"
 %endfunction%

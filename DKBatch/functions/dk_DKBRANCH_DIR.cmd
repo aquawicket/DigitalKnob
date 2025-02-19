@@ -12,7 +12,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
     
-	if "%~1" neq "" (
+	if not "%~1"=="" (
 		set "DKBRANCH_DIR=%~1"
 		%return%
 	)
@@ -98,10 +98,10 @@ setlocal
     %dk_call% dk_echo
 	%dk_call% dk_echo "Test Getting DKBRANCH_DIR . . ."
 	%dk_call% dk_DKBRANCH_DIR
-	%dk_call% dk_printVar DKBRANCH_DIR
+	%dk_call% dk_echo "DKBRANCH_DIR = %DKBRANCH_DIR%"
 	
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Setting DKBRANCH_DIR . . ."
 	%dk_call% dk_DKBRANCH_DIR "C:/DK/Development"
-	%dk_call% dk_printVar DKBRANCH_DIR 
+	%dk_call% dk_echo "DKBRANCH_DIR = %DKBRANCH_DIR%"
 %endfunction%

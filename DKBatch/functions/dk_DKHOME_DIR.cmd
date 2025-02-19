@@ -10,7 +10,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     %dk_call% dk_debugFunc 0 1
 
 	::############ SET ############
-	if "%~1" neq "" ( 
+	if not "%~1"=="" ( 
 		set "DKHOME_DIR=%~1"
 		%return%
 	)
@@ -23,8 +23,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	rem if not defined HOMEDRIVE        (!dk_call! dk_warning "HOMEDRIVE is invalid")
 	rem if not defined HOMEPATH         (!dk_call! dk_warning "HOMEPATH is invalid")
 	
-	set "DKHOME_DIR=%USERPROFILE%"
-	set "DKHOME_DIR=%DKHOME_DIR:\=/%"
+	set "DKHOME_DIR=%USERPROFILE:\=/%"
 	
 	rem	if exist "!WSLPATH_EXE!"        (!dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR)
 
@@ -44,10 +43,10 @@ setlocal
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Getting DKHOME_DIR . . ."
 	%dk_call% dk_DKHOME_DIR
-	%dk_call% dk_printVar DKHOME_DIR
+	%dk_call% dk_echo "DKHOME_DIR = %DKHOME_DIR%"
 	
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Setting DKHOME_DIR . . ."
 	%dk_call% dk_DKHOME_DIR "C:/"
-	%dk_call% dk_printVar DKHOME_DIR 
+	%dk_call% dk_echo "DKHOME_DIR = %DKHOME_DIR%"
 %endfunction%
