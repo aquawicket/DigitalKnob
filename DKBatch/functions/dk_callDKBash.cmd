@@ -71,7 +71,7 @@ setlocal
 	
 	::###### run command ######
 	if not defined USE_WSL (
-		set DKBASH_COMMAND=%BASH_EXE% -c 'export DKINIT=""; export RELOAD_WITH_BASH=""; . %DKBASH_FUNCTIONS_DIR%/%~1.sh; %1 %ALL_BUT_FIRST%'
+		set DKBASH_COMMAND=%BASH_EXE% -c 'export DKINIT=; export RELOAD_WITH_BASH=; . %DKBASH_FUNCTIONS_DIR%/%~1.sh; %1 %ALL_BUT_FIRST%'
 	)
 	if defined USE_WSL (
 		set DKBASH_COMMAND=%WSL_EXE% bash -c 'export DKINIT=""; export RELOAD_WITH_BASH=""; . %DKBASH_FUNCTIONS_DIR%/%~1.sh; %1 %ALL_BUT_FIRST%'
