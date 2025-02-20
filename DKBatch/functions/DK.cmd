@@ -5,11 +5,11 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 echo:
 for %%Z in ("%COMSPEC%") do (set "DKSHELL=%%~nZ")
 for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")
-set "DKSHELL_PATH=%COMSPEC:\=/%"
+if defined COMSPEC (set "DKSHELL_PATH=%COMSPEC:\=/%")
 set "ESC="                         &:: escape character
 echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
 echo DKSHELL_PATH = %DKSHELL_PATH%
-set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
+if defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
 echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 echo:
 set "DKBATCH_FUNCTIONS_DIR_=%~dp0"
