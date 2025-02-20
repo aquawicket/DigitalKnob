@@ -49,7 +49,7 @@ setlocal
         %dk_call% dk_echo
     )
         
-    if "%commit_msg%"=="" set "commit_msg=git commit %date%"
+    if "%commit_msg%"=="" (set "commit_msg=git commit %date%")
         
     %dk_call% dk_echo
     %dk_call% dk_echo "git commit '%commit_msg%'"
