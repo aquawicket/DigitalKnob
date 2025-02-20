@@ -30,7 +30,7 @@ setlocal
     
     if exist "%_to_%" (
         if "%OVERWRITE%" neq "1" (
-            %dk_call% dk_error "dk_copy Cannot copy file. Destiantion exists and OVERWRITE is not set"
+            %dk_call% dk_error "dk_copy Cannot copy file. Destiantion already exists and OVERWRITE is not set"
         ) 
         %dk_call% dk_delete %_to_%
     )

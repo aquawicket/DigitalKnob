@@ -35,11 +35,11 @@ setlocal
     
     %dk_call% dk_set _command_ echo
     %dk_call% dk_commandExists "%_command_%" result
-    if "%result%" equ "true" (echo %_command_% exists) else (echo %_command_% does NOT exists)
+    if "%result%" equ "true" (echo %_command_% exists) else (echo %_command_% does NOT exist)
     
     %dk_call% dk_set _command_ NonExistentCommand
     %dk_call% dk_commandExists "%_command_%" result
-    if "%result%" equ "true" (echo %_command_% exists) else (echo %_command_% does NOT exists)
+    if "%result%" equ "true" (echo %_command_% exists) else (echo %_command_% does NOT exist)
     ::FIXME: ERRORLEVEL is still 1 
     
     
@@ -48,11 +48,11 @@ setlocal
     
     %dk_call% dk_set _command_ echo
     %dk_call% dk_commandExists "%_command_%"
-    if not ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT exists)
+    if not ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT exist)
     
     %dk_call% dk_set _command_ NonExistentCommand
     %dk_call% dk_commandExists "%_command_%"
-    if not ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT exists)
+    if not ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT exist)
     ::FIXME: ERRORLEVEL is still 1 
     
     
@@ -60,10 +60,10 @@ setlocal
     %dk_call% dk_echo
     
     %dk_call% dk_set _command_ echo 
-    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT exists)
+    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT exist)
     
     %dk_call% dk_set _command_ NonExistentCommand   
-    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT exists)
+    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT exist)
     ::FIXME: ERRORLEVEL is still 1 
 %endfunction%   
     

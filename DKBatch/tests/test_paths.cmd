@@ -35,7 +35,7 @@ set "IN=%WINDIR%\NonExistent.file
 	echo IN         = "%IN%"
 
 	%dk_call% dk_pathExists "%IN%"
-	%dk_call% dk_pathExists "%IN%" && (echo "%IN%" exists) || (echo "%IN%" does NOT exists)
+	%dk_call% dk_pathExists "%IN%" && (echo "%IN%" exists) || (echo "%IN%" does NOT exist)
 	
 	call :get_variable "%IN%" get_variable
 	echo get_variable   = %get_variable%
