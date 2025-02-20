@@ -2,14 +2,14 @@
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 %dk_call% dk_validate DKIMPORTS_DIR     	   "%dk_call% dk_DKIMPORTS_DIR"
-if not exist "%DKIMPORTS_DIR%\git\dkconfig.txt" %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt"  "%DKIMPORTS_DIR%\git\dkconfig.txt"
+if not exist "%DKIMPORTS_DIR%/git/dkconfig.txt" %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt"  "%DKIMPORTS_DIR%\git\dkconfig.txt"
 
-%dk_call% dk_getFileParam %DKIMPORTS_DIR%\git\dkconfig.txt GIT_DL_WIN_X86
-%dk_call% dk_getFileParam %DKIMPORTS_DIR%\git\dkconfig.txt GIT_DL_WIN_X86_64
+%dk_call% dk_getFileParam %DKIMPORTS_DIR%/git/dkconfig.txt GIT_DL_WIN_X86
+%dk_call% dk_getFileParam %DKIMPORTS_DIR%/git/dkconfig.txt GIT_DL_WIN_X86_64
 
 :: https://stackoverflow.com/a/67714373
-if not defined GIT_CONFIG_SYSTEM  (set GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem)
-if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal)
+if not defined GIT_CONFIG_SYSTEM  (set GIT_CONFIG_SYSTEM=%DKCACHE_DIR%\.gitSystem)
+if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGlobal)
 
 ::####################################################################
 ::# dk_installGit()
@@ -33,12 +33,12 @@ if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	if defined GIT_DIR  %dk_call% dk_fatal "ERROR: GIT_DIR should not be set."
 	::### DO NOT USE GIT_DIR ###
 	
-    set "GIT_EXE=%GIT%\bin\git.exe"
-	set "BASH_EXE=%GIT%\bin\bash.exe"
-    set "GITBASH_EXE=%GIT%\git-bash.exe"
-	set "PATCH_EXE=%GIT%\usr\bin\patch.exe"
+    set "GIT_EXE=%GIT%/bin/git.exe"
+	set "BASH_EXE=%GIT%/bin/bash.exe"
+    set "GITBASH_EXE=%GIT%/git-bash.exe"
+	set "PATCH_EXE=%GIT%/usr/bin/patch.exe"
     %dk_call% dk_firewallAllow "GIT" "%GIT%/mingw64/libexec/git-core/git-remote-https.exe"
-	%dk_call% dk_firewallAllow "lsass" "%WINDIR%\System32\lsass.exe"
+	%dk_call% dk_firewallAllow "lsass" "%WINDIR:\=/%/System32/lsass.exe"
 	 
     if exist "%GIT_EXE%" %return%
     %dk_call% dk_echo   

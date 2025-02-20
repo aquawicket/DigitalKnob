@@ -13,7 +13,7 @@ setlocal
 	
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	cd %DKBRANCH_DIR%
-    "%GIT_EXE%" clean -fdx
+    "%GIT_EXE:/=\%" clean -fdx
 %endfunction%
 
 

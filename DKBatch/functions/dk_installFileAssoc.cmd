@@ -90,6 +90,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_installFileAssoc ".txt" "C:\Windows\System32\notepad.exe"
+    %dk_call% dk_installFileAssoc ".txt" "%WINDIR%\System32\notepad.exe"
 %endfunction%
     

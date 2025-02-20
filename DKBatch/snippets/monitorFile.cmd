@@ -3,7 +3,7 @@
 :main
     setlocal
 
-	set "file=C:\Users\Administrator\digitalknob\Development\TODO.txt"
+	set "file=%USERPROFILE%\digitalknob\Development\TODO.txt"
 	
     if "%file%"=="" goto :help
     if not exist "%file%" (

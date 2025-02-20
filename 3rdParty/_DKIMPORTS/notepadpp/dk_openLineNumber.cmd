@@ -4,7 +4,7 @@ set "NOTEPADPP_EXE=C:\Program Files\Notepad++\notepad++.exe"
 
 
 
-"%NOTEPADPP_EXE%" C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\notepadpp\dk_openLineNumber.cmd -n23
+"%NOTEPADPP_EXE%" %USERPROFILE%\digitalknob\Development\3rdParty\_DKIMPORTS\notepadpp\dk_openLineNumber.cmd -n23
 
 
 

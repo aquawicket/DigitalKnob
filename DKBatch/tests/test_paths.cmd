@@ -8,12 +8,12 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 :main
 ::	set IN=%0
-set "IN=C:\Windows\NonExistent.file
+set "IN=%WINDIR%\NonExistent.file
 ::	set "IN=%0"
 ::	set IN=%~0
 ::	set "IN=%~0"
 ::	set "IN=%ProgramFiles%\WSL\wsl.exe"
-::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\tests\test_blank.cmd"
+::	set "IN=%USERPROFILE%\digitalknob\Development\DKBatch\tests\test_blank.cmd"
 ::	set "IN=C:/Program Files/WSL/wsl.exe"
 ::  set "IN=test_dk_echo.cmd"
 ::  set "IN=/test_dk_echo.cmd"
@@ -28,9 +28,9 @@ set "IN=C:\Windows\NonExistent.file
 ::	set "IN=..//functions//DK.cmd"
 ::	set "IN=..\..\DKBatch\functions\DK.cmd"
 ::	set "IN=..\..\DKBatch\..\Batch\functions\DK.cmd"
-::	set IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\
-::	set "IN=C:/Users/aquawicket/digitalknob/Development/DKBatch/DK.cmd"
-::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch"
+::	set IN=%USERPROFILE%\digitalknob\Development\DKBatch\
+::	set "IN=%USERPROFILE%/digitalknob/Development/DKBatch/DK.cmd"
+::	set "IN=%USERPROFILE%\digitalknob\Development\DKBatch"
 
 	echo IN         = "%IN%"
 

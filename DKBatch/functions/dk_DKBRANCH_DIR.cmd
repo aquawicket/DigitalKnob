@@ -24,7 +24,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	rem for %%I in (.) do set "CURRENT_FOLDER=%%~nxI"                &rem get the current folder
     rem	if not defined GIT_EXE (%dk_call% dk_installGit)
    	rem    if exist "%CD%\.git" (
-   	rem        "%GIT_EXE%" branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (
+   	rem        "%GIT_EXE:/=\%" branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (
    	rem            set "DKBRANCH=%CURRENT_FOLDER%"
    	rem        )
    	rem    )

@@ -14,11 +14,14 @@ setlocal
 
 	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	::%dk_call% dk_cd "%DKBRANCH_DIR%"
-	"%GIT_EXE%" -C %DKBRANCH_DIR% remote update
+	"%GIT_EXE:/=\%" -C %DKBRANCH_DIR% remote update
     
-    %dk_call% dk_commandToVariable "%GIT_EXE%" "-C %DKBRANCH_DIR% rev-parse --abbrev-ref HEAD" branch
-    %dk_call% dk_commandToVariable "%GIT_EXE%" "-C %DKBRANCH_DIR% rev-list --count origin/%branch%..%branch%" ahead
-    %dk_call% dk_commandToVariable "%GIT_EXE%" "-C %DKBRANCH_DIR% rev-list --count %branch%..origin/%branch%" behind
+    %dk_call% dk_commandToVariable "%GIT_EXE:/=\%" "-C %DKBRANCH_DIR% rev-parse --abbrev-ref HEAD"
+	set "branch=%dk_commandToVariable%"
+    %dk_call% dk_commandToVariable "%GIT_EXE:/=\%" "-C %DKBRANCH_DIR% rev-list --count origin/%branch%..%branch%"
+	set "ahead=%dk_commandToVariable%"
+    %dk_call% dk_commandToVariable "%GIT_EXE:/=\%" "-C %DKBRANCH_DIR% rev-list --count %branch%..origin/%branch%"
+	set "behind=%dk_commandToVariable%"
 
     %dk_call% dk_echo "%ahead% commits ahead, %behind% commits behind"
 %endfunction%

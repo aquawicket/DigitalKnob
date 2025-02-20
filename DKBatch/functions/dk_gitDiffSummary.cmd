@@ -10,7 +10,7 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
-    "%GIT_EXE%" -C %DKBRANCH_DIR% --no-pager diff --compact-summary
+    "%GIT_EXE:/=\%" -C %DKBRANCH_DIR% --no-pager diff --compact-summary
 %endfunction%
 
 

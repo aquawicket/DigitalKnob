@@ -141,14 +141,14 @@ exit /b 0
 	::### .java ###
 	::### .js ###
 	if "%~1"==".js" (
-		(ftype JSFile=C:\Windows\System32\WScript.exe "%%1" %%*)
+		(ftype JSFile=%WINDIR%\System32\WScript.exe "%%1" %%*)
 		(assoc .js=JSFile)
 		rem %windir%\system32\reg.exe import "%DKJAVASCRIPT_DIR%\default.reg"
 	)
 	::### .php ###
 	::### .ps1 ###
 	if "%~1"==".ps1" (
-		(ftype Microsoft.PowerShellScript.1="C:\Windows\System32\notepad.exe" "%%1")
+		(ftype Microsoft.PowerShellScript.1="%WINDIR%\System32\notepad.exe" "%%1")
 		(assoc .ps1=Microsoft.PowerShellScript.1)
 		rem %windir%\system32\reg.exe import "%DKPOWERSHELL_DIR%\default.reg"
 	)

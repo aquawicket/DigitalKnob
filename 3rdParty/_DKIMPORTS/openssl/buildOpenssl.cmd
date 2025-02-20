@@ -26,8 +26,8 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		%MSYS2%\clang64\bin\mingw32-make -C %OPENSSL%\win_x86_64_clang\Debug
 	)
 	if "%TARGET_TRIPLE%"=="win_x86_msvc" (
-		cd %OPENSSL%\%TARGET_TRIPLE%\%TARGET_TYPE% && set PATH=%NASM%; & C:\Users\Administrator\digitalknob\Development\3rdParty\strawberry-perl-5.40.0.1-64bit-portable\perl\bin\perl.exe ../../Configure no-shared --debug VC-WIN32
-		C:\Users\Administrator\digitalknob\Development\3rdParty\strawberry-perl-5.40.0.1-64bit-portable\perl\bin\perl.exe configdata.pm --dump
+		cd %OPENSSL%\%TARGET_TRIPLE%\%TARGET_TYPE% && set PATH=%NASM%; & %USERPROFILE%\digitalknob\Development\3rdParty\strawberry-perl-5.40.0.1-64bit-portable\perl\bin\perl.exe ../../Configure no-shared --debug VC-WIN32
+		%USERPROFILE%\digitalknob\Development\3rdParty\strawberry-perl-5.40.0.1-64bit-portable\perl\bin\perl.exe configdata.pm --dump
 	)
 
 	

@@ -46,4 +46,4 @@ setlocal
 
 
 
-C:\Users\Administrator\digitalknob\Development\3rdParty\cygwin-setup-x86_64\bin\bash.exe --login -c '/cygdrive/c/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/cygwin/crosstool-ng-build.sh'
+%USERPROFILE%\digitalknob\Development\3rdParty\cygwin-setup-x86_64\bin\bash.exe --login -c '/cygdrive/c/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/cygwin/crosstool-ng-build.sh'

@@ -38,8 +38,8 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	set "get_path=C:\Users\Administrator\digitalknob\file.txt"
-	set "from_path=C:\Users\Administrator\digitalknob\DKBatch\functions"
+	set "get_path=%USERPROFILE%\digitalknob\file.txt"
+	set "from_path=%USERPROFILE%\digitalknob\DKBatch\functions"
 	
 	%dk_call% dk_echo "get relative path to: %get_path%"
 	%dk_call% dk_echo "       starting from: %from_path%"
