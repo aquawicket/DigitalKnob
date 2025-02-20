@@ -14,13 +14,13 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 2 3
  
-	set "_from_=%1"
-	set "_from_=%_from_:"=%"
-	set "_from_=%_from_:/=\%"
+	set "_from_=%~1"
+::	set "_from_=%_from_:"=%"
+::	set "_from_=%_from_:/=\%"
 	
-	set "_to_=%2"
-	set "_to_=%_to_:"=%"
-	set "_to_=%_to_:/=\%"
+	set "_to_=%~2"
+::	set "_to_=%_to_:"=%"
+::	set "_to_=%_to_:/=\%"
 	
     if "%~3" equ "OVERWRITE" ( set "OVERWRITE=1" ) else ( set "OVERWRITE=0" )
     
@@ -41,9 +41,9 @@ setlocal
     
     ::copy "%_from_%" "%_to_%"
     if exist "%_from_%\*" (
-        echo D|xcopy "%_from_%" "%_to_%" /S /E /H /Y
+        echo D|xcopy "%_from_:/=\%" "%_to_:/=\%" /S /E /H /Y
     ) else (
-        echo F|xcopy "%_from_%" "%_to_%" /H /Y
+        echo F|xcopy "%_from_:/=\%" "%_to_:/=\%" /H /Y
     )
 	
 	if not exist "%_to_%" (%dk_call% dk_fatal "dk_copy failed: %_to_% does not exist")

@@ -10,9 +10,7 @@ setlocal
 	%dk_call% dk_debugFunc 2
 	
 	set "softlink_path=%~1"
-	set "softlink_path=%softlink_path:/=\%"
 	set "pointed_to_path=%~2"
-	set "pointed_to_path=%pointed_to_path:/=\%"
 	
     %dk_call% dk_todo "dk_createSoftlink not implemented"
 %endfunction%

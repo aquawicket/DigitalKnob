@@ -10,9 +10,7 @@ setlocal
 	%dk_call% dk_debugFunc 2 3
  
     set "shortcut_path=%~1"
-	set "shortcut_path=%shortcut_path:/=\%"
     set "target_path=%~2"
-	set "target_path=%target_path:/=\%"
     set "OVERWRITE=%~3"
     
     if not defined OVERWRITE if exist "%shortcut_path%" (%dk_call% dk_warning "%shortcut_path% already exists" && %return%)

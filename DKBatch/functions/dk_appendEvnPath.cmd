@@ -11,16 +11,19 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#              echo dk_appendEvnPath returned: %result%
 ::#
 :dk_appendEvnPath
-::setlocal
+setlocal
 	%dk_call% dk_debugFunc 1
 
     set "_path_=%~1"
-	set "_path_=%_path_:/=\%"
-    %dk_call% dk_stringContains "%PATH%" "%_path_%;" && %dk_call% dk_info "path already in list" && %return%
 
-    set "PATH=%PATH%;%_path_%"
-::	setx PATH %PATH%
-::  if "%ERRORLEVEL%" neq "0" dk_error "ERROR: %ERRORLEVEL%"
+    %dk_call% dk_stringContains "%PATH%" "%_path_:/=\%;" && (
+		%dk_call% dk_info "environment PATH already contains _path_:%_path_%"
+		%return%
+	)
+
+	endlocal & (
+		set "PATH=%PATH%;%_path_:/=\%"
+	)
 %endfunction%
 
 

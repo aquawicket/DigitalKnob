@@ -9,10 +9,9 @@ setlocal
 	%dk_call% dk_debugFunc 1
 	
 	set "_path_=%~1"
-	set "_path_=%_path_:/=\%"
 	
     ::if defined USER (set "DKUSERNAME=%USER%) else (set "DKUSERNAME=%USERNAME%")
-    takeown /F "%_path_%" /R /D "Y"
+    takeown /F "%_path_:/=\%" /R /D "Y"
 %endfunction%
 
 

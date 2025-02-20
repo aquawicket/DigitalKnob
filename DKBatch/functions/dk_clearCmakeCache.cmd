@@ -10,7 +10,6 @@ setlocal
 	%dk_call% dk_debugFunc 1
 	
 	set "_path_=%~1"
-	set "_path_=%_path_:/=\%"
 	
     %dk_call% dk_info "Deleting CMake cache files in %_path_%"
 	

@@ -10,7 +10,6 @@ setlocal
 	%dk_call% dk_debugFunc 1 2
  
     set "filepath=%~1"
-	set "filepath=%filepath:/=\%"
 	
     set "appname=%~2"
     if not defined appname (set "appname=temp")
@@ -19,7 +18,7 @@ setlocal
     %dk_call% dk_validate GXX_EXE "%dk_call% %DKIMPORTS_DIR%\gcc\dk_install.cmd"
     
     ::gcc -o [executable_name] [source_file].c
-    %GXX_EXE% -o %appname% -static "%filepath%"
+    %GXX_EXE% -o %appname% -static "%filepath:/=\%"
 %endfunction%
 
 

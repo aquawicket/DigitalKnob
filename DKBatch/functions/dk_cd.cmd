@@ -10,10 +10,9 @@ setlocal
     %dk_call% dk_debugFunc 0 1
 
 	set "_directory_=%~1"
-	set "_directory_=%_directory_:/=\%"
 	
 	title %_directory_%
-    cd "%_directory_%"
+    cd "%_directory_:/=\%"
 %endfunction%
 
 

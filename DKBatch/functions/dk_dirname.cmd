@@ -15,20 +15,12 @@ setlocal enableDelayedExpansion
     set "pathname=%1"
     set "pathname=%pathname:"=%"
 	
-	if not "X!pathname:/=!X"=="X%pathname%X" (set fslashes=1)
-	
-::	set "pathname=%pathname:/=\%"
-::  if "%pathname:~-1%"=="\"   set "pathname=%pathname:~0,-1%"
-::	if "%pathname:~-1%"=="/"   set "pathname=%pathname:~0,-1%"
-	
     for %%Z in ("%pathname%") do set "dk_dirname=%%~dpZ"
 	if "%dk_dirname:~-1%"=="\" set "dk_dirname=%dk_dirname:~0,-1%"
-
-	if defined fslashes (set dk_dirname=%dk_dirname:\=/%)
 	
     endlocal & (
-		set "dk_dirname=%dk_dirname%"
-		if "%2" neq "" set "%2=%dk_dirname%"
+		set "dk_dirname=%dk_dirname:\=/%"
+		if not "%~2"=="" set "%~2=%dk_dirname:\=/%"
 	)
 %endfunction%
 
