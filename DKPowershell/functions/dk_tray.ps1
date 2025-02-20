@@ -9,7 +9,7 @@ function Global:dk_tray(){
 	dk_debugFunc 0
 	
 	[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | out-null
-	$icon = [System.Drawing.Icon]::ExtractAssociatedIcon("C:\Windows\System32\mmc.exe")	
+	$icon = [System.Drawing.Icon]::ExtractAssociatedIcon("C:/Windows/System32/mmc.exe")	
 	$Tray = New-Object System.Windows.Forms.NotifyIcon
 	$Tray.Text = "DigitalKnob Systray"
 	$Tray.Icon = $icon

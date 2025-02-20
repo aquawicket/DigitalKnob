@@ -3,7 +3,7 @@
 # Based on C# code by Ali Hamdar (http://alihamdar.com/)
 # http://social.msdn.microsoft.com/Forums/en/csharpgeneral/thread/79efecc4-fa6d-4078-afe4-bb1379bb968b
 
-$outputfile = 'C:\test.jpg'
+$outputfile = 'C:/test.jpg'
 $imagetype  = 'jpeg' # bmp, emf, gif, jpeg, png, tiff, wmf
 
 Add-Type -AssemblyName System.Windows.Forms

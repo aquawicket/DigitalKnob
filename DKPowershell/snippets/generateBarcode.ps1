@@ -19,7 +19,7 @@ $text            = $( Get-Date -Format 'yyyyMMddHHmmss' ).Substring( 0, 13 ) # o
 $textcolor       = [System.Drawing.Brushes]::Black
 # You can list all available background colors with the command: [enum]::GetNames( [System.Drawing.KnownColor] )
 $backgroundcolor = [System.Drawing.Color]::White
-$outputfile      = ( "D:\barcode{0}.jpg" -f $text )
+$outputfile      = ( "D:/barcode{0}.jpg" -f $text )
 # You can list available output formats with the command: [System.Drawing.Imaging.ImageFormat].DeclaredFields.Name
 $outputformat    = [System.Drawing.Imaging.ImageFormat]::Jpeg
 
