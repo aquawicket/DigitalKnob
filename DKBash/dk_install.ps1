@@ -15,17 +15,17 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 	Write-Host "Associating .sh files with DKBash . . ."
 
 	###### DKINIT ######
-	$global:DIGITALKNOB_DIR = "$env:USERPROFILE\digitalknob"
-	$global:DKBRANCH_DIR = "$DIGITALKNOB_DIR\Development"
-	$global:DKPOWERSHELL_FUNCTION_DIR = "$DKBRANCH_DIR\DKPowershell\functions"
-	#$global:DKPOWERSHELL_FUNCTION_DIR_ = "$DKPOWERSHELL_FUNCTION_DIR\"
-	. $DKPOWERSHELL_FUNCTION_DIR\DK.ps1
+	$global:DIGITALKNOB_DIR = "$env:USERPROFILE/digitalknob"
+	$global:DKBRANCH_DIR = "$DIGITALKNOB_DIR/Development"
+	$global:DKPOWERSHELL_FUNCTION_DIR = "$DKBRANCH_DIR/DKPowershell/functions"
+	#$global:DKPOWERSHELL_FUNCTION_DIR_ = "$DKPOWERSHELL_FUNCTION_DIR/"
+	. $DKPOWERSHELL_FUNCTION_DIR/DK.ps1
 
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
 	dk_call dk_validate GITBASH_EXE "dk_call dk_installGit"
 
 	Write-Host "PSCommandPath = $PSCommandPath"
-	$global:DKBASH_FUNCTIONS_DIR = "$DKBRANCH_DIR\DKBash\functions"
+	$global:DKBASH_FUNCTIONS_DIR = "$DKBRANCH_DIR/DKBash/functions"
 	Write-Host "DKBASH_FUNCTIONS_DIR = $DKBASH_FUNCTIONS_DIR"
 	Write-Host "GITBASH_EXE = $GITBASH_EXE"
 	
@@ -33,7 +33,7 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 #	ftype dkbash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%GITBASH_EXE%" "%%1" %*
 	cmd /c ftype dkbash=powershell $PSCommandPath $DKBASH_FUNCTIONS_DIR $GITBASH_EXE "%%1" %*
 	cmd /c assoc .sh=dkbash
-#	dkregistrySetKey "HKEY_CLASSES_ROOT\dkbash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"	
+#	dkregistrySetKey "HKEY_CLASSES_ROOT/dkbash/DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"	
 #}
 pause
 

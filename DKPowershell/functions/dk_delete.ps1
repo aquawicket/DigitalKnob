@@ -8,7 +8,6 @@ if(!$dk_delete){ $dk_delete = 1 } else{ return } #include guard
 function Global:dk_delete($path) {
 	dk_debugFunc 1
 
-	#$path = dk_call dk_replaceAll $path "/" "\"
 	if(!(dk_call dk_pathExists $path)){
 		dk_call dk_warning "dk_delete $path does not exist"
 		return

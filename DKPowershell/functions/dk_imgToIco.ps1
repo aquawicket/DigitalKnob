@@ -215,7 +215,7 @@ function Global:dk_imgToIco() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	$imgFile = "C:\Users\Administrator\digitalknob\Development\DKCpp\DKCpp\apps\DKCef\icons\icon.png"
-	$icoFile = "C:\Users\Administrator\digitalknob\Development\DKCpp\DKCpp\apps\DKCef\icons\icon.ico"
+	$imgFile = "C:/Users/Administrator/digitalknob/Development/DKCpp/DKCpp/apps/DKCef/icons/icon.png"
+	$icoFile = "C:/Users/Administrator/digitalknob/Development/DKCpp/DKCpp/apps/DKCef/icons/icon.ico"
 	dk_call dk_imgToIco $imgFile $icoFile
 }

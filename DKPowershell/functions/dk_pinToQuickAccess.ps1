@@ -10,7 +10,6 @@ function Global:dk_pinToQuickAccess() {
 	
 	$path = $args[0];
 	$path = ${path} -replace '/', '\';
-	#dk_echo "dk_pinToQuickAccess($path)"
 	
 	$quickAccess = New-object -com shell.application;
 	#$quickAccess.Namespace("$path").Self.InvokeVerb("pintohome");
@@ -36,5 +35,5 @@ function Global:dk_pinToQuickAccess() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_pinToQuickAccess("C:\Users\Administrator\digitalknob");
+	dk_call dk_pinToQuickAccess("C:/Users/Administrator/digitalknob");
 }
