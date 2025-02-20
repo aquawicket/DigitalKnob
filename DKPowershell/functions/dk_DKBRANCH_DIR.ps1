@@ -1,4 +1,4 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
 if(!$dk_DKBRANCH_DIR){ $dk_DKBRANCH_DIR = 1 } else{ return } #include guard
 
 ##################################################################################
@@ -112,9 +112,6 @@ function Global:dk_DKBRANCH_DIR() {
 			dk_call dk_assertPath DKPHP_FUNCTIONS_DIR
 			$global:DKPHP_FUNCTIONS_DIR_="${DKPHP_FUNCTIONS_DIR}/"
 			dk_call dk_assertPath DKPHP_FUNCTIONS_DIR_
-		
-		$global:DKCPP_PLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
-		dk_call dk_assertPath DKCPP_PLUGINS_DIR
 		
 		$global:DKPOWERSHELL_DIR="${DKBRANCH_DIR}/DKPowershell"
 		dk_call dk_assertPath DKPOWERSHELL_DIR
