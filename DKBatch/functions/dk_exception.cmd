@@ -96,7 +96,7 @@ setlocal disableDelayedExpansion
 if not exist "%temp%\Kill.Yes" call :buildYes
 call :CtrlC <"%temp%\Kill.Yes" 1>nul 2>&1
 :CtrlC
-@%ComSpec% /c exit -1073741510
+@%COMSPEC% /c exit -1073741510
 
 :buildYes - Establish a Yes file for the language used by the OS
 pushd "%temp%"

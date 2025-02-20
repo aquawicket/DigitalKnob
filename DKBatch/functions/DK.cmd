@@ -211,13 +211,13 @@ set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:\=/%"
         set "RELOADED=1"
         set "DKINIT="
 
-        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" &::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
+        "%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" &::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
 	
 	&::%DKSCRIPT_ARGS%
 	
 		:: Change console settings
 		:: >nul REG ADD HKCU\Console\digitalknob FontSize /t reg_sz /d "Consolas" /f
-		:: start "digitalknob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+		:: start "digitalknob" "%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 		:: exit
 		
         ::####################################

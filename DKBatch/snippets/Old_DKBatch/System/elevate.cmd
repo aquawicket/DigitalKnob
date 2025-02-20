@@ -44,7 +44,7 @@
 
 :InvokeCmd
   ECHO args = "/c """ + "!batchPath!" + """ " + args >> "%vbsGetPrivileges%"
-  ECHO UAC.ShellExecute "%ComSpec%", args, "", "runas", 1 >> "%vbsGetPrivileges%"
+  ECHO UAC.ShellExecute "%COMSPEC%", args, "", "runas", 1 >> "%vbsGetPrivileges%"
 
 :ExecElevation
  "%SystemRoot%\%winSysFolder%\WScript.exe" "%vbsGetPrivileges%" %*

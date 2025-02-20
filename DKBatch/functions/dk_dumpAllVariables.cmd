@@ -12,7 +12,7 @@ setlocal
 	set "_file_=%_file_:/=\%"
 	
 	for %%f in ("_file_") do (
-        start /i /wait /min "" "%comspec%" /c">""%%~ff"" set "	
+        start /i /wait /min "" "%COMSPEC%" /c">""%%~ff"" set "	
     )
 %endfunction%
 

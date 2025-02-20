@@ -39,7 +39,7 @@ if ":" == "%func:~0,1%" ( goto %func% )
         call "%~d0\:Step3\..%~pnx0"
     ) else (
         set "_callertype=cmd-line"
-        %ComSpec% /c "call "%~d0\:Step3\..%~pnx0" "
+        %COMSPEC% /c "call "%~d0\:Step3\..%~pnx0" "
     )
     endlocal
 )

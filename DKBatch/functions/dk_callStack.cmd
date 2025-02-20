@@ -26,7 +26,7 @@ if ":" == "%func:~0,1%" ( goto %func% )
     ) else (
         set "SOURCE_TYPE_A=cmd-line"
         pause
-        %ComSpec% /c "call "%~d0\:Step2\..%~pnx0" %*"
+        %COMSPEC% /c "call "%~d0\:Step2\..%~pnx0" %*"
     )
     endlocal
 )
@@ -82,7 +82,7 @@ if ":" == "%func:~0,1%" ( goto %func% )
         call "%~d0\:Step4\..%~pnx0" %*
     ) else (
         set "SOURCE_TYPE_B=cmd-line"
-        %ComSpec% /c "call "%~d0\:Step4\..%~pnx0" %*"
+        %COMSPEC% /c "call "%~d0\:Step4\..%~pnx0" %*"
     )
     rem endlocal
 )
@@ -131,7 +131,7 @@ if ":" == "%func:~0,1%" ( goto %func% )
     ) else (
         set "SOURCE_TYPE_C=cmd-line"
         pause
-        %ComSpec% /c "call "%~d0\:Step4\..%~pnx0" %*"
+        %COMSPEC% /c "call "%~d0\:Step4\..%~pnx0" %*"
     )
     rem endlocal
 )

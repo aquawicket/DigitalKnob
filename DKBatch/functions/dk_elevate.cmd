@@ -16,7 +16,7 @@ if %ERRORLEVEL% equ 0 goto elevated
         cscript //nologo "%~f0?.wsf" %THIS_PATH% gotPrivileges %DKSCRIPT_PATH% & exit
     :gotPrivileges
         setlocal & cd /d %~dp0
-        %ComSpec% /k "%THIS_PATH%" elevated
+        %COMSPEC% /k "%THIS_PATH%" elevated
     --><job><script language="VBScript">
             WScript.Echo "VBScript entry"
             Set oShell = CreateObject( "WScript.Shell" )

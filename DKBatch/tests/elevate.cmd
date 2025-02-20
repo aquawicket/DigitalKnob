@@ -47,7 +47,7 @@
 
 :InvokeCmd
   echo args = "/c """ + "!batchPath!" + """ " + args >> "%vbsGetPrivileges%"
-  echo UAC.ShellExecute "%ComSpec%", args, "", "runas", 1 >> "%vbsGetPrivileges%"
+  echo UAC.ShellExecute "%COMSPEC%", args, "", "runas", 1 >> "%vbsGetPrivileges%"
 
 :ExecElevation
 pause

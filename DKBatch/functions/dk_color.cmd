@@ -25,7 +25,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		
 		::(set ESC="                          										&:: escape character   BAD: Uncopyable character
 		::for /f %%A in ('echo prompt $E^| cmd') do (set ESC=%%A)					&:: escape character   BAD: cryptic
-		::for /f %%A in ('forfiles /c "%ComSpec% /c echo 0x1B"') do (set ESC=%%A)	&:: escape character   BAD: Very slow
+		::for /f %%A in ('forfiles /c "%COMSPEC% /c echo 0x1B"') do (set ESC=%%A)	&:: escape character   BAD: Very slow
 		::for /l %%A in (27,1,1) do (cmd /c exit %%A & (set ESC=!^=ExitCodeAscii!)) &:: escape character   GOOD: Converts DECIMAL to ASCII
 		
 		::for /l %%A in (0,1,126)   do (cmd /c exit %%A & set /a "C%%A=!^=ExitCodeAscii!" & echo C%%A = !C%%A! >> ascii.txt)

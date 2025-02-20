@@ -20,7 +20,7 @@ goto:eof
 	for %%f in ("%temp%\original_%random%%random%%random%.tmp") do (
 
 		rem Retrieve the original environment to the temporary file
-		start /i /wait /min "" "%comspec%" /c">""%%~ff"" set "
+		start /i /wait /min "" "%COMSPEC%" /c">""%%~ff"" set "
 
 		rem We need two flag variables. Prepare two names that "should" not collide
 		for /f "tokens=1,2" %%d in ("_&d&%random%%random%_ _&m&%random%%random%_") do (

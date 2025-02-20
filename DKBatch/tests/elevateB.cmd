@@ -25,7 +25,7 @@ cscript //nologo "%~f0?.wsf" %* & exit
 	args = args & strArg & " "  
 	Next
 	args = "/c """ + batchPath + """ " + args 
-	UAC.ShellExecute "%ComSpec%", args, "", "runas", 1
+	UAC.ShellExecute "%COMSPEC%", args, "", "runas", 1
 </script></job><!--
 
 :gotPrivileges

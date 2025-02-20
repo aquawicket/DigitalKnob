@@ -19,7 +19,7 @@ if "%~1" neq ""    goto runDKBat
 	(echo installed ^& "%COMSPEC%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%COMSPEC%" "%DKCACHE_DIR%" "%%1" %%*) else ^
 	(echo not installed ^& "%%1" %%*)
 	
-	%dk_call% dk_registrySetKey    "HKCR\DKBat\DefaultIcon" "" "REG_SZ" "%ComSpec%"
+	%dk_call% dk_registrySetKey    "HKCR\DKBat\DefaultIcon" "" "REG_SZ" "%COMSPEC%"
 	%dk_call% dk_registryDeleteKey "HKCR\.bat"
 	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat"
 	assoc .bat=DKBat
@@ -31,7 +31,7 @@ if "%~1" neq ""    goto runDKBat
 :runDKBat
 	if not exist "%DKBATCH_FUNCTIONS_DIR%"   set "DKBATCH_FUNCTIONS_DIR=%~1"
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%"  set "DKBATCH_FUNCTIONS_DIR_=%~1\"
-	if not exist "%ComSpec%"                 set "ComSpec=%~2"
+	if not exist "%COMSPEC%"                 set "COMSPEC=%~2"
 	if not exist "%DKCACHE_DIR%"             set "DKCACHE_DIR=%~3"
 	if not exist "%DKSCRIPT_PATH%"           set "DKSCRIPT_PATH=%~4"
 	if not defined DKSCRIPT_ARGS			 for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b
@@ -39,8 +39,8 @@ if "%~1" neq ""    goto runDKBat
 	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
-	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
-	"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" && pause || pause
+	::"%COMSPEC%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+	"%COMSPEC%" /V:ON /K call "%DKSCRIPT_PATH%" && pause || pause
 	
 	if ERRORLEVEL 1 pause
 	
