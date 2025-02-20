@@ -9,9 +9,8 @@ setlocal
 	%dk_call% dk_debugFunc 1
 	
 	set "_file_=%~1"
-	set "_file_=%_file_:/=\%"
-	
-	for %%f in ("_file_") do (
+
+	for %%f in ("%_file_%") do (
         start /i /wait /min "" "%COMSPEC%" /c">""%%~ff"" set "	
     )
 %endfunction%
@@ -26,5 +25,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_dumpAllVariables "variables.txt"
+    %dk_call% dk_dumpAllVariables "C:/Users/Administrator/digitalknob/variables.txt"
 %endfunction%

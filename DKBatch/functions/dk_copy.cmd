@@ -14,19 +14,13 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 2 3
  
-	set "_from_=%~1"
-::	set "_from_=%_from_:"=%"
-::	set "_from_=%_from_:/=\%"
-	
+	set "_from_=%~1"	
 	set "_to_=%~2"
-::	set "_to_=%_to_:"=%"
-::	set "_to_=%_to_:/=\%"
-	
-    if "%~3" equ "OVERWRITE" ( set "OVERWRITE=1" ) else ( set "OVERWRITE=0" )
+    if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
     
     %dk_call% dk_info "Copying %_from_% to %_to_%"
     
-    if not exist "%_from_%" ( %dk_call% dk_error "dk_copy: %_from_% not found" )
+    if not exist "%_from_%" (%dk_call% dk_error "dk_copy: %_from_% not found")
     
     if exist "%_to_%" (
         if "%OVERWRITE%" neq "1" (
@@ -47,8 +41,6 @@ setlocal
     )
 	
 	if not exist "%_to_%" (%dk_call% dk_fatal "dk_copy failed: %_to_% does not exist")
-    ::TODO
-    ::[ ? = "success" ]
 %endfunction%
 
 
@@ -63,9 +55,9 @@ setlocal
 
     %dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
     
-    %dk_call% dk_fileWrite %DKCACHE_DIR%\copyMe.file "dk_copy test"
-    %dk_call% dk_copy %DKCACHE_DIR%\copyMe.file %DKCACHE_DIR%\iWasCopied.txt OVERWRITE
+    %dk_call% dk_fileWrite "%DKCACHE_DIR%/copyMe.file" "dk_copy test"
+    %dk_call% dk_copy "%DKCACHE_DIR%/copyMe.file" "%DKCACHE_DIR%/iWasCopied.txt" OVERWRITE
     
-    %dk_call% dk_makeDirectory %DKCACHE_DIR%\copyMe
-    %dk_call% dk_copy %DKCACHE_DIR%\copyMe %DKCACHE_DIR%\iWasCopied OVERWRITE
+    %dk_call% dk_makeDirectory "%DKCACHE_DIR%/copyMe"
+    %dk_call% dk_copy "%DKCACHE_DIR%/copyMe" "%DKCACHE_DIR%/iWasCopied" OVERWRITE
 %endfunction%
