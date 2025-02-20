@@ -13,7 +13,9 @@ setlocal
     set "target_path=%~2"
     set "OVERWRITE=%~3"
     
-    if not defined OVERWRITE if exist "%shortcut_path%" (%dk_call% dk_warning "%shortcut_path% already exists" && %return%)
+    if not defined OVERWRITE (
+		if exist "%shortcut_path%" (%dk_call% dk_warning "%shortcut_path% already exists" && %return%)
+	)
 	if exist "%shortcut_path%" (%dk_call% dk_delete "%shortcut_path%")
 
 	:: Method 1: direct powershell

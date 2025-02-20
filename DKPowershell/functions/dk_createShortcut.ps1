@@ -2,7 +2,7 @@ if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 
 if(!$dk_createShortcut){ $dk_createShortcut = 1 } else{ return } #include guard
 
 ##################################################################################
-# dk_createShortcut(shortcut_path, target_path) arguments
+# dk_createShortcut(shortcut_path, target_path)
 #
 #
 function Global:dk_createShortcut() {
@@ -13,11 +13,14 @@ function Global:dk_createShortcut() {
 	$target_path=$args[1]
 	$arguments=$args[2]
 	
-	$shortcut_path = $shortcut_path -replace "/mnt/c", "C:"
-	$shortcut_path = $shortcut_path -replace "/", "\\"
+	$shortcut_path = $shortcut_path -replace "/c/", "C:/"
+	$shortcut_path = $shortcut_path -replace "/mnt/c/", "C:/"
+	$shortcut_path = $shortcut_path -replace "/", "\"
+	Write-Host "shortcut_path = $shortcut_path"
 	
-	$target_path = $target_path -replace "/mnt/c", "C:"
-	$target_path = $target_path -replace "/", "\\"
+	$target_path = $target_path -replace "/c/", "C:/"
+	$target_path = $target_path -replace "/mnt/c/", "C:/"
+	$target_path = $target_path -replace "/", "\"
 	
 	if(dk_call dk_pathExists "${shortcut_path}"){ 
 		dk_call dk_warning "${shortcut_path} already exists."
@@ -51,8 +54,7 @@ function Global:dk_createShortcut() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	#dk_call dk_createShortcut "C:\Users\Administrator\Desktop\digitalknob.lnk" "C:\Users\Administrator\digitalknob"
-#	dk_call dk_createShortcut "C:\Users\Administrator\Desktop\HelloWorld.lnk" "C:\Windows\System32\wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
-	
-	dk_call dk_createShortcut "C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP.lnk" "C:/Windows/System32/wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
+	dk_call dk_createShortcut "C:/Users/Administrator/Desktop/digitalknob.lnk" "C:/Users/Administrator/digitalknob"
+	#dk_call dk_createShortcut "C:\Users\Administrator\Desktop\HelloWorld.lnk" "C:\Windows\System32\wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
+	#dk_createShortcut "C:/Users/Administrator/digitalknob" "C:/Windows/System32/wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
 }
