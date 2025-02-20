@@ -2,12 +2,12 @@
 if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# dk_set(name, value)
+::# dk_set(name, value...)
 ::#
 ::#
 :dk_set
 setlocal
-::	%dk_call% dk_debugFunc 1 2
+::	%dk_call% dk_debugFunc 2 99
 
 	set "_name_=%~1"
 	set "_args_=%*"

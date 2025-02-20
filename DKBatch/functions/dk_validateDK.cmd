@@ -6,8 +6,8 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#
 ::#
 :dk_validateDK
+::setlocal
     %dk_call% dk_debugFunc 0
- ::setlocal
  
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	if not defined DKBRANCH          set "DKBRANCH=Development"
@@ -44,7 +44,7 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-::setlocal
+setlocal
     %dk_call% dk_debugFunc 0
     
     %dk_call% dk_validateDK
