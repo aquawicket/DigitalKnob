@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-[ -n "${DKINIT-}" ] && return 0
+[ -n "${DKINIT-}" ] && return
 export DKINIT=1
 $(true)
 
@@ -72,10 +72,7 @@ DK(){
     DKSCRIPT_VARS
 
     ###### DKTEST MODE ######
-    if [ ! "${DKSCRIPT_EXT}" = ".sh" ]; then
-		$(true)
-		exit 0
-	fi
+    [ ! "${DKSCRIPT_EXT}" = ".sh" ] || return 0
 	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || exit 0
     dk_call dk_echo
     dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
@@ -238,7 +235,7 @@ dk_installPackage() {
 
 ##################################################################################
 # run DK()
-DK & $(true)
+DK
 
 
 
