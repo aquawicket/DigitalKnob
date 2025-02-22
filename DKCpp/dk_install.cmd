@@ -87,7 +87,7 @@ if "%~1" == "" (goto dk_install)
 	::set "default_host_arch=cosmocc"
 	set "default_host_env=clang"
 	
-	::###### DKINIT ######
+	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	

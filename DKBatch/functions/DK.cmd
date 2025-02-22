@@ -1,5 +1,4 @@
 @echo off
-if defined DKINIT (goto:eof) else (set "DKINIT=1")
 if defined DK_CMD (goto:eof) else (set "DK_CMD=1")
 
 ::###### Print Version Info ######
@@ -210,7 +209,6 @@ set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:\=/%"
     if defined RELOADED (goto end_dk_reload)
         echo "reloading with delayed expansion . . ."
         set "RELOADED=1"
-        set "DKINIT="
 		set "DK_CMD="
 
         "%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" &::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	

@@ -95,9 +95,9 @@ if "%~1" == "" (goto :dk_install)
 	set "default_target_arch=cosmocc"
 	set "default_target_env=cosmocc"
 	
-	::###### DKINIT ######
+	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ 	(set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
-	if not defined DKINIT 					(call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+	if not defined DK_CMD 					(call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Install DKC ######
 	%dk_call% dk_echo "Installing DKC . . ."

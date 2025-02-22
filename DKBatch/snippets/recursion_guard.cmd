@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
 ::# recursion_guard(commands)

@@ -19,7 +19,7 @@ setlocal
 	for %%a in (%*) do set LAST_ARG=%%a
 	
     :: Call DKBatch function
-    set DKBATCH_COMMAND="%CMD_EXE% /c "set "DKINIT=" && set "DKSCRIPT_PATH=%DKSCRIPT_PATH%" && set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%" && %~1 %ALL_BUT_FIRST%"
+    set DKBATCH_COMMAND="%CMD_EXE% /c "set "DK_CMD=" && set "DKSCRIPT_PATH=%DKSCRIPT_PATH%" && set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%" && %~1 %ALL_BUT_FIRST%"
     ::echo %DKBATCH_COMMAND%
 	for /f "delims=" %%Z in ('%DKBATCH_COMMAND%') do (
         echo %%Z                &rem  Display the other shell's stdout

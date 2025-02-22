@@ -39,7 +39,7 @@ if "%*" == "" (goto dk_install)
 
 
 :dk_install
-	::###### DKINIT ######
+	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
