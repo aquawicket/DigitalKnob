@@ -10,11 +10,9 @@ if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 1 99
 	
-	echo dk_callPowershell(%*)
 	
 	::### Get DKC_FUNCTIONS_DIR
 	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(set "DKPOWERSHELL_FUNCTIONS_DIR=%CD:\=/%/DKPowershell/functions")
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(mkdir "%DKPOWERSHELL_FUNCTIONS_DIR:/=\%")
 	%dk_call% dk_assertPath DKPOWERSHELL_FUNCTIONS_DIR
 	
