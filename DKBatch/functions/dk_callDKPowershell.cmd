@@ -1,8 +1,8 @@
 @echo off
-if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_callPowershell(function, arguments..., rtn_var)
+::# dk_callPowershell(function, arguments...)
 ::#
 ::#   Reference: https://stackoverflow.com/questions/34451444/how-to-get-a-returned-value-from-powershell-and-get-it-in-a-batch-file
 ::#
@@ -24,16 +24,16 @@ setlocal enableDelayedExpansion
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1"	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1")
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1"	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1")
 	
-	
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
     
 	:: https://stackoverflow.com/a/4732316/688352
     %dk_call% %COMSPEC% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
 	
+	::### ALL_BUT_FIRST ###
 	set ALL_BUT_FIRST=%*
 	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
     
-    :: get LAST_ARG
+    ::### LAST_ARG ###
 	for %%a in (%*) do set LAST_ARG=%%a
 	
     :: Call DKPowershell function
@@ -52,11 +52,13 @@ setlocal enableDelayedExpansion
 	
 	
 	::###### run command ######
-	(set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1"%ALL_BUT_FIRST%";)
+	set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %ALL_BUT_FIRST%
 	
 	::echo DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%
 	%dk_call% dk_commandToVariable "%DKPOWERSHELL_COMMAND%"
-	endlocal & (set dk_callPowershell=%dk_commandToVariable%)
+	endlocal & (
+		set "dk_callPowershell=%dk_commandToVariable%"
+	)
 	
 %endfunction%
 
@@ -68,7 +70,7 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKPowershell dk_test "FROM DKBatch" "dk_callDKPowershell.cmd"
+	%dk_call% dk_callDKPowershell dk_test "arg 1" "arg 2" "arg 3"
     %dk_call% dk_echo
 	%dk_call% dk_echo "dk_callPowershell = %dk_callPowershell%"
 %endfunction%

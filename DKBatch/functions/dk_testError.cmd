@@ -1,6 +1,6 @@
 echo dk_test.cmd %*
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~f0 %*
+if not defined DK_CMD call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~f0 %*
 
 ::####################################################################
 ::# dk_testError()

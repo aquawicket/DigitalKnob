@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
 ::# dk_callDKC(function, arguments...)
@@ -114,7 +114,7 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKC dk_test "FROM DKBatch" "dk_callDKC.cmd"
+	%dk_call% dk_callDKC dk_test "arg 1" "arg 2" "arg 3"
     %dk_call% dk_echo
 	%dk_call% dk_echo "dk_callDKC = %dk_callDKC%"
 %endfunction%

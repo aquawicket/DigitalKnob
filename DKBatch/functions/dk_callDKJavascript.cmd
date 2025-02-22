@@ -1,8 +1,8 @@
 @echo off
-if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_callDKJavascript(function, arguments..., rtn_var)
+::# dk_callDKJavascript(function, arguments...)
 ::#
 ::#
 :dk_callDKJavascript
@@ -11,7 +11,6 @@ setlocal
  
 	::### Get DKJAVASCRIPT_FUNCTIONS_DIR
 	%dk_call% dk_validate DKJAVASCRIPT_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
-	if not exist "%DKJAVASCRIPT_FUNCTIONS_DIR%"			(set "DKJAVASCRIPT_FUNCTIONS_DIR=%CD%/DKJavascript/functions")
 	if not exist "%DKJAVASCRIPT_FUNCTIONS_DIR%"			(mkdir "%DKJAVASCRIPT_FUNCTIONS_DIR%")
 	%dk_call% dk_assertPath DKJAVASCRIPT_FUNCTIONS_DIR
 	
@@ -23,6 +22,7 @@ setlocal
 	if not exist %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js		(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js" "%DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js")
 	if not exist %DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js	(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js" "%DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js")
 
+	::### ALL_BUT_FIRST ###
 	set ALL_BUT_FIRST=%*
 	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
 	
@@ -38,8 +38,6 @@ setlocal
 		set "dk_callDKJavascript=%dk_callDKJavascript%"
 	)
 	
-	
-
 %endfunction%
 
 
@@ -50,12 +48,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	echo calling dk_callDKJavascript dk_test "FROM :DKTEST" "DK_CALLDKJAVASCRIPT.CMD" . . .
-	echo:
-	
-	%dk_call% dk_callDKJavascript dk_test "FROM :DKTEST" "DK_CALLDKJAVASCRIPT.CMD"
-
-	
-	echo:
-	echo return value: dk_callDKJavascript = %dk_callDKJavascript%
+	%dk_call% dk_callDKJavascript dk_test "arg 1" "arg 2" "arg 3"
+	%dk_call% dk_echo
+	%dk_call% dk_echo "dk_callDKJavascript = %dk_callDKJavascript%"
 %endfunction%

@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
 ::# dk_callDKCmake(function, arguments..., rtn_var)
@@ -12,7 +12,6 @@ setlocal
 
 	::### Get DKCMAKE_FUNCTIONS_DIR
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
-	if not exist "%DKCMAKE_FUNCTIONS_DIR%"       	(set "DKCMAKE_FUNCTIONS_DIR=%CD%/DKCMake/functions")
 	if not exist "%DKCMAKE_FUNCTIONS_DIR%"       	(mkdir "%DKCMAKE_FUNCTIONS_DIR%")
 	%dk_call% dk_assertPath DKCMAKE_FUNCTIONS_DIR
 	
@@ -24,7 +23,6 @@ setlocal
 	if not exist %DKCMAKE_FUNCTIONS_DIR%/DK.cmake	(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/DK.cmake" "%DKCMAKE_FUNCTIONS_DIR%/DK.cmake")
 	if not exist %DKCMAKE_FUNCTIONS_DIR%/%~1.cmake	(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/%~1.cmake" "%DKCMAKE_FUNCTIONS_DIR%/%~1.cmake")
 	
-	
     %dk_call% dk_validate DKIMPORTS_DIR         	"%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_validate CMAKE_EXE             	"%dk_call% %DKIMPORTS_DIR%/cmake/dk_install.cmd"
 
@@ -32,11 +30,11 @@ setlocal
 	set "DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR%/"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
     
+	::### ALL_BUT_FIRST ###
 	set ALL_BUT_FIRST=%*
 	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
-    set "ALL_BUT_FIRST=%ALL_BUT_FIRST:"='%"
     
-    :: get LAST_ARG
+    ::### LAST_ARG ###
 	for %%a in (%*) do set LAST_ARG=%%a
     
     ::Create Run function Script
@@ -50,7 +48,7 @@ setlocal
         set "dk_callDKCmake=%%Z"	&rem  Set the return value to the last line of output
     )
 	endlocal & (
-		::set "dk_callDKCmake=%dk_commandToVariable%""
+		set "dk_callDKCmake=%dk_callDKCmake%"
 		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKCmake%")
 	)
 	
@@ -70,7 +68,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_callDKCmake dk_test "FROM DKBatch" "dk_callDKCmake.cmd" rtn_var
+    %dk_call% dk_callDKCmake dk_test "arg 1" "arg 2" "arg 3"
 	%dk_call% dk_echo
-    %dk_call% dk_echo "rtn_var = %rtn_var%"
+    %dk_call% dk_echo "dk_callDKCmake = %dk_callDKCmake%"
 %endfunction%

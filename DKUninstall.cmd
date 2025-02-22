@@ -1,6 +1,6 @@
 @echo off
 if not defined DKBATCH_FUNCTIONS_DIR_  (set "DKBATCH_FUNCTIONS_DIR_=%CD%/DKBatch/functions/")
-if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::############################################################################
 ::# DKUninstall()

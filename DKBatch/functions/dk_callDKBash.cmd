@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
 ::# dk_callDKBash(function, arguments..., rtn_var)
@@ -11,13 +11,11 @@ setlocal
     %dk_call% dk_debugFunc 1 99
 
 	::set "USE_WSL=1"
-	
 	if defined USE_WSL   (%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR")
 	if defined USE_WSL   (%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/dk_install.cmd")
 	
 	::### Get DKC_FUNCTIONS_DIR
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if not exist "%DKBASH_FUNCTIONS_DIR%"		(set "DKBASH_FUNCTIONS_DIR=%CD%/DKBash/functions")
 	if not exist "%DKBASH_FUNCTIONS_DIR%"		(mkdir "%DKBASH_FUNCTIONS_DIR%")
 	if not exist "%DKBASH_FUNCTIONS_DIR_%"		(set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR%/")
 	%dk_call% dk_assertPath DKBASH_FUNCTIONS_DIR
@@ -92,9 +90,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKBash dk_blank
-	%dk_call% dk_callDKBash dk_test "#\$*+"
-	
+	%dk_call% dk_callDKBash dk_test "arg 1" "arg 2" "arg 3"
     %dk_call% dk_echo
-	if defined rtn_var (%dk_call% dk_echo "dk_callDKBash = %dk_callDKBash%")
+	%dk_call% dk_echo "dk_callDKBash = %dk_callDKBash%"
 %endfunction%
