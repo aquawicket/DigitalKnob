@@ -10,7 +10,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://packages.msys2.org/package/sh
 
 if(EXISTS "${SH_EXE}")
-	dk_pause()
 	dk_return()
 endif()
 

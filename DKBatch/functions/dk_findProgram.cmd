@@ -30,8 +30,6 @@ setlocal enableDelayedExpansion
 		set "%~1=%dk_commandToVariable%"
 	)
 
-::DEBUG
-::	%dk_call% printVar %1
 %endfunction%
 
 

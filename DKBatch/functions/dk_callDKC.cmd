@@ -18,7 +18,6 @@ setlocal enableDelayedExpansion
 	
 	::###### _func_ ######
 	set "_func_=%~1"
-	%dk_call% dk_assertVar _func_
 	
 	::###### _args_ ######
 	set _args_=%*
