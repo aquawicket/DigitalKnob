@@ -74,9 +74,9 @@ if "%~1" == "" (goto :dk_install)
 	
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
-	::if not defined target_os	(set "target_os=cosmocc")
-	::if not defined target_arch	(set "target_arch=cosmocc")
-	::if not defined target_env	(set "target_env=cosmocc")
+	::if not defined target_os		(set "target_os=win")
+	::if not defined target_arch		(set "target_arch=x86_64")
+	::if not defined target_env		(set "target_env=gcc")
 	
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
@@ -96,11 +96,12 @@ if "%~1" == "" (goto :dk_install)
 	%dk_call% dk_printVar target_arch
 	
 	::###### target_env ######
-	if not defined target_env (set "target_env=clang")
+	if not defined target_env (set "target_env=gcc")
 	%dk_call% dk_printVar target_env
 	
 	::###### target_triple ######
 	if not defined target_triple (set "target_triple=%target_os%_%target_arch%_%target_env%")
+	set "%target_triple%=1"
 	%dk_call% dk_printVar target_triple
 	
 	::###### MSYSTEM ######
@@ -122,7 +123,7 @@ if "%~1" == "" (goto :dk_install)
 	if "%target_env%"=="cosmocc"	(set "DK_C_COMPILER=%SH_EXE% %COSMOCC_C_COMPILER%")
 	if "%target_env%"=="clang"  	(set "DK_C_COMPILER=%CLANG_C_COMPILER%")
 	if "%target_env%"=="gcc"	  	(set "DK_C_COMPILER=%GCC_C_COMPILER%")
-	%dk_call% dk_assertVar DK_C_COMPILER
+	%dk_call% dk_assertPath DK_C_COMPILER
 	%dk_call% dk_printVar DK_C_COMPILER
 	
 	%dk_call% dk_registryDeleteKey "HKCR/DKC"

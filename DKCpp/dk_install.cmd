@@ -75,7 +75,7 @@ if "%~1" == "" (goto :dk_install)
 
 
 :dk_install
-	if not "%~1" neq "" (goto:eof)
+	if not "%~1"=="" (goto:eof)
 	
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
@@ -105,7 +105,7 @@ if "%~1" == "" (goto :dk_install)
 	%dk_call% dk_printVar target_env
 	
 	::###### target_triple ######
-	if not defined target_triple (set "target_triple=${target_os}_${target_arch}_${target_env}")
+	if not defined target_triple (set "target_triple=%target_os%_%target_arch%_%target_env%")
 	set "%target_triple%=1"
 	%dk_call% dk_printVar target_triple
 	

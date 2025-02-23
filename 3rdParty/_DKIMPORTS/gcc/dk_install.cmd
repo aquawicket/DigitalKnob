@@ -10,9 +10,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/gcc/DKMAKE.cmake)" "GCC_EXE;GXX_EXE"
-	%dk_call% dk_assertVar GCC_EXE
-	%dk_call% dk_assertVar GXX_EXE
+    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/gcc/DKMAKE.cmake)" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+	%dk_call% dk_assertVar GCC_C_COMPILER
+	%dk_call% dk_assertVar GCC_CXX_COMPILER
 %endfunction%
 
 

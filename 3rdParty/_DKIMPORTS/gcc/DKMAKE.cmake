@@ -5,19 +5,32 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ gcc ############
 # https://packages.msys2.org/package/mingw-w64-x86_64-gcc?repo=mingw64
+dk_validate(host_triple			"dk_host_triple()")
+dk_validate(ENV{target_triple}	"dk_target_triple()")
+dk_set($ENV{target_triple}		1)
 
-dk_validate(target_triple "dk_target_triple()")
-
-if(clang OR mingw OR ucrt)
+#dk_getFileParam("${DKIMPORTS_DIR}/clang/dkconfig.txt" VERSION)
+#if(clang OR mingw OR ucrt)
+if(MSYSTEM)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 endif()
-
 dk_installPackage(gcc)
-#dk_installPackage(g++)
 
-dk_set(GCC_EXE 					"${${MSYSTEM}_BIN}/gcc.exe")
-dk_set(GXX_EXE 					"${${MSYSTEM}_BIN}/g++.exe")
+if(win_x86_gcc)
+	dk_validate(MSYS2 			"dk_depend(msys2)")
+	dk_set(MINGW32_BIN		  	"${MSYS2}/mingw32/bin")
+	dk_set(GCC_C_COMPILER   	"${MINGW32_BIN}/gcc.exe")
+	dk_set(GCC_CXX_COMPILER		"${MINGW32_BIN}/g++.exe")
+	dk_set(GCC_RC_COMPILER  	"${MINGW32_BIN}/windres.exe")
+elseif(win_x86_64_gcc)
+	dk_validate(MSYS2 			"dk_depend(msys2)")
+	dk_set(MINGW64_BIN		  	"${MSYS2}/mingw64/bin")
+	dk_set(GCC_C_COMPILER   	"${MINGW64_BIN}/gcc.exe")
+	dk_set(GCC_CXX_COMPILER 	"${MINGW64_BIN}/g++.exe")
+	dk_set(GCC_RC_COMPILER  	"${MINGW64_BIN}/windres.exe")
+endif()
 #if(win_x86_clang)
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clang32/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clang32/bin/g++.exe)
