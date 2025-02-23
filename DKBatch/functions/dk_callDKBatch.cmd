@@ -12,14 +12,14 @@ setlocal
 
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
     
-	set ALL_BUT_FIRST=%*
-	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
+	set "ALL_BUT_FIRST=%*"
+	if defined ALL_BUT_FIRST (set "ALL_BUT_FIRST=!ALL_BUT_FIRST:%1 =!")
 	
 	:: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
 	
     :: Call DKBatch function
-    set DKBATCH_COMMAND="%CMD_EXE% /c "set "DK_CMD=" && set "DKSCRIPT_PATH=%DKSCRIPT_PATH%" && set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%" && %~1 %ALL_BUT_FIRST%"
+    set DKBATCH_COMMAND=%CMD_EXE% /c (set "DK_CMD=") && (set "DKSCRIPT_PATH=%DKSCRIPT_PATH%") && (set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%") && %~1 %ALL_BUT_FIRST%
     ::echo %DKBATCH_COMMAND%
 	for /f "delims=" %%Z in ('%DKBATCH_COMMAND%') do (
         echo %%Z                &rem  Display the other shell's stdout
@@ -28,10 +28,10 @@ setlocal
     ::echo rtn_value = !rtn_value!
     
 	endlocal & (
-		set dk_callDKBatch=%dk_callDKBatch%
+		set "dk_callDKBatch=%dk_callDKBatch%"
 		rem if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKBatch%")
 	)
-	
+	echo dk_callDKBatch = %dk_callDKBatch%
 %endfunction%
 
 
