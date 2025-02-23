@@ -74,30 +74,28 @@ namespace DKConsole {
             Console.WriteLine("<");
             
 			string path = Path.Combine(name + @"\icon.png");
-        //  while (true) {
-                try {
-                    i %= 100;
-                    using (Graphics g = Graphics.FromHwnd(GetConsoleWindow())) {
-						using (Image image = Image.FromFile(path)) {
-                            System.Drawing.Size fontSize = GetConsoleFontSize();
-							decimal scalingFactor = GetDpiForWindow(GetConsoleWindow()) / 96m;
-							
-                            // translating the character positions to pixels
-                            System.Drawing.Rectangle imageRect = new System.Drawing.Rectangle(
-                                (int)(location.X * fontSize.Width * scalingFactor),
-                                (int)(location.Y * fontSize.Height * scalingFactor),
-                                (int)(imageSize.Width * fontSize.Width * scalingFactor),
-                                (int)(imageSize.Height * fontSize.Height * scalingFactor));
-                            g.DrawImage(image, imageRect);
-                        }
-                    }
-                    ++i;
+            try {
+                i %= 100;
+                using (Graphics g = Graphics.FromHwnd(GetConsoleWindow())) {
+					using (Image image = Image.FromFile(path)) {
+						System.Drawing.Size fontSize = GetConsoleFontSize();
+						decimal scalingFactor = GetDpiForWindow(GetConsoleWindow()) / 96m;
+									
+						// translating the character positions to pixels
+						System.Drawing.Rectangle imageRect = new System.Drawing.Rectangle(
+						(int)(location.X * fontSize.Width * scalingFactor),
+						(int)(location.Y * fontSize.Height * scalingFactor),
+						(int)(imageSize.Width * fontSize.Width * scalingFactor),
+						(int)(imageSize.Height * fontSize.Height * scalingFactor));
+						g.DrawImage(image, imageRect);
+					}
                 }
-                catch (Exception e) {
-                    Thread t = Thread.CurrentThread;
-                    Thread.Sleep(1300); 
-                }
-        //  }
+                ++i;
+            }
+            catch (Exception e) {
+                Thread t = Thread.CurrentThread;
+                Thread.Sleep(1300); 
+            }
        }
 	   
        private static System.Drawing.Size GetConsoleFontSize() {

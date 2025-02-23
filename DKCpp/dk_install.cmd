@@ -30,7 +30,7 @@ if "%~1" == "" (goto :dk_install)
 	if exist "%APP_FILE%" (del "%APP_FILE:/=\%")
 
 	::set "COMPILE_COMMAND=%DK_CXX_COMPILER% -mclang -mcosmo -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
-	set COMPILE_COMMAND=%DK_CXX_COMPILER% -o %APP_FILE% -static %DKCPP_FILE%
+	set COMPILE_COMMAND=%DK_CXX_COMPILER% -v -o %APP_FILE% -static %DKCPP_FILE% -lgdi32
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 	

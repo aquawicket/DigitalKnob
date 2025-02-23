@@ -17,8 +17,8 @@ dk_generate() {
 	dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
 	TARGET_PATH="${DKCPP_APPS_DIR}/${target_app}"
 	#dk_call dk_printVar TARGET_PATH
-	dk_call dk_makeDirectory "${TARGET_PATH}/${target_triple}"
-	dk_call dk_cd "${TARGET_PATH}/${target_triple}"
+	dk_call dk_makeDirectory "${TARGET_PATH}/${target_triple,,}"
+	dk_call dk_cd "${TARGET_PATH}/${target_triple,,}"
 	dk_call dk_assertPath DKCMAKE_DIR
 	#dk_call dk_assertPath ${DKCMAKE_DIR}
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
