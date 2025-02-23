@@ -27,7 +27,7 @@ DK(){
     
 	###### Reload Main Script with bash ######
 	[ $# -eq 0 ] && dkreloadWithBash || dkreloadWithBash $*
-    
+
 	############ Set Options ############
     dksetOptions
 	
@@ -37,7 +37,7 @@ DK(){
 	export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/"
     [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
     [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] && . "${DKBASH_FUNCTIONS_DIR_}dk_source.sh"
-    
+ 
     ############ LOAD FUNCTION FILES ############
 	#dk_source dk_callStack
     dk_source dk_return
@@ -58,20 +58,19 @@ DK(){
 	dk_source dk_isChildPathOf
     dk_call dk_color
     dk_call dk_logo
-    
+  
 #	dk_call dk_wslFixNet
 #	dk_call dk_wslFixFileAccess
 #	sudo apt-get update
 #	sudo apt-get upgrade
 #	/mnt/c/Windows/System32/cmd.exe /c 'wsl --shutdown'
 
-	
 	############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
 
     ###### DKTEST MODE ######
-    [ ! "${DKSCRIPT_EXT}" = ".sh" ] || return 0
-	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || exit 0
+    [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
+	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || return 0
     dk_call dk_echo
     dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 	dk_call dk_echo

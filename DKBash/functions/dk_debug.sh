@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 [ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
-
+echo "dk_debug after DK_SH"
 ##################################################################################
 # dk_debug(message)
 #
