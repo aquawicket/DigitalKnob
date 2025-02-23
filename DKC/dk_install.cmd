@@ -81,7 +81,9 @@ if "%~1" == "" (goto :dk_install)
 	if not "%~1"=="" (goto:eof)
 	
 	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmocc, gcc, msvc 
+	:: clang, cosmocc, gcc, msvc
+	:: NOTE: gcc is now working yet.  Need the appropriate command to line libwinpthread and others statically
+	::
 	::if not defined target_os		(set "target_os=win")
 	::if not defined target_arch	(set "target_arch=x86_64")
 	::if not defined target_env		(set "target_env=gcc")
@@ -104,7 +106,7 @@ if "%~1" == "" (goto :dk_install)
 	%dk_call% dk_printVar target_arch
 	
 	::###### target_env ######
-	if not defined target_env (set "target_env=gcc")
+	if not defined target_env (set "target_env=clang")
 	%dk_call% dk_printVar target_env
 	
 	::###### target_triple ######
