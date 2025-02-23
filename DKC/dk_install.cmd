@@ -36,9 +36,9 @@ if "%~1" == "" (goto :dk_install)
 
 ::	g++.exe -frtti -fexceptions -march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -DDEBUG -D_DEBUG -g -static -Wl,--whole-archive CMakeFiles\HelloWorld.dir/objects.a -Wl,--no-whole-archive -o HelloWorld.exe -Wl,--out-implib,libHelloWorld.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\HelloWorld.dir\linkLibs.rsp
 	
-	set "LDFLAGS=-static -static-libgcc -static-libstdc++ C:\Users\Administrator\digitalknob\Development\3rdParty\msys2-base-x86_64-20241208\mingw64\lib\libwinpthread.a"
-	::set COMPILE_COMMAND=%DK_C_COMPILER% -o %APP_FILE% -static %DKC_FILE%
-	set COMPILE_COMMAND=%DK_C_COMPILER% -v -frtti -fexceptions -march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -DDEBUG -D_DEBUG -g -static -o HelloWorld.exe --with-mpc=/mingw64
+	::set "LDFLAGS=-static -static-libgcc -static-libstdc++ C:\Users\Administrator\digitalknob\Development\3rdParty\msys2-base-x86_64-20241208\mingw64\lib\libwinpthread.a"
+	set COMPILE_COMMAND=%DK_C_COMPILER% -o %APP_FILE% -static %DKC_FILE%
+	::set COMPILE_COMMAND=%DK_C_COMPILER% -v -frtti -fexceptions -march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -DDEBUG -D_DEBUG -g -static -o HelloWorld.exe
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 	
