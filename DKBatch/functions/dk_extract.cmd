@@ -12,20 +12,21 @@ setlocal
 	set "_file_=%~1"
 	set "_dest_=%~2"
 	
-	if not exist "%_file_%" %dk_call% dk_error "%_file_% does not exist"
+	if not exist "%_file_%" %dk_call% (dk_error "%_file_% does not exist")
 	 
     :: if the destination isn't provided, we should extract to a folder named the same as the file
     :: in the same diretory the archive file is in.
-	if not "%_dest_%"=="" goto twoParams
+	if not "%_dest_%"=="" (goto twoParams)
 
     ::### handle 1 parameter
     %dk_call% dk_basename "%_file_%" basename
     %dk_call% dk_removeExtension "%basename%" basename
     %dk_call% dk_dirname "%_file_%" _dest_		&:: extract contents to same directoy
-    set "_dest_=%_dest_%\%basename%"			&:: extract contents to folder within same directory
+    set "_dest_=%_dest_%/%basename%"			&:: extract contents to folder within same directory
 	
+	:: try dk_powershell
 	%dk_call% dk_info "Extracting %_file_% to %_dest_%. . ."
-	if exist "%_dest_%" %dk_call% dk_error "%_dest_% already exists"
+	if exist "%_dest_%" (%dk_call% dk_error "%_dest_% already exists")
     %dk_call% dk_powershell Expand-Archive '"%_file_%"' -DestinationPath '"%_dest_%"'
 	::%dk_call% dk_callDKPowershell dk_extract %*
     %return%
@@ -35,12 +36,12 @@ setlocal
     
     :: try dk_powershell
 	%dk_call% dk_info "Extracting %_file_% to %_dest_% . . ."
-	if exist "%_dest_%" %dk_call% dk_error "%_dest_% already exists"
-    if not exist "%_dest_%" %dk_call% dk_powershell Expand-Archive '"%_file_%"' -DestinationPath '"%_dest_%"'
-	::if not exist "%_dest_%" %dk_call% dk_callDKPowershell dk_extract %*
+	if exist "%_dest_%" (%dk_call% dk_error "%_dest_% already exists")
+    if not exist "%_dest_%" (%dk_call% dk_powershell Expand-Archive '"%_file_%"' -DestinationPath '"%_dest_%"')
+	::if not exist "%_dest_%" (%dk_call% dk_callDKPowershell dk_extract %*)
     
     :: try tar
-    if not exist "%_dest_%" %dk_call% dk_makeDirectory "%_dest_%" && tar --help && tar -xf "%_file_%" -C "%_dest_%"
+    if not exist "%_dest_%" (%dk_call% dk_makeDirectory "%_dest_%" && tar --help && tar -xf "%_file_%" -C "%_dest_%")
 %endfunction%
 
 

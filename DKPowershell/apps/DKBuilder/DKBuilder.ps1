@@ -2,7 +2,7 @@
 
 #${ENABLE_dk_debugFunc} = 1
 
-###### DKINIT ######
+###### INIT ######
 if(!${DKSCRIPT_PATH})							{ ${DKSCRIPT_PATH} = $Script:MyInvocation.MyCommand.Path }
 Write-Host "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 

@@ -205,7 +205,7 @@ if(typeof location === "object") {
 		queryString=location.href.split('?')[1];
 	}
 }
-dk_check('queryString');
+//dk_check('queryString');
 
 //###### DKSCRIPT variables ######
 //if(typeof ARGV !== "undefined" && ARGV.length > 0){
@@ -220,8 +220,9 @@ dk_check('queryString');
 //}
 
 //var DKSCRIPT_PATH = location.href;
-WScript_Shell = new ActiveXObject("WScript.Shell");	
-var DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");
+if(typeof WScript_Shell === "undefined"){ WScript_Shell = new ActiveXObject("WScript.Shell"); }
+if(typeof DKSCRIPT_PATH === "undefined"){ DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");}
+console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
 var DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
 var DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
 var DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1);

@@ -1,4 +1,4 @@
-if(${DKINIT}){return} else{ $global:DKINIT=1 }	# include_guard
+if(${DK_PS1}){return} else{ $global:DK_PS1=1 }	# include_guard
 
 ### Print Version Info ###
 Write-Host ""
@@ -13,7 +13,7 @@ Write-Host "'"
 
 
 #####################################################################
-# DKINIT()
+# DK()
 #
 #	# Reference: https://ss64.com/ps
 #

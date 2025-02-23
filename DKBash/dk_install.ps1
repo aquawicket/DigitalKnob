@@ -14,7 +14,7 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 	
 	Write-Host "Associating .sh files with DKBash . . ."
 
-	###### DKINIT ######
+	###### INIT ######
 	$global:DIGITALKNOB_DIR = "$env:USERPROFILE/digitalknob"
 	$global:DKBRANCH_DIR = "$DIGITALKNOB_DIR/Development"
 	$global:DKPOWERSHELL_FUNCTION_DIR = "$DKBRANCH_DIR/DKPowershell/functions"

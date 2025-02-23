@@ -12,7 +12,7 @@ dk_callDKBatch = function dk_callDKBatch_f() {
 	COMSPEC = dk_getEnv("%COMSPEC%")
 	WShell = new ActiveXObject("WScript.Shell");
 	
-	var rtncode = WShell.Run("cmd /V:ON /c set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/& C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
+	var rtncode = WShell.Run("start /b cmd /V:ON /c set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/& C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
 	
 	//WShell.Exec("cmd /V:ON /c set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/& C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
 	
@@ -23,8 +23,8 @@ dk_callDKBatch = function dk_callDKBatch_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST() {
 	//dk_debugFunc(0);
 	
-	dk_callDKBatch("dk_debug")
+	dk_callDKBatch("dk_test")
 }
