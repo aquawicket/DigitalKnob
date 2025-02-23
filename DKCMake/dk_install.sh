@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-[ -z "${DKINIT-}" ] && . ../../DKBash/functions/DK.sh
+[ -z "${DK_SH-}" ] && . ../../DKBash/functions/DK.sh
 
 ##################################################################################
 # dk_install()

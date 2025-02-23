@@ -23,7 +23,7 @@ if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 fi
 
 ###### include guard ######
-[ -n "$DKINIT" ] && return || readonly DKINIT=1
+[ -n "$DK_SH" ] && return || readonly DK_SH=1
 
 
 ###### get DKSCRIPT_ variables  ######

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 #[ -n "${HAVE_dk_load}" ] && return || readonly HAVE_dk_load=1
-[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ##################################################################################
 # dk_load(funcName OR funcPath)

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ##################################################################################
 # dk_callDKBatch(func) args
@@ -41,7 +41,7 @@ dk_callDKBatch() {
 	echo "CMD_EXE = '${CMD_EXE}'"
 	echo "DKBATCH_APP_WIN = '${DKBATCH_APP_WIN}'"
 	echo "cmnd = ${CMD_EXE} //V:ON //c ${DKBATCH_FUNCTIONS_DIR}/${1}.cmd ${@:2}"
-	export DKINIT=""
+	#export DKINIT=""
 	${CMD_EXE} //V:ON //c call ${DKBATCH_APP_WIN} ${@:2}
 	#echo "output = ${output}"
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ##################################################################################
 # dk_resetAll()
@@ -45,7 +45,6 @@ dk_resetAll() {
 #	#dk_call dk_info "Restarting ${DKSCRIPT_NAME}. . ."
 #	#dk_call dk_sleep 3
 	
-#	unset DKINIT
 #	unset DKHOME_DIR
 #	unset DK
 #	unset DKF

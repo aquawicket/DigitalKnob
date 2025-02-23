@@ -1,9 +1,7 @@
 #!/usr/bin/env sh
-[ -n "${DKINIT-}" ] && return
-export DKINIT=1
+[ -n "${DK_SH-}" ] && return
+export DK_SH=1
 $(true)
-
-#echo "0 = $0"
 
 ### Print Shell Path ad Version ###
 export ESC=""  # escape character
@@ -17,7 +15,7 @@ echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}"
 echo ""
 
 ##################################################################################
-# DKINIT()
+# DK()
 #
 DK(){
 	###### SUDO_EXE ######
@@ -96,24 +94,9 @@ dkreloadWithBash(){
 	(command -v bash &>/dev/null) || dk_installPackage bash
 	(command -v bash &>/dev/null) && export BASH_EXE=$(command -v bash) || echo "ERROR: bash not found" || exit 1
 	echo "Reloading ${0} with ${BASH_EXE} . . ."
-	unset DKINIT
+	unset DK_SH
 	exec ${BASH_EXE} "${0}"
 	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}'
-}
-
-##################################################################################
-# dkinit()
-#
-dkinit(){
-    echo "Loading DKBash DigitalKnob . . ."
-#   (command -v dk_commandExists &>/dev/null)   || dk_commandExists(){ (command -v ${1} &>/dev/null); }
-#   (command -v builtin &>/dev/null)			&& export builtin="builtin"
-#   (command -v dk_basename &>/dev/null)        || dk_commandExists basename  && dk_basename(){ ${builtin-} echo $(basename ${1-}); }
-#   (command -v dk_dirname &>/dev/null)         || dk_commandExists dirname   && dk_dirname() { ${builtin} echo $(dirname ${1}); }
-#   (command -v dk_realpath &>/dev/null)        || dk_commandExists realpath  && dk_realpath(){ ${builtin} echo $(realpath ${1}); } || dk_realpath(){ ${builtin} echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
-#   (command -v dk_debugFunc &>/dev/null)       || dk_debugFunc(){
-#        [ "${ENABLE_dk_debugFunc-0}" -eq "1" ] && echo "$(dk_basename ${BASH_SOURCE[1]-}):${BASH_LINENO[1]}  ${FUNCNAME[1]}(${BASH_ARGC[1]})" || return $(true)
-#   }
 }
 
 ##################################################################################
