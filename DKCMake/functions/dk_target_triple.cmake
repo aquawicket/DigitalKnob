@@ -43,10 +43,10 @@ function(dk_target_triple)
 
 message("${CMAKE_CURRENT_LIST_LINE}")	
 	### Set Target_Type ###
-	if(Target_Dir MATCHES "Debug")	
-		dk_set(Target_Type Debug)						# Target_Type = Debug
-	elseif(Target_Dir MATCHES "Release")
+	if(Target_Dir MATCHES "Release")
 		dk_set(Target_Type Release)						# Target_Type = Release
+	else()
+		dk_set(Target_Type Debug)						# Target_Type = Debug (DEFAULT)
 	endif()
 	dk_toLower(${Target_Type} target_type)
 	dk_toUpper(${Target_Type} TARGET_TYPE)

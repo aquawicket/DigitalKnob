@@ -48,6 +48,8 @@ if "%~1" == "" (goto dk_install)
 
 
 :dk_install
+	if not "%~1"=="" (goto:eof)
+	
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
@@ -60,7 +62,7 @@ if "%~1" == "" (goto dk_install)
 	
 	::###### DKPowershell ######
 	%dk_call% dk_registryDeleteKey "HKCR\DKPowershell"
-	ftype DKPowershell="%COMSPEC%" /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
+	ftype DKPowershell="%COMSPEC%" /V:ON /K call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR\DKPowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 	
 	::###### .ps1 ######

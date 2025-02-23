@@ -42,6 +42,8 @@ if "%~1" == "" (goto dk_install)
 
 
 :dk_install
+	if not "%~1"=="" (goto:eof)
+	
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
@@ -56,7 +58,7 @@ if "%~1" == "" (goto dk_install)
 	%dk_call% dk_registryDeleteKey "HKCR\DKPhp"
 	
 ::	%dk_call% dk_validate COMSPEC "%dk_call% dk_COMSPEC"
-	ftype DKPhp=%COMSPEC% /c call "%~f0" "%DKPHP_FUNCTIONS_DIR%" "%PHP_EXE%" "%%1" %*
+	ftype DKPhp=%COMSPEC% /V:ON /K call "%~f0" "%DKPHP_FUNCTIONS_DIR%" "%PHP_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR\DKPhp\DefaultIcon" "" "REG_SZ" "%PHP_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKCR\.php"

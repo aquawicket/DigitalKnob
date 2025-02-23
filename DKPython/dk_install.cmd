@@ -54,6 +54,7 @@ exit /b 0
 
 :dk_install
 	if "%~1" neq "" (goto:eof)
+	
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
@@ -65,7 +66,7 @@ exit /b 0
 ::	echo PYTHON3_EXE = %PYTHON3_EXE%
 ::	%dk_call% dk_registryDeleteKey "HKCR\DKPython"
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
-	ftype DKPython=%COMSPEC% /c call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON3_EXE%" "%%1" %*
+	ftype DKPython=%COMSPEC% /V:ON /K call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON3_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR\DKPython\DefaultIcon" "" "REG_SZ" "%PYTHON3_EXE%"	
 ::	%dk_call% dk_registryDeleteKey "HKCR\.py"
 ::	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.py"

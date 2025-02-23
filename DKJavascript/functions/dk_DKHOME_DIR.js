@@ -31,7 +31,7 @@ dk_DKHOME_DIR = function dk_DKHOME_DIR_f(){
 	dk_assertPath(DKHOME_DIR)
 	
 	//console.log("DKHOME_DIR = "+DKHOME_DIR);
-	return DKHOME_DIR;
+	//window["DKHOME_DIR"] = DKHOME_DIR;
 }
 
 
@@ -43,7 +43,7 @@ dk_DKHOME_DIR = function dk_DKHOME_DIR_f(){
 DKTEST = function DKTEST_f() {
 	//dk_debugFunc(0);
 
-	var DKHOME_DIR = dk_DKHOME_DIR();
+	dk_DKHOME_DIR();
 	console.log("DKHOME_DIR = "+DKHOME_DIR);
 	
 	//console.log("dk_DKHOME_DIR:DKTEST()")

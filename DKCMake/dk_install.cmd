@@ -43,6 +43,8 @@ if "%~1" == "" (goto:dk_install)
 
 
 :dk_install
+	if not "%~1"=="" (goto:eof)
+	
 	if not defined DKBATCH_FUNCTIONS_DIR_   (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%\digitalknob\Development\DKBatch\functions\")
 	if not defined DK_CMD 					(call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
@@ -55,7 +57,7 @@ if "%~1" == "" (goto:dk_install)
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
 ::	%dk_call% dk_registryDeleteKey "HKCR\DKCmake"
-	ftype DKCmake=%COMSPEC% /c call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR%" "%%1" %*
+	ftype DKCmake=%COMSPEC% /V:ON /K call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR\DKCmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"
 	
 ::	%dk_call% dk_registryDeleteKey "HKCR\.cmake"

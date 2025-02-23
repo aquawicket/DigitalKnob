@@ -220,14 +220,31 @@ if(typeof location === "object") {
 //}
 
 //var DKSCRIPT_PATH = location.href;
-if(typeof WScript_Shell === "undefined"){ WScript_Shell = new ActiveXObject("WScript.Shell"); }
-if(typeof DKSCRIPT_PATH === "undefined"){ DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");}
-console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
-var DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
-var DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
-var DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1);
-var DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1));
-var DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf("."));
+if(typeof WScript_Shell === "undefined"){ WScript_Shell = new ActiveXObject("WScript.Shell");}
+if(typeof DKSCRIPT_PATH === "undefined"){ 
+	DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");
+	console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
+}
+if(typeof DKSCRIPT_ARGS === "undefined"){ 
+	DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
+	console.log("DKSCRIPT_ARGS = "+DKSCRIPT_ARGS);
+}
+if(typeof DKSCRIPT_DIR === "undefined"){ 
+	DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
+	console.log("DKSCRIPT_DIR = "+DKSCRIPT_DIR);
+}
+if(typeof DKSCRIPT_FILE === "undefined"){ 
+	DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1); 
+	console.log("DKSCRIPT_FILE = "+DKSCRIPT_FILE);
+}
+if(typeof DKSCRIPT_NAME === "undefined"){ 
+	DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1)); 
+	console.log("DKSCRIPT_NAME = "+DKSCRIPT_NAME);
+}
+if(typeof DKSCRIPT_EXT === "undefined"){ 
+	DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf(".")); 
+	console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
+}
 
 
 
@@ -392,3 +409,4 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 	}
 	//}
 //}
+

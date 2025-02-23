@@ -8,6 +8,7 @@
 //################################################################################
 //# dk_echo(message)
 //#
+#include <stdarg.h>
 #include <stdio.h>
 int dk_echo(const char* str, ...){
 	

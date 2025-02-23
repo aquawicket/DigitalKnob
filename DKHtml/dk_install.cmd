@@ -27,6 +27,8 @@ if "%~1" == "" (goto dk_install)
 
 
 :dk_install
+	if not "%~1"=="" (goto:eof)
+	
 	set "BROWSER_EXE=C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
 	
     ::###### DK_CMD ######
