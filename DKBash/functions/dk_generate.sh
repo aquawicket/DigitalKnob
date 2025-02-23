@@ -67,7 +67,8 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-DSHARED=ON"
 	fi
 	
-	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${target_triple}/${target_type}"
+	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${target_triple,,}/${target_type}"
+	dk_call dk_makeDirectory "${CMAKE_BINARY_DIR}"
 	#dk_call dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_call dk_defined WSLENV; then
