@@ -159,11 +159,11 @@ dk_generate() {
 	elif [ "${target_triple,,}" = "win_x86_64_msvc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Visual Studio 17 2022"
 	else
-		dk_call dk_fatal "Could no determine target_triple:${target_triple}"
+		dk_call dk_fatal "Could no determine target_triple:${target_triple,,}"
 	fi
 
 	###### CMAKE_TOOLCHAIN_FILE ######
-#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake"
+#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${target_triple,,}_toolchain.cmake"
 #	dk_call dk_echo "TOOLCHAIN = ${TOOLCHAIN}"
 #	if dk_call dk_pathExists "${TOOLCHAIN}"; then
 #		dk_call dk_arrayPush CMAKE_ARGS "-DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN}"
