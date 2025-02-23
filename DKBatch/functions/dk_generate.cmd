@@ -95,6 +95,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_assertVar CMAKE_BINARY_DIR
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 
+	echo target_triple = %target_triple%
+	pause
 	if "%target_triple%"=="COSMOPOLITAN"			(set CMAKE_GENERATOR="MSYS Makefiles")
     if "%target_triple%"=="ANDROID_ARM32_CLANG"		(set CMAKE_GENERATOR="Unix Makefiles")
     if "%target_triple%"=="ANDROID_ARM64_CLANG"		(set CMAKE_GENERATOR="Unix Makefiles")

@@ -30,7 +30,7 @@ if "%~1" == "" (goto :dk_install)
 	if exist "%APP_FILE%" (del "%APP_FILE:/=\%")
 
 	::set "COMPILE_COMMAND=%DK_CXX_COMPILER% -mclang -mcosmo -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
-	set COMPILE_COMMAND=%DK_C_COMPILER% -o %APP_FILE% -static %DKC_FILE%
+	set COMPILE_COMMAND=%DK_C_COMPILER% -L/c/Users/Administrator/digitalknob/Development/3rdParty/msys2-base-x86_64-20241208/mingw64/lib -o %APP_FILE% -static %DKC_FILE%
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 	
@@ -75,7 +75,7 @@ if "%~1" == "" (goto :dk_install)
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
 	::if not defined target_os		(set "target_os=win")
-	::if not defined target_arch		(set "target_arch=x86_64")
+	::if not defined target_arch	(set "target_arch=x86_64")
 	::if not defined target_env		(set "target_env=gcc")
 	
 	::###### DK_CMD ######

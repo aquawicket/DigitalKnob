@@ -12,7 +12,7 @@ setlocal
 	set "_name_=%~1"
 	set "_args_=%*"
 
-	if defined _args_ (set "_args_=!_args_:%_name_% =!")
+	if defined _args_ (set "_args_=!_args_:*%~1 =!")
 	
     endlocal & (
 		set "%_name_%=%_args_%"

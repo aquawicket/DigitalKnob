@@ -248,11 +248,11 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	)
 		
 	if defined target_env (
-		%dk_call% dk_set target_triple "!target_os!_!target_arch!_!target_env!"
-		%dk_call% dk_set TARGET_TRIPLE "!TARGET_OS!_!TARGET_ARCH!_!TARGET_ENV!"
+		%dk_call% dk_set target_triple !target_os!_!target_arch!_!target_env!
+		%dk_call% dk_set TARGET_TRIPLE !TARGET_OS!_!TARGET_ARCH!_!TARGET_ENV!
 	) else (
-		%dk_call% dk_set target_triple "!target_os!_!target_arch!"
-		%dk_call% dk_set TARGET_TRIPLE "!TARGET_OS!_!TARGET_ARCH!"
+		%dk_call% dk_set target_triple !target_os!_!target_arch!
+		%dk_call% dk_set TARGET_TRIPLE !TARGET_OS!_!TARGET_ARCH!
 	)
 	%dk_call% dk_assertVar target_triple
 	%dk_call% dk_assertVar TARGET_TRIPLE

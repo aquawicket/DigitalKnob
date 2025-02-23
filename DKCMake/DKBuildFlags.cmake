@@ -128,7 +128,7 @@ include_guard()
 
 
 dk_validate(host_triple   "dk_host_triple()")
-dk_validate(TARGET_TRIPLE "dk_target_triple()")
+dk_validate(target_triple "dk_target_triple()")
 ########### CORE DEPENDENCIES ############
 dk_depend(cmake)
 
