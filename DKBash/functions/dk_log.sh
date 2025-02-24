@@ -122,7 +122,7 @@
 [ -z ${FATAL_LINE-} ]     	&& FATAL_LINE=0
 [ -z ${FATAL_PAUSE-} ]    	&& FATAL_PAUSE=0
 [ -z ${FATAL_TIMEOUT-} ]   	&& FATAL_TIMEOUT=9
-[ -z ${FATAL_HALT-} ]     	&& FATAL_HALT=1
+[ -z ${FATAL_HALT-} ]     	&& FATAL_HALT=0
 
 ##################################################################################
 # dk_log(message)
