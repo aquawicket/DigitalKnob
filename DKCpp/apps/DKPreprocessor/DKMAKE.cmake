@@ -15,7 +15,6 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\### This file is gener
 dk_fileWrite(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt   "cmake_minimum_required(VERSION 3.10) \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "include(\${DKCMAKE_FUNCTIONS_DIR}/DK.cmake) \n\n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "### ${APP_NAME} ### \n")
-#dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "cmake_policy(SET CMP0054 NEW) \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "project(${APP_NAME}) \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "include_directories(${CMAKE_CURRENT_LIST_DIR}) \n")
 dk_validate(DKCPP_PLUGINS_DIR "dk_DKBRANCH_DIR()")

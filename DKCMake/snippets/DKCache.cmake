@@ -14,7 +14,6 @@ if(NOT OS)
 	message(FATAL_ERROR "The OS variable has not been set for DKCache.cmake")
 endif()
 
-#cmake_policy(SET CMP0074 NEW)
 #project(HelloWorld C CXX)
 ##set(OS win_x86 CACHE PATH "" FORCE)
 set(DK3RDPARTY_DIR "C:/Users/$ENV{USERNAME}/digitalknob/Development/3rdParty" CACHE PATH "" FORCE)
