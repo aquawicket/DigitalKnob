@@ -1,6 +1,7 @@
-message("######################################################################")
-message("#################### linux_arm32_gcc_toolchain.cmake #################")
-message("######################################################################")
+message("############################################################################")
+message("###################### linux_arm32_gcc_toolchain.cmake #####################")
+message("############################################################################")
+# https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 
 #dk_depend(build-essential)
 dk_depend(gcc)

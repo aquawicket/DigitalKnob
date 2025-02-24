@@ -1,6 +1,7 @@
-message(STATUS "####################################################################")
-message(STATUS "################ android_arm32_clang_toolchain.cmake ###############")
-message(STATUS "####################################################################")
+message(STATUS "#####################################################################")
+message(STATUS "################ android_arm32_clang_toolchain.cmake ################")
+message(STATUS "#####################################################################")
+# https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 
 dk_validate(ANDROID_NDK					"dk_depend(android-ndk)")
 dk_set(ANDROID_ABI						armeabi-v7a)
@@ -8,8 +9,6 @@ dk_set(ANDROID_CPP_FEATURES				"rtti exceptions")
 dk_set(ANDROID_STL						c++_static)
 dk_set(ANDROID_STL_FORCE_FEATURES		1)
 dk_set(ANDROID_TOOLCHAIN				clang)
-
-
 
 dk_set(CMAKE_TOOLCHAIN_FILE				"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
 dk_set(CMAKE_GENERATOR					"Unix Makefiles")

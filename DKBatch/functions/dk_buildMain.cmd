@@ -30,13 +30,20 @@ setlocal enableDelayedExpansion
 		if exist "%BUILD_LIST_FILE%" (
 			%dk_call% dk_fileToGrid "%BUILD_LIST_FILE%" BUILD_LIST
 			if not defined _line_ (set /a _line_=0)
-			:skip_comments
+			:skipTarget
 			call set "comment_check=%%BUILD_LIST[!_line_!][0]%%"
 			if "!comment_check:~0,1!"=="#" (
 				rem echo skipping _line_ . . .
 				set /a _line_+=1
-				goto skip_comments
+				goto skipTarget
 			)
+			::Each host_arch will have a list of compatible triples
+			::The the current host_arch doesn't have the target_tripple in it's allowed list
+			::We goto skipTarget, we could also have a disabled list for each host_arch to do the same:
+			::A block list could be good, because everything will be attempted by default instead of enabled.
+			:: Example win_x86 mac ios iossim     = win_x86_host's will skip all instaces of mac, ios and iossim
+			::         
+			
 			 %dk_call% dk_printVar BUILD_LIST[!_line_!][2]
 			if defined BUILD_LIST[!_line_!][2] (
 				set "UPDATE=1"
