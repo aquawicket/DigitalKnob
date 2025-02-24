@@ -90,8 +90,8 @@
 [ -z ${FIXME_TAG-} ]      	&& FIXME_TAG="FIXME: "
 [ -z ${FIXME_TRACE-} ]    	&& FIXME_TRACE=0
 [ -z ${FIXME_LINE-} ]     	&& FIXME_LINE=0
-[ -z ${FIXME_PAUSE-} ]    	&& FIXME_PAUSE=1
-[ -z ${FIXME_TIMEOUT-} ]   	&& FIXME_TIMEOUT=0
+[ -z ${FIXME_PAUSE-} ]    	&& FIXME_PAUSE=0
+[ -z ${FIXME_TIMEOUT-} ]   	&& FIXME_TIMEOUT=30
 [ -z ${FIXME_HALT-} ]     	&& FIXME_HALT=0
 
 # WARNING
@@ -110,7 +110,7 @@
 [ -z ${ERROR_TAG-} ]      	&& ERROR_TAG="ERROR: "
 [ -z ${ERROR_TRACE-} ]    	&& ERROR_TRACE=1
 [ -z ${ERROR_LINE-} ]     	&& ERROR_LINE=0
-[ -z ${ERROR_PAUSE-} ]    	&& ERROR_PAUSE=1
+[ -z ${ERROR_PAUSE-} ]    	&& ERROR_PAUSE=0
 [ -z ${ERROR_TIMEOUT-} ]   	&& ERROR_TIMEOUT=3
 [ -z ${ERROR_HALT-} ]     	&& ERROR_HALT=0
 
