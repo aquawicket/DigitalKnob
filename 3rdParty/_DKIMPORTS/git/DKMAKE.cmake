@@ -9,18 +9,15 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://git-scm.com
 # https://github.com/git-for-windows/git
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-#dk_getFileParam("${DKIMPORTS_DIR}/git/dkconfig.txt" GIT_DL_VERSION)
 dk_getFileParam("${DKIMPORTS_DIR}/git/dkconfig.txt" GIT_DL_WIN_X86)
 dk_getFileParam("${DKIMPORTS_DIR}/git/dkconfig.txt" GIT_DL_WIN_X86_64)
 
 ### DOWNLOAD ###
 dk_validate(host_triple "dk_host_triple()")
 if(WIN_X86_HOST)
-	#set(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_DL_VERSION}.windows.1/PortableGit-${GIT_DL_VERSION}-32-bit.7z.exe)
 	set(GIT_DL "${GIT_DL_WIN_X86}")
 endif()
 if(WIN_X86_64_HOST)
-	#set(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_DL_VERSION}.windows.1/PortableGit-${GIT_DL_VERSION}-64-bit.7z.exe)
 	set(GIT_DL "${GIT_DL_WIN_X86_64}")
 endif()
 if(WIN_HOST AND NOT GIT_DL)
