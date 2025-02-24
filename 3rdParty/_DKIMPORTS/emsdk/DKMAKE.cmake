@@ -80,7 +80,7 @@ endif()
 
 dk_set(EMSDK_ENV 	"${EMSDK}/emsdk_env${bat}")			
 dk_set(EMCONFIGURE	"${EMSDK}/upstream/emscripten/emconfigure${bat}")   
-dk_set				(EMSDK_TOOLCHAIN_FILE 		${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+dk_set				(EMSDK_TOOLCHAIN_FILE 		"${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake")
 dk_set				(EMSDK_GENERATOR 			"Unix Makefiles")
 dk_set				(EMSDK_AR 					"${EMSDK}/upstream/emscripten/emar${bat}")				# Name of archiving tool for static libraries.
 dk_assertPath		(EMSDK_AR)
