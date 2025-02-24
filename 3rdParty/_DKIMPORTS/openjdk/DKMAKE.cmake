@@ -18,13 +18,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://gist.github.com/douglarek/bbda8cc23a562cb5d5798717d57bc9e9
 
 dk_validate(host_triple "dk_host_triple()")
-if(WIN_HOST)
-	set(OPENJDK_WIN_DL		"https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip")
-elseif(MAC_HOST)
-	set(OPENJDK_MAC_DL		"https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz")
-elseif(LINUX_HOST)
-	set(OPENJDK_LINUX_DL	"https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz")
-endif()
+dk_getFileParam("${DKIMPORTS_DIR}/openjdk/dkconfig.txt" OPENJDK_DL_WIN_X86_64)
+dk_getFileParam("${DKIMPORTS_DIR}/openjdk/dkconfig.txt" OPENJDK_DL_MAC_X86_64)
+dk_getFileParam("${DKIMPORTS_DIR}/openjdk/dkconfig.txt" OPENJDK_DL_LINUX_X86_64)
 
 if(ANDROID_HOST)
 	dk_installPackage(openjdk-17)
@@ -40,7 +36,7 @@ endif()
 
 if(MAC_HOST)
 	if(NOT EXISTS /Library/Java/JavaVirtualMachines/jdk-11.jdk)
-		dk_download(${OPENJDK_MAC_DL} ${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
+		dk_download(${OPENJDK_DL_MAC_X86_64} ${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 		dk_command(tar xf ${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 		
 		dk_validate(SUDO_EXE "dk_depend(sudo)")
@@ -52,9 +48,10 @@ if(MAC_HOST)
 endif()
 
 if(WIN_HOST)
-	dk_import(${OPENJDK_WIN_DL})
-	dk_validate(CMD_EXE "dk_CMD_EXE()")
+	dk_import(${OPENJDK_DL_WIN_X86_64})
 	
+	dk_set(JAVAC_EXE "${OPENJDK}/bin/javac.exe")
+
 	###### JAVA_VERSION ######
 	set(ENV{JAVA_VERSION} 11)
 	
@@ -62,9 +59,12 @@ if(WIN_HOST)
 	dk_nativePath("${OPENJDK}" ENV{JAVA_HOME})
 	
 	###### JAVA Registry ######
+	dk_validate(CMD_EXE "dk_CMD_EXE()")
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" /v CurrentVersion /t REG_SZ /d "$ENV{JAVA_VERSION}" /f)
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v JavaHome /t REG_SZ /d "$ENV{JAVA_HOME}" /f)
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v RuntimeLib /t REG_SZ /d "$ENV{JAVA_HOME}\\bin\\server\\jvm.dll" /f)
+	
+	
 	
 	###### VS_JavaHome ######
 #	set(ENV{VS_JavaHome} "$ENV{JAVA_HOME}")
