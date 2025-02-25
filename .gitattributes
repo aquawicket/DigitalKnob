@@ -1,6 +1,6 @@
 #*          text eol=lf
 *.bash      text eol=lf
-#*.bat       text eol=crlf
+*.bat       text eol=lf
 *.c 		text eol=lf
 *.cmake		text eol=lf
 *.cmd       text eol=lf
