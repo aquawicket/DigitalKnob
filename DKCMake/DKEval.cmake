@@ -27,7 +27,7 @@ include_guard()
 # SOFTWARE.
 
 #message("DKCOMMAND = ${DKCOMMAND}")
-
+string(REPLACE "'" "\"" DKCOMMAND ${DKCOMMAND})
 dk_parseFunctionsAndLoadFromString("${DKCOMMAND}")
 dk_eval("${DKCOMMAND}")
 
