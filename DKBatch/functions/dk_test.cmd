@@ -13,6 +13,7 @@ setlocal enableDelayedExpansion
 	echo ################# dk_test.cmd ################
 	echo ### cmd variables ###
 	if not "%~0"=="" (echo                     0 = '%~0')
+	echo                     * = '%*'
 	if not "%~1"=="" (echo                     1 = '%~1')
 	if not "%~2"=="" (echo                     2 = '%~2')
 	if not "%~3"=="" (echo                     3 = '%~3')
@@ -22,13 +23,15 @@ setlocal enableDelayedExpansion
 	if not "%~7"=="" (echo                     7 = '%~7')
 	if not "%~8"=="" (echo                     8 = '%~8')
 	if not "%~9"=="" (echo                     9 = '%~9')
-	echo                     * = '%*'
 	echo            ERRORLEVEL = '%ERRORLEVEL%'
 	echo                  DATE = '%DATE%'
 	echo                  TIME = '%TIME%'
 	echo               COMSPEC = '%COMSPEC%'
 	echo:
 	echo ### DK variables ###
+	echo                DKSHELL = '%DKSHELL%'
+	echo           DKSHELL_PATH = '%DKSHELL_PATH%'
+	echo        DKSHELL_VERSION = '%DKSHELL_VERSION%'
 	echo                    LVL = '%LVL%'
 	echo               __TIME__ = '%__TIME__%'
 	echo               __CMND__ = '%__CMND__%'

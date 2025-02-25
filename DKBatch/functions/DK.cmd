@@ -3,20 +3,25 @@ if defined DK_CMD (goto:eof) else (set "DK_CMD=1")
 
 ::###### Print Version Info ######
 echo:
-for %%Z in ("%COMSPEC%") do (set "DKSHELL=%%~nZ")
-for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")
-if defined COMSPEC (set "DKSHELL_PATH=%COMSPEC:\=/%")
-set "ESC="                         &:: escape character
-echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
-echo DKSHELL_PATH = %DKSHELL_PATH%
-if defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
-echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
-echo:
-set "DKBATCH_FUNCTIONS_DIR_=%~dp0"
-set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
+if defined COMSPEC (set "DKSHELL_PATH=%COMSPEC:\=/%")						&:: ### DKSHELL_PATH ###
+for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL=%%~nZ")						&:: ### DKSHELL ###
+for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")	&:: ### DKSHELL_VERSION ###
+set "DKSHELL_VERSION=%DKSHELL_VERSION:Version =%"
+set "ESC="																	&:: ### ESC ###
+if not defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%~1")						&:: ### DKSCRIPT_PATH ###
+if not defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%~0")
+set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
+if not defined DKSCRIPT_ARGS (set "DKSCRIPT_ARGS=%*")						&:: ### DKSCRIPT_ARGS ###
+call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%1=%%"
+if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%~dp0")	&:: ### DKBATCH_FUNCTIONS_DIR_ ###
 set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:\=/%"
+set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"									&:: ### PATH ###
 
-::if not exist "%~0.cmd" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
+echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
+
+
+
+::if not exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 
 (set \n=^^^
 %= This creates an escaped Line Feed - DO NOT ALTER =%
@@ -277,7 +282,7 @@ set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:\=/%"
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal enableDelayedExpansion
-    ::%dk_call% dk_debugFunc 0
+    %dk_call% dk_debugFunc 0
 	
-	%DKSCRIPT_PATH:/=\%
+	%DKSCRIPT_PATH%
 %endfunction%

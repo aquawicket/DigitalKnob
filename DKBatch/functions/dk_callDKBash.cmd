@@ -16,9 +16,6 @@ setlocal
 	
 	::### Get DKC_FUNCTIONS_DIR
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if not exist "%DKBASH_FUNCTIONS_DIR%"		(mkdir "%DKBASH_FUNCTIONS_DIR%")
-	if not exist "%DKBASH_FUNCTIONS_DIR_%"		(set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR%/")
-	%dk_call% dk_assertPath DKBASH_FUNCTIONS_DIR
 	
 	::### Get DKHTTP_DKBASH_FUNCTIONS_DIR
 	if not defined DKHTTP_DKBASH_DIR            (set "DKHTTP_DKBASH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBash")
@@ -28,10 +25,10 @@ setlocal
 	if not exist %DKBASH_FUNCTIONS_DIR%/DK.sh	(%dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/DK.sh" "%DKBASH_FUNCTIONS_DIR%/DK.sh")
 	if not exist %DKBASH_FUNCTIONS_DIR%/%~1.sh	(%dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/%~1.sh" "%DKBASH_FUNCTIONS_DIR%/%~1.sh")
 
-	%dk_call% dk_BASH_EXE
+	%dk_call% dk_validate BASH_EXE "%dk_call% dk_BASH_EXE"
 
-	set ALL_BUT_FIRST=%*
-	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
+::	set ALL_BUT_FIRST=%*
+::	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
 	
     :: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
@@ -65,12 +62,15 @@ setlocal
 ::		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
 ::	)
 	
+	set "test=DKBatch"
 	::###### run command ######
-	set "BASH_FUNCTION=%DKBASH_FUNCTIONS_DIR:\=/%/%~1.sh"
+	set "bash_file=%DKBASH_FUNCTIONS_DIR:\=/%/%~1.sh"
 	if defined USE_WSL (
-		set DKBASH_COMMAND=%WSL_EXE% bash -c 'export DKINIT=; export RELOAD_WITH_BASH=; . %BASH_FUNCTION%; %1 %ALL_BUT_FIRST%'
+		rem set DKBASH_COMMAND=%WSL_EXE% bash -c 'export RELOAD_WITH_BASH=; . %bash_file%; %1 %ALL_BUT_FIRST%'
+		set DKBASH_COMMAND=%WSL_EXE% bash -c '. %bash_file%; %*'
 	) else (
-		set DKBASH_COMMAND=%BASH_EXE% -c 'export DKINIT=; export RELOAD_WITH_BASH=; . %BASH_FUNCTION%; %1 %ALL_BUT_FIRST%'
+		rem set DKBASH_COMMAND=%BASH_EXE% -c 'export RELOAD_WITH_BASH=; . %bash_file%; %1 %ALL_BUT_FIRST%'
+		set DKBASH_COMMAND=%BASH_EXE% -c '. %bash_file%; %*'
 	)
 	::echo DKBASH_COMMAND = %DKBASH_COMMAND%
 	echo ############################################

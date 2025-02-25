@@ -8,6 +8,7 @@ dk_test() {
     #dk_debugFunc 0 99
     
     echo "################ dk_test.sh ################"
+	echo "                 test = ${test-}"
     echo "                    0 = ${0-}"
 	echo "                    1 = ${1-}"
 	echo "                    2 = ${2-}"
@@ -33,7 +34,7 @@ dk_test() {
     echo "        DKSCRIPT_NAME = ${DKSCRIPT_NAME-}"
     echo "         DKSCRIPT_EXT = ${DKSCRIPT_EXT-}"
     echo "        DKSCRIPT_ARGS = ${DKSCRIPT_ARGS-}"
-    echo "           DKHOME_DIR = ${DKHOME_DIR-}"
+    echo "           DKHOME_DIR = $(dk_call dk_DKHOME_DIR)"
     echo "          DKCACHE_DIR = ${DKCACHE_DIR-}"
     echo "        DKDESKTOP_DIR = ${DKDESKTOP_DIR-}"
     echo "          DIGITALKNOB = ${DIGITALKNOB-}"
