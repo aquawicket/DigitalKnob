@@ -9,7 +9,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1
  
-	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
+	set "_reg_path_=%~1"
+ 
+	for /f "usebackq delims=" %%a in (`reg query %_reg_path_:/=\%`) do (
 		echo %%a
 	)
 %endfunction%
@@ -22,5 +24,5 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
    
-    %dk_call% dk_registryListKeys "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
+    %dk_call% dk_registryListKeys "HKLM/SYSTEM/ControlSet001/Services/SharedAccess/Parameters/FirewallPolicy/FirewallRules"
 %endfunction%

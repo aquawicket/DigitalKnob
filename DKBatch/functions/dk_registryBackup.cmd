@@ -27,14 +27,13 @@ setlocal
 	%dk_call% dk_echo "REG_BACKUP_DIR = %REG_BACKUP_DIR%"
 	%dk_call% dk_makeDirectory "%REG_BACKUP_DIR%"
 	
-	set "REG_EXE=%SYSTEMROOT:\=/%/System32/reg.exe"
-	%dk_call% dk_assertPath REG_EXE
+	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
 	
-    "%REG_EXE:/=\%" export HKLM %REG_BACKUP_DIR:/=\%\HKLM.reg
-	"%REG_EXE:/=\%" export HKCU %REG_BACKUP_DIR:/=\%\HKCU.reg
-	"%REG_EXE:/=\%" export HKCR %REG_BACKUP_DIR:/=\%\HKCR.reg
-	"%REG_EXE:/=\%" export HKU  %REG_BACKUP_DIR:/=\%\HKU.reg
-	"%REG_EXE:/=\%" export HKCC %REG_BACKUP_DIR:/=\%\HKCC.reg
+    "%REG_EXE%" export HKLM %REG_BACKUP_DIR:/=\%\HKLM.reg
+	"%REG_EXE%" export HKCU %REG_BACKUP_DIR:/=\%\HKCU.reg
+	"%REG_EXE%" export HKCR %REG_BACKUP_DIR:/=\%\HKCR.reg
+	"%REG_EXE%" export HKU  %REG_BACKUP_DIR:/=\%\HKU.reg
+	"%REG_EXE%" export HKCC %REG_BACKUP_DIR:/=\%\HKCC.reg
 	
 	%dk_call% dk_success "Registry Backup Complete"
 %endfunction%

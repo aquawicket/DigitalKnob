@@ -45,13 +45,12 @@ setlocal
 	
     %dk_call% dk_registryKeyExists "%_reg_path_%" || (
 		%dk_call% dk_warning "dk_registryDeleteKey: _reg_path_:%_reg_path_% does not exist"
-		exit /b 0
+		%return%
 	)
     
-	set "REG_EXE=%SYSTEMROOT:\=/%/System32/reg.exe"
-	%dk_call% dk_assertPath REG_EXE
+	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
 	
-    "%REG_EXE:/=\%" delete "%_reg_path_:/=\%" /f
+    "%REG_EXE%" delete "%_reg_path_:/=\%" /f
 
 %endfunction%
 
@@ -63,5 +62,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
+	%dk_call% dk_registryDeleteKey "NonExistant"
     %dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.txt"
 %endfunction%

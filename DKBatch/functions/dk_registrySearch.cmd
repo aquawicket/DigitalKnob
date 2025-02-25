@@ -25,11 +25,11 @@ setlocal enableDelayedExpansion
 
 	set "_haystack_=%~1"
     set "_needle_=%~2"
-	::set "rtn_var=%~3"
+	if not defined _needle_ (%dk_call% dk_warning "search is empty" & %return%)
 	
+	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
 	set /a i=0
-	::reg query %_haystack_% /s /f "%_needle_%" /k /v /d
-	for /f "tokens=1,2,3" %%a in ('reg query !_haystack_! /s /f "!_needle_!" /k /v /d') do (
+	for /f "tokens=1,2,3" %%a in ('!REG_EXE! query !_haystack_! /s /f "!_needle_!" /k /v /d') do (
 		set "LINE=%%a"
 		set "LINE=!LINE:~,4!"
 		rem echo LINE = !LINE!
@@ -45,13 +45,7 @@ setlocal enableDelayedExpansion
 		)
 		
 		set "dk_registrySearch[!i!]=!regpath!;!value_name!;!value_type!;!value_data!"
-		rem echo %~3[!i!] = !regpath!;!value_name!;!value_type!;!value_data!
 		set /a i+=1
-		rem echo regpath = !regpath!
-		rem echo value_name = !value_name!
-		rem echo value_type = !value_type!
-		rem echo value_data = !value_data!
-		rem echo:
 	)
 	(call )
 	
@@ -86,7 +80,11 @@ setlocal enableDelayedExpansion
     %dk_call% dk_registrySearch "HKCR" %dk_inputBox%
 	%dk_call% dk_printVar dk_registrySearch
 	%dk_call% dk_registrySearch "HKCU" %dk_inputBox%
+	%dk_call% dk_printVar dk_registrySearch
 	%dk_call% dk_registrySearch "HKLM" %dk_inputBox%
+	%dk_call% dk_printVar dk_registrySearch
 	%dk_call% dk_registrySearch "HKU"  %dk_inputBox%
+	%dk_call% dk_printVar dk_registrySearch
 	%dk_call% dk_registrySearch "HKCC" %dk_inputBox%
+	%dk_call% dk_printVar dk_registrySearch
 %endfunction%
