@@ -21,7 +21,7 @@ setlocal enableDelayedExpansion
 	
 	::###### _args_ ######
 	set _args_=%*
-	if defined _args_ (set _args_=!_args_:*%1=!)
+	if defined _args_ (set _args_=!_args_:%~1 =!)
 	
 	::###### _last_arg_ ######
 	for %%a in (%*) do set _last_arg_=%%a
@@ -100,7 +100,7 @@ setlocal enableDelayedExpansion
 	)
 	
 	::###### run executable ######
-	%dk_call% dk_commandToVariable "%_app_exe_:/=\%" %_args_%
+	%dk_call% dk_commandToVariable %_app_exe_% %_args_%
 	endlocal & (
 		set "dk_callDKC=%dk_commandToVariable%"
 	)
