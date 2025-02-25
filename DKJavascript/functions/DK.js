@@ -3,6 +3,8 @@ var assets = "file:///C:/Users/Administrator/digitalknob/Development";
 var USE_FILESYSTEM = 0;
 var USE_NODEJS=0;
 
+
+
 //###### Console ######
 (function(con) {
 	'use strict';
@@ -10,6 +12,7 @@ var USE_NODEJS=0;
 	var empty = {};
 	if(typeof ActiveXObject === "function"){
 		if(typeof WScript === "object"){
+			if(typeof WScript.StdOut !== "undefined")
 			var print = function(msg) { WScript.StdOut.Write(msg+"\n"); };
 		} else {
 			var print = function(msg) {
@@ -27,6 +30,8 @@ var USE_NODEJS=0;
 	while (prop = properties.pop()) con[prop] = con[prop] || empty;
 	while (method = methods.pop()) con[method] = con[method] || print;
 })(this.console = this.console || {});
+
+
 
 
 //############ dk_check ############
@@ -49,16 +54,20 @@ if(USE_NODEJS){
 
 
 
-//############ HOST ############
-var HOST = "unknown"
+//############ DKSHELL ############
+var DKENGINE = "unknown"
 if(typeof ActiveXObject === "function"){
-	if(typeof WScript === "object"){ HOST = "jscript"; }
-	else{ HOST = "DKHta" }
+	if(typeof WScript === "object"){ // JScript
+		var DKENGINE = ScriptEngine();
+		var DKENGINE_VERSION = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
+	}
+	else{ DKENGINE = "DKHta"; }
 } else { 
-	HOST = "Browser" 
+	DKENGINE = "Browser" 
 }
-dk_check('HOST');
-console.log("HOST = "+HOST);
+dk_check('DKENGINE');
+//console.log("DKENGINE = "+DKENGINE);
+//console.log("DKENGINE_VERSION = "+DKENGINE_VERSION);
 
 
 //############ ARGV, ARGC ############
@@ -174,7 +183,7 @@ if(typeof ActiveXObject === "function"){
 		var WShell = new ActiveXObject("WScript.Shell");
 	}
 }
-dk_check('WShell');
+//dk_check('WShell');
 
 /*
 //############ documentElement ############
@@ -189,10 +198,20 @@ dk_check('documentElement');
 //############ location ############
 if(typeof location === "undefined"){ 
 	var location = new Object;
-	location.href = document.url;
-	console.log("location.href = "+location.href);
 }
 dk_check('location');
+if(typeof location.href === "undefined"){
+	if(typeof document.url !== "undefined"){
+		location.href = document.url;
+	}
+}
+console.log("location.href = "+location.href);
+if(typeof DKSCRIPT_PATH === "undefined"){
+	var DKSCRIPT_PATH = location.href;
+}
+console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
+
+
 
 
 //############ queryString ############
@@ -219,98 +238,115 @@ if(typeof location === "object") {
 //	var DKSCRIPT_PATH = location.href;
 //}
 
+
 //var DKSCRIPT_PATH = location.href;
-if(typeof WScript_Shell === "undefined"){ WScript_Shell = new ActiveXObject("WScript.Shell");}
+if(typeof WScript_Shell === "undefined"){ 
+	if(typeof ActiveXObject === "function"){
+		WScript_Shell = new ActiveXObject("WScript.Shell");
+	}
+}
 if(typeof DKSCRIPT_PATH === "undefined"){ 
-	DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");
-	console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
+	if(typeof WScript_Shell !== "undefined"){
+		DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");
+		console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
+	}
 }
-if(typeof DKSCRIPT_ARGS === "undefined"){ 
-	DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
-	console.log("DKSCRIPT_ARGS = "+DKSCRIPT_ARGS);
+if(typeof DKSCRIPT_ARGS === "undefined"){
+	if(typeof WScript_Shell !== "undefined"){
+		DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
+		console.log("DKSCRIPT_ARGS = "+DKSCRIPT_ARGS);
+	}
 }
-if(typeof DKSCRIPT_DIR === "undefined"){ 
-	DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
-	console.log("DKSCRIPT_DIR = "+DKSCRIPT_DIR);
+if(typeof DKSCRIPT_DIR === "undefined"){
+	if(typeof DKSCRIPT_PATH !== "undefined"){
+		DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
+		console.log("DKSCRIPT_DIR = "+DKSCRIPT_DIR);
+	}
 }
-if(typeof DKSCRIPT_FILE === "undefined"){ 
-	DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1); 
-	console.log("DKSCRIPT_FILE = "+DKSCRIPT_FILE);
+if(typeof DKSCRIPT_FILE === "undefined"){
+	if(typeof DKSCRIPT_PATH !== "undefined"){
+		DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1); 
+		console.log("DKSCRIPT_FILE = "+DKSCRIPT_FILE);
+	}
 }
-if(typeof DKSCRIPT_NAME === "undefined"){ 
-	DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1)); 
-	console.log("DKSCRIPT_NAME = "+DKSCRIPT_NAME);
+if(typeof DKSCRIPT_NAME === "undefined"){
+	if(typeof DKSCRIPT_PATH !== "undefined"){
+		DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1)); 
+		console.log("DKSCRIPT_NAME = "+DKSCRIPT_NAME);
+	}
 }
-if(typeof DKSCRIPT_EXT === "undefined"){ 
-	DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf(".")); 
-	console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
+if(typeof DKSCRIPT_EXT === "undefined"){
+	if(typeof DKSCRIPT_PATH !== "undefined"){
+		DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf(".")); 
+		console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
+	}
 }
 
 
+if(typeof DKSCRIPT_PATH !== "undefined"){
+	//###### DKHOME_DIR variables ######
+	var DIGITALKNOB = "digitalknob"
+	var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1);
+	var DKCACHE_DIR = DKHOME_DIR+"/.dk"
+	var DKDESKTOP_DIR = DKHOME_DIR+"/Desktop"
 
-//###### DKHOME_DIR variables ######
-var DIGITALKNOB = "digitalknob"
-var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1);
-var DKCACHE_DIR = DKHOME_DIR+"/.dk"
-var DKDESKTOP_DIR = DKHOME_DIR+"/Desktop"
+	//###### DIGITALKNOB_DIR variables ######
+	var DIGITALKNOB_DIR = DKHOME_DIR+"/"+DIGITALKNOB
+	var DKDOWNLOAD_DIR = DIGITALKNOB_DIR+"/download"
+	var DKTOOLS_DIR = DIGITALKNOB_DIR+"/DKTools"
 
-//###### DIGITALKNOB_DIR variables ######
-var DIGITALKNOB_DIR = DKHOME_DIR+"/"+DIGITALKNOB
-var DKDOWNLOAD_DIR = DIGITALKNOB_DIR+"/download"
-var DKTOOLS_DIR = DIGITALKNOB_DIR+"/DKTools"
-
-//###### DKBRANCH_DIR variables ######
-var DKBRANCH = "Development"
-var DKBRANCH_DIR = DIGITALKNOB_DIR+"/"+DKBRANCH
-var DK3RDPARTY_DIR = DKBRANCH_DIR+"/3rdParty"
-var DKIMPORTS_DIR = DK3RDPARTY_DIR+"/_DKIMPORTS"
-var DKCPP_APPS_DIR = DKBRANCH_DIR+"/DKCpp/DKCpp/apps"
-var DKBASH_DIR = DKBRANCH_DIR+"/DKBash"
-var DKBASH_FUNCTIONS_DIR = DKBASH_DIR+"/functions"
-var DKBASH_FUNCTIONS_DIR_ = DKBASH_DIR+"/functions/"
-var DKBATCH_DIR = DKBRANCH_DIR+"/DKBatch"
-var DKBATCH_FUNCTIONS_DIR = DKBATCH_DIR+"/functions"
-var DKBATCH_FUNCTIONS_DIR_ = DKBATCH_DIR+"/functions/"
-var DKC_DIR = DKBRANCH_DIR+"/DKC"
-var DKC_FUNCTIONS_DIR = DKC_DIR+"/functions"
-var DKC_FUNCTIONS_DIR_ = DKC_DIR+"/functions/"
-var DKCMAKE_DIR = DKBRANCH_DIR+"/DKCMake"
-var DKCMAKE_FUNCTIONS_DIR = DKCMAKE_DIR+"/functions"
-var DKCMAKE_FUNCTIONS_DIR_ = DKCMAKE_DIR+"/functions/"
-var DKCPP_DIR = DKBRANCH_DIR+"/DKCpp"
-var DKCPP_APPS_DIR = DKCPP_DIR+"/DKCpp/apps"
-var DKCPP_FUNCTIONS_DIR = DKCPP_DIR+"/functions"
-var DKCPP_FUNCTIONS_DIR_ = DKCPP_DIR+"/functions/"
-var DKCSHARP_DIR = DKBRANCH_DIR+"/DKCSharp"
-var DKCSHARP_FUNCTIONS_DIR = DKCSHARP_DIR+"/functions"
-var DKCSHARP_FUNCTIONS_DIR_ = DKCSHARP_DIR+"/functions/"
-var DKHTA_DIR = DKBRANCH_DIR+"/DKHta"
-var DKHTA_FUNCTIONS_DIR = DKHTA_DIR+"/functions"
-var DKHTA_FUNCTIONS_DIR_ = DKHTA_DIR+"/functions/"
-var DKHTML_DIR = DKBRANCH_DIR+"/DKHta"
-var DKHTML_FUNCTIONS_DIR = DKHTML_DIR+"/functions"
-var DKHTML_FUNCTIONS_DIR_ = DKHTML_DIR+"/functions/"
-var DKJAVA_DIR = DKBRANCH_DIR+"/DKJava"
-var DKJAVA_FUNCTIONS_DIR = DKJAVA_DIR+"/functions"
-var DKJAVA_FUNCTIONS_DIR_ = DKJAVA_DIR+"/functions/"
-var DKJAVASCRIPT_DIR = DKBRANCH_DIR+"/DKJavascript"
-var DKJAVASCRIPT_FUNCTIONS_DIR = DKJAVASCRIPT_DIR+"/functions"
-var DKJAVASCRIPT_FUNCTIONS_DIR_ = DKJAVASCRIPT_DIR+"/functions/"
-var DKPHP_DIR = DKBRANCH_DIR+"/DKPhp"
-var DKPHP_FUNCTIONS_DIR = DKPHP_DIR+"/functions"
-var DKPHP_FUNCTIONS_DIR_ = DKPHP_DIR+"/functions/"
-var DKCPP_PLUGINS_DIR = DKBRANCH_DIR+"/DKPlugins"
-var DKPOWERSHELL_DIR = DKBRANCH_DIR+"/DKPowershell"
-var DKPOWERSHELL_FUNCTIONS_DIR = DKPOWERSHELL_DIR+"/functions"
-var DKPOWERSHELL_FUNCTIONS_DIR_ = DKPOWERSHELL_DIR+"/functions/"
-var DKPYTHON_DIR = DKBRANCH_DIR+"/DKPython"
-var DKPYTHON_FUNCTIONS_DIR = DKPYTHON_DIR+"/functions"
-var DKPYTHON_FUNCTIONS_DIR_ = DKPYTHON_DIR+"/functions/"
-var DKVB_DIR = DKBRANCH_DIR+"/DKVb"
-var DKVB_FUNCTIONS_DIR = DKVB_DIR+"/functions"
-var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
-var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
-
+	//###### DKBRANCH_DIR variables ######
+	var DKBRANCH = "Development"
+	var DKBRANCH_DIR = DIGITALKNOB_DIR+"/"+DKBRANCH
+	var DK3RDPARTY_DIR = DKBRANCH_DIR+"/3rdParty"
+	var DKIMPORTS_DIR = DK3RDPARTY_DIR+"/_DKIMPORTS"
+	var DKCPP_APPS_DIR = DKBRANCH_DIR+"/DKCpp/DKCpp/apps"
+	var DKBASH_DIR = DKBRANCH_DIR+"/DKBash"
+	var DKBASH_FUNCTIONS_DIR = DKBASH_DIR+"/functions"
+	var DKBASH_FUNCTIONS_DIR_ = DKBASH_DIR+"/functions/"
+	var DKBATCH_DIR = DKBRANCH_DIR+"/DKBatch"
+	var DKBATCH_FUNCTIONS_DIR = DKBATCH_DIR+"/functions"
+	var DKBATCH_FUNCTIONS_DIR_ = DKBATCH_DIR+"/functions/"
+	var DKC_DIR = DKBRANCH_DIR+"/DKC"
+	var DKC_FUNCTIONS_DIR = DKC_DIR+"/functions"
+	var DKC_FUNCTIONS_DIR_ = DKC_DIR+"/functions/"
+	var DKCMAKE_DIR = DKBRANCH_DIR+"/DKCMake"
+	var DKCMAKE_FUNCTIONS_DIR = DKCMAKE_DIR+"/functions"
+	var DKCMAKE_FUNCTIONS_DIR_ = DKCMAKE_DIR+"/functions/"
+	var DKCPP_DIR = DKBRANCH_DIR+"/DKCpp"
+	var DKCPP_APPS_DIR = DKCPP_DIR+"/DKCpp/apps"
+	var DKCPP_FUNCTIONS_DIR = DKCPP_DIR+"/functions"
+	var DKCPP_FUNCTIONS_DIR_ = DKCPP_DIR+"/functions/"
+	var DKCSHARP_DIR = DKBRANCH_DIR+"/DKCSharp"
+	var DKCSHARP_FUNCTIONS_DIR = DKCSHARP_DIR+"/functions"
+	var DKCSHARP_FUNCTIONS_DIR_ = DKCSHARP_DIR+"/functions/"
+	var DKHTA_DIR = DKBRANCH_DIR+"/DKHta"
+	var DKHTA_FUNCTIONS_DIR = DKHTA_DIR+"/functions"
+	var DKHTA_FUNCTIONS_DIR_ = DKHTA_DIR+"/functions/"
+	var DKHTML_DIR = DKBRANCH_DIR+"/DKHta"
+	var DKHTML_FUNCTIONS_DIR = DKHTML_DIR+"/functions"
+	var DKHTML_FUNCTIONS_DIR_ = DKHTML_DIR+"/functions/"
+	var DKJAVA_DIR = DKBRANCH_DIR+"/DKJava"
+	var DKJAVA_FUNCTIONS_DIR = DKJAVA_DIR+"/functions"
+	var DKJAVA_FUNCTIONS_DIR_ = DKJAVA_DIR+"/functions/"
+	var DKJAVASCRIPT_DIR = DKBRANCH_DIR+"/DKJavascript"
+	var DKJAVASCRIPT_FUNCTIONS_DIR = DKJAVASCRIPT_DIR+"/functions"
+	var DKJAVASCRIPT_FUNCTIONS_DIR_ = DKJAVASCRIPT_DIR+"/functions/"
+	var DKPHP_DIR = DKBRANCH_DIR+"/DKPhp"
+	var DKPHP_FUNCTIONS_DIR = DKPHP_DIR+"/functions"
+	var DKPHP_FUNCTIONS_DIR_ = DKPHP_DIR+"/functions/"
+	var DKCPP_PLUGINS_DIR = DKBRANCH_DIR+"/DKPlugins"
+	var DKPOWERSHELL_DIR = DKBRANCH_DIR+"/DKPowershell"
+	var DKPOWERSHELL_FUNCTIONS_DIR = DKPOWERSHELL_DIR+"/functions"
+	var DKPOWERSHELL_FUNCTIONS_DIR_ = DKPOWERSHELL_DIR+"/functions/"
+	var DKPYTHON_DIR = DKBRANCH_DIR+"/DKPython"
+	var DKPYTHON_FUNCTIONS_DIR = DKPYTHON_DIR+"/functions"
+	var DKPYTHON_FUNCTIONS_DIR_ = DKPYTHON_DIR+"/functions/"
+	var DKVB_DIR = DKBRANCH_DIR+"/DKVb"
+	var DKVB_FUNCTIONS_DIR = DKVB_DIR+"/functions"
+	var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
+	var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
+}
 
 //############ alert ############
 if(typeof alert === "undefined"){
@@ -330,15 +366,8 @@ if(typeof console === "undefined"){
 dk_check('console');
 */
 
-//############ document.addEventListener ############
-if(typeof document.addEventListener !== "undefined"){
-	document.addEventListener("DOMContentLoaded", onDOMContentLoaded());
-}
-//dk_check('document.addEventListener');
-
-
 //############ onDOMContentLoaded ############
-//if(typeof onDOMContentLoaded === "undefined"){
+if(typeof onDOMContentLoaded === "undefined"){
 	function onDOMContentLoaded() {
 		if(!window){ alert("window is invalid"); return; }
 		if(!document){ alert("document is invalid"); return; }
@@ -350,9 +379,14 @@ if(typeof document.addEventListener !== "undefined"){
 			document.title = dkTitle;
 		}
 	}
-//}
+}
 dk_check('onDOMContentLoaded');
 
+//############ document.addEventListener ############
+if(typeof document.addEventListener !== "undefined"){
+	document.addEventListener("DOMContentLoaded", onDOMContentLoaded());
+}
+//dk_check('document.addEventListener');
 
 //############ body_onload ############
 function body_onload(){
@@ -397,15 +431,17 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 			console.log("")
 		});
 	} else {
-		var JS_PATH = ARGV(0);
-		var JS_ARGS = ARGV(1);
-		var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
-		var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
-		var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
-		var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
-		dk_source(JS_PATH, function(){
-			window[JS_NAME](JS_ARGS);
-		});
+		if(typeof ARGV !== "undefined"){ 
+			var JS_PATH = ARGV(0);
+			var JS_ARGS = ARGV(1);
+			var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
+			var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
+			var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
+			var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
+			dk_source(JS_PATH, function(){
+				window[JS_NAME](JS_ARGS);
+			});
+		}
 	}
 	//}
 //}

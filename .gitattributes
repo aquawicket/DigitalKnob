@@ -3,7 +3,7 @@
 #*.bat       text eol=crlf
 *.c 		text eol=lf
 *.cmake		text eol=lf
-#*.cmd       text eol=crlf
+*.cmd       text eol=lf
 *.cpp 		text eol=lf
 *.cs 		text eol=lf
 *.h 		text eol=lf
