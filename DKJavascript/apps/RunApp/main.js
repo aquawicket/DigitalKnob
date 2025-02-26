@@ -1,6 +1,11 @@
 function RunFile() {
-	WshShell = new ActiveXObject("WScript.Shell");
-	WshShell.Run("c:/windows/system32/notepad.exe", 1, false);
+	if(typeof ActiveXObject === "function"){
+		WshShell = new ActiveXObject("WScript.Shell");
+		WshShell.Run("c:/windows/system32/notepad.exe", 1, false);
+	} else {
+		console.error("ActiveXObject not available in browsers");
+		alert("ActiveXObject not available in browsers");
+	}
 }
 	
 	

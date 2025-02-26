@@ -37,7 +37,6 @@ var USE_NODEJS=0;
 //############ dk_check ############
 dk_check = function(object){
 	if(typeof this[object] === "undefined"){console.error(object+" is invalid\n");}
-  //if(typeof this[object] !== "undefined"){console.debug(object+" is valid\n");}
 }
 
 
@@ -72,14 +71,13 @@ dk_check('DKENGINE');
 
 //############ ARGV, ARGC ############
 if(typeof WScript === "object"){
-	ARGV = WScript.Arguments;
 	ARGC = WScript.Arguments.Count();
-	//for (i=0; i<ARGV.length; i++){
-	//	console.log("ARGV"+i+" = "+ARGV(i)+"\n");
-	//}
+	var ARGV = new Array(ARGC);
+    for(var i = 0; i < ARGV.length; ++i) {
+        ARGV[i] = WScript.Arguments(i);
+		console.log("ARGV["+i+"] = "+ARGV[i]);
+    }
 }
-//dk_check('WScript.Arguments');
-
 
 //############ globalThis ############
 if(typeof globalThis === "undefined") {
@@ -425,21 +423,25 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 			console.log("")
 			console.log(bg_magenta+white+"###### DKTEST MODE ###### "+DKSCRIPT_FILE+" ###### DKTEST MODE ######"+clr)
 			console.log("")
-				DKTEST()
+				 DKTEST()
 			console.log("")
 			console.log(bg_magenta+white+"######## END TEST ####### "+DKSCRIPT_FILE+" ######## END TEST #######"+clr)
 			console.log("")
 		});
 	} else {
 		if(typeof ARGV !== "undefined"){ 
-			var JS_PATH = ARGV(0);
-			var JS_ARGS = ARGV(1);
+			if(ARGC > 0){ var JS_PATH = ARGV[0]; }
+			if(ARGC > 1){ var JS_ARGS = ARGV[1]; }
 			var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
 			var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
 			var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
 			var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
 			dk_source(JS_PATH, function(){
-				window[JS_NAME](JS_ARGS);
+				if(typeof JS_ARGS !== "undefined"){
+					window[JS_NAME](JS_ARGS);
+				} else {
+					window[JS_NAME]();
+				}
 			});
 		}
 	}
