@@ -6,14 +6,17 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#
 ::#
 :dk_CMD_EXE
-::setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
    
-    if exist "%CMD_EXE%" %return%
+    if exist "%CMD_EXE%" (%return%)
 
-	if not exist "%CMD_EXE%"  set "CMD_EXE=%COMSPEC%"
-	if not exist "%CMD_EXE%"  %dk_call% dk_findProgram CMD_EXE "cmd.exe" "%WINDIR%\System32"
-
+	set "CMD_EXE=%COMSPEC:\=/%"
+	if not exist "%CMD_EXE%" (%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%WINDIR:\=/%/System32")
+	
+	endlocal & (
+		set "CMD_EXE=%CMD_EXE%"
+	)
 %endfunction%
 
 

@@ -27,9 +27,9 @@ setlocal enableDelayedExpansion
 	
     endlocal & (
 		rem set "dk_findProgram=%dk_commandToVariable%"
-		set "%~1=%dk_commandToVariable%"
+		set "%~1=%dk_commandToVariable:\=/%"
+		%dk_call% dk_assertPath "%~1"
 	)
-
 %endfunction%
 
 

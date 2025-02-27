@@ -12,15 +12,11 @@ setlocal
     if exist %POWERSHELL_EXE% (%return%)
     
 	::###### try pwsh.exe ######
-    if not exist "%POWERSHELL_EXE%" (
-		%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-		%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
-	)
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+	%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 
     ::###### try powershell.exe ######
-	if not exist "%POWERSHELL_EXE%" (
-		%dk_call% dk_findProgram POWERSHELL_EXE powershell.exe
-	)
+	if not exist "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%WINDIR%\system32")
 	
 	endlocal & (
 		set "POWERSHELL_EXE=%POWERSHELL_EXE%"

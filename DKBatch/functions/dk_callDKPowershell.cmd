@@ -59,7 +59,6 @@ setlocal enableDelayedExpansion
 	endlocal & (
 		set "dk_callPowershell=%dk_commandToVariable%"
 	)
-	
 %endfunction%
 
 

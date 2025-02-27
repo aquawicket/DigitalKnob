@@ -9,7 +9,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0
    
-    if defined BASH_EXE %return%
+    if exist "%BASH_EXE%" (%return%)
     
 	:: try Git for windows bash.exe
 	%dk_call% dk_validate GIT "%dk_call% dk_installGit"
