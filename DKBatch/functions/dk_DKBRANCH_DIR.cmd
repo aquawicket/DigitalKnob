@@ -19,12 +19,11 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	%dk_call% dk_validatePath DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	
-
 	if not defined DKBRANCH  (set "DKBRANCH=Development")            &rem set the default branch
 	rem for %%I in (.) do set "CURRENT_FOLDER=%%~nxI"                &rem get the current folder
     rem	if not defined GIT_EXE (%dk_call% dk_installGit)
    	rem    if exist "%CD%\.git" (
-   	rem        "%GIT_EXE:/=\%" branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (
+   	rem        "%GIT_EXE%" branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (
    	rem            set "DKBRANCH=%CURRENT_FOLDER%"
    	rem        )
    	rem    )
@@ -84,7 +83,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	set "DKPYTHON_DIR=%DKBRANCH_DIR%/DKPython"
 		set "DKPYTHON_FUNCTIONS_DIR=%DKPYTHON_DIR%/functions"
 		set "DKPYTHON_FUNCTIONS_DIR_=%DKPYTHON_FUNCTIONS_DIR%/"
-		
 %endfunction%
 
 

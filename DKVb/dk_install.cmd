@@ -1,5 +1,5 @@
 @echo off
-if "%*" == "" (goto dk_install)
+if "%*"=="" (goto dk_install)
 
 :runDKVb
 	set "DKVB_FUNCTIONS_DIR=%~1"
@@ -49,8 +49,8 @@ if "%*" == "" (goto dk_install)
 	%dk_call% dk_echo "Installing DKVb . . ."
 	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs
 	set "DKVB_FUNCTIONS_DIR=..\DKVb\functions"
-	::set "WSCRIPT_EXE=%SystemRoot%\System32\WScript.exe"
-	set "CSCRIPT_EXE=%SystemRoot%\System32\CScript.exe"
+	::set "WSCRIPT_EXE=%SystemRoot:\=/%/System32/WScript.exe"
+	set "CSCRIPT_EXE=%SystemRoot:\=/%/System32/CScript.exe"
 	
 	
 	%dk_call% dk_registryDeleteKey "HKCR\DKVb"

@@ -52,8 +52,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     ::set "CMAKE_ARGS=%CMAKE_ARGS% 2>cmake_eval.err"
   
     ::### call the cmake command ###
-    echo "%CMAKE_EXE:/=\%" %CMAKE_ARGS%
-    "%CMAKE_EXE:/=\%" %CMAKE_ARGS%
+    echo "%CMAKE_EXE%" %CMAKE_ARGS%
+    "%CMAKE_EXE%" %CMAKE_ARGS%
 
 
 

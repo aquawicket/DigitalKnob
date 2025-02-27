@@ -7,14 +7,14 @@ setlocal enableDelayedExpansion
 	set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"
 	if not defined DIGITALKNOB (set "DIGITALKNOB=digitalknob")
 	if not defined DKBRANCH (set "DKBRANCH=Development")
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%\%DIGITALKNOB%\%DKBRANCH%\DKBatch\functions")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
-	set "DK=%DKBATCH_FUNCTIONS_DIR_%\DK.cmd"
+	set "DK=%DKBATCH_FUNCTIONS_DIR_%/DK.cmd"
 
 	:: firewall
-	call :dk_firewallAllow powershell "%WINDIR%\system32\windowspowershell\v1.0\powershell.exe"
-	call :dk_firewallAllow curl "%WINDIR%\system32\curl.exe"
-	call :dk_firewallAllow git "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\mingw64\libexec\git-core\git-remote-https.exe"
+	call :dk_firewallAllow powershell "%WINDIR:\=/%/System32/WindowsPowershell/v1.0\/powershell.exe"
+	call :dk_firewallAllow curl "%WINDIR:\=/%/System32/curl.exe"
+	call :dk_firewallAllow git "%USERPROFILE:\=/%/digitalknob/DKTools/git-portable-2.46.2-64-bit/mingw64/libexec/git-core/git-remote-https.exe"
 
 	if not exist %DK% (
 		powershell -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^

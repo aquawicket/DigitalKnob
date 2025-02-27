@@ -1,5 +1,5 @@
 @echo off
-if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\")
+if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../../DKBatch/functions/")
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
@@ -20,8 +20,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	::%dk_call% dk_importVariables %CMAKE_DL%
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"	
-	%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
-	%dk_call% dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
+	%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%/%NOTEPADPP_FOLDER%"
+	%dk_call% dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%/notepad++.exe"
 	
 	if exist "%NOTEPADPP_EXE%" (goto installed)
 	    %dk_call% dk_echo   
@@ -34,10 +34,10 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::### Add Dark Mode ###
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_copy %DKIMPORTS_DIR%\notepadpp\dark_config.xml %NOTEPADPP_DIR%\config.xml OVERWRITE
+	%dk_call% dk_copy "%DKIMPORTS_DIR%/notepadpp/dark_config.xml" "%NOTEPADPP_DIR%/config.xml" OVERWRITE
 	
 	::### Add Context Menu ###
-	%dk_call% %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppContextMenu.cmd
+	%dk_call% "%DKIMPORTS_DIR%/notepadpp/dk_installNotepadppContextMenu.cmd"
 	
 	::### Add File Associations ###
 	::%dk_call% %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppFileAssociations.cmd
