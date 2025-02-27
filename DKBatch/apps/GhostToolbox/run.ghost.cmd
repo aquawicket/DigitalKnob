@@ -71,7 +71,7 @@ goto hello
 
 :firstrun
 @echo off
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 ::TEMPFILES
 IF EXIST "aria2_download.log" DEL /s /q "aria2_download.log" >nul 2>nul
 IF EXIST "cookies.txt" DEL /s /q "cookies.txt" >nul 2>nul
@@ -125,52 +125,52 @@ goto :eof
 echo.
 @echo off
 :: NORMAL FOREG COLORS
-set nhcolor=
-set Black=%nhcolor%[30m
-set Red=%nhcolor%[31m
-set Green=%nhcolor%[32m
-set Yellow=%nhcolor%[33m
-set Blue=%nhcolor%[33m
-set Magenta=%nhcolor%[35m
-set Cyan=%nhcolor%[36m
-set White=%nhcolor%[37m
-set Lightgray=%nhcolor%[37m
+set ESC=
+set Black=%ESC%[30m
+set Red=%ESC%[31m
+set Green=%ESC%[32m
+set Yellow=%ESC%[33m
+set Blue=%ESC%[33m
+set Magenta=%ESC%[35m
+set Cyan=%ESC%[36m
+set White=%ESC%[37m
+set Lightgray=%ESC%[37m
 :: STRONG FOREG COLORS
-set SWhite=%nhcolor%[90m
-set SRed=%nhcolor%[91m
-set SGreen=%nhcolor%[92m
-set SYellow=%nhcolor%[93m
-set SBlue=%nhcolor%[94m
-set SMagenta=%nhcolor%[95m
-set SCyan=%nhcolor%[96m
-set SWhite=%nhcolor%[97m
+set SWhite=%ESC%[90m
+set SRed=%ESC%[91m
+set SGreen=%ESC%[92m
+set SYellow=%ESC%[93m
+set SBlue=%ESC%[94m
+set SMagenta=%ESC%[95m
+set SCyan=%ESC%[96m
+set SWhite=%ESC%[97m
 :: NORMALBACKGROUND
-set NBlack=%nhcolor%[40m
-set NRed=%nhcolor%[41m
-set NGreen=%nhcolor%[42m
-set NYellow=%nhcolor%[43m
-set NBlue=%nhcolor%[44m
-set NMagenta=%nhcolor%[45m
-set NCyan=%nhcolor%[46m
-set NWhite=%nhcolor%[47m
+set NBlack=%ESC%[40m
+set NRed=%ESC%[41m
+set NGreen=%ESC%[42m
+set NYellow=%ESC%[43m
+set NBlue=%ESC%[44m
+set NMagenta=%ESC%[45m
+set NCyan=%ESC%[46m
+set NWhite=%ESC%[47m
 :: STRONGBACKGROUND
-set BBlack=%nhcolor%[100m
-set BRed=%nhcolor%[101m
-set BGreen=%nhcolor%[102m
-set BYellow=%nhcolor%[103m
-set BBlue=%nhcolor%[104m
-set BMagenta=%nhcolor%[105m
-set BCyan=%nhcolor%[106m
-set BWhite=%nhcolor%[107m
+set BBlack=%ESC%[100m
+set BRed=%ESC%[101m
+set BGreen=%ESC%[102m
+set BYellow=%ESC%[103m
+set BBlue=%ESC%[104m
+set BMagenta=%ESC%[105m
+set BCyan=%ESC%[106m
+set BWhite=%ESC%[107m
 :: STYLE
-set Green=%nhcolor%[32m
-set White=%nhcolor%[37m
-set Cyan=%nhcolor%[36m
-set Magenta=%nhcolor%[35m
-set Red=%nhcolor%[31m
-set Yellow=%nhcolor%[33m
-set Lightgray=%nhcolor%[37m
-set Bold=%nhcolor%[1m
+set Green=%ESC%[32m
+set White=%ESC%[37m
+set Cyan=%ESC%[36m
+set Magenta=%ESC%[35m
+set Red=%ESC%[31m
+set Yellow=%ESC%[33m
+set Lightgray=%ESC%[37m
+set Bold=%ESC%[1m
 REG ADD "HKCU\Console" /v "WindowAlpha" /t REG_DWORD /d "247" /f>nul
 REG QUERY "HKCU\Console" /v "VirtualTerminalLevel" >nul 2>&1
 if %ERRORLEVEL% EQU 0 goto terminal1
@@ -179,22 +179,22 @@ if %ERRORLEVEL% EQU 1 goto terminal2
 goto checkterminal2
 :terminal2
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
-echo @echo off >> "%GHOST_DIR%\wget\restart.cmd"
-echo TITLE GhostToolbox - Restart >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo cd "%GHOST_DIR%" >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo timeout /t 2 >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo start toolbox.updater.x64.exe >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo del /s /q wget\restart.cmd >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo exit >> "%GHOST_DIR%\wget\restart.cmd"
+echo @echo off >> "%GHOST_DIR%\data\restart.cmd"
+echo TITLE GhostToolbox - Restart >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo cd "%GHOST_DIR%" >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo timeout /t 2 >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo start toolbox.updater.x64.exe >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo del /s /q wget\restart.cmd >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo exit >> "%GHOST_DIR%\data\restart.cmd"
 )
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
-echo @echo off >> "%GHOST_DIR%\wget\restart.cmd"
-echo TITLE GhostToolbox - Restart >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo cd "%GHOST_DIR%" >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo timeout /t 2 >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo start toolbox.updater.x86.exe >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo del /s /q wget\restart.cmd >nul >> "%GHOST_DIR%\wget\restart.cmd"
-echo exit >> "%GHOST_DIR%\wget\restart.cmd"
+echo @echo off >> "%GHOST_DIR%\data\restart.cmd"
+echo TITLE GhostToolbox - Restart >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo cd "%GHOST_DIR%" >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo timeout /t 2 >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo start toolbox.updater.x86.exe >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo del /s /q wget\restart.cmd >nul >> "%GHOST_DIR%\data\restart.cmd"
+echo exit >> "%GHOST_DIR%\data\restart.cmd"
 )
 timeout /t 1 >nul
 cls && color 08
@@ -250,7 +250,7 @@ call :PainText 0D " o"
 call :PainText 0D " x"
 timeout /t 3 >nul
 REG ADD "HKEY_CURRENT_USER\Console" /v "VirtualTerminalLevel" /t REG_DWORD /d "1" /f >nul 2>nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 explorer restart.cmd
 cls
@@ -457,15 +457,15 @@ color 0E
 cls
 ::%ProgramData%\Microsoft\colortool\colortool -b midnight-in-mojave.itermcolors >nul
 @echo off
-set nhcolor=
-set Green=%nhcolor%[32m
-set White=%nhcolor%[37m
-set Cyan=%nhcolor%[36m
-set Magenta=%nhcolor%[35m
-set Red=%nhcolor%[31m
-set Yellow=%nhcolor%[33m
-set Lightgray=%nhcolor%[37m
-set Bold=%nhcolor%[1m
+set ESC=
+set Green=%ESC%[32m
+set White=%ESC%[37m
+set Cyan=%ESC%[36m
+set Magenta=%ESC%[35m
+set Red=%ESC%[31m
+set Yellow=%ESC%[33m
+set Lightgray=%ESC%[37m
+set Bold=%ESC%[1m
 nhcolor 07 " ====================================================================================================================="
 nhcolor 0D "  %White%Command %Red%Color  %Magenta%Schemes
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -621,7 +621,7 @@ cls
 goto forwindows11
 
 :GhostModeX1
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" goto forwindows11G
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
@@ -898,8 +898,8 @@ setlocal EnableDelayedExpansion
 ::goto SKIPMEMORY1
 cls
 timeout /t 1 >nul
-cd "%GHOST_DIR%\wget" >nul 2>nul
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 cls
 for /f %%N in ('hashsum /a md5 memory.bin') do set "MD5=%%N"
 if %MD5% equ 0f54822bfc1a74beda5676dbc7d72967 (
@@ -1200,7 +1200,7 @@ timeout /t 2 >nul
 cls
 goto :win1117
 :win11mediaplayer
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.MediaPlayer.11.2208.UWP_x64.exe') do set "MD5=%%N"
 if %MD5% equ 1d48bed2b35265a1d297ab86ef1ac35f (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.MediaPlayer.11.2208.UWP_x64.exe
@@ -1239,7 +1239,7 @@ timeout /t 2 >nul
 goto opwin11
 :win1115X
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 nhcolor 07 " ====================================================================================================================="
 nhcolor 0D "  %White%Tab Explorer for Windows 11 22H2 (Internet required)
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -1385,7 +1385,7 @@ cls
 goto :win1108xbr
 
 :win11xbox4bar
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.823.1271.0.bin') do set "MD5=%%N"
 if %MD5% equ 487d999abe50b2dd7ae92eb2189aae43 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.823.1271.0.bin
@@ -1441,7 +1441,7 @@ del /s /q "%GHOST_DIR%\Temp" >nul 2>nul
 goto begin
 
 :win11xbox3bar
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGameBar_5.822.9161.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 888ddb19e1248c7df811759aca286fac (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.XboxGameBar_5.822.9161.0_x64.exe
@@ -1474,7 +1474,7 @@ goto begin
 
 :win11xbox1bar
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ da1280f01b51f55b124fee384b6b1cb4 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
@@ -1532,7 +1532,7 @@ RD /S /Q "Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe" >nul
 goto begin
 :win11xbox2bar
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 Echo Get-AppxPackage *XboxGamingOverlay* ^| Remove-AppxPackage > XGB.ps1
 Powershell -ExecutionPolicy ByPass -File XGB.ps1
 Del XGB.ps1 >nul
@@ -1546,7 +1546,7 @@ echo Xbox Game Bar Completely remove.
 timeout /t 2 >nul
 goto begin
 :wingetoption
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 setlocal enableDelayedExpansion
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
 if "%version%" == "Windows 10" (
@@ -1563,7 +1563,7 @@ goto :GETWGET
 cls
 echo %SWhite%Updating Microsoft Windows Package Manager.. Please Wait..
 echo.
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto WINGETDLX86
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto WINGETDLX64
 :WINGETDLX86
@@ -1608,7 +1608,7 @@ timeout /t 8 >nul
 goto begin
 )
 :GETWGETCHECK
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 for /f "tokens=1" %%a in ('winget.exe -v') do set "getcli=%%a"
@@ -1622,8 +1622,8 @@ del /q /f /s "Microsoft.Windows.Package.Manager_v1.7.10861" >nul
 cls
 echo %SWhite%Updating Microsoft Windows Package Manager.. Please Wait..
 echo.
-cd "%GHOST_DIR%\wget" >nul
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
+cd "%GHOST_DIR%\data" >nul
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto WINGETDLX86
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto WINGETDLX64
 :WINGETDLX86
@@ -1669,7 +1669,7 @@ goto begin
 )
 :wingetcli
 timeout /t 3 >nul
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 for /f tokens^=* %%i in ('where .:*VCLibs.x86*') do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 timeout /t 1 >nul
@@ -1697,14 +1697,14 @@ for /f "tokens=1" %%a in ('winget.exe -v') do set "var=%%a"
 if not exist "%GHOST_DIR%\list.txt" (
 type > "%GHOST_DIR%\list.txt" 2>nul
 )
-if exist "%GHOST_DIR%\wget\Microsoft.Windows.Package.Manager_v1.7.10861" (
-del /s /q "%GHOST_DIR%\wget\Microsoft.Windows.Package.Manager_v1.7.10861" >nul
+if exist "%GHOST_DIR%\data\Microsoft.Windows.Package.Manager_v1.7.10861" (
+del /s /q "%GHOST_DIR%\data\Microsoft.Windows.Package.Manager_v1.7.10861" >nul
 )
-if exist "%GHOST_DIR%\wget\*VCLibs*" (
-del /s /q "%GHOST_DIR%\wget\*VCLibs*" >nul 2>nul
+if exist "%GHOST_DIR%\data\*VCLibs*" (
+del /s /q "%GHOST_DIR%\data\*VCLibs*" >nul 2>nul
 )
-if exist "%GHOST_DIR%\wget\*UI.Xaml*" (
-del /s /q "%GHOST_DIR%\wget\*UI.Xaml*" >nul 2>nul
+if exist "%GHOST_DIR%\data\*UI.Xaml*" (
+del /s /q "%GHOST_DIR%\data\*UI.Xaml*" >nul 2>nul
 )
 winget install -e -s msstore --accept-source-agreements >nul 2>nul
 cls
@@ -1847,7 +1847,7 @@ cls
 goto :win1114w
 :widgetswin1101
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.WidgetsforWindows11_422.33900.0.0.bin') do set "MD5=%%N"
 if %MD5% equ 6adcc63b4dba634efce4e74d1a9d0981 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.WidgetsforWindows11_422.33900.0.0.bin
@@ -1902,7 +1902,7 @@ timeout /t 5 >nul
 goto forwindows11
 :widgetswin1102
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 Echo Get-AppxPackage *Client.WebExperience* ^| Remove-AppxPackage > WID.ps1
 Powershell -ExecutionPolicy ByPass -File WID.ps1
 Del WID.ps1 >nul
@@ -1917,7 +1917,7 @@ timeout /t 5 >nul
 goto forwindows11
 :widgetswin1103
 ::Reg add "HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate" /v " Install{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}" /t REG_DWORD /d "0" /f >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://go.microsoft.com/fwlink/p/?LinkId=2124703" -o"MicrosoftEdgeWebview2Setup.exe"
 MicrosoftEdgeWebview2Setup.exe
@@ -1986,7 +1986,7 @@ cls
 
 :XADMINXX1W10C
 cls
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 ::wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3DTtBFT" -t 5 >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *3DTtBFT* >nul 2>nul
 cls
@@ -2068,7 +2068,7 @@ goto begin
 
 :XADMINXX1
 cls
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *3DTtBFT* >nul 2>nul
 cls
 nhcolor 07 " ====================================================================================================================="
@@ -2142,7 +2142,7 @@ cls
 goto :win1107
 :win11yrphone1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001') do set "MD5=%%N"
 if %MD5% equ fd7d257f8dfeac5bd7dafd3604ab6c7a (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
@@ -2324,7 +2324,7 @@ RD /S /Q "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe" >nul 2>n
 goto :opwin11
 :win11yrphone2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 Echo Get-AppxPackage *YourPhone* ^| Remove-AppxPackage > YourPhone.ps1
 Powershell -ExecutionPolicy ByPass -File YourPhone.ps1
 Del YourPhone.ps1 >nul
@@ -2355,7 +2355,7 @@ cls
 goto :win1106
 :win11paintC1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ eaba232e6dc8176d6815455fb739c3e9 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
@@ -2410,7 +2410,7 @@ RD /S /Q "Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 goto :opwin11
 :win11paintC2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ bbfe39323895eb39a7739476f0443bd8 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
@@ -2485,7 +2485,7 @@ timeout /t 2 >nul
 cls
 goto :win1105
 :win11snipp01
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 40c03c38cb885312d8c6c574509a614f (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
@@ -2616,7 +2616,7 @@ timeout /t 2 >nul
 cls
 goto :win1103
 :win11team1
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Reg.exe add "HKLM\SOFTWARE\Microsoft\EdgeUpdate " /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d "1" /f >nul 2>nul
 ::Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate" /v " Install{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}" /t REG_DWORD /d "0" /f >nul 2>nul
@@ -2701,7 +2701,7 @@ echo For Windows 11 22H2 Sun Valley 2
 timeout /t 2 >nul
 goto opwin11
 :win1118X
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3Dpuup7" -t 5 >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *3Dpuup7* >nul 2>nul
 cls
@@ -2905,7 +2905,7 @@ cls
 goto :win1110
 :win11notepad1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ ff85639043a8afd38f55d4ccb28c4108 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
@@ -2960,7 +2960,7 @@ start explorer
 goto forwindows11
 :win11notepad2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsNotepad_11.2112.32.0.Appx') do set "MD5=%%N"
 if %MD5% equ bb109307baec28d699404325ee3a7259 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.WindowsNotepad_11.2112.32.0.Appx
@@ -3031,7 +3031,7 @@ timeout /t 2 >nul
 cls
 goto :win1111
 :win11hevc1
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 20598f684c4a80ed6bcef14e4cddcae2 (
@@ -3182,7 +3182,7 @@ goto begin
 
 :WCT01
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 TEST1.bin') do set "MD5=%%N"
 if %MD5% equ e63c49a60081b6732fe9ef71c06fc69ca4f0aaee (
@@ -3280,7 +3280,7 @@ goto forwindows11
 
 
 :win11taskbar3
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 ep_setup.exe') do set "MD5=%%N"
 if %MD5% equ e69bbc44ba6b8fa4ffbf3a4127f23856 (
@@ -3377,7 +3377,7 @@ del /q /f /s "%Windir%\dxgi.dll" 2>nul >nul
 timeout /t 2 >nul
 start explorer
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://github.com/valinet/ExplorerPatcher/releases/download/22000.613.44.2_d5f510f/ep_setup.exe" -d"%Windir%" -o"dxgi.dll"
 cls
@@ -3393,7 +3393,7 @@ nhcolor 08 " %Red%| FAIL | dxgi.dll
 del /q /f /s "%Windir%\dxgi.dll" 2>nul >nul
 )
 timeout /t 1 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://github.com/valinet/ExplorerPatcher/releases/download/22000.613.44.2_d5f510f/ep_setup.exe" -d"%Windir%" -o"dxgi.dll"
 cls
 timeout /t 2 >nul
@@ -3489,15 +3489,15 @@ FOR /F "skip=2 tokens=2,*" %%A IN ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windo
 color 0E
 cls
 @echo off
-set nhcolor=
-set Green=%nhcolor%[32m
-set White=%nhcolor%[37m
-set Cyan=%nhcolor%[36m
-set Magenta=%nhcolor%[35m
-set Red=%nhcolor%[31m
-set Yellow=%nhcolor%[33m
-set Lightgray=%nhcolor%[37m
-set Bold=%nhcolor%[1m
+set ESC=
+set Green=%ESC%[32m
+set White=%ESC%[37m
+set Cyan=%ESC%[36m
+set Magenta=%ESC%[35m
+set Red=%ESC%[31m
+set Yellow=%ESC%[33m
+set Lightgray=%ESC%[37m
+set Bold=%ESC%[1m
 nhcolor 07 " ====================================================================================================================="
 nhcolor 0D "  %White%Editions that can be upgraded to 
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -3774,7 +3774,7 @@ timeout /t 3 >nul
 goto begin
 :winre1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto winrex86
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto winrex64
 :winrex64
@@ -3825,7 +3825,7 @@ if "%var%"=="1607" goto :winreforltsb1607
 ::del /q /f /s Windows.Recovery.wim >nul 2>nul
 ::wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://kende-my.sharepoint.com/:u:/g/personal/k9788_office365svip_top/EQ8iu1sTvP5JuhLDZCYlL3gBjHHal_z6FEx8Vej2TErwHg?e=aH4Rkk&download=1" -t 3 -O Windows.Recovery.wim
 ::)
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -3916,7 +3916,7 @@ cls
 goto netframework
 :netframework1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1CYhxA0Kk_y-g87uWtIr-aJ28Zhat93OA" -t 3 -O microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.001
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1fViDe1DR43G9V-3a3r-VJQRM4JSSBu3D" -t 3 -O microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.002
@@ -3937,7 +3937,7 @@ cls
 goto begin
 :netframework2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1jDLIJj_1FrzBA-oq3p6jmwdqCpifpqPa" -t 3 -O "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~x86~~.cab"
 cls
@@ -3951,7 +3951,7 @@ cls
 goto begin
 :netframework3
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Kce9FBdkpjTOPhRNCr3s5Y1DwIIUCpVh" -t 3 -O "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab"
 cls
@@ -3965,7 +3965,7 @@ cls
 goto begin
 :netframework4
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BIKNQKGjqN3CB88zSwL0G22xyM9B_rL5" -t 3 -O "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~x86~~.cab"
 cls
@@ -4046,7 +4046,7 @@ cls
 goto onedrive0
 :onedrive1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://oneclient.sfx.ms/Win/Prod/19.174.0902.0013/OneDriveSetup.exe" -t 30 -O OneDriveSetup.exe
 Reg Add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSyncNGSC" /t REG_DWORD /d 0 /f
 cls
@@ -4089,7 +4089,7 @@ powershell stop-process -name "DriverEasyPortable.exe" -force >nul
 rd /s /q "%SYSTEMDRIVE%\Program Files\DriverEasy" >nul
 del /q /f /s "%USERPROFILE%\Desktop\DriverEasy Portable.lnk" >nul
 del /q /f /s "%USERPROFILE%\Desktop\DriverEasy Portable" >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -4250,7 +4250,7 @@ cls
 goto ghst
 
 :nile01
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 del /s /q setup.exe 2>nul >nul
 cls
@@ -4327,7 +4327,7 @@ goto nilesoft
 :ghosthemes
 cls
 IF EXIST "C:\UXThemePatcher" attrib +h /s /d "%SYSTEMDRIVE%\UXThemePatcher"
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /q /f /s
 del /q /f /s UltraUXThemePatcher_3.7.2.exe >nul 2>nul
 del /q /f /s theme.BIBDarkMode.7z >nul 2>nul
@@ -4395,11 +4395,11 @@ goto ghst
 :theme99
 cls
 if not exist "%PROGRAMFILES%\7-Zip\7zG.exe" ( 
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.7-zip.org/a/7z2103-x64.exe" -o"7z2103-x64.exe"
 7z2103-x64.exe /S
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://uxthemepatcher.com/UXThemePatcher_11.0.sfx.exe" -o"UXThemePatcher_11.0.sfx.exe"
 timeout /t 5 >nul
 cls
@@ -4413,7 +4413,7 @@ cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
 if "%var%"=="22000" cls && echo %Green%Please install Windows 11 Version. && timeout /t 4 >nul && goto ghosthemes
 
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://virtualcustoms.net/attachment.php?s=f479322d0b91427f1c8dc9b0afea814b&attachmentid=86191&d=1586737378" -o"UltraUXThemePatcher_3.7.2.exe"
 timeout /t 5 >nul
@@ -4438,7 +4438,7 @@ if "%var%"=="2004" goto :checkbuildstartmenu
 echo %Green%Nope...not for this version. && timeout /t 4 >nul && goto ghst
 :checkbuildstartmenu
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 "NSudoLG.exe" -U:T -P:E cmd /c Reg add "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\4\215754378" /v "EnabledState" /t REG_DWORD /d "2" /f >nul 2>nul
 "NSudoLG.exe" -U:T -P:E cmd /c Reg add "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\4\215754378" /v "EnabledStateOptions" /t REG_DWORD /d "1" /f >nul 2>nul
@@ -4473,7 +4473,7 @@ set /a UBRDEC=%UBRHEX%
 cls
 :yesiwantnewicons
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 "NSudoLG.exe" -U:T -P:E cmd /c Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\4\215754378" /v "EnabledState" /t REG_DWORD /d "2" /f >nul 2>nul
 "NSudoLG.exe" -U:T -P:E cmd /c Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\4\215754378" /v "EnabledStateOptions" /t REG_DWORD /d "0" /f >nul 2>nul
@@ -4558,7 +4558,7 @@ goto ghst
 ::GOOGLE TEAM DRIVE WALLPAPER
 ::mkdir ghostspectre.wallpaper
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /s /q "GhostSpectre_Wallpaper.zip" >nul
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
@@ -5137,7 +5137,7 @@ cls
 goto edgeop
 :edg1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 powershell stop-process -name "MicrosoftEdge" -force
 powershell stop-process -name "RuntimeBroker" -force
 cls
@@ -5171,7 +5171,7 @@ cls
 goto begin
 :edg2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 powershell stop-process -name "MicrosoftEdge" -force
 powershell stop-process -name "RuntimeBroker" -force
 cls
@@ -5202,7 +5202,7 @@ cls
 goto begin
 :edg3
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 powershell stop-process -name "MicrosoftEdge" -force
 powershell stop-process -name "RuntimeBroker" -force
 cls
@@ -5275,17 +5275,17 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Win
 	if "%var%"=="1607" cls && echo %Red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
 :miracastyes
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 echo Microsoft Connect x64
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/2S7jfN6" -t 5 -O Microsoft.PPIProjection_cw5n1h2txyewy.zip
 goto :mirax64check
 )
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 echo Microsoft Connect x86
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3fNDad2" -t 5 -O Microsoft.PPIProjection_cw5n1h2txyewy.zip
 goto :mirax86check
 )
@@ -5378,7 +5378,7 @@ color 0b
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\cbdhsvc_59ed3" /v "Start" /t REG_DWORD /d "2" /f >nul
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\cbdhsvc" /v "Start" /t REG_DWORD /d "2" /f >nul
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Clipboard_Dependencies.zip') do set "MD5=%%N"
 if %MD5% equ c9319a8a7076b0b47f321be7822c85b8 (
@@ -5429,7 +5429,7 @@ cls
 ::powershell expand-archive -path Clipboard_Dependencies.zip -force
 7z1900-extra\x64\7za x "Clipboard_Dependencies.zip" -aoa -ptkp -o"Clipboard_Dependencies"
 cls
-cd "%GHOST_DIR%\wget\Clipboard_Dependencies"
+cd "%GHOST_DIR%\data\Clipboard_Dependencies"
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -5440,7 +5440,7 @@ cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 cls
 timeout /t 3 >nul
-cd  "%GHOST_DIR%\wget"
+cd  "%GHOST_DIR%\data"
 rd /Q /S "Clipboard_Dependencies" >nul 2>nul
 cls
 echo Restart the computer for the changes to take effect.
@@ -5475,7 +5475,7 @@ REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\WpnUserService_3c549" /v "Start"
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\SENS" /v "Start" /t REG_DWORD /d "2" /f >nul 2>nul
 REG ADD "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "0" /f >nul 2>nul
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Touch_keyboard_Dependencies.zip') do set "MD5=%%N"
 if %MD5% equ c9319a8a7076b0b47f321be7822c85b8 (
@@ -5530,7 +5530,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 ::powershell expand-archive -path Touch_keyboard_Dependencies.zip -force
 7z1900-extra\x64\7za x "Touch_keyboard_Dependencies.zip" -aoa -ptkp -o"Touch_keyboard_Dependencies"
 cls
-cd "%GHOST_DIR%\wget\Touch_keyboard_Dependencies"
+cd "%GHOST_DIR%\data\Touch_keyboard_Dependencies"
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -5546,13 +5546,13 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 ::powershell expand-archive -path Touch_keyboard_Dependencies.zip -force
 7z1900-extra\7za x "Touch_keyboard_Dependencies.zip" -aoa -ptkp -o"Touch_keyboard_Dependencies"
 cls
-cd "%GHOST_DIR%\wget\Touch_keyboard_Dependencies"
+cd "%GHOST_DIR%\data\Touch_keyboard_Dependencies"
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 cls
 )
 timeout /t 3 >nul
-cd  "%GHOST_DIR%\wget"
+cd  "%GHOST_DIR%\data"
 rd /Q /S "Touch_keyboard_Dependencies" >nul 2>nul
 cls
 echo Restart the computer for the changes to take effect.
@@ -5642,15 +5642,15 @@ goto begin
 color 0E
 cls
 @echo off
-set nhcolor=
-set Green=%nhcolor%[32m
-set White=%nhcolor%[37m
-set Cyan=%nhcolor%[36m
-set Magenta=%nhcolor%[35m
-set Red=%nhcolor%[31m
-set Yellow=%nhcolor%[33m
-set Lightgray=%nhcolor%[37m
-set Bold=%nhcolor%[1m
+set ESC=
+set Green=%ESC%[32m
+set White=%ESC%[37m
+set Cyan=%ESC%[36m
+set Magenta=%ESC%[35m
+set Red=%ESC%[31m
+set Yellow=%ESC%[33m
+set Lightgray=%ESC%[37m
+set Bold=%ESC%[1m
 nhcolor 07 " ====================================================================================================================="
 nhcolor 07 "  %white%Stops Windows Updates until 2077 (for version 1703 or higher version)
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -6927,7 +6927,7 @@ cls
 goto op11
 :gamebar1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 timeout /t 3 >nul
 cls
@@ -7099,7 +7099,7 @@ timeout /t 5 >nul
 goto begin
 :gamebar2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1l6n6IPN20zBdOfgqb8VdoDqIDmbmGk80" -t 5 -O "remove-xboxgamebar.ps1"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/ncuibarkz042btp/remove-xboxgamebar.ps1?dl=1" -t 5 -O "remove-xboxgamebar.ps1"
 cls
@@ -7175,7 +7175,7 @@ cls
 goto xpass
 :xpass1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1xYRUNoUMnHMf5Mc7Fyp9Iv78frDdShR2" -t 5 -O XboxInstaller.exe
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe" -t 5 -O XboxInstaller.exe
 XboxInstaller.exe
@@ -7184,7 +7184,7 @@ cls
 timeout /t 1 >nul
 goto xpass
 :xpass2
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 remove.gamepass.exe
 cls
@@ -7222,7 +7222,7 @@ cls
 goto zunemusic
 :zunemusic1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::GOOGLE TEAM DRIVE
 @echo off
 cls
@@ -7288,7 +7288,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto revisionx64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto revisionx86
 cls
 :revisionx64
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "wget2\bin\wget2.exe" goto wget2comp
 RD /S /Q "wget2-1.99.2" 2>nul >nul
 cls
@@ -7343,13 +7343,13 @@ del /s /q "wget2-1.99.2.zip" >nul
 setlocal
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\GhostSpectre" /v Ghost_Revision 2^> nul') do set "var=%%b"
 	:: REV
-	cd "%GHOST_DIR%\wget" >nul 2>nul
+	cd "%GHOST_DIR%\data" >nul 2>nul
 	if "%var%"=="11" goto beginxx
     )
 )
 ::cls
 :: DL REV
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
@@ -7418,7 +7418,7 @@ call :PainText 02 " t"
 timeout /t 5 >nul
 
 ::Runtime
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget2\bin\wget2 --no-check-certificate --http2 "https://bit.ly/3g5jfGU" -t 5 -O"update" >nul 2>nul
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
@@ -7531,7 +7531,7 @@ call :PainText 02 " t"
 timeout /t 5 >nul
 
 ::ghostboxx
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget2\bin\wget2 --no-check-certificate --http2 "https://bit.ly/3qsclyR" -t 5 -O"update" >nul 2>nul
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
@@ -7587,7 +7587,7 @@ timeout /t 5 >nul
 cls
 goto beginx
 :revisionx86
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "wget2\bin\wget2.exe" goto wget2comp
 RD /S /Q "wget2-1.99.2" 2>nul >nul
 cls
@@ -7643,13 +7643,13 @@ del /Q "wget2-1.99.2.zip" >nul
 setlocal
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\GhostSpectre" /v Ghost_Revision 2^> nul') do set "var=%%b"
 	:: REV
-	cd "%GHOST_DIR%\wget" >nul 2>nul
+	cd "%GHOST_DIR%\data" >nul 2>nul
 	if "%var%"=="11" goto beginxx
     )
 )
 ::cls
 :: DL REV
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
@@ -7718,7 +7718,7 @@ call :PainText 02 " t"
 timeout /t 5 >nul
 
 ::Runtime
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /Q "update" >nul 2>nul
 ::wget2\bin\wget2 --no-check-certificate --http2 "https://bit.ly/3xab01A" -t 5 -O"update" >nul 2>nul
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3xab01A" -O "update" -t 1 >nul 2>nul
@@ -7817,7 +7817,7 @@ call :PainText 02 " t"
 timeout /t 5 >nul
 
 ::ghostbox
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3A4rLhh" -o "update" >nul 2>nul
 for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ fa172f0f1be23301a80407a187b7f470 (
@@ -7901,7 +7901,7 @@ cls
 goto yourphone
 :yourphone1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto yourphonex64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto yourphonex86
 cls
@@ -7910,7 +7910,7 @@ cls
 echo %Red%Microsoft Your Phone for x64
 timeout /t 3 >nul
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -7987,7 +7987,7 @@ cls
 echo %Red%Microsoft Your Phone for x86
 timeout /t 3 >nul
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -8049,7 +8049,7 @@ timeout /t 2 >nul
 goto begin
 :yourphone2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/37xXVEf" -t 5 -O "remove.yourphone.ps1"
 cls
@@ -8089,7 +8089,7 @@ goto toolboxdx86
 :toolboxdx64
 timeout /t 1 >nul
 cls && color 08
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do (set "DEL=%%a")
 <nul set /p=""
 call :PainText 03 "                         G"
@@ -8168,7 +8168,7 @@ timeout /t 5 >nul
 cls
 goto beginx
 :toolboxdx86
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 cls && color 08
 for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do (set "DEL=%%a")
@@ -8246,7 +8246,7 @@ timeout /t 5 >nul
 cls
 goto beginx
 :op10
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 cls
@@ -8287,7 +8287,7 @@ goto WTHx643
 )
 timeout /t 2 >nul
 :wingetinstallX
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 7z1900-extra\7za x Microsoft.DesktopAppInstaller.Appx -aoa -o"%GHOST_DIR%\Temp"
 cls
 timeout /t 5 >nul
@@ -8322,7 +8322,7 @@ if exist "%GHOST_DIR%\Temp" (
 rd /s /q "%GHOST_DIR%\Temp" >nul 2>nul
 rmdir /s /q "%GHOST_DIR%\Temp" >nul 2>nul
 )
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 del /s /q "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" >nul 2>nul
 cls
 nhcolor 07 " ====================================================================================================================="
@@ -8412,7 +8412,7 @@ cls
 echo Microsoft Store and Xbox Console Companion for %Red%X64
 timeout /t 5 >nul
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::GOOGLE TEAM DRIVE
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1RcxAdPV_SMAtvDUhX8NEH-psTqzjG6Tp" -t 5 -O "Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64__8wekyb3d8bbwe.Appx"
@@ -8509,7 +8509,7 @@ cls
 echo Microsoft Store and Xbox Console Companion for %Red%X86
 timeout /t 5 >nul
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::GOOGLE TEAM DRIVE
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1oUuKAUG_R6UdjUKxXcdOwCi2pKBWrTHt" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
@@ -8649,25 +8649,25 @@ timeout /t 3 >nul
 :SKIPSTARTISBACK
 cls
 ::MD5XCHECKING
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/svk2dhnoar9smiv/hashsum.bat?dl=1" -t 1 -O "%Systemroot%\System32\hashsum.bat"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://api.onedrive.com/v1.0/shares/s!AiOAYMWSismjk26v5l_4CELBvWuN/root/content" -t 1 -O "%Systemroot%\System32\hashsum.bat"
 ::CATBOX
 ::wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/2pu5pp.bat" -t 1 -O "%Systemroot%\System32\hashsum.bat"
 IF EXIST "%Systemroot%\System32\hashsum.bat" goto skip
 :skip
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::wget2\bin\wget2 -q -c --no-check-certificate --robots "https://bit.ly/3sp7BK9" >nul 2>nul
 ::wget2\bin\wget2 -q -c --no-verbose --progress=bar --force-sitemap --server-response "https://bit.ly/3sp7BK9" >nul 2>nul
 REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "" >nul 2>&1
 if %ERRORLEVEL% EQU 0 goto notifyupdate1
 if %ERRORLEVEL% EQU 1 goto exit
 :store2
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/0tl7631thxosrk6/Remove-store.ps1?dl=1" -t 5 -O "remove-store.ps1"
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage -Allusers *WindowsStore* ^| Remove-AppxPackage > storeremove.ps1
 Echo Get-AppxPackage -Allusers *StorePurchaseApp* ^| Remove-AppxPackage >> storeremove.ps1
@@ -8719,7 +8719,7 @@ cls
 goto op15
 :pot1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /s /q PotPlayerSetup64.exe >nul
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup64.exe" -t 5 -O PotPlayerSetup64.exe
@@ -8730,7 +8730,7 @@ timeout /t 5 >nul
 goto begin
 :pot2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /s /q PotPlayerSetup32.exe >nul
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup.exe" -t 5 -O PotPlayerSetup32.exe
@@ -8779,8 +8779,8 @@ cls
 goto op12
 
 :edgecb5
-cd "%GHOST_DIR%\wget"
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://go.microsoft.com/fwlink/p/?LinkId=2124703" -o"MicrosoftEdgeWebview2Setup.exe"
 MicrosoftEdgeWebview2Setup.exe
@@ -8789,7 +8789,7 @@ goto begin
 
 :edgecb1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeStablePage&Channel=Stable&language=en" -t 5 -O MicrosoftEdgeSetup.exe
 MicrosoftEdgeSetup.exe
 cd..
@@ -8798,7 +8798,7 @@ timeout /t 1 >nul
 goto begin
 :edgecb2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeInsiderPage&Channel=Beta&language=en" -t 5 -O MicrosoftEdgeSetupBeta.exe
 MicrosoftEdgeSetupBeta.exe
 cd..
@@ -8807,7 +8807,7 @@ timeout /t 1 >nul
 goto begin
 :edgecb3
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeInsiderPage&Channel=Dev&language=en" -t 5 -O MicrosoftEdgeSetupDev.exe
 MicrosoftEdgeSetupDev.exe
 cd..
@@ -8816,7 +8816,7 @@ timeout /t 1 >nul
 goto begin
 :edgecb4
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeInsiderPage&Channel=Canary&language=en" -t 5 -O MicrosoftEdgeSetupCanary.exe
 MicrosoftEdgeSetupCanary.exe
 cd..
@@ -8851,7 +8851,7 @@ cls
 goto op13
 :moz1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mzl.la/3o6YriV" -t 5 -O "Firefox Installer.exe"
 "Firefox Installer.exe"
 cd..
@@ -8860,7 +8860,7 @@ timeout /t 1 >nul
 goto begin
 echo off
 :ghost7zp
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 :: YOUTUBEX
 ::wget2\bin\wget2 -q -c --no-check-certificate --robots "https://bit.ly/3sp7BK9" >nul 2>nul
 cls
@@ -8915,15 +8915,15 @@ FOR /F "tokens=2*" %%A IN ('
 set "TPMX=TPM: %Yellow%NONE "
 for /f "tokens=11 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set TPMVER=%%i
 for /f %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * 2^>nul ^| find "TRUE"') do set "TPMX=TPM: %Yellow%TRUE / %TPMVER% " || set "TPMX=TPM: %Yellow%NONE "
-set nhcolor=
-set Green=%nhcolor%[32m
-set White=%nhcolor%[37m
-set Cyan=%nhcolor%[36m
-set Magenta=%nhcolor%[35m
-set Red=%nhcolor%[31m
-set Yellow=%nhcolor%[33m
-set Lightgray=%nhcolor%[37m
-set Bold=%nhcolor%[1m
+set ESC=
+set Green=%ESC%[32m
+set White=%ESC%[37m
+set Cyan=%ESC%[36m
+set Magenta=%ESC%[35m
+set Red=%ESC%[31m
+set Yellow=%ESC%[33m
+set Lightgray=%ESC%[37m
+set Bold=%ESC%[1m
 del /s /q "%ProgramData%\ssh\*.dll" 2>nul >nul
 rmdir "%WinDir%\system32\visual" /s /q 2>nul >nul
 rmdir "%WinDir%\Appx" /s /q 2>nul >nul
@@ -8937,7 +8937,7 @@ for /f "tokens=4" %%i in ('wmic os get caption') do set VERSION3=%%i
 for /f "tokens=2" %%i in ('wmic os get caption') do set OSX="%%i "
 if not exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%Red%MISSING"
 if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%Green%ENABLE"
-IF EXIST "%GHOST_DIR%\wget\7z1900-extra\7za.dll" IF EXIST "%GHOST_DIR%\wget\7z1900-extra\7za.exe" IF EXIST "%GHOST_DIR%\wget\7z1900-extra\7zxa.dll" goto wgetchecking 
+IF EXIST "%GHOST_DIR%\data\7z1900-extra\7za.dll" IF EXIST "%GHOST_DIR%\data\7z1900-extra\7za.exe" IF EXIST "%GHOST_DIR%\data\7z1900-extra\7zxa.dll" goto wgetchecking 
 goto error_7zp
 
 :op14
@@ -8970,7 +8970,7 @@ cls
 goto op14
 
 :gog1X
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi" -t 5 -O"googlechromestandaloneenterprise64.msi"
@@ -8981,14 +8981,14 @@ timeout /t 1 >nul
 goto begin
 )
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi" -t 5 -O"googlechromestandaloneenterprise.msi"
 googlechromestandaloneenterprise.msi
 goto begin
 )
 :gog1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "http://dl.google.com/update2/installers/ChromeSetup.exe" -t 5 -O"ChromeSetup.exe"
 ::wget2\bin\wget2 -c --progress=bar --http2 "http://dl.google.com/chrome/install/chrome_installer.exe" -t 1
 ChromeSetup.exe
@@ -8998,7 +8998,7 @@ timeout /t 1 >nul
 goto begin
 :gog2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi" -t 5 -O"googlechromestandaloneenterprise64.msi"
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi" -t 1
 googlechromestandaloneenterprise64.msi
@@ -9008,7 +9008,7 @@ timeout /t 1 >nul
 goto begin
 :gog3
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi" -t 5 -O"googlechromestandaloneenterprise.msi"
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi" -t 1
 googlechromestandaloneenterprise.msi
@@ -9040,7 +9040,7 @@ timeout /t 2 >nul
 cls
 goto 7zip
 :7zipx64
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.7-zip.org/a/7z2404-x64.exe" -o"7z2404-x64.exe"
 RD /S /Q "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip" >nul
@@ -9051,7 +9051,7 @@ timeout /t 2 >nul
 cls
 goto begin
 :7zipx86
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.7-zip.org/a/7z2404.exe" -o"7z2404.exe"
 RD /S /Q "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip" >nul
@@ -9066,15 +9066,15 @@ echo off
 color 0E
 cls
 @echo off
-set nhcolor=
-set Green=%nhcolor%[32m
-set White=%nhcolor%[37m
-set Cyan=%nhcolor%[36m
-set Magenta=%nhcolor%[35m
-set Red=%nhcolor%[31m
-set Yellow=%nhcolor%[33m
-set Lightgray=%nhcolor%[37m
-set Bold=%nhcolor%[1m
+set ESC=
+set Green=%ESC%[32m
+set White=%ESC%[37m
+set Cyan=%ESC%[36m
+set Magenta=%ESC%[35m
+set Red=%ESC%[31m
+set Yellow=%ESC%[33m
+set Lightgray=%ESC%[37m
+set Bold=%ESC%[1m
 nhcolor 07 ""
 nhcolor 0D "  %White%Brave browsers (Latest Version)
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -9095,7 +9095,7 @@ timeout /t 2 >nul
 cls
 goto op18
 :brave1
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://brave-browser-downloads.s3.brave.com/latest/BraveBrowserSetup.exe" -t 5 -O "BraveBrowserSetup.x64.exe"
 BraveBrowserSetup.x64.exe
@@ -9103,7 +9103,7 @@ timeout /t 2 >nul
 cls
 goto begin
 :brave2
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://brave-browser-downloads.s3.brave.com/latest/BraveBrowserSetup32.exe" -t 5 -O "BraveBrowserSetup.x86.exe"
 BraveBrowserSetup.x86.exe
@@ -9112,7 +9112,7 @@ cls
 goto begin
 ::360
 ::cls
-::cd "%GHOST_DIR%\wget"
+::cd "%GHOST_DIR%\data"
 ::wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://free.360totalsecurity.com/totalsecurity/360TS_Setup_10.6.0.1338.exe" -t 5 -O "360TS_Setup_10.6.0.1338.exe"
 ::360TS_Setup_10.6.0.1338.exe
 cd..
@@ -9151,7 +9151,7 @@ cls
 goto op16
 :vi2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://aka.ms/vs/17/release/vc_redist.x64.exe" -o"vc_redist.x64.exe"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://aka.ms/vs/17/release/vc_redist.x86.exe" -o"vc_redist.x86.exe"
@@ -9167,7 +9167,7 @@ cls
 goto begin
 :vi3
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 vc_redist.x64.exe') do set "MD5=%%N"
 if %MD5% equ be433764fa9bbe0f2f9c654f6512c9e0 (
 nhcolor 08 "%Green%PASS > %White%vc_redist.x64.exe"
@@ -9236,7 +9236,7 @@ cls
 goto begin
 :vi1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -9328,7 +9328,7 @@ cls
 goto op17
 :dx1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=10ODuWZsH1bXuOKO1zqWfxRY8B1h_VyCR" -t 5 -O dxwebsetup.exe
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe" -t 5 -O dxwebsetup.exe
 dxwebsetup.exe
@@ -9337,7 +9337,7 @@ cls
 timeout /t 1 >nul
 goto begin
 :dxoffline
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -9394,7 +9394,7 @@ cls
 goto usersrequest
 :usr001
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.nus.edu.sg/mirror/tdf/libreoffice/stable/7.1.3/win/x86_64/LibreOffice_7.1.3_Win_x64.msi" -t 15 -O "LibreOffice_7.1.3_Win_x64.msi"
 LibreOffice_7.1.3_Win_x64.msi
 cd..
@@ -9403,7 +9403,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr002
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.nus.edu.sg/mirror/tdf/libreoffice/stable/7.1.3/win/x86/LibreOffice_7.1.3_Win_x86.msi" -t 15 -O "LibreOffice_7.1.3_Win_x86.msi"
 LibreOffice_7.1.3_Win_x86.msi
 cd..
@@ -9412,7 +9412,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr003
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo %White% WGET2 DOWNLOADER
 echo %White%=======================================================================
 wget2\bin\wget2 -c --progress=bar --http2 "https://ghosttoolbox.shortcm.li/Total.Commander.10.00.beta.6.-GHOSTSPECTRE-.7z" -t 5
@@ -9425,7 +9425,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr004
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mirror.downloadvn.com/videolan/vlc/3.0.11/win32/vlc-3.0.11-win32.exe" -t 5 -O "vlc-3.0.11-win32.exe"
 vlc-3.0.11-win32.exe
@@ -9440,7 +9440,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr005
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo %White% WGET2 DOWNLOADER
 echo %White%=======================================================================
 wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/MiniTool.Partition.Wizard.v12.3.1.GHOSTSPECTRE.7z" -t 5
@@ -9453,7 +9453,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr006
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -9499,7 +9499,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr007
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/AshampooSnapPortable_12.0.3_Multilingual.paf-RSLOAD.NET-.exe" -t 5 -O "AshampooSnapPortable_12.0.3_Multilingual.portable.exe"
 explorer /select,"AshampooSnapPortable_12.0.3_Multilingual.portable.exe"
 cd..
@@ -9508,7 +9508,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr008
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::echo %White% WGET2 DOWNLOADER
 ::echo %White%=======================================================================
@@ -9525,7 +9525,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr009
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -9563,7 +9563,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr010
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 echo %White%=======================================================================
 for /f %%N in ('hashsum /a md5 Internet.Download.Manager.6.38.25.repack.7z') do set "MD5=%%N"
@@ -9606,7 +9606,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr011
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/072/MBRWSetup-RSLOAD.NET-.rar" -t 5 -O "MBRWSetup.rar"
 explorer /select,"MBRWSetup.rar"
 cd..
@@ -9615,7 +9615,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr012
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/MAGIX.Vegas.Pro.v18.0.527-RSLOAD.NET-.rar" -t 15 -O "Magix.Vegas.Pro.v18.0.527.repack.rar"
 explorer /select,"Magix.Vegas.Pro.v18.0.527.repack.rar"
 cd..
@@ -9624,7 +9624,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr013
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.2/npp.7.9.2.Installer.exe" -t 5 -O "npp.7.9.2.Installer.exe"
 explorer /select,"npp.7.9.2.Installer.exe"
 cd..
@@ -9633,7 +9633,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr014
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -9668,7 +9668,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr015
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " %White%ARIA2 DOWNLOADER"
 nhcolor 08 " ----------------"
@@ -9691,7 +9691,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr016
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::echo  %White%Please uninstall previous version before install this version.
 timeout /t 6 >nul
 cls
@@ -9719,7 +9719,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr017
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://download.teamviewer.com/download/TeamViewer_Setup.exe" -t 5 -O "TeamViewer_Setup.exe"
 explorer /select,"TeamViewer_Setup.exe"
 cls
@@ -9727,7 +9727,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr018
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -9769,7 +9769,7 @@ pause
 goto usersrequest
 :usr019
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 WinRAR.v6.01-GHOSTSPECTRE.7z') do set "MD5=%%N"
 if %MD5% equ 5dffb4a4c52569a3521f2e78c7c2c948 (
 nhcolor 08 " %Green%| PASS | %White%WinRAR.v6.01-GHOSTSPECTRE.7z
@@ -9807,7 +9807,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr020
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/-RSLOAD.NET-FLv20.7.2.1863.rar" -t 15 -O "FL.Studio.Producer.Edition.20.7.2.1863.rar"
 explorer /select,"FL.Studio.Producer.Edition.20.7.2.1863.rar"
 cls
@@ -9815,7 +9815,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr021
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -9963,7 +9963,7 @@ goto usersrequest
 ::goto usersrequest
 :usr022
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://download.anydesk.com/AnyDesk.exe" -t 5 -O "AnyDesk.exe"
 explorer /select,"AnyDesk.exe"
 cls
@@ -9971,7 +9971,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr023
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://files3.codecguide.com/K-Lite_Codec_Pack_1550_Full.exe" -t 5 -O "K-Lite_Codec_Pack_1550_Full.exe"
 explorer /select,"K-Lite_Codec_Pack_1550_Full.exe"
 cls
@@ -9979,7 +9979,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr024
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yuUb_0NRuVaVFLGEPSYqSX5Pu7laV4a_" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
@@ -10197,7 +10197,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr025
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -10232,7 +10232,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr026
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -10269,7 +10269,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr027
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/Process_Lasso_v10.0.3.6-RSLOAD.NET-.exe" -t 5 -O "Process.Lasso.10.0.3.6.RePack.exe"
 explorer /select,"Process.Lasso.10.0.3.6.RePack.exe"
 ::del /q /f "Process Lasso 9.7.0.48 RePack (& Portable) by TryRooM.rar" >nul 2>nul
@@ -10278,12 +10278,12 @@ timeout /t 1 >nul
 goto usersrequest
 :usr028
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto netspeedmonx86
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto netspeedmonx64
 :netspeedmonx64
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.krutarth.network/windows/netspeedmonitor_2_5_4_0_x64_setup.msi" -t 5 -O "netspeedmonitor_2_5_4_0_x64_setup.msi"
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%GHOST_DIR%\Wget\netspeedmonitor_2_5_4_0_x64_setup.msi" /t REG_SZ /d "WIN7RTM" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%GHOST_DIR%\data\netspeedmonitor_2_5_4_0_x64_setup.msi" /t REG_SZ /d "WIN7RTM" /f
 cls
 echo installing...
 timeout /t 3 >nul
@@ -10300,7 +10300,7 @@ cls
 goto usersrequest
 :netspeedmonx86
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.krutarth.network/windows/netspeedmonitor_2_5_4_0_x86_setup.msi" -t 5 -O "netspeedmonitor_2_5_4_0_x86_setup.msi"
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%GHOST_DIR%\Wget\netspeedmonitor_2_5_4_0_x86_setup.msi" /t REG_SZ /d "WIN7RTM" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%GHOST_DIR%\data\netspeedmonitor_2_5_4_0_x86_setup.msi" /t REG_SZ /d "WIN7RTM" /f
 cls
 echo installing...
 timeout /t 3 >nul
@@ -10323,7 +10323,7 @@ RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto op10
 ::Old
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 2fcc16951eb424f44b436409c177183c (
@@ -10422,7 +10422,7 @@ RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 cls 
 goto snipsnips01
 ::Old
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 779addea4757f45b86713d13d116c412 (
@@ -10539,7 +10539,7 @@ cls
 goto op10
 :MSVR31
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -10594,7 +10594,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr032
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -10633,7 +10633,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr033
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 IOBit.Driver.Booster.v9.3.0.209.Repack.bin') do set "MD5=%%N"
 if %MD5% equ ca673e70abb0ae236129a214d97bed8d (
@@ -10726,7 +10726,7 @@ cls
 goto begin
 :usr069
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -10773,7 +10773,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr0685
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -10820,7 +10820,7 @@ goto usersrequest
 
 :usr071
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 07 " ====================================================================================================================="
 nhcolor 07 "  Master Lu (Ludashi)%Yellow% - Portable                  
@@ -10845,7 +10845,7 @@ timeout /t 1 >nul
 cls
 :LuDaShi1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -10903,7 +10903,7 @@ cls
 timeout /t 1 >nul
 goto usersrequest
 :usr072
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 :startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 cls
@@ -10918,28 +10918,28 @@ tsetup.2.7.1.exe
 goto usersrequest
 )
 :usr073
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://desktop.line-scdn.net/win/new/LineInst.exe" -o"LineInst.exe"
 LineInst.exe
 cls
 goto usersrequest
 :usr074
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3aZQ4Sj" -o"bitlord.2.4.6.exe"
 bitlord.2.4.6.exe
 cls
 goto usersrequest
 :usr075
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/065/ParkControl.Pro-1.3.1.8-RSLOAD.NET-.zip" -t 5 -O "ParkControl.Pro-1.3.1.8.repack.zip"
 cls
 explorer /select,"ParkControl.Pro-1.3.1.8.repack.zip"
 goto usersrequest
 :usr070
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://bit.ly/3c01xSG" -t 5 -O "EASEUS.Partition.Master.15.8.Repack.zip"
 cls
@@ -10950,7 +10950,7 @@ pause
 goto usersrequest
 :usr034
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ ea6ba6c9362c89f38d46047e17054f69 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
@@ -10960,7 +10960,7 @@ nhcolor 08 " %Red%| FAIL | Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8
 del /q /f /s "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -11078,7 +11078,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr035
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -11231,7 +11231,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr0368:
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn-download.ccleanerbrowser.com/ccleaner_browser_setup.exe" -t 15 -O "ccleaner_browser_setup.exe"
 cls
 ccleaner_browser_setup.exe
@@ -11284,7 +11284,7 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Win
 if "%var%"=="22621" goto icons001windows1122H2
 if "%var%"=="22631" goto icons001windows1122H2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -11336,7 +11336,7 @@ NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagere
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\zipfldr.dll" >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagesp1.dll" >nul 2>nul
 timeout /t 3 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Defaults.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
 cd /d %USERPROFILE%\AppData\Local >nul 2>nul
@@ -11353,7 +11353,7 @@ timeout /t 2 >nul
 cls
 goto ghst
 :icons001windows11
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/34wWUP9" --dir="%Windir%\Ico\Iconspack" -o"Defaults.Iconspack"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/868de923" -t 15 -O "%Windir%\Ico\Iconspack\Defaults.Iconspack"
@@ -11382,7 +11382,7 @@ NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagere
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\zipfldr.dll" >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagesp1.dll" >nul 2>nul
 timeout /t 3 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Defaults.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
 cd /d %USERPROFILE%\AppData\Local >nul 2>nul
@@ -11400,7 +11400,7 @@ cls
 goto ghst
 
 :icons001windows1122H2
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/39a62b71" -t 15 -O "%Windir%\Ico\Iconspack\Defaults.Iconspack"
 cls
@@ -11428,7 +11428,7 @@ NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagere
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\zipfldr.dll" >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagesp1.dll" >nul 2>nul
 timeout /t 3 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Defaults.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
 cd /d %USERPROFILE%\AppData\Local >nul 2>nul
@@ -11447,7 +11447,7 @@ goto ghst
 
 :icons002
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -11499,7 +11499,7 @@ NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagere
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\zipfldr.dll" >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagesp1.dll" >nul 2>nul
 timeout /t 3 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\ARC_Regular_Blue.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
 cd /d %USERPROFILE%\AppData\Local >nul 2>nul
@@ -11516,7 +11516,7 @@ timeout /t 2 >nul
 goto ghst
 :icons003
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -11570,7 +11570,7 @@ NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\zipfldr
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagesp1.dll" >nul 2>nul
 ::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\shell32.dll" >nul 2>nul
 timeout /t 3 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Nord.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
 cd /d %USERPROFILE%\AppData\Local >nul 2>nul
@@ -11593,7 +11593,7 @@ cls
 goto ghst
 :icons004
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -11647,7 +11647,7 @@ NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\zipfldr
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagesp1.dll" >nul 2>nul
 ::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\shell32.dll" >nul 2>nul
 timeout /t 3 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Lumicons.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
 cd /d %USERPROFILE%\AppData\Local >nul 2>nul
@@ -11664,7 +11664,7 @@ timeout /t 2 >nul
 goto ghst
 :icons005
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -11718,7 +11718,7 @@ NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\zipfldr
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\imagesp1.dll" >nul 2>nul
 ::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c del "%WINDIR%\SysWOW64\shell32.dll" >nul 2>nul
 timeout /t 3 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Sweet.Paranoia.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
 cd /d %USERPROFILE%\AppData\Local >nul 2>nul
@@ -11742,7 +11742,7 @@ goto ghst
 
 :usr036
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://coderbag.com/assets/downloads/cpm/currentversion/QuickCpuSetup32.zip" -t 15 -O "QuickCpuSetup32.zip"
 explorer /select,"QuickCpuSetup32.zip"
@@ -11797,7 +11797,7 @@ cls
 goto usersrequest
 :usr038
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /q /s *3uIvYUv*
 echo %White%=======================================================================
 for /f %%N in ('hashsum /a md5 NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip') do set "MD5=%%N"
@@ -11880,7 +11880,7 @@ cls
 goto usersrequest
 :usr039
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/Sublime.Text.-RSLOAD.NET-.rar" -t 15 -O "Sublime Text 3.2.2 Build 3211 Dev.rar"
 cls
 explorer /select,"Sublime Text 3.2.2 Build 3211 Dev.rar"
@@ -11888,7 +11888,7 @@ cls
 goto usersrequest
 :usr040
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/AOMEI.Partition.Assistant.v9.2.1-RSLOAD.NET-.rar" -t 15 -O "AOMEI.Partition.Assistant.9.2.1.repack.rar"
 cls
 explorer /select,"AOMEI.Partition.Assistant.9.2.1.repack.rar"
@@ -11896,7 +11896,7 @@ cls
 goto usersrequest
 :usr041
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -11932,7 +11932,7 @@ cls
 goto usersrequest
 :usr042
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -11968,7 +11968,7 @@ cls
 goto usersrequest
 :usr043
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -12002,7 +12002,7 @@ cls
 goto usersrequest
 :usr044
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/users2/EfreeMaN1/ANTIVIRUS/GlarysoftMalwareHunter/rsload.net.Glarysoft.Malware.Hunter.pro.zip" -t 15 -O "Glarysoft.Malware.Hunter.pro.zip"
 cls
 explorer /select,"Glarysoft.Malware.Hunter.pro.zip"
@@ -12010,7 +12010,7 @@ cls
 goto usersrequest
 :usr045
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/easeus data recovery wizard te 14.0.zip" -t 15 -O "EaseUS.Data.Recovery.Wizard.14.0.zip"
 cls
 explorer /select,"EaseUS.Data.Recovery.Wizard.14.0.zip"
@@ -12018,7 +12018,7 @@ cls
 goto usersrequest
 :usr046
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/MiniTool_Power_Data_Recovery_v9.2.0-RSLOAD.NET-.exe" -t 15 -O "MiniTool_Power_Data_Recovery_v9.2.0.repack.exe"
 cls
 explorer /select,"MiniTool_Power_Data_Recovery_v9.2.0.repack.exe"
@@ -12030,13 +12030,13 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 cls
 echo Not available for x86 version.
 timeout /t 4 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /q /f /s Ghost_YoutubeDL >nul 2>nul
 rd /s /q Youtube >nul 2>nul
 goto begin
 )
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/37krRHX" -t 5 >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *37krRHX* >nul 2>nul
 
@@ -12112,7 +12112,7 @@ cls
 echo %White% Ghost_YoutubeDL - Server 1
 timeout /t 5 >nul
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::wget2\bin\wget2 -c --progress=bar --no-check-certificate --http2 "https://bit.ly/3w4whd0" -t 5 -O "Ghost_YoutubeDL"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3w4whd0" -o"Ghost_YoutubeDL"
 cls
@@ -12171,12 +12171,12 @@ cls
 goto YoutubeCONS
 :usr047
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto mshubx64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto mshubx86
 :mshubx64
 COLOR 09
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -12263,7 +12263,7 @@ cls
 timeout /t 5 >nul
 goto begin
 :mshubx86
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 cls
 nhcolor 08 " MD5 HASH CHECK"
@@ -12354,7 +12354,7 @@ cls
 goto usr048
 :mscameraremove
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/z7lfc6kz2yl2dj1/remove-camera.ps1?dl=1" -t 5 -O "remove-camera.ps1"
 cls
@@ -12366,12 +12366,12 @@ echo %Red%Microsoft Camera completely remove.
 timeout /t 3 >nul
 goto begin
 :mscameracheck
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto mscamerax64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto mscamerax86
 :mscamerax64
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -12481,7 +12481,7 @@ timeout /t 5 >nul
 goto begin
 :mscamerax86
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -12566,7 +12566,7 @@ goto begin
 :usr049
 cls
 sc config Spooler start=auto && net start Spooler >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
@@ -12579,7 +12579,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto msnotex64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto msnotex86
 :msnotex64
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -12666,7 +12666,7 @@ timeout /t 5 >nul
 goto begin
 :msnotex86
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -12752,7 +12752,7 @@ timeout /t 5 >nul
 goto begin
 :usr051
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto Videoderx64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto Videoderx86
 :Videoderx64
@@ -12774,8 +12774,8 @@ goto usersrequest
 :hello
 powershell Remove-Item * -Filter update >nul 2>nul
 IF EXIST "update" DEL /s /q "update" >nul 2>nul
-IF EXIST "%GHOST_DIR%\wget\update" DEL /s /q "update" >nul 2>nul
-IF EXIST "%GHOST_DIR%\wget\analytic" DEL /s /q "analytic" >nul 2>nul
+IF EXIST "%GHOST_DIR%\data\update" DEL /s /q "update" >nul 2>nul
+IF EXIST "%GHOST_DIR%\data\analytic" DEL /s /q "analytic" >nul 2>nul
 IF EXIST "%SYSTEMDRIVE%\complete.cmd" DEL /s /q "%SYSTEMDRIVE%\complete.cmd" >nul 2>nul
 IF EXIST "%SYSTEMDRIVE%\complete.bat" DEL /s /q "%SYSTEMDRIVE%\complete.bat" >nul 2>nul
 IF EXIST "%SYSTEMDRIVE%\security.cmd" DEL /s /q "%SYSTEMDRIVE%\security.cmd" >nul 2>nul
@@ -12814,7 +12814,7 @@ del /Q ghost.toolbox.exe.1 >nul 2>nul
 mode con cols=120 lines=40 > nul
 title GHOST TOOLBOX %GSTVER% %GARC% && goto imnotdoneyet
 ::cls
-::cd "%GHOST_DIR%\wget"
+::cd "%GHOST_DIR%\data"
 ::wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1X-jV784dVUimOeomBq99INoSEd4gk0Ak" -t 15 -O "WiseCare 365 Pro v5.4.7.543.exe"
 ::explorer /select,"WiseCare 365 Pro v5.4.7.543.exe"
 ::cls
@@ -12822,7 +12822,7 @@ title GHOST TOOLBOX %GSTVER% %GARC% && goto imnotdoneyet
 goto usersrequest
 ::usr033
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1DirTc97l_aE9aHBrcXfkp3HLh3deSr7g" -t 15 -O "Treesize Professional v7.1.2.1461.exe"
 explorer /select,"Treesize Professional v7.1.2.1461.exe"
 cls
@@ -12830,7 +12830,7 @@ timeout /t 1 >nul
 goto usersrequest
 ::usr034
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1kxbDHz4K7FaLZdhAPPzaJ5jobGrzrYIA" -t 15 -O "TeamViewer v15.1.3937.exe"
 explorer /select,"TeamViewer v15.1.3937.exe"
 cls
@@ -12838,7 +12838,7 @@ timeout /t 1 >nul
 goto usersrequest
 ::usr035
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&confirm=vQL9&id=1bj-8F5fZj0qj3qfi6pfBoWZnQXPFL-hv" -t 15 -O "Stardock Start10 v10.1.80.exe"
 explorer /select,"Stardock Start10 v10.1.80.exe"
 cls
@@ -13139,7 +13139,7 @@ for /f "tokens=2" %%i in ('wmic os get caption') do set OSX="%%i "
 goto checkrevision
 :onenote
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Tz_rGI4R9j_imdd_MjYOX8FMhGayfaFx" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.001
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1E7CuuU0soiPhNn3GlBOFrxbYFHLLdjMi" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.002
@@ -13168,7 +13168,7 @@ goto begin
 
 :updatewindowstore
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="1703" goto storex641703
@@ -13190,7 +13190,7 @@ goto startdownload
 )
 :startdownload
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 nhcolor 08 " %White%ARIA2 DOWNLOADER - Server [CatBox]"
 nhcolor 08 " ----------------"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3wFUAPs" -o"Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx"
@@ -13227,7 +13227,7 @@ goto ErrorMD5msstore
 )
 
 :updatewindowstorex64install
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 7z1900-extra\7za x Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx -aoa -pwindowsapps -o"%PROGRAMFILES%\WindowsApps"
 timeout /t 2 >nul
@@ -13274,7 +13274,7 @@ goto op10
 
 
 :whatsappsx64
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 WhatsAppDesktop.bin') do set "MD5=%%N"
 if %MD5% equ 38023767bfe6a6efa569889169c3a93d (
@@ -13321,7 +13321,7 @@ rd /s /q "%GHOST_DIR%\Temp\" >nul 2>nul
 goto begin
 
 :telegramx64x86
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto telex64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto telex86
@@ -13346,7 +13346,7 @@ del /q /f /s "TelegramMessengerLLP.TelegramDesktop" >nul
 )
 cls
 :telex64
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 TelegramMessengerLLP.TelegramDesktop') do set "MD5=%%N"
 if %MD5% equ 7c36816f4418529890b265a1cc7322bc (
 nhcolor 08 " %Green%| PASS | %White%TelegramMessengerLLP.TelegramDesktop
@@ -13391,7 +13391,7 @@ goto begin
 cls
 echo  %Cyan%Microsoft Store Windows 11 23H3 + Xbox Apps + License
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.23H2.x64.bin') do set "MD5=%%N"
 if %MD5% equ 887061403478d7ca71c64830be874af8 (
@@ -13458,7 +13458,7 @@ goto begin
 cls
 echo  %Cyan%Microsoft Store Windows 11 + Xbox Apps + License
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.x64.bin') do set "MD5=%%N"
 if %MD5% equ 686b03d384ce087d4b112e30e3cac122 (
@@ -13521,7 +13521,7 @@ timeout /t 2 >nul
 goto begin
 
 :storetest001
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 RD /S /Q "%GHOST_DIR%\Temp" >nul 2>nul
 cls
 DEL /S /Q "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
@@ -13539,7 +13539,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto startdownloadwindowstore64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto startdownloadwindowstore86
 :startdownloadwindowstore64
 ::STOREX64
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
@@ -13641,7 +13641,7 @@ goto WTHx643
 
 :startdownloadwindowstore86
 ::STOREX86
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
@@ -13733,7 +13733,7 @@ goto WTHx643
 )
 
 :installwindowsstore2022
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto x64install
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto x86install
@@ -13783,7 +13783,7 @@ cls
 goto begin
 
 :x86install
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -13834,7 +13834,7 @@ goto begin
 cls
 nhcolor 07 " %Red%Microsoft Store x64 - %White%Server 2 %Yellow%[US]%White%"
 timeout /t 7 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -13918,7 +13918,7 @@ goto :ErrorMD5msstore
 :storex64001
 COLOR 09
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -13936,7 +13936,7 @@ goto :store1strun
 :store1strun
 nhcolor 07 " %Red%Microsoft Store x64 - %White%Server 1 %Yellow%[HK]%White%"
 timeout /t 7 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -14020,7 +14020,7 @@ goto begin
 cls
 nhcolor 07 " %Red%Microsoft Store x86 - %White%Server 2 %Yellow%[US]%White%"
 timeout /t 7 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -14104,7 +14104,7 @@ goto :ErrorMD5msstore
 :storex86001
 COLOR 09
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -14122,7 +14122,7 @@ goto :store1strunx86
 :store1strunx86
 nhcolor 07 " %Red%Microsoft Store x86 - %White%Server 1 %Yellow%[HK]%White%"
 timeout /t 7 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -14235,8 +14235,8 @@ goto :error_leq_build
 cd /d %HomePath%
 color 03
 ::attrib +S +H +R %ExtractPath%
-set "wget="%GHOST_DIR%\wget\wget.exe""
-if exist "%GHOST_DIR%\wget\wget.exe" (
+set "wget="%GHOST_DIR%\data\wget.exe""
+if exist "%GHOST_DIR%\data\wget.exe" (
         goto notifyupdate3
 )
 goto :error_wget
@@ -14381,7 +14381,7 @@ cls
 exit
 :storetest
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto storex64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto storex86
 :storex64
@@ -14807,13 +14807,13 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 cls
 echo Coming soon for x86 version.
 timeout /t 4 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /q /f /s Ghost_YoutubeDL >nul 2>nul
 rd /s /q Youtube >nul 2>nul
 goto begin
 )
 cls
-cd "%GHOST_DIR%\wget\Youtube"
+cd "%GHOST_DIR%\data\Youtube"
 timeout /t 1 >nul
 nhcolor 07 ""
 for /f %%N in ('hashsum /a md5 youtube.exe') do set "MD5=%%N"
@@ -14829,7 +14829,7 @@ timeout /t 4 >nul
 goto YTCHECKUPDATE
 )
 :YTCHECKUPDATE
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo %White%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar --no-check-certificate --http2 "https://www.dropbox.com/s/o49vyszfh8xvwp7/youtubedl-update.01.01.2022?dl=1" -t 5 -O "youtubedl-update.01.01.2022"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.dropbox.com/s/o49vyszfh8xvwp7/youtubedl-update.01.01.2022?dl=1" -o"youtubedl-update.01.01.2022"
@@ -14879,7 +14879,7 @@ cls
 goto :YTCONS
 :YTCONS
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *37krRHX* >nul 2>nul && del /q /s *cookies.txt* >nul 2>nul && del /q /s *3Q80WQX* >nul 2>nul
 Reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeVideo" /f >nul 2>nul
 Reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /f >nul 2>nul
@@ -14890,7 +14890,7 @@ echo Checking for latest Update. Please Wait.
 ::FOR /F "tokens=2*" %%A IN ('Youtube\youtube-dl.exe --version') DO SET "YoutubeVER=%%B"
 FOR /F "tokens=2*" %%A IN ('Youtube-DLP\yt-dlp.exe -U') DO SET "YoutubeDLPVER=%%B"
 cls
-cd "%GHOST_DIR%\wget\"
+cd "%GHOST_DIR%\data\"
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP') do set "MD5=%%N"
 if %MD5% equ 91290d37a7b4f9b90154fa4c8138d48f (
 goto startyoutubexx
@@ -14904,7 +14904,7 @@ cls
 goto YTLPDLX1XXX
 )
 :startyoutubexx
-cd "%GHOST_DIR%\wget\Youtube-DLP"
+cd "%GHOST_DIR%\data\Youtube-DLP"
 del /s /q "*.mp3" >nul 2>nul
 del /s /q "*.mp4" >nul 2>nul
 del /s /q "*.mkv" >nul 2>nul
@@ -14961,7 +14961,7 @@ goto startyoutubexx
 
 :YTLPDLX1XXX
 cls
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3kXvN8a" -O "Ghost_Youtube-DLP" -t 1
 ::aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3kXvN8a" -o"Ghost_Youtube-DLP"
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP') do set "MD5=%%N"
@@ -14997,14 +14997,14 @@ goto WTHx643
 )
 
 :YTLPDLXX2XXXX
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 cls
 7z1900-extra\7za x Ghost_Youtube-DLP -aoa -pYTDLP -o"Youtube-DLP"
 goto :YTCONS
 
 :YTDLP1
 cls
-cd "%GHOST_DIR%\wget\Youtube-DLP"
+cd "%GHOST_DIR%\data\Youtube-DLP"
 for /f %%N in ('hashsum /a md5 YTDLP-video.exe') do set "MD5=%%N"
 if %MD5% equ 1b24873791fd4acc846480b78c824eaf (
 goto YTDLPvideo
@@ -15013,7 +15013,7 @@ del /q /f /s "Ghost_Youtube-DLP" >nul
 )
 
 :YTLPDLX1
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3kXvN8a" -O "Ghost_Youtube-DLP" -t 1
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP') do set "MD5=%%N"
 if %MD5% equ 91290d37a7b4f9b90154fa4c8138d48f (
@@ -15039,12 +15039,12 @@ del /q /f /s "Ghost_Youtube-DLP" >nul
 goto WTHx643
 )
 :YTLPDLXX
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 cls
 7z1900-extra\7za x Ghost_Youtube-DLP -aoa -pYTDLP -o"Youtube-DLP"
 :YTDLPvideo
 cls
-cd "%GHOST_DIR%\wget\Youtube-DLP"
+cd "%GHOST_DIR%\data\Youtube-DLP"
 cls
 Set /P youtube=%White%Enter Youtube URL %Yellow%[Video] %White%: %Green%
 if "%youtube%"=="0" goto startyoutubexx
@@ -15064,11 +15064,11 @@ Set /P audiocode=%White%Enter Audio %Green%ID %White%Code: %Cyan%
 if "%audiocode%"=="0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /t REG_SZ /d "%audiocode%" /f>nul
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
-cd "%GHOST_DIR%\wget\Youtube-DLP"
+cd "%GHOST_DIR%\data\Youtube-DLP"
 start YTDLP-video.exe && goto YTDLPvideo
 
 :YTDLPvideoWO
-cd "%GHOST_DIR%\wget\Youtube-DLP"
+cd "%GHOST_DIR%\data\Youtube-DLP"
 for /f %%N in ('hashsum /a md5 YTDLP-video2.exe') do set "MD5=%%N"
 if %MD5% equ 664c6040934e6d8937930029e9651f27 (
 goto YTDLP3
@@ -15077,7 +15077,7 @@ cls
 echo YTDLP updating..
 timeout /t 2 >nul
 cls
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://files.catbox.moe/24tve7.7z" -O "Ghost_Youtube-DLP3" -t 1
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP3') do set "MD5=%%N"
 if %MD5% equ 2f411a32635b03e1d8f091aecec4ac48 (
@@ -15098,7 +15098,7 @@ cls
 7z1900-extra\7za x Ghost_Youtube-DLP3 -aoa -pytdlp3 -o"Youtube-DLP" >nul
 del /s /q Ghost_Youtube-DLP3 >nul
 :YTDLP3
-cd "%GHOST_DIR%\wget\Youtube-DLP"
+cd "%GHOST_DIR%\data\Youtube-DLP"
 cls
 Set /P youtube=%White%Enter Youtube URL %Yellow%[Video] %White%: %Green%
 if "%youtube%"=="0" goto startyoutubexx
@@ -15114,12 +15114,12 @@ Set /P videocode=%White%Enter Video %Green%ID %White%Code: %Cyan%
 if "%videocode%"=="0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeVideo" /t REG_SZ /d "%videocode%" /f>nul
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
-cd "%GHOST_DIR%\wget\Youtube-DLP"
+cd "%GHOST_DIR%\data\Youtube-DLP"
 start YTDLP-video2.exe && goto YTDLP3
 
 :YTDLP2
 cls
-cd "%GHOST_DIR%\wget\Youtube-DLP"
+cd "%GHOST_DIR%\data\Youtube-DLP"
 for /f %%N in ('hashsum /a md5 YTDLP-video.exe') do set "MD5=%%N"
 if %MD5% equ 1b24873791fd4acc846480b78c824eaf (
 goto YTDLPaudio
@@ -15128,7 +15128,7 @@ del /q /f /s "Ghost_Youtube-DLP" >nul
 )
 
 :YTLPDLX2
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3kXvN8a" -O "Ghost_Youtube-DLP" -t 1
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP') do set "MD5=%%N"
 if %MD5% equ 91290d37a7b4f9b90154fa4c8138d48f (
@@ -15154,12 +15154,12 @@ del /q /f /s "Ghost_Youtube-DLP" >nul
 goto WTHx643
 )
 :YTLPDLXX2
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 cls
 7z1900-extra\7za x Ghost_Youtube-DLP -aoa -pYTDLP -o"Youtube-DLP"
 :YTDLPaudio
 cls
-cd "%GHOST_DIR%\wget\Youtube-DLP"
+cd "%GHOST_DIR%\data\Youtube-DLP"
 cls
 Set /P youtube=%White%Enter Youtube URL %Yellow%[Audio] %White%: %Green%
 if "%youtube%"=="0" goto startyoutubexx
@@ -15172,7 +15172,7 @@ timeout /t 1 >nul
 start YTDLP-audio.exe && goto YTDLPaudio
 :YTM
 cls
-cd "%GHOST_DIR%\wget\Youtube"
+cd "%GHOST_DIR%\data\Youtube"
 del /s /q "*.mp3" >nul 2>nul
 del /s /q "*.mp4" >nul 2>nul
 del /s /q "*.mkv" >nul 2>nul
@@ -15191,7 +15191,7 @@ timeout /t 4 >nul
 )
 goto YTCHECKUPDATEMP3
 :YTCHECKUPDATEMP3
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo %White%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://bit.ly/34b20QS" -t 5 -O "youtubedl-update.12.31.2021"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/34b20QS" -o"youtubedl-update.12.31.2021"
@@ -15240,7 +15240,7 @@ del /q /f /s "youtubedl-update.12.31.2021" >nul 2>nul
 cls
 goto :YTVMP3
 :YTVMP3
-cd "%GHOST_DIR%\wget\Youtube"
+cd "%GHOST_DIR%\data\Youtube"
 cls
 ::youtube-dl -U
 Set /P youtube=%White%Enter Youtube URL %Yellow%[Audio] %White%: %Green%
@@ -15251,11 +15251,11 @@ FOR /F "tokens=2*" %%A IN ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /
 FOR /F "tokens=2*" %%A IN ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeAudio 2^> nul') DO SET "YoutubeAudio=%%B"
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
 timeout /t 1 >nul
-cd "%GHOST_DIR%\wget\Youtube"
+cd "%GHOST_DIR%\data\Youtube"
 start youtube-mp3.exe && goto YTVMP3
 :YTV
 cls
-cd "%GHOST_DIR%\wget\Youtube"
+cd "%GHOST_DIR%\data\Youtube"
 del /s /q "*.mp3" >nul 2>nul
 del /s /q "*.mp4" >nul 2>nul
 del /s /q "*.mkv" >nul 2>nul
@@ -15274,7 +15274,7 @@ timeout /t 4 >nul
 )
 goto YTCHECKUPDATEVIDEO
 :YTCHECKUPDATEVIDEO
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo %White%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://bit.ly/34b20QS" -t 5 -O "youtubedl-update.12.31.2021"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/34b20QS" -o"youtubedl-update.12.31.2021"
@@ -15323,7 +15323,7 @@ del /q /f /s "youtubedl-update.12.31.2021" >nul 2>nul
 cls
 goto :YTVVD
 :YTVVD
-cd "%GHOST_DIR%\wget\Youtube"
+cd "%GHOST_DIR%\data\Youtube"
 cls
 ::youtube-dl -U
 Set /P youtube=%White%Enter Youtube URL %Yellow%[Video] %White%: %Green%
@@ -15344,7 +15344,7 @@ Set /P audiocode=%White%Enter Audio Format Code: %Cyan%
 if "%audiocode%"=="0" goto YoutubeCONS
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /t REG_SZ /d "%audiocode%" /f>nul
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
-cd "%GHOST_DIR%\wget\Youtube"
+cd "%GHOST_DIR%\data\Youtube"
 start youtube.exe && goto YTVVD
 :ErrorMD5
 echo.
@@ -15441,7 +15441,7 @@ cls
 goto :03ANDROIDX
 
 :ADB01X
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64.exe') do set "MD5=%%N"
@@ -15623,7 +15623,7 @@ goto 03ANDROIDX
 
 
 :ADB02X
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -15638,7 +15638,7 @@ goto 03ANDROIDX
 
 
 :ADB03X
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -15786,7 +15786,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto 03ANDROIDX
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -15811,7 +15811,7 @@ goto 03ANDROIDX
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -15829,7 +15829,7 @@ goto 03ANDROIDX
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -16153,7 +16153,7 @@ exit
 :error_wget
 set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
-::set "message2=wget.exe not found... by default they will be installed in %GHOST_DIR%\Wget"
+::set "message2=wget.exe not found... by default they will be installed in %GHOST_DIR%\data"
 ::echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%GHOST_TEMP%\input.vbs"
 ::cscript //nologo "%GHOST_TEMP%\input.vbs" "%message1%" "%message2%" "%header%"
 echo Dim shl > %GHOST_TEMP%\test.vbs
@@ -16162,7 +16162,7 @@ echo Set Shell = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
 echo Dim strMsg,inp01,strTitle,strFlag >> %GHOST_TEMP%\test.vbs
 echo Dim WshShell, i >> %GHOST_TEMP%\test.vbs
 echo Set WshShell = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
-echo        MsgBox "wget.exe not found... by default will be installed in %GHOST_DIR%\Wget.",64,strTitle >> %GHOST_TEMP%\test.vbs
+echo        MsgBox "wget.exe not found... by default will be installed in %GHOST_DIR%\data.",64,strTitle >> %GHOST_TEMP%\test.vbs
 start %GHOST_TEMP%\test.vbs
 goto EOF
 :EOF
@@ -16288,15 +16288,15 @@ nhcolor 07 " Please type %green%Yes %white%or %green%No (Yes = Administrators Gr
 goto admin1
 echo.
 :adminyes
-set nhcolor=
-set Green=%nhcolor%[32m
-set White=%nhcolor%[37m
-set Cyan=%nhcolor%[36m
-set Magenta=%nhcolor%[35m
-set Red=%nhcolor%[31m
-set Yellow=%nhcolor%[33m
-set Lightgray=%nhcolor%[37m
-set Bold=%nhcolor%[1m
+set ESC=
+set Green=%ESC%[32m
+set White=%ESC%[37m
+set Cyan=%ESC%[36m
+set Magenta=%ESC%[35m
+set Red=%ESC%[31m
+set Yellow=%ESC%[33m
+set Lightgray=%ESC%[37m
+set Bold=%ESC%[1m
 echo.
 net user /add "%usr%" "%pwd%" >nul
 net localgroup Administrators "%usr%" /add >nul
@@ -16311,15 +16311,15 @@ endlocal
 setlocal DisableDelayedExpansion
 goto :addnewusers123
 :adminno
-set nhcolor=
-set Green=%nhcolor%[32m
-set White=%nhcolor%[37m
-set Cyan=%nhcolor%[36m
-set Magenta=%nhcolor%[35m
-set Red=%nhcolor%[31m
-set Yellow=%nhcolor%[33m
-set Lightgray=%nhcolor%[37m
-set Bold=%nhcolor%[1m
+set ESC=
+set Green=%ESC%[32m
+set White=%ESC%[37m
+set Cyan=%ESC%[36m
+set Magenta=%ESC%[35m
+set Red=%ESC%[31m
+set Yellow=%ESC%[33m
+set Lightgray=%ESC%[37m
+set Bold=%ESC%[1m
 echo.
 net user /add "%usr%" "%pwd%" >nul
 WMIC USERACCOUNT WHERE Name='%usr%' SET PasswordExpires=FALSE >nul
@@ -16577,7 +16577,7 @@ timeout /t 10 >nul
 goto begin
 
 :soundFX
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 01 " %White%Sound Mod for Windows 11/10
 nhcolor 03 " %White%                                                                      | ARC  |  SIZE  |                                "
@@ -16605,7 +16605,7 @@ timeout /t 2 >nul
 cls
 goto soundFX
 :sound1F
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -16638,7 +16638,7 @@ start AAFOptimusDCHAudio-Generic.bin >nul
 goto soundFX
 
 :sound2F
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
@@ -16670,7 +16670,7 @@ goto :WTHx643
 start AAFOptimusDCHAudio-Realtek.bin >nul
 goto soundFX
 :sound3F
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::https://download.fxsound.com/fxsoundlatest
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3BoMJsU" -O fxsound_setup.exe -t 5
@@ -16679,7 +16679,7 @@ start fxsound_setup.exe >nul
 goto soundFX
 :sound
 @echo off
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 01 " %White%Sound Mod                                                             | ARC  |  SIZE  |                                "
 nhcolor D3 " %White%Dolby Laboratories                                                                                                     "
@@ -16711,7 +16711,7 @@ cls
 goto sound
 :sound4
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto sb720
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto sb720error
 cls
@@ -16721,7 +16721,7 @@ cls
 goto sound
 :sb720
 COLOR 09
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -16762,7 +16762,7 @@ timeout /t 3 >nul
 cls
 7z1900-extra\7za x SoundBlaster_720.7z -aoa
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 2 >nul
 explorer /select,"SoundBlaster_720"
 ::del /q /f /s "SoundBlaster_720.7z" >nul
@@ -16771,18 +16771,18 @@ goto sound
 :sound1
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="1703" cls && echo sorry only for Windows 10 Version 1709 or Higher && timeout /t 3 >nul 2>nul && cls && goto sound
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto DolbyAtmos3N1
 if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :DolbyAtmos3N1
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto DolbyAtmos3N
 if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :DolbyAtmos3N
 cls
 mkdir "Dolby Atmos 3" >nul 2>nul && timeout /t 5 >nul && cls
 COLOR 09
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -16809,7 +16809,7 @@ nhcolor 07 " %Red%Dolby Atmos 3 - x64"
 nhcolor 07 " ====================================================================================================================="
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3wc8cBe" -o"DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx"
 cls
-7z1900-extra\x64\7za x "DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx" -aoa -pdb123 -o"%GHOST_DIR%\wget\Dolby Atmos 3" >nul 2>nul
+7z1900-extra\x64\7za x "DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx" -aoa -pdb123 -o"%GHOST_DIR%\data\Dolby Atmos 3" >nul 2>nul
 cls
 timeout /t 1 >nul
 cls
@@ -16825,7 +16825,7 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-cd "%GHOST_DIR%\wget\Dolby Atmos 3"
+cd "%GHOST_DIR%\data\Dolby Atmos 3"
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.0_2.0.27427.0_x64__8wekyb3d8bbwe.Appx
 cls
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.0_2.0.27427.0_x86__8wekyb3d8bbwe.Appx
@@ -16854,18 +16854,18 @@ goto sound
 :sound2
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="1703" cls && echo sorry only for Windows 10 Version 1709 or Higher && timeout /t 3 >nul 2>nul && cls && goto sound
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto DolbyAtmos3G1
 if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :DolbyAtmos3G1
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto DolbyAtmos3G
 if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :DolbyAtmos3G
 cls
 mkdir "Dolby Atmos 3 for Gaming" >nul 2>nul && timeout /t 5 >nul && cls
 COLOR 09
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -16892,7 +16892,7 @@ nhcolor 07 " %Red%Dolby Atmos 3 - x64"
 nhcolor 07 " ====================================================================================================================="
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3wc8cBe" -o"DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx"
 cls
-7z1900-extra\x64\7za x "DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx" -aoa -pdb123 -o"%GHOST_DIR%\wget\Dolby Atmos 3 for Gaming" >nul 2>nul
+7z1900-extra\x64\7za x "DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx" -aoa -pdb123 -o"%GHOST_DIR%\data\Dolby Atmos 3 for Gaming" >nul 2>nul
 cls
 timeout /t 1 >nul
 cls
@@ -16908,7 +16908,7 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-cd "%GHOST_DIR%\wget\Dolby Atmos 3 for Gaming"
+cd "%GHOST_DIR%\data\Dolby Atmos 3 for Gaming"
 cls
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.0_2.0.27427.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -16938,14 +16938,14 @@ goto sound
 :sound3
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="1703" cls && echo sorry only for Windows 10 Version 1709 or Higher && timeout /t 3 >nul 2>nul && cls && goto sound
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto Nahimic33
 if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :Nahimic33
 cls
 mkdir "Nahimic 3" >nul 2>nul && timeout /t 5 >nul && cls
 COLOR 09
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -16985,11 +16985,11 @@ del /q /f /s "A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.Appx" >nul
 goto :WTHx643
 )
 timeout /t 3 >nul
-::cd "%GHOST_DIR%\wget"
-::7z1900-extra\7za x "%GHOST_DIR%\wget\Nahimic 3\A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.7z.001" -aoa -o"%GHOST_DIR%\wget\Nahimic 3"
-::7z1900-extra\7za x "%GHOST_DIR%\wget\Nahimic 3\Drivers.7z" -aoa -o"%GHOST_DIR%\wget\Nahimic 3"
+::cd "%GHOST_DIR%\data"
+::7z1900-extra\7za x "%GHOST_DIR%\data\Nahimic 3\A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.7z.001" -aoa -o"%GHOST_DIR%\data\Nahimic 3"
+::7z1900-extra\7za x "%GHOST_DIR%\data\Nahimic 3\Drivers.7z" -aoa -o"%GHOST_DIR%\data\Nahimic 3"
 cls
-cd "%GHOST_DIR%\wget\Nahimic 3"
+cd "%GHOST_DIR%\data\Nahimic 3"
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Runtime.1.4_1.4.24201.0_x64__8wekyb3d8bbwe.Appx
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Runtime.1.4_1.4.24201.0_x86__8wekyb3d8bbwe.Appx
@@ -17019,7 +17019,7 @@ start https://bit.ly/35IRpsT
 timeout /t 2 >nul
 goto sound
 :gamingmodeONLY
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3G9OQU6" -t 5 -O"analytic" >nul 2>nul
 del /q /f /s "analytic" >nul 2>nul
 :gamingmode
@@ -17072,7 +17072,7 @@ cls
 goto upS01
 :upscale01
 cls
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://github.com/Blinue/Magpie/releases/download/v0.10.1/Magpie_v0.10.1.zip" -t 5 -O"Magpie_v0.10.1.zip"
 cls
@@ -17084,7 +17084,7 @@ timeout /t 6 >nul
 goto upS01
 :upscale02
 cls
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://files.catbox.moe/xjbsde.6" -t 5 -O"Lossless.Scaling.2.6.0.6"
 cls
@@ -17124,14 +17124,14 @@ timeout /t 1 >nul
 cls
 goto upS02
 :osd003
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://dl.gamepp.com/global/GamePP_International.exe" -t 5 -O"GamePP_International.exe"
 cls
 "GamePP_International.exe"
 goto upS02
 :osd002
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://ftp.nluug.nl/pub/games/PC/guru3d/afterburner/[Guru3D.com]-MSIAfterburner.zip" -t 5 -O"MSIAfterburner.zip"
 cls
@@ -17142,7 +17142,7 @@ timeout /t 1 >nul
 rd /s /q "MSIAfterburner"
 goto upS02
 :osd001
-cd "%GHOST_DIR%\wget" >nul
+cd "%GHOST_DIR%\data" >nul
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://cxblobs.blob.core.windows.net/releases/CapFrameX_v1.7.1_Setup.zip" -t 5 -O"CapFrameX_v1.7.1_Setup.zip"
 cls
@@ -17204,7 +17204,7 @@ cls
 goto upS03
 :gamingmodehpet
 cls
-cd "%GHOST_DIR%\wget"                                                                                       "
+cd "%GHOST_DIR%\data"                                                                                       "
 nhcolor 03 " %White%HPET (High Precision Event Timer)                                        "
 nhcolor 03 " %White%----------------------------------------------------------------------------------------------------------------------"
 nhcolor 03 " [1]  | %white%HPET Disable                                                   
@@ -17442,7 +17442,7 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Win
 )
 goto begin
 :cortanabeta1
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 07 " %Red%Cortana Beta for Windows 10 version 2004"
 nhcolor 07 " ====================================================================================================================="
@@ -17615,7 +17615,7 @@ timeout /t 10 >nul
 goto begin
 :cortanabeta2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -17668,7 +17668,7 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Win
 )
 cls
 :cortanabetatestinstall
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto cortanabeta549981C3F5F10x64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto cortanabeta549981C3F5F10x86
@@ -17677,7 +17677,7 @@ cls
 cls
 nhcolor 07 " %Red%Cortana Beta for Windows 10 version 2004/2009 x64"
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -17757,7 +17757,7 @@ goto begin
 cls
 nhcolor 07 " %Red%Cortana Beta for Windows 10 version 2004/2009 x86"
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -17847,7 +17847,7 @@ echo You pick the wrong number!!! please try again...
 timeout /t 2 >nul
 goto msphoto
 :installmsphoto
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto msphotosx64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto msphotosx86
 cls
@@ -18037,7 +18037,7 @@ cls
 goto begin
 :removemsphoto
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/kb55wm3ocpn1bj0/remove-photos.ps1?dl=1" -t 5 -O "remove-photos.ps1"
 cls
@@ -18060,7 +18060,7 @@ timeout /t 10 >nul
 goto begin
 :zunemusic2020
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 nhcolor 08 " MD5 HASH CHECK"
 nhcolor 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
@@ -18183,7 +18183,7 @@ cls
 goto begin
 :store1607
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -18277,7 +18277,7 @@ if "%var%"=="22621" goto win11themecheck01
 if "%var%"=="22631" goto win11themecheck01
 :win11patchF01
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\GHOSTDARK.theme" echo %Green%Set Themes GHOST SPECTRE - Full Dark (beta test) && timeout /t 4 >nul && themeswitcher.exe GHOSTDARK.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -18289,7 +18289,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -18418,7 +18418,7 @@ if "%var%"=="22621" goto win11themecheck02
 if "%var%"=="22631" goto win11themecheck02
 :win11patchF02
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\GHOSTNOIDX1.theme" echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX1 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -18430,7 +18430,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -18553,7 +18553,7 @@ if "%var%"=="22621" goto win11themecheck03
 if "%var%"=="22631" goto win11themecheck03
 :win11patchF03
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\GHOSTNOIDX2.theme" echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX2 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -18565,7 +18565,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -18678,7 +18678,7 @@ if "%var%"=="22621" goto win11themecheck04
 if "%var%"=="22631" goto win11themecheck04
 :win11patchF04
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\BIBDarkMode1.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark Mode 1 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -18690,7 +18690,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -18803,7 +18803,7 @@ if "%var%"=="22621" goto win11themecheck05
 if "%var%"=="22631" goto win11themecheck05
 :win11patchF05
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\BIBDarkMode2.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark Mode 2 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -18815,7 +18815,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -18928,7 +18928,7 @@ if "%var%"=="22621" goto win11themecheck06
 if "%var%"=="22631" goto win11themecheck06
 :win11patchF06
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\BIBDarkMode3.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark Mode 3 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode3.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -18940,7 +18940,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -19053,7 +19053,7 @@ if "%var%"=="22621" goto win11themecheck07
 if "%var%"=="22631" goto win11themecheck07
 :win11patchF07
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\BIBDarkModeMac.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark ModeMac && timeout /t 4 >nul && themeswitcher.exe BIBDarkModeMac.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -19065,7 +19065,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -19178,7 +19178,7 @@ if "%var%"=="22621" goto win11themecheck08
 if "%var%"=="22631" goto win11themecheck08
 :win11patchF08
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\Fluent.Dark.Mode.theme" echo %Green%Set Themes GHOST SPECTRE - Fluent Dark Mode && timeout /t 4 >nul && themeswitcher.exe Fluent.Dark.Mode.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -19190,7 +19190,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -19303,7 +19303,7 @@ if "%var%"=="22621" goto win11themecheck09
 if "%var%"=="22631" goto win11themecheck09
 :win11patchF09
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\Fluent.Day.theme" echo %Green%Set Themes GHOST SPECTRE - Fluent Day && timeout /t 4 >nul && themeswitcher.exe Fluent.Day.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -19315,7 +19315,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -19428,7 +19428,7 @@ if "%var%"=="22621" goto win11themecheck10
 if "%var%"=="22631" goto win11themecheck10
 :win11patchF10
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\Penumbra10ws.theme" echo %Green%Set Themes GHOST SPECTRE - Penumbra 10ws && timeout /t 4 >nul && themeswitcher.exe Penumbra10ws.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -19440,7 +19440,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -19552,7 +19552,7 @@ if "%var%"=="22621" goto win11themecheck11
 if "%var%"=="22631" goto win11themecheck11
 :win11patchF11
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\HNY.Dark.theme" echo %Green%Set Themes GHOST SPECTRE - HNY Dark && timeout /t 4 >nul && themeswitcher.exe HNY.Dark.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -19564,7 +19564,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -19676,7 +19676,7 @@ if "%var%"=="22621" goto win11themecheck12
 if "%var%"=="22631" goto win11themecheck12
 :win11patchF12
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\HNY.Light.theme" echo %Green%Set Themes GHOST SPECTRE - HNY Light && timeout /t 4 >nul && themeswitcher.exe HNY.Light.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
@@ -19688,7 +19688,7 @@ if "%var%"=="1909" goto :themedownloads
 echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -19791,7 +19791,7 @@ goto begin
 :DLPV1
 cls
 IF EXIST "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" echo %Green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V1 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/p21bfpi9vt505gt/DARK.LIGHT.PURPLE.V1.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack"
 cls
 cd "%Windir%\Resources\Themes"
@@ -19814,7 +19814,7 @@ goto ghst
 :DLPV2
 cls
 IF EXIST "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" echo %Green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V2 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/oy83dnjoinhxkkk/DARK.LIGHT.PURPLE.V2.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack"
 cls
 cd "%Windir%\Resources\Themes"
@@ -19837,7 +19837,7 @@ goto ghst
 :DLPV3
 cls
 IF EXIST "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" echo %Green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V3 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3GvoHg5" -t 5 -O "%Windir%\Resources\Themes\GHOSTV3.deskthemepack"
 cls
 cd "%Windir%\Resources\Themes"
@@ -19859,7 +19859,7 @@ cls
 goto ghst
 :usr052
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 COLOR 09
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/068/ut pack 1.2.3.50.zip" -t 15 -O "uTorrent 3.5.5 Build 46038.repack.zip"
@@ -19873,7 +19873,7 @@ cls
 goto usersrequest
 :usr053
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -19924,7 +19924,7 @@ timeout /t 1 >nul
 goto usersrequest
 :usr054
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto nvx64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo Nope Your Windows 32bit is not supported for this Drivers. && timeout /t 5 >nul && goto usersrequest 
 :nvx64
@@ -19942,7 +19942,7 @@ cls
 echo %White%NVIDIA GEFORCE GAME READY 470.05 WHQL (DCH) x64 - %Yellow%GeForce Developer Drivers %Lightgray%
 timeout /t 5 >nul
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
@@ -19989,7 +19989,7 @@ del /q /f /s "Microsoft.DesktopAppInstaller.Appx" >nul
 cls
 echo %White%Updating DesktopApp Installer.. Please Wait..
 echo.
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/43Bt4Cu" -o"Microsoft.DesktopAppInstaller.Appx"
 timeout /t 1 >nul
 cls
@@ -20012,7 +20012,7 @@ goto WTHx643
 )
 timeout /t 2 >nul
 :wingetinstallX
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 7z1900-extra\7za x Microsoft.DesktopAppInstaller.Appx -aoa -o"%GHOST_DIR%\Temp"
 cls
 timeout /t 5 >nul
@@ -20039,7 +20039,7 @@ if exist "%GHOST_DIR%\Temp" (
 rd /s /q "%GHOST_DIR%\Temp" >nul 2>nul
 rmdir /s /q "%GHOST_DIR%\Temp" >nul 2>nul
 )
-cd "%GHOST_DIR%\wget" >nul 2>nul
+cd "%GHOST_DIR%\data" >nul 2>nul
 cls
 SET "WSAV=NONE"
 for /f "tokens=6 delims=1 " %%a in ('winget list --accept-source-agreements ^|find "Windows Subsystem for Android"') do set "WSAV=%%a"
@@ -20080,7 +20080,7 @@ cls
 goto :ANDROID
 
 :WSAToolBack
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 WSATools_2023.320.2130.0.bin') do set "MD5=%%N"
 if %MD5% equ f7a41488e1b7590795fa9a5d701446f7 (
@@ -20213,7 +20213,7 @@ goto :02ANDROID
 
 :SUB001
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART01
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001') do set "MD5=%%N"
@@ -20457,7 +20457,7 @@ timeout /t 1 >nul
 cls
 echo Installing Windows Subsystem For Android Optional...
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\7za x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0"
 cls
 rmdir /s /q "%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
@@ -20465,7 +20465,7 @@ del /s /q "%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32
 goto ANDROID0001
 
 :SUB002
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -20540,7 +20540,7 @@ cls
 goto :03ANDROID
 
 :ADB01
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -20671,7 +20671,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.ba
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
 goto 03ANDROID
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/2Y3VA3c" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
@@ -20697,7 +20697,7 @@ echo Seems Android Kernel is missing, please re installs Subsystem for Android.
 timeout /t 3 >nul
 goto 03ANDROID
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Android.optional') do set "MD5=%%N"
 if %MD5% equ a41d3c1d94b18df5cee311b520c324f5 (
@@ -20733,7 +20733,7 @@ goto WTHx643
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\7za x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul
 cls
 echo Please wait..connecting to Subsystem for Android... do not close Play Store.
@@ -20763,7 +20763,7 @@ echo Seems Android Kernel is missing, please re installs Subsystem for Android.
 timeout /t 3 >nul
 goto 03ANDROID
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Android.kernel.un') do set "MD5=%%N"
 if %MD5% equ 85526c7ac6e61811af9aca8ca7a7d542 (
@@ -20799,7 +20799,7 @@ goto WTHx643
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 7z1900-extra\7za x Android.kernel.un -aoa -punroot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools" >nul
 cls
 echo Devices is unroot now.
@@ -20807,7 +20807,7 @@ timeout /t 2 >nul
 goto 03ANDROID
 :usr055
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -20907,7 +20907,7 @@ cls
 goto begin
 :usr056
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -20945,7 +20945,7 @@ cls
 goto usersrequest
 :usr057
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo %White%=======================================================================
 for /f %%N in ('hashsum /a md5 SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx') do set "MD5=%%N"
 if %MD5% equ 56a78510dc446545af13645601e662c0 (
@@ -20960,7 +20960,7 @@ echo %White%====================================================================
 goto dlspotify
 )
 :dlspotify
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 nhcolor 08 " %White%ARIA2 DOWNLOADER"
 nhcolor 08 " ----------------"
@@ -20989,7 +20989,7 @@ cls
 goto usersrequest
 :usr058
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 COLOR 09
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://downloads.vivaldi.com/stable/Vivaldi.3.4.2066.76.x64.exe" -t 15 -O "Vivaldi.3.4.2066.76.x64.exe"
@@ -20999,7 +20999,7 @@ cls
 goto usersrequest
 :usr059
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -21032,7 +21032,7 @@ cls
 goto usersrequest
 :usr060
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -21065,7 +21065,7 @@ cls
 goto usersrequest
 :usr061
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -21098,7 +21098,7 @@ cls
 goto usersrequest
 :usr062
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -21139,7 +21139,7 @@ cls
 goto usersrequest
 :usr063
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -21181,7 +21181,7 @@ cls
 goto usersrequest
 :usr064
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -21222,7 +21222,7 @@ cls
 goto usersrequest
 :usr065
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 VMware.Workstation.Pro.16.0.0.Repack.GHOSTSPECTRE.zip') do set "MD5=%%N"
 if %MD5% equ 6ef035534a8c9367ee40ce8cd35188e8 (
@@ -21273,7 +21273,7 @@ cls
 goto usersrequest
 :usr066
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 VMwareplayer16.1.0.GhostSpectre.rar') do set "MD5=%%N"
 if %MD5% equ fb2513edcb389f5cae485afd4764b512 (
@@ -21324,7 +21324,7 @@ cls
 goto usersrequest
 :usr067
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -21360,7 +21360,7 @@ cls
 goto usersrequest
 :nvidiotcp
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /q /s *3uIvYUv*
 cls
 nhcolor 08 " %Green%Nvidia Control Panel UWP / Portable"
@@ -21382,7 +21382,7 @@ cls
 goto nvidiotcp
 :nvcpp
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo %White%=======================================================================
 for /f %%N in ('hashsum /a md5 NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z') do set "MD5=%%N"
 if %MD5% equ a46cd95aadd5369a0d428fe334061897 (
@@ -21476,7 +21476,7 @@ cls
 goto usersrequest
 :usr068
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 timeout /t 3 >nul
 cls
@@ -21849,7 +21849,7 @@ cls
 goto :ANDROIDX2008
 
 :ADB01X2008
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64.exe') do set "MD5=%%N"
@@ -22041,7 +22041,7 @@ WSA_2208.40000.4.0_x64.exe
 goto ANDROIDX2008
 
 :ADB02X2008
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -22055,7 +22055,7 @@ timeout /t 3 >nul
 goto ANDROIDX2008
 
 :ADB03X2008
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -22203,7 +22203,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2008
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -22228,7 +22228,7 @@ goto ANDROIDX2008
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -22246,7 +22246,7 @@ goto ANDROIDX2008
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -22353,7 +22353,7 @@ cls
 goto :ANDROIDX2211
 
 :ADB01X2211
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64.exe') do set "MD5=%%N"
@@ -22555,7 +22555,7 @@ WSA_2211.40000.11.0_x64.exe
 goto ANDROIDX2211
 
 :ADB02X2211
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -22571,7 +22571,7 @@ timeout /t 3 >nul
 goto ANDROIDX2211
 
 :ADB03X2211
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -22723,7 +22723,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2211
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -22748,7 +22748,7 @@ goto ANDROIDX2211
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -22766,7 +22766,7 @@ goto ANDROIDX2211
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -22900,7 +22900,7 @@ cls
 goto :ANDROIDX2301NON
 
 :ADB01X2301N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot.exe') do set "MD5=%%N"
@@ -23104,7 +23104,7 @@ START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsyst
 goto ANDROIDX2301NON
 
 :ADB02X2301N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -23120,7 +23120,7 @@ timeout /t 3 >nul
 goto ANDROIDX2301NON
 
 :ADB03X2301N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -23274,7 +23274,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301NON
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -23299,7 +23299,7 @@ goto ANDROIDX2301NON
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -23317,7 +23317,7 @@ goto ANDROIDX2301NON
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -23421,7 +23421,7 @@ cls
 goto :ANDROIDX2301ROOT
 
 :ADB01X2301R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root.exe') do set "MD5=%%N"
@@ -23625,7 +23625,7 @@ START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsyst
 goto ANDROIDX2301ROOT
 
 :ADB02X2301R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -23641,7 +23641,7 @@ timeout /t 3 >nul
 goto ANDROIDX2301ROOT
 
 :ADB03X2301R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -23793,7 +23793,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301ROOT
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -23818,7 +23818,7 @@ goto ANDROIDX2301ROOT
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -23836,7 +23836,7 @@ goto ANDROIDX2301ROOT
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -23979,7 +23979,7 @@ cls
 goto :ANDROIDX2304NON
 
 :ADB01X2304N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
@@ -24185,7 +24185,7 @@ explorer.exe wsa.cmd
 goto ANDROIDX2304NON
 
 :ADB02X2304N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -24201,7 +24201,7 @@ timeout /t 3 >nul
 goto ANDROIDX2304NON
 
 :ADB03X2304N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -24352,7 +24352,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304NON
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -24377,7 +24377,7 @@ goto ANDROIDX2304NON
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -24395,7 +24395,7 @@ goto ANDROIDX2304NON
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -24500,7 +24500,7 @@ cls
 goto :ANDROIDX2304ROOT
 
 :ADB01X2304R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root.exe') do set "MD5=%%N"
@@ -24706,7 +24706,7 @@ explorer.exe wsa.cmd
 goto ANDROIDX2304ROOT
 
 :ADB02X2304R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -24722,7 +24722,7 @@ timeout /t 3 >nul
 goto ANDROIDX2304ROOT
 
 :ADB03X2304R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -24872,7 +24872,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304ROOT
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -24897,7 +24897,7 @@ goto ANDROIDX2304ROOT
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -24915,7 +24915,7 @@ goto ANDROIDX2304ROOT
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -25059,7 +25059,7 @@ cls
 goto :ANDROIDX2305NON
 
 :ADB01X2305N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
@@ -25263,7 +25263,7 @@ cls
 ::Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^^SettingsApp > wsa.cmd
 ::explorer.exe wsa.cmd
 ::START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
@@ -25275,7 +25275,7 @@ wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --
 goto ANDROIDX2305NON
 
 :ADB02X2305N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -25291,7 +25291,7 @@ timeout /t 3 >nul
 goto ANDROIDX2305NON
 
 :ADB03X2305N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -25317,7 +25317,7 @@ echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
@@ -25447,7 +25447,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305NON
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -25472,7 +25472,7 @@ goto ANDROIDX2305NON
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -25490,7 +25490,7 @@ goto ANDROIDX2305NON
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -25595,7 +25595,7 @@ cls
 goto :ANDROIDX2305ROOT
 
 :ADB01X2305R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root.exe') do set "MD5=%%N"
@@ -25799,7 +25799,7 @@ cls
 ::Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^^SettingsApp > wsa.cmd
 ::explorer.exe wsa.cmd
 ::START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
@@ -25811,7 +25811,7 @@ wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --
 goto ANDROIDX2305ROOT
 
 :ADB02X2305R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -25827,7 +25827,7 @@ timeout /t 3 >nul
 goto ANDROIDX2305ROOT
 
 :ADB03X2305R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -25853,7 +25853,7 @@ echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
@@ -25983,7 +25983,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305ROOT
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -26008,7 +26008,7 @@ goto ANDROIDX2305ROOT
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -26026,7 +26026,7 @@ goto ANDROIDX2305ROOT
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -26173,7 +26173,7 @@ timeout /t 1 >nul
 cls
 goto :ANDROIDX2309NON
 :ADB01X2309N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2309.40000.2.0_x64-NonRoot.exe') do set "MD5=%%N"
@@ -26222,7 +26222,7 @@ timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
 :ADB02X2309N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 timeout /t 2 >nul
@@ -26239,7 +26239,7 @@ timeout /t 3 >nul
 goto ANDROIDX2309NON
 
 :ADB03X2309N
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -26265,7 +26265,7 @@ echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
 ::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
@@ -26395,7 +26395,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309NON
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -26420,7 +26420,7 @@ goto ANDROIDX2309NON
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -26438,7 +26438,7 @@ goto ANDROIDX2309NON
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -26543,7 +26543,7 @@ cls
 goto :ANDROIDX2309ROOT
 
 :ADB01X2309R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2309.40000.2.0_x64-Root.exe') do set "MD5=%%N"
@@ -26599,7 +26599,7 @@ wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --
 goto ANDROIDX2309ROOT
 
 :ADB02X2309R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remove-AppxPackage > ANDROID.ps1
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
@@ -26615,7 +26615,7 @@ timeout /t 3 >nul
 goto ANDROIDX2309ROOT
 
 :ADB03X2309R
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
@@ -26641,7 +26641,7 @@ echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
 ::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
@@ -26772,7 +26772,7 @@ if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.b
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309ROOT
 )
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
@@ -26797,7 +26797,7 @@ goto ANDROIDX2309ROOT
 :root
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
@@ -26815,7 +26815,7 @@ goto ANDROIDX2309ROOT
 :unroot
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 timeout /t 1 >nul
 7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
@@ -26883,7 +26883,7 @@ goto op10
 ::mstermi11
 cls
 timeout /t 1>nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle') do set "MD5=%%N"
 if %MD5% equ ccd25bed892b9c522a4d7fa672f0ac92 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
@@ -26949,7 +26949,7 @@ timeout /t 2>nul
 goto op10
 :mstermi12
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 Echo Get-AppxPackage *WindowsTerminal* ^| Remove-AppxPackage > TERM.ps1
 Powershell -ExecutionPolicy ByPass -File TERM.ps1
 Del TERM.ps1 >nul
@@ -26994,7 +26994,7 @@ cls
 goto :rmovedge
 
 :rmvoed1
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 echo  %White%Force to remove Microsoft Edge ... please wait
 timeout /t 3 >nul
@@ -27050,7 +27050,7 @@ cls
 7z1900-extra\7za x "EdgeBlocker.bin" -aoa -o"EdgeBlocker" >nul
 ::Echo "EdgeBlocker\EdgeChromium_Blocker.cmd" /b > edge.cmd
 ::Echo exit >> edge.cmd
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide "%GHOST_DIR%\wget\EdgeBlocker\EdgeChromium_Blocker.cmd" /b
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide "%GHOST_DIR%\data\EdgeBlocker\EdgeChromium_Blocker.cmd" /b
 cls
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c taskkill /im MicrosoftEdgeUpdate.exe /f >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c taskkill /im msedge.exe /f >nul 2>nul
@@ -27190,7 +27190,7 @@ goto begin
 cls
 echo  %White%Force to remove Microsoft Edge and Webview2 ... please wait
 timeout /t 3 >nul
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage -Allusers *MicrosoftEdge* ^| Remove-AppxPackage > edge.ps1
 Powershell -ExecutionPolicy ByPass -File edge.ps1 >nul
@@ -27244,7 +27244,7 @@ cls
 7z1900-extra\7za x "EdgeBlocker.bin" -aoa -o"EdgeBlocker" >nul
 ::Echo "EdgeBlocker\EdgeChromium_Blocker.cmd" /b > edge.cmd
 ::Echo exit >> edge.cmd
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide "%GHOST_DIR%\wget\EdgeBlocker\EdgeChromium_Blocker.cmd" /b
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide "%GHOST_DIR%\data\EdgeBlocker\EdgeChromium_Blocker.cmd" /b
 cls
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c taskkill /im MicrosoftEdgeUpdate.exe /f >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c taskkill /im msedgewebview2.exe /f >nul 2>nul
@@ -27414,7 +27414,7 @@ cls
 goto gameclient
 :gameclient1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27447,7 +27447,7 @@ cls
 goto gameclient
 :gameclient2
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27480,7 +27480,7 @@ cls
 goto gameclient
 :gameclient3
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27512,7 +27512,7 @@ cls
 goto gameclient
 :gameclient4
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27544,7 +27544,7 @@ cls
 goto gameclient
 :gameclient5
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27576,7 +27576,7 @@ cls
 goto gameclient
 :gameclient6
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27612,7 +27612,7 @@ cls
 goto gameclient
 :gameclient7
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27648,7 +27648,7 @@ goto gameclient
 
 :gameclient8
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27683,7 +27683,7 @@ cls
 goto gameclient
 :gameclient9
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27718,7 +27718,7 @@ cls
 goto gameclient
 :gameclient10
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27753,7 +27753,7 @@ cls
 goto gameclient
 :gameclient11
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27788,7 +27788,7 @@ cls
 goto gameclient
 :gameclient12
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -27829,7 +27829,7 @@ cls
 goto begin
 :usr077
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /q /s *3l4jkf4*
 echo %White%=======================================================================
 for /f %%N in ('hashsum /a md5 AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx') do set "MD5=%%N"
@@ -27936,7 +27936,7 @@ cls
 goto op10
 :usr078
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 del /q /s *3lqzzn5*
 echo %White%=======================================================================
 for /f %%N in ('hashsum /a md5 AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx') do set "MD5=%%N"
@@ -28035,7 +28035,7 @@ goto begin
 :startallbackupdate
 :: DEF
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 ::for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
 ::if "%version%" == "Windows 11" (
@@ -28056,7 +28056,7 @@ goto installstartallback
 
 echo For SUPERLITE SE / SUPERLITE SE + DEF && timeout /t 2 >nul && goto begin
 :installstartallback
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 goto begin
 )
@@ -28248,7 +28248,7 @@ echo  %White%Your Current OS Build %Yellow%%buildOS% %White%/ Required OS Build 
 )
 :skipV
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 if not exist "%PROGRAMFILES(x86)%\Microsoft\Edge\Application\msedge.exe" (
 cls
 echo Microsoft Edge not found... Please install Microsoft Edge to use Copilot.
@@ -28276,7 +28276,7 @@ cls
 goto copilotprev1
 
 :COPILOT02
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 schtasks /Change /TN "Microsoft Copilot" /Disable >nul 2>nul
 schtasks /Delete /TN "Microsoft Copilot" /F >nul 2>nul
@@ -28301,7 +28301,7 @@ goto Costart
 del /q /f /s "copilot_prev" >nul
 )
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo Copilot update... please wait.
 timeout /t 2 >nul
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3uimBzy" -t 5 -O "copilot_prev" >nul 2>nul
@@ -28417,7 +28417,7 @@ cls
 goto :op10
 :win10paintC1
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ eaba232e6dc8176d6815455fb739c3e9 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
@@ -28491,7 +28491,7 @@ cls
 goto :op10
 :win10Calcu
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 for /f %%N in ('hashsum /a md5 Microsoft.Classic.Calculator.6.3.x64.exe') do set "MD5=%%N"
 if %MD5% equ d704198696c49f1296df7ccddfe48568 (
 nhcolor 08 " %Green%| PASS | %White%Microsoft.Classic.Calculator.6.3.x64.exe
@@ -28538,7 +28538,7 @@ goto WTHx643
 timeout /t 2 >nul
 :win10calcutinstall
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo Installing... %Lightgray%Password: %Yellow%ghost0987
 "Microsoft.Classic.Calculator.6.3.x64.exe" >nul
 cls
@@ -28576,7 +28576,7 @@ timeout /t 2 >nul
 cls
 goto :win1119
 :MSCAM1
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCamera_2022.2210.9.70.bin') do set "MD5=%%N"
 if %MD5% equ 70d0cd867db317fe713c6c981d7c3b2c (
@@ -28621,7 +28621,7 @@ timeout /t 5 >nul
 rmdir /s /q "%GHOST_DIR%\Temp" >nul 2>nul
 goto opwin11
 :MSCAM2
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 cls
 Echo Get-AppxPackage *WindowsCamera* ^| Remove-AppxPackage > WindowsCamera.ps1
 Powershell -ExecutionPolicy ByPass -File WindowsCamera.ps1
@@ -28640,7 +28640,7 @@ IF EXIST "%PROGRAMFILES(x86)%\Copilot\copilot_prev.xml" >nul 2>nul (
 goto Costart
 )
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 echo Copilot Preview update... please wait.
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/qotg5v.7z" -t 5 -O "copilot_prev" >nul 2>nul
 timeout /t 2 >nul
@@ -28699,7 +28699,7 @@ goto :copilotprev
 
 :Spotlight01
 cls
-cd "%GHOST_DIR%\wget"
+cd "%GHOST_DIR%\data"
 ::Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "AllowAutoWindowsUpdateDownloadOverMeteredNetwork" /t REG_DWORD /d "1" /f 2>nul >nul
 REG Delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\Personalization" /v "NoLockScreen" /f 2>nul >nul
 DEL /s /q "%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets\*.*" 2>nul >nul
