@@ -135,51 +135,52 @@ echo.
 @echo off
 :: NORMAL FOREG COLORS
 set ESC=
-set Black=%ESC%[30m
-set Red=%ESC%[31m
-set Green=%ESC%[32m
-set Yellow=%ESC%[33m
-set Blue=%ESC%[33m
-set Magenta=%ESC%[35m
-set Cyan=%ESC%[36m
-set White=%ESC%[37m
-set Lightgray=%ESC%[37m
-:: STRONG FOREG COLORS
-set SWhite=%ESC%[90m
-set SRed=%ESC%[91m
-set SGreen=%ESC%[92m
-set SYellow=%ESC%[93m
-set SBlue=%ESC%[94m
-set SMagenta=%ESC%[95m
-set SCyan=%ESC%[96m
-set SWhite=%ESC%[97m
-:: NORMALBACKGROUND
-set NBlack=%ESC%[40m
-set NRed=%ESC%[41m
-set NGreen=%ESC%[42m
-set NYellow=%ESC%[43m
-set NBlue=%ESC%[44m
-set NMagenta=%ESC%[45m
-set NCyan=%ESC%[46m
-set NWhite=%ESC%[47m
-:: STRONGBACKGROUND
-set BBlack=%ESC%[100m
-set BRed=%ESC%[101m
-set BGreen=%ESC%[102m
-set BYellow=%ESC%[103m
-set BBlue=%ESC%[104m
-set BMagenta=%ESC%[105m
-set BCyan=%ESC%[106m
-set BWhite=%ESC%[107m
-:: STYLE
-set Green=%ESC%[32m
-set White=%ESC%[37m
-set Cyan=%ESC%[36m
-set Magenta=%ESC%[35m
-set Red=%ESC%[31m
-set Yellow=%ESC%[33m
-set Lightgray=%ESC%[37m
-set Bold=%ESC%[1m
+(set CSI=%ESC%[)				&:: Control Sequence Introducer
+(set ESC=)						&:: Escape 						- Alters the meaning of a limited number of following bytes.
+(set clr=%CSI%0m)       		&:: Default                     - Reset all modes (styles and colors)
+(set bright=%CSI%1m)			&:: Bright                		- Applies brightness flag to foreground color
+ ::# Foreground Colors
+(set black=%CSI%30m)			&:: Foreground Black            - Applies non-dim/bright black to foreground
+(set red=%CSI%31m)      		&:: Foreground Red              - Applies non-dim/bright red to foreground
+(set green=%CSI%32m)    		&:: Foreground Green            - Applies non-dim/bright green to foreground
+(set yellow=%CSI%33m)   		&:: Foreground Yellow           - Applies non-dim/bright yellow to foreground
+(set blue=%CSI%34m)     		&:: Foreground Blue             - Applies non-dim/bright blue to foreground
+(set magenta=%CSI%35m)  		&:: Foreground Magenta          - Applies non-dim/bright magenta to foreground
+(set cyan=%CSI%36m)     		&:: Foreground Cyan             - Applies non-dim/bright cyan to foreground
+(set white=%CSI%37m)    		&:: Foreground White            - Applies non-dim/bright white to foreground
+(set extended=%CSI%38m) 		&:: Foreground Extended         - Applies extended color value to the foreground
+(set fg_clr=%CSI%39m)			&:: Foreground Default          - Applies only the foreground portion of the defaults
+::# Background Colors
+(set bg_black=%CSI%40m)     	&:: Background Black            - Applies non-dim/bright black to background
+(set bg_red=%CSI%41m)       	&:: Background Red              - Applies non-dim/bright red to background
+(set bg_green=%CSI%42m)     	&:: Background Green            - Applies non-dim/bright green to background
+(set bg_yellow=%CSI%43m)    	&:: Background Yellow           - Applies non-dim/bright yellow to background
+(set bg_blue=%CSI%44m)      	&:: Background Blue             - Applies non-dim/bright blue to background
+(set bg_magenta=%CSI%45m)   	&:: Background Magenta          - Applies non-dim/bright magenta to background
+(set bg_cyan=%CSI%46m)      	&:: Background Cyan             - Applies non-dim/bright cyan to background
+(set bg_white=%CSI%47m)     	&:: Background White            - Applies non-dim/bright white to background
+(set bg_extended=%CSI%48m)  	&:: Background Extended         - Applies extended color value to the background
+(set bg_clr=%CSI%49m)     		&:: Background Default          - Applies only the background portion of the defaults
+ ::# Foreground Colors (light)
+(set lblack=%CSI%90m)       	&:: Bright Foreground Black     - Applies bright black to foreground
+(set lred=%CSI%91m)         	&:: Bright Foreground Red       - Applies bright red to foreground
+(set lgreen=%CSI%92m)       	&:: Bright Foreground Green     - Applies bright green to foreground
+(set lyellow=%CSI%93m)      	&:: Bright Foreground Yellow    - Applies bright yellow to foreground
+(set lblue=%CSI%94m)        	&:: Bright Foreground Blue      - Applies bright blue to foreground
+(set lmagenta=%CSI%95m)     	&:: Bright Foreground Magenta   - Applies bright magenta to foreground
+(set lcyan=%CSI%96m)        	&:: Bright Foreground Cyan      - Applies bright cyan to foreground
+(set lwhite=%CSI%97m)       	&:: Bright Foreground White     - Applies bright white to foreground
+::# Background Colors (light)
+(set bg_lblack=%CSI%100m)		&:: Bright Background Black     - Applies bright black to background
+(set bg_lred=%CSI%101m)         &:: Bright Background Red       - Applies bright red to background
+(set bg_lgreen=%CSI%102m)       &:: Bright Background Green     - Applies bright green to background
+(set bg_lyellow=%CSI%103m)      &:: Bright Background Yellow    - Applies bright yellow to background
+(set bg_lblue=%CSI%104m)        &:: Bright Background Blue      - Applies bright blue to background
+(set bg_lmagenta=%CSI%105m)     &:: Bright Background Magenta   - Applies bright magenta to background
+(set bg_lcyan=%CSI%106m)        &:: Bright Background Cyan      - Applies bright cyan to background
+(set bg_lwhite=%CSI%107m)       &:: Bright Background White     - Applies bright white to background
+
+
 REG ADD "HKCU\Console" /v "WindowAlpha" /t REG_DWORD /d "247" /f>nul
 REG QUERY "HKCU\Console" /v "VirtualTerminalLevel" >nul 2>&1
 if %ERRORLEVEL% EQU 0 goto terminal1
@@ -192,7 +193,7 @@ echo @echo off >> "%GHOST_DATA%\restart.cmd"
 echo TITLE GhostToolbox - Restart >nul >> "%GHOST_DATA%\restart.cmd"
 echo cd "%GHOST_DIR%" >nul >> "%GHOST_DATA%\restart.cmd"
 echo timeout /t 2 >nul >> "%GHOST_DATA%\restart.cmd"
-echo start toolbox.updater.x64.exe >nul >> "%GHOST_DATA%\restart.cmd"
+echo start %GHOST_DATA%\toolbox.updater.x64.exe >nul >> "%GHOST_DATA%\restart.cmd"
 echo del /s /q wget\restart.cmd >nul >> "%GHOST_DATA%\restart.cmd"
 echo exit >> "%GHOST_DATA%\restart.cmd"
 )
@@ -206,7 +207,7 @@ echo del /s /q wget\restart.cmd >nul >> "%GHOST_DATA%\restart.cmd"
 echo exit >> "%GHOST_DATA%\restart.cmd"
 )
 timeout /t 1 >nul
-cls && color 08
+cls &::& color 08
 for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do (set "DEL=%%a")
 <nul set /p=""
 call :PainText 03 "                             U"
@@ -317,8 +318,8 @@ cls
 :: 1252 	West European Latin
 :: 65000 	UTF-7 *
 :: 65001 	UTF-8 *
-del /q /s *3u5rCaj* >nul 2>nul && del /q /s *watch* >nul 2>nul && del /q /s "    G" >nul 2>nul && del /q /s *37krRHX* >nul 2>nul && del /q /s "%GHOST_TEMP%\*.bat" >nul 2>nul
-if exist "yesno.vbs" DEL /s /q "yesno.vbs" >nul 2>nul
+del /q /s *3u5rCaj* >nul 2>nul && del /q /s *watch* >nul 2>nul && del /q /s "    G" >nul 2>nul && del /q /s *37krRHX* >nul 2>nul && del /q /s "%Temp%\*.bat" >nul 2>nul
+IF EXIST "yesno.vbs" DEL /s /q "yesno.vbs" >nul 2>nul
 color 07
 @echo off
 %nhcolor% 07 " ====================================================================================================================="
@@ -362,9 +363,9 @@ color 07
 %nhcolor% 04 " [16] | %Lightgray%Visual C++ Redistributables AIO (system)            %Red%:    NOTE: Before Start Downloading Set Your Timezone     :"
 %nhcolor% 04 " [17] | %Lightgray%DirectX (system)                                    %Red%: by State or Country & Sync now. Type Timezone to Change.:"
 %nhcolor% 0E " ----------------------                                     %Red%:    NOTE: Please use %Yellow%Google DNS %White%or %Yellow%Cloudflare DNS.       %Red%:"
-%nhcolor% 04 " [99] | %Lightgray%GhostToolbox Changelogs / Update                   %Red%----------------------------------------------------------- "
+%nhcolor% 04 " [99] | %Lightgray%Ghost Toolbox Changelogs / Update                   %Red%----------------------------------------------------------- "
 %nhcolor% 04 "                                                           
-set /p firstindex=" Type option:%Green%"
+set /p firstindex=" Type option:%green%"
 if "%firstindex%"=="1" goto windows10op
 if "%firstindex%"=="2" goto op2
 if "%firstindex%"=="3" goto op3
@@ -450,11 +451,11 @@ goto begin
 cls
 Powershell Add-AppxPackage -Path '%PROGRAMFILES%\WindowsApps\*.AppxManifest.xml'
 cls
-echo %White%Microsoft UWP Silent ReInstalling.. Please Wait...
+echo %white%Microsoft UWP Silent ReInstalling.. Please Wait...
 powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%PROGRAMFILES%\WindowsApps\*\AppxManifest.xml' >nul 2>nul
 timeout /t 2 >nul
 cls
-echo %White%All UWP Apps Complete Installed.
+echo %white%All UWP Apps Complete Installed.
 timeout /t 2 >nul
 goto begin
 
@@ -467,17 +468,17 @@ cls
 ::%PROGRAMDATA%\Microsoft\colortool\colortool -b midnight-in-mojave.itermcolors >nul
 @echo off
 set ESC=
-set Green=%ESC%[32m
-set White=%ESC%[37m
-set Cyan=%ESC%[36m
-set Magenta=%ESC%[35m
-set Red=%ESC%[31m
-set Yellow=%ESC%[33m
-set Lightgray=%ESC%[37m
-set Bold=%ESC%[1m
-%nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Command %Red%Color  %Magenta%Schemes
-%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
+set green=%ESC%[32m
+set white=%ESC%[37m
+set cyan=%ESC%[36m
+set magenta=%ESC%[35m
+set red=%ESC%[31m
+set yellow=%ESC%[33m
+set white=%ESC%[37m
+set bright=%ESC%[1m
+echo "%white% ====================================================================================================================="
+%nhcolor% 0D "  %white%Command %red%Color  %Magenta%Schemes
+echo "%white% ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " [1]  | midnight-in-mojave                 [33] | Broadcast.itermcolors
 %nhcolor% 03 " [2]  | 3024 Day                           [34] | Brogrammer.itermcolors"
 %nhcolor% 03 " [3]  | AdventureTime.itermcolors          [35] | Builtin Dark.itermcolors"
@@ -496,7 +497,7 @@ set Bold=%ESC%[1m
 %nhcolor% 03 " [16] | BirdsOfParadise.itermcolors        [48] | Ciapre.itermcolors"
 %nhcolor% 03 " [17] | Blazer.itermcolors                 [49] | CLRS.itermcolors"
 %nhcolor% 03 " [18] | Blue Matrix.itermcolors            [50] | coffee_theme.itermcolors"
-%nhcolor% 03 " [19] | campbell %Yellow%(default)                 %Cyan%[51] | CrayonPonyFish.itermcolors"
+%nhcolor% 03 " [19] | campbell %yellow%(default)                 %cyan%[51] | CrayonPonyFish.itermcolors"
 %nhcolor% 03 " [20] | campbell-legacy                    [52] | Cyberdyne.itermcolors"
 %nhcolor% 03 " [21] | cmd-legacy                         [53] | cyberpunk.itermcolors"
 %nhcolor% 03 " [22] | deuteranopia.itermcolors           [54] | Dark Pastel.itermcolors"
@@ -510,8 +511,8 @@ set Bold=%ESC%[1m
 %nhcolor% 03 " [30] | Borland.itermcolors                [62] | DotGov.itermcolors"
 %nhcolor% 03 " [31] | Breeze.itermcolors                 [63] | Dracula.itermcolors"
 %nhcolor% 03 " [32] | Bright Lights.itermcolors          [64] | Duotone Dark.itermcolors"
-%nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 " [0]  | %Green%Back to menu
+echo "%white% ====================================================================================================================="
+%nhcolor% 03 " [0]  | %green%Back to menu
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -624,7 +625,7 @@ timeout /t 1 >nul
 FOR /F "tokens=1*" %%A in ('wmic os get caption ^| find /i "Windows 11"') do goto yeswin11 && goto nowin11
 cls
 :nowin11
-echo %Green%Windows 11 only && timeout /t 4 >nul && goto begin
+echo %green%Windows 11 only && timeout /t 4 >nul && goto begin
 cls
 :yeswin11
 goto forwindows11
@@ -644,7 +645,7 @@ FOR /F "tokens=1*" %%A in ('wmic os get caption ^| find /i "Windows 11"') do got
 FOR /F "tokens=1*" %%A in ('wmic os get caption ^| find /i "Windows 10"') do goto forwindows11G && goto nowin11G
 cls
 :nowin11
-echo %Green%Windows 11 only && timeout /t 4 >nul && goto begin
+echo %green%Windows 11 only && timeout /t 4 >nul && goto begin
 cls
 :GhostMode
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
@@ -664,43 +665,43 @@ set GhostMode6GB=Mode 2
 set GhostMode8GB=Mode 3
 set GhostMode10=
 cls
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\01" 2>nul | find /i "0" > NUL &&  set "GhostMode1=%Green%Enabled" || set "GhostMode1=%Red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\02" 2>nul | find /i "0" > NUL &&  set "GhostMode2=%Green%Enabled" || set "GhostMode2=%Red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\04" 2>nul | find /i "0" > NUL &&  set "GhostMode3=%Green%Enabled" || set "GhostMode3=%Red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\05" 2>nul | find /i "0" > NUL &&  set "GhostMode4=%Green%Enabled" || set "GhostMode4=%Red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\07" 2>nul | find /i "0" > NUL &&  set "GhostMode5=%Green%Enabled" || set "GhostMode5=%Red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\08" 2>nul | find /i "0" > NUL &&  set "GhostMode6=%Green%Enabled" || set "GhostMode6=%Red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode" 2>nul | find /i "GhostMode" > NUL &&  set "GhostModea=%Green%Enabled" || set "GhostModea=%Red%Disabled" 
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\01" 2>nul | find /i "0" > NUL &&  set "GhostMode1=%green%Enabled" || set "GhostMode1=%red%Disabled" 
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\02" 2>nul | find /i "0" > NUL &&  set "GhostMode2=%green%Enabled" || set "GhostMode2=%red%Disabled" 
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\04" 2>nul | find /i "0" > NUL &&  set "GhostMode3=%green%Enabled" || set "GhostMode3=%red%Disabled" 
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\05" 2>nul | find /i "0" > NUL &&  set "GhostMode4=%green%Enabled" || set "GhostMode4=%red%Disabled" 
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\07" 2>nul | find /i "0" > NUL &&  set "GhostMode5=%green%Enabled" || set "GhostMode5=%red%Disabled" 
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\08" 2>nul | find /i "0" > NUL &&  set "GhostMode6=%green%Enabled" || set "GhostMode6=%red%Disabled" 
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode" 2>nul | find /i "GhostMode" > NUL &&  set "GhostModea=%green%Enabled" || set "GhostModea=%red%Disabled" 
 FOR /F "tokens=1*" %%A in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" ^| find /i "380000"') do set GhostMode7=Default
 FOR /F "tokens=1*" %%A in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" ^| find /i "4000000"') do set GhostMode7=Mode 1
 FOR /F "tokens=1*" %%A in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" ^| find /i "6000000"') do set GhostMode7=Mode 2
 FOR /F "tokens=1*" %%A in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" ^| find /i "8000000"') do set GhostMode7=Mode 3
-FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Silent"') do set GhostMode10="%White%+ %Yellow%Silent" || set GhostMode10=""
+FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Silent"') do set GhostMode10="%white%+ %yellow%Silent" || set GhostMode10=""
 FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Reduce Memory 1min"  2^> nul ') do set GhostMode8=Every 1 minute %GhostMode10%
 FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Reduce Memory 5min"  2^> nul ') do set GhostMode8=Every 5 minute %GhostMode10%
 FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Reduce Memory 15min"  2^> nul ') do set GhostMode8=Every 15 minute %GhostMode10%
 FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Reduce Memory 30min"  2^> nul ') do set GhostMode8=Every 30 minute %GhostMode10%
 FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\Reduce Memory 60min"  2^> nul ') do set GhostMode8=Every 1 hour %GhostMode10%
 echo.
-%nhcolor% 09 "  %White%Ghost Mode Right Click Options
+%nhcolor% 09 "  %white%Ghost Mode Right Click Options
 echo.
-%nhcolor% 09 " %yellow% [1] %White% Power Options                   %Magenta%|     %GhostMode1%
-%nhcolor% 09 " %yellow% [2] %White% Task Manager                    %Magenta%|     %GhostMode2%
-%nhcolor% 09 " %yellow% [3] %White% Reduced Memory                  %Magenta%|     %GhostMode3%
-%nhcolor% 09 " %yellow% [4] %White% God Mode                        %Magenta%|     %GhostMode4%
-%nhcolor% 09 " %yellow% [5] %White% Ping Test                       %Magenta%|     %GhostMode5%
-%nhcolor% 09 " %yellow% [6] %White% Cleanup Temp                    %Magenta%|     %GhostMode6%
-%nhcolor% 09 " %yellow% [a] %White% Ghost Mode Disabled All         %Magenta%|     %GhostModea%
+%nhcolor% 09 " %yellow% [1] %white% Power Options                   %Magenta%|     %GhostMode1%
+%nhcolor% 09 " %yellow% [2] %white% Task Manager                    %Magenta%|     %GhostMode2%
+%nhcolor% 09 " %yellow% [3] %white% Reduced Memory                  %Magenta%|     %GhostMode3%
+%nhcolor% 09 " %yellow% [4] %white% God Mode                        %Magenta%|     %GhostMode4%
+%nhcolor% 09 " %yellow% [5] %white% Ping Test                       %Magenta%|     %GhostMode5%
+%nhcolor% 09 " %yellow% [6] %white% Cleanup Temp                    %Magenta%|     %GhostMode6%
+%nhcolor% 09 " %yellow% [a] %white% Ghost Mode Disabled All         %Magenta%|     %GhostModea%
 echo.
-%nhcolor% 09 "  %White%Ghost Mode Other
+%nhcolor% 09 "  %white%Ghost Mode Other
 echo.
-%nhcolor% 09 " %yellow% [7] %White% Reduced Process                 %Magenta%|     %GhostMode7%
-%nhcolor% 09 " %yellow% [8] %White% Reduced Memory                  %Magenta%|     %GhostMode8%
+%nhcolor% 09 " %yellow% [7] %white% Reduced Process                 %Magenta%|     %GhostMode7%
+%nhcolor% 09 " %yellow% [8] %white% Reduced Memory                  %Magenta%|     %GhostMode8%
 echo.
 
-%nhcolor% 09 " %yellow% [0] %White% Back to main menu
+%nhcolor% 09 " %yellow% [0] %white% Back to main menu
 echo.
-set /p firstindex=" Type option:%Green%"
+set /p firstindex=" Type option:%green%"
 
 if "%firstindex%"=="1" goto ghostm0d1
 if "%firstindex%"=="2" goto ghostm0d2
@@ -871,16 +872,16 @@ goto GhostMode
 :GhostModeProc
 cls
 echo.
-%nhcolor% 09 "  %White%Reduced Processes
+%nhcolor% 09 "  %white%Reduced Processes
 echo.
-%nhcolor% 09 " %yellow% [1] %White% (default)                       %Magenta%|
-%nhcolor% 09 " %yellow% [2] %White%  Mode 1                         %Magenta%|
-%nhcolor% 09 " %yellow% [3] %White%  Mode 2                         %Magenta%|
-%nhcolor% 09 " %yellow% [4] %White%  Mode 3                         %Magenta%|
+%nhcolor% 09 " %yellow% [1] %white% (default)                       %Magenta%|
+%nhcolor% 09 " %yellow% [2] %white%  Mode 1                         %Magenta%|
+%nhcolor% 09 " %yellow% [3] %white%  Mode 2                         %Magenta%|
+%nhcolor% 09 " %yellow% [4] %white%  Mode 3                         %Magenta%|
 echo.
-%nhcolor% 09 " %yellow% [0] %White% Back to main menu
+%nhcolor% 09 " %yellow% [0] %white% Back to main menu
 echo.
-set /p firstindex=" Type option:%Green%"
+set /p firstindex=" Type option:%green%"
 if "%firstindex%"=="1" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "3670016" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
 if "%firstindex%"=="2" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "67108864" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
 if "%firstindex%"=="3" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "100663296" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
@@ -900,10 +901,10 @@ setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 ::reg Query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" | find /i "Default" > NUL && goto :MSL3 || goto :MSL4
 :::MSL3
-::set MeMsilent="%Yellow%Disabled"
+::set MeMsilent="%yellow%Disabled"
 ::goto SKIPMEMORY1
 ::MSL4
-:set MeMsilent="%Yellow%Enabled"
+:set MeMsilent="%yellow%Enabled"
 ::goto SKIPMEMORY1
 cls
 timeout /t 1 >nul
@@ -950,8 +951,8 @@ goto SKIPMEMORY1
 del /q /f /s "memory.bin" >nul 2>nul
 )
 :SKIPMEMORY1
-FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Silent"') do set MeMsilent="%Yellow%Enabled" >nul 2>nul
-FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Default"') do set MeMsilent="%Yellow%Disabled" >nul 2>nul
+FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Silent"') do set MeMsilent="%yellow%Enabled" >nul 2>nul
+FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Default"') do set MeMsilent="%yellow%Disabled" >nul 2>nul
 if not exist "%Windir%\System32\ReduceMemory_x64.exe" goto startagainMEM
 schtasks /Change /TN "Reduce Memory 1min" /Disable >nul 2>nul
 schtasks /Delete /TN "Reduce Memory 1min" /F >nul 2>nul
@@ -969,24 +970,24 @@ schtasks /Change /TN "Reduce Memory 60min" /Disable >nul 2>nul
 schtasks /Delete /TN "Reduce Memory 60min" /F >nul 2>nul
 cls
 echo.
-%nhcolor% 09 "  %White%Automatic Reduced Memory
+%nhcolor% 09 "  %white%Automatic Reduced Memory
 echo.
-%nhcolor% 09 " %yellow% [1]  %White%  (Default)                      %Magenta%|
-%nhcolor% 09 " %yellow% [2]  %White%  Every 1  Minute                %Magenta%|
-%nhcolor% 09 " %yellow% [3]  %White%  Every 5  Minute                %Magenta%|
-%nhcolor% 09 " %yellow% [4]  %White%  Every 15 Minute                %Magenta%|
-%nhcolor% 09 " %yellow% [5]  %White%  Every 30 Minute                %Magenta%|
-%nhcolor% 09 " %yellow% [6]  %White%  Every 60 Minute                %Magenta%|
-echo.
-echo   --
-echo.
-%nhcolor% 09 " %yellow% [7]  %White%  Silent Mode                    %Magenta%| %MeMsilent%
+%nhcolor% 09 " %yellow% [1]  %white%  (Default)                      %Magenta%|
+%nhcolor% 09 " %yellow% [2]  %white%  Every 1  Minute                %Magenta%|
+%nhcolor% 09 " %yellow% [3]  %white%  Every 5  Minute                %Magenta%|
+%nhcolor% 09 " %yellow% [4]  %white%  Every 15 Minute                %Magenta%|
+%nhcolor% 09 " %yellow% [5]  %white%  Every 30 Minute                %Magenta%|
+%nhcolor% 09 " %yellow% [6]  %white%  Every 60 Minute                %Magenta%|
 echo.
 echo   --
 echo.
-::%nhcolor% 09 " %yellow% [0] %White% Back to main menu
+%nhcolor% 09 " %yellow% [7]  %white%  Silent Mode                    %Magenta%| %MeMsilent%
+echo.
+echo   --
+echo.
+::%nhcolor% 09 " %yellow% [0] %white% Back to main menu
 ::echo.
-set /p firstindex=" Type option:%Green%"
+set /p firstindex=" Type option:%green%"
 if "%firstindex%"=="1" goto MeM01
 if "%firstindex%"=="2" goto MeM02
 if "%firstindex%"=="3" goto MeM03
@@ -1096,30 +1097,30 @@ goto GhostMode
 cls
 color 0b
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Options for Windows 11
+%nhcolor% 0D "  %white%Options for Windows 11
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Restore Old/New Right click Context Menu"
-%nhcolor% 03 "  [2]  | %Green%Enable/Disable Clipboard & Notification / Copy & Paste / Typing for %Yellow%SUPERLITE/SE"
-%nhcolor% 03 "  [3]  | %Green%Enable Microsoft Chat/Teams"
-%nhcolor% 03 "  [4]  | %Green%Microsoft Touch Keyboard / Tablet Keyboard"
-%nhcolor% 03 "  [5]  | %Green%Microsoft Snipping Tool"
-%nhcolor% 03 "  [6]  | %Green%Microsoft Paint"
-%nhcolor% 03 "  [7]  | %Green%Restore Old/New Explorer Ribbon"
-%nhcolor% 03 "  [8]  | %Green%Right click startmenu > Easy Context Menu / Powershell / Command
-%nhcolor% 03 "  [9]  | %Green%Windows Subsytem for Android
-%nhcolor% 03 "  [10] | %Green%Notepad for Windows 11
-%nhcolor% 03 "  [11] | %Green%HEVC + AV1 Video Codec for Windows 11
-%nhcolor% 03 "  [12] | %Green%Custom Patcher Taskbar/Explorer for Windows 11
-%nhcolor% 03 "  [13] | %Green%Enable Windows Hello (Biometrics) for %Yellow%SUPERLITE/SE" 
-%nhcolor% 03 "  [14] | %Green%Windows 11 Widgets
-%nhcolor% 03 "  [15] | %Green%Explorer Tab for Windows 11 22H2 (Sun Valley 2)
-%nhcolor% 03 "  [16] | %Green%Enable/Disable Filter Administrator Account for %Yellow%SUPERLITE/SE"
-%nhcolor% 03 "  [17] | %Green%Microsoft Media Player UWP"
-%nhcolor% 03 "  [18] | %Green%Enable Right Click Taskbar %Yellow%> %White%Task Manager for Windows 11 22H2 (Sun Valley 2)"
-%nhcolor% 03 "  [19] | %Green%Microsoft Camera"
-%nhcolor% 03 "  [20] | %Green%Enable/Disable Search Highlights Windows 11"
+%nhcolor% 03 "  [1]  | %green%Restore Old/New Right click Context Menu"
+%nhcolor% 03 "  [2]  | %green%Enable/Disable Clipboard & Notification / Copy & Paste / Typing for %yellow%SUPERLITE/SE"
+%nhcolor% 03 "  [3]  | %green%Enable Microsoft Chat/Teams"
+%nhcolor% 03 "  [4]  | %green%Microsoft Touch Keyboard / Tablet Keyboard"
+%nhcolor% 03 "  [5]  | %green%Microsoft Snipping Tool"
+%nhcolor% 03 "  [6]  | %green%Microsoft Paint"
+%nhcolor% 03 "  [7]  | %green%Restore Old/New Explorer Ribbon"
+%nhcolor% 03 "  [8]  | %green%Right click startmenu > Easy Context Menu / Powershell / Command
+%nhcolor% 03 "  [9]  | %green%Windows Subsytem for Android
+%nhcolor% 03 "  [10] | %green%Notepad for Windows 11
+%nhcolor% 03 "  [11] | %green%HEVC + AV1 Video Codec for Windows 11
+%nhcolor% 03 "  [12] | %green%Custom Patcher Taskbar/Explorer for Windows 11
+%nhcolor% 03 "  [13] | %green%Enable Windows Hello (Biometrics) for %yellow%SUPERLITE/SE" 
+%nhcolor% 03 "  [14] | %green%Windows 11 Widgets
+%nhcolor% 03 "  [15] | %green%Explorer Tab for Windows 11 22H2 (Sun Valley 2)
+%nhcolor% 03 "  [16] | %green%Enable/Disable Filter Administrator Account for %yellow%SUPERLITE/SE"
+%nhcolor% 03 "  [17] | %green%Microsoft Media Player UWP"
+%nhcolor% 03 "  [18] | %green%Enable Right Click Taskbar %yellow%> %white%Task Manager for Windows 11 22H2 (Sun Valley 2)"
+%nhcolor% 03 "  [19] | %green%Microsoft Camera"
+%nhcolor% 03 "  [20] | %green%Enable/Disable Search Highlights Windows 11"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back to menu
+%nhcolor% 03 "  [0]  | %green%Back to menu
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -1152,15 +1153,15 @@ cls
 goto :opwin11
 
 :win1120
-reg Query "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" 2>nul | find /i "IsDynamicSearchBoxEnabled" > NUL &&  set "HI1X=%Red%Disabled" || set "HI1X=%Green%Enabled" 
+reg Query "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" 2>nul | find /i "IsDynamicSearchBoxEnabled" > NUL &&  set "HI1X=%red%Disabled" || set "HI1X=%green%Enabled" 
 cls
 color 0b
 echo.
-%nhcolor% 09 "  %White%Search Settings / Enable or Disable Search Bing / Highlights Windows 11 on Taskbar Search
+%nhcolor% 09 "  %white%Search Settings / Enable or Disable Search Bing / Highlights Windows 11 on Taskbar Search
 echo.
-%nhcolor% 09 " %yellow% [1] %White% Search Highlights %Magenta%> %HI1X%
+%nhcolor% 09 " %yellow% [1] %white% Search Highlights %Magenta%> %HI1X%
 echo.
-%nhcolor% 09 " %yellow% [0] %White% Back to main menu
+%nhcolor% 09 " %yellow% [0] %white% Back to main menu
 timeout /t 1 >nul
 echo.
 set /p op=Type option:
@@ -1192,11 +1193,11 @@ goto win1120
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Download Media Player UWP
+%nhcolor% 0D "  %white%Download Media Player UWP
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download Media Player & Install - 11.2208 (60MB)"
+%nhcolor% 03 "  [1]  | %green%Download Media Player & Install - 11.2208 (60MB)"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -1212,10 +1213,10 @@ goto :win1117
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.MediaPlayer.11.2208.UWP_x64.exe') do set "MD5=%%N"
 if %MD5% equ 1d48bed2b35265a1d297ab86ef1ac35f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MediaPlayer.11.2208.UWP_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MediaPlayer.11.2208.UWP_x64.exe
 goto win11mediaplayerinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MediaPlayer.11.2208.UWP_x64.exe
+%nhcolor% 08 " %red%| FAIL | Microsoft.MediaPlayer.11.2208.UWP_x64.exe
 del /q /f /s "Microsoft.MediaPlayer.11.2208.UWP_x64.exe" >nul
 )
 cls
@@ -1224,16 +1225,16 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.MediaPlayer.11.2208.UWP_x64.exe') do set "MD5=%%N"
 if %MD5% equ 1d48bed2b35265a1d297ab86ef1ac35f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MediaPlayer.11.2208.UWP_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MediaPlayer.11.2208.UWP_x64.exe
 goto win11mediaplayerinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MediaPlayer.11.2208.UWP_x64.exe
+%nhcolor% 08 " %red%| FAIL | Microsoft.MediaPlayer.11.2208.UWP_x64.exe
 del /q /f /s "Microsoft.MediaPlayer.11.2208.UWP_x64.exe" >nul
 goto WTHx643
 )
 :win11mediaplayerinstall
 cls
-echo installing... Password: %Yellow%ghost0987
+echo installing... Password: %yellow%ghost0987
 Microsoft.MediaPlayer.11.2208.UWP_x64.exe >nul
 timeout /t 1 >nul
 goto forwindows11
@@ -1250,17 +1251,17 @@ goto opwin11
 cls
 cd "%GHOST_DATA%"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Tab Explorer for Windows 11 22H2 (Internet required)
+%nhcolor% 0D "  %white%Tab Explorer for Windows 11 22H2 (Internet required)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Enable  > Tab Explorer"
-%nhcolor% 03 "  [2]  | %Green%Disable > Tab Explorer"
-%nhcolor% 03 "  [3]  | %Green%Resume Windows updates"
+%nhcolor% 03 "  [1]  | %green%Enable  > Tab Explorer"
+%nhcolor% 03 "  [2]  | %green%Disable > Tab Explorer"
+%nhcolor% 03 "  [3]  | %green%Resume Windows updates"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 " NOTE: If still not working please resume windows updates and try enable again.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [4]  | If still not working? Try this method %Yellow% https://bit.ly/3Ik5fFJ %White%
+%nhcolor% 03 "  [4]  | If still not working? Try this method %yellow% https://bit.ly/3Ik5fFJ %white%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 0E ""
 timeout /t 1 >nul
@@ -1328,12 +1329,12 @@ goto win1115X
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Explorer Ribbon Old/Modern
+%nhcolor% 0D "  %white%Explorer Ribbon Old/Modern
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Restore Old Explorer Ribbon"
-%nhcolor% 03 "  [2]  | %Green%Restore New Explorer Ribbon"
+%nhcolor% 03 "  [1]  | %green%Restore Old Explorer Ribbon"
+%nhcolor% 03 "  [2]  | %green%Restore New Explorer Ribbon"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -1366,18 +1367,18 @@ goto opwin11
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Xbox Game Bar
+%nhcolor% 0D "  %white%Microsoft Xbox Game Bar
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download Xbox Game Bar & Install - 5.721.9022.0 (48MB)"
-%nhcolor% 03 "  [2]  | %Green%Download Xbox Game Bar & Install - 5.822.9161.0 (60MB)"
-%nhcolor% 03 "  [3]  | %Green%Download Xbox Game Bar & Install - 5.823.1271.0 (80MB)"
-%nhcolor% 03 "  [4]  | %Green%Remove Xbox Game Bar"
+%nhcolor% 03 "  [1]  | %green%Download Xbox Game Bar & Install - 5.721.9022.0 (48MB)"
+%nhcolor% 03 "  [2]  | %green%Download Xbox Game Bar & Install - 5.822.9161.0 (60MB)"
+%nhcolor% 03 "  [3]  | %green%Download Xbox Game Bar & Install - 5.823.1271.0 (80MB)"
+%nhcolor% 03 "  [4]  | %green%Remove Xbox Game Bar"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%NOTE: Xbox Game Bar Shorcut key on keyboard %Yellow%win+g
-%nhcolor% 07 "  %Red%NOTE: Latest version support FPS on Administrator Account.
-%nhcolor% 07 "  %Red%NOTE: If Xbox Game Bar wont open on %Yellow%Windows 11 Superlite%Red%, Please use on Non-Administrator Account.
+%nhcolor% 07 "  %red%NOTE: Xbox Game Bar Shorcut key on keyboard %yellow%win+g
+%nhcolor% 07 "  %red%NOTE: Latest version support FPS on Administrator Account.
+%nhcolor% 07 "  %red%NOTE: If Xbox Game Bar wont open on %yellow%Windows 11 Superlite%red%, Please use on Non-Administrator Account.
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -1397,10 +1398,10 @@ goto :win1108xbr
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.823.1271.0.bin') do set "MD5=%%N"
 if %MD5% equ 487d999abe50b2dd7ae92eb2189aae43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.823.1271.0.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.823.1271.0.bin
 goto win11xboxbarinstall823
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.823.1271.0.bin
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.823.1271.0.bin
 del /q /f /s "Microsoft.XboxGamingOverlay_5.823.1271.0.bin" >nul
 )
 cls
@@ -1408,10 +1409,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.823.1271.0.bin') do set "MD5=%%N"
 if %MD5% equ 487d999abe50b2dd7ae92eb2189aae43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.823.1271.0.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.823.1271.0.bin
 goto win11xboxbarinstall823
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.823.1271.0.bin
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.823.1271.0.bin
 del /q /f /s "Microsoft.XboxGamingOverlay_5.823.1271.0.bin" >nul
 )
 cls
@@ -1419,10 +1420,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.823.1271.0.bin') do set "MD5=%%N"
 if %MD5% equ 487d999abe50b2dd7ae92eb2189aae43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.823.1271.0.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.823.1271.0.bin
 goto win11xboxbarinstall823
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.823.1271.0.bin
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.823.1271.0.bin
 del /q /f /s "Microsoft.XboxGamingOverlay_5.823.1271.0.bin" >nul
 goto WTHx643
 )
@@ -1453,10 +1454,10 @@ goto begin
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGameBar_5.822.9161.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 888ddb19e1248c7df811759aca286fac (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGameBar_5.822.9161.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGameBar_5.822.9161.0_x64.exe
 goto win11xboxbarinstallU2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGameBar_5.822.9161.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGameBar_5.822.9161.0_x64.exe
 del /q /f /s "Microsoft.XboxGameBar_5.822.9161.0_x64.exe" >nul
 )
 cls
@@ -1465,10 +1466,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGameBar_5.822.9161.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 888ddb19e1248c7df811759aca286fac (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGameBar_5.822.9161.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGameBar_5.822.9161.0_x64.exe
 goto win11xboxbarinstallU2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGameBar_5.822.9161.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGameBar_5.822.9161.0_x64.exe
 del /q /f /s "Microsoft.XboxGameBar_5.822.9161.0_x64.exe" >nul
 goto WTHx643
 )
@@ -1476,7 +1477,7 @@ goto WTHx643
 cls
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "1" /f >nul
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "GameDVR_Enabled" /t REG_DWORD /d "1" /f >nul
-echo installing... Password: %Yellow%ghost0987
+echo installing... Password: %yellow%ghost0987
 Microsoft.XboxGameBar_5.822.9161.0_x64.exe >nul
 timeout /t 1 >nul
 goto begin
@@ -1486,10 +1487,10 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ da1280f01b51f55b124fee384b6b1cb4 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11xboxbarinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -1497,10 +1498,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ da1280f01b51f55b124fee384b6b1cb4 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11xboxbarinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -1508,10 +1509,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ da1280f01b51f55b124fee384b6b1cb4 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11xboxbarinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto WTHx643
 )
@@ -1570,7 +1571,7 @@ for /f "tokens=1" %%a in ('winget.exe -v') do goto GETWGETCHECK
 goto :GETWGET 
 :GETWGET
 cls
-echo %SWhite%Updating Microsoft Windows Package Manager.. Please Wait..
+echo %lblack%Updating Microsoft Windows Package Manager.. Please Wait..
 echo.
 cd "%GHOST_DATA%" >nul
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto WINGETDLX86
@@ -1629,7 +1630,7 @@ goto wingetcli
 del /q /f /s "Microsoft.Windows.Package.Manager_v1.7.10861" >nul
 )
 cls
-echo %SWhite%Updating Microsoft Windows Package Manager.. Please Wait..
+echo %lblack%Updating Microsoft Windows Package Manager.. Please Wait..
 echo.
 cd "%GHOST_DATA%" >nul
 cd "%GHOST_DATA%" >nul
@@ -1720,19 +1721,19 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Version: %Magenta%%var%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] %White%- %Yellow%Install UWP Apps
-%nhcolor% 07 "  %Green%[2] %White%- %Yellow%Install UWP Apps from list %Lightgray%(GhostToolbox\list.txt)
-%nhcolor% 07 "  %Green%[3] %White%- %Yellow%Search Apps
-%nhcolor% 07 "  %Green%[4] %White%- %Yellow%Check update if are available %Lightgray%(UWP|ANY) | %SMagenta%NOTE: To update all Type > %Yellow%upgrade all     
-::%nhcolor% 07 "  %Green%[5] %White%- %Yellow%WPM Option
-%nhcolor% 07 "  %Green%[5] %White%- %Yellow%Uninstall UWP Apps
-::%nhcolor% 07 "  %Green%[7] %White%- %Yellow%Import/Expor Packages
+%nhcolor% 07 "  %green%[1] %white%- %yellow%Install UWP Apps
+%nhcolor% 07 "  %green%[2] %white%- %yellow%Install UWP Apps from list %white%(GhostToolbox\list.txt)
+%nhcolor% 07 "  %green%[3] %white%- %yellow%Search Apps
+%nhcolor% 07 "  %green%[4] %white%- %yellow%Check update if are available %white%(UWP|ANY) | %lmagenta%NOTE: To update all Type > %yellow%upgrade all     
+::%nhcolor% 07 "  %green%[5] %white%- %yellow%WPM Option
+%nhcolor% 07 "  %green%[5] %white%- %yellow%Uninstall UWP Apps
+::%nhcolor% 07 "  %green%[7] %white%- %yellow%Import/Expor Packages
 ::winget source reset --force
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[6] %White%- Tutorial how to use it https://youtu.be/QOsg7O62s9o
-%nhcolor% 07 "  %Green%[7] %White%- Reset Winget Settings
+%nhcolor% 07 "  %green%[6] %white%- Tutorial how to use it https://youtu.be/QOsg7O62s9o
+%nhcolor% 07 "  %green%[7] %white%- Reset Winget Settings
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] %White%- Back to menu or Cancel
+%nhcolor% 07 "  %green%[0] %white%- Back to menu or Cancel
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 set /p op=Type option:
 if "%op%"=="1" goto winG01
@@ -1751,7 +1752,7 @@ goto wingetoption
 :winG01
 cls
 set "WINGETIN=winget install -e --silent --accept-source-agreements --accept-package-agreements --id"
-set /p codeid=%Green%Enter Product id %White%: %Yellow%
+set /p codeid=%green%Enter Product id %white%: %yellow%
 if "%codeid%"=="0" goto wingetoption
 %WINGETIN% %codeid%
 timeout /t 5 >nul
@@ -1772,19 +1773,19 @@ set "codeid="
 set "O="
 set "WINGESSW=winget search --source winget"
 set "WINGESSS=winget search --source msstore"
-set /p codeid=%Green%Search %White%: %Yellow%
+set /p codeid=%green%Search %white%: %yellow%
 echo.
 if "%codeid%"=="0" goto wingetoption
-echo %SMagenta%Winget
+echo %lmagenta%Winget
 echo ------
 %WINGESSW% "%codeid%"
 echo.
-echo %SMagenta%MS STORE
+echo %lmagenta%MS STORE
 echo --------
 %WINGESSS% "%codeid%"
 echo.
 set "WINGETIN=winget install -e --silent --accept-source-agreements --accept-package-agreements --id"
-set /p codeid=%Green%Enter Product id %White%: %Yellow%
+set /p codeid=%green%Enter Product id %white%: %yellow%
 if "%codeid%"=="0" goto winG03
 echo.
 %WINGETIN% %codeid%
@@ -1796,7 +1797,7 @@ goto :winG03
 cls
 winget upgrade
 echo -----------------------------------------------------------------------------------------------------------------------
-set /p codeid=%Green%Enter Product id %White%: %Yellow%
+set /p codeid=%green%Enter Product id %white%: %yellow%
 if "%codeid%"=="0" goto wingetoption
 if "%codeid%"=="upgrade all" goto wingetupgradeall
 winget upgrade %codeid%
@@ -1812,12 +1813,12 @@ goto winG04
 cls 
 winget install -e -s msstore --accept-source-agreements >nul
 cls
-echo %White%Name                                         Id                                                                Source
-echo -----------------------------------------------------------------------------------------------------------------------%SMagenta%
+echo %white%Name                                         Id                                                                Source
+echo -----------------------------------------------------------------------------------------------------------------------%lmagenta%
 winget list | find /i "msstore"
-echo %White%-----------------------------------------------------------------------------------------------------------------------
+echo %white%-----------------------------------------------------------------------------------------------------------------------
 set "WINGETIN=winget uninstall --id"
-set /p codeid=%Green%Enter Product id %White%: %Yellow%
+set /p codeid=%green%Enter Product id %white%: %yellow%
 if "%codeid%"=="0" goto wingetoption
 echo.
 %WINGETIN% %codeid%
@@ -1828,20 +1829,20 @@ goto :winG05
 :win1114w
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Windows Widgets for Windows 11 (422.33900.0.0)
+%nhcolor% 0D "  %white%Windows Widgets for Windows 11 (422.33900.0.0)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download & Install (10MB)"
-%nhcolor% 03 "  [2]  | %Green%Remove Widgets"
+%nhcolor% 03 "  [1]  | %green%Download & Install (10MB)"
+%nhcolor% 03 "  [2]  | %green%Remove Widgets"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]  | %Green%Download WebView2 (required to use Widgets)"
-::%nhcolor% 03 "  [4]  | %Green%Forcing link to open Default Browser Firefox/Chrome/Brave/Opera/etc etc"
+%nhcolor% 03 "  [3]  | %green%Download WebView2 (required to use Widgets)"
+::%nhcolor% 03 "  [4]  | %green%Forcing link to open Default Browser Firefox/Chrome/Brave/Opera/etc etc"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 " %Red% NOTE: Microsoft Edge browser is required to open the link from widgets.
-%nhcolor% 07 " %Red% NOTE: Weather on Taskbar required OS Build 22000.527 or Higher OS Build.
-%nhcolor% 03 " %Red% NOTE: Microsoft Edge Browser it will automatically install when you install Webview2."
-%nhcolor% 03 " %Red% NOTE: if you want to remove Edge Browser type %Yellow%"removedge" %Red%on main menu Ghost toolbox."
+%nhcolor% 07 " %red% NOTE: Microsoft Edge browser is required to open the link from widgets.
+%nhcolor% 07 " %red% NOTE: Weather on Taskbar required OS Build 22000.527 or Higher OS Build.
+%nhcolor% 03 " %red% NOTE: Microsoft Edge Browser it will automatically install when you install Webview2."
+%nhcolor% 03 " %red% NOTE: if you want to remove Edge Browser type %yellow%"removedge" %red%on main menu Ghost toolbox."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 set /p op=Type option:
 if "%op%"=="1" goto widgetswin1101
@@ -1859,10 +1860,10 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.WidgetsforWindows11_422.33900.0.0.bin') do set "MD5=%%N"
 if %MD5% equ 6adcc63b4dba634efce4e74d1a9d0981 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WidgetsforWindows11_422.33900.0.0.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WidgetsforWindows11_422.33900.0.0.bin
 goto win11widgetsinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WidgetsforWindows11_422.33900.0.0.bin
+%nhcolor% 08 " %red%| FAIL | Microsoft.WidgetsforWindows11_422.33900.0.0.bin
 del /q /f /s "Microsoft.WidgetsforWindows11_422.33900.0.0.bin" >nul
 )
 cls
@@ -1870,10 +1871,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WidgetsforWindows11_422.33900.0.0.bin') do set "MD5=%%N"
 if %MD5% equ 6adcc63b4dba634efce4e74d1a9d0981 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WidgetsforWindows11_422.33900.0.0.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WidgetsforWindows11_422.33900.0.0.bin
 goto win11widgetsinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WidgetsforWindows11_422.33900.0.0.bin
+%nhcolor% 08 " %red%| FAIL | Microsoft.WidgetsforWindows11_422.33900.0.0.bin
 del /q /f /s "Microsoft.WidgetsforWindows11_422.33900.0.0.bin" >nul
 )
 cls
@@ -1881,10 +1882,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WidgetsforWindows11_422.33900.0.0.bin') do set "MD5=%%N"
 if %MD5% equ 6adcc63b4dba634efce4e74d1a9d0981 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WidgetsforWindows11_422.33900.0.0.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WidgetsforWindows11_422.33900.0.0.bin
 goto win11widgetsinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WidgetsforWindows11_422.33900.0.0.bin
+%nhcolor% 08 " %red%| FAIL | Microsoft.WidgetsforWindows11_422.33900.0.0.bin
 del /q /f /s "Microsoft.WidgetsforWindows11_422.33900.0.0.bin" >nul
 goto WTHx643
 )
@@ -1895,7 +1896,7 @@ timeout /t 1 >nul
 ::::%_7ZA_EXE% x Microsoft.WidgetsforWindows11_422.33900.0.0.bin -aoa -pghostwidgets -o"%GHOST_TEMP%\Widgets"
 timeout /t 2 >nul
 cls
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 "Microsoft.WidgetsforWindows11_422.33900.0.0.bin"
 Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /f >nul
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "1" /f >nul
@@ -2000,22 +2001,22 @@ cd "%GHOST_DATA%" >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *3DTtBFT* >nul 2>nul
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Admin Filter for Administrator Account
+%nhcolor% 0D "  %white%Admin Filter for Administrator Account
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Enable  > Admin Filter"
-%nhcolor% 03 "  [2]  | %Green%Disable > Admin Filter"
+%nhcolor% 03 "  [1]  | %green%Enable  > Admin Filter"
+%nhcolor% 03 "  [2]  | %green%Disable > Admin Filter"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  %Red%NOTE: By default Administrator account Admin Filter is Disable.
-%nhcolor% 03 "  %Red%NOTE: If you need to use UAC in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %Red%NOTE: If you need to use Xbox Game Pass in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %Red%NOTE: If you need to use Drag n Drop Taskbar (SV2) in Administrator Account please Enable Admin Filter.
-::%nhcolor% 03 "  %Red%NOTE: If you need to use Windows Hello (Biometric) in Administrator Account please Enable Admin Filter.
-::%nhcolor% 03 "  %Red%NOTE: If you need to use Windows Spotlight in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %Red%NOTE: If you need to Login windows with Email Account in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %Yellow%     *If still not working i suggest please use on non Administrator account (local account).*
-%nhcolor% 03 "  %Yellow%     *For Windows Hello (Biometric) please use on non-Administrator account.*
+%nhcolor% 03 "  %red%NOTE: By default Administrator account Admin Filter is Disable.
+%nhcolor% 03 "  %red%NOTE: If you need to use UAC in Administrator Account please Enable Admin Filter.
+%nhcolor% 03 "  %red%NOTE: If you need to use Xbox Game Pass in Administrator Account please Enable Admin Filter.
+%nhcolor% 03 "  %red%NOTE: If you need to use Drag n Drop Taskbar (SV2) in Administrator Account please Enable Admin Filter.
+::%nhcolor% 03 "  %red%NOTE: If you need to use Windows Hello (Biometric) in Administrator Account please Enable Admin Filter.
+::%nhcolor% 03 "  %red%NOTE: If you need to use Windows Spotlight in Administrator Account please Enable Admin Filter.
+%nhcolor% 03 "  %red%NOTE: If you need to Login windows with Email Account in Administrator Account please Enable Admin Filter.
+%nhcolor% 03 "  %yellow%     *If still not working i suggest please use on non Administrator account (local account).*
+%nhcolor% 03 "  %yellow%     *For Windows Hello (Biometric) please use on non-Administrator account.*
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 0E ""
 timeout /t 1 >nul
@@ -2081,22 +2082,22 @@ cd "%GHOST_DATA%" >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *3DTtBFT* >nul 2>nul
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Admin Filter for Administrator Account
+%nhcolor% 0D "  %white%Admin Filter for Administrator Account
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Enable  > Admin Filter"
-%nhcolor% 03 "  [2]  | %Green%Disable > Admin Filter"
+%nhcolor% 03 "  [1]  | %green%Enable  > Admin Filter"
+%nhcolor% 03 "  [2]  | %green%Disable > Admin Filter"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  %Red%NOTE: By default Administrator account Admin Filter is Disable.
-%nhcolor% 03 "  %Red%NOTE: If you need to use UAC in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %Red%NOTE: If you need to use Xbox Game Pass in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %Red%NOTE: If you need to use Drag n Drop Taskbar (SV2) in Administrator Account please Enable Admin Filter.
-::%nhcolor% 03 "  %Red%NOTE: If you need to use Windows Hello (Biometric) in Administrator Account please Enable Admin Filter.
-::%nhcolor% 03 "  %Red%NOTE: If you need to use Windows Spotlight in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %Red%NOTE: If you need to Login windows with Email Account in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %Yellow%     *If still not working i suggest please use on non Administrator account (local account).*
-%nhcolor% 03 "  %Yellow%     *For Windows Hello (Biometric) please use on non-Administrator account.*
+%nhcolor% 03 "  %red%NOTE: By default Administrator account Admin Filter is Disable.
+%nhcolor% 03 "  %red%NOTE: If you need to use UAC in Administrator Account please Enable Admin Filter.
+%nhcolor% 03 "  %red%NOTE: If you need to use Xbox Game Pass in Administrator Account please Enable Admin Filter.
+%nhcolor% 03 "  %red%NOTE: If you need to use Drag n Drop Taskbar (SV2) in Administrator Account please Enable Admin Filter.
+::%nhcolor% 03 "  %red%NOTE: If you need to use Windows Hello (Biometric) in Administrator Account please Enable Admin Filter.
+::%nhcolor% 03 "  %red%NOTE: If you need to use Windows Spotlight in Administrator Account please Enable Admin Filter.
+%nhcolor% 03 "  %red%NOTE: If you need to Login windows with Email Account in Administrator Account please Enable Admin Filter.
+%nhcolor% 03 "  %yellow%     *If still not working i suggest please use on non Administrator account (local account).*
+%nhcolor% 03 "  %yellow%     *For Windows Hello (Biometric) please use on non-Administrator account.*
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 0E ""
 timeout /t 1 >nul
@@ -2131,12 +2132,12 @@ goto opwin11
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft YourPhone 2021.1015.2146.0
+%nhcolor% 0D "  %white%Microsoft YourPhone 2021.1015.2146.0
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download YourPhone & Install (216MB + 18MB)"
-%nhcolor% 03 "  [2]  | %Green%Remove YourPhone"
+%nhcolor% 03 "  [1]  | %green%Download YourPhone & Install (216MB + 18MB)"
+%nhcolor% 03 "  [2]  | %green%Remove YourPhone"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2154,40 +2155,40 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001') do set "MD5=%%N"
 if %MD5% equ fd7d257f8dfeac5bd7dafd3604ab6c7a (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
 goto win11phonecheck1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
 del /q /f /s "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001" >nul
 goto win11phonedown
 )
 :win11phonecheck1
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002') do set "MD5=%%N"
 if %MD5% equ 0597d265eee089f29f06996872fab649 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
 goto win11phonecheck2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
 del /q /f /s "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002" >nul
 goto win11phonedown
 )
 :win11phonecheck2
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003') do set "MD5=%%N"
 if %MD5% equ 31a0fde5b2929e70e26b87134ede079a (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
 goto win11phonecheck3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
 del /q /f /s "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003" >nul
 goto win11phonedown
 )
 :win11phonecheck3
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_Dependencies.x64.Appx') do set "MD5=%%N"
 if %MD5% equ 67b7a353a7661a6eae03af4a1151be35 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_Dependencies.x64.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_Dependencies.x64.Appx
 goto win11phoneinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_Dependencies.x64.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_Dependencies.x64.Appx
 del /q /f /s "Microsoft.YourPhone_Dependencies.x64.Appx" >nul
 goto win11phonedown
 )
@@ -2198,10 +2199,10 @@ echo  PART 1
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001') do set "MD5=%%N"
 if %MD5% equ fd7d257f8dfeac5bd7dafd3604ab6c7a (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
 goto win11phonecek02
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
 del /q /f /s "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001" >nul
 goto win11phoneserverx001
 )
@@ -2212,10 +2213,10 @@ echo  PART 1
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001') do set "MD5=%%N"
 if %MD5% equ fd7d257f8dfeac5bd7dafd3604ab6c7a (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
 goto win11phonecek02
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001
 del /q /f /s "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001" >nul
 goto WTHx643
 )
@@ -2226,10 +2227,10 @@ echo  PART 2
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002') do set "MD5=%%N"
 if %MD5% equ 0597d265eee089f29f06996872fab649 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
 goto win11phonecek03
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
 del /q /f /s "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002" >nul
 goto win11phoneserverx002
 )
@@ -2240,10 +2241,10 @@ echo  PART 2
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002') do set "MD5=%%N"
 if %MD5% equ 0597d265eee089f29f06996872fab649 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
 goto win11phonecek03
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002
 del /q /f /s "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.002" >nul
 goto WTHx643
 )
@@ -2254,10 +2255,10 @@ echo  PART 3
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003') do set "MD5=%%N"
 if %MD5% equ 31a0fde5b2929e70e26b87134ede079a (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
 goto win11phonecek04
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
 del /q /f /s "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003" >nul
 goto win11phoneserverx003
 )
@@ -2268,10 +2269,10 @@ echo  PART 3
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003') do set "MD5=%%N"
 if %MD5% equ 31a0fde5b2929e70e26b87134ede079a (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
 goto win11phonecek04
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003
 del /q /f /s "Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.003" >nul
 goto WTHx643
 )
@@ -2282,10 +2283,10 @@ echo  PART 4
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_Dependencies.x64.Appx') do set "MD5=%%N"
 if %MD5% equ 67b7a353a7661a6eae03af4a1151be35 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_Dependencies.x64.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_Dependencies.x64.Appx
 goto win11phoneinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_Dependencies.x64.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_Dependencies.x64.Appx
 del /q /f /s "Microsoft.YourPhone_Dependencies.x64.Appx" >nul
 goto win11phoneserverx004
 )
@@ -2296,10 +2297,10 @@ echo  PART 4
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_Dependencies.x64.Appx') do set "MD5=%%N"
 if %MD5% equ 67b7a353a7661a6eae03af4a1151be35 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_Dependencies.x64.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_Dependencies.x64.Appx
 goto win11phoneinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_Dependencies.x64.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_Dependencies.x64.Appx
 del /q /f /s "Microsoft.YourPhone_Dependencies.x64.Appx" >nul
 goto WTHx643
 )
@@ -2344,12 +2345,12 @@ goto :opwin11
 :win1106
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Paint
+%nhcolor% 0D "  %white%Microsoft Paint
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download Paint & Install (10.2103.1.0) (17MB)"
-%nhcolor% 03 "  [2]  | %Green%Download Paint & Install (11.2110.0.0) (24MB)"
+%nhcolor% 03 "  [1]  | %green%Download Paint & Install (10.2103.1.0) (17MB)"
+%nhcolor% 03 "  [2]  | %green%Download Paint & Install (11.2110.0.0) (24MB)"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2367,10 +2368,10 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ eaba232e6dc8176d6815455fb739c3e9 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11paintinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -2378,10 +2379,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ eaba232e6dc8176d6815455fb739c3e9 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11paintinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -2389,10 +2390,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ eaba232e6dc8176d6815455fb739c3e9 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11paintinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto WTHx643
 )
@@ -2422,10 +2423,10 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ bbfe39323895eb39a7739476f0443bd8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11paintinstall2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -2433,10 +2434,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ bbfe39323895eb39a7739476f0443bd8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11paintinstall2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -2444,10 +2445,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ bbfe39323895eb39a7739476f0443bd8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11paintinstall2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto WTHx643
 )
@@ -2476,11 +2477,11 @@ goto :opwin11
 :win1105
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Snipping Tool
+%nhcolor% 0D "  %white%Microsoft Snipping Tool
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download Snipping Tool & Install (18MB)"
+%nhcolor% 03 "  [1]  | %green%Download Snipping Tool & Install (18MB)"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2497,10 +2498,10 @@ goto :win1105
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 40c03c38cb885312d8c6c574509a614f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11snippinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -2508,20 +2509,20 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 40c03c38cb885312d8c6c574509a614f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11snippinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2YVCiNM" -o"Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 40c03c38cb885312d8c6c574509a614f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11snippinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto WTHx643
 )
@@ -2549,15 +2550,15 @@ goto forwindows11
 :win1104
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Touch Keyboard / Handwriting Panel pen and ink.
+%nhcolor% 0D "  %white%Microsoft Touch Keyboard / Handwriting Panel pen and ink.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Enable Touch Keyboard"
-%nhcolor% 03 "  [2]  | %Green%Disable Touch Keyboard"
-%nhcolor% 03 "  [3]  | %Green%Change Touch Keyboard Themes"
+%nhcolor% 03 "  [1]  | %green%Enable Touch Keyboard"
+%nhcolor% 03 "  [2]  | %green%Disable Touch Keyboard"
+%nhcolor% 03 "  [3]  | %green%Change Touch Keyboard Themes"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-::%nhcolor% 03 "  [4]  | %Green%Download Fixed %Yellow%(if Using Latest Build Windows 11 you dont need this)"
+::%nhcolor% 03 "  [4]  | %green%Download Fixed %yellow%(if Using Latest Build Windows 11 you dont need this)"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2605,13 +2606,13 @@ goto win1104
 :win1103
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Chat / Teams
+%nhcolor% 0D "  %white%Microsoft Chat / Teams
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download Webview2 for Chat/Teams"
-%nhcolor% 03 "         %Red%NOTE: Microsoft Edge Browser it will automatically install when you install Webview2."
-%nhcolor% 03 "         %Red%NOTE: if you want to remove Edge Browser type %Yellow%"removedge" %Red%on main menu Ghost toolbox."
+%nhcolor% 03 "  [1]  | %green%Download Webview2 for Chat/Teams"
+%nhcolor% 03 "         %red%NOTE: Microsoft Edge Browser it will automatically install when you install Webview2."
+%nhcolor% 03 "         %red%NOTE: if you want to remove Edge Browser type %yellow%"removedge" %red%on main menu Ghost toolbox."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2644,20 +2645,20 @@ goto :win1103
 :win1102
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Clipboard & Action Notification / TabletInputService
+%nhcolor% 0D "  %white%Microsoft Clipboard & Action Notification / TabletInputService
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Enabled - Clipboard & Action Notification"
-%nhcolor% 03 "  [2]  | %Green%Disable - Clipboard & Action Notification"
+%nhcolor% 03 "  [1]  | %green%Enabled - Clipboard & Action Notification"
+%nhcolor% 03 "  [2]  | %green%Disable - Clipboard & Action Notification"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]  | %Green%Enabled - TabletInputService"
-%nhcolor% 03 "  [4]  | %Green%Disable - TabletInputService"
+%nhcolor% 03 "  [3]  | %green%Enabled - TabletInputService"
+%nhcolor% 03 "  [4]  | %green%Disable - TabletInputService"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  NOTE: Please Enable Clipboard if cannot Copy & Paste in some Apps.
 %nhcolor% 03 "  NOTE: To Use Please Update OS Build 22000 . 282 or higher OS build.
 %nhcolor% 03 "  NOTE: To Using Clipboard for shortcut key Press on your keyboard Win+V
-%nhcolor% 03 "  %Yellow%NOTE: If you cant typing in some Apps please enable TabletInputService for SUPERLITE/SE.
+%nhcolor% 03 "  %yellow%NOTE: If you cant typing in some Apps please enable TabletInputService for SUPERLITE/SE.
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2715,12 +2716,12 @@ cd "%GHOST_DATA%" >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *3Dpuup7* >nul 2>nul
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Enabled Right Click Taskbar > Task Manager
+%nhcolor% 0D "  %white%Enabled Right Click Taskbar > Task Manager
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Enabled "
-%nhcolor% 03 "  [2]  | %Green%Disabled"
+%nhcolor% 03 "  [1]  | %green%Enabled "
+%nhcolor% 03 "  [2]  | %green%Disabled"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2756,12 +2757,12 @@ goto forwindows11
 :win1101
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Restore Old/New Right click Context Menu
+%nhcolor% 0D "  %white%Restore Old/New Right click Context Menu
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Restore Old Right click Context Menu "
-%nhcolor% 03 "  [2]  | %Green%Restore New Right click Context Menu"
+%nhcolor% 03 "  [1]  | %green%Restore Old Right click Context Menu "
+%nhcolor% 03 "  [2]  | %green%Restore New Right click Context Menu"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2791,24 +2792,24 @@ goto win1101
 :win1108
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Right click startmenu > Easy Context Menu / Powershell / Command
+%nhcolor% 0D "  %white%Right click startmenu > Easy Context Menu / Powershell / Command
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Easy Context Menu
+%nhcolor% 0D "  %white%Easy Context Menu
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Enable"
-%nhcolor% 03 "  [2]  | %Green%Disable"
+%nhcolor% 03 "  [1]  | %green%Enable"
+%nhcolor% 03 "  [2]  | %green%Disable"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Powershell (Admin)
+%nhcolor% 0D "  %white%Powershell (Admin)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]  | %Green%Enable"
-%nhcolor% 03 "  [4]  | %Green%Disable"
+%nhcolor% 03 "  [3]  | %green%Enable"
+%nhcolor% 03 "  [4]  | %green%Disable"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Command (Admin)
+%nhcolor% 0D "  %white%Command (Admin)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]  | %Green%Enable"
-%nhcolor% 03 "  [6]  | %Green%Disable"
+%nhcolor% 03 "  [5]  | %green%Enable"
+%nhcolor% 03 "  [6]  | %green%Disable"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2894,12 +2895,12 @@ goto win1108
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Notepad for Windows 11
+%nhcolor% 0D "  %white%Notepad for Windows 11
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download & Install (14MB) - 10.2103.6.0"
-%nhcolor% 03 "  [2]  | %Green%Download & Install (28MB) - 11.2112.32.0"
+%nhcolor% 03 "  [1]  | %green%Download & Install (14MB) - 10.2103.6.0"
+%nhcolor% 03 "  [2]  | %green%Download & Install (28MB) - 11.2112.32.0"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -2917,10 +2918,10 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ ff85639043a8afd38f55d4ccb28c4108 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11notepadinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -2928,10 +2929,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ ff85639043a8afd38f55d4ccb28c4108 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11notepadinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -2939,10 +2940,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ ff85639043a8afd38f55d4ccb28c4108 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win11notepadinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto WTHx643
 )
@@ -2972,10 +2973,10 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsNotepad_11.2112.32.0.Appx') do set "MD5=%%N"
 if %MD5% equ bb109307baec28d699404325ee3a7259 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsNotepad_11.2112.32.0.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsNotepad_11.2112.32.0.Appx
 goto win11notepadinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsNotepad_11.2112.32.0.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsNotepad_11.2112.32.0.Appx
 del /q /f /s "Microsoft.WindowsNotepad_11.2112.32.0.Appx" >nul
 )
 cls
@@ -2983,10 +2984,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsNotepad_11.2112.32.0.Appx') do set "MD5=%%N"
 if %MD5% equ bb109307baec28d699404325ee3a7259 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsNotepad_11.2112.32.0.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsNotepad_11.2112.32.0.Appx
 goto win11notepadinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsNotepad_11.2112.32.0.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsNotepad_11.2112.32.0.Appx
 del /q /f /s "Microsoft.WindowsNotepad_11.2112.32.0.Appx" >nul
 )
 cls
@@ -2994,10 +2995,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsNotepad_11.2112.32.0.Appx') do set "MD5=%%N"
 if %MD5% equ bb109307baec28d699404325ee3a7259 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsNotepad_11.2112.32.0.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsNotepad_11.2112.32.0.Appx
 goto win11notepadinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsNotepad_11.2112.32.0.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsNotepad_11.2112.32.0.Appx
 del /q /f /s "Microsoft.WindowsNotepad_11.2112.32.0.Appx" >nul
 goto WTHx643
 )
@@ -3023,11 +3024,11 @@ goto forwindows11
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft HEVC + AV1 Video Extension (1.0.42701.0 / 1.1.41601.0)
+%nhcolor% 0D "  %white%Microsoft HEVC + AV1 Video Extension (1.0.42701.0 / 1.1.41601.0)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download & Install (7MB)"
+%nhcolor% 03 "  [1]  | %green%Download & Install (7MB)"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -3044,10 +3045,10 @@ cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 20598f684c4a80ed6bcef14e4cddcae2 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
 goto win11hevcinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -3055,10 +3056,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 20598f684c4a80ed6bcef14e4cddcae2 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
 goto win11hevcinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -3066,10 +3067,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 20598f684c4a80ed6bcef14e4cddcae2 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
 goto win11hevcinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx" >nul
 goto WTHx643
 )
@@ -3082,7 +3083,7 @@ timeout /t 1 >nul
 cd "%GHOST_TEMP%\Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe" >nul
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 echo.
 for /f tokens^=* %%i in ('where .:*VCLibs*.*x64*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 for /f tokens^=* %%i in ('where .:*HEVC*.*x64*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
@@ -3090,7 +3091,7 @@ for /f tokens^=* %%i in ('where .:*AV1*.*x64*')do Powershell Add-AppxPackage -Pa
 cls
 )
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 echo.
 for /f tokens^=* %%i in ('where .:*VCLibs*.*x86*') do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 for /f tokens^=* %%i in ('where .:*HEVC*.*x86*') do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
@@ -3112,19 +3113,19 @@ if "%var%"=="22621" cls && echo Not Support for Windows 11 22H2 Version. && time
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Explorer Patcher (for version 22000) Windows 11)
+%nhcolor% 0D "  %white%Explorer Patcher (for version 22000) Windows 11)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download > Custom Taskbar & Replace Taskbar"
-%nhcolor% 03 "  [2]  | %Green%Set to Default Taskbar/Explorer Windows 11"
+%nhcolor% 03 "  [1]  | %green%Download > Custom Taskbar & Replace Taskbar"
+%nhcolor% 03 "  [2]  | %green%Set to Default Taskbar/Explorer Windows 11"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]  | %Green%Download WebView2 (required to use Weather on Taskbar)"
+%nhcolor% 03 "  [3]  | %green%Download WebView2 (required to use Weather on Taskbar)"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: To use Explorer Patcher > Right Click on Taskbar >  Properties > for Options.
-%nhcolor% 03 "         %Red%NOTE: Please re-install again if explorer not showing.
-%nhcolor% 03 "         %Red%NOTE: Weather on taskbar is now support on latest version. (WebView2 is required)
-%nhcolor% 03 "         %Red%NOTE: Only for Superlite/Compact, If using %Yellow%"Superlite SE" %Red%you dont need this patcher.
+%nhcolor% 03 "         %red%NOTE: To use Explorer Patcher > Right Click on Taskbar >  Properties > for Options.
+%nhcolor% 03 "         %red%NOTE: Please re-install again if explorer not showing.
+%nhcolor% 03 "         %red%NOTE: Weather on taskbar is now support on latest version. (WebView2 is required)
+%nhcolor% 03 "         %red%NOTE: Only for Superlite/Compact, If using %yellow%"Superlite SE" %red%you dont need this patcher.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -3182,7 +3183,7 @@ goto completeX1TILE
 )
 :scanx123TILE
 cls
-echo %NCyan%%SWhite%Please wait..
+echo %bg_cyan%%lblack%Please wait..
 timeout /t 0 >nul
 start explorer >nul 2>&1
 goto findagainexTILE
@@ -3196,11 +3197,11 @@ timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 TEST1.bin') do set "MD5=%%N"
 if %MD5% equ e63c49a60081b6732fe9ef71c06fc69ca4f0aaee (
 cls
-%nhcolor% 08 " %Green%| PASS | %White%TEST1.bin
+%nhcolor% 08 " %green%| PASS | %white%TEST1.bin
 goto WCTIN
 ) else (
 cls
-%nhcolor% 08 " %Red%| FAIL | TEST1.bin
+%nhcolor% 08 " %red%| FAIL | TEST1.bin
 del /q /f /s "TEST1.bin" 2>nul >nul
 )
 cls
@@ -3210,7 +3211,7 @@ cls
 timeout /t 1 >nul
 :WCTIN
 cls
-echo %NRed%%SWhite%Please wait.. 1
+echo %bg_red%%lblack%Please wait.. 1
 :: CENTER 1
 ::Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "1" /f >nul
 taskkill /f /im "explorer.exe" >nul 2>&1
@@ -3266,7 +3267,7 @@ cls
 goto completeX1
 )
 :scanx123
-echo %NCyan%%SWhite%Please wait.. 4
+echo %bg_cyan%%lblack%Please wait.. 4
 timeout /t 0 >nul
 start explorer >nul 2>&1
 regedit.exe /S %WinDir%\ExplorerPatcher3.reg >nul
@@ -3294,11 +3295,11 @@ timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 ep_setup.exe') do set "MD5=%%N"
 if %MD5% equ e69bbc44ba6b8fa4ffbf3a4127f23856 (
 cls
-%nhcolor% 08 " %Green%| PASS | %White%ep_setup.exe
+%nhcolor% 08 " %green%| PASS | %white%ep_setup.exe
 goto win11intaskbarXX
 ) else (
 cls
-%nhcolor% 08 " %Red%| FAIL | ep_setup.exe
+%nhcolor% 08 " %red%| FAIL | ep_setup.exe
 del /q /f /s "ep_setup.exe" 2>nul >nul
 )
 cls
@@ -3308,10 +3309,10 @@ timeout /t 1 >nul
 cls
 for /f %%N in ('hashsum /a md5 ep_setup.exe') do set "MD5=%%N"
 if %MD5% equ e69bbc44ba6b8fa4ffbf3a4127f23856 (
-%nhcolor% 08 " %Green%| PASS | %White%ep_setup.exe
+%nhcolor% 08 " %green%| PASS | %white%ep_setup.exe
 goto win11intaskbarXX
 ) else (
-%nhcolor% 08 " %Red%| FAIL | ep_setup.exe
+%nhcolor% 08 " %red%| FAIL | ep_setup.exe
 del /q /f /s "ep_setup.exe" 2>nul >nul
 )
 cls
@@ -3320,20 +3321,20 @@ timeout /t 1 >nul
 cls
 for /f %%N in ('hashsum /a md5 ep_setup.exe') do set "MD5=%%N"
 if %MD5% equ e69bbc44ba6b8fa4ffbf3a4127f23856 (
-%nhcolor% 08 " %Green%| PASS | %White%ep_setup.exe
+%nhcolor% 08 " %green%| PASS | %white%ep_setup.exe
 goto win11intaskbarXX
 ) else (
-%nhcolor% 08 " %Red%| FAIL | ep_setup.exe
+%nhcolor% 08 " %red%| FAIL | ep_setup.exe
 del /q /f /s "ep_setup.exe" 2>nul >nul
 goto WTHx643
 )
 timeout /t 1 >nul
 :win11intaskbarXX
 cls
-echo %NRed%%SWhite%Please wait..
+echo %bg_red%%lblack%Please wait..
 ep_setup.exe >nul
 cls
-echo %NRed%%SWhite%Please wait..
+echo %bg_red%%lblack%Please wait..
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f >nul
 :findagainex
 timeout /t 3 >nul
@@ -3378,7 +3379,7 @@ goto forwindows11
 :win11taskbar1
 cls
 taskkill /F /IM SystemSettings.exe >nul 2>nul
-echo %SWhite%Please wait..
+echo %lblack%Please wait..
 if exist "%Windir%\dxgi.dll" (
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 1 >nul
@@ -3395,10 +3396,10 @@ cd "%Windir%"
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 dxgi.dll') do set "MD5=%%N"
 if %MD5% equ 78959caa05476f8e6bd80f8377bb1aad (
-%nhcolor% 08 " %Green%| PASS | %White%dxgi.dll
+%nhcolor% 08 " %green%| PASS | %white%dxgi.dll
 goto win11intaskbar
 ) else (
-%nhcolor% 08 " %Red%| FAIL | dxgi.dll
+%nhcolor% 08 " %red%| FAIL | dxgi.dll
 del /q /f /s "%Windir%\dxgi.dll" 2>nul >nul
 )
 timeout /t 1 >nul
@@ -3410,16 +3411,16 @@ cd "%Windir%"
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 dxgi.dll') do set "MD5=%%N"
 if %MD5% equ 78959caa05476f8e6bd80f8377bb1aad (
-%nhcolor% 08 " %Green%| PASS | %White%dxgi.dll
+%nhcolor% 08 " %green%| PASS | %white%dxgi.dll
 goto win11intaskbar
 ) else (
-%nhcolor% 08 " %Red%| FAIL | dxgi.dll
+%nhcolor% 08 " %red%| FAIL | dxgi.dll
 del /q /f /s "%Windir%\dxgi.dll" 2>nul >nul
 goto WTHx643
 )
 :win11intaskbar
 cls
-echo %NRed%%SWhite%Please wait..
+echo %bg_red%%lblack%Please wait..
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f >nul
 taskkill /f /im "explorer.exe" >nul 2>&1
 :findagainex
@@ -3433,7 +3434,7 @@ cls
 goto completeX1
 )
 :scanx123
-echo %NCyan%%SWhite%Please wait..
+echo %bg_cyan%%lblack%Please wait..
 timeout /t 0 >nul
 start explorer >nul 2>&1
 goto findagainex
@@ -3456,12 +3457,12 @@ goto forwindows11
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Windows Hello (Biometrics) - Non Administrator
+%nhcolor% 0D "  %white%Windows Hello (Biometrics) - Non Administrator
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Enable"
-%nhcolor% 03 "  [2]  | %Green%Disable"
+%nhcolor% 03 "  [1]  | %green%Enable"
+%nhcolor% 03 "  [2]  | %green%Disable"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -3499,38 +3500,38 @@ color 0E
 cls
 @echo off
 set ESC=
-set Green=%ESC%[32m
-set White=%ESC%[37m
-set Cyan=%ESC%[36m
-set Magenta=%ESC%[35m
-set Red=%ESC%[31m
-set Yellow=%ESC%[33m
-set Lightgray=%ESC%[37m
-set Bold=%ESC%[1m
+set green=%ESC%[32m
+set white=%ESC%[37m
+set cyan=%ESC%[36m
+set magenta=%ESC%[35m
+set red=%ESC%[31m
+set yellow=%ESC%[33m
+set white=%ESC%[37m
+set bright=%ESC%[1m
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Editions that can be upgraded to 
+%nhcolor% 0D "  %white%Editions that can be upgraded to 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Professional"
-%nhcolor% 03 "  [2]  | %Green%Professional Education"
-%nhcolor% 03 "  [3]  | %Green%Professional for Workstation"
-%nhcolor% 03 "  [4]  | %Green%Professional Country Specific"
-%nhcolor% 03 "  [5]  | %Green%Professional Single Language"
-%nhcolor% 03 "  [6]  | %Green%Education"
-%nhcolor% 03 "  [7]  | %Green%Enterprise"
-%nhcolor% 03 "  [8]  | %Green%IoT Enterprise"
+%nhcolor% 03 "  [1]  | %green%Professional"
+%nhcolor% 03 "  [2]  | %green%Professional Education"
+%nhcolor% 03 "  [3]  | %green%Professional for Workstation"
+%nhcolor% 03 "  [4]  | %green%Professional Country Specific"
+%nhcolor% 03 "  [5]  | %green%Professional Single Language"
+%nhcolor% 03 "  [6]  | %green%Education"
+%nhcolor% 03 "  [7]  | %green%Enterprise"
+%nhcolor% 03 "  [8]  | %green%IoT Enterprise"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0E "  %Red%Your Current Edition is %White%: %Yellow%%EditionID% "
+%nhcolor% 0E "  %red%Your Current Edition is %white%: %yellow%%EditionID% "
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0E "  %White%Windows 10 Activated"
+%nhcolor% 0E "  %white%Windows 10 Activated"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [9]  | %Green%Activated 
-%nhcolor% 03 "  [10] | %Green%Reset
+%nhcolor% 03 "  [9]  | %green%Activated 
+%nhcolor% 03 "  [10] | %green%Reset
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  NOTE: Internet connection required for Activated.
 %nhcolor% 03 "  NOTE: Windows 10 LTSC/LTSB/SERVER cannot be upgraded.
 %nhcolor% 03 "  NOTE: Restart is required after Activated or Reset.
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back to menu
+%nhcolor% 03 "  [0]  | %green%Back to menu
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -3720,24 +3721,24 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Windows Recovery x64 (winre) | WIN11.21H1-22H2/ 20H2 / 2004 / 1909 / 1903 / 1803 / LTSC / 1709 / 1703   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Download                              
+%nhcolor% 07 "  %green%[1] | Download                              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Arch    : %Cyan%X64                                             
-%nhcolor% 07 "  %Red%Size    : %Cyan%4xxMB  
-%nhcolor% 07 "  %Red%Required internet to download                             
+%nhcolor% 07 "  %red%Arch    : %cyan%X64                                             
+%nhcolor% 07 "  %red%Size    : %cyan%4xxMB  
+%nhcolor% 07 "  %red%Required internet to download                             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Recovery is the process of recovering and restoring Windows OS to its normal or last known good configuration
 %nhcolor% 07 "  after it crashed, became corrupted or stopped working normally. It is a Windows default process that aids users in
 %nhcolor% 07 "  recovering the system from technical flaws and errors.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%How to Get to the Recovery/Reset PC/Restore/Safe Mode/Cmd/Etc in Windows 10 if Windows crashed/etc etc.
-%nhcolor% 07 "  %Red%Method 1 : When Windows Logo loading screen appears Press Reset Button or Power button Twice.
-%nhcolor% 07 "  %Red%Method 2 : In Windows Hold the Shift key on your keyboard and click restart.
-%nhcolor% 07 "  %Red%Method 3 : GIYF
+%nhcolor% 07 "  %red%How to Get to the Recovery/Reset PC/Restore/Safe Mode/Cmd/Etc in Windows 10 if Windows crashed/etc etc.
+%nhcolor% 07 "  %red%Method 1 : When Windows Logo loading screen appears Press Reset Button or Power button Twice.
+%nhcolor% 07 "  %red%Method 2 : In Windows Hold the Shift key on your keyboard and click restart.
+%nhcolor% 07 "  %red%Method 3 : GIYF
 echo.
-%nhcolor% 07 "  %Yellow%NOTE: Windows 11 Recovery no longer works on Legacy boot mode, please install Windows 11 using UEFI mode.
+%nhcolor% 07 "  %yellow%NOTE: Windows 11 Recovery no longer works on Legacy boot mode, please install Windows 11 using UEFI mode.
 echo.
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
@@ -3750,7 +3751,7 @@ timeout /t 2 >nul
 cls
 goto winre
 :winrex86
-echo %Red%Windows Recovery for X86 already installed you dont need this.
+echo %red%Windows Recovery for X86 already installed you dont need this.
 timeout /t 4 >nul
 goto winre
 :winrex86x64nope
@@ -3829,7 +3830,7 @@ if "%var%"=="1607" goto :winreforltsb1607
 :winrex64download
 ::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 ::echo 9865f5d10881b60aeacea22dd7894bce  "Windows.Recovery.wim" | hashsum /c /q && (
-::%nhcolor% 08 "%Green%|PASS|%White% Windows.Recovery.wim"
+::%nhcolor% 08 "%green%|PASS|%white% Windows.Recovery.wim"
 ::) || (
 ::del /q /f /s Windows.Recovery.wim >nul 2>nul
 ::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://kende-my.sharepoint.com/:u:/g/personal/k9788_office365svip_top/EQ8iu1sTvP5JuhLDZCYlL3gBjHHal_z6FEx8Vej2TErwHg?e=aH4Rkk&download=1" -t 3 -O Windows.Recovery.wim
@@ -3856,10 +3857,10 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %White%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%White%
+echo %white%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
 timeout /t 10 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3lUbhRl" -o"Windows.Recovery.wim"
 timeout /t 5 >nul
@@ -3890,24 +3891,24 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft .NET Framework 2.x/3.x/4.x                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | %White%Enable .NET Framework 3/2 & %Yellow%(Disable force .NetFramework 4.x)
-::%nhcolor% 07 "  %Green%[1] | Enable .NET Framework 3/2 %white%- %Red%X64 %white%- %Yellow%64bit for WIN10 VERSION %Green%1909/1903
-::%nhcolor% 07 "  %Green%[2] | Enable .NET Framework 3/2 %white%- %Red%X86 %white%- %Yellow%32bit for WIN10 VERSION %Green%1909/1903
-::%nhcolor% 07 "  %Green%[3] | Enable .NET Framework 3/2 %white%- %Red%X64 %white%- %Yellow%64bit for WIN10 VERSION %Green%LTSC/1809
-::%nhcolor% 07 "  %Green%[4] | Enable .NET Framework 3/2 %white%- %Red%X86 %white%- %Yellow%32bit for WIN10 VERSION %Green%LTSC/1809
-::%nhcolor% 07 "  %Green%[5] | Enable .NET Framework 3/2 %white%- %Red%X64/x86 for WIN10 VERSION %Green%2004/20H1  
-%nhcolor% 07 "  %Green%[7] | %White%Force to using Latest .Net Framework 4.x %Yellow%(Enable force .NetFramework 4.x)
+%nhcolor% 07 "  %green%[1] | %white%Enable .NET Framework 3/2 & %yellow%(Disable force .NetFramework 4.x)
+::%nhcolor% 07 "  %green%[1] | Enable .NET Framework 3/2 %white%- %red%X64 %white%- %yellow%64bit for WIN10 VERSION %green%1909/1903
+::%nhcolor% 07 "  %green%[2] | Enable .NET Framework 3/2 %white%- %red%X86 %white%- %yellow%32bit for WIN10 VERSION %green%1909/1903
+::%nhcolor% 07 "  %green%[3] | Enable .NET Framework 3/2 %white%- %red%X64 %white%- %yellow%64bit for WIN10 VERSION %green%LTSC/1809
+::%nhcolor% 07 "  %green%[4] | Enable .NET Framework 3/2 %white%- %red%X86 %white%- %yellow%32bit for WIN10 VERSION %green%LTSC/1809
+::%nhcolor% 07 "  %green%[5] | Enable .NET Framework 3/2 %white%- %red%X64/x86 for WIN10 VERSION %green%2004/20H1  
+%nhcolor% 07 "  %green%[7] | %white%Force to using Latest .Net Framework 4.x %yellow%(Enable force .NetFramework 4.x)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] Back to menu                                         
+%nhcolor% 07 "  %green%[0] Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Servers : %Cyan%Microsoft tlu.dl.delivery                           
-%nhcolor% 07 "  %Red%Arch    : %Cyan%x64 | x86                                            
-%nhcolor% 07 "  %Red%Size    : %Cyan%69MB | 37MB                                         
-%nhcolor% 07 "  %Red%Required internet for download .NET Framework 3/2.         
+%nhcolor% 07 "  %red%Servers : %cyan%Microsoft tlu.dl.delivery                           
+%nhcolor% 07 "  %red%Arch    : %cyan%x64 | x86                                            
+%nhcolor% 07 "  %red%Size    : %cyan%69MB | 37MB                                         
+%nhcolor% 07 "  %red%Required internet for download .NET Framework 3/2.         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%NOTE Framework 3.x only works on Compact/Superlite Update 3 or newest   
+%nhcolor% 07 "  %red%NOTE Framework 3.x only works on Compact/Superlite Update 3 or newest   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%By default Superlite latest ver + and Compact version already force to using latest .Net Framework 4.          
+%nhcolor% 07 "  %red%By default Superlite latest ver + and Compact version already force to using latest .Net Framework 4.          
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
 if "%op%"=="1" goto netframework5
@@ -4010,14 +4011,14 @@ REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\DiagTrack" /v "Start" /t REG_DWO
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
 if "%var%"=="22000" (
 cls
-echo %Yellow%Windows Insider Program is enable!.
+echo %yellow%Windows Insider Program is enable!.
 timeout /t 2 >nul
 cls
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 3 >nul
 goto begin
 )
-echo %White%Windows Insider Program is enable!
+echo %white%Windows Insider Program is enable!
 timeout /t 2 >nul
 cls
 echo Restart the computer for the changes to take effect.
@@ -4031,17 +4032,17 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft OneDrive                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Download and Install                                 
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                                 
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Servers : %Cyan%Microsoft                                       
-%nhcolor% 07 "  %Red%Version : %Cyan%19.174.0902.0013                                
-%nhcolor% 07 "  %Red%Size    : %Cyan%33.4MB                                          
-%nhcolor% 07 "  %Red%Required internet to download.                            
+%nhcolor% 07 "  %red%Servers : %cyan%Microsoft                                       
+%nhcolor% 07 "  %red%Version : %cyan%19.174.0902.0013                                
+%nhcolor% 07 "  %red%Size    : %cyan%33.4MB                                          
+%nhcolor% 07 "  %red%Required internet to download.                            
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Alternative                                              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[2] RaiDrive Standard Edition                            
+%nhcolor% 07 "  %green%[2] RaiDrive Standard Edition                            
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
 if "%op%"=="1" goto onedrive1
@@ -4073,12 +4074,12 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  DriverEasy (Portable)                                    
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Download and Install                                 
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                                 
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Version : %Cyan%5.6.15.34863                       
-%nhcolor% 07 "  %Red%Size    : %Cyan%4.13MB                                          
-%nhcolor% 07 "  %Red%Required internet to download.                            
+%nhcolor% 07 "  %red%Version : %cyan%5.6.15.34863                       
+%nhcolor% 07 "  %red%Size    : %cyan%4.13MB                                          
+%nhcolor% 07 "  %red%Required internet to download.                            
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -4123,7 +4124,7 @@ cls
 :startdownload
 timeout /t 1 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/36WrRJR" -o"DriverEasy.5.6.15.34863.7z"
 timeout /t 5 >nul
@@ -4132,9 +4133,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 DriverEasy.5.6.15.34863.7z') do set "MD5=%%N"
 if %MD5% equ 552b3337dee56516fed779128737b76e (
-%nhcolor% 08 " %Green%| PASS | %White%DriverEasy.5.6.15.34863.7z
+%nhcolor% 08 " %green%| PASS | %white%DriverEasy.5.6.15.34863.7z
 ) else (
-%nhcolor% 08 " %Red%| FAIL | DriverEasy.5.6.15.34863.7z
+%nhcolor% 08 " %red%| FAIL | DriverEasy.5.6.15.34863.7z
 del /q /f /s "DriverEasy.5.6.15.34863.7z" >nul 2>nul
 goto :WTHx643
 )
@@ -4167,37 +4168,37 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Ghost Personalize                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%[1] Download Ghostspectre Wallpaper                      
+%nhcolor% 07 "  %red%[1] Download Ghostspectre Wallpaper                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Yellow%[2] Colors - | Dark  Purple] | Dark  Explorer  | Dark  Taskbar |
-%nhcolor% 07 "  %Yellow%[3] Colors - | Dark  Purple] | Dark  Explorer  | White Taskbar |  
-%nhcolor% 07 "  %Yellow%[4] Colors - | Light Purple] | White Explorer  | White Taskbar |  
-%nhcolor% 07 "  %Yellow%[5] Colors - | Light Purple] | White Explorer  | Dark  Taskbar |  
-%nhcolor% 07 "  %Yellow%[6] Colors - | Light Purple] | Dark  Explorer  | Dark  Taskbar |   
-%nhcolor% 07 "  %Yellow%[7] Colors - | Light Purple] | Dark  Explorer  | White Taskbar |  
-%nhcolor% 07 "  %Yellow%[8] Colors - | Windows 10 Default White |                   
-%nhcolor% 07 "  %Yellow%[9] Colors - | Windows 10 Default Dark  |                   
+%nhcolor% 07 "  %yellow%[2] Colors - | Dark  Purple] | Dark  Explorer  | Dark  Taskbar |
+%nhcolor% 07 "  %yellow%[3] Colors - | Dark  Purple] | Dark  Explorer  | White Taskbar |  
+%nhcolor% 07 "  %yellow%[4] Colors - | Light Purple] | White Explorer  | White Taskbar |  
+%nhcolor% 07 "  %yellow%[5] Colors - | Light Purple] | White Explorer  | Dark  Taskbar |  
+%nhcolor% 07 "  %yellow%[6] Colors - | Light Purple] | Dark  Explorer  | Dark  Taskbar |   
+%nhcolor% 07 "  %yellow%[7] Colors - | Light Purple] | Dark  Explorer  | White Taskbar |  
+%nhcolor% 07 "  %yellow%[8] Colors - | Windows 10 Default White |                   
+%nhcolor% 07 "  %yellow%[9] Colors - | Windows 10 Default Dark  |                   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Explorer UI Ribbon  
-%nhcolor% 07 "  %Green%[10] Enable  : Explorer UI Ribbon                        
-%nhcolor% 07 "  %Green%[11] Disable : Explorer UI Ribbon         
-%nhcolor% 07 "  %Red%NOTE: Do not disable Ribbon if your software Use Ribbon ex. (Office/Paint/etc etc)         
+%nhcolor% 07 "  %green%[10] Enable  : Explorer UI Ribbon                        
+%nhcolor% 07 "  %green%[11] Disable : Explorer UI Ribbon         
+%nhcolor% 07 "  %red%NOTE: Do not disable Ribbon if your software Use Ribbon ex. (Office/Paint/etc etc)         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Transparency Taskbar  
-%nhcolor% 07 "  %Green%[12] Enable  : Transparency Taskbar                      
-%nhcolor% 07 "  %Green%[13] Disable : Transparency Taskbar                      
+%nhcolor% 07 "  %green%[12] Enable  : Transparency Taskbar                      
+%nhcolor% 07 "  %green%[13] Disable : Transparency Taskbar                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  New Start menu Icons for Windows 10 Version 2004 (build %Yellow%19041.421 %White%or higher build) 
-%nhcolor% 07 "  %Green%[14] Unlocked New Startmenu Icon                                          
-%nhcolor% 07 "  %Green%[15] Revert to Old Startmenu Icon                                          
+%nhcolor% 07 "  New Start menu Icons for Windows 10 Version 2004 (build %yellow%19041.421 %white%or higher build) 
+%nhcolor% 07 "  %green%[14] Unlocked New Startmenu Icon                                          
+%nhcolor% 07 "  %green%[15] Revert to Old Startmenu Icon                                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Windows 10/11 Themes & Iconpack for version 2009/2004/1909 (64bit)
-%nhcolor% 07 "  %Green%[16] %White%Windows Themes
-%nhcolor% 07 "  %Green%[17] %White%Icons Pack
+%nhcolor% 07 "  %green%[16] %white%Windows Themes
+%nhcolor% 07 "  %green%[17] %white%Icons Pack
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[18] %White%Nilesoft Shell (Right click menu)
+%nhcolor% 07 "  %green%[18] %white%Nilesoft Shell (Right click menu)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] Back to menu                                        
+%nhcolor% 07 "  %green%[0] Back to menu                                        
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -4237,13 +4238,13 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Nilesoft Shell (Right click menu)                             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] %White% Download & install
+%nhcolor% 07 "  %green%[1] %white% Download & install
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Nilesoft Shell Themes     
-%nhcolor% 07 "  %Green%[2] %White% Change to Dark
-%nhcolor% 07 "  %Green%[3] %White% Change to White
+%nhcolor% 07 "  %green%[2] %white% Change to Dark
+%nhcolor% 07 "  %green%[3] %white% Change to White
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] Back to menu                                        
+%nhcolor% 07 "  %green%[0] Back to menu                                        
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -4350,33 +4351,33 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Ghost Personalize - Windows Themes                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Yellow%[1]  %cyan%> %Green%GHOST SPECTRE - DARK LIGHT PURPLE V1"
-%nhcolor% 07 "  %Yellow%[2]  %cyan%> %Green%GHOST SPECTRE - DARK LIGHT PURPLE V2"
-%nhcolor% 07 "  %Yellow%[3]  %cyan%> %Green%GHOST SPECTRE - DARK LIGHT PURPLE V3" 
-%nhcolor% 07 "  %Yellow%[4]  %cyan%> %Green%GHOST SPECTRE - FULL DARK (beta test)"
-%nhcolor% 07 "  %Yellow%[5]  %cyan%> %Green%GHOST SPECTRE - GHOST NOID X1"
-%nhcolor% 07 "  %Yellow%[6]  %cyan%> %Green%GHOST SPECTRE - GHOST NOID X2"
-%nhcolor% 07 "  %Yellow%[7]  %cyan%> %Green%BIB Dark Mode 1"
-%nhcolor% 07 "  %Yellow%[8]  %cyan%> %Green%BIB Dark Mode 2"
-%nhcolor% 07 "  %Yellow%[9]  %cyan%> %Green%BIB Dark Mode 3"
-%nhcolor% 07 "  %Yellow%[10] %cyan%> %Green%BIB Dark ModeMac"
-%nhcolor% 07 "  %Yellow%[11] %cyan%> %Green%Fluent Dark Mode"
-%nhcolor% 07 "  %Yellow%[12] %cyan%> %Green%Fluent Day"
-%nhcolor% 07 "  %Yellow%[13] %cyan%> %Green%Penumbra 10ws"
-%nhcolor% 07 "  %Yellow%[14] %cyan%> %Green%HNY Dark"
-%nhcolor% 07 "  %Yellow%[15] %cyan%> %Green%HNY Light"
-%nhcolor% 07 "  %Yellow%[98] %cyan%> %Green%Re-install Themes Patch"
-%nhcolor% 07 "  %Yellow%[99] %cyan%> %Green%install Themes Patch for Windows 11"
+%nhcolor% 07 "  %yellow%[1]  %cyan%> %green%GHOST SPECTRE - DARK LIGHT PURPLE V1"
+%nhcolor% 07 "  %yellow%[2]  %cyan%> %green%GHOST SPECTRE - DARK LIGHT PURPLE V2"
+%nhcolor% 07 "  %yellow%[3]  %cyan%> %green%GHOST SPECTRE - DARK LIGHT PURPLE V3" 
+%nhcolor% 07 "  %yellow%[4]  %cyan%> %green%GHOST SPECTRE - FULL DARK (beta test)"
+%nhcolor% 07 "  %yellow%[5]  %cyan%> %green%GHOST SPECTRE - GHOST NOID X1"
+%nhcolor% 07 "  %yellow%[6]  %cyan%> %green%GHOST SPECTRE - GHOST NOID X2"
+%nhcolor% 07 "  %yellow%[7]  %cyan%> %green%BIB Dark Mode 1"
+%nhcolor% 07 "  %yellow%[8]  %cyan%> %green%BIB Dark Mode 2"
+%nhcolor% 07 "  %yellow%[9]  %cyan%> %green%BIB Dark Mode 3"
+%nhcolor% 07 "  %yellow%[10] %cyan%> %green%BIB Dark ModeMac"
+%nhcolor% 07 "  %yellow%[11] %cyan%> %green%Fluent Dark Mode"
+%nhcolor% 07 "  %yellow%[12] %cyan%> %green%Fluent Day"
+%nhcolor% 07 "  %yellow%[13] %cyan%> %green%Penumbra 10ws"
+%nhcolor% 07 "  %yellow%[14] %cyan%> %green%HNY Dark"
+%nhcolor% 07 "  %yellow%[15] %cyan%> %green%HNY Light"
+%nhcolor% 07 "  %yellow%[98] %cyan%> %green%Re-install Themes Patch"
+%nhcolor% 07 "  %yellow%[99] %cyan%> %green%install Themes Patch for Windows 11"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red% NOTE: If Themes is not working after Windows update please Re-install Themes Patch > Option 98.
-%nhcolor% 07 "  %Red% NOTE: For Windows 11 Please Install Themes Patch before use any Themes > Option 99.
-%nhcolor% 07 "  %Red% NOTE: Some themes may not perfect in Windows 11.
-%nhcolor% 07 "  %Red% NOTE: Do not Delete backup folder "UXThemePatcher"
+%nhcolor% 07 "  %red% NOTE: If Themes is not working after Windows update please Re-install Themes Patch > Option 98.
+%nhcolor% 07 "  %red% NOTE: For Windows 11 Please Install Themes Patch before use any Themes > Option 99.
+%nhcolor% 07 "  %red% NOTE: Some themes may not perfect in Windows 11.
+%nhcolor% 07 "  %red% NOTE: Do not Delete backup folder "UXThemePatcher"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Yellow%[0] Back to menu
+%nhcolor% 07 "  %yellow%[0] Back to menu
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 timeout /t 2 >nul
-set /p op=%Cyan%Type option:
+set /p op=%cyan%Type option:
 if "%op%"=="1" goto DLPV1
 if "%op%"=="2" goto DLPV2
 if "%op%"=="3" goto DLPV3
@@ -4420,7 +4421,7 @@ goto ghosthemes
 cls
 :theme98
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" cls && echo %Green%Please install Windows 11 Version. && timeout /t 4 >nul && goto ghosthemes
+if "%var%"=="22000" cls && echo %green%Please install Windows 11 Version. && timeout /t 4 >nul && goto ghosthemes
 
 cd "%GHOST_DATA%"
 cls
@@ -4444,7 +4445,7 @@ goto ghst
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2004" goto :checkbuildstartmenu
-echo %Green%Nope...not for this version. && timeout /t 4 >nul && goto ghst
+echo %green%Nope...not for this version. && timeout /t 4 >nul && goto ghst
 :checkbuildstartmenu
 cls
 cd "%GHOST_DATA%"
@@ -4462,7 +4463,7 @@ cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2004" goto :yesiwantnewicons
 ::if "%var%"=="2004" goto :checkbuildstartmenu
-echo %Green%Nope...not for this version. && timeout /t 4 >nul && goto ghst
+echo %green%Nope...not for this version. && timeout /t 4 >nul && goto ghst
 :checkbuildstartmenu
 cls
 FOR /f "tokens=2*" %%a in ('Reg Query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v UBR') do set "UBRHEX=%%~b"
@@ -4499,13 +4500,13 @@ cls
 goto ghst
 :nostartmenuiconoldbuild
 cls
-echo %Red% This only for Windows 10 version 2004 for build 19041.421 or higher.
+echo %red% This only for Windows 10 version 2004 for build 19041.421 or higher.
 timeout /t 5 >nul
 cls
 goto ghst
 :nostartmenuicon
 cls
-echo %Yellow% This Function only for Windows 10 version 2004
+echo %yellow% This Function only for Windows 10 version 2004
 timeout /t 5 >nul
 cls
 goto ghst
@@ -4591,7 +4592,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2Ly4D6t" -o"GhostSpectre_Wallpaper.zip"
@@ -4805,9 +4806,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft Disk Benchmark Test (Write/Read)               
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%Type %Red%C%White%, %Red%D%White%, %Red%E%White%, to %Red%Z for %White%Benchmark your Drives             
+%nhcolor% 07 "  %green%Type %red%C%white%, %red%D%white%, %red%E%white%, to %red%Z for %white%Benchmark your Drives             
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Benchmark Drive : 
@@ -4869,16 +4870,16 @@ goto opdisk
 :diskc
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%C:
-%nhcolor% 07 " %White%====================================================================================================================="
+%nhcolor% 07 "  BENCHMARK DRIVE %red%C:
+%nhcolor% 07 " %white%====================================================================================================================="
 winsat disk -drive C
-%nhcolor% 07 " %White%====================================================================================================================="
+%nhcolor% 07 " %white%====================================================================================================================="
 pause
 goto opdisk
 :diskd
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%D:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%D:
 %nhcolor% 07 " ====================================================================================================================="
 powershell winsat disk -drive D
 timeout /t 1 >nul
@@ -4888,7 +4889,7 @@ goto opdisk
 :diske
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%E:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%E:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive E
 timeout /t 1 >nul
@@ -4898,7 +4899,7 @@ goto opdisk
 :diskf
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%F:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%F:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive F
 timeout /t 1 >nul
@@ -4908,7 +4909,7 @@ goto opdisk
 :diskg
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%G:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%G:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive G
 timeout /t 1 >nul
@@ -4918,7 +4919,7 @@ goto opdisk
 :diskh
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%H:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%H:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive H
 timeout /t 1 >nul
@@ -4928,7 +4929,7 @@ goto opdisk
 :diski
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%I:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%I:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive I
 timeout /t 1 >nul
@@ -4938,7 +4939,7 @@ goto opdisk
 :diskj
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%J:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%J:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive J
 timeout /t 1 >nul
@@ -4948,7 +4949,7 @@ goto opdisk
 :diskk
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%K:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%K:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive K
 timeout /t 1 >nul
@@ -4958,7 +4959,7 @@ goto opdisk
 :diskl
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%L:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%L:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive L
 timeout /t 1 >nul
@@ -4968,7 +4969,7 @@ goto opdisk
 :diskm
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%M:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%M:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive M
 timeout /t 1 >nul
@@ -4978,7 +4979,7 @@ goto opdisk
 :diskn
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%N:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%N:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive N
 timeout /t 1 >nul
@@ -4988,7 +4989,7 @@ goto opdisk
 :disko
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%O:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%O:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive O
 timeout /t 1 >nul
@@ -4998,7 +4999,7 @@ goto opdisk
 :diskp
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%P:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%P:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive P
 timeout /t 1 >nul
@@ -5008,7 +5009,7 @@ goto opdisk
 :diskq
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%Q:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%Q:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive Q
 timeout /t 1 >nul
@@ -5018,7 +5019,7 @@ goto opdisk
 :diskr
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%R:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%R:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive R
 timeout /t 1 >nul
@@ -5028,7 +5029,7 @@ goto opdisk
 :disks
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%S:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%S:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive S
 timeout /t 1 >nul
@@ -5038,7 +5039,7 @@ goto opdisk
 :diskt
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%T:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%T:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive T
 timeout /t 1 >nul
@@ -5048,7 +5049,7 @@ goto opdisk
 :disku
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%U:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%U:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive U
 timeout /t 1 >nul
@@ -5058,7 +5059,7 @@ goto opdisk
 :diskv
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%V:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%V:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive V
 timeout /t 1 >nul
@@ -5068,7 +5069,7 @@ goto opdisk
 :diskw
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%W:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%W:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive W
 timeout /t 1 >nul
@@ -5078,7 +5079,7 @@ goto opdisk
 :diskx
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%X:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%X:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive X
 timeout /t 1 >nul
@@ -5088,7 +5089,7 @@ goto opdisk
 :disky
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%Y:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%Y:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive Y
 timeout /t 1 >nul
@@ -5098,7 +5099,7 @@ goto opdisk
 :diskz
 cls
 color 0b
-%nhcolor% 07 "  BENCHMARK DRIVE %Red%Z:
+%nhcolor% 07 "  BENCHMARK DRIVE %red%Z:
 %nhcolor% 07 " ====================================================================================================================="
 winsat disk -drive Z
 timeout /t 1 >nul
@@ -5107,8 +5108,8 @@ pause
 goto opdisk
 :edgeop
 cls
-echo %Red% NOTE: Original Microsoft Edge is dead, Alternative Web Browsers you can using 
-echo %Red%       Microsoft Edge Chromium/Google Chrome/Firefox/Brave/Yandex/Opera/etc etc.
+echo %red% NOTE: Original Microsoft Edge is dead, Alternative Web Browsers you can using 
+echo %red%       Microsoft Edge Chromium/Google Chrome/Firefox/Brave/Yandex/Opera/etc etc.
 timeout /t 5 >nul
 goto begin
 color 0E
@@ -5116,21 +5117,21 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft Edge (Original version) - Browser              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Download and Install (479)                           
-%nhcolor% 07 "  %Green%[2] | Download and Install (449)                           
-%nhcolor% 07 "  %Green%[3] | Download and Install (418)                           
+%nhcolor% 07 "  %green%[1] | Download and Install (479)                           
+%nhcolor% 07 "  %green%[2] | Download and Install (449)                           
+%nhcolor% 07 "  %green%[3] | Download and Install (418)                           
 %nhcolor% 07 "  [0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%File Size : %Cyan%37MB                                         
-%nhcolor% 07 "  %Green%Arch      : %Cyan%x64                                         
-%nhcolor% 07 "  %Green%Version   : %Cyan%18363.479 / 18363.449 / 18363.418            
-%nhcolor% 07 "  %Green%Servers   : %Cyan%Google Cloud Storage                         
-%nhcolor% 07 "  %Green%Required internet to download.                           
+%nhcolor% 07 "  %green%File Size : %cyan%37MB                                         
+%nhcolor% 07 "  %green%Arch      : %cyan%x64                                         
+%nhcolor% 07 "  %green%Version   : %cyan%18363.479 / 18363.449 / 18363.418            
+%nhcolor% 07 "  %green%Servers   : %cyan%Google Cloud Storage                         
+%nhcolor% 07 "  %green%Required internet to download.                           
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%NOTE: Microsoft Edge cannot be removed after installed. 
+%nhcolor% 07 "  %green%NOTE: Microsoft Edge cannot be removed after installed. 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Microsoft Edge original version will be dead soon please stop using this browser.
-%nhcolor% 07 "  %Red%Alternative Web Browsers you can using Edge Chromium/Google Chrome/Firefox/Brave/Yandex and etc etc.
+%nhcolor% 07 "  %red%Microsoft Edge original version will be dead soon please stop using this browser.
+%nhcolor% 07 "  %red%Alternative Web Browsers you can using Edge Chromium/Google Chrome/Firefox/Brave/Yandex and etc etc.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -5246,16 +5247,16 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft Connect Apps (Miracast) %red%for Windows 10 version 1909/1903                  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Download and Install                                 
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                                 
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%Servers : %Cyan%Google Cloud Storage                           
-%nhcolor% 07 "  %Green%Arch    : %Cyan%x64                                      
-%nhcolor% 07 "  %Green%Required internet to download.                           
+%nhcolor% 07 "  %green%Servers : %cyan%Google Cloud Storage                           
+%nhcolor% 07 "  %green%Arch    : %cyan%x64                                      
+%nhcolor% 07 "  %green%Required internet to download.                           
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------" 
-%nhcolor% 07 "  %Red%NOTE: For Windows 10 Version 2004/2009 Connect app for wireless projection using Miracast is no longer installed 
-%nhcolor% 07 "  %Red%      by default, but is available as an optional feature. To install the app, 
-%nhcolor% 07 "  %Red%      click on %Yellow%Settings %White%> %Yellow%Apps %White%> %Yellow%Optional features %White%> %Yellow%Add a feature and then install the Wireless Display app.
+%nhcolor% 07 "  %red%NOTE: For Windows 10 Version 2004/2009 Connect app for wireless projection using Miracast is no longer installed 
+%nhcolor% 07 "  %red%      by default, but is available as an optional feature. To install the app, 
+%nhcolor% 07 "  %red%      click on %yellow%Settings %white%> %yellow%Apps %white%> %yellow%Optional features %white%> %yellow%Add a feature and then install the Wireless Display app.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -5273,15 +5274,15 @@ setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 setlocal
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-	if "%var%"=="2009" cls && echo %Red%Miracast Apps no longer available on Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="2004" cls && echo %Red%Miracast Apps no longer available on Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%"=="2009" cls && echo %red%Miracast Apps no longer available on Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%"=="2004" cls && echo %red%Miracast Apps no longer available on Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
 	if "%var%"=="1909" goto :miracastyes
 	if "%var%"=="1903" goto :miracastyes
-	if "%var%"=="1809" cls && echo %Red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="1803" cls && echo %Red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="1709" cls && echo %Red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="1703" cls && echo %Red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="1607" cls && echo %Red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%"=="1809" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%"=="1803" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%"=="1709" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%"=="1703" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%"=="1607" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
 :miracastyes
 cls
 cd "%GHOST_DATA%"
@@ -5304,11 +5305,11 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.PPIProjection_cw5n1h2txyewy.zip') do set "MD5=%%N"
 if %MD5% equ 931aa08a8ac88ab56c4772240b88f9c3 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.PPIProjection_cw5n1h2txyewy.zip
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.PPIProjection_cw5n1h2txyewy.zip
 timeout /t 4 >nul
 goto mirainstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.PPIProjection_cw5n1h2txyewy.zip
+%nhcolor% 08 " %red%| FAIL | Microsoft.PPIProjection_cw5n1h2txyewy.zip
 del /q /f /s "Microsoft.PPIProjection_cw5n1h2txyewy.zip" >nul
 goto :ErrorMD5
 )
@@ -5318,11 +5319,11 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.PPIProjection_cw5n1h2txyewy.zip') do set "MD5=%%N"
 if %MD5% equ 7dcd652679772d21f3957ac82bbcd4c8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.PPIProjection_cw5n1h2txyewy.zip
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.PPIProjection_cw5n1h2txyewy.zip
 timeout /t 4 >nul
 goto mirainstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.PPIProjection_cw5n1h2txyewy.zip
+%nhcolor% 08 " %red%| FAIL | Microsoft.PPIProjection_cw5n1h2txyewy.zip
 del /q /f /s "Microsoft.PPIProjection_cw5n1h2txyewy.zip" >nul
 goto :ErrorMD5
 )
@@ -5346,28 +5347,28 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft Clipboard                                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Enable | %Cyan%Required internet for download dependencies (1.9MB)                                    
-%nhcolor% 07 "  %Green%[2] | Disable                                                                                    
+%nhcolor% 07 "  %green%[1] | Enable | %cyan%Required internet for download dependencies (1.9MB)                                    
+%nhcolor% 07 "  %green%[2] | Disable                                                                                    
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%NOTE: Superlite version you need enable Action Center & Notification to using Clipboard or Snip & sketch. 
+%nhcolor% 07 "  %red%NOTE: Superlite version you need enable Action Center & Notification to using Clipboard or Snip & sketch. 
 %nhcolor% 07 "   Superlite or Compact Version 2004/2009 Dependencies required to enable Clipboard
-%nhcolor% 07 "  - %Yellow%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
-%nhcolor% 07 "  - %Yellow%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
-%nhcolor% 07 "  - %Yellow%Microsoft.VCLibs.140.00_14.0.27810.0_x64
-%nhcolor% 07 "  - %Yellow%Microsoft.VCLibs.140.00_14.0.27810.0_x86
+%nhcolor% 07 "  - %yellow%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
+%nhcolor% 07 "  - %yellow%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
+%nhcolor% 07 "  - %yellow%Microsoft.VCLibs.140.00_14.0.27810.0_x64
+%nhcolor% 07 "  - %yellow%Microsoft.VCLibs.140.00_14.0.27810.0_x86
 echo.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Microsoft Touch Keyboard (For Tablet Users or Enable Touchpad keyboard)                                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[3] | Enable | %Cyan%Required internet for download dependencies (1.9MB)                                       
+%nhcolor% 07 "  %green%[3] | Enable | %cyan%Required internet for download dependencies (1.9MB)                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Superlite or Compact Version 2004/2009 Dependencies required to enable Touch Keyboard
-%nhcolor% 07 "  - %Yellow%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
-%nhcolor% 07 "  - %Yellow%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
-%nhcolor% 07 "  - %Yellow%Microsoft.VCLibs.140.00_14.0.27810.0_x64
-%nhcolor% 07 "  - %Yellow%Microsoft.VCLibs.140.00_14.0.27810.0_x86
+%nhcolor% 07 "  - %yellow%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
+%nhcolor% 07 "  - %yellow%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
+%nhcolor% 07 "  - %yellow%Microsoft.VCLibs.140.00_14.0.27810.0_x64
+%nhcolor% 07 "  - %yellow%Microsoft.VCLibs.140.00_14.0.27810.0_x86
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] | Back to menu
+%nhcolor% 07 "  %green%[0] | Back to menu
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -5418,7 +5419,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Enable Clipboard
+%nhcolor% 07 " %red%Enable Clipboard
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3vyb5eI" -o"Clipboard_Dependencies.zip"
 cls
@@ -5428,9 +5429,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Clipboard_Dependencies.zip') do set "MD5=%%N"
 if %MD5% equ c9319a8a7076b0b47f321be7822c85b8 (
-%nhcolor% 08 " %Green%| PASS | %White%Clipboard_Dependencies.zip
+%nhcolor% 08 " %green%| PASS | %white%Clipboard_Dependencies.zip
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Clipboard_Dependencies.zip
+%nhcolor% 08 " %red%| FAIL | Clipboard_Dependencies.zip
 del /q /f /s "Clipboard_Dependencies.zip" >nul
 goto :ErrorMD5
 )
@@ -5518,7 +5519,7 @@ rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
 cls
-%nhcolor% 07 " %Red%Enable Touch Keyboard
+%nhcolor% 07 " %red%Enable Touch Keyboard
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3vyb5eI" -o"Touch_keyboard_Dependencies.zip"
 cls
@@ -5528,9 +5529,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Touch_keyboard_Dependencies.zip') do set "MD5=%%N"
 if %MD5% equ c9319a8a7076b0b47f321be7822c85b8 (
-%nhcolor% 08 " %Green%| PASS | %White%Touch_keyboard_Dependencies.zip
+%nhcolor% 08 " %green%| PASS | %white%Touch_keyboard_Dependencies.zip
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Touch_keyboard_Dependencies.zip
+%nhcolor% 08 " %red%| FAIL | Touch_keyboard_Dependencies.zip
 del /q /f /s "Touch_keyboard_Dependencies.zip" >nul
 goto :ErrorMD5
 )
@@ -5576,21 +5577,21 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  COMPACT OS LZX (for SSD/NvME)                            
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | COMPACT OS LZX [LZMS]                                
-%nhcolor% 07 "  %Green%[2] | COMPACT OS NORMAL                                    
+%nhcolor% 07 "  %green%[1] | COMPACT OS LZX [LZMS]                                
+%nhcolor% 07 "  %green%[2] | COMPACT OS NORMAL                                    
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "                                %Red% /_\ HDD Highly Not recommended to Use LZX /_\          
+%nhcolor% 07 "                                %red% /_\ HDD Highly Not recommended to Use LZX /_\          
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  %White%Folder and files be compressed                      
-%nhcolor% 07 "  %Red%"C:\Program Files"                                       
-%nhcolor% 07 "  %Red%"C:\Program Files (x86)"                                 
-%nhcolor% 07 "  %Red%"C:\ProgramData"                                         
-%nhcolor% 07 "  %Red%"C:\Users"                                               
-%nhcolor% 07 "  %Red%"C:\Windows"                                             
+%nhcolor% 07 "  %white%Folder and files be compressed                      
+%nhcolor% 07 "  %red%"C:\Program Files"                                       
+%nhcolor% 07 "  %red%"C:\Program Files (x86)"                                 
+%nhcolor% 07 "  %red%"C:\ProgramData"                                         
+%nhcolor% 07 "  %red%"C:\Users"                                               
+%nhcolor% 07 "  %red%"C:\Windows"                                             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "                           %Red% NOTE: it take 5min~10min on SSD to finish (HDD 30m~1h)   
+%nhcolor% 07 "                           %red% NOTE: it take 5min~10min on SSD to finish (HDD 30m~1h)   
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -5652,21 +5653,21 @@ color 0E
 cls
 @echo off
 set ESC=
-set Green=%ESC%[32m
-set White=%ESC%[37m
-set Cyan=%ESC%[36m
-set Magenta=%ESC%[35m
-set Red=%ESC%[31m
-set Yellow=%ESC%[33m
-set Lightgray=%ESC%[37m
-set Bold=%ESC%[1m
+set green=%ESC%[32m
+set white=%ESC%[37m
+set cyan=%ESC%[36m
+set magenta=%ESC%[35m
+set red=%ESC%[31m
+set yellow=%ESC%[33m
+set white=%ESC%[37m
+set bright=%ESC%[1m
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  %white%Stops Windows Updates until 2077 (for version 1703 or higher version)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 " [1] | %cyan%Pause Windows Update until 2077         
 %nhcolor% 07 " [0] | %cyan%Back to menu                
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 " NOTE: This only to stop Windows Update (Cumulative update), %Yellow%Drivers%White%/%Yellow%MS Store%White%/%Yellow%Defenders %White%Update will works as normal.
+%nhcolor% 07 " NOTE: This only to stop Windows Update (Cumulative update), %yellow%Drivers%white%/%yellow%MS Store%white%/%yellow%Defenders %white%Update will works as normal.
 %nhcolor% 07 " NOTE: To Pause in Windows 11 > Click > Windows Update > Click Pause and press 1 to Pause until 2077.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
@@ -5747,13 +5748,13 @@ goto begin
 :op7
 color 0E
 cls
-%nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Right click Take Ownership Menu                          
-%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Add                                                  
-%nhcolor% 07 "  %Green%[2] | Removed                                              
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
-%nhcolor% 07 " ====================================================================================================================="
+echo "================================================================================================================"
+echo " Right click Take Ownership Menu                          												      "
+echo "----------------------------------------------------------------------------------------------------------------"
+echo " %green%[1] | Add                                                  											  "
+echo " %green%[2] | Removed                                              											  "
+echo " %green%[0] | Back to menu                                         											  "
+echo "================================================================================================================"
 timeout /t 2 >nul
 set /p op=Type option:
 if "%op%"=="1" goto op77
@@ -5795,13 +5796,13 @@ goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  %Green%[1] %Cyan%>%White% Action Center and Notification                           
-%nhcolor% 07 "  %Green%[2] %Cyan%>%White% Print Spooler for Printer (services)                                                  
-%nhcolor% 07 "  %Green%[3] %Cyan%>%White% Windows Hello (Biometrics) for Superlite - Non Administrator
-%nhcolor% 07 "  %Green%[4] %Cyan%>%White% TabletInputService (services)
-%nhcolor% 07 "  %Green%[5] %Cyan%>%White% Bing Search Highlights
+%nhcolor% 07 "  %green%[1] %cyan%>%white% Action Center and Notification                           
+%nhcolor% 07 "  %green%[2] %cyan%>%white% Print Spooler for Printer (services)                                                  
+%nhcolor% 07 "  %green%[3] %cyan%>%white% Windows Hello (Biometrics) for Superlite - Non Administrator
+%nhcolor% 07 "  %green%[4] %cyan%>%white% TabletInputService (services)
+%nhcolor% 07 "  %green%[5] %cyan%>%white% Bing Search Highlights
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] %Yellow%Back to menu                                  
+%nhcolor% 07 "  %green%[0] %yellow%Back to menu                                  
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
@@ -5936,7 +5937,7 @@ cls
 %nhcolor% 07 "  [1] > Enable                                                  
 %nhcolor% 07 "  [2] > Disable
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  NOTE: %Red%Windows 10/11 SUPERLITE/SE is %yellow%Disable %Red%by Default.                      
+%nhcolor% 07 "  NOTE: %red%Windows 10/11 SUPERLITE/SE is %yellow%Disable %red%by Default.                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  [0] > Back to menu                                  
 %nhcolor% 07 " ====================================================================================================================="
@@ -5959,7 +5960,7 @@ cls
 %nhcolor% 07 "  [1] > Enable                                                  
 %nhcolor% 07 "  [2] > Disable
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  NOTE: %Red%SUPERLITE/SE Bionmetric only working on Non Administrator Account.                      
+%nhcolor% 07 "  NOTE: %red%SUPERLITE/SE Bionmetric only working on Non Administrator Account.                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  [0] > Back to menu                                  
 %nhcolor% 07 " ====================================================================================================================="
@@ -5999,7 +6000,7 @@ cls
 %nhcolor% 07 "  [1] > Enable                                                  
 %nhcolor% 07 "  [2] > Disable
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  %Yellow%NOTE: If you cant typing in some Apps please enable TabletInputService for SUPERLITE/SE.             
+%nhcolor% 03 "  %yellow%NOTE: If you cant typing in some Apps please enable TabletInputService for SUPERLITE/SE.             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  [0] > Back to menu                                  
 %nhcolor% 07 " ====================================================================================================================="
@@ -6082,35 +6083,35 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Action Center and Notification                           
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Enable                                               
-%nhcolor% 07 "  %Green%[2] | Disable                                              
+%nhcolor% 07 "  %green%[1] | Enable                                               
+%nhcolor% 07 "  %green%[2] | Disable                                              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Cortana                                                  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[3] | Enable                                               
-%nhcolor% 07 "  %Green%[4] | Disable                                              
+%nhcolor% 07 "  %green%[3] | Enable                                               
+%nhcolor% 07 "  %green%[4] | Disable                                              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Print Spooler for Printer (services)                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[5] | Enable  | Service Auto                                              
-%nhcolor% 07 "  %Green%[6] | Disable | Service Manual
-%nhcolor% 07 "  NOTE: %Red%Windows 10 SUPERLITE/SE is %yellow%Disable %Red%by Default.                                          
+%nhcolor% 07 "  %green%[5] | Enable  | Service Auto                                              
+%nhcolor% 07 "  %green%[6] | Disable | Service Manual
+%nhcolor% 07 "  NOTE: %red%Windows 10 SUPERLITE/SE is %yellow%Disable %red%by Default.                                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Cortana Beta for %yellow%Windows 10 Version 2004/2009                                                  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[7] | Install Cortana Beta   | %Red%Required internet for downloads (84.4MB) | %Yellow%2.2007.9736.0
-%nhcolor% 07 "  %Green%[8] | Uninstall Cortana Beta |  
+%nhcolor% 07 "  %green%[7] | Install Cortana Beta   | %red%Required internet for downloads (84.4MB) | %yellow%2.2007.9736.0
+%nhcolor% 07 "  %green%[8] | Uninstall Cortana Beta |  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Windows Hello (Biometrics) for Superlite - Non Administrator
+%nhcolor% 0D "  %white%Windows Hello (Biometrics) for Superlite - Non Administrator
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [9]  | %Green%Enable"
-%nhcolor% 03 "  [10] | %Green%Disable"
+%nhcolor% 03 "  [9]  | %green%Enable"
+%nhcolor% 03 "  [10] | %green%Disable"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [11]  | %Green%Enabled - TabletInputService"
-%nhcolor% 03 "  [12]  | %Green%Disable - TabletInputService"
-%nhcolor% 03 "  %Yellow%NOTE: If you cant typing in some Apps please enable TabletInputService for SUPERLITE/SE.
+%nhcolor% 03 "  [11]  | %green%Enabled - TabletInputService"
+%nhcolor% 03 "  [12]  | %green%Disable - TabletInputService"
+%nhcolor% 03 "  %yellow%NOTE: If you cant typing in some Apps please enable TabletInputService for SUPERLITE/SE.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -6267,8 +6268,8 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Cleanup Windows Store Cache and Delivery Optimization  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Cleanup now                                        
-%nhcolor% 07 "  %Green%[0] | Back to menu                                       
+%nhcolor% 07 "  %green%[1] | Cleanup now                                        
+%nhcolor% 07 "  %green%[0] | Back to menu                                       
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -6285,21 +6286,21 @@ cls
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %Cyan%  Do Cleaning.                                          
+echo %cyan%  Do Cleaning.                                          
 %nhcolor% 07 " ====================================================================================================================="
 net stop DoSvc
 timeout /t 5 >nul
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %Cyan%  Do Cleaning..
+echo %cyan%  Do Cleaning..
 %nhcolor% 07 " ====================================================================================================================="
 takeown /f "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization" /r /d y >nul 2>nul
 timeout /t 5 >nul
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %Cyan%  Do Cleaning...                                           
+echo %cyan%  Do Cleaning...                                           
 %nhcolor% 07 " ====================================================================================================================="
 rd /Q /S  "%WINDIR%\SoftwareDistribution\Download\" >nul 2>nul
 rd /Q /S  "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\" >nul 2>nul
@@ -6307,7 +6308,7 @@ timeout /t 5 >nul
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %Cyan%  Do Cleaning....                                           
+echo %cyan%  Do Cleaning....                                           
 %nhcolor% 07 " ====================================================================================================================="
 rd /Q /S "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\" >nul 2>nul
 rd /Q /S "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Logs\" >nul 2>nul
@@ -6317,7 +6318,7 @@ timeout /t 5 >nul
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %Cyan%  Do Cleaning.....                                                
+echo %cyan%  Do Cleaning.....                                                
 %nhcolor% 07 " ====================================================================================================================="
 mkdir "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache" >nul 2>nul
 mkdir "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Logs" >nul 2>nul
@@ -6327,7 +6328,7 @@ timeout /t 5 >nul
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %Cyan%  Do Cleaning......
+echo %cyan%  Do Cleaning......
 %nhcolor% 07 " ====================================================================================================================="
 sc config DoSvc "start=" "delayed-auto" >nul 2>nul
 timeout /t 5 >nul
@@ -6427,18 +6428,18 @@ if Not defined WinVerAct (
 Echo:No response from slmgr.vbs
     Exit /B 1
 )
-Echo   %White%Activation Status:%Yellow%%WinVerAct:~0%
+Echo   %white%Activation Status:%yellow%%WinVerAct:~0%
 echo.                               
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | %Yellow%Activated Windows 10 Pro (non-CORE)  - (activation trial - 6 month)                      
-%nhcolor% 07 "  %Green%[2] | %Yellow%Activated for Windows 10 Home (CORE) - (activation trial - 6 month) 
-%nhcolor% 07 "  %Green%[3] | %Yellow%Enter Your Product Key (if you have your own product key please enter here)
-%nhcolor% 07 "  %Green%[4] | %Yellow%Reset
+%nhcolor% 07 "  %green%[1] | %yellow%Activated Windows 10 Pro (non-CORE)  - (activation trial - 6 month)                      
+%nhcolor% 07 "  %green%[2] | %yellow%Activated for Windows 10 Home (CORE) - (activation trial - 6 month) 
+%nhcolor% 07 "  %green%[3] | %yellow%Enter Your Product Key (if you have your own product key please enter here)
+%nhcolor% 07 "  %green%[4] | %yellow%Reset
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] | %Yellow%Back to menu                                        
+%nhcolor% 07 "  %green%[0] | %yellow%Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%Required Internet for Activated.                        
-%nhcolor% 07 "  %Red%NOTE: If you like Windows 10 please buy a original product key.
+%nhcolor% 07 "  %green%Required Internet for Activated.                        
+%nhcolor% 07 "  %red%NOTE: If you like Windows 10 please buy a original product key.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -6487,138 +6488,138 @@ timeout /t 2 >nul
 goto op4
 :ac1
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID% 
-echo  %White%---------------------------------------------------------------------------------------------------------------------
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID% 
+echo  %white%---------------------------------------------------------------------------------------------------------------------
 timeout /t 3 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[                                        ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[                                        ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ =                                      ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ =                                      ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ===                                    ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ===                                    ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ======                                 ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ======                                 ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ =========                              ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ =========                              ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ===============                        ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ===============                        ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ======================                 ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ======================                 ]   
+echo  %white%=====================================================================================================================
 cscript //B "%windir%\system32\slmgr.vbs" /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul
 timeout /t 2 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ===========================            ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ===========================            ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ===============================        ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ===============================        ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ===================================    ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ===================================    ]   
+echo  %white%=====================================================================================================================
 cscript //B "%windir%\system32\slmgr.vbs" /skms kms8.msguides.com >nul
 cscript //B "%windir%\system32\slmgr.vbs" /skms kms8.msguides.com >nul
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ====================================== ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ====================================== ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ====================================== ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ====================================== ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ] 
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ] 
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ ====================================== ]  
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ ====================================== ]  
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ xxxxxxxx Windows is Activated xxxxxxxx ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ xxxxxxxx Windows is Activated xxxxxxxx ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ xxxxxxxx Windows is Activated xxxxxxxx ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ xxxxxxxx Windows is Activated xxxxxxxx ]   
+echo  %white%=====================================================================================================================
 timeout /t 3 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Activated for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %Green%[ Restart required for Activated ]
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ Restart required for Activated ]
+echo  %white%=====================================================================================================================
 timeout /t 5 >nul
 goto :op4
 :ac4
@@ -6626,98 +6627,98 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Win
 if "%var%"=="Home" goto :ac4home
 color 0b
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxx Windows is not Activated xxxxxx ] 
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ] 
+echo  %white%=====================================================================================================================
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /t REG_SZ /d "" /f >nul
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]   
+echo  %white%=====================================================================================================================
 cscript //B "%windir%\system32\slmgr.vbs" -ipk VK7JG-NPHTM-C97JM-9MPGT-3V66T >nul
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /f >nul
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxx Windows is not Activated xxxxxx ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxx Windows is not Activated xxxxxx ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]   
+echo  %white%=====================================================================================================================
 timeout /t 5 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ Restart is Required ]
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ Restart is Required ]
+echo  %white%=====================================================================================================================
 timeout /t 5 >nul
 cls
 goto :op4
 :ac4home
 color 0b
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxx Windows is not Activated xxxxxx ] 
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ] 
+echo  %white%=====================================================================================================================
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /t REG_SZ /d "" /f >nul
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]   
+echo  %white%=====================================================================================================================
 cscript //B "%windir%\system32\slmgr.vbs" -ipk YTMG3-N6DKC-DKB77-7M9GH-8HVX7 >nul
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /f >nul
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxx Windows is not Activated xxxxxx ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]   
+echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ xxxxxx Windows is not Activated xxxxxx ]   
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]   
+echo  %white%=====================================================================================================================
 timeout /t 5 >nul
 cls
-echo  %White%=====================================================================================================================
-echo   %Red%Auto Reset for Windows 10%White% : %Yellow%%EditionID%
-echo  %White%=====================================================================================================================
-echo   [LOADING]   %Green%[ Restart is Required ]
-echo  %White%=====================================================================================================================
+echo  %white%=====================================================================================================================
+echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
+echo  %white%=====================================================================================================================
+echo   [LOADING]   %green%[ Restart is Required ]
+echo  %white%=====================================================================================================================
 timeout /t 5 >nul
 cls
 goto :op4
@@ -6728,15 +6729,15 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Paging file (virtual memory)                             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Disable : Pagefile.sys                               
-%nhcolor% 07 "  %Green%[2] | Enable  : Pagefile.sys [set to 256MB]                
-%nhcolor% 07 "  %Green%[3] | Enable  : Pagefile.sys [set to 3.0GB]                
-%nhcolor% 07 "  %Green%[4] | Enable  : Pagefile.sys [set to 4.0GB]                
-%nhcolor% 07 "  %Green%[5] | Enable  : Pagefile.sys [set to 8.0GB]                
-%nhcolor% 07 "  %Green%[6] | Enable  : Pagefile.sys [set to 16.0GB]               
-%nhcolor% 07 "  %Green%[7] | Enable  : Pagefile.sys [Default System managed]      
+%nhcolor% 07 "  %green%[1] | Disable : Pagefile.sys                               
+%nhcolor% 07 "  %green%[2] | Enable  : Pagefile.sys [set to 256MB]                
+%nhcolor% 07 "  %green%[3] | Enable  : Pagefile.sys [set to 3.0GB]                
+%nhcolor% 07 "  %green%[4] | Enable  : Pagefile.sys [set to 4.0GB]                
+%nhcolor% 07 "  %green%[5] | Enable  : Pagefile.sys [set to 8.0GB]                
+%nhcolor% 07 "  %green%[6] | Enable  : Pagefile.sys [set to 16.0GB]               
+%nhcolor% 07 "  %green%[7] | Enable  : Pagefile.sys [Default System managed]      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%NOTE: Default System managed ex. 4GB of ram Pagefile.sys be using 4GB of size on your drives.
+%nhcolor% 07 "  %red%NOTE: Default System managed ex. 4GB of ram Pagefile.sys be using 4GB of size on your drives.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  [0] | Back to menu                                   
 %nhcolor% 07 " ====================================================================================================================="
@@ -6820,22 +6821,22 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Hibernation / Fastboot / Sleep mode                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Disable : hiberfil.sys                               
-%nhcolor% 07 "  %Green%[2] | Enable  : hiberfil.sys (Full Hibernate will uses 13gb space on your drive)       
-%nhcolor% 07 "  %Green%[5] | Enable  : Enable fastboot without hibernation
-::%nhcolor% 07 "  %Green%[5] | %Yellow%Go here if still not enabled         
-%nhcolor% 07 "        %Red%NOTE: Windows 10/11 Superlite/SE Hibernation/Fastboot disable by default.                      
+%nhcolor% 07 "  %green%[1] | Disable : hiberfil.sys                               
+%nhcolor% 07 "  %green%[2] | Enable  : hiberfil.sys (Full Hibernate will uses 13gb space on your drive)       
+%nhcolor% 07 "  %green%[5] | Enable  : Enable fastboot without hibernation
+::%nhcolor% 07 "  %green%[5] | %yellow%Go here if still not enabled         
+%nhcolor% 07 "        %red%NOTE: Windows 10/11 Superlite/SE Hibernation/Fastboot disable by default.                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Sysmain / Superfetch                                    
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[3] | Disable : Sysmain / Superfetch                       
-%nhcolor% 07 "  %Green%[4] | Enable  : Sysmain / Superfetch                       
+%nhcolor% 07 "  %green%[3] | Disable : Sysmain / Superfetch                       
+%nhcolor% 07 "  %green%[4] | Enable  : Sysmain / Superfetch                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%NOTE: for Laptops/Desktops users can enable hibernation if you want to using sleepmode/standby mode.
-%nhcolor% 07 "  %Red%NOTE: for HDD users enable Sysmain and hibernation for better boot up times and application.
-%nhcolor% 07 "  %Red%NOTE: A computer with 4GB of RAM would have a 3.5GB hiberfil.sys file on your Drives.
+%nhcolor% 07 "  %red%NOTE: for Laptops/Desktops users can enable hibernation if you want to using sleepmode/standby mode.
+%nhcolor% 07 "  %red%NOTE: for HDD users enable Sysmain and hibernation for better boot up times and application.
+%nhcolor% 07 "  %red%NOTE: A computer with 4GB of RAM would have a 3.5GB hiberfil.sys file on your Drives.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -6903,24 +6904,24 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft Xbox Game Bar                                  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Download and Install                          
-%nhcolor% 07 "  %Green%[2] | Removed Xbox Game Bar                         
-%nhcolor% 07 "  %Green%[3] | Enable or Disable Xbox Game Bar
+%nhcolor% 07 "  %green%[1] | Download and Install                          
+%nhcolor% 07 "  %green%[2] | Removed Xbox Game Bar                         
+%nhcolor% 07 "  %green%[3] | Enable or Disable Xbox Game Bar
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"                             
-%nhcolor% 07 "  %Green%[0] | Back to menu                                       
+%nhcolor% 07 "  %green%[0] | Back to menu                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%File Size : %Cyan%56MB                                       
-%nhcolor% 07 "  %Red%Arch      : %Cyan%x64 | x86                                                           
-%nhcolor% 07 "  %Red%Required Internet for download.                          
+%nhcolor% 07 "  %red%File Size : %cyan%56MB                                       
+%nhcolor% 07 "  %red%Arch      : %cyan%x64 | x86                                                           
+%nhcolor% 07 "  %red%Required Internet for download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Microsoft XboxGamingOverlay | %Cyan%5.621.3231.0
+%nhcolor% 07 "  %red%Microsoft XboxGamingOverlay | %cyan%5.621.3231.0
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %white%Last updated - 03/28/2021               
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%NOTE: Close or Minimize GHOST TOOLBOX after finished Installed.                                                 
+%nhcolor% 07 "  %red%NOTE: Close or Minimize GHOST TOOLBOX after finished Installed.                                                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%NOTE: FPS Counter is not supported when running as an administrator account, pls use on non-Administrator account.
-%nhcolor% 07 "  %Red%NOTE: If Xbox Game Bar cannot running on Windows 11 Superlite Please use on Non-Administrator Account.
+%nhcolor% 07 "  %red%NOTE: FPS Counter is not supported when running as an administrator account, pls use on non-Administrator account.
+%nhcolor% 07 "  %red%NOTE: If Xbox Game Bar cannot running on Windows 11 Superlite Please use on Non-Administrator Account.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -6944,10 +6945,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ a6dc8ed0a730091135687100140d692c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 cls
 goto :xbox1strun
@@ -6975,7 +6976,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/39m1pv8" -o"Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx"
@@ -6984,19 +6985,19 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ a6dc8ed0a730091135687100140d692c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :Server2
 )
 :Server2
 cls
-%nhcolor% 08 "%White%Failed - Retry Server 2"
+%nhcolor% 08 "%white%Failed - Retry Server 2"
 timeout /t 5 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - SERVER 2"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - SERVER 2"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/39m1pv8" -o"Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
@@ -7004,19 +7005,19 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ a6dc8ed0a730091135687100140d692c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :Server3
 )
 :Server3
 cls
-%nhcolor% 08 "%White%Failed - Retry Server 3"
+%nhcolor% 08 "%white%Failed - Retry Server 3"
 timeout /t 5 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - SERVER 3"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - SERVER 3"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2QflP2z" -o"Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
@@ -7024,10 +7025,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ a6dc8ed0a730091135687100140d692c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
@@ -7041,9 +7042,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ a6dc8ed0a730091135687100140d692c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
@@ -7056,7 +7057,7 @@ if "%XGAMEBAR=%"=="x86" goto :xboxgamebarx86
 cls
 :xboxgamebarx64
 cls
-echo %Red%Microsoft Xbox Game Bar for %Cyan%X64
+echo %red%Microsoft Xbox Game Bar for %cyan%X64
 cls
 %_7ZA_EXE% x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -7085,7 +7086,7 @@ timeout /t 5 >nul
 goto begin
 :xboxgamebarx86
 cls
-echo %Red%Microsoft Xbox Game Bar for %Cyan%X86
+echo %red%Microsoft Xbox Game Bar for %cyan%X86
 cls
 %_7ZA_EXE% x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -7149,26 +7150,26 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft Xbox Game Pass for PC (Beta) (Supported Windows 10 version 2004/1909/1903 or Higher)  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Download and Install                                
-%nhcolor% 07 "  %Green%[2] | Removed Xbox Game Pass                               
-%nhcolor% 07 "  %Green%[3] | Join Game Pass (website)                             
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                                
+%nhcolor% 07 "  %green%[2] | Removed Xbox Game Pass                               
+%nhcolor% 07 "  %green%[3] | Join Game Pass (website)                             
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%File Size    : %Cyan%152MB                                     
-%nhcolor% 07 "  %Red%Architecture : %Cyan%x64 / x86                                 
-%nhcolor% 07 "  %Red%Servers      : %Cyan%Microsoft                                 
-%nhcolor% 07 "  %Red%Required Internet for download.                          
+%nhcolor% 07 "  %red%File Size    : %cyan%152MB                                     
+%nhcolor% 07 "  %red%Architecture : %cyan%x64 / x86                                 
+%nhcolor% 07 "  %red%Servers      : %cyan%Microsoft                                 
+%nhcolor% 07 "  %red%Required Internet for download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Microsoft Xbox Game Pass | %Cyan%1910.1001.7.0                 
-%nhcolor% 07 "  %Red%7-Zip 19.00                                              
+%nhcolor% 07 "  %red%Microsoft Xbox Game Pass | %cyan%1910.1001.7.0                 
+%nhcolor% 07 "  %red%7-Zip 19.00                                              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Apps Requires: Windows Store/Purchaseapps/XboxIdentityProvider/XboxGamebar/Xbox live
-%nhcolor% 07 "  %Red%(If some Apps is missing you can download through Xbox Game Pass Apps)
+%nhcolor% 07 "  %red%Apps Requires: Windows Store/Purchaseapps/XboxIdentityProvider/XboxGamebar/Xbox live
+%nhcolor% 07 "  %red%(If some Apps is missing you can download through Xbox Game Pass Apps)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Discover your next favorite game. Unlimited access to over 100 high-quality PC games for an introductory 
-%nhcolor% 07 "  %Red%price of $1.00 per month (MSRP $4.99 per month). With a huge variety of games from every genre, theres 
-%nhcolor% 07 "  %Red%something for everyone and enjoy exclusive member deals and discounts. With games 
-%nhcolor% 07 "  %Red%added all the time, youll always have something new to play.
+%nhcolor% 07 "  %red%Discover your next favorite game. Unlimited access to over 100 high-quality PC games for an introductory 
+%nhcolor% 07 "  %red%price of $1.00 per month (MSRP $4.99 per month). With a huge variety of games from every genre, theres 
+%nhcolor% 07 "  %red%something for everyone and enjoy exclusive member deals and discounts. With games 
+%nhcolor% 07 "  %red%added all the time, youll always have something new to play.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -7209,15 +7210,15 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft Zune Music (Groove Music)                                    
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Download and Install                                 
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                                 
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%File Size : %Cyan%45.4MB                                       
-%nhcolor% 07 "  %Red%Arch      : %Cyan%x64 / x86 / ARM                              
-%nhcolor% 07 "  %Red%Servers   : %Cyan%OneDrive Business                         
-%nhcolor% 07 "  %Red%Required Internet for download.                          
+%nhcolor% 07 "  %red%File Size : %cyan%45.4MB                                       
+%nhcolor% 07 "  %red%Arch      : %cyan%x64 / x86 / ARM                              
+%nhcolor% 07 "  %red%Servers   : %cyan%OneDrive Business                         
+%nhcolor% 07 "  %red%Required Internet for download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Microsoft.ZuneMusic | %Cyan%2019.20032.12616.0 - Last Update 08/17/2020            
+%nhcolor% 07 "  %red%Microsoft.ZuneMusic | %cyan%2019.20032.12616.0 - Last Update 08/17/2020            
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -7333,7 +7334,7 @@ for /f %%N in ('hashsum /a md5 wget2-1.99.2.zip') do set "MD5=%%N"
 if %MD5% equ e8bb3d1a6be4cb1d33e13f8b592a405a (
 goto :skip
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "wget2-1.99.2.zip" >nul 2>nul
 goto wgetserver2
 )
@@ -7434,7 +7435,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ 4ea4e22bdca19b6fad62e7a9d75acbf7 (
 goto runtimeinstallx64
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 timeout /t 1 >nul
 del /Q "update" >nul 2>nul
 goto runtimeinstallx64server2
@@ -7447,7 +7448,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ 4ea4e22bdca19b6fad62e7a9d75acbf7 (
 goto runtimeinstallx64
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 timeout /t 1 >nul
 del /Q "update" >nul 2>nul
 goto runtimeinstallx64server3
@@ -7460,7 +7461,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ 4ea4e22bdca19b6fad62e7a9d75acbf7 (
 goto runtimeinstallx64
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 timeout /t 1 >nul
 del /Q "update" >nul 2>nul
 goto runtimeinstallx64
@@ -7476,29 +7477,29 @@ timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 msvcp140d.dll') do set "MD5=%%N"
 if %MD5% equ 3db20b6372df0a621729050588003036 (
 cls
-%nhcolor% 08 " %White%MD5 CHECK RUNTIME: %Green% FILE MATCH "
+%nhcolor% 08 " %white%MD5 CHECK RUNTIME: %green% FILE MATCH "
 timeout /t 5 >nul
 goto installghostboxx64
 ) else (
 cls
-%nhcolor% 08 " %White%MD5 CHECK RUNTIME: %Red% FILE NOT MATCH "
+%nhcolor% 08 " %white%MD5 CHECK RUNTIME: %red% FILE NOT MATCH "
 timeout /t 8 >nul
 goto WTHx64
 )
 
 :WTHx64
 cls
-%nhcolor% 08 " %Red%Seems your internet is blocking the servers, Please use CloudFlare DNS / Google DNS or Any VPN. "
+%nhcolor% 08 " %red%Seems your internet is blocking the servers, Please use CloudFlare DNS / Google DNS or Any VPN. "
 timeout /t 10 >nul
 exit
 :WTHx642
 cls
-%nhcolor% 08 " %Red%Seems your internet is blocking the servers, Please use CloudFlare DNS / Google DNS or Any VPN. "
+%nhcolor% 08 " %red%Seems your internet is blocking the servers, Please use CloudFlare DNS / Google DNS or Any VPN. "
 timeout /t 10 >nul
 goto ghst
 :WTHx643
 cls
-%nhcolor% 08 " %Red%Seems your internet is blocking the servers, Please use CloudFlare DNS / Google DNS or Any VPN. "
+%nhcolor% 08 " %red%Seems your internet is blocking the servers, Please use CloudFlare DNS / Google DNS or Any VPN. "
 timeout /t 10 >nul
 goto begin
 
@@ -7547,7 +7548,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ d6a045521d5dced8cb955416db57941d (
 goto ghostboxinstallx64
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /Q "update" >nul 2>nul
 goto ghostboxx64server2
 )
@@ -7559,7 +7560,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ d6a045521d5dced8cb955416db57941d (
 goto ghostboxinstallx64
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /Q "update" >nul 2>nul
 goto WTHx64
 )
@@ -7633,7 +7634,7 @@ for /f %%N in ('hashsum /a md5 wget2-1.99.2.zip') do set "MD5=%%N"
 if %MD5% equ e8bb3d1a6be4cb1d33e13f8b592a405a (
 goto :skip
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "wget2-1.99.2.zip" >nul
 goto wgetserver2
 )
@@ -7736,7 +7737,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ 7c122d0a8e629868123460b12cc5f291 (
 goto runtimeinstallx86
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 timeout /t 1 >nul
 del /Q "update" >nul 2>nul
 goto runtimeinstallx86server2
@@ -7749,7 +7750,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ 7c122d0a8e629868123460b12cc5f291 (
 goto runtimeinstallx86
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 timeout /t 1 >nul
 del /Q "update" >nul 2>nul
 goto runtimeinstallx86server3
@@ -7762,7 +7763,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ 7c122d0a8e629868123460b12cc5f291 (
 goto runtimeinstallx86
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 timeout /t 1 >nul
 del /Q "update" >nul 2>nul
 goto runtimeinstallx86
@@ -7778,12 +7779,12 @@ timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 msvcp140d.dll') do set "MD5=%%N"
 if %MD5% equ 4b90c9fa4510da01d7f067986e2066a3 (
 cls
-%nhcolor% 08 " %White%MD5 CHECK RUNTIME: %Green% FILE MATCH "
+%nhcolor% 08 " %white%MD5 CHECK RUNTIME: %green% FILE MATCH "
 timeout /t 5 >nul
 goto installghostboxx86
 ) else (
 cls
-%nhcolor% 08 " %White%MD5 CHECK RUNTIME: %Red% FILE NOT MATCH "
+%nhcolor% 08 " %white%MD5 CHECK RUNTIME: %red% FILE NOT MATCH "
 timeout /t 8 >nul
 goto WTHx64
 )
@@ -7832,7 +7833,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ fa172f0f1be23301a80407a187b7f470 (
 goto ghostboxinstallx86
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 goto ghostboxx86server2
 )
 
@@ -7842,7 +7843,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ fa172f0f1be23301a80407a187b7f470 (
 goto ghostboxinstallx86
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 goto WTHx64
 )
 
@@ -7882,18 +7883,18 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft Your Phone                                    
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Download and Install                                 
-%nhcolor% 07 "  %Green%[2] | Remove Your Phone         
+%nhcolor% 07 "  %green%[1] | Download and Install                                 
+%nhcolor% 07 "  %green%[2] | Remove Your Phone         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%File Size : %Cyan%92.2MB                                       
-%nhcolor% 07 "  %Red%Arch      : %Cyan%x64 | x86 | ARM                              
-%nhcolor% 07 "  %Red%Servers   : %cyan%Microsoft OneDrive Business                     
-%nhcolor% 07 "  %Red%Required Internet for download.                          
+%nhcolor% 07 "  %red%File Size : %cyan%92.2MB                                       
+%nhcolor% 07 "  %red%Arch      : %cyan%x64 | x86 | ARM                              
+%nhcolor% 07 "  %red%Servers   : %cyan%Microsoft OneDrive Business                     
+%nhcolor% 07 "  %red%Required Internet for download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%Microsoft.YourPhone | %Cyan%2020.724.243.0   
-%nhcolor% 07 "  %Red%NOTE: YourPhone only works on Compact version
+%nhcolor% 07 "  %red%Microsoft.YourPhone | %cyan%2020.724.243.0   
+%nhcolor% 07 "  %red%NOTE: YourPhone only works on Compact version
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %white%Last updated - 07/25/2020           
 %nhcolor% 07 " ====================================================================================================================="
@@ -7916,7 +7917,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" goto yourphonex86
 cls
 :yourphonex64
 cls
-echo %Red%Microsoft Your Phone for x64
+echo %red%Microsoft Your Phone for x64
 timeout /t 3 >nul
 cls
 cd "%GHOST_DATA%"
@@ -7948,9 +7949,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 6bf3415afee288b08fe7c5e8dc8972ed (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
@@ -7993,7 +7994,7 @@ timeout /t 2 >nul
 goto begin
 :yourphonex86
 cls
-echo %Red%Microsoft Your Phone for x86
+echo %red%Microsoft Your Phone for x86
 timeout /t 3 >nul
 cls
 cd "%GHOST_DATA%"
@@ -8025,9 +8026,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 6bf3415afee288b08fe7c5e8dc8972ed (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
@@ -8066,7 +8067,7 @@ powershell -ExecutionPolicy Bypass -File "remove.yourphone.ps1"
 cls
 del /q /s "remove.yourphone.ps1" >nul 2>nul
 cls
-echo %Red%Microsoft Your Phone completely remove.
+echo %red%Microsoft Your Phone completely remove.
 timeout /t 3 >nul
 goto begin
 cls
@@ -8078,11 +8079,11 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" goto x86rev
 :x64rev
 timeout /t 1 >nul
 cd "%GHOST_DIR%" >nul 2>nul		
-for /f %%N in ('hashsum /a md5 toolbox.updater.x64.exe') do set "MD5=%%N"
+for /f %%N in ('hashsum /a md5 %GHOST_DATA%\toolbox.updater.x64.exe') do set "MD5=%%N"
 if %MD5% equ 939048212bbcf1eabddc35d0fa7023ad (
 goto beginx
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 goto toolboxdx64
 )
 :x86rev
@@ -8092,7 +8093,7 @@ for /f %%N in ('hashsum /a md5 toolbox.updater.x86.exe') do set "MD5=%%N"
 if %MD5% equ 88e69dcec7d1daf2af821a6a491c00cb (
 goto beginx
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 goto toolboxdx86
 )
 :toolboxdx64
@@ -8140,7 +8141,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ d6a045521d5dced8cb955416db57941d (
 goto ghostboxinstallx64
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 goto ghostboxx64server2
 )
 :ghostboxx64server2
@@ -8220,7 +8221,7 @@ for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ fa172f0f1be23301a80407a187b7f470 (
 goto ghostboxinstallx86
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 goto ghostboxx86server2
 )
 :ghostboxx86server2
@@ -8272,7 +8273,7 @@ goto GETSTOREX01
 
 :GETSTOREX01
 cls
-echo %White%Updating DesktopApp Installer.. Please Wait..
+echo %white%Updating DesktopApp Installer.. Please Wait..
 echo.
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/43Bt4Cu" -o"Microsoft.DesktopAppInstaller.Appx"
 timeout /t 1 >nul
@@ -8335,43 +8336,43 @@ cd "%GHOST_DATA%" >nul 2>nul
 del /s /q "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" >nul 2>nul
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Store and Xbox Console Companion / %Yellow%UWP               
+%nhcolor% 07 "  Microsoft Store and Xbox Console Companion / %yellow%UWP               
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 06 " %Green%OPT  %Yellow%|     %White%| LIST                                            | %Red%SIZE   %White%| %Red%Desc
+%nhcolor% 06 " %green%OPT  %yellow%|     %white%| LIST                                            | %red%SIZE   %white%| %red%Desc
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 06 " %Green%[1]  %Yellow%| %White%UWP | Microsoft Store & Xbox Console Companion        | %Red%188MB  %White%|
-%nhcolor% 06 " %Green%[2]  %Yellow%| %White%UWP | Removed Microsoft Store and Xbox Apps                                                    
+%nhcolor% 06 " %green%[1]  %yellow%| %white%UWP | Microsoft Store & Xbox Console Companion        | %red%188MB  %white%|
+%nhcolor% 06 " %green%[2]  %yellow%| %white%UWP | Removed Microsoft Store and Xbox Apps                                                    
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 06 " %Green%     %Yellow%|     %White%| LIST / USERS REQUEST                                       
+%nhcolor% 06 " %green%     %yellow%|     %white%| LIST / USERS REQUEST                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 06 " %Green%[10] %Yellow%| %White%UWP | Microsoft 3D Paint [Latest Version]             | %Red% 63MB  %White%|
-%nhcolor% 06 " %Green%[11] %Yellow%| %White%UWP | Microsoft Snip & Sketch [Latest Version]        | %Red% 15MB  %White%|
-%nhcolor% 06 " %Green%[12] %Yellow%| %White%UWP | Microsoft Calculator 2020.2103.8.0              | %Red% 30MB  %White%|
-%nhcolor% 06 " %Green%[13] %Yellow%| %White%UWP | Microsoft Sticky Notes 3.7.78                   | %Red% 61MB  %White%|
-%nhcolor% 06 " %Green%[14] %Yellow%| %White%UWP | Microsoft Office Hub 18.2006.1031               | %Red% 16MB  %White%|
-%nhcolor% 06 " %Green%[15] %Yellow%| %White%UWP | Microsoft Windows Camera 2021.105               | %Red% 48MB  %White%|
-%nhcolor% 06 " %Green%[16] %Yellow%| %White%UWP | Microsoft OneNote 16002.13127                   | %Red%204MB  %White%|
-%nhcolor% 06 " %Green%[17] %Yellow%| %White%UWP | Microsoft Photos [Latest Version]               | %Red% 75MB  %White%|
-%nhcolor% 06 " %Green%[18] %Yellow%| %White%UWP | Netflix [Latest Version]                        | %Red%  9MB  %White%|
-%nhcolor% 06 " %Green%[19] %Yellow%| %White%UWP | Spotify Music 1.143.700.0                       | %Red%113MB  %White%|
-%nhcolor% 06 " %Green%[20] %Yellow%| %White%UWP | Microsoft HEVC Video Extension (codec)          | %Red%  6MB  %White%|
-%nhcolor% 06 " %Green%[21] %Yellow%| %White%UWP | NVIDIA Control Panel 8.1.960.0 (DCH) x64        | %Red%  8MB  %White%|
-%nhcolor% 06 " %Green%[22] %Yellow%| %White%UWP | Intel Graphics Command Center 1.100.3370.70     | %Red%144MB  %White%| 6th Gen Intel Core Platforms or newer
-%nhcolor% 06 " %Green%[23] %Yellow%| %White%UWP | Intel Graphics Control Panel 3.3.0.0_x64        | %Red% 10MB  %White%|
-%nhcolor% 06 " %Green%[24] %Yellow%| %White%UWP | Microsoft Windows Terminal [Latest Version]     | %Red%  8MB  %White%|
-%nhcolor% 06 " %Green%[25] %Yellow%| %White%UWP | Microsoft Paint 10.2103.1.0                     | %Red% 17MB  %White%|
-%nhcolor% 06 " %Green%[26] %Yellow%| %White%x64 | Microsoft Classic Calculator 6.3                | %Red%2.8MB  %White%|
-%nhcolor% 06 " %Green%[27] %Yellow%| %White%UWP | WhatsApp Desktop x64 [Latest Version]           | %Red%154MB  %White%| Windows Version 2004 or higher required
-%nhcolor% 06 " %Green%[28] %Yellow%| %White%UWP | Telegram Desktop [Latest Version]               | %Red% 54MB  %White%|
+%nhcolor% 06 " %green%[10] %yellow%| %white%UWP | Microsoft 3D Paint [Latest Version]             | %red% 63MB  %white%|
+%nhcolor% 06 " %green%[11] %yellow%| %white%UWP | Microsoft Snip & Sketch [Latest Version]        | %red% 15MB  %white%|
+%nhcolor% 06 " %green%[12] %yellow%| %white%UWP | Microsoft Calculator 2020.2103.8.0              | %red% 30MB  %white%|
+%nhcolor% 06 " %green%[13] %yellow%| %white%UWP | Microsoft Sticky Notes 3.7.78                   | %red% 61MB  %white%|
+%nhcolor% 06 " %green%[14] %yellow%| %white%UWP | Microsoft Office Hub 18.2006.1031               | %red% 16MB  %white%|
+%nhcolor% 06 " %green%[15] %yellow%| %white%UWP | Microsoft Windows Camera 2021.105               | %red% 48MB  %white%|
+%nhcolor% 06 " %green%[16] %yellow%| %white%UWP | Microsoft OneNote 16002.13127                   | %red%204MB  %white%|
+%nhcolor% 06 " %green%[17] %yellow%| %white%UWP | Microsoft Photos [Latest Version]               | %red% 75MB  %white%|
+%nhcolor% 06 " %green%[18] %yellow%| %white%UWP | Netflix [Latest Version]                        | %red%  9MB  %white%|
+%nhcolor% 06 " %green%[19] %yellow%| %white%UWP | Spotify Music 1.143.700.0                       | %red%113MB  %white%|
+%nhcolor% 06 " %green%[20] %yellow%| %white%UWP | Microsoft HEVC Video Extension (codec)          | %red%  6MB  %white%|
+%nhcolor% 06 " %green%[21] %yellow%| %white%UWP | NVIDIA Control Panel 8.1.960.0 (DCH) x64        | %red%  8MB  %white%|
+%nhcolor% 06 " %green%[22] %yellow%| %white%UWP | Intel Graphics Command Center 1.100.3370.70     | %red%144MB  %white%| 6th Gen Intel Core Platforms or newer
+%nhcolor% 06 " %green%[23] %yellow%| %white%UWP | Intel Graphics Control Panel 3.3.0.0_x64        | %red% 10MB  %white%|
+%nhcolor% 06 " %green%[24] %yellow%| %white%UWP | Microsoft Windows Terminal [Latest Version]     | %red%  8MB  %white%|
+%nhcolor% 06 " %green%[25] %yellow%| %white%UWP | Microsoft Paint 10.2103.1.0                     | %red% 17MB  %white%|
+%nhcolor% 06 " %green%[26] %yellow%| %white%x64 | Microsoft Classic Calculator 6.3                | %red%2.8MB  %white%|
+%nhcolor% 06 " %green%[27] %yellow%| %white%UWP | WhatsApp Desktop x64 [Latest Version]           | %red%154MB  %white%| Windows Version 2004 or higher required
+%nhcolor% 06 " %green%[28] %yellow%| %white%UWP | Telegram Desktop [Latest Version]               | %red% 54MB  %white%|
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 06 " %Green%[0]  %Yellow%|%White% Back to menu      
+%nhcolor% 06 " %green%[0]  %yellow%|%white% Back to menu      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Red%NOTE: if CONTROL PANEL USING "%Yellow%UWP" PLS INSTALL MS STORE. %White%(Intel HD/Realtek/Razer/Alienware/Acer/Asus/etc etc)
-%nhcolor% 07 "  %Yellow%NOTE: For Windows 11 user Please update microsoft store before use.
-%nhcolor% 07 "  %Yellow%NOTE: For Windows 11 user Some apps cannot be running on Administrator account please use on Non-Administrator.
-%nhcolor% 07 "  %Yellow%NOTE: Some of UWP Apps Microsoft Edge is required to run Tiktok/Messenger/Facebook/etc & WIN11 enable adminfilter.
-%nhcolor% 07 "  %Yellow%NOTE: For Xbox Apps please Fix them in settings and install all mising and install Microsoft Webview2.
-%nhcolor% 07 "  %Yellow%NOTE: For Latest Version UWP Apps Without MS Store i suggest can use Windows Package Manager %Cyan%Option 43%Yellow%.
+%nhcolor% 07 "  %red%NOTE: if CONTROL PANEL USING "%yellow%UWP" PLS INSTALL MS STORE. %white%(Intel HD/Realtek/Razer/Alienware/Acer/Asus/etc etc)
+%nhcolor% 07 "  %yellow%NOTE: For Windows 11 user Please update microsoft store before use.
+%nhcolor% 07 "  %yellow%NOTE: For Windows 11 user Some apps cannot be running on Administrator account please use on Non-Administrator.
+%nhcolor% 07 "  %yellow%NOTE: Some of UWP Apps Microsoft Edge is required to run Tiktok/Messenger/Facebook/etc & WIN11 enable adminfilter.
+%nhcolor% 07 "  %yellow%NOTE: For Xbox Apps please Fix them in settings and install all mising and install Microsoft Webview2.
+%nhcolor% 07 "  %yellow%NOTE: For Latest Version UWP Apps Without MS Store i suggest can use Windows Package Manager %cyan%Option 43%yellow%.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 0 >nul
 set /p op=Type option:
@@ -8406,8 +8407,8 @@ goto op10
 :ErrorMD5msstore
 echo.
 cls
-%nhcolor% 08 "%Yellow%If you get a downloaded failed All server 1~3, seems like your Internet provider is block the servers,"
-%nhcolor% 08 "%Yellow%can try using any VPN to download it or using Google DNS or CloudFlare DNS."
+%nhcolor% 08 "%yellow%If you get a downloaded failed All server 1~3, seems like your Internet provider is block the servers,"
+%nhcolor% 08 "%yellow%can try using any VPN to download it or using Google DNS or CloudFlare DNS."
 timeout /t 15 >nul
 goto op10
 :store1
@@ -8418,7 +8419,7 @@ if "%STOREARC%"=="x86" goto :storex86
 cls
 :storex64
 cls
-echo Microsoft Store and Xbox Console Companion for %Red%X64
+echo Microsoft Store and Xbox Console Companion for %red%X64
 timeout /t 5 >nul
 cls
 cd "%GHOST_DATA%"
@@ -8515,7 +8516,7 @@ timeout /t 2 >nul
 goto begin
 :storex86
 cls
-echo Microsoft Store and Xbox Console Companion for %Red%X86
+echo Microsoft Store and Xbox Console Companion for %red%X86
 timeout /t 5 >nul
 cls
 cd "%GHOST_DATA%"
@@ -8629,7 +8630,7 @@ if exist "%Windir%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2t
 goto skipkillstartmenu
 :killstartmenu
 cls
-echo  %Yellow%Checking latest update StartIsBack for SUPERLITE SE
+echo  %yellow%Checking latest update StartIsBack for SUPERLITE SE
 timeout /t 3 >nul
 taskkill /F /IM StartMenuExperienceHost.exe >nul
 ::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c rd /q /s "%Windir%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy" >nul
@@ -8691,7 +8692,7 @@ cls
 echo Completely Remove.
 del /q /s "storeremove.ps1" >nul 2>nul
 cls
-echo %Red%Microsoft Store and Xbox Apps completely remove.
+echo %red%Microsoft Store and Xbox Apps completely remove.
 timeout /t 3 >nul
 goto begin
 cls
@@ -8704,16 +8705,16 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Daum Potplayer x64 / x86                                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | x64 Download                                         
-%nhcolor% 07 "  %Green%[2] | x32 Download                                         
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | x64 Download                                         
+%nhcolor% 07 "  %green%[2] | x32 Download                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%File Size : %Cyan%27MB                                         
-%nhcolor% 07 "  %Green%Arch      : %Cyan%x86 / x64                                    
-%nhcolor% 07 "  %Green%Servers   : %Cyan%potplayer.daum.net                           
-%nhcolor% 07 "  %Green%Required Internet for download.                          
+%nhcolor% 07 "  %green%File Size : %cyan%27MB                                         
+%nhcolor% 07 "  %green%Arch      : %cyan%x86 / x64                                    
+%nhcolor% 07 "  %green%Servers   : %cyan%potplayer.daum.net                           
+%nhcolor% 07 "  %green%Required Internet for download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%Latest version                                           
+%nhcolor% 07 "  %green%Latest version                                           
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -8755,19 +8756,19 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Microsoft Edge Stable / Beta / Dev / Canary (browser)  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | %White%Download Edge Chromium (Stable release) %Yellow%(use this version for Tiktok/Messenger/Instagram/etc etc)             
-%nhcolor% 07 "  %Green%[2] | %White%Download Edge Chromium (Beta)                        
-%nhcolor% 07 "  %Green%[3] | %White%Download Edge Chromium (Developer)                          
-%nhcolor% 07 "  %Green%[4] | %White%Download Edge Chromium (Canary)  
+%nhcolor% 07 "  %green%[1] | %white%Download Edge Chromium (Stable release) %yellow%(use this version for Tiktok/Messenger/Instagram/etc etc)             
+%nhcolor% 07 "  %green%[2] | %white%Download Edge Chromium (Beta)                        
+%nhcolor% 07 "  %green%[3] | %white%Download Edge Chromium (Developer)                          
+%nhcolor% 07 "  %green%[4] | %white%Download Edge Chromium (Canary)  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 " %Red% NOTE: For Windows 11 to use UWP Apps tiktok/reddit/messenger/facebook/etc, please enable adminfilter option 42.
+%nhcolor% 07 " %red% NOTE: For Windows 11 to use UWP Apps tiktok/reddit/messenger/facebook/etc, please enable adminfilter option 42.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"   
-%nhcolor% 07 "  %Green%[5] | %White%Download Webview2  
+%nhcolor% 07 "  %green%[5] | %white%Download Webview2  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"                     
-%nhcolor% 07 "  %Green%[0] | %White%Back to menu                                        
+%nhcolor% 07 "  %green%[0] | %white%Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Servers : %Cyan%microsoft                                      
-%nhcolor% 07 "  Arch    : %Cyan%x86 / x64                                      
+%nhcolor% 07 "  Servers : %cyan%microsoft                                      
+%nhcolor% 07 "  Arch    : %cyan%x86 / x64                                      
 %nhcolor% 07 "  Required Internet for download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Version : Latest                                         
@@ -8837,16 +8838,16 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo  %White%Mozilla Firefox (browser)                                
+echo  %white%Mozilla Firefox (browser)                                
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Green%[1] %White%Download                                             
-echo  %Green%[0] %White%Back to menu                                         
+echo  %green%[1] %white%Download                                             
+echo  %green%[0] %white%Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  Servers : %Yellow%mozilla                                        
-echo  Arch    : %Yellow%x86 / x64                                      
-echo  %White%Required Internet for download.                          
+echo  Servers : %yellow%mozilla                                        
+echo  Arch    : %yellow%x86 / x64                                      
+echo  %white%Required Internet for download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Green%Version : %White%Latest                                         
+echo  %green%Version : %white%Latest                                         
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -8878,11 +8879,11 @@ cls
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SYSTEM\HardwareConfig\Current" /v "BIOSVersion"') do set "DFMT3=%%B"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\HARDWARE\DESCRIPTION\System\CentralProcessor\0" /v "ProcessorNameString"') do set "DFMT4=%%B"
 FOR /f "tokens=2*" %%a in ('Reg Query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v UBR') do set "UBRHEX=%%~b"
-FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild"') do set "DFMT5=%NBlue%%SWhite% %%B"
+FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild"') do set "DFMT5=%bg_blue%%lblack% %%B"
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ProductName"') do set "DFMT6=%%B"
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
 if "%version%" == "Windows 10" (
-FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ReleaseId"') do set "DFMT7=%NRed%%SWhite% %%B "
+FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ReleaseId"') do set "DFMT7=%bg_red%%lblack% %%B "
 )
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do set "CODENAME=%%B"
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "EditionID"') do set "EditionID=%%B"
@@ -8891,10 +8892,10 @@ FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windo
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\.NETFramework" /v "Edition"') do set "spectremod=%%B"
 reg Query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\.NETFramework" | find /i "0x0" > NUL && set "FNETFX4=DISABLE" || set "FNETFX4=ENABLE"
 set /a UBRDEC=%FNETFX4%
-::reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "OSARC=%NMagenta%%SWhite%32bit" || set "OSARC=%NMagenta%%SWhite% 64bit "
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "OSARC=%NMagenta%%SWhite% 64bit "
+::reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "OSARC=%bg_magenta%%lblack%32bit" || set "OSARC=%bg_magenta%%lblack% 64bit "
+if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "OSARC=%bg_magenta%%lblack% 64bit "
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (set "OSARC=%NMagenta%%SWhite% 32bit "
+if "%PROCESSOR_ARCHITECTURE%"=="x86" (set "OSARC=%bg_magenta%%lblack% 32bit "
 )
 set /a UBRDEC=%UBRHEX%
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "GARC=x86" || set "GARC=x64"
@@ -8905,10 +8906,10 @@ for /f "tokens=2 delims=()" %%a in ('wmic timezone get caption /value') do set t
 ::for /f "tokens=6,*" %%f in ('powercfg -list ^| findstr \*') do set PWRPLAN2=%%f
 FOR /F "tokens=2*" %%A in ('
     REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v DisplayVersion 2^> nul 
-') do set "CODENAME=%NGreen%%SWhite% %%B "
+') do set "CODENAME=%bg_green%%lblack% %%B "
 FOR /F "tokens=2*" %%A in ('
     REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Edition 2^> nul 
-') do set "Edition=%BGreen%%SWhite% %%B "
+') do set "Edition=%bg_lgreen%%lblack% %%B "
 FOR /F "tokens=2*" %%A in ('
     REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Youtube_DL 2^> nul 
 ') do set "YT_DL=%%B"
@@ -8920,19 +8921,19 @@ FOR /F "tokens=2*" %%A in ('
 ::)
 ::for /f "tokens=11 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set TPMVER=%%i
 ::for /f "tokens=2 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set TPM=%%i
-::for /f "tokens=2 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set | find /i "TRUE" >NUL && set "TPMX=TPM: %Yellow%TRUE / " || set "TPMX=TPM: %Yellow%NONE "
-set "TPMX=TPM: %Yellow%NONE "
+::for /f "tokens=2 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set | find /i "TRUE" >NUL && set "TPMX=TPM: %yellow%TRUE / " || set "TPMX=TPM: %yellow%NONE "
+set "TPMX=TPM: %yellow%NONE "
 for /f "tokens=11 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set TPMVER=%%i
-for /f %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * 2^>nul ^| find "TRUE"') do set "TPMX=TPM: %Yellow%TRUE / %TPMVER% " || set "TPMX=TPM: %Yellow%NONE "
+for /f %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * 2^>nul ^| find "TRUE"') do set "TPMX=TPM: %yellow%TRUE / %TPMVER% " || set "TPMX=TPM: %yellow%NONE "
 set ESC=
-set Green=%ESC%[32m
-set White=%ESC%[37m
-set Cyan=%ESC%[36m
-set Magenta=%ESC%[35m
-set Red=%ESC%[31m
-set Yellow=%ESC%[33m
-set Lightgray=%ESC%[37m
-set Bold=%ESC%[1m
+set green=%ESC%[32m
+set white=%ESC%[37m
+set cyan=%ESC%[36m
+set magenta=%ESC%[35m
+set red=%ESC%[31m
+set yellow=%ESC%[33m
+set white=%ESC%[37m
+set bright=%ESC%[1m
 del /s /q "%PROGRAMDATA%\ssh\*.dll" 2>nul >nul
 rmdir "%WinDir%\system32\visual" /s /q 2>nul >nul
 rmdir "%WinDir%\Appx" /s /q 2>nul >nul
@@ -8942,10 +8943,10 @@ cls
 for /f "tokens=2" %%i in ('wmic os get caption') do set VERSION1=%%i
 for /f "tokens=3" %%i in ('wmic os get caption') do set VERSION2=%%i
 for /f "tokens=4" %%i in ('wmic os get caption') do set VERSION3=%%i
-::for /f "tokens=2" %%i in ('wmic os get caption') do set OS="%BBlue%%SWhite% %%i "
+::for /f "tokens=2" %%i in ('wmic os get caption') do set OS="%bg_lblue%%lblack% %%i "
 for /f "tokens=2" %%i in ('wmic os get caption') do set OSX="%%i "
-if not exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%Red%MISSING"
-if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%Green%ENABLE"
+if not exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
+if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%green%ENABLE"
 
 if exist "%_7ZA_DLL%" (
 	if exist "%_7ZA_EXE%" (
@@ -8960,18 +8961,18 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 echo  Google Chrome (browser)                                  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Red%[1] %White%Download - Standalone x64 x86
-::echo  %Red%[2] %White%Download (Standalone Install) - x64 (68MB)                                          
-::echo  %Red%[3] %White%Download (Standalone Install) - x86 (66MB)
+echo  %red%[1] %white%Download - Standalone x64 x86
+::echo  %red%[2] %white%Download (Standalone Install) - x64 (68MB)                                          
+::echo  %red%[3] %white%Download (Standalone Install) - x86 (66MB)
 ::http://dl.google.com/update2/installers/ChromeSetup.exe
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Red%[0] %Green%Back to menu                                         
+echo  %red%[0] %green%Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Cyan%Servers : Google                                         
-echo  %Cyan%Arch    : x86 / x64                                      
-echo  %Cyan%Required Internet for download.                          
+echo  %cyan%Servers : Google                                         
+echo  %cyan%Arch    : x86 / x64                                      
+echo  %cyan%Required Internet for download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Cyan%Version : Latest                                         
+echo  %cyan%Version : Latest                                         
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -9036,12 +9037,12 @@ color 0E
 cls
 @echo off
 %nhcolor% 07 ""
-%nhcolor% 0D "  %White%7-Zip for Windows
+%nhcolor% 0D "  %white%7-Zip for Windows
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Install 7zip x64"
-%nhcolor% 03 "  [2]  | %Green%Install 7zip x86"
+%nhcolor% 03 "  [1]  | %green%Install 7zip x64"
+%nhcolor% 03 "  [2]  | %green%Install 7zip x86"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back to menu
+%nhcolor% 03 "  [0]  | %green%Back to menu
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -9082,21 +9083,21 @@ color 0E
 cls
 @echo off
 set ESC=
-set Green=%ESC%[32m
-set White=%ESC%[37m
-set Cyan=%ESC%[36m
-set Magenta=%ESC%[35m
-set Red=%ESC%[31m
-set Yellow=%ESC%[33m
-set Lightgray=%ESC%[37m
-set Bold=%ESC%[1m
+set green=%ESC%[32m
+set white=%ESC%[37m
+set cyan=%ESC%[36m
+set magenta=%ESC%[35m
+set red=%ESC%[31m
+set yellow=%ESC%[33m
+set white=%ESC%[37m
+set bright=%ESC%[1m
 %nhcolor% 07 ""
-%nhcolor% 0D "  %White%Brave browsers (Latest Version)
+%nhcolor% 0D "  %white%Brave browsers (Latest Version)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Brave x64"
-%nhcolor% 03 "  [2]  | %Green%Brave x86
+%nhcolor% 03 "  [1]  | %green%Brave x64"
+%nhcolor% 03 "  [2]  | %green%Brave x86
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back to menu
+%nhcolor% 03 "  [0]  | %green%Back to menu
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -9139,17 +9140,17 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo   %White%Visual C++ Redistributables AIO x86 x64 (80)                 
+echo   %white%Visual C++ Redistributables AIO x86 x64 (80)                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo   %Green%[1] %White%Microsoft Visual C++ 2002-2003-2005-2008-2010-2012-2013-2022 (AIO)
-echo   %Green%[2] %White%Microsoft Visual C++ 2015-2017-2019-2022 %yellow%v17 %Red%x64-x86
-echo   %Green%[0] %White%Back to menu 
+echo   %green%[1] %white%Microsoft Visual C++ 2002-2003-2005-2008-2010-2012-2013-2022 (AIO)
+echo   %green%[2] %white%Microsoft Visual C++ 2015-2017-2019-2022 %yellow%v17 %red%x64-x86
+echo   %green%[0] %white%Back to menu 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo   %Red%File Size : 29.6MB
-echo   %Red%Arch      : x86 / x64
-echo   %Red%Servers   : github
-echo   %Red%Required Internet for download. 
-echo   %Red%NOTE: If of some software cannot be install or running please try Option 2.
+echo   %red%File Size : 29.6MB
+echo   %red%Arch      : x86 / x64
+echo   %red%Servers   : github
+echo   %red%Required Internet for download. 
+echo   %red%NOTE: If of some software cannot be install or running please try Option 2.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 echo   Latest version
 %nhcolor% 07 " ====================================================================================================================="
@@ -9185,11 +9186,11 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 vc_redist.x64.exe') do set "MD5=%%N"
 if %MD5% equ be433764fa9bbe0f2f9c654f6512c9e0 (
-%nhcolor% 08 "%Green%PASS > %White%vc_redist.x64.exe"
+%nhcolor% 08 "%green%PASS > %white%vc_redist.x64.exe"
 timeout /t 2 >nul
 goto vsicheckx86
 ) else (
-%nhcolor% 08 "%Red%FAIL > vc_redist.x64.exe"
+%nhcolor% 08 "%red%FAIL > vc_redist.x64.exe"
 del /q /f /s "vc_redist.x64.exe" >nul 2>nul
 timeout /t 2 >nul
 goto :downloadvsi
@@ -9197,11 +9198,11 @@ goto :downloadvsi
 :vsicheckx86
 for /f %%N in ('hashsum /a md5 vc_redist.x86.exe') do set "MD5=%%N"
 if %MD5% equ 24e8177b25c072f4fb0d37496ccdbb34 (
-%nhcolor% 08 "%Green%PASS > %White%vc_redist.x86.exe"
+%nhcolor% 08 "%green%PASS > %white%vc_redist.x86.exe"
 timeout /t 2 >nul
 goto :visinstall
 ) else (
-%nhcolor% 08 "%Red%FAIL > vc_redist.x86.exe"
+%nhcolor% 08 "%red%FAIL > vc_redist.x86.exe"
 del /q /f /s "vc_redist.x86.exe" >nul 2>nul
 timeout /t 2 >nul
 goto :downloadvsi
@@ -9213,11 +9214,11 @@ cls
 for /f %%N in ('hashsum /a md5 vc_redist.x64.exe') do set "MD5=%%N"
 if %MD5% equ be433764fa9bbe0f2f9c654f6512c9e0 (
 cls
-%nhcolor% 08 "%Green%PASS > %White%vc_redist.x64.exe"
+%nhcolor% 08 "%green%PASS > %white%vc_redist.x64.exe"
 timeout /t 2 >nul
 ) else (
 cls
-%nhcolor% 08 "%Red%FAIL > vc_redist.x64.exe"
+%nhcolor% 08 "%red%FAIL > vc_redist.x64.exe"
 del /q /f /s "vc_redist.x64.exe" >nul 2>nul
 timeout /t 2 >nul
 goto :WTHx643
@@ -9228,11 +9229,11 @@ cls
 for /f %%N in ('hashsum /a md5 vc_redist.x86.exe') do set "MD5=%%N"
 if %MD5% equ 24e8177b25c072f4fb0d37496ccdbb34 (
 cls
-%nhcolor% 08 "%Green%PASS > %White%vc_redist.x86.exe"
+%nhcolor% 08 "%green%PASS > %white%vc_redist.x86.exe"
 timeout /t 2 >nul
 ) else (
 cls
-%nhcolor% 08 "%Red%FAIL > vc_redist.x86.exe"
+%nhcolor% 08 "%red%FAIL > vc_redist.x86.exe"
 timeout /t 2 >nul
 del /q /f /s "vc_redist.x86.exe" >nul 2>nul
 goto :WTHx643
@@ -9318,17 +9319,17 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo  %White%DirectX Runtime Web Installer                            
+echo  %white%DirectX Runtime Web Installer                            
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Online Installer      
-%nhcolor% 03 "  [2]  | %Green%Offline Installer %Yellow%(95.6MB)                              
-%nhcolor% 03 "  [0]  | %Green%Back to menu                                         
+%nhcolor% 03 "  [1]  | %green%Online Installer      
+%nhcolor% 03 "  [2]  | %green%Offline Installer %yellow%(95.6MB)                              
+%nhcolor% 03 "  [0]  | %green%Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Red%Servers : Microsoft                                      
-echo  %Red%Arch    : x86 / x64                                      
-echo  %Red%Required Internet for download.                          
+echo  %red%Servers : Microsoft                                      
+echo  %red%Arch    : x86 / x64                                      
+echo  %red%Required Internet for download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Red%Latest version                                           
+echo  %red%Latest version                                           
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -9375,7 +9376,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "http://ftp.twaren.net/cpatch/msupdate/directx/directx_jun2010_redist.exe" -o"directX_offline.exe"
@@ -9428,12 +9429,12 @@ goto usersrequest
 :usr003
 cls
 cd "%GHOST_DATA%"
-echo %White% WGET2 DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET2 DOWNLOADER
+echo %white%=======================================================================
 wget2\bin\wget2 -c --progress=bar --http2 "https://ghosttoolbox.shortcm.li/Total.Commander.10.00.beta.6.-GHOSTSPECTRE-.7z" -t 5
-echo %White%=======================================================================
-echo %White%Password Rar: %Yellow%ghost5
-echo %White%=======================================================================
+echo %white%=======================================================================
+echo %white%Password Rar: %yellow%ghost5
+echo %white%=======================================================================
 pause
 explorer /select,"Total.Commander.10.00.beta.6.-GHOSTSPECTRE-.7z"
 timeout /t 1 >nul
@@ -9456,12 +9457,12 @@ goto usersrequest
 :usr005
 cls
 cd "%GHOST_DATA%"
-echo %White% WGET2 DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET2 DOWNLOADER
+echo %white%=======================================================================
 wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/MiniTool.Partition.Wizard.v12.3.1.GHOSTSPECTRE.7z" -t 5
-echo %White%=======================================================================
-echo %White%Password 7zip: %Yellow%ghost99
-echo %White%=======================================================================
+echo %white%=======================================================================
+echo %white%Password 7zip: %yellow%ghost99
+echo %white%=======================================================================
 pause
 explorer /select,"MiniTool.Partition.Wizard.v12.3.1.GHOSTSPECTRE.7z"
 timeout /t 1 >nul
@@ -9491,10 +9492,10 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%Avast Premium Security 20.10.5824.0 %Red%(Expires: 13, December, 2023)
+%nhcolor% 08 " %white%Avast Premium Security 20.10.5824.0 %red%(Expires: 13, December, 2023)
 timeout /t 10 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/36GT3xD" -o"avast.premium.security.20.6.5495.0.zip"
@@ -9504,9 +9505,9 @@ color 03
 cls
 timeout /t 8 >nul
 cls
-echo %White%===============================
-echo %White%Password Zip: %Yellow%ghostspectre123
-echo %White%===============================
+echo %white%===============================
+echo %white%Password Zip: %yellow%ghostspectre123
+echo %white%===============================
 pause
 explorer /select,"avast_premium_security_setup_offline\avast_premium_security_setup_offline.exe"
 cls
@@ -9525,12 +9526,12 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-::echo %White% WGET2 DOWNLOADER
-::echo %White%=======================================================================
+::echo %white% WGET2 DOWNLOADER
+::echo %white%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/CCleaner.5.79.8704.GHOSTSPECTRE.rar" -t 5
-::echo %White%=======================================================================
-::echo %White%Password Rar: %Yellow%ghostspectre23
-::echo %White%=======================================================================
+::echo %white%=======================================================================
+::echo %white%Password Rar: %yellow%ghostspectre23
+::echo %white%=======================================================================
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/066/ccleaner_pro_5.79.8704.zip" -t 5 -O "Ccleaner_pro_5.79.8704.zip"
 ::pause
 explorer /select,"ccleaner_pro_5.79.8704.zip"
@@ -9562,15 +9563,15 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net" "http://95.141.198.238/noload2/files/074/Revo_Uninstaller_Pro_v4.4.5-RSLOAD.NET-.exe" -o"Revo.Uninstaller.Pro.4.4.5.RePack.exe"
 timeout /t 3 >nul
 cls
-::echo %White%===============================
-::echo %White%Password Zip: %Yellow%ghostspectre123
-::echo %White%===============================
+::echo %white%===============================
+::echo %white%Password Zip: %yellow%ghostspectre123
+::echo %white%===============================
 pause
 explorer /select,"Revo.Uninstaller.Pro.4.4.5.RePack.exe"
 cls
@@ -9580,41 +9581,41 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 Internet.Download.Manager.6.38.25.repack.7z') do set "MD5=%%N"
 if %MD5% equ 218f294e33e8457b21afd90537b1cb8e (
-%nhcolor% 08 " %Green%| PASS | %White%Internet.Download.Manager.6.38.25.repack.7z
+%nhcolor% 08 " %green%| PASS | %white%Internet.Download.Manager.6.38.25.repack.7z
 timeout /t 2 >nul
 goto :idmcomplete
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | Internet.Download.Manager.6.38.25.repack.7z
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | Internet.Download.Manager.6.38.25.repack.7z
 del /q /f /s "Internet.Download.Manager.6.38.25.repack.7z" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto idmdownload
 )
 :idmdownload
 cls
-echo %White% WGET2 DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET2 DOWNLOADER
+echo %white%=======================================================================
 wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/Internet.Download.Manager.6.38.25.repack.7z" -t 5
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 Internet.Download.Manager.6.38.25.repack.7z') do set "MD5=%%N"
 if %MD5% equ 218f294e33e8457b21afd90537b1cb8e (
-%nhcolor% 08 " %Green%| PASS | %White%Internet.Download.Manager.6.38.25.repack.7z
+%nhcolor% 08 " %green%| PASS | %white%Internet.Download.Manager.6.38.25.repack.7z
 timeout /t 2 >nul
 goto :idmcomplete
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | Internet.Download.Manager.6.38.25.repack.7z
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | Internet.Download.Manager.6.38.25.repack.7z
 del /q /f /s "Internet.Download.Manager.6.38.25.repack.7z" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto :ytserver2
 )
 :idmcomplete
-echo %White%=======================================================================
-echo %White%Password 7zip: %Yellow%ghostIDM
-echo %White%=======================================================================
+echo %white%=======================================================================
+echo %white%Password 7zip: %yellow%ghostIDM
+echo %white%=======================================================================
 pause
 explorer /select,"Internet.Download.Manager.6.38.25.repack.7z"
 timeout /t 1 >nul
@@ -9672,7 +9673,7 @@ rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 ::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://bit.ly/3mv31Xy" -t 15 -O "Movavi.Video.Suite.21.0.1.RePack.zip"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net"  "http://95.141.198.238/noload2/files/074/movavi_video_suite 21.3.0.zip" -o"Movavi_Video_Suite_v21.3.0.x64.zip"
@@ -9685,7 +9686,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net" "http://95.141.198.238/noload2/files/072/fsecure freedome vpn 2.41.6817.zip" -o"F-Secure.Freedome.VPN.v2.41.6817.zip"
@@ -9707,7 +9708,7 @@ goto usersrequest
 :usr016
 cls
 cd "%GHOST_DATA%"
-::echo  %White%Please uninstall previous version before install this version.
+::echo  %white%Please uninstall previous version before install this version.
 timeout /t 6 >nul
 cls
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/chemtable soft organizer 9.01.zip" -t 5 -O "Soft.Organizer.9.01.repack.zip"
@@ -9765,10 +9766,10 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %Red%do NOT PANIC if DOWNLOAD IT LOOKS STUCK JUST WAIT TILL COMPLETE.
+echo %red%do NOT PANIC if DOWNLOAD IT LOOKS STUCK JUST WAIT TILL COMPLETE.
 timeout /t 7 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net" "http://95.141.198.238/noload2/files/065/Adobe.Photoshop.2021.v22.4.2.242-RSLOAD.NET-.exe" -o"Adobe.Photoshop.2021.v22.4.2.242.x64.exe"
@@ -9777,9 +9778,9 @@ explorer /select,"Adobe.Photoshop.2021.v22.4.2.242.x64.exe"
 cls
 timeout /t 3 >nul
 cls
-::echo %White%===============================
-::echo %White%Password Zip: %Yellow%repack.me
-::echo %White%===============================
+::echo %white%===============================
+::echo %white%Password Zip: %yellow%repack.me
+::echo %white%===============================
 pause
 goto usersrequest
 :usr019
@@ -9787,11 +9788,11 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 WinRAR.v6.01-GHOSTSPECTRE.7z') do set "MD5=%%N"
 if %MD5% equ 5dffb4a4c52569a3521f2e78c7c2c948 (
-%nhcolor% 08 " %Green%| PASS | %White%WinRAR.v6.01-GHOSTSPECTRE.7z
+%nhcolor% 08 " %green%| PASS | %white%WinRAR.v6.01-GHOSTSPECTRE.7z
 cls
 goto installrar
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WinRAR.v6.01-GHOSTSPECTRE.7z
+%nhcolor% 08 " %red%| FAIL | WinRAR.v6.01-GHOSTSPECTRE.7z
 del /q /f /s "WinRAR.v6.01-GHOSTSPECTRE.7z" >nul
 goto downloadrar
 )
@@ -9801,7 +9802,7 @@ cls
 cls
 :installrar
 cls
-echo  %White%Installing... Please Wait...
+echo  %white%Installing... Please Wait...
 timeout /t 2 >nul
 ::powershell expand-archive -path WinRAR.v6.01-GHOSTSPECTRE.7z -force >nul 2>nul
 %_7ZA_EXE% x WinRAR.v6.01-GHOSTSPECTRE.7z -aoa -pghost123 -o"WinRAR.v6.01-GHOSTSPECTRE"
@@ -9813,7 +9814,7 @@ timeout /t 2 >nul
 cls
 ::Repack Diakov
 ::explorer /select,"WinRAR.v6.01.RePack.exe"
-echo  %Green%Installing... Complete...
+echo  %green%Installing... Complete...
 cd..
 rd /q /s "WinRAR.v6.01-GHOSTSPECTRE" >nul 2>nul
 timeout /t 5 >nul
@@ -9837,18 +9838,18 @@ cls
 for /f %%N in ('hashsum /a md5 Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip') do set "MD5=%%N"
 if %MD5% equ 640e2bc8b67ba8730502d51a108bd2ca (
 cls
-%nhcolor% 08 " %Green%| PASS | %White%Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
+%nhcolor% 08 " %green%| PASS | %white%Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
 cls
 goto :installasc
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
+%nhcolor% 08 " %red%| FAIL | Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
 del /q /f /s "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip" >nul
 goto :downloadasc
 )
 cls
 :ascserver2
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - Server 2"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - Server 2"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3vEgwcj" -o"Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip"
@@ -9858,11 +9859,11 @@ cls
 for /f %%N in ('hashsum /a md5 Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip') do set "MD5=%%N"
 if %MD5% equ 640e2bc8b67ba8730502d51a108bd2ca (
 cls
-%nhcolor% 08 " %Green%| PASS | %White%Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
+%nhcolor% 08 " %green%| PASS | %white%Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
 cls
 goto :installasc
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
+%nhcolor% 08 " %red%| FAIL | Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
 del /q /f /s "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip" >nul
 goto ErrorMD5msstore
 )
@@ -9890,7 +9891,7 @@ rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3uXfjNl" -o"Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip"
@@ -9899,11 +9900,11 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip') do set "MD5=%%N"
 if %MD5% equ 640e2bc8b67ba8730502d51a108bd2ca (
-%nhcolor% 08 " %Green%| PASS | %White%Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
+%nhcolor% 08 " %green%| PASS | %white%Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
 cls
 goto :installasc
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
+%nhcolor% 08 " %red%| FAIL | Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip
 del /q /f /s "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip" >nul
 goto :ascserver2
 )
@@ -9966,11 +9967,11 @@ RD /S /Q "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul 2>nul
 start explorer >nul 2>nul
 goto usersrequest
 :32bit
-::echo %White%===============================
-::echo %White%Password Zip: %Yellow%www.downloadly.ir
-::echo %White%Password Zip: %Yellow%www.downloadha.com
-::echo %White%Password Rar: %Yellow%%ghost555
-::echo %White%===============================
+::echo %white%===============================
+::echo %white%Password Zip: %yellow%www.downloadly.ir
+::echo %white%Password Zip: %yellow%www.downloadha.com
+::echo %white%Password Rar: %yellow%%ghost555
+::echo %white%===============================
 ::pause
 ::explorer /select,"Advanced.SystemCare.Pro.14.02.171+Portable.zip"
 ::cls
@@ -10029,10 +10030,10 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto MD5CHECKX64Mail
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cf0864d157cc5be151e725e10ea43780 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 goto :MD5CHECKX64X86Mail
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
@@ -10041,139 +10042,139 @@ goto :ErrorMD5
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cf0864d157cc5be151e725e10ea43780 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 8bf2f9fc4faca15880db229645777906 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
 goto :MD5CHECKX64X86Mail
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 :MD5CHECKX64X86Mail
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001') do set "MD5=%%N"
 if %MD5% equ 52f2ba962f4e9617ed7b27103b44dc12 (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.002') do set "MD5=%%N"
 if %MD5% equ bc4a3020d8fcc3312ab4a50996af774f (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.002
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.002
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.002
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.002
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.002" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.003') do set "MD5=%%N"
 if %MD5% equ 5acc989496de5c81fc933dd5133f7b85 (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.003
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.003
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.003
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.003
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.003" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.004') do set "MD5=%%N"
 if %MD5% equ 604ab76efda4efbc47240d14cba76b5a (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.004
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.004
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.004
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.004
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.004" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.005') do set "MD5=%%N"
 if %MD5% equ 2c6df3c7cab2f975f02cb385f69755b8 (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.005
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.005
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.005
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.005
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.005" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.006') do set "MD5=%%N"
 if %MD5% equ 658c4a531832c19bae261190978f83bd (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.006
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.006
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.006
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.006
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.006" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.007') do set "MD5=%%N"
 if %MD5% equ 72ac630535e501f96ae256f382a6ff3c (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.007
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.007
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.007
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.007
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.007" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.008') do set "MD5=%%N"
 if %MD5% equ 4004c9dd4f16ab6b4e349ea3f39b37e7 (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.008
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.008
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.008
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.008
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.008" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.009') do set "MD5=%%N"
 if %MD5% equ 38ca64117db2055f5b53ddfa7731336e (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.009
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.009
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.009
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.009
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.009" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.010') do set "MD5=%%N"
 if %MD5% equ dee2a40f25ecfaedb70310f216096381 (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.010
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.010
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.010
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.010
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.010" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.011') do set "MD5=%%N"
 if %MD5% equ dba9636e2c4016ca85cdff65ed148989 (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.011
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.011
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.011
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.011
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.011" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.012') do set "MD5=%%N"
 if %MD5% equ 31f4353f075e2c27dd83b4cf4bd203a3 (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.012
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.012
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.012
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.012
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.012" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.013') do set "MD5=%%N"
 if %MD5% equ b77602d4b2cdf70d9adab349c89de54d (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.013
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.013
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.013
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.013
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.013" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.014') do set "MD5=%%N"
 if %MD5% equ 5862b46e0c968e9355038a41b492753d (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.014
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.014
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.014
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.014
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.014" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.015') do set "MD5=%%N"
 if %MD5% equ 5203b04bb9fab4b466b1a40df644ef2d (
-%nhcolor% 08 " %Green%| PASS | %White%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.015
+%nhcolor% 08 " %green%| PASS | %white%microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.015
 ) else (
-%nhcolor% 08 " %Red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.015
+%nhcolor% 08 " %red%| FAIL | microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.015
 del /q /f /s "microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.015" >nul
 goto :ErrorMD5
 )
@@ -10235,7 +10236,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% --no-conf --file-allocation=none --http-user="rsload.net" --http-passwd="rsload.net" --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false "http://95.141.198.238/noload2/files/066/Adobe.Illustrator.2021.v25.2.3.259-RSLOAD.NET-.exe" -o"Adobe.Illustrator.2021.v25.2.3.259.x64.exe"
@@ -10270,10 +10271,10 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::echo %Red%do NOT PANIC if DOWNLOAD IT LOOKS STUCK.
+::echo %red%do NOT PANIC if DOWNLOAD IT LOOKS STUCK.
 timeout /t 7 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% --no-conf --file-allocation=none --http-user="rsload.net" --http-passwd="rsload.net" --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false "http://95.141.198.238/noload2/files/045/Adobe.After.Effects.2021.v18.2.1.8-RSLOAD.NET-.exe" -o"Adobe.After.Effects.2021.v18.2.1.8.exe"
@@ -10342,10 +10343,10 @@ cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 2fcc16951eb424f44b436409c177183c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :install3dpaint
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -10376,10 +10377,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 2fcc16951eb424f44b436409c177183c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :install3dpaint
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto Paintdl2
 )
@@ -10391,10 +10392,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 2fcc16951eb424f44b436409c177183c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :install3dpaint
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto WTHx643
 )
@@ -10510,15 +10511,15 @@ cd..
 cls
 :snipsnips01
 cls
-%nhcolor% 08 "  %Red%in SUPERLITE/SE Edition "Action Center / Clipboard" is required to using > Microsoft Snip and Sketch.
+%nhcolor% 08 "  %red%in SUPERLITE/SE Edition "Action Center / Clipboard" is required to using > Microsoft Snip and Sketch.
 %nhcolor% 08 "  ----------
 %nhcolor% 08 "  [1] Enable "Action Center / Clipboard" for SUPERLITE / SE.
 %nhcolor% 08 "  [2] Skip if you using COMPACT Edition.
 %nhcolor% 08 "  ----------
-echo %White%  To use the Snipping Tool keyboard: Press Windows logo key + Shift + S
+echo %white%  To use the Snipping Tool keyboard: Press Windows logo key + Shift + S
 timeout /t 1 >nul
 %nhcolor% 08 "  ----------
-set /p firstindex=" Type option:%Green%"
+set /p firstindex=" Type option:%green%"
 if "%firstindex%"=="1" goto snipsnips02
 if "%firstindex%"=="2" goto snipsnips03
 cls
@@ -10631,16 +10632,16 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net" "http://95.141.198.238/noload2/files/072/netlimiter 4.1.10.0.zip" -o"NetLimiter.v4.1.10.0.Repack.zip"
 timeout /t 5 >nul
 cls
-echo  %White%----------------------------------------------------------------------
-::echo  %White%To Crack this software Type any name and any numbers registration code.
-::echo  %White%Password Zip: %Yellow%ghostspectre55
-::echo  %White%----------------------------------------------------------------------
+echo  %white%----------------------------------------------------------------------
+::echo  %white%To Crack this software Type any name and any numbers registration code.
+::echo  %white%Password Zip: %yellow%ghostspectre55
+::echo  %white%----------------------------------------------------------------------
 pause
 explorer /select,"NetLimiter.v4.1.10.0.Repack.zip"
 cls
@@ -10652,10 +10653,10 @@ cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 IOBit.Driver.Booster.v9.3.0.209.Repack.bin') do set "MD5=%%N"
 if %MD5% equ ca673e70abb0ae236129a214d97bed8d (
-%nhcolor% 08 " %Green%| PASS | %White%IOBit.Driver.Booster.v9.3.0.209.Repack.bin
+%nhcolor% 08 " %green%| PASS | %white%IOBit.Driver.Booster.v9.3.0.209.Repack.bin
 goto iobitDBinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | IOBit.Driver.Booster.v9.3.0.209.Repack.bin
+%nhcolor% 08 " %red%| FAIL | IOBit.Driver.Booster.v9.3.0.209.Repack.bin
 del /q /f /s "IOBit.Driver.Booster.v9.3.0.209.Repack.bin" >nul
 )
 cls
@@ -10684,7 +10685,7 @@ cls
 echo Visual C++ Redistributables AIO required to using latest version Driver Booster.
 timeout /t 4 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net" "https://bit.ly/3DRjn7D" -o"IOBit.Driver.Booster.v9.3.0.209.Repack.bin"
@@ -10692,16 +10693,16 @@ timeout /t 5 >nul
 cls
 for /f %%N in ('hashsum /a md5 IOBit.Driver.Booster.v9.3.0.209.Repack.bin') do set "MD5=%%N"
 if %MD5% equ bc8cdbda9ed79f2561eb09384c8e25c9 (
-%nhcolor% 08 " %Green%| PASS | %White%IOBit.Driver.Booster.v9.3.0.209.Repack.bin
+%nhcolor% 08 " %green%| PASS | %white%IOBit.Driver.Booster.v9.3.0.209.Repack.bin
 goto iobitDBinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | IOBit.Driver.Booster.v9.3.0.209.Repack.bin
+%nhcolor% 08 " %red%| FAIL | IOBit.Driver.Booster.v9.3.0.209.Repack.bin
 del /q /f /s "IOBit.Driver.Booster.v9.3.0.209.Repack.bin" >nul
 )
 timeout /t 2 >nul
 )
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://matix.li/5667332a1eb3" -o"IOBit.Driver.Booster.v9.3.0.209.Repack.bin"
@@ -10710,10 +10711,10 @@ timeout /t 5 >nul
 cls
 for /f %%N in ('hashsum /a md5 IOBit.Driver.Booster.v9.3.0.209.Repack.bin') do set "MD5=%%N"
 if %MD5% equ bc8cdbda9ed79f2561eb09384c8e25c9 (
-%nhcolor% 08 " %Green%| PASS | %White%IOBit.Driver.Booster.v9.3.0.209.Repack.bin
+%nhcolor% 08 " %green%| PASS | %white%IOBit.Driver.Booster.v9.3.0.209.Repack.bin
 goto iobitDBinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | IOBit.Driver.Booster.v9.3.0.209.Repack.bin
+%nhcolor% 08 " %red%| FAIL | IOBit.Driver.Booster.v9.3.0.209.Repack.bin
 del /q /f /s "IOBit.Driver.Booster.v9.3.0.209.Repack.bin" >nul
 )
 timeout /t 2 >nul
@@ -10764,11 +10765,11 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %White% WGET2 DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET2 DOWNLOADER
+echo %white%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/IOBit_Smart_Defrag_7.0.0.62.repack.zip" -t 5
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/066/iobit smart defrag 7.0.0.62.zip" -t 5 -O "IOBit_Smart_Defrag_7.0.0.62.repack.zip"
-echo %White%=======================================================================
+echo %white%=======================================================================
 timeout /t 3 >nul
 %_7ZA_EXE% x "IOBit_Smart_Defrag_7.0.0.62.repack.zip" -aoa -pisd -o"IOBit_Smart_Defrag_7.0.0.62.repack" >nul 2>nul
 echo. The program is being installed... Wait for the operation to complete.
@@ -10811,7 +10812,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/39sTgVd" -o"O&O.Defrag.Pro.24.1.6505.repack.GHOSTSPECTRE.zip"
@@ -10838,17 +10839,17 @@ cls
 cd "%GHOST_DATA%"
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Master Lu (Ludashi)%Yellow% - Portable                  
+%nhcolor% 07 "  Master Lu (Ludashi)%yellow% - Portable                  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | MasterLU - 5.1020.1295.1215 (Classic)                               
-%nhcolor% 07 "  %Green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | MasterLU - 5.1020.1295.1215 (Classic)                               
+%nhcolor% 07 "  %green%[0] | Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%Language : %Cyan%Only Available in Chinese Language.                           
-%nhcolor% 07 "  %Green%Arch     : %Cyan%x64                                                            
+%nhcolor% 07 "  %green%Language : %cyan%Only Available in Chinese Language.                           
+%nhcolor% 07 "  %green%Arch     : %cyan%x64                                                            
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------" 
-%nhcolor% 07 "  %Red%Master Lu is a professional and excellent hardware detection tool in China. 
-%nhcolor% 07 "  %Red%Master Lu has Hardware Computer Testing, Performance Testing, Real-time Temperature detection, Battery protection, 
-%nhcolor% 07 "  %Red%Computer Protection, Driver Update, CPU / GPU / Phones Ranking, Mobile phone evaluation and other functions. 
+%nhcolor% 07 "  %red%Master Lu is a professional and excellent hardware detection tool in China. 
+%nhcolor% 07 "  %red%Master Lu has Hardware Computer Testing, Performance Testing, Real-time Temperature detection, Battery protection, 
+%nhcolor% 07 "  %red%Computer Protection, Driver Update, CPU / GPU / Phones Ranking, Mobile phone evaluation and other functions. 
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
 if "%op%"=="1" goto LuDaShi1
@@ -10882,16 +10883,16 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %White% WGET2 DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET2 DOWNLOADER
+echo %white%=======================================================================
 wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/LuDaShi.5.1020.1295.1215.GHOSTSPECTRE.7z" -t 5
-echo %White%=======================================================================
+echo %white%=======================================================================
 cls
 :ludashinote
 %nhcolor% 07 "  Do you want Install now?                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | Yes                                
-%nhcolor% 07 "  %Green%[0] | No                                         
+%nhcolor% 07 "  %green%[1] | Yes                                
+%nhcolor% 07 "  %green%[0] | No                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 set /p op=Type option:
 if "%op%"=="1" goto LuDaShi1yes
@@ -10968,10 +10969,10 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ ea6ba6c9362c89f38d46047e17054f69 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :installcalcu
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -11005,10 +11006,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ ea6ba6c9362c89f38d46047e17054f69 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :installcalcu
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :DL2calcu
 )
@@ -11022,9 +11023,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ ea6ba6c9362c89f38d46047e17054f69 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
@@ -11099,11 +11100,11 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 87d79eab4bfca146c7b260e94b86705d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
 cls
 goto :installsticky
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -11117,11 +11118,11 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 87d79eab4bfca146c7b260e94b86705d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
 cls
 goto :installsticky
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 cls
 goto WTHx643
@@ -11131,10 +11132,10 @@ goto WTHx643
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 87d79eab4bfca146c7b260e94b86705d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :stickyserver2
 )
@@ -11264,22 +11265,22 @@ if "%var%"=="1909" goto :iconsmenu
 if "%var%"=="2004" goto :iconsmenu
 if "%var%"=="2009" goto :iconsmenu
 cls
-echo %Green%Nope...not for this version. Available Only For Version 1909/2004/2009/21H1 or Higher && timeout /t 4 >nul && goto ghst
+echo %green%Nope...not for this version. Available Only For Version 1909/2004/2009/21H1 or Higher && timeout /t 4 >nul && goto ghst
 :iconsmenu
 cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  Ghost Personalize - Icons Pack                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Yellow%[1] %cyan%> %Green%Default Windows 10/11 Icons Pack
-%nhcolor% 07 "  %Yellow%[2] %cyan%> %Green%ARC Regular Blue Icons Pack
-%nhcolor% 07 "  %Yellow%[3] %cyan%> %Green%Nord Icons Pack
-%nhcolor% 07 "  %Yellow%[4] %cyan%> %Green%Lumicons Icons Pack
-%nhcolor% 07 "  %Yellow%[5] %cyan%> %Green%Sweet Paranoia Icons Pack
+%nhcolor% 07 "  %yellow%[1] %cyan%> %green%Default Windows 10/11 Icons Pack
+%nhcolor% 07 "  %yellow%[2] %cyan%> %green%ARC Regular Blue Icons Pack
+%nhcolor% 07 "  %yellow%[3] %cyan%> %green%Nord Icons Pack
+%nhcolor% 07 "  %yellow%[4] %cyan%> %green%Lumicons Icons Pack
+%nhcolor% 07 "  %yellow%[5] %cyan%> %green%Sweet Paranoia Icons Pack
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Yellow%[0] Back to menu
+%nhcolor% 07 "  %yellow%[0] Back to menu
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 timeout /t 2 >nul
-set /p op=%Cyan%Type option:
+set /p op=%cyan%Type option:
 if "%op%"=="1" goto icons001
 if "%op%"=="2" goto icons002
 if "%op%"=="3" goto icons003
@@ -11321,7 +11322,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -11332,15 +11333,15 @@ cls
 cd "%Windir%\Ico\Iconspack"
 for /f %%N in ('hashsum /a md5 Defaults.Iconspack') do set "MD5=%%N"
 if %MD5% equ 7fdc00bc2bf4f0846d789a094694e679 (
-%nhcolor% 08 " %Green%| PASS | %White%Defaults.Iconspack
+%nhcolor% 08 " %green%| PASS | %white%Defaults.Iconspack
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Defaults.Iconspack
+%nhcolor% 08 " %red%| FAIL | Defaults.Iconspack
 del /q /f /s "Defaults.Iconspack" >nul 2>nul
 goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %White% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11378,15 +11379,15 @@ cls
 cd "%Windir%\Ico\Iconspack"
 for /f %%N in ('hashsum /a md5 Defaults.Iconspack') do set "MD5=%%N"
 if %MD5% equ cbeb316ebcacda5cba59943675f0803e (
-%nhcolor% 08 " %Green%| PASS | %White%Defaults.Iconspack
+%nhcolor% 08 " %green%| PASS | %white%Defaults.Iconspack
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Defaults.Iconspack
+%nhcolor% 08 " %red%| FAIL | Defaults.Iconspack
 del /q /f /s "Defaults.Iconspack" >nul 2>nul
 goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %White% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11424,15 +11425,15 @@ cls
 cd "%Windir%\Ico\Iconspack"
 for /f %%N in ('hashsum /a md5 Defaults.Iconspack') do set "MD5=%%N"
 if %MD5% equ 5e12579f53a53893a7882ce6f9f3d035 (
-%nhcolor% 08 " %Green%| PASS | %White%Defaults.Iconspack
+%nhcolor% 08 " %green%| PASS | %white%Defaults.Iconspack
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Defaults.Iconspack
+%nhcolor% 08 " %red%| FAIL | Defaults.Iconspack
 del /q /f /s "Defaults.Iconspack" >nul 2>nul
 goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %White% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11484,7 +11485,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -11495,15 +11496,15 @@ cls
 cd "%Windir%\Ico\Iconspack"
 for /f %%N in ('hashsum /a md5 ARC_Regular_Blue.Iconspack') do set "MD5=%%N"
 if %MD5% equ 66e447c77df627531ad2e25f9447636a (
-%nhcolor% 08 " %Green%| PASS | %White%ARC_Regular_Blue.Iconspack
+%nhcolor% 08 " %green%| PASS | %white%ARC_Regular_Blue.Iconspack
 ) else (
-%nhcolor% 08 " %Red%| FAIL | ARC_Regular_Blue.Iconspack
+%nhcolor% 08 " %red%| FAIL | ARC_Regular_Blue.Iconspack
 del /q /f /s "ARC_Regular_Blue.Iconspack" >nul 2>nul
 goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %White% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11553,7 +11554,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -11564,15 +11565,15 @@ cls
 cd "%Windir%\Ico\Iconspack"
 for /f %%N in ('hashsum /a md5 Nord.Iconspack') do set "MD5=%%N"
 if %MD5% equ c71ffae105aaa32aed0dcc0a1add657e (
-%nhcolor% 08 " %Green%| PASS | %White%Nord.Iconspack
+%nhcolor% 08 " %green%| PASS | %white%Nord.Iconspack
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Nord.Iconspack
+%nhcolor% 08 " %red%| FAIL | Nord.Iconspack
 del /q /f /s "Nord.Iconspack" >nul 2>nul
 goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %White% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11602,7 +11603,7 @@ timeout /t 2 >nul
 goto ghst
 :ErrorMD5Icons
 cls
-echo %Red% Download failed, seems your internet cant reach the files, You can try using Google DNS or Cloud DNS or VPN.
+echo %red% Download failed, seems your internet cant reach the files, You can try using Google DNS or Cloud DNS or VPN.
 timeout /t 5 >nul
 cls
 goto ghst
@@ -11630,7 +11631,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -11641,15 +11642,15 @@ cls
 cd "%Windir%\Ico\Iconspack"
 for /f %%N in ('hashsum /a md5 Lumicons.Iconspack') do set "MD5=%%N"
 if %MD5% equ 60dd921ce9e280d872944babdec5cb9c (
-%nhcolor% 08 " %Green%| PASS | %White%Lumicons.Iconspack
+%nhcolor% 08 " %green%| PASS | %white%Lumicons.Iconspack
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Lumicons.Iconspack
+%nhcolor% 08 " %red%| FAIL | Lumicons.Iconspack
 del /q /f /s "Lumicons.Iconspack" >nul 2>nul
 goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %White% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11701,7 +11702,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -11712,15 +11713,15 @@ cls
 cd "%Windir%\Ico\Iconspack"
 for /f %%N in ('hashsum /a md5 Sweet.Paranoia.Iconspack') do set "MD5=%%N"
 if %MD5% equ 75ea904277d8c12d7400a3a31150f0c8 (
-%nhcolor% 08 " %Green%| PASS | %White%Sweet.Paranoia.Iconspack
+%nhcolor% 08 " %green%| PASS | %white%Sweet.Paranoia.Iconspack
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Sweet.Paranoia.Iconspack
+%nhcolor% 08 " %red%| FAIL | Sweet.Paranoia.Iconspack
 del /q /f /s "Sweet.Paranoia.Iconspack" >nul 2>nul
 goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %White% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11750,7 +11751,7 @@ timeout /t 2 >nul
 goto ghst
 :ErrorMD5Icons
 cls
-echo %Red% Download failed, seems your internet cant reach the files, You can try using Google DNS or Cloud DNS or VPN.
+echo %red% Download failed, seems your internet cant reach the files, You can try using Google DNS or Cloud DNS or VPN.
 timeout /t 5 >nul
 cls
 goto ghst
@@ -11793,19 +11794,19 @@ rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
 cls
-echo %White%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%Lightgray%
+echo %white%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
 cls
 timeout /t 7 >nul
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3qL72ZK" -o"Abelssoft.SSD.Fresh.2021.10.05.35.GHOSTSPECTRE.zip"
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/064/Abelssoft.SSD.Fresh.rar" -t 5 -O "Abelssoft.SSD.Fresh.rar"
 timeout /t 3 >nul
 cls
-::echo %White%===============================
-::echo %White%Password Zip: %Yellow%ghostspectre123
-::echo %White%===============================
+::echo %white%===============================
+::echo %white%Password Zip: %yellow%ghostspectre123
+::echo %white%===============================
 pause
 explorer /select,"Abelssoft.SSD.Fresh.rar"
 cls
@@ -11814,17 +11815,17 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 del /q /s *3uIvYUv*
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip') do set "MD5=%%N"
 if %MD5% equ 94da12728bc8ee9f3eabcc4163614a86 (
-%nhcolor% 08 " %Green%| PASS | %White%NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
+echo %white%=======================================================================
 goto :nvidiainstallcp
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
 del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
@@ -11848,44 +11849,44 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %White% WGET2 DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET2 DOWNLOADER
+echo %white%=======================================================================
 wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip" -t 5
-echo %White%=======================================================================
+echo %white%=======================================================================
 timeout /t 3 >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip') do set "MD5=%%N"
 if %MD5% equ 94da12728bc8ee9f3eabcc4163614a86 (
-%nhcolor% 08 " %Green%| PASS | %White%NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
+echo %white%=======================================================================
 goto :nvidiainstallcp
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
 del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 cls
-echo %White% WGET2 DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET2 DOWNLOADER
+echo %white%=======================================================================
 wget2\bin\wget2 -c --progress=bar "https://uc0733a5d3c694be1b5f4988d8c8.dl.dropboxusercontent.com/s/xul7h467qpc67bn/NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip" -t 5
 timeout /t 3 >nul
 rename "3uIvYUv" "NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 timeout /t 3 >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip') do set "MD5=%%N"
 if %MD5% equ 94da12728bc8ee9f3eabcc4163614a86 (
-%nhcolor% 08 " %Green%| PASS | %White%NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
+echo %white%=======================================================================
 goto :nvidiainstallcp
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip
 del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 :nvidiainstallcp
-echo %Green%Installing Nvidia Control Panel x64 DCH.. please wait.
+echo %green%Installing Nvidia Control Panel x64 DCH.. please wait.
 timeout /t 5 >nul
 powershell expand-archive -path NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip -force >nul 2>nul
 Powershell Add-AppxPackage -Path "NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj\NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.Appx"
@@ -11933,10 +11934,10 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %Red%do NOT PANIC if DOWNLOAD IT LOOKS STUCK JUST WAIT TILL COMPLETE.
+echo %red%do NOT PANIC if DOWNLOAD IT LOOKS STUCK JUST WAIT TILL COMPLETE.
 timeout /t 7 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% --no-conf --file-allocation=none --http-user="rsload.net" --http-passwd="rsload.net" --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false "http://95.141.198.238/noload2/files/066/Adobe.Premiere.Pro.2021.v15.2.0.35-RSLOAD.NET-.exe" -o"Adobe.Premiere.Pro.2020.v15.2.0.35.exe"
@@ -11969,10 +11970,10 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %Red%do NOT PANIC if DOWNLOAD IT LOOKS STUCK JUST WAIT TILL COMPLETE.
+echo %red%do NOT PANIC if DOWNLOAD IT LOOKS STUCK JUST WAIT TILL COMPLETE.
 timeout /t 7 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% --no-conf --file-allocation=none --http-user="rsload.net" --http-passwd="rsload.net" --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false "http://95.141.198.238/noload2/files/062/Adobe.Photoshop.Lightroom.Classic.v10.2.0.10-RSLOAD.NET-.exe" -o"Adobe.Photoshop.Lightroom.Classic.v10.2.0.10.exe"
@@ -12006,7 +12007,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% --no-conf --file-allocation=none --http-user="rsload.net" --http-passwd="rsload.net" --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false "http://95.141.198.238/noload2/files/074/foxit_pdf_editor_pro_11.0.0.49893.zip" -o"foxit_phantompdf_business_11.0.0.49893.zip"
@@ -12064,15 +12065,15 @@ cls
 cls
 %nhcolor% 07 " You want to Enable Youtube Downloader Features? 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | > %White%YES
-%nhcolor% 07 "  %Green%[2] | > %White%NO
+%nhcolor% 07 "  %green%[1] | > %white%YES
+%nhcolor% 07 "  %green%[2] | > %white%NO
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[3] | > %White%Tutorial How to use YoutubeDL/DLP
+%nhcolor% 07 "  %green%[3] | > %white%Tutorial How to use YoutubeDL/DLP
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  NOTE: %Yellow%"Visual C++ Redistributables AIO" %White%Required to install to using %Yellow%Youtube-DL%White%.
+%nhcolor% 07 "  NOTE: %yellow%"Visual C++ Redistributables AIO" %white%Required to install to using %yellow%Youtube-DL%white%.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
-set /p op=Type option: %White%
+set /p op=Type option: %white%
 if "%op%"=="1" goto YTYES
 if "%op%"=="2" goto begin
 if "%op%"=="3" goto YTWEBSITE2
@@ -12105,77 +12106,77 @@ cls
 :: For Youtube-DLP - Download
 goto YTLPDLX1XXX
 cls
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 Ghost_YoutubeDL') do set "MD5=%%N"
 if %MD5% equ 9ce828dc05c4ae943f336ddbf731c5c0 (
-%nhcolor% 08 " %Green%| PASS | %White%Ghost_YoutubeDL
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%Ghost_YoutubeDL
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :ytextract
 ) else (
 cls
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | Ghost_YoutubeDL
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | Ghost_YoutubeDL
 del /q /f /s "Ghost_YoutubeDL" >nul
 del /q /f /s "Ghost_YoutubeDL.1" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto :ytdownload1
 )
 cls
 :ytdownload1
 cls
-echo %White% Ghost_YoutubeDL - Server 1
+echo %white% Ghost_YoutubeDL - Server 1
 timeout /t 5 >nul
 cls
 cd "%GHOST_DATA%"
 ::wget2\bin\wget2 -c --progress=bar --no-check-certificate --http2 "https://bit.ly/3w4whd0" -t 5 -O "Ghost_YoutubeDL"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3w4whd0" -o"Ghost_YoutubeDL"
 cls
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 Ghost_YoutubeDL') do set "MD5=%%N"
 if %MD5% equ 9ce828dc05c4ae943f336ddbf731c5c0 (
-%nhcolor% 08 " %Green%| PASS | %White%Ghost_YoutubeDL
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%Ghost_YoutubeDL
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :ytextract
 ) else (
 cls
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | Ghost_YoutubeDL
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | Ghost_YoutubeDL
 del /q /f /s "Ghost_YoutubeDL" >nul
 del /q /f /s "Ghost_YoutubeDL.1" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :ytserver1234
 )
 :ytserver1234
 cls
-echo %White% Ghost_YoutubeDL - Server 2
+echo %white% Ghost_YoutubeDL - Server 2
 timeout /t 5 >nul
 cls
 ::wget2\bin\wget2 -c --progress=bar --no-check-certificate --http2 "https://bit.ly/2TQWZaY" -t 5 -O "Ghost_YoutubeDL"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2TQWZaY" -o"Ghost_YoutubeDL"
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 Ghost_YoutubeDL') do set "MD5=%%N"
 if %MD5% equ 9ce828dc05c4ae943f336ddbf731c5c0 (
-%nhcolor% 08 " %Green%| PASS | %White%Ghost_YoutubeDL
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%Ghost_YoutubeDL
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :ytextract
 ) else (
 cls
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | Ghost_YoutubeDL
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | Ghost_YoutubeDL
 del /q /f /s "Ghost_YoutubeDL" >nul
 del /q /f /s "Ghost_YoutubeDL.1" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :ytserver2
 )
 :ytserver2
 cls
-echo  %Red% Download failed seems your internet is blocking the server, Please using VPN or Google DNS.
-echo  %Yellow% Make sure your Time Zone is correct in the Country or region.
+echo  %red% Download failed seems your internet is blocking the server, Please using VPN or Google DNS.
+echo  %yellow% Make sure your Time Zone is correct in the Country or region.
 timeout /t 7 >nul
 goto begin
 :ytextract
@@ -12197,11 +12198,11 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ fd3c3021c58b2d873e31f6f224a3674b (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 cls
 goto install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :download
 )
@@ -12229,16 +12230,16 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Microsoft Office Hub x64 "
+%nhcolor% 07 " %red%Microsoft Office Hub x64 "
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2S8GNBz" -o"Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx"
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ fd3c3021c58b2d873e31f6f224a3674b (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 goto hubxxx64install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :hubxxx64server2
 )
@@ -12253,9 +12254,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ fd3c3021c58b2d873e31f6f224a3674b (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
@@ -12285,11 +12286,11 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ fd3c3021c58b2d873e31f6f224a3674b (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 cls
 goto :install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :download
 )
@@ -12317,7 +12318,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Microsoft Office Hub x86 "
+%nhcolor% 07 " %red%Microsoft Office Hub x86 "
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://api.jl-workshop.com/v2/csdlg/download?h=58419ca4aa&url=https://www.mediafire.com/file/pvpvtswnngo5z5w/Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_%25257E_8wekyb3d8bbwe.7z/file" -o"Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
@@ -12327,9 +12328,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ fd3c3021c58b2d873e31f6f224a3674b (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
@@ -12377,7 +12378,7 @@ powershell -ExecutionPolicy Bypass -File "remove-camera.ps1"
 cls
 del /q /s "remove-camera.ps1" >nul 2>nul
 cls
-echo %Red%Microsoft Camera completely remove.
+echo %red%Microsoft Camera completely remove.
 timeout /t 3 >nul
 goto begin
 :mscameracheck
@@ -12392,11 +12393,11 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 7c441ade3cd68727444958866fe1ada5 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 cls
 goto :install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :download
 )
@@ -12424,7 +12425,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Microsoft Camera x64 "
+%nhcolor% 07 " %red%Microsoft Camera x64 "
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://files.catbox.moe/6cenpm.7z" -o"Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
@@ -12432,9 +12433,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 7c441ade3cd68727444958866fe1ada5 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -12446,9 +12447,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 7c441ade3cd68727444958866fe1ada5 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
@@ -12502,11 +12503,11 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 7c441ade3cd68727444958866fe1ada5 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 cls
 goto :install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :download
 )
@@ -12534,7 +12535,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Microsoft Camera x86 "
+%nhcolor% 07 " %red%Microsoft Camera x86 "
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3pKkxt8" -o"Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
@@ -12544,9 +12545,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 7c441ade3cd68727444958866fe1ada5 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
@@ -12600,10 +12601,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 315db9bc3cb9c413ee3231592778526d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :msnoteinstallx64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -12628,7 +12629,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Microsoft OneNote x64 "
+%nhcolor% 07 " %red%Microsoft OneNote x64 "
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://ucee1f92619de4d7fbe4ce9ccddd.dl.dropboxusercontent.com/s/2oubt70qn0rcvas/Microsoft.Office.OneNote_16002.13127.ISO?dl=1" -o"Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
@@ -12636,10 +12637,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 315db9bc3cb9c413ee3231592778526d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :msnoteinstallx64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -12649,10 +12650,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 315db9bc3cb9c413ee3231592778526d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :msnoteinstallx64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
@@ -12687,10 +12688,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 315db9bc3cb9c413ee3231592778526d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :installnotex86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -12715,7 +12716,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Microsoft OneNote x86 "
+%nhcolor% 07 " %red%Microsoft OneNote x86 "
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://ucee1f92619de4d7fbe4ce9ccddd.dl.dropboxusercontent.com/s/2oubt70qn0rcvas/Microsoft.Office.OneNote_16002.13127.ISO?dl=1" -o"Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
@@ -12723,10 +12724,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 315db9bc3cb9c413ee3231592778526d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :msnoteinstallx86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -12736,10 +12737,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 315db9bc3cb9c413ee3231592778526d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :msnoteinstallx86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
@@ -13107,25 +13108,25 @@ goto begin
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SYSTEM\HardwareConfig\Current" /v "BIOSVersion"') do set "DFMT3=%%B"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\HARDWARE\DESCRIPTION\System\CentralProcessor\0" /v "ProcessorNameString"') do set "DFMT4=%%B"
 FOR /f "tokens=2*" %%a in ('Reg Query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v UBR') do set "UBRHEX=%%~b"
-FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild"') do set "DFMT5=%NBlue%%SWhite% %%B"
+FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild"') do set "DFMT5=%bg_blue%%lblack% %%B"
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ProductName"') do set "DFMT6=%%B"
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
 if "%version%" == "Windows 10" (
-FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ReleaseId"') do set "DFMT7=%NRed%%SWhite% %%B "
+FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ReleaseId"') do set "DFMT7=%bg_red%%lblack% %%B "
 )
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do set "CODENAME=%%B"
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "EditionID"') do set "EditionID=%%B"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_USERS\.DEFAULT\Control Panel\International\User Profile" /v "Languages"') do set "DFMT8=%%B"
-if not exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%Red%MISSING"
-if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%Yellow%ENABLE"
+if not exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
+if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%yellow%ENABLE"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition"') do set "spectremod=%%B"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\.NETFramework" /v "Edition"') do set "spectremod=%%B"
 reg Query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\.NETFramework" | find /i "0x0" > NUL && set "FNETFX4=DISABLE" || set "FNETFX4=ENABLE"
 set /a UBRDEC=%FNETFX4%
-::reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "OSARC=%NMagenta%%SWhite%32bit" || set "OSARC=%NMagenta%%SWhite% 64bit "
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "OSARC=%NMagenta%%SWhite% 64bit "
+::reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "OSARC=%bg_magenta%%lblack%32bit" || set "OSARC=%bg_magenta%%lblack% 64bit "
+if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "OSARC=%bg_magenta%%lblack% 64bit "
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (set "OSARC=%NMagenta%%SWhite% 32bit "
+if "%PROCESSOR_ARCHITECTURE%"=="x86" (set "OSARC=%bg_magenta%%lblack% 32bit "
 )
 set /a UBRDEC=%UBRHEX%
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "GARC=x86" || set "GARC=x64"
@@ -13136,20 +13137,20 @@ for /f "tokens=2 delims=()" %%a in ('wmic timezone get caption /value') do set t
 ::for /f "tokens=6,*" %%f in ('powercfg -list ^| findstr \*') do set PWRPLAN2=%%f
 FOR /F "tokens=2*" %%A in ('
     REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v DisplayVersion 2^> nul 
-') do set "CODENAME=%NGreen%%SWhite% %%B "
+') do set "CODENAME=%bg_green%%lblack% %%B "
 FOR /F "tokens=2*" %%A in ('
     REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Edition 2^> nul 
-') do set "Edition=%BGreen%%SWhite% %%B "
+') do set "Edition=%bg_lgreen%%lblack% %%B "
 ::for /f "tokens=11 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set TPMVER=%%i
 ::for /f "tokens=2 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set TPM=%%i
-::for /f "tokens=2 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set | find /i "TRUE" >NUL && set "TPMX=TPM: %Yellow%TRUE / " || set "TPMX=TPM: %Yellow%NONE "
-set "TPMX=TPM: %Yellow%NONE "
+::for /f "tokens=2 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set | find /i "TRUE" >NUL && set "TPMX=TPM: %yellow%TRUE / " || set "TPMX=TPM: %yellow%NONE "
+set "TPMX=TPM: %yellow%NONE "
 for /f "tokens=11 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set TPMVER=%%i
-for /f %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * 2^>nul ^| find "TRUE"') do set "TPMX=TPM: %Yellow%TRUE / %TPMVER% " || set "TPMX=TPM: %Yellow%NONE "
+for /f %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * 2^>nul ^| find "TRUE"') do set "TPMX=TPM: %yellow%TRUE / %TPMVER% " || set "TPMX=TPM: %yellow%NONE "
 for /f "tokens=2" %%i in ('wmic os get caption') do set VERSION1=%%i
 for /f "tokens=3" %%i in ('wmic os get caption') do set VERSION2=%%i
 for /f "tokens=4" %%i in ('wmic os get caption') do set VERSION3=%%i
-::for /f "tokens=2" %%i in ('wmic os get caption') do set OS="%BBlue%%SWhite% %%i "
+::for /f "tokens=2" %%i in ('wmic os get caption') do set OS="%bg_lblue%%lblack% %%i "
 for /f "tokens=2" %%i in ('wmic os get caption') do set OSX="%%i "
 goto checkrevision
 :onenote
@@ -13196,17 +13197,17 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx') do set "MD5=%%N"
 if %MD5% equ 24d405a306edbac170f1e91663d69a8b (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
 goto updatewindowstorex64install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
 del /q /f /s "Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx" >nul
 goto startdownload
 )
 :startdownload
 cls
 cd "%GHOST_DATA%"
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - Server [CatBox]"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - Server [CatBox]"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3wFUAPs" -o"Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx"
 timeout /t 1 >nul
@@ -13215,16 +13216,16 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx') do set "MD5=%%N"
 if %MD5% equ 24d405a306edbac170f1e91663d69a8b (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
 goto updatewindowstorex64install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
 del /q /f /s "Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx" >nul
 goto server2
 )
 :server2
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - Server [DropBox]"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - Server [DropBox]"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3wFUAPs" -o"Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx"
 timeout /t 1 >nul
@@ -13233,10 +13234,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx') do set "MD5=%%N"
 if %MD5% equ 24d405a306edbac170f1e91663d69a8b (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
 goto updatewindowstorex64install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx
 del /q /f /s "Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx" >nul
 goto ErrorMD5msstore
 )
@@ -13247,14 +13248,14 @@ cls
 %_7ZA_EXE% x Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx -aoa -pwindowsapps -o"%PROGRAMFILES%\WindowsApps"
 timeout /t 2 >nul
 cls
-echo %White%Microsoft Windows Store Silent Installing.. Please Wait...
+echo %white%Microsoft Windows Store Silent Installing.. Please Wait...
 powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%PROGRAMFILES%\WindowsApps\*\AppxManifest.xml' >nul 2>nul
 timeout /t 2 >nul
 powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%PROGRAMFILES%\WindowsApps\Microsoft.StorePurchaseApp_12106.1001.33.0_x64__8wekyb3d8bbwe\AppxManifest.xml' >nul 2>nul
 timeout /t 1 >nul
 Powershell Add-AppxPackage -Path '%PROGRAMFILES%\WindowsApps\Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe\Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe.AppxBundle' >nul 2>nul
 cls
-echo %White%Microsoft Windows Store Complete Installed.
+echo %white%Microsoft Windows Store Complete Installed.
 timeout /t 5 >nul
 cls
 goto begin
@@ -13293,7 +13294,7 @@ cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 WhatsAppDesktop.bin') do set "MD5=%%N"
 if %MD5% equ 38023767bfe6a6efa569889169c3a93d (
-%nhcolor% 08 " %Green%| PASS | %White%WhatsAppDesktop.bin
+%nhcolor% 08 " %green%| PASS | %white%WhatsAppDesktop.bin
 goto skipwhatsapps
 ) else (
 del /q /f /s "WhatsAppDesktop.bin" >nul
@@ -13303,7 +13304,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WhatsAppDesktop.bin') do set "MD5=%%N"
 if %MD5% equ 38023767bfe6a6efa569889169c3a93d (
-%nhcolor% 08 " %Green%| PASS | %White%WhatsAppDesktop.bin
+%nhcolor% 08 " %green%| PASS | %white%WhatsAppDesktop.bin
 goto skipwhatsapps
 ) else (
 del /q /f /s "WhatsAppDesktop.bin" >nul
@@ -13313,7 +13314,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WhatsAppDesktop.bin') do set "MD5=%%N"
 if %MD5% equ 38023767bfe6a6efa569889169c3a93d (
-%nhcolor% 08 " %Green%| PASS | %White%WhatsAppDesktop.bin
+%nhcolor% 08 " %green%| PASS | %white%WhatsAppDesktop.bin
 goto skipwhatsapps
 ) else (
 del /q /f /s "WhatsAppDesktop.bin" >nul
@@ -13322,7 +13323,7 @@ goto WTHx643
 cls
 :skipwhatsapps
 cls
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 %_7ZA_EXE% x WhatsAppDesktop.bin -aoa -pwassap -o"%GHOST_TEMP%"
 echo.
 timeout /t 5 >nul
@@ -13344,7 +13345,7 @@ cls
 :telex86
 for /f %%N in ('hashsum /a md5 TelegramMessengerLLP.TelegramDesktop') do set "MD5=%%N"
 if %MD5% equ dc312c821645d8176877dd8d72c6467c (
-%nhcolor% 08 " %Green%| PASS | %White%TelegramMessengerLLP.TelegramDesktop
+%nhcolor% 08 " %green%| PASS | %white%TelegramMessengerLLP.TelegramDesktop
 goto skiptelegram
 ) else (
 del /q /f /s "TelegramMessengerLLP.TelegramDesktop" >nul
@@ -13354,7 +13355,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 TelegramMessengerLLP.TelegramDesktop') do set "MD5=%%N"
 if %MD5% equ dc312c821645d8176877dd8d72c6467c (
-%nhcolor% 08 " %Green%| PASS | %White%TelegramMessengerLLP.TelegramDesktop
+%nhcolor% 08 " %green%| PASS | %white%TelegramMessengerLLP.TelegramDesktop
 goto skiptelegram
 ) else (
 del /q /f /s "TelegramMessengerLLP.TelegramDesktop" >nul
@@ -13364,7 +13365,7 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 TelegramMessengerLLP.TelegramDesktop') do set "MD5=%%N"
 if %MD5% equ 7c36816f4418529890b265a1cc7322bc (
-%nhcolor% 08 " %Green%| PASS | %White%TelegramMessengerLLP.TelegramDesktop
+%nhcolor% 08 " %green%| PASS | %white%TelegramMessengerLLP.TelegramDesktop
 goto skiptelegram
 ) else (
 del /q /f /s "TelegramMessengerLLP.TelegramDesktop" >nul
@@ -13374,7 +13375,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 TelegramMessengerLLP.TelegramDesktop') do set "MD5=%%N"
 if %MD5% equ 7c36816f4418529890b265a1cc7322bc (
-%nhcolor% 08 " %Green%| PASS | %White%TelegramMessengerLLP.TelegramDesktop
+%nhcolor% 08 " %green%| PASS | %white%TelegramMessengerLLP.TelegramDesktop
 goto skiptelegram
 ) else (
 del /q /f /s "TelegramMessengerLLP.TelegramDesktop" >nul
@@ -13384,7 +13385,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 TelegramMessengerLLP.TelegramDesktop') do set "MD5=%%N"
 if %MD5% equ 7c36816f4418529890b265a1cc7322bc (
-%nhcolor% 08 " %Green%| PASS | %White%TelegramMessengerLLP.TelegramDesktop
+%nhcolor% 08 " %green%| PASS | %white%TelegramMessengerLLP.TelegramDesktop
 goto skiptelegram
 ) else (
 del /q /f /s "TelegramMessengerLLP.TelegramDesktop" >nul
@@ -13393,7 +13394,7 @@ goto WTHx643
 cls
 :skiptelegram
 cls
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 ::%_7ZA_EXE% x WhatsAppDesktop.bin -aoa -pwassap -o"%GHOST_TEMP%"
 echo.
 timeout /t 5 >nul
@@ -13404,13 +13405,13 @@ goto begin
 
 :storex64forwindows1123H2
 cls
-echo  %Cyan%Microsoft Store Windows 11 23H3 + Xbox Apps + License
+echo  %cyan%Microsoft Store Windows 11 23H3 + Xbox Apps + License
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.23H2.x64.bin') do set "MD5=%%N"
 if %MD5% equ 887061403478d7ca71c64830be874af8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Store.Windows11.23H2.x64.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Store.Windows11.23H2.x64.bin
 goto installwin11store
 ) else (
 del /q /f /s "Microsoft.Store.Windows11.23H2.x64.bin" >nul
@@ -13424,7 +13425,7 @@ timeout /t 2 >nul
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.23H2.x64.bin') do set "MD5=%%N"
 if %MD5% equ 887061403478d7ca71c64830be874af8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Store.Windows11.23H2.x64.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Store.Windows11.23H2.x64.bin
 goto installwin11store
 ) else (
 del /q /f /s "Microsoft.Store.Windows11.23H2.x64.bin" >nul
@@ -13438,7 +13439,7 @@ timeout /t 2 >nul
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.23H2.x64.bin') do set "MD5=%%N"
 if %MD5% equ 887061403478d7ca71c64830be874af8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Store.Windows11.23H2.x64.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Store.Windows11.23H2.x64.bin
 goto installwin11store
 ) else (
 del /q /f /s "Microsoft.Store.Windows11.23H2.x64.bin" >nul
@@ -13452,7 +13453,7 @@ timeout /t 2 >nul
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.23H2.x64.bin') do set "MD5=%%N"
 if %MD5% equ 887061403478d7ca71c64830be874af8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Store.Windows11.23H2.x64.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Store.Windows11.23H2.x64.bin
 goto installwin11store
 ) else (
 del /q /f /s "Microsoft.Store.Windows11.23H2.x64.bin" >nul
@@ -13471,13 +13472,13 @@ goto begin
 
 :storex64forwindows11
 cls
-echo  %Cyan%Microsoft Store Windows 11 + Xbox Apps + License
+echo  %cyan%Microsoft Store Windows 11 + Xbox Apps + License
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.x64.bin') do set "MD5=%%N"
 if %MD5% equ 686b03d384ce087d4b112e30e3cac122 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Store.Windows11.x64.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Store.Windows11.x64.bin
 goto installwin11store
 ) else (
 del /q /f /s "Microsoft.Store.Windows11.x64.bin" >nul
@@ -13491,7 +13492,7 @@ timeout /t 2 >nul
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.x64.bin') do set "MD5=%%N"
 if %MD5% equ 686b03d384ce087d4b112e30e3cac122 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Store.Windows11.x64.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Store.Windows11.x64.bin
 goto installwin11store
 ) else (
 del /q /f /s "Microsoft.Store.Windows11.x64.bin" >nul
@@ -13505,7 +13506,7 @@ timeout /t 2 >nul
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.x64.bin') do set "MD5=%%N"
 if %MD5% equ 686b03d384ce087d4b112e30e3cac122 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Store.Windows11.x64.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Store.Windows11.x64.bin
 goto installwin11store
 ) else (
 del /q /f /s "Microsoft.Store.Windows11.x64.bin" >nul
@@ -13519,7 +13520,7 @@ timeout /t 2 >nul
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.x64.bin') do set "MD5=%%N"
 if %MD5% equ 686b03d384ce087d4b112e30e3cac122 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Store.Windows11.x64.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Store.Windows11.x64.bin
 goto installwin11store
 ) else (
 del /q /f /s "Microsoft.Store.Windows11.x64.bin" >nul
@@ -13558,7 +13559,7 @@ cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 goto skip2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
@@ -13573,7 +13574,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 goto skip2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
@@ -13588,7 +13589,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 goto skip2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
@@ -13603,7 +13604,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 goto skip2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
@@ -13614,7 +13615,7 @@ goto WTHx643
 ::DependencyX64
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 527cc2dd0885539455d42f3a4f4a50a0 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 goto installwindowsstore2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
@@ -13625,7 +13626,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 527cc2dd0885539455d42f3a4f4a50a0 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 goto installwindowsstore2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
@@ -13636,7 +13637,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 527cc2dd0885539455d42f3a4f4a50a0 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 goto installwindowsstore2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
@@ -13647,7 +13648,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 527cc2dd0885539455d42f3a4f4a50a0 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 goto installwindowsstore2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
@@ -13660,7 +13661,7 @@ cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 goto skip2022x86
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
@@ -13671,7 +13672,7 @@ echo SERVER 01 - US
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 goto skip2022x86
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
@@ -13684,7 +13685,7 @@ echo SERVER 02 - HK
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 goto skip2022x86
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
@@ -13697,7 +13698,7 @@ echo SERVER 03 - US
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 goto skip2022x86
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
@@ -13707,7 +13708,7 @@ goto WTHx643
 ::DependencyX86
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 46bf5f9cec3c527fd908fdf779f4b23f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 goto installwindowsstore2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
@@ -13718,7 +13719,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 46bf5f9cec3c527fd908fdf779f4b23f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 goto installwindowsstore2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
@@ -13729,7 +13730,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 46bf5f9cec3c527fd908fdf779f4b23f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 goto installwindowsstore2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
@@ -13740,7 +13741,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 46bf5f9cec3c527fd908fdf779f4b23f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 goto installwindowsstore2022
 ) else (
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
@@ -13758,14 +13759,14 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 timeout /t 2 >nul
 ) else (
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 527cc2dd0885539455d42f3a4f4a50a0 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 timeout /t 2 >nul
 goto install
 ) else (
@@ -13777,7 +13778,7 @@ cls
 cls
 %_7ZA_EXE% x Microsoft.WindowsStore_22202.1402.2.0.Dependency -aoa -pstore2022 -o"%GHOST_TEMP%"
 cls
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 echo.
 timeout /t 5 >nul
 cd "%GHOST_TEMP%\" >nul 2>nul
@@ -13804,14 +13805,14 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
 if %MD5% equ e36e5a19497838ec66a63e58a98c82ce (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Base
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Base
 timeout /t 2 >nul
 ) else (
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
 if %MD5% equ 46bf5f9cec3c527fd908fdf779f4b23f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_22202.1402.2.0.Dependency
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_22202.1402.2.0.Dependency
 timeout /t 2 >nul
 goto install
 ) else (
@@ -13823,7 +13824,7 @@ cls
 cls
 %_7ZA_EXE% x Microsoft.WindowsStore_22202.1402.2.0.Dependency -aoa -pstore2022 -o"%GHOST_TEMP%"
 cls
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 echo.
 timeout /t 5 >nul
 cd "%GHOST_TEMP%\" >nul 2>nul
@@ -13847,7 +13848,7 @@ goto begin
 
 :storeserver2
 cls
-%nhcolor% 07 " %Red%Microsoft Store x64 - %White%Server 2 %Yellow%[US]%White%"
+%nhcolor% 07 " %red%Microsoft Store x64 - %white%Server 2 %yellow%[US]%white%"
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
@@ -13872,7 +13873,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - Server 2"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - Server 2"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3wFUAPs" -o"Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx"
 timeout /t 1 >nul
@@ -13881,19 +13882,19 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 goto storemd5check
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :Server3
 )
 :Server3
 cls
-%nhcolor% 08 " %Red%Download failed - Retry Server 3"
+%nhcolor% 08 " %red%Download failed - Retry Server 3"
 timeout /t 5 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - Server 3"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - Server 3"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://ucee1f92619de4d7fbe4ce9ccddd.dl.dropboxusercontent.com/s/42p1r4pew4i1s55/TEXT.ISO?dl=1" -o"Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx"
 timeout /t 1 >nul
@@ -13902,19 +13903,19 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 goto storemd5check
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :Server4
 )
 :Server4
 cls
-%nhcolor% 08 " %Red%Download failed - Retry Server 4"
+%nhcolor% 08 " %red%Download failed - Retry Server 4"
 timeout /t 5 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - Server 4 [DropBox]"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - Server 4 [DropBox]"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2XiS4Be" -o"Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx"
 timeout /t 1 >nul
@@ -13923,10 +13924,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 goto storemd5check
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5msstore
 )
@@ -13939,17 +13940,17 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 cls
 goto storemd5check
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 cls
 goto :store1strun
 )
 :store1strun
-%nhcolor% 07 " %Red%Microsoft Store x64 - %White%Server 1 %Yellow%[HK]%White%"
+%nhcolor% 07 " %red%Microsoft Store x64 - %white%Server 1 %yellow%[HK]%white%"
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
@@ -13974,7 +13975,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://api.jl-workshop.com/v2/csdlg/download?h=53d8a10868&url=https://plus2.uhub.com/share/wHIaroFnqr4MYL6o" -o"Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx"
 timeout /t 5 >nul
@@ -13985,9 +13986,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :storeserver2
 )
@@ -14009,7 +14010,7 @@ timeout /t 5 >nul
 cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 echo.
 timeout /t 5 >nul
 for /f tokens^=* %%i in ('where .:*NET.Native.Framework*.*x64*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
@@ -14033,7 +14034,7 @@ timeout /t 5 >nul
 goto begin
 :storeserver2x86
 cls
-%nhcolor% 07 " %Red%Microsoft Store x86 - %White%Server 2 %Yellow%[US]%White%"
+%nhcolor% 07 " %red%Microsoft Store x86 - %white%Server 2 %yellow%[US]%white%"
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
@@ -14058,7 +14059,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - Server 2"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - Server 2"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3wFUAPs" -o"Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx"
 timeout /t 1 >nul
@@ -14067,19 +14068,19 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 goto storemd5checkx86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :Server3
 )
 :Server3
 cls
-%nhcolor% 08 " %Red%Download failed - Retry Server 3"
+%nhcolor% 08 " %red%Download failed - Retry Server 3"
 timeout /t 5 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - Server 3"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - Server 3"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3s75GZZ" -o"Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx"
 timeout /t 1 >nul
@@ -14088,19 +14089,19 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 goto storemd5checkx86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :Server4
 )
 :Server4
 cls
-%nhcolor% 08 " %Red%Download failed - Retry Server 4"
+%nhcolor% 08 " %red%Download failed - Retry Server 4"
 timeout /t 5 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER - Server 4 [Dropbox]"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER - Server 4 [Dropbox]"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2XiS4Be" -o"Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx"
 timeout /t 1 >nul
@@ -14109,10 +14110,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 goto storemd5checkx86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5msstore
 )
@@ -14125,17 +14126,17 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 cls
 goto storemd5checkx86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 cls
 goto :store1strunx86
 )
 :store1strunx86
-%nhcolor% 07 " %Red%Microsoft Store x86 - %White%Server 1 %Yellow%[HK]%White%"
+%nhcolor% 07 " %red%Microsoft Store x86 - %white%Server 1 %yellow%[HK]%white%"
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
@@ -14160,7 +14161,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://api.jl-workshop.com/v2/csdlg/download?h=53d8a10868&url=https://plus2.uhub.com/share/wHIaroFnqr4MYL6o" -o"Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx"
 timeout /t 5 >nul
@@ -14171,9 +14172,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 81bb0be6335ed208f337a6b244f41a43 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :storeserver2x86
 )
@@ -14272,25 +14273,25 @@ COLOR 09
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ f0d83eb2973b181535e9cfa9af614924 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
 cls
 goto installx641607
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-%nhcolor% 07 " %Red%Microsoft Store x64 for 1703 & 1607"
+%nhcolor% 07 " %red%Microsoft Store x64 for 1703 & 1607"
 cls
 ::wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx" -t 5
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3A9DPg3" -o"Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ f0d83eb2973b181535e9cfa9af614924 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :installx641607
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 ::server2
@@ -14298,10 +14299,10 @@ cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3A9DPg3" -o"Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ f0d83eb2973b181535e9cfa9af614924 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :installx641607
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
@@ -14318,9 +14319,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ f0d83eb2973b181535e9cfa9af614924 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
@@ -14401,7 +14402,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto storex64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto storex86
 :storex64
 COLOR 09
-%nhcolor% 07 " %Red%Microsoft Store x64 "
+%nhcolor% 07 " %red%Microsoft Store x64 "
 %nhcolor% 07 " ====================================================================================================================="
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1_9vrnCvAHOU0d_1HAuuoUL1Jk-pKOTVz" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64__8wekyb3d8bbwe.Appx
@@ -14445,306 +14446,306 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001') do set "MD5=%%N"
 if %MD5% equ d7f18d3172517b7556f917b72953b549 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002') do set "MD5=%%N"
 if %MD5% equ f6389fb67a538a4c652e67f854d66f8a (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003') do set "MD5=%%N"
 if %MD5% equ 751b518318d1ebaabcb394850f1867af (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004') do set "MD5=%%N"
 if %MD5% equ d683f4b6edd59bcb67cf9da3c274cfb6 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005') do set "MD5=%%N"
 if %MD5% equ 31b27e8e6905b649e602445a1d7becc6 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006') do set "MD5=%%N"
 if %MD5% equ c4c2fb0b1c58c38900c1c5562132daca (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 9822a3dfa5990ea6c24c8bca8d1535ec (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64
 del /q /f /s "Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ e30374ba31ec7778438810953ead3247 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86
 del /q /f /s "Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 571660a6ca9c95cd6e9bb80511a5f1f1 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64
 del /q /f /s "Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ f701a3fafaa13aa41566ac59b5759816 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86
 del /q /f /s "Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ e049b9316262537b8c8c71c77836f573 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64
 del /q /f /s "Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 0e4e6784a4b1802acd3e0ee5c5e991bb (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
 del /q /f /s "Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 0b15f28e350c8ab623320c4de5d30bb7 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64
 del /q /f /s "Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 54af1987e01950aa2cae9c844865957d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 7d1cd35a670c330f2bc61b4868382bb2 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64
 del /q /f /s "Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ e7e8198e8bc2a366ee3444a821ded275 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ f918ba442e0eae16b50beb3f85cad49c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
 del /q /f /s "Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 99f966b1f86bf4d6bf669c6f416c7416 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 130cba1fd224dd5203072f949befc333 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64
 del /q /f /s "Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 8aa866d15e43a079a6d887a4821a49ef (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 74dcc090a080498fe2f8ff1c139cec9c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
 del /q /f /s "Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ a4e2af92db60a0491d0b78372f3b5ab2 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 80a4d6a322a785461088b7c504fdcd30 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64
 del /q /f /s "Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 3811044b43bc3a1a334922740a7532fc (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
 del /q /f /s "Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ aba14751569bd63114fff0489e62f6a5 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27323.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27323.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27323.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27323.0_x64
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 30b4ae842985a09a48464c41da56fdfd (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27323.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27323.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27323.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27323.0_x86
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 8bf2f9fc4faca15880db229645777906 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27810.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27810.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x64
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cf0864d157cc5be151e725e10ea43780 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27810.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27810.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VP9VideoExtensions_1.0.22681.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 74709276eece8aefc5a0ec55a0b747f5 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VP9VideoExtensions_1.0.22681.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VP9VideoExtensions_1.0.22681.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VP9VideoExtensions_1.0.22681.0.x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.VP9VideoExtensions_1.0.22681.0.x64
 del /q /f /s "Microsoft.VP9VideoExtensions_1.0.22681.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ 5b6d07da895f36b2c6f816ce0e85eca8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral
 del /q /f /s "Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.StorePurchaseApp_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ c84994e2f33b4b8699c265fe7bff0bd6 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.StorePurchaseApp_12004.1001.113.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.StorePurchaseApp_12004.1001.113.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.StorePurchaseApp_12004.1001.113.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.StorePurchaseApp_12004.1001.113.0_neutral
 del /q /f /s "Microsoft.StorePurchaseApp_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ ec5551c086f913db090d9964c9db2090 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.XboxApp_48.62.6002.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ f8512b6443b286fc1b7745f0ed40deba (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxApp_48.62.6002.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxApp_48.62.6002.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxApp_48.62.6002.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxApp_48.62.6002.0_neutral
 del /q /f /s "Microsoft.XboxApp_48.62.6002.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.XboxIdentityProvider_12.58.1001.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ a9d70d36967808194cda5a98d044198f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxIdentityProvider_12.58.1001.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxIdentityProvider_12.58.1001.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxIdentityProvider_12.58.1001.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxIdentityProvider_12.58.1001.0_neutral
 del /q /f /s "Microsoft.XboxIdentityProvider_12.58.1001.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
@@ -14838,51 +14839,51 @@ goto YTCONS
 %nhcolor% 07 ""
 ) else (
 cls
-%nhcolor% 08 "%Red% Checking for latest update Youtube-DL"
+%nhcolor% 08 "%red% Checking for latest update Youtube-DL"
 del /q /f /s "youtube.exe" >nul 2>nul
 timeout /t 4 >nul
 goto YTCHECKUPDATE
 )
 :YTCHECKUPDATE
 cd "%GHOST_DATA%"
-echo %White%=======================================================================
+echo %white%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar --no-check-certificate --http2 "https://www.dropbox.com/s/o49vyszfh8xvwp7/youtubedl-update.01.01.2022?dl=1" -t 5 -O "youtubedl-update.01.01.2022"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.dropbox.com/s/o49vyszfh8xvwp7/youtubedl-update.01.01.2022?dl=1" -o"youtubedl-update.01.01.2022"
 timeout /t 1 >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 youtubedl-update.01.01.2022') do set "MD5=%%N"
 if %MD5% equ 5ef1d046c0303d9da2fb15472a58c518 (
-%nhcolor% 08 " %Green%| PASS | %White%youtubedl-update.01.01.2022
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%youtubedl-update.01.01.2022
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :YTCONSINSTALL
 ) else (
 cls
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| Checking for latest update...
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| Checking for latest update...
 del /q /f /s "youtubedl-update.01.01.2022" >nul
 del /q /f /s "youtubedl-update.01.01.2022.1" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto YTCHECKSERVER2
 )
 :YTCHECKSERVER2
 cls
 ::wget2\bin\wget2 -c --progress=bar --no-check-certificate --http2 "https://onedrive.live.com/download?cid=B05B6F928B4A01FF&resid=B05B6F928B4A01FF!114&authkey=ACNkeQhVchH7uBQ" -t 5 -O "youtubedl-update.01.01.2022"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://onedrive.live.com/download?cid=B05B6F928B4A01FF&resid=B05B6F928B4A01FF!114&authkey=ACNkeQhVchH7uBQ" -o"youtubedl-update.01.01.2022"
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 youtubedl-update.01.01.2022') do set "MD5=%%N"
 if %MD5% equ 5ef1d046c0303d9da2fb15472a58c518 (
-%nhcolor% 08 " %Green%| PASS | %White%youtubedl-update.01.01.2022
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%youtubedl-update.01.01.2022
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :YTCONSINSTALL
 ) else (
 cls
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| Checking for latest update...
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| Checking for latest update...
 del /q /f /s "youtubedl-update.01.01.2022" >nul
 del /q /f /s "youtubedl-update.01.01.2022.1" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto :ytserver2
 )
 :YTCONSINSTALL
@@ -14926,27 +14927,27 @@ del /s /q "*.mkv" >nul 2>nul
 del /s /q "*.cmd" >nul 2>nul
 cls
 %nhcolor% 07 " ====================================================================================================================="
-::%nhcolor% 07 "   YoutubeDL | %Green%%YoutubeVER%
+::%nhcolor% 07 "   YoutubeDL | %green%%YoutubeVER%
 ::%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-::%nhcolor% 07 "  %Green%[1] | %White%Youtube > Video [with audio]
-::%nhcolor% 07 "  %Green%[2] | %White%Youtube > Video [without audio]
-::%nhcolor% 07 "  %Green%[3] | %White%Youtube > Audio %Yellow%[MP3]
+::%nhcolor% 07 "  %green%[1] | %white%Youtube > Video [with audio]
+::%nhcolor% 07 "  %green%[2] | %white%Youtube > Video [without audio]
+::%nhcolor% 07 "  %green%[3] | %white%Youtube > Audio %yellow%[MP3]
 ::%nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "   YoutubeDLP %Green%| %SCyan%%YoutubeDLPVER%
+%nhcolor% 07 "   YoutubeDLP %green%| %lcyan%%YoutubeDLPVER%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] | %White%Youtube > Video %Yellow%[with audio]
-%nhcolor% 07 "  %Green%[2] | %White%Youtube > Video %Yellow%[without audio]
-%nhcolor% 07 "  %Green%[3] | %White%Youtube > Audio %Yellow%[MP3]
-%nhcolor% 07 "  NOTE: %Yellow%Can Download a whole playlist from YouTube.
+%nhcolor% 07 "  %green%[1] | %white%Youtube > Video %yellow%[with audio]
+%nhcolor% 07 "  %green%[2] | %white%Youtube > Video %yellow%[without audio]
+%nhcolor% 07 "  %green%[3] | %white%Youtube > Audio %yellow%[MP3]
+%nhcolor% 07 "  NOTE: %yellow%Can Download a whole playlist from YouTube.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[4] | %White%Here's is the list of all the supported sites.
-%nhcolor% 07 "  %Green%[5] | %White%Tutorial How to Download from Youtube. %Cyan%https://dai.ly/k3S3CBo3AISVU3zv54i
+%nhcolor% 07 "  %green%[4] | %white%Here's is the list of all the supported sites.
+%nhcolor% 07 "  %green%[5] | %white%Tutorial How to Download from Youtube. %cyan%https://dai.ly/k3S3CBo3AISVU3zv54i
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[0] | %White%Back to menu                                        
+%nhcolor% 07 "  %green%[0] | %white%Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "      | %White%Press %Cyan%0 %White%to Cancel or Back
-%nhcolor% 07 "      | %White%Files you've download are automatically saved in  | %Red%'%GHOST_DIR%\Youtube Video' %White% |
-%nhcolor% 07 "      | %White%                                                  | %Red%'%GHOST_DIR%\Youtube Audio' %White% |
+%nhcolor% 07 "      | %white%Press %cyan%0 %white%to Cancel or Back
+%nhcolor% 07 "      | %white%Files you've download are automatically saved in  | %red%'%GHOST_DIR%\Youtube Video' %white% |
+%nhcolor% 07 "      | %white%                                                  | %red%'%GHOST_DIR%\Youtube Audio' %white% |
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -15061,7 +15062,7 @@ cls
 cls
 cd "%GHOST_DATA%\Youtube-DLP"
 cls
-Set /P youtube=%White%Enter Youtube URL %Yellow%[Video] %White%: %Green%
+Set /P youtube=%white%Enter Youtube URL %yellow%[Video] %white%: %green%
 if "%youtube%"=="0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d """%youtube%""" /f>nul
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeURL 2^> nul') do set "YoutubeURL=%%B"
@@ -15071,11 +15072,11 @@ FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /
 timeout /t 1 >nul
 yt-dlp -F %YoutubeURL%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-Set /P videocode=%White%Enter Video %Green%ID %White%Code: %Cyan%
+Set /P videocode=%white%Enter Video %green%ID %white%Code: %cyan%
 if "%videocode%"=="0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeVideo" /t REG_SZ /d "%videocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-Set /P audiocode=%White%Enter Audio %Green%ID %White%Code: %Cyan%
+Set /P audiocode=%white%Enter Audio %green%ID %white%Code: %cyan%
 if "%audiocode%"=="0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /t REG_SZ /d "%audiocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -15115,7 +15116,7 @@ del /s /q Ghost_Youtube-DLP3 >nul
 :YTDLP3
 cd "%GHOST_DATA%\Youtube-DLP"
 cls
-Set /P youtube=%White%Enter Youtube URL %Yellow%[Video] %White%: %Green%
+Set /P youtube=%white%Enter Youtube URL %yellow%[Video] %white%: %green%
 if "%youtube%"=="0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d """%youtube%""" /f>nul
 ::REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /t REG_SZ /d "999" /f>nul
@@ -15125,7 +15126,7 @@ FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /
 timeout /t 1 >nul
 yt-dlp -F %YoutubeURL%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-Set /P videocode=%White%Enter Video %Green%ID %White%Code: %Cyan%
+Set /P videocode=%white%Enter Video %green%ID %white%Code: %cyan%
 if "%videocode%"=="0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeVideo" /t REG_SZ /d "%videocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -15176,7 +15177,7 @@ cls
 cls
 cd "%GHOST_DATA%\Youtube-DLP"
 cls
-Set /P youtube=%White%Enter Youtube URL %Yellow%[Audio] %White%: %Green%
+Set /P youtube=%white%Enter Youtube URL %yellow%[Audio] %white%: %green%
 if "%youtube%"=="0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d """%youtube%""" /f>nul
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeURL 2^> nul') do set "YoutubeURL=%%B"
@@ -15200,51 +15201,51 @@ goto YTVMP3
 %nhcolor% 07 ""
 ) else (
 cls
-%nhcolor% 08 "%Red% Checking for latest update Youtube."
+%nhcolor% 08 "%red% Checking for latest update Youtube."
 del /q /f /s "youtube-mp3.exe" >nul 2>nul
 timeout /t 4 >nul
 )
 goto YTCHECKUPDATEMP3
 :YTCHECKUPDATEMP3
 cd "%GHOST_DATA%"
-echo %White%=======================================================================
+echo %white%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://bit.ly/34b20QS" -t 5 -O "youtubedl-update.12.31.2021"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/34b20QS" -o"youtubedl-update.12.31.2021"
 timeout /t 1 >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 youtubedl-update.12.31.2021') do set "MD5=%%N"
 if %MD5% equ 1211694c46e414e0ddf038fdfaf392d2 (
-%nhcolor% 08 " %Green%| PASS | %White%youtubedl-update.12.31.2021
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%youtubedl-update.12.31.2021
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :YTCONSINSTALLMP3
 ) else (
 cls
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| Checking for latest update...
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| Checking for latest update...
 del /q /f /s "youtubedl-update.12.31.2021" >nul
 del /q /f /s "youtubedl-update.12.31.2021.1" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto YTCHECKSERVER2MP3
 )
 :YTCHECKSERVER2MP3
 cls
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://bit.ly/3sMrEFH" -t 5 -O "youtubedl-update.12.31.2021"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3sMrEFH" -o"youtubedl-update.12.31.2021"
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 youtubedl-update.12.31.2021') do set "MD5=%%N"
 if %MD5% equ 1211694c46e414e0ddf038fdfaf392d2 (
-%nhcolor% 08 " %Green%| PASS | %White%youtubedl-update.12.31.2021
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%youtubedl-update.12.31.2021
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :YTCONSINSTALLMP3
 ) else (
 cls
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| Checking for latest update...
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| Checking for latest update...
 del /q /f /s "youtubedl-update.12.31.2021" >nul
 del /q /f /s "youtubedl-update.12.31.2021.1" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto :ytserver2
 )
 :YTCONSINSTALLMP3
@@ -15258,7 +15259,7 @@ goto :YTVMP3
 cd "%GHOST_DATA%\Youtube"
 cls
 ::youtube-dl -U
-Set /P youtube=%White%Enter Youtube URL %Yellow%[Audio] %White%: %Green%
+Set /P youtube=%white%Enter Youtube URL %yellow%[Audio] %white%: %green%
 if "%youtube%"=="0" goto YoutubeCONS
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d "%youtube%" /f>nul
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeURL 2^> nul') do set "YoutubeURL=%%B"
@@ -15283,51 +15284,51 @@ goto YTVVD
 %nhcolor% 07 ""
 ) else (
 cls
-%nhcolor% 08 "%Red% Checking for latest update Youtube."
+%nhcolor% 08 "%red% Checking for latest update Youtube."
 del /q /f /s "youtube.exe" >nul 2>nul
 timeout /t 4 >nul
 )
 goto YTCHECKUPDATEVIDEO
 :YTCHECKUPDATEVIDEO
 cd "%GHOST_DATA%"
-echo %White%=======================================================================
+echo %white%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://bit.ly/34b20QS" -t 5 -O "youtubedl-update.12.31.2021"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/34b20QS" -o"youtubedl-update.12.31.2021"
 timeout /t 1 >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 youtubedl-update.12.31.2021') do set "MD5=%%N"
 if %MD5% equ 1211694c46e414e0ddf038fdfaf392d2 (
-%nhcolor% 08 " %Green%| PASS | %White%youtubedl-update.12.31.2021
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%youtubedl-update.12.31.2021
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :YTCONSINSTALLVIDEO
 ) else (
 cls
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| Checking for latest update...
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| Checking for latest update...
 del /q /f /s "youtubedl-update.12.31.2021" >nul
 del /q /f /s "youtubedl-update.12.31.2021.1" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto YTCHECKSERVER2VIDEO
 )
 :YTCHECKSERVER2VIDEO
 cls
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://bit.ly/3sMrEFH" -t 5 -O "youtubedl-update.12.31.2021"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3sMrEFH" -o"youtubedl-update.12.31.2021"
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 youtubedl-update.12.31.2021') do set "MD5=%%N"
 if %MD5% equ 1211694c46e414e0ddf038fdfaf392d2 (
-%nhcolor% 08 " %Green%| PASS | %White%youtubedl-update.12.31.2021
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%youtubedl-update.12.31.2021
+echo %white%=======================================================================
 timeout /t 2 >nul
 goto :YTCONSINSTALLVIDEO
 ) else (
 cls
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| Checking for latest update...
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| Checking for latest update...
 del /q /f /s "youtubedl-update.12.31.2021" >nul
 del /q /f /s "youtubedl-update.12.31.2021.1" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto :ytserver2
 )
 :YTCONSINSTALLVIDEO
@@ -15341,7 +15342,7 @@ goto :YTVVD
 cd "%GHOST_DATA%\Youtube"
 cls
 ::youtube-dl -U
-Set /P youtube=%White%Enter Youtube URL %Yellow%[Video] %White%: %Green%
+Set /P youtube=%white%Enter Youtube URL %yellow%[Video] %white%: %green%
 if "%youtube%"=="0" goto YoutubeCONS
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d "%youtube%" /f>nul
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeURL 2^> nul') do set "YoutubeURL=%%B"
@@ -15351,11 +15352,11 @@ FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /
 timeout /t 1 >nul
 youtube-dl -F %YoutubeURL%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-Set /P videocode=%White%Enter Video Format Code: %Cyan%
+Set /P videocode=%white%Enter Video Format Code: %cyan%
 if "%videocode%"=="0" goto YoutubeCONS
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeVideo" /t REG_SZ /d "%videocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-Set /P audiocode=%White%Enter Audio Format Code: %Cyan%
+Set /P audiocode=%white%Enter Audio Format Code: %cyan%
 if "%audiocode%"=="0" goto YoutubeCONS
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /t REG_SZ /d "%audiocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -15364,7 +15365,7 @@ start youtube.exe && goto YTVVD
 :ErrorMD5
 echo.
 cls
-%nhcolor% 08 "%Yellow%If you get a download failed on any UWP Apps Please get it on Microsoft Store, Thank you."
+%nhcolor% 08 "%yellow%If you get a download failed on any UWP Apps Please get it on Microsoft Store, Thank you."
 timeout /t 15 >nul
 del /q /f /s Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe.AppxBundle >nul 2>nul
 del /q /f /s Microsoft.StorePurchaseApp_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.AppxBundle >nul 2>nul
@@ -15389,42 +15390,42 @@ set "WSACX=Not Installed"
 set "WSACX=Installed"
 )
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "  %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP% "
+%nhcolor% 07 "  %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP% "
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%600MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%600MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [14]  > %Green%Root   %Cyan% > %Yellow%> %White%Windows Subsystem for Android"
-%nhcolor% 03 "  [15]  > %Green%Unroot %Cyan% > %Yellow%> %White%Windows Subsystem for Android"
+%nhcolor% 03 "  [14]  > %green%Root   %cyan% > %yellow%> %white%Windows Subsystem for Android"
+%nhcolor% 03 "  [15]  > %green%Unroot %cyan% > %yellow%> %white%Windows Subsystem for Android"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/6m0nxQcTnzk"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/6m0nxQcTnzk"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -15461,10 +15462,10 @@ cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 0688adf183cba929b5023458bda45eca (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64.exe
 goto CHECKPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64.exe
 del /q /f /s "WSA_2204.40000.19.0_x64.exe" >nul
 goto WSADL
 )
@@ -15472,10 +15473,10 @@ goto WSADL
 :CHECKPART1
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-1.bin') do set "MD5=%%N"
 if %MD5% equ e64e99617514715eecc2ec5c536fd4d5 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64-1.bin
 goto CHECKPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-1.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-1.bin" >nul
 goto WSADL
 )
@@ -15483,10 +15484,10 @@ goto WSADL
 :CHECKPART2
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-2.bin') do set "MD5=%%N"
 if %MD5% equ 2dac1deb4498848c40c35d352f9c7eae (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64-2.bin
 goto CHECKPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-2.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-2.bin" >nul
 goto WSADL
 )
@@ -15494,10 +15495,10 @@ goto WSADL
 :CHECKPART3
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-3.bin') do set "MD5=%%N"
 if %MD5% equ 15116c01e2ad48bbc82f6b0d68b07a46 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64-3.bin
 goto CHECKPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-3.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-3.bin" >nul
 goto WSADL
 )
@@ -15505,10 +15506,10 @@ goto WSADL
 :CHECKPART4
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-4.bin') do set "MD5=%%N"
 if %MD5% equ 40b6b98a19ac392ec354b6ae1cc7be5a (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-4.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-4.bin" >nul
 goto WSADL
 )
@@ -15518,10 +15519,10 @@ goto WSADL
 cls
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 0688adf183cba929b5023458bda45eca (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64.exe
 del /q /f /s "WSA_2204.40000.19.0_x64.exe" >nul
 )
 cls
@@ -15531,10 +15532,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-1.bin') do set "MD5=%%N"
 if %MD5% equ e64e99617514715eecc2ec5c536fd4d5 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64-1.bin
 goto DLPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-1.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-1.bin" >nul
 )
 cls
@@ -15544,10 +15545,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-2.bin') do set "MD5=%%N"
 if %MD5% equ 2dac1deb4498848c40c35d352f9c7eae (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64-2.bin
 goto DLPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-2.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-2.bin" >nul
 )
 cls
@@ -15557,10 +15558,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-3.bin') do set "MD5=%%N"
 if %MD5% equ 15116c01e2ad48bbc82f6b0d68b07a46 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64-3.bin
 goto DLPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-3.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-3.bin" >nul
 )
 cls
@@ -15570,10 +15571,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-4.bin') do set "MD5=%%N"
 if %MD5% equ 40b6b98a19ac392ec354b6ae1cc7be5a (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2204.40000.19.0_x64-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2204.40000.19.0_x64-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-4.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-4.bin" >nul
 )
 cls
@@ -15583,50 +15584,50 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 0688adf183cba929b5023458bda45eca (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2204.40000.19.0_x64.exe
+%nhcolor% 08 " %green%| OK | %white%WSA_2204.40000.19.0_x64.exe
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64.exe
 del /q /f /s "WSA_2204.40000.19.0_x64.exe" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-1.bin') do set "MD5=%%N"
 if %MD5% equ e64e99617514715eecc2ec5c536fd4d5 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2204.40000.19.0_x64-1.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2204.40000.19.0_x64-1.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-1.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-1.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-2.bin') do set "MD5=%%N"
 if %MD5% equ 2dac1deb4498848c40c35d352f9c7eae (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2204.40000.19.0_x64-2.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2204.40000.19.0_x64-2.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-2.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-2.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-3.bin') do set "MD5=%%N"
 if %MD5% equ 15116c01e2ad48bbc82f6b0d68b07a46 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2204.40000.19.0_x64-3.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2204.40000.19.0_x64-3.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-3.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-3.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2204.40000.19.0_x64-4.bin') do set "MD5=%%N"
 if %MD5% equ 40b6b98a19ac392ec354b6ae1cc7be5a (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2204.40000.19.0_x64-4.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2204.40000.19.0_x64-4.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2204.40000.19.0_x64-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2204.40000.19.0_x64-4.bin
 del /q /f /s "WSA_2204.40000.19.0_x64-4.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
@@ -15691,14 +15692,14 @@ goto 03ANDROIDX
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto 03ANDROIDX || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X
 
 :ADB07X
@@ -15776,7 +15777,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -15829,7 +15830,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto 03ANDROIDX
 
@@ -15847,7 +15848,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto 03ANDROIDX
 
@@ -15872,7 +15873,7 @@ goto :03ANDROIDX
 
 :storex86
 COLOR 09
-%nhcolor% 07 " %Red%Microsoft Store x86 "
+%nhcolor% 07 " %red%Microsoft Store x86 "
 %nhcolor% 07 " ====================================================================================================================="
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1idM8UW7cBS9fIyJfSaKYKZuX9Y2QRKIn" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
@@ -15904,207 +15905,207 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001') do set "MD5=%%N"
 if %MD5% equ d7f18d3172517b7556f917b72953b549 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002') do set "MD5=%%N"
 if %MD5% equ f6389fb67a538a4c652e67f854d66f8a (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003') do set "MD5=%%N"
 if %MD5% equ 751b518318d1ebaabcb394850f1867af (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004') do set "MD5=%%N"
 if %MD5% equ d683f4b6edd59bcb67cf9da3c274cfb6 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005') do set "MD5=%%N"
 if %MD5% equ 31b27e8e6905b649e602445a1d7becc6 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006') do set "MD5=%%N"
 if %MD5% equ c4c2fb0b1c58c38900c1c5562132daca (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ e30374ba31ec7778438810953ead3247 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86
 del /q /f /s "Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ f701a3fafaa13aa41566ac59b5759816 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86
 del /q /f /s "Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 0e4e6784a4b1802acd3e0ee5c5e991bb (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
 del /q /f /s "Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 54af1987e01950aa2cae9c844865957d (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ e7e8198e8bc2a366ee3444a821ded275 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 99f966b1f86bf4d6bf669c6f416c7416 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 8aa866d15e43a079a6d887a4821a49ef (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ a4e2af92db60a0491d0b78372f3b5ab2 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 3811044b43bc3a1a334922740a7532fc (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
 del /q /f /s "Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 30b4ae842985a09a48464c41da56fdfd (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27323.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27323.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27323.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27323.0_x86
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cf0864d157cc5be151e725e10ea43780 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27810.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27810.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 
 for /f %%N in ('hashsum /a md5 Microsoft.VP9VideoExtensions_1.0.22681.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ fe0f6a7777ed50913b127342ad88326b (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VP9VideoExtensions_1.0.22681.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VP9VideoExtensions_1.0.22681.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VP9VideoExtensions_1.0.22681.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.VP9VideoExtensions_1.0.22681.0_x86
 del /q /f /s "Microsoft.VP9VideoExtensions_1.0.22681.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ 5b6d07da895f36b2c6f816ce0e85eca8 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral
 del /q /f /s "Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.StorePurchaseApp_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ c84994e2f33b4b8699c265fe7bff0bd6 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.StorePurchaseApp_12004.1001.113.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.StorePurchaseApp_12004.1001.113.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.StorePurchaseApp_12004.1001.113.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.StorePurchaseApp_12004.1001.113.0_neutral
 del /q /f /s "Microsoft.StorePurchaseApp_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ ec5551c086f913db090d9964c9db2090 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsStore_12004.1001.113.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsStore_12004.1001.113.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsStore_12004.1001.113.0_neutral
 del /q /f /s "Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.XboxApp_48.62.6002.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ f8512b6443b286fc1b7745f0ed40deba (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxApp_48.62.6002.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxApp_48.62.6002.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxApp_48.62.6002.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxApp_48.62.6002.0_neutral
 del /q /f /s "Microsoft.XboxApp_48.62.6002.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.XboxIdentityProvider_12.58.1001.0_neutral_~_8wekyb3d8bbwe.AppxBundle') do set "MD5=%%N"
 if %MD5% equ a9d70d36967808194cda5a98d044198f (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.XboxIdentityProvider_12.58.1001.0_neutral
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.XboxIdentityProvider_12.58.1001.0_neutral
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.XboxIdentityProvider_12.58.1001.0_neutral
+%nhcolor% 08 " %red%| FAIL | Microsoft.XboxIdentityProvider_12.58.1001.0_neutral
 del /q /f /s "Microsoft.XboxIdentityProvider_12.58.1001.0_neutral_~_8wekyb3d8bbwe.AppxBundle" >nul
 goto :ErrorMD5
 )
@@ -16222,18 +16223,18 @@ echo.
 echo.
 ::FOR /F "tokens=* delims=0" %%A in ('net user %USERNAME%') do ECHO.%%A
 FOR /F "tokens=1 delims=," %%G in ('net user "%USERNAME%"') do @echo   %%G
-::%nhcolor% 07 "  %White%Current User     : %Yellow%%USERNAME% %Magenta% 
-::%nhcolor% 07 "  %White%Account expires  : %Yellow%%AXP1%
-::%nhcolor% 07 "  %White%Password expires : %Yellow%%AXP2%
-::%nhcolor% 07 "  %White%Local Group      : %Yellow%%AXP3%
+::%nhcolor% 07 "  %white%Current User     : %yellow%%USERNAME% %Magenta% 
+::%nhcolor% 07 "  %white%Account expires  : %yellow%%AXP1%
+::%nhcolor% 07 "  %white%Password expires : %yellow%%AXP2%
+::%nhcolor% 07 "  %white%Local Group      : %yellow%%AXP3%
 echo.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Add New User %Yellow%(local account)
-%nhcolor% 03 "  [2]  | %Green%Disable or Enable Administrator accounts
-%nhcolor% 03 "  [3]  | %Green%Add user with microsoft accounts %Yellow%(email) %Green%/ Change Administrator username / Delete users / Etc
-%nhcolor% 03 "  [4]  | %Green%Set Current User Password to %Yellow%Never Expires
+%nhcolor% 03 "  [1]  | %green%Add New User %yellow%(local account)
+%nhcolor% 03 "  [2]  | %green%Disable or Enable Administrator accounts
+%nhcolor% 03 "  [3]  | %green%Add user with microsoft accounts %yellow%(email) %green%/ Change Administrator username / Delete users / Etc
+%nhcolor% 03 "  [4]  | %green%Set Current User Password to %yellow%Never Expires
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back to menu                         
+%nhcolor% 03 "  [0]  | %green%Back to menu                         
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 06 ""
 set /p op=%yellow%Type option:%white%
@@ -16264,9 +16265,9 @@ set usr=%usr%& set pass=%pass%
 %nhcolor% 07 " ====================================================================================================================="
 echo  %white%Created Your new username and password %yellow%(without Symbol) %cyan%e.g."Kitty X01" or "Kitty"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  %Red%NOTE: Don't forget set your new user to Administrator Group. (recommends)
+%nhcolor% 03 "  %red%NOTE: Don't forget set your new user to Administrator Group. (recommends)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back to menu                                      
+%nhcolor% 03 "  [0]  | %green%Back to menu                                      
 %nhcolor% 07 " ====================================================================================================================="
 echo.
 :username
@@ -16278,7 +16279,7 @@ if [!usr!]==[] goto username
 if "%usr%"=="0" goto addnewusers123
 :passyesorno
 %nhcolor% 07 "-------------------"
-set /p passyesno= %yellow% Set Password for This user %Cyan%"!usr!"%yellow%? %White%Type %Green%Yes %White%or %Green%No %White%: %white%
+set /p passyesno= %yellow% Set Password for This user %cyan%"!usr!"%yellow%? %white%Type %green%Yes %white%or %green%No %white%: %white%
 if "%passyesno%"=="yes" goto :password
 if "%passyesno%"=="no" goto :admin1
 if "%passyesno%"=="Yes" goto :password
@@ -16294,7 +16295,7 @@ echo.
 :admin1
 %nhcolor% 07 "-------------------"
 setlocal EnableDelayedExpansion
-set /p adm=%yellow% Set This user %Cyan%"!usr!" %yellow%to Administrators Group? %White%Type %Green%Yes %White%or %Green%No %White%: %white%
+set /p adm=%yellow% Set This user %cyan%"!usr!" %yellow%to Administrators Group? %white%Type %green%Yes %white%or %green%No %white%: %white%
 if "%adm%"=="yes" goto adminyes
 if "%adm%"=="no" goto adminno
 if "%adm%"=="Yes" goto adminyes
@@ -16304,14 +16305,14 @@ goto admin1
 echo.
 :adminyes
 set ESC=
-set Green=%ESC%[32m
-set White=%ESC%[37m
-set Cyan=%ESC%[36m
-set Magenta=%ESC%[35m
-set Red=%ESC%[31m
-set Yellow=%ESC%[33m
-set Lightgray=%ESC%[37m
-set Bold=%ESC%[1m
+set green=%ESC%[32m
+set white=%ESC%[37m
+set cyan=%ESC%[36m
+set magenta=%ESC%[35m
+set red=%ESC%[31m
+set yellow=%ESC%[33m
+set white=%ESC%[37m
+set bright=%ESC%[1m
 echo.
 net user /add "%usr%" "%pwd%" >nul
 net localgroup Administrators "%usr%" /add >nul
@@ -16327,14 +16328,14 @@ setlocal DisableDelayedExpansion
 goto :addnewusers123
 :adminno
 set ESC=
-set Green=%ESC%[32m
-set White=%ESC%[37m
-set Cyan=%ESC%[36m
-set Magenta=%ESC%[35m
-set Red=%ESC%[31m
-set Yellow=%ESC%[33m
-set Lightgray=%ESC%[37m
-set Bold=%ESC%[1m
+set green=%ESC%[32m
+set white=%ESC%[37m
+set cyan=%ESC%[36m
+set magenta=%ESC%[35m
+set red=%ESC%[31m
+set yellow=%ESC%[33m
+set white=%ESC%[37m
+set bright=%ESC%[1m
 echo.
 net user /add "%usr%" "%pwd%" >nul
 WMIC USERACCOUNT WHERE Name='%usr%' set PasswordExpires=FALSE >nul
@@ -16354,12 +16355,12 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 echo  %white%Type %green%yes %white%to enable Administrators accounts
 echo  %white%Type %green%no %white%to disable Administrators accounts
-%nhcolor% 07 " %Red%NOTE: FOR SUPERLITE USER. PLEASE ADD NEW USER BEFORE DISABLE ADMINISTRATOR ACCOUNTS AND"
-%nhcolor% 07 " %Red%      set YOUR NEW USER TO ADMINISTRATORS GROUP."
+%nhcolor% 07 " %red%NOTE: FOR SUPERLITE USER. PLEASE ADD NEW USER BEFORE DISABLE ADMINISTRATOR ACCOUNTS AND"
+%nhcolor% 07 " %red%      set YOUR NEW USER TO ADMINISTRATORS GROUP."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back to menu
+%nhcolor% 03 "  [0]  | %green%Back to menu
 %nhcolor% 07 " ====================================================================================================================="
-set /p op=%green%Type Yes or No : %White%
+set /p op=%green%Type Yes or No : %white%
 if "%op%"=="no" goto disableadmin
 if "%op%"=="yes" goto enableadmin
 if "%op%"=="0" goto addnewusers123
@@ -16548,14 +16549,14 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 echo   %white%Standalone Windows Update                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Check for latest updates. If updates are available.
+%nhcolor% 03 "  [1]  | %green%Check for latest updates. If updates are available.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  GhostToolbox Settings > every start > message popup If standalone updates are available.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [2]  | %Green%Enable (message popup)
-%nhcolor% 03 "  [3]  | %Green%Disable (message popup)
+%nhcolor% 03 "  [2]  | %green%Enable (message popup)
+%nhcolor% 03 "  [3]  | %green%Disable (message popup)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back to menu                                         
+%nhcolor% 03 "  [0]  | %green%Back to menu                                         
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -16572,42 +16573,42 @@ goto standaloneupdate
 :stdup1
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Check_Update" /t REG_DWORD /d "0" /f>nul
-echo Check for updates on every startup %red%(GhostToolbox) - %Yellow%Enable
+echo Check for updates on every startup %red%(GhostToolbox) - %yellow%Enable
 timeout /t 2 >nul
 cls
 goto standaloneupdate
 :stdup2
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Check_Update" /t REG_DWORD /d "1" /f>nul
-echo Check for updates on every startup %red%(GhostToolbox) - %Yellow%Disable
+echo Check for updates on every startup %red%(GhostToolbox) - %yellow%Disable
 timeout /t 2 >nul
 cls
 goto standaloneupdate
 :servermaintain
 cls
-%nhcolor% 08 "%Red% 503 Service Temporarily Unavailable, Server currently under maintenance."
-%nhcolor% 08 "%Red% I'm apologize for the inconvenience caused. Thank you for your understanding."
-%nhcolor% 08 "%Red% System Downtime We are currently undergoing system maintenance."
+%nhcolor% 08 "%red% 503 Service Temporarily Unavailable, Server currently under maintenance."
+%nhcolor% 08 "%red% I'm apologize for the inconvenience caused. Thank you for your understanding."
+%nhcolor% 08 "%red% System Downtime We are currently undergoing system maintenance."
 timeout /t 10 >nul
 goto begin
 
 :soundFX
 cd "%GHOST_DATA%"
 cls
-%nhcolor% 01 " %White%Sound Mod for Windows 11/10
-%nhcolor% 03 " %White%                                                                      | ARC  |  SIZE  |                                "
-%nhcolor% D3 " %White%AAF DCH Optimus Audio                                                                                                  "
+%nhcolor% 01 " %white%Sound Mod for Windows 11/10
+%nhcolor% 03 " %white%                                                                      | ARC  |  SIZE  |                                "
+%nhcolor% D3 " %white%AAF DCH Optimus Audio                                                                                                  "
 %nhcolor% 03 " [1] | %white%Based On Microsoft Generic Audio Driver                         | x64  |  531MB |
 %nhcolor% 03 " [2] | %white%Based On Realtek Audio Driver                                   | x64  |  560MB |
-%nhcolor% 03 " %White%This mod package contains: Dolby Digital Encoder/DTS Interactive Encoder/Realtek Patched APO/360/720/Cinema 5
-%nhcolor% 03 " %White%                           Nahimic 3/Dolby Atmos/DTS
-%nhcolor% D3 " %White%FxSound                                                                                                                "
+%nhcolor% 03 " %white%This mod package contains: Dolby Digital Encoder/DTS Interactive Encoder/Realtek Patched APO/360/720/Cinema 5
+%nhcolor% 03 " %white%                           Nahimic 3/Dolby Atmos/DTS
+%nhcolor% D3 " %white%FxSound                                                                                                                "
 %nhcolor% 03 " [3] | %white%FxSound                                                         | x64  |  64MB  |
-%nhcolor% D3 " %White%Old Version for Windows 10                                                                                             "
+%nhcolor% D3 " %white%Old Version for Windows 10                                                                                             "
 %nhcolor% 03 " [4] | %white%Old Version for Windows 10                                      
 %nhcolor% 08 " [0] | Back to menu                                                                                                     "
 echo.
-set /p firstindex=" %Red%Type option : "
+set /p firstindex=" %red%Type option : "
 if "%firstindex%"=="1" goto sound1F
 if "%firstindex%"=="2" goto sound2F
 if "%firstindex%"=="3" goto sound3F
@@ -16626,10 +16627,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 AAFOptimusDCHAudio-Generic.bin') do set "MD5=%%N"
 if %MD5% equ b9e7a2a13258e78dc1ce3187e4cb0533 (
-%nhcolor% 08 " %Green%| PASS | %White%AAFOptimusDCHAudio-Generic.bin
+%nhcolor% 08 " %green%| PASS | %white%AAFOptimusDCHAudio-Generic.bin
 goto FX0C
 ) else (
-%nhcolor% 08 " %Red%| FAIL | AAFOptimusDCHAudio-Generic.bin
+%nhcolor% 08 " %red%| FAIL | AAFOptimusDCHAudio-Generic.bin
 del /q /f /s "AAFOptimusDCHAudio-Generic.bin" >nul
 )
 cls
@@ -16641,10 +16642,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 AAFOptimusDCHAudio-Generic.bin') do set "MD5=%%N"
 if %MD5% equ b9e7a2a13258e78dc1ce3187e4cb0533 (
-%nhcolor% 08 " %Green%| PASS | %White%AAFOptimusDCHAudio-Generic.bin
+%nhcolor% 08 " %green%| PASS | %white%AAFOptimusDCHAudio-Generic.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | AAFOptimusDCHAudio-Generic.bin
+%nhcolor% 08 " %red%| FAIL | AAFOptimusDCHAudio-Generic.bin
 del /q /f /s "AAFOptimusDCHAudio-Generic.bin" >nul
 timeout /t 2 >nul
 goto :WTHx643
@@ -16659,10 +16660,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 AAFOptimusDCHAudio-Realtek.bin') do set "MD5=%%N"
 if %MD5% equ f055255757ed703d17de15bcb0acff70 (
-%nhcolor% 08 " %Green%| PASS | %White%AAFOptimusDCHAudio-Realtek.bin
+%nhcolor% 08 " %green%| PASS | %white%AAFOptimusDCHAudio-Realtek.bin
 goto FX1C
 ) else (
-%nhcolor% 08 " %Red%| FAIL | AAFOptimusDCHAudio-Realtek.bin
+%nhcolor% 08 " %red%| FAIL | AAFOptimusDCHAudio-Realtek.bin
 del /q /f /s "AAFOptimusDCHAudio-Realtek.bin" >nul
 )
 cls
@@ -16674,10 +16675,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 AAFOptimusDCHAudio-Realtek.bin') do set "MD5=%%N"
 if %MD5% equ f055255757ed703d17de15bcb0acff70 (
-%nhcolor% 08 " %Green%| PASS | %White%AAFOptimusDCHAudio-Realtek.bin
+%nhcolor% 08 " %green%| PASS | %white%AAFOptimusDCHAudio-Realtek.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | AAFOptimusDCHAudio-Realtek.bin
+%nhcolor% 08 " %red%| FAIL | AAFOptimusDCHAudio-Realtek.bin
 del /q /f /s "AAFOptimusDCHAudio-Realtek.bin" >nul
 timeout /t 2 >nul
 goto :WTHx643
@@ -16696,22 +16697,22 @@ goto soundFX
 @echo off
 cd "%GHOST_DATA%"
 cls
-%nhcolor% 01 " %White%Sound Mod                                                             | ARC  |  SIZE  |                                "
-%nhcolor% D3 " %White%Dolby Laboratories                                                                                                     "
+%nhcolor% 01 " %white%Sound Mod                                                             | ARC  |  SIZE  |                                "
+%nhcolor% D3 " %white%Dolby Laboratories                                                                                                     "
 %nhcolor% 03 " [1] | %white%Dolby Atmos 3                                                   | x64  |  19MB  |
 %nhcolor% 03 " [2] | %white%Dolby Atmos 3 for Gaming                                        | x64  |  19MB  |
-%nhcolor% D3 " %White%Nahimic 3 (v1.4.1.0)                                                                                                   "
+%nhcolor% D3 " %white%Nahimic 3 (v1.4.1.0)                                                                                                   "
 %nhcolor% 03 " [3] | %white%A-Volute Nahimic                                                | x64  |  44MB  |
-%nhcolor% D3 " %White%Creative Sound Blaster                                                                                                 "
+%nhcolor% D3 " %white%Creative Sound Blaster                                                                                                 "
 %nhcolor% 03 " [4] | %white%SoundBlaster 720                                                | x64  |  26MB  |
 %nhcolor% 80 "                                                                                                                        "
 %nhcolor% 08 " [5] | Tutorial How to Install Drivers (Dolby Atmos 3 / Nahimic 3)                                                      "
 %nhcolor% 08 " [0] | Back to menu                                                                                                     "
-%nhcolor% 41 "                  %White%NOTE: To install Driver mod make sure your device also supports HD Audio Device.                      "
-%nhcolor% 41 "                  %White%NOTE: Do not update the Apps UWP if you want to keep using this sound modded.                         "
-%nhcolor% 41 "                  %White%NOTE: Only for Windows 10.                                                                            "
-%nhcolor% 41 "             %White%(If you want to keep using This modded please Disable > Windows Update > In Services)                      "
-set /p firstindex=" %Red%Type option : "
+%nhcolor% 41 "                  %white%NOTE: To install Driver mod make sure your device also supports HD Audio Device.                      "
+%nhcolor% 41 "                  %white%NOTE: Do not update the Apps UWP if you want to keep using this sound modded.                         "
+%nhcolor% 41 "                  %white%NOTE: Only for Windows 10.                                                                            "
+%nhcolor% 41 "             %white%(If you want to keep using This modded please Disable > Windows Update > In Services)                      "
+set /p firstindex=" %red%Type option : "
 if "%firstindex%"=="1" goto sound1
 if "%firstindex%"=="2" goto sound2
 if "%firstindex%"=="3" goto sound3
@@ -16759,7 +16760,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%SB 720 "
+%nhcolor% 07 " %red%SB 720 "
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/356DgGx" -o"SoundBlaster_720.7z"
 cls
@@ -16767,9 +16768,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 SoundBlaster_720.7z') do set "MD5=%%N"
 if %MD5% equ 2b353ef34b0882bf6cb2b94521e8bf67 (
-%nhcolor% 08 " %Green%| PASS | %White%SoundBlaster_720.7z
+%nhcolor% 08 " %green%| PASS | %white%SoundBlaster_720.7z
 ) else (
-%nhcolor% 08 " %Red%| FAIL | SoundBlaster_720.7z
+%nhcolor% 08 " %red%| FAIL | SoundBlaster_720.7z
 del /q /f /s "SoundBlaster_720.7z" >nul
 goto :WTHx643
 )
@@ -16820,7 +16821,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Dolby Atmos 3 - x64"
+%nhcolor% 07 " %red%Dolby Atmos 3 - x64"
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3wc8cBe" -o"DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx"
 cls
@@ -16832,9 +16833,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx') do set "MD5=%%N"
 if %MD5% equ 2aaaf67170d8a4cbd189f760247c5ebf (
-%nhcolor% 08 " %Green%| PASS | %White%DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx
+%nhcolor% 08 " %green%| PASS | %white%DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx
+%nhcolor% 08 " %red%| FAIL | DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx
 del /q /f /s "DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx" >nul
 goto :WTHx643
 )
@@ -16903,7 +16904,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Dolby Atmos 3 - x64"
+%nhcolor% 07 " %red%Dolby Atmos 3 - x64"
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3wc8cBe" -o"DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx"
 cls
@@ -16915,9 +16916,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx') do set "MD5=%%N"
 if %MD5% equ 2aaaf67170d8a4cbd189f760247c5ebf (
-%nhcolor% 08 " %Green%| PASS | %White%DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx
+%nhcolor% 08 " %green%| PASS | %white%DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx
+%nhcolor% 08 " %red%| FAIL | DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx
 del /q /f /s "DolbyLaboratories.DolbyAtmos_3.20402.409.0_x64__rz1tebttyb220.Appx" >nul
 goto :WTHx643
 )
@@ -16983,7 +16984,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 07 " %Red%Nahimic 3 (v1.4.1.0) - x64"
+%nhcolor% 07 " %red%Nahimic 3 (v1.4.1.0) - x64"
 %nhcolor% 07 " ====================================================================================================================="
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3pLWPgT" -o"A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.Appx"
 cls
@@ -16993,9 +16994,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.Appx') do set "MD5=%%N"
 if %MD5% equ 4d8d62db531eadfc1ba99bb159584188 (
-%nhcolor% 08 " %Green%| PASS | %White%A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.Appx
+%nhcolor% 08 " %green%| PASS | %white%A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.Appx
+%nhcolor% 08 " %red%| FAIL | A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.Appx
 del /q /f /s "A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.Appx" >nul
 goto :WTHx643
 )
@@ -17040,14 +17041,14 @@ del /q /f /s "analytic" >nul 2>nul
 :gamingmode
 @echo off
 cls
-%nhcolor% D3 " %White% Upscaling AMD FSR / Nvidia Image Scaling | Game Monitor OSD | Etc                                                    "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [1]  | %White%Upscaling Tools " 
-%nhcolor% 03 " [2]  | %White%Game Monitor OSD" 
-%nhcolor% 03 " [3]  | %White%Old Tweaked Windows 10" 
-%nhcolor% 03 " [0]  | %Green%Back to menu                                         
+%nhcolor% D3 " %white% Upscaling AMD FSR / Nvidia Image Scaling | Game Monitor OSD | Etc                                                    "
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [1]  | %white%Upscaling Tools " 
+%nhcolor% 03 " [2]  | %white%Game Monitor OSD" 
+%nhcolor% 03 " [3]  | %white%Old Tweaked Windows 10" 
+%nhcolor% 03 " [0]  | %green%Back to menu                                         
 %nhcolor% 07 " ======================================================================================================================"
-set /p firstindex=" %Red%Type option : "
+set /p firstindex=" %red%Type option : "
 if "%firstindex%"=="1" goto upS01
 if "%firstindex%"=="2" goto upS02
 if "%firstindex%"=="3" goto upS03
@@ -17060,21 +17061,21 @@ cls
 goto gamingmode
 :upS01
 cls
-%nhcolor% D3 " %White% Upscaling AMD FSR / Nvidia Image Scaling                                                                             "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [1]  | %White%Magpie v0.10.1 " 
-%nhcolor% 03 " [2]  | %White%Lossless Scaling 2.6.0.6 " 
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [3]  | %White%How to Use upscaling tools " 
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [0]  | %Green%Back to menu                                         
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " %Yellow%How to use > The game must be running in windowed mode. 
-%nhcolor% 03 " %Yellow%e.g your native screen 1080p > set in-game 720p window mode then use upscaling shortcut key.
+%nhcolor% D3 " %white% Upscaling AMD FSR / Nvidia Image Scaling                                                                             "
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [1]  | %white%Magpie v0.10.1 " 
+%nhcolor% 03 " [2]  | %white%Lossless Scaling 2.6.0.6 " 
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [3]  | %white%How to Use upscaling tools " 
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [0]  | %green%Back to menu                                         
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %yellow%How to use > The game must be running in windowed mode. 
+%nhcolor% 03 " %yellow%e.g your native screen 1080p > set in-game 720p window mode then use upscaling shortcut key.
 echo.
-%nhcolor% 03 " %Red%NOTE: If cant launch please install Visual C++ Redistributables AIO.
+%nhcolor% 03 " %red%NOTE: If cant launch please install Visual C++ Redistributables AIO.
 %nhcolor% 07 " ======================================================================================================================"
-set /p firstindex=" %Red%Type option : "
+set /p firstindex=" %red%Type option : "
 if "%firstindex%"=="1" goto upscale01
 if "%firstindex%"=="2" goto upscale02
 if "%firstindex%"=="3" start https://www.youtube.com/watch?v=cWSi6W3Jt3g && goto upS01
@@ -17107,9 +17108,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Lossless.Scaling.2.6.0.6') do set "MD5=%%N"
 if %MD5% equ 0012d6a90a7c70a15591222a4e8d13a4 (
-%nhcolor% 08 " %Green%| PASS | %White%Lossless.Scaling.2.6.0.6
+%nhcolor% 08 " %green%| PASS | %white%Lossless.Scaling.2.6.0.6
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Lossless.Scaling.2.6.0.6
+%nhcolor% 08 " %red%| FAIL | Lossless.Scaling.2.6.0.6
 del /q /f /s "Lossless.Scaling.2.6.0.6" >nul
 goto :WTHx643
 )
@@ -17119,15 +17120,15 @@ cls
 goto upS01
 :upS02
 cls
-%nhcolor% D3 " %White%Game Monitor OSD                                                                                                      "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [1]  | %White%CapFrameX + Monitor + Analysis + Etc" 
-%nhcolor% 03 " [2]  | %White%MSI Afterburner + Monitor + GPU Overclocking + Etc" 
-%nhcolor% 03 " [3]  | %White%GamePP + Monitor + Benchmark + Upscaling + Reshade + Etc (Language: english+chinese)" 
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [0]  | %Green%Back to menu                                         
+%nhcolor% D3 " %white%Game Monitor OSD                                                                                                      "
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [1]  | %white%CapFrameX + Monitor + Analysis + Etc" 
+%nhcolor% 03 " [2]  | %white%MSI Afterburner + Monitor + GPU Overclocking + Etc" 
+%nhcolor% 03 " [3]  | %white%GamePP + Monitor + Benchmark + Upscaling + Reshade + Etc (Language: english+chinese)" 
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [0]  | %green%Back to menu                                         
 %nhcolor% 07 " ======================================================================================================================"
-set /p firstindex=" %Red%Type option : "
+set /p firstindex=" %red%Type option : "
 if "%firstindex%"=="1" goto osd001
 if "%firstindex%"=="2" goto osd002
 if "%firstindex%"=="3" goto osd003
@@ -17169,37 +17170,37 @@ rd /s /q "CapFrameX"
 goto upS02
 :upS03
 cls
-%nhcolor% D3 " %White%Old Tweak                                                                                                             "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [1]  | %White%HPET (High Precision Event Timer) " 
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " %White%Windows 10 Startup Delay (Boot up times login screen)                                           "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% D3 " %white%Old Tweak                                                                                                             "
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [1]  | %white%HPET (High Precision Event Timer) " 
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%Windows 10 Startup Delay (Boot up times login screen)                                           "
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " [6]  | %white%Disable Startup Delay                                                                                     "
 %nhcolor% 03 " [7]  | %white%Set to Default %yellow%(Windows 10)                                                                     "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " %White%Mitigations for (Spectre Variant 2) and (Meltdown) (for Intel CPU)    "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%Mitigations for (Spectre Variant 2) and (Meltdown) (for Intel CPU)    "
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " [8]  | %white%Disable mitigation                                                                                     "
 %nhcolor% 03 " [9]  | %white%Enable  mitigation                                                                                      "
 %nhcolor% 03 " [10] | %white%Set to Default %yellow%(Windows 10)                                                                      "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " %White%Disable the Login Screens Background Blur on Windows 10"
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%Disable the Login Screens Background Blur on Windows 10"
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " [11] | %white%Disable                                                                                     "
 %nhcolor% 03 " [12] | %white%Set to Default %yellow%(Windows 10)  "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " %White%Enable Game Mode And Ultimate Performance Power Plan (for High-end PC)"
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%Enable Game Mode And Ultimate Performance Power Plan (for High-end PC)"
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " [13] | %white%Enable                                                                                     "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " %White%Hardware-accelerated GPU scheduling (Available for Windows 10 version 2004 / Latest Drivers Graphics Cards)"
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%Hardware-accelerated GPU scheduling (Available for Windows 10 version 2004 / Latest Drivers Graphics Cards)"
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " [14] | %white%Enable or Disable                                                                                   "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [0]  | %Green%Back to menu                                         
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [0]  | %green%Back to menu                                         
 %nhcolor% 07 " ======================================================================================================================"
-set /p firstindex=" %Red%Type option : "
+set /p firstindex=" %red%Type option : "
 if "%firstindex%"=="1" goto gamingmodehpet
 if "%firstindex%"=="6" goto gamingmode67
 if "%firstindex%"=="7" goto gamingmode7
@@ -17220,21 +17221,21 @@ goto upS03
 :gamingmodehpet
 cls
 cd "%GHOST_DATA%"                                                                                       "
-%nhcolor% 03 " %White%HPET (High Precision Event Timer)                                        "
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%HPET (High Precision Event Timer)                                        "
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " [1]  | %white%HPET Disable                                                   
-%nhcolor% 03 " [2]  | %white%HPET Enable %Red%(not recommended for AMD Cards)
+%nhcolor% 03 " [2]  | %white%HPET Enable %red%(not recommended for AMD Cards)
 %nhcolor% 03 " [3]  | %white%Set to Default %yellow%(Windows 10)
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " %White%HPET (High Precision Event Timer) / DynamicTick / Tscsync - (V2)
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [4]  | %white%HPET: Enable  / Dynamictick: Yes / Tscsync: Enhanced %Red%(not recommended for AMD Cards)         
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " %white%HPET (High Precision Event Timer) / DynamicTick / Tscsync - (V2)
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [4]  | %white%HPET: Enable  / Dynamictick: Yes / Tscsync: Enhanced %red%(not recommended for AMD Cards)         
 %nhcolor% 03 " [5]  | %white%HPET: Disable / Dynamictick: Yes / Tscsync: Enhanced                 
 %nhcolor% 03 " [6]  | %white%Set to Default %yellow%(Windows 10)        
-%nhcolor% 03 " %White%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [0]  | %Green%Back to menu             
+%nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 03 " [0]  | %green%Back to menu             
 %nhcolor% 07 " ======================================================================================================================"
-set /p firstindex=" %Red%Type option : "
+set /p firstindex=" %red%Type option : "
 if "%firstindex%"=="1" goto gamingmode1
 if "%firstindex%"=="2" goto gamingmode2
 if "%firstindex%"=="3" goto gamingmode3
@@ -17459,7 +17460,7 @@ goto begin
 :cortanabeta1
 cd "%GHOST_DATA%"
 cls
-%nhcolor% 07 " %Red%Cortana Beta for Windows 10 version 2004"
+%nhcolor% 07 " %red%Cortana Beta for Windows 10 version 2004"
 %nhcolor% 07 " ====================================================================================================================="
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 15 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1kzuPjxENfF1jwh-dRxtu4dnXaYxV0shl" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
@@ -17478,89 +17479,89 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001') do set "MD5=%%N"
 if %MD5% equ 40bf589a68225927c07eb3335586fa20 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %red%| FAIL | Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001
 del /q /f /s "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.002') do set "MD5=%%N"
 if %MD5% equ 93e9cbd1b0f84d9dc7240907bfeb28cc (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.002
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %red%| FAIL | Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.002
 del /q /f /s "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.002" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.003') do set "MD5=%%N"
 if %MD5% equ fe56b68526635a17e8f8af3cf6f8ccea (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.003
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %red%| FAIL | Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.003
 del /q /f /s "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.003" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ e049b9316262537b8c8c71c77836f573 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64
 del /q /f /s "Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 0e4e6784a4b1802acd3e0ee5c5e991bb (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86
 del /q /f /s "Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 74dcc090a080498fe2f8ff1c139cec9c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
 del /q /f /s "Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ a4e2af92db60a0491d0b78372f3b5ab2 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86
 del /q /f /s "Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 80a4d6a322a785461088b7c504fdcd30 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64
 del /q /f /s "Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 3811044b43bc3a1a334922740a7532fc (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86
 del /q /f /s "Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 8bf2f9fc4faca15880db229645777906 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27810.0_x64
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27810.0_x64
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x64
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x64
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
 for /f %%N in ('hashsum /a md5 Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cf0864d157cc5be151e725e10ea43780 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.VCLibs.140.00_14.0.27810.0_x86
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.VCLibs.140.00_14.0.27810.0_x86
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86
+%nhcolor% 08 " %red%| FAIL | Microsoft.VCLibs.140.00_14.0.27810.0_x86
 del /q /f /s "Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
@@ -17622,10 +17623,10 @@ del /q /s /f "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.Msi
 del /q /s /f "Microsoft.549981C3F5F10_2.2005.5739.0_neutral_~_8wekyb3d8bbwe.Msixbundle"
 del /q /s /f "Microsoft.549981C3F5F10_2.2005.5739.0_neutral_~_8wekyb3d8bbwe.Msixbundle"
 cls
-echo %Red%Cortana completely installed.
+echo %red%Cortana completely installed.
 timeout /t 2 >nul
 cls
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 10 >nul
 goto begin
 :cortanabeta2
@@ -17658,12 +17659,12 @@ del /q /s remove-cortanabeta.ps1 >nul 2>nul
 taskkill /im explorer.exe /f
 start explorer.exe
 cls
-echo %Red%Cortana Beta completely remove.
+echo %red%Cortana Beta completely remove.
 timeout /t 3 >nul
 goto begin
 :cortanabeta3
 cls
-echo %Red%Sorry Cortana Beta only works on Windows 10 Version 2004 or higher
+echo %red%Sorry Cortana Beta only works on Windows 10 Version 2004 or higher
 timeout /t 3 >nul
 goto begin
 :cortanabetatest
@@ -17690,7 +17691,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" goto cortanabeta549981C3F5F10x86
 cls
 :cortanabeta549981C3F5F10x64
 cls
-%nhcolor% 07 " %Red%Cortana Beta for Windows 10 version 2004/2009 x64"
+%nhcolor% 07 " %red%Cortana Beta for Windows 10 version 2004/2009 x64"
 cls
 cd "%GHOST_DATA%"
 cls
@@ -17721,9 +17722,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 06a96eac1ce27d04d70f85460d48a9fb (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
@@ -17762,15 +17763,15 @@ cls
 cd..
 RD /S /Q "Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
-echo %Red%Cortana completely installed.
+echo %red%Cortana completely installed.
 timeout /t 2 >nul
 cls
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 10 >nul
 goto begin
 :cortanabeta549981C3F5F10x86
 cls
-%nhcolor% 07 " %Red%Cortana Beta for Windows 10 version 2004/2009 x86"
+%nhcolor% 07 " %red%Cortana Beta for Windows 10 version 2004/2009 x86"
 cls
 cd "%GHOST_DATA%"
 cls
@@ -17801,9 +17802,9 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ 06a96eac1ce27d04d70f85460d48a9fb (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5
 )
@@ -17832,10 +17833,10 @@ cls
 cd..
 RD /S /Q "Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
-echo %Red%Cortana completely installed.
+echo %red%Cortana completely installed.
 timeout /t 2 >nul
 cls
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 10 >nul
 goto begin
 :win22621
@@ -17902,17 +17903,17 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.windows.photos_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cdfdd1e58a66861c78e9ffcf705bff09 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 goto install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.windows.photos_8wekyb3d8bbwe.Appx" >nul
 goto downloadmsphoto1
 )
 cls
 :downloadmsphoto1
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://files.catbox.moe/das3j3.Appx" -o"Microsoft.windows.photos_8wekyb3d8bbwe.Appx"
@@ -17920,10 +17921,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.windows.photos_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cdfdd1e58a66861c78e9ffcf705bff09 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 goto install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.windows.photos_8wekyb3d8bbwe.Appx" >nul
 goto :errordlphotos
 )
@@ -17938,15 +17939,15 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.windows.photos_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cdfdd1e58a66861c78e9ffcf705bff09 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.windows.photos_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-%nhcolor% 07 " %Red%Microsoft Windows Photos x64"
+%nhcolor% 07 " %red%Microsoft Windows Photos x64"
 timeout /t 3 >nul
 cls
 %_7ZA_EXE% x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
@@ -17965,7 +17966,7 @@ timeout /t 3 >nul
 RD /S /Q /f "microsoft.windows.photos_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "microsoft.windows.photos_8wekyb3d8bbwe" >nul 2>nul
 cls
-::echo %Green%Microsoft Windows Photos and Video Editor Completely Installed.
+::echo %green%Microsoft Windows Photos and Video Editor Completely Installed.
 timeout /t 3 >nul
 cls
 goto begin
@@ -17975,10 +17976,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.windows.photos_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cdfdd1e58a66861c78e9ffcf705bff09 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 goto :install
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.windows.photos_8wekyb3d8bbwe.Appx" >nul
 goto :download
 )
@@ -18006,9 +18007,9 @@ rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
 cls
-::echo %White%If you cant download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%Lightgray%
+::echo %white%If you cant download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://files.catbox.moe/das3j3.Appx" -o"Microsoft.windows.photos_8wekyb3d8bbwe.Appx"
@@ -18019,15 +18020,15 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.windows.photos_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ cdfdd1e58a66861c78e9ffcf705bff09 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.windows.photos_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.windows.photos_8wekyb3d8bbwe.Appx" >nul
 goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-%nhcolor% 07 " %Red%Microsoft Windows Photos x86"
+%nhcolor% 07 " %red%Microsoft Windows Photos x86"
 timeout /t 3 >nul
 cls
 ::%_7ZA_EXE% x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
@@ -18046,7 +18047,7 @@ timeout /t 3 >nul
 RD /S /Q /f "microsoft.windows.photos_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "microsoft.windows.photos_8wekyb3d8bbwe" >nul 2>nul
 cls
-::echo %Green%Microsoft Windows Photos and Video Editor Completely Installed.
+::echo %green%Microsoft Windows Photos and Video Editor Completely Installed.
 timeout /t 3 >nul
 cls
 goto begin
@@ -18064,13 +18065,13 @@ FOR /D %%p in ("%PROGRAMFILES%\WindowsApps\*Microsoft.Photos.MediaEngineDLC*") d
 cls
 del /q /s "remove-photos.ps1" >nul 2>nul
 cls
-echo %Red%Microsoft Windows Photos and Video Editor completely remove.
+echo %red%Microsoft Windows Photos and Video Editor completely remove.
 timeout /t 3 >nul
 goto begin
 :ErrorMD52020
 cls
 echo.
-%nhcolor% 08 "%Yellow%Seems your internet is blocking the server, please using VPN or Google DNS or get it from MS Store."
+%nhcolor% 08 "%yellow%Seems your internet is blocking the server, please using VPN or Google DNS or get it from MS Store."
 timeout /t 10 >nul
 goto begin
 :zunemusic2020
@@ -18080,10 +18081,10 @@ cd "%GHOST_DATA%"
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ d5bc2fcdf74f7011fb31ff2d4dccfc19 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :zunecheckxinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -18108,7 +18109,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3fLY3UD" -o"Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx"
@@ -18118,10 +18119,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ d5bc2fcdf74f7011fb31ff2d4dccfc19 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx
 goto :zunecheckxinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto :ErrorMD5msstore
 )
@@ -18131,7 +18132,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto zunemusic2020x64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto zunemusic2020x86
 :zunemusic2020x64
 cls
-%nhcolor% 07 " %Red%Microsoft Zune Music x64"
+%nhcolor% 07 " %red%Microsoft Zune Music x64"
 timeout /t 3 >nul
 cls
 %_7ZA_EXE% x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
@@ -18153,7 +18154,7 @@ timeout /t 3 >nul
 RD /S /Q /f "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
-echo %Green%Microsoft Zune Music Completely Installed.
+echo %green%Microsoft Zune Music Completely Installed.
 timeout /t 3 >nul
 cls
 goto begin
@@ -18171,7 +18172,7 @@ exit
 
 :zunemusic2020x86
 cls
-%nhcolor% 07 " %Red%Microsoft Zune Music x86"
+%nhcolor% 07 " %red%Microsoft Zune Music x86"
 timeout /t 3 >nul
 cls
 %_7ZA_EXE% x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
@@ -18192,7 +18193,7 @@ timeout /t 3 >nul
 RD /S /Q /f "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
-echo %Green%Microsoft Zune Music Completely Installed.
+echo %green%Microsoft Zune Music Completely Installed.
 timeout /t 3 >nul
 cls
 goto begin
@@ -18221,7 +18222,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/37Bvo0w" -o"Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe.Appx"
@@ -18231,7 +18232,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto store1607x64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto store1607x64
 :store1607x64
 cls
-%nhcolor% 07 " %Red%Microsoft Store x64"
+%nhcolor% 07 " %red%Microsoft Store x64"
 timeout /t 3 >nul
 cls
 %_7ZA_EXE% x Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore1607 -o"%GHOST_TEMP%\Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe"
@@ -18269,7 +18270,7 @@ timeout /t 3 >nul
 RD /S /Q /f "Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
-echo %Green%Microsoft Store Completely Installed.
+echo %green%Microsoft Store Completely Installed.
 timeout /t 3 >nul
 cls
 goto begin
@@ -18295,13 +18296,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\GHOSTDARK.theme" echo %Green%Set Themes GHOST SPECTRE - Full Dark (beta test) && timeout /t 4 >nul && themeswitcher.exe GHOSTDARK.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\GHOSTDARK.theme" echo %green%Set Themes GHOST SPECTRE - Full Dark (beta test) && timeout /t 4 >nul && themeswitcher.exe GHOSTDARK.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -18326,7 +18327,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/32cejIu" -o"themes.ghostdark.2004.7z"
@@ -18336,14 +18337,14 @@ if %MD5% equ 21f8b0a84acd0b2e931f6de8007cde1a (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "themes.ghostdark.2004.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTDARK theme
+echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
 themeswitcher.exe GHOSTDARK.theme
@@ -18355,7 +18356,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTDARK theme
+echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
 themeswitcher.exe GHOSTDARK.theme
@@ -18367,7 +18368,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTDARK theme
+echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
 themeswitcher.exe GHOSTDARK.theme
@@ -18378,7 +18379,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTDARK theme
+echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
 themeswitcher.exe GHOSTDARK.theme
@@ -18388,7 +18389,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher1\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTDARK theme
+echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
 themeswitcher.exe GHOSTDARK.theme
@@ -18416,7 +18417,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.ghostdark.2004.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -18436,13 +18437,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\GHOSTNOIDX1.theme" echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX1 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\GHOSTNOIDX1.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -18467,7 +18468,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -18477,14 +18478,14 @@ if %MD5% equ ba675f00027bca6da38afdb64c2324e0 (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "themes.GHOSTNOIDX1.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
+echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe GHOSTNOIDX1.theme
@@ -18495,7 +18496,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
+echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe GHOSTNOIDX1.theme
@@ -18506,7 +18507,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
+echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe GHOSTNOIDX1.theme
@@ -18516,7 +18517,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
+echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe GHOSTNOIDX1.theme
@@ -18526,7 +18527,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher1\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
+echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe GHOSTNOIDX1.theme
@@ -18551,7 +18552,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX1.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -18571,13 +18572,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\GHOSTNOIDX2.theme" echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX2 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\GHOSTNOIDX2.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -18602,7 +18603,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -18612,14 +18613,14 @@ if %MD5% equ e66ab98d30388e5f4c4844713f20d85e (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
+echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX2.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe GHOSTNOIDX2.theme
@@ -18630,7 +18631,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
+echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX2.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe GHOSTNOIDX2.theme
@@ -18641,7 +18642,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
+echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX2.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe GHOSTNOIDX2.theme
@@ -18651,7 +18652,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
+echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX2.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe GHOSTNOIDX2.theme
@@ -18676,7 +18677,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -18696,13 +18697,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\BIBDarkMode1.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark Mode 1 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\BIBDarkMode1.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 1 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -18727,7 +18728,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -18737,14 +18738,14 @@ if %MD5% equ 5cc5a2deefe7616baf14347d1f033f4e (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "theme.BIBDarkMode.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 1
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode1.theme
@@ -18755,7 +18756,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 1
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode1.theme
@@ -18766,7 +18767,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 1
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode1.theme
@@ -18776,7 +18777,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 1
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode1.theme
@@ -18801,7 +18802,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -18821,13 +18822,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\BIBDarkMode2.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark Mode 2 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\BIBDarkMode2.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 2 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -18852,7 +18853,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -18862,14 +18863,14 @@ if %MD5% equ 5cc5a2deefe7616baf14347d1f033f4e (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "theme.BIBDarkMode.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 2
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode2.theme
@@ -18880,7 +18881,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 2
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode2.theme
@@ -18891,7 +18892,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 2
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode2.theme
@@ -18901,7 +18902,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 2
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode2.theme
@@ -18926,7 +18927,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -18946,13 +18947,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\BIBDarkMode3.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark Mode 3 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode3.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\BIBDarkMode3.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 3 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode3.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -18977,7 +18978,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -18987,14 +18988,14 @@ if %MD5% equ 5cc5a2deefe7616baf14347d1f033f4e (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "theme.BIBDarkMode.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 3
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode3.theme
@@ -19005,7 +19006,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 3
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode3.theme
@@ -19016,7 +19017,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 3
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode3.theme
@@ -19026,7 +19027,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 3
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkMode3.theme
@@ -19051,7 +19052,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -19071,13 +19072,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\BIBDarkModeMac.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark ModeMac && timeout /t 4 >nul && themeswitcher.exe BIBDarkModeMac.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\BIBDarkModeMac.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark ModeMac && timeout /t 4 >nul && themeswitcher.exe BIBDarkModeMac.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -19102,7 +19103,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -19112,14 +19113,14 @@ if %MD5% equ 5cc5a2deefe7616baf14347d1f033f4e (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "theme.BIBDarkMode.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 3
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkModeMac.theme
@@ -19130,7 +19131,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 3
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkModeMac.theme
@@ -19141,7 +19142,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 3
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkModeMac.theme
@@ -19151,7 +19152,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - BIB DarkMode 3
+echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe BIBDarkModeMac.theme
@@ -19176,7 +19177,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -19196,13 +19197,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\Fluent.Dark.Mode.theme" echo %Green%Set Themes GHOST SPECTRE - Fluent Dark Mode && timeout /t 4 >nul && themeswitcher.exe Fluent.Dark.Mode.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\Fluent.Dark.Mode.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode && timeout /t 4 >nul && themeswitcher.exe Fluent.Dark.Mode.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -19227,7 +19228,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -19237,14 +19238,14 @@ if %MD5% equ 7def6ed7533159d79c20db748a277710 (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "theme.Fluent.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - Fluent Dark Mode
+echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Fluent.Dark.Mode.theme
@@ -19255,7 +19256,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - Fluent Dark Mode
+echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Fluent.Dark.Mode.theme
@@ -19266,7 +19267,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - Fluent Dark Mode
+echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Fluent.Dark.Mode.theme
@@ -19276,7 +19277,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - Fluent Dark Mode
+echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Fluent.Dark.Mode.theme
@@ -19301,7 +19302,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -19321,13 +19322,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\Fluent.Day.theme" echo %Green%Set Themes GHOST SPECTRE - Fluent Day && timeout /t 4 >nul && themeswitcher.exe Fluent.Day.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\Fluent.Day.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Day && timeout /t 4 >nul && themeswitcher.exe Fluent.Day.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -19352,7 +19353,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -19362,14 +19363,14 @@ if %MD5% equ 7def6ed7533159d79c20db748a277710 (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "theme.Fluent.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - Fluent Day
+echo %green%Set Themes GHOST SPECTRE - Fluent Day
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Fluent.Day.theme
@@ -19380,7 +19381,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - Fluent Day
+echo %green%Set Themes GHOST SPECTRE - Fluent Day
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Fluent.Day.theme
@@ -19391,7 +19392,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - Fluent Day
+echo %green%Set Themes GHOST SPECTRE - Fluent Day
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Fluent.Day.theme
@@ -19401,7 +19402,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - Fluent Day
+echo %green%Set Themes GHOST SPECTRE - Fluent Day
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Fluent.Day.theme
@@ -19426,7 +19427,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -19446,13 +19447,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\Penumbra10ws.theme" echo %Green%Set Themes GHOST SPECTRE - Penumbra 10ws && timeout /t 4 >nul && themeswitcher.exe Penumbra10ws.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\Penumbra10ws.theme" echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws && timeout /t 4 >nul && themeswitcher.exe Penumbra10ws.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -19477,7 +19478,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -19487,14 +19488,14 @@ if %MD5% equ 1e30adf4013f244d233e85b5370004ee (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "theme.Penumbra10.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - Penumbra 10ws
+echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Penumbra10.7z -aoa -ppen -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Penumbra10ws.theme
@@ -19505,7 +19506,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - Penumbra 10ws
+echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Penumbra10.7z -aoa -ppen -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Penumbra10ws.theme
@@ -19516,7 +19517,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - Penumbra 10ws
+echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Penumbra10.7z -aoa -ppen -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Penumbra10ws.theme
@@ -19526,7 +19527,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - Penumbra 10ws
+echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Penumbra10.7z -aoa -ppen -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe Penumbra10ws.theme
@@ -19550,7 +19551,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -19570,13 +19571,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\HNY.Dark.theme" echo %Green%Set Themes GHOST SPECTRE - HNY Dark && timeout /t 4 >nul && themeswitcher.exe HNY.Dark.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\HNY.Dark.theme" echo %green%Set Themes GHOST SPECTRE - HNY Dark && timeout /t 4 >nul && themeswitcher.exe HNY.Dark.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -19601,7 +19602,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -19611,14 +19612,14 @@ if %MD5% equ f9fe8c57566c5c3223c77c88c15db50d (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "theme.HNY.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - HNY Dark
+echo %green%Set Themes GHOST SPECTRE - HNY Dark
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe HNY.Dark.theme
@@ -19629,7 +19630,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - HNY Dark
+echo %green%Set Themes GHOST SPECTRE - HNY Dark
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe HNY.Dark.theme
@@ -19640,7 +19641,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - HNY Dark
+echo %green%Set Themes GHOST SPECTRE - HNY Dark
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe HNY.Dark.theme
@@ -19650,7 +19651,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - HNY Dark
+echo %green%Set Themes GHOST SPECTRE - HNY Dark
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe HNY.Dark.theme
@@ -19674,7 +19675,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
@@ -19694,13 +19695,13 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\HNY.Light.theme" echo %Green%Set Themes GHOST SPECTRE - HNY Light && timeout /t 4 >nul && themeswitcher.exe HNY.Light.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if exist "%windir%\Resources\Themes\HNY.Light.theme" echo %green%Set Themes GHOST SPECTRE - HNY Light && timeout /t 4 >nul && themeswitcher.exe HNY.Light.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%"=="2009" goto :themedownloads
 if "%var%"=="2004" goto :themedownloads
 if "%var%"=="1909" goto :themedownloads
-echo %Green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
+echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
@@ -19725,7 +19726,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
@@ -19735,14 +19736,14 @@ if %MD5% equ f9fe8c57566c5c3223c77c88c15db50d (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "theme.HNY.7z" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22000" (
-echo %Green%Set Themes GHOST SPECTRE - HNY Light
+echo %green%Set Themes GHOST SPECTRE - HNY Light
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe HNY.Light.theme
@@ -19753,7 +19754,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22621" (
-echo %Green%Set Themes GHOST SPECTRE - HNY Light
+echo %green%Set Themes GHOST SPECTRE - HNY Light
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe HNY.Light.theme
@@ -19764,7 +19765,7 @@ goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
-echo %Green%Set Themes GHOST SPECTRE - HNY Light
+echo %green%Set Themes GHOST SPECTRE - HNY Light
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe HNY.Light.theme
@@ -19774,7 +19775,7 @@ start explorer
 goto ghst
 )
 if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
-echo %Green%Set Themes GHOST SPECTRE - HNY Light
+echo %green%Set Themes GHOST SPECTRE - HNY Light
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
 themeswitcher.exe HNY.Light.theme
@@ -19798,14 +19799,14 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Val
 del /q /f /s "themes.GHOSTNOIDX2.7z" >nul 2>nul
 del /q /f /s "UltraUXThemePatcher_3.7.2.exe" >nul 2>nul
 attrib +h /s /d "%Appdata%\Microsoft\Windows\Start Menu\Programs\UltraUXThemePatcher" >nul 2>nul
-echo %Red%Restart the computer for the changes to take effect.
+echo %red%Restart the computer for the changes to take effect.
 timeout /t 7 >nul
 cls
 goto begin
 
 :DLPV1
 cls
-if exist "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" echo %Green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V1 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
+if exist "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V1 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/p21bfpi9vt505gt/DARK.LIGHT.PURPLE.V1.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack"
 cls
@@ -19815,12 +19816,12 @@ if %MD5% equ 521145e1b2e31f7425dfe0045a34754e (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
-echo %Green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V1
+echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V1
 timeout /t 4 >nul
 "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" >nul 2>nul
 taskkill /IM "SystemSettings.exe" /F >nul 2>nul
@@ -19828,7 +19829,7 @@ cls
 goto ghst
 :DLPV2
 cls
-if exist "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" echo %Green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V2 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
+if exist "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V2 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/oy83dnjoinhxkkk/DARK.LIGHT.PURPLE.V2.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack"
 cls
@@ -19838,12 +19839,12 @@ if %MD5% equ 7c8beb558fa2a4f1f4987eb24e888647 (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
-echo %Green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V2
+echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V2
 timeout /t 4 >nul
 "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" >nul 2>nul
 taskkill /IM "SystemSettings.exe" /F >nul 2>nul
@@ -19851,7 +19852,7 @@ cls
 goto ghst
 :DLPV3
 cls
-if exist "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" echo %Green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V3 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
+if exist "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V3 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3GvoHg5" -t 5 -O "%Windir%\Resources\Themes\GHOSTV3.deskthemepack"
 cls
@@ -19861,12 +19862,12 @@ if %MD5% equ c224250e3abaebe6a333aa844d989798 (
 cls
 goto SETTHEME
 ) else (
-%nhcolor% 08 " %Red%
+%nhcolor% 08 " %red%
 del /q /f /s "GHOSTV3.deskthemepack" >nul 2>nul
 goto WTHx642
 )
 :SETTHEME
-echo %Green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V3
+echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V3
 timeout /t 4 >nul
 "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" >nul 2>nul
 taskkill /IM "SystemSettings.exe" /F >nul 2>nul
@@ -19879,9 +19880,9 @@ cls
 COLOR 09
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/068/ut pack 1.2.3.50.zip" -t 15 -O "uTorrent 3.5.5 Build 46038.repack.zip"
 cls
-::echo %White%===============================
-::echo %White%Password Zip: %Yellow%repack.me
-::echo %White%===============================
+::echo %white%===============================
+::echo %white%Password Zip: %yellow%repack.me
+::echo %white%===============================
 ::pause
 explorer /select,"uTorrent 3.5.5 Build 46038.repack.zip"
 cls
@@ -19911,7 +19912,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% --no-conf --file-allocation=none --http-user="rsload.net" --http-passwd="rsload.net" --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false "http://95.141.198.238/noload2/files/065/8974946IObit.Uninstaller.Pro-10.1.0.21-RSLOAD.NET-.zip" -o"IOBit_Uninstaller_10.1.0.21.repack.GHOSTSPECTRE.zip"
@@ -19945,16 +19946,16 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" echo Nope Your Windows 32bit is not support
 :nvx64
 REG QUERY "HKEY_CURRENT_USER\SOFTWARE\NVIDIA Corporation" >nul 2>&1
 if %ERRORLEVEL% EQU 0 goto nvdown
-if %ERRORLEVEL% EQU 1 echo %Lightgray%Sorry.. you are not using Nvidia Video Card. && timeout /t 8 >nul && goto usersrequest 
+if %ERRORLEVEL% EQU 1 echo %white%Sorry.. you are not using Nvidia Video Card. && timeout /t 8 >nul && goto usersrequest 
 :nvdown
 cls
-::echo %White%If you cant download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%Lightgray%
+::echo %white%If you cant download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
 timeout /t 6 >nul
 cls
-echo %Yellow%Please uninstall previous geforce driver using DDU (Display Driver Uninstaller) before install this driver. %Lightgray%
+echo %yellow%Please uninstall previous geforce driver using DDU (Display Driver Uninstaller) before install this driver. %white%
 timeout /t 10 >nul
 cls
-echo %White%NVIDIA GEFORCE GAME READY 470.05 WHQL (DCH) x64 - %Yellow%GeForce Developer Drivers %Lightgray%
+echo %white%NVIDIA GEFORCE GAME READY 470.05 WHQL (DCH) x64 - %yellow%GeForce Developer Drivers %white%
 timeout /t 5 >nul
 cls
 cd "%GHOST_DATA%"
@@ -19979,11 +19980,11 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %White% WGET2 DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET2 DOWNLOADER
+echo %white%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/470.05_gameready_win10-dch_64bit_international.exe" -t 5
 start http://www.mediafire.com/file/b844fbyd01spymg/470.05_gameready_win10-dch_64bit_international.exe/file
-echo %White%=======================================================================
+echo %white%=======================================================================
 ::pause
 ::explorer /select,"470.05_gameready_win10-dch_64bit_international.exe"
 timeout /t 1 >nul
@@ -20002,7 +20003,7 @@ goto skipWinget
 del /q /f /s "Microsoft.DesktopAppInstaller.Appx" >nul
 )
 cls
-echo %White%Updating DesktopApp Installer.. Please Wait..
+echo %white%Updating DesktopApp Installer.. Please Wait..
 echo.
 cd "%GHOST_DATA%" >nul 2>nul
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/43Bt4Cu" -o"Microsoft.DesktopAppInstaller.Appx"
@@ -20059,20 +20060,20 @@ cls
 set "WSAV=NONE"
 for /f "tokens=6 delims=1 " %%a in ('winget list --accept-source-agreements ^|find "Windows Subsystem for Android"') do set "WSAV=%%a"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %White%Your Current Version WSA: %Cyan%%WSAV%
+echo  %white%Your Current Version WSA: %cyan%%WSAV%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Windows Subsystem For Android %Yellow%1.7.32815.0
-%nhcolor% 03 "  [2]   > %Green%Windows Subsystem For Android %Yellow%2204.40000.1.0
-%nhcolor% 03 "  [3]   > %Green%Windows Subsystem For Android %Yellow%2208.40000.4.0
-%nhcolor% 03 "  [4]   > %Green%Windows Subsystem For Android %Yellow%2211.40000.11.0
-%nhcolor% 03 "  [5]   > %Green%Windows Subsystem For Android %Yellow%2301.40000.4.0
-%nhcolor% 03 "  [6]   > %Green%Windows Subsystem For Android %Yellow%2304.40000.5.0
-%nhcolor% 03 "  [7]   > %Green%Windows Subsystem For Android %Yellow%2305.40000.5.0
-%nhcolor% 03 "  [8]   > %Green%Windows Subsystem For Android %Yellow%2309.40000.2.0
+%nhcolor% 03 "  [1]   > %green%Windows Subsystem For Android %yellow%1.7.32815.0
+%nhcolor% 03 "  [2]   > %green%Windows Subsystem For Android %yellow%2204.40000.1.0
+%nhcolor% 03 "  [3]   > %green%Windows Subsystem For Android %yellow%2208.40000.4.0
+%nhcolor% 03 "  [4]   > %green%Windows Subsystem For Android %yellow%2211.40000.11.0
+%nhcolor% 03 "  [5]   > %green%Windows Subsystem For Android %yellow%2301.40000.4.0
+%nhcolor% 03 "  [6]   > %green%Windows Subsystem For Android %yellow%2304.40000.5.0
+%nhcolor% 03 "  [7]   > %green%Windows Subsystem For Android %yellow%2305.40000.5.0
+%nhcolor% 03 "  [8]   > %green%Windows Subsystem For Android %yellow%2309.40000.2.0
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [99]  > %Green%Install WSATool / WSATools allows you to backup Android apps (Size: 165MB)
+%nhcolor% 03 "  [99]  > %green%Install WSATool / WSATools allows you to backup Android apps (Size: 165MB)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -20101,7 +20102,7 @@ for /f %%N in ('hashsum /a md5 WSATools_2023.320.2130.0.bin') do set "MD5=%%N"
 if %MD5% equ f7a41488e1b7590795fa9a5d701446f7 (
 goto wsatoolinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSATools_2023.320.2130.0.bin
+%nhcolor% 08 " %red%| FAIL | WSATools_2023.320.2130.0.bin
 del /q /f /s "WSATools_2023.320.2130.0.bin" >nul
 )
 cls
@@ -20111,7 +20112,7 @@ for /f %%N in ('hashsum /a md5 WSATools_2023.320.2130.0.bin') do set "MD5=%%N"
 if %MD5% equ f7a41488e1b7590795fa9a5d701446f7 (
 goto wsatoolinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSATools_2023.320.2130.0.bin
+%nhcolor% 08 " %red%| FAIL | WSATools_2023.320.2130.0.bin
 del /q /f /s "WSATools_2023.320.2130.0.bin" >nul
 )
 cls
@@ -20121,7 +20122,7 @@ for /f %%N in ('hashsum /a md5 WSATools_2023.320.2130.0.bin') do set "MD5=%%N"
 if %MD5% equ f7a41488e1b7590795fa9a5d701446f7 (
 goto wsatoolinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSATools_2023.320.2130.0.bin
+%nhcolor% 08 " %red%| FAIL | WSATools_2023.320.2130.0.bin
 del /q /f /s "WSATools_2023.320.2130.0.bin" >nul
 goto WTHx643
 )
@@ -20142,12 +20143,12 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 echo   Virtual Machine Platform : %VMP%
 ::echo   Hypervisor Platform      : %HVP%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %Green%[1] > %White% Enable/Disabled Virtual Machine Platform
-%nhcolor% 07 "  %Green%[2] > %White% Download / Install Windows Subsystem for Android
-%nhcolor% 07 "  %Green%[3] > %White% Download / Install Android Debug Bridge (ADB) / APK
-%nhcolor% 07 "  %Green%[4] > %White% Tutorial How to Install
+%nhcolor% 07 "  %green%[1] > %white% Enable/Disabled Virtual Machine Platform
+%nhcolor% 07 "  %green%[2] > %white% Download / Install Windows Subsystem for Android
+%nhcolor% 07 "  %green%[3] > %white% Download / Install Android Debug Bridge (ADB) / APK
+%nhcolor% 07 "  %green%[4] > %white% Tutorial How to Install
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0] > %Green%Back
+%nhcolor% 03 "  [0] > %green%Back
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 0 >nul
 set /p op=Type option:
@@ -20164,14 +20165,14 @@ goto ANDROID
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Enabled"
-%nhcolor% 03 "  [2]  | %Green%Disabled"
+%nhcolor% 03 "  [1]  | %green%Enabled"
+%nhcolor% 03 "  [2]  | %green%Disabled"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %Red%NOTE: If you want to using VMWARE/VIRTUALBOX please Disabled Virtual Machine Platform.
+%nhcolor% 0D "  %red%NOTE: If you want to using VMWARE/VIRTUALBOX please Disabled Virtual Machine Platform.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 1 >nul
@@ -20206,12 +20207,12 @@ goto :ANDROID0001
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Download / Install Windows Subsystem for Android
+%nhcolor% 0D "  %white%Download / Install Windows Subsystem for Android
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download & Install (616MB)"
-%nhcolor% 03 "  [2]  | %Green%Remove Windows Subsystem for Android"
+%nhcolor% 03 "  [1]  | %green%Download & Install (616MB)"
+%nhcolor% 03 "  [2]  | %green%Remove Windows Subsystem for Android"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 1 >nul
@@ -20233,10 +20234,10 @@ cls
 ::PART01
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001') do set "MD5=%%N"
 if %MD5% equ 5cf7823fad820c5a667de6ab65a9d0dc (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
 goto androidcheckingpart02
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001" >nul
 goto downloadandroidpart01
 )
@@ -20244,10 +20245,10 @@ goto downloadandroidpart01
 ::PART02
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002') do set "MD5=%%N"
 if %MD5% equ 05052b07ed81dd24624eb3569530411d (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
 goto androidcheckingpart03
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002" >nul
 goto downloadandroidpart02
 )
@@ -20255,10 +20256,10 @@ goto downloadandroidpart02
 ::PART03
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003') do set "MD5=%%N"
 if %MD5% equ 9ec37d7a2abd4ca25fce33f37013a3e1 (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
 goto androidcheckingpart04
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003" >nul
 goto downloadandroidpart03
 )
@@ -20266,10 +20267,10 @@ goto downloadandroidpart03
 ::PART04
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004') do set "MD5=%%N"
 if %MD5% equ ffcdb9c1b3b26978a5515ca7e535ef08 (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
 goto androidinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004" >nul
 goto downloadandroidpart04
 )
@@ -20279,10 +20280,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001') do set "MD5=%%N"
 if %MD5% equ 5cf7823fad820c5a667de6ab65a9d0dc (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
 goto androinext02
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001" >nul
 goto CCPART01
 )
@@ -20292,10 +20293,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001') do set "MD5=%%N"
 if %MD5% equ 5cf7823fad820c5a667de6ab65a9d0dc (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
 goto androinext02
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001" >nul
 goto WTHx643
 )
@@ -20304,10 +20305,10 @@ goto WTHx643
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002') do set "MD5=%%N"
 if %MD5% equ 05052b07ed81dd24624eb3569530411d (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
 goto androinext03
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002" >nul
 goto downloadandroidpart02
 )
@@ -20318,10 +20319,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002') do set "MD5=%%N"
 if %MD5% equ 05052b07ed81dd24624eb3569530411d (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
 goto androinext03
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002" >nul
 goto CCPART02
 )
@@ -20331,10 +20332,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002') do set "MD5=%%N"
 if %MD5% equ 05052b07ed81dd24624eb3569530411d (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
 goto androinext03
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.002" >nul
 goto WTHx643
 )
@@ -20343,10 +20344,10 @@ goto WTHx643
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003') do set "MD5=%%N"
 if %MD5% equ 9ec37d7a2abd4ca25fce33f37013a3e1 (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
 goto androinext04
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003" >nul
 goto downloadandroidpart03
 )
@@ -20356,10 +20357,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003') do set "MD5=%%N"
 if %MD5% equ 9ec37d7a2abd4ca25fce33f37013a3e1 (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
 goto androinext04
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003" >nul
 goto CCPART03
 )
@@ -20369,10 +20370,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003') do set "MD5=%%N"
 if %MD5% equ 9ec37d7a2abd4ca25fce33f37013a3e1 (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
 goto androinext04
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.003" >nul
 goto WTHx643
 )
@@ -20381,10 +20382,10 @@ goto WTHx643
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004') do set "MD5=%%N"
 if %MD5% equ ffcdb9c1b3b26978a5515ca7e535ef08 (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
 goto androidinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004" >nul
 goto downloadandroidpart04
 )
@@ -20394,10 +20395,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004') do set "MD5=%%N"
 if %MD5% equ ffcdb9c1b3b26978a5515ca7e535ef08 (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
 goto androidinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004" >nul
 goto CCPART04
 )
@@ -20407,10 +20408,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004') do set "MD5=%%N"
 if %MD5% equ ffcdb9c1b3b26978a5515ca7e535ef08 (
-%nhcolor% 08 " %Green%| PASS | %White%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
+%nhcolor% 08 " %green%| PASS | %white%MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
 goto androidinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
+%nhcolor% 08 " %red%| FAIL | MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004
 del /q /f /s "MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.004" >nul
 goto WTHx643
 )
@@ -20419,10 +20420,10 @@ goto WTHx643
 cls
 for /f %%N in ('hashsum /a md5 Android.optional') do set "MD5=%%N"
 if %MD5% equ a41d3c1d94b18df5cee311b520c324f5 (
-%nhcolor% 08 " %Green%| PASS | %White%Android.optional
+%nhcolor% 08 " %green%| PASS | %white%Android.optional
 goto androidinstall2nd
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Android.optional
+%nhcolor% 08 " %red%| FAIL | Android.optional
 del /q /f /s "Android.optional" >nul
 )
 cls
@@ -20430,10 +20431,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Android.optional') do set "MD5=%%N"
 if %MD5% equ a41d3c1d94b18df5cee311b520c324f5 (
-%nhcolor% 08 " %Green%| PASS | %White%Android.optional
+%nhcolor% 08 " %green%| PASS | %white%Android.optional
 goto androidinstall2nd
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Android.optional
+%nhcolor% 08 " %red%| FAIL | Android.optional
 del /q /f /s "Android.optional" >nul
 )
 cls
@@ -20441,10 +20442,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Android.optional') do set "MD5=%%N"
 if %MD5% equ a41d3c1d94b18df5cee311b520c324f5 (
-%nhcolor% 08 " %Green%| PASS | %White%Android.optional
+%nhcolor% 08 " %green%| PASS | %white%Android.optional
 goto androidinstall2nd
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Android.optional
+%nhcolor% 08 " %red%| FAIL | Android.optional
 del /q /f /s "Android.optional" >nul
 goto WTHx643
 )
@@ -20504,31 +20505,31 @@ set "ADBCX=Not Installed"
 set "ADBCX=Installed"
 )
 ::FOR /F "tokens=2*" %%A in ('adb.exe devices') do set "ADBV=%%B"
-echo   %White%Android Debug Bridge (ADB) : %Yellow%%ADBCX%
-::echo   %White%ADB Version                : %Yellow%%ADBV%
+echo   %white%Android Debug Bridge (ADB) : %yellow%%ADBCX%
+::echo   %white%ADB Version                : %yellow%%ADBV%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  > %Green%Download & Install Android Debug Bridge (ADB) (11MB)"
-%nhcolor% 03 "  [2]  > %Green%Remove Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [1]  > %green%Download & Install Android Debug Bridge (ADB) (11MB)"
+%nhcolor% 03 "  [2]  > %green%Remove Android Debug Bridge (ADB)"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]  > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [4]  > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [5]  > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [6]  > %Green%List of devices"
-%nhcolor% 03 "  [7]  > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [8]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [9]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [3]  > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [4]  > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [5]  > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [6]  > %green%List of devices"
+%nhcolor% 03 "  [7]  > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [8]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [9]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [10] > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [11] > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "  [10] > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [11] > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12] > %Green%Root   %Yellow%> %White%Windows Subsystem for Android"
-%nhcolor% 03 "  [13] > %Green%UnRoot %Yellow%> %White%Windows Subsystem for Android"
+%nhcolor% 03 "  [12] > %green%Root   %yellow%> %white%Windows Subsystem for Android"
+%nhcolor% 03 "  [13] > %green%UnRoot %yellow%> %white%Windows Subsystem for Android"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]  > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -20581,14 +20582,14 @@ goto 03ANDROID
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto 03ANDROID || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB04
 :ADB03
 ::%PROGRAMDATA%\
@@ -20662,7 +20663,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -20716,10 +20717,10 @@ cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 Android.optional') do set "MD5=%%N"
 if %MD5% equ a41d3c1d94b18df5cee311b520c324f5 (
-%nhcolor% 08 " %Green%| PASS | %White%Android.optional
+%nhcolor% 08 " %green%| PASS | %white%Android.optional
 goto root
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Android.optional
+%nhcolor% 08 " %red%| FAIL | Android.optional
 del /q /f /s "Android.optional" >nul
 )
 cls
@@ -20727,10 +20728,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Android.optional') do set "MD5=%%N"
 if %MD5% equ a41d3c1d94b18df5cee311b520c324f5 (
-%nhcolor% 08 " %Green%| PASS | %White%Android.optional
+%nhcolor% 08 " %green%| PASS | %white%Android.optional
 goto root
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Android.optional
+%nhcolor% 08 " %red%| FAIL | Android.optional
 del /q /f /s "Android.optional" >nul
 )
 cls
@@ -20738,10 +20739,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Android.optional') do set "MD5=%%N"
 if %MD5% equ a41d3c1d94b18df5cee311b520c324f5 (
-%nhcolor% 08 " %Green%| PASS | %White%Android.optional
+%nhcolor% 08 " %green%| PASS | %white%Android.optional
 goto root
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Android.optional
+%nhcolor% 08 " %red%| FAIL | Android.optional
 del /q /f /s "Android.optional" >nul
 goto WTHx643
 )
@@ -20782,10 +20783,10 @@ cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 Android.kernel.un') do set "MD5=%%N"
 if %MD5% equ 85526c7ac6e61811af9aca8ca7a7d542 (
-%nhcolor% 08 " %Green%| PASS | %White%Android.kernel.un
+%nhcolor% 08 " %green%| PASS | %white%Android.kernel.un
 goto unroot
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Android.optional
+%nhcolor% 08 " %red%| FAIL | Android.optional
 del /q /f /s "Android.kernel.un" >nul
 )
 cls
@@ -20793,10 +20794,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Android.kernel.un') do set "MD5=%%N"
 if %MD5% equ 85526c7ac6e61811af9aca8ca7a7d542 (
-%nhcolor% 08 " %Green%| PASS | %White%Android.kernel.un
+%nhcolor% 08 " %green%| PASS | %white%Android.kernel.un
 goto unroot
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Android.kernel.un
+%nhcolor% 08 " %red%| FAIL | Android.kernel.un
 del /q /f /s "Android.kernel.un" >nul
 )
 cls
@@ -20804,10 +20805,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Android.kernel.un') do set "MD5=%%N"
 if %MD5% equ 85526c7ac6e61811af9aca8ca7a7d542 (
-%nhcolor% 08 " %Green%| PASS | %White%Android.kernel.un
+%nhcolor% 08 " %green%| PASS | %white%Android.kernel.un
 goto unroot
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Android.kernel.un
+%nhcolor% 08 " %red%| FAIL | Android.kernel.un
 del /q /f /s "Android.kernel.un" >nul
 goto WTHx643
 )
@@ -20845,7 +20846,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://api.onedrive.com/v1.0/shares/s!AknvY_6QeKgkcp-malezWi6YYPw/root/content" -o"4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx"
@@ -20857,7 +20858,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto netflix64
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto netflix86
 cls
 :netflix64
-%nhcolor% 07 " %Red%Netflix x64"
+%nhcolor% 07 " %red%Netflix x64"
 timeout /t 3 >nul
 cls
 %_7ZA_EXE% x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
@@ -20887,12 +20888,12 @@ timeout /t 3 >nul
 RD /S /Q /f "4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8" >nul 2>nul
 RD /S /Q "4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8" >nul 2>nul
 cls
-echo %Green%Netflix Completely Installed.
+echo %green%Netflix Completely Installed.
 timeout /t 3 >nul
 cls
 goto begin
 :netflix86
-%nhcolor% 07 " %Red%Netflix x86"
+%nhcolor% 07 " %red%Netflix x86"
 timeout /t 3 >nul
 cls
 %_7ZA_EXE% x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
@@ -20916,7 +20917,7 @@ timeout /t 3 >nul
 RD /S /Q /f "4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8" >nul 2>nul
 RD /S /Q "4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8" >nul 2>nul
 cls
-echo %Green%Netflix Completely Installed.
+echo %green%Netflix Completely Installed.
 timeout /t 3 >nul
 cls
 goto begin
@@ -20945,15 +20946,15 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net" "https://bit.ly/2QCYojZ" -o"Mirillis.Action!.4.17.0.repack.GHOSTSPECTRE.zip"
 timeout /t 5 >nul
 cls
-echo %White%===============================
-echo %White%Password Zip: %Yellow%ghost2021
-echo %White%===============================
+echo %white%===============================
+echo %white%Password Zip: %yellow%ghost2021
+echo %white%===============================
 pause
 explorer /select,"Mirillis.Action!.4.17.0.repack.GHOSTSPECTRE.zip"
 cls
@@ -20961,44 +20962,44 @@ goto usersrequest
 :usr057
 cls
 cd "%GHOST_DATA%"
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx') do set "MD5=%%N"
 if %MD5% equ 56a78510dc446545af13645601e662c0 (
-%nhcolor% 08 " %Green%| PASS | %White%SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
+%nhcolor% 08 " %green%| PASS | %white%SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
 timeout /t 2 >nul
 goto installspotify
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
 del /q /f /s "SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto dlspotify
 )
 :dlspotify
 cd "%GHOST_DATA%"
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://uc4c2aba45f0c781a167d830ffb9.dl.dropboxusercontent.com/s/25irvn9azrj93nd/SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx?dl=1" -o"SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx"
 cls
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx') do set "MD5=%%N"
 if %MD5% equ 56a78510dc446545af13645601e662c0 (
-%nhcolor% 08 " %Green%| PASS | %White%SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
+%nhcolor% 08 " %green%| PASS | %white%SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
 timeout /t 2 >nul
 goto installspotify
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
 del /q /f /s "SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto WTHx643
 )
 :installspotify
 powershell add-appxpackage -path SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
 cls
-echo %White%Close GhostToolbox before launch Spotify Music.
+echo %white%Close GhostToolbox before launch Spotify Music.
 timeout /t 6 >nul
 cls
 goto usersrequest
@@ -21037,7 +21038,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net"  "http://95.141.198.238/noload2/files/073/raimersoft_tapinradio_2.14.3.zip" -o"TapinRadio.Pro.2.14.3.repack.zip"
@@ -21070,7 +21071,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net"  "http://95.141.198.238/noload2/files/073/raimersoft_radiomaximus_2.29.2.zip" -o"RadioMaximus.v2.29.2.Pro.Repack.zip"
@@ -21103,7 +21104,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net" "http://95.141.198.238/noload2/files/069/Hard Disk Sentinel 5.70.11973 RePack (& Portable) by TryRooM.rar" -o"Hard.Disk.Sentinel.PRO.5.70.11973.RePack.rar"
@@ -21136,18 +21137,18 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::echo %White%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%White%
+::echo %white%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
 timeout /t 10 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net" "https://bit.ly/3g3nPpk" -o"ManyCam.7.8.1.16.GHOSTSPECTRE.7z"
 timeout /t 5 >nul
 cls
-echo %White%===============================
-echo %White%Password Zip: %Yellow%ghost12
-echo %White%===============================
+echo %white%===============================
+echo %white%Password Zip: %yellow%ghost12
+echo %white%===============================
 pause
 explorer /select,"ManyCam.7.8.1.16.GHOSTSPECTRE.7z"
 cls
@@ -21179,7 +21180,7 @@ cls
 :startdownload
 timeout /t 10 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2LcSenJ" -o"avira_phantom_vpn_2.33.3.30309.repack.zip"
@@ -21187,9 +21188,9 @@ color 03
 
 timeout /t 5 >nul
 cls
-::echo %White%===============================
-::echo %White%Password Zip: %Yellow%ghostspectre3232
-::echo %White%===============================
+::echo %white%===============================
+::echo %white%Password Zip: %yellow%ghostspectre3232
+::echo %white%===============================
 ::pause
 explorer /select,"avira_phantom_vpn_2.33.3.30310.repack.zip"
 cls
@@ -21219,18 +21220,18 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %White%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%White%
+echo %white%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
 timeout /t 10 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3ezZtCJ" -o"Air.Explorer.Pro.v4.0.1.repack+portable.rar"
 timeout /t 5 >nul
 cls
-echo %White%===============================
-echo %White%Password Zip: %Yellow%ghostspectre3434
-echo %White%===============================
+echo %white%===============================
+echo %white%Password Zip: %yellow%ghostspectre3434
+echo %white%===============================
 pause
 explorer /select,"Air.Explorer.Pro.v4.0.1.repack+portable.rar"
 cls
@@ -21269,19 +21270,19 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::echo %White%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%White%
+::echo %white%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
 timeout /t 10 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3vy3JIh" -o"VMware.Workstation.Pro.16.0.0.Repack.GHOSTSPECTRE.zip"
 timeout /t 5 >nul
 :vmskip
 cls
-echo %White%===============================
-echo %White%Password Zip: %Yellow%ghostspectre789
-echo %White%===============================
+echo %white%===============================
+echo %white%Password Zip: %yellow%ghostspectre789
+echo %white%===============================
 pause
 explorer /select,"VMwareplayer16.1.0.GhostSpectre.rar"
 cls
@@ -21320,19 +21321,19 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %White%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%White%
+echo %white%If you cant Download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
 timeout /t 10 >nul
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3e2KsZz" -o"VMwareplayer16.1.0.GhostSpectre.rar"
 timeout /t 5 >nul
 :vmskip
 cls
-echo %White%===============================
-echo %White%Password Zip: %Yellow%ghostspectre987
-echo %White%===============================
+echo %white%===============================
+echo %white%Password Zip: %yellow%ghostspectre987
+echo %white%===============================
 pause
 explorer /select,"VMwareplayer16.1.0.GhostSpectre.rar"
 cls
@@ -21363,7 +21364,7 @@ rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
 cls
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exe" -o"lghub_installer.exe"
@@ -21378,11 +21379,11 @@ cls
 cd "%GHOST_DATA%"
 del /q /s *3uIvYUv*
 cls
-%nhcolor% 08 " %Green%Nvidia Control Panel UWP / Portable"
+%nhcolor% 08 " %green%Nvidia Control Panel UWP / Portable"
 %nhcolor% 08 " ---------------------
-%nhcolor% 08 "  %Green%[1] | %white%Nvidia Control Panel UWP      - Download and Install
-%nhcolor% 08 "  %Green%[2] | %white%Nvidia Control Panel Portable - Download and Install
-%nhcolor% 08 "  %Green%[0] | %white%Back to menu
+%nhcolor% 08 "  %green%[1] | %white%Nvidia Control Panel UWP      - Download and Install
+%nhcolor% 08 "  %green%[2] | %white%Nvidia Control Panel Portable - Download and Install
+%nhcolor% 08 "  %green%[0] | %white%Back to menu
 %nhcolor% 08 " ---------------------
 timeout /t 1 >nul
 set /p op=Type option:
@@ -21398,17 +21399,17 @@ goto nvidiotcp
 :nvcpp
 cls
 cd "%GHOST_DATA%"
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z') do set "MD5=%%N"
 if %MD5% equ a46cd95aadd5369a0d428fe334061897 (
-%nhcolor% 08 " %Green%| PASS | %White%NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
+echo %white%=======================================================================
 goto :installnvpt
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
 del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
@@ -21431,39 +21432,39 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
-echo %White%=======================================================================
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
+echo %white%=======================================================================
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://api.onedrive.com/v1.0/shares/s!AknvY_6QeKgkgTkDIjr9Xse0mEpS/root/content" -o"NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z"
 timeout /t 5 >nul
 cls
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z') do set "MD5=%%N"
 if %MD5% equ a46cd95aadd5369a0d428fe334061897 (
-%nhcolor% 08 " %Green%| PASS | %White%NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
+echo %white%=======================================================================
 goto :installnvpt
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
 del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3tHbv12" -o"NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z"
 timeout /t 5 >nul
 cls
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z') do set "MD5=%%N"
 if %MD5% equ a46cd95aadd5369a0d428fe334061897 (
-%nhcolor% 08 " %Green%| PASS | %White%NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
+echo %white%=======================================================================
 goto :installnvpt
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z
 del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 goto :nvidiotcp
 )
 :installnvpt
@@ -21516,7 +21517,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://uc555b6847affe04605636c0688d.dl.dropboxusercontent.com/s/tcz9r6yutrxcwer/Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe?dl=1" -o"Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx"
@@ -21527,7 +21528,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" goto hevcinstallx86
 cls
 :hevcinstallx64
 cls
-echo %Red%Microsoft.HEVCVideoExtension for %Cyan%X64
+echo %red%Microsoft.HEVCVideoExtension for %cyan%X64
 cls
 %_7ZA_EXE% x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
 cls
@@ -21549,7 +21550,7 @@ timeout /t 5 >nul
 goto usersrequest
 :hevcinstallx86
 cls
-echo %Red%Microsoft.HEVCVideoExtension for %Cyan%X86
+echo %red%Microsoft.HEVCVideoExtension for %cyan%X86
 cls
 %_7ZA_EXE% x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
 cls
@@ -21574,25 +21575,25 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 echo  Game Client                                
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 08 "  %Green%[1]  %Yellow%> %White%Steam          
-%nhcolor% 08 "  %Green%[2]  %Yellow%> %White%Origin         
-%nhcolor% 08 "  %Green%[3]  %Yellow%> %White%Ubisoft Connect
-%nhcolor% 08 "  %Green%[4]  %Yellow%> %White%GOG GALAXY 2.0 
-%nhcolor% 08 "  %Green%[5]  %Yellow%> %White%Epic Games     
-%nhcolor% 08 "  %Green%[6]  %Yellow%> %White%Battle.net     
-%nhcolor% 08 "  %Green%[7]  %Yellow%> %White%itch.io        
-%nhcolor% 08 "  %Green%[8]  %Yellow%> %White%Bethesda Net   
-%nhcolor% 08 "  %Green%[9]  %Yellow%> %White%EA App         
-%nhcolor% 08 "  %Green%[10] %Yellow%> %White%Xbox App %Red%(For Windows 10 20H2/21H1 or higher)
-%nhcolor% 08 "  %Green%[11] %Yellow%> %White%Rockstar Games Launcher      
-%nhcolor% 08 "  %Green%[12] %Yellow%> %White%Amazon Games App   
+%nhcolor% 08 "  %green%[1]  %yellow%> %white%Steam          
+%nhcolor% 08 "  %green%[2]  %yellow%> %white%Origin         
+%nhcolor% 08 "  %green%[3]  %yellow%> %white%Ubisoft Connect
+%nhcolor% 08 "  %green%[4]  %yellow%> %white%GOG GALAXY 2.0 
+%nhcolor% 08 "  %green%[5]  %yellow%> %white%Epic Games     
+%nhcolor% 08 "  %green%[6]  %yellow%> %white%Battle.net     
+%nhcolor% 08 "  %green%[7]  %yellow%> %white%itch.io        
+%nhcolor% 08 "  %green%[8]  %yellow%> %white%Bethesda Net   
+%nhcolor% 08 "  %green%[9]  %yellow%> %white%EA App         
+%nhcolor% 08 "  %green%[10] %yellow%> %white%Xbox App %red%(For Windows 10 20H2/21H1 or higher)
+%nhcolor% 08 "  %green%[11] %yellow%> %white%Rockstar Games Launcher      
+%nhcolor% 08 "  %green%[12] %yellow%> %white%Amazon Games App   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Green%[0] %White%Back to menu                                         
+echo  %green%[0] %white%Back to menu                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Red%NOTE: Please install %Yellow%"Visual C++ Redistributables AIO" %Red%before Install this game client.
-echo  %Red%NOTE: Required Internet for download.                         
+echo  %red%NOTE: Please install %yellow%"Visual C++ Redistributables AIO" %red%before Install this game client.
+echo  %red%NOTE: Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %Yellow%Version : Latest                                     
+echo  %yellow%Version : Latest                                     
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -21617,159 +21618,159 @@ cls
 goto gameclient
 :GSCHANGELOG
 cls
-%nhcolor% 07 "%BBlue%%SWhite% 10/04/2021 %NRed%%SWhite% 1.9.0.14 %NBlack%%SWhite% Update IObit Driver Booster 9.0.0.85 RC                                                        "
-%nhcolor% 07 "%BBlue%%SWhite% 10/04/2021 %NRed%%SWhite% 1.9.0.14 %NBlack%%SWhite% Add Catbox/Dropbox server Microsoft Store for Windows 10 version 1603/1703                     "
-%nhcolor% 07 "%BBlue%%SWhite% 10/10/2021 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO Windows 11 Pro Superlite/Compact https://bit.ly/3oPzo8a                            "
-%nhcolor% 07 "%BBlue%%SWhite% 10/11/2021 %NRed%%SWhite% 1.9.0.15 %NBlack%%SWhite% Add Options for Windows 11                                                                     "
-%nhcolor% 07 "%BBlue%%SWhite% 10/12/2021 %NRed%%SWhite% 1.9.0.16 %NBlack%%SWhite% Add Options Touch Keyboard / Clipboard for Superlite / Chat / Teams  (Windows 11)              "
-%nhcolor% 07 "%BBlue%%SWhite% 10/14/2021 %NRed%%SWhite% 1.9.0.17 %NBlack%%SWhite% Add Options Snipping Tool (Windows 11)                                                         "
-%nhcolor% 07 "%BBlue%%SWhite% 10/16/2021 %NRed%%SWhite% 1.9.0.18 %NBlack%%SWhite% Supported Windows 11 Themes Patch (Windows 11)                                                 "
-%nhcolor% 07 "%BBlue%%SWhite% 10/17/2021 %NRed%%SWhite% 1.9.0.19 %NBlack%%SWhite% Add Microsoft Paint (Windows 11)                                                               "
-%nhcolor% 07 "%BBlue%%SWhite% 10/19/2021 %NRed%%SWhite% 1.9.0.20 %NBlack%%SWhite% Update Microsoft Xbox Gamebar 5.721.9022.0                                                     "
-%nhcolor% 07 "%BBlue%%SWhite% 10/19/2021 %NRed%%SWhite% 1.9.0.20 %NBlack%%SWhite% Add Options Restore Explorer Ribbon Old/Modern (Windows 11)                                    "
-%nhcolor% 07 "%BBlue%%SWhite% 10/30/2021 %NRed%%SWhite% 1.9.0.21 %NBlack%%SWhite% Add Windows Subsystem for Android (Windows 11) https://bit.ly/3bphAZr                          "
-%nhcolor% 07 "%BBlue%%SWhite% 11/01/2021 %NRed%%SWhite% 1.9.0.22 %NBlack%%SWhite% Add Unroot/Root Options Windows Subsystem for Android (Windows 11)                             "
-%nhcolor% 07 "%BBlue%%SWhite% 11/08/2021 %NRed%%SWhite% 1.9.0.23 %NBlack%%SWhite% Add Notepad for Windows 11 (Windows 11)                                                        "
-%nhcolor% 07 "%BBlue%%SWhite% 11/08/2021 %NRed%%SWhite% 1.9.0.23 %NBlack%%SWhite% Update Microsoft Paint 11.2110.0.0 (Windows 11)                                                "
-%nhcolor% 07 "%BBlue%%SWhite% 11/10/2021 %NRed%%SWhite% 1.9.0.24 %NBlack%%SWhite% Add Microsoft HEVC + AV1 Video Extension (Windows 11)                                          "
-%nhcolor% 07 "%BBlue%%SWhite% 11/15/2021 %NRed%%SWhite% 1.9.0.25 %NBlack%%SWhite% Add Microsoft Windows Terminal (UWP)                                                           "
-%nhcolor% 07 "%BBlue%%SWhite% 11/17/2021 %NRed%%SWhite% 1.9.0.26 %NBlack%%SWhite% Add Custom Patcher Taskbar/Explorer Windows 10 for Windows 11 (Windows 11)                     "
-%nhcolor% 07 "%BBlue%%SWhite% 12/17/2021 %NRed%%SWhite% 1.9.0.27 %NBlack%%SWhite% Add Disable/Enabled Biometrics for SUPERLITE (Windows 11)                                      "
-%nhcolor% 07 "%BBlue%%SWhite% 12/19/2021 %NRed%%SWhite% 1.9.0.28 %NBlack%%SWhite% Update Youtube-dl 2021.12.17                                                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 12/23/2021 %NRed%%SWhite% 1.9.0.29 %NBlack%%SWhite% Update IObit Driver Booster 9.1.0.156                                                          "
-%nhcolor% 07 "%BBlue%%SWhite% 12/30/2021 %NRed%%SWhite% 1.9.0.30 %NBlack%%SWhite% Add Youtube-dlp 2021.12.27                                                                     "
-%nhcolor% 07 "%BBlue%%SWhite% 01/31/2022 %NRed%%SWhite% 1.9.0.31 %NBlack%%SWhite% Update Youtube-dlp 2022.01.21                                                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 02/04/2022 %NRed%%SWhite% 1.9.0.32 %NBlack%%SWhite% Add Default Icons for Windows 11                                                               "
-%nhcolor% 07 "%BBlue%%SWhite% 02/06/2022 %NRed%%SWhite% 1.9.0.33 %NBlack%%SWhite% Add Default Themes GHOST SPECTRE V3                                                            "
-%nhcolor% 07 "%BBlue%%SWhite% 02/09/2022 %NRed%%SWhite% 1.9.0.34 %NBlack%%SWhite% Update Youtube-dlp 2022.02.04                                                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 02/13/2022 %NRed%%SWhite% 1.9.0.35 %NBlack%%SWhite% Windows Widgets for Windows 11                                                                 "
-%nhcolor% 07 "%BBlue%%SWhite% 02/18/2022 %NRed%%SWhite% 1.9.0.36 %NBlack%%SWhite% Update IObit Driver Booster 9.2.0.178                                                          "
-%nhcolor% 07 "%BBlue%%SWhite% 02/18/2022 %NRed%%SWhite% 1.9.0.36 %NBlack%%SWhite% Re-upload Windows 11 Recovery                                                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 02/20/2022 %NRed%%SWhite% 1.9.0.37 %NBlack%%SWhite% Update Windows 11 Notepad 11.2112.32.0                                                         "
-%nhcolor% 07 "%BBlue%%SWhite% 03/01/2022 %NRed%%SWhite% 1.9.0.38 %NBlack%%SWhite% Update Widgets Windows 11 421.20070.95.0 + Weather on Taskbar                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 03/09/2022 %NRed%%SWhite% 1.9.0.39 %NBlack%%SWhite% Minor bug fixes for Other Languages                                                            "
-%nhcolor% 07 "%BBlue%%SWhite% 03/09/2022 %NRed%%SWhite% 1.9.0.39 %NBlack%%SWhite% Update Youtube-dl 2022.03.08.1                                                                 "
-%nhcolor% 07 "%BBlue%%SWhite% 03/24/2022 %NRed%%SWhite% 1.9.0.40 %NBlack%%SWhite% Re-uploads Windows Recovery for LTSB 2016                                                      "
-%nhcolor% 07 "%BBlue%%SWhite% 03/24/2022 %NRed%%SWhite% 1.9.0.40 %NBlack%%SWhite% Update Explorer Patcher 22000.556.42.39 (Windows 11)                                           "
-%nhcolor% 07 "%BBlue%%SWhite% 04/13/2022 %NRed%%SWhite% 1.9.0.41 %NBlack%%SWhite% Update Youtube-dl 2022.04.08                                                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 04/18/2022 %NRed%%SWhite% 1.9.0.42 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V60                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 04/19/2022 %NRed%%SWhite% 1.9.0.43 %NBlack%%SWhite% Update IObit Driver Booster 9.3.0.209                                                          "
-%nhcolor% 07 "%BBlue%%SWhite% 05/01/2022 %NRed%%SWhite% 1.9.0.44 %NBlack%%SWhite% Update Custom Patcher Taskbar/Explorer Windows 11 22000.613.44.2                               "
-%nhcolor% 07 "%BBlue%%SWhite% 05/23/2022 %NRed%%SWhite% 1.9.0.45 %NBlack%%SWhite% Update Youtube-dl 2022.05.18                                                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 05/23/2022 %NRed%%SWhite% 1.9.0.45 %NBlack%%SWhite% Re-uploads Default Icons Windows 10                                                            "
-%nhcolor% 07 "%BBlue%%SWhite% 06/08/2022 %NRed%%SWhite% 1.9.0.46 %NBlack%%SWhite% Update Windows Subsystem for Android 2204.40000 (Windows 11) https://bit.ly/3NxeX9j            "
-%nhcolor% 07 "%BBlue%%SWhite% 06/27/2022 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO Windows 11 Pro 22H2 Beta Release https://youtu.be/EXoBHxCvxlE                      "
-%nhcolor% 07 "%BBlue%%SWhite% 06/27/2022 %NRed%%SWhite% 1.9.0.47 %NBlack%%SWhite% Update 7-Zip 22.00                                                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 06/28/2022 %NRed%%SWhite% 1.9.0.48 %NBlack%%SWhite% Add New Explorer Tab for Windows 11 22H2 Sun Valley 2 (Windows 11 SV2)                         "
-%nhcolor% 07 "%BBlue%%SWhite% 08/28/2022 %NRed%%SWhite% 1.9.0.49 %NBlack%%SWhite% Add Windows Recovery for Windows 11 22H2                                                       "
-%nhcolor% 07 "%BBlue%%SWhite% 09/23/2022 %NRed%%SWhite% 1.9.0.50 %NBlack%%SWhite% Update Windows Subsystem for Android 2208.40000 (Windows 11)                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 09/26/2022 %NRed%%SWhite% 1.9.0.51 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V62                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 09/26/2022 %NRed%%SWhite% 1.9.0.51 %NBlack%%SWhite% Add Admin Filter for Adminitrator Account (Windows 11)                                         "
-%nhcolor% 07 "%BBlue%%SWhite% 09/27/2022 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO Windows 11 Pro 22H2 Official Release https://youtu.be/EXoBHxCvxlE                  "
-%nhcolor% 07 "%BBlue%%SWhite% 09/28/2022 %NRed%%SWhite% 1.9.0.52 %NBlack%%SWhite% Add Microsoft Classic Calculator 6.3 x64                                                       "
-%nhcolor% 07 "%BBlue%%SWhite% 09/28/2022 %NRed%%SWhite% 1.9.0.52 %NBlack%%SWhite% Update Microsoft Xbox Game Bar 5.822.9161.0 x64                                                "
-%nhcolor% 07 "%BBlue%%SWhite% 09/30/2022 %NRed%%SWhite% 1.9.0.53 %NBlack%%SWhite% Add Microsoft Media Player 11.2208 (Windows 11)                                                "
-%nhcolor% 07 "%BBlue%%SWhite% 10/04/2022 %NRed%%SWhite% 1.9.0.54 %NBlack%%SWhite% Update Youtube-dlp 2022.10.04                                                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 10/20/2022 %NRed%%SWhite% 1.9.0.55 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V63                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 10/24/2022 %NRed%%SWhite% 1.9.0.56 %NBlack%%SWhite% Add Right Click Taskbar > Task Manager (Windows 11 SV2)                                        "
-%nhcolor% 07 "%BBlue%%SWhite% 11/11/2022 %NRed%%SWhite% 1.9.0.57 %NBlack%%SWhite% Update Youtube-dlp 2022.11.11                                                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 12/17/2022 %NRed%%SWhite% 1.9.0.58 %NBlack%%SWhite% Update Widgets Windows 11 422.33900.0.0 + Weather on Taskbar                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 12/17/2022 %NRed%%SWhite% 1.9.0.58 %NBlack%%SWhite% Update StartAllBack 3.5.6 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 01/06/2023 %NRed%%SWhite% 1.9.0.59 %NBlack%%SWhite% Update Youtube-dlp 2023.01.06                                                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 01/13/2023 %NRed%%SWhite% 1.9.0.60 %NBlack%%SWhite% Update Windows Subsystem for Android 2211.40000 (Windows 11)                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 01/31/2023 %NRed%%SWhite% 1.9.0.61 %NBlack%%SWhite% Update StartAllBack 3.5.7 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 02/14/2023 %NRed%%SWhite% 1.9.0.62 %NBlack%%SWhite% Add Microsoft Camera 2022.2210.9.70 (Windows 11)                                               "
-%nhcolor% 07 "%BBlue%%SWhite% 02/14/2023 %NRed%%SWhite% 1.9.0.62 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V65                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 02/15/2023 %NRed%%SWhite% 1.9.0.63 %NBlack%%SWhite% Update Windows Subsystem for Android 2301.40000 (Windows 11)                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 02/20/2023 %NRed%%SWhite% 1.9.0.64 %NBlack%%SWhite% Update Microsoft Xbox Gamebar 5.823.1271.0 + Xbox Identity Provider                            "
-%nhcolor% 07 "%BBlue%%SWhite% 03/04/2023 %NRed%%SWhite% 1.9.0.65 %NBlack%%SWhite% Update Youtube-dlp 2023.03.03 - Fixed download speed issues                                    "
-%nhcolor% 07 "%BBlue%%SWhite% 03/06/2023 %NRed%%SWhite% 1.9.0.66 %NBlack%%SWhite% Update Youtube-dlp 2023.03.05 - Stable + Update FFmpeg + Auto Update                           "
-%nhcolor% 07 "%BBlue%%SWhite% 03/07/2023 %NRed%%SWhite% 1.9.0.67 %NBlack%%SWhite% Update StartAllBack 3.6.2 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 03/19/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO Windows 11 Pro 22H2 Update Moment 2 https://youtu.be/EXoBHxCvxlE                   "
-%nhcolor% 07 "%BBlue%%SWhite% 03/19/2023 %NRed%%SWhite% 1.9.0.68 %NBlack%%SWhite% Add Force to removes Microsoft Edge/Edge Webview2 (type in console %Yellow%removedge %White%)  "
-%nhcolor% 07 "%BBlue%%SWhite% 03/19/2023 %NRed%%SWhite% 1.9.0.68 %NBlack%%SWhite% Update StartAllBack 3.6.3 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 03/19/2023 %NRed%%SWhite% 1.9.0.68 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V69                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 04/02/2023 %NRed%%SWhite% 1.9.0.69 %NBlack%%SWhite% Add Upscaling tools > Magpie / Loseless Scaling                                                "
-%nhcolor% 07 "%BBlue%%SWhite% 04/02/2023 %NRed%%SWhite% 1.9.0.69 %NBlack%%SWhite% Add Game Monitor OSD > CapFrameX / MSI Afterburner / GamePP                                    "
-%nhcolor% 07 "%BBlue%%SWhite% 04/06/2023 %NRed%%SWhite% 1.9.0.70 %NBlack%%SWhite% Add WhatsApp Desktop 2.2310.3.0 x64 (UWP)                                                      "
-%nhcolor% 07 "%BBlue%%SWhite% 04/06/2023 %NRed%%SWhite% 1.9.0.70 %NBlack%%SWhite% Add Telegram Desktop 4.7.1.0 x64 (UWP)                                                         "
-%nhcolor% 07 "%BBlue%%SWhite% 04/16/2023 %NRed%%SWhite% 1.9.0.71 %NBlack%%SWhite% Update StartAllBack 3.6.4 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 04/19/2023 %NRed%%SWhite% 1.9.0.72 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V70                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 05/08/2023 %NRed%%SWhite% 1.9.0.73 %NBlack%%SWhite% Microsoft Store Windows 11 + Xbox Apps + License (UWP)                                         "
-%nhcolor% 07 "%BBlue%%SWhite% 05/08/2023 %NRed%%SWhite% 1.9.0.73 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V72                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 05/09/2023 %NRed%%SWhite% 1.9.0.74 %NBlack%%SWhite% Fixed YoutubeDLP not saved in location Video/Audio                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 05/14/2023 %NRed%%SWhite% 1.9.0.75 %NBlack%%SWhite% Add AFF Optimus Realtek/Generic (Sound Mod)                                                    "
-%nhcolor% 07 "%BBlue%%SWhite% 05/14/2023 %NRed%%SWhite% 1.9.0.75 %NBlack%%SWhite% Add FX Sound (Sound Mod)                                                                       "
-%nhcolor% 07 "%BBlue%%SWhite% 05/17/2023 %NRed%%SWhite% 1.9.0.76 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V73                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 05/19/2023 %NRed%%SWhite% 1.9.0.77 %NBlack%%SWhite% Update Windows Subsystem for Android 2304.40000 (Windows 11)                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 05/19/2023 %NRed%%SWhite% 1.9.0.77 %NBlack%%SWhite% Add WsaTools Backuptool (Windows Subsystem for Android)                                        "
-%nhcolor% 07 "%BBlue%%SWhite% 05/23/2023 %NRed%%SWhite% 1.9.0.78 %NBlack%%SWhite% Update StartAllBack 3.6.5 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 06/12/2023 %NRed%%SWhite% 1.9.0.79 %NBlack%%SWhite% Update WhatsApp Desktop Latest version (UWP)                                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 06/12/2023 %NRed%%SWhite% 1.9.0.79 %NBlack%%SWhite% Update Telegram Desktop Latest version (UWP)                                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 06/12/2023 %NRed%%SWhite% 1.9.0.79 %NBlack%%SWhite% Update Desktop Apps Installer (UWP) for Windows version 1809 or higher is required             "
-%nhcolor% 07 "%BBlue%%SWhite% 06/18/2023 %NRed%%SWhite% 1.9.0.80 %NBlack%%SWhite% Update StartAllBack 3.6.7 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 06/19/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO Windows 11 Pro 22H2 Update Moment 3 https://youtu.be/kHZUYiyaH8k                   "
-%nhcolor% 07 "%BBlue%%SWhite% 06/19/2023 %NRed%%SWhite% 1.9.0.81 %NBlack%%SWhite% Update Windows Subsystem for Android 2305.40000 (Windows 11)                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 06/18/2023 %NRed%%SWhite% 1.9.0.82 %NBlack%%SWhite% Update StartAllBack 3.6.8 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 07/29/2023 %NRed%%SWhite% 1.9.0.83 %NBlack%%SWhite% Add Reduce Processes Mode 1/Mode 2/Mode 3 > ghostmode"
-%nhcolor% 07 "%BBlue%%SWhite% 07/29/2023 %NRed%%SWhite% 1.9.0.83 %NBlack%%SWhite% Update MS Photos to Latest version (UWP)"
-%nhcolor% 07 "%BBlue%%SWhite% 08/02/2023 %NRed%%SWhite% 1.9.0.84 %NBlack%%SWhite% Add Reduce Memory Automatically in 1min/5min/15min/30min/60min > ghostmode"
-%nhcolor% 07 "%BBlue%%SWhite% 08/07/2023 %NRed%%SWhite% 1.9.0.85 %NBlack%%SWhite% Update StartAllBack 3.6.11 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 08/15/2023 %NRed%%SWhite% 1.9.0.86 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V75                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 08/15/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN11 22H2 PRO U14 / Benchmark W11 M3 vs W10 AIO %Cyan%https://youtu.be/kHZUYiyaH8k"
-%nhcolor% 07 "%BBlue%%SWhite% 08/20/2023 %NRed%%SWhite% 1.9.0.87 %NBlack%%SWhite% Add Reduce Memory Automatically in Silent Mode > ghostmode"
-%nhcolor% 07 "%BBlue%%SWhite% 09/05/2023 %NRed%%SWhite% 1.9.0.88 %NBlack%%SWhite% Update StartAllBack 3.6.12 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 09/14/2023 %NRed%%SWhite% 1.9.0.89 %NBlack%%SWhite% Add Account Password Never expires / Account Information "
-%nhcolor% 07 "%BBlue%%SWhite% 09/25/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 8.1 Potato Update 9 %Cyan%https://youtu.be/MAtEoKkRyyM                         "
-%nhcolor% 07 "%BBlue%%SWhite% 09/26/2023 %NRed%%SWhite% 1.9.0.90 %NBlack%%SWhite% Add YoutubeDLP Video Without Audio                                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 09/29/2023 %NRed%%SWhite% 1.9.0.91 %NBlack%%SWhite% Add Copilot Preview (Windows 11 22H2) to use type copilot %Cyan%https://youtu.be/r4S9J_NyE4s   "
-%nhcolor% 07 "%BBlue%%SWhite% 10/02/2023 %NRed%%SWhite% 1.9.0.92 %NBlack%%SWhite% Update Windows Subsystem for Android 2309.40000 (Windows 11)                                   "
-%nhcolor% 07 "%BBlue%%SWhite% 10/06/2023 %NRed%%SWhite% 1.9.0.93 %NBlack%%SWhite% Update StartAllBack 3.6.13 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 10/11/2023 %NRed%%SWhite% 1.9.0.94 %NBlack%%SWhite% Add Windows Package Manager for Windows 11 version 21H2 or Higher %Cyan%https://youtu.be/QOsg7O62s9o "
-%nhcolor% 07 "%BBlue%%SWhite% 10/12/2023 %NRed%%SWhite% 1.9.0.95 %NBlack%%SWhite% Add Windows Package Manager for Windows 10 version 2004 or Higher                              "
-%nhcolor% 07 "%BBlue%%SWhite% 10/13/2023 %NRed%%SWhite% 1.9.0.96 %NBlack%%SWhite% Add Windows Package Manager for Windows 10 32bit version 2004 or Higher                        "
-%nhcolor% 07 "%BBlue%%SWhite% 10/23/2023 %NRed%%SWhite% 1.9.0.97 %NBlack%%SWhite% Update StartAllBack 3.6.14 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 10/25/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 11 23H2 / 22H2 U15 M4 %Cyan%https://youtu.be/kHZUYiyaH8k                       "
-%nhcolor% 07 "%BBlue%%SWhite% 10/28/2023 %NRed%%SWhite% 1.9.0.98 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V76                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 10/31/2023 %NRed%%SWhite% 1.9.0.99 %NBlack%%SWhite% Update StartAllBack 3.6.15 for SE Windows 11 22H1/22H2 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 11/05/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 11 23H2 UPDATE 2 %Cyan%https://youtu.be/kHZUYiyaH8k                            "
-%nhcolor% 07 "%BBlue%%SWhite% 11/05/2023 %NRed%%SWhite% 1.9.1.1  %NBlack%%SWhite% Add UWP Apps Uninstall for Windows Package Manager                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 11/06/2023 %NRed%%SWhite% 1.9.1.2  %NBlack%%SWhite% Add Copilot Preview (Windows 11 22H3) to use type copilot %Cyan%https://youtu.be/r4S9J_NyE4s   "
-%nhcolor% 07 "%BBlue%%SWhite% 11/07/2023 %NRed%%SWhite% 1.9.1.3  %NBlack%%SWhite% Update StartAllBack 3.6.16 for SE Windows 11 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 11/14/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 11 23H2 / HOME EDITION %Cyan%https://youtu.be/kHZUYiyaH8k                      "
-%nhcolor% 07 "%BBlue%%SWhite% 11/14/2023 %NRed%%SWhite% 1.9.1.4  %NBlack%%SWhite% Add Supported Ghost Personalize for Windows 11 23H2                                            "
-%nhcolor% 07 "%BBlue%%SWhite% 11/14/2023 %NRed%%SWhite% 1.9.1.4  %NBlack%%SWhite% Add Nilesoft Shell Right click menu (Ghost Personalize)                                        "
-%nhcolor% 07 "%BBlue%%SWhite% 11/14/2023 %NRed%%SWhite% 1.9.1.4  %NBlack%%SWhite% Add Ghost Wallpaper V4 (Ghost Personalize)                                                     "
-%nhcolor% 07 "%BBlue%%SWhite% 11/18/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 11 23H2 U3 / W11 22H2 U16 %Cyan%https://youtu.be/kHZUYiyaH8k                   "
-%nhcolor% 07 "%BBlue%%SWhite% 11/30/2023 %NRed%%SWhite% 1.9.1.5  %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V77                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 11/30/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 10 22H2 AIO U12 %Cyan%https://youtu.be/PoEmy0IVvy8                             "
-%nhcolor% 07 "%BBlue%%SWhite% 12/01/2023 %NRed%%SWhite% 1.9.1.6  %NBlack%%SWhite% Update Windows Package Manager v1.6.3133                                                       "
-%nhcolor% 07 "%BBlue%%SWhite% 12/04/2023 %NRed%%SWhite% 1.9.1.7  %NBlack%%SWhite% Update StartAllBack 3.7.0 for SE Windows 11 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 12/18/2023 %NRed%%SWhite% 1.9.1.8  %NBlack%%SWhite% Update StartAllBack 3.7.2 for SE Windows 11 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 12/25/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 10 22H2 AIO U13 %Cyan%https://youtu.be/PoEmy0IVvy8                             "
-%nhcolor% 07 "%BBlue%%SWhite% 12/25/2023 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 11 23H2 U4 / ISO WIN 11 22H2 U17 %Cyan%https://youtu.be/kHZUYiyaH8k            "
-%nhcolor% 07 "%BBlue%%SWhite% 01/09/2024 %NRed%%SWhite% 1.9.1.9  %NBlack%%SWhite% Update StartAllBack 3.7.3 for SE Windows 11 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 02/06/2024 %NRed%%SWhite% 1.9.1.10 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V77                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 02/15/2024 %NRed%%SWhite% 1.9.1.11 %NBlack%%SWhite% Release Windows 10 AI Copilot (22H2) (type in console %Yellow%copilot%White% to enabled)       "
-%nhcolor% 07 "%BBlue%%SWhite% 03/01/2024 %NRed%%SWhite% 1.9.1.12 %NBlack%%SWhite% Update StartAllBack 3.7.5 for SE Windows 11 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 03/03/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 11 23H2 U6 Moment 5 %Cyan%https://youtu.be/kHZUYiyaH8k                         "
-%nhcolor% 07 "%BBlue%%SWhite% 03/03/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release GHOST MULTI LANGUAGE FOR WIN11 23H2/22H2 %Cyan%https://youtu.be/gQaHH3atA0             "
-%nhcolor% 07 "%BBlue%%SWhite% 03/04/2024 %NRed%%SWhite% 1.9.1.13 %NBlack%%SWhite% Update Lossless Scaling 2.6.0.6"
-%nhcolor% 07 "%BBlue%%SWhite% 03/06/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% UPDATE GHOST MULTI LANGUAGE 1.2 FOR WIN11 23H2/22H2 %Cyan%https://youtu.be/gQaHH3atA0          "
-%nhcolor% 07 "%BBlue%%SWhite% 03/11/2024 %NRed%%SWhite% 1.9.1.14 %NBlack%%SWhite% Add Themes Nilesoft Shell Dark / White (Ghost Personalize)                                     "
-%nhcolor% 07 "%BBlue%%SWhite% 03/14/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 10 AIO U15 %Cyan%https://youtu.be/PoEmy0IVvy8                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 03/16/2024 %NRed%%SWhite% 1.9.1.15 %NBlack%%SWhite% Update StartAllBack 3.7.7 for SE Windows 11 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 03/21/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 11 23H2 U7 %Cyan%https://youtu.be/kHZUYiyaH8k                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 03/23/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% UPDATE GHOST MULTI LANGUAGE 1.3 FOR WIN11 23H2/22H2 %Cyan%https://youtu.be/gQaHH3atA0          "
-%nhcolor% 07 "%BBlue%%SWhite% 03/30/2024 %NRed%%SWhite% 1.9.1.16 %NBlack%%SWhite% Update Windows Package Manager 1.7.10861"
-%nhcolor% 07 "%BBlue%%SWhite% 04/01/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release GHOST MULTI LANGUAGE 1.4 FOR WIN10 Supported %Cyan%https://youtu.be/gQaHH3atA0         "
-%nhcolor% 07 "%BBlue%%SWhite% 04/03/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release GHOST MULTI LANGUAGE 1.5 %Cyan%https://youtu.be/0=-gQaHH3atA0         "
-%nhcolor% 07 "%BBlue%%SWhite% 04/08/2024 %NRed%%SWhite% 1.9.1.17 %NBlack%%SWhite% Update StartAllBack 3.7.8 for SE Windows 11 (type in console %Yellow%startallback %White%to update)"
-%nhcolor% 07 "%BBlue%%SWhite% 04/08/2024 %NRed%%SWhite% 1.9.1.17 %NBlack%%SWhite% Update Visual C++ Redistributables AIO x86 x64 V80                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 04/08/2024 %NRed%%SWhite% 1.9.1.17 %NBlack%%SWhite% Update 7-Zip 24.04                                                                             "
-%nhcolor% 07 "%BBlue%%SWhite% 04/11/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release GHOST MULTI LANGUAGE 1.6 %Cyan%https://youtu.be/-gQaHH3atA0                            "
-%nhcolor% 07 "%BBlue%%SWhite% 04/13/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 10 AIO U16 %Cyan%https://youtu.be/PoEmy0IVvy8                                  "
-%nhcolor% 07 "%BBlue%%SWhite% 04/16/2024 %NRed%%SWhite%   NOTE   %NBlack%%SWhite% Release ISO WIN 11 23H2 U8 %Cyan%https://youtu.be/kHZUYiyaH8k                                  "
+echo "%bg_lblue%%lblack% 10/04/2021 %bg_red%%lblack% 1.9.0.14 %bg_black%%lblack% Update IObit Driver Booster 9.0.0.85 RC                                                    "
+echo "%bg_lblue%%lblack% 10/04/2021 %bg_red%%lblack% 1.9.0.14 %bg_black%%lblack% Add Catbox/Dropbox server Microsoft Store for Windows 10 version 1603/1703                 "
+echo "%bg_lblue%%lblack% 10/10/2021 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO Windows 11 Pro Superlite/Compact https://bit.ly/3oPzo8a                        "
+echo "%bg_lblue%%lblack% 10/11/2021 %bg_red%%lblack% 1.9.0.15 %bg_black%%lblack% Add Options for Windows 11                                                                 "
+echo "%bg_lblue%%lblack% 10/12/2021 %bg_red%%lblack% 1.9.0.16 %bg_black%%lblack% Add Options Touch Keyboard / Clipboard for Superlite / Chat / Teams  (Windows 11)          "
+echo "%bg_lblue%%lblack% 10/14/2021 %bg_red%%lblack% 1.9.0.17 %bg_black%%lblack% Add Options Snipping Tool (Windows 11)                                                     "
+echo "%bg_lblue%%lblack% 10/16/2021 %bg_red%%lblack% 1.9.0.18 %bg_black%%lblack% Supported Windows 11 Themes Patch (Windows 11)                                             "
+echo "%bg_lblue%%lblack% 10/17/2021 %bg_red%%lblack% 1.9.0.19 %bg_black%%lblack% Add Microsoft Paint (Windows 11)                                                           "
+echo "%bg_lblue%%lblack% 10/19/2021 %bg_red%%lblack% 1.9.0.20 %bg_black%%lblack% Update Microsoft Xbox Gamebar 5.721.9022.0                                                 "
+echo "%bg_lblue%%lblack% 10/19/2021 %bg_red%%lblack% 1.9.0.20 %bg_black%%lblack% Add Options Restore Explorer Ribbon Old/Modern (Windows 11)                                "
+echo "%bg_lblue%%lblack% 10/30/2021 %bg_red%%lblack% 1.9.0.21 %bg_black%%lblack% Add Windows Subsystem for Android (Windows 11) https://bit.ly/3bphAZr                      "
+echo "%bg_lblue%%lblack% 11/01/2021 %bg_red%%lblack% 1.9.0.22 %bg_black%%lblack% Add Unroot/Root Options Windows Subsystem for Android (Windows 11)                         "
+echo "%bg_lblue%%lblack% 11/08/2021 %bg_red%%lblack% 1.9.0.23 %bg_black%%lblack% Add Notepad for Windows 11 (Windows 11)                                                    "
+echo "%bg_lblue%%lblack% 11/08/2021 %bg_red%%lblack% 1.9.0.23 %bg_black%%lblack% Update Microsoft Paint 11.2110.0.0 (Windows 11)                                            "
+echo "%bg_lblue%%lblack% 11/10/2021 %bg_red%%lblack% 1.9.0.24 %bg_black%%lblack% Add Microsoft HEVC + AV1 Video Extension (Windows 11)                                      "
+echo "%bg_lblue%%lblack% 11/15/2021 %bg_red%%lblack% 1.9.0.25 %bg_black%%lblack% Add Microsoft Windows Terminal (UWP)                                                       "
+echo "%bg_lblue%%lblack% 11/17/2021 %bg_red%%lblack% 1.9.0.26 %bg_black%%lblack% Add Custom Patcher Taskbar/Explorer Windows 10 for Windows 11 (Windows 11)                 "
+echo "%bg_lblue%%lblack% 12/17/2021 %bg_red%%lblack% 1.9.0.27 %bg_black%%lblack% Add Disable/Enabled Biometrics for SUPERLITE (Windows 11)                                  "
+echo "%bg_lblue%%lblack% 12/19/2021 %bg_red%%lblack% 1.9.0.28 %bg_black%%lblack% Update Youtube-dl 2021.12.17                                                               "
+echo "%bg_lblue%%lblack% 12/23/2021 %bg_red%%lblack% 1.9.0.29 %bg_black%%lblack% Update IObit Driver Booster 9.1.0.156                                                      "
+echo "%bg_lblue%%lblack% 12/30/2021 %bg_red%%lblack% 1.9.0.30 %bg_black%%lblack% Add Youtube-dlp 2021.12.27                                                                 "
+echo "%bg_lblue%%lblack% 01/31/2022 %bg_red%%lblack% 1.9.0.31 %bg_black%%lblack% Update Youtube-dlp 2022.01.21                                                              "
+echo "%bg_lblue%%lblack% 02/04/2022 %bg_red%%lblack% 1.9.0.32 %bg_black%%lblack% Add Default Icons for Windows 11                                                           "
+echo "%bg_lblue%%lblack% 02/06/2022 %bg_red%%lblack% 1.9.0.33 %bg_black%%lblack% Add Default Themes GHOST SPECTRE V3                                                        "
+echo "%bg_lblue%%lblack% 02/09/2022 %bg_red%%lblack% 1.9.0.34 %bg_black%%lblack% Update Youtube-dlp 2022.02.04                                                              "
+echo "%bg_lblue%%lblack% 02/13/2022 %bg_red%%lblack% 1.9.0.35 %bg_black%%lblack% Windows Widgets for Windows 11                                                             "
+echo "%bg_lblue%%lblack% 02/18/2022 %bg_red%%lblack% 1.9.0.36 %bg_black%%lblack% Update IObit Driver Booster 9.2.0.178                                                      "
+echo "%bg_lblue%%lblack% 02/18/2022 %bg_red%%lblack% 1.9.0.36 %bg_black%%lblack% Re-upload Windows 11 Recovery                                                              "
+echo "%bg_lblue%%lblack% 02/20/2022 %bg_red%%lblack% 1.9.0.37 %bg_black%%lblack% Update Windows 11 Notepad 11.2112.32.0                                                     "
+echo "%bg_lblue%%lblack% 03/01/2022 %bg_red%%lblack% 1.9.0.38 %bg_black%%lblack% Update Widgets Windows 11 421.20070.95.0 + Weather on Taskbar                              "
+echo "%bg_lblue%%lblack% 03/09/2022 %bg_red%%lblack% 1.9.0.39 %bg_black%%lblack% Minor bug fixes for Other Languages                                                        "
+echo "%bg_lblue%%lblack% 03/09/2022 %bg_red%%lblack% 1.9.0.39 %bg_black%%lblack% Update Youtube-dl 2022.03.08.1                                                             "
+echo "%bg_lblue%%lblack% 03/24/2022 %bg_red%%lblack% 1.9.0.40 %bg_black%%lblack% Re-uploads Windows Recovery for LTSB 2016                                                  "
+echo "%bg_lblue%%lblack% 03/24/2022 %bg_red%%lblack% 1.9.0.40 %bg_black%%lblack% Update Explorer Patcher 22000.556.42.39 (Windows 11)                                       "
+echo "%bg_lblue%%lblack% 04/13/2022 %bg_red%%lblack% 1.9.0.41 %bg_black%%lblack% Update Youtube-dl 2022.04.08                                                               "
+echo "%bg_lblue%%lblack% 04/18/2022 %bg_red%%lblack% 1.9.0.42 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V60                                         "
+echo "%bg_lblue%%lblack% 04/19/2022 %bg_red%%lblack% 1.9.0.43 %bg_black%%lblack% Update IObit Driver Booster 9.3.0.209                                                      "
+echo "%bg_lblue%%lblack% 05/01/2022 %bg_red%%lblack% 1.9.0.44 %bg_black%%lblack% Update Custom Patcher Taskbar/Explorer Windows 11 22000.613.44.2                           "
+echo "%bg_lblue%%lblack% 05/23/2022 %bg_red%%lblack% 1.9.0.45 %bg_black%%lblack% Update Youtube-dl 2022.05.18                                                               "
+echo "%bg_lblue%%lblack% 05/23/2022 %bg_red%%lblack% 1.9.0.45 %bg_black%%lblack% Re-uploads Default Icons Windows 10                                                        "
+echo "%bg_lblue%%lblack% 06/08/2022 %bg_red%%lblack% 1.9.0.46 %bg_black%%lblack% Update Windows Subsystem for Android 2204.40000 (Windows 11) https://bit.ly/3NxeX9j        "
+echo "%bg_lblue%%lblack% 06/27/2022 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO Windows 11 Pro 22H2 Beta Release https://youtu.be/EXoBHxCvxlE                  "
+echo "%bg_lblue%%lblack% 06/27/2022 %bg_red%%lblack% 1.9.0.47 %bg_black%%lblack% Update 7-Zip 22.00                                                                         "
+echo "%bg_lblue%%lblack% 06/28/2022 %bg_red%%lblack% 1.9.0.48 %bg_black%%lblack% Add New Explorer Tab for Windows 11 22H2 Sun Valley 2 (Windows 11 SV2)                     "
+echo "%bg_lblue%%lblack% 08/28/2022 %bg_red%%lblack% 1.9.0.49 %bg_black%%lblack% Add Windows Recovery for Windows 11 22H2                                                   "
+echo "%bg_lblue%%lblack% 09/23/2022 %bg_red%%lblack% 1.9.0.50 %bg_black%%lblack% Update Windows Subsystem for Android 2208.40000 (Windows 11)                               "
+echo "%bg_lblue%%lblack% 09/26/2022 %bg_red%%lblack% 1.9.0.51 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V62                                         "
+echo "%bg_lblue%%lblack% 09/26/2022 %bg_red%%lblack% 1.9.0.51 %bg_black%%lblack% Add Admin Filter for Adminitrator Account (Windows 11)                                     "
+echo "%bg_lblue%%lblack% 09/27/2022 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO Windows 11 Pro 22H2 Official Release https://youtu.be/EXoBHxCvxlE              "
+echo "%bg_lblue%%lblack% 09/28/2022 %bg_red%%lblack% 1.9.0.52 %bg_black%%lblack% Add Microsoft Classic Calculator 6.3 x64                                                   "
+echo "%bg_lblue%%lblack% 09/28/2022 %bg_red%%lblack% 1.9.0.52 %bg_black%%lblack% Update Microsoft Xbox Game Bar 5.822.9161.0 x64                                            "
+echo "%bg_lblue%%lblack% 09/30/2022 %bg_red%%lblack% 1.9.0.53 %bg_black%%lblack% Add Microsoft Media Player 11.2208 (Windows 11)                                            "
+echo "%bg_lblue%%lblack% 10/04/2022 %bg_red%%lblack% 1.9.0.54 %bg_black%%lblack% Update Youtube-dlp 2022.10.04                                                              "
+echo "%bg_lblue%%lblack% 10/20/2022 %bg_red%%lblack% 1.9.0.55 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V63                                         "
+echo "%bg_lblue%%lblack% 10/24/2022 %bg_red%%lblack% 1.9.0.56 %bg_black%%lblack% Add Right Click Taskbar > Task Manager (Windows 11 SV2)                                    "
+echo "%bg_lblue%%lblack% 11/11/2022 %bg_red%%lblack% 1.9.0.57 %bg_black%%lblack% Update Youtube-dlp 2022.11.11                                                              "
+echo "%bg_lblue%%lblack% 12/17/2022 %bg_red%%lblack% 1.9.0.58 %bg_black%%lblack% Update Widgets Windows 11 422.33900.0.0 + Weather on Taskbar                               "
+echo "%bg_lblue%%lblack% 12/17/2022 %bg_red%%lblack% 1.9.0.58 %bg_black%%lblack% Update StartAllBack 3.5.6 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 01/06/2023 %bg_red%%lblack% 1.9.0.59 %bg_black%%lblack% Update Youtube-dlp 2023.01.06                                                              "
+echo "%bg_lblue%%lblack% 01/13/2023 %bg_red%%lblack% 1.9.0.60 %bg_black%%lblack% Update Windows Subsystem for Android 2211.40000 (Windows 11)                               "
+echo "%bg_lblue%%lblack% 01/31/2023 %bg_red%%lblack% 1.9.0.61 %bg_black%%lblack% Update StartAllBack 3.5.7 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 02/14/2023 %bg_red%%lblack% 1.9.0.62 %bg_black%%lblack% Add Microsoft Camera 2022.2210.9.70 (Windows 11)                                           "
+echo "%bg_lblue%%lblack% 02/14/2023 %bg_red%%lblack% 1.9.0.62 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V65                                         "
+echo "%bg_lblue%%lblack% 02/15/2023 %bg_red%%lblack% 1.9.0.63 %bg_black%%lblack% Update Windows Subsystem for Android 2301.40000 (Windows 11)                               "
+echo "%bg_lblue%%lblack% 02/20/2023 %bg_red%%lblack% 1.9.0.64 %bg_black%%lblack% Update Microsoft Xbox Gamebar 5.823.1271.0 + Xbox Identity Provider                        "
+echo "%bg_lblue%%lblack% 03/04/2023 %bg_red%%lblack% 1.9.0.65 %bg_black%%lblack% Update Youtube-dlp 2023.03.03 - Fixed download speed issues                                "
+echo "%bg_lblue%%lblack% 03/06/2023 %bg_red%%lblack% 1.9.0.66 %bg_black%%lblack% Update Youtube-dlp 2023.03.05 - Stable + Update FFmpeg + Auto Update                       "
+echo "%bg_lblue%%lblack% 03/07/2023 %bg_red%%lblack% 1.9.0.67 %bg_black%%lblack% Update StartAllBack 3.6.2 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 03/19/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO Windows 11 Pro 22H2 Update Moment 2 https://youtu.be/EXoBHxCvxlE               "
+echo "%bg_lblue%%lblack% 03/19/2023 %bg_red%%lblack% 1.9.0.68 %bg_black%%lblack% Add Force to removes Microsoft Edge/Edge Webview2 (type in console %yellow%removedge %white%)  "
+echo "%bg_lblue%%lblack% 03/19/2023 %bg_red%%lblack% 1.9.0.68 %bg_black%%lblack% Update StartAllBack 3.6.3 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 03/19/2023 %bg_red%%lblack% 1.9.0.68 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V69                                         "
+echo "%bg_lblue%%lblack% 04/02/2023 %bg_red%%lblack% 1.9.0.69 %bg_black%%lblack% Add Upscaling tools > Magpie / Loseless Scaling                                            "
+echo "%bg_lblue%%lblack% 04/02/2023 %bg_red%%lblack% 1.9.0.69 %bg_black%%lblack% Add Game Monitor OSD > CapFrameX / MSI Afterburner / GamePP                                "
+echo "%bg_lblue%%lblack% 04/06/2023 %bg_red%%lblack% 1.9.0.70 %bg_black%%lblack% Add WhatsApp Desktop 2.2310.3.0 x64 (UWP)                                                  "
+echo "%bg_lblue%%lblack% 04/06/2023 %bg_red%%lblack% 1.9.0.70 %bg_black%%lblack% Add Telegram Desktop 4.7.1.0 x64 (UWP)                                                     "
+echo "%bg_lblue%%lblack% 04/16/2023 %bg_red%%lblack% 1.9.0.71 %bg_black%%lblack% Update StartAllBack 3.6.4 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 04/19/2023 %bg_red%%lblack% 1.9.0.72 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V70                                         "
+echo "%bg_lblue%%lblack% 05/08/2023 %bg_red%%lblack% 1.9.0.73 %bg_black%%lblack% Microsoft Store Windows 11 + Xbox Apps + License (UWP)                                     "
+echo "%bg_lblue%%lblack% 05/08/2023 %bg_red%%lblack% 1.9.0.73 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V72                                         "
+echo "%bg_lblue%%lblack% 05/09/2023 %bg_red%%lblack% 1.9.0.74 %bg_black%%lblack% Fixed YoutubeDLP not saved in location Video/Audio                                         "
+echo "%bg_lblue%%lblack% 05/14/2023 %bg_red%%lblack% 1.9.0.75 %bg_black%%lblack% Add AFF Optimus Realtek/Generic (Sound Mod)                                                "
+echo "%bg_lblue%%lblack% 05/14/2023 %bg_red%%lblack% 1.9.0.75 %bg_black%%lblack% Add FX Sound (Sound Mod)                                                                   "
+echo "%bg_lblue%%lblack% 05/17/2023 %bg_red%%lblack% 1.9.0.76 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V73                                         "
+echo "%bg_lblue%%lblack% 05/19/2023 %bg_red%%lblack% 1.9.0.77 %bg_black%%lblack% Update Windows Subsystem for Android 2304.40000 (Windows 11)                               "
+echo "%bg_lblue%%lblack% 05/19/2023 %bg_red%%lblack% 1.9.0.77 %bg_black%%lblack% Add WsaTools Backuptool (Windows Subsystem for Android)                                    "
+echo "%bg_lblue%%lblack% 05/23/2023 %bg_red%%lblack% 1.9.0.78 %bg_black%%lblack% Update StartAllBack 3.6.5 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 06/12/2023 %bg_red%%lblack% 1.9.0.79 %bg_black%%lblack% Update WhatsApp Desktop Latest version (UWP)                                               "
+echo "%bg_lblue%%lblack% 06/12/2023 %bg_red%%lblack% 1.9.0.79 %bg_black%%lblack% Update Telegram Desktop Latest version (UWP)                                               "
+echo "%bg_lblue%%lblack% 06/12/2023 %bg_red%%lblack% 1.9.0.79 %bg_black%%lblack% Update Desktop Apps Installer (UWP) for Windows version 1809 or higher is required         "
+echo "%bg_lblue%%lblack% 06/18/2023 %bg_red%%lblack% 1.9.0.80 %bg_black%%lblack% Update StartAllBack 3.6.7 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 06/19/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO Windows 11 Pro 22H2 Update Moment 3 https://youtu.be/kHZUYiyaH8k               "
+echo "%bg_lblue%%lblack% 06/19/2023 %bg_red%%lblack% 1.9.0.81 %bg_black%%lblack% Update Windows Subsystem for Android 2305.40000 (Windows 11)                               "
+echo "%bg_lblue%%lblack% 06/18/2023 %bg_red%%lblack% 1.9.0.82 %bg_black%%lblack% Update StartAllBack 3.6.8 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 07/29/2023 %bg_red%%lblack% 1.9.0.83 %bg_black%%lblack% Add Reduce Processes Mode 1/Mode 2/Mode 3 > ghostmode"
+echo "%bg_lblue%%lblack% 07/29/2023 %bg_red%%lblack% 1.9.0.83 %bg_black%%lblack% Update MS Photos to Latest version (UWP)"
+echo "%bg_lblue%%lblack% 08/02/2023 %bg_red%%lblack% 1.9.0.84 %bg_black%%lblack% Add Reduce Memory Automatically in 1min/5min/15min/30min/60min > ghostmode"
+echo "%bg_lblue%%lblack% 08/07/2023 %bg_red%%lblack% 1.9.0.85 %bg_black%%lblack% Update StartAllBack 3.6.11 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 08/15/2023 %bg_red%%lblack% 1.9.0.86 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V75                                         "
+echo "%bg_lblue%%lblack% 08/15/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN11 22H2 PRO U14 / Benchmark W11 M3 vs W10 AIO %cyan%https://youtu.be/kHZUYiyaH8k"
+echo "%bg_lblue%%lblack% 08/20/2023 %bg_red%%lblack% 1.9.0.87 %bg_black%%lblack% Add Reduce Memory Automatically in Silent Mode > ghostmode"
+echo "%bg_lblue%%lblack% 09/05/2023 %bg_red%%lblack% 1.9.0.88 %bg_black%%lblack% Update StartAllBack 3.6.12 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 09/14/2023 %bg_red%%lblack% 1.9.0.89 %bg_black%%lblack% Add Account Password Never expires / Account Information "
+echo "%bg_lblue%%lblack% 09/25/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 8.1 Potato Update 9 %cyan%https://youtu.be/MAtEoKkRyyM                     "
+echo "%bg_lblue%%lblack% 09/26/2023 %bg_red%%lblack% 1.9.0.90 %bg_black%%lblack% Add YoutubeDLP Video Without Audio                                                         "
+echo "%bg_lblue%%lblack% 09/29/2023 %bg_red%%lblack% 1.9.0.91 %bg_black%%lblack% Add Copilot Preview (Windows 11 22H2) to use type copilot %cyan%https://youtu.be/r4S9J_NyE4s   "
+echo "%bg_lblue%%lblack% 10/02/2023 %bg_red%%lblack% 1.9.0.92 %bg_black%%lblack% Update Windows Subsystem for Android 2309.40000 (Windows 11)                               "
+echo "%bg_lblue%%lblack% 10/06/2023 %bg_red%%lblack% 1.9.0.93 %bg_black%%lblack% Update StartAllBack 3.6.13 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 10/11/2023 %bg_red%%lblack% 1.9.0.94 %bg_black%%lblack% Add Windows Package Manager for Windows 11 version 21H2 or Higher %cyan%https://youtu.be/QOsg7O62s9o "
+echo "%bg_lblue%%lblack% 10/12/2023 %bg_red%%lblack% 1.9.0.95 %bg_black%%lblack% Add Windows Package Manager for Windows 10 version 2004 or Higher                          "
+echo "%bg_lblue%%lblack% 10/13/2023 %bg_red%%lblack% 1.9.0.96 %bg_black%%lblack% Add Windows Package Manager for Windows 10 32bit version 2004 or Higher                    "
+echo "%bg_lblue%%lblack% 10/23/2023 %bg_red%%lblack% 1.9.0.97 %bg_black%%lblack% Update StartAllBack 3.6.14 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 10/25/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 11 23H2 / 22H2 U15 M4 %cyan%https://youtu.be/kHZUYiyaH8k                   "
+echo "%bg_lblue%%lblack% 10/28/2023 %bg_red%%lblack% 1.9.0.98 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V76                                         "
+echo "%bg_lblue%%lblack% 10/31/2023 %bg_red%%lblack% 1.9.0.99 %bg_black%%lblack% Update StartAllBack 3.6.15 for SE Windows 11 22H1/22H2 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 11/05/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 11 23H2 UPDATE 2 %cyan%https://youtu.be/kHZUYiyaH8k                        "
+echo "%bg_lblue%%lblack% 11/05/2023 %bg_red%%lblack% 1.9.1.1  %bg_black%%lblack% Add UWP Apps Uninstall for Windows Package Manager                                         "
+echo "%bg_lblue%%lblack% 11/06/2023 %bg_red%%lblack% 1.9.1.2  %bg_black%%lblack% Add Copilot Preview (Windows 11 22H3) to use type copilot %cyan%https://youtu.be/r4S9J_NyE4s   "
+echo "%bg_lblue%%lblack% 11/07/2023 %bg_red%%lblack% 1.9.1.3  %bg_black%%lblack% Update StartAllBack 3.6.16 for SE Windows 11 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 11/14/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 11 23H2 / HOME EDITION %cyan%https://youtu.be/kHZUYiyaH8k                  "
+echo "%bg_lblue%%lblack% 11/14/2023 %bg_red%%lblack% 1.9.1.4  %bg_black%%lblack% Add Supported Ghost Personalize for Windows 11 23H2                                        "
+echo "%bg_lblue%%lblack% 11/14/2023 %bg_red%%lblack% 1.9.1.4  %bg_black%%lblack% Add Nilesoft Shell Right click menu (Ghost Personalize)                                    "
+echo "%bg_lblue%%lblack% 11/14/2023 %bg_red%%lblack% 1.9.1.4  %bg_black%%lblack% Add Ghost Wallpaper V4 (Ghost Personalize)                                                 "
+echo "%bg_lblue%%lblack% 11/18/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 11 23H2 U3 / W11 22H2 U16 %cyan%https://youtu.be/kHZUYiyaH8k               "
+echo "%bg_lblue%%lblack% 11/30/2023 %bg_red%%lblack% 1.9.1.5  %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V77                                         "
+echo "%bg_lblue%%lblack% 11/30/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 10 22H2 AIO U12 %cyan%https://youtu.be/PoEmy0IVvy8                         "
+echo "%bg_lblue%%lblack% 12/01/2023 %bg_red%%lblack% 1.9.1.6  %bg_black%%lblack% Update Windows Package Manager v1.6.3133                                                   "
+echo "%bg_lblue%%lblack% 12/04/2023 %bg_red%%lblack% 1.9.1.7  %bg_black%%lblack% Update StartAllBack 3.7.0 for SE Windows 11 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 12/18/2023 %bg_red%%lblack% 1.9.1.8  %bg_black%%lblack% Update StartAllBack 3.7.2 for SE Windows 11 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 12/25/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 10 22H2 AIO U13 %cyan%https://youtu.be/PoEmy0IVvy8                         "
+echo "%bg_lblue%%lblack% 12/25/2023 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 11 23H2 U4 / ISO WIN 11 22H2 U17 %cyan%https://youtu.be/kHZUYiyaH8k        "
+echo "%bg_lblue%%lblack% 01/09/2024 %bg_red%%lblack% 1.9.1.9  %bg_black%%lblack% Update StartAllBack 3.7.3 for SE Windows 11 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 02/06/2024 %bg_red%%lblack% 1.9.1.10 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V77                                         "
+echo "%bg_lblue%%lblack% 02/15/2024 %bg_red%%lblack% 1.9.1.11 %bg_black%%lblack% Release Windows 10 AI Copilot (22H2) (type in console %yellow%copilot%white% to enabled)   "
+echo "%bg_lblue%%lblack% 03/01/2024 %bg_red%%lblack% 1.9.1.12 %bg_black%%lblack% Update StartAllBack 3.7.5 for SE Windows 11 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 03/03/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 11 23H2 U6 Moment 5 %cyan%https://youtu.be/kHZUYiyaH8k                     "
+echo "%bg_lblue%%lblack% 03/03/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release GHOST MULTI LANGUAGE FOR WIN11 23H2/22H2 %cyan%https://youtu.be/gQaHH3atA0         "
+echo "%bg_lblue%%lblack% 03/04/2024 %bg_red%%lblack% 1.9.1.13 %bg_black%%lblack% Update Lossless Scaling 2.6.0.6"
+echo "%bg_lblue%%lblack% 03/06/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% UPDATE GHOST MULTI LANGUAGE 1.2 FOR WIN11 23H2/22H2 %cyan%https://youtu.be/gQaHH3atA0      "
+echo "%bg_lblue%%lblack% 03/11/2024 %bg_red%%lblack% 1.9.1.14 %bg_black%%lblack% Add Themes Nilesoft Shell Dark / White (Ghost Personalize)                                 "
+echo "%bg_lblue%%lblack% 03/14/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 10 AIO U15 %cyan%https://youtu.be/PoEmy0IVvy8                              "
+echo "%bg_lblue%%lblack% 03/16/2024 %bg_red%%lblack% 1.9.1.15 %bg_black%%lblack% Update StartAllBack 3.7.7 for SE Windows 11 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 03/21/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 11 23H2 U7 %cyan%https://youtu.be/kHZUYiyaH8k                              "
+echo "%bg_lblue%%lblack% 03/23/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% UPDATE GHOST MULTI LANGUAGE 1.3 FOR WIN11 23H2/22H2 %cyan%https://youtu.be/gQaHH3atA0      "
+echo "%bg_lblue%%lblack% 03/30/2024 %bg_red%%lblack% 1.9.1.16 %bg_black%%lblack% Update Windows Package Manager 1.7.10861"
+echo "%bg_lblue%%lblack% 04/01/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release GHOST MULTI LANGUAGE 1.4 FOR WIN10 Supported %cyan%https://youtu.be/gQaHH3atA0     "
+echo "%bg_lblue%%lblack% 04/03/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release GHOST MULTI LANGUAGE 1.5 %cyan%https://youtu.be/0=-gQaHH3atA0     "
+echo "%bg_lblue%%lblack% 04/08/2024 %bg_red%%lblack% 1.9.1.17 %bg_black%%lblack% Update StartAllBack 3.7.8 for SE Windows 11 (type in console %yellow%startallback %white%to update)"
+echo "%bg_lblue%%lblack% 04/08/2024 %bg_red%%lblack% 1.9.1.17 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V80                                         "
+echo "%bg_lblue%%lblack% 04/08/2024 %bg_red%%lblack% 1.9.1.17 %bg_black%%lblack% Update 7-Zip 24.04                                                                         "
+echo "%bg_lblue%%lblack% 04/11/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release GHOST MULTI LANGUAGE 1.6 %cyan%https://youtu.be/-gQaHH3atA0                        "
+echo "%bg_lblue%%lblack% 04/13/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 10 AIO U16 %cyan%https://youtu.be/PoEmy0IVvy8                              "
+echo "%bg_lblue%%lblack% 04/16/2024 %bg_red%%lblack%   NOTE   %bg_black%%lblack% Release ISO WIN 11 23H2 U8 %cyan%https://youtu.be/kHZUYiyaH8k                              "
 
 echo.
 pause
@@ -21802,39 +21803,39 @@ set "WSACX=Not Installed"
 set "WSACX=Installed"
 )
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "  %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP% "
+%nhcolor% 07 "  %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP% "
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%623MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%623MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/6m0nxQcTnzk"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/6m0nxQcTnzk"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -21869,10 +21870,10 @@ cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 82e00d1f30087549eeb853a4e67fb683 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64.exe
 goto CHECKPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64.exe
 del /q /f /s "WSA_2208.40000.4.0_x64.exe" >nul
 goto WSADL
 )
@@ -21880,10 +21881,10 @@ goto WSADL
 :CHECKPART1
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-1.bin') do set "MD5=%%N"
 if %MD5% equ 98db3da5e0816abbc2b66c3c67d098ad (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64-1.bin
 goto CHECKPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-1.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-1.bin" >nul
 goto WSADL
 )
@@ -21891,10 +21892,10 @@ goto WSADL
 :CHECKPART2
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-2.bin') do set "MD5=%%N"
 if %MD5% equ 892e42de8f5ba85c92420636ae01cd35 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64-2.bin
 goto CHECKPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-2.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-2.bin" >nul
 goto WSADL
 )
@@ -21902,10 +21903,10 @@ goto WSADL
 :CHECKPART3
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-3.bin') do set "MD5=%%N"
 if %MD5% equ 9464f6cf0a78db3123c3348a4b73fde7 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64-3.bin
 goto CHECKPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-3.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-3.bin" >nul
 goto WSADL
 )
@@ -21913,10 +21914,10 @@ goto WSADL
 :CHECKPART4
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-4.bin') do set "MD5=%%N"
 if %MD5% equ 39489fdca6028bd6ddbc47c19c94da0c (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-4.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-4.bin" >nul
 goto WSADL
 )
@@ -21926,10 +21927,10 @@ goto WSADL
 cls
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 82e00d1f30087549eeb853a4e67fb683 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64.exe
 del /q /f /s "WSA_2208.40000.4.0_x64.exe" >nul
 )
 cls
@@ -21937,10 +21938,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 82e00d1f30087549eeb853a4e67fb683 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64.exe
 del /q /f /s "WSA_2208.40000.4.0_x64.exe" >nul
 )
 cls
@@ -21950,10 +21951,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-1.bin') do set "MD5=%%N"
 if %MD5% equ 98db3da5e0816abbc2b66c3c67d098ad (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64-1.bin
 goto DLPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-1.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-1.bin" >nul
 )
 cls
@@ -21963,10 +21964,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-2.bin') do set "MD5=%%N"
 if %MD5% equ 892e42de8f5ba85c92420636ae01cd35 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64-2.bin
 goto DLPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-2.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-2.bin" >nul
 )
 cls
@@ -21976,10 +21977,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-3.bin') do set "MD5=%%N"
 if %MD5% equ 9464f6cf0a78db3123c3348a4b73fde7 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64-3.bin
 goto DLPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-3.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-3.bin" >nul
 )
 cls
@@ -21989,10 +21990,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-4.bin') do set "MD5=%%N"
 if %MD5% equ 39489fdca6028bd6ddbc47c19c94da0c (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2208.40000.4.0_x64-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2208.40000.4.0_x64-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-4.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-4.bin" >nul
 )
 cls
@@ -22002,50 +22003,50 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ 82e00d1f30087549eeb853a4e67fb683 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2208.40000.4.0_x64.exe
+%nhcolor% 08 " %green%| OK | %white%WSA_2208.40000.4.0_x64.exe
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64.exe
 del /q /f /s "WSA_2208.40000.4.0_x64.exe" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-1.bin') do set "MD5=%%N"
 if %MD5% equ 98db3da5e0816abbc2b66c3c67d098ad (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2208.40000.4.0_x64-1.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2208.40000.4.0_x64-1.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-1.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-1.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-2.bin') do set "MD5=%%N"
 if %MD5% equ 892e42de8f5ba85c92420636ae01cd35 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2208.40000.4.0_x64-2.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2208.40000.4.0_x64-2.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-2.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-2.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-3.bin') do set "MD5=%%N"
 if %MD5% equ 9464f6cf0a78db3123c3348a4b73fde7 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2208.40000.4.0_x64-3.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2208.40000.4.0_x64-3.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-3.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-3.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2208.40000.4.0_x64-4.bin') do set "MD5=%%N"
 if %MD5% equ 39489fdca6028bd6ddbc47c19c94da0c (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2208.40000.4.0_x64-4.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2208.40000.4.0_x64-4.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2208.40000.4.0_x64-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2208.40000.4.0_x64-4.bin
 del /q /f /s "WSA_2208.40000.4.0_x64-4.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
@@ -22108,14 +22109,14 @@ goto ANDROIDX2008
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2008 || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2008
 
 :ADB07X2008
@@ -22193,7 +22194,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -22246,7 +22247,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2008
 
@@ -22264,7 +22265,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2008
 
@@ -22305,40 +22306,40 @@ set "WSACX=Installed"
 )
 
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "  %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP% "
+%nhcolor% 07 "  %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP% "
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%626MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%626MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: To Root/Unroot please use Magisk on Start menu"
+%nhcolor% 03 "         %red%NOTE: To Root/Unroot please use Magisk on Start menu"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -22373,10 +22374,10 @@ cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ a2e64cbf2deb534778bfe1148579c34e (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64.exe
 goto CHECKPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64.exe
 del /q /f /s "WSA_2211.40000.11.0_x64.exe" >nul
 goto WSADL
 )
@@ -22384,10 +22385,10 @@ goto WSADL
 :CHECKPART1
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-1.bin') do set "MD5=%%N"
 if %MD5% equ 6a26c49107c853a261ac7cc30aecbfd6 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64-1.bin
 goto CHECKPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-1.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-1.bin" >nul
 goto WSADL
 )
@@ -22395,10 +22396,10 @@ goto WSADL
 :CHECKPART2
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-2.bin') do set "MD5=%%N"
 if %MD5% equ ddd44b4f359a17c29c51d31498db7884 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64-2.bin
 goto CHECKPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-2.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-2.bin" >nul
 goto WSADL
 )
@@ -22406,10 +22407,10 @@ goto WSADL
 :CHECKPART3
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-3.bin') do set "MD5=%%N"
 if %MD5% equ 2825447396f01dc084574699048f7f47 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64-3.bin
 goto CHECKPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-3.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-3.bin" >nul
 goto WSADL
 )
@@ -22417,10 +22418,10 @@ goto WSADL
 :CHECKPART4
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-4.bin') do set "MD5=%%N"
 if %MD5% equ c1a09c7f0f7ea00287bcd6dbffa686c3 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-4.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-4.bin" >nul
 goto WSADL
 )
@@ -22430,10 +22431,10 @@ goto WSADL
 cls
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ a2e64cbf2deb534778bfe1148579c34e (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64.exe
 del /q /f /s "WSA_2211.40000.11.0_x64.exe" >nul
 )
 cls
@@ -22441,10 +22442,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ a2e64cbf2deb534778bfe1148579c34e (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64.exe
 del /q /f /s "WSA_2211.40000.11.0_x64.exe" >nul
 )
 ::CAT
@@ -22453,10 +22454,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ a2e64cbf2deb534778bfe1148579c34e (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64.exe
 del /q /f /s "WSA_2211.40000.11.0_x64.exe" >nul
 )
 
@@ -22464,10 +22465,10 @@ del /q /f /s "WSA_2211.40000.11.0_x64.exe" >nul
 cls
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-1.bin') do set "MD5=%%N"
 if %MD5% equ 6a26c49107c853a261ac7cc30aecbfd6 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64-1.bin
 goto DLPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-1.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-1.bin" >nul
 )
 cls
@@ -22477,10 +22478,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-2.bin') do set "MD5=%%N"
 if %MD5% equ ddd44b4f359a17c29c51d31498db7884 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64-2.bin
 goto DLPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-2.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-2.bin" >nul
 )
 cls
@@ -22490,10 +22491,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-3.bin') do set "MD5=%%N"
 if %MD5% equ 2825447396f01dc084574699048f7f47 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64-3.bin
 goto DLPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-3.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-3.bin" >nul
 )
 cls
@@ -22503,10 +22504,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-4.bin') do set "MD5=%%N"
 if %MD5% equ c1a09c7f0f7ea00287bcd6dbffa686c3 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2211.40000.11.0_x64-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2211.40000.11.0_x64-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-4.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-4.bin" >nul
 )
 cls
@@ -22516,50 +22517,50 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64.exe') do set "MD5=%%N"
 if %MD5% equ a2e64cbf2deb534778bfe1148579c34e (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %green%| OK | %white%WSA_2211.40000.11.0_x64.exe
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64.exe
 del /q /f /s "WSA_2211.40000.11.0_x64.exe" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-1.bin') do set "MD5=%%N"
 if %MD5% equ 6a26c49107c853a261ac7cc30aecbfd6 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2211.40000.11.0_x64-1.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2211.40000.11.0_x64-1.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-1.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-1.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-2.bin') do set "MD5=%%N"
 if %MD5% equ ddd44b4f359a17c29c51d31498db7884 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2211.40000.11.0_x64-2.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2211.40000.11.0_x64-2.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-2.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-2.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-3.bin') do set "MD5=%%N"
 if %MD5% equ 2825447396f01dc084574699048f7f47 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2211.40000.11.0_x64-3.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2211.40000.11.0_x64-3.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-3.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-3.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2211.40000.11.0_x64-4.bin') do set "MD5=%%N"
 if %MD5% equ c1a09c7f0f7ea00287bcd6dbffa686c3 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2211.40000.11.0_x64-4.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2211.40000.11.0_x64-4.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2211.40000.11.0_x64-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2211.40000.11.0_x64-4.bin
 del /q /f /s "WSA_2211.40000.11.0_x64-4.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
@@ -22628,14 +22629,14 @@ goto ANDROIDX2211
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2211 || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2211
 
 :ADB07X2211
@@ -22713,7 +22714,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -22766,7 +22767,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2211
 
@@ -22784,7 +22785,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2211
 
@@ -22818,10 +22819,10 @@ timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Non-Root Version "
-%nhcolor% 03 "  [2]  | %Green%Root Version "
+%nhcolor% 03 "  [1]  | %green%Non-Root Version "
+%nhcolor% 03 "  [2]  | %green%Root Version "
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Yellow%Back
+%nhcolor% 03 "  [0]  | %yellow%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -22854,38 +22855,38 @@ set "WSACX=Installed"
 )
 
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "   %White%ROOT : %Yellow%NONE %Magenta%| %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP%"
+%nhcolor% 07 "   %white%ROOT : %yellow%NONE %Magenta%| %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP%"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%640MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%640MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -22920,10 +22921,10 @@ cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ 66d6d886f3c72000d1f6813353aba99b (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot.exe
 goto CHECKPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot.exe" >nul
 goto WSADL
 )
@@ -22931,10 +22932,10 @@ goto WSADL
 :CHECKPART1
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-1.bin') do set "MD5=%%N"
 if %MD5% equ ed2471269908e13480982b3a105ada9f (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot-1.bin
 goto CHECKPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-1.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-1.bin" >nul
 goto WSADL
 )
@@ -22942,10 +22943,10 @@ goto WSADL
 :CHECKPART2
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-2.bin') do set "MD5=%%N"
 if %MD5% equ 9046e9d8520936b08a31db79befeaa23 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot-2.bin
 goto CHECKPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-2.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-2.bin" >nul
 goto WSADL
 )
@@ -22953,10 +22954,10 @@ goto WSADL
 :CHECKPART3
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-3.bin') do set "MD5=%%N"
 if %MD5% equ 8ad2b2cf8495b67a2f89ce9a3b7a1905 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot-3.bin
 goto CHECKPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-3.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-3.bin" >nul
 goto WSADL
 )
@@ -22964,10 +22965,10 @@ goto WSADL
 :CHECKPART4
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-4.bin') do set "MD5=%%N"
 if %MD5% equ cb7ccf48c1407424b715649ba2f89a0f (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-4.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-4.bin" >nul
 goto WSADL
 )
@@ -22977,10 +22978,10 @@ goto WSADL
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ 66d6d886f3c72000d1f6813353aba99b (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot.exe" >nul
 )
 cls
@@ -22988,10 +22989,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ 66d6d886f3c72000d1f6813353aba99b (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot.exe" >nul
 )
 ::CAT
@@ -23000,10 +23001,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ 66d6d886f3c72000d1f6813353aba99b (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot.exe" >nul
 )
 
@@ -23011,10 +23012,10 @@ del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot.exe" >nul
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-1.bin') do set "MD5=%%N"
 if %MD5% equ ed2471269908e13480982b3a105ada9f (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot-1.bin
 goto DLPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-1.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-1.bin" >nul
 )
 cls
@@ -23024,10 +23025,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-2.bin') do set "MD5=%%N"
 if %MD5% equ 9046e9d8520936b08a31db79befeaa23 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot-2.bin
 goto DLPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-2.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-2.bin" >nul
 )
 cls
@@ -23037,10 +23038,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-3.bin') do set "MD5=%%N"
 if %MD5% equ 8ad2b2cf8495b67a2f89ce9a3b7a1905 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot-3.bin
 goto DLPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-3.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-3.bin" >nul
 )
 cls
@@ -23050,10 +23051,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-4.bin') do set "MD5=%%N"
 if %MD5% equ cb7ccf48c1407424b715649ba2f89a0f (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-NonRoot-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-4.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-4.bin" >nul
 )
 cls
@@ -23063,50 +23064,50 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ 66d6d886f3c72000d1f6813353aba99b (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-NonRoot.exe
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot.exe" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-1.bin') do set "MD5=%%N"
 if %MD5% equ ed2471269908e13480982b3a105ada9f (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-NonRoot-1.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-1.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-1.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-2.bin') do set "MD5=%%N"
 if %MD5% equ 9046e9d8520936b08a31db79befeaa23 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-NonRoot-2.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-2.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-2.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-3.bin') do set "MD5=%%N"
 if %MD5% equ 8ad2b2cf8495b67a2f89ce9a3b7a1905 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-NonRoot-3.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-3.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-3.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-NonRoot-4.bin') do set "MD5=%%N"
 if %MD5% equ cb7ccf48c1407424b715649ba2f89a0f (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-NonRoot-4.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-NonRoot-4.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-NonRoot-4.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
@@ -23179,14 +23180,14 @@ goto ANDROIDX2301NON
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2301NON || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2301N
 
 :ADB07X2301N
@@ -23264,7 +23265,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -23317,7 +23318,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2301NON
 
@@ -23335,7 +23336,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2301NON
 
@@ -23375,38 +23376,38 @@ set "WSACX=Installed"
 )
 
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "   %White%ROOT : %Yellow%YES %Magenta%| %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP%"
+%nhcolor% 07 "   %white%ROOT : %yellow%YES %Magenta%| %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP%"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%640MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%640MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -23441,10 +23442,10 @@ cls
 ::PART00
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ 9dc3598083da7d2d6e666749c240f66e (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root.exe
 goto CHECKPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-Root.exe" >nul
 goto WSADL
 )
@@ -23452,10 +23453,10 @@ goto WSADL
 :CHECKPART1
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-1.bin') do set "MD5=%%N"
 if %MD5% equ adb321b2374efdabb5001d30ea48eada (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root-1.bin
 goto CHECKPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-1.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-1.bin" >nul
 goto WSADL
 )
@@ -23463,10 +23464,10 @@ goto WSADL
 :CHECKPART2
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-2.bin') do set "MD5=%%N"
 if %MD5% equ 188154ea6b310c0b1f974234300e6b3c (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root-2.bin
 goto CHECKPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-2.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-2.bin" >nul
 goto WSADL
 )
@@ -23474,10 +23475,10 @@ goto WSADL
 :CHECKPART3
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-3.bin') do set "MD5=%%N"
 if %MD5% equ d90ecaf1f50d63b1cf586584eb8ceeb4 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root-3.bin
 goto CHECKPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-3.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-3.bin" >nul
 goto WSADL
 )
@@ -23485,10 +23486,10 @@ goto WSADL
 :CHECKPART4
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-4.bin') do set "MD5=%%N"
 if %MD5% equ 6dce71a24221f5fca1d5531af200caf1 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-4.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-4.bin" >nul
 goto WSADL
 )
@@ -23498,10 +23499,10 @@ goto WSADL
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ 9dc3598083da7d2d6e666749c240f66e (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-Root.exe" >nul
 )
 cls
@@ -23509,10 +23510,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ 9dc3598083da7d2d6e666749c240f66e (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-Root.exe" >nul
 )
 ::CAT
@@ -23521,10 +23522,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ 9dc3598083da7d2d6e666749c240f66e (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-Root.exe" >nul
 )
 
@@ -23532,10 +23533,10 @@ del /q /f /s "WSA_2301.40000.4.0_x64-Root.exe" >nul
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-1.bin') do set "MD5=%%N"
 if %MD5% equ adb321b2374efdabb5001d30ea48eada (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root-1.bin
 goto DLPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-1.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-1.bin" >nul
 )
 cls
@@ -23545,10 +23546,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-2.bin') do set "MD5=%%N"
 if %MD5% equ 188154ea6b310c0b1f974234300e6b3c (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root-2.bin
 goto DLPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-2.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-2.bin" >nul
 )
 cls
@@ -23558,10 +23559,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-3.bin') do set "MD5=%%N"
 if %MD5% equ d90ecaf1f50d63b1cf586584eb8ceeb4 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root-3.bin
 goto DLPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-3.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-3.bin" >nul
 )
 cls
@@ -23571,10 +23572,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-4.bin') do set "MD5=%%N"
 if %MD5% equ 6dce71a24221f5fca1d5531af200caf1 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2301.40000.4.0_x64-Root-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2301.40000.4.0_x64-Root-4.bin
 goto WSAINSTALL
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-4.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-4.bin" >nul
 )
 cls
@@ -23584,50 +23585,50 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ 9dc3598083da7d2d6e666749c240f66e (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-Root.exe
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root.exe
 del /q /f /s "WSA_2301.40000.4.0_x64-Root.exe" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-1.bin') do set "MD5=%%N"
 if %MD5% equ adb321b2374efdabb5001d30ea48eada (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-Root-1.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-Root-1.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-1.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-1.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-2.bin') do set "MD5=%%N"
 if %MD5% equ 188154ea6b310c0b1f974234300e6b3c (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-Root-2.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-Root-2.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-2.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-2.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-3.bin') do set "MD5=%%N"
 if %MD5% equ d90ecaf1f50d63b1cf586584eb8ceeb4 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-Root-3.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-Root-3.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-3.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-3.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2301.40000.4.0_x64-Root-4.bin') do set "MD5=%%N"
 if %MD5% equ 6dce71a24221f5fca1d5531af200caf1 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2301.40000.4.0_x64-Root-4.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2301.40000.4.0_x64-Root-4.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2301.40000.4.0_x64-Root-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2301.40000.4.0_x64-Root-4.bin
 del /q /f /s "WSA_2301.40000.4.0_x64-Root-4.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
@@ -23698,14 +23699,14 @@ goto ANDROIDX2301ROOT
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2301ROOT || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2301R
 
 :ADB07X2301R
@@ -23783,7 +23784,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -23836,7 +23837,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2301ROOT
 
@@ -23854,7 +23855,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2301ROOT
 
@@ -23886,14 +23887,14 @@ timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Non-Root Version "
-%nhcolor% 03 "  [2]  | %Green%Root Version "
-%nhcolor% 03 " %Red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if not apps cannot be installed."
-%nhcolor% 03 " %Red%      and also just ignore annoying flagged notification on latest version WSA."
+%nhcolor% 03 "  [1]  | %green%Non-Root Version "
+%nhcolor% 03 "  [2]  | %green%Root Version "
+%nhcolor% 03 " %red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if not apps cannot be installed."
+%nhcolor% 03 " %red%      and also just ignore annoying flagged notification on latest version WSA."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]  | %Green%Get WSA Password here "
+%nhcolor% 03 "  [3]  | %green%Get WSA Password here "
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Yellow%Back
+%nhcolor% 03 "  [0]  | %yellow%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -23932,39 +23933,39 @@ set "WSACX=Installed"
 )
 
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "   %White%ROOT : %Yellow%NONE %Magenta%| %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP%"
+%nhcolor% 07 "   %white%ROOT : %yellow%NONE %Magenta%| %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP%"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%730MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%730MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
-%nhcolor% 03 "         %Red%      e.g. zero.apk or 1234.apk"
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "         %red%      e.g. zero.apk or 1234.apk"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -24001,7 +24002,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot.exe') do set "MD5=
 if %MD5% equ e903b0fab1fdb8e7a8bf9f2590ede11f (
 goto CHECKPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot.exe" >nul
 goto WSADL
 )
@@ -24011,7 +24012,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-1.bin') do set "MD
 if %MD5% equ 22cf4369aca894b3efb7786610ca149d (
 goto CHECKPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-1.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-1.bin" >nul
 goto WSADL
 )
@@ -24021,7 +24022,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-2.bin') do set "MD
 if %MD5% equ 1c53d8f4810ca35d76e161c4a77bb0f2 (
 goto CHECKPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-2.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-2.bin" >nul
 goto WSADL
 )
@@ -24031,7 +24032,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-3.bin') do set "MD
 if %MD5% equ f91d3724d7b161002c755bda9e096cea (
 goto CHECKPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-3.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-3.bin" >nul
 goto WSADL
 )
@@ -24041,7 +24042,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-4.bin') do set "MD
 if %MD5% equ d379328d74e0d45344030492ec0d3ed7 (
 goto WSAINSTALL2304N
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-4.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-4.bin" >nul
 goto WSADL
 )
@@ -24051,10 +24052,10 @@ goto WSADL
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ e903b0fab1fdb8e7a8bf9f2590ede11f (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-NonRoot.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot.exe" >nul
 )
 cls
@@ -24062,10 +24063,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ e903b0fab1fdb8e7a8bf9f2590ede11f (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-NonRoot.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot.exe" >nul
 )
 ::CAT
@@ -24074,10 +24075,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ e903b0fab1fdb8e7a8bf9f2590ede11f (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-NonRoot.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot.exe" >nul
 )
 
@@ -24085,10 +24086,10 @@ del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot.exe" >nul
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-1.bin') do set "MD5=%%N"
 if %MD5% equ 22cf4369aca894b3efb7786610ca149d (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-NonRoot-1.bin
 goto DLPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-1.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-1.bin" >nul
 )
 cls
@@ -24098,10 +24099,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-2.bin') do set "MD5=%%N"
 if %MD5% equ 1c53d8f4810ca35d76e161c4a77bb0f2 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-NonRoot-2.bin
 goto DLPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-2.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-2.bin" >nul
 )
 cls
@@ -24111,10 +24112,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-3.bin') do set "MD5=%%N"
 if %MD5% equ f91d3724d7b161002c755bda9e096cea (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-NonRoot-3.bin
 goto DLPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-3.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-3.bin" >nul
 )
 cls
@@ -24124,10 +24125,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-4.bin') do set "MD5=%%N"
 if %MD5% equ d379328d74e0d45344030492ec0d3ed7 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-NonRoot-4.bin
 goto WSAINSTALL2304N
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-4.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-4.bin" >nul
 )
 cls
@@ -24137,50 +24138,50 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ e903b0fab1fdb8e7a8bf9f2590ede11f (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-NonRoot.exe
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot.exe" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-1.bin') do set "MD5=%%N"
 if %MD5% equ 22cf4369aca894b3efb7786610ca149d (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-NonRoot-1.bin
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-1.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-1.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-2.bin') do set "MD5=%%N"
 if %MD5% equ 1c53d8f4810ca35d76e161c4a77bb0f2 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-NonRoot-2.bin
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-2.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-2.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-3.bin') do set "MD5=%%N"
 if %MD5% equ f91d3724d7b161002c755bda9e096cea (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-NonRoot-3.bin
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-3.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-3.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-NonRoot-4.bin') do set "MD5=%%N"
 if %MD5% equ d379328d74e0d45344030492ec0d3ed7 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-NonRoot-4.bin
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-NonRoot-4.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-NonRoot-4.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
@@ -24190,7 +24191,7 @@ echo Installing...
 WSA_2304.40000.5.0_x64-NonRoot.exe
 timeout /t 3 >nul
 cls
-echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
+echo %red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 6 >nul
 cls
 cd "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64"
@@ -24257,14 +24258,14 @@ goto ANDROIDX2304NON
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2304NON || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2304N
 
 :ADB07X2304N
@@ -24342,7 +24343,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -24395,7 +24396,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2304NON
 
@@ -24413,7 +24414,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2304NON
 
@@ -24453,39 +24454,39 @@ set "WSACX=Installed"
 )
 
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "   %White%ROOT : %Yellow%YES %Magenta%| %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP%"
+%nhcolor% 07 "   %white%ROOT : %yellow%YES %Magenta%| %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP%"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%740MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%740MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
-%nhcolor% 03 "         %Red%      e.g. zero.apk or 1234.apk"
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "         %red%      e.g. zero.apk or 1234.apk"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -24522,7 +24523,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root.exe') do set "MD5=%%N
 if %MD5% equ 28fa7f06a8a7a91e5a7d56fa0cfb7964 (
 goto CHECKPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-Root.exe" >nul
 goto WSADL
 )
@@ -24532,7 +24533,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-1.bin') do set "MD5=%
 if %MD5% equ 4118c4f2abedc2fe692322e48fa1dcd6 (
 goto CHECKPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-1.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-1.bin" >nul
 goto WSADL
 )
@@ -24542,7 +24543,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-2.bin') do set "MD5=%
 if %MD5% equ f358a8898dc7d7c9b0c35b3af896d412 (
 goto CHECKPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-2.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-2.bin" >nul
 goto WSADL
 )
@@ -24552,7 +24553,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-3.bin') do set "MD5=%
 if %MD5% equ d1b5b1eaae1f8ba4db739ae8f5a28f79 (
 goto CHECKPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-3.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-3.bin" >nul
 goto WSADL
 )
@@ -24562,7 +24563,7 @@ for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-4.bin') do set "MD5=%
 if %MD5% equ 4b19e61806b7dac9e66c59e9a60cd59b (
 goto WSAINSTALL2304R
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-4.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-4.bin" >nul
 goto WSADL
 )
@@ -24572,10 +24573,10 @@ goto WSADL
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ 28fa7f06a8a7a91e5a7d56fa0cfb7964 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-Root.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-Root.exe" >nul
 )
 cls
@@ -24583,10 +24584,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ 28fa7f06a8a7a91e5a7d56fa0cfb7964 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-Root.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-Root.exe" >nul
 )
 ::CAT
@@ -24595,10 +24596,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ 28fa7f06a8a7a91e5a7d56fa0cfb7964 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-Root.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-Root.exe" >nul
 )
 
@@ -24606,10 +24607,10 @@ del /q /f /s "WSA_2304.40000.5.0_x64-Root.exe" >nul
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-1.bin') do set "MD5=%%N"
 if %MD5% equ 4118c4f2abedc2fe692322e48fa1dcd6 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-Root-1.bin
 goto DLPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-1.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-1.bin" >nul
 )
 cls
@@ -24619,10 +24620,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-2.bin') do set "MD5=%%N"
 if %MD5% equ f358a8898dc7d7c9b0c35b3af896d412 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-Root-2.bin
 goto DLPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-2.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-2.bin" >nul
 )
 cls
@@ -24632,10 +24633,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-3.bin') do set "MD5=%%N"
 if %MD5% equ d1b5b1eaae1f8ba4db739ae8f5a28f79 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-Root-3.bin
 goto DLPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-3.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-3.bin" >nul
 )
 cls
@@ -24645,10 +24646,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-4.bin') do set "MD5=%%N"
 if %MD5% equ 4b19e61806b7dac9e66c59e9a60cd59b (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2304.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2304.40000.5.0_x64-Root-4.bin
 goto WSAINSTALL2304R
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-4.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-4.bin" >nul
 )
 cls
@@ -24658,50 +24659,50 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ 28fa7f06a8a7a91e5a7d56fa0cfb7964 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-Root.exe
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2304.40000.5.0_x64-Root.exe" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-1.bin') do set "MD5=%%N"
 if %MD5% equ 4118c4f2abedc2fe692322e48fa1dcd6 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-Root-1.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-1.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-1.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-2.bin') do set "MD5=%%N"
 if %MD5% equ f358a8898dc7d7c9b0c35b3af896d412 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-Root-2.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-2.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-2.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-3.bin') do set "MD5=%%N"
 if %MD5% equ d1b5b1eaae1f8ba4db739ae8f5a28f79 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-Root-3.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-3.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-3.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2304.40000.5.0_x64-Root-4.bin') do set "MD5=%%N"
 if %MD5% equ 4b19e61806b7dac9e66c59e9a60cd59b (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2304.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2304.40000.5.0_x64-Root-4.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2304.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2304.40000.5.0_x64-Root-4.bin
 del /q /f /s "WSA_2304.40000.5.0_x64-Root-4.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
@@ -24711,7 +24712,7 @@ echo Installing...
 WSA_2304.40000.5.0_x64-Root.exe
 timeout /t 2 >nul
 cls
-echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
+echo %red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 6 >nul
 cls
 cd "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64"
@@ -24777,14 +24778,14 @@ goto ANDROIDX2304ROOT
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2304ROOT || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2304R
 
 :ADB07X2304R
@@ -24862,7 +24863,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -24915,7 +24916,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2304ROOT
 
@@ -24933,7 +24934,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2304ROOT
 
@@ -24965,14 +24966,14 @@ timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Non-Root Version "
-%nhcolor% 03 "  [2]  | %Green%Root Version "
-::%nhcolor% 03 " %Red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if not apps cannot be installed."
-::%nhcolor% 03 " %Red%      and also just ignore annoying flagged notification on latest version WSA."
+%nhcolor% 03 "  [1]  | %green%Non-Root Version "
+%nhcolor% 03 "  [2]  | %green%Root Version "
+::%nhcolor% 03 " %red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if not apps cannot be installed."
+::%nhcolor% 03 " %red%      and also just ignore annoying flagged notification on latest version WSA."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]  | %Green%Get WSA Password here "
+%nhcolor% 03 "  [3]  | %green%Get WSA Password here "
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Yellow%Back
+%nhcolor% 03 "  [0]  | %yellow%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -25011,39 +25012,39 @@ set "WSACX=Installed"
 )
 
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "   %White%ROOT : %Yellow%NONE %Magenta%| %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP%"
+%nhcolor% 07 "   %white%ROOT : %yellow%NONE %Magenta%| %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP%"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%611MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%611MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
-%nhcolor% 03 "         %Red%      e.g. zero.apk or 1234.apk"
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "         %red%      e.g. zero.apk or 1234.apk"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -25081,7 +25082,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot.exe') do set "MD5=
 if %MD5% equ 542f1b00a5a63514018dc427ab0f8f98 (
 goto CHECKPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot.exe" >nul
 goto WSADL
 )
@@ -25091,7 +25092,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-1.bin') do set "MD
 if %MD5% equ ef7f6268dee3db1ed48f70bf86298096 (
 goto CHECKPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-1.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-1.bin" >nul
 goto WSADL
 )
@@ -25101,7 +25102,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-2.bin') do set "MD
 if %MD5% equ c6d96aed9e38dcaf740dec1a00696cb3 (
 goto CHECKPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-2.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-2.bin" >nul
 goto WSADL
 )
@@ -25111,7 +25112,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-3.bin') do set "MD
 if %MD5% equ 9e6e66cf01c908d2670e5fc657a78b0e (
 goto CHECKPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-3.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-3.bin" >nul
 goto WSADL
 )
@@ -25121,7 +25122,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-4.bin') do set "MD
 if %MD5% equ 8077c74beea90dd451720a7e8bd4abca (
 goto WSAINSTALL2305N
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-4.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-4.bin" >nul
 goto WSADL
 )
@@ -25131,10 +25132,10 @@ goto WSADL
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ 542f1b00a5a63514018dc427ab0f8f98 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-NonRoot.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot.exe" >nul
 )
 ::CAT
@@ -25143,10 +25144,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ 542f1b00a5a63514018dc427ab0f8f98 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-NonRoot.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot.exe" >nul
 )
 ::HUB
@@ -25155,10 +25156,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ 542f1b00a5a63514018dc427ab0f8f98 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-NonRoot.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot.exe" >nul
 )
 
@@ -25166,10 +25167,10 @@ del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot.exe" >nul
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-1.bin') do set "MD5=%%N"
 if %MD5% equ ef7f6268dee3db1ed48f70bf86298096 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-NonRoot-1.bin
 goto DLPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-1.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-1.bin" >nul
 )
 cls
@@ -25179,10 +25180,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-2.bin') do set "MD5=%%N"
 if %MD5% equ c6d96aed9e38dcaf740dec1a00696cb3 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-NonRoot-2.bin
 goto DLPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-2.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-2.bin" >nul
 )
 cls
@@ -25192,10 +25193,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-3.bin') do set "MD5=%%N"
 if %MD5% equ 9e6e66cf01c908d2670e5fc657a78b0e (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-NonRoot-3.bin
 goto DLPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-3.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-3.bin" >nul
 )
 cls
@@ -25205,10 +25206,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-4.bin') do set "MD5=%%N"
 if %MD5% equ 8077c74beea90dd451720a7e8bd4abca (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-NonRoot-4.bin
 goto WSAINSTALL2305N
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-4.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-4.bin" >nul
 )
 cls
@@ -25218,50 +25219,50 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ 542f1b00a5a63514018dc427ab0f8f98 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-NonRoot.exe
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot.exe" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-1.bin') do set "MD5=%%N"
 if %MD5% equ ef7f6268dee3db1ed48f70bf86298096 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-NonRoot-1.bin
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-1.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-1.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-2.bin') do set "MD5=%%N"
 if %MD5% equ c6d96aed9e38dcaf740dec1a00696cb3 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-NonRoot-2.bin
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-2.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-2.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-3.bin') do set "MD5=%%N"
 if %MD5% equ 9e6e66cf01c908d2670e5fc657a78b0e (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-NonRoot-3.bin
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-3.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-3.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-NonRoot-4.bin') do set "MD5=%%N"
 if %MD5% equ 8077c74beea90dd451720a7e8bd4abca (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-NonRoot-4.bin
 timeout /t 1 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-NonRoot-4.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-NonRoot-4.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
@@ -25271,7 +25272,7 @@ echo Installing...
 WSA_2305.40000.5.0_x64-NonRoot.exe
 timeout /t 3 >nul
 cls
-echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
+echo %red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 4 >nul
 cls
 ::cd "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64"
@@ -25352,14 +25353,14 @@ goto ANDROIDX2305NON
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2305NON || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2305N
 
 :ADB07X2305N
@@ -25437,7 +25438,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -25490,7 +25491,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2305NON
 
@@ -25508,7 +25509,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2305NON
 
@@ -25548,39 +25549,39 @@ set "WSACX=Installed"
 )
 
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "   %White%ROOT : %Yellow%YES %Magenta%| %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP%"
+%nhcolor% 07 "   %white%ROOT : %yellow%YES %Magenta%| %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP%"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%622MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%622MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
-%nhcolor% 03 "         %Red%      e.g. zero.apk or 1234.apk"
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "         %red%      e.g. zero.apk or 1234.apk"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -25617,7 +25618,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root.exe') do set "MD5=%%N
 if %MD5% equ c753f3db7d364e4a7a1942ebede70375 (
 goto CHECKPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-Root.exe" >nul
 goto WSADL
 )
@@ -25627,7 +25628,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-1.bin') do set "MD5=%
 if %MD5% equ a4dec6715342c5e5d7e78a6d4483c655 (
 goto CHECKPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-1.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-1.bin" >nul
 goto WSADL
 )
@@ -25637,7 +25638,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-2.bin') do set "MD5=%
 if %MD5% equ 841e511cdef27cfbb031a9e19e512a44 (
 goto CHECKPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-2.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-2.bin" >nul
 goto WSADL
 )
@@ -25647,7 +25648,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-3.bin') do set "MD5=%
 if %MD5% equ 906ff90f7dc7248a18db7e663ea46684 (
 goto CHECKPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-3.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-3.bin" >nul
 goto WSADL
 )
@@ -25657,7 +25658,7 @@ for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-4.bin') do set "MD5=%
 if %MD5% equ 0c019daa7cce04a9f83a09b4467f1feb (
 goto WSAINSTALL2305R
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-4.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-4.bin" >nul
 goto WSADL
 )
@@ -25667,10 +25668,10 @@ goto WSADL
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ c753f3db7d364e4a7a1942ebede70375 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-Root.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-Root.exe" >nul
 )
 ::CAT
@@ -25679,10 +25680,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ c753f3db7d364e4a7a1942ebede70375 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-Root.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-Root.exe" >nul
 )
 ::HUB
@@ -25691,10 +25692,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ c753f3db7d364e4a7a1942ebede70375 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-Root.exe
 goto DLPART1
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-Root.exe" >nul
 )
 
@@ -25702,10 +25703,10 @@ del /q /f /s "WSA_2305.40000.5.0_x64-Root.exe" >nul
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-1.bin') do set "MD5=%%N"
 if %MD5% equ a4dec6715342c5e5d7e78a6d4483c655 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-Root-1.bin
 goto DLPART2
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-1.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-1.bin" >nul
 )
 cls
@@ -25715,10 +25716,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-2.bin') do set "MD5=%%N"
 if %MD5% equ 841e511cdef27cfbb031a9e19e512a44 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-Root-2.bin
 goto DLPART3
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-2.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-2.bin" >nul
 )
 cls
@@ -25728,10 +25729,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-3.bin') do set "MD5=%%N"
 if %MD5% equ 906ff90f7dc7248a18db7e663ea46684 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-Root-3.bin
 goto DLPART4
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-3.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-3.bin" >nul
 )
 cls
@@ -25741,10 +25742,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-4.bin') do set "MD5=%%N"
 if %MD5% equ 0c019daa7cce04a9f83a09b4467f1feb (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2305.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %green%| PASS | %white%WSA_2305.40000.5.0_x64-Root-4.bin
 goto WSAINSTALL2305R
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-4.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-4.bin" >nul
 )
 cls
@@ -25754,50 +25755,50 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ c753f3db7d364e4a7a1942ebede70375 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-Root.exe
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root.exe
 del /q /f /s "WSA_2305.40000.5.0_x64-Root.exe" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-1.bin') do set "MD5=%%N"
 if %MD5% equ a4dec6715342c5e5d7e78a6d4483c655 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-Root-1.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-1.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-1.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-1.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-2.bin') do set "MD5=%%N"
 if %MD5% equ 841e511cdef27cfbb031a9e19e512a44 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-Root-2.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-2.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-2.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-2.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-3.bin') do set "MD5=%%N"
 if %MD5% equ 906ff90f7dc7248a18db7e663ea46684 (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-Root-3.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-3.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-3.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-3.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
 )
 for /f %%N in ('hashsum /a md5 WSA_2305.40000.5.0_x64-Root-4.bin') do set "MD5=%%N"
 if %MD5% equ 0c019daa7cce04a9f83a09b4467f1feb (
-%nhcolor% 08 " %Green%| OK | %White%WSA_2305.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %green%| OK | %white%WSA_2305.40000.5.0_x64-Root-4.bin
 timeout /t 2 >nul
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2305.40000.5.0_x64-Root-4.bin
+%nhcolor% 08 " %red%| FAIL | WSA_2305.40000.5.0_x64-Root-4.bin
 del /q /f /s "WSA_2305.40000.5.0_x64-Root-4.bin" >nul
 timeout /t 5 >nul
 goto WTHx643
@@ -25807,7 +25808,7 @@ echo Installing...
 WSA_2305.40000.5.0_x64-Root.exe
 timeout /t 2 >nul
 cls
-echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
+echo %red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 4 >nul
 cls
 ::cd "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64"
@@ -25888,14 +25889,14 @@ goto ANDROIDX2305ROOT
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2305ROOT || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2305R
 
 :ADB07X2305R
@@ -25973,7 +25974,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -26026,7 +26027,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2305ROOT
 
@@ -26044,7 +26045,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2305ROOT
 
@@ -26080,14 +26081,14 @@ timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Non-Root Version "
-%nhcolor% 03 "  [2]  | %Green%Root Version "
-::%nhcolor% 03 " %Red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if not apps cannot be installed."
-::%nhcolor% 03 " %Red%      and also just ignore annoying flagged notification on latest version WSA."
+%nhcolor% 03 "  [1]  | %green%Non-Root Version "
+%nhcolor% 03 "  [2]  | %green%Root Version "
+::%nhcolor% 03 " %red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if not apps cannot be installed."
+::%nhcolor% 03 " %red%      and also just ignore annoying flagged notification on latest version WSA."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]  | %Green%Get WSA Password here "
+%nhcolor% 03 "  [3]  | %green%Get WSA Password here "
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Yellow%Back
+%nhcolor% 03 "  [0]  | %yellow%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -26126,39 +26127,39 @@ set "WSACX=Installed"
 )
 
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "   %White%ROOT : %Yellow%NONE %Magenta%| %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP%"
+%nhcolor% 07 "   %white%ROOT : %yellow%NONE %Magenta%| %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP%"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%681MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%681MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
-%nhcolor% 03 "         %Red%      e.g. zero.apk or 1234.apk"
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "         %red%      e.g. zero.apk or 1234.apk"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -26195,7 +26196,7 @@ for /f %%N in ('hashsum /a md5 WSA_2309.40000.2.0_x64-NonRoot.exe') do set "MD5=
 if %MD5% equ be6601e4c1e14a81774771e22a7ab87c (
 goto WSAINSTALL2309N
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2309.40000.2.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2309.40000.2.0_x64-NonRoot.exe
 del /q /f /s "WSA_2309.40000.2.0_x64-NonRoot.exe" >nul
 goto WSADL2309N
 )
@@ -26207,10 +26208,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2309.40000.2.0_x64-NonRoot.exe') do set "MD5=%%N"
 if %MD5% equ be6601e4c1e14a81774771e22a7ab87c (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2309.40000.2.0_x64-NonRoot.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2309.40000.2.0_x64-NonRoot.exe
 goto WSAINSTALL2309N
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2309.40000.2.0_x64-NonRoot.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2309.40000.2.0_x64-NonRoot.exe
 del /q /f /s "WSA_2309.40000.2.0_x64-NonRoot.exe" >nul
 goto WTHx643
 )
@@ -26300,14 +26301,14 @@ goto ANDROIDX2309NON
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2309NON || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2309N
 
 :ADB07X2309N
@@ -26385,7 +26386,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -26438,7 +26439,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2309NON
 
@@ -26456,7 +26457,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2309NON
 
@@ -26496,39 +26497,39 @@ set "WSACX=Installed"
 )
 
 FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "VirtualMachinePlatform"') do set "VMP=%%B"
-%nhcolor% 07 "   %White%ROOT : %Yellow%YES %Magenta%| %White%ADB : %Yellow%%ADBCX% %Magenta%| %White%WSA : %Yellow%%WSACX% %Magenta%| %White%Virtual Machine Platform : %Yellow%%VMP%"
+%nhcolor% 07 "   %white%ROOT : %yellow%YES %Magenta%| %white%ADB : %yellow%%ADBCX% %Magenta%| %white%WSA : %yellow%%WSACX% %Magenta%| %white%Virtual Machine Platform : %yellow%%VMP%"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]   > %Green%Download & Install %Yellow%> %White%WSA %Magenta%| %SBlue%698MB"
-%nhcolor% 03 "  [2]   > %Green%Remove WSA"
+%nhcolor% 03 "  [1]   > %green%Download & Install %yellow%> %white%WSA %Magenta%| %lblue%698MB"
+%nhcolor% 03 "  [2]   > %green%Remove WSA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [3]   > %Green%Download & Install %Yellow%> %White%ADB %Magenta%| %SBlue%16MB"
-%nhcolor% 03 "  [4]   > %Green%Remove ADB"
+%nhcolor% 03 "  [3]   > %green%Download & Install %yellow%> %white%ADB %Magenta%| %lblue%16MB"
+%nhcolor% 03 "  [4]   > %green%Remove ADB"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [5]   > %Green%Open > Windows Subsystem for Android"
-%nhcolor% 03 "  [6]   > %Green%Open > Android Debug Bridge (ADB)"
-%nhcolor% 03 "  [7]   > %Green%Connect Subsystem for Android via (ADB)"
-%nhcolor% 03 "  [8]   > %Green%List of devices"
-%nhcolor% 03 "  [9]   > %Green%Kill-Server (ADB)"
-%nhcolor% 03 "  [10]  > %Green%Kill-Subsystem for Android Apps"
-%nhcolor% 03 "  [11]  > %Green%Reboot Subsystem for Android"
-%nhcolor% 03 "         %Red%NOTE: Please disconnect any Android Phones from USB devices before use."
+%nhcolor% 03 "  [5]   > %green%Open > Windows Subsystem for Android"
+%nhcolor% 03 "  [6]   > %green%Open > Android Debug Bridge (ADB)"
+%nhcolor% 03 "  [7]   > %green%Connect Subsystem for Android via (ADB)"
+%nhcolor% 03 "  [8]   > %green%List of devices"
+%nhcolor% 03 "  [9]   > %green%Kill-Server (ADB)"
+%nhcolor% 03 "  [10]  > %green%Kill-Subsystem for Android Apps"
+%nhcolor% 03 "  [11]  > %green%Reboot Subsystem for Android"
+%nhcolor% 03 "         %red%NOTE: Please disconnect any Android Phones from USB devices before use."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [12]  > %Green%Install APK (Android Apps)"
-%nhcolor% 03 "  [13]  > %Green%Install APK (Android Apps) - For Non-Administrator"
-%nhcolor% 03 "         %Red%NOTE: APK filename must without symbol."
-%nhcolor% 03 "         %Red%      e.g. zero.apk or 1234.apk"
+%nhcolor% 03 "  [12]  > %green%Install APK (Android Apps)"
+%nhcolor% 03 "  [13]  > %green%Install APK (Android Apps) - For Non-Administrator"
+%nhcolor% 03 "         %red%NOTE: APK filename must without symbol."
+%nhcolor% 03 "         %red%      e.g. zero.apk or 1234.apk"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "         %Red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
+%nhcolor% 03 "         %red%NOTE: APK Apps you can get it from Apkpure.com / Aptoide.com / apkvision.com"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 0D "  %White%Enable/Disabled Virtual Machine Platform
+%nhcolor% 0D "  %white%Enable/Disabled Virtual Machine Platform
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [16]  > %White%Virtual Machine Platform %Cyan% > %Green%Enabled"
-%nhcolor% 03 "  [17]  > %White%Virtual Machine Platform %Cyan% > %Green%Disabled"
-%nhcolor% 03 "         %Red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
+%nhcolor% 03 "  [16]  > %white%Virtual Machine Platform %cyan% > %green%Enabled"
+%nhcolor% 03 "  [17]  > %white%Virtual Machine Platform %cyan% > %green%Disabled"
+%nhcolor% 03 "         %red%NOTE: If you want using VMWARE / Virtualbox Please Disabled Virtual Machine Platform."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [18]  > %White%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
+%nhcolor% 03 "  [18]  > %white%Tutorial how to use / Get WSA Password https://youtu.be/8X32xaEBhAA"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]   > %Green%Press %Cyan%0 %White%to Cancel or Back
+%nhcolor% 03 "  [0]   > %green%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 0E ""
 timeout /t 0 >nul
@@ -26565,7 +26566,7 @@ for /f %%N in ('hashsum /a md5 WSA_2309.40000.2.0_x64-Root.exe') do set "MD5=%%N
 if %MD5% equ b0c5a8b97349122432bee83812c13033 (
 goto WSAINSTALL2309R
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2309.40000.2.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2309.40000.2.0_x64-Root.exe
 del /q /f /s "WSA_2309.40000.2.0_x64-Root.exe" >nul
 goto WSADL2309R
 )
@@ -26578,10 +26579,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 WSA_2309.40000.2.0_x64-Root.exe') do set "MD5=%%N"
 if %MD5% equ b0c5a8b97349122432bee83812c13033 (
-%nhcolor% 08 " %Green%| PASS | %White%WSA_2309.40000.2.0_x64-Root.exe
+%nhcolor% 08 " %green%| PASS | %white%WSA_2309.40000.2.0_x64-Root.exe
 goto WSAINSTALL2309R
 ) else (
-%nhcolor% 08 " %Red%| FAIL | WSA_2309.40000.2.0_x64-Root.exe
+%nhcolor% 08 " %red%| FAIL | WSA_2309.40000.2.0_x64-Root.exe
 del /q /f /s "WSA_2309.40000.2.0_x64-Root.exe" >nul
 goto WTHx643
 )
@@ -26595,7 +26596,7 @@ timeout /t 3 >nul
 timeout /t 3 >nul
 ROOT >> "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root"
 cls
-::echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
+::echo %red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 4 >nul
 cls
 if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
@@ -26677,14 +26678,14 @@ goto ANDROIDX2309ROOT
 )
 cd "%GHOST_DIR%\Android\platform-tools"
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "" /f >nul 2>nul
-Set /P AndroidADB=%Yellow%ADB %White%
+Set /P AndroidADB=%yellow%ADB %white%
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /t REG_SZ /d "%AndroidADB%" /f >nul 2>nul
 reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" | find /i "exit" >nul 2>nul && goto ANDROIDX2309ROOT || goto ADBCON
 :ADBCON
 "adb.exe" %AndroidADB%
-echo %Red%----------------------------
-echo %Red%Type exit to Cancel or Back.
-echo %Red%----------------------------
+echo %red%----------------------------
+echo %red%Type exit to Cancel or Back.
+echo %red%----------------------------
 goto ADB06X2309R
 
 :ADB07X2309R
@@ -26762,7 +26763,7 @@ set AndroidAPK=
 cd "%GHOST_DIR%\Android\platform-tools"
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 cls
-Set /P AndroidAPK=%SMagenta%Install Android APK %White%: %SGreen%
+Set /P AndroidAPK=%lmagenta%Install Android APK %white%: %lgreen%
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /t REG_SZ /d """%AndroidAPK%""" /f>nul
 timeout /t 1 >nul
@@ -26815,7 +26816,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
-echo %Cyan% WSA is Rooted!
+echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2309ROOT
 
@@ -26833,7 +26834,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 %_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
-echo %Cyan% WSA is Unrooted!
+echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2309ROOT
 
@@ -26869,12 +26870,12 @@ goto :ANDROIDX2309ROOT
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Windows Terminal - Latest
+%nhcolor% 0D "  %white%Microsoft Windows Terminal - Latest
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download & install"
-%nhcolor% 03 "  [2]  | %Green%Remove"
+%nhcolor% 03 "  [1]  | %green%Download & install"
+%nhcolor% 03 "  [2]  | %green%Remove"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -26901,10 +26902,10 @@ timeout /t 1>nul
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle') do set "MD5=%%N"
 if %MD5% equ ccd25bed892b9c522a4d7fa672f0ac92 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
 goto installx2d
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
 del /q /f /s "Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle" >nul
 )
 cls
@@ -26912,10 +26913,10 @@ wget2\bin\wget2 -c --progress=bar --http2 "https://files.catbox.moe/5fk2e0.Msixb
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle') do set "MD5=%%N"
 if %MD5% equ ccd25bed892b9c522a4d7fa672f0ac92 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
 goto installx2d
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
 del /q /f /s "Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle" >nul
 )
 cls
@@ -26923,16 +26924,16 @@ wget2\bin\wget2 -c --progress=bar --http2 "https://www.dropbox.com/s/wea08i445jn
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle') do set "MD5=%%N"
 if %MD5% equ ccd25bed892b9c522a4d7fa672f0ac92 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
 goto installx2d
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
+%nhcolor% 08 " %red%| FAIL | Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle
 del /q /f /s "Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle" >nul
 goto WTHx643
 )
 :installx2d
 cls
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 echo.
 %_7ZA_EXE% x Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle -aoa -pt -o"%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
@@ -26989,12 +26990,12 @@ goto op10
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Force to Remove Microsoft Edge Browser & Webview2
+%nhcolor% 0D "  %white%Force to Remove Microsoft Edge Browser & Webview2
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Remove Microsoft Edge Browser"
-%nhcolor% 03 "  [2]  | %Green%Remove Microsoft Edge Browser & Webview2"
+%nhcolor% 03 "  [1]  | %green%Remove Microsoft Edge Browser"
+%nhcolor% 03 "  [2]  | %green%Remove Microsoft Edge Browser & Webview2"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -27011,7 +27012,7 @@ goto :rmovedge
 :rmvoed1
 cd "%GHOST_DATA%"
 cls
-echo  %White%Force to remove Microsoft Edge ... please wait
+echo  %white%Force to remove Microsoft Edge ... please wait
 timeout /t 3 >nul
 Echo Get-AppxPackage -Allusers *MicrosoftEdge* ^| Remove-AppxPackage > edge.ps1
 Powershell -ExecutionPolicy ByPass -File edge.ps1 >nul
@@ -27024,10 +27025,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 EdgeBlocker.bin') do set "MD5=%%N"
 if %MD5% equ b78b816350282e64b3e14dbeb9417423 (
-%nhcolor% 08 " %Green%| PASS | %White%EdgeBlocker.bin
+%nhcolor% 08 " %green%| PASS | %white%EdgeBlocker.bin
 goto edgeblockR
 ) else (
-%nhcolor% 08 " %Red%| FAIL | EdgeBlocker.bin
+%nhcolor% 08 " %red%| FAIL | EdgeBlocker.bin
 del /q /f /s "EdgeBlocker.bin" >nul
 )
 cls
@@ -27039,10 +27040,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 EdgeBlocker.bin') do set "MD5=%%N"
 if %MD5% equ b78b816350282e64b3e14dbeb9417423 (
-%nhcolor% 08 " %Green%| PASS | %White%EdgeBlocker.bin
+%nhcolor% 08 " %green%| PASS | %white%EdgeBlocker.bin
 goto edgeblockR
 ) else (
-%nhcolor% 08 " %Red%| FAIL | EdgeBlocker.bin
+%nhcolor% 08 " %red%| FAIL | EdgeBlocker.bin
 del /q /f /s "EdgeBlocker.bin" >nul
 )
 cls
@@ -27053,10 +27054,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 EdgeBlocker.bin') do set "MD5=%%N"
 if %MD5% equ b78b816350282e64b3e14dbeb9417423 (
-%nhcolor% 08 " %Green%| PASS | %White%EdgeBlocker.bin
+%nhcolor% 08 " %green%| PASS | %white%EdgeBlocker.bin
 goto edgeblockR
 ) else (
-%nhcolor% 08 " %Red%| FAIL | EdgeBlocker.bin
+%nhcolor% 08 " %red%| FAIL | EdgeBlocker.bin
 del /q /f /s "EdgeBlocker.bin" >nul
 goto :WTHx643
 )
@@ -27195,15 +27196,15 @@ schtasks /Delete /TN "MicrosoftEdgeUpdateBrowserReplacementTask" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\EdgeUpdate " /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d "1" /f >nul 2>nul
 
 cls
-echo  %White%Microsoft Edge complete remove...reboot your computer for the changes to take effect.
-echo  %White%and dont forget to set your current browser to default.
+echo  %white%Microsoft Edge complete remove...reboot your computer for the changes to take effect.
+echo  %white%and dont forget to set your current browser to default.
 timeout /t 6 >nul
 del /s /q edge2.ps1 >nul
 goto begin
 
 :rmvoed2
 cls
-echo  %White%Force to remove Microsoft Edge and Webview2 ... please wait
+echo  %white%Force to remove Microsoft Edge and Webview2 ... please wait
 timeout /t 3 >nul
 cd "%GHOST_DATA%"
 cls
@@ -27218,10 +27219,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 EdgeBlocker.bin') do set "MD5=%%N"
 if %MD5% equ b78b816350282e64b3e14dbeb9417423 (
-%nhcolor% 08 " %Green%| PASS | %White%EdgeBlocker.bin
+%nhcolor% 08 " %green%| PASS | %white%EdgeBlocker.bin
 goto edgeblockR
 ) else (
-%nhcolor% 08 " %Red%| FAIL | EdgeBlocker.bin
+%nhcolor% 08 " %red%| FAIL | EdgeBlocker.bin
 del /q /f /s "EdgeBlocker.bin" >nul
 )
 cls
@@ -27233,10 +27234,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 EdgeBlocker.bin') do set "MD5=%%N"
 if %MD5% equ b78b816350282e64b3e14dbeb9417423 (
-%nhcolor% 08 " %Green%| PASS | %White%EdgeBlocker.bin
+%nhcolor% 08 " %green%| PASS | %white%EdgeBlocker.bin
 goto edgeblockR
 ) else (
-%nhcolor% 08 " %Red%| FAIL | EdgeBlocker.bin
+%nhcolor% 08 " %red%| FAIL | EdgeBlocker.bin
 del /q /f /s "EdgeBlocker.bin" >nul
 )
 cls
@@ -27247,10 +27248,10 @@ cls
 %nhcolor% 08 " --------------"
 for /f %%N in ('hashsum /a md5 EdgeBlocker.bin') do set "MD5=%%N"
 if %MD5% equ b78b816350282e64b3e14dbeb9417423 (
-%nhcolor% 08 " %Green%| PASS | %White%EdgeBlocker.bin
+%nhcolor% 08 " %green%| PASS | %white%EdgeBlocker.bin
 goto edgeblockR
 ) else (
-%nhcolor% 08 " %Red%| FAIL | EdgeBlocker.bin
+%nhcolor% 08 " %red%| FAIL | EdgeBlocker.bin
 del /q /f /s "EdgeBlocker.bin" >nul
 goto :WTHx643
 )
@@ -27408,14 +27409,14 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 " Xbox App For Windows 10 20H2/21H1 or higher version.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-::%nhcolor% 07 " %Red%(NOTE: Please install Microsoft Store before install Xbox App, To install Microsoft Store go to Option 10 > 1)
-%nhcolor% 07 " %Yellow%NOTE: For Xbox Apps please Fix them in settings and install all mising.
-::%nhcolor% 07 " %Red%(NOTE: If Dependencies is missing goto Xbox App > Settings > General > Dependencies > Install)
-%nhcolor% 07 " %Red%NOTE: Some Game Xbox App Cannot be works on Administrator Account, please using Xbox App on non-Administrator User.
-::%nhcolor% 07 " %Red%(NOTE: To using Latest Xbox App OS Build 1904x.1055 or Higher OS Build is required)
+::%nhcolor% 07 " %red%(NOTE: Please install Microsoft Store before install Xbox App, To install Microsoft Store go to Option 10 > 1)
+%nhcolor% 07 " %yellow%NOTE: For Xbox Apps please Fix them in settings and install all mising.
+::%nhcolor% 07 " %red%(NOTE: If Dependencies is missing goto Xbox App > Settings > General > Dependencies > Install)
+%nhcolor% 07 " %red%NOTE: Some Game Xbox App Cannot be works on Administrator Account, please using Xbox App on non-Administrator User.
+::%nhcolor% 07 " %red%(NOTE: To using Latest Xbox App OS Build 1904x.1055 or Higher OS Build is required)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 08 "  %Green%[1] %Yellow%> %White%Xbox App %Red%
-%nhcolor% 08 "  %Green%[0] %Yellow%> %White%Back          
+%nhcolor% 08 "  %green%[1] %yellow%> %white%Xbox App %red%
+%nhcolor% 08 "  %green%[0] %yellow%> %white%Back          
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -27614,7 +27615,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://blizz.ly/3hzFDqN" -t 15 -O "Battle.net-Setup.exe"
@@ -27650,7 +27651,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://itch.io/app/download" -t 15 -O "itch-setup.exe"
@@ -27686,7 +27687,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://download.cdp.bethesda.net/BethesdaNetLauncher_Setup.exe" -t 15 -O "BethesdaNetLauncher_Setup.exe"
@@ -27721,7 +27722,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EADesktopInstaller.exe" -t 15 -O "EADesktopInstaller.exe"
@@ -27756,7 +27757,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe" -t 15 -O "XboxInstaller.exe"
@@ -27791,7 +27792,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe" -t 15 -O "Rockstar-Games-Launcher.exe"
@@ -27826,7 +27827,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-::%nhcolor% 08 " %White%ARIA2 DOWNLOADER"
+::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://download.amazongames.com/AmazonGamesSetup.exe" -t 15 -O "AmazonGamesSetup.exe"
@@ -27846,17 +27847,17 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 del /q /s *3l4jkf4*
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx') do set "MD5=%%N"
 if %MD5% equ 371d5df7c7e6fb8f05a737925e7b8909 (
-%nhcolor% 08 " %Green%| PASS | %White%AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
+echo %white%=======================================================================
 goto installcp
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
 del /q /f /s "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
@@ -27880,49 +27881,49 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %White% WGET DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET DOWNLOADER
+echo %white%=======================================================================
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/3236z3.Appx" -t 5 -O"AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx"
 timeout /t 3 >nul
 ::rename "3l4jkf4" "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 timeout /t 3 >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx') do set "MD5=%%N"
 if %MD5% equ 371d5df7c7e6fb8f05a737925e7b8909 (
-%nhcolor% 08 " %Green%| PASS | %White%AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
+echo %white%=======================================================================
 goto installcp
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
 del /q /f /s "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 cls
-echo %White% WGET DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET DOWNLOADER
+echo %white%=======================================================================
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/g202m9blil6vd9v/3236z3.Appx?dl=1" -t 5 -O"AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx"
 timeout /t 3 >nul
 ::rename "3l4jkf4" "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 timeout /t 3 >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx') do set "MD5=%%N"
 if %MD5% equ 371d5df7c7e6fb8f05a737925e7b8909 (
-%nhcolor% 08 " %Green%| PASS | %White%AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
+echo %white%=======================================================================
 goto installcp
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx
 del /q /f /s "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 cls
 goto WTHx643
 :installcp
 cls
-echo %Green%Installing Intel Graphics Experience.. please wait.
+echo %green%Installing Intel Graphics Experience.. please wait.
 %_7ZA_EXE% x AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx -aoa -pintelG -o"%GHOST_TEMP%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
@@ -27953,17 +27954,17 @@ goto op10
 cls
 cd "%GHOST_DATA%"
 del /q /s *3lqzzn5*
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx') do set "MD5=%%N"
 if %MD5% equ 0115b584d4c3fb877f1939034f87f1cf (
-%nhcolor% 08 " %Green%| PASS | %White%AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
+echo %white%=======================================================================
 goto installcp
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
 del /q /f /s "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
@@ -27987,50 +27988,50 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-echo %White% WGET DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET DOWNLOADER
+echo %white%=======================================================================
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/1t7ft3.appx" -t 5 -O"AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx"
 timeout /t 3 >nul
 ::rename "3lqzzn5" "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 timeout /t 3 >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx') do set "MD5=%%N"
 if %MD5% equ 0115b584d4c3fb877f1939034f87f1cf (
-%nhcolor% 08 " %Green%| PASS | %White%AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
+echo %white%=======================================================================
 goto installcp
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
 del /q /f /s "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 cls
-echo %White% WGET DOWNLOADER
-echo %White%=======================================================================
+echo %white% WGET DOWNLOADER
+echo %white%=======================================================================
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/y1xy9o356e88bxj/1t7ft3.appx?dl=1" -t 5 -O"AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx"
 timeout /t 3 >nul
 ::rename "3lqzzn5" "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 timeout /t 3 >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx') do set "MD5=%%N"
 if %MD5% equ 0115b584d4c3fb877f1939034f87f1cf (
-%nhcolor% 08 " %Green%| PASS | %White%AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
+echo %white%=======================================================================
 goto installcp
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx
 del /q /f /s "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 cls
 goto WTHx643
 :installcp
 cls
-echo %Green%Installing Intel Graphics Control Panel.. please wait.
+echo %green%Installing Intel Graphics Control Panel.. please wait.
 timeout /t 2 >nul
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 Powershell Add-AppxPackage -Path "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx"
@@ -28075,17 +28076,17 @@ cd "%GHOST_DATA%"
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 goto begin
 )
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 StartAllBack.v3.7.8.bin') do set "MD5=%%N"
 if %MD5% equ 1ccc474e842e51498494511edc0473eb (
-%nhcolor% 08 " %Green%| PASS | %White%StartAllBack.v3.7.8.bin
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%StartAllBack.v3.7.8.bin
+echo %white%=======================================================================
 goto installstartallb
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | StartAllBack.v3.7.8.bin
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | StartAllBack.v3.7.8.bin
 del /q /f /s "StartAllBack.v3.7.8.bin" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 cls
 :: CAT MOE
@@ -28093,17 +28094,17 @@ cls
 
 timeout /t 2 >nul
 cls
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 StartAllBack.v3.7.8.bin') do set "MD5=%%N"
 if %MD5% equ 1ccc474e842e51498494511edc0473eb (
-%nhcolor% 08 " %Green%| PASS | %White%StartAllBack.v3.7.8.bin
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%StartAllBack.v3.7.8.bin
+echo %white%=======================================================================
 goto installstartallb
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | StartAllBack.v3.7.8.bin
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | StartAllBack.v3.7.8.bin
 del /q /f /s "StartAllBack.v3.7.8.bin" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 :: Uhub
 cls 
@@ -28111,35 +28112,35 @@ cls
 ::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/ac93deef" -t 5 -O"StartAllBack.v3.7.8.bin"
 timeout /t 2 >nul
 cls
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 StartAllBack.v3.7.8.bin') do set "MD5=%%N"
 if %MD5% equ 1ccc474e842e51498494511edc0473eb (
-%nhcolor% 08 " %Green%| PASS | %White%StartAllBack.v3.7.8.bin
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%StartAllBack.v3.7.8.bin
+echo %white%=======================================================================
 goto installstartallb
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | StartAllBack.v3.7.8.bin
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | StartAllBack.v3.7.8.bin
 del /q /f /s "StartAllBack.v3.7.8.bin" >nul
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 :: ONE DRIVE Enterprises
 cls
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/51fd27ca" -t 3 -O "StartAllBack.v3.7.8.bin"
 timeout /t 2 >nul
 cls
-echo %White%=======================================================================
+echo %white%=======================================================================
 for /f %%N in ('hashsum /a md5 StartAllBack.v3.7.8.bin') do set "MD5=%%N"
 if %MD5% equ 1ccc474e842e51498494511edc0473eb (
-%nhcolor% 08 " %Green%| PASS | %White%StartAllBack.v3.7.8.bin
-echo %White%=======================================================================
+%nhcolor% 08 " %green%| PASS | %white%StartAllBack.v3.7.8.bin
+echo %white%=======================================================================
 goto installstartallb
 ) else (
-echo %White%=======================================================================
-%nhcolor% 08 " %Red%| FAIL | StartAllBack.v3.7.8.bin
+echo %white%=======================================================================
+%nhcolor% 08 " %red%| FAIL | StartAllBack.v3.7.8.bin
 del /q /f /s "StartAllBack.v3.7.8.bin" >nul
 goto WTHx643
-echo %White%=======================================================================
+echo %white%=======================================================================
 )
 :installstartallb
 cls
@@ -28195,7 +28196,7 @@ goto CFGKILL
 )
 :FINDCFGWAIT
 cls
-echo %NCyan%%SWhite%Installing.. please wait...
+echo %bg_cyan%%lblack%Installing.. please wait...
 timeout /t 0 >nul
 goto FINDCFG
 :CFGKILL
@@ -28243,7 +28244,7 @@ for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "
 ::for /f "tokens=1" %%A in (' echo %buildOS% ') do set "XX=%%A"
 for /f "tokens=1" %%G in (' echo 22621.2360 ') do if %%G lss %buildOS% goto :skipV
 cls
-echo  %White%Your Current OS Build %Yellow%%buildOS% %White%/ Required OS Build %Cyan%22621.2361 %White%or Higher to use Copilot. && timeout /t 10 >nul && goto begin
+echo  %white%Your Current OS Build %yellow%%buildOS% %white%/ Required OS Build %cyan%22621.2361 %white%or Higher to use Copilot. && timeout /t 10 >nul && goto begin
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
@@ -28251,7 +28252,7 @@ for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "
 ::for /f "tokens=1" %%A in (' echo %buildOS% ') do set "XX=%%A"
 for /f "tokens=1" %%G in (' echo 22631.2360 ') do if %%G lss %buildOS% goto :skipV
 cls
-echo  %White%Your Current OS Build %Yellow%%buildOS% %White%/ Required OS Build %Cyan%22631.2361 %White%or Higher to use Copilot. && timeout /t 10 >nul && goto begin
+echo  %white%Your Current OS Build %yellow%%buildOS% %white%/ Required OS Build %cyan%22631.2361 %white%or Higher to use Copilot. && timeout /t 10 >nul && goto begin
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="19045" (
@@ -28259,7 +28260,7 @@ for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "
 ::for /f "tokens=1" %%A in (' echo %buildOS% ') do set "XX=%%A"
 for /f "tokens=1" %%G in (' echo 19045.4045 ') do if %%G lss %buildOS% goto :skipV
 cls
-echo  %White%Your Current OS Build %Yellow%%buildOS% %White%/ Required OS Build %Cyan%19045.4046 %White%or Higher to use Copilot. && timeout /t 10 >nul && goto begin
+echo  %white%Your Current OS Build %yellow%%buildOS% %white%/ Required OS Build %cyan%19045.4046 %white%or Higher to use Copilot. && timeout /t 10 >nul && goto begin
 )
 :skipV
 cls
@@ -28272,14 +28273,14 @@ goto begin
 )
 cls
 echo.
-%nhcolor% 09 "  %White%Microsoft Copilot
+%nhcolor% 09 "  %white%Microsoft Copilot
 echo.
-%nhcolor% 09 " %yellow% [1] %White%  Enable                         %Magenta%|
-%nhcolor% 09 " %yellow% [2] %White%  Disable                        %Magenta%|
+%nhcolor% 09 " %yellow% [1] %white%  Enable                         %Magenta%|
+%nhcolor% 09 " %yellow% [2] %white%  Disable                        %Magenta%|
 echo.
-%nhcolor% 09 " %yellow% [0] %White% Back to main menu
+%nhcolor% 09 " %yellow% [0] %white% Back to main menu
 echo.
-set /p firstindex=" Type option:%Green%"
+set /p firstindex=" Type option:%green%"
 if "%firstindex%"=="1" goto COPILOT01
 if "%firstindex%"=="2" goto COPILOT02
 if "%firstindex%"=="0" goto begin
@@ -28405,7 +28406,7 @@ schtasks /Change /TN "Microsoft Copilot" /Enable >nul 2>nul
 schtasks /run /tn "Microsoft Copilot" >nul 2>nul
 cls
 RD /S /Q "copilot_prev_force_" >nul 2>nul
-echo %White%First time use Copilot please run Microsoft Edge and close Microsoft Edge and run copilot on taskbar icon.
+echo %white%First time use Copilot please run Microsoft Edge and close Microsoft Edge and run copilot on taskbar icon.
 timeout /t 8 >nul
 goto begin
 :nope1234
@@ -28414,11 +28415,11 @@ cls && echo for Windows 11 22H2 / 23H3 OS build 22621.2361 or higher. && goto be
 :usr080
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Paint
+%nhcolor% 0D "  %white%Microsoft Paint
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download Paint & Install (10.2103.1.0) (17MB)"
+%nhcolor% 03 "  [1]  | %green%Download Paint & Install (10.2103.1.0) (17MB)"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -28435,10 +28436,10 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ eaba232e6dc8176d6815455fb739c3e9 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win10paintinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -28446,10 +28447,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ eaba232e6dc8176d6815455fb739c3e9 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win10paintinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
@@ -28457,10 +28458,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx') do set "MD5=%%N"
 if %MD5% equ eaba232e6dc8176d6815455fb739c3e9 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 goto win10paintinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
+%nhcolor% 08 " %red%| FAIL | Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx
 del /q /f /s "Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 goto WTHx643
 )
@@ -28488,11 +28489,11 @@ goto :op10
 :msclassicalcu
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Classic Calculator 6.3
+%nhcolor% 0D "  %white%Microsoft Classic Calculator 6.3
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Download & Install (2.8MB)"
+%nhcolor% 03 "  [1]  | %green%Download & Install (2.8MB)"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -28509,10 +28510,10 @@ cls
 cd "%GHOST_DATA%"
 for /f %%N in ('hashsum /a md5 Microsoft.Classic.Calculator.6.3.x64.exe') do set "MD5=%%N"
 if %MD5% equ d704198696c49f1296df7ccddfe48568 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Classic.Calculator.6.3.x64.exe
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Classic.Calculator.6.3.x64.exe
 goto win10calcutinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Classic.Calculator.6.3.x64.exe
+%nhcolor% 08 " %red%| FAIL | Microsoft.Classic.Calculator.6.3.x64.exe
 del /q /f /s "Microsoft.Classic.Calculator.6.3.x64.exe" >nul
 )
 cls
@@ -28521,10 +28522,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Classic.Calculator.6.3.x64.exe') do set "MD5=%%N"
 if %MD5% equ d704198696c49f1296df7ccddfe48568 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Classic.Calculator.6.3.x64.exe
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Classic.Calculator.6.3.x64.exe
 goto win10calcutinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Classic.Calculator.6.3.x64.exe
+%nhcolor% 08 " %red%| FAIL | Microsoft.Classic.Calculator.6.3.x64.exe
 del /q /f /s "Microsoft.Classic.Calculator.6.3.x64.exe" >nul
 )
 cls
@@ -28532,10 +28533,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Classic.Calculator.6.3.x64.exe') do set "MD5=%%N"
 if %MD5% equ d704198696c49f1296df7ccddfe48568 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Classic.Calculator.6.3.x64.exe
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Classic.Calculator.6.3.x64.exe
 goto win10calcutinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Classic.Calculator.6.3.x64.exe
+%nhcolor% 08 " %red%| FAIL | Microsoft.Classic.Calculator.6.3.x64.exe
 del /q /f /s "Microsoft.Classic.Calculator.6.3.x64.exe" >nul
 )
 cls
@@ -28543,10 +28544,10 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Classic.Calculator.6.3.x64.exe') do set "MD5=%%N"
 if %MD5% equ d704198696c49f1296df7ccddfe48568 (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.Classic.Calculator.6.3.x64.exe
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.Classic.Calculator.6.3.x64.exe
 goto win10calcutinstall
 ) else (
-%nhcolor% 08 " %Red%| FAIL | Microsoft.Classic.Calculator.6.3.x64.exe
+%nhcolor% 08 " %red%| FAIL | Microsoft.Classic.Calculator.6.3.x64.exe
 del /q /f /s "Microsoft.Classic.Calculator.6.3.x64.exe" >nul
 goto WTHx643
 )
@@ -28554,30 +28555,30 @@ timeout /t 2 >nul
 :win10calcutinstall
 cls
 cd "%GHOST_DATA%"
-echo Installing... %Lightgray%Password: %Yellow%ghost0987
+echo Installing... %white%Password: %yellow%ghost0987
 "Microsoft.Classic.Calculator.6.3.x64.exe" >nul
 cls
 goto op10
 :appsnewuser
 Powershell Add-AppxPackage -Path '%PROGRAMFILES%\WindowsApps\*.AppxManifest.xml'
 cls
-echo %White%Microsoft Windows Store Silent Installing.. Please Wait...
+echo %white%Microsoft Windows Store Silent Installing.. Please Wait...
 powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%PROGRAMFILES%\WindowsApps\*\AppxManifest.xml' >nul 2>nul
 timeout /t 2 >nul
 cls
-echo %White%All UWP Apps Complete ReInstalled.
+echo %white%All UWP Apps Complete ReInstalled.
 timeout /t 2 >nul
 goto begin
 :win1119
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %White%Microsoft Camera 2022.2210.9.70
+%nhcolor% 0D "  %white%Microsoft Camera 2022.2210.9.70
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %Green%Install"
-%nhcolor% 03 "  [2]  | %Green%Remove"
+%nhcolor% 03 "  [1]  | %green%Install"
+%nhcolor% 03 "  [2]  | %green%Remove"
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 03 "  [0]  | %Green%Back
+%nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
@@ -28595,7 +28596,7 @@ cd "%GHOST_DATA%"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCamera_2022.2210.9.70.bin') do set "MD5=%%N"
 if %MD5% equ 70d0cd867db317fe713c6c981d7c3b2c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCamera_2022.2210.9.70.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCamera_2022.2210.9.70.bin
 timeout /t 2 >nul
 goto XXCAMINSTALL
 ) else (
@@ -28607,7 +28608,7 @@ cls
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsCamera_2022.2210.9.70.bin') do set "MD5=%%N"
 if %MD5% equ 70d0cd867db317fe713c6c981d7c3b2c (
-%nhcolor% 08 " %Green%| PASS | %White%Microsoft.WindowsCamera_2022.2210.9.70.bin
+%nhcolor% 08 " %green%| PASS | %white%Microsoft.WindowsCamera_2022.2210.9.70.bin
 timeout /t 2 >nul
 goto XXCAMINSTALL
 ) else (
@@ -28619,7 +28620,7 @@ cls
 cls
 %_7ZA_EXE% x Microsoft.WindowsCamera_2022.2210.9.70.bin -aoa -o"%GHOST_TEMP%"
 cls
-echo %Cyan%Installing please wait...
+echo %cyan%Installing please wait...
 echo.
 timeout /t 5 >nul
 cd "%GHOST_TEMP%\" >nul 2>nul
@@ -28630,7 +28631,7 @@ for /f tokens^=* %%i in ('where .:*UI.Xaml*.*x64*')do Powershell Add-AppxPackage
 for /f tokens^=* %%i in ('where .:*WindowsCamera*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 cls
 )
-echo %Cyan%Complete...
+echo %cyan%Complete...
 echo.
 timeout /t 5 >nul
 rmdir /s /q "%GHOST_TEMP%" >nul 2>nul
@@ -28665,24 +28666,24 @@ cls
 
 for /f "tokens=2*" %%a in ('reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" 2^> nul') do set "var=%%b"
 if "%var%"=="0x1" (
-set CopilotTEXT="%Yellow%Enabled"
+set CopilotTEXT="%yellow%Enabled"
 goto start
 )
 if "%var%"=="0x0" (
-set CopilotTEXT="%Yellow%Disable"
+set CopilotTEXT="%yellow%Disable"
 goto start
 )
 
 :start
 echo.
-%nhcolor% 09 "  %White%Copilot Preview
+%nhcolor% 09 "  %white%Copilot Preview
 echo.
-%nhcolor% 09 " %yellow% [1] %White% Copilot is > %CopilotTEXT% 
+%nhcolor% 09 " %yellow% [1] %white% Copilot is > %CopilotTEXT% 
 
 echo.
-%nhcolor% 09 " %yellow% [0] %White% Back to main menu
+%nhcolor% 09 " %yellow% [0] %white% Back to main menu
 echo.
-set /p firstindex=" Type option:%Green%"
+set /p firstindex=" Type option:%green%"
 if "%firstindex%"=="1" goto CoPilot01
 if "%firstindex%"=="0" goto GhostMode
 cls
@@ -28695,7 +28696,7 @@ goto GhostModeProc
 :CoPilot01
 for /f "tokens=2*" %%a in ('reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" 2^> nul') do set "var=%%b"
 if "%var%"=="0x0" (
-set CopilotTEXT="%Yellow%Enabled"
+set CopilotTEXT="%yellow%Enabled"
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "1" /f >nul 2>nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" /t REG_DWORD /d "1" /f >nul 2>nul
 schtasks.exe /Create /XML "%PROGRAMFILES(X86)%\Copilot\copilot_prev.xml" /tn "copilot_prev" >nul 2>nul
@@ -28704,7 +28705,7 @@ schtasks /run /tn "copilot" >nul 2>nul
 goto :copilotprev
 )
 if "%var%"=="0x1" (
-set CopilotTEXT="%Yellow%Disable"
+set CopilotTEXT="%yellow%Disable"
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "0" /f >nul 2>nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" /t REG_DWORD /d "0" /f >nul 2>nul
 schtasks /Change /TN "copilot_prev" /Disable >nul 2>nul

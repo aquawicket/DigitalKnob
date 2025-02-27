@@ -6,11 +6,12 @@ if "%~1" == "" (goto dk_install)
 	set "WSCRIPT_EXE=%~2"
 	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3
 	set "DKSCRIPT_PATH=%~4"
+	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 	set "CMD_EXE=%COMSPEC%"
-	::set "ENGINE=javascript"
-	set "ENGINE={16d51579-a30b-4c8b-a276-0ff4dc41e755}"
+	set "ENGINE=javascript"
+	::set "ENGINE={16d51579-a30b-4c8b-a276-0ff4dc41e755}"
 	
-    %CMD_EXE% /c %CSCRIPT_EXE% //D //E:%ENGINE% //X //NoLogo "%DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js" "%DKSCRIPT_PATH%" 
+    %CMD_EXE% /c %CSCRIPT_EXE% //D //E:%ENGINE% //X //NoLogo "%DKJAVASCRIPT_FUNCTIONS_DIR:\=/%/DK.js" "%DKSCRIPT_PATH:\=/%" 
 	
 	::&& (echo: & echo rtncode:true %errorlevel%) || (echo: & echo rtncode:false %errorlevel%)
 	::%COMSPEC% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
