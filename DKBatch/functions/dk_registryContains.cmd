@@ -32,7 +32,7 @@ setlocal
 	%dk_call% dk_debugFunc 0
    
 	set "key=HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
-	set "exe=%WINDIR%\System32\curl.exe"
+	set "exe=C:/ProgramFiles (x86)/Edrum Monitor/EdrumMon.exe"
    
     %dk_call% dk_registryContains "%key%" "%exe%" && (
 		%dk_call% dk_echo "FirewallRules contains %exe%"

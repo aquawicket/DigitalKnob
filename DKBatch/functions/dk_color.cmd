@@ -102,7 +102,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		(set PM=%ESC%^^)	&:: Privacy Message
 		(set APC=%ESC%_)	&:: Application Program Command
         
-		
 		(set DECSC=%ESC%7)	&:: Save Cursor Position in Memory**
 		(set DECSR=%ESC%8)	&:: Restore Cursor Position from Memory**
 		

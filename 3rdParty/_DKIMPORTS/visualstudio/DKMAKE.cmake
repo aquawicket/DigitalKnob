@@ -127,12 +127,22 @@ if(NOT EXISTS "${VS}")
 	# --quiet				- Prevents any user interface from being displayed
 	
 	
-	execute_process(COMMAND cmd /c start /wait ${DKDOWNLOAD_DIR}/${VS_DL_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall)
-	#	dk_findProgram(VS_SETUP_BOOTSTRAPPER_EXE vs_setup_bootstrapper.exe "C:/windows/temp")
-	#	dk_firewallAllow("VS_SETUP_BOOTSTRAPPER" "${VS_SETUP_BOOTSTRAPPER_EXE}")
-#	if(EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
-#		dk_firewallAllow("VS_SETUP" "C:/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
-#	endif()
+	#execute_process(COMMAND cmd /c start /wait ${DKDOWNLOAD_DIR}/${VS_DL_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall)
+	execute_process(COMMAND ${DKDOWNLOAD_DIR}/${VS_DL_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall TIMEOUT 1)
+
+	### wait for vs_setup_bootstrapper.exe to exist in C:/windows/temp ###
+	while(NOT VS_SETUP_BOOTSTRAPPER_EXE)
+		dk_findProgram(VS_SETUP_BOOTSTRAPPER_EXE vs_setup_bootstrapper.exe "C:/Windows/Temp")
+	endwhile()
+	dk_printVar(VS_SETUP_BOOTSTRAPPER_EXE)
+	dk_firewallAllow("VS_SETUP_BOOTSTRAPPER" "${VS_SETUP_BOOTSTRAPPER_EXE}")
+	
+	while(NOT VS_SETUP_EXE)
+		dk_findProgram(VS_SETUP_EXE setup.exe "${VS_INSTALL_PATH}")
+	endwhile()
+	dk_printVar(VS_SETUP_EXE)
+	dk_firewallAllow("VS_SETUP_EXE" "${VS_SETUP_EXE}")
+	dk_pause()
 
 	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 	dk_copy("${VS_CACHE_PATH}" "${DKDOWNLOAD_DIR}/VS")

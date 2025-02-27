@@ -11,13 +11,20 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2
 
+	echo dk_firewallAllow %*
+	
 	set "_name_=%~1"
 	set "_file_=%~2"
+::	set _file_=%_file_:#40=(%
+::	set _file_=%_file_:#41=)%
+	
 	%dk_call% dk_assertPath "%_file_%"
-	%dk_call% dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%_file_:/=\%" && (
+
+	%dk_call% dk_registryContains "HKLM/SYSTEM/ControlSet001/Services/SharedAccess/Parameters/FirewallPolicy/FirewallRules" "%_file_:/=\%" && (
 		%dk_call% dk_notice "registry already contains a firewall rule for %_file_%"
 		exit /b 0
-	)
+	) || (echo not found)
+
 	%dk_call% dk_notice "Adding firewall allow rule for %_file_% . . ."
 	
 	%dk_call% dk_findProgram NETSH_EXE netsh.exe "C:/Windows/System32"
