@@ -7,23 +7,14 @@ REM	 Created with: 	Dolls vodka Technologies, Inc., PowerShell 2021
 REM	 Created on:   	12/6/2020 2:42 AM
 REM	 Created by:   	Ghost Spectre
 REM	 Organization: 	
-REM	 Filename:     	Ghost Toolbox
+REM	 Filename:     	GhostToolbox
 REM	===========================================================================
 REM	.DESCRIPTION
 REM		Description of the PowerShell class.
 REM
 SET "GSTVER=1.9.1.17"
-::set "GHOST_DIR=C:\Ghost Toolbox"
-set "GHOST_DIR=C:\Users\Administrator\digitalknob\Development\DKBatch\apps\GhostToolbox"
-::############ ADDED BY DIGITALKONOB ############
-::if not exist "%GHOST_DIR%" (
-::    echo D|xcopy "%~dp0" "%GHOST_DIR%" /S /E /H /Y
-::)
-::if not exist "%SYSTEMROOT%\System32\nhcolor.exe" (
-::	echo F|xcopy "%~dp0\nhcolor.exe" "%SYSTEMROOT%\System32\nhcolor.exe" /H /Y
-::)
-::############ ADDED BY DIGITALKONOB ############
-	
+SET "GHOST_DIR=%CD%"
+
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
 SET "build=22631.3007"
@@ -75,6 +66,7 @@ if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 goto hello
 @ECHO ON
 ::if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
+
 :firstrun
 @echo off
 cd "%GHOST_DIR%\wget" >nul 2>nul
@@ -92,6 +84,7 @@ ForFiles /p "%temp%" /s /m *.bat /d -1 /c "cmd /c del /a @path" >nul 2>nul
 cls
 @echo off
 @ECHO ON
+
 @echo off
 :GHOSTSPECTRE
 cls && color 08
@@ -185,7 +178,7 @@ goto checkterminal2
 :terminal2
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 echo @echo off >> "%GHOST_DIR%\wget\restart.cmd"
-echo TITLE Ghost Toolbox - Restart >nul >> "%GHOST_DIR%\wget\restart.cmd"
+echo TITLE GhostToolbox - Restart >nul >> "%GHOST_DIR%\wget\restart.cmd"
 echo cd "%GHOST_DIR%" >nul >> "%GHOST_DIR%\wget\restart.cmd"
 echo timeout /t 2 >nul >> "%GHOST_DIR%\wget\restart.cmd"
 echo start toolbox.updater.x64.exe >nul >> "%GHOST_DIR%\wget\restart.cmd"
@@ -194,7 +187,7 @@ echo exit >> "%GHOST_DIR%\wget\restart.cmd"
 )
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 echo @echo off >> "%GHOST_DIR%\wget\restart.cmd"
-echo TITLE Ghost Toolbox - Restart >nul >> "%GHOST_DIR%\wget\restart.cmd"
+echo TITLE GhostToolbox - Restart >nul >> "%GHOST_DIR%\wget\restart.cmd"
 echo cd "%GHOST_DIR%" >nul >> "%GHOST_DIR%\wget\restart.cmd"
 echo timeout /t 2 >nul >> "%GHOST_DIR%\wget\restart.cmd"
 echo start toolbox.updater.x86.exe >nul >> "%GHOST_DIR%\wget\restart.cmd"
@@ -358,7 +351,7 @@ nhcolor 0E " ----------------------                                     %Red%---
 nhcolor 04 " [16] | %Lightgray%Visual C++ Redistributables AIO (system)            %Red%:    NOTE: Before Start Downloading Set Your Timezone     :"
 nhcolor 04 " [17] | %Lightgray%DirectX (system)                                    %Red%: by State or Country & Sync now. Type Timezone to Change.:"
 nhcolor 0E " ----------------------                                     %Red%:    NOTE: Please use %Yellow%Google DNS %White%or %Yellow%Cloudflare DNS.       %Red%:"
-nhcolor 04 " [99] | %Lightgray%Ghost Toolbox Changelogs / Update                   %Red%----------------------------------------------------------- "
+nhcolor 04 " [99] | %Lightgray%GhostToolbox Changelogs / Update                   %Red%----------------------------------------------------------- "
 nhcolor 04 "                                                           
 set /p firstindex=" Type option:%Green%"
 if "%firstindex%"=="1" goto windows10op
@@ -444,10 +437,10 @@ goto begin
 
 :UWPRE
 cls
-Powershell Add-AppxPackage -Path '%ProgramFiles%\WindowsApps\*.AppxManifest.xml'
+Powershell Add-AppxPackage -Path '%PROGRAMFILES%\WindowsApps\*.AppxManifest.xml'
 cls
 echo %White%Microsoft UWP Silent ReInstalling.. Please Wait...
-powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%ProgramFiles%\WindowsApps\*\AppxManifest.xml' >nul 2>nul
+powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%PROGRAMFILES%\WindowsApps\*\AppxManifest.xml' >nul 2>nul
 timeout /t 2 >nul
 cls
 echo %White%All UWP Apps Complete Installed.
@@ -1717,7 +1710,7 @@ nhcolor 07 " ===================================================================
 nhcolor 07 "  Version: %Magenta%%var%
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
 nhcolor 07 "  %Green%[1] %White%- %Yellow%Install UWP Apps
-nhcolor 07 "  %Green%[2] %White%- %Yellow%Install UWP Apps from list %Lightgray%(Ghost Toolbox\list.txt)
+nhcolor 07 "  %Green%[2] %White%- %Yellow%Install UWP Apps from list %Lightgray%(GhostToolbox\list.txt)
 nhcolor 07 "  %Green%[3] %White%- %Yellow%Search Apps
 nhcolor 07 "  %Green%[4] %White%- %Yellow%Check update if are available %Lightgray%(UWP|ANY) | %SMagenta%NOTE: To update all Type > %Yellow%upgrade all     
 ::nhcolor 07 "  %Green%[5] %White%- %Yellow%WPM Option
@@ -1887,7 +1880,7 @@ goto WTHx643
 :win11widgetsinstall
 cls
 timeout /t 1 >nul
-::"NSudoLG.exe" -U:T -P:E cmd /c FOR /d /r "%Systemdrive%\Program Files\WindowsApps\" %%d IN (*MicrosoftWindows.Client.Widgets*) DO @IF EXIST "%%d" rd /q /s "%%d" >nul
+::"NSudoLG.exe" -U:T -P:E cmd /c FOR /d /r "%SYSTEMDRIVE%\Program Files\WindowsApps\" %%d IN (*MicrosoftWindows.Client.Widgets*) DO @IF EXIST "%%d" rd /q /s "%%d" >nul
 ::::7z1900-extra\7za x Microsoft.WidgetsforWindows11_422.33900.0.0.bin -aoa -pghostwidgets -o"%Temp%\Widgets"
 timeout /t 2 >nul
 cls
@@ -1979,7 +1972,7 @@ cls
 
 :XADMINXX1W10C2
 ::cls
-::IF EXIST "%SystemDrive%\Users\Administrator" (
+::IF EXIST "%SYSTEMDRIVE%\Users\Administrator" (
 ::goto XADMINXX1W10C
 ::)
 
@@ -2044,7 +2037,7 @@ timeout /t 5 >nul
 goto XADMINXX1W10
 
 :win1116
-::IF EXIST "%SystemDrive%\Users\Administrator" (
+::IF EXIST "%SYSTEMDRIVE%\Users\Administrator" (
 goto XADMINXX1
 ::)
 cls
@@ -2061,7 +2054,7 @@ goto XADMINXX1W11C2
 
 :XADMINXX1W11C2
 cls
-IF EXIST "%SystemDrive%\Users\Administrator" (
+IF EXIST "%SYSTEMDRIVE%\Users\Administrator" (
 goto XADMINXX1
 )
 
@@ -2827,7 +2820,7 @@ cls
 mkdir "%LocalAppData%\Microsoft\Windows\WinX\Group5" >nul 2>nul
 timeout /t 1 >nul
 ::COPY /Y "%LocalAppData%\Microsoft\Windows\WinX\Easy Context Menu.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Group5\Easy Context Menu.lnk" >nul 2>nul
-COPY /Y "%SystemDrive%\Users\Default\AppData\Local\Microsoft\Windows\WinX\Group5\Easy Context Menu.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Group5\Easy Context Menu.lnk" >nul 2>nul
+COPY /Y "%SYSTEMDRIVE%\Users\Default\AppData\Local\Microsoft\Windows\WinX\Group5\Easy Context Menu.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Group5\Easy Context Menu.lnk" >nul 2>nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 2 >nul
 start explorer
@@ -2847,7 +2840,7 @@ cls
 mkdir "%LocalAppData%\Microsoft\Windows\WinX\Group4" >nul 2>nul
 ::COPY /Y "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Powershell.lnk" >nul 2>nul
 timeout /t 1 >nul
-COPY /Y "%SystemDrive%\Users\Default\AppData\Local\Microsoft\Windows\WinX\Group4\Powershell.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" >nul 2>nul
+COPY /Y "%SYSTEMDRIVE%\Users\Default\AppData\Local\Microsoft\Windows\WinX\Group4\Powershell.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" >nul 2>nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 2 >nul
 start explorer
@@ -2869,7 +2862,7 @@ cls
 ::COPY /Y "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Command.lnk" >nul 2>nul
 mkdir "%LocalAppData%\Microsoft\Windows\WinX\Group4" >nul 2>nul
 timeout /t 1 >nul
-COPY /Y "%SystemDrive%\Users\Default\AppData\Local\Microsoft\Windows\WinX\Group4\Command.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" >nul 2>nul
+COPY /Y "%SYSTEMDRIVE%\Users\Default\AppData\Local\Microsoft\Windows\WinX\Group4\Command.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" >nul 2>nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 2 >nul
 start explorer
@@ -3140,13 +3133,13 @@ goto :win1112
 cd %GHOST_DIR%\TileIconifier"
 cls
 ::Add Backup
-reg export "HKCU\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache" "%SystemDrive%\ProgramData\TileIconify\TileIconify_backup.reg" >nul
+reg export "HKCU\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache" "%SYSTEMDRIVE%\ProgramData\TileIconify\TileIconify_backup.reg" >nul
 echo Reg Export
 timeout /t 2 >nul
-TileIconifier.dll -method 3 a "%GHOST_DIR%\TileIconifier\TileIconify.backup" "%SystemDrive%\ProgramData\TileIconify\*" "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\TileIconify\*" >nul
+TileIconifier.dll -method 3 a "%GHOST_DIR%\TileIconifier\TileIconify.backup" "%SYSTEMDRIVE%\ProgramData\TileIconify\*" "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\TileIconify\*" >nul
 echo Backup Tiles Export
 timeout /t 2 >nul
-IF EXIST "%SystemDrive%\ProgramData\TileIconify\TileIconify_backup.reg" DEL /s /q "%SystemDrive%\ProgramData\TileIconify\TileIconify_backup.reg" >nul 2>nul
+IF EXIST "%SYSTEMDRIVE%\ProgramData\TileIconify\TileIconify_backup.reg" DEL /s /q "%SYSTEMDRIVE%\ProgramData\TileIconify\TileIconify_backup.reg" >nul 2>nul
 goto begin
 
 :BBX02
@@ -3160,12 +3153,12 @@ goto begin
 )
 :: Extract
 taskkill /f /im "explorer.exe" >nul 2>&1
-TileIconifier.dll x "C:\Ghost Toolbox\TileIconifier\TileIconify.backup" "%SystemDrive%" -to "%SystemDrive%"
+TileIconifier.dll x "%GHOST_DIR%\TileIconifier\TileIconify.backup" "%SYSTEMDRIVE%" -to "%SYSTEMDRIVE%"
 timeout /t 2 >nul
 ::reg imxport
-regedit.exe /S "%SystemDrive%\ProgramData\TileIconify\TileIconify_backup.reg" >nul
+regedit.exe /S "%SYSTEMDRIVE%\ProgramData\TileIconify\TileIconify_backup.reg" >nul
 timeout /t 1 >nul
-IF EXIST "%SystemDrive%\ProgramData\TileIconify\TileIconify_backup.reg" DEL /s /q "%SystemDrive%\ProgramData\TileIconify\TileIconify_backup.reg" >nul 2>nul
+IF EXIST "%SYSTEMDRIVE%\ProgramData\TileIconify\TileIconify_backup.reg" DEL /s /q "%SYSTEMDRIVE%\ProgramData\TileIconify\TileIconify_backup.reg" >nul 2>nul
 :findagainexTILE
 timeout /t 1 >nul
 tasklist | find /i "explorer.exe" >nul 2>&1
@@ -3244,7 +3237,7 @@ REG DELETE "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CloudSto
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "1" /f >nul
 7z1900-extra\7za x TEST1.bin -aoa -ptest -o"%APPDATA%\" >nul
 7z1900-extra\7za x TEST2.bin -aoa -ptest -o"%WinDir%\" >nul
-7z1900-extra\7za x TEST3.bin -aoa -ptest -o"%SystemDrive%\" >nul
+7z1900-extra\7za x TEST3.bin -aoa -ptest -o"%SYSTEMDRIVE%\" >nul
 timeout /t 2 >nul
 regedit.exe /S %WinDir%\ExplorerPatcher2.reg >nul
 regedit.exe /S %WinDir%\ExplorerPatcher1.reg >nul
@@ -3357,11 +3350,11 @@ del /q /f /s "%Windir%\dxgi.prev" 2>nul >nul
 REG DELETE "HKEY_CURRENT_USER\Software\ExplorerPatcher" /f >nul 2>nul
 REG DELETE "HKLM\Software\ExplorerPatcher" /f >nul 2>nul
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{D17F1E1A-5919-4427-8F89-A1A8503CA3EB}_ExplorerPatcher" /f >nul 2>nul
-RD /S /Q "%userprofile%\AppData\Roaming\ExplorerPatcher" >nul 2>nul
+RD /S /Q "%USERPROFILE%\AppData\Roaming\ExplorerPatcher" >nul 2>nul
 RD /S /Q "%PROGRAMFILES%\ExplorerPatcher" >nul 2>nul
-del /q /f /s "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\ExplorerPatcher\Properties (ExplorerPatcher).lnk" >nul 2>nul
-del /q /f /s "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\ExplorerPatcher\Properties (ExplorerPatcher).lnk" >nul 2>nul
-RD /S /Q "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\ExplorerPatcher" >nul 2>nul
+del /q /f /s "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\ExplorerPatcher\Properties (ExplorerPatcher).lnk" >nul 2>nul
+del /q /f /s "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\ExplorerPatcher\Properties (ExplorerPatcher).lnk" >nul 2>nul
+RD /S /Q "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\ExplorerPatcher" >nul 2>nul
 timeout /t 2 >nul
 start explorer
 goto forwindows11
@@ -4091,9 +4084,9 @@ cls
 powershell stop-process -name "DriverEasy" -force >nul
 powershell stop-process -name "DriverEasyPortable" -force >nul
 powershell stop-process -name "DriverEasyPortable.exe" -force >nul
-rd /s /q "%systemdrive%\Program Files\DriverEasy" >nul
-del /q /f /s "%userprofile%\Desktop\DriverEasy Portable.lnk" >nul
-del /q /f /s "%userprofile%\Desktop\DriverEasy Portable" >nul
+rd /s /q "%SYSTEMDRIVE%\Program Files\DriverEasy" >nul
+del /q /f /s "%USERPROFILE%\Desktop\DriverEasy Portable.lnk" >nul
+del /q /f /s "%USERPROFILE%\Desktop\DriverEasy Portable" >nul
 cd "%GHOST_DIR%\wget"
 cls
 IF EXIST "aria2c\aria2c.exe" IF EXIST "7z1900-extra\7za.dll" IF EXIST "7z1900-extra\7za.exe" IF EXIST "7z1900-extra\7zxa.dll" goto startdownload
@@ -4137,13 +4130,13 @@ goto :WTHx643
 timeout /t 2 >nul
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
-7z1900-extra\7za x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%systemdrive%\Program Files\"
+7z1900-extra\7za x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%SYSTEMDRIVE%\Program Files\"
 )
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
-7z1900-extra\x64\7za x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%systemdrive%\Program Files\"
+7z1900-extra\x64\7za x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%SYSTEMDRIVE%\Program Files\"
 )
-::mklink "%userprofile%\Desktop\DriverEasy Portable" "%systemdrive%\Program Files\DriverEasy\DriverEasyPortable.exe"
-if exist "%systemdrive%\Program Files\DriverEasy\DriverEasyPortable.exe" (mklink "%userprofile%\Desktop\DriverEasy Portable" "%systemdrive%\Program Files\DriverEasy\DriverEasyPortable.exe") >nul 2>nul
+::mklink "%USERPROFILE%\Desktop\DriverEasy Portable" "%SYSTEMDRIVE%\Program Files\DriverEasy\DriverEasyPortable.exe"
+if exist "%SYSTEMDRIVE%\Program Files\DriverEasy\DriverEasyPortable.exe" (mklink "%USERPROFILE%\Desktop\DriverEasy Portable" "%SYSTEMDRIVE%\Program Files\DriverEasy\DriverEasyPortable.exe") >nul 2>nul
 cls
 echo Driver Easy Portable complete installed.
 cd..
@@ -4270,10 +4263,10 @@ goto nilesoft
 
 :nile02
 cls
-IF EXIST "%programfiles%\Nilesoft Shell\imports\theme.nss" (
-cd "%programfiles%\Nilesoft Shell\imports\"
+IF EXIST "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" (
+cd "%PROGRAMFILES%\Nilesoft Shell\imports\"
 timeout /t 1 >nul
-del /s /q "%programfiles%\Nilesoft Shell\imports\theme.nss" 2>nul >nul
+del /s /q "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" 2>nul >nul
 timeout /t 1 >nul
 echo theme > theme.nss
 echo { >> theme.nss
@@ -4301,10 +4294,10 @@ goto nilesoft
 
 :nile03
 cls
-IF EXIST "%programfiles%\Nilesoft Shell\imports\theme.nss" (
-cd "%programfiles%\Nilesoft Shell\imports\"
+IF EXIST "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" (
+cd "%PROGRAMFILES%\Nilesoft Shell\imports\"
 timeout /t 1 >nul
-del /s /q "%programfiles%\Nilesoft Shell\imports\theme.nss" 2>nul >nul
+del /s /q "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" 2>nul >nul
 echo theme > theme.nss
 echo { >> theme.nss
 echo 	name = "modern" >> theme.nss
@@ -4331,7 +4324,7 @@ goto nilesoft
 
 :ghosthemes
 cls
-IF EXIST "C:\UXThemePatcher" attrib +h /s /d "%SystemDrive%\UXThemePatcher"
+IF EXIST "C:\UXThemePatcher" attrib +h /s /d "%SYSTEMDRIVE%\UXThemePatcher"
 cd "%GHOST_DIR%\wget"
 del /q /f /s
 del /q /f /s UltraUXThemePatcher_3.7.2.exe >nul 2>nul
@@ -4399,7 +4392,7 @@ cls
 goto ghst
 :theme99
 cls
-if not exist "C:\Program Files\7-Zip\7zG.exe" ( 
+if not exist "%PROGRAMFILES%\7-Zip\7zG.exe" ( 
 cd "%GHOST_DIR%\wget"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.7-zip.org/a/7z2103-x64.exe" -o"7z2103-x64.exe"
 7z2103-x64.exe /S
@@ -4408,10 +4401,10 @@ cd "%GHOST_DIR%\wget"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://uxthemepatcher.com/UXThemePatcher_11.0.sfx.exe" -o"UXThemePatcher_11.0.sfx.exe"
 timeout /t 5 >nul
 cls
-"C:\Program Files\7-Zip\"7zG x "UXThemePatcher_11.0.sfx.exe" -aoa -puxthemepatcher.com >nul -o"%temp%\" 2>nul
+"%PROGRAMFILES%\7-Zip\"7zG x "UXThemePatcher_11.0.sfx.exe" -aoa -puxthemepatcher.com >nul -o"%temp%\" 2>nul
 timeout /t 1 >nul
 "%temp%\UXThemePatcher 11.0.exe" >nul
-attrib +h /s /d "%SystemDrive%\UXThemePatcher"
+attrib +h /s /d "%SYSTEMDRIVE%\UXThemePatcher"
 goto ghosthemes
 cls
 :theme98
@@ -4531,11 +4524,11 @@ cls
 goto ghst
 :ghost11
 cls
-takeown /F "%systemdrive%\Windows\System32\UIRibbon.dll"
-takeown /F "%systemdrive%\Windows\System32\*UIRibbon*"
-ICACLS "%systemdrive%\Windows\System32\*UIRibbon*" /grant administrators:F
+takeown /F "%SYSTEMDRIVE%\Windows\System32\UIRibbon.dll"
+takeown /F "%SYSTEMDRIVE%\Windows\System32\*UIRibbon*"
+ICACLS "%SYSTEMDRIVE%\Windows\System32\*UIRibbon*" /grant administrators:F
 cls
-ren %systemdrive%\Windows\System32\UIRibbon.dll UIRibbon.dll.bak
+ren %SYSTEMDRIVE%\Windows\System32\UIRibbon.dll UIRibbon.dll.bak
 cls
 taskkill /F /IM explorer.exe
 start explorer
@@ -4546,11 +4539,11 @@ cls
 goto ghst
 :ghost10
 cls
-takeown /F "%systemdrive%\Windows\System32\UIRibbon.dll"
-takeown /F "%systemdrive%\Windows\System32\*UIRibbon*"
-ICACLS "%systemdrive%\Windows\System32\*UIRibbon*" /grant administrators:F
+takeown /F "%SYSTEMDRIVE%\Windows\System32\UIRibbon.dll"
+takeown /F "%SYSTEMDRIVE%\Windows\System32\*UIRibbon*"
+ICACLS "%SYSTEMDRIVE%\Windows\System32\*UIRibbon*" /grant administrators:F
 cls
-ren %systemdrive%\Windows\System32\UIRibbon.dll.bak UIRibbon.dll
+ren %SYSTEMDRIVE%\Windows\System32\UIRibbon.dll.bak UIRibbon.dll
 cls
 taskkill /F /IM explorer.exe
 start explorer
@@ -5146,8 +5139,8 @@ cd "%GHOST_DIR%\wget"
 powershell stop-process -name "MicrosoftEdge" -force
 powershell stop-process -name "RuntimeBroker" -force
 cls
-takeown /f "%systemdrive%\Windows\WinSxS\*amd64_microsoft-windows-microsoftedge*" /r /d y
-takeown /f "%systemdrive%\Windows\SystemApps\*edge*" /r /d y
+takeown /f "%SYSTEMDRIVE%\Windows\WinSxS\*amd64_microsoft-windows-microsoftedge*" /r /d y
+takeown /f "%SYSTEMDRIVE%\Windows\SystemApps\*edge*" /r /d y
 cls
 ::powershell Remove-Item -Recurse -Force $env:systemdrive\Windows\WinSxS\*amd64_microsoft-windows-microsoftedge_31bf3856ad364e35_10.0.18362.418*
 cls
@@ -5180,8 +5173,8 @@ cd "%GHOST_DIR%\wget"
 powershell stop-process -name "MicrosoftEdge" -force
 powershell stop-process -name "RuntimeBroker" -force
 cls
-takeown /f "%systemdrive%\Windows\WinSxS\*amd64_microsoft-windows-microsoftedge*" /r /d y
-takeown /f "%systemdrive%\Windows\SystemApps\*edge*" /r /d y
+takeown /f "%SYSTEMDRIVE%\Windows\WinSxS\*amd64_microsoft-windows-microsoftedge*" /r /d y
+takeown /f "%SYSTEMDRIVE%\Windows\SystemApps\*edge*" /r /d y
 cls
 powershell Remove-Item -Recurse -Force $env:systemdrive\Windows\WinSxS\*amd64_microsoft-windows-microsoftedge_31bf3856ad364e35_10.0.18362.418*
 cls
@@ -5211,8 +5204,8 @@ cd "%GHOST_DIR%\wget"
 powershell stop-process -name "MicrosoftEdge" -force
 powershell stop-process -name "RuntimeBroker" -force
 cls
-takeown /f "%systemdrive%\Windows\WinSxS\*amd64_microsoft-windows-microsoftedge*" /r /d y
-takeown /f "%systemdrive%\Windows\SystemApps\*edge*" /r /d y
+takeown /f "%SYSTEMDRIVE%\Windows\WinSxS\*amd64_microsoft-windows-microsoftedge*" /r /d y
+takeown /f "%SYSTEMDRIVE%\Windows\SystemApps\*edge*" /r /d y
 cls
 powershell Remove-Item -Recurse -Force $env:systemdrive\Windows\WinSxS\*amd64_microsoft-windows-microsoftedge_31bf3856ad364e35_10.0.18362.418*
 cls
@@ -5325,7 +5318,7 @@ goto :ErrorMD5
 :mirainstall
 cls
 ::powershell Remove-Item  path $env:systemdrive\Windows\Systemapps\*PPIProjection* -Recurse -Force
-takeown /f "%systemdrive%\Windows\SystemApps\*Microsoft.PPIProjection*" /r /d y >nul
+takeown /f "%SYSTEMDRIVE%\Windows\SystemApps\*Microsoft.PPIProjection*" /r /d y >nul
 cls
 powershell expand-archive -path Microsoft.PPIProjection_cw5n1h2txyewy.zip $env:systemdrive\Windows\Systemapps
 cls
@@ -6864,7 +6857,7 @@ goto op5
 powercfg.exe /h off
 powercfg.exe /hibernate off
 powercfg.exe /hibernate off
-Reg add "hku\Default\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Value #1" /t REG_EXPAND_SZ /d "cmd.exe /C del /q /f \"%%SystemDrive%%\hiberfil.sys\" >nul\" /f" /f >nul
+Reg add "hku\Default\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Value #1" /t REG_EXPAND_SZ /d "cmd.exe /C del /q /f \"%%SYSTEMDRIVE%%\hiberfil.sys\" >nul\" /f" /f >nul
 cls
 echo Restart the computer for the changes to take effect.
 timeout /t 5 >nul
@@ -8944,6 +8937,7 @@ if not exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%Red%MISSING"
 if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%Green%ENABLE"
 IF EXIST "%GHOST_DIR%\wget\7z1900-extra\7za.dll" IF EXIST "%GHOST_DIR%\wget\7z1900-extra\7za.exe" IF EXIST "%GHOST_DIR%\wget\7z1900-extra\7zxa.dll" goto wgetchecking 
 goto error_7zp
+
 :op14
 cls
 nhcolor 07 " ====================================================================================================================="
@@ -9047,7 +9041,7 @@ goto 7zip
 cd "%GHOST_DIR%\wget"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.7-zip.org/a/7z2404-x64.exe" -o"7z2404-x64.exe"
-RD /S /Q "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip" >nul
+RD /S /Q "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip" >nul
 "7z2404-x64.exe" /S
 cls
 echo  installing....
@@ -9058,7 +9052,7 @@ goto begin
 cd "%GHOST_DIR%\wget"
 cls
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.7-zip.org/a/7z2404.exe" -o"7z2404.exe"
-RD /S /Q "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip" >nul
+RD /S /Q "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\7-Zip" >nul
 "7z2404.exe" /S
 cls
 echo  installing....
@@ -9713,8 +9707,8 @@ cd..
 rd /s /q "Soft.Organizer.9.01.repack" >nul 2>nul
 del /s /q /f "%Temp%\7z2002-x64.exe" >nul 2>nul
 del /s /q /f "%Temp%\7z2002.exe" >nul 2>nul
-::if exist "%ProgramFiles(x86)%\Soft Organizer\SoftOrganizer.exe" (mklink "%userprofile%\Desktop\Soft Organizer" "%ProgramFiles(x86)%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
-::if exist "%ProgramFiles%\Soft Organizer\SoftOrganizer.exe" (mklink "%userprofile%\Desktop\Soft Organizer" "%ProgramFiles%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
+::if exist "%ProgramFiles(x86)%\Soft Organizer\SoftOrganizer.exe" (mklink "%USERPROFILE%\Desktop\Soft Organizer" "%ProgramFiles(x86)%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
+::if exist "%PROGRAMFILES%\Soft Organizer\SoftOrganizer.exe" (mklink "%USERPROFILE%\Desktop\Soft Organizer" "%PROGRAMFILES%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
 cd..
 cls
 timeout /t 1 >nul
@@ -9942,10 +9936,10 @@ goto usersrequest
 :32bit
 SET XCOPY="xcopy.exe"
 SET XCOPYSWITCH=/s /i /r /v /k /f /c /h /y
-%XCOPY% "ASC.exe" "C:\Program Files\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
-%XCOPY% "madexcept_.bpl" "C:\Program Files\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
-%XCOPY% "OFCommon.dll" "C:\Program Files\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
-%XCOPY% "Scan.dll" "C:\Program Files\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
+%XCOPY% "ASC.exe" "%PROGRAMFILES%\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
+%XCOPY% "madexcept_.bpl" "%PROGRAMFILES%\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
+%XCOPY% "OFCommon.dll" "%PROGRAMFILES%\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
+%XCOPY% "Scan.dll" "%PROGRAMFILES%\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
 cls
 timeout /t 2 >nul
 cd "%temp%"
@@ -10287,15 +10281,15 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" goto netspeedmonx86
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto netspeedmonx64
 :netspeedmonx64
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.krutarth.network/windows/netspeedmonitor_2_5_4_0_x64_setup.msi" -t 5 -O "netspeedmonitor_2_5_4_0_x64_setup.msi"
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "C:\Ghost Toolbox\Wget\netspeedmonitor_2_5_4_0_x64_setup.msi" /t REG_SZ /d "WIN7RTM" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%GHOST_DIR%\Wget\netspeedmonitor_2_5_4_0_x64_setup.msi" /t REG_SZ /d "WIN7RTM" /f
 cls
 echo installing...
 timeout /t 3 >nul
 "netspeedmonitor_2_5_4_0_x64_setup.msi" /q
-mklink "%userprofile%\Desktop\NetSpeed Monitor" "%systemdrive%\Program Files\NetSpeedMonitor\nsmc.exe"
+mklink "%USERPROFILE%\Desktop\NetSpeed Monitor" "%SYSTEMDRIVE%\Program Files\NetSpeedMonitor\nsmc.exe"
 cls
 timeout /t 5 >nul
-"C:\Program Files\NetSpeedMonitor\nsmc.exe"
+"%PROGRAMFILES%\NetSpeedMonitor\nsmc.exe"
 timeout /t 2 >nul
 cd..
 cls
@@ -10304,15 +10298,15 @@ cls
 goto usersrequest
 :netspeedmonx86
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.krutarth.network/windows/netspeedmonitor_2_5_4_0_x86_setup.msi" -t 5 -O "netspeedmonitor_2_5_4_0_x86_setup.msi"
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "C:\Ghost Toolbox\Wget\netspeedmonitor_2_5_4_0_x86_setup.msi" /t REG_SZ /d "WIN7RTM" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%GHOST_DIR%\Wget\netspeedmonitor_2_5_4_0_x86_setup.msi" /t REG_SZ /d "WIN7RTM" /f
 cls
 echo installing...
 timeout /t 3 >nul
 "netspeedmonitor_2_5_4_0_x86_setup.msi" /q
-mklink "%userprofile%\Desktop\NetSpeed Monitor" "%systemdrive%\Program Files\NetSpeedMonitor\nsmc.exe"
+mklink "%USERPROFILE%\Desktop\NetSpeed Monitor" "%SYSTEMDRIVE%\Program Files\NetSpeedMonitor\nsmc.exe"
 cls
 timeout /t 5 >nul
-"C:\Program Files\NetSpeedMonitor\nsmc.exe"
+"%PROGRAMFILES%\NetSpeedMonitor\nsmc.exe"
 timeout /t 2 >nul
 cd..
 cls
@@ -10721,8 +10715,8 @@ FOR %%i IN ("Driver.Booster.*.exe") DO Set FileName="%%i"
 cd..
 rd /s /q "IOBit.Driver.Booster.v9.3.0.209.repack" >nul 2>nul
 timeout /t 2 >nul
-::if exist "%ProgramFiles(x86)%\IObit\Driver Booster\DriverBooster.exe" (mklink "%userprofile%\Desktop\IOBit Driver Booster" "%ProgramFiles(x86)%\IObit\Driver Booster\DriverBooster.exe") >nul 2>nul
-::if exist "%ProgramFiles%\IObit\Driver Booster\DriverBooster.exe" (mklink "%userprofile%\Desktop\IOBit Driver Booster" "%ProgramFiles%\IObit\Driver Booster\DriverBooster.exe") >nul 2>nul
+::if exist "%ProgramFiles(x86)%\IObit\Driver Booster\DriverBooster.exe" (mklink "%USERPROFILE%\Desktop\IOBit Driver Booster" "%ProgramFiles(x86)%\IObit\Driver Booster\DriverBooster.exe") >nul 2>nul
+::if exist "%PROGRAMFILES%\IObit\Driver Booster\DriverBooster.exe" (mklink "%USERPROFILE%\Desktop\IOBit Driver Booster" "%PROGRAMFILES%\IObit\Driver Booster\DriverBooster.exe") >nul 2>nul
 cd..
 cls
 timeout /t 1 >nul
@@ -10769,8 +10763,8 @@ cd..
 rd /s /q "IOBit_Smart_Defrag_7.0.0.62.repack" >nul 2>nul
 del /s /q /f "%Temp%\7z2002-x64.exe" >nul 2>nul
 del /s /q /f "%Temp%\7z2002.exe" >nul 2>nul
-if exist "%ProgramFiles(x86)%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%userprofile%\Desktop\IObit Smart Defrag" "%ProgramFiles(x86)%\IObit\Smart Defrag\SmartDefrag.exe") >nul 2>nul
-if exist "%ProgramFiles%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%userprofile%\Desktop\IObit Smart Defrag" "%ProgramFiles%\IObit\Smart Defrag\SmartDefrag") >nul 2>nul
+if exist "%ProgramFiles(x86)%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%USERPROFILE%\Desktop\IObit Smart Defrag" "%ProgramFiles(x86)%\IObit\Smart Defrag\SmartDefrag.exe") >nul 2>nul
+if exist "%PROGRAMFILES%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%USERPROFILE%\Desktop\IObit Smart Defrag" "%PROGRAMFILES%\IObit\Smart Defrag\SmartDefrag") >nul 2>nul
 cd..
 cls
 timeout /t 1 >nul
@@ -10899,10 +10893,10 @@ goto usersrequest
 :LuDaShi1yes
 cls
 echo. The program is being installed... Wait for the operation to complete.
-7z1900-extra\7za x "LuDaShi.5.1020.1295.1215.GHOSTSPECTRE.7z" -aoa -o"%ProgramFiles%\LuDaShi.5.1020.1295.1215" >nul 2>nul
+7z1900-extra\7za x "LuDaShi.5.1020.1295.1215.GHOSTSPECTRE.7z" -aoa -o"%PROGRAMFILES%\LuDaShi.5.1020.1295.1215" >nul 2>nul
 timeout /t 5 >nul
-if exist "%ProgramFiles(x86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%userprofile%\Desktop\MasterLU Classic" "%ProgramFiles(x86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
-if exist "%ProgramFiles%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%userprofile%\Desktop\MasterLU Classic" "%ProgramFiles%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
+if exist "%ProgramFiles(x86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%USERPROFILE%\Desktop\MasterLU Classic" "%ProgramFiles(x86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
+if exist "%PROGRAMFILES%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%USERPROFILE%\Desktop\MasterLU Classic" "%PROGRAMFILES%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
 cls
 timeout /t 1 >nul
 goto usersrequest
@@ -11343,7 +11337,7 @@ timeout /t 3 >nul
 cd "%GHOST_DIR%\wget"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Defaults.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
-cd /d %userprofile%\AppData\Local >nul 2>nul
+cd /d %USERPROFILE%\AppData\Local >nul 2>nul
 attrib  h IconCache.db >nul 2>nul
 del IconCache.db >nul 2>nul
 del iconcache* >nul 2>nul
@@ -11389,7 +11383,7 @@ timeout /t 3 >nul
 cd "%GHOST_DIR%\wget"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Defaults.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
-cd /d %userprofile%\AppData\Local >nul 2>nul
+cd /d %USERPROFILE%\AppData\Local >nul 2>nul
 attrib  h IconCache.db >nul 2>nul
 del IconCache.db >nul 2>nul
 del iconcache* >nul 2>nul
@@ -11435,7 +11429,7 @@ timeout /t 3 >nul
 cd "%GHOST_DIR%\wget"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Defaults.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
-cd /d %userprofile%\AppData\Local >nul 2>nul
+cd /d %USERPROFILE%\AppData\Local >nul 2>nul
 attrib  h IconCache.db >nul 2>nul
 del IconCache.db >nul 2>nul
 del iconcache* >nul 2>nul
@@ -11506,7 +11500,7 @@ timeout /t 3 >nul
 cd "%GHOST_DIR%\wget"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\ARC_Regular_Blue.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
-cd /d %userprofile%\AppData\Local >nul 2>nul
+cd /d %USERPROFILE%\AppData\Local >nul 2>nul
 attrib  h IconCache.db >nul 2>nul
 del IconCache.db >nul 2>nul
 del iconcache* >nul 2>nul
@@ -11577,7 +11571,7 @@ timeout /t 3 >nul
 cd "%GHOST_DIR%\wget"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Nord.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
-cd /d %userprofile%\AppData\Local >nul 2>nul
+cd /d %USERPROFILE%\AppData\Local >nul 2>nul
 attrib  h IconCache.db >nul 2>nul
 del IconCache.db >nul 2>nul
 del iconcache* >nul 2>nul
@@ -11654,7 +11648,7 @@ timeout /t 3 >nul
 cd "%GHOST_DIR%\wget"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Lumicons.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
-cd /d %userprofile%\AppData\Local >nul 2>nul
+cd /d %USERPROFILE%\AppData\Local >nul 2>nul
 attrib  h IconCache.db >nul 2>nul
 del IconCache.db >nul 2>nul
 del iconcache* >nul 2>nul
@@ -11725,7 +11719,7 @@ timeout /t 3 >nul
 cd "%GHOST_DIR%\wget"
 7z1900-extra\x64\7za x "%Windir%\Ico\Iconspack\Sweet.Paranoia.Iconspack" -aoa -pico -o"%windir%\" >nul 2>nul
 timeout /t 1 >nul
-cd /d %userprofile%\AppData\Local >nul 2>nul
+cd /d %USERPROFILE%\AppData\Local >nul 2>nul
 attrib  h IconCache.db >nul 2>nul
 del IconCache.db >nul 2>nul
 del iconcache* >nul 2>nul
@@ -12780,10 +12774,10 @@ powershell Remove-Item * -Filter update >nul 2>nul
 IF EXIST "update" DEL /s /q "update" >nul 2>nul
 IF EXIST "%GHOST_DIR%\wget\update" DEL /s /q "update" >nul 2>nul
 IF EXIST "%GHOST_DIR%\wget\analytic" DEL /s /q "analytic" >nul 2>nul
-IF EXIST "%systemdrive%\complete.cmd" DEL /s /q "%systemdrive%\complete.cmd" >nul 2>nul
-IF EXIST "%systemdrive%\complete.bat" DEL /s /q "%systemdrive%\complete.bat" >nul 2>nul
-IF EXIST "%systemdrive%\security.cmd" DEL /s /q "%systemdrive%\security.cmd" >nul 2>nul
-IF EXIST "%systemdrive%\security.bat" DEL /s /q "%systemdrive%\security.bat" >nul 2>nul
+IF EXIST "%SYSTEMDRIVE%\complete.cmd" DEL /s /q "%SYSTEMDRIVE%\complete.cmd" >nul 2>nul
+IF EXIST "%SYSTEMDRIVE%\complete.bat" DEL /s /q "%SYSTEMDRIVE%\complete.bat" >nul 2>nul
+IF EXIST "%SYSTEMDRIVE%\security.cmd" DEL /s /q "%SYSTEMDRIVE%\security.cmd" >nul 2>nul
+IF EXIST "%SYSTEMDRIVE%\security.bat" DEL /s /q "%SYSTEMDRIVE%\security.bat" >nul 2>nul
 IF EXIST "%temp%\*.cmd" DEL /s /q "%temp%\*.cmd" >nul 2>nul
 IF EXIST "%temp%\*.bat" DEL /s /q "%temp%\*.bat" >nul 2>nul
 IF EXIST "%temp%\*.vbs" DEL /s /q "%temp%\*.vbs" >nul 2>nul
@@ -12798,10 +12792,10 @@ IF EXIST "%WinDir%\System32\update.dll" DEL /s /q "%WinDir%\System32\update.dll"
 IF EXIST "%ProgramData%\ssh\updateau.dll" DEL /s /q "%ProgramData%\ssh\updateau.dll" >nul 2>nul
 IF EXIST "%WinDir%\System32\Visual" rmdir /s /q "%WinDir%\System32\Visual" >nul 2>nul
 IF EXIST "%ProgramData%\Microsoft\DRM" rmdir /s /q "%ProgramData%\Microsoft\DRM" >nul 2>nul
-IF EXIST "%SystemDrive%\EdgeBlocker" rmdir /s /q "%SystemDrive%\EdgeBlocker" >nul 2>nul
+IF EXIST "%SYSTEMDRIVE%\EdgeBlocker" rmdir /s /q "%SYSTEMDRIVE%\EdgeBlocker" >nul 2>nul
 IF EXIST "%WinDir%\System32\Visual" rmdir /s /q "%WinDir%\System32\Visual" >nul 2>nul
 ::wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://youtu.be/kHZUYiyaH8k" -t 5 -O"analytic" >nul 2>nul
-:: Start Ghost Toolbox
+:: Start GhostToolbox
 cd "%GHOST_DIR%" >nul 2>nul
 SET INSTALL_PATH1="ghost.toolbox.7z";
 if exist %INSTALL_PATH1% (
@@ -13233,15 +13227,15 @@ goto ErrorMD5msstore
 :updatewindowstorex64install
 cd "%GHOST_DIR%\wget"
 cls
-7z1900-extra\7za x Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx -aoa -pwindowsapps -o"%ProgramFiles%\WindowsApps"
+7z1900-extra\7za x Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx -aoa -pwindowsapps -o"%PROGRAMFILES%\WindowsApps"
 timeout /t 2 >nul
 cls
 echo %White%Microsoft Windows Store Silent Installing.. Please Wait...
-powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%ProgramFiles%\WindowsApps\*\AppxManifest.xml' >nul 2>nul
+powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%PROGRAMFILES%\WindowsApps\*\AppxManifest.xml' >nul 2>nul
 timeout /t 2 >nul
-powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%ProgramFiles%\WindowsApps\Microsoft.StorePurchaseApp_12106.1001.33.0_x64__8wekyb3d8bbwe\AppxManifest.xml' >nul 2>nul
+powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%PROGRAMFILES%\WindowsApps\Microsoft.StorePurchaseApp_12106.1001.33.0_x64__8wekyb3d8bbwe\AppxManifest.xml' >nul 2>nul
 timeout /t 1 >nul
-Powershell Add-AppxPackage -Path '%ProgramFiles%\WindowsApps\Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe\Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe.AppxBundle' >nul 2>nul
+Powershell Add-AppxPackage -Path '%PROGRAMFILES%\WindowsApps\Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe\Microsoft.DesktopAppInstaller_2019.1019.1.0_neutral_~_8wekyb3d8bbwe.AppxBundle' >nul 2>nul
 cls
 echo %White%Microsoft Windows Store Complete Installed.
 timeout /t 5 >nul
@@ -13984,9 +13978,9 @@ timeout /t 5 >nul
 cls
 echo Taking ownership..please wait...
 ::powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul 2>nul
-::7z1900-extra\7za x "%temp%\WindowsApps.zip" -aoa -o"%ProgramFiles%\" >nul 2>nul
+::7z1900-extra\7za x "%temp%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul 2>nul
 takeown /f "%localappdata%\packages" /r /d y >nul 2>nul
-takeown /f "%ProgramFiles%\WindowsApps" /r /d y >nul 2>nul
+takeown /f "%PROGRAMFILES%\WindowsApps" /r /d y >nul 2>nul
 regsvr32 quartz.dll /s >nul 2>nul
 timeout /t 2 >nul
 cls
@@ -14170,7 +14164,7 @@ timeout /t 5 >nul
 cls
 echo Taking ownership..please wait...
 takeown /f "%localappdata%\packages" /r /d y >nul 2>nul
-takeown /f "%ProgramFiles%\WindowsApps" /r /d y >nul 2>nul
+takeown /f "%PROGRAMFILES%\WindowsApps" /r /d y >nul 2>nul
 regsvr32 quartz.dll /s >nul 2>nul
 cls
 7z1900-extra\7za x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%Temp%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
@@ -14222,37 +14216,40 @@ cls
 timeout /t 5 >nul
 goto begin
 :imnotdoneyet
+
 :start
 cd /d %HomePath%
 color 03
 ::attrib +S +H +R %ExtractPath%
-set "nhcolor=%systemroot%\system32\nhcolor.exe"
-::if exist %systemroot%\system32\nhcolor.exe (
-::
+set "nhcolor=%GHOST_DIR%\nhcolor.exe"
+echo "%nhcolor%"
+if exist "%nhcolor%" (
         goto ghostlocation
-::)
+)
 goto :error_leq_build
 ::goto :nomsg10242020
+
 :wgetchecking
 cd /d %HomePath%
 color 03
 ::attrib +S +H +R %ExtractPath%
 set "wget="%GHOST_DIR%\wget\wget.exe""
 if exist "%GHOST_DIR%\wget\wget.exe" (
-::
         goto notifyupdate3
 )
 goto :error_wget
+
 :ghostlocation
 cd /d %HomePath%
 color 03
 ::attrib +S +H +R %ExtractPath%
-set "ghost.toolbox="%GHOST_DIR%""
+set "ghost.toolbox="%GHOST_DIR%\""
 if exist "%GHOST_DIR%" (
 ::
         goto ghost7zp
 )
 goto :error_location
+
 :storex641703
 COLOR 09
 cls
@@ -14295,9 +14292,9 @@ goto :WTHx643
 cls
 echo Taking ownership..please wait...
 ::powershell expand-archive -path 7z1900-extra.zip -force
-::7z1900-extra\7za x "%temp%\WindowsApps.zip" -aoa -o"%ProgramFiles%\" >nul
+::7z1900-extra\7za x "%temp%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul
 takeown /f "%localappdata%\packages" /r /d y >nul
-takeown /f "%ProgramFiles%\WindowsApps" /r /d y >nul
+takeown /f "%PROGRAMFILES%\WindowsApps" /r /d y >nul
 regsvr32 quartz.dll /s
 cls
 nhcolor 08 " MD5 HASH CHECK"
@@ -15631,8 +15628,8 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto 03ANDROIDX
@@ -15660,12 +15657,12 @@ goto 03ANDROIDX
 :ADB05X
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
-explorer.exe "%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk"
+explorer.exe "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk"
 goto 03ANDROIDX
 
 :ADB06X
@@ -15803,7 +15800,7 @@ goto 03ANDROIDX
 
 :ADB014X
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -15814,14 +15811,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto 03ANDROIDX
 
 :ADB015X
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -15832,7 +15829,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto 03ANDROIDX
@@ -16139,6 +16136,7 @@ del /q /f /s Microsoft.XboxIdentityProvider_12.58.1001.0_neutral_~_8wekyb3d8bbwe
 cls
 timeout /t 5 >nul
 goto begin
+
 :error_leq_build
 set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
@@ -16149,10 +16147,11 @@ goto EOF
 :EOF
 del /q /s /a %temp%\*.bat >nul 2>nul
 exit
+
 :error_wget
 set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
-::set "message2=wget.exe not found... by default they will be installed in C:\Ghost Toolbox\Wget"
+::set "message2=wget.exe not found... by default they will be installed in %GHOST_DIR%\Wget"
 ::echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%temp%\input.vbs"
 ::cscript //nologo "%temp%\input.vbs" "%message1%" "%message2%" "%header%"
 echo Dim shl > %temp%\test.vbs
@@ -16161,16 +16160,17 @@ echo Set Shell = CreateObject("WScript.Shell") >> %temp%\test.vbs
 echo Dim strMsg,inp01,strTitle,strFlag >> %temp%\test.vbs
 echo Dim WshShell, i >> %temp%\test.vbs
 echo Set WshShell = CreateObject("WScript.Shell") >> %temp%\test.vbs
-echo        MsgBox "wget.exe not found... by default will be installed in C:\Ghost Toolbox\Wget.",64,strTitle >> %temp%\test.vbs
+echo        MsgBox "wget.exe not found... by default will be installed in %GHOST_DIR%\Wget.",64,strTitle >> %temp%\test.vbs
 start %temp%\test.vbs
 goto EOF
 :EOF
 del /q /s /a %temp%\*.bat >nul 2>nul
 exit
+
 :error_location
 ::set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
-::set "message2=Ghost Toolbox only works on C:\Ghost Toolbox\ other drive or any location Ghost Toolbox cannot be works.
+::set "message2=GhostToolbox only works on %GHOST_DIR%\ other drive or any location GhostToolbox cannot be works.
 ::echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%temp%\input.vbs"
 ::cscript //nologo "%temp%\input.vbs" "%message1%" "%message2%" "%header%"
 echo Dim shl > %temp%\test.vbs
@@ -16179,7 +16179,7 @@ echo Set Shell = CreateObject("WScript.Shell") >> %temp%\test.vbs
 echo Dim strMsg,inp01,strTitle,strFlag >> %temp%\test.vbs
 echo Dim WshShell, i >> %temp%\test.vbs
 echo Set WshShell = CreateObject("WScript.Shell") >> %temp%\test.vbs
-echo        MsgBox "Ghost Toolbox only works on %GHOST_DIR% other drive or any location Ghost Toolbox cannot be working.",64,strTitle >> %temp%\test.vbs
+echo        MsgBox "GhostToolbox only works on %GHOST_DIR%\ other drive or any location GhostToolbox cannot be working.",64,strTitle >> %temp%\test.vbs
 start %temp%\test.vbs
 goto EOF
 :EOF
@@ -16533,7 +16533,7 @@ echo   %white%Standalone Windows Update
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
 nhcolor 03 "  [1]  | %Green%Check for latest updates. If updates are available.
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
-nhcolor 07 "  Ghost Toolbox Settings > every start > message popup If standalone updates are available.
+nhcolor 07 "  GhostToolbox Settings > every start > message popup If standalone updates are available.
 nhcolor 07 " ---------------------------------------------------------------------------------------------------------------------"
 nhcolor 03 "  [2]  | %Green%Enable (message popup)
 nhcolor 03 "  [3]  | %Green%Disable (message popup)
@@ -16555,14 +16555,14 @@ goto standaloneupdate
 :stdup1
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Check_Update" /t REG_DWORD /d "0" /f>nul
-echo Check for updates on every startup %red%(Ghost Toolbox) - %Yellow%Enable
+echo Check for updates on every startup %red%(GhostToolbox) - %Yellow%Enable
 timeout /t 2 >nul
 cls
 goto standaloneupdate
 :stdup2
 cls
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Check_Update" /t REG_DWORD /d "1" /f>nul
-echo Check for updates on every startup %red%(Ghost Toolbox) - %Yellow%Disable
+echo Check for updates on every startup %red%(GhostToolbox) - %Yellow%Disable
 timeout /t 2 >nul
 cls
 goto standaloneupdate
@@ -17074,8 +17074,8 @@ cd "%GHOST_DIR%\wget" >nul
 cls
 wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://github.com/Blinue/Magpie/releases/download/v0.10.1/Magpie_v0.10.1.zip" -t 5 -O"Magpie_v0.10.1.zip"
 cls
-7z1900-extra\7za x "Magpie_v0.10.1.zip" -aoa -o"%programfiles%\Magpie"
-if exist "%programfiles%\Magpie\Magpie.exe" (mklink "%userprofile%\Desktop\Magpie" "%programfiles%\Magpie\Magpie.exe") >nul 2>nul
+7z1900-extra\7za x "Magpie_v0.10.1.zip" -aoa -o"%PROGRAMFILES%\Magpie"
+if exist "%PROGRAMFILES%\Magpie\Magpie.exe" (mklink "%USERPROFILE%\Desktop\Magpie" "%PROGRAMFILES%\Magpie\Magpie.exe") >nul 2>nul
 cls
 echo for Non Administrator account please right click and run as Administrator to run Magpie.
 timeout /t 6 >nul
@@ -17096,8 +17096,8 @@ nhcolor 08 " %Red%| FAIL | Lossless.Scaling.2.6.0.6
 del /q /f /s "Lossless.Scaling.2.6.0.6" >nul
 goto :WTHx643
 )
-7z1900-extra\7za x "Lossless.Scaling.2.6.0.6" -aoa -o"%programfiles%"
-if exist "%programfiles%\Lossless Scaling\LosslessScaling.exe" (mklink "%userprofile%\Desktop\Lossless Scaling" "%programfiles%\Lossless Scaling\LosslessScaling.exe") >nul 2>nul
+7z1900-extra\7za x "Lossless.Scaling.2.6.0.6" -aoa -o"%PROGRAMFILES%"
+if exist "%PROGRAMFILES%\Lossless Scaling\LosslessScaling.exe" (mklink "%USERPROFILE%\Desktop\Lossless Scaling" "%PROGRAMFILES%\Lossless Scaling\LosslessScaling.exe") >nul 2>nul
 cls
 goto upS01
 :upS02
@@ -18041,9 +18041,9 @@ wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --
 cls
 powershell -ExecutionPolicy Bypass -File "remove-photos.ps1"
 cls
-FOR /D %%p IN ("%Systemdrive%\Program Files\WindowsApps\*Microsoft.Windows.Photos*") DO rmdir "%%p" /s /q >nul
-FOR /D %%p IN ("%Systemdrive%\Program Files\WindowsApps\*Microsoft.Windows.Photos.DLC.Main*") DO rmdir "%%p" /s /q >nul
-FOR /D %%p IN ("%Systemdrive%\Program Files\WindowsApps\*Microsoft.Photos.MediaEngineDLC*") DO rmdir "%%p" /s /q >nul
+FOR /D %%p IN ("%SYSTEMDRIVE%\Program Files\WindowsApps\*Microsoft.Windows.Photos*") DO rmdir "%%p" /s /q >nul
+FOR /D %%p IN ("%SYSTEMDRIVE%\Program Files\WindowsApps\*Microsoft.Windows.Photos.DLC.Main*") DO rmdir "%%p" /s /q >nul
+FOR /D %%p IN ("%SYSTEMDRIVE%\Program Files\WindowsApps\*Microsoft.Photos.MediaEngineDLC*") DO rmdir "%%p" /s /q >nul
 cls
 del /q /s "remove-photos.ps1" >nul 2>nul
 cls
@@ -18140,16 +18140,18 @@ echo %Green%Microsoft Zune Music Completely Installed.
 timeout /t 3 >nul
 cls
 goto begin
+
 :error_7zp
 set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
-set "message2=7z1900-extra folder or files is missing. Without 7z1900-extra files Ghost Toolbox cannot be working.
+set "message2=7z1900-extra folder or files is missing. Without 7z1900-extra files GhostToolbox cannot be working.
 echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%temp%\input.vbs"
 cscript //nologo "%temp%\input.vbs" "%message1%" "%message2%" "%header%"
 goto EOF
 :EOF
 del /q /s /a %temp%\*.bat >nul 2>nul
 exit
+
 :zunemusic2020x86
 cls
 nhcolor 07 " %Red%Microsoft Zune Music x86"
@@ -19910,8 +19912,8 @@ cd..
 rd /s /q "IOBit_Uninstaller_10.1.0.21.repack.GHOSTSPECTRE" >nul 2>nul
 del /s /q /f "%Temp%\7z2002-x64.exe" >nul 2>nul
 del /s /q /f "%Temp%\7z2002.exe" >nul 2>nul
-if exist "%ProgramFiles(x86)%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%userprofile%\Desktop\IObit Uninstaller" "%ProgramFiles(x86)%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
-if exist "%ProgramFiles%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%userprofile%\Desktop\IObit Uninstaller" "%ProgramFiles%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
+if exist "%ProgramFiles(x86)%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%USERPROFILE%\Desktop\IObit Uninstaller" "%ProgramFiles(x86)%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
+if exist "%PROGRAMFILES%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%USERPROFILE%\Desktop\IObit Uninstaller" "%PROGRAMFILES%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
 cd..
 cls
 timeout /t 2 >nul
@@ -20454,7 +20456,7 @@ cls
 echo Installing Windows Subsystem For Android Optional...
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
-7z1900-extra\7za x Android.optional -aoa -proot -o"%ProgramFiles%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0"
+7z1900-extra\7za x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0"
 cls
 rmdir /s /q "%Temp%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 del /s /q "%Temp%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
@@ -20467,8 +20469,8 @@ Echo Get-AppxPackage *MicrosoftCorporationII.WindowsSubsystemForAndroid* ^| Remo
 Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROID0001
@@ -20573,7 +20575,7 @@ echo %Red%----------------------------
 goto ADB04
 :ADB03
 ::%programdata%\
-explorer.exe "%ProgramFiles%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\WSA.lnk"
+explorer.exe "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\WSA.lnk"
 goto 03ANDROID
 :ADB05
 if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
@@ -20687,7 +20689,7 @@ echo ADB is not installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
-if not exist "%ProgramFiles%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
+if not exist "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
 cls
 echo Seems Android Kernel is missing, please re installs Subsystem for Android.
 timeout /t 3 >nul
@@ -20730,7 +20732,7 @@ goto WTHx643
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
-7z1900-extra\7za x Android.optional -aoa -proot -o"%ProgramFiles%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul
+7z1900-extra\7za x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul
 cls
 echo Please wait..connecting to Subsystem for Android... do not close Play Store.
 START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
@@ -20753,7 +20755,7 @@ echo ADB is not installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
-if not exist "%ProgramFiles%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
+if not exist "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
 cls
 echo Seems Android Kernel is missing, please re installs Subsystem for Android.
 timeout /t 3 >nul
@@ -20796,7 +20798,7 @@ goto WTHx643
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
-7z1900-extra\7za x Android.kernel.un -aoa -punroot -o"%ProgramFiles%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools" >nul
+7z1900-extra\7za x Android.kernel.un -aoa -punroot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools" >nul
 cls
 echo Devices is unroot now.
 timeout /t 2 >nul
@@ -20979,7 +20981,7 @@ goto WTHx643
 :installspotify
 powershell add-appxpackage -path SpotifyAB.SpotifyMusic_1.143.700.0_x86__zpdnekdrzrea0.Appx
 cls
-echo %White%Close Ghost Toolbox before launch Spotify Music.
+echo %White%Close GhostToolbox before launch Spotify Music.
 timeout /t 6 >nul
 cls
 goto usersrequest
@@ -21451,20 +21453,20 @@ goto :nvidiotcp
 cls
 echo Installing... please wait..
 timeout /t 5 >nul
-7z1900-extra\7za x "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" -aoa -o"%systemdrive%\Program Files\" >nul 2>nul
+7z1900-extra\7za x "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" -aoa -o"%SYSTEMDRIVE%\Program Files\" >nul 2>nul
 cls
-if exist "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%userprofile%\Desktop\") >nul 2>nul
-if exist "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%Appdata%\Microsoft\Windows\Start Menu\Programs\") >nul 2>nul
-::if exist "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (mklink "%userprofile%\Desktop\Nvidia Control Panel" "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe") >nul 2>nul
-::if exist "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (mklink "%Appdata%\Microsoft\Windows\Start Menu\Programs\Nvidia Control Panel.lnk" "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe") >nul 2>nul
-::if exist "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe"
+if exist "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%USERPROFILE%\Desktop\") >nul 2>nul
+if exist "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%Appdata%\Microsoft\Windows\Start Menu\Programs\") >nul 2>nul
+::if exist "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (mklink "%USERPROFILE%\Desktop\Nvidia Control Panel" "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe") >nul 2>nul
+::if exist "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (mklink "%Appdata%\Microsoft\Windows\Start Menu\Programs\Nvidia Control Panel.lnk" "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe") >nul 2>nul
+::if exist "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe"
 ::echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
-::echo sLinkFile = "%userprofile%\Desktop\Nvidia Control Panel.lnk" >> CreateShortcut.vbs
+::echo sLinkFile = "%USERPROFILE%\Desktop\Nvidia Control Panel.lnk" >> CreateShortcut.vbs
 ::echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
-::echo oLink.TargetPath = "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" >> CreateShortcut.vbs
-::echo oLink.WorkingDirectory = "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64" >> CreateShortcut.vbs
+::echo oLink.TargetPath = "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" >> CreateShortcut.vbs
+::echo oLink.WorkingDirectory = "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64" >> CreateShortcut.vbs
 ::echo oLink.Description = "Nvidia Control Panel" >> CreateShortcut.vbs
-::echo oLink.IconLocation = "%systemdrive%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" >> CreateShortcut.vbs
+::echo oLink.IconLocation = "%SYSTEMDRIVE%\Program Files\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" >> CreateShortcut.vbs
 ::echo oLink.Save >> CreateShortcut.vbs
 ::cscript CreateShortcut.vbs
 ::del CreateShortcut.vbs
@@ -22044,8 +22046,8 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2008
@@ -22072,12 +22074,12 @@ goto ANDROIDX2008
 :ADB05X2008
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
-explorer.exe "%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk"
+explorer.exe "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk"
 goto ANDROIDX2008
 
 :ADB06X2008
@@ -22215,7 +22217,7 @@ goto ANDROIDX2008
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22226,14 +22228,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2008
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22244,7 +22246,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2008
@@ -22558,10 +22560,10 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64" >nul 2>nul
-rmdir /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe"
-del /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe"
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64" >nul 2>nul
+rmdir /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe"
+del /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe"
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2211
@@ -22588,12 +22590,12 @@ goto ANDROIDX2211
 :ADB05X2211
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64\WSA.lnk" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\WSA.lnk" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
-cd "%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64"
+cd "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64"
 Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^SettingsApp > wsa.cmd
 ::Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp > wsa.cmd
 ::explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp
@@ -22735,7 +22737,7 @@ goto ANDROIDX2211
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22746,14 +22748,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2211
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22764,7 +22766,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2211
@@ -23107,10 +23109,10 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64" >nul 2>nul
-rmdir /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
-del /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64" >nul 2>nul
+rmdir /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2301NON
@@ -23137,17 +23139,17 @@ goto ANDROIDX2301NON
 :ADB05X2301N
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\nonroot" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\nonroot" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
-cd "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64"
+cd "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64"
 timeout /t 1 >nul
-::Echo cd "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64" > wsa.cmd
+::Echo cd "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64" > wsa.cmd
 Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe^!^SettingsApp > wsa.cmd
 ::Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp > wsa.cmd
-::explorer.exe %ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64 shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp
+::explorer.exe %PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64 shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp
 explorer.exe wsa.cmd
 goto ANDROIDX2301NON
 
@@ -23286,7 +23288,7 @@ goto ANDROIDX2301NON
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23297,14 +23299,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2301NON
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23315,7 +23317,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2301NON
@@ -23628,10 +23630,10 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64" >nul 2>nul
-rmdir /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
-del /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64" >nul 2>nul
+rmdir /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2301ROOT
@@ -23658,12 +23660,12 @@ goto ANDROIDX2301ROOT
 :ADB05X2301R
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\root" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\root" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
-cd "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64"
+cd "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64"
 Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^SettingsApp > wsa.cmd
 ::Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp > wsa.cmd
 ::explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp
@@ -23805,7 +23807,7 @@ goto ANDROIDX2301ROOT
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23816,14 +23818,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2301ROOT
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23834,7 +23836,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2301ROOT
@@ -24174,7 +24176,7 @@ cls
 echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 6 >nul
 cls
-cd "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64"
+cd "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64"
 Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^^SettingsApp > wsa.cmd
 explorer.exe wsa.cmd
 ::START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
@@ -24188,10 +24190,10 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64" >nul 2>nul
-rmdir /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
-del /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64" >nul 2>nul
+rmdir /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2304NON
@@ -24218,13 +24220,13 @@ goto ANDROIDX2304NON
 :ADB05X2304N
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\nonroot" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\nonroot" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
 timeout /t 1 >nul
-cd "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64"
+cd "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64"
 Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^^SettingsApp > wsa.cmd
 explorer.exe wsa.cmd
 goto ANDROIDX2304NON
@@ -24364,7 +24366,7 @@ goto ANDROIDX2304NON
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24375,14 +24377,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2304NON
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24393,7 +24395,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2304NON
@@ -24695,7 +24697,7 @@ cls
 echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 6 >nul
 cls
-cd "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64"
+cd "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64"
 Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^^SettingsApp > wsa.cmd
 explorer.exe wsa.cmd
 ::START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
@@ -24709,10 +24711,10 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64" >nul 2>nul
-rmdir /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
-del /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64" >nul 2>nul
+rmdir /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2304ROOT
@@ -24739,12 +24741,12 @@ goto ANDROIDX2304ROOT
 :ADB05X2304R
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\root" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\root" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
-cd "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64"
+cd "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64"
 Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^^SettingsApp > wsa.cmd
 explorer.exe wsa.cmd
 goto ANDROIDX2304ROOT
@@ -24884,7 +24886,7 @@ goto ANDROIDX2304ROOT
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24895,14 +24897,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2304ROOT
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24913,7 +24915,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2304ROOT
@@ -25255,19 +25257,19 @@ cls
 echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 4 >nul
 cls
-::cd "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64"
+::cd "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64"
 ::Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^^SettingsApp > wsa.cmd
 ::explorer.exe wsa.cmd
 ::START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-if exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
-"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
+if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
+"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
-wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
-"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
+wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
+"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 goto ANDROIDX2305NON
 
 :ADB02X2305N
@@ -25278,10 +25280,10 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64" >nul 2>nul
-rmdir /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
-del /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64" >nul 2>nul
+rmdir /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2305NON
@@ -25308,20 +25310,20 @@ goto ANDROIDX2305NON
 :ADB05X2305N
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\nonroot" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\nonroot" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-if exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
-"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
+if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
+"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
-wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
-"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
+wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
+"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 goto ANDROIDX2305NON
 
 :ADB06X2305N
@@ -25459,7 +25461,7 @@ goto ANDROIDX2305NON
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -25470,14 +25472,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2305NON
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -25488,7 +25490,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2305NON
@@ -25791,19 +25793,19 @@ cls
 echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 4 >nul
 cls
-::cd "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64"
+::cd "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64"
 ::Echo explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!^^SettingsApp > wsa.cmd
 ::explorer.exe wsa.cmd
 ::START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-if exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
-"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
+if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
+"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
-wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
-"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
+wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
+"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 goto ANDROIDX2305ROOT
 
 :ADB02X2305R
@@ -25814,10 +25816,10 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64" >nul 2>nul
-rmdir /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
-del /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64" >nul 2>nul
+rmdir /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2305ROOT
@@ -25844,20 +25846,20 @@ goto ANDROIDX2305ROOT
 :ADB05X2305R
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\root" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\root" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-if exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
-"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
+if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
+"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
-wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
-"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
+wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
+"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 goto ANDROIDX2305ROOT
 
 :ADB06X2305R
@@ -25995,7 +25997,7 @@ goto ANDROIDX2305ROOT
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26006,14 +26008,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2305ROOT
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26024,7 +26026,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2305ROOT
@@ -26200,20 +26202,20 @@ cls
 echo.
 timeout /t 3 >nul
 echo Installing...
-7z1900-extra\7za x "WSA_2309.40000.2.0_x64-NonRoot.exe" -aoa -pwsa2309 -o"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64"
+7z1900-extra\7za x "WSA_2309.40000.2.0_x64-NonRoot.exe" -aoa -pwsa2309 -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64"
 timeout /t 3 >nul
-NONROOT >> "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\nonroot"
+NONROOT >> "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\nonroot"
 cls
 timeout /t 4 >nul
 cls
 timeout /t 1 >nul
-if exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
-::"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe"
+if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
+::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe"
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /v "AllowDevelopmentWithoutDevLicense" /t REG_DWORD /d "1" /f
 Powershell Add-AppxPackage -Path "$env:ProgramFiles\Microsoft\WSA_2309.40000.2.0_x64\uwp\Microsoft.UI.Xaml.2.8_x64.appx" >nul
 Powershell Add-AppxPackage -Path "$env:ProgramFiles\Microsoft\WSA_2309.40000.2.0_x64\uwp\Microsoft.VCLibs.140.00.UWPDesktop_x64.appx" >nul
 Powershell Add-AppxPackage -Path "$env:ProgramFiles\Microsoft\WSA_2309.40000.2.0_x64\uwp\Microsoft.VCLibs.140.00_x64.appx" >nul
-explorer "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\run.bat"
+explorer "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\run.bat"
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
@@ -26226,10 +26228,10 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64" >nul 2>nul
-rmdir /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
-del /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64" >nul 2>nul
+rmdir /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2309NON
@@ -26256,21 +26258,21 @@ goto ANDROIDX2309NON
 :ADB05X2309N
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\nonroot" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\nonroot" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-if exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
-::"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
+if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
+::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 Powershell Start-Process "wsa://com.android.settings"
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
-wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
-"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
+wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
+"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 goto ANDROIDX2309NON
 :ADB06X2309N
 if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
@@ -26407,7 +26409,7 @@ goto ANDROIDX2309NON
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26418,14 +26420,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2309NON
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26436,7 +26438,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2309NON
@@ -26572,26 +26574,26 @@ echo.
 cls
 echo Installing...
 timeout /t 3 >nul
-7z1900-extra\7za x "WSA_2309.40000.2.0_x64-Root.exe" -aoa -pwsa2309 -o"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64"
+7z1900-extra\7za x "WSA_2309.40000.2.0_x64-Root.exe" -aoa -pwsa2309 -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64"
 timeout /t 3 >nul
-ROOT >> "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\root"
+ROOT >> "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root"
 cls
 ::echo %Red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 4 >nul
 cls
-if exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
-::"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe"
+if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
+::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe"
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /v "AllowDevelopmentWithoutDevLicense" /t REG_DWORD /d "1" /f
 Powershell Add-AppxPackage -Path "$env:ProgramFiles\Microsoft\WSA_2309.40000.2.0_x64\uwp\Microsoft.UI.Xaml.2.8_x64.appx" >nul
 Powershell Add-AppxPackage -Path "$env:ProgramFiles\Microsoft\WSA_2309.40000.2.0_x64\uwp\Microsoft.VCLibs.140.00.UWPDesktop_x64.appx" >nul
 Powershell Add-AppxPackage -Path "$env:ProgramFiles\Microsoft\WSA_2309.40000.2.0_x64\uwp\Microsoft.VCLibs.140.00_x64.appx" >nul
-explorer "C:\Program Files\Microsoft\WSA_2309.40000.2.0_x64\Run.bat"
+explorer "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Run.bat"
 
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
-wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
-"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
+wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
+"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 goto ANDROIDX2309ROOT
 
 :ADB02X2309R
@@ -26602,10 +26604,10 @@ Powershell -ExecutionPolicy ByPass -File ANDROID.ps1
 Del ANDROID.ps1 >nul
 timeout /t 3 >nul
 cls
-rmdir /s /q "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64" >nul 2>nul
-del /s /q "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64" >nul 2>nul
-rmdir /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
-del /s /q "%UserProfile%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+rmdir /s /q "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64" >nul 2>nul
+del /s /q "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64" >nul 2>nul
+rmdir /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Packages\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe" >nul 2>nul
 echo Windows Subsystem For Android Completely Remove.
 timeout /t 3 >nul
 goto ANDROIDX2309ROOT
@@ -26632,21 +26634,21 @@ goto ANDROIDX2309ROOT
 :ADB05X2309R
 ::%programdata%\
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\root" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root" (
 echo WSA is not installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-if exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
-::"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
+if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
+::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 Powershell Start-Process "wsa://com.android.settings"
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
-wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
-"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
+wget -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
+"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 goto ANDROIDX2309ROOT
 
 :ADB06X2309R
@@ -26784,7 +26786,7 @@ goto ANDROIDX2309ROOT
 
 :ADB014X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26795,14 +26797,14 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %Cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2309ROOT
 
 :ADB015X2008
 cls
-if not exist "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
+if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26813,7 +26815,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 timeout /t 1 >nul
-7z1900-extra\7za x "%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%ProgramFiles%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
+7z1900-extra\7za x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %Cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2309ROOT
@@ -26922,13 +26924,13 @@ cd "%Temp%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe" >
 for /f tokens^=* %%i in ('where .:*WindowsTerminal*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "3" /f >nul 2>nul
 net start TabletInputService >nul 2>nul
-copy "%temp%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\01 - Windows Terminal.lnk" "%UserProfile%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
-copy "%temp%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\02 - Windows Terminal.lnk" "%UserProfile%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
+copy "%temp%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\01 - Windows Terminal.lnk" "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
+copy "%temp%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\02 - Windows Terminal.lnk" "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
 if "%version%" == "Windows 10" (
 timeout /t 1 >nul
-rename "%UserProfile%\AppData\Local\Microsoft\Windows\WinX\Group3\01 - Windows Terminal.lnk" "Windows Terminal.lnk"
-rename "%UserProfile%\AppData\Local\Microsoft\Windows\WinX\Group3\02 - Windows Terminal.lnk" "Windows Terminal (Admin).lnk"
+rename "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\01 - Windows Terminal.lnk" "Windows Terminal.lnk"
+rename "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\02 - Windows Terminal.lnk" "Windows Terminal (Admin).lnk"
 )
 cls
 echo Installing completed...
@@ -26949,13 +26951,13 @@ cd "%GHOST_DIR%\wget"
 Echo Get-AppxPackage *WindowsTerminal* ^| Remove-AppxPackage > TERM.ps1
 Powershell -ExecutionPolicy ByPass -File TERM.ps1
 Del TERM.ps1 >nul
-del /q /f /s "%UserProfile%\AppData\Local\Microsoft\Windows\WinX\Group3\01 - Windows Terminal.lnk" >nul 2>nul
-del /q /f /s "%UserProfile%\AppData\Local\Microsoft\Windows\WinX\Group3\02 - Windows Terminal.lnk" >nul 2>nul
+del /q /f /s "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\01 - Windows Terminal.lnk" >nul 2>nul
+del /q /f /s "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\02 - Windows Terminal.lnk" >nul 2>nul
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
 if "%version%" == "Windows 10" (
 timeout /t 1 >nul
-del /q /f /s "%UserProfile%\AppData\Local\Microsoft\Windows\WinX\Group3\Windows Terminal.lnk" >nul 2>nul
-del /q /f /s "%UserProfile%\AppData\Local\Microsoft\Windows\WinX\Group3\Windows Terminal (Admin).lnk" >nul 2>nul
+del /q /f /s "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\Windows Terminal.lnk" >nul 2>nul
+del /q /f /s "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\Windows Terminal (Admin).lnk" >nul 2>nul
 )
 echo Windows Terminal Completely remove.
 timeout /t 2 >nul
@@ -27056,8 +27058,8 @@ taskkill /im msedge.exe /f >nul 2>nul
 ::FOR /F "tokens=2*" %%A IN ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge" /v UninstallString 2^> nul') DO SET "EDGEREMOVE=%%B" >nul 2>nul
 ::%EDGEREMOVE% --force-uninstall 2>nul >nul
 del /q /f /s "%appdata%\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk" 2>nul >nul
-RD /S /Q "C:\Program Files\Microsoft\Edge" 2>nul >nul
-RD /S /Q "C:\Program Files\Microsoft\Temp\Edge" 2>nul >nul
+RD /S /Q "%PROGRAMFILES%\Microsoft\Edge" 2>nul >nul
+RD /S /Q "%PROGRAMFILES%\Microsoft\Temp\Edge" 2>nul >nul
 RD /S /Q "C:\Program Files (x86)\Microsoft\Edge" 2>nul >nul
 RD /S /Q "C:\Program Files (x86)\Microsoft\Temp" 2>nul >nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c taskkill /im MicrosoftEdgeUpdate.exe /f >nul 2>nul
@@ -27071,20 +27073,20 @@ del /q /f /s "%AppData%\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.
 del /q /f /s "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\Microsoft Edge.lnk" >nul 2>nul
 del /q /f /s "%WinDir%\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk" >nul 2>nul"
 del /q /f /s "%WinDir%\System32\config\systemprofile\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\TaskBar\Microsoft Edge.lnk" >nul 2>nul"
-del /q /f /s "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk" >nul 2>nul
-del /q /f /s "%UserProfile%\Desktop\Microsoft Edge.lnk" >nul 2>nul
-del /q /f /s "%SystemDrive%\Users\Default\Desktop\Microsoft Edge.lnk" >nul 2>nul
-del /q /f /s "%SystemDrive%\Users\Public\Desktop\Microsoft Edge.lnk" >nul 2>nul
+del /q /f /s "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk" >nul 2>nul
+del /q /f /s "%USERPROFILE%\Desktop\Microsoft Edge.lnk" >nul 2>nul
+del /q /f /s "%SYSTEMDRIVE%\Users\Default\Desktop\Microsoft Edge.lnk" >nul 2>nul
+del /q /f /s "%SYSTEMDRIVE%\Users\Public\Desktop\Microsoft Edge.lnk" >nul 2>nul
 del /q /f /s "%AppData%\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk" >nul 2>nul
 ::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update" /f >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files (x86)\Microsoft\Edge" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files (x86)\Microsoft\EdgeCore" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files (x86)\Microsoft\EdgeUpdate" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files\Microsoft\Edge" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files\Microsoft\EdgeCore" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files\Microsoft\EdgeUpdate" >nul 2>nul
-::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\ProgramData\Microsoft\EdgeUpdate" >nul 2>nul
-::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\ProgramData\Microsoft\Edge" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files (x86)\Microsoft\Edge" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files (x86)\Microsoft\EdgeCore" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files (x86)\Microsoft\EdgeUpdate" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files\Microsoft\Edge" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files\Microsoft\EdgeCore" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files\Microsoft\EdgeUpdate" >nul 2>nul
+::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\ProgramData\Microsoft\EdgeUpdate" >nul 2>nul
+::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\ProgramData\Microsoft\Edge" >nul 2>nul
 ::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Edge" /f >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_CURRENT_USER\SOFTWARE\Microsoft\EdgeUpdate" /f >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Edge" /f >nul 2>nul
@@ -27253,8 +27255,8 @@ taskkill /im msedge.exe /f >nul 2>nul
 FOR /F "tokens=2*" %%A IN ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge" /v UninstallString 2^> nul') DO SET "EDGEREMOVE=%%B" >nul 2>nul
 %EDGEREMOVE% --force-uninstall 2>nul >nul
 del /q /f /s "%appdata%\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk" 2>nul >nul
-RD /S /Q "C:\Program Files\Microsoft\Edge" 2>nul >nul
-RD /S /Q "C:\Program Files\Microsoft\Temp\Edge" 2>nul >nul
+RD /S /Q "%PROGRAMFILES%\Microsoft\Edge" 2>nul >nul
+RD /S /Q "%PROGRAMFILES%\Microsoft\Temp\Edge" 2>nul >nul
 RD /S /Q "C:\Program Files (x86)\Microsoft\Edge" 2>nul >nul
 RD /S /Q "C:\Program Files (x86)\Microsoft\Temp" 2>nul >nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c taskkill /im MicrosoftEdgeUpdate.exe /f >nul 2>nul
@@ -27264,26 +27266,26 @@ NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_LOCAL_MACHINE
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\edgeupdate" /f >nul 2>nul
 del /q /f /s "%AppData%\Microsoft\Internet Explorer\Quick Launch\Microsoft Edge.lnk" >nul 2>nul
 del /q /f /s "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\Microsoft Edge.lnk" >nul 2>nul
-del /q /f /s "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk" >nul 2>nul
-del /q /f /s "%UserProfile%\Desktop\Microsoft Edge.lnk" >nul 2>nul
-del /q /f /s "%SystemDrive%\Users\Default\Desktop\Microsoft Edge.lnk" >nul 2>nul
-del /q /f /s "%SystemDrive%\Users\Public\Desktop\Microsoft Edge.lnk" >nul 2>nul
+del /q /f /s "%SYSTEMDRIVE%\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk" >nul 2>nul
+del /q /f /s "%USERPROFILE%\Desktop\Microsoft Edge.lnk" >nul 2>nul
+del /q /f /s "%SYSTEMDRIVE%\Users\Default\Desktop\Microsoft Edge.lnk" >nul 2>nul
+del /q /f /s "%SYSTEMDRIVE%\Users\Public\Desktop\Microsoft Edge.lnk" >nul 2>nul
 del /q /f /s "%AppData%\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk" >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update" /f >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView" /f >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge" /f >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update" /f >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files (x86)\Microsoft\Edge" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files (x86)\Microsoft\EdgeCore" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files (x86)\Microsoft\EdgeUpdate" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files (x86)\Microsoft\EdgeWebView" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files\Microsoft\Edge" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files\Microsoft\EdgeCore" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files\Microsoft\EdgeUpdate" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\Program Files\Microsoft\EdgeWebView" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%UserProfile%\AppData\Local\Microsoft\Edge" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\ProgramData\Microsoft\EdgeUpdate" >nul 2>nul
-NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SystemDrive%\ProgramData\Microsoft\Edge" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files (x86)\Microsoft\Edge" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files (x86)\Microsoft\EdgeCore" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files (x86)\Microsoft\EdgeUpdate" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files (x86)\Microsoft\EdgeWebView" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files\Microsoft\Edge" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files\Microsoft\EdgeCore" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files\Microsoft\EdgeUpdate" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\Program Files\Microsoft\EdgeWebView" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%USERPROFILE%\AppData\Local\Microsoft\Edge" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\ProgramData\Microsoft\EdgeUpdate" >nul 2>nul
+NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c RD /S /Q "%SYSTEMDRIVE%\ProgramData\Microsoft\Edge" >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Edge" /f >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_CURRENT_USER\SOFTWARE\Microsoft\EdgeUpdate" /f >nul 2>nul
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Edge" /f >nul 2>nul
@@ -27336,7 +27338,7 @@ cls
 Echo Get-AppxPackage *MicrosoftEdge* ^| Reset-AppxPackage > edge2.ps1
 Powershell -ExecutionPolicy ByPass -File edge2.ps1
 del /s /q edge2.ps1 >nul
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Value #1" /t REG_EXPAND_SZ /d "cmd.exe /c RD /S /Q \"%%systemdrive%%\Program Files (x86)\Microsoft\EdgeWebView" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v "New Value #1" /t REG_EXPAND_SZ /d "cmd.exe /c RD /S /Q \"%%SYSTEMDRIVE%%\Program Files (x86)\Microsoft\EdgeWebView" /f
 cls
 ::FileAssociations
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c REG DELETE "HKCR\.html\OpenWithProgIds" /v "MSEdgeHTM" /f  >nul
@@ -28540,10 +28542,10 @@ echo Installing... %Lightgray%Password: %Yellow%ghost0987
 cls
 goto op10
 :appsnewuser
-Powershell Add-AppxPackage -Path '%ProgramFiles%\WindowsApps\*.AppxManifest.xml'
+Powershell Add-AppxPackage -Path '%PROGRAMFILES%\WindowsApps\*.AppxManifest.xml'
 cls
 echo %White%Microsoft Windows Store Silent Installing.. Please Wait...
-powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%ProgramFiles%\WindowsApps\*\AppxManifest.xml' >nul 2>nul
+powershell -executionpolicy unrestricted add-appxpackage -disabledevelopmentmode -register '%PROGRAMFILES%\WindowsApps\*\AppxManifest.xml' >nul 2>nul
 timeout /t 2 >nul
 cls
 echo %White%All UWP Apps Complete ReInstalled.
