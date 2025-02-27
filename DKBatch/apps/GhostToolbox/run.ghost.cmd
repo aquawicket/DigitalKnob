@@ -14,6 +14,8 @@ REM		Description of the PowerShell class.
 REM
 SET "GSTVER=1.9.1.17"
 SET "GHOST_DIR=%CD%"
+SET "GHOST_TEMP=%GHOST_DIR%\TEMP"
+mkdir "%GHOST_TEMP%"
 
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%"=="22631" (
@@ -80,7 +82,7 @@ IF EXIST "aria2-1.36.0-win-32bit-build1" rd /s /q "aria2-1.36.0-win-32bit-build1
 IF EXIST ".wget-hsts" DEL /s /q ".wget-hsts" >nul 2>nul
 IF EXIST "3Q80WQX" DEL /s /q "3Q80WQX" >nul 2>nul
 @echo off
-ForFiles /p "%temp%" /s /m *.bat /d -1 /c "cmd /c del /a @path" >nul 2>nul
+ForFiles /p "%GHOST_TEMP%" /s /m *.bat /d -1 /c "cmd /c del /a @path" >nul 2>nul
 cls
 @echo off
 @ECHO ON
@@ -306,7 +308,7 @@ cls
 :: 1252 	West European Latin
 :: 65000 	UTF-7 *
 :: 65001 	UTF-8 *
-del /q /s *3u5rCaj* >nul 2>nul && del /q /s *watch* >nul 2>nul && del /q /s "    G" >nul 2>nul && del /q /s *37krRHX* >nul 2>nul && del /q /s "%Temp%\*.bat" >nul 2>nul
+del /q /s *3u5rCaj* >nul 2>nul && del /q /s *watch* >nul 2>nul && del /q /s "    G" >nul 2>nul && del /q /s *37krRHX* >nul 2>nul && del /q /s "%GHOST_TEMP%\*.bat" >nul 2>nul
 IF EXIST "yesno.vbs" DEL /s /q "yesno.vbs" >nul 2>nul
 color 07
 @echo off
@@ -1509,9 +1511,9 @@ cls
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "1" /f 2>nul
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "GameDVR_Enabled" /t REG_DWORD /d "1" /f 2>nul
 timeout /t 1 >nul
-7z1900-extra\7za x Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pxbox -o"%Temp%\Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pxbox -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
-cd "%Temp%\Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
 cls
 cls
@@ -1744,7 +1746,7 @@ set /p codeid=%Green%Enter Product id %White%: %Yellow%
 if "%codeid%"=="0" goto wingetoption
 %WINGETIN% %codeid%
 timeout /t 5 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto winG01
 :winG02
 cls
@@ -1752,7 +1754,7 @@ SET "WINGETIN=winget install -e --silent --accept-source-agreements --accept-pac
 cd "%GHOST_DIR%"
 for /f "tokens=1 delims=" %%i in (list.txt) do %WINGETIN% %%i
 timeout /t 5 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto :wingetoption
 :winG03
 cls
@@ -1779,7 +1781,7 @@ echo.
 %WINGETIN% %codeid%
 endlocal
 timeout /t 2 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto :winG03
 :winG04
 cls
@@ -1790,11 +1792,11 @@ if "%codeid%"=="0" goto wingetoption
 if "%codeid%"=="upgrade all" goto wingetupgradeall
 winget upgrade %codeid%
 timeout /t 5 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto winG04
 :wingetupgradeall
 winget upgrade --all
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 endlocal
 goto winG04
 :winG05
@@ -1811,7 +1813,7 @@ if "%codeid%"=="0" goto wingetoption
 echo.
 %WINGETIN% %codeid%
 timeout /t 1 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto :winG05
 
 :win1114w
@@ -1881,7 +1883,7 @@ goto WTHx643
 cls
 timeout /t 1 >nul
 ::"NSudoLG.exe" -U:T -P:E cmd /c FOR /d /r "%SYSTEMDRIVE%\Program Files\WindowsApps\" %%d IN (*MicrosoftWindows.Client.Widgets*) DO @IF EXIST "%%d" rd /q /s "%%d" >nul
-::::7z1900-extra\7za x Microsoft.WidgetsforWindows11_422.33900.0.0.bin -aoa -pghostwidgets -o"%Temp%\Widgets"
+::::7z1900-extra\7za x Microsoft.WidgetsforWindows11_422.33900.0.0.bin -aoa -pghostwidgets -o"%GHOST_TEMP%\Widgets"
 timeout /t 2 >nul
 cls
 echo %Cyan%Installing please wait...
@@ -1889,8 +1891,8 @@ echo %Cyan%Installing please wait...
 Reg delete "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /f >nul
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "1" /f >nul
 echo.
-::RD /S /Q "%Temp%\Widgets" >nul 2>nul
-::RD /S /Q "%Temp%\Widgets" >nul 2>nul
+::RD /S /Q "%GHOST_TEMP%\Widgets" >nul 2>nul
+::RD /S /Q "%GHOST_TEMP%\Widgets" >nul 2>nul
 cls
 echo Installing complete...
 timeout /t 2 >nul
@@ -2295,10 +2297,10 @@ goto WTHx643
 :win11phoneinstall
 cls
 timeout /t 1 >nul
-7z1900-extra\7za x Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001 -aoa -pphone -o"%Temp%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
-7z1900-extra\7za x Microsoft.YourPhone_Dependencies.x64.Appx -aoa -pdependencies -o"%Temp%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001 -aoa -pphone -o"%GHOST_TEMP%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.YourPhone_Dependencies.x64.Appx -aoa -pdependencies -o"%GHOST_TEMP%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
-cd "%Temp%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.2.2_2.2.29512.0_x64__8wekyb3d8bbwe.Appx
@@ -2389,9 +2391,9 @@ timeout /t 2 >nul
 cls
 :win11paintinstall
 cls
-7z1900-extra\7za x Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%Temp%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
-cd "%Temp%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.30035.0_x64__8wekyb3d8bbwe.Appx
@@ -2443,9 +2445,9 @@ goto WTHx643
 cls
 :win11paintinstall2
 cls
-7z1900-extra\7za x Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%Temp%\Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%GHOST_TEMP%\Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
-cd "%Temp%\Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
 cls
 echo Installing UI Xaml
@@ -2516,9 +2518,9 @@ goto WTHx643
 )
 :win11snippinstall
 cls
-7z1900-extra\7za x Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -psnipping -o"%Temp%\Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -psnipping -o"%GHOST_TEMP%\Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
-cd "%Temp%\Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe"
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.4_2.42007.9001.0_x64__8wekyb3d8bbwe.Appx
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.30035.0_x64__8wekyb3d8bbwe.Appx
@@ -2938,10 +2940,10 @@ goto WTHx643
 cls
 :win11notepadinstall
 cls
-7z1900-extra\7za x Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pnotepad -o"%Temp%\Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pnotepad -o"%GHOST_TEMP%\Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe"
 cls
 timeout /t 1 >nul
-cd "%Temp%\Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe" >nul
+cd "%GHOST_TEMP%\Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe" >nul
 echo Installing VCLibs
 for /f tokens^=* %%i in ('where .:*VCLibs*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 cls
@@ -2993,16 +2995,16 @@ goto WTHx643
 cls
 :win11notepadinstall
 cls
-7z1900-extra\7za x Microsoft.WindowsNotepad_11.2112.32.0.Appx -aoa -pnotepad -o"%Temp%\Microsoft.WindowsNotepad_11.2112.32.0"
+7z1900-extra\7za x Microsoft.WindowsNotepad_11.2112.32.0.Appx -aoa -pnotepad -o"%GHOST_TEMP%\Microsoft.WindowsNotepad_11.2112.32.0"
 cls
 timeout /t 1 >nul
 echo Installing...
-"%Temp%\Microsoft.WindowsNotepad_11.2112.32.0\Microsoft.WindowsNotepad_11.2112.32.0.exe" >nul
+"%GHOST_TEMP%\Microsoft.WindowsNotepad_11.2112.32.0\Microsoft.WindowsNotepad_11.2112.32.0.exe" >nul
 cls
 cd..
 timeout /t 1 >nul
-RD /S /Q "%Temp%\Microsoft.WindowsNotepad_11.2112.32.0" >nul 2>nul
-RD /S /Q "%Temp%\Microsoft.WindowsNotepad_11.2112.32.0" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Microsoft.WindowsNotepad_11.2112.32.0" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Microsoft.WindowsNotepad_11.2112.32.0" >nul 2>nul
 cls
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 2 >nul
@@ -3065,10 +3067,10 @@ goto WTHx643
 cls
 :win11hevcinstall
 cls
-7z1900-extra\7za x Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx -aoa -phevc -o"%Temp%\Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe"
 cls
 timeout /t 1 >nul
-cd "%Temp%\Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe" >nul
+cd "%GHOST_TEMP%\Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe" >nul
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 echo %Cyan%Installing please wait...
@@ -4401,9 +4403,9 @@ cd "%GHOST_DIR%\wget"
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://uxthemepatcher.com/UXThemePatcher_11.0.sfx.exe" -o"UXThemePatcher_11.0.sfx.exe"
 timeout /t 5 >nul
 cls
-"%PROGRAMFILES%\7-Zip\"7zG x "UXThemePatcher_11.0.sfx.exe" -aoa -puxthemepatcher.com >nul -o"%temp%\" 2>nul
+"%PROGRAMFILES%\7-Zip\"7zG x "UXThemePatcher_11.0.sfx.exe" -aoa -puxthemepatcher.com >nul -o"%GHOST_TEMP%\" 2>nul
 timeout /t 1 >nul
-"%temp%\UXThemePatcher 11.0.exe" >nul
+"%GHOST_TEMP%\UXThemePatcher 11.0.exe" >nul
 attrib +h /s /d "%SYSTEMDRIVE%\UXThemePatcher"
 goto ghosthemes
 cls
@@ -6301,7 +6303,7 @@ nhcolor 07 " ===================================================================
 rd /Q /S "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\" >nul 2>nul
 rd /Q /S "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Logs\" >nul 2>nul
 rd /Q /S "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\State\" >nul 2>nul
-del /q /f /s "%TEMP%\*"
+del /q /f /s "%GHOST_TEMP%\*"
 timeout /t 5 >nul
 cls
 color 0E
@@ -7047,9 +7049,9 @@ cls
 cls
 echo %Red%Microsoft Xbox Game Bar for %Cyan%X64
 cls
-7z1900-extra\7za x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%Temp%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.4_2.42007.9001.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -7066,8 +7068,8 @@ cls
 Powershell Add-AppxPackage -Path Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
 timeout /t 3 >nul
-RD /S /Q "%Temp%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
-RD /S /Q "%Temp%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+RD /S /Q "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+RD /S /Q "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 net start BcastDVRUserService
 cls
 timeout /t 5 >nul
@@ -7076,9 +7078,9 @@ goto begin
 cls
 echo %Red%Microsoft Xbox Game Bar for %Cyan%X86
 cls
-7z1900-extra\7za x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%Temp%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.4_2.42007.9001.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -7089,8 +7091,8 @@ cls
 Powershell Add-AppxPackage -Path Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
 timeout /t 3 >nul
-RD /S /Q "%Temp%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
-RD /S /Q "%Temp%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+RD /S /Q "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+RD /S /Q "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 net start BcastDVRUserService
 cls
 timeout /t 5 >nul
@@ -7945,9 +7947,9 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pyourphone789 -o"%Temp%"
+7z1900-extra\7za x Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pyourphone789 -o"%GHOST_TEMP%"
 cls
-cd "%Temp%\Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -8022,9 +8024,9 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pyourphone789 -o"%Temp%"
+7z1900-extra\7za x Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pyourphone789 -o"%GHOST_TEMP%"
 cls
-cd "%Temp%\Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -9705,8 +9707,8 @@ FOR %%i IN ("Soft Organizer*.exe") DO Set FileName="%%i"
 %FileName% /SILENT
 cd..
 rd /s /q "Soft.Organizer.9.01.repack" >nul 2>nul
-del /s /q /f "%Temp%\7z2002-x64.exe" >nul 2>nul
-del /s /q /f "%Temp%\7z2002.exe" >nul 2>nul
+del /s /q /f "%GHOST_TEMP%\7z2002-x64.exe" >nul 2>nul
+del /s /q /f "%GHOST_TEMP%\7z2002.exe" >nul 2>nul
 ::if exist "%ProgramFiles(x86)%\Soft Organizer\SoftOrganizer.exe" (mklink "%USERPROFILE%\Desktop\Soft Organizer" "%ProgramFiles(x86)%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
 ::if exist "%PROGRAMFILES%\Soft Organizer\SoftOrganizer.exe" (mklink "%USERPROFILE%\Desktop\Soft Organizer" "%PROGRAMFILES%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
 cd..
@@ -9894,8 +9896,8 @@ goto :ascserver2
 cls
 echo Installing in progress... please wait... do not clicks or moving your mouse.
 taskkill /F /IM explorer.exe >nul 2>nul
-7z1900-extra\7za x Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip -aoa -pASC -o"%Temp%\Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul
-cd "%Temp%\Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE"
+7z1900-extra\7za x Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip -aoa -pASC -o"%GHOST_TEMP%\Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul
+cd "%GHOST_TEMP%\Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE"
 ping -n 15 127.0.0.1 >nul
 Start /wait advanced-systemcare-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
 ping -n 15 127.0.0.1 >nul
@@ -9927,7 +9929,7 @@ SET XCOPYSWITCH=/s /i /r /v /k /f /c /h /y
 %XCOPY% "Scan.dll" "C:\Program Files (x86)\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
 cls
 timeout /t 2 >nul
-cd "%temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul 2>nul >nul 2>nul
 del /q /s "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul 2>nul >nul 2>nul
 RD /S /Q "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul 2>nul >nul 2>nul
@@ -9942,7 +9944,7 @@ SET XCOPYSWITCH=/s /i /r /v /k /f /c /h /y
 %XCOPY% "Scan.dll" "%PROGRAMFILES%\IObit\Advanced SystemCare\" %XCOPYSWITCH% >nul 2>nul
 cls
 timeout /t 2 >nul
-cd "%temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul 2>nul
 del /q /s "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul 2>nul
 RD /S /Q "Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul 2>nul
@@ -10317,7 +10319,7 @@ goto usersrequest
 cls
 winget install -e --silent --accept-source-agreements --accept-package-agreements --id 9NBLGGH5FV99
 timeout /t 2 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto op10
 ::Old
 cls
@@ -10383,8 +10385,8 @@ goto WTHx643
 )
 :install3dpaint
 cls
-7z1900-extra\7za x Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsp -o"%Temp%\Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe"
-cd "%Temp%\Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsp -o"%GHOST_TEMP%\Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 echo Microsoft 3D Paint x86
@@ -10405,7 +10407,7 @@ Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x64__8weky
 cls
 )
 Powershell Add-AppxPackage -Path Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.AppxBundle
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cd..
@@ -10416,7 +10418,7 @@ goto usersrequest
 cls
 winget install -e --silent --accept-source-agreements --accept-package-agreements --id 9MZ95KL8MR0L
 timeout /t 2 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 cls 
 goto snipsnips01
 ::Old
@@ -10458,8 +10460,8 @@ aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=non
 cls
 :ScreenSketchinstall
 cls
-7z1900-extra\7za x Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsss -o"%Temp%\Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe"
-cd "%Temp%\Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsss -o"%GHOST_TEMP%\Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 echo Microsoft Snip and Sketch x86
@@ -10486,7 +10488,7 @@ Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.4_2.42007.9001.0_x86__8weky
 cls
 )
 Powershell Add-AppxPackage -Path Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe.AppxBundle
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cd..
@@ -10562,8 +10564,8 @@ cls
 :startdownload
 aria2c\aria2c -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2VAZj3j" -o"Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
-7z1900-extra\7za x Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsmr -o"%Temp%\Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe"
-cd "%Temp%\Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsmr -o"%GHOST_TEMP%\Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 echo Microsoft MixedReality Portal x86
@@ -10583,7 +10585,7 @@ cls
 Powershell Add-AppxPackage -Path Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
 )
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cd..
@@ -10761,8 +10763,8 @@ FOR %%i IN ("IObit Smart Defrag*.exe") DO Set FileName="%%i"
 %FileName% /SILENT
 cd..
 rd /s /q "IOBit_Smart_Defrag_7.0.0.62.repack" >nul 2>nul
-del /s /q /f "%Temp%\7z2002-x64.exe" >nul 2>nul
-del /s /q /f "%Temp%\7z2002.exe" >nul 2>nul
+del /s /q /f "%GHOST_TEMP%\7z2002-x64.exe" >nul 2>nul
+del /s /q /f "%GHOST_TEMP%\7z2002.exe" >nul 2>nul
 if exist "%ProgramFiles(x86)%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%USERPROFILE%\Desktop\IObit Smart Defrag" "%ProgramFiles(x86)%\IObit\Smart Defrag\SmartDefrag.exe") >nul 2>nul
 if exist "%PROGRAMFILES%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%USERPROFILE%\Desktop\IObit Smart Defrag" "%PROGRAMFILES%\IObit\Smart Defrag\SmartDefrag") >nul 2>nul
 cd..
@@ -10809,8 +10811,8 @@ FOR %%i IN ("O&O Defrag*.exe") DO Set FileName="%%i"
 %FileName% /SILENT
 cd..
 rd /s /q "O&O.Defrag.Pro.24.1.6505.repack.GHOSTSPECTRE" >nul 2>nul
-del /s /q /f "%Temp%\7z2002-x64.exe" >nul 2>nul
-del /s /q /f "%Temp%\7z2002.exe" >nul 2>nul
+del /s /q /f "%GHOST_TEMP%\7z2002-x64.exe" >nul 2>nul
+del /s /q /f "%GHOST_TEMP%\7z2002.exe" >nul 2>nul
 cd..
 cls
 timeout /t 1 >nul
@@ -11013,7 +11015,7 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pcalcu -o"%Temp%\Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pcalcu -o"%GHOST_TEMP%\Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe"
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "ARC=x86" || set "ARC=x64"
 if "%ARC%"=="x64" goto :calcx64
@@ -11022,7 +11024,7 @@ cls
 :calcx64
 cls
 echo Microsoft Calculator for x64
-cd "%Temp%\Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe"
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.2_2.21909.17002.0_x64__8wekyb3d8bbwe.Appx
 cls
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.2_2.21909.17002.0_x86__8wekyb3d8bbwe.Appx
@@ -11041,7 +11043,7 @@ Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x86__8weky
 cls
 Powershell Add-AppxPackage -Path Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 timeout /t 3 >nul
@@ -11053,7 +11055,7 @@ goto usersrequest
 :calcx86
 cls
 echo Microsoft Calculator for x86
-cd "%Temp%\Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.2_2.21909.17002.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -11065,7 +11067,7 @@ Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x86__8weky
 cls
 Powershell Add-AppxPackage -Path Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 timeout /t 3 >nul
@@ -11122,7 +11124,7 @@ del /q /f /s "Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Ap
 goto :stickyserver2
 )
 cls
-7z1900-extra\7za x Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -psticky -o"%Temp%\Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -psticky -o"%GHOST_TEMP%\Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe"
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "ARC=x86" || set "ARC=x64"
 if "%ARC%"=="x64" goto :stickyx64
@@ -11131,7 +11133,7 @@ cls
 :stickyx64
 cls
 echo Microsoft Sticky Notes for x64
-cd "%Temp%\Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe" >nul
+cd "%GHOST_TEMP%\Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe" >nul
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -11167,7 +11169,7 @@ Powershell Add-AppxPackage -Path Microsoft.Services.Store.Engagement_10.0.19011.
 cls
 Powershell Add-AppxPackage -Path Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
-cd "%Temp%" >nul
+cd "%GHOST_TEMP%" >nul
 cls
 RD /S /Q "Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
@@ -11188,7 +11190,7 @@ goto begin
 :stickyx86
 cls
 echo Microsoft Sticky Notes for x86
-cd "%Temp%\Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe" >nul
+cd "%GHOST_TEMP%\Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe" >nul
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -11208,7 +11210,7 @@ Powershell Add-AppxPackage -Path Microsoft.Services.Store.Engagement_10.0.19011.
 cls
 Powershell Add-AppxPackage -Path Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 cls
 RD /S /Q "Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
@@ -12244,9 +12246,9 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmshub -o"%Temp%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmshub -o"%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -12318,9 +12320,9 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmshub -o"%Temp%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmshub -o"%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -12437,9 +12439,9 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscamera -o"%Temp%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscamera -o"%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -12535,9 +12537,9 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscamera -o"%Temp%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscamera -o"%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -12643,9 +12645,9 @@ goto :WTHx643
 timeout /t 3 >nul
 cls
 cls
-7z1900-extra\7za x Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsnote -o"%Temp%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsnote -o"%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -12731,9 +12733,9 @@ timeout /t 3 >nul
 cls
 :installnotex86
 cls
-7z1900-extra\7za x Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsnote -o"%Temp%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsnote -o"%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -12778,10 +12780,10 @@ IF EXIST "%SYSTEMDRIVE%\complete.cmd" DEL /s /q "%SYSTEMDRIVE%\complete.cmd" >nu
 IF EXIST "%SYSTEMDRIVE%\complete.bat" DEL /s /q "%SYSTEMDRIVE%\complete.bat" >nul 2>nul
 IF EXIST "%SYSTEMDRIVE%\security.cmd" DEL /s /q "%SYSTEMDRIVE%\security.cmd" >nul 2>nul
 IF EXIST "%SYSTEMDRIVE%\security.bat" DEL /s /q "%SYSTEMDRIVE%\security.bat" >nul 2>nul
-IF EXIST "%temp%\*.cmd" DEL /s /q "%temp%\*.cmd" >nul 2>nul
-IF EXIST "%temp%\*.bat" DEL /s /q "%temp%\*.bat" >nul 2>nul
-IF EXIST "%temp%\*.vbs" DEL /s /q "%temp%\*.vbs" >nul 2>nul
-IF EXIST "%temp%\Autorun" rmdir /s /q "%temp%\Autorun" >nul 2>nul
+IF EXIST "%GHOST_TEMP%\*.cmd" DEL /s /q "%GHOST_TEMP%\*.cmd" >nul 2>nul
+IF EXIST "%GHOST_TEMP%\*.bat" DEL /s /q "%GHOST_TEMP%\*.bat" >nul 2>nul
+IF EXIST "%GHOST_TEMP%\*.vbs" DEL /s /q "%GHOST_TEMP%\*.vbs" >nul 2>nul
+IF EXIST "%GHOST_TEMP%\Autorun" rmdir /s /q "%GHOST_TEMP%\Autorun" >nul 2>nul
 IF EXIST "%GHOST_DIR%\*.cmd" DEL /s /q "%GHOST_DIR%\*.cmd" >nul 2>nul
 IF EXIST "%GHOST_DIR%\*.bat" DEL /s /q "%GHOST_DIR%\*.bat" >nul 2>nul
 IF EXIST "%WinDir%\System32\config.arg" DEL /s /q "%WinDir%\System32\config.arg" >nul 2>nul
@@ -13079,8 +13081,8 @@ for /f "tokens=3" %%i in ('wmic os get caption') do set VERSION2=%%i
 for /f "tokens=4" %%i in ('wmic os get caption') do set VERSION3=%%i
 set "header=GHOST MSG"
 set "message2=You are using the latest build version of %VERSION1% %VERSION2% %VERSION3%. Please check back again for updates at a later time."
-echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%temp%\input.vbs"
-cscript //nologo "%temp%\input.vbs" "%message1%" "%message2%" "%header%"
+echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%GHOST_TEMP%\input.vbs"
+cscript //nologo "%GHOST_TEMP%\input.vbs" "%message1%" "%message2%" "%header%"
 goto begin
 :chcp
 ::chcp 65001 >nul
@@ -13252,21 +13254,21 @@ goto begin
 cls
 winget install -e --silent --accept-source-agreements --accept-package-agreements --id 9NKSQGP7F2NH
 timeout /t 2 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto op10
 
 :wingettelegram
 cls
 winget install -e --silent --accept-source-agreements --accept-package-agreements --id 9NZTWSQNTD0S
 timeout /t 2 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto op10
 
 :wingetnetflix
 cls
 winget install -e --silent --accept-source-agreements --accept-package-agreements --id 9WZDNCRFJ3TJ
 timeout /t 2 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto op10
 
 
@@ -13978,18 +13980,18 @@ timeout /t 5 >nul
 cls
 echo Taking ownership..please wait...
 ::powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul 2>nul
-::7z1900-extra\7za x "%temp%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul 2>nul
+::7z1900-extra\7za x "%GHOST_TEMP%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul 2>nul
 takeown /f "%localappdata%\packages" /r /d y >nul 2>nul
 takeown /f "%PROGRAMFILES%\WindowsApps" /r /d y >nul 2>nul
 regsvr32 quartz.dll /s >nul 2>nul
 timeout /t 2 >nul
 cls
-7z1900-extra\7za x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%Temp%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
 cls
-cd "%Temp%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 5 >nul
-cd "%Temp%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 cls
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 echo %Cyan%Installing please wait...
@@ -14009,7 +14011,7 @@ cls
 cls
 cd..
 RD /S /Q "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
-del /q /s "%temp%\WindowsApps.zip" >nul 2>nul
+del /q /s "%GHOST_TEMP%\WindowsApps.zip" >nul 2>nul
 RD /S /Q "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
 timeout /t 5 >nul
@@ -14167,12 +14169,12 @@ takeown /f "%localappdata%\packages" /r /d y >nul 2>nul
 takeown /f "%PROGRAMFILES%\WindowsApps" /r /d y >nul 2>nul
 regsvr32 quartz.dll /s >nul 2>nul
 cls
-7z1900-extra\7za x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%Temp%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
-cd "%Temp%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
-cd "%Temp%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -14210,7 +14212,7 @@ Powershell Add-AppxPackage -Path Microsoft.XboxIdentityProvider_12.67.21001.0_ne
 cls
 cd..
 RD /S /Q "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
-del /q /s "%temp%\WindowsApps.zip" >nul 2>nul
+del /q /s "%GHOST_TEMP%\WindowsApps.zip" >nul 2>nul
 RD /S /Q "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
 timeout /t 5 >nul
@@ -14292,7 +14294,7 @@ goto :WTHx643
 cls
 echo Taking ownership..please wait...
 ::powershell expand-archive -path 7z1900-extra.zip -force
-::7z1900-extra\7za x "%temp%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul
+::7z1900-extra\7za x "%GHOST_TEMP%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul
 takeown /f "%localappdata%\packages" /r /d y >nul
 takeown /f "%PROGRAMFILES%\WindowsApps" /r /d y >nul
 regsvr32 quartz.dll /s
@@ -14309,9 +14311,9 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore1703 -o"%Temp%\Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore1703 -o"%GHOST_TEMP%\Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.1.3_1.3.24201.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -14369,7 +14371,7 @@ Powershell Add-AppxPackage -Path Microsoft.XboxIdentityProvider_2017.523.613.100
 cls
 cd..
 RD /S /Q "Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
-del /q /s "%temp%\WindowsApps.zip" >nul 2>nul
+del /q /s "%GHOST_TEMP%\WindowsApps.zip" >nul 2>nul
 cls
 timeout /t 5 >nul
 goto begin
@@ -16141,49 +16143,49 @@ goto begin
 set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
 set "message2=This tool only for Ghost Spectre Windows Modded %build%"
-echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%temp%\input.vbs"
-cscript //nologo "%temp%\input.vbs" "%message1%" "%message2%" "%header%"
+echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%GHOST_TEMP%\input.vbs"
+cscript //nologo "%GHOST_TEMP%\input.vbs" "%message1%" "%message2%" "%header%"
 goto EOF
 :EOF
-del /q /s /a %temp%\*.bat >nul 2>nul
+del /q /s /a %GHOST_TEMP%\*.bat >nul 2>nul
 exit
 
 :error_wget
 set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
 ::set "message2=wget.exe not found... by default they will be installed in %GHOST_DIR%\Wget"
-::echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%temp%\input.vbs"
-::cscript //nologo "%temp%\input.vbs" "%message1%" "%message2%" "%header%"
-echo Dim shl > %temp%\test.vbs
-echo Set shl = CreateObject("WScript.Shell") >> %temp%\test.vbs
-echo Set Shell = CreateObject("WScript.Shell") >> %temp%\test.vbs
-echo Dim strMsg,inp01,strTitle,strFlag >> %temp%\test.vbs
-echo Dim WshShell, i >> %temp%\test.vbs
-echo Set WshShell = CreateObject("WScript.Shell") >> %temp%\test.vbs
-echo        MsgBox "wget.exe not found... by default will be installed in %GHOST_DIR%\Wget.",64,strTitle >> %temp%\test.vbs
-start %temp%\test.vbs
+::echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%GHOST_TEMP%\input.vbs"
+::cscript //nologo "%GHOST_TEMP%\input.vbs" "%message1%" "%message2%" "%header%"
+echo Dim shl > %GHOST_TEMP%\test.vbs
+echo Set shl = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
+echo Set Shell = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
+echo Dim strMsg,inp01,strTitle,strFlag >> %GHOST_TEMP%\test.vbs
+echo Dim WshShell, i >> %GHOST_TEMP%\test.vbs
+echo Set WshShell = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
+echo        MsgBox "wget.exe not found... by default will be installed in %GHOST_DIR%\Wget.",64,strTitle >> %GHOST_TEMP%\test.vbs
+start %GHOST_TEMP%\test.vbs
 goto EOF
 :EOF
-del /q /s /a %temp%\*.bat >nul 2>nul
+del /q /s /a %GHOST_TEMP%\*.bat >nul 2>nul
 exit
 
 :error_location
 ::set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
 ::set "message2=GhostToolbox only works on %GHOST_DIR%\ other drive or any location GhostToolbox cannot be works.
-::echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%temp%\input.vbs"
-::cscript //nologo "%temp%\input.vbs" "%message1%" "%message2%" "%header%"
-echo Dim shl > %temp%\test.vbs
-echo Set shl = CreateObject("WScript.Shell") >> %temp%\test.vbs
-echo Set Shell = CreateObject("WScript.Shell") >> %temp%\test.vbs
-echo Dim strMsg,inp01,strTitle,strFlag >> %temp%\test.vbs
-echo Dim WshShell, i >> %temp%\test.vbs
-echo Set WshShell = CreateObject("WScript.Shell") >> %temp%\test.vbs
-echo        MsgBox "GhostToolbox only works on %GHOST_DIR%\ other drive or any location GhostToolbox cannot be working.",64,strTitle >> %temp%\test.vbs
-start %temp%\test.vbs
+::echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%GHOST_TEMP%\input.vbs"
+::cscript //nologo "%GHOST_TEMP%\input.vbs" "%message1%" "%message2%" "%header%"
+echo Dim shl > %GHOST_TEMP%\test.vbs
+echo Set shl = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
+echo Set Shell = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
+echo Dim strMsg,inp01,strTitle,strFlag >> %GHOST_TEMP%\test.vbs
+echo Dim WshShell, i >> %GHOST_TEMP%\test.vbs
+echo Set WshShell = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
+echo        MsgBox "GhostToolbox only works on %GHOST_DIR%\ other drive or any location GhostToolbox cannot be working.",64,strTitle >> %GHOST_TEMP%\test.vbs
+start %GHOST_TEMP%\test.vbs
 goto EOF
 :EOF
-del /q /s /a %temp%\*.bat >nul 2>nul
+del /q /s /a %GHOST_TEMP%\*.bat >nul 2>nul
 exit
 @echo off
 :addnewusers123
@@ -17712,9 +17714,9 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscortanabeta -o"%Temp%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscortanabeta -o"%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
 cls
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -17792,9 +17794,9 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscortanabeta -o"%Temp%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscortanabeta -o"%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
 cls
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -17854,7 +17856,7 @@ cls
 cls
 winget install -e --silent --accept-source-agreements --accept-package-agreements --id 9WZDNCRFJBH4
 timeout /t 2 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto op10
 
 :msphotosx64
@@ -17932,16 +17934,16 @@ cls
 nhcolor 07 " %Red%Microsoft Windows Photos x64"
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%Temp%\microsoft.windows.photos_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
 cls
-cd "%Temp%\microsoft.windows.photos_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
 cls
 powershell add-appxpackage -path Microsoft.UI.Xaml.2.4_2.42007.9001.0_x64__8wekyb3d8bbwe.Appx
 powershell add-appxpackage -path Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.2_2.2.29512.0_x64__8wekyb3d8bbwe.Appx
 powershell add-appxpackage -path Microsoft.windows.photos_8wekyb3d8bbwe.Appxbundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "microsoft.windows.photos_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "microsoft.windows.photos_8wekyb3d8bbwe" >nul 2>nul
 timeout /t 3 >nul
@@ -18013,16 +18015,16 @@ cls
 nhcolor 07 " %Red%Microsoft Windows Photos x86"
 timeout /t 3 >nul
 cls
-::7z1900-extra\7za x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%Temp%\microsoft.windows.photos_8wekyb3d8bbwe"
+::7z1900-extra\7za x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
 cls
-cd "%Temp%\microsoft.windows.photos_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
 cls
 powershell add-appxpackage -path Microsoft.UI.Xaml.2.4_2.42007.9001.0_x86__8wekyb3d8bbwe.Appx
 powershell add-appxpackage -path Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.2_2.2.29512.0_x86__8wekyb3d8bbwe.Appx
 powershell add-appxpackage -path Microsoft.windows.photos_8wekyb3d8bbwe.Appxbundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "microsoft.windows.photos_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "microsoft.windows.photos_8wekyb3d8bbwe" >nul 2>nul
 timeout /t 3 >nul
@@ -18117,11 +18119,11 @@ cls
 nhcolor 07 " %Red%Microsoft Zune Music x64"
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%Temp%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
-7z1900-extra\7za x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%Temp%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 cls
 timeout /t 3 >nul
-cd "%Temp%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
 cls
 powershell add-appxpackage -path Microsoft.UI.Xaml.2.3_2.32002.13001.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -18129,7 +18131,7 @@ powershell add-appxpackage -path Microsoft.VCLibs.140.00_14.0.27810.0_x64__8weky
 cls
 powershell add-appxpackage -path Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 timeout /t 3 >nul
@@ -18145,11 +18147,11 @@ goto begin
 set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
 set "message2=7z1900-extra folder or files is missing. Without 7z1900-extra files GhostToolbox cannot be working.
-echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%temp%\input.vbs"
-cscript //nologo "%temp%\input.vbs" "%message1%" "%message2%" "%header%"
+echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%GHOST_TEMP%\input.vbs"
+cscript //nologo "%GHOST_TEMP%\input.vbs" "%message1%" "%message2%" "%header%"
 goto EOF
 :EOF
-del /q /s /a %temp%\*.bat >nul 2>nul
+del /q /s /a %GHOST_TEMP%\*.bat >nul 2>nul
 exit
 
 :zunemusic2020x86
@@ -18157,10 +18159,10 @@ cls
 nhcolor 07 " %Red%Microsoft Zune Music x86"
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%Temp%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
 cls
 timeout /t 3 >nul
-cd "%Temp%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
 cls
 powershell add-appxpackage -path Microsoft.UI.Xaml.2.3_2.32002.13001.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -18168,7 +18170,7 @@ powershell add-appxpackage -path Microsoft.VCLibs.140.00_14.0.27810.0_x86__8weky
 cls
 powershell add-appxpackage -path Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 timeout /t 3 >nul
@@ -18217,9 +18219,9 @@ cls
 nhcolor 07 " %Red%Microsoft Store x64"
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore1607 -o"%Temp%\Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore1607 -o"%GHOST_TEMP%\Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe"
 cls
-cd "%Temp%\Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe"
 cls
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.1.6_1.6.24903.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -18245,7 +18247,7 @@ powershell add-appxpackage -path Microsoft.XboxApp_44.44.7002.0_neutral_~_8wekyb
 cls
 powershell add-appxpackage -path Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 timeout /t 3 >nul
@@ -18276,8 +18278,8 @@ if "%var%"=="22631" goto win11themecheck01
 :win11patchF01
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\GHOSTDARK.theme" echo %Green%Set Themes GHOST SPECTRE - Full Dark (beta test) && timeout /t 4 >nul && themeswitcher.exe GHOSTDARK.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -18417,8 +18419,8 @@ if "%var%"=="22631" goto win11themecheck02
 :win11patchF02
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\GHOSTNOIDX1.theme" echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX1 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -18552,8 +18554,8 @@ if "%var%"=="22631" goto win11themecheck03
 :win11patchF03
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\GHOSTNOIDX2.theme" echo %Green%Set Themes GHOST SPECTRE - GHOSTNOIDX2 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -18677,8 +18679,8 @@ if "%var%"=="22631" goto win11themecheck04
 :win11patchF04
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\BIBDarkMode1.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark Mode 1 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -18802,8 +18804,8 @@ if "%var%"=="22631" goto win11themecheck05
 :win11patchF05
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\BIBDarkMode2.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark Mode 2 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -18927,8 +18929,8 @@ if "%var%"=="22631" goto win11themecheck06
 :win11patchF06
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\BIBDarkMode3.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark Mode 3 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode3.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -19052,8 +19054,8 @@ if "%var%"=="22631" goto win11themecheck07
 :win11patchF07
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\BIBDarkModeMac.theme" echo %Green%Set Themes GHOST SPECTRE - BIB Dark ModeMac && timeout /t 4 >nul && themeswitcher.exe BIBDarkModeMac.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -19177,8 +19179,8 @@ if "%var%"=="22631" goto win11themecheck08
 :win11patchF08
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\Fluent.Dark.Mode.theme" echo %Green%Set Themes GHOST SPECTRE - Fluent Dark Mode && timeout /t 4 >nul && themeswitcher.exe Fluent.Dark.Mode.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -19302,8 +19304,8 @@ if "%var%"=="22631" goto win11themecheck09
 :win11patchF09
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\Fluent.Day.theme" echo %Green%Set Themes GHOST SPECTRE - Fluent Day && timeout /t 4 >nul && themeswitcher.exe Fluent.Day.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -19427,8 +19429,8 @@ if "%var%"=="22631" goto win11themecheck10
 :win11patchF10
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\Penumbra10ws.theme" echo %Green%Set Themes GHOST SPECTRE - Penumbra 10ws && timeout /t 4 >nul && themeswitcher.exe Penumbra10ws.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -19551,8 +19553,8 @@ if "%var%"=="22631" goto win11themecheck11
 :win11patchF11
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\HNY.Dark.theme" echo %Green%Set Themes GHOST SPECTRE - HNY Dark && timeout /t 4 >nul && themeswitcher.exe HNY.Dark.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -19675,8 +19677,8 @@ if "%var%"=="22631" goto win11themecheck12
 :win11patchF12
 cls
 cd "%GHOST_DIR%\wget"
-wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%Temp%\ThemeSwitcher.7z"
-7z1900-extra\x64\7za x %Temp%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
+wget -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+7z1900-extra\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 IF EXIST "%windir%\Resources\Themes\HNY.Light.theme" echo %Green%Set Themes GHOST SPECTRE - HNY Light && timeout /t 4 >nul && themeswitcher.exe HNY.Light.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %Green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -19910,8 +19912,8 @@ FOR %%i IN ("IObit*.exe") DO Set FileName="%%i"
 ::%FileName% /SILENT
 cd..
 rd /s /q "IOBit_Uninstaller_10.1.0.21.repack.GHOSTSPECTRE" >nul 2>nul
-del /s /q /f "%Temp%\7z2002-x64.exe" >nul 2>nul
-del /s /q /f "%Temp%\7z2002.exe" >nul 2>nul
+del /s /q /f "%GHOST_TEMP%\7z2002-x64.exe" >nul 2>nul
+del /s /q /f "%GHOST_TEMP%\7z2002.exe" >nul 2>nul
 if exist "%ProgramFiles(x86)%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%USERPROFILE%\Desktop\IObit Uninstaller" "%ProgramFiles(x86)%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
 if exist "%PROGRAMFILES%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%USERPROFILE%\Desktop\IObit Uninstaller" "%PROGRAMFILES%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
 cd..
@@ -20434,9 +20436,9 @@ goto WTHx643
 :androidinstall2nd
 cls
 timeout /t 1 >nul
-7z1900-extra\7za x MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001 -aoa -p8wekyb3d8bbwe -o"%Temp%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001 -aoa -p8wekyb3d8bbwe -o"%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
-cd "%Temp%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
 cls
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.6_2.62108.18004.0_x64__8wekyb3d8bbwe.Appx
@@ -20458,8 +20460,8 @@ timeout /t 2 >nul
 cd "%GHOST_DIR%\wget"
 7z1900-extra\7za x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0"
 cls
-rmdir /s /q "%Temp%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
-del /s /q "%Temp%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
+rmdir /s /q "%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
+del /s /q "%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 goto ANDROID0001
 
 :SUB002
@@ -20843,9 +20845,9 @@ cls
 nhcolor 07 " %Red%Netflix x64"
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%Temp%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
+7z1900-extra\7za x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
 cls
-cd "%Temp%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
+cd "%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
 cls
 powershell add-appxpackage -path Microsoft.VCLibs.110.00_11.0.51106.1_x64__8wekyb3d8bbwe.Appx
 cls
@@ -20863,7 +20865,7 @@ powershell add-appxpackage -path Microsoft.Media.PlayReadyClient_2.3.1678.0_x64_
 cls
 powershell add-appxpackage -path 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.AppxBundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 timeout /t 3 >nul
@@ -20878,9 +20880,9 @@ goto begin
 nhcolor 07 " %Red%Netflix x86"
 timeout /t 3 >nul
 cls
-7z1900-extra\7za x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%Temp%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
+7z1900-extra\7za x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
 cls
-cd "%Temp%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
+cd "%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
 cls
 powershell add-appxpackage -path Microsoft.VCLibs.110.00_11.0.51106.1_x86__8wekyb3d8bbwe.Appx
 cls
@@ -20892,7 +20894,7 @@ powershell add-appxpackage -path Microsoft.Media.PlayReadyClient_2.3.1678.0_x86_
 cls
 powershell add-appxpackage -path 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.AppxBundle
 cls
-cd "%Temp%"
+cd "%GHOST_TEMP%"
 RD /S /Q "Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 RD /S /Q "Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 timeout /t 3 >nul
@@ -21512,9 +21514,9 @@ cls
 cls
 echo %Red%Microsoft.HEVCVideoExtension for %Cyan%X64
 cls
-7z1900-extra\7za x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%Temp%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
+7z1900-extra\7za x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
 cls
-cd "%Temp%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -21524,8 +21526,8 @@ Powershell Add-AppxPackage -Path Microsoft.HEVCVideoExtensions_1.0.41031.0_x64__
 Powershell Add-AppxPackage -Path Microsoft.HEIFImageExtension_1.0.40978.0_x64__8wekyb3d8bbwe.Appx
 cls
 timeout /t 3 >nul
-RD /S /Q "%Temp%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
-RD /S /Q "%Temp%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
 net start BcastDVRUserService
 cls
 timeout /t 5 >nul
@@ -21534,9 +21536,9 @@ goto usersrequest
 cls
 echo %Red%Microsoft.HEVCVideoExtension for %Cyan%X86
 cls
-7z1900-extra\7za x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%Temp%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
+7z1900-extra\7za x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
 cls
-cd "%Temp%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe"
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -21544,8 +21546,8 @@ Powershell Add-AppxPackage -Path Microsoft.HEVCVideoExtensions_1.0.41031.0_x86__
 Powershell Add-AppxPackage -Path Microsoft.HEIFImageExtension_1.0.40978.0_x86__8wekyb3d8bbwe.Appx
 cls
 timeout /t 3 >nul
-RD /S /Q "%Temp%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
-RD /S /Q "%Temp%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
 net start BcastDVRUserService
 cls
 timeout /t 5 >nul
@@ -26875,7 +26877,7 @@ goto :usr079
 cls
 winget install -e --silent --accept-source-agreements --accept-package-agreements --id 9N0DX20HK701
 timeout /t 2 >nul
-RD /S /Q "%Temp%\Winget" >nul 2>nul
+RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 goto op10
 
 ::mstermi11
@@ -26917,15 +26919,15 @@ goto WTHx643
 cls
 echo %Cyan%Installing please wait...
 echo.
-7z1900-extra\7za x Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle -aoa -pt -o"%Temp%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
+7z1900-extra\7za x Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle -aoa -pt -o"%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
 timeout /t 1 >nul
-cd "%Temp%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe" >nul
+cd "%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe" >nul
 for /f tokens^=* %%i in ('where .:*WindowsTerminal*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "3" /f >nul 2>nul
 net start TabletInputService >nul 2>nul
-copy "%temp%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\01 - Windows Terminal.lnk" "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
-copy "%temp%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\02 - Windows Terminal.lnk" "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
+copy "%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\01 - Windows Terminal.lnk" "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
+copy "%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\02 - Windows Terminal.lnk" "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
 if "%version%" == "Windows 10" (
 timeout /t 1 >nul
@@ -27906,9 +27908,9 @@ goto WTHx643
 :installcp
 cls
 echo %Green%Installing Intel Graphics Experience.. please wait.
-7z1900-extra\7za x AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx -aoa -pintelG -o"%Temp%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
+7z1900-extra\7za x AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx -aoa -pintelG -o"%GHOST_TEMP%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
 timeout /t 2 >nul
-cd "%Temp%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
+cd "%GHOST_TEMP%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
 timeout /t 2 >nul
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 Powershell Add-AppxPackage -Path "Microsoft.NET.Native.Framework.2.2_2.2.29512.0_x64__8wekyb3d8bbwe.appx"
@@ -28451,9 +28453,9 @@ timeout /t 2 >nul
 cls
 :win10paintinstall
 cls
-7z1900-extra\7za x Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%Temp%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
+7z1900-extra\7za x Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
-cd "%Temp%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
+cd "%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.30035.0_x64__8wekyb3d8bbwe.Appx
