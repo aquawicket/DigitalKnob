@@ -1,5 +1,5 @@
 @echo off
-call ..\functions\DK.cmd
+call ../functions/DK.cmd
 
 echo %ver%
 pause

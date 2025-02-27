@@ -21,7 +21,7 @@ setlocal
 	for /f "tokens=*" %%a in ('echo.%bas:\=^&echo.%') do (
 		set sub=!sub!%%a\
 		call set tmp=%%src:!sub!=%%
-		if "!tmp!" NEQ "!src!" (set mat=!sub!)else (set upp=!upp!..\)
+		if "!tmp!" NEQ "!src!" (set mat=!sub!)else (set upp=!upp!../)
 	)
 	set src=%upp%!src:%mat%=!
 	( endlocal & REM RETURN VALUES

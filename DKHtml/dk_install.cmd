@@ -32,14 +32,14 @@ if "%~1" == "" (goto dk_install)
 	set "BROWSER_EXE=C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
 	
     ::###### DK_CMD ######
-    if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
+    if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
     if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_assertPath DKBATCH_FUNCTIONS_DIR_
 	
     ::###### Install DKHtml ######
     %dk_call% dk_echo "Installing DKHtml . . ."
 	%dk_call% dk_assertPath BROWSER_EXE
-    set "DKHTML_FUNCTIONS_DIR=..\DKHtml\functions"
+    set "DKHTML_FUNCTIONS_DIR=../DKHtml/functions"
 
 	%dk_call% dk_registryDeleteKey "HKCR\DKHtml"
 	

@@ -12,7 +12,7 @@ setlocal enableDelayedExpansion
 	set "DK=%DKBATCH_FUNCTIONS_DIR_%/DK.cmd"
 
 	:: firewall
-	call :dk_firewallAllow powershell "%WINDIR:\=/%/System32/WindowsPowershell/v1.0\/powershell.exe"
+	call :dk_firewallAllow powershell "%WINDIR:\=/%/System32/WindowsPowershell/v1.0/powershell.exe"
 	call :dk_firewallAllow curl "%WINDIR:\=/%/System32/curl.exe"
 	call :dk_firewallAllow git "%USERPROFILE:\=/%/digitalknob/DKTools/git-portable-2.46.2-64-bit/mingw64/libexec/git-core/git-remote-https.exe"
 
@@ -53,7 +53,7 @@ setlocal enableDelayedExpansion
 	if not exist "%WFCUI_EXE%" 	(set "WFCUI_EXE=C:/Program Files/Malwarebytes/Windows Firewall Control/wfcUI.exe")
 	if exist "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
 	if exist "%WFCUI_EXE%"		(set "WFC_APP=%WFCUI_EXE%")
-	if exist "%WFC_APP%"		(set cmnd="%WFC_APP:/=\%" -allow "%_file_:/=\%")
+	if exist "%WFC_APP%"		(set cmnd="%WFC_APP%" -allow "%_file_:/=\%")
 	if not exist "%CMD_EXE%"	(set "CMD_EXE=%COMSPEC%")
 	if not exist "%CMD_EXE%"	(%dk_call% dk_error "CMD_EXE is invalid")
 	::echo cmnd ^> "%CMD_EXE%" /c "%cmnd%"

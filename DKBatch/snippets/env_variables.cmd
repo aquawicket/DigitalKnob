@@ -3,7 +3,7 @@ cls
 echo %0(%*)
 
 :::::: Load DK Function files (DK_INIT) ::::::
-call ..\functions\DK.cmd
+call ../functions/DK.cmd
 
 :main
 	:: Get the PATH environment variable from registry

@@ -42,13 +42,13 @@ if "%*"=="" (goto dk_install)
 	if not "%~1"=="" (goto:eof)
 	
 	::###### DK_CMD ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\")
+	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Install DKVb ######
 	%dk_call% dk_echo "Installing DKVb . . ."
 	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs
-	set "DKVB_FUNCTIONS_DIR=..\DKVb\functions"
+	set "DKVB_FUNCTIONS_DIR=../DKVb/functions"
 	::set "WSCRIPT_EXE=%SystemRoot:\=/%/System32/WScript.exe"
 	set "CSCRIPT_EXE=%SystemRoot:\=/%/System32/CScript.exe"
 	

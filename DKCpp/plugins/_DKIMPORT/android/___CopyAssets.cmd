@@ -12,8 +12,8 @@ if not exist %ANDROID_HOME% (
 )
 
 set ASSETS=%APP_ROOT%/app/src/main/assets
-if exist %APP_ROOT%..\assets (
-	set ASSETS=%APP_ROOT%..\assets
+if exist %APP_ROOT%../assets (
+	set ASSETS=%APP_ROOT%../assets
 )
 
 set DEVICE_PATH=/sdcard/Android/data/%PACKAGE_NAME%/files/assets

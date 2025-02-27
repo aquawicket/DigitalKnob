@@ -17,7 +17,7 @@ for %%x in (%*) do (
 set "ESC="
 set "SPACE= "
 
-if not exist "%DKBATCH_FUNCTIONS_DIR_%"  (set "DKBATCH_FUNCTIONS_DIR_=%CD%\..\functions\")
+if not exist "%DKBATCH_FUNCTIONS_DIR_%"  (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../functions/")
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 

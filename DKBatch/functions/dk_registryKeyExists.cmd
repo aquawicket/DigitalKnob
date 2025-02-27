@@ -14,7 +14,7 @@ setlocal
 	set "REG_EXE=%SYSTEMROOT:\=/%/System32/reg.exe"
 	%dk_call% dk_assertPath REG_EXE
 	
-    "%REG_EXE:/=\%" query "%_reg_path_:/=\%" >nul 2>&1
+    "%REG_EXE%" query "%_reg_path_:/=\%" >nul 2>&1
     
     if %ERRORLEVEL% equ 0 (
 		endlocal & (
