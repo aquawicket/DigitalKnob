@@ -123,17 +123,17 @@ setlocal
 	
 	::### No Quotes w/ special characters  i.e. ( and )
 	::# foward slashes
-	::%dk_call% dk_assertPath C:/Program Files (x86)/Common Files		&::BAD
+	::%dk_call% dk_assertPath C:/Program Files (x86)/Common Files		&::CMD ERROR
 	::# trailing forwardslash
-	::%dk_call% dk_assertPath C:/Program Files (x86)/Common Files/		&::BAD
+	::%dk_call% dk_assertPath C:/Program Files (x86)/Common Files/		&::CMD ERROR
 	::# lower case
-	::%dk_call% dk_assertPath c:/program files (x86)/common files		&::BAD
+	::%dk_call% dk_assertPath c:/program files (x86)/common files		&::CMD ERROR
 	::# UPPER CASE
-	::%dk_call% dk_assertPath C:/PROGRAM FILES (X86)/COMMON FILES		&::BAD
+	::%dk_call% dk_assertPath C:/PROGRAM FILES (X86)/COMMON FILES		&::CMD ERROR
 	::# windows path
-	::%dk_call% dk_assertPath C:\Program Files (x86)\Common Files		&::BAD
+	::%dk_call% dk_assertPath C:\Program Files (x86)\Common Files		&::CMD ERROR
 	::# trailing backslash
-	::%dk_call% dk_assertPath C:\Program Files (x86)\Common Files\		&::BAD
+	::%dk_call% dk_assertPath C:\Program Files (x86)\Common Files\		&::CMD ERROR
 	
 	set "myPath=C:/Program Files/Common Files"
 	::# as Variable quoted
@@ -159,9 +159,9 @@ setlocal
 	::# As a variable name unquoted
     %dk_call% dk_assertPath myPath									&::OK
 	::# as a variable using %'s unquoted
-	::%dk_call% dk_assertPath %myPath%								&::BAD	
+	::%dk_call% dk_assertPath %myPath%								&::CMD ERROR	
 	::# As a variable using !'s unquoted
-	::%dk_call% dk_assertPath !myPath!								&::BAD
+	::%dk_call% dk_assertPath !myPath!								&::CMD ERROR
 	
 	::###### THESE SHOULD ALL BE (NOT FOUND) ######
 	::# nonexistent path
@@ -173,7 +173,7 @@ setlocal
 	::# nonexistent windows path
 	%dk_call% dk_assertPath "C:\NonExistent (x86)\Common Files"	&::ASSERT
 	::# nonexistent No quotes path
-	::%dk_call% dk_assertPath C:/NonExistent (x86)/Common Files	&::BAD
+	::%dk_call% dk_assertPath C:/NonExistent (x86)/Common Files	&::CMD ERROR
     
 	::# as Variable
     set "myPath=C:/ProgramFiles (x86)/Common Files"
@@ -186,7 +186,7 @@ setlocal
 	::# As an unquoted variable name to nonexistent path w/ special characters
     %dk_call% dk_assertPath myPath									&::ASSERT
 	::# As an unquoted variable using %'s to nonexistent path w/ special characters
-	::%dk_call% dk_assertPath %myPath%								&::BAD
+	::%dk_call% dk_assertPath %myPath%								&::CMD ERROR
 	::# As an unquoted variable using !'s to nonexistent path w/ special characters
-    ::%dk_call% dk_assertPath !myPath!								&::BAD
+    ::%dk_call% dk_assertPath !myPath!								&::CMD ERROR
 %endfunction%

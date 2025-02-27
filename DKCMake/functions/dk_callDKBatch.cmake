@@ -7,11 +7,11 @@ include_guard()
 #
 #
 function(dk_callDKBatch func)
+	message("dk_callDKBatch.cmake(${ARGV})")
 	dk_debugFunc()
 	
 	#set(func "${ARGV0}")
-	set(args "${ARGN}")
-
+	set(args ${ARGN})
 	dk_replaceAll("${args}" "(" "#40" args)
 	dk_replaceAll("${args}" ")" "#41" args)
 

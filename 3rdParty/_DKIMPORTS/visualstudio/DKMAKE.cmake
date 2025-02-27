@@ -15,9 +15,9 @@ dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 
 
-if(EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
+#if(EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
 	dk_firewallAllow("VS_SETUP" "C:/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
-endif()
+#endif()
 
 #############################################################################################################
 # C:/Program Files (x86)/Microsoft Visual Studio    /2022      /BuildTools    /VC/Tools/MSVC   /14.42.34433
@@ -137,14 +137,16 @@ if(NOT EXISTS "${VS}")
 	dk_printVar(VS_SETUP_BOOTSTRAPPER_EXE)
 	dk_firewallAllow("VS_SETUP_BOOTSTRAPPER" "${VS_SETUP_BOOTSTRAPPER_EXE}")
 	
-	while(NOT VS_SETUP_EXE)
-		dk_findProgram(VS_SETUP_EXE setup.exe "${VS_INSTALL_PATH}")
+	while(NOT EXISTS "${VS_SETUP_EXE}")
+		dk_findProgram(VS_SETUP_EXE setup.exe "C:/Program Files (x86)/Microsoft Visual Studio/Installer")
 	endwhile()
 	dk_printVar(VS_SETUP_EXE)
 	dk_firewallAllow("VS_SETUP_EXE" "${VS_SETUP_EXE}")
-	dk_pause()
 
 	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+	while(NOT EXISTS "${VS_CACHE_PATH}")
+		dk_sleep(1)
+	endwhile()
 	dk_copy("${VS_CACHE_PATH}" "${DKDOWNLOAD_DIR}/VS")
 else()
 	dk_info("Visual Studio ${VS_TYPE} ${VS_MAJOR} ${VS_YEAR} already installed")

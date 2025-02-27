@@ -9,10 +9,11 @@ include_guard()
 #   @executable		- The path to the executable to allow
 #
 function(dk_firewallAllow)
+	message("dk_firewallAllow.cmake(${ARGV})")
 	dk_debugFunc(2)
 	
-	dk_assertPath("${ARGV1}")
-	dk_callDKBatch(dk_firewallAllow output "${ARGV0}" "${ARGV1}")
+	#dk_assertPath("${ARGV1}")
+	dk_callDKBatch(dk_firewallAllow "${ARGV0}" "${ARGV1}")
 endfunction()
 
 
