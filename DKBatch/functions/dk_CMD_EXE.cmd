@@ -14,8 +14,10 @@ setlocal
 	set "CMD_EXE=%COMSPEC:\=/%"
 	if not exist "%CMD_EXE%" (%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%WINDIR:\=/%/System32")
 	
+	for %%Z in ("%CMD_EXE%") do set "CMD_EXE=%%~fZ"
+	
 	endlocal & (
-		set "CMD_EXE=%CMD_EXE%"
+		set "CMD_EXE=%CMD_EXE:\=/%"
 	)
 %endfunction%
 

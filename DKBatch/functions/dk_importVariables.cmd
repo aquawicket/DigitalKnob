@@ -51,6 +51,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	set "IMPORT_PATH="
 	%dk_call% dk_getOptionValue  IMPORT_PATH %* 	&rem C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
+	set "IMPORT_PATH=%IMPORT_PATH:\=/%"
 	rem %dk_call% dk_printVar IMPORT_PATH
 	
 	set "BRANCH="
@@ -128,7 +129,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	rem ##############################################					################################# EXAMPLE ##########################
 	rem ### PLUGIN_URL
 	set "PLUGIN_URL="
-	set "PLUGIN_URL=%URL%"
+	set "PLUGIN_URL=%URL:\=/%"
 	%dk_call% dk_printVar PLUGIN_URL 											&rem PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 
 	rem ### PLUGIN_URL_FILENAME

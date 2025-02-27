@@ -14,12 +14,11 @@ if "%~1" == "" (goto dk_install)
 	::###### run script ######
 	::title %DKSCRIPT_PATH%
 	::(set PATH=%DKPYTHON_FUNCTIONS_DIR%;%PATH% & 
-	(set cmnd=%COMSPEC% /V:ON /k call "%PYTHON3_EXE%" "%DKSCRIPT_PATH%")
+	(set cmnd=%COMSPEC:/=\% /V:ON /k call "%PYTHON3_EXE:\=/%" "%DKSCRIPT_PATH:\=/%")
 	::echo %cmnd%
 	::echo:
 	::echo:
 	%cmnd%
-	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
 		echo ERROR:%ERRORLEVEL% 

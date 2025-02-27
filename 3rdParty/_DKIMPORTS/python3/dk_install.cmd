@@ -18,7 +18,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		%dk_call% dk_importVariables "%PYTHON3_IMPORT%" IMPORT_PATH %~dp0
 	::)
 	echo PYTHON3 = %PYTHON3%
-	if exist "%PYTHON3%/python.exe" (%dk_call% dk_set PYTHON3_EXE "%PYTHON3%/python.exe")
+	if exist "%PYTHON3%/python.exe" (set "PYTHON3_EXE=%PYTHON3%/python.exe")
 	if exist "%PYTHON3_EXE%" (%return%)
 	
 	::install
