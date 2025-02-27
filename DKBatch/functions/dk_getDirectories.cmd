@@ -11,12 +11,12 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1
 
 	set "_path_=%~1"
-	set "_path_=%_path_:/=\%"
 	%dk_call% dk_assertPath "%_path_%"
 
 	set /a "n=0"
-	for /d %%a in ("%_path_%\*") do (
-		set "dk_getDirectories[!n!]=%%a"
+	for /d %%a in ("%_path_:/=\%\*") do (
+		set "temp=%%a"
+		set "dk_getDirectories[!n!]=!temp:\=/!"
 		set /a "n+=1"
 	) 
 
@@ -47,8 +47,9 @@ setlocal
 	%dk_call% Array::dk_length dk_getDirectories
 	%dk_call% dk_echo "directories %dk_length%"
 
-	%dk_call% dk_set myPath "C:\Windows"
+	%dk_call% dk_set myPath "C:/Windows"
 	%dk_call% dk_getDirectories "%myPath%"
 	%dk_call% dk_printVar dk_getDirectories
+	%dk_call% Array::dk_length dk_getDirectories
 	%dk_call% dk_echo "directories %dk_length%"
 %endfunction%
