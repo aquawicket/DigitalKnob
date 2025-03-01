@@ -32,20 +32,11 @@ char* DKC_FUNCTIONS_DIR_;
 #include "dk_preprocessor.h"
 //#include "dk_DKHOME_DIR.h"
 //#include "dk_DIGITALKNOB_DIR.h"
-static int DK(){
-	
-	printf("\x1B[104m \x1B[30m %s %s \x1B[0m \n\n", DKCOMPILER, DKCOMPILER_VERSION);
-	return 0;
-	
-	//dk_DKHOME_DIR();
-	//dk_DIGITALKNOB_DIR();
-	//DKHOME_DIR = getenv("USERPROFILE");
-	//sprintf(DKCACHE_DIR, "s/.dk");/*, DKHOME_DIR);*/
 
-	//strcat(DKCACHE_DIR, "/.dk");
-	//strcat(DKCACHE_DIR, "/.dk");
-};
-//int rtn = DK();
+int DK();
+//	printf("\x1B[104m \x1B[30m - %s %s \x1B[0m \n\n", DKCOMPILER, DKCOMPILER_VERSION);
+//	return 0;
+//}
 
 
 #endif //DK_h

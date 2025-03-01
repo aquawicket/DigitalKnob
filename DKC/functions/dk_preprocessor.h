@@ -526,7 +526,7 @@
 
 
 
-#pragma message("\x1B[104m"   STR(DKCOMPILER_FULL))
+//#pragma message("\x1B[104m"   STR(DKCOMPILER_FULL))
 
 
 
