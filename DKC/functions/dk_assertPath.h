@@ -13,14 +13,13 @@
 int dk_assertPath(const char* path){
     //dk_debugFunc(1);
 
-	if(dk_pathExists(path)){
-		return 0;
+	int exit_status = dk_pathExists(path);
+	if(exit_status == 0){
+		return exit_status;
 	}
 	
-	char error_msg[128];
-	sprintf(error_msg, "path:'%s' does not exist.\n", path);
-	dk_error(error_msg);
-	return -1;
+	dk_error("path:'%s' does not exist\n", path);
+	return exit_status;
 }
 
 

@@ -9,7 +9,7 @@
 //# dk_fixme(str)
 //#
 #include "dk_log.h"
-int dk_fixme(const char* str){
+int dk_fixme(const char* str, ...){
 	return dk_log(FIXME, str);
 };
 

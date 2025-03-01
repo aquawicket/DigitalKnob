@@ -4,6 +4,7 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main(int argc, char** argv) {
+	
 	dk_assertPath("/c/Users/Administrator/digitalknob");
 	dk_assertPath("C:/Users/Administrator/digitalknob");
 	dk_assertPath("C:\\Users\\Administrator\\digitalknob");

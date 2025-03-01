@@ -9,7 +9,7 @@
 //# dk_fatal(str)
 //#
 #include "dk_log.h"
-int dk_fatal(const char* str){
+int dk_fatal(const char* str, ...){
 	return dk_log(FATAL, str);
 };
 

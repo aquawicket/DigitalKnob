@@ -289,8 +289,8 @@
 //# dk_log(level, str)
 //#
 #include "dk_echo.h"
-int dk_log(int level, const char* str)
-{
+int v_dk_log(int level, const char* format, va_list args) {
+
 	#if ENABLE_dk_log != 1
 		return 1;
 	#endif
@@ -395,10 +395,20 @@ int dk_log(int level, const char* str)
 	if(level_enable != 1)
 		return 1;
 
-	char message[1028];
-	sprintf(message, "%s%s%s\n", level_color, str, clr);
-	return dk_echo(message);
+	//char message[1028];
+	//sprintf(message, "%s%s\n", level_color, str);
+	printf("%s", level_color);
+	vprintf(format, args);
+	printf("%s", clr);
+	return 0;
 };
 
+int dk_log(int level, const char* format, ...) {
+	va_list args;
+    va_start(args, format);
+    int exit_status = v_dk_log(level, format, args);
+    va_end(args);
+    return exit_status;
+};	
 
 #endif //dk_log_hpp

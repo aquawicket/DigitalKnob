@@ -9,8 +9,11 @@
 //# dk_error(str)
 //#
 #include "dk_log.h"
-int dk_error(const char* str){
-	return dk_log(ERROR, str);
+int dk_error(const char* str, ...){
+	
+	int exit_status = 0;
+	dk_log(ERROR, str);
+	return exit_status;
 };
 
 

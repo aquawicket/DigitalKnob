@@ -6,20 +6,21 @@
 #define DKMAIN 1
 int main(int argc, char** argv) {
 	
-	//dk_log("test dk_log message");
+	int exit_status;
 	
-	dk_log(VERBOSE, "test dk_log VERBOSE message");
-    dk_log(DEBUG,   "test dk_log DEBUG message");
-    dk_log(INFO,    "test dk_log INFO message");
-    dk_log(SUCCESS, "test dk_log SUCCESS message");
-    dk_log(TODO,    "test dk_log TODO message");
-    dk_log(NOTICE,  "test dk_log NOTICE message");
-    dk_log(FIXME,   "test dk_log FIXME message");
-    dk_log(WARNING, "test dk_log WARNING message");
-    dk_log(ERROR,   "test dk_log ERROR message");
-    dk_log(FATAL,   "test dk_log FATAL message");
-	
-	int exit_status = 0
+	//exit_status = dk_log("test dk_log message");
+	exit_status = dk_log(VERBOSE, "test dk_log VERBOSE %d\n");
+	exit_status = dk_log(DEBUG,   "test dk_log DEBUG message\n");
+    exit_status = dk_log(INFO,    "test dk_log INFO message\n");
+    exit_status = dk_log(SUCCESS, "test dk_log SUCCESS message\n");
+    exit_status = dk_log(TODO,    "test dk_log TODO message\n");
+    exit_status = dk_log(NOTICE,  "test dk_log NOTICE message\n");
+    exit_status = dk_log(FIXME,   "test dk_log FIXME message\n");
+    exit_status = dk_log(WARNING, "test dk_log WARNING message\n");
+    exit_status = dk_log(ERROR,   "test dk_log ERROR message\n");
+    exit_status = dk_log(FATAL,   "test dk_log FATAL message\n");
+	exit_status = dk_log(INFO,    "test dk_log with number: %d\n", 15);
+	exit_status = dk_log(INFO,    "test dk_log with string: %s\n", "inserted string");
     return exit_status;
 }
 #endif
