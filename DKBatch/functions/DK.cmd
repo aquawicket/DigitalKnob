@@ -165,7 +165,11 @@ echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
 :dk_DKCACHE_DIR
     if not exist   "%DKCACHE_DIR%"     (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
     if not exist   "%DKCACHE_DIR%"     (mkdir %DKCACHE_DIR%)
-    if exist       "%DKCACHE_DIR%"     (copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul)
+    if exist       "%DKCACHE_DIR%"     (
+		if "%DKSCRIPT_NAME%"=="DKBuilder" (
+			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul)
+		)
+	)
 %endfunction%
 
 ::##################################################################################
