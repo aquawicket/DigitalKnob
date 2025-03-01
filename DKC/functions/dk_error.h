@@ -6,14 +6,15 @@
 
 
 //################################################################################
-//# dk_error(str)
+//# dk_error( const char * format, ... );
 //#
 #include "dk_log.h"
-int dk_error(const char* str, ...){
-	
-	int exit_status = 0;
-	dk_log(ERROR, str);
-	return exit_status;
+int dk_error(const char* format, ...) {
+	va_list args;
+    va_start(args, format);
+	int exit_status = v_dk_log(ERROR, format, args);
+    va_end(args);
+    return exit_status;
 };
 
 
