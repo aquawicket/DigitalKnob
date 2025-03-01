@@ -8,8 +8,8 @@
 //# dk_debug(message)
 //#
 #include "dk_log.hpp"
-void dk_debug(const char* message){
-	dk_log(DEBUG, message);
+int dk_debug(const char* message){
+	return dk_log(DEBUG, message);
 };
 
 #endif //dk_debug_hpp

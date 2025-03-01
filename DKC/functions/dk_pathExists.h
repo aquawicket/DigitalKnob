@@ -13,12 +13,7 @@
 int dk_pathExists(const char *dirname) {
 	//dk_debugFunc(1);
 	
-	 if (access(dirname, F_OK) == 0) {
-        return 1; // Directory exists
-    } else {
-        return 0; // Directory does not exist
-    }
-	return 0;
+	return access(dirname, F_OK);
 };
 
 #endif //dk_pathExists_h

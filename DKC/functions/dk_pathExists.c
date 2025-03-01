@@ -6,22 +6,27 @@
 #define DKMAIN 1
 int main(int argc, char** argv) {
 	
-	if(dk_pathExists("/C/Windows/System32/cmd.exe")){
-		dk_echo("'/C/Windows/System32/cmd.exe': path exists\n");
+	char* path = "";
+	
+	path = "C:/Windows/System32";
+	if(dk_pathExists(path) == 0){
+		dk_echo("'%s': path exists\n", path);
 	} else {
-		dk_echo("'/C/Windows/System32/cmd.exe': path does NOT exist\n");
+		dk_echo("'%s': path does NOT exist\n", path);
 	}
 	
-	if(dk_pathExists("/C/Windows/System32")){
-		dk_echo("'/C/Windows/System32'        : path exists\n");
+	path = "C:/Windows/System32/cmd.exe";
+	if(dk_pathExists(path) == 0){
+		dk_echo("'%s': path exists\n", path);
 	} else {
-		dk_echo("'/C/Windows/System32'        : path does NOT exist\n");
+		dk_echo("'%s': path does NOT exist\n", path);
 	}
 	
-	if(dk_pathExists("/C/Non/Existent/Dir")){
-		dk_echo("'/C/Non/Existent/Dir'        : path exists\n");
+	path = "C:/Non/Existent/Dir";
+	if(dk_pathExists(path) == 0){
+		dk_echo("'%s': path exists\n", path);
 	} else {
-		dk_echo("'/C/Non/Existent/Dir'        : path does NOT exist\n");
+		dk_echo("'%s': path does NOT exist\n", path);
 	}
 	
 	int exit_status = 0;

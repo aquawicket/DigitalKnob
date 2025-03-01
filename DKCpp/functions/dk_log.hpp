@@ -396,11 +396,11 @@ int dk_log(int level, const char* message)
 		return 1;
 
 	std::cout << level_color;
-	int errorlevel = dk_echo(message);
+	int exit_status = dk_echo(message);
 	std::cout << "\n";
 	std::cout << clr;
 	
-	return errorlevel;
+	return exit_status;
 };
 
 

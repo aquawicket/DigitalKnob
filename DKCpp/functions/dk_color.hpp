@@ -217,9 +217,9 @@ const std::string ANSI124 = "\x1B[124m";//   const std::string ???         = "\x
 //################################################################################
 //# dk_color()
 //#
-void dk_color(){
+int dk_color(){
 	//dk_echo(blue+"C"+green+"O"+red+"L"+magenta+"O"+cyan+"R"+blue+"O"+green+"N"+clr);
-    return;
+    return 0;
 };
 
 

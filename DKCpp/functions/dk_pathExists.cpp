@@ -1,29 +1,35 @@
 #include "dk_pathExists.hpp"
-
+#include "dk_echo.hpp"
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
 int main(int argc, char** argv) {
 	
-	if(dk_pathExists("/C/Windows/System32/cmd.exe")){
-		printf("'/C/Windows/System32/cmd.exe': path exists\n");
+	char* path = (char*)"";
+	
+	path = (char*)"C:/Windows/System32";
+	if(dk_pathExists(path) == 0){
+		dk_echo("'%s': path exists\n", path);
 	} else {
-		printf("'/C/Windows/System32/cmd.exe': path does NOT exist\n");
+		dk_echo("'%s': path does NOT exist\n", path);
 	}
 	
-	if(dk_pathExists("/C/Windows/System32")){
-		printf("'/C/Windows/System32'        : path exists\n");
+	path = (char*)"C:/Windows/System32/cmd.exe";
+	if(dk_pathExists(path) == 0){
+		dk_echo("'%s': path exists\n", path);
 	} else {
-		printf("'/C/Windows/System32'        : path does NOT exist\n");
+		dk_echo("'%s': path does NOT exist\n", path);
 	}
 	
-	if(dk_pathExists("/C/Non/Existent/Dir")){
-		printf("'/C/Non/Existent/Dir'        : path exists\n");
+	path = (char*)"C:/Non/Existent/Dir";
+	if(dk_pathExists(path) == 0){
+		dk_echo("'%s': path exists\n", path);
 	} else {
-		printf("'/C/Non/Existent/Dir'        : path does NOT exist\n");
+		dk_echo("'%s': path does NOT exist\n", path);
 	}
 	
-    return 0;
+	int exit_status = 0;
+    return exit_status;
 }
 #endif
