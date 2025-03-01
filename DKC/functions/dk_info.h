@@ -6,11 +6,15 @@
 
 
 //################################################################################
-//# dk_info(str)
+//# dk_info( const char * format, ... );
 //#
 #include "dk_log.h"
-int dk_info(const char* str){
-	return dk_log(INFO, str);
+int dk_info(const char* format, ...) {
+	va_list args;
+    va_start(args, format);
+	int exit_status = v_dk_log(INFO, format, args);
+    va_end(args);
+    return exit_status;
 };
 
 

@@ -6,11 +6,15 @@
 
 
 //################################################################################
-//# dk_fixme(str)
+//# dk_fixme( const char * format, ... );
 //#
 #include "dk_log.h"
-int dk_fixme(const char* str, ...){
-	return dk_log(FIXME, str);
+int dk_fixme(const char* format, ...) {
+	va_list args;
+    va_start(args, format);
+	int exit_status = v_dk_log(FIXME, format, args);
+    va_end(args);
+    return exit_status;
 };
 
 

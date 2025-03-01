@@ -6,11 +6,15 @@
 
 
 //################################################################################
-//# dk_fatal(str)
+//# dk_fatal( const char * format, ... );
 //#
 #include "dk_log.h"
-int dk_fatal(const char* str, ...){
-	return dk_log(FATAL, str);
+int dk_fatal(const char* format, ...) {
+	va_list args;
+    va_start(args, format);
+	int exit_status = v_dk_log(FATAL, format, args);
+    va_end(args);
+    return exit_status;
 };
 
 

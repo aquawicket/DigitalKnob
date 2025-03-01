@@ -5,7 +5,10 @@
 #define DKMAIN 1
 int main(int argc, char** argv) {
 	
-	int exit_status = dk_success("test dk_success()");
+	int exit_status;
+	exit_status = dk_success("test dk_success() \n");
+	exit_status = dk_success("test dk_success() with number: %d\n", SUCCESS);
+	exit_status = dk_success("test dk_success() with string: %s\n", "SUCCESS string");
 	return exit_status;
 }
 #endif

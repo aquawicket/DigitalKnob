@@ -4,14 +4,16 @@
 
 #include "DK.h"
 
-
 //################################################################################
-//# dk_notice(str)
+//# dk_notice( const char * format, ... );
 //#
 #include "dk_log.h"
-int dk_notice(const char* str){
-	return dk_log(NOTICE, str);
+int dk_notice(const char* format, ...) {
+	va_list args;
+    va_start(args, format);
+	int exit_status = v_dk_log(NOTICE, format, args);
+    va_end(args);
+    return exit_status;
 };
-
 
 #endif //dk_notice_h
