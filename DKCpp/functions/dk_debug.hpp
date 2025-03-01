@@ -4,12 +4,18 @@
 
 #include "DK.hpp"
 
+
 //################################################################################
-//# dk_debug(message)
+//# dk_debug( const char * format, ... );
 //#
 #include "dk_log.hpp"
-int dk_debug(const char* message){
-	return dk_log(DEBUG, message);
+int dk_debug(const char* format, ...) {
+	va_list args;
+    va_start(args, format);
+	int exit_status = v_dk_log(DEBUG, format, args);
+    va_end(args);
+    return exit_status;
 };
 
-#endif //dk_debug_hpp
+
+#endif //dk_debug_h

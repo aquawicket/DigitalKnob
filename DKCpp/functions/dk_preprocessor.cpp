@@ -26,6 +26,10 @@
 
 #include "dk_preprocessor.hpp"
 
+DKMESSAGE(test DKMESSAGE)
+DKWARNING(test DKWARNING)
+//DKERROR(test DKERROR)
+
 WARNING_DISABLE
 #include <stdio.h>
 WARNING_ENABLE
@@ -35,7 +39,7 @@ WARNING_ENABLE
 #ifndef DKMAIN
 #define DKMAIN 1
 int main(int argc, char** argv) {
-	//int PrintPreprocessor(){
+
 	#ifdef __has_builtin
 		std::cout << "__has_builtin 		= ON\n";
 	#endif

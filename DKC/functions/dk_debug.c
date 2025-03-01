@@ -4,7 +4,6 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main(int argc, char** argv) {
-	
 	int exit_status;
 	exit_status = dk_debug("test dk_debug() \n");
 	exit_status = dk_debug("test dk_debug() with number: %d\n", DEBUG);

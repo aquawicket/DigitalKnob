@@ -524,15 +524,18 @@
 
 
 
+
+
 #pragma message("\x1B[104m"   STR(DKCOMPILER_FULL))
 
 
-///////////////
+
+
+/////////////////
 #include "DK.h"
 
 
-
-static int PrintPreprocessor();
+//static int PrintPreprocessor();
 
 
 #endif //dk_preprocessor_h

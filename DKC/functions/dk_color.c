@@ -283,6 +283,6 @@ int main(int argc, char** argv) {
     dk_echo("\n");
 	
 	int exit_status = 0;
-	return exit_satus;
+	return exit_status;
 }
 #endif

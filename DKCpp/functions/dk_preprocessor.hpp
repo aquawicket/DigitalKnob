@@ -526,20 +526,16 @@
 
 
 
+#pragma message("\x1B[104m"   STR(DKCOMPILER_FULL))
 
 
 
 
-
-///////////////
+/////////////////
 #include "DK.hpp"
 
 
-static int PrintPreprocessor();
+//static int PrintPreprocessor();
 
 
-
-
-
-
-#endif //DKPreprocessor_hpp
+#endif //dk_preprocessor_hpp

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef dk_log_hpp
-#define dk_log_hpp
+#ifndef dk_log_h
+#define dk_log_h
 
 #include "DK.h"
 #include "dk_color.h"
@@ -420,4 +420,4 @@ int dk_log(int level, const char* format, ...) {
 	return exit_status;
 }
 
-#endif //dk_log_hpp
+#endif //dk_log_h
