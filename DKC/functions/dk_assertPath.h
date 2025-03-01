@@ -10,16 +10,17 @@
 //#
 #include "dk_pathExists.h"
 #include "dk_error.h"
-void dk_assertPath(const char* path){
+int dk_assertPath(const char* path){
     //dk_debugFunc(1);
 
 	if(dk_pathExists(path)){
-		return;
+		return 0;
 	}
 	
 	char error_msg[128];
 	sprintf(error_msg, "path:'%s' does not exist.\n", path);
 	dk_error(error_msg);
+	return -1;
 }
 
 

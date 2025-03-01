@@ -60,8 +60,8 @@ if "%~1" == "" (goto :dk_install)
 	echo %bg_magenta%%white%######## END TEST ####### %APP_NAME%.c ######## END TEST #######%clr%
 	echo:
 	
-	set "return_code=%ERRORLEVEL%"
-	echo return_code = %return_code%
+	set "exit_status=%ERRORLEVEL%"
+	echo exit_status = %exit_status%
 	pause
 
 %endfunction%

@@ -13,9 +13,8 @@
 #include "dk_echo.h"
 #include <stdlib.h>
 #include <stdio.h>
-void dk_callDKPowershell(char* func, char* args, char* rtn_var){
+int dk_callDKPowershell(char* func, char* args, char* rtn_var){
 	printf("%s(%s)\n", func, args);
-// main( int argc, char *argv[] )
 
 	char* POWERSHELL_EXE = "powershell.exe";
 	char* DKSCRIPT_PATH = "C:\\Users\\Administrator\\digitalknob\\Development\\DKC\\functions\\dk_callDKPowershell.h";
@@ -46,6 +45,7 @@ void dk_callDKPowershell(char* func, char* args, char* rtn_var){
 
 	printf("> %s", rtn_var);
 	//if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
+	return 0;
 };
 
 

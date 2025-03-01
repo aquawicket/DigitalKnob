@@ -13,7 +13,7 @@
 #include "dk_echo.h"
 #include <stdlib.h>
 #include <stdio.h>
-void dk_callDKBatch(char* func, char* args, char* rtn_var){
+int dk_callDKBatch(char* func, char* args, char* rtn_var){
 	printf("%s(%s)\n", func, args);
 // main( int argc, char *argv[] )
 
@@ -47,6 +47,7 @@ void dk_callDKBatch(char* func, char* args, char* rtn_var){
 
 	printf("> %s", rtn_var);
 	//if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
+	return 0;
 };
 
 
