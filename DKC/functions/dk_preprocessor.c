@@ -78,7 +78,9 @@ int PrintPreprocessor(){
 	dk_echo("DKC_LANGUAGE_VERSION   = %s \n", DKC_LANGUAGE_VERSION);
 	dk_echo("DKCPP_LANGUAGE_VERSION = %s \n", DKCPP_LANGUAGE_VERSION);
 	dk_echo("DKBUILD_TYPE           = %s \n", DKBUILD_TYPE);
-	return 0;
+	
+	int exit_status - 0;
+	return exit_status;
 }
 
 
@@ -88,7 +90,9 @@ int PrintPreprocessor(){
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char **argv) {
-	return PrintPreprocessor();
+int main(int argc, char** argv) {
+	
+	int exit_status = PrintPreprocessor();
+	return exit_status;
 }
 #endif

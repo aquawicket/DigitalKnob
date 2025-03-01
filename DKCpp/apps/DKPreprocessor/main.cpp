@@ -28,7 +28,7 @@
 #include <stdio.h>
 #include "DKPreprocessor.h"
 
-int main() {
+int main(int argc, char** argv) {
 	DKPreprocessor::PrintPreprocessor();
 	printf("DKDATE      = %s \n", DKDATE);
 	printf("DKTIME      = %s \n", DKTIME);

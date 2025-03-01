@@ -3,7 +3,8 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char **argv) {
-	return dk_error("test dk_error()");
+int main(int argc, char** argv) {
+	int exit_status = dk_error("test dk_error()");
+	return exit_status;
 }
 #endif

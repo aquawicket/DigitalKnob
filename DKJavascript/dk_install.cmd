@@ -13,7 +13,7 @@ if "%~1" == "" (goto dk_install)
 	
     %CMD_EXE% /c %CSCRIPT_EXE% //D //E:%ENGINE% //X //NoLogo "%DKJAVASCRIPT_FUNCTIONS_DIR:\=/%/DK.js" "%DKSCRIPT_PATH:\=/%" 
 	
-	::&& (echo: & echo rtncode:true %errorlevel%) || (echo: & echo rtncode:false %errorlevel%)
+	::&& (echo: & echo exit_status:true %errorlevel%) || (echo: & echo exit_status:false %errorlevel%)
 	::%COMSPEC% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
 
 %endfunction%

@@ -1,6 +1,6 @@
 #include "MyClass.h"
 
-void main()
+int main(int argc, char** argv) {
 {
 	MyClass myclass;
 	
@@ -42,4 +42,5 @@ void main()
 	printf("MyClass::EditPointer name = %s \n", out->name.c_str());
 
 	getchar(); //wait for close
+	return 0;
 }

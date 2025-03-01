@@ -47,7 +47,7 @@
 CefRefPtr<CefListValue> DKCefChildV8Handler::myRetval;
 
 int main(int argc, char* argv[]){
-	printf("[DKCefChild] main()\n");
+	printf("[DKCefChild] int main(int argc, char* argv[]) {\n");
 	argc;
 	argv;
 

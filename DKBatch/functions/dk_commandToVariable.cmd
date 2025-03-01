@@ -25,10 +25,10 @@ setlocal enableDelayedExpansion
     )
 	%COMSPEC% /c exit /b 0
 	
-	:: Final errorlevel is stored in last line
+	:: Final exit_status is stored in last line
 	set /a "i-=1"
 	set /a numLines=i-1
-	set /a errorcode = !dk_commandToVariable[%i%]!
+	set /a exit_status = !dk_commandToVariable[%i%]!
     set "dk_commandToVariable[%i%]="           &:: delete the error line from the array
     set "dk_commandToVariable=!dk_commandToVariable[%numLines%]!"
 	
@@ -47,9 +47,9 @@ setlocal enableDelayedExpansion
 	::############### Print call details ###############
 	if defined PRINT_COMMANDS (
 		echo ###############################
-		echo ## command:^> %*
-		echo ##  output: %dk_commandToVariable%
-		echo ## rtncode: %errorcode%
+		echo ##     command:^> %*
+		echo ##      output: %dk_commandToVariable%
+		echo ## exit_status: %exit_status%
 		echo:##
 	)
 	::##################################################

@@ -224,6 +224,7 @@ void dk_app_Exit(){
 #define DKMAIN 1
 #include <stdio.h>
 int main(int argc, char** argv) {
-	return dk_app_dk_app(argc, argv);
+	int exit_status = dk_app_dk_app(argc, argv);
+	return exit_status;
 }
 #endif

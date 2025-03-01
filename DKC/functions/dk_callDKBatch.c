@@ -4,7 +4,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
 	//dk_debugFunc(0);
 	
 	char rtn_var[1035] = "undefined";

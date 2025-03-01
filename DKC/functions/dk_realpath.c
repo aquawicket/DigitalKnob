@@ -1,19 +1,18 @@
 #include "dk_realpath.h"
-
+#include "dk_echo.h"
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
 	
 	char* RelPath = "../../../";
 	char* AbsPath;
-	int rtn_code = dk_realpath(RelPath, &AbsPath);
+	int exit_status = dk_realpath(RelPath, &AbsPath);
 	
-#include "dk_echo.h"
 	dk_echo("AbsPath = %s\n", AbsPath);
 	
-    return rtn_code;
+    return exit_status;
 }
 #endif

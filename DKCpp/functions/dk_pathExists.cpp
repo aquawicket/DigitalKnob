@@ -4,7 +4,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
 	
 	if(dk_pathExists("/C/Windows/System32/cmd.exe")){
 		printf("'/C/Windows/System32/cmd.exe': path exists\n");

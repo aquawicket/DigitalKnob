@@ -5,14 +5,13 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
 	//dk_debugFunc(0);
 	
 	char rtn_var[1035] = "undefined";
-
-	printf("rtn_var = %s", rtn_var);
-	dk_callDKBatch("dk_test", "FROM DKBatch", rtn_var);
-    //dk_echo();
-	printf("rtn_var = %s", rtn_var);
+	int exit_status = dk_callDKBatch("dk_test", "FROM DKBatch", rtn_var);
+	dk_echo("rtn_var = %s", rtn_var);
+	
+	return exit_status;
 }
 #endif

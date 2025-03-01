@@ -40,7 +40,7 @@ int dk_endianness(void) {
 #define DKMAIN 1
 #include <stdio.h>
 #include "dk_echo.h"
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
 	switch(dk_endianness()){
 		case ENDIAN_BIG:			dk_echo("endianness = ENDIAN_BIG\n"); 			break;
 		case ENDIAN_LITTLE:			dk_echo("endianness = ENDIAN_LITTLE\n"); 		break;

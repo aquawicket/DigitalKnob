@@ -4,7 +4,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
 	
 	//dk_log("test dk_log message");
 	
@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
     dk_log(ERROR,   "test dk_log ERROR message");
     dk_log(FATAL,   "test dk_log FATAL message");
 	
-    return 0;
+	int exit_status = 0
+    return exit_status;
 }
 #endif

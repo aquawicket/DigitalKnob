@@ -4,9 +4,10 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char **argv) {
-	int rtn_code = dk_DKHOME_DIR();
+int main(int argc, char** argv) {
+	
+	int exit_status = dk_DKHOME_DIR();
 	dk_echo(DKHOME_DIR);
-    return rtn_code;
+    return exit_status;
 }
 #endif
