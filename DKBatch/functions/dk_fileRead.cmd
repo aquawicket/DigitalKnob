@@ -2,13 +2,13 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# dk_fileToVariable(<path>, optional:<rtn_var>)
+::# dk_fileRead(<path>, optional:<rtn_var>)
 ::#
 ::#  Read lines of a file into an array and echo them back
 ::#
 ::#  reference: https://stackoverflow.com/a/49042678
 ::#
-:dk_fileToVariable
+:dk_fileRead
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2
 
@@ -40,7 +40,7 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_fileToVariable "%DKBRANCH_DIR%\build_list.txt" myVar
-	::%dk_call% dk_fileToVariable "%DKBRANCH_DIR%\Readme.md" myVar      FIXME
+	%dk_call% dk_fileRead "%DKBRANCH_DIR%\build_list.txt" myVar
+	::%dk_call% dk_fileRead "%DKBRANCH_DIR%\Readme.md" myVar      FIXME
     %dk_call% dk_printVar myVar
 %endfunction%

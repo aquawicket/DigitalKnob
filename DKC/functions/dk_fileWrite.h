@@ -12,6 +12,8 @@
 //################################################################################
 //# dk_fileWrite(filepath, string)
 //#
+//#		Reference: https://www.geeksforgeeks.org/basics-file-handling-c/
+//#
 int dk_fileWrite(const char* filepath, const char* str){
 	
     // Declare the file pointer
