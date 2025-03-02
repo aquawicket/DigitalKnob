@@ -16,7 +16,7 @@ setlocal
 
     set "_path_=%~1"
 
-    %dk_call% dk_stringContains "%PATH%" "%_path_:/=\%;" && (
+    %dk_call% dk_contains "%PATH%" "%_path_:/=\%;" && (
 		%dk_call% dk_info "environment PATH already contains _path_:%_path_%"
 		%return%
 	)

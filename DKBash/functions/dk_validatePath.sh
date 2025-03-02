@@ -11,7 +11,7 @@ dk_validatePath() {
 
 	[ -e "${1-}" ] && return
 	[ -e "${!1-}" ] && return
-    # dk_call dk_stringContains "$2" "dk_call" || dk_call dk_error "dk_validate parameter 2 requires the use of dk_call"
+    # dk_call dk_contains "$2" "dk_call" || dk_call dk_error "dk_validate parameter 2 requires the use of dk_call"
     
 	eval "${2}"
     

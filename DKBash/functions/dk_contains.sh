@@ -3,10 +3,10 @@
 
 
 ##################################################################################
-# dk_stringContains(string, substring)
+# dk_contains(string, substring)
 #
 #
-dk_stringContains() {
+dk_contains() {
 	dk_debugFunc 2
 
 	
@@ -24,12 +24,12 @@ dk_stringContains() {
 DKTEST() {
 	dk_debugFunc 0
 
-	if dk_stringContains "1one1" "one"; then
+	if dk_contains "1one1" "one"; then
 		dk_echo "1one1 contains one"
 	else
 		dk_echo "1one1 does not contains one"
 	fi
 
-	dk_stringContains "1one1" "one" && dk_echo "1one1 contains one" || dk_echo "1one1 does not contain one"
-	dk_stringContains "2two2" "owt" && dk_echo "2two2 contains owt" || dk_echo "2two2 does not contain owt"
+	dk_contains "1one1" "one" && dk_echo "1one1 contains one" || dk_echo "1one1 does not contain one"
+	dk_contains "2two2" "owt" && dk_echo "2two2 contains owt" || dk_echo "2two2 does not contain owt"
 }

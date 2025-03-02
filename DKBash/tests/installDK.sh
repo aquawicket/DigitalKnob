@@ -23,7 +23,7 @@ fi
 dk_source dk_validate
 dk_source dk_installGit
 dk_source dk_DKBRANCH_DIR
-dk_source dk_stringContains
+dk_source dk_contains
 dk_source dk_DIGITALKNOB_DIR
 dk_source dk_host_triple
 dk_source dk_getExtension

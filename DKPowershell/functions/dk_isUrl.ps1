@@ -8,7 +8,7 @@ if(!$dk_isUrl){ $dk_isUrl = 1 } else{ return } #include guard
 function Global:dk_isUrl($str) {
 	dk_debugFunc 1
 	
-	if(dk_call dk_stringContains $str "://"){ $isUrl = $true }
+	if(dk_call dk_contains $str "://"){ $isUrl = $true }
 	else{ $isUrl = $false }
 	dk_call dk_printVar isUrl
 	return $isUrl

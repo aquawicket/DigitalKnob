@@ -3,10 +3,10 @@
 
 
 ##################################################################################
-# dk_stringContains(<string>, <substring>)
+# dk_contains(<string>, <substring>)
 #
 #
-dk_stringContainsCI() {
+dk_containsCI() {
 	dk_debugFunc 2
 
 	local string=$(dk_call dk_toLower "${1}")
@@ -25,12 +25,12 @@ dk_stringContainsCI() {
 DKTEST() {
 	dk_debugFunc 0
 
-	if dk_stringContainsCI "1ONE1" "one"; then
+	if dk_containsCI "1ONE1" "one"; then
 		dk_echo "1ONE1 contains one"
 	else
 		dk_echo "1ONE1 does not contain one"
 	fi
 
-	dk_stringContainsCI "1ONE1" "one" && dk_echo "1ONE1 contains one" || dk_echo "1ONE1 does not contain one"
-	dk_stringContainsCI "2TWO2" "owt" && dk_echo "2TWO2 contains owt" || dk_echo "2TWO2 does not contain owt"
+	dk_containsCI "1ONE1" "one" && dk_echo "1ONE1 contains one" || dk_echo "1ONE1 does not contain one"
+	dk_containsCI "2TWO2" "owt" && dk_echo "2TWO2 contains owt" || dk_echo "2TWO2 does not contain owt"
 }

@@ -2,11 +2,11 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# dk_stringContainsCI(haystack, needle, rtn_var)
+::# dk_containsCI(haystack, needle, rtn_var)
 ::#
 ::#		Case insensitive substring search
 ::#
-:dk_stringContainsCI
+:dk_containsCI
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2 3
     
@@ -39,13 +39,13 @@ setlocal
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a NeEdLe in this haystack"
     %dk_call% dk_set substring "needle"
-    %dk_call% dk_stringContainsCI "%string%" "%substring%" result
+    %dk_call% dk_containsCI "%string%" "%substring%" result
     if "%result%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
     
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "straw"
-    %dk_call% dk_stringContainsCI "%string%" "%substring%" result
+    %dk_call% dk_containsCI "%string%" "%substring%" result
     if "%result%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
     ::FIXME: ERRORLEVEL is still 1 
     
@@ -54,13 +54,13 @@ setlocal
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "needle"
-    %dk_call% dk_stringContainsCI "%string%" "%substring%"
+    %dk_call% dk_containsCI "%string%" "%substring%"
     if not ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
     
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "straw"
-    %dk_call% dk_stringContainsCI "%string%" "%substring%"
+    %dk_call% dk_containsCI "%string%" "%substring%"
     if not ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
     ::FIXME: ERRORLEVEL is still 1 
     
@@ -69,11 +69,11 @@ setlocal
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "needle"
-    %dk_call% dk_stringContainsCI "%string%" "%substring%" && (%dk_call% dk_echo "string contains substring") || (%dk_call% dk_echo "string does NOT contain substring")
+    %dk_call% dk_containsCI "%string%" "%substring%" && (%dk_call% dk_echo "string contains substring") || (%dk_call% dk_echo "string does NOT contain substring")
 
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "straw"
-    %dk_call% dk_stringContainsCI "%string%" "%substring%" && (%dk_call% dk_echo "string contains substring") || (%dk_call% dk_echo "string does NOT contain substring")
+    %dk_call% dk_containsCI "%string%" "%substring%" && (%dk_call% dk_echo "string contains substring") || (%dk_call% dk_echo "string does NOT contain substring")
     ::FIXME: ERRORLEVEL is still 1
 %endfunction%

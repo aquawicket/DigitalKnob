@@ -167,9 +167,9 @@ dk_host_triple() {
 		fi
 		dk_call dk_printVar UNAME_OS
 
-		if dk_call dk_stringContainsCI "$(try uname -o)" "GNU"; then
+		if dk_call dk_containsCI "$(try uname -o)" "GNU"; then
 			UNAME_ENV="-gnu"
-		elif dk_call dk_stringContainsCI "$(try uname -o)" "Android"; then
+		elif dk_call dk_containsCI "$(try uname -o)" "Android"; then
 			UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
 		else
 			UNAME_ENV="gcc" # Default
@@ -191,17 +191,17 @@ dk_host_triple() {
 	dk_call dk_printVar UNAME_a
 	### Get the HOST_OS ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	if dk_call dk_stringContainsCI "${UNAME_a}" "Android"; then
+	if dk_call dk_containsCI "${UNAME_a}" "Android"; then
 		HOST_OS="android"
-	elif dk_call dk_stringContainsCI "${UNAME_a}" "Darwin"; then
+	elif dk_call dk_containsCI "${UNAME_a}" "Darwin"; then
 		HOST_OS="mac"
-	elif dk_call dk_stringContainsCI "${UNAME_a}" "raspberrypi"; then
+	elif dk_call dk_containsCI "${UNAME_a}" "raspberrypi"; then
 		HOST_OS="raspberry"
- 	elif dk_call dk_stringContainsCI "${UNAME_a}" "LiNuX"; then
+ 	elif dk_call dk_containsCI "${UNAME_a}" "LiNuX"; then
 		HOST_OS="linux"
-	elif dk_call dk_stringContainsCI "${UNAME_a}" "Msys"; then
+	elif dk_call dk_containsCI "${UNAME_a}" "Msys"; then
 		HOST_OS="win"
-	elif dk_call dk_stringContainsCI "${UNAME_a}" "Cygwin"; then
+	elif dk_call dk_containsCI "${UNAME_a}" "Cygwin"; then
 		HOST_OS="win"
 	else
 		dk_call dk_error "Unsupported HOST_OS: ${UNAME_a}"

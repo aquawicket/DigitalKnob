@@ -14,7 +14,7 @@ call "DKBatch/functions/DK.cmd" %*
 ::###### Load Main Program ######
 call dk_load dk_validate
 call dk_load dk_installGit
-call dk_load dk_stringContains
+call dk_load dk_contains
 call dk_load dk_DIGITALKNOB_DIR
 call dk_load dk_host_triple
 call dk_load dk_getExtension
