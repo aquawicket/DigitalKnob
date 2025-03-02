@@ -63,7 +63,6 @@ int dk_replaceAll(char *str, char *find, char *replace, char* output) {
     }
     strcpy(tmp, str);
 	strcpy(output, result);
-	//strcpy(str, result);
 	return 0;
 }
 
