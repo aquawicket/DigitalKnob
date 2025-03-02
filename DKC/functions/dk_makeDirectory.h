@@ -9,7 +9,7 @@
 //################################################################################
 //# dk_makeDirectory()
 //#
-int dk_makeDirectory(char* path){
+int dk_makeDirectory(const char* path){
 	
 	dk_echo("dk_makeDirectory(%s)", path);
 	return mkdir(path);

@@ -13,7 +13,7 @@
 //#		Reference: https://stackoverflow.com/a/32496721
 //#
 //# You must free the result if result is non-NULL.
-int dk_replaceAll(char *str, char *find, char *replace, char* output) {
+int dk_replaceAll(char *str, const char *find, const char *replace, char* output) {
     char *result; // the return string
     char *ins;    // the next insert point
     char *tmp;    // varies
