@@ -45,7 +45,7 @@ int dk_fileWrite(const char* filepath, const char* str){
         // Closing the file using fclose()
         fclose(filePointer);
 
-        printf("Data successfully written\n");
+        dk_success("Data successfully written\n");
     }
     return 0;
 };

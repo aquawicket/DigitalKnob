@@ -92,11 +92,11 @@ VOID ErrorExit (LPSTR lpszMessage)
 
 VOID KeyEventProc(KEY_EVENT_RECORD ker)
 {
-    printf("Key event: ");
+    dk_echo("Key event: ");
 
     if(ker.bKeyDown)
-        printf("key pressed\n");
-    else printf("key released\n");
+        dk_echo("key pressed\n");
+    else dk_echo("key released\n");
 }
 
 VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
@@ -104,7 +104,7 @@ VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
 #ifndef MOUSE_HWHEELED
 #define MOUSE_HWHEELED 0x0008
 #endif
-    printf("Mouse event: ");
+    dk_echo("Mouse event: ");
 
 	int colume = mer.dwMousePosition.X;
     int row = mer.dwMousePosition.Y;
@@ -113,37 +113,37 @@ VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
         case 0:
 			if(mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
             {
-                printf("X:%d, Y:%d - Left Press\n",colume, row);
+                dk_echo("X:%d, Y:%d - Left Press\n",colume, row);
             }
             else if(mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED)
             {
-                printf("X:%d, Y:%d - Right Press\n",colume, row);
+                dk_echo("X:%d, Y:%d - Right Press\n",colume, row);
             }
             else
             {
-                printf("X:%d, Y:%d - Button Press\n",colume, row);
+                dk_echo("X:%d, Y:%d - Button Press\n",colume, row);
             }
             break;
         case DOUBLE_CLICK:
-            printf("X:%d, Y:%d - Double Click\n",colume, row);
+            dk_echo("X:%d, Y:%d - Double Click\n",colume, row);
             break;
         case MOUSE_HWHEELED:
-			printf("X:%d, Y:%d - H Wheel\n",colume, row);
+			dk_echo("X:%d, Y:%d - H Wheel\n",colume, row);
             break;
         case MOUSE_MOVED:
-            printf("X:%d, Y:%d - Move\n",colume, row);
+            dk_echo("X:%d, Y:%d - Move\n",colume, row);
             break;
         case MOUSE_WHEELED:
-			printf("X:%d, Y:%d - V Wheel\n",colume, row);
+			dk_echo("X:%d, Y:%d - V Wheel\n",colume, row);
             break;
         default:
-            printf("unknown\n");
+            dk_echo("unknown\n");
             break;
     }
 }
 
 VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr)
 {
-    printf("Resize event\n");
-    printf("Console screen buffer is %d columns by %d rows.\n", wbsr.dwSize.X, wbsr.dwSize.Y);
+    dk_echo("Resize event\n");
+    dk_echo("Console screen buffer is %d columns by %d rows.\n", wbsr.dwSize.X, wbsr.dwSize.Y);
 }

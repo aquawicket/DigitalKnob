@@ -16,7 +16,7 @@
 int dk_test(int argc, char **argv){
 	//dk_debugFunc 0 99
 	
-	printf("################# dk_test.h ################\n");
+	dk_echo("################# dk_test.h ################\n");
 
 /*	
 	//### args[n] ###
@@ -26,7 +26,7 @@ int dk_test(int argc, char **argv){
 	strcpy(__ARGV__,"");
 	for (int j = 0; j < argc; j++) { 
 		char* temp = va_arg(args_ptr, char*);  // Increments args_ptr to the next argument.
-		printf("               arg%d = %s\n", j, temp);
+		dk_echo("               arg%d = %s\n", j, temp);
 		strcat(__ARGV__, temp);
 		strcat(__ARGV__, ";");
 	}
@@ -70,8 +70,8 @@ int dk_test(int argc, char **argv){
 //	setGlobal(GLOBAL_VAR, "This is a global variable");
 //	setReturn(RETURN_VAR, "This is a return variable");
 
-//	printf("GLOBAL_VAR = %s\n", GLOBAL_VAR);
-//	printf("RETURN_VAR = %s\n", RETURN_VAR);
+//	dk_echo("GLOBAL_VAR = %s\n", GLOBAL_VAR);
+//	dk_echo("RETURN_VAR = %s\n", RETURN_VAR);
 
 //	dk_echo("rtn_var string");
 	fprintf(stdout, "rtn_var string\n");

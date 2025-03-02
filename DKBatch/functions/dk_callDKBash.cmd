@@ -14,7 +14,7 @@ setlocal
 	if defined USE_WSL   (%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR")
 	if defined USE_WSL   (%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/dk_install.cmd")
 	
-	::### Get DKC_FUNCTIONS_DIR
+	::### Get DKBASH_FUNCTIONS_DIR
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
 	::### Get DKHTTP_DKBASH_FUNCTIONS_DIR
@@ -62,7 +62,7 @@ setlocal
 ::		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
 ::	)
 	
-	set "test=DKBatch"
+	set "test=DKBash"
 	::###### run command ######
 	set "bash_file=%DKBASH_FUNCTIONS_DIR:\=/%/%~1.sh"
 	if defined USE_WSL (

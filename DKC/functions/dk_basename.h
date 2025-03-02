@@ -4,13 +4,13 @@
 
 #include "DK.h"
 #include "dk_replaceAll.h"
+#include <string.h>
+#include <stdio.h>
+#include <libgen.h>
 
 //################################################################################
 //# dk_basename()
 //#
-#include <string.h>
-#include <stdio.h>
-#include <libgen.h>
 int dk_basename(const char* path, char* _basename_){
 	//dk_debugFunc(1);
 	

@@ -4,12 +4,12 @@
 
 #include "DK.h"
 #include "dk_echo.h"
+#include <stdio.h>
+#include <libgen.h>
 
 //################################################################################
 //# dk_dirname(path, output)
 //#
-#include <stdio.h>
-#include <libgen.h>
 int dk_dirname(const char* path, char* output){
 	//dk_debugFunc(1);
 	

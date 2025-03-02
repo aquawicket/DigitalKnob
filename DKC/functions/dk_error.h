@@ -3,12 +3,11 @@
 #define dk_error_h
 
 #include "DK.h"
-
+#include "dk_log.h"
 
 //################################################################################
 //# dk_error( const char * format, ... );
 //#
-#include "dk_log.h"
 int dk_error(const char* format, ...) {
 	va_list args;
     va_start(args, format);

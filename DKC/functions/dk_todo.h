@@ -9,6 +9,7 @@
 //#
 #include "dk_log.h"
 int dk_todo(const char* format, ...) {
+	
 	va_list args;
     va_start(args, format);
 	int exit_status = v_dk_log(TODO, format, args);

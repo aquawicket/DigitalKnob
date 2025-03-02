@@ -3,13 +3,12 @@
 #define dk_assertPath_h
 
 #include "DK.h"
-
+#include "dk_pathExists.h"
+#include "dk_error.h"
 
 //####################################################################
 //# dk_assertPath()
 //#
-#include "dk_pathExists.h"
-#include "dk_error.h"
 int dk_assertPath(const char* path){
     //dk_debugFunc(1);
 
