@@ -6,16 +6,17 @@
 #include "dk_echo.h"
 
 //################################################################################
-//# dk_dirname()
+//# dk_dirname(path, output)
 //#
 #include <stdio.h>
 #include <libgen.h>
-int dk_dirname(char* path, char* dirname_){
+int dk_dirname(const char* path, char* output){
 	//dk_debugFunc(1);
 	
-	char* _dirname_ = dirname(path);
-	//dk_echo("_dirname_ = %s\n", _dirname_);
-	strcpy(dirname_, _dirname_);
+	dk_echo("dk_dirname(%s)\n", path);
+	char* _dirname_ = dirname((char*)path);
+	dk_echo("_dirname_ = %s\n", _dirname_);
+	strcpy(output, _dirname_);
 	return 0;
 };
 

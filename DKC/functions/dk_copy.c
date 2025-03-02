@@ -6,6 +6,6 @@
 #define DKMAIN 1
 int main(int argc, char** argv) {
 	
-	return dk_copy("C:/Windows/notepad.exe", "C:/Windows/notepad2.exe", 1);
+	return dk_copy("C:/DKTest/test.txt", "C:/DKTest/test_copied.txt", true);
 }
 #endif

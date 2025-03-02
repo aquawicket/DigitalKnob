@@ -11,7 +11,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <libgen.h>
-int dk_basename(char* path, char** _basename_){
+int dk_basename(const char* path, char** _basename_){
 	//dk_debugFunc(1);
 	
 	// Method 1
@@ -22,7 +22,7 @@ int dk_basename(char* path, char** _basename_){
     if (base != NULL) {
         base++; // Move pointer past the last '/'
     } else {
-        base = path; // If no '/', the entire string is the basename
+        base = (char*)path; // If no '/', the entire string is the basename
     }
 	*_basename_ = base;
 	

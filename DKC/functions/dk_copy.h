@@ -5,6 +5,7 @@
 #include "DK.h"
 #include "dk_info.h"
 #include "dk_pathExists.h"
+#include "dk_debug.h"
 #include "dk_error.h"
 #include "dk_delete.h"
 #include "dk_dirname.h"
@@ -17,12 +18,12 @@
 //################################################################################
 //# dk_copy()
 //#
-int dk_copy(char* _from_, char* _to_, bool OVERWRITE){
+int dk_copy(const char* _from_, const char* _to_, bool OVERWRITE){
 	
-	dk_info("Copying %s _to_ %s\n", _from_, _to_);
+	dk_echo("Copying %s _to_ %s\n", _from_, _to_);
 	if(dk_pathExists(_from_) != 0){ dk_error("dk_copy: %s not found\n", _from_); }
 	
-	if(dk_pathExists(_to_) == 1){
+	if(dk_pathExists(_to_) == 0){
         if(OVERWRITE != true){
             dk_error("dk_copy Cannot copy file. Destiantion already exists and OVERWRITE is not set");
         }
@@ -30,9 +31,14 @@ int dk_copy(char* _from_, char* _to_, bool OVERWRITE){
     }
 	
 	// the base directory of the %_to_% path must exist.
-	char* _dirname_;
-    dk_dirname(_to_, _dirname_);
-    dk_makeDirectory(_dirname_);
+	char* _dir_name_;
+	dk_dirname(_to_, _dir_name_);
+	dk_echo("_dir_name_ = %s\n", _dir_name_);
+	
+	
+    if(dk_pathExists(_dir_name_) != 0){
+		dk_makeDirectory(_dir_name_);
+	}
 	
 	//###### C copy file code ######
 	//### https://stackoverflow.com/a/2180788
