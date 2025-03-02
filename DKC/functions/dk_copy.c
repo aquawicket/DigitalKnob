@@ -1,4 +1,4 @@
-#include "__TEMPLATE__.h"
+#include "dk_copy.h"
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
@@ -6,6 +6,6 @@
 #define DKMAIN 1
 int main(int argc, char** argv) {
 	
-	return __TEMPLATE__();
+	return dk_copy();
 }
 #endif
