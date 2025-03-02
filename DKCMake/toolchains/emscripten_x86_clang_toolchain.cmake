@@ -2,6 +2,12 @@ message("#######################################################################
 message("################# emscripten_x86_clang_toolchain.cmake #####################")
 message("############################################################################")
 
+if(ANDROID_HOST)
+	dk_pause()
+	message("paused in emscripten toolchain because ANDROID_HOST")
+	dk_exit()
+endif()
+
 dk_validate(EMSDK							"dk_depend(emsdk)")
 
 dk_set(CMAKE_GENERATOR						"Unix Makefiles")
