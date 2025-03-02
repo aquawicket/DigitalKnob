@@ -1,4 +1,4 @@
-#include "dk_copy.h"
+#include "dk_makeDirectory.h"
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
@@ -6,6 +6,6 @@
 #define DKMAIN 1
 int main(int argc, char** argv) {
 	
-	return dk_copy("C:/Windows/notepad.exe", "C:/Windows/notepad2.exe", 1);
+	return dk_makeDirectory("C:/test");
 }
 #endif

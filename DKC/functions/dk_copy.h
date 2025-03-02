@@ -7,6 +7,8 @@
 #include "dk_pathExists.h"
 #include "dk_error.h"
 #include "dk_delete.h"
+#include "dk_dirname.h"
+#include "dk_makeDirectory.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
@@ -28,9 +30,9 @@ int dk_copy(char* _from_, char* _to_, bool OVERWRITE){
     }
 	
 	// the base directory of the %_to_% path must exist.
-	char* dk_dirname;
-    dk_dirname(_to_, dk_dirname);
-    dk_makeDirectory(dk_dirname);
+	char* _dirname_;
+    dk_dirname(_to_, _dirname_);
+    dk_makeDirectory(_dirname_);
 	
 	//###### C copy file code ######
 	//### https://stackoverflow.com/a/2180788

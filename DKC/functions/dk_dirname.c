@@ -1,5 +1,6 @@
 #include "dk_dirname.h"
 #include "dk_echo.h"
+#include "dk_replaceAll.h"
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
@@ -7,13 +8,14 @@
 int main(int argc, char** argv) {
 	
 	/// Get DKSCRIPT_PATH
-	char* DKSCRIPT_PATH = argv[0];
+	char* DKSCRIPT_PATH = (char*)argv[0];
+	dk_replaceAll(DKSCRIPT_PATH, "\\", "/", DKSCRIPT_PATH);
 	dk_echo("DKSCRIPT_PATH = %s\n", DKSCRIPT_PATH);
 	
 	/// Get DKSCRIPT_DIR
-	char DKSCRIPT_DIR[256];
-	int exit_status = dk_dirname(DKSCRIPT_PATH, DKSCRIPT_DIR);
-	dk_echo("DKSCRIPT_DIR = %s\n", DKSCRIPT_DIR);
+	char* _DKSCRIPT_DIR_;
+	int exit_status = dk_dirname(DKSCRIPT_PATH, _DKSCRIPT_DIR_);
+	dk_echo("DKSCRIPT_DIR = %s\n", _DKSCRIPT_DIR_);
 	
     return exit_status;
 }
