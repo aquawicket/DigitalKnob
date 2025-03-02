@@ -52,8 +52,8 @@ set "IN=%WINDIR%\NonExistent.file
 	%dk_call% dk_basename "%IN%" dk_basename
 	echo dk_basename   = %dk_basename%
 	
-	%dk_call% dk_getDrive "%IN%" dk_getDrive
-	echo dk_getDrive      = %dk_getDrive%
+	%dk_call% dk_driveName "%IN%" dk_driveName
+	echo dk_driveName      = %dk_driveName%
 
 	%dk_call% dk_getExtension "%IN%" dk_getExtension
 	echo dk_getExtension  = %dk_getExtension%

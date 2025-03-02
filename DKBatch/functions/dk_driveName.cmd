@@ -2,10 +2,10 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_getDrive(<pathname>, <output>:optional)
+::# dk_driveName(<pathname>, <output>:optional)
 ::#
 ::#
-:dk_getDrive
+:dk_driveName
 setlocal
 	%dk_call% dk_debugFunc 1 2    
 
@@ -15,11 +15,11 @@ setlocal
 ::  if "%pathname:~-1%"=="\" set "pathname=%pathname:~0,-1%"
 ::  if "%pathname:~-1%"=="/" set "pathname=%pathname:~0,-1%"
 
-    for %%Z in ("%pathname%") do set "dk_getDrive=%%~dZ"
+    for %%Z in ("%pathname%") do set "dk_driveName=%%~dZ"
 	
     endlocal & (
-		set "dk_getDrive=%dk_getDrive%"
-		if "%2" neq "" set "%2=%dk_getDrive%"
+		set "dk_driveName=%dk_driveName%"
+		if "%2" neq "" set "%2=%dk_driveName%"
 	)
 %endfunction%
 
@@ -32,10 +32,10 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_set myPath "C:\Windows"
-    %dk_call% dk_getDrive "%myPath%" drive
+    %dk_call% dk_driveName "%myPath%" drive
     %dk_call% dk_printVar drive
 	
 	%dk_call% dk_set myPath "DK.cmd"
-    %dk_call% dk_getDrive "%myPath%" drive
+    %dk_call% dk_driveName "%myPath%" drive
     %dk_call% dk_printVar drive
 %endfunction%
