@@ -26,7 +26,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     if exist "%DKCPP_APPS_DIR%\%input%\DKMAKE.cmake"    (set "TARGET_PATH=%DKCPP_APPS_DIR%\%input%")
     %dk_call% dk_printVar TARGET_PATH
     
-	%dk_call% dk_getParentFolder "%TARGET_PATH%" parent
+	%dk_call% dk_folderName "%TARGET_PATH%" parent
     %dk_call% dk_printVar parent
     
     if "%parent%"=="apps" %return%

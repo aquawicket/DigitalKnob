@@ -2,18 +2,18 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_getParentFolder(<input> rtn_var)
+::# dk_folderName(<input> rtn_var)
 ::#
 ::#
-:dk_getParentFolder
+:dk_folderName
 setlocal
 	%dk_call% dk_debugFunc 2
 
-    for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "dk_getParentFolder=%%~nxb"
+    for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "dk_folderName=%%~nxb"
     endlocal & (
-		set "dk_getParentFolder=%dk_getParentFolder%"
+		set "dk_folderName=%dk_folderName%"
 	)
-    %dk_call% dk_printVar dk_getParentFolder
+    %dk_call% dk_printVar dk_folderName
 %endfunction%
 
 
@@ -26,5 +26,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_getParentFolder "C:/Windows/System32"
+    %dk_call% dk_folderName "C:/Windows/System32"
 %endfunction%
