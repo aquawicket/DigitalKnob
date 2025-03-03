@@ -318,7 +318,7 @@ cls
 :: 1252 	West European Latin
 :: 65000 	UTF-7 *
 :: 65001 	UTF-8 *
-del /q /s *3u5rCaj* >nul 2>nul && del /q /s *watch* >nul 2>nul && del /q /s "    G" >nul 2>nul && del /q /s *37krRHX* >nul 2>nul && del /q /s "%Temp%\*.bat" >nul 2>nul
+::del /q /s *3u5rCaj* >nul 2>nul && del /q /s *watch* >nul 2>nul && del /q /s "    G" >nul 2>nul && del /q /s *37krRHX* >nul 2>nul && del /q /s "%Temp%\*.bat" >nul 2>nul
 IF EXIST "yesno.vbs" DEL /s /q "yesno.vbs" >nul 2>nul
 color 07
 @echo off
