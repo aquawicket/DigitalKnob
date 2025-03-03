@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../../../D
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_installGitContextMenu()
+::# dk_install()
 ::#
-:dk_installGitContextMenu
+:dk_install
 ::setlocal
 	%dk_call% dk_debugFunc 0
 	
@@ -29,5 +29,5 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0
 	
-    call :dk_installGitContextMenu
+    call :dk_install
 %endfunction%

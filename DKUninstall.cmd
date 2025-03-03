@@ -33,31 +33,8 @@ setlocal
 	exit /b 0
 	goto:eof
 	::##############################################################
-	
-	
-	
-	echo:
-	echo ############ Remove File Association (windows) ############
-	(call :DKUninstallExt .bat)
-	(call :DKUninstallExt .c)
-	(call :DKUninstallExt .cmake)
-	(call :DKUninstallExt .cmd)
-	(call :DKUninstallExt .cpp)
-	(call :DKUninstallExt .cs)
-	(call :DKUninstallExt .css)
-	(call :DKUninstallExt .hta)
-	(call :DKUninstallExt .html)
-	(call :DKUninstallExt .java)
-	(call :DKUninstallExt .js)
-	(call :DKUninstallExt .php)
-	(call :DKUninstallExt .ps1)
-	(call :DKUninstallExt .py)
-	(call :DKUninstallExt .sh)
-	(call :DKUninstallExt .vbs)
-	
-	echo:
-	echo ############ Remove Context menus ############
-	%dk_call% dk_registryDeleteKey "HKCR\AllFilesystemObjects\shell\GIT ADD"
+
+
 	
 	echo:
 	echo ############ Run Uninstallers ############

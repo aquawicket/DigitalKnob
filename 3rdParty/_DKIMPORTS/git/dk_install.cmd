@@ -53,5 +53,5 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_install
+    call :dk_install
 %endfunction%
