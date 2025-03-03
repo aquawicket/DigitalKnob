@@ -3,22 +3,27 @@ if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../../DKBa
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_installNotepadppContextMenu()
+::# dk_install()
 ::#
-:dk_installNotepadppContextMenu
+:dk_install
+::setlocal
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% %DKIMPORTS_DIR%\notepadpp\dk_install.cmd"
-	%dk_call% dk_installContextMenu "Edit with Notepad++" "%NOTEPADPP_EXE%" "\"%NOTEPADPP_EXE%\" \"%%%%1\""
+    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/python/DKMAKE.cmake)" "PYTHON"
+	%dk_call% dk_assertVar PYTHON
 %endfunction%
+
+
+
+
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
 	
-    %dk_call% dk_installNotepadppContextMenu
+    call :dk_install
 %endfunction%
