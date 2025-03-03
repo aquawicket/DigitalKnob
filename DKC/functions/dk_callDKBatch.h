@@ -22,8 +22,19 @@ int dk_callDKBatch(char* func, char* args, char* rtn_var){
 	char* DKSCRIPT_PATH = "C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKBatch.h";
 	char* DKBATCH_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKBatch/functions/";
 
+	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKBatch.h")) {
+      dk_error("putenv failed \n");
+      return -1;
+    }
+	if(-1 == putenv("DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/")) {
+      dk_error("putenv failed \n");
+      return -1;
+    } 
+	
+	char* func_path = "C:/Users/Administrator/digitalknob/Development/DKBatch/functions/";
 	char DKBATCH_COMMAND[512];
-	int err = sprintf(DKBATCH_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKBATCH_FUNCTIONS_DIR_=%s) & (set PATH=!DKBATCH_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKBATCH_FUNCTIONS_DIR_, func, args);
+	//int err = sprintf(DKBATCH_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKBATCH_FUNCTIONS_DIR_=%s) & (set PATH=!DKBATCH_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKBATCH_FUNCTIONS_DIR_, func, args);
+	int err = sprintf(DKBATCH_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",CMD_EXE, DKBATCH_FUNCTIONS_DIR_, func, args);
     dk_echo("%s\n", DKBATCH_COMMAND);
 	
 	FILE *fp;
