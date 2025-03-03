@@ -13,20 +13,22 @@ setlocal
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
 	echo ############ Remove File Association (windows) ############
-	call %DKBRANCH_DIR%/DKVb/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKPython/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKPowershell/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKPhp/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKJavascript/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKJava/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKHtml/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKHta/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKCSharp/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKCpp/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKCmake/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKC/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKBatch/dk_uninstall.cmd
 	call %DKBRANCH_DIR%/DKBash/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKBatch/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKC/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKCSharp/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKCmake/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKCpp/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKHta/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKHtml/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKJava/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKJavascript/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKPhp/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKPowershell/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKPython/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKVb/dk_uninstall.cmd
+	
+	call %DKBRANCH_DIR%/3rdParty/_DKIMPORTS/git/contextMenu/dk_uninstall.cmd
 	
 	exit /b 0
 	goto:eof
