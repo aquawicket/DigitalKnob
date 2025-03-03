@@ -15,14 +15,29 @@
 //#   Reference: https://stackoverflow.com/questions/34451444/how-to-get-a-returned-value-from-powershell-and-get-it-in-a-batch-file
 //#
 int dk_callDKPowershell(char* func, char* args, char* rtn_var){
-	dk_echo("%s(%s)\n", func, args);
+	//dk_echo("%s(%s)\n", func, args);
 
 	char* POWERSHELL_EXE = "powershell.exe";
 	char* DKSCRIPT_PATH = "C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKPowershell.h";
+	char* DKPOWERSHELL_FUNCTIONS_DIR = "C:/Users/Administrator/digitalknob/Development/DKPowershell/functions";
 	char* DKPOWERSHELL_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKPowershell/functions/";
 
+	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKPowershell.h")) {
+      dk_error("putenv failed \n");
+      return -1;
+    }
+	if(-1 == putenv("DKPOWERSHELL_FUNCTIONS_DIR=C:/Users/Administrator/digitalknob/Development/DKPowershell/functions")) {
+      dk_error("putenv failed \n");
+      return -1;
+    } 
+	if(-1 == putenv("DKPOWERSHELL_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKPowershell/functions/")) {
+      dk_error("putenv failed \n");
+      return -1;
+    } 
+	
 	char DKPOWERSHELL_COMMAND[512];
-    int err = sprintf(DKPOWERSHELL_COMMAND, "%s -Command $global:DKSCRIPT_PATH ^= '%s'^; . %s/%s.ps1^; %s %s", POWERSHELL_EXE, DKSCRIPT_PATH, DKPOWERSHELL_FUNCTIONS_DIR_, func, func, args);
+    //int err = sprintf(DKPOWERSHELL_COMMAND, "%s -Command $global:DKSCRIPT_PATH ^= '%s'^; . %s/%s.ps1^; %s %s", POWERSHELL_EXE, DKSCRIPT_PATH, DKPOWERSHELL_FUNCTIONS_DIR_, func, func, args);
+	int err = sprintf(DKPOWERSHELL_COMMAND, "%s -Command . %s%s.ps1^; %s %s", POWERSHELL_EXE, DKPOWERSHELL_FUNCTIONS_DIR_, func, func, args);
 	dk_echo("%s\n", DKPOWERSHELL_COMMAND);
 	
 	FILE *fp;

@@ -1,4 +1,4 @@
-if(${DK_PS1}){return} else{ $global:DK_PS1=1 }	# include_guard
+if(${env:DK_PS1}){return} else{ ${env:DK_PS1}=1 }	# include_guard
 
 ### Print Version Info ###
 Write-Host ""

@@ -1,4 +1,4 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+. ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1
 if(!$dk_timeout){ $dk_timeout = 1 } else{ return } #include guard
 
 ##################################################################################
