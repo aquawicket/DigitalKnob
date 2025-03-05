@@ -1,5 +1,5 @@
 @echo off
-if defined DK_CMD (goto:eof) else (set "DK_CMD=1")
+if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 
 ::####################################################################
 ::# DK
@@ -13,6 +13,7 @@ if defined DK_CMD (goto:eof) else (set "DK_CMD=1")
 	for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL=%%~nZ")						&:: ### DKSHELL ###
 	for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")	&:: ### DKSHELL_VERSION ###
 	set "DKSHELL_VERSION=%DKSHELL_VERSION:Version =%"
+	
 	set "ESC="																	&:: ### ESC ###
 	if not defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%~1")						&:: ### DKSCRIPT_PATH ###
 	if not defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%~0")
@@ -27,12 +28,14 @@ if defined DK_CMD (goto:eof) else (set "DK_CMD=1")
 
 	set DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
 	%DE_STATUS%
+	
     set "NO_STDOUT=1>nul"
     set "NO_STDERR=2>nul"
     set "NO_OUTPUT=1>nul 2>nul"
 	
-	set "endfunction=exit /b !errorlevel!"
-    set "return=exit /b !errorlevel!"
+	set "exit_status=^!errorlevel^!"
+	set "endfunction=exit /b ^!errorlevel^!"
+    set "return=exit /b ^!errorlevel^!"
 
     call :dk_DKSCRIPT_PATH "%~1" %*
 	call :dk_DKSCRIPT_FILE
@@ -44,7 +47,7 @@ if defined DK_CMD (goto:eof) else (set "DK_CMD=1")
     ::###### Reload Main Script with cmd ######
     ::if "!DE!" neq "" 
 	call :dk_reload 
-    if "!DE!" neq "" (
+    if not "!DE!"=="" (
 		echo ERROR: DKBatch requires delayed expansion
 		pause
 		exit 13
@@ -205,32 +208,29 @@ if defined DK_CMD (goto:eof) else (set "DK_CMD=1")
 ::# dk_reload
 ::#
 :dk_reload
-    if "%DKSCRIPT_EXT%" neq ".cmd" (goto end_dk_reload)
-    if defined RELOADED (goto end_dk_reload)
-        echo "reloading with delayed expansion . . ."
-        set "RELOADED=1"
-		set "DK_CMD="
+    if not "%DKSCRIPT_EXT%"==".cmd" (exit /b 0)
+    if defined RELOADED (exit /b 0)
+      
+	echo "reloading with /v:on 'delayed expansion',  /k 'keep terminal open' . . . ."
+    set "RELOADED=1"
+	set "DK_CMD="
 
-        "%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" &::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
+	"%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" 	&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
 	
-	&::%DKSCRIPT_ARGS%
-	
-		:: Change console settings
-		:: >nul REG ADD HKCU\Console\digitalknob FontSize /t reg_sz /d "Consolas" /f
-		:: start "digitalknob" "%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
-		:: exit
+	:: Change console settings
+	:: >nul REG ADD HKCU\Console\digitalknob FontSize /t reg_sz /d "Consolas" /f
+	:: start "digitalknob" "%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+	:: exit
 		
-        ::####################################
-        ::############ EXIT POINT ############
-        ::####################################
-			set "exit_code=%errorlevel%"
-			echo:
-			echo Exit code: %exit_code%
-			echo:
-			::if "%exit_code%" neq "0" pause
-			pause
-			exit %exit_code%
-    :end_dk_reload
+    ::####################################
+    ::############ EXIT POINT ############
+    ::####################################
+	set "exit_status=%errorlevel%"
+	echo:
+	echo exit_status = %exit_status%
+	echo:
+	if not "%exit_status%"=="0" pause
+	exit %exit_status%
 	
 	::( >NUL reg delete HKCU\Console\digitalknob /f )
 %endfunction%
