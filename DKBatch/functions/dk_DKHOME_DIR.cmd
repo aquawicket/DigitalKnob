@@ -32,12 +32,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 
 
-
-
-
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_echo
