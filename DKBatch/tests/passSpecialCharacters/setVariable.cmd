@@ -7,7 +7,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :setVariable name value
 	endlocal
 	::echo "setVariable %~1 '%~2'"
-%DESTATE%
+%DE_STATUS%
 	set "temp=%~2"
 	set "temp=%temp:^^=^%"
 	set "%~1=%temp%"

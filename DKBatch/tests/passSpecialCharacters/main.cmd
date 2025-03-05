@@ -27,12 +27,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 set setVar=setlocal disableDelayedExpansion ^& call setVariable
 
-(set ESC=)
-(set CSI=%ESC%[)
-(set clr=%CSI%0m) 
-(set red=%CSI%31m)
-(set green=%CSI%32m) 
-set DESTATE=if "^!DE^!"=="" (echo %green%delayed expansion = ON%clr%) else (echo %red%delayed expansion = OFF%clr%)
+set DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
 
 
 :main
@@ -57,12 +52,12 @@ setlocal enableDelayedExpansion
 	
 	echo:
 	echo:
-	%DESTATE%
+	%DE_STATUS%
 
 	setlocal disableDelayedExpansion
 	call setVariableB complexB "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? %"
 	
-	%DESTATE%
+	%DE_STATUS%
 
 	echo main: complexB = "%complexB%"
 	echo main: complexB = '!complexB!'

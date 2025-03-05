@@ -31,11 +31,12 @@ echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
 %= This creates a Line Feed - DO NOT ALTER =%
 )
 
+set DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
 ::####################################################################
 ::# DK
 ::#
 :DK
-	if "!DE!" == "" (echo delayed expansion = ON) else (echo delayed expansion = OFF)
+	%DE_STATUS%
     set "NO_STDOUT=1>nul"
     set "NO_STDERR=2>nul"
     set "NO_OUTPUT=1>nul 2>nul"
