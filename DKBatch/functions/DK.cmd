@@ -1,41 +1,31 @@
 @echo off
 if defined DK_CMD (goto:eof) else (set "DK_CMD=1")
 
-::###### Print Version Info ######
-echo:
-if defined COMSPEC (set "DKSHELL_PATH=%COMSPEC:\=/%")						&:: ### DKSHELL_PATH ###
-for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL=%%~nZ")						&:: ### DKSHELL ###
-for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")	&:: ### DKSHELL_VERSION ###
-set "DKSHELL_VERSION=%DKSHELL_VERSION:Version =%"
-set "ESC="																	&:: ### ESC ###
-if not defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%~1")						&:: ### DKSCRIPT_PATH ###
-if not defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%~0")
-set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
-if not defined DKSCRIPT_ARGS (set "DKSCRIPT_ARGS=%*")						&:: ### DKSCRIPT_ARGS ###
-call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%1=%%"
-if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%~dp0")	&:: ### DKBATCH_FUNCTIONS_DIR_ ###
-set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:\=/%"
-set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"									&:: ### PATH ###
-
-echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
-
-
-
-::if not exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
-
-(set \n=^^^
-%= This creates an escaped Line Feed - DO NOT ALTER =%
-)
-
-(set LF=^
-%= This creates a Line Feed - DO NOT ALTER =%
-)
-
-set DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
 ::####################################################################
 ::# DK
 ::#
 :DK
+	::if not exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
+	
+	::###### Print Version Info ######
+	echo:
+	if defined COMSPEC (set "DKSHELL_PATH=%COMSPEC:\=/%")						&:: ### DKSHELL_PATH ###
+	for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL=%%~nZ")						&:: ### DKSHELL ###
+	for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")	&:: ### DKSHELL_VERSION ###
+	set "DKSHELL_VERSION=%DKSHELL_VERSION:Version =%"
+	set "ESC="																	&:: ### ESC ###
+	if not defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%~1")						&:: ### DKSCRIPT_PATH ###
+	if not defined DKSCRIPT_PATH (set "DKSCRIPT_PATH=%~0")
+	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
+	if not defined DKSCRIPT_ARGS (set "DKSCRIPT_ARGS=%*")						&:: ### DKSCRIPT_ARGS ###
+	call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%1=%%"
+	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%~dp0")	&:: ### DKBATCH_FUNCTIONS_DIR_ ###
+	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:\=/%"
+	set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"									&:: ### PATH ###
+
+	echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
+
+	set DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
 	%DE_STATUS%
     set "NO_STDOUT=1>nul"
     set "NO_STDERR=2>nul"
