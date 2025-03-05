@@ -15,10 +15,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	set "_target_triple_=%words[0][1]%"
 	set "_target_type_=%words[0][2]%"
 	
-	:: echo _target_app_ = %_target_app_%
-	:: echo _target_triple_ = %_target_triple_%
-	:: echo _target_type_ = %_target_type_%
-	
     :: get a list of the directories in DKCpp/apps
 	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
