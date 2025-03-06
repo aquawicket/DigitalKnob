@@ -64,10 +64,10 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		(set "exit_bool=1")
 	)
 ::###### Exit #############################################################################################
-	
+
 	::###### Print function exit ######
 	if defined printExit (call :printExit)
-	
+
 	call :popStack
 exit /b %exit_code%
 
@@ -90,37 +90,36 @@ exit /b %exit_code%
 		^& call set _line_=%%a^
 		^& call set %%_line_%%^
 		^& call set %%_line_:dk.gbl.=%%) 2^>nul
-		
+
 	::set dk_time=(call echo %%time%%)
 	::set checkError=(if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
 
-		
 ::	set checkError=(if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
-	
+
 ::	set endfunction=exit /b !errorlevel!)
 ::	set return=exit /b !errorlevel!)
 
 ::	set endfunction=(echo !errorlevel!^& exit /b !errorlevel!)
 ::	set return=(echo !errorlevel!^& exit /b !errorlevel!)
-	
+
 ::	set endfunction=(echo !errorlevel!^& call dk_getError)
 ::	set return=(echo !errorlevel!^& call dk_getError)
-	
+
 ::	set endfunction=(call dk_getError^& exit /b !errorlevel!)
 ::	set return=(call dk_getError^& exit /b !errorlevel!)
-	
+
 ::	set endfunction=(call dk_getError^& !returns!^& exit /b !errorlevel!)
 ::	set return=(call dk_getError^& !returns!^& exit /b !errorlevel!)
 
 	set endfunction=(call dk_getError^& exit /b ^!errorlevel^!)
 	set return=(call dk_getError^& exit /b ^!errorlevel^!)
-	
+
 ::	set endfunction=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
 ::	set return=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
-	
+
 ::	set endfunction=(!checkError!^& !globals!^& exit /b !errorlevel!)
 ::	set return=(!checkError!^& !globals!^& exit /b !errorlevel!)
-	
+
 	set /a "LVL=0"
 	set "ESC="
 	set "clr=%ESC%[0m"
@@ -130,17 +129,29 @@ exit /b %exit_code%
 exit /b !errorlevel!
 
 ::####################################################################
+::# :updateIndent
+::#
+:updateIndent
+	(set pad=)
+	(set padB=)
+	for /l %%x in (1, 1, %LVL%) do (set pad=!pad!%indent%)
+	for /l %%x in (1, 1, %LVL%) do (set padB=!padB!%indent%)
+exit /b !errorlevel!
+
+::####################################################################
 ::# :printEntry
 ::#
 :printEntry
 	if defined _IGNORE_ if not "X!_IGNORE_:%__FUNC__%=!X"=="X%_IGNORE_%X" (%endfunction%)
 	call :updateIndent
-	
+
 ::	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
 ::	if not "%_codepage_%"=="65001" chcp 65001>nul
-::	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
-	
-	echo %pad%%DEC%mq^> %ASCII%!__FUNC__!(!__ARGV__!)
+::	echo %pad% !__FUNC__!(!__ARGV__!)
+
+	echo %pad%� !__FUNC__!(!__ARGV__!)
+
+::	echo %pad%%DEC%mq^> %ASCII%!__FUNC__!(!__ARGV__!)
 exit /b !errorlevel!
 
 ::####################################################################
@@ -149,12 +160,12 @@ exit /b !errorlevel!
 :printExit
 	if defined _IGNORE_ if not "X!_IGNORE_:%__FUNC__%=!X"=="X%_IGNORE_%X" (%endfunction%)
 	call :updateIndent
-	
-	::echo %pad%╔══ !__FUNC__!(!__ARGV__!)
-	::echo %pad%▼
-	
-	echo %pad%%DEC%lqq %ASCII%!__FUNC__!(!__ARGV__!)
-	echo %pad%v
+	::echo %pad% !__FUNC__!(!__ARGV__!)
+	::echo %pad%
+	echo %pad%�� !__FUNC__!(!__ARGV__!)
+	echo %pad%
+::	echo %pad%%DEC%lqq %ASCII%!__FUNC__!(!__ARGV__!)
+::	echo %pad%v
 exit /b !errorlevel!
 
 ::####################################################################
@@ -195,18 +206,6 @@ exit /b !errorlevel!
 	(set %~1=%argv%)
 	(set dk.rtn.%~1=%argv%)		&:: prefix the variable name with rtn. and assign a value
 exit /b !errorlevel!
-
-::####################################################################
-::# :updateIndent
-::#
-:updateIndent
-	(set pad=)
-	(set padB=)
-	for /l %%x in (1, 1, %LVL%) do (set pad=!pad!%indent%)
-	for /l %%x in (1, 1, %LVL%) do (set padB=!padB!%indent%)
-exit /b !errorlevel!
-
-
 
 ::####################################################################
 ::# :popStack
