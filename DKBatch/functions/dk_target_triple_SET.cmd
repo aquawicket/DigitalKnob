@@ -66,7 +66,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		if defined host_env (
 			%dk_call% dk_set target_env	"!host_env!"
 		)
-		pause
 	) else if "!input!"=="2" (
 		%dk_call% dk_set target_os		"cosmopolitan"
 		%dk_call% dk_set target_arch	"cosmopolitan"
