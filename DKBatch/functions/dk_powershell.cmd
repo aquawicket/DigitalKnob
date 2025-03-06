@@ -36,10 +36,16 @@ setlocal
 ::   :found
     if "%~1"=="" %return%
     %dk_call% dk_printVar POWERSHELL_EXE
-    "%POWERSHELL_EXE%" -Command %*
-    
-	::function complete, remove recursion block
-    set "dk_powershell="
+    ::"%POWERSHELL_EXE%" -Command %*
+	
+	::###### run command ######
+	set DKPOWERSHELL_COMMAND="%POWERSHELL_EXE%" -Command %~1
+	echo "DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%"
+	
+	call dk_commandToVariable "%DKPOWERSHELL_COMMAND%"
+	endlocal & (
+		set "dk_powershell=%dk_commandToVariable%"
+	)
 %endfunction%
 
 
