@@ -22,7 +22,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	if "%~1"=="setReturn" 			(call :%* & exit /b !errorlevel!)
 	if "%~1"=="printStackVariables"	(call :%* & exit /b !errorlevel!)
 
-	
 	::###### Stack Variables ######
 	(set __CMND__=%~1)
 	(set __CMND__=!__CMND__:::=/!)
@@ -51,7 +50,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_source dk_isCRLF
 		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
 		rem if exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd"
-    )
+	)
 
 ::###### Entry ############################################################################################
 	if defined printCalls (echo dk_call ^> %__CMND__% !__ARGV__!)
@@ -244,4 +243,3 @@ setlocal
 
 	%dk_call% dk_test
 %endfunction%
-
