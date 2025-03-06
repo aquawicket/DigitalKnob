@@ -54,159 +54,160 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	echo 
 
 	%dk_call% dk_keyboardInput input
-	if "!input!" equ "0" (
+	if "!input!"=="0" (
 		#%dk_call% dk_echo "repeating last selection"
-		#%dk_call% dk_set target_app		!_target_app_!
-		#%dk_call% dk_set target_triple		!_target_triple_!
-		#%dk_call% dk_set target_type		!_target_type_!
-	) else if "!input!" equ "1" (
-		%dk_call% dk_set target_triple 		!host_triple!
-		%dk_call% dk_set target_os			!host_os!
-		%dk_call% dk_set target_arch		!host_arch!
+		#%dk_call% dk_set target_app	"!_target_app_!"
+		#%dk_call% dk_set target_triple	"!_target_triple_!"
+		#%dk_call% dk_set target_type	"!_target_type_!"
+	) else if "!input!"=="1" (
+		%dk_call% dk_set target_triple 	"!host_triple!"
+		%dk_call% dk_set target_os		"!host_os!"
+		%dk_call% dk_set target_arch	"!host_arch!"
 		if defined host_env (
-			%dk_call% dk_set target_env		!host_env!
+			%dk_call% dk_set target_env	"!host_env!"
 		)
-	) else if "!input!" equ "2" (
+		pause
+	) else if "!input!"=="2" (
 		%dk_call% dk_set target_os		"cosmopolitan"
 		%dk_call% dk_set target_arch	"cosmopolitan"
 		%dk_call% dk_set target_env		"cosmopolitan"
-	) else if "!input!" equ "3" (
+	) else if "!input!"=="3" (
 		%dk_call% dk_set target_os		"android"
 		%dk_call% dk_set target_arch	"arm32"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "4" (
+	) else if "!input!"=="4" (
 		%dk_call% dk_set target_os		"android"
 		%dk_call% dk_set target_arch	"arm64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "5" (
+	) else if "!input!"=="5" (
 		%dk_call% dk_set target_os		"android"
 		%dk_call% dk_set target_arch	"x86"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "6" (
+	) else if "!input!"=="6" (
 		%dk_call% dk_set target_os		"android"
 		%dk_call% dk_set target_arch	"x86_64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "7" (
+	) else if "!input!"=="7" (
 		%dk_call% dk_set target_os		"emscripten"
 		%dk_call% dk_set target_arch	"x86"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "8" (
+	) else if "!input!"=="8" (
 		%dk_call% dk_set target_os		"ios"
 		%dk_call% dk_set target_arch	"arm32"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "9" (
+	) else if "!input!"=="9" (
 		%dk_call% dk_set target_os		"ios"
 		%dk_call% dk_set target_arch	"arm64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "10" (
+	) else if "!input!"=="10" (
 		%dk_call% dk_set target_os		"ios"
 		%dk_call% dk_set target_arch	"x86"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "11" (
+	) else if "!input!"=="11" (
 		%dk_call% dk_set target_os		"ios"
 		%dk_call% dk_set target_arch	"x86_64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "12" (
+	) else if "!input!"=="12" (
 		%dk_call% dk_set target_os		"iossim"
 		%dk_call% dk_set target_arch	"arm32"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "13" (
+	) else if "!input!"=="13" (
 		%dk_call% dk_set target_os		"iossim"
 		%dk_call% dk_set target_arch	"arm64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "14" (
+	) else if "!input!"=="14" (
 		%dk_call% dk_set target_os		"iossim"
 		%dk_call% dk_set target_arch	"x86"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!" equ "15" (
+	) else if "!input!"=="15" (
 		%dk_call% dk_set target_os 		"iossim"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "16" (
+	) else if "!input!"=="16" (
 		%dk_call% dk_set target_os 		"linux"
 		%dk_call% dk_set target_arch 	"arm32"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "17" (
+	) else if "!input!"=="17" (
 		%dk_call% dk_set target_os 		"linux"
 		%dk_call% dk_set target_arch 	"arm64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "18" (
+	) else if "!input!"=="18" (
 		%dk_call% dk_set target_os 		"linux"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "19" (
+	) else if "!input!"=="19" (
 		%dk_call% dk_set target_os 		"linux"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "20" (
+	) else if "!input!"=="20" (
 		%dk_call% dk_set target_os 		"mac"
 		%dk_call% dk_set target_arch 	"arm32"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "21" (
+	) else if "!input!"=="21" (
 		%dk_call% dk_set target_os 		"mac"
 		%dk_call% dk_set target_arch 	"arm64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "22" (
+	) else if "!input!"=="22" (
 		%dk_call% dk_set target_os 		"mac"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "23" (
+	) else if "!input!"=="23" (
 		%dk_call% dk_set target_os 		"mac"
 		%dk_call% dk_set target_arch	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "24" (
+	) else if "!input!"=="24" (
 		%dk_call% dk_set target_os 		"raspberry"
 		%dk_call% dk_set target_arch 	"arm32"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "25" (
+	) else if "!input!"=="25" (
 		%dk_call% dk_set target_os 		"raspberry"
 		%dk_call% dk_set target_arch 	"arm64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "26" (
+	) else if "!input!"=="26" (
 		%dk_call% dk_set target_os 		"raspberry"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "27" (
+	) else if "!input!"=="27" (
 		%dk_call% dk_set target_os 		"raspberry"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "28" (
+	) else if "!input!"=="28" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"arm32"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "29" (
+	) else if "!input!"=="29" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"arm64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "30" (
+	) else if "!input!"=="30" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "31" (
+	) else if "!input!"=="31" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"gcc"
-	) else if "!input!" equ "32" (
+	) else if "!input!"=="32" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"msvc"
-	) else if "!input!" equ "33" (
+	) else if "!input!"=="33" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!" equ "34" (
+	) else if "!input!"=="34" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"gcc"
-	) else if "!input!" equ "35" (
+	) else if "!input!"=="35" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"msvc"
-	) else if "!input!" equ "36" (
+	) else if "!input!"=="36" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"ucrt"
-	) else if "!input!" equ "37" (
+	) else if "!input!"=="37" (
 		%dk_call% dk_exit 0
 	) else (
 		%dk_call% dk_warning "invalid selection"
@@ -214,23 +215,24 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	%dk_call% dk_assertVar target_os
 	%dk_call% dk_toUpper !target_os! TARGET_OS
-	%dk_call% dk_set TARGET_OS !TARGET_OS!
-	%dk_call% dk_set !target_os! 1
+	::%dk_call% dk_set TARGET_OS !TARGET_OS!
+	::%dk_call% dk_set !target_os! 1
 	%dk_call% dk_set !TARGET_OS! 1
 	%dk_call% dk_assertVar TARGET_OS
-	%dk_call% dk_printVar target_os
+	::%dk_call% dk_printVar target_os
 	%dk_call% dk_printVar TARGET_OS
-	%dk_call% dk_printVar !target_os!
+	::%dk_call% dk_printVar !target_os!
 	%dk_call% dk_printVar !TARGET_OS!
+
 	%dk_call% dk_assertVar target_arch
 	%dk_call% dk_toUpper !target_arch! TARGET_ARCH
-	%dk_call% dk_set TARGET_ARCH !TARGET_ARCH!
-	%dk_call% dk_set !target_arch! 1
+	::%dk_call% dk_set TARGET_ARCH !TARGET_ARCH!
+	::%dk_call% dk_set !target_arch! 1
 	%dk_call% dk_set !TARGET_ARCH! 1
 	%dk_call% dk_assertVar TARGET_ARCH
-	%dk_call% dk_printVar target_arch
+	::%dk_call% dk_printVar target_arch
 	%dk_call% dk_printVar TARGET_ARCH
-	%dk_call% dk_printVar !target_arch!
+	::%dk_call% dk_printVar !target_arch!
 	%dk_call% dk_printVar !TARGET_ARCH!
 
 	if not defined target_env (
@@ -238,29 +240,26 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	)
 	if defined target_env (
 		%dk_call% dk_toUpper !target_env! TARGET_ENV
-		%dk_call% dk_set TARGET_ENV !TARGET_ENV!
-		%dk_call% dk_set !target_env! 1
+		rem %dk_call% dk_set TARGET_ENV !TARGET_ENV!
+		rem %dk_call% dk_set !target_env! 1
 		%dk_call% dk_set !TARGET_ENV! 1
-		%dk_call% dk_printVar target_env
+		rem %dk_call% dk_printVar target_env
 		%dk_call% dk_printVar TARGET_ENV
-		%dk_call% dk_printVar !target_env!
+		rem %dk_call% dk_printVar !target_env!
 		%dk_call% dk_printVar !TARGET_ENV!
-	)
-		
-	if defined target_env (
-		%dk_call% dk_set target_triple !target_os!_!target_arch!_!target_env!
+		rem %dk_call% dk_set target_triple !target_os!_!target_arch!_!target_env!
 		%dk_call% dk_set TARGET_TRIPLE !TARGET_OS!_!TARGET_ARCH!_!TARGET_ENV!
 	) else (
-		%dk_call% dk_set target_triple !target_os!_!target_arch!
+		rem %dk_call% dk_set target_triple !target_os!_!target_arch!
 		%dk_call% dk_set TARGET_TRIPLE !TARGET_OS!_!TARGET_ARCH!
 	)
-	%dk_call% dk_assertVar target_triple
+	::%dk_call% dk_assertVar target_triple
 	%dk_call% dk_assertVar TARGET_TRIPLE
-	%dk_call% dk_set !target_triple! 1	
+	::%dk_call% dk_set !target_triple! 1	
 	%dk_call% dk_set !TARGET_TRIPLE! 1	
-	%dk_call% dk_printVar target_triple
+	::%dk_call% dk_printVar target_triple
 	%dk_call% dk_printVar TARGET_TRIPLE
-	%dk_call% dk_printVar !target_triple!
+	::%dk_call% dk_printVar !target_triple!
 	%dk_call% dk_printVar !TARGET_TRIPLE!	
 
 	::### Set DEBUG_DIR and RELEASE_DIR variables
@@ -278,9 +277,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_assertVar RELEASE_DIR
 	%dk_call% dk_printVar DEBUG_DIR
 	%dk_call% dk_printVar RELEASE_DIR
-	rem #else
-	rem #	%dk_call% dk_target_triple
-	
+
 %endfunction%
 
 

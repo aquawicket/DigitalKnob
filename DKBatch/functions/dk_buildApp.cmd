@@ -9,11 +9,11 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_title "Generating %target_app% - %target_triple% - %target_type%"
+	%dk_call% dk_title "Building %target_app% - %target_triple% - %target_type%"
     %dk_call% dk_echo
-    %dk_call% dk_echo "###############################################################"
-    %dk_call% dk_echo "****** Building %target_app% - %target_triple% - %target_type% - %target_level% ******"
-    %dk_call% dk_echo "###############################################################"
+    %dk_call% dk_echo "####################################################################"
+    %dk_call% dk_echo " Building %target_app% - %target_triple% - %target_type% - %target_level%"
+    %dk_call% dk_echo "####################################################################"
     %dk_call% dk_echo
 
     %dk_call% dk_assertVar target_type
@@ -23,7 +23,7 @@ setlocal
 
     %dk_call% dk_echo
     %dk_call% dk_echo "####################################################################"
-    %dk_call% dk_echo "****** Done Building %target_app% - %target_triple% - %target_type% - %target_level% ******"
+    %dk_call% dk_echo " Done Building %target_app% - %target_triple% - %target_type% - %target_level%"
     %dk_call% dk_echo "####################################################################"
     %dk_call% dk_echo
 %endfunction%

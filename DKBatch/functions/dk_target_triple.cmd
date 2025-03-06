@@ -27,8 +27,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	set "default_target_env=clang"
 
 	::### Get TARGET_DIR ###
-	!dk_call! dk_realpath "!CMAKE_BINARY_DIR!" TARGET_DIR
-	!dk_call! dk_printVar TARGET_DIR 							&:: TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
+	if defined CMAKE_BINARY_DIR (%dk_call% dk_realpath "%CMAKE_BINARY_DIR%" TARGET_DIR)
+
+	%dk_call% dk_printVar TARGET_DIR 							&:: TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
 
 	::### Set target_type / TARGET_TYPE ###
 	if "!TARGET_DIR!" equ "Debug" (	
@@ -49,10 +50,10 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_containsCI "!TARGET_DIR!" "android" 		&& goto if
 	%dk_call% dk_containsCI "!TARGET_DIR!" "emscripten" 	&& goto if
 	%dk_call% dk_containsCI "!TARGET_DIR!" "ios" 			&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "iossim"		&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "linux" 		&& goto if
+	%dk_call% dk_containsCI "!TARGET_DIR!" "iossim"			&& goto if
+	%dk_call% dk_containsCI "!TARGET_DIR!" "linux" 			&& goto if
 	%dk_call% dk_containsCI "!TARGET_DIR!" "mac"			&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "raspberry" 	&& goto if
+	%dk_call% dk_containsCI "!TARGET_DIR!" "raspberry" 		&& goto if
 	%dk_call% dk_containsCI "!TARGET_DIR!" "windows"		&& goto if
 	%dk_call% dk_containsCI "!TARGET_DIR!" "cosmopolitan"	&& goto if
 	goto else
@@ -90,14 +91,14 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	::### Set target_os / TARGET_OS / <target_os>_target / <TARGET_OS>_TARGET
 	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "android" 		&& !dk_call! dk_set target_os android
-	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "emscripten" 	&& !dk_call! dk_set target_os emscripten
+	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "emscripten" 		&& !dk_call! dk_set target_os emscripten
 	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "ios" 			&& !dk_call! dk_set target_os ios
-	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "iossim" 		&& !dk_call! dk_set target_os iossim 
-	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "linux" 		&& !dk_call! dk_set target_os linux
+	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "iossim" 			&& !dk_call! dk_set target_os iossim 
+	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "linux" 			&& !dk_call! dk_set target_os linux
 	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "mac" 			&& !dk_call! dk_set target_os mac
-	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "raspberry" 	&& !dk_call! dk_set target_os raspberry
+	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "raspberry" 		&& !dk_call! dk_set target_os raspberry
 	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "windows" 		&& !dk_call! dk_set target_os windows
-	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "win"			&& !dk_call! dk_set target_os win
+	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "win"				&& !dk_call! dk_set target_os win
 	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "cosmopolitan"	&& !dk_call! dk_set target_os cosmopolitan
 	if not defined target_os (
 		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid target_os"
@@ -115,9 +116,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		!dk_call! dk_set !TARGET_OS!_TARGET 1
 	)
 	::### Get target_arch / TARGET_ARCH
-	%dk_call% dk_containsCI "!target_triple!" "arm64" 		&& !dk_call! dk_set target_arch arm64
-	%dk_call% dk_containsCI "!target_triple!" "arm32" 		&& !dk_call! dk_set target_arch arm32
-	%dk_call% dk_containsCI "!target_triple!" "x86_64" 		&& !dk_call! dk_set target_arch x86_64
+	%dk_call% dk_containsCI "!target_triple!" "arm64" 			&& !dk_call! dk_set target_arch arm64
+	%dk_call% dk_containsCI "!target_triple!" "arm32" 			&& !dk_call! dk_set target_arch arm32
+	%dk_call% dk_containsCI "!target_triple!" "x86_64" 			&& !dk_call! dk_set target_arch x86_64
 	%dk_call% dk_containsCI "!target_triple!" "x86" 			&& !dk_call! dk_set target_arch x86
 	%dk_call% dk_containsCI "!target_triple!" "cosmopolitan" 	&& !dk_call! dk_set target_arch cosmopolitan	
 	if not defined target_arch (
@@ -135,10 +136,10 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	)
 
 	::### Set evn / TARGET_ENV 
-	%dk_call% dk_containsCI "!target_triple!" "clang" 		&& !dk_call! dk_set target_env clang
-	%dk_call% dk_containsCI "!target_triple!" "mingw" 		&& !dk_call! dk_set target_env mingw
-	%dk_call% dk_containsCI "!target_triple!" "ucrt"  		&& !dk_call! dk_set target_env ucrt
-	%dk_call% dk_containsCI "!target_triple!" "msvc"  		&& !dk_call! dk_set target_env msvc
+	%dk_call% dk_containsCI "!target_triple!" "clang" 			&& !dk_call! dk_set target_env clang
+	%dk_call% dk_containsCI "!target_triple!" "mingw" 			&& !dk_call! dk_set target_env mingw
+	%dk_call% dk_containsCI "!target_triple!" "ucrt"  			&& !dk_call! dk_set target_env ucrt
+	%dk_call% dk_containsCI "!target_triple!" "msvc"  			&& !dk_call! dk_set target_env msvc
 	%dk_call% dk_containsCI "!target_triple!" "cosmopolitan" 	&& !dk_call! dk_set target_env cosmopolitan
 	if not defined target_env (
 		!dk_call! dk_warning "The target target_triple:!target_triple! does not contain a valid target_env"

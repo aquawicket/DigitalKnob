@@ -77,4 +77,6 @@ PROJECT(DigitalKnob)
 
 dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
 
-		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)
+
+	dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)
+

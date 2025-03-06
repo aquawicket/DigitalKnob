@@ -2,10 +2,10 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::###### SETTINGS ######
-::(set printCalls=1) 
-::(set printEntry=1)
-::(set printExit=1)
-::(set _IGNORE_=dk_debugFunc;dk_echo;)
+::(set "printCalls=1") 
+(set "printEntry=1")
+(set "printExit=1")
+::(set "_IGNORE_=dk_debugFunc;dk_echo;")
 
 
 ::####################################################################
@@ -56,24 +56,20 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::###### Entry ############################################################################################
 	if defined printCalls (echo dk_call ^> %__CMND__% !__ARGV__!)
 
-	call %__CMND__% %__ARGV__% || goto error_handler
-	
-	if %errorlevel% NEQ 0 (set RTN_CODE=%errorlevel%) else (set RTN_CODE=0)
-	set RTN_BOOL=0
-	goto end_handler
-	
-	:error_handler
-	if %errorlevel% NEQ 0 (set RTN_CODE=%errorlevel%) else (set RTN_CODE=0)
-	set RTN_BOOL=1
-	
-	:end_handler
+	call %__CMND__% %__ARGV__% && (
+		(set "exit_code=!errorlevel!")
+		(set "exit_bool=0")
+	) || (
+		(set "exit_code=!errorlevel!")
+		(set "exit_bool=1")
+	)
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
 	if defined printExit (call :printExit)
 	
 	call :popStack
-exit /b %RTN_CODE%
+exit /b %exit_code%
 
 
 
@@ -116,8 +112,8 @@ exit /b %RTN_CODE%
 ::	set endfunction=(call dk_getError^& !returns!^& exit /b !errorlevel!)
 ::	set return=(call dk_getError^& !returns!^& exit /b !errorlevel!)
 
-	set endfunction=(call dk_getError^& exit /b !errorlevel!)
-	set return=(call dk_getError^& exit /b !errorlevel!)
+	set endfunction=(call dk_getError^& exit /b ^!errorlevel^!)
+	set return=(call dk_getError^& exit /b ^!errorlevel^!)
 	
 ::	set endfunction=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
 ::	set return=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
@@ -138,11 +134,13 @@ exit /b !errorlevel!
 ::#
 :printEntry
 	if defined _IGNORE_ if not "X!_IGNORE_:%__FUNC__%=!X"=="X%_IGNORE_%X" (%endfunction%)
-	
 	call :updateIndent
+	
 ::	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
 ::	if not "%_codepage_%"=="65001" chcp 65001>nul
-	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
+::	echo %pad%╚═► !__FUNC__!(!__ARGV__!)
+	
+	echo %pad%%DEC%mq^> %ASCII%!__FUNC__!(!__ARGV__!)
 exit /b !errorlevel!
 
 ::####################################################################
@@ -150,10 +148,13 @@ exit /b !errorlevel!
 ::#
 :printExit
 	if defined _IGNORE_ if not "X!_IGNORE_:%__FUNC__%=!X"=="X%_IGNORE_%X" (%endfunction%)
-	
 	call :updateIndent
-	echo %pad%╔══ !__FUNC__!(!__ARGV__!)
-	echo %pad%▼
+	
+	::echo %pad%╔══ !__FUNC__!(!__ARGV__!)
+	::echo %pad%▼
+	
+	echo %pad%%DEC%lqq %ASCII%!__FUNC__!(!__ARGV__!)
+	echo %pad%v
 exit /b !errorlevel!
 
 ::####################################################################
