@@ -18,7 +18,12 @@ setlocal
 	set "inputFile=%~1"
 	set "inputFilename=%~nx1"
 	if "%~2"=="" (set "outputFile=%~nx1.cmd") else (set "outputFile=%~2")
-	if "%~3"=="OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+	
+	::if "%~3"=="OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+	:: Find OVERWRITE in any of the arguments
+	set "args=%*"
+	if not "X%args:OVERWRITE=%X"=="X%args%X" (set "OVERWRITE=1")
+	
 
 	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
 	if exist "%outputFile%" (
@@ -59,12 +64,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    ::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-    ::set "input=%DKBRANCH_DIR%/DKBuilder.cmd"
-    ::set "output=%DKBRANCH_DIR%/DKBuilder.cmd.b64"
-	
     %dk_call% dk_selectFile
     %dk_call% dk_embedBin "%dk_selectFile%"
-	
-    ::%dk_call% Base64::dk_encode "%input%" "test.b64"
 %endfunction%

@@ -1,5 +1,9 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	file(TO_CMAKE_PATH "$ENV{USERPROFILE}$ENV{HOME}/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ###############################################################################
@@ -56,7 +60,7 @@ function(dk_test)
     dk_echo( "           DKCPP_APPS_DIR = ${DKCPP_APPS_DIR}")
     dk_echo( "           DKBASH_DIR = ${DKCMAKE_DIR}")
     dk_echo( " DKBASH_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
-    dk_echo( "DKBASH_FUNCTIONS_DIR_ = ${DKCMAKE_FUNCTIONS_DIR_}")
+    dk_echo( "DKBASH_FUNCTIONS_DIR_ = $ENV{DKCMAKE_FUNCTIONS_DIR_}")
     
     set(return_valueA "return_valueA from dk_test.cmake")
 	set(return_valueB "return_valueB from dk_test.cmake")

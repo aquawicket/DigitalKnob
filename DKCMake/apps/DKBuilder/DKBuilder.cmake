@@ -1,8 +1,5 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "${DKCMAKE_FUNCTIONS_DIR_}")
-	set(DKCMAKE_FUNCTIONS_DIR_ "../../functions/")
-endif()
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ###### Load Main Program ######

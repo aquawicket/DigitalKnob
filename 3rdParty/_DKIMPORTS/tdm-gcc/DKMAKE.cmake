@@ -2,7 +2,7 @@
 if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ../../../DKCMake/functions/)
 endif()
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ tdm-gcc ############
 # https://github.com/jmeubank/tdm-gcc

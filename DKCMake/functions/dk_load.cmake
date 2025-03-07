@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 if(NOT dk_loading_list)
@@ -77,8 +77,8 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	#endif()
 	
 	#message("fpath = ${fpath}")
-	if(EXISTS "${DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake")
-		set(${fn}_file ${DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake)
+	if(EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake")
+		set(${fn}_file $ENV{DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake)
 	elseif(EXISTS "$ENV{DKCMAKE_DIR}/functions/${fpath}.cmake")
 		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 	elseif(EXISTS "${fpath}")

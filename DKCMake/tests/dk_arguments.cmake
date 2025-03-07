@@ -1,8 +1,9 @@
 #!/usr/bin/cmake -P
-if(NOT DKCMAKE_FUNCTIONS_DIR_)
-	set(DKCMAKE_FUNCTIONS_DIR_ "C:/Users/Administrator/digitalknob/Development/DKCMake/functions/")
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	file(TO_CMAKE_PATH "$ENV{USERPROFILE}$ENV{HOME}/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
 endif()
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ###############################################################################

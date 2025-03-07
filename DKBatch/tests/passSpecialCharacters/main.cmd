@@ -26,6 +26,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::	?	\?
 
 set setVar=setlocal disableDelayedExpansion ^& call setVariable
+::set }=^& setlocal enableDelayedExpansion
 
 set DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
 
@@ -37,15 +38,17 @@ setlocal enableDelayedExpansion
 	::setlocal disableDelayedExpansion
 	::call setVariable complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? %"
 	
-	%setVar% complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? %" & setlocal enableDelayedExpansion
+	::%setVar% complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? " & setlocal enableDelayedExpansion
+	::setlocal enableDelayedExpansion & call setVariable complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? " & setlocal enableDelayedExpansion
+	::setlocal disableDelayedExpansion & call setVariable complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ?" & setlocal enableDelayedExpansion
+	setlocal disableDelayedExpansion & call setVariable complex "'" "`" "(" ")" "!" "\" "/" "[" "]" "." "^" "," ";" "=" "|" "<" ">" "&" "*" "?" & setlocal enableDelayedExpansion
+	::setlocal disableDelayedExpansion & call setVariable complex "abc" "123" "x y z"  & setlocal enableDelayedExpansion
+	::%setVar% complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? % " %}%
 	
 	:: delayed expansion is lost here, use of "%var%" requires quotes 
-	echo main: complex = "%complex%"
-	
 	echo main: complex = '!complex!'
 	
 	:: with delayed expansion regained, no quotes are required for !var!
-	setlocal enableDelayedExpansion
 	echo main: complex = '!complex!'
 	
 	call printVariable complex
@@ -56,6 +59,7 @@ setlocal enableDelayedExpansion
 
 	setlocal disableDelayedExpansion
 	call setVariableB complexB "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? %"
+	::call setVariableB complexB "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? %"
 	
 	%DE_STATUS%
 

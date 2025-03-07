@@ -6,7 +6,7 @@ endif()
 if(NOT EXISTS ${DKCMAKE_FUNCTIONS_DIR_})
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../../../../../DKCMake/functions/) # From try compile to Dk.cmake 
 endif()
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 

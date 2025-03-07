@@ -11,7 +11,7 @@ setlocal
 	%dk_call% dk_debugFunc 0 99
 
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
-	%dk_call% dk_assertVar POWERSHELL_EXE
+	%dk_call% dk_assertPath POWERSHELL_EXE
     
 ::    :: try pwsh.exe
 ::    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
@@ -34,20 +34,19 @@ setlocal
 ::    %return%
       
 ::   :found
-    if "%~1"=="" %return%
-    %dk_call% dk_printVar POWERSHELL_EXE
-    ::"%POWERSHELL_EXE%" -Command %*
+    if "%~1"=="" (%return%)
 	
 	::###### run command ######
-	set DKPOWERSHELL_COMMAND="%POWERSHELL_EXE%" -Command %~1
+	set DKPOWERSHELL_COMMAND="%POWERSHELL_EXE%" -Command %*
 	echo "DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%"
 	
 	call dk_commandToVariable "%DKPOWERSHELL_COMMAND%"
 	endlocal & (
 		set "dk_powershell=%dk_commandToVariable%"
 	)
+	
+	(set "dk_powershell=")
 %endfunction%
-
 
 
 
@@ -56,6 +55,12 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_powershell "Write-Output 'testing dk_powershell'"
-    ::%dk_call% dk_powershell "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershell(): ${PSVAR}'"
+	%dk_call% dk_powershell Write-Output 'dk_powershell TEST A';
+	
+	%dk_call% dk_powershell "Write-Output 'dk_powershell TEST B';"
+	
+	setlocal disableDelayedExpansion & set "ps_command=${PSVAR}='this is a powershell variable'; Write-Output 'testing dk_powershell ${PSVAR}';" & setlocal enableDelayedExpansion
+
+    %dk_call% dk_powershell "!ps_command!"
+
 %endfunction%

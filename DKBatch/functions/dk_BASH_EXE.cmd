@@ -32,5 +32,5 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_BASH_EXE
-    %dk_call% dk_printVar BASH_EXE
+    %dk_call% dk_echo "BASH_EXE = '%BASH_EXE%'"
 %endfunction%

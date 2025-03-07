@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ##################################################################################
@@ -30,7 +30,7 @@ function(dk_generate)
 	
 	set(CMAKE_ARGS "")
 	dk_assertPath(DKCMAKE_FUNCTIONS_DIR_)
-	dk_arrayPush(CMAKE_ARGS "-DDKCMAKE_FUNCTIONS_DIR_=${DKCMAKE_FUNCTIONS_DIR_}")
+	dk_arrayPush(CMAKE_ARGS "-DDKCMAKE_FUNCTIONS_DIR_=$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	if("${target_type}" STREQUAL "Debug")
 		dk_arrayPush(CMAKE_ARGS "-DDEBUG=ON" "-DRELEASE=OFF")
 	elseif("${target_type}" STREQUAL "Release")

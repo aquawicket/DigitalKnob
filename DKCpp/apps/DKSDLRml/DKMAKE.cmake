@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_depend(imagemagick)
 dk_depend(sdl)	#FIX for DK/DKAndroid.cpp, line:35

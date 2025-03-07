@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ###############################################################################
@@ -56,7 +56,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	set(myFile "${DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	set(myFile "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	set(mySubstring "DKINIT")
 	dk_fileIncludes("${myFile}" "${mySubstring}")
 	if(dk_fileIncludes)
@@ -66,7 +66,7 @@ function(DKTEST)
 	endif()
 	
 	
-	set(myFile "${DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	set(myFile "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	set(mySubstring "NONEXISTENT")
 	dk_fileIncludes("${myFile}" "${mySubstring}")
 	if(dk_fileIncludes)

@@ -1,7 +1,11 @@
-#!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+cmake_minimum_required(VERSION 3.18)
 
+# Tiny library. Extend as desired.
+
+macro(return_)
+  set(${ARGS} ${ARGN} PARENT_SCOPE)
+  return()
+endmacro()
 
 function(fun_expr ARGS)
   unset(args)
@@ -42,4 +46,14 @@ function(get_last_name ARGS)
   return_(Doe)             # return unquoted
 endfunction()
 
+function(get_first_and_last ARGS)
+  return_([[John]] Doe)    # return list
+endfunction()
 
+# Blog demo
+
+fun_expr(NAME format_name(get_first_and_last()))
+message(${NAME})
+
+fun_expr(NAME format_name(get_first_name() get_last_name()))
+message(${NAME})

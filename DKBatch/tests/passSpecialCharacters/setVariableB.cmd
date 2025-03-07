@@ -6,7 +6,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 :setVariableB name value
 
-	echo "setVariableB %~1 '%~2'"
+	echo "setVariable_B %~1 '%~2'"
 
 	set "temp=%~2"
 	set "temp=%temp:^^=^%"
@@ -16,5 +16,5 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	call echo setVariable OUTPUT: %~1 = "%%%~1%%"
 	setlocal enableDelayedExpansion
 	
-	echo setVariable OUTPUT: %~1 = '!%~1!'
+	echo setVariable_B OUTPUT: %~1 = '!%~1!'
 %endfunction%

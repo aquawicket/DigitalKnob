@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ################################################################################
@@ -40,7 +40,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 
-	dk_fileToGrid("${DKCMAKE_FUNCTIONS_DIR_}fileToVariable.txt" myArray)
+	dk_fileToGrid("$ENV{DKCMAKE_FUNCTIONS_DIR_}fileToVariable.txt" myArray)
 	#dk_printVar(myArray)
 	
 #	message("${myArray[0,0]:0:1}")

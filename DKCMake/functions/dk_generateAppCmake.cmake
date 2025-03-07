@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ###############################################################################
@@ -26,7 +26,7 @@ function(dk_generateAppCmake DK_Project_Dir)
 #include_guard()
 message(\"\${ESC}[46m \${ESC}[30m ***\${CMAKE_CURRENT_LIST_FILE}*** \${ESC}[0m\")
 cmake_minimum_required(VERSION 3.10)
-include(\${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include(\$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 	
 ###### DEPENDENCIES ######
 foreach(dependency ${DK_DEPENDENCIES})
