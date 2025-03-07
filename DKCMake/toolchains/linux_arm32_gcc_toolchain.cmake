@@ -3,6 +3,10 @@ message("###################### linux_arm32_gcc_toolchain.cmake ################
 message("############################################################################")
 # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 
+if(NOT LINUX_HOST)
+	dk_exit()
+endif()
+
 #dk_depend(build-essential)
 dk_depend(gcc)
 dk_depend(make)

@@ -2,6 +2,10 @@ message("#######################################################################
 message("################# raspbery_arm32_gcc_toolchain.cmake #######################")
 message("############################################################################")
 
+if(NOT RASPBERRY_HOST)
+	dk_exit()
+endif()
+
 #dk_depend(build-essential)
 dk_depend(gcc)
 dk_depend(make)

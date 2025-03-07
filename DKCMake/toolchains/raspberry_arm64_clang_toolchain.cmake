@@ -2,6 +2,10 @@ message("#######################################################################
 message("################## raspbery_arm64_clang_toolchain.cmake ####################")
 message("############################################################################")
 
+if(NOT RASPBERRY_HOST)
+	dk_exit()
+endif()
+
 #dk_depend(build-essential)
 dk_depend(clang)
 dk_depend(make)

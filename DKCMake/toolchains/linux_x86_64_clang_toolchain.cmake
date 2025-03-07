@@ -2,6 +2,10 @@ message("#######################################################################
 message("#################### linux_x86_64_clang_toolchain.cmake ####################")
 message("############################################################################")
 
+if(NOT LINUX_HOST)
+	dk_exit()
+endif()
+
 #dk_depend(build-essential)
 dk_depend(clang)
 dk_depend(make)

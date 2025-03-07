@@ -3,6 +3,8 @@ dk_echo(STATUS "################ android_x86_64_clang_toolchain.cmake ##########
 dk_echo(STATUS "#####################################################################")
 # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 
+dk_exit()
+
 dk_validate(ANDROID_NDK					"dk_depend(android-ndk)")
 dk_set(ANDROID_ABI						x86_64)
 dk_set(ANDROID_CPP_FEATURES				"rtti exceptions")

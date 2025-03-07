@@ -2,6 +2,10 @@ message("#######################################################################
 message("################## windoows_x86_64_msvc_toolchain.cmake ####################")
 message("############################################################################")
 
+if(NOT WIN_HOST)
+	dk_exit()
+endif()
+
 dk_depend(visualstudio)
 
 dk_set(CMAKE_GENERATOR				${VS_GENERATOR})

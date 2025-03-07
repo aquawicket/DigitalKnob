@@ -2,6 +2,10 @@ message("#######################################################################
 message("################### windoows_x86_64_ucrt_toolchain.cmake ###################")
 message("############################################################################")
 
+if(NOT WIN_HOST)
+	dk_exit()
+endif()
+
 dk_validate(MSYS2 "dk_depend(msys2)")
 dk_depend(gcc)
 
