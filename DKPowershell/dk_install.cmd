@@ -23,8 +23,8 @@ if "%~1" == "" (goto dk_install)
 	)
 	
 	::###### reload ######
-::	if not exist %~dp0\reload goto:eof
-::	del %~dp0\reload
+::	if not exist %~dp0/reload goto:eof
+::	del %~dp0/reload
 ::	cls
 ::	goto runDKPowershell
 %endfunction%
@@ -61,13 +61,13 @@ if "%~1" == "" (goto dk_install)
 	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
 	
 	::###### DKPowershell ######
-	%dk_call% dk_registryDeleteKey "HKCR\DKPowershell"
+	%dk_call% dk_registryDeleteKey "HKCR/DKPowershell"
 	ftype DKPowershell="%COMSPEC%" /V:ON /K call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR\DKPowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
+	%dk_call% dk_registrySetKey "HKCR/DKPowershell/DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 	
 	::###### .ps1 ######
-	%dk_call% dk_registryDeleteKey "HKCR\.ps1"
-	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1"
+	%dk_call% dk_registryDeleteKey "HKCR/.ps1"
+	%dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.ps1"
 	assoc .ps1=DKPowershell
 	
 	%dk_call% dk_success "DKPowershell install complete"

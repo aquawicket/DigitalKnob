@@ -41,15 +41,15 @@ if "%~1" == "" (goto dk_install)
 	%dk_call% dk_assertPath BROWSER_EXE
     set "DKHTML_FUNCTIONS_DIR=../DKHtml/functions"
 
-	%dk_call% dk_registryDeleteKey "HKCR\DKHtml"
+	%dk_call% dk_registryDeleteKey "HKCR/DKHtml"
 	
 	set "CMD_EXE=%COMSPEC%"
 	%dk_call% dk_assertPath CMD_EXE
 	ftype DKHtml=%BROWSER_EXE% "%%1" %*
-    %dk_call% dk_registrySetKey "HKCR\DKHtml\DefaultIcon" "" "REG_SZ" "%BROWSER_EXE%"
+    %dk_call% dk_registrySetKey "HKCR/DKHtml/DefaultIcon" "" "REG_SZ" "%BROWSER_EXE%"
 
-    %dk_call% dk_registryDeleteKey "HKCR\.html"
-    %dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html"
+    %dk_call% dk_registryDeleteKey "HKCR/.html"
+    %dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.html"
     assoc .html=DKHtml
 
     %dk_call% dk_success "DKHtml install complete"

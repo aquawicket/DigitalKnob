@@ -5,23 +5,28 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::##################################################################################
 ::# Base64::dk_embedBin(inputFile)
 ::# Base64::dk_embedBin(inputFile, outputFile)
+::# Base64::dk_embedBin(inputFile, outputFile, OVERWRITE)
 ::#
 ::#    https://stackoverflow.com/a/19596027/688352
 ::#
 :dk_embedBin
 setlocal
-	%dk_call% dk_debugFunc 1 2
-	
-    set "inputFile=%~1"
+	%dk_call% dk_debugFunc 1 3
+
+	set "inputFile=%~1"
 	set "inputFilename=%~nx1"
 	set "outputFile=%~nx1.cmd"
-    ::if %__ARGC__% equ 2 (set "outputFile=%~2")
 	if not "%~2"=="" (set "outputFile=%~2")
-    
-    if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
-	if exist "%outputFile%" (del %outputFile%)
-    :: if exist "%outputFile%" (%dk_call% dk_error "%outputFile% already exists and cannot be overwritten")
-    
+	if "%~3"=="OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+
+	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
+	if exist "%outputFile%" (
+		if not "%OVERWRITE%"=="1" (
+			%dk_call% dk_error "dk_embedBin Cannot embed file. Destiantion already exists and OVERWRITE is not set"
+		)
+		del %outputFile:/=\%
+	)
+
 	set "tempCmd=%inputFile%.tmp"
 	(
 	echo ;;;===,,,@echo off
@@ -31,9 +36,9 @@ setlocal
 	echo ;;;===,,,exit /b
 
 	) >"%tempCmd%"
-	
-    copy /a %tempCmd% + /b %inputFile% /b %outputFile%
-	del %tempCmd%
+
+	copy /a %tempCmd:/=\% + /b %inputFile:/=\% /b %outputFile:/=\%
+	del %tempCmd:/=\%
 %endfunction%
 
 
@@ -46,8 +51,8 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     ::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-    ::set "input=%DKBRANCH_DIR%\DKBuilder.cmd"
-    ::set "output=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
+    ::set "input=%DKBRANCH_DIR%/DKBuilder.cmd"
+    ::set "output=%DKBRANCH_DIR%/DKBuilder.cmd.b64"
 	
     %dk_call% dk_selectFile input
     %dk_call% dk_embedBin "%input%"

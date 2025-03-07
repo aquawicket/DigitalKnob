@@ -17,7 +17,6 @@ setlocal
     %dk_call% dk_powershell "Start-Sleep -Seconds %seconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
     
 ::  :: Method 3 - powershell directly
-::  %dk_call% dk_printVar POWERSHELL_EXE
 ::  set /a "seconds=%~1"
 ::  %dk_call% %POWERSHELL_EXE% -Command "Start-Sleep -Seconds %seconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
     

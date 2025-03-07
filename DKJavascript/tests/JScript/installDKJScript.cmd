@@ -12,12 +12,12 @@ if "%~1" neq "" (goto runDKJScript)
 	set "WSCRIPT_EXE=wscript.exe"
 	%dk_call% dk_validate DKJAVASCRIPT_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
-	%dk_call% dk_registryDeleteKey "HKCR\DKJScript"
+	%dk_call% dk_registryDeleteKey "HKCR/DKJScript"
 	ftype DKJScript=%COMSPEC% /c call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR\DKJScript\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
+	%dk_call% dk_registrySetKey "HKCR/DKJScript/DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
 	
-	%dk_call% dk_registryDeleteKey "HKCR\.js"
-	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js"
+	%dk_call% dk_registryDeleteKey "HKCR/.js"
+	%dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.js"
 	assoc .js=DKJScript
 	
 	%dk_call% dk_success "DKJScript install complete"

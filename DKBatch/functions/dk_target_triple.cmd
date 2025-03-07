@@ -85,9 +85,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	!dk_call! dk_set TARGET_TRIPLE !TARGET_TRIPLE!				&::	TARGET_TRIPLE = WIN_X86_64_CLANG
 	!dk_call! dk_set !target_triple! 1						    &:: win_x86_64_clang = 1
 	!dk_call! dk_set !TARGET_TRIPLE! 1						    &:: WIN_X86_64_CLANG = 1
-	!dk_call! dk_printVar target_triple 
-	!dk_call! dk_printVar TARGET_TRIPLE 
-
 
 	::### Set target_os / TARGET_OS / <target_os>_target / <TARGET_OS>_TARGET
 	%dk_call% dk_containsCI "!TARGET_TRIPLE!" "android" 		&& !dk_call! dk_set target_os android

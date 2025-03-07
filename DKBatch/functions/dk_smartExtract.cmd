@@ -7,34 +7,19 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#
 :dk_smartExtract
 setlocal
-    %dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 2
 
-    set "src=%~1"
-    set "dest=%~2"
-    
-    %dk_call% dk_realpath "%src%" src_realpath
-	::%dk_call% dk_printVar src_realpath
-    
-    %dk_call% dk_dirname "%src_realpath%" src_dirname
-	::%dk_call% dk_printVar src_dirname
-    
-    %dk_call% dk_basename "%src_realpath%" src_basename
-	::%dk_call% dk_printVar src_basename
-    
-    %dk_call% dk_basename "%src_basename%" src_folder
-	::%dk_call% dk_printVar src_folder
-	
+	set "src=%~1"
+	set "dest=%~2"
+
+	%dk_call% dk_realpath "%src%" src_realpath
+	%dk_call% dk_dirname "%src_realpath%" src_dirname
+	%dk_call% dk_basename "%src_realpath%" src_basename
+	%dk_call% dk_basename "%src_basename%" src_folder
 	%dk_call% dk_set src_extractPath "%src_dirname%/%src_basename%_EXTRACTED"
-	::%dk_call% dk_printVar src_extractPath
-    
-    %dk_call% dk_realpath "%dest%" dest_realpath
-	::%dk_call% dk_printVar dest_realpath
-    
-    %dk_call% dk_dirname "%dest_realpath%" dest_dirname
-	::%dk_call% dk_printVar dest_dirname
-    
-    %dk_call% dk_basename "%dest_realpath%" dest_folder
-	::%dk_call% dk_printVar dest_folder
+	%dk_call% dk_realpath "%dest%" dest_realpath
+	%dk_call% dk_dirname "%dest_realpath%" dest_dirname
+	%dk_call% dk_basename "%dest_realpath%" dest_folder
 
 ::  if not exist "%dest_realpath%" %dk_call% dk_makeDirectory "%dest_realpath%"
 
@@ -45,18 +30,14 @@ setlocal
 	%dk_call% dk_extract "%src_realpath%" "%src_extractPath%"
 	
 	%dk_call% dk_getDirectories "%src_extractPath%"
-    ::%dk_call% dk_printVar dk_getDirectories
 	
     %dk_call% Array::dk_length dk_getDirectories 
 	set "dir_count=%dk_length%"
-    ::%dk_call% dk_printVar dir_count
     
 	%dk_call% dk_getFiles "%src_extractPath%"
-	::%dk_call% dk_printVar dk_getFiles
 	
     %dk_call% Array::dk_length dk_getFiles
 	set "file_count=%dk_length%"
-    ::%dk_call% dk_printVar file_count
     
     if %dir_count% equ 1 (
 		if %file_count% equ 0 (

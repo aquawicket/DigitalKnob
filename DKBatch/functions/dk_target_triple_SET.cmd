@@ -218,10 +218,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	::%dk_call% dk_set !target_os! 1
 	%dk_call% dk_set !TARGET_OS! 1
 	%dk_call% dk_assertVar TARGET_OS
-	::%dk_call% dk_printVar target_os
-	%dk_call% dk_printVar TARGET_OS
-	::%dk_call% dk_printVar !target_os!
-	%dk_call% dk_printVar !TARGET_OS!
 
 	%dk_call% dk_assertVar target_arch
 	%dk_call% dk_toUpper !target_arch! TARGET_ARCH
@@ -229,10 +225,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	::%dk_call% dk_set !target_arch! 1
 	%dk_call% dk_set !TARGET_ARCH! 1
 	%dk_call% dk_assertVar TARGET_ARCH
-	::%dk_call% dk_printVar target_arch
-	%dk_call% dk_printVar TARGET_ARCH
-	::%dk_call% dk_printVar !target_arch!
-	%dk_call% dk_printVar !TARGET_ARCH!
 
 	if not defined target_env (
 		%dk_call% dk_set target_env clang
@@ -242,10 +234,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		rem %dk_call% dk_set TARGET_ENV !TARGET_ENV!
 		rem %dk_call% dk_set !target_env! 1
 		%dk_call% dk_set !TARGET_ENV! 1
-		rem %dk_call% dk_printVar target_env
-		%dk_call% dk_printVar TARGET_ENV
-		rem %dk_call% dk_printVar !target_env!
-		%dk_call% dk_printVar !TARGET_ENV!
 		rem %dk_call% dk_set target_triple !target_os!_!target_arch!_!target_env!
 		%dk_call% dk_set TARGET_TRIPLE !TARGET_OS!_!TARGET_ARCH!_!TARGET_ENV!
 	) else (
@@ -256,10 +244,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_assertVar TARGET_TRIPLE
 	::%dk_call% dk_set !target_triple! 1	
 	%dk_call% dk_set !TARGET_TRIPLE! 1	
-	::%dk_call% dk_printVar target_triple
-	%dk_call% dk_printVar TARGET_TRIPLE
-	::%dk_call% dk_printVar !target_triple!
-	%dk_call% dk_printVar !TARGET_TRIPLE!	
 
 	::### Set DEBUG_DIR and RELEASE_DIR variables
 	if defined IOS (
@@ -274,8 +258,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	)
 	%dk_call% dk_assertVar DEBUG_DIR
 	%dk_call% dk_assertVar RELEASE_DIR
-	%dk_call% dk_printVar DEBUG_DIR
-	%dk_call% dk_printVar RELEASE_DIR
 
 %endfunction%
 

@@ -9,11 +9,11 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 @RD /S /Q "build"
 
-set "BASH_EXE=%DK3RDPARTY_DIR%\msys2-x86_64-20240727\usr\bin\bash.exe"
-%dk_call% dk_replaceAll "%DKTOOLS_DIR%\cmake-3.29.5-windows-x86_64\bin\cmake"         "\" "/" CMAKE_EXE
-%dk_call% dk_replaceAll "%DK3RDPARTY_DIR%\_DKIMPORTS\cosmocc\cosmo_toolchain.cmake"   "\" "/" CMAKE_TOOLCHAIN_FILE
-%dk_call% dk_replaceAll "%DKSCRIPT_DIR%"                                              "\" "/" CMAKE_SOURCE_DIR
-%dk_call% dk_replaceAll "%DKSCRIPT_DIR%/\build"                                       "\" "/" CMAKE_BINARY_DIR
+set "BASH_EXE=%DK3RDPARTY_DIR:/=\%\msys2-x86_64-20240727\usr\bin\bash.exe"
+set "CMAKE_EXE=%DKTOOLS_DIR:\=/%/cmake-3.29.5-windows-x86_64/bin/cmake"
+set "CMAKE_TOOLCHAIN_FILE=%DK3RDPARTY_DIR:\=/%/_DKIMPORTS/cosmocc/cosmo_toolchain.cmake"
+set "CMAKE_SOURCE_DIR=%DKSCRIPT_DIR:\=/%"
+set "CMAKE_BINARY_DIR=%DKSCRIPT_DIR:\=/%/build"
 
 
 ::###### Configure helloWorld ######

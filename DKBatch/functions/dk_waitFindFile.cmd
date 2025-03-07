@@ -56,5 +56,4 @@ setlocal
 	%dk_call% dk_waitFindFile "vs_setup_bootstrapper.exe" "C:\Windows\Temp" 60
 	
 	echo file found or timeout reached
-	%dk_call% dk_printVar dk_waitFindFile
 %endfunction%

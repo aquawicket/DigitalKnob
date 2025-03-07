@@ -13,15 +13,14 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0 99
 	
-    set "inputFile=%~1"
+	set "inputFile=%~1"
 	set "outputFile=%~nx1.cmd"
-    ::if %__ARGC__% equ 2 (set "outputFile=%~2")
 	if not "%~2"=="" (set "outputFile=%~2")
-    
-    if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
+
+	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
 	if exist "%outputFile%" (del %outputFile%)
-    :: if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
-    
+	:: if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
+
 	(
 	echo @echo off
 	echo setlocal enabledelayedexpansion
@@ -59,9 +58,9 @@ setlocal
 	echo:
 	) >"%outputFile%"
 	
-    certutil -encode -f "%inputFile%" "encoded.tmp"
+	certutil -encode -f "%inputFile%" "encoded.tmp"
 	type "encoded.tmp">>"%outputFile%"
-    del "encoded.tmp"
+	del "encoded.tmp"
 %endfunction%
 
 
@@ -73,12 +72,12 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    ::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-    ::set "input=%DKBRANCH_DIR%\DKBuilder.cmd"
-    ::set "output=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
+	::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	::set "input=%DKBRANCH_DIR%/DKBuilder.cmd"
+	::set "output=%DKBRANCH_DIR%/DKBuilder.cmd.b64"
 	
-    %dk_call% dk_selectFile input
-    %dk_call% dk_embedFile "%input%"
+	%dk_call% dk_selectFile input
+	%dk_call% dk_embedFile "%input%"
 	
-    ::%dk_call% Base64::dk_encode "%input%" "test.b64"
+	::%dk_call% Base64::dk_encode "%input%" "test.b64"
 %endfunction%

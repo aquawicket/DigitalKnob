@@ -14,7 +14,6 @@ call dk_debug dk_debug
 call dk_warning dk_warning
 call dk_debug "SCRIPT(%*)"
 set "TEST_VAR=this is a test variable"
-call dk_printVar TEST_VAR
 
 
 ::############ main ############

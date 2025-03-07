@@ -36,12 +36,6 @@ if "%~1" == "" (goto dk_install)
 		echo ERROR:%ERRORLEVEL%
 		pause
 	)
-	
-	::###### reload ######
-::	if not exist %~dp0\reload (goto:eof)
-::	del %~dp0\reload
-::	cls
-::	goto runDKCSharp
 %endfunction%
 
 
@@ -84,7 +78,6 @@ if "%~1" == "" (goto dk_install)
 	for /r "%SystemRoot%\Microsoft.NET\Framework\" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
 	set "COMPILER_EXE=%CSC_EXE%"
 	%dk_call% dk_assertVar COMPILER_EXE
-	%dk_call% dk_printVar COMPILER_EXE
 
 	%dk_call% dk_registryDeleteKey "HKCR\DKCSharp"
 	ftype DKCSharp=%COMSPEC% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*

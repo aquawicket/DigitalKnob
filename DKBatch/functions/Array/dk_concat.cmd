@@ -19,33 +19,35 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 ::#
 :dk_concat
-::setlocal
+setlocal
     %dk_call% dk_debugFunc 2
 
     set "_arrayA_=%~1"
     set "_arrayB_=%~2"
     set "_arrayC_=dk_concat"
 
-    set /a countA=0
-    set /a countB=0
+    set /a "countA=0"
+    set /a "countB=0"
     :concat_loop1
     if defined %_arrayA_%[%countA%] (
-        call set "%_arrayC_%[%countB%]=%%%_arrayA_%[%countA%]%%"  &:: FIXME: remove the need for call here
-        set /a countA+=1
-        set /a countB+=1
+        call set "%dk_concat%[%countB%]=%%%_arrayA_%[%countA%]%%"  &:: FIXME: remove the need for call here
+        set /a "countA+=1"
+        set /a "countB+=1"
         goto concat_loop1
     )
     set /a countA=0
     :concat_loop2
     if defined %_arrayB_%[%countA%] (
-        call set "%_arrayC_%[%countB%]=%%%_arrayB_%[%countA%]%%"  &:: FIXME: remove the need for call here
-        set /a countA+=1
-        set /a countB+=1
-        goto concat_loop2
+        call set "%dk_concat%[%countB%]=%%%_arrayB_%[%countA%]%%"  &:: FIXME: remove the need for call here
+        set /a "countA+=1"
+        set /a "countB+=1"
+        goto :concat_loop2
     )
 
     ::### return value ###
-    endlocal & set "dk_concat=%_arrayC_%"
+    endlocal & (
+		set "dk_concat=%dk_concat%"
+	)
 %endfunction%
 
 

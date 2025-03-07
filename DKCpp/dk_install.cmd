@@ -94,20 +94,16 @@ if "%~1" == "" (goto :dk_install)
 	
 	::###### target_os ######
 	if not defined target_os (set "target_os=win")
-	%dk_call% dk_printVar target_os
 	
 	::###### target_arch ######
 	if not defined target_arch (set "target_arch=x86_64")
-	%dk_call% dk_printVar target_arch
 	
 	::###### target_env ######
 	if not defined target_env (set "target_env=clang")
-	%dk_call% dk_printVar target_env
 	
 	::###### target_triple ######
 	if not defined target_triple (set "target_triple=%target_os%_%target_arch%_%target_env%")
 	set "%target_triple%=1"
-	%dk_call% dk_printVar target_triple
 	
 	::###### MSYSTEM ######
 	::if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="x86"    set "MSYSTEM=CLANG32"
@@ -115,7 +111,6 @@ if "%~1" == "" (goto :dk_install)
 	::if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="arm64"  set "MSYSTEM=CLANGARM64"
 	::if not defined MSYSTEM  if "%target_env%"=="gcc"   if "%target_arch%"=="x86"    set "MSYSTEM=MINGW32"
 	::if not defined MSYSTEM  if "%target_env%"=="gcc"   if "%target_arch%"=="x86_64" set "MSYSTEM=MINGW64"
-	::%dk_call% dk_printVar MSYSTEM
 
 	::###### DK_CXX_COMPILER ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
@@ -129,7 +124,6 @@ if "%~1" == "" (goto :dk_install)
 	if "%target_env%"=="clang"  	(set "DK_CXX_COMPILER=%CLANG_CXX_COMPILER%")
 	if "%target_env%"=="gcc"	  	(set "DK_CXX_COMPILER=%GCC_CXX_COMPILER%")
 	%dk_call% dk_assertVar DK_CXX_COMPILER
-	%dk_call% dk_printVar DK_CXX_COMPILER
 
 	%dk_call% dk_registryDeleteKey "HKCR/DKCpp"
 	ftype DKCpp=%COMSPEC% /v:on /k call "%~f0" "%DK_CXX_COMPILER%" "%%1" %%*

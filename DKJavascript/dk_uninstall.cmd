@@ -4,9 +4,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 :dk_uninstall
 	ftype DKJavascript=
-	%dk_call% dk_registryDeleteKey "HKCR\DKJavascript"
+	%dk_call% dk_registryDeleteKey "HKCR/DKJavascript"
 	
 	assoc .js=
-	%dk_call% dk_registryDeleteKey "HKCR\.js"
-	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js"
+	%dk_call% dk_registryDeleteKey "HKCR/.js"
+	%dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.js"
 %endfunction%

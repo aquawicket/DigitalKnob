@@ -13,7 +13,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_set NASM_DL "https://github.com/microsoft/vcpkg/files/12073957/nasm-2.16.01-win64.zip"
 	
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	::%dk_call% dk_printVar DK3RDPARTY_DIR
 	%dk_call% dk_importVariables %NASM_DL% IMPORT_PATH %DKIMPORTS_DIR%\nasm ROOT %DK3RDPARTY_DIR%
 
 ::	%dk_call% dk_basename %NASM_DL% NASM_DL_FILE
@@ -32,6 +31,5 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	:: TODO
 	
-	%dk_call% dk_printVar NASM
+	::%dk_call% dk_printVar NASM
 %endfunction%
-

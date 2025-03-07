@@ -4,9 +4,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 :dk_uninstall
 	ftype DKCpp=
-	%dk_call% dk_registryDeleteKey "HKCR\DKCpp"
+	%dk_call% dk_registryDeleteKey "HKCR/DKCpp"
 	
 	assoc .cpp=
-	%dk_call% dk_registryDeleteKey "HKCR\.cpp"
-	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp"
+	%dk_call% dk_registryDeleteKey "HKCR/.cpp"
+	%dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.cpp"
 %endfunction%

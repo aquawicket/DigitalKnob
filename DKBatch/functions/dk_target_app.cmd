@@ -32,8 +32,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
         set /a n+=1
         goto loop1 
     :endloop1
-	:: %dk_call% dk_printVar dk_getDirectories
-    :: %dk_call% dk_printVar commands
 
     :: prepend cache selection if available
     if exist "%DKCACHE_DIR%\DKBuilder.cache" if "%_target_app_%" neq "" if "%_target_triple_%" neq "" if "%_target_type_%" neq "" (
@@ -62,9 +60,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     %dk_call% Array::dk_push dk_getDirectories "Exit"
     %dk_call% Array::dk_push commands "%dk_call% dk_exit"
 
-	:: %dk_call% dk_printVar dk_getDirectories
-	:: %dk_call% dk_printVar commands
-	
     ::### Print the dk_getDirectories list ###
     set /a "n=0"
     :loop2

@@ -14,18 +14,18 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :dk_encode
 setlocal
 	%dk_call% dk_debugFunc 1 3
- 
-    set "inputFile=%~1"
+
+	set "inputFile=%~1"
 	if "%~2"=="" (set "outputFile=%inputFile%.b64") else (set "outputFile=%~2")
 	if "%~3"=="OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
-    
-    if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
-    if exist "%outputFile%" (%dk_call% dk_error "%outputFile% already exists and cannot be overwritten")
-    
-    certutil -encode -f "%inputFile:/=\%" "%outputFile:/=\%.tmp" 1>nul
-	
-    type "%outputFile:/=\%.tmp"|find /v "CERTIFICATE-----">"%outputFile:/=\%"
-    del "%outputFile:/=\%.tmp"
+
+	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
+	if exist "%outputFile%" (%dk_call% dk_error "%outputFile% already exists and cannot be overwritten")
+
+	certutil -encode -f "%inputFile:/=\%" "%outputFile:/=\%.tmp" 1>nul
+
+	type "%outputFile:/=\%.tmp"|find /v "CERTIFICATE-----">"%outputFile:/=\%"
+	del "%outputFile:/=\%.tmp"
 %endfunction%
 
 
@@ -37,7 +37,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_selectFile
-    %dk_call% Base64::dk_encode "%dk_selectFile%"
-
+	%dk_call% dk_selectFile
+	%dk_call% Base64::dk_encode "%dk_selectFile%"
 %endfunction%

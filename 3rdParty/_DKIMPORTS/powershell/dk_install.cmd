@@ -34,7 +34,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		if NOT exist "%POWERSHELL_EXE%" (%dk_call% dk_error "cannot find pwsh.exe")
 	:powershell_installed
 	
-	
 	::### Add File Associations ###
 	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	::%dk_call% "%DKIMPORTS_DIR%\powershell\dk_installPowershellFileAssociations.cmd"
@@ -42,7 +41,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :: install via CMake
 ::	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 ::	%dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/powershell/DKMAKE.cmake)" "POWERSHELL_EXE"
-::	%dk_call% dk_printVar POWERSHELL_EXE
 
 	::%dk_call% dk_checkError
 %endfunction%

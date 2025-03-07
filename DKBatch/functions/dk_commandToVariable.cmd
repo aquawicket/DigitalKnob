@@ -79,7 +79,7 @@ setlocal
 	%dk_call% dk_printVar dk_commandToVariable
 	%dk_call% dk_printVar RTNVAR
 	
-	%dk_call% dk_set myCommand "%USERPROFILE%\.dk\DKC_BUILD_DIR\dk_test.exe" "var one" "var two" "var three"
+	%dk_call% dk_set myCommand ""%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three""
     %dk_call% dk_commandToVariable "%myCommand%"
 	%dk_call% dk_printVar dk_commandToVariable
 %endfunction%

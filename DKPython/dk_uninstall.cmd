@@ -4,9 +4,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 :dk_uninstall
 	ftype DKPython=
-	%dk_call% dk_registryDeleteKey "HKCR\DKPython"
+	%dk_call% dk_registryDeleteKey "HKCR/DKPython"
 	
 	assoc .py=
-	%dk_call% dk_registryDeleteKey "HKCR\.py"
-	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.py"
+	%dk_call% dk_registryDeleteKey "HKCR/.py"
+	%dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.py"
 %endfunction%

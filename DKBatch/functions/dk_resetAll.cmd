@@ -29,8 +29,6 @@ setlocal
         %dk_call% dk_echo "WARNING: this file isn't running from the branch directory"
         %dk_call% dk_echo "Is must be in the branch directory to continue."
         %dk_call% dk_echo "%clr%"
-        %dk_call% dk_printVar DKSCRIPT_DIR
-        %dk_call% dk_printVar DKBRANCH_DIR
         %return%
     )
     

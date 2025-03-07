@@ -14,12 +14,6 @@ if "%~1" == "" (goto dk_install)
 		echo ERROR:%ERRORLEVEL%
 		pause
 	)
-	
-	::###### reload ######
-::	if not exist %~dp0\reload (goto:eof)
-::	del %~dp0\reload
-::	cls
-::	goto runDKPhp
 %endfunction%
 
 
@@ -51,18 +45,18 @@ if "%~1" == "" (goto dk_install)
 	::###### Install DKPhp ######
 	%dk_call% dk_echo "Installing DKPhp . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate PHP_EXE "call %DKIMPORTS_DIR%\php\dk_install.cmd"
+	%dk_call% dk_validate PHP_EXE "%dk_call% %DKIMPORTS_DIR%/php/dk_install.cmd"
 	%dk_call% dk_validate PHP_EXE "%dk_call% dk_PHP_EXE"
 	
 	
-	%dk_call% dk_registryDeleteKey "HKCR\DKPhp"
+	%dk_call% dk_registryDeleteKey "HKCR/DKPhp"
 	
 ::	%dk_call% dk_validate COMSPEC "%dk_call% dk_COMSPEC"
 	ftype DKPhp=%COMSPEC% /V:ON /K call "%~f0" "%DKPHP_FUNCTIONS_DIR%" "%PHP_EXE%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR\DKPhp\DefaultIcon" "" "REG_SZ" "%PHP_EXE%"
+	%dk_call% dk_registrySetKey "HKCR/DKPhp/DefaultIcon" "" "REG_SZ" "%PHP_EXE%"
 	
-	%dk_call% dk_registryDeleteKey "HKCR\.php"
-	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.php"
+	%dk_call% dk_registryDeleteKey "HKCR/.php"
+	%dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.php"
 	assoc .php=DKPhp
 	
 	%dk_call% dk_success "DKPhp install complete"
