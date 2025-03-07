@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include_guard()
 
 if(NOT DEFINED PAUSE_ON_EXIT) 
-	set(PAUSE_ON_EXIT 1 CACHE INTERNAL "")
+	set(PAUSE_ON_EXIT 0 CACHE INTERNAL "")
 endif()
 ###############################################################################
 # dk_exit(exit_code)
