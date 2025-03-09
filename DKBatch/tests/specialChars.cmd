@@ -1,6 +1,6 @@
 @echo off
 setlocal
-call :setVar (^.*)(Form Product=")([^"]*") FormType="[^"]*" FormID="([0-9][0-9]*)".*$
+::call :setVar (^.*)(Form Product=")([^"]*") FormType="[^"]*" FormID="([0-9][0-9]*)".*$
 call :setVar "' ` ( ) ! \ / [ ] . ^ , ; = ? | < > & * ~ @ $ % ^ { } - _ "
 ::call :setVar "' ` ( ) ! \ / [ ] . ^ , ; = ? | < > & * ~ @ $ % ^ # { } - _ #"
 
@@ -17,12 +17,10 @@ goto :eof
 	for /f "usebackq tokens=* delims=" %%G in (`findstr /B /c:"call :setVar " "%~f0"`) do (
 		set "str=%%G"
 	)
-
 	setLocal EnableDelayedExpansion
 	set str=!str:call :setVar =!
 	echo !str!
 	set "str=!str:*#=!"
-
 	for /F "delims=" %%A in ("!str!") DO (
 	  endlocal
 	  endlocal
