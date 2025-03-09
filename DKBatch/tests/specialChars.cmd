@@ -1,29 +1,34 @@
 @echo off
 setlocal
-call :setVar result#(^.*)(Form Product=")([^"]*") FormType="[^"]*" FormID="([0-9][0-9]*)".*$
+call :setVar (^.*)(Form Product=")([^"]*") FormType="[^"]*" FormID="([0-9][0-9]*)".*$
+call :setVar "' ` ( ) ! \ / [ ] . ^ , ; = ? | < > & * ~ @ $ % ^ { } - _ "
+::call :setVar "' ` ( ) ! \ / [ ] . ^ , ; = ? | < > & * ~ @ $ % ^ # { } - _ #"
 
-call :setVar result
 setLocal EnableDelayedExpansion
-echo setVar =  !setVar!
+echo setVar = '!setVar!'
 pause
 goto :eof
 
+
+
+:: Search the own batch file for <searchName> in a line with "call :setVar "
 :setVar <resultVar> <searchName>
-:: Search the own batch file for <searchName> in a line with "REM <searchName>#"
-:: Return all after the "#" without any modification
-setLocal DisableDelayedExpansion
-for /f "usebackq tokens=* delims=" %%G in (`findstr /n /c:"call :setVar %~1#" "%~f0"`) do (
-    set "str=%%G"
-)
-setLocal EnableDelayedExpansion
-set "str=!str:*#=!"
+	setLocal DisableDelayedExpansion
+	for /f "usebackq tokens=* delims=" %%G in (`findstr /B /c:"call :setVar " "%~f0"`) do (
+		set "str=%%G"
+	)
 
-for /F "delims=" %%A in ("!str!") DO (
-  endlocal
-  endlocal
-  set "setVar=%%A"
-  goto :eof
-)
+	setLocal EnableDelayedExpansion
+	set str=!str:call :setVar =!
+	echo !str!
+	set "str=!str:*#=!"
 
-pause
+	for /F "delims=" %%A in ("!str!") DO (
+	  endlocal
+	  endlocal
+	  set "setVar=%%A"
+	  goto :eof
+	)
+
+	pause
 goto :eof
