@@ -33,15 +33,11 @@ set DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo 
 
 :main
 setlocal enableDelayedExpansion
-
-
 	::setlocal disableDelayedExpansion
 	::call setVariable complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? %"
 	
-	::%setVar% complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? " & setlocal enableDelayedExpansion
-	::setlocal enableDelayedExpansion & call setVariable complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? " & setlocal enableDelayedExpansion
-	::setlocal disableDelayedExpansion & call setVariable complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ?" & setlocal enableDelayedExpansion
-	setlocal disableDelayedExpansion & call setVariable complex "'" "`" "(" ")" "!" "\" "/" "[" "]" "." "^" "," ";" "=" "|" "<" ">" "&" "*" "?" & setlocal enableDelayedExpansion
+	::setlocal disableDelayedExpansion & call setVariable complex "'" "`" "(" ")" "!" "\" "/" "[" "]" "." "^" "," ";" "=" "?" "|" "<" ">" "&" "*" & setlocal enableDelayedExpansion
+	setlocal disableDelayedExpansion & call setVariable complex "' ` ( ) ! \ / [ ] . ^ , ; = ? | < > & *" & setlocal enableDelayedExpansion
 	::setlocal disableDelayedExpansion & call setVariable complex "abc" "123" "x y z"  & setlocal enableDelayedExpansion
 	::%setVar% complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? % " %}%
 	
@@ -53,19 +49,6 @@ setlocal enableDelayedExpansion
 	
 	call printVariable complex
 	
-	echo:
-	echo:
-	%DE_STATUS%
-
-	setlocal disableDelayedExpansion
-	call setVariableB complexB "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? %"
-	::call setVariableB complexB "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? %"
-	
-	%DE_STATUS%
-
-	echo main: complexB = "%complexB%"
-	echo main: complexB = '!complexB!'
-	pause
 %endfunction%
 
 

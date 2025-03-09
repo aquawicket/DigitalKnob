@@ -1,7 +1,7 @@
 @echo off
 if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=../functions/"
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
-if not "%~1"=="" call %~1
+if not "%~1"=="" (call %~1)
 %endfunction%
 
 
@@ -20,7 +20,7 @@ if not "%~1"=="" call %~1
 
 ::1073750990 = Syntax error
 :testC
-	:: TODO
+	A SYNTAX ERROR
 %endfunction%
 
 ::1073750991 = Invalid number
@@ -42,7 +42,6 @@ if not "%~1"=="" call %~1
 :errorFunc
 	%dk_call% dk_debug "test_CatchErrors"
 	A SYNTAX ERROR
-	echo "after error"
 %endfunction%
 
 :noErrorFunc
@@ -53,15 +52,13 @@ if not "%~1"=="" call %~1
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal enableDelayedExpansion
-    %dk_call% dk_debugFunc 0
-	
+	%dk_call% dk_debugFunc 0
+
 	%dk_call% test_CatchErrors :testA
 	%dk_call% test_CatchErrors :testB
 	%dk_call% test_CatchErrors :testC
 	%dk_call% test_CatchErrors :testD
 	%dk_call% test_CatchErrors :testE
 	%dk_call% test_CatchErrors :testF
-	
-
 
 %endfunction%

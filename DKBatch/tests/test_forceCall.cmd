@@ -5,5 +5,4 @@
 	pause
 	
 	test_forceCallB & pause
-	pause
 %endfunction%

@@ -16,6 +16,7 @@
 	::	call echo 0 = %%~0
 	::	echo returned from func2
 	::)
+	pause
 %endfunction%
 
 :func2
@@ -48,6 +49,6 @@
 
 :func5
 	echo :func5 %*
-<:dk_dumpStackReturn <nul call dk_dumpStack
-	echo returned from dk_dumpStack
+<:dk_dumpStackReturn <nul call dk_callstack
+	echo returned from dk_callstack
 %endfunction%

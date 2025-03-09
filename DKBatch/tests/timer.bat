@@ -23,9 +23,9 @@ set macroDiffTime=do^
   ^&(if "!DD:~1!"=="" set "DD=0!DD!")^
   ^&(for %%v in (!HH!:!MM!:!SS!.!DD!) do endlocal^&if "%%~c" neq "" (set %%~c=%%v) else echo %%v)
 
-
+echo starting timer
 %callMacro% ("t1") %macroGetTime%
-ping 127.0.0.1
+ping 127.0.0.1 1>nul
 %callMacro% ("t2") %macroGetTime%
 %callMacro% ("t1 t2 elapsedTime") %macroDiffTime%
 
