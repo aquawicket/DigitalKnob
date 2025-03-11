@@ -9,9 +9,9 @@ include_guard()
 
 
 set(myPath "C:/Users/Administrator/digitalknob/Development/DKPowershell/functions")
-dk_getFiles("${myPath}" files)
+dk_getFiles("${myPath}")
 
-foreach(file ${files})
+foreach(file ${dk_getFiles})
 	#dk_echo("file = ${file}")
 	dk_basename("${file}" func)
 	dk_replaceAll("${func}" ".ps1" "" func)

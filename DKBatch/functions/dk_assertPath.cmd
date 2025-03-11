@@ -8,7 +8,6 @@ set "STRICT_PATHS=1"
 ::#
 :dk_assertPath
 setlocal enableDelayedExpansion
-	::echo dk_assertPath %*
 	%dk_call% dk_debugFunc 0 99
 	
 	::### path from all arguments
@@ -27,8 +26,8 @@ setlocal enableDelayedExpansion
 	(set var=%var:,=%)
 	(set var=%var:;=%)
 	(set var=%var:!=%)
-	(set var=%var:\=%)
-	(set var=%var:\=%)
+	::(set var=%var:\=%)
+	::(set var=%var:\=%)
 	(set var=%var:[=%)
 	(set var=%var:]=%)
 	(set var=%var:.=%)
@@ -40,7 +39,9 @@ setlocal enableDelayedExpansion
 	::TODO: multiply
 	if defined %var% (set value="!%var:"=%!")
 	set value="%value:"=%"
+	echo value = %value%
 	for %%Z in ("%value:"=%") do (set _real_="%%~fZ")
+	echo _real_ = %_real_%
 	
 	if defined STRICT_FORWARD_SLASHES set "_real_=%_real_:\=/%"
 
@@ -53,7 +54,7 @@ setlocal enableDelayedExpansion
 		%dk_call% dk_echo "ASSERTION: dk_assertPath path:'%value:"=%' path mismatch%clr%"
 	)
 	
-	if exist "%value:"=%"	(
+	if exist "%value:"=%" (
 		if defined %var% (echo %green% %var%:%value% %clr%) else (echo %green% %* %clr%)
 		%return%
 	)
@@ -74,6 +75,7 @@ setlocal
 	::###### THES SHOULD ALL BE FOUND ######
 	
 	::### Quotes ###
+	%dk_call% dk_assertPath "C:/"		&::OK
 	::# existing path w/ foward slashes
 	%dk_call% dk_assertPath "C:/Program Files/Common Files"		&::OK
 	::# existing path w/ trailing forwardslash

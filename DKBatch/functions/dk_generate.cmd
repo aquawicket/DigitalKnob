@@ -17,12 +17,12 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     %dk_call% dk_echo
 
 	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
-    set "TARGET_PATH=%DKCPP_APPS_DIR%\%target_app%"
-    if not exist "%TARGET_PATH%\%target_triple%"   %dk_call% dk_makeDirectory "%TARGET_PATH%\%target_triple%"
+    set "TARGET_PATH=%DKCPP_APPS_DIR%/%target_app%"
+    if not exist "%TARGET_PATH%/%target_triple%"   %dk_call% dk_makeDirectory "%TARGET_PATH%\%target_triple%"
 	
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
-    set "CMAKE_SOURCE_DIR=!DKCMAKE_DIR:\=/!"
-    set "CMAKE_TARGET_PATH=!TARGET_PATH:\=/!"
+    set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
+    set "CMAKE_TARGET_PATH=%TARGET_PATH%"
 
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set "target_level=RebuildAll"
@@ -149,18 +149,16 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::  fi
 	::if defined WSL_EXE (
 	::	%dk_call% dk_replaceAll "!CMAKE_ARGS!" "C:" "/mnt/c" WSL_CMAKE_ARGS
-	::	%dk_call% dk_replaceAll "!WSL_CMAKE_ARGS!" "\" "/" WSL_CMAKE_ARGS
 	::)
 
 	::###### linux_x86_64 (WSL) ######
 	if defined WSL_EXE (%dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR)
-	if defined WSL_EXE (%dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "\" "/" DKSCRIPT_DIR)
-	if defined WSL_EXE %WSL_EXE% sh -c "export UPDATE=1 && export target_app=%target_app% && export target_triple=%target_triple% && export target_type=%target_type% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
+	if defined WSL_EXE %WSL_EXE% sh -c "export UPDATE=1 && export target_app=%target_app% && export target_triple=%target_triple% && export target_type=%target_type% && %DKSCRIPT_DIR:\=/%/DKBuilder.sh && exit $(true)"
 	if defined WSL_EXE (%return%)
 
 	::###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_install.cmd"
+    if not defined CMAKE_EXE call "%DKIMPORTS_DIR%/cmake/dk_install.cmd"
 
 	::###### Delete Cmake Cache files ######
 	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"

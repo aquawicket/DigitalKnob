@@ -14,7 +14,8 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_assertPath "%_path_%"
 
 	set /a "n=0"
-	for %%a in ("%_path_%\*") do (
+	for %%a in ("%_path_:/=\%\*") do (
+		echo %%a
 		set "temp=%%a"
 		set "dk_getFiles[!n!]=!temp:\=/!"
 		set /a "n+=1"
@@ -26,9 +27,6 @@ setlocal enableDelayedExpansion
 		if defined currentScope endlocal
 		set "%%b"
 	)
-
-::	DEBUG
-::	%dk_call% dk_printVar %~1
 %endfunction%
 
 
@@ -42,7 +40,7 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_getFiles "C:"
+	%dk_call% dk_getFiles "C:/"
 	%dk_call% dk_printVar dk_getFiles
 	%dk_call% Array::dk_length dk_getFiles
 	%dk_call% dk_echo "files %dk_length%"

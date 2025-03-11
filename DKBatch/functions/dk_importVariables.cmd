@@ -51,7 +51,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	set "IMPORT_PATH="
 	%dk_call% dk_getOptionValue  IMPORT_PATH %* 	&rem C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
-	set "IMPORT_PATH=%IMPORT_PATH:\=/%"
+	if defined IMPORT_PATH (set "IMPORT_PATH=%IMPORT_PATH:\=/%")
 	rem %dk_call% dk_printVar IMPORT_PATH
 	
 	set "BRANCH="
@@ -338,7 +338,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 
 	rem ### CURRENT_PLUGIN
 	set "CURRENT_PLUGIN="
-	%dk_call% dk_set CURRENT_PLUGIN !PLUGIN_IMPORT_NAME_UPPER! 
+	%dk_call% dk_set CURRENT_PLUGIN !PLUGIN_IMPORT_NAME_UPPER!
 	%dk_call% dk_convertToCIdentifier !CURRENT_PLUGIN! CURRENT_PLUGIN 
 	if not "!PLUGIN_IMPORT_NAME_UPPER!" == "!CURRENT_PLUGIN!" (
 		%dk_call% dk_notice "!PLUGIN_IMPORT_NAME_UPPER! contains non-alphanumeric characters and is changed to !CURRENT_PLUGIN!" 
@@ -352,7 +352,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	
 	rem ### <PLUGIN>_DIR     ### DO NOT USE GIT_DIR ###
 	set "!CURRENT_PLUGIN!_DIR="
-	if "!CURRENT_PLUGIN!" neq "GIT" ( 
+	if not "!CURRENT_PLUGIN!"=="GIT" ( 
 		%dk_call% dk_set !CURRENT_PLUGIN!_DIR !PLUGIN_INSTALL_PATH! 
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DIR 							& rem ZLIB_DIR				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	)

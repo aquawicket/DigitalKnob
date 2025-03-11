@@ -22,9 +22,6 @@ setlocal
        goto length_loop 
     )
     endlocal & set "dk_length=%dk_length%"
-	
-::debug	
-::	%dk_call% dk_printVar %2
 %endfunction%
 
 

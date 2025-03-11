@@ -2,17 +2,17 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::###### SETTINGS ######
-::(set "printCalls=1") 
-::(set "printEntry=1")
-::(set "printExit=1")
-::(set "_IGNORE_=dk_debugFunc;dk_echo;")
+::(set "dk_call_PRINTCALLS=1") 
+(set "dk_call_PRINTENTRY=1")
+(set "dk_call_PRINTEXIT=1")
+::(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 
 
 ::####################################################################
 ::# dk_call(command args)
 ::#
 :dk_call
-	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
+	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13)
 	
 	:: don't add these functions to the callstack, just call them
 	if "%~1"=="init"				(call :%* & exit /b !errorlevel!)
@@ -32,11 +32,10 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	if defined __ARGV__ (set __ARGV__=!__ARGV__:*%1=!)
 
 	::TODO - use dk_getFileLine to add the file line to the stack entry
-
 	call :pushStack %*
 
 	::###### Print function entry ####
-	if defined printEntry (call :printEntry)
+	if defined dk_call_PRINTENTRY (call :dk_call_PRINTENTRY)
 
 	if %LVL% lss 1 (exit /b !errorlevel!)
 
@@ -53,7 +52,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	)
 
 ::###### Entry ############################################################################################
-	if defined printCalls (echo dk_call ^> %__CMND__% !__ARGV__!)
+	if defined dk_call_PRINTCALLS (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__% %__ARGV__% && (
 		(set "exit_code=!errorlevel!")
@@ -65,7 +64,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::###### Exit #############################################################################################
 
 	::###### Print function exit ######
-	if defined printExit (call :printExit)
+	if defined dk_call_PRINTEXIT (call :dk_call_PRINTEXIT)
 
 	call :popStack
 exit /b %exit_code%
@@ -138,10 +137,10 @@ exit /b !errorlevel!
 exit /b !errorlevel!
 
 ::####################################################################
-::# :printEntry
+::# :dk_call_PRINTENTRY
 ::#
-:printEntry
-	if defined _IGNORE_ if not "X!_IGNORE_:%__FUNC__%=!X"=="X%_IGNORE_%X" (%endfunction%)
+:dk_call_PRINTENTRY
+	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X"=="X%dk_call_IGNORE%X" (%endfunction%)
 	call :updateIndent
 
 ::	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
@@ -154,10 +153,10 @@ exit /b !errorlevel!
 exit /b !errorlevel!
 
 ::####################################################################
-::# :printExit
+::# :dk_call_PRINTEXIT
 ::#
-:printExit
-	if defined _IGNORE_ if not "X!_IGNORE_:%__FUNC__%=!X"=="X%_IGNORE_%X" (%endfunction%)
+:dk_call_PRINTEXIT
+	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X"=="X%dk_call_IGNORE%X" (%endfunction%)
 	call :updateIndent
 	::echo %pad% !__FUNC__!(!__ARGV__!)
 	::echo %pad%
