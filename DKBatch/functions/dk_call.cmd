@@ -3,8 +3,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::###### SETTINGS ######
 ::(set "dk_call_PRINTCALLS=1") 
-(set "dk_call_PRINTENTRY=1")
-(set "dk_call_PRINTEXIT=1")
+::(set "dk_call_PRINTENTRY=1")
+::(set "dk_call_PRINTEXIT=1")
 ::(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 
 
