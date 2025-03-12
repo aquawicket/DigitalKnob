@@ -2,33 +2,37 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::dk_findProgram(<VAR> name [path1 path2 ...])
+::dk_findProgram(<var> name [path1 path2 ...])
 ::#
 ::#
 :dk_findProgram
 setlocal enableDelayedExpansion
-    %dk_call% dk_debugFunc 2 9 
- 
-    set "VAR=%~1"
-    set "VAL=!%VAR%!"
-	if exist "%VAL%" %dk_call% dk_debug "already FOUND %VAR% at %VAL%" && %return%
-	
-	set "name=%~2"
-	if "%~3" neq "" (
-		set "pattern=%~3"
-		set "pattern=!pattern:/=\!"
-		set "recursive=/R"
-	) else (
-		set "pattern="
-		set "recursive="
+	%dk_call% dk_debugFunc 2 9 
+
+	set "_var_=%~1
+	set "_val_=!%_var_%!"
+	if exist "%_val_%" (
+		%dk_call% dk_notice "%_var_% already found at %_val_%"
+		%return%
 	)
-    
-	%dk_call% dk_commandToVariable where %recursive% %pattern% %name%
-	
-    endlocal & (
-		rem set "dk_findProgram=%dk_commandToVariable%"
-		set "%~1=%dk_commandToVariable:\=/%"
-		%dk_call% dk_assertPath "%~1"
+	set "_filename_=%~2"
+	set "_pattern_=%~3"
+	set "_recursive_="
+	if defined _pattern_ (
+		set "_pattern_=%_pattern_:/=\%"
+		set "_recursive_=/R"
+	)
+
+	%dk_call% dk_commandToVariable where %_recursive_% %_pattern_% %_filename_%
+	if defined dk_commandToVariable (
+		%dk_call% dk_assertPath %dk_commandToVariable:\=/%
+		set "dk_findProgram=%dk_commandToVariable:\=/%"
+	) else (
+		%dk_call% dk_error "dk_findProgram: %_filename_% not found"
+	)
+		
+	endlocal & (
+		set "%~1=%dk_findProgram%"
 	)
 %endfunction%
 
@@ -42,14 +46,16 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
-    %dk_call% dk_printVar POWERSHELL_EXE
-    
-    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-    %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_printVar PWSH_EXE
+	
+	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
+	%dk_call% dk_printVar POWERSHELL_EXE
 	
 	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "C:/Windows/System32"
 	%dk_call% dk_printVar CMD_EXE
+	
 	%dk_call% dk_findProgram CMD_EXE "cmd.exe"
 	%dk_call% dk_printVar CMD_EXE
 %endfunction%
