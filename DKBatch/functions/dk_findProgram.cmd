@@ -1,11 +1,10 @@
 @echo off
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
-set return_error=endlocal ^& call dk_returnError
+
 ::################################################################################
-::dk_findProgram(<var> name [path1 path2 ...])
-::#
-::#
+:: dk_findProgram(<var> name [path1 path2 ...])
+::
 :dk_findProgram
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2 9
@@ -13,8 +12,7 @@ setlocal enableDelayedExpansion
 	set "_var_=%~1
 	set "_val_=!%_var_%!"
 	if exist "%_val_%" (
-		%dk_call% dk_notice "%_var_% already found at %_val_%"
-		%return%
+		dk_returnError "dk_findProgram: %_var_% already set"
 	)
 	set "_filename_=%~2"
 	set "_pattern_=%~3"
@@ -29,9 +27,7 @@ setlocal enableDelayedExpansion
 		%dk_call% dk_assertPath %dk_commandToVariable:\=/%
 		set "dk_findProgram=%dk_commandToVariable:\=/%"
 	) else (
-		rem endlocal & %dk_call% dk_returnError "dk_findProgram: %_filename_% not found" & exit /b 1
-		::%return_error% "dk_findProgram: %_filename_% not found"
-		call dk_returnError "test"
+		dk_returnError "dk_findProgram: %_filename_% not found"
 	)
 
 	endlocal & (
@@ -53,17 +49,19 @@ setlocal enableDelayedExpansion
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0
 	
-	
+
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%" || echo %red%LAST_ERROR = %LAST_ERROR%!LAST_ERROR!%clr%
+	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 	%dk_call% dk_printVar PWSH_EXE
-	
-	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" || echo %red%LAST_ERROR = %LAST_ERROR%!LAST_ERROR!%clr%
+
+	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
 	%dk_call% dk_printVar POWERSHELL_EXE
-	
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "C:/Windows/System32" || echo %red%LAST_ERROR = %LAST_ERROR%!LAST_ERROR!%clr%
+
+	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "C:/Windows/System32"
+	%dk_call% dk_printVar CMD_EXE
+
+	%dk_call% dk_findProgram CMD_EXE "cmd.exe"
 	%dk_call% dk_printVar CMD_EXE
 	
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe" || echo %red%LAST_ERROR = %LAST_ERROR%!LAST_ERROR!%clr%
-	%dk_call% dk_printVar CMD_EXE
+	%dk_call% dk_printLastError
 %endfunction%
