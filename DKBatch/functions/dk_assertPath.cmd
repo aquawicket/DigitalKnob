@@ -38,7 +38,7 @@ setlocal enableDelayedExpansion
 		%return%
 	)
 
-	echo %green% %_var_%:%_val_% %clr%
+	::%dk_call% dk_debug "dk_assertPath %_var_% = %_val_%"
 %endfunction%
 
 
