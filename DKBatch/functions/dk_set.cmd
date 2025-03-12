@@ -9,13 +9,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal enableDelayedExpansion
 ::	%dk_call% dk_debugFunc 2 99
 
-	::echo:
 	set _name_=%~1
-	::echo _name_ = %_name_%
-	
 	set "_args_=%*"
-	set "_args_=!_args_:%~1=!"
-	::echo _args_ = %_args_%
+	set "_args_=!_args_:*%1=!"
 	
 	set /a "_argc_=0"
 	for %%Z in (%_args_%) do (
@@ -24,10 +20,6 @@ setlocal enableDelayedExpansion
 	if "%_argc_%"=="1" (
 		for %%Z in (%_args_%) do set _args_=%%~Z
 	)
-	::echo _argc_ = %_argc_%
-	::if [%_args_:~-1%"]==["] set "_args_=%_args_:~0,-1%"
-	
-	::echo _args_ = %_args_%
 	
 	endlocal & (set "%~1=%_args_%")
 
@@ -43,21 +35,22 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_set myVar word
-	echo myVar = %myVar%
-    ::%dk_call% dk_echo "myVar = %myVar%"
+::	%dk_call% dk_set myVar word
+::	echo myVar = %myVar%
+::	%dk_call% dk_echo "myVar = %myVar%"
 	
-    %dk_call% dk_set myVar "words in quotes"
-	echo myVar = %myVar%
-    ::%dk_call% dk_echo "myVar = %myVar%"
+::  %dk_call% dk_set myVar "words in quotes"
+::	echo myVar = %myVar%
+::	%dk_call% dk_echo "myVar = %myVar%"
 	
-	%dk_call% dk_set myVar words without quotes
-	echo myVar = %myVar%
-    ::%dk_call% dk_echo "myVar = %myVar%"
+::	%dk_call% dk_set myVar words without quotes
+::	echo myVar = %myVar%
+::	%dk_call% dk_echo "myVar = %myVar%"
+
+::	%dk_call% dk_set myVarB "dk_info('test dk_info message')"
+::	echo myVar = %myVar%
+::	%dk_call% dk_echo "myVarB = %myVarB%"
 	
-	
-	
-	%dk_call% dk_set myVarB "dk_info('test dk_info message')"
-	echo myVar = %myVar%
-	::%dk_call% dk_echo "myVarB = %myVarB%"
+	%dk_call% dk_set CMAKE C:/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64
+	echo CMAKE = %CMAKE%
 %endfunction%

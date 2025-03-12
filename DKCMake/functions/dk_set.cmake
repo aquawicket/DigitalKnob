@@ -17,7 +17,8 @@ function(dk_set variable) #, value)
 		dk_fatal("dk_set(${ARGV}): not enough arguments, expected at least 2, got ${ARGC}")
 	endif()
 	
-	set(${ARGV} CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used todo direct cache entry lookups
+	#set(${ARGV} CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used todo direct cache entry lookups
+	set(${ARGV0} "${ARGN}" CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used todo direct cache entry lookups
 	set(ENV{${ARGV0}} "${ARGN}")
 	
 #	dk_printVar(${ARGV0})
