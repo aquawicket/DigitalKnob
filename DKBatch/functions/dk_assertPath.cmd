@@ -39,9 +39,7 @@ setlocal enableDelayedExpansion
 	::TODO: multiply
 	if defined %var% (set value="!%var:"=%!")
 	set value="%value:"=%"
-	echo value = %value%
 	for %%Z in ("%value:"=%") do (set _real_="%%~fZ")
-	echo _real_ = %_real_%
 	
 	if defined STRICT_FORWARD_SLASHES set "_real_=%_real_:\=/%"
 
