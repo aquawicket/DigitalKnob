@@ -8,12 +8,15 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :dk_findProgram
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 2 9
+	echo:
+	echo dk_findProgram %*
 	
 	set "_var_=%~1
 	set "_val_=!%_var_%!"
 	if exist "%_val_%" (
 		dk_returnError "dk_findProgram: %_var_% already set"
 	)
+	
 	set "_filename_=%~2"
 	set "_pattern_=%~3"
 	set "_recursive_="
@@ -33,6 +36,7 @@ setlocal enableDelayedExpansion
 	endlocal & (
 		set "%~1=%dk_findProgram%"
 	)
+	
 %endfunction%
 
 
@@ -51,17 +55,16 @@ setlocal enableDelayedExpansion
 	
 
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar PWSH_EXE
 
-	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
+	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar POWERSHELL_EXE
 
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "C:/Windows/System32"
+	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "C:/Windows/System32" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar CMD_EXE
 
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe"
+	%dk_call% dk_findProgram CMD_EXE "cmd.exe" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar CMD_EXE
-	
-	%dk_call% dk_printLastError
+
 %endfunction%

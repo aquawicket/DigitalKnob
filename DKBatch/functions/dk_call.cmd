@@ -55,10 +55,10 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	if defined dk_call_PRINTCALLS (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__% %__ARGV__% && (
-		(set "exit_code=!errorlevel!")
+		(set "LAST_ERROR_STATUS=!errorlevel!")
 		(set "exit_bool=0")
 	) || (
-		(set "exit_code=!errorlevel!")
+		(set "LAST_ERROR_STATUS=!errorlevel!")
 		(set "exit_bool=1")
 	)
 ::###### Exit #############################################################################################
@@ -67,7 +67,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	if defined dk_call_PRINTEXIT (call :dk_call_PRINTEXIT)
 
 	call :popStack
-exit /b %exit_code%
+exit /b %LAST_ERROR_STATUS%
 
 
 
