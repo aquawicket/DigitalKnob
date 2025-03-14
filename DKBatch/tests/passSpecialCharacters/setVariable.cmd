@@ -14,7 +14,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		echo %~1 %%~x
 		call :setargs %1 %%x
 	)
-	endlocal & %DE_STATUS%
+	endlocal & %PRINT_DE_STATUS%
 	pause
 	goto :end
 	:setargs

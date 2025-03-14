@@ -23,11 +23,10 @@ if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 	::### Print DKSHELL DKSHELL_VERSION ###
 	echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
 
-	::###### Print DE_STATUS #####
-	set DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
-	%DE_STATUS%
+	::###### PRINT_DE_STATUS #####
+	set PRINT_DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
+	%PRINT_DE_STATUS%
 
-	::###### DKBATCH_FUNCTIONS_DIR_ ######
 	if not defined DKBATCH_FUNCTIONS_DIR_	(set "DKBATCH_FUNCTIONS_DIR_=%~dp0")
 	if defined DKBATCH_FUNCTIONS_DIR_		(set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:\=/%")
 
@@ -63,14 +62,13 @@ if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 	::echo DKCACHE_DIR = %DKCACHE_DIR%
 
 	::###### Reload Main Script with cmd ######
-	call :dk_reload 
+	call :dk_reload
 	if not "!DE!"=="" (
 		echo ERROR: DKBatch requires delayed expansion
 		pause
 		exit 13
 	)
 
-	::call :dk_DKBATCH_VARS
 	call :dk_DKHTTP_VARS
 
 	::############ get dk_source and dk_call ######
@@ -120,6 +118,8 @@ if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 	echo %~1
 %endfunction%
 
+
+
 ::##################################################################################
 ::# dk_DKSCRIPT_PATH
 ::#
@@ -127,7 +127,7 @@ if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 	if not defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
 	if defined DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist & exit /b -1)
-exit /b %errorlevel%
+%endfunction%
 
 ::##################################################################################
 ::# dk_DKSCRIPT_ARGS
@@ -135,7 +135,7 @@ exit /b %errorlevel%
 :dk_DKSCRIPT_ARGS
 	if not defined DKSCRIPT_ARGS	(set DKSCRIPT_ARGS=%*)
 	if defined DKSCRIPT_ARGS		(call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%~1 =%%")
-exit /b %errorlevel%
+%endfunction%
 
 ::##################################################################################
 ::# dk_DKSCRIPT_FILE
@@ -170,9 +170,9 @@ exit /b %errorlevel%
 ::# dk_DKSCRIPT_EXT
 ::#
 :dk_DKSCRIPT_EXT
-	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1)
+	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
 	if not defined DKSCRIPT_EXT		(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ")
-	if not defined DKSCRIPT_EXT		(echo DKSCRIPT_EXT:%DKSCRIPT_EXT% not defined & pause & exit 1)
+	if not defined DKSCRIPT_EXT		(echo DKSCRIPT_EXT:%DKSCRIPT_EXT% not defined & pause & exit -1)
 %endfunction%
 
 ::##################################################################################
@@ -180,31 +180,12 @@ exit /b %errorlevel%
 ::#
 :dk_DKCACHE_DIR
 	if not exist "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
-	if not exist "%DKCACHE_DIR%" (mkdir %DKCACHE_DIR%)
+	if not exist "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
 	if exist "%DKCACHE_DIR%" (
 		if "%DKSCRIPT_NAME%"=="DKBuilder" (
 			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul)
 		)
 	)
-%endfunction%
-
-::##################################################################################
-::# dk_DKBATCH_VARS
-::#
-:dk_DKBATCH_VARS
-	if not exist	"%DKBATCH_DIR%"			(for %%Z in ("%DKF%") do set "DKBATCH_DIR=%%~dpZ")
-	if not exist	"%DKBATCH_DIR%"			(for %%Z in ("%~dp0") do set "DKBATCH_DIR=%%~dpZ")
-	if exist		"%DKBATCH_DIR%"			(set "DKBATCH_DIR=%DKBATCH_DIR:\=/%")
-	if "%DKBATCH_DIR:~-1%"=="/"				(set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%")
-
-	if not exist "%DKBATCH_DIR%"			(echo ERROR: DKBATCH_DIR:%DKBATCH_DIR% does not exist & pause & exit 1)
-
-	if not exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%/functions")
-	if not exist "%DKBATCH_FUNCTIONS_DIR%"	(echo ERROR: DKBATCH_FUNCTIONS_DIR:%DKBATCH_FUNCTIONS_DIR% does not exist & pause & exit 1)
-
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%/")
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%"	(echo ERROR: DKBATCH_FUNCTIONS_DIR_:%DKBATCH_FUNCTIONS_DIR_% does not exist & pause & exit 1)
-	if exist "%DKBATCH_FUNCTIONS_DIR%"		(set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%")
 %endfunction%
 
 ::##################################################################################
@@ -230,8 +211,8 @@ exit /b %errorlevel%
 ::# dk_reload
 ::#
 :dk_reload
-	if not "%DKSCRIPT_EXT%"==".cmd" (exit /b 0)
-	if defined RELOADED (exit /b 0)
+	if not "%DKSCRIPT_EXT%"==".cmd" (exit /b -1)
+	if defined RELOADED (exit /b -1)
 
 	echo "reloading with /v:on 'delayed expansion',  /k 'keep terminal open' . . . ."
 	set "RELOADED=1"
