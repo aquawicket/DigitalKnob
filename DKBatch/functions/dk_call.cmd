@@ -28,7 +28,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	(set __FILE__=%~dpnx1)
 	(set __FILE__=%__FILE__:\=/%)
 	(set __FUNC__=%~n1)
-	 set __ARGV__=%*
+	set __ARGV__=%*
 	if defined __ARGV__ (set __ARGV__=!__ARGV__:*%1=!)
 
 	::TODO - use dk_getFileLine to add the file line to the stack entry
@@ -42,7 +42,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::##### Prepair ###########################################################################################
 	if exist "%__CMND__%.cmd" (set __CMND__=%__CMND__%.cmd)
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd)
-	
+
 	if not exist "%__CMND__%" (
 		call dk_source "%__CMND__%"
 		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%%__FUNC__%.cmd" echo [31m ERROR: failed to download %__CMND__%.cmd [0m & %return%
