@@ -5,8 +5,8 @@
 #include "DK.h"
 #include "dk_color.h"
 
-#ifndef ENABLE_dk_log
-	#define ENABLE_dk_log 1
+#ifndef dk_log_ENABLE
+	#define dk_log_ENABLE 1
 #endif
 
 //  0 VERBOSE    dk_verbose
@@ -291,7 +291,7 @@
 #include "dk_echo.h"
 int v_dk_log(int level, const char* format, va_list args) {
 		
-	#if ENABLE_dk_log != 1
+	#if dk_log_ENABLE != 1
 		return 1;
 	#endif
 	

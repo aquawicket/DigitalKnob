@@ -2,7 +2,7 @@
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
-dk_if(NOT DEFINED ENABLE_dk_log [[ set(ENABLE_dk_log  1				CACHE INTERNAL "") ]])
+dk_if(NOT DEFINED dk_log_ENABLE [[ set(dk_log_ENABLE  1				CACHE INTERNAL "") ]])
 dk_if(NOT DEFINED NOHALT_dk_log	[[ set(NOHALT_dk_log 1				CACHE INTERNAL "") ]])
 # 0 VERBOSE    dk_verbose
 # 1 DEBUG      dk_debug
@@ -27,7 +27,7 @@ dk_if(NOT DEFINED DEFAULT_LINE    [[ set(DEFAULT_LINE   	0               CACHE I
 dk_if(NOT DEFINED DEFAULT_HALT    [[ set(DEFAULT_HALT   	0				CACHE INTERNAL '') ]]) 
 
 # VERBOSE
-dk_if(NOT DEFINED VERBOSE_ENABLE  [[ set(VERBOSE_ENABLE 	1				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_VERBOSE_ENABLE  [[ set(dk_log_VERBOSE_ENABLE 	1				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED VERBOSE_COLOR   [[ set(VERBOSE_COLOR  	"${magenta}" 	CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED VERBOSE_TAG     [[ set(VERBOSE_TAG    	"VERBOSE: "  	CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED VERBOSE_PAUSE   [[ set(VERBOSE_PAUSE  	0            	CACHE INTERNAL '') ]])
@@ -147,7 +147,7 @@ function(dk_log)
 	
 	dk_getOption(NO_HALT REMOVE)
 	
-	if(NOT ENABLE_dk_log)
+	if(NOT dk_log_ENABLE)
 		dk_return()
 	endif()
 	

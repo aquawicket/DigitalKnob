@@ -3,8 +3,8 @@ sys.path.append(".")
 from DK import *
 
 from dk_echo import *
-try: ENABLE_dk_log
-except NameError: ENABLE_dk_log=1
+try: dk_log_ENABLE
+except NameError: dk_log_ENABLE=1
 
 # 0 VERBOSE    dk_verbose
 # 1 DEBUG      dk_debug
@@ -30,7 +30,7 @@ DEFAULT_TAG=""
 
 ### VERBOSE
 VERBOSE="VERBOSE"
-VERBOSE_ENABLE=1
+dk_log_VERBOSE_ENABLE=1
 VERBOSE_COLOR=magenta
 VERBOSE_TAG="VERBOSE: "
 #VERBOSE_PAUSE=1"
@@ -151,7 +151,7 @@ FATAL_HALT=1
 def dk_log(*args):
 #    dk_debugFunc 1 2
 
-    if ENABLE_dk_log != 1:  
+    if dk_log_ENABLE != 1:  
         return 
    
     if len(args) == 1 or args[1] == None:

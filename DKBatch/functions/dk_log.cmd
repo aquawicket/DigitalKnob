@@ -1,7 +1,7 @@
 @echo off
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
-if not defined ENABLE_dk_log	(set "ENABLE_dk_log=1")
+if not defined dk_log_ENABLE	(set "dk_log_ENABLE=1")
 
 ::	0 VERBOSE		dk_verbose
 ::	1 DEBUG			dk_debug
@@ -17,14 +17,14 @@ if not defined ENABLE_dk_log	(set "ENABLE_dk_log=1")
 :: 10 FATAL			dk_fatal
 
 ::### VERBOSE ###
-if not defined VERBOSE_ENABLE		(set "VERBOSE_ENABLE=1")
-if not defined VERBOSE_COLOR		(set "VERBOSE_COLOR=%magenta%")
-if not defined VERBOSE_TAG			(set "VERBOSE_TAG=VERBOSE: ")
-::if not defined VERBOSE_TRACE		(set "VERBOSE_TRACE=0")
-::if not defined VERBOSE_LINE		(set "VERBOSE_LINE=0")
-::if not defined VERBOSE_PAUSE		(set "VERBOSE_PAUSE=0")
-::if not defined VERBOSE_TIMEOUT 	(set "VERBOSE_TIMEOUT=0")
-::if not defined VERBOSE_HALT		(set "VERBOSE_HALT=0")
+if not defined dk_log_VERBOSE_ENABLE	(set "dk_log_VERBOSE_ENABLE=1")
+if not defined VERBOSE_COLOR			(set "VERBOSE_COLOR=%magenta%")
+if not defined VERBOSE_TAG				(set "VERBOSE_TAG=VERBOSE: ")
+::if not defined VERBOSE_TRACE			(set "VERBOSE_TRACE=0")
+::if not defined VERBOSE_LINE			(set "VERBOSE_LINE=0")
+::if not defined VERBOSE_PAUSE			(set "VERBOSE_PAUSE=0")
+::if not defined VERBOSE_TIMEOUT 		(set "VERBOSE_TIMEOUT=0")
+::if not defined VERBOSE_HALT			(set "VERBOSE_HALT=0")
 
 ::### DEBUG ###
 if not defined DEBUG_ENABLE			(set "DEBUG_ENABLE=1")
@@ -154,7 +154,7 @@ if not defined FATAL_TIMEOUT		(set "FATAL_TIMEOUT=9")
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 1 2
 
-    if "%ENABLE_dk_log%" neq "1" (
+    if "%dk_log_ENABLE%" neq "1" (
 		%return%
 	)
 

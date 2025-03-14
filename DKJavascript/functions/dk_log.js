@@ -1,6 +1,6 @@
 dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function(){});
 
-var ENABLE_dk_log = 1;
+var dk_log_ENABLE = 1;
 
 //### DEFAULT ###
 var DEFAULT="DEFAULT"
@@ -15,7 +15,7 @@ var DEFAULT_HALT=0
 
 //### VERBOSE ###
 var VERBOSE="VERBOSE"
-var VERBOSE_ENABLE=1
+var dk_log_VERBOSE_ENABLE=1
 var VERBOSE_COLOR=magenta
 var VERBOSE_TAG="VERBOSE: "
 var VERBOSE_PAUSE=0
@@ -136,7 +136,7 @@ var FATAL_HALT=1
 dk_log = function dk_log_f() {
 	//dk_debugFunc(1 2);
 	
-	//if(ENABLE_dk_log !== 1){return} 
+	//if(dk_log_ENABLE !== 1){return} 
 	if(typeof arguments[1] === "undefined"){
 		_level_="DEFAULT";
 		_message_=arguments[0];

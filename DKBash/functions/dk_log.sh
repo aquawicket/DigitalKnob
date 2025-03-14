@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 [ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
-[ -z ${ENABLE_dk_log-} ]  && ENABLE_dk_log=1
+[ -z ${dk_log_ENABLE-} ]  && dk_log_ENABLE=1
 
 #  0 VERBOSE    dk_verbose
 #  1 DEBUG      dk_debug
@@ -25,7 +25,7 @@
 [ -z ${DEFAULT_HALT-} ]   	&& DEFAULT_HALT=0
 
 # VERBOSE
-[ -z ${VERBOSE_ENABLE-} ] 	&& VERBOSE_ENABLE=1
+[ -z ${dk_log_VERBOSE_ENABLE-} ] 	&& dk_log_VERBOSE_ENABLE=1
 [ -z ${VERBOSE_COLOR-} ]  	&& VERBOSE_COLOR=${magenta-}
 [ -z ${VERBOSE_TAG-} ]    	&& VERBOSE_TAG="VERBOSE: "
 [ -z ${VERBOSE_TRACE-} ]  	&& VERBOSE_TRACE=0
@@ -136,7 +136,7 @@
 dk_log() {
 	dk_debugFunc 1 2
 
-	[ ${ENABLE_dk_log-1} -ne 1 ] && return
+	[ ${dk_log_ENABLE-1} -ne 1 ] && return
 	
 	[ $(__ARGC__ 1) -eq 1 ] && _level_="DEFAULT" && _message_="$1"
 	[ $(__ARGC__ 1) -eq 2 ] && _level_=$1 && _message_="$2"

@@ -1,7 +1,7 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
 if(!$dk_log){ $dk_log = 1 } else{ return } #include guard
 
-if(!(${ENABLE_dk_log}))  { $global:ENABLE_dk_log = 1 }
+if(!(${dk_log_ENABLE}))  { $global:dk_log_ENABLE = 1 }
 
 # DEFAULT
 if(!(${DEFAULT_ENABLE})) { $global:DEFAULT_ENABLE = 1 }
@@ -13,7 +13,7 @@ if(!(${DEFAULT_LINE}))   { $global:DEFAULT_LINE = 0 }
 if(!(${DEFAULT_HALT}))   { $global:DEFAULT_HALT = 0 }
 
 # VERBOSE
-if(!(${VERBOSE_ENABLE})) { $global:VERBOSE_ENABLE = 1 }
+if(!(${dk_log_VERBOSE_ENABLE})) { $global:dk_log_VERBOSE_ENABLE = 1 }
 if(!(${VERBOSE_COLOR}))  { $global:VERBOSE_COLOR = ${magenta} }
 if(!(${VERBOSE_TAG}))    { $global:VERBOSE_TAG = "VERBOSE: " }
 if(!(${VERBOSE_PAUSE}))  { $global:VERBOSE_PAUSE = 0 }
@@ -104,7 +104,7 @@ if(!(${FIXME_HALT}))     { $global:FIXME_HALT = 0 }
 function Global:dk_log($_level_, $_message_) {
 	dk_debugFunc 1 2
 
-	if(${ENABLE_dk_log} -ne 1){ return }
+	if(${dk_log_ENABLE} -ne 1){ return }
 	
 	#echo "_level_ = $_level_"
 	#echo "_message_ = $_message_"
