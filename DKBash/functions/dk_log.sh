@@ -35,14 +35,14 @@
 [ -z ${dk_log_VERBOSE_HALT-} ]   	&& dk_log_VERBOSE_HALT=0
 
 # DEBUG
-[ -z ${DEBUG_ENABLE-} ]   	&& DEBUG_ENABLE=1
-[ -z ${DEBUG_COLOR-} ]    	&& DEBUG_COLOR=${blue-}
-[ -z ${DEBUG_TAG-} ]      	&& DEBUG_TAG="DEBUG: "
-[ -z ${DEBUG_TRACE-} ]    	&& DEBUG_TRACE=0
-[ -z ${DEBUG_LINE-} ]     	&& DEBUG_LINE=0
-[ -z ${DEBUG_PAUSE-} ]    	&& DEBUG_PAUSE=0
-[ -z ${DEBUG_TIMEOUT-} ]   	&& DEBUG_TIMEOUT=0
-[ -z ${DEBUG_HALT-} ]     	&& DEBUG_HALT=0
+[ -z ${dk_log_DEBUG_ENABLE-} ]   	&& dk_log_DEBUG_ENABLE=1
+[ -z ${dk_log_DEBUG_COLOR-} ]    	&& dk_log_DEBUG_COLOR=${blue-}
+[ -z ${dk_log_DEBUG_TAG-} ]      	&& dk_log_DEBUG_TAG="DEBUG: "
+[ -z ${dk_log_DEBUG_TRACE-} ]    	&& dk_log_DEBUG_TRACE=0
+[ -z ${dk_log_DEBUG_LINE-} ]     	&& dk_log_DEBUG_LINE=0
+[ -z ${dk_log_DEBUG_PAUSE-} ]    	&& dk_log_DEBUG_PAUSE=0
+[ -z ${dk_log_DEBUG_TIMEOUT-} ]   	&& dk_log_DEBUG_TIMEOUT=0
+[ -z ${dk_log_DEBUG_HALT-} ]     	&& dk_log_DEBUG_HALT=0
 
 # INFO
 [ -z ${INFO_ENABLE-} ]    	&& INFO_ENABLE=1

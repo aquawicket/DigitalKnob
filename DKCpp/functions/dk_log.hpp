@@ -81,23 +81,23 @@
 #ifndef DEBUG_ENABLED
 	#define DEBUG_ENABLED 1
 #endif	
-#ifndef DEBUG_COLOR
-	#define DEBUG_COLOR blue
+#ifndef dk_log_DEBUG_COLOR
+	#define dk_log_DEBUG_COLOR blue
 #endif
-#ifndef DEBUG_TAG
-	#define DEBUG_TAG "DEBUG: "
+#ifndef dk_log_DEBUG_TAG
+	#define dk_log_DEBUG_TAG "DEBUG: "
 #endif
-#ifndef DEBUG_PAUSE
-	#define DEBUG_PAUSE 0
+#ifndef dk_log_DEBUG_PAUSE
+	#define dk_log_DEBUG_PAUSE 0
 #endif
-#ifndef DEBUG_TRACE	
-	#define DEBUG_TRACE 0
+#ifndef dk_log_DEBUG_TRACE	
+	#define dk_log_DEBUG_TRACE 0
 #endif
-#ifndef DEBUG_LINE
-	#define DEBUG_LINE 0
+#ifndef dk_log_DEBUG_LINE
+	#define dk_log_DEBUG_LINE 0
 #endif
-#ifndef DEBUG_HALT
-	#define DEBUG_HALT 0
+#ifndef dk_log_DEBUG_HALT
+	#define dk_log_DEBUG_HALT 0
 #endif
 
 // INFO
@@ -312,12 +312,12 @@ int v_dk_log(int level, const char* format, va_list args) {
 	}
 	if(level == DEBUG){
 		level_enable  = DEBUG_ENABLED;
-		level_color   = (char *)DEBUG_COLOR;
-		level_tag     = (char *)DEBUG_TAG;
-		level_pause	  = DEBUG_PAUSE;
-		level_trace   = DEBUG_TRACE;
-		level_line    = DEBUG_LINE;
-		level_halt    = DEBUG_HALT;
+		level_color   = (char *)dk_log_DEBUG_COLOR;
+		level_tag     = (char *)dk_log_DEBUG_TAG;
+		level_pause	  = dk_log_DEBUG_PAUSE;
+		level_trace   = dk_log_DEBUG_TRACE;
+		level_line    = dk_log_DEBUG_LINE;
+		level_halt    = dk_log_DEBUG_HALT;
 	}
 	if(level == INFO){
 		level_enable  = INFO_ENABLED;

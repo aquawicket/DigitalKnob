@@ -22,13 +22,13 @@ if(!(${dk_log_VERBOSE_LINE}))   { $global:dk_log_VERBOSE_LINE = 0 }
 if(!(${dk_log_VERBOSE_HALT}))   { $global:dk_log_VERBOSE_HALT = 0 }
 
 # DEBUG
-if(!(${DEBUG_ENABLE}))   { $global:DEBUG_ENABLE = 1 }
-if(!(${DEBUG_COLOR}))    { $global:DEBUG_COLOR = ${blue} }
-if(!(${DEBUG_TAG}))      { $global:DEBUG_TAG = "DEBUG: " }
-if(!(${DEBUG_PAUSE}))    { $global:DEBUG_PAUSE = 0 }
-if(!(${DEBUG_TRACE}))    { $global:DEBUG_TRACE = 0 }
-if(!(${DEBUG_LINE}))     { $global:DEBUG_LINE = 0 }
-if(!(${DEBUG_HALT}))     { $global:DEBUG_HALT = 0 }
+if(!(${dk_log_DEBUG_ENABLE}))   { $global:dk_log_DEBUG_ENABLE = 1 }
+if(!(${dk_log_DEBUG_COLOR}))    { $global:dk_log_DEBUG_COLOR = ${blue} }
+if(!(${dk_log_DEBUG_TAG}))      { $global:dk_log_DEBUG_TAG = "DEBUG: " }
+if(!(${dk_log_DEBUG_PAUSE}))    { $global:dk_log_DEBUG_PAUSE = 0 }
+if(!(${dk_log_DEBUG_TRACE}))    { $global:dk_log_DEBUG_TRACE = 0 }
+if(!(${dk_log_DEBUG_LINE}))     { $global:dk_log_DEBUG_LINE = 0 }
+if(!(${dk_log_DEBUG_HALT}))     { $global:dk_log_DEBUG_HALT = 0 }
 
 # INFO
 if(!(${INFO_ENABLE}))    { $global:INFO_ENABLE = 1 }

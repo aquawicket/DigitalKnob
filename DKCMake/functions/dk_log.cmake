@@ -37,14 +37,14 @@ dk_if(NOT DEFINED dk_log_VERBOSE_LINE    [[ set(dk_log_VERBOSE_LINE   	0        
 dk_if(NOT DEFINED dk_log_VERBOSE_HALT    [[ set(dk_log_VERBOSE_HALT		0				CACHE INTERNAL '') ]])
 
 # DEBUG
-dk_if(NOT DEFINED DEBUG_ENABLE    [[ set(DEBUG_ENABLE		1				CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED DEBUG_COLOR     [[ set(DEBUG_COLOR 		"${lblue}"		CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED DEBUG_TAG       [[ set(DEBUG_TAG 			"DEBUG: "		CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED DEBUG_PAUSE     [[ set(DEBUG_PAUSE 		0 				CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED DEBUG_TIMEOUT   [[ set(DEBUG_TIMEOUT 		0 				CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED DEBUG_TRACE     [[ set(DEBUG_TRACE 		0 				CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED DEBUG_LINE      [[ set(DEBUG_LINE 		0 				CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED DEBUG_HALT      [[ set(DEBUG_HALT			0 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_DEBUG_ENABLE    [[ set(dk_log_DEBUG_ENABLE		1				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_DEBUG_COLOR     [[ set(dk_log_DEBUG_COLOR 		"${lblue}"		CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_DEBUG_TAG       [[ set(dk_log_DEBUG_TAG 			"DEBUG: "		CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_DEBUG_PAUSE     [[ set(dk_log_DEBUG_PAUSE 		0 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_DEBUG_TIMEOUT   [[ set(dk_log_DEBUG_TIMEOUT 		0 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_DEBUG_TRACE     [[ set(dk_log_DEBUG_TRACE 		0 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_DEBUG_LINE      [[ set(dk_log_DEBUG_LINE 		0 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_DEBUG_HALT      [[ set(dk_log_DEBUG_HALT			0 				CACHE INTERNAL '') ]])
 
 # INFO
 dk_if(NOT DEFINED INFO_ENABLE     [[ set(INFO_ENABLE		1 				CACHE INTERNAL '') ]])

@@ -26,14 +26,14 @@ var dk_log_VERBOSE_HALT=0
 
 //### DEBUG ###
 var DEBUG="DEBUG"
-var DEBUG_ENABLE=1
-var DEBUG_COLOR=lblue
-var DEBUG_TAG="DEBUG: "
-var DEBUG_PAUSE=0
-var DEBUG_TIMEOUT=0
-var DEBUG_TRACE=0
-var DEBUG_LINE=0
-var DEBUG_HALT=0
+var dk_log_DEBUG_ENABLE=1
+var dk_log_DEBUG_COLOR=lblue
+var dk_log_DEBUG_TAG="DEBUG: "
+var dk_log_DEBUG_PAUSE=0
+var dk_log_DEBUG_TIMEOUT=0
+var dk_log_DEBUG_TRACE=0
+var dk_log_DEBUG_LINE=0
+var dk_log_DEBUG_HALT=0
 
 //### INFO ###
 var INFO="INFO"
