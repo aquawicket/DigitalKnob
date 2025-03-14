@@ -35,9 +35,10 @@ setlocal
 	::	$Shortcut.Save();
 
 	:: Method 3: call powershell function
+
 	%dk_call% dk_callDKPowershell dk_createShortcut %*
-    
-    if not exist %shortcut_path% (%dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%")
+
+	if not exist %shortcut_path% (%dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%")
 %endfunction%
 
 

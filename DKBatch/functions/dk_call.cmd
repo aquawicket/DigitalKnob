@@ -24,11 +24,11 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	::###### Stack Variables ######
 	(set __CMND__=%~1)
-	(set __CMND__=!__CMND__:::=/!)
+	(set __CMND__=!__CMND__:::=/!)		&:: Replace :: with /
 	(set __FILE__=%~dpnx1)
 	(set __FILE__=%__FILE__:\=/%)
 	(set __FUNC__=%~n1)
-	set __ARGV__=%*
+	 set __ARGV__=%*
 	if defined __ARGV__ (set __ARGV__=!__ARGV__:*%1=!)
 
 	::TODO - use dk_getFileLine to add the file line to the stack entry
@@ -200,9 +200,9 @@ exit /b !errorlevel!
 ::#
 :setReturn name value
 	set argv=%*
-	if defined argv (set argv=!argv:*%1=!)
+	if defined argv (set argv=!argv:*%1 =!)
 	(set %~1=%argv%)
-	(set dk.rtn.%~1=%argv%)		&:: prefix the variable name with rtn. and assign a value
+	(set dk.rtn.%~1=%argv%)		&:: prefix the variable name with dk.rtn. and assign a value
 exit /b !errorlevel!
 
 ::####################################################################
@@ -228,7 +228,7 @@ exit /b !errorlevel!
 	set argv=%*
 	if defined argv (set argv=!argv:*%1=!)
 	(set %~1=%argv%)
-	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with global. and assign a value
+	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
 exit /b !errorlevel!
 
 

@@ -12,12 +12,11 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
     
-	if not "%~1"=="" (
-		set "DKBRANCH_DIR=%~1"
-		%return%
-	)
+::	if not "%~1"=="" (
+::		set "DKBRANCH_DIR=%~1"
+::	)
 	
-	%dk_call% dk_validatePath DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	
 	if not defined DKBRANCH  (set "DKBRANCH=Development")            &rem set the default branch
 	rem for %%I in (.) do set "CURRENT_FOLDER=%%~nxI"                &rem get the current folder
@@ -28,7 +27,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
    	rem        )
    	rem    )
 	rem %dk_call% dk_printVar DKBRANCH
-	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%"
+	if not defined DKBRANCH_DIR (set "DKBRANCH_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%")
 	
 	set "DKBASH_DIR=%DKBRANCH_DIR%/DKBash"
 		set "DKBASH_FUNCTIONS_DIR=%DKBASH_DIR%/functions"

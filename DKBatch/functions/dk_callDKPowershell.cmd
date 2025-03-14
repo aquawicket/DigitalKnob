@@ -8,36 +8,35 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#
 :dk_callPowershell
 setlocal enableDelayedExpansion
-    %dk_call% dk_debugFunc 1 99
-	
-	
+	%dk_call% dk_debugFunc 1 99
+
 	::### Get DKC_FUNCTIONS_DIR
-	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(mkdir "%DKPOWERSHELL_FUNCTIONS_DIR:/=\%")
 	%dk_call% dk_assertPath DKPOWERSHELL_FUNCTIONS_DIR
-	
+
 	::### Get DKHTTP_DKPOWERSHELL_DIR
 	if not defined DKHTTP_DKPOWERSHELL_DIR				(set "DKHTTP_DKPOWERSHELL_DIR=%DKHTTP_DKBRANCH_DIR%/DKPowershell")
 	if not defined DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR	(set "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR=%DKHTTP_DKPOWERSHELL_DIR%/functions")
-	
+
 	::### Download files if missing
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1"	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1")
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1"	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1")
-	
+
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
-    
+
 	:: https://stackoverflow.com/a/4732316/688352
-    %dk_call% %COMSPEC% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
-	
+	%dk_call% %COMSPEC% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
+
 	::### ALL_BUT_FIRST ###
 	set ALL_BUT_FIRST=%*
 	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
-    
-    ::### LAST_ARG ###
+
+	::### LAST_ARG ###
 	for %%a in (%*) do set LAST_ARG=%%a
-	
-    :: Call DKPowershell function
-    ::set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH ^= '%DKSCRIPT_PATH%'^; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1^; %~1 %ALL_BUT_FIRST%
+
+	:: Call DKPowershell function
+	::set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH ^= '%DKSCRIPT_PATH%'^; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1^; %~1 %ALL_BUT_FIRST%
 	::	::echo %DKPOWERSHELL_COMMAND%
 	::	for /f "delims=" %%Z in ('%DKPOWERSHELL_COMMAND%') do (
 	::		echo %%Z                &rem  Display the other shell's stdout
@@ -49,11 +48,11 @@ setlocal enableDelayedExpansion
 	::		set "dk_callDKBash=%dk_callDKPowershell%""
 	::		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKPowershell%")
 	::	)
-	
-	
+
+
 	::###### run command ######
 	set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %ALL_BUT_FIRST%
-	
+
 	::echo DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%
 	%dk_call% dk_commandToVariable "%DKPOWERSHELL_COMMAND%"
 	endlocal & (
@@ -70,6 +69,6 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_callDKPowershell dk_test "arg 1" "arg 2" "arg 3"
-    %dk_call% dk_echo
+	%dk_call% dk_echo
 	%dk_call% dk_echo "dk_callPowershell = %dk_callPowershell%"
 %endfunction%
