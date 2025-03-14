@@ -16,13 +16,13 @@ var DEFAULT_HALT=0
 //### VERBOSE ###
 var VERBOSE="VERBOSE"
 var dk_log_VERBOSE_ENABLE=1
-var VERBOSE_COLOR=magenta
-var VERBOSE_TAG="VERBOSE: "
-var VERBOSE_PAUSE=0
-var VERBOSE_TIMEOUT=0
-var VERBOSE_TRACE=0
-var VERBOSE_LINE=0
-var VERBOSE_HALT=0
+var dk_log_VERBOSE_COLOR=magenta
+var dk_log_VERBOSE_TAG="VERBOSE: "
+var dk_log_VERBOSE_PAUSE=0
+var dk_log_VERBOSE_TIMEOUT=0
+var dk_log_VERBOSE_TRACE=0
+var dk_log_VERBOSE_LINE=0
+var dk_log_VERBOSE_HALT=0
 
 //### DEBUG ###
 var DEBUG="DEBUG"

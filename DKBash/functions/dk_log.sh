@@ -26,13 +26,13 @@
 
 # VERBOSE
 [ -z ${dk_log_VERBOSE_ENABLE-} ] 	&& dk_log_VERBOSE_ENABLE=1
-[ -z ${VERBOSE_COLOR-} ]  	&& VERBOSE_COLOR=${magenta-}
-[ -z ${VERBOSE_TAG-} ]    	&& VERBOSE_TAG="VERBOSE: "
-[ -z ${VERBOSE_TRACE-} ]  	&& VERBOSE_TRACE=0
-[ -z ${VERBOSE_LINE-} ]   	&& VERBOSE_LINE=0
-[ -z ${VERBOSE_PAUSE-} ]  	&& VERBOSE_PAUSE=0
-[ -z ${VERBOSE_TIMEOUT-} ] 	&& VERBOSE_TIMEOUT=0
-[ -z ${VERBOSE_HALT-} ]   	&& VERBOSE_HALT=0
+[ -z ${dk_log_VERBOSE_COLOR-} ]  	&& dk_log_VERBOSE_COLOR=${magenta-}
+[ -z ${dk_log_VERBOSE_TAG-} ]    	&& dk_log_VERBOSE_TAG="VERBOSE: "
+[ -z ${dk_log_VERBOSE_TRACE-} ]  	&& dk_log_VERBOSE_TRACE=0
+[ -z ${dk_log_VERBOSE_LINE-} ]   	&& dk_log_VERBOSE_LINE=0
+[ -z ${dk_log_VERBOSE_PAUSE-} ]  	&& dk_log_VERBOSE_PAUSE=0
+[ -z ${dk_log_VERBOSE_TIMEOUT-} ] 	&& dk_log_VERBOSE_TIMEOUT=0
+[ -z ${dk_log_VERBOSE_HALT-} ]   	&& dk_log_VERBOSE_HALT=0
 
 # DEBUG
 [ -z ${DEBUG_ENABLE-} ]   	&& DEBUG_ENABLE=1

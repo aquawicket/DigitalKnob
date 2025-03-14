@@ -18,12 +18,12 @@ if not defined dk_log_ENABLE	(set "dk_log_ENABLE=1")
 
 ::### VERBOSE ###
 if not defined dk_log_VERBOSE_ENABLE	(set "dk_log_VERBOSE_ENABLE=1")
-if not defined VERBOSE_COLOR			(set "VERBOSE_COLOR=%magenta%")
-if not defined VERBOSE_TAG				(set "VERBOSE_TAG=VERBOSE: ")
-::if not defined VERBOSE_TRACE			(set "VERBOSE_TRACE=0")
-::if not defined VERBOSE_LINE			(set "VERBOSE_LINE=0")
-::if not defined VERBOSE_PAUSE			(set "VERBOSE_PAUSE=0")
-::if not defined VERBOSE_TIMEOUT 		(set "VERBOSE_TIMEOUT=0")
+if not defined dk_log_VERBOSE_COLOR		(set "dk_log_VERBOSE_COLOR=%magenta%")
+if not defined dk_log_VERBOSE_TAG		(set "dk_log_VERBOSE_TAG=VERBOSE: ")
+::if not defined dk_log_VERBOSE_TRACE	(set "dk_log_VERBOSE_TRACE=0")
+::if not defined dk_log_VERBOSE_LINE	(set "dk_log_VERBOSE_LINE=0")
+::if not defined dk_log_VERBOSE_PAUSE	(set "dk_log_VERBOSE_PAUSE=0")
+::if not defined dk_log_VERBOSE_TIMEOUT (set "dk_log_VERBOSE_TIMEOUT=0")
 ::if not defined VERBOSE_HALT			(set "VERBOSE_HALT=0")
 
 ::### DEBUG ###

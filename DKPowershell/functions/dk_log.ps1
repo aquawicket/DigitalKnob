@@ -14,12 +14,12 @@ if(!(${DEFAULT_HALT}))   { $global:DEFAULT_HALT = 0 }
 
 # VERBOSE
 if(!(${dk_log_VERBOSE_ENABLE})) { $global:dk_log_VERBOSE_ENABLE = 1 }
-if(!(${VERBOSE_COLOR}))  { $global:VERBOSE_COLOR = ${magenta} }
-if(!(${VERBOSE_TAG}))    { $global:VERBOSE_TAG = "VERBOSE: " }
-if(!(${VERBOSE_PAUSE}))  { $global:VERBOSE_PAUSE = 0 }
-if(!(${VERBOSE_TRACE}))  { $global:VERBOSE_TRACE = 0 }
-if(!(${VERBOSE_LINE}))   { $global:VERBOSE_LINE = 0 }
-if(!(${VERBOSE_HALT}))   { $global:VERBOSE_HALT = 0 }
+if(!(${dk_log_VERBOSE_COLOR}))  { $global:dk_log_VERBOSE_COLOR = ${magenta} }
+if(!(${dk_log_VERBOSE_TAG}))    { $global:dk_log_VERBOSE_TAG = "VERBOSE: " }
+if(!(${dk_log_VERBOSE_PAUSE}))  { $global:dk_log_VERBOSE_PAUSE = 0 }
+if(!(${dk_log_VERBOSE_TRACE}))  { $global:dk_log_VERBOSE_TRACE = 0 }
+if(!(${dk_log_VERBOSE_LINE}))   { $global:dk_log_VERBOSE_LINE = 0 }
+if(!(${dk_log_VERBOSE_HALT}))   { $global:dk_log_VERBOSE_HALT = 0 }
 
 # DEBUG
 if(!(${DEBUG_ENABLE}))   { $global:DEBUG_ENABLE = 1 }

@@ -58,23 +58,23 @@
 #ifndef VERBOSE_ENABLED
 	#define VERBOSE_ENABLED 1
 #endif	
-#ifndef VERBOSE_COLOR
-	#define VERBOSE_COLOR magenta
+#ifndef dk_log_VERBOSE_COLOR
+	#define dk_log_VERBOSE_COLOR magenta
 #endif
-#ifndef VERBOSE_TAG
-	#define VERBOSE_TAG "VERBOSE: "
+#ifndef dk_log_VERBOSE_TAG
+	#define dk_log_VERBOSE_TAG "VERBOSE: "
 #endif
-#ifndef VERBOSE_PAUSE
-	#define VERBOSE_PAUSE 0
+#ifndef dk_log_VERBOSE_PAUSE
+	#define dk_log_VERBOSE_PAUSE 0
 #endif
-#ifndef VERBOSE_TRACE	
-	#define VERBOSE_TRACE 0
+#ifndef dk_log_VERBOSE_TRACE	
+	#define dk_log_VERBOSE_TRACE 0
 #endif
-#ifndef VERBOSE_LINE
-	#define VERBOSE_LINE 0
+#ifndef dk_log_VERBOSE_LINE
+	#define dk_log_VERBOSE_LINE 0
 #endif
-#ifndef VERBOSE_HALT
-	#define VERBOSE_HALT 0
+#ifndef dk_log_VERBOSE_HALT
+	#define dk_log_VERBOSE_HALT 0
 #endif
 
 // DEBUG
@@ -304,12 +304,12 @@ int v_dk_log(int level, const char* format, va_list args) {
 	int level_halt    = DEFAULT_HALT;
 	if(level == VERBOSE){
 		level_enable  = VERBOSE_ENABLED;
-		level_color   = (char *)VERBOSE_COLOR;
-		level_tag     = (char *)VERBOSE_TAG;
-		level_pause	  = VERBOSE_PAUSE;
-		level_trace   = VERBOSE_TRACE;
-		level_line    = VERBOSE_LINE;
-		level_halt    = VERBOSE_HALT;
+		level_color   = (char *)dk_log_VERBOSE_COLOR;
+		level_tag     = (char *)dk_log_VERBOSE_TAG;
+		level_pause	  = dk_log_VERBOSE_PAUSE;
+		level_trace   = dk_log_VERBOSE_TRACE;
+		level_line    = dk_log_VERBOSE_LINE;
+		level_halt    = dk_log_VERBOSE_HALT;
 	}
 	if(level == DEBUG){
 		level_enable  = DEBUG_ENABLED;
