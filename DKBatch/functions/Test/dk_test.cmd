@@ -29,7 +29,7 @@ setlocal enableDelayedExpansion
 						(echo:)
 						(echo             ###### DK variables ######)
 						(echo                   test = '%test%')
-						(echo                DKSHELL = '%DKSHELL%')
+						(echo           DKSHELL_NAME = '%DKSHELL_NAME%')
 						(echo           DKSHELL_PATH = '%DKSHELL_PATH%')
 						(echo        DKSHELL_VERSION = '%DKSHELL_VERSION%')
 						(echo                    LVL = '%LVL%')
@@ -46,7 +46,7 @@ setlocal enableDelayedExpansion
 						(echo          DKSCRIPT_FILE = '%DKSCRIPT_FILE%')
 						(echo          DKSCRIPT_NAME = '%DKSCRIPT_NAME%')
 						(echo           DKSCRIPT_EXT = '%DKSCRIPT_EXT%')
-						echo          DKSCRIPT_ARGS = '%DKSCRIPT_ARGS%'
+						(echo          DKSCRIPT_ARGS = '%DKSCRIPT_ARGS%')
 						(echo             DKHOME_DIR = '%DKHOME_DIR%')
 						(echo            DKCACHE_DIR = '%DKCACHE_DIR%')
 						(echo          DKDESKTOP_DIR = '%DKDESKTOP_DIR%')
@@ -74,7 +74,9 @@ setlocal enableDelayedExpansion
 						(echo                dk_test = '%dk_test%')
 						(echo             RETURN_VAR = '%RETURN_VAR%')
 						(echo             GLOBAL_VAR = '%GLOBAL_VAR%')
-	
+
+	%dk_call% dk_stacktrace
+
 	endlocal & (
 		set "dk_test=this B"
 		%dk_call% setReturn RETURN_VAR "return B"

@@ -47,7 +47,7 @@ exit /b %ERRORLEVEL%
 
 
 :dk_install
-	if "%~1" neq "" (goto:eof)
+	if not "%~1"=="" (goto:eof)
 	
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")

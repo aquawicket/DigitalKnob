@@ -13,8 +13,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	if not defined DKBRANCH          set "DKBRANCH=Development"
 	if not defined DKBRANCH_DIR      set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
 	
-	if exist "%DKBRANCH_DIR%\.git" if "%DKSCRIPT_NAME%" neq "DKBuilder" %return%
-	if exist "%DKBRANCH_DIR%\.git" if "%DKSCRIPT_DIR%" equ "%DKBRANCH_DIR%" %return%
+	if exist "%DKBRANCH_DIR%\.git" (if not "%DKSCRIPT_NAME%"=="DKBuilder" %return%)
+	if exist "%DKBRANCH_DIR%\.git" (if "%DKSCRIPT_DIR%" equ "%DKBRANCH_DIR%" %return%)
 
     if not exist "%DKBRANCH_DIR%\.git" (%dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git %DKBRANCH%)
 	

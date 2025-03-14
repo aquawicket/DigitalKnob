@@ -10,8 +10,8 @@ if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 	::### DKSHELL_PATH ###
 	if defined COMSPEC (set "DKSHELL_PATH=%COMSPEC:\=/%")
 
-	::### DKSHELL ###
-	for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL=%%~nZ")
+	::### DKSHELL_NAME ###
+	for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL_NAME=%%~nZ")
 
 	::### DKSHELL_VERSION ###
 	for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")
@@ -20,8 +20,8 @@ if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 	::### ESC ###
 	set "ESC="
 
-	::### Print DKSHELL DKSHELL_VERSION ###
-	echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
+	::### Print DKSHELL_NAME DKSHELL_VERSION ###
+	echo %ESC%[42m %ESC%[30m %DKSHELL_NAME% %DKSHELL_VERSION% %ESC%[0m
 
 	::###### PRINT_DE_STATUS #####
 	set PRINT_DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
@@ -78,7 +78,7 @@ if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 	
 	::############ Elevate Permissions ############
 	::set "ENABLE_dk_elevate=1"
-	if "%ENABLE_dk_elevate%" neq "1" (goto skip_elevate)
+	if not "%ENABLE_dk_elevate%"=="1" (goto skip_elevate)
 		net session >nul 2>&1
 		if %ERRORLEVEL% equ 0 (goto skip_elevate)
 		if "%2"=="elevated" (set "elevated=1")
@@ -97,7 +97,7 @@ if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 	::%DK% dk_load %DKSCRIPT_PATH%
 
 	::###### DKTEST MODE ######
-	if "%DKSCRIPT_EXT%" neq ".cmd" (%return%)
+	if not "%DKSCRIPT_EXT%"==".cmd" (%return%)
 	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 0
 	%dk_call% dk_echo
 	%dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%"

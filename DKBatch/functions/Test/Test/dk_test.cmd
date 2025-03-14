@@ -13,15 +13,15 @@ setlocal enableDelayedExpansion
 						(echo            ###### cmd variables ######)
 	if not "%~0"==""	(echo                      0 = '%~0')
 						(echo                      * = '%*')
-	if not "%~1"==""	(echo                      1 = '%~1')
-	if not "%~2"==""	(echo                      2 = '%~2')
-	if not "%~3"==""	(echo                      3 = '%~3')
-	if not "%~4"==""	(echo                      4 = '%~4')
-	if not "%~5"==""	(echo                      5 = '%~5')
-	if not "%~6"==""	(echo                      6 = '%~6')
-	if not "%~7"==""	(echo                      7 = '%~7')
-	if not "%~8"==""	(echo                      8 = '%~8')
-	if not "%~9"==""	(echo                      9 = '%~9')
+	if "%~1" neq ""		(echo                      1 = '%~1')
+	if "%~2" neq ""		(echo                      2 = '%~2')
+	if "%~3" neq ""		(echo                      3 = '%~3')
+	if "%~4" neq ""		(echo                      4 = '%~4')
+	if "%~5" neq ""		(echo                      5 = '%~5')
+	if "%~6" neq ""		(echo                      6 = '%~6')
+	if "%~7" neq ""		(echo                      7 = '%~7')
+	if "%~8" neq ""		(echo                      8 = '%~8')
+	if "%~9" neq ""		(echo                      9 = '%~9')
 						(echo             ERRORLEVEL = '%ERRORLEVEL%')
 						(echo                   DATE = '%DATE%')
 						(echo                   TIME = '%TIME: =%')
@@ -29,7 +29,7 @@ setlocal enableDelayedExpansion
 						(echo:)
 						(echo             ###### DK variables ######)
 						(echo                   test = '%test%')
-						(echo                DKSHELL = '%DKSHELL%')
+						(echo           DKSHELL_NAME = '%DKSHELL_NAME%')
 						(echo           DKSHELL_PATH = '%DKSHELL_PATH%')
 						(echo        DKSHELL_VERSION = '%DKSHELL_VERSION%')
 						(echo                    LVL = '%LVL%')
@@ -46,7 +46,7 @@ setlocal enableDelayedExpansion
 						(echo          DKSCRIPT_FILE = '%DKSCRIPT_FILE%')
 						(echo          DKSCRIPT_NAME = '%DKSCRIPT_NAME%')
 						(echo           DKSCRIPT_EXT = '%DKSCRIPT_EXT%')
-						echo          DKSCRIPT_ARGS = '%DKSCRIPT_ARGS%'
+						(echo          DKSCRIPT_ARGS = '%DKSCRIPT_ARGS%')
 						(echo             DKHOME_DIR = '%DKHOME_DIR%')
 						(echo            DKCACHE_DIR = '%DKCACHE_DIR%')
 						(echo          DKDESKTOP_DIR = '%DKDESKTOP_DIR%')
@@ -74,7 +74,9 @@ setlocal enableDelayedExpansion
 						(echo                dk_test = '%dk_test%')
 						(echo             RETURN_VAR = '%RETURN_VAR%')
 						(echo             GLOBAL_VAR = '%GLOBAL_VAR%')
-	
+
+	%dk_call% dk_stacktrace
+
 	endlocal & (
 		set "dk_test=this C"
 		%dk_call% setReturn RETURN_VAR "return C"

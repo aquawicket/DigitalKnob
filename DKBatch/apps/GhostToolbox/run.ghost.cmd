@@ -8882,7 +8882,7 @@ FOR /f "tokens=2*" %%a in ('Reg Query "HKLM\Software\Microsoft\Windows NT\Curren
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild"') do set "DFMT5=%bg_blue%%lblack% %%B"
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ProductName"') do set "DFMT6=%%B"
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-if "%version%" == "Windows 10" (
+if "%version%" EQU "Windows 10" (
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ReleaseId"') do set "DFMT7=%bg_red%%lblack% %%B "
 )
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do set "CODENAME=%%B"
@@ -8893,7 +8893,7 @@ FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windo
 reg Query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\.NETFramework" | find /i "0x0" > NUL && set "FNETFX4=DISABLE" || set "FNETFX4=ENABLE"
 set /a UBRDEC=%FNETFX4%
 ::reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "OSARC=%bg_magenta%%lblack%32bit" || set "OSARC=%bg_magenta%%lblack% 64bit "
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "OSARC=%bg_magenta%%lblack% 64bit "
+if "%PROCESSOR_ARCHITECTURE%" EQU "AMD64" (set "OSARC=%bg_magenta%%lblack% 64bit "
 )
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (set "OSARC=%bg_magenta%%lblack% 32bit "
 )

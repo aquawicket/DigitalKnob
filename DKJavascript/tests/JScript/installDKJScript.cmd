@@ -1,6 +1,6 @@
 @echo off
 
-if "%~1" neq "" (goto runDKJScript)
+if not "%~1"=="" (goto runDKJScript)
 :installDKJScript
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../DKBatch/functions/")

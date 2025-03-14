@@ -12,7 +12,7 @@ setlocal enableDelayedExpansion
     set "s=#!%~1!"
     set "len=0"
     for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
-        if "!s:~%%N,1!" neq "" (
+        if not "!s:~%%N,1!"=="" (
             set /a "len+=%%N"
             set "s=!s:~%%N!"
         )

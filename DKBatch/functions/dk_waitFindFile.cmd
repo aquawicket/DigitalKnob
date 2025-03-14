@@ -32,7 +32,7 @@ setlocal enableDelayedExpansion
         CHOICE /T 1 /C "yq" /D y > nul
 
         :: User pressed Q? just quit
-        if "%errorlevel%" neq "1" goto :eof
+        if not "%errorlevel%"=="1" (goto :eof)
 
         :: Repeat until file changed, timeout elapsed, user quits or Ctrl-C
 		if %seconds% gtr %timeout% (

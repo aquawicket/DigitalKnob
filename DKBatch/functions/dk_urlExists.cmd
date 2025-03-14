@@ -22,16 +22,16 @@ setlocal enableDelayedExpansion
         :: if !httpCode! equ 000 echo !httpCode! Server Rejected the Request
         
         if !httpCode! equ 200 (
-            if "%~2" neq "" (endlocal & set "%2=true")
+            if not "%~2"=="" (endlocal & set "%2=true")
             exit /b 0
         )
         if !httpCode! equ 302 (
-            if "%~2" neq "" (endlocal & set "%2=true")
+            if not "%~2"=="" (endlocal & set "%2=true")
             exit /b 0
         )
     :end_curl
 
-    if "%~2" neq "" (endlocal & set "%2=false")
+    if not "%~2"=="" (endlocal & set "%2=false")
     exit /b 1
 %endfunction%
 

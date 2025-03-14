@@ -28,7 +28,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 set setVar=setlocal disableDelayedExpansion ^& call setVariable
 ::set }=^& setlocal enableDelayedExpansion
 
-set PRINT_DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
+set PRINT_DE_STATUS=if "^!DE^!" equ "" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
 
 
 :main
