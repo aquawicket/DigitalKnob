@@ -8,9 +8,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :dk_CURL_EXE
 setlocal
 	%dk_call% dk_debugFunc 0
-   
-    if defined CURL_EXE (%return%)
-    
+
+	if defined CURL_EXE (%return%)
+
 	set "CURL_EXE=%WINDIR:\=/%/System32/curl.exe"
 	if not exist "%CURL_EXE%" (%dk_call% dk_findProgram CURL_EXE "curl.exe" "%WINDIR%\system32")
 
@@ -30,6 +30,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_CURL_EXE
-    %dk_call% dk_printVar CURL_EXE
+	%dk_call% dk_CURL_EXE
+	%dk_call% dk_printVar CURL_EXE
 %endfunction%

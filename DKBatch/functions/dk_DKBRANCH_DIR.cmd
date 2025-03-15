@@ -17,8 +17,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 
-	if not defined DKBRANCH  (set "DKBRANCH=Development")            &rem set the default branch
-	rem for %%I in (.) do set "CURRENT_FOLDER=%%~nxI"                &rem get the current folder
+	if not defined DKBRANCH  (set "DKBRANCH=Development")			&rem set the default branch
+	rem for %%I in (.) do set "CURRENT_FOLDER=%%~nxI"				&rem get the current folder
 	rem if not defined GIT_EXE (%dk_call% dk_installGit)
 	rem if exist "%CD%\.git" (
 	rem 	"%GIT_EXE%" branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (

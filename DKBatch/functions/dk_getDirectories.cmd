@@ -26,9 +26,6 @@ setlocal enableDelayedExpansion
 		if defined currentScope endlocal
 		set "%%b"
 	)
-
-::	DEBUG
-::	%dk_call% dk_printVar %~1
 %endfunction%
 
 

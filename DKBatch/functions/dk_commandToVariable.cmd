@@ -10,9 +10,9 @@ set "dk_commandToVariable_PRINT_COMMANDS=1"
 :dk_commandToVariable
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1 99
-	
+
 	set "_command_=%*"
-	
+
 	::###### _last_arg_ ######
 	for %%A in (%*) do set _last_arg_=%%A
 

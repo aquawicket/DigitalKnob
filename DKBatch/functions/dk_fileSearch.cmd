@@ -20,15 +20,15 @@ setlocal enableDelayedExpansion
 	set prefix=!file_pattern:%filename%=!
 
 	echo searching '%base_path%' for '%file_pattern%'
-	:: /s     =  copy Subdirectories, but not empty ones.
-	:: /fp    =  include Full Pathname of files in the output.
-	:: /l     =  List only - don't copy, timestamp or delete any files.
-	:: /lev:n =  only copy the top n LEVels of the source directory tree.
-	:: /nc    =  No Class - don't log file classes.
-	:: /ndl   =  No Directory List - don't log directory names.
-	:: /njh   =  No Job Header.
-	:: /njs   =  No Job Summary.
-	:: /ns    =  No Size - don't log file sizes.
+	:: /s		- copy Subdirectories, but not empty ones.
+	:: /fp		- include Full Pathname of files in the output.
+	:: /l		- List only - don't copy, timestamp or delete any files.
+	:: /lev:n 	- only copy the top n LEVels of the source directory tree.
+	:: /nc		- No Class - don't log file classes.
+	:: /ndl		- No Directory List - don't log directory names.
+	:: /njh		- No Job Header.
+	:: /njs		- No Job Summary.
+	:: /ns		- No Size - don't log file sizes.
 	echo:
 	for /f "tokens=*" %%g in ('%systemroot%\system32\robocopy.exe "%base_path%" "null" "%filename%" /fp /l /lev:%search_depth% /nc /ndl /njh /njs /ns /s') do (
 		set "string=%%g"
