@@ -32,26 +32,26 @@
 #define FATAL 9
 
 // DEFAULT
-#ifndef DEFAULT_ENABLED
-	#define DEFAULT_ENABLED 1
+#ifndef dk_log_DEFAULT_ENABLED
+	#define dk_log_DEFAULT_ENABLED 1
 #endif	
-#ifndef DEFAULT_COLOR
-	#define DEFAULT_COLOR white
+#ifndef dk_log_DEFAULT_COLOR
+	#define dk_log_DEFAULT_COLOR white
 #endif
-#ifndef DEFAULT_TAG
-	#define DEFAULT_TAG ""
+#ifndef dk_log_DEFAULT_TAG
+	#define dk_log_DEFAULT_TAG ""
 #endif
-#ifndef DEFAULT_PAUSE
-	#define DEFAULT_PAUSE 0
+#ifndef dk_log_DEFAULT_PAUSE
+	#define dk_log_DEFAULT_PAUSE 0
 #endif
-#ifndef DEFAULT_TRACE	
-	#define DEFAULT_TRACE 0
+#ifndef dk_log_DEFAULT_TRACE	
+	#define dk_log_DEFAULT_TRACE 0
 #endif
-#ifndef DEFAULT_LINE
-	#define DEFAULT_LINE 0
+#ifndef dk_log_DEFAULT_LINE
+	#define dk_log_DEFAULT_LINE 0
 #endif
-#ifndef DEFAULT_HALT
-	#define DEFAULT_HALT 0
+#ifndef dk_log_DEFAULT_HALT
+	#define dk_log_DEFAULT_HALT 0
 #endif
 
 // VERBOSE
@@ -104,184 +104,184 @@
 #ifndef INFO_ENABLED
 	#define INFO_ENABLED 1
 #endif	
-#ifndef INFO_COLOR
-	#define INFO_COLOR white
+#ifndef dk_log_INFO_COLOR
+	#define dk_log_INFO_COLOR white
 #endif
-#ifndef INFO_TAG
-	#define INFO_TAG "INFO: "
+#ifndef dk_log_INFO_TAG
+	#define dk_log_INFO_TAG "INFO: "
 #endif
-#ifndef INFO_PAUSE
-	#define INFO_PAUSE 0
+#ifndef dk_log_INFO_PAUSE
+	#define dk_log_INFO_PAUSE 0
 #endif
-#ifndef INFO_TRACE	
-	#define INFO_TRACE 0
+#ifndef dk_log_INFO_TRACE	
+	#define dk_log_INFO_TRACE 0
 #endif
-#ifndef INFO_LINE
-	#define INFO_LINE 0
+#ifndef dk_log_INFO_LINE
+	#define dk_log_INFO_LINE 0
 #endif
-#ifndef INFO_HALT
-	#define INFO_HALT 0
+#ifndef dk_log_INFO_HALT
+	#define dk_log_INFO_HALT 0
 #endif
 
 // SUCCESS
-#ifndef SUCCESS_ENABLED
-	#define SUCCESS_ENABLED 1
+#ifndef dk_log_SUCCESS_ENABLED
+	#define dk_log_SUCCESS_ENABLED 1
 #endif	
-#ifndef SUCCESS_COLOR
-	#define SUCCESS_COLOR green
+#ifndef dk_log_SUCCESS_COLOR
+	#define dk_log_SUCCESS_COLOR green
 #endif
-#ifndef SUCCESS_TAG
-	#define SUCCESS_TAG "SUCCESS: "
+#ifndef dk_log_SUCCESS_TAG
+	#define dk_log_SUCCESS_TAG "SUCCESS: "
 #endif
-#ifndef SUCCESS_PAUSE
-	#define SUCCESS_PAUSE 0
+#ifndef dk_log_SUCCESS_PAUSE
+	#define dk_log_SUCCESS_PAUSE 0
 #endif
-#ifndef SUCCESS_TRACE	
-	#define SUCCESS_TRACE 0
+#ifndef dk_log_SUCCESS_TRACE	
+	#define dk_log_SUCCESS_TRACE 0
 #endif
-#ifndef SUCCESS_LINE
-	#define SUCCESS_LINE 0
+#ifndef dk_log_SUCCESS_LINE
+	#define dk_log_SUCCESS_LINE 0
 #endif
-#ifndef SUCCESS_HALT
-	#define SUCCESS_HALT 0
+#ifndef dk_log_SUCCESS_HALT
+	#define dk_log_SUCCESS_HALT 0
 #endif
 
 // TODO
-#ifndef TODO_ENABLED
-	#define TODO_ENABLED 1
+#ifndef dk_log_TODO_ENABLED
+	#define dk_log_TODO_ENABLED 1
 #endif	
-#ifndef TODO_COLOR
-	#define TODO_COLOR lblue
+#ifndef dk_log_TODO_COLOR
+	#define dk_log_TODO_COLOR lblue
 #endif
-#ifndef TODO_TAG
-	#define TODO_TAG "TODO: "
+#ifndef dk_log_TODO_TAG
+	#define dk_log_TODO_TAG "TODO: "
 #endif
-#ifndef TODO_PAUSE
-	#define TODO_PAUSE 1
+#ifndef dk_log_TODO_PAUSE
+	#define dk_log_TODO_PAUSE 1
 #endif
-#ifndef TODO_TRACE	
-	#define TODO_TRACE 0
+#ifndef dk_log_TODO_TRACE	
+	#define dk_log_TODO_TRACE 0
 #endif
-#ifndef TODO_LINE
-	#define TODO_LINE 0
+#ifndef dk_log_TODO_LINE
+	#define dk_log_TODO_LINE 0
 #endif
-#ifndef TODO_HALT
-	#define TODO_HALT 0
+#ifndef dk_log_TODO_HALT
+	#define dk_log_TODO_HALT 0
 #endif
 
 // NOTICE
-#ifndef NOTICE_ENABLED
-	#define NOTICE_ENABLED 1
+#ifndef dk_log_NOTICE_ENABLED
+	#define dk_log_NOTICE_ENABLED 1
 #endif	
-#ifndef NOTICE_COLOR
-	#define NOTICE_COLOR lyellow
+#ifndef dk_log_NOTICE_COLOR
+	#define dk_log_NOTICE_COLOR lyellow
 #endif
-#ifndef NOTICE_TAG
-	#define NOTICE_TAG "NOTICE: "
+#ifndef dk_log_NOTICE_TAG
+	#define dk_log_NOTICE_TAG "NOTICE: "
 #endif
-#ifndef NOTICE_PAUSE
-	#define NOTICE_PAUSE 0
+#ifndef dk_log_NOTICE_PAUSE
+	#define dk_log_NOTICE_PAUSE 0
 #endif
-#ifndef NOTICE_TRACE	
-	#define NOTICE_TRACE 0
+#ifndef dk_log_NOTICE_TRACE	
+	#define dk_log_NOTICE_TRACE 0
 #endif
-#ifndef NOTICE_LINE
-	#define NOTICE_LINE 0
+#ifndef dk_log_NOTICE_LINE
+	#define dk_log_NOTICE_LINE 0
 #endif
-#ifndef NOTICE_HALT
-	#define NOTICE_HALT 0
+#ifndef dk_log_NOTICE_HALT
+	#define dk_log_NOTICE_HALT 0
 #endif
 
 // FIXME
-#ifndef FIXME_ENABLED
-	#define FIXME_ENABLED 1
+#ifndef dk_log_FIXME_ENABLED
+	#define dk_log_FIXME_ENABLED 1
 #endif	
-#ifndef FIXME_COLOR
-	#define FIXME_COLOR lyellow
+#ifndef dk_log_FIXME_COLOR
+	#define dk_log_FIXME_COLOR lyellow
 #endif
-#ifndef FIXME_TAG
-	#define FIXME_TAG "FIXME: "
+#ifndef dk_log_FIXME_TAG
+	#define dk_log_FIXME_TAG "FIXME: "
 #endif
-#ifndef FIXME_PAUSE
-	#define FIXME_PAUSE 1
+#ifndef dk_log_FIXME_PAUSE
+	#define dk_log_FIXME_PAUSE 1
 #endif
-#ifndef FIXME_TRACE	
-	#define FIXME_TRACE 0
+#ifndef dk_log_FIXME_TRACE	
+	#define dk_log_FIXME_TRACE 0
 #endif
-#ifndef FIXME_LINE
-	#define FIXME_LINE 0
+#ifndef dk_log_FIXME_LINE
+	#define dk_log_FIXME_LINE 0
 #endif
-#ifndef FIXME_HALT
-	#define FIXME_HALT 0
+#ifndef dk_log_FIXME_HALT
+	#define dk_log_FIXME_HALT 0
 #endif
 
 // WARNING
-#ifndef WARNING_ENABLED
-	#define WARNING_ENABLED 1;
+#ifndef dk_log_WARNING_ENABLED
+	#define dk_log_WARNING_ENABLED 1;
 #endif	
-#ifndef WARNING_COLOR
-	#define WARNING_COLOR yellow
+#ifndef dk_log_WARNING_COLOR
+	#define dk_log_WARNING_COLOR yellow
 #endif
-#ifndef WARNING_TAG
-	#define WARNING_TAG "WARNING: "
+#ifndef dk_log_WARNING_TAG
+	#define dk_log_WARNING_TAG "WARNING: "
 #endif
-#ifndef WARNING_PAUSE
-	#define WARNING_PAUSE 0
+#ifndef dk_log_WARNING_PAUSE
+	#define dk_log_WARNING_PAUSE 0
 #endif
-#ifndef WARNING_TRACE	
-	#define WARNING_TRACE 0
+#ifndef dk_log_WARNING_TRACE	
+	#define dk_log_WARNING_TRACE 0
 #endif
-#ifndef WARNING_LINE
-	#define WARNING_LINE 0
+#ifndef dk_log_WARNING_LINE
+	#define dk_log_WARNING_LINE 0
 #endif
-#ifndef WARNING_HALT
-	#define WARNING_HALT 0
+#ifndef dk_log_WARNING_HALT
+	#define dk_log_WARNING_HALT 0
 #endif
 
 // ERROR
-#ifndef ERROR_ENABLED
-	#define ERROR_ENABLED 1
+#ifndef dk_log_ERROR_ENABLED
+	#define dk_log_ERROR_ENABLED 1
 #endif	
-#ifndef ERROR_COLOR
-	#define ERROR_COLOR lred
+#ifndef dk_log_ERROR_COLOR
+	#define dk_log_ERROR_COLOR lred
 #endif
-#ifndef ERROR_TAG
-	#define ERROR_TAG "ERROR: "
+#ifndef dk_log_ERROR_TAG
+	#define dk_log_ERROR_TAG "ERROR: "
 #endif
-#ifndef ERROR_PAUSE
-	#define ERROR_PAUSE 1
+#ifndef dk_log_ERROR_PAUSE
+	#define dk_log_ERROR_PAUSE 1
 #endif
-#ifndef ERROR_TRACE	
-	#define ERROR_TRACE 0
+#ifndef dk_log_ERROR_TRACE	
+	#define dk_log_ERROR_TRACE 0
 #endif
-#ifndef ERROR_LINE
-	#define ERROR_LINE 0
+#ifndef dk_log_ERROR_LINE
+	#define dk_log_ERROR_LINE 0
 #endif
-#ifndef ERROR_HALT
-	#define ERROR_HALT 0
+#ifndef dk_log_ERROR_HALT
+	#define dk_log_ERROR_HALT 0
 #endif
 
 // FATAL
-#ifndef FATAL_ENABLED
-	#define FATAL_ENABLED 1
+#ifndef dk_log_FATAL_ENABLED
+	#define dk_log_FATAL_ENABLED 1
 #endif	
-#ifndef FATAL_COLOR
-	#define FATAL_COLOR red
+#ifndef dk_log_FATAL_COLOR
+	#define dk_log_FATAL_COLOR red
 #endif
-#ifndef FATAL_TAG
-	#define FATAL_TAG "FATAL: "
+#ifndef dk_log_FATAL_TAG
+	#define dk_log_FATAL_TAG "FATAL: "
 #endif
-#ifndef FATAL_PAUSE
-	#define FATAL_PAUSE 1
+#ifndef dk_log_FATAL_PAUSE
+	#define dk_log_FATAL_PAUSE 1
 #endif
-#ifndef FATAL_TRACE	
-	#define FATAL_TRACE 0
+#ifndef dk_log_FATAL_TRACE	
+	#define dk_log_FATAL_TRACE 0
 #endif
-#ifndef FATAL_LINE
-	#define FATAL_LINE 0
+#ifndef dk_log_FATAL_LINE
+	#define dk_log_FATAL_LINE 0
 #endif
-#ifndef FATAL_HALT
-	#define FATAL_HALT 1
+#ifndef dk_log_FATAL_HALT
+	#define dk_log_FATAL_HALT 1
 #endif
 
 
@@ -294,13 +294,13 @@ int v_dk_log(int level, const char* format, va_list args) {
 		return 1;
 	#endif
 	
-	int level_enable  = DEFAULT_ENABLED;
-	char* level_color = (char *)DEFAULT_COLOR;
-	char* level_tag   = (char *)DEFAULT_TAG;
-	int level_pause	  = DEFAULT_PAUSE;
-	int level_trace   = DEFAULT_TRACE;
-	int level_line    = DEFAULT_LINE;
-	int level_halt    = DEFAULT_HALT;
+	int level_enable  = dk_log_DEFAULT_ENABLED;
+	char* level_color = (char *)dk_log_DEFAULT_COLOR;
+	char* level_tag   = (char *)dk_log_DEFAULT_TAG;
+	int level_pause	  = dk_log_DEFAULT_PAUSE;
+	int level_trace   = dk_log_DEFAULT_TRACE;
+	int level_line    = dk_log_DEFAULT_LINE;
+	int level_halt    = dk_log_DEFAULT_HALT;
 	if(level == VERBOSE){
 		level_enable  = VERBOSE_ENABLED;
 		level_color   = (char *)dk_log_VERBOSE_COLOR;
@@ -321,75 +321,75 @@ int v_dk_log(int level, const char* format, va_list args) {
 	}
 	if(level == INFO){
 		level_enable  = INFO_ENABLED;
-		level_color   = (char *)INFO_COLOR;
-		level_tag     = (char *)INFO_TAG;
-		level_pause	  = INFO_PAUSE;
-		level_trace   = INFO_TRACE;
-		level_line    = INFO_LINE;
-		level_halt    = INFO_HALT;
+		level_color   = (char *)dk_log_INFO_COLOR;
+		level_tag     = (char *)dk_log_INFO_TAG;
+		level_pause	  = dk_log_INFO_PAUSE;
+		level_trace   = dk_log_INFO_TRACE;
+		level_line    = dk_log_INFO_LINE;
+		level_halt    = dk_log_INFO_HALT;
 	}
 	if(level == SUCCESS){
-		level_enable  = SUCCESS_ENABLED;
-		level_color   = (char *)SUCCESS_COLOR;
-		level_tag     = (char *)SUCCESS_TAG;
-		level_pause	  = SUCCESS_PAUSE;
-		level_trace   = SUCCESS_TRACE;
-		level_line    = SUCCESS_LINE;
-		level_halt    = SUCCESS_HALT;
+		level_enable  = dk_log_SUCCESS_ENABLED;
+		level_color   = (char *)dk_log_SUCCESS_COLOR;
+		level_tag     = (char *)dk_log_SUCCESS_TAG;
+		level_pause	  = dk_log_SUCCESS_PAUSE;
+		level_trace   = dk_log_SUCCESS_TRACE;
+		level_line    = dk_log_SUCCESS_LINE;
+		level_halt    = dk_log_SUCCESS_HALT;
 	}
 	if(level == TODO){
-		level_enable  = TODO_ENABLED;
-		level_color   = (char *)TODO_COLOR;
-		level_tag     = (char *)TODO_TAG;
-		level_pause	  = TODO_PAUSE;
-		level_trace   = TODO_TRACE;
-		level_line    = TODO_LINE;
-		level_halt    = TODO_HALT;
+		level_enable  = dk_log_TODO_ENABLED;
+		level_color   = (char *)dk_log_TODO_COLOR;
+		level_tag     = (char *)dk_log_TODO_TAG;
+		level_pause	  = dk_log_TODO_PAUSE;
+		level_trace   = dk_log_TODO_TRACE;
+		level_line    = dk_log_TODO_LINE;
+		level_halt    = dk_log_TODO_HALT;
 	}
 	if(level == NOTICE){
-		level_enable  = NOTICE_ENABLED;
-		level_color   = (char *)NOTICE_COLOR;
-		level_tag     = (char *)NOTICE_TAG;
-		level_pause	  = NOTICE_PAUSE;
-		level_trace   = NOTICE_TRACE;
-		level_line    = NOTICE_LINE;
-		level_halt    = NOTICE_HALT;
+		level_enable  = dk_log_NOTICE_ENABLED;
+		level_color   = (char *)dk_log_NOTICE_COLOR;
+		level_tag     = (char *)dk_log_NOTICE_TAG;
+		level_pause	  = dk_log_NOTICE_PAUSE;
+		level_trace   = dk_log_NOTICE_TRACE;
+		level_line    = dk_log_NOTICE_LINE;
+		level_halt    = dk_log_NOTICE_HALT;
 	}
 	if(level == FIXME){
-		level_enable  = FIXME_ENABLED;
-		level_color   = (char *)FIXME_COLOR;
-		level_tag     = (char *)FIXME_TAG;
-		level_pause	  = FIXME_PAUSE;
-		level_trace   = FIXME_TRACE;
-		level_line    = FIXME_LINE;
-		level_halt    = FIXME_HALT;
+		level_enable  = dk_log_FIXME_ENABLED;
+		level_color   = (char *)dk_log_FIXME_COLOR;
+		level_tag     = (char *)dk_log_FIXME_TAG;
+		level_pause	  = dk_log_FIXME_PAUSE;
+		level_trace   = dk_log_FIXME_TRACE;
+		level_line    = dk_log_FIXME_LINE;
+		level_halt    = dk_log_FIXME_HALT;
 	}
 	if(level == WARNING){
-		level_enable  = WARNING_ENABLED;
-		level_color   = (char *)WARNING_COLOR;
-		level_tag     = (char *)WARNING_TAG;
-		level_pause	  = WARNING_PAUSE;
-		level_trace   = WARNING_TRACE;
-		level_line    = WARNING_LINE;
-		level_halt    = WARNING_HALT;
+		level_enable  = dk_log_WARNING_ENABLED;
+		level_color   = (char *)dk_log_WARNING_COLOR;
+		level_tag     = (char *)dk_log_WARNING_TAG;
+		level_pause	  = dk_log_WARNING_PAUSE;
+		level_trace   = dk_log_WARNING_TRACE;
+		level_line    = dk_log_WARNING_LINE;
+		level_halt    = dk_log_WARNING_HALT;
 	}
 	if(level == ERROR){
-		level_enable  = ERROR_ENABLED;
-		level_color   = (char *)ERROR_COLOR;
-		level_tag     = (char *)ERROR_TAG;
-		level_pause	  = ERROR_PAUSE;
-		level_trace   = ERROR_TRACE;
-		level_line    = ERROR_LINE;
-		level_halt    = ERROR_HALT;
+		level_enable  = dk_log_ERROR_ENABLED;
+		level_color   = (char *)dk_log_ERROR_COLOR;
+		level_tag     = (char *)dk_log_ERROR_TAG;
+		level_pause	  = dk_log_ERROR_PAUSE;
+		level_trace   = dk_log_ERROR_TRACE;
+		level_line    = dk_log_ERROR_LINE;
+		level_halt    = dk_log_ERROR_HALT;
 	}
 	if(level == FATAL){
-		level_enable  = FATAL_ENABLED;
-		level_color   = (char *)FATAL_COLOR;
-		level_tag     = (char *)FATAL_TAG;
-		level_pause	  = FATAL_PAUSE;
-		level_trace   = FATAL_TRACE;
-		level_line    = FATAL_LINE;
-		level_halt    = FATAL_HALT;
+		level_enable  = dk_log_FATAL_ENABLED;
+		level_color   = (char *)dk_log_FATAL_COLOR;
+		level_tag     = (char *)dk_log_FATAL_TAG;
+		level_pause	  = dk_log_FATAL_PAUSE;
+		level_trace   = dk_log_FATAL_TRACE;
+		level_line    = dk_log_FATAL_LINE;
+		level_halt    = dk_log_FATAL_HALT;
 	}
 	if(level_enable != 1)
 		return 1;

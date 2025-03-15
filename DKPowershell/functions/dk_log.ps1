@@ -4,13 +4,13 @@ if(!$dk_log){ $dk_log = 1 } else{ return } #include guard
 if(!(${dk_log_ENABLE}))  { $global:dk_log_ENABLE = 1 }
 
 # DEFAULT
-if(!(${DEFAULT_ENABLE})) { $global:DEFAULT_ENABLE = 1 }
-if(!(${DEFAULT_COLOR}))  { $global:DEFAULT_COLOR = ${white} }
-#if(!(${DEFAULT_TAG}))   { $global:DEFAULT_TAG = bat>: " }
-if(!(${DEFAULT_PAUSE}))  { $global:DEFAULT_PAUSE = 0 }
-if(!(${DEFAULT_TRACE}))  { $global:DEFAULT_TRACE = 0 }
-if(!(${DEFAULT_LINE}))   { $global:DEFAULT_LINE = 0 }
-if(!(${DEFAULT_HALT}))   { $global:DEFAULT_HALT = 0 }
+if(!(${dk_log_DEFAULT_ENABLE})) { $global:dk_log_DEFAULT_ENABLE = 1 }
+if(!(${dk_log_DEFAULT_COLOR}))  { $global:dk_log_DEFAULT_COLOR = ${white} }
+#if(!(${dk_log_DEFAULT_TAG}))   { $global:dk_log_DEFAULT_TAG = bat>: " }
+if(!(${dk_log_DEFAULT_PAUSE}))  { $global:dk_log_DEFAULT_PAUSE = 0 }
+if(!(${dk_log_DEFAULT_TRACE}))  { $global:dk_log_DEFAULT_TRACE = 0 }
+if(!(${dk_log_DEFAULT_LINE}))   { $global:dk_log_DEFAULT_LINE = 0 }
+if(!(${dk_log_DEFAULT_HALT}))   { $global:dk_log_DEFAULT_HALT = 0 }
 
 # VERBOSE
 if(!(${dk_log_VERBOSE_ENABLE})) { $global:dk_log_VERBOSE_ENABLE = 1 }
@@ -31,67 +31,67 @@ if(!(${dk_log_DEBUG_LINE}))     { $global:dk_log_DEBUG_LINE = 0 }
 if(!(${dk_log_DEBUG_HALT}))     { $global:dk_log_DEBUG_HALT = 0 }
 
 # INFO
-if(!(${INFO_ENABLE}))    { $global:INFO_ENABLE = 1 }
-if(!(${INFO_COLOR}))     { $global:INFO_COLOR = ${white} }
-if(!(${INFO_TAG}))       { $global:INFO_TAG = "INFO: " }
-if(!(${INFO_PAUSE}))     { $global:INFO_PAUSE = 0 }
-if(!(${INFO_TRACE}))     { $global:INFO_TRACE = 0 }
-if(!(${INFO_LINE}))      { $global:INFO_LINE = 0 }
-if(!(${INFO_HALT}))      { $global:INFO_HALT = 0 }
+if(!(${dk_log_INFO_ENABLE}))    { $global:dk_log_INFO_ENABLE = 1 }
+if(!(${dk_log_INFO_COLOR}))     { $global:dk_log_INFO_COLOR = ${white} }
+if(!(${dk_log_INFO_TAG}))       { $global:dk_log_INFO_TAG = "INFO: " }
+if(!(${dk_log_INFO_PAUSE}))     { $global:dk_log_INFO_PAUSE = 0 }
+if(!(${dk_log_INFO_TRACE}))     { $global:dk_log_INFO_TRACE = 0 }
+if(!(${dk_log_INFO_LINE}))      { $global:dk_log_INFO_LINE = 0 }
+if(!(${dk_log_INFO_HALT}))      { $global:dk_log_INFO_HALT = 0 }
 
 # NOTICE
-if(!(${NOTICE_ENABLE}))  { $global:NOTICE_ENABLE = 1 }
-if(!(${NOTICE_COLOR}))   { $global:NOTICE_COLOR = ${lyellow} }
-if(!(${NOTICE_TAG}))     { $global:NOTICE_TAG = "NOTICE: " }
-if(!(${NOTICE_PAUSE}))   { $global:NOTICE_PAUSE = 0 }
-if(!(${NOTICE_TRACE}))   { $global:NOTICE_TRACE = 0 }
-if(!(${NOTICE_LINE}))    { $global:NOTICE_LINE = 0 }
-if(!(${NOTICE_HALT}))    { $global:NOTICE_HALT = 0 }
+if(!(${dk_log_NOTICE_ENABLE}))  { $global:dk_log_NOTICE_ENABLE = 1 }
+if(!(${dk_log_NOTICE_COLOR}))   { $global:dk_log_NOTICE_COLOR = ${lyellow} }
+if(!(${dk_log_NOTICE_TAG}))     { $global:dk_log_NOTICE_TAG = "NOTICE: " }
+if(!(${dk_log_NOTICE_PAUSE}))   { $global:dk_log_NOTICE_PAUSE = 0 }
+if(!(${dk_log_NOTICE_TRACE}))   { $global:dk_log_NOTICE_TRACE = 0 }
+if(!(${dk_log_NOTICE_LINE}))    { $global:dk_log_NOTICE_LINE = 0 }
+if(!(${dk_log_NOTICE_HALT}))    { $global:dk_log_NOTICE_HALT = 0 }
 
 # SUCCESS
-if(!(${SUCCESS_ENABLE}))  { $global:SUCCESS_ENABLE = 1 }
-if(!(${SUCCESS_COLOR}))   { $global:SUCCESS_COLOR = ${green} }
-if(!(${SUCCESS_TAG}))     { $global:SUCCESS_TAG = "SUCCESS: " }
-if(!(${SUCCESS_PAUSE}))   { $global:SUCCESS_PAUSE = 0 }
-if(!(${SUCCESS_TRACE}))   { $global:SUCCESS_TRACE = 0 }
-if(!(${SUCCESS_LINE}))    { $global:SUCCESS_LINE = 0 }
-if(!(${SUCCESS_HALT}))    { $global:SUCCESS_HALT = 0 }
+if(!(${dk_log_SUCCESS_ENABLE}))  { $global:dk_log_SUCCESS_ENABLE = 1 }
+if(!(${dk_log_SUCCESS_COLOR}))   { $global:dk_log_SUCCESS_COLOR = ${green} }
+if(!(${dk_log_SUCCESS_TAG}))     { $global:dk_log_SUCCESS_TAG = "SUCCESS: " }
+if(!(${dk_log_SUCCESS_PAUSE}))   { $global:dk_log_SUCCESS_PAUSE = 0 }
+if(!(${dk_log_SUCCESS_TRACE}))   { $global:dk_log_SUCCESS_TRACE = 0 }
+if(!(${dk_log_SUCCESS_LINE}))    { $global:dk_log_SUCCESS_LINE = 0 }
+if(!(${dk_log_SUCCESS_HALT}))    { $global:dk_log_SUCCESS_HALT = 0 }
 
 # WARNING
-if(!(${WARNING_ENABLE})) { $global:WARNING_ENABLE = 1 }
-if(!(${WARNING_COLOR}))  { $global:WARNING_COLOR = ${yellow} }
-if(!(${WARNING_TAG}))    { $global:WARNING_TAG = "WARNING: " }
-if(!(${WARNING_PAUSE}))  { $global:WARNING_PAUSE = 0 }
-if(!(${WARNING_TRACE}))  { $global:WARNING_TRACE = 0 }
-if(!(${WARNING_LINE}))   { $global:WARNING_LINE = 0 }
-if(!(${WARNING_HALT}))   { $global:WARNING_HALT = 0 }
+if(!(${dk_log_WARNING_ENABLE})) { $global:dk_log_WARNING_ENABLE = 1 }
+if(!(${dk_log_WARNING_COLOR}))  { $global:dk_log_WARNING_COLOR = ${yellow} }
+if(!(${dk_log_WARNING_TAG}))    { $global:dk_log_WARNING_TAG = "WARNING: " }
+if(!(${dk_log_WARNING_PAUSE}))  { $global:dk_log_WARNING_PAUSE = 0 }
+if(!(${dk_log_WARNING_TRACE}))  { $global:dk_log_WARNING_TRACE = 0 }
+if(!(${dk_log_WARNING_LINE}))   { $global:dk_log_WARNING_LINE = 0 }
+if(!(${dk_log_WARNING_HALT}))   { $global:dk_log_WARNING_HALT = 0 }
 
 # ERROR
-if(!(${ERROR_ENABLE}))   { $global:ERROR_ENABLE = 1 }
-if(!(${ERROR_COLOR}))    { $global:ERROR_COLOR = ${red} }
-if(!(${ERROR_TAG}))      { $global:ERROR_TAG = "ERROR: " }
-if(!(${ERROR_PAUSE}))    { $global:ERROR_PAUSE = 1 }
-if(!(${ERROR_TRACE}))    { $global:ERROR_TRACE = 0 }
-if(!(${ERROR_LINE}))     { $global:ERROR_LINE = 0 }
-if(!(${ERROR_HALT}))     { $global:ERROR_HALT = 0 }
+if(!(${dk_log_ERROR_ENABLE}))   { $global:dk_log_ERROR_ENABLE = 1 }
+if(!(${dk_log_ERROR_COLOR}))    { $global:dk_log_ERROR_COLOR = ${red} }
+if(!(${dk_log_ERROR_TAG}))      { $global:dk_log_ERROR_TAG = "ERROR: " }
+if(!(${dk_log_ERROR_PAUSE}))    { $global:dk_log_ERROR_PAUSE = 1 }
+if(!(${dk_log_ERROR_TRACE}))    { $global:dk_log_ERROR_TRACE = 0 }
+if(!(${dk_log_ERROR_LINE}))     { $global:dk_log_ERROR_LINE = 0 }
+if(!(${dk_log_ERROR_HALT}))     { $global:dk_log_ERROR_HALT = 0 }
 
 # TODO
-if(!(${TODO_ENABLE}))    { $global:TODO_ENABLE = 1 }
-if(!(${TODO_COLOR}))     { $global:TODO_COLOR = ${lblue} }
-if(!(${TODO_TAG}))       { $global:TODO_TAG = "TODO: " }
-if(!(${TODO_PAUSE}))     { $global:TODO_PAUSE = 1 }
-if(!(${TODO_TRACE}))     { $global:TODO_TRACE = 0 }
-if(!(${TODO_LINE}))      { $global:TODO_LINE = 0 }
-if(!(${TODO_HALT}))      { $global:TODO_HALT = 0 }
+if(!(${dk_log_TODO_ENABLE}))    { $global:dk_log_TODO_ENABLE = 1 }
+if(!(${dk_log_TODO_COLOR}))     { $global:dk_log_TODO_COLOR = ${lblue} }
+if(!(${dk_log_TODO_TAG}))       { $global:dk_log_TODO_TAG = "TODO: " }
+if(!(${dk_log_TODO_PAUSE}))     { $global:dk_log_TODO_PAUSE = 1 }
+if(!(${dk_log_TODO_TRACE}))     { $global:dk_log_TODO_TRACE = 0 }
+if(!(${dk_log_TODO_LINE}))      { $global:dk_log_TODO_LINE = 0 }
+if(!(${dk_log_TODO_HALT}))      { $global:dk_log_TODO_HALT = 0 }
 
 # FIXME
-if(!(${FIXME_ENABLE}))   { $global:FIXME_ENABLE = 1 }
-if(!(${FIXME_COLOR}))    { $global:FIXME_COLOR = ${lred} }
-if(!(${FIXME_TAG}))      { $global:FIXME_TAG = "FIXME: " }
-if(!(${FIXME_PAUSE}))    { $global:FIXME_PAUSE = 1 }
-if(!(${FIXME_TRACE}))    { $global:FIXME_TRACE = 0 }
-if(!(${FIXME_LINE}))     { $global:FIXME_LINE = 0 }
-if(!(${FIXME_HALT}))     { $global:FIXME_HALT = 0 }
+if(!(${dk_log_FIXME_ENABLE}))   { $global:dk_log_FIXME_ENABLE = 1 }
+if(!(${dk_log_FIXME_COLOR}))    { $global:dk_log_FIXME_COLOR = ${lred} }
+if(!(${dk_log_FIXME_TAG}))      { $global:dk_log_FIXME_TAG = "FIXME: " }
+if(!(${dk_log_FIXME_PAUSE}))    { $global:dk_log_FIXME_PAUSE = 1 }
+if(!(${dk_log_FIXME_TRACE}))    { $global:dk_log_FIXME_TRACE = 0 }
+if(!(${dk_log_FIXME_LINE}))     { $global:dk_log_FIXME_LINE = 0 }
+if(!(${dk_log_FIXME_HALT}))     { $global:dk_log_FIXME_HALT = 0 }
 
 
 ################################################################################

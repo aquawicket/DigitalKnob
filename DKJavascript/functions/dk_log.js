@@ -4,14 +4,14 @@ var dk_log_ENABLE = 1;
 
 //### DEFAULT ###
 var DEFAULT="DEFAULT"
-var DEFAULT_ENABLE=1;
-var DEFAULT_COLOR=white
-var DEFAULT_TAG=""
-var DEFAULT_PAUSE=0
-var DEFAULT_TIMEOUT=0
-var DEFAULT_TRACE=0
-var DEFAULT_LINE=0
-var DEFAULT_HALT=0
+var dk_log_DEFAULT_ENABLE=1;
+var dk_log_DEFAULT_COLOR=white
+var dk_log_DEFAULT_TAG=""
+var dk_log_DEFAULT_PAUSE=0
+var dk_log_DEFAULT_TIMEOUT=0
+var dk_log_DEFAULT_TRACE=0
+var dk_log_DEFAULT_LINE=0
+var dk_log_DEFAULT_HALT=0
 
 //### VERBOSE ###
 var VERBOSE="VERBOSE"
@@ -37,92 +37,92 @@ var dk_log_DEBUG_HALT=0
 
 //### INFO ###
 var INFO="INFO"
-var INFO_ENABLE=1
-var INFO_COLOR=white
-var INFO_TAG="INFO: "
-var INFO_PAUSE=0
-var INFO_TIMEOUT=0
-var INFO_TRACE=0
-var INFO_LINE=0
-var INFO_HALT=0
+var dk_log_INFO_ENABLE=1
+var dk_log_INFO_COLOR=white
+var dk_log_INFO_TAG="INFO: "
+var dk_log_INFO_PAUSE=0
+var dk_log_INFO_TIMEOUT=0
+var dk_log_INFO_TRACE=0
+var dk_log_INFO_LINE=0
+var dk_log_INFO_HALT=0
 
 //### SUCCESS ###
 var SUCCESS="SUCCESS"
-var SUCCESS_ENABLE=1
-var SUCCESS_COLOR=green
-var SUCCESS_TAG="SUCCESS: "
-var SUCCESS_PAUSE=0
-var SUCCESS_TIMEOUT=0
-var SUCCESS_TRACE=0
-var SUCCESS_LINE=0
-var SUCCESS_HALT=0
+var dk_log_SUCCESS_ENABLE=1
+var dk_log_SUCCESS_COLOR=green
+var dk_log_SUCCESS_TAG="SUCCESS: "
+var dk_log_SUCCESS_PAUSE=0
+var dk_log_SUCCESS_TIMEOUT=0
+var dk_log_SUCCESS_TRACE=0
+var dk_log_SUCCESS_LINE=0
+var dk_log_SUCCESS_HALT=0
 
 //### TODO ###
 var TODO="TODO"
-var TODO_ENABLE=1
-var TODO_COLOR=blue
-var TODO_TAG="TODO: "
-var TODO_PAUSE=0
-var TODO_TIMEOUT=1
-var TODO_TRACE=0
-var TODO_LINE=0
-var TODO_HALT=0
+var dk_log_TODO_ENABLE=1
+var dk_log_TODO_COLOR=blue
+var dk_log_TODO_TAG="TODO: "
+var dk_log_TODO_PAUSE=0
+var dk_log_TODO_TIMEOUT=1
+var dk_log_TODO_TRACE=0
+var dk_log_TODO_LINE=0
+var dk_log_TODO_HALT=0
 
 //### NOTICE ###
 var NOTICE="NOTICE"
-var NOTICE_ENABLE=1
-var NOTICE_COLOR=lyellow
-var NOTICE_TAG="NOTICE: "
-var NOTICE_PAUSE=0
-var NOTICE_TIMEOUT=0
-var NOTICE_TRACE=0
-var NOTICE_LINE=0
-var NOTICE_HALT=0
+var dk_log_NOTICE_ENABLE=1
+var dk_log_NOTICE_COLOR=lyellow
+var dk_log_NOTICE_TAG="NOTICE: "
+var dk_log_NOTICE_PAUSE=0
+var dk_log_NOTICE_TIMEOUT=0
+var dk_log_NOTICE_TRACE=0
+var dk_log_NOTICE_LINE=0
+var dk_log_NOTICE_HALT=0
 
 //### FIXME ###
 var FIXME="FIXME"
-var FIXME_ENABLE=1
-var FIXME_COLOR=lyellow
-var FIXME_TAG="FIXME: "
-var FIXME_PAUSE=1
-var FIXME_TIMEOUT=0
-var FIXME_TRACE=0
-var FIXME_LINE=0
-var FIXME_HALT=0
+var dk_log_FIXME_ENABLE=1
+var dk_log_FIXME_COLOR=lyellow
+var dk_log_FIXME_TAG="FIXME: "
+var dk_log_FIXME_PAUSE=1
+var dk_log_FIXME_TIMEOUT=0
+var dk_log_FIXME_TRACE=0
+var dk_log_FIXME_LINE=0
+var dk_log_FIXME_HALT=0
 
 //### WARNING ###
 var WARNING="WARNING"
-var WARNING_ENABLE=1
-var WARNING_COLOR=yellow
-var WARNING_TAG="WARNING: "
-var WARNING_PAUSE=0
-var WARNING_TIMEOUT=0
-var WARNING_TRACE=1
-var WARNING_LINE=0
-var WARNING_HALT=0
+var dk_log_WARNING_ENABLE=1
+var dk_log_WARNING_COLOR=yellow
+var dk_log_WARNING_TAG="WARNING: "
+var dk_log_WARNING_PAUSE=0
+var dk_log_WARNING_TIMEOUT=0
+var dk_log_WARNING_TRACE=1
+var dk_log_WARNING_LINE=0
+var dk_log_WARNING_HALT=0
 
 //### ERROR ###
 var ERROR="ERROR"
-var ERROR_ENABLE=1
-var ERROR_COLOR=lred
-var ERROR_TAG="ERROR: "
-var ERROR_PAUSE=0
-var ERROR_TIMEOUT=1
-var ERROR_TRACE=0
-var ERROR_LINE=0
-var ERROR_HALT=0
+var dk_log_ERROR_ENABLE=1
+var dk_log_ERROR_COLOR=lred
+var dk_log_ERROR_TAG="ERROR: "
+var dk_log_ERROR_PAUSE=0
+var dk_log_ERROR_TIMEOUT=1
+var dk_log_ERROR_TRACE=0
+var dk_log_ERROR_LINE=0
+var dk_log_ERROR_HALT=0
 
 //### FATAL ###
 var FATAL="FATAL"
-var FATAL_ENABLE=1
-var FATAL_COLOR=red
-var FATAL_TAG="FATAL: "
-var FATAL_PAUSE=0
-var FATAL_TIMEOUT=0
-var FATAL_TRACE=1
-var FATAL_LINE=0
-var FATAL_SOUND=1
-var FATAL_HALT=1
+var dk_log_FATAL_ENABLE=1
+var dk_log_FATAL_COLOR=red
+var dk_log_FATAL_TAG="FATAL: "
+var dk_log_FATAL_PAUSE=0
+var dk_log_FATAL_TIMEOUT=0
+var dk_log_FATAL_TRACE=1
+var dk_log_FATAL_LINE=0
+var dk_log_FATAL_SOUND=1
+var dk_log_FATAL_HALT=1
 
 
 //##################################################################################

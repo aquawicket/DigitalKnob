@@ -17,128 +17,128 @@ if not defined dk_log_ENABLE	(set "dk_log_ENABLE=1")
 :: 10 FATAL			dk_fatal
 
 ::### VERBOSE ###
-if not defined dk_log_VERBOSE_ENABLE	(set "dk_log_VERBOSE_ENABLE=1")
-if not defined dk_log_VERBOSE_COLOR		(set "dk_log_VERBOSE_COLOR=%magenta%")
-if not defined dk_log_VERBOSE_TAG		(set "dk_log_VERBOSE_TAG=VERBOSE: ")
-::if not defined dk_log_VERBOSE_TRACE	(set "dk_log_VERBOSE_TRACE=0")
-::if not defined dk_log_VERBOSE_LINE	(set "dk_log_VERBOSE_LINE=0")
-::if not defined dk_log_VERBOSE_PAUSE	(set "dk_log_VERBOSE_PAUSE=0")
-::if not defined dk_log_VERBOSE_TIMEOUT (set "dk_log_VERBOSE_TIMEOUT=0")
-::if not defined dk_log_VERBOSE_HALT	(set "dk_log_VERBOSE_HALT=0")
+if not defined dk_log_VERBOSE_ENABLE		(set "dk_log_VERBOSE_ENABLE=1")
+if not defined dk_log_VERBOSE_COLOR			(set "dk_log_VERBOSE_COLOR=%magenta%")
+if not defined dk_log_VERBOSE_TAG			(set "dk_log_VERBOSE_TAG=VERBOSE: ")
+::if not defined dk_log_VERBOSE_TRACE		(set "dk_log_VERBOSE_TRACE=0")
+::if not defined dk_log_VERBOSE_LINE		(set "dk_log_VERBOSE_LINE=0")
+::if not defined dk_log_VERBOSE_PAUSE		(set "dk_log_VERBOSE_PAUSE=0")
+::if not defined dk_log_VERBOSE_TIMEOUT 	(set "dk_log_VERBOSE_TIMEOUT=0")
+::if not defined dk_log_VERBOSE_HALT		(set "dk_log_VERBOSE_HALT=0")
 
 ::### DEBUG ###
-if not defined dk_log_DEBUG_ENABLE		(set "dk_log_DEBUG_ENABLE=1")
-if not defined dk_log_DEBUG_COLOR		(set "dk_log_DEBUG_COLOR=%lblue%")
-if not defined dk_log_DEBUG_TAG			(set "dk_log_DEBUG_TAG=DEBUG: ")
-::if not defined dk_log_DEBUG_TRACE		(set "dk_log_DEBUG_TRACE=0")
-::if not defined dk_log_DEBUG_LINE		(set "dk_log_DEBUG_LINE=0")
-::if not defined dk_log_DEBUG_PAUSE		(set "dk_log_DEBUG_PAUSE=0")
-::if not defined dk_log_DEBUG_TIMEOUT	(set "dk_log_DEBUG_TIMEOUT=0")
-::if not defined dk_log_DEBUG_HALT		(set "dk_log_DEBUG_HALT=0")
+if not defined dk_log_DEBUG_ENABLE			(set "dk_log_DEBUG_ENABLE=1")
+if not defined dk_log_DEBUG_COLOR			(set "dk_log_DEBUG_COLOR=%lblue%")
+if not defined dk_log_DEBUG_TAG				(set "dk_log_DEBUG_TAG=DEBUG: ")
+::if not defined dk_log_DEBUG_TRACE			(set "dk_log_DEBUG_TRACE=0")
+::if not defined dk_log_DEBUG_LINE			(set "dk_log_DEBUG_LINE=0")
+::if not defined dk_log_DEBUG_PAUSE			(set "dk_log_DEBUG_PAUSE=0")
+::if not defined dk_log_DEBUG_TIMEOUT		(set "dk_log_DEBUG_TIMEOUT=0")
+::if not defined dk_log_DEBUG_HALT			(set "dk_log_DEBUG_HALT=0")
 
 ::### DEFAULT ###
-if not defined DEFAULT_ENABLE		(set "DEFAULT_ENABLE=1")
-if not defined DEFAULT_COLOR		(set "DEFAULT_COLOR=%white%")
-::if not defined DEFAULT_TAG		(set "DEFAULT_TAG=")
-::if not defined DEFAULT_TRACE		(set "DEFAULT_TRACE=0")
-::if not defined DEFAULT_LINE		(set "DEFAULT_LINE=0")
-::if not defined DEFAULT_PAUSE		(set "DEFAULT_PAUSE=0")
-::if not defined DEFAULT_TIMEOUT	(set "DEFAULT_TIMEOUT=0")
-::if not defined DEFAULT_HALT		(set "DEFAULT_HALT=0")
+if not defined dk_log_DEFAULT_ENABLE		(set "dk_log_DEFAULT_ENABLE=1")
+if not defined dk_log_DEFAULT_COLOR			(set "dk_log_DEFAULT_COLOR=%white%")
+::if not defined dk_log_DEFAULT_TAG			(set "dk_log_DEFAULT_TAG=")
+::if not defined dk_log_DEFAULT_TRACE		(set "dk_log_DEFAULT_TRACE=0")
+::if not defined dk_log_DEFAULT_LINE		(set "dk_log_DEFAULT_LINE=0")
+::if not defined dk_log_DEFAULT_PAUSE		(set "dk_log_DEFAULT_PAUSE=0")
+::if not defined dk_log_DEFAULT_TIMEOUT		(set "dk_log_DEFAULT_TIMEOUT=0")
+::if not defined dk_log_dk_log_DEFAULT_HALT	(set "dk_log_dk_log_DEFAULT_HALT=0")
 
 ::### INFO ###
-if not defined INFO_ENABLE			(set "INFO_ENABLE=1")
-if not defined INFO_COLOR			(set "INFO_COLOR=%white%")
-if not defined INFO_TAG				(set "INFO_TAG=INFO: ")
-::if not defined INFO_TRACE			(set "INFO_TRACE=0")
-::if not defined INFO_LINE			(set "INFO_LINE=0")
-::if not defined INFO_PAUSE			(set "INFO_PAUSE=0")
-::if not defined INFO_TIMEOUT		(set "INFO_TIMEOUT=0")
-::if not defined INFO_HALT			(set "INFO_HALT=0")
+if not defined dk_log_INFO_ENABLE			(set "dk_log_INFO_ENABLE=1")
+if not defined dk_log_INFO_COLOR			(set "dk_log_INFO_COLOR=%white%")
+if not defined dk_log_INFO_TAG				(set "dk_log_INFO_TAG=INFO: ")
+::if not defined dk_log_INFO_TRACE			(set "dk_log_INFO_TRACE=0")
+::if not defined dk_log_INFO_LINE			(set "dk_log_INFO_LINE=0")
+::if not defined dk_log_INFO_PAUSE			(set "dk_log_INFO_PAUSE=0")
+::if not defined dk_log_INFO_TIMEOUT		(set "dk_log_INFO_TIMEOUT=0")
+::if not defined dk_log_INFO_HALT			(set "dk_log_INFO_HALT=0")
 
 ::### SUCCESS ###
-if not defined SUCCESS_ENABLE		(set "SUCCESS_ENABLE=1")
-if not defined SUCCESS_COLOR		(set "SUCCESS_COLOR=%green%")
-if not defined SUCCESS_TAG			(set "SUCCESS_TAG=SUCCESS: ")
-::if not defined SUCCESS_TRACE		(set "SUCCESS_TRACE=0")
-::if not defined SUCCESS_LINE		(set "SUCCESS_LINE=0")
-::if not defined SUCCESS_PAUSE		(set "SUCCESS_PAUSE=0")
-::if not defined SUCCESS_TIMEOUT	(set "SUCCESS_TIMEOUT=0")
-::if not defined SUCCESS_HALT		(set "SUCCESS_HALT=0")
+if not defined dk_log_SUCCESS_ENABLE		(set "dk_log_SUCCESS_ENABLE=1")
+if not defined dk_log_SUCCESS_COLOR			(set "dk_log_SUCCESS_COLOR=%green%")
+if not defined dk_log_SUCCESS_TAG			(set "dk_log_SUCCESS_TAG=SUCCESS: ")
+::if not defined dk_log_SUCCESS_TRACE		(set "dk_log_SUCCESS_TRACE=0")
+::if not defined dk_log_SUCCESS_LINE		(set "dk_log_SUCCESS_LINE=0")
+::if not defined dk_log_SUCCESS_PAUSE		(set "dk_log_SUCCESS_PAUSE=0")
+::if not defined dk_log_SUCCESS_TIMEOUT		(set "dk_log_SUCCESS_TIMEOUT=0")
+::if not defined dk_log_SUCCESS_HALT		(set "dk_log_SUCCESS_HALT=0")
 
 ::### TODO ###
-if not defined TODO_ENABLE			(set "TODO_ENABLE=1")
-if not defined TODO_COLOR			(set "TODO_COLOR=%blue%")
-if not defined TODO_TAG				(set "TODO_TAG=TODO: ")
-::if not defined TODO_TRACE			(set "TODO_TRACE=0")
-::if not defined TODO_LINE			(set "TODO_LINE=0")
-::if not defined TODO_PAUSE			(set "TODO_PAUSE=0")
-if not defined TODO_TIMEOUT			(set "TODO_TIMEOUT=1")
-::if not defined TODO_HALT			(set "TODO_HALT=0")
+if not defined dk_log_TODO_ENABLE			(set "dk_log_TODO_ENABLE=1")
+if not defined dk_log_TODO_COLOR			(set "dk_log_TODO_COLOR=%blue%")
+if not defined dk_log_TODO_TAG				(set "dk_log_TODO_TAG=TODO: ")
+::if not defined dk_log_TODO_TRACE			(set "dk_log_TODO_TRACE=0")
+::if not defined dk_log_TODO_LINE			(set "dk_log_TODO_LINE=0")
+::if not defined dk_log_TODO_PAUSE			(set "dk_log_TODO_PAUSE=0")
+if not defined dk_log_TODO_TIMEOUT			(set "dk_log_TODO_TIMEOUT=1")
+::if not defined dk_log_TODO_HALT			(set "dk_log_TODO_HALT=0")
 
 ::### NOTICE ###
-if not defined NOTICE_ENABLE		(set "NOTICE_ENABLE=1")
-if not defined NOTICE_COLOR			(set "NOTICE_COLOR=%lyellow%")
-if not defined NOTICE_TAG			(set "NOTICE_TAG=NOTICE: ")
-::if not defined NOTICE_TRACE		(set "NOTICE_TRACE=0")
-::if not defined NOTICE_LINE		(set "NOTICE_LINE=0")
-::if not defined NOTICE_PAUSE		(set "NOTICE_PAUSE=0")
-::if not defined NOTICE_TIMEOUT		(set "NOTICE_TIMEOUT=0")
-::if not defined NOTICE_HALT		(set "NOTICE_HALT=0")
+if not defined dk_log_NOTICE_ENABLE			(set "dk_log_NOTICE_ENABLE=1")
+if not defined dk_log_NOTICE_COLOR			(set "dk_log_NOTICE_COLOR=%lyellow%")
+if not defined dk_log_NOTICE_TAG			(set "dk_log_NOTICE_TAG=NOTICE: ")
+::if not defined dk_log_NOTICE_TRACE		(set "dk_log_NOTICE_TRACE=0")
+::if not defined dk_log_NOTICE_LINE			(set "dk_log_NOTICE_LINE=0")
+::if not defined dk_log_NOTICE_PAUSE		(set "dk_log_NOTICE_PAUSE=0")
+::if not defined dk_log_NOTICE_TIMEOUT		(set "dk_log_NOTICE_TIMEOUT=0")
+::if not defined dk_log_NOTICE_HALT			(set "dk_log_NOTICE_HALT=0")
 
 ::### FIXME ###
-if not defined FIXME_ENABLE			(set "FIXME_ENABLE=1")
-if not defined FIXME_COLOR			(set "FIXME_COLOR=%lyellow%")
-if not defined FIXME_TAG			(set "FIXME_TAG=FIXME: ")
-::if not defined FIXME_TRACE		(set "FIXME_TRACE=0")
-::if not defined FIXME_LINE			(set "FIXME_LINE=0")
-if not defined FIXME_PAUSE			(set "FIXME_PAUSE=1")
-::if not defined FIXME_TIMEOUT		(set "FIXME_TIMEOUT=0")
-::if not defined FIXME_HALT			(set "FIXME_HALT=0")
+if not defined dk_log_FIXME_ENABLE			(set "dk_log_FIXME_ENABLE=1")
+if not defined dk_log_FIXME_COLOR			(set "dk_log_FIXME_COLOR=%lyellow%")
+if not defined dk_log_FIXME_TAG				(set "dk_log_FIXME_TAG=FIXME: ")
+::if not defined dk_log_FIXME_TRACE			(set "dk_log_FIXME_TRACE=0")
+::if not defined dk_log_FIXME_LINE			(set "dk_log_FIXME_LINE=0")
+if not defined dk_log_FIXME_PAUSE			(set "dk_log_FIXME_PAUSE=1")
+::if not defined dk_log_FIXME_TIMEOUT		(set "dk_log_FIXME_TIMEOUT=0")
+::if not defined dk_log_FIXME_HALT			(set "dk_log_FIXME_HALT=0")
 
 ::### WARNING ###
-if not defined WARNING_ENABLE		(set "WARNING_ENABLE=1")
-if not defined WARNING_COLOR		(set "WARNING_COLOR=%yellow%")
-if not defined WARNING_TAG			(set "WARNING_TAG=WARNING: ")
-if not defined WARNING_TRACE		(set "WARNING_TRACE=1")
-::if not defined WARNING_LINE		(set "WARNING_LINE=0")
-::if not defined WARNING_SOUND		(set "WARNING_SOUND=0")
-::if not defined WARNING_PAUSE		(set "WARNING_PAUSE=0")
-::if not defined WARNING_TIMEOUT	(set "WARNING_TIMEOUT=0")
-::if not defined WARNING_HALT		(set "WARNING_HALT=0")
+if not defined dk_log_WARNING_ENABLE		(set "dk_log_WARNING_ENABLE=1")
+if not defined dk_log_WARNING_COLOR			(set "dk_log_WARNING_COLOR=%yellow%")
+if not defined dk_log_WARNING_TAG			(set "dk_log_WARNING_TAG=WARNING: ")
+if not defined dk_log_WARNING_TRACE			(set "dk_log_WARNING_TRACE=1")
+::if not defined dk_log_WARNING_LINE		(set "dk_log_WARNING_LINE=0")
+::if not defined dk_log_WARNING_SOUND		(set "dk_log_WARNING_SOUND=0")
+::if not defined dk_log_WARNING_PAUSE		(set "dk_log_WARNING_PAUSE=0")
+::if not defined dk_log_WARNING_TIMEOUT		(set "dk_log_WARNING_TIMEOUT=0")
+::if not defined dk_log_WARNING_HALT		(set "dk_log_WARNING_HALT=0")
 
 ::### DEPRECATED ###
-if not defined DEPRECATED_ENABLE	(set "DEPRECATED_ENABLE=1")
-if not defined DEPRECATED_COLOR		(set "DEPRECATED_COLOR=%dim%%yellow%")
-if not defined DEPRECATED_TAG		(set "DEPRECATED_TAG=DEPRECATED: ")
-if not defined DEPRECATED_TRACE		(set "DEPRECATED_TRACE=1")
-::if not defined DEPRECATED_LINE	(set "DEPRECATED_LINE=0")
-::if not defined DEPRECATED_SOUND	(set "DEPRECATED_SOUND=0")
-if not defined DEPRECATED_PAUSE		(set "DEPRECATED_PAUSE=1")
-::if not defined DEPRECATED_TIMEOUT	(set "DEPRECATED_TIMEOUT=0")
-::if not defined DEPRECATED_HALT	(set "DEPRECATED_HALT=0")
+if not defined dk_log_DEPRECATED_ENABLE		(set "dk_log_DEPRECATED_ENABLE=1")
+if not defined dk_log_DEPRECATED_COLOR		(set "dk_log_DEPRECATED_COLOR=%dim%%yellow%")
+if not defined dk_log_DEPRECATED_TAG		(set "dk_log_DEPRECATED_TAG=DEPRECATED: ")
+if not defined dk_log_DEPRECATED_TRACE		(set "dk_log_DEPRECATED_TRACE=1")
+::if not defined dk_log_DEPRECATED_LINE		(set "dk_log_DEPRECATED_LINE=0")
+::if not defined dk_log_DEPRECATED_SOUND	(set "dk_log_DEPRECATED_SOUND=0")
+if not defined dk_log_DEPRECATED_PAUSE		(set "dk_log_DEPRECATED_PAUSE=1")
+::if not defined dk_log_DEPRECATED_TIMEOUT	(set "dk_log_DEPRECATED_TIMEOUT=0")
+::if not defined dk_log_DEPRECATED_HALT		(set "dk_log_DEPRECATED_HALT=0")
 
 ::### ERROR ###
-if not defined ERROR_ENABLE			(set "ERROR_ENABLE=1")
-if not defined ERROR_COLOR			(set "ERROR_COLOR=%lred%")
-if not defined ERROR_TAG			(set "ERROR_TAG=ERROR: ")
-if not defined ERROR_TRACE			(set "ERROR_TRACE=1")
-::if not defined ERROR_LINE			(set "ERROR_LINE=0")
-::if not defined ERROR_SOUND		(set "ERROR_SOUND=0")
-::if not defined ERROR_PAUSE		(set "ERROR_PAUSE=0")
-if not defined ERROR_TIMEOUT		(set "ERROR_TIMEOUT=3")
-::if not defined ERROR_HALT			(set "ERROR_HALT=0")
+if not defined dk_log_ERROR_ENABLE			(set "dk_log_ERROR_ENABLE=1")
+if not defined dk_log_ERROR_COLOR			(set "dk_log_ERROR_COLOR=%lred%")
+if not defined dk_log_ERROR_TAG				(set "dk_log_ERROR_TAG=ERROR: ")
+if not defined dk_log_ERROR_TRACE			(set "dk_log_ERROR_TRACE=1")
+::if not defined dk_log_ERROR_LINE			(set "dk_log_ERROR_LINE=0")
+::if not defined dk_log_ERROR_SOUND			(set "dk_log_ERROR_SOUND=0")
+::if not defined dk_log_ERROR_PAUSE			(set "dk_log_ERROR_PAUSE=0")
+if not defined dk_log_ERROR_TIMEOUT			(set "dk_log_ERROR_TIMEOUT=3")
+::if not defined dk_log_ERROR_HALT			(set "dk_log_ERROR_HALT=0")
 
 ::### FATAL ###
-if not defined FATAL_ENABLE			(set "FATAL_ENABLE=1")
-if not defined FATAL_COLOR			(set "FATAL_COLOR=%red%")
-if not defined FATAL_TAG			(set "FATAL_TAG=FATAL: ")
-if not defined FATAL_TRACE			(set "FATAL_TRACE=1")
-::if not defined FATAL_LINE			(set "FATAL_LINE=0")
-::if not defined FATAL_SOUND		(set "FATAL_SOUND=0")
-::if not defined FATAL_PAUSE		(set "FATAL_PAUSE=0")
-if not defined FATAL_TIMEOUT		(set "FATAL_TIMEOUT=9")
-::if not defined FATAL_HALT			(set "FATAL_HALT=0")
+if not defined dk_log_FATAL_ENABLE			(set "dk_log_FATAL_ENABLE=1")
+if not defined dk_log_FATAL_COLOR			(set "dk_log_FATAL_COLOR=%red%")
+if not defined dk_log_FATAL_TAG				(set "dk_log_FATAL_TAG=FATAL: ")
+if not defined dk_log_FATAL_TRACE			(set "dk_log_FATAL_TRACE=1")
+::if not defined dk_log_FATAL_LINE			(set "dk_log_FATAL_LINE=0")
+::if not defined dk_log_FATAL_SOUND			(set "dk_log_FATAL_SOUND=0")
+::if not defined dk_log_FATAL_PAUSE			(set "dk_log_FATAL_PAUSE=0")
+if not defined dk_log_FATAL_TIMEOUT			(set "dk_log_FATAL_TIMEOUT=9")
+::if not defined dk_log_FATAL_HALT			(set "dk_log_FATAL_HALT=0")
 
 
 
@@ -168,7 +168,7 @@ setlocal enableDelayedExpansion
 		set "_message_=%~2"
 	)
 	
-    if "!%_level_%_ENABLE!" neq "1" (
+    if "!dk_log_%_level_%_ENABLE!" neq "1" (
 		%return%
 	)
 
@@ -178,23 +178,23 @@ setlocal enableDelayedExpansion
 	::)
 
 	::###### Message to Screen ######
-    %dk_call% dk_echo "!%_level_%_COLOR!!%_level_%_TAG!%_message_%%clr%"
+    %dk_call% dk_echo "!dk_log_%_level_%_COLOR!!dk_log_%_level_%_TAG!%_message_%%clr%"
 
 	::###### TRACE ######
-	if "!%_level_%_TRACE!" gtr "0" (
-		%dk_call% dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"
+	if "!dk_log_%_level_%_TRACE!" gtr "0" (
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"
 		%dk_call% dk_stacktrace
 	)
 
 	::###### LINE ######
-	if "!%_level_%_LINE!" gtr "0" (
-		%dk_call% dk_echo "!%_level_%_COLOR!*** LINE_ON_%_level_% ***%clr%"
+	if "!dk_log_%_level_%_LINE!" gtr "0" (
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** LINE_ON_%_level_% ***%clr%"
 		%dk_call% dk_showFileLine "%_callerpath%" "%_message_%"
 	)
 
 	::###### SOUND ######
-	if "!%_level_%_SOUND!" gtr "0" (
-		%dk_call% dk_echo "!%_level_%_COLOR!*** SOUND_ON_%_level_% ***%clr%"
+	if "!dk_log_%_level_%_SOUND!" gtr "0" (
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** SOUND_ON_%_level_% ***%clr%"
 		%dk_call% Array::dk_push errorBeeps "440,500"
 		%dk_call% Array::dk_push errorBeeps "440,500"
 		%dk_call% Array::dk_push errorBeeps "440,500" 
@@ -217,20 +217,20 @@ setlocal enableDelayedExpansion
 	)
 		
 	::###### PAUSE ######
-	if "!%_level_%_PAUSE!" gtr "0" (
-		%dk_call% dk_echo "!%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"
+	if "!dk_log_%_level_%_PAUSE!" gtr "0" (
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"
 		%dk_call% dk_pause
 	)
 	
 	::###### TIMEOUT ######
-	if "!%_level_%_TIMEOUT!" gtr "0" (
-		%dk_call% dk_echo "!%_level_%_COLOR!*** TIMEOUT_ON_%_level_% ***%clr%"
-		%dk_call% dk_timeout !%_level_%_TIMEOUT!
+	if "!dk_log_%_level_%_TIMEOUT!" gtr "0" (
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** TIMEOUT_ON_%_level_% ***%clr%"
+		%dk_call% dk_timeout !dk_log_%_level_%_TIMEOUT!
 	)
 	
 	::###### HALT ######
-	if "!%_level_%_HALT!" gtr "0" (
-		%dk_call% dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"
+	if "!dk_log_%_level_%_HALT!" gtr "0" (
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"
 		%dk_call% dk_exit 13
 	)
 %endfunction%
