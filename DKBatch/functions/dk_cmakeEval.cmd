@@ -51,9 +51,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::	###### IMPORT VARIABLES ######
 	if not defined DKRETURN (%return%)
 	%dk_call% dk_importVars
-	
-	
-	
+
 ::  ## these lines are deprecated ###
 ::  if not defined DKRETURN %return%
 ::  if not exist %DKCMAKE_DIR%\cmake_vars.cmd %return%

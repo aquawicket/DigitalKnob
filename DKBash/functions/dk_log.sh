@@ -109,9 +109,9 @@
 [ -z ${dk_log_DEPRECATED_ENABLE-} ]		&& dk_log_DEPRECATED_ENABLE=1
 [ -z ${dk_log_DEPRECATED_COLOR-} ]		&& dk_log_DEPRECATED_COLOR=${yellow-}
 [ -z ${dk_log_DEPRECATED_TAG-} ]		&& dk_log_DEPRECATED_TAG="DEPRECATED: "
-[ -z ${dk_log_DEPRECATED_TRACE-} ]		&& dk_log_DEPRECATED_TRACE=0
+[ -z ${dk_log_DEPRECATED_TRACE-} ]		&& dk_log_DEPRECATED_TRACE=1
 [ -z ${dk_log_DEPRECATED_LINE-} ]		&& dk_log_DEPRECATED_LINE=0
-[ -z ${dk_log_DEPRECATED_PAUSE-} ]		&& dk_log_DEPRECATED_PAUSE=0
+[ -z ${dk_log_DEPRECATED_PAUSE-} ]		&& dk_log_DEPRECATED_PAUSE=1
 [ -z ${dk_log_DEPRECATED_TIMEOUT-} ]	&& dk_log_DEPRECATED_TIMEOUT=0
 [ -z ${dk_log_DEPRECATED_HALT-} ]		&& dk_log_DEPRECATED_HALT=0
 

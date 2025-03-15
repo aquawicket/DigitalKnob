@@ -26,16 +26,16 @@ setlocal enableDelayedExpansion
 	if defined dk_assertPath_FORWARD_SLASHES set "_real_=%_real_:\=/%"
 
 	::### Test case sensitive ###
-	if defined dk_assertPath_CASE_SENSITIVE if not [%_val_%]==[%_real_%] (
+	if defined dk_assertPath_CASE_SENSITIVE if "%_val_%" neq "%_real_%" (
 		echo %red% %_var_%:'%_val_%' _real_:'%_real_%' mismatch %clr%
 		%dk_call% dk_error "ASSERTION: dk_assertPath path:'%_val_:"=%' mismatch"
-		%return%
+		%endfunction%
 	)
 
 	::### Test path exists ###
 	if not exist "%_val_:"=%" (
 		%dk_call% dk_error "ASSERTION: dk_assertPath %_var_%:'%_val_:"=%' not found"
-		%return%
+		%endfunction%
 	)
 
 	::%dk_call% dk_debug "dk_assertPath %_var_% = %_val_%"
