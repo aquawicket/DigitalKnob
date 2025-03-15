@@ -9,20 +9,20 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :dk_isVariableName
 setlocal
 	%dk_call% dk_debugFunc 1 2
+ 
+    ::set "arg1=%~1"
+    ::if defined "%~1" call set "arg1=%%%arg1%%%"
+    set "var="&for /f "delims=0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ[]" %%i in ("%~1") do set "bad_characters=%%i"
 
-	set "var="&for /f "delims=0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ[]" %%i in ("%~1") do (set "bad_characters=%%i")
-
-	if not defined bad_characters (
-		set "dk_isVariableName=0"
-	) else (
-		set "dk_isVariableName=1"
-	)
-
-	set "bad_characters="
-	endlocal & (
-		if "%~2" neq "" (call set "%~2=%dk_isVariableName%")
-		exit /b %dk_isVariableName%
-	)
+    if not defined bad_characters (
+        set "bad_characters="
+        if "%~2" neq "" (endlocal & set "%2=true")
+        exit /b 0
+    )
+    
+    set "bad_characters="
+    if "%~2" neq "" (endlocal & call set "%2=false")
+    exit /b 1
 %endfunction%
 
 

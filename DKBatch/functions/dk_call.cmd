@@ -3,16 +3,16 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::###### SETTINGS ######
 ::(set "dk_call_PRINTCALLS=1") 
-(set "dk_call_PRINTENTRY=1")
-(set "dk_call_PRINTEXIT=1")
-(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
+::(set "dk_call_PRINTENTRY=1")
+::(set "dk_call_PRINTEXIT=1")
+::(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 
 
 ::####################################################################
 ::# dk_call(command args)
 ::#
 :dk_call
-	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit -1)
+	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13)
 	
 	:: don't add these functions to the callstack, just call them
 	if "%~1"=="init"				(call :%* & exit /b !errorlevel!)
@@ -23,13 +23,13 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	if "%~1"=="printStackVariables"	(call :%* & exit /b !errorlevel!)
 
 	::###### Stack Variables ######
-	(set "__CMND__=%~1")
-	(set "__CMND__=!__CMND__:::=/!")		&:: Replace :: with /
-	(set "__FILE__=%~dpnx1")
-	(set "__FILE__=%__FILE__:\=/%")
-	(set "__FUNC__=%~n1")
-	(set __ARGV__=%*)
-	if defined __ARGV__ (set "__ARGV__=!__ARGV__:*%~1=!")
+	(set __CMND__=%~1)
+	(set __CMND__=!__CMND__:::=/!)		&:: Replace :: with /
+	(set __FILE__=%~dpnx1)
+	(set __FILE__=%__FILE__:\=/%)
+	(set __FUNC__=%~n1)
+	set __ARGV__=%*
+	if defined __ARGV__ (set __ARGV__=!__ARGV__:*%1=!)
 
 	::TODO - use dk_getFileLine to add the file line to the stack entry
 	call :pushStack %*
@@ -77,30 +77,61 @@ exit /b %LAST_ERROR_STATUS%
 ::#
 :init
 	set "dk_call=call dk_call"
-
+::	set gblsAndRtns=(for /F "delims=" %%a in ('set dk. 2^>nul') do ^
+::		endlocal^
+::		^& call set _line_=%%a^
+::		^& call set _line_=%%_line_:dk.rtn.=%%^
+::		^& call set %%_line_%%^
+::		^& call set %%_line_:dk.gbl.=%%)
 	set globalize=(for /F "delims=" %%a in ('set dk.') do ^
 		endlocal^
 		^& call set _line_=%%a^
 		^& call set %%_line_%%^
 		^& call set %%_line_:dk.gbl.=%%) 2^>nul
 
+	::set dk_time=(call echo %%time%%)
+	::set checkError=(if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
+
+::	set checkError=(if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
+
+::	set endfunction=exit /b !errorlevel!)
+::	set return=exit /b !errorlevel!)
+
+::	set endfunction=(echo !errorlevel!^& exit /b !errorlevel!)
+::	set return=(echo !errorlevel!^& exit /b !errorlevel!)
+
+::	set endfunction=(echo !errorlevel!^& call dk_getError)
+::	set return=(echo !errorlevel!^& call dk_getError)
+
+::	set endfunction=(call dk_getError^& exit /b !errorlevel!)
+::	set return=(call dk_getError^& exit /b !errorlevel!)
+
+::	set endfunction=(call dk_getError^& !returns!^& exit /b !errorlevel!)
+::	set return=(call dk_getError^& !returns!^& exit /b !errorlevel!)
+
 	set endfunction=(call dk_getError^& exit /b ^!errorlevel^!)
 	set return=(call dk_getError^& exit /b ^!errorlevel^!)
+
+::	set endfunction=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
+::	set return=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
+
+::	set endfunction=(!checkError!^& !globals!^& exit /b !errorlevel!)
+::	set return=(!checkError!^& !globals!^& exit /b !errorlevel!)
 
 	set /a "LVL=0"
 	set "ESC="
 	set "clr=%ESC%[0m"
 	set "pad=%clr%"
 	set "padB=      "
-	set "indent=      "
+	set "indent=        "
 exit /b !errorlevel!
 
 ::####################################################################
 ::# :updateIndent
 ::#
 :updateIndent
-	(set "pad=")
-	(set "padB=")
+	(set pad=)
+	(set padB=)
 	for /l %%x in (1, 1, %LVL%) do (set pad=!pad!%indent%)
 	for /l %%x in (1, 1, %LVL%) do (set padB=!padB!%indent%)
 exit /b !errorlevel!

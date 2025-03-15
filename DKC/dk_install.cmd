@@ -78,8 +78,8 @@ if "%~1" == "" (goto :dk_install)
 
 
 :dk_install
-	if "%~1" neq "" (goto:eof)
-
+	if not "%~1"=="" (goto:eof)
+	
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc
 	:: NOTE: gcc is now working yet.  Need the appropriate command to line libwinpthread and others statically
@@ -87,29 +87,29 @@ if "%~1" == "" (goto :dk_install)
 	::if not defined target_os		(set "target_os=win")
 	::if not defined target_arch	(set "target_arch=x86_64")
 	::if not defined target_env		(set "target_env=gcc")
-
+	
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
-
+	
 	::###### Install DKC ######
 	%dk_call% dk_echo "Installing DKC . . ."
-
+	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-
+	
 	::###### target_os ######
 	if not defined target_os (set "target_os=win")
-
+	
 	::###### target_arch ######
 	if not defined target_arch (set "target_arch=x86_64")
-
+	
 	::###### target_env ######
 	if not defined target_env (set "target_env=clang")
-
+	
 	::###### target_triple ######
 	if not defined target_triple (set "target_triple=%target_os%_%target_arch%_%target_env%")
 	set "%target_triple%=1"
-
+	
 	::###### MSYSTEM ######
 	::if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="x86"    set "MSYSTEM=CLANG32"
 	::if not defined MSYSTEM  if "%target_env%"=="clang" if "%target_arch%"=="x86_64" set "MSYSTEM=CLANG64"

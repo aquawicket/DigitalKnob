@@ -8,23 +8,22 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :dk_set
 setlocal enableDelayedExpansion
 ::	%dk_call% dk_debugFunc 2 99
-	echo dk_set %*
 
 	set _name_=%~1
 	set "_args_=%*"
-	set "_args_=!_args_:*%~1 =!"
-
+	set "_args_=!_args_:*%1=!"
+	
 	set /a "_argc_=0"
 	for %%Z in (%_args_%) do (
 		set /a _argc_+=1
 	)
-	if %_argc_% equ 1 (
+	if "%_argc_%"=="1" (
 		for %%Z in (%_args_%) do set _args_=%%~Z
 	)
-
+	
 	endlocal & (set "%~1=%_args_%")
 
-	::%dk_call% dk_printVar %~1
+	%dk_call% dk_printVar %~1 
 %endfunction%
 
 
