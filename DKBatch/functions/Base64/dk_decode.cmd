@@ -6,8 +6,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::# Base64::dk_decode(inputFile)
 ::# Base64::dk_decode(inputFile, outputFile)
 ::#
-::#    Decode base-64 input to output
-::#    https://github.com/base64code/examples
+::#	Decode base-64 input to output
+::#	https://github.com/base64code/examples
 ::#
 :dk_decode
 setlocal

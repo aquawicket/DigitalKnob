@@ -9,7 +9,7 @@ set "dk_embedBin_OVERWRITE_OUTPUT=1"
 ::# Base64::dk_embedBin(inputFile, outputFile)
 ::# Base64::dk_embedBin(inputFile, outputFile, OVERWRITE)
 ::#
-::#    https://stackoverflow.com/a/19596027/688352
+::#	https://stackoverflow.com/a/19596027/688352
 ::#
 :dk_embedBin
 setlocal
@@ -64,6 +64,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_selectFile
-    %dk_call% dk_embedBin "%dk_selectFile%"
+	%dk_call% dk_selectFile
+	%dk_call% dk_embedBin "%dk_selectFile%"
 %endfunction%

@@ -6,13 +6,13 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::# Base64::dk_embedFile(inputFile)
 ::# Base64::dk_embedFile(inputFile, outputFile)
 ::#
-::#    Encode input to base-64 output
-::#    https://github.com/base64code/examples
+::#	Encode input to base-64 output
+::#	https://github.com/base64code/examples
 ::#
 :dk_embedFile
 setlocal
 	%dk_call% dk_debugFunc 0 99
-	
+
 	set "inputFile=%~1"
 	set "outputFile=%~nx1.cmd"
 	if not "%~2"=="" (set "outputFile=%~2")
@@ -35,7 +35,7 @@ setlocal
 	echo:
 	echo set MBEGIN=-1
 	echo for /f "useback tokens=1 delims=: " %%%%a in (`findstr /B /N /C:"-----BEGIN CERTIFICATE-----" "%%~f0"`^) DO (
-	echo     set /a MBEGIN=%%%%a-1
+	echo	set /a MBEGIN=%%%%a-1
 	echo ^)
 	echo:
 	echo if "%%MBEGIN%%"=="-1" (
@@ -57,7 +57,7 @@ setlocal
 	echo exit /b 0
 	echo:
 	) >"%outputFile%"
-	
+
 	certutil -encode -f "%inputFile%" "encoded.tmp"
 	type "encoded.tmp">>"%outputFile%"
 	del "encoded.tmp"
@@ -75,9 +75,9 @@ setlocal
 	::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	::set "input=%DKBRANCH_DIR%/DKBuilder.cmd"
 	::set "output=%DKBRANCH_DIR%/DKBuilder.cmd.b64"
-	
+
 	%dk_call% dk_selectFile input
 	%dk_call% dk_embedFile "%input%"
-	
+
 	::%dk_call% Base64::dk_encode "%input%" "test.b64"
 %endfunction%

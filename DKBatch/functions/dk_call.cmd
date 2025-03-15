@@ -191,7 +191,7 @@ exit /b !errorlevel!
 :printParentStackVariables
 	(set /a PLVL=LVL-1)
 	call :updateIndent	
-	if defined PLVL        		(echo %padB% PLVL  = %PLVL%)
+	if defined PLVL				(echo %padB% PLVL  = %PLVL%)
 	if defined __STACK__%PLVL% 	(echo %padB% __STACK__%PLVL% = !__STACK__%PLVL%!)
 exit /b !errorlevel!
 

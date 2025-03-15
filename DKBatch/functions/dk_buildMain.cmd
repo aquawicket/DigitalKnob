@@ -37,13 +37,13 @@ setlocal enableDelayedExpansion
 				set /a _line_+=1
 				goto :skipTarget
 			)
-			::Each host_arch will have a list of compatible triples
-			::The the current host_arch doesn't have the target_tripple in it's allowed list
-			::We goto skipTarget, we could also have a disabled list for each host_arch to do the same:
-			::A block list could be good, because everything will be attempted by default instead of enabled.
-			:: Example win_x86 mac ios iossim     = win_x86_host's will skip all instaces of mac, ios and iossim
-			::         
-			
+			rem Each host_arch will have a list of compatible triples
+			rem The the current host_arch doesn't have the target_tripple in it's allowed list
+			rem We goto skipTarget, we could also have a disabled list for each host_arch to do the same:
+			rem A block list could be good, because everything will be attempted by default instead of enabled.
+			rem Example win_x86 mac ios iossim     = win_x86_host's will skip all instaces of mac, ios and iossim
+
+
 			if defined BUILD_LIST[!_line_!][2] (
 				set "UPDATE=1"
 				call set "target_app=%%BUILD_LIST[!_line_!][0]%%"
@@ -55,24 +55,24 @@ setlocal enableDelayedExpansion
 			)
 		)
 
-        if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE			& goto :while_loop
-        if not defined target_app		%dk_call% dk_target_app target_app		& goto :while_loop
-        if not defined target_triple	%dk_call% dk_target_triple_SET			& goto :while_loop
+		if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE			& goto :while_loop
+		if not defined target_app		%dk_call% dk_target_app target_app		& goto :while_loop
+		if not defined target_triple	%dk_call% dk_target_triple_SET			& goto :while_loop
 		if not defined target_type		%dk_call% dk_target_type target_type	& goto :while_loop
-		
+
 		:: save selections to DKBuilder.cache file
 		%dk_call% dk_echo "creating DKBuilder.cache..."
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 		%dk_call% dk_fileWrite "%DKCACHE_DIR%/DKBuilder.cache" "%target_app% %target_triple% %target_type%"
-		
-        %dk_call% dk_generate
-        %dk_call% dk_buildApp
 
-        %dk_call% dk_unset UPDATE
-        %dk_call% dk_unset target_app
-        %dk_call% dk_unset target_triple
-        %dk_call% dk_unset target_type
-    goto while_loop
+		%dk_call% dk_generate
+		%dk_call% dk_buildApp
+
+		%dk_call% dk_unset UPDATE
+		%dk_call% dk_unset target_app
+		%dk_call% dk_unset target_triple
+		%dk_call% dk_unset target_type
+	goto while_loop
 %endfunction%
 
 
@@ -84,8 +84,7 @@ setlocal enableDelayedExpansion
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal enableDelayedExpansion
-    %dk_call% dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 
- 
-    %dk_call% dk_buildMain
+	%dk_call% dk_buildMain
 %endfunction%

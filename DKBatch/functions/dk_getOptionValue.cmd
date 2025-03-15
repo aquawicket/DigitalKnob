@@ -8,19 +8,18 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0 99
 
-	
-    :getParameter_loop
+	:getParameter_loop
 	if "%~2" == "" (%endfunction%)
 	if "%~1" == "%~2" (
 		rem set "_value_=%~3"
 		endlocal & set "%1=%~3"
 		%endfunction%
 	)
-    shift /2
-    goto getParameter_loop 
+	shift /2
+	goto getParameter_loop 
 	:end_getParameter_loop
-	
-    endlocal & set "%1=%_value_%"
+
+	endlocal & set "%1=%_value_%"
 
 ::DEBUG
 ::	%dk_call% dk_printVar %2
@@ -44,7 +43,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0 99
 
-	
 	%dk_call% :dk_getOptionValue INPUT %*
 	%dk_call% dk_printVar INPUT
 	%DUMP_VARS%

@@ -14,7 +14,7 @@ setlocal
 	endlocal & set "%~1=%value%"
 	
 ::debug
-::    %dk_call% dk_printVar %1
+::	%dk_call% dk_printVar %1
 %endfunction%
 
 
@@ -22,10 +22,10 @@ setlocal
 :DKTEST 
 setlocal
 	%dk_call% dk_debugFunc 0
-	
+
 	%dk_call% dk_echo "initial value of myGlobalVar"
 	%dk_call% dk_echo "myGlobalVar = %myGlobalVar%"
-	
+
 	echo:
 	%dk_call% dk_echo "calling dk_getGlobal"
 	%dk_call% dk_getGlobal myGlobalVar

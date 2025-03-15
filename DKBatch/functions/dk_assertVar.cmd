@@ -11,7 +11,7 @@ if defined %~1   %return%
 setlocal
 	%dk_call% dk_debugFunc 1
 	
-    %dk_call% dk_fatal "ASSERTION: dk_assertVar(%*): %~1 not defined"
+	%dk_call% dk_fatal "ASSERTION: dk_assertVar(%*): %~1 not defined"
 %endfunction%
 
 
@@ -25,21 +25,21 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_set myVar string
-    %dk_call% dk_echo "dk_assertVar(myVar)"  && %dk_call% dk_assertVar myVar
+	%dk_call% dk_set myVar string
+	%dk_call% dk_echo "dk_assertVar(myVar)"  && %dk_call% dk_assertVar myVar
 
-    %dk_call% dk_set myVarB 15
-    %dk_call% dk_echo "dk_assertVar(myVarB)" && %dk_call% dk_assertVar myVarB
+	%dk_call% dk_set myVarB 15
+	%dk_call% dk_echo "dk_assertVar(myVarB)" && %dk_call% dk_assertVar myVarB
 
-    %dk_call% dk_set myVarC "  "
-    %dk_call% dk_echo "dk_assertVar(myVarC)" && %dk_call% dk_assertVar myVarC
+	%dk_call% dk_set myVarC "  "
+	%dk_call% dk_echo "dk_assertVar(myVarC)" && %dk_call% dk_assertVar myVarC
 
-    %dk_call% dk_set myVarD " "
-    %dk_call% dk_echo "dk_assertVar(myVarD)" && %dk_call% dk_assertVar myVarD
+	%dk_call% dk_set myVarD " "
+	%dk_call% dk_echo "dk_assertVar(myVarD)" && %dk_call% dk_assertVar myVarD
 
 	%dk_call% dk_set myVarE 99
-    %dk_call% dk_unset myVarE
-    %dk_call% dk_echo "dk_assertVar(myVarE)" && %dk_call% dk_assertVar myVarE
+	%dk_call% dk_unset myVarE
+	%dk_call% dk_echo "dk_assertVar(myVarE)" && %dk_call% dk_assertVar myVarE
 
-    %dk_call% dk_echo "dk_assertVar(noVar)"  && %dk_call% dk_assertVar noVar
+	%dk_call% dk_echo "dk_assertVar(noVar)"  && %dk_call% dk_assertVar noVar
 %endfunction%

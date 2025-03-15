@@ -7,41 +7,40 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#
 :dk_callDKCmake
 setlocal
-    %dk_call% dk_debugFunc 1 4
+	%dk_call% dk_debugFunc 1 4
 
 
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
-	
+
 	::### Get DKHTTP_DKCMAKE_FUNCTIONS_DIR
 	if not defined DKHTTP_DKCMAKE_DIR					(set "DKHTTP_DKCMAKE_DIR=%DKHTTP_DKBRANCH_DIR%/DKCMake")
 	if not defined DKHTTP_DKCMAKE_FUNCTIONS_DIR			(set "DKHTTP_DKCMAKE_FUNCTIONS_DIR=%DKHTTP_DKCMAKE_DIR%/functions")
-	
+
 	::### Download files if missing
 	if not exist "%DKCMAKE_FUNCTIONS_DIR%/DK.cmake"		(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/DK.cmake" "%DKCMAKE_FUNCTIONS_DIR%/DK.cmake")
 	::if not exist "%DKCMAKE_FUNCTIONS_DIR%/%~1.cmake"	(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/%~1.cmake" "%DKCMAKE_FUNCTIONS_DIR%/%~1.cmake")
 
-    %dk_call% dk_validate DKIMPORTS_DIR         		"%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_validate CMAKE_EXE             		"%dk_call% %DKIMPORTS_DIR%/cmake/dk_install.cmd"
+	%dk_call% dk_validate DKIMPORTS_DIR				"%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate CMAKE_EXE					"%dk_call% %DKIMPORTS_DIR%/cmake/dk_install.cmd"
 
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
-    
+
 	::### ALL_BUT_FIRST ###
 	::set ALL_BUT_FIRST=%*
 	::if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
-    
-    ::Create Run function Script
-    ::set "DKCOMMAND=%~1(%ALL_BUT_FIRST%)"
+
+	::Create Run function Script
+	::set "DKCOMMAND=%~1(%ALL_BUT_FIRST%)"
 	set DKCOMMAND=%~1
 	::set "DKCOMMAND=%DKCOMMAND:"='%"
 
-    :: Call DKCmake function
-    set command=%CMAKE_EXE% "-DDKCOMMAND=%DKCOMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DQUEUE_BUILD=ON" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
-    echo %command%    
-    for /f "delims=" %%Z in ('%command%') do (
-        set "dk_callDKCmake=%%Z"
-    )
-	
-	
+	:: Call DKCmake function
+	set command=%CMAKE_EXE% "-DDKCOMMAND=%DKCOMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DQUEUE_BUILD=ON" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
+	echo %command%	
+	for /f "delims=" %%Z in ('%command%') do (
+		set "dk_callDKCmake=%%Z"
+	)
+
 	rem for %%a in (%*) do set LAST_ARG=%%a
 	endlocal & (
 		set "dk_callDKCmake=%dk_callDKCmake%"
@@ -64,7 +63,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_callDKCmake "dk_test('arg 1' 'arg 2' 'arg 3')"
+	%dk_call% dk_callDKCmake "dk_test('arg 1' 'arg 2' 'arg 3')"
 	%dk_call% dk_echo
-    %dk_call% dk_echo "dk_callDKCmake = %dk_callDKCmake%"
+	%dk_call% dk_echo "dk_callDKCmake = %dk_callDKCmake%"
 %endfunction%

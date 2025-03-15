@@ -5,14 +5,14 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::################################################################################
 ::# Array::dk_splice(array, start, deleteCount, item1, item2, /* …, */ itemN)
 ::#
-::#    https://www.w3schools.com/js/js_array_methods.asp#mark_splice
-::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+::#	https://www.w3schools.com/js/js_array_methods.asp#mark_splice
+::#	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 ::#
 :dk_splice
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_todo "Array::dk_splice"
+	%dk_call% dk_todo "Array::dk_splice"
 %endfunction%
 
 
@@ -23,5 +23,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_splice
+	%dk_call% dk_splice
 %endfunction%
