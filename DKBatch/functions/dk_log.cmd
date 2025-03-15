@@ -177,7 +177,7 @@ setlocal enableDelayedExpansion
 	::	%dk_call% dk_set _message_ %_message_:~1,-1%    &rem if _message_ starts and ends with quotes, remove them
 	::)
 
-	::###### Message to Screen ######
+	::###### ECHO MASSAGE ######
     %dk_call% dk_echo "!dk_log_%_level_%_COLOR!!dk_log_%_level_%_TAG!%_message_%%clr%"
 
 	::###### TRACE ######
