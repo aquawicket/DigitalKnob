@@ -101,7 +101,7 @@ if(1)
 	
 # android_arm32
 if(${DK_BINARY_OSARCH} MATCHES "android_arm32")
-	dk_set(ANDROID_NDK 						"${DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
+	dk_set(ANDROID_NDK 						"$ENV{DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
 	dk_set(ANDROID_NDK_GENERATOR 			"Unix Makefiles")
 	dk_set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe")
 	dk_set(ANDROID_NDK_ANDROID_ABI			"armeabi-v7a")
@@ -127,7 +127,7 @@ endif()
 
 # android_arm64
 if(${DK_BINARY_OSARCH} MATCHES "android_arm64")
-	dk_set(ANDROID_NDK 						"${DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
+	dk_set(ANDROID_NDK 						"$ENV{DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
 	dk_set(ANDROID_NDK_GENERATOR 			"Unix Makefiles")
 	dk_set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe")
 	dk_set(ANDROID_NDK_ANDROID_ABI			"arm64-v8a")

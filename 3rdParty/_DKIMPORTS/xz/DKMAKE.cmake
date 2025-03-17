@@ -24,8 +24,8 @@ dk_import("${XZ_DL}")
 #dk_set(XZ_VERSION 5.2.5)
 #dk_set(XZ_DL https://tukaani.org/xz/${XZ_FOLDER}.tar.gz)
 #dk_set(XZ_NAME xz-${XZ_VERSION})
-#dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
-#dk_set(XZ ${DK3RDPARTY_DIR}/${XZ_FOLDER})
+#dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
+#dk_set(XZ $ENV{DK3RDPARTY_DIR}/${XZ_FOLDER})
 #dk_import(${XZ_DL} ${XZ})
 
 

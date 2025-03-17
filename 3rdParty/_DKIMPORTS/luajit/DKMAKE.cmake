@@ -12,9 +12,9 @@ dk_load(dk_builder)
 dk_import(https://github.com/LuaJIT/LuaJIT/archive/refs/heads/v2.1.zip)
 
 #dk_import(https://github.com/tarantool/luajit.git BRANCH tarantool/master)
-#dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
-#dk_rename(${DK3RDPARTY_DIR}/luajit-tarantool/master ${DK3RDPARTY_DIR}/luajit OVERWRITE)
-#dk_set(LUAJIT ${DK3RDPARTY_DIR}/luajit)
+#dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
+#dk_rename($ENV{DK3RDPARTY_DIR}/luajit-tarantool/master $ENV{DK3RDPARTY_DIR}/luajit OVERWRITE)
+#dk_set(LUAJIT $ENV{DK3RDPARTY_DIR}/luajit)
 #dk_fileReplace(${LUAJIT}/CMakeLists.txt "  message(FATAL_ERROR" "  message(STATUS")
 
 dk_libDebug(${LUAJIT_DEBUG_DIR}/libluajit.a)

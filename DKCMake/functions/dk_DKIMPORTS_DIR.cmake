@@ -15,8 +15,8 @@ function(dk_DKIMPORTS_DIR)
 		
 	###### GET ######
 	else()
-		dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
-		dk_set(DKIMPORTS_DIR "${DK3RDPARTY_DIR}/_DKIMPORTS")
+		dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
+		dk_set(DKIMPORTS_DIR "$ENV{DK3RDPARTY_DIR}/_DKIMPORTS")
 	endif()
 endfunction()
 

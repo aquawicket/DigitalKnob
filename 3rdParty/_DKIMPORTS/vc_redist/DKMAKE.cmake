@@ -32,7 +32,7 @@ if((NOT EXISTS "${VCCOMP140_X86_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_DEBUG_DL
 	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_DL_FILE}")
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	dk_download(${VC_REDIST_X86_DL} $ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_DL_FILE})
-	dk_command($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_DL_FILE} /install /quiet /norestart) #/log ${DK3RDPARTY_DIR}/vc_redist_install_log.txt
+	dk_command($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_DL_FILE} /install /quiet /norestart) #/log $ENV{DK3RDPARTY_DIR}/vc_redist_install_log.txt
 endif()
 #dk_assertPath(VCCOMP140_X86_DLL)
 
@@ -49,7 +49,7 @@ if((NOT EXISTS "${VCCOMP140_X86_64_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_64_DE
 	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_64_DL_FILE}")
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	dk_download(${VC_REDIST_X86_64_DL} $ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_DL_FILE})
-	dk_command($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_DL_FILE} /install /quiet /norestart) #/log ${DK3RDPARTY_DIR}/vc_redist_install_log.txt
+	dk_command($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_DL_FILE} /install /quiet /norestart) #/log $ENV{DK3RDPARTY_DIR}/vc_redist_install_log.txt
 endif()
 #dk_assertPath(VCCOMP140_X86_64_DLL)
 

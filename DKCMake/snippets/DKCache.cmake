@@ -20,7 +20,7 @@ set(DK3RDPARTY_DIR "C:/Users/$ENV{USERNAME}/digitalknob/Development/3rdParty" CA
 
 ##${STDINT}
 
-set(ZLIB ${DK3RDPARTY_DIR}/zlib-1.2.11 CACHE PATH "" FORCE)
+set(ZLIB $ENV{DK3RDPARTY_DIR}/zlib-1.2.11 CACHE PATH "" FORCE)
 if(EXISTS ${ZLIB}/${target_triple}/Release/zlibstatic.lib)
 	set(ZLIB_INCLUDE_DIR ${ZLIB} CACHE PATH "" FORCE)
 	set(ZLIB_LIBRARY ${ZLIB}/${target_triple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
@@ -30,7 +30,7 @@ endif()
 
 #execute_process(COMMAND ${CMD_EXE} /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
 
-set(BZIP2 ${DK3RDPARTY_DIR}/bzip2-1.0.6 CACHE PATH "" FORCE)
+set(BZIP2 $ENV{DK3RDPARTY_DIR}/bzip2-1.0.6 CACHE PATH "" FORCE)
 if(EXISTS ${BZIP2}/${target_triple}/libbz2.lib)
 	set(BZIP2_ROOT ${BZIP2} CACHE PATH "" FORCE)
 	set(BZIP2_INCLUDE_DIR ${BZIP2} CACHE PATH "" FORCE)
@@ -41,35 +41,35 @@ if(EXISTS ${BZIP2}/${target_triple}/libbz2.lib)
 endif()
 
 
-set(TIFF ${DK3RDPARTY_DIR}/tiff-4.0.3 CACHE PATH "" FORCE)
+set(TIFF $ENV{DK3RDPARTY_DIR}/tiff-4.0.3 CACHE PATH "" FORCE)
 if(EXISTS ${TIFF}/${target_triple}/Release/tiff-static.lib)
 	set(TIFF_INCLUDE_DIR ${TIFF}/libtiff CACHE PATH "" FORCE)
 	set(TIFF_INCLUDE_DIR2 ${TIFF}/${target_triple} CACHE PATH "" FORCE)
 endif()
 
 
-set(PNG ${DK3RDPARTY_DIR}/libpng-1.7.0beta34 CACHE PATH "" FORCE)
+set(PNG $ENV{DK3RDPARTY_DIR}/libpng-1.7.0beta34 CACHE PATH "" FORCE)
 if(EXISTS ${PNG}/${target_triple}/Release/libpng17_static.lib)
 	set(PNG_INCLUDE_DIR ${PNG} CACHE PATH "" FORCE)
 	set(PNG_INCLUDE_DIR2 ${PNG}/${target_triple} CACHE PATH "" FORCE)
 endif()
 
 
-set(JPEG ${DK3RDPARTY_DIR}/libjpeg-turbo-1.5.3 CACHE PATH "" FORCE)
+set(JPEG $ENV{DK3RDPARTY_DIR}/libjpeg-turbo-1.5.3 CACHE PATH "" FORCE)
 if(EXISTS ${JPEG}/${target_triple}/Release/turbojpeg-static.lib)
 	set(JPEG_INCLUDE_DIR ${JPEG} CACHE PATH "" FORCE)
 	set(JPEG_INCLUDE_DIR2 ${JPEG}/${target_triple} CACHE PATH "" FORCE)
 endif()
 
 
-set(GIF ${DK3RDPARTY_DIR}/ CACHE PATH "" FORCE)
+set(GIF $ENV{DK3RDPARTY_DIR}/ CACHE PATH "" FORCE)
 if(EXISTS ${GIF}/${target_triple}/Release/lib/.libs/libgif.lib)
 	set(GIF_INCLUDE_DIR ${GIF} CACHE PATH "" FORCE)
 	set(GIF_INCLUDE_DIR2 ${GIF}/${target_triple} CACHE PATH "" FORCE)
 endif()
 
 
-set(FREETYPE ${DK3RDPARTY_DIR}/freetype-2.5.5 CACHE PATH "" FORCE)
+set(FREETYPE $ENV{DK3RDPARTY_DIR}/freetype-2.5.5 CACHE PATH "" FORCE)
 if(EXISTS ${FREETYPE}/${target_triple}/Release/freetype.lib)
 	set(FREETYPE_INCLUDE_DIRS ${FREETYPE}/include CACHE PATH "" FORCE)
 	set(FREETYPE_INCLUDE_DIR_freetype2 ${FREETYPE}/include CACHE PATH "" FORCE)
@@ -79,7 +79,7 @@ if(EXISTS ${FREETYPE}/${target_triple}/Release/freetype.lib)
 	set(FREETYPE_LIBRARY_RELEASE ${FREETYPE}/${target_triple}/Release/freetype.lib CACHE FILEPATH "" FORCE)
 endif()
 
-set(SDL2 ${DK3RDPARTY_DIR}/SDL2-2.0.14 CACHE PATH "" FORCE)
+set(SDL2 $ENV{DK3RDPARTY_DIR}/SDL2-2.0.14 CACHE PATH "" FORCE)
 if(EXISTS ${SDL2}/${target_triple}/Release/SDL2.lib)
 	set(SDL2_DIR ${SDL2} CACHE PATH "" FORCE)
 	set(SDL2_INCLUDE_DIR ${SDL2}/include CACHE PATH "" FORCE)
@@ -94,7 +94,7 @@ if(EXISTS ${SDL2}/${target_triple}/Release/SDL2.lib)
 endif()
 
 
-set(SDL2_IMAGE ${DK3RDPARTY_DIR}/SDL2_image-2.0.1 CACHE PATH "" FORCE)
+set(SDL2_IMAGE $ENV{DK3RDPARTY_DIR}/SDL2_image-2.0.1 CACHE PATH "" FORCE)
 if(EXISTS ${SDL2_IMAGE}/${target_triple}/lib/Release/SDL_image.lib)
 	set(SDL2_IMAGE_INCLUDE_DIR ${SDL2_IMAGE} CACHE PATH "" FORCE)
 	set(SDL2_IMAGE_LIBRARY_TEMP ${SDL2_IMAGE}/${target_triple}/lib/Release/SDL_image.lib CACHE FILEPATH "" FORCE)
@@ -104,7 +104,7 @@ if(EXISTS ${SDL2_IMAGE}/${target_triple}/lib/Release/SDL_image.lib)
 endif()
 
 
-set(SFML ${DK3RDPARTY_DIR}/SFML-2.4.2 CACHE PATH "" FORCE)
+set(SFML $ENV{DK3RDPARTY_DIR}/SFML-2.4.2 CACHE PATH "" FORCE)
 if(EXISTS ${SFML}/${target_triple}/lib/Release/sfml-main.lib)
 	set(SFML_INCLUDE_DIR ${SFML}/include CACHE FILEPATH "" FORCE)
 	set(SFML_MAIN_LIBRARY_DEBUG ${SFML}/${target_triple}/lib/Debug/sfml-main-d.lib CACHE FILEPATH "" FORCE)
@@ -120,7 +120,7 @@ if(EXISTS ${SFML}/${target_triple}/lib/Release/sfml-main.lib)
 endif()
 
 # https://cmake.org/cmake/help/latest/module/FindGLEW.html
-set(GLEW ${DK3RDPARTY_DIR}/glew-2.2.0 CACHE PATH "" FORCE)
+set(GLEW $ENV{DK3RDPARTY_DIR}/glew-2.2.0 CACHE PATH "" FORCE)
 if(EXISTS ${GLEW}/${target_triple}/lib/Release/libglew32.lib)
 	##set(GLEW_DIR ${GLEW}/build/cmake CACHE PATH "" FORCE)
 	set(GLEW_USE_STATIC_LIBS ON CACHE BOOL "" FORCE)
@@ -136,7 +136,7 @@ if(EXISTS ${GLEW}/${target_triple}/lib/Release/libglew32.lib)
 endif()
 
 
-set(OPENSSL ${DK3RDPARTY_DIR}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
+set(OPENSSL $ENV{DK3RDPARTY_DIR}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
 if(EXISTS ${OPENSSL}/lib/ssleay32MT.lib)
 	set(CMAKE_USE_OPENSSL ON CACHE BOOL "" FORCE)
 	set(OPENSSL_INCLUDE_DIR ${OPENSSL}/include CACHE PATH "" FORCE)
@@ -147,7 +147,7 @@ if(EXISTS ${OPENSSL}/lib/ssleay32MT.lib)
 endif()
 
 
-set(OPENAL ${DK3RDPARTY_DIR}/openal-1.15.1 CACHE PATH "" FORCE)
+set(OPENAL $ENV{DK3RDPARTY_DIR}/openal-1.15.1 CACHE PATH "" FORCE)
 if(EXISTS ${OPENAL}/${target_triple}/Release/OpenAL32.lib)
 # /I${OPENAL}/include/AL
 	set(OPENAL_INCLUDE_DIR ${OPENAL}/include CACHE PATH "" FORCE)
@@ -157,19 +157,19 @@ if(EXISTS ${OPENAL}/${target_triple}/Release/OpenAL32.lib)
 endif()
 
 
-set(VORBIS ${DK3RDPARTY_DIR}/libvorbis-1.3.5 CACHE PATH "" FORCE)
+set(VORBIS $ENV{DK3RDPARTY_DIR}/libvorbis-1.3.5 CACHE PATH "" FORCE)
 if(EXISTS ${VORBIS}/${target_triple}/Release/lib/.libs/libvorbis.lib)
 	set(VORBIS_INCLUDE_DIR ${VORBIS}/include CACHE PATH "" FORCE)
 endif()
 
 
-set(OGG ${DK3RDPARTY_DIR}/libogg-1.3.2 CACHE PATH "" FORCE)
+set(OGG $ENV{DK3RDPARTY_DIR}/libogg-1.3.2 CACHE PATH "" FORCE)
 if(EXISTS ${OGG}/${target_triple}/Release/src/.libs/libogg.lib)
 	set(OGG_INCLUDE_DIR ${OGG}/include CACHE PATH "" FORCE)
 endif()
 
 
-set(SMPEG2 ${DK3RDPARTY_DIR}/smpeg2-2.0.0 CACHE PATH "" FORCE)
+set(SMPEG2 $ENV{DK3RDPARTY_DIR}/smpeg2-2.0.0 CACHE PATH "" FORCE)
 if(EXISTS ${SMPEG2}/${target_triple}/lib/Release/libsmpeg2.lib)
 	set(SMPEG_INCLUDE_DIR ${SMPEG2} CACHE PATH "" FORCE)
 endif()

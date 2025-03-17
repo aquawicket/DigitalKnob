@@ -16,8 +16,8 @@ endif()
 #dk_set(MSINTTYPES_VERSION r26)
 #dk_set(MSINTTYPES_FOLDER msinttypes-${MSINTTYPES_VERSION})
 #dk_set(MSINTTYPES_DL https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/msinttypes-r26.zip)
-#dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
-#dk_set(MSINTTYPES ${DK3RDPARTY_DIR}/${MSINTTYPES_FOLDER})
+#dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
+#dk_set(MSINTTYPES $ENV{DK3RDPARTY_DIR}/${MSINTTYPES_FOLDER})
 
 
 ### INSTALL ###

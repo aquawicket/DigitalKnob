@@ -18,9 +18,9 @@ dk_validate(host_triple "dk_host_triple()")
 #	dk_set(ANDROID_SDK "$ENV{HOME}/digitalknob/3rdParty/android-sdk")
 #	dk_set(ANDROID_SDK_DIR "$ENV{HOME}/digitalknob/3rdParty/android-sdk")
 #else()
-	dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
-	dk_set(ANDROID_SDK "${DK3RDPARTY_DIR}/android-sdk")
-	dk_set(ANDROID_SDK_DIR "${DK3RDPARTY_DIR}/android-sdk")
+	dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
+	dk_set(ANDROID_SDK "$ENV{DK3RDPARTY_DIR}/android-sdk")
+	dk_set(ANDROID_SDK_DIR "$ENV{DK3RDPARTY_DIR}/android-sdk")
 #endif()
 
 ### INSTALL ###

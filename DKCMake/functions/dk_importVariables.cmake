@@ -330,7 +330,7 @@ function(dk_importVariables)
 		unset(ROOT)
 	else()
 		dk_assertPath(DK3RDPARTY_DIR)
-		set(PLUGIN_INSTALL_ROOT ${DK3RDPARTY_DIR})
+		set(PLUGIN_INSTALL_ROOT $ENV{DK3RDPARTY_DIR})
 	endif()
 	dk_printVar(PLUGIN_INSTALL_ROOT)									# PLUGIN_INSTALL_ROOT: C:/Users/name/digitalknob/Development/3rdParty
 

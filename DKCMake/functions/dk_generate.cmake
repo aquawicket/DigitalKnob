@@ -147,35 +147,35 @@ function(dk_generate)
 	endif()
 	
 	if("${target_triple}" STREQUAL "win_arm64_clang")
-		dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR")
-		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
+		dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR")
+		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64")
 	endif()
 	
 	if("${target_triple}" STREQUAL "win_x86_clang")
-		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
+		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32")
 	endif()
 	
 	if("${target_triple}" STREQUAL "win_x86_gcc")
-		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
+		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32")
 	endif()
 	
 	if("${target_triple}" STREQUAL "win_x86_64_clang")
-		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
+		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
 		# TODO: export MSYSTEM=CLANG64
 		#dk_arrayUnshift(CMAKE_ARGS "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64")
 	endif()
 	
 	if("${target_triple}" STREQUAL "win_x86_64_gcc")
-		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
+		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64")
 	endif()
 	
 	if("${target_triple}" STREQUAL "win_x86_64_ucrt")
-		# TODO: export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
+		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64")
 	endif()
 	
