@@ -3,7 +3,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ####################################################################
-# dk_DKCACHE_DIR()
+# dk_DKDESKTOP_DIR()
 #
 #
 function(dk_DKDESKTOP_DIR)
@@ -11,7 +11,7 @@ function(dk_DKDESKTOP_DIR)
 
 	###### SET ######
 	if(ARGN)
-		dk_set(DKDESKTOP_DIR "${ARGN}")
+		dk_set(ENV{DKDESKTOP_DIR} "${ARGN}")
 		
 	###### GET ######
 	else()

@@ -44,8 +44,8 @@ endif()
 	
 ###### ANDROID_USER_HOME ######
 if(NOT DEFINED ENV{ANDROID_USER_HOME})
-	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
-	set(ENV{ANDROID_USER_HOME} "${DKCACHE_DIR}/.android")
+	dk_validate(ENV{DKCACHE_DIR} "dk_DKCACHE_DIR()")
+	set(ENV{ANDROID_USER_HOME} "$ENV{DKCACHE_DIR}/.android")
 	if(WIN_HOST)
 		dk_replaceAll("$ENV{ANDROID_USER_HOME}" "/" "\\" ENV{ANDROID_USER_HOME})
 		dk_validate(CMD_EXE "dk_CMD_EXE()")
@@ -56,7 +56,7 @@ endif()
 	
 ###### ANDROID_SDK_HOME ######
 #if(NOT DEFINED ENV{ANDROID_SDK_HOME})
-#	set(ENV{ANDROID_SDK_HOME} "${DKCACHE_DIR}")
+#	set(ENV{ANDROID_SDK_HOME} "$ENV{DKCACHE_DIR}")
 #	if(WIN_HOST)
 #		dk_replaceAll("$ENV{ANDROID_SDK_HOME}" "/" "\\" ENV{ANDROID_SDK_HOME})
 #		dk_validate(CMD_EXE "dk_CMD_EXE()")

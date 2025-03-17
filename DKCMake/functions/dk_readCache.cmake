@@ -9,8 +9,8 @@ include_guard()
 function(dk_readCache)
 #	dk_debugFunc(3)
 	
-	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
-	if(NOT EXISTS "${DKCACHE_DIR}/DKBuilder.cache")
+	dk_validate(ENV{DKCACHE_DIR} "dk_DKCACHE_DIR()")
+	if(NOT EXISTS "$ENV{DKCACHE_DIR}/DKBuilder.cache")
 		dk_return()
 	endif()
 	#dk_unset(_target_app_)
@@ -25,9 +25,9 @@ function(dk_readCache)
 #		[ "${count}" = "2" ] &&	_target_type_=$(builtin echo "${p}" | tr -d '\r')
 #		[ "${count}" = "3" ] && _target_env_=$(echo ${p} | tr -d '\r')
 #		count=$((count + 1))
-#	done < "${DKCACHE_DIR}"/DKBuilder.cache
+#	done < "$ENV{DKCACHE_DIR}"/DKBuilder.cache
 
-#	file(STRINGS "${DKCACHE_DIR}/DKBuilder.cache" lines)
+#	file(STRINGS "$ENV{DKCACHE_DIR}/DKBuilder.cache" lines)
 #	foreach(line ${lines})
 #		if(${count} EQUAL 0)
 #			set(${ARGV0} ${line})

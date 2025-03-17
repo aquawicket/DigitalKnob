@@ -38,10 +38,10 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(DKDESKTOP_DIR   "dk_DKHOME_DIR()")
+	dk_validate(ENV{DKDESKTOP_DIR}   "dk_DKDESKTOP_DIR()")
 	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 	dk_validate(DKDOWNLOAD_DIR  "dk_DIGITALKNOB_DIR()")
 	
-	#dk_createShortcut("${DKDESKTOP_DIR}/digitalknob.lnk" "C:/Users/Administrator/digitalknob")
+	#dk_createShortcut("$ENV{DKDESKTOP_DIR}/digitalknob.lnk" "C:/Users/Administrator/digitalknob")
 	dk_createShortcut("C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP.lnk" "C:/Windows/System32/wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP")
 endfunction()

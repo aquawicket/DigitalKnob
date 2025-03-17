@@ -16,16 +16,16 @@ function(dk_exportVars var_name var_value)
 		set(export "export")
 	endif()
 	
-	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
-	if(EXISTS "${DKCACHE_DIR}/DKEXPORT_VARS")
-		dk_fileIncludes("${DKCACHE_DIR}/DKEXPORT_VARS" "${export} ${var_name}=${var_value}")
+	dk_validate(ENV{DKCACHE_DIR{ "dk_DKCACHE_DIR()")
+	if(EXISTS "$ENV{DKCACHE_DIR}/DKEXPORT_VARS")
+		dk_fileIncludes("$ENV{DKCACHE_DIR}/DKEXPORT_VARS" "${export} ${var_name}=${var_value}")
 		if(dk_fileIncludes)
 			dk_notice("DKEXPORT_VARS already contains '${export} ${var_name}=${var_value}'")
 			dk_return()
 		endif()
 	endif()
 	
-	dk_fileAppend("${DKCACHE_DIR}/DKEXPORT_VARS" "${export} ${var_name}=${var_value}\n")
+	dk_fileAppend("$ENV{DKCACHE_DIR}/DKEXPORT_VARS" "${export} ${var_name}=${var_value}\n")
 endfunction()
 
 

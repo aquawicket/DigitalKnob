@@ -61,8 +61,8 @@ function(dk_msys2Bash)
 	dk_replaceAll("${bash}"  "C:/"  "/c/"  bash)
 	
 	### run bash as a file
-	#dk_fileWrite(${DKCACHE_DIR}/dkscript.tmp ${bash})
-	#dk_executeProcess(${MSYS2_DIR}/usr/bin/bash ${DKCACHE_DIR}/dkscript.tmp NOECHO)	
+	#dk_fileWrite($ENV{DKCACHE_DIR}/dkscript.tmp ${bash})
+	#dk_executeProcess(${MSYS2_DIR}/usr/bin/bash $ENV{DKCACHE_DIR}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
 	#dk_info("\n${clr}${magenta} dk_msys2Bash> ${bash}\n")
