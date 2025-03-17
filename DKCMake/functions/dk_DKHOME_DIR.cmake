@@ -11,12 +11,13 @@ function(dk_DKHOME_DIR)
 
 	###### SET ######
 	if(ARGV)
-		dk_set(DKHOME_DIR "${ARGV}")
+		#dk_set(DKHOME_DIR "${ARGV}")
+		set(ENV{DKHOME_DIR} "${ARGV}")
 		return()
 	endif()
 	
-	if(EXISTS "${DKHOME_DIR}")
-		dk_debug("DKHOME_DIR:${DKHOME_DIR} already set")
+	if(EXISTS "$ENV{DKHOME_DIR}")
+		dk_debug("ENV{DKHOME_DIR}:$ENV{DKHOME_DIR} already set")
 		return()
 	endif()
     
@@ -71,9 +72,9 @@ function(dk_DKHOME_DIR)
 #	dk_validate(CMD_EXE "dk_CMD_EXE()")
 	
 	###### DKHOME_DIR ######
-	if(NOT EXISTS "$ENV{DKHOME_DIR}")
-		set(DKHOME_DIR "$ENV{DKHOME_DIR}")
-	endif()
+#	if(NOT EXISTS "$ENV{DKHOME_DIR}")
+#		set(ENV{DKHOME_DIR} "$ENV{DKHOME_DIR}")
+#	endif()
 	if(NOT EXISTS "$ENV{DKHOME_DIR}")
 #		if(CYGPATH_EXE)
 #			dk_debug("setting DKHOME_DIR from CYGPATH of %USERPROFILE%")
@@ -89,28 +90,31 @@ function(dk_DKHOME_DIR)
 #			dk_debug("setting DKHOME_DIR from CMAKE NATIVE PATH of %USERPROFILE%")
 			execute_process(COMMAND ${CMD_EXE} /c "echo %USERPROFILE%" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
 			#cmake_path(NATIVE_PATH DKHOME_DIR NORMALIZE DKHOME_DIR)
-			dk_nativePath("${DKHOME_DIR}" DKHOME_DIR)
+			dk_nativePath("$ENV{DKHOME_DIR}" DKHOME_DIR)
+			set(ENV{DKHOME_DIR} "${DKHOME_DIR}")
 #		endif()
 	endif()
 	if(NOT EXISTS "$ENV{DKHOME_DIR}")
 		if(${CMAKE_VERSION} VERSION_GREATER "3.21")
 			file(REAL_PATH "~" DKHOME_DIR EXPAND_TILDE)
+			set(ENV{DKHOME_DIR} "${DKHOME_DIR}")
 		else()
-			set(DKHOME_DIR "$ENV{USERPROFILE}")
 			if(NOT EXISTS "$ENV{DKHOME_DIR}")
-				set(DKHOME_DIR "$ENV{HOME}")
+				dk_set(ENV{DKHOME_DIR} "$ENV{USERPROFILE}")
+			endif()
+			if(NOT EXISTS "$ENV{DKHOME_DIR}")
+				dk_set(ENV{DKHOME_DIR} "$ENV{HOME}")
 			endif()
 		endif()
 	endif()
 	if(NOT EXISTS "$ENV{DKHOME_DIR}")
 		dk_fatal("DKHOME_DIR:$ENV{DKHOME_DIR} not found")
 	else()
-		dk_debug("setting DKHOME_DIR with TO_CMAKE_PATH of $ENV{DKHOME_DIR}")
-		file(TO_CMAKE_PATH "${DKHOME_DIR}" DKHOME_DIR)
-		
-		dk_set(DKHOME_DIR "${DKHOME_DIR}")				# Globalize the variable
-		#set(ENV{DKHOME_DIR} "${DKHOME_DIR}")			# Set Environment Varible
+		file(TO_CMAKE_PATH "$ENV{DKHOME_DIR}" DKHOME_DIR)
+		set(ENV{DKHOME_DIR} "${DKHOME_DIR}")
 	endif()
+	message("ENV{DKHOME_DIR} = $ENV{DKHOME_DIR}")
+	
 endfunction()
 
 
@@ -120,15 +124,15 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc(0)
- 
+	dk_debugFunc(0)
+
 	dk_echo()
 	dk_echo("Test Getting DKHOME_DIR . . .")
 	dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
 	dk_printVar(DKHOME_DIR)
-	
-	dk_echo()
-	dk_echo("Test Setting DKHOME_DIR . . .")
-	dk_DKHOME_DIR("C:/")
-	dk_printVar(DKHOME_DIR)
+
+#	dk_echo()
+#	dk_echo("Test Setting DKHOME_DIR . . .")
+#	dk_DKHOME_DIR("C:/")
+#	dk_printVar(DKHOME_DIR)
 endfunction()
