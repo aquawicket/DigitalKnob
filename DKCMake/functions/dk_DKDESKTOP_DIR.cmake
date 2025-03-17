@@ -15,8 +15,8 @@ function(dk_DKDESKTOP_DIR)
 		
 	###### GET ######
 	else()
-		dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
-		dk_set(DKDESKTOP_DIR "${DKHOME_DIR}/Desktop")
+		dk_validate(ENV{DKHOME_DIR} "dk_DKHOME_DIR()")
+		dk_set(DKDESKTOP_DIR "$ENV{DKHOME_DIR}/Desktop")
 	endif()
 endfunction()
 

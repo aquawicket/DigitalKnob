@@ -15,8 +15,8 @@ function(dk_DKCACHE_DIR)
 		
 	###### GET ######
 	else()
-		dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
-		dk_set(DKCACHE_DIR "${DKHOME_DIR}/.dk")
+		dk_validate(ENV{DKHOME_DIR} "dk_DKHOME_DIR()")
+		dk_set(DKCACHE_DIR "$ENV{DKHOME_DIR}/.dk")
 	endif()
 	if(NOT EXISTS "${DKCACHE_DIR}")
 		dk_makeDirectory("${DKCACHE_DIR}")

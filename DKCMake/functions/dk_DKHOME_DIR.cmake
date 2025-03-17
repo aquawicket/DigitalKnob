@@ -11,12 +11,12 @@ function(dk_DKHOME_DIR)
 
 	###### SET ######
 	if(ARGV)
-		dk_set(DKHOME_DIR "${ARGV}")
+		dk_set(ENV{DKHOME_DIR} "${ARGV}")
 		return()
 	endif()
 	
-	if(EXISTS "${DKHOME_DIR}")
-		dk_debug("DKHOME_DIR:${DKHOME_DIR} already set")
+	if(EXISTS "$ENV{DKHOME_DIR}")
+		dk_debug("DKHOME_DIR:$ENV{DKHOME_DIR} already set")
 		return()
 	endif()
     
