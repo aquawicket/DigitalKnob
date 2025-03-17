@@ -7,19 +7,19 @@ include_guard()
 #
 #
 function(dk_DKHOME_DIR)
-    dk_debugFunc(0 1)
+	dk_debugFunc(0 1)
 
 	###### SET ######
 	if(ARGV)
 		dk_set(ENV{DKHOME_DIR} "${ARGV}")
 		return()
 	endif()
-	
+
 	if(EXISTS "$ENV{DKHOME_DIR}")
 		dk_debug("DKHOME_DIR:$ENV{DKHOME_DIR} already set")
 		return()
 	endif()
-    
+
 #	###### CMD_EXE ######
 #	dk_validate(CMD_EXE "dk_CMD_EXE()")
 #	if(NOT EXISTS "${CMD_EXE}")
@@ -33,7 +33,7 @@ function(dk_DKHOME_DIR)
 #		set(ENV{CMD_EXE} "${CMD_EXE}")				# Set Environment Varible
 #		dk_printVar(ENV{CMD_EXE})
 #	endif()
-	
+
 #	###### CYGPATH_EXE ######
 #	if(NOT EXISTS "${CYGPATH_EXE}")
 #		if(CMD_EXE)
@@ -54,7 +54,7 @@ function(dk_DKHOME_DIR)
 #		set(ENV{CYGPATH_EXE} "${CYGPATH_EXE}")		# Set Environment Varible
 #		dk_printVar(ENV{CYGPATH_EXE})
 #	endif()
-	
+
 #	###### WSLPATH_EXE ######
 #	if(NOT EXISTS "${WSLPATH_EXE}")
 #		dk_findProgram(WSLPATH_EXE wslpath)
@@ -67,9 +67,9 @@ function(dk_DKHOME_DIR)
 #		set(ENV{WSLPATH_EXE} "${WSLPATH_EXE}")		# Set Environment Varible
 #		dk_printVar(ENV{WSLPATH_EXE})
 #	endif()
-	
+
 #	dk_validate(CMD_EXE "dk_CMD_EXE()")
-	
+
 	###### DKHOME_DIR ######
 	if(NOT EXISTS "${DKHOME_DIR}")
 		dk_debug("setting DKHOME_DIR from environment variable DKHOME_DIR:$ENV{DKHOME_DIR}")
@@ -101,12 +101,12 @@ function(dk_DKHOME_DIR)
 		dk_debug("setting DKHOME_DIR from environment variable ENV{HOME}:$ENV{HOME}")
 		set(DKHOME_DIR "$ENV{HOME}")
 	endif()
-    if(NOT EXISTS "${DKHOME_DIR}")
+	if(NOT EXISTS "${DKHOME_DIR}")
 		dk_fatal("DKHOME_DIR:${DKHOME_DIR} not found")
 	else()
 		dk_debug("setting DKHOME_DIR with TO_CMAKE_PATH of ${DKHOME_DIR}")
 		file(TO_CMAKE_PATH "${DKHOME_DIR}" DKHOME_DIR)
-		
+
 		dk_set(DKHOME_DIR "${DKHOME_DIR}")				# Globalize the variable
 		#set(ENV{DKHOME_DIR} "${DKHOME_DIR}")			# Set Environment Varible
 	endif()
@@ -119,7 +119,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc(0)
+	dk_debugFunc(0)
  
 	dk_echo()
 	dk_echo("Test Getting DKHOME_DIR . . .")
