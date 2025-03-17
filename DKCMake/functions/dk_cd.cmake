@@ -34,6 +34,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	dk_cd(${DKDOWNLOAD_DIR})
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	dk_cd($ENV{DKDOWNLOAD_DIR})
 endfunction()

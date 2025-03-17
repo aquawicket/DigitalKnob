@@ -23,11 +23,11 @@ dk_import(https://justine.lol/linux-compiler-on-windows/cross9.zip)
 
 
 #if(NOT EXISTS ??)
-#	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+#	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 #	dk_echo("Installing ${CROSS9_FOLDER}")
 	
 	### Download ###
-#	dk_download(${CROSS9_DL} ${DKDOWNLOAD_DIR})
+#	dk_download(${CROSS9_DL} $ENV{DKDOWNLOAD_DIR})
 
 
 #endif()

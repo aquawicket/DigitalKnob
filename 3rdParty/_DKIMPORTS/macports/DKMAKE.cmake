@@ -20,9 +20,9 @@ dk_load(dk_builder)
 ### VERSION ###
 dk_set(MACPORTS_DL https://github.com/macports/macports-base/releases/download/v2.7.1/MacPorts-2.7.1-11-BigSur.pkg)
 
-if(NOT EXISTS ${DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
-	dk_download(${MACPORTS_DL} ${DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)		
-	dk_command(chmod +x ${DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
+if(NOT EXISTS $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
+	dk_download(${MACPORTS_DL} $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)		
+	dk_command(chmod +x $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
 	dk_set(QUEUE_BUILD ON)
-	#MAC_dk_queueCommand(${DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg) #FIXME
+	#MAC_dk_queueCommand($ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg) #FIXME
 endif()

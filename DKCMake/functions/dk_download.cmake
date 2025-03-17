@@ -55,7 +55,7 @@ function(dk_download url) # dest_path #NO_HALT
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)
-		set(dest_path "${DKDOWNLOAD_DIR}")
+		set(dest_path "$ENV{DKDOWNLOAD_DIR}")
 	endif()
 	if(NOT dest_path)
 		dk_fatal("dest_path:${dest_path} is invalid")
@@ -161,6 +161,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" ${DKDOWNLOAD_DIR})
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" $ENV{DKDOWNLOAD_DIR})
 endfunction()

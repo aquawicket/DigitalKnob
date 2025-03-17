@@ -37,8 +37,8 @@ function(dk_DIGITALKNOB_DIR)
 #	### DKDOWNLOAD_DIR ###
 #	#dk_set(DKDOWNLOAD_DIR "$ENV{DIGITALKNOB_DIR}/download")
 #	set(DKDOWNLOAD_DIR "$ENV{DIGITALKNOB_DIR}/download")
-#	if(NOT EXISTS "${DKDOWNLOAD_DIR}") 
-#		dk_makeDirectory("${DKDOWNLOAD_DIR}")
+#	if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}") 
+#		dk_makeDirectory("$ENV{DKDOWNLOAD_DIR}")
 #	endif()
 	
 #	### DKTOOLS_DIR ###

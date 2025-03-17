@@ -48,8 +48,8 @@ elseif(ANDROID_HOST)
 
 	## Repackage Gradle's aapt2.jar with termux version of aapt2
 	if(NOT GRADLE_USER_HOME)
-		dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-		dk_set(GRADLE_USER_HOME ${DKDOWNLOAD_DIR}/.gradle) #TODO: move this into _DKIMPORTS as its own dependency
+		dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+		dk_set(GRADLE_USER_HOME $ENV{DKDOWNLOAD_DIR}/.gradle) #TODO: move this into _DKIMPORTS as its own dependency
 		dk_printVar(GRADLE_USER_HOME)
 	endif()
 	dk_set(AAPT2 ${GRADLE_USER_HOME}/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)

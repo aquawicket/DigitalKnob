@@ -12,7 +12,7 @@ dk_validate(host_triple "dk_host_triple()")
 #	dk_return()
 #endif()
 dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 
 
 #if(EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
@@ -26,7 +26,7 @@ dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 # https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history
 
 #dk_set(VS_INSTALL_PATH		"${DKTOOLS_DIR}/VS")
-#dk_set(VS_CACHE_PATH		"${DKDOWNLOAD_DIR}/VS")
+#dk_set(VS_CACHE_PATH		"$ENV{DKDOWNLOAD_DIR}/VS")
 dk_set(VS_YEAR 				2022)												# 2019, 2022
 #dk_set(VS_TYPE				"BuildTools") 										# BuildTools, Community			
 dk_set(VS_MAJOR 			17)													# 17
@@ -44,8 +44,8 @@ endif()
 
 ###### VS_CACHE_PATH ######
 if(NOT VS_CACHE_PATH)
-	#dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	#set(VS_CACHE_PATH	"${DKDOWNLOAD_DIR}/VS")
+	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	#set(VS_CACHE_PATH	"$ENV{DKDOWNLOAD_DIR}/VS")
 	set(VS_CACHE_PATH	"C:/Program Files \(x86\)/Microsoft Visual Studio/DL")
 endif()
 set(VS_CACHE_FLAG			--path cache=${VS_CACHE_PATH})		
@@ -112,7 +112,7 @@ dk_set(VS	"${VS_INSTALL_PATH}/${VS_YEAR}/${VS_TYPE}")
 if(NOT EXISTS "${VS}")
 	dk_info("Installing Visual Studio ${VS_TYPE} ${VS_YEAR} ${VS_VERSION}. . .")
 	dk_basename(${VS_DL} VS_DL_FILE)
-	dk_download(${VS_DL} ${DKDOWNLOAD_DIR}/${VS_DL_FILE})
+	dk_download(${VS_DL} $ENV{DKDOWNLOAD_DIR}/${VS_DL_FILE})
 	#dk_download(${VS_DL})
 	
 	# Visual Studio Installer Options
@@ -127,8 +127,8 @@ if(NOT EXISTS "${VS}")
 	# --quiet				- Prevents any user interface from being displayed
 	
 	
-	#execute_process(COMMAND cmd /c start /wait ${DKDOWNLOAD_DIR}/${VS_DL_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall)
-	execute_process(COMMAND ${DKDOWNLOAD_DIR}/${VS_DL_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall TIMEOUT 1)
+	#execute_process(COMMAND cmd /c start /wait $ENV{DKDOWNLOAD_DIR}/${VS_DL_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall)
+	execute_process(COMMAND $ENV{DKDOWNLOAD_DIR}/${VS_DL_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall TIMEOUT 1)
 
 	### wait for vs_setup_bootstrapper.exe to exist in C:/windows/temp ###
 	while(NOT VS_SETUP_BOOTSTRAPPER_EXE)
@@ -143,11 +143,11 @@ if(NOT EXISTS "${VS}")
 	dk_printVar(VS_SETUP_EXE)
 	dk_firewallAllow("VS_SETUP_EXE" "${VS_SETUP_EXE}")
 
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	while(NOT EXISTS "${VS_CACHE_PATH}")
 		dk_sleep(1)
 	endwhile()
-	dk_copy("${VS_CACHE_PATH}" "${DKDOWNLOAD_DIR}/VS")
+	dk_copy("${VS_CACHE_PATH}" "$ENV{DKDOWNLOAD_DIR}/VS")
 else()
 	dk_info("Visual Studio ${VS_TYPE} ${VS_MAJOR} ${VS_YEAR} already installed")
 endif()

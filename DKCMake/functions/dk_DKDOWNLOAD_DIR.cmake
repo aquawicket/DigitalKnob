@@ -11,19 +11,19 @@ function(dk_DKDOWNLOAD_DIR)
             
 	###### SET ######
 	if(ARGV)
-		dk_set(DKDOWNLOAD_DIR "${ARGV}")
+		set(ENV{DKDOWNLOAD_DIR} "${ARGV}")
 		
 	###### GET ######
 	else()
 		dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
-		dk_set(DKDOWNLOAD_DIR "$ENV{DIGITALKNOB_DIR}/download")
+		set(ENV{DKDOWNLOAD_DIR} "$ENV{DIGITALKNOB_DIR}/download")
 	endif()
 	
-	if(NOT EXISTS "${DKDOWNLOAD_DIR}") 
-		dk_makeDirectory("${DKDOWNLOAD_DIR}")
+	if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}") 
+		dk_makeDirectory("$ENV{DKDOWNLOAD_DIR}")
 	endif()
 	
-	dk_assertPath(DKDOWNLOAD_DIR)
+	dk_assertPath(ENV{DKDOWNLOAD_DIR})
 endfunction()
 
 
@@ -38,10 +38,10 @@ function(DKTEST)
 	dk_echo()
 	dk_echo("Test Getting DKDOWNLOAD_DIR . . .")
 	dk_DKDOWNLOAD_DIR()
-	dk_printVar(DKDOWNLOAD_DIR)
+	dk_printVar(ENV{DKDOWNLOAD_DIR})
 	
 	dk_echo()
 	dk_echo("Test Setting DKDOWNLOAD_DIR . . .")
 	dk_DKDOWNLOAD_DIR("C:/DK/download")
-	dk_printVar(DKDOWNLOAD_DIR)
+	dk_printVar(ENV{DKDOWNLOAD_DIR})
 endfunction()

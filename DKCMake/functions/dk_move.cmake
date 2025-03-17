@@ -50,17 +50,17 @@ function(DKTEST)
 	
 	dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
     
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-    dk_fileWrite("${DKDOWNLOAD_DIR}/moveMe.file" "dk_move test")
-    dk_move("${DKDOWNLOAD_DIR}/moveMe.file" "$ENV{DIGITALKNOB_DIR}/iWasMoved.txt" OVERWRITE)
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+    dk_fileWrite("$ENV{DKDOWNLOAD_DIR}/moveMe.file" "dk_move test")
+    dk_move("$ENV{DKDOWNLOAD_DIR}/moveMe.file" "$ENV{DIGITALKNOB_DIR}/iWasMoved.txt" OVERWRITE)
     
     dk_fileWrite(moveMe.file "dk_move test")
     dk_move(moveMe.file iWasMoved.txt OVERWRITE)
     
-    dk_makeDirectory("${DKDOWNLOAD_DIR}/moveMe")
+    dk_makeDirectory("$ENV{DKDOWNLOAD_DIR}/moveMe")
 #endfunction()
 
-    dk_move("${DKDOWNLOAD_DIR}/moveMe" "$ENV{DIGITALKNOB_DIR}/iWasMoved" OVERWRITE)
+    dk_move("$ENV{DKDOWNLOAD_DIR}/moveMe" "$ENV{DIGITALKNOB_DIR}/iWasMoved" OVERWRITE)
     
     dk_makeDirectory(moveMe)
     dk_move(moveMe iWasMoved OVERWRITE)

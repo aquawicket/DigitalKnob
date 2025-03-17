@@ -55,7 +55,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	#dk_echo(" ")
 	
 	### set the PLUGIN_DL_DIR
-	set(PLUGIN_DL_DIR ${DKDOWNLOAD_DIR})
+	set(PLUGIN_DL_DIR $ENV{DKDOWNLOAD_DIR})
 	
 	### set the PLUGIN_DL_FILENAME ###
 	# let's check that the PLUGIN_URL_FILENAME has at least the PLUGIN_IMPORT_NAME in it somewhere, or else we gotta rename it

@@ -41,11 +41,11 @@ dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
 
 ### Save Pacman database, keys and cache to download directory for offline buiding ###
 #dk_copy("${DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
-#dk_set				(MSYS2_DBPath		"${DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
-#dk_set				(MSYS2_LogFile		"${DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
-#dk_set				(MSYS2_GPGDir		"${DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")
+#dk_set				(MSYS2_DBPath		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
+#dk_set				(MSYS2_LogFile		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
+#dk_set				(MSYS2_GPGDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")
 #dk_makeDirectory("${MSYS2_DBPath}")
-dk_set				(MSYS2_CacheDir		"${DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
+dk_set				(MSYS2_CacheDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
 dk_makeDirectory("${MSYS2_CacheDir}")
 
 
@@ -59,8 +59,8 @@ dk_makeDirectory("${MSYS2_CacheDir}")
 #	dk_info("Installing ${MSYS2_FOLDER}")
 #	dk_import(${MSYS2_DL})
 #	
-#	#dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-#	#dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
-#	#dk_command("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2}" --confirm-command)
+#	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+#	#dk_download(${MSYS2_DL} $ENV{DKDOWNLOAD_DIR})
+#	#dk_command("$ENV{DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2}" --confirm-command)
 #endif()
 

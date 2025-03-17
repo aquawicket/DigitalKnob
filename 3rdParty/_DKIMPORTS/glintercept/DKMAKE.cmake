@@ -25,6 +25,6 @@ endif()
 # if HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\GLIntercept_is1 exists
 dk_set(GLINTERCEPT "C:/Program Files (x86)/GLIntercept_1_3_4")
 if(NOT EXISTS "${GLINTERCEPT}/unins000.exe")
-	dk_download(https://github.com/dtrebilco/glintercept/releases/download/1.3.4/GLIntercept_1_3_4.exe ${DKDOWNLOAD_DIR}/GLIntercept_1_3_4.exe)
-	dk_command(${DKDOWNLOAD_DIR}/GLIntercept_1_3_4.exe)
+	dk_download(https://github.com/dtrebilco/glintercept/releases/download/1.3.4/GLIntercept_1_3_4.exe $ENV{DKDOWNLOAD_DIR}/GLIntercept_1_3_4.exe)
+	dk_command($ENV{DKDOWNLOAD_DIR}/GLIntercept_1_3_4.exe)
 endif()

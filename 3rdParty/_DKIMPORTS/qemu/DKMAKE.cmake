@@ -24,10 +24,10 @@ dk_set(QEMU_SYSTEM_X86_64_EXE ${QEMU_DIR}/qemu-system-x86_64.exe)
 
 ### INSTALL ###
 if(NOT EXISTS ${QEMU_IMG_EXE})
-	dk_download(${QEMU_DL} ${DKDOWNLOAD_DIR})
+	dk_download(${QEMU_DL} $ENV{DKDOWNLOAD_DIR})
 	dk_nativePath(${QEMU_DIR} QEMU_DIR_NATIVE)
 	dk_echo("Installing ${QEMU_FOLDER} . . .")
-	dk_set(command_string "${DKDOWNLOAD_DIR}/${QEMU_DL_FILE}" /S /D=${QEMU_DIR_NATIVE})
+	dk_set(command_string "$ENV{DKDOWNLOAD_DIR}/${QEMU_DL_FILE}" /S /D=${QEMU_DIR_NATIVE})
 	dk_executeProcess(echo ${command_string})
 	dk_executeProcess(${command_string})
 endif()

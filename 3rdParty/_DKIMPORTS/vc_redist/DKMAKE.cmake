@@ -30,9 +30,9 @@ dk_set(VCRUNTIME140_X86_DEBUG_DLL "C:/Windows/SysWOW64/vcruntime140d.dll")
 if((NOT EXISTS "${VCCOMP140_X86_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_DEBUG_DLL}"))
 	dk_basename(${VC_REDIST_X86_DL} VC_REDIST_X86_DL_FILE)
 	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_DL_FILE}")
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	dk_download(${VC_REDIST_X86_DL} ${DKDOWNLOAD_DIR}/${VC_REDIST_X86_DL_FILE})
-	dk_command(${DKDOWNLOAD_DIR}/${VC_REDIST_X86_DL_FILE} /install /quiet /norestart) #/log ${DK3RDPARTY_DIR}/vc_redist_install_log.txt
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	dk_download(${VC_REDIST_X86_DL} $ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_DL_FILE})
+	dk_command($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_DL_FILE} /install /quiet /norestart) #/log ${DK3RDPARTY_DIR}/vc_redist_install_log.txt
 endif()
 #dk_assertPath(VCCOMP140_X86_DLL)
 
@@ -47,9 +47,9 @@ dk_set(VCRUNTIME140_X86_64_DEBUG_DLL "C:/Windows/System32/vcruntime140d.dll")
 if((NOT EXISTS "${VCCOMP140_X86_64_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_64_DEBUG_DLL}"))
 	dk_basename(${VC_REDIST_X86_64_DL} VC_REDIST_X86_64_DL_FILE)
 	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_64_DL_FILE}")
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	dk_download(${VC_REDIST_X86_64_DL} ${DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_DL_FILE})
-	dk_command(${DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_DL_FILE} /install /quiet /norestart) #/log ${DK3RDPARTY_DIR}/vc_redist_install_log.txt
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	dk_download(${VC_REDIST_X86_64_DL} $ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_DL_FILE})
+	dk_command($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_DL_FILE} /install /quiet /norestart) #/log ${DK3RDPARTY_DIR}/vc_redist_install_log.txt
 endif()
 #dk_assertPath(VCCOMP140_X86_64_DLL)
 

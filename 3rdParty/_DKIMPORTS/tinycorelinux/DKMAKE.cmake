@@ -20,7 +20,7 @@ if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 	dk_info("Installing tiny-core-linux . . .")
 	
 	dk_basename(${TINYCORELINUX_DL} TINYCORELINUX_DL_FILE)
-	dk_download(${TINYCORELINUX_DL} ${DKDOWNLOAD_DIR}/${TINYCORELINUX_DL_FILE})
+	dk_download(${TINYCORELINUX_DL} $ENV{DKDOWNLOAD_DIR}/${TINYCORELINUX_DL_FILE})
 
 	##### EAMPLE with tinycorelinux #####
 	# cd into install directory
@@ -47,7 +47,7 @@ if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 
 	### Launching the VM
 	# C:/Users/Administrator/digitalknob/Development/3rdParty/qemu/qemu-system-x86_64 -cdrom CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl
-	dk_command(${QEMU_SYSTEM_X86_64_EXE} -cdrom ${DKDOWNLOAD_DIR}/CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl)
+	dk_command(${QEMU_SYSTEM_X86_64_EXE} -cdrom $ENV{DKDOWNLOAD_DIR}/CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl)
 endif()
 
 dk_set(TINYCOURLINUX_launcher "${TINYCORELINUX}/LAUNCH.cmd")

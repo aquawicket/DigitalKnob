@@ -18,5 +18,5 @@ endif()
 ###### set GRADLE_USER_HOME environment variable ######
 #dk_validate(ENV{DKCACHE_DIR{ "dk_DKCACHE_DIR()")
 #dk_set(GRADLE_USER_HOME $ENV{DKCACHE_DIR}/.gradle)
-dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-dk_set(GRADLE_USER_HOME ${DKDOWNLOAD_DIR}/.gradle)
+dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+dk_set(GRADLE_USER_HOME $ENV{DKDOWNLOAD_DIR}/.gradle)

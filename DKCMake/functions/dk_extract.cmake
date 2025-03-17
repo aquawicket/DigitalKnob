@@ -43,6 +43,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	dk_extract("${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64.zip" "${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64")
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	dk_extract("$ENV{DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64.zip" "$ENV{DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64")
 endfunction()

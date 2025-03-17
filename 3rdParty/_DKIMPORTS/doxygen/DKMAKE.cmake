@@ -27,12 +27,12 @@ endif()
 if(NOT EXISTS ${DOXYGEN_EXE})
 	if(WIN_HOST)
 		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6-setup.exe)
-		dk_command(${DKDOWNLOAD_DIR}/doxygen-1.9.6-setup.exe)
+		dk_command($ENV{DKDOWNLOAD_DIR}/doxygen-1.9.6-setup.exe)
 	elseif(MAC_HOST)
 		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/Doxygen-1.9.6.dmg) #FIXME:  The Downloaded file is a BYPASS file .dmg
-		dk_command(${DKDOWNLOAD_DIR}/Doxygen-1.9.6.dmg)
+		dk_command($ENV{DKDOWNLOAD_DIR}/Doxygen-1.9.6.dmg)
 	else()
 		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6.linux.bin.tar.gz)
-		#dk_command(${DKDOWNLOAD_DIR}/doxygen-1.9.6.linux.bin.tar.gz) #FIXME
+		#dk_command($ENV{DKDOWNLOAD_DIR}/doxygen-1.9.6.linux.bin.tar.gz) #FIXME
 	endif()
 endif()
