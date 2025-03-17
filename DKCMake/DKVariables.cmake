@@ -123,15 +123,15 @@ dk_validate(CONFIG_PATH   "dk_CONFIG_PATH()")
 ###############################################################
 ## Set variables for paths
 ###############################################################
-dk_validate(DIGITALKNOB_DIR  "dk_DIGITALKNOB_DIR()")
+dk_validate(ENV{DIGITALKNOB_DIR}  "dk_DIGITALKNOB_DIR()")
 
-dk_cd(${DIGITALKNOB_DIR})
+dk_cd($ENV{DIGITALKNOB_DIR})
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
 
 ### Install DKBIN binary directory ###
 if(INSTALL_DKLIBS)
-	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB_DIR}/DKBIN)
+	dk_set(CMAKE_INSTALL_PREFIX $ENV{DIGITALKNOB_DIR}/DKBIN)
 endif()
 
 

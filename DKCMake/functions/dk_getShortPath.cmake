@@ -15,7 +15,7 @@ function(dk_getShortPath path rtn_var)
 	
 	if(WIN_HOST)
 		dk_fileWrite(${DKCMAKE_DIR}/dk_getShortPath.cmd "@ECHO OFF \necho %~s1")
-		execute_process(COMMAND ${DKCMAKE_DIR}/dk_getShortPath.cmd ${path} OUTPUT_VARIABLE shortPath WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+		execute_process(COMMAND ${DKCMAKE_DIR}/dk_getShortPath.cmd ${path} OUTPUT_VARIABLE shortPath WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR})
 		dk_replaceAll(${shortPath} "\\" "/" shortPath)
 		dk_replaceAll(${shortPath} "\n" "" shortPath)
 		set(${rtn_var} ${shortPath} PARENT_SCOPE)

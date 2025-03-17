@@ -41,8 +41,8 @@ endfunction()
 function(DKTEST)
     dk_debugFunc()
  
-	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-    dk_getDirectories("${DIGITALKNOB_DIR}" directories)# RECURSIVE)
+	dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
+    dk_getDirectories("$ENV{DIGITALKNOB_DIR}" directories)# RECURSIVE)
     dk_printVar(directories)
 endfunction()
     

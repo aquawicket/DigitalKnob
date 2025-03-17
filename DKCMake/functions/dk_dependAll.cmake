@@ -34,12 +34,12 @@ function(dk_dependAll)
 	
 	
 #	# Find all plugins Folders from DKBRANCH root
-#	if(IS_DIRECTORY ${DIGITALKNOB_DIR})
-#		file(GLOB children RELATIVE ${DIGITALKNOB_DIR}/ ${DIGITALKNOB_DIR}/*)
+#	if(IS_DIRECTORY $ENV{DIGITALKNOB_DIR})
+#		file(GLOB children RELATIVE $ENV{DIGITALKNOB_DIR}/ $ENV{DIGITALKNOB_DIR}/*)
 #		foreach(child ${children})
 #			file(GLOB plugins RELATIVE ${DKBRANCH_DIR}/${child}/plugins/ ${DKBRANCH_DIR}/${child}/plugins/*)
 #			foreach(plugin ${plugins})
-#				if(EXISTS ${DIGITALKNOB_DIR}/${child}/plugins/${plugin}/DKMAKE.cmake)
+#				if(EXISTS $ENV{DIGITALKNOB_DIR}/${child}/plugins/${plugin}/DKMAKE.cmake)
 #					if(NOT ${plugin} STREQUAL "_DKIMPORT")
 #						set(DEPENDALL_FILE ${DEPENDALL_FILE} "dk_depend(${plugin})\n")
 #					endif()

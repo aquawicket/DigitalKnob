@@ -137,7 +137,7 @@ function(dk_executeProcess)
 	# will use value of that variable unless WORKING_DIRECTORY is specified in the function call.
 	if(NOT WORKING_DIRECTORY)
 		if(NOT PWD)
-			dk_cd(${DIGITALKNOB_DIR})
+			dk_cd($ENV{DIGITALKNOB_DIR})
 		endif()
 		list(APPEND ARGV WORKING_DIRECTORY "${PWD}") # add WORKING_DIRECTORY if missing
 	endif()

@@ -25,7 +25,7 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_append(COMMAND_ARGS ${patch_file})
 	dk_append(COMMAND_ARGS --reject)
 	execute_process(COMMAND ${COMMAND_ARGS}
-					WORKING_DIRECTORY ${DIGITALKNOB_DIR}
+					WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR}
 					RESULT_VARIABLE result
 					OUTPUT_VARIABLE output
 					OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -46,7 +46,7 @@ function(dk_gitApplyPatch directory patch_file)
 #	dk_append(COMMAND_ARGS --directory=${directory})
 #	dk_append(COMMAND_ARGS ${patch_file})
 #	execute_process(COMMAND ${COMMAND_ARGS}
-#					WORKING_DIRECTORY ${DIGITALKNOB_DIR}
+#					WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR}
 #					RESULT_VARIABLE result
 #					OUTPUT_VARIABLE output
 #					OUTPUT_STRIP_TRAILING_WHITESPACE)

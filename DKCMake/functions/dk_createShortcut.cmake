@@ -39,7 +39,7 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_validate(ENV{DKDESKTOP_DIR}   "dk_DKDESKTOP_DIR()")
-	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
+	dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
 	dk_validate(DKDOWNLOAD_DIR  "dk_DIGITALKNOB_DIR()")
 	
 	#dk_createShortcut("$ENV{DKDESKTOP_DIR}/digitalknob.lnk" "C:/Users/Administrator/digitalknob")

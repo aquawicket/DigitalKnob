@@ -192,15 +192,15 @@ endfunction()
 #	Add javascript like access to functions. Experamental  
 #
 if(string_Ext)
-	#execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB_DIR}/Development/DKCMake/)
-	#dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
-	#dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### This file was automatically generated from DKFunctions.cmake ###\n\n")
+	#execute_process(COMMAND ${CMAKE_COMMAND} -E remove $ENV{DIGITALKNOB_DIR}/Development/DKCMake/)
+	#dk_fileAppend($ENV{DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
+	#dk_fileAppend($ENV{DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### This file was automatically generated from DKFunctions.cmake ###\n\n")
 
 	function(CreateStringFunc str)
 		dk_debugFunc()
 		
-		dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "${str}")
-		include(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake)
+		dk_fileAppend($ENV{DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "${str}")
+		include($ENV{DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake)
 	endfunction()
 
 	set(stringified "test" CACHE INTERNAL "")

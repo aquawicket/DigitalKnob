@@ -141,8 +141,8 @@ foreach(plugin ${dkdepend_list})
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
 	
-	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${target_triple})
-	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${target_triple})
+	#install(TARGETS <target_name> DESTINATION $ENV{DIGITALKNOB_DIR}/DKInstall/lib/${target_triple})
+	#install(FILES file.h DESTINATION $ENV{DIGITALKNOB_DIR}/DKInstall/lib/${target_triple})
 	
 	####################### DKCpp/plugins #######################
 	# Libraries in the /DKCpp/plugins folder
@@ -983,7 +983,7 @@ if(MAC)
 	#	dk_resizeImage(${DK_Project_Dir}/icons/icon.png 512 512 ${DK_Project_Dir}/icons/mac/icons.iconset/icon_256x256@2x.png)
 	#	dk_resizeImage(${DK_Project_Dir}/icons/icon.png 512 512 ${DK_Project_Dir}/icons/mac/icons.iconset/icon_512x512.png)
 	#	dk_resizeImage(${DK_Project_Dir}/icons/icon.png 1024 1024 ${DK_Project_Dir}/icons/mac/icons.iconset/icon_512x512@2x.png)
-	#	dk_executeProcess(iconutil -c icns -o ${DK_Project_Dir}/icons/mac/icons.icns ${DK_Project_Dir}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+	#	dk_executeProcess(iconutil -c icns -o ${DK_Project_Dir}/icons/mac/icons.icns ${DK_Project_Dir}/icons/mac/icons.iconset WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR})
 	#	set(MACOSX_BUNDLE_ICON_FILE icons.icns)
 	#	set(app_ICONS ${DK_Project_Dir}/icons/mac/icons.icns)
 	#	set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
@@ -1253,7 +1253,7 @@ if(WIN_X86)
 		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
-		##set_source_files_properties(${DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_Project_Dir}/resource.h)
 		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_Project_Dir}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
@@ -1383,7 +1383,7 @@ if(WIN_X86_64)
 		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
-		##set_source_files_properties(${DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_Project_Dir}/resource.h)
 		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_Project_Dir}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
