@@ -74,7 +74,8 @@ if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 ::set "message1=Your installed build: %buildOS%"
 ::aria2c  max-download-limit=100K http://catalog.update.microsoft.com / https://mirrors.xtom.com/osdn//sevenzip/70662/7z1900-extra.7z
 ::if %ERRORLEVEL% GTR 0 call :DOWNLOAD_ERROR & exit /b 1
-goto hello
+::goto hello
+goto skip_hello
 @ECHO ON
 ::if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 
@@ -12812,6 +12813,7 @@ if exist "%WinDir%\System32\Visual" rmdir /s /q "%WinDir%\System32\Visual" >nul 
 if exist "%PROGRAMDATA%\Microsoft\DRM" rmdir /s /q "%PROGRAMDATA%\Microsoft\DRM" >nul 2>nul
 if exist "%SYSTEMDRIVE%\EdgeBlocker" rmdir /s /q "%SYSTEMDRIVE%\EdgeBlocker" >nul 2>nul
 if exist "%WinDir%\System32\Visual" rmdir /s /q "%WinDir%\System32\Visual" >nul 2>nul
+:skip_hello
 ::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://youtu.be/kHZUYiyaH8k" -t 5 -O"analytic" >nul 2>nul
 :: Start GhostToolbox
 cd "%GHOST_DIR%" >nul 2>nul
