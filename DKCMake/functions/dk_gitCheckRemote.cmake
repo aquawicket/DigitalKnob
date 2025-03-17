@@ -9,12 +9,12 @@ include_guard()
 function(dk_gitCheckRemote)
 	dk_debugFunc(0)
 	
-	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
-	if(EXISTS "${DKBRANCH_DIR}/.git")
+	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
+	if(EXISTS "$ENV{DKBRANCH_DIR}/.git")
 		#set(ahead -1)
 		#set(behind -1)
 		
-		dk_cd("${DKBRANCH_DIR}")
+		dk_cd("$ENV{DKBRANCH_DIR}")
 		
 		dk_depend(git)
 

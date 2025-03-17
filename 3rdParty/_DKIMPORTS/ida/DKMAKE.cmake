@@ -9,5 +9,5 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://hex-rays.com/ida-free/
 # https://out7.hex-rays.com/files/idafree84_windows.exe
 
-dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-dk_import(https://out7.hex-rays.com/files/idafree84_windows.exe ROOT ${DKTOOLS_DIR})
+dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+dk_import(https://out7.hex-rays.com/files/idafree84_windows.exe ROOT $ENV{DKTOOLS_DIR})

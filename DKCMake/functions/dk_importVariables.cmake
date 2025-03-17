@@ -489,5 +489,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"  NAME git   ROOT ${DKTOOLS_DIR})
+	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"  NAME git   ROOT $ENV{DKTOOLS_DIR})
 endfunction()

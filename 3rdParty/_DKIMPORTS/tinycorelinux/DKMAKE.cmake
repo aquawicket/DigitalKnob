@@ -9,12 +9,12 @@ dk_load(dk_builder)
 # http://tinycorelinux.net/downloads.html
 # http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso
 
-dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()") 
+dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()") 
 
 dk_depend(qemu)
 
 dk_set(TINYCORELINUX_DL http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso)
-dk_set(TINYCORELINUX ${DKTOOLS_DIR}/TinyCoreLinux)
+dk_set(TINYCORELINUX $ENV{DKTOOLS_DIR}/TinyCoreLinux)
 
 if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 	dk_info("Installing tiny-core-linux . . .")

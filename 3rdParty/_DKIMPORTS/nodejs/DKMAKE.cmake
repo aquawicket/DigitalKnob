@@ -20,8 +20,8 @@ dk_assertVar(NODEJS_DL)
 dk_importVariables(${NODEJS_DL})
 
 ### IMPORT ###
-dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-dk_set(NODEJS_DIR ${DKTOOLS_DIR}/${NODEJS_FOLDER})
+dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+dk_set(NODEJS_DIR $ENV{DKTOOLS_DIR}/${NODEJS_FOLDER})
 dk_import(${NODEJS_DL} PATH ${NODEJS_DIR})
 dk_set(NODE_EXE ${NODEJS_DIR}/node.exe)
 dk_set(NPM_EXE ${NODEJS_DIR}/npm.cmd)

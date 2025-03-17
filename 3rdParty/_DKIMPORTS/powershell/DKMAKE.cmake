@@ -12,8 +12,8 @@ if(EXISTS ${POWERSHELL_EXE})
 endif()
 
 # try pwsh.exe
-dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-dk_findProgram(POWERSHELL_EXE "pwsh.exe" "${DKTOOLS_DIR}")
+dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+dk_findProgram(POWERSHELL_EXE "pwsh.exe" "$ENV{DKTOOLS_DIR}")
 if(EXISTS ${POWERSHELL_EXE})
 	return()
 endif()

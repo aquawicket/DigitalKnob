@@ -14,11 +14,11 @@ dk_validate(host_triple "dk_host_triple()")
 WIN_HOST_dk_set	(QEMU_DL https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe)
 dk_assertVar(QEMU_DL)
 
-dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-dk_importVariables(${QEMU_DL} ROOT ${DKTOOLS_DIR})
+dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+dk_importVariables(${QEMU_DL} ROOT $ENV{DKTOOLS_DIR})
 
 
-#dk_set(QEMU_DIR ${DKTOOLS_DIR}/${QEMU_FOLDER})
+#dk_set(QEMU_DIR $ENV{DKTOOLS_DIR}/${QEMU_FOLDER})
 dk_set(QEMU_IMG_EXE ${QEMU_DIR}/qemu-img.exe)
 dk_set(QEMU_SYSTEM_X86_64_EXE ${QEMU_DIR}/qemu-system-x86_64.exe)
 

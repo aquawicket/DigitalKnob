@@ -31,8 +31,8 @@ function(dk_installGit)
 
 	### Get GIT variables ###
 	if(GIT_DL)
-		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-		dk_importVariables(${GIT_DL} NAME git ROOT ${DKTOOLS_DIR})
+		dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+		dk_importVariables(${GIT_DL} NAME git ROOT $ENV{DKTOOLS_DIR})
 	endif()
 
 	### First Check ###

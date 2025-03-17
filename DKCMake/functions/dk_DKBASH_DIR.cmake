@@ -15,8 +15,8 @@ function(dk_DKBASH_DIR)
 		
 	###### GET ######
 	else()
-		dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
-		dk_set(DKBASH_DIR "${DKBRANCH_DIR}/DKBash")
+		dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
+		dk_set(DKBASH_DIR "$ENV{DKBRANCH_DIR}/DKBash")
 	endif()
 	
 	dk_set(DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions")

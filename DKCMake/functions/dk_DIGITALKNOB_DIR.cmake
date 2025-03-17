@@ -44,8 +44,8 @@ function(dk_DIGITALKNOB_DIR)
 #	### DKTOOLS_DIR ###
 #	dk_set(DKTOOLS_DIR "$ENV{DIGITALKNOB_DIR}/DKTools")
 #	set(ENV{DKTOOLS_DIR} "$ENV{DIGITALKNOB_DIR}/DKTools")
-#	if(NOT EXISTS "${DKTOOLS_DIR}") 
-#		dk_makeDirectory("${DKTOOLS_DIR}")
+#	if(NOT EXISTS "$ENV{DKTOOLS_DIR}") 
+#		dk_makeDirectory("$ENV{DKTOOLS_DIR}")
 #	endif()
 endfunction()
 

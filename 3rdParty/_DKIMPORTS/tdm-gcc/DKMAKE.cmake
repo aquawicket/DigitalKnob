@@ -27,7 +27,7 @@ endif()
 
 ### TDM-GCC variables ###
 if(TDM-GCC_DL)
-	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+	dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 	dk_importVariables(${TDM-GCC_DL})
 	#dk_import(${TDM-GCC_DL})
 endif()

@@ -12,10 +12,10 @@ function(dk_gitDeleteBranch)
 	
 	set(branch ${ARGV0})
 	
-	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
 	dk_validate(GIT_EXE "dk_installGit()")              
-	execute_process(COMMAND "${GIT_EXE}" push -d origin ${branch} WORKING_DIRECTORY ${DKBRANCH_DIR})	# Delete remote branch
-	execute_process(COMMAND "${GIT_EXE}" branch -d ${branch} WORKING_DIRECTORY ${DKBRANCH_DIR})					# Delete local branch
+	execute_process(COMMAND "${GIT_EXE}" push -d origin ${branch} WORKING_DIRECTORY $ENV{DKBRANCH_DIR})	# Delete remote branch
+	execute_process(COMMAND "${GIT_EXE}" branch -d ${branch} WORKING_DIRECTORY $ENV{DKBRANCH_DIR})					# Delete local branch
 endfunction()
 
 

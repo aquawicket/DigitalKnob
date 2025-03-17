@@ -9,8 +9,8 @@ include_guard()
 function(dk_gitDiffSummary)
 	dk_debugFunc(0)
   
-	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
-    dk_cd(${DKBRANCH_DIR})
+	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
+    dk_cd($ENV{DKBRANCH_DIR})
     
 	dk_depend(git)
 

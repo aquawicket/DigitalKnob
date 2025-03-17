@@ -11,7 +11,7 @@ dk_validate(host_triple "dk_host_triple()")
 #	dk_undepend(visualstudio)
 #	dk_return()
 #endif()
-dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 
 
@@ -25,7 +25,7 @@ dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 #
 # https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history
 
-#dk_set(VS_INSTALL_PATH		"${DKTOOLS_DIR}/VS")
+#dk_set(VS_INSTALL_PATH		"$ENV{DKTOOLS_DIR}/VS")
 #dk_set(VS_CACHE_PATH		"$ENV{DKDOWNLOAD_DIR}/VS")
 dk_set(VS_YEAR 				2022)												# 2019, 2022
 #dk_set(VS_TYPE				"BuildTools") 										# BuildTools, Community			
