@@ -10,7 +10,7 @@ function(dk_callDKCmake func rtn_var)
     dk_debugFunc()
     
     ### get required variables ###
-    dk_validate(DKIMPORTS_DIR           "dk_DKBRANCH_DIR()")
+    dk_validate(ENV{DKIMPORTS_DIR}           "dk_DKBRANCH_DIR()")
 	dk_depend(cmake)
 	dk_validate(DKCMAKE_DIR             "dk_DKBRANCH_DIR()")
     dk_validate(DKCMAKE_FUNCTIONS_DIR   "dk_DKBRANCH_DIR()")

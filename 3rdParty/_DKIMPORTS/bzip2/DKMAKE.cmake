@@ -21,8 +21,8 @@ dk_depend(pytest)
 dk_validate(MSYS2 "dk_depend(msys2)")
 
 ### IMPORT ###
-dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/bzip2/dkconfig.txt" BZIP2_DL)
+dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/bzip2/dkconfig.txt" BZIP2_DL)
 dk_import(${BZIP2_DL})
 
 dk_include		(${BZIP2_DIR}/							BZIP2_INCLUDE_DIR)

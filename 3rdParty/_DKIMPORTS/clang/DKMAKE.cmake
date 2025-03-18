@@ -11,7 +11,7 @@ dk_validate(host_triple			"dk_host_triple()")
 dk_validate(ENV{target_triple}	"dk_target_triple()")
 dk_set($ENV{target_triple} 		1)
 
-#dk_getFileParam("${DKIMPORTS_DIR}/clang/dkconfig.txt" VERSION)
+#dk_getFileParam("$ENV{DKIMPORTS_DIR}/clang/dkconfig.txt" VERSION)
 #if(clang OR mingw OR ucrt)
 if(MSYSTEM)
 	dk_validate(MSYS2 "dk_depend(msys2)")

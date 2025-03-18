@@ -90,7 +90,7 @@ dk_import(https://github.com/mikke89/RmlUi/archive/a903d8f7.zip)
 
 
 ### PATCH ###
-dk_gitApplyPatch("${RMLUI_DIR}" "${DKIMPORTS_DIR}/rmlui/rmlui.patch")
+dk_gitApplyPatch("${RMLUI_DIR}" "$ENV{DKIMPORTS_DIR}/rmlui/rmlui.patch")
 
 
 ### LINK ###

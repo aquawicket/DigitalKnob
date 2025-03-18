@@ -12,8 +12,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ### IMPORT ###
 dk_validate(host_triple "dk_host_triple()")
 dk_validate(target_triple "dk_target_triple()")
-dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/zlib/dkconfig.txt" ZLIB_DL)
+dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/zlib/dkconfig.txt" ZLIB_DL)
 dk_import(${ZLIB_DL})
 #dk_import(https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz)
 

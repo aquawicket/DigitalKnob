@@ -10,9 +10,9 @@ include_guard()
 ############ git ############
 # https://git-scm.com
 # https://github.com/git-for-windows/git
-dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/git/dkconfig.txt" GIT_DL_WIN_X86)
-dk_getFileParam("${DKIMPORTS_DIR}/git/dkconfig.txt" GIT_DL_WIN_X86_64)
+dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/git/dkconfig.txt" GIT_DL_WIN_X86)
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/git/dkconfig.txt" GIT_DL_WIN_X86_64)
 
 ### DOWNLOAD ###
 dk_validate(host_triple "dk_host_triple()")

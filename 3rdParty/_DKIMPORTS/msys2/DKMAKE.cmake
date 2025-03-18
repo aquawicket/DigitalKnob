@@ -19,7 +19,7 @@ endif()
 
 ############ MSYS2 variables ############
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam		("${DKIMPORTS_DIR}/msys2/dkconfig.txt" MSYS2_DL)
+dk_getFileParam		("$ENV{DKIMPORTS_DIR}/msys2/dkconfig.txt" MSYS2_DL)
 dk_importVariables	("${MSYS2_DL}")
 dk_validate			(DKDOWNLOAD_DIR 	"dk_DKDOWNLOAD_DIR()")
 dk_set				(MSYS2_DBPath		"${MSYS2_DIR}/var/lib/pacman")
@@ -40,7 +40,7 @@ dk_import(${MSYS2_DL})
 dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
 
 ### Save Pacman database, keys and cache to download directory for offline buiding ###
-#dk_copy("${DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
+#dk_copy("$ENV{DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
 #dk_set				(MSYS2_DBPath		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
 #dk_set				(MSYS2_LogFile		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
 #dk_set				(MSYS2_GPGDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")

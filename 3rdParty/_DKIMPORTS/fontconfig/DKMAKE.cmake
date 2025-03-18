@@ -20,7 +20,7 @@ endif()
 
 ### IMPORT ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam ("${DKIMPORTS_DIR}/fontconfig/dkconfig.txt" 			FONTCONFIG_DL)
+dk_getFileParam ("$ENV{DKIMPORTS_DIR}/fontconfig/dkconfig.txt" 			FONTCONFIG_DL)
 dk_import		(${FONTCONFIG_DL}										FONTCONFIG_INCLUDE_DIR)
 
 ### LINK ###

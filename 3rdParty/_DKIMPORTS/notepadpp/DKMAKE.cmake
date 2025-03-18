@@ -26,12 +26,12 @@ dk_set(NOTEPADPP_EXE "${NOTEPADPP_DIR}/notepad++.exe")
 
 
 ### dark mode ###
-dk_copy(${DKIMPORTS_DIR}/notepadpp/dark_config.xml ${NOTEPADPP_DIR}/config.xml OVERWRITE)
+dk_copy($ENV{DKIMPORTS_DIR}/notepadpp/dark_config.xml ${NOTEPADPP_DIR}/config.xml OVERWRITE)
 
 
 ### dk_installNotepadppContextMenu.cmd ###
-dk_command(${DKIMPORTS_DIR}/notepadpp/dk_installNotepadppContextMenu.cmd)
+dk_command($ENV{DKIMPORTS_DIR}/notepadpp/dk_installNotepadppContextMenu.cmd)
 
 
 ### dk_installNotepadppFileAssociations.cmd ###
-dk_command(${DKIMPORTS_DIR}/notepadpp/dk_installNotepadppFileAssociations.cmd)
+dk_command($ENV{DKIMPORTS_DIR}/notepadpp/dk_installNotepadppFileAssociations.cmd)

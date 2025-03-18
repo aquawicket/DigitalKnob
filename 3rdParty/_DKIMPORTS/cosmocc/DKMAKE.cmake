@@ -17,7 +17,7 @@ dk_import(https://cosmo.zip/pub/cosmocc/cosmocc.zip)
 #dk_set(COSMOPOLITAN 							1)
 
 #dk_validate(host_triple 						"dk_host_triple()")
-#dk_validate(DKIMPORTS_DIR						"dk_DKIMPORTS_DIR()")
+#dk_validate(ENV{DKIMPORTS_DIR}						"dk_DKIMPORTS_DIR()")
 ################## COSMOCC Variables ##################
 #dk_set(COSMOCC_SYSTEM_NAME 					Generic)
 #dk_set(COSMOCC_SKIP_RPATH 						ON)
@@ -58,7 +58,7 @@ dk_set(COSMOCC_C_COMPILER 						"${COSMOCC}/bin/cosmocc")
 #dk_set(COSMOCC_OBJDUMP							"${COSMOCC}/bin/x86_64-unknown-cosmo-objdump")
 #dk_set(COSMOCC_RANLIB 							"${COSMOCC}/bin/${CMAKE_HOST_SYSTEM_PROCESSOR}-linux-cosmo-ranlib")
 #dk_set(COSMOCC_READELF							"${COSMOCC}/bin/x86_64-unknown-cosmo-readelf")
-#dk_set(COSMOCC_USER_MAKE_RULES_OVERRIDE		"${DKIMPORTS_DIR}/cosmocc/cosmocc_user_make_rules_override.cmake")
+#dk_set(COSMOCC_USER_MAKE_RULES_OVERRIDE		"$ENV{DKIMPORTS_DIR}/cosmocc/cosmocc_user_make_rules_override.cmake")
 
 
 

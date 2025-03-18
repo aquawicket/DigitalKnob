@@ -20,7 +20,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### INSTALL ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	(${DKIMPORTS_DIR}/[app_name]/dkconfig.txt [APP_NAME]_IMPORT)
+dk_getFileParam	($ENV{DKIMPORTS_DIR}/[app_name]/dkconfig.txt [APP_NAME]_IMPORT)
 dk_import		(${[APP_NAME]})
 
 

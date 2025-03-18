@@ -12,10 +12,10 @@ function(dk_dependAll)
 	
 	set(DEPENDALL_FILE "")
 	
-	if(IS_DIRECTORY ${DKIMPORTS_DIR})
-		file(GLOB allfiles RELATIVE "${DKIMPORTS_DIR}/" "${DKIMPORTS_DIR}/*")
+	if(IS_DIRECTORY $ENV{DKIMPORTS_DIR})
+		file(GLOB allfiles RELATIVE "$ENV{DKIMPORTS_DIR}/" "$ENV{DKIMPORTS_DIR}/*")
 		foreach(each_file ${allfiles})
-			if(EXISTS ${DKIMPORTS_DIR}/${each_file}/DKMAKE.cmake)
+			if(EXISTS $ENV{DKIMPORTS_DIR}/${each_file}/DKMAKE.cmake)
 				set(DEPENDALL_FILE ${DEPENDALL_FILE} "dk_depend(${each_file})\n")
 			endif()
 		endforeach()

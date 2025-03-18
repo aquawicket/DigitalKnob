@@ -18,10 +18,10 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://gist.github.com/douglarek/bbda8cc23a562cb5d5798717d57bc9e9
 
 dk_validate(host_triple "dk_host_triple()")
-dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/openjdk/dkconfig.txt" OPENJDK_DL_WIN_X86_64)
-dk_getFileParam("${DKIMPORTS_DIR}/openjdk/dkconfig.txt" OPENJDK_DL_MAC_X86_64)
-dk_getFileParam("${DKIMPORTS_DIR}/openjdk/dkconfig.txt" OPENJDK_DL_LINUX_X86_64)
+dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/openjdk/dkconfig.txt" OPENJDK_DL_WIN_X86_64)
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/openjdk/dkconfig.txt" OPENJDK_DL_MAC_X86_64)
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/openjdk/dkconfig.txt" OPENJDK_DL_LINUX_X86_64)
 
 if(ANDROID_HOST)
 	dk_installPackage(openjdk-17)

@@ -9,8 +9,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/bombela/backward-cpp.git
 
 ### IMPORT ###
-dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/backward-cpp/dkconfig.txt" BACKWARD_CPP_DL)
+dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/backward-cpp/dkconfig.txt" BACKWARD_CPP_DL)
 dk_import("${BACKWARD_CPP_DL}")
 
 ### LINK ###

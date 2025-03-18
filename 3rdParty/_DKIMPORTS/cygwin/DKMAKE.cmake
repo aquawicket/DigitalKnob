@@ -42,10 +42,10 @@ if(CYGWIN)
 
 	#if(NOT EXISTS "???")
 	dk_info("running install_crosstool.cmd")
-	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+	dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 	dk_validate(CMD_EXE "dk_CMD_EXE()")
 	dk_nativePath("${CMD_EXE}" CMD_EXE)
-	set(INSTALL_CROSSTOOL_CMD "${DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
+	set(INSTALL_CROSSTOOL_CMD "$ENV{DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
 	execute_process(COMMAND ${CMD_EXE} /c "${INSTALL_CROSSTOOL_CMD}")
 	
 	#execute_process(COMMAND ${CYGWIN_EXE} & crosstool-ng-build.sh)

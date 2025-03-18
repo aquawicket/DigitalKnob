@@ -9,8 +9,8 @@ dk_load(dk_builder)
 # https://github.com/facebook/folly/blob/main/CMake/FindZstd.cmake
 
 ### IMPORT ###
-dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/zstd/dkconfig.txt" ZSTD_DL)
+dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/zstd/dkconfig.txt" ZSTD_DL)
 dk_import(${ZSTD_DL})
 
 ### LINK ###

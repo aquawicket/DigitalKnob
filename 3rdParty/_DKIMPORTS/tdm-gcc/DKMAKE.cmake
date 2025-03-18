@@ -8,8 +8,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/jmeubank/tdm-gcc
 
 dk_validate(host_triple "dk_host_triple()")
-dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-#dk_getFileParam("${DKIMPORTS_DIR}/tdm-gcc/dkconfig.txt" VERSION)
+dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+#dk_getFileParam("$ENV{DKIMPORTS_DIR}/tdm-gcc/dkconfig.txt" VERSION)
 
 
 ### DOWNLOAD ###

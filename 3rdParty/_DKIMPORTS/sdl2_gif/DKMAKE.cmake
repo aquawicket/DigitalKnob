@@ -19,9 +19,9 @@ dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
 dk_set			(SDL2_GIF_NAME SDL2_gif)
 dk_set			(SDL2_GIF $ENV{DK3RDPARTY_DIR}/${SDL2_GIF_NAME})
 IF(NOT EXISTS ${SDL2_GIF})
-	dk_extract	(${DKIMPORTS_DIR}/sdl2_gif/gif_2_lib.zip $ENV{DK3RDPARTY_DIR})
+	dk_extract	($ENV{DKIMPORTS_DIR}/sdl2_gif/gif_2_lib.zip $ENV{DK3RDPARTY_DIR})
 	dk_rename	($ENV{DK3RDPARTY_DIR}/SDL2    ${SDL2_GIF} OVERWRITE)
-	dk_copy		(${DKIMPORTS_DIR}/sdl2_gif ${SDL2_GIF} OVERWRITE)
+	dk_copy		($ENV{DKIMPORTS_DIR}/sdl2_gif ${SDL2_GIF} OVERWRITE)
 ENDIF()
 
 

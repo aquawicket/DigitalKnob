@@ -203,7 +203,7 @@ function(dk_generate)
 	endif()
 	
 	###### CMake Configure ######
-	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+	dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
     dk_depend(cmake)
 	
 	dk_echo("")

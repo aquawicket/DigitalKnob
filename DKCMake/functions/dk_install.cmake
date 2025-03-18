@@ -33,7 +33,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	#if(NOT ${PLUGIN_IMPORT_NAME} STREQUAL ${plugin_lower})
 	#	dk_fatal("ERROR:  dk_install() (${PLUGIN_IMPORT_NAME}) must be all lowercase")
 	#endif()
-	dk_assertPath(${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME})
+	dk_assertPath($ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME})
 	
 	if(EXISTS ${PLUGIN_DIR}/installed)
 		dk_info("${PLUGIN_IMPORT_NAME} already installed")
@@ -188,10 +188,10 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	if(ARGN MATCHES "PATCH")
 		dk_patch(${PLUGIN_IMPORT_NAME} ${PLUGIN_DIR})
 	else()
-		file(GLOB ITEMS ${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/*)
+		file(GLOB ITEMS $ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/*)
 		list(LENGTH ITEMS count)
 		if(${count} GREATER 1)
-			dk_notice(" Found ${count} items in the ${PLUGIN_IMPORT_NAME} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in ${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/DKMAKE.cmake ")
+			dk_notice(" Found ${count} items in the ${PLUGIN_IMPORT_NAME} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in $ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/DKMAKE.cmake ")
 		endif()
 	endif()
 	

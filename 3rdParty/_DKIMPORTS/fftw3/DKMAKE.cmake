@@ -11,7 +11,7 @@ dk_load(dk_builder)
 
 ### IMPORT ###
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam 	("${DKIMPORTS_DIR}/fftw3/dkconfig.txt" FFTW3_DL)
+dk_getFileParam 	("$ENV{DKIMPORTS_DIR}/fftw3/dkconfig.txt" FFTW3_DL)
 dk_import			(${FFTW3_DL})
 
 ### LINK ###

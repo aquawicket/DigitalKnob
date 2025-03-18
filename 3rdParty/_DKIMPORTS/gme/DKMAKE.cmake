@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### INSTALL ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	("${DKIMPORTS_DIR}/gme/dkconfig.txt" GME_DL)
+dk_getFileParam	("$ENV{DKIMPORTS_DIR}/gme/dkconfig.txt" GME_DL)
 dk_import		(${GME_DL})
 
 ### LINK ###

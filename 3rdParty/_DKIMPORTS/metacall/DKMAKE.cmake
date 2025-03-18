@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### INSTALL ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-#dk_getFileParam	(${DKIMPORTS_DIR}/metacall/dkconfig.txt METACALL_IMPORT)
+#dk_getFileParam	($ENV{DKIMPORTS_DIR}/metacall/dkconfig.txt METACALL_IMPORT)
 set				(METACALL_DL https://github.com/metacall/core/archive/5b592ac0.zip)
 dk_import		(${METACALL_DL})
 

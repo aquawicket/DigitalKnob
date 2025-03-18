@@ -14,6 +14,6 @@ include_guard()
 
 ### INSTALL ###
 #dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-#dk_getFileParam	(${DKIMPORTS_DIR}/[app_name]/dkconfig.txt [APP_NAME]_IMPORT)
+#dk_getFileParam	($ENV{DKIMPORTS_DIR}/[app_name]/dkconfig.txt [APP_NAME]_IMPORT)
 dk_import			("https://github.com/ovsky/ghost-open-toolbox/archive/refs/heads/complete.zip")
 

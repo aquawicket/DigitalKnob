@@ -13,7 +13,7 @@ function(dk_downloadAll3rdParty)
 	dk_dependAll()
 	
 	# Get a list of all /3rdParty/DKMAKE.cmake paths
-	file(GLOB All3rdParty ${DKIMPORTS_DIR}/*)
+	file(GLOB All3rdParty $ENV{DKIMPORTS_DIR}/*)
 	foreach(item ${All3rdParty})
 		if(EXISTS ${item}/DKMAKE.cmake)
 			dk_verbose(item)

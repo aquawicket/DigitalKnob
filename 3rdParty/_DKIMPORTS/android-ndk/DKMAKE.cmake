@@ -75,13 +75,13 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ### DEPEND ###
 dk_depend(android-sdk)
 
-dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_VERSION)
-dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_BUILD)
-dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_WIN_DL)
-dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_MAC_DL)
-dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_LINUX_DL)
-dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_ANDROID_DL)
+dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_VERSION)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_BUILD)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_WIN_DL)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_MAC_DL)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_LINUX_DL)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_ANDROID_DL)
 
 ###### INSTALL ######
 
