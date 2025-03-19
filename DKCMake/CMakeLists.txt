@@ -1,9 +1,9 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-if(NOT EXISTS ${DKCMAKE_FUNCTIONS_DIR_})
-	set(DKCMAKE_FUNCTIONS_DIR_ "${CMAKE_SOURCE_DIR}/functions/" CACHE INTERNAL "")
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${CMAKE_SOURCE_DIR}/functions/")
 endif()
-set(DKSCRIPT_PATH "${CMAKE_SOURCE_DIR}/CMakeLists.txt" CACHE INTERNAL "")
-include("${DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+set(ENV{DKSCRIPT_PATH} "${CMAKE_SOURCE_DIR}/CMakeLists.txt")
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ### CMakeLists.txt for DKCMake ###
@@ -59,24 +59,23 @@ message("##############################################################")
 
 dk_load(dk_dumpAllVariables)
 
-		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
-
+		dk_dumpAllVariables("${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp")
 
 
 #Load all cmake flags prior to calling PROJECT()
-dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
-dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
+dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake")
+dk_load("$ENV{DKCMAKE_DIR}/DKBuildFlags.cmake")
 
-		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
+		dk_dumpAllVariables("${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp")
 
 
 message("################# PROJECT(DigitalKnob) #################")
 PROJECT(DigitalKnob)
 
-		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
+		dk_dumpAllVariables("${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp")
 
-dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
+dk_load("$ENV{DKCMAKE_DIR}/DKGenerate.cmake")
 
 
-	dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)
+	dk_dumpAllVariables("${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp")
 
