@@ -2,10 +2,10 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include_guard()
 
-if(NOT EXISTS "${DKSCRIPT_PATH}")
+if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
 	file(TO_CMAKE_PATH "$ENV{DKSCRIPT_PATH}" DKSCRIPT_PATH)
 endif()
-if(NOT EXISTS "${DKSCRIPT_PATH}")
+if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
 	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}")
 endif()
 #set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
@@ -18,7 +18,7 @@ set(DKSHELL_PATH ${CMAKE_COMMAND})
 string(ASCII 27 ESC)
 message("${ESC}[46m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m")
 message("DKSHELL_PATH = ${DKSHELL_PATH}")
-message("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
+message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
 message("")
 
 if(NOT DEFINED ENV{DKCMAKE_FUNCTIONS_DIR_})
@@ -90,8 +90,8 @@ function(DKINIT)
 	#include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 	dk_load(dk_dirname)
 	dk_load(dk_basename)
-	if("${DKSCRIPT_EXT}" STREQUAL ".cmake")
-		dk_load("${DKSCRIPT_PATH}")
+	if("$ENV{DKSCRIPT_EXT}" STREQUAL ".cmake")
+		dk_load("$ENV{DKSCRIPT_PATH}")
 	endif()
 	#dk_load(__TIME__)
 	dk_load(__FILE__)
@@ -107,11 +107,11 @@ function(DKINIT)
 	
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
-		#if("${DKSCRIPT_DIR}" STREQUAL "$ENV{DKCMAKE_FUNCTIONS_DIR}")
-		string(FIND "${DKSCRIPT_DIR}" "$ENV{DKCMAKE_FUNCTIONS_DIR}" isChildOf)
+		#if("$ENV{DKSCRIPT_DIR}" STREQUAL "$ENV{DKCMAKE_FUNCTIONS_DIR}")
+		string(FIND "$ENV{DKSCRIPT_DIR}" "$ENV{DKCMAKE_FUNCTIONS_DIR}" isChildOf)
 		if(${isChildOf} GREATER -1)
-			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
-			include(${DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
+			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### $ENV{DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
+			include($ENV{DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
 			DKTEST()
 			dk_echo("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")
 			dk_exit(0)
@@ -181,32 +181,32 @@ endfunction()
 #
 function(dk_DKSCRIPT_VARS)
 	###### DKSCRIPT_PATH ######
-	if(NOT EXISTS "${DKSCRIPT_PATH}")
+	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
 		set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}" CACHE INTERNAL "")
 	endif()
-	if(NOT EXISTS "${DKSCRIPT_PATH}")
+	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
 		set(DKSCRIPT_PATH "${CMAKE_CURRENT_LIST_FILE}" CACHE INTERNAL "")
 	endif()
-	if(NOT EXISTS "${DKSCRIPT_PATH}")
-		message(FATAL_ERROR "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found")
+	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
+		message(FATAL_ERROR "DKSCRIPT_PATH:$ENV{DKSCRIPT_PATH} not found")
 	endif()
 	###### DKSCRIPT_ARGS ######
 	set(DKSCRIPT_ARGS ${ARGS} CACHE INTERNAL "")
 
 	###### DKSCRIPT_DIR ######
-	get_filename_component(DKSCRIPT_DIR ${DKSCRIPT_PATH} DIRECTORY)
-	set(DKSCRIPT_DIR ${DKSCRIPT_DIR} CACHE INTERNAL "")
-	if(NOT EXISTS ${DKSCRIPT_DIR})
+	get_filename_component(DKSCRIPT_DIR $ENV{DKSCRIPT_PATH} DIRECTORY)
+	set(DKSCRIPT_DIR $ENV{DKSCRIPT_DIR} CACHE INTERNAL "")
+	if(NOT EXISTS $ENV{DKSCRIPT_DIR})
 		dk_fatal("DKSCRIPT_DIR not found!")
 	endif()
 	
 	###### DKSCRIPT_NAME ######
-	get_filename_component(DKSCRIPT_NAME ${DKSCRIPT_PATH} NAME)
-	set(DKSCRIPT_NAME ${DKSCRIPT_NAME} CACHE INTERNAL "")
+	get_filename_component(DKSCRIPT_NAME $ENV{DKSCRIPT_PATH} NAME)
+	set(DKSCRIPT_NAME $ENV{DKSCRIPT_NAME} CACHE INTERNAL "")
 	
 	###### DKSCRIPT_EXT ######
-	get_filename_component(DKSCRIPT_EXT ${DKSCRIPT_PATH} LAST_EXT)
-	set(DKSCRIPT_EXT ${DKSCRIPT_EXT} CACHE INTERNAL "")
+	get_filename_component(DKSCRIPT_EXT $ENV{DKSCRIPT_PATH} LAST_EXT)
+	set(DKSCRIPT_EXT $ENV{DKSCRIPT_EXT} CACHE INTERNAL "")
 endfunction()
 
 ##################################################################################

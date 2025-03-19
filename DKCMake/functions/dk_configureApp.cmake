@@ -178,5 +178,5 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_validate(DKCPP_APPS_DIR "dk_DKBRANCH_DIR()")
-	dk_configureApp("${DKCPP_APPS_DIR}/DKCore")
+	dk_configureApp("$ENV{DKCPP_APPS_DIR}/DKCore")
 endfunction()

@@ -37,5 +37,5 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_validate(DKCPP_APPS_DIR "dk_DKBRANCH_DIR()")
-	dk_createWindowsIcon("${DKCPP_APPS_DIR}/DKCore/icons/icon.png" "${DKCPP_APPS_DIR}/DKCore/icons/icon.ico")
+	dk_createWindowsIcon("$ENV{DKCPP_APPS_DIR}/DKCore/icons/icon.png" "$ENV{DKCPP_APPS_DIR}/DKCore/icons/icon.ico")
 endfunction()
