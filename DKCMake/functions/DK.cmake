@@ -23,7 +23,7 @@ message("")
 
 if(NOT DEFINED ENV{DKCMAKE_FUNCTIONS_DIR_})
 	get_filename_component(DKCMAKE_FUNCTIONS_DIR ${CMAKE_CURRENT_LIST_DIR} REALPATH)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
 	message("ENV{DKCMAKE_FUNCTIONS_DIR_} = $ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 		message(FATAL_ERROR "ENV{DKCMAKE_FUNCTIONS_DIR_}:$ENV{DKCMAKE_FUNCTIONS_DIR_} does not exist")
@@ -59,10 +59,10 @@ function(DKINIT)
 	
 	############ Get DKCMAKE variables ############
 	dk_DKCMAKE_VARS()
-	#dk_echo("DKCMAKE_DIR = ${DKCMAKE_DIR}")
-	#dk_echo("DKCMAKE_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
+	#dk_echo("DKCMAKE_DIR = $ENV{DKCMAKE_DIR}")
+	#dk_echo("DKCMAKE_FUNCTIONS_DIR = $ENV{DKCMAKE_FUNCTIONS_DIR}")
 	
-	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 	dk_load("dk_fatal")
 	
 	############ Get DKHTTP variables ############
@@ -87,7 +87,7 @@ function(DKINIT)
 	set(ENABLE_DKTEST 1 CACHE INTERNAL "")
 
 	############ LOAD FUNCTION FILES ############
-	#include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	#include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 	dk_load(dk_dirname)
 	dk_load(dk_basename)
 	if("${DKSCRIPT_EXT}" STREQUAL ".cmake")
@@ -107,8 +107,8 @@ function(DKINIT)
 	
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
-		#if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
-		string(FIND "${DKSCRIPT_DIR}" "${DKCMAKE_FUNCTIONS_DIR}" isChildOf)
+		#if("${DKSCRIPT_DIR}" STREQUAL "$ENV{DKCMAKE_FUNCTIONS_DIR}")
+		string(FIND "${DKSCRIPT_DIR}" "$ENV{DKCMAKE_FUNCTIONS_DIR}" isChildOf)
 		if(${isChildOf} GREATER -1)
 			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
 			include(${DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
@@ -147,9 +147,9 @@ endfunction()
 #
 function(dk_DKCMAKE_VARS)
 	get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
-	set(DKCMAKE_DIR ${DKCMAKE_DIR} CACHE INTERNAL "")
-	set(DKCMAKE_FUNCTIONS_DIR ${DKCMAKE_DIR}/functions CACHE INTERNAL "")
-	set(DKCMAKE_FUNCTIONS_DIR_ ${DKCMAKE_FUNCTIONS_DIR}/ CACHE INTERNAL "")
+	set(ENV{DKCMAKE_DIR} $ENV{DKCMAKE_DIR} CACHE INTERNAL "")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR} $ENV{DKCMAKE_DIR}/functions CACHE INTERNAL "")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} $ENV{DKCMAKE_FUNCTIONS_DIR}/ CACHE INTERNAL "")
 endfunction(dk_DKCMAKE_VARS)
 
 ##################################################################################

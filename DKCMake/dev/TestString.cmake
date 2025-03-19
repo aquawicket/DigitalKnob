@@ -26,7 +26,7 @@ include_guard()
 # SOFTWARE.
 
 dk_set(string_Ext ON)
-include(${DKCMAKE_DIR}/DKString.cmake)
+include($ENV{DKCMAKE_DIR}/DKString.cmake)
 dk_clearScreen()
 
 message(STATUS " ")

@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 if(NOT DKCMAKE_FUNCTIONS_DIR_)
-	set(DKCMAKE_FUNCTIONS_DIR_ ../../../DKCMake/functions/)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} ../../../DKCMake/functions/)
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
@@ -55,7 +55,7 @@ endif()
 
 ### GENERATE ###
 if(ANDROID OR MAC)
-	dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
+	dk_validate(DKCMAKE_BUILD "dk_load($ENV{DKCMAKE_DIR}/DKBuildFlags.cmake)")
 	string(REPLACE "-DANDROID_CPP_FEATURES=\"rtti exceptions\""	"" DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "-std=c++1z" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "-DMAC " " " 	DKCMAKE_BUILD "${DKCMAKE_BUILD}") #fix for class named MAC in cryptopp

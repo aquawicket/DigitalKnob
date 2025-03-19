@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 if(NOT DKCMAKE_FUNCTIONS_DIR_)
-	set(DKCMAKE_FUNCTIONS_DIR_ ../../../DKCMake/functions/)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} ../../../DKCMake/functions/)
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
@@ -29,7 +29,7 @@ if(NOT XCODEBUILD_EXE)
 endif()
 
 # iOS variables
-dk_set(IOS_TOOLCHAIN_FILE	"${DKCMAKE_DIR}/ios.toolchain.cmake")
+dk_set(IOS_TOOLCHAIN_FILE	"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
 dk_set(IOS_DARWIN			darwin20.6.0)
 dk_set(IOS_SDK				15.0)
 dk_set(IOS_MIN_SDK			13.0)

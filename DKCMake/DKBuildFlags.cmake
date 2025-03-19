@@ -1,7 +1,7 @@
 #!/usr/bin/cmake -P
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	file(TO_CMAKE_PATH "$ENV{USERPROFILE}$ENV{HOME}/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
@@ -123,7 +123,7 @@ include_guard()
 #	dk_printVar(CMAKE_TOOLCHAIN_FILE)
 #elseif(DKCMAKE_LOAD_FILE_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_LOAD_FILE_TOOLCHAIN")
-#	#dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
+#	#dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
 #elseif(DKCMAKE_INTERNAL_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_INTERNAL_TOOLCHAIN")
 #else()
@@ -306,140 +306,140 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 
 #################### TOOLCHAINS ##########################
-if(NOT EXISTS "${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake")
-	dk_error("${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake Not Found")
+if(NOT EXISTS "$ENV{DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake")
+	dk_error("$ENV{DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake Not Found")
 endif()
-dk_load(${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake)
+dk_load($ENV{DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake)
 
 #[[
 ### android_arm32
 if(ANDROID_ARM32)
-	dk_load(${DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
 endif()
 
 ### android_arm64
 if(ANDROID_ARM64)
-	dk_load(${DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
 endif()
 
 ### android_x86
 if(ANDROID_X86)
-	dk_load(${DKCMAKE_DIR}/toolchains/android_x86_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_x86_toolchain.cmake)
 endif()
 
 ### android_x86_64
 if(ANDROID_X86_64)
-	dk_load(${DKCMAKE_DIR}/toolchains/android_x86_64_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_x86_64_toolchain.cmake)
 endif()
 
 ### cosmopolitan ###
 if(COSMOPOLITAN)
-	dk_load(${DKCMAKE_DIR}/toolchains/cosmopolitan_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/cosmopolitan_toolchain.cmake)
 endif()
 
 ### emscripten_x86 ###
 if(EMSCRIPTEN_X86)
-	dk_load(${DKCMAKE_DIR}/toolchains/emscripten_x86_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/emscripten_x86_toolchain.cmake)
 endif()
 
 ### ios_arm32 - XCODE ###
 if(IOS_ARM32)
-	dk_load(${DKCMAKE_DIR}/toolchains/ios_arm32_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/ios_arm32_toolchain.cmake)
 endif()
 
 ### ios_arm64 - XCODE ###
 if(IOS_ARM64)
-	dk_load(${DKCMAKE_DIR}/toolchains/ios_arm64_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/ios_arm64_toolchain.cmake)
 endif()
 
 ### iOS Simulator x86 - XCODE ###
 if(IOSSIM_X86)
-	dk_load(${DKCMAKE_DIR}/toolchains/iossim_x86_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/iossim_x86_toolchain.cmake)
 endif()
 
 ### iOS Simulator x86_64 - XCODE ###
 if(IOSSIM_X86_64)
-	dk_load(${DKCMAKE_DIR}/toolchains/iossim_x86_64_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/iossim_x86_64_toolchain.cmake)
 endif()
 
 ### Linux x86 ###
 if(LINUX_X86)
-	dk_load(${DKCMAKE_DIR}/toolchains/linux_x86_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/linux_x86_toolchain.cmake)
 endif()
 
 #### Linux x86_64 - clang ###
 if(LINUX_X86_64_CLANG)
-	dk_load(${DKCMAKE_DIR}/toolchains/linux_x86_64_clang_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/linux_x86_64_clang_toolchain.cmake)
 endif()
 
 #### Linux x86_64 - gcc ###
 if(LINUX_X86_64_GCC)
-	dk_load(${DKCMAKE_DIR}/toolchains/linux_x86_64_gcc_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/linux_x86_64_gcc_toolchain.cmake)
 endif()
 
 ### Mac x86 - XCODE ###
 if(MAC_X86)
-	dk_load(${DKCMAKE_DIR}/toolchains/mac_x86_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/mac_x86_toolchain.cmake)
 endif()
 
 ### Mac x86_64 - XCODE ###
 if(MAC_X86_64)
-	dk_load(${DKCMAKE_DIR}/toolchains/mac_x86_64_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/mac_x86_64_toolchain.cmake)
 endif()
 
 ### Raspbery arm32 ###
 if(RASPBERRY_ARM32)
-	dk_load(${DKCMAKE_DIR}/toolchains/raspberry_arm32_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/raspberry_arm32_toolchain.cmake)
 endif()
 
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
-	dk_load(${DKCMAKE_DIR}/toolchains/raspberry_arm64_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/raspberry_arm64_toolchain.cmake)
 endif()
 
 ### Windows arm64 - CLANGARM64 ###
 if(win_arm64_clang)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_arm64_clang_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_arm64_clang_toolchain.cmake)
 endif()
 
 ### Windows x86 - MSVC ###
 if(win_x86_msvc)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_msvc_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_msvc_toolchain.cmake)
 endif()
 
 ### Windows x86 - MINGW32 ###
 if(win_x86_gcc)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_gcc_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86 - CLANG32 ###
 if(win_x86_clang)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_clang_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_clang_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MSVC ###
 if(win_x86_64_msvc)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_msvc_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_msvc_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - CLANG64 ###
 if(win_x86_64_clang)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MINGW64 ###
 if(win_x86_64_gcc)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_gcc_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - UCRT64 ###
 if(win_x86_64_ucrt)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_ucrt_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_ucrt_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MSYS ###
 if(win_x86_64_msys)
-	dk_load(${DKCMAKE_DIR}/toolchains/win_x86_64_msys_toolchain.cmake)
+	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_msys_toolchain.cmake)
 endif()
 ]]
 

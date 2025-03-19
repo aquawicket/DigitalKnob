@@ -18,7 +18,7 @@ function(dk_reload)
 	dk_info ("reloading ${DKSCRIPT_PATH}. . .")
 
 	###### Method 1 ######
-	dk_fileWrite("${DKCMAKE_DIR}/reload" "${DKSCRIPT_PATH}")
+	dk_fileWrite("$ENV{DKCMAKE_DIR}/reload" "${DKSCRIPT_PATH}")
 	dk_exit(0)
 endfunction()
 

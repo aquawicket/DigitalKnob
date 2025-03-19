@@ -9,7 +9,7 @@ dk_depend(DK)
 #[[ Work In Progress
 	#!/usr/bin/cmake -P
 	if(NOT DKCMAKE_FUNCTIONS_DIR_)
-		set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
 	endif()
 	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
@@ -24,7 +24,7 @@ dk_depend(DK)
 
 
 	############ CONFIGURE APP ############
-	dk_configure(${DK_Project_Dir} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
+	dk_configure(${DK_Project_Dir} -DDKCMAKE_FUNCTIONS_DIR=$ENV{DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
 
 
 	############ BUILD APP ############

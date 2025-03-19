@@ -1,7 +1,7 @@
 #!/usr/bin/cmake -P
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	file(TO_CMAKE_PATH "$ENV{USERPROFILE}$ENV{HOME}/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
@@ -29,8 +29,8 @@ include_guard()
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-dk_assertPath("${DKCMAKE_DIR}/DKDisabled.cmake")
-dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
+dk_assertPath("$ENV{DKCMAKE_DIR}/DKDisabled.cmake")
+dk_load("$ENV{DKCMAKE_DIR}/DKDisabled.cmake")
 
 dk_info("\n")
 dk_info("############################################################")

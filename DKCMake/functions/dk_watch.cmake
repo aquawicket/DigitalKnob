@@ -2,7 +2,7 @@
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #include_guard()
 
-include(${DKCMAKE_FUNCTIONS_DIR}/dk_watchCallback.cmake)
+include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_watchCallback.cmake)
 ##############################################################################
 # dk_watch(variable)
 # 

@@ -44,13 +44,13 @@ dk_info("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 
 
 ### Set DKCMAKE_DIR ###
-dk_set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR})
-dk_info("DKCMAKE_DIR = ${DKCMAKE_DIR}")
+dk_set(ENV{DKCMAKE_DIR} ${CMAKE_SOURCE_DIR})
+dk_info("DKCMAKE_DIR = $ENV{DKCMAKE_DIR}")
 
 ### Set DKBRANCH_DIR
-string(FIND "${DKCMAKE_DIR}" "DKCMake" pos)
+string(FIND "$ENV{DKCMAKE_DIR}" "DKCMake" pos)
 math(EXPR pos "${pos}-1")
-string(SUBSTRING ${DKCMAKE_DIR} 0 ${pos} DKBRANCH_DIR)
+string(SUBSTRING $ENV{DKCMAKE_DIR} 0 ${pos} DKBRANCH_DIR)
 dk_set(DKBRANCH_DIR $ENV{DKBRANCH_DIR})
 dk_info("DKBRANCH_DIR = $ENV{DKBRANCH_DIR}")
 
@@ -165,7 +165,7 @@ endif()
 
 # ios_arm64
 if(${DK_BINARY_OSARCH} MATCHES "ios_arm64")
-	dk_set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake")
+	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"OS64")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")
@@ -178,7 +178,7 @@ endif()
 
 # iossim_x86
 if(${DK_BINARY_OSARCH} MATCHES "iossim_x86")
-	dk_set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake")
+	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"SIMULATOR")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")
@@ -192,7 +192,7 @@ endif()
 
 # iossim_x86_64
 if(${DK_BINARY_OSARCH} MATCHES "iossim_x86_64")	
-	dk_set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake")
+	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"SIMULATOR64")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")

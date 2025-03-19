@@ -16,7 +16,7 @@ function(dk_undepend plugin)
 	set(target ${ARGV1})
 	
 	# Only allow dk_undepend command from these filters	
-#	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE_DIR})
+#	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL $ENV{DKCMAKE_DIR})
 #		if(DK_Project_Dir)
 #			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DK_Project_Dir})
 #				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL $ENV{DKIMPORTS_DIR}/${plugin})

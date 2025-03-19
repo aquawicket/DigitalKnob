@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 if(NOT DKCMAKE_FUNCTIONS_DIR_)
-	set(DKCMAKE_FUNCTIONS_DIR_ ../../../DKCMake/functions/)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} ../../../DKCMake/functions/)
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
@@ -220,7 +220,7 @@ endif()
 
 # Remove some flags for some builds
 if(ANDROID OR EMSCRIPTEN OR MAC)
-	dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
+	dk_validate(DKCMAKE_BUILD "dk_load($ENV{DKCMAKE_DIR}/DKBuildFlags.cmake)")
 	string(REPLACE "-std=c17" 	""	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "-std=c++1z" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "  " 		" " DKCMAKE_BUILD "${DKCMAKE_BUILD}")

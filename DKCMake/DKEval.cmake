@@ -1,7 +1,7 @@
 #!/usr/bin/cmake -P
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	file(TO_CMAKE_PATH "$ENV{USERPROFILE}$ENV{HOME}/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
@@ -39,20 +39,20 @@ if(DKRETURN)
 	#message("DKRETURN = ${DKRETURN}")
 	
 #	## create windows cmd script to set the return variables
-#	dk_delete(${DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
+#	dk_delete($ENV{DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
 #	foreach(item ${DKRETURN})
 #		set(line "set \"${item}=${${item}}\" \n")
-#		dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
+#		dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
 #		dk_exportVars(${item} "${${item}}")
 #	endforeach()
 	
 #	## create unix shell script to set the return variables
-#	dk_delete(${DKCMAKE_DIR}/cmake_vars.sh NO_HALT)
-#	dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "#!/bin/sh \n")
+#	dk_delete($ENV{DKCMAKE_DIR}/cmake_vars.sh NO_HALT)
+#	dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.sh "#!/bin/sh \n")
 #	foreach(var ${DKRETURN})
 #		dk_convertToCIdentifier(${var} var_)
 #		set(line "export ${var_}=\"${${var}}\" \n")
-#       dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
+#       dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
 #	endforeach()
 
 	dk_load(dk_exportVars)

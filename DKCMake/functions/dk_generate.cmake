@@ -20,7 +20,7 @@ function(dk_generate)
 	dk_printVar(TARGET_PATH)
 	dk_makeDirectory("${TARGET_PATH}/${target_triple}")
 	dk_cd("${TARGET_PATH}/${target_triple}")
-	set(CMAKE_SOURCE_DIR "${DKCMAKE_DIR}")
+	set(CMAKE_SOURCE_DIR "$ENV{DKCMAKE_DIR}")
 	dk_assertPath(CMAKE_SOURCE_DIR)
 	set(CMAKE_TARGET_PATH "${TARGET_PATH}")
 	
@@ -184,7 +184,7 @@ function(dk_generate)
 	endif()
 
 	###### CMAKE_TOOLCHAIN_FILE ######
-#	set(TOOLCHAIN "${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake")
+#	set(TOOLCHAIN "$ENV{DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake")
 #	dk_echo("TOOLCHAIN = ${TOOLCHAIN}")
 #	if(dk_pathExists "${TOOLCHAIN}")
 #		dk_arrayPush(CMAKE_ARGS "-DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN}")
@@ -192,13 +192,13 @@ function(dk_generate)
 	
 	###### WSL CMake Fix ######
 	if(DEFINED WSLENV) 
-		dk_cd("${DKCMAKE_DIR}")
+		dk_cd("$ENV{DKCMAKE_DIR}")
 		dk_arrayPush(CMAKE_ARGS ".")
 	endif()
 	
 	###### Cygwin CMake Fix ######
 	if(DEFINED CYGWIN) 
-		dk_cd("${DKCMAKE_DIR}")
+		dk_cd("$ENV{DKCMAKE_DIR}")
 		dk_arrayPush(CMAKE_ARGS ".")
 	endif()
 	
