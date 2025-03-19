@@ -16,8 +16,8 @@ function(dk_callDKBatch func)
 	dk_replaceAll("${args}" ")" "#41" args)
 
 
-	dk_validate(DKBATCH_FUNCTIONS_DIR       "dk_DKBRANCH_DIR()")
-    dk_replaceAll("${DKBATCH_FUNCTIONS_DIR}" "/" "\\" DKBATCH_FUNCTIONS_DIR_WIN)
+	dk_validate(ENV{DKBATCH_FUNCTIONS_DIR}       "dk_DKBRANCH_DIR()")
+    dk_replaceAll("$ENV{DKBATCH_FUNCTIONS_DIR}" "/" "\\" DKBATCH_FUNCTIONS_DIR_WIN)
     
     ### get ALL_BUT_FIRST_ARGS ###
 	#set(ALL_BUT_FIRST_ARGS                  ${ARGN})
@@ -27,7 +27,7 @@ function(dk_callDKBatch func)
     
     ### Call DKBatch function ###
     dk_validate(CMD_EXE "dk_CMD_EXE()")
-	dk_set(DKBATCH_COMMAND "${CMD_EXE}" /V:ON /c call "${DKBATCH_FUNCTIONS_DIR_WIN}\\${func}.cmd" "${args}" OUTPUT_VARIABLE _output_ ECHO_OUTPUT_VARIABLE WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
+	dk_set(DKBATCH_COMMAND "${CMD_EXE}" /V:ON /c call "${DKBATCH_FUNCTIONS_DIR_WIN}\\${func}.cmd" "${args}" OUTPUT_VARIABLE _output_ ECHO_OUTPUT_VARIABLE WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
 	
 	message("DKBATCH_COMMAND = ${DKBATCH_COMMAND}")
     execute_process(COMMAND ${DKBATCH_COMMAND})
