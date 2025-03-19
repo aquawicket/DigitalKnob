@@ -7,13 +7,13 @@ include_guard()
 #
 #
 function(dk_BASH_EXE)
-    dk_debugFunc()
+	dk_debugFunc()
 
 	if(EXISTS "${BASH_EXE}")
 		dk_debug("BASH_EXE:${BASH_EXE} already set")
 		return()
 	endif()
-	
+
 	###### BASH_EXE ######
 	### environment variable bash ###
 	if(DEFINED ENV{BASH})
@@ -25,7 +25,7 @@ function(dk_BASH_EXE)
 			endif()
 		endif()
 	endif()
-	
+
 	### Msys2 bash ###
 	if(MSYSTEM)
 		dk_validate(MSYS2 "dk_depend(msys2)")
@@ -47,8 +47,8 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc(0)
- 
-    dk_BASH_EXE()
-    dk_printVar(BASH_EXE)
+	dk_debugFunc(0)
+
+	dk_BASH_EXE()
+	dk_printVar(BASH_EXE)
 endfunction()

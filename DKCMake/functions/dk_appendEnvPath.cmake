@@ -10,11 +10,10 @@ include_guard()
 function(dk_appendEnvPath)
 	dk_debugFunc(1)
 	set(inputPath ${ARGV0})
-	
-	dk_assertPath(inputPath)
 
+	dk_assertPath(inputPath)
 	dk_nativePath("${inputPath}" nativePath)
-	
+
 	#dk_printVar(ENV{PATH})
 	string(FIND "$ENV{PATH}" "${nativePath}" hasPath)
 	if(${hasPath} GREATER -1)
@@ -37,6 +36,6 @@ endfunction()
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
 	dk_debugFunc(0)
-	
+
 	dk_todo()
 endfunction()

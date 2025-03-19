@@ -16,7 +16,7 @@ include_guard()
 function(dk_append variable)
 	dk_debugFunc()
 	#set(variable ${ARGV0})
-	
+
 	if(NOT ARGN)
 		dk_warning("dk_append(${variable}) ARGN:${ARGN} is invalid")
 		return()
