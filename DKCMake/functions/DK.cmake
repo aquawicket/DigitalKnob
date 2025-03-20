@@ -2,6 +2,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include_guard()
 
+message("ENV{DKSCRIPT_PATH} = $ENV{DKSCRIPT_PATH}")
 if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
 	file(TO_CMAKE_PATH "$ENV{DKSCRIPT_PATH}" DKSCRIPT_PATH)
 endif()
@@ -21,20 +22,23 @@ message("DKSHELL_PATH = ${DKSHELL_PATH}")
 message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
 message("")
 
-if(NOT DEFINED ENV{DKCMAKE_FUNCTIONS_DIR_})
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	message("setting DKCMAKE_FUNCTIONS_DIR_")
 	get_filename_component(DKCMAKE_FUNCTIONS_DIR ${CMAKE_CURRENT_LIST_DIR} REALPATH)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR} "${DKCMAKE_FUNCTIONS_DIR}")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
-	message("ENV{DKCMAKE_FUNCTIONS_DIR_} = $ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 		message(FATAL_ERROR "ENV{DKCMAKE_FUNCTIONS_DIR_}:$ENV{DKCMAKE_FUNCTIONS_DIR_} does not exist")
 	endif()
+else()
+	message("ENV{DKCMAKE_FUNCTIONS_DIR_}:'$ENV{DKCMAKE_FUNCTIONS_DIR_}' already exists")
 endif()
-	
+
 message("CMAKE_GENERATOR = ${CMAKE_GENERATOR}")
 
 
 ############ dk_cmakePolicies ############
-include("${CMAKE_CURRENT_LIST_DIR}/dk_cmakePolicies.cmake")
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}/dk_cmakePolicies.cmake")
 dk_cmakePolicies()
 
 # Note: Using DK() as the function name will cause DK/DKMAKE.cmake to fail in dk_load.cmake
@@ -48,7 +52,7 @@ function(DKINIT)
 	###### Get Privledges ahead of time ######
 	if(CMAKE_HOST_UNIX)
 		message("calling sudo at beginning of script . . .")
-		execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
+		execute_process(COMMAND sudo echo WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}") #ask for sudo password ahead of time
 	endif()
 
 	###### Initialize Language specifics ######
@@ -62,7 +66,7 @@ function(DKINIT)
 	#dk_echo("DKCMAKE_DIR = $ENV{DKCMAKE_DIR}")
 	#dk_echo("DKCMAKE_FUNCTIONS_DIR = $ENV{DKCMAKE_FUNCTIONS_DIR}")
 	
-	include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_load.cmake")
 	dk_load("dk_fatal")
 	
 	############ Get DKHTTP variables ############
@@ -146,10 +150,10 @@ endfunction()
 # dk_DKCMAKE_VARS()
 #
 function(dk_DKCMAKE_VARS)
-	get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
-	set(ENV{DKCMAKE_DIR} "$ENV{DKCMAKE_DIR}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR} "$ENV{DKCMAKE_DIR}/functions")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
+	get_filename_component(DKCMAKE_DIR	"${CMAKE_CURRENT_LIST_DIR}" DIRECTORY)
+	set(ENV{DKCMAKE_DIR} 				"${DKCMAKE_DIR}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR}		"$ENV{DKCMAKE_DIR}/functions")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_}		"$ENV{DKCMAKE_FUNCTIONS_DIR}/")
 endfunction(dk_DKCMAKE_VARS)
 
 ##################################################################################
@@ -188,25 +192,25 @@ function(dk_DKSCRIPT_VARS)
 		set(ENV{DKSCRIPT_PATH} "${CMAKE_CURRENT_LIST_FILE}")
 	endif()
 	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
-		message(FATAL_ERROR "DKSCRIPT_PATH:$ENV{DKSCRIPT_PATH} not found")
+		message(FATAL_ERROR "ENV{DKSCRIPT_PATH}:$ENV{DKSCRIPT_PATH} not found")
 	endif()
 	###### DKSCRIPT_ARGS ######
 	set(ENV{DKSCRIPT_ARGS} ${ARGS})
 
 	###### DKSCRIPT_DIR ######
 	get_filename_component(DKSCRIPT_DIR "$ENV{DKSCRIPT_PATH}" DIRECTORY)
-	set(ENV{DKSCRIPT_DIR} "$ENV{DKSCRIPT_DIR}")
+	set(ENV{DKSCRIPT_DIR} "${DKSCRIPT_DIR}")
 	if(NOT EXISTS "$ENV{DKSCRIPT_DIR}")
 		dk_fatal("ENV{DKSCRIPT_DIR}:$ENV{DKSCRIPT_DIR} not found!")
 	endif()
 	
 	###### DKSCRIPT_NAME ######
 	get_filename_component(DKSCRIPT_NAME "$ENV{DKSCRIPT_PATH}" NAME)
-	set(ENV{DKSCRIPT_NAME} "$ENV{DKSCRIPT_NAME}")
+	set(ENV{DKSCRIPT_NAME} "${DKSCRIPT_NAME}")
 	
 	###### DKSCRIPT_EXT ######
 	get_filename_component(DKSCRIPT_EXT "$ENV{DKSCRIPT_PATH}" LAST_EXT)
-	set(ENV{DKSCRIPT_EXT} "$ENV{DKSCRIPT_EXT}")
+	set(ENV{DKSCRIPT_EXT} "${DKSCRIPT_EXT}")
 endfunction()
 
 ##################################################################################

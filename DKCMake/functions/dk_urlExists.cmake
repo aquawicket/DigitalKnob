@@ -5,10 +5,15 @@ include_guard()
 ####################################################################
 # dk_urlExists(url rtn_var)
 #
-function(dk_urlExists url rtn_var)
-    dk_debugFunc(1 2)
-    
-	if(CMAKE_VERSION VERSION_LESS 3.19)
+function(dk_urlExists)
+	dk_debugFunc(1 2)
+
+	set(url "${ARGV0}")
+	set(ret "${ARGV10}")
+
+	if(WIN32)
+		dk_callDKBatch(dk_urlExists)
+	elseif(CMAKE_VERSION VERSION_LESS 3.19)
 		file(DOWNLOAD "${url}" "$ENV{DKCACHE_DIR}/dk_urlExists.temp" STATUS status)
 		dk_delete("$ENV{DKCACHE_DIR}/dk_urlExists.temp")
 	else()

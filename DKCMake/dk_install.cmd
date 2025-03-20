@@ -6,9 +6,10 @@ if "%~1" == "" (goto:dk_install)
 	set "CMAKE_EXE=%~1"
 	set "DKCMAKE_FUNCTIONS_DIR_=%~2"
 	set "DKSCRIPT_PATH=%~3"
+	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 	
 	::###### run script ######
-	set cmnd="%COMSPEC%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -P "%DKSCRIPT_PATH:\=/%"
+	set cmnd="%COMSPEC%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -P "%DKSCRIPT_PATH%"
 	echo %cmnd%
 	%cmnd%
 	
@@ -32,7 +33,7 @@ if "%~1" == "" (goto:dk_install)
 :dk_install
 	if not "%~1"=="" (goto:eof)
 	
-	if not defined DKBATCH_FUNCTIONS_DIR_   (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/digitalknob/Development/DKBatch/functions/")
+	if not defined DKBATCH_FUNCTIONS_DIR_	(set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/digitalknob/Development/DKBatch/functions/")
 	if not defined DK_CMD 					(call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	::###### Install DKBash ######

@@ -97,10 +97,10 @@ function(dk_DKHOME_DIR)
 #			set(ENV{DKHOME_DIR} $ENV{DKHOME_DIR})
 #		endif()
 #	endif()
-	
+
 	if(NOT EXISTS "$ENV{DKHOME_DIR}")
-		file(REAL_PATH "~" DKHOME_DIR EXPAND_TILDE)
-		set(ENV{DKHOME_DIR} $ENV{DKHOME_DIR})
+		file(REAL_PATH "~" DKHOME_DIR EXPAND_TILDE) # EXPAND_TILDE - Added in version 3.21.
+		set(ENV{DKHOME_DIR} ${DKHOME_DIR})
 	endif()
 #	if(NOT EXISTS "$ENV{DKHOME_DIR}")
 #		set(ENV{DKHOME_DIR} "$ENV{USERPROFILE}")
