@@ -2,8 +2,8 @@
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
-dk_if(NOT DEFINED dk_log_ENABLE [[ set(dk_log_ENABLE 1				CACHE INTERNAL "") ]])
-dk_if(NOT DEFINED NOHALT_dk_log	[[ set(NOHALT_dk_log 1				CACHE INTERNAL "") ]])
+dk_if(NOT DEFINED dk_log_ENABLE [[ dk_set(dk_log_ENABLE 1) ]])
+dk_if(NOT DEFINED dk_log_NOHALT	[[ dk_set(dk_log_NOHALT 1) ]])
 # 0 VERBOSE		dk_verbose
 # 1 DEBUG		dk_debug
 # 2 INFO		dk_info
@@ -19,7 +19,7 @@ dk_if(NOT DEFINED NOHALT_dk_log	[[ set(NOHALT_dk_log 1				CACHE INTERNAL "") ]])
 # DEFAULT
 dk_if(NOT DEFINED dk_log_DEFAULT_ENABLE		[[ set(dk_log_DEFAULT_ENABLE	1				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED dk_log_DEFAULT_COLOR		[[ set(dk_log_DEFAULT_COLOR		"${white}"		CACHE INTERNAL '') ]])
-dk_if(NOT DEFINED dk_log_DEFAULT_TAG		[[ set(dk_log_DEFAULT_TAG		""				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_DEFAULT_TAG		[[ set(dk_log_DEFAULT_TAG		"DEFAULT: "		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED dk_log_DEFAULT_PAUSE		[[ set(dk_log_DEFAULT_PAUSE		0				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED dk_log_DEFAULT_TIMEOUT	[[ set(dk_log_DEFAULT_TIMEOUT	0				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED dk_log_DEFAULT_TRACE		[[ set(dk_log_DEFAULT_TRACE		0				CACHE INTERNAL '') ]]) 
@@ -147,7 +147,7 @@ function(dk_log)
 
 	dk_getOption(NO_HALT REMOVE)
 
-	if(NOT dk_log_ENABLE)
+	if(NOT ${dk_log_ENABLE} EQUAL 1)
 		dk_return()
 	endif()
 
@@ -160,48 +160,48 @@ function(dk_log)
 		set(_message_ "${ARGV1}")
 	endif()
 
-	if(NOT ${_level_}_ENABLE)
+	if(NOT dk_log_${_level_}_ENABLE)
 		dk_return()
 	endif()
 
-	#dk_echo("${bg_RGB}0;0;50m${${_level_}_COLOR}${${_level_}_TAG}${_message_}${clr}")
-	dk_echo("${${_level_}_COLOR}${${_level_}_TAG}${_message_}${clr}")
+	#dk_echo("${bg_RGB}0;0;50m${dk_log_${_level_}_COLOR}${dk_log_${_level_}_TAG}${_message_}${clr}")
+	dk_echo("${dk_log_${_level_}_COLOR}${dk_log_${_level_}_TAG}${_message_}${clr}")
 
 	### TRACE ###
-	if(${_level_}_TRACE) #OR TRACE AND NOT NO_TRACE)
-		dk_echo("${${_level_}_COLOR}*** TRACE_ON_${_level_} ***")
+	if(dk_log_${_level_}_TRACE) #OR TRACE AND NOT NO_TRACE)
+		dk_echo("${dk_log_${_level_}_COLOR}*** TRACE_ON_${_level_} ***")
 		dk_stacktrace()
 		message("${clr}")
 	endif()
 
 	### LINE ###
-	if(${_level_}_LINE) #OR HALT AND NOT NO_HALT)
-		dk_echo("${${_level_}_COLOR}*** LINE_ON_${_level_} ***")
+	if(dk_log_${_level_}_LINE) #OR HALT AND NOT NO_HALT)
+		dk_echo("${dk_log_${_level_}_COLOR}*** LINE_ON_${_level_} ***")
 		#d_k_showFileLine("${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}")
 		message("${clr}")
 	endif()
 
 	### SOUND ###
-	if(${_level_}_SOUND) #OR SOUND AND NOT NO_SOUND)
-		dk_echo("${${_level_}_COLOR}*** SOUND_ON_${_level_} ***${clr}")
-		dk_beeps(${_level_}_SOUND)
+	if(dk_log_${_level_}_SOUND) #OR SOUND AND NOT NO_SOUND)
+		dk_echo("${dk_log_${_level_}_COLOR}*** SOUND_ON_${_level_} ***${clr}")
+		dk_beeps(dk_log_${_level_}_SOUND)
 	endif()
 
 	### PAUSE ###
-	if(${_level_}_PAUSE) #OR PAUSE AND NOT NO_PAUSE)
-		dk_echo("${${_level_}_COLOR}*** PAUSE_ON_${_level_} ***${clr}")
+	if(dk_log_${_level_}_PAUSE) #OR PAUSE AND NOT NO_PAUSE)
+		dk_echo("${dk_log_${_level_}_COLOR}*** PAUSE_ON_${_level_} ***${clr}")
 		dk_pause()
 	endif()
 
 	### TIMEOUT ###
-	if(${_level_}_TIMEOUT) #OR TIMEOUT AND NOT TIMEOUT)
-		dk_echo("${${_level_}_COLOR}*** TIMEOUT_ON_${_level_} ***${clr}")
-		dk_timeout(${_level_}_TIMEOUT)
+	if(dk_log_${_level_}_TIMEOUT) #OR TIMEOUT AND NOT TIMEOUT)
+		dk_echo("${dk_log_${_level_}_COLOR}*** TIMEOUT_ON_${_level_} ***${clr}")
+		dk_timeout(dk_log_${_level_}_TIMEOUT)
 	endif()
 
 	### HALT ###
-	if(${_level_}_HALT) #OR HALT AND NOT NO_HALT)
-		dk_echo("${${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
+	if(dk_log_${_level_}_HALT) #OR HALT AND NOT NO_HALT)
+		dk_echo("${dk_log_${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
 		dk_exit(13)
 	endif()
 

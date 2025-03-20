@@ -2,10 +2,10 @@
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
-if(NOT BACKUP_DL_SERVER)
+if(NOT DEFINED BACKUP_DL_SERVER)
 	dk_set(BACKUP_DL_SERVER "http://aquawicket.com/download")
 endif()
-if(NOT TEST_BACKUP_DL_SERVER)
+if(NOT DEFINED TEST_BACKUP_DL_SERVER)
 	dk_set(TEST_BACKUP_DL_SERVER 0)
 endif()
 ###############################################################################
@@ -19,13 +19,13 @@ endif()
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
-function(dk_download url) # dest_path #NO_HALT
+function(dk_download) # dest_path #NO_HALT
 	dk_debugFunc(1 3)
 	
+	set(url "${ARGV0}")
+	set(dest_path "${ARGV1}")
 	dk_getOption(NO_HALT REMOVE)
 	
-	set(dest_path ${ARGN})						# C:/Users/Administrator/Downloads
-	message("dest_path = ${dest_path}")
 	
 	# Setup all url variables
 	#if(NOT url)
@@ -55,6 +55,7 @@ function(dk_download url) # dest_path #NO_HALT
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)
+		dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 		set(dest_path "$ENV{DKDOWNLOAD_DIR}")
 	endif()
 	if(NOT dest_path)
@@ -63,7 +64,7 @@ function(dk_download url) # dest_path #NO_HALT
 	if(IS_DIRECTORY ${dest_path})
 		set(dest_path "${dest_path}/${url_filename}")
 	endif()
-	#dk_printVar(dest_path)						# C:/Users/Administrator/Downloads/myFile.txt
+	dk_printVar(dest_path)						# C:/Users/Administrator/Downloads/myFile.txt
 	
 	dk_dirname("${dest_path}" dest_dir)			# C:/Users/Administrator/Downloads
 	if(NOT dest_dir)
@@ -130,7 +131,7 @@ function(dk_download url) # dest_path #NO_HALT
 	
 	set(FETCHCONTENT_QUIET FALSE) #FIX download progress 
 	
-	dk_info("Downloading ${url_filename}. . . please wait")
+	message("Downloading ${url_filename}. . . please wait")
 	file(DOWNLOAD ${url} "${temp_path}"
 		SHOW_PROGRESS 
 		STATUS status 
@@ -161,6 +162,8 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" $ENV{DKDOWNLOAD_DIR})
+	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	#dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" $ENV{DKDOWNLOAD_DIR})
+	
+	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1")
 endfunction()

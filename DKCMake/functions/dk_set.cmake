@@ -24,7 +24,7 @@ function(dk_set variable) #, value)
 	set(${VAR} "${ARGN}" CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
 	set(ENV{${VAR}} "${ARGN}")
 
-	dk_printVar(ENV{${VAR}})
+	#dk_printVar(ENV{${VAR}})
 endfunction()
 
 
