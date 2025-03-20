@@ -41,7 +41,7 @@ function(dk_DKBRANCH_DIR)
 				dk_set(ENV{DKBASH_FUNCTIONS_DIR} "$ENV{DKBASH_DIR}/functions")
 			endif()
 			if(NOT EXISTS "$ENV{DKBASH_FUNCTIONS_DIR_}") 
-				dk_set(ENV{DKBASH_FUNCTIONS_DIR_} "$ENV{DKBASH_FUNCTIONS_DIR}/")
+				dk_set(ENV{DKBASH_FUNCTIONS_DIR_} "$ENV{DKBASH_DIR}/functions/")
 			endif()
 
 		###### DKBATCH ######

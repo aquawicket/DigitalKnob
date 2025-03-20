@@ -2,47 +2,53 @@
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
+if(NOT DEFINED dk_callDKBatch_PRINT_COMMAND)
+	dk_set(dk_callDKBatch_PRINT_COMMAND 0)
+endif()
+if(NOT DEFINED dk_callDKBatch_PRINT_OUTPUT)
+	dk_set(dk_callDKBatch_PRINT_OUTPUT 0)
+endif()
 ##################################################################################
-# dk_callDKBatch(<func>, <args...>, <rtn_var:optional>)
+# dk_callDKBatch(<func>, <args...>)
 #
 #
 function(dk_callDKBatch func)
-	message("dk_callDKBatch.cmake(${ARGV})")
-	dk_debugFunc()
-	
+	dk_debugFunc(1 99)
+
 	#set(func "${ARGV0}")
 	set(args ${ARGN})
 	dk_replaceAll("${args}" "(" "#40" args)
 	dk_replaceAll("${args}" ")" "#41" args)
 
-	message("ENV{DKBATCH_FUNCTIONS_DIR_} = $ENV{DKBATCH_FUNCTIONS_DIR_}")
-	dk_validate(ENV{DKBATCH_FUNCTIONS_DIR_}		"dk_DKBRANCH_DIR()")
-	message("ENV{DKBATCH_FUNCTIONS_DIR_} = $ENV{DKBATCH_FUNCTIONS_DIR_}")
-	#dk_replaceAll("$ENV{DKBATCH_FUNCTIONS_DIR_}" "/" "\\" DKBATCH_FUNCTIONS_DIR_WIN)
-
 	### get ALL_BUT_FIRST_ARGS ###
 	#set(ALL_BUT_FIRST_ARGS                  ${ARGN})
-
 	### get LAST_ARG ###
 	#list(GET ARGN -1 LAST_ARG)
-	
+
+	if("${dk_callDKBatch_PRINT_OUTPUT}" EQUAL 1)
+		set(ECHO_OUTPUT_VARIABLE "ECHO_OUTPUT_VARIABLE")
+	endif()
+
 	### Call DKBatch function ###
 	dk_validate(CMD_EXE "dk_CMD_EXE()")
-	
-	dk_set(DKBATCH_COMMAND "${CMD_EXE}" /V:ON /c call "$ENV{DKBATCH_FUNCTIONS_DIR_}${func}.cmd" "${args}" OUTPUT_VARIABLE _output_ ECHO_OUTPUT_VARIABLE WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
-	
-	message("DKBATCH_COMMAND = ${DKBATCH_COMMAND}")
+	dk_validate(ENV{DKBATCH_FUNCTIONS_DIR_}		"dk_DKBRANCH_DIR()")
+	set(DKBATCH_COMMAND "${CMD_EXE}" /V:ON /c call "$ENV{DKBATCH_FUNCTIONS_DIR_}${func}.cmd" "${args}" & echo !${func}! OUTPUT_VARIABLE output_variable RESULT_VARIABLE result_variable ${ECHO_OUTPUT_VARIABLE} WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+	if("${dk_callDKBatch_PRINT_COMMAND}" EQUAL 1)
+		message("DKBATCH_COMMAND = '${DKBATCH_COMMAND}'")
+	endif()
 	execute_process(COMMAND ${DKBATCH_COMMAND})
 
 	### process the return value ###
-	string(FIND "${_output_}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
+	string(FIND "${output_variable}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
 	if(last_newline_pos GREATER -1)
-		string(SUBSTRING "${_output_}" ${last_newline_pos} -1 _output_) # Extract the last line
+		string(SUBSTRING "${output_variable}" ${last_newline_pos} -1 output_variable) # Extract the last line
 	endif()
-	string(STRIP "${_output_}" _output_)
+	string(STRIP "${output_variable}" output_variable)
 
-	set(dk_callDKBatch "${_output_}" PARENT_SCOPE)
-	#set(${rtn_var} "${_output_}" PARENT_SCOPE)
+	#message("output_variable = ${output_variable}")
+	#message("result_variable = ${result_variable}")
+	set(dk_callDKBatch "${output_variable}" PARENT_SCOPE)
 endfunction()
 
 
@@ -61,8 +67,17 @@ function(DKTEST)
 	#execute_process(COMMAND ${CMD_EXE} /V:ON /c "set /p input=& echo !input!" OUTPUT_VARIABLE input)
 	#dk_echo("input = ${input}")
 
-	dk_callDKBatch(dk_test "abc" "1 2 4")
+	#dk_callDKBatch(dk_debug "abc 1 2 4")
+	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	
+	dk_callDKBatch(dk_urlExists "http://www.google.com/index.html")
 	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	
+	dk_callDKBatch(dk_urlExists "http://www.nonExistentURL/fjafjkasfjas;d")
+	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	
+	#dk_callDKBatch(dk_test "abc" "1 2 4")
+	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 	
 	#dk_callDKBatch(dk_test "C:\Program Files (x86)\Edrum Monitor\EdrumMon.exe" "dk_callDKBatch.cmake")
 	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")

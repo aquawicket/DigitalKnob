@@ -2,14 +2,15 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_urlExists(url rtn_var)
+::# dk_urlExists(<url> <ret:optional>)
 ::#
 :dk_urlExists
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1 2
 
+	::if defined DISABLE_curl (goto end_curl_exists)
+	
 	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
-	if defined DISABLE_curl (goto end_curl_exists)
 	for /f "usebackq tokens=*" %%A in (`%CURL_EXE% -sI -o nul -w "%%{http_code}" "%~1"`) do (set "httpCode=%%A")
 
 	:: if !httpCode! equ 503 echo !httpCode! Service Unavailable
@@ -29,7 +30,8 @@ setlocal enableDelayedExpansion
 	)
 
 	endlocal & (
-		if "%~2" neq "" (set "%~2=%dk_urlExists%")
+		set "dk_urlExists=%dk_urlExists%"
+		rem if "%~2" neq "" (set "%~2=%dk_urlExists%")
 		exit /b %dk_urlExists%
 	)
 %endfunction%
@@ -47,13 +49,15 @@ setlocal
 	::###### Using if return value
 	%dk_call% dk_echo
 	set "url=http://www.google.com/index.html"
-	%dk_call% dk_urlExists "%url%" result
-	if %result% equ 0 (echo %url% exists) else (echo %url% does NOT exist)
+	%dk_call% dk_urlExists "%url%"
+	if %dk_urlExists% equ 0 (echo %url% exists) else (echo %url% does NOT exist)
+	echo dk_urlExists = %dk_urlExists%
 	
 	%dk_call% dk_echo
 	set "url=http://www.nonexisting.com/nofile.no"
-	%dk_call% dk_urlExists "%url%" result
-	if %result% equ 0 (echo %url% exists) else (echo %url% does NOT exist)
+	%dk_call% dk_urlExists "%url%"
+	if %dk_urlExists% equ 0 (echo %url% exists) else (echo %url% does NOT exist)
+	echo dk_urlExists = %dk_urlExists%
 	::FIXME: ERRORLEVEL is still 1 
 	
 	
@@ -62,11 +66,13 @@ setlocal
 	set "url=http://www.google.com/index.html"
 	%dk_call% dk_urlExists "%url%"
 	if not ERRORLEVEL 1 (echo %url% exists) else (echo %url% does NOT exist)
+	echo dk_urlExists = %dk_urlExists%
 	
 	%dk_call% dk_echo
 	set "url=http://www.nonexisting.com/nofile.no"
 	%dk_call% dk_urlExists "%url%"
 	if not ERRORLEVEL 1 (echo %url% exists) else (echo %url% does NOT exist)
+	echo dk_urlExists = %dk_urlExists%
 	::FIXME: ERRORLEVEL is still 1 
 	
 	
@@ -74,11 +80,14 @@ setlocal
 	%dk_call% dk_echo
 	set "url=http://www.google.com/index.html"
 	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
+	echo dk_urlExists = %dk_urlExists%
 	
 	%dk_call% dk_echo
 	set "url=http://www.nonexisting.com/nofile.no"  
 	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
-	::FIXME: ERRORLEVEL is still 1 
+	echo dk_urlExists = %dk_urlExists%
+	(call )		&::FIXME: ERRORLEVEL is still 1 
+	
 	
 	
 	::###### Experimental
