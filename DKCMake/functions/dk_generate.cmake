@@ -29,7 +29,7 @@ function(dk_generate)
 	set(DKLINK "Static")
 	
 	set(CMAKE_ARGS "")
-	dk_assertPath(ENV{DKCMAKE_FUNCTIONS_DIR_})
+	dk_assertPath($ENV{DKCMAKE_FUNCTIONS_DIR_})
 	dk_arrayPush(CMAKE_ARGS "-DDKCMAKE_FUNCTIONS_DIR_=$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	if("${target_type}" STREQUAL "Debug")
 		dk_arrayPush(CMAKE_ARGS "-DDEBUG=ON" "-DRELEASE=OFF")

@@ -21,7 +21,7 @@ function(dk_DKCACHE_DIR)
 	if(NOT EXISTS "$ENV{DKCACHE_DIR}")
 		dk_makeDirectory("$ENV{DKCACHE_DIR}")
 	endif()
-	dk_assertPath(ENV{DKCACHE_DIR})
+	dk_assertPath($ENV{DKCACHE_DIR})
 endfunction()
 
 
