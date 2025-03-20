@@ -21,7 +21,7 @@ function(dk_buildMain)
 #	endif()
 
 #	dk_printVar SHLVL		# https://stackoverflow.com/a/4511483/688352
-	dk_assertPath(DKSCRIPT_DIR)
+	dk_assertPath(ENV{DKSCRIPT_DIR})
 	
 	while(1)
 		if(NOT DEFINED ENV{UPDATE})

@@ -43,7 +43,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	endif()
 	if(EXISTS ${cmakelists_path})
 		dk_info("###### Configuring $ENV{CURRENT_PLUGIN} with CMake ######")
-		dk_assertPath(DKCMAKE_DIR)
+		dk_assertPath(ENV{DKCMAKE_DIR})
 		dk_assertPath(SOURCE_DIR)
 		dk_assertPath(BINARY_DIR)
 		
