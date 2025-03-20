@@ -17,7 +17,7 @@ function(dk_source func)
 	# If it's a dk_function, download if it doesn't exist then load it
 	if(NOT EXISTS $ENV{DKCMAKE_FUNCTIONS_DIR}/${func}.cmake)
 		dk_info("downloading ${func} . . .")
-		dk_download(${DKHTTP_DKCMAKE_FUNCTIONS_DIR}/${func}.cmake $ENV{DKCMAKE_FUNCTIONS_DIR}/${func}.cmake)
+		dk_download($ENV{DKHTTP_DKCMAKE_FUNCTIONS_DIR}/${func}.cmake $ENV{DKCMAKE_FUNCTIONS_DIR}/${func}.cmake)
 	endif()
 	if(NOT EXISTS $ENV{DKCMAKE_FUNCTIONS_DIR}/${func}.cmake)
 		dk_fatal("ERROR: failed to download ${func}") 

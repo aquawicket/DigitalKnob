@@ -16,7 +16,7 @@ function(dk_callDKCmake func rtn_var)
     dk_validate(DKCMAKE_FUNCTIONS_DIR   "dk_DKBRANCH_DIR()")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR}           "$ENV{DKCMAKE_FUNCTIONS_DIR}")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR_}          "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
-	set(DKSCRIPT_PATH                   "$ENV{DKSCRIPT_PATH}")
+	set(ENV{DKSCRIPT_PATH}                   "$ENV{DKSCRIPT_PATH}")
     
     
     ### get ALL_BUT_FIRST_ARGS ###

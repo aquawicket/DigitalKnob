@@ -6,7 +6,7 @@ if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
 	file(TO_CMAKE_PATH "$ENV{DKSCRIPT_PATH}" DKSCRIPT_PATH)
 endif()
 if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
-	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}")
+	set(ENV{DKSCRIPT_PATH} "${CMAKE_PARENT_LIST_FILE}")
 endif()
 #set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 
@@ -67,7 +67,7 @@ function(DKINIT)
 	
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS()
-	#dk_echo("DKHTTP_DKCMAKE_FUNCTIONS_DIR = ${DKHTTP_DKCMAKE_FUNCTIONS_DIR}")
+	#dk_echo("DKHTTP_DKCMAKE_FUNCTIONS_DIR = $ENV{DKHTTP_DKCMAKE_FUNCTIONS_DIR}")
 
 	############ Setup dk_callStack ############
 	dk_setupCallstack()
@@ -147,19 +147,19 @@ endfunction()
 #
 function(dk_DKCMAKE_VARS)
 	get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
-	set(ENV{DKCMAKE_DIR} $ENV{DKCMAKE_DIR} CACHE INTERNAL "")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR} $ENV{DKCMAKE_DIR}/functions CACHE INTERNAL "")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} $ENV{DKCMAKE_FUNCTIONS_DIR}/ CACHE INTERNAL "")
+	set(ENV{DKCMAKE_DIR} "$ENV{DKCMAKE_DIR}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR} "$ENV{DKCMAKE_DIR}/functions")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
 endfunction(dk_DKCMAKE_VARS)
 
 ##################################################################################
 # dk_DKHTTP_VARS()
 #
 function(dk_DKHTTP_VARS)
-	set(DKHTTP_DIGITALKNOB_DIR			"https://raw.githubusercontent.com/aquawicket/DigitalKnob" CACHE INTERNAL "")
-	set(DKHTTP_DKBRANCH_DIR				"${DKHTTP_DIGITALKNOB_DIR}/Development" CACHE INTERNAL "")
-	set(DKHTTP_DKCMAKE_DIR				"${DKHTTP_DKBRANCH_DIR}/DKCMake" CACHE INTERNAL "")
-	set(DKHTTP_DKCMAKE_FUNCTIONS_DIR	"${DKHTTP_DKCMAKE_DIR}/functions" CACHE INTERNAL "")
+	set(ENV{DKHTTP_DIGITALKNOB_DIR}			"https://raw.githubusercontent.com/aquawicket/DigitalKnob")
+	set(ENV{DKHTTP_DKBRANCH_DIR}			"$ENV{DKHTTP_DIGITALKNOB_DIR}/Development")
+	set(ENV{DKHTTP_DKCMAKE_DIR}				"$ENV{DKHTTP_DKBRANCH_DIR}/DKCMake")
+	set(ENV{DKHTTP_DKCMAKE_FUNCTIONS_DIR}	"$ENV{DKHTTP_DKCMAKE_DIR}/functions")
 endfunction()
 
 
@@ -182,31 +182,31 @@ endfunction()
 function(dk_DKSCRIPT_VARS)
 	###### DKSCRIPT_PATH ######
 	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
-		set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}" CACHE INTERNAL "")
+		set(ENV{DKSCRIPT_PATH} "${CMAKE_PARENT_LIST_FILE}")
 	endif()
 	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
-		set(DKSCRIPT_PATH "${CMAKE_CURRENT_LIST_FILE}" CACHE INTERNAL "")
+		set(ENV{DKSCRIPT_PATH} "${CMAKE_CURRENT_LIST_FILE}")
 	endif()
 	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
 		message(FATAL_ERROR "DKSCRIPT_PATH:$ENV{DKSCRIPT_PATH} not found")
 	endif()
 	###### DKSCRIPT_ARGS ######
-	set(DKSCRIPT_ARGS ${ARGS} CACHE INTERNAL "")
+	set(ENV{DKSCRIPT_ARGS} ${ARGS})
 
 	###### DKSCRIPT_DIR ######
-	get_filename_component(DKSCRIPT_DIR $ENV{DKSCRIPT_PATH} DIRECTORY)
-	set(DKSCRIPT_DIR $ENV{DKSCRIPT_DIR} CACHE INTERNAL "")
-	if(NOT EXISTS $ENV{DKSCRIPT_DIR})
-		dk_fatal("DKSCRIPT_DIR not found!")
+	get_filename_component(DKSCRIPT_DIR "$ENV{DKSCRIPT_PATH}" DIRECTORY)
+	set(ENV{DKSCRIPT_DIR} "$ENV{DKSCRIPT_DIR}")
+	if(NOT EXISTS "$ENV{DKSCRIPT_DIR}")
+		dk_fatal("ENV{DKSCRIPT_DIR}:$ENV{DKSCRIPT_DIR} not found!")
 	endif()
 	
 	###### DKSCRIPT_NAME ######
-	get_filename_component(DKSCRIPT_NAME $ENV{DKSCRIPT_PATH} NAME)
-	set(DKSCRIPT_NAME $ENV{DKSCRIPT_NAME} CACHE INTERNAL "")
+	get_filename_component(DKSCRIPT_NAME "$ENV{DKSCRIPT_PATH}" NAME)
+	set(ENV{DKSCRIPT_NAME} "$ENV{DKSCRIPT_NAME}")
 	
 	###### DKSCRIPT_EXT ######
-	get_filename_component(DKSCRIPT_EXT $ENV{DKSCRIPT_PATH} LAST_EXT)
-	set(DKSCRIPT_EXT $ENV{DKSCRIPT_EXT} CACHE INTERNAL "")
+	get_filename_component(DKSCRIPT_EXT "$ENV{DKSCRIPT_PATH}" LAST_EXT)
+	set(ENV{DKSCRIPT_EXT} "$ENV{DKSCRIPT_EXT}")
 endfunction()
 
 ##################################################################################

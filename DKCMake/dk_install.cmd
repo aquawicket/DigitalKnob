@@ -4,7 +4,7 @@ if "%~1" == "" (goto:dk_install)
 :runDKCMake
 	echo dk_install.cmd %*
 	set "CMAKE_EXE=%~1"
-	::set "DKCMAKE_FUNCTIONS_DIR_=%~2"
+	set "DKCMAKE_FUNCTIONS_DIR_=%~2"
 	set "DKSCRIPT_PATH=%~3"
 	
 	::###### run script ######

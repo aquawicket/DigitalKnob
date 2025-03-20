@@ -16,7 +16,9 @@ function(dk_cmakePolicies)
 	if(POLICY CMP0002)
 		cmake_policy(SET CMP0002 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0002.html	cmake 2.6.0  - Logical target names must be globally unique.
 	endif()
+	if(POLICY CMP0003)
 		cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html	cmake 2.6.0  - Libraries linked via full path no longer produce linker search paths.
+	endif()
 		cmake_policy(SET CMP0004 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0004.html	cmake 2.6.0  - Libraries linked may not have leading or trailing whitespace.
 		cmake_policy(SET CMP0005 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0005.html	cmake 2.6.0  - Preprocessor definition values are now escaped automatically.
 		cmake_policy(SET CMP0006 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0006.html	cmake 2.6.0  - Installing MACOSX_BUNDLE targets requires a BUNDLE DESTINATION.
