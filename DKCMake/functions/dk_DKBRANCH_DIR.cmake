@@ -33,6 +33,15 @@ function(dk_DKBRANCH_DIR)
 		dk_set(ENV{DKBRANCH_DIR} "$ENV{DIGITALKNOB_DIR}/$ENV{DKBRANCH}")
 	endif()
 
+		###### DK3RDPARTY ######
+		if(NOT EXISTS "$ENV{DK3RDPARTY_DIR}")
+			dk_set(ENV{DK3RDPARTY_DIR} "$ENV{DKBRANCH_DIR}/3rdParty")
+		endif()
+			###### DKIMPORTS ######
+			if(NOT EXISTS "$ENV{DKIMPORTS_DIR}")
+				dk_set(ENV{DKIMPORTS_DIR} "$ENV{DK3RDPARTY_DIR}/_DKIMPORTS")
+			endif()
+
 		###### DKBASH ######
 		if(NOT EXISTS "$ENV{DKBASH_DIR}") 
 			dk_set(ENV{DKBASH_DIR} "$ENV{DKBRANCH_DIR}/DKBash")
