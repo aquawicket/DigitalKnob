@@ -21,9 +21,12 @@ endif()
 #
 function(dk_download) # dest_path #NO_HALT
 	dk_debugFunc(1 3)
+	message("dk_download(${ARGV})")
 	
 	set(url "${ARGV0}")
+	dk_printVar(url)
 	set(dest_path "${ARGV1}")
+	dk_printVar(dest_path)
 	dk_getOption(NO_HALT REMOVE)
 	
 	
@@ -35,21 +38,15 @@ function(dk_download) # dest_path #NO_HALT
 	#dk_printVar(url)							# https://aquawicket.com/download/myFile.txt
 	
 	dk_dirname(${url} url_dir)
-	if(NOT url_dir)
-		dk_fatal("url_dir:${url_dir} is invalid")
-	endif()
+	dk_assertVar(url_dir)
 	#dk_printVar(url_dir)						# https://aquawicket.com/download
 	
 	dk_basename(${url} url_filename)
-	if(NOT url_filename)
-		dk_fatal("url_filename:${url_filename} is invalid")
-	endif()
+	dk_assertVar(url_filename)
 	#dk_printVar(url_filename)					# myFile.txt
 	
 	dk_getExtension(${url} url_ext)	
-	if(NOT url_ext)
-		dk_fatal("url_ext:${url_ext} is invalid")
-	endif()
+	dk_assertVar(url_ext)
 	#dk_printVar(url_ext)						# .txt
 	
 	
@@ -58,36 +55,29 @@ function(dk_download) # dest_path #NO_HALT
 		dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 		set(dest_path "$ENV{DKDOWNLOAD_DIR}")
 	endif()
-	if(NOT dest_path)
-		dk_fatal("dest_path:${dest_path} is invalid")
-	endif()	
+	dk_assertVar(dest_path)
+	
 	if(IS_DIRECTORY ${dest_path})
 		set(dest_path "${dest_path}/${url_filename}")
 	endif()
 	dk_printVar(dest_path)						# C:/Users/Administrator/Downloads/myFile.txt
-	
 	dk_dirname("${dest_path}" dest_dir)			# C:/Users/Administrator/Downloads
-	if(NOT dest_dir)
-		dk_fatal("dest_dir:${dest_dir} is invalid")
-	endif()
+	dk_assertVar(dest_dir)
+	
 	if(NOT EXISTS ${dest_dir})
 		dk_notice("dest_dir:${dest_dir} does not exists. It will be created")
 		dk_makeDirectory("${dest_dir}")
 	endif()
+	dk_assertPath(dest_dir)
 	dk_cd("${dest_dir}")
 	#dk_printVar(dest_dir)
 	
 	dk_basename("${dest_path}" dest_filename)	# myFile.txt
-	if(NOT dest_filename)
-		dk_fatal("dest_filename:${dest_filename} is invalid")
-		return()
-	endif()
+	dk_assertVar(dest_filename)
 	#dk_printVar(dest_filename)
 	
 	dk_getExtension(${dest_path} dest_ext)		# .txt
-	if(NOT dest_ext)
-		dk_fatal("dest_ext:${dest_ext} is invalid")
-	endif()
+	dk_assertVar(dest_ext)
 	#dk_printVar(dest_ext)
 	
 	if(EXISTS "${dest_path}")
@@ -98,17 +88,16 @@ function(dk_download) # dest_path #NO_HALT
 	endif()
 	
 	
-	
 	# Use BACKUP_DL_SERVER only
 	if(TEST_BACKUP_DL_SERVER)
 		set(url "${BACKUP_DL_SERVER}/${url_filename}")
+		dk_assertVar(url)
 		dk_info("Using Backup Server url:${url} . . .")
 	
 	# Test that url exists, if not try BACKUP_DL_SERVER
 	else()
-		dk_assertVar(url)
-		dk_urlExists(${url} result)
-		if(NOT result)
+		dk_urlExists(${url})
+		if(dk_urlExists)
 			dk_warning("url:${url} NOT FOUND")
 			set(url "${BACKUP_DL_SERVER}/${url_filename}")
 			dk_info("Trying Backup Server url:${url} . . .")
@@ -131,7 +120,7 @@ function(dk_download) # dest_path #NO_HALT
 	
 	set(FETCHCONTENT_QUIET FALSE) #FIX download progress 
 	
-	message("Downloading ${url_filename}. . . please wait")
+	dk_info("Downloading ${url_filename}. . . please wait")
 	file(DOWNLOAD ${url} "${temp_path}"
 		SHOW_PROGRESS 
 		STATUS status 
@@ -165,5 +154,7 @@ function(DKTEST)
 	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	#dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" $ENV{DKDOWNLOAD_DIR})
 	
-	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1")
+	#dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1")
+	
+	dk_download("https://www.dependencywalker.com/depends22_x64.zip")
 endfunction()

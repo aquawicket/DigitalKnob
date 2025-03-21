@@ -23,7 +23,7 @@ function(dk_DKDOWNLOAD_DIR)
 		dk_makeDirectory("$ENV{DKDOWNLOAD_DIR}")
 	endif()
 	
-	dk_assertPath($ENV{DKDOWNLOAD_DIR})
+	dk_assertPath("$ENV{DKDOWNLOAD_DIR}")
 endfunction()
 
 

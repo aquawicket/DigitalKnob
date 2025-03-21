@@ -16,6 +16,7 @@ include_guard()
 #
 function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	dk_debugFunc()
+	message("dk_install(${ARGV})")
 	
 	dk_getOption(NO_HALT  REMOVE)
 	
@@ -55,7 +56,8 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	#dk_echo(" ")
 	
 	### set the PLUGIN_DL_DIR
-	set(PLUGIN_DL_DIR $ENV{DKDOWNLOAD_DIR})
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	set(PLUGIN_DL_DIR "$ENV{DKDOWNLOAD_DIR}")
 	
 	### set the PLUGIN_DL_FILENAME ###
 	# let's check that the PLUGIN_URL_FILENAME has at least the PLUGIN_IMPORT_NAME in it somewhere, or else we gotta rename it
@@ -77,8 +79,8 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		set(PLUGIN_DL_FILENAME ${PLUGIN_URL_FILENAME})
 	endif()
 	
-	dk_download(${PLUGIN_URL} "${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}" NO_HALT)
-	dk_assertPath("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}") # "The download file does not exist"
+	dk_download("${PLUGIN_URL}" "${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}" NO_HALT)
+	dk_assertPath("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}") # "if the download file does not exist"
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${PLUGIN_URL_EXTENSION} STREQUAL "")

@@ -79,5 +79,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_import(https://github.com/madler/zlib/archive/d476828316d05d54c6fd6a068b121b30c147b5cd.zip)
+	#dk_import("https://github.com/madler/zlib/archive/d4768283.zip")
+	dk_import("https://www.dependencywalker.com/depends22_x64.zip")
 endfunction()
