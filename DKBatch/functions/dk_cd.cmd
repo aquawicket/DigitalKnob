@@ -7,12 +7,12 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#
 :dk_cd
 setlocal
-    %dk_call% dk_debugFunc 0 1
+	%dk_call% dk_debugFunc 0 1
 
 	set "_directory_=%~1"
-	
+
 	title %_directory_%
-    cd "%_directory_:/=\%"
+	cd "%_directory_:/=\%"
 %endfunction%
 
 
@@ -23,6 +23,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    ::%dk_call% dk_cd %DIGITALKNOB_DIR%
+	::%dk_call% dk_cd %DIGITALKNOB_DIR%
 	%dk_call% dk_cd C:/Windows
 %endfunction%

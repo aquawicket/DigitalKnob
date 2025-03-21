@@ -8,8 +8,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    if %ERRORLEVEL% equ 0 %return%
-    %dk_call% dk_error "ERRORLEVEL = %ERRORLEVEL%"
+	if %ERRORLEVEL% equ 0 %return%
+	%dk_call% dk_error "ERRORLEVEL = %ERRORLEVEL%"
 %endfunction%
 
 
@@ -23,5 +23,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_checkError
+	%dk_call% dk_checkError
 %endfunction%

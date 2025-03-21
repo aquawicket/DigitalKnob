@@ -7,7 +7,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#
 :dk_callDKJava
 setlocal
-    %dk_call% dk_debugFunc 1 99
+	%dk_call% dk_debugFunc 1 99
  
 	::### Get DKJAVA_FUNCTIONS_DIR
 	%dk_call% dk_validate DKJAVA_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
@@ -34,9 +34,9 @@ setlocal
 	
 	echo DKJAVA_COMMAND = %DKJAVA_COMMAND%
 	for /f "delims=" %%Z in ('%DKJAVA_COMMAND%') do (
-        echo %%Z                		&rem  Display the command's stdout
+		echo %%Z						&rem  Display the command's stdout
 		set "dk_callDKJava=%%Z"	&rem  Set the return value to the last line of output
-    )
+	)
 	endlocal & (
 		set "dk_callDKJava=%dk_callDKJava%"
 	)

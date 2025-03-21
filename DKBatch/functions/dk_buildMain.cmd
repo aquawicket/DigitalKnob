@@ -41,7 +41,7 @@ setlocal enableDelayedExpansion
 			rem The the current host_arch doesn't have the target_tripple in it's allowed list
 			rem We goto skipTarget, we could also have a disabled list for each host_arch to do the same:
 			rem A block list could be good, because everything will be attempted by default instead of enabled.
-			rem Example win_x86 mac ios iossim     = win_x86_host's will skip all instaces of mac, ios and iossim
+			rem Example win_x86 mac ios iossim	=	win_x86_host's will skip all instaces of mac, ios and iossim
 
 
 			if defined BUILD_LIST[!_line_!][2] (

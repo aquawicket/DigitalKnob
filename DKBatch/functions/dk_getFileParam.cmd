@@ -2,7 +2,7 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# dk_getFileParam(file, var_name)
+::# dk_getFileParam(<file> <var_name>)
 ::#
 ::# todo: add optional 3rd parameter for output value
 :dk_getFileParamB
@@ -28,7 +28,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_getFileParam %DKIMPORTS_DIR%/git/dkconfig.txt VERSION
-	%dk_call% dk_printVar VERSION	
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_getFileParam %DKBRANCH_DIR%/settings dk_call_PRINTENTRY
+	%dk_call% dk_printVar dk_call_PRINTENTRY
 %endfunction%

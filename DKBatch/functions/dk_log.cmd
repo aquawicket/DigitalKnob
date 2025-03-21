@@ -44,7 +44,7 @@ if not defined dk_log_DEFAULT_COLOR			(set "dk_log_DEFAULT_COLOR=%white%")
 ::if not defined dk_log_DEFAULT_LINE		(set "dk_log_DEFAULT_LINE=0")
 ::if not defined dk_log_DEFAULT_PAUSE		(set "dk_log_DEFAULT_PAUSE=0")
 ::if not defined dk_log_DEFAULT_TIMEOUT		(set "dk_log_DEFAULT_TIMEOUT=0")
-::if not defined dk_log_dk_log_DEFAULT_HALT	(set "dk_log_dk_log_DEFAULT_HALT=0")
+::if not defined dk_log_DEFAULT_HALT		(set "dk_log_DEFAULT_HALT=0")
 
 ::### INFO ###
 if not defined dk_log_INFO_ENABLE			(set "dk_log_INFO_ENABLE=1")
@@ -145,40 +145,40 @@ if not defined dk_log_FATAL_TIMEOUT			(set "dk_log_FATAL_TIMEOUT=9")
 ::##################################################################################
 ::# dk_log(<level> <message>)
 ::#
-::#    Print a log message to the console
+::#		Print a log message to the console
 ::#
-::#    @level   - The message level: VERBOSE, DEBUG, DEFAULT, INFO, SUCCESS, TODO, NOTICE, FIXME, WARNING, ERROR, FATAL 
-::#    @message - The message to print
+::#		@level   - The message level: VERBOSE, DEBUG, DEFAULT, INFO, SUCCESS, TODO, NOTICE, FIXME, WARNING, ERROR, FATAL 
+::#		@message - The message to print
 ::#
 :dk_log
 setlocal enableDelayedExpansion
-    %dk_call% dk_debugFunc 1 2
+	%dk_call% dk_debugFunc 1 2
 
-    if "%dk_log_ENABLE%" neq "1" (
+	if "%dk_log_ENABLE%" neq "1" (
 		%return%
 	)
 
-    if "%~2" equ "" (
+	if "%~2" equ "" (
 		set "_level_=DEFAULT"
 		set "_message_=%~1"
 	)
 	
-    if "%~2" neq "" (
+	if "%~2" neq "" (
 		set "_level_=%~1"
 		set "_message_=%~2"
 	)
 	
-    if "!dk_log_%_level_%_ENABLE!" neq "1" (
+	if "!dk_log_%_level_%_ENABLE!" neq "1" (
 		%return%
 	)
 
 	::### remove surrounding quotes ###
-    ::if "" == %_message_:~0,1%%_message_:~-1% (
-	::	%dk_call% dk_set _message_ %_message_:~1,-1%    &rem if _message_ starts and ends with quotes, remove them
+	::if "" == %_message_:~0,1%%_message_:~-1% (
+	::	%dk_call% dk_set _message_ %_message_:~1,-1%	&rem if _message_ starts and ends with quotes, remove them
 	::)
 
 	::###### ECHO MASSAGE ######
-    %dk_call% dk_echo "!dk_log_%_level_%_COLOR!!dk_log_%_level_%_TAG!%_message_%%clr%"
+	%dk_call% dk_echo "!dk_log_%_level_%_COLOR!!dk_log_%_level_%_TAG!%_message_%%clr%"
 
 	::###### TRACE ######
 	if "!dk_log_%_level_%_TRACE!" gtr "0" (

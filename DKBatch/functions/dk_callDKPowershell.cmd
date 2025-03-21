@@ -39,8 +39,8 @@ setlocal enableDelayedExpansion
 :: set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH ^= '%DKSCRIPT_PATH%'^; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1^; %~1 %ALL_BUT_FIRST%
 :: ::echo %DKPOWERSHELL_COMMAND%
 :: for /f "delims=" %%Z in ('%DKPOWERSHELL_COMMAND%') do (
-:: 	echo %%Z                &rem  Display the other shell's stdout
-:: 		set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
+:: 	echo %%Z				&rem  Display the other shell's stdout
+:: 		set "rtn_value=%%Z"	 &rem  Set the return value to the last line of output
 :: )
 :: ::echo rtn_value = !rtn_value!
 ::

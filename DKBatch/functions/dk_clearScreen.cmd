@@ -8,8 +8,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :dk_clearScreen
 setlocal
 	%dk_call% dk_debugFunc 0
-	
-    cls
+
+	cls
 %endfunction%
 
 
@@ -24,5 +24,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_clearScreen
+	%dk_call% dk_clearScreen
 %endfunction%
