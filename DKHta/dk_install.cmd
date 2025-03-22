@@ -1,5 +1,5 @@
 @echo off
-if "%~1" equ "" (goto dk_install)
+if "%~1" equ "" (goto :dk_install)
 
 :runDKHta
 

@@ -30,14 +30,14 @@ include_guard()
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#message("DKCOMMAND = ${DKCOMMAND}")
-string(REPLACE "\'" "\"" DKCOMMAND ${DKCOMMAND})
+message("DKCOMMAND = ${DKCOMMAND}")
+string(REPLACE "\'" "\"" DKCOMMAND "${DKCOMMAND}")
 dk_parseFunctionsAndLoadFromString("${DKCOMMAND}")
 dk_eval("${DKCOMMAND}")
 
 if(DKRETURN)
 	#message("DKRETURN = ${DKRETURN}")
-	
+
 #	## create windows cmd script to set the return variables
 #	dk_delete($ENV{DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
 #	foreach(item ${DKRETURN})
@@ -45,14 +45,14 @@ if(DKRETURN)
 #		dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
 #		dk_exportVars(${item} "${${item}}")
 #	endforeach()
-	
+
 #	## create unix shell script to set the return variables
 #	dk_delete($ENV{DKCMAKE_DIR}/cmake_vars.sh NO_HALT)
 #	dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.sh "#!/bin/sh \n")
 #	foreach(var ${DKRETURN})
 #		dk_convertToCIdentifier(${var} var_)
 #		set(line "export ${var_}=\"${${var}}\" \n")
-#       dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
+#		dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
 #	endforeach()
 
 	dk_load(dk_exportVars)

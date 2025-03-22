@@ -4,21 +4,21 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::################################################################################
 ::# dk_cmakeEval(cmake_commands, return_variables, -DVARS)
 ::#
-::#
 :dk_cmakeEval
 ::setlocal
 	%dk_call% dk_debugFunc 1 4
 
 	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_assertPath DKIMPORTS_DIR
-	
+
 	%dk_call% dk_validate DKCMAKE_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_assertPath DKCMAKE_DIR
 
 	%dk_call% dk_validate CMAKE_EXE			"%dk_call% %DKIMPORTS_DIR%/cmake/dk_install.cmd"
 	%dk_call% dk_assertPath CMAKE_EXE
 
-	%dk_call% dk_set DKCOMMAND "%~1"
+	::%dk_call% dk_set DKCOMMAND "%~1"
+	set DKCOMMAND=%~1
 	%dk_call% dk_set DKRETURN "%~2"
 	%dk_call% dk_set DKVARS "%~3"
 	%dk_call% dk_set DK_EVAL "%DKCMAKE_DIR:\=/%/DKEval.cmake"
@@ -26,15 +26,15 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	::### build CMAKE_ARGS ###
 	:: append %DKCOMMAND% to CMAKE_ARGS with quotes removed
 ::	if defined DKCOMMAND  (call set CMAKE_ARGS=%CMAKE_ARGS% -DDKCOMMAND=%%DKCOMMAND:"=%%)
-	if defined DKCOMMAND  set CMAKE_ARGS=%CMAKE_ARGS% -DDKCOMMAND=%DKCOMMAND:\=/%
+	if defined DKCOMMAND  set CMAKE_ARGS=%CMAKE_ARGS% "-DDKCOMMAND=%DKCOMMAND:\=/%"
 
 	:: append %DKRETURN% to CMAKE_ARGS with quotes removed
 ::	if defined DKRETURN   (call set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%%DKRETURN:"=%%)
-	if defined DKRETURN   set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%DKRETURN%
+	if defined DKRETURN   set CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%DKRETURN%"
 	
 	:: append %DKVARS% to CMAKE_ARGS with quotes removed
 ::	if defined DKVARS	 (call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%)
-	if defined DKVARS	 set CMAKE_ARGS=%CMAKE_ARGS% %DKVARS%
+	if defined DKVARS	 set CMAKE_ARGS=%CMAKE_ARGS% "%DKVARS%"
  
 	::set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
 	set CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_:\=/%
@@ -43,17 +43,15 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	::set "CMAKE_ARGS=%CMAKE_ARGS% "--log-level=TRACE""
 	::set "CMAKE_ARGS=%CMAKE_ARGS% >cmake_eval.out"
 	::set "CMAKE_ARGS=%CMAKE_ARGS% 2>cmake_eval.err"
-  
+
 	::### call the cmake command ###
 	echo "%CMAKE_EXE%" %CMAKE_ARGS%
 	"%CMAKE_EXE%" %CMAKE_ARGS%
 
-::	###### IMPORT VARIABLES ######
+	::###### IMPORT VARIABLES ######
 	if not defined DKRETURN (%return%)
 	%dk_call% dk_importVars
-	
-	
-	
+
 ::  ## these lines are deprecated ###
 ::  if not defined DKRETURN %return%
 ::  if not exist %DKCMAKE_DIR%\cmake_vars.cmd %return%

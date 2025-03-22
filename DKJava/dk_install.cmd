@@ -5,30 +5,30 @@ if "%~1" equ "" (goto :dk_install)
 	set "COMPILER_EXE=%~1"
 	if not defined COMPILER_EXE (echo ERROR: COMPILER_EXE is invalid)
 	
-	set "DKCSharp_FILE=%~2"
-	if not defined DKCSharp_FILE (echo ERROR: DKCSharp_FILE is invalid)
+	set "DKJava_FILE=%~2"
+	if not defined DKJava_FILE (echo ERROR: DKJava_FILE is invalid)
 	
 	:: get the app name
-	for %%Z in ("%DKCSharp_FILE%") do (set "APP=%%~nZ")
+	for %%Z in ("%DKJava_FILE%") do (set "APP=%%~nZ")
 	
 	::###### Compile Code ######
 	echo compiling ...
 	if exist %APP%.exe (del %APP%.exe)
 
-	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKCSharp_FILE%
-	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKCSharp_FILE%
-	%COMPILER_EXE% /nologo /out:%APP%.exe *.cs
+	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKJava_FILE%
+	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKJava_FILE%
+	%COMPILER_EXE% /nologo /out:%APP%.exe *.java
 	
 	if not exist "%APP%.exe" (
 		echo: 
-		echo ERROR: compilation of %DKCSharp_FILE% failed.
+		echo ERROR: compilation of %DKJava_FILE% failed.
 		pause
 		goto:eof
 	)
 	
 	::###### run executable ######
 	cls
-	title %DKCSharp_FILE%
+	title %DKJava_FILE%
     %COMSPEC% /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
@@ -70,7 +70,7 @@ if "%~1" equ "" (goto :dk_install)
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Install DKCSharp ######
-	%dk_call% dk_echo "Installing DKCSharp . . ."
+	%dk_call% dk_echo "Installing DKJava . . ."
 	
 	::###### COMPILER_EXE ######
 	:: find csc.exe
@@ -80,5 +80,5 @@ if "%~1" equ "" (goto :dk_install)
 	ftype DKJava=%COMSPEC% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	assoc .java=DKJava
 	
-	%dk_call% dk_success "DKCSharp install complete"
+	%dk_call% dk_success "DKJava install complete"
 %endfunction%
