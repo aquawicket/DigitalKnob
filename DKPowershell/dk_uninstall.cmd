@@ -3,10 +3,39 @@ if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/fu
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 :dk_uninstall
-	ftype DKPowershell=
-	%dk_call% dk_registryDeleteKey "HKCR/DKPowershell"
+setlocal
+	%dk_call% dk_debugFunc 0
 	
-	assoc .ps1=
-	%dk_call% dk_registryDeleteKey "HKCR/.ps1"
-	%dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.ps1"
+	set "ftype=DKPowershell"
+	set "assoc=ps1"
+	
+	(ftype %ftype% 2>nul) && (ftype %ftype%=)
+	%dk_call% dk_registryKeyExists "HKCR/%ftype%" && %dk_call% dk_registryDeleteKey "HKCR/%ftype%" || (call )
+
+	(assoc .%assoc% 2>nul) && (assoc .%assoc%=)
+	%dk_call% dk_registryKeyExists "HKCR/.%assoc%" && %dk_call% dk_registryDeleteKey "HKCR/.%assoc%" || (call )
+	%dk_call% dk_registryKeyExists "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.%assoc%" && %dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.%assoc%" || (call )
+
+	::###### RESTORE DEFAULTS ######
+	::ftype %assoc%file="%%1" %%*
+	::assoc .%assoc%=%assoc%file
+	::%dk_call% dk_registrySetKey "HKLM/SOFTWARE/Classes/.%assoc%" "" "REG_SZ" "%assoc%file"
+	::%dk_call% dk_registrySetKey "HKLM/SOFTWARE/Classes/%assoc%file/shell/open/command" "" "REG_SZ" "\"%%1\" %*"
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+setlocal
+	%dk_call% dk_debugFunc 0
+
+	call :dk_uninstall
 %endfunction%

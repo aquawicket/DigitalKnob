@@ -6,8 +6,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0
 	
-	set "ftype=DKCpp"
-	set "assoc=cpp"
+	set "ftype=DKJava"
+	set "assoc=java"
 	
 	(ftype %ftype% 2>nul) && (ftype %ftype%=)
 	%dk_call% dk_registryKeyExists "HKCR/%ftype%" && %dk_call% dk_registryDeleteKey "HKCR/%ftype%" || (call )
