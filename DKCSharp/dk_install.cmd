@@ -29,7 +29,7 @@ if "%~1" == "" (goto dk_install)
 	::###### run executable ######
 	cls
 	title %DKCSharp_FILE%
-    %COMSPEC% /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
+	"%COMSPEC%" /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
@@ -74,16 +74,10 @@ if "%~1" == "" (goto dk_install)
 	
 	::###### COMPILER_EXE ######
 	:: find csc.exe
-	set "csc="
-	for /r "%SystemRoot%\Microsoft.NET\Framework\" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
-	set "COMPILER_EXE=%CSC_EXE%"
-	%dk_call% dk_assertVar COMPILER_EXE
-
-	%dk_call% dk_registryDeleteKey "HKCR\DKCSharp"
-	ftype DKCSharp=%COMSPEC% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
-	
-	%dk_call% dk_registryDeleteKey "HKCR\.cs"
-	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cs"
+	for /r "%SystemRoot%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
+	set "COMPILER_EXE=%CSC_EXE:\=/%"
+	%dk_call% dk_assertPath COMPILER_EXE
+	ftype DKCSharp="%COMSPEC%" /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	assoc .cs=DKCSharp
 	
 	%dk_call% dk_success "DKCSharp install complete"

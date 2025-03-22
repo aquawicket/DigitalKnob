@@ -1,5 +1,5 @@
 @echo off
-if "%~1" == "" (goto dk_install)
+if "%~1" equ "" (goto :dk_install)
 
 :runDKCSharp
 	set "COMPILER_EXE=%~1"
@@ -63,7 +63,7 @@ if "%~1" == "" (goto dk_install)
 
 
 :dk_install
-	if not "%~1"=="" (goto:eof)
+	if "%~1" neq "" (goto:eof)
 	
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
@@ -74,17 +74,11 @@ if "%~1" == "" (goto dk_install)
 	
 	::###### COMPILER_EXE ######
 	:: find csc.exe
-	set "csc="
-	for /r "%SystemRoot%\Microsoft.NET\Framework\" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
+	for /r "%SystemRoot%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
 	set "COMPILER_EXE=%CSC_EXE%"
 	%dk_call% dk_assertVar COMPILER_EXE
-
-	%dk_call% dk_registryDeleteKey "HKCR\DKCSharp"
-	ftype DKCSharp=%COMSPEC% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
-	
-	%dk_call% dk_registryDeleteKey "HKCR/.cs"
-	%dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.cs"
-	assoc .cs=DKCSharp
+	ftype DKJava=%COMSPEC% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
+	assoc .java=DKJava
 	
 	%dk_call% dk_success "DKCSharp install complete"
 %endfunction%

@@ -6,7 +6,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::############################################################################
 ::# dk_install()
 ::#
-:dk_uninstall
+:dk_install
 setlocal
 	%dk_call% dk_debugFunc 0
 
@@ -15,9 +15,9 @@ setlocal
 	echo ############ Install DK languages ############
 	call %DKBRANCH_DIR%/DKBash/dk_install.cmd
 	call %DKBRANCH_DIR%/DKBatch/dk_install.cmd
-	call %DKBRANCH_DIR%/DKC/dk_install.cmd
+	::call %DKBRANCH_DIR%/DKC/dk_install.cmd
 	call %DKBRANCH_DIR%/DKCMake/dk_install.cmd
-	call %DKBRANCH_DIR%/DKCpp/dk_install.cmd
+	::call %DKBRANCH_DIR%/DKCpp/dk_install.cmd
 	call %DKBRANCH_DIR%/DKCSharp/dk_install.cmd
 	call %DKBRANCH_DIR%/DKHta/dk_install.cmd
 	call %DKBRANCH_DIR%/DKHtml/dk_install.cmd

@@ -17,7 +17,7 @@ setlocal
 	call %DKBRANCH_DIR%/DKC/dk_uninstall.cmd
 	call %DKBRANCH_DIR%/DKCMake/dk_uninstall.cmd
 	call %DKBRANCH_DIR%/DKCpp/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKCSharp/dk_install.cmd
+	call %DKBRANCH_DIR%/DKCSharp/dk_uninstall.cmd
 	call %DKBRANCH_DIR%/DKHta/dk_uninstall.cmd
 	call %DKBRANCH_DIR%/DKHtml/dk_uninstall.cmd
 	call %DKBRANCH_DIR%/DKJava/dk_uninstall.cmd
@@ -31,11 +31,7 @@ setlocal
 	call %DKBRANCH_DIR%/3rdParty/_DKIMPORTS/git/contextMenu/dk_uninstall.cmd
 
 %endfunction%
-	goto:eof
 	::##############################################################
-
-	echo:
-	echo ############ Run Uninstallers ############
 
 	echo:
 	echo ### Uninstalling Microsoft Visual Studio BuildTools ###
@@ -84,84 +80,84 @@ setlocal
 	%dk_call% dk_delete "%DKCACHE_DIR%"
 %endfunction%
 
-:DKUninstallExt extension
-	if "%~1"==".bat"	(call :DKRemoveFtype DKBash)
-	if "%~1"==".c"		(call :DKRemoveFtype DKC)
-	if "%~1"==".cmake"	(call :DKRemoveFtype DKCmake)
-	if "%~1"==".cmd"	(call :DKRemoveFtype DKBatch)
-	if "%~1"==".cpp"	(call :DKRemoveFtype DKCpp)
-	if "%~1"==".cs"		(call :DKRemoveFtype DKCSharp)
-	if "%~1"==".hta"	(call :DKRemoveFtype DKHta)
-	if "%~1"==".html"	(call :DKRemoveFtype DKHtml)
-	if "%~1"==".java"	(call :DKRemoveFtype DKJava)
-	if "%~1"==".js"		(call :DKRemoveFtype DKJavascript)
-	if "%~1"==".php"	(call :DKRemoveFtype DKPhp)
-	if "%~1"==".ps1"	(call :DKRemoveFtype DKPowershell)
-	if "%~1"==".py"		(call :DKRemoveFtype DKPython)
-	if "%~1"==".sh"		(call :DKRemoveFtype DKBash)
-	if "%~1"==".vbs"	(call :DKRemoveFtype DKVb)
+:::DKUninstallExt extension
+::	if "%~1"==".bat"	(call :DKRemoveFtype DKBash)
+::	if "%~1"==".c"		(call :DKRemoveFtype DKC)
+::	if "%~1"==".cmake"	(call :DKRemoveFtype DKCmake)
+::	if "%~1"==".cmd"	(call :DKRemoveFtype DKBatch)
+::	if "%~1"==".cpp"	(call :DKRemoveFtype DKCpp)
+::	if "%~1"==".cs"		(call :DKRemoveFtype DKCSharp)
+::	if "%~1"==".hta"	(call :DKRemoveFtype DKHta)
+::	if "%~1"==".html"	(call :DKRemoveFtype DKHtml)
+::	if "%~1"==".java"	(call :DKRemoveFtype DKJava)
+::	if "%~1"==".js"		(call :DKRemoveFtype DKJavascript)
+::	if "%~1"==".php"	(call :DKRemoveFtype DKPhp)
+::	if "%~1"==".ps1"	(call :DKRemoveFtype DKPowershell)
+::	if "%~1"==".py"		(call :DKRemoveFtype DKPython)
+::	if "%~1"==".sh"		(call :DKRemoveFtype DKBash)
+::	if "%~1"==".vbs"	(call :DKRemoveFtype DKVb)
+::
+::	(call :DKRemoveAssoc %~1)
+::	(call :DKRestoreDefault %~1)
+::%endfunction%
 
-	(call :DKRemoveAssoc %~1)
-	(call :DKRestoreDefault %~1)
-%endfunction%
+:::DKRemoveFtype ftype_name
+::	(ftype %~1 2>nul) && (ftype %~1=)
+::	%dk_call% dk_registryDeleteKey "HKCR\%~1"
+::%endfunction%
 
-:DKRemoveFtype ftype_name
-	(ftype %~1 2>nul) && (ftype %~1=)
-	%dk_call% dk_registryDeleteKey "HKCR\%~1"
-%endfunction%
+:::DKRemoveAssoc assoc_ext
+::	(assoc %~1=)
+::	%dk_call% dk_registryDeleteKey "HKCR\%~1"
+::	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%~1"
+::%endfunction%
 
-:DKRemoveAssoc assoc_ext
-	(assoc %~1=)
-	%dk_call% dk_registryDeleteKey "HKCR\%~1"
-	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%~1"
-%endfunction%
-
-:DKRestoreDefault extension
-	::### .bat ###
-	if "%~1"==".bat" (
-		(ftype batfile="%%1" %%*)
-		(assoc .bat=batfile)
-	)
-	::### .c ###
-	::### .cmake ###
-	::### .cmd ###
-	if "%~1"==".cmd" (
-		(ftype cmdfile="%%1" %%*)
-		(assoc .cmd=cmdfile)
-		rem %windir%\system32\reg.exe import "%DKBATCH_DIR%\default.reg"
-	)
-	::### .cpp ###
-	::### .cs ###
-	::### .hta ###
-	::### .html ###
-	if "%~1"==".html" (
-		(ftype htmlfile="C:\Program Files\Internet Explorer\iexplore.exe" %%1)
-		(assoc .html=htmlfile)
-		rem %windir%\system32\reg.exe import "%DKHTML_DIR%\default.reg"
-	)
-	::### .java ###
-	::### .js ###
-	if "%~1"==".js" (
-		(ftype JSFile=%WINDIR%\System32\WScript.exe "%%1" %%*)
-		(assoc .js=JSFile)
-		rem %windir%\system32\reg.exe import "%DKJAVASCRIPT_DIR%\default.reg"
-	)
-	::### .php ###
-	::### .ps1 ###
-	if "%~1"==".ps1" (
-		(ftype Microsoft.PowerShellScript.1="%WINDIR%\System32\notepad.exe" "%%1")
-		(assoc .ps1=Microsoft.PowerShellScript.1)
-		rem %windir%\system32\reg.exe import "%DKPOWERSHELL_DIR%\default.reg"
-	)
-	::### .py ###
-	::### .sh ###
-	::### .vbs ###
-	if "%~1"==".vbs" (
-		(ftype VBSFile="%%SystemRoot%%\System32\WScript.exe" "%%1" %%*)
-		(assoc .vbs=VBSFile)
-		rem %windir%\system32\reg.exe import "%DKVB_DIR%\default.reg"
-	)
-%endfunction%
+:::DKRestoreDefault extension
+::	::### .bat ###
+::	if "%~1"==".bat" (
+::		(ftype batfile="%%1" %%*)
+::		(assoc .bat=batfile)
+::	)
+::	::### .c ###
+::	::### .cmake ###
+::	::### .cmd ###
+::	if "%~1"==".cmd" (
+::		(ftype cmdfile="%%1" %%*)
+::		(assoc .cmd=cmdfile)
+::		rem %windir%\system32\reg.exe import "%DKBATCH_DIR%\default.reg"
+::	)
+::	::### .cpp ###
+::	::### .cs ###
+::	::### .hta ###
+::	::### .html ###
+::	if "%~1"==".html" (
+::		(ftype htmlfile="C:\Program Files\Internet Explorer\iexplore.exe" %%1)
+::		(assoc .html=htmlfile)
+::		rem %windir%\system32\reg.exe import "%DKHTML_DIR%\default.reg"
+::	)
+::	::### .java ###
+::	::### .js ###
+::	if "%~1"==".js" (
+::		(ftype JSFile=%WINDIR%\System32\WScript.exe "%%1" %%*)
+::		(assoc .js=JSFile)
+::		rem %windir%\system32\reg.exe import "%DKJAVASCRIPT_DIR%\default.reg"
+::	)
+::	::### .php ###
+::	::### .ps1 ###
+::	if "%~1"==".ps1" (
+::		(ftype Microsoft.PowerShellScript.1="%WINDIR%\System32\notepad.exe" "%%1")
+::		(assoc .ps1=Microsoft.PowerShellScript.1)
+::		rem %windir%\system32\reg.exe import "%DKPOWERSHELL_DIR%\default.reg"
+::	)
+::	::### .py ###
+::	::### .sh ###
+::	::### .vbs ###
+::	if "%~1"==".vbs" (
+::		(ftype VBSFile="%%SystemRoot%%\System32\WScript.exe" "%%1" %%*)
+::		(assoc .vbs=VBSFile)
+::		rem %windir%\system32\reg.exe import "%DKVB_DIR%\default.reg"
+::	)
+::%endfunction%
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
