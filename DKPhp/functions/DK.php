@@ -8,7 +8,8 @@ header('Access-Control-Allow-Origin: *');
 #
 
 function DK(){
-	echo "DK()\n";
+	#dk_debugFunc();
+	echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
 
 	$COMSPEC = getenv('COMSPEC');
 	if(isset($COMSPEC)){
@@ -38,4 +39,15 @@ function DK(){
 }
 DK();
 
+
+
+
+####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+if(!function_exists('DKTEST')){
+	function DKTEST(){ 
+		#dk_debugFunc();
+
+		DK();
+	}
+}
 ?>

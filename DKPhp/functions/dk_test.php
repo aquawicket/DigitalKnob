@@ -7,11 +7,11 @@ include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Develop
 #
 function dk_test(){
 	#dk_debugFunc 0 99
-
+	echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
+	
 	$argv = func_get_args();
 	$argv_str = implode(";", $argv);
-	
-	echo "################ dk_test.sh ################\n";
+
 	if(isset($test))	{	echo "                 test = $test\n";}
 	if(isset($argv[0]))	{	echo "              argv[0] = $argv[0]\n";}
 	if(isset($argv[1]))	{	echo "              argv[1] = $argv[1]\n";}
@@ -26,12 +26,16 @@ function dk_test(){
 	if(isset($argv_str)){	echo "                 argv = $argv_str\n";}
 							echo "                 time = ".time()."\n";
 							echo "                 argv = ".implode(";", $argv)."\n";
-#	echo "           __CALLER__ = $(__CALLER__)\n";
-#	echo "             __FILE__ = $(__FILE__)\n";
-#	echo "             __LINE__ = $(__LINE__)\n";
-#	echo "         __FUNCTION__ = $(__FUNCTION__ 1)\n";
-#	echo "             __ARGC__ = $(__ARGC__ 1)\n";
-#	echo "             __ARGV__ = $(__ARGV__ 1)\n";
+							echo "             __LINE__ = ".__LINE__."\n";
+							echo "             __FILE__ = ".__FILE__."\n";
+							echo "              __DIR__ = ".__DIR__."\n";
+							echo "         __FUNCTION__ = ".__FUNCTION__."\n";
+							echo "            __CLASS__ = ".__CLASS__."\n";
+							echo "            __TRAIT__ = ".__TRAIT__."\n";
+							echo "           __METHOD__ = ".__METHOD__."\n";
+							#echo "         __PROPERTY__ = ".__PROPERTY__."\n";
+							echo "        __NAMESPACE__ = ".__NAMESPACE__."\n";
+
 #	echo "        DKSCRIPT_PATH = ${DKSCRIPT_PATH-}\n";
 #	echo "         DKSCRIPT_DIR = ${DKSCRIPT_DIR-}\n";
 #	echo "        DKSCRIPT_FILE = ${DKSCRIPT_FILE-}\n";

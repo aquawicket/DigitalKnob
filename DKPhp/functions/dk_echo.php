@@ -7,6 +7,7 @@ include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Develop
 #
 function dk_echo(){
 	#dk_debugFunc();
+	echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
 
 	$argv = func_get_args();
 	$argv_str = implode(";", $argv);
@@ -32,14 +33,14 @@ function dk_echo(){
 
 
 
-
-
 ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
-function DKTEST(){ 
-	#dk_debugFunc();
+if(!function_exists('DKTEST')){
+	function DKTEST(){ 
+		#dk_debugFunc();
 
-	$ret = dk_echo("testing dk_echo()", "abc", 123);
-	echo "dk_echo():ret = $ret\n";
+		$ret = dk_echo("testing dk_echo()", "abc", 123);
+		echo "dk_echo():ret = $ret\n";
+	}
 }
 
 ?>
