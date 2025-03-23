@@ -1,6 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-include_once("DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 
 ##################################################################################
 # dk_echo()

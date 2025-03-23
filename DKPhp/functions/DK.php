@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 
 ##################################################################################
-# dk_realpath(path) -> rtn_var
+# DK()
 #
 #	PHP: https://www.php.net/manual/en/function.realpath.php
 #

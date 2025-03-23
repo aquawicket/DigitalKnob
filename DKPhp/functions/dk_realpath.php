@@ -1,8 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-include("DK.php");
-#include(${DKPHP_FUNCTIONS_DIR}/DK.php)
-#include_guard()
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 
 ##################################################################################
 # dk_realpath(path) -> rtn_var
