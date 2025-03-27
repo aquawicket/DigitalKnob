@@ -10,7 +10,7 @@ if defined %~1   %return%
 :dk_assertVar
 setlocal
 	%dk_call% dk_debugFunc 1
-	
+
 	%dk_call% dk_fatal "ASSERTION: dk_assertVar(%*): %~1 not defined"
 %endfunction%
 
