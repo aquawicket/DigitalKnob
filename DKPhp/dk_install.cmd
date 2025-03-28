@@ -14,7 +14,8 @@ if "%~1" equ "" (goto:dk_install)
 	::echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 
 	::###### run script ######'
-	"%COMSPEC%" /V:ON /K call "%PHP_EXE%" -r "include('%DKSCRIPT_PATH:\=/%');DKTEST();"
+	"%COMSPEC%" /V:ON /K call "%PHP_EXE%" "%DKSCRIPT_PATH%"
+	::"%COMSPEC%" /V:ON /K call "%PHP_EXE%" -r "include('%DKSCRIPT_PATH:\=/%');DKTEST();"
 	::###### exit_code ######
 ::	if %ERRORLEVEL% neq 0 (
 ::		echo ERROR:%ERRORLEVEL%
