@@ -150,7 +150,9 @@ function dk_log(){
 	#dk_debugFunc(1 2)
 	#echo("###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n");
 
-	$argv = func_get_args();
+	if(!isset($argv)){
+		$argv = func_get_args();
+	}
 
 	if(isset($argv[1])){
 		echo("$argv[1]\n");
@@ -165,9 +167,8 @@ function dk_log(){
 
 
 
-
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-//if($GLOBALS['DKSCRIPT_PATH'] == __FILE__) {
+if($GLOBALS['DKSCRIPT_PATH'] == __FILE__){
 	echo("loading dk_log.php:DKTEST()\n");
 	function DKTEST() { 
 		#dk_debugFunc(0)
@@ -185,4 +186,4 @@ function dk_log(){
 		dk_log("ERROR",			"test dk_log ERROR message");
 		dk_log("FATAL",			"test dk_log FATAL message");
 	}
-//}
+}

@@ -1,4 +1,5 @@
 <?php
+echo "###### ".basename(__FILE__)." ######\n";
 //header('Access-Control-Allow-Origin: *');
 include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 
