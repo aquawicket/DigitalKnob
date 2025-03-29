@@ -1,14 +1,10 @@
 <?php
-echo "###### ".basename(__FILE__)." ######\n";
-//header('Access-Control-Allow-Origin: *');
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 
 ##################################################################################
 # dk_echo()
 #
 function dk_echo(){
 	#dk_debugFunc();
-	echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
 
 	$argv = func_get_args();
 	$argv_str = implode(";", $argv);
@@ -34,14 +30,13 @@ function dk_echo(){
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
-if(!function_exists('DKTEST')){
-	function DKTEST(){ 
-		#dk_debugFunc();
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+if(!function_exists('DKTEST')){ function DKTEST() {
+	#dk_debugFunc();
 
-		$ret = dk_echo("testing dk_echo()", "abc", 123);
-		echo "dk_echo():ret = $ret\n";
-	}
-}
+	$ret = dk_echo("testing dk_echo()", "abc", 123);
+	echo "dk_echo():ret = $ret\n";
+}}
 
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 ?>

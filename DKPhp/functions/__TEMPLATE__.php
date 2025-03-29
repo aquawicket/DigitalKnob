@@ -1,6 +1,4 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 
 ##################################################################################
 # __TEMPLATE__()
@@ -19,10 +17,22 @@ function __TEMPLATE__(){
 
 
 
+
+
+
+
+
+
+
+
+
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-function DKTEST() { 
+if(!function_exists('DKTEST')){ function DKTEST() {
 	#dk_debugFunc 0
 
 	__TEMPLATE__(123, "abc");
+}}
 
-}
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
+
+?>

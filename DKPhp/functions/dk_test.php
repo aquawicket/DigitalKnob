@@ -1,7 +1,4 @@
 <?php
-echo "###### ".basename(__FILE__)." ######\n";
-//header('Access-Control-Allow-Origin: *');
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 
 ##################################################################################
 # dk_test()
@@ -74,7 +71,7 @@ function dk_test(){
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-function DKTEST() { 
+if(!function_exists('DKTEST')){ function DKTEST() {
 	#dk_call dk_debugFunc 0
 
 	dk_test("from DKTEST()", "to dk_test()");
@@ -90,4 +87,8 @@ function DKTEST() {
 #	echo "";
 #	echo "GLOBAL_VAR = ${GLOBAL_VAR}";
 #	echo "RETURN_VAR = ${RETURN_VAR}";
-}
+}}
+
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
+
+?>

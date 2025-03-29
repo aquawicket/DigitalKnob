@@ -1,6 +1,4 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 
 ##################################################################################
 # dk_realpath(path) -> rtn_var
@@ -26,12 +24,13 @@ function dk_realpath(){
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
-function DKTEST(){ 
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+if(!function_exists('DKTEST')){ function DKTEST() {
 	#dk_debugFunc();
 	
 	echo dk_realpath("notepad.exe");
+}}
 
-}
 
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 ?>
