@@ -7,13 +7,13 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 
-###### [app_name] ######
+###### ghost_toolbox ######
 # https://github.com/ovsky/ghost-open-toolbox
-# https://github.com/ovsky/ghost-open-toolbox/archive/refs/heads/complete.zip
-
 
 ### INSTALL ###
 #dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 #dk_getFileParam	($ENV{DKIMPORTS_DIR}/[app_name]/dkconfig.txt [APP_NAME]_IMPORT)
-dk_import			("https://github.com/ovsky/ghost-open-toolbox/archive/refs/heads/complete.zip")
+dk_import			("https://github.com/ovsky/ghost-open-toolbox/archive/b43ed1d2b3661eb1f76083330ba40e18bc9e36e8.zip")
 
+dk_copy	("${DK3RDPARTY_DIR}/ghost_toolbox-b43ed1d2b3661eb1f76083330ba40e18bc9e36e8" "C:/Ghost Toolbox")
+execute_process(COMMAND "C:\\Ghost Toolbox\\ghost-commandline\\Ghost Toolbox 1.9.0.56.bat")
