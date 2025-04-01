@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include_guard()
-if(NOT DKCMAKE_FUNCTIONS_DIR_)
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR_} ../../../DKCMake/functions/) # From this path to DK.cmake
 endif()
 if(NOT EXISTS $ENV{DKCMAKE_FUNCTIONS_DIR_})

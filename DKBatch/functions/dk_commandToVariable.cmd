@@ -13,50 +13,48 @@ setlocal enableDelayedExpansion
 
 	set "_command_=%*"
 
-	::###### _last_arg_ ######
-	for %%A in (%*) do set _last_arg_=%%A
-
+	::### set dk_commandToVariable[] array ###
 	set /a "i=0"
 	for /f "usebackq delims=" %%Z in (`%_command_% ^& call echo %%^^errorlevel%%`) do (
 		set "dk_commandToVariable[!i!]=%%Z"
 		set /a "i+=1"
 	)
-	%COMSPEC% /c exit /b 0
+	%COMSPEC% /c exit /b 0   &::NOTE:  what is this doing, why is it needed?
 
-	::### Final exit_status is stored in last line ###
-	set /a "i-=1"
-	set /a numLines=i-1
-	set /a exit_status = !dk_commandToVariable[%i%]!
-	set "dk_commandToVariable[%i%]="								&:: delete the error line from the array
-	set "dk_commandToVariable=!dk_commandToVariable[%numLines%]!"
-
-	::### Print the lines of the command ###
-	set /a "numLines=numLines-1"
-	for /l %%x in (0, 1, %numLines%) do (
-		echo !dk_commandToVariable[%%x]!
-		set "dk_commandToVariable[%%x]="
-	)
-	set /a "numLines=numLines+1"
-	set "dk_commandToVariable[%numLines%]="							&:: create an empty slot at the end of the array
-
-	::### WARNING ###
-	::%dk_call% dk_todo "dk_commandToVariable only returns the last line, or, array item from the command.
+	::### set dk_commandToVariable_exit_status ###
+	set /a "exit_status_line=i-1"
+	::set /a "dk_commandToVariable[%exit_status_line%]=13"   &::DEBUG: Test error return
+	set /a "dk_commandToVariable_exit_status=!dk_commandToVariable[%exit_status_line%]!"
+	set /a "dk_commandToVariable[%exit_status_line%]="   &:: clear the errorline from the array
+	
+	::### set dk_commandToVariable ###
+	set /a "last_output_line=i-2"
+	set "dk_commandToVariable=!dk_commandToVariable[%last_output_line%]!"
 
 	::############### Print call details ###############
 	if defined dk_commandToVariable_PRINT_COMMANDS (
 		echo #######################################################
-		echo ##     command:^> %*
-		if defined dk_commandToVariable (echo ##      output: %dk_commandToVariable%)
-		echo ## exit_status: %exit_status%
-		echo:##
+		echo ##                          command: = '%*'
+		echo ##
+		for /l %%x in (0, 1, %exit_status_line%) do (
+			if defined dk_commandToVariable[%%x] (
+		echo ##        dk_commandToVariable[%%x]: = !dk_commandToVariable[%%x]!
+			)
+		)
+		echo ##             dk_commandToVariable: = !dk_commandToVariable!
+		echo ## dk_commandToVariable_exit_status: = %dk_commandToVariable_exit_status%
+		echo ##
 	)
 	::##################################################
 
-	::### return the last line from the programs output ###
-	endlocal & (
-		set "dk_commandToVariable=%dk_commandToVariable%"
+	::### Return the array to the calling scope ###
+	set "currentScope=1"
+	for /F "delims=" %%b in ('set dk_commandToVariable') do (
+		if defined currentScope endlocal
+		set "%%b"
 	)
-%endfunction%
+exit /b %dk_commandToVariable_exit_status%
+::%endfunction%
 
 
 
@@ -68,12 +66,20 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_set myCommand ver
-	%dk_call% dk_commandToVariable "%myCommand%" RTNVAR
-	%dk_call% dk_printVar dk_commandToVariable
-	%dk_call% dk_printVar RTNVAR
+::	%dk_call% dk_set myCommand ver
+::	%dk_call% dk_commandToVariable "%myCommand%" RTNVAR
+::	%dk_call% dk_printVar dk_commandToVariable
+::	%dk_call% dk_printVar RTNVAR
 
-	%dk_call% dk_set myCommand ""%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three""
+::	%dk_call% dk_set myCommand ""%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three""
+::	%dk_call% dk_commandToVariable "%myCommand%"
+::	%dk_call% dk_printVar dk_commandToVariable
+	
+	%dk_call% dk_validate ADB_EXE "%dk_call% ANDROID::dk_ADB_EXE"
+	%dk_call% dk_set myCommand ""%ADB_EXE%" shell pm list packages" &::-f string
 	%dk_call% dk_commandToVariable "%myCommand%"
 	%dk_call% dk_printVar dk_commandToVariable
+	%dk_call% dk_echo "dk_commandToVariable = %dk_commandToVariable%"
+	%dk_call% dk_echo "dk_commandToVariable_exit_status = %dk_commandToVariable_exit_status%"
+
 %endfunction%

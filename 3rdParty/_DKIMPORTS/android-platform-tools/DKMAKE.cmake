@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-if(NOT DKCMAKE_FUNCTIONS_DIR_)
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR_} ../../../DKCMake/functions/)
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
@@ -50,7 +50,6 @@ elseif(ANDROID_HOST)
 	if(NOT GRADLE_USER_HOME)
 		dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 		dk_set(GRADLE_USER_HOME $ENV{DKDOWNLOAD_DIR}/.gradle) #TODO: move this into _DKIMPORTS as its own dependency
-		dk_printVar(GRADLE_USER_HOME)
 	endif()
 	dk_set(AAPT2 ${GRADLE_USER_HOME}/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
 	if(EXISTS ${AAPT2}/aapt2-7.0.3-7396180-linux.jar)
@@ -69,6 +68,7 @@ elseif(LINUX_HOST)
 	dk_import(${ANDROID_PLATFORM_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/platform-tools)
 endif()
 
+dk_set(ADB_EXE "${ANDROID_SDK}/platform-tools/adb.exe")
 # 34.0.3
 #WIN_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r34.0.3-windows.zip PATH ${ANDROID_SDK}/platform-tools)
 #MAC_HOST_dk_import(https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r34.0.3-darwin.zip PATH ${ANDROID_SDK}/platform-tools)

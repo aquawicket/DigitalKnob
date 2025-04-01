@@ -393,7 +393,7 @@ goto:eof
 
 
 :: List packages constaining string
-:: pm list packages -f string
+:: "%ADB%" shell pm list packages -f string
 
 ::Optional
 ::Theme Module ==> "com.android.thememanager.module"
