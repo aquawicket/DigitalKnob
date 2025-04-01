@@ -1,1 +1,1 @@
-ANT_DL=https://github.com/apache/ant/archive/146baef.zip
+ANT_IMPORT=https://github.com/apache/ant/archive/146baef.zip

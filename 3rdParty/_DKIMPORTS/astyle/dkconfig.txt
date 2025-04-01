@@ -1,4 +1,4 @@
-ASTYLE_DL=https://pilotfiber.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip
+ASTYLE_IMPORT=https://pilotfiber.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip
 
-#ASTYLE_DL=https://sourceforge.net/projects/astyle/files/astyle/astyle%203.1/AStyle_3.1_windows.zip
-#ASTYLE_DL=https://pilotfiber.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip?viasf=1
+#ASTYLE_IMPORT=https://sourceforge.net/projects/astyle/files/astyle/astyle%203.1/AStyle_3.1_windows.zip
+#ASTYLE_IMPORT=https://pilotfiber.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip?viasf=1
