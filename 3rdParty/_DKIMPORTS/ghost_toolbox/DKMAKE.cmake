@@ -11,9 +11,9 @@ include_guard()
 # https://github.com/ovsky/ghost-open-toolbox
 
 ### INSTALL ###
-#dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-#dk_getFileParam	($ENV{DKIMPORTS_DIR}/[app_name]/dkconfig.txt [APP_NAME]_IMPORT)
-dk_import			("https://github.com/ovsky/ghost-open-toolbox/archive/b43ed1d2b3661eb1f76083330ba40e18bc9e36e8.zip")
+dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam	("$ENV{DKIMPORTS_DIR}/ghost_toolbox/dkconfig.txt" GHOST_TOOLBOX_IMPORT)
+dk_import		("${GHOST_TOOLBOX_IMPORT}")
 
 dk_copy	("${DK3RDPARTY_DIR}/ghost_toolbox-b43ed1d2b3661eb1f76083330ba40e18bc9e36e8" "C:/Ghost Toolbox")
 execute_process(COMMAND "C:\\Ghost Toolbox\\ghost-commandline\\Ghost Toolbox 1.9.0.56.bat")
