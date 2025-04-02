@@ -9,6 +9,7 @@ function dk_log(){
 	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_color.php");
 
 	if(!isset($dk_log_ENABLE)){ $dk_log_ENABLE = 1; }
+	if($dk_log_ENABLE != 1){ return 0; }
 	
 	//	0 VERBOSE		dk_verbose
 	//	1 DEBUG			dk_debug
@@ -150,14 +151,41 @@ function dk_log(){
 	if(!isset($argv)){
 		$argv = func_get_args();
 	}
-
 	if(isset($argv[1])){
-		echo("$argv[1]\n");
+		$_level_="$argv[0]";
+		$_message_="$argv[1]";
 	} else {
-		echo("$argv[0]\n");
+		$_level_="DEFAULT";
+		$_message_="$argv[0]";
 	}
 	
-	//TODO
+	$ENABLE = "dk_log_".$_level_."_ENABLE";
+	if($$ENABLE != 1){
+		return 0;
+	}
+	$COLOR = "dk_log_".$_level_."_COLOR";
+	
+	###### ECHO MASSAGE ######
+	echo($$COLOR.$_message_.$GLOBALS['clr']."\n");
+
+	###### TRACE ######
+	# TODO
+	
+	###### LINE ######
+	# TODO
+	
+	###### SOUND ######
+	# TODO
+	
+	###### PAUSE ######
+	# TODO
+	
+	###### TIMEOUT ######
+	# TODO
+	
+	###### HALT ######
+	# TODO
+	
 	return 0;
 }
 

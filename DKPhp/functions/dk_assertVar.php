@@ -3,19 +3,16 @@
 ##################################################################################
 # dk_assertVar()
 #
-function dk_assertVar(){
-	#dk_debugFunc
-	echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
-	$argv = func_get_args();
-	if(isset($argv[0])){
-		//return 0;
+function dk_assertVar() {
+	if(!isset($argv)){
+		$argv = func_get_args();
 	}
-	echo "${$argv[0]}";
-	if(isset(${$argv[0]})){
+	
+    if (isset($argv[0])) {
 		return 0;
-	}
-	//TODO
-	echo "dk_fatal(ASSERTION: dk_assertVar(%*): $argv[0] not defined)\n";
+    }
+	
+	echo "dk_fatal(ASSERTION: dk_assertVar(): variable not defined)\n";
 	return -1;
 }
 
@@ -30,11 +27,9 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 	$testVar = "abc123";
 	dk_assertVar($testVar);
 	dk_assertVar("testVar");
-	dk_assertVar("nonexistent");
-	
-	//dk_assertVar($nonexistent);
+	dk_assertVar($nonexistent);
 }}
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
 ?>
