@@ -22,11 +22,11 @@ function dk_success() {
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-function DKTEST() {
-	#dk_infoFunc(0);
+if(!function_exists('DKTEST')){ function DKTEST() {
+	#dk_debugFunc 0
 
     dk_success("test dk_success message");
-}
+}}
 
 
 include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");

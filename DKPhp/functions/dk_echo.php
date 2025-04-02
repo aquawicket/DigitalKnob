@@ -9,7 +9,9 @@ function dk_echo(){
 	$argv = func_get_args();
 	$argv_str = implode(";", $argv);
 	$argc = func_num_args();
+	echo "$argv_str";
 
+	/*
 	echo "argc = $argc\n";
 	echo "argv = $argv_str\n";
 	if($argc > 0){ echo "argv[0] = $argv[0]\n"; }
@@ -22,7 +24,8 @@ function dk_echo(){
 	if($argc > 7){ echo "argv[7] = $argv[7]\n"; }
 	if($argc > 8){ echo "argv[8] = $argv[8]\n"; }
 	if($argc > 9){ echo "argv[9] = $argv[9]\n"; }
-
+	*/
+	
 	return 0;
 }
 
@@ -34,8 +37,10 @@ function dk_echo(){
 if(!function_exists('DKTEST')){ function DKTEST() {
 	#dk_debugFunc();
 
-	$ret = dk_echo("testing dk_echo()", "abc", 123);
-	echo "dk_echo():ret = $ret\n";
+	$ret = dk_echo("testing dk_echo()\n");
+
+	//$ret = dk_echo("testing dk_echo()", "abc", 123, "\n");
+	//echo "dk_echo():ret = $ret\n";
 }}
 
 include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");

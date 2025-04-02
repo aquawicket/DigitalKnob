@@ -7,7 +7,9 @@ function __TEMPLATE__(){
 	#dk_debugFunc
 	echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
 
-	$argv = func_get_args();
+	if(!isset($argv)){
+		$argv = func_get_args();
+	}
 
 	//TODO
 	return 0;

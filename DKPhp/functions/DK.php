@@ -59,9 +59,7 @@ function DK(){
 	###### DKTEST MODE ######
     //[ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
 	//dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || return 0
-    echo("\n");
-echo($GLOBALS['bg_magenta'].$GLOBALS['white']."###### DKTEST MODE ###### ${DKSCRIPT_FILE} ###### DKTEST MODE ######".$GLOBALS['clr']."\n");
-	echo("\n");
+	echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."###### DKTEST MODE ###### ${DKSCRIPT_FILE} ###### DKTEST MODE ######".$GLOBALS['clr']."\n\n");
     #dk_echo "${bg_RGB}20;20;20m"
     //dk_source "${DKSCRIPT_PATH}"
     #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
@@ -69,9 +67,7 @@ echo($GLOBALS['bg_magenta'].$GLOBALS['white']."###### DKTEST MODE ###### ${DKSCR
 	//if(function_exists('DKTEST')){
 		DKTEST();
 	//}
-    echo("\n");
-    echo($GLOBALS['bg_magenta'].$GLOBALS['white']."########################## END TEST ################################".$GLOBALS['clr']."\n");
-    echo("\n");
+    echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."########################## END TEST ################################".$GLOBALS['clr']."\n\n");
     //dk_exit 0
 }
 
