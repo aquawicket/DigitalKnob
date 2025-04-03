@@ -23,13 +23,13 @@ setlocal
 	
 	if not exist "%_from_%" (
 		%dk_call% dk_error "dk_rename: %_from_% not found"
-		%return%
+		dk_return
 	)
 	
 	if exist "%_to_%" (
 		if not "%OVERWRITE%"=="1" (
 			%dk_call% dk_error "dk_rename Cannot rename file. Destiantion already exists and OVERWRITE is not set"
-			%return%
+			dk_return
 		) 
 		%dk_call% dk_delete %_to_%
 	)

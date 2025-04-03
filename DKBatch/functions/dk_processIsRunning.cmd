@@ -10,7 +10,7 @@ setlocal
 	%dk_call% dk_debugFunc 2
 
     tasklist | find /i "%1" > nul
-    if "%ERRORLEVEL%"=="0" endlocal & set "%2=1" && %return%
+    if "%ERRORLEVEL%"=="0" endlocal & set "%2=1" && dk_return
     endlocal & set "%2=0"
 %endfunction%
 

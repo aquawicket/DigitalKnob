@@ -16,15 +16,15 @@ setlocal
  ::if "!DE!" equ "" (echo delayed expansion ON) else (echo delayed expansion OFF)
 	
     if not defined dk_printVar set "dk_printVar=1"
-    if "%dk_printVar%" neq "1" %return%
+    if "%dk_printVar%" neq "1" dk_return
     
-    %dk_call% dk_isVariableName "%~1" || %return%
+    %dk_call% dk_isVariableName "%~1" || dk_return
     
     :array
 		if not defined %~1[0] goto pointer
         set /a "n=0"
         :loop1
-            if not defined %~1[%n%] %return%
+            if not defined %~1[%n%] dk_return
 			
 			:: delayed expansion OFF
             if "!DE!" neq "" %dk_call% dk_echo "%cyan% ARRAY:%~1[%n%] =%blue% %%%~1[%n%]%% %clr%"
@@ -34,7 +34,7 @@ setlocal
 
             set /a n+=1
         goto :loop1 
-	%return%
+	dk_return
 
     :pointer
         if not defined %~1 goto undefined
@@ -50,7 +50,7 @@ setlocal
         if "!DE!" equ "" set "_ptrB_=!%~1!"
 		if "!DE!" equ "" if not defined !%~1! goto variable
 		if "!DE!" equ "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %_ptrB_% =%blue% !%_ptrB_%! %clr%"
-    %return%
+    dk_return
 
     :variable	
 		:: delayed expansion OFF
@@ -58,11 +58,11 @@ setlocal
 		
 		:: delayed expansion ON
 		if "!DE!" equ "" %dk_call% dk_echo "%cyan% VARIABLE:%~1 =%blue% !%~1! %clr%"
-    %return%
+    dk_return
 
     :undefined
         %dk_call% dk_echo "%cyan% %~1 =%red% UNDEFINED %clr%"
-	%return%
+	dk_return
 %endfunction%
 
 

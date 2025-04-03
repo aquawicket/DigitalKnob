@@ -33,6 +33,7 @@ setlocal
     %dk_call% dk_confirm && (echo "the confimation has passed") || (echo "the confimation has failed")
     
     ::###### abort in not confirmed type code
-    %dk_call% dk_confirm || (%return%)
+    ::%dk_call% dk_confirm || (%return%)
+	%dk_call% dk_confirm || (dk_return)
     echo "passed the confirmation, executing code after confirm"
 %endfunction%

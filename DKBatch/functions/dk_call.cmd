@@ -27,6 +27,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	(set __CMND__=!__CMND__:::=/!)		&:: Replace :: with /
 	(set __FILE__=%~dpnx1)
 	(set __FILE__=%__FILE__:\=/%)
+	(set __FILENAME__=%~nx1)
 	(set __FUNC__=%~n1)
 	set __ARGV__=%*
 	if defined __ARGV__ (set __ARGV__=!__ARGV__:*%1=!)
@@ -55,11 +56,11 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	if defined dk_call_PRINTCALLS (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__% %__ARGV__% && (
-		(set "LAST_ERROR_STATUS=!errorlevel!")
-		(set "exit_bool=0")
+		(set "LAST_STATUS=!errorlevel!")
+		(set "LAST_BOOL=0")
 	) || (
-		(set "LAST_ERROR_STATUS=!errorlevel!")
-		(set "exit_bool=1")
+		(set "LAST_STATUS=!errorlevel!")
+		(set "LAST_BOOL=1")
 	)
 ::###### Exit #############################################################################################
 
@@ -67,7 +68,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	if defined dk_call_PRINTEXIT (call :dk_call_PRINTEXIT)
 
 	call :popStack
-exit /b %LAST_ERROR_STATUS%
+exit /b %LAST_STATUS%
 
 
 
@@ -109,8 +110,8 @@ exit /b %LAST_ERROR_STATUS%
 ::	set endfunction=(call dk_getError^& !returns!^& exit /b !errorlevel!)
 ::	set return=(call dk_getError^& !returns!^& exit /b !errorlevel!)
 
-	set endfunction=(call dk_getError^& exit /b ^!errorlevel^!)
-	set return=(call dk_getError^& exit /b ^!errorlevel^!)
+	set endfunction=(call dk_return^& exit /b ^!errorlevel^!)
+	set return=(call dk_return^& exit /b ^!errorlevel^!)
 
 ::	set endfunction=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
 ::	set return=(call dk_getError^& !globalize!^& exit /b !errorlevel!)

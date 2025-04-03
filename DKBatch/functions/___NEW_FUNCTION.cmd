@@ -15,7 +15,7 @@ setlocal
 	
 	if exist %dk_inputBox%.cmd (
 		%dk_call% dk_notice "function %dk_inputBox% already exists"
-		%return%
+		goto :edit_textfile
 	)
 	
 	echo @echo off > 								"%dk_inputBox%.cmd"
@@ -51,6 +51,10 @@ setlocal
 	echo 	%%dk_call%% %dk_inputBox% >>			"%dk_inputBox%.cmd"
 	echo %%endfunction%% >> 						"%dk_inputBox%.cmd"
 	echo: >> 										"%dk_inputBox%.cmd"
+	
+	:edit_textfile
+	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_NOTEPADPP_EXE"
+	"%NOTEPADPP_EXE%" "%dk_inputBox%.cmd"
 %endfunction%
 
 

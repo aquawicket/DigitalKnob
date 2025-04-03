@@ -10,15 +10,15 @@ setlocal
 	%dk_call% dk_debugFunc 1  
     :: Method 1 - javascript (fastest)
     set /a "seconds=(%~1*1000)"
-    cscript /nologo /e:JScript "%~f0" "%seconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
+    cscript /nologo /e:JScript "%~f0" "%seconds%" %NO_STDERR% && dk_return || (call ) %NO_OUTPUT%
     
     :: Method 2 - dk_powershell
     set /a "seconds=%~1"
-    %dk_call% dk_powershell "Start-Sleep -Seconds %seconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
+    %dk_call% dk_powershell "Start-Sleep -Seconds %seconds%" %NO_STDERR% && dk_return || (call ) %NO_OUTPUT%
     
 ::  :: Method 3 - powershell directly
 ::  set /a "seconds=%~1"
-::  %dk_call% %POWERSHELL_EXE% -Command "Start-Sleep -Seconds %seconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
+::  %dk_call% %POWERSHELL_EXE% -Command "Start-Sleep -Seconds %seconds%" %NO_STDERR% && dk_return || (call ) %NO_OUTPUT%
     
     :: Method 4 - using ping
     set /a "seconds=(%~1+1)"

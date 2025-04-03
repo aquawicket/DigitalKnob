@@ -13,7 +13,8 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_validate DIGITALKNOB_DIR	"%dk_call% dk_DIGITALKNOB_DIR"
 	
 	if not exist "%DKDESKTOP_DIR%\digitalknob.lnk" (
-		%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" &rem OVERWRITE
+		::%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" &rem OVERWRITE
+		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%\digitalknob" "%DIGITALKNOB_DIR%" &rem OVERWRITE
 	)
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
 

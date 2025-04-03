@@ -182,19 +182,21 @@ setlocal enableDelayedExpansion
 
 	::###### TRACE ######
 	if "!dk_log_%_level_%_TRACE!" gtr "0" (
-		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** TRACE_ON_%_level_% ***"
 		%dk_call% dk_stacktrace
+		%dk_call% dk_echo "%clr%"
 	)
 
 	::###### LINE ######
 	if "!dk_log_%_level_%_LINE!" gtr "0" (
-		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** LINE_ON_%_level_% ***%clr%"
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** LINE_ON_%_level_% ***"
 		%dk_call% dk_showFileLine "%_callerpath%" "%_message_%"
+		%dk_call% dk_echo "%clr%"
 	)
 
 	::###### SOUND ######
 	if "!dk_log_%_level_%_SOUND!" gtr "0" (
-		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** SOUND_ON_%_level_% ***%clr%"
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** SOUND_ON_%_level_% ***"
 		%dk_call% Array::dk_push errorBeeps "440,500"
 		%dk_call% Array::dk_push errorBeeps "440,500"
 		%dk_call% Array::dk_push errorBeeps "440,500" 
@@ -214,25 +216,30 @@ setlocal enableDelayedExpansion
 		%dk_call% Array::dk_push errorBeeps "523,150" 
 		%dk_call% Array::dk_push errorBeeps "440,1000"
 		%dk_call% dk_beeps errorBeeps
+		%dk_call% dk_echo "%clr%"
 	)
 		
 	::###### PAUSE ######
 	if "!dk_log_%_level_%_PAUSE!" gtr "0" (
-		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** PAUSE_ON_%_level_% ***"
 		%dk_call% dk_pause
+		%dk_call% dk_echo "%clr%"
 	)
 	
 	::###### TIMEOUT ######
 	if "!dk_log_%_level_%_TIMEOUT!" gtr "0" (
-		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** TIMEOUT_ON_%_level_% ***%clr%"
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** TIMEOUT_ON_%_level_% ***"
 		%dk_call% dk_timeout !dk_log_%_level_%_TIMEOUT!
+		%dk_call% dk_echo "%clr%"
 	)
 	
 	::###### HALT ######
 	if "!dk_log_%_level_%_HALT!" gtr "0" (
-		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** HALT_ON_%_level_% ***"
 		%dk_call% dk_exit 13
+		%dk_call% dk_echo "%clr%"
 	)
+
 %endfunction%
 
 

@@ -22,17 +22,19 @@ setlocal enableDelayedExpansion
 		set "_recursive_=/R"
 	)
 
-	%dk_call% dk_commandToVariable where %_recursive_% %_pattern_% %_filename_% 2>nul
-	if defined dk_commandToVariable (
-		%dk_call% dk_assertPath %dk_commandToVariable:\=/%
-		set "dk_findProgram=%dk_commandToVariable:\=/%"
-	) else (
-		dk_return "dk_findProgram: %_filename_% not found"
+	%dk_call% dk_commandToVariable where %_recursive_% "%_pattern_%" "%_filename_%" 2>nul
+	if not defined dk_commandToVariable (
+		dk_return -1 "%_filename_% not found"
 	)
 
+	%dk_call% dk_assertPath "%dk_commandToVariable:\=/%"
+	set "dk_findProgram=%dk_commandToVariable:\=/%"
+
+	
 	endlocal & (
 		set "%~1=%dk_findProgram%"
 	)
+	dk_return
 %endfunction%
 
 
@@ -62,5 +64,8 @@ setlocal enableDelayedExpansion
 
 	%dk_call% dk_findProgram CMD_EXE "cmd.exe" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar CMD_EXE
+	
+	%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%" || %dk_call% dk_printLastError
+	%dk_call% dk_printVar NOTEPADPP_EXE
 
 %endfunction%

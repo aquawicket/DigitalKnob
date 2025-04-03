@@ -1,6 +1,0 @@
-if not "%errorlevel%"=="0" (
-	%dk_call% dk_error "%errorlevel% ERROR: in %__FILE__% %___FUNC___%[%__ARGV__%]"
-)
-if not "!errorlevel!"=="0" (
-	!dk_call! dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]"
-)

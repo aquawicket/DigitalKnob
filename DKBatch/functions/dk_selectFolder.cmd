@@ -8,7 +8,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 1
 	
-	set "MSHTA_EXE=%systemroot%/system32/mshta.exe"
+	set "MSHTA_EXE=%systemroot:\=/%/system32/mshta.exe"
     %dk_call% dk_assertPath MSHTA_EXE
 	
     for /f "usebackq delims=" %%i in (
@@ -18,7 +18,7 @@ setlocal
 	
     if not defined dk_selectFolder (
         %dk_call% dk_echo "no folder selected"
-        %return%
+        dk_return
     )
     
     endlocal & (
