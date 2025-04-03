@@ -1,16 +1,16 @@
 #pragma once
-#ifndef dk_cd_h
-#define dk_cd_h
+#ifndef dk_cd_hpp
+#define dk_cd_hpp
 
-#include "DK.h"
+#include "DK.hpp"
 
 
 //################################################################################
-//# dk_cd()
+//# dk_chdir()
 //#
 //# Reference: https://stackoverflow.com/a/3485200/688352
 //#
-int dk_cd(char* current_directory){
+int dk_chdir(char* current_directory){
 	
 	// TODO
 	return 1; //error
