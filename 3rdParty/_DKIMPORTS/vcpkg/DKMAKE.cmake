@@ -12,7 +12,7 @@ dk_load(dk_builder)
 
 dk_import(https://github.com/microsoft/vcpkg/archive/cff6ed45.zip)
 
-dk_cd(${VCPKG})
+dk_chdir(${VCPKG})
 
 if(WIN)
 	dk_queueCommand(bootstrap-vcpkg.bat)

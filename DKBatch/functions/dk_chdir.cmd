@@ -2,10 +2,10 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# dk_cd(directory)
+::# dk_chdir(directory)
 ::#
 ::#
-:dk_cd
+:dk_chdir
 setlocal
 	%dk_call% dk_debugFunc 0 1
 
@@ -18,11 +18,18 @@ setlocal
 
 
 
+
+
+
+
+
+
+
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	::%dk_call% dk_cd %DIGITALKNOB_DIR%
-	%dk_call% dk_cd C:/Windows
+	::%dk_call% dk_chdir %DIGITALKNOB_DIR%
+	%dk_call% dk_chdir C:/Windows
 %endfunction%

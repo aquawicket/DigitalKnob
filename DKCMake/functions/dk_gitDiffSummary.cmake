@@ -10,7 +10,7 @@ function(dk_gitDiffSummary)
 	dk_debugFunc(0)
   
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
-    dk_cd($ENV{DKBRANCH_DIR})
+    dk_chdir($ENV{DKBRANCH_DIR})
     
 	dk_depend(git)
 

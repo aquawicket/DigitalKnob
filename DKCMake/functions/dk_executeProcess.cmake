@@ -131,13 +131,13 @@ function(dk_executeProcess)
 	endif()
 	
 	### WORKING_DIRECTORY ###
-	# defaults to ${PWD} set by dk_cd(directory)
+	# defaults to ${PWD} set by dk_chdir(directory)
 	# since CMAKE doesn't use a default PWD or CD current directory, we make our own by keeping
 	# the PWD variable updated with the desired path. Any calls to execute_process
 	# will use value of that variable unless WORKING_DIRECTORY is specified in the function call.
 	if(NOT WORKING_DIRECTORY)
 		if(NOT PWD)
-			dk_cd($ENV{DIGITALKNOB_DIR})
+			dk_chdir($ENV{DIGITALKNOB_DIR})
 		endif()
 		list(APPEND ARGV WORKING_DIRECTORY "${PWD}") # add WORKING_DIRECTORY if missing
 	endif()

@@ -34,7 +34,7 @@ dk_resetAll() {
 	# Backup main script file to ${DKCACHE_DIR}
 	#dk_call dk_delete "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
 	dk_call dk_copy "${DKSCRIPT_PATH}" "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
-	dk_call dk_cd "${DKCACHE_DIR}"
+	dk_call dk_chdir "${DKCACHE_DIR}"
 	dk_call dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
 	dk_call dk_delete "${DKBRANCH_DIR}"
 	

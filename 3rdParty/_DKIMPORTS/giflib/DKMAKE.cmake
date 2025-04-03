@@ -68,7 +68,7 @@ else()
 	endif()
 	
 	### GENERATE / CONFIGURE ###
-	dk_cd			(${GIFLIB_DIR})
+	dk_chdir			(${GIFLIB_DIR})
 	dk_depend(bash)
 	dk_queueCommand	(${BASH_EXE} -c "autoreconf -f -i")
 

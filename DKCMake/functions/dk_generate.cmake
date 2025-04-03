@@ -19,7 +19,7 @@ function(dk_generate)
 	set(TARGET_PATH "$ENV{DKCPP_APPS_DIR}/${target_app}")
 	dk_printVar(TARGET_PATH)
 	dk_makeDirectory("${TARGET_PATH}/${target_triple}")
-	dk_cd("${TARGET_PATH}/${target_triple}")
+	dk_chdir("${TARGET_PATH}/${target_triple}")
 	set(CMAKE_SOURCE_DIR "$ENV{DKCMAKE_DIR}")
 	dk_assertPath(CMAKE_SOURCE_DIR)
 	set(CMAKE_TARGET_PATH "${TARGET_PATH}")
@@ -192,13 +192,13 @@ function(dk_generate)
 	
 	###### WSL CMake Fix ######
 	if(DEFINED WSLENV) 
-		dk_cd("$ENV{DKCMAKE_DIR}")
+		dk_chdir("$ENV{DKCMAKE_DIR}")
 		dk_arrayPush(CMAKE_ARGS ".")
 	endif()
 	
 	###### Cygwin CMake Fix ######
 	if(DEFINED CYGWIN) 
-		dk_cd("$ENV{DKCMAKE_DIR}")
+		dk_chdir("$ENV{DKCMAKE_DIR}")
 		dk_arrayPush(CMAKE_ARGS ".")
 	endif()
 	

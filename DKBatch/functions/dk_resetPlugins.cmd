@@ -13,7 +13,7 @@ setlocal
 
     %dk_call% dk_confirm || %return%
     
-    %dk_call% dk_cd %DKCPP_PLUGINS_DIR%
+    %dk_call% dk_chdir %DKCPP_PLUGINS_DIR%
     "%GIT_EXE%" -C %DKBRANCH_DIR% clean -f -d
 %endfunction%
 

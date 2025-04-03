@@ -30,7 +30,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		
 		::###### create and cd into install directory ######
 		%dk_call% dk_makeDirectory %REACTOS_DIR% 
-		%dk_call% dk_cd %REACTOS_DIR%
+		%dk_call% dk_chdir %REACTOS_DIR%
 		
 		::###### Install the OS to the .img file ######
 		::###### (Install from the running virtual OS) ######

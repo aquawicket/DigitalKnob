@@ -125,7 +125,7 @@ dk_validate(CONFIG_PATH   "dk_CONFIG_PATH()")
 ###############################################################
 dk_validate(ENV{DIGITALKNOB_DIR}  "dk_DIGITALKNOB_DIR()")
 
-dk_cd($ENV{DIGITALKNOB_DIR})
+dk_chdir($ENV{DIGITALKNOB_DIR})
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
 

@@ -144,7 +144,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 :: ###### WSL CMake Fix ######
 :: if defined WSLENV; then 
-::		%dk_call% dk_cd "$DKCMAKE_DIR"
+::		%dk_call% dk_chdir "$DKCMAKE_DIR"
 ::		set -- "$@" "."
 ::	fi
 	::if defined WSL_EXE (

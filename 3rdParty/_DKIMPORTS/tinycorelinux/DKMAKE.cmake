@@ -24,7 +24,7 @@ if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 
 	##### EAMPLE with tinycorelinux #####
 	# cd into install directory
-	dk_cd(${TINYCORELINUX})
+	dk_chdir(${TINYCORELINUX})
 
 	### Install the OS to the .img file
 	# (Install from the running virtual OS)

@@ -200,7 +200,7 @@ foreach(plugin ${dkdepend_list})
 #				dk_fatal("This is still being used")
 #				dk_set(QUEUE_BUILD ON)
 #				dk_info("************* Building ${plugin} *************")
-#				dk_cd(${plugin_path}/${CONFIG_PATH})
+#				dk_chdir(${plugin_path}/${CONFIG_PATH})
 #				
 #				if(MULTI_CONFIG)
 #					dk_fatal("This is still being used")

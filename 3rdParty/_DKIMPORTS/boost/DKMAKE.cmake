@@ -129,7 +129,7 @@ dk_set(BOOST_CMAKE -DBOOST_ROOT=${BOOST_DIR} -DBOOST_LIBRARYDIR=${BOOST_TRIPLE_D
 
 
 ### GENERATE ###
-dk_cd(${BOOST_DIR})
+dk_chdir(${BOOST_DIR})
 if(MSVC)
 	if(NOT EXISTS ${BOOST_DIR}/b2.exe)
 		WIN_HOST_dk_queueCommand(${BOOST_DIR}/bootstrap.bat vc143)
@@ -528,7 +528,7 @@ if(SHARED)
 #endif()
 
 #if(WIN)
-#	dk_cd(${BOOST_DIR})
+#	dk_chdir(${BOOST_DIR})
 #	dk_queueCommand(${BOOST_DIR}/bootstrap.bat)
 #	dk_queueCommand(${BOOST_DIR}/b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST_DEBUG_DIR} --stagedir=${BOOST_DEBUG_DIR})
 #	dk_queueCommand(${BOOST_DIR}/b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST_RELEASE_DIR} --stagedir=${BOOST_RELEASE_DIR})

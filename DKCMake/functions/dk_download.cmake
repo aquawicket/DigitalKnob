@@ -69,7 +69,7 @@ function(dk_download) # dest_path #NO_HALT
 		dk_makeDirectory("${dest_dir}")
 	endif()
 	dk_assertPath(dest_dir)
-	dk_cd("${dest_dir}")
+	dk_chdir("${dest_dir}")
 	#dk_printVar(dest_dir)
 	
 	dk_basename("${dest_path}" dest_filename)	# myFile.txt

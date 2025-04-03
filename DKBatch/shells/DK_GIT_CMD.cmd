@@ -8,7 +8,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 %dk_call% dk_validate GIT "%dk_call% dk_installGit"
 set "PATH=%GIT%\cmd;%PATH%"
 %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-%dk_call% dk_cd %DKBRANCH_DIR%
+%dk_call% dk_chdir %DKBRANCH_DIR%
 
 
 %dk_call% dk_clearScreen

@@ -37,7 +37,7 @@ setlocal
 
 		::###### create and cd into install directory ######
 		if not exist %WINPE_DIR% (%dk_call% dk_makeDirectory "%WINPE_DIR%")
-		%dk_call% dk_cd "%WINPE_DIR%"
+		%dk_call% dk_chdir "%WINPE_DIR%"
 
 		::###### Install the OS to the .img file ######
 		:: (Install from the running virtual OS)

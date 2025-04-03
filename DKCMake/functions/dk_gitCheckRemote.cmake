@@ -14,7 +14,7 @@ function(dk_gitCheckRemote)
 		#set(ahead -1)
 		#set(behind -1)
 		
-		dk_cd("$ENV{DKBRANCH_DIR}")
+		dk_chdir("$ENV{DKBRANCH_DIR}")
 		
 		dk_depend(git)
 

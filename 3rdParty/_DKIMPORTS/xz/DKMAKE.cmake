@@ -129,7 +129,7 @@ ANDROID_dk_cd				(${XZ}/${target_triple})
 ANDROID_dk_queueCommand			(${DKCMAKE_BUILD} ${XZ})
 ANDROID_dk_visualStudio			(${XZ} liblzma)
 
-dk_cd						(${XZ})
+dk_chdir						(${XZ})
 dk_queueCommand					(autoreconf -f -i)
 		
 UNIX_DEBUG_dk_cd			(${XZ_DEBUG_DIR})

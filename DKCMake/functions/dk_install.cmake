@@ -168,7 +168,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		dk_smartExtract("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}" "${PLUGIN_DIR}")
 
 	elseif(${FILETYPE} STREQUAL "Executable")
-		dk_cd(${PLUGIN_DL_DIR})
+		dk_chdir(${PLUGIN_DL_DIR})
 		dk_set(QUEUE_BUILD ON)
 		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}) # "dk_install():167")
 		

@@ -17,11 +17,11 @@ dk_depend(git)
 
 ### IMPORT ###
 dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
-dk_cd(${SMPEG2_DEBUG_DIR})
+dk_chdir(${SMPEG2_DEBUG_DIR})
 
 ### PATCH ###
 dk_gitApplyPatch(${SMPEG2} $ENV{DKIMPORTS_DIR}/smpeg2/gcc6.patch)
-dk_cd(${SMPEG2_DEBUG_DIR})
+dk_chdir(${SMPEG2_DEBUG_DIR})
 
 ### LINK ###
 dk_include				(${SMPEG2})

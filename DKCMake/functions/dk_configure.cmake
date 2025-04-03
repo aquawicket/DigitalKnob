@@ -28,7 +28,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_makeDirectory("${BINARY_DIR}")
 	dk_assertPath("${BINARY_DIR}")
 	
-	dk_cd("${BINARY_DIR}")
+	dk_chdir("${BINARY_DIR}")
 	# Configure with CMake		(multi_config / single_config)
 	
 	

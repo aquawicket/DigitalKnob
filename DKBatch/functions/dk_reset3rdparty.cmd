@@ -14,7 +14,7 @@ setlocal
     %dk_call% dk_confirm || %return%
     
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-    %dk_call% dk_cd %DK3RDPARTY_DIR%
+    %dk_call% dk_chdir %DK3RDPARTY_DIR%
     "%GIT_EXE%" -C %DKBRANCH_DIR% clean -f -d
 %endfunction%
 

@@ -15,7 +15,7 @@ function(dk_gitCommit)
 	dk_keyboardInput(commit_msg)
 	
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
-	dk_cd("$ENV{DKBRANCH_DIR}")
+	dk_chdir("$ENV{DKBRANCH_DIR}")
 	
 	execute_process(COMMAND "${GIT_EXE}" config credential.helper WORKING_DIRECTORY ${PWD} OUTPUT_VARIABLE STORE)
 	if(NOT STORE)

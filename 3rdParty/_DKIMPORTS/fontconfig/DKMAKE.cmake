@@ -38,7 +38,7 @@ endif()
 dk_set				(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG_INCLUDE_DIR} -DFONTCONFIG_LIBRARY=${FONTCONFIG_LIBRARY})
 
 ### GENERATE / COMPILE ###
-dk_cd				(${FONTCONFIG_DIR})
+dk_chdir				(${FONTCONFIG_DIR})
 #dk_queueCommand	(autoupdate)
 #dk_queueCommand	(autoconf)
 dk_configure		(${FONTCONFIG_DIR})

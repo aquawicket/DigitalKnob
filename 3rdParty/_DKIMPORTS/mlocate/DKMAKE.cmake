@@ -15,7 +15,7 @@ if(NOT UNIX_HOST OR ANDROID)
 endif()
 
 ### INSTALL ###
-dk_cd(/usr)
+dk_chdir(/usr)
 #dk_depend(sudo)
 #dk_command(${SUDO_EXE} apt -y install mlocate)
 dk_installPackage(mlocate)

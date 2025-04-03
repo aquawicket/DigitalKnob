@@ -14,7 +14,7 @@ if(NOT LINUX_HOST OR ANDROID_HOST)
 endif()
 
 ### INSTALL ###
-dk_cd(/usr)
+dk_chdir(/usr)
 #dk_depend(sudo)
 #dk_command(${SUDO_EXE} apt -y install rpm)
 dk_installPackage(rpm)
