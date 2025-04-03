@@ -18,10 +18,12 @@ function DK(){
 	}
 	
 	$DKSCRIPT_PATH = $argv[0];
+	$DKSCRIPT_DIR = dirname("${DKSCRIPT_PATH}");
 	$DKSCRIPT_FILE = basename("${DKSCRIPT_PATH}");
 	$DKSCRIPT_NAME = pathinfo($DKSCRIPT_FILE, PATHINFO_FILENAME);
 	$DKSCRIPT_EXT =	".".pathinfo($DKSCRIPT_FILE, PATHINFO_EXTENSION);
 	#echo("DKSCRIPT_PATH = ${DKSCRIPT_PATH}\n");
+	#echo("DKSCRIPT_DIR = ${DKSCRIPT_DIR}\n");
 	#echo("DKSCRIPT_FILE = ${DKSCRIPT_FILE}\n");
 	#echo("DKSCRIPT_NAME = ${DKSCRIPT_NAME}\n");
 	#echo("DKSCRIPT_EXT = ${DKSCRIPT_EXT}\n");
@@ -47,44 +49,14 @@ function DK(){
 	$USERPROFILE = getenv('USERPROFILE');
 	#echo "USERPROFILE = $USERPROFILE\n";
 	
-	### command ###
-	$output=null;
-	$retval=null;
-	exec('whoami', $output, $retval);
-	$WHOAMI = $output[0]; 
-	echo "Returned with status $retval and output:\n";
-	echo "WHOAMI = $WHOAMI\n";
-	
-	
 	###### DKTEST MODE ######
     //[ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
 	//dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || return 0
 	echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."###### DKTEST MODE ###### ${DKSCRIPT_FILE} ###### DKTEST MODE ######".$GLOBALS['clr']."\n\n");
-    #dk_echo "${bg_RGB}20;20;20m"
-    //dk_source "${DKSCRIPT_PATH}"
-    #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
-    #dk_call dk_echo "${clr}"
-	//if(function_exists('DKTEST')){
 		DKTEST();
-	//}
     echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."########################## END TEST ################################".$GLOBALS['clr']."\n\n");
-    //dk_exit 0
 }
 
-
-
-
-/*
-if($GLOBALS['DKSCRIPT_PATH'] == __FILE__){
-	echo("loading DK.php:DKTEST()\n");
-	function DKTEST(){ 
-		#dk_debugFunc();
-		DK();
-	}
-}
-*/
 
 DK("$argv[0]");
-
-
 ?>
