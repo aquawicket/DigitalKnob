@@ -7,8 +7,6 @@
 #
 #	PHP: https://www.php.net/manual/en/function.realpath.php
 #
-
-
 function DK(){
 	#dk_debugFunc();
 	#echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
