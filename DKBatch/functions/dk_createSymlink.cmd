@@ -23,7 +23,7 @@ setlocal
 	%dk_call% dk_isDirectory "%src_path%" && (set "/D=/D")
 	
 	::FIXME:  mklink is a internal command only in Windows Vista and up
-	mklink %/D% "%symlink_path%" "%src_path%"
+	mklink %/D% "%symlink_path:/=\%" "%src_path:/=\%"
 	
 	::### CMAKE ###
 ::	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
@@ -39,11 +39,11 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	::### Create a file symlink ###
-	%dk_call% dk_createSymlink "C:/Users/Administrator/Desktop/build_list.txt" "C:/Users/Administrator/digitalknob/Development/build_list.txt"
-	
 	::### Create a directory symlink ###
     %dk_call% dk_createSymlink "C:/Users/Administrator/Desktop/digitalknob" "C:/Users/Administrator/digitalknob"
+	
+	::### Create a file symlink ###
+	%dk_call% dk_createSymlink "C:/Users/Administrator/Desktop/DKBuilder.cmd" "C:/Users/Administrator/digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd" &rem OVERWRITE
 	
 	::### Test Non-Existent Error ###
     ::%dk_call% dk_createSymlink "C:/Users/Administrator/Desktop/Non-Existent" "C:/Non-Existent"

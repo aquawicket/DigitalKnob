@@ -49,6 +49,6 @@ if not defined dk_return (set "dk_return=dk_return")
 		if "%dk_return_PRINT%" equ "1" call dk_printLastError
 	)
 	
-	if "%dk_return_PRINT%" equ "1" call dk_printLastError
+	if "%dk_return_PRINT%" equ "1" dk_printLastError
 
 ::call exit /b %LAST_STATUS%

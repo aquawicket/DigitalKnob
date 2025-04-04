@@ -11,12 +11,18 @@ setlocal enableDelayedExpansion
 
 	%dk_call% dk_validate DKDESKTOP_DIR		"%dk_call% dk_DKDESKTOP_DIR"
 	%dk_call% dk_validate DIGITALKNOB_DIR	"%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DKBRANCH_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	
-	if not exist "%DKDESKTOP_DIR%\digitalknob.lnk" (
+	if not exist "%DKDESKTOP_DIR%/digitalknob" (
 		::%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" &rem OVERWRITE
-		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%\digitalknob" "%DIGITALKNOB_DIR%" &rem OVERWRITE
+		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%/digitalknob" "%DIGITALKNOB_DIR%" &rem OVERWRITE
 	)
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
+	
+	if not exist "%DKDESKTOP_DIR%/DKBuilder.cmd" (
+		::%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" &rem OVERWRITE
+		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" &rem OVERWRITE
+	)
 
 	::%dk_call% dk_assertPath DKSCRIPT_DIR
 	::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
