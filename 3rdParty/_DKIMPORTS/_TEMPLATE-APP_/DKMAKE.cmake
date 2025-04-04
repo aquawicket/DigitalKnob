@@ -11,7 +11,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
-###### [app_name] ######
+###### __app_name__ ######
 # http://www.app.com
 # http://www.app.com/downloads/app-1.0.exe
 
@@ -20,8 +20,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### INSTALL ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/[app_name]/dkconfig.txt [APP_NAME]_IMPORT)
-dk_import		(${[APP_NAME]})
+dk_getFileParam	($ENV{DKIMPORTS_DIR}/__APP_NAME__/dkconfig.txt __APP_NAME__IMPORT)
+dk_import		(${__APP_NAME__})
 
 
 #											Single Config										MULTI_CONFIG
