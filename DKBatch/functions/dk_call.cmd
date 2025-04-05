@@ -219,7 +219,8 @@ exit /b !errorlevel!
 ::#
 :pushStack file args
 	(set /a LVL+=1)
-	call :setGlobal __STACK__%LVL% %time% %*
+	call :setGlobal __STACK__%LVL% %*
+	::call :setGlobal __STACK__%LVL% %time% %*
 exit /b !errorlevel!
 
 ::####################################################################
