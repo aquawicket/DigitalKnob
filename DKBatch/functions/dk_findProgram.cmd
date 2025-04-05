@@ -24,13 +24,16 @@ setlocal enableDelayedExpansion
 
 	%dk_call% dk_commandToVariable where %_recursive_% "%_pattern_%" "%_filename_%" 2>nul
 	if not defined dk_commandToVariable (
-		dk_return -1 "%_filename_% not found"
+		if "%~4"=="NO_HALT" (
+			dk_return "%_filename_% not found"
+		) else ( 
+			dk_return -1 "%_filename_% not found"
+		)
 	)
 
 	%dk_call% dk_assertPath "%dk_commandToVariable:\=/%"
 	set "dk_findProgram=%dk_commandToVariable:\=/%"
 
-	
 	endlocal & (
 		set "%~1=%dk_findProgram%"
 	)

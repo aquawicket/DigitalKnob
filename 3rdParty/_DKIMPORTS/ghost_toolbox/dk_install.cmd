@@ -14,7 +14,7 @@ setlocal
 	%dk_call% dk_todo "implement dk_import.cmd"
 	::%dk_call% dk_import "https://github.com/ovsky/ghost-open-toolbox/archive/b43ed1d2b3661eb1f76083330ba40e18bc9e36e8.zip"
 	
-	%DKBATCH_DIR%\dk_cmakeEval.cmd "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')"
+	%dk_call% dk_cmakeEval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')"
 %endfunction%
 
 
