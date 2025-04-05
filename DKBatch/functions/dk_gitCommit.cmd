@@ -57,8 +57,6 @@ setlocal
     %dk_call% dk_confirm || (%return%)
     
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	::%dk_call% dk_chdir "%DKBRANCH_DIR%"
-	::echo CD = %CD%
     "%GIT_EXE%" -C %DKBRANCH_DIR% commit -a -m "%commit_msg%"
     "%GIT_EXE%" -C %DKBRANCH_DIR% push
 %endfunction%

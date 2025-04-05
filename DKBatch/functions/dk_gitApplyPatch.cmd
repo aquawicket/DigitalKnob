@@ -22,7 +22,7 @@ setlocal
 ::	"%PATCH_EXE%" --directory=%directory% < %patchFile% --verbose --dry-run
 	
 	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
-	"%GIT_EXE%" apply --verbose --no-index --unsafe-paths --directory=%directory% %patchFile%
+	"%GIT_EXE%" "-C %DKBRANCH_DIR% apply --verbose --no-index --unsafe-paths --directory=%directory% %patchFile%
 	
 %endfunction%
 
