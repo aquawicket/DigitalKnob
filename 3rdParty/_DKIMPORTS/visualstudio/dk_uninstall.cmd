@@ -15,7 +15,7 @@ setlocal
 	
 	echo:
 	echo ### Uninstalling visualstudio_installer ###
-	%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe" /uninstall
+	"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe" /uninstall
 %endfunction%
 
 
