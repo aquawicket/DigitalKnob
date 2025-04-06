@@ -10,19 +10,13 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0 1
 
-	for /f "tokens=* delims=" %%p in ('cmd /c mshta.exe "%~f0"') do (
-		set "dk_inputBox=%%p"
+	for /f "tokens=* delims=" %%A in ('cmd /c mshta.exe "%~f0"') do (
+		set "dk_inputBox=%%A"
 	)
-	if "%~1"=="" (
-		endlocal & (
-			set "dk_inputBox=%dk_inputBox%"
-			if "%1" neq "" set "%2=%dk_inputBox%"
-		)
-	) else (
-		endlocal & (
-			set "dk_inputBox=%dk_inputBox%"
-			if "%1" neq "" set "%2=%dk_inputBox%"
-		)
+	
+	endlocal & (
+		set "dk_inputBox=%dk_inputBox%"
+		if "%1" neq "" (set "%2=%dk_inputBox%")
 	)
 %endfunction%
 
@@ -37,7 +31,7 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_inputBox
-	%dk_call% dk_printVar dk_inputBox
+	%dk_call% dk_echo "dk_inputBox = %dk_inputBox%"
 %endfunction%
 
 -->

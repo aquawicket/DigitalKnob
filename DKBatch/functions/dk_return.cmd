@@ -5,7 +5,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 set /a "dk_return_PRINT=1"
 if not defined dk_return (set "dk_return=dk_return")
 ::################################################################################
-::dk_return()
+::dk_return(exit_code, message)
 ::#
 ::#		dk_return						pass
 ::#		dk_return -1					FIXME
@@ -20,6 +20,7 @@ if not defined dk_return (set "dk_return=dk_return")
 	::if 1%1 neq +1%1 (echo %~1 is not_numeric) else (echo %~1 is numeric)
 	
 	if "%~1" equ "" (
+		endlocal
 		set "dk_return_PRINT=%dk_return_PRINT%"
 		set "LAST_STATUS=%errorlevel%"
 		set "LAST_FILE=!__FILENAME__!"
