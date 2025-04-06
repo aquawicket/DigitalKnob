@@ -8,6 +8,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :dk_uninstall
 	%dk_call% dk_debugFunc 0
 	
+	echo:
+	echo ### Uninstalling wsl ###
 	%dk_call% dk_findProgram WSL_EXE wsl.exe
 	::%WSL_EXE% --uninstall
 	

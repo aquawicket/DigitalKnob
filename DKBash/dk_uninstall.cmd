@@ -6,6 +6,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0
 	
+	echo:
+	echo ############ Uninstalling DKBash #############
 	set "ftype=DKBash"
 	set "assoc=sh"
 	
