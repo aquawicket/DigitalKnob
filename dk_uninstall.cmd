@@ -44,15 +44,18 @@ setlocal
 	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
 	%dk_call% dk_copy "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%DKDESKTOP_DIR%/DKBuilder.cmd"
 
+	::###### Delete DK Simlinks ######
+	%dk_call% dk_delete "%DKDESKTOP_DIR%/digitalknob"
+
 	::###### Delete DK Directories ######
 	echo ### Deleting DKCACHE_DIR ###
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	%dk_call% dk_delete "%DKCACHE_DIR%"
 
+	echo ### Deleting DIGITALKNOB_DIR ###
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	echo Do you want to delete the digitalknob folder ?
 	%dk_call% dk_confirm || (exit /b 0)
-	echo ### Deleting DIGITALKNOB_DIR ###
 	%dk_call% dk_delete "%DIGITALKNOB_DIR%"
 %endfunction%
 
