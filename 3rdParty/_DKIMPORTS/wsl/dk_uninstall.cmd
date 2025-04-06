@@ -37,6 +37,10 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 		%dk_call% dism.exe /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux /norestart
 	)
 	
+	:: FIXME - is this needed
+	echo ### Uninstalling Windows Subsystem for Linux ###
+	MsiExec.exe /uninstall {AAAA4669-FCEF-4B2A-8355-1E0FA411A269} /quiet
+	
 	:: restart
 	shutdown /r /t 3
 %endfunction%

@@ -9,8 +9,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
 	%dk_call% dk_debugFunc 0
 
+	::###### Uninstall DK Languages ######
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-
 	echo ############ Uninstall DK languages ############
 	call %DKBRANCH_DIR%/DKBash/dk_uninstall.cmd
 	call %DKBRANCH_DIR%/DKBatch/dk_uninstall.cmd
@@ -27,57 +27,33 @@ setlocal
 	call %DKBRANCH_DIR%/DKPython/dk_uninstall.cmd
 	call %DKBRANCH_DIR%/DKVb/dk_uninstall.cmd
 
+	::###### Uninstall DK 3rdParty ######
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	echo ############ Uninstall 3rdParty #############
-	call %DKBRANCH_DIR%/3rdParty/_DKIMPORTS/git/contextMenu/dk_uninstall.cmd
+	call %DKIMPORTS_DIR%/git/contextMenu/dk_uninstall.cmd
+	call %DKIMPORTS_DIR%/visualstudio/dk_uninstall.cmd
+	call %DKIMPORTS_DIR%/windows-sdk/dk_uninstall.cmd
+	call %DKIMPORTS_DIR%/vs_coreeditorfonts/dk_uninstall.cmd
+	call %DKIMPORTS_DIR%/vs_coreeditorfonts/dk_uninstall.cmd
+	call %DKIMPORTS_DIR%/python/dk_uninstall.cmd
+	call %DKIMPORTS_DIR%/wsl/dk_uninstall.cmd
 
-%endfunction%
-	::##############################################################
-
-	echo:
-	echo ### Uninstalling Microsoft Visual Studio BuildTools ###
-	"C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" uninstall --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools"
-
-	echo:
-	echo ### Uninstalling Windows Software Development Kit ###
-	"C:\ProgramData\Package Cache\{71684ad3-afc2-4a65-9d45-92ef58510f18}\winsdksetup.exe" /uninstall /quiet
-
-	echo:
-	echo ### Uninstalling vs_CoreEditorFonts ###
-	MsiExec.exe /uninstall {1851460E-0E63-4117-B5BA-25A2F045801B} /quiet
-
-	echo:
-	echo ### Uninstalling Windows SDK AddOn ###
-	MsiExec.exe /uninstall {F1E37C98-16B7-421F-BA33-6C5B5400012A} /quiet
-
-	echo:
-	echo ### Uninstalling Microsoft Visual Studio Installer ###
-	"C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" /uninstall
-
-	echo:
-	echo ### Uninstalling Python 2.7.18 ###
-	MsiExec.exe /uninstall {A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6} /quiet
-
-	echo:
-	echo ### Uninstalling Windows Subsystem for Linux ###
-	MsiExec.exe /uninstall {AAAA4669-FCEF-4B2A-8355-1E0FA411A269} /quiet
-
-	echo:
+	::###### Backup DKBuilder.cmd to Desktop ######
 	echo ### Creating backup of DKBuilder.cmd ###
 	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
 	%dk_call% dk_copy "%DKBATCH_FUNCTIONS_DIR_%DKBuilder.cmd" "%DKDESKTOP_DIR%\DKBuilder.cmd"
 
-	echo:
+	::###### Delete DK Directories ######
 	echo ### Deleting DKCACHE_DIR ###
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	%dk_call% dk_delete "%DKCACHE_DIR%"
 
-	echo:
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	echo Do you want to delete %DIGITALKNOB_DIR% ?
 	%dk_call% dk_confirm || (exit /b 0)
 
 	echo ### Deleting DIGITALKNOB_DIR ###
-	%dk_call% dk_delete "%DKCACHE_DIR%"
+	%dk_call% dk_delete "%DIGITALKNOB_DIR%"
 %endfunction%
 
 :::DKUninstallExt extension
