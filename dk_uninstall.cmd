@@ -56,7 +56,7 @@ setlocal
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	echo Do you want to delete the digitalknob folder ?
 	%dk_call% dk_confirm || (exit /b 0)
-	%dk_call% dk_delete "%DIGITALKNOB_DIR%"
+	((goto) 2>nul & cd "C:\" && rmdir /s /q "%DIGITALKNOB_DIR%") 
 %endfunction%
 
 :::DKUninstallExt extension
