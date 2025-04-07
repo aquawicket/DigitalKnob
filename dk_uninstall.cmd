@@ -41,11 +41,11 @@ setlocal
 
 	::###### Backup DKBuilder.cmd to Desktop ######
 	echo ### Creating backup of DKBuilder.cmd ###
-	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
-	%dk_call% dk_copy "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%DKDESKTOP_DIR%/DKBuilder.cmd"
+	%dk_call% dk_copy "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%SystemDrive%/DKBuilder.cmd"
 
 	::###### Delete DK Simlinks ######
 	%dk_call% dk_delete "%DKDESKTOP_DIR%/digitalknob"
+	%dk_call% dk_delete "%DKDESKTOP_DIR%/DKBuilder.cmd"
 
 	::###### Delete DK Directories ######
 	echo ### Deleting DKCACHE_DIR ###
@@ -59,26 +59,7 @@ setlocal
 	((goto) 2>nul & cd "C:\" && rmdir /s /q "%DIGITALKNOB_DIR%") 
 %endfunction%
 
-:::DKUninstallExt extension
-::	if "%~1"==".bat"	(call :DKRemoveFtype DKBash)
-::	if "%~1"==".c"		(call :DKRemoveFtype DKC)
-::	if "%~1"==".cmake"	(call :DKRemoveFtype DKCmake)
-::	if "%~1"==".cmd"	(call :DKRemoveFtype DKBatch)
-::	if "%~1"==".cpp"	(call :DKRemoveFtype DKCpp)
-::	if "%~1"==".cs"		(call :DKRemoveFtype DKCSharp)
-::	if "%~1"==".hta"	(call :DKRemoveFtype DKHta)
-::	if "%~1"==".html"	(call :DKRemoveFtype DKHtml)
-::	if "%~1"==".java"	(call :DKRemoveFtype DKJava)
-::	if "%~1"==".js"		(call :DKRemoveFtype DKJavascript)
-::	if "%~1"==".php"	(call :DKRemoveFtype DKPhp)
-::	if "%~1"==".ps1"	(call :DKRemoveFtype DKPowershell)
-::	if "%~1"==".py"		(call :DKRemoveFtype DKPython)
-::	if "%~1"==".sh"		(call :DKRemoveFtype DKBash)
-::	if "%~1"==".vbs"	(call :DKRemoveFtype DKVb)
-::
-::	(call :DKRemoveAssoc %~1)
-::	(call :DKRestoreDefault %~1)
-::%endfunction%
+
 
 :::DKRemoveFtype ftype_name
 ::	(ftype %~1 2>nul) && (ftype %~1=)

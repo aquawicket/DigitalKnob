@@ -46,10 +46,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	if not exist "%__CMND__%" (
 		call dk_source "%__CMND__%"
-		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%%__FUNC__%.cmd" echo [31m ERROR: failed to download %__CMND__%.cmd [0m & %return%
-		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_source dk_isCRLF
-		rem if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
-		rem if exist "%DKBATCH_FUNCTIONS_DIR_%dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR_%dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd"
 	)
 
 ::###### Entry ############################################################################################
@@ -78,12 +74,6 @@ exit /b %LAST_STATUS%
 ::#
 :init
 	set "dk_call=call dk_call"
-::	set gblsAndRtns=(for /F "delims=" %%a in ('set dk. 2^>nul') do ^
-::		endlocal^
-::		^& call set _line_=%%a^
-::		^& call set _line_=%%_line_:dk.rtn.=%%^
-::		^& call set %%_line_%%^
-::		^& call set %%_line_:dk.gbl.=%%)
 	set globalize=(for /F "delims=" %%a in ('set dk.') do ^
 		endlocal^
 		^& call set _line_=%%a^
@@ -98,30 +88,12 @@ exit /b %LAST_STATUS%
 ::	set endfunction=exit /b !errorlevel!)
 ::	set return=exit /b !errorlevel!)
 
-::	set endfunction=(echo !errorlevel!^& exit /b !errorlevel!)
-::	set return=(echo !errorlevel!^& exit /b !errorlevel!)
-
-::	set endfunction=(echo !errorlevel!^& call dk_getError)
-::	set return=(echo !errorlevel!^& call dk_getError)
-
-::	set endfunction=(call dk_getError^& exit /b !errorlevel!)
-::	set return=(call dk_getError^& exit /b !errorlevel!)
-
-::	set endfunction=(call dk_getError^& !returns!^& exit /b !errorlevel!)
-::	set return=(call dk_getError^& !returns!^& exit /b !errorlevel!)
-
 	set endfunction=(call dk_return^& exit /b ^!errorlevel^!)
 	set return=(call dk_return^& exit /b ^!errorlevel^!)
 
-::	set endfunction=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
-::	set return=(call dk_getError^& !globalize!^& exit /b !errorlevel!)
-
-::	set endfunction=(!checkError!^& !globals!^& exit /b !errorlevel!)
-::	set return=(!checkError!^& !globals!^& exit /b !errorlevel!)
-
+	if not defined ESC (set "ESC=")
+	if not defined clr (set "clr=%ESC%[0m")
 	set /a "LVL=0"
-	set "ESC="
-	set "clr=%ESC%[0m"
 	set "pad=%clr%"
 	set "padB=      "
 	set "indent=        "
@@ -172,9 +144,9 @@ exit /b !errorlevel!
 ::#
 :printConstantVariables
 	call :updateIndent
-	if defined dk_call		(echo %padB% dk_call		= %dk_call%)
-	if defined indent		(echo %padB% indent			= %indent%)
-	if defined pad			(echo %padB% pad			= %pad%)
+	if defined dk_call			(echo %padB% dk_call		= %dk_call%)
+	if defined indent			(echo %padB% indent			= %indent%)
+	if defined pad				(echo %padB% pad			= %pad%)
 exit /b !errorlevel!
 
 ::####################################################################
@@ -201,7 +173,7 @@ exit /b !errorlevel!
 ::#
 :setReturn name value
 	set argv=%*
-	if defined argv (set argv=!argv:*%1 =!)
+	if defined argv 			(set argv=!argv:*%1 =!)
 	(set %~1=%argv%)
 	(set dk.rtn.%~1=%argv%)		&:: prefix the variable name with dk.rtn. and assign a value
 exit /b !errorlevel!
