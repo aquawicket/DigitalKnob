@@ -35,8 +35,8 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
     :: prepend cache selection if available
     if exist "%DKCACHE_DIR%\DKBuilder.cache" if not "%_target_app_%"=="" if not "%_target_triple_%"=="" if not "%_target_type_%"=="" (
-        %dk_call% Array::dk_unshift dk_getDirectories "re-run [%_target_app_% - %_target_triple_% - %_target_type_%]"
-        %dk_call% Array::dk_unshift commands "call:runCache"
+        %dk_call% Array/dk_unshift dk_getDirectories "re-run [%_target_app_% - %_target_triple_% - %_target_type_%]"
+        %dk_call% Array/dk_unshift commands "call:runCache"
     )
     goto end_runCache
     :runCache
@@ -45,20 +45,20 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
     :end_runCache
     
     ::### Append remaining dk_getDirectories with commands ###
-    %dk_call% Array::dk_push dk_getDirectories "Enter Manually"
-    %dk_call% Array::dk_push commands "%dk_call% dk_enterManually"
+    %dk_call% Array/dk_push dk_getDirectories "Enter Manually"
+    %dk_call% Array/dk_push commands "%dk_call% dk_enterManually"
     
-    %dk_call% Array::dk_push dk_getDirectories "Clear Screen"
-    %dk_call% Array::dk_push commands "%dk_call% dk_clearScreen"
+    %dk_call% Array/dk_push dk_getDirectories "Clear Screen"
+    %dk_call% Array/dk_push commands "%dk_call% dk_clearScreen"
     
-    %dk_call% Array::dk_push dk_getDirectories "Reload"
-    %dk_call% Array::dk_push commands "%dk_call% dk_reload"
+    %dk_call% Array/dk_push dk_getDirectories "Reload"
+    %dk_call% Array/dk_push commands "%dk_call% dk_reload"
     
-    %dk_call% Array::dk_push dk_getDirectories "Go Back"
-    %dk_call% Array::dk_push commands "%dk_call% dk_unset UPDATE"
+    %dk_call% Array/dk_push dk_getDirectories "Go Back"
+    %dk_call% Array/dk_push commands "%dk_call% dk_unset UPDATE"
     
-    %dk_call% Array::dk_push dk_getDirectories "Exit"
-    %dk_call% Array::dk_push commands "%dk_call% dk_exit"
+    %dk_call% Array/dk_push dk_getDirectories "Exit"
+    %dk_call% Array/dk_push commands "%dk_call% dk_exit"
 
     ::### Print the dk_getDirectories list ###
     set /a "n=0"

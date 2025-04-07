@@ -41,12 +41,12 @@ setlocal
 
 	%dk_call% dk_getDirectories "C:"
 	%dk_call% dk_printVar dk_getDirectories
-	%dk_call% Array::dk_length dk_getDirectories
+	%dk_call% Array/dk_length dk_getDirectories
 	%dk_call% dk_echo "directories %dk_length%"
 
 	%dk_call% dk_set myPath "C:/Windows"
 	%dk_call% dk_getDirectories "%myPath%"
 	%dk_call% dk_printVar dk_getDirectories
-	%dk_call% Array::dk_length dk_getDirectories
+	%dk_call% Array/dk_length dk_getDirectories
 	%dk_call% dk_echo "directories %dk_length%"
 %endfunction%

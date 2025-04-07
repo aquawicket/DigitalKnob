@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=../")
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# Array::dk_pop(array)
+::# Array/dk_pop(array)
 ::#
 ::#	The pop() method of Array instances removes the last element from an array and returns that element. This method changes the length of the array
 ::#
@@ -20,7 +20,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1
 	
-	%dk_call% Array::dk_length %~1
+	%dk_call% Array/dk_length %~1
 	set /a dk_length-=1
 
 	(set dk_pop=!%~1[%dk_length%]!)
@@ -44,33 +44,33 @@ setlocal
 	%dk_call% dk_printVar myArrayA 
 	%dk_call% dk_echo
 	
-	%dk_call% Array::dk_pop myArrayA
+	%dk_call% Array/dk_pop myArrayA
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_pop
 	%dk_call% dk_echo
 	
-	%dk_call% Array::dk_pop myArrayA
+	%dk_call% Array/dk_pop myArrayA
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_pop
 	%dk_call% dk_echo
 	
-	%dk_call% Array::dk_pop myArrayA
+	%dk_call% Array/dk_pop myArrayA
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_pop
 	%dk_call% dk_echo
 	
-	%dk_call% Array::dk_pop myArrayA
+	%dk_call% Array/dk_pop myArrayA
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_pop
 	%dk_call% dk_echo
 	
-	%dk_call% Array::dk_pop myArrayA
+	%dk_call% Array/dk_pop myArrayA
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_pop
 	%dk_call% dk_echo
 	
 ::  FIXME:  out of array bounds from here on
-::  %dk_call% Array::dk_pop myArrayA
+::  %dk_call% Array/dk_pop myArrayA
 ::  %dk_call% dk_printVar myArrayA
 ::  %dk_call% dk_printVar dk_pop
 	%dk_call% dk_echo

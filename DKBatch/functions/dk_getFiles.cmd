@@ -42,12 +42,12 @@ setlocal
 
 	%dk_call% dk_getFiles "C:/"
 	%dk_call% dk_printVar dk_getFiles
-	%dk_call% Array::dk_length dk_getFiles
+	%dk_call% Array/dk_length dk_getFiles
 	%dk_call% dk_echo "files %dk_length%"
 
 	%dk_call% dk_set myPath "C:/Windows"
 	%dk_call% dk_getFiles "%myPath%"
 	%dk_call% dk_printVar dk_getFiles
-	%dk_call% Array::dk_length dk_getFiles
+	%dk_call% Array/dk_length dk_getFiles
 	%dk_call% dk_echo "files %dk_length%"
 %endfunction%

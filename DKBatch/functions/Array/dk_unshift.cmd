@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=../")
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# Array::dk_unshift(array, element)
+::# Array/dk_unshift(array, element)
 ::#
 ::#	Adds the specified elements to the beginning of an array and returns the new length of the array
 ::#
@@ -22,7 +22,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_debugFunc 2
 
 	set "_arry_=%~1"
-	%dk_call% Array::dk_length %~1
+	%dk_call% Array/dk_length %~1
 	set /a "dk_unshift=dk_length+1"
 
 	set /a "prev=dk_length-1"
@@ -46,27 +46,27 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_echo
-	%dk_call% Array::dk_unshift myArrayA "a b c"
+	%dk_call% Array/dk_unshift myArrayA "a b c"
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_unshift
 
 	%dk_call% dk_echo
-	%dk_call% Array::dk_unshift myArrayA "1 2 3"
+	%dk_call% Array/dk_unshift myArrayA "1 2 3"
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_unshift
 
 	%dk_call% dk_echo
-	%dk_call% Array::dk_unshift myArrayA "d e f"
+	%dk_call% Array/dk_unshift myArrayA "d e f"
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_unshift
 
 	%dk_call% dk_echo
-	%dk_call% Array::dk_unshift myArrayA "4 5 6"
+	%dk_call% Array/dk_unshift myArrayA "4 5 6"
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_unshift
 
 	%dk_call% dk_echo
-	%dk_call% Array::dk_unshift myArrayA "h i j"
+	%dk_call% Array/dk_unshift myArrayA "h i j"
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_unshift
 %endfunction%

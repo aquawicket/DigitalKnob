@@ -58,11 +58,11 @@ setlocal
 	(set G#2=415)
 	(set A3=440)
 
-	%dk_call% Array::dk_push errorBeeps "200, 1400"
-	%dk_call% Array::dk_push errorBeeps "200, 1400"
-	%dk_call% Array::dk_push errorBeeps "200, 1400"
-	%dk_call% Array::dk_push errorBeeps "200, 1400"
-	%dk_call% Array::dk_push errorBeeps "200, 1400"
+	%dk_call% Array/dk_push errorBeeps "200, 1400"
+	%dk_call% Array/dk_push errorBeeps "200, 1400"
+	%dk_call% Array/dk_push errorBeeps "200, 1400"
+	%dk_call% Array/dk_push errorBeeps "200, 1400"
+	%dk_call% Array/dk_push errorBeeps "200, 1400"
 
 	%dk_call% dk_beeps errorBeeps
 

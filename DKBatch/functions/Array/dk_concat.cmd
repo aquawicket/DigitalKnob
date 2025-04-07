@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=../")
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# Array::dk_concat(array, {value1, value2, /* …, */ valueN})
+::# Array/dk_concat(array, {value1, value2, /* …, */ valueN})
 ::#
 ::#  Merge two or more arrays. This method does not change the existing arrays, but instead returns a new array
 ::#
@@ -72,7 +72,7 @@ setlocal
 	%dk_call% dk_printVar myArray2
 
 	echo:
-	%dk_call% Array::dk_concat myArray1 myArray2
+	%dk_call% Array/dk_concat myArray1 myArray2
 	%dk_call% dk_printVar dk_concat
 
 	echo:
@@ -83,9 +83,9 @@ setlocal
 	"%dk_concat[3]%" equ "1 2 3" if ^
 	"%dk_concat[4]%" equ "4 5 6" if ^
 	"%dk_concat[5]%" equ "7 8 9" (
-		%dk_call% dk_success "Array::dk_concat succeeded"
+		%dk_call% dk_success "Array/dk_concat succeeded"
 		%return%
 	)
 	
-	%dk_call% dk_error "Array::dk_concat failed"
+	%dk_call% dk_error "Array/dk_concat failed"
 %endfunction%

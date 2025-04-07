@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=../")
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::################################################################################
-::# Array::dk_join(array, separator)
+::# Array/dk_join(array, separator)
 ::#
 ::#	The join() method of Array instances creates and returns a new string by concatenating all of the elements in this array, separated by commas or a specified separator string. 
 ::#	If the array has only one item, then that item will be returned without using the separator.
@@ -13,7 +13,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::#		A string to separate each pair of adjacent elements of the array. If omitted, the array elements are separated with a comma (",").
 ::#
 ::#	RETURN VALUE
-::#	A string with all array elements joined. If Array::length is 0, the empty string is returned.
+::#	A string with all array elements joined. If Array/length is 0, the empty string is returned.
 ::#
 ::#	REFERENCE
 ::#	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
@@ -53,7 +53,7 @@ setlocal
 	set "myArrayA[4]=h i j"
 	%dk_call% dk_printVar myArrayA
 	
-	%dk_call% Array::dk_join myArrayA ";"
+	%dk_call% Array/dk_join myArrayA ";"
 	%dk_call% dk_info "dk_join = '%dk_join%'"
 
 
@@ -64,6 +64,6 @@ setlocal
 	set "myArrayB[4]=a b c"
 	%dk_call% dk_printVar myArrayB
 	
-	%dk_call% Array::dk_join myArrayB ";"
+	%dk_call% Array/dk_join myArrayB ";"
 	%dk_call% dk_info "dk_join = '%dk_join%'"
 %endfunction%
