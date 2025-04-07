@@ -17,28 +17,21 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 setlocal
     %dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	%dk_call% dk_getFileParam dkconfig.txt VC_REDIST_X86_IMPORT
-	%dk_call% dk_getFileParam dkconfig.txt VC_REDIST_X86_64_IMPORT
-	
-	if defined win_x86_host		(set "VC_REDIST_DL=%VC_REDIST_X86_IMPORT%")
-	if defined win_x86_64_host	(set "VC_REDIST_DL=%VC_REDIST_X86_64_IMPORT%")
-	if not defined VC_REDIST_DL (%dk_call% dk_error "VC_REDIST_DL is invalid")
-
-	if defined win_x86_host			(set "VCCOMP140_DLL=C:/Windows/SysWOW64/vcomp140.dll")
-	if defined win_x86_64_host		(set "VCCOMP140_DLL=C:/Windows/System32/vcomp140.dll")
-	if not defined VCCOMP140_DLL	(%dk_call% dk_error "VCCOMP140_DLL is invalid")
-
-	if exist "%VCCOMP140_DLL%" (%return%)
-
+	::### 32Bit ###
+	%dk_call% dk_getFileParam "dkconfig.txt" VC_REDIST_X86_IMPORT
+	set "VCCOMP140_X86_DLL=C:/Windows/SysWOW64/vcomp140.dll"
+	set "VCCOMP140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcomp140d.dll"
+	set "VCRUNTIME140_X86_DLL=C:/Windows/SysWOW64/vcruntime140.dll"
+	set "VCRUNTIME140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcruntime140d.dll"
 	::### INSTALL ###
-	%dk_call% dk_basename %VC_REDIST_DL% VC_REDIST_DL_FILE
-	%dk_call% dk_info "Installing Visual C Redistributable - %VC_REDIST_DL_FILE%"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_download %VC_REDIST_DL% %DKDOWNLOAD_DIR%/%VC_REDIST_DL_FILE%
-	%dk_call% dk_command %DKDOWNLOAD_DIR%/%VC_REDIST_DL_FILE% /install /quiet /norestart 
-	
-	if not exist %VCCOMP140_DLL% (%dk_call %dk_error "Unable to locate VCCOMP140_DLL:%VCCOMP140_DLL%")
+	if not exist "%VCCOMP140_X86_DLL%" if not exist "%VCCOMP140_X86_DEBUG_DLL%" (
+		%dk_call% dk_basename "%VC_REDIST_X86_IMPORT%"
+		%dk_call% dk_info "Installing Visual C Redistributable - %VC_REDIST_X86_IMPORT_FILE%"
+		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		%dk_call% dk_download "%VC_REDIST_X86_IMPORT%" "%DKDOWNLOAD_DIR%/%VC_REDIST_X86_IMPORT_FILE%"
+		"%DKDOWNLOAD_DIR%/%VC_REDIST_X86_IMPORT_FILE%" /install /quiet /norestart 	&rem /log $ENV{DK3RDPARTY_DIR}/vc_redist_install_log.txt
+	)
+
 %endfunction%
 
 

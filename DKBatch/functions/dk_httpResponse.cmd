@@ -2,7 +2,7 @@
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_urlExists(<url> <ret:optional>)
+::# dk_httpResponse(<url> <ret:optional>)
 ::#
 ::#		Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
 ::#				   https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
@@ -80,30 +80,18 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::# 	510 Not Extended
 ::# 	511 Network Authentication Required
 ::#
-:dk_urlExists
+:dk_httpResponse
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1 2
 
-	%dk_call% dk_httpResponse "%~1"
-	echo dk_httpResponse = %dk_httpResponse%
+	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
+	for /f "usebackq tokens=*" %%A in (`%CURL_EXE% -sI -o nul -w "%%{http_code}" "%~1"`) do (set "dk_httpResponse=%%A")
 
-	if !dk_httpResponse! equ 200 (
-		set "dk_urlExists=0"
-	) else if !dk_httpResponse! equ 301 (
-		set "dk_urlExists=0"
-	) else if !dk_httpResponse! equ 302 (
-		set "dk_urlExists=0"
-	) else (
-		set "dk_urlExists=1"
-	)
-	
 	endlocal & (
-		set "dk_urlExists=%dk_urlExists%"
-		rem if "%~2" neq "" (set "%~2=%dk_urlExists%")
-		exit /b %dk_urlExists%
+		set "dk_httpResponse=%dk_httpResponse%"
+		if "%~2" neq "" (set "%~2=%dk_httpResponse%")
 	)
 %endfunction%
-
 
 
 
@@ -115,71 +103,20 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	::###### Using if return value
-	%dk_call% dk_echo
 	set "url=http://www.google.com/index.html"
-	%dk_call% dk_urlExists "%url%"
-	if %dk_urlExists% equ 0 (echo %url% exists) else (echo %url% does NOT exist)
-	echo dk_urlExists = %dk_urlExists%
+	%dk_call% dk_httpResponse "%url%"
+	echo url:'%url%' dk_httpResponse = %dk_httpResponse%
 	
-	%dk_call% dk_echo
 	set "url=http://www.nonexisting.com/nofile.no"
-	%dk_call% dk_urlExists "%url%"
-	if %dk_urlExists% equ 0 (echo %url% exists) else (echo %url% does NOT exist)
-	echo dk_urlExists = %dk_urlExists%
-	::FIXME: ERRORLEVEL is still 1 
+	%dk_call% dk_httpResponse "%url%"
+	echo url:'%url%' dk_httpResponse = %dk_httpResponse%
 	
-	
-	::###### Using if ERRORLEVEL
-	%dk_call% dk_echo
-	set "url=http://www.google.com/index.html"
-	%dk_call% dk_urlExists "%url%"
-	if not ERRORLEVEL 1 (echo %url% exists) else (echo %url% does NOT exist)
-	echo dk_urlExists = %dk_urlExists%
-	
-	%dk_call% dk_echo
-	set "url=http://www.nonexisting.com/nofile.no"
-	%dk_call% dk_urlExists "%url%"
-	if not ERRORLEVEL 1 (echo %url% exists) else (echo %url% does NOT exist)
-	echo dk_urlExists = %dk_urlExists%
-	::FIXME: ERRORLEVEL is still 1 
-	
-	
-	::###### Using && and || conditionals
-	%dk_call% dk_echo
-	set "url=http://www.google.com/index.html"
-	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
-	echo dk_urlExists = %dk_urlExists%
-	
-	%dk_call% dk_echo
-	set "url=http://www.nonexisting.com/nofile.no"  
-	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
-	echo dk_urlExists = %dk_urlExists%
-	(call )		&::FIXME: ERRORLEVEL is still 1 
-	
-	
-	
-	::###### Using && and || conditionals
-	echo:
 	set "url=https://aka.ms/vs/16/release/VC_redist.x86.exe"
-	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
-	echo dk_urlExists = %dk_urlExists%
+	%dk_call% dk_httpResponse "%url%"
+	echo url:'%url%' dk_httpResponse = %dk_httpResponse%
 	
-	echo:
 	set "url=https://aka.ms/vs/16/release/VC_redist.x64.exe" 
-	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
-	echo dk_urlExists = %dk_urlExists%
-	(call )		&::FIXME: ERRORLEVEL is still 1 
-	
-	::###### Experimental
-	::  %dk_call% dk_echo
-	::  set "url=http://www.google.com/index.html"
-	::  %dk_call% dk_urlExists "%url%"
-	::  if %dk_urlExists% (echo %url% exists) else (echo %url% does NOT exist)
-	::
-	::  %dk_call% dk_echo
-	::  set "url=http://www.nonexisting.com/nofile.no"
-	::  %dk_call% dk_urlExists "%url%"
-	::  if %dk_urlExists% (echo %url% exists) else (echo %url% does NOT exist)
-	::  if not ERRORLEVEL 1 (echo ERRORLEVEL is 0) else (echo ERRORLEVEL is 1)
+	%dk_call% dk_httpResponse "%url%"
+	echo url:'%url%' dk_httpResponse = %dk_httpResponse%
+
 %endfunction%
