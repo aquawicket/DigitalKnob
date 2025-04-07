@@ -42,6 +42,9 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_download %GIT_DL%
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT%"
+	
+	::###### Install Git Context Menu ######
+	"contextMenu/dk_install.cmd"
        
     if NOT exist "%GIT_EXE%" (%dk_call% dk_error "cannot find git")
 %endfunction%

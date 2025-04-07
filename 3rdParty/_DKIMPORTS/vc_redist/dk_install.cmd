@@ -18,8 +18,11 @@ setlocal
     %dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	if defined win_x86_host		(set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x86.exe")
-	if defined win_x86_64_host	(set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x64.exe")
+	%dk_call% dk_getFileParam dkconfig.txt VC_REDIST_X86_IMPORT
+	%dk_call% dk_getFileParam dkconfig.txt VC_REDIST_X86_64_IMPORT
+	
+	if defined win_x86_host		(set "VC_REDIST_DL=%VC_REDIST_X86_IMPORT%")
+	if defined win_x86_64_host	(set "VC_REDIST_DL=%VC_REDIST_X86_64_IMPORT%")
 	if not defined VC_REDIST_DL (%dk_call% dk_error "VC_REDIST_DL is invalid")
 
 	if defined win_x86_host			(set "VCCOMP140_DLL=C:/Windows/SysWOW64/vcomp140.dll")
