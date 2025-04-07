@@ -29,13 +29,13 @@ if "%~1" equ "" (goto :dk_install)
 :dk_install
 	if "%~1" neq "" (goto:eof)
 
+	echo Installing DKHta . . .
+	
 	::###### DK_CMD ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
-	%dk_call% dk_assertPath DKBATCH_FUNCTIONS_DIR_
 
-	::###### Install DKBash ######
-	%dk_call% dk_echo "Installing DKHta . . ."
+	::###### Install DKHta ######
 	set "MSHTA_EXE=%WINDIR:\=/%/SysWOW64/mshta.exe"
 	%dk_call% dk_assertPath MSHTA_EXE
 	set "DKHTA_FUNCTIONS_DIR=../DKHta/functions"

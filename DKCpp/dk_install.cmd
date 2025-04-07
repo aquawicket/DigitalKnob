@@ -77,6 +77,8 @@ if "%~1" == "" (goto :dk_install)
 :dk_install
 	if not "%~1"=="" (goto:eof)
 	
+	echo Installing DKCpp . . .
+	
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
 	::if not defined target_os		(set "target_os=cosmocc")
@@ -84,12 +86,10 @@ if "%~1" == "" (goto :dk_install)
 	::if not defined target_env		(set "target_env=cosmocc")
 	
 	::###### DK_CMD ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Install DKCpp ######
-	%dk_call% dk_echo "Installing DKCpp . . ."
-	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 	
 	::###### target_os ######

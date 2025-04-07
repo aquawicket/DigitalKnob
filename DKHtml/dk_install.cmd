@@ -29,16 +29,15 @@ if "%~1" equ "" (goto :dk_install)
 :dk_install
 	if "%~1" neq "" (goto :eof)
 	
-	set "BROWSER_EXE=C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
-	%dk_call% dk_assertPath BROWSER_EXE
+	echo Installing DKHtml . . .
 	
 	::###### DK_CMD ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
-	%dk_call% dk_assertPath DKBATCH_FUNCTIONS_DIR_
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Install DKHtml ######
-	%dk_call% dk_echo "Installing DKHtml . . ."
+	set "BROWSER_EXE=C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
+	%dk_call% dk_assertPath BROWSER_EXE
 	set "DKHTML_FUNCTIONS_DIR=../DKHtml/functions"
 	ftype DKHtml=%BROWSER_EXE% "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR/DKHtml/DefaultIcon" "" "REG_SZ" "%BROWSER_EXE%"

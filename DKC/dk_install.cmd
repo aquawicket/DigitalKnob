@@ -81,6 +81,8 @@ if "%~1" equ "" (goto:dk_install)
 :dk_install
 	if "%~1" neq "" (goto:eof)
 
+	echo Installing DKC . . .
+	
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc
 	:: NOTE: gcc is now working yet.  Need the appropriate command to line libwinpthread and others statically
@@ -90,12 +92,10 @@ if "%~1" equ "" (goto:dk_install)
 	::if not defined target_env		(set "target_env=gcc")
 
 	::###### DK_CMD ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	::###### Install DKC ######
-	%dk_call% dk_echo "Installing DKC . . ."
-
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 
 	::###### target_os ######

@@ -36,11 +36,13 @@ if "%~1" == "" (goto:dk_install)
 :dk_install
 	if not "%~1"=="" (goto:eof)
 	
-	if not defined DKBATCH_FUNCTIONS_DIR_	(set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/digitalknob/Development/DKBatch/functions/")
-	if not defined DK_CMD 					(call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+	echo Installing DKCmake . . .
+	
+	::###### DK_CMD ######
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
+	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
-	::###### Install DKBash ######
-	%dk_call% dk_echo "Installing DKCmake . . ."
+	::###### Install DKCMake ######
 	%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_DKIMPORTS_DIR"
 	if not defined CMAKE_EXE                 %dk_call% "%DKIMPORTS_DIR%/cmake/dk_install.cmd"
 

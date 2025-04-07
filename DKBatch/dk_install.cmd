@@ -37,19 +37,20 @@ if "%~1" equ "" (goto dk_install)
 :dk_install
 	if "%~1" neq "" (goto:eof)
 
+	echo Installing DKBatch . . .
+	
 	::###### DK_CMD ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	::###### Install DKBatch ######
-	%dk_call% dk_echo "Installing DKBatch . . ."
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
 
 	:: Set the registry entry for the exxtension
 	ftype DKBatch="%COMSPEC%" /c if exist "%~f0" ^
-	(echo installed ^& "%COMSPEC%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%COMSPEC%" "%DKCACHE_DIR%" "%%1" %%*) else ^
-	(echo not installed ^& "%%1" %%*)
+	(echo DKBatch installed ^& "%COMSPEC%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%COMSPEC%" "%DKCACHE_DIR%" "%%1" %%*) else ^
+	(echo DKBatch not installed ^& "%%1" %%*)
 
 	%dk_call% dk_registrySetKey "HKCR\DKBatch\DefaultIcon" "" "REG_SZ" "%COMSPEC%"
 	assoc .cmd=DKBatch

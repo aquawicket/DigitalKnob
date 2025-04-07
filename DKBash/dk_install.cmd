@@ -36,12 +36,15 @@ if "%~1" == "" (goto dk_install)
 
 
 :dk_install
+	if "%~1" neq "" (goto:eof)
+
+	echo Installing DKBash . . .
+
 	::###### DK_CMD ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	::###### Install DKBash ######
-	%dk_call% dk_echo "Installing DKBash . . ."
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
 

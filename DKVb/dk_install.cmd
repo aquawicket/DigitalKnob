@@ -41,13 +41,14 @@ if "%*" equ "" (goto dk_install)
 :dk_install
 	if "%~1" neq "" (goto:eof)
 
+	echo Installing DKVb . . .
+	
 	::###### DK_CMD ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
-
+	
 	::###### Install DKVb ######
-	%dk_call% dk_echo "Installing DKVb . . ."
-	set "DKVB_FUNCTIONS_DIR=../DKVb/functions"
+	%dk_call% dk_validate DKVB_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	::set "WSCRIPT_EXE=%SystemRoot:\=/%/System32/WScript.exe"
 	set "CSCRIPT_EXE=%SystemRoot:\=/%/System32/CScript.exe"
 

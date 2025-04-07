@@ -65,13 +65,13 @@ if "%~1" == "" (goto dk_install)
 :dk_install
 	if not "%~1"=="" (goto:eof)
 	
+	echo Installing DKCSharp . . .
+	
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	
 	::###### Install DKCSharp ######
-	%dk_call% dk_echo "Installing DKCSharp . . ."
-	
 	::###### COMPILER_EXE ######
 	:: find csc.exe
 	for /r "%SystemRoot%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"

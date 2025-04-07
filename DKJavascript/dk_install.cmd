@@ -45,12 +45,13 @@ if "%~1" equ "" (goto:dk_install)
 :dk_install
 	if "%~1" neq "" (goto:eof)
 
+	echo Installing DKJScript . . .
+	
 	::###### DK_CMD ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	::###### Install DKJScript ######
-	%dk_call% dk_echo "Installing DKJScript . . ."
 	set "CSCRIPT_EXE=cscript.exe"
 	set "WSCRIPT_EXE=wscript.exe"
 	%dk_call% dk_validate DKJAVASCRIPT_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
