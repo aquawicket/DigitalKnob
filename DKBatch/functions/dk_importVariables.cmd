@@ -163,7 +163,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 	rem ### PLUGIN_URL_LENGTH
 	set "PLUGIN_URL_LENGTH="
-	%dk_call% Array::dk_length PLUGIN_URL_ARRAY
+	%dk_call% Array/dk_length PLUGIN_URL_ARRAY
 	set "PLUGIN_URL_LENGTH=%dk_length%"
 	rem %dk_call% dk_printVar PLUGIN_URL_LENGTH 									&rem PLUGIN_URL_LENGTH		: 8
 	
@@ -211,7 +211,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	if defined PLUGIN_GIT (
 		rem ### PLUGIN_GIT_FILENAME
 		set "PLUGIN_GIT_FILENAME="
-        %dk_call% Array::dk_at PLUGIN_URL_ARRAY 3
+        %dk_call% Array/dk_at PLUGIN_URL_ARRAY 3
 		set "PLUGIN_GIT_FILENAME=!dk_at!"							
 		%dk_call% dk_printVar PLUGIN_GIT_FILENAME 							&rem PLUGIN_GIT_FILENAME		: zlib
 		
