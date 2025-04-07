@@ -41,9 +41,10 @@ setlocal
 
 	::###### Backup DKBuilder.cmd to Desktop ######
 	echo ### Creating backup of DKBuilder.cmd ###
-	%dk_call% dk_copy "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%SystemDrive%/DKBuilder.cmd"
+	%dk_call% dk_copy "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%SystemDrive%/DKBuilder.cmd" OVERWRITE
 
 	::###### Delete DK Simlinks ######
+	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
 	%dk_call% dk_delete "%DKDESKTOP_DIR%/digitalknob"
 	%dk_call% dk_delete "%DKDESKTOP_DIR%/DKBuilder.cmd"
 
