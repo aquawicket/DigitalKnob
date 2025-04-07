@@ -14,25 +14,26 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_validate DKBRANCH_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	
 	if not exist "%DKDESKTOP_DIR%/digitalknob" (
-		::%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" &rem OVERWRITE
-		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%/digitalknob" "%DIGITALKNOB_DIR%" &rem OVERWRITE
+		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%/digitalknob" "%DIGITALKNOB_DIR%"
 	)
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
 	
+	if not exist "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" (
+		%dk_call% dk_download "%DKHTTP_DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd"
+	)
+	
 	if not exist "%DKDESKTOP_DIR%/DKBuilder.cmd" (
-		::%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" &rem OVERWRITE
-		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" &rem OVERWRITE
+		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd"
 	)
 
 	::%dk_call% dk_assertPath DKSCRIPT_DIR
-	::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-
+	
 	%dk_call% dk_unset UPDATE
 	%dk_call% dk_unset target_app
 	%dk_call% dk_unset target_triple
 	%dk_call% dk_unset target_type
 
-	::set "BUILD_LIST_FILE=%DKCACHE_DIR%\build_list.txt"
+	::set "BUILD_LIST_FILE=%DKCACHE_DIR%/build_list.txt"
 	:while_loop
 		if exist "%BUILD_LIST_FILE%" (
 			%dk_call% dk_fileToGrid "%BUILD_LIST_FILE%" BUILD_LIST
