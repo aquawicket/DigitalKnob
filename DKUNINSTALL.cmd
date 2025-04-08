@@ -3,42 +3,42 @@ if not defined DKBATCH_FUNCTIONS_DIR_  (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/DKB
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::############################################################################
-::# dk_uninstall()
+::# DKUNINSTALL()
 ::#
-:dk_uninstall
+:DKUNINSTALL
 setlocal
 	%dk_call% dk_debugFunc 0
 
 	::###### Uninstall DK Languages ######
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	echo ############ Uninstall DK languages ############
-	call %DKBRANCH_DIR%/DKBash/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKBatch/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKC/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKCMake/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKCpp/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKCSharp/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKHta/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKHtml/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKJava/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKJavascript/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKPhp/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKPowershell/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKPython/dk_uninstall.cmd
-	call %DKBRANCH_DIR%/DKVb/dk_uninstall.cmd
+	call %DKBRANCH_DIR%/DKBash/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKBatch/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKC/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKCMake/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKCpp/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKCSharp/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKHta/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKHtml/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKJava/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKJavascript/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKPhp/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKPowershell/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKPython/DKUNINSTALL.cmd
+	call %DKBRANCH_DIR%/DKVb/DKUNINSTALL.cmd
 
 	::###### Uninstall DK 3rdParty ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	echo ############ Uninstall 3rdParty #############
-	call %DKIMPORTS_DIR%/git/contextMenu/dk_uninstall.cmd
-	call %DKIMPORTS_DIR%/visualstudio/dk_uninstall.cmd
-	call %DKIMPORTS_DIR%/windows-sdk/dk_uninstall.cmd
-	call %DKIMPORTS_DIR%/vs_coreeditorfonts/dk_uninstall.cmd
-	call %DKIMPORTS_DIR%/vs_coreeditorfonts/dk_uninstall.cmd
-	call %DKIMPORTS_DIR%/python/dk_uninstall.cmd
-	call %DKIMPORTS_DIR%/vc_redist/dk_uninstall.cmd
+	call %DKIMPORTS_DIR%/git/contextMenu/DKUNINSTALL.cmd
+	call %DKIMPORTS_DIR%/visualstudio/DKUNINSTALL.cmd
+	call %DKIMPORTS_DIR%/windows-sdk/DKUNINSTALL.cmd
+	call %DKIMPORTS_DIR%/vs_coreeditorfonts/DKUNINSTALL.cmd
+	call %DKIMPORTS_DIR%/vs_coreeditorfonts/DKUNINSTALL.cmd
+	call %DKIMPORTS_DIR%/python/DKUNINSTALL.cmd
+	call %DKIMPORTS_DIR%/vc_redist/DKUNINSTALL.cmd
 
-	::call %DKIMPORTS_DIR%/wsl/dk_uninstall.cmd
+	::call %DKIMPORTS_DIR%/wsl/DKUNINSTALL.cmd
 
 	::###### Backup DKBuilder.cmd to Desktop ######
 	echo ### Creating backup of DKBuilder.cmd ###
@@ -127,5 +127,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	call :dk_uninstall
+	call :DKUNINSTALL
 %endfunction%
