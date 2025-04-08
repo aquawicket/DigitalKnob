@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../../DKBa
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_install()
+::# DKINSTALL()
 ::#
-:dk_install
+:DKINSTALL
 	%dk_call% dk_debugFunc 0
 ::setlocal
 	
@@ -21,26 +21,26 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	::%dk_call% dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	%dk_call% dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_set POWERSHELL_DIR "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
+	%dk_call% dk_set POWERSHELL_DIR "%DKTOOLS_DIR%/%POWERSHELL_FOLDER%"
 	::###################################################
-	%dk_call% dk_set POWERSHELL_EXE "%POWERSHELL_DIR%\pwsh.exe"
+	%dk_call% dk_set POWERSHELL_EXE "%POWERSHELL_DIR%\/pwsh.exe"
 	
 	if exist "%POWERSHELL_EXE%" (goto powershell_installed)
 		%dk_call% dk_echo   
 		%dk_call% dk_info "Installing powershell . . ."
 		%dk_call% dk_download %POWERSHELL_DL%
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-		%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%POWERSHELL_DL_FILE%" "%POWERSHELL_DIR%"
+		%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%POWERSHELL_DL_FILE%" "%POWERSHELL_DIR%"
 		if NOT exist "%POWERSHELL_EXE%" (%dk_call% dk_error "cannot find pwsh.exe")
 	:powershell_installed
 	
 	::### Add File Associations ###
 	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% "%DKIMPORTS_DIR%\powershell\dk_installPowershellFileAssociations.cmd"
+	::%dk_call% "%DKIMPORTS_DIR%/powershell/fileAssoc/DKINSTALL.cmd"
 	
 :: install via CMake
 ::	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-::	%dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/powershell/DKMAKE.cmake)" "POWERSHELL_EXE"
+::	%dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/powershell/DKINSTALL.cmake)" "POWERSHELL_EXE"
 
 	::%dk_call% dk_checkError
 %endfunction%
@@ -52,6 +52,6 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_install
+	%dk_call% DKINSTALL
 %endfunction%
 

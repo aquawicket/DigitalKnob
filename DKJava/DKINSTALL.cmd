@@ -1,5 +1,5 @@
 @echo off
-if "%~1" equ "" (goto :dk_install)
+if "%~1" equ "" (goto :DKINSTALL)
 
 :runDKCSharp
 	set "COMPILER_EXE=%~1"
@@ -62,7 +62,7 @@ if "%~1" equ "" (goto :dk_install)
 
 
 
-:dk_install
+:DKINSTALL
 	if "%~1" neq "" (goto:eof)
 	
 	echo Installing DKJava . . .

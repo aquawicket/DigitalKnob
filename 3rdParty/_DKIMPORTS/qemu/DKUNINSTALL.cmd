@@ -4,12 +4,12 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 
 ::####################################################################
-::# dk_uninstall()
+::# DKUNINSTALL()
 ::#
 ::#	  windows uninstall registry location
 ::#   HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\QEMU
 ::#
-:dk_uninstall
+:DKUNINSTALL
 	%dk_call% dk_debugFunc 0
 	
 	if defined win_x86_host      (set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe")
@@ -35,5 +35,5 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_uninstall
+	%dk_call% DKUNINSTALL
 %endfunction%

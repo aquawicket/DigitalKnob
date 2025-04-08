@@ -1,5 +1,5 @@
 @echo off
-if "%~1" equ "" (goto:dk_install)
+if "%~1" equ "" (goto:DKINSTALL)
 
 :runDKC
 	if not defined ESC (set "ESC=")
@@ -78,7 +78,7 @@ if "%~1" equ "" (goto:dk_install)
 
 
 
-:dk_install
+:DKINSTALL
 	if "%~1" neq "" (goto:eof)
 
 	echo Installing DKC . . .

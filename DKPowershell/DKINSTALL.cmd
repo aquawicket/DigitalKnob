@@ -1,5 +1,5 @@
 @echo off
-if "%~1" equ "" (goto dk_install)
+if "%~1" equ "" (goto DKINSTALL)
 
 :runDKPowershell
 	echo runDKPowershell %*
@@ -40,7 +40,7 @@ if "%~1" equ "" (goto dk_install)
 
 
 
-:dk_install
+:DKINSTALL
 	if "%~1" neq "" (goto:eof)
 
 	echo Installing DKPowershell . . .

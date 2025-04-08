@@ -1,5 +1,5 @@
 @echo off
-if "%*" equ "" (goto dk_install)
+if "%*" equ "" (goto DKINSTALL)
 
 :runDKVb
 	set "DKVB_FUNCTIONS_DIR=%~1"
@@ -38,7 +38,7 @@ if "%*" equ "" (goto dk_install)
 
 
 
-:dk_install
+:DKINSTALL
 	if "%~1" neq "" (goto:eof)
 
 	echo Installing DKVb . . .

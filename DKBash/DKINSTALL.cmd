@@ -1,5 +1,5 @@
 @echo off
-if "%~1" == "" (goto dk_install)
+if "%~1" == "" (goto DKINSTALL)
 
 :runDKBash
 	set "DKBASH_FUNCTIONS_DIR=%~1"
@@ -35,7 +35,7 @@ if "%~1" == "" (goto dk_install)
 
 
 
-:dk_install
+:DKINSTALL
 	if "%~1" neq "" (goto:eof)
 
 	echo Installing DKBash . . .

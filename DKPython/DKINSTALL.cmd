@@ -1,5 +1,5 @@
 @echo off
-if "%~1" equ "" (goto dk_install)
+if "%~1" equ "" (goto DKINSTALL)
 
 :runDKPython
 	set "DKPYTHON_FUNCTIONS_DIR=%~1"
@@ -46,7 +46,7 @@ exit /b %ERRORLEVEL%
 
 
 
-:dk_install
+:DKINSTALL
 	if "%~1" neq "" (goto:eof)
 
 	echo Installing DKPython . . .

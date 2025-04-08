@@ -1,5 +1,5 @@
 @echo off
-if "%~1" == "" (goto dk_install)
+if "%~1" == "" (goto DKINSTALL)
 
 :runDKJavascript
 	set "NODEJS_EXE=%~1"
@@ -31,7 +31,7 @@ if "%~1" == "" (goto dk_install)
 
 
 
-:dk_install
+:DKINSTALL
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)

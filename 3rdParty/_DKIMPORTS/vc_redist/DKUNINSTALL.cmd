@@ -11,9 +11,9 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 
 ::####################################################################
-::# dk_uninstall
+::# DKUNINSTALL
 ::#
-:dk_uninstall
+:DKUNINSTALL
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
 	
@@ -60,5 +60,5 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 	
-	call :dk_uninstall
+	call :DKUNINSTALL
 %endfunction%

@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../../DKBa
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_install()
+::# DKINSTALL()
 ::#
-:dk_install
+:DKINSTALL
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
@@ -37,10 +37,10 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_copy "%DKIMPORTS_DIR%/notepadpp/dark_config.xml" "%NOTEPADPP_DIR%/config.xml" OVERWRITE
 	
 	::### Add Context Menu ###
-	%dk_call% "%DKIMPORTS_DIR%/notepadpp/dk_installNotepadppContextMenu.cmd"
+	%dk_call% "%DKIMPORTS_DIR%/notepadpp/contextMenu/DKINSTALL.cmd"
 	
 	::### Add File Associations ###
-	::%dk_call% %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppFileAssociations.cmd
+	::%dk_call% %DKIMPORTS_DIR%/notepadpp/fileAssoc/DKINSTALL.cmd
 %endfunction%
 
 
@@ -53,5 +53,5 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_install
+	%dk_call% DKINSTALL
 %endfunction%

@@ -1,5 +1,5 @@
 @echo off
-if "%~1" == "" (goto dk_install)
+if "%~1" == "" (goto DKINSTALL)
 
 :runDKCSharp
 	set "COMPILER_EXE=%~1"
@@ -62,7 +62,7 @@ if "%~1" == "" (goto dk_install)
 
 
 
-:dk_install
+:DKINSTALL
 	if not "%~1"=="" (goto:eof)
 	
 	echo Installing DKCSharp . . .

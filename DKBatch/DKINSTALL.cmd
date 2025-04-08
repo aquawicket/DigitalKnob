@@ -1,5 +1,5 @@
 @echo off
-if "%~1" equ "" (goto dk_install)
+if "%~1" equ "" (goto DKINSTALL)
 
 :runDKBatch
 	if not exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
@@ -34,7 +34,7 @@ if "%~1" equ "" (goto dk_install)
 
 
 
-:dk_install
+:DKINSTALL
 	if "%~1" neq "" (goto:eof)
 
 	echo Installing DKBatch . . .

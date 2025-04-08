@@ -1,5 +1,5 @@
 @echo off
-if "%~1" == "" (goto :dk_install)
+if "%~1" == "" (goto :DKINSTALL)
 
 :runDKCpp
 	if not defined ESC (set "ESC=")
@@ -74,7 +74,7 @@ if "%~1" == "" (goto :dk_install)
 
 
 
-:dk_install
+:DKINSTALL
 	if not "%~1"=="" (goto:eof)
 	
 	echo Installing DKCpp . . .

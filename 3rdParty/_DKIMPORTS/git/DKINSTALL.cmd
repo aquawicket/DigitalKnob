@@ -12,9 +12,9 @@ if not defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSyste
 if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal")
 
 ::####################################################################
-::# dk_install
+::# DKINSTALL
 ::#
-:dk_install
+:DKINSTALL
 ::setlocal
 	%dk_call% dk_debugFunc 0	
 	
@@ -56,5 +56,5 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    call :dk_install
+    call :DKINSTALL
 %endfunction%

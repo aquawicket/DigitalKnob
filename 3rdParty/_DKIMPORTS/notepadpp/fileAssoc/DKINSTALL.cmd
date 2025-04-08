@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../../DKBa
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_installNotepadppFileAssociations()
+::# DKINSTALL()
 ::#
-:dk_installNotepadppFileAssociations
+:DKINSTALL
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
@@ -62,5 +62,5 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	setlocal
 	%dk_call% dk_debugFunc 0
 	
-    %dk_call% dk_installNotepadppFileAssociations
+    call :DKINSTALL
 %endfunction%

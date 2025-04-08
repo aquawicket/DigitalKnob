@@ -2,7 +2,7 @@
 if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../DKBatch/functions/")
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
-:dk_uninstall
+:DKUNINSTALL
 setlocal
 	%dk_call% dk_debugFunc 0
 	
@@ -39,5 +39,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	call :dk_uninstall
+	call :DKUNINSTALL
 %endfunction%
