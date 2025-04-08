@@ -197,7 +197,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		file(GLOB ITEMS $ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/*)
 		list(LENGTH ITEMS count)
 		if(${count} GREATER 1)
-			dk_notice(" Found ${count} items in the ${PLUGIN_IMPORT_NAME} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in $ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/DKMAKE.cmake ")
+			dk_notice(" Found ${count} items in the ${PLUGIN_IMPORT_NAME} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in $ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/DKINSTALL.cmake ")
 		endif()
 	endif()
 	

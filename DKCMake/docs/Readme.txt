@@ -30,7 +30,7 @@
 		Rebuild - "Rebuild the project wihtout dependencies"
 		RebuildAll - "Rebuild the project and dependencies"
 	
-* All Apps, Plugins and 3rdParty Libraries, require a DKMAKE.cmake file to interact with the build system.
+* All Apps, Plugins and 3rdParty Libraries, require a DKINSTALL.cmake file to interact with the build system.
 
 
 ****************************************************
@@ -49,7 +49,7 @@
 ****************************************************
 
 Q. How do I add a 3rdParty library to DigitalKnob
-A. Take a look in the /digitalknob/3rdParty/_DKIMPORTS folder,   there you will find tons of examples of how DK uses DKMAKE.cmake files.
+A. Take a look in the /digitalknob/3rdParty/_DKIMPORTS folder,   there you will find tons of examples of how DK uses DKINSTALL.cmake files.
 
 Q. How do I add an App
 A. For now, just rename any of the folders in /DKCpp/apps to your desired app name and use it as a template.

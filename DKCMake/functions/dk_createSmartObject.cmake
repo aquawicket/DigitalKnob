@@ -15,7 +15,7 @@ function(dk_createSmartObject object)
 	
 	todo()
 	dk_verbose("dk_createSmartObject(${object})")
-	# We require something that can resolve to a full, valid path containing a DKMAKE.cmake file 
+	# We require something that can resolve to a full, valid path containing a DKINSTALL.cmake file 
 endfunction()
 
 

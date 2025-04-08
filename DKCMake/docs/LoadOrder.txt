@@ -7,20 +7,20 @@ CMakeLists.txt        	    				<file>.cmake
     *DKStart.cmake			    			DKEval.cmake
 		DKVariables.cmake
 	*DKBuildFlags.cmake
-		cmake/DKMAKE.cmake
-		build-essential/DKMAKE.cmake
-		gcc/DKMAKE.cmake
-		wsl.DKMAKE.cmake
-		make/DKMAKE.cmake
-		android-ndk/DKMAKE.cmake
-		emsdk/DKMAKE.cmake
-		make/DKMAKE.cmake
-		xcode/DKMAKE.cmake
-		gcc/DKMAKE.cmake
-		xcode/DKMAKE.cmake
-		visualstudio/DKMAKE.cmake
-		clang/DKMAKE.cmake	
+		cmake/DKINSTALL.cmake
+		build-essential/DKINSTALL.cmake
+		gcc/DKINSTALL.cmake
+		wsl.DKINSTALL.cmake
+		make/DKINSTALL.cmake
+		android-ndk/DKINSTALL.cmake
+		emsdk/DKINSTALL.cmake
+		make/DKINSTALL.cmake
+		xcode/DKINSTALL.cmake
+		gcc/DKINSTALL.cmake
+		xcode/DKINSTALL.cmake
+		visualstudio/DKINSTALL.cmake
+		clang/DKINSTALL.cmake	
 	*DKGenerate.cmake
 		DKDisabled.cmake
-		${DK_PROJECT_DIR}/DKMAKE.cmake)
+		${DK_PROJECT_DIR}/DKINSTALL.cmake)
 

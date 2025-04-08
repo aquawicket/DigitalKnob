@@ -1608,7 +1608,7 @@ dk_deleteTempFiles() {
 #	dk_verbose "dk_installMsys2(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('${DKIMPORTS_DIR}/msys2/DKMAKE.cmake')" "MSYS2"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/msys2/DKINSTALL.cmake')" "MSYS2"
 #	dk_printVar MSYS2
 #}
 
@@ -1621,7 +1621,7 @@ dk_deleteTempFiles() {
 #	dk_verbose "dk_installMake(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('${DKIMPORTS_DIR}/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/make/DKINSTALL.cmake')" "MAKE_PROGRAM"
 #	dk_printVar MAKE_PROGRAM
 #}
 
@@ -1634,7 +1634,7 @@ dk_deleteTempFiles() {
 #	dk_verbose "dk_installEmscripten(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('${DKIMPORTS_DIR}/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/emsdk/DKINSTALL.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
 #	dk_printVar EMSDK
 #	dk_printVar EMSDK_ENV
 #	dk_printVar EMSDK_GENERATOR
@@ -1652,7 +1652,7 @@ dk_deleteTempFiles() {
 #	dk_verbose "dk_installAndroidNdk(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/android-ndk/DKINSTALL.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 #	dk_printVar ANDROID_NDK
 #	dk_printVar ANDROID_GENERATOR
 #	dk_printVar ANDROID_TOOLCHAIN_FILE
@@ -1671,7 +1671,7 @@ dk_deleteTempFiles() {
 #	dk_verbose "dk_installClang(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('${DKIMPORTS_DIR}/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/clang/DKINSTALL.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 #	dk_printVar CLANG_C_COMPILER
 #	dk_printVar CLANG_CXX_COMPILER
 #}
@@ -1685,7 +1685,7 @@ dk_deleteTempFiles() {
 #	dk_verbose "dk_installGcc(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('${DKIMPORTS_DIR}/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/gcc/DKINSTALL.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
 #	dk_printVar GCC_C_COMPILER
 #	dk_printVar GCC_CXX_COMPILER
 #}
@@ -1987,14 +1987,14 @@ dk_enterManually() {
 	
 	target_app="_${input}_"
 	
-	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
-	if test -f "${DKIMPORTS_DIR}"/"${input}"/DKMAKE.cmake; then
+	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
+	if test -f "${DKIMPORTS_DIR}"/"${input}"/DKINSTALL.cmake; then
 		TARGET_PATH=${DKIMPORTS_DIR}/${input}
 	fi
-	if test -f "${DKCPP_PLUGINS_DIR}"/"${input}"/DKMAKE.cmake; then
+	if test -f "${DKCPP_PLUGINS_DIR}"/"${input}"/DKINSTALL.cmake; then
 		TARGET_PATH=${DKCPP_PLUGINS_DIR}/${input}
 	fi
-	if test -f "${DKCPP_APPS_DIR}"/"${input}"/DKMAKE.cmake; then
+	if test -f "${DKCPP_APPS_DIR}"/"${input}"/DKINSTALL.cmake; then
 		TARGET_PATH=${DKCPP_APPS_DIR}/${input}
 		return $(true)
 	fi
@@ -2004,8 +2004,8 @@ dk_enterManually() {
 		mkdir -p "${DKCPP_APPS_DIR}"/"${target_app}";
 	fi
 	
-	# create apps/<target_app>/DKMAKE.cmake 
-	echo "dk_depend(${input})" > "${DKCPP_APPS_DIR}"/"${target_app}"/DKMAKE.cmake
+	# create apps/<target_app>/DKINSTALL.cmake 
+	echo "dk_depend(${input})" > "${DKCPP_APPS_DIR}"/"${target_app}"/DKINSTALL.cmake
 	
 	# create apps/<target_app>/main.cpp
 	echo "int main(int argc, char** argv) { return 0; }" > "${DKCPP_APPS_DIR}"/"${target_app}"/main.cpp

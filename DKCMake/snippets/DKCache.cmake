@@ -1,6 +1,6 @@
 ## https://stackoverflow.com/a/31044116/688352
 
-## USAGE:  Place this cmake command into the command line for any DKMAKE.cmake build scripts using any of these these libraries
+## USAGE:  Place this cmake command into the command line for any DKINSTALL.cmake build scripts using any of these these libraries
 ##	-C$ENV{DKCMAKE_DIR}/DKCache.cmake
 ##
 ## Also note that cmake DOES accept multiple -C'cacheFile' commands at a time, so we can split these up later.

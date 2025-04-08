@@ -21,7 +21,7 @@ function(dk_dependB plugin)
 		dk_append(init_list "${plugin}")
 		
 		dk_getPathToPlugin(${plugin} plugin_path)
-		dk_load(${plugin_path}/DKMAKE.cmake)
+		dk_load(${plugin_path}/DKINSTALL.cmake)
 		#dk_depend(${plugin})
 		#return()
 	#endif()

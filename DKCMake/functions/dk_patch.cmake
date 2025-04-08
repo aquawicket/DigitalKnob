@@ -15,7 +15,7 @@ function(dk_patch import_name dest_path)
 
 	dk_notice("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
 	dk_notice("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the dk_import or dk_install command")
-	dk_notice("located in $ENV{DKIMPORTS_DIR}/${import_name}/DKMAKE.cmake")
+	dk_notice("located in $ENV{DKIMPORTS_DIR}/${import_name}/DKINSTALL.cmake")
 	
 	dk_assertPath($ENV{DKIMPORTS_DIR}/${import_name})
 	dk_assertPath(${dest_path})

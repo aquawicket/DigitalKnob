@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ############ DKDuktapeDebugger ############
-dk_info("DKDuktapeDebugger/DKMAKE.cmake")
+dk_info("DKDuktapeDebugger/DKINSTALL.cmake")
 dk_depend(DKDuktape)
 
 #if(NOT EXISTS ${DKCPP_PLUGINS_DIR}/DKDuktapeDebugger/duk_trans_dvalue.c)

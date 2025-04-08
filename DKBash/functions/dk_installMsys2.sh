@@ -10,7 +10,7 @@ dk_installMsys2() {
 	dk_debugFunc 0
 
 
-	dk_cmakeEval "include('${DKIMPORTS_DIR}/msys2/DKMAKE.cmake')" "MSYS2"
+	dk_cmakeEval "include('${DKIMPORTS_DIR}/msys2/DKINSTALL.cmake')" "MSYS2"
 	dk_printVar MSYS2
 }
 

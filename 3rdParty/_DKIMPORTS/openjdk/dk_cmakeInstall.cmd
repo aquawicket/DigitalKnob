@@ -10,7 +10,7 @@ setlocal
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake)" "JAVAC_EXE"
+    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/openjdk/DKINSTALL.cmake)" "JAVAC_EXE"
 	%dk_call% dk_assertPath %JAVAC_EXE%
 %endfunction%
 

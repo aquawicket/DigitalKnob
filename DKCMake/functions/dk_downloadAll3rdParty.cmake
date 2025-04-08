@@ -12,12 +12,12 @@ function(dk_downloadAll3rdParty)
 	
 	dk_dependAll()
 	
-	# Get a list of all /3rdParty/DKMAKE.cmake paths
+	# Get a list of all /3rdParty/DKINSTALL.cmake paths
 	file(GLOB All3rdParty $ENV{DKIMPORTS_DIR}/*)
 	foreach(item ${All3rdParty})
-		if(EXISTS ${item}/DKMAKE.cmake)
+		if(EXISTS ${item}/DKINSTALL.cmake)
 			dk_verbose(item)
-			file(STRINGS ${item}/DKMAKE.cmake lines)
+			file(STRINGS ${item}/DKINSTALL.cmake lines)
 			dk_unset(temp_import_script)
 			dk_unset(index)
 			dk_unset(indexB)

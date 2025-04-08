@@ -56,7 +56,7 @@ endif()
 ######################################################
 ##### Scan the DKCpp/plugins and build the lists #####
 ######################################################
-dk_load(${DK_Project_Dir}/DKMAKE.cmake)
+dk_load(${DK_Project_Dir}/DKINSTALL.cmake)
 dk_assertVar(target_triple)
 dk_delete(${DK_Project_Dir}/${target_triple}/DKBUILD.log NO_HALT)
 dk_printSettings()

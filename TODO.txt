@@ -10,7 +10,7 @@ Finish coding dk_target_triple.sh
 
 Start coding dk_target_triple.ps1
 
-remove all dk_load(dk_builder) lines from /_DKIMPORTS/lib/DKMAKE.cmake
+remove all dk_load(dk_builder) lines from /_DKIMPORTS/lib/DKINSTALL.cmake
 
 
 

@@ -227,14 +227,14 @@ function DKBuild_InstallXcode(){
 }
 
 function DKBuild_ValidateNDK(){
-	const ANDROID_NDK_BUILD = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROID-NDK_BUILD")
+	const ANDROID_NDK_BUILD = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/android-ndk/DKINSTALL.cmake", "ANDROID-NDK_BUILD")
 	var ANDROID_NDK_DL = ""
 	if(CPP_DK_GetOS() === "Windows")
-		ANDROID_NDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROID-NDK_WIN_DL")
+		ANDROID_NDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/android-ndk/DKINSTALL.cmake", "ANDROID-NDK_WIN_DL")
 	if(CPP_DK_GetOS() === "Mac")
-		ANDROID_NDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROID-NDK_MAC_DL")
+		ANDROID_NDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/android-ndk/DKINSTALL.cmake", "ANDROID-NDK_MAC_DL")
 	if(CPP_DK_GetOS() === "Linux")
-		ANDROID_NDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROID-NDK_LINUX_DL")
+		ANDROID_NDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/android-ndk/DKINSTALL.cmake", "ANDROID-NDK_LINUX_DL")
 	ANDROID_NDK = DIGITALKNOB_DIR+"DK/3rdParty/android-sdk/ndk/"+ANDROID_NDK_BUILD
 	
 	//set environment variables
@@ -256,14 +256,14 @@ function DKBuild_ValidateNDK(){
 		CPP_DKFile_Rename(DIGITALKNOB_DIR+"DK/3rdParty/android-sdk/ndk/android-ndk-r22b", ANDROID_NDK, true)
 		CPP_DKFile_Rename(DIGITALKNOB_DIR+"DK/3rdParty/android-sdk/ndk/android-ndk-r23b", ANDROID_NDK, true)
 		CPP_DKFile_Copy(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/android-ndk/", ANDROID_NDK, true)
-		CPP_DKFile_Delete(ANDROID_NDK+"/DKMAKE.cmake")
+		CPP_DKFile_Delete(ANDROID_NDK+"/DKINSTALL.cmake")
 		CPP_DKFile_StringToFile(ANDROID_NDK_BUILD, ANDROID_NDK+"/installed")
 	}
 }
 
 function DKBuild_ValidateEMSDK(){
 	console.log("Looking for Emscripten SDK . . .")
-	const EMMAKE = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/emsdk/DKMAKE.cmake", "EMMAKE")
+	const EMMAKE = DKBuild_GetDKMakeVariable(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/emsdk/DKINSTALL.cmake", "EMMAKE")
 	if(!CPP_DKFile_Exists(EMMAKE))
 		DKBuild_InstallEMSDK()
 	if(CPP_DKFile_Exists(EMMAKE))
@@ -351,7 +351,7 @@ function DKBuild_GetAppList(){
 				var dkApps = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR+items[i]+"/DKCpp/apps")
 				var dkAppsArray = dkApps.split(",")
 				for(var nn=0; nn < dkAppsArray.length; nn++){
-					if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[i]+"/DKCpp/apps/"+dkAppsArray[nn]+"/DKMAKE.cmake")){
+					if(CPP_DKFile_Exists(DIGITALKNOB_DIR+items[i]+"/DKCpp/apps/"+dkAppsArray[nn]+"/DKINSTALL.cmake")){
 						APP_LIST.push(dkAppsArray[nn])
 					}
 				}
@@ -364,7 +364,7 @@ function DKBuild_FindAppPath(name){
 	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
 	var files = contents.split(",")
 	for(var i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKCpp/apps/"+name+"/DKMAKE.cmake"))
+		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKCpp/apps/"+name+"/DKINSTALL.cmake"))
 			return DIGITALKNOB_DIR+files[i]+"/DKCpp/apps/"+name+"/"
 	}
 	return 0;

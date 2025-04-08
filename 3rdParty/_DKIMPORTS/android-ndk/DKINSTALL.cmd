@@ -11,7 +11,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
  
 	%dk_call% dk_validatePath DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake)" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
+    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/android-ndk/DKINSTALL.cmake)" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
     %dk_call% dk_assertVar ANDROID_GENERATOR
     %dk_call% dk_assertVar ANDROID_API
     %dk_call% dk_assertVar ANDROID_NDK

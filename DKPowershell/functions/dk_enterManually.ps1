@@ -13,14 +13,14 @@ function Global:dk_enterManually() {
 	$input = Read-Host
 	$global:target_app = "_${input}_"
 	
-	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
-	if(dk_call dk_pathExists "$DKIMPORTS_DIR/$input/DKMAKE.cmake"){
+	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
+	if(dk_call dk_pathExists "$DKIMPORTS_DIR/$input/DKINSTALL.cmake"){
 		$global:TARGET_PATH = "$DKIMPORTS_DIR/$input"
 	}
-	if(dk_call dk_pathExists "$DKCPP_PLUGINS_DIR/$input/DKMAKE.cmake"){
+	if(dk_call dk_pathExists "$DKCPP_PLUGINS_DIR/$input/DKINSTALL.cmake"){
 		$global:TARGET_PATH = "$DKCPP_PLUGINS_DIR/$input"
 	}
-	if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$input/DKMAKE.cmake"){
+	if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$input/DKINSTALL.cmake"){
 		$global:TARGET_PATH = "$DKCPP_APPS_DIR/$input"
 		return ${true}
 	}
@@ -30,8 +30,8 @@ function Global:dk_enterManually() {
 		dk_call dk_makeDirectory "$DKCPP_APPS_DIR/$target_app"
 	}
 	
-	# create DKCpp/apps/<target_app>/DKMAKE.cmake 
-	echo "dk_call dk_depend($input)" > "$DKCPP_APPS_DIR/$target_app/DKMAKE.cmake"
+	# create DKCpp/apps/<target_app>/DKINSTALL.cmake 
+	echo "dk_call dk_depend($input)" > "$DKCPP_APPS_DIR/$target_app/DKINSTALL.cmake"
 	
 	# create DKCpp/apps/<target_app>/main.cpp
 	echo "int main(int argc, char** argv) { return 0; }" > "$DKCPP_APPS_DIR/$target_app/main.cpp"

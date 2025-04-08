@@ -41,7 +41,7 @@ message("CMAKE_GENERATOR = ${CMAKE_GENERATOR}")
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}/dk_cmakePolicies.cmake")
 dk_cmakePolicies()
 
-# Note: Using DK() as the function name will cause DK/DKMAKE.cmake to fail in dk_load.cmake
+# Note: Using DK() as the function name will cause DK/DKINSTALL.cmake to fail in dk_load.cmake
 #####################################################################
 # DKINIT()
 #

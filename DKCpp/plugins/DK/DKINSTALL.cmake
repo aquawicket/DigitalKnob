@@ -1,4 +1,4 @@
-dk_info("DK/DKMAKE.cmake")
+dk_info("DK/DKINSTALL.cmake")
 
 if(ANDROID)
 	dk_depend(log)
