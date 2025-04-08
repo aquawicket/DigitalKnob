@@ -17,7 +17,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_set REACTOS_DIR "%DKTOOLS_DIR%\ReactOS"
 	%dk_call% dk_set REACTOS_IMG %REACTOS_DIR%\reactos.img
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\dk_install.cmd"
+	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\DKINSTALL.cmd"
 	
 	setlocal
 		if exist "%REACTOS_IMG%" (%return%)

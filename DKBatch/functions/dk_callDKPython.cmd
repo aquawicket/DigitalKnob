@@ -26,7 +26,7 @@ setlocal
 	
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate PYTHON3_EXE "%dk_call% %DKIMPORTS_DIR%/python3/dk_install.cmd"
+	%dk_call% dk_validate PYTHON3_EXE "%dk_call% %DKIMPORTS_DIR%/python3/DKINSTALL.cmd"
 
 	%dk_call% dk_validate CMD_EXE "dk_CMD_EXE.cmd"
 	set DKPYTHON_COMMAND="%CMD_EXE:/=\%" /V:ON /k call "%PYTHON3_EXE:\=/%" "%DKPYTHON_FUNCTIONS_DIR:\=/%/%1.py" %ALL_BUT_FIRST%

@@ -27,7 +27,7 @@ setlocal
 	
 	::### CMAKE ###
 ::	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
-::	%dk_call% dk_validate CMAKE_EXE			"%dk_call% %DKIMPORTS_DIR%/cmake/dk_install.cmd"
+::	%dk_call% dk_validate CMAKE_EXE			"%dk_call% %DKIMPORTS_DIR%/cmake/DKINSTALL.cmd"
 ::	"%CMAKE_EXE%" -E create_symlink 		"%src_path%" "%symlink_path%"
 %endfunction%
 

@@ -10,7 +10,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate VSCODE_EXE "%dk_call% %DKIMPORTS_DIR%\vscode\dk_install.cmd"
+	%dk_call% dk_validate VSCODE_EXE "%dk_call% %DKIMPORTS_DIR%\vscode\DKINSTALL.cmd"
 	%dk_call% dk_installFileAssoc .vscode %VSCODE_EXE%
 	%dk_call% dk_installFileAssoc .code-workspace %VSCODE_EXE%
 %endfunction%

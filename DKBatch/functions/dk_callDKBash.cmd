@@ -12,7 +12,7 @@ setlocal
 
 	::set "USE_WSL=1"
 	if defined USE_WSL   (%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR")
-	if defined USE_WSL   (%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/dk_install.cmd")
+	if defined USE_WSL   (%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd")
 
 	::### Get DKBASH_FUNCTIONS_DIR
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"

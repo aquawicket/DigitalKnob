@@ -56,7 +56,7 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_debug "target_env = %target_env%"
 
 	::###### CSC_EXE ######
-	:: TODO:  note, reference dk_install.cmd for how to call DKCSharp methods from batch script
+	:: TODO:  note, reference DKINSTALL.cmd for how to call DKCSharp methods from batch script
 
 	::###### _c_file_ ######
 	set "_csharp_file_=%DKCSHARP_FUNCTIONS_DIR%/%_func_%.cs"
