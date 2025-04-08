@@ -1,80 +1,96 @@
 executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("DK.vbs").readAll()
 
-
 '##################################################################################
 '# dk_test()
 '#
 public function dk_test(args)
-	WScript.Echo ""
+	dk_echo("")
 	ARGV = Join(args, ";")
-	WScript.Echo "dk_test("+ARGV+")"
-	WScript.Echo ""
-	WScript.Echo "################# dk_test.vbs ################"
+	dk_echo("dk_test("+ARGV+")")
+	dk_echo("")
+	dk_echo("################# dk_test.vbs ################")
 	ARGC = CStr(UBound(args)+1)
 	if ARGC > 0 then 
-		WScript.Echo "                    0 = "+args(0)
+		dk_echo("                           0 = "+args(0))
 	end if
 	if ARGC > 0 then 
-		WScript.Echo "                    1 = "+args(1)
+		dk_echo("                           1 = "+args(1))
 	end if
     if ARGC > 2 then 
-		WScript.Echo "                    2 = "+args(2)
+		dk_echo("                           2 = "+args(2))
 	end if
 	if ARGC > 2 then 
-		WScript.Echo "                    3 = "+args(3)
+		dk_echo("                           3 = "+args(3))
 	end if
 	if ARGC > 2 then 
-		WScript.Echo "                    4 = "+args(4)
+		dk_echo("                           4 = "+args(4))
 	end if
 	if ARGC > 2 then 
-		WScript.Echo "                    5 = "+args(5)
+		dk_echo("                           5 = "+args(5))
 	end if
 	if ARGC > 2 then 
-		WScript.Echo "                    6 = "+args(6)
+		dk_echo("                           6 = "+args(6))
+	end if 
+	if ARGC > 2 then 
+		dk_echo("                           7 = "+args(7))
 	end if
 	if ARGC > 2 then 
-		WScript.Echo "                    7 = "+args(7)
+		dk_echo("                           8 = "+args(8))
 	end if
 	if ARGC > 2 then 
-		WScript.Echo "                    8 = "+args(8)
+		dk _echo("                          9 = "+args(9))
 	end if
-	if ARGC > 2 then 
-		WScript.Echo "                    9 = "+args(9)
-	end if
-        WScript.Echo "           ERRORLEVEL = "+ERRORLEVEL
-        WScript.Echo "                  LVL = "+LVL
-'        WScript.Echo "                 TIME = "+TIME
-        WScript.Echo "                 CMND = "+CMND
-        WScript.Echo "                 FILE = "+WScript.ScriptFullName
-        WScript.Echo "                 LINE = "+LINE
-        WScript.Echo "                 FUNC = "+FUNC
-        WScript.Echo "                 ARGC = "+ARGC
-        WScript.Echo "                 ARGV = "+ARGV
-        WScript.Echo "        DKSCRIPT_PATH = "+DKSCRIPT_PATH
-        WScript.Echo "         DKSCRIPT_DIR = "+DKSCRIPT_DIR
-        WScript.Echo "        DKSCRIPT_NAME = "+DKSCRIPT_NAME
-        WScript.Echo "         DKSCRIPT_EXT = "+DKSCRIPT_EXT
-        WScript.Echo "        DKSCRIPT_ARGS = "+DKSCRIPT_ARGS
-        WScript.Echo "           DKHOME_DIR = "+DKHOME_DIR
-        WScript.Echo "          DKCACHE_DIR = "+DKCACHE_DIR
-        WScript.Echo "        DKDESKTOP_DIR = "+DKDESKTOP_DIR
-        WScript.Echo "          DIGITALKNOB = "+DIGITALKNOB
-        WScript.Echo "      DIGITALKNOB_DIR = "+DIGITALKNOB_DIR
-        WScript.Echo "       DKDOWNLOAD_DIR = "+DKDOWNLOAD_DIR
-        WScript.Echo "          DKTOOLS_DIR = "+DKTOOLS_DIR
-        WScript.Echo "             DKBRANCH = "+DKBRANCH
-        WScript.Echo "         DKBRANCH_DIR = "+DKBRANCH_DIR
-        WScript.Echo "       DK3RDPARTY_DIR = "+DK3RDPARTY_DIR
-        WScript.Echo "           DKCPP_APPS_DIR = "+DKCPP_APPS_DIR
-        WScript.Echo "           DKBASH_DIR = "+DKVB_DIR
-        WScript.Echo " DKBASH_FUNCTIONS_DIR = "+DKVB_FUNCTIONS_DIR
-        WScript.Echo "DKBASH_FUNCTIONS_DIR_ = "+DKVB_FUNCTIONS_DIR_
+        dk_echo("                  ERRORLEVEL = "+ERRORLEVEL)
+    	dk_echo("                         LVL = "+LVL)
+        'dk_echo("                       TIME = "+TIME)
+        dk_echo("                        CMND = "+CMND)
+        dk_echo("                        FILE = "+WScript.ScriptFullName)
+        dk_echo("                        LINE = "+LINE)
+        dk_echo("                        FUNC = "+FUNC)
+        dk_echo("                        ARGC = "+ARGC)
+        dk_echo("                        ARGV = "+ARGV)
+        dk_echo("          ENV(DKSCRIPT_PATH) = "+ENV("DKSCRIPT_PATH"))
+        dk_echo("           ENV(DKSCRIPT_DIR) = "+ENV("DKSCRIPT_DIR"))
+        dk_echo("          ENV(DKSCRIPT_NAME) = "+ENV("DKSCRIPT_NAME"))
+        dk_echo("           ENV(DKSCRIPT_EXT) = "+ENV("DKSCRIPT_EXT"))
+        dk_echo("          ENV(DKSCRIPT_ARGS) = "+ENV("DKSCRIPT_ARGS"))
+        dk_echo("             ENV(DKHOME_DIR) = "+ENV("DKHOME_DIR"))
+        dk_echo("            ENV(DKCACHE_DIR) = "+ENV("DKCACHE_DIR"))
+        dk_echo("          ENV(DKDESKTOP_DIR) = "+ENV("DKDESKTOP_DIR"))
+        dk_echo("            ENV(DIGITALKNOB) = "+ENV("DIGITALKNOB"))
+        dk_echo("        ENV(DIGITALKNOB_DIR) = "+ENV("DIGITALKNOB_DIR"))
+        dk_echo("         ENV(DKDOWNLOAD_DIR) = "+ENV("DKDOWNLOAD_DIR"))
+        dk_echo("            ENV(DKTOOLS_DIR) = "+ENV("DKTOOLS_DIR"))
+        dk_echo("               ENV(DKBRANCH) = "+ENV("DKBRANCH"))
+        dk_echo("           ENV(DKBRANCH_DIR) = "+ENV("DKBRANCH_DIR"))
+        dk_echo("         ENV(DK3RDPARTY_DIR) = "+ENV("DK3RDPARTY_DIR"))
+        dk_echo("         ENV(DKCPP_APPS_DIR) = "+ENV("DKCPP_APPS_DIR"))
+        dk_echo("             ENV(DKBASH_DIR) = "+ENV("DKBASH_DIR"))
+        dk_echo("   ENV(DKBASH_FUNCTIONS_DIR) = "+ENV("DKBASH_FUNCTIONS_DIR"))
+        dk_echo("  ENV(DKBASH_FUNCTIONS_DIR_) = "+ENV("DKBASH_FUNCTIONS_DIR_"))
+		dk_echo("            ENV(DKBATCH_DIR) = "+ENV("DKBATCH_DIR"))
+        dk_echo("  ENV(DKBATCH_FUNCTIONS_DIR) = "+ENV("DKBATCH_FUNCTIONS_DIR"))
+        dk_echo(" ENV(DKBATCH_FUNCTIONS_DIR_) = "+ENV("DKBATCH_FUNCTIONS_DIR_"))
+		dk_echo("                ENV(DKC_DIR) = "+ENV("DKC_DIR"))
+        dk_echo("      ENV(DKC_FUNCTIONS_DIR) = "+ENV("DKC_FUNCTIONS_DIR"))
+        dk_echo("     ENV(DKC_FUNCTIONS_DIR_) = "+ENV("DKC_FUNCTIONS_DIR_"))
+		dk_echo("            ENV(DKCMAKE_DIR) = "+ENV("DKCMAKE_DIR"))
+        dk_echo("  ENV(DKCMAKE_FUNCTIONS_DIR) = "+ENV("DKCMAKE_FUNCTIONS_DIR"))
+        dk_echo(" ENV(DKCMAKE_FUNCTIONS_DIR_) = "+ENV("DKCMAKE_FUNCTIONS_DIR_"))
+		dk_echo("              ENV(DKCPP_DIR) = "+ENV("DKCPP_DIR"))
+        dk_echo("    ENV(DKCPP_FUNCTIONS_DIR) = "+ENV("DKCPP_FUNCTIONS_DIR"))
+        dk_echo("   ENV(DKCPP_FUNCTIONS_DIR_) = "+ENV("DKCPP_FUNCTIONS_DIR_"))
+		dk_echo("           ENV(DKCSHARP_DIR) = "+ENV("DKCSHARP_DIR"))
+        dk_echo(" ENV(DKCSHARP_FUNCTIONS_DIR) = "+ENV("DKCSHARP_FUNCTIONS_DIR"))
+        dk_echo("ENV(DKCSHARP_FUNCTIONS_DIR_) = "+ENV("DKCSHARP_FUNCTIONS_DIR_"))
     	
 '	%dk_call% setGlobal GLOBAL_VAR "This is a global variable"
 '	%dk_call% setReturn RETURN_VAR "This is a return variable"
-
-	WScript.Echo "GLOBAL_VAR = %GLOBAL_VAR%"
-	WScript.Echo "RETURN_VAR = %RETURN_VAR%"
+	GLOBAL_VAR = "This is a global variable"
+	RETURN_VAR = "This is a return variable"
+	
+	dk_echo("GLOBAL_VAR = "+GLOBAL_VAR)
+	dk_echo("RETURN_VAR = "+RETURN_VAR)
 end function
 
 
@@ -86,22 +102,22 @@ end function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-if DKSCRIPT_FILE = "dk_test.vbs" then
+if(ENV("DKSCRIPT_FILE") = "dk_test.vbs") then
 	
 	dk_test(Array("from :DKTEST", "to dk_test"))
-'	WScript.Echo ""
-'	WScript.Echo "GLOBAL_VAR = %GLOBAL_VAR%"
-'	WScript.Echo "RETURN_VAR = %RETURN_VAR%"
+'	dk_echo ""
+'	dk_echo("GLOBAL_VAR = %GLOBAL_VAR%"
+'	dk_echo("RETURN_VAR = %RETURN_VAR%"
 	
 '	Test::dk_test("from :DKTEST" "to Test::dk_test")
-'	WScript.Echo ""
-'	WScript.Echo "GLOBAL_VAR = %GLOBAL_VAR%"
-'	WScript.Echo "RETURN_VAR = %RETURN_VAR%"
+'	dk_echo ""
+'	dk_echo("GLOBAL_VAR = %GLOBAL_VAR%"
+'	dk_echo("RETURN_VAR = %RETURN_VAR%"
 	
 '	Test::Test::dk_test("from :DKTEST" "to Test::Test::dk_test")
-'	WScript.Echo ""
-'	WScript.Echo "GLOBAL_VAR = %GLOBAL_VAR%"
-'	WScript.Echo "RETURN_VAR = %RETURN_VAR%"
+'	dk_echo ""
+'	dk_echo("GLOBAL_VAR = %GLOBAL_VAR%"
+'	dk_echo("RETURN_VAR = %RETURN_VAR%"
 	
 	
 end if

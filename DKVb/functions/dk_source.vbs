@@ -4,7 +4,7 @@ executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("DK.vbs").
 '# dk_source(<message>)
 '#
 public function dk_source(file)
-	executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile(file+".vbs").readAll()
+	executeGlobal FileSystemObject.openTextFile(file+".vbs").readAll()
 end function
 
 

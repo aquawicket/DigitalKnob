@@ -45,20 +45,20 @@ if "%~1" equ "" (goto:DKINSTALL)
 :DKINSTALL
 	if "%~1" neq "" (goto:eof)
 
-	echo Installing DKJScript . . .
+	echo Installing DKJavascript . . .
 	
 	::###### DK_CMD ######
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r %USERPROFILE% DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
-	::###### Install DKJScript ######
+	::###### Install DKJavascript ######
 	set "CSCRIPT_EXE=cscript.exe"
 	set "WSCRIPT_EXE=wscript.exe"
 	%dk_call% dk_validate DKJAVASCRIPT_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
-	ftype DKJScript=%COMSPEC% /V:ON /K call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
+	ftype DKJavascript=%COMSPEC% /V:ON /K call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR\DKJScript\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
-	assoc .js=DKJScript
+	assoc .js=DKJavascript
 	
-	%dk_call% dk_success "DKJScript install complete"
+	%dk_call% dk_success "DKJavascript install complete"
 %endfunction%
