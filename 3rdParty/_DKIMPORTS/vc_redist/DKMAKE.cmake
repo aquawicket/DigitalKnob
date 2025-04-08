@@ -19,7 +19,8 @@ endif()
 
 
 ###### 32Bit ######
-dk_set(VC_REDIST_X86_IMPORT "https://aka.ms/vs/16/release/vc_redist.x86.exe")
+#dk_set(VC_REDIST_X86_IMPORT "https://aka.ms/vs/16/release/vc_redist.x86.exe")
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/vc_redist/dkconfig.txt" VC_REDIST_X86_IMPORT)
 dk_set(VCCOMP140_X86_DLL "C:/Windows/SysWOW64/vcomp140.dll")
 dk_set(VCCOMP140_X86_DEBUG_DLL "C:/Windows/SysWOW64/vcomp140d.dll")
 dk_set(VCRUNTIME140_X86_DLL "C:/Windows/SysWOW64/vcruntime140.dll")
@@ -36,7 +37,8 @@ endif()
 
 
 ###### 64Bit ######
-dk_set(VC_REDIST_X86_64_IMPORT "https://aka.ms/vs/16/release/VC_redist.x64.exe")
+#dk_set(VC_REDIST_X86_64_IMPORT "https://aka.ms/vs/16/release/VC_redist.x64.exe")
+dk_getFileParam("$ENV{DKIMPORTS_DIR}/vc_redist/dkconfig.txt" VC_REDIST_X86_64_IMPORT)
 dk_set(VCCOMP140_X86_64_DLL "C:/Windows/System32/vcomp140.dll")
 dk_set(VCCOMP140_X86_64_DEBUG_DLL "C:/Windows/System32/vcomp140d.dll")
 dk_set(VCRUNTIME140_X86_64_DLL "C:/Windows/System32/vcruntime140.dll")

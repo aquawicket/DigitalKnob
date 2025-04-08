@@ -19,8 +19,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #dk_depend(depend_name)
 
 ### INSTALL ###
-dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/__APP_NAME__/dkconfig.txt __APP_NAME__IMPORT)
+dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam	("$ENV{DKIMPORTS_DIR}/__APP_NAME__/dkconfig.txt" __APP_NAME__IMPORT)
 dk_import		(${__APP_NAME__})
 
 

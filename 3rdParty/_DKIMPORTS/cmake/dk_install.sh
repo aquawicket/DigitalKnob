@@ -10,7 +10,6 @@ CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmak
 CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
 
 
-
 ##################################################################################
 # dk_install()
 #
@@ -18,7 +17,6 @@ CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/c
 dk_install() {
 	dk_debugFunc 0
 
-	
 	dk_validate HOST_OS "dk_host_triple"
 	######################################################################################################
 	[ "${HOST_OS}" = "android" ]                 && CMAKE_IMPORT=cmake
