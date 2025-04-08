@@ -70,9 +70,18 @@ function(DKTEST)
 	endif()
 	
 	
+	dk_echo()
+	set(url "https://aka.ms/vs/16/release/VC_redist.x86.exe")
+	dk_urlExists("${url}")
+	if(${dk_urlExists} EQUAL 0)
+		dk_echo("url:${url} exists") 
+	else()
+		dk_echo("url:${url} does not exist") 
+	endif()
+	
 	
 	dk_echo()
-	set(url "https://dl.google.com/android/repository/android-ndk-r23c-windows.zip")
+	set(url "https://aka.ms/vs/16/release/VC_redist.x64.exe")
 	dk_urlExists("${url}")
 	if(${dk_urlExists} EQUAL 0)
 		dk_echo("url:${url} exists") 
