@@ -36,6 +36,7 @@ setlocal
 	call %DKIMPORTS_DIR%/vs_coreeditorfonts/dk_uninstall.cmd
 	call %DKIMPORTS_DIR%/vs_coreeditorfonts/dk_uninstall.cmd
 	call %DKIMPORTS_DIR%/python/dk_uninstall.cmd
+	call %DKIMPORTS_DIR%/vc_redist/dk_uninstall.cmd
 
 	::call %DKIMPORTS_DIR%/wsl/dk_uninstall.cmd
 

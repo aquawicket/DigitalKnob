@@ -4,14 +4,9 @@ if "%~1" equ "" (goto:dk_install)
 
 :runDKPhp
 	set "DKPHP_FUNCTIONS_DIR=%~1"
-	::echo DKPHP_FUNCTIONS_DIR = %DKPHP_FUNCTIONS_DIR%
-
 	set "PHP_EXE=%~2"
-	::echo PHP_EXE = %PHP_EXE%
-
 	set "DKSCRIPT_PATH=%~3"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
-	::echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 
 	::###### run script ######'
 	"%COMSPEC%" /V:ON /K call "%PHP_EXE%" "%DKSCRIPT_PATH%"
