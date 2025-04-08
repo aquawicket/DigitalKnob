@@ -14,7 +14,7 @@ macro(dk_preload var)
 	string(STRIP ${var} fn)
 	
 	get_filename_component(name_we "${fn}" NAME_WE)
-	if("${name_we}" STREQUAL "DKMAKE")
+	if("${name_we}" STREQUAL "DKINSTALL")
 		dk_dirname("${fn}" fnDir)
 		#dk_echo("fnDir = ${fnDir}")
 		if(fnDir)
