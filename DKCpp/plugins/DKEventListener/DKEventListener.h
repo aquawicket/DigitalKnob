@@ -15,7 +15,7 @@ typedef std::function<void(DKEvent*)> DKCallback;
 class DKEventListener : virtual public DKInterface
 {
 public:
-	DKEventListener() : DKInterface() {
+	DKEventListener() : DKInterface(){
 		DKDEBUGFUNC();
 		interfaceName = "EventListener";
 		address[interfaceName] = pointerToAddress(this);
@@ -23,7 +23,7 @@ public:
 	}
 	
 	// undefined handleEvent(Event event);
-	virtual const void handleEvent(DKEvent& event) {
+	virtual const void handleEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKTODO();
 	}

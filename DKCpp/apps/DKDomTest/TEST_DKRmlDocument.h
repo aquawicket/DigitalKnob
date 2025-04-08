@@ -12,7 +12,7 @@ public:
 	static DKRmlDocument* _dkRmlDocument;
 	//std::unique_ptr<DKRmlDocument> _dkRmlDocument;
 	
-	TEST_DKRmlDocument() {
+	TEST_DKRmlDocument(){
 		//DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
@@ -46,7 +46,7 @@ public:
 		printRmlDocumentProperties(_dkRmlDocument);
 	}
 	
-	~TEST_DKRmlDocument() {
+	~TEST_DKRmlDocument(){
 		delete _dkRmlDocument;
 	}
 	
@@ -65,7 +65,7 @@ public:
 				DKElement* item = aElements->item(i);
 				if (!item)
 					console.error("aElements->item(" + toString(i) + ") invalid!");
-				if (item->hasAttribute("href")) {
+				if (item->hasAttribute("href")){
 					item->style()->setProperty("color", "rgb(0,0,255)");
 					item->style()->setProperty("text-decoration", "underline");
 					item->addEventListener("click", &TEST_DKRmlDocument::onHyperlink);

@@ -12,7 +12,7 @@ class TEST_EventListener //: public DKObjectT<TEST_EventListener>
 public:
 	DKEventListener* _eventListener;
 
-	TEST_EventListener() {
+	TEST_EventListener(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_EventListener.h //////");
 		
@@ -21,7 +21,7 @@ public:
 		printEventListenerProperties(*_eventListener);
 	}
 	
-	~TEST_EventListener() {
+	~TEST_EventListener(){
 		delete _eventListener;
 	}
 	

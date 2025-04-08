@@ -20,7 +20,7 @@ int main(int argc, char** argsv)
 	);
 
 	// Check that the window was successfully created
-	if (window == NULL) {
+	if (window == NULL){
 		// In the case that the window could not be made...
 		SDL_Log("Could not create window: %s\n", SDL_GetError());
 		return 1;
@@ -40,10 +40,10 @@ int main(int argc, char** argsv)
 	SDL_Rect rect_tex = { 200, 200, surface ? surface->w : 0, surface ? surface->h : 0 };
 	SDL_FreeSurface(surface);
 
-	while (1) {
+	while (1){
 		SDL_Event e;
-		if (SDL_PollEvent(&e)) {
-			if (e.type == SDL_QUIT) {
+		if (SDL_PollEvent(&e)){
+			if (e.type == SDL_QUIT){
 				break;
 			}
 		}

@@ -2,7 +2,7 @@
 
 /*
 // https://stackoverflow.com/a/950146/688352
-function loadScript(url, callback) {
+function loadScript(url, callback){
     // Adding the script tag to the head as suggested before
     var head = document.head;
     var script = document.createElement('script');
@@ -24,7 +24,7 @@ function loadScript(url, callback) {
 //#
 //#     @msg    - The message to print
 //#
-dk_echo = function dk_echo_f() {
+dk_echo = function dk_echo_f(){
 	console.log(arguments[0]);
 }
 
@@ -33,8 +33,8 @@ dk_echo = function dk_echo_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
-	dk_echo("Hello World")
+	dk_echo("Hello World");
 }

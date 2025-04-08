@@ -39,7 +39,7 @@ const char* BUILD_DATE = __DATE__;
 const char* BUILD_TIME = __TIME__;
 
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 	#if HAVE_DKSDLWindow
 		#if !IOS && !EMSCRIPTEN
 			SDL_SetMainReady();

@@ -17,7 +17,7 @@ WARNING_ENABLE
 class DKLocation : virtual public DKInterface
 {
 public:
-	DKLocation() : DKInterface() {
+	DKLocation() : DKInterface(){
 		DKDEBUGFUNC();
 		interfaceName = "Location";
 		address[interfaceName] = pointerToAddress(this);
@@ -32,7 +32,7 @@ public:
 		UriUriA uri;
 		const char* const uriString = href.c_str();
 		const char* errorPos;
-		if (uriParseSingleUriA(&uri, uriString, &errorPos) != URI_SUCCESS) {
+		if (uriParseSingleUriA(&uri, uriString, &errorPos) != URI_SUCCESS){
 			DKERROR("uriParseSingleUriA failed! \n");
 			return;
 		}
@@ -83,19 +83,19 @@ public:
 	virtual void hash(const USVString& hash)		{ _hash = hash; } 			// setter
 
 	// [LegacyUnforgeable] undefined assign(USVString url);
-	virtual void assign(const USVString& url) {
+	virtual void assign(const USVString& url){
 		DKDEBUGFUNC(url);
 		DKTODO();
 	}
 	
 	// [LegacyUnforgeable] undefined replace(USVString url);
-	virtual void replace(const USVString& url) {
+	virtual void replace(const USVString& url){
 		DKDEBUGFUNC(url);
 		DKTODO();
 	}
 	
 	// [LegacyUnforgeable] undefined reload();
-	virtual void reload() {
+	virtual void reload(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}

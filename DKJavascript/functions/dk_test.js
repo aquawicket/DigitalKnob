@@ -68,7 +68,7 @@ dk_test = function dk_test_f(){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	dk_test("from :DKTEST", "to dk_test");

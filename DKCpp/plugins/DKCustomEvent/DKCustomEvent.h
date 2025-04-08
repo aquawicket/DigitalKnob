@@ -17,7 +17,7 @@ class DKCustomEvent : public DKEvent
 {
 public:
 	// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
-	DKCustomEvent(const DOMString& type, const CustomEventInit& eventInitDict = "{}") : DKEvent(type, eventInitDict) {
+	DKCustomEvent(const DOMString& type, const CustomEventInit& eventInitDict = "{}") : DKEvent(type, eventInitDict){
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "CustomEvent";
 		address[interfaceName] = pointerToAddress(this);

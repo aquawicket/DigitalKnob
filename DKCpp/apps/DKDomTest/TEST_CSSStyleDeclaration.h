@@ -10,7 +10,7 @@
 class TEST_CSSStyleDeclaration : public DKObjectT<TEST_CSSStyleDeclaration>
 {
 public:
-	TEST_CSSStyleDeclaration() {
+	TEST_CSSStyleDeclaration(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_CSSStyleDeclaration.h //////");
 		
@@ -18,7 +18,7 @@ public:
 		printCSSStyleDeclarationProperties(cssStyleDeclaration);
 	}
 	
-	static void printCSSStyleDeclarationProperties(DKCSSStyleDeclaration& cssStyleDeclaration) {
+	static void printCSSStyleDeclarationProperties(DKCSSStyleDeclaration& cssStyleDeclaration){
 		DKDEBUGFUNC(cssStyleDeclaration);
 		
 		console.log("cssStyleDeclaration = "			+toString(cssStyleDeclaration));

@@ -885,7 +885,7 @@ int DKWidgetJS::GetClientWidth(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString value;
-	if (!DKWidget::GetClientWidth(id, value)) {
+	if (!DKWidget::GetClientWidth(id, value)){
 		return 0;
 	}
 	duk_push_string(ctx, value.c_str());
@@ -898,7 +898,7 @@ int DKWidgetJS::GetClientHeight(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString value;
-	if (!DKWidget::GetClientHeight(id, value)) {
+	if (!DKWidget::GetClientHeight(id, value)){
 		return 0;
 	}
 	duk_push_string(ctx, value.c_str());

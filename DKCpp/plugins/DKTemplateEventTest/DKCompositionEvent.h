@@ -12,7 +12,7 @@ class DKCompositionEvent : public DKUIEvent
 public:
 	////// Constructor //////
 	// [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
-	DKCompositionEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
+	DKCompositionEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options){
 		DKINFO("DKCompositionEvent("+_type+", "+_options+") \n");
 		
 		////// Instance properties //////
@@ -31,7 +31,7 @@ public:
 	
 	////// Instance methods //////
 	// [CompositionEvent.initCompositionEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/initCompositionEvent
-	void initCompositionEvent() {
+	void initCompositionEvent(){
 		DKTODO();
 	}
 

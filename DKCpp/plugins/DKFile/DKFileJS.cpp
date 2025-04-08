@@ -222,7 +222,7 @@ int DKFileJS::GetModifiedTime(duk_context* ctx){
 	return true;
 }
 
-int DKFileJS::GetPath(duk_context* ctx) {
+int DKFileJS::GetPath(duk_context* ctx){
 	DKString path = duk_require_string(ctx, 0);
 	DKFile::GetPath(path);
 	duk_push_string(ctx, path.c_str());
@@ -230,7 +230,7 @@ int DKFileJS::GetPath(duk_context* ctx) {
 	return true;
 }
 
-int DKFileJS::GetPaths(duk_context* ctx) {
+int DKFileJS::GetPaths(duk_context* ctx){
 	DKString path = duk_require_string(ctx, 0);
 	DKFile::GetPath(path);
 	DKString aPath;

@@ -12,7 +12,7 @@ class DKKeyboardEvent : public DKUIEvent
 public:
 	////// Constructor //////
 	// [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
-	DKKeyboardEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
+	DKKeyboardEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options){
 		DKINFO("DKKeyboardEvent("+_type+", "+_options+") \n");
 		
 		////// Instance properties //////
@@ -70,18 +70,18 @@ public:
 	
 	////// Instance methods //////
 	// [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
-	void getModifierState() {
+	void getModifierState(){
 		DKTODO();
 	}
 	
 	
 	////// Obsolete methods //////
 	// [KeyboardEvent.initKeyEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyEvent
-	void initKeyEvent() {
+	void initKeyEvent(){
 		DKDEPRECATED();
 	}
 	// [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
-	void initKeyboardEvent() {
+	void initKeyboardEvent(){
 		DKDEPRECATED();
 	}
 	

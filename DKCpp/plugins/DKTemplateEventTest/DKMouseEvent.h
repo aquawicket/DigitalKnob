@@ -12,7 +12,7 @@ class DKMouseEvent : public DKUIEvent
 public:
 	////// Constructor //////
 	// [MouseEvent()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent
-	DKMouseEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
+	DKMouseEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options){
 		DKINFO("DKMouseEvent("+_type+", "+_options+") \n");
 		
 		////// Instance properties //////
@@ -100,11 +100,11 @@ public:
 	
 	////// Instance methods //////
 	// [MouseEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState
-	void getModifierState() {
+	void getModifierState(){
 		DKTODO();
 	}
 	// [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
-	void initMouseEvent() {
+	void initMouseEvent(){
 		DKDEPRECATED();
 	}
 	

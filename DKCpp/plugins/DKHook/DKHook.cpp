@@ -39,7 +39,7 @@ HHOOK DKHook::hook;
 #endif
 //WARNING_ENABLE
 
-bool DKHook::Init() {
+bool DKHook::Init(){
 	DKDEBUGFUNC();
 #if WIN
 	InstallHook();
@@ -64,14 +64,14 @@ bool DKHook::Init() {
 	return true;
 }
 
-bool DKHook::End() {
+bool DKHook::End(){
 	DKDEBUGFUNC();
 	//if(hModule){FreeLibrary(hModule);}
 	return true;
 }
 
 #if LINUX
-void DKHook::LinuxHook() {
+void DKHook::LinuxHook(){
 	DKDEBUGFUNC();
 	// Read Mouse     
 	bytes = read(fd, _data, sizeof(_data));
@@ -87,7 +87,7 @@ void DKHook::LinuxHook() {
 #endif
 
 #if WIN
-int DKHook::Messsages() {
+int DKHook::Messsages(){
 	DKDEBUGFUNC();
 	while(msg.message != WM_QUIT){ //while we do not close our application
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)){
@@ -100,7 +100,7 @@ int DKHook::Messsages() {
 	return (int)msg.wParam; //return the messages
 }
 
-void DKHook::InstallHook() {
+void DKHook::InstallHook(){
 	DKDEBUGFUNC();
 	/*
 	SetWindowHookEx(
@@ -123,13 +123,13 @@ void DKHook::InstallHook() {
 	}
 }
 
-void DKHook::UninstallHook() {
+void DKHook::UninstallHook(){
 	DKDEBUGFUNC();
 	UnhookWindowsHookEx(hook);
 }
 
 
-LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam) {
+LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam){
 	DKDEBUGFUNC(nCode, wParam, lParam);
 	MSLLHOOKSTRUCT* pMouseStruct = (MSLLHOOKSTRUCT *)lParam; // WH_MOUSE_LL struct										 
 	if(nCode == 0){ // we have information in wParam/lParam ? If yes, let's check it:
@@ -151,7 +151,7 @@ LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam) {
 	return CallNextHookEx(DKHook::hook, nCode, wParam, lParam);
 }
 
-LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam) {
+LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam){
 	DKDEBUGFUNC(nCode, wParam, lParam);
 	KBDLLHOOKSTRUCT* pKeyboardStruct = (KBDLLHOOKSTRUCT *)lParam; // WH_KEYBOARD_LL struct
 	if(nCode == 0){ // we have information in wParam/lParam ? If yes, let's check it:

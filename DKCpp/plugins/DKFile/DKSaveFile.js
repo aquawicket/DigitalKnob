@@ -8,7 +8,7 @@ var rPath;
 //var DKSaveFile_callback;
 
 //////////////////////////
-function DKSaveFile_init() {
+function DKSaveFile_init(){
     dk.create("DKFile/DKSaveFile.css");
     dk.create("DKFile/DKSaveFile.html");
     byId("DKFile/DKSaveFile.html").addEventListener("SetFile", DKSaveFile_onevent);
@@ -26,7 +26,7 @@ function DKSaveFile_init() {
 }
 
 /////////////////////////
-function DKSaveFile_end() {
+function DKSaveFile_end(){
     byId("DKFile/DKSaveFile.html").removeEventListener("SetFile", DKSaveFile_onevent);
     byId("DKSaveFileCancel").removeEventListener("click", DKSaveFile_onevent);
     byId("DKSaveFileOK").removeEventListener("click", DKSaveFile_onevent);
@@ -37,38 +37,38 @@ function DKSaveFile_end() {
 }
 
 //////////////////////////////////
-function DKSaveFile_onevent(event) {
+function DKSaveFile_onevent(event){
     //console.log("DKSaveFile_onevent("+event+")"); 
     //console.log("DKSaveFile_onevent("+event.type+","+event.value+")");
     if (!event.currentTarget)
         return error("event.currentTarger invalid");
 
     console.log("DKSaveFile_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
-    if (event.currentTarget.id.includes("DKSaveFileDrive")) {
+    if (event.currentTarget.id.includes("DKSaveFileDrive")){
         DKSaveFile_OpenFolder(DK_GetValue(event));
     }
-    if (event.currentTarget.id.includes("DKSaveFileFolder")) {
+    if (event.currentTarget.id.includes("DKSaveFileFolder")){
         //console.log("DKSaveFileFolder");
         DKSaveFile_OpenFolder(DK_GetValue(event));
     }
-    if (event.currentTarget.id.includes("DKSaveFileFile")) {
+    if (event.currentTarget.id.includes("DKSaveFileFile")){
         DKSaveFile_OpenFile(DK_GetValue(event));
     }
 
-    if (event.currentTarget.id === "DKSaveFileUp") {
+    if (event.currentTarget.id === "DKSaveFileUp"){
         var up = byId("DKSaveFilePath").value + "/..";
         //console.log(up);
         DKSaveFile_OpenFolder(up);
     }
-    if (event.currentTarget.id === "DKSaveFileOK") {
-        if (rPath && event_data2 === "relative") {
-            if (CPP_DKFile_IsDirectory(rPath)) {
+    if (event.currentTarget.id === "DKSaveFileOK"){
+        if (rPath && event_data2 === "relative"){
+            if (CPP_DKFile_IsDirectory(rPath)){
                 rPath = rPath + "/" + byId("DKSaveFileName").value;
             }
             console.log("DKSendEvent(" + event_id + "," + event_type + "," + rPath + ")");
             DKSendEvent(event_id, event_type, rPath);
-        } else if (aPath && event_data2 === "absolute") {
-            if (CPP_DKFile_IsDirectory(aPath)) {
+        } else if (aPath && event_data2 === "absolute"){
+            if (CPP_DKFile_IsDirectory(aPath)){
                 aPath = aPath + "/" + byId("DKSaveFileName").value;
             }
             //console.log("DKSendEvent("+event_id+","+event_type+","+aPath+")");
@@ -85,12 +85,12 @@ function DKSaveFile_onevent(event) {
         return;
     }
 
-    if (event.currentTarget.id === "DKSaveFileCancel") {
+    if (event.currentTarget.id === "DKSaveFileCancel"){
         DKFrame_Close("DKFile/DKSaveFile.html");
         return;
     }
 
-    if (event.type === "SetFile") {
+    if (event.type === "SetFile"){
         //console.log("event.value = "+event.value);
 
         //var params = DK_GetValue(event).split(",");
@@ -106,7 +106,7 @@ function DKSaveFile_onevent(event) {
         DKSaveFile_UpdatePath(event_data1);
     }
 
-    if (event.currentTarget.id === "DKSaveFilePath") {
+    if (event.currentTarget.id === "DKSaveFilePath"){
         console.log("DKSaveFilePath");
         //var path = byId("DKSaveFilePath").value;
         //DKSaveFile_UpdatePath(path);
@@ -122,16 +122,16 @@ function DKSaveFile_GetFIle(callback)
 */
 
 //////////////////////////////////////
-function DKSaveFile_OpenFolder(path) {
-    if (DKSaveFile_UpdatePath(path)) {
+function DKSaveFile_OpenFolder(path){
+    if (DKSaveFile_UpdatePath(path)){
         return true;
     }
     return false;
 }
 
 ////////////////////////////////////
-function DKSaveFile_OpenFile(path) {
-    if (DK_GetOS() === "Android") {
+function DKSaveFile_OpenFile(path){
+    if (DK_GetOS() === "Android"){
         aPath = path;
     } else {
         aPath = CPP_DKFile_GetAbsolutePath(path);
@@ -145,12 +145,12 @@ function DKSaveFile_OpenFile(path) {
 }
 
 //////////////////////////////////////
-function DKSaveFile_UpdatePath(path) {
+function DKSaveFile_UpdatePath(path){
     if (!path)
         return error("path invalid");
         
     console.log("DKSaveFile_UpdatePath(" + path + ")");
-    if (DK_GetOS() === "Android") {
+    if (DK_GetOS() === "Android"){
         aPath = path;
     } else {
         aPath = CPP_DKFile_GetAbsolutePath(path);
@@ -167,8 +167,8 @@ function DKSaveFile_UpdatePath(path) {
     byId("DKSaveFileMenu").innerHTML = "";
     byId("DKSaveFileMenu2").innerHTML = "";
 
-    for (var d = 0; d < files.length; d++) {
-        if (CPP_DKFile_IsDirectory(aPath + "/" + files[d])) {
+    for (var d = 0; d < files.length; d++){
+        if (CPP_DKFile_IsDirectory(aPath + "/" + files[d])){
             //Folders
             var element2 = DK_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFolder");
             var value = aPath + "/" + files[d];
@@ -182,8 +182,8 @@ function DKSaveFile_UpdatePath(path) {
         }
     }
 
-    for (var f = 0; f < files.length; f++) {
-        if (!CPP_DKFile_IsDirectory(aPath + "/" + files[f])) {
+    for (var f = 0; f < files.length; f++){
+        if (!CPP_DKFile_IsDirectory(aPath + "/" + files[f])){
             //Files
             var element3 = DK_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFile");
             var value = aPath + "/" + files[f];
@@ -195,11 +195,11 @@ function DKSaveFile_UpdatePath(path) {
             element3.addEventListener("click", DKSaveFile_onevent);
 
             var extension = CPP_DKFile_GetExtention(files[f]);
-            if ((extension === "png") || (extension === "jpeg") || (extension === "jpg") || (extension === "bmp") || (extension === "tiff") || (extension === "tif") || (extension === "gif") || (extension === "tga") || (extension === "ico")) {
+            if ((extension === "png") || (extension === "jpeg") || (extension === "jpg") || (extension === "bmp") || (extension === "tiff") || (extension === "tif") || (extension === "gif") || (extension === "tga") || (extension === "ico")){
                 element3.style.backgroundImage = "url(\"DKFile/picture.png\")";
-            } else if ((extension === "osg") || (extension === "osgb") || (extension === "osgt") || (extension === "3dm") || (extension === "3ds") || (extension === "ac") || (extension === "ascii") || (extension === "blend") || (extension === "bvh") || (extension === "c4d") || (extension === "dae") || (extension === "dds") || (extension === "dgn") || (extension === "dwg") || (extension === "dxf") || (extension === "fbx") || (extension === "lwo") || (extension === "lws") || (extension === "ma") || (extension === "max") || (extension === "mb") || (extension === "mesh") || (extension === "mtl") || (extension === "obj") || (extension === "pov") || (extension === "skp") || (extension === "stl") || (extension === "ztl")) {
+            } else if ((extension === "osg") || (extension === "osgb") || (extension === "osgt") || (extension === "3dm") || (extension === "3ds") || (extension === "ac") || (extension === "ascii") || (extension === "blend") || (extension === "bvh") || (extension === "c4d") || (extension === "dae") || (extension === "dds") || (extension === "dgn") || (extension === "dwg") || (extension === "dxf") || (extension === "fbx") || (extension === "lwo") || (extension === "lws") || (extension === "ma") || (extension === "max") || (extension === "mb") || (extension === "mesh") || (extension === "mtl") || (extension === "obj") || (extension === "pov") || (extension === "skp") || (extension === "stl") || (extension === "ztl")){
                 element3.style.backgroundImage = "url(\"DKFile/cube.png\")";
-            } else if ((extension === "html") || (extension === "htm")) {
+            } else if ((extension === "html") || (extension === "htm")){
                 element3.style.backgroundImage = "url(\"DKFile/html.png\")";
             } else {
                 element3.style.backgroundImage = "url(\"DKFile/file.png\")";

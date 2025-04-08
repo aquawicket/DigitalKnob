@@ -17,7 +17,7 @@ public:
 	DKRmlInterface* _dkRmlInterface = nullptr;
 	DKRmlEventListener* _dkRmlEventListener = nullptr;
 
-	DKRmlLocation(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKLocation() {
+	DKRmlLocation(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKLocation(){
 		DKDEBUGFUNC();
 		DKASSERT(dkRmlInterface);
 		DKASSERT(dkRmlEventListener);

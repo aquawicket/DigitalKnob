@@ -9,7 +9,7 @@
 //#
 #include <stdarg.h>
 #include <stdio.h>
-int dk_echo(const char* format, ...) {
+int dk_echo(const char* format, ...){
 	va_list args;
     va_start(args, format);
 	int exit_status = vprintf(format, args);

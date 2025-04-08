@@ -5,7 +5,7 @@
 // [Exposed=*]
 // interface Event {
 // constructor(DOMString type, optional EventInit eventInitDict = {});
-var Event = function Event(type, eventInitDict, address) {
+var Event = function Event(type, eventInitDict, address){
 	//console.log("Event("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
@@ -42,7 +42,7 @@ var Event = function Event(type, eventInitDict, address) {
     });
 	
 	// sequence<EventTarget> composedPath();
-	Event.prototype.composedPath = function composedPath() {
+	Event.prototype.composedPath = function composedPath(){
 		return CPP_DKEventDUK_composedPath(this.address);
     }
 	
@@ -82,7 +82,7 @@ var Event = function Event(type, eventInitDict, address) {
     })
 	
 	// undefined stopPropagation();
-	Event.prototype.stopPropagation = function stopPropagation() {
+	Event.prototype.stopPropagation = function stopPropagation(){
         CPP_DKEventDUK_stopPropagation(this.address);
     }
 	
@@ -94,7 +94,7 @@ var Event = function Event(type, eventInitDict, address) {
     })
 	
 	// undefined stopImmediatePropagation();
-	Event.prototype.stopImmediatePropagation = function stopImmediatePropagation() {
+	Event.prototype.stopImmediatePropagation = function stopImmediatePropagation(){
         CPP_DKEventDUK_stopImmediatePropagation(this.address);
     }
 	
@@ -120,7 +120,7 @@ var Event = function Event(type, eventInitDict, address) {
     })
 	
 	// undefined preventDefault();
-	Event.prototype.preventDefault = function preventDefault() {
+	Event.prototype.preventDefault = function preventDefault(){
         CPP_DKEventDUK_preventDefault(this.address);
     }
 	
@@ -153,7 +153,7 @@ var Event = function Event(type, eventInitDict, address) {
     })
 	
 	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
-	Event.prototype.initEvent = function initEvent(type, bubbles, cancelable) {
+	Event.prototype.initEvent = function initEvent(type, bubbles, cancelable){
         CPP_DKEventDUK_initEvent(this.address, type, bubbles, cancelable);
     }
 

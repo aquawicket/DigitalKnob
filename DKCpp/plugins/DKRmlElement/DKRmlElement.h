@@ -76,7 +76,7 @@ public:
 	const DKString& classList() override { 									// getter
 		Rml::StringList list = _rmlElement->GetActivePseudoClasses();
 		_classList.clear();
-		for (unsigned int n = 0; n < list.size(); ++n) {
+		for (unsigned int n = 0; n < list.size(); ++n){
 			_classList += list[n];
 			if (n < list.size()-1)
 				_classList += ",";

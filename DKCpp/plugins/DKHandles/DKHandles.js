@@ -13,7 +13,7 @@ function DKHandles_init(){
 	byId("Next").addEventListener("click", DKHandles_onevent);
 	byId("Highlight").addEventListener("click", DKHandles_onevent);
 	DKHandles_UpdateWindowList();
-	byId("search").ondragstart = function() { return false; };
+	byId("search").ondragstart = function(){ return false; };
 }
 
 function DKHandles_end(){

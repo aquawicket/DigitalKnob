@@ -3,7 +3,7 @@
 function DKClipboard(){}
 dk.clipboard = DKPlugin(DKClipboard, "singleton")
 
-DKClipboard.prototype.cut = function DKClipboard_cut(ele) {
+DKClipboard.prototype.cut = function DKClipboard_cut(ele){
     var text = "";
     if (window.getSelection)
         text = window.getSelection().toString();
@@ -13,7 +13,7 @@ DKClipboard.prototype.cut = function DKClipboard_cut(ele) {
     dk.clipboard.removeSelection(id);
 }
 
-DKClipboard.prototype.copy = function DKClipboard_copy(ele) {
+DKClipboard.prototype.copy = function DKClipboard_copy(ele){
     var text = "";
     if (window.getSelection)
         text = window.getSelection().toString();
@@ -22,17 +22,17 @@ DKClipboard.prototype.copy = function DKClipboard_copy(ele) {
     dk.clipboard.copyToClipboard(text);
 }
 
-DKClipboard.prototype.paste = function DKClipboard_paste(ele) {
+DKClipboard.prototype.paste = function DKClipboard_paste(ele){
     dk.clipboard.removeSelection(ele);
     ele.focus();
     ele.select();
     document.execCommand('Paste');
 }
 
-DKClipboard.prototype.copyToClipboard = function DKClipboard_copyToClipboard(text) {
+DKClipboard.prototype.copyToClipboard = function DKClipboard_copyToClipboard(text){
     if (window.clipboardData && window.clipboardData.setData)
         return clipboardData.setData("Text", text);
-    else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+    else if (document.queryCommandSupported && document.queryCommandSupported("copy")){
         var textarea = document.createElement("textarea");
         textarea.textContent = text;
         textarea.style.position = "fixed";
@@ -42,7 +42,7 @@ DKClipboard.prototype.copyToClipboard = function DKClipboard_copyToClipboard(tex
         try {
             return document.execCommand("copy");
             // Security exception may be thrown by some browsers.
-        } catch (ex) {
+        } catch (ex){
             return error("Copy to clipboard failed.", ex);
         } finally {
             document.body.removeChild(textarea);
@@ -50,7 +50,7 @@ DKClipboard.prototype.copyToClipboard = function DKClipboard_copyToClipboard(tex
     }
 }
 
-DKClipboard.prototype.removeSelection = function DKClipboard_removeSelection(ele) {
+DKClipboard.prototype.removeSelection = function DKClipboard_removeSelection(ele){
     var text = ele.value;
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
     ele.value = text;

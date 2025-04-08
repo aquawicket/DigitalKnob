@@ -2,17 +2,17 @@
 
 function DKMenu(){}
 
-DKMenu.prototype.init = function DKMenu_init(callback) {
-    dk.create("DKGui/DKMenu.css", function() {
+DKMenu.prototype.init = function DKMenu_init(callback){
+    dk.create("DKGui/DKMenu.css", function(){
         callback && callback()
     })
 }
 
-DKMenu.prototype.end = function DKMenu_end() {
+DKMenu.prototype.end = function DKMenu_end(){
     dk.close("DKGui/DKMenu.css")
 }
 
-DKMenu.prototype.create = function DKMenu_create(parent) {
+DKMenu.prototype.create = function DKMenu_create(parent){
     const dkmenu = new DKPlugin(DKMenu)
     dkmenu.div = document.createElement("div")
 	dkmenu.div.setAttribute("dk_menu", "menu")
@@ -36,7 +36,7 @@ DKMenu.prototype.create = function DKMenu_create(parent) {
         parent.appendChild(dkmenu.div)
     else
         document.body.appendChild(dkmenu.div)
-    document.addEventListener('mouseup', function(event) {
+    document.addEventListener('mouseup', function(event){
         dkmenu.close()
     }, {
         once: true
@@ -45,13 +45,13 @@ DKMenu.prototype.create = function DKMenu_create(parent) {
     return dkmenu
 }
 
-DKMenu.prototype.close = function DLMenu_close() {
+DKMenu.prototype.close = function DLMenu_close(){
 	//FIXME: events arn't getting removed
     //this.div.parentElement.removeChild(this.div)
     delete this.div
 }
 
-DKMenu.prototype.addItem = function DKMenu_addItem(label, callback) {
+DKMenu.prototype.addItem = function DKMenu_addItem(label, callback){
     this.div.dkmenuItem = document.createElement("div")
     this.div.dkmenuItem.innerHTML = label
     this.div.dkmenuItem.class = "option"
@@ -75,7 +75,7 @@ DKMenu.prototype.addItem = function DKMenu_addItem(label, callback) {
     this.div.dkmenuItem.style.borderTopWidth = "0rem"
     this.div.dkmenuItem.style.borderLeftWidth = "0rem"
     this.div.dkmenuItem.style.borderRightWidth = "0rem"
-    this.div.dkmenuItem.onmousedown = function onmousedown_callback() {
+    this.div.dkmenuItem.onmousedown = function onmousedown_callback(){
         callback && callback()
         //event.stopPropagation()
     }
@@ -83,7 +83,7 @@ DKMenu.prototype.addItem = function DKMenu_addItem(label, callback) {
     this.validatePosition(this)
 }
 
-DKMenu.prototype.validatePosition = function DKMenu_validatePosition() {
+DKMenu.prototype.validatePosition = function DKMenu_validatePosition(){
     this.div.style.top = window.mouseY + "px"
     this.div.style.left = window.mouseX + "px"
     this.div.style.removeProperty("right")
@@ -96,11 +96,11 @@ DKMenu.prototype.validatePosition = function DKMenu_validatePosition() {
     var width = Number(this.div.clientWidth)
     var height = Number(this.div.clientHeight)
 
-    if (top + height > win_height) {
+    if (top + height > win_height){
         top = win_height - height
         this.div.style.top = top + "px"
     }
-    if (left + width > win_width) {
+    if (left + width > win_width){
         left = win_width - width
         this.div.style.left = left + "px"
     }

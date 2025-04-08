@@ -26,7 +26,7 @@ typedef DKWindow DKWindowProxy;
 class DKWindow : virtual public DKEventTarget
 {
 public:
-	DKWindow() : DKEventTarget() {
+	DKWindow() : DKEventTarget(){
 		DKDEBUGFUNC();
 		interfaceName = "Window";
 		address[interfaceName] = pointerToAddress(this);
@@ -105,7 +105,7 @@ public:
 	virtual void status(const DOMString& status)				{ _status = status; } 					// setter
 	
 	// undefined close();
-	virtual void close() {
+	virtual void close(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
@@ -116,19 +116,19 @@ public:
 	virtual void closed(const bool& closed)						{ _closed = closed; } 					// setter
 	
 	// undefined stop();
-	virtual void stop() {
+	virtual void stop(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
 	// undefined focus();
-	virtual void focus() {
+	virtual void focus(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
 	// undefined blur();
-	virtual void blur() {
+	virtual void blur(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
@@ -166,7 +166,7 @@ public:
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 	DKWindowProxy* _open = NULL;
-	virtual DKWindowProxy* open(const USVString& url, const DOMString& target, const DOMString& features) {
+	virtual DKWindowProxy* open(const USVString& url, const DOMString& target, const DOMString& features){
 		DKDEBUGFUNC(url, target, features);
 		DKTODO();
 		return _open;
@@ -196,20 +196,20 @@ public:
 	
 	//user prompts
 	// undefined alert();
-	virtual void alert() {
+	virtual void alert(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
 	// undefined alert(DOMString message);
-	virtual void alert(const DOMString& message) {
+	virtual void alert(const DOMString& message){
 		DKDEBUGFUNC(message);
 		DKTODO();
 	}
 	
 	// boolean confirm(optional DOMString message = "");
 	bool _confirm = false;
-	virtual const bool& confirm(const DOMString& message = "") {
+	virtual const bool& confirm(const DOMString& message = ""){
 		DKDEBUGFUNC(message);
 		DKTODO();
 		return _confirm;
@@ -217,26 +217,26 @@ public:
 	
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
 	DOMString _prompt = "";
-	virtual const DOMString& prompt(const DOMString& message = "", const DOMString _default = "") {
+	virtual const DOMString& prompt(const DOMString& message = "", const DOMString _default = ""){
 		DKDEBUGFUNC(message, _default);
 		DKTODO();
 		return _prompt;
 	}
 	
 	// undefined print();
-	virtual void print() {
+	virtual void print(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
-	virtual void postMessage(const DKString& message, const USVString& targetOrigin, const DKString& transfer = "[]") {
+	virtual void postMessage(const DKString& message, const USVString& targetOrigin, const DKString& transfer = "[]"){
 		DKDEBUGFUNC(message, targetOrigin, transfer);
 		DKTODO();
 	}
 	
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
-	virtual void postMessage(const DKString& message, const DKString& options = "{}") {
+	virtual void postMessage(const DKString& message, const DKString& options = "{}"){
 		DKDEBUGFUNC(message, options);
 		DKTODO();
 	}
@@ -285,13 +285,13 @@ public:
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 	// partial interface Window {
 	//		undefined captureEvents();
-			virtual void captureEvents() {
+			virtual void captureEvents(){
 				DKDEBUGFUNC();
 				DKTODO();
 			}
 
 	//		undefined releaseEvents();
-			virtual void releaseEvents() {
+			virtual void releaseEvents(){
 				DKDEBUGFUNC();
 				DKTODO();
 			}
@@ -315,7 +315,7 @@ public:
 	// partial interface Window {
 	//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
 			DKString _getDigitalGoodsService = "";
-			virtual const DKString& getDigitalGoodsService(const DOMString& serviceProvider) {
+			virtual const DKString& getDigitalGoodsService(const DOMString& serviceProvider){
 				DKDEBUGFUNC(serviceProvider);
 				DKTODO();
 				return _getDigitalGoodsService;
@@ -336,7 +336,7 @@ public:
 	// partial interface Window {
 	//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
 			DKString _showOpenFilePicker = "";
-			virtual const DKString& showOpenFilePicker(const DKString& options = "{}") {
+			virtual const DKString& showOpenFilePicker(const DKString& options = "{}"){
 				DKDEBUGFUNC(options);
 				DKTODO();
 				return _showOpenFilePicker;
@@ -344,7 +344,7 @@ public:
 
 	//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
 			DKString _showSaveFilePicker = "";
-			virtual const DKString& showSaveFilePicker(const DKString& options = "{}") {
+			virtual const DKString& showSaveFilePicker(const DKString& options = "{}"){
 				DKDEBUGFUNC(options);
 				DKTODO();
 				return _showSaveFilePicker;
@@ -352,7 +352,7 @@ public:
 
 	//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
 			DKString _showDirectoryPicker = "";
-			virtual const DKString& showDirectoryPicker(const DKString& options = "{}") {
+			virtual const DKString& showDirectoryPicker(const DKString& options = "{}"){
 				DKDEBUGFUNC(options);
 				DKTODO();
 				return _showDirectoryPicker;
@@ -364,7 +364,7 @@ public:
 	// partial interface Window {
 	//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
 			DKString _queryLocalFonts = "";
-			virtual const DKString& queryLocalFonts(const DKString& options = "{}") {
+			virtual const DKString& queryLocalFonts(const DKString& options = "{}"){
 				DKDEBUGFUNC(options);
 				DKTODO();
 				return _queryLocalFonts;
@@ -411,7 +411,7 @@ public:
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
 	// partial interface Window {
 	//		undefined navigate(SpatialNavigationDirection dir);
-			virtual void navigate(const DKString& dir) {
+			virtual void navigate(const DKString& dir){
 				DKDEBUGFUNC(dir);
 				DKTODO();
 			}
@@ -421,7 +421,7 @@ public:
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
 			DKCSSStyleDeclaration* _getComputedStyle = NULL;
-			virtual DKCSSStyleDeclaration* getComputedStyle(DKElement* elt, const CSSOMString& pseudoElt = "") {
+			virtual DKCSSStyleDeclaration* getComputedStyle(DKElement* elt, const CSSOMString& pseudoElt = ""){
 				DKDEBUGFUNC(elt, pseudoElt);
 				DKTODO();
 				return _getComputedStyle;
@@ -432,7 +432,7 @@ public:
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
 			DKString _matchMedia = "";
-			virtual const DKString& matchMedia(const CSSOMString& mediaQueryString) {
+			virtual const DKString& matchMedia(const CSSOMString& mediaQueryString){
 				DKDEBUGFUNC(mediaQueryString);
 				DKTODO();
 				return _matchMedia;
@@ -450,25 +450,25 @@ public:
 
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			virtual void moveTo(const int& x, const int& y) {
+			virtual void moveTo(const int& x, const int& y){
 				DKDEBUGFUNC(x, y);
 				DKTODO();
 			}
 
 	//		undefined moveBy(long x, long y);
-			virtual void moveBy(const int& x, const int& y) {
+			virtual void moveBy(const int& x, const int& y){
 				DKDEBUGFUNC(x, y);
 				DKTODO();
 			}
 
 	//		undefined resizeTo(long width, long height);
-			virtual void resizeTo(const int& width, const int& height) {
+			virtual void resizeTo(const int& width, const int& height){
 				DKDEBUGFUNC(width, height);
 				DKTODO();
 			}
 
 	//		undefined resizeBy(long x, long y);
-			virtual void resizeBy(const int& x, const int& y) {
+			virtual void resizeBy(const int& x, const int& y){
 				DKDEBUGFUNC(x, y);
 				DKTODO();
 			}
@@ -506,37 +506,37 @@ public:
 			virtual void pageYOffset(const double& pageYOffset)	{ _pageYOffset = pageYOffset; } 	// setter
 
 	//		undefined scroll(optional ScrollToOptions options = {});
-			virtual void scroll(const DKString& options = "{}") {
+			virtual void scroll(const DKString& options = "{}"){
 				DKDEBUGFUNC(options);
 				DKTODO();
 			}
 			
 	//		undefined scroll(unrestricted double x, unrestricted double y);
-			virtual void scroll(const double& x, const double& y) {
+			virtual void scroll(const double& x, const double& y){
 				DKDEBUGFUNC(x, y);
 				DKTODO();
 			}
 			
 	//		undefined scrollTo(optional ScrollToOptions options = {});
-			virtual void scrollTo(const DKString& options = "{}") {
+			virtual void scrollTo(const DKString& options = "{}"){
 				DKDEBUGFUNC(options);
 				DKTODO();
 			}
 			
 	//		undefined scrollTo(unrestricted double x, unrestricted double y);
-			virtual void scrollTo(const double& x, const double& y) {
+			virtual void scrollTo(const double& x, const double& y){
 				DKDEBUGFUNC(x, y);
 				DKTODO();
 			}
 
 	//		undefined scrollBy(optional ScrollToOptions options = {});
-			virtual void scrollBy(const DKString& options = "{}") {
+			virtual void scrollBy(const DKString& options = "{}"){
 				DKDEBUGFUNC(options);
 				DKTODO();
 			}
 			
 	//		undefined scrollBy(unrestricted double x, unrestricted double y);
-			virtual void scrollBy(const double& x, const double& y) {
+			virtual void scrollBy(const double& x, const double& y){
 				DKDEBUGFUNC(x, y);
 				DKTODO();
 			}
@@ -606,14 +606,14 @@ public:
 	// partial interface Window {
 	//		unsigned long requestIdleCallback(IdleRequestCallback callback, optional IdleRequestOptions options = {});
 			unsigned int _requestIdleCallback = 0;
-			virtual const unsigned int& requestIdleCallback(const DKString& callback, const DKString& options = "{}") {
+			virtual const unsigned int& requestIdleCallback(const DKString& callback, const DKString& options = "{}"){
 				DKDEBUGFUNC(callback, options);
 				DKTODO();
 				return _requestIdleCallback;
 			}
 	//
 	//		undefined cancelIdleCallback(unsigned long handle);
-			virtual void cancelIdleCallback(const unsigned int& handle) {
+			virtual void cancelIdleCallback(const unsigned int& handle){
 				DKDEBUGFUNC(handle);
 				DKTODO();
 			}
@@ -623,7 +623,7 @@ public:
 	// partial interface Window {
 	//		Selection? getSelection();
 			DKString _getSelection = "";
-			virtual const DKString& getSelection() {
+			virtual const DKString& getSelection(){
 				DKDEBUGFUNC();
 				DKTODO();
 				return _getSelection;
@@ -635,7 +635,7 @@ public:
 	//		[SecureContext]
 	//		Promise<ScreenDetails> getScreenDetails();
 			DKString _getScreenDetails = "";
-			virtual const DKString& getScreenDetails() {
+			virtual const DKString& getScreenDetails(){
 				DKDEBUGFUNC();
 				DKTODO();
 				return _getScreenDetails;

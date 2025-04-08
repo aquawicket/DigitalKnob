@@ -63,7 +63,7 @@ Rml::ElementInstancer* DKRmlInterface::original_head_instancer = nullptr;
 Rml::ElementInstancer* DKRmlInterface::original_body_instancer = nullptr;
 
 
-DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
+DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface(){
 	DKDEBUGFUNC();
 	interfaceName = "RmlInterface";
 	address[interfaceName] = pointerToAddress(this);
@@ -72,13 +72,13 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	if(!window)
 		DKERROR("window invalid! \n");
 	
-	if (!dkRmlFile) {
+	if (!dkRmlFile){
 		dkRmlFile = new DKRmlFile();
 		Rml::SetFileInterface(dkRmlFile);
 	}
 
 	//DKINFO("DKRmlInterface(" + window->interfaceName + ") \n");
-	if (same(window->interfaceName, "SdlWindow")) {
+	if (same(window->interfaceName, "SdlWindow")){
 		DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSDLWindow*>(window), this);
 	}
 	else {
@@ -86,8 +86,8 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 		return;
 	}
 
-	if (!rml_initialized) {
-		if (!Rml::Initialise()) {
+	if (!rml_initialized){
+		if (!Rml::Initialise()){
 			DKERROR("Rml::Initialise(): failed \n");
 			return;
 		}
@@ -121,14 +121,14 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	///////////////////////////////////////////////////////////////////
 	
 	context = Rml::CreateContext(interfaceAddress, Rml::Vector2i(w, h));
-	if (!context) {
+	if (!context){
 		DKERROR("context is invalid! \n");
 		return;
 	}
 		
 #ifdef HAVE_rmlui_debugger
-	if (!rml_debugger_initialized) {
-		if (!Rml::Debugger::Initialise(context)) {
+	if (!rml_debugger_initialized){
+		if (!Rml::Debugger::Initialise(context)){
 			DKERROR("Rml::Debugger::Initialise(): failed\n");
 			return;
 		}
@@ -136,7 +136,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	}
 #endif
 	
-	if (!rml_properties_registered) {
+	if (!rml_properties_registered){
 		//Add missing stylesheet properties to silence warnings
 		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
 		Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
@@ -219,7 +219,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	//Rml::Debugger::SetVisible(true);
 }
 
-DKRmlInterface::~DKRmlInterface() {
+DKRmlInterface::~DKRmlInterface(){
 	DKDEBUGFUNC();
 	if(context){
 		Rml::ReleaseTextures();
@@ -266,7 +266,7 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	DKRmlConverter::HtmlToRml(html, rml);
 
 	//// Clear any document and load the rml into the document
-	if (document) {
+	if (document){
 		document->Close();
 		if(context)
 			Rml::Factory::ClearStyleSheetCache();
@@ -291,7 +291,7 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	document->GetOwnerDocument()->GetElementsByTagName(bodys, "body");
 	if (!bodys.empty()) 
 		body = bodys[0];
-	if (!head && !body) {
+	if (!head && !body){
 		document->GetOwnerDocument()->AppendChild(document->CreateElement("head"), true);
 		document->GetOwnerDocument()->AppendChild(document->CreateElement("body"), true);
 	}
@@ -304,7 +304,7 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	DKString file = DKFile::local_assets + "DKRmlInterface/DKRml.css";
 	const Rml::StyleSheetContainer* doc_sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
-	if(doc_sheet) { 
+	if(doc_sheet){ 
 		//Combine the file_sheet and the doc_sheet into a new_sheet and load it back to the document
 		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = doc_sheet->CombineStyleSheetContainer(*file_sheet);
 		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
@@ -368,7 +368,7 @@ bool DKRmlInterface::LoadUrl(const DKString& url){
 			return DKERROR("Could not get html from url "+_url+"\n");
 	}
 #endif
-	if (!has(_url, "http://") && !has(_url, "https://")) {
+	if (!has(_url, "http://") && !has(_url, "https://")){
 		if(!DKFile::FileToString(_url, html))
 			return DKERROR("failed on "+_url+"\n");
 	}

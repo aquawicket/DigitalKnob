@@ -25,13 +25,13 @@ dk_download = function(url, destination){
 	var xmlHttpRequest = new XMLHttpRequest;
 	xmlHttpRequest.Open('GET', url, false);
 	xmlHttpRequest.Send();
-	if (xmlHttpRequest.Status == 200) {
+	if (xmlHttpRequest.Status == 200){
 		var filestream = new FileStream;
 		filestream.Open();
 		filestream.Type = 1; // adTypeBinary
 		filestream.Write(xmlHttpRequest.ResponseBody);
 		filestream.Position = 0;
-		if (filesystem.FileExists(destination)) { filesystem.DeleteFile(destination); }
+		if (filesystem.FileExists(destination)){ filesystem.DeleteFile(destination); }
 		filestream.SaveToFile(destination, 2); // adSaveCreateOverWrite
 		filestream.Close();
 	}

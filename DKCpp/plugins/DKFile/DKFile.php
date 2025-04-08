@@ -345,7 +345,7 @@ function pushDKAssets(){
 		        $filesrc = $assetsPath.$assetsList[$n];
                 
 		        $skip = false;
-                foreach ($ignoreFiles as $item) {
+                foreach ($ignoreFiles as $item){
 			        if(fnmatch($item, $filesrc)){
 					    //skip if $src matches the ignore list
 					    $skip = true;
@@ -376,7 +376,7 @@ function pushDKAssets(){
             $src = $assetFolder.$assetFiles[$nn];
             
             $skip = false;
-            foreach ($ignoreFiles as $item) {
+            foreach ($ignoreFiles as $item){
 			    if(fnmatch($item, $src)){
 					//skip if $src matches the ignore list
 					$skip = true;
@@ -468,7 +468,7 @@ function pullDKAssets(){
             $src = $dkPluginsFolder.$dkPluginsFiles[$nn];
             
             $skip = false;
-            foreach ($ignoreFiles as $item) {
+            foreach ($ignoreFiles as $item){
 			    if(fnmatch($item, $src)){
 					//skip if $src matches the ignore list
 					$skip = true;
@@ -518,7 +518,7 @@ function Upload($src, $dest){
 	if($_FILES["fileToUpload"]["size"] > 5000000){
 		return "Sorry, your file is too large.";
 	}
-	if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+	if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)){
 		return "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 	}
 	else{
@@ -540,7 +540,7 @@ if($printFiles = $_GET["PrintFiles"]){
 	$dirArray = ListFiles($printFiles);
 	$indexCount	= count($dirArray);
 	
-	for($index=0; $index < $indexCount; $index++) {
+	for($index=0; $index < $indexCount; $index++){
         if (substr("$dirArray[$index]", 0, 1) != "."){ // don't list hidden files
 			if($printFiles == "."){
 				if(filetype($root.$dirArray[$index]) == "dir"){

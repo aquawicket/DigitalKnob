@@ -7,7 +7,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_log.js");
 //#
 //#     @msg    - The message to print
 //#
-dk_warning = function dk_warning_f() {
+dk_warning = function dk_warning_f(){
 	dk_log("WARNING", arguments[0]);
 }
 
@@ -16,7 +16,7 @@ dk_warning = function dk_warning_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	dk_warning("test dk_warning WARNING message");

@@ -30,13 +30,13 @@ int dk_callDKBatch(char* func, char* args, char* rtn_var){
 	/* Open the command for reading. */
 	//int exit_code = system(DKBATCH_COMMAND);
 	fp = popen(DKBATCH_COMMAND, "r");
-	if (fp == NULL) {
+	if (fp == NULL){
 		printf("Failed to run command\n");
 		exit(1);
 	}
 
 	/* Read the output a line at a time - output it. */
-	while (fgets(path, sizeof(path), fp) != NULL) {
+	while (fgets(path, sizeof(path), fp) != NULL){
 		strcpy(rtn_var, path);
 		printf("> %s", rtn_var);
 	}

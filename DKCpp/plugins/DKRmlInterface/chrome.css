@@ -644,7 +644,7 @@ select {
     background-color: white;
     cursor: default;
 }
-select:not(:-internal-list-box) {
+select:not(:-internal-list-box){
     overflow: visible !important;
 }
 select:-internal-list-box {
@@ -897,7 +897,7 @@ bdo {
 textarea[dir=auto i] {
     unicode-bidi: -webkit-plaintext;
 }
-dialog:not([open]) {
+dialog:not([open]){
     display: none
 }
 dialog {

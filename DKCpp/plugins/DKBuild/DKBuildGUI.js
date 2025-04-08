@@ -1,8 +1,8 @@
-function DKBuildGUI_init() {
+function DKBuildGUI_init(){
     //DKPlugin("DKBuild/DKBuild.js", function(){});
-    dk.create("DKBuild/DKBuildGUI.html", function() {
-        DKPlugin("DKFile/DKFile.js", function() {
-            DKPlugin("DKBuild/DKBuild.js", function(rval) {
+    dk.create("DKBuild/DKBuildGUI.html", function(){
+        DKPlugin("DKFile/DKFile.js", function(){
+            DKPlugin("DKBuild/DKBuild.js", function(rval){
                 //byId("AppList").addEventListener("click", DKBuildGUI_onevent);
                 byId("AppList").addEventListener("change", DKBuildGUI_onevent);
                 byId("OSList").addEventListener("change", DKBuildGUI_onevent);
@@ -12,7 +12,7 @@ function DKBuildGUI_init() {
                 byId("build").addEventListener("click", DKBuildGUI_onevent);
 
                 //DKBuild_ValidateSvn();
-                DKPlugin("DKGit/DKGit.js", function() {//DKGit_ValidateGit();
+                DKPlugin("DKGit/DKGit.js", function(){//DKGit_ValidateGit();
                 });
                 DKBuild_ValidateCmake();
                 DKBuild_ValidateVC2019();
@@ -43,7 +43,7 @@ function DKBuildGUI_init() {
     });
 }
 
-function DKBuildGUI_end() {
+function DKBuildGUI_end(){
     byId("AppList").removeEventListener("change", DKBuildGUI_onevent);
     byId("OSList").removeEventListener("change", DKBuildGUI_onevent);
     byId("BuildType").removeEventListener("change", DKBuildGUI_onevent);
@@ -54,35 +54,35 @@ function DKBuildGUI_end() {
     dk.close("DKBuild/DKBuild.js");
 }
 
-function DKBuildGUI_onevent(event) {
+function DKBuildGUI_onevent(event){
     //console.log("DKBuildGUI_onevent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 
-    if (event.currentTarget.id === "AppList") {
+    if (event.currentTarget.id === "AppList"){
         //if(DK_Type(event,"click")){
         //	DKBuildGUI_UpdateApps();
         //}
-        if (event.type === "change") {
+        if (event.type === "change"){
             DKBuildGUI_AppSelect();
         }
     }
-    if (event.currentTarget.id === "OSList") {
+    if (event.currentTarget.id === "OSList"){
         DKBuildGUI_OsSelect();
     }
-    if (event.currentTarget.id === "BuildType") {
+    if (event.currentTarget.id === "BuildType"){
         DKBuildGUI_BuildSelect();
     }
-    if (event.currentTarget.id === "git") {
-        DKPlugin("DKGit/GitMenu.js", function() {
+    if (event.currentTarget.id === "git"){
+        DKPlugin("DKGit/GitMenu.js", function(){
             DKMenu_ValidatePosition("DKGit/GitMenu.html");
         });
     }
-    if (event.currentTarget.id === "libraries") {
-        DKPlugin("DKBuild/LibraryMenu.js", function() {
+    if (event.currentTarget.id === "libraries"){
+        DKPlugin("DKBuild/LibraryMenu.js", function(){
             DKMenu_ValidatePosition("DKBuild/LibraryMenu.html");
         });
     }
-    if (event.currentTarget.id === "build") {
-        DKPlugin("DKBuild/RunMenu.js", function() {
+    if (event.currentTarget.id === "build"){
+        DKPlugin("DKBuild/RunMenu.js", function(){
             DKMenu_ValidatePosition("DKBuild/RunMenu.html");
         });
     }
@@ -100,12 +100,12 @@ function DKBuildGUI_onevent(event) {
 	*/
 }
 
-function DKBuildGUI_UpdateApps() {
+function DKBuildGUI_UpdateApps(){
     ////////  Update App List /////////////
     byId("AppList").innerHTML === "";
     DKBuild_GetAppList();
 
-    for (var i = 0; i < APP_LIST.length; ++i) {
+    for (var i = 0; i < APP_LIST.length; ++i){
         //console.log(APP_LIST[i]+"\n");
         var ele = DK_CreateElement(byId("AppList"), "option", "al");
         ele.innerHTML = APP_LIST[i];
@@ -114,10 +114,10 @@ function DKBuildGUI_UpdateApps() {
     }
 }
 
-function DKBuildGUI_AppSelect() {
+function DKBuildGUI_AppSelect(){
     // We can send events to classes that are not of DKWidget as well.
-    if (byId("AppList").value === "NEW APP") {
-        DKPlugin("DKGui/DKMessageBox.js", function() {
+    if (byId("AppList").value === "NEW APP"){
+        DKPlugin("DKGui/DKMessageBox.js", function(){
             DKSendEvent("DKGui/DKMessageBox.html", "GetInput", "NewApp,DKBuildGUI.html");
             // To -> DKMessageBox
         });
@@ -133,12 +133,12 @@ function DKBuildGUI_AppSelect() {
     //DKSendEvent("DKMenuRightWeb.html", "Update", "");
 }
 
-function DKBuildGUI_OsSelect() {
+function DKBuildGUI_OsSelect(){
     OS = byId("OSList").value;
     console.log("OS = " + OS + "\n");
 }
 
-function DKBuildGUI_BuildSelect() {
+function DKBuildGUI_BuildSelect(){
     TYPE = byId("BuildType").value;
     console.log("TYPE = " + TYPE + "\n");
 }

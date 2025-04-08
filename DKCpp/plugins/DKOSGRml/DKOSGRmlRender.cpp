@@ -82,7 +82,7 @@ void DKOSGRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscr
 			"varying vec2 texCoord; \n"
 			"varying vec4 out_color; \n"
 			"\n"
-			"void main() { \n"
+			"void main(){ \n"
 				"texCoord = vec2(gl_MultiTexCoord0); \n"
 				"vec4 pos = gl_Vertex + vec4(LibRmlPosition, 0, 0); \n"
 				"gl_Position = gl_ModelViewProjectionMatrix * pos; \n"
@@ -105,7 +105,7 @@ void DKOSGRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscr
             "varying lowp vec4 out_color; \n"
 #endif
 			"\n"
-			"void main() { \n"
+			"void main(){ \n"
 				"if(is_texture){ \n"
 					"gl_FragColor = out_color * texture2D(myTexture, texCoord); \n"
 				"} \n"

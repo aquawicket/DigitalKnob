@@ -39,14 +39,14 @@ static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 #endif
 
 
-RmlSDL2Renderer::RmlSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen) {
+RmlSDL2Renderer::RmlSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen){
 	DKDEBUGFUNC(renderer, screen);
     mRenderer = renderer;
     mScreen = screen;
 }
 
 // Called by Rml when it wants to render geometry that it does not wish to optimise.
-void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
+void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation){
 	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SDL Shaders
@@ -95,7 +95,7 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 			DKERROR("SDL_GL_BindTexture: "+DKString(SDL_GetError())+"\n");
     }
  
-    for(int  i = 0; i < num_vertices; i++) {
+    for(int  i = 0; i < num_vertices; i++){
         Positions[i] = vertices[i].position;
         Colors[i] = vertices[i].colour;
         if(sdl_texture){
@@ -238,9 +238,9 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
     }
     Rml::String extension = source.substr(i + 1, source.length() - i);
     SDL_Surface* surface = IMG_LoadTyped_RW(SDL_RWFromMem(buffer, int(buffer_size)), 1, extension.c_str());
-    if (surface) {
+    if (surface){
         SDL_Texture* texture = SDL_CreateTextureFromSurface(mRenderer, surface);
-        if (texture) {
+        if (texture){
             texture_handle = (Rml::TextureHandle)texture;
             texture_dimensions = Rml::Vector2i(surface->w, surface->h);
             SDL_FreeSurface(surface);

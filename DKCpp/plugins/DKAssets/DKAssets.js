@@ -33,11 +33,11 @@ var log_lines;
 
 var hostname;
 // = DKFile_GetSetting(local_assets+"settings.txt", "[HOSTNAME]");
-if (!hostname) {
+if (!hostname){
     hostname = window.location.hostname;
 }
 //if(!hostname){ hostname = "TODO.com"; }
-if (!hostname) {
+if (!hostname){
     hostname = "127.0.0.1";
 }
 
@@ -55,7 +55,7 @@ pathname = pathname.replace("index.html", "");
 
 var protocol = window.location.protocol;
 online_assets = protocol + "//" + hostname + pathname;
-if (protocol !== "file:") {//local_assets = protocol+"//"+hostname+pathname;
+if (protocol !== "file:"){//local_assets = protocol+"//"+hostname+pathname;
 }
 
 appfilename = pathname.replace("/", "");
@@ -91,21 +91,21 @@ console.log("LOG_SHOW: "+LOG_SHOW);
 console.log("LOG_HIDE: "+LOG_HIDE);
 */
 
-function DKAssets_init() {
+function DKAssets_init(){
 }
 
-var DKAssets_LocalAssets = function() {
+var DKAssets_LocalAssets = function(){
     return local_assets;
 }
 
-function DKAssets_OnlineAssets() {
+function DKAssets_OnlineAssets(){
     return online_assets;
 }
 
-function DKAssets_Protocol() {
+function DKAssets_Protocol(){
     return protocol;
 }
 
-function DKAssets_AbsolutePath() {
+function DKAssets_AbsolutePath(){
     return absolutepath;
 }

@@ -288,7 +288,7 @@
 //################################################################################
 //# dk_log(level, str)
 //#
-int v_dk_log(int level, const char* format, va_list args) {
+int v_dk_log(int level, const char* format, va_list args){
 		
 	#if dk_log_ENABLE != 1
 		return 1;
@@ -406,7 +406,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 };
 
 	
-int dk_log(int level, const char* format, ...) {
+int dk_log(int level, const char* format, ...){
 	
 	// Get the message string from variable args
 	va_list args;

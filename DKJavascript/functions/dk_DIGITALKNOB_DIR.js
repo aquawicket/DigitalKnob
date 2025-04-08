@@ -38,7 +38,7 @@ dk_DIGITALKNOB_DIR = function dk_DIGITALKNOB_DIR_f(){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 
 	dk_DIGITALKNOB_DIR();

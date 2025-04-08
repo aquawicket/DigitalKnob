@@ -17,7 +17,7 @@ class DKFocusEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
-	DKFocusEvent(const DOMString& type, const FocusEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
+	DKFocusEvent(const DOMString& type, const FocusEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict){
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "FocusEvent";
 		address[interfaceName] = pointerToAddress(this);

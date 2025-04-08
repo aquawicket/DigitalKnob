@@ -15,10 +15,10 @@ TestApp.prototype.end = function end(){
     //dk.close("DKGui/TestApp.css");
 }
 
-TestApp.prototype.create = function create(create_callback) {
+TestApp.prototype.create = function create(create_callback){
 	console.log("TestApp.prototype.create")
     const instance = DKPlugin(TestApp)
-    dk.create("DKGui/TestApp.html", function dkcreate_callback(html) {
+    dk.create("DKGui/TestApp.html", function dkcreate_callback(html){
         if (!html)
             return error("invalid html", create_callback);
         instance.html = html;

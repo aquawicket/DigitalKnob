@@ -15,7 +15,7 @@ class DKNode : virtual public DKEventTarget
 {
 public:
 
-	DKNode() : DKEventTarget() {
+	DKNode() : DKEventTarget(){
 		DKDEBUGFUNC();
 		interfaceName = "Node";
 		address[interfaceName] = pointerToAddress(this);
@@ -109,7 +109,7 @@ public:
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
 	DKNode* _getRootNode = NULL;
-	virtual DKNode* getRootNode(const DKString& options = "{}") {
+	virtual DKNode* getRootNode(const DKString& options = "{}"){
 		DKDEBUGFUNC(options);
 		return _getRootNode;
 	}
@@ -126,7 +126,7 @@ public:
 	
 	// boolean hasChildNodes();
 	bool _hasChildNodes = false;
-	virtual bool hasChildNodes() {
+	virtual bool hasChildNodes(){
 		DKDEBUGFUNC();
 		return _hasChildNodes;
 	}
@@ -167,28 +167,28 @@ public:
 	virtual void textContent(const DOMString& textContent)			{ _textContent = textContent; } 		// setter
 	
 	// [CEReactions] undefined normalize();
-	virtual void normalize() {
+	virtual void normalize(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
 
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
 	DKNode* _cloneNode = NULL;
-	virtual DKNode* cloneNode(const bool& deep = false) {
+	virtual DKNode* cloneNode(const bool& deep = false){
 		DKDEBUGFUNC(deep);
 		return _cloneNode;
 	}
 	
 	// boolean isEqualNode(Node? otherNode);
 	bool _isEqualNode = false;
-	virtual const bool& isEqualNode(DKNode* otherNode) {
+	virtual const bool& isEqualNode(DKNode* otherNode){
 		DKDEBUGFUNC(otherNode);
 		return _isEqualNode;
 	}
 	
 	// boolean isSameNode(Node? otherNode); // legacy alias of ===
 	bool _isSameNode = false;
-	virtual const bool& isSameNode(DKNode* otherNode) {
+	virtual const bool& isSameNode(DKNode* otherNode){
 		DKDEBUGFUNC(otherNode);
 		return _isSameNode;
 	}
@@ -225,63 +225,63 @@ public:
 	
 	// unsigned short compareDocumentPosition(Node other);
 	unsigned short _compareDocumentPosition = 0;
-	virtual const unsigned short& compareDocumentPosition(DKNode* other) {
+	virtual const unsigned short& compareDocumentPosition(DKNode* other){
 		DKDEBUGFUNC(other);
 		return _compareDocumentPosition;
 	}
 	
 	// boolean contains(Node? other);
 	bool _contains = false;
-	virtual const bool& contains(DKNode* other) {
+	virtual const bool& contains(DKNode* other){
 		DKDEBUGFUNC(other);
 		return _contains;
 	}
 	
 	// DOMString? lookupPrefix(DOMString? namespace);
 	DOMString _lookupPrefix = "";
-	virtual const DOMString& lookupPrefix(const DOMString& _namespace) {
+	virtual const DOMString& lookupPrefix(const DOMString& _namespace){
 		DKDEBUGFUNC(_namespace);
 		return _lookupPrefix;
 	}
 	
 	// DOMString? lookupNamespaceURI(DOMString? prefix);
 	DOMString _lookupNamespaceURI = "";
-	virtual const DOMString& lookupNamespaceURI(const DOMString& prefix) {
+	virtual const DOMString& lookupNamespaceURI(const DOMString& prefix){
 		DKDEBUGFUNC(prefix);
 		return _lookupNamespaceURI;
 	}
 	
 	// boolean isDefaultNamespace(DOMString? namespace);
 	bool _isDefaultNamespace = false;
-	virtual const bool& isDefaultNamespace(const DOMString& _namespace) {
+	virtual const bool& isDefaultNamespace(const DOMString& _namespace){
 		DKDEBUGFUNC(_namespace);
 		return _isDefaultNamespace;
 	}
 	
 	// [CEReactions] Node insertBefore(Node node, Node? child);
 	DKNode* _insertBefore = NULL;
-	virtual DKNode* insertBefore(DKNode* node, DKNode* child) {
+	virtual DKNode* insertBefore(DKNode* node, DKNode* child){
 		DKDEBUGFUNC(node, child);
 		return _insertBefore;
 	}
 	
 	// [CEReactions] Node appendChild(Node node);
 	DKNode* _appendChild = NULL;
-	virtual DKNode* appendChild(DKNode* node) {
+	virtual DKNode* appendChild(DKNode* node){
 		DKDEBUGFUNC(node);
 		return _appendChild;
 	}
 	
 	// [CEReactions] Node replaceChild(Node node, Node child);
 	DKNode* _replaceChild = NULL;
-	virtual DKNode* replaceChild(DKNode* node, DKNode* child) {
+	virtual DKNode* replaceChild(DKNode* node, DKNode* child){
 		DKDEBUGFUNC(node, child);
 		return _replaceChild;
 	}
 	
 	// [CEReactions] Node removeChild(Node child);
 	DKNode* _removeChild = NULL;
-	virtual DKNode* removeChild(DKNode* child) {
+	virtual DKNode* removeChild(DKNode* child){
 		DKDEBUGFUNC(child);
 		return _removeChild;
 	}

@@ -1,4 +1,4 @@
-@if (@X)==(@Y) @end /* JScript comment
+@if (@X)==(@Y) @end /* javascript comment
 @echo off
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 

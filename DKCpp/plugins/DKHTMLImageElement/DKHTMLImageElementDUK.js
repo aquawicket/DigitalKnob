@@ -7,7 +7,7 @@
 // LegacyFactoryFunction=Image(optional unsigned long width, optional unsigned long height)]
 // interface HTMLImageElement : HTMLElement {
 // [HTMLConstructor] constructor();
-var HTMLImageElement = function HTMLImageElement(address) {
+var HTMLImageElement = function HTMLImageElement(address){
 	//console.log("HTMLImageElement("+address+")")
 	
 	if(address)
@@ -136,7 +136,7 @@ var HTMLImageElement = function HTMLImageElement(address) {
 	})
 	
 	// Promise<undefined> decode();
-	HTMLElement.prototype.decode = function decode() {
+	HTMLElement.prototype.decode = function decode(){
 		return CPP_DKHTMLImageElementDUK(this.address);
     }
 	

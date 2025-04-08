@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 
-var UIEvent = function UIEvent(pointer) {
+var UIEvent = function UIEvent(pointer){
     // Properties
     /*
 	Object.defineProperty(this, "cancelBubble", { //Not standardized, Deprecated
@@ -14,25 +14,25 @@ var UIEvent = function UIEvent(pointer) {
 	*/
     Object.defineProperty(this, "detail", {
         //Read only
-        get: function detail() {
+        get: function detail(){
             return CPP_DKDomUIEvent_detail(pointer)
         }
     })
     Object.defineProperty(this, "isChar", {
         //Read only
-        get: function isChar() {
+        get: function isChar(){
             return CPP_DKDomUIEvent_isChar(pointer)
         }
     })
     Object.defineProperty(this, "layerX", {
         //Read only
-        get: function layerX() {
+        get: function layerX(){
             return CPP_DKDomUIEvent_layerX(pointer)
         }
     })
     Object.defineProperty(this, "layerY", {
         //Read only
-        get: function layerY() {
+        get: function layerY(){
             return CPP_DKDomUIEvent_layerY(pointer)
         }
     })
@@ -50,13 +50,13 @@ var UIEvent = function UIEvent(pointer) {
 	*/
     Object.defineProperty(this, "sourceCapabilities", {
         //Read only
-        get: function sourceCapabilities() {
+        get: function sourceCapabilities(){
             return CPP_DKDomUIEvent_sourceCapabilities(pointer)
         }
     })
     Object.defineProperty(this, "view", {
         //Read only
-        get: function view() {
+        get: function view(){
             return CPP_DKDomUIEvent_view(pointer)
         }
     })
@@ -69,7 +69,7 @@ var UIEvent = function UIEvent(pointer) {
 	*/
 
     // Methods
-    UIEvent.prototype.initUIEvent = function initUIEvent() {
+    UIEvent.prototype.initUIEvent = function initUIEvent(){
         //Deprecated
         CPP_DKDomUIEvent_initUIEvent(this.pointer)
     }

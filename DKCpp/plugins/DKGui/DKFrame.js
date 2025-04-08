@@ -1,15 +1,15 @@
 //"use strict";
 
-function DKFrame() {}
+function DKFrame(){}
 
-DKFrame.prototype.init = function DKFrame_init() {
+DKFrame.prototype.init = function DKFrame_init(){
     dk.create("DKGui/DKFrame.css");
 }
-DKFrame.prototype.end = function DKFrame_end() {
+DKFrame.prototype.end = function DKFrame_end(){
 	//dk.close("DKGui/DKFrame.css");
 }
 
-DKFrame.prototype.create = function DKFrame_create(obj) {
+DKFrame.prototype.create = function DKFrame_create(obj){
     //dk.dumpVariable(obj);
 
     var instance;
@@ -17,7 +17,7 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     var element;
     if (obj && obj instanceof DKFrame)
         type = "DKFrame"
-    else if (obj && obj instanceof HTMLElement) {
+    else if (obj && obj instanceof HTMLElement){
         type = "HTMLElement"
         element = obj;
     } 
@@ -39,8 +39,8 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     if (obj instanceof HTMLElement)
         element = obj;
     else {
-        for (var key in obj) {
-            if (obj[key]instanceof HTMLElement) {
+        for (var key in obj){
+            if (obj[key]instanceof HTMLElement){
                 element = obj[key];
                 if (element.id && element.id.includes(".html"))
                     break;
@@ -70,7 +70,7 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
 	instance.frame.content.setAttribute("id", "dk_frame_content");
     instance.frame.content.setAttribute("dk_frame", "content");
     instance.frame.appendChild(instance.frame.content);
-	DKPlugin("DKGui/DKResize.js", function(DKClass) {
+	DKPlugin("DKGui/DKResize.js", function(DKClass){
 		if(!DKClass)
 			return error("DKClass invalid")
 		console.log("DKClass = "+DKClass)
@@ -84,12 +84,12 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     return instance;
 }
 
-DKFrame.prototype.close = function DKFrame_close() {
+DKFrame.prototype.close = function DKFrame_close(){
     this.resize && this.resize.close && this.resize.close();
     this.dkplugin && this.dkplugin.close && this.dkplugin.close();
 }
 
-DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, height) {
+DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, height){
     var instance = this;
     if (typeof title !== "string")
         return error("title invalid\n");
@@ -113,11 +113,11 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     frame.style.left = newleft + "px";
     frame.style.width = width + "rem";
     frame.style.height = newheight + "rem";
-    frame.onmousedown = function DKFrame_frame_onmousedown(event) {
+    frame.onmousedown = function DKFrame_frame_onmousedown(event){
         (document.body.lastChild !== frame) && (frame.mousedown_target = event.target);
         instance.bringToFront(event.currentTarget);
     }
-    frame.onmouseup = function DKFrame_frame_onmouseup(event) {
+    frame.onmouseup = function DKFrame_frame_onmouseup(event){
         (frame.mousedown_target == event.target) && event.target.click();
         frame.mousedown_target = null;
     }
@@ -126,7 +126,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
 	frame.titlebar.setAttribute("id", "dk_frame_titlebar");
     frame.titlebar.setAttribute("dk_frame", "titlebar");
-    frame.titlebar.ondblclick = function DKFrame_titlebar_ondblclick(event) {
+    frame.titlebar.ondblclick = function DKFrame_titlebar_ondblclick(event){
         event.stopPropagation();
         instance.maximize();
     }
@@ -146,7 +146,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
 	frame.reload.setAttribute("id", "dk_frame_reload");
     frame.reload.setAttribute("dk_frame", "reload");
     frame.reload.setAttribute("src", "DKGui/reload.png");
-    frame.reload.onmousedown = function DKFrame_reload_onmousedown(event) {
+    frame.reload.onmousedown = function DKFrame_reload_onmousedown(event){
         event.stopPropagation();
         instance.reload();
     }
@@ -155,7 +155,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
 	frame.minimize.setAttribute("id", "dk_frame_minimize");
     frame.minimize.setAttribute("dk_frame", "minimize");
     frame.minimize.setAttribute("src", "DKGui/minimize.png");
-    frame.minimize.onmousedown = function DKFrame_minimize_onmousedown(event) {
+    frame.minimize.onmousedown = function DKFrame_minimize_onmousedown(event){
         event.stopPropagation();
         instance.minimize();
     }
@@ -164,7 +164,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
 	frame.maximize.setAttribute("id", "dk_frame_maximize");
     frame.maximize.setAttribute("dk_frame", "maximize");
     frame.maximize.setAttribute("src", "DKGui/maximize.png");
-    frame.maximize.onmousedown = function DKFrame_maximize_onmousedown(event) {
+    frame.maximize.onmousedown = function DKFrame_maximize_onmousedown(event){
         event.stopPropagation();
         instance.maximize();
     }
@@ -173,19 +173,19 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
 	frame.close.setAttribute("id", "dk_frame_close");
     frame.close.setAttribute("dk_frame", "close");
     frame.close.setAttribute("src", "DKGui/close.png");
-    frame.close.onmousedown = function DKFrame_close_onmousedown(event) {
+    frame.close.onmousedown = function DKFrame_close_onmousedown(event){
         event.stopPropagation();
         instance.close();
     }
     return frame;
 }
 
-DKFrame.prototype.bringToFront = function DKFrame_bringToFront(frame) {
+DKFrame.prototype.bringToFront = function DKFrame_bringToFront(frame){
     (document.body.lastChild !== frame) && document.body.appendChild(frame);
 }
 
-DKFrame.prototype.maximize = function DKFrame_maximize() {
-    if (this.frame.maximized) {
+DKFrame.prototype.maximize = function DKFrame_maximize(){
+    if (this.frame.maximized){
         this.restoreSize(this.frame);
         this.frame.content.style.width = parseInt(this.frame.style.width) + "rem";
         this.frame.content.style.height = parseInt(this.frame.style.height) - 21 + "rem";
@@ -204,12 +204,12 @@ DKFrame.prototype.maximize = function DKFrame_maximize() {
     }
 }
 
-DKFrame.prototype.minimize = function DKFrame_minimize() {
+DKFrame.prototype.minimize = function DKFrame_minimize(){
     var top = this.frame.style.top;
     var bottom = this.frame.style.bottom;
     var left = this.frame.style.left;
     var right = this.frame.style.right;
-    if (!this.frame.minimized) {
+    if (!this.frame.minimized){
         this.storeSize(this.frame);
         this.frame.style.left = "0rem";
         this.frame.style.bottom = "0rem";
@@ -226,7 +226,7 @@ DKFrame.prototype.minimize = function DKFrame_minimize() {
         this.frame.resize.image.style.visibility = "hidden";
         this.frame.resize.corner.style.visibility = "hidden";
         var instance = this;
-        this.frame.titlebar.onclick = function DKFrame_titlebar_onclick(event) {
+        this.frame.titlebar.onclick = function DKFrame_titlebar_onclick(event){
             event.stopPropagation();
             instance.minimize(instance.frame.minimize);
         }
@@ -244,7 +244,7 @@ DKFrame.prototype.minimize = function DKFrame_minimize() {
     }
 }
 
-DKFrame.prototype.reload = function DKFrame_reload() {
+DKFrame.prototype.reload = function DKFrame_reload(){
     console.log("DKFrame.prototype.reload()");
     var url = this.dkplugin.prototype.url
     this.dkplugin.close();
@@ -253,23 +253,23 @@ DKFrame.prototype.reload = function DKFrame_reload() {
 
     //open everything back up
     var instance = this;
-    DKPlugin(url, function() {
+    DKPlugin(url, function(){
         instance.dkplugin.create();
     });
     return true;
 }
 
-DKFrame.prototype.setTitle = function DKFrame_setTitle(title) {
+DKFrame.prototype.setTitle = function DKFrame_setTitle(title){
     this.frame.titlebartext.innerHTML = title;
     return true;
 }
 
-DKFrame.prototype.setIcon = function DKFrame_setIcon(url) {
+DKFrame.prototype.setIcon = function DKFrame_setIcon(url){
     this.frame.titlebaricon.src = url;
     return true;
 }
 
-DKFrame.prototype.storeSize = function DKFrame_storeSize(frame) {
+DKFrame.prototype.storeSize = function DKFrame_storeSize(frame){
     frame.top = frame.style.top;
     frame.bottom = frame.style.bottom;
     frame.left = frame.style.left;
@@ -279,7 +279,7 @@ DKFrame.prototype.storeSize = function DKFrame_storeSize(frame) {
     return true;
 }
 
-DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
+DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame){
     frame.style.top = frame.top;
     frame.style.bottom = frame.bottom;
     frame.style.left = frame.left;
@@ -289,9 +289,9 @@ DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
     return true;
 }
 
-DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url) {
+DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url){
     var instance = DKPlugin(DKFrame, title)
-    //if (!instance.ok) {
+    //if (!instance.ok){
     //    instance.frame && DKFrame.prototype.bringToFront(instance.frame);
     //    return false;
     //}
@@ -307,7 +307,7 @@ DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, widt
 }
 
 /*
-DKFrame.prototype.iFrame = function DKFrame_Iframe(title, url, width, height) {
+DKFrame.prototype.iFrame = function DKFrame_Iframe(title, url, width, height){
     if (typeof title !== "string")
         return error("title invalid\n");
     if (typeof url !== "string")

@@ -17,7 +17,7 @@ class DKMouseEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
-	DKMouseEvent(const DOMString& type, const MouseEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
+	DKMouseEvent(const DOMString& type, const MouseEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict){
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "MouseEvent";
 		address[interfaceName] = pointerToAddress(this);
@@ -81,7 +81,7 @@ public:
 	
 	// boolean getModifierState(DOMString keyArg);
 	bool _getModifierState = false;
-	virtual const bool& getModifierState(const DOMString& keyArg) {
+	virtual const bool& getModifierState(const DOMString& keyArg){
 		DKDEBUGFUNC(keyArg);
 		DKTODO();
 		return _getModifierState;
@@ -166,7 +166,7 @@ public:
 		const bool& shiftKeyArg = false,
 		const bool& metaKeyArg = false,
 		const short& buttonArg = 0,
-		DKEventTarget* relatedTargetArg = NULL) {
+		DKEventTarget* relatedTargetArg = NULL){
 			DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg);
 			DKTODO();
 		}

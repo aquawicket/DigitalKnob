@@ -25,7 +25,7 @@ public:
 	
 	Rml::Element* _rmlElement;
 	
-	DKRmlCSSStyleDeclaration(Rml::Element* rmlElement) : DKCSSStyleDeclaration() {
+	DKRmlCSSStyleDeclaration(Rml::Element* rmlElement) : DKCSSStyleDeclaration(){
 		DKDEBUGFUNC();
 		DKASSERT(rmlElement);
 		

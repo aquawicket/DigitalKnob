@@ -13,12 +13,12 @@ dk_check = function(object){
 }
 
 //###### globalThis (variable) ######
-var globalThis = (function () {  
+var globalThis = (function (){  
     return this || (1, eval)('this');  
 }());  
 
 //###### window (variable) ######
-var window = (function () {  
+var window = (function (){  
     return this || (1, eval)('this');  
 }());  
 

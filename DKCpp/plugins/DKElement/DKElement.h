@@ -185,7 +185,7 @@ public:
 	
 	// Element? closest(DOMString selectors);
 	DKElement* _closest = NULL;
-	virtual DKElement* closest(const DOMString& selectors) {
+	virtual DKElement* closest(const DOMString& selectors){
 		DKDEBUGFUNC(selectors);
 		return _closest;
 	}
@@ -206,7 +206,7 @@ public:
   
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	DKHTMLCollection* _getElementsByTagName = NULL;
-	virtual DKHTMLCollection* getElementsByTagName(const DOMString& qualifiedName) {
+	virtual DKHTMLCollection* getElementsByTagName(const DOMString& qualifiedName){
 		DKDEBUGFUNC(qualifiedName);
 		return _getElementsByTagName;
 	}

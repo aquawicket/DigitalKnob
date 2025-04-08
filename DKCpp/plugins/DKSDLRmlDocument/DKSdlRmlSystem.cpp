@@ -34,7 +34,7 @@ WARNING_ENABLE
 Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey){
 	DKDEBUGFUNC(sdlkey);
     using namespace Rml::Input;
-    switch(sdlkey) {
+    switch(sdlkey){
         case SDLK_UNKNOWN:
             return KI_UNKNOWN;
         case SDLK_SPACE:
@@ -343,23 +343,23 @@ bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& 
 	return true;
 }
 
-void RmlSDL2SystemInterface::GetClipboardText(Rml::String& text) {
+void RmlSDL2SystemInterface::GetClipboardText(Rml::String& text){
     DKDEBUGFUNC(text);
     text = SDL_GetClipboardText();
 }
 
-void RmlSDL2SystemInterface::SetClipboardText(const Rml::String& text) {
+void RmlSDL2SystemInterface::SetClipboardText(const Rml::String& text){
     DKDEBUGFUNC(text);
     if (SDL_SetClipboardText(text.c_str()) != 0)
         DKERROR("SDL_SetClipboardText() failed!: "+DKString(SDL_GetError()) + "\n");
 }
 
-void RmlSDL2SystemInterface::ActivateKeyboard(Rml::Vector2f caret_position, float line_height) {
+void RmlSDL2SystemInterface::ActivateKeyboard(Rml::Vector2f caret_position, float line_height){
     DKDEBUGFUNC(caret_position, line_height);
     SDL_StartTextInput();
 }
 
-void RmlSDL2SystemInterface::DeactivateKeyboard() {
+void RmlSDL2SystemInterface::DeactivateKeyboard(){
     DKDEBUGFUNC();
     SDL_StopTextInput();
 }

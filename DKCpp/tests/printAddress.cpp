@@ -50,7 +50,7 @@ std::string* from_hex(std::string& address)
 	std::stringstream ss;
 	ss << address;
 	std::intptr_t tmp;
-	if (!(ss >> std::hex >> tmp)) {
+	if (!(ss >> std::hex >> tmp)){
 		std::cout << address << ": invalid address" << std::endl;
 		return NULL;
 	}
@@ -58,7 +58,7 @@ std::string* from_hex(std::string& address)
 	return obj;
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 { 
 	std::string str_var = "simple string";
 	std::cout << "str_var = " << str_var << std::endl;

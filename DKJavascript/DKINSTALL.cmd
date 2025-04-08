@@ -1,7 +1,7 @@
 @echo off
 if "%~1" equ "" (goto:DKINSTALL)
 
-:runDKJScript
+:runDKJavascript
 	set "CSCRIPT_EXE=%~1"
 	set "WSCRIPT_EXE=%~2"
 	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3
@@ -57,7 +57,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	%dk_call% dk_validate DKJAVASCRIPT_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
 	ftype DKJavascript=%COMSPEC% /V:ON /K call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR\DKJScript\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
+	%dk_call% dk_registrySetKey "HKCR\DKJavascript\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
 	assoc .js=DKJavascript
 	
 	%dk_call% dk_success "DKJavascript install complete"

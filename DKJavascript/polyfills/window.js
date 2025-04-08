@@ -1,5 +1,5 @@
 
-(function (Object) {
+(function (Object){
   typeof window !== 'object' && (
     this ?
       get() :
@@ -8,7 +8,7 @@
         get: get
       }), _T_)
   );
-  function get() {
+  function get(){
     var global = this || self;
     global.window = global;
     delete Object.prototype._T_;

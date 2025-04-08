@@ -15,7 +15,7 @@ dk_download = function(url, destination){
 	Object.Open('GET', Source, false);
 	Object.Send();
 
-	if (Object.Status == 200) {
+	if (Object.Status == 200){
 		// Create the Data Stream
 		var Stream = WScript.CreateObject('ADODB.Stream');
 
@@ -27,7 +27,7 @@ dk_download = function(url, destination){
 
 		// Create an Empty Target File
 		var File = WScript.CreateObject('Scripting.FileSystemObject');
-		if (File.FileExists(Target)) {
+		if (File.FileExists(Target)){
 			File.DeleteFile(Target);
 		}
 
@@ -42,7 +42,7 @@ dk_download = function(url, destination){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-function DKTEST() {
+function DKTEST(){
 	//dk_debugFunc(0);
 	
 	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.js")

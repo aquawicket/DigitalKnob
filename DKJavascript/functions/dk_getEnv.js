@@ -2,7 +2,7 @@
 //# dk_getEnv()
 //#
 //#
-dk_getEnv = function dk_getEnv_f() {
+dk_getEnv = function dk_getEnv_f(){
     //dk_debugFunc(0 1);
 	
 	if(typeof WScript === "object"){
@@ -17,7 +17,7 @@ dk_getEnv = function dk_getEnv_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	COMSPEC = dk_getEnv("COMSPEC");

@@ -1,7 +1,7 @@
 var index = "http://127.0.0.1:2393/DKHtml/index.html";
 var assets = "file:///C:/Users/Administrator/digitalknob/Development";
 
-var globalThis = (function () {  
+var globalThis = (function (){  
     return this || (1, eval)('this');  
 }());  
 

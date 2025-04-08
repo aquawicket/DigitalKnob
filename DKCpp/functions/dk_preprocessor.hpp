@@ -468,7 +468,7 @@
 /// the error occurred.
 #ifndef DKASSERT
 #define DKASSERT(x)                                                       	\
-    if (!(x)) {                                                         	\
+    if (!(x)){                                                         	\
         char buf[2048];                                                 	\
         snprintf (buf, 2048, "Assertion (%s) failed in \"%s\", line %d\n",	\
                  #x, __FILE__, __LINE__);                                   \

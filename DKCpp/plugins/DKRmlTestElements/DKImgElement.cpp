@@ -138,7 +138,7 @@ void DKImgElement::OnPropertyChange(const PropertyIdSet& changed_properties)
     Element::OnPropertyChange(changed_properties);
 
     if (changed_properties.Contains(PropertyId::ImageColor) ||
-        changed_properties.Contains(PropertyId::Opacity)) {
+        changed_properties.Contains(PropertyId::Opacity)){
         GenerateGeometry();
     }
 }

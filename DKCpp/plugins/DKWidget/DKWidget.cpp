@@ -127,7 +127,7 @@ bool DKWidget::CreateWidget(DKString& file)
 		html = "<div id=\"" + id + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
 	else{
-		if (!DKFile::VerifyPath(path)) { 
+		if (!DKFile::VerifyPath(path)){ 
 			DKERROR("DKWidget::CreateWidget("+file+"): file does not exist\n");
 			return false;
 		}
@@ -775,7 +775,7 @@ bool DKWidget::ScrollToBottom(const DKString& id)
 bool DKWidget::GetClientWidth(const DKString& id, DKString& value)
 {
 	DKDEBUGFUNC(id, value);
-	if (!GetClientWidth(GetElementById(id), value)) { return false; }
+	if (!GetClientWidth(GetElementById(id), value)){ return false; }
 	return true;
 }
 

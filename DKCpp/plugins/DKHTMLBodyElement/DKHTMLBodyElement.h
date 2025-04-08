@@ -13,7 +13,7 @@ class DKHTMLBodyElement : public DKHTMLElement
 {
 public:
 	// [HTMLConstructor] constructor();
-	DKHTMLBodyElement() : DKHTMLElement() {
+	DKHTMLBodyElement() : DKHTMLElement(){
 		DKDEBUGFUNC();
 		interfaceName = "DKHTMLBodyElement";
 		address[interfaceName] = pointerToAddress(this);

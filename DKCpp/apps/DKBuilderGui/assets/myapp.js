@@ -3,7 +3,7 @@ function MyApp(){}
 const myapp = DKPlugin(MyApp);
 
 
-myapp.loadFiles = function myapp_loadFiles() {
+myapp.loadFiles = function myapp_loadFiles(){
 	DKPlugin("DK/DKTrace.js")
     //DKPlugin("DK/DKErrorHandler.js")
     DKPlugin("DK/DKPhp.js")
@@ -29,7 +29,7 @@ myapp.loadFiles = function myapp_loadFiles() {
     //DKPlugin("DKCodeMirror/DKCodeMirror.js")
 }
 
-myapp.loadApp = function myapp_loadApp() {
+myapp.loadApp = function myapp_loadApp(){
 	//dk.errorCatcher(myapp, "myapp")
 	//dk.errorhandler.create()
 	//DKTime.prototype.create()
@@ -39,43 +39,43 @@ myapp.loadApp = function myapp_loadApp() {
 	//DKDevToolsButton.prototype.create()
 	
 	/*
-	DKPlugin("DKGui/TestApp.js", function() {
+	DKPlugin("DKGui/TestApp.js", function(){
 		TestApp.prototype.create()
 	});
 	*/
 	
 	/*
-	DKPlugin("DKGui/DKMessageBox.js", function() {
+	DKPlugin("DKGui/DKMessageBox.js", function(){
 		DKMessageBox.prototype.create()
 	});
 	*/
 	
 	/*
-	dk.paint = DKPlugin("DKPaint/DKPaint.js", function() {
+	dk.paint = DKPlugin("DKPaint/DKPaint.js", function(){
 		const dkframe = DKFrame.prototype.create(byId("DKPaint/DKPaint.html"))
     });
 	*/
 	
 	/*
-	DKPlugin("DKColorPicker/DKColorPicker.js", function() {
+	DKPlugin("DKColorPicker/DKColorPicker.js", function(){
         DKColorPicker.prototype.create();
     });
 	*/
 	
 	/*
-	DKPlugin("DKNotepad/DKNotepad.js", function() {
+	DKPlugin("DKNotepad/DKNotepad.js", function(){
         DKNotepad.prototype.create();
     });
 	*/
 	
 	/*
-	DKPlugin("DKBuild/DKBuildGUI.js", function() {
+	DKPlugin("DKBuild/DKBuildGUI.js", function(){
         DKBuildGUI.prototype.create();
     });
 	*/
 
 	/*
-	DKPlugin("DKFile/filemanager.js", function() {
+	DKPlugin("DKFile/filemanager.js", function(){
 		DKFileManager.prototype.create();
     });
 	*/

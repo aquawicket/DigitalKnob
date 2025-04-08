@@ -15,11 +15,11 @@ public:
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
-	virtual DKCSSStyleDeclaration* style() { 			// getter
+	virtual DKCSSStyleDeclaration* style(){ 			// getter
 		DKINFO("DKElementCSSInlineStyle::style()\n");
 		return _style; 
 	}		
-	virtual void style(DKCSSStyleDeclaration* style) {	// setter
+	virtual void style(DKCSSStyleDeclaration* style){	// setter
 		DKINFO("DKElementCSSInlineStyle::style(style)\n");
 		_style = style; 
 	}

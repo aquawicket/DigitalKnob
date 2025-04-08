@@ -17,7 +17,7 @@ class DKKeyboardEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
-	DKKeyboardEvent(const DOMString& type, const KeyboardEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
+	DKKeyboardEvent(const DOMString& type, const KeyboardEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict){
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "KeyboardEvent";
 		address[interfaceName] = pointerToAddress(this);
@@ -95,7 +95,7 @@ public:
 	
 	// boolean getModifierState(DOMString keyArg);
 	bool _getModifierState = false;
-	virtual const bool& getModifierState(const DOMString& keyArg) {
+	virtual const bool& getModifierState(const DOMString& keyArg){
 		DKDEBUGFUNC(keyArg);
 		DKTODO();
 		return _getModifierState;
@@ -124,7 +124,7 @@ public:
 		const bool& ctrlKey = false,
 		const bool& altKey = false,
 		const bool& shiftKey = false,
-		const bool& metaKey = false) {
+		const bool& metaKey = false){
 			DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, keyArg, locationArg, ctrlKey, altKey, shiftKey, metaKey);
 			DKTODO();
 		}

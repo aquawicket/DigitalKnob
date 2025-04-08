@@ -17,7 +17,7 @@ function printCustomEventProperties(customevent){
 	printEventProperties(customEvent);
 }
 
-function onCustomEvent(event) {
+function onCustomEvent(event){
 		console.log("onCustomEvent() \n");
 		printCustomEventProperties(event);
 		return true;

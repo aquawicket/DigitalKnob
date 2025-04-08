@@ -1,24 +1,24 @@
 //"use strict";
 
-function DKFileManager() {}
+function DKFileManager(){}
 
-DKFileManager.prototype.init = function DKFileManager_init(callback) {
+DKFileManager.prototype.init = function DKFileManager_init(callback){
     DKPlugin("DKFile/DKFileAssociation.js", function(){
 		dk.create("DKFile/filemanager.css");
 		callback && callback(true);
 	});
 }
 
-DKFileManager.prototype.end = function DKFileManager_end() {
+DKFileManager.prototype.end = function DKFileManager_end(){
     dk.close("DKFile/filemanager.css")
     dk.close("DKFile/DKFileAssociation.js")
 }
 
-DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_create_callback) {
+DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_create_callback){
     const instance = new DKPlugin(DKFileManager)
     if (!instance)
         return error("instance invalid", DKFileManager_create_callback)
-    dk.create("DKFile/filemanager.html", function dk_create_callback(html) {
+    dk.create("DKFile/filemanager.html", function dk_create_callback(html){
         if(!html)
             return error("html invalid")
 		if(!instance)
@@ -34,13 +34,13 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
 		instance.cancel = byId("dk_filemanager_cancel")
         //instance.ok = html.querySelector("[dk_filemanager='ok']")
         instance.ok = byId("dk_filemanager_ok")
-		instance.up.onclick = function(event) {
+		instance.up.onclick = function(event){
             instance.upDir(instance, event)
         }
-        instance.list.onclick = function(event) {
+        instance.list.onclick = function(event){
             instance.highlight(instance, event)
         }
-        instance.path.onkeypress = function(event) {
+        instance.path.onkeypress = function(event){
             instance.onPath(instance, event)
         }
 		
@@ -57,16 +57,16 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
     })
 }
 
-DKFileManager.prototype.createOpen = function DKFileManager_getfile(DKFileManager_createOpen_callback) {
-    instance.create(function(instance) {
+DKFileManager.prototype.createOpen = function DKFileManager_getfile(DKFileManager_createOpen_callback){
+    instance.create(function(instance){
         instance.dkFrame.setTitle("Open")
         instance.cancel.style.visibility = "visible";
         instance.ok.style.visibility = "visible";
-        instance.cancel.onclick = function() {
+        instance.cancel.onclick = function(){
             instance.close(instance)
             return true;
         }
-        instance.ok.onclick = function() {
+        instance.ok.onclick = function(){
             DKFileManager_createOpen_callback(instance.currentFile)
             instance.close(instance)
             return true;
@@ -74,16 +74,16 @@ DKFileManager.prototype.createOpen = function DKFileManager_getfile(DKFileManage
     })
 }
 
-DKFileManager.prototype.createSaveAs = function DKFileManager_savefile(DKFileManager_createSaveAs_callback) {
-    instance.create(function(instance) {
+DKFileManager.prototype.createSaveAs = function DKFileManager_savefile(DKFileManager_createSaveAs_callback){
+    instance.create(function(instance){
         instance.dkFrame.setTitle("Save As")
         instance.cancel.style.visibility = "visible";
         instance.ok.style.visibility = "visible";
-        instance.cancel.onclick = function() {
+        instance.cancel.onclick = function(){
             instance.close(instance)
             return true;
         }
-        instance.ok.onclick = function() {
+        instance.ok.onclick = function(){
             DKFileManager_createSaveAs_callback(instance.currentFile)
             instance.close(instance)
             return true;
@@ -91,34 +91,34 @@ DKFileManager.prototype.createSaveAs = function DKFileManager_savefile(DKFileMan
     })
 }
 
-DKFileManager.prototype.upDir = function(instance) {
+DKFileManager.prototype.upDir = function(instance){
     var up = instance.path.value + "../";
     instance.openFolder(instance, up)
 }
 
-DKFileManager.prototype.onPath = function(instance, event) {
+DKFileManager.prototype.onPath = function(instance, event){
     if (event.code === 'Enter')
         instance.openFolder(instance, instance.path.value)
 }
 
-DKFileManager.prototype.highlight = function DKFileManager_highlight(instance, event) {
+DKFileManager.prototype.highlight = function DKFileManager_highlight(instance, event){
     if (event instanceof Event)
         event.stopPropagation()
     var nodes = instance.list.childNodes;
-    for (var n = 0; n < nodes.length; n++) {
+    for (var n = 0; n < nodes.length; n++){
         if (!nodes[n])
             console.error("nodes[" + n + "] invalid\n")
         nodes[n].style.backgroundColor = instance.list.style.backgroundColor;
         nodes[n].style.color = instance.list.style.color;
     }
-    if (event.currentTarget.getAttribute("dk_filemanager") === "folder" || event.currentTarget.getAttribute("dk_filemanager") === "file") {
+    if (event.currentTarget.getAttribute("dk_filemanager") === "folder" || event.currentTarget.getAttribute("dk_filemanager") === "file"){
         event.currentTarget.style.backgroundColor = "rgb(123,157,212)";
         event.currentTarget.style.color = "rgb(255,255,255)";
     }
     instance.currentFile = event.currentTarget.getAttribute("path")
 }
 
-DKFileManager.prototype.dblclick = function(instance, event) {
+DKFileManager.prototype.dblclick = function(instance, event){
     const folder = event.currentTarget.getAttribute("folder")
     const file = event.currentTarget.getAttribute("file")
     const path = event.currentTarget.getAttribute("path")
@@ -128,80 +128,80 @@ DKFileManager.prototype.dblclick = function(instance, event) {
         instance.openFile(instance, path)
 }
 
-DKFileManager.prototype.rightclickmenu = function(instance, event) {
+DKFileManager.prototype.rightclickmenu = function(instance, event){
     event.preventDefault()
     instance.highlight(instance, event)
     const folder = event.currentTarget.getAttribute("dk_filemanager") === "folder";
     const file = event.currentTarget.getAttribute("dk_filemanager") === "file";
     const node = event.currentTarget;
     const path = event.currentTarget.getAttribute("path")
-    DKPlugin("DKGui/DKMenu.js", function(DKClass) {
+    DKPlugin("DKGui/DKMenu.js", function(DKClass){
 		DUMP(DKClass)
         const dkmenu = DKClass.prototype.create()
 		DUMP(dkmenu)
-        file && dkmenu.addItem("Edit", function dk_menu_edit() {
+        file && dkmenu.addItem("Edit", function dk_menu_edit(){
             instance.editFile(instance, path)
         })
-        dkmenu.addItem("Open", function dk_menu_open() {
+        dkmenu.addItem("Open", function dk_menu_open(){
             folder && instance.openFolder(instance, path)
             file && instance.openFile(instance, path)
         })
-        dkmenu.addItem("Open In OS", function dk_menu_openinos() {
+        dkmenu.addItem("Open In OS", function dk_menu_openinos(){
             folder && instance.openFolderInOS(instance, path)
             file && instance.openFileInOS(instance, path)
         })
-        dkmenu.addItem("New File", function dk_menu_newfile() {
+        dkmenu.addItem("New File", function dk_menu_newfile(){
             instance.newFile(instance)
         })
-        dkmenu.addItem("New Folder", function dk_menu_newFolder() {
+        dkmenu.addItem("New Folder", function dk_menu_newFolder(){
             instance.newFolder(instance)
         })
-        dkmenu.addItem("Rename", function dk_menu_rename() {
+        dkmenu.addItem("Rename", function dk_menu_rename(){
             instance.rename(instance, node)
         })
-        dkmenu.addItem("Delete", function dk_menu_delete() {
+        dkmenu.addItem("Delete", function dk_menu_delete(){
             instance.delete(instance, path)
         })
-        dkmenu.addItem("Copy", function dk_menu_copy() {
+        dkmenu.addItem("Copy", function dk_menu_copy(){
             instance.copy(instance, path)
         })
-        dkmenu.addItem("Cut", function dk_menu_cut() {
+        dkmenu.addItem("Cut", function dk_menu_cut(){
             instance.cut(instance, path)
         })
-        dkmenu.addItem("Paste", function dk_menu_paste() {
+        dkmenu.addItem("Paste", function dk_menu_paste(){
             instance.paste(instance)
         })
-        dkmenu.addItem("Import", function dk_menu_import() {
+        dkmenu.addItem("Import", function dk_menu_import(){
             instance.import(instance, path)
         })
-        dkmenu.addItem("Git Add", function dk_menu_gitAdd() {
+        dkmenu.addItem("Git Add", function dk_menu_gitAdd(){
             instance.GitAdd(instance, path)
         })
-        dkmenu.addItem("upxCompress", function dk_menu_upxCompress() {
+        dkmenu.addItem("upxCompress", function dk_menu_upxCompress(){
             instance.upxCompress(instance, path)
         })
     })
 }
 
-DKFileManager.prototype.editFile = function DKFileManager_editFile(instance, path) {
+DKFileManager.prototype.editFile = function DKFileManager_editFile(instance, path){
     return dk.fileassociation.edit(path)
 }
-DKFileManager.prototype.openFolder = function DKFileManager_openFolder(instance, path) {
+DKFileManager.prototype.openFolder = function DKFileManager_openFolder(instance, path){
     return instance.updatePath(instance, path)
 }
-DKFileManager.prototype.openFile = function DKFileManager_openFile(instance, path) {
+DKFileManager.prototype.openFile = function DKFileManager_openFile(instance, path){
     return dk.fileassociation.open(instance, path)
 }
-DKFileManager.prototype.openFolderInOS = function DKFileManager_openFolderInOS(instance, path) {
+DKFileManager.prototype.openFolderInOS = function DKFileManager_openFolderInOS(instance, path){
     console.debug("TODO: DKFileManager.prototype.openFolderInOS(" + path + ")")
 }
-DKFileManager.prototype.openFileInOS = function DKFileManager_openFolderInOS(instance, path) {
+DKFileManager.prototype.openFileInOS = function DKFileManager_openFolderInOS(instance, path){
     console.debug("TODO: DKFileManager.prototype.openFileInOS(" + path + ")")
 }
-DKFileManager.prototype.newFile = function DKFileManager_newFile(instance) {
+DKFileManager.prototype.newFile = function DKFileManager_newFile(instance){
     const filename = "NewFile.txt";
     const path = instance.path.value + filename;
-    dk.file.stringToFile("", path, 0, function(result) {
+    dk.file.stringToFile("", path, 0, function(result){
         console.log(result)
     })
     const newFile = dk.gui.createElement(instance.list, "div", "managerFile")
@@ -222,10 +222,10 @@ DKFileManager.prototype.newFile = function DKFileManager_newFile(instance) {
     instance.rename(instance, newFile)
 }
 
-DKFileManager.prototype.newFolder = function DKFileManager_newFolder(instance) {
+DKFileManager.prototype.newFolder = function DKFileManager_newFolder(instance){
     const foldername = "NewFolder";
     const path = instance.path.value + foldername;
-    dk.file.makeDir(path, 0, true, function(result) {
+    dk.file.makeDir(path, 0, true, function(result){
         console.log(result)
     })
     const newFolder = dk.gui.createElement(instance.list, "div", "managerFolder")
@@ -246,7 +246,7 @@ DKFileManager.prototype.newFolder = function DKFileManager_newFolder(instance) {
     instance.rename(instance, newFolder)
 }
 
-DKFileManager.prototype.rename = function DKFileManager_rename(instance, node) {
+DKFileManager.prototype.rename = function DKFileManager_rename(instance, node){
     const renamer = dk.gui.createElement(instance.list, "div", "renamer")
     renamer.style.position = "absolute";
     renamer.style.top = node.offsetTop;
@@ -258,21 +258,21 @@ DKFileManager.prototype.rename = function DKFileManager_rename(instance, node) {
     renamerInput.style.width = "100%";
     renamerInput.style.height = "100%";
     renamerInput.value = node.innerHTML;
-    setTimeout(function() {
+    setTimeout(function(){
         if (renamerInput)
             renamerInput.focus()
-        document.addEventListener('mousedown', function() {
+        document.addEventListener('mousedown', function(){
             doRename()
         }, {
             once: true
         })
     }, 100)
-    renamerInput.onkeydown = function(event) {
+    renamerInput.onkeydown = function(event){
         if (event.code === "Enter")
             doRename()
     }
 
-    function doRename() {
+    function doRename(){
         const oldfilename = node.innerHTML;
         const oldpath = node.getAttribute("path")
         const newfilename = renamerInput.value;
@@ -286,10 +286,10 @@ DKFileManager.prototype.rename = function DKFileManager_rename(instance, node) {
     }
 }
 
-DKFileManager.prototype.delete = function DKFileManager_delete(instance, path) {
-    DKPlugin("DKGui/DKMessageBox.js", function() {
-        dk.messagebox.createConfirm("Delete this file?", function(result) {
-            dk.file.delete(path, function(result) {
+DKFileManager.prototype.delete = function DKFileManager_delete(instance, path){
+    DKPlugin("DKGui/DKMessageBox.js", function(){
+        dk.messagebox.createConfirm("Delete this file?", function(result){
+            dk.file.delete(path, function(result){
                 console.log(path)
                 const element = instance.list.querySelector("[path='" + path + "']")
                 element.parentNode.removeChild(element)
@@ -297,48 +297,48 @@ DKFileManager.prototype.delete = function DKFileManager_delete(instance, path) {
         })
     })
 }
-DKFileManager.prototype.copy = function DKFileManager_copy(instance, path) {
+DKFileManager.prototype.copy = function DKFileManager_copy(instance, path){
     console.debug("TODO: instance.copy(" + path + ")")
 }
-DKFileManager.prototype.cut = function DKFileManager_cut(instance, path) {
+DKFileManager.prototype.cut = function DKFileManager_cut(instance, path){
     console.debug("TODO: instance.cut(" + path + ")")
 }
-DKFileManager.prototype.paste = function DKFileManager_paste(instance, path) {
+DKFileManager.prototype.paste = function DKFileManager_paste(instance, path){
     console.debug("TODO: instance.paste")
 }
-DKFileManager.prototype.import = function DKFileManager_import(instance, path) {
+DKFileManager.prototype.import = function DKFileManager_import(instance, path){
     console.debug("TODO: instance.import(" + path + ")")
 }
-DKFileManager.prototype.gitAdd = function DKFileManager_gitAdd(instance, path) {
+DKFileManager.prototype.gitAdd = function DKFileManager_gitAdd(instance, path){
     console.debug("TODO: instance.gitAdd(" + path + ")")
 }
-DKFileManager.prototype.upxCompress = function DKFileManager_upxCompress(instance, path) {
+DKFileManager.prototype.upxCompress = function DKFileManager_upxCompress(instance, path){
     console.debug("TODO: instance.upxCompress(" + path + ")")
 }
 
-DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance, _path) {
+DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance, _path){
     //console.log("DKFileManager.prototype.updatPath("+_path+")")
-    dk.file.getPathObject(_path, function dk_file_getPathObject(path) {
+    dk.file.getPathObject(_path, function dk_file_getPathObject(path){
         instance.path.value = path.aPath;
         instance.list.innerHTML = "";
-        dk.file.directoryContents(path.aPath, function dk_file_directoryContents_callback(results) {
+        dk.file.directoryContents(path.aPath, function dk_file_directoryContents_callback(results){
             if (!results)
                 return error("results invalid")
             const items = results.split(",")
-            for (var n = 0; n < items.length; n++) {
-                dk.file.isDir(path.aPath + items[n], function dk_file_isDir_callback(dir) {
-                    if (dir) {
+            for (var n = 0; n < items.length; n++){
+                dk.file.isDir(path.aPath + items[n], function dk_file_isDir_callback(dir){
+                    if (dir){
                         //Folders
                         const folderpath = path.aPath + items[n] + "/";
                         const folder = dk.gui.createTag("div", instance.list, {
                             innerHTML: items[n],
-                            onclick: function onclick(event) {
+                            onclick: function onclick(event){
                                 instance.highlight(instance, event)
                             },
-                            ondblclick: function ondblclick(event) {
+                            ondblclick: function ondblclick(event){
                                 instance.dblclick(instance, event)
                             },
-                            oncontextmenu: function oncontextmenu(event) {
+                            oncontextmenu: function oncontextmenu(event){
                                 instance.rightclickmenu(instance, event)
                             }
                         })
@@ -349,9 +349,9 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
                     }
                 })
             }
-            for (var n = 0; n < items.length; n++) {
-                dk.file.isDir(path.aPath + items[n], function dk_file_isDir_callback(dir) {
-                    if (!dir) {
+            for (var n = 0; n < items.length; n++){
+                dk.file.isDir(path.aPath + items[n], function dk_file_isDir_callback(dir){
+                    if (!dir){
                         //Files
                         const filepath = path.aPath + items[n];
                         const file = dk.gui.createElement(instance.list, "div", "managerFile")
@@ -359,13 +359,13 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
                         file.setAttribute("dk_filemanager", "file")
                         file.setAttribute("path", filepath)
                         file.innerHTML = items[n];
-                        file.onclick = function(event) {
+                        file.onclick = function(event){
                             instance.highlight(instance, event)
                         }
-                        file.ondblclick = function(event) {
+                        file.ondblclick = function(event){
                             instance.dblclick(instance, event)
                         }
-                        file.oncontextmenu = function(event) {
+                        file.oncontextmenu = function(event){
                             instance.rightclickmenu(instance, event)
                         }
                         var extension = dk.file.getExtention(items[n])

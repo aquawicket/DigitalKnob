@@ -79,7 +79,7 @@ bool DKWebSockets::CreateClient(const DKString& address){
 		clientWebSocket = ws;
 	});
 
-	clientHub.onDisconnection([](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
+	clientHub.onDisconnection([](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length){
 		DKDEBUGFUNC(ws, code, message, length);
 		clientWebSocket = NULL;
 	});
@@ -113,7 +113,7 @@ bool DKWebSockets::CreateClient(const DKString& address){
 			static int protocolErrorCount = 0;
 			protocolErrorCount++;
 			DKERROR("Client emitted error on invalid protocol\n");
-			if (protocolErrorCount > 1) {
+			if (protocolErrorCount > 1){
 				DKERROR("FAILURE: "+toString(protocolErrorCount)+" errors emitted for one connection!\n");
 				exit(-1);
 			}
@@ -169,7 +169,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port){
 			static int protocolErrorCount = 0;
 			protocolErrorCount++;
 			DKERROR("Client emitted error on invalid protocol\n");
-			if (protocolErrorCount > 1) {
+			if (protocolErrorCount > 1){
 				DKERROR("FAILURE: "+toString(protocolErrorCount)+" errors emitted for one connection!\n");
 				exit(-1);
 			}
@@ -183,7 +183,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port){
 	serverHub.onConnection([](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req){
 		DKDEBUGFUNC(ws, req);
 		serverWebSocket = ws;
-		switch ((long) ws->getUserData()) {
+		switch ((long) ws->getUserData()){
 		case 8:
 			DKINFO("Client established a remote connection over non-SSL");
 			break;
@@ -195,7 +195,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port){
 		}
 	});
 
-	serverHub.onDisconnection([](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
+	serverHub.onDisconnection([](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length){
 		DKDEBUGFUNC(ws, code, message, length);
 		serverWebSocket = NULL;
 		DKINFO("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+">\n");

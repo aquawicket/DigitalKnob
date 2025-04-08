@@ -7,7 +7,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_log.js");
 //#
 //#     @msg    - The message to print
 //#
-dk_debug = function dk_debug_f() {
+dk_debug = function dk_debug_f(){
 	dk_log("DEBUG", arguments[0]);
 }
 
@@ -16,7 +16,7 @@ dk_debug = function dk_debug_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	dk_debug("test dk_debug DEBUG message");

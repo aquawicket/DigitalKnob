@@ -6,7 +6,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 	
 	char* from = "/C/Users/Administrator/digitalknob";
     char* to = "/C/Users/Administrator/digitalknob/Development/DKC/functions/dk_relativePath.c";

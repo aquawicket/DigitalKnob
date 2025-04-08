@@ -32,13 +32,13 @@
 
 std::map<Key, DKKeyCodes::KeyboardEventMap> DKKeyCodes::keys;
 
-void DKKeyCodes::mapKey(Key name, DKString key, DKString code, int location) {
+void DKKeyCodes::mapKey(Key name, DKString key, DKString code, int location){
     DKString vk_keycode = int_to_hex(name);
     int which = name;
     keys[name] = KeyboardEventMap{code, vk_keycode, key, location, which};
 }
 
-void DKKeyCodes::mapKeys() {
+void DKKeyCodes::mapKeys(){
     //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
     //mapKey(KEY_Name,    " code",   " key");
 

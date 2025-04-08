@@ -1,19 +1,19 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement
 
-var Image = function Image(width, height) {
+var Image = function Image(width, height){
 	var image = document.createElement("img");
 	image.width = width;
 	image.height = height;
 	return new HTMLImageElement(image);
 }
 
-var HTMLImageElement = function HTMLImageElement(pointer) {
+var HTMLImageElement = function HTMLImageElement(pointer){
 	// Properties
 	Object.defineProperty(this, "src", {
-        get: function src() {
+        get: function src(){
 			return CPP_DKDomElement_getAttribute(pointer, "src")
         },
-		set: function src(val) {
+		set: function src(val){
 			return CPP_DKDomElement_setAttribute(pointer, "src", val)
 		}
     });

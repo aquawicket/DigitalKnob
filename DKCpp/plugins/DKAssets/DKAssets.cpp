@@ -167,15 +167,15 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	
 #if WIN
 	if (DKFile::PathExists(DKFile::app_path + "../assets/") && 
-	    DKFile::PathExists(DKFile::app_path + "../DKINSTALL.cmake")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "../assets/", path)) {
+	    DKFile::PathExists(DKFile::app_path + "../DKINSTALL.cmake")){
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "../assets/", path)){
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
 		}
 	}
 	if (DKFile::PathExists(DKFile::app_path + "../../assets/") &&
-		DKFile::PathExists(DKFile::app_path + "../../DKINSTALL.cmake")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path)) {
+		DKFile::PathExists(DKFile::app_path + "../../DKINSTALL.cmake")){
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path)){
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
 		}
@@ -183,8 +183,8 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	return false;
 #elif MAC
 	if (DKFile::PathExists(DKFile::app_path + "../../../../../assets/") && 
-		DKFile::PathExists(DKFile::app_path + "../../../../../DKINSTALL.cmake")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../../../../assets/", path)) {
+		DKFile::PathExists(DKFile::app_path + "../../../../../DKINSTALL.cmake")){
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../../../../assets/", path)){
 			return true;
 		}
 	}
@@ -203,7 +203,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
     }
 	return false;
 #elif LINUX
-	if (DKFile::PathExists(DKFile::app_path + "../../assets/") && DKFile::PathExists(DKFile::app_path + "../../DKINSTALL.cmake")) {
+	if (DKFile::PathExists(DKFile::app_path + "../../assets/") && DKFile::PathExists(DKFile::app_path + "../../DKINSTALL.cmake")){
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path))
 			return true;
 	}

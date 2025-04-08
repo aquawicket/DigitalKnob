@@ -313,7 +313,7 @@ bool DKVncClient::draw(){
 		return DKERROR("SDL_RenderCopyEx() failed\n");
 }
 
-void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h) {
+void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h){
 	DKDEBUGFUNC(cl, x, y, w, h);
 	//Throttle the drawing to conserve cpu
 	DKUtil::GetTicks(DKUtil::now);
@@ -442,7 +442,7 @@ bool DKVncClient::handle(SDL_Event *e){
 				rfbClientLog("released left Alt key\n");
 			}
 
-			if (e->active.gain && lost_scrap()) {
+			if (e->active.gain && lost_scrap()){
 				static char *data = NULL;
 				static int len = 0;
 				get_scrap(T('T', 'E', 'X', 'T'), &len, &data);
@@ -482,7 +482,7 @@ bool DKVncClient::handle(SDL_Event *e){
 }
 
 /*
-rfbBool DKVncClient::resize(rfbClient* client) {
+rfbBool DKVncClient::resize(rfbClient* client){
 	DKDEBUGFUNC(client);
 	//DKINFO("client->appData.scaleSetting="+toString(client->appData.scaleSetting)+"\n");
 	int width = client->width;
@@ -529,7 +529,7 @@ rfbBool DKVncClient::resize(rfbClient* client) {
 	else{
 		SDL_Surface* sdl = (SDL_Surface*)rfbClientGetClientData(client, SDL_Init);
 		rfbClientLog("Could not set resolution %dx%d!\n", client->width,client->height);
-		if(sdl) {
+		if(sdl){
 			client->width=sdl->pitch / (depth / 8);
 			client->height=sdl->h;
 		} 
@@ -554,7 +554,7 @@ void DKVncClient::kbd_leds(rfbClient* cl, int value, int pad){
 
 void DKVncClient::text_chat(rfbClient* cl, int value, char *text){
 	DKDEBUGFUNC(cl, value, text);
-	switch(value) {
+	switch(value){
 		case rfbTextChatOpen:
 			fprintf(stderr,"TextChat: We should open a textchat window!\n");
 			TextChatOpen(cl);
@@ -604,7 +604,7 @@ void DKVncClient::resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int 
 			int y1 = ((j + 1) * cl->height - 1) / realHeight + 1;
 			uint32_t r = 0, g = 0, b = 0;
 			for (y = y0; y < y1; y++){
-				for (x = x0; x < x1; x++) {
+				for (x = x0; x < x1; x++){
 					uint32_t v = get(cl, x, y);
 #define REDSHIFT cl->format.redShift
 #define REDMAX cl->format.redMax
@@ -661,7 +661,7 @@ void DKVncClient::setRealDimension(rfbClient *client, int w, int h){
 	sdl = SDL_GetWindowSurface(dkSdlWindow->window);
 	if (!sdl) 
 		DKERROR("ERROR: "+toString(SDL_GetError())+"\n");
-	if (!sdl->pixels) {
+	if (!sdl->pixels){
 		int size;
 		sdl->pixels = (char *)client->frameBuffer;
 		rowStride = client->width;
@@ -695,7 +695,7 @@ rfbKeySym DKVncClient::SDL_key2rfbKeySym(SDL_KeyboardEvent* e){
 	rfbKeySym k = 0;
 	SDL_Keycode sym = e->keysym.sym;
 	
-	switch (sym) {
+	switch (sym){
 		case SDLK_BACKSPACE: k = XK_BackSpace; break;
 		case SDLK_TAB: k = XK_Tab; break;
 		case SDLK_CLEAR: k = XK_Clear; break;
@@ -771,7 +771,7 @@ rfbKeySym DKVncClient::SDL_key2rfbKeySym(SDL_KeyboardEvent* e){
 	/* both SDL and X11 keysyms match ASCII in the range 0x01-0x7f */
 	if(k == 0 && sym > 0x0 && sym < 0x100){
 		k = sym;
-		if(e->keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
+		if(e->keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)){
 			if(k >= '1' && k <= '9'){
 				k &= ~0x10;
 			}

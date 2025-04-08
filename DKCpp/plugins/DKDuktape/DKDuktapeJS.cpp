@@ -183,10 +183,10 @@ int DKDuktapeJS::_DKDEBUGFUNC(duk_context* ctx){
 	//TODO - we need to pull the function name
 	DKString str = "unknown_func(";
 	int i = 0;
-	while (duk_is_valid_index(ctx, i)) {
-		if (duk_is_boolean(ctx, i)) { str += toString(duk_get_boolean(ctx, i)); }
-		if (duk_is_number(ctx, i)) { str += toString(duk_get_number(ctx, i)); }
-		if (duk_is_string(ctx, i)) { str += duk_get_string(ctx, i); }
+	while (duk_is_valid_index(ctx, i)){
+		if (duk_is_boolean(ctx, i)){ str += toString(duk_get_boolean(ctx, i)); }
+		if (duk_is_number(ctx, i)){ str += toString(duk_get_number(ctx, i)); }
+		if (duk_is_string(ctx, i)){ str += duk_get_string(ctx, i); }
 		str += ","; //FIXME - no comma on the last argument
 		i++;
 	}
@@ -200,12 +200,12 @@ int DKDuktapeJS::_DKDEBUGVARS(duk_context* ctx){
 	//TODO - we need to pull the function name and the variable names
 	DKString info = "unknown_file:unknown_line unknown_func()   ";
 	int i = 0;
-	while (duk_is_valid_index(ctx, i)) {
+	while (duk_is_valid_index(ctx, i)){
 		DKString var = "unknown_name: ";
-		if (duk_is_boolean(ctx, i)) { var += toString(duk_get_boolean(ctx, i)); }
-		if (duk_is_number(ctx, i)) { var += toString(duk_get_number(ctx, i)); }
-		if (duk_is_string(ctx, i)) { var += duk_get_string(ctx, i); }
-		if (!DKLog::log_debug) {
+		if (duk_is_boolean(ctx, i)){ var += toString(duk_get_boolean(ctx, i)); }
+		if (duk_is_number(ctx, i)){ var += toString(duk_get_number(ctx, i)); }
+		if (duk_is_string(ctx, i)){ var += duk_get_string(ctx, i); }
+		if (!DKLog::log_debug){
 			DKLog::log_debug = true;
 			DKDEBUG(info + var + "\n");
 			DKLog::log_debug = false;
@@ -262,7 +262,7 @@ int DKDuktapeJS::_Create(duk_context* ctx){
 	//Call the callback
 	if(callback_found){
 		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
-		//if(duk_pcall(ctx, 0) != 0) { // JsFunc call failed
+		//if(duk_pcall(ctx, 0) != 0){ // JsFunc call failed
 			DKDuktape::DumpError(obj->data[1].c_str());
 			/*
 			//TODO - can we get more info on the actuall callback to display here
@@ -1199,7 +1199,7 @@ int DKDuktapeJS::WaitForImage(duk_context* ctx){
 	return 1;
 }
 
-int DKDuktapeJS::ColorMap(duk_context* ctx) {
+int DKDuktapeJS::ColorMap(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKTextColor::PrintColors();
 	return 1;
@@ -1208,7 +1208,7 @@ int DKDuktapeJS::ColorMap(duk_context* ctx) {
 
 //TODO: incorporate this into javascript Window object and Console object
 //Desktop Console
-int DKDuktapeJS::setConsolePosition(duk_context* ctx) {
+int DKDuktapeJS::setConsolePosition(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 #if WIN
 	int x = duk_require_int(ctx, 0);

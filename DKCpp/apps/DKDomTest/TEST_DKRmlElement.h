@@ -10,7 +10,7 @@ class TEST_DKRmlElement //: public DKObjectT<TEST_DKRmlElement>
 public:
 	DKRmlElement* dkRmlElement;
 	
-	TEST_DKRmlElement() {
+	TEST_DKRmlElement(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlElement.h //////");
 		
@@ -19,7 +19,7 @@ public:
 		printDKRmlElementProperties(dkRmlElement);
 	}
 	
-	~TEST_DKRmlElement() {
+	~TEST_DKRmlElement(){
 		delete dkRmlElement;
 	}
 	

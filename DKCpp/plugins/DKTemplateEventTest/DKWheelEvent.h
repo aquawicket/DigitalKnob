@@ -12,7 +12,7 @@ class DKWheelEvent : public DKMouseEvent
 public:
 	////// Constructor //////
 	// [WheelEvent()] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/WheelEvent
-	DKWheelEvent(DKString _type, DKString _options) : DKMouseEvent(_type, _options) {
+	DKWheelEvent(DKString _type, DKString _options) : DKMouseEvent(_type, _options){
 		DKINFO("DKWheelEvent("+_type+", "+_options+") \n");
 		
 		////// Instance properties //////

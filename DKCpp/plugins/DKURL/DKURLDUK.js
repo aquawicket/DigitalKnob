@@ -7,7 +7,7 @@
 // LegacyWindowAlias=webkitURL]
 // interface URL {
 // constructor(USVString url, optional USVString base);
-var URL = function URL(url, base, address) {	
+var URL = function URL(url, base, address){	
 	//console.log("URL("+url+","+base+","+address+")");
 	
 	if(address)
@@ -17,7 +17,7 @@ var URL = function URL(url, base, address) {
 	
 	
 	// static boolean canParse(USVString url, optional USVString base);
-	URL.prototype.canParse = function canParse(url, base) {
+	URL.prototype.canParse = function canParse(url, base){
 		return CPP_DKURLDUK_canParse(this.address, url, base);
     }
 	
@@ -94,7 +94,7 @@ var URL = function URL(url, base, address) {
     })
 	
 	// USVString toJSON();
-	URL.prototype.toJSON = function toJSON() {
+	URL.prototype.toJSON = function toJSON(){
 		return CPP_DKURLDUK_toJSON(this.address);
     }
 	
@@ -104,12 +104,12 @@ var URL = function URL(url, base, address) {
 	// [Exposed=(Window,DedicatedWorker,SharedWorker)]
 	// partial interface URL {
 	// static DOMString createObjectURL((Blob or MediaSource) obj);
-	URL.prototype.createObjectURL = function createObjectURL(obj) {
+	URL.prototype.createObjectURL = function createObjectURL(obj){
 		return CPP_DKURLDUK_createObjectURL(this.address, obj);
     }
 	
 	// static undefined revokeObjectURL(DOMString url);
-	URL.prototype.revokeObjectURL = function revokeObjectURL(url) {
+	URL.prototype.revokeObjectURL = function revokeObjectURL(url){
 		CPP_DKURLDUK_revokeObjectURL(this.address, url);
     }
 	

@@ -3,7 +3,7 @@
 
 
 // [CustomEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
-var CustomEvent = function CustomEvent(type, options, address) {
+var CustomEvent = function CustomEvent(type, options, address){
 	//console.log("CustomEvent("+type+","+options+","+address+")")
 	
 	//options = JSON.stringify(options);
@@ -16,7 +16,7 @@ var CustomEvent = function CustomEvent(type, options, address) {
 	////// Instance properties //////
 	// [CustomEvent.detail](Read only)
 	Object.defineProperty(this, "detail", {
-        get: function detail() {
+        get: function detail(){
             return CPP_DKCustomEvent_detail(this.address);
         }
     });
@@ -24,7 +24,7 @@ var CustomEvent = function CustomEvent(type, options, address) {
 
     ////// Instance methods //////
 	// [CustomEvent.initCustomEvent()](Deprecated)
-	CustomEvent.prototype.initCustomEvent = function initCustomEvent() {
+	CustomEvent.prototype.initCustomEvent = function initCustomEvent(){
 		CPP_DKCustomEvent_initCustomEvent(this.address);
     }
 	

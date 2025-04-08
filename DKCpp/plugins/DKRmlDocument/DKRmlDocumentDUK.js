@@ -1,5 +1,5 @@
 
-var DKRmlDocument = function DKRmlDocument(dkRmlInterface, dkRmlEventListener) {
+var DKRmlDocument = function DKRmlDocument(dkRmlInterface, dkRmlEventListener){
 	console.log("DKRmlDocument("+dkRmlInterface+","+dkRmlEventListener+")");
 	console.log("DKRmlDocument("+dkRmlInterface.address+","+dkRmlEventListener.address+")");
 

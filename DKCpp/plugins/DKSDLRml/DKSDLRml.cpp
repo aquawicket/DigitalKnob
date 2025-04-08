@@ -64,7 +64,7 @@ bool DKSDLRml::End(){
 	return true;
 }
 
-bool DKSDLRml::Handle(SDL_Event *event) {
+bool DKSDLRml::Handle(SDL_Event *event){
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if(!dkRml->document)
 		return DKERROR("dkRml->document invalid\n");

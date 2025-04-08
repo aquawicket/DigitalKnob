@@ -4,7 +4,7 @@
 
 // [Exposed=Window, LegacyUnenumerableNamedProperties]
 // interface HTMLCollection {
-var HTMLCollection = function HTMLCollection(address) {
+var HTMLCollection = function HTMLCollection(address){
 	console.log("HTMLCollection("+address+")")
 	
 	if(address)
@@ -20,12 +20,12 @@ var HTMLCollection = function HTMLCollection(address) {
     })
 	
 	// getter Element? item(unsigned long index);
-	HTMLCollection.prototype.item = function item(index) {
+	HTMLCollection.prototype.item = function item(index){
 		return new Element(CPP_DKHTMLCollectionDUK_item(this.address, index));
     }
 	
 	// getter Element? namedItem(DOMString name);
-	HTMLCollection.prototype.namedItem = function namedItem(name) {
+	HTMLCollection.prototype.namedItem = function namedItem(name){
 		return new Element(CPP_DKHTMLCollectionDUK_namedItem(this.address, name));
     }
 	

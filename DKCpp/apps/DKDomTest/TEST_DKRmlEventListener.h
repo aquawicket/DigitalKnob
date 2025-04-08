@@ -12,7 +12,7 @@ class TEST_DKRmlEventListener //: public DKObjectT<TEST_DKRmlEventListener>
 public:
 	static DKRmlEventListener* _dkRmlEventListener;
 
-	TEST_DKRmlEventListener() {
+	TEST_DKRmlEventListener(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlEventListener.h //////");
 		
@@ -21,7 +21,7 @@ public:
 		printDKRmlEventListenerProperties(*_dkRmlEventListener);
 	}
 	
-	~TEST_DKRmlEventListener() {
+	~TEST_DKRmlEventListener(){
 		delete _dkRmlEventListener;
 	}
 	

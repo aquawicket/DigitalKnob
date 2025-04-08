@@ -2,12 +2,12 @@
 
 var GIT = ""
 
-function DKGit_init() {
+function DKGit_init(){
     DKGit_SetGitExePath()
     DKGit_ValidateGit()
 }
 
-function DKGit_SetGitExePath() {
+function DKGit_SetGitExePath(){
     if (CPP_DK_GetOS() === "Windows"){
 		if(CPP_DK_GetOSArchitecture() === "32")
 			GIT = CPP_DKFile_GetShortName("C:/Program Files/Git/bin/git.exe")
@@ -22,25 +22,25 @@ function DKGit_SetGitExePath() {
         GIT = "/usr/bin/git"
 }
 
-function DKGit_ValidateGit() {
+function DKGit_ValidateGit(){
     console.log("Looking for GIT\n")
-    if (!CPP_DKFile_Exists(GIT)) {
+    if (!CPP_DKFile_Exists(GIT)){
         DKGit_InstallGit()
         DKGit_SetGitExePath()
     }
 }
 
-function DKGit_InstallGit() {
+function DKGit_InstallGit(){
     console.log("Installing Git...\n")
     var assets = CPP_DKAssets_LocalAssets()
-    if (CPP_DK_GetOS() === "Windows") {
+    if (CPP_DK_GetOS() === "Windows"){
 		CPP_DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe", assets)
 		CPP_DK_System(assets + "/Git-2.30.1-32-bit.exe")
 	} 
-    else if (CPP_DK_GetOS() === "Mac") {
+    else if (CPP_DK_GetOS() === "Mac"){
         //TODO
     }
-    else if (CPP_DK_GetOS() === "Linux") {
+    else if (CPP_DK_GetOS() === "Linux"){
         CPP_DK_Execute("sudo apt-get install git")
     }
     else if (CPP_DK_GETOS() === "Raspberry"){
@@ -89,7 +89,7 @@ function DKGit_PullBranch(branch){
 	CPP_DK_Execute(GIT + " branch --set-upstream-to=origin/"+branch)
 }
 
-function DKGit_GitUpdate() {
+function DKGit_GitUpdate(){
     console.log("Git Update DigitalKnob...\n")
 	DKGit_Clone("https://github.com/aquawicket/DigitalKnob.git", DIGITALKNOB_DIR+"DK")
 	DKGit_PullBranch("Development")
@@ -97,16 +97,16 @@ function DKGit_GitUpdate() {
     //Multipe user folders
 	CPP_DKFile_ChDir(DIGITALKNOB_DIR)
     var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
-    if (contents) {
+    if (contents){
         var files = contents.split(",")
-        for (var i = 0; i < files.length; i++) {
+        for (var i = 0; i < files.length; i++){
 			//Look for text files that contain [MYGIT] in them. The rest of the line is the repository address
             if (CPP_DKFile_IsDirectory(DIGITALKNOB_DIR+files[i]))
                 continue
 			if(files[i].indexOf(".txt") <= 1)
 				continue
             var url = CPP_DKFile_GetSetting(DIGITALKNOB_DIR+files[i], "[MYGIT]")
-            if (url) {
+            if (url){
 				var folder = files[i].replace(".txt", "")
 				DKGit_Clone(url, DIGITALKNOB_DIR+folder)
 				DKGit_PullBranch("Development")
@@ -127,12 +127,12 @@ function DKGit_GitUpdate() {
         DKAudio_PlaySound("DKBuild/ding.wav")
 }
 
-function DKGit_GitCommit() {
+function DKGit_GitCommit(){
     //Multipe folders in digitalknob/
     var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
-    if (contents) {
+    if (contents){
         var files = contents.split(",")
-        for (var i = 0; i < files.length; i++) {
+        for (var i = 0; i < files.length; i++){
 			if(CPP_DKFile_Exists(DIGITALKNOB_DIR + files[i] + "/.git")){
 				console.log("\n\n")
                 console.log("### Git Commit " + files[i] + "... \n")

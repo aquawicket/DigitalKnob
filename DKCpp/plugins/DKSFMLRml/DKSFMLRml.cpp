@@ -64,7 +64,7 @@ bool DKSFMLRml::End(){
 	return true;
 }
 
-bool DKSFMLRml::Handle(sf::Event& event) {
+bool DKSFMLRml::Handle(sf::Event& event){
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if(!dkRml->document)
 		return DKERROR("dkRml->document invalid! \n");

@@ -36,7 +36,7 @@ var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
 
 dk.create("DK/init.js", function(){}); //load DKApp_url using flags above, then call app_LoadPlugins()
 
-function app_LoadPlugins() {
+function app_LoadPlugins(){
 	if(USE_SDL)
 		dk.create("DKSDLText"); //Class contains SDL fps counter
 	dk.create("DKTray/DKTray.js", function(){});

@@ -39,8 +39,8 @@
 #	define WIDEN2(x) L ## x
 #	define WIDEN(x) WIDEN2(x)
 #	define __WFILE__ WIDEN(__FILE__)
-#	define HRCHECK(__expr) {hr=(__expr);if(FAILED(hr)){wprintf(L"FAILURE 0x%08X (%i)\n\tline: %u file: '%s'\n\texpr: '" WIDEN(#__expr) L"'\n",hr, hr, __LINE__,__WFILE__);}}
-#	define RELEASE(__p) {if(__p!=nullptr){__p->Release();__p=nullptr;}}
+#	define HRCHECK(__expr){hr=(__expr);if(FAILED(hr)){wprintf(L"FAILURE 0x%08X (%i)\n\tline: %u file: '%s'\n\texpr: '" WIDEN(#__expr) L"'\n",hr, hr, __LINE__,__WFILE__);}}
+#	define RELEASE(__p){if(__p!=nullptr){__p->Release();__p=nullptr;}}
 #endif
 
 //WARNING_DISABLE

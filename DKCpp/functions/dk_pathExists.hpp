@@ -10,7 +10,7 @@
 //#
 #include <stdio.h>
 #include <unistd.h>
-int dk_pathExists(const char *dirname) {
+int dk_pathExists(const char *dirname){
 	//dk_debugFunc(1);
 	
 	return access(dirname, F_OK);

@@ -43,7 +43,7 @@ Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 
 	DKString _url = path;
 	
-	if (has(_url, ":/")) { //could be http:// , https:// or C:/
+	if (has(_url, ":/")){ //could be http:// , https:// or C:/
 		//absolute path
 	}
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css

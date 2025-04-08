@@ -12,7 +12,7 @@ class DKCustomEvent : public DKEvent
 public:
 	////// Constructor //////
 	// [CustomEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
-	DKCustomEvent(DKString _type, DKString _options) : DKEvent(_type, _options) {
+	DKCustomEvent(DKString _type, DKString _options) : DKEvent(_type, _options){
 		
 		////// Instance properties //////
 		detail = "";

@@ -37,7 +37,7 @@ DKSdlRmlRenderer* DKSdlRmlDocument::Renderer;
 RmlSDL2SystemInterface* DKSdlRmlDocument::SystemInterface;
 
 //bool DKSdlRmlDocument::Init(){
-DKSdlRmlDocument::DKSdlRmlDocument(DKSDLWindow* _dkSdlWindow, DKRmlInterface* _dkRmlInterface) {
+DKSdlRmlDocument::DKSdlRmlDocument(DKSDLWindow* _dkSdlWindow, DKRmlInterface* _dkRmlInterface){
 	DKDEBUGFUNC();
 	//Android SDL_TEXTINPUT events not working
 	//SDL_StartTextInput(); 
@@ -46,11 +46,11 @@ DKSdlRmlDocument::DKSdlRmlDocument(DKSDLWindow* _dkSdlWindow, DKRmlInterface* _d
 	dkSdlWindow = _dkSdlWindow;
 	//dkRmlInterface = DKRmlInterface::Instance("DKRmlInterface0");
 	dkRmlInterface = _dkRmlInterface;
-	if (!dkSdlWindow || !dkRmlInterface) {
+	if (!dkSdlWindow || !dkRmlInterface){
 		DKERROR("DKSdlRmlDocument::Init(): INVALID OBJECTS\n");
 		return;
 	}
-	if (!rml_render_interface_set) {
+	if (!rml_render_interface_set){
 #ifdef USE_DKSDLRMLRENDERER
 		Renderer = new DKSdlRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->_window);
 #elif USE_DKSDLRMLOPENGL
@@ -74,7 +74,7 @@ DKSdlRmlDocument::DKSdlRmlDocument(DKSDLWindow* _dkSdlWindow, DKRmlInterface* _d
 	//return true;
 }
 
-bool DKSdlRmlDocument::Handle(SDL_Event *event) {
+bool DKSdlRmlDocument::Handle(SDL_Event *event){
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	
 	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);

@@ -39,7 +39,7 @@ public:
 	static int innerHTML(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("DKInnerHTMLDUK::innerHTML()\n");
-		if (duk_is_valid_index(ctx, 1)) {
+		if (duk_is_valid_index(ctx, 1)){
 			element(ctx)->innerHTML(duk_require_string(ctx, 1));
 		}
 		else {

@@ -170,7 +170,7 @@ bool DKConsoleWindow::End(){
 	return true;
 }
 
-void DKConsoleWindow::Loop() {
+void DKConsoleWindow::Loop(){
     //DKDEBUGFUNC(); //EXCESSIVE LOGGING
     /*
     if (GetAsyncKeyState(VK_LBUTTON) & 0x01)
@@ -202,8 +202,8 @@ void DKConsoleWindow::Loop() {
             ErrorExit("ReadDKConsoleWindow");
 
     // Dispatch the events to the appropriate handler. 
-    for (i = 0; i < cNumRead; i++) {
-        switch (irInBuf[i].EventType) {
+    for (i = 0; i < cNumRead; i++){
+        switch (irInBuf[i].EventType){
             case KEY_EVENT:
                 KeyboardEventProc(irInBuf[i].Event.KeyEvent);
                 break;
@@ -229,7 +229,7 @@ void DKConsoleWindow::Loop() {
 
 /*
 //// Instance properties ////
-int DKConsoleWindow::closed(duk_context* ctx) {
+int DKConsoleWindow::closed(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	// TODO
 	bool isClosed = false;
@@ -237,16 +237,16 @@ int DKConsoleWindow::closed(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::Columns(duk_context* ctx) {
+int DKConsoleWindow::Columns(duk_context* ctx){
     DKDEBUGFUNC(ctx);
     duk_push_uint(ctx, DKConsoleWindow::Get()->columns);
     return true;
 }
 
-int DKConsoleWindow::fullScreen(duk_context* ctx) {
+int DKConsoleWindow::fullScreen(duk_context* ctx){
     DKDEBUGFUNC(ctx);
     //get
-    if (!duk_is_boolean(ctx, 0)) {
+    if (!duk_is_boolean(ctx, 0)){
         // TODO
         bool isFullScreen = false;
         duk_push_boolean(ctx, isFullScreen);
@@ -255,7 +255,7 @@ int DKConsoleWindow::fullScreen(duk_context* ctx) {
     //set
     else {
         bool fullscreen = duk_require_boolean(ctx, 0);
-        if (fullscreen) {
+        if (fullscreen){
 			#if WIN
 				GetWindowPlacement(GetConsoleWindow(), &wpc);
 				if (!HWNDStyle)
@@ -291,7 +291,7 @@ int DKConsoleWindow::fullScreen(duk_context* ctx) {
     }
 }
 
-int DKConsoleWindow::innerHeight(duk_context* ctx) {
+int DKConsoleWindow::innerHeight(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -304,7 +304,7 @@ int DKConsoleWindow::innerHeight(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::innerWidth(duk_context* ctx) {
+int DKConsoleWindow::innerWidth(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -317,10 +317,10 @@ int DKConsoleWindow::innerWidth(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::name(duk_context* ctx) {
+int DKConsoleWindow::name(duk_context* ctx){
     DKDEBUGFUNC(ctx);
     //get
-    if (!duk_is_string(ctx, 0)) {
+    if (!duk_is_string(ctx, 0)){
         char _title[1024];
 		#if WIN
 			GetConsoleTitle(_title, sizeof(_title));
@@ -340,7 +340,7 @@ int DKConsoleWindow::name(duk_context* ctx) {
     }
 }
 
-int DKConsoleWindow::outerHeight(duk_context* ctx) {
+int DKConsoleWindow::outerHeight(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -351,7 +351,7 @@ int DKConsoleWindow::outerHeight(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::outerWidth(duk_context* ctx) {
+int DKConsoleWindow::outerWidth(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -362,13 +362,13 @@ int DKConsoleWindow::outerWidth(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::Rows(duk_context* ctx) {
+int DKConsoleWindow::Rows(duk_context* ctx){
     DKDEBUGFUNC(ctx);
     duk_push_uint(ctx, DKConsoleWindow::Get()->rows);
     return true;
 }
 
-int DKConsoleWindow::ScreenX(duk_context* ctx) {
+int DKConsoleWindow::ScreenX(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -380,7 +380,7 @@ int DKConsoleWindow::ScreenX(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::screenLeft(duk_context* ctx) {
+int DKConsoleWindow::screenLeft(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -392,7 +392,7 @@ int DKConsoleWindow::screenLeft(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::ScreenY(duk_context* ctx) {
+int DKConsoleWindow::ScreenY(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -404,7 +404,7 @@ int DKConsoleWindow::ScreenY(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::screenTop(duk_context* ctx) {
+int DKConsoleWindow::screenTop(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -417,28 +417,28 @@ int DKConsoleWindow::screenTop(duk_context* ctx) {
 }
 
 //// Instance methods ////
-int DKConsoleWindow::blur(duk_context* ctx) {
+int DKConsoleWindow::blur(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
 	#endif
 	return true;
 }
-int DKConsoleWindow::close(duk_context* ctx) {
+int DKConsoleWindow::close(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 	#endif
 	return true;
 }
-int DKConsoleWindow::focus(duk_context* ctx) {
+int DKConsoleWindow::focus(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		ShowWindow(GetConsoleWindow(), SW_SHOW);
 	#endif
 	return true;
 }
-int DKConsoleWindow::moveBy(duk_context* ctx) {
+int DKConsoleWindow::moveBy(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		int deltaX = duk_require_int(ctx, 0);
@@ -454,7 +454,7 @@ int DKConsoleWindow::moveBy(duk_context* ctx) {
 	#endif
 	return true;
 }
-int DKConsoleWindow::moveTo(duk_context* ctx) {
+int DKConsoleWindow::moveTo(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		int x = duk_require_int(ctx, 0);
@@ -470,7 +470,7 @@ int DKConsoleWindow::moveTo(duk_context* ctx) {
 	#endif
 	return true;
 }
-int DKConsoleWindow::resizeBy(duk_context* ctx) {
+int DKConsoleWindow::resizeBy(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		int xDelta = duk_require_int(ctx, 0);
@@ -486,7 +486,7 @@ int DKConsoleWindow::resizeBy(duk_context* ctx) {
 	#endif
 	return true;
 }
-int DKConsoleWindow::resizeTo(duk_context* ctx) {
+int DKConsoleWindow::resizeTo(duk_context* ctx){
     DKDEBUGFUNC(ctx);
 	#if WIN
 		int width = duk_require_int(ctx, 0);
@@ -505,7 +505,7 @@ int DKConsoleWindow::resizeTo(duk_context* ctx) {
 */	
 	
 #if WIN
-void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
+void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage){
     DKDEBUGFUNC(lpszMessage);
     fprintf(stderr, "%s\n", lpszMessage);
     // Restore input mode on exit.
@@ -513,12 +513,12 @@ void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
     ExitProcess(0);
 }
 
-void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
+void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer){
     DKDEBUGFUNC(fer);
     DKString address = pointerToAddress(this);
     relatedTarget = address;
 
-    if (!fer.bSetFocus) {
+    if (!fer.bSetFocus){
         //1. blur: sent after element A loses focus.
 		DKFocusEvent* blur_event = new DKFocusEvent("blur", "");
 		blur_event->relatedTarget = relatedTarget;
@@ -595,7 +595,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     else
         shiftKey = false;
 
-    if (ker.bKeyDown) {
+    if (ker.bKeyDown){
 		DKKeyboardEvent* keydown_event = new DKKeyboardEvent("keydown", "");
 		keydown_event->altKey = altKey;
 		keydown_event->code = code;
@@ -644,12 +644,12 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     }
 }
 
-void DKConsoleWindow::MenuEventProc(MENU_EVENT_RECORD mer) {
+void DKConsoleWindow::MenuEventProc(MENU_EVENT_RECORD mer){
     DKDEBUGFUNC(mer);
     DKINFO("DKConsoleWindow::MenuEventProc() \n");
 }
 
-void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
+void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer){
     DKDEBUGFUNC(mer);
     //DKINFO("DKConsoleWindow::MouseEventProc()\n");
 	#ifndef MOUSE_HWHEELED
@@ -674,35 +674,35 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             //  8 : 4th button(typically the "Browser Back" button)
             // 16 : 5th button(typically the "Browser Forward" button)
             buttons = 0;
-            if (mer.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
+            if (mer.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED){  // 0x0001
                 //DKINFO("1 ");
                 buttons = buttons + 1;
             }
             else {
                 //DKINFO("0 ");
             }
-            if (mer.dwButtonState & FROM_LEFT_2ND_BUTTON_PRESSED) {  // 0x0004
+            if (mer.dwButtonState & FROM_LEFT_2ND_BUTTON_PRESSED){  // 0x0004
                 //DKINFO("2 ");
                 buttons = buttons + 4;
             }
             else {
                 //DKINFO("0 ");
             }
-            if (mer.dwButtonState & RIGHTMOST_BUTTON_PRESSED) {      // 0x0002
+            if (mer.dwButtonState & RIGHTMOST_BUTTON_PRESSED){      // 0x0002
                 //DKINFO("3 ");
                 buttons = buttons + 2;
             }
             else {
                 //DKINFO("0 ");
             }
-            if (mer.dwButtonState & FROM_LEFT_3RD_BUTTON_PRESSED) {  // 0x0008
+            if (mer.dwButtonState & FROM_LEFT_3RD_BUTTON_PRESSED){  // 0x0008
                 //DKINFO("4 ");
                 buttons = buttons + 8;
             }
             else {
                 //DKINFO("0 ");
             }
-            if (mer.dwButtonState & FROM_LEFT_4TH_BUTTON_PRESSED) {  // 0x0010
+            if (mer.dwButtonState & FROM_LEFT_4TH_BUTTON_PRESSED){  // 0x0010
                 //DKINFO("5 \n");
                 buttons = buttons + 16;
             }
@@ -710,8 +710,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 //DKINFO("0 \n");
             }
 
-            if (mer.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
-                if (!button_state[0]) {
+            if (mer.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED){  // 0x0001
+                if (!button_state[0]){
                     button_state[0] = true;
                     button = 0;
 
@@ -724,7 +724,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     break;
                 }
             }
-            else if (button_state[0]) {
+            else if (button_state[0]){
                 button_state[0] = false;
                 button = 0;
 
@@ -743,8 +743,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 break;
             }
 
-            if ((mer.dwButtonState & RIGHTMOST_BUTTON_PRESSED)) {      // 0x0002
-                if (!button_state[1]) {
+            if ((mer.dwButtonState & RIGHTMOST_BUTTON_PRESSED)){      // 0x0002
+                if (!button_state[1]){
                     button_state[1] = true;
                     button = 2;
 					
@@ -757,7 +757,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     break;
                 }
             }
-            else if (button_state[1]) {
+            else if (button_state[1]){
                 button_state[1] = false;
                 button = 2;
 
@@ -776,8 +776,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 break;
             }
 
-            if (mer.dwButtonState & FROM_LEFT_2ND_BUTTON_PRESSED) {  // 0x0004
-                if (!button_state[2]) {
+            if (mer.dwButtonState & FROM_LEFT_2ND_BUTTON_PRESSED){  // 0x0004
+                if (!button_state[2]){
                     button_state[2] = true;
                     button = 1;
                     
@@ -790,7 +790,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     break;
                 }
             }
-            else if (button_state[2]) {
+            else if (button_state[2]){
                 button_state[2] = false;
                 button = 1;
                 
@@ -803,8 +803,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 break;
             }
 
-            if (mer.dwButtonState & FROM_LEFT_3RD_BUTTON_PRESSED) {  // 0x0008
-                if (!button_state[3]) {
+            if (mer.dwButtonState & FROM_LEFT_3RD_BUTTON_PRESSED){  // 0x0008
+                if (!button_state[3]){
                     button_state[3] = true;
                     button = 3;
                     
@@ -817,7 +817,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     break;
                 }
             }
-            else if (button_state[3]) {
+            else if (button_state[3]){
                 button_state[3] = false;
                 button = 3;
                 
@@ -830,8 +830,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 break;
             }
 
-            if (mer.dwButtonState & FROM_LEFT_4TH_BUTTON_PRESSED) { // 0x0010
-                if (!button_state[4]) {
+            if (mer.dwButtonState & FROM_LEFT_4TH_BUTTON_PRESSED){ // 0x0010
+                if (!button_state[4]){
                     button_state[4] = true;
                     button = 4;
                     
@@ -844,7 +844,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     break;
                 }
             }
-            else if (button_state[4]) {
+            else if (button_state[4]){
                 button_state[4] = false;
                 button = 4;
                 
@@ -938,7 +938,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
     }
 }
 
-void DKConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
+void DKConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
     DKDEBUGFUNC(wbsr);
 	//DKString address = pointerToAddress(this);
     columns = wbsr.dwSize.X;

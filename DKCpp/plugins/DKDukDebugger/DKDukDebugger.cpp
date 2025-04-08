@@ -30,7 +30,7 @@
 
 DKStringArray DKDukDebugger::message;
 
-bool DKDukDebugger::Init() {
+bool DKDukDebugger::Init(){
 	DKDEBUGFUNC();
 
 	ctx = DKDuktape::Get()->ctx;
@@ -60,13 +60,13 @@ bool DKDukDebugger::Init() {
 		"print('Hello world!');\n"
 		"[ undefined, null, true, false, 123, -123, 123.1, 0, -0, 1/0, 0/0, -1/0, \n"
 		"  'foo', Uint8Array.allocPlain('bar'), Duktape.Pointer('dummy'), Math.cos, \n"
-		"].forEach(function (val) {\n"
+		"].forEach(function (val){\n"
 		"    print(val);\n"
 		"    evalMe = val;\n"
 		"});\n"
 		"\n"
 		"var str = 'xxx'\n"
-		"for (i = 0; i < 10; i++) {\n"
+		"for (i = 0; i < 10; i++){\n"
 		"    print(i, str);\n"
 		"    evalMe = str;\n"
 		"    evalMe = Uint8Array.allocPlain(str);\n"
@@ -76,7 +76,7 @@ bool DKDukDebugger::Init() {
 	duk_pop(ctx);
 
 	duk_debugger_detach(ctx);
-	if (trans_ctx) {
+	if (trans_ctx){
 		duk_trans_dvalue_free(trans_ctx);
 		trans_ctx = NULL;
 	}
@@ -85,11 +85,11 @@ bool DKDukDebugger::Init() {
 	return true;
 }
 
-bool DKDukDebugger::End() {
+bool DKDukDebugger::End(){
 	DKDEBUGFUNC();
 
 	duk_debugger_detach(ctx);
-	if (trans_ctx) {
+	if (trans_ctx){
 		duk_trans_dvalue_free(trans_ctx);
 		trans_ctx = NULL;
 	}
@@ -97,7 +97,7 @@ bool DKDukDebugger::End() {
 	return true;
 }
 
-bool DKDukDebugger::attach() {
+bool DKDukDebugger::attach(){
 	// Attach debugger; this will fail with a fatal error here unless
 	// debugger support is compiled in.  To fail more gracefully, call
 	// this under a duk_safe_call() to catch the error.
@@ -115,11 +115,11 @@ bool DKDukDebugger::attach() {
 	return true;
 }
 
-void DKDukDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
+void DKDukDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block){
 	//DKDEBUGFUNC(ctx, block); //EXCESSIVE LOGGING
 	static int first_blocked = 1;
 
-	if (!block) {
+	if (!block){
 		// Duktape is not blocked; you can cooperate with e.g. a user
 		// interface here and send dvalues to Duktape, but don't block.
 		return;
@@ -140,7 +140,7 @@ void DKDukDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 	// If you create dvalues manually and send them using
 	// duk_trans_dvalue_send(), you must free the dvalues after
 	// the send call returns using duk_dvalue_free().
-	if (first_blocked) {
+	if (first_blocked){
 		//char* tmp;
 		//int i;
 
@@ -165,7 +165,7 @@ void DKDukDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 		// ignored by Duktape; Duktape will parse the dvalues to be able to
 		// skip them, so that the dvalue encoding is exercised.
 		tmp = (char*)malloc(100000);  // long buffer, >= 65536 chars
-		for (i = 0; i < 100000; i++) {
+		for (i = 0; i < 100000; i++){
 			tmp[i] = (char) i;
 		}
 		duk_trans_dvalue_send_req(ctx);
@@ -210,7 +210,7 @@ void DKDukDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 	duk_trans_dvalue_send_eom(ctx);
 }
 
-void DKDukDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
+void DKDukDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv){
 	//DKDEBUGFUNC(ctx, dv); //EXCESSIVE LOGGING
 	(void)ctx;
 	char buf[DUK_DVALUE_TOSTRING_BUFLEN];
@@ -223,7 +223,7 @@ void DKDukDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 
 	message.push_back(toString(buf));
 
-	if (same(toString(buf), "EOM")) {
+	if (same(toString(buf), "EOM")){
 		//message[0] = NFY
 		//message[1] = 1
 		//message[2] = 1 or 0
@@ -231,7 +231,7 @@ void DKDukDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 		//message[4] = function name
 		//message[5] = line number
 		//DKINFO(toString(message, ",") + "\n");
-		if (same(message[2], "0")) {
+		if (same(message[2], "0")){
 			/*
 			DKString fileString;
 			if(DKFile::PathExists(message[3]))
@@ -254,7 +254,7 @@ void DKDukDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 	duk_dvalue_free(dv);
 }
 
-void DKDukDebugger::my_handshake(duk_trans_dvalue_ctx* ctx, const char* line) {
+void DKDukDebugger::my_handshake(duk_trans_dvalue_ctx* ctx, const char* line){
 	DKDEBUGFUNC(ctx, line);
 
 	// The Duktape handshake line is given in 'line' (without LF).
@@ -264,7 +264,7 @@ void DKDukDebugger::my_handshake(duk_trans_dvalue_ctx* ctx, const char* line) {
 	DKINFO("Received handshake line: " + toString(line) + "\n");
 }
 
-void DKDukDebugger::my_detached(duk_trans_dvalue_ctx* ctx) {
+void DKDukDebugger::my_detached(duk_trans_dvalue_ctx* ctx){
 	DKDEBUGFUNC(ctx);
 
 	// Detached call forwarded as is.
@@ -272,7 +272,7 @@ void DKDukDebugger::my_detached(duk_trans_dvalue_ctx* ctx) {
 }
 
 /*
-duk_ret_t DKDukDebugger::native_print(duk_context* ctx) {
+duk_ret_t DKDukDebugger::native_print(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	duk_push_string(ctx, " ");
 	duk_insert(ctx, 0);

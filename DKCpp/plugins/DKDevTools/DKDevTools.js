@@ -2,7 +2,7 @@
 
 function DKDevTools(){}
 
-DKDevTools.prototype.create = function DKDevTools_create() {
+DKDevTools.prototype.create = function DKDevTools_create(){
     const instance = DKPlugin(DKDevTools, "singleton")
     if (!instance)
         return;
@@ -17,37 +17,37 @@ DKDevTools.prototype.create = function DKDevTools_create() {
     return instance;
 }
 
-DKDevTools.prototype.close = function DKDevTools_close() {
+DKDevTools.prototype.close = function DKDevTools_close(){
     this.dkcodemirror.close();
 }
 
-DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
-    dk.gui.createButton(instance.div, "Pull Assets", "10rem", "", "5rem", "", "90rem", "20rem", function dk_gui_createButton_onclick() {
-        dk.file.pullDKAssets(function dk_file_pullDKAssets_callback(result) {
+DKDevTools.prototype.addTools = function DKDevTools_addTools(instance){
+    dk.gui.createButton(instance.div, "Pull Assets", "10rem", "", "5rem", "", "90rem", "20rem", function dk_gui_createButton_onclick(){
+        dk.file.pullDKAssets(function dk_file_pullDKAssets_callback(result){
             console.log("done pulling assets. result = " + result);
             pull.disabled = false;
         });
     });
-    const pull = dk.gui.createButton(instance.div, "Push Assets", "32rem", "", "5rem", "", "90rem", "20rem", function dk_gui_createButton_onclick() {
-        dk.file.pushDKAssets(function dk_file_pushDKAssets_callback(result) {
+    const pull = dk.gui.createButton(instance.div, "Push Assets", "32rem", "", "5rem", "", "90rem", "20rem", function dk_gui_createButton_onclick(){
+        dk.file.pushDKAssets(function dk_file_pushDKAssets_callback(result){
             console.log("done copying assets. result = " + result);
         });
     });
-    const runCode = dk.gui.createButton(instance.div, "Run Code", "70rem", "", "5rem", "", "80rem", "20rem", function dk_gui_createButton_onclick() {
+    const runCode = dk.gui.createButton(instance.div, "Run Code", "70rem", "", "5rem", "", "80rem", "20rem", function dk_gui_createButton_onclick(){
         try {
             eval(instance.codeMirror.getValue());
-        } catch (err) {
+        } catch (err){
             console.error(err);
         }
     });
-    dk.gui.createImageButton(instance.div, "File Manager", "DKFile/folder.png", "2rem", "", "", "2px", "", "", function() {
-        DKPlugin("DKFile/filemanager.js", function() {
+    dk.gui.createImageButton(instance.div, "File Manager", "DKFile/folder.png", "2rem", "", "", "2px", "", "", function(){
+        DKPlugin("DKFile/filemanager.js", function(){
             DKFileManager.prototype.init();
             DKFileManager.prototype.create();
         });
     })
 
-    DKPlugin("DKCodeMirror/DKCodeMirror.js", function DKPlugin_callback(klass) {
+    DKPlugin("DKCodeMirror/DKCodeMirror.js", function DKPlugin_callback(klass){
 
         instance.dkcodemirror = DKPlugin(DKCodeMirror)
         if (!instance.dkcodemirror)
@@ -72,18 +72,18 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
             mode: "javascript",
         })
         instance.codeMirror = codeMirror;
-        codeMirror.on('change', function(codeMirror) {
+        codeMirror.on('change', function(codeMirror){
             dk.file.stringToFile(codeMirror.getValue(), "USER/devtoolscode.js");
         })
 
-        dk.file.exists("USER/devtoolscode.js", function(result) {
-            if (!result) {
+        dk.file.exists("USER/devtoolscode.js", function(result){
+            if (!result){
                 console.log("file does not exist")
                 return
             }
 
-            dk.file.fileToString("USER/devtoolscode.js", function(str) {
-                if (!str && str != "") {
+            dk.file.fileToString("USER/devtoolscode.js", function(str){
+                if (!str && str != ""){
                     console.log("str invalid")
                     return
                 }
@@ -105,11 +105,11 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
             fontSize: "9rem",
             tabSize: "3"
         },
-        oninput: function() {
+        oninput: function(){
             dk.file.stringToFile(codebox.value, "USER/devtoolscode.js");
         },
-        onkeydown: function(e) {
-            if (e.key == 'Tab') {
+        onkeydown: function(e){
+            if (e.key == 'Tab'){
                 e.preventDefault();
                 var start = this.selectionStart;
                 var end = this.selectionEnd;
@@ -123,14 +123,14 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
     });
 
     codebox.setAttribute("spellcheck","false");
-    dk.file.exists("USER/devtoolscode.js", function(result) {
-        if (!result) {
+    dk.file.exists("USER/devtoolscode.js", function(result){
+        if (!result){
             console.log("file does not exist");
             return;
         }
 
-        dk.file.fileToString("USER/devtoolscode.js", function(str) {
-            if (!str && str != "") {
+        dk.file.fileToString("USER/devtoolscode.js", function(str){
+            if (!str && str != ""){
                 console.log("str invalid");
                 return;
             }

@@ -10,7 +10,7 @@ class TEST_DKRmlLocation //: public DKObjectT<TEST_DKRmlLocation>
 public:
 	static DKRmlLocation* _dkRmlLocation;
 	
-	TEST_DKRmlLocation() {
+	TEST_DKRmlLocation(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlLocation.h //////");
 		
@@ -20,7 +20,7 @@ public:
 		printDKRmlLocationProperties(*_dkRmlLocation);
 	}
 	
-	~TEST_DKRmlLocation() {
+	~TEST_DKRmlLocation(){
 		delete _dkRmlLocation;
 	}
 	

@@ -52,8 +52,8 @@
 class MovieEventHandler : public osgGA::GUIEventHandler
 {
 public:
-    MovieEventHandler():_trackMouse(false) {}
-    void setMouseTracking(bool track) { _trackMouse = track; }
+    MovieEventHandler():_trackMouse(false){}
+    void setMouseTracking(bool track){ _trackMouse = track; }
     bool getMouseTracking() const { return _trackMouse; }
     void set(osg::Node* node);
     virtual bool handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter& aa, osg::Object*, osg::NodeVisitor* nv);
@@ -64,7 +64,7 @@ protected:
     class FindImageStreamsVisitor : public osg::NodeVisitor
 	{
     public:
-        FindImageStreamsVisitor(ImageStreamList& imageStreamList): _imageStreamList(imageStreamList) {
+        FindImageStreamsVisitor(ImageStreamList& imageStreamList): _imageStreamList(imageStreamList){
         virtual void apply(osg::Geode& geode){
             apply(geode.getStateSet());
             for(unsigned int i=0;i<geode.getNumDrawables();++i)
@@ -94,7 +94,7 @@ protected:
         }
         ImageStreamList& _imageStreamList;
     protected:
-        FindImageStreamsVisitor& operator = (const FindImageStreamsVisitor&) { return *this; }
+        FindImageStreamsVisitor& operator = (const FindImageStreamsVisitor&){ return *this; }
 
     };
     bool            _trackMouse;
@@ -182,7 +182,7 @@ int main(int argc, char** argv)
     }
 #	if WIN || defined(__APPLE__)
 		// if user requests devices video capability.
-		if (arguments.read("-devices") || arguments.read("--devices")) {
+		if (arguments.read("-devices") || arguments.read("--devices")){
 			// Force load QuickTime plugin, probe video capability, exit
 			osgDB::readImageFile("devices.live");
 			return 1;
@@ -235,7 +235,7 @@ int main(int argc, char** argv)
     osg::Vec3 bottomright = pos;
     bool xyPlane = fullscreen;
     bool useAudioSink = false;
-    while(arguments.read("--audio")) { useAudioSink = true; }
+    while(arguments.read("--audio")){ useAudioSink = true; }
 #if HAVE_sdl
     unsigned int numAudioStreamsEnabled = 0;
 #endif
@@ -305,7 +305,7 @@ int main(int argc, char** argv)
         viewer.getCamera()->setClearColor(osg::Vec4(0.0f,0.0f,0.0f,1.0f));
         float screenAspectRatio = 1280.0f/1024.0f;
         osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
-        if (wsi) {
+        if (wsi){
             unsigned int width, height;
             wsi->getScreenResolution(osg::GraphicsContext::ScreenIdentifier(0), width, height);
             screenAspectRatio = float(width) / float(height);

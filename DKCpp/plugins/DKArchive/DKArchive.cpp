@@ -93,7 +93,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
         if(r != ARCHIVE_OK){
 			return DKERROR("!ARCHIVE_OK: "+toString(archive_error_string(ext))+"\n");
 		}
-        else if (archive_entry_size(entry) > 0) {
+        else if (archive_entry_size(entry) > 0){
 			copy_data(a, ext);
 			if(r != ARCHIVE_OK)
 				return DKERROR("!ARCHIVE_OK: "+toString(archive_error_string(ext))+"\n");
@@ -209,7 +209,7 @@ int DKArchive::copy_data(struct archive* ar, struct archive* aw){
 		if (r != ARCHIVE_OK)
 			return (r);
 		r = archive_write_data_block(aw, buff, size, offset);
-		if (r != ARCHIVE_OK) {
+		if (r != ARCHIVE_OK){
 			DKERROR("archive_write_data_block() - "+DKString(archive_error_string(aw)));
 			return (r);
 		}

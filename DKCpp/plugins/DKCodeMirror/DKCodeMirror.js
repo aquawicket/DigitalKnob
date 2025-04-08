@@ -3,12 +3,12 @@
 function DKCodeMirror(){}
 
 
-DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callback) {
-    DKPlugin("DKCodeMirror/lib/codemirror.js", function() {
-        dk.create("DKCodeMirror/lib/codemirror.css", function() {
-            dk.create("DKCodeMirror/theme/abcdef.css", function() {
-                dk.create("DKCodeMirror/DKCodeMirror.css", function() {
-                    DKPlugin("DKCodeMirror/mode/javascript/javascript.js", function() {
+DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callback){
+    DKPlugin("DKCodeMirror/lib/codemirror.js", function(){
+        dk.create("DKCodeMirror/lib/codemirror.css", function(){
+            dk.create("DKCodeMirror/theme/abcdef.css", function(){
+                dk.create("DKCodeMirror/DKCodeMirror.css", function(){
+                    DKPlugin("DKCodeMirror/mode/javascript/javascript.js", function(){
                         DKCodeMirror_init_callback && DKCodeMirror_init_callback();
                     });
                 });
@@ -17,17 +17,17 @@ DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callb
     });
 }
 
-DKCodeMirror.prototype.end = function DKCodeMirror_end(DKCodeMirror_end_callback) {
+DKCodeMirror.prototype.end = function DKCodeMirror_end(DKCodeMirror_end_callback){
     dk.close("DKCodeMirror/lib/codemirror.js");
-    //, function() {
+    //, function(){
     dk.close("DKCodeMirror/lib/codemirror.css");
-    //, function() {
+    //, function(){
     dk.close("DKCodeMirror/theme/abcdef.css");
-    //, function() {
+    //, function(){
     dk.close("DKCodeMirror/DKCodeMirror.css");
-    //, function() {
+    //, function(){
     dk.close("DKCodeMirror/mode/javascript/javascript.js");
-    //, function() {
+    //, function(){
     DKCodeMirror_end_callback && DKCodeMirror_end_callback();
     //});
     //});
@@ -36,7 +36,7 @@ DKCodeMirror.prototype.end = function DKCodeMirror_end(DKCodeMirror_end_callback
     //});
 }
 
-DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create_callback) {
+DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create_callback){
     const instance = DKPlugin(DKCodeMirror)
     if (!instance)
         return error("instance invalid", DKCodeMirror_create_callback);
@@ -55,22 +55,22 @@ DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create
     return instance;
 }
 
-DKCodeMirror.prototype.createOpen = function DKCodeMirror_createOpen(file, DKCodeMirror_createOpen_callback) {
-    this.create(function(instance) {
+DKCodeMirror.prototype.createOpen = function DKCodeMirror_createOpen(file, DKCodeMirror_createOpen_callback){
+    this.create(function(instance){
         instance.dkframe.setTitle("DKCodeMirror - " + file);
         instance.currentfile = file;
-        dk.file.fileToString(file, function(str) {
+        dk.file.fileToString(file, function(str){
             instance.myCodeMirror.setValue(str);
             DKCodeMirror_createOpen_callback && DKCodeMirror_createOpen_callback(instance);
         });
     });
 }
 
-DKCodeMirror.prototype.setSelection = function DKCodeMirror_setSelection(instance, line) {
+DKCodeMirror.prototype.setSelection = function DKCodeMirror_setSelection(instance, line){
     instance.myCodeMirror.setSelection(CodeMirror.Pos(line, 0), CodeMirror.Pos(line, 10));
 }
 
-DKCodeMirror.prototype.highlightError = function DKCodeMirror_highlightError(instance, line, ch) {
+DKCodeMirror.prototype.highlightError = function DKCodeMirror_highlightError(instance, line, ch){
     instance.myCodeMirror.focus();
     instance.myCodeMirror.setCursor({
         line: line - 1,

@@ -23,7 +23,7 @@ console.log("document = "+document);
 const url = "DKWebTest/index.html"
 location.href = url;
 
-function onHyperlink(event) {
+function onHyperlink(event){
 	console.log("onHyperlink()");
 	const target = event.target;
 	console.log("target = "+target);
@@ -32,7 +32,7 @@ function onHyperlink(event) {
 	location.href = value;
 }
 
-function onLoad(event) {
+function onLoad(event){
 	console.log("onLoad()");
 	document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);	//the document needs to be refreshed when reloading a page
 	//window.document = document;
@@ -51,7 +51,7 @@ function onLoad(event) {
 			console.error("aElements.item("+i+") invalid!");
 			return;
 		}
-		if (item.hasAttribute("href")) {
+		if (item.hasAttribute("href")){
 			item.addEventListener("click", onHyperlink);
 			const style = item.style;
 			console.log("style = "+style);

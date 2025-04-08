@@ -15,11 +15,11 @@ APP_BASE_NAME=`basename "$0"`
 # Use the maximum available, or set MAX_FD != -1 to use that value.
 MAX_FD="maximum"
 
-warn ( ) {
+warn ( ){
     echo "$*"
 }
 
-die ( ) {
+die ( ){
     echo
     echo "$*"
     echo
@@ -151,7 +151,7 @@ if $cygwin ; then
 fi
 
 # Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
-function splitJvmOpts() {
+function splitJvmOpts(){
     JVM_OPTS=("$@")
 }
 eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS

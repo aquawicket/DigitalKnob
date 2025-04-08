@@ -1,4 +1,4 @@
-function RunMenu_init() {
+function RunMenu_init(){
     dk.create("DKBuild/RunMenu.html");
     document.addEventListener("mousedown", RunMenu_onevent);
     byId("Build App").addEventListener("click", RunMenu_onevent);
@@ -11,7 +11,7 @@ function RunMenu_init() {
 }
 
 
-function RunMenu_end() {
+function RunMenu_end(){
     document.removeEventListener("mousedown", RunMenu_onevent);
     byId("Build App").removeEventListener("click", RunMenu_onevent);
     byId("Rebuild App").removeEventListener("click", RunMenu_onevent);
@@ -23,9 +23,9 @@ function RunMenu_end() {
     dk.close("DKBuild/RunMenu.html");
 }
 
-function RunMenu_onevent(event) {
+function RunMenu_onevent(event){
     console.log("RunMenu_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
-    if (event.currentTarget.id === "Build App") {
+    if (event.currentTarget.id === "Build App"){
         OS = byId("OSList").value;
         APP = byId("AppList").value;
         TYPE = byId("BuildType").value;
@@ -33,7 +33,7 @@ function RunMenu_onevent(event) {
         LEVEL = "Build";
         DKThread_DKQueue("BuildApp " + APP + ":" + OS + ":" + TYPE + ":" + LINK + ":" + LEVEL, "DKBuild_DoResults();");
     }
-    if (event.currentTarget.id === "Rebuild App") {
+    if (event.currentTarget.id === "Rebuild App"){
         OS = byId("OSList").value;
         APP = byId("AppList").value;
         TYPE = byId("BuildType").value;
@@ -41,7 +41,7 @@ function RunMenu_onevent(event) {
         LEVEL = "Rebuild";
         DKThread_DKQueue("RebuildApp " + APP + ":" + OS + ":" + TYPE + ":" + LINK + ":" + LEVEL, "DKBuild_DoResults();");
     }
-    if (event.currentTarget.id === "Rebuild All") {
+    if (event.currentTarget.id === "Rebuild All"){
         OS = byId("OSList").value;
         APP = byId("AppList").value;
         TYPE = byId("BuildType").value;
@@ -49,65 +49,65 @@ function RunMenu_onevent(event) {
         LEVEL = "RebuildAll";
         DKThread_DKQueue("BuildAll " + APP + ":" + OS + ":" + TYPE + ":" + LINK + ":" + LEVEL, "DKBuild_DoResults();");
     }
-    if (event.currentTarget.id === "Copy Assets") {
+    if (event.currentTarget.id === "Copy Assets"){
         console.warn("DKBuildGUI::Copy Assets: TODO\n");
     }
-    if (event.currentTarget.id === "Run App") {
+    if (event.currentTarget.id === "Run App"){
         OS = byId("OSList").value;
         APP = byId("AppList").value;
-        if (DK_GetOS() === "Win32" || DK_GetOS() === "Win64") {
-            if (OS === "win_x86") {
+        if (DK_GetOS() === "Win32" || DK_GetOS() === "Win64"){
+            if (OS === "win_x86"){
                 DK_Run(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".exe");
                 var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
                 var files = contents.split(",");
-                for (var i = 0; i < files.length; i++) {
-                    if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".exe")) {
+                for (var i = 0; i < files.length; i++){
+                    if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".exe")){
                         //console.log(DIGITALKNOB_DIR+"/"+files[i]+"/DKCpp/apps/"+APP+"/"+OS+"/Release/"+APP+".exe\n");
                         DK_Run(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".exe");
                         return;
                     }
                 }
             }
-            if (OS === "win_x86_64") {
+            if (OS === "win_x86_64"){
                 DK_Run(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
                 DK_Run(DIGITALKNOB_DIR + "/USER/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
 
                 DK_Run(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
                 var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
                 var files = contents.split(",");
-                for (var i = 0; i < files.length; i++) {
-                    if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe")) {
+                for (var i = 0; i < files.length; i++){
+                    if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe")){
                         //console.log(DIGITALKNOB_DIR+"/"+files[i]+"/DKCpp/apps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe\n");
                         DK_Run(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
                         return;
                     }
                 }
             }
-            if (OS === "android") {
+            if (OS === "android"){
                 console.log("TODO: Run android from Windows\n");
             }
         }
-        if (DK_GetOS() === "Mac") {
-            if (OS === "mac") {
+        if (DK_GetOS() === "Mac"){
+            if (OS === "mac"){
                 console.log("TODO: Run mac apps from OSX\n");
             }
-            if (OS = "ios") {
+            if (OS = "ios"){
                 console.log("TODO: Run iOS apps from OSX\n");
             }
-            if (OS = "ios-simulator") {
+            if (OS = "ios-simulator"){
                 console.log("TODO: Run iOS-simulator apps from OSX\n");
             }
         }
-        if (DK_GetOS() === "Linux") {
+        if (DK_GetOS() === "Linux"){
             //if(OS === "linux_x86_64"){
             //console.log("TODO: Run linux apps from Linux\n");
-            if (dk.file.extist(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")) {
+            if (dk.file.extist(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")){
                 DK_Run(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".desktop");
             }
             var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
             var files = contents.split(",");
-            for (var i = 0; i < files.length; i++) {
-                if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")) {
+            for (var i = 0; i < files.length; i++){
+                if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")){
                     //console.log(DIGITALKNOB_DIR+"/"+files[i]+"/DKCpp/apps/"+APP+"/"+OS+"/Release/"+APP+".desktop\n");
                     DK_Run(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".desktop");
                     return;
@@ -118,7 +118,7 @@ function RunMenu_onevent(event) {
     }
 
     //TODO
-    if (event.currentTarget.id === "Generate Docs") {
+    if (event.currentTarget.id === "Generate Docs"){
         console.log("Generate Docs: TODO\n");
         var doxy_path = "C:/Program Files/doxygen/bin/doxygen.exe";
         var doxy_file = DIGITALKNOB_DIR + "/DKDocs/Doxyfile";
@@ -127,15 +127,15 @@ function RunMenu_onevent(event) {
         DK_Execute(doxy_exe + " " + doxy_file);
     }
 
-    if (event.currentTarget.id === "Export to Android Studio") {
+    if (event.currentTarget.id === "Export to Android Studio"){
         console.log("Export to Android Studio\n");
-        DKPlugin("DKBuild/AndroidImport.js", function() {
+        DKPlugin("DKBuild/AndroidImport.js", function(){
             AndroidImport_Import();
         });
     }
 
-    if (event.currentTarget === document) {
-        if (byId("DKBuild/RunMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))) {
+    if (event.currentTarget === document){
+        if (byId("DKBuild/RunMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
             return;
         }
     }

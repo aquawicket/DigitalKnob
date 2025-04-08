@@ -30,14 +30,14 @@
 //var url = "DKCodeRunner/index.html"
 //var url = "DKCodeRunner.html"
 //location.href = url
-var globalThis = (function () {  
+var globalThis = (function (){  
     return this || (1, eval)('this');  
 }());  
 
-var MyApp = function() {};
+var MyApp = function(){};
 var myapp = new MyApp;
 
-myapp.loadFiles = function myapp_loadFiles() {
+myapp.loadFiles = function myapp_loadFiles(){
 	//alert("myapp_loadFiles()");
 	
 	DKPlugin("DK/DKTrace.js", "singleton")
@@ -70,6 +70,6 @@ myapp.loadFiles = function myapp_loadFiles() {
 }
 myapp.loadFiles();
 
-myapp.loadApp = function myapp_loadApp() {
+myapp.loadApp = function myapp_loadApp(){
 	alert("myapp_loadApp()");
 }

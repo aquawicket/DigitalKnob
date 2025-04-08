@@ -262,7 +262,7 @@ public:
 		return true;
 	}
 	
-	static bool onEvent(DKEvent* event) {
+	static bool onEvent(DKEvent* event){
 		DKDEBUGFUNC(event);
 		DKINFO("DKEventJS::onEvent("+event->type+") \n");
 		

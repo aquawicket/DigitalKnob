@@ -7,7 +7,7 @@
 //################################################################################
 //# same(str, str2)
 //#
-bool same(const std::string& str, const std::string& str2) {
+bool same(const std::string& str, const std::string& str2){
 	//DKDEBUGFUNC(str, str2);
 	if(str.compare(str2) == 0)
 		return true;
@@ -29,14 +29,14 @@ template < typename T = const void > T* as_pointer_to( const std::string& addres
 }
 
 
-void* addressToObject(const std::string& address) {
+void* addressToObject(const std::string& address){
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	
 	//FIXME:  Error example (win_x86_64_mingw64_gcc)
 	//		0x0x23aefc8: the address is not a valid hex notation
 	//
 	void* object = nullptr;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos) {
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos){
 		
 		std::cout << (address+": the address is not a valid hex notation\n");
 		
@@ -53,13 +53,13 @@ void* addressToObject(const std::string& address) {
 	std::stringstream ss;
 	ss << address.substr(2, address.size() - 2);
 	std::uint64_t tmp;
-	if (!(ss >> std::hex >> tmp)) {
+	if (!(ss >> std::hex >> tmp)){
 		std::cout << (address + ": invalid address\n");
 		return NULL;
 	}
 	object = reinterpret_cast<void*>(tmp);
 	
-	if (!object) {
+	if (!object){
 		printf("invalid object\n");
 		return NULL;
 	}
@@ -71,9 +71,9 @@ void* addressToObject(const std::string& address) {
 //################################################################################
 //# objectToAddress(element)
 //#
-std::string objectToAddress(void* object) {
+std::string objectToAddress(void* object){
 	//DKDEBUGFUNC(element);  //EXCESSIVE LOGGING
-	if (!object) {
+	if (!object){
 		std::cout << ("invalid object\n");
 		return "";
 	}
@@ -85,7 +85,7 @@ std::string objectToAddress(void* object) {
 	//	address.insert(0, "0x");
 	//}
 
-	if (same("0xDDDDDDDD", address)) {
+	if (same("0xDDDDDDDD", address)){
 		std::cout << ("address = 0xDDDDDDDD\n");
 		return "";
 	}
@@ -95,7 +95,7 @@ std::string objectToAddress(void* object) {
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifdef DKTEST
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 	const std::string str = "000000000018FB74" ;
     const void* pv = as_pointer_to<const void>(str) ;
     std::cout << pv << '\n' ;

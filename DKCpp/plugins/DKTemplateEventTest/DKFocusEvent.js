@@ -3,7 +3,7 @@
 
 
 // [FocusEvent()] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/FocusEvent
-var FocusEvent = function FocusEvent(type, options, address) {
+var FocusEvent = function FocusEvent(type, options, address){
 	//console.log("FocusEvent("+type+","+options+","+address+")")
 	
 	options = JSON.stringify(options)
@@ -16,7 +16,7 @@ var FocusEvent = function FocusEvent(type, options, address) {
 	////// Instance properties //////
 	// [FocusEvent.relatedTarget](Read only)
 	Object.defineProperty(this, "relatedTarget", {
-        get: function relatedTarget() {
+        get: function relatedTarget(){
             return CPP_DKFocusEvent_relatedTarget(this.address);
         }
     });

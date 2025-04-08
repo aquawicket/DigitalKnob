@@ -2,7 +2,7 @@
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Navigator
 
 
-var Navigator = function Navigator(address) {
+var Navigator = function Navigator(address){
 	console.log("Navigator("+address+")")
 	
 	if(address)

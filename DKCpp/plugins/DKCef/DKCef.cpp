@@ -162,7 +162,7 @@ bool DKCef::Init(){
 				return DKERROR(cef_dll + ": path not found! \n");
 #		endif
 		libelf = LoadLibrary(elf_dll.c_str());
-		if (!libelf) {
+		if (!libelf){
 			DKString error;
 			DKWindows::GetLastError(error);
 			DKERROR("Could not load "+elf_dll+": "+error+"\n");
@@ -197,7 +197,7 @@ bool DKCef::Init(){
 	}
 	if(!same(DKV8::multi_process, "ON")){
 		int exit_code = CefExecuteProcess(args, cefApp.get(), NULL);
-		if(exit_code >= 0) {
+		if(exit_code >= 0){
 			// The sub-process has completed so return here.
 			return false;
 			//DKClass::_Close("DKWindow0"); //REVIEW: This coming after return ?
@@ -322,7 +322,7 @@ bool DKCef::Init(){
 	if (!result2)
 		return DKERROR("CefInitialize error");
 	DKUtil::GetThreadId(cefThreadId); //store the main Cef threadId
-	if (DKClass::DKValid("DKSDLWindow,DKSDLWindow0")) {
+	if (DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
 		if(DKClass::DKAvailable("DKSDLCef")){
 			DKClass::DKCreate("DKSDLCef");
 			//NewBrowser(id, top, left, width, height, url);
@@ -475,9 +475,9 @@ bool DKCef::GetBrowsers(int& num){
 
 bool DKCef::GetCurrentBrowser(int& browser){
 	DKDEBUGFUNC(browser);
-	if (!current_browser) {
+	if (!current_browser){
 		DKWARN("current_browser invalid\n")
-		if (dkBrowsers.size() && dkBrowsers[0].browser) {
+		if (dkBrowsers.size() && dkBrowsers[0].browser){
 			DKWARN("setting current_browser to dkBrowsers[0].browser");
 			current_browser = dkBrowsers[0].browser;
 		}
@@ -542,7 +542,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 	int _height = height ? height : 600;
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
-	if (DKClass::DKValid("DKWindow,DKWindow0")) {
+	if (DKClass::DKValid("DKWindow,DKWindow0")){
 		browserSettings.windowless_frame_rate = 60;
 		//browserSettings.background_color = 0;
 		window_info.SetAsWindowless(NULL);
@@ -712,7 +712,7 @@ bool DKCef::RunJavascript(const int& browser, DKString& string){
 	return true;
 }
 
-bool DKCef::SetFocus(const int& browser) {
+bool DKCef::SetFocus(const int& browser){
 	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size()-1)
 		return DKERROR("browser > (int)dkBrowsers.size()-1 ! \n");
@@ -834,12 +834,12 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser){
 	class Visitor : public CefWebPluginInfoVisitor {
 	public:
 		explicit Visitor(CefRefPtr<CefBrowser> browser)
-			: browser_(browser) {
+			: browser_(browser){
 			html_ = "<html><head><title>Plugin Info Test</title></head>"
 				"<body bgcolor=\"white\">"
 				"\n<b>Installed plugins:</b>";
 		}
-		~Visitor() {
+		~Visitor(){
 			html_ += "\n</body></html>";
 
 			// Load the html in the browser.
@@ -894,22 +894,22 @@ bool DKCef::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t l
 	
 	//Remove color symbols
 	replace(msg, "%c", "");
-	if (level == LOGSEVERITY_DEFAULT) {
+	if (level == LOGSEVERITY_DEFAULT){
 		DKINFO("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
-	else if (level == LOGSEVERITY_VERBOSE) {
+	else if (level == LOGSEVERITY_VERBOSE){
 		DKDEBUG("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
-	else if (level == LOGSEVERITY_DEBUG) {
+	else if (level == LOGSEVERITY_DEBUG){
 		DKDEBUG("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
-	else if (level == LOGSEVERITY_INFO) {
+	else if (level == LOGSEVERITY_INFO){
 		DKINFO("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
-	else if (level == LOGSEVERITY_WARNING) {
+	else if (level == LOGSEVERITY_WARNING){
 		DKWARN("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
-	else if (level == LOGSEVERITY_ERROR) {
+	else if (level == LOGSEVERITY_ERROR){
 		DKERROR("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
 	//else if(level == LOGSEVERITY_DISABLE){

@@ -1,5 +1,5 @@
 
-var DKRmlInterface = function DKRmlInterface(window) {
+var DKRmlInterface = function DKRmlInterface(window){
 	console.log("DKRmlInterface("+window+")");
 	
 	if(!window)

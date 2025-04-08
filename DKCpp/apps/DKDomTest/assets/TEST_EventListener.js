@@ -3,7 +3,7 @@
 console.log("\n////// TEST_EventListener.js //////")
 
 
-function printEventListenerProperties(eventListener) {
+function printEventListenerProperties(eventListener){
 
 	console.log("eventListener = "		+eventListener);
 }

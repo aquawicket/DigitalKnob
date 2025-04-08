@@ -16,7 +16,7 @@ class DKURL : public DKInterface
 public:
 	
 	// constructor(USVString url, optional USVString base);
-	DKURL(const USVString& url, const USVString& base = "") : DKInterface() {
+	DKURL(const USVString& url, const USVString& base = "") : DKInterface(){
 		DKDEBUGFUNC(url, base);
 		interfaceName = "URL";
 		address[interfaceName] = pointerToAddress(this);
@@ -25,7 +25,7 @@ public:
 	
 	// static boolean canParse(USVString url, optional USVString base);
 	bool _canParse = false;
-	virtual const bool& canParse(const USVString& url, const USVString& base = "") {
+	virtual const bool& canParse(const USVString& url, const USVString& base = ""){
 		DKDEBUGFUNC(url, base);
 		DKTODO();
 		return _canParse;
@@ -93,7 +93,7 @@ public:
 
 	// USVString toJSON();
 	USVString _toJSON = "";
-	virtual const USVString& toJSON() {
+	virtual const USVString& toJSON(){
 		DKDEBUGFUNC();
 		DKTODO();
 		return _toJSON;
@@ -105,14 +105,14 @@ public:
 	// partial interface URL {
 	// static DOMString createObjectURL((Blob or MediaSource) obj);
 	DOMString _createObjectURL = "";
-	virtual const DOMString& createObjectURL(const DKString& obj) {
+	virtual const DOMString& createObjectURL(const DKString& obj){
 		DKDEBUGFUNC(obj);
 		DKTODO();
 		return _createObjectURL;
 	}
 	
 	// static undefined revokeObjectURL(DOMString url);
-	virtual void revokeObjectURL(const DOMString& url) {
+	virtual void revokeObjectURL(const DOMString& url){
 		DKDEBUGFUNC(url);
 		DKTODO();
 	}

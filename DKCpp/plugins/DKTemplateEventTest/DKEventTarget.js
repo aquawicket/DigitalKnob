@@ -3,7 +3,7 @@
 
 
 // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
-var EventTarget = function EventTarget(address) {
+var EventTarget = function EventTarget(address){
 	//console.log("EventTarget("+address+")")
 
     if(address)
@@ -12,7 +12,7 @@ var EventTarget = function EventTarget(address) {
 		this.address = CPP_DKEventTarget();
 	
 	/*
-    for (var i = 0; i < instances.length; i++) {
+    for (var i = 0; i < instances.length; i++){
         if (instances[i].address === address)
             return instances[i]; //return already existing instance
     }
@@ -22,7 +22,7 @@ var EventTarget = function EventTarget(address) {
 
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
     Object.defineProperty(this, "addEventListener", {
-        value: function addEventListener(type, callback, useCapture) {
+        value: function addEventListener(type, callback, useCapture){
             /*
 			if (!(type in this.listeners))
                 this.listeners[type] = [];
@@ -34,13 +34,13 @@ var EventTarget = function EventTarget(address) {
     });
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
     Object.defineProperty(this, "removeEventListener", {
-        value: function removeEventListener(type, callback, useCapture) {
+        value: function removeEventListener(type, callback, useCapture){
 			/*
             if (!(type in this.listeners))
                 return;
             var stack = this.listeners[type];
-            for (var i = 0, l = stack.length; i < l; i++) {
-                if (stack[i] === callback) {
+            for (var i = 0, l = stack.length; i < l; i++){
+                if (stack[i] === callback){
                     //console.log(stack[i]);
                     stack.splice(i, 1);
                     this.listeners[type].splice(i, 1);
@@ -53,13 +53,13 @@ var EventTarget = function EventTarget(address) {
     });
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
     Object.defineProperty(this, "dispatchEvent", {
-        value: function dispatchEvent(event) {
+        value: function dispatchEvent(event){
 			/*
-            if (!(event.type in this.listeners)) {
+            if (!(event.type in this.listeners)){
                 return true;
             }
             var stack = this.listeners[event.type].slice();
-            for (var i = 0; i < stack.length; i++) {
+            for (var i = 0; i < stack.length; i++){
                 stack[i].call(this, event);
             }
             */

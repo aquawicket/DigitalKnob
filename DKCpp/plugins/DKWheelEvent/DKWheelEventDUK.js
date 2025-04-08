@@ -5,7 +5,7 @@
 // [Exposed=Window]
 // interface WheelEvent : MouseEvent {
 // constructor(DOMString type, optional WheelEventInit eventInitDict = {});
-var WheelEvent = function WheelEvent(type, eventInitDict, address) {
+var WheelEvent = function WheelEvent(type, eventInitDict, address){
 	console.log("WheelEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
@@ -18,21 +18,21 @@ var WheelEvent = function WheelEvent(type, eventInitDict, address) {
 	// const unsigned long DOM_DELTA_PIXEL = 0x00;
 	Object.defineProperty(this, "DOM_DELTA_PIXEL", {
         get: function DOM_DELTA_PIXEL() 	{ return CPP_DKWheelEventDUK_DOM_DELTA_PIXEL(this.address) },
-		//set: function DOM_DELTA_PIXEL(num) { return CPP_DKWheelEventDUK_DOM_DELTA_PIXEL(this.address, num) },
+		//set: function DOM_DELTA_PIXEL(num){ return CPP_DKWheelEventDUK_DOM_DELTA_PIXEL(this.address, num) },
 		//configurable: true,
     })
 		
 	// const unsigned long DOM_DELTA_LINE  = 0x01;
 	Object.defineProperty(this, "DOM_DELTA_LINE", {
         get: function DOM_DELTA_LINE() 		{ return CPP_DKWheelEventDUK_DOM_DELTA_LINE(this.address) },
-		//set: function DOM_DELTA_LINE(num) { return CPP_DKWheelEventDUK_DOM_DELTA_LINE(this.address, num) },
+		//set: function DOM_DELTA_LINE(num){ return CPP_DKWheelEventDUK_DOM_DELTA_LINE(this.address, num) },
 		//configurable: true,
     })
 		
 	// const unsigned long DOM_DELTA_PAGE  = 0x02;
 	Object.defineProperty(this, "DOM_DELTA_PAGE", {
         get: function DOM_DELTA_PAGE() 		{ return CPP_DKWheelEventDUK_DOM_DELTA_PAGE(this.address) },
-		//set: function DOM_DELTA_PAGE(num) { return CPP_DKWheelEventDUK_DOM_DELTA_PAGE(this.address, num) },
+		//set: function DOM_DELTA_PAGE(num){ return CPP_DKWheelEventDUK_DOM_DELTA_PAGE(this.address, num) },
 		//configurable: true,
     })
 		
@@ -53,7 +53,7 @@ var WheelEvent = function WheelEvent(type, eventInitDict, address) {
 	// readonly attribute double deltaZ;
 	Object.defineProperty(this, "deltaZ", {
         get: function deltaZ() 	{ return CPP_DKWheelEventDUK_deltaZ(this.address) },
-		set: function deltaZ(z) { return CPP_DKWheelEventDUK_deltaZ(this.address, z) },
+		set: function deltaZ(z){ return CPP_DKWheelEventDUK_deltaZ(this.address, z) },
 		configurable: true,
     })
 	

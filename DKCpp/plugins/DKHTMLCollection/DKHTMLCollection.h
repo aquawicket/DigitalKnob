@@ -15,7 +15,7 @@ class DKHTMLCollection : public DKInterface
 public:
 	std::vector<DKElement*> _element_list;
 	
-	DKHTMLCollection(std::vector<DKElement*> element_list) : DKInterface() {
+	DKHTMLCollection(std::vector<DKElement*> element_list) : DKInterface(){
 		DKDEBUGFUNC(element_list);
 		//DKASSERT(element_list);
 		
@@ -33,7 +33,7 @@ public:
 		const unsigned int length = _element_list.size(); 
 		return length; 
 	}		
-	//virtual void length(const unsigned int& length) {} 	// setter	(readonly)
+	//virtual void length(const unsigned int& length){} 	// setter	(readonly)
 	
 	// getter Element? item(unsigned long index);
 	virtual DKElement* item(const unsigned int& index){

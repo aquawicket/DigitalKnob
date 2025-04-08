@@ -77,7 +77,7 @@ public:
 			if (!item)
 				console.error("aElements->item("+toString(i)+") invalid!");
 			
-			if (item->hasAttribute("href")) {
+			if (item->hasAttribute("href")){
 				if(!item->style())
 					console.error("item->style() invalid!");
 				

@@ -278,7 +278,7 @@ bool RmlSFMLRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 bool RmlSFMLRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
 	sf::Texture *texture = new sf::Texture();
 
-	if (!texture->create(sf::Vector2u(source_dimensions.x, source_dimensions.y))) {
+	if (!texture->create(sf::Vector2u(source_dimensions.x, source_dimensions.y))){
 		delete texture;
 		return false;
 	}
@@ -329,14 +329,14 @@ void RmlSFMLRenderer::initViewport(){
 
 
 /*
-RmlSFMLRenderer::RmlSFMLRenderer(SFML_Renderer* renderer, SFML_Window* screen) {
+RmlSFMLRenderer::RmlSFMLRenderer(SFML_Renderer* renderer, SFML_Window* screen){
 	//DKDEBUGFUNC(renderer, screen);
     mRenderer = renderer;
     mScreen = screen;
 }
 
 // Called by Rml when it wants to render geometry that it does not wish to optimise.
-void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
+void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation){
 	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SFML Shaders
@@ -385,7 +385,7 @@ void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 			DKERROR("SFML_GL_BindTexture: "+DKString(SFML_GetError())+"\n");
     }
  
-    for(int  i = 0; i < num_vertices; i++) {
+    for(int  i = 0; i < num_vertices; i++){
         Positions[i] = vertices[i].position;
         Colors[i] = vertices[i].colour;
         if(sfml_texture){
@@ -521,9 +521,9 @@ bool RmlSFMLRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
     }
     Rml::String extension = source.substr(i + 1, source.length() - i);
     SFML_Surface* surface = IMG_LoadTyped_RW(SFML_RWFromMem(buffer, int(buffer_size)), 1, extension.c_str());
-    if (surface) {
+    if (surface){
         SFML_Texture* texture = SFML_CreateTextureFromSurface(mRenderer, surface);
-        if (texture) {
+        if (texture){
             texture_handle = (Rml::TextureHandle)texture;
             texture_dimensions = Rml::Vector2i(surface->w, surface->h);
             SFML_FreeSurface(surface);

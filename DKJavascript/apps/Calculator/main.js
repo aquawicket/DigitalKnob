@@ -1,6 +1,6 @@
 //alert("Calculator")
 
-function insertValue(value) {
+function insertValue(value){
 	if (isClear == true){
 		document.getElementById("txtDisplay").value = value
 		isClear = false
@@ -9,12 +9,12 @@ function insertValue(value) {
 	}
 }
 
-function clearValue() {
+function clearValue(){
 	document.getElementById("txtDisplay").value = "0";
 	isClear = true;
 }
 
-function evalStatement() {
+function evalStatement(){
 	document.getElementById("txtDisplay").value = eval(document.getElementById("txtDisplay").value)
 }
 	

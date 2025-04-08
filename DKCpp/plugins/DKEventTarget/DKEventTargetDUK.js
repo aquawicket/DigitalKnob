@@ -7,7 +7,7 @@
 // [Exposed=*]
 // interface EventTarget {
 // constructor();
-var EventTarget = function EventTarget(address) {
+var EventTarget = function EventTarget(address){
 	console.log("EventTarget("+address+")")
 
     if(address)
@@ -16,7 +16,7 @@ var EventTarget = function EventTarget(address) {
 		this.address = CPP_DKEventTargetDUK_constructor();
 	
 	/*
-    for (var i = 0; i < instances.length; i++) {
+    for (var i = 0; i < instances.length; i++){
         if (instances[i].address === address)
             return instances[i]; //return already existing instance
     }
@@ -26,7 +26,7 @@ var EventTarget = function EventTarget(address) {
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
     Object.defineProperty(this, "addEventListener", {
-        value: function addEventListener(type, callback, useCapture) {
+        value: function addEventListener(type, callback, useCapture){
             /*
 			if (!(type in this.callbacks))
                 this.callbacks[type] = [];
@@ -39,13 +39,13 @@ var EventTarget = function EventTarget(address) {
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
     Object.defineProperty(this, "removeEventListener", {
-        value: function removeEventListener(type, callback, useCapture) {
+        value: function removeEventListener(type, callback, useCapture){
 			/*
             if (!(type in this.callbacks))
                 return;
             var stack = this.callbacks[type];
-            for (var i = 0, l = stack.length; i < l; i++) {
-                if (stack[i] === callback) {
+            for (var i = 0, l = stack.length; i < l; i++){
+                if (stack[i] === callback){
                     //console.log(stack[i]);
                     stack.splice(i, 1);
                     this.callbacks[type].splice(i, 1);
@@ -59,13 +59,13 @@ var EventTarget = function EventTarget(address) {
 	
 	// boolean dispatchEvent(Event event);
     Object.defineProperty(this, "dispatchEvent", {
-        value: function dispatchEvent(event) {
+        value: function dispatchEvent(event){
 			/*
-            if (!(event.type in this.callbacks)) {
+            if (!(event.type in this.callbacks)){
                 return true;
             }
             var stack = this.callbacks[event.type].slice();
-            for (var i = 0; i < stack.length; i++) {
+            for (var i = 0; i < stack.length; i++){
                 stack[i].call(this, event);
             }
             */

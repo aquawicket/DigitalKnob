@@ -163,7 +163,7 @@ bool DKRmlConverter::IndexToRml(const DKString& html, DKString& rml){
 	//if(!xml.LoadDocumentFromString(rml))
 	//	return false;
 	
-	//if (!xml.FindNode("//body")) {
+	//if (!xml.FindNode("//body")){
 	//	DKERROR("No body tag\n");
 	//	xml.PrependNode("//html", "body");
 	//	//todo, we need to move the rest of the content into the body node.
@@ -183,7 +183,7 @@ bool DKRmlConverter::IndexToRml(const DKString& html, DKString& rml){
 }
 */
 
-bool DKRmlConverter::PostProcess(Rml::Element* element) {
+bool DKRmlConverter::PostProcess(Rml::Element* element){
 	DKDEBUGFUNC(element);
 	if(!element)
 		return DKERROR("element invalid\n");
@@ -350,7 +350,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 					DKDuktape::Get()->LoadJSString(path+src, js);
 			}
 #endif
-			if(!has(path, "http://")) {
+			if(!has(path, "http://")){
 				processed += src+",";
 				//DKString app = DKRml::Get()->workingPath +src;
 				//DKDuktape::LoadFile(app);
@@ -438,8 +438,8 @@ bool DKRmlConverter::MouseOverIframe(DKEvents* event){
 bool DKRmlConverter::Encode(std::string& data){
 	std::string buffer;
 	buffer.reserve(data.size());
-	for(size_t pos = 0; pos != data.size(); ++pos) {
-		switch(data[pos]) {
+	for(size_t pos = 0; pos != data.size(); ++pos){
+		switch(data[pos]){
 			//case '&':  buffer.append("&amp;");      
 				//break;
 			case '\"': buffer.append("&quot;");      
@@ -535,7 +535,7 @@ bool DKRmlConverter::GetOuterHtml(Rml::Element* element, DKString& string){
 	style = "";
 	DKStringArray ids;
 	GetElements(id, ids); //FIXME
-	for (unsigned int i = 0; i < ids.size(); ++i) {
+	for (unsigned int i = 0; i < ids.size(); ++i){
 		BuildStyleString(ids[i], style); //FIXME
 		xml.SetAttributes("//*[@id=\"" + ids[i] + "\"]", "style", style); //Update the style string
 		style = "";

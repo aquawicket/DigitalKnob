@@ -1,4 +1,4 @@
-function DKTray_init() {
+function DKTray_init(){
 	if(DK_GetOS() !== "Win32" && DK_GetOS() !== "Win64")
 		return;
 	if(DK_GetBrowser() !== "Cef" && DK_GetBrowser() !== "Rml")
@@ -20,7 +20,7 @@ function DKTray_init() {
 	DKTray_ShowBalloon(app);
 }
 
-function DKTray_end() {
+function DKTray_end(){
 	ById("DKTray").removeEventListener("1000", DKTray_onevent);
 	byId("DKTray").removeEventListener("1001", DKTray_onevent);
 	byId("DKTray").removeEventListener("1002", DKTray_onevent);
@@ -28,7 +28,7 @@ function DKTray_end() {
 	byId("DKTray").removeEventListener("doubleclick", DKTray_onevent);
 }
 
-function DKTray_OnEvent(event) {
+function DKTray_OnEvent(event){
 	if(event.type === "dblclick")
 		DKTray_ToggleWindow();
 	if(event.type === "1000"){
@@ -46,7 +46,7 @@ function DKTray_OnEvent(event) {
 		DK_Exit();
 }
 
-function DKTray_ToggleWindow() {
+function DKTray_ToggleWindow(){
 	dk.create("DKWindowJS");
 	if(CPP_DKWindow_IsVisible()){
 		CPP_DKWindow_Hide();

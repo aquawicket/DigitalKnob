@@ -12,7 +12,7 @@ class DKFocusEvent : public DKUIEvent
 public:
 	////// Constructor //////
 	// [FocusEvent()] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/FocusEvent
-	DKFocusEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
+	DKFocusEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options){
 		DKINFO("DKFocusEvent("+_type+", "+_options+") \n");
 		
 		////// Instance properties //////

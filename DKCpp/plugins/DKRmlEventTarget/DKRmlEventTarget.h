@@ -17,7 +17,7 @@ public:
 	Rml::Element* _rmlElement;
 	
 	// constructor();
-	DKRmlEventTarget(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKEventTarget() {
+	DKRmlEventTarget(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKEventTarget(){
 		DKDEBUGFUNC(dkRmlEventListener, rmlElement);
 		DKASSERT(dkRmlEventListener);
 		DKASSERT(rmlElement);
@@ -55,7 +55,7 @@ public:
 	}
 	
 	/*
-	bool onEvent() {
+	bool onEvent(){
 		
 	}
 	*/

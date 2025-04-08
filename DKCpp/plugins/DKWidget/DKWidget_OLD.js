@@ -42,7 +42,7 @@ function DKWidget_AttachDrags(id){
 	var parent = byId(id);
 	if(!parent){ return false; }
 	var elements = parent.getElementsByTagName('*');
-	for (var i=0; i<elements.length; i++) {	
+	for (var i=0; i<elements.length; i++){	
 		var x = elements[i];
 		if(!DK_IE() && DK_GetBrowser() !== "RML")
 			x.style.setProperty("pointer-events","all");
@@ -732,7 +732,7 @@ function DKWidget_Paste(id){
 	document.execCommand('Paste');
 }
 
-function copyToClipboard(text) {
+function copyToClipboard(text){
     if(window.clipboardData && window.clipboardData.setData){
         // IE specific code path to prevent textarea being shown while dialog is visible.
         return clipboardData.setData("Text", text); 
@@ -745,7 +745,7 @@ function copyToClipboard(text) {
         textarea.select();
         try {
             return document.execCommand("copy");  // Security exception may be thrown by some browsers.
-        } catch (ex) {
+        } catch (ex){
             console.warn("Copy to clipboard failed.", ex);
             return false;
         } finally {

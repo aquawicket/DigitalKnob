@@ -500,7 +500,7 @@ size_t DKCurl::WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream){
 }
 
 //int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer){
-size_t DKCurl::WriteToBuffer(char* data, size_t size, size_t nmemb, std::string* buffer) {
+size_t DKCurl::WriteToBuffer(char* data, size_t size, size_t nmemb, std::string* buffer){
 	DKDEBUGFUNC(data, size, nmemb, buffer);
 	size_t result = 0;
     if(buffer != NULL){
@@ -558,7 +558,7 @@ void DKCurl::dump(const char *text, FILE *stream, unsigned char *ptr, size_t siz
 				fputs("   ", stream);
 		}
 		// show data on the right
-		for(c = 0; (c < width) && (i+c < size); c++) {
+		for(c = 0; (c < width) && (i+c < size); c++){
 			char x = (ptr[i+c] >= 0x20 && ptr[i+c] < 0x80) ? ptr[i+c] : '.';
 			fputc(x, stream);
 		}

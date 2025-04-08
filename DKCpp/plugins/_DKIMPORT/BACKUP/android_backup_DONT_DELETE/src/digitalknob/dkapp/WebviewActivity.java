@@ -191,7 +191,7 @@ public class WebviewActivity extends Activity
 						Log.d("WebviewActivity.java", "onReceive");
 						Intent install = new Intent(Intent.ACTION_VIEW);
 						install.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						if(fileName.contains(".apk")) {
+						if(fileName.contains(".apk")){
 							install.setDataAndType(uri, "application/vnd.android.package-archive");
 						}
 						else{
@@ -209,10 +209,10 @@ public class WebviewActivity extends Activity
 
         /*
         //Download in browser
-        mWebView.setDownloadListener(new DownloadListener() {
+        mWebView.setDownloadListener(new DownloadListener(){
             public void onDownloadStart(String url, String userAgent,
                                         String contentDisposition, String mimetype,
-                                        long contentLength) {
+                                        long contentLength){
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
@@ -260,9 +260,9 @@ public class WebviewActivity extends Activity
             this.doubleBackToExitPressedOnce = true;
             Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
-            new Handler().postDelayed(new Runnable() {
+            new Handler().postDelayed(new Runnable(){
                 @Override
-                public void run() {
+                public void run(){
                     doubleBackToExitPressedOnce = false;
                 }
             }, 2000);
@@ -358,7 +358,7 @@ public class WebviewActivity extends Activity
         /*
         public Bitmap getDefaultVideoPoster()
         {
-            if (WebviewActivity.this == null) {
+            if (WebviewActivity.this == null){
                 return null;
             }
             return BitmapFactory.decodeResource(WebviewActivity.this.getApplicationContext().getResources(), 2130837573);

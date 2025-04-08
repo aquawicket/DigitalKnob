@@ -5,7 +5,7 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 #include <string>
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 	
 	/// Get DKSCRIPT_PATH
 	std::string DKSCRIPT_PATH = argv[0];

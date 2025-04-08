@@ -111,7 +111,7 @@ public:
 	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() override { return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() override { return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler() override { return this; }
-	//virtual CefRefPtr<CefPrintHandler> GetPrintHandler() { return this; }
+	//virtual CefRefPtr<CefPrintHandler> GetPrintHandler(){ return this; }
 	virtual CefRefPtr<CefRenderHandler> GetRenderHandler() override { return this; }
 	
 	// DK

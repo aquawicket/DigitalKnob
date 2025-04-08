@@ -13,7 +13,7 @@
 class DKCSSStyleDeclaration : virtual public DKInterface
 {
 public:
-	DKCSSStyleDeclaration() : DKInterface() {
+	DKCSSStyleDeclaration() : DKInterface(){
 		DKDEBUGFUNC();
 		interfaceName = "CSSStyleDeclaration";
 		address[interfaceName] = pointerToAddress(this);

@@ -28,13 +28,13 @@
 #include "DKXml/DKXml.h"
 
 
-bool DKXmlJS::Init() {
+bool DKXmlJS::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKXml_GetXmlNode", DKXmlJS::GetXmlNode);
 	return true;
 }
 
-int DKXmlJS::GetXmlNode(duk_context* ctx) {
+int DKXmlJS::GetXmlNode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString file = duk_require_string(ctx, 0);
 	DKString tag = duk_require_string(ctx, 1);

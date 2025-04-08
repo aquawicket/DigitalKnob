@@ -155,8 +155,8 @@ void DKApp::Init(){
 }
 
 #if EMSCRIPTEN
-EM_BOOL DKApp::EM_DoFrame(double time, void* userData) {
-	if (paused) {
+EM_BOOL DKApp::EM_DoFrame(double time, void* userData){
+	if (paused){
 		DKUtil::Sleep(100);
 		return EM_TRUE; // Return true to keep the loop running.
 	}

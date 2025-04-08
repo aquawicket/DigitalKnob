@@ -5,11 +5,11 @@ dk.debug = DKPlugin(DKDebug)
 
 /*
 //Error-first callbacks
-dk.firstFunc = function dk_firstFunc(str1, str2, callback) {
+dk.firstFunc = function dk_firstFunc(str1, str2, callback){
     console.debug("dk.firstFunc(" + str1 + "," + str2 + ")");
-    return dk.secondFunc(str1, str2, function dk_secondFunc_callback(err, result) {
+    return dk.secondFunc(str1, str2, function dk_secondFunc_callback(err, result){
         console.debug("dk.secondFuncCallback(" + err + "," + result + ")");
-        if (err) {
+        if (err){
             console.error(err.name + " " + err.message);
             return callback(err);
         }
@@ -18,11 +18,11 @@ dk.firstFunc = function dk_firstFunc(str1, str2, callback) {
     });
     return error("Don't use return without callback");
 }
-dk.secondFunc = function dk_secondFunc(str1, str2, dk_secondFunc_callback) {
+dk.secondFunc = function dk_secondFunc(str1, str2, dk_secondFunc_callback){
     console.debug("dk.secondFunc(" + str1 + "," + str2 + ")");
-    dk.thirdFunc(str1, str2, function dk_thirdFunc_callback(err, result) {
+    dk.thirdFunc(str1, str2, function dk_thirdFunc_callback(err, result){
         console.debug("dk.thirdFuncCallback(" + err + "," + result + ")");
-        if (err) {
+        if (err){
             throw err;
             console.log("dk.secondFunc(): got an error, passing it along");
             return dk_secondFunc_callback(err);
@@ -30,7 +30,7 @@ dk.secondFunc = function dk_secondFunc(str1, str2, dk_secondFunc_callback) {
         return dk_secondFunc_callback(null, result);
     });
 }
-dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback) {
+dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback){
     console.debug("dk.thirdFunc(" + str1 + "," + str2 + ")");
     if (str1 !== str2)
         return dk_thirdFunc_callback(new Error("The strings must match"));
@@ -39,9 +39,9 @@ dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback) {
 */
 
 /*
-function err(str) { 
+function err(str){ 
     try { throw new Error(str); } 
-    catch(e) { 
+    catch(e){ 
         window.lastError = e;
         throw(e);
      };
@@ -50,14 +50,14 @@ function err(str) {
 */
 
 /*
-const require2 = function require2(variable) {
+const require2 = function require2(variable){
     console.log(variable);
     //if(variable === undefined)
 }
 */
 
 /*
-const testFunc = function testFunc(needed) {
+const testFunc = function testFunc(needed){
     require2(needed);
     //console.log(needed);
 }
@@ -66,7 +66,7 @@ const testFunc = function testFunc(needed) {
 ////////////////////////////////////
 ///  A Convienient Debug Function
 ///////////////////////////////////
-DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
+DKDebug.prototype.debugFunc = function DKDebug_debugFunc(){
     //console.log("DKDebug.prototype.debugFunc");
 
     /*
@@ -99,18 +99,18 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
 
     /*
     //Object by dot path experament
-    const OBJ = function OBJ(dotPath) {
+    const OBJ = function OBJ(dotPath){
         const objstrings = dotPath.split(".");
         console.debug("OBJ(" + dotPath + ")");
         console.debug(objstrings.length + " suspected objects in the path");
 
         const objs = [window];
-        for (var n = 0; n < objstrings.length; n++) {
+        for (var n = 0; n < objstrings.length; n++){
             //objs.push()
             objs.push(objs[n][objstrings[n]]);
-            if (objs[n + 1] === undefined) {
+            if (objs[n + 1] === undefined){
                 var errmsg = "";
-                for (var nn = 0; nn < n + 1; nn++) {
+                for (var nn = 0; nn < n + 1; nn++){
                     if (nn === n)
                         errmsg += "(";
                     errmsg += objstrings[nn];
@@ -278,7 +278,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     */
 
     /*
-    dk.php.call("GET", "/DK/DK.php", "debugFunc", "one", "two", "three", function dk_php_call_callback(rval) {
+    dk.php.call("GET", "/DK/DK.php", "debugFunc", "one", "two", "three", function dk_php_call_callback(rval){
         console.log(rval);
     });
     */
@@ -300,13 +300,13 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     */
 
     /*
-    dk.php.debugFunc("one", "two", "three", function dk_php_debugFunc_callback(rval) {
+    dk.php.debugFunc("one", "two", "three", function dk_php_debugFunc_callback(rval){
         console.log(rval);
     });
     */
 
     /*
-    dk.php.getRemoteAddress(function dk_php_getRemoteAddress_callback(rval) {
+    dk.php.getRemoteAddress(function dk_php_getRemoteAddress_callback(rval){
         console.log(rval);
     });
     */
@@ -344,7 +344,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
         console.info("resized: x:"+resizableDiv.style.width+" y:"+resizableDiv.style.height);
     });
     //only works on window object
-    resizableDiv.onresize = function resizableDiv_onresize_callback() {
+    resizableDiv.onresize = function resizableDiv_onresize_callback(){
         console.info("resized: x:" + resizableDiv.style.width + " y:" + resizableDiv.style.height);
     }
     */
@@ -352,15 +352,15 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     /*
     //Update time on all Tasmota devices
     const dateInMilliseconds = GetDateInMilliseconds();
-    for (var n = 0; n < devices.length; n++) {
+    for (var n = 0; n < devices.length; n++){
         const cmnd = "timezone -7";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
-        DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {//console.log("DK_SendRequest("+success+","+url+","+data+")");
+        DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data){//console.log("DK_SendRequest("+success+","+url+","+data+")");
         });
 
         cmnd = "time 4 " + dateInMilliseconds;
         url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
-        DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {
+        DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data){
             console.log("DK_SendRequest(" + success + "," + url + "," + data + ")");
         });
     }
@@ -368,10 +368,10 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
 
     /*
     //Get time from all Tasmota devices
-    for (var n = 0; n < devices.length; n++) {
+    for (var n = 0; n < devices.length; n++){
         const cmnd = "time";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
-        DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {
+        DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data){
             //console.log("DK_SendRequest("+success+","+url+","+data+")");
             console.log("" + data + "");
         });
@@ -391,10 +391,10 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
 
     /*
     //Test PHP functions
-    dk.php.stringToFile("test.txt", "Appended string\n", "FILE_APPEND", function dk_php_stringToFile_callback(rVal) {
+    dk.php.stringToFile("test.txt", "Appended string\n", "FILE_APPEND", function dk_php_stringToFile_callback(rVal){
         console.log("characters written: " + rVal);
     });
-    dk.php.getTime(function dk_php_getTime_callback(rVal) {
+    dk.php.getTime(function dk_php_getTime_callback(rVal){
         console.log(rVal);
     });
     */
@@ -427,14 +427,14 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     };
 
     var myData = [];
-    const onDataReceived = function onDataReceived(input) {
-        if (myData.length) {
-            for (var value in input) {
+    const onDataReceived = function onDataReceived(input){
+        if (myData.length){
+            for (var value in input){
                 var skipUndefineds = (myData.length - 1);
-                while (skipUndefineds && !myData[skipUndefineds][value]) {
+                while (skipUndefineds && !myData[skipUndefineds][value]){
                     skipUndefineds--;
                 }
-                if (myData[skipUndefineds][value] === input[value]) {
+                if (myData[skipUndefineds][value] === input[value]){
                     //This variable is the same value as it's last occurence, there is no need to store it"
                     //Let's just remove it before we save the object to save space"
                     delete input[value];
@@ -447,23 +447,23 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
 }
 /////////////////////////////////////////////
 
-DKDebug.prototype.init = function DKDebug_init() {
+DKDebug.prototype.init = function DKDebug_init(){
     dk.debug.keyHistory = new Array;
     document.addEventListener("keydown", dk.debug.onevent);
 }
 
-DKDebug.prototype.end = function DKDebug_end() {
+DKDebug.prototype.end = function DKDebug_end(){
     document.removeEventListener("keydown", dk.debug.onevent);
 }
 
-DKDebug.prototype.onevent = function DKDebug_onevent(event) {
+DKDebug.prototype.onevent = function DKDebug_onevent(event){
     //console.debug("DKDebug.prototype.onevent("+event.code+" "+JSON.stringify(event)+")");
-    if (event.type === "keydown") {
+    if (event.type === "keydown"){
         dk.debug.logKey(event.code);
         dk.debug.checkKeys();
     }
-    if (event.type === "keydown" && event.code === "F12") {
-        if (dk.hasCPP()) {
+    if (event.type === "keydown" && event.code === "F12"){
+        if (dk.hasCPP()){
             if (typeof dkcef.showDevTools === 'function')
                 dkcef.showDevTools(0);
             if (typeof dkrml.debuggerOn === 'function')
@@ -472,75 +472,75 @@ DKDebug.prototype.onevent = function DKDebug_onevent(event) {
     }
 }
 
-DKDebug.prototype.logKey = function DKDebug_logKey(code) {
+DKDebug.prototype.logKey = function DKDebug_logKey(code){
     if (dk.debug.keyHistory.length > 20)
         dk.debug.keyHistory.shift();
     dk.debug.keyHistory[dk.debug.keyHistory.length] = code;
 }
 
-DKDebug.prototype.checkKeys = function DKDebug_checkKeys() {
+DKDebug.prototype.checkKeys = function DKDebug_checkKeys(){
     var string = "";
     for (var n = 0; n < dk.debug.keyHistory.length; n++)
         string += dk.debug.keyToChar(dk.debug.keyHistory[n]);
     //check for commands
-    if (string.includes("dkreload")) {
+    if (string.includes("dkreload")){
         console.log("*** dk.debug.reload() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.refresh();
     }
-    if (string.includes("dkpush")) {
+    if (string.includes("dkpush")){
         console.log("*** dk.debug.pushDKFiles() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.pushDKFiles();
     }
-    if (string.includes("dkpull")) {
+    if (string.includes("dkpull")){
         console.log("*** dk.debug.pullDKFiles() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.pullDKFiles();
     }
-    if (string.includes("dkclear")) {
+    if (string.includes("dkclear")){
         console.log("*** dk.debug.clearConsole() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.clearConsole();
     }
-    if (string.includes("dkinfo")) {
+    if (string.includes("dkinfo")){
         console.log("*** dk.debug.printInfo() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.printInfo();
     }
-    if (string.includes("dkconsole")) {
+    if (string.includes("dkconsole")){
         console.log("*** dk.debug.showConsole() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.showConsole();
     }
-    if (string.includes("dksource")) {
+    if (string.includes("dksource")){
         console.log("*** dk.debug.getSource() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.getSource();
     }
-    if (string.includes("dkcrashcpp")) {
+    if (string.includes("dkcrashcpp")){
         console.log("*** dk.debug.crashCPP() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.crashCPP();
     }
-    if (string.includes("dkcrashjs")) {
+    if (string.includes("dkcrashjs")){
         console.log("*** dk.debug.crashJS() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.crashJS();
     }
-    if (string.includes("dkeditor")) {
+    if (string.includes("dkeditor")){
         console.log("*** dk.debug.editor() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.editor();
     }
-    if (string.includes("dkdebug")) {
+    if (string.includes("dkdebug")){
         console.log("*** dk.debug.debugger() ***");
         dk.debug.keyHistory.length = 0;
         dk.debug.debugger();
     }
 }
 
-DKDebug.prototype.keyToChar = function DKDebug_keyToChar(key) {
+DKDebug.prototype.keyToChar = function DKDebug_keyToChar(key){
     if (key === "KeyA")
         return "a"
     if (key === "KeyB")
@@ -596,13 +596,13 @@ DKDebug.prototype.keyToChar = function DKDebug_keyToChar(key) {
     return false;
 }
 
-DKDebug.prototype.reload = function DKDebug_reload() {
+DKDebug.prototype.reload = function DKDebug_reload(){
     window.location.reload(true);
 }
 
-DKDebug.prototype.pushDKFiles = function DKDebug_pushDKFiles() {
+DKDebug.prototype.pushDKFiles = function DKDebug_pushDKFiles(){
     //This is the pure js method
-    dk.file.pushDKAssets(function dk_php_pushDKAssetsCallback(rval) {
+    dk.file.pushDKAssets(function dk_php_pushDKAssetsCallback(rval){
         console.log(rval);
         console.log("done copying assets");
     });
@@ -610,47 +610,47 @@ DKDebug.prototype.pushDKFiles = function DKDebug_pushDKFiles() {
     /*
     //This is the js->cpp method
     var assets = CPP_DKAssets_LocalAssets();
-    if (!assets) {
+    if (!assets){
         console.error("assets is invalid");
         return false;
     }
     console.log("assets = " + assets);
     var search = assets;
-    while (!CPP_DKFile_Exists(search + "/Development/DKCpp/plugins")) {
+    while (!CPP_DKFile_Exists(search + "/Development/DKCpp/plugins")){
         var n = search.lastIndexOf("/");
-        if (n === -1) {
+        if (n === -1){
             return error("could not locate a DKPlugins folder");
         }
         search = search.substring(0, n);
         console.log(search + "");
     }
     DIGITALKNOB_DIR = search;
-    if (!CPP_DKFile_Exists(DIGITALKNOB_DIR)) {
+    if (!CPP_DKFile_Exists(DIGITALKNOB_DIR)){
         return error("Could not find search");
     }
     var temp = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR);
-    if (!temp) {
+    if (!temp){
         console.log("dk.debug.PushDKFiles() variable temp is invalid");
         return false;
     }
     var folders = temp.split(",");
     var plugin_folders = [];
     plugin_folders.push(DIGITALKNOB_DIR + "/Development/DKCpp/plugins");
-    for (var n = 0; n < folders.length; n++) {
+    for (var n = 0; n < folders.length; n++){
         if (CPP_DKFile_Exists(DIGITALKNOB_DIR + "/" + folders[n] + "/DKPlugins"))
             plugin_folders.push(DIGITALKNOB_DIR + "/" + folders[n] + "/DKPlugins");
     }
-    for (var n = 0; n < plugin_folders.length; n++) {
+    for (var n = 0; n < plugin_folders.length; n++){
         plugin_folders[n] = CPP_DKFile_GetAbsolutePath(plugin_folders[n]);
     }
     var temp = CPP_DKFile_DirectoryContents(assets);
-    if (!temp) {
+    if (!temp){
         return error("temp is invalid");
     }
     var folders = temp.split(",");
-    for (var n = 0; n < folders.length; n++) {
-        for (var nn = 0; nn < plugin_folders.length; nn++) {
-            if (CPP_DKFile_Exists(plugin_folders[nn] + "/" + folders[n])) {
+    for (var n = 0; n < folders.length; n++){
+        for (var nn = 0; nn < plugin_folders.length; nn++){
+            if (CPP_DKFile_Exists(plugin_folders[nn] + "/" + folders[n])){
                 CPP_DKFile_CopyFolder(assets + "/" + folders[n], plugin_folders[nn] + "/" + folders[n], true, true);
             }
         }
@@ -658,36 +658,36 @@ DKDebug.prototype.pushDKFiles = function DKDebug_pushDKFiles() {
     */
 }
 
-DKDebug.prototype.pullDKFiles = function DKDebug_pullDKFiles() {
+DKDebug.prototype.pullDKFiles = function DKDebug_pullDKFiles(){
     //This is the pure js method
-    dk.file.pullDKAssets(function dk_php_pullDKAssetsCallback(rval) {
+    dk.file.pullDKAssets(function dk_php_pullDKAssetsCallback(rval){
         console.log(rval);
         console.log("done copying assets");
     });
 }
 
-DKDebug.prototype.clearConsole = function DKDebug_clearConsole() {
+DKDebug.prototype.clearConsole = function DKDebug_clearConsole(){
     var api;
     if (typeof console === 'undefined')
         return error("console invalid");
-    if (typeof console._commandLineAPI !== 'undefined') {
+    if (typeof console._commandLineAPI !== 'undefined'){
         api = console._commandLineAPI;
         //chrome
-    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+    } else if (typeof console._inspectorCommandLineAPI !== 'undefined'){
         api = console._inspectorCommandLineAPI;
         //Safari
-    } else if (typeof console.clear !== 'undefined') {
+    } else if (typeof console.clear !== 'undefined'){
         api = console;
     }
     api.clear();
 }
 
-DKDebug.prototype.printInfo = function DKDebug_printInfo() {
+DKDebug.prototype.printInfo = function DKDebug_printInfo(){
     console.log("\n");
     console.log("**** DKOBJECTS ****");
     var objects = dk.getObjects();
     var arry = objects.split(",");
-    for (var n = 0; n < arry.length; n++) {
+    for (var n = 0; n < arry.length; n++){
         if (!arry[n])
             continue;
         console.log(arry[n]);
@@ -696,7 +696,7 @@ DKDebug.prototype.printInfo = function DKDebug_printInfo() {
     console.log("**** DKEVENTS ****");
     var events = dk.getEvents();
     var arry = events.split(",");
-    for (var n = 0; n < arry.length; n++) {
+    for (var n = 0; n < arry.length; n++){
         if (!arry[n])
             continue;
         console.log(arry[n]);
@@ -706,7 +706,7 @@ DKDebug.prototype.printInfo = function DKDebug_printInfo() {
     console.log("**** DKFUNCTIONS ****");
     var events = dk.getFunctions();
     var arry = events.split(",");
-    for (var n = 0; n < arry.length; n++) {
+    for (var n = 0; n < arry.length; n++){
         if (!arry[n])
             continue;
         console.log(arry[n]);
@@ -714,37 +714,37 @@ DKDebug.prototype.printInfo = function DKDebug_printInfo() {
     console.log("\n");
 }
 
-DKDebug.prototype.function = function DKDebug_showConsole() {
+DKDebug.prototype.function = function DKDebug_showConsole(){
     dk.showConsole();
 }
 
-DKDebug.prototype.getSource = function DKDebug_getSource() {
+DKDebug.prototype.getSource = function DKDebug_getSource(){
     //dk.create("DKWidgetJS");
     var source = document.documentElement.outerHTML;
     var assets = CPP_DKAssets_LocalAssets();
 
-    if (dk.getBrowser() === "RML") {
+    if (dk.getBrowser() === "RML"){
         CPP_DKFile_StringToFile(source, assets + "RmlUi_Source.html");
     } else {
         CPP_DKFile_StringToFile(source, assets + "Browser_Source.html");
     }
 }
 
-DKDebug.prototype.crashCPP = function DKDebug_crashCPP() {
+DKDebug.prototype.crashCPP = function DKDebug_crashCPP(){
     console.log("dk.debug.crashCPP()");
     CPP_DK_Crash();
 }
 
-DKDebug.prototype.crashJS = function DKDebug_crashJS() {
+DKDebug.prototype.crashJS = function DKDebug_crashJS(){
     console.log("dk.debug.crashJS()");
     throw new Error('CRASH TEST');
 }
 
-DKDebug.prototype.editor = function DKDebug_editor() {
-    DKPlugin("DKEditor/DKEditor.js", function dk_create_callback() {});
+DKDebug.prototype.editor = function DKDebug_editor(){
+    DKPlugin("DKEditor/DKEditor.js", function dk_create_callback(){});
 }
 
-DKDebug.prototype.debugger = function DKDebug_debugger() {
+DKDebug.prototype.debugger = function DKDebug_debugger(){
     if (dk.getBrowser() === "RML" || dk.getJSEngine() === "Duktape")
         dkrml.debuggerToggle();
     if (dk.getBrowser() === "CEF")

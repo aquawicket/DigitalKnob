@@ -56,7 +56,7 @@ public:
 		/// Print event list
 		/*
 		unsigned int i=0;
-		for (auto& eventObj : events<EventType>) {
+		for (auto& eventObj : events<EventType>){
 			DKINFO("event["+toString(i)+"] = ("+eventObj.type+","+eventObj.eventTargetAddress+") \n");
 			i++;
         }
@@ -81,7 +81,7 @@ public:
     static void dispatchEvent(EventType* event, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(event, eventTargetAddress);
 		DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
-		for (auto& eventObj : events<EventType>) {
+		for (auto& eventObj : events<EventType>){
 			DKINFO("	eventObj("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
 			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress){
 				DKINFO("		event("+event->type+") \n");	

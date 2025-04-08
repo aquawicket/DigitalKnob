@@ -43,12 +43,12 @@ static struct termios current, old;
 */
 
 
-char getch(void) {
+char getch(void){
 	DKDEBUGFUNC();
 	return DKUnix::getch_(0);
 }
 
-char getche(void) {
+char getche(void){
 	DKDEBUGFUNC();
 	return DKUnix::getch_(1);
 }
@@ -90,7 +90,7 @@ bool DKUnix::GetUsername(DKString& username){
 #endif
 	/*
 	struct passwd* usr_b = getpwuid(getuid());
-	if (usr_b) {
+	if (usr_b){
 		username = usr_b->pw_name;
 		return true;
 	}
@@ -100,7 +100,7 @@ bool DKUnix::GetUsername(DKString& username){
 		return true;
 	}
 	char usr_d[64];
-	if (getlogin_r(usr_d, sizeof(usr_d) - 1) != 0) {
+	if (getlogin_r(usr_d, sizeof(usr_d) - 1) != 0){
 		username = usr_d;
 		return true;
 	}
@@ -115,7 +115,7 @@ bool DKUnix::GetUsername(DKString& username){
 	return false;
 }
 
-char DKUnix::getch_(int echo) {
+char DKUnix::getch_(int echo){
 	DKDEBUGFUNC();
 	char ch;
 	initTermios(echo);
@@ -124,12 +124,12 @@ char DKUnix::getch_(int echo) {
 	return ch;
 }
 
-void DKUnix::initTermios(int echo) {
+void DKUnix::initTermios(int echo){
 	DKDEBUGFUNC();
 	tcgetattr(0, &old);              // save current terminal settings 
 	current = old;                   // store them
 	current.c_lflag &= ~ICANON;      // disable buffered i/o
-	if (echo) {
+	if (echo){
 		current.c_lflag |= ECHO;     // set echo mode on
 	}
 	else {
@@ -138,7 +138,7 @@ void DKUnix::initTermios(int echo) {
 	tcsetattr(0, TCSANOW, &current);  // use created terminal settings
 	/*
 	// Fallback shell command method
-	if (echo) {
+	if (echo){
 		system("stty raw echo"); // Set terminal to raw mode with echo, (no wait for enter)
 	}
 	else {
@@ -147,7 +147,7 @@ void DKUnix::initTermios(int echo) {
 	*/
 }
 
-void DKUnix::restoreTermios(void) {
+void DKUnix::restoreTermios(void){
 	DKDEBUGFUNC();
 	tcsetattr(0, TCSANOW, &old);
 	// Fallback shell command method

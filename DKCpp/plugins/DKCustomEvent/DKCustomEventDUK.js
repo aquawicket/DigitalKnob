@@ -7,7 +7,7 @@
 // [Exposed=*]
 // interface CustomEvent : Event {
 // constructor(DOMString type, optional CustomEventInit eventInitDict = {});
-var CustomEvent = function CustomEvent(type, eventInitDict, address) {
+var CustomEvent = function CustomEvent(type, eventInitDict, address){
 	//console.log("CustomEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
@@ -23,7 +23,7 @@ var CustomEvent = function CustomEvent(type, eventInitDict, address) {
     })
 	
 	// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
-	CustomEvent.prototype.initCustomEvent = function initCustomEvent() {
+	CustomEvent.prototype.initCustomEvent = function initCustomEvent(){
 		CPP_DKCustomEventDUK_initCustomEvent(this.address);
     }
 	

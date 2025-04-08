@@ -1,5 +1,5 @@
 DKSolutionMenu.prototype = Object.create(DKPlugin.prototype);
-function DKSolutionMenu(identifier) {
+function DKSolutionMenu(identifier){
     return DKPlugin.call(this, identifier);
 }
 dk.solutionmenu = new DKSolutionMenu("DKSolutionMenu");
@@ -7,8 +7,8 @@ dk.solutionmenu = new DKSolutionMenu("DKSolutionMenu");
 dk.solutionmenu.id = "";
 dk.solutionmenu.file = "";
 
-dk.solutionmenu.init = function dk_solutionmenu_init() {
-    dk.create("DKFile/DKSolutionMenu.html", function dk_create_callback() {
+dk.solutionmenu.init = function dk_solutionmenu_init(){
+    dk.create("DKFile/DKSolutionMenu.html", function dk_create_callback(){
         document.addEventListener("mousedown", dk.solutionmenu.onevent);
         byId("DKSolutionMenu_Open").onclick = dk.solutionmenu.open;
         byId("DKSolutionMenu_OpenHere").onclick = dk.solutionmenu.openHere;
@@ -25,7 +25,7 @@ dk.solutionmenu.init = function dk_solutionmenu_init() {
     });
 }
 
-dk.solutionmenu.end = function dk_solutionmenu_end() {
+dk.solutionmenu.end = function dk_solutionmenu_end(){
     document.removeEventListener("mousedown", dk.solutionmenu.onevent);
     /*
 	byId("DKSolutionMenu_Open").onclick = null;
@@ -44,67 +44,67 @@ dk.solutionmenu.end = function dk_solutionmenu_end() {
     dk.close("DKFile/DKSolutionMenu.html");
 }
 
-dk.solutionmenu.onevent = function dk_solutionmenu_onevent(event) {
+dk.solutionmenu.onevent = function dk_solutionmenu_onevent(event){
     console.debug("DKSolutionMenu_onevent(" + event.currentTarget.id + "," + event.type + ")\n");
-    if (event.currentTarget.id === "DKSolutionMenu_Open") {
+    if (event.currentTarget.id === "DKSolutionMenu_Open"){
         dk.solutionmenu.open();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.OpenHere") {
+    if (event.currentTarget.id === "dk.solutionmenu.OpenHere"){
         dk.solutionmenu.openHere();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.NewFile") {
+    if (event.currentTarget.id === "dk.solutionmenu.NewFile"){
         dk.solutionmenu.newFile();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.NewFolder") {
+    if (event.currentTarget.id === "dk.solutionmenu.NewFolder"){
         dk.solutionmenu.newFolder();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.Rename") {
+    if (event.currentTarget.id === "dk.solutionmenu.Rename"){
         dk.solutionmenu.rename();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.Delete") {
+    if (event.currentTarget.id === "dk.solutionmenu.Delete"){
         dk.solutionmenu.delete();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.Copy") {
+    if (event.currentTarget.id === "dk.solutionmenu.Copy"){
         dk.solutionmenu.copy();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.Cut") {
+    if (event.currentTarget.id === "dk.solutionmenu.Cut"){
         dk.solutionmenu.cut();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.Paste") {
+    if (event.currentTarget.id === "dk.solutionmenu.Paste"){
         dk.solutionmenu.paste();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.Import") {
+    if (event.currentTarget.id === "dk.solutionmenu.Import"){
         dk.solutionmenu.import();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.GitAdd") {
+    if (event.currentTarget.id === "dk.solutionmenu.GitAdd"){
         dk.solutionmenu.gitAdd();
     }
-    if (event.currentTarget.id === "dk.solutionmenu.UpxCompress") {
+    if (event.currentTarget.id === "dk.solutionmenu.UpxCompress"){
         dk.solutionmenu.upxCompress();
     }
 
     //FIXME
-    if (event.currentTarget === document) {
-        if (byId("DKFile/DKSolutionMenu.html") && byId("DKFile/DKSolutionMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))) {
+    if (event.currentTarget === document){
+        if (byId("DKFile/DKSolutionMenu.html") && byId("DKFile/DKSolutionMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
             return;
         }
     }
     dk.close("DKFile/DKSolutionMenu.js");
 }
 
-dk.solutionmenu.setId = function dk_solutionmenu_setId(id) {
+dk.solutionmenu.setId = function dk_solutionmenu_setId(id){
     dk.solutionmenu.id = id;
 }
 
-dk.solutionmenu.setFile = function dk_solutionmenu_setFile(file) {
+dk.solutionmenu.setFile = function dk_solutionmenu_setFile(file){
     dk.solutionmenu.file = file;
 }
 
-dk.solutionmenu.open = function dk_solutionmenu_open() {
+dk.solutionmenu.open = function dk_solutionmenu_open(){
     dk.solution.openFile(dk.solutionmenu.file);
 }
 
-dk.solutionmenu.openHere = function dk_solutionmenu_openHere() {
+dk.solutionmenu.openHere = function dk_solutionmenu_openHere(){
     console.log("dk.solutionmenu.OpenHere()");
     var path = dk.solutionmenu.file;
     //console.log("dk.solutionmenu.file = "+dk.solutionmenu.file+"\n");
@@ -114,8 +114,8 @@ dk.solutionmenu.openHere = function dk_solutionmenu_openHere() {
     dk.solution.openHere(path);
 }
 
-dk.solutionmenu.newFile = function dk_solutionmenu_newFile() {
-    if (!dk.solutionmenu.file) {
+dk.solutionmenu.newFile = function dk_solutionmenu_newFile(){
+    if (!dk.solutionmenu.file){
         console.error("dk.solutionmenu.newFile(): dk.solutionmenu.file is invalid\n");
         return;
     }
@@ -130,11 +130,11 @@ dk.solutionmenu.newFile = function dk_solutionmenu_newFile() {
     var elements = DK_GetElements(byId("DKSolutionMenu"));
     //console.log("elements = "+elements+"\n");
     var arry = elements.split(",");
-    for (var i = 0; i < arry.length; i++) {
+    for (var i = 0; i < arry.length; i++){
         //console.log("arry["+i+"] ="+arry[i]+"\n");
         var value = byId(arry[i]).value;
         //console.log("arry["+i+"] ="+value+"\n");
-        if (value === dk.solutionmenu.file) {
+        if (value === dk.solutionmenu.file){
             dk.solutionmenu.SetId(arry[i]);
             //console.log("id = "+arry[i]+"\n");
             break;
@@ -144,8 +144,8 @@ dk.solutionmenu.newFile = function dk_solutionmenu_newFile() {
     dk.solutionmenu.Rename();
 }
 
-dk.solutionmenu.newFolder = function dk_solutionmenu_newFolder() {
-    if (!dk.solutionmenu.file) {
+dk.solutionmenu.newFolder = function dk_solutionmenu_newFolder(){
+    if (!dk.solutionmenu.file){
         console.error("dk.solutionmenu.NewFile(): dk.solutionmenu.file is invalid\n");
         return;
     }
@@ -157,11 +157,11 @@ dk.solutionmenu.newFolder = function dk_solutionmenu_newFolder() {
     //Find the id
     //console.log("elements = "+elements+"\n");
     var arry = byId("DKSolutionMenu").childNodes;
-    for (var i = 0; i < arry.length; i++) {
+    for (var i = 0; i < arry.length; i++){
         //console.log("arry["+i+"] ="+arry[i]+"\n");
         var value = arry[i].value;
         //console.log("arry["+i+"] ="+value+"\n");
-        if (value === dk.solutionmenu.file) {
+        if (value === dk.solutionmenu.file){
             dk.solutionmenu.setId(arry[i]);
             //console.log("id = "+arry[i]+"\n");
             break;
@@ -171,12 +171,12 @@ dk.solutionmenu.newFolder = function dk_solutionmenu_newFolder() {
     dk.solutionmenu.rename();
 }
 
-dk.solutionmenu.rename = function dk_solutionmenu_rename() {
+dk.solutionmenu.rename = function dk_solutionmenu_rename(){
     var top1 = byId("DKSolutionMenu").offsetTop;
     var top2 = byId("DKSolutionMenu").offsetTop;
     var top = top1 - top2 - 1;
 
-    DKPlugin("DKFile/DKSolutionRename.js", function dk_create_callback() {
+    DKPlugin("DKFile/DKSolutionRename.js", function dk_create_callback(){
         DKSolutionRename_SetId(dk.solutionmenu.id);
         DKSolutionRename_SetFile(dk.solutionmenu.file);
         byId("DKFile/DKSolutionRename.html").style.top = top + "rem";
@@ -185,11 +185,11 @@ dk.solutionmenu.rename = function dk_solutionmenu_rename() {
     });
 }
 
-dk.solutionmenu.delete = function dk_solutionmenu_delete() {
-    DKPlugin("DKGui/DKMessageBox.js", function dk_create_callback() {
+dk.solutionmenu.delete = function dk_solutionmenu_delete(){
+    DKPlugin("DKGui/DKMessageBox.js", function dk_create_callback(){
         DKSolutionMenu_Html("DKGui/DKMessageBox.html");
-        DKMessageBox_Confirm("delete this file?", function DKMessageBox_Confirm_callback(rval) {
-            if (rval === true) {
+        DKMessageBox_Confirm("delete this file?", function DKMessageBox_Confirm_callback(rval){
+            if (rval === true){
                 console.debug("dk.solutionmenu.Delete(): dk.solutionmenu.file = " + dk.solutionmenu.file);
                 dk.file.delete(dk.solutionmenu.file);
                 dk.solution.updatePath(byId("DKSolutionPath").value);
@@ -198,22 +198,22 @@ dk.solutionmenu.delete = function dk_solutionmenu_delete() {
     });
 }
 
-dk.solutionmenu.copy = function dk_solutionmenu_copy() {
+dk.solutionmenu.copy = function dk_solutionmenu_copy(){
     DK_SetClipboardFiles(dk.solutionmenu.file);
 }
 
-dk.solutionmenu.cut = function dk_solutionmenu_cut() {
+dk.solutionmenu.cut = function dk_solutionmenu_cut(){
     DK_SetClipboardFiles(dk.solutionmenu.file);
 }
 
-dk.solutionmenu.paste = function dk_solutionmenu_paste() {//TODO
+dk.solutionmenu.paste = function dk_solutionmenu_paste(){//TODO
 }
 
-dk.solutionmenu.import = function dk_solutionmenu_import() {//TODO
+dk.solutionmenu.import = function dk_solutionmenu_import(){//TODO
 }
 
-dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd() {
-    DKPlugin("DKBuild/DKBuild.js", function dk_create_callback() {
+dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd(){
+    DKPlugin("DKBuild/DKBuild.js", function dk_create_callback(){
         var git = GIT;
         //from DKBuild.js
         var dk_path = DIGITALKNOB_DIR;
@@ -222,9 +222,9 @@ dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd() {
 
         console.log("dk.solutionmenu.file = " + dk.solutionmenu.file + "\n");
         var search = dk.solutionmenu.file;
-        while (!dk.file.extist(search + "/.git")) {
+        while (!dk.file.extist(search + "/.git")){
             var n = search.lastIndexOf("/");
-            if (n === -1) {
+            if (n === -1){
                 console.warn("could not locate a .git folder\n");
                 return false;
             }
@@ -238,8 +238,8 @@ dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd() {
     });
 }
 
-dk.solutionmenu.upxCompress = function dk_solutionmenuuUpxCompress() {
-    DKPlugin("DKBuild/DKBuild.js", function dk_create_callback() {
+dk.solutionmenu.upxCompress = function dk_solutionmenuuUpxCompress(){
+    DKPlugin("DKBuild/DKBuild.js", function dk_create_callback(){
         //for DIGITALKNOB_DIR
 
         var dk_path = DIGITALKNOB_DIR;
@@ -247,7 +247,7 @@ dk.solutionmenu.upxCompress = function dk_solutionmenuuUpxCompress() {
         var upx = dk_path + "/Development/3rdParty/upx-3.95-win64/upx.exe";
         console.log("upx = " + upx + "\n");
         //upx compress the exe file
-        if (dk.file.extist(upx)) {
+        if (dk.file.extist(upx)){
             console.warn("UPX compressing exe... please wait\n");
             DK_Execute(upx + " -9 -v " + dk.solutionmenu.file);
         } else {

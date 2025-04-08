@@ -52,7 +52,7 @@ DKStringArray DKDuktape::codeToRun;
 	//extern void fileio_register(duk_context *ctx);
 #endif
 
-const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags) {
+const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags){
 	DKDEBUGFUNC(ctx, path, flags);
 	FILE *f = NULL;
 	char *buf;
@@ -87,7 +87,7 @@ fail:
 }
 
 /*
-void duk_eval_file(duk_context* ctx, const char* path) {
+void duk_eval_file(duk_context* ctx, const char* path){
 	duk_push_string_file_raw(ctx, path, 0);
 	duk_push_string(ctx, path);
 	duk_compile(ctx, DUK_COMPILE_EVAL);
@@ -96,7 +96,7 @@ void duk_eval_file(duk_context* ctx, const char* path) {
 }
 */
 
-duk_int_t duk_peval_file(duk_context *ctx, const char *path) {
+duk_int_t duk_peval_file(duk_context *ctx, const char *path){
 	DKDEBUGFUNC(ctx, path);
 	duk_int_t rc;
 	duk_push_string_file_raw(ctx, path, DUK_STRING_PUSH_SAFE);
@@ -187,7 +187,7 @@ bool DKDuktape::End(){
 	return true;
 }
 
-void DKDuktape::my_fatal(void* udata, const char* msg) {
+void DKDuktape::my_fatal(void* udata, const char* msg){
 	DKDEBUGFUNC(udata, msg);
 	(void)udata;  /* ignored in this case, silence warning */
 	/* Note that 'msg' may be NULL. */
@@ -221,7 +221,7 @@ bool DKDuktape::CallEnd(const DKString& file){
 	if(toBool(rval)){
 		DKWARN("Auto-calling _end is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript\n");
 		DKWARN("Using DKPlugin("+func+") in javascript should take care of _init and _end \n");
-		for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i) {
+		for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i){
 			if (has(DKDuktape::filelist[i], filename))
 				DKDuktape::filelist.erase(DKDuktape::filelist.begin() + i);
 		}
@@ -236,7 +236,7 @@ bool DKDuktape::CallEnd(const DKString& file){
 	if(duk_peval_string(ctx, func.c_str()) != 0)
 		DKDuktape::DumpError(func);
 	duk_pop(ctx);  // ignore result?
-	for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i) {
+	for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i){
 		if (has(DKDuktape::filelist[i], filename))
 			DKDuktape::filelist.erase(DKDuktape::filelist.begin() + i);
 	}
@@ -388,7 +388,7 @@ bool DKDuktape::OnEvent(DKEvents* event){
 		return DKERROR("type invalid");
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
-	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
+	//replace(jsreturn, "(){ [ecmascript code] }", ""); //remove (){ [ecmascript code] }
 	if(jsreturn.empty() || same(jsreturn,"0"))
 		return DKERROR("DKDuktape::OnEvent: jsreturn variable invalid\n");
 	DKString evt = id +","+ type;
@@ -417,7 +417,7 @@ bool DKDuktape::Reload(){
 	DKStringArray list;
 	DKClass::GetObjects(list);
 	//for(unsigned long i=list.size()-1; i>0; --i){
-	for (size_t i = list.size() - 1; i > 0; --i) {
+	for (size_t i = list.size() - 1; i > 0; --i){
 		if(!has(list[i],"DKJavascript,")){
 			if(has(list[i],"App0")){ continue; }
 			if(has(list[i],"DKAssets")){ continue; }
@@ -482,7 +482,7 @@ bool DKDuktape::Trace(){
 	duk_pop_2(ctx);
 	*/
 	DKERROR("*** TRACE STACK ***\n");
-	for (int level = -1; level > -10; level--) {
+	for (int level = -1; level > -10; level--){
 		duk_inspect_callstack_entry(ctx, level);
 		if(duk_is_undefined(ctx, -1)){
 			duk_pop(ctx);
@@ -517,8 +517,8 @@ bool DKDuktape::UnloadFile(const DKString& path){
 		return DKERROR("path invalid");
 	if(!FileLoaded(path))
 		return DKERROR("FileLoaded("+path+") failed");
-	for(unsigned int i = 0; i < filelist.size(); ++i) {
-		if(has(path, filelist[i])) {
+	for(unsigned int i = 0; i < filelist.size(); ++i){
+		if(has(path, filelist[i])){
 			//DKINFO("DKDuktape::FileLoaded(): "+path+" is loaded\n");
 			filelist.erase(filelist.begin() + i); //TODO: error control
 			return true;
@@ -527,9 +527,9 @@ bool DKDuktape::UnloadFile(const DKString& path){
 	return false;
 }
 
-DKString DKDuktape::eventToAddress(DKEvents* event) {
+DKString DKDuktape::eventToAddress(DKEvents* event){
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
-	if (!event) {
+	if (!event){
 		DKERROR("DKDuktape::eventToAddress(): invalid event\n");
 		return NULL;
 	}
@@ -543,10 +543,10 @@ DKString DKDuktape::eventToAddress(DKEvents* event) {
 	return ss.str();
 }
 
-DKEvents* DKDuktape::addressToEvent(const DKString& address) {
+DKEvents* DKDuktape::addressToEvent(const DKString& address){
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	DKEvents* event;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos){
 		DKERROR("DKRml::addressToEvent(): the address is not a valid hex notation");
 		return NULL;
 	}
@@ -555,12 +555,12 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 	ss << address.substr(2, address.size() - 2);
 	//int tmp(0);
 	std::uint64_t tmp;
-	if (!(ss >> std::hex >> tmp)) {
+	if (!(ss >> std::hex >> tmp)){
 		DKERROR("DKRml::addressToEvent(" + address + "): invalid address\n");
 		return NULL;
 	}
 	event = reinterpret_cast<DKEvents*>(tmp);
-	//if (!event->GetCurrentElement()) {
+	//if (!event->GetCurrentElement()){
 	//	DKERROR("DKRml::addressToEvent(" + address + "): currentElement invalid\n");
 	//	return NULL;
 	//}
@@ -569,7 +569,7 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 
 void DKDuktape::EventLoop(){
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
-	if (!DKUtil::InMainThread()) {
+	if (!DKUtil::InMainThread()){
 		DKERROR("not in main thread");
 		return;
 	}
@@ -604,7 +604,7 @@ void DKDuktape::EventLoop(){
 ////////////// eventloop stuff  //////////////////////////////////
 //////////////////////////////////////////////////////////////////
 #ifdef HAVE_eventloop
-	int DKDuktape::handle_file(duk_context *ctx, const char *filename) {
+	int DKDuktape::handle_file(duk_context *ctx, const char *filename){
 		DKDEBUGFUNC(ctx, filename);
 		FILE *f = NULL;
 		int retval;
@@ -625,17 +625,17 @@ void DKDuktape::EventLoop(){
 		unsigned long got;
 		int rc;
 		int retval = -1;
-		if (fseek(f, 0, SEEK_END) < 0) {
+		if (fseek(f, 0, SEEK_END) < 0){
 			DKERROR("DKDuktape::handle_fh(): SEEK_END Error \n");
 			return -1;
 		}
 		len = (int) ftell(f);
-		if (fseek(f, 0, SEEK_SET) < 0) {
+		if (fseek(f, 0, SEEK_SET) < 0){
 			DKERROR("DKDuktape::handle_fh(): SEEK_SET Error \n");
 			return -1;
 		}
 		buf = (char *) malloc(len);
-		if (!buf) {
+		if (!buf){
 			DKERROR("DKDuktape::handle_fh(): buf invalid \n");
 			return -1;
 		}
@@ -645,7 +645,7 @@ void DKDuktape::EventLoop(){
 		free(buf);
 		buf = NULL;
 		rc = duk_safe_call(ctx, wrapped_compile_execute, NULL, 2 /*nargs*/, 1 /*nret*/);
-		if (rc != DUK_EXEC_SUCCESS) {
+		if (rc != DUK_EXEC_SUCCESS){
 			DKERROR("DKDuktape::handle_fh(): DUK_EXEC_SUCCESS failed \n");
 			return -1;
 		} else {
@@ -672,13 +672,13 @@ void DKDuktape::EventLoop(){
 	#endif
 		//Start a zero timer which will call _USERCODE from within the event loop.
 		//DKINFO("DKDuktape: set _USERCODE timer\n");
-		//duk_eval_string(ctx, "setTimeout(function() { _USERCODE(); }, 0);");
+		//duk_eval_string(ctx, "setTimeout(function(){ _USERCODE(); }, 0);");
 		//duk_pop(ctx);
 		/*
 		if(c_evloop){
 			DKINFO("DKDuktape: calling eventloop_run()\n");
 			rc = duk_safe_call(ctx, eventloop_run, 0 , 1 );
-			if (rc != 0) {
+			if (rc != 0){
 				DKINFO("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
 			}
 			duk_pop(ctx);

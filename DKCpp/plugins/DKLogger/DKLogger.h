@@ -163,7 +163,7 @@ bool Trace();
 void getTemplateArgs(std::ostringstream& out);
 
 template <typename A, typename... Args>
-void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args) {
+void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args){
 	int arg_count = sizeof...(Args);
 	std::ostringstream check_str;
 	check_str << arg1;
@@ -177,7 +177,7 @@ void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args) {
 }
 
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
+void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args){
 	if(log_show.empty() && !log_debug)
 		return;
 	int arg_count = sizeof...(Args);

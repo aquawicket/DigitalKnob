@@ -68,7 +68,7 @@ public class DK extends Activity
 		OpenActivity("SplashActivity");
 
 		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
+		handler.postDelayed(new Runnable(){
 			@Override
 			public void run(){
 				copyAssets();
@@ -83,7 +83,7 @@ public class DK extends Activity
 				
 				//This gives DK time to register functions for Webview
 				Handler handler2 = new Handler();
-				handler2.postDelayed(new Runnable() {
+				handler2.postDelayed(new Runnable(){
 					@Override
 					public void run(){
 						//TODO: maybe we can check if the plugins is available - DKAvailable(data)

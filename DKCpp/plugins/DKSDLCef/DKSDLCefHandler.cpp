@@ -66,18 +66,18 @@ void SourceCallback::Visit(const CefString& string){
 
 
 
-DKSDLCefHandler::DKSDLCefHandler(): is_closing_(false) {
+DKSDLCefHandler::DKSDLCefHandler(): is_closing_(false){
 	DKDEBUGFUNC();
 	DCHECK(!g_instance);
 	g_instance = this;
 }
 
-DKSDLCefHandler::~DKSDLCefHandler() {
+DKSDLCefHandler::~DKSDLCefHandler(){
 	DKDEBUGFUNC();
 	g_instance = NULL;
 }
 
-DKSDLCefHandler* DKSDLCefHandler::GetInstance() {
+DKSDLCefHandler* DKSDLCefHandler::GetInstance(){
 	DKDEBUGFUNC();
 	return g_instance;
 }
@@ -98,7 +98,7 @@ void DKSDLCefHandler::CloseAllBrowsers(bool force_close){
 		(*it)->GetHost()->CloseBrowser(force_close);
 }
 
-bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser) {
+bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser){
 	DKDEBUGFUNC(browser);
 	CEF_REQUIRE_UI_THREAD();
 
@@ -147,8 +147,8 @@ void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser){
 	// Remove from the list of existing browsers.
 	/*
 	BrowserList::iterator bit = browser_list_.begin();
-	for (; bit != browser_list_.end(); ++bit) {
-		if ((*bit)->IsSame(browser)) {
+	for (; bit != browser_list_.end(); ++bit){
+		if ((*bit)->IsSame(browser)){
 			browser_list_.erase(bit);
 			break;
 		}
@@ -171,7 +171,7 @@ void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser){
 	cef_texture.push_back(NULL);
 	
 	dkCef->current_browser = browser;
-	if (!dkCef->dkBrowsers.size()) {
+	if (!dkCef->dkBrowsers.size()){
 		DKERROR("DKSDLCefHandler::OnAfterCreated(): !dkCef->dkBrowsers.size()\n");
 		return;
 	}
@@ -349,7 +349,7 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 		SDL_SetTextureBlendMode(cef_texture[n], SDL_BLENDMODE_BLEND);
 		unsigned char* texture_data;
 		int texture_pitch;
-		if (SDL_LockTexture(cef_texture[n], NULL, (void**)&texture_data, &texture_pitch) != 0) {
+		if (SDL_LockTexture(cef_texture[n], NULL, (void**)&texture_data, &texture_pitch) != 0){
 			DKERROR("SDL_LockTexture(cef_texture[n]...) failed\n");
 			return;
 		}
@@ -376,7 +376,7 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 	}
 	*/
 	/*
-	if(cef_texture[n]) {
+	if(cef_texture[n]){
 		SDL_SetRenderTarget(dkSdlWindow->renderer, cef_texture[n]);
 		SDL_SetRenderDrawColor(dkSdlWindow->renderer, 255, 255, 255, 255);
 		SDL_RenderFillRect(dkSdlWindow->renderer, NULL);

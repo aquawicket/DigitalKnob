@@ -73,7 +73,7 @@ public:
 	~DKRmlGuiNode();
 	virtual bool handle(const osgGA::GUIEventAdapter& ea, const osg::NodePath& np, osgGA::GUIActionAdapter& aa);
     
-    Rml::Context* getContext() { return _context; } // get libRml context of this gui
+    Rml::Context* getContext(){ return _context; } // get libRml context of this gui
     virtual void traverse(osg::NodeVisitor& nv); // traversal handler for injecting time into libRml
     Rml::Input::KeyIdentifier GetKeyCode(int osgkey); //transform osg key to libRml key
     int GetKeyModifiers(int osgModKeyMask); // transform key modifiers from osg to libRml

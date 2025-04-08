@@ -2,7 +2,7 @@
 //# dk_exit(msg)
 //#
 //#
-dk_exit = function dk_exit_f() {
+dk_exit = function dk_exit_f(){
 	console.log("dk_exit()");
 	die();
 }
@@ -12,7 +12,7 @@ dk_exit = function dk_exit_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	dk_exit();

@@ -148,7 +148,7 @@ public:
 		return true;
 	}
 	
-	static void onevent(DKEvent* event) {
+	static void onevent(DKEvent* event){
 		DKDEBUGFUNC(event);
 		
 		// get the globally stored js callback function

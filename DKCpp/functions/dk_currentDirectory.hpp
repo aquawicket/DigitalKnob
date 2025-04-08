@@ -10,7 +10,7 @@
 //#
 #include <filesystem>
 #include <iostream>
-int dk_currentDirectory(std::string& cwd) {
+int dk_currentDirectory(std::string& cwd){
 	//dk_debugFunc();
 	
 	cwd = std::filesystem::current_path().string();

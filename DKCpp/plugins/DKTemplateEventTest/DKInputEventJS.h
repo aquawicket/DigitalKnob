@@ -128,7 +128,7 @@ public:
 		return true;
 	}
 	
-	static bool onInputEvent(DKInputEvent* event) {
+	static bool onInputEvent(DKInputEvent* event){
 		DKDEBUGFUNC(event);
 		DKINFO("onInputEvent("+event->type+") \n");
 		

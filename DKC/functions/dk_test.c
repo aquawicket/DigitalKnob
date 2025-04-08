@@ -6,7 +6,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 	
 	for(int n=0; n<argc; ++n){
 		dk_echo("main(%d, %s)\n", n, argv[n]);

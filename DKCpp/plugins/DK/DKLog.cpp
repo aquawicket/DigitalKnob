@@ -167,7 +167,7 @@ void signal_handler(int signal){
 
 // https://stackoverflow.com/a/9371717/688352  - The command is slow on windows, read this
 bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const unsigned short color_override/*, const bool rtnval*/){
-	if (!DKUtil::InMainThread()) {
+	if (!DKUtil::InMainThread()){
 		if (lvl <= DK_ERROR)
 			return false;
 		return true;
@@ -214,7 +214,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		if (log_warnings == false && lvl == DK_WARN)   { return true; }
 		if (log_info == false && lvl == DK_INFO)       { return true; }
 		if (log_debug == false && lvl == DK_DEBUG)     { return true; }
-		if (log_verbose == false && lvl == DK_VERBOSE) { return true; }
+		if (log_verbose == false && lvl == DK_VERBOSE){ return true; }
 	}
 
     //DKString out_string;
@@ -254,7 +254,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 			if (lvl == DK_WARN)    { color = DKWARN_COLOR; }
 			if (lvl == DK_INFO)    { color = DKINFO_COLOR; }
 			if (lvl == DK_DEBUG)   { color = DKDEBUG_COLOR; }
-			if (lvl == DK_VERBOSE) { color = DKVERBOSE_COLOR; }
+			if (lvl == DK_VERBOSE){ color = DKVERBOSE_COLOR; }
 		}
 		else {
 			color = color_override;
@@ -265,7 +265,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 #	elif !LINUX
 		char color[10];
 		/*
-		if(lvl == DK_ASSERT) { strcpy(color, (char*)DKASSERT_COLOR); }
+		if(lvl == DK_ASSERT){ strcpy(color, (char*)DKASSERT_COLOR); }
 		if(lvl == DK_FATAL)  { strcpy(color, (char*)DKFATAL_COLOR); }
 		if(lvl == DK_ERROR)  { strcpy(color, (char*)DKERROR_COLOR); }
 		if(lvl == DK_WARN)   { strcpy(color, (char*)DKWARN_COLOR); }
@@ -280,19 +280,19 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	
 	//File output (log.txt)	
 	if(log_file){
-		if(DKFile::local_assets.empty()) {	// no assets path available yet
+		if(DKFile::local_assets.empty()){	// no assets path available yet
 			output_buffer += out_stream.str();	// save the output to a buffer until we have an assets path
 		}
 		else {	// assets path is available
 			std::ofstream file_log;
-			if(!output_buffer.empty()) { // we have a buffer to dump into the file first
+			if(!output_buffer.empty()){ // we have a buffer to dump into the file first
 				//clear the log file
 				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::trunc);
 				file_log.close();
 				
 				// dump the buffer into the file
 				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
-				if(file_log.is_open()) {
+				if(file_log.is_open()){
 					file_log << output_buffer;
 					file_log.close();
 					output_buffer.clear();

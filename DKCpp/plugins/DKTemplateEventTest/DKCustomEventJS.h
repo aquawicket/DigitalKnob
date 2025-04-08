@@ -94,7 +94,7 @@ public:
 		return true;
 	}
 	
-	static bool onCustomEvent(DKCustomEvent* event) {
+	static bool onCustomEvent(DKCustomEvent* event){
 		DKDEBUGFUNC(event);
 		DKINFO("DKCustomEventJS::onCustomEvent("+event->type+") \n");
 		

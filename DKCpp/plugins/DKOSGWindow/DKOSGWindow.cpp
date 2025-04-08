@@ -485,7 +485,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
     return false; //alow event to continue
 }
 
-bool DKOSGWindow::TestInt(const void* input, void* output) {
+bool DKOSGWindow::TestInt(const void* input, void* output){
     DKDEBUGFUNC(input, output);
     int in = *(int*)input;
     int out = in;
@@ -493,7 +493,7 @@ bool DKOSGWindow::TestInt(const void* input, void* output) {
     return true;
 }
 
-bool DKOSGWindow::TestString(const void* input, void* output) {
+bool DKOSGWindow::TestString(const void* input, void* output){
     DKDEBUGFUNC(input, output);
     std::string in = *(std::string*)input;
     std::string out = in;
@@ -501,7 +501,7 @@ bool DKOSGWindow::TestString(const void* input, void* output) {
     return true;
 }
 
-bool DKOSGWindow::TestReturnInt(const void* input, void* output) {
+bool DKOSGWindow::TestReturnInt(const void* input, void* output){
     DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     int var = 1234;
@@ -509,7 +509,7 @@ bool DKOSGWindow::TestReturnInt(const void* input, void* output) {
     return true;
 }
 
-bool DKOSGWindow::TestReturnString(const void* input, void* output) {
+bool DKOSGWindow::TestReturnString(const void* input, void* output){
     DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     std::string var = "Return test";

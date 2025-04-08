@@ -17,7 +17,7 @@ dk.xconsole = Object()
 // If you use dk.xconsolelog, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
 
-DKConsole.prototype.setXConsole = function DKConsole_setXConsole() {
+DKConsole.prototype.setXConsole = function DKConsole_setXConsole(){
     dk.xconsole.assert = console.assert;
     dk.xconsole.clear = console.clear;
     dk.xconsole.context = console.context;
@@ -44,111 +44,111 @@ DKConsole.prototype.setXConsole = function DKConsole_setXConsole() {
     //dk.xconsole.warn = console.warn;
     dk.xconsole.on = true;
 
-    console.assert = function console_assert() {
+    console.assert = function console_assert(){
         dk.xconsole.on && dk.xconsole.assert.apply(this, Array.prototype.slice.call(arguments));
         dk.console.assert && dk.console.assert.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.clear = function console_clear() {
+    console.clear = function console_clear(){
         dk.xconsole.on && dk.xconsole.clear.apply(this, Array.prototype.slice.call(arguments));
         dk.console.clear && dk.console.clear.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.context = function console_context() {
+    console.context = function console_context(){
         dk.xconsole.on && dk.xconsole.context.apply(this, Array.prototype.slice.call(arguments));
         dk.console.context && dk.console.context.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.count = function console_count() {
+    console.count = function console_count(){
         dk.xconsole.on && dk.xconsole.count.apply(this, Array.prototype.slice.call(arguments));
         dk.console.count && dk.console.count.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.countReset = function console_countReset() {
+    console.countReset = function console_countReset(){
         dk.xconsole.on && dk.xconsole.countReset.apply(this, Array.prototype.slice.call(arguments));
         dk.console.countReset && dk.console.countReset.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.debug = function console_debug() {
+    console.debug = function console_debug(){
         dk.xconsole.on && dk.xconsole.debug.apply(this, Array.prototype.slice.call(arguments));
         dk.console.debug && dk.console.debug.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.dir = function console_dir() {
+    console.dir = function console_dir(){
         dk.xconsole.on && dk.xconsole.dir.apply(this, Array.prototype.slice.call(arguments));
         dk.console.dir && dk.console.dir.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.dirxml = function console_dirxml() {
+    console.dirxml = function console_dirxml(){
         dk.xconsole.on && dk.xconsole.dirxml.apply(this, Array.prototype.slice.call(arguments));
         dk.console.dirxml && dk.console.dirxml.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.error = function console_error() {
+    console.error = function console_error(){
         dk.xconsole.on && dk.xconsole.error.apply(this, Array.prototype.slice.call(arguments));
         dk.console.error && dk.console.error.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.group = function console_group() {
+    console.group = function console_group(){
         dk.xconsole.on && dk.xconsole.group.apply(this, Array.prototype.slice.call(arguments));
         dk.console.group && dk.console.group.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.groupCollapsed = function console_groupCollapsed() {
+    console.groupCollapsed = function console_groupCollapsed(){
         dk.xconsole.on && dk.xconsole.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
         dk.console.groupCollapsed && dk.console.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.groupEnd = function console_groupEnd() {
+    console.groupEnd = function console_groupEnd(){
         dk.xconsole.on && dk.xconsole.groupEnd.apply(this, Array.prototype.slice.call(arguments));
         dk.console.groupEnd && dk.console.groupEnd.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.info = function console_info() {
+    console.info = function console_info(){
         dk.xconsole.on && dk.xconsole.info.apply(this, Array.prototype.slice.call(arguments));
         dk.console.info && dk.console.info.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.log = function console_log() {
+    console.log = function console_log(){
         dk.xconsole.on && dk.xconsole.info.apply(this, Array.prototype.slice.call(arguments));
         dk.console.log && dk.console.info.apply(this, Array.prototype.slice.call(arguments));
     }
     //console.memory;
-    console.profile = function console_profile() {
+    console.profile = function console_profile(){
         dk.xconsole.on && dk.xconsole.profile.apply(this, Array.prototype.slice.call(arguments));
         dk.console.profile && dk.console.profile.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.profileEnd = function console_profileEnd() {
+    console.profileEnd = function console_profileEnd(){
         dk.xconsole.on && dk.xconsole.profileEnd.apply(this, Array.prototype.slice.call(arguments));
         dk.console.profileEnd && dk.console.profileEnd.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.table = function console_table() {
+    console.table = function console_table(){
         dk.xconsole.on && dk.xconsole.table.apply(this, Array.prototype.slice.call(arguments));
         dk.console.table && dk.console.table.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.time = function console_time() {
+    console.time = function console_time(){
         dk.xconsole.on && dk.xconsole.time.apply(this, Array.prototype.slice.call(arguments));
         dk.console.time && dk.console.time.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.timeEnd = function console_timeEnd() {
+    console.timeEnd = function console_timeEnd(){
         dk.xconsole.on && dk.xconsole.timeEnd.apply(this, Array.prototype.slice.call(arguments));
         dk.console.timeEnd && dk.console.timeEnd.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.timeLog = function console_timeLog() {
+    console.timeLog = function console_timeLog(){
         dk.xconsole.on && dk.xconsole.timeLog.apply(this, Array.prototype.slice.call(arguments));
         dk.console.timeLog && dk.console.timeLog.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.timeStamp = function console_timeStamp() {
+    console.timeStamp = function console_timeStamp(){
         dk.xconsole.on && dk.xconsole.timeStamp.apply(this, Array.prototype.slice.call(arguments));
         dk.console.timeStamp && dk.console.timeStamp.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.trace = function console_trace() {
+    console.trace = function console_trace(){
         dk.xconsole.on && dk.xconsole.trace.apply(this, Array.prototype.slice.call(arguments));
         dk.console.trace && dk.console.trace.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.warn = function console_warn() {
+    console.warn = function console_warn(){
         dk.xconsole.on && dk.xconsole.warn.apply(this, Array.prototype.slice.call(arguments));
         dk.console.warn && dk.console.warn.apply(this, Array.prototype.slice.call(arguments));
     }
 }
 
-DKConsole.prototype.init = function DKConsole_init() {
+DKConsole.prototype.init = function DKConsole_init(){
 	console.log("DKConsole.prototype.init")
     dk.create("DKGui/DKConsole.css");
 }
 
-DKConsole.prototype.end = function DKConsole_end() {
+DKConsole.prototype.end = function DKConsole_end(){
     dk.close("DKGui/DKConsole.css");
 }
 
-DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left, right, width, height) {
+DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left, right, width, height){
 											
     dk.console.limit = 200;
 
@@ -169,11 +169,11 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 				width: width,
 				height: height
 			},
-			oncontextmenu: function container_oncontextmenu(event) {
+			oncontextmenu: function container_oncontextmenu(event){
 				event.preventDefault();
-				DKPlugin("DKGui/DKMenu.js", function(DKClass) {
+				DKPlugin("DKGui/DKMenu.js", function(DKClass){
 					// const dkmenu = DKClass.prototype.create();
-					dkmenu.addItem("Clear console", function DKMenu_Clear() {
+					dkmenu.addItem("Clear console", function DKMenu_Clear(){
 						dk.console.clear();
 					});
 				});
@@ -193,11 +193,11 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 		dk.console.container.style.right = right
 		dk.console.container.style.width = width
 		dk.console.container.style.height = height
-		dk.console.container.oncontextmenu = function container_oncontextmenu(event) {
+		dk.console.container.oncontextmenu = function container_oncontextmenu(event){
 			event.preventDefault();
-			DKPlugin("DKGui/DKMenu.js", function(DKClass) {
+			DKPlugin("DKGui/DKMenu.js", function(DKClass){
 				const dkmenu = DKClass.prototype.create();
-				dkmenu.addItem("Clear console", function DKMenu_Clear() {
+				dkmenu.addItem("Clear console", function DKMenu_Clear(){
 						dk.console.clear();
 				});
 			});
@@ -280,9 +280,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 	if(USE_CSS){
 		dk.console.command = dk.gui.createTag("input", dk.console.commandDiv, {
 			type: "text",
-			onkeydown: function command_onkeydown(event) {
-				if (event.code === "Enter") {
-					if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
+			onkeydown: function command_onkeydown(event){
+				if (event.code === "Enter"){
+					if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls"){
 						dk.console.clear();
 						event.currentTarget.value = "";
 						return;
@@ -290,7 +290,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 					//console.debug("RUN Javascript -> " + event.currentTarget.value);
 					try {
 						eval(event.currentTarget.value);
-					} catch (x) {
+					} catch (x){
 						console.error("eval failed");
 					}
 					event.currentTarget.value = "";
@@ -310,9 +310,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 		dk.console.command.style.backgroundColor = "rgba(0,0,0,0)"
 		dk.console.command.style.borderColor = "rgba(0,0,0,0)"
 		dk.console.command.style.color = "white"
-		dk.console.command.onkeydown = function command_onkeydown(event) {
-			if (event.code === "Enter") {
-				if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
+		dk.console.command.onkeydown = function command_onkeydown(event){
+			if (event.code === "Enter"){
+				if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls"){
 					dk.console.clear();
 					event.currentTarget.value = "";
 					return;
@@ -320,7 +320,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 				//console.debug("RUN Javascript -> " + event.currentTarget.value);
 				try {
 					eval(event.currentTarget.value);
-				} catch (x) {
+				} catch (x){
 					console.error("eval failed");
 				}
 				event.currentTarget.value = "";
@@ -335,8 +335,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 
     //FIXME: initiating before dk.console.commandDiv
     /*
-    dk.console.logDiv.onclick = function() {
-        setTimeout(function() {
+    dk.console.logDiv.onclick = function(){
+        setTimeout(function(){
             dk.console.command.focus();
         }, 100);
     }
@@ -362,13 +362,13 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 	}
 
 
-    function _toArray(arr) {
+    function _toArray(arr){
         return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
     }
-    function _nonIterableRest() {
+    function _nonIterableRest(){
         throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
     }
-    function _unsupportedIterableToArray(o, minLen) {
+    function _unsupportedIterableToArray(o, minLen){
         if (!o)
             return;
         if (typeof o === "string")
@@ -381,7 +381,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
             return _arrayLikeToArray(o, minLen);
     }
-    function _arrayLikeToArray(arr, len) {
+    function _arrayLikeToArray(arr, len){
         if (len == null || len > arr.length)
             len = arr.length;
         for (var i = 0, arr2 = new Array(len); i < len; i++){
@@ -389,16 +389,16 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 		}
         return arr2;
     }
-    function _iterableToArray(iter) {
+    function _iterableToArray(iter){
         if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
             return Array.from(iter);
     }
-    function _arrayWithHoles(arr) {
+    function _arrayWithHoles(arr){
         if (Array.isArray(arr))
             return arr;
     }
     // https://console.spec.whatwg.org/#logger
-    DKConsole.prototype.Logger = function DKConsole_Logger(logLevel, args) {
+    DKConsole.prototype.Logger = function DKConsole_Logger(logLevel, args){
         if (!args)
             return;
         //const [first,...rest] = args;
@@ -406,7 +406,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
           , first = _args[0]
           , rest = _args.slice(1);
 
-        if (!rest) {
+        if (!rest){
             dk.console.Printer(legLevel, first);
             return;
         }
@@ -421,7 +421,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#formatter
-    DKConsole.prototype.Formatter = function DKConsole_Formatter(args) {
+    DKConsole.prototype.Formatter = function DKConsole_Formatter(args){
         if (!args.length)
             return;
         var target = args[0];
@@ -435,26 +435,26 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         var converted = undefined;
         if (specifier === "%s")
             converted = current.toString();
-        if (specifier === "%d" || specifier === "%i") {
+        if (specifier === "%d" || specifier === "%i"){
             if (typeof current === "symbol")
                 converted = NaN;
             else
                 converted = parseInt(current, 10);
         }
-        if (specifier === "%f") {
+        if (specifier === "%f"){
             if (typeof current === "symbol")
                 converted = NaN;
             else
                 converted = parseFloat(current, 10);
         }
         // 4. If specifier is %o, optionally let converted be current with optimally useful formatting applied.
-        if (specifier === "%o") {// TODO
+        if (specifier === "%o"){// TODO
         }
         // 5. If specifier is %O, optionally let converted be current with generic JavaScript object formatting applied.
-        if (specifier === "%O") {// TODO
+        if (specifier === "%O"){// TODO
         }
         // 6. TODO: process %c
-        if (specifier === "%c") {
+        if (specifier === "%c"){
             if (typeof current === "symbol")
                 converted = NaN;
             if (typeof current === "undefined")
@@ -467,7 +467,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         const result = [];
         result.push(target);
         var n = 2;
-        while (args[n]) {
+        while (args[n]){
             result.push(args[n]);
             n++;
         }
@@ -480,7 +480,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#printer
-    DKConsole.prototype.Printer = function DKConsole_Printer(logLevel, args) {
+    DKConsole.prototype.Printer = function DKConsole_Printer(logLevel, args){
         //const _args = dk.console.ColorChromeConsole(arguments);
         if ((dk.console.logDiv.scrollHeight - dk.console.logDiv.scrollTop) < (dk.console.logDiv.offsetHeight + 1))
             dk.console.logDiv.scroll = true;
@@ -506,7 +506,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 			msgDiv.style.backgroundColor = "rgb(36,36,36)"   //+++addded
 			msgDiv.style.borderColor = "rgb(58,58,58)"       //+++addded
 		}
-        if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
+        if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup){
             msgDiv.setAttribute("group", dk.console.currentGroup.id);
             msgDiv.style.display = dk.console.currentGroup.display;
         }
@@ -546,11 +546,11 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 		
         //If the message is the same as the last, just increase a count next to the original.
         const lastMsgDiv = dk.console.logDiv.lastChild.previousSibling;
-        if (lastMsgDiv) {
+        if (lastMsgDiv){
             const lastMsgSpan = lastMsgDiv.firstChild.nextSibling;
-            if ((arguments[1] == lastMsgSpan.innerText) || (arguments[1].includes && arguments[1].includes(lastMsgSpan.innerText))) {
+            if ((arguments[1] == lastMsgSpan.innerText) || (arguments[1].includes && arguments[1].includes(lastMsgSpan.innerText))){
                 const lastMsgIcon = lastMsgDiv.firstChild;
-                if (!lastMsgIcon.childElementCount) {
+                if (!lastMsgIcon.childElementCount){
 					
 					
 					
@@ -609,10 +609,10 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             }
         }
 
-        if (arguments[1] && arguments[1].includes && arguments[1].includes("<anonymous>")) {
+        if (arguments[1] && arguments[1].includes && arguments[1].includes("<anonymous>")){
             arguments[1] = arguments[1].replace("<anonymous>", "&lt;anonymous&gt;");
         }
-        if (logLevel === "group" || logLevel === "groupCollapsed") {
+        if (logLevel === "group" || logLevel === "groupCollapsed"){
             const group = arguments[1];
             if (arguments.length === 3)
                 logLevel = arguments[2][1];
@@ -640,12 +640,12 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 			}
 			
 			
-            if (group.display === "none") {
+            if (group.display === "none"){
                 groupArrow.setAttribute("src", "DKGui/groupArrow1.png");
             }
             dk.gui.createTag("a", msgSpan, {}).innerHTML = group.label;
-            msgDiv.onclick = function() {
-                if (group.display === "block") {
+            msgDiv.onclick = function(){
+                if (group.display === "block"){
                     groupArrow.setAttribute("src", "DKGui/groupArrow1.png");
                     group.display = "none";
                 } else {
@@ -662,7 +662,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             msgSpan.innerHTML = arguments[1];
         }
 
-        if (logLevel === "error") {
+        if (logLevel === "error"){
 			msgDiv.setAttribute("dk_console", "msgDivError");
 			msgSpan.setAttribute("dk_console", "msgSpanError");
 			//## NO_CSS ##
@@ -673,7 +673,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 				msgSpan.style.color = "rgb(255,128,128)"
 			}
         }
-        if (logLevel === "warn") {
+        if (logLevel === "warn"){
             msgDiv.setAttribute("dk_console", "msgDivWarn");
 			msgSpan.setAttribute("dk_console", "msgSpanWarn");
 			//## NO_CSS ##
@@ -683,7 +683,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 				msgSpan.style.color = "rgb(255,221,158)"
 			}
         }
-        if (logLevel === "debug") {
+        if (logLevel === "debug"){
             msgDiv.setAttribute("dk_console", "msgDivDebug");
 			msgSpan.setAttribute("dk_console", "msgSpanDebug");
 			//## NO_CSS ##
@@ -693,7 +693,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 				msgSpan.style.color = "rgb(77,136,255)"
 			}
         }
-        if (logLevel === "green") {
+        if (logLevel === "green"){
             msgDiv.setAttribute("dk_console", "msgDivGreen");
 			msgSpan.setAttribute("dk_console", "msgSpanGreen");
 			//## NO_CSS ##
@@ -712,7 +712,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         if (dk.console.logDiv.childElementCount > dk.console.limit)
             dk.console.logDiv.removeChild(dk.console.logDiv.firstChild);
 		
-		setTimeout(function() {
+		setTimeout(function(){
 			dk.console.logDiv.scrollTop = (dk.console.logDiv.scrollHeight - dk.console.logDiv.style.height);
 		}, 0);
 
@@ -720,8 +720,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#assert
-    DKConsole.prototype.assert = function DKConsole_assert(condition) {
-        for (var _len = arguments.length, data = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    DKConsole.prototype.assert = function DKConsole_assert(condition){
+        for (var _len = arguments.length, data = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++){
             data[_key - 1] = arguments[_key];
         }
 
@@ -733,7 +733,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         var message = "Assertion failed";
         // 3. If data is empty, append message to data.
 
-        if (!data) {
+        if (!data){
             data = message;
         } else {
             // 4. Otherwise: 
@@ -754,7 +754,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#clear
-    DKConsole.prototype.clear = function DKConsole_clear() {
+    DKConsole.prototype.clear = function DKConsole_clear(){
         // 1. Empty the appropriate group stack.
         dk.console.groupStack = [];
         // 2. If possible for the environment, clear the console. (Otherwise, do nothing.)
@@ -766,7 +766,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     //dk.console.context;
 
     // https://console.spec.whatwg.org/#count
-    DKConsole.prototype.count = function DKConsole_count(label) {
+    DKConsole.prototype.count = function DKConsole_count(label){
         !label && (label = "default");
         // 1. Let map be the associated count map.
         !dk.console.map && (dk.console.map = new Object);
@@ -783,12 +783,12 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#countReset
-    DKConsole.prototype.countReset = function DKConsole_countReset(label) {
+    DKConsole.prototype.countReset = function DKConsole_countReset(label){
         !label && (label = "default");
         // 1. Let map be the associated count map.
         !dk.console.map && (dk.console.map = new Object);
         // 2. If map[label] exists, set map[label] to 0.
-        if (dk.console.map[label]) {
+        if (dk.console.map[label]){
             dk.console.map[label] = 0;
         }// 3. Otherwise:
         else {
@@ -799,8 +799,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#debug
-    DKConsole.prototype.debug = function DKConsole_debug() {
-        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++) {
+    DKConsole.prototype.debug = function DKConsole_debug(){
+        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++){
             data[_key] = arguments[_key];
         }
 
@@ -808,12 +808,12 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#dir
-    DKConsole.prototype.dir = function DKConsole_dir(item, options) {// 1. Let object be item with generic JavaScript object formatting applied.
+    DKConsole.prototype.dir = function DKConsole_dir(item, options){// 1. Let object be item with generic JavaScript object formatting applied.
     // 2. Perform Printer("dir", object, options).
     }
 
     // https://console.spec.whatwg.org/#dirxml
-    DKConsole.prototype.dirxml = function DKConsole_dirxml() {// 1. Let finalList be a new list, initially empty.
+    DKConsole.prototype.dirxml = function DKConsole_dirxml(){// 1. Let finalList be a new list, initially empty.
     // 2. For each item of data:
     //     1. Let converted be a DOM tree representation of item if possible; otherwise let converted be item with optimally useful formatting applied.
     //     2. Append converted to finalList.
@@ -821,8 +821,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#error
-    DKConsole.prototype.error = function DKConsole_error() {
-        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++) {
+    DKConsole.prototype.error = function DKConsole_error(){
+        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++){
             data[_key] = arguments[_key];
         }
         if (!data)
@@ -837,9 +837,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     dk.console.groupStack = [];
 
     // https://console.spec.whatwg.org/#group
-    DKConsole.prototype.group = function DKConsole_group() {
+    DKConsole.prototype.group = function DKConsole_group(){
         var n = 0;
-        while (dk.console.logDiv.querySelector("[group='" + n + "']")) {
+        while (dk.console.logDiv.querySelector("[group='" + n + "']")){
             n++;
         }
         // 1. Let group be a new group.
@@ -849,7 +849,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             id: n
         };
         // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
-        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++) {
+        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++){
             data[_key] = arguments[_key];
         }
         if (data)
@@ -864,9 +864,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#groupcollapsed
-    DKConsole.prototype.groupCollapsed = function DKConsole_groupCollapsed() {
+    DKConsole.prototype.groupCollapsed = function DKConsole_groupCollapsed(){
         var n = 0;
-        while (dk.console.logDiv.querySelector("[group='" + n + "']")) {
+        while (dk.console.logDiv.querySelector("[group='" + n + "']")){
             n++;
         }
         // 1. Let group be a new group.
@@ -876,7 +876,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             id: n
         };
         // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
-        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++) {
+        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++){
             data[_key] = arguments[_key];
         }
         if (data)
@@ -891,7 +891,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#groupend
-    DKConsole.prototype.groupEnd = function DKConsole_groupEnd() {
+    DKConsole.prototype.groupEnd = function DKConsole_groupEnd(){
         // Pop the last group from the group stack.
         dk.console.groupStack.pop();
         if (dk.console.groupStack.length)
@@ -901,16 +901,16 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#info
-    DKConsole.prototype.info = function DKConsole_info() {
-        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++) {
+    DKConsole.prototype.info = function DKConsole_info(){
+        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++){
             data[_key] = arguments[_key];
         }
         dk.console.Logger("info", data);
     }
 
     // https://console.spec.whatwg.org/#log
-    DKConsole.prototype.log = function DKConsole_log() {
-        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++) {
+    DKConsole.prototype.log = function DKConsole_log(){
+        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++){
             data[_key] = arguments[_key];
         }
         dk.console.Logger("log", data);
@@ -921,19 +921,19 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     //dk.console.profileEnd;
 
     // https://console.spec.whatwg.org/#table
-    DKConsole.prototype.table = function DKConsole_table(tabularData, properties) {// Try to construct a table with the columns of the properties of tabularData (or use properties) and rows of tabularData 
+    DKConsole.prototype.table = function DKConsole_table(tabularData, properties){// Try to construct a table with the columns of the properties of tabularData (or use properties) and rows of tabularData 
     // and log it with a logLevel of "log". Fall back to just logging the argument if it can be parsed as tabular.
     }
 
     // https://console.spec.whatwg.org/#time
-    DKConsole.prototype.time = function DKConsole_time(label) {
+    DKConsole.prototype.time = function DKConsole_time(label){
         !label && (label = "default");
         // 1. If the associated timer table contains an entry with key label, return, optionally reporting a warning to the console indicating that a timer with label label has already been started.
         // 2. Otherwise, set the value of the entry with key label in the associated timer table to the current time.
     }
 
     // https://console.spec.whatwg.org/#timeEnd
-    DKConsole.prototype.timeEnd = function DKConsole_timeEnd(label) {
+    DKConsole.prototype.timeEnd = function DKConsole_timeEnd(label){
         !label && (label = "default");
         // 1. Let timerTable be the associated timer table.
         // 2. Let startTime be timerTable[label].
@@ -944,7 +944,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#timeLog
-    DKConsole.prototype.timeLog = function DKConsole_timeLog(label) {
+    DKConsole.prototype.timeLog = function DKConsole_timeLog(label){
         !label && (label = "default");
         // 1. Let timerTable be the associated timer table.
         // 2. Let startTime be timerTable[label].
@@ -957,8 +957,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     //DKConsole.prototype.timeStamp;
 
     // https://console.spec.whatwg.org/#trace
-    DKConsole.prototype.trace = function DKConsole_trace() {
-        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++) {
+    DKConsole.prototype.trace = function DKConsole_trace(){
+        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++){
             data[_key] = arguments[_key];
         }
         // 1. Let trace be some implementation-specific, potentially-interactive representation of the callstack from where this function was called.
@@ -973,8 +973,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     // https://console.spec.whatwg.org/#warn
-    DKConsole.prototype.warn = function DKConsole_warn() {
-        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++) {
+    DKConsole.prototype.warn = function DKConsole_warn(){
+        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++){
             data[_key] = arguments[_key];
         }
         if (!data)
@@ -989,7 +989,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 	dk.console.record = dk.x.record
 	delete dk.x;
 	//restore the record of messages from the program beginning
-	for (var n = 0; n < dk.console.record.length; n++) {
+	for (var n = 0; n < dk.console.record.length; n++){
 		const lvl = Object.keys(dk.console.record[n])[0];
 		const msg = dk.console.record[n][lvl];
 		dk.console[lvl](msg);
@@ -999,16 +999,16 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     return dk.console.container;
 }
 
-DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
+DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args){
     var argArray = [];
-    if (args.length) {
+    if (args.length){
         const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
         const endTagRe = /<\/span>/gi;
         var reResultArray;
         if (typeof args[0].replace !== "function")
             return args;
         argArray.push(args[0].replace(startTagRe, '%c').replace(endTagRe, '%c'));
-        while (reResultArray = startTagRe.exec(args[0])) {
+        while (reResultArray = startTagRe.exec(args[0])){
             argArray.push(reResultArray[2]);
             argArray.push('');
         }
@@ -1021,7 +1021,7 @@ DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
 }
 
 /*
-DKConsole.prototype.ColorChromeConsole = function DKConsole_ColorChromeConsole(args) {
+DKConsole.prototype.ColorChromeConsole = function DKConsole_ColorChromeConsole(args){
     var argArray = [];
     argArray.push("%c " + args[0]);
     if (args[1] === "red")

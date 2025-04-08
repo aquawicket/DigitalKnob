@@ -12,7 +12,7 @@ class DKUIEvent : public DKEvent
 public:
 	////// Constructor //////
 	// [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
-	DKUIEvent(DKString _type, DKString _options) : DKEvent(_type, _options) {
+	DKUIEvent(DKString _type, DKString _options) : DKEvent(_type, _options){
 		
 		////// Instance properties //////
 		detail = 0;

@@ -26,9 +26,9 @@ function Query($query)
 		}
 		echo mysql_num_fields($result); //FIXME: not all query results have mysql_num_fields
 		echo ",";
-		while ($row = mysql_fetch_row($result)) {
+		while ($row = mysql_fetch_row($result)){
 		
-			for ($x = 0; $x < sizeof($row); $x++) {
+			for ($x = 0; $x < sizeof($row); $x++){
 				echo $row[$x];
 				echo ",";
 			} 

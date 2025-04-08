@@ -145,7 +145,7 @@ bool DKRml::End(){
 	return true;
 }
 
-bool DKRml::GetSourceCode(DKString& source_code) {
+bool DKRml::GetSourceCode(DKString& source_code){
 	DKDEBUGFUNC(source_code);
 	source_code = document->GetContext()->GetRootElement()->GetInnerRML();
 	DKINFO("######################## CODE FROM RmlUi #########################\n");
@@ -203,7 +203,7 @@ bool DKRml::LoadHtml(const DKString& html){
 	dkRmlConverter.HtmlToRml(html, rml);
 
 	//// Clear any document and load the rml into the document
-	if (document) {
+	if (document){
 		Rml::Factory::ClearStyleSheetCache();
 		document->Close();
 	}
@@ -233,7 +233,7 @@ bool DKRml::LoadHtml(const DKString& html){
 	document->GetOwnerDocument()->GetElementsByTagName(bodys, "body");
 	if (!bodys.empty()) 
 		body = bodys[0];
-	if (!head && !body) {
+	if (!head && !body){
 		document->GetOwnerDocument()->AppendChild(document->CreateElement("head"), true);
 		document->GetOwnerDocument()->AppendChild(document->CreateElement("body"), true);
 	}
@@ -245,7 +245,7 @@ bool DKRml::LoadHtml(const DKString& html){
 	DKString file = DKFile::local_assets + "DKRml/DKRml.css";
 	const Rml::StyleSheetContainer* doc_sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
-	if(doc_sheet) { 
+	if(doc_sheet){ 
 		//Combine the file_sheet and the doc_sheet into a new_sheet and load it back to the document
 		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = doc_sheet->CombineStyleSheetContainer(*file_sheet);
 		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
@@ -309,7 +309,7 @@ bool DKRml::LoadUrl(const DKString& url){
 			return DKERROR("Could not get html from url "+_url+"\n");
 	}
 #endif
-	if (!has(_url, "http://") && !has(_url, "https://")) {
+	if (!has(_url, "http://") && !has(_url, "https://")){
 		if(!DKFile::FileToString(_url, html))
 			return DKERROR("failed on "+_url+"\n");
 	}
@@ -368,17 +368,17 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	*/
 #if ANDROID
 	//Toggle Keyboard on text element click
-	if (type == "mousedown") {
+	if (type == "mousedown"){
 		if (same(currentElement->GetTagName(), "textarea") ||
-			same(currentElement->GetTagName(), "input")) {
+			same(currentElement->GetTagName(), "input")){
 			CallJavaFunction("toggleKeyboard", "");
 			return;
 		}
 	}
 	//Hide Keyboard on input Enter
-	if (type == "keydown" && currentElement->GetTagName() == "input") {
+	if (type == "keydown" && currentElement->GetTagName() == "input"){
 		int key = rmlEvent.GetParameter<int>("key_identifier", 0);
-		if (key == Rml::Input::KI_RETURN) { //Enter
+		if (key == Rml::Input::KI_RETURN){ //Enter
 			CallJavaFunction("toggleKeyboard", "");
 			return;
 		}
@@ -399,17 +399,17 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 		//	_type = "change";
 		
 		//// PROCESS ELEMENT EVENTS //////
-		if (same(ev->GetId(), currentElementAddress) && same(_type, type)) {
+		if (same(ev->GetId(), currentElementAddress) && same(_type, type)){
 			ev->data.clear();
 			ev->data.push_back(rmlEventAddress);
 			//ev->rEvent = &rmlEvent;
 			/*
 			//pass the value
-			if (same(type, "keydown") || same(type, "keyup")) {
+			if (same(type, "keydown") || same(type, "keyup")){
 				ev->data.clear();
 				ev->data.push_back(toString(rmlEvent.GetParameter<int>("key_identifier", 0)));
 			}
-			if (same(type, "mousedown") || same(type, "mouseup")) {
+			if (same(type, "mousedown") || same(type, "mouseup")){
 				ev->data.clear();
 				ev->data.push_back(toString(rmlEvent.GetParameter<int>("button", 0)));
 			}
@@ -425,7 +425,7 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 			// we need to find a way to stop propagation of the event, while allowing drag events.
 /*
 #ifdef DRAG_FIX
-			if (!same(type, "mousedown")) {
+			if (!same(type, "mousedown")){
 #endif
 				if (!same(type, "keydown")) 
 					rmlEvent.StopPropagation();
@@ -482,10 +482,10 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 	if(!document)
 		return DKERROR("document invalid");
 	Rml::Element* element;
-	if (same("window", elementAddress)) {
+	if (same("window", elementAddress)){
 		element = DKRml::Get()->document->GetContext()->GetRootElement();
 	}
-	else if (same("sdlwindow", elementAddress)) {
+	else if (same("sdlwindow", elementAddress)){
 		element = DKRml::Get()->document->GetContext()->GetRootElement();
 	}
 	else {
@@ -553,10 +553,10 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	return true;
 }
 
-Rml::Event* DKRml::addressToEvent(const DKString& address) {
+Rml::Event* DKRml::addressToEvent(const DKString& address){
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	Rml::Event* event;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos){
 		
 		DKERROR(address+" is invalid hex notation\n");
 		
@@ -575,21 +575,21 @@ Rml::Event* DKRml::addressToEvent(const DKString& address) {
 	ss << address.substr(2, address.size() - 2);
 	//int tmp(0);
 	std::uint64_t tmp;
-	if (!(ss >> std::hex >> tmp)) {
+	if (!(ss >> std::hex >> tmp)){
 		DKERROR(address+": invalid address\n");
 		return NULL;
 	}
 	event = reinterpret_cast<Rml::Event*>(tmp);
-	if (!event->GetCurrentElement()) {
+	if (!event->GetCurrentElement()){
 		DKERROR(address+": currentElement invalid\n");
 		return NULL;
 	}
 	return event;
 }
 
-DKString DKRml::eventToAddress(Rml::Event* event) {
+DKString DKRml::eventToAddress(Rml::Event* event){
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
-	if (!event) {
+	if (!event){
 		DKERROR("invalid event\n");
 		return "";
 	}
@@ -603,14 +603,14 @@ DKString DKRml::eventToAddress(Rml::Event* event) {
 	return address;
 }
 
-Rml::Element* DKRml::addressToElement(const DKString& address) {
+Rml::Element* DKRml::addressToElement(const DKString& address){
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	
 	//FIXME:  Error example (win_x86_64_mingw64_gcc)
 	//		0x0x23aefc8: the address is not a valid hex notation
 	//
 	Rml::Element* element = nullptr;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos) {
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos){
 		
 		DKERROR(address+": the address is not a valid hex notation\n");
 		
@@ -627,13 +627,13 @@ Rml::Element* DKRml::addressToElement(const DKString& address) {
 	std::stringstream ss;
 	ss << address.substr(2, address.size() - 2);
 	std::uint64_t tmp;
-	if (!(ss >> std::hex >> tmp)) {
+	if (!(ss >> std::hex >> tmp)){
 		DKERROR(address + ": invalid address\n");
 		return NULL;
 	}
 	element = reinterpret_cast<Rml::Element*>(tmp);
 	
-	if (!element) {
+	if (!element){
 		DKERROR("invalid element\n");
 		return NULL;
 	}
@@ -642,9 +642,9 @@ Rml::Element* DKRml::addressToElement(const DKString& address) {
 	return element;
 }
 
-DKString DKRml::elementToAddress(Rml::Element* element) {
+DKString DKRml::elementToAddress(Rml::Element* element){
 	//DKDEBUGFUNC(element);  //EXCESSIVE LOGGING
-	if (!element) {
+	if (!element){
 		DKERROR("invalid element\n");
 		return "";
 	}
@@ -656,7 +656,7 @@ DKString DKRml::elementToAddress(Rml::Element* element) {
 		address.insert(0, "0x");
 	}
 
-	if (same("0xDDDDDDDD", address)) {
+	if (same("0xDDDDDDDD", address)){
 		DKERROR("ss = 0xDDDDDDDD\n");
 		return "";
 	}
@@ -664,7 +664,7 @@ DKString DKRml::elementToAddress(Rml::Element* element) {
 }
 
 //TODO
-bool DKRml::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {
+bool DKRml::GetOuterHTML(Rml::Element* element, DKString& outerHtml){
 	DKDEBUGFUNC(element, outerHtml);
 	/*
 	if (!element)
@@ -686,7 +686,7 @@ bool DKRml::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {
 
 	DKStringArray ids;
 	GetElements(id, ids);
-	for (unsigned int i = 0; i < ids.size(); ++i) {
+	for (unsigned int i = 0; i < ids.size(); ++i){
 		BuildStyleString(ids[i], style);
 		xml.SetAttributes("//*[@id=\"" + ids[i] + "\"]", "style", style); //Update the style string
 		style = "";
@@ -701,7 +701,7 @@ bool DKRml::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {
 }
 
 //TODO
-bool DKRml::SetOuterHTML(Rml::Element* element, const DKString& outerHtml) {
+bool DKRml::SetOuterHTML(Rml::Element* element, const DKString& outerHtml){
 	DKDEBUGFUNC(element, outerHtml);
 	return DKERROR("not implemented\n");
 }

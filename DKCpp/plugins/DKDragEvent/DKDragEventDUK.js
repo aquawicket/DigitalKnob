@@ -5,7 +5,7 @@
 // [Exposed=Window]
 // interface DragEvent : MouseEvent {
 // constructor(DOMString type, optional DragEventInit eventInitDict = {});
-var DragEvent = function DragEvent(type, eventInitDict, address) {
+var DragEvent = function DragEvent(type, eventInitDict, address){
 	//console.log("DragEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)

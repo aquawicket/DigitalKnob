@@ -6,7 +6,7 @@ if(typeof dk_echo === "undefined"){ 		dk_source(DKJAVASCRIPT_DIR+"/functions/dk_
 //################################################################################
 //# dk_assertVar(expression)
 //#
-dk_assertVar = function dk_assertVar_f() {
+dk_assertVar = function dk_assertVar_f(){
 	//dk_debugFunc 0
 	
 	if(arguments[0]){ return }
@@ -22,7 +22,7 @@ dk_assertVar = function dk_assertVar_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0)
 
     dk_set(myVar string)

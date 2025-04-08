@@ -159,8 +159,8 @@ void dk_app_Init(){
 }
 
 #if EMSCRIPTEN
-EM_BOOL dk_app_EM_DoFrame(double time, void* userData) {
-	if (paused) {
+EM_BOOL dk_app_EM_DoFrame(double time, void* userData){
+	if (paused){
 		DKUtil_Sleep(100);
 		return EM_TRUE; // Return true to keep the loop running.
 	}
@@ -224,7 +224,7 @@ void dk_app_Exit(){
 #ifndef DKMAIN
 #define DKMAIN 1
 #include <stdio.h>
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 	
 	return dk_app_dk_app(argc, argv);
 }

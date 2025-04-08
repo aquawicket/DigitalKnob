@@ -5,15 +5,15 @@ function DKChart(){}
 dk.chart = DKPlugin(DKChart);
 
 
-DKChart.prototype.init = function DKChart_init() {
+DKChart.prototype.init = function DKChart_init(){
     //DKPlugin("https://momentjs.com/downloads/moment.min.js");
-    DKPlugin("DKChart/moment.min.js", function dk_create_callback() {
+    DKPlugin("DKChart/moment.min.js", function dk_create_callback(){
         //DKPlugin("https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js");
         DKPlugin("DKChart/chart.min.js");
     });
 }
 
-DKChart.prototype.create = function DKChart_create(parent, id, top, bottom, left, right, width, height) {
+DKChart.prototype.create = function DKChart_create(parent, id, top, bottom, left, right, width, height){
     const chartDiv = document.createElement("div");
     chartDiv.id = id;
     chartDiv.style.position = "absolute";
@@ -40,7 +40,7 @@ DKChart.prototype.create = function DKChart_create(parent, id, top, bottom, left
     chartDiv.appendChild(chartCanvas);
 
     //FIXME - do proper refreshing on resize    
-    dk.gui.addResizeHandler(chartCanvas, function dk_gui_addResizeHandler() {//console.debug("chartCanvas resized: x:"+chartCanvas.style.width+" y:"+chartCanvas.style.height);
+    dk.gui.addResizeHandler(chartCanvas, function dk_gui_addResizeHandler(){//console.debug("chartCanvas resized: x:"+chartCanvas.style.width+" y:"+chartCanvas.style.height);
     //chartCanvas.width = window.innerWidth;
     //chartCanvas.height = window.innerHeight;
     //chartCanvas.style.height = "100%";

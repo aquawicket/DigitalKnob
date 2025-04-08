@@ -15,7 +15,7 @@ if($_GET["query"]){
 <script type="text/javascript">
 //function LoadDKfacebook()
 //{
-	window.fbAsyncInit = function() {
+	window.fbAsyncInit = function(){
 		FB.init({
 			appId      : '1514766155465090',
 			cookie     : true,  // enable cookies to allow the server to access 
@@ -40,7 +40,7 @@ if($_GET["query"]){
 	};
 
 	// Load the SDK asynchronously
-	(function(d, s, id) {
+	(function(d, s, id){
 		var js, fjs = d.getElementsByTagName(s)[0];
 		if (d.getElementById(id)) return;
 		js = d.createElement(s); js.id = id;
@@ -61,7 +61,7 @@ function statusChangeCallback(response){
       // Logged into your app and Facebook.
       connected();
     }
-	else if (response.status === 'not_authorized') {
+	else if (response.status === 'not_authorized'){
       // The person is logged into Facebook, but not your app.
       document.getElementById('statusDKLogin').innerHTML = 'Please log ' +
         'into this app.';
@@ -78,17 +78,17 @@ function statusChangeCallback(response){
 // This function is called when someone finishes with the Login
 // Button.  See the onlogin handler attached to it in the sample
 // code below.
-function checkLoginState() {
-	FB.getLoginStatus(function(response) {
+function checkLoginState(){
+	FB.getLoginStatus(function(response){
 		statusChangeCallback(response);
     });
 }
   
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
-function connected() {
+function connected(){
     DKDebug('Facebook: Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
+    FB.api('/me', function(response){
       DKDebug('Successful login for: ' + response.name);
       document.getElementById('statusDKLogin').innerHTML =
         'Thanks for logging in, ' + response.name + '!';

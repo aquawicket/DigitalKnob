@@ -34,7 +34,7 @@
 #endif
 //#include "FileInterface.h"
 
-bool LoadGifAnimation(SDL_Renderer* renderer, const Rml::String& source, Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions) {
+bool LoadGifAnimation(SDL_Renderer* renderer, const Rml::String& source, Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions){
     size_t i;
     for (i = source.length() - 1; i > 0; i--){
         if (source[i] == '.')
@@ -47,10 +47,10 @@ bool LoadGifAnimation(SDL_Renderer* renderer, const Rml::String& source, Rml::Te
     GifData gif_data;        
 
     DKString _url = source;
-    if (has(_url, ":/")) { //could be http:// , https:// or C:/
+    if (has(_url, ":/")){ //could be http:// , https:// or C:/
         //absolute path
     }
-    else if (has(_url, "//")) { //could be //www.site.com/style.css or //site.com/style.css
+    else if (has(_url, "//")){ //could be //www.site.com/style.css or //site.com/style.css
         //_url = DKRml::Get()->protocol+":"+_url;
         return DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
     }
@@ -64,7 +64,7 @@ bool LoadGifAnimation(SDL_Renderer* renderer, const Rml::String& source, Rml::Te
     //	_url = DKRml::Get()->workingPath+_url;
     //return DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
 
-    if (has(_url, "://")) {
+    if (has(_url, "://")){
         #ifdef HAVE_DKCurl
             DKFile::MakeDir(DKFile::local_assets + "Cache");
             DKString filename;
@@ -85,7 +85,7 @@ bool LoadGifAnimation(SDL_Renderer* renderer, const Rml::String& source, Rml::Te
         return DKERROR("Couldn't load " + _url + ": " + SDL_GetError());
 
     gif_data.textures = (SDL_Texture**)SDL_calloc(gif_data.anim->count, sizeof(*gif_data.textures));
-    if (!gif_data.textures) {
+    if (!gif_data.textures){
         IMG_FreeAnimation(gif_data.anim);
         return DKERROR("Couldn't allocate textures\n");
     }
@@ -103,8 +103,8 @@ bool LoadGifAnimation(SDL_Renderer* renderer, const Rml::String& source, Rml::Te
     return true;
 }
 
-SDL_Texture* GetGifAnimation(const Rml::TextureHandle texture) {
-    if (gif_map.find(texture) != gif_map.end()) {
+SDL_Texture* GetGifAnimation(const Rml::TextureHandle texture){
+    if (gif_map.find(texture) != gif_map.end()){
         GifData* g = &gif_map[texture];
         SDL_Texture* sdl_texture = (SDL_Texture*)g->textures[g->current_frame];
         g->delay = g->anim->delays[g->current_frame];
@@ -112,7 +112,7 @@ SDL_Texture* GetGifAnimation(const Rml::TextureHandle texture) {
 
 		// FIXME: imprecise timer arithmetic here. Causing animations to drop to half speed
 		// on slower systems. The animation should not slow, but appear choppy at the same relative speed.
-        if (g->currentTime > g->lastTime + g->delay) {
+        if (g->currentTime > g->lastTime + g->delay){
             g->lastTime = g->currentTime;
             g->current_frame = (g->current_frame + 1) % g->anim->count;
         }

@@ -10,7 +10,7 @@
 class TEST_FocusEvent //: public DKObjectT<TEST_FocusEvent>
 {
 public:
-	TEST_FocusEvent() {
+	TEST_FocusEvent(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_FocusEvent.h //////");
 		

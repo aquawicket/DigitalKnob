@@ -25,7 +25,7 @@ public:
 	}
 	
 	// [HTMLConstructor] constructor();
-	DKRmlHTMLElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKHTMLElement(), DKRmlElement(dkRmlEventListener, rmlElement) {
+	DKRmlHTMLElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKHTMLElement(), DKRmlElement(dkRmlEventListener, rmlElement){
 		DKDEBUGFUNC();
 		DKASSERT(dkRmlEventListener);
 		DKASSERT(rmlElement);

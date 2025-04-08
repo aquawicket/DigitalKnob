@@ -1,13 +1,13 @@
 "use strict";
 
 DKAudioPlayer.prototype = Object.create(DKPlugin.prototype);
-function DKAudioPlayer(identifier) {
+function DKAudioPlayer(identifier){
     return DKPlugin.call(this, identifier);
 }
 dk.audioplayer = new DKAudioPlayer("DKAudioPlayer");
 dk.audioplayer.file = "";
 
-dk.audioplayer.init = function dk_auudioplayer_init() {
+dk.audioplayer.init = function dk_auudioplayer_init(){
     dk.create("DKAudio");
     dk.create("DKAudio/DKAudioPlayer.html");
     window.addEventListener("timeupdate", dk.audioplayer.onevent);
@@ -19,7 +19,7 @@ dk.audioplayer.init = function dk_auudioplayer_init() {
     byId("DKAudioPlayer_volume").value = "128";
 }
 
-dk.audioplayer.end = function dk_audioplayer_end() {
+dk.audioplayer.end = function dk_audioplayer_end(){
     window.removeEventListener("timeupdate", dk.audioplayer.onevent);
     window.removeEventListener("ended", dk.audioplayer.onevent);
     byId("DKAudioPlayer_playpause").removeEventListener("click", dk.audioplayer.onevent);
@@ -29,40 +29,40 @@ dk.audioplayer.end = function dk_audioplayer_end() {
     dk.close("DKAudio/DKAudioPlayer.html");
 }
 
-dk.audioplayer.onevent = function dk_audioplayer_onevent(event) {
+dk.audioplayer.onevent = function dk_audioplayer_onevent(event){
     //console.log("dk.audioplayer.onevent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 
-    if (event.currentTarget.id === "DKAudioPlayer_playpause") {
+    if (event.currentTarget.id === "DKAudioPlayer_playpause"){
         dk.audioplayer.playpause();
     }
-    if (event.currentTarget.id === "DKAudioPlayer_position") {
+    if (event.currentTarget.id === "DKAudioPlayer_position"){
         dk.audioplayer.settime(byId("DKAudioPlayer_position").value);
     }
-    if (event.currentTarget.id === "DKAudioPlayer_speaker") {
+    if (event.currentTarget.id === "DKAudioPlayer_speaker"){
         dk.audioplayer.speaker();
     }
-    if (event.currentTarget.id === "DKAudioPlayer_volume") {
+    if (event.currentTarget.id === "DKAudioPlayer_volume"){
         var volume = byId("DKAudioPlayer_volume").value;
         dk.audio.setvolume(parseInt(volume));
         dk.audioplayer.updatevolume(parseInt(volume));
     }
-    if (event.type === "finnished") {
+    if (event.type === "finnished"){
         byId("DKAudioPlayer_playpause").src = "DKAudio/play.png";
     }
-    if (event.type === "timeupdate") {
+    if (event.type === "timeupdate"){
         dk.audioplayer.TimeUpdate();
     }
 }
 
-dk.audioplayer.open = function dk_audioplayer_open(file) {
+dk.audioplayer.open = function dk_audioplayer_open(file){
     dk.audioplayer.file = file;
     dk.audio.openMusic(file);
     byId("DKAudioPlayer_position").value = "0";
 }
 
-dk.audioplayer.playpause = function dk_audioplayer_playpause() {
+dk.audioplayer.playpause = function dk_audioplayer_playpause(){
     var src = byId("DKAudioPlayer_playpause").src;
-    if (src.indexOf("play.png") !== -1) {
+    if (src.indexOf("play.png") !== -1){
         byId("DKAudioPlayer_playpause").src = "DKAudio/pause.png";
         dk.audio.Resume(dk.audioplayer.file);
     } else {
@@ -71,13 +71,13 @@ dk.audioplayer.playpause = function dk_audioplayer_playpause() {
     }
 }
 
-dk.audioplayer.settime = function dk_audioplayer_settime(value) {
+dk.audioplayer.settime = function dk_audioplayer_settime(value){
     var time = (value * dk.audio.GetDuration() / 1000);
     console.log("time = " + time + "\n");
     dk.audio.SetTime(time);
 }
 
-dk.audioplayer.timeupdate = function dk_audioplayer_timeupdate() {
+dk.audioplayer.timeupdate = function dk_audioplayer_timeupdate(){
     var time = dk.audio.GetTime() / dk.audio.GetDuration() * 1000;
     byId("DKAudioPlayer_position").value = time;
 
@@ -88,9 +88,9 @@ dk.audioplayer.timeupdate = function dk_audioplayer_timeupdate() {
     byId("DKAudioPlayer_time").innerHTML = minute + second;
 }
 
-dk.audioplayer.speaker = function dk_audioplayer_speaker() {
+dk.audioplayer.speaker = function dk_audioplayer_speaker(){
     var src = byId("DKAudioPlayer_speaker").src;
-    if (src.indexOf("mute.png") !== -1) {
+    if (src.indexOf("mute.png") !== -1){
         dk.audio.mute();
         dk.audioplayer.updatevolume(dk.audio.getvolume());
     } else {
@@ -102,7 +102,7 @@ dk.audioplayer.speaker = function dk_audioplayer_speaker() {
     byId("DKAudioPlayer_volume").value = dk.audio.getvolume();
 }
 
-dk.audioplayer.updatevolume = function dk_audioplayer_updatevolume(volume) {
+dk.audioplayer.updatevolume = function dk_audioplayer_updatevolume(volume){
     var num = parseInt(volume);
     if (num < 1)
         byId("DKAudioPlayer_speaker").src = "DKAudio/mute.png";

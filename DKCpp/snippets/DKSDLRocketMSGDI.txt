@@ -58,7 +58,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 		}
     }
  
-    for(int  i = 0; i < num_vertices; i++) {
+    for(int  i = 0; i < num_vertices; i++){
         Positions[i] = vertices[i].position;
         Colors[i] = vertices[i].colour;
         if(sdl_texture){

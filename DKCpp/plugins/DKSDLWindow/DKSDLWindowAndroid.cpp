@@ -125,19 +125,19 @@ bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output){
     // https://bitbucket.org/MartinFelis/love-android-sdl2/issue/23/release-build-crash-on-start
 
     argv[argc++] = SDL_strdup("app_process");
-    for (i = 0; i < len; ++i) {
+    for (i = 0; i < len; ++i){
         const char* utf;
         char* arg = NULL;
 		jstring string = (jstring)jd.env->GetObjectArrayElement((jobjectArray)jd.array, i);
-        if (string) {
+        if (string){
 			utf = jd.env->GetStringUTFChars(string, 0);
-            if (utf) {
+            if (utf){
                 arg = SDL_strdup(utf);
 				jd.env->ReleaseStringUTFChars(string, utf);
             }
 			jd.env->DeleteLocalRef(string);
         }
-        if (!arg) {
+        if (!arg){
             arg = SDL_strdup("");
         }
         argv[argc++] = arg;
@@ -149,7 +149,7 @@ bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output){
 
     // Release the arguments. 
 
-    for (i = 0; i < argc; ++i) {
+    for (i = 0; i < argc; ++i){
         //SDL_free(argv[i]);
     }
 

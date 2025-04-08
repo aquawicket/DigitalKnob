@@ -9,7 +9,7 @@ function DKFacebook_init()
 //////////////////////////////////
 function DKFacebookLogin(Function)
 {
-	window.fbAsyncInit = function() {
+	window.fbAsyncInit = function(){
 		FB.init({
 			appId      : '1514766155465090',
 			cookie     : true,  // enable cookies to allow the server to access 
@@ -38,7 +38,7 @@ function DKFacebookLogin(Function)
 	};
 
 	// Load the SDK asynchronously
-	(function(d, s, id) {
+	(function(d, s, id){
 		var js, fjs = d.getElementsByTagName(s)[0];
 		if (d.getElementById(id)) return;
 		js = d.createElement(s); js.id = id;
@@ -61,10 +61,10 @@ function statusChangeCallback(response)
       // Logged into your app and Facebook.
       connected();
     }
-	else if (response.status === 'not_authorized') {
+	else if (response.status === 'not_authorized'){
       // The person is logged into Facebook, but not your app.
       console.log("Please log into this app\n");
-	  FB.login(function(response) {
+	  FB.login(function(response){
 		// handle the response
 		}, {scope: 'public_profile,email'});
 	}
@@ -72,7 +72,7 @@ function statusChangeCallback(response)
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
 	  console.log("Please log into facebook\n");
-	  FB.login(function(response) {
+	  FB.login(function(response){
 		// handle the response
 		}, {scope: 'public_profile,email'});
     }
@@ -85,7 +85,7 @@ function statusChangeCallback(response)
 //////////////////////////
 function checkLoginState()
 {
-	FB.getLoginStatus(function(response) {
+	FB.getLoginStatus(function(response){
 		statusChangeCallback(response);
     });
 }
@@ -96,7 +96,7 @@ function checkLoginState()
 function connected()
 {
     console.log("Facebook: Welcome!  Fetching your information....\n");
-    FB.api('/me', function(response) {
+    FB.api('/me', function(response){
 		console.log("Successful login for: " + response.name+"\n");
     });
 }
@@ -105,7 +105,7 @@ function connected()
 function DKFacebook_Query(query, parameter, Function)
 {
 	FB.api(query, function(response){
-		if (response.hasOwnProperty("error")) {
+		if (response.hasOwnProperty("error")){
 			console.log("Error: " + response.error.message+"\n");
 		}
 		else{

@@ -41,7 +41,7 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     public boolean mIsSurfaceReady;
 
     // Startup
-    public SDLSurface(Context context) {
+    public SDLSurface(Context context){
         super(context);
         getHolder().addCallback(this);
 
@@ -63,11 +63,11 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         mIsSurfaceReady = false;
     }
 
-    public void handlePause() {
+    public void handlePause(){
         enableSensor(Sensor.TYPE_ACCELEROMETER, false);
     }
 
-    public void handleResume() {
+    public void handleResume(){
         setFocusable(true);
         setFocusableInTouchMode(true);
         requestFocus();
@@ -76,20 +76,20 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         enableSensor(Sensor.TYPE_ACCELEROMETER, true);
     }
 
-    public Surface getNativeSurface() {
+    public Surface getNativeSurface(){
         return getHolder().getSurface();
     }
 
     // Called when we have a valid drawing surface
     @Override
-    public void surfaceCreated(SurfaceHolder holder) {
+    public void surfaceCreated(SurfaceHolder holder){
         Log.v("SDL", "surfaceCreated()");
         SDLActivity.onNativeSurfaceCreated();
     }
 
     // Called when we lose the surface
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
+    public void surfaceDestroyed(SurfaceHolder holder){
         Log.v("SDL", "surfaceDestroyed()");
 
         // Transition to pause, if needed
@@ -103,10 +103,10 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // Called when the surface is resized
     @Override
     public void surfaceChanged(SurfaceHolder holder,
-                               int format, int width, int height) {
+                               int format, int width, int height){
         Log.v("SDL", "surfaceChanged()");
 
-        if (SDLActivity.mSingleton == null) {
+        if (SDLActivity.mSingleton == null){
             return;
         }
 
@@ -116,16 +116,16 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         int nDeviceHeight = height;
         try
         {
-            if (Build.VERSION.SDK_INT >= 17) {
+            if (Build.VERSION.SDK_INT >= 17){
                 DisplayMetrics realMetrics = new DisplayMetrics();
                 mDisplay.getRealMetrics( realMetrics );
                 nDeviceWidth = realMetrics.widthPixels;
                 nDeviceHeight = realMetrics.heightPixels;
             }
-        } catch(Exception ignored) {
+        } catch(Exception ignored){
         }
 
-        synchronized(SDLActivity.getContext()) {
+        synchronized(SDLActivity.getContext()){
             // In case we're waiting on a size change after going fullscreen, send a notification.
             SDLActivity.getContext().notifyAll();
         }
@@ -140,38 +140,38 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         boolean skip = false;
         int requestedOrientation = SDLActivity.mSingleton.getRequestedOrientation();
 
-        if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT || requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT) {
-            if (mWidth > mHeight) {
+        if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT || requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT){
+            if (mWidth > mHeight){
                skip = true;
             }
-        } else if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE || requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE) {
-            if (mWidth < mHeight) {
+        } else if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE || requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE){
+            if (mWidth < mHeight){
                skip = true;
             }
         }
 
         // Special Patch for Square Resolution: Black Berry Passport
-        if (skip) {
+        if (skip){
            double min = Math.min(mWidth, mHeight);
            double max = Math.max(mWidth, mHeight);
 
-           if (max / min < 1.20) {
+           if (max / min < 1.20){
               Log.v("SDL", "Don't skip on such aspect-ratio. Could be a square resolution.");
               skip = false;
            }
         }
 
         // Don't skip in MultiWindow.
-        if (skip) {
-            if (Build.VERSION.SDK_INT >= 24) {
-                if (SDLActivity.mSingleton.isInMultiWindowMode()) {
+        if (skip){
+            if (Build.VERSION.SDK_INT >= 24){
+                if (SDLActivity.mSingleton.isInMultiWindowMode()){
                     Log.v("SDL", "Don't skip in Multi-Window");
                     skip = false;
                 }
             }
         }
 
-        if (skip) {
+        if (skip){
            Log.v("SDL", "Skip .. Surface is not ready.");
            mIsSurfaceReady = false;
            return;
@@ -189,13 +189,13 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
     // Key events
     @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
+    public boolean onKey(View v, int keyCode, KeyEvent event){
         return SDLActivity.handleKeyEvent(v, keyCode, event, null);
     }
 
     // Touch events
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(View v, MotionEvent event){
         /* Ref: http://developer.android.com/training/gestures/multi.html */
         int touchDevId = event.getDeviceId();
         final int pointerCount = event.getPointerCount();
@@ -210,21 +210,21 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
          *  adb shell input mouse tap 100 100
          *  adb shell input touchscreen tap 100 100
          */
-        if (touchDevId < 0) {
+        if (touchDevId < 0){
             touchDevId -= 1;
         }
 
         // 12290 = Samsung DeX mode desktop mouse
         // 12290 = 0x3002 = 0x2002 | 0x1002 = SOURCE_MOUSE | SOURCE_TOUCHSCREEN
         // 0x2   = SOURCE_CLASS_POINTER
-        if (event.getSource() == InputDevice.SOURCE_MOUSE || event.getSource() == (InputDevice.SOURCE_MOUSE | InputDevice.SOURCE_TOUCHSCREEN)) {
+        if (event.getSource() == InputDevice.SOURCE_MOUSE || event.getSource() == (InputDevice.SOURCE_MOUSE | InputDevice.SOURCE_TOUCHSCREEN)){
             int mouseButton = 1;
             try {
                 Object object = event.getClass().getMethod("getButtonState").invoke(event);
-                if (object != null) {
+                if (object != null){
                     mouseButton = (Integer) object;
                 }
-            } catch(Exception ignored) {
+            } catch(Exception ignored){
             }
 
             // We need to check if we're in relative mouse mode and get the axis offset rather than the x/y values
@@ -235,14 +235,14 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
             SDLActivity.onNativeMouse(mouseButton, action, x, y, motionListener.inRelativeMode());
         } else {
-            switch(action) {
+            switch(action){
                 case MotionEvent.ACTION_MOVE:
-                    for (i = 0; i < pointerCount; i++) {
+                    for (i = 0; i < pointerCount; i++){
                         pointerFingerId = event.getPointerId(i);
                         x = event.getX(i) / mWidth;
                         y = event.getY(i) / mHeight;
                         p = event.getPressure(i);
-                        if (p > 1.0f) {
+                        if (p > 1.0f){
                             // may be larger than 1.0f on some devices
                             // see the documentation of getPressure(i)
                             p = 1.0f;
@@ -259,7 +259,7 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                 case MotionEvent.ACTION_POINTER_UP:
                 case MotionEvent.ACTION_POINTER_DOWN:
                     // Non primary pointer up/down
-                    if (i == -1) {
+                    if (i == -1){
                         i = event.getActionIndex();
                     }
 
@@ -267,7 +267,7 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     x = event.getX(i) / mWidth;
                     y = event.getY(i) / mHeight;
                     p = event.getPressure(i);
-                    if (p > 1.0f) {
+                    if (p > 1.0f){
                         // may be larger than 1.0f on some devices
                         // see the documentation of getPressure(i)
                         p = 1.0f;
@@ -276,12 +276,12 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     break;
 
                 case MotionEvent.ACTION_CANCEL:
-                    for (i = 0; i < pointerCount; i++) {
+                    for (i = 0; i < pointerCount; i++){
                         pointerFingerId = event.getPointerId(i);
                         x = event.getX(i) / mWidth;
                         y = event.getY(i) / mHeight;
                         p = event.getPressure(i);
-                        if (p > 1.0f) {
+                        if (p > 1.0f){
                             // may be larger than 1.0f on some devices
                             // see the documentation of getPressure(i)
                             p = 1.0f;
@@ -299,9 +299,9 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
    }
 
     // Sensor events
-    public void enableSensor(int sensortype, boolean enabled) {
+    public void enableSensor(int sensortype, boolean enabled){
         // TODO: This uses getDefaultSensor - what if we have >1 accels?
-        if (enabled) {
+        if (enabled){
             mSensorManager.registerListener(this,
                             mSensorManager.getDefaultSensor(sensortype),
                             SensorManager.SENSOR_DELAY_GAME, null);
@@ -312,20 +312,20 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    public void onAccuracyChanged(Sensor sensor, int accuracy){
         // TODO
     }
 
     @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+    public void onSensorChanged(SensorEvent event){
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
 
             // Since we may have an orientation set, we won't receive onConfigurationChanged events.
             // We thus should check here.
             int newOrientation;
 
             float x, y;
-            switch (mDisplay.getRotation()) {
+            switch (mDisplay.getRotation()){
                 case Surface.ROTATION_90:
                     x = -event.values[1];
                     y = event.values[0];
@@ -349,7 +349,7 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     break;
             }
 
-            if (newOrientation != SDLActivity.mCurrentOrientation) {
+            if (newOrientation != SDLActivity.mCurrentOrientation){
                 SDLActivity.mCurrentOrientation = newOrientation;
                 SDLActivity.onNativeOrientationChanged(newOrientation);
             }
@@ -368,7 +368,7 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         int action = event.getActionMasked();
 
         float x, y;
-        switch (action) {
+        switch (action){
             case MotionEvent.ACTION_SCROLL:
                 x = event.getAxisValue(MotionEvent.AXIS_HSCROLL, 0);
                 y = event.getAxisValue(MotionEvent.AXIS_VSCROLL, 0);
@@ -386,7 +386,7 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
             case MotionEvent.ACTION_BUTTON_RELEASE:
 
                 // Change our action value to what SDL's code expects.
-                if (action == MotionEvent.ACTION_BUTTON_PRESS) {
+                if (action == MotionEvent.ACTION_BUTTON_PRESS){
                     action = MotionEvent.ACTION_DOWN;
                 } else { /* MotionEvent.ACTION_BUTTON_RELEASE */
                     action = MotionEvent.ACTION_UP;

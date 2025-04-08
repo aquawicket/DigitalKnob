@@ -4,7 +4,7 @@
 @echo off
 
 rem Use %SendKeys% to send keys to the keyboard buffer
-set SendKeys=CScript //nologo //E:JScript "%~F0"
+set SendKeys=CScript //nologo //E:javascript "%~F0"
 
 rem Start the other program in the same Window
 start "" /B %COMSPEC%
@@ -31,7 +31,7 @@ goto:eof
 @end
 
 
-// JScript section
+// javascript section
 
 var WshShell = WScript.CreateObject("WScript.Shell");
 WshShell.SendKeys(WScript.Arguments(0));

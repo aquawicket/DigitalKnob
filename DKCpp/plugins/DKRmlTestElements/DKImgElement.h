@@ -132,7 +132,7 @@ private:
 class DKImgInstancer : public ElementInstancer
 {
 public:
-	virtual ~DKImgInstancer() {};
+	virtual ~DKImgInstancer(){};
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.

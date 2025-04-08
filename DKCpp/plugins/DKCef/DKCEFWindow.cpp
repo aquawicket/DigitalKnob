@@ -904,19 +904,19 @@ void DKCEFWindow::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle 
 	DKDEBUGFUNC(browser, cursor, type, custom_cursor_info);
 #if WIN
 	HWND hwnd;
-	if (!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)) {
+	if (!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)){
 		DKERROR("DKClass::CallFunc() failed\n");
 		return; 
 	}
-	if (!::IsWindow(hwnd)) {
+	if (!::IsWindow(hwnd)){
 		DKERROR("::IsWindow() failed\n");
 		return; 
 	}
-	if (!SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)))) {
+	if (!SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)))){
 		DKERROR("SetClassLongPtr() failed\n");
 		return;
 	}
-	if (!SetCursor(cursor)) {
+	if (!SetCursor(cursor)){
 		DKERROR("SetCursor() failed\n");
 	}
 /*
@@ -936,7 +936,7 @@ void DKCEFWindow::OnFindResult(CefRefPtr<CefBrowser> browser, int identifier, in
 	CEF_REQUIRE_UI_THREAD();
 }
 
-bool DKCEFWindow::OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback) {
+bool DKCEFWindow::OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback){
 	DKDEBUGFUNC(browser, mode, title, default_file_path, accept_filters, selected_accept_filter, callback);
 	return false;
 }
@@ -946,50 +946,50 @@ void DKCEFWindow::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool ful
 	CEF_REQUIRE_UI_THREAD();
 #if WIN
 	HWND hwnd = GetActiveWindow();
-	if (!hwnd) {
+	if (!hwnd){
 		DKERROR("hwnd invalid\n");
 		return;
 	}
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
-	if (!dwStyle) {
+	if (!dwStyle){
 		DKERROR("dwStyle invalid\n");
 		return;
 	}
-	if (dwStyle & WS_OVERLAPPEDWINDOW) {
+	if (dwStyle & WS_OVERLAPPEDWINDOW){
 		MONITORINFO mi = { sizeof(mi) };
-		if (!GetWindowPlacement(hwnd, &g_wpPrev) && GetMonitorInfo(MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)) {
+		if (!GetWindowPlacement(hwnd, &g_wpPrev) && GetMonitorInfo(MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)){
 			DKERROR("GetWindowPlacement() failed");
 			return;
 		}
-		if (!SetWindowLong(hwnd, GWL_STYLE, dwStyle & ~WS_OVERLAPPEDWINDOW)) {
+		if (!SetWindowLong(hwnd, GWL_STYLE, dwStyle & ~WS_OVERLAPPEDWINDOW)){
 			DKERROR("SetWindowLong() failed\n");
 			return;
 		}
-		if (!SetWindowPos(hwnd, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOOWNERZORDER | SWP_FRAMECHANGED)) {
+		if (!SetWindowPos(hwnd, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOOWNERZORDER | SWP_FRAMECHANGED)){
 			DKERROR("SetWindowPos() failed");
 			return;
 		}
 	}
 	else {
-		if (!SetWindowLong(hwnd, GWL_STYLE, dwStyle | WS_OVERLAPPEDWINDOW)) {
+		if (!SetWindowLong(hwnd, GWL_STYLE, dwStyle | WS_OVERLAPPEDWINDOW)){
 			DKERROR("SetWindowLong() failed");
 			return;
 		}
-		if (!SetWindowPlacement(hwnd, &g_wpPrev)) {
+		if (!SetWindowPlacement(hwnd, &g_wpPrev)){
 			DKERROR("SetWindowPlacement() failed\n");
 		}
-		if (!SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_FRAMECHANGED)) {
+		if (!SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_FRAMECHANGED)){
 			DKERROR("SetWindowPos() failed\n");
 		}
 	}
 #elif LINUX
 #	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
-		if (!gdk_window) {
+		if (!gdk_window){
 			DKERROR("gdk_window invalid\n");
 			return;
 		}
-		if (fullscreen) {
+		if (fullscreen){
 			gdk_window_fullscreen(gdk_window);
 			isFullscreen = true;
 		}
@@ -1003,9 +1003,9 @@ void DKCEFWindow::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool ful
 #endif
 }
 
-void DKCEFWindow::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode) {
+void DKCEFWindow::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode){
 	DKDEBUGFUNC(browser, frame, httpStatusCode);
-	if (!frame->IsMain()) {
+	if (!frame->IsMain()){
 		DKERROR("frame in not main\n");
 		return;
 	}
@@ -1063,7 +1063,7 @@ bool DKCEFWindow::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRef
 	if (message->GetName() == "GetFunctions")
 		if (!DKV8::GetFunctions(browser))
 			return DKERROR("DKV8::GetFunctions() failed\n");
-	if (has(message->GetName(), "CallFunc(")) {
+	if (has(message->GetName(), "CallFunc(")){
 		//DKINFO("DKCEFWindow::OnProcessMessageReceived(CallFunc)\n");
 		//get function name
 		DKString func = message->GetName();

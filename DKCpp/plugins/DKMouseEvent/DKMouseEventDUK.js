@@ -7,7 +7,7 @@
 // [Exposed=Window]
 // interface MouseEvent : UIEvent {
 // constructor(DOMString type, optional MouseEventInit eventInitDict = {});
-var MouseEvent = function MouseEvent(type, eventInitDict, address) {
+var MouseEvent = function MouseEvent(type, eventInitDict, address){
 	console.log("MouseEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
@@ -68,27 +68,27 @@ var MouseEvent = function MouseEvent(type, eventInitDict, address) {
 	// readonly attribute boolean metaKey;
 	Object.defineProperty(this, "metaKey", {
         get: function metaKey() 	{ return CPP_DKMouseEventDUK_metaKey(this.address) },
-		set: function metaKey(flag) { return CPP_DKMouseEventDUK_metaKey(this.address, flag) },
+		set: function metaKey(flag){ return CPP_DKMouseEventDUK_metaKey(this.address, flag) },
 		configurable: true,
     })
 	
 	// readonly attribute short button;
 	Object.defineProperty(this, "button", {
-        get: function button() { return CPP_DKMouseEventDUK_button(this.address) },
+        get: function button(){ return CPP_DKMouseEventDUK_button(this.address) },
     })
 	
 	// readonly attribute unsigned short buttons;
 	Object.defineProperty(this, "buttons", {
-        get: function buttons() { return CPP_DKMouseEventDUK_buttons(this.address) },
+        get: function buttons(){ return CPP_DKMouseEventDUK_buttons(this.address) },
     })
 	
 	// readonly attribute EventTarget? relatedTarget;
 	Object.defineProperty(this, "relatedTarget", {
-        get: function relatedTarget() { return new EventTarget(CPP_DKMouseEventDUK_relatedTarget(this.address)) },
+        get: function relatedTarget(){ return new EventTarget(CPP_DKMouseEventDUK_relatedTarget(this.address)) },
     })
 	
 	// boolean getModifierState(DOMString keyArg);
-	MouseEvent.prototype.getModifierState = function getModifierState() {
+	MouseEvent.prototype.getModifierState = function getModifierState(){
 		CPP_DKMouseEventDUK_getModifierState(this.address);
     }
 	
@@ -97,27 +97,27 @@ var MouseEvent = function MouseEvent(type, eventInitDict, address) {
 	// partial interface MouseEvent {
 	//  	readonly attribute double pageX;
 			Object.defineProperty(this, "pageX", {
-				get: function pageX() { return CPP_DKMouseEventDUK_pageX(this.address) },
+				get: function pageX(){ return CPP_DKMouseEventDUK_pageX(this.address) },
 			})
 	//  	readonly attribute double pageY;
 			Object.defineProperty(this, "pageY", {
-				get: function pageY() { return CPP_DKMouseEventDUK_pageY(this.address) },
+				get: function pageY(){ return CPP_DKMouseEventDUK_pageY(this.address) },
 			})
 	//  	readonly attribute double x;
 			Object.defineProperty(this, "x", {
-				get: function x() { return CPP_DKMouseEventDUK_x(this.address) },
+				get: function x(){ return CPP_DKMouseEventDUK_x(this.address) },
 			})
 	//  	readonly attribute double y;
 			Object.defineProperty(this, "y", {
-				get: function y() { return CPP_DKMouseEventDUK_y(this.address) },
+				get: function y(){ return CPP_DKMouseEventDUK_y(this.address) },
 			})
 	//  	readonly attribute double offsetX; 
 			Object.defineProperty(this, "offsetX", {
-				get: function offsetX() { return CPP_DKMouseEventDUK_offsetX(this.address) },
+				get: function offsetX(){ return CPP_DKMouseEventDUK_offsetX(this.address) },
 			})
 	//  	readonly attribute double offsetY;
 			Object.defineProperty(this, "offsetY", {
-				get: function offsetY() { return CPP_DKMouseEventDUK_offsetY(this.address) },
+				get: function offsetY(){ return CPP_DKMouseEventDUK_offsetY(this.address) },
 			})	
 	// };
 		
@@ -125,11 +125,11 @@ var MouseEvent = function MouseEvent(type, eventInitDict, address) {
 	// partial interface MouseEvent {
 	//   	readonly attribute double movementX;
 			Object.defineProperty(this, "movementX", {
-				get: function movementX() { return CPP_DKMouseEventDUK_movementX(this.address) },
+				get: function movementX(){ return CPP_DKMouseEventDUK_movementX(this.address) },
 			})
 	//   	readonly attribute double movementY;
 			Object.defineProperty(this, "movementY", {
-				get: function movementY() { return CPP_DKMouseEventDUK_movementY(this.address) },
+				get: function movementY(){ return CPP_DKMouseEventDUK_movementY(this.address) },
 			})
 	// };
 		
@@ -151,7 +151,7 @@ var MouseEvent = function MouseEvent(type, eventInitDict, address) {
 	//		optional boolean metaKeyArg = false,
 	//		optional short buttonArg = 0,
 	//		optional EventTarget? relatedTargetArg = null);
-			MouseEvent.prototype.initMouseEvent = function initMouseEvent() {
+			MouseEvent.prototype.initMouseEvent = function initMouseEvent(){
 				CPP_DKMouseEventDUK_initMouseEvent(this.address);
 			}
 	// };

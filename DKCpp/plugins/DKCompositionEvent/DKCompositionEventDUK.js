@@ -7,7 +7,7 @@
 // [Exposed=Window]
 // interface CompositionEvent : UIEvent {
 // constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
-var CompositionEvent = function CompositionEvent(type, options, address) {
+var CompositionEvent = function CompositionEvent(type, options, address){
 	console.log("CompositionEvent("+type+","+options+","+address+")")
 	
 	if(address)
@@ -31,7 +31,7 @@ var CompositionEvent = function CompositionEvent(type, options, address) {
 	//		optional boolean cancelableArg = false,
 	//		optional WindowProxy? viewArg = null,
 	//		optional DOMString dataArg = "");
-	CompositionEvent.prototype.initCompositionEvent = function initCompositionEvent() {
+	CompositionEvent.prototype.initCompositionEvent = function initCompositionEvent(){
 		CPP_DKCompositionEventDUK_initCompositionEvent(this.address)
 	}
 	

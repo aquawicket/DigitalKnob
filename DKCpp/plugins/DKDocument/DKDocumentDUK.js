@@ -6,7 +6,7 @@
 // [Exposed=Window]
 // interface Document : Node {
 // constructor();
-var Document = function Document(address) {
+var Document = function Document(address){
 	//console.log("Document("+address+")")
 	
 	if(address)
@@ -75,89 +75,89 @@ var Document = function Document(address) {
     })
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	Document.prototype.getElementsByTagName = function getElementsByTagName(qualifiedName) {
+	Document.prototype.getElementsByTagName = function getElementsByTagName(qualifiedName){
 		return new HTMLCollection(CPP_DKDocumentDUK_getElementsByTagName(this.address, qualifiedName));
     }
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	Document.prototype.getElementsByTagNameNS = function getElementsByTagNameNS(namespace, localName) {
+	Document.prototype.getElementsByTagNameNS = function getElementsByTagNameNS(namespace, localName){
 		return new HTMLCollection(CPP_DKDocumentDUK_getElementsByTagNameNS(this.address, namespace, localName));
     }
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	Document.prototype.getElementsByClassName = function getElementsByClassName(classNames) {
+	Document.prototype.getElementsByClassName = function getElementsByClassName(classNames){
 		return new HTMLCollection(CPP_DKDocumentDUK_getElementsByClassName(this.address, classNames));
     }
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	Document.prototype.createElement = function createElement(localName, options) {
+	Document.prototype.createElement = function createElement(localName, options){
 		return new Element(CPP_DKDocumentDUK_createElement(this.address, localName, options));
     }
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
-	Document.prototype.createElementNS = function createElementNS(namespace, qualifiedName, options) {
+	Document.prototype.createElementNS = function createElementNS(namespace, qualifiedName, options){
 		return new Element(CPP_DKDocumentDUK_createElementNS(this.address, namespace, qualifiedName, options));
     }
 	
 	// [NewObject] DocumentFragment createDocumentFragment();
-	Document.prototype.createDocumentFragment = function createDocumentFragment() {
+	Document.prototype.createDocumentFragment = function createDocumentFragment(){
 		CPP_DKDocumentDUK_createDocumentFragment(this.address);
 		// TODO
     }
 	
 	// [NewObject] Text createTextNode(DOMString data);
-	Document.prototype.createTextNode = function createTextNode(data) {
+	Document.prototype.createTextNode = function createTextNode(data){
 		CPP_DKDocumentDUK_createTextNode(this.address, data);
 		// TODO
     }
 	
 	// [NewObject] CDATASection createCDATASection(DOMString data);
-	Document.prototype.createCDATASection = function createCDATASection(data) {
+	Document.prototype.createCDATASection = function createCDATASection(data){
 		CPP_DKDocumentDUK_createCDATASection(this.address, data);
 		// TODO
     }
 	
 	// [NewObject] Comment createComment(DOMString data);
-	Document.prototype.createComment = function createComment(data) {
+	Document.prototype.createComment = function createComment(data){
 		CPP_DKDocumentDUK_createComment(this.address, data);
 		// TODO
     }
 	
 	// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
-	Document.prototype.createProcessingInstruction = function createProcessingInstruction(target, data) {
+	Document.prototype.createProcessingInstruction = function createProcessingInstruction(target, data){
 		CPP_DKDocumentDUK_createProcessingInstruction(this.address, target, data);
 		// TODO
     }
 	
 	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
-	Document.prototype.importNode = function importNode(node, deep) {
+	Document.prototype.importNode = function importNode(node, deep){
 		return new Node(CPP_DKDocumentDUK_importNode(this.address, node, deep));
     }
 	
 	// [CEReactions] Node adoptNode(Node node);
-	Document.prototype.adoptNode = function adoptNode(node) {
+	Document.prototype.adoptNode = function adoptNode(node){
 		return new Node(CPP_DKDocumentDUK_adoptNode(this.address, node));
     }
 	
 	// [NewObject] Attr createAttribute(DOMString localName);
-	Document.prototype.createAttribute = function createAttribute(localName) {
+	Document.prototype.createAttribute = function createAttribute(localName){
 		CPP_DKDocumentDUK_createAttribute(this.address, localName);
 		// TODO
     }
 	
 	// [NewObject] Attr createAttributeNS(DOMString? namespace, DOMString qualifiedName);
-	Document.prototype.createAttributeNS = function createAttributeNS(namespace, qualifiedName) {
+	Document.prototype.createAttributeNS = function createAttributeNS(namespace, qualifiedName){
 		CPP_DKDocumentDUK_createAttributeNS(this.address, namespace, qualifiedName);
 		// TODO
     }
 	
 	// [NewObject] Event createEvent(DOMString interface); // legacy
-	Document.prototype.createEvent = function createEvent(interface) {
+	Document.prototype.createEvent = function createEvent(interface){
 		return new Event("", "", CPP_DKDocumentDUK_createEvent(this.address, interface));
     }
 	
 	// [NewObject] Range createRange();
-	Document.prototype.createRange = function createRange() {
+	Document.prototype.createRange = function createRange(){
 		CPP_DKDocumentDUK_createRange(this.address);
 		// TODO
     }
@@ -166,13 +166,13 @@ var Document = function Document(address) {
 	// TODO 
 	
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	Document.prototype.createNodeIterator = function createNodeIterator(root, whatToShow, filter) {
+	Document.prototype.createNodeIterator = function createNodeIterator(root, whatToShow, filter){
 		CPP_DKDocumentDUK_createNodeIterator(this.address, root, whatToShow, filter);
 		// TODO
     }
 	
 	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	Document.prototype.createTreeWalker = function createTreeWalker(root, whatToShow, filter) {
+	Document.prototype.createTreeWalker = function createTreeWalker(root, whatToShow, filter){
 		CPP_DKDocumentDUK_createTreeWalker(this.address, root, whatToShow, filter);
 		// TODO
     }
@@ -193,13 +193,13 @@ var Document = function Document(address) {
 	// Source: Font Metrics API Level 1 (https://drafts.css-houdini.org/font-metrics-api-1/)
 	// partial interface Document {
 	//		FontMetrics measureElement(Element element);
-			Document.prototype.measureElement = function measureElement(element) {
+			Document.prototype.measureElement = function measureElement(element){
 				CPP_DKDocumentDUK_measureElement(this.address, element);
 				// TODO
 			}
 	//
 	//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
-			Document.prototype.measureText = function measureText(text, styleMap) {
+			Document.prototype.measureText = function measureText(text, styleMap){
 				CPP_DKDocumentDUK_measureText(this.address, text, styleMap);
 				// TODO
 			}
@@ -220,7 +220,7 @@ var Document = function Document(address) {
 			})
 	//
 	//		Promise<undefined> exitFullscreen();
-			Document.prototype.exitFullscreen = function exitFullscreen() {
+			Document.prototype.exitFullscreen = function exitFullscreen(){
 				CPP_DKDocumentDUK_exitFullscreen(this.address);
 				// TODO
 			}

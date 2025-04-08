@@ -124,7 +124,7 @@ int DKScreen::top(duk_context* ctx){
 int DKScreen::width(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int width;
-	if(!DKUtil::GetScreenWidth(width)) { return 0; }
+	if(!DKUtil::GetScreenWidth(width)){ return 0; }
 	duk_push_number(ctx, width);
 	return 1;
 }
@@ -144,7 +144,7 @@ int DKScreen::mozBrightness(duk_context* ctx){
 
 
 //Methods
-int DKScreen::lockOrientation(duk_context* ctx) {
+int DKScreen::lockOrientation(duk_context* ctx){
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/lockOrientation
 	DKDEBUGFUNC(ctx);
 	DKString orientation = duk_require_string(ctx, 0);

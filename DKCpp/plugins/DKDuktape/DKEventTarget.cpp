@@ -49,12 +49,12 @@ bool DKEventTarget::Init(){
 bool DKEventTarget::OnEvent(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	if (id.empty()) { return false; } //we need an id
+	if (id.empty()){ return false; } //we need an id
 	DKString type = event->GetType();
-	if (type.empty()) { return false; } //we need a type
+	if (type.empty()){ return false; } //we need a type
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
-	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
+	//replace(jsreturn, "(){ [ecmascript code] }", ""); //remove (){ [ecmascript code] }
 
 	duk_context* ctx = DKDuktape::Get()->ctx;
 
@@ -99,7 +99,7 @@ bool DKEventTarget::OnEvent(DKEvents* event){
 
 	//dispatch the event
 	DKString dispatchEvent = "DispatchEvent(\"" + eventAddress + "\")";
-	if (duk_peval_string(ctx, dispatchEvent.c_str()) != 0) {
+	if (duk_peval_string(ctx, dispatchEvent.c_str()) != 0){
 		DKDuktape::DumpError(dispatchEvent);
 	}
 
@@ -111,11 +111,11 @@ int DKEventTarget::addEventListener(duk_context* ctx){
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
 	DKString jsreturn;
-	if (duk_to_string(ctx, 2)) {
+	if (duk_to_string(ctx, 2)){
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
 	}
-	if (!DKEvents::AddEvent(id, type, jsreturn, &DKEventTarget::OnEvent, DKEventTarget::Get())) { return false; }
+	if (!DKEvents::AddEvent(id, type, jsreturn, &DKEventTarget::OnEvent, DKEventTarget::Get())){ return false; }
 	return true;
 }
 
@@ -123,12 +123,12 @@ int DKEventTarget::removeEventListener(duk_context* ctx){
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
 	DKString jsreturn;
-	if (duk_to_string(ctx, 2)) {
+	if (duk_to_string(ctx, 2)){
 
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
 	}
-	if (!DKEvents::RemoveEvent(id, type, jsreturn)) { return false; }
+	if (!DKEvents::RemoveEvent(id, type, jsreturn)){ return false; }
 	return true;
 }
 
@@ -136,11 +136,11 @@ int DKEventTarget::dispatchEvent(duk_context* ctx){
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
 	DKString jsreturn;
-	if (duk_to_string(ctx, 2)) {
+	if (duk_to_string(ctx, 2)){
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
 	}
-	if (!DKEvents::SendEvent(id, type, jsreturn)) { return false; }
+	if (!DKEvents::SendEvent(id, type, jsreturn)){ return false; }
 	return true;
 }
 
@@ -153,8 +153,8 @@ int DKEventTarget::id(duk_context* ctx){
 	DKStringArray events;
 	toStringArray(events, evt, ",");
 
-	if (events.size() < 1) { return 0; }
-	if (!same(events[0], id)) { return 0; }
+	if (events.size() < 1){ return 0; }
+	if (!same(events[0], id)){ return 0; }
 	return 1;
 }
 
@@ -165,8 +165,8 @@ int DKEventTarget::idLike(duk_context* ctx){
 	DKStringArray events;
 	toStringArray(events, evt, ",");
 
-	if (events.size() < 1) { return 0; }
-	if (!has(events[0], id)) { return 0; }
+	if (events.size() < 1){ return 0; }
+	if (!has(events[0], id)){ return 0; }
 	return 1;
 }
 
@@ -177,8 +177,8 @@ int DKEventTarget::type(duk_context* ctx){
 	DKStringArray events;
 	toStringArray(events, evt, ",");
 
-	if (events.size() < 2) { return 0; }
-	if (!same(events[1], id)) { return 0; }
+	if (events.size() < 2){ return 0; }
+	if (!same(events[1], id)){ return 0; }
 	return 1;
 }
 
@@ -189,7 +189,7 @@ int DKEventTarget::value(duk_context* ctx){
 	DKStringArray events;
 	toStringArray(events, evt, ",");
 
-	if (events.size() < 3) { return 0; }
-	if (!same(events[2], value)) { return 0; }
+	if (events.size() < 3){ return 0; }
+	if (!same(events[2], value)){ return 0; }
 	return 1;
 }

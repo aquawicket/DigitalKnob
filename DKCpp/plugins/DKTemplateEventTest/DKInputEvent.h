@@ -12,7 +12,7 @@ class DKInputEvent : public DKUIEvent
 public:
 	////// Constructor //////
 	// [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
-	DKInputEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
+	DKInputEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options){
 		DKINFO("DKInputEvent("+_type+", "+_options+") \n");
 		
 		////// Instance properties //////
@@ -36,7 +36,7 @@ public:
 	
 	////// Instance methods //////
 	// [InputEvent.getTargetRanges()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/getTargetRanges
-	void getTargetRanges() {
+	void getTargetRanges(){
 		DKTODO();
 	}
 

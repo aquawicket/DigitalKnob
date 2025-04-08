@@ -38,7 +38,7 @@ dk_DKDOWNLOAD_DIR = function dk_DKDOWNLOAD_DIR_f(){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 
 	dk_DKDOWNLOAD_DIR();

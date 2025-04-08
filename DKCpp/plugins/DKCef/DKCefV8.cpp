@@ -222,7 +222,7 @@ bool DKCefV8::Execute(CefArgs args, CefReturn retval){
 	int rtncode;
 	if (!DKUtil::Execute(command, mode, stdouterr, rtncode))
 		return DKERROR("DKUtil::Execute() failed");
-	if (rtncode == 0) {
+	if (rtncode == 0){
 		if (!retval->SetString(0, stdouterr))
 			return DKERROR("SetString failed");
 	}
@@ -313,11 +313,11 @@ bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int mouseX = 0;
 	int mouseY = 0;
-	if (!DKUtil::GetMousePos(mouseX, mouseY)) { return false; }
+	if (!DKUtil::GetMousePos(mouseX, mouseY)){ return false; }
 	int r;
 	int g;
 	int b;
-	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)) { return false; }
+	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)){ return false; }
 	DKString rgb = toString(r) + "," + toString(g) + "," + toString(b);
 	if(!retval->SetString(0, rgb)){ return false; }
 	return true;

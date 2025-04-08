@@ -13,7 +13,7 @@ format: Tue, 19 Aug 1975 23:15:30 GMT
 
 dk.time = DKPlugin(DKTime, "singleton")
 
-function DKTime() {}
+function DKTime(){}
 
 DKTime.prototype.init = function DKTime_init(DKTime_init_callback){
     DKPlugin("DK/sun.js", function(){
@@ -21,13 +21,13 @@ DKTime.prototype.init = function DKTime_init(DKTime_init_callback){
     });
 }
 
-DKTime.prototype.create = function DKTime_create(percision) {
+DKTime.prototype.create = function DKTime_create(percision){
     !percision && (percision = 1000);
     window.setInterval(this.update, percision);
     return this;
 }
 
-DKTime.prototype.setLatitudeLongitude = function DKTime_setLatitude_longitude(latitude, longitude, zenith) {
+DKTime.prototype.setLatitudeLongitude = function DKTime_setLatitude_longitude(latitude, longitude, zenith){
     latitude && (this.latitude = latitude);
     longitude && (this.longitude = longitude);
     !zenith && (zenith = 0);
@@ -35,14 +35,14 @@ DKTime.prototype.setLatitudeLongitude = function DKTime_setLatitude_longitude(la
 }
 
 //TODO - make this function faster
-DKTime.prototype.update = function DKTime_update() {
+DKTime.prototype.update = function DKTime_update(){
     const instance = this;
     dk.time.date = new Date();
     dk.time.year = dk.time.date.getFullYear();
     dk.time.month = (dk.time.date.getMonth() + 1);
     dk.time.day = dk.time.date.getDate();
     dk.time.military = dk.time.date.getHours();
-    if (dk.time.military > 11) {
+    if (dk.time.military > 11){
         dk.time.ampm = "PM";
         if (dk.time.military > 12)
             dk.time.hour = dk.time.military - 12;
@@ -59,7 +59,7 @@ DKTime.prototype.update = function DKTime_update() {
     dk.time.second = dk.time.date.getSeconds();
     dk.time.second = dk.time.second > 9 ? dk.time.second : '0' + dk.time.second;
     dk.time.milliseconds = dk.time.date.getTime();
-    switch (dk.time.date.getDay()) {
+    switch (dk.time.date.getDay()){
     case 0:
         dk.time.dayName = "Sunday";
         break;
@@ -86,7 +86,7 @@ DKTime.prototype.update = function DKTime_update() {
     }
     dk.time.time = Number(dk.time.military) + (dk.time.minute * .01);
 
-    if (dk.time.longitude && dk.time.latitude) {
+    if (dk.time.longitude && dk.time.latitude){
         var date = new Date().sunrise(dk.time.latitude, dk.time.longitude, dk.time.zenith);
         dk.time.sunrise = date.getHours() + (date.getMinutes() * .01);
         date = new Date().sunset(dk.time.latitude, dk.time.longitude, dk.time.zenith);

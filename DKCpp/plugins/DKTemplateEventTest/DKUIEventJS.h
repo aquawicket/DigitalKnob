@@ -125,7 +125,7 @@ public:
 		return true;
 	}
 	
-	static bool onUIEvent(DKUIEvent* event) {
+	static bool onUIEvent(DKUIEvent* event){
 		DKDEBUGFUNC(event);
 		DKINFO("onUIEvent("+event->type+") \n");
 		

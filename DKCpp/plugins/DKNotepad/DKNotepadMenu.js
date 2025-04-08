@@ -2,8 +2,8 @@
 
 dk.notepadmenu = new DKPlugin("dk_notepadmenu");
 
-dk.notepadmenu.init = function dk_notepadmenu_init() {
-    dk.create("DKNotepad/DKNotepadMenu.html", function() {
+dk.notepadmenu.init = function dk_notepadmenu_init(){
+    dk.create("DKNotepad/DKNotepadMenu.html", function(){
         document.addEventListener("mousedown", dk.notepadmenu.onevent);
         byId("DKNotepadMenu_Cut").addEventListener("mousedown", dk.notepadmenu.onevent);
         byId("DKNotepadMenu_Copy").addEventListener("mousedown", dk.notepadmenu.onevent);
@@ -11,7 +11,7 @@ dk.notepadmenu.init = function dk_notepadmenu_init() {
     });
 }
 
-dk.notepadmenu.end = function dk_notepadmenu_end() {
+dk.notepadmenu.end = function dk_notepadmenu_end(){
     document.removeEventListener("mousedown", dk.notepadmenu.onevent);
     byId("DKNotepadMenu_Cut").removeEventListener("mousedown", dk.notepadmenu.onevent);
     byId("DKNotepadMenu_Copy").removeEventListener("mousedown", dk.notepadmenu.onevent);
@@ -19,8 +19,8 @@ dk.notepadmenu.end = function dk_notepadmenu_end() {
     dk.close("DKNotepad/DKNotepadMenu.html");
 }
 
-dk.notepadmenu.onevent = function dk_notepadmenu_onevent(event) {
-    if (event.currentTarget.id === "DKNotepadMenu_Cut") {
+dk.notepadmenu.onevent = function dk_notepadmenu_onevent(event){
+    if (event.currentTarget.id === "DKNotepadMenu_Cut"){
         DKNotepadMenu_Cut();
         PreventDefault(event);
     }
@@ -28,21 +28,21 @@ dk.notepadmenu.onevent = function dk_notepadmenu_onevent(event) {
         DKNotepadMenu_Copy();
     if (event.currentTarget.id === "DKNotepadMenu_Paste")
         DKNotepadMenu_Paste();
-    if (event.currentTarget === document) {
+    if (event.currentTarget === document){
         if (byId("DKNotepad/DKNotepadMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY)))
             return;
     }
     dk.close("DKNotepad/DKNotepadMenu.js");
 }
 
-dk.notepadmenu.cut = function dk_notepadmenu_cut() {
+dk.notepadmenu.cut = function dk_notepadmenu_cut(){
     dk.clipboard.cut("DKNotepad_Text");
 }
 
-dk.notepadmenu.copy = function dk_notepadmenu_copy() {
+dk.notepadmenu.copy = function dk_notepadmenu_copy(){
     dk.clipboard.copy("DKNotepad_Text");
 }
 
-dk.notepadmenu.paste = function dk_notepadMenu_paste() {
+dk.notepadmenu.paste = function dk_notepadMenu_paste(){
     dk.clipboard.paste("DKNotepad_Text");
 }

@@ -74,8 +74,8 @@ public:
 
 // Operations
 public:
-    BOOL Enabled() { return m_bEnabled; }
-    BOOL Visible() { return !m_bHidden; }
+    BOOL Enabled(){ return m_bEnabled; }
+    BOOL Visible(){ return !m_bHidden; }
 
     // Create the tray icon
     BOOL Create(HINSTANCE hInst, HWND hParent, UINT uCallbackMessage, LPCTSTR szTip,
@@ -179,7 +179,7 @@ protected:
     void InstallIconPending();
     ATOM RegisterClass(HINSTANCE hInstance);
 
-    virtual void CustomizeMenu(HMENU) {}
+    virtual void CustomizeMenu(HMENU){}
 
 // Implementation
 protected:

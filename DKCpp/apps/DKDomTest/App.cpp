@@ -3,7 +3,7 @@
 
 
 ///////////////////////////////////////
-bool App::Init() {
+bool App::Init(){
 	DKDEBUGFUNC();
 	
 	/*

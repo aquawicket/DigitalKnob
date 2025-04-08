@@ -14,7 +14,7 @@ WARNING_ENABLE
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 
 #ifdef RTTI_ENABLED
 	printf("RTTI_ENABLED = TRUE\n");

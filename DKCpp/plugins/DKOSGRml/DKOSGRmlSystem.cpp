@@ -50,7 +50,7 @@ bool DKOSGRmlSystem::LogMessage(Rml::Log::Type type, const Rml::String& message)
 	//DKDEBUGFUNC(type, message);  //EXCESSIVE LOGGING
 	if (has(message, "Loaded font face"))
 		type = Rml::Log::LT_DEBUG;
-	switch (type) {
+	switch (type){
 	case Rml::Log::LT_ALWAYS:
 		DKINFO("[Rml] " + DKString(message) + "\n");
 		break;

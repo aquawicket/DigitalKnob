@@ -18,7 +18,7 @@ class DKCompositionEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
-	DKCompositionEvent(const DOMString& type, const CompositionEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
+	DKCompositionEvent(const DOMString& type, const CompositionEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict){
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "CompositionEvent";
 		address[interfaceName] = pointerToAddress(this);
@@ -28,7 +28,7 @@ public:
 	// readonly attribute DOMString data;
 	DOMString _data = "";
 	virtual const DOMString& 	data()						{ return _data; }	// getter
-	virtual void 				data(const DOMString& data) { _data = data; }	// setter
+	virtual void 				data(const DOMString& data){ _data = data; }	// setter
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface CompositionEvent {
@@ -43,7 +43,7 @@ public:
 		const bool& bubblesArg = false, 
 		const bool& cancelableArg = false, 
 		DKWindow* viewArg = NULL,		// FIXME: change to DKWindowProxy
-		const DOMString& dataArg = "") {
+		const DOMString& dataArg = ""){
 		DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, dataArg);
 		DKTODO();
 	}

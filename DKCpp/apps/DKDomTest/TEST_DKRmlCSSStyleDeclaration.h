@@ -10,7 +10,7 @@
 class TEST_DKRmlCSSStyleDeclaration //: public DKObjectT<TEST_DKRmlCSSStyleDeclaration>
 {
 public:
-	TEST_DKRmlCSSStyleDeclaration() {
+	TEST_DKRmlCSSStyleDeclaration(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlCSSStyleDeclaration.h //////");
 		
@@ -18,7 +18,7 @@ public:
 		printDKRmlCSSStyleDeclarationProperties(dkRmlCSSStyleDeclaration);
 	}
 	
-	static void printDKRmlCSSStyleDeclarationProperties(DKRmlCSSStyleDeclaration& dkRmlCSSStyleDeclaration) {
+	static void printDKRmlCSSStyleDeclarationProperties(DKRmlCSSStyleDeclaration& dkRmlCSSStyleDeclaration){
 		DKDEBUGFUNC(dkRmlCSSStyleDeclaration);
 		
 		console.log("dkRmlCSSStyleDeclaration = "		+toString(dkRmlCSSStyleDeclaration));

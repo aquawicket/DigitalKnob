@@ -21,7 +21,7 @@ int dk_test(int __ARGC__, ...){
 	va_start(ap, __ARGC__); /* Before C23: Requires the last fixed parameter (to get the address) */
 	char __ARGV__[256];
 	strcpy(__ARGV__,"");
-	for (int j = 0; j < __ARGC__; j++) { 
+	for (int j = 0; j < __ARGC__; j++){ 
 		char* temp = va_arg(ap, char*);  /* Increments ap to the next argument. */
 		printf("               arg%d = %s\n", j, temp);
 		strcat(__ARGV__, temp);

@@ -37,12 +37,12 @@
 
 /*
 // https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
-static void dump_global_object_keys(duk_context *ctx) {
+static void dump_global_object_keys(duk_context *ctx){
 	DKDEBUGFUNC(ctx);
 	// Prints only non-enumerable keys.  We can't use Object.getOwnPropertyNames() here because we might not have 'Object' any more.
 	duk_eval_string_noresult(ctx,
-	"(function () {\n"
-	"    for (var k in this) { print('key:', k); }\n"
+	"(function (){\n"
+	"    for (var k in this){ print('key:', k); }\n"
 	"})()\n");
 }
 */
@@ -213,7 +213,7 @@ bool DKDomWindow::Init(){
 	
 	//Create the global window object
 	DKDuktape* dt = DKDuktape::Get();
-	if(DKClass::DKValid("DKRml,DKRml0")) {
+	if(DKClass::DKValid("DKRml,DKRml0")){
 		Rml::Element* window = DKRml::Get()->document->GetContext()->GetRootElement(); //Root element that holds all the documents.
 		DKString window_address = DKRml::Get()->elementToAddress(window);
 		DKString var_window = "var window = new Window('" + window_address + "')";
@@ -243,35 +243,35 @@ bool DKDomWindow::Init(){
 	return true;
 }
 
-int DKDomWindow::closed(duk_context* ctx) {
+int DKDomWindow::closed(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::console(duk_context* ctx) {
+int DKDomWindow::console(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::controllers(duk_context* ctx) {
+int DKDomWindow::controllers(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::customElements(duk_context* ctx) {
+int DKDomWindow::customElements(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::crypto(duk_context* ctx) {
+int DKDomWindow::crypto(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::devicePixelRatio(duk_context* ctx) {
+int DKDomWindow::devicePixelRatio(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	//get
-	if (!duk_is_number(ctx, 1)) {
+	if (!duk_is_number(ctx, 1)){
 		float ratio = DKRml::Get()->context->GetDensityIndependentPixelRatio();
 		duk_push_number(ctx, ratio);
 		return true;
@@ -282,79 +282,79 @@ int DKDomWindow::devicePixelRatio(duk_context* ctx) {
 	return true;
 }
 
-int DKDomWindow::document(duk_context* ctx) {
+int DKDomWindow::document(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::DOMMatrix(duk_context* ctx) {
+int DKDomWindow::DOMMatrix(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::DOMMatrixReadOnly(duk_context* ctx) {
+int DKDomWindow::DOMMatrixReadOnly(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::DOMPoint(duk_context* ctx) {
+int DKDomWindow::DOMPoint(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::DOMPointReadOnly(duk_context* ctx) {
+int DKDomWindow::DOMPointReadOnly(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::DOMQuad(duk_context* ctx) {
+int DKDomWindow::DOMQuad(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::DOMRect(duk_context* ctx) {
+int DKDomWindow::DOMRect(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::DOMRectReadOnly(duk_context* ctx) {
+int DKDomWindow::DOMRectReadOnly(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::event(duk_context* ctx) {
+int DKDomWindow::event(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::frameElement(duk_context* ctx) {
+int DKDomWindow::frameElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::frames(duk_context* ctx) {
+int DKDomWindow::frames(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::fullscreen(duk_context* ctx) {
+int DKDomWindow::fullscreen(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::history(duk_context* ctx) {
+int DKDomWindow::history(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::innerHeight(duk_context* ctx) {
+int DKDomWindow::innerHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int y = DKRml::Get()->context->GetDimensions().y;
 	duk_push_int(ctx, y);
 	return true;
 }
 
-int DKDomWindow::innerWidth(duk_context* ctx) {
+int DKDomWindow::innerWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int x = DKRml::Get()->context->GetDimensions().x;
 	duk_push_int(ctx, x);
@@ -675,7 +675,7 @@ int DKDomWindow::getComputedStyle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomWindow::getComputedStyle(): element invalid\n");
 	}

@@ -40,7 +40,7 @@ dk_DKHOME_DIR = function dk_DKHOME_DIR_f(){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 
 	dk_DKHOME_DIR();

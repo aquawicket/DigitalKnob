@@ -57,7 +57,7 @@ public class DKApp extends SDLActivity {
 	public static DKApp instance;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState){
 		Log.d("DKApp.java", "onCreate()");
 		instance = this;
 		super.onCreate(savedInstanceState);
@@ -70,7 +70,7 @@ public class DKApp extends SDLActivity {
 		OpenActivity("SplashActivity");
 
 		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
+		handler.postDelayed(new Runnable(){
 			@Override
 			public void run(){
 				copyAssets();
@@ -85,7 +85,7 @@ public class DKApp extends SDLActivity {
 
 				//This gives DK time to register functions for Webview
 				Handler handler2 = new Handler();
-				handler2.postDelayed(new Runnable() {
+				handler2.postDelayed(new Runnable(){
 					@Override
 					public void run(){
 						//TODO: maybe we can check if the plugins is available - DKAvailable(data)
@@ -99,7 +99,7 @@ public class DKApp extends SDLActivity {
 		*/
 	}
 
-	private void copyAssets() {
+	private void copyAssets(){
 		Log.d("DK.java", "copyAssets()");
 		Log.i("DK.java", "Copying assets to storage . . .");
 		Context context = this.getApplicationContext();
@@ -118,13 +118,13 @@ public class DKApp extends SDLActivity {
 		}
 	}
 
-	private void copyAsset(String path) {
+	private void copyAsset(String path){
 		Log.d("DK.java", "copyAsset("+path+")");
 		Log.i("DK.java", "Copying "+path+" to storage . . .");
 		copyFile(path, true);
 	}
 
-	private void copyFileOrDir(String path, boolean overwrite) {
+	private void copyFileOrDir(String path, boolean overwrite){
 		//Log.d("DK.java", "copyFileOrDir("+path+",boolean)");
 		if(path.equals("null")){ path = ""; }
 		Context context = this.getApplicationContext();
@@ -159,7 +159,7 @@ public class DKApp extends SDLActivity {
 		}
 	}
 
-	private void copyFile(String filename, boolean overwrite) {
+	private void copyFile(String filename, boolean overwrite){
 		//Log.d("DK.java", "copyFile("+filename+",boolean)");
 		Context context = this.getApplicationContext();
 		int stringId = context.getApplicationInfo().labelRes;

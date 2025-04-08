@@ -1,7 +1,7 @@
 // supressed entries will not be logged.
 var supress = ["mousemove", "mouseover", "mouseout", "mouseleave"];
 
-DKEventMonitor = function DKEventMonitor_j() {
+DKEventMonitor = function DKEventMonitor_j(){
 	document.addEventListener("DOMContentLoaded", function(event){ DKEventMonitor.prototype.debugEvent(event, document); });
 }
 
@@ -127,7 +127,7 @@ DKEventMonitor.prototype.debugEvent = function DKEventMonitor_debugEvent(event, 
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	dk_source(DKJAVASCRIPT_DIR+"/functions/DKHtmlConsole.js", function(){

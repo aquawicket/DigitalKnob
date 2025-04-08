@@ -33,7 +33,7 @@
 Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey){
 	DKDEBUGFUNC(sdlkey);
     using namespace Rml::Input;
-    switch(sdlkey) {
+    switch(sdlkey){
         case SDLK_UNKNOWN:
             return KI_UNKNOWN;
             break;

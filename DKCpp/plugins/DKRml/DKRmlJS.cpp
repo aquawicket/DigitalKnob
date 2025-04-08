@@ -29,7 +29,7 @@
 #include "DKRml/DKRmlJS.h"
 
 
-bool DKRmlJS::Init() {
+bool DKRmlJS::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKRml_DebuggerOff", DKRmlJS::DebuggerOff);
 	DKDuktape::AttachFunction("CPP_DKRml_DebuggerOn", DKRmlJS::DebuggerOn);
@@ -39,25 +39,25 @@ bool DKRmlJS::Init() {
 	return true;
 }
 
-int DKRmlJS::DebuggerOff(duk_context* ctx) {
+int DKRmlJS::DebuggerOff(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKRml::Get()->DebuggerOff();
 	return false;
 }
 
-int DKRmlJS::DebuggerOn(duk_context* ctx) {
+int DKRmlJS::DebuggerOn(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKRml::Get()->DebuggerOn();
 	return false;
 }
 
-int DKRmlJS::DebuggerToggle(duk_context* ctx) {
+int DKRmlJS::DebuggerToggle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKRml::Get()->DebuggerToggle();
 	return true;
 }
 
-int DKRmlJS::LoadUrl(duk_context* ctx) {
+int DKRmlJS::LoadUrl(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString file = duk_require_string(ctx, 0);
 	if (!DKRml::Get()->LoadUrl(file))
@@ -65,7 +65,7 @@ int DKRmlJS::LoadUrl(duk_context* ctx) {
 	return true;
 }
 
-int DKRmlJS::PostProcess(duk_context* ctx) {
+int DKRmlJS::PostProcess(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	Rml::ElementList elements;
 	DKRml::Get()->document->GetElementsByTagName(elements, "body");

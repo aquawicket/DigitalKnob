@@ -188,7 +188,7 @@ public:
 		if (!sprite_name.empty()){
 			// Load sprite.
 			bool valid_sprite = false;
-			if (Rml::ElementDocument * document = Rml::Element::GetOwnerDocument()) {
+			if (Rml::ElementDocument * document = Rml::Element::GetOwnerDocument()){
 				if (const Rml::StyleSheet* style_sheet = document->GetStyleSheet()){
 					if (const Rml::Sprite* sprite = style_sheet->GetSprite(sprite_name)){
 						rect = sprite->rectangle;
@@ -267,7 +267,7 @@ public:
 class RmlAudioInstancer : public Rml::ElementInstancer
 {
 public:
-	virtual ~RmlAudioInstancer() {};
+	virtual ~RmlAudioInstancer(){};
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.

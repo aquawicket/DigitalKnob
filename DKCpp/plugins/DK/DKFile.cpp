@@ -208,7 +208,7 @@ bool DKFile::Delete(const DKString& path){
 	return true;
 }
 
-bool DKFile::FileToString(const DKString& file, DKString& string) {
+bool DKFile::FileToString(const DKString& file, DKString& string){
 	DKDEBUGFUNC(file, string);
 	DebugPath(file);
 	if(!PathExists(file))
@@ -222,7 +222,7 @@ bool DKFile::FileToString(const DKString& file, DKString& string) {
 	return true;// && DKDEBUGRETURN(file, string);
 }
 
-bool DKFile::FileLineToString(const DKString& file, const unsigned int lineNum, DKString& string) {
+bool DKFile::FileLineToString(const DKString& file, const unsigned int lineNum, DKString& string){
 	DKDEBUGFUNC(file, lineNum, string);
 	DKString data;
 	FileToString(file, data);
@@ -230,7 +230,7 @@ bool DKFile::FileLineToString(const DKString& file, const unsigned int lineNum, 
 	unsigned int currentLine = 1;
 	std::istringstream f(data);
 	std::string line;
-	while (std::getline(f, line)) {
+	while (std::getline(f, line)){
 		if (lineNum == currentLine){
 			string = line;
 			return true;
@@ -240,7 +240,7 @@ bool DKFile::FileLineToString(const DKString& file, const unsigned int lineNum, 
 	return false;// DKERROR("DKFile::FileLineToString() failed! \n");
 }
 
-bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& extension) {
+bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& extension){
 	DKDEBUGFUNC(filename, path, extension);
 	DebugPath(filename);
 	DebugPath(path);
@@ -258,7 +258,7 @@ bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& 
 	return DKERROR("Could not find "+filename+extension+" file \n");
 }
 
-bool DKFile::GetAbsolutePath(const DKString& in, DKString& out) {
+bool DKFile::GetAbsolutePath(const DKString& in, DKString& out){
 	DKDEBUGFUNC(in, out);
 	//GetAbsolutePath is allowed to recieve obscure paths, it will return normalized paths.
 	if(!PathExists(in))

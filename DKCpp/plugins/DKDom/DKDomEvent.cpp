@@ -97,7 +97,7 @@ int DKDomEvent::cancelBubble(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::cencelBubble(): event invalid\n");
 	}
@@ -113,7 +113,7 @@ int DKDomEvent::cancelable(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::cancelable(): event invalid\n");
 	}
@@ -125,7 +125,7 @@ int DKDomEvent::composed(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::composed(): event invalid\n");
 	}
@@ -137,7 +137,7 @@ int DKDomEvent::currentTarget(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::currentTarget(): event invalid\n");
 	}
@@ -155,7 +155,7 @@ int DKDomEvent::deepPath(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::deepPath(): event invalid\n");
 	}
@@ -167,7 +167,7 @@ int DKDomEvent::defaultPrevented(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::defaultPrevented(): event invalid\n");
 	}
@@ -179,7 +179,7 @@ int DKDomEvent::eventPhase(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::eventPhase(): event invalid\n");
 	}
@@ -192,7 +192,7 @@ int DKDomEvent::explicitOriginalTarget(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::explicitOriginalTarget(): event invalid\n");
 	}
@@ -204,7 +204,7 @@ int DKDomEvent::originalTarget(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::originalTarget(): event invalid\n");
 	}
@@ -216,7 +216,7 @@ int DKDomEvent::returnValue(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::returnValue(): event invalid\n");
 	}
@@ -228,7 +228,7 @@ int DKDomEvent::srcElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::srcElement(): event invalid\n");
 	}
@@ -246,13 +246,13 @@ int DKDomEvent::target(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::target(): event invalid\n");
 	}
 	Rml::Element* targetElement = event->GetCurrentElement();
 	DKString targetElementAddress = DKRml::elementToAddress(targetElement);
-	if (targetElementAddress.empty()) {
+	if (targetElementAddress.empty()){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::target(): targetElementAddress invalid\n");
 	}
@@ -264,7 +264,7 @@ int DKDomEvent::timeStamp(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::timeStamp(): event invalid\n");
 	}
@@ -275,7 +275,7 @@ int DKDomEvent::timeStamp(duk_context* ctx){
 int DKDomEvent::type(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::type(): event invalid\n");
 	}
@@ -295,7 +295,7 @@ int DKDomEvent::isTrusted(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::isTrusted(): event invalid\n");
 	}
@@ -310,7 +310,7 @@ int DKDomEvent::scoped(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::scoped(): event invalid\n");
 	}
@@ -321,11 +321,11 @@ int DKDomEvent::scoped(duk_context* ctx){
 
 // Methods
 /////////////////////////////////////////////
-int DKDomEvent::createEvent(duk_context* ctx) {
+int DKDomEvent::createEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::createEvent(): event invalid\n");
 	}
@@ -337,7 +337,7 @@ int DKDomEvent::composedPath(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::composedPath(): event invalid\n");
 	}
@@ -349,7 +349,7 @@ int DKDomEvent::initEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::initEvent(): event invalid\n");
 	}
@@ -361,7 +361,7 @@ int DKDomEvent::preventDefault(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::preventDefault(): event invalid\n");
 	}
@@ -400,7 +400,7 @@ int DKDomEvent::getPreventDefault(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::getPreventDefault(): event invalid\n");
 	}
@@ -412,7 +412,7 @@ int DKDomEvent::preventBubble(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::preventBubble(): event invalid\n");
 	}
@@ -424,7 +424,7 @@ int DKDomEvent::preventCapture(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::preventCapture(): event invalid\n");
 	}
@@ -439,7 +439,7 @@ int DKDomEvent::getParameters(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
-	if (!event) {
+	if (!event){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomEvent::getParameters(): event invalid\n");
 	}

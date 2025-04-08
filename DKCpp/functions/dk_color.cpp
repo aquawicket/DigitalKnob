@@ -4,7 +4,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
     dk_echo("\n");
  
 	dk_echo("%s%s          CSI Codes         %s\n", black, bg_lblack, clr);

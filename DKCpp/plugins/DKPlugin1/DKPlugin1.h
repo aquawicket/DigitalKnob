@@ -38,11 +38,11 @@ public:
 	bool SomeFunction(void* input, void* output);
 };
 
-extern "C" void* getObj() {
+extern "C" void* getObj(){
     return static_cast<void*>(DKPlugin1::Instance(""));
 }
 
-extern "C" void* getName() {
+extern "C" void* getName(){
     return static_cast<void*>("DKPlugin1");
 }
 

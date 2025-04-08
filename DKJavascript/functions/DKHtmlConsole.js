@@ -1,7 +1,7 @@
 //"use strict";
-function DKHtmlConsole() {}
+function DKHtmlConsole(){}
 
-DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, bottom, left, right, width, height) {
+DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, bottom, left, right, width, height){
 	//alert("DKHtmlConsole.create");
 	if(!window){ alert("windows is invalid"); return; }
 	if(!window.document){ alert("document is invalid"); return; }
@@ -27,7 +27,7 @@ DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, bottom, left
 	console = this //overwrite the console
 }
 
-DKHtmlConsole.prototype.log = function DKHtmlConsole_log(message) {
+DKHtmlConsole.prototype.log = function DKHtmlConsole_log(message){
 	this.dkhtmlconsole.innerHTML = this.dkhtmlconsole.innerHTML + "<a>" + message + "</a></br>";
 	this.dkhtmlconsole.scrollTop = this.dkhtmlconsole.scrollHeight;
 }
@@ -38,7 +38,7 @@ DKHtmlConsole.prototype.log = function DKHtmlConsole_log(message) {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	dkconsole = new DKHtmlConsole;

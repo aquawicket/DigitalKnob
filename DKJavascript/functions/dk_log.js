@@ -133,7 +133,7 @@ var dk_log_FATAL_HALT=1
 //#    @level   - The message level
 //#    @message - The message to print
 //#
-dk_log = function dk_log_f() {
+dk_log = function dk_log_f(){
 	//dk_debugFunc(1 2);
 	
 	//if(dk_log_ENABLE !== 1){return} 
@@ -153,7 +153,7 @@ dk_log = function dk_log_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 
 	dk_log("test dk_log message");

@@ -16,7 +16,7 @@ class DKEventTarget : virtual public DKInterface
 {
 public:
 	// constructor();
-	DKEventTarget() : DKInterface() {
+	DKEventTarget() : DKInterface(){
 		DKDEBUGFUNC();
 		interfaceName = "EventTarget";
 		address[interfaceName] = pointerToAddress(this);
@@ -24,7 +24,7 @@ public:
 	}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	virtual void addEventListener(const DOMString& type, DKCallback callback) {
+	virtual void addEventListener(const DOMString& type, DKCallback callback){
 		DKDEBUGFUNC(type, callback);
 		DKEventListener eventListener;
         eventListener.type = type;
@@ -36,7 +36,7 @@ public:
 		/// Print event list
 		/*
 		unsigned int i=0;
-		for (auto& eventListener : eventListeners) {
+		for (auto& eventListener : eventListeners){
 			DKINFO("event["+toString(i)+"] = ("+eventListener.type+","+eventListener.interfaceAddress+") \n");
 			i++;
         }
@@ -44,7 +44,7 @@ public:
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
-	virtual void removeEventListener(const DOMString& type, DKCallback callback) {
+	virtual void removeEventListener(const DOMString& type, DKCallback callback){
 		DKDEBUGFUNC(type, callback);
 		for(auto it = eventListeners.begin(); it != eventListeners.end();){
 			if(it->type == type && it->interfaceAddress == interfaceAddress) // && it->callback == callback)
@@ -55,9 +55,9 @@ public:
 	}
 	
 	// boolean dispatchEvent(Event event);
-    virtual bool dispatchEvent(DKEvent* event) {
+    virtual bool dispatchEvent(DKEvent* event){
 		DKDEBUGFUNC(event);
-		for (auto& eventListener : eventListeners) {
+		for (auto& eventListener : eventListeners){
 			if(eventListener.type == event->type() && eventListener.interfaceAddress == interfaceAddress){
 				event->currentTarget(this);
 				event->target(this);

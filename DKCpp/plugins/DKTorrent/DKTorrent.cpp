@@ -29,7 +29,7 @@
 
 // return the name of a torrent status enum
 char const* state(lt::torrent_status::state_t s){
-	switch (s) {
+	switch (s){
 	case lt::torrent_status::checking_files: return "checking";
 	case lt::torrent_status::downloading_metadata: return "dl metadata";
 	case lt::torrent_status::downloading: return "downloading";
@@ -55,29 +55,29 @@ void DKTorrent::Loop(){
 	std::vector<lt::alert*> alerts;
 	ses->pop_alerts(&alerts);
 
-	for (lt::alert const* a : alerts) {
-		if (auto at = lt::alert_cast<lt::add_torrent_alert>(a)) {
+	for (lt::alert const* a : alerts){
+		if (auto at = lt::alert_cast<lt::add_torrent_alert>(a)){
 			h = at->handle;
 		}
 		// if we receive the finished alert or an error, we're done
-		if (lt::alert_cast<lt::torrent_finished_alert>(a)) {
+		if (lt::alert_cast<lt::torrent_finished_alert>(a)){
 			h.save_resume_data();
 			//goto done;
 		}
-		if (lt::alert_cast<lt::torrent_error_alert>(a)) {
+		if (lt::alert_cast<lt::torrent_error_alert>(a)){
 			std::cout << a->message() << std::endl;
 			//goto done;
 		}
 
 		// when resume data is ready, save it
-		if (auto rd = lt::alert_cast<lt::save_resume_data_alert>(a)) {
+		if (auto rd = lt::alert_cast<lt::save_resume_data_alert>(a)){
 			std::ofstream of(".resume_file", std::ios_base::binary);
 			of.unsetf(std::ios_base::skipws);
 			lt::bencode(std::ostream_iterator<char>(of)
 				, *rd->resume_data);
 		}
 
-		if (auto st = lt::alert_cast<lt::state_update_alert>(a)) {
+		if (auto st = lt::alert_cast<lt::state_update_alert>(a)){
 			if (st->status.empty()) continue;
 
 			// we only have a single torrent, so we know which one
@@ -97,7 +97,7 @@ void DKTorrent::Loop(){
 	ses->post_torrent_updates();
 
 	// save resume data once every 30 seconds
-	if (clk::now() - last_save_resume > std::chrono::seconds(30)) {
+	if (clk::now() - last_save_resume > std::chrono::seconds(30)){
 		h.save_resume_data();
 		last_save_resume = clk::now();
 	}

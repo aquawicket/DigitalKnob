@@ -19,7 +19,7 @@ int dk_basename(char* path, char** _basename_){
 	
 	// Method 2
 	char *base = strrchr(path, '/');
-    if (base != NULL) {
+    if (base != NULL){
         base++; // Move pointer past the last '/'
     } else {
         base = path; // If no '/', the entire string is the basename

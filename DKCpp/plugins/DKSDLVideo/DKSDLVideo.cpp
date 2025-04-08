@@ -76,7 +76,7 @@ bool DKSDLVideo::Handle(SDL_Event *event){
 bool DKSDLVideo::Play(const void* input, void* output){
 	DKDebug(input, output);
 	DKString path = *(DKString*)input;
-	if(!DKFile::VerifyPath(path)) { return false; }
+	if(!DKFile::VerifyPath(path)){ return false; }
 
 	WV_waaveInit(WAAVE_INIT_AUDIO | WAAVE_INIT_VIDEO);
 	stream = WV_getStream(path.c_str());

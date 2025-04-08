@@ -36,7 +36,7 @@
 //WARNING_ENABLE
 
 
-DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow) {
+DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow){
     DKDEBUGFUNC(sdlRenderer, sdlWindow);
     DKINFO("Using DKSDLRmlRenderer\n");
     mSdlRenderer = sdlRenderer;
@@ -49,7 +49,7 @@ DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWin
 }
 
 // Called by RmlUi when it wants to render geometry that it does not wish to optimise.
-void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
+void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation){
     //DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING
     SDL_Texture* sdlTexture = GetGifAnimation(texture);
     if (sdlTexture == nullptr)
@@ -60,7 +60,7 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
     //If the id contains [CEF] , it is a cef image
     //Update the texture with DKSDLCef::GetTexture(id);
     ///////////////////////////////////////////////////////////
-    if (has(texture_name[texture], "[CEF]")) {
+    if (has(texture_name[texture], "[CEF]")){
         DKString id = texture_name[texture];
         replace(id, "[CEF]", "");
         struct DKTexture { SDL_Texture* texture; };
@@ -87,7 +87,7 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
 }
 
 // Called by RmlUi when it wants to compile geometry it believes will be static for the foreseeable future.
-Rml::CompiledGeometryHandle DKSDLRmlRenderer::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture) {
+Rml::CompiledGeometryHandle DKSDLRmlRenderer::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture){
     DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture);
     DK_UNUSED(vertices);
     DK_UNUSED(num_vertices);
@@ -98,17 +98,17 @@ Rml::CompiledGeometryHandle DKSDLRmlRenderer::CompileGeometry(Rml::Vertex* verti
 }
 
 // Called by RmlUi when it wants to render application-compiled geometry.
-void DKSDLRmlRenderer::RenderCompiledGeometry(Rml::CompiledGeometryHandle geometry, const Rml::Vector2f& translation) {
+void DKSDLRmlRenderer::RenderCompiledGeometry(Rml::CompiledGeometryHandle geometry, const Rml::Vector2f& translation){
     DKDEBUGFUNC(geometry, translation);
 }
 
 // Called by RmlUi when it wants to release application-compiled geometry.
-void DKSDLRmlRenderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geometry) {
+void DKSDLRmlRenderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geometry){
     DKDEBUGFUNC(geometry);
 }
 
 // Called by RmlUi when it wants to enable or disable scissoring to clip content.		
-void DKSDLRmlRenderer::EnableScissorRegion(bool enable) {
+void DKSDLRmlRenderer::EnableScissorRegion(bool enable){
     //DKDEBUGFUNC(enable);  //EXCESSIVE LOGGING
     if (enable)
        SDL_RenderSetClipRect(mSdlRenderer, &mScisorRect);
@@ -137,7 +137,7 @@ bool DKSDLRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
     //The source variable is the id of the iframe. It will contain [CEF] in it's id.
     //We will map that id to the texture handle for later use. 
     ///////////////////////////////////////////////////////////////////////////////
-    if (has(source, "[CEF]")) {
+    if (has(source, "[CEF]")){
         texture_handle = reinterpret_cast<Rml::TextureHandle>(&source);
         texture_name[texture_handle] = source;
         return true;

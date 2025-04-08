@@ -61,7 +61,7 @@ public:
 	
 	// sequence<EventTarget> composedPath();
 	DKString _composedPath = "";
-	virtual const DKString& composedPath() {
+	virtual const DKString& composedPath(){
 		DKDEBUGFUNC();
 		DKTODO();
 		return _composedPath;
@@ -93,7 +93,7 @@ public:
 	virtual void 						eventPhase(const unsigned short& eventPhase) 			{ _eventPhase = eventPhase; }				// setter
 	
 	// undefined stopPropagation();
-	virtual void stopPropagation() {
+	virtual void stopPropagation(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
@@ -104,7 +104,7 @@ public:
 	virtual void 						cancelBubble(const bool& cancelBubble) 					{ _cancelBubble = cancelBubble; }			// setter
 	
 	// undefined stopImmediatePropagation();
-	virtual void stopImmediatePropagation() {
+	virtual void stopImmediatePropagation(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
@@ -125,7 +125,7 @@ public:
 	virtual void 						returnValue(const bool& returnValue) 					{ _returnValue = returnValue; }				// setter
 	
 	// undefined preventDefault();
-	virtual void preventDefault() {
+	virtual void preventDefault(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
@@ -151,7 +151,7 @@ public:
 	virtual void 				 		timeStamp(const DOMHighResTimeStamp& timeStamp) 		{ _timeStamp = timeStamp; }					// setter
 	
 	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
-	virtual void initEvent(const DOMString& type, const bool& bubbles = false, const bool& cancelable = false) {
+	virtual void initEvent(const DOMString& type, const bool& bubbles = false, const bool& cancelable = false){
 		DKDEBUGFUNC(type, bubbles, cancelable);
 		DKTODO();
 	}

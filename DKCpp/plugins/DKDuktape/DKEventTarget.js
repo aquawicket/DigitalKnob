@@ -15,10 +15,10 @@ var EventFromCPP = function EventFromCPP(pointer, event)
 
 // https://dom.spec.whatwg.org/#interface-eventtarget
 instances = [];
-var EventTarget = function EventTarget(pointer) {
+var EventTarget = function EventTarget(pointer){
     this.pointer = pointer;
-    for (var i = 0; i < instances.length; i++) {
-        if (instances[i].pointer === pointer) {
+    for (var i = 0; i < instances.length; i++){
+        if (instances[i].pointer === pointer){
             return instances[i];
             //return already existing instance
         }
@@ -30,11 +30,11 @@ var EventTarget = function EventTarget(pointer) {
     this.listeners = {};
 
     Object.defineProperty(this, "addEventListener", {
-        value: function addEventListener(type, callback, useCapture) {
-            if (!(type in this.listeners)) {
+        value: function addEventListener(type, callback, useCapture){
+            if (!(type in this.listeners)){
                 this.listeners[type] = [];
             }
-            if (this.listeners[type].indexOf(callback) === -1) {
+            if (this.listeners[type].indexOf(callback) === -1){
                 //Do not allow duplicate entries
                 this.listeners[type].push(callback);
             }
@@ -43,13 +43,13 @@ var EventTarget = function EventTarget(pointer) {
         }
     });
     Object.defineProperty(this, "removeEventListener", {
-        value: function removeEventListener(type, callback, useCapture) {
-            if (!(type in this.listeners)) {
+        value: function removeEventListener(type, callback, useCapture){
+            if (!(type in this.listeners)){
                 return;
             }
             var stack = this.listeners[type];
-            for (var i = 0, l = stack.length; i < l; i++) {
-                if (stack[i] === callback) {
+            for (var i = 0, l = stack.length; i < l; i++){
+                if (stack[i] === callback){
                     //console.log(stack[i]);
                     stack.splice(i, 1);
                     this.listeners[type].splice(i, 1);
@@ -61,12 +61,12 @@ var EventTarget = function EventTarget(pointer) {
         }
     });
     Object.defineProperty(this, "dispatchEvent", {
-        value: function dispatchEvent(event) {
-            if (!(event.type in this.listeners)) {
+        value: function dispatchEvent(event){
+            if (!(event.type in this.listeners)){
                 return true;
             }
             var stack = this.listeners[event.type].slice();
-            for (var i = 0; i < stack.length; i++) {
+            for (var i = 0; i < stack.length; i++){
                 stack[i].call(this, event);
             }
             return !event.defaultPrevented;

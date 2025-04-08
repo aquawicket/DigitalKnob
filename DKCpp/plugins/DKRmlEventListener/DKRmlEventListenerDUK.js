@@ -1,5 +1,5 @@
 
-var DKRmlEventListener = function DKRmlEventListener() {
+var DKRmlEventListener = function DKRmlEventListener(){
 	console.log("DKRmlEventListener()");
 
 	//if(address)

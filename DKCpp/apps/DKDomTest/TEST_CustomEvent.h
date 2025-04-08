@@ -21,7 +21,7 @@ public:
 		eventTarget.dispatchEvent(&customEvent);
 	}
 
-	static void printCustomEventProperties(DKCustomEvent* customEvent) {
+	static void printCustomEventProperties(DKCustomEvent* customEvent){
 		DKDEBUGFUNC(customEvent);
 		
 		console.log("customEvent = "			+toString(customEvent));
@@ -38,7 +38,7 @@ public:
 		TEST_Event::printEventProperties(customEvent);
 	}
 	
-	static bool onCustomEvent(DKEvent* event) {
+	static bool onCustomEvent(DKEvent* event){
 		DKDEBUGFUNC(event);
 		console.log("\nTEST_CustomEvent::onCustomEvent()");
 		printCustomEventProperties(dynamic_cast<DKCustomEvent*>(event));		//TODO: try to remove the need for dynamic_cast

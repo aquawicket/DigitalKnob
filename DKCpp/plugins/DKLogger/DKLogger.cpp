@@ -122,14 +122,14 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 		DKUtil::GetThreadId(threadId);
 		string = string + "TID:" + toString((unsigned int)threadId) + "  ";
 	}
-	if(log_lines || lvl == DK_ERROR || lvl == DK_FATAL) {
+	if(log_lines || lvl == DK_ERROR || lvl == DK_FATAL){
 		DKString filename = file;
 		std::string::size_type found = filename.find_last_of("/\\");
 		if(found != std::string::npos && found < filename.length())
 			string += filename.substr(found+1);
 		string = string + ":" + toString(line) + "  ";
 	}
-	if(log_funcs || lvl == DK_ERROR || lvl == DK_FATAL) {
+	if(log_funcs || lvl == DK_ERROR || lvl == DK_FATAL){
 		if(strlen(func))
 			string = string + func + "() ";
 	}

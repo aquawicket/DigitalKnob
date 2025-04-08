@@ -9,31 +9,31 @@ var DocumentOrShadowRoot = {
     //styleSheets =        { console.log("styleSheets")        } //FIXME
 
     // Methods
-    caretPositionFromPoint() {//TODO
+    caretPositionFromPoint(){//TODO
     },
-    elementFromPoint(x, y) {
+    elementFromPoint(x, y){
         //console.log("DocumentOrShadowRoot.elementFromPoint("+x+","+y+")")
         //NOTE: Rml uses GetHoverElement and gets mouse x, y on it's own.
         var elementAddress = CPP_DKDomDocumentOrShadowRoot_elementFromPoint()
-        if (!elementAddress) {
+        if (!elementAddress){
             console.error("DocumentOrShadowRoot.elementFromPoint(" + x + "," + y + "): elementAddress invalid")
             return;
         }
         return new HTMLElement(elementAddress)
     },
-    elementsFromPoint() {
+    elementsFromPoint(){
         //TODO
         CPP_DKDomDocumentOrShadowRoot_elementsFromPoint()
     },
-    getSelection() {
+    getSelection(){
         //TODO
         CPP_DKDomDocumentOrShadowRoot_getSelection()
     },
-    nodeFromPoint() {
+    nodeFromPoint(){
         //TODO
         CPP_DKDomDocumentOrShadowRoot_nodeFromPoint()
     },
-    nodesFromPoint() {
+    nodesFromPoint(){
         //TODO
         CPP_DKDomDocumentOrShadowRoot_nodesFromPoint()
     }

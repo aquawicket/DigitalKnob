@@ -1,6 +1,6 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Window
 
-var Window = function Window(pointer) {
+var Window = function Window(pointer){
     return EventTarget.call(this, pointer);
 }
 Window.prototype = EventTarget.prototype;
@@ -9,8 +9,8 @@ Window.prototype = EventTarget.prototype;
 var window = new Window("window");
 
 //Create the globalThis object
-if (typeof globalThis === 'undefined') {
-    (function () {
+if (typeof globalThis === 'undefined'){
+    (function (){
         var globalThis = new Function('return this;')();
         Object.defineProperty(globalThis, 'globalThis', {
             value: globalThis,

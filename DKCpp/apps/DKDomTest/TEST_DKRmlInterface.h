@@ -11,7 +11,7 @@ class TEST_DKRmlInterface //: public DKObjectT<TEST_DKRmlInterface>
 public:
 	static DKRmlInterface* _dkRmlInterface;
 	
-	TEST_DKRmlInterface() {
+	TEST_DKRmlInterface(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlInterface.h //////");
 		
@@ -20,7 +20,7 @@ public:
 		printDKRmlInterfaceProperties(*_dkRmlInterface);
 	}
 	
-	~TEST_DKRmlInterface() {
+	~TEST_DKRmlInterface(){
 		delete _dkRmlInterface;
 	}
 	

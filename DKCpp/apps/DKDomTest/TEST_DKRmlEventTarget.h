@@ -13,7 +13,7 @@ public:
 	DKRmlEventTarget* dkRmlEventTarget;
 	//std::unique_ptr<DKRmlEventTarget> dkRmlEventTarget;
 
-	TEST_DKRmlEventTarget() {
+	TEST_DKRmlEventTarget(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlEventTarget.h //////");
 		
@@ -23,7 +23,7 @@ public:
 		printDKRmlEventTargetProperties(dkRmlEventTarget);
 	}
 	
-	~TEST_DKRmlEventTarget() {
+	~TEST_DKRmlEventTarget(){
 		delete dkRmlEventTarget;
 	}
 	

@@ -2,26 +2,26 @@
 
 dk.notepadfile = new DKPlugin("dk_notepadfile");
 
-dk.notepadfile.init = function dk_notepad_file_init() {
+dk.notepadfile.init = function dk_notepad_file_init(){
 
     const menu = dk.menu.createInstance(dk.notepad.html.container);
-    dk.menu.addItem(menu, "New", function() {
+    dk.menu.addItem(menu, "New", function(){
         dk.notepadfile.new();
     });
-    dk.menu.addItem(menu, "Open", function() {
+    dk.menu.addItem(menu, "Open", function(){
         console.log("Open");
         dk.notepadfile.open();
     });
-    dk.menu.addItem(menu, "Save", function() {
+    dk.menu.addItem(menu, "Save", function(){
         console.log("Save");
     });
-    dk.menu.addItem(menu, "SaveAs", function() {
+    dk.menu.addItem(menu, "SaveAs", function(){
         console.log("SaveAs");
     });
-    dk.menu.addItem(menu, "Print", function() {
+    dk.menu.addItem(menu, "Print", function(){
         console.log("Print");
     });
-    dk.menu.addItem(menu, "Exit", function(event) {
+    dk.menu.addItem(menu, "Exit", function(event){
         dk.frame.close(dk.notepad.html);
     });
     menu.style.top = "0rem";
@@ -41,7 +41,7 @@ dk.notepadfile.init = function dk_notepad_file_init() {
 }
 
 /*
-function DKNotepadFile_end() {/*
+function DKNotepadFile_end(){/*
 	document.removeEventListener("mousedown", DKNotepadFile_onevent);
 	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_onevent); //FIXME:   DKNotepadFile_New undefined
 	byId("DKNotepadFile_Open").removeEventListener("click", DKNotepadFile_onevent);
@@ -52,7 +52,7 @@ function DKNotepadFile_end() {/*
 	dk.close("DKNotepad/DKNotepadFile.html");
 }
 
-function DKNotepadFile_onevent(event) {
+function DKNotepadFile_onevent(event){
 	//console.warn("DKNotepadFile_onevent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(event.currentTarget.id === "DKNotepadFile_New"){
 		DKNotepadFile_New();
@@ -84,27 +84,27 @@ function DKNotepadFile_onevent(event) {
 }
 */
 
-dk.notepadfile.new = function dk_notepad_file_new() {
+dk.notepadfile.new = function dk_notepad_file_new(){
     console.debug("dk.notepadfile.new()");
     dk.notepad.html.text.value = "";
     dk.notepad.currentFile = "";
 }
 
-function DKNotepadFile_New() {
+function DKNotepadFile_New(){
     byId("DKNotepad_Text").value = "";
     currentFile = "";
 }
 
-function DKNotepadFile_Open() {
-    DKPlugin("DKFile/DKOpenFile.js", function() {
+function DKNotepadFile_Open(){
+    DKPlugin("DKFile/DKOpenFile.js", function(){
         DKFrame_Html("DKFile/DKOpenFile.html");
         DKOpenFile_UpdatePath("/");
         //DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "DKNotepad/DKNotepad.html,OpenFile,/,absolute"); // To -> DKOpenFile
     });
 }
 
-function DKNotepadFile_Save() {
-    if (!currentFile) {
+function DKNotepadFile_Save(){
+    if (!currentFile){
         DKNotepadFile_SaveAs();
         return;
     }
@@ -112,14 +112,14 @@ function DKNotepadFile_Save() {
     //var assets = DKAssets_LocalAssets();
     //console.log("DKNotepadFile_Save(): text = "+text);
     DKFile_StringToFile(text, currentFile);
-    DKPlugin("DKGui/DKMessageBox.js", function() {
+    DKPlugin("DKGui/DKMessageBox.js", function(){
         DKFrame_Html("DKGui/DKMessageBox.html");
         DKMessageBox_Message("File Saved");
     });
 }
 
-function DKNotepadFile_SaveAs() {
-    DKPlugin("DKFile/DKSaveFile.js", function() {
+function DKNotepadFile_SaveAs(){
+    DKPlugin("DKFile/DKSaveFile.js", function(){
         DKFrame_Html("DKFile/DKSaveFile.html");
 
         var event = new Object("SetFile");
@@ -127,7 +127,7 @@ function DKNotepadFile_SaveAs() {
         event.currentTarget = byId("DKFile/DKSaveFile.html");
         event.type = "SetFile";
         event.value = "DKNotepad/DKNotepad.html,SaveFile,/,absolute";
-        window.addEventListener("SetFile", function() {
+        window.addEventListener("SetFile", function(){
             console.log("Creating events is working!")
         }, false);
         window.dispatchEvent(event);
@@ -137,10 +137,10 @@ function DKNotepadFile_SaveAs() {
     });
 }
 
-function DKNotepadFile_Print() {
+function DKNotepadFile_Print(){
     CPP_DKCef_Print(0);
 }
 
-function DKNotepadFile_CheckForSave() {
+function DKNotepadFile_CheckForSave(){
     console.log("TODO\n");
 }

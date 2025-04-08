@@ -6,7 +6,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 	int exit_status = dk_DIGITALKNOB_DIR();
 	dk_echo(DIGITALKNOB_DIR);
     return exit_status;

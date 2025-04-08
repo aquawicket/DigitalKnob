@@ -5,13 +5,13 @@ if(typeof dk_error === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_e
 //#
 //#    https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/filesystemobject-object
 //#
-dk_assertPath = function dk_assertPath_f() {
+dk_assertPath = function dk_assertPath_f(){
 	//dk_debugFunc(0 99);
 
 	_path_ = arguments[0];
 	console.log("_path_ = "+_path_);
 	
-	if(typeof fileSystemObject === "undefined") { 
+	if(typeof fileSystemObject === "undefined"){ 
 		fileSystemObject = new ActiveXObject("Scripting.FileSystemObject");
 	};
 	if(fileSystemObject.FolderExists(_path_) || fileSystemObject.FileExists(_path_)){
@@ -26,7 +26,7 @@ dk_assertPath = function dk_assertPath_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc 0
 
 	//# correct path

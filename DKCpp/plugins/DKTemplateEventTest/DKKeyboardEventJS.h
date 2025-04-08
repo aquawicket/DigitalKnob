@@ -278,7 +278,7 @@ public:
 		return true;
 	}
 	
-	static bool onKeyboardEvent(DKKeyboardEvent* event) {
+	static bool onKeyboardEvent(DKKeyboardEvent* event){
 		DKDEBUGFUNC(event);
 		DKINFO("onKeyboardEvent("+event->type+") \n");
 		

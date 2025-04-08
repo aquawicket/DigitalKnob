@@ -3,7 +3,7 @@
 
 // [Exposed=Window]
 // interface Screen {
-var Screen = function Screen(address) {
+var Screen = function Screen(address){
 	//console.log("Screen("+address+")")
 	
 	if(address)

@@ -145,7 +145,7 @@ int DKDomScreen::mozBrightness(duk_context* ctx){
 
 
 //Methods
-int DKDomScreen::lockOrientation(duk_context* ctx) {
+int DKDomScreen::lockOrientation(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/lockOrientation
 	DKString orientation = duk_require_string(ctx, 0);

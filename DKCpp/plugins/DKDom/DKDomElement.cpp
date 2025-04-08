@@ -271,7 +271,7 @@ int DKDomElement::removeAttribute(duk_context* ctx){
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
@@ -336,7 +336,7 @@ int DKDomElement::querySelector(duk_context* ctx){
 	DKString address = duk_require_string(ctx, 0);
 	DKString selectors = duk_require_string(ctx, 1);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
@@ -357,7 +357,7 @@ int DKDomElement::querySelectorAll(duk_context* ctx){
 	DKString address = duk_require_string(ctx, 0);
 	DKString selectors = duk_require_string(ctx, 1);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
@@ -383,7 +383,7 @@ int DKDomElement::scrollHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
@@ -397,7 +397,7 @@ int DKDomElement::scrollIntoView(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
@@ -416,7 +416,7 @@ int DKDomElement::scrollLeft(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
@@ -430,7 +430,7 @@ int DKDomElement::scrollTop(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
@@ -444,7 +444,7 @@ int DKDomElement::scrollWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;

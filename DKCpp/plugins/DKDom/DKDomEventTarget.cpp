@@ -55,7 +55,7 @@ bool DKDomEventTarget::OnEvent(DKEvents* event){
 		return DKERROR("type invalid");
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
-	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
+	//replace(jsreturn, "(){ [ecmascript code] }", ""); //remove (){ [ecmascript code] }
 	duk_context* ctx = DKDuktape::Get()->ctx;
 	//FIXME: calling jsreturn only works if a function name is passed in.
 	//Example:  document.onmousemove = function(e){} does not work since the function has no name

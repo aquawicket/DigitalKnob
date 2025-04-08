@@ -274,8 +274,8 @@ void DKScreenRecorder::DrawBuffer(){
 #if LINUX
 	image = XGetImage(disp, root, 0, 0, desktopWidth, desktopHeight, AllPlanes, ZPixmap);
 	int w,h;
-	for(h=0; h<desktopHeight; ++h) {
-		for(w=0; w<desktopWidth; ++w) {
+	for(h=0; h<desktopHeight; ++h){
+		for(w=0; w<desktopWidth; ++w){
 			unsigned long xpixel = XGetPixel(image, w, h);
 			unsigned int red   = (xpixel & 0x00ff0000) >> 16;
 			unsigned int green = (xpixel & 0x0000ff00) >> 8;

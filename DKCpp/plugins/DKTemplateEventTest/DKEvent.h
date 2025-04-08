@@ -77,26 +77,26 @@ public:
 	
 	////// Instance methods //////
 	// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
-	void composedPath() {
+	void composedPath(){
 		DKTODO();
 	}
 	// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
-	void preventDefault() {
+	void preventDefault(){
 		DKTODO();
 	}
 	// [Event.stopImmediatePropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation
-	void stopImmediatePropagation() {
+	void stopImmediatePropagation(){
 		DKTODO();
 	}
 	// [Event.stopPropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
-	void stopPropagation() {
+	void stopPropagation(){
 		DKTODO();
 	}
 
 
 	////// Deprecated methods //////
 	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
-	void initEvent() {
+	void initEvent(){
 		DKDEPRECATED();
 	}
 	

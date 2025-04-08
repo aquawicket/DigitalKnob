@@ -22,7 +22,7 @@ string WStringToString(const wstring& wstr)
 	return str;
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 {
 	string str;
 	cin >> str;

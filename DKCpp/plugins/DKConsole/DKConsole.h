@@ -15,7 +15,7 @@
 class DKConsole : virtual public DKInterface
 {
 public:
-	DKConsole() : DKInterface() {
+	DKConsole() : DKInterface(){
 		DKDEBUGFUNC();
 		interfaceName = "Console";
 		address[interfaceName] = pointerToAddress(this);
@@ -24,7 +24,7 @@ public:
 	
 	// Logging
 	//undefined assert(optional boolean condition = false, any... data);
-	virtual void _assert(const DKString& data) {
+	virtual void _assert(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKERROR(data+"\n");
 	}
@@ -43,13 +43,13 @@ public:
 	virtual void _assert(const bool& condition, const double& data)	{ _assert(condition, toString(data)); }
 
 	//undefined clear();
-	virtual void clear() {
+	virtual void clear(){
 		DKDEBUGFUNC();
 		int rtnvalue = DKUtil::System("cls", rtnvalue);
 	}
 
 	//undefined debug(any... data);
-	virtual void debug(const DKString& data) {
+	virtual void debug(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKDEBUG(data+"\n");
 	}
@@ -59,7 +59,7 @@ public:
 	virtual void debug(const double& data)	{ debug(toString(data)); }
 	
 	//undefined error(any... data);
-	virtual void error(const DKString& data) {
+	virtual void error(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKERROR(data+"\n");
 	}
@@ -69,7 +69,7 @@ public:
 	virtual void error(const double& data)	{ error(toString(data)); }
 	
 	//undefined info(any... data);
-	virtual void info(const DKString& data) {
+	virtual void info(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKINFO(data+"\n");
 	}
@@ -79,7 +79,7 @@ public:
 	virtual void info(const double& data)	{ info(toString(data)); }
 
 	//undefined log(any... data);
-	virtual void log(const DKString& data) {
+	virtual void log(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKINFO(data+"\n");
 	}
@@ -89,13 +89,13 @@ public:
 	virtual void log(const double& data){ log(toString(data)); }
 	
 	//undefined table(optional any tabularData, optional sequence<DOMString> properties);
-	virtual void table(const DKString& tabularData = "", const DKString& properties = "") {
+	virtual void table(const DKString& tabularData = "", const DKString& properties = ""){
 		DKDEBUGFUNC(tabularData, properties);
 		DKTODO();
 	}
 	
 	//undefined trace(any... data);
-	virtual void trace(const DKString& data) {
+	virtual void trace(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKTODO();
 	}
@@ -105,7 +105,7 @@ public:
 	virtual void trace(const double& data)	{ trace(toString(data)); }
 	
 	//undefined warn(any... data);
-	virtual void warn(const DKString& data) {
+	virtual void warn(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKWARN(data+"\n");
 	}
@@ -115,33 +115,33 @@ public:
 	virtual void warn(const double& data)	{ warn(toString(data)); }
 	
 	//undefined dir(optional any item, optional object? options);
-	virtual void dir(const DKString& item = "", const DKString& options = "") {
+	virtual void dir(const DKString& item = "", const DKString& options = ""){
 		DKDEBUGFUNC(item, options);
 		DKTODO();
 	}
 	
 	//undefined dirxml(any... data);
-	virtual void dirxml(const DKString& data) {
+	virtual void dirxml(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKTODO();
 	}
 	
 	// Counting
 	//undefined count(optional DOMString label = "default");
-	virtual void count(const DOMString& label = "default") {
+	virtual void count(const DOMString& label = "default"){
 		DKDEBUGFUNC(label);
 		DKTODO();
 	}
 	
 	//undefined countReset(optional DOMString label = "default");
-	virtual void countReset(const DOMString& label = "default") {
+	virtual void countReset(const DOMString& label = "default"){
 		DKDEBUGFUNC(label);
 		DKTODO();
 	}
 	
 	// Grouping
 	//undefined group(any... data);
-	virtual void group(const DKString& data) {
+	virtual void group(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKTODO();
 	}
@@ -151,7 +151,7 @@ public:
 	virtual void group(const double& data)	{ group(toString(data)); }
 	
 	//undefined groupCollapsed(any... data);
-	virtual void groupCollapsed(const DKString& data) {
+	virtual void groupCollapsed(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKTODO();
 	}
@@ -161,20 +161,20 @@ public:
 	virtual void groupCollapsed(const double& data)	{ groupCollapsed(toString(data)); }
 	
 	//undefined groupEnd();
-	virtual void groupEnd() {
+	virtual void groupEnd(){
 		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
 	// Timing
 	//undefined time(optional DOMString label = "default");
-	virtual void time(const DOMString& label = "default") {
+	virtual void time(const DOMString& label = "default"){
 		DKDEBUGFUNC(label);
 		DKTODO();
 	}
 	
 	//undefined timeLog(optional DOMString label = "default", any... data);
-	virtual void timeLog(const DKString& data) {
+	virtual void timeLog(const DKString& data){
 		DKDEBUGFUNC(data);
 		DKTODO();
 	}
@@ -184,7 +184,7 @@ public:
 	}
 	
 	//undefined timeEnd(optional DOMString label = "default");
-	virtual void timeEnd(const DOMString& label = "default") {
+	virtual void timeEnd(const DOMString& label = "default"){
 		DKDEBUGFUNC(label);
 		DKTODO();
 	}

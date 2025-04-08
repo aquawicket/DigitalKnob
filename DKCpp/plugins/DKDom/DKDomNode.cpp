@@ -97,18 +97,18 @@ int DKDomNode::childNodes(duk_context* ctx){
 		return DKERROR("DKDomNode::childNodes(): element invalid\n");
 	int num = element->GetNumChildren();
 	Rml::ElementList elements;
-	for (int i = 0; i < num; i++) {
+	for (int i = 0; i < num; i++){
 		elements.push_back(element->GetChild(i));
 	}
-	if (elements.empty()) {
+	if (elements.empty()){
 		duk_push_null(ctx);
 		return true;
 	}
 	DKString str;
-	for (unsigned int i = 0; i < elements.size(); i++) {
+	for (unsigned int i = 0; i < elements.size(); i++){
 		DKString elementAddress = DKRml::elementToAddress(elements[i]);
 		str += elementAddress;
-		if (i < elements.size() - 1) { str += ","; }
+		if (i < elements.size() - 1){ str += ","; }
 	}
 	duk_push_string(ctx, str.c_str());
 	return true;
@@ -294,7 +294,7 @@ int DKDomNode::appendChild(duk_context* ctx){
 			DKRml::Get()->dkRmlConverter.PostProcess(child);
 	}
 	//post process if it's a <script>
-	if (same("script", child->GetTagName())) {
+	if (same("script", child->GetTagName())){
 		if(child->HasAttribute("src"))
 			DKRml::Get()->dkRmlConverter.PostProcess(child);
 	}
@@ -376,14 +376,14 @@ int DKDomNode::insertBefore(duk_context* ctx){
 			DKRml::Get()->dkRmlConverter.PostProcess(child);
 	}
 	//post process if it's a <script>
-	if (same("script", child->GetTagName())) {
+	if (same("script", child->GetTagName())){
 		if(child->HasAttribute("src"))
 			DKRml::Get()->dkRmlConverter.PostProcess(child);
 	}
 	return true;
 }
 
-int DKDomNode::isDefaultNamespace(duk_context* ctx) {
+int DKDomNode::isDefaultNamespace(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("DKDomNode::isDefaultNamespace not implemented\n");
 }
@@ -453,7 +453,7 @@ int DKDomNode::replaceChild(duk_context* ctx){
 			DKRml::Get()->dkRmlConverter.PostProcess(oldChild);
 	}
 	//post process if it's a <script>
-	if (same("script", oldChild->GetTagName())) {
+	if (same("script", oldChild->GetTagName())){
 		if(oldChild->HasAttribute("src"))
 			DKRml::Get()->dkRmlConverter.PostProcess(oldChild);
 	}

@@ -132,7 +132,7 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output){
 #	endif
 }
 
-bool DKUtil::C2Bin(const DKString hex, std::streamsize size, const char* fileOut) {
+bool DKUtil::C2Bin(const DKString hex, std::streamsize size, const char* fileOut){
 	DKDEBUGFUNC(hex, size, fileOut);
 #	ifdef ISSUE_111424_FIXED
 		//NOTES: 
@@ -727,7 +727,7 @@ bool DKUtil::Round(double& num){
 	return true && DKDEBUGRETURN(num);
 }
 
-bool DKUtil::Run(const DKString& command, const DKString& params /*, rtnvalue*/) {
+bool DKUtil::Run(const DKString& command, const DKString& params /*, rtnvalue*/){
 	DKDEBUGFUNC(command, params/*, rtnvalue*/);
 #	if WIN
 		DKString error;

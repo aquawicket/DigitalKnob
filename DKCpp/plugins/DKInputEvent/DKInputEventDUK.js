@@ -7,7 +7,7 @@
 // [Exposed=Window]
 // interface InputEvent : UIEvent {
 // constructor(DOMString type, optional InputEventInit eventInitDict = {});
-var InputEvent = function InputEvent(type, options, address) {
+var InputEvent = function InputEvent(type, options, address){
 	console.log("InputEvent("+type+","+options+","+address+")")
 	
 	if(address)
@@ -26,7 +26,7 @@ var InputEvent = function InputEvent(type, options, address) {
 	// readonly attribute boolean isComposing;
 	Object.defineProperty(this, "isComposing", {
         get: function isComposing() 	{ return CPP_DKInputEventDUK_isComposing(this.address) },
-		set: function isComposing(data) { return CPP_DKInputEventDUK_isComposing(this.address, data) },
+		set: function isComposing(data){ return CPP_DKInputEventDUK_isComposing(this.address, data) },
 		configurable: true,
     })
 	
@@ -41,11 +41,11 @@ var InputEvent = function InputEvent(type, options, address) {
 	// partial interface InputEvent {
 	// readonly attribute DataTransfer? dataTransfer;
 	Object.defineProperty(this, "dataTransfer", {
-		get: function dataTransfer() { return CPP_DKInputEventDUK_dataTransfer(this.address) },
+		get: function dataTransfer(){ return CPP_DKInputEventDUK_dataTransfer(this.address) },
 	})
 	
 	// sequence<StaticRange> getTargetRanges();
-	InputEvent.prototype.getTargetRanges = function getTargetRanges() {
+	InputEvent.prototype.getTargetRanges = function getTargetRanges(){
 		CPP_DKInputEventDUK_getTargetRanges(this.address);
 	}
 	

@@ -65,29 +65,29 @@ public class EGLview extends GLSurfaceView
 	private static String TAG = "EGLview";
 	private static final boolean DEBUG = false;
 	
-	public EGLview(Context context) {
+	public EGLview(Context context){
 	    super(context);
 	    init(false, 16, 8);
 	}
-	public EGLview(Context context, AttributeSet attrs) {
+	public EGLview(Context context, AttributeSet attrs){
 	    super(context,attrs);
 	    init(false, 16, 8);
 	}
 	
 	
-	public EGLview(Context context, boolean translucent, int depth, int stencil) {
+	public EGLview(Context context, boolean translucent, int depth, int stencil){
 	    super(context);
 	    init(translucent, depth, stencil);
 	}
 	
-	private void init(boolean translucent, int depth, int stencil) {
+	private void init(boolean translucent, int depth, int stencil){
 	
 	    /* By default, GLSurfaceView() creates a RGB_565 opaque surface.
 	     * If we want a translucent one, we should change the surface's
 	     * format here, using PixelFormat.TRANSLUCENT for GL Surfaces
 	     * is interpreted as any 32-bit surface with alpha by SurfaceFlinger.
 	     */
-	    if (translucent) {
+	    if (translucent){
 	        this.getHolder().setFormat(PixelFormat.TRANSLUCENT);
 	    }
 	
@@ -113,7 +113,7 @@ public class EGLview extends GLSurfaceView
 	
 	private static class ContextFactory implements GLSurfaceView.EGLContextFactory {
 	    private static int EGL_CONTEXT_CLIENT_VERSION = 0x3098;
-	    public EGLContext createContext(EGL10 egl, EGLDisplay display, EGLConfig eglConfig) {
+	    public EGLContext createContext(EGL10 egl, EGLDisplay display, EGLConfig eglConfig){
 	        Log.w(TAG, "creating OpenGL ES 1 context");
 	        checkEglError("Before eglCreateContext", egl);
 	        int[] attrib_list = {EGL_CONTEXT_CLIENT_VERSION, 1, EGL10.EGL_NONE };
@@ -122,21 +122,21 @@ public class EGLview extends GLSurfaceView
 	        return context;
 	    }
 	
-	    public void destroyContext(EGL10 egl, EGLDisplay display, EGLContext context) {
+	    public void destroyContext(EGL10 egl, EGLDisplay display, EGLContext context){
 	        egl.eglDestroyContext(display, context);
 	    }
 	}
 	
-	private static void checkEglError(String prompt, EGL10 egl) {
+	private static void checkEglError(String prompt, EGL10 egl){
 	    int error;
-	    while ((error = egl.eglGetError()) != EGL10.EGL_SUCCESS) {
+	    while ((error = egl.eglGetError()) != EGL10.EGL_SUCCESS){
 	        Log.e(TAG, String.format("%s: EGL error: 0x%x", prompt, error));
 	    }
 	}
 	
 	private static class ConfigChooser implements GLSurfaceView.EGLConfigChooser {
 	
-	    public ConfigChooser(int r, int g, int b, int a, int depth, int stencil) {
+	    public ConfigChooser(int r, int g, int b, int a, int depth, int stencil){
 	        mRedSize = r;
 	        mGreenSize = g;
 	        mBlueSize = b;
@@ -159,7 +159,7 @@ public class EGLview extends GLSurfaceView
 	        EGL10.EGL_NONE
 	    };
 	
-	    public EGLConfig chooseConfig(EGL10 egl, EGLDisplay display) {
+	    public EGLConfig chooseConfig(EGL10 egl, EGLDisplay display){
 	
 	        /* Get the number of minimally matching EGL configurations
 	         */
@@ -168,7 +168,7 @@ public class EGLview extends GLSurfaceView
 	
 	        int numConfigs = num_config[0];
 	
-	        if (numConfigs <= 0) {
+	        if (numConfigs <= 0){
 	            throw new IllegalArgumentException("No configs match configSpec");
 	        }
 	
@@ -177,7 +177,7 @@ public class EGLview extends GLSurfaceView
 	        EGLConfig[] configs = new EGLConfig[numConfigs];
 	        egl.eglChooseConfig(display, s_configAttribs2, configs, numConfigs, num_config);
 	
-	        if (DEBUG) {
+	        if (DEBUG){
 	             printConfigs(egl, display, configs);
 	        }
 	        /* Now return the "best" one
@@ -186,8 +186,8 @@ public class EGLview extends GLSurfaceView
 	    }
 	
 	    public EGLConfig chooseConfig(EGL10 egl, EGLDisplay display,
-	            EGLConfig[] configs) {
-	        for(EGLConfig config : configs) {
+	            EGLConfig[] configs){
+	        for(EGLConfig config : configs){
 	            int d = findConfigAttrib(egl, display, config,
 	                    EGL10.EGL_DEPTH_SIZE, 0);
 	            int s = findConfigAttrib(egl, display, config,
@@ -214,26 +214,26 @@ public class EGLview extends GLSurfaceView
 	    }
 	
 	    private int findConfigAttrib(EGL10 egl, EGLDisplay display,
-	            EGLConfig config, int attribute, int defaultValue) {
+	            EGLConfig config, int attribute, int defaultValue){
 	
-	        if (egl.eglGetConfigAttrib(display, config, attribute, mValue)) {
+	        if (egl.eglGetConfigAttrib(display, config, attribute, mValue)){
 	            return mValue[0];
 	        }
 	        return defaultValue;
 	    }
 	
 	    private void printConfigs(EGL10 egl, EGLDisplay display,
-	        EGLConfig[] configs) {
+	        EGLConfig[] configs){
 	        int numConfigs = configs.length;
 	        Log.w(TAG, String.format("%d configurations", numConfigs));
-	        for (int i = 0; i < numConfigs; i++) {
+	        for (int i = 0; i < numConfigs; i++){
 	            Log.w(TAG, String.format("Configuration %d:\n", i));
 	            printConfig(egl, display, configs[i]);
 	        }
 	    }
 	
 	    private void printConfig(EGL10 egl, EGLDisplay display,
-	            EGLConfig config) {
+	            EGLConfig config){
 	        int[] attributes = {
 	                EGL10.EGL_BUFFER_SIZE,
 	                EGL10.EGL_ALPHA_SIZE,
@@ -305,10 +305,10 @@ public class EGLview extends GLSurfaceView
 	                "EGL_CONFORMANT"
 	        };
 	        int[] value = new int[1];
-	        for (int i = 0; i < attributes.length; i++) {
+	        for (int i = 0; i < attributes.length; i++){
 	            int attribute = attributes[i];
 	            String name = names[i];
-	            if ( egl.eglGetConfigAttrib(display, config, attribute, value)) {
+	            if ( egl.eglGetConfigAttrib(display, config, attribute, value)){
 	                Log.w(TAG, String.format("  %s: %d\n", name, value[0]));
 	            } else {
 	                // Log.w(TAG, String.format("  %s: failed\n", name));
@@ -328,16 +328,16 @@ public class EGLview extends GLSurfaceView
 	}
 	
 	private static class Renderer implements GLSurfaceView.Renderer {
-	    public void onDrawFrame(GL10 gl) {
+	    public void onDrawFrame(GL10 gl){
 	        DKMain.CallCppFunction("DKAndroid_step");
 	    }
 	
-	    public void onSurfaceChanged(GL10 gl, int width, int height) {
+	    public void onSurfaceChanged(GL10 gl, int width, int height){
 	    	DKMain.CallCppFunction("DKAndroid_init,"+Integer.toString(width)+","+Integer.toString(height));
 	        DKMain.CallCppFunction("DKAndroid_onResize,"+Integer.toString(width)+","+Integer.toString(height));
 	    }
 	
-	    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+	    public void onSurfaceCreated(GL10 gl, EGLConfig config){
 	        	gl.glEnable(GL10.GL_DEPTH_TEST);
 	        }
 	    }

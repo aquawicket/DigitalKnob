@@ -2,7 +2,7 @@
 function DKCodeRunner(){}
 dk.coderunner = DKPlugin(DKCodeRunner)
 
-DKCodeRunner.prototype.init = function DKCodeRunner_init() {
+DKCodeRunner.prototype.init = function DKCodeRunner_init(){
 	DKPlugin("DKFile/DKFile.js")
 	DKPlugin("DKGui/DKGui.js")
 	DKPlugin("DKGui/DKFrame.js")
@@ -10,11 +10,11 @@ DKCodeRunner.prototype.init = function DKCodeRunner_init() {
 	this.create()
 }
 
-DKCodeRunner.prototype.end = function DKCodeRunner_end() {
+DKCodeRunner.prototype.end = function DKCodeRunner_end(){
 	console.log("DKCodeRunner.prototype.end()")
 }
 
-DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom, left, right, width, height) {
+DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom, left, right, width, height){
 	console.log("DKCodeRunner.prototype.create()")
 	
 	var textareaDiv = document.createElement("div")
@@ -49,7 +49,7 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 		}
 	}, 0)
 
-	textarea.oncontextmenu = function textarea_oncontextmenu(event) {
+	textarea.oncontextmenu = function textarea_oncontextmenu(event){
 		event.preventDefault();
 		var dkmenu = DKMenu.prototype.create(textarea)
 		dkmenu.addItem("Test", function dk_menu_test(){
@@ -62,51 +62,51 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	
 	
 	// CEF ///////////////////////////////////////////////
-	textarea.oninput = function textarea_oninput(event) {
+	textarea.oninput = function textarea_oninput(event){
 		console.log("input")
 		dk.coderunner.saveCache(textarea.value)
 	}
 	// RML /////////////////////////////////////////////////
-	textarea.onchange = function textarea_onchange(event) {
+	textarea.onchange = function textarea_onchange(event){
 		console.log("change")
 		dk.coderunner.saveCache(textarea.value)
 	}
 	
-	dk.gui.createButton(document.body, "Run Code", "4rem", "", "50rem", "", "100rem", "20rem", function() {
+	dk.gui.createButton(document.body, "Run Code", "4rem", "", "50rem", "", "100rem", "20rem", function(){
         console.log("*** Running Code ***")
 		try {
 			eval(textarea.value);
 		} 
-		catch (err) {
+		catch (err){
 			console.error(err);
 		}
     })
 	
-	dk.gui.createButton(document.body, "Pull Assets", "4rem", "", "200rem", "", "100rem", "20rem", function() {
+	dk.gui.createButton(document.body, "Pull Assets", "4rem", "", "200rem", "", "100rem", "20rem", function(){
         dk.file.pullDKAssets()
     })
 	
-	dk.gui.createButton(document.body, "Push Assets", "4rem", "", "350rem", "", "100rem", "20rem", function() {
+	dk.gui.createButton(document.body, "Push Assets", "4rem", "", "350rem", "", "100rem", "20rem", function(){
         dk.file.pushDKAssets()
     })
 	
-	dk.gui.createImageButton(document.body, "Message Box", "DKCodeRunner/messageboxIcon.png", "3rem", "", "", "90rem", "35rem", "30rem", function() {
-        DKPlugin("DKGui/DKMessageBox.js", function() {
-            DKMessageBox.prototype.createConfirm("Restart Yes or No?", function dk_messagebox_createConfirm_callback(rval) {
-                if (rval) {
+	dk.gui.createImageButton(document.body, "Message Box", "DKCodeRunner/messageboxIcon.png", "3rem", "", "", "90rem", "35rem", "30rem", function(){
+        DKPlugin("DKGui/DKMessageBox.js", function(){
+            DKMessageBox.prototype.createConfirm("Restart Yes or No?", function dk_messagebox_createConfirm_callback(rval){
+                if (rval){
                     console.log("you clicked "+rval);
                 }
 			});
 		});
 	})
 	
-	dk.gui.createImageButton(document.body, "File Manager", "DKCodeRunner/folderIcon.png", "3rem", "", "", "50rem", "35rem", "30rem", function() {
-        DKPlugin("DKFile/filemanager.js", function() {
+	dk.gui.createImageButton(document.body, "File Manager", "DKCodeRunner/folderIcon.png", "3rem", "", "", "50rem", "35rem", "30rem", function(){
+        DKPlugin("DKFile/filemanager.js", function(){
 			DKFileManager.prototype.create();
 		});
     })
 	
-	dk.gui.createImageButton(document.body, "Debugger", "DKCodeRunner/Debugger.png", "3rem", "", "", "10rem", "35rem", "30rem", function() {
+	dk.gui.createImageButton(document.body, "Debugger", "DKCodeRunner/Debugger.png", "3rem", "", "", "10rem", "35rem", "30rem", function(){
         if(dk.getBrowser() === "Rml")
 			CPP_DKRml_DebuggerToggle()
 		if(dk.getBrowser() === "Cef")

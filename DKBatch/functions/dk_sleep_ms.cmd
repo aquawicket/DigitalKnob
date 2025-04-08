@@ -11,7 +11,7 @@ setlocal
 	
     :: Method 1 - javascript (fastest)
     set /a "milliseconds=%~1"
-    cscript /nologo /e:JScript "%~f0" "%milliseconds%" %NO_STDERR% && dk_return || (call ) %NO_OUTPUT%
+    cscript /nologo /e:javascript "%~f0" "%milliseconds%" %NO_STDERR% && dk_return || (call ) %NO_OUTPUT%
     
     :: Method 2 - dk_powershell
     set /a "milliseconds=%~1"

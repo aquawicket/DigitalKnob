@@ -22,21 +22,21 @@ WARNING_ENABLE
 
 
 // readonly attribute long availWidth;
-int DKScreen::availWidth() { // getter
+int DKScreen::availWidth(){ // getter
 	DKDEBUGFUNC();
 	DKWARN("Screen.availWidth not implemented! \n");
 	return 0;
 }
 
 // readonly attribute long availHeight;
-int DKScreen::availHeight() { // getter
+int DKScreen::availHeight(){ // getter
 	DKDEBUGFUNC();
 	DKWARN("Screen.availHeight not implemented! \n");
 	return 0;
 }
 
 // readonly attribute long width;
-int DKScreen::width() { // getter
+int DKScreen::width(){ // getter
 	DKDEBUGFUNC();
 	#if ANDROID
 		// https://stackoverflow.com/a/12134363/688352
@@ -86,7 +86,7 @@ int DKScreen::width() { // getter
 }
 
 // readonly attribute long height;
-int DKScreen::height() { // getter
+int DKScreen::height(){ // getter
 	DKDEBUGFUNC();
 	#if ANDROID
 		// https://stackoverflow.com/a/12134363/688352
@@ -137,7 +137,7 @@ int DKScreen::height() { // getter
 }
 
 // readonly attribute unsigned long colorDepth;
-int DKScreen::colorDepth() { // getter
+int DKScreen::colorDepth(){ // getter
 	DKDEBUGFUNC();
 	#if ANDROID
 		DKWARN("Screen.colorDepth not implemented! \n");
@@ -163,7 +163,7 @@ int DKScreen::colorDepth() { // getter
 }
 
 // readonly attribute unsigned long pixelDepth;
-int DKScreen::pixelDepth() { // getter
+int DKScreen::pixelDepth(){ // getter
 	DKDEBUGFUNC();
 	DKWARN("Screen.pixelDepth not implemented! \n");
 	return 0;

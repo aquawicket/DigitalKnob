@@ -7,7 +7,7 @@
 // [Exposed=Window]
 // interface UIEvent : Event {
 //constructor(DOMString type, optional UIEventInit eventInitDict = {});
-var UIEvent = function UIEvent(type, eventInitDict, address) {
+var UIEvent = function UIEvent(type, eventInitDict, address){
 	console.log("UIEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
@@ -43,7 +43,7 @@ var UIEvent = function UIEvent(type, eventInitDict, address) {
 	// partial interface UIEvent {
 	// 		Deprecated in this specification
 	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
-			UIEvent.prototype.initUIEvent = function initUIEvent(typeArg, bubblesArg, cancelableArg, viewArg, detailArg) {
+			UIEvent.prototype.initUIEvent = function initUIEvent(typeArg, bubblesArg, cancelableArg, viewArg, detailArg){
 				CPP_DKUIEventDUK_initUIEvent(this.address, typeArg, bubblesArg, cancelableArg, viewArg, detailArg);
 			}
 	//	};

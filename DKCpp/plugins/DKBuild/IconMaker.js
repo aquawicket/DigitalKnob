@@ -5,15 +5,15 @@ const IMAGEMAGICK_DL = "http://ftp.icm.edu.pl/packages/ImageMagick/binaries/" + 
 const IMAGEMAGICK = DIGITALKNOB_DIR + "/Development/3rdParty/" + IMAGEMAGICK_NAME
 const IMAGEMAGICK_CONVERT = IMAGEMAGICK + "/convert.exe";
 
-function IconMaker_init() {
+function IconMaker_init(){
     IMAGEMAGICK_CONVERT = CPP_DKFile_GetShortName(IMAGEMAGICK_CONVERT);
     console.log("IMAGEMAGICK_CONVERT = " + IMAGEMAGICK_CONVERT);
 }
 
-function IconMaker_end() {
+function IconMaker_end(){
 }
 
-function IconMaker_Create(AppPath) {
+function IconMaker_Create(AppPath){
     CPP_DK_Create("DKArchiveJS");
     IconMaker_ValidateImageMagick();
 
@@ -23,7 +23,7 @@ function IconMaker_Create(AppPath) {
     CPP_DK_Execute(IMAGEMAGICK_CONVERT + " " + AppPath + "/icons/icon.png -define icon:auto-resize=16 " + AppPath + "/assets/favicon.ico");
 
     //Create Mac Icons
-    if (CPP_DK_GetOS() === "Mac") {
+    if (CPP_DK_GetOS() === "Mac"){
         CPP_DKFile_MkDir(AppPath + "/icons/mac");
         CPP_DKFile_MkDir(AppPath + "/icons/mac/icons.iconset");
         CPP_DK_Execute("sips -z 16 16 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_16x16.png");
@@ -62,17 +62,17 @@ function IconMaker_Create(AppPath) {
     //CPP_DKFile_MkDir(AppPath+"/icons/ios7");
 }
 
-function IconMaker_ValidateImageMagick() {
+function IconMaker_ValidateImageMagick(){
     console.log("Looking for ImageMagick...");
     //console.log(SVN);
-    if (!CPP_DKFile_Exists(IMAGEMAGICK_CONVERT)) {
+    if (!CPP_DKFile_Exists(IMAGEMAGICK_CONVERT)){
         console.log("Installing ImageMagick...");
         IconMaker_InstallImageMagick();
     }
     console.log("Found ImageMagick");
 }
 
-function IconMaker_InstallImageMagick() {
+function IconMaker_InstallImageMagick(){
     CPP_DKFile_MkDir(DIGITALKNOB_DIR + "/Development/Download");
     var dlpath = DIGITALKNOB_DIR + "/Development/Download/" + IMAGEMAGICK_NAME + ".zip";
 

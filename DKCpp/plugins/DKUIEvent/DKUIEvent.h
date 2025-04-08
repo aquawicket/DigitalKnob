@@ -19,7 +19,7 @@ class DKUIEvent : public DKEvent
 {
 public:
 	// constructor(DOMString type, optional UIEventInit eventInitDict = {});
-	DKUIEvent(const DOMString& type, const UIEventInit& eventInitDict = "{}") : DKEvent(type, eventInitDict) {
+	DKUIEvent(const DOMString& type, const UIEventInit& eventInitDict = "{}") : DKEvent(type, eventInitDict){
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "UIEvent";
 		address[interfaceName] = pointerToAddress(this);

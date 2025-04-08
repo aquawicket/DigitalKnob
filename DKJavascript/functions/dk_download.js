@@ -5,19 +5,19 @@
 //#
 //#
 dk_download = function dk_download_f(url, destination){
-	if(typeof filesystem === "undefined") { var filesystem = new FileSystem; }
+	if(typeof filesystem === "undefined"){ var filesystem = new FileSystem; }
 	if (filesystem.FileExists(destination)){ return; }
 	console.log("downloading "+url+"  to   "+destination+"\n");
 	var xmlHttpRequest = new XMLHttpRequest;
 	xmlHttpRequest.Open('GET', url, false);
 	xmlHttpRequest.Send();
-	if (xmlHttpRequest.Status == 200) {
+	if (xmlHttpRequest.Status == 200){
 		var filestream = new FileStream;
 		filestream.Open();
 		filestream.Type = 1; // adTypeBinary
 		filestream.Write(xmlHttpRequest.ResponseBody);
 		filestream.Position = 0;
-		if (filesystem.FileExists(destination)) { filesystem.DeleteFile(destination); }
+		if (filesystem.FileExists(destination)){ filesystem.DeleteFile(destination); }
 		filestream.SaveToFile(destination, 2); // adSaveCreateOverWrite
 		filestream.Close();
 	}
@@ -34,7 +34,7 @@ xhr.open("GET", url, false)
 xhr.send()
 	
 var fso = new ActiveXObject("Scripting.FileSystemObject")
-if (fso.FileExists(filepath) == false) {
+if (fso.FileExists(filepath) == false){
 	var stream = new ActiveXObject("ADODB.Stream")
 	stream.Open()
     stream.Type = 1
@@ -54,7 +54,7 @@ if (fso.FileExists(filepath) == false) {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.js")

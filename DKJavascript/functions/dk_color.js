@@ -12,7 +12,7 @@
 //#   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 //#   https://en.wikipedia.org/wiki/ANSI_escape_code
 //#
-dk_color = function dk_color_f() {
+dk_color = function dk_color_f(){
 	//dk_debugFunc(0 1)
 	
 	var USE_COLOR = 1;
@@ -24,7 +24,7 @@ dk_color = function dk_color_f() {
 	fi
 */
 
-	if(USE_COLOR) {
+	if(USE_COLOR){
 		var ESC = "\x1b";    		 	// escape character
 		
 		// Attributes on
@@ -181,7 +181,7 @@ dk_color();
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0)
 	
 	console.log("");

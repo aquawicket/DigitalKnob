@@ -10,7 +10,7 @@
 class TEST_DragEvent //: public DKObjectT<TEST_DragEvent>
 {
 public:
-	TEST_DragEvent() {
+	TEST_DragEvent(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DragEvent.h //////");
 	
@@ -20,7 +20,7 @@ public:
 		eventTarget.dispatchEvent(&dragEvent);
 	}
 	
-	static void printDragEventProperties(DKDragEvent* dragEvent) {
+	static void printDragEventProperties(DKDragEvent* dragEvent){
 		DKDEBUGFUNC(dragEvent);
 		
 		console.log("dragEvent = "					+toString(dragEvent));
@@ -34,7 +34,7 @@ public:
 		TEST_MouseEvent::printMouseEventProperties(dragEvent);
 	}
 	
-	static bool onDragEvent(DKEvent* event) {
+	static bool onDragEvent(DKEvent* event){
 		DKDEBUGFUNC(event);
 		console.log("\nTEST_DragEvent::onDragEvent()");
 		printDragEventProperties(dynamic_cast<DKDragEvent*>(event));						//TODO: try to remove the need for dynamic_cast

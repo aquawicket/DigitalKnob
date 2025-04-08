@@ -2,14 +2,14 @@ var WORKSPACE = "C:/AndroidStudio";
 var ANDROIDSTUDIO = "C:/Program Files/Android/Android Studio/bin/studio64.exe";
 TYPE = byId("BuildType").innerHTML;
 
-function AndroidImport_init() {
+function AndroidImport_init(){
     dk.create("DKHandles");
     ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
     console.log("ANDROIDSTUDIO=" + ANDROIDSTUDIO + "\n");
 }
 
-function AndroidImport_Import() {
-    if (!APP) {
+function AndroidImport_Import(){
+    if (!APP){
         console.log("Please select an app\n");
         return;
     }
@@ -18,8 +18,8 @@ function AndroidImport_Import() {
     var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
     var files = contents.split(",");
 
-    for (var i = 0; i < files.length; i++) {
-        if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP)) {
+    for (var i = 0; i < files.length; i++){
+        if (dk.file.extist(DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP)){
             appdir = DIGITALKNOB_DIR + "/" + files[i] + "/DKCpp/apps/" + APP;
         }
     }
@@ -30,7 +30,7 @@ function AndroidImport_Import() {
 	}
 	*/
 
-    if (!appdir) {
+    if (!appdir){
         console.log("AndroidImport_Import(): cannot locate appdir\n");
         return;
     }
@@ -40,24 +40,24 @@ function AndroidImport_Import() {
     dk.file.makeDir(WORKSPACE + "/" + APP + "_" + TYPE);
     DK_Run(ANDROIDSTUDIO, "");
 
-    if (!DKHandles_WaitForWindow("Welcome to Android Studio", 60)) {
+    if (!DKHandles_WaitForWindow("Welcome to Android Studio", 60)){
         //Check for 60 seconds
         console.warn("DKHandles_WaitForWindow(Welcome to Android Studio): failed\n");
         return;
     }
     console.log("Window is ready.\n");
     var assets = DKAssets_LocalAssets();
-    if (!DK_WaitForImage(assets + "DKBuild/import.bmp", 30)) {
+    if (!DK_WaitForImage(assets + "DKBuild/import.bmp", 30)){
         //Check for 30 seconds
         console.warn("DK_WaitForImage(" + assets + "DKBuild/import.bmp): failed\n");
         return;
     }
-    if (!DK_ClickImage(assets + "DKBuild/import.bmp")) {
+    if (!DK_ClickImage(assets + "DKBuild/import.bmp")){
         console.warn("DK_ClickImage(" + assets + "DKBuild/import.bmp): failed\n");
         return;
     }
 
-    if (!DKHandles_WaitForWindow("Select Eclipse or Gradle Project to Import", 30)) {
+    if (!DKHandles_WaitForWindow("Select Eclipse or Gradle Project to Import", 30)){
         //Check for 30 seconds
         console.warn("DKHandles_WaitForWindow(Select Eclipse or Gradle Project to Import): failed\n");
         return;
@@ -82,7 +82,7 @@ function AndroidImport_Import() {
 	*/
 
     //Get app path
-    if (TYPE === "Debug") {
+    if (TYPE === "Debug"){
         path = appdir + "/android_arm32/Debug";
     } else {
         path = appdir + "/android_arm32/Release";
@@ -101,7 +101,7 @@ function AndroidImport_Import() {
     DK_StrokeKey(13)
     //stroke enter
 
-    if (!DKHandles_WaitForWindow("Import Project from ADT (Eclipse Android)", 30)) {
+    if (!DKHandles_WaitForWindow("Import Project from ADT (Eclipse Android)", 30)){
         //Check for 30 seconds
         console.warn("DKHandles_WaitForWindow(Import Project from ADT (Eclipse Android)): failed\n");
         return;
@@ -171,7 +171,7 @@ function AndroidImport_Import() {
     //copy shared libs
     dk.file.makeDir(WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs");
     dk.file.makeDir(WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a");
-    if (TYPE === "Debug") {
+    if (TYPE === "Debug"){
         DKFile_Copy(appdir + "/android_arm32/Debug/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
     } else {
         DKFile_Copy(appdir + "/android_arm32/Release/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
@@ -180,7 +180,7 @@ function AndroidImport_Import() {
     console.log("Import finished\n");
 
     dk.create("DKAudio");
-    if (CPP_DK_Valid("DKAudioJS,DKAudioJS0")) {
+    if (CPP_DK_Valid("DKAudioJS,DKAudioJS0")){
         DKAudio_PlaySound("DKBuild/ding.wav");
     }
 }

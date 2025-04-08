@@ -1,7 +1,7 @@
 // DKConsoleWindow.js
 
 /////////////////////////////////////////////////////////
-var DKConsoleWindow = function DKConsoleWindow(address) {
+var DKConsoleWindow = function DKConsoleWindow(address){
 	console.log("DKConsoleWindow("+address+")");
 
 	if(address)
@@ -14,10 +14,10 @@ var DKConsoleWindow = function DKConsoleWindow(address) {
 	
 	//// Instance properties ////
 	Object.defineProperty(this, "columns", { //Read only
-        get: function columns() { return CPP_DKConsoleWindowDUK_columns(this.address) },
+        get: function columns(){ return CPP_DKConsoleWindowDUK_columns(this.address) },
     })
 	Object.defineProperty(this, "rows", { //Read only
-        get: function rows() { return CPP_DKConsoleWindowDUK_rows(this.address) },
+        get: function rows(){ return CPP_DKConsoleWindowDUK_rows(this.address) },
     })
 
 	

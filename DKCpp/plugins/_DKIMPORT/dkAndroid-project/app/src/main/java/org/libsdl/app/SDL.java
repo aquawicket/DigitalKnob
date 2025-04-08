@@ -12,14 +12,14 @@ public class SDL {
 
     // This function should be called first and sets up the native code
     // so it can call into the Java classes
-    public static void setupJNI() {
+    public static void setupJNI(){
         SDLActivity.nativeSetupJNI();
         SDLAudioManager.nativeSetupJNI();
         SDLControllerManager.nativeSetupJNI();
     }
 
     // This function should be called each time the activity is started
-    public static void initialize() {
+    public static void initialize(){
         setContext(null);
 
         SDLActivity.initialize();
@@ -28,17 +28,17 @@ public class SDL {
     }
 
     // This function stores the current activity (SDL or not)
-    public static void setContext(Context context) {
+    public static void setContext(Context context){
         mContext = context;
     }
 
-    public static Context getContext() {
+    public static Context getContext(){
         return mContext;
     }
 
     public static void loadLibrary(String libraryName) throws UnsatisfiedLinkError, SecurityException, NullPointerException {
 
-        if (libraryName == null) {
+        if (libraryName == null){
             throw new NullPointerException("No library name provided.");
         }
 
@@ -67,15 +67,15 @@ public class SDL {
             Method loadMethod = relinkInstanceClass.getDeclaredMethod("loadLibrary", contextClass, stringClass, stringClass, relinkListenerClass);
             loadMethod.invoke(relinkInstance, mContext, libraryName, null, null);
         }
-        catch (final Throwable e) {
+        catch (final Throwable e){
             // Fall back
             try {
                 System.loadLibrary(libraryName);
             }
-            catch (final UnsatisfiedLinkError ule) {
+            catch (final UnsatisfiedLinkError ule){
                 throw ule;
             }
-            catch (final SecurityException se) {
+            catch (final SecurityException se){
                 throw se;
             }
         }

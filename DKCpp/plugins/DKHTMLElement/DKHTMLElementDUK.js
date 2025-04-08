@@ -4,7 +4,7 @@
 // [Exposed=Window]
 // interface HTMLElement : Element {
 // [HTMLConstructor] constructor();
-var HTMLElement = function HTMLElement(address) {
+var HTMLElement = function HTMLElement(address){
 	//console.log("HTMLElement("+address+")")
 	
 	if(address)
@@ -58,7 +58,7 @@ var HTMLElement = function HTMLElement(address) {
     })
 	
 	// undefined click();
-	HTMLElement.prototype.click = function click() {
+	HTMLElement.prototype.click = function click(){
 		CPP_DKHTMLElementDUK_click(this.address);
     }
 	
@@ -112,30 +112,30 @@ var HTMLElement = function HTMLElement(address) {
     })
 	
 	// ElementInternals attachInternals();
-	HTMLElement.prototype.attachInternals = function attachInternals() {
+	HTMLElement.prototype.attachInternals = function attachInternals(){
 		return CPP_DKHTMLElementDUK_attachInternals(this.address);
     }
 	
 	// The popover API
 	// undefined showPopover();
-	HTMLElement.prototype.showPopover = function showPopover() {
+	HTMLElement.prototype.showPopover = function showPopover(){
 		CPP_DKHTMLElementDUK_showPopover(this.address);
     }
 	
 	// undefined hidePopover();
-	HTMLElement.prototype.hidePopover = function hidePopover() {
+	HTMLElement.prototype.hidePopover = function hidePopover(){
 		CPP_DKHTMLElementDUK_hidePopover(this.address);
     }
 	
 	// undefined togglePopover(optional boolean force);
-	HTMLElement.prototype.togglePopover = function togglePopover(force) {
+	HTMLElement.prototype.togglePopover = function togglePopover(force){
 		CPP_DKHTMLElementDUK_togglePopover(this.address, force);
     }
 	
 	// [CEReactions] attribute DOMString? popover;
 	Object.defineProperty(this, "popover", {
         get: function popover()		{ return CPP_DKHTMLElementDUK_popover(this.address) },
-		set: function popover(data) { return CPP_DKHTMLElementDUK_popover(this.address, data) },
+		set: function popover(data){ return CPP_DKHTMLElementDUK_popover(this.address, data) },
 		//configurable: true,
     })
 	

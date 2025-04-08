@@ -4,7 +4,7 @@ function main(){
 		document.title = dkTitle;
 
 		document.addEventListener("DOMContentLoaded", onDOMContentLoaded() );
-		function onDOMContentLoaded() {
+		function onDOMContentLoaded(){
 			document.body.style.backgroundColor = "rgb(150,150,150)"
 		}
 }

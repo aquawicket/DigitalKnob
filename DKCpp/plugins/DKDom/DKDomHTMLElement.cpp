@@ -49,7 +49,7 @@ int DKDomHTMLElement::click(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomElement::focus(): element invalid\n");
 	}
@@ -61,7 +61,7 @@ int DKDomHTMLElement::focus(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomElement::focus(): element invalid\n");
 	}
@@ -77,7 +77,7 @@ int DKDomHTMLElement::innerText(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("DKDomElement::offsetParent(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
@@ -91,7 +91,7 @@ int DKDomHTMLElement::offsetHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("DKDomElement::offsetParent(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
@@ -105,7 +105,7 @@ int DKDomHTMLElement::offsetLeft(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("DKDomElement::offsetParent(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
@@ -119,7 +119,7 @@ int DKDomHTMLElement::offsetParent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("DKDomElement::offsetParent(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
@@ -138,7 +138,7 @@ int DKDomHTMLElement::offsetTop(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("DKDomElement::offsetTop(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
@@ -152,7 +152,7 @@ int DKDomHTMLElement::offsetWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if (!element){
 		DKERROR("DKDomElement::offsetParent(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;

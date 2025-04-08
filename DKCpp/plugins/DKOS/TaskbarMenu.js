@@ -7,8 +7,8 @@ function TaskbarMenu(){}
 dk.os.taskbarMenu = DKPlugin(TaskbarMenu, "singleton")
 
 
-TaskbarMenu.prototype.init = function TaskbarMenu_init() {
-    dk.create("DKOS/TaskbarMenu.html", function() {
+TaskbarMenu.prototype.init = function TaskbarMenu_init(){
+    dk.create("DKOS/TaskbarMenu.html", function(){
         document.addEventListener("mousedown", dk.os.taskbarMenu.onevent);
         byId("OpenSource").addEventListener("click", dk.os.taskbarMenu.onevent);
         byId("OpenDebug").addEventListener("click", dk.os.taskbarMenu.onevent);
@@ -30,7 +30,7 @@ TaskbarMenu.prototype.init = function TaskbarMenu_init() {
     });
 }
 
-TaskbarMenu.prototype.end = function TaskbarMenu_end() {
+TaskbarMenu.prototype.end = function TaskbarMenu_end(){
     document.removeEventListener("mousedown", dk.os.taskbarMenu.onevent);
     byId("OpenSource").removeEventListener("click", dk.os.taskbarMenu.onevent);
     byId("OpenDebug").removeEventListener("click", dk.os.taskbarMenu.onevent);
@@ -51,14 +51,14 @@ TaskbarMenu.prototype.end = function TaskbarMenu_end() {
     dk.close("DKOS/TaskbarMenu.html");
 }
 
-TaskbarMenu.prototype.onevent = function TaskbarMenu_onevent(event) {
-    if (event.currentTarget.id === "FileExplorer") {
-		DKPlugin("DKFile/filemanager.js", function() {
+TaskbarMenu.prototype.onevent = function TaskbarMenu_onevent(event){
+    if (event.currentTarget.id === "FileExplorer"){
+		DKPlugin("DKFile/filemanager.js", function(){
 			DKFileManager.prototype.create();
 		});
 		/*
-        DKPlugin("DKFile/DKSolution.js", function(rval) {
-            if (!rval) {
+        DKPlugin("DKFile/DKSolution.js", function(rval){
+            if (!rval){
                 return;
             }
             DKFrame_Html("DKFile/DKSolution.html");
@@ -67,46 +67,46 @@ TaskbarMenu.prototype.onevent = function TaskbarMenu_onevent(event) {
         });
 		*/
     }
-    if (event.currentTarget.id === "OpenBuilder") {
-        DKPlugin("DKBuild/DKBuildGUI.js", function(rval) {
-            if (!rval) {
+    if (event.currentTarget.id === "OpenBuilder"){
+        DKPlugin("DKBuild/DKBuildGUI.js", function(rval){
+            if (!rval){
                 return;
             }
             DKFrame_Html("DKBuild/DKBuildGUI.html");
         });
     }
-    if (event.currentTarget.id === "OpenNotepad") {
-        DKPlugin("DKFile/DKFileAssociation.js", function() {
+    if (event.currentTarget.id === "OpenNotepad"){
+        DKPlugin("DKFile/DKFileAssociation.js", function(){
             DKFileAssociation_Open("DKNotepad/DKNotepad.js");
         });
     }
-    if (event.currentTarget.id === "InputTest") {
-        DKPlugin("DKFile/DKFileAssociation.js", function() {
+    if (event.currentTarget.id === "InputTest"){
+        DKPlugin("DKFile/DKFileAssociation.js", function(){
             DKFileAssociation_Open("DKInputTest/DKInput.js");
         });
     }
-    if (event.currentTarget.id === "OpenMessage") {
-        DKPlugin("DKGui/DKMessageBox.js", function() {
+    if (event.currentTarget.id === "OpenMessage"){
+        DKPlugin("DKGui/DKMessageBox.js", function(){
             DKFrame_Html("DKGui/DKMessageBox.html");
             DKMessageBox_Message("Test DKGui/DKMussageBox");
         });
     }
-    if (event.currentTarget.id === "OpenTetris") {
-        DKPlugin("DKGui/DKFrame.js", function() {
+    if (event.currentTarget.id === "OpenTetris"){
+        DKPlugin("DKGui/DKFrame.js", function(){
             DKFrame_Iframe("Tetris", "http://www.lutanho.net/play/tetris.html", 440, 560);
         });
     }
-    if (event.currentTarget.id === "OpenGoogle") {
-        DKPlugin("DKGui/DKFrame.js", function() {
+    if (event.currentTarget.id === "OpenGoogle"){
+        DKPlugin("DKGui/DKFrame.js", function(){
             DKFrame_Iframe("Google", "https://google.com", 640, 480);
         });
     }
 
-    if (event.currentTarget.id === "Git") {
-        DKPlugin("DKGui/DKMenu.js", function() {
-            DKPlugin("DKGit/GitMenu.js", function() {
+    if (event.currentTarget.id === "Git"){
+        DKPlugin("DKGui/DKMenu.js", function(){
+            DKPlugin("DKGit/GitMenu.js", function(){
                 //DKMenu_ValidatePosition("DKGit/GitMenu.html")
-                if (!window.mouseX) {
+                if (!window.mouseX){
                     window.mouseX = "10",
                     window.mouseY = "10";
                 }
@@ -115,39 +115,39 @@ TaskbarMenu.prototype.onevent = function TaskbarMenu_onevent(event) {
             });
         });
     }
-    if (event.currentTarget.id === "OpenSource") {
+    if (event.currentTarget.id === "OpenSource"){
         //console.log("OpenSource\n");
         dk.create("DKWidgetJS");
         var source = document.body.outerHTML;
         var assets = DKAssets_LocalAssets();
         DKFile_StringToFile(source, assets + "source.html");
-        DKPlugin("DKNotepad/DKNotepad.js", function() {
+        DKPlugin("DKNotepad/DKNotepad.js", function(){
             DKFrame_Html("DKNotepad/DKNotepad.html");
             DKNotepad_Open(assets + "source.html");
             //console.log(source+"\n");
         });
     }
-    if (event.currentTarget.id === "OpenDebug") {
-        if (DK_GetBrowser() === "RML") {
+    if (event.currentTarget.id === "OpenDebug"){
+        if (DK_GetBrowser() === "RML"){
             DKRml_DebuggerOn();
             //FIXME
         }
-        if (DK_GetBrowser() === "CEF") {
+        if (DK_GetBrowser() === "CEF"){
             CPP_DKCef_ShowDevTools(0);
         }
     }
-    if (event.currentTarget.id === "PushDKFiles") {
+    if (event.currentTarget.id === "PushDKFiles"){
         dk.file.pushDKAssets()
     }
-    if (event.currentTarget.id === "ClearConsole") {
+    if (event.currentTarget.id === "ClearConsole"){
         console.clear();
     }
-    if (event.currentTarget.id === "Info") {
+    if (event.currentTarget.id === "Info"){
         console.log("\n**** DKOBJECTS ****\n");
         var objects = DK_GetObjects();
         var arry = objects.split(",");
-        for (var i = 0; i < arry.length; i++) {
-            if (!arry[i]) {
+        for (var i = 0; i < arry.length; i++){
+            if (!arry[i]){
                 continue;
             }
             console.log(arry[i] + "\n");
@@ -157,8 +157,8 @@ TaskbarMenu.prototype.onevent = function TaskbarMenu_onevent(event) {
         console.log("**** DKEVENTS ****\n");
         var events = DK_GetEvents();
         var arry = events.split(",");
-        for (var i = 0; i < arry.length; i++) {
-            if (!arry[i]) {
+        for (var i = 0; i < arry.length; i++){
+            if (!arry[i]){
                 continue;
             }
             console.log(arry[i] + "\n");
@@ -168,55 +168,55 @@ TaskbarMenu.prototype.onevent = function TaskbarMenu_onevent(event) {
         console.log("**** DKFUNCTIONS ****\n");
         var events = DK_GetFunctions();
         var arry = events.split(",");
-        for (var i = 0; i < arry.length; i++) {
-            if (!arry[i]) {
+        for (var i = 0; i < arry.length; i++){
+            if (!arry[i]){
                 continue;
             }
             console.log(arry[i] + "\n");
         }
         console.log("\n");
     }
-    if (event.currentTarget.id === "Reload") {
+    if (event.currentTarget.id === "Reload"){
         DKFrame_CloseAll();
         //CPP_DK_Reload();
         location.reload();
     }
-    if (event.currentTarget.id === "CloseDKGui") {
+    if (event.currentTarget.id === "CloseDKGui"){
         dk.close("TaskbarMenu.js")
         CPP_DK_Exit();
         return;
     }
-    if (event.currentTarget.id === "TaskbarMenu_Run") {
-        if (event.code !== "Enter") {
+    if (event.currentTarget.id === "TaskbarMenu_Run"){
+        if (event.code !== "Enter"){
             return;
         }
         TaskbarMenu_Run(byId("TaskbarMenu_Run").value);
     }
 
-    if (event.currentTarget === document) {
-        if (byId("DKOS/TaskbarMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))) {
+    if (event.currentTarget === document){
+        if (byId("DKOS/TaskbarMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
             return;
         }
     }
     dk.close("DKOS/TaskbarMenu.js");
 }
 
-TaskbarMenu.prototype.Add = function TaskbarMenu_Add(title, code) {
+TaskbarMenu.prototype.Add = function TaskbarMenu_Add(title, code){
     //<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
     var ele = DK_CreateElement(byId("DKOS/TaskbarMenu.html"), "div", "TaskbarMenu_item");
     ele.innerHTML = title;
 }
 
-TaskbarMenu.prototype.Run = function TaskbarMenu_Run(command) {
-    if (command.indexOf("http://") === 0) {
+TaskbarMenu.prototype.Run = function TaskbarMenu_Run(command){
+    if (command.indexOf("http://") === 0){
         DKFrame_Iframe(command, command, "100%", "100%");
         return true;
     }
-    if (command.indexOf("https://") === 0) {
+    if (command.indexOf("https://") === 0){
         DKFrame_Iframe(command, command, "100%", "100%");
         return true;
     }
-    if (command.indexOf("file://") === 0) {
+    if (command.indexOf("file://") === 0){
         DKFrame_Iframe(command, command, "100%", "100%");
         return true;
     }

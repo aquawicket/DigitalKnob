@@ -38,7 +38,7 @@ int main(VOID)
         ErrorExit("SetConsoleMode");
 
     // Loop to read and handle the next 100 input events.
-    while (1) {
+    while (1){
         // Wait for the events.
         if (! ReadConsoleInput(
                 hStdin,      // input buffer handle
@@ -48,8 +48,8 @@ int main(VOID)
         ErrorExit("ReadConsoleInput");
 
         // Dispatch the events to the appropriate handler.
-        for (i = 0; i < cNumRead; i++) {
-            switch(irInBuf[i].EventType) {
+        for (i = 0; i < cNumRead; i++){
+            switch(irInBuf[i].EventType){
                 case KEY_EVENT: // keyboard input
                     KeyEventProc(irInBuf[i].Event.KeyEvent);
                     break;

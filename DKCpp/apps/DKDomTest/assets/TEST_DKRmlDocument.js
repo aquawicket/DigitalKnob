@@ -39,7 +39,7 @@ function onLoad(event){
 			var item = aElements.item(i);
 			if (!item)
 				console.error("aElements.item(" + i + ") invalid!");
-			if (item.hasAttribute("href")) {
+			if (item.hasAttribute("href")){
 				item.style.setProperty("color", "rgb(0,0,255)");
 				item.style.setProperty("text-decoration", "underline");
 				//item.addEventListener("click", onHyperlink);

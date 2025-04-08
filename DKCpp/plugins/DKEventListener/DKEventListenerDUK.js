@@ -3,7 +3,7 @@
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // callback interface EventListener {
-var EventListener = function EventListener(address) {
+var EventListener = function EventListener(address){
 	console.log("EventListener("+address+")")
 	
 	if(address)

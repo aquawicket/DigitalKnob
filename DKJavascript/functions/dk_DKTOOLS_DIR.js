@@ -40,7 +40,7 @@ dk_DKTOOLS_DIR = function dk_DKTOOLS_DIR(){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 
 	dk_DKTOOLS_DIR();

@@ -10,7 +10,7 @@ class TEST_URL //: public DKObjectT<TEST_URL>
 public:
 	DKURL* _dkUrl;
 	
-	TEST_URL() {
+	TEST_URL(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_URL.h //////");
 		
@@ -19,7 +19,7 @@ public:
 		printURLProperties(*_dkUrl);
 	}
 	
-	~TEST_URL() {
+	~TEST_URL(){
 		delete _dkUrl;
 	}
 	

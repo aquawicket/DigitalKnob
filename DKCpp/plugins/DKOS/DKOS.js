@@ -1,9 +1,9 @@
 //"use strict";
 
 dk.os = DKPlugin(DKOS, "singleton")
-function DKOS() {}
+function DKOS(){}
 
-DKOS.prototype.init = function DKOS_init() {
+DKOS.prototype.init = function DKOS_init(){
     console.log("DKOS.prototype.init()")
 	DKPlugin("DKFile/DKFile.js")
 	DKPlugin("DKGui/DKGui.js")
@@ -12,21 +12,21 @@ DKOS.prototype.init = function DKOS_init() {
 	this.create()
 }
 
-DKOS.prototype.end = function DKOS_end() {
+DKOS.prototype.end = function DKOS_end(){
 	console.log("DKOS.prototype.end()")
 }
 
-DKOS.prototype.create = function DKOS_create(parent, top, bottom, left, right, width, height) {
+DKOS.prototype.create = function DKOS_create(parent, top, bottom, left, right, width, height){
 	console.log("DKCodeRunner.prototype.create()")
 	
-	 dk.create("DKOS/DKOS.html", function() {
+	 dk.create("DKOS/DKOS.html", function(){
         document.documentElement.style.backgroundColor = "black";
         document.body.style.margin = "0px";
         document.body.style.overflow = "hidden";
         
 		/*
 		var OS = DK_GetOS();
-        if (OS !== "iOS" && OS !== "Android") {/*
+        if (OS !== "iOS" && OS !== "Android"){/*
 			var screenwidth = screen.width;
 			var screenheight = screen.height;
 			var newwidth = parseInt(screenwidth)-100;
@@ -36,9 +36,9 @@ DKOS.prototype.create = function DKOS_create(parent, top, bottom, left, right, w
         }
 		*/
 
-        DKPlugin("DKOS/Desktop.js")//, function() {
-            DKPlugin("DKOS/Taskbar.js")//, function() {
-                //if (OS === "iOS" || OS === "Android") {//DK_SetScale(2);   FIXME
+        DKPlugin("DKOS/Desktop.js")//, function(){
+            DKPlugin("DKOS/Taskbar.js")//, function(){
+                //if (OS === "iOS" || OS === "Android"){//DK_SetScale(2);   FIXME
                 //}
             //});
         //});

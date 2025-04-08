@@ -17,7 +17,7 @@ class DKInputEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional InputEventInit eventInitDict = {});
-	DKInputEvent(const DOMString& type, const InputEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
+	DKInputEvent(const DOMString& type, const InputEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict){
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "InputEvent";
 		address[interfaceName] = pointerToAddress(this);
@@ -48,7 +48,7 @@ public:
 	
 	// sequence<StaticRange> getTargetRanges();
 	DKString _getTargetRanges = "";
-	virtual const DKString& getTargetRanges() {
+	virtual const DKString& getTargetRanges(){
 		DKDEBUGFUNC();
 		DKTODO();
 		return _getTargetRanges;

@@ -6,16 +6,16 @@ var USE_NODEJS=0;
 
 
 //###### Console ######
-(function(con) {
+(function(con){
 	'use strict';
 	var prop, method;
 	var empty = {};
 	if(typeof ActiveXObject === "function"){
 		if(typeof WScript === "object"){
 			if(typeof WScript.StdOut !== "undefined")
-			var print = function(msg) { WScript.StdOut.Write(msg+"\n"); };
+			var print = function(msg){ WScript.StdOut.Write(msg+"\n"); };
 		} else {
-			var print = function(msg) {
+			var print = function(msg){
 				// https://stackoverflow.com/a/52793021/688352
 				//var WShell = new ActiveXObject('WScript.Shell');
 				//var WShellExec = WShell.Exec("cmd /c echo "+msg);
@@ -65,41 +65,45 @@ if(typeof ActiveXObject === "function"){
 	DKENGINE = "Browser" 
 }
 dk_check('DKENGINE');
-//console.log("DKENGINE = "+DKENGINE);
-//console.log("DKENGINE_VERSION = "+DKENGINE_VERSION);
+console.log("DKENGINE = "+DKENGINE);
+console.log("DKENGINE_VERSION = "+DKENGINE_VERSION);
 
 
 //############ ARGV, ARGC ############
 if(typeof WScript === "object"){
 	ARGC = WScript.Arguments.Count();
 	var ARGV = new Array(ARGC);
-    for(var i = 0; i < ARGV.length; ++i) {
+    for(var i = 0; i < ARGV.length; ++i){
         ARGV[i] = WScript.Arguments(i);
 		console.log("ARGV["+i+"] = "+ARGV[i]);
     }
+	console.log("ARGV = "+ARGV);
+	console.log("ARGC = "+ARGC);
 }
 
 //############ globalThis ############
-if(typeof globalThis === "undefined") {
-	var globalThis = (function () {  
+if(typeof globalThis === "undefined"){
+	var globalThis = (function (){  
 		return this || (1, eval)('this');  
 	}());
+	console.log("globalThis = "+typeof globalThis);
 }
 dk_check('globalThis');
 
 
 //############ window ############
-if(typeof window === "undefined") {
-	var window = (function () {  
+if(typeof window === "undefined"){
+	var window = (function (){  
 		return this || (1, eval)('this');  
 	}());
+	console.log("window = "+typeof window);
 }
 dk_check('window');
 
 
 //############ String.prototype.replaceAll (polyfill) ############
-if(typeof String.prototype.replaceAll === "undefined") {
-	String.prototype.replaceAll = function replaceAll(search, replace) { 
+if(typeof String.prototype.replaceAll === "undefined"){
+	String.prototype.replaceAll = function replaceAll(search, replace){ 
 		return this.split(search).join(replace); 
 	}
 }
@@ -107,18 +111,19 @@ if(typeof String.prototype.replaceAll === "undefined") {
 
 
 //############ XMLHttpRequest ############
-if(typeof XMLHttpRequest == "undefined"){ // || !ie7xmlhttp) {
+if(typeof XMLHttpRequest == "undefined"){ // || !ie7xmlhttp){
 	if(typeof ActiveXObject === "function"){
-		XMLHttpRequest = function() {
+		XMLHttpRequest = function(){
 			return new ActiveXObject("Msxml2.XMLHTTP.6.0");
 		}
+		console.log("XMLHttpRequest = "+typeof XMLHttpRequest);
 	}
 }
 dk_check('XMLHttpRequest');
 
 
 //############ dk_source ############
-if(typeof dk_source === "undefined") {
+if(typeof dk_source === "undefined"){
 	dk_source = function(url, callback){
 		var url = url.replaceAll("\\", "/");
 		//############ Msxml2.XMLHTTP.6.0 ############
@@ -141,14 +146,14 @@ if(typeof dk_source === "undefined") {
 			// file:///C:/Path/Format
 			var script = document.createElement("script");
 			script.src = url;  
-			if (callback) {
-				script.onreadystatechange = function () { // IE < 7, does not support onload
-					if (script.readyState === "loaded" || script.readyState === "complete") {
+			if (callback){
+				script.onreadystatechange = function (){ // IE < 7, does not support onload
+					if (script.readyState === "loaded" || script.readyState === "complete"){
 						script.onreadystatechange = null; // no need to be notified again
 						callback();
 					}
 				};
-				script.onload = function () { // other browsers
+				script.onload = function (){ // other browsers
 					callback();
 				};
 			}
@@ -162,7 +167,8 @@ dk_check('dk_source');
 //############ DOMDocument ############
 if(typeof ActiveXObject === "function"){
 	if(typeof document === "undefined"){ 
-		var document = new ActiveXObject("Msxml2.DOMDocument.6.0");  
+		var document = new ActiveXObject("Msxml2.DOMDocument.6.0");
+		console.log("document = "+typeof document);
 		document.async = true;
 		document.setProperty("ProhibitDTD", false);
 		document.validateOnParse = false;
@@ -179,6 +185,7 @@ dk_check('document');
 if(typeof ActiveXObject === "function"){
 	if(typeof WShell === "undefined"){ 
 		var WShell = new ActiveXObject("WScript.Shell");
+		console.log("WShell = "+typeof WShell);
 	}
 }
 //dk_check('WShell');
@@ -214,11 +221,11 @@ console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
 
 //############ queryString ############
 var queryString = "undefined"
-if(typeof location === "object") {
-	if(typeof location.search === "string") {
+if(typeof location === "object"){
+	if(typeof location.search === "string"){
 		queryString = location.search;
 	}
-	else if(typeof location.href === "string") {
+	else if(typeof location.href === "string"){
 		queryString=location.href.split('?')[1];
 	}
 }
@@ -366,7 +373,8 @@ dk_check('console');
 
 //############ onDOMContentLoaded ############
 if(typeof onDOMContentLoaded === "undefined"){
-	function onDOMContentLoaded() {
+	function onDOMContentLoaded(){
+		console.log("onDOMContentLoaded()")
 		if(!window){ alert("window is invalid"); return; }
 		if(!document){ alert("document is invalid"); return; }
 		if(!window.document){ alert("window.document is invalid"); return; }
@@ -388,7 +396,11 @@ if(typeof document.addEventListener !== "undefined"){
 
 //############ body_onload ############
 function body_onload(){
-	if(!window.document.body){ alert("window.document.body is invalid"); return; }
+	console.log("body_onload()")
+	if(!window.document.body){ 
+		alert("window.document.body is invalid"); 
+		//return; 
+	}
 		
 	if(DKSCRIPT_FILE === "index.html"){
 		var APP_NAME = DKSCRIPT_DIR.substr(DKSCRIPT_DIR.lastIndexOf("/")+1);
@@ -408,7 +420,6 @@ dk_check('body_onload');
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
 dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
-
 
 
 

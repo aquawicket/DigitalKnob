@@ -1,27 +1,27 @@
-function DKStats_init() {
+function DKStats_init(){
     dk.create("DKStats/DKStats.html");
     window.addEventListener("second", DKStats_onevent);
     //byId("DKStats/DKStats.html").addEventListener("click", DKStats_onevent);
     DKStats_Update();
 }
 
-function DKStats_end() {
+function DKStats_end(){
     window.removeEventListener("second", DKStats_onevent);
     //byId("DKStats/DKStats.html").removeEventListener("click", DKStats_onevent);
     dk.close("DKStats/DKStats.html");
 }
 
-function DKStats_onevent(event) {
-    if (event.type === "second") {
+function DKStats_onevent(event){
+    if (event.type === "second"){
         DKStats_Update();
     }
 }
 
-function DKStats_Update() {
+function DKStats_Update(){
     //TIME
     var currentdate = new Date();
     var hours = currentdate.getHours();
-    if (hours > 12) {
+    if (hours > 12){
         hours = hours - 12;
     }
     // Standard time

@@ -12,7 +12,7 @@
 class DKScreen : public DKInterface
 {
 public:
-	DKScreen() : DKInterface() {
+	DKScreen() : DKInterface(){
 		DKDEBUGFUNC();
 		interfaceName = "Screen";
 		address[interfaceName] = pointerToAddress(this);

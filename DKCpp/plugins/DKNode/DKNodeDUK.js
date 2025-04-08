@@ -4,7 +4,7 @@
 
 // [Exposed=Window]
 // interface Node : EventTarget {
-var Node = function Node(address) {
+var Node = function Node(address){
 	console.log("Node("+address+")")
 	
 	if(address)
@@ -116,7 +116,7 @@ var Node = function Node(address) {
     })
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
-	Node.prototype.getRootNode = function getRootNode(options) {
+	Node.prototype.getRootNode = function getRootNode(options){
 		return CPP_DKNodeDUK_getRootNode(this.address, options);
     }
 	
@@ -133,7 +133,7 @@ var Node = function Node(address) {
     })
 	
 	// boolean hasChildNodes();
-	Node.prototype.hasChildNodes = function hasChildNodes() {
+	Node.prototype.hasChildNodes = function hasChildNodes(){
 		return CPP_DKNodeDUK_hasChildNodes(this.address);
     }
 	
@@ -180,22 +180,22 @@ var Node = function Node(address) {
     })
 	
 	// [CEReactions] undefined normalize();
-	Node.prototype.normalize = function normalize() {
+	Node.prototype.normalize = function normalize(){
 		CPP_DKNodeDUK_normalize(this.address);
     }
 	
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
-	Node.prototype.cloneNode = function cloneNode(deep) {
+	Node.prototype.cloneNode = function cloneNode(deep){
 		return CPP_DKNodeDUK_cloneNode(this.address, deep);
     }
 	
 	// boolean isEqualNode(Node? otherNode);
-	Node.prototype.isEqualNode = function isEqualNode(otherNode) {
+	Node.prototype.isEqualNode = function isEqualNode(otherNode){
 		return CPP_DKNodeDUK_isEqualNode(this.address, otherNode);
     }
 	
 	// boolean isSameNode(Node? otherNode); // legacy alias of ===
-	Node.prototype.isSameNode = function isSameNode(otherNode) {
+	Node.prototype.isSameNode = function isSameNode(otherNode){
 		return CPP_DKNodeDUK_isSameNode(this.address, otherNode);
     }
 	
@@ -236,47 +236,47 @@ var Node = function Node(address) {
     })
 	
 	// unsigned short compareDocumentPosition(Node other);
-	Node.prototype.compareDocumentPosition = function compareDocumentPosition(other) {
+	Node.prototype.compareDocumentPosition = function compareDocumentPosition(other){
 		return CPP_DKNodeDUK_compareDocumentPosition(this.address, other);
     }
 	
 	// boolean contains(Node? other);
-	Node.prototype.contains = function contains(other) {
+	Node.prototype.contains = function contains(other){
 		return CPP_DKNodeDUK_contains(this.address, other);
     }
 	
 	// DOMString? lookupPrefix(DOMString? namespace);
-	Node.prototype.lookupPrefix = function lookupPrefix(namespace) {
+	Node.prototype.lookupPrefix = function lookupPrefix(namespace){
 		return CPP_DKNodeDUK_lookupPrefix(this.address, namespace);
     }
 	
 	// DOMString? lookupNamespaceURI(DOMString? prefix);
-	Node.prototype.lookupNamespaceURI = function lookupNamespaceURI(prefix) {
+	Node.prototype.lookupNamespaceURI = function lookupNamespaceURI(prefix){
 		return CPP_DKNodeDUK_lookupNamespaceURI(this.address, prefix);
     }
 	
 	// boolean isDefaultNamespace(DOMString? namespace);
-	Node.prototype.isDefaultNamespace = function isDefaultNamespace(namespace) {
+	Node.prototype.isDefaultNamespace = function isDefaultNamespace(namespace){
 		return CPP_DKNodeDUK_isDefaultNamespace(this.address, namespace);
     }
 	
 	// [CEReactions] Node insertBefore(Node node, Node? child);
-	Node.prototype.insertBefore = function insertBefore(node, child) {
+	Node.prototype.insertBefore = function insertBefore(node, child){
 		return CPP_DKNodeDUK_insertBefore(this.address, node, child);
     }
 	
 	// [CEReactions] Node appendChild(Node node);
-	Node.prototype.appendChild = function appendChild(node) {
+	Node.prototype.appendChild = function appendChild(node){
 		return CPP_DKNodeDUK_appendChild(this.address, node);
     }
 	
 	// [CEReactions] Node replaceChild(Node node, Node child);
-	Node.prototype.replaceChild = function replaceChild(node, child) {
+	Node.prototype.replaceChild = function replaceChild(node, child){
 		return CPP_DKNodeDUK_replaceChild(this.address, node, child);
     }
 	
 	// [CEReactions] Node removeChild(Node child);
-	Node.prototype.removeChild = function removeChild(child) {
+	Node.prototype.removeChild = function removeChild(child){
 		return CPP_DKNodeDUK_removeChild(this.address, child);
     }
 	

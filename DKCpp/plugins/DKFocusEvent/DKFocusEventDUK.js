@@ -7,7 +7,7 @@
 // [Exposed=Window]
 // interface FocusEvent : UIEvent {
 // constructor(DOMString type, optional FocusEventInit eventInitDict = {});
-var FocusEvent = function FocusEvent(type, eventInitDict, address) {
+var FocusEvent = function FocusEvent(type, eventInitDict, address){
 	console.log("FocusEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)

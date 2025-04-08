@@ -89,7 +89,7 @@ public:
 		return true;
 	}
 	
-	static bool onFocusEvent(DKFocusEvent* event) {
+	static bool onFocusEvent(DKFocusEvent* event){
 		DKDEBUGFUNC(event);
 		DKINFO("onFocusEvent("+event->type+") \n");
 		

@@ -344,7 +344,7 @@ public:
 		return true;
 	}
 	
-	static bool onMouseEvent(DKMouseEvent* event) {
+	static bool onMouseEvent(DKMouseEvent* event){
 		DKDEBUGFUNC(event);
 		DKINFO("onMouseEvent("+event->type+") \n");
 		

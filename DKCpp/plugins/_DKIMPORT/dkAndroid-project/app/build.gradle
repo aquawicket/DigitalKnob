@@ -1,6 +1,6 @@
 def buildAsLibrary = project.hasProperty('BUILD_AS_LIBRARY');
 def buildAsApplication = !buildAsLibrary
-if (buildAsApplication) {
+if (buildAsApplication){
     apply plugin: 'com.android.application'
 }
 else {
@@ -12,7 +12,7 @@ android {
 	ndkVersion "23.1.7779620"
 	ndkPath 'C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/23.1.7779620'
     defaultConfig {
-        if (buildAsApplication) {
+        if (buildAsApplication){
             applicationId "org.libsdl.app"
         }
         minSdkVersion 26
@@ -37,7 +37,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
+    if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')){
         externalNativeBuild {
 			cmake {
 				path 'jni/src/CMakeLists.txt'

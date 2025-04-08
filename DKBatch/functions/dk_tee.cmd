@@ -4,7 +4,7 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-rem APATee.bat: Asynchronous (real time) Tee program, Batch-JScript hybrid version
+rem APATee.bat: Asynchronous (real time) Tee program, Batch-javascript hybrid version
 rem Antonio Perez Ayala
 
 rem The advantage of this program is that the data management is written in Batch code,
@@ -31,14 +31,14 @@ if /I "%~2" neq "/A" if exist %1 (del %1)
 rem Create the semaphore-signal file and start the asynchronous Tee process
 echo X > Flag.out
 if exist Flag.in (del Flag.in)
-Cscript //nologo //E:JScript "%~F0" | "%~F0" %1 :TeeProcess
+Cscript //nologo //E:javascript "%~F0" | "%~F0" %1 :TeeProcess
 del Flag.out
 goto :EOF
 
 :TeeProcess
    rem Wait for "Data Available" signal
    if not exist Flag.in (goto TeeProcess)
-   rem Read the input line sent by JScript code
+   rem Read the input line sent by javascript code
    set line=
    set /P line=
    rem Set "Data Read" acknowledgement
@@ -59,7 +59,7 @@ goto TeeProcess
 @end
 
 
-// JScript section
+// javascript section
 
 var fso = new ActiveXObject("Scripting.FileSystemObject");
 // Process all lines of Stdin

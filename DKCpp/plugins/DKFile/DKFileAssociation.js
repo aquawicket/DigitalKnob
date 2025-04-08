@@ -1,83 +1,83 @@
 "use strict";
 
-function DKFileAssociation() {}
+function DKFileAssociation(){}
 dk.fileassociation = DKPlugin(DKFileAssociation, "singleton")
 
-DKFileAssociation.prototype.edit = function DKFileAssociation_edit(file) {
+DKFileAssociation.prototype.edit = function DKFileAssociation_edit(file){
     dk.fileassociation.opentext(file);
     return true;
 }
 
-DKFileAssociation.prototype.open = function DKFileAssociation_open(instance, file) {
+DKFileAssociation.prototype.open = function DKFileAssociation_open(instance, file){
     if (!file)
         return error("file invalid");
     if (!file.includes("."))
         return error("no file extension");
-    if (file.includes(".js")) {
+    if (file.includes(".js")){
         dk.fileassociation.openjs(file);
         return true;
     }
-    if (file.includes(".html")) {
+    if (file.includes(".html")){
         dk.fileassociation.openhtml(file);
         return true;
     }
-    if (file.includes(".css")) {
+    if (file.includes(".css")){
         dk.fileassociation.opencss(file);
         return true;
     }
-    if (file.includes(".png")) {
+    if (file.includes(".png")){
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.includes(".bmp")) {
+    if (file.includes(".bmp")){
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.includes(".gif")) {
+    if (file.includes(".gif")){
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.includes(".jpeg")) {
+    if (file.includes(".jpeg")){
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.includes(".jpg")) {
+    if (file.includes(".jpg")){
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.includes(".tiff")) {
+    if (file.includes(".tiff")){
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.includes(".tif")) {
+    if (file.includes(".tif")){
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.includes(".osgt")) {
+    if (file.includes(".osgt")){
         dk.fileassociation.openmodel(file);
         return true;
     }
-    if (file.includes(".osg")) {
+    if (file.includes(".osg")){
         dk.fileassociation.openmodel(file);
         return true;
     }
-    if (file.includes(".wav")) {
+    if (file.includes(".wav")){
         dk.fileassociation.openaudio(file);
         return true;
     }
-    if (file.includes(".mp3")) {
+    if (file.includes(".mp3")){
         dk.fileassociation.openaudio(file);
         return true;
     }
-    if (file.includes(".avi")) {
+    if (file.includes(".avi")){
         dk.fileassociation.openvideo(file);
         return true;
     }
-    if (file.includes(".mkv")) {
+    if (file.includes(".mkv")){
         dk.fileassociation.openvideo(file);
         return true;
     }
-    if (file.includes(".mp4")) {
+    if (file.includes(".mp4")){
         dk.fileassociation.openvideo(file);
         return true;
     }
@@ -85,29 +85,29 @@ DKFileAssociation.prototype.open = function DKFileAssociation_open(instance, fil
     return true;
 }
 
-DKFileAssociation.prototype.openhtml = function DKFileAssociation_openHtml(path) {
+DKFileAssociation.prototype.openhtml = function DKFileAssociation_openHtml(path){
     if (!dk.hasCPP())
         path = path.replace(dk.file.onlineAssets, "");
     else
         path = path.replace(CPP_DKAssets_LocalAssets(), "");
-    dk.create(path, function(node) {
+    dk.create(path, function(node){
         const css = path.replace(".html", ".css");
         css && dk.create(css);
         node && dk.frame.create(node);
     });
 }
 
-DKFileAssociation.prototype.openjs = function DKFileAssociation_openjs(path) {
+DKFileAssociation.prototype.openjs = function DKFileAssociation_openjs(path){
     if (typeof CPP_DKAssets_LocalAssets === "function")
 		path = path.replace(CPP_DKAssets_LocalAssets(), "")
 	else
         path = path.replace(dk.file.onlineAssets, "")	
-	DKPlugin(path, function(dkclass) {
+	DKPlugin(path, function(dkclass){
         dkclass.prototype.create();
     });
 }
 
-DKFileAssociation.prototype.opencss = function DKFileAssociation_opencss(path) {
+DKFileAssociation.prototype.opencss = function DKFileAssociation_opencss(path){
     if (!dk.hasCPP())
         path = path.replace(dk.file.onlineAssets, "");
     else
@@ -115,29 +115,29 @@ DKFileAssociation.prototype.opencss = function DKFileAssociation_opencss(path) {
     dk.create(path);
 }
 
-DKFileAssociation.prototype.opentext = function DKFileAssociation_opentext(path) {
-    DKPlugin("DKNotepad/DKNotepad.js", function dk_create_callback(val) {
+DKFileAssociation.prototype.opentext = function DKFileAssociation_opentext(path){
+    DKPlugin("DKNotepad/DKNotepad.js", function dk_create_callback(val){
         dk.notepad.createOpen(path);
     });
 }
 
-DKFileAssociation.prototype.openimage = function DKFileAssociation_openimage(path) {
-    DKPlugin("DKPaint/DKPaint.js", function dk_create_callback() {
+DKFileAssociation.prototype.openimage = function DKFileAssociation_openimage(path){
+    DKPlugin("DKPaint/DKPaint.js", function dk_create_callback(){
         dk.paint.createOpen(path);
     });
 }
 
-DKFileAssociation.prototype.openmodel = function DKFileAssociation_openmodel(path) {
-    dk.create("DKOSGManipulator,,DKOSGWindow", function dk_create_callback() {});
-    dk.create("DKOSGModel,,DKWindow," + path, function dk_create_callback() {});
+DKFileAssociation.prototype.openmodel = function DKFileAssociation_openmodel(path){
+    dk.create("DKOSGManipulator,,DKOSGWindow", function dk_create_callback(){});
+    dk.create("DKOSGModel,,DKWindow," + path, function dk_create_callback(){});
 }
 
-DKFileAssociation.prototype.openaudio = function DKFileAssociation_openaudio(path) {
+DKFileAssociation.prototype.openaudio = function DKFileAssociation_openaudio(path){
     if (!dk.hasCPP())
         path = path.replace(dk.file.onlineAssets, "");
     else
         path = path.replace(CPP_DKAssets_LocalAssets(), "");
-    dk.create("DKAudio", function dk_create_callback() {
+    dk.create("DKAudio", function dk_create_callback(){
         dk.audio.playSound(path);
     });
     //dk.create("DKOSGAudio,"+file+",DKOSGWindow,"+path);
@@ -146,7 +146,7 @@ DKFileAssociation.prototype.openaudio = function DKFileAssociation_openaudio(pat
     //DKSDLAudio_Play("DKSDLAudio,"+file);
 }
 
-DKFileAssociation.prototype.openvideo = function DKFileAssociation_openvideo(path) {
+DKFileAssociation.prototype.openvideo = function DKFileAssociation_openvideo(path){
     if (!dk.hasCPP())
         path = path.replace(dk.file.onlineAssets, "");
     else

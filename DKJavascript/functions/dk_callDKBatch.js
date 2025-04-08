@@ -3,7 +3,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_getEnv.js");
 //# dk_callDKBatch(function args)
 //#
 //#
-dk_callDKBatch = function dk_callDKBatch_f() {
+dk_callDKBatch = function dk_callDKBatch_f(){
 	//dk_debugFunc(0);
 	
 	console.log("dk_callDKBatch("+arguments[0]+")");
@@ -23,7 +23,7 @@ dk_callDKBatch = function dk_callDKBatch_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST() {
+DKTEST = function DKTEST(){
 	//dk_debugFunc(0);
 	
 	dk_callDKBatch("dk_test")

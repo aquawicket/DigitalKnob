@@ -10,7 +10,7 @@
 class TEST_EventTarget //: public DKObjectT<TEST_EventTarget>
 {
 public:
-	TEST_EventTarget() {
+	TEST_EventTarget(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_EventTarget.h //////");
 		

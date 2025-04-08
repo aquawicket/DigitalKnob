@@ -12,7 +12,7 @@ function getch(){
 }
 
 
-function DKBuildConsole_init() {
+function DKBuildConsole_init(){
     CPP_DK_Create("DKBuild/DKBuild.js")
 	CPP_DK_Create("DKGit/DKGit.js")
 	//DKGit_CheckForDiff()
@@ -20,11 +20,11 @@ function DKBuildConsole_init() {
         DKBuildConsole_Process()
 }
 
-function DKBuildConsole_end() {
+function DKBuildConsole_end(){
     CPP_DK_Close("DKBuild/DKBuild.js")
 }
 
-function DKBuildConsole_ChooseUpdate() {
+function DKBuildConsole_ChooseUpdate(){
 	console.log("**** Update DigitalKnob ??? ****")
 	console.log("    1:  Git Update")
 	console.log("    2:  Git Commit")
@@ -128,7 +128,7 @@ function DKBuildConsole_ChooseUpdate() {
 	}
 }
 
-function DKBuildConsole_SelectOs() {
+function DKBuildConsole_SelectOs(){
 	const OSes = [];
 	if(CPP_DK_GetOS() === "Windows"){
 		var arch = CPP_DK_Execute("ECHO %PROCESSOR_ARCHITECTURE%")
@@ -256,7 +256,7 @@ function DKBuildConsole_SelectOs() {
 	}
 }
 
-function DKBuildConsole_SelectApp() {
+function DKBuildConsole_SelectApp(){
 	console.log("**** SELECT APP TO BUILD ****")
 	DKBuild_GetAppList()
 	for (var i = 0; i < APP_LIST.length; ++i)
@@ -287,7 +287,7 @@ function DKBuildConsole_SelectApp() {
 	}
 }
 
-function DKBuildConsole_SelectType() {
+function DKBuildConsole_SelectType(){
 	console.log("**** SELECT BUILD TYPE ****")
 	console.log("    1:  Debug")
 	console.log("    2:  Release")
@@ -370,7 +370,7 @@ function BuildConsole_PostBuildOptions(){
 	}
 }
 
-function DKBuildConsole_Process() {
+function DKBuildConsole_Process(){
 	
 	while(TYPE === ""){
 		switch(true){
@@ -495,7 +495,7 @@ function DKBuildConsole_OpenAppSolution(os, app){
 	console.log("ERROR: path does not exist: "+solution_path)
 }
 
-function DKBuildConsole_TranslateOption(num) {
+function DKBuildConsole_TranslateOption(num){
     if (num === 0)
         return "1"
     if (num === 1)
@@ -568,7 +568,7 @@ function DKBuildConsole_TranslateOption(num) {
         return "z"
 }
 
-function DKBuildConsole_KeyToApp(key) {
+function DKBuildConsole_KeyToApp(key){
 	if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac"){
 		//F1 Unix
 		if (key === 80)

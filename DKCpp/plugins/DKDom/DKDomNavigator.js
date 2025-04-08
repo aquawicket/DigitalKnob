@@ -1,6 +1,6 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Navigator
 
-var Navigator = function Navigator(pointer) {
+var Navigator = function Navigator(pointer){
     //Properties (Standard)
     Object.defineProperty(this, "activeVRDisplays", {
         //Read only
@@ -81,7 +81,7 @@ var Navigator = function Navigator(pointer) {
     })
     Object.defineProperty(this, "platform", {
         //Read only
-        get: function platform() {
+        get: function platform(){
             return CPP_DKDomNavigator_platform()
         }
     })
@@ -189,52 +189,52 @@ var Navigator = function Navigator(pointer) {
     })
 
     //Methods (Standard)
-    Navigator.prototype.canShare = function canShare() {
+    Navigator.prototype.canShare = function canShare(){
         //Experimental
         return "TODO";
     }
-    Navigator.prototype.getVRDisplays = function getVRDisplays() {
+    Navigator.prototype.getVRDisplays = function getVRDisplays(){
         //Experimental
         return "TODO";
     }
-    Navigator.prototype.getUserMedia = function getUserMedia() {
+    Navigator.prototype.getUserMedia = function getUserMedia(){
         //Experimental
         return "TODO";
     }
-    Navigator.prototype.registerContentHandler = function registerContentHandler() {
+    Navigator.prototype.registerContentHandler = function registerContentHandler(){
         //Obsolete
         return "TODO";
     }
-    Navigator.prototype.registerProtocolHandler = function registerProtocolHandler() {
+    Navigator.prototype.registerProtocolHandler = function registerProtocolHandler(){
         return "TODO";
     }
-    Navigator.prototype.requestMediaKeySystemAccess = function requestMediaKeySystemAccess() {
+    Navigator.prototype.requestMediaKeySystemAccess = function requestMediaKeySystemAccess(){
         //Experimental
         return "TODO";
     }
-    Navigator.prototype.sendBeacon = function sendBeacon() {
+    Navigator.prototype.sendBeacon = function sendBeacon(){
         //Experimental
         return "TODO";
     }
-    Navigator.prototype.share = function share() {
+    Navigator.prototype.share = function share(){
         //Experimental
         return "TODO";
     }
-    Navigator.prototype.taintEnabled = function taintEnabled() {
+    Navigator.prototype.taintEnabled = function taintEnabled(){
         //Obsolete, Experimental
         return "TODO";
     }
-    Navigator.prototype.vibrate = function vibrate() {
+    Navigator.prototype.vibrate = function vibrate(){
         //Obsolete, Experimental
         return "TODO";
     }
 
     //Methods (Non-standard)
-    Navigator.prototype.mozIsLocallyAvailable = function mozIsLocallyAvailable() {
+    Navigator.prototype.mozIsLocallyAvailable = function mozIsLocallyAvailable(){
         //Not standardized
         return "TODO";
     }
-    Navigator.prototype.mozPay = function mozPay() {
+    Navigator.prototype.mozPay = function mozPay(){
         //Not standardized
         return "TODO";
     }

@@ -6,7 +6,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 	int exit_status = dk_chdir("C:/Users/Administrator/digitalknob");
 	return exit_status;
 }

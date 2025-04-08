@@ -13,7 +13,7 @@ class DKHTMLElement : public DKElement
 {
 public:
 	// [HTMLConstructor] constructor();
-	DKHTMLElement() : DKElement() {
+	DKHTMLElement() : DKElement(){
 		DKDEBUGFUNC();
 		interfaceName = "HTMLElement";
 		address[interfaceName] = pointerToAddress(this);
@@ -53,7 +53,7 @@ public:
 	virtual void inert(const bool& inert)				{ _inert = inert; } 			// setter
 	
 	// undefined click();
-	virtual void click() {
+	virtual void click(){
 		DKDEBUGFUNC();
 	}
 	
@@ -94,24 +94,24 @@ public:
 
 	// ElementInternals attachInternals();
 	DKString _attachInternals = "";
-	virtual const DKString& attachInternals() {
+	virtual const DKString& attachInternals(){
 		DKDEBUGFUNC();
 		return _attachInternals;
 	}
 
 	// The popover API
 	// undefined showPopover();
-	virtual void showPopover() {
+	virtual void showPopover(){
 		DKDEBUGFUNC();
 	}
 	
 	// undefined hidePopover();
-	virtual void hidePopover() {
+	virtual void hidePopover(){
 		DKDEBUGFUNC();
 	}
 	
 	// undefined togglePopover(optional boolean force);
-	virtual void togglePopover(const bool& force) {
+	virtual void togglePopover(const bool& force){
 		DKDEBUGFUNC(force);
 	}
 	

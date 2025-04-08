@@ -137,7 +137,7 @@ bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser){
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList();
 	int i=0;
-	for(it_type iterator = functions.begin(); iterator != functions.end(); iterator++) {
+	for(it_type iterator = functions.begin(); iterator != functions.end(); iterator++){
 		//printf("%s\n", iterator->first.c_str());
 		args->SetString(i, iterator->first.c_str()); // Get function names
 		i++;
@@ -149,7 +149,7 @@ bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser){
 }
 
 //Multi process Execute
-bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args) {
+bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args){
 	DKDEBUGFUNC(browser, func, args);
 	_browser = browser;
 	if(!functions[func])
@@ -309,7 +309,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 //#endif
 }
 
-void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) {
+void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info){
 	CEF_REQUIRE_RENDERER_THREAD();
 	DKDEBUGFUNC(browser, extra_info);
 
@@ -324,13 +324,13 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDict
 //#endif
 }
 
-void DKCefApp::OnContextInitialized() {
+void DKCefApp::OnContextInitialized(){
 	CEF_REQUIRE_UI_THREAD();
 	DKDEBUGFUNC();
 	//CefRefreshWebPlugins(); //FIXME
 }
 
-void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) {
+void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context){
 	CEF_REQUIRE_RENDERER_THREAD();
 	DKDEBUGFUNC(browser, frame, context);
 
@@ -345,7 +345,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 //#endif
 }
 
-bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
+bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message){
 	CEF_REQUIRE_UI_THREAD();
 	DKDEBUGFUNC(browser, source_process, message);
 	//DK_UNUSED(browser);
@@ -385,7 +385,7 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr
 	return false;
 }
 
-void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace) {
+void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace){
 	DKDEBUGFUNC(browser, frame, context, exception, stackTrace); //DON'T DO THIS
 	
 	//This isn't working so well, another Error handler is located in DK/Browser.js
@@ -398,7 +398,7 @@ void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 	DKERROR("#################### Uncaught Exception ####################\n");
 	DKERROR("Exception: "+msg+"\n");
 	std::ostringstream stackFormatted;
-	for (int i = 0; i < stackTrace->GetFrameCount(); ++i) {
+	for (int i = 0; i < stackTrace->GetFrameCount(); ++i){
 			stackFormatted << "at "
 			<< stackTrace->GetFrame(i)->GetFunctionName().ToString()
 			<< "() in "

@@ -7,7 +7,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_log.js");
 //#
 //#     @msg    - The message to print
 //#
-dk_error = function dk_error_f() {
+dk_error = function dk_error_f(){
 	dk_log("ERROR", arguments[0]);
 }
 
@@ -16,7 +16,7 @@ dk_error = function dk_error_f() {
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f() {
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	dk_error("test dk_error ERROR message");

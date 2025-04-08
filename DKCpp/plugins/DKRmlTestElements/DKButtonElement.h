@@ -132,7 +132,7 @@ private:
 class DKButtonInstancer : public ElementInstancer
 {
 public:
-	virtual ~DKButtonInstancer() {};
+	virtual ~DKButtonInstancer(){};
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.

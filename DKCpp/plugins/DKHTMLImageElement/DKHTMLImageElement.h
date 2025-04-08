@@ -15,7 +15,7 @@ class DKHTMLImageElement : public DKHTMLElement
 {
 public:
 	// [HTMLConstructor] constructor();
-	DKHTMLImageElement() : DKHTMLElement() {
+	DKHTMLImageElement() : DKHTMLElement(){
 		DKDEBUGFUNC();
 		interfaceName = "HTMLImageElement";
 		address[interfaceName] = pointerToAddress(this);
@@ -108,7 +108,7 @@ public:
 	virtual void fetchPriority(const DOMString& fetchPriority)		{ _fetchPriority = fetchPriority; } 	// setter
 	
 	// Promise<undefined> decode();
-	virtual void decode() {
+	virtual void decode(){
 		DKDEBUGFUNC();
 	}
 

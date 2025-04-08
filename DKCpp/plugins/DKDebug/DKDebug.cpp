@@ -183,7 +183,7 @@ static inline void printStackTrace(FILE *out = stderr, unsigned int max_frames =
 	free(symbollist);
 }
 
-void handler(int signum) {
+void handler(int signum){
 	DKDEBUGFUNC(signum);
 	const char* name = NULL;
 	switch(signum){

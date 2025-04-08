@@ -26,11 +26,11 @@
     <title>no title</title>
 	<script type="text/javascript">
 	<!--
-	function loadHTA() {
+	function loadHTA(){
 		// window size
 		var resW=screen.availWidth
 		var resH=screen.availHeight
-		if (resW <= 800) {
+		if (resW <= 800){
 			myW=resW-30
 			myH=resH-20
 			self.focus()
@@ -44,8 +44,8 @@
 	// Abort if not IE55+
 	var ie55up=/*@cc_on!@*/!window.createPopup;
 	var abortStr='HTA mode requires Internet Explorer 5.5+ \n';
-	function Aborting() {
-		if (!ie55up) { alert(abortStr);self.close() }
+	function Aborting(){
+		if (!ie55up){ alert(abortStr);self.close() }
 	}
 	function main(){
 		document.getElementById("main").click();

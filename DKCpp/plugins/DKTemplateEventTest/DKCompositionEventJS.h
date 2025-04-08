@@ -112,7 +112,7 @@ public:
 		return true;
 	}
 	
-	static bool onCompositionEvent(DKCompositionEvent* event) {
+	static bool onCompositionEvent(DKCompositionEvent* event){
 		DKDEBUGFUNC(event);
 		DKINFO("onCompositionEvent("+event->type+") \n");
 		

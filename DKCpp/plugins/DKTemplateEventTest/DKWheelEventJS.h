@@ -140,7 +140,7 @@ public:
 		return true;
 	}
 	
-	static bool onWheelEvent(DKWheelEvent* event) {
+	static bool onWheelEvent(DKWheelEvent* event){
 		DKDEBUGFUNC(event);
 		DKINFO("onWheelEvent("+event->type+") \n");
 		

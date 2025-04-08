@@ -22,7 +22,7 @@ int dk_createProcess(){
 	//sprintf(args,"-f \"C:\\Documents and Settings\\Aeiou\\SERVIDOR\\dirweb\\demo.php\" >\"C:\\Documents and Settings\\Aeiou\\SERVIDOR\\dirtmp\\out00.txt\");
  
 	//create the proc with those args
-	if(!CreateProcess("C:\\Windows\\System32\\notepad.exe", args, NULL, NULL, 0, 0, NULL, NULL, &si, &pi)) {
+	if(!CreateProcess("C:\\Windows\\System32\\notepad.exe", args, NULL, NULL, 0, 0, NULL, NULL, &si, &pi)){
 		dk_fatal("CreateProcess() failed");
 		return 0;
     }

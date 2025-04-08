@@ -1,8 +1,8 @@
 //"use strict";
 
-function DKResize() {}
+function DKResize(){}
 
-DKResize.prototype.createBox = function DKResize_create(element) {
+DKResize.prototype.createBox = function DKResize_create(element){
 	console.log("DKResize.prototype.createBox")
 	const dkresize = DKPlugin(DKResize)
 
@@ -72,7 +72,7 @@ DKResize.prototype.createBox = function DKResize_create(element) {
     return dkresize;
 }
 
-DKResize.prototype.close = function DKResize_close() {
+DKResize.prototype.close = function DKResize_close(){
     /*
     this.removeHandle(this.corner);
     this.removeHandle(this.top);
@@ -94,21 +94,21 @@ DKResize.prototype.close = function DKResize_close() {
     */
 }
 
-DKResize.prototype.addHandle = function DKResize_addHandle(element, resize_element, side) {
+DKResize.prototype.addHandle = function DKResize_addHandle(element, resize_element, side){
     const dkresize = this;
-    element.onmousedown = element.touchstart = function(event) {
+    element.onmousedown = element.touchstart = function(event){
         dkresize.start(event, resize_element, side);
     }
 }
 
-DKResize.prototype.removeHandle = function DKResize_removeHandle(element) {
+DKResize.prototype.removeHandle = function DKResize_removeHandle(element){
     element.onmousedown = element.ontouchstart = null;
 }
 
-DKResize.prototype.start = function DKResize_start(event, element, side) {
+DKResize.prototype.start = function DKResize_start(event, element, side){
     const instance = this;
     !event && (event = window.event);
-    if (dk.iE()) {
+    if (dk.iE()){
         this.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         this.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
@@ -119,20 +119,20 @@ DKResize.prototype.start = function DKResize_start(event, element, side) {
     (side === "left") && (this.positionX = dk.gui.getLeftPx(element));
     this.sizeX = dk.gui.getWidthPx(element);
     this.sizeY = dk.gui.getHeightPx(element);
-    document.body.onmousemove = document.body.ontouchmove = function(event) {
+    document.body.onmousemove = document.body.ontouchmove = function(event){
         instance.move(event, element, side);
     }
-    document.body.onmouseup = document.body.ontouchend = function(event) {
+    document.body.onmouseup = document.body.ontouchend = function(event){
         instance.stop(event);
     }
 }
 
-DKResize.prototype.move = function DKResize_move(event, element, side) {
+DKResize.prototype.move = function DKResize_move(event, element, side){
     if (!event)
         event = window.event;
     var x;
     var y;
-    if (dk.iE()) {
+    if (dk.iE()){
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
@@ -140,7 +140,7 @@ DKResize.prototype.move = function DKResize_move(event, element, side) {
         y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
 
-    if (side === "top") {
+    if (side === "top"){
         if (element.style.top)
             element.style.top = dk.gui.pos(this.positionY + y - this.mouseStartY);
         else
@@ -148,7 +148,7 @@ DKResize.prototype.move = function DKResize_move(event, element, side) {
         element.style.height = dk.gui.pos(this.sizeY - (y - this.mouseStartY));
         return;
     }
-    if (side === "left") {
+    if (side === "left"){
         if (element.style.left)
             element.style.left = dk.gui.pos(this.positionX + x - this.mouseStartX);
         else
@@ -160,7 +160,7 @@ DKResize.prototype.move = function DKResize_move(event, element, side) {
     element.style.height = dk.gui.pos(this.sizeY + y - this.mouseStartY);
 }
 
-DKResize.prototype.stop = function DKResize_stop() {
+DKResize.prototype.stop = function DKResize_stop(){
     document.body.onmousemove = null;
     document.body.onmouseup = null;
     document.body.ontouchmove = null;
@@ -168,15 +168,15 @@ DKResize.prototype.stop = function DKResize_stop() {
 }
 
 /*
-DKResize.prototype.attachResizes = function DKResize_attachResizes(parent) {
+DKResize.prototype.attachResizes = function DKResize_attachResizes(parent){
     const elements = parent.getElementsByTagName('*');
-    for (var n = 0; n < elements.length; n++) {
+    for (var n = 0; n < elements.length; n++){
         const element = elements[n];
         if (!dk.iE() && dk.getBrowser() !== "RML")
             element.style.setProperty("pointer-events", "all");
-         if (element.getAttribute("resize") !== null) {
+         if (element.getAttribute("resize") !== null){
             var resize_element = element.getAttribute("resize");
-            element.onmousedown = function(event) {
+            element.onmousedown = function(event){
                 dk.drag.resizeStart(event, resize_element);
             }
         }

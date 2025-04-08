@@ -39,11 +39,11 @@ public:
 	void* SomeFunction(void* data);
 };
 
-extern "C" void* getObj() {
+extern "C" void* getObj(){
     return static_cast<void*>(DKPlugin2::Instance(""));
 }
 
-extern "C" void* getName() {
+extern "C" void* getName(){
     return static_cast<void*>("DKPlugin2");
 }
 

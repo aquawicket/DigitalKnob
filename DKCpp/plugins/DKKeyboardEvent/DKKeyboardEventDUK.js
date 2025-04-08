@@ -5,7 +5,7 @@
 // [Exposed=Window]
 // interface KeyboardEvent : UIEvent {
 // constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
-var KeyboardEvent = function KeyboardEvent(type, options, address) {
+var KeyboardEvent = function KeyboardEvent(type, options, address){
 	//console.log("KeyboardEvent("+type+","+options+","+address+")")
 	
 	if(address)
@@ -106,7 +106,7 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
     })
 	
 	// boolean getModifierState(DOMString keyArg);
-	KeyboardEvent.prototype.getModifierState = function getModifierState(keyArg) {
+	KeyboardEvent.prototype.getModifierState = function getModifierState(keyArg){
 		return CPP_DKKeyboardEventDUK_getModifierState(this.address, keyArg)
     }
 	
@@ -123,7 +123,7 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
 	//		optional boolean altKey = false,
 	//		optional boolean shiftKey = false,
 	//		optional boolean metaKey = false);
-			KeyboardEvent.prototype.initKeyboardEvent = function initKeyboardEvent() {
+			KeyboardEvent.prototype.initKeyboardEvent = function initKeyboardEvent(){
 				CPP_DKKeyboardEventDUK_initKeyboardEvent(this.address);
 			}
 	// };

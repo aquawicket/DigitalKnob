@@ -58,7 +58,7 @@ bool DKSDLMetalRml::End(){
 	return true;
 }
 
-bool DKSDLMetalRml::Handle(SDL_Event *event) {
+bool DKSDLMetalRml::Handle(SDL_Event *event){
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if(!dkRml->document)
 		return DKERROR("dkRml->document invalid");

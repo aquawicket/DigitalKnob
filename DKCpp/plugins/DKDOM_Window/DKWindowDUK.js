@@ -7,7 +7,7 @@
 // Exposed=Window,
 // LegacyUnenumerableNamedProperties]
 // interface Window : EventTarget {
-var Window = function Window(address) {
+var Window = function Window(address){
 	console.log("Window("+address+")");
 	
 	if(address)
@@ -102,7 +102,7 @@ var Window = function Window(address) {
     })
 	
 	// undefined close();
-	Window.prototype.close = function close() {
+	Window.prototype.close = function close(){
 		CPP_DKWindowDUK_close(this.address)
     }
 	
@@ -113,17 +113,17 @@ var Window = function Window(address) {
     })
 	
 	// undefined stop();
-	Window.prototype.stop = function stop() {
+	Window.prototype.stop = function stop(){
 		CPP_DKWindowDUK_stop(this.address)
     }
 	
 	// undefined focus();
-	Window.prototype.focus = function focus() {
+	Window.prototype.focus = function focus(){
 		CPP_DKWindowDUK_focus(this.address)
     }
 	
 	// undefined blur();
-	Window.prototype.blur = function blur() {
+	Window.prototype.blur = function blur(){
 		CPP_DKWindowDUK_blur(this.address)
     }
 	
@@ -165,7 +165,7 @@ var Window = function Window(address) {
     })
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-	Window.prototype.open = function open(url, target, features) {
+	Window.prototype.open = function open(url, target, features){
 		return new Window(CPP_DKWindowDUK_open(this.address, url, target, features));
     }
 	
@@ -196,37 +196,37 @@ var Window = function Window(address) {
 	
 	//user prompts
 	// undefined alert();
-	Window.prototype.alert = function alert() {
+	Window.prototype.alert = function alert(){
 		CPP_DKWindowDUK_alert(this.address);
     }
 	
 	// undefined alert(DOMString message);
-	Window.prototype.alert = function alert(message) {
+	Window.prototype.alert = function alert(message){
 		CPP_DKWindowDUK_alert(this.address, message);
     }
 		
 	// boolean confirm(optional DOMString message = "");
-	Window.prototype.confirm = function confirm(message) {
+	Window.prototype.confirm = function confirm(message){
 		return CPP_DKWindowDUK_confirm(this.address, message);
     }
 		
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
-	Window.prototype.prompt = function prompt(message, _default) {
+	Window.prototype.prompt = function prompt(message, _default){
 		return CPP_DKWindowDUK_prompt(this.address, message, _default);
     }
 		
 	// undefined print();
-	Window.prototype.print = function print() {
+	Window.prototype.print = function print(){
 		CPP_DKWindowDUK_print(this.address);
     }
 		
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
-	Window.prototype.postMessage = function postMessage(message, targetOrigin, transfer) {
+	Window.prototype.postMessage = function postMessage(message, targetOrigin, transfer){
 		CPP_DKWindowDUK_print(this.address, message, targetOrigin, transfer);
     }
 	
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
-	Window.prototype.postMessage = function postMessage(message, options) {
+	Window.prototype.postMessage = function postMessage(message, options){
 		CPP_DKWindowDUK_print(this.address, message, options);
     }
 	
@@ -277,12 +277,12 @@ var Window = function Window(address) {
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 	// partial interface Window {
 	//		undefined captureEvents();
-			Window.prototype.captureEvents = function captureEvents() {
+			Window.prototype.captureEvents = function captureEvents(){
 				CPP_DKWindowDUK_captureEvents(this.address);
 			}
 	//
 	//		undefined releaseEvents();
-			Window.prototype.releaseEvents = function releaseEvents() {
+			Window.prototype.releaseEvents = function releaseEvents(){
 				CPP_DKWindowDUK_releaseEvents(this.address);
 			}
 	//
@@ -306,7 +306,7 @@ var Window = function Window(address) {
 	// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
 	// partial interface Window {
 	//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
-			Window.prototype.getDigitalGoodsService = function getDigitalGoodsService(serviceProvider) {
+			Window.prototype.getDigitalGoodsService = function getDigitalGoodsService(serviceProvider){
 				return CPP_DKWindowDUK_getDigitalGoodsService(this.address, serviceProvider);
 			}
 	// };
@@ -325,17 +325,17 @@ var Window = function Window(address) {
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
-			Window.prototype.showOpenFilePicker = function showOpenFilePicker(options) {
+			Window.prototype.showOpenFilePicker = function showOpenFilePicker(options){
 				return CPP_DKWindowDUK_showOpenFilePicker(this.address, options);
 			}
 	//
 	//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
-			Window.prototype.showSaveFilePicker = function showSaveFilePicker(options) {
+			Window.prototype.showSaveFilePicker = function showSaveFilePicker(options){
 				return CPP_DKWindowDUK_showSaveFilePicker(this.address, options);
 			}
 	//
 	//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
-			Window.prototype.showDirectoryPicker = function showDirectoryPicker(options) {
+			Window.prototype.showDirectoryPicker = function showDirectoryPicker(options){
 				return CPP_DKWindowDUK_showDirectoryPicker(this.address, options);
 			}
 	// };
@@ -344,7 +344,7 @@ var Window = function Window(address) {
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
-			Window.prototype.queryLocalFonts = function queryLocalFonts(options) {
+			Window.prototype.queryLocalFonts = function queryLocalFonts(options){
 				return CPP_DKWindowDUK_queryLocalFonts(this.address, options);
 			}
 	// };	
@@ -394,7 +394,7 @@ var Window = function Window(address) {
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
 	// partial interface Window {
 	//		undefined navigate(SpatialNavigationDirection dir);
-			Window.prototype.navigate = function navigate(dir) {
+			Window.prototype.navigate = function navigate(dir){
 				return CPP_DKWindowDUK_navigate(this.address, dir);
 			}
 	// };
@@ -402,7 +402,7 @@ var Window = function Window(address) {
 	// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
-			Window.prototype.getComputedStyle = function getComputedStyle(elt, pseudoElt) {
+			Window.prototype.getComputedStyle = function getComputedStyle(elt, pseudoElt){
 				return new CSSStyleDeclaration(CPP_DKWindowDUK_getComputedStyle(this.address, elt, pseudoElt));
 			}
 	// };
@@ -410,7 +410,7 @@ var Window = function Window(address) {
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
-			Window.prototype.matchMedia = function matchMedia(query) {
+			Window.prototype.matchMedia = function matchMedia(query){
 				return CPP_DKWindowDUK_matchMedia(this.address, query);
 			}
 	//
@@ -428,22 +428,22 @@ var Window = function Window(address) {
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			Window.prototype.moveTo = function moveTo(x, y) {
+			Window.prototype.moveTo = function moveTo(x, y){
 				CPP_DKWindowDUK_moveTo(this.address, x, y);
 			}
 	//
 	//		undefined moveBy(long x, long y);
-			Window.prototype.moveBy = function moveBy(deltaX, deltaY) {
+			Window.prototype.moveBy = function moveBy(deltaX, deltaY){
 				CPP_DKWindowDUK_moveBy(this.address, deltaX, deltaY);
 			}
 	//
 	//		undefined resizeTo(long width, long height);
-			Window.prototype.resizeTo = function resizeTo(width, height) {
+			Window.prototype.resizeTo = function resizeTo(width, height){
 				CPP_DKWindowDUK_resizeTo(this.address, width, height);
 			}
 	//
 	//		undefined resizeBy(long x, long y);
-			Window.prototype.resizeBy = function resizeBy(x, y) {
+			Window.prototype.resizeBy = function resizeBy(x, y){
 				CPP_DKWindowDUK_resizeBy(this.address, x, y);
 			}
 	//
@@ -486,32 +486,32 @@ var Window = function Window(address) {
 			})
 	//
 	//		undefined scroll(optional ScrollToOptions options = {});
-			Window.prototype.scroll = function scroll(options) {
+			Window.prototype.scroll = function scroll(options){
 				CPP_DKWindowDUK_scroll(this.address, options);
 			}
 	//		
 	//		undefined scroll(unrestricted double x, unrestricted double y);
-			Window.prototype.scroll = function scroll(x, y) {
+			Window.prototype.scroll = function scroll(x, y){
 				CPP_DKWindowDUK_scroll(this.address, x, y);
 			}
 	//
 	//		undefined scrollTo(optional ScrollToOptions options = {});
-			Window.prototype.scrollTo = function scrollTo(options) {
+			Window.prototype.scrollTo = function scrollTo(options){
 				CPP_DKWindowDUK_scrollTo(this.address, options);
 			}
 	//
 	//		undefined scrollTo(unrestricted double x, unrestricted double y);
-			Window.prototype.scrollTo = function scrollTo(x, y) {
+			Window.prototype.scrollTo = function scrollTo(x, y){
 				CPP_DKWindowDUK_scrollTo(this.address, x, y);
 			}
 			
 	//		undefined scrollBy(optional ScrollToOptions options = {});
-			Window.prototype.scrollBy = function scrollBy(options) {
+			Window.prototype.scrollBy = function scrollBy(options){
 				CPP_DKWindowDUK_scrollBy(this.address, options);
 			}
 	//
 	//		undefined scrollBy(unrestricted double x, unrestricted double y);
-			Window.prototype.scrollBy = function scrollBy(x, y) {
+			Window.prototype.scrollBy = function scrollBy(x, y){
 				CPP_DKWindowDUK_scrollBy(this.address, x, y);
 			}
 	//
@@ -589,12 +589,12 @@ var Window = function Window(address) {
 	// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
 	// partial interface Window {
 	//		unsigned long requestIdleCallback(IdleRequestCallback callback, optional IdleRequestOptions options = {});
-			Window.prototype.requestIdleCallback = function requestIdleCallback(callback, options) {
+			Window.prototype.requestIdleCallback = function requestIdleCallback(callback, options){
 				return CPP_DKWindowDUK_requestIdleCallback(this.address, callback, options);
 			}
 	//
 	//		undefined cancelIdleCallback(unsigned long handle);
-			Window.prototype.cancelIdleCallback = function cancelIdleCallback(handle) {
+			Window.prototype.cancelIdleCallback = function cancelIdleCallback(handle){
 				CPP_DKWindowDUK_cancelIdleCallback(this.address, handle);
 			}
 	// };
@@ -602,7 +602,7 @@ var Window = function Window(address) {
 	// Source: Selection API (https://www.w3.org/TR/selection-api/)
 	// partial interface Window {
 	//		Selection? getSelection();
-			Window.prototype.getSelection = function getSelection() {
+			Window.prototype.getSelection = function getSelection(){
 				return CPP_DKWindowDUK_getSelection(this.address);
 			}
 	// };
@@ -611,7 +611,7 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		[SecureContext]
 	//		Promise<ScreenDetails> getScreenDetails();
-			Window.prototype.getScreenDetails = function getScreenDetails() {
+			Window.prototype.getScreenDetails = function getScreenDetails(){
 				return CPP_DKWindowDUK_getScreenDetails(this.address);
 			}
 	// };

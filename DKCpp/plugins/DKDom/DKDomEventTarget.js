@@ -15,9 +15,9 @@ var EventFromCPP = function EventFromCPP(pointer, event)
 
 // https://dom.spec.whatwg.org/#interface-eventtarget
 instances = [];
-var EventTarget = function EventTarget(pointer) {
+var EventTarget = function EventTarget(pointer){
     this.pointer = pointer;
-    for (var i = 0; i < instances.length; i++) {
+    for (var i = 0; i < instances.length; i++){
         if (instances[i].pointer === pointer)
             return instances[i]; //return already existing instance
     }
@@ -26,7 +26,7 @@ var EventTarget = function EventTarget(pointer) {
     //EventTarget.prototype.listeners = null;
     this.listeners = {};
     Object.defineProperty(this, "addEventListener", {
-        value: function addEventListener(type, callback, useCapture) {
+        value: function addEventListener(type, callback, useCapture){
             if (!(type in this.listeners))
                 this.listeners[type] = [];
             if (this.listeners[type].indexOf(callback) === -1)
@@ -36,12 +36,12 @@ var EventTarget = function EventTarget(pointer) {
         }
     })
     Object.defineProperty(this, "removeEventListener", {
-        value: function removeEventListener(type, callback, useCapture) {
+        value: function removeEventListener(type, callback, useCapture){
             if (!(type in this.listeners))
                 return;
             var stack = this.listeners[type];
-            for (var i = 0, l = stack.length; i < l; i++) {
-                if (stack[i] === callback) {
+            for (var i = 0, l = stack.length; i < l; i++){
+                if (stack[i] === callback){
                     //console.log(stack[i])
                     stack.splice(i, 1)
                     this.listeners[type].splice(i, 1)
@@ -53,7 +53,7 @@ var EventTarget = function EventTarget(pointer) {
         }
     })
     Object.defineProperty(this, "dispatchEvent", {
-        value: function dispatchEvent(event) {
+        value: function dispatchEvent(event){
 			if(!this){
 				console.error("dispatchEvent(): this invalid"); 
 				return false;

@@ -69,13 +69,13 @@ public:
 
 //Global quick functions
 //static void DKQueue(const DKString& name, boost::function<void ()> func){
-static void DKQueue(const DKString& name, std::function<void()> func) {
+static void DKQueue(const DKString& name, std::function<void()> func){
 	DKThreadPool::Instance("DKThreadPool0");
 	DKThreadPool::Instance("DKThreadPool0")->Queue(name, func);
 }
 
 //static void DKQueue(const DKString& name, boost::function<void ()> func, const DKString& data){
-static void DKQueue(const DKString& name, std::function<void()> func, const DKString& data) {
+static void DKQueue(const DKString& name, std::function<void()> func, const DKString& data){
 	DKThreadPool::Instance("DKThreadPool0");
 	DKThreadPool::Instance("DKThreadPool0")->Queue(name, func, data);
 }
@@ -89,8 +89,8 @@ static void DKQueue(const DKString& name, std::function<void()> func, const DKSt
 class DKThread
 {
 public:
-    DKThread() : io_service(), work(io_service), thread() {}
-    ~DKThread() {}
+    DKThread() : io_service(), work(io_service), thread(){}
+    ~DKThread(){}
 
     void start(){
         if (thread) 

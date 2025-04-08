@@ -21,7 +21,7 @@ class HIDDeviceUSB implements HIDDevice {
     protected boolean mRunning;
     protected boolean mFrozen;
 
-    public HIDDeviceUSB(HIDDeviceManager manager, UsbDevice usbDevice, int interface_index) {
+    public HIDDeviceUSB(HIDDeviceManager manager, UsbDevice usbDevice, int interface_index){
         mManager = manager;
         mDevice = usbDevice;
         mInterfaceIndex = interface_index;
@@ -30,107 +30,107 @@ class HIDDeviceUSB implements HIDDevice {
         mRunning = false;
     }
 
-    public String getIdentifier() {
+    public String getIdentifier(){
         return String.format("%s/%x/%x/%d", mDevice.getDeviceName(), mDevice.getVendorId(), mDevice.getProductId(), mInterfaceIndex);
     }
 
     @Override
-    public int getId() {
+    public int getId(){
         return mDeviceId;
     }
 
     @Override
-    public int getVendorId() {
+    public int getVendorId(){
         return mDevice.getVendorId();
     }
 
     @Override
-    public int getProductId() {
+    public int getProductId(){
         return mDevice.getProductId();
     }
 
     @Override
-    public String getSerialNumber() {
+    public String getSerialNumber(){
         String result = null;
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= 21){
             try {
                 result = mDevice.getSerialNumber();
             }
-            catch (SecurityException exception) {
+            catch (SecurityException exception){
                 //Log.w(TAG, "App permissions mean we cannot get serial number for device " + getDeviceName() + " message: " + exception.getMessage());
             }
         }
-        if (result == null) {
+        if (result == null){
             result = "";
         }
         return result;
     }
 
     @Override
-    public int getVersion() {
+    public int getVersion(){
         return 0;
     }
 
     @Override
-    public String getManufacturerName() {
+    public String getManufacturerName(){
         String result = null;
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= 21){
             result = mDevice.getManufacturerName();
         }
-        if (result == null) {
+        if (result == null){
             result = String.format("%x", getVendorId());
         }
         return result;
     }
 
     @Override
-    public String getProductName() {
+    public String getProductName(){
         String result = null;
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= 21){
             result = mDevice.getProductName();
         }
-        if (result == null) {
+        if (result == null){
             result = String.format("%x", getProductId());
         }
         return result;
     }
 
     @Override
-    public UsbDevice getDevice() {
+    public UsbDevice getDevice(){
         return mDevice;
     }
 
-    public String getDeviceName() {
+    public String getDeviceName(){
         return getManufacturerName() + " " + getProductName() + "(0x" + String.format("%x", getVendorId()) + "/0x" + String.format("%x", getProductId()) + ")";
     }
 
     @Override
-    public boolean open() {
+    public boolean open(){
         mConnection = mManager.getUSBManager().openDevice(mDevice);
-        if (mConnection == null) {
+        if (mConnection == null){
             Log.w(TAG, "Unable to open USB device " + getDeviceName());
             return false;
         }
 
         // Force claim our interface
         UsbInterface iface = mDevice.getInterface(mInterfaceIndex);
-        if (!mConnection.claimInterface(iface, true)) {
+        if (!mConnection.claimInterface(iface, true)){
             Log.w(TAG, "Failed to claim interfaces on USB device " + getDeviceName());
             close();
             return false;
         }
 
         // Find the endpoints
-        for (int j = 0; j < iface.getEndpointCount(); j++) {
+        for (int j = 0; j < iface.getEndpointCount(); j++){
             UsbEndpoint endpt = iface.getEndpoint(j);
-            switch (endpt.getDirection()) {
+            switch (endpt.getDirection()){
             case UsbConstants.USB_DIR_IN:
-                if (mInputEndpoint == null) {
+                if (mInputEndpoint == null){
                     mInputEndpoint = endpt;
                 }
                 break;
             case UsbConstants.USB_DIR_OUT:
-                if (mOutputEndpoint == null) {
+                if (mOutputEndpoint == null){
                     mOutputEndpoint = endpt;
                 }
                 break;
@@ -138,7 +138,7 @@ class HIDDeviceUSB implements HIDDevice {
         }
 
         // Make sure the required endpoints were present
-        if (mInputEndpoint == null || mOutputEndpoint == null) {
+        if (mInputEndpoint == null || mOutputEndpoint == null){
             Log.w(TAG, "Missing required endpoint on USB device " + getDeviceName());
             close();
             return false;
@@ -153,14 +153,14 @@ class HIDDeviceUSB implements HIDDevice {
     }
 
     @Override
-    public int sendFeatureReport(byte[] report) {
+    public int sendFeatureReport(byte[] report){
         int res = -1;
         int offset = 0;
         int length = report.length;
         boolean skipped_report_id = false;
         byte report_number = report[0];
 
-        if (report_number == 0x0) {
+        if (report_number == 0x0){
             ++offset;
             --length;
             skipped_report_id = true;
@@ -174,35 +174,35 @@ class HIDDeviceUSB implements HIDDevice {
             report, offset, length,
             1000/*timeout millis*/);
 
-        if (res < 0) {
+        if (res < 0){
             Log.w(TAG, "sendFeatureReport() returned " + res + " on device " + getDeviceName());
             return -1;
         }
 
-        if (skipped_report_id) {
+        if (skipped_report_id){
             ++length;
         }
         return length;
     }
 
     @Override
-    public int sendOutputReport(byte[] report) {
+    public int sendOutputReport(byte[] report){
         int r = mConnection.bulkTransfer(mOutputEndpoint, report, report.length, 1000);
-        if (r != report.length) {
+        if (r != report.length){
             Log.w(TAG, "sendOutputReport() returned " + r + " on device " + getDeviceName());
         }
         return r;
     }
 
     @Override
-    public boolean getFeatureReport(byte[] report) {
+    public boolean getFeatureReport(byte[] report){
         int res = -1;
         int offset = 0;
         int length = report.length;
         boolean skipped_report_id = false;
         byte report_number = report[0];
 
-        if (report_number == 0x0) {
+        if (report_number == 0x0){
             /* Offset the return buffer by 1, so that the report ID
                will remain in byte 0. */
             ++offset;
@@ -218,18 +218,18 @@ class HIDDeviceUSB implements HIDDevice {
             report, offset, length,
             1000/*timeout millis*/);
 
-        if (res < 0) {
+        if (res < 0){
             Log.w(TAG, "getFeatureReport() returned " + res + " on device " + getDeviceName());
             return false;
         }
 
-        if (skipped_report_id) {
+        if (skipped_report_id){
             ++res;
             ++length;
         }
 
         byte[] data;
-        if (res == length) {
+        if (res == length){
             data = report;
         } else {
             data = Arrays.copyOfRange(report, 0, res);
@@ -240,20 +240,20 @@ class HIDDeviceUSB implements HIDDevice {
     }
 
     @Override
-    public void close() {
+    public void close(){
         mRunning = false;
-        if (mInputThread != null) {
-            while (mInputThread.isAlive()) {
+        if (mInputThread != null){
+            while (mInputThread.isAlive()){
                 mInputThread.interrupt();
                 try {
                     mInputThread.join();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException e){
                     // Keep trying until we're done
                 }
             }
             mInputThread = null;
         }
-        if (mConnection != null) {
+        if (mConnection != null){
             UsbInterface iface = mDevice.getInterface(mInterfaceIndex);
             mConnection.releaseInterface(iface);
             mConnection.close();
@@ -262,22 +262,22 @@ class HIDDeviceUSB implements HIDDevice {
     }
 
     @Override
-    public void shutdown() {
+    public void shutdown(){
         close();
         mManager = null;
     }
 
     @Override
-    public void setFrozen(boolean frozen) {
+    public void setFrozen(boolean frozen){
         mFrozen = frozen;
     }
 
     protected class InputThread extends Thread {
         @Override
-        public void run() {
+        public void run(){
             int packetSize = mInputEndpoint.getMaxPacketSize();
             byte[] packet = new byte[packetSize];
-            while (mRunning) {
+            while (mRunning){
                 int r;
                 try
                 {
@@ -288,18 +288,18 @@ class HIDDeviceUSB implements HIDDevice {
                     Log.v(TAG, "Exception in UsbDeviceConnection bulktransfer: " + e);
                     break;
                 }
-                if (r < 0) {
+                if (r < 0){
                     // Could be a timeout or an I/O error
                 }
-                if (r > 0) {
+                if (r > 0){
                     byte[] data;
-                    if (r == packetSize) {
+                    if (r == packetSize){
                         data = packet;
                     } else {
                         data = Arrays.copyOfRange(packet, 0, r);
                     }
 
-                    if (!mFrozen) {
+                    if (!mFrozen){
                         mManager.HIDDeviceInputReport(mDeviceId, data);
                     }
                 }

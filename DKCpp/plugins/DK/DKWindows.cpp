@@ -55,7 +55,7 @@ HWND DKWindows::consoleWindow;
 extern int main(int argc, char** argv);
 
 //////////// WIN MAIN ////////////////////////////////////////////////////////////////////////////
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow){
 	DKDEBUGFUNC(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
@@ -363,13 +363,13 @@ bool DKWindows::GetProcessList(DKString& list){
 	// Calculate how many process identifiers were returned.
 	cProcesses = cbNeeded / sizeof(DWORD);
 	// Print the name and process identifier for each process.
-	for (i = 0; i < cProcesses; i++) {
-		if (aProcesses[i] != 0) {
+	for (i = 0; i < cProcesses; i++){
+		if (aProcesses[i] != 0){
 			TCHAR szProcessName[MAX_PATH] = TEXT("<unknown>");
 			//Get a handle to the process.
 			HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, aProcesses[i]);
 			//Get the process name.
-			if (NULL != hProcess) {
+			if (NULL != hProcess){
 				HMODULE hMod;
 				DWORD _cbNeeded;
 				if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &_cbNeeded))
@@ -415,7 +415,7 @@ bool DKWindows::GetUsername(DKString& username){
 	/*
 	TCHAR name[UNLEN + 1];
 	DWORD size = UNLEN + 1;
-	if (GetUserName((TCHAR*)name, &size)) {
+	if (GetUserName((TCHAR*)name, &size)){
 		username = toString(name);
 		return true;
 	}

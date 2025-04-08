@@ -41,7 +41,7 @@
 static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 #endif
 
-DKSDLRmlOpenGL::DKSDLRmlOpenGL(SDL_Renderer* renderer, SDL_Window* screen) {
+DKSDLRmlOpenGL::DKSDLRmlOpenGL(SDL_Renderer* renderer, SDL_Window* screen){
 	DKDEBUGFUNC(renderer, screen);
     DKINFO("Using DKSDLRmlOpenGL\n");
     mRenderer = renderer;
@@ -49,7 +49,7 @@ DKSDLRmlOpenGL::DKSDLRmlOpenGL(SDL_Renderer* renderer, SDL_Window* screen) {
 }
 
 // Called by Rml when it wants to render geometry that it does not wish to optimise.
-void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
+void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation){
 	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SDL Shaders
@@ -81,7 +81,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 		//If the id contains [CEF] , it is a cef image
 		//Update the texture with DKSDLCef::GetTexture(id);
 		///////////////////////////////////////////////////////////
-        if (has(texture_name[texture], "[CEF]")) {
+        if (has(texture_name[texture], "[CEF]")){
 			DKString id = texture_name[texture];
             replace(id, "[CEF]", "");
 			struct DKTexture{ SDL_Texture* texture; };
@@ -95,7 +95,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 			DKREDINFO("SDL_GL_BindTexture: "+DKString(SDL_GetError())+"\n");
     }
  
-    for(int  i = 0; i < num_vertices; i++) {
+    for(int  i = 0; i < num_vertices; i++){
         Positions[i] = vertices[i].position;
         //Colors[i] = vertices[i].colour; 		//!!!FIXME!!!!
         if(sdl_texture){
@@ -175,7 +175,7 @@ bool DKSDLRmlOpenGL::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector
 	//CEF Texture
 	//The source variable is the id of the iframe. It will contain [CEF] in it's id.
 	//We will map that id to the texture handle for later use. 
-    if (has(source, "[CEF]")) {
+    if (has(source, "[CEF]")){
 		texture_handle = reinterpret_cast<Rml::TextureHandle>(&source);
 		texture_name[texture_handle] = source;
 		return true;
@@ -237,9 +237,9 @@ bool DKSDLRmlOpenGL::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector
     }
     Rml::String extension = source.substr(i + 1, source.length() - i);
     SDL_Surface* surface = IMG_LoadTyped_RW(SDL_RWFromMem(buffer, int(buffer_size)), 1, extension.c_str());
-    if (surface) {
+    if (surface){
         SDL_Texture* texture = SDL_CreateTextureFromSurface(mRenderer, surface);
-        if (texture) {
+        if (texture){
             texture_handle = (Rml::TextureHandle)texture;
             texture_dimensions = Rml::Vector2i(surface->w, surface->h);
             SDL_FreeSurface(surface);

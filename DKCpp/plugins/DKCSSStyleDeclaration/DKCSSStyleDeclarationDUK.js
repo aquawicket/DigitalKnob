@@ -4,7 +4,7 @@
 // Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 // [Exposed=Window]
 // interface CSSStyleDeclaration {
-var CSSStyleDeclaration = function CSSStyleDeclaration(address) {
+var CSSStyleDeclaration = function CSSStyleDeclaration(address){
 	console.log("CSSStyleDeclaration("+address+")")
 	
 	if(address)
@@ -28,27 +28,27 @@ var CSSStyleDeclaration = function CSSStyleDeclaration(address) {
     })
 	
 	// getter CSSOMString item(unsigned long index);
-	CSSStyleDeclaration.prototype.item = function item(index) {
+	CSSStyleDeclaration.prototype.item = function item(index){
         return CPP_DKCSSStyleDeclarationDUK_item(this.address, index);
     }
 
 	// CSSOMString getPropertyValue(CSSOMString property);
-	CSSStyleDeclaration.prototype.getPropertyValue = function getPropertyValue(property) {
+	CSSStyleDeclaration.prototype.getPropertyValue = function getPropertyValue(property){
         return CPP_DKCSSStyleDeclarationDUK_getPropertyValue(this.address, property);
     }
 
 	// CSSOMString getPropertyPriority(CSSOMString property);
-	CSSStyleDeclaration.prototype.getPropertyPriority = function getPropertyPriority(property) {
+	CSSStyleDeclaration.prototype.getPropertyPriority = function getPropertyPriority(property){
         return CPP_DKCSSStyleDeclarationDUK_getPropertyPriority(this.address, property);
     }
 	
 	// [CEReactions] undefined setProperty(CSSOMString property, [LegacyNullToEmptyString] CSSOMString value, optional [LegacyNullToEmptyString] CSSOMString priority = "");
-	CSSStyleDeclaration.prototype.setProperty = function setProperty(property, value, priority) {
+	CSSStyleDeclaration.prototype.setProperty = function setProperty(property, value, priority){
         CPP_DKCSSStyleDeclarationDUK_setProperty(this.address, property, value, priority);
     }
 	
 	// [CEReactions] CSSOMString removeProperty(CSSOMString property);
-	CSSStyleDeclaration.prototype.removeProperty = function removeProperty(property) {
+	CSSStyleDeclaration.prototype.removeProperty = function removeProperty(property){
         return CPP_DKCSSStyleDeclarationDUK_removeProperty(this.address, property);
     }
 	

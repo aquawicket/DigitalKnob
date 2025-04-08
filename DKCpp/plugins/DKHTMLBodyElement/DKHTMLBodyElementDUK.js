@@ -7,7 +7,7 @@
 // [HTMLConstructor] constructor();
 //	 // also has obsolete members
 //};
-var HTMLBodyElement = function HTMLBodyElement(address) {
+var HTMLBodyElement = function HTMLBodyElement(address){
 	//console.log("HTMLBodyElement("+address+")")
 	
 	if(address)

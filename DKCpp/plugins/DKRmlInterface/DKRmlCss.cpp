@@ -62,7 +62,7 @@ DKRmlCss::DKRmlCss(DKRmlInterface* dkRmlInterface, /*const*/ DKString& file){
 	//Load user agent style sheet
 	const Rml::StyleSheetContainer* doc_sheet = dkRmlInterface->document->GetOwnerDocument()->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
-	if (doc_sheet) { //Combine the file_sheet to the current sheet
+	if (doc_sheet){ //Combine the file_sheet to the current sheet
 		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = doc_sheet->CombineStyleSheetContainer(*file_sheet);
 		dkRmlInterface->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
 	}

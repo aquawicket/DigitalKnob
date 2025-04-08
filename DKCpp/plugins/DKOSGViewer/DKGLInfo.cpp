@@ -89,7 +89,7 @@ bool DKGLInfo::Init(){
 	if (!_gc->isRealized())
 		return DKERROR("Graphics context is not realized \n");
 
-	if (traits->pbuffer == false) {
+	if (traits->pbuffer == false){
 		DKINFO("Realized graphics window for OpenGL operations. \n");
 	}
 	else{

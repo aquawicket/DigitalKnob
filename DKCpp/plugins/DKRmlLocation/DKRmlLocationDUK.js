@@ -1,5 +1,5 @@
 
-var DKRmlLocation = function DKRmlLocation(dkRmlInterface, dkRmlEventListener) {
+var DKRmlLocation = function DKRmlLocation(dkRmlInterface, dkRmlEventListener){
 	console.log("RmlLocation("+dkRmlInterface+","+dkRmlEventListener+")");
 	console.log("RmlLocation("+dkRmlInterface.address+","+dkRmlEventListener.address+")");
 

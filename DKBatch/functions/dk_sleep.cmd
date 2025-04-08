@@ -10,7 +10,7 @@ setlocal
 	%dk_call% dk_debugFunc 1  
     :: Method 1 - javascript (fastest)
     set /a "seconds=(%~1*1000)"
-    cscript /nologo /e:JScript "%~f0" "%seconds%" %NO_STDERR% && dk_return || (call ) %NO_OUTPUT%
+    cscript /nologo /e:javascript "%~f0" "%seconds%" %NO_STDERR% && dk_return || (call ) %NO_OUTPUT%
     
     :: Method 2 - dk_powershell
     set /a "seconds=%~1"

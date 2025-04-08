@@ -119,8 +119,8 @@ osg::Node* DKSDLOsg::createScene(){
     return pGeode;
 }
 
-bool DKSDLOsg::OnEvent(SDL_Event* event) {
-    switch (event->type) {
+bool DKSDLOsg::OnEvent(SDL_Event* event){
+    switch (event->type){
         case SDL_MOUSEMOTION:
             osg_graphicsWindow->getEventQueue()->mouseMotion(event->motion.x, event->motion.y);
             return true;
@@ -146,11 +146,11 @@ bool DKSDLOsg::OnEvent(SDL_Event* event) {
 }
 
 
-bool DKSDLOsg::OnRender() {
+bool DKSDLOsg::OnRender(){
 	SDL_GL_SwapWindow(sdl_window);
     return true;
 }
 
-void DKSDLOsg::OnUpdate() {
+void DKSDLOsg::OnUpdate(){
     osg_viewer.frame(); // draw the new frame
 }
