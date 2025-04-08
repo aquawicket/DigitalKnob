@@ -20,7 +20,6 @@ setlocal
 	endlocal & (
 		if "%~2" neq "" (set "%~2=%dk_basename%")
 		set "dk_basename=%dk_basename%"
-		echo dk_basename = %dk_basename%
 	)
 %endfunction%
 

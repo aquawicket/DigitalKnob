@@ -85,7 +85,7 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1 2
 
 	%dk_call% dk_httpResponse "%~1"
-	echo dk_httpResponse = %dk_httpResponse%
+	::echo dk_httpResponse = %dk_httpResponse%
 
 	if !dk_httpResponse! equ 200 (
 		set "dk_urlExists=0"

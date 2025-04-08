@@ -1,0 +1,4 @@
+PYTHON3_WIN_ARM64_IMPORT=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-arm64.zip
+PYTHON3_WIN_X86_IMPORT=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip
+PYTHON3_WIN_X86_64_IMPORT=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip
+PYTHON3_MAC_X86_64_IMPORT=https://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg
