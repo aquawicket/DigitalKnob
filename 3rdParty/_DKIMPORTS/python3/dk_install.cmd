@@ -8,15 +8,13 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 :dk_install
     %dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-::	if defined ANDROID_HOST           (set "PYTHON3_IMPORT=python")
-
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_getFileParam "%DKIMPORTS_DIR%/python3/dkconfig.txt" PYTHON3_MAC_X86_64_IMPORT
 	%dk_call% dk_getFileParam "%DKIMPORTS_DIR%/python3/dkconfig.txt" PYTHON3_WIN_ARM64_IMPORT
 	%dk_call% dk_getFileParam "%DKIMPORTS_DIR%/python3/dkconfig.txt" PYTHON3_WIN_X86_64_IMPORT
 	%dk_call% dk_getFileParam "%DKIMPORTS_DIR%/python3/dkconfig.txt" PYTHON3_WIN_X86_IMPORT
 	
+	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 	if defined MAC_X86_HOST           (set "PYTHON3_IMPORT=%PYTHON3_MAC_X86_64_IMPORT%")
 	if defined WIN_ARM64_HOST         (set "PYTHON3_IMPORT=%PYTHON3_WIN_ARM64_IMPORT%")
 	if defined WIN_X86_HOST           (set "PYTHON3_IMPORT=%PYTHON3_WIN_X86_IMPORT%")
