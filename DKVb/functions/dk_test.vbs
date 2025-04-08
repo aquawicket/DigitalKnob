@@ -1,4 +1,6 @@
-executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("DK.vbs").readAll()
+if(NOT DK_VBS = 1) then
+	executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("DK.vbs").readAll()
+end if
 
 '##################################################################################
 '# dk_test()
@@ -126,8 +128,8 @@ end function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-if(ENV("DKSCRIPT_FILE") = "dk_test.vbs") then
-	
+if(ENV("DKSCRIPT_PATH") = WScript.ScriptFullName) then
+public function DKTEST()	
 	dk_test(Array("from :DKTEST", "to dk_test"))
 '	dk_echo ""
 '	dk_echo("GLOBAL_VAR = %GLOBAL_VAR%"
@@ -142,6 +144,5 @@ if(ENV("DKSCRIPT_FILE") = "dk_test.vbs") then
 '	dk_echo ""
 '	dk_echo("GLOBAL_VAR = %GLOBAL_VAR%"
 '	dk_echo("RETURN_VAR = %RETURN_VAR%"
-	
-	
+end function	
 end if

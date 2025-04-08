@@ -1,5 +1,8 @@
-executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("DK.vbs").readAll()
-ForceConsole()
+if(NOT DK_VBS = 1) then
+	executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("DK.vbs").readAll()
+	ForceConsole()
+end if
+
 
 '##################################################################################
 '# dk_echo(<message>)
@@ -16,7 +19,14 @@ end function
 
 
 
+
+
+
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-if DKSCRIPT_FILE = "dk_echo.vbs" then
+if(ENV("DKSCRIPT_PATH") = WScript.ScriptFullName) then
+public function DKTEST()	
+
 	dk_echo("test dk_echo()")
+
+end function	
 end if

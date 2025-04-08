@@ -16,7 +16,11 @@ end function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-if DKSCRIPT_FILE = "dk_source.vbs" then
+if(ENV("DKSCRIPT_PATH") = WScript.ScriptFullName) then
+public function DKTEST()
+
 	dk_source("dk_messageBox")
 	dk_messageBox("test dk_source() successful")
+
+end function
 end if
