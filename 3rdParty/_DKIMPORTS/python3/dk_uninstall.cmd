@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../../DKBa
 if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::####################################################################
-::# dk_install
+::# dk_uninstall
 ::#
-:dk_install
+:dk_uninstall
     %dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
@@ -24,16 +24,18 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	::%dk_call% dk_isUrl %PYTHON3_IMPORT% && (
 		%dk_call% dk_importVariables "%PYTHON3_IMPORT%" IMPORT_PATH %~dp0
 	::)
-	set "PYTHON3_EXE=%PYTHON3%/python.exe"
-	if exist "%PYTHON3_EXE%" (%return%)
+	::echo PYTHON3 = %PYTHON3%
+	%dk_call% dk_delete "%PYTHON3%"
+	::if exist "%PYTHON3%/python.exe" (set "PYTHON3_EXE=%PYTHON3%/python.exe")
+	::if exist "%PYTHON3_EXE%" (%return%)
 	
 	::install
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_basename "%PYTHON3_IMPORT%" PYTHON3_IMPORT_FILE
-	%dk_call% dk_download "%PYTHON3_IMPORT%" "%DKDOWNLOAD_DIR%/%PYTHON3_IMPORT_FILE%"
-	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%PYTHON3_IMPORT_FILE%" "%PYTHON3%"
+	::%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	::%dk_call% dk_basename "%PYTHON3_IMPORT%" PYTHON3_IMPORT_FILE
+	::%dk_call% dk_download "%PYTHON3_IMPORT%" "%DKDOWNLOAD_DIR%/%PYTHON3_IMPORT_FILE%"
+	::%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%PYTHON3_IMPORT_FILE%" "%PYTHON3%"
 	
-	%dk_call% dk_assertPath "%PYTHON3_EXE%"
+	::if NOT exist "%PYTHON3_EXE%" (%dk_call% dk_error "cannot find PYTHON3_EXE:%PYTHON3_EXE%")
 %endfunction%
 
 
@@ -44,5 +46,5 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 	setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_install
+	call :dk_uninstall
 %endfunction%
