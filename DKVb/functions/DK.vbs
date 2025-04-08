@@ -32,15 +32,17 @@ else
 	dk_source("dk_echo")
 	dk_echo("Test dk_echo")
 	
-	'if(isEmpty(ENV("DKSCRIPT_PATH"))) Then
+'	if(isEmpty(ENV("DKSCRIPT_PATH"))) Then
 		ENV("DKSCRIPT_PATH") = WScript.ScriptFullName
-	'end if
-	'if(isEmpty(ENV("DKSCRIPT_DIR"))) Then
+'	end if
+'	if(isEmpty(ENV("DKSCRIPT_DIR"))) Then
 		ENV("DKSCRIPT_DIR") = FileSystemObject.GetParentFolderName(ENV("DKSCRIPT_PATH"))
-	'end if
-	ENV("DKSCRIPT_FILE") 		= FileSystemObject.GetFileName(ENV("DKSCRIPT_PATH"))
-	ENV("DKSCRIPT_NAME") 		= FileSystemObject.GetBaseName(ENV("DKSCRIPT_PATH"))
-	ENV("DKSCRIPT_EXT") 		= "."+FileSystemObject.GetExtensionName(ENV("DKSCRIPT_PATH"))
+'	end if
+'	if(isEmpty(ENV("DKSCRIPT_FILE"))) Then
+		ENV("DKSCRIPT_FILE") = FileSystemObject.GetFileName(ENV("DKSCRIPT_PATH"))
+'	end if
+	ENV("DKSCRIPT_NAME")		= FileSystemObject.GetBaseName(ENV("DKSCRIPT_PATH"))
+	ENV("DKSCRIPT_EXT")			= "."+FileSystemObject.GetExtensionName(ENV("DKSCRIPT_PATH"))
 	ENV("DKHOME_DIR")			= WScript_Shell.ExpandEnvironmentStrings(ENV("USERPROFILE"))
 	ENV("DKCACHE_DIR")			= ENV("DKHOME_DIR")+"\.dk"
 	ENV("DKDESKTOP_DIR")		= ENV("DKHOME_DIR")+"\Desktop"
