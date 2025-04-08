@@ -19,19 +19,19 @@ endif()
 
 
 ###### 32Bit ######
-#dk_set(VC_REDIST_X86_IMPORT "https://aka.ms/vs/16/release/vc_redist.x86.exe")
-#dk_set(VCCOMP140_X86_DLL "C:/Windows/SysWOW64/vcomp140.dll")
-#dk_set(VCCOMP140_X86_DEBUG_DLL "C:/Windows/SysWOW64/vcomp140d.dll")
-#dk_set(VCRUNTIME140_X86_DLL "C:/Windows/SysWOW64/vcruntime140.dll")
-#dk_set(VCRUNTIME140_X86_DEBUG_DLL "C:/Windows/SysWOW64/vcruntime140d.dll")
+dk_set(VC_REDIST_X86_IMPORT "https://aka.ms/vs/16/release/vc_redist.x86.exe")
+dk_set(VCCOMP140_X86_DLL "C:/Windows/SysWOW64/vcomp140.dll")
+dk_set(VCCOMP140_X86_DEBUG_DLL "C:/Windows/SysWOW64/vcomp140d.dll")
+dk_set(VCRUNTIME140_X86_DLL "C:/Windows/SysWOW64/vcruntime140.dll")
+dk_set(VCRUNTIME140_X86_DEBUG_DLL "C:/Windows/SysWOW64/vcruntime140d.dll")
 ### INSTALL ###
-#if((NOT EXISTS "${VCCOMP140_X86_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_DEBUG_DLL}"))
-#	dk_basename(${VC_REDIST_X86_IMPORT} VC_REDIST_X86_IMPORT_FILE)
-#	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_IMPORT_FILE}")
-#	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-#	dk_download(${VC_REDIST_X86_IMPORT} $ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_IMPORT_FILE})
-#	dk_command($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_IMPORT_FILE} /install /quiet /norestart) #/log $ENV{DK3RDPARTY_DIR}/vc_redist_install_log.txt
-#endif()
+if((NOT EXISTS "${VCCOMP140_X86_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_DEBUG_DLL}"))
+	dk_basename(${VC_REDIST_X86_IMPORT} VC_REDIST_X86_IMPORT_FILE)
+	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_IMPORT_FILE}")
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	dk_download(${VC_REDIST_X86_IMPORT})
+	dk_command($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_IMPORT_FILE} /install /quiet /norestart) #/log $ENV{DK3RDPARTY_DIR}/vc_redist_install_log.txt
+endif()
 #dk_assertPath(VCCOMP140_X86_DLL)
 
 
@@ -46,7 +46,7 @@ if((NOT EXISTS "${VCCOMP140_X86_64_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_64_DE
 	dk_basename(${VC_REDIST_X86_64_IMPORT} VC_REDIST_X86_64_IMPORT_FILE)
 	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_64_IMPORT_FILE}")
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_download(${VC_REDIST_X86_64_IMPORT} $ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_IMPORT_FILE})
+	dk_download(${VC_REDIST_X86_64_IMPORT})
 	dk_command($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_IMPORT_FILE} /install /quiet /norestart) #/log $ENV{DK3RDPARTY_DIR}/vc_redist_install_log.txt
 endif()
 #dk_assertPath(VCCOMP140_X86_64_DLL)

@@ -15,11 +15,12 @@ setlocal
 	set "pathname=%1"
 	set "pathname=%pathname:"=%"
 
-	for %%Z in ("%pathname%") do set "dk_basename=%%~nxZ"
-
+	for %%A in ("%pathname%") do (set "dk_basename=%%~nxA")
+	
 	endlocal & (
+		if "%~2" neq "" (set "%~2=%dk_basename%")
 		set "dk_basename=%dk_basename%"
-		if "%2" neq "" set "%2=%dk_basename%"
+		echo dk_basename = %dk_basename%
 	)
 %endfunction%
 
@@ -59,6 +60,11 @@ setlocal
 
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
+	%dk_call% dk_basename "%myPath%"
+	%dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+	
+	%dk_call% dk_echo
+	%dk_call% dk_set myPath "https://aka.ms/vs/16/release/vc_redist.x64.exe"
 	%dk_call% dk_basename "%myPath%"
 	%dk_call% dk_echo "%myPath%: basename = %dk_basename%"
 %endfunction%
