@@ -22,14 +22,22 @@ endif()
 function(dk_download)
 	dk_debugFunc(1 3)
 	message("dk_download(${ARGV})")
-	dk_echo("ARGV0 = ${ARGV0}")
-	dk_echo("ARGV1 = ${ARGV1}")
-	dk_echo("ARGV2 = ${ARGV2}")
 	
-	set(url "${ARGV0}")
+	
+	dk_includes("${ARGV}" "${ARGV0}")
+	if(dk_includes)
+		set(url "${ARGV0}")
+	endif()
 	dk_echo("url = ${url}")
-	set(dest_path "${ARGV1}")
+	
+	# FIXME: Sometimes argument vars will linger a value. For instance, ARGV1 contains a value not related to this function.
+	# We make sure the value is located in the full ARGV to fix this for now. We still need to find the root of this issue.
+	dk_includes("${ARGV}" "${ARGV1}")
+	if(dk_includes)
+		set(dest_path "${ARGV1}")
+	endif()
 	dk_echo("dest_path = ${dest_path}")
+	
 	dk_getOption(NO_HALT REMOVE)
 	dk_echo("NO_HALT = ${NO_HALT}")
 	
