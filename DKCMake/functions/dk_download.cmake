@@ -19,16 +19,19 @@ endif()
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
-function(dk_download) # dest_path #NO_HALT
+function(dk_download)
 	dk_debugFunc(1 3)
 	message("dk_download(${ARGV})")
+	dk_echo("ARGV0 = ${ARGV0}")
+	dk_echo("ARGV1 = ${ARGV1}")
+	dk_echo("ARGV2 = ${ARGV2}")
 	
 	set(url "${ARGV0}")
-	dk_printVar(url)
+	dk_echo("url = ${url}")
 	set(dest_path "${ARGV1}")
-	dk_printVar(dest_path)
+	dk_echo("dest_path = ${dest_path}")
 	dk_getOption(NO_HALT REMOVE)
-	
+	dk_echo("NO_HALT = ${NO_HALT}")
 	
 	# Setup all url variables
 	#if(NOT url)
