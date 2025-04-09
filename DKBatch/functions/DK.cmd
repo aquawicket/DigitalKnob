@@ -1,5 +1,5 @@
 @echo off
-if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
+if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 
 ::####################################################################
 ::# DK
@@ -217,7 +217,7 @@ if defined DK_CMD (exit /b %errorlevel%) else (set "DK_CMD=1")
 
 	echo "reloading with /v:on 'delayed expansion',  /k 'keep terminal open' . . . ."
 	set "RELOADED=1"
-	set "DK_CMD="
+	set "DK.cmd="
 
 	"%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" 	&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
 

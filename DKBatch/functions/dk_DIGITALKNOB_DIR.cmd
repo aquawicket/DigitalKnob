@@ -1,5 +1,5 @@
 @echo off
-if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::if not defined dk_DIGITALKNOB_DIR (set "dk_DIGITALKNOB_DIR=1") else (goto:eof)
 
 ::####################################################################

@@ -1,6 +1,6 @@
 @echo off
 if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=../")
-if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 set "dk_embedBin_DELETE_CMD_ON_EXTRACT=0"
 set "dk_embedBin_OVERWRITE_OUTPUT=1"

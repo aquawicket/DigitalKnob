@@ -67,9 +67,9 @@ if "%~1" equ "" (goto :DKINSTALL)
 	
 	echo Installing DKJava . . .
 	
-	::###### DK_CMD ######
+	::###### DK.cmd ######
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
-	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::###### Install DKCSharp ######
 	::###### COMPILER_EXE ######

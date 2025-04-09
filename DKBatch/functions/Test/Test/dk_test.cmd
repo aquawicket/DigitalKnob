@@ -1,5 +1,5 @@
 @echo off
-if not defined DK_CMD call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~f0 %*
+if not defined DK.cmd call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~f0 %*
 
 ::####################################################################
 ::# Test/Test/dk_test(args)
