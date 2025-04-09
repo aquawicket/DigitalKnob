@@ -46,24 +46,27 @@ if(USE_NODEJS){
 	WShell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
 }
 
+//########### DKENGINE ###########
 if(typeof ScriptEngine !== "undefined"){
-	console.log("typeof ScriptEngine = "+ typeof ScriptEngine);
+	var DKENGINE = ScriptEngine();
+	var DKENGINE_VERSION = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
 }
+dk_check('DKENGINE');
 
 //############ DKSHELL ############
-//var DKENGINE = "unknown"
 if(typeof ActiveXObject === "function"){
-	if(typeof WScript === "object"){ // JScript
-		var DKENGINE = ScriptEngine();
-		var DKENGINE_VERSION = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
+	if(typeof WScript !== "object"){ // JScript
+		DKENGINE = "DKHta"; 
 	}
-	else{ DKENGINE = "DKHta"; }
 } else { 
 	DKENGINE = "Browser" 
 }
-dk_check('DKENGINE');
-console.debug("DKENGINE = "+DKENGINE);
-console.debug("DKENGINE_VERSION = "+DKENGINE_VERSION);
+
+
+
+
+
+
 
 //############ ARGV, ARGC ############
 if(typeof WScript === "object"){
@@ -349,7 +352,6 @@ if(typeof alert === "undefined"){
 	});
 }
 dk_check('alert');
-alert("typeof ScriptEngine = "+ typeof ScriptEngine);
 
 /*
 //############ console ############
