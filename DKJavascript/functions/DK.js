@@ -4,8 +4,7 @@ var USE_FILESYSTEM = 0;
 var USE_NODEJS=0;
 
 
-
-//###### Console ######
+//###### console.log ######
 (function(con){
 	'use strict';
 	var prop, method;
@@ -47,8 +46,12 @@ if(USE_NODEJS){
 	WShell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
 }
 
+if(typeof ScriptEngine !== "undefined"){
+	console.log("typeof ScriptEngine = "+ typeof ScriptEngine);
+}
+
 //############ DKSHELL ############
-var DKENGINE = "unknown"
+//var DKENGINE = "unknown"
 if(typeof ActiveXObject === "function"){
 	if(typeof WScript === "object"){ // JScript
 		var DKENGINE = ScriptEngine();
@@ -342,10 +345,11 @@ if(typeof location === "object"){
 //############ alert ############
 if(typeof alert === "undefined"){
 	dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js", function(){
-		alert("test");
+		//alert("test");
 	});
 }
 dk_check('alert');
+alert("typeof ScriptEngine = "+ typeof ScriptEngine);
 
 /*
 //############ console ############
@@ -385,7 +389,7 @@ function body_onload(){
 	console.log("body_onload()")
 	if(!window.document.body){ 
 		alert("window.document.body is invalid"); 
-		//return; 
+		return; 
 	}
 		
 	if(DKSCRIPT_FILE === "index.html"){
