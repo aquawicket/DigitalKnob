@@ -7,8 +7,8 @@ setlocal
 	%dk_call% dk_debugFunc 0
 	
 	echo:
-	echo ############ Uninstalling DKBatch #############
-	set "ftype=DKBatch"
+	echo ############ Uninstalling DKcmd #############
+	set "ftype=DKcmd"
 	set "assoc=cmd"
 	
 	(ftype %ftype% 2>nul) && (ftype %ftype%=)
