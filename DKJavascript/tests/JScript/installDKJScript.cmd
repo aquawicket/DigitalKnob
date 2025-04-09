@@ -4,7 +4,7 @@ if not "%~1"=="" (goto runDKJavascript)
 :installDKJavascript
 	::###### DK_CMD ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../DKBatch/functions/")
-	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+	if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::###### Install DKJavascript ######
 	%dk_call% dk_echo "Installing DKJavascript . . ."

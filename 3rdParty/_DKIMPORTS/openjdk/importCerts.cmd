@@ -1,6 +1,6 @@
 @echo off
 if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=../../../DKBatch/functions/")
-if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 :: NOTE: you'll need to download and install openssl for this, link below
 :: https://slproweb.com/products/Win32OpenSSL.html

@@ -1,5 +1,5 @@
 @echo off
-if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 set "dk_assertPath_FORWARD_SLASHES=1"
 set "dk_assertPath_CASE_SENSITIVE=1"
