@@ -31,14 +31,10 @@ var USE_NODEJS=0;
 	while (method = methods.pop()) con[method] = con[method] || print;
 })(this.console = this.console || {});
 
-
-
-
 //############ dk_check ############
 dk_check = function(object){
 	if(typeof this[object] === "undefined"){console.error(object+" is invalid\n");}
 }
-
 
 //############ NodeJS ############
 if(USE_NODEJS){
@@ -50,8 +46,6 @@ if(USE_NODEJS){
 	WShell.Run('start '+NODEJS_EXE+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
 	WShell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
 }
-
-
 
 //############ DKSHELL ############
 var DKENGINE = "unknown"
@@ -65,9 +59,8 @@ if(typeof ActiveXObject === "function"){
 	DKENGINE = "Browser" 
 }
 dk_check('DKENGINE');
-console.log("DKENGINE = "+DKENGINE);
-console.log("DKENGINE_VERSION = "+DKENGINE_VERSION);
-
+console.debug("DKENGINE = "+DKENGINE);
+console.debug("DKENGINE_VERSION = "+DKENGINE_VERSION);
 
 //############ ARGV, ARGC ############
 if(typeof WScript === "object"){
@@ -75,10 +68,10 @@ if(typeof WScript === "object"){
 	var ARGV = new Array(ARGC);
     for(var i = 0; i < ARGV.length; ++i){
         ARGV[i] = WScript.Arguments(i);
-		console.log("ARGV["+i+"] = "+ARGV[i]);
+		//console.log("ARGV["+i+"] = "+ARGV[i]);
     }
-	console.log("ARGV = "+ARGV);
-	console.log("ARGC = "+ARGC);
+	//console.log("ARGV = "+ARGV+"\n");
+	//console.log("ARGC = "+ARGC+"\n");
 }
 
 //############ globalThis ############
@@ -125,6 +118,7 @@ dk_check('XMLHttpRequest');
 //############ dk_source ############
 if(typeof dk_source === "undefined"){
 	dk_source = function(url, callback){
+		//console.log("dk_source("+url+")");
 		var url = url.replaceAll("\\", "/");
 		//############ Msxml2.XMLHTTP.6.0 ############
 		if(typeof WScript === "object"){
@@ -139,8 +133,12 @@ if(typeof dk_source === "undefined"){
 				//console.log(xmlHttpRequest.responseText);
 				eval(xmlHttpRequest.responseText);
 			}
+			console.log("checking for callback");
 			if(callback){
 				callback();
+				return;
+			} else {
+				console.log("no callback");
 			}
 		} else { //############ Browsers ############
 			// file:///C:/Path/Format
@@ -205,19 +203,113 @@ if(typeof location === "undefined"){
 	var location = new Object;
 }
 dk_check('location');
+
+//######### location.href #########
 if(typeof location.href === "undefined"){
 	if(typeof document.url !== "undefined"){
 		location.href = document.url;
 	}
 }
 console.log("location.href = "+location.href);
+
+//######### DKSCRIPT_PATH / DKSCRIPT_ARGS #########
 if(typeof DKSCRIPT_PATH === "undefined"){
-	var DKSCRIPT_PATH = location.href;
+	if(typeof WScript_Shell !== "undefined"){ 
+		var DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");
+		var DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
+	} else if(typeof location.href !== "undefined"){
+		var DKSCRIPT_PATH = location.href;
+	}
+}
+if(typeof DKSCRIPT_PATH === "undefined"){
+	console.error("DKSCRIPT_PATH invalid");
 }
 console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
 
+//######### DKSCRIPT_DIR ############
+if(typeof DKSCRIPT_DIR === "undefined"){
+	DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
+	console.log("DKSCRIPT_DIR = "+DKSCRIPT_DIR);
+}
+//######### DKSCRIPT_FILE ############
+if(typeof DKSCRIPT_FILE === "undefined"){
+	DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1); 
+	console.log("DKSCRIPT_FILE = "+DKSCRIPT_FILE);
+}
+//######### DKSCRIPT_NAME ############
+if(typeof DKSCRIPT_NAME === "undefined"){
+	DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1)); 
+	console.log("DKSCRIPT_NAME = "+DKSCRIPT_NAME);
+}
+//######### DKSCRIPT_EXT ############
+if(typeof DKSCRIPT_EXT === "undefined"){
+	DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf(".")); 
+	console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
+}
 
 
+//###### DKHOME_DIR variables ######
+var DIGITALKNOB = "digitalknob"
+var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1);
+var DKCACHE_DIR = DKHOME_DIR+"/.dk"
+var DKDESKTOP_DIR = DKHOME_DIR+"/Desktop"
+
+//###### DIGITALKNOB_DIR variables ######
+var DIGITALKNOB_DIR = DKHOME_DIR+"/"+DIGITALKNOB
+var DKDOWNLOAD_DIR = DIGITALKNOB_DIR+"/download"
+var DKTOOLS_DIR = DIGITALKNOB_DIR+"/DKTools"
+
+//###### DKBRANCH_DIR variables ######
+var DKBRANCH = "Development"
+var DKBRANCH_DIR = DIGITALKNOB_DIR+"/"+DKBRANCH
+var DK3RDPARTY_DIR = DKBRANCH_DIR+"/3rdParty"
+var DKIMPORTS_DIR = DK3RDPARTY_DIR+"/_DKIMPORTS"
+var DKCPP_APPS_DIR = DKBRANCH_DIR+"/DKCpp/DKCpp/apps"
+var DKBASH_DIR = DKBRANCH_DIR+"/DKBash"
+var DKBASH_FUNCTIONS_DIR = DKBASH_DIR+"/functions"
+var DKBASH_FUNCTIONS_DIR_ = DKBASH_DIR+"/functions/"
+var DKBATCH_DIR = DKBRANCH_DIR+"/DKBatch"
+var DKBATCH_FUNCTIONS_DIR = DKBATCH_DIR+"/functions"
+var DKBATCH_FUNCTIONS_DIR_ = DKBATCH_DIR+"/functions/"
+var DKC_DIR = DKBRANCH_DIR+"/DKC"
+var DKC_FUNCTIONS_DIR = DKC_DIR+"/functions"
+var DKC_FUNCTIONS_DIR_ = DKC_DIR+"/functions/"
+var DKCMAKE_DIR = DKBRANCH_DIR+"/DKCMake"
+var DKCMAKE_FUNCTIONS_DIR = DKCMAKE_DIR+"/functions"
+var DKCMAKE_FUNCTIONS_DIR_ = DKCMAKE_DIR+"/functions/"
+var DKCPP_DIR = DKBRANCH_DIR+"/DKCpp"
+var DKCPP_APPS_DIR = DKCPP_DIR+"/DKCpp/apps"
+var DKCPP_FUNCTIONS_DIR = DKCPP_DIR+"/functions"
+var DKCPP_FUNCTIONS_DIR_ = DKCPP_DIR+"/functions/"
+var DKCSHARP_DIR = DKBRANCH_DIR+"/DKCSharp"
+var DKCSHARP_FUNCTIONS_DIR = DKCSHARP_DIR+"/functions"
+var DKCSHARP_FUNCTIONS_DIR_ = DKCSHARP_DIR+"/functions/"
+var DKHTA_DIR = DKBRANCH_DIR+"/DKHta"
+var DKHTA_FUNCTIONS_DIR = DKHTA_DIR+"/functions"
+var DKHTA_FUNCTIONS_DIR_ = DKHTA_DIR+"/functions/"
+var DKHTML_DIR = DKBRANCH_DIR+"/DKHta"
+var DKHTML_FUNCTIONS_DIR = DKHTML_DIR+"/functions"
+var DKHTML_FUNCTIONS_DIR_ = DKHTML_DIR+"/functions/"
+var DKJAVA_DIR = DKBRANCH_DIR+"/DKJava"
+var DKJAVA_FUNCTIONS_DIR = DKJAVA_DIR+"/functions"
+var DKJAVA_FUNCTIONS_DIR_ = DKJAVA_DIR+"/functions/"
+var DKJAVASCRIPT_DIR = DKBRANCH_DIR+"/DKJavascript"
+var DKJAVASCRIPT_FUNCTIONS_DIR = DKJAVASCRIPT_DIR+"/functions"
+var DKJAVASCRIPT_FUNCTIONS_DIR_ = DKJAVASCRIPT_DIR+"/functions/"
+var DKPHP_DIR = DKBRANCH_DIR+"/DKPhp"
+var DKPHP_FUNCTIONS_DIR = DKPHP_DIR+"/functions"
+var DKPHP_FUNCTIONS_DIR_ = DKPHP_DIR+"/functions/"
+var DKCPP_PLUGINS_DIR = DKBRANCH_DIR+"/DKPlugins"
+var DKPOWERSHELL_DIR = DKBRANCH_DIR+"/DKPowershell"
+var DKPOWERSHELL_FUNCTIONS_DIR = DKPOWERSHELL_DIR+"/functions"
+var DKPOWERSHELL_FUNCTIONS_DIR_ = DKPOWERSHELL_DIR+"/functions/"
+var DKPYTHON_DIR = DKBRANCH_DIR+"/DKPython"
+var DKPYTHON_FUNCTIONS_DIR = DKPYTHON_DIR+"/functions"
+var DKPYTHON_FUNCTIONS_DIR_ = DKPYTHON_DIR+"/functions/"
+var DKVB_DIR = DKBRANCH_DIR+"/DKVb"
+var DKVB_FUNCTIONS_DIR = DKVB_DIR+"/functions"
+var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
+var DK_JS = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 
 //############ queryString ############
 var queryString = "undefined"
@@ -244,119 +336,13 @@ if(typeof location === "object"){
 //}
 
 
-//var DKSCRIPT_PATH = location.href;
-if(typeof WScript_Shell === "undefined"){ 
-	if(typeof ActiveXObject === "function"){
-		WScript_Shell = new ActiveXObject("WScript.Shell");
-	}
-}
-if(typeof DKSCRIPT_PATH === "undefined"){ 
-	if(typeof WScript_Shell !== "undefined"){
-		DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");
-		console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
-	}
-}
-if(typeof DKSCRIPT_ARGS === "undefined"){
-	if(typeof WScript_Shell !== "undefined"){
-		DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
-		console.log("DKSCRIPT_ARGS = "+DKSCRIPT_ARGS);
-	}
-}
-if(typeof DKSCRIPT_DIR === "undefined"){
-	if(typeof DKSCRIPT_PATH !== "undefined"){
-		DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
-		console.log("DKSCRIPT_DIR = "+DKSCRIPT_DIR);
-	}
-}
-if(typeof DKSCRIPT_FILE === "undefined"){
-	if(typeof DKSCRIPT_PATH !== "undefined"){
-		DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1); 
-		console.log("DKSCRIPT_FILE = "+DKSCRIPT_FILE);
-	}
-}
-if(typeof DKSCRIPT_NAME === "undefined"){
-	if(typeof DKSCRIPT_PATH !== "undefined"){
-		DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1)); 
-		console.log("DKSCRIPT_NAME = "+DKSCRIPT_NAME);
-	}
-}
-if(typeof DKSCRIPT_EXT === "undefined"){
-	if(typeof DKSCRIPT_PATH !== "undefined"){
-		DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf(".")); 
-		console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
-	}
-}
 
 
-if(typeof DKSCRIPT_PATH !== "undefined"){
-	//###### DKHOME_DIR variables ######
-	var DIGITALKNOB = "digitalknob"
-	var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1);
-	var DKCACHE_DIR = DKHOME_DIR+"/.dk"
-	var DKDESKTOP_DIR = DKHOME_DIR+"/Desktop"
-
-	//###### DIGITALKNOB_DIR variables ######
-	var DIGITALKNOB_DIR = DKHOME_DIR+"/"+DIGITALKNOB
-	var DKDOWNLOAD_DIR = DIGITALKNOB_DIR+"/download"
-	var DKTOOLS_DIR = DIGITALKNOB_DIR+"/DKTools"
-
-	//###### DKBRANCH_DIR variables ######
-	var DKBRANCH = "Development"
-	var DKBRANCH_DIR = DIGITALKNOB_DIR+"/"+DKBRANCH
-	var DK3RDPARTY_DIR = DKBRANCH_DIR+"/3rdParty"
-	var DKIMPORTS_DIR = DK3RDPARTY_DIR+"/_DKIMPORTS"
-	var DKCPP_APPS_DIR = DKBRANCH_DIR+"/DKCpp/DKCpp/apps"
-	var DKBASH_DIR = DKBRANCH_DIR+"/DKBash"
-	var DKBASH_FUNCTIONS_DIR = DKBASH_DIR+"/functions"
-	var DKBASH_FUNCTIONS_DIR_ = DKBASH_DIR+"/functions/"
-	var DKBATCH_DIR = DKBRANCH_DIR+"/DKBatch"
-	var DKBATCH_FUNCTIONS_DIR = DKBATCH_DIR+"/functions"
-	var DKBATCH_FUNCTIONS_DIR_ = DKBATCH_DIR+"/functions/"
-	var DKC_DIR = DKBRANCH_DIR+"/DKC"
-	var DKC_FUNCTIONS_DIR = DKC_DIR+"/functions"
-	var DKC_FUNCTIONS_DIR_ = DKC_DIR+"/functions/"
-	var DKCMAKE_DIR = DKBRANCH_DIR+"/DKCMake"
-	var DKCMAKE_FUNCTIONS_DIR = DKCMAKE_DIR+"/functions"
-	var DKCMAKE_FUNCTIONS_DIR_ = DKCMAKE_DIR+"/functions/"
-	var DKCPP_DIR = DKBRANCH_DIR+"/DKCpp"
-	var DKCPP_APPS_DIR = DKCPP_DIR+"/DKCpp/apps"
-	var DKCPP_FUNCTIONS_DIR = DKCPP_DIR+"/functions"
-	var DKCPP_FUNCTIONS_DIR_ = DKCPP_DIR+"/functions/"
-	var DKCSHARP_DIR = DKBRANCH_DIR+"/DKCSharp"
-	var DKCSHARP_FUNCTIONS_DIR = DKCSHARP_DIR+"/functions"
-	var DKCSHARP_FUNCTIONS_DIR_ = DKCSHARP_DIR+"/functions/"
-	var DKHTA_DIR = DKBRANCH_DIR+"/DKHta"
-	var DKHTA_FUNCTIONS_DIR = DKHTA_DIR+"/functions"
-	var DKHTA_FUNCTIONS_DIR_ = DKHTA_DIR+"/functions/"
-	var DKHTML_DIR = DKBRANCH_DIR+"/DKHta"
-	var DKHTML_FUNCTIONS_DIR = DKHTML_DIR+"/functions"
-	var DKHTML_FUNCTIONS_DIR_ = DKHTML_DIR+"/functions/"
-	var DKJAVA_DIR = DKBRANCH_DIR+"/DKJava"
-	var DKJAVA_FUNCTIONS_DIR = DKJAVA_DIR+"/functions"
-	var DKJAVA_FUNCTIONS_DIR_ = DKJAVA_DIR+"/functions/"
-	var DKJAVASCRIPT_DIR = DKBRANCH_DIR+"/DKJavascript"
-	var DKJAVASCRIPT_FUNCTIONS_DIR = DKJAVASCRIPT_DIR+"/functions"
-	var DKJAVASCRIPT_FUNCTIONS_DIR_ = DKJAVASCRIPT_DIR+"/functions/"
-	var DKPHP_DIR = DKBRANCH_DIR+"/DKPhp"
-	var DKPHP_FUNCTIONS_DIR = DKPHP_DIR+"/functions"
-	var DKPHP_FUNCTIONS_DIR_ = DKPHP_DIR+"/functions/"
-	var DKCPP_PLUGINS_DIR = DKBRANCH_DIR+"/DKPlugins"
-	var DKPOWERSHELL_DIR = DKBRANCH_DIR+"/DKPowershell"
-	var DKPOWERSHELL_FUNCTIONS_DIR = DKPOWERSHELL_DIR+"/functions"
-	var DKPOWERSHELL_FUNCTIONS_DIR_ = DKPOWERSHELL_DIR+"/functions/"
-	var DKPYTHON_DIR = DKBRANCH_DIR+"/DKPython"
-	var DKPYTHON_FUNCTIONS_DIR = DKPYTHON_DIR+"/functions"
-	var DKPYTHON_FUNCTIONS_DIR_ = DKPYTHON_DIR+"/functions/"
-	var DKVB_DIR = DKBRANCH_DIR+"/DKVb"
-	var DKVB_FUNCTIONS_DIR = DKVB_DIR+"/functions"
-	var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
-	var DK = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
-}
 
 //############ alert ############
 if(typeof alert === "undefined"){
 	dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js", function(){
-		//alert("test");
+		alert("test");
 	});
 }
 dk_check('alert');
@@ -419,7 +405,7 @@ dk_check('body_onload');
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
+dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(){});
 
 
 
@@ -427,18 +413,44 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 //if(typeof DKSCRIPT_PATH !== "string" && DKSCRIPT_EXT === ".js"){
 //if(typeof ARGV !== "undefined" && ARGV.length > 0){
 	//if(typeof ARGV(0) === "string"){
-	if(DKSCRIPT_EXT === ".js"){
-		dk_source(ARGV(0), function(){
-			//if(DKSCRIPT_EXT !== ".js"){ return }
-			//if(!dk_fileContains(DKSCRIPT_PATH, ":DKTEST")){ return }
-			console.log("")
-			console.log(bg_magenta+white+"###### DKTEST MODE ###### "+DKSCRIPT_FILE+" ###### DKTEST MODE ######"+clr)
-			console.log("")
-				 DKTEST()
-			console.log("")
-			console.log(bg_magenta+white+"######## END TEST ####### "+DKSCRIPT_FILE+" ######## END TEST #######"+clr)
-			console.log("")
+	if(typeof ARGV !== "undefined"){ 
+		if(ARGC > 0){ var JS_PATH = ARGV[0]; }
+		if(ARGC > 1){ var JS_ARGS = ARGV[1]; }
+		var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
+		var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
+		var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
+		var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
+		dk_source(JS_PATH, function(){
+			if(typeof JS_ARGS !== "undefined"){
+				window[JS_NAME](JS_ARGS);
+			} else {
+				window[JS_NAME]();
+			}
 		});
+	} else {
+		console.log("TODO");
+	}
+		
+	/*
+	if(typeof ARGV !== "undefined"){
+		FUNC_NAME = ARGV[0].substr(ARGV[0].lastIndexOf("/")+1, (ARGV[0].lastIndexOf(".") - ARGV[0].lastIndexOf("/")-1)); 
+		alert("FUNC_NAME = "+FUNC_NAME);
+		
+		document.title = FUNC_NAME;
+		if(typeof globalThis[FUNC_NAME] === "undefined"){
+
+			dk_source(ARGV[0], function dk_source_callback(){
+				//if(DKSCRIPT_EXT !== ".js"){ return }
+				//if(!dk_fileContains(DKSCRIPT_PATH, ":DKTEST")){ return }
+				console.log("")
+				console.log(bg_magenta+white+"###### DKTEST MODE ###### "+DKSCRIPT_FILE+" ###### DKTEST MODE ######"+clr)
+				console.log("")
+				DKTEST()//function DKTEST_callback(){});
+				console.log("")
+				console.log(bg_magenta+white+"######## END TEST ####### "+DKSCRIPT_FILE+" ######## END TEST #######"+clr)
+				console.log("")
+			});
+		}
 	} else {
 		if(typeof ARGV !== "undefined"){ 
 			if(ARGC > 0){ var JS_PATH = ARGV[0]; }
@@ -456,6 +468,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js");
 			});
 		}
 	}
+	*/
 	//}
 //}
 

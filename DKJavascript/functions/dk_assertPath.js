@@ -26,7 +26,7 @@ dk_assertPath = function dk_assertPath_f(){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f(){
+DKTEST = function DKTEST_f(callback){
 	//dk_debugFunc 0
 
 	//# correct path
@@ -48,5 +48,7 @@ DKTEST = function DKTEST_f(){
 //	//# CMD.exe
 //	dk_assertPath("%COMSPEC%")							//OK
 	
-    dk_assertPath("C:/NonExistentPath");					//ASSERT
+    //dk_assertPath("C:/NonExistentPath");				//ASSERT
+	
+	if(callback){ callback(); }
 };

@@ -1,4 +1,13 @@
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function(){});
+(function(v){
+	if(typeof dk_color === "undefined"){
+		dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function(){});
+		return dk_color;
+		}
+	}
+})(this.dk_color = this.dk_color || {});
+
+
+
 
 var dk_log_ENABLE = 1;
 
@@ -168,3 +177,5 @@ DKTEST = function DKTEST_f(){
     dk_log(ERROR,   "test dk_log ERROR message");
     dk_log(FATAL,   "test dk_log FATAL message");
 }
+
+});
