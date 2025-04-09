@@ -1,4 +1,4 @@
-//alert("Calculator")
+//alert("DKCalculator")
 
 function insertValue(value){
 	if (isClear == true){
