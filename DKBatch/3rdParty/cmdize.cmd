@@ -60,27 +60,27 @@
 
 @echo off
 
-if "%~1" == "" (
+if "%~1" equ "" (
 	call :print-usage U
 	goto:eof
 )
 
-if /i "%~1" == "/HELP" (
+if /i "%~1" equ "/HELP" (
 	call :print-usage UH
 	goto:eof
 )
 
-if /i "%~1" == "/HELP-MORE" (
+if /i "%~1" equ "/HELP-MORE" (
 	call :print-usage UHD
 	goto:eof
 )
 
-if /i "%~1" == "/HELP-DEVEL" (
+if /i "%~1" equ "/HELP-DEVEL" (
 	call :print-usage UHDG
 	goto:eof
 )
 
-if /i "%~1" == "/L" (
+if /i "%~1" equ "/L" (
 	call :print-extension-list
 	goto:eof
 )
@@ -93,16 +93,16 @@ set "CMDIZE_ENGINE="
 set "CMDIZE_MAYBE=>"
 
 :cmdize_loop_begin
-if "%~1" == "" exit /b %CMDIZE_ERROR%
+if "%~1" equ "" exit /b %CMDIZE_ERROR%
 
-if /i "%~1" == "/W" (
+if /i "%~1" equ "/W" (
 	set "CMDIZE_WRAP=1"
 	shift /1
 	goto :cmdize_loop_begin
 )
 
-if /i "%~1" == "/E" (
-	if /i "%~2" == "default" (
+if /i "%~1" equ "/E" (
+	if /i "%~2" equ "default" (
 		set "CMDIZE_ENGINE="
 	) else (
 		set "CMDIZE_ENGINE=%~2"
@@ -112,7 +112,7 @@ if /i "%~1" == "/E" (
 	goto :cmdize_loop_begin
 )
 
-if /i "%~1" == "/P" (
+if /i "%~1" equ "/P" (
 	set "CMDIZE_MAYBE=& rem "
 	shift /1
 	goto :cmdize_loop_begin
@@ -170,7 +170,7 @@ for %%e in ( "%CMDIZE_ENGINE%" ) do for %%s in (
 	"wscript wscript javascript"
 	"cchakra cscript {16d51579-a30b-4c8b-a276-0ff4dc41e755}"
 	"wchakra wscript {16d51579-a30b-4c8b-a276-0ff4dc41e755}"
-) do for /f "tokens=1,2,3" %%a in ( "%%~s" ) do if "%%~e" == "%%~a" (
+) do for /f "tokens=1,2,3" %%a in ( "%%~s" ) do if "%%~e" equ "%%~a" (
 	call :print-prolog "%%~b //nologo //e:%%~c" "0</*! ::" "*/0;"
 	type "%~f1"
 )
@@ -225,11 +225,11 @@ for /f "tokens=1,* delims=:" %%r in ( 'findstr /n /r "^" "%~f1"' ) do (
 	rem the line after the directive and put it to the next line,
 	rem if it contains an executable code.
 
-	if "%%s" == "" (
+	if "%%s" equ "" (
 		echo:%%s
-	) else for /f "tokens=1,*" %%a in ( "%%s" ) do if /i not "%%a" == "Option" (
+	) else for /f "tokens=1,*" %%a in ( "%%s" ) do if /i not "%%a" equ "Option" (
 		echo:%%s
-	) else for /f "tokens=1,* delims=':	 " %%i in ( "%%b" ) do if /i not "%%i" == "Explicit" (
+	) else for /f "tokens=1,* delims=':	 " %%i in ( "%%b" ) do if /i not "%%i" equ "Explicit" (
 		echo:%%s
 	) else (
 		call :warn Commenting "Option Explicit" in "%~1"
@@ -237,13 +237,13 @@ for /f "tokens=1,* delims=:" %%r in ( 'findstr /n /r "^" "%~f1"' ) do (
 		echo:rem the following line was commented out automatically.
 		set /p "=rem " <nul
 
-		if /i "%%b" == "Explicit" (
+		if /i "%%b" equ "Explicit" (
 			rem Option Explicit
 			echo:%%s
-		) else for /f "tokens=1,* delims='" %%i in ( "%%b" ) do if /i "%%i" == "Explicit" (
+		) else for /f "tokens=1,* delims='" %%i in ( "%%b" ) do if /i "%%i" equ "Explicit" (
 			rem Option Explicit {QUOTE} ...
 			echo:%%s
-		) else for /f "tokens=1,* delims=:	 " %%i in ( "%%b" ) do if /i "%%i" == "Explicit" (
+		) else for /f "tokens=1,* delims=:	 " %%i in ( "%%b" ) do if /i "%%i" equ "Explicit" (
 			rem Option Explicit {COLON|TAB|SPACE} ...
 			echo:%%a %%i
 			echo:%%j
@@ -261,7 +261,7 @@ goto:eof
 ::D>* https://perldoc.perl.org/perlwin32
 ::D>
 :cmdize.pl	[/e cmdonly]
-if /i "%CMDIZE_ENGINE%" == "cmdonly" (
+if /i "%CMDIZE_ENGINE%" equ "cmdonly" (
 	call :print-prolog "perl -x -S" "" "" "@" "dpn0.pl"
 	goto:eof
 )
@@ -316,7 +316,7 @@ goto:eof
 ::D>* http://stackoverflow.com/a/17468811/3627676
 ::D>
 :cmdize.py	[/e short]
-if /i "%CMDIZE_ENGINE%" == "short" (
+if /i "%CMDIZE_ENGINE%" equ "short" (
 	call :print-prolog "python -x" "" "" "@" "f0"
 	type "%~f1"
 	goto:eof
@@ -379,7 +379,7 @@ if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
 for /f "tokens=1,* delims=:" %%n in ( 'findstr /i /n /r "<?xml.*?>" "%~f1"' ) do for /f "tokens=1,2,* delims=?" %%a in ( "%%~o" ) do for /f "tokens=1,*" %%d in ( "%%b" ) do (
 	set "CMDIZE_ERROR_WSF="
 	if %%n neq 1 set "CMDIZE_ERROR_WSF=1"
-	if not "%%a" == "<" set "CMDIZE_ERROR_WSF=1"
+	if not "%%a" equ "<" set "CMDIZE_ERROR_WSF=1"
 	if defined CMDIZE_ERROR_WSF (
 		call :warn Incorrect XML declaration: it must be at the beginning of the script
 		exit /b 1
@@ -599,7 +599,7 @@ goto:eof
 ::G>    @engine pattern %* & @goto:eof
 ::G>
 :print-prolog
-if "%~4" == "@" (
+if "%~4" equ "@" (
 	echo:@%~1 "%%~%~5" %%* ^& @goto:eof
 	goto:eof
 )

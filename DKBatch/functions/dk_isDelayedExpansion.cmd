@@ -12,7 +12,7 @@ set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)"
 :dk_isDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 1
-    if "!DE!" == "" (
+    if "!DE!" equ "" (
       set "%1=ON"
     )  else (
       set "%1=OFF"

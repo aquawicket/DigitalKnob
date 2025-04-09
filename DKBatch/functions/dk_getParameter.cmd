@@ -11,7 +11,7 @@ setlocal
 
 	
     :getParameter_loop
-	if "%~1" == "%~3" (
+	if "%~1" equ "%~3" (
 		set "_value_=%~4"
 		goto end_getParameter_loop
 	)

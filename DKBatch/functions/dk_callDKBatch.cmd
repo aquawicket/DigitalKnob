@@ -30,7 +30,7 @@ setlocal
 
 	endlocal & (
 		set "dk_callDKBatch=%dk_callDKBatch%"
-		rem if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKBatch%")
+		rem if "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKBatch%")
 	)
 	echo dk_callDKBatch = %dk_callDKBatch%
 %endfunction%

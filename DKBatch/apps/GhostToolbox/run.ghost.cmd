@@ -1560,12 +1560,12 @@ goto begin
 cd "%GHOST_DATA%" >nul
 setlocal enableDelayedExpansion
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-if "%version%" == "Windows 10" (
+if "%version%" equ "Windows 10" (
 cls
 for /f "tokens=1" %%a in ('winget.exe -v') do goto GETWGETCHECK
 )
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-if "%version%" == "Windows 11" (
+if "%version%" equ "Windows 11" (
 cls
 for /f "tokens=1" %%a in ('winget.exe -v') do goto GETWGETCHECK
 )
@@ -5706,7 +5706,7 @@ REG ADD "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "PauseFeatureUpda
 REG ADD "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "PauseQualityUpdatesEndTime" /t REG_SZ /d "2077-01-01T10:38:56Z" /f >nul
 cls
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-if "%version%" == "Windows 11" (
+if "%version%" equ "Windows 11" (
 Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\Settings" /v "PausedFeatureStatus" /t REG_DWORD /d "2" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\Settings" /v "PausedQualityStatus" /t REG_DWORD /d "2" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "ActiveHoursEnd" /t REG_DWORD /d "17" /f >nul
@@ -13113,7 +13113,7 @@ FOR /f "tokens=2*" %%a in ('Reg Query "HKLM\Software\Microsoft\Windows NT\Curren
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild"') do set "DFMT5=%bg_blue%%lblack% %%B"
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ProductName"') do set "DFMT6=%%B"
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-if "%version%" == "Windows 10" (
+if "%version%" equ "Windows 10" (
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ReleaseId"') do set "DFMT7=%bg_red%%lblack% %%B "
 )
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do set "CODENAME=%%B"
@@ -26947,7 +26947,7 @@ net start TabletInputService >nul 2>nul
 copy "%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\01 - Windows Terminal.lnk" "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
 copy "%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe\02 - Windows Terminal.lnk" "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3" >nul 2>nul
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-if "%version%" == "Windows 10" (
+if "%version%" equ "Windows 10" (
 timeout /t 1 >nul
 rename "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\01 - Windows Terminal.lnk" "Windows Terminal.lnk"
 rename "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\02 - Windows Terminal.lnk" "Windows Terminal (Admin).lnk"
@@ -26974,7 +26974,7 @@ Del TERM.ps1 >nul
 del /q /f /s "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\01 - Windows Terminal.lnk" >nul 2>nul
 del /q /f /s "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\02 - Windows Terminal.lnk" >nul 2>nul
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-if "%version%" == "Windows 10" (
+if "%version%" equ "Windows 10" (
 timeout /t 1 >nul
 del /q /f /s "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\Windows Terminal.lnk" >nul 2>nul
 del /q /f /s "%USERPROFILE%\AppData\Local\Microsoft\Windows\WinX\Group3\Windows Terminal (Admin).lnk" >nul 2>nul
@@ -28056,7 +28056,7 @@ cls
 cd "%GHOST_DATA%"
 cls
 ::for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-::if "%version%" == "Windows 11" (
+::if "%version%" equ "Windows 11" (
 ::timeout /t 1 >nul
 ::goto startALLBX
 ::)
@@ -28172,13 +28172,13 @@ del /q /f /s "StartAllBack.v3.7.6.bin" >nul 2>nul
 del /q /f /s "StartAllBack.v3.7.7.bin" >nul 2>nul
 
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-if "%version%" == "Windows 11" (
+if "%version%" equ "Windows 11" (
 timeout /t 1 >nul
 goto startALLBX11
 )
 
 for /f "tokens=2-3 delims=5. " %%i in ('wmic os get caption^,version') do set VERSION=%%i %%j
-if "%version%" == "Windows 10" (
+if "%version%" equ "Windows 10" (
 timeout /t 1 >nul
 goto startALLBX10
 )

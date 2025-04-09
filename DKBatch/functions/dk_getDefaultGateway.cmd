@@ -14,7 +14,7 @@ setlocal
 	for /f "tokens=2,3 delims={,}" %%a in ('"WMIC NICConfig where IPEnabled="True" get DefaultIPGateway /value | find "I" "') do set "rtn_value=%%~a"
 
 	for %%a in (%*) do set last_arg=%%a
-	if "%last_arg%" == "rtn_var" (endlocal & set "%last_arg%=%rtn_value%" && echo %rtn_value%)
+	if "%last_arg%" equ "rtn_var" (endlocal & set "%last_arg%=%rtn_value%" && echo %rtn_value%)
 %endfunction%
 
 

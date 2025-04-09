@@ -5,7 +5,7 @@
 
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
-if ":" == "%func:~0,1%" ( goto %func% )
+if ":" equ "%func:~0,1%" ( goto %func% )
 
 
 :: *** Get the filename of the caller of this script, needed for later restart

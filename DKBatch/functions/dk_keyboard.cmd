@@ -20,7 +20,7 @@ setlocal
  
     echo dk_keyboard %*
     
-    if "%~1" == "callback" set callback=%~2 %~3
+    if "%~1" equ "callback" set callback=%~2 %~3
     ::if defined callback echo callback = %callback%
     %dk_call% dk_debugFunc 0 3 || %dk_call% dk_error "%dk_call% dk_debugFunc failed!"
     

@@ -25,7 +25,7 @@ setlocal
     
     :: first we need to relocate this file up one directory
     :: make sure script is running from DKBRANCH_DIR
-    if not "%DKSCRIPT_DIR%" == "%DKBRANCH_DIR%" (
+    if not "%DKSCRIPT_DIR%" equ "%DKBRANCH_DIR%" (
         %dk_call% dk_echo "%yellow%"
         %dk_call% dk_echo "WARNING: this file isn't running from the branch directory"
         %dk_call% dk_echo "Is must be in the branch directory to continue."

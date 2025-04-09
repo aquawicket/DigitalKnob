@@ -33,7 +33,7 @@ setlocal enableDelayedExpansion
 	set /a count=0
 	:includes_loop
 	if defined %_arry_%[%count%] (
-		if "!%_arry_%[%count%]!" == "%~2" (
+		if "!%_arry_%[%count%]!" equ "%~2" (
 			if "%~3" neq "" (endlocal & set "%3=true")
 			endlocal & (set dk_includes=true) & exit /b 0
 		)

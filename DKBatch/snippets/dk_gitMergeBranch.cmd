@@ -55,7 +55,7 @@ pause
 "%GIT_EXE%" -C %DKBRANCH_DIR% merge --no-ff --no-commit %branch%
 pause
 
-if NOT "%ERRORLEVEL%" == "0" (
+if NOT "%ERRORLEVEL%" equ "0" (
 	echo THERE WAN AN ERROR MERGING.
 	goto :conflicts
 ) else (
@@ -79,7 +79,7 @@ goto :resolved
 :: push merge to %destination%
 echo Pushing merge to %destination%
 "%GIT_EXE%" -C %DKBRANCH_DIR% commit -a -m "Merge %branch% Branch in to %destination%"
-if NOT "%ERRORLEVEL%" == "0" (
+if NOT "%ERRORLEVEL%" equ "0" (
 	echo THERE WAN AN ERROR COMMITING.
 	goto :conflicts
 ) 

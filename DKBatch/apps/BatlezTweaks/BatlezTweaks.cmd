@@ -3505,7 +3505,7 @@ goto :GameBoosters
 cls
 for /f "tokens=*" %%f in ('wmic cpu get NumberOfCores /value ^| find "="') do set %%f
 for /f "tokens=*" %%f in ('wmic cpu get NumberOfLogicalProcessors /value ^| find "="') do set %%f
-if "!NumberOfCores!" == "2" (
+if "!NumberOfCores!" equ "2" (
 	goto HyperThreading
 )
 if !NumberOfCores! gtr 4 (

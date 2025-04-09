@@ -4,7 +4,7 @@ call ../functions/DK.cmd
 ::echo func = %func%
 ::echo args = %*
 ::for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
-::if ":" == "%func:~0,1%" ( goto %func% )
+::if ":" equ "%func:~0,1%" ( goto %func% )
 
 
 

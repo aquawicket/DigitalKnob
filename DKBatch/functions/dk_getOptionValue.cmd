@@ -10,8 +10,8 @@ setlocal
 	%dk_call% dk_debugFunc 0 99
 
 	:getParameter_loop
-	if "%~2" == "" (%endfunction%)
-	if "%~1" == "%~2" (
+	if "%~2" equ "" (%endfunction%)
+	if "%~1" equ "%~2" (
 		rem set "_value_=%~3"
 		endlocal & set "%1=%~3"
 		%endfunction%

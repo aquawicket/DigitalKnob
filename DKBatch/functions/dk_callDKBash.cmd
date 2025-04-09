@@ -60,7 +60,7 @@ setlocal
 
 ::	endlocal & (
 ::		set "dk_callDKBash=%dk_callDKBash%""
-::		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
+::		if "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
 ::	)
 
 	set "test=DKBash"

@@ -113,8 +113,8 @@
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
-if "%~1" == "startGame" goto :game
-if "%~1" == "startController" goto :controller
+if "%~1" equ "startGame" goto :game
+if "%~1" equ "startController" goto :controller
 
 
 ::---------------------------------------------------------------------

@@ -2,7 +2,7 @@
 
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
-if ":" == "%func:~0,1%" (goto %func%)
+if ":" equ "%func:~0,1%" (goto %func%)
 
 if "%~1" equ "DKApp.onKeyDown" (goto:%~1)
 
@@ -72,7 +72,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	echo keyCode: %~1
 	if %~1 equ 27 (set "callback=")
-	if "%~1" == "" (
+	if "%~1" equ "" (
 		(call)
 		%return%
 	)

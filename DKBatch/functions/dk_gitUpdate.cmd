@@ -39,7 +39,7 @@ setlocal
 			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
 			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %_branch_%
 			
-			if NOT "%ERRORLEVEL%" == "0" (
+			if NOT "%ERRORLEVEL%" equ "0" (
 				%dk_call% dk_echo "Remote has no '%_branch_%' branch. Creating..."
 				"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
 				"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
@@ -57,7 +57,7 @@ setlocal
 	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
 	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %_branch_%
 			
-	if NOT "%ERRORLEVEL%" == "0" (
+	if NOT "%ERRORLEVEL%" equ "0" (
 		%dk_call% dk_echo "Remote has no '%_branch_%' branch. Creating..."
 		"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
 		"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%

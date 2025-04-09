@@ -270,7 +270,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 		%dk_call% dk_toLower !PLUGIN_URL_FILE!    PLUGIN_URL_FILE_LOWER 
 		rem ### deduce the plugin version		
 		%dk_call% dk_replaceAll !PLUGIN_URL_FILE_LOWER! !PLUGIN_IMPORT_NAME_LOWER! "" PLUGIN_INSTALL_VERSION 	
-		if "!PLUGIN_IMPORT_NAME_LOWER!" == "!PLUGIN_URL_FILE_LOWER!" (
+		if "!PLUGIN_IMPORT_NAME_LOWER!" equ "!PLUGIN_URL_FILE_LOWER!" (
 			if defined PLUGIN_GIT_TAG (
 				set "PLUGIN_INSTALL_VERSION=!PLUGIN_GIT_TAG!"
 			) else if defined PLUGIN_GIT_BRANCH (
@@ -279,10 +279,10 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 				set "PLUGIN_INSTALL_VERSION=master"
 			)  
 		)  
-		if "!PLUGIN_INSTALL_VERSION:~0,1!" == "-" (
+		if "!PLUGIN_INSTALL_VERSION:~0,1!" equ "-" (
 			set "PLUGIN_INSTALL_VERSION=!PLUGIN_INSTALL_VERSION:~1!"
 		)  
-		if "!PLUGIN_INSTALL_VERSION:~0,1!" == "_" (
+		if "!PLUGIN_INSTALL_VERSION:~0,1!" equ "_" (
 			set "PLUGIN_INSTALL_VERSION=!PLUGIN_INSTALL_VERSION:~1!"
 		)  
 	)    
@@ -341,7 +341,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	set "CURRENT_PLUGIN="
 	%dk_call% dk_set CURRENT_PLUGIN !PLUGIN_IMPORT_NAME_UPPER!
 	%dk_call% dk_convertToCIdentifier !CURRENT_PLUGIN! CURRENT_PLUGIN 
-	if not "!PLUGIN_IMPORT_NAME_UPPER!" == "!CURRENT_PLUGIN!" (
+	if not "!PLUGIN_IMPORT_NAME_UPPER!" equ "!CURRENT_PLUGIN!" (
 		%dk_call% dk_notice "!PLUGIN_IMPORT_NAME_UPPER! contains non-alphanumeric characters and is changed to !CURRENT_PLUGIN!" 
 	)  
 	rem %dk_call% dk_printVar CURRENT_PLUGIN 									&rem CURRENT_PLUGIN			: ZLIB

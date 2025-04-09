@@ -6,7 +6,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
-if ":" == "%func:~0,1%" ( goto %func% )
+if ":" equ "%func:~0,1%" ( goto %func% )
 
 if not defined frame (set /a frame=0)
 if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"

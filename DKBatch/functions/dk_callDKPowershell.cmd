@@ -47,7 +47,7 @@ setlocal enableDelayedExpansion
 ::
 ::	endlocal & (
 ::		set "dk_callDKBash=%dk_callDKPowershell%""
-::		if "%LAST_ARG%" == "rtn_var" (set "%LAST_ARG%=%dk_callDKPowershell%")
+::		if "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKPowershell%")
 ::	)
 
 	::###### run command ######

@@ -1794,9 +1794,9 @@ if errorlevel 1 (
 )
 :# Check if delayed variable expansion works now 
 set VAR=before
-if "%VAR%" == "before" (
+if "%VAR%" equ "before" (
   set VAR=after
-  if not "!VAR!" == "after" goto :EnableExpansionFailed
+  if not "!VAR!" equ "after" goto :EnableExpansionFailed
 )
 :# Success
 exit /b 0
@@ -1830,9 +1830,9 @@ if errorlevel 1 (
   endlocal & exit /b 1
 )
 set VAR=before
-if "%VAR%" == "before" (
+if "%VAR%" equ "before" (
   set VAR=after
-  if not "!VAR!" == "after" (
+  if not "!VAR!" equ "after" (
     >&2 echo Error: Delayed environment variable expansion must be enabled.
     >&2 echo Please restart your cmd.exe shell with the /V option,
     >&2 echo or set HKLM\Software\Microsoft\Command Processor\DelayedExpansion=1
@@ -3605,9 +3605,9 @@ if errorlevel 1 (
   endlocal & set "RETVAL=1" & goto:eof
 )
 set VAR=before
-if "%VAR%" == "before" (
+if "%VAR%" equ "before" (
   set VAR=after
-  if not "!VAR!" == "after" (
+  if not "!VAR!" equ "after" (
     >&2 echo Error: Failed to enable delayed environment variable expansion.
     >&2 echo This script requires Windows XP or later.
     endlocal & set "RETVAL=1" & goto:eof

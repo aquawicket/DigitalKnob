@@ -1,5 +1,5 @@
 @echo off
-if "%~1" == "" (goto DKINSTALL)
+if "%~1" equ "" (goto DKINSTALL)
 
 :runDKCSharp
 	set "COMPILER_EXE=%~1"

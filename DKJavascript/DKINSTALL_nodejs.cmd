@@ -1,5 +1,5 @@
 @echo off
-if "%~1" == "" (goto DKINSTALL)
+if "%~1" equ "" (goto DKINSTALL)
 
 :runDKJavascript
 	set "NODEJS_EXE=%~1"

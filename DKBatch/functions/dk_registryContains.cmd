@@ -16,7 +16,7 @@ setlocal enableDelayedExpansion
 	
 	for /f "usebackq delims=" %%a in (`%REG_EXE% query "%_reg_path_:/=\%"`) do (
 		set "line=%%a"
-		if not "x!line:%~2=!x" == "x!line!x" (
+		if not "x!line:%~2=!x" equ "x!line!x" (
 			exit /b 0
 		)
 	)

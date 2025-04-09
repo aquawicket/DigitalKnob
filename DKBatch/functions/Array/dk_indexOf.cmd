@@ -40,7 +40,7 @@ setlocal enableDelayedExpansion
 
 		if "!DE!" equ "" (set "_value_=!%~1[%_count_%]!")
 		if "!DE!" neq "" (call set "_value_=%%%~1[%_count_%]%%")
-		if "%~2" == "%_value_%" (
+		if "%~2" equ "%_value_%" (
 			endlocal & set "dk_indexOf=%_count_%"
 			%endfunction%
 		)

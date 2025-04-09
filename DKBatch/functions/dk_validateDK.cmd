@@ -19,10 +19,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
     if not exist "%DKBRANCH_DIR%\.git" (%dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git %DKBRANCH%)
 	
-	if "%DKSCRIPT_NAME%" == "DKBuilder" set "DKSCRIPT_PATH=%DKBRANCH_DIR%\%DKSCRIPT_NAME%%DKSCRIPT_EXT%"
+	if "%DKSCRIPT_NAME%" equ "DKBuilder" set "DKSCRIPT_PATH=%DKBRANCH_DIR%\%DKSCRIPT_NAME%%DKSCRIPT_EXT%"
 	if not exist "%DKSCRIPT_PATH%"  %dk_call% dk_fatal "DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist"
 	
-	if "%DKSCRIPT_NAME%" == "DKBuilder" set "DKSCRIPT_ARGS=%DKSCRIPT_PATH%"
+	if "%DKSCRIPT_NAME%" equ "DKBuilder" set "DKSCRIPT_ARGS=%DKSCRIPT_PATH%"
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
 	if "%DKSCRIPT_DIR:~-1%"=="\" set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
 	if "%DKSCRIPT_DIR:~-1%"=="/" set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
