@@ -29,9 +29,9 @@ dk_libDebug			(${NCURSES_DEBUG_DIR}/lib/libncurses.a)
 dk_libRelease		(${NCURSES_RELEASE_DIR}/lib/libncurses.a)
 
 
-#DEBUG_dk_cd		(${NCURSES_DEBUG_DIR})
+#DEBUG_dk_chdir			(${NCURSES_DEBUG_DIR})
 #DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-#RELEASE_dk_cd		(${NCURSES_RELEASE_DIR})
+#RELEASE_dk_chdir		(${NCURSES_RELEASE_DIR})
 #RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
 dk_configure			(${NCURSES})
 

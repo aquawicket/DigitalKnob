@@ -27,10 +27,10 @@ WIN_dk_libRelease	(${LIBX11_RELEASE_DIR}/libx11.lib)
 
 
 ### GENERATE / COMPILE ###
-DEBUG_dk_cd		(${LIBX11_DEBUG_DIR})
+DEBUG_dk_chdir			(${LIBX11_DEBUG_DIR})
 DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
-RELEASE_dk_cd		(${LIBX11_RELEASE_DIR})
+RELEASE_dk_chdir		(${LIBX11_RELEASE_DIR})
 RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 dk_build				(${LIBX11})

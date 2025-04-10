@@ -33,15 +33,15 @@ dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD_DEBUG_DIR}/libmd.a)
 
 ### COMPILE ###
 if(ANDROID)
-	ANDROID_dk_ndk(${LIBMD})
+	ANDROID_dk_ndk			(${LIBMD})
 else()
-	DEBUG_dk_cd		(${LIBMD})
+	DEBUG_dk_chdir			(${LIBMD})
 	DEBUG_dk_queueCommand	(aclocal)
 	
-	#DEBUG_dk_cd		(${LIBMD_DEBUG_DIR})
+	#DEBUG_dk_chdir			(${LIBMD_DEBUG_DIR})
 	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-	#RELEASE_dk_cd		(${LIBMD_RELEASE_DIR})
-	#RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#RELEASE_dk_chdir		(${LIBMD_RELEASE_DIR})
+	#RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
 	dk_configure			(${LIBMD_DIR})
 	
 	
