@@ -16,7 +16,7 @@ setlocal
     )
 	endlocal & (
 		set "dk_selectFile=%dk_selectFile:\=/%"
-		if not "%~1"=="" (set "%~1=%dk_selectFile:\=/%")
+		if not "%~1" equ "" (set "%~1=%dk_selectFile:\=/%")
 	)
 %endfunction%
 

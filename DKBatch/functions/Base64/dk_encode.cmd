@@ -16,8 +16,8 @@ setlocal
 	%dk_call% dk_debugFunc 1 3
 
 	set "inputFile=%~1"
-	if "%~2"=="" (set "outputFile=%inputFile%.b64") else (set "outputFile=%~2")
-	if "%~3"=="OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+	if "%~2" equ "" (set "outputFile=%inputFile%.b64") else (set "outputFile=%~2")
+	if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
 
 	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
 	if exist "%outputFile%" (%dk_call% dk_error "%outputFile% already exists and cannot be overwritten")

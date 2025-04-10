@@ -19,7 +19,7 @@ setlocal enableDelayedExpansion
         for %%a in (%_file_%) do set fdate=%%~ta.%%~za.%%~aa
 
         :: Different attributes found?
-        if not "%last_fdate%"=="%fdate%" (
+        if not "%last_fdate%" equ "%fdate%" (
             cls
 			echo Monitoring %_file_% for changes
 			echo    last file info = !last_fdate!
@@ -34,7 +34,7 @@ setlocal enableDelayedExpansion
         CHOICE /T 1 /C "yq" /D y > nul
 
         :: User pressed Q? just quit
-        if not "%errorlevel%"=="1" (goto :eof)
+        if not "%errorlevel%" equ "1" (goto :eof)
 
         :: Repeat until user quits or Ctrl-C
     goto watchFile_loop

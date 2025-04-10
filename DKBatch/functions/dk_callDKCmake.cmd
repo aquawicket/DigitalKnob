@@ -45,7 +45,7 @@ setlocal
 	rem for %%a in (%*) do set LAST_ARG=%%a
 	endlocal & (
 		set "dk_callDKCmake=%dk_callDKCmake%"
-		rem if "%LAST_ARG%"=="rtn_var" (set "%LAST_ARG%=%dk_callDKCmake%")
+		rem if "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKCmake%")
 	)
 	
 ::	::echo command = %command%

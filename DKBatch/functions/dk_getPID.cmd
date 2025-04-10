@@ -23,9 +23,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
     for /f "tokens=1* delims=   : " %%a in ('%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process | Where-Object ProcessId -EQ "$PID""') do (
             echo %%a, %%b
-            if /I "%%a"=="ProcessId"       set "%%a=%%b"
-            if /I "%%a"=="ParentProcessId" set "%%a=%%b"
-            if /I "%%a"=="ExecutablePath"  set "%%a=%%b"
+            if /I "%%a" equ "ProcessId"       set "%%a=%%b"
+            if /I "%%a" equ "ParentProcessId" set "%%a=%%b"
+            if /I "%%a" equ "ExecutablePath"  set "%%a=%%b"
     )
     echo ProcessId = %ProcessId%
     echo ParentProcessId = %ParentProcessId%
@@ -34,9 +34,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
     for /f "tokens=1* delims=   : " %%a in ('%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process | Where-Object ParentProcessId -EQ "%ParentProcessId%""') do (
             echo %%a, %%b
-            if /I "%%a"=="ProcessId"       set "%%a=%%b"
-            if /I "%%a"=="ParentProcessId" set "%%a=%%b"
-            if /I "%%a"=="ExecutablePath"  set "%%a=%%b"
+            if /I "%%a" equ "ProcessId"       set "%%a=%%b"
+            if /I "%%a" equ "ParentProcessId" set "%%a=%%b"
+            if /I "%%a" equ "ExecutablePath"  set "%%a=%%b"
     )
     echo ProcessId = %ProcessId%
     echo ParentProcessId = %ParentProcessId%

@@ -59,9 +59,9 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
     
     
     echo "%caller%" = "%DKTEST_caller%"
-    if "%caller%"=="%DKTEST_caller%" (echo THEY ARE EQUAL!)
+    if "%caller%" equ "%DKTEST_caller%" (echo THEY ARE EQUAL!)
     
-    if "%caller%"=="" (
+    if "%caller%" equ "" (
         %dk_call% dk_debug "CALLER IS EMPTY"
         setlocal DisableDelayedExpansion
         set /a frame+=1

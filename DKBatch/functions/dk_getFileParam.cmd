@@ -13,7 +13,7 @@ setlocal
 	set "_file_=%~1"
 
 	for /f "delims== tokens=1,2" %%A in (%_file_:/=\%) do (
-		if "%%A"=="%~2" (
+		if "%%A" equ "%~2" (
 			endlocal & (
 				set "%~2=%%B"
 			)

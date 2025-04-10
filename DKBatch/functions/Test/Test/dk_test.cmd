@@ -11,7 +11,7 @@ setlocal enableDelayedExpansion
 	
 	echo ################# Test/Test/dk_test.cmd ################
 						(echo            ###### cmd variables ######)
-	if not "%~0"==""	(echo                      0 = '%~0')
+	if not "%~0" equ ""	(echo                      0 = '%~0')
 						(echo                      * = '%*')
 	if "%~1" neq ""		(echo                      1 = '%~1')
 	if "%~2" neq ""		(echo                      2 = '%~2')

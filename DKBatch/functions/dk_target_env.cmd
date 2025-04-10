@@ -32,18 +32,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_keyboardInput choice
     ::%dk_call% dk_keyboardInputTimeout choice 1 60 
 
-    if "%choice%"=="1" endlocal & set "%1=CLANGARM64"   && %return%
-    if "%choice%"=="2" endlocal & set "%1=CLANG32"   	&& %return%
-    if "%choice%"=="3" endlocal & set "%1=CLANG64"      && %return%
-    if "%choice%"=="4" endlocal & set "%1=MINGW32"      && %return%
-	if "%choice%"=="4" endlocal & set "%1=MINGW64"      && %return%
-	if "%choice%"=="4" endlocal & set "%1=UCRT64"      	&& %return%
-	if "%choice%"=="4" endlocal & set "%1=CYGWIN"      	&& %return%
-	if "%choice%"=="4" endlocal & set "%1=WSL"      	&& %return%
-	if "%choice%"=="4" endlocal & set "%1=MINGW32"      && %return%
-    if "%choice%"=="5" %dk_call% dk_clearScreen      	&& %return%
-    if "%choice%"=="6" %dk_call% dk_unset target_triple && %return%
-    if "%choice%"=="7" %dk_call% dk_exit             	&& %return%
+    if "%choice%" equ "1" endlocal & set "%1=CLANGARM64"   && %return%
+    if "%choice%" equ "2" endlocal & set "%1=CLANG32"   	&& %return%
+    if "%choice%" equ "3" endlocal & set "%1=CLANG64"      && %return%
+    if "%choice%" equ "4" endlocal & set "%1=MINGW32"      && %return%
+	if "%choice%" equ "4" endlocal & set "%1=MINGW64"      && %return%
+	if "%choice%" equ "4" endlocal & set "%1=UCRT64"      	&& %return%
+	if "%choice%" equ "4" endlocal & set "%1=CYGWIN"      	&& %return%
+	if "%choice%" equ "4" endlocal & set "%1=WSL"      	&& %return%
+	if "%choice%" equ "4" endlocal & set "%1=MINGW32"      && %return%
+    if "%choice%" equ "5" %dk_call% dk_clearScreen      	&& %return%
+    if "%choice%" equ "6" %dk_call% dk_unset target_triple && %return%
+    if "%choice%" equ "7" %dk_call% dk_exit             	&& %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
     %dk_call% dk_unset target_env

@@ -1,5 +1,5 @@
 @echo off
-if not "%~1"=="" goto %~1
+if not "%~1" equ "" goto %~1
 :MAIN
 	setlocal
 	echo Here I am in the MAIN thread

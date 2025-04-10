@@ -27,39 +27,39 @@ set "WGET_EXE=%GHOST_DATA%\wget.exe"
 set "ARIA2C_EXE=%GHOST_DATA%\aria2c\aria2c.exe"
 
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 set "build=22631.3007"
 )
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 set "build=22621.3007"
 )
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 set "build=22000.2713"
 )
-if "%var%"=="19045" (
+if "%var%" equ "19045" (
 set "build=19045.3930"
 )
-if "%var%"=="19044" (
+if "%var%" equ "19044" (
 set "build=19044.3930"
 )
-if "%var%"=="19043" (
+if "%var%" equ "19043" (
 set "build=19043.3693"
 )
-if "%var%"=="19042" (
+if "%var%" equ "19042" (
 set "build=19042.3693"
 )
-if "%var%"=="19041" (
+if "%var%" equ "19041" (
 set "build=19041.3693"
 )
-if "%var%"=="18363" (
+if "%var%" equ "18363" (
 set "build=18363.2274"
 )
-if "%var%"=="17763" (
+if "%var%" equ "17763" (
 set "build=17763.2145"
 )
 @ECHO ON
 @ECHO OFF
-if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
+if not "%1" equ "am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 @ECHO ON
 @ECHO OFF
 ::fodhelper
@@ -77,7 +77,7 @@ if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 ::goto hello
 goto skip_hello
 @ECHO ON
-::if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
+::if not "%1" equ "am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 
 :firstrun
 @echo off
@@ -189,7 +189,7 @@ if %ERRORLEVEL% EQU 1 goto terminal2
 :terminal1
 goto checkterminal2
 :terminal2
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 echo @echo off >> "%GHOST_DATA%\restart.cmd"
 echo TITLE GhostToolbox - Restart >nul >> "%GHOST_DATA%\restart.cmd"
 echo cd "%GHOST_DIR%" >nul >> "%GHOST_DATA%\restart.cmd"
@@ -198,7 +198,7 @@ echo start %GHOST_DATA%\toolbox.updater.x64.exe >nul >> "%GHOST_DATA%\restart.cm
 echo del /s /q wget\restart.cmd >nul >> "%GHOST_DATA%\restart.cmd"
 echo exit >> "%GHOST_DATA%\restart.cmd"
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 echo @echo off >> "%GHOST_DATA%\restart.cmd"
 echo TITLE GhostToolbox - Restart >nul >> "%GHOST_DATA%\restart.cmd"
 echo cd "%GHOST_DIR%" >nul >> "%GHOST_DATA%\restart.cmd"
@@ -268,8 +268,8 @@ cls
 exit
 :checkterminal2
 FOR /f "tokens=2*" %%a in ('Reg Query "HKEY_CURRENT_USER\Console" /v VirtualTerminalLevel') do set "VTERMINAL=%%~b"
-if "%VTERMINAL%"=="0x1" goto :vterm1
-if "%VTERMINAL%"=="0x0" goto :vterm2
+if "%VTERMINAL%" equ "0x1" goto :vterm1
+if "%VTERMINAL%" equ "0x0" goto :vterm2
 :vterm1
 goto begin
 :vterm2
@@ -367,79 +367,79 @@ color 07
 %nhcolor% 04 " [99] | %Lightgray%Ghost Toolbox Changelogs / Update                   %Red%----------------------------------------------------------- "
 %nhcolor% 04 "                                                           
 set /p firstindex=" Type option:%green%"
-if "%firstindex%"=="1" goto windows10op
-if "%firstindex%"=="2" goto op2
-if "%firstindex%"=="3" goto op3
-if "%firstindex%"=="4" goto op4
-if "%firstindex%"=="5" goto op5
-if "%firstindex%"=="6" goto op6
-if "%firstindex%"=="7" goto op7
-if "%firstindex%"=="8" goto op8
-if "%firstindex%"=="9" goto op9
-if "%firstindex%"=="10" goto op10
-if "%firstindex%"=="11" goto win1108xbr
-if "%firstindex%"=="12" goto op12
-if "%firstindex%"=="13" goto op13
-if "%firstindex%"=="14" goto op14
-if "%firstindex%"=="15" goto op15
-if "%firstindex%"=="16" goto op16
-if "%firstindex%"=="17" goto op17
-if "%firstindex%"=="18" goto op18
-if "%firstindex%"=="19" goto op19
-if "%firstindex%"=="20" goto op20
-if "%firstindex%"=="21" goto edgeop
-if "%firstindex%"=="22" goto opdisk
-if "%firstindex%"=="23" goto gameclient10xbox
-if "%firstindex%"=="24" goto ghst
-if "%firstindex%"=="25" goto drivereasy
-if "%firstindex%"=="26" goto onedrive0
-if "%firstindex%"=="27" goto begin
-if "%firstindex%"=="28" goto zunemusic
-if "%firstindex%"=="29" goto yourphone
-if "%firstindex%"=="30" goto netframework
-if "%firstindex%"=="31" goto winre
-if "%firstindex%"=="32" goto edition
-if "%firstindex%"=="33" goto addnewusers123
-if "%firstindex%"=="34" goto cmdcolorsche
-if "%firstindex%"=="35" goto standaloneupdate
-if "%firstindex%"=="36" goto usr033
-if "%firstindex%"=="37" goto 7zip
-if "%firstindex%"=="38" goto soundFX
-if "%firstindex%"=="39" goto gamingmodeONLY
-if "%firstindex%"=="40" goto gameclient
-if "%firstindex%"=="41" goto YTENABLE
-if "%firstindex%"=="42" goto opwin11
-if "%firstindex%"=="43" goto wingetoption
-if "%firstindex%"=="sound" goto sound
-if "%firstindex%"=="terminal" goto term
-if "%firstindex%"=="storetest" goto storetest001
-if "%firstindex%"=="timezone" goto tymezone 
-if "%firstindex%"=="Timezone" goto tymezone
-if "%firstindex%"=="zunemusic2020" goto zunemusic2020
-if "%firstindex%"=="test123" goto test123
-if "%firstindex%"=="themesghostdark" goto themesghostdark
-if "%firstindex%"=="windowsinsider" goto windowsinsider
-if "%firstindex%"=="icons001" goto icons001
-if "%firstindex%"=="icons002" goto icons002
-if "%firstindex%"=="theme01" goto theme01
-::if "%firstindex%"=="youtube" goto YTENABLE ::YoutubeCONS
-if "%firstindex%"=="youtube" goto YTENABLE
-if "%firstindex%"=="updatewindowstore" goto updatewindowstore
-if "%firstindex%"=="99" goto GSCHANGELOG
-if "%firstindex%"=="windows11" goto windows11
-if "%firstindex%"=="android" goto ANDROID
-if "%firstindex%"=="dd" goto WCT01
-if "%firstindex%"=="bb01" goto BBX01
-if "%firstindex%"=="bb02" goto BBX02
-if "%firstindex%"=="adminfilter" goto XADMINXX1W10
-if "%firstindex%"=="reinstallapps" goto appsnewuser
-if "%firstindex%"=="startallback" goto startallbackupdate
-if "%firstindex%"=="removedge" goto rmovedge
-if "%firstindex%"=="ghostmode" goto GhostModeX1
-if "%firstindex%"=="uwp" goto UWPRE
-if "%firstindex%"=="copilot" goto copilotprev1
-if "%firstindex%"=="spotlight" goto Spotlight01
-if "%firstindex%"=="winget" goto wingetoption
+if "%firstindex%" equ "1" goto windows10op
+if "%firstindex%" equ "2" goto op2
+if "%firstindex%" equ "3" goto op3
+if "%firstindex%" equ "4" goto op4
+if "%firstindex%" equ "5" goto op5
+if "%firstindex%" equ "6" goto op6
+if "%firstindex%" equ "7" goto op7
+if "%firstindex%" equ "8" goto op8
+if "%firstindex%" equ "9" goto op9
+if "%firstindex%" equ "10" goto op10
+if "%firstindex%" equ "11" goto win1108xbr
+if "%firstindex%" equ "12" goto op12
+if "%firstindex%" equ "13" goto op13
+if "%firstindex%" equ "14" goto op14
+if "%firstindex%" equ "15" goto op15
+if "%firstindex%" equ "16" goto op16
+if "%firstindex%" equ "17" goto op17
+if "%firstindex%" equ "18" goto op18
+if "%firstindex%" equ "19" goto op19
+if "%firstindex%" equ "20" goto op20
+if "%firstindex%" equ "21" goto edgeop
+if "%firstindex%" equ "22" goto opdisk
+if "%firstindex%" equ "23" goto gameclient10xbox
+if "%firstindex%" equ "24" goto ghst
+if "%firstindex%" equ "25" goto drivereasy
+if "%firstindex%" equ "26" goto onedrive0
+if "%firstindex%" equ "27" goto begin
+if "%firstindex%" equ "28" goto zunemusic
+if "%firstindex%" equ "29" goto yourphone
+if "%firstindex%" equ "30" goto netframework
+if "%firstindex%" equ "31" goto winre
+if "%firstindex%" equ "32" goto edition
+if "%firstindex%" equ "33" goto addnewusers123
+if "%firstindex%" equ "34" goto cmdcolorsche
+if "%firstindex%" equ "35" goto standaloneupdate
+if "%firstindex%" equ "36" goto usr033
+if "%firstindex%" equ "37" goto 7zip
+if "%firstindex%" equ "38" goto soundFX
+if "%firstindex%" equ "39" goto gamingmodeONLY
+if "%firstindex%" equ "40" goto gameclient
+if "%firstindex%" equ "41" goto YTENABLE
+if "%firstindex%" equ "42" goto opwin11
+if "%firstindex%" equ "43" goto wingetoption
+if "%firstindex%" equ "sound" goto sound
+if "%firstindex%" equ "terminal" goto term
+if "%firstindex%" equ "storetest" goto storetest001
+if "%firstindex%" equ "timezone" goto tymezone 
+if "%firstindex%" equ "Timezone" goto tymezone
+if "%firstindex%" equ "zunemusic2020" goto zunemusic2020
+if "%firstindex%" equ "test123" goto test123
+if "%firstindex%" equ "themesghostdark" goto themesghostdark
+if "%firstindex%" equ "windowsinsider" goto windowsinsider
+if "%firstindex%" equ "icons001" goto icons001
+if "%firstindex%" equ "icons002" goto icons002
+if "%firstindex%" equ "theme01" goto theme01
+::if "%firstindex%" equ "youtube" goto YTENABLE ::YoutubeCONS
+if "%firstindex%" equ "youtube" goto YTENABLE
+if "%firstindex%" equ "updatewindowstore" goto updatewindowstore
+if "%firstindex%" equ "99" goto GSCHANGELOG
+if "%firstindex%" equ "windows11" goto windows11
+if "%firstindex%" equ "android" goto ANDROID
+if "%firstindex%" equ "dd" goto WCT01
+if "%firstindex%" equ "bb01" goto BBX01
+if "%firstindex%" equ "bb02" goto BBX02
+if "%firstindex%" equ "adminfilter" goto XADMINXX1W10
+if "%firstindex%" equ "reinstallapps" goto appsnewuser
+if "%firstindex%" equ "startallback" goto startallbackupdate
+if "%firstindex%" equ "removedge" goto rmovedge
+if "%firstindex%" equ "ghostmode" goto GhostModeX1
+if "%firstindex%" equ "uwp" goto UWPRE
+if "%firstindex%" equ "copilot" goto copilotprev1
+if "%firstindex%" equ "spotlight" goto Spotlight01
+if "%firstindex%" equ "winget" goto wingetoption
 
 cls
 color 07
@@ -517,71 +517,71 @@ echo "%white% ==================================================================
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" %PROGRAMDATA%\Microsoft\colortool\colortool -b "midnight-in-mojave.itermcolors"
-if "%op%"=="2" %PROGRAMDATA%\Microsoft\colortool\colortool -b "3024 Day.itermcolors"
-if "%op%"=="3" %PROGRAMDATA%\Microsoft\colortool\colortool -b "AdventureTime.itermcolors"
-if "%op%"=="4" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Afterglow.itermcolors"
-if "%op%"=="5" %PROGRAMDATA%\Microsoft\colortool\colortool -b "AlienBlood.itermcolors"
-if "%op%"=="6" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Andromeda.itermcolors"
-if "%op%"=="7" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Argonaut.itermcolors"
-if "%op%"=="8" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Arthur.itermcolors"
-if "%op%"=="9" %PROGRAMDATA%\Microsoft\colortool\colortool -b "AtelierSulphurpool.itermcolors"
-if "%op%"=="10" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Atom.itermcolors"
-if "%op%"=="11" %PROGRAMDATA%\Microsoft\colortool\colortool -b "ayu.itermcolors"
-if "%op%"=="12" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Banana Blueberry.itermcolors"
-if "%op%"=="13" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Batman.itermcolors"
-if "%op%"=="14" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Belafonte Day.itermcolors"
-if "%op%"=="15" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Belafonte Night.itermcolors"
-if "%op%"=="16" %PROGRAMDATA%\Microsoft\colortool\colortool -b "BirdsOfParadise.itermcolors"
-if "%op%"=="17" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Blazer.itermcolors"
-if "%op%"=="18" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Blue Matrix.itermcolors"
-if "%op%"=="19" goto CMDdefaultcolor
-if "%op%"=="20" %PROGRAMDATA%\Microsoft\colortool\colortool -b "campbell-legacy.ini"
-if "%op%"=="21" %PROGRAMDATA%\Microsoft\colortool\colortool -b "cmd-legacy.ini"
-if "%op%"=="22" %PROGRAMDATA%\Microsoft\colortool\colortool -b "deuteranopia.itermcolors"
-if "%op%"=="23" %PROGRAMDATA%\Microsoft\colortool\colortool -b "OneHalfDark.itermcolors"
-if "%op%"=="24" %PROGRAMDATA%\Microsoft\colortool\colortool -b "OneHalfLight.itermcolors"
-if "%op%"=="25" %PROGRAMDATA%\Microsoft\colortool\colortool -b "solarized_dark.itermcolors"
-if "%op%"=="26" %PROGRAMDATA%\Microsoft\colortool\colortool -b "solarized_light.itermcolors
-if "%op%"=="27" %PROGRAMDATA%\Microsoft\colortool\colortool -b "BlueBerryPie.itermcolors"
-if "%op%"=="28" %PROGRAMDATA%\Microsoft\colortool\colortool -b "BlulocoDark.itermcolors"
-if "%op%"=="29" %PROGRAMDATA%\Microsoft\colortool\colortool -b "BlulocoLight.itermcolors"
-if "%op%"=="30" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Borland.itermcolors"
-if "%op%"=="31" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Breeze.itermcolors"
-if "%op%"=="32" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Bright Lights.itermcolors"
-if "%op%"=="33" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Broadcast.itermcolors"
-if "%op%"=="34" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Brogrammer.itermcolors"
-if "%op%"=="35" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Dark.itermcolors"
-if "%op%"=="36" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Light.itermcolors"
-if "%op%"=="37" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Pastel Dark.itermcolors"
-if "%op%"=="38" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Solarized Dark.itermcolors"
-if "%op%"=="39" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Solarized Light.itermcolors"
-if "%op%"=="40" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Tango Dark.itermcolors"
-if "%op%"=="41" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Tango Light.itermcolors"
-if "%op%"=="42" %PROGRAMDATA%\Microsoft\colortool\colortool -b "C64.itermcolors"
-if "%op%"=="43" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Calamity.itermcolors"
-if "%op%"=="44" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Chalk.itermcolors"
-if "%op%"=="45" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Chalkboard.itermcolors"
-if "%op%"=="46" %PROGRAMDATA%\Microsoft\colortool\colortool -b "ChallengerDeep.itermcolors"
-if "%op%"=="47" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Chester.itermcolors"
-if "%op%"=="48" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Ciapre.itermcolors"
-if "%op%"=="49" %PROGRAMDATA%\Microsoft\colortool\colortool -b "CLRS.itermcolors"
-if "%op%"=="50" %PROGRAMDATA%\Microsoft\colortool\colortool -b "coffee_theme.itermcolors"
-if "%op%"=="51" %PROGRAMDATA%\Microsoft\colortool\colortool -b "CrayonPonyFish.itermcolors"
-if "%op%"=="52" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Cyberdyne.itermcolors"
-if "%op%"=="53" %PROGRAMDATA%\Microsoft\colortool\colortool -b "cyberpunk.itermcolors"
-if "%op%"=="54" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Dark Pastel.itermcolors"
-if "%op%"=="55" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Dark+.itermcolors"
-if "%op%"=="56" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Darkside.itermcolors"
-if "%op%"=="57" %PROGRAMDATA%\Microsoft\colortool\colortool -b "deep.itermcolors"
-if "%op%"=="58" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Desert.itermcolors"
-if "%op%"=="59" %PROGRAMDATA%\Microsoft\colortool\colortool -b "deuteranopia.itermcolors"
-if "%op%"=="60" %PROGRAMDATA%\Microsoft\colortool\colortool -b "DimmedMonokai.itermcolors"
-if "%op%"=="61" %PROGRAMDATA%\Microsoft\colortool\colortool -b "DoomOne.itermcolors"
-if "%op%"=="62" %PROGRAMDATA%\Microsoft\colortool\colortool -b "DotGov.itermcolors"
-if "%op%"=="63" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Dracula.itermcolors"
-if "%op%"=="64" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Duotone Dark.itermcolors"
-if "%op%"=="0" goto begin
+if "%op%" equ "1" %PROGRAMDATA%\Microsoft\colortool\colortool -b "midnight-in-mojave.itermcolors"
+if "%op%" equ "2" %PROGRAMDATA%\Microsoft\colortool\colortool -b "3024 Day.itermcolors"
+if "%op%" equ "3" %PROGRAMDATA%\Microsoft\colortool\colortool -b "AdventureTime.itermcolors"
+if "%op%" equ "4" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Afterglow.itermcolors"
+if "%op%" equ "5" %PROGRAMDATA%\Microsoft\colortool\colortool -b "AlienBlood.itermcolors"
+if "%op%" equ "6" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Andromeda.itermcolors"
+if "%op%" equ "7" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Argonaut.itermcolors"
+if "%op%" equ "8" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Arthur.itermcolors"
+if "%op%" equ "9" %PROGRAMDATA%\Microsoft\colortool\colortool -b "AtelierSulphurpool.itermcolors"
+if "%op%" equ "10" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Atom.itermcolors"
+if "%op%" equ "11" %PROGRAMDATA%\Microsoft\colortool\colortool -b "ayu.itermcolors"
+if "%op%" equ "12" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Banana Blueberry.itermcolors"
+if "%op%" equ "13" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Batman.itermcolors"
+if "%op%" equ "14" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Belafonte Day.itermcolors"
+if "%op%" equ "15" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Belafonte Night.itermcolors"
+if "%op%" equ "16" %PROGRAMDATA%\Microsoft\colortool\colortool -b "BirdsOfParadise.itermcolors"
+if "%op%" equ "17" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Blazer.itermcolors"
+if "%op%" equ "18" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Blue Matrix.itermcolors"
+if "%op%" equ "19" goto CMDdefaultcolor
+if "%op%" equ "20" %PROGRAMDATA%\Microsoft\colortool\colortool -b "campbell-legacy.ini"
+if "%op%" equ "21" %PROGRAMDATA%\Microsoft\colortool\colortool -b "cmd-legacy.ini"
+if "%op%" equ "22" %PROGRAMDATA%\Microsoft\colortool\colortool -b "deuteranopia.itermcolors"
+if "%op%" equ "23" %PROGRAMDATA%\Microsoft\colortool\colortool -b "OneHalfDark.itermcolors"
+if "%op%" equ "24" %PROGRAMDATA%\Microsoft\colortool\colortool -b "OneHalfLight.itermcolors"
+if "%op%" equ "25" %PROGRAMDATA%\Microsoft\colortool\colortool -b "solarized_dark.itermcolors"
+if "%op%" equ "26" %PROGRAMDATA%\Microsoft\colortool\colortool -b "solarized_light.itermcolors
+if "%op%" equ "27" %PROGRAMDATA%\Microsoft\colortool\colortool -b "BlueBerryPie.itermcolors"
+if "%op%" equ "28" %PROGRAMDATA%\Microsoft\colortool\colortool -b "BlulocoDark.itermcolors"
+if "%op%" equ "29" %PROGRAMDATA%\Microsoft\colortool\colortool -b "BlulocoLight.itermcolors"
+if "%op%" equ "30" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Borland.itermcolors"
+if "%op%" equ "31" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Breeze.itermcolors"
+if "%op%" equ "32" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Bright Lights.itermcolors"
+if "%op%" equ "33" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Broadcast.itermcolors"
+if "%op%" equ "34" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Brogrammer.itermcolors"
+if "%op%" equ "35" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Dark.itermcolors"
+if "%op%" equ "36" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Light.itermcolors"
+if "%op%" equ "37" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Pastel Dark.itermcolors"
+if "%op%" equ "38" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Solarized Dark.itermcolors"
+if "%op%" equ "39" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Solarized Light.itermcolors"
+if "%op%" equ "40" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Tango Dark.itermcolors"
+if "%op%" equ "41" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Builtin Tango Light.itermcolors"
+if "%op%" equ "42" %PROGRAMDATA%\Microsoft\colortool\colortool -b "C64.itermcolors"
+if "%op%" equ "43" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Calamity.itermcolors"
+if "%op%" equ "44" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Chalk.itermcolors"
+if "%op%" equ "45" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Chalkboard.itermcolors"
+if "%op%" equ "46" %PROGRAMDATA%\Microsoft\colortool\colortool -b "ChallengerDeep.itermcolors"
+if "%op%" equ "47" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Chester.itermcolors"
+if "%op%" equ "48" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Ciapre.itermcolors"
+if "%op%" equ "49" %PROGRAMDATA%\Microsoft\colortool\colortool -b "CLRS.itermcolors"
+if "%op%" equ "50" %PROGRAMDATA%\Microsoft\colortool\colortool -b "coffee_theme.itermcolors"
+if "%op%" equ "51" %PROGRAMDATA%\Microsoft\colortool\colortool -b "CrayonPonyFish.itermcolors"
+if "%op%" equ "52" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Cyberdyne.itermcolors"
+if "%op%" equ "53" %PROGRAMDATA%\Microsoft\colortool\colortool -b "cyberpunk.itermcolors"
+if "%op%" equ "54" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Dark Pastel.itermcolors"
+if "%op%" equ "55" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Dark+.itermcolors"
+if "%op%" equ "56" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Darkside.itermcolors"
+if "%op%" equ "57" %PROGRAMDATA%\Microsoft\colortool\colortool -b "deep.itermcolors"
+if "%op%" equ "58" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Desert.itermcolors"
+if "%op%" equ "59" %PROGRAMDATA%\Microsoft\colortool\colortool -b "deuteranopia.itermcolors"
+if "%op%" equ "60" %PROGRAMDATA%\Microsoft\colortool\colortool -b "DimmedMonokai.itermcolors"
+if "%op%" equ "61" %PROGRAMDATA%\Microsoft\colortool\colortool -b "DoomOne.itermcolors"
+if "%op%" equ "62" %PROGRAMDATA%\Microsoft\colortool\colortool -b "DotGov.itermcolors"
+if "%op%" equ "63" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Dracula.itermcolors"
+if "%op%" equ "64" %PROGRAMDATA%\Microsoft\colortool\colortool -b "Duotone Dark.itermcolors"
+if "%op%" equ "0" goto begin
 cls
 color 0b
 timeout /t 2 >nul
@@ -612,13 +612,13 @@ goto cmdcolorsche
 :opwin11
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" goto forwindows11
+if "%var%" equ "22000" goto forwindows11
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22610" goto forwindows11
+if "%var%" equ "22610" goto forwindows11
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" goto forwindows11
+if "%var%" equ "22621" goto forwindows11
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" goto forwindows11
+if "%var%" equ "22631" goto forwindows11
 cls
 
 :recheck
@@ -634,11 +634,11 @@ goto forwindows11
 :GhostModeX1
 cd "%GHOST_DATA%"
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" goto forwindows11G
+if "%var%" equ "22000" goto forwindows11G
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22610" goto forwindows11G
+if "%var%" equ "22610" goto forwindows11G
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" goto forwindows11G
+if "%var%" equ "22621" goto forwindows11G
 cls
 :recheck
 timeout /t 1 >nul
@@ -649,7 +649,7 @@ cls
 echo %green%Windows 11 only && timeout /t 4 >nul && goto begin
 cls
 :GhostMode
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 echo  GhostMode only for Windows 10/11 64bit version.
 timeout /t 3 >nul
@@ -704,16 +704,16 @@ echo.
 echo.
 set /p firstindex=" Type option:%green%"
 
-if "%firstindex%"=="1" goto ghostm0d1
-if "%firstindex%"=="2" goto ghostm0d2
-if "%firstindex%"=="3" goto ghostm0d3
-if "%firstindex%"=="4" goto ghostm0d4
-if "%firstindex%"=="5" goto ghostm0d5
-if "%firstindex%"=="6" goto ghostm0d6
-if "%firstindex%"=="7" goto GhostModeProc
-if "%firstindex%"=="8" goto GhostModeMemory
-if "%firstindex%"=="a" goto ghostm0da
-if "%firstindex%"=="0" goto begin
+if "%firstindex%" equ "1" goto ghostm0d1
+if "%firstindex%" equ "2" goto ghostm0d2
+if "%firstindex%" equ "3" goto ghostm0d3
+if "%firstindex%" equ "4" goto ghostm0d4
+if "%firstindex%" equ "5" goto ghostm0d5
+if "%firstindex%" equ "6" goto ghostm0d6
+if "%firstindex%" equ "7" goto GhostModeProc
+if "%firstindex%" equ "8" goto GhostModeMemory
+if "%firstindex%" equ "a" goto ghostm0da
+if "%firstindex%" equ "0" goto begin
 cls
 color 07
 echo This function not available yet
@@ -883,11 +883,11 @@ echo.
 %nhcolor% 09 " %yellow% [0] %white% Back to main menu
 echo.
 set /p firstindex=" Type option:%green%"
-if "%firstindex%"=="1" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "3670016" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
-if "%firstindex%"=="2" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "67108864" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
-if "%firstindex%"=="3" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "100663296" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
-if "%firstindex%"=="4" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "134217728" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
-if "%firstindex%"=="0" goto GhostMode
+if "%firstindex%" equ "1" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "3670016" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
+if "%firstindex%" equ "2" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "67108864" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
+if "%firstindex%" equ "3" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "100663296" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
+if "%firstindex%" equ "4" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "134217728" /f && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto GhostMode
+if "%firstindex%" equ "0" goto GhostMode
 cls
 color 07
 echo This function not available yet
@@ -989,14 +989,14 @@ echo.
 ::%nhcolor% 09 " %yellow% [0] %white% Back to main menu
 ::echo.
 set /p firstindex=" Type option:%green%"
-if "%firstindex%"=="1" goto MeM01
-if "%firstindex%"=="2" goto MeM02
-if "%firstindex%"=="3" goto MeM03
-if "%firstindex%"=="4" goto MeM04
-if "%firstindex%"=="5" goto MeM05
-if "%firstindex%"=="6" goto MeM06
-if "%firstindex%"=="7" goto MeM07
-::if "%firstindex%"=="0" goto GhostMode
+if "%firstindex%" equ "1" goto MeM01
+if "%firstindex%" equ "2" goto MeM02
+if "%firstindex%" equ "3" goto MeM03
+if "%firstindex%" equ "4" goto MeM04
+if "%firstindex%" equ "5" goto MeM05
+if "%firstindex%" equ "6" goto MeM06
+if "%firstindex%" equ "7" goto MeM07
+::if "%firstindex%" equ "0" goto GhostMode
 cls
 color 07
 echo This function not available yet
@@ -1125,27 +1125,27 @@ color 0b
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win1101
-if "%op%"=="2" goto win1102
-if "%op%"=="3" goto win1103
-if "%op%"=="4" goto win1104
-if "%op%"=="5" goto win1105
-if "%op%"=="6" goto win1106
-if "%op%"=="7" goto win1107
-if "%op%"=="8" goto win1108
-if "%op%"=="9" goto ANDROID
-if "%op%"=="10" goto win1110
-if "%op%"=="11" goto win1111
-if "%op%"=="12" goto win1112
-if "%op%"=="13" goto win1113
-if "%op%"=="14" goto win1114w
-if "%op%"=="15" goto win1115
-if "%op%"=="16" goto win1116
-if "%op%"=="17" goto win1117
-if "%op%"=="18" goto win1118
-if "%op%"=="19" goto win1119
-if "%op%"=="20" goto win1120
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto win1101
+if "%op%" equ "2" goto win1102
+if "%op%" equ "3" goto win1103
+if "%op%" equ "4" goto win1104
+if "%op%" equ "5" goto win1105
+if "%op%" equ "6" goto win1106
+if "%op%" equ "7" goto win1107
+if "%op%" equ "8" goto win1108
+if "%op%" equ "9" goto ANDROID
+if "%op%" equ "10" goto win1110
+if "%op%" equ "11" goto win1111
+if "%op%" equ "12" goto win1112
+if "%op%" equ "13" goto win1113
+if "%op%" equ "14" goto win1114w
+if "%op%" equ "15" goto win1115
+if "%op%" equ "16" goto win1116
+if "%op%" equ "17" goto win1117
+if "%op%" equ "18" goto win1118
+if "%op%" equ "19" goto win1119
+if "%op%" equ "20" goto win1120
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -1166,8 +1166,8 @@ echo.
 timeout /t 1 >nul
 echo.
 set /p op=Type option:
-if "%op%"=="1" goto Hilights1
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto Hilights1
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -1202,8 +1202,8 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11mediaplayer
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11mediaplayer
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -1242,7 +1242,7 @@ goto forwindows11
 :win1115
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" goto win1115X
+if "%var%" equ "22621" goto win1115X
 color 0b
 cls
 echo For Windows 11 22H2 Sun Valley 2
@@ -1267,11 +1267,11 @@ cd "%GHOST_DATA%"
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11vive1
-if "%op%"=="2" goto win11vive2
-if "%op%"=="3" start ms-settings:windowsupdate
-if "%op%"=="4" start https://bit.ly/3Ik5fFJ
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11vive1
+if "%op%" equ "2" goto win11vive2
+if "%op%" equ "3" start ms-settings:windowsupdate
+if "%op%" equ "4" start https://bit.ly/3Ik5fFJ
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -1339,9 +1339,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11ribbon01
-if "%op%"=="2" goto win11ribbon02
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto win11ribbon01
+if "%op%" equ "2" goto win11ribbon02
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -1383,11 +1383,11 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11xbox1bar
-if "%op%"=="2" goto win11xbox3bar
-if "%op%"=="3" goto win11xbox4bar
-if "%op%"=="4" goto win11xbox2bar
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto win11xbox1bar
+if "%op%" equ "2" goto win11xbox3bar
+if "%op%" equ "3" goto win11xbox4bar
+if "%op%" equ "4" goto win11xbox2bar
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -1575,8 +1575,8 @@ cls
 echo %lblack%Updating Microsoft Windows Package Manager.. Please Wait..
 echo.
 cd "%GHOST_DATA%" >nul
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto WINGETDLX86
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto WINGETDLX64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto WINGETDLX86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto WINGETDLX64
 :WINGETDLX86
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 15 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
 timeout /t 5 >nul
@@ -1635,8 +1635,8 @@ echo %lblack%Updating Microsoft Windows Package Manager.. Please Wait..
 echo.
 cd "%GHOST_DATA%" >nul
 cd "%GHOST_DATA%" >nul
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto WINGETDLX86
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto WINGETDLX64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto WINGETDLX86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto WINGETDLX64
 :WINGETDLX86
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 15 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
 timeout /t 5 >nul
@@ -1681,7 +1681,7 @@ goto begin
 :wingetcli
 timeout /t 3 >nul
 cd "%GHOST_DATA%" >nul 2>nul
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 for /f tokens^=* %%i in ('where .:*VCLibs.x86*') do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 timeout /t 1 >nul
 for /f tokens^=* %%i in ('where .:*UI.Xaml*.*x86*') do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
@@ -1689,7 +1689,7 @@ timeout /t 1 >nul
 Powershell Add-AppxPackage -Path "Microsoft.Windows.Package.Manager_v1.7.10861"
 timeout /t 1 >nul
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 for /f tokens^=* %%i in ('where .:*VCLibs.x64.14.00.Desktop*') do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 timeout /t 1 >nul
 for /f tokens^=* %%i in ('where .:*UI.Xaml*.*x64*') do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
@@ -1737,14 +1737,14 @@ cls
 %nhcolor% 07 "  %green%[0] %white%- Back to menu or Cancel
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 set /p op=Type option:
-if "%op%"=="1" goto winG01
-if "%op%"=="2" goto winG02
-if "%op%"=="3" goto winG03
-if "%op%"=="4" goto winG04
-if "%op%"=="5" goto winG05
-if "%op%"=="6" start https://youtu.be/QOsg7O62s9o && cls && goto wingetoption
-if "%op%"=="7" winget source reset --force && cls && goto wingetoption
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto winG01
+if "%op%" equ "2" goto winG02
+if "%op%" equ "3" goto winG03
+if "%op%" equ "4" goto winG04
+if "%op%" equ "5" goto winG05
+if "%op%" equ "6" start https://youtu.be/QOsg7O62s9o && cls && goto wingetoption
+if "%op%" equ "7" winget source reset --force && cls && goto wingetoption
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo  You pick the wrong number!!! please try again...
@@ -1754,7 +1754,7 @@ goto wingetoption
 cls
 set "WINGETIN=winget install -e --silent --accept-source-agreements --accept-package-agreements --id"
 set /p codeid=%green%Enter Product id %white%: %yellow%
-if "%codeid%"=="0" goto wingetoption
+if "%codeid%" equ "0" goto wingetoption
 %WINGETIN% %codeid%
 timeout /t 5 >nul
 RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
@@ -1776,7 +1776,7 @@ set "WINGESSW=winget search --source winget"
 set "WINGESSS=winget search --source msstore"
 set /p codeid=%green%Search %white%: %yellow%
 echo.
-if "%codeid%"=="0" goto wingetoption
+if "%codeid%" equ "0" goto wingetoption
 echo %lmagenta%Winget
 echo ------
 %WINGESSW% "%codeid%"
@@ -1787,7 +1787,7 @@ echo --------
 echo.
 set "WINGETIN=winget install -e --silent --accept-source-agreements --accept-package-agreements --id"
 set /p codeid=%green%Enter Product id %white%: %yellow%
-if "%codeid%"=="0" goto winG03
+if "%codeid%" equ "0" goto winG03
 echo.
 %WINGETIN% %codeid%
 endlocal
@@ -1799,8 +1799,8 @@ cls
 winget upgrade
 echo -----------------------------------------------------------------------------------------------------------------------
 set /p codeid=%green%Enter Product id %white%: %yellow%
-if "%codeid%"=="0" goto wingetoption
-if "%codeid%"=="upgrade all" goto wingetupgradeall
+if "%codeid%" equ "0" goto wingetoption
+if "%codeid%" equ "upgrade all" goto wingetupgradeall
 winget upgrade %codeid%
 timeout /t 5 >nul
 RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
@@ -1820,7 +1820,7 @@ winget list | find /i "msstore"
 echo %white%-----------------------------------------------------------------------------------------------------------------------
 set "WINGETIN=winget uninstall --id"
 set /p codeid=%green%Enter Product id %white%: %yellow%
-if "%codeid%"=="0" goto wingetoption
+if "%codeid%" equ "0" goto wingetoption
 echo.
 %WINGETIN% %codeid%
 timeout /t 1 >nul
@@ -1846,10 +1846,10 @@ cls
 %nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 0E ""
 set /p op=Type option:
-if "%op%"=="1" goto widgetswin1101
-if "%op%"=="2" goto widgetswin1102
-if "%op%"=="3" goto widgetswin1103
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto widgetswin1101
+if "%op%" equ "2" goto widgetswin1102
+if "%op%" equ "3" goto widgetswin1103
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2022,9 +2022,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto adminfil01W10
-if "%op%"=="2" goto adminfil02W10
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto adminfil01W10
+if "%op%" equ "2" goto adminfil02W10
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -2103,9 +2103,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto adminfil01
-if "%op%"=="2" goto adminfil02
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto adminfil01
+if "%op%" equ "2" goto adminfil02
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2142,9 +2142,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11yrphone1
-if "%op%"=="2" goto win11yrphone2
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11yrphone1
+if "%op%" equ "2" goto win11yrphone2
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2355,9 +2355,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11paintC1
-if "%op%"=="2" goto win11paintC2
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11paintC1
+if "%op%" equ "2" goto win11paintC2
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2486,9 +2486,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11snipp01
-::if "%op%"=="2" start https://bit.ly/3BJBLw1 && goto forwindows11
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11snipp01
+::if "%op%" equ "2" start https://bit.ly/3BJBLw1 && goto forwindows11
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2563,11 +2563,11 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11key01
-if "%op%"=="2" goto win11key02
-if "%op%"=="3" goto win11key03
-if "%op%"=="4" start https://bit.ly/3BJBLw1 && goto forwindows11
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11key01
+if "%op%" equ "2" goto win11key02
+if "%op%" equ "3" goto win11key03
+if "%op%" equ "4" start https://bit.ly/3BJBLw1 && goto forwindows11
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2617,9 +2617,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11team1
-if "%op%"=="2" goto win11team2
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11team1
+if "%op%" equ "2" goto win11team2
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2663,11 +2663,11 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11clip1
-if "%op%"=="2" goto win11clip2
-if "%op%"=="3" goto win11clip3
-if "%op%"=="4" goto win11clip4
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11clip1
+if "%op%" equ "2" goto win11clip2
+if "%op%" equ "3" goto win11clip3
+if "%op%" equ "4" goto win11clip4
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2705,8 +2705,8 @@ goto win1102
 :win1118
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" goto win1118X
-if "%var%"=="22631" goto win1118X
+if "%var%" equ "22621" goto win1118X
+if "%var%" equ "22631" goto win1118X
 cls
 echo For Windows 11 22H2 Sun Valley 2
 timeout /t 2 >nul
@@ -2726,9 +2726,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto taskma81
-if "%op%"=="2" goto taskma82
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto taskma81
+if "%op%" equ "2" goto taskma82
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2767,9 +2767,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11context01
-if "%op%"=="2" goto win11context02
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11context01
+if "%op%" equ "2" goto win11context02
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2814,13 +2814,13 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11o1
-if "%op%"=="2" goto win11o2
-if "%op%"=="3" goto win11o3
-if "%op%"=="4" goto win11o4
-if "%op%"=="5" goto win11o5
-if "%op%"=="6" goto win11o6
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11o1
+if "%op%" equ "2" goto win11o2
+if "%op%" equ "3" goto win11o3
+if "%op%" equ "4" goto win11o4
+if "%op%" equ "5" goto win11o5
+if "%op%" equ "6" goto win11o6
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -2905,9 +2905,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11notepad1
-if "%op%"=="2" goto win11notepad2
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11notepad1
+if "%op%" equ "2" goto win11notepad2
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -3033,8 +3033,8 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11hevc1
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11hevc1
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -3083,7 +3083,7 @@ cls
 timeout /t 1 >nul
 cd "%GHOST_TEMP%\Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe" >nul
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 echo %cyan%Installing please wait...
 echo.
 for /f tokens^=* %%i in ('where .:*VCLibs*.*x64*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
@@ -3091,7 +3091,7 @@ for /f tokens^=* %%i in ('where .:*HEVC*.*x64*')do Powershell Add-AppxPackage -P
 for /f tokens^=* %%i in ('where .:*AV1*.*x64*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 cls
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 echo %cyan%Installing please wait...
 echo.
 for /f tokens^=* %%i in ('where .:*VCLibs*.*x86*') do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
@@ -3108,9 +3108,9 @@ RD /S /Q "Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe" >nul 2>nul
 goto forwindows11
 :win1112
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22610" cls && echo Not Support for Windows 11 22H2 Version. && timeout /t 5 >nul && goto forwindows11
+if "%var%" equ "22610" cls && echo Not Support for Windows 11 22H2 Version. && timeout /t 5 >nul && goto forwindows11
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" cls && echo Not Support for Windows 11 22H2 Version. && timeout /t 5 >nul && goto forwindows11
+if "%var%" equ "22621" cls && echo Not Support for Windows 11 22H2 Version. && timeout /t 5 >nul && goto forwindows11
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
@@ -3130,10 +3130,10 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win11taskbar3
-if "%op%"=="2" goto win11taskbar4
-if "%op%"=="3" goto widgetswin1103
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto win11taskbar3
+if "%op%" equ "2" goto win11taskbar4
+if "%op%" equ "3" goto widgetswin1103
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -3467,9 +3467,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto biomet1
-if "%op%"=="2" goto biomet2
-if "%op%"=="0" goto forwindows11
+if "%op%" equ "1" goto biomet1
+if "%op%" equ "2" goto biomet2
+if "%op%" equ "0" goto forwindows11
 cls
 color 0b
 echo This function not available yet
@@ -3495,7 +3495,7 @@ goto win1113
 :edition
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionID') do set "var=%%b" >nul
-if "%var%"=="EnterpriseS" goto BuyOriginalWindows
+if "%var%" equ "EnterpriseS" goto BuyOriginalWindows
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "EditionID"') do set "EditionID=%%B"
 color 0E
 cls
@@ -3536,17 +3536,17 @@ set bright=%ESC%[1m
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto edition1
-if "%op%"=="2" goto edition2
-if "%op%"=="3" goto edition3
-if "%op%"=="4" goto edition4
-if "%op%"=="5" goto edition5
-if "%op%"=="6" goto edition6
-if "%op%"=="7" goto edition7
-if "%op%"=="8" goto edition8
-if "%op%"=="9" goto editionac
-if "%op%"=="10" goto editionreset
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto edition1
+if "%op%" equ "2" goto edition2
+if "%op%" equ "3" goto edition3
+if "%op%" equ "4" goto edition4
+if "%op%" equ "5" goto edition5
+if "%op%" equ "6" goto edition6
+if "%op%" equ "7" goto edition7
+if "%op%" equ "8" goto edition8
+if "%op%" equ "9" goto editionac
+if "%op%" equ "10" goto editionreset
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -3556,7 +3556,7 @@ goto edition
 :editionac
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" goto begin
+if "%var%" equ "22000" goto begin
 echo  Please wait.
 timeout /t 2 >nul
 cls
@@ -3743,8 +3743,8 @@ echo.
 echo.
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
-if "%op%"=="1" goto winre1
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto winre1
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -3786,48 +3786,48 @@ goto begin
 :winre1
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto winrex86
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto winrex64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto winrex86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto winrex64
 :winrex64
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b"
-if "%var%"=="22621" start https://www.mediafire.com/file/ak3e1fkbzzkdja4/WIN11.22H2.RECOVERY.ZIP/file && goto begin
+if "%var%" equ "22621" start https://www.mediafire.com/file/ak3e1fkbzzkdja4/WIN11.22H2.RECOVERY.ZIP/file && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b"
-if "%var%"=="22000" start https://www.mediafire.com/file/v79cq1gi8cgud2z/WIN11.RECOVERY.BAK.x64.zip/file && goto begin
+if "%var%" equ "22000" start https://www.mediafire.com/file/v79cq1gi8cgud2z/WIN11.RECOVERY.BAK.x64.zip/file && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b"
-if "%var%"=="22631" start https://www.mediafire.com/file/ak3e1fkbzzkdja4/WIN11.22H2.RECOVERY.ZIP/file && goto begin
+if "%var%" equ "22631" start https://www.mediafire.com/file/ak3e1fkbzzkdja4/WIN11.22H2.RECOVERY.ZIP/file && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="19045" (
+if "%var%" equ "19045" (
 goto winrex64win10aio
 )
-if "%var%"=="19044" (
+if "%var%" equ "19044" (
 goto winrex64win10aio
 )
-if "%var%"=="19043" (
+if "%var%" equ "19043" (
 goto winrex64win10aio
 )
-if "%var%"=="19042" (
+if "%var%" equ "19042" (
 goto winrex64win10aio
 )
-if "%var%"=="19041" (
+if "%var%" equ "19041" (
 goto winrex64win10aio
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName') do set "var=%%b"
-if "%var%"=="Windows 10 Enterprise LTSC 2021" goto :winrex86x64nope
+if "%var%" equ "Windows 10 Enterprise LTSC 2021" goto :winrex86x64nope
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="Home" goto :winrex86x64nope
+if "%var%" equ "Home" goto :winrex86x64nope
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v DisplayVersion') do set "var=%%b"
-if "%var%"=="21H1" goto :winrex64download21H1
+if "%var%" equ "21H1" goto :winrex64download21H1
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v DisplayVersion') do set "var=%%b"
-if "%var%"=="21H2" goto :winrex64download21H1
+if "%var%" equ "21H2" goto :winrex64download21H1
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2004" goto :winrex64download2009
-if "%var%"=="1909" goto :winrex64download1909
-if "%var%"=="1903" goto :winrex64download1909
-if "%var%"=="1809" goto :winrex64download1809
-if "%var%"=="1803" goto :winrex64download1809
-if "%var%"=="1709" goto :winrex64download1809
-if "%var%"=="1703" goto :winrex64download1809
-if "%var%"=="1607" goto :winreforltsb1607
+if "%var%" equ "2004" goto :winrex64download2009
+if "%var%" equ "1909" goto :winrex64download1909
+if "%var%" equ "1903" goto :winrex64download1909
+if "%var%" equ "1809" goto :winrex64download1809
+if "%var%" equ "1803" goto :winrex64download1809
+if "%var%" equ "1709" goto :winrex64download1809
+if "%var%" equ "1703" goto :winrex64download1809
+if "%var%" equ "1607" goto :winreforltsb1607
 :winrex64download
 ::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 ::echo 9865f5d10881b60aeacea22dd7894bce  "Windows.Recovery.wim" | hashsum /c /q && (
@@ -3838,11 +3838,11 @@ if "%var%"=="1607" goto :winreforltsb1607
 ::)
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -3912,13 +3912,13 @@ cls
 %nhcolor% 07 "  %red%By default Superlite latest ver + and Compact version already force to using latest .Net Framework 4.          
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
-if "%op%"=="1" goto netframework5
-::if "%op%"=="2" goto netframework2
-::if "%op%"=="3" goto netframework3
-::if "%op%"=="4" goto netframework4
-::if "%op%"=="5" goto netframework5
-if "%op%"=="7" goto netframework7
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto netframework5
+::if "%op%" equ "2" goto netframework2
+::if "%op%" equ "3" goto netframework3
+::if "%op%" equ "4" goto netframework4
+::if "%op%" equ "5" goto netframework5
+if "%op%" equ "7" goto netframework7
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -4010,7 +4010,7 @@ goto begin
 cls
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\DiagTrack" /v "Start" /t REG_DWORD /d "2" /f >nul 2>nul
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 cls
 echo %yellow%Windows Insider Program is enable!.
 timeout /t 2 >nul
@@ -4046,9 +4046,9 @@ cls
 %nhcolor% 07 "  %green%[2] RaiDrive Standard Edition                            
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
-if "%op%"=="1" goto onedrive1
-if "%op%"=="2" goto onedrive2
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto onedrive1
+if "%op%" equ "2" goto onedrive2
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -4084,8 +4084,8 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto drivereasy1
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto drivereasy1
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -4103,11 +4103,11 @@ del /q /f /s "%USERPROFILE%\Desktop\DriverEasy Portable" >nul
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -4142,10 +4142,10 @@ goto :WTHx643
 )
 timeout /t 2 >nul
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %_7ZA_EXE% x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%PROGRAMFILES%\"
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %_7Z_DIR_%\x64\7za x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%PROGRAMFILES%\"
 )
 ::mklink "%USERPROFILE%\Desktop\DriverEasy Portable" "%PROGRAMFILES%\DriverEasy\DriverEasyPortable.exe"
@@ -4158,7 +4158,7 @@ cls
 goto begin
 :ghst
 ::for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-::if "%var%"=="22631" (
+::if "%var%" equ "22631" (
 ::cls
 ::echo  Will available soon for Windows 11 23H2
 ::timeout /t 5 >nul
@@ -4203,25 +4203,25 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ghost01
-if "%op%"=="2" goto ghost02
-if "%op%"=="3" goto ghost03
-if "%op%"=="4" goto ghost04
-if "%op%"=="5" goto ghost05
-if "%op%"=="6" goto ghost06
-if "%op%"=="7" goto ghost07
-if "%op%"=="8" goto ghost08
-if "%op%"=="9" goto ghost09
-if "%op%"=="10" goto ghost10
-if "%op%"=="11" goto ghost11
-if "%op%"=="12" goto ghost12
-if "%op%"=="13" goto ghost13
-if "%op%"=="14" goto ghost14
-if "%op%"=="15" goto ghost15
-if "%op%"=="16" goto ghosthemes
-if "%op%"=="17" goto iconspacks
-if "%op%"=="18" goto nilesoft
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto ghost01
+if "%op%" equ "2" goto ghost02
+if "%op%" equ "3" goto ghost03
+if "%op%" equ "4" goto ghost04
+if "%op%" equ "5" goto ghost05
+if "%op%" equ "6" goto ghost06
+if "%op%" equ "7" goto ghost07
+if "%op%" equ "8" goto ghost08
+if "%op%" equ "9" goto ghost09
+if "%op%" equ "10" goto ghost10
+if "%op%" equ "11" goto ghost11
+if "%op%" equ "12" goto ghost12
+if "%op%" equ "13" goto ghost13
+if "%op%" equ "14" goto ghost14
+if "%op%" equ "15" goto ghost15
+if "%op%" equ "16" goto ghosthemes
+if "%op%" equ "17" goto iconspacks
+if "%op%" equ "18" goto nilesoft
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -4249,10 +4249,10 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto nile01
-if "%op%"=="2" goto nile02
-if "%op%"=="3" goto nile03
-if "%op%"=="0" goto ghst
+if "%op%" equ "1" goto nile01
+if "%op%" equ "2" goto nile02
+if "%op%" equ "3" goto nile03
+if "%op%" equ "0" goto ghst
 cls
 color 0b
 echo This function not available yet
@@ -4379,24 +4379,24 @@ cls
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 timeout /t 2 >nul
 set /p op=%cyan%Type option:
-if "%op%"=="1" goto DLPV1
-if "%op%"=="2" goto DLPV2
-if "%op%"=="3" goto DLPV3
-if "%op%"=="4" goto theme01
-if "%op%"=="5" goto theme02
-if "%op%"=="6" goto theme03
-if "%op%"=="7" goto theme04
-if "%op%"=="8" goto theme05
-if "%op%"=="9" goto theme06
-if "%op%"=="10" goto theme07
-if "%op%"=="11" goto theme08
-if "%op%"=="12" goto theme09
-if "%op%"=="13" goto theme10
-if "%op%"=="14" goto theme11
-if "%op%"=="15" goto theme12
-if "%op%"=="98" goto theme98
-if "%op%"=="99" goto theme99
-if "%op%"=="0" goto ghst
+if "%op%" equ "1" goto DLPV1
+if "%op%" equ "2" goto DLPV2
+if "%op%" equ "3" goto DLPV3
+if "%op%" equ "4" goto theme01
+if "%op%" equ "5" goto theme02
+if "%op%" equ "6" goto theme03
+if "%op%" equ "7" goto theme04
+if "%op%" equ "8" goto theme05
+if "%op%" equ "9" goto theme06
+if "%op%" equ "10" goto theme07
+if "%op%" equ "11" goto theme08
+if "%op%" equ "12" goto theme09
+if "%op%" equ "13" goto theme10
+if "%op%" equ "14" goto theme11
+if "%op%" equ "15" goto theme12
+if "%op%" equ "98" goto theme98
+if "%op%" equ "99" goto theme99
+if "%op%" equ "0" goto ghst
 cls
 color 0b
 echo This function not available yet
@@ -4422,7 +4422,7 @@ goto ghosthemes
 cls
 :theme98
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" cls && echo %green%Please install Windows 11 Version. && timeout /t 4 >nul && goto ghosthemes
+if "%var%" equ "22000" cls && echo %green%Please install Windows 11 Version. && timeout /t 4 >nul && goto ghosthemes
 
 cd "%GHOST_DATA%"
 cls
@@ -4445,7 +4445,7 @@ goto ghst
 :ghost15
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2004" goto :checkbuildstartmenu
+if "%var%" equ "2004" goto :checkbuildstartmenu
 echo %green%Nope...not for this version. && timeout /t 4 >nul && goto ghst
 :checkbuildstartmenu
 cls
@@ -4462,23 +4462,23 @@ goto ghst
 :ghost14
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2004" goto :yesiwantnewicons
-::if "%var%"=="2004" goto :checkbuildstartmenu
+if "%var%" equ "2004" goto :yesiwantnewicons
+::if "%var%" equ "2004" goto :checkbuildstartmenu
 echo %green%Nope...not for this version. && timeout /t 4 >nul && goto ghst
 :checkbuildstartmenu
 cls
 FOR /f "tokens=2*" %%a in ('Reg Query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v UBR') do set "UBRHEX=%%~b"
 set /a UBRDEC=%UBRHEX%
-	if "%UBRDEC%"=="421" goto yesiwantnewicons
-	if "%UBRDEC%"=="423" goto yesiwantnewicons
-	if "%UBRDEC%"=="450" goto yesiwantnewicons
-	if "%UBRDEC%"=="487" goto yesiwantnewicons
-	if "%UBRDEC%"=="488" goto yesiwantnewicons
-	if "%UBRDEC%"=="508" goto yesiwantnewicons
-	if "%UBRDEC%"=="572" goto yesiwantnewicons
-	if "%UBRDEC%"=="630" goto yesiwantnewicons
-	if "%UBRDEC%"=="632" goto yesiwantnewicons
-	if "%UBRDEC%"=="685" goto yesiwantnewicons
+	if "%UBRDEC%" equ "421" goto yesiwantnewicons
+	if "%UBRDEC%" equ "423" goto yesiwantnewicons
+	if "%UBRDEC%" equ "450" goto yesiwantnewicons
+	if "%UBRDEC%" equ "487" goto yesiwantnewicons
+	if "%UBRDEC%" equ "488" goto yesiwantnewicons
+	if "%UBRDEC%" equ "508" goto yesiwantnewicons
+	if "%UBRDEC%" equ "572" goto yesiwantnewicons
+	if "%UBRDEC%" equ "630" goto yesiwantnewicons
+	if "%UBRDEC%" equ "632" goto yesiwantnewicons
+	if "%UBRDEC%" equ "685" goto yesiwantnewicons
 	goto nostartmenuiconoldbuild
 )
 cls
@@ -4573,11 +4573,11 @@ cd "%GHOST_DATA%"
 del /s /q "GhostSpectre_Wallpaper.zip" >nul
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -4813,55 +4813,55 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Benchmark Drive : 
-if "%op%"=="C" goto diskc
-if "%op%"=="c" goto diskc
-if "%op%"=="D" goto diskd
-if "%op%"=="d" goto diskd
-if "%op%"=="E" goto diske
-if "%op%"=="e" goto diske
-if "%op%"=="F" goto diskf
-if "%op%"=="f" goto diskf
-if "%op%"=="G" goto diskg
-if "%op%"=="g" goto diskg
-if "%op%"=="H" goto diskh
-if "%op%"=="h" goto diskh
-if "%op%"=="I" goto diski
-if "%op%"=="i" goto diski
-if "%op%"=="J" goto diskj
-if "%op%"=="j" goto diskj
-if "%op%"=="K" goto diskk
-if "%op%"=="k" goto diskk
-if "%op%"=="L" goto diskl
-if "%op%"=="l" goto diskl
-if "%op%"=="M" goto diskm
-if "%op%"=="m" goto diskm
-if "%op%"=="N" goto diskn
-if "%op%"=="n" goto diskn
-if "%op%"=="O" goto disko
-if "%op%"=="o" goto disko
-if "%op%"=="P" goto diskp
-if "%op%"=="p" goto diskp
-if "%op%"=="Q" goto diskq
-if "%op%"=="q" goto diskq
-if "%op%"=="R" goto diskr
-if "%op%"=="r" goto diskr
-if "%op%"=="S" goto disks
-if "%op%"=="s" goto disks
-if "%op%"=="T" goto diskt
-if "%op%"=="t" goto diskt
-if "%op%"=="U" goto disku
-if "%op%"=="u" goto disku
-if "%op%"=="V" goto diskv
-if "%op%"=="v" goto diskv
-if "%op%"=="W" goto diskw
-if "%op%"=="w" goto diskw
-if "%op%"=="X" goto diskx
-if "%op%"=="x" goto diskx
-if "%op%"=="Y" goto disky
-if "%op%"=="y" goto disky
-if "%op%"=="Z" goto diskz
-if "%op%"=="z" goto diskz
-if "%op%"=="0" goto op_menu
+if "%op%" equ "C" goto diskc
+if "%op%" equ "c" goto diskc
+if "%op%" equ "D" goto diskd
+if "%op%" equ "d" goto diskd
+if "%op%" equ "E" goto diske
+if "%op%" equ "e" goto diske
+if "%op%" equ "F" goto diskf
+if "%op%" equ "f" goto diskf
+if "%op%" equ "G" goto diskg
+if "%op%" equ "g" goto diskg
+if "%op%" equ "H" goto diskh
+if "%op%" equ "h" goto diskh
+if "%op%" equ "I" goto diski
+if "%op%" equ "i" goto diski
+if "%op%" equ "J" goto diskj
+if "%op%" equ "j" goto diskj
+if "%op%" equ "K" goto diskk
+if "%op%" equ "k" goto diskk
+if "%op%" equ "L" goto diskl
+if "%op%" equ "l" goto diskl
+if "%op%" equ "M" goto diskm
+if "%op%" equ "m" goto diskm
+if "%op%" equ "N" goto diskn
+if "%op%" equ "n" goto diskn
+if "%op%" equ "O" goto disko
+if "%op%" equ "o" goto disko
+if "%op%" equ "P" goto diskp
+if "%op%" equ "p" goto diskp
+if "%op%" equ "Q" goto diskq
+if "%op%" equ "q" goto diskq
+if "%op%" equ "R" goto diskr
+if "%op%" equ "r" goto diskr
+if "%op%" equ "S" goto disks
+if "%op%" equ "s" goto disks
+if "%op%" equ "T" goto diskt
+if "%op%" equ "t" goto diskt
+if "%op%" equ "U" goto disku
+if "%op%" equ "u" goto disku
+if "%op%" equ "V" goto diskv
+if "%op%" equ "v" goto diskv
+if "%op%" equ "W" goto diskw
+if "%op%" equ "w" goto diskw
+if "%op%" equ "X" goto diskx
+if "%op%" equ "x" goto diskx
+if "%op%" equ "Y" goto disky
+if "%op%" equ "y" goto disky
+if "%op%" equ "Z" goto diskz
+if "%op%" equ "z" goto diskz
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -5136,10 +5136,10 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto edg1
-if "%op%"=="2" goto edg2
-if "%op%"=="3" goto edg3
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto edg1
+if "%op%" equ "2" goto edg2
+if "%op%" equ "3" goto edg3
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -5261,8 +5261,8 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto mira1
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto mira1
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -5275,26 +5275,26 @@ setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 setlocal
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-	if "%var%"=="2009" cls && echo %red%Miracast Apps no longer available on Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="2004" cls && echo %red%Miracast Apps no longer available on Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="1909" goto :miracastyes
-	if "%var%"=="1903" goto :miracastyes
-	if "%var%"=="1809" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="1803" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="1709" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="1703" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%"=="1607" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "2009" cls && echo %red%Miracast Apps no longer available on Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "2004" cls && echo %red%Miracast Apps no longer available on Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1909" goto :miracastyes
+	if "%var%" equ "1903" goto :miracastyes
+	if "%var%" equ "1809" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1803" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1709" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1703" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1607" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
 :miracastyes
 cls
 cd "%GHOST_DATA%"
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 echo Microsoft Connect x64
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/2S7jfN6" -t 5 -O Microsoft.PPIProjection_cw5n1h2txyewy.zip
 goto :mirax64check
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 echo Microsoft Connect x86
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3fNDad2" -t 5 -O Microsoft.PPIProjection_cw5n1h2txyewy.zip
@@ -5373,10 +5373,10 @@ echo.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto clip1
-if "%op%"=="2" goto clip2
-if "%op%"=="3" goto Touchkey1
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto clip1
+if "%op%" equ "2" goto clip2
+if "%op%" equ "3" goto Touchkey1
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -5400,11 +5400,11 @@ goto :dp2342
 )
 :dp2342
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -5499,11 +5499,11 @@ cls
 :tk121212
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -5537,7 +5537,7 @@ del /q /f /s "Touch_keyboard_Dependencies.zip" >nul
 goto :ErrorMD5
 )
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 ::powershell expand-archive -path Touch_keyboard_Dependencies.zip -force
 %_7Z_DIR_%\x64\7za x "Touch_keyboard_Dependencies.zip" -aoa -ptkp -o"Touch_keyboard_Dependencies"
 cls
@@ -5553,7 +5553,7 @@ Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27810.0_x86__8weky
 cls
 timeout /t 3 >nul
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 ::powershell expand-archive -path Touch_keyboard_Dependencies.zip -force
 %_7ZA_EXE% x "Touch_keyboard_Dependencies.zip" -aoa -ptkp -o"Touch_keyboard_Dependencies"
 cls
@@ -5596,9 +5596,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto co1
-if "%op%"=="2" goto co2
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto co1
+if "%op%" equ "2" goto co2
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -5673,10 +5673,10 @@ set bright=%ESC%[1m
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto pauseupdate1
-if "%op%"=="2" goto pauseupdate2
-if "%op%"=="3" goto pauseupdate2
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto pauseupdate1
+if "%op%" equ "2" goto pauseupdate2
+if "%op%" equ "3" goto pauseupdate2
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -5758,9 +5758,9 @@ echo " %green%[0] | Back to menu                                         							
 echo "================================================================================================================"
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto op77
-if "%op%"=="2" goto op78
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto op77
+if "%op%" equ "2" goto op78
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -5807,14 +5807,14 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto w0001
-if "%op%"=="2" goto w0002
-if "%op%"=="3" goto w0003
-if "%op%"=="4" goto w0004
-if "%op%"=="5" goto w0005
-if "%op%"=="11" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "3" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto actionandnoti
-if "%op%"=="12" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "4" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto actionandnoti
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto w0001
+if "%op%" equ "2" goto w0002
+if "%op%" equ "3" goto w0003
+if "%op%" equ "4" goto w0004
+if "%op%" equ "5" goto w0005
+if "%op%" equ "11" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "3" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto actionandnoti
+if "%op%" equ "12" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "4" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto actionandnoti
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -5834,9 +5834,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto AC0001
-if "%op%"=="2" goto AC0002
-if "%op%"=="0" goto windows10op
+if "%op%" equ "1" goto AC0001
+if "%op%" equ "2" goto AC0002
+if "%op%" equ "0" goto windows10op
 cls
 color 0b
 echo wrong number!
@@ -5848,7 +5848,7 @@ goto w0001
 cls
 color 0b
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="14393" (
+if "%var%" equ "14393" (
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "0" /f >nul
 REG ADD "HKCU\Software\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "0" /f >nul
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "0" /f >nul
@@ -5893,7 +5893,7 @@ cls
 color 0E
 color 0b
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="14393" (
+if "%var%" equ "14393" (
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "1" /f >nul
 REG ADD "HKCU\Software\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "1" /f >nul
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "1" /f >nul
@@ -5944,9 +5944,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" sc config Spooler start=auto && net start Spooler && echo Print Spooler is enable. && timeout /t 2 >nul && goto windows10op
-if "%op%"=="2" sc config Spooler start=demand && net stop Spooler && echo Print Spooler is disable. && timeout /t 2 >nul && goto windows10op
-if "%op%"=="0" goto windows10op
+if "%op%" equ "1" sc config Spooler start=auto && net start Spooler && echo Print Spooler is enable. && timeout /t 2 >nul && goto windows10op
+if "%op%" equ "2" sc config Spooler start=demand && net stop Spooler && echo Print Spooler is disable. && timeout /t 2 >nul && goto windows10op
+if "%op%" equ "0" goto windows10op
 cls
 color 0b
 echo wrong number!
@@ -5967,9 +5967,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto biomet1win10
-if "%op%"=="2" goto biomet2win10
-if "%op%"=="0" goto windows10op
+if "%op%" equ "1" goto biomet1win10
+if "%op%" equ "2" goto biomet2win10
+if "%op%" equ "0" goto windows10op
 cls
 color 0b
 echo wrong number!
@@ -6007,9 +6007,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "3" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto windows10op
-if "%op%"=="2" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "4" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto windows10op
-if "%op%"=="0" goto windows10op
+if "%op%" equ "1" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "3" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto windows10op
+if "%op%" equ "2" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "4" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto windows10op
+if "%op%" equ "0" goto windows10op
 cls
 color 0b
 echo wrong number!
@@ -6028,9 +6028,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto sbing0001
-if "%op%"=="2" goto sbing0002
-if "%op%"=="0" goto windows10op
+if "%op%" equ "1" goto sbing0001
+if "%op%" equ "2" goto sbing0002
+if "%op%" equ "0" goto windows10op
 cls
 color 0b
 echo wrong number!
@@ -6116,19 +6116,19 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto op01
-if "%op%"=="2" goto op02
-if "%op%"=="3" goto cortana1
-if "%op%"=="4" goto cortana2
-if "%op%"=="5" sc config Spooler start=auto && net start Spooler && echo Print Spooler is enable. && timeout /t 2 >nul && goto begin
-if "%op%"=="6" sc config Spooler start=demand && net stop Spooler && echo Print Spooler is disable. && timeout /t 2 >nul && goto begin
-if "%op%"=="7" goto cortanabetatest
-if "%op%"=="8" goto cortanabeta2
-if "%op%"=="9" goto biomet1win10
-if "%op%"=="10" goto biomet2win10
-if "%op%"=="11" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "3" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto actionandnoti
-if "%op%"=="12" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "4" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto actionandnoti
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto op01
+if "%op%" equ "2" goto op02
+if "%op%" equ "3" goto cortana1
+if "%op%" equ "4" goto cortana2
+if "%op%" equ "5" sc config Spooler start=auto && net start Spooler && echo Print Spooler is enable. && timeout /t 2 >nul && goto begin
+if "%op%" equ "6" sc config Spooler start=demand && net stop Spooler && echo Print Spooler is disable. && timeout /t 2 >nul && goto begin
+if "%op%" equ "7" goto cortanabetatest
+if "%op%" equ "8" goto cortanabeta2
+if "%op%" equ "9" goto biomet1win10
+if "%op%" equ "10" goto biomet2win10
+if "%op%" equ "11" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "3" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto actionandnoti
+if "%op%" equ "12" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputService" /v "Start" /t REG_DWORD /d "4" /f >nul 2>nul && cls && echo Restart the computer for the changes to take effect. && timeout /t 2 >nul && goto actionandnoti
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -6155,7 +6155,7 @@ goto actionandnoti
 cls
 color 0b
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="14393" (
+if "%var%" equ "14393" (
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "0" /f >nul
 REG ADD "HKCU\Software\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "0" /f >nul
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "0" /f >nul
@@ -6199,7 +6199,7 @@ cls
 color 0E
 color 0b
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="14393" (
+if "%var%" equ "14393" (
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "1" /f >nul
 REG ADD "HKCU\Software\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "1" /f >nul
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d "1" /f >nul
@@ -6274,8 +6274,8 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto op33
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto op33
+if "%op%" equ "0" goto op_menu
 cls
 color 0D
 echo This function not available yet
@@ -6355,9 +6355,9 @@ echo  [0] Back to menu
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto op22
-if "%op%"=="2" goto logs2
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto op22
+if "%op%" equ "2" goto logs2
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -6409,12 +6409,12 @@ Exit
 :op4
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionID') do set "var=%%b" >nul
-if "%var%"=="EnterpriseS" goto BuyOriginalWindows
+if "%var%" equ "EnterpriseS" goto BuyOriginalWindows
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" goto begin
+if "%var%" equ "22000" goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" goto begin
-if "%var%"=="22631" goto begin
+if "%var%" equ "22621" goto begin
+if "%var%" equ "22631" goto begin
 @Echo off&SetLocal EnableExtensions EnableDelayedExpansion
 Set "WinVerAct="
 cls
@@ -6444,11 +6444,11 @@ echo.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ac1
-if "%op%"=="2" goto ac2
-if "%op%"=="3" goto ac3
-if "%op%"=="4" goto ac4
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto ac1
+if "%op%" equ "2" goto ac2
+if "%op%" equ "3" goto ac3
+if "%op%" equ "4" goto ac4
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -6458,7 +6458,7 @@ goto op4
 :ac3
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="Home" goto ac4homereset
+if "%var%" equ "Home" goto ac4homereset
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /t REG_SZ /d "" /f >nul
 timeout /t 1 >nul
 cscript //B "%windir%\system32\slmgr.vbs" -ipk VK7JG-NPHTM-C97JM-9MPGT-3V66T >nul
@@ -6625,7 +6625,7 @@ timeout /t 5 >nul
 goto :op4
 :ac4
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="Home" goto :ac4home
+if "%var%" equ "Home" goto :ac4home
 color 0b
 cls
 echo  %white%=====================================================================================================================
@@ -6744,14 +6744,14 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto m1
-if "%op%"=="2" goto m2
-if "%op%"=="3" goto m3
-if "%op%"=="4" goto m4
-if "%op%"=="5" goto m5
-if "%op%"=="6" goto m6
-if "%op%"=="7" goto m7
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto m1
+if "%op%" equ "2" goto m2
+if "%op%" equ "3" goto m3
+if "%op%" equ "4" goto m4
+if "%op%" equ "5" goto m5
+if "%op%" equ "6" goto m6
+if "%op%" equ "7" goto m7
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -6841,12 +6841,12 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto op55
-if "%op%"=="2" goto op56
-if "%op%"=="3" goto super1
-if "%op%"=="4" goto super2
-if "%op%"=="5" goto opxdx5
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto op55
+if "%op%" equ "2" goto op56
+if "%op%" equ "3" goto super1
+if "%op%" equ "4" goto super2
+if "%op%" equ "5" goto opxdx5
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -6926,10 +6926,10 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto gamebar1
-if "%op%"=="2" goto gamebar2
-if "%op%"=="3" goto gamebar3
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto gamebar1
+if "%op%" equ "2" goto gamebar2
+if "%op%" equ "3" goto gamebar3
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -6957,11 +6957,11 @@ goto :xbox1strun
 :xbox1strun
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -7053,8 +7053,8 @@ timeout /t 3 >nul
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "XGAMEBAR=x86" || set "XGAMEBAR==x64"
 ::set /a UBRDEC=%UBRHEX% >nul
-if "%XGAMEBAR=%"=="x64" goto :xboxgamebarx64
-if "%XGAMEBAR=%"=="x86" goto :xboxgamebarx86
+if "%XGAMEBAR=%" equ "x64" goto :xboxgamebarx64
+if "%XGAMEBAR=%" equ "x86" goto :xboxgamebarx86
 cls
 :xboxgamebarx64
 cls
@@ -7174,10 +7174,10 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto xpass1
-if "%op%"=="2" goto xpass2
-if "%op%"=="3" goto xpass3
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto xpass1
+if "%op%" equ "2" goto xpass2
+if "%op%" equ "3" goto xpass3
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -7223,8 +7223,8 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto zunemusic2020
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto zunemusic2020
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -7239,8 +7239,8 @@ cd "%GHOST_DATA%"
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "ZUNEMUSIC=x86" || set "ZUNEMUSIC==x64"
 ::set /a UBRDEC=%UBRHEX% >nul
-if "%ZUNEMUSIC=%"=="x64" goto :zunemusicx64
-if "%ZUNEMUSIC=%"=="x86" goto :zunemusicx86
+if "%ZUNEMUSIC=%" equ "x64" goto :zunemusicx64
+if "%ZUNEMUSIC=%" equ "x86" goto :zunemusicx86
 cls
 :zunemusicx64
 cls
@@ -7295,8 +7295,8 @@ cls
 timeout /t 2 >nul
 goto begin
 :checkrevision
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto revisionx64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto revisionx86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto revisionx64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto revisionx86
 cls
 :revisionx64
 cd "%GHOST_DATA%"
@@ -7355,18 +7355,18 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\GhostSpectre" /v Ghost_Revision 2^> nul') do set "var=%%b"
 	:: REV
 	cd "%GHOST_DATA%" >nul 2>nul
-	if "%var%"=="11" goto beginxx
+	if "%var%" equ "11" goto beginxx
     )
 )
 ::cls
 :: DL REV
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
 )
@@ -7655,18 +7655,18 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\GhostSpectre" /v Ghost_Revision 2^> nul') do set "var=%%b"
 	:: REV
 	cd "%GHOST_DATA%" >nul 2>nul
-	if "%var%"=="11" goto beginxx
+	if "%var%" equ "11" goto beginxx
     )
 )
 ::cls
 :: DL REV
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
 )
@@ -7901,9 +7901,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto yourphone1
-if "%op%"=="2" goto yourphone2
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto yourphone1
+if "%op%" equ "2" goto yourphone2
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -7913,8 +7913,8 @@ goto yourphone
 :yourphone1
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto yourphonex64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto yourphonex86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto yourphonex64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto yourphonex86
 cls
 :yourphonex64
 cls
@@ -7924,11 +7924,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -8001,11 +8001,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -8075,8 +8075,8 @@ cls
 timeout /t 2 >nul
 goto begin
 :beginxx
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto x64rev
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto x86rev
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto x64rev
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto x86rev
 :x64rev
 timeout /t 1 >nul
 cd "%GHOST_DIR%" >nul 2>nul		
@@ -8262,12 +8262,12 @@ setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="1803" goto :skipWinget
-if "%var%"=="1709" goto :skipWinget
-if "%var%"=="1703" goto :skipWinget
-if "%var%"=="1607" goto :skipWinget
+if "%var%" equ "1803" goto :skipWinget
+if "%var%" equ "1709" goto :skipWinget
+if "%var%" equ "1703" goto :skipWinget
+if "%var%" equ "1607" goto :skipWinget
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName') do set "var=%%b"
-if "%var%"=="Windows 10 Enterprise 2015 LTSB" goto skipWinget
+if "%var%" equ "Windows 10 Enterprise 2015 LTSB" goto skipWinget
 for /f "tokens=1" %%a in ('winget.exe -v') do goto skipWinget
 goto GETSTOREX01
 
@@ -8302,7 +8302,7 @@ cd "%GHOST_DATA%" >nul 2>nul
 %_7ZA_EXE% x Microsoft.DesktopAppInstaller.Appx -aoa -o"%GHOST_TEMP%"
 cls
 timeout /t 5 >nul
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 cd "%GHOST_TEMP%\" >nul 2>nul
 for /f tokens^=* %%i in ('where .:*UI.Xaml*.*x64*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 timeout /t 1 >nul
@@ -8314,7 +8314,7 @@ Microsoft.DesktopAppInstaller_2023.606.2047.0_neutral_~_8wekyb3d8bbwe.Msixbundle
 timeout /t 1 >nul
 taskkill /f /im "AppInstaller.exe" /t >nul 2>nul
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cd "%GHOST_TEMP%\" >nul 2>nul
 for /f tokens^=* %%i in ('where .:*UI.Xaml*.*x86*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 timeout /t 1 >nul
@@ -8377,29 +8377,29 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto storetest001
-if "%op%"=="2" goto store2
-if "%op%"=="10" goto usr029
-if "%op%"=="11" goto usr030
-if "%op%"=="12" goto usr034
-if "%op%"=="13" goto usr035
-if "%op%"=="14" goto usr047
-if "%op%"=="15" goto usr048
-if "%op%"=="16" goto usr049
-if "%op%"=="17" goto msphoto
-if "%op%"=="18" goto wingetnetflix
-if "%op%"=="19" goto usr057
-if "%op%"=="20" goto usr068
-if "%op%"=="21" goto usr038
-if "%op%"=="22" goto usr077
-if "%op%"=="23" goto usr078
-if "%op%"=="24" goto usr079
-if "%op%"=="25" goto usr080
-if "%op%"=="26" goto msclassicalcu
-if "%op%"=="27" goto wingetwhatsapps
-if "%op%"=="28" goto wingettelegram
-if "%op%"=="43" goto wingetoption
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto storetest001
+if "%op%" equ "2" goto store2
+if "%op%" equ "10" goto usr029
+if "%op%" equ "11" goto usr030
+if "%op%" equ "12" goto usr034
+if "%op%" equ "13" goto usr035
+if "%op%" equ "14" goto usr047
+if "%op%" equ "15" goto usr048
+if "%op%" equ "16" goto usr049
+if "%op%" equ "17" goto msphoto
+if "%op%" equ "18" goto wingetnetflix
+if "%op%" equ "19" goto usr057
+if "%op%" equ "20" goto usr068
+if "%op%" equ "21" goto usr038
+if "%op%" equ "22" goto usr077
+if "%op%" equ "23" goto usr078
+if "%op%" equ "24" goto usr079
+if "%op%" equ "25" goto usr080
+if "%op%" equ "26" goto msclassicalcu
+if "%op%" equ "27" goto wingetwhatsapps
+if "%op%" equ "28" goto wingettelegram
+if "%op%" equ "43" goto wingetoption
+if "%op%" equ "0" goto op_menu
 cls
 echo You pick the wrong numbers.. please try again.
 timeout /t 2 >nul
@@ -8415,8 +8415,8 @@ goto op10
 :store1
 @echo off
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "STOREARC=x86" || set "STOREARC=x64"
-if "%STOREARC%"=="x64" goto :storex64
-if "%STOREARC%"=="x86" goto :storex86
+if "%STOREARC%" equ "x64" goto :storex64
+if "%STOREARC%" equ "x86" goto :storex86
 cls
 :storex64
 cls
@@ -8595,11 +8595,11 @@ goto :SKIPSTARTISBACK
 
 :: remove startisback from SV2
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 REG DELETE "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\StartIsBack" /f >nul 2>nul
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 REG DELETE "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\StartIsBack" /f >nul 2>nul
 )
 
@@ -8610,21 +8610,21 @@ if %ERRORLEVEL% EQU 1 goto startisbacknotfound
 :startisbackfound
 :: SE or nonSE
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition" 2^> nul') do set "var=%%b"
-if "%var%"=="SUPERLITE SE" ( 
+if "%var%" equ "SUPERLITE SE" ( 
 goto startisbackchecking
 )
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition" 2^> nul') do set "var=%%b"
-if "%var%"=="SUPERLITE SE + DEF" ( 
+if "%var%" equ "SUPERLITE SE + DEF" ( 
 goto startisbackchecking
 )
 goto nonSE
 
 :startisbackchecking
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="14393" goto SKIPSTARTISBACK
+if "%var%" equ "14393" goto SKIPSTARTISBACK
 cls
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\StartIsBack" /v "DisplayVersion" 2^>nul') do set "var=%%b"
-if "%var%"=="2.9.20" ( 
+if "%var%" equ "2.9.20" ( 
 goto noupdate
 )
 if exist "%Windir%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" goto killstartmenu
@@ -8637,7 +8637,7 @@ taskkill /F /IM StartMenuExperienceHost.exe >nul
 ::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c rd /q /s "%Windir%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy" >nul
 :skipkillstartmenu
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\StartIsBack" /v "DisplayVersion" 2^>nul') do set "var=%%b"
-if "%var%"=="2.9.20" ( 
+if "%var%" equ "2.9.20" ( 
 goto noupdate
 )
 goto :getlateststartisback
@@ -8647,8 +8647,8 @@ echo wscript.quit MsgBox ("Found Latest version StartIsBack 2.9.20, Do you want 
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto webstartisback >nul
-if "%value%"=="7" timeout /t 2 >nul && goto :SKIPSTARTISBACK >nul
+if "%value%" equ "6" goto webstartisback >nul
+if "%value%" equ "7" timeout /t 2 >nul && goto :SKIPSTARTISBACK >nul
 
 :webstartisback
 goto installstartallback
@@ -8719,9 +8719,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto pot1
-if "%op%"=="2" goto pot2
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto pot1
+if "%op%" equ "2" goto pot2
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -8776,12 +8776,12 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto edgecb1
-if "%op%"=="2" goto edgecb2
-if "%op%"=="3" goto edgecb3
-if "%op%"=="4" goto edgecb4
-if "%op%"=="5" goto edgecb5
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto edgecb1
+if "%op%" equ "2" goto edgecb2
+if "%op%" equ "3" goto edgecb3
+if "%op%" equ "4" goto edgecb4
+if "%op%" equ "5" goto edgecb5
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -8852,8 +8852,8 @@ echo  %green%Version : %white%Latest
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto moz1
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto moz1
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -8896,7 +8896,7 @@ set /a UBRDEC=%FNETFX4%
 ::reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "OSARC=%bg_magenta%%lblack%32bit" || set "OSARC=%bg_magenta%%lblack% 64bit "
 if "%PROCESSOR_ARCHITECTURE%" EQU "AMD64" (set "OSARC=%bg_magenta%%lblack% 64bit "
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (set "OSARC=%bg_magenta%%lblack% 32bit "
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (set "OSARC=%bg_magenta%%lblack% 32bit "
 )
 set /a UBRDEC=%UBRHEX%
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "GARC=x86" || set "GARC=x64"
@@ -8915,7 +8915,7 @@ FOR /F "tokens=2*" %%A in ('
     REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Youtube_DL 2^> nul 
 ') do set "YT_DL=%%B"
 ::for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-::if "%var%"=="22000" (
+::if "%var%" equ "22000" (
 ::for /f "tokens=11 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:textvaluelist.xsl') do set TPMVER=%%i
 ::for /f "tokens=2 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:textvaluelist.xsl') do set TPM=%%i
 ::for /f "tokens=2 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv') do set | find /i "TRUE" >NUL && set "TPMX=TPM: TRUE / " || set "TPMX=TPM: NONE "
@@ -8977,8 +8977,8 @@ echo  %cyan%Version : Latest
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto gog1X
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto gog1X
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -8989,7 +8989,7 @@ goto op14
 :gog1X
 cd "%GHOST_DATA%"
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi" -t 5 -O"googlechromestandaloneenterprise64.msi"
 googlechromestandaloneenterprise64.msi
 cd..
@@ -8997,7 +8997,7 @@ cls
 timeout /t 1 >nul
 goto begin
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi" -t 5 -O"googlechromestandaloneenterprise.msi"
 googlechromestandaloneenterprise.msi
@@ -9047,9 +9047,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto 7zipx64
-if "%op%"=="2" goto 7zipx86
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto 7zipx64
+if "%op%" equ "2" goto 7zipx86
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -9102,9 +9102,9 @@ set bright=%ESC%[1m
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto brave1
-if "%op%"=="2" goto brave2
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto brave1
+if "%op%" equ "2" goto brave2
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -9157,9 +9157,9 @@ echo   Latest version
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto vi1
-if "%op%"=="2" goto vi2
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto vi1
+if "%op%" equ "2" goto vi2
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -9256,11 +9256,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -9334,9 +9334,9 @@ echo  %red%Latest version
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto dx1
-if "%op%"=="2" goto dxoffline
-if "%op%"=="0" goto op_menu
+if "%op%" equ "1" goto dx1
+if "%op%" equ "2" goto dxoffline
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -9357,11 +9357,11 @@ goto begin
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -9443,11 +9443,11 @@ goto usersrequest
 :usr004
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mirror.downloadvn.com/videolan/vlc/3.0.11/win32/vlc-3.0.11-win32.exe" -t 5 -O "vlc-3.0.11-win32.exe"
 vlc-3.0.11-win32.exe
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mirror.downloadvn.com/videolan/vlc/3.0.11/win64/vlc-3.0.11-win64.exe" -t 5 -O "vlc-3.0.11-win64.exe"
 vlc-3.0.11-win64.exe
 )
@@ -9473,11 +9473,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -9544,11 +9544,11 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -9653,11 +9653,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -9747,11 +9747,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -9871,11 +9871,11 @@ goto ErrorMD5msstore
 :downloadasc
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -9998,10 +9998,10 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yuUb_0NRuVaVFLGEPSYqSX5Pu7laV4a_" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1WcePVqtkImMCfh42PJ5E6syodTnQzbzq" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yuUb_0NRuVaVFLGEPSYqSX5Pu7laV4a_" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 )
@@ -10024,8 +10024,8 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto MD5CHECKX86Mail
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto MD5CHECKX64Mail
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto MD5CHECKX86Mail
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto MD5CHECKX64Mail
 :MD5CHECKX86Mail
 %nhcolor% 08 " MD5 HASH CHECK"
 %nhcolor% 08 " --------------"
@@ -10185,8 +10185,8 @@ cls
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "ARC=x86" || set "ARC=x64"
 ::set /a UBRDEC=%UBRHEX% >nul
-if "%ARC%"=="x64" goto :mailcx64
-if "%ARC%"=="x86" goto :mailcx86
+if "%ARC%" equ "x64" goto :mailcx64
+if "%ARC%" equ "x86" goto :mailcx86
 :mailcx64
 cls
 echo Microsoft Mail and Calenders x64
@@ -10217,11 +10217,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10252,11 +10252,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10296,8 +10296,8 @@ goto usersrequest
 :usr028
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto netspeedmonx86
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto netspeedmonx64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto netspeedmonx86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto netspeedmonx64
 :netspeedmonx64
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.krutarth.network/windows/netspeedmonitor_2_5_4_0_x64_setup.msi" -t 5 -O "netspeedmonitor_2_5_4_0_x64_setup.msi"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%GHOST_DATA%\netspeedmonitor_2_5_4_0_x64_setup.msi" /t REG_SZ /d "WIN7RTM" /f
@@ -10352,11 +10352,11 @@ del /q /f /s "Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx" >n
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10405,7 +10405,7 @@ cls
 %_7ZA_EXE% x Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsp -o"%GHOST_TEMP%\Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe"
 cd "%GHOST_TEMP%\Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe"
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 echo Microsoft 3D Paint x86
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.0_2.1810.18004.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -10414,7 +10414,7 @@ cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x86__8wekyb3d8bbwe.Appx
 cls
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 echo Microsoft 3D Paint x64
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.0_2.1810.18004.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -10452,11 +10452,11 @@ cls
 :ScreenSketchdl
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10480,7 +10480,7 @@ cls
 %_7ZA_EXE% x Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsss -o"%GHOST_TEMP%\Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe"
 cd "%GHOST_TEMP%\Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe"
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 echo Microsoft Snip and Sketch x86
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -10489,7 +10489,7 @@ cls
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.4_2.42007.9001.0_x86__8wekyb3d8bbwe.Appx
 cls
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 echo Microsoft Snip and Sketch x64
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.29231.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -10521,8 +10521,8 @@ echo %white%  To use the Snipping Tool keyboard: Press Windows logo key + Shift 
 timeout /t 1 >nul
 %nhcolor% 08 "  ----------
 set /p firstindex=" Type option:%green%"
-if "%firstindex%"=="1" goto snipsnips02
-if "%firstindex%"=="2" goto snipsnips03
+if "%firstindex%" equ "1" goto snipsnips02
+if "%firstindex%" equ "2" goto snipsnips03
 cls
 color 07
 echo You pick wrong the numbers, please try again.
@@ -10559,11 +10559,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10584,7 +10584,7 @@ cls
 %_7ZA_EXE% x Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsmr -o"%GHOST_TEMP%\Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe"
 cd "%GHOST_TEMP%\Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe"
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 echo Microsoft MixedReality Portal x86
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -10593,7 +10593,7 @@ cls
 Powershell Add-AppxPackage -Path Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe.AppxBundle
 cls
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 echo Microsoft MixedReality Portal x64
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -10613,11 +10613,11 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10662,11 +10662,11 @@ del /q /f /s "IOBit.Driver.Booster.v9.3.0.209.Repack.bin" >nul
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10746,11 +10746,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10793,11 +10793,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10853,8 +10853,8 @@ cls
 %nhcolor% 07 "  %red%Computer Protection, Driver Update, CPU / GPU / Phones Ranking, Mobile phone evaluation and other functions. 
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
-if "%op%"=="1" goto LuDaShi1
-if "%op%"=="01" goto usersrequest
+if "%op%" equ "1" goto LuDaShi1
+if "%op%" equ "01" goto usersrequest
 cls
 color 0b
 echo You pick the wrong number!!! please try again...
@@ -10864,11 +10864,11 @@ cls
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -10896,8 +10896,8 @@ cls
 %nhcolor% 07 "  %green%[0] | No                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 set /p op=Type option:
-if "%op%"=="1" goto LuDaShi1yes
-if "%op%"=="0" goto ludaexplorer
+if "%op%" equ "1" goto LuDaShi1yes
+if "%op%" equ "0" goto ludaexplorer
 cls
 color 0b
 echo You pick the wrong number!!! please try again...
@@ -10922,13 +10922,13 @@ goto usersrequest
 :usr072
 cd "%GHOST_DATA%"
 :startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://updates.tdesktop.com/tx64/tsetup-x64.2.7.1.exe" -o"tsetup-x64.2.7.1.exe"
 tsetup-x64.2.7.1.exe
 goto usersrequest
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://updates.tdesktop.com/tsetup/tsetup.2.7.1.exe" -o"tsetup.2.7.1.exe"
 tsetup.2.7.1.exe
@@ -10980,11 +10980,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11035,8 +11035,8 @@ cls
 %_7ZA_EXE% x Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pcalcu -o"%GHOST_TEMP%\Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe"
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "ARC=x86" || set "ARC=x64"
-if "%ARC%"=="x64" goto :calcx64
-if "%ARC%"=="x86" goto :calcx86
+if "%ARC%" equ "x64" goto :calcx64
+if "%ARC%" equ "x86" goto :calcx86
 cls
 :calcx64
 cls
@@ -11144,8 +11144,8 @@ cls
 %_7ZA_EXE% x Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -psticky -o"%GHOST_TEMP%\Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe"
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "ARC=x86" || set "ARC=x64"
-if "%ARC%"=="x64" goto :stickyx64
-if "%ARC%"=="x86" goto :stickyx86
+if "%ARC%" equ "x64" goto :stickyx64
+if "%ARC%" equ "x86" goto :stickyx86
 cls
 :stickyx64
 cls
@@ -11199,8 +11199,8 @@ echo wscript.quit MsgBox ("Microsoft Sticky Notes complete installed! Sign out o
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto tickyrestart >nul
-if "%value%"=="7" goto begin >nul
+if "%value%" equ "6" goto tickyrestart >nul
+if "%value%" equ "7" goto begin >nul
 :tickyrestart
 shutdown -l
 goto begin
@@ -11242,8 +11242,8 @@ echo wscript.quit MsgBox ("Microsoft Sticky Notes complete installed! Sign out o
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto tickyrestart >nul
-if "%value%"=="7" goto begin >nul
+if "%value%" equ "6" goto tickyrestart >nul
+if "%value%" equ "7" goto begin >nul
 timeout /t 1 >nul
 goto usersrequest
 :usr0368:
@@ -11257,14 +11257,14 @@ goto usersrequest
 
 :iconspacks
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto iconspack1st
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo Nope Your Windows 32bit is not supported for this. && timeout /t 5 >nul && goto ghst 
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto iconspack1st
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is not supported for this. && timeout /t 5 >nul && goto ghst 
 cls
 :iconspack1st
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="1909" goto :iconsmenu
-if "%var%"=="2004" goto :iconsmenu
-if "%var%"=="2009" goto :iconsmenu
+if "%var%" equ "1909" goto :iconsmenu
+if "%var%" equ "2004" goto :iconsmenu
+if "%var%" equ "2009" goto :iconsmenu
 cls
 echo %green%Nope...not for this version. Available Only For Version 1909/2004/2009/21H1 or Higher && timeout /t 4 >nul && goto ghst
 :iconsmenu
@@ -11282,12 +11282,12 @@ cls
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 timeout /t 2 >nul
 set /p op=%cyan%Type option:
-if "%op%"=="1" goto icons001
-if "%op%"=="2" goto icons002
-if "%op%"=="3" goto icons003
-if "%op%"=="4" goto icons004
-if "%op%"=="5" goto icons005
-if "%op%"=="0" goto ghst
+if "%op%" equ "1" goto icons001
+if "%op%" equ "2" goto icons002
+if "%op%" equ "3" goto icons003
+if "%op%" equ "4" goto icons004
+if "%op%" equ "5" goto icons005
+if "%op%" equ "0" goto ghst
 cls
 color 0b
 echo This function not available yet
@@ -11296,18 +11296,18 @@ cls
 goto ghst
 :icons001
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" goto icons001windows11
+if "%var%" equ "22000" goto icons001windows11
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" goto icons001windows1122H2
-if "%var%"=="22631" goto icons001windows1122H2
+if "%var%" equ "22621" goto icons001windows1122H2
+if "%var%" equ "22631" goto icons001windows1122H2
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11466,11 +11466,11 @@ goto ghst
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11535,11 +11535,11 @@ goto ghst
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11612,11 +11612,11 @@ goto ghst
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11683,11 +11683,11 @@ goto ghst
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11760,13 +11760,13 @@ goto ghst
 :usr036
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://coderbag.com/assets/downloads/cpm/currentversion/QuickCpuSetup32.zip" -t 15 -O "QuickCpuSetup32.zip"
 explorer /select,"QuickCpuSetup32.zip"
 cls
 goto usersrequest
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://coderbag.com/assets/downloads/cpm/currentversion/QuickCpuSetup64.zip" -t 15 -O "QuickCpuSetup64.zip"
 explorer /select,"QuickCpuSetup64.zip"
 cls
@@ -11774,11 +11774,11 @@ goto usersrequest
 )
 :usr037
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11830,11 +11830,11 @@ echo %white%====================================================================
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11915,11 +11915,11 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11951,11 +11951,11 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -11988,11 +11988,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -12043,7 +12043,7 @@ cls
 goto usersrequest
 :YTENABLE
 del /q /f /s "Ghost_YoutubeDL.1" >nul
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 echo Not available for x86 version.
 timeout /t 4 >nul
@@ -12075,9 +12075,9 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option: %white%
-if "%op%"=="1" goto YTYES
-if "%op%"=="2" goto begin
-if "%op%"=="3" goto YTWEBSITE2
+if "%op%" equ "1" goto YTYES
+if "%op%" equ "2" goto begin
+if "%op%" equ "3" goto YTWEBSITE2
 cls
 color 0b
 echo You pick the wrong number mate.
@@ -12086,10 +12086,10 @@ cls
 goto youwhotemate
 :YTYES
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
@@ -12189,8 +12189,8 @@ goto YoutubeCONS
 :usr047
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto mshubx64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto mshubx86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto mshubx64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto mshubx86
 :mshubx64
 COLOR 09
 cd "%GHOST_DATA%"
@@ -12211,11 +12211,11 @@ goto :download
 timeout /t 3 >nul
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -12299,11 +12299,11 @@ goto :download
 timeout /t 3 >nul
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -12360,9 +12360,9 @@ cls
 %nhcolor% 07 "  [0] - Back to menu
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 set /p op=Type option:
-if "%op%"=="0" goto usersrequest
-if "%op%"=="1" goto mscameracheck
-if "%op%"=="2" goto mscameraremove
+if "%op%" equ "0" goto usersrequest
+if "%op%" equ "1" goto mscameracheck
+if "%op%" equ "2" goto mscameraremove
 cls
 color 0b
 echo You pick the wrong number!!! please try again...
@@ -12384,8 +12384,8 @@ timeout /t 3 >nul
 goto begin
 :mscameracheck
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto mscamerax64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto mscamerax86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto mscamerax64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto mscamerax86
 :mscamerax64
 cls
 cd "%GHOST_DATA%"
@@ -12406,11 +12406,11 @@ cls
 :download
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -12516,11 +12516,11 @@ cls
 :download
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -12592,8 +12592,8 @@ goto :msnoteinstallx64
 ) else (
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto msnotex64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto msnotex86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto msnotex64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto msnotex86
 :msnotex64
 cls
 cd "%GHOST_DATA%"
@@ -12610,11 +12610,11 @@ del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bb
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -12697,11 +12697,11 @@ del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bb
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -12770,8 +12770,8 @@ goto begin
 :usr051
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto Videoderx64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto Videoderx86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto Videoderx64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto Videoderx86
 :Videoderx64
 cls
 COLOR 09
@@ -12868,22 +12868,22 @@ goto usersrequest
 setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="17763" goto checkversion1809
-if "%var%"=="18363" goto checkversion1909
-if "%var%"=="19041" goto checkversion2004
-if "%var%"=="19042" goto checkversion2009
-if "%var%"=="19043" goto checkversion21H1
-if "%var%"=="19044" goto checkversion21H2
-if "%var%"=="19045" goto checkversion22H2
-if "%var%"=="22000" goto checkversionwin1121H2
-if "%var%"=="22621" goto checkversionwin1122H2
-if "%var%"=="22631" goto checkversionwin1123H2
+if "%var%" equ "17763" goto checkversion1809
+if "%var%" equ "18363" goto checkversion1909
+if "%var%" equ "19041" goto checkversion2004
+if "%var%" equ "19042" goto checkversion2009
+if "%var%" equ "19043" goto checkversion21H1
+if "%var%" equ "19044" goto checkversion21H2
+if "%var%" equ "19045" goto checkversion22H2
+if "%var%" equ "22000" goto checkversionwin1121H2
+if "%var%" equ "22621" goto checkversionwin1122H2
+if "%var%" equ "22631" goto checkversionwin1123H2
 
 :checkversion1809
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :for1809
@@ -12894,7 +12894,7 @@ goto :noupdate
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :for1909
@@ -12905,7 +12905,7 @@ goto :noupdate
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :for2004
@@ -12916,7 +12916,7 @@ goto :noupdate
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :for2009
@@ -12927,7 +12927,7 @@ goto :noupdate
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :for21H1
@@ -12938,7 +12938,7 @@ goto :noupdate
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :for21H2
@@ -12949,7 +12949,7 @@ goto :noupdate
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :for22H2
@@ -12960,7 +12960,7 @@ goto :noupdate
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :forwin1121H2
@@ -12971,7 +12971,7 @@ goto :noupdate
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :forwin1122H2
@@ -12982,7 +12982,7 @@ goto :noupdate
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
         goto :forwin1123H2
@@ -12994,71 +12994,71 @@ echo wscript.quit MsgBox ("Found new update %build%, you want to download standa
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto webwin1123H2 >nul
-if "%value%"=="7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto webwin1123H2 >nul
+if "%value%" equ "7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
 :forwin1122H2
 echo wscript.quit MsgBox ("Found new update %build%, you want to download standalone now? ", 4, "Check for Updates") > yesno.vbs
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto webwin1122H2 >nul
-if "%value%"=="7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto webwin1122H2 >nul
+if "%value%" equ "7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
 :forwin1121H2
 echo wscript.quit MsgBox ("Found new update %build%, you want to download standalone now? ", 4, "Check for Updates") > yesno.vbs
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto webwin1121H1 >nul
-if "%value%"=="7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto webwin1121H1 >nul
+if "%value%" equ "7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
 :for22H2
 echo wscript.quit MsgBox ("Found new update %build%, you want to download standalone now? ", 4, "Check for Updates") > yesno.vbs
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto web21H1 >nul
-if "%value%"=="7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto web21H1 >nul
+if "%value%" equ "7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
 :for21H2
 echo wscript.quit MsgBox ("Found new update %build%, you want to download standalone now? ", 4, "Check for Updates") > yesno.vbs
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto web21H1 >nul
-if "%value%"=="7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto web21H1 >nul
+if "%value%" equ "7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
 :for21H1
 echo wscript.quit MsgBox ("Found new update %build%, you want to download standalone now? ", 4, "Check for Updates") > yesno.vbs
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto web21H1 >nul
-if "%value%"=="7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto web21H1 >nul
+if "%value%" equ "7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
 :for2009
 echo wscript.quit MsgBox ("Found new update %build%, you want to download standalone now? ", 4, "Check for Updates") > yesno.vbs
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto web2009 >nul
-if "%value%"=="7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto web2009 >nul
+if "%value%" equ "7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
 :for2004
 echo wscript.quit MsgBox ("Found new update %build%, you want to download standalone now? ", 4, "Check for Updates") > yesno.vbs
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto web2004 >nul
-if "%value%"=="7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto web2004 >nul
+if "%value%" equ "7" timeout /t 5 >nul && goto :GHOSTSPECTRE >nul
 :for1909
 echo wscript.quit MsgBox ("Found new update %build%, you want to download standalone now? ", 4, "Check for Updates") > yesno.vbs
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto web1909 >nul
-if "%value%"=="7" goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto web1909 >nul
+if "%value%" equ "7" goto :GHOSTSPECTRE >nul
 :for1809
 echo wscript.quit MsgBox ("Found new update %build%, you want to download standalone now? ", 4, "Check for Updates") > yesno.vbs
 wscript //nologo yesno.vbs
 set value=%errorlevel%
 del yesno.vbs
-if "%value%"=="6" goto web1809 >nul
-if "%value%"=="7" goto :GHOSTSPECTRE >nul
+if "%value%" equ "6" goto web1809 >nul
+if "%value%" equ "7" goto :GHOSTSPECTRE >nul
 :webwin1123H2
 start https://youtu.be/kHZUYiyaH8k
 goto begin
@@ -13070,7 +13070,7 @@ start https://bit.ly/3oPzo8a
 goto begin
 :web21H1
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionId') do set "var=%%b"
-if "%var%"=="Core" ( 
+if "%var%" equ "Core" ( 
 start https://www.youtube.com/watch?v=cSUr-BZMgWA
 goto begin
 )
@@ -13078,7 +13078,7 @@ start https://bit.ly/3x0SlWQ
 goto begin
 :web2009
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionId') do set "var=%%b"
-if "%var%"=="Core" ( 
+if "%var%" equ "Core" ( 
 start https://www.youtube.com/watch?v=cSUr-BZMgWA
 goto begin
 )
@@ -13126,9 +13126,9 @@ if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%yellow%ENABLE"
 reg Query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\.NETFramework" | find /i "0x0" > NUL && set "FNETFX4=DISABLE" || set "FNETFX4=ENABLE"
 set /a UBRDEC=%FNETFX4%
 ::reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "OSARC=%bg_magenta%%lblack%32bit" || set "OSARC=%bg_magenta%%lblack% 64bit "
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "OSARC=%bg_magenta%%lblack% 64bit "
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (set "OSARC=%bg_magenta%%lblack% 64bit "
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (set "OSARC=%bg_magenta%%lblack% 32bit "
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (set "OSARC=%bg_magenta%%lblack% 32bit "
 )
 set /a UBRDEC=%UBRHEX%
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "GARC=x86" || set "GARC=x64"
@@ -13189,10 +13189,10 @@ cls
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="1703" goto storex641703
-if "%var%"=="1607" goto storex641703
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto updatewindowstorex64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto updatewindowstorex86
+if "%var%" equ "1703" goto storex641703
+if "%var%" equ "1607" goto storex641703
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto updatewindowstorex64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto updatewindowstorex86
 :updatewindowstorex64
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -13341,8 +13341,8 @@ goto begin
 :telegramx64x86
 cd "%GHOST_DATA%"
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto telex64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto telex86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto telex64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto telex86
 cls
 :telex86
 for /f %%N in ('hashsum /a md5 TelegramMessengerLLP.TelegramDesktop') do set "MD5=%%N"
@@ -13544,17 +13544,17 @@ RD /S /Q "%GHOST_TEMP%" >nul 2>nul
 cls
 DEL /S /Q "Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b"
-if "%var%"=="22631" goto storex64forwindows1123H2
-if "%var%"=="22621" goto storex64forwindows11
-if "%var%"=="22000" goto storex64forwindows11
+if "%var%" equ "22631" goto storex64forwindows1123H2
+if "%var%" equ "22621" goto storex64forwindows11
+if "%var%" equ "22000" goto storex64forwindows11
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="1703" goto storex641703
-if "%var%"=="1607" goto storex641703
+if "%var%" equ "1703" goto storex641703
+if "%var%" equ "1607" goto storex641703
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName') do set "var=%%b"
-if "%var%"=="Windows 10 Enterprise 2015 LTSB" goto storex641703
+if "%var%" equ "Windows 10 Enterprise 2015 LTSB" goto storex641703
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto startdownloadwindowstore64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto startdownloadwindowstore86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto startdownloadwindowstore64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto startdownloadwindowstore86
 :startdownloadwindowstore64
 ::STOREX64
 cd "%GHOST_DATA%"
@@ -13753,8 +13753,8 @@ goto WTHx643
 :installwindowsstore2022
 cd "%GHOST_DATA%"
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto x64install
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto x86install
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto x64install
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto x86install
 :x64install
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -13855,11 +13855,11 @@ timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -13957,11 +13957,11 @@ timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -14011,7 +14011,7 @@ cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe
 timeout /t 5 >nul
 cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 echo %cyan%Installing please wait...
 echo.
 timeout /t 5 >nul
@@ -14041,11 +14041,11 @@ timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -14143,11 +14143,11 @@ timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -14400,8 +14400,8 @@ exit
 :storetest
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto storex64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto storex86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto storex64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto storex86
 :storex64
 COLOR 09
 %nhcolor% 07 " %red%Microsoft Store x64 "
@@ -14821,7 +14821,7 @@ cls
 timeout /t 5 >nul
 goto begin
 :YoutubeCONS
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 echo Coming soon for x86 version.
 timeout /t 4 >nul
@@ -14953,14 +14953,14 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-::if "%op%"=="1" goto YTV
-::if "%op%"=="2" goto YTM
-if "%op%"=="1" goto YTDLP1
-if "%op%"=="3" goto YTDLP2
-if "%op%"=="4" goto YTWEBSITE
-if "%op%"=="5" goto YTWEBSITE1
-if "%op%"=="2" goto YTDLPvideoWO
-if "%op%"=="0" goto op_menu
+::if "%op%" equ "1" goto YTV
+::if "%op%" equ "2" goto YTM
+if "%op%" equ "1" goto YTDLP1
+if "%op%" equ "3" goto YTDLP2
+if "%op%" equ "4" goto YTWEBSITE
+if "%op%" equ "5" goto YTWEBSITE1
+if "%op%" equ "2" goto YTDLPvideoWO
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -15065,7 +15065,7 @@ cls
 cd "%GHOST_DATA%\Youtube-DLP"
 cls
 Set /P youtube=%white%Enter Youtube URL %yellow%[Video] %white%: %green%
-if "%youtube%"=="0" goto startyoutubexx
+if "%youtube%" equ "0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d """%youtube%""" /f>nul
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeURL 2^> nul') do set "YoutubeURL=%%B"
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeVideo 2^> nul') do set "YoutubeVideo=%%B"
@@ -15075,11 +15075,11 @@ timeout /t 1 >nul
 yt-dlp -F %YoutubeURL%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 Set /P videocode=%white%Enter Video %green%ID %white%Code: %cyan%
-if "%videocode%"=="0" goto startyoutubexx
+if "%videocode%" equ "0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeVideo" /t REG_SZ /d "%videocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 Set /P audiocode=%white%Enter Audio %green%ID %white%Code: %cyan%
-if "%audiocode%"=="0" goto startyoutubexx
+if "%audiocode%" equ "0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /t REG_SZ /d "%audiocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 cd "%GHOST_DATA%\Youtube-DLP"
@@ -15119,7 +15119,7 @@ del /s /q Ghost_Youtube-DLP3 >nul
 cd "%GHOST_DATA%\Youtube-DLP"
 cls
 Set /P youtube=%white%Enter Youtube URL %yellow%[Video] %white%: %green%
-if "%youtube%"=="0" goto startyoutubexx
+if "%youtube%" equ "0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d """%youtube%""" /f>nul
 ::REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /t REG_SZ /d "999" /f>nul
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeURL 2^> nul') do set "YoutubeURL=%%B"
@@ -15129,7 +15129,7 @@ timeout /t 1 >nul
 yt-dlp -F %YoutubeURL%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 Set /P videocode=%white%Enter Video %green%ID %white%Code: %cyan%
-if "%videocode%"=="0" goto startyoutubexx
+if "%videocode%" equ "0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeVideo" /t REG_SZ /d "%videocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 cd "%GHOST_DATA%\Youtube-DLP"
@@ -15180,7 +15180,7 @@ cls
 cd "%GHOST_DATA%\Youtube-DLP"
 cls
 Set /P youtube=%white%Enter Youtube URL %yellow%[Audio] %white%: %green%
-if "%youtube%"=="0" goto startyoutubexx
+if "%youtube%" equ "0" goto startyoutubexx
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d """%youtube%""" /f>nul
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeURL 2^> nul') do set "YoutubeURL=%%B"
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeVideo 2^> nul') do set "YoutubeVideo=%%B"
@@ -15262,7 +15262,7 @@ cd "%GHOST_DATA%\Youtube"
 cls
 ::youtube-dl -U
 Set /P youtube=%white%Enter Youtube URL %yellow%[Audio] %white%: %green%
-if "%youtube%"=="0" goto YoutubeCONS
+if "%youtube%" equ "0" goto YoutubeCONS
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d "%youtube%" /f>nul
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeURL 2^> nul') do set "YoutubeURL=%%B"
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeVideo 2^> nul') do set "YoutubeVideo=%%B"
@@ -15345,7 +15345,7 @@ cd "%GHOST_DATA%\Youtube"
 cls
 ::youtube-dl -U
 Set /P youtube=%white%Enter Youtube URL %yellow%[Video] %white%: %green%
-if "%youtube%"=="0" goto YoutubeCONS
+if "%youtube%" equ "0" goto YoutubeCONS
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /t REG_SZ /d "%youtube%" /f>nul
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeURL 2^> nul') do set "YoutubeURL=%%B"
 FOR /F "tokens=2*" %%A in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v YoutubeVideo 2^> nul') do set "YoutubeVideo=%%B"
@@ -15355,11 +15355,11 @@ timeout /t 1 >nul
 youtube-dl -F %YoutubeURL%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 Set /P videocode=%white%Enter Video Format Code: %cyan%
-if "%videocode%"=="0" goto YoutubeCONS
+if "%videocode%" equ "0" goto YoutubeCONS
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeVideo" /t REG_SZ /d "%videocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 Set /P audiocode=%white%Enter Audio Format Code: %cyan%
-if "%audiocode%"=="0" goto YoutubeCONS
+if "%audiocode%" equ "0" goto YoutubeCONS
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /t REG_SZ /d "%audiocode%" /f>nul
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 cd "%GHOST_DATA%\Youtube"
@@ -15432,25 +15432,25 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X
-if "%op%"=="2" goto ADB02X
-if "%op%"=="3" goto ADB03X
-if "%op%"=="4" goto ADB04X
-if "%op%"=="5" goto ADB05X
-if "%op%"=="6" cls && goto ADB06X
-if "%op%"=="7" goto ADB07X
-if "%op%"=="8" goto ADB08X
-if "%op%"=="9" goto ADB09X
-if "%op%"=="10" goto ADB010X
-if "%op%"=="11" goto ADB011X
-if "%op%"=="12" goto ADB012X
-if "%op%"=="13" goto ADB013X
-if "%op%"=="14" goto ADB014X
-if "%op%"=="15" goto ADB015X
-if "%op%"=="16" goto VMP01X
-if "%op%"=="17" goto VMP02X
-if "%op%"=="18" start https://www.youtube.com/watch?v=6m0nxQcTnzk && goto 03ANDROIDX
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X
+if "%op%" equ "2" goto ADB02X
+if "%op%" equ "3" goto ADB03X
+if "%op%" equ "4" goto ADB04X
+if "%op%" equ "5" goto ADB05X
+if "%op%" equ "6" cls && goto ADB06X
+if "%op%" equ "7" goto ADB07X
+if "%op%" equ "8" goto ADB08X
+if "%op%" equ "9" goto ADB09X
+if "%op%" equ "10" goto ADB010X
+if "%op%" equ "11" goto ADB011X
+if "%op%" equ "12" goto ADB012X
+if "%op%" equ "13" goto ADB013X
+if "%op%" equ "14" goto ADB014X
+if "%op%" equ "15" goto ADB015X
+if "%op%" equ "16" goto VMP01X
+if "%op%" equ "17" goto VMP02X
+if "%op%" equ "18" start https://www.youtube.com/watch?v=6m0nxQcTnzk && goto 03ANDROIDX
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -16240,11 +16240,11 @@ echo.
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 06 ""
 set /p op=%yellow%Type option:%white%
-if "%op%"=="0" goto begin
-if "%op%"=="1" goto addnewu1
-if "%op%"=="2" goto addnewu2
-if "%op%"=="3" goto addnewusers
-if "%op%"=="4" goto nvrexpires
+if "%op%" equ "0" goto begin
+if "%op%" equ "1" goto addnewu1
+if "%op%" equ "2" goto addnewu2
+if "%op%" equ "3" goto addnewusers
+if "%op%" equ "4" goto nvrexpires
 cls
 color 0b
 echo You pick the wrong number!!! please try again...
@@ -16278,14 +16278,14 @@ setlocal EnableDelayedExpansion
 %nhcolor% 07 "-------------------"
 set /p usr= %yellow% Username:%white%
 if [!usr!]==[] goto username
-if "%usr%"=="0" goto addnewusers123
+if "%usr%" equ "0" goto addnewusers123
 :passyesorno
 %nhcolor% 07 "-------------------"
 set /p passyesno= %yellow% Set Password for This user %cyan%"!usr!"%yellow%? %white%Type %green%Yes %white%or %green%No %white%: %white%
-if "%passyesno%"=="yes" goto :password
-if "%passyesno%"=="no" goto :admin1
-if "%passyesno%"=="Yes" goto :password
-if "%passyesno%"=="No" goto :admin1
+if "%passyesno%" equ "yes" goto :password
+if "%passyesno%" equ "no" goto :admin1
+if "%passyesno%" equ "Yes" goto :password
+if "%passyesno%" equ "No" goto :admin1
 goto passyesorno
 :password
 echo.
@@ -16298,10 +16298,10 @@ echo.
 %nhcolor% 07 "-------------------"
 setlocal EnableDelayedExpansion
 set /p adm=%yellow% Set This user %cyan%"!usr!" %yellow%to Administrators Group? %white%Type %green%Yes %white%or %green%No %white%: %white%
-if "%adm%"=="yes" goto adminyes
-if "%adm%"=="no" goto adminno
-if "%adm%"=="Yes" goto adminyes
-if "%adm%"=="No" goto adminno
+if "%adm%" equ "yes" goto adminyes
+if "%adm%" equ "no" goto adminno
+if "%adm%" equ "Yes" goto adminyes
+if "%adm%" equ "No" goto adminno
 %nhcolor% 07 " Please type %green%Yes %white%or %green%No (Yes = Administrators Group | No = Standard Users)"
 goto admin1
 echo.
@@ -16363,9 +16363,9 @@ echo  %white%Type %green%no %white%to disable Administrators accounts
 %nhcolor% 03 "  [0]  | %green%Back to menu
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=%green%Type Yes or No : %white%
-if "%op%"=="no" goto disableadmin
-if "%op%"=="yes" goto enableadmin
-if "%op%"=="0" goto addnewusers123
+if "%op%" equ "no" goto disableadmin
+if "%op%" equ "yes" goto enableadmin
+if "%op%" equ "0" goto addnewusers123
 echo Please type %green%yes %white%or %green%no
 timeout /t 1 >nul
 goto addnewu2
@@ -16396,27 +16396,27 @@ cls
 setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="17763" goto checkversion1809
-if "%var%"=="18363" goto checkversion1909
-if "%var%"=="19041" goto checkversion2004
-if "%var%"=="19042" goto checkversion2009
-if "%var%"=="19043" goto checkversion21H1
-if "%var%"=="19044" goto checkversion21H2
-if "%var%"=="19045" goto checkversion22H2
-if "%var%"=="22000" goto checkversionwin1121H2
-if "%var%"=="22621" goto checkversionwin1122H2
-if "%var%"=="22631" goto checkversionwin1123H2
+if "%var%" equ "17763" goto checkversion1809
+if "%var%" equ "18363" goto checkversion1909
+if "%var%" equ "19041" goto checkversion2004
+if "%var%" equ "19042" goto checkversion2009
+if "%var%" equ "19043" goto checkversion21H1
+if "%var%" equ "19044" goto checkversion21H2
+if "%var%" equ "19045" goto checkversion22H2
+if "%var%" equ "22000" goto checkversionwin1121H2
+if "%var%" equ "22621" goto checkversionwin1122H2
+if "%var%" equ "22631" goto checkversionwin1123H2
 :checkversion1809
 setlocal
 for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v Check_Update') do set "var=%%b"
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :for1809
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :for1809
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 goto :firstrun
@@ -16426,11 +16426,11 @@ for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v 
 set "build=%build%"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :for1909
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :for1909
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 goto :firstrun
@@ -16440,11 +16440,11 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v Check_Update') do set "var=%%b"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :for2004
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :for2004
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 goto :firstrun
@@ -16454,11 +16454,11 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v Check_Update') do set "var=%%b"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :for2009
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :for2009
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 goto :firstrun
@@ -16468,11 +16468,11 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v Check_Update') do set "var=%%b"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :for21H1
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :for21H1
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 goto :firstrun
@@ -16482,11 +16482,11 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v Check_Update') do set "var=%%b"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :for21H2
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :for21H2
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 :checkversion22H2
@@ -16495,11 +16495,11 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v Check_Update') do set "var=%%b"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :for22H2
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :for22H2
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 goto :firstrun
@@ -16509,11 +16509,11 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v Check_Update') do set "var=%%b"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :forwin1121H2
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :forwin1121H2
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 goto :firstrun
@@ -16523,11 +16523,11 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v Check_Update') do set "var=%%b"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :forwin1122H2
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :forwin1122H2
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 goto :firstrun
@@ -16537,11 +16537,11 @@ setlocal
 for /f "tokens=2*" %%a in ('reg query HKLM\SOFTWARE\WOW6432Node\GhostSpectre /v Check_Update') do set "var=%%b"
 for /f "tokens=1,2 delims=. " %%a in ('echo !build!') do set "builda=%%a" && set "buildb=%%b"
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
-if /i "%buildOS:~4%"=="." set "buildOS=0%buildOS%"
+if /i "%buildOS:~4%" equ "." set "buildOS=0%buildOS%"
 if /i !builda!==!buildOSa! (
     if /i !buildb! GTR !buildOSb! (
-	if "%var%"=="0x0" goto :forwin1123H2
-	if "%var%"=="0x1" goto :firstrun
+	if "%var%" equ "0x0" goto :forwin1123H2
+	if "%var%" equ "0x1" goto :firstrun
     )
 )
 goto :firstrun
@@ -16562,10 +16562,10 @@ echo   %white%Standalone Windows Update
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="2" goto stdup1
-if "%op%"=="3" goto stdup2
-if "%op%"=="1" goto latestupdate
-if "%op%"=="0" goto op_menu
+if "%op%" equ "2" goto stdup1
+if "%op%" equ "3" goto stdup2
+if "%op%" equ "1" goto latestupdate
+if "%op%" equ "0" goto op_menu
 cls
 color 0b
 echo This function not available yet
@@ -16611,11 +16611,11 @@ cls
 %nhcolor% 08 " [0] | Back to menu                                                                                                     "
 echo.
 set /p firstindex=" %red%Type option : "
-if "%firstindex%"=="1" goto sound1F
-if "%firstindex%"=="2" goto sound2F
-if "%firstindex%"=="3" goto sound3F
-if "%firstindex%"=="4" goto sound
-if "%firstindex%"=="0" goto begin
+if "%firstindex%" equ "1" goto sound1F
+if "%firstindex%" equ "2" goto sound2F
+if "%firstindex%" equ "3" goto sound3F
+if "%firstindex%" equ "4" goto sound
+if "%firstindex%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -16715,12 +16715,12 @@ cls
 %nhcolor% 41 "                  %white%NOTE: Only for Windows 10.                                                                            "
 %nhcolor% 41 "             %white%(If you want to keep using This modded please Disable > Windows Update > In Services)                      "
 set /p firstindex=" %red%Type option : "
-if "%firstindex%"=="1" goto sound1
-if "%firstindex%"=="2" goto sound2
-if "%firstindex%"=="3" goto sound3
-if "%firstindex%"=="4" goto sound4
-if "%firstindex%"=="5" goto sound5
-if "%firstindex%"=="0" goto soundFX
+if "%firstindex%" equ "1" goto sound1
+if "%firstindex%" equ "2" goto sound2
+if "%firstindex%" equ "3" goto sound3
+if "%firstindex%" equ "4" goto sound4
+if "%firstindex%" equ "5" goto sound5
+if "%firstindex%" equ "0" goto soundFX
 cls
 color 0b
 echo This function not available yet
@@ -16730,8 +16730,8 @@ goto sound
 :sound4
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto sb720
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto sb720error
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto sb720
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto sb720error
 cls
 :sb720error
 %nhcolor% 08 " Sorry your x86 device is not supported"
@@ -16742,11 +16742,11 @@ COLOR 09
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -16788,14 +16788,14 @@ timeout /t 3 >nul
 goto sound
 :sound1
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="1703" cls && echo sorry only for Windows 10 Version 1709 or Higher && timeout /t 3 >nul 2>nul && cls && goto sound
+if "%var%" equ "1703" cls && echo sorry only for Windows 10 Version 1709 or Higher && timeout /t 3 >nul 2>nul && cls && goto sound
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto DolbyAtmos3N1
-if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto DolbyAtmos3N1
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :DolbyAtmos3N1
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto DolbyAtmos3N
-if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto DolbyAtmos3N
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :DolbyAtmos3N
 cls
 mkdir "Dolby Atmos 3" >nul 2>nul && timeout /t 5 >nul && cls
@@ -16803,11 +16803,11 @@ COLOR 09
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -16871,14 +16871,14 @@ cls
 goto sound
 :sound2
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="1703" cls && echo sorry only for Windows 10 Version 1709 or Higher && timeout /t 3 >nul 2>nul && cls && goto sound
+if "%var%" equ "1703" cls && echo sorry only for Windows 10 Version 1709 or Higher && timeout /t 3 >nul 2>nul && cls && goto sound
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto DolbyAtmos3G1
-if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto DolbyAtmos3G1
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :DolbyAtmos3G1
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto DolbyAtmos3G
-if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto DolbyAtmos3G
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :DolbyAtmos3G
 cls
 mkdir "Dolby Atmos 3 for Gaming" >nul 2>nul && timeout /t 5 >nul && cls
@@ -16886,11 +16886,11 @@ COLOR 09
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -16955,10 +16955,10 @@ cls
 goto sound
 :sound3
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="1703" cls && echo sorry only for Windows 10 Version 1709 or Higher && timeout /t 3 >nul 2>nul && cls && goto sound
+if "%var%" equ "1703" cls && echo sorry only for Windows 10 Version 1709 or Higher && timeout /t 3 >nul 2>nul && cls && goto sound
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto Nahimic33
-if "%PROCESSOR_ARCHITECTURE%"=="x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto Nahimic33
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" cls && echo sorry only for Windows 10 64bit && timeout /t 3 >nul 2>nul && cls && goto begin
 :Nahimic33
 cls
 mkdir "Nahimic 3" >nul 2>nul && timeout /t 5 >nul && cls
@@ -16966,11 +16966,11 @@ COLOR 09
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -17051,10 +17051,10 @@ cls
 %nhcolor% 03 " [0]  | %green%Back to menu                                         
 %nhcolor% 07 " ======================================================================================================================"
 set /p firstindex=" %red%Type option : "
-if "%firstindex%"=="1" goto upS01
-if "%firstindex%"=="2" goto upS02
-if "%firstindex%"=="3" goto upS03
-if "%firstindex%"=="0" goto begin
+if "%firstindex%" equ "1" goto upS01
+if "%firstindex%" equ "2" goto upS02
+if "%firstindex%" equ "3" goto upS03
+if "%firstindex%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -17078,10 +17078,10 @@ echo.
 %nhcolor% 03 " %red%NOTE: If cant launch please install Visual C++ Redistributables AIO.
 %nhcolor% 07 " ======================================================================================================================"
 set /p firstindex=" %red%Type option : "
-if "%firstindex%"=="1" goto upscale01
-if "%firstindex%"=="2" goto upscale02
-if "%firstindex%"=="3" start https://www.youtube.com/watch?v=cWSi6W3Jt3g && goto upS01
-if "%firstindex%"=="0" goto gamingmode
+if "%firstindex%" equ "1" goto upscale01
+if "%firstindex%" equ "2" goto upscale02
+if "%firstindex%" equ "3" start https://www.youtube.com/watch?v=cWSi6W3Jt3g && goto upS01
+if "%firstindex%" equ "0" goto gamingmode
 cls
 color 0b
 echo This function not available yet
@@ -17131,10 +17131,10 @@ cls
 %nhcolor% 03 " [0]  | %green%Back to menu                                         
 %nhcolor% 07 " ======================================================================================================================"
 set /p firstindex=" %red%Type option : "
-if "%firstindex%"=="1" goto osd001
-if "%firstindex%"=="2" goto osd002
-if "%firstindex%"=="3" goto osd003
-if "%firstindex%"=="0" goto gamingmode
+if "%firstindex%" equ "1" goto osd001
+if "%firstindex%" equ "2" goto osd002
+if "%firstindex%" equ "3" goto osd003
+if "%firstindex%" equ "0" goto gamingmode
 cls
 color 0b
 echo This function not available yet
@@ -17203,17 +17203,17 @@ cls
 %nhcolor% 03 " [0]  | %green%Back to menu                                         
 %nhcolor% 07 " ======================================================================================================================"
 set /p firstindex=" %red%Type option : "
-if "%firstindex%"=="1" goto gamingmodehpet
-if "%firstindex%"=="6" goto gamingmode67
-if "%firstindex%"=="7" goto gamingmode7
-if "%firstindex%"=="8" goto gamingmode8
-if "%firstindex%"=="9" goto gamingmode9
-if "%firstindex%"=="10" goto gamingmode10
-if "%firstindex%"=="11" goto gamingmode11
-if "%firstindex%"=="12" goto gamingmode12
-if "%firstindex%"=="13" goto gamingmode13
-if "%firstindex%"=="14" goto gamingmode14
-if "%firstindex%"=="0" goto gamingmode
+if "%firstindex%" equ "1" goto gamingmodehpet
+if "%firstindex%" equ "6" goto gamingmode67
+if "%firstindex%" equ "7" goto gamingmode7
+if "%firstindex%" equ "8" goto gamingmode8
+if "%firstindex%" equ "9" goto gamingmode9
+if "%firstindex%" equ "10" goto gamingmode10
+if "%firstindex%" equ "11" goto gamingmode11
+if "%firstindex%" equ "12" goto gamingmode12
+if "%firstindex%" equ "13" goto gamingmode13
+if "%firstindex%" equ "14" goto gamingmode14
+if "%firstindex%" equ "0" goto gamingmode
 cls
 color 0b
 echo This function not available yet
@@ -17238,13 +17238,13 @@ cd "%GHOST_DATA%"                                                               
 %nhcolor% 03 " [0]  | %green%Back to menu             
 %nhcolor% 07 " ======================================================================================================================"
 set /p firstindex=" %red%Type option : "
-if "%firstindex%"=="1" goto gamingmode1
-if "%firstindex%"=="2" goto gamingmode2
-if "%firstindex%"=="3" goto gamingmode3
-if "%firstindex%"=="4" goto gamingmode4
-if "%firstindex%"=="5" goto gamingmode5
-if "%firstindex%"=="6" goto gamingmode6
-if "%firstindex%"=="0" goto upS03
+if "%firstindex%" equ "1" goto gamingmode1
+if "%firstindex%" equ "2" goto gamingmode2
+if "%firstindex%" equ "3" goto gamingmode3
+if "%firstindex%" equ "4" goto gamingmode4
+if "%firstindex%" equ "5" goto gamingmode5
+if "%firstindex%" equ "6" goto gamingmode6
+if "%firstindex%" equ "0" goto upS03
 cls
 color 0b
 echo This function not available yet
@@ -17420,14 +17420,14 @@ setlocal EnableDelayedExpansion
 setlocal
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 	
-	if "%var%"=="2009" goto :tymezonefor2004
-	if "%var%"=="2004" goto :tymezonefor2004
-	if "%var%"=="1909" goto :tymezonefor1909
-	if "%var%"=="1903" goto :tymezonefor1909
-	if "%var%"=="1809" goto :tymezonefor1809
-	if "%var%"=="1709" goto :tymezonefor1809
-	if "%var%"=="1703" goto :tymezonefor1809
-	if "%var%"=="1607" goto :tymezonefor1809
+	if "%var%" equ "2009" goto :tymezonefor2004
+	if "%var%" equ "2004" goto :tymezonefor2004
+	if "%var%" equ "1909" goto :tymezonefor1909
+	if "%var%" equ "1903" goto :tymezonefor1909
+	if "%var%" equ "1809" goto :tymezonefor1809
+	if "%var%" equ "1709" goto :tymezonefor1809
+	if "%var%" equ "1703" goto :tymezonefor1809
+	if "%var%" equ "1607" goto :tymezonefor1809
     )
 )
 goto begin
@@ -17448,14 +17448,14 @@ setlocal EnableDelayedExpansion
 setlocal
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 
-	if "%var%"=="2009" goto :cortanabeta1
-	if "%var%"=="2004" goto :cortanabeta1
-	if "%var%"=="1909" goto :cortanabeta3
-	if "%var%"=="1809" goto :cortanabeta3
-	if "%var%"=="1803" goto :cortanabeta3
-	if "%var%"=="1709" goto :cortanabeta3
-	if "%var%"=="1703" goto :cortanabeta3
-	if "%var%"=="1607" goto :cortanabeta3
+	if "%var%" equ "2009" goto :cortanabeta1
+	if "%var%" equ "2004" goto :cortanabeta1
+	if "%var%" equ "1909" goto :cortanabeta3
+	if "%var%" equ "1809" goto :cortanabeta3
+	if "%var%" equ "1803" goto :cortanabeta3
+	if "%var%" equ "1709" goto :cortanabeta3
+	if "%var%" equ "1703" goto :cortanabeta3
+	if "%var%" equ "1607" goto :cortanabeta3
     )
 )
 goto begin
@@ -17572,7 +17572,7 @@ powershell expand-archive -path 7z1900-extra.zip -force
 cls
 %_7ZA_EXE% x "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001" -aoa -pcortana
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
 cls
 powershell add-appxpackage -path Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx
@@ -17586,7 +17586,7 @@ cls
 powershell add-appxpackage -path Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.Msixbundle
 cls
 )
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
 cls
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
@@ -17638,14 +17638,14 @@ setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 
-	if "%var%"=="2009" goto :cortanabetauninstall
-	if "%var%"=="2004" goto :cortanabetauninstall
-	if "%var%"=="1909" goto :cortanabeta3
-	if "%var%"=="1809" goto :cortanabeta3
-	if "%var%"=="1803" goto :cortanabeta3
-	if "%var%"=="1709" goto :cortanabeta3
-	if "%var%"=="1703" goto :cortanabeta3
-	if "%var%"=="1607" goto :cortanabeta3
+	if "%var%" equ "2009" goto :cortanabetauninstall
+	if "%var%" equ "2004" goto :cortanabetauninstall
+	if "%var%" equ "1909" goto :cortanabeta3
+	if "%var%" equ "1809" goto :cortanabeta3
+	if "%var%" equ "1803" goto :cortanabeta3
+	if "%var%" equ "1709" goto :cortanabeta3
+	if "%var%" equ "1703" goto :cortanabeta3
+	if "%var%" equ "1607" goto :cortanabeta3
     )
 )
 goto begin
@@ -17674,22 +17674,22 @@ cls
 setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-	if "%var%"=="2009" goto :cortanabetatestinstall
-	if "%var%"=="2004" goto :cortanabetatestinstall
-	if "%var%"=="1909" goto :cortanabeta3
-	if "%var%"=="1809" goto :cortanabeta3
-	if "%var%"=="1803" goto :cortanabeta3
-	if "%var%"=="1709" goto :cortanabeta3
-	if "%var%"=="1703" goto :cortanabeta3
-	if "%var%"=="1607" goto :cortanabeta3
+	if "%var%" equ "2009" goto :cortanabetatestinstall
+	if "%var%" equ "2004" goto :cortanabetatestinstall
+	if "%var%" equ "1909" goto :cortanabeta3
+	if "%var%" equ "1809" goto :cortanabeta3
+	if "%var%" equ "1803" goto :cortanabeta3
+	if "%var%" equ "1709" goto :cortanabeta3
+	if "%var%" equ "1703" goto :cortanabeta3
+	if "%var%" equ "1607" goto :cortanabeta3
     )
 )
 cls
 :cortanabetatestinstall
 cd "%GHOST_DATA%"
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto cortanabeta549981C3F5F10x64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto cortanabeta549981C3F5F10x86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto cortanabeta549981C3F5F10x64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto cortanabeta549981C3F5F10x86
 cls
 :cortanabeta549981C3F5F10x64
 cls
@@ -17698,11 +17698,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -17778,11 +17778,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -17856,9 +17856,9 @@ cls
 %nhcolor% 07 "  [0] - Back to menu
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 set /p op=Type option:
-if "%op%"=="0" goto op10
-if "%op%"=="1" goto wingetnetmsphoto
-if "%op%"=="2" goto removemsphoto
+if "%op%" equ "0" goto op10
+if "%op%" equ "1" goto wingetnetmsphoto
+if "%op%" equ "2" goto removemsphoto
 cls
 color 0b
 echo You pick the wrong number!!! please try again...
@@ -17866,8 +17866,8 @@ timeout /t 2 >nul
 goto msphoto
 :installmsphoto
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto msphotosx64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto msphotosx86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto msphotosx64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto msphotosx86
 cls
 
 :wingetnetmsphoto
@@ -17880,11 +17880,11 @@ goto op10
 :msphotosx64
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -17988,11 +17988,11 @@ goto :download
 cls
 :download
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -18091,11 +18091,11 @@ del /q /f /s "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.App
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -18130,8 +18130,8 @@ goto :ErrorMD5msstore
 )
 :zunecheckxinstall
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto zunemusic2020x64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto zunemusic2020x86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto zunemusic2020x64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto zunemusic2020x86
 :zunemusic2020x64
 cls
 %nhcolor% 07 " %red%Microsoft Zune Music x64"
@@ -18204,11 +18204,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -18230,8 +18230,8 @@ color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/37Bvo0w" -o"Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe.Appx"
 timeout /t 8 >nul
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto store1607x64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto store1607x64
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto store1607x64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto store1607x64
 :store1607x64
 cls
 %nhcolor% 07 " %red%Microsoft Store x64"
@@ -18289,31 +18289,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme01
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck01
+if "%var%" equ "22000" goto win11themecheck01
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck01
-if "%var%"=="22631" goto win11themecheck01
+if "%var%" equ "22621" goto win11themecheck01
+if "%var%" equ "22631" goto win11themecheck01
 :win11patchF01
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\GHOSTDARK.theme" echo %green%Set Themes GHOST SPECTRE - Full Dark (beta test) && timeout /t 4 >nul && themeswitcher.exe GHOSTDARK.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -18345,7 +18345,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
@@ -18357,7 +18357,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
@@ -18369,7 +18369,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
@@ -18430,31 +18430,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme02
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck02
+if "%var%" equ "22000" goto win11themecheck02
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck02
-if "%var%"=="22631" goto win11themecheck02
+if "%var%" equ "22621" goto win11themecheck02
+if "%var%" equ "22631" goto win11themecheck02
 :win11patchF02
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\GHOSTNOIDX1.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -18486,7 +18486,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
@@ -18497,7 +18497,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
@@ -18508,7 +18508,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
@@ -18565,31 +18565,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme03
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck03
+if "%var%" equ "22000" goto win11themecheck03
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck03
-if "%var%"=="22631" goto win11themecheck03
+if "%var%" equ "22621" goto win11themecheck03
+if "%var%" equ "22631" goto win11themecheck03
 :win11patchF03
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\GHOSTNOIDX2.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -18621,7 +18621,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX2.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
@@ -18632,7 +18632,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX2.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
@@ -18643,7 +18643,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX2.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
@@ -18690,31 +18690,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme04
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck04
+if "%var%" equ "22000" goto win11themecheck04
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck04
-if "%var%"=="22631" goto win11themecheck04
+if "%var%" equ "22621" goto win11themecheck04
+if "%var%" equ "22631" goto win11themecheck04
 :win11patchF04
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\BIBDarkMode1.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 1 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -18746,7 +18746,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -18757,7 +18757,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -18768,7 +18768,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -18815,31 +18815,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme05
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck05
+if "%var%" equ "22000" goto win11themecheck05
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck05
-if "%var%"=="22631" goto win11themecheck05
+if "%var%" equ "22621" goto win11themecheck05
+if "%var%" equ "22631" goto win11themecheck05
 :win11patchF05
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\BIBDarkMode2.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 2 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -18871,7 +18871,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -18882,7 +18882,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -18893,7 +18893,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -18940,31 +18940,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme06
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck06
+if "%var%" equ "22000" goto win11themecheck06
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck06
-if "%var%"=="22631" goto win11themecheck06
+if "%var%" equ "22621" goto win11themecheck06
+if "%var%" equ "22631" goto win11themecheck06
 :win11patchF06
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\BIBDarkMode3.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 3 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode3.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -18996,7 +18996,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -19007,7 +19007,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -19018,7 +19018,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -19065,31 +19065,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme07
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck07
+if "%var%" equ "22000" goto win11themecheck07
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck07
-if "%var%"=="22631" goto win11themecheck07
+if "%var%" equ "22621" goto win11themecheck07
+if "%var%" equ "22631" goto win11themecheck07
 :win11patchF07
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\BIBDarkModeMac.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark ModeMac && timeout /t 4 >nul && themeswitcher.exe BIBDarkModeMac.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -19121,7 +19121,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -19132,7 +19132,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -19143,7 +19143,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -19190,31 +19190,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme08
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck08
+if "%var%" equ "22000" goto win11themecheck08
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck08
-if "%var%"=="22631" goto win11themecheck08
+if "%var%" equ "22621" goto win11themecheck08
+if "%var%" equ "22631" goto win11themecheck08
 :win11patchF08
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\Fluent.Dark.Mode.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode && timeout /t 4 >nul && themeswitcher.exe Fluent.Dark.Mode.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -19246,7 +19246,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
@@ -19257,7 +19257,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
@@ -19268,7 +19268,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
@@ -19315,31 +19315,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme09
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck09
+if "%var%" equ "22000" goto win11themecheck09
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck09
-if "%var%"=="22631" goto win11themecheck09
+if "%var%" equ "22621" goto win11themecheck09
+if "%var%" equ "22631" goto win11themecheck09
 :win11patchF09
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\Fluent.Day.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Day && timeout /t 4 >nul && themeswitcher.exe Fluent.Day.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -19371,7 +19371,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - Fluent Day
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
@@ -19382,7 +19382,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - Fluent Day
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
@@ -19393,7 +19393,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - Fluent Day
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
@@ -19440,31 +19440,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme10
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck10
+if "%var%" equ "22000" goto win11themecheck10
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck10
-if "%var%"=="22631" goto win11themecheck10
+if "%var%" equ "22621" goto win11themecheck10
+if "%var%" equ "22631" goto win11themecheck10
 :win11patchF10
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\Penumbra10ws.theme" echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws && timeout /t 4 >nul && themeswitcher.exe Penumbra10ws.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -19496,7 +19496,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Penumbra10.7z -aoa -ppen -o%windir%\Resources\Themes >nul 2>nul
@@ -19507,7 +19507,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Penumbra10.7z -aoa -ppen -o%windir%\Resources\Themes >nul 2>nul
@@ -19518,7 +19518,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Penumbra10.7z -aoa -ppen -o%windir%\Resources\Themes >nul 2>nul
@@ -19564,31 +19564,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme11
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck11
+if "%var%" equ "22000" goto win11themecheck11
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck11
-if "%var%"=="22631" goto win11themecheck11
+if "%var%" equ "22621" goto win11themecheck11
+if "%var%" equ "22631" goto win11themecheck11
 :win11patchF11
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\HNY.Dark.theme" echo %green%Set Themes GHOST SPECTRE - HNY Dark && timeout /t 4 >nul && themeswitcher.exe HNY.Dark.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -19620,7 +19620,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - HNY Dark
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
@@ -19631,7 +19631,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - HNY Dark
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
@@ -19642,7 +19642,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - HNY Dark
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
@@ -19688,31 +19688,31 @@ if %ERRORLEVEL% EQU 1 goto win11patchN
 :theme12
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22000" goto win11themecheck12
+if "%var%" equ "22000" goto win11themecheck12
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2^> nul') do set "var=%%b"
-if "%var%"=="22621" goto win11themecheck12
-if "%var%"=="22631" goto win11themecheck12
+if "%var%" equ "22621" goto win11themecheck12
+if "%var%" equ "22631" goto win11themecheck12
 :win11patchF12
 cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if exist "%windir%\Resources\Themes\HNY.Light.theme" echo %green%Set Themes GHOST SPECTRE - HNY Light && timeout /t 4 >nul && themeswitcher.exe HNY.Light.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
-if "%var%"=="2009" goto :themedownloads
-if "%var%"=="2004" goto :themedownloads
-if "%var%"=="1909" goto :themedownloads
+if "%var%" equ "2009" goto :themedownloads
+if "%var%" equ "2004" goto :themedownloads
+if "%var%" equ "1909" goto :themedownloads
 echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nul && goto ghst
 cls
 :themedownloads
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -19744,7 +19744,7 @@ goto WTHx642
 )
 :SETTHEME
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22000" (
+if "%var%" equ "22000" (
 echo %green%Set Themes GHOST SPECTRE - HNY Light
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
@@ -19755,7 +19755,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 echo %green%Set Themes GHOST SPECTRE - HNY Light
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
@@ -19766,7 +19766,7 @@ start explorer
 goto ghst
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 echo %green%Set Themes GHOST SPECTRE - HNY Light
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
@@ -19894,11 +19894,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -19943,8 +19943,8 @@ goto usersrequest
 :usr054
 cls
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto nvx64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" echo Nope Your Windows 32bit is not supported for this Drivers. && timeout /t 5 >nul && goto usersrequest 
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto nvx64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is not supported for this Drivers. && timeout /t 5 >nul && goto usersrequest 
 :nvx64
 REG QUERY "HKEY_CURRENT_USER\SOFTWARE\NVIDIA Corporation" >nul 2>&1
 if %ERRORLEVEL% EQU 0 goto nvdown
@@ -19962,11 +19962,11 @@ timeout /t 5 >nul
 cls
 cd "%GHOST_DATA%"
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -20034,7 +20034,7 @@ cd "%GHOST_DATA%" >nul 2>nul
 %_7ZA_EXE% x Microsoft.DesktopAppInstaller.Appx -aoa -o"%GHOST_TEMP%"
 cls
 timeout /t 5 >nul
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 cd "%GHOST_TEMP%\" >nul 2>nul
 for /f tokens^=* %%i in ('where .:*UI.Xaml*.*x64*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 for /f tokens^=* %%i in ('where .:*VCLibs*.*x64*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
@@ -20043,7 +20043,7 @@ Microsoft.DesktopAppInstaller_2023.606.2047.0_neutral_~_8wekyb3d8bbwe.Msixbundle
 timeout /t 1 >nul
 taskkill /f /im "AppInstaller.exe" /t >nul 2>nul
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cd "%GHOST_TEMP%\" >nul 2>nul
 for /f tokens^=* %%i in ('where .:*UI.Xaml*.*x86*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
 for /f tokens^=* %%i in ('where .:*VCLibs*.*x86*')do Powershell Add-AppxPackage -Path %%~nxi | echo File: %%~nxi
@@ -20080,16 +20080,16 @@ echo  %white%Your Current Version WSA: %cyan%%WSAV%
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ANDROID0001
-if "%op%"=="2" goto 03ANDROIDX
-if "%op%"=="3" goto ANDROIDX2008
-if "%op%"=="4" goto ANDROIDX2211
-if "%op%"=="5" goto AndroidWSA2301
-if "%op%"=="6" goto AndroidWSA2304
-if "%op%"=="7" goto AndroidWSA2305
-if "%op%"=="8" goto AndroidWSA2309
-if "%op%"=="99" goto WSAToolBack
-if "%op%"=="0" goto opwin11
+if "%op%" equ "1" goto ANDROID0001
+if "%op%" equ "2" goto 03ANDROIDX
+if "%op%" equ "3" goto ANDROIDX2008
+if "%op%" equ "4" goto ANDROIDX2211
+if "%op%" equ "5" goto AndroidWSA2301
+if "%op%" equ "6" goto AndroidWSA2304
+if "%op%" equ "7" goto AndroidWSA2305
+if "%op%" equ "8" goto AndroidWSA2309
+if "%op%" equ "99" goto WSAToolBack
+if "%op%" equ "0" goto opwin11
 cls
 color 0b
 echo This function not available yet
@@ -20154,11 +20154,11 @@ echo   Virtual Machine Platform : %VMP%
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto 01ANDROID
-if "%op%"=="2" goto 02ANDROID
-if "%op%"=="3" goto 03ANDROID
-if "%op%"=="4" start https://youtu.be/BZDcrX4TS1Q && goto ANDROID
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto 01ANDROID
+if "%op%" equ "2" goto 02ANDROID
+if "%op%" equ "3" goto 03ANDROID
+if "%op%" equ "4" start https://youtu.be/BZDcrX4TS1Q && goto ANDROID
+if "%op%" equ "0" goto ANDROID
 cls
 echo Wrong number mate.
 timeout /t 1 >nul
@@ -20179,9 +20179,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto VMP01
-if "%op%"=="2" goto VMP02
-if "%op%"=="0" goto ANDROID0001
+if "%op%" equ "1" goto VMP01
+if "%op%" equ "2" goto VMP02
+if "%op%" equ "0" goto ANDROID0001
 cls
 color 0b
 echo This function not available yet
@@ -20219,9 +20219,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto SUB001
-if "%op%"=="2" goto SUB002
-if "%op%"=="0" goto ANDROID0001
+if "%op%" equ "1" goto SUB001
+if "%op%" equ "2" goto SUB002
+if "%op%" equ "0" goto ANDROID0001
 cls
 color 0b
 echo This function not available yet
@@ -20536,20 +20536,20 @@ echo   %white%Android Debug Bridge (ADB) : %yellow%%ADBCX%
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01
-if "%op%"=="2" goto ADB02
-if "%op%"=="3" goto ADB03
-if "%op%"=="4" cls && goto ADB04
-if "%op%"=="5" goto ADB05
-if "%op%"=="6" goto ADB06
-if "%op%"=="7" goto ADB07
-if "%op%"=="8" goto ADB08
-if "%op%"=="9" goto ADB09
-if "%op%"=="10" goto ADB10
-if "%op%"=="11" goto ADB11
-if "%op%"=="12" goto ADB12
-if "%op%"=="13" goto ADB13
-if "%op%"=="0" goto ANDROID0001
+if "%op%" equ "1" goto ADB01
+if "%op%" equ "2" goto ADB02
+if "%op%" equ "3" goto ADB03
+if "%op%" equ "4" cls && goto ADB04
+if "%op%" equ "5" goto ADB05
+if "%op%" equ "6" goto ADB06
+if "%op%" equ "7" goto ADB07
+if "%op%" equ "8" goto ADB08
+if "%op%" equ "9" goto ADB09
+if "%op%" equ "10" goto ADB10
+if "%op%" equ "11" goto ADB11
+if "%op%" equ "12" goto ADB12
+if "%op%" equ "13" goto ADB13
+if "%op%" equ "0" goto ANDROID0001
 cls
 color 0b
 echo This function not available yet
@@ -20828,11 +20828,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -20856,8 +20856,8 @@ cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://files.catbox.moe/k2fs0u.Appx" -o"4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx"
 timeout /t 8 >nul
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto netflix64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto netflix86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto netflix64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto netflix86
 cls
 :netflix64
 %nhcolor% 07 " %red%Netflix x64"
@@ -20928,11 +20928,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21020,11 +21020,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21053,11 +21053,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21086,11 +21086,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21119,11 +21119,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21160,11 +21160,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21202,11 +21202,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21252,11 +21252,11 @@ goto vmdownload
 :vmdownload
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21303,11 +21303,11 @@ goto vmdownload
 :vmdownload
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21345,11 +21345,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21389,9 +21389,9 @@ cls
 %nhcolor% 08 " ---------------------
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto usr038
-if "%op%"=="2" goto nvcpp
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto usr038
+if "%op%" equ "2" goto nvcpp
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -21414,11 +21414,11 @@ del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" >nul
 echo %white%=======================================================================
 )
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21499,11 +21499,11 @@ cls
 timeout /t 3 >nul
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -21525,8 +21525,8 @@ color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://uc555b6847affe04605636c0688d.dl.dropboxusercontent.com/s/tcz9r6yutrxcwer/Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe?dl=1" -o"Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx"
 timeout /t 5 >nul
 cls
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto hevcinstallx64
-if "%PROCESSOR_ARCHITECTURE%"=="x86" goto hevcinstallx86
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto hevcinstallx64
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto hevcinstallx86
 cls
 :hevcinstallx64
 cls
@@ -21599,19 +21599,19 @@ echo  %yellow%Version : Latest
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto gameclient1
-if "%op%"=="2" goto gameclient2
-if "%op%"=="3" goto gameclient3
-if "%op%"=="4" goto gameclient4
-if "%op%"=="5" goto gameclient5
-if "%op%"=="6" goto gameclient6
-if "%op%"=="7" goto gameclient7
-if "%op%"=="8" goto gameclient8
-if "%op%"=="9" goto gameclient9
-if "%op%"=="10" goto gameclient10xbox
-if "%op%"=="11" goto gameclient11
-if "%op%"=="12" goto gameclient12
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto gameclient1
+if "%op%" equ "2" goto gameclient2
+if "%op%" equ "3" goto gameclient3
+if "%op%" equ "4" goto gameclient4
+if "%op%" equ "5" goto gameclient5
+if "%op%" equ "6" goto gameclient6
+if "%op%" equ "7" goto gameclient7
+if "%op%" equ "8" goto gameclient8
+if "%op%" equ "9" goto gameclient9
+if "%op%" equ "10" goto gameclient10xbox
+if "%op%" equ "11" goto gameclient11
+if "%op%" equ "12" goto gameclient12
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo Wrong numbers please try again...
@@ -21842,23 +21842,23 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2008
-if "%op%"=="2" goto ADB02X2008
-if "%op%"=="3" goto ADB03X2008
-if "%op%"=="4" goto ADB04X2008
-if "%op%"=="5" goto ADB05X2008
-if "%op%"=="6" cls && goto ADB06X2008
-if "%op%"=="7" goto ADB07X2008
-if "%op%"=="8" goto ADB08X2008
-if "%op%"=="9" goto ADB09X2008
-if "%op%"=="10" goto ADB010X2008
-if "%op%"=="11" goto ADB011X2008
-if "%op%"=="12" goto ADB012X2008
-if "%op%"=="13" goto ADB013X2008
-if "%op%"=="16" goto VMP01X2008
-if "%op%"=="17" goto VMP02X2008
-if "%op%"=="18" start https://www.youtube.com/watch?v=6m0nxQcTnzk && goto ANDROIDX2008
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2008
+if "%op%" equ "2" goto ADB02X2008
+if "%op%" equ "3" goto ADB03X2008
+if "%op%" equ "4" goto ADB04X2008
+if "%op%" equ "5" goto ADB05X2008
+if "%op%" equ "6" cls && goto ADB06X2008
+if "%op%" equ "7" goto ADB07X2008
+if "%op%" equ "8" goto ADB08X2008
+if "%op%" equ "9" goto ADB09X2008
+if "%op%" equ "10" goto ADB010X2008
+if "%op%" equ "11" goto ADB011X2008
+if "%op%" equ "12" goto ADB012X2008
+if "%op%" equ "13" goto ADB013X2008
+if "%op%" equ "16" goto VMP01X2008
+if "%op%" equ "17" goto VMP02X2008
+if "%op%" equ "18" start https://www.youtube.com/watch?v=6m0nxQcTnzk && goto ANDROIDX2008
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -22346,23 +22346,23 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2211
-if "%op%"=="2" goto ADB02X2211
-if "%op%"=="3" goto ADB03X2211
-if "%op%"=="4" goto ADB04X2211
-if "%op%"=="5" goto ADB05X2211
-if "%op%"=="6" cls && goto ADB06X2211
-if "%op%"=="7" goto ADB07X2211
-if "%op%"=="8" goto ADB08X2211
-if "%op%"=="9" goto ADB09X2211
-if "%op%"=="10" goto ADB010X2211
-if "%op%"=="11" goto ADB011X2211
-if "%op%"=="12" goto ADB012X2211
-if "%op%"=="13" goto ADB013X2211
-if "%op%"=="16" goto VMP01X2211
-if "%op%"=="17" goto VMP02X2211
-if "%op%"=="18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2211
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2211
+if "%op%" equ "2" goto ADB02X2211
+if "%op%" equ "3" goto ADB03X2211
+if "%op%" equ "4" goto ADB04X2211
+if "%op%" equ "5" goto ADB05X2211
+if "%op%" equ "6" cls && goto ADB06X2211
+if "%op%" equ "7" goto ADB07X2211
+if "%op%" equ "8" goto ADB08X2211
+if "%op%" equ "9" goto ADB09X2211
+if "%op%" equ "10" goto ADB010X2211
+if "%op%" equ "11" goto ADB011X2211
+if "%op%" equ "12" goto ADB012X2211
+if "%op%" equ "13" goto ADB013X2211
+if "%op%" equ "16" goto VMP01X2211
+if "%op%" equ "17" goto VMP02X2211
+if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2211
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -22828,9 +22828,9 @@ goto ANDROIDX2301ROOT
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ANDROIDX2301NON
-if "%op%"=="2" goto ANDROIDX2301ROOT
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ANDROIDX2301NON
+if "%op%" equ "2" goto ANDROIDX2301ROOT
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -22893,23 +22893,23 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2301N
-if "%op%"=="2" goto ADB02X2301N
-if "%op%"=="3" goto ADB03X2301N
-if "%op%"=="4" goto ADB04X2301N
-if "%op%"=="5" goto ADB05X2301N
-if "%op%"=="6" cls && goto ADB06X2301N
-if "%op%"=="7" goto ADB07X2301N
-if "%op%"=="8" goto ADB08X2301N
-if "%op%"=="9" goto ADB09X2301N
-if "%op%"=="10" goto ADB010X2301N
-if "%op%"=="11" goto ADB011X2301N
-if "%op%"=="12" goto ADB012X2301N
-if "%op%"=="13" goto ADB013X2301N
-if "%op%"=="16" goto VMP01X2301N
-if "%op%"=="17" goto VMP02X2301N
-if "%op%"=="18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2301NON
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2301N
+if "%op%" equ "2" goto ADB02X2301N
+if "%op%" equ "3" goto ADB03X2301N
+if "%op%" equ "4" goto ADB04X2301N
+if "%op%" equ "5" goto ADB05X2301N
+if "%op%" equ "6" cls && goto ADB06X2301N
+if "%op%" equ "7" goto ADB07X2301N
+if "%op%" equ "8" goto ADB08X2301N
+if "%op%" equ "9" goto ADB09X2301N
+if "%op%" equ "10" goto ADB010X2301N
+if "%op%" equ "11" goto ADB011X2301N
+if "%op%" equ "12" goto ADB012X2301N
+if "%op%" equ "13" goto ADB013X2301N
+if "%op%" equ "16" goto VMP01X2301N
+if "%op%" equ "17" goto VMP02X2301N
+if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2301NON
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -23414,23 +23414,23 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2301R
-if "%op%"=="2" goto ADB02X2301R
-if "%op%"=="3" goto ADB03X2301R
-if "%op%"=="4" goto ADB04X2301R
-if "%op%"=="5" goto ADB05X2301R
-if "%op%"=="6" cls && goto ADB06X2301R
-if "%op%"=="7" goto ADB07X2301R
-if "%op%"=="8" goto ADB08X2301R
-if "%op%"=="9" goto ADB09X2301R
-if "%op%"=="10" goto ADB010X2301R
-if "%op%"=="11" goto ADB011X2301R
-if "%op%"=="12" goto ADB012X2301R
-if "%op%"=="13" goto ADB013X2301R
-if "%op%"=="16" goto VMP01X2301R
-if "%op%"=="17" goto VMP02X2301R
-if "%op%"=="18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2301ROOT
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2301R
+if "%op%" equ "2" goto ADB02X2301R
+if "%op%" equ "3" goto ADB03X2301R
+if "%op%" equ "4" goto ADB04X2301R
+if "%op%" equ "5" goto ADB05X2301R
+if "%op%" equ "6" cls && goto ADB06X2301R
+if "%op%" equ "7" goto ADB07X2301R
+if "%op%" equ "8" goto ADB08X2301R
+if "%op%" equ "9" goto ADB09X2301R
+if "%op%" equ "10" goto ADB010X2301R
+if "%op%" equ "11" goto ADB011X2301R
+if "%op%" equ "12" goto ADB012X2301R
+if "%op%" equ "13" goto ADB013X2301R
+if "%op%" equ "16" goto VMP01X2301R
+if "%op%" equ "17" goto VMP02X2301R
+if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2301ROOT
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -23900,10 +23900,10 @@ goto ANDROIDX2304ROOT
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ANDROIDX2304NON
-if "%op%"=="2" goto ANDROIDX2304ROOT
-if "%op%"=="3" goto startAndroidWSA2304YT
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ANDROIDX2304NON
+if "%op%" equ "2" goto ANDROIDX2304ROOT
+if "%op%" equ "3" goto startAndroidWSA2304YT
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -23972,23 +23972,23 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2304N
-if "%op%"=="2" goto ADB02X2304N
-if "%op%"=="3" goto ADB03X2304N
-if "%op%"=="4" goto ADB04X2304N
-if "%op%"=="5" goto ADB05X2304N
-if "%op%"=="6" cls && goto ADB06X2304N
-if "%op%"=="7" goto ADB07X2304N
-if "%op%"=="8" goto ADB08X2304N
-if "%op%"=="9" goto ADB09X2304N
-if "%op%"=="10" goto ADB010X2304N
-if "%op%"=="11" goto ADB011X2304N
-if "%op%"=="12" goto ADB012X2304N
-if "%op%"=="13" goto ADB013X2304N
-if "%op%"=="16" goto VMP01X2304N
-if "%op%"=="17" goto VMP02X2304N
-if "%op%"=="18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2304NON
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2304N
+if "%op%" equ "2" goto ADB02X2304N
+if "%op%" equ "3" goto ADB03X2304N
+if "%op%" equ "4" goto ADB04X2304N
+if "%op%" equ "5" goto ADB05X2304N
+if "%op%" equ "6" cls && goto ADB06X2304N
+if "%op%" equ "7" goto ADB07X2304N
+if "%op%" equ "8" goto ADB08X2304N
+if "%op%" equ "9" goto ADB09X2304N
+if "%op%" equ "10" goto ADB010X2304N
+if "%op%" equ "11" goto ADB011X2304N
+if "%op%" equ "12" goto ADB012X2304N
+if "%op%" equ "13" goto ADB013X2304N
+if "%op%" equ "16" goto VMP01X2304N
+if "%op%" equ "17" goto VMP02X2304N
+if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2304NON
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -24493,23 +24493,23 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2304R
-if "%op%"=="2" goto ADB02X2304R
-if "%op%"=="3" goto ADB03X2304R
-if "%op%"=="4" goto ADB04X2304R
-if "%op%"=="5" goto ADB05X2304R
-if "%op%"=="6" cls && goto ADB06X2304R
-if "%op%"=="7" goto ADB07X2304R
-if "%op%"=="8" goto ADB08X2304R
-if "%op%"=="9" goto ADB09X2304R
-if "%op%"=="10" goto ADB010X2304R
-if "%op%"=="11" goto ADB011X2304R
-if "%op%"=="12" goto ADB012X2304R
-if "%op%"=="13" goto ADB013X2304R
-if "%op%"=="16" goto VMP01X2304R
-if "%op%"=="17" goto VMP02X2304R
-if "%op%"=="18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2304ROOT
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2304R
+if "%op%" equ "2" goto ADB02X2304R
+if "%op%" equ "3" goto ADB03X2304R
+if "%op%" equ "4" goto ADB04X2304R
+if "%op%" equ "5" goto ADB05X2304R
+if "%op%" equ "6" cls && goto ADB06X2304R
+if "%op%" equ "7" goto ADB07X2304R
+if "%op%" equ "8" goto ADB08X2304R
+if "%op%" equ "9" goto ADB09X2304R
+if "%op%" equ "10" goto ADB010X2304R
+if "%op%" equ "11" goto ADB011X2304R
+if "%op%" equ "12" goto ADB012X2304R
+if "%op%" equ "13" goto ADB013X2304R
+if "%op%" equ "16" goto VMP01X2304R
+if "%op%" equ "17" goto VMP02X2304R
+if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2304ROOT
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -24979,10 +24979,10 @@ goto ANDROIDX2305ROOT
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ANDROIDX2305NON
-if "%op%"=="2" goto ANDROIDX2305ROOT
-if "%op%"=="3" goto startAndroidWSA2305YT
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ANDROIDX2305NON
+if "%op%" equ "2" goto ANDROIDX2305ROOT
+if "%op%" equ "3" goto startAndroidWSA2305YT
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -25051,24 +25051,24 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2305N
-if "%op%"=="2" goto ADB02X2305N
-if "%op%"=="3" goto ADB03X2305N
-if "%op%"=="4" goto ADB04X2305N
-::if "%op%"=="5" cmd /c start shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp
-if "%op%"=="5" goto ADB05X2305N
-if "%op%"=="6" cls && goto ADB06X2305N
-if "%op%"=="7" goto ADB07X2305N
-if "%op%"=="8" goto ADB08X2305N
-if "%op%"=="9" goto ADB09X2305N
-if "%op%"=="10" goto ADB010X2305N
-if "%op%"=="11" goto ADB011X2305N
-if "%op%"=="12" goto ADB012X2305N
-if "%op%"=="13" goto ADB013X2305N
-if "%op%"=="16" goto VMP01X2305N
-if "%op%"=="17" goto VMP02X2305N
-if "%op%"=="18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2305NON
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2305N
+if "%op%" equ "2" goto ADB02X2305N
+if "%op%" equ "3" goto ADB03X2305N
+if "%op%" equ "4" goto ADB04X2305N
+::if "%op%" equ "5" cmd /c start shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp
+if "%op%" equ "5" goto ADB05X2305N
+if "%op%" equ "6" cls && goto ADB06X2305N
+if "%op%" equ "7" goto ADB07X2305N
+if "%op%" equ "8" goto ADB08X2305N
+if "%op%" equ "9" goto ADB09X2305N
+if "%op%" equ "10" goto ADB010X2305N
+if "%op%" equ "11" goto ADB011X2305N
+if "%op%" equ "12" goto ADB012X2305N
+if "%op%" equ "13" goto ADB013X2305N
+if "%op%" equ "16" goto VMP01X2305N
+if "%op%" equ "17" goto VMP02X2305N
+if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2305NON
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -25588,23 +25588,23 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2305R
-if "%op%"=="2" goto ADB02X2305R
-if "%op%"=="3" goto ADB03X2305R
-if "%op%"=="4" goto ADB04X2305R
-if "%op%"=="5" goto ADB05X2305R
-if "%op%"=="6" cls && goto ADB06X2305R
-if "%op%"=="7" goto ADB07X2305R
-if "%op%"=="8" goto ADB08X2305R
-if "%op%"=="9" goto ADB09X2305R
-if "%op%"=="10" goto ADB010X2305R
-if "%op%"=="11" goto ADB011X2305R
-if "%op%"=="12" goto ADB012X2305R
-if "%op%"=="13" goto ADB013X2305R
-if "%op%"=="16" goto VMP01X2305R
-if "%op%"=="17" goto VMP02X2305R
-if "%op%"=="18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2305ROOT
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2305R
+if "%op%" equ "2" goto ADB02X2305R
+if "%op%" equ "3" goto ADB03X2305R
+if "%op%" equ "4" goto ADB04X2305R
+if "%op%" equ "5" goto ADB05X2305R
+if "%op%" equ "6" cls && goto ADB06X2305R
+if "%op%" equ "7" goto ADB07X2305R
+if "%op%" equ "8" goto ADB08X2305R
+if "%op%" equ "9" goto ADB09X2305R
+if "%op%" equ "10" goto ADB010X2305R
+if "%op%" equ "11" goto ADB011X2305R
+if "%op%" equ "12" goto ADB012X2305R
+if "%op%" equ "13" goto ADB013X2305R
+if "%op%" equ "16" goto VMP01X2305R
+if "%op%" equ "17" goto VMP02X2305R
+if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2305ROOT
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -26094,10 +26094,10 @@ goto ANDROIDX2309ROOT
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ANDROIDX2309NON
-if "%op%"=="2" goto ANDROIDX2309ROOT
-if "%op%"=="3" goto startAndroidWSA2309YT
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ANDROIDX2309NON
+if "%op%" equ "2" goto ANDROIDX2309ROOT
+if "%op%" equ "3" goto startAndroidWSA2309YT
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -26166,24 +26166,24 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2309N
-if "%op%"=="2" goto ADB02X2309N
-if "%op%"=="3" goto ADB03X2309N
-if "%op%"=="4" goto ADB04X2309N
-::if "%op%"=="5" cmd /c start shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp
-if "%op%"=="5" goto ADB05X2309N
-if "%op%"=="6" cls && goto ADB06X2309N
-if "%op%"=="7" goto ADB07X2309N
-if "%op%"=="8" goto ADB08X2309N
-if "%op%"=="9" goto ADB09X2309N
-if "%op%"=="10" goto ADB010X2309N
-if "%op%"=="11" goto ADB011X2309N
-if "%op%"=="12" goto ADB012X2309N
-if "%op%"=="13" goto ADB013X2309N
-if "%op%"=="16" goto VMP01X2309N
-if "%op%"=="17" goto VMP02X2309N
-if "%op%"=="18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2309NON
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2309N
+if "%op%" equ "2" goto ADB02X2309N
+if "%op%" equ "3" goto ADB03X2309N
+if "%op%" equ "4" goto ADB04X2309N
+::if "%op%" equ "5" cmd /c start shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!SettingsApp
+if "%op%" equ "5" goto ADB05X2309N
+if "%op%" equ "6" cls && goto ADB06X2309N
+if "%op%" equ "7" goto ADB07X2309N
+if "%op%" equ "8" goto ADB08X2309N
+if "%op%" equ "9" goto ADB09X2309N
+if "%op%" equ "10" goto ADB010X2309N
+if "%op%" equ "11" goto ADB011X2309N
+if "%op%" equ "12" goto ADB012X2309N
+if "%op%" equ "13" goto ADB013X2309N
+if "%op%" equ "16" goto VMP01X2309N
+if "%op%" equ "17" goto VMP02X2309N
+if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2309NON
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -26536,23 +26536,23 @@ FOR /F "tokens=2*" %%A in ('dism /online /get-features /format:table ^| find "Vi
 %nhcolor% 0E ""
 timeout /t 0 >nul
 set /p op=Type option:
-if "%op%"=="1" goto ADB01X2309R
-if "%op%"=="2" goto ADB02X2309R
-if "%op%"=="3" goto ADB03X2309R
-if "%op%"=="4" goto ADB04X2309R
-if "%op%"=="5" goto ADB05X2309R
-if "%op%"=="6" cls && goto ADB06X2309R
-if "%op%"=="7" goto ADB07X2309R
-if "%op%"=="8" goto ADB08X2309R
-if "%op%"=="9" goto ADB09X2309R
-if "%op%"=="10" goto ADB010X2309R
-if "%op%"=="11" goto ADB011X2309R
-if "%op%"=="12" goto ADB012X2309R
-if "%op%"=="13" goto ADB013X2309R
-if "%op%"=="16" goto VMP01X2309R
-if "%op%"=="17" goto VMP02X2309R
-if "%op%"=="18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2309ROOT
-if "%op%"=="0" goto ANDROID
+if "%op%" equ "1" goto ADB01X2309R
+if "%op%" equ "2" goto ADB02X2309R
+if "%op%" equ "3" goto ADB03X2309R
+if "%op%" equ "4" goto ADB04X2309R
+if "%op%" equ "5" goto ADB05X2309R
+if "%op%" equ "6" cls && goto ADB06X2309R
+if "%op%" equ "7" goto ADB07X2309R
+if "%op%" equ "8" goto ADB08X2309R
+if "%op%" equ "9" goto ADB09X2309R
+if "%op%" equ "10" goto ADB010X2309R
+if "%op%" equ "11" goto ADB011X2309R
+if "%op%" equ "12" goto ADB012X2309R
+if "%op%" equ "13" goto ADB013X2309R
+if "%op%" equ "16" goto VMP01X2309R
+if "%op%" equ "17" goto VMP02X2309R
+if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2309ROOT
+if "%op%" equ "0" goto ANDROID
 cls
 color 0b
 echo This function not available yet
@@ -26881,9 +26881,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto mstermi11
-if "%op%"=="2" goto mstermi12
-if "%op%"=="0" goto op10
+if "%op%" equ "1" goto mstermi11
+if "%op%" equ "2" goto mstermi12
+if "%op%" equ "0" goto op10
 cls
 color 0b
 echo This function not available yet
@@ -27001,9 +27001,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto rmvoed1
-if "%op%"=="2" goto rmvoed2
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto rmvoed1
+if "%op%" equ "2" goto rmvoed2
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -27405,7 +27405,7 @@ goto begin
 :gameclient10xbox
 cls
 ::for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-::if "%var%"=="22000" goto winxboxappnope
+::if "%var%" equ "22000" goto winxboxappnope
 color 07
 cls
 %nhcolor% 07 " ====================================================================================================================="
@@ -27422,8 +27422,8 @@ cls
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
-if "%op%"=="1" goto gameclient10
-if "%op%"=="0" goto gameclient
+if "%op%" equ "1" goto gameclient10
+if "%op%" equ "0" goto gameclient
 cls
 color 0b
 echo Wrong numbers please try again...
@@ -27435,11 +27435,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27468,11 +27468,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27501,11 +27501,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27533,11 +27533,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27565,11 +27565,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27597,11 +27597,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27633,11 +27633,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27669,11 +27669,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27704,11 +27704,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27739,11 +27739,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27774,11 +27774,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27809,11 +27809,11 @@ cls
 cd "%GHOST_DATA%"
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27863,11 +27863,11 @@ echo %white%====================================================================
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -27930,7 +27930,7 @@ echo %green%Installing Intel Graphics Experience.. please wait.
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
 timeout /t 2 >nul
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 Powershell Add-AppxPackage -Path "Microsoft.NET.Native.Framework.2.2_2.2.29512.0_x64__8wekyb3d8bbwe.appx"
 Powershell Add-AppxPackage -Path "Microsoft.NET.Native.Framework.2.2_2.2.29512.0_x86__8wekyb3d8bbwe.appx"
 Powershell Add-AppxPackage -Path "Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.appx"
@@ -27939,7 +27939,7 @@ Powershell Add-AppxPackage -Path "Microsoft.VCLibs.140.00_14.0.30035.0_x64__8wek
 Powershell Add-AppxPackage -Path "Microsoft.VCLibs.140.00_14.0.30035.0_x86__8wekyb3d8bbwe.appx"
 Powershell Add-AppxPackage -Path "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.eappxbundle"
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 Powershell Add-AppxPackage -Path "Microsoft.NET.Native.Framework.2.2_2.2.29512.0_x86__8wekyb3d8bbwe.appx"
 Powershell Add-AppxPackage -Path "Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.appx"
 Powershell Add-AppxPackage -Path "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.eappxbundle"
@@ -27970,11 +27970,11 @@ echo %white%====================================================================
 )
 cls
 if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -28035,10 +28035,10 @@ goto WTHx643
 cls
 echo %green%Installing Intel Graphics Control Panel.. please wait.
 timeout /t 2 >nul
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 Powershell Add-AppxPackage -Path "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx"
 )
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 goto begin
 )
 timeout /t 1 >nul
@@ -28064,18 +28064,18 @@ cls
 :startALLBX
 cls
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition" 2^> nul') do set "var=%%b"
-if "%var%"=="SUPERLITE SE" ( 
+if "%var%" equ "SUPERLITE SE" ( 
 goto installstartallback
 )
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition" 2^> nul') do set "var=%%b"
-if "%var%"=="SUPERLITE SE + DEF" ( 
+if "%var%" equ "SUPERLITE SE + DEF" ( 
 goto installstartallback
 )
 
 echo For SUPERLITE SE / SUPERLITE SE + DEF && timeout /t 2 >nul && goto begin
 :installstartallback
 cd "%GHOST_DATA%"
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 goto begin
 )
 echo %white%=======================================================================
@@ -28232,16 +28232,16 @@ cls
 setlocal EnableExtensions
 setlocal EnableDelayedExpansion
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" cls && goto WIN11L
+if "%var%" equ "22621" cls && goto WIN11L
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" cls && goto WIN11L
+if "%var%" equ "22631" cls && goto WIN11L
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="19045" cls && goto WIN11L
+if "%var%" equ "19045" cls && goto WIN11L
 cls
 echo  Only for Windows 10 22H2 / windows 11 22H2 / 23H2 or higher version. && timeout /t 4 >nul && goto begin 
 :WIN11L
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
 ::for /f "tokens=1" %%A in (' echo %buildOS% ') do set "XX=%%A"
 for /f "tokens=1" %%G in (' echo 22621.2360 ') do if %%G lss %buildOS% goto :skipV
@@ -28249,7 +28249,7 @@ cls
 echo  %white%Your Current OS Build %yellow%%buildOS% %white%/ Required OS Build %cyan%22621.2361 %white%or Higher to use Copilot. && timeout /t 10 >nul && goto begin
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
 ::for /f "tokens=1" %%A in (' echo %buildOS% ') do set "XX=%%A"
 for /f "tokens=1" %%G in (' echo 22631.2360 ') do if %%G lss %buildOS% goto :skipV
@@ -28257,7 +28257,7 @@ cls
 echo  %white%Your Current OS Build %yellow%%buildOS% %white%/ Required OS Build %cyan%22631.2361 %white%or Higher to use Copilot. && timeout /t 10 >nul && goto begin
 )
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="19045" (
+if "%var%" equ "19045" (
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
 ::for /f "tokens=1" %%A in (' echo %buildOS% ') do set "XX=%%A"
 for /f "tokens=1" %%G in (' echo 19045.4045 ') do if %%G lss %buildOS% goto :skipV
@@ -28283,9 +28283,9 @@ echo.
 %nhcolor% 09 " %yellow% [0] %white% Back to main menu
 echo.
 set /p firstindex=" Type option:%green%"
-if "%firstindex%"=="1" goto COPILOT01
-if "%firstindex%"=="2" goto COPILOT02
-if "%firstindex%"=="0" goto begin
+if "%firstindex%" equ "1" goto COPILOT01
+if "%firstindex%" equ "2" goto COPILOT02
+if "%firstindex%" equ "0" goto begin
 cls
 color 07
 echo This function not available yet
@@ -28362,7 +28362,7 @@ NSudoLG.exe -U:C -P:E -ShowWindowMode:Hide reg add "HKCU\Software\Microsoft\Wind
 
 :copilotv22H2w10
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="19045" (
+if "%var%" equ "19045" (
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
 for /f "tokens=1" %%G in (' echo 19045.4045 ') do if %%G lss %buildOS% goto :copilotoldversion
 cls
@@ -28370,7 +28370,7 @@ goto copilotoldversion
 )
 :copilotv22H2
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22621" (
+if "%var%" equ "22621" (
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
 for /f "tokens=1" %%G in (' echo 22621.2714 ') do if %%G lss %buildOS% goto :copilotoldversion
 cls
@@ -28378,7 +28378,7 @@ goto copilotoldversion
 )
 :copilotv23H2
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
-if "%var%"=="22631" (
+if "%var%" equ "22631" (
 for /f "tokens=6,7 delims=[]. " %%a in ('ver') do set "buildOS=%%a.%%b" && set "buildOSa=%%a" && set "buildOSb=%%b"
 for /f "tokens=1" %%G in (' echo 22631.2714 ') do if %%G lss %buildOS% goto :copilotoldversion
 cls
@@ -28425,8 +28425,8 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win10paintC1
-if "%op%"=="0" goto op10
+if "%op%" equ "1" goto win10paintC1
+if "%op%" equ "0" goto op10
 cls
 color 0b
 echo This function not available yet
@@ -28499,8 +28499,8 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto win10Calcu
-if "%op%"=="0" goto op10
+if "%op%" equ "1" goto win10Calcu
+if "%op%" equ "0" goto op10
 cls
 color 0b
 echo This function not available yet
@@ -28584,9 +28584,9 @@ cls
 %nhcolor% 0E ""
 timeout /t 1 >nul
 set /p op=Type option:
-if "%op%"=="1" goto MSCAM1
-if "%op%"=="2" goto MSCAM2
-if "%op%"=="0" goto begin
+if "%op%" equ "1" goto MSCAM1
+if "%op%" equ "2" goto MSCAM2
+if "%op%" equ "0" goto begin
 cls
 color 0b
 echo This function not available yet
@@ -28667,11 +28667,11 @@ timeout /t 2 >nul
 cls
 
 for /f "tokens=2*" %%a in ('reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" 2^> nul') do set "var=%%b"
-if "%var%"=="0x1" (
+if "%var%" equ "0x1" (
 set CopilotTEXT="%yellow%Enabled"
 goto start
 )
-if "%var%"=="0x0" (
+if "%var%" equ "0x0" (
 set CopilotTEXT="%yellow%Disable"
 goto start
 )
@@ -28686,8 +28686,8 @@ echo.
 %nhcolor% 09 " %yellow% [0] %white% Back to main menu
 echo.
 set /p firstindex=" Type option:%green%"
-if "%firstindex%"=="1" goto CoPilot01
-if "%firstindex%"=="0" goto GhostMode
+if "%firstindex%" equ "1" goto CoPilot01
+if "%firstindex%" equ "0" goto GhostMode
 cls
 color 07
 echo This function not available yet
@@ -28697,7 +28697,7 @@ goto GhostModeProc
 
 :CoPilot01
 for /f "tokens=2*" %%a in ('reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" 2^> nul') do set "var=%%b"
-if "%var%"=="0x0" (
+if "%var%" equ "0x0" (
 set CopilotTEXT="%yellow%Enabled"
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "1" /f >nul 2>nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" /t REG_DWORD /d "1" /f >nul 2>nul
@@ -28706,7 +28706,7 @@ schtasks /Change /TN "copilot" /Enable >nul 2>nul
 schtasks /run /tn "copilot" >nul 2>nul
 goto :copilotprev
 )
-if "%var%"=="0x1" (
+if "%var%" equ "0x1" (
 set CopilotTEXT="%yellow%Disable"
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "0" /f >nul 2>nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" /t REG_DWORD /d "0" /f >nul 2>nul

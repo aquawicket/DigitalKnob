@@ -35,7 +35,7 @@ setlocal
 ::    %return%
       
 ::   :found
-    if "%~1"=="" (%return%)
+    if "%~1" equ "" (%return%)
 	
 	::###### run command ######
 	set DKPOWERSHELL_COMMAND="%POWERSHELL_EXE%" -Command %*

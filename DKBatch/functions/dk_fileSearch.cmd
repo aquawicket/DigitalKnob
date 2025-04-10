@@ -33,7 +33,7 @@ setlocal enableDelayedExpansion
 	echo:
 	for /f "tokens=*" %%g in ('%systemroot%\system32\robocopy.exe "%base_path%" "null" "%filename%" /fp /l /lev:%search_depth% /nc /ndl /njh /njs /ns /s') do (
 		set "string=%%g"
-		if not "!string:%file_pattern%=!"=="!string!" (
+		if not "!string:%file_pattern%=!" equ "!string!" (
 			echo *** %%g
 			set "dk_fileSearch=%%g"
 		) else (

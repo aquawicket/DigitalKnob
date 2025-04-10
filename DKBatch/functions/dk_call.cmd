@@ -13,15 +13,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_call(command args)
 ::#
 :dk_call
-	if "%~1"=="" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13)
+	if "%~1" equ "" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13)
 	
 	:: don't add these functions to the callstack, just call them
-	if "%~1"=="init"				(call :%* & exit /b !errorlevel!)
-	if "%~1"=="pushStack"			(call :%* & exit /b !errorlevel!)
-	if "%~1"=="popStack"			(call :%* & exit /b !errorlevel!)
-	if "%~1"=="setGlobal" 			(call :%* & exit /b !errorlevel!)
-	if "%~1"=="setReturn" 			(call :%* & exit /b !errorlevel!)
-	if "%~1"=="printStackVariables"	(call :%* & exit /b !errorlevel!)
+	if "%~1" equ "init"				(call :%* & exit /b !errorlevel!)
+	if "%~1" equ "pushStack"			(call :%* & exit /b !errorlevel!)
+	if "%~1" equ "popStack"			(call :%* & exit /b !errorlevel!)
+	if "%~1" equ "setGlobal" 			(call :%* & exit /b !errorlevel!)
+	if "%~1" equ "setReturn" 			(call :%* & exit /b !errorlevel!)
+	if "%~1" equ "printStackVariables"	(call :%* & exit /b !errorlevel!)
 
 	::###### Stack Variables ######
 	(set __CMND__=%~1)
@@ -82,9 +82,9 @@ exit /b %LAST_STATUS%
 		^& call set %%_line_:dk.gbl.=%%) 2^>nul
 
 	::set dk_time=(call echo %%time%%)
-	::set checkError=(if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
+	::set checkError=(if not "!errorlevel!" equ "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
 
-::	set checkError=(if not "!errorlevel!"=="0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
+::	set checkError=(if not "!errorlevel!" equ "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
 
 ::	set endfunction=exit /b !errorlevel!)
 ::	set return=exit /b !errorlevel!)
@@ -114,11 +114,11 @@ exit /b !errorlevel!
 ::# :dk_call_PRINTENTRY
 ::#
 :dk_call_PRINTENTRY
-	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X"=="X%dk_call_IGNORE%X" (%endfunction%)
+	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X" equ "X%dk_call_IGNORE%X" (%endfunction%)
 	call :updateIndent
 
 ::	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
-::	if not "%_codepage_%"=="65001" chcp 65001>nul
+::	if not "%_codepage_%" equ "65001" chcp 65001>nul
 ::	echo %pad% !__FUNC__!(!__ARGV__!)
 
 	echo %pad%È !__FUNC__!(!__ARGV__!)
@@ -130,7 +130,7 @@ exit /b !errorlevel!
 ::# :dk_call_PRINTEXIT
 ::#
 :dk_call_PRINTEXIT
-	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X"=="X%dk_call_IGNORE%X" (%endfunction%)
+	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X" equ "X%dk_call_IGNORE%X" (%endfunction%)
 	call :updateIndent
 	::echo %pad% !__FUNC__!(!__ARGV__!)
 	::echo %pad%

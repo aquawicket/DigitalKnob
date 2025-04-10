@@ -13,7 +13,7 @@ setlocal
 	%dk_call% dk_debugFunc 0 1
 
 	::### SET ###
-	if not "%~1"=="" (echo|set/p=%~1|clip)
+	if not "%~1" equ "" (echo|set/p=%~1|clip)
 
 	:: ###### GET ######
 	%dk_call% dk_commandToVariable powershell -command Get-Clipboard

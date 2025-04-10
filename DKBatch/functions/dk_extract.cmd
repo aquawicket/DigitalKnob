@@ -17,7 +17,7 @@ setlocal
 	 
     :: if the destination isn't provided, we should extract to a folder named the same as the file
     :: in the same diretory the archive file is in.
-	if not "%_dest_%"=="" (goto twoParams)
+	if not "%_dest_%" equ "" (goto twoParams)
 
     ::### handle 1 parameter
     %dk_call% dk_basename "%_file_%" basename

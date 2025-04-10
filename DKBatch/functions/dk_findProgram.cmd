@@ -25,7 +25,7 @@ setlocal enableDelayedExpansion
 
 	%dk_call% dk_commandToVariable where %_recursive_% "%_pattern_%" "%_filename_%" 2>nul
 	if not defined dk_commandToVariable (
-		if "%~4"=="NO_HALT" (
+		if "%~4" equ "NO_HALT" (
 			dk_return "%_filename_% not found"
 		) else ( 
 			dk_return -1 "%_filename_% not found"

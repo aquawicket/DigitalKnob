@@ -3,8 +3,8 @@
 ::setlocal DisableExtensions
 
 
-if "~x0"=="%~x0" goto :NOCMDEXT 
-if "%%~x0"=="%~x0" goto :NOCMDEXT
+if "~x0" equ "%~x0" goto :NOCMDEXT 
+if "%%~x0" equ "%~x0" goto :NOCMDEXT
 if CmdExtVersion 2 goto :CMDEXTV2
 goto :CMDEXTV1
 pause

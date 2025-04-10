@@ -16,7 +16,7 @@ for /f "useback tokens=1 delims=: " %%a in (`findstr /B /N /C:"-----BEGIN CERTIF
 	set /a MBEGIN=%%a-1
 )
 
-if "%MBEGIN%"=="-1" (
+if "%MBEGIN%" equ "-1" (
 	endlocal
 	exit /b -1
 )

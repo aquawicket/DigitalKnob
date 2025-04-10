@@ -17,14 +17,14 @@ setlocal
  
 	set "_from_=%~1"	
 	set "_to_=%~2"
-	if "%~3"=="OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+	if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
 
 	%dk_call% dk_info "Copying %_from_% to %_to_%"
 
 	if not exist "%_from_%" (%dk_call% dk_error "dk_copy:'%_from_%' not found")
 
 	if exist "%_to_%" (
-		if not "%OVERWRITE%"=="1" (
+		if not "%OVERWRITE%" equ "1" (
 			%dk_call% dk_error "dk_copy Cannot copy file. Destiantion already exists and OVERWRITE is not set"
 		)
 		%dk_call% dk_delete %_to_%

@@ -13,7 +13,7 @@ setlocal enableDelayedExpansion
 	for %%a in (%_file_%) do set last_fdate=%%~ta.%%~za.%%~aa
 	set /a "seconds=0"
 	set /a "timeout=30"
-	if not "%~2"=="" (set /a "timeout=%~2")
+	if not "%~2" equ "" (set /a "timeout=%~2")
 	
 	echo Waiting for change in %_file_%.   press q to skip
 	:dk_waitOnFileChange_LOOP
@@ -21,7 +21,7 @@ setlocal enableDelayedExpansion
         for %%a in (%_file_%) do set fdate=%%~ta.%%~za.%%~aa
 
         :: Different attributes found?
-        if not "%last_fdate%"=="%fdate%" (%return%)
+        if not "%last_fdate%" equ "%fdate%" (%return%)
 
         :: Remember the new date/time
         set last_fdate=%fdate%
@@ -30,7 +30,7 @@ setlocal enableDelayedExpansion
         CHOICE /T 1 /C "yq" /D y > nul
 
         :: User pressed Q? just quit
-        if not "%errorlevel%"=="1" )goto :eof)
+        if not "%errorlevel%" equ "1" )goto :eof)
 
         :: Repeat until file changed, timeout elapsed, user quits or Ctrl-C
 		if %seconds% gtr %timeout% (

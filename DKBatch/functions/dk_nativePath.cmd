@@ -13,7 +13,7 @@ setlocal
     set pathname=%1
     set pathname=%pathname:"=%
 	set "pathname=%pathname:/=\%"
-    if "%pathname:~-1%"=="\" set pathname=%pathname:~0,-1%
+    if "%pathname:~-1%" equ "\" set pathname=%pathname:~0,-1%
 
 	for %%Z in ("%pathname%") do set "dk_nativePath=%%~fZ"
 ::	set "dk_nativePath=%dk_nativePath:\=/%"

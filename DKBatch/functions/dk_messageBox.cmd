@@ -11,10 +11,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 setlocal
     %dk_call% dk_debugFunc 2 7
 
-	if "%~1"=="" (set "text=chose a selection") 	else (set "text=%~1")
-	if "%~2"=="" (set "caption=dk_messageBox") 		else (set "caption=%~2")
-	if "%~3"=="" (set /a "flags=0") 				else (set /a "flags=%~3")
-	if "%~4"=="" (set /a "timeout=0") 				else (set /a "timeout=%~4")
+	if "%~1" equ "" (set "text=chose a selection") 	else (set "text=%~1")
+	if "%~2" equ "" (set "caption=dk_messageBox") 		else (set "caption=%~2")
+	if "%~3" equ "" (set /a "flags=0") 				else (set /a "flags=%~3")
+	if "%~4" equ "" (set /a "timeout=0") 				else (set /a "timeout=%~4")
 	echo text = %text%
 	echo caption = %caption%
 	echo flags = %flags%
@@ -135,13 +135,13 @@ setlocal
 ::	set /a "No=7"		&:: No button pressed
 	
 	echo dk_messageBox = %dk_messageBox%
-    if "%dk_messageBox%"=="1"  (echo You Clicked OK)
-    if "%dk_messageBox%"=="2"  (echo You Clicked Cancel)
-    if "%dk_messageBox%"=="3"  (echo You Clicked Abort)
-    if "%dk_messageBox%"=="4"  (echo You Clicked Retry)
-    if "%dk_messageBox%"=="5"  (echo You Clicked Ignore)
-    if "%dk_messageBox%"=="6"  (echo You Clicked Yes)
-    if "%dk_messageBox%"=="7"  (echo You Clicked No)
-    if "%dk_messageBox%"=="-1" (echo The message timed out)
+    if "%dk_messageBox%" equ "1"  (echo You Clicked OK)
+    if "%dk_messageBox%" equ "2"  (echo You Clicked Cancel)
+    if "%dk_messageBox%" equ "3"  (echo You Clicked Abort)
+    if "%dk_messageBox%" equ "4"  (echo You Clicked Retry)
+    if "%dk_messageBox%" equ "5"  (echo You Clicked Ignore)
+    if "%dk_messageBox%" equ "6"  (echo You Clicked Yes)
+    if "%dk_messageBox%" equ "7"  (echo You Clicked No)
+    if "%dk_messageBox%" equ "-1" (echo The message timed out)
 %endfunction%
     

@@ -17,26 +17,26 @@ setlocal
 
 	set "inputFile=%~1"
 	set "inputFilename=%~nx1"
-	if "%~2"=="" (set "outputFile=%~nx1.cmd") else (set "outputFile=%~2")
+	if "%~2" equ "" (set "outputFile=%~nx1.cmd") else (set "outputFile=%~2")
 	
-	::if "%~3"=="OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+	::if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
 	:: Find OVERWRITE in any of the arguments
 	set "args=%*"
-	if not "X%args:OVERWRITE=%X"=="X%args%X" (set "OVERWRITE=1")
+	if not "X%args:OVERWRITE=%X" equ "X%args%X" (set "OVERWRITE=1")
 	
 
 	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
 	if exist "%outputFile%" (
-		if not "%OVERWRITE%"=="1" (
+		if not "%OVERWRITE%" equ "1" (
 			%dk_call% dk_error "dk_embedBin Cannot embed file. Destiantion already exists and OVERWRITE is not set"
 		)
 		del "%outputFile:/=\%"
 	)
 
-	if "%dk_embedBin_DELETE_CMD_ON_EXTRACT%"=="1" (
+	if "%dk_embedBin_DELETE_CMD_ON_EXTRACT%" equ "1" (
 		set DELETE_CMD_ON_EXTRACT=echo ;;;===,,,del "%outputFile:/=\%"
 	)
-	if not "%dk_embedBin_OVERWRITE_OUTPUT%"=="1" (
+	if not "%dk_embedBin_OVERWRITE_OUTPUT%" equ "1" (
 		set OVERWRITE_OUTPUT=echo ;;;===,,,if exist "%inputFilename%" echo ERROR: outputfile already exists ^& pause ^& exit /b %%errorlevel%%
 	)
 	set "tempCmd=%inputFile%.tmp"

@@ -173,7 +173,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem ############### PLUGIN_IMPORT VARIABLES ###############
 	rem #######################################################
 	if not defined IMPORT_PATH  set "IMPORT_PATH=%CD:\=/%"
-	if "%IMPORT_PATH:~-1%"=="/" set "IMPORT_PATH=%IMPORT_PATH:~0,-1%"
+	if "%IMPORT_PATH:~-1%" equ "/" set "IMPORT_PATH=%IMPORT_PATH:~0,-1%"
 	%dk_call% dk_printVar IMPORT_PATH
 
 rem ### PLUGIN_IMPORT ###
@@ -331,7 +331,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	
 	if defined PLUGIN_IMPORT_NAME_LOWER (
 		if defined PLUGIN_GIT_NAME_LOWER (
-			if NOT "!PLUGIN_IMPORT_NAME_LOWER!"=="!PLUGIN_GIT_NAME_LOWER!" (
+			if NOT "!PLUGIN_IMPORT_NAME_LOWER!" equ "!PLUGIN_GIT_NAME_LOWER!" (
 				%dk_call% dk_warning "PLUGIN_IMPORT_NAME:!PLUGIN_IMPORT_NAME_LOWER! and PLUGIN_GIT_NAME:!PLUGIN_GIT_NAME_LOWER! do not match"
 			)
 		)
@@ -353,7 +353,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	
 	rem ### <PLUGIN>_DIR     ### DO NOT USE GIT_DIR ###
 	set "!CURRENT_PLUGIN!_DIR="
-	if not "!CURRENT_PLUGIN!"=="GIT" ( 
+	if not "!CURRENT_PLUGIN!" equ "GIT" ( 
 		%dk_call% dk_set !CURRENT_PLUGIN!_DIR !PLUGIN_INSTALL_PATH! 
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DIR 							& rem ZLIB_DIR				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	)

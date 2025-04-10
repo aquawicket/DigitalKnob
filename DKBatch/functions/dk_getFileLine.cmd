@@ -15,7 +15,7 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_assertPath "%_filepath_%"
     
     for /f "delims=:" %%a in ('findstr /n /c:"%~2" "%_filepath_%"') do (
-		if "!line!"=="" (
+		if "!line!" equ "" (
 			set "line=%%a"
 		) else (
 			set "line=!line!;%%a"

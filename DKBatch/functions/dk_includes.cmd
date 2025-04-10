@@ -15,7 +15,7 @@ setlocal enableDelayedExpansion
     set "_haystack_=%~1"
     set "_needle_=%~2"
 	
-	if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
+	if not "x!_haystack_:%_needle_%=!" equ "x%_haystack_%" (
         if "%~3" neq "" endlocal & (
 			set "dk_includes=true"
 			if "%3" neq "" set "%2=%dk_includes%"

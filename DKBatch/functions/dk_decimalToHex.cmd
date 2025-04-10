@@ -14,7 +14,7 @@ setlocal enableDelayedExpansion
 	set "_LOOKUP_=0123456789abcdef"
 	set "_hex_="
 	set "_prefix_="
-	if "%~1"=="" set "_hex_=00" & goto endlookup
+	if "%~1" equ "" set "_hex_=00" & goto endlookup
 	set /a A=%~1
 	if %A% lss 0 set /a A=0xfffffff + %A% + 1 & set "_prefix_=f"
 	:loop

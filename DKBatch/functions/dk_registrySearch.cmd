@@ -33,7 +33,7 @@ setlocal enableDelayedExpansion
 		set "LINE=%%a"
 		set "LINE=!LINE:~,4!"
 		rem echo LINE = !LINE!
-		if "!LINE!"=="HKEY" (
+		if "!LINE!" equ "HKEY" (
 			set "regpath=%%a"
 			set "value_name="
 			set "value_type="

@@ -33,14 +33,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::%dk_call% dk_keyboardInput choice
     %dk_call% dk_keyboardInputTimeout choice 1 60
         
-    if "%choice%"=="1"  endlocal & set "%1=option1"	  & %return%
-	if "%choice%"=="2"  endlocal & set "%1=option2"   & %return%
-    if "%choice%"=="3"  endlocal & set "%1=option3"   & %return%
-    if "%choice%"=="4"  endlocal & set "%1=option4"   & %return%
-    if "%choice%"=="5"  endlocal & set "%1=option5"   & %return%
-    if "%choice%"=="38" %dk_call% Option6             & %return%
-    if "%choice%"=="39" %dk_call% Option7             & %return%
-    if "%choice%"=="40" %dk_call% dk_exit             & %return%
+    if "%choice%" equ "1"  endlocal & set "%1=option1"	  & %return%
+	if "%choice%" equ "2"  endlocal & set "%1=option2"   & %return%
+    if "%choice%" equ "3"  endlocal & set "%1=option3"   & %return%
+    if "%choice%" equ "4"  endlocal & set "%1=option4"   & %return%
+    if "%choice%" equ "5"  endlocal & set "%1=option5"   & %return%
+    if "%choice%" equ "38" %dk_call% Option6             & %return%
+    if "%choice%" equ "39" %dk_call% Option7             & %return%
+    if "%choice%" equ "40" %dk_call% dk_exit             & %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
     %dk_call% dk_unset target_triple

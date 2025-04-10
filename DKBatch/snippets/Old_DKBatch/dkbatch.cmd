@@ -44,7 +44,7 @@ set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^([0m[35m%ALL_BUT_FIRST%[0
 
 ::################## %DKEND% ##################
 set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m "
-if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & if "!STAY_OPEN!"=="1" ( goto:eof ) else ( if "!DKLOADED!"=="%~1" ( timeout 30 & exit %ERRORLEVEL% ) else ( goto:eof ) )
+if "%~2" equ "DKEND" %DOEND%:[35m!%1![0m & echo. & if "!STAY_OPEN!" equ "1" ( goto:eof ) else ( if "!DKLOADED!" equ "%~1" ( timeout 30 & exit %ERRORLEVEL% ) else ( goto:eof ) )
 set "DKEND=call %0 %%0 DKEND & call return %%0 %%0"
 
 ::: NO_RELATIVE_PATHS() :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -105,10 +105,10 @@ set "FATAL=DKERROR ERROR %1 "
 ::set "REQUIRED_3=if [%%3]==[] echo [91m	%~n0(%*): argument 3 is invalid [0m & goto:eof"
 
 set caller=%0
-if not "%1"=="" set "caller=%~1"
-::if "%1"=="" ( set "caller=%0" ) else ( set "caller=%1" )
+if not "%1" equ "" set "caller=%~1"
+::if "%1" equ "" ( set "caller=%0" ) else ( set "caller=%1" )
 
-if not "%STAY_OPEN%"=="" (
+if not "%STAY_OPEN%" equ "" (
 	if not defined in_subprocess (cmd /k set in_subprocess=y ^& "%caller%" %ALL_BUT_FIRST%) & exit )
 )
 
@@ -123,7 +123,7 @@ if not "%STAY_OPEN%"=="" (
 if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
 
 :: import %DKBATCH% command to global environment variables
-if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 %%* & @setlocal enableextensions enabledelayedexpansion"
+if "%DKBATCH%" equ "" setx DKBATCH "@echo off & call %0 %%0 %%* & @setlocal enableextensions enabledelayedexpansion"
 
 
 :: Add dkbatch subfolders to the user PATH environment variable

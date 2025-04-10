@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0 1
 	
 	::############ SET ############
-	if not "%~1"=="" ( 
+	if not "%~1" equ "" ( 
 		set "DKIMPORTS_DIR=%~1"
 		%return%
 	)

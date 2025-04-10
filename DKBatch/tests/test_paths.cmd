@@ -79,8 +79,8 @@ set "IN=%WINDIR%\NonExistent.file
 :get_variable
 	set _input=%1
 	set _input=%_input:"=%
-	if "%_input:~-1%"=="\" set _input=%_input:~0,-1%
-	if "%_input:~-1%"=="/" set _input=%_input:~0,-1%
+	if "%_input:~-1%" equ "\" set _input=%_input:~0,-1%
+	if "%_input:~-1%" equ "/" set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%Z"
 	endlocal & set %2=%OUT%
 %endfunction%

@@ -20,7 +20,7 @@ setlocal
 	:done
 	echo DKSHELL_NAME = %DKSHELL_NAME%
 
-	if "%DKSHELL_NAME%"=="powershell" for /F "tokens=* USEBACKQ" %%F IN (`where powershell.exe`) do set DKSHELL_PATH=%%F
+	if "%DKSHELL_NAME%" equ "powershell" for /F "tokens=* USEBACKQ" %%F IN (`where powershell.exe`) do set DKSHELL_PATH=%%F
 	if not defined DKSHELL_PATH set "DKSHELL_PATH=%SHELL%"
 	if not defined DKSHELL_PATH set "DKSHELL_PATH=%COMSPEC%"
 	echo DKSHELL_PATH = %DKSHELL_PATH%

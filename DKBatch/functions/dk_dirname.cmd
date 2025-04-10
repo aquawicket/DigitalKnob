@@ -17,11 +17,11 @@ setlocal enableDelayedExpansion
     set "pathname=%pathname:"=%"
 	
     for %%Z in ("%pathname%") do set "dk_dirname=%%~dpZ"
-	if "%dk_dirname:~-1%"=="\" set "dk_dirname=%dk_dirname:~0,-1%"
+	if "%dk_dirname:~-1%" equ "\" set "dk_dirname=%dk_dirname:~0,-1%"
 	
     endlocal & (
 		set "dk_dirname=%dk_dirname:\=/%"
-		if not "%~2"=="" set "%~2=%dk_dirname:\=/%"
+		if not "%~2" equ "" set "%~2=%dk_dirname:\=/%"
 	)
 %endfunction%
 

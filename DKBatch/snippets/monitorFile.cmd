@@ -5,7 +5,7 @@
 
 	set "file=%USERPROFILE%\digitalknob\Development\TODO.txt"
 	
-    if "%file%"=="" goto :help
+    if "%file%" equ "" goto :help
     if not exist "%file%" (
         echo Input file '%file%' not found
         goto :eof
@@ -21,7 +21,7 @@
         for %%a in (%FN%) do set fdate=%%~ta.%%~za.%%~aa
 
         :: Different attributes found?
-        if not "%last_fdate%"=="%fdate%" (
+        if not "%last_fdate%" equ "%fdate%" (
             cls
 			echo Monitoring %FN% for changes
 			echo    last file info = %last_fdate%

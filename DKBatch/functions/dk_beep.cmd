@@ -14,8 +14,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
  
 	::### Method 1 - powershell beep ###
 	if not defined POWERSHELL_EXE (%dk_call% dk_POWERSHELL_EXE)
-	if "%~1"=="" (set frequency=500) else (set frequency=%~1)
-	if "%~2"=="" (set duration=500)  else (set duration=%~1)
+	if "%~1" equ "" (set frequency=500) else (set frequency=%~1)
+	if "%~2" equ "" (set duration=500)  else (set duration=%~1)
 	"%POWERSHELL_EXE%" "[console]::beep(%frequency%,%duration%)"
 	::%dk_call% dk_callDKPowershell dk_beep %frequency% %duration%
 	

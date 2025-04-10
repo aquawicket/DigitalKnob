@@ -38,18 +38,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_keyboardInput choice
     ::%dk_call% dk_keyboardInputTimeout choice 13 60
 		
-    if "%choice%"=="0"  %dk_call% dk_set target_app %_target_app_% & %dk_call% dk_set target_triple %_target_triple_% & %dk_call% dk_set target_type %_target_type_%
-    if "%choice%"=="1"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
-    if "%choice%"=="2"  %dk_call% dk_gitCommit
-    if "%choice%"=="3"  %dk_call% dk_downloadDK
-    if "%choice%"=="4"  %dk_call% dk_pushAssets
-    if "%choice%"=="5"  %dk_call% dk_pullAssets
-    if "%choice%"=="6"  %dk_call% dk_resetAll
-    if "%choice%"=="7"  %dk_call% dk_removeAll
-    if "%choice%"=="8"  %dk_call% dk_clearScreen
-    if "%choice%"=="9"  %dk_call% dk_reload
-    if "%choice%"=="10" %dk_call% dk_exit 0
-	if "%choice%"=="11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
+    if "%choice%" equ "0"  %dk_call% dk_set target_app %_target_app_% & %dk_call% dk_set target_triple %_target_triple_% & %dk_call% dk_set target_type %_target_type_%
+    if "%choice%" equ "1"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
+    if "%choice%" equ "2"  %dk_call% dk_gitCommit
+    if "%choice%" equ "3"  %dk_call% dk_downloadDK
+    if "%choice%" equ "4"  %dk_call% dk_pushAssets
+    if "%choice%" equ "5"  %dk_call% dk_pullAssets
+    if "%choice%" equ "6"  %dk_call% dk_resetAll
+    if "%choice%" equ "7"  %dk_call% dk_removeAll
+    if "%choice%" equ "8"  %dk_call% dk_clearScreen
+    if "%choice%" equ "9"  %dk_call% dk_reload
+    if "%choice%" equ "10" %dk_call% dk_exit 0
+	if "%choice%" equ "11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
       
     ::endlocal & 
 	set "UPDATE=1"

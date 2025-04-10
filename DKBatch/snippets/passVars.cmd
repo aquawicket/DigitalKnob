@@ -24,7 +24,7 @@ echo(
 exit /b
 
 :initMacro
-if "!!"=="" (
+if "!!" equ "" (
     echo ERROR: Delayed Expansion must be disabled while defining macros
     (goto) 2>nul
     (goto) 2>nul
@@ -43,7 +43,7 @@ set $set=FOR /L %%N in (1 1 2) dO IF %%N==2 ( %\n%
         endlocal                                                    %\n%
         set "%%~1.Len=0"                                            %\n%
         set "%%~1="                                                 %\n%
-        if "!!"=="" (                                               %\n%
+        if "!!" equ "" (                                               %\n%
             %= Used if delayed expansion is enabled =%              %\n%
                 setlocal DisableDelayedExpansion                    %\n%
                 for /F "delims=" %%O in ('"%%~2 | findstr /N ^^"') do ( %\n%

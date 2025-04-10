@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::echo %~2
 	%~2
 
-	if "%~3"=="NO_HALT"	(dk_return)
+	if "%~3" equ "NO_HALT"	(dk_return)
 	if not defined %~1	(%dk_call% dk_error "dk_validate was unable to set the variable:%~1 with the code provided")
 %endfunction%
 

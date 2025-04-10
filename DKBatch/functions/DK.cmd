@@ -24,7 +24,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	echo %ESC%[42m %ESC%[30m %DKSHELL_NAME% %DKSHELL_VERSION% %ESC%[0m
 
 	::###### PRINT_DE_STATUS #####
-	set PRINT_DE_STATUS=if "^!DE^!"=="" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
+	set PRINT_DE_STATUS=if "^!DE^!" equ "" (echo [32mdelayed expansion = ON[0m) else (echo [31mdelayed expansion = OFF[0m)
 	%PRINT_DE_STATUS%
 
 	if not defined DKBATCH_FUNCTIONS_DIR_	(set "DKBATCH_FUNCTIONS_DIR_=%~dp0")
@@ -63,7 +63,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 
 	::###### Reload Main Script with cmd ######
 	call :dk_reload
-	if not "!DE!"=="" (
+	if not "!DE!" equ "" (
 		echo ERROR: DKBatch requires delayed expansion
 		pause
 		exit 13
@@ -78,10 +78,10 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	
 	::############ Elevate Permissions ############
 	::set "ENABLE_dk_elevate=1"
-	if not "%ENABLE_dk_elevate%"=="1" (goto skip_elevate)
+	if not "%ENABLE_dk_elevate%" equ "1" (goto skip_elevate)
 		net session >nul 2>&1
 		if %ERRORLEVEL% equ 0 (goto skip_elevate)
-		if "%2"=="elevated" (set "elevated=1")
+		if "%2" equ "elevated" (set "elevated=1")
 		if not defined elevated (
 			set "elevated=1"
 			call "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%
@@ -97,7 +97,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::%DK% dk_load %DKSCRIPT_PATH%
 
 	::###### DKTEST MODE ######
-	if not "%DKSCRIPT_EXT%"==".cmd" (%return%)
+	if not "%DKSCRIPT_EXT%" equ ".cmd" (%return%)
 	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 0
 	%dk_call% dk_echo
 	%dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%"
@@ -153,7 +153,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
 	if not exist "%DKSCRIPT_DIR%"	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ")
 	if exist 	 "%DKSCRIPT_DIR%"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:\=/%")
-	if "%DKSCRIPT_DIR:~-1%"=="/"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%")
+	if "%DKSCRIPT_DIR:~-1%" equ "/"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%")
 	if not exist "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit -1)
 %endfunction%
 
@@ -182,7 +182,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if not exist "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
 	if not exist "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
 	if exist "%DKCACHE_DIR%" (
-		if "%DKSCRIPT_NAME%"=="DKBuilder" (
+		if "%DKSCRIPT_NAME%" equ "DKBuilder" (
 			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul)
 		)
 	)
@@ -212,7 +212,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_reload
 ::#
 :dk_reload
-	if not "%DKSCRIPT_EXT%"==".cmd" (exit /b -1)
+	if not "%DKSCRIPT_EXT%" equ ".cmd" (exit /b -1)
 	if defined RELOADED (exit /b -1)
 
 	echo "reloading with /v:on 'delayed expansion',  /k 'keep terminal open' . . . ."
@@ -233,7 +233,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	echo:
 	echo exit_status = %exit_status%
 	echo:
-	if not "%exit_status%"=="0" pause
+	if not "%exit_status%" equ "0" pause
 	exit %exit_status%
 
 	::( >NUL reg delete HKCU\Console\digitalknob /f )

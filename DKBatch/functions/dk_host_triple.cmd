@@ -25,11 +25,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "%host_os%_host=1"
 	
 	::###### host_arch and <arch>_host ######
-	if "%PROCESSOR_ARCHITECTURE%"=="x86"   set "host_arch=x86"
-    if "%PROCESSOR_ARCHITECTURE%"=="AMD64" set "host_arch=x86_64"
-    if "%PROCESSOR_ARCHITECTURE%"=="IA64"  set "host_arch=x86_64"
-    if "%PROCESSOR_ARCHITECTURE%"=="EM64T" set "host_arch=x86_64"
-    if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "host_arch=arm64"
+	if "%PROCESSOR_ARCHITECTURE%" equ "x86"   set "host_arch=x86"
+    if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" set "host_arch=x86_64"
+    if "%PROCESSOR_ARCHITECTURE%" equ "IA64"  set "host_arch=x86_64"
+    if "%PROCESSOR_ARCHITECTURE%" equ "EM64T" set "host_arch=x86_64"
+    if "%PROCESSOR_ARCHITECTURE%" equ "ARM64" set "host_arch=arm64"
 	set "%host_arch%_host=1"             
 	
 	::###### host_env and <env>_host #######

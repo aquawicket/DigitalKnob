@@ -28,7 +28,7 @@ setlocal
 	)
 	
 	if exist "%_to_%" (
-		if not "%OVERWRITE%"=="1" (
+		if not "%OVERWRITE%" equ "1" (
 			%dk_call% dk_error "dk_rename Cannot rename file. Destiantion already exists and OVERWRITE is not set"
 			dk_return
 		) 

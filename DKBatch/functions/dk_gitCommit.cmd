@@ -21,14 +21,14 @@ setlocal
 	
     %dk_call% dk_commandToVariable "%GIT_EXE%" -C %DKBRANCH_DIR% config --global credential.helper
 	set "STORE=%dk_commandToVariable%"
-    if not "%STORE%"=="store" (
+    if not "%STORE%" equ "store" (
         "%GIT_EXE%" -C %DKBRANCH_DIR% config --global credential.helper store
         echo "git credential.helper is now set to store"
     )
         
     %dk_call% dk_commandToVariable "%GIT_EXE%" -C %DKBRANCH_DIR% config --global user.email
 	set "USER_EMAIL=%dk_commandToVariable%"
-    if "%USER_EMAIL%"=="" (
+    if "%USER_EMAIL%" equ "" (
         %dk_call% dk_echo
         %dk_call% dk_echo "please enter an email address"
         %dk_call% dk_keyboardInput USER_EMAIL
@@ -40,7 +40,7 @@ setlocal
         
     %dk_call% dk_commandToVariable "%GIT_EXE%" -C %DKBRANCH_DIR% config --global user.name
 	set "USER_NAME=%dk_commandToVariable%"
-    if "%USER_NAME%"=="" (
+    if "%USER_NAME%" equ "" (
         %dk_call% dk_echo
         %dk_call% dk_echo "please enter a username"
         %dk_call% dk_keyboardInput USER_NAME
@@ -50,7 +50,7 @@ setlocal
         %dk_call% dk_echo
     )
         
-    if "%commit_msg%"=="" (set "commit_msg=git commit %date%")
+    if "%commit_msg%" equ "" (set "commit_msg=git commit %date%")
         
     %dk_call% dk_echo
     %dk_call% dk_echo "git commit '%commit_msg%'"

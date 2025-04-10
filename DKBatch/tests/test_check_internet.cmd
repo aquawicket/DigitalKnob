@@ -16,5 +16,5 @@ set connect=0
 call check_net.cmd
 del check_net.cmd
 del reply.cmd
-if "%connect%"=="0" echo You have NO active connection to the internet
-if "%connect%"=="1" echo You have an active connection to the internet
+if "%connect%" equ "0" echo You have NO active connection to the internet
+if "%connect%" equ "1" echo You have an active connection to the internet

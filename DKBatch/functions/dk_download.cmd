@@ -27,7 +27,7 @@ setlocal
 	%dk_call% dk_isDirectory "%destination%" && set "destination=%destination%/%dk_basename%"
     if exist "%destination%" (%dk_call% dk_info "%destination% already exist" & %return%)
  
-	if "%TEST_BACKUP_DL_SERVER%"=="1"  (set "url=%BACKUP_DL_SERVER%/%dk_basename%")
+	if "%TEST_BACKUP_DL_SERVER%" equ "1"  (set "url=%BACKUP_DL_SERVER%/%dk_basename%")
 	
 	::### Test that url exists, if not try BACKUP_DL_SERVER ###
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_warning "url:%url% NOT FOUND" && set "url=%BACKUP_DL_SERVER%/%dk_basename%" && %dk_call% dk_info "Trying Backup Server url:%url% . . ."

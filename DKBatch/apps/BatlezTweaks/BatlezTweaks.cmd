@@ -85,18 +85,18 @@ echo.
 echo.
 set /p preset= 
 
-if /i "%preset%"=="Gold" goto Gold
-if /i "%preset%"=="Blue" goto Blue
-if /i "%preset%"=="Cyan" goto Cyan
-if /i "%preset%"=="Yellow" goto Yellow
-if /i "%preset%"=="Green" goto Green
-if /i "%preset%"=="Red" goto Red
-if /i "%preset%"=="Pink" goto Pink
-if /i "%preset%"=="Purple" goto Purple
-if /i "%preset%"=="Lime" goto Lime
-if /i "%preset%"=="Brown" goto Brown
-if /i "%preset%"=="Orange" goto Orange
-if /i "%preset%"=="White" goto White
+if /i "%preset%" equ "Gold" goto Gold
+if /i "%preset%" equ "Blue" goto Blue
+if /i "%preset%" equ "Cyan" goto Cyan
+if /i "%preset%" equ "Yellow" goto Yellow
+if /i "%preset%" equ "Green" goto Green
+if /i "%preset%" equ "Red" goto Red
+if /i "%preset%" equ "Pink" goto Pink
+if /i "%preset%" equ "Purple" goto Purple
+if /i "%preset%" equ "Lime" goto Lime
+if /i "%preset%" equ "Brown" goto Brown
+if /i "%preset%" equ "Orange" goto Orange
+if /i "%preset%" equ "White" goto White
 echo Please enter a valid option.
 timeout /t 2 /nobreak >nul
 goto Presets
@@ -416,8 +416,8 @@ echo.
 echo.
 echo.
 set /p input="%c%Would you like to create a Restore and Registry Point? %w%(Y/N)%u% %c%»%u% "
-if "%input%"=="Y" goto restorepoint1
-if "%input%"=="N" goto menu
+if "%input%" equ "Y" goto restorepoint1
+if "%input%" equ "N" goto menu
 echo %c%Please enter a valid number!%u% & goto Backup
 
 :: Credits to tarekifla
@@ -458,7 +458,7 @@ if %SR_STATUS%==0 (
 )
 set /p deleteOld=Do you want to remove old restore points? (Yes/No): 
 
-if /i "%deleteOld%"=="Yes" (
+if /i "%deleteOld%" equ "Yes" (
     echo Removing old system restore points...
     vssadmin delete shadows /for=C: /oldest >nul 2>&1
     if %errorlevel%==0 (
@@ -466,7 +466,7 @@ if /i "%deleteOld%"=="Yes" (
     ) else (
         echo Failed to remove old restore points. Please ensure you have sufficient privileges.
     )
-) else if /i "%deleteOld%"=="No" (
+) else if /i "%deleteOld%" equ "No" (
     echo Old restore points will not be removed.
 ) else (
     echo Invalid input. Skipping old restore point deletion.
@@ -4252,7 +4252,7 @@ if '%choice%'=='24' choco install vscode -y
 if '%choice%'=='25' choco install discord discord.install discord-canary -y
 if '%choice%'=='26' choco install spotify toastify -y
 if '%choice%'=='27' choco install gamebooster -y
-if "%choice%"=="28" (
+if "%choice%" equ "28" (
     choco install curl
     curl -o "%TEMP%\apowermirror-setup.exe" "https://download.apowersoft.com/down.php?softid=apowermirror"
     pause /5
@@ -4287,7 +4287,7 @@ if '%choice%'== '50' (
 if '%choice%'== '51' choco install everything -y
 if '%choice%'== '52' choco install visualstudio2022professional -y
 if '%choice%'== '53' choco install adobeshockwaveplayer -y
-if "%choice%"=="54" (
+if "%choice%" equ "54" (
     choco install curl
     curl -o %TEMP%\RobloxPlayerLauncher.exe https://setup.rbxcdn.com/version-c1236188328f4133-Roblox.exe
     start "" %TEMP%\RobloxPlayerLauncher.exe

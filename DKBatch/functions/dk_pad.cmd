@@ -40,10 +40,10 @@ setlocal
 		set "padR=!padR!!padchar!"
 	)
 	
-	if "%align%"=="L" (
+	if "%align%" equ "L" (
 		set "rtn_var=!padL!!str!!padR!"
 	)
-	if "%align%"=="R" (
+	if "%align%" equ "R" (
 		set "rtn_var=!padR!!str!!padL!"
 	)
 	

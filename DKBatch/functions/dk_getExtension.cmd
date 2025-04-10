@@ -18,8 +18,8 @@ setlocal
 	set "pathname=%~nx1"
 	set "pathname=%pathname:/=\%"
 	set "pathname=%pathname:"=%"
-	if "%pathname:~-1%"=="\" set "pathname=%pathname:~0,-1%"
-	if "%pathname:~-1%"=="/" set "pathname=%pathname:~0,-1%"
+	if "%pathname:~-1%" equ "\" set "pathname=%pathname:~0,-1%"
+	if "%pathname:~-1%" equ "/" set "pathname=%pathname:~0,-1%"
 
 	set "dk_getExtension="
 	for /L %%i in (1,1,10) do (

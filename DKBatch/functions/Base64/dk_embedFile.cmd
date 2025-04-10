@@ -15,7 +15,7 @@ setlocal
 
 	set "inputFile=%~1"
 	set "outputFile=%~nx1.cmd"
-	if not "%~2"=="" (set "outputFile=%~2")
+	if not "%~2" equ "" (set "outputFile=%~2")
 
 	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
 	if exist "%outputFile%" (del %outputFile%)
@@ -38,7 +38,7 @@ setlocal
 	echo	set /a MBEGIN=%%%%a-1
 	echo ^)
 	echo:
-	echo if "%%MBEGIN%%"=="-1" (
+	echo if "%%MBEGIN%%" equ "-1" (
 	echo	endlocal
 	echo	exit /b -1
 	echo ^)

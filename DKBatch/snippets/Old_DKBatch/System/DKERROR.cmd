@@ -38,13 +38,13 @@
 ::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set ERROR_CODE=%ERRORLEVEL%
-if "%~1"=="IF_ERROR" (goto :IF_ERROR)
-if "%~1"=="ERROR" (goto :ERROR)
-if "%~1"=="IF_FATAL" (goto :IF_FATAL)
-if "%~1"=="FATAL" (goto :FATAL)
+if "%~1" equ "IF_ERROR" (goto :IF_ERROR)
+if "%~1" equ "ERROR" (goto :ERROR)
+if "%~1" equ "IF_FATAL" (goto :IF_FATAL)
+if "%~1" equ "FATAL" (goto :FATAL)
 
 :IF_ERROR
-if not "%ERROR_CODE%"=="0" (
+if not "%ERROR_CODE%" equ "0" (
 	echo [91m ERROR: %ERROR_CODE%   %3 [0m
 	call :print_error %*
 	pause
@@ -61,7 +61,7 @@ exit /b %ERROR_CODE%
 
 
 :IF_FATAL
-if not "%ERROR_CODE%"=="0" (
+if not "%ERROR_CODE%" equ "0" (
 	echo [31m FATAL: %ERROR_CODE%   %3 [0m
 	call :print_error %*
 	echo Press any key to exit . . .

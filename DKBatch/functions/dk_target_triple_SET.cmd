@@ -55,159 +55,159 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo 
 
 	%dk_call% dk_keyboardInput input
-	if "!input!"=="0" (
+	if "!input!" equ "0" (
 		#%dk_call% dk_echo "repeating last selection"
 		#%dk_call% dk_set target_app	"!_target_app_!"
 		#%dk_call% dk_set target_triple	"!_target_triple_!"
 		#%dk_call% dk_set target_type	"!_target_type_!"
-	) else if "!input!"=="1" (
+	) else if "!input!" equ "1" (
 		%dk_call% dk_set target_triple 	"!host_triple!"
 		%dk_call% dk_set target_os		"!host_os!"
 		%dk_call% dk_set target_arch	"!host_arch!"
 		if defined host_env (
 			%dk_call% dk_set target_env	"!host_env!"
 		)
-	) else if "!input!"=="2" (
+	) else if "!input!" equ "2" (
 		%dk_call% dk_set target_os		"cosmopolitan"
 		%dk_call% dk_set target_arch	"cosmopolitan"
 		%dk_call% dk_set target_env		"cosmopolitan"
-	) else if "!input!"=="3" (
+	) else if "!input!" equ "3" (
 		%dk_call% dk_set target_os		"android"
 		%dk_call% dk_set target_arch	"arm32"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="4" (
+	) else if "!input!" equ "4" (
 		%dk_call% dk_set target_os		"android"
 		%dk_call% dk_set target_arch	"arm64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="5" (
+	) else if "!input!" equ "5" (
 		%dk_call% dk_set target_os		"android"
 		%dk_call% dk_set target_arch	"x86"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="6" (
+	) else if "!input!" equ "6" (
 		%dk_call% dk_set target_os		"android"
 		%dk_call% dk_set target_arch	"x86_64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="7" (
+	) else if "!input!" equ "7" (
 		%dk_call% dk_set target_os		"emscripten"
 		%dk_call% dk_set target_arch	"x86"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="8" (
+	) else if "!input!" equ "8" (
 		%dk_call% dk_set target_os		"ios"
 		%dk_call% dk_set target_arch	"arm32"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="9" (
+	) else if "!input!" equ "9" (
 		%dk_call% dk_set target_os		"ios"
 		%dk_call% dk_set target_arch	"arm64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="10" (
+	) else if "!input!" equ "10" (
 		%dk_call% dk_set target_os		"ios"
 		%dk_call% dk_set target_arch	"x86"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="11" (
+	) else if "!input!" equ "11" (
 		%dk_call% dk_set target_os		"ios"
 		%dk_call% dk_set target_arch	"x86_64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="12" (
+	) else if "!input!" equ "12" (
 		%dk_call% dk_set target_os		"iossim"
 		%dk_call% dk_set target_arch	"arm32"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="13" (
+	) else if "!input!" equ "13" (
 		%dk_call% dk_set target_os		"iossim"
 		%dk_call% dk_set target_arch	"arm64"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="14" (
+	) else if "!input!" equ "14" (
 		%dk_call% dk_set target_os		"iossim"
 		%dk_call% dk_set target_arch	"x86"
 		%dk_call% dk_set target_env		"clang"
-	) else if "!input!"=="15" (
+	) else if "!input!" equ "15" (
 		%dk_call% dk_set target_os 		"iossim"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="16" (
+	) else if "!input!" equ "16" (
 		%dk_call% dk_set target_os 		"linux"
 		%dk_call% dk_set target_arch 	"arm32"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="17" (
+	) else if "!input!" equ "17" (
 		%dk_call% dk_set target_os 		"linux"
 		%dk_call% dk_set target_arch 	"arm64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="18" (
+	) else if "!input!" equ "18" (
 		%dk_call% dk_set target_os 		"linux"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="19" (
+	) else if "!input!" equ "19" (
 		%dk_call% dk_set target_os 		"linux"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="20" (
+	) else if "!input!" equ "20" (
 		%dk_call% dk_set target_os 		"mac"
 		%dk_call% dk_set target_arch 	"arm32"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="21" (
+	) else if "!input!" equ "21" (
 		%dk_call% dk_set target_os 		"mac"
 		%dk_call% dk_set target_arch 	"arm64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="22" (
+	) else if "!input!" equ "22" (
 		%dk_call% dk_set target_os 		"mac"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="23" (
+	) else if "!input!" equ "23" (
 		%dk_call% dk_set target_os 		"mac"
 		%dk_call% dk_set target_arch	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="24" (
+	) else if "!input!" equ "24" (
 		%dk_call% dk_set target_os 		"raspberry"
 		%dk_call% dk_set target_arch 	"arm32"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="25" (
+	) else if "!input!" equ "25" (
 		%dk_call% dk_set target_os 		"raspberry"
 		%dk_call% dk_set target_arch 	"arm64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="26" (
+	) else if "!input!" equ "26" (
 		%dk_call% dk_set target_os 		"raspberry"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="27" (
+	) else if "!input!" equ "27" (
 		%dk_call% dk_set target_os 		"raspberry"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="28" (
+	) else if "!input!" equ "28" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"arm32"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="29" (
+	) else if "!input!" equ "29" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"arm64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="30" (
+	) else if "!input!" equ "30" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="31" (
+	) else if "!input!" equ "31" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"gcc"
-	) else if "!input!"=="32" (
+	) else if "!input!" equ "32" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86"
 		%dk_call% dk_set target_env 	"msvc"
-	) else if "!input!"=="33" (
+	) else if "!input!" equ "33" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"clang"
-	) else if "!input!"=="34" (
+	) else if "!input!" equ "34" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"gcc"
-	) else if "!input!"=="35" (
+	) else if "!input!" equ "35" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"msvc"
-	) else if "!input!"=="36" (
+	) else if "!input!" equ "36" (
 		%dk_call% dk_set target_os 		"win"
 		%dk_call% dk_set target_arch 	"x86_64"
 		%dk_call% dk_set target_env 	"ucrt"
-	) else if "!input!"=="37" (
+	) else if "!input!" equ "37" (
 		%dk_call% dk_exit 0
 	) else (
 		%dk_call% dk_warning "invalid selection"

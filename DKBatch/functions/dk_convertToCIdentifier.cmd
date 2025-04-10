@@ -18,8 +18,8 @@ setlocal enabledelayedexpansion
 		if not defined _input_ (goto c_identifier_endLoop)
 
 		for /F "delims=*~ eol=*" %%C in ("%_input_:~0,1%") do (			
-			if not "!map:%%C=!"=="%map%" (set "dk_convertToCIdentifier=!dk_convertToCIdentifier!%%C")
-			if "!map:%%C=!"=="%map%" (set "dk_convertToCIdentifier=!dk_convertToCIdentifier!_")
+			if not "!map:%%C=!" equ "%map%" (set "dk_convertToCIdentifier=!dk_convertToCIdentifier!%%C")
+			if "!map:%%C=!" equ "%map%" (set "dk_convertToCIdentifier=!dk_convertToCIdentifier!_")
 		)
 		set "_input_=%_input_:~1%"
 		goto c_identifier_loop

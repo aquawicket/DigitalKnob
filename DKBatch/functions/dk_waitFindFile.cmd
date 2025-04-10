@@ -13,7 +13,7 @@ setlocal enableDelayedExpansion
 
 	set /a "seconds=0"
 	set /a "timeout=30"
-	if not "%~3"=="" (set /a "timeout=%~3")
+	if not "%~3" equ "" (set /a "timeout=%~3")
 	
 	echo Looking for %filename% in %searchPath% for %timeout% seconds. press q to skip
 	:dk_waitFindFile_LOOP
@@ -33,7 +33,7 @@ setlocal enableDelayedExpansion
         CHOICE /T 1 /C "yq" /D y > nul
 
         :: User pressed Q? just quit
-        if not "%errorlevel%"=="1" (goto :eof)
+        if not "%errorlevel%" equ "1" (goto :eof)
 
         :: Repeat until file changed, timeout elapsed, user quits or Ctrl-C
 		if %seconds% gtr %timeout% (

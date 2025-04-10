@@ -14,7 +14,7 @@ setlocal enableDelayedExpansion
     set "_haystack_=%~1"
     set "_needle_=%~2"
 	
-	if /I not "XXX!_haystack_:%_needle_%=!XXX"=="XXX%_haystack_%XXX" (
+	if /I not "XXX!_haystack_:%_needle_%=!XXX" equ "XXX%_haystack_%XXX" (
         if "%~3" neq "" (endlocal & set "%3=true")
 		set "_haystack_="
 		set "_needle_="

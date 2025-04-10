@@ -22,7 +22,7 @@ setlocal enableDelayedExpansion
 		endlocal & set "dk_isNumber=-1"
 	)
 
-	if not "%~2"=="" (set "%~2=%dk_isNumber%")
+	if not "%~2" equ "" (set "%~2=%dk_isNumber%")
 	exit /b %dk_isNumber%
 %endfunction%
 

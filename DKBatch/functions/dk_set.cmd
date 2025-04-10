@@ -18,7 +18,7 @@ setlocal enableDelayedExpansion
 	for %%Z in (%_args_%) do (
 		set /a _argc_+=1
 	)
-	if "%_argc_%"=="1" (
+	if "%_argc_%" equ "1" (
 		for %%Z in (%_args_%) do set _args_=%%~Z
 	)
 	

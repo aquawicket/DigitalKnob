@@ -41,7 +41,7 @@ setlocal enableDelayedExpansion
 			if not defined _line_ (set /a _line_=0)
 			:skipTarget
 			call set "comment_check=%%BUILD_LIST[!_line_!][0]%%"
-			if "!comment_check:~0,1!"=="#" (
+			if "!comment_check:~0,1!" equ "#" (
 				rem echo skipping _line_ . . .
 				set /a _line_+=1
 				goto :skipTarget

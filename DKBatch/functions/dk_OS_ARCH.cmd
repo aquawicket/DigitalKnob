@@ -12,7 +12,7 @@ setlocal
 
 	for /f "tokens=1* delims==" %%A in ('wmic os get OSArchitecture /value') do (
 	for /f "tokens=*" %%S in ("%%B") do (
-		if "%%A"=="OSArchitecture" set "OS_ARCH=%%S"
+		if "%%A" equ "OSArchitecture" set "OS_ARCH=%%S"
 	))
 	
 	endlocal & (

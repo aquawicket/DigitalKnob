@@ -133,7 +133,7 @@ goto MAS_Start
 cls
 title  Microsoft Activation Scripts AIO 1.4
 set _elev=
-if /i "%~1"=="-el" set _elev=1
+if /i "%~1" equ "-el" set _elev=1
 for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 set "_null=1>nul 2>nul"
 set "_psc=powershell"
@@ -143,7 +143,7 @@ set "ErrLine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 ::========================================================================================================================================
 
-for %%i in (powershell.exe) do if "%%~$path:i"=="" (
+for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
 echo Powershell is not installed in the system.
 echo Aborting...
@@ -2421,11 +2421,11 @@ set instype=
 for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if not errorlevel 1 set "instype=%%b"
 
 set KMS38=
-if "%winbuild%" GEQ "17763" if "%osedition%"=="EnterpriseS" set KMS38=1
-if "%winbuild%" GEQ "17763" if "%osedition%"=="EnterpriseSN" set KMS38=1
-if "%osedition%"=="EnterpriseG" set KMS38=1
-if "%osedition%"=="EnterpriseGN" set KMS38=1
-if not "%instype%"=="Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
+if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseS" set KMS38=1
+if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseSN" set KMS38=1
+if "%osedition%" equ "EnterpriseG" set KMS38=1
+if "%osedition%" equ "EnterpriseGN" set KMS38=1
+if not "%instype%" equ "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
 
 if defined KMS38 (
 call "%~dp0KMS38_Activation_AIO.cmd" /u
@@ -2472,11 +2472,11 @@ set instype=
 for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if not errorlevel 1 set "instype=%%b"
 
 set KMS38=
-if "%winbuild%" GEQ "17763" if "%osedition%"=="EnterpriseS" set KMS38=1
-if "%winbuild%" GEQ "17763" if "%osedition%"=="EnterpriseSN" set KMS38=1
-if "%osedition%"=="EnterpriseG" set KMS38=1
-if "%osedition%"=="EnterpriseGN" set KMS38=1
-if not "%instype%"=="Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
+if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseS" set KMS38=1
+if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseSN" set KMS38=1
+if "%osedition%" equ "EnterpriseG" set KMS38=1
+if "%osedition%" equ "EnterpriseGN" set KMS38=1
+if not "%instype%" equ "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
 
 if defined KMS38 (
 call "%~dp0KMS38_Activation_AIO.cmd" /u
@@ -2692,8 +2692,8 @@ set "_args=%~1"
 set "_arg2=%~2"
 if defined _arg2 set "_args=%~1 %~2"
 for %%A in (%_args%) do (
-if /i "%%A"=="-el" set _elev=1
-if /i "%%A"=="/u" set Unattended=1)
+if /i "%%A" equ "-el" set _elev=1
+if /i "%%A" equ "/u" set Unattended=1)
 :DL_NoProgArgs
 for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 set "_psc=powershell"
@@ -2710,7 +2710,7 @@ set wApp=55c92734-d682-4d71-983e-d6ec3f16059f
 
 ::========================================================================================================================================
 
-for %%i in (powershell.exe) do if "%%~$path:i"=="" (
+for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
 echo Powershell is not installed in the system.
 echo Aborting...
@@ -2786,7 +2786,7 @@ goto DL_Done
 ::  Written by @abbodi1406
 
 set "_work=%~dp0"
-if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
+if "%_work:~-1%" equ "\" set "_work=%_work:~0,-1%"
 
 set "_batf=%~f0"
 set "_batp=%_batf:'=''%"
@@ -2848,7 +2848,7 @@ set SKU=
 for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
 if not defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
 
-if "%osSKU%"=="" (
+if "%osSKU%" equ "" (
 %ELine%
 echo SKU value was not detected properly. Aborting...
 goto DL_Done
@@ -2859,7 +2859,7 @@ goto DL_Done
 set osedition=
 call :_CheckEdition %nul%
 
-if "%osedition%"=="" (
+if "%osedition%" equ "" (
 %ELine%
 echo [%winos% ^| %winbuild% ^| SKU:%osSKU%] HWID Activation is Not Supported.
 goto DL_Done
@@ -2877,7 +2877,7 @@ cls
 set key=
 call :%osedition% %nul%
 
-if "%key%"=="" (
+if "%key%" equ "" (
 %ELine%
 echo [%winos% ^| %winbuild%] HWID Activation is Not Supported.
 goto DL_Done
@@ -2912,12 +2912,12 @@ set "wlecho=Checking %_2%                        [Service Status -%wl_state%] [S
 set "specho=Checking %_3%                         [Service Status -%sp_state%] [Startup Type -%sp_start_type%]"
 set "wuecho=Checking %_4%                       [Service Status -%wu_state%] [Startup Type -%wu_start_type%]"
 
-if not "%Cl_start_type%"=="Demand"       (call :DL_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
-if not "%wl_start_type%"=="Demand"       (call :DL_color "%wlecho%" %Red% & set wlst_e=1) else (echo %wlecho%)
-if not "%sp_start_type%"=="Delayed-Auto" (call :DL_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
+if not "%Cl_start_type%" equ "Demand"       (call :DL_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
+if not "%wl_start_type%" equ "Demand"       (call :DL_color "%wlecho%" %Red% & set wlst_e=1) else (echo %wlecho%)
+if not "%sp_start_type%" equ "Delayed-Auto" (call :DL_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
 
-if "%wu_start_type%"=="Disabled" (set "_C=%Red%") else (set "_C=%Gray%")
-if not "%wu_start_type%"=="Auto"         (call :DL_color "%wuecho%" %_C% & set wust_e=1) else (echo %wuecho%)
+if "%wu_start_type%" equ "Disabled" (set "_C=%Red%") else (set "_C=%Gray%")
+if not "%wu_start_type%" equ "Auto"         (call :DL_color "%wuecho%" %_C% & set wust_e=1) else (echo %wuecho%)
 
 echo:
 if defined Clst_e (sc config %_1% start= Demand %nul%       && set Clst_s=%_1%-Demand || set Clst_u=%_1%-Demand )
@@ -2931,10 +2931,10 @@ if defined st_s (echo Changing services Startup Type to       [ %Clst_s%%wlst_s%
 for %%# in (Clst_u,wlst_u,spst_u,wust_u) do if defined %%# set st_u=1
 if defined st_u (call :DL_color "Error in changing Startup Type to       [ %Clst_u%%wlst_u%%spst_u%%wust_u%]" %Red%)
 
-if not "%Cl_state%"=="Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
-if not "%wl_state%"=="Running" (%_psc% start-service %_2% %nul% && set wl_s=%_2% || set wl_u=%_2% )
-if not "%sp_state%"=="Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
-if not "%wu_state%"=="Running" (%_psc% start-service %_4% %nul% && set wu_s=%_4% || set wu_u=%_4% )
+if not "%Cl_state%" equ "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
+if not "%wl_state%" equ "Running" (%_psc% start-service %_2% %nul% && set wl_s=%_2% || set wl_u=%_2% )
+if not "%sp_state%" equ "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
+if not "%wu_state%" equ "Running" (%_psc% start-service %_4% %nul% && set wu_s=%_4% || set wu_u=%_4% )
 
 for %%# in (Cl_s,wl_s,sp_s,wu_s) do if defined %%# set s_s=1
 if defined s_s (echo Starting services                       [ %Cl_s%%wl_s%%sp_s%%wu_s%] [Successful])
@@ -2989,7 +2989,7 @@ pushd "%temp_%\"
 set _gather_hash=
 set _slc_hash=
 
-if "%arch%"=="ARM64" (
+if "%arch%" equ "ARM64" (
 set _gather_hash=578364cb2319da7999acd8c015b4ce8da8f1b282
 set _slc_hash=5dbea3a580cf60391453a04a5c910a3ceca2b810
 %nul% %_psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':bat2file\:.*';iex ($f[1]);X 1;X 2;"
@@ -3034,7 +3034,7 @@ echo %copyfiles% [%SystemRoot%\Temp\_Ticket_Work\] [Successful]
 
 set "GatherMod=Creating modified gatherosstate        "
 
-if not "%arch%"=="ARM64" (
+if not "%arch%" equ "ARM64" (
 rundll32 "%temp_%\slc.dll",PatchGatherosstate %nul%
 if not exist "%temp_%\gatherosstatemodified.exe" (
 call :DL_color "%GatherMod% [Unsuccessful] Aborting" %Red%
@@ -3048,7 +3048,7 @@ echo %GatherMod% [Successful]
 ::========================================================================================================================================
 
 set _gather=
-if "%arch%"=="ARM64" (
+if "%arch%" equ "ARM64" (
 set _gather=gatherosstate.exe
 ) else (
 set _gather=gatherosstatemodified.exe
@@ -3125,7 +3125,7 @@ call :DL_CheckPermAct
 if defined PermAct goto DL_Act_successful
 
 call :DL_ReTry
-if not "%ErrCode%"=="" set "Error_Code_=[Error Code %ErrCode%]"
+if not "%ErrCode%" equ "" set "Error_Code_=[Error Code %ErrCode%]"
 call :DL_CheckPermAct
 
 :DL_Act_successful
@@ -3172,19 +3172,19 @@ goto DL_Done
 for /f "tokens=1,3 delims=: " %%a in ('sc query %1') do (if /i %%a==state set "state=%%b")
 for /f "tokens=1-4 delims=: " %%a in ('sc qc %1') do (if /i %%a==start_type set "start_type=%%c %%d")
 
-if /i "%state%"=="STOPPED" set state=Stopped
-if /i "%state%"=="RUNNING" set state=Running
+if /i "%state%" equ "STOPPED" set state=Stopped
+if /i "%state%" equ "RUNNING" set state=Running
 
-if /i "%start_type%"=="auto_start (delayed)" set start_type=Delayed-Auto
-if /i "%start_type%"=="auto_start "          set start_type=Auto
-if /i "%start_type%"=="demand_start "        set start_type=Demand
-if /i "%start_type%"=="disabled "            set start_type=Disabled
+if /i "%start_type%" equ "auto_start (delayed)" set start_type=Delayed-Auto
+if /i "%start_type%" equ "auto_start "          set start_type=Auto
+if /i "%start_type%" equ "demand_start "        set start_type=Demand
+if /i "%start_type%" equ "disabled "            set start_type=Disabled
 
 for %%i in (%*) do (
-if /i "%%i"=="%_4%" set "wu_start_type=%start_type%" & set "wu_state=%state%"
-if /i "%%i"=="%_3%" set "sp_start_type=%start_type%" & set "sp_state=%state%"
-if /i "%%i"=="%_1%" set "Cl_start_type=%start_type%" & set "Cl_state=%state%"
-if /i "%%i"=="%_2%" set "wl_start_type=%start_type%" & set "wl_state=%state%"
+if /i "%%i" equ "%_4%" set "wu_start_type=%start_type%" & set "wu_state=%state%"
+if /i "%%i" equ "%_3%" set "sp_start_type=%start_type%" & set "sp_state=%state%"
+if /i "%%i" equ "%_1%" set "Cl_start_type=%start_type%" & set "Cl_state=%state%"
+if /i "%%i" equ "%_2%" set "wl_start_type=%start_type%" & set "wl_state=%state%"
 )
 exit /b
 
@@ -10982,8 +10982,8 @@ set "_args=%~1"
 set "_arg2=%~2"
 if defined _arg2 set "_args=%~1 %~2"
 for %%A in (%_args%) do (
-if /i "%%A"=="-el" set _elev=1
-if /i "%%A"=="/u" set Unattended=1)
+if /i "%%A" equ "-el" set _elev=1
+if /i "%%A" equ "/u" set Unattended=1)
 :K38_NoProgArgs
 for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 set "_psc=powershell"
@@ -11000,7 +11000,7 @@ set wApp=55c92734-d682-4d71-983e-d6ec3f16059f
 
 ::========================================================================================================================================
 
-for %%i in (powershell.exe) do if "%%~$path:i"=="" (
+for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
 echo Powershell is not installed in the system.
 echo Aborting...
@@ -11076,7 +11076,7 @@ goto K38_Done
 ::  Written by @abbodi1406
 
 set "_work=%~dp0"
-if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
+if "%_work:~-1%" equ "\" set "_work=%_work:~0,-1%"
 
 set "_batf=%~f0"
 set "_batp=%_batf:'=''%"
@@ -11138,7 +11138,7 @@ set SKU=
 for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
 if not defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
 
-if "%osSKU%"=="" (
+if "%osSKU%" equ "" (
 %ELine%
 echo SKU value was not detected properly. Aborting...
 goto K38_Done
@@ -11149,7 +11149,7 @@ goto K38_Done
 set osedition=
 call :K38_CheckEdition %nul%
 
-if "%osedition%"=="" (
+if "%osedition%" equ "" (
 %ELine%
 echo [%winos% ^| %winbuild% ^| SKU:%osSKU%] KMS38 Activation is Not Supported.
 goto K38_Done
@@ -11169,7 +11169,7 @@ wmic os get osarchitecture | find /i "ARM" > nul && set arch=ARM64|| echo %PROCE
 ::========================================================================================================================================
 
 cls
-if "%app%"=="" (
+if "%app%" equ "" (
 %ELine%
 echo [%winos% ^| %winbuild%] KMS38 Activation is Not Supported.
 goto K38_Done
@@ -11178,7 +11178,7 @@ goto K38_Done
 set key=
 call :%app% %nul%
 
-if "%key%"=="" (
+if "%key%" equ "" (
 %ELine%
 echo [%winos% ^| %winbuild% ^| %app%] KMS38 Activation is Not Supported.
 goto K38_Done
@@ -11203,8 +11203,8 @@ for %%# in (%_1% %_3%) do call :K38_ServiceCheck %%#
 set "CLecho=Checking %_1%                        [Service Status -%Cl_state%] [Startup Type -%Cl_start_type%]"
 set "specho=Checking %_3%                         [Service Status -%sp_state%] [Startup Type -%sp_start_type%]"
 
-if not "%Cl_start_type%"=="Demand"       (call :K38_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
-if not "%sp_start_type%"=="Delayed-Auto" (call :K38_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
+if not "%Cl_start_type%" equ "Demand"       (call :K38_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
+if not "%sp_start_type%" equ "Delayed-Auto" (call :K38_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
 
 echo:
 if defined Clst_e (sc config %_1% start= Demand %nul%       && set Clst_s=%_1%-Demand || set Clst_u=%_1%-Demand )
@@ -11216,8 +11216,8 @@ if defined st_s (echo Changing services Startup Type to       [ %Clst_s%%spst_s%
 for %%# in (Clst_u,spst_u) do if defined %%# set st_u=1
 if defined st_u (call :K38_color "Error in changing Startup Type to       [ %Clst_u%%spst_u%]" %Red%)
 
-if not "%Cl_state%"=="Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
-if not "%sp_state%"=="Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
+if not "%Cl_state%" equ "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
+if not "%sp_state%" equ "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
 
 for %%# in (Cl_s,sp_s) do if defined %%# set s_s=1
 if defined s_s (echo Starting services                       [ %Cl_s%%sp_s%] [Successful])
@@ -11293,7 +11293,7 @@ set _gather_hash=
 set _slc_hash=
 set "A_Cor_cl=%systemroot%\System32\clipup.exe"
 
-if "%arch%"=="ARM64" (
+if "%arch%" equ "ARM64" (
 set _gather_hash=578364cb2319da7999acd8c015b4ce8da8f1b282
 set _slc_hash=5dbea3a580cf60391453a04a5c910a3ceca2b810
 %nul% %_psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':bat2file\:.*';iex ($f[1]);X 1;X 2;"
@@ -11502,17 +11502,17 @@ goto K38_Done
 for /f "tokens=1,3 delims=: " %%a in ('sc query %1') do (if /i %%a==state set "state=%%b")
 for /f "tokens=1-4 delims=: " %%a in ('sc qc %1') do (if /i %%a==start_type set "start_type=%%c %%d")
 
-if /i "%state%"=="STOPPED" set state=Stopped
-if /i "%state%"=="RUNNING" set state=Running
+if /i "%state%" equ "STOPPED" set state=Stopped
+if /i "%state%" equ "RUNNING" set state=Running
 
-if /i "%start_type%"=="auto_start (delayed)" set start_type=Delayed-Auto
-if /i "%start_type%"=="auto_start "          set start_type=Auto
-if /i "%start_type%"=="demand_start "        set start_type=Demand
-if /i "%start_type%"=="disabled "            set start_type=Disabled
+if /i "%start_type%" equ "auto_start (delayed)" set start_type=Delayed-Auto
+if /i "%start_type%" equ "auto_start "          set start_type=Auto
+if /i "%start_type%" equ "demand_start "        set start_type=Demand
+if /i "%start_type%" equ "disabled "            set start_type=Disabled
 
 for %%i in (%*) do (
-if /i "%%i"=="%_3%" set "sp_start_type=%start_type%" & set "sp_state=%state%"
-if /i "%%i"=="%_1%" set "Cl_start_type=%start_type%" & set "Cl_state=%state%"
+if /i "%%i" equ "%_3%" set "sp_start_type=%start_type%" & set "sp_state=%state%"
+if /i "%%i" equ "%_1%" set "Cl_start_type=%start_type%" & set "Cl_state=%state%"
 )
 exit /b
 
@@ -20247,9 +20247,9 @@ set "_args=%~1"
 set "_arg2=%~2"
 if defined _arg2 set "_args=%~1 %~2"
 for %%A in (%_args%) do (
-if /i "%%A"=="-el" set _elev=1
-if /i "%%A"=="/u" set Unattended=1
-if /i "%%A"=="Task" set Task=1&set Unattended=1)
+if /i "%%A" equ "-el" set _elev=1
+if /i "%%A" equ "/u" set Unattended=1
+if /i "%%A" equ "Task" set Task=1&set Unattended=1)
 :NoProgArgs
 for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 set "_psc=powershell"
@@ -20260,7 +20260,7 @@ set "ELine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 ::========================================================================================================================================
 
-for %%i in (powershell.exe) do if "%%~$path:i"=="" (
+for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
 echo Powershell is not installed in the system.
 echo Aborting...
@@ -20327,7 +20327,7 @@ exit /b
 
 :E_Admin
 %ELine%
-if "!_batf!"=="%ProgramData%\Online_KMS_Activation\Activate.cmd" (
+if "!_batf!" equ "%ProgramData%\Online_KMS_Activation\Activate.cmd" (
 echo Unable to elevate the script as admin.
 echo Try to manually run the file as admin - "%ProgramData%\Online_KMS_Activation\Activate.cmd"
 ) else (
@@ -20360,7 +20360,7 @@ If defined Task call :Activation_Start & echo Exiting... & echo: & exit /b
 ::  Written by @dbenham (stackoverflow)
 
 mode con: cols=98 lines=30
-if "!_batf!"=="%ProgramData%\Online_KMS_Activation\Activate.cmd" title  Online KMS Activation  [%ProgramData%\Online_KMS_Activation\]
+if "!_batf!" equ "%ProgramData%\Online_KMS_Activation\Activate.cmd" title  Online KMS Activation  [%ProgramData%\Online_KMS_Activation\]
 %nul% %_psc% "&{$H=get-host;$W=$H.ui.rawui;$B=$W.buffersize;$B.height=150;$W.buffersize=$B;}"
 
 ::========================================================================================================================================
@@ -20490,7 +20490,7 @@ if /i %PROCESSOR_ARCHITECTURE%==x86 (if not defined PROCESSOR_ARCHITEW6432 (
 set "_temp=%SystemRoot%\Temp"
 set "_log=%~dpn0"
 set "_work=%~dp0"
-if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
+if "%_work:~-1%" equ "\" set "_work=%_work:~0,-1%"
 for /f "skip=2 tokens=2*" %%a in ('reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop') do call set "_dsk=%%b"
 if exist "%SystemDrive%\Users\Public\Desktop\desktop.ini" set "_dsk=%SystemDrive%\Users\Public\Desktop"
 setlocal EnableDelayedExpansion
@@ -20714,7 +20714,7 @@ FOR /F "TOKENS=8 DELIMS=\" %%A IN ('REG QUERY "%RegKey%" /f "%Pattern%" /k %_Nul
     FOR /F "TOKENS=3 DELIMS=-~" %%B IN ('ECHO %%A') DO SET "EditionPKG=%%B"
   )
 )
-IF /I "%EditionPKG:~-7%"=="Edition" (
+IF /I "%EditionPKG:~-7%" equ "Edition" (
 SET "EditionID=%EditionPKG:~0,-7%"
 ) ELSE (
 FOR /F "TOKENS=3 DELIMS=: " %%A IN ('DISM /English /Online /Get-CurrentEdition %_Nul6% ^| FIND /I "Current Edition :"') DO SET "EditionID=%%A"
@@ -20725,11 +20725,11 @@ IF %winbuild% GEQ 17063 FOR /F "SKIP=2 TOKENS=2*" %%A IN ('REG QUERY "HKLM\SOFTW
 IF %winbuild% LSS 14393 FOR /F "SKIP=2 TOKENS=2*" %%A IN ('REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionId') DO SET "EditionID=%%B"
 GOTO :Main
 )
-FOR %%A IN (Cloud,CloudN,IoTEnterprise,IoTEnterpriseS,ProfessionalSingleLanguage,ProfessionalCountrySpecific) DO (IF /I "%EditionWMI%"=="%%A" GOTO :Main)
+FOR %%A IN (Cloud,CloudN,IoTEnterprise,IoTEnterpriseS,ProfessionalSingleLanguage,ProfessionalCountrySpecific) DO (IF /I "%EditionWMI%" equ "%%A" GOTO :Main)
 SET "EditionID=%EditionWMI%"
 
 :Main
-IF DEFINED EditionID FOR %%A IN (EnterpriseG,EnterpriseGN) DO (IF /I "%EditionID%"=="%%A" SET Win10Gov=1)
+IF DEFINED EditionID FOR %%A IN (EnterpriseG,EnterpriseGN) DO (IF /I "%EditionID%" equ "%%A" SET Win10Gov=1)
 if defined EditionID (set "_winos=Windows %EditionID% edition") else (set "_winos=Detected Windows")
 for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName %_Nul6%') do if not errorlevel 1 set "_winos=%%b"
 set "nKMS=does not support KMS activation..."
@@ -20928,7 +20928,7 @@ set WinPerm=1
 if %WinPerm% EQU 0 (
 wmic path %spp% where "ApplicationID='%_wApp%' and LicenseStatus='1'" get Name %_Nul2% | findstr /i "Windows" %_Nul3% && (
 for /f "tokens=%tok% delims=, " %%G in ('"wmic path %spp% where (ApplicationID='%_wApp%' and LicenseStatus='1') get Description /VALUE"') do set "channel=%%G"
-  for %%A in (VOLUME_MAK, RETAIL, OEM_DM, OEM_SLP, OEM_COA, OEM_COA_SLP, OEM_COA_NSLP, OEM_NONSLP, OEM) do if /i "%%A"=="!channel!" set WinPerm=1
+  for %%A in (VOLUME_MAK, RETAIL, OEM_DM, OEM_SLP, OEM_COA, OEM_COA_SLP, OEM_COA_NSLP, OEM_NONSLP, OEM) do if /i "%%A" equ "!channel!" set WinPerm=1
   )
 )
 if %WinPerm% EQU 0 (
@@ -21235,7 +21235,7 @@ echo:
 set "_key="
 for /f "tokens=2 delims==" %%A in ('"wmic path %spp% where ID='%app%' get Name /VALUE"') do echo Installing Key for: %%A
 call :keys %app%
-if "%_key%"=="" (echo Could not find matching KMS Client key&exit /b)
+if "%_key%" equ "" (echo Could not find matching KMS Client key&exit /b)
 wmic path %sps% where version='%ver%' call InstallProductKey ProductKey="%_key%" %_Nul3%
 set ERRORCODE=%ERRORLEVEL%
 if %ERRORCODE% NEQ 0 (
@@ -21342,7 +21342,7 @@ set "_PRIDs="
 set "_LicensesPath="
 set "_Integrator="
 for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath" %_Nul6%') do if not errorlevel 1 (set "_InstallRoot=%%b\root")
-if not "%_InstallRoot%"=="" (
+if not "%_InstallRoot%" equ "" (
   for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v PackageGUID" %_Nul6%') do if not errorlevel 1 (set "_GUID=%%b")
   for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration /v ProductReleaseIds" %_Nul6%') do if not errorlevel 1 (set "_ProductIds=%%b")
   set "_Config=HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration"
@@ -21351,7 +21351,7 @@ if not "%_InstallRoot%"=="" (
 set "_LicensesPath=%_InstallRoot%\Licenses16"
 set "_Integrator=%_InstallRoot%\integration\integrator.exe"
 for /f "skip=2 tokens=2*" %%a in ('"reg query %_PRIDs% /v ActiveConfiguration" %_Nul6%') do set "_PRIDs=%_PRIDs%\%%b"
-if "%_ProductIds%"=="" (
+if "%_ProductIds%" equ "" (
 if %_Office15% EQU 0 (goto :%_fC2R%) else (goto :Reg15istry)
 )
 if not exist "%_LicensesPath%\ProPlus*.xrm-ms" (
@@ -21371,14 +21371,14 @@ set "_PR15IDs="
 set "_OSPP15Ready="
 set "_Licenses15Path="
 for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath" %_Nul6%') do if not errorlevel 1 (set "_Install15Root=%%b\root")
-if not "%_Install15Root%"=="" (
+if not "%_Install15Root%" equ "" (
   for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration /v ProductReleaseIds" %_Nul6%') do if not errorlevel 1 (set "_Product15Ids=%%b")
   set "_Con15fig=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration /v ProductReleaseIds"
   set "_PR15IDs=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\ProductReleaseIDs"
   set "_OSPP15Ready=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration"
 )
 set "_OSPP15ReadT=REG_SZ"
-if "%_Product15Ids%"=="" (
+if "%_Product15Ids%" equ "" (
   for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\propertyBag /v productreleaseid" %_Nul6%') do if not errorlevel 1 (set "_Product15Ids=%%b")
   set "_Con15fig=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\propertyBag /v productreleaseid"
   set "_OSPP15Ready=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun"
@@ -21392,7 +21392,7 @@ if exist "%ProgramFiles%\Microsoft Office\Office15\OSPP.VBS" (
 ) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office15\OSPP.VBS" (
   set "_OSPP15VBS=%ProgramFiles(x86)%\Microsoft Office\Office15\OSPP.VBS"
 )
-if "%_Product15Ids%"=="" (
+if "%_Product15Ids%" equ "" (
 if %_Office16% EQU 0 (goto :%_fC2R%) else (goto :CheckC2R)
 )
 if not exist "%_Licenses15Path%\ProPlus*.xrm-ms" (
@@ -21452,7 +21452,7 @@ if not exist "!_work!\bin\cleanospp%xBit%.exe" (
 set "_copp="
 )
 if %_Retail% EQU 0 if %_OMSI% EQU 0 if defined _copp (
-if "!_copp!"=="1" (
+if "!_copp!" equ "1" (
 %_Nul3% "!_work!\bin\cleanospp%xBit%.exe" -Licenses
 ) else (
 pushd %_copp%
@@ -21800,7 +21800,7 @@ goto :GVLKC2R
 :InsLic
 set "_ID=%1Volume"
 set "_pkey="
-if not "%2"=="" (
+if not "%2" equ "" (
 set "_ID=%1Retail"
 set "_pkey=PidKey=%2"
 )
@@ -21817,7 +21817,7 @@ exit /b
 set "_ID=%1Volume"
 set "_patt=%1VL_"
 set "_pkey="
-if not "%2"=="" (
+if not "%2" equ "" (
 set "_ID=%1Retail"
 set "_patt=%1R_"
 set "_pkey=%2"
@@ -21848,7 +21848,7 @@ if exist "%SysPath%\spp\store_test\2.0\tokens.dat" if defined _copp (
 goto :%_sC2R%
 
 :keys
-if "%~1"=="" exit /b
+if "%~1" equ "" exit /b
 goto :%1 %_Nul2%
 
 :: Windows 10 [RS5]
@@ -22790,11 +22790,11 @@ set "_arg3=%~3"
 if defined _arg2 set "_args=%~1 %~2"
 if defined _arg3 set "_args=%~1 %~2 %~3"
 for %%A in (%_args%) do (
-if /i "%%A"=="-el" set _elev=1
-if /i "%%A"=="/swa" set _SkipWinAct=1
-if /i "%%A"=="/rt" set RenTask=1&set Unattended=1
-if /i "%%A"=="/rat" set RenActTask=1&set Unattended=1
-if /i "%%A"=="/dcm" set DeskMenu=1&set Unattended=1)
+if /i "%%A" equ "-el" set _elev=1
+if /i "%%A" equ "/swa" set _SkipWinAct=1
+if /i "%%A" equ "/rt" set RenTask=1&set Unattended=1
+if /i "%%A" equ "/rat" set RenActTask=1&set Unattended=1
+if /i "%%A" equ "/dcm" set DeskMenu=1&set Unattended=1)
 :NoProgArgs
 for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 set "_psc=powershell"
@@ -22806,7 +22806,7 @@ set "ELine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 ::========================================================================================================================================
 
-for %%i in (powershell.exe) do if "%%~$path:i"=="" (
+for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
 echo Powershell is not installed in the system.
 echo Aborting...
@@ -22885,7 +22885,7 @@ goto Done
 ::  Written by @abbodi1406
 
 set "_work=%~dp0"
-if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
+if "%_work:~-1%" equ "\" set "_work=%_work:~0,-1%"
 
 set "_batf=%~f0"
 set "_batp=%_batf:'=''%"
@@ -23412,7 +23412,7 @@ set "ELine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 ::========================================================================================================================================
 
-for %%i in (powershell.exe) do if "%%~$path:i"=="" (
+for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
 echo Powershell is not installed in the system.
 echo Aborting...
@@ -23583,7 +23583,7 @@ set SKU=
 for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
 if not defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
 
-if "%osSKU%"=="" (
+if "%osSKU%" equ "" (
 %ELine%
 echo SKU value was not detected properly. Aborting...
 goto Ins_Done
@@ -23594,7 +23594,7 @@ goto Ins_Done
 set osedition=
 call :_CheckEdition %nul%
 
-if "%osedition%"=="" (
+if "%osedition%" equ "" (
 %ELine%
 echo [%winos% ^| %winbuild% ^| SKU:%osSKU%] HWID Activation is Not Supported.
 goto Ins_Done
@@ -23603,7 +23603,7 @@ goto Ins_Done
 set key=
 call :%osedition% %nul%
 
-if "%key%"=="" (
+if "%key%" equ "" (
 %ELine%
 echo [%winos% ^| %winbuild%] HWID Activation is Not Supported.
 goto Ins_Done
@@ -23693,7 +23693,7 @@ setlocal EnableDelayedExpansion
 set instype=
 for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if not errorlevel 1 set "instype=%%b"
 
-if not "%instype%"=="Client" (
+if not "%instype%" equ "Client" (
 %ELine%
 echo Unsupported OS version [Server] Detected.
 echo OS Requirement - Windows 10 [17134] 1803 and later builds.
@@ -23706,7 +23706,7 @@ for /f "tokens=2 delims==" %%a in ('"wmic path %slp% where (ApplicationID='%wApp
 if not defined osedition for /f "tokens=3 delims=: " %%a in ('DISM /English /Online /Get-CurrentEdition 2^>nul ^| find /i "Current Edition :"') do set "osedition=%%a"
 
 cls
-if "%osedition%"=="" (
+if "%osedition%" equ "" (
 %ELine%
 echo OS Edition was not detected properly. Aborting...
 goto Ced_Done
@@ -23744,7 +23744,7 @@ choice /C:NY /N /M "Do you want to change to the %%a edition? [Y,N] : "
 if errorlevel 2 (
 
 call :%%a %nul%
-if "!key!"=="" cls &%ELine% &echo [%%a ^| %winbuild%] HWID Activation is Not Supported. &goto Ced_Done
+if "!key!" equ "" cls &%ELine% &echo [%%a ^| %winbuild%] HWID Activation is Not Supported. &goto Ced_Done
 
 cls
 echo ____________________________________________________________________
@@ -23937,8 +23937,8 @@ if defined _xpr set "ExpireMsg=Extended grace period ends %_xpr%"
 )
 if %LicenseStatus% EQU 5 (
 set "License=Notification"
-  if "%LicenseReason%"=="C004F200" (set "LicenseMsg=Notification Reason: 0xC004F200 (non-genuine)."
-  ) else if "%LicenseReason%"=="C004F009" (set "LicenseMsg=Notification Reason: 0xC004F009 (grace time expired)."
+  if "%LicenseReason%" equ "C004F200" (set "LicenseMsg=Notification Reason: 0xC004F200 (non-genuine)."
+  ) else if "%LicenseReason%" equ "C004F009" (set "LicenseMsg=Notification Reason: 0xC004F009 (grace time expired)."
   ) else (set "LicenseMsg=Notification Reason: 0x%LicenseReason%"
   )
 )
@@ -23950,11 +23950,11 @@ if not defined cKmsClient exit /b
 
 if %KeyManagementServicePort%==0 set KeyManagementServicePort=1688
 set "KmsReg=Registered KMS machine name: %KeyManagementServiceMachine%:%KeyManagementServicePort%"
-if "%KeyManagementServiceMachine%"=="" set "KmsReg=Registered KMS machine name: KMS name not available"
+if "%KeyManagementServiceMachine%" equ "" set "KmsReg=Registered KMS machine name: KMS name not available"
 
 if %DiscoveredKeyManagementServiceMachinePort%==0 set DiscoveredKeyManagementServiceMachinePort=1688
 set "KmsDns=KMS machine name from DNS: %DiscoveredKeyManagementServiceMachineName%:%DiscoveredKeyManagementServiceMachinePort%"
-if "%DiscoveredKeyManagementServiceMachineName%"=="" set "KmsDns=DNS auto-discovery: KMS name not available"
+if "%DiscoveredKeyManagementServiceMachineName%" equ "" set "KmsDns=DNS auto-discovery: KMS name not available"
 
 for /f "tokens=* delims=" %%# in ('"wmic path %~2 get ClientMachineID, KeyManagementServiceHostCaching /value" ^| findstr ^=') do set "%%#"
 if /i %KeyManagementServiceHostCaching%==True (set KeyManagementServiceHostCaching=Enabled) else (set KeyManagementServiceHostCaching=Disabled)
@@ -23962,9 +23962,9 @@ if /i %KeyManagementServiceHostCaching%==True (set KeyManagementServiceHostCachi
 if %winbuild% lss 9200 exit /b
 if %~1 equ %ospp% exit /b
 
-if "%DiscoveredKeyManagementServiceMachineIpAddress%"=="" set "DiscoveredKeyManagementServiceMachineIpAddress=not available"
+if "%DiscoveredKeyManagementServiceMachineIpAddress%" equ "" set "DiscoveredKeyManagementServiceMachineIpAddress=not available"
 
-if "%KeyManagementServiceLookupDomain%"=="" set "KeyManagementServiceLookupDomain="
+if "%KeyManagementServiceLookupDomain%" equ "" set "KeyManagementServiceLookupDomain="
 
 if %VLActivationTypeEnabled% EQU 3 (
 set VLActivationType=Token
@@ -24118,7 +24118,7 @@ set SKU=
 for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
 if not defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
 
-if "%osSKU%"=="" (
+if "%osSKU%" equ "" (
 %ELine%
 echo SKU value was not detected properly. Aborting...
 goto PU_Done
@@ -24129,7 +24129,7 @@ goto PU_Done
 set osedition=
 call :K38_CheckEdition %nul%
 
-if "%osedition%"=="" (
+if "%osedition%" equ "" (
 %ELine%
 echo OS Edition was not detected properly. Aborting...
 goto PU_Done
@@ -24140,7 +24140,7 @@ goto PU_Done
 set app=
 for /f "tokens=2 delims==" %%a in ('"wmic path %slp% where (ApplicationID='%wApp%' and LicenseFamily='%osedition%' and Description like '%%KMSCLIENT%%') get ID /VALUE" 2^>nul') do set "app=%%a"
 
-if "%app%"=="" (
+if "%app%" equ "" (
 %ELine%
 echo Activation ID was not detected properly. Aborting...
 goto PU_Done

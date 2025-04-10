@@ -22,7 +22,7 @@ setlocal enableDelayedExpansion
 		(set cmnd="%CMAKE_EXE%" --build %TARGET_PATH%/%target_triple% --config %target_type% --verbose)
 	)
 
-	if "%cmnd%"=="" (%return%)
+	if "%cmnd%" equ "" (%return%)
 
 	%cmnd% && (
 		%dk_call% dk_success "CMake Build Successful" 

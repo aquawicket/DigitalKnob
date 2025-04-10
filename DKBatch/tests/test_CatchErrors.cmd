@@ -1,7 +1,7 @@
 @echo off
 if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=../functions/"
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-if not "%~1"=="" (call %~1)
+if not "%~1" equ "" (call %~1)
 %endfunction%
 
 

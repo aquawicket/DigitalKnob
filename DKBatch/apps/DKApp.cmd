@@ -81,7 +81,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::echo %ESC%[19;70H            &::
 	::echo %ESC%[19;70HKeyCode:%~1
 	
-	::if "%~1"=="13" (echo "Enter")
+	::if "%~1" equ "13" (echo "Enter")
 	::if %~1 equ 35 (echo "End")
 	::if %~1 equ 36 (echo "Home")
 	::if %~1 equ 37 (echo "LeftArrow")

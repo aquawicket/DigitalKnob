@@ -54,19 +54,19 @@ setlocal enableDelayedExpansion
 
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if "%target_env%"=="cosmocc" (
+	if "%target_env%" equ "cosmocc" (
 		%dk_call% dk_validate SH_EXE				"%dk_call% %DKIMPORTS_DIR%/sh/DKINSTALL.cmd"
 		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd"
 		%dk_call% dk_assertPath COSMOCC_C_COMPILER
 		set "COMPILER_EXE=!SH_EXE! !COSMOCC_C_COMPILER!"
 	)
 
-	if "%target_env%"=="clang" (
+	if "%target_env%" equ "clang" (
 		%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/clang/DKINSTALL.cmd"
 		%dk_call% dk_assertPath CLANG_C_COMPILER
 		set "COMPILER_EXE=!CLANG_C_COMPILER!"
 	)
-	if "%target_env%"=="gcc" (
+	if "%target_env%" equ "gcc" (
 		%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
 		%dk_call% dk_assertPath GCC_C_COMPILER
 		set "COMPILER_EXE=!GCC_C_COMPILER!"
