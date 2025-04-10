@@ -1,1 +1,1 @@
-BACKWARD_CPP_DL=https://github.com/bombela/backward-cpp/archive/51f0700.zip
+BACKWARD_CPP_IMPORT=https://github.com/bombela/backward-cpp/archive/51f0700.zip

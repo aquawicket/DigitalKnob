@@ -5,31 +5,28 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
+###### bgfx ######
 # https://github.com/bkaradzic/bgfx.git
-
-### DEPENDS ###
-#dk_depend(libname)
-
-
-### INSTALL ###
-dk_import(https://github.com/bkaradzic/bgfx/archive/f8b20616def6ee7e82a3c14361c8a432b5bd15da.zip)
-#dk_import(https://github.com/bkaradzic/bgfx/archive/refs/heads/master.zip)
-
-
+# https://github.com/bkaradzic/bgfx/archive/f8b20616.zip
+# https://github.com/bkaradzic/bgfx/archive/refs/heads/master.zip
+#
+dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+dk_getFileParam	("$ENV{DKIMPORTS_DIR}/babel/dkconfig.txt" BGFX_IMPORT)
+dk_import		(${BGFX_IMPORT})
 
 ### LINK ###
-dk_include			(${BGFX_DIR}/include)
+dk_include			("${BGFX_DIR}/include")
 if(UNIX)
-	dk_libDebug		(${BGFX_DEBUG_DIR}/libbgfx.a)
-	dk_libRelease	(${BGFX_RELEASE_DIR}/libbgfx.a)
+	dk_libDebug		("${BGFX_DEBUG_DIR}/libbgfx.a")
+	dk_libRelease	("${BGFX_RELEASE_DIR}/libbgfx.a")
 elseif()
-	dk_libDebug		(${BGFX_DEBUG_DIR}/bgfx.lib)
-	dk_libRelease	(${BGFX_RELEASE_DIR}/bgfx.lib)
+	dk_libDebug		("${BGFX_DEBUG_DIR}/bgfx.lib")
+	dk_libRelease	("${BGFX_RELEASE_DIR}/bgfx.lib")
 endif()
 
 ### GENERATE ###
-dk_configure(${BGFX_DIR})
+dk_configure("${BGFX_DIR}")
 
 
 ### COMPILE ###
-dk_build(${BGFX_DIR})
+dk_build("${BGFX_DIR}")

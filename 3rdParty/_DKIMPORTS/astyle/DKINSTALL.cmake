@@ -12,12 +12,12 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://svn.code.sf.net/p/astyle/code/trunk astyle-code
 
 ### IMPORT ###
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam($ENV{DKIMPORTS_DIR}/astyle/dkconfig.txt ASTYLE_IMPORT)
-dk_import(${ASTYLE_IMPORT})
+dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParam		($ENV{DKIMPORTS_DIR}/astyle/dkconfig.txt ASTYLE_IMPORT)
+dk_import			(${ASTYLE_IMPORT})
 
 ### LINK ###
-dk_validate(target_triple "dk_target_triple()")
+dk_validate			(target_triple "dk_target_triple()")
 dk_include			(${ASTYLE_DIR}/src)
 
 if(WIN)
