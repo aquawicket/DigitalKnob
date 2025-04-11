@@ -17,7 +17,8 @@ setlocal
 	%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%" NO_HALT
 
     ::###### try powershell.exe ######
-	if not exist "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%WINDIR%\system32")
+	if not exist "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%WINDIR:\=/%/System32")
+	%dk_call% dk_assertPath "%POWERSHELL_EXE%"
 	
 	endlocal & (
 		set "POWERSHELL_EXE=%POWERSHELL_EXE%"

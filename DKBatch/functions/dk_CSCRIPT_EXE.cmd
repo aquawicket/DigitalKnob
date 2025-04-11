@@ -13,11 +13,10 @@ setlocal
 	if exist "%CSCRIPT_EXE%" (%return%)
 
 	if not exist "%CSCRIPT_EXE%" (%dk_call% dk_findProgram CSCRIPT_EXE "cscript.exe" "%WINDIR:\=/%/System32")
-
-	for %%Z in ("%CSCRIPT_EXE%") do set "CSCRIPT_EXE=%%~fZ"
+	%dk_call% dk_assertPath "%CSCRIPT_EXE%"
 
 	endlocal & (
-		set "CSCRIPT_EXE=%CSCRIPT_EXE:\=/%"
+		set "CSCRIPT_EXE=%CSCRIPT_EXE%"
 	)
 %endfunction%
 
@@ -33,5 +32,5 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_CSCRIPT_EXE
-	%dk_call% dk_printVar CSCRIPT_EXE
+	%dk_call% dk_echo "CSCRIPT_EXE = %CSCRIPT_EXE%"
 %endfunction%

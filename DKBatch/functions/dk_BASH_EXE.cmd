@@ -12,10 +12,10 @@ setlocal
 
 	if exist "%BASH_EXE%" (%return%)
 
-	:: try Git for windows bash.exe
 	%dk_call% dk_validate GIT "%dk_call% dk_installGit"
-	%dk_call% dk_findProgram BASH_EXE "bash.exe" "%GIT%"
-
+	if not exist "%BASH_EXE%" (%dk_call% dk_findProgram BASH_EXE "bash.exe" "%GIT%")
+	%dk_call% dk_assertPath "%BASH_EXE%"
+	
 	endlocal & (
 		set "BASH_EXE=%BASH_EXE%"
 	)

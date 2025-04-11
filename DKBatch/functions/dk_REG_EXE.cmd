@@ -14,6 +14,7 @@ setlocal
 
 	set "REG_EXE=%WINDIR:\=/%/System32/reg.exe"
 	if not exist "%REG_EXE%" (%dk_call% dk_findProgram REG_EXE "reg.exe" "%WINDIR:\=/%/System32")
+	%dk_call% dk_assertPath "%REG_EXE%"
 	
 	endlocal & (
 		set "REG_EXE=%REG_EXE%"
@@ -32,5 +33,5 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_REG_EXE
-    %dk_call% dk_printVar REG_EXE
+	%dk_call% dk_echo "REG_EXE = %REG_EXE%"
 %endfunction%

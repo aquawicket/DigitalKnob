@@ -13,8 +13,9 @@ setlocal
 	if defined CURL_EXE (%return%)
 
 	set "CURL_EXE=%WINDIR:\=/%/System32/curl.exe"
-	if not exist "%CURL_EXE%" (%dk_call% dk_findProgram CURL_EXE "curl.exe" "%WINDIR%\system32")
-
+	if not exist "%CURL_EXE%" (%dk_call% dk_findProgram CURL_EXE "curl.exe" "%WINDIR:\=/%/System32")
+	%dk_call% dk_assertPath "%CURL_EXE%"
+	
 	endlocal & (
 		set "CURL_EXE=%CURL_EXE%"
 	)
@@ -32,5 +33,5 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_CURL_EXE
-	%dk_call% dk_printVar CURL_EXE
+	%dk_call% dk_echo "CURL_EXE = %CURL_EXE%"
 %endfunction%

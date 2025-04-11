@@ -12,8 +12,8 @@ setlocal
    
     if defined TIMEOUT_EXE (%return%)
     
-	set "TIMEOUT_EXE=%WINDIR:\=/%/System32/timeout.exe"
-    if not exist "%TIMEOUT_EXE%" (%dk_call% dk_findProgram TIMEOUT_EXE "timeout.exe" "%WINDIR%\system32")
+    if not exist "%TIMEOUT_EXE%" (%dk_call% dk_findProgram TIMEOUT_EXE "timeout.exe" "%WINDIR:\=/%/System32")
+	%dk_call% dk_assertPath "%TIMEOUT_EXE%"
 	
 	endlocal & (
 		set "TIMEOUT_EXE=%TIMEOUT_EXE%"
@@ -31,6 +31,6 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_validate TIMEOUT_EXE "%dk_call% dk_TIMEOUT_EXE"
-    %dk_call% dk_printVar TIMEOUT_EXE
+	%dk_call% dk_TIMEOUT_EXE
+    %dk_call% dk_echo "TIMEOUT_EXE = %TIMEOUT_EXE%"
 %endfunction%

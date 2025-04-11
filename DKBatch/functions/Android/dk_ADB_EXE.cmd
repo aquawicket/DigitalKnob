@@ -1,4 +1,5 @@
 @echo off
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::################################################################################
@@ -10,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/android-platform-tools/DKINSTALL.cmake)" "ADB_EXE"
-	%dk_call% dk_assertVar ADB_EXE
+	%dk_call% dk_assertPath "%ADB_EXE%"
 %endfunction%
 
 
@@ -22,5 +23,5 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_ADB_EXE
-	echo ADB_EXE = %ADB_EXE%
+	%dk_call% dk_echo "ADB_EXE = '%ADB_EXE%'"
 %endfunction%

@@ -12,11 +12,11 @@ setlocal
    
     if exist %NOTEPADPP_EXE% (%return%)
     
-	::###### try notepad++.exe in 'DKTOOLS_DIR' ######
+	::###### search for notepad++.exe in 'DKTOOLS_DIR' ######
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%DKTOOLS_DIR%" NO_HALT
 
-    ::###### try notepad.exe on 'Program Files' ######
+    ::###### search for notepad.exe on 'C:/Program Files' ######
 	if not exist "%NOTEPADPP_EXE%" (%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%")
 	%dk_call% dk_assertPath "%NOTEPADPP_EXE%"
 	
