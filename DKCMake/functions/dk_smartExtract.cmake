@@ -47,7 +47,7 @@ function(dk_smartExtract src dest)
     dk_basename("${dest_realpath}" dest_folder)
 	dk_printVar(dest_folder)
 
-#  if not exist "${dest_realpath}" dk_makeDirectory "${dest_realpath}"
+#  if not exist "${dest_realpath}" dk_mkdir "${dest_realpath}"
 
     dk_info("Extracting ${src_realpath}  to  ${src_extractPath}")
 	

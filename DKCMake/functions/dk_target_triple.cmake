@@ -95,7 +95,7 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 	if(NOT EXISTS ${Target_Triple_Dir})
 		dk_warning("Target_Triple_Dir:${Target_Triple_Dir} does not exits.")
 		dk_debug("Creating directory . . .${Target_Triple_Dir} ")
-		dk_makeDirectory(${Target_Triple_Dir})
+		dk_mkdir(${Target_Triple_Dir})
 	endif()
 	dk_assertPath(Target_Triple_Dir)
 	

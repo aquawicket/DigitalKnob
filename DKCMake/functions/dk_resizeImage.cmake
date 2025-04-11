@@ -19,7 +19,7 @@ function(dk_resizeImage)
 	
 	dk_dirname(${outpath} outdir)
 	dk_assertVar(outdir)
-	dk_makeDirectory(${outdir})
+	dk_mkdir(${outdir})
 	dk_assertPath(${outdir})
 	
 	if(ANDROID_HOST)

@@ -20,7 +20,7 @@ function(dk_DKTOOLS_DIR)
 	endif()
 
 	if(NOT EXISTS "$ENV{DKTOOLS_DIR}") 
-		dk_makeDirectory("$ENV{DKTOOLS_DIR}")
+		dk_mkdir("$ENV{DKTOOLS_DIR}")
 	endif()
 endfunction()
 

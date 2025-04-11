@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 dk_depend(android-sdk)
-dk_makeDirectory(${ANDROID_SDK}/sources)
+dk_mkdir(${ANDROID_SDK}/sources)
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam	($ENV{DKIMPORTS_DIR}/android-sources/dkconfig.txt ANDROID_SOURCES_DL)
 dk_getFileParam	($ENV{DKIMPORTS_DIR}/android-sources/dkconfig.txt ANDROID_SOURCES_VERSION)

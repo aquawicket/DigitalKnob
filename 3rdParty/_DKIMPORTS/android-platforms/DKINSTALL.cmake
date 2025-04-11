@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://dl.google.com/android/repository/platform-26_r02.zip
 
 dk_depend(android-sdk)
-dk_makeDirectory(${ANDROID_SDK}/platforms)
+dk_mkdir(${ANDROID_SDK}/platforms)
 
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParam($ENV{DKIMPORTS_DIR}/android-platforms/dkconfig.txt ANDROID_PLATFORMS_DL)

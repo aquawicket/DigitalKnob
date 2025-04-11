@@ -12,7 +12,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # Installed Build Tools revision NN.N.N is corrupted" https://stackoverflow.com/a/68430992/688352
 
 dk_depend(android-sdk)
-dk_makeDirectory(${ANDROID_SDK}/build-tools)
+dk_mkdir(${ANDROID_SDK}/build-tools)
 
 # 30.0.3
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")

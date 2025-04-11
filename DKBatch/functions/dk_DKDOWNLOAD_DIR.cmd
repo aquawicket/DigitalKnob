@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::############ GET ############
 	%dk_call% dk_validatePath DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%/download"
-	if NOT exist "%DKDOWNLOAD_DIR%" (%dk_call% dk_makeDirectory "%DKDOWNLOAD_DIR%")
+	if NOT exist "%DKDOWNLOAD_DIR%" (%dk_call% dk_mkdir "%DKDOWNLOAD_DIR%")
 	
 	%dk_call% dk_assertPath DKDOWNLOAD_DIR
 %endfunction%

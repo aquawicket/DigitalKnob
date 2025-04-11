@@ -36,7 +36,7 @@ dk_move() {
 	# the base directory of the ${_to_} path must exist.    
 	_parent_dir_=$(dk_call dk_dirname "${_to_}")
 	dk_call dk_printVar _parent_dir_
-	dk_call dk_makeDirectory "${_parent_dir_}"
+	dk_call dk_mkdir "${_parent_dir_}"
 	
 	mv "${_from_}" "${_to_}"
 }
@@ -54,9 +54,9 @@ DKTEST(){
 	echo "dk_move test" > moveMe.file
 	dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
-	dk_makeDirectory ${DKDOWNLOAD_DIR}/moveMe
+	dk_mkdir ${DKDOWNLOAD_DIR}/moveMe
 	dk_move ${DKDOWNLOAD_DIR}/moveMe ${DIGITALKNOB_DIR}/iWasMoved OVERWRITE
 	
-	dk_makeDirectory moveMe
+	dk_mkdir moveMe
 	dk_move moveMe iWasMoved OVERWRITE
 }

@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	set "TARGET_PATH=%DKCPP_APPS_DIR%/%target_app%"
-	if not exist "%TARGET_PATH%/%target_triple%" (%dk_call% dk_makeDirectory "%TARGET_PATH%\%target_triple%")
+	if not exist "%TARGET_PATH%/%target_triple%" (%dk_call% dk_mkdir "%TARGET_PATH%\%target_triple%")
 	
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
 	set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"

@@ -20,7 +20,7 @@ function(dk_DKDOWNLOAD_DIR)
 	endif()
 	
 	if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}") 
-		dk_makeDirectory("$ENV{DKDOWNLOAD_DIR}")
+		dk_mkdir("$ENV{DKDOWNLOAD_DIR}")
 	endif()
 	
 	dk_assertPath("$ENV{DKDOWNLOAD_DIR}")

@@ -21,7 +21,7 @@ dk_DIGITALKNOB_DIR() {
 		export DIGITALKNOB_DIR="${DKHOME_DIR}/${DIGITALKNOB}"  
 	fi 
 	if [ ! -e "${DIGITALKNOB_DIR}" ]; then
-		dk_call dk_makeDirectory "${DIGITALKNOB_DIR}" 
+		dk_call dk_mkdir "${DIGITALKNOB_DIR}" 
 	fi
 }
 

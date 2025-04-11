@@ -34,7 +34,7 @@ dk_rename() {
 	# the base directory of the ${_to_} path must exist.    
 	parent_dir=$(dk_dirname ${_to_})
 	dk_call dk_printVar parent_dir
-	dk_call dk_makeDirectory "${parent_dir}"
+	dk_call dk_mkdir "${parent_dir}"
 	
 	mv -i ${_from_} ${_to_}   # -i means interactive, to prevent overwrite
 	#TODO
@@ -49,6 +49,6 @@ DKTEST() {
 	echo "rename this file" > renameMe.txt
 	dk_rename renameMe.txt iWasRenamed.txt
 	
-	dk_makeDirectory renameMe
+	dk_mkdir renameMe
 	dk_rename renameMe iWasRenamed
 }

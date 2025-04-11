@@ -19,7 +19,7 @@ dk_DKDOWNLOAD_DIR() {
 	fi 
 
 	if [ ! -e "${DKDOWNLOAD_DIR}" ]; then
-		dk_call dk_makeDirectory "${DKDOWNLOAD_DIR}" 
+		dk_call dk_mkdir "${DKDOWNLOAD_DIR}" 
 	fi 
 }
 

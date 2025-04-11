@@ -36,7 +36,7 @@ setlocal
     
     ::### make sure the destination parent directory exists ###
     %dk_call% dk_dirname "%destination%"
-    if not exist "%dk_dirname%" (%dk_call% dk_makeDirectory "%dk_dirname%")
+    if not exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
 
     
     ::set "DISABLE_powershell=1"

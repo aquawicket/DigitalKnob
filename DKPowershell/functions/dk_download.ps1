@@ -29,7 +29,7 @@ function Global:dk_download($url, $destination) {
 	# make sure the destination parent directory exists
 	$destination_dir = dk_call dk_dirname "${destination}"
 	if(!(${destination_dir})){ dk_call dk_error "destination_dir is invalid" }
-	if(!(Test-Path "${destination_dir}")){ dk_call dk_makeDirectory "${destination_dir}" }
+	if(!(Test-Path "${destination_dir}")){ dk_call dk_mkdir "${destination_dir}" }
 	
 	# method 1
 	Invoke-WebRequest -URI ${url} -OutFile ${destination} #-SkipHttpErrorCheck

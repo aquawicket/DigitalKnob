@@ -15,7 +15,7 @@ function dk_copy() {
 	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_warning.php");
 	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_error.php");
 	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_dirname.php");
-	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_makeDirectory.php");
+	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_mkdir.php");
 	
 	if(!isset($argv)){
 		$argv = func_get_args();
@@ -45,7 +45,7 @@ function dk_copy() {
 	# the base directory of the %$_to_ path must exist.    
 	$dk_dirname = dk_dirname("$_to_");
 	if(!file_exists("$dk_dirname")){
-		dk_makeDirectory("$dk_dirname");
+		dk_mkdir("$dk_dirname");
 	}
 
 	copy($argv[0], $argv[1]);
@@ -72,7 +72,7 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 #	dk_fileWrite("$DKCACHE_DIR/copyMe.file", "dk_copy test");
 #	dk_copy("$DKCACHE_DIR/copyMe.file", "$DKCACHE_DIR/iWasCopied.txt", "OVERWRITE");
 
-#	dk_makeDirectory("%DKCACHE_DIR%/copyMe");
+#	dk_mkdir("%DKCACHE_DIR%/copyMe");
 #	dk_copy("$DKCACHE_DIR/copyMe", "$DKCACHE_DIR/iWasCopied", OVERWRITE);
 }}
 

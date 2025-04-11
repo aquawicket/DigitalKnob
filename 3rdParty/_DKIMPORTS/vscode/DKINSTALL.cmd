@@ -35,12 +35,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist %VSCODE_EXE% (goto vscodeInstalled)
 	%dk_call% dk_echo 
     %dk_call% dk_info "Installing VSCode . . ."
-	%dk_call% dk_makeDirectory %DKTOOLS_DIR%
+	%dk_call% dk_mkdir %DKTOOLS_DIR%
 ::	%dk_call% dk_import %VSCODE_DL% PATH %VSCODE_DIR%
 	%dk_call% dk_download %VSCODE_DL%
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%VSCODE_DL_FILE%" "%VSCODE_DIR%"
-	%dk_call% dk_makeDirectory %VSCODE_DIR%\data
+	%dk_call% dk_mkdir %VSCODE_DIR%\data
 	if not exist %VSCODE_EXE% (%dk_call% dk_error "cannot find %VSCODE_EXE%")
 	:vscodeInstalled
 	

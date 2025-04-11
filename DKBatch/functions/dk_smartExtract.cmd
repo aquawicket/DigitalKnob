@@ -22,7 +22,7 @@ setlocal
 	%dk_call% dk_dirname "%dest_realpath%" dest_dirname
 	%dk_call% dk_basename "%dest_realpath%" dest_folder
 
-::  if not exist "%dest_realpath%" %dk_call% dk_makeDirectory "%dest_realpath%"
+::  if not exist "%dest_realpath%" %dk_call% dk_mkdir "%dest_realpath%"
 
     %dk_call% dk_info "Extracting %src_realpath%  to  %src_extractPath%"
 	

@@ -17,7 +17,7 @@ dk_generate() {
 	dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
 	TARGET_PATH="${DKCPP_APPS_DIR}/${target_app}"
 	#dk_call dk_printVar TARGET_PATH
-	dk_call dk_makeDirectory "${TARGET_PATH}/${target_triple,,}"
+	dk_call dk_mkdir "${TARGET_PATH}/${target_triple,,}"
 	dk_call dk_chdir "${TARGET_PATH}/${target_triple,,}"
 	dk_call dk_assertPath DKCMAKE_DIR
 	#dk_call dk_assertPath ${DKCMAKE_DIR}
@@ -68,7 +68,7 @@ dk_generate() {
 	fi
 	
 	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${target_triple,,}/${target_type}"
-	dk_call dk_makeDirectory "${CMAKE_BINARY_DIR}"
+	dk_call dk_mkdir "${CMAKE_BINARY_DIR}"
 	#dk_call dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_call dk_defined WSLENV; then

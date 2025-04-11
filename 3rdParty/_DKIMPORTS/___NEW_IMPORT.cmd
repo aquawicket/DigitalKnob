@@ -29,7 +29,7 @@ setlocal
 		%return%
 	)
 
-	%dk_call% dk_makeDirectory "%DKIMPORTS_DIR%/%name%"
+	%dk_call% dk_mkdir "%DKIMPORTS_DIR%/%name%"
 ::	echo @echo off > 								"%dk_inputBox%.cmd"
 ::	echo if not defined DK.cmd (call "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" %%~0 %%*) >> "%dk_inputBox%.cmd"
 ::	echo: >> 										"%dk_inputBox%.cmd"

@@ -27,7 +27,7 @@ function Global:dk_enterManually() {
 	dk_call dk_printVar TARGET_PATH
 	
 	if(!(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app")){
-		dk_call dk_makeDirectory "$DKCPP_APPS_DIR/$target_app"
+		dk_call dk_mkdir "$DKCPP_APPS_DIR/$target_app"
 	}
 	
 	# create DKCpp/apps/<target_app>/DKINSTALL.cmake 

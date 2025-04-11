@@ -20,7 +20,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validatePath DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	set "DKTOOLS_DIR=%DIGITALKNOB_DIR%/DKTools"
 		
-	if NOT exist "%DKTOOLS_DIR%" (%dk_call% dk_makeDirectory "%DKTOOLS_DIR%")
+	if NOT exist "%DKTOOLS_DIR%" (%dk_call% dk_mkdir "%DKTOOLS_DIR%")
 	
 	%dk_call% dk_assertPath DIGITALKNOB_DIR
 %endfunction%

@@ -19,7 +19,7 @@ function Global:dk_DKDESKTOP_DIR() {
 	$global:DKDESKTOP_DIR = "${DKHOME_DIR}/Desktop" 
 	
 	if(!(Test-Path $DKDESKTOP_DIR)){ 
-		dk_call dk_makeDirectory "${DKDESKTOP_DIR}" 
+		dk_call dk_mkdir "${DKDESKTOP_DIR}" 
 	}
 }
 

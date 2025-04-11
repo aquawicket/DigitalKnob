@@ -77,7 +77,7 @@ function(dk_download)
 	
 	if(NOT EXISTS ${dest_dir})
 		dk_notice("dest_dir:${dest_dir} does not exists. It will be created")
-		dk_makeDirectory("${dest_dir}")
+		dk_mkdir("${dest_dir}")
 	endif()
 	dk_assertPath(dest_dir)
 	dk_chdir("${dest_dir}")

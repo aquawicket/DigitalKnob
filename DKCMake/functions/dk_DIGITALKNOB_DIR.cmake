@@ -31,19 +31,19 @@ function(dk_DIGITALKNOB_DIR)
 	#dk_set(DIGITALKNOB_DIR "$ENV{DKHOME_DIR}/$ENV{DIGITALKNOB}")
 	set(ENV{DIGITALKNOB_DIR} "$ENV{DKHOME_DIR}/$ENV{DIGITALKNOB}")
     if(NOT EXISTS "$ENV{DIGITALKNOB_DIR}")
-		dk_makeDirectory("$ENV{DIGITALKNOB_DIR}")
+		dk_mkdir("$ENV{DIGITALKNOB_DIR}")
 	endif()
 	
 #	### DKDOWNLOAD_DIR ###
 #	#dk_set(ENV{DKDOWNLOAD_DIR} "$ENV{DIGITALKNOB_DIR}/download")
 #	if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}") 
-#		dk_makeDirectory("$ENV{DKDOWNLOAD_DIR}")
+#		dk_mkdir("$ENV{DKDOWNLOAD_DIR}")
 #	endif()
 	
 #	### DKTOOLS_DIR ###
 #	dk_set(ENV{DKTOOLS_DIR} "$ENV{DIGITALKNOB_DIR}/DKTools")
 #	if(NOT EXISTS "$ENV{DKTOOLS_DIR}") 
-#		dk_makeDirectory("$ENV{DKTOOLS_DIR}")
+#		dk_mkdir("$ENV{DKTOOLS_DIR}")
 #	endif()
 endfunction()
 

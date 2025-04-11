@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate OPENSSL "%dk_call% %DKIMPORTS_DIR%\openssl\DKINSTALL.cmd"
 	%dk_call% dk_validate NASM "%dk_call% %DKIMPORTS_DIR%\nasm\DKINSTALL.cmd"
 	%dk_call% dk_delete %OPENSSL%\%TARGET_TRIPLE%
-	%dk_call% dk_makeDirectory %OPENSSL%\%TARGET_TRIPLE%\Debug 
+	%dk_call% dk_mkdir %OPENSSL%\%TARGET_TRIPLE%\Debug 
 	
 	::############ win_x86_64_clang ##########
 	if "%TARGET_TRIPLE%"=="win_x86_64_clang" (

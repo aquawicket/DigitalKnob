@@ -16,7 +16,7 @@ function(dk_extract src dest)
 	dk_getOption(NO_HALT  REMOVE)
 	
 	if(NOT EXISTS ${dest})
-		dk_makeDirectory(${dest})
+		dk_mkdir(${dest})
 	endif()
 	
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")

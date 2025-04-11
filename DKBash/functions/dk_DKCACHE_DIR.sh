@@ -18,7 +18,7 @@ dk_DKCACHE_DIR() {
 		export DKCACHE_DIR="${DKHOME_DIR}/.dk"  
 	fi 
 	if [ ! -e "${DKCACHE_DIR}" ]; then
-		dk_call dk_makeDirectory "${DKCACHE_DIR}" 
+		dk_call dk_mkdir "${DKCACHE_DIR}" 
 	fi
 }
 

@@ -18,14 +18,14 @@ function(dk_configure SOURCE_DIR) #ARGN
 	
 	if(NOT EXISTS "${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
 		set($ENV{CURRENT_PLUGIN}_CONFIG_DIR "${$ENV{CURRENT_PLUGIN}}/${CONFIG_PATH}")
-		dk_makeDirectory("${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
+		dk_mkdir("${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
 	endif()
 	dk_assertPath($ENV{CURRENT_PLUGIN}_CONFIG_DIR)
 	
 	dk_set(BINARY_DIR "${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
 	dk_assertVar(BINARY_DIR)
 	
-	dk_makeDirectory("${BINARY_DIR}")
+	dk_mkdir("${BINARY_DIR}")
 	dk_assertPath("${BINARY_DIR}")
 	
 	dk_chdir("${BINARY_DIR}")

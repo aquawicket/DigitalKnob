@@ -44,9 +44,9 @@ dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
 #dk_set				(MSYS2_DBPath		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
 #dk_set				(MSYS2_LogFile		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
 #dk_set				(MSYS2_GPGDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")
-#dk_makeDirectory("${MSYS2_DBPath}")
+#dk_mkdir("${MSYS2_DBPath}")
 dk_set				(MSYS2_CacheDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
-dk_makeDirectory("${MSYS2_CacheDir}")
+dk_mkdir("${MSYS2_CacheDir}")
 
 
 

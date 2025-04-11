@@ -26,7 +26,7 @@ dk_validate(host_triple "dk_host_triple()")
 ### INSTALL ###
 if(NOT EXISTS ${ANDROID_SDK_DIR})
 	dk_info("Installing android-sdk")
-	dk_makeDirectory("${ANDROID_SDK_DIR}")
+	dk_mkdir("${ANDROID_SDK_DIR}")
 	dk_patch(android-sdk "${ANDROID_SDK_DIR}")
 endif()
 

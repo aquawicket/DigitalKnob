@@ -29,7 +29,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE%
 		
 		::###### create and cd into install directory ######
-		%dk_call% dk_makeDirectory %REACTOS_DIR% 
+		%dk_call% dk_mkdir %REACTOS_DIR% 
 		%dk_call% dk_chdir %REACTOS_DIR%
 		
 		::###### Install the OS to the .img file ######

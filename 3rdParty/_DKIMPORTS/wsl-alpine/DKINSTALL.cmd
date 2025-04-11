@@ -24,7 +24,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing Alpine Linux . . ."
 	%dk_call% dk_download %LAUNCHER_DL%
-	%dk_call% dk_makeDirectory "%DKTOOLS_DIR%/AlpineLinux"
+	%dk_call% dk_mkdir "%DKTOOLS_DIR%/AlpineLinux"
 	%dk_call% dk_basename %LAUNCHER_DL% LAUNCHER_DL_FILE
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_copy "%DKDOWNLOAD_DIR%/%LAUNCHER_DL_FILE%" "%ALPINE_DIR%/%LAUNCHER_DL_FILE%" OVERWRITE

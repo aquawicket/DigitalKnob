@@ -13,7 +13,7 @@ dk_load(dk_builder)
 dk_import(https://github.com/dontcallmedom/webidlpedia/archive/398a36b0.zip)
 
 ### Build WebAPIs Tree ###
-dk_makeDirectory(${WEBIDLPEDIA}/DKWebAPIs)
+dk_mkdir(${WEBIDLPEDIA}/DKWebAPIs)
 dk_delete(${WEBIDLPEDIA}/DKWebAPIs/W3C_apis.txt NO_HALT)
 dk_delete(${WEBIDLPEDIA}/DKWebAPIs/W3C_interfaces.txt NO_HALT)
 if(NOT EXISTS ${WEBIDLPEDIA}/DKWebAPIs/W3C_interfaces.txt)

@@ -36,7 +36,7 @@ setlocal
 		%dk_call% dk_download "%WINPE_DL%"
 
 		::###### create and cd into install directory ######
-		if not exist %WINPE_DIR% (%dk_call% dk_makeDirectory "%WINPE_DIR%")
+		if not exist %WINPE_DIR% (%dk_call% dk_mkdir "%WINPE_DIR%")
 		%dk_call% dk_chdir "%WINPE_DIR%"
 
 		::###### Install the OS to the .img file ######

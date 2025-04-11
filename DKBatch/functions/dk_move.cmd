@@ -34,7 +34,7 @@ setlocal
 	:: the base directory of the %to% path must exist.	
 	%dk_call% dk_dirname "%_to_%" _parent_dir_
 	%dk_call% dk_printVar _parent_dir_
-	%dk_call% dk_makeDirectory "%_parent_dir_%"
+	%dk_call% dk_mkdir "%_parent_dir_%"
 
 	move /Y "%_from_:/=\%" "%_to_:/=\%" %NO_STDOUT%
 
@@ -60,11 +60,11 @@ setlocal
 	%dk_call% dk_fileWrite moveMe.file "dk_move test"
 	%dk_call% dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
-	%dk_call% dk_makeDirectory %DKDOWNLOAD_DIR%/moveMe
+	%dk_call% dk_mkdir %DKDOWNLOAD_DIR%/moveMe
 %endfunction%
 
 	%dk_call% dk_move %DKDOWNLOAD_DIR%/moveMe %DIGITALKNOB_DIR%/iWasMoved OVERWRITE
 	
-	%dk_call% dk_makeDirectory moveMe
+	%dk_call% dk_mkdir moveMe
 	%dk_call% dk_move moveMe iWasMoved OVERWRITE
 %endfunction%

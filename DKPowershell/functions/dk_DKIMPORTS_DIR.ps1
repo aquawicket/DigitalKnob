@@ -19,7 +19,7 @@ function Global:dk_DKIMPORTS_DIR() {
 	$global:DKIMPORTS_DIR = "${DK3RDPARTY_DIR}/_DKIMPORTS" 
 	
 	if(!(Test-Path $DKIMPORTS_DIR)){ 
-		dk_call dk_makeDirectory "${DKIMPORTS_DIR}" 
+		dk_call dk_mkdir "${DKIMPORTS_DIR}" 
 	}
 }
 

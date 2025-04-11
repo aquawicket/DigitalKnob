@@ -124,7 +124,7 @@ function(dk_installPackage)
 		if(EXISTS "${MSYS2_CacheDir}/db.lck")
 			dk_delete("${MSYS2_CacheDir}/db.lck")
 		endif()
-		#dk_makeDirectory("${MSYS2_CacheDir}")
+		#dk_mkdir("${MSYS2_CacheDir}")
 		dk_assertPath(MSYS2_CacheDir)
 		
 		if(win_x86_clang)

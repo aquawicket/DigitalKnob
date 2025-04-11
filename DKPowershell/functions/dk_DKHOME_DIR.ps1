@@ -22,7 +22,7 @@ function Global:dk_DKHOME_DIR() {
 	
 #	### DKCACHE_DIR ###
 #	$global:DKCACHE_DIR = "${DKHOME_DIR}/.dk"
-#   dk_call dk_makeDirectory $DKCACHE_DIR
+#   dk_call dk_mkdir $DKCACHE_DIR
 #	dk_call dk_assertPath DKCACHE_DIR
 	
 #	### DKDESKTOP_DIR ###

@@ -20,7 +20,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validatePath DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
 	set "DKCACHE_DIR=%DKHOME_DIR%/.dk"
 	
-	if NOT exist "%DKCACHE_DIR%" (%dk_call% dk_makeDirectory "%DKCACHE_DIR%")
+	if NOT exist "%DKCACHE_DIR%" (%dk_call% dk_mkdir "%DKCACHE_DIR%")
 	
 	%dk_call% dk_assertPath DKCACHE_DIR
 %endfunction%

@@ -22,7 +22,7 @@ dk_smartExtract() {
 	dest_fullpath="${dest}"
 	dest_folder="$(dk_call dk_basename "${dest_fullpath}")"
 	if ! dk_call dk_pathExists "${dest_fullpath}"; then
-		dk_call dk_makeDirectory "${dest_fullpath}"
+		dk_call dk_mkdir "${dest_fullpath}"
 	fi
 
 	dk_call dk_info "Extracting $src_filename . . ."

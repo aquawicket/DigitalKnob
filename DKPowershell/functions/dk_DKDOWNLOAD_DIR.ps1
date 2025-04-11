@@ -19,7 +19,7 @@ function Global:dk_DKDOWNLOAD_DIR() {
 	$global:DKDOWNLOAD_DIR = "${DIGITALKNOB_DIR}/download" 
 	
 	if(!(Test-Path $DKDOWNLOAD_DIR)){ 
-		dk_call dk_makeDirectory "${DKDOWNLOAD_DIR}" 
+		dk_call dk_mkdir "${DKDOWNLOAD_DIR}" 
 	}
 }
 

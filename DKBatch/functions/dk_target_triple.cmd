@@ -68,7 +68,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist !TARGET_TRIPLE_DIR! (goto TARGET_TRIPLE_DIR_EXISTS)
 		!dk_call! dk_warning "TARGET_TRIPLE_DIR:!TARGET_TRIPLE_DIR! does not exits."
 		!dk_call! dk_debug "Creating directory . . .!TARGET_TRIPLE_DIR!"
-		!dk_call! dk_makeDirectory !TARGET_TRIPLE_DIR!
+		!dk_call! dk_mkdir !TARGET_TRIPLE_DIR!
 	:TARGET_TRIPLE_DIR_EXISTS
 	!dk_call! dk_assertPath TARGET_TRIPLE_DIR
 		

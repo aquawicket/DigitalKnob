@@ -31,7 +31,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_printVar parent
 
 	if "%parent%" equ "apps" %return%
-	%dk_call% dk_makeDirectory "%DKCPP_APPS_DIR%\%target_app%"
+	%dk_call% dk_mkdir "%DKCPP_APPS_DIR%\%target_app%"
 
 	:: create apps/<target_app>/DKINSTALL.cmake
 	echo dk_depend(%input%) > "%DKCPP_APPS_DIR%\%target_app%\DKINSTALL.cmake"

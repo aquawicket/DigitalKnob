@@ -29,7 +29,7 @@ dk_enterManually() {
 	dk_call dk_printVar TARGET_PATH
 	
 	if [ ! -d "${DKCPP_APPS_DIR}/${target_app}" ]; then
-		dk_call dk_makeDirectory "${DKCPP_APPS_DIR}/${target_app}";
+		dk_call dk_mkdir "${DKCPP_APPS_DIR}/${target_app}";
 	fi
 	
 	# create apps/<target_app>/DKINSTALL.cmake 

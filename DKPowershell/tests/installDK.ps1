@@ -19,7 +19,7 @@ dk_load dk_DIGITALKNOB_DIR
 dk_load dk_host_triple
 dk_load dk_getExtension
 dk_load dk_removeExtension
-dk_load dk_makeDirectory
+dk_load dk_mkdir
 dk_load dk_replaceAll
 dk_load dk_convertToCIdentifier
 dk_load dk_toLower

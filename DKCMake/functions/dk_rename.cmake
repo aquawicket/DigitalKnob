@@ -34,7 +34,7 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NO_HALT
 	
 	# the base directory of the ${to} path must exist.    
 	dk_dirname(${to} PARENT_DIR)
-	dk_makeDirectory(${PARENT_DIR})
+	dk_mkdir(${PARENT_DIR})
 	
 	file(RENAME ${from} ${to})
 endfunction()

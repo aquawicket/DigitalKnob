@@ -9,7 +9,7 @@
 #include "dk_error.h"
 #include "dk_delete.h"
 #include "dk_dirname.h"
-#include "dk_makeDirectory.h"
+#include "dk_mkdir.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
@@ -37,7 +37,7 @@ int dk_copy(const char* _from_, const char* _to_, bool OVERWRITE){
 	
 	
     if(dk_pathExists(_dir_name_) != 0){
-		dk_makeDirectory(_dir_name_);
+		dk_mkdir(_dir_name_);
 	}
 	
 	//###### C copy file code ######

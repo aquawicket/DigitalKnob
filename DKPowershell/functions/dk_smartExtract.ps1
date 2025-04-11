@@ -20,7 +20,7 @@ function Global:dk_smartExtract($src, $dest) {
 	$dest_basename = dk_call dk_basename $dest_fullpath
 	
 #	if(!(dk_call dk_pathExists $dest_fullpath)){
-#		dk_call dk_makeDirectory $dest_fullpath
+#		dk_call dk_mkdir $dest_fullpath
 #	}
 	
 	if(dk_call dk_pathExists "$src_extractPath"){ dk_call dk_delete "$src_extractPath" }

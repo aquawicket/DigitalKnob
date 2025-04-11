@@ -18,7 +18,7 @@ if(WIN)
 	dk_command(${NODE_EXE} ${WEBREF}/DKBuildInterfaces.js)
 endif()
 
-#dk_makeDirectory(${WEBREF}/DKWebAPIs)
+#dk_mkdir(${WEBREF}/DKWebAPIs)
 #dk_delete(${WEBREF}/DKWebAPIs/interfaces.txt NO_HALT)
 #if(NOT EXISTS ${WEBREF}/DKWebAPIs/interfaces.txt)
 #	file(GLOB items RELATIVE "${WEBREF}/ed/idlnames/" "${WEBREF}/ed/idlnames/*")

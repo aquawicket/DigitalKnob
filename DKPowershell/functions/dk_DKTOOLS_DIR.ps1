@@ -19,7 +19,7 @@ function Global:dk_DKTOOLS_DIR() {
 	$global:DKTOOLS_DIR = "${DIGITALKNOB_DIR}/DKTools" 
 	
 	if(!(Test-Path $DKTOOLS_DIR)){ 
-		dk_call dk_makeDirectory "${DKTOOLS_DIR}" 
+		dk_call dk_mkdir "${DKTOOLS_DIR}" 
 	}
 }
 

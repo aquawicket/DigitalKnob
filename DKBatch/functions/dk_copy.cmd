@@ -32,7 +32,7 @@ setlocal
 
 	:: the base directory of the %to% path must exist.    
 	%dk_call% dk_dirname "%_to_%"
-	%dk_call% dk_makeDirectory "%dk_dirname%"
+	%dk_call% dk_mkdir "%dk_dirname%"
 
 	::copy "%_from_%" "%_to_%"
 	if exist "%_from_%\*" (
@@ -59,6 +59,6 @@ setlocal
 	%dk_call% dk_fileWrite "%DKCACHE_DIR%/copyMe.file" "dk_copy test"
 	%dk_call% dk_copy "%DKCACHE_DIR%/copyMe.file" "%DKCACHE_DIR%/iWasCopied.txt" OVERWRITE
 
-	%dk_call% dk_makeDirectory "%DKCACHE_DIR%/copyMe"
+	%dk_call% dk_mkdir "%DKCACHE_DIR%/copyMe"
 	%dk_call% dk_copy "%DKCACHE_DIR%/copyMe" "%DKCACHE_DIR%/iWasCopied" OVERWRITE
 %endfunction%

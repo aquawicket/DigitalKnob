@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 dk_depend(android-sdk)
-dk_makeDirectory(${ANDROID_SDK}/system-images)
+dk_mkdir(${ANDROID_SDK}/system-images)
 
 # 24
 #dk_import(https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-24_r07.zip PATH ${ANDROID_SDK}/system-images/24)

@@ -21,8 +21,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
 dk_set(ANDROID_SDK $ENV{DK3RDPARTY_DIR}/android-sdk)
-dk_makeDirectory(${ANDROID_SDK})
-dk_makeDirectory(${ANDROID_SDK}/cmdline-tools)
+dk_mkdir(${ANDROID_SDK})
+dk_mkdir(${ANDROID_SDK}/cmdline-tools)
 
 # 7583922
 if(WIN_HOST)

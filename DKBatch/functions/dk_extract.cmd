@@ -42,7 +42,7 @@ setlocal
 	::if not exist "%_dest_%" (%dk_call% dk_callDKPowershell dk_extract %*)
     
     :: try tar
-    if not exist "%_dest_%" (%dk_call% dk_makeDirectory "%_dest_%" && tar --help && tar -xf "%_file_%" -C "%_dest_%")
+    if not exist "%_dest_%" (%dk_call% dk_mkdir "%_dest_%" && tar --help && tar -xf "%_file_%" -C "%_dest_%")
 %endfunction%
 
 

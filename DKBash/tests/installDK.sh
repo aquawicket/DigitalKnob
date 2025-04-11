@@ -28,7 +28,7 @@ dk_source dk_DIGITALKNOB_DIR
 dk_source dk_host_triple
 dk_source dk_getExtension
 dk_source dk_removeExtension
-dk_source dk_makeDirectory
+dk_source dk_mkdir
 dk_source dk_replaceAll
 #dk_source dk_convertToCIdentifier
 dk_source dk_toLower

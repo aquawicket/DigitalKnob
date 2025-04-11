@@ -79,7 +79,7 @@ setlocal enableDelayedExpansion
 	::###### DKC_BUILD_DIR ######
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	set "DKC_BUILD_DIR=%DKCACHE_DIR%/DKC_BUILD_DIR"
-	if not exist "%DKC_BUILD_DIR%" (%dk_call% dk_makeDirectory "%DKC_BUILD_DIR%")
+	if not exist "%DKC_BUILD_DIR%" (%dk_call% dk_mkdir "%DKC_BUILD_DIR%")
 
 	::###### _app_exe_ ######
 	set "_app_exe_=%DKC_BUILD_DIR%/%_func_%.exe"

@@ -44,7 +44,7 @@ dk_download() {
 	#dk_call dk_printVar destination_dir
 	
 	[ -n ${destination_dir} ] || dk_call dk_error "destination_dir is invalid"
-	[ -e ${destination_dir} ] || dk_call dk_makeDirectory "${destination_dir}"
+	[ -e ${destination_dir} ] || dk_call dk_mkdir "${destination_dir}"
 	
 	# set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 	

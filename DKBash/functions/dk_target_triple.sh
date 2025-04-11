@@ -63,7 +63,7 @@ dk_target_triple() {
 	else
 		dk_call dk_warning "TARGET_TRIPLE_DIR:${TARGET_TRIPLE_DIR} does not exits."
 		dk_call dk_debug "Creating directory . . .${TARGET_TRIPLE_DIR}"
-		dk_call dk_makeDirectory "${TARGET_TRIPLE_DIR}"
+		dk_call dk_mkdir "${TARGET_TRIPLE_DIR}"
 	fi
 
 	#### Set DK_PROJECT_DIR ###

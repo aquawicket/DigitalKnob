@@ -31,7 +31,7 @@ function Global:dk_move($_from_, $_to_) {
 	# the base directory of the $_to_ path must exist.    
 	$_parent_dir_ = dk_call dk_dirname "${_to_}"
 	dk_call dk_printVar _parent_dir_
-	dk_call dk_makeDirectory ${_parent_dir_}
+	dk_call dk_mkdir ${_parent_dir_}
 	
 	mv "$_from_" "$_to_"
 }
@@ -49,9 +49,9 @@ function Global:DKTEST(){
 	dk_call dk_fileWrite moveMe.file "dk_move test"
 	dk_call dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
-	dk_call dk_makeDirectory $DKDOWNLOAD_DIR/moveMe
+	dk_call dk_mkdir $DKDOWNLOAD_DIR/moveMe
 	dk_call dk_move $DKDOWNLOAD_DIR/moveMe $DIGITALKNOB_DIR/iWasMoved OVERWRITE
 	
-	dk_call dk_makeDirectory moveMe
+	dk_call dk_mkdir moveMe
 	dk_call dk_move moveMe iWasMoved OVERWRITE
 }

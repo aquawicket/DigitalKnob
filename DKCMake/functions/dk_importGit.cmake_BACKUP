@@ -125,7 +125,7 @@ function(dk_importGit url) #branch #id #PATCH
 			dk_delete(${${LIBVAR}})
 		endif()
 		if(NOT EXISTS ${${LIBVAR}})
-			dk_makeDirectory(${${LIBVAR}})
+			dk_mkdir(${${LIBVAR}})
 		endif()
 		dk_cd(${${LIBVAR}})
 		dk_command(${GIT_EXE} clone ${url} ${${LIBVAR}})

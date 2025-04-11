@@ -19,7 +19,7 @@ dk_DKTOOLS_DIR() {
 	fi
 	
 	if [ ! -e "${DKTOOLS_DIR}" ]; then
-		dk_call dk_makeDirectory "${DKTOOLS_DIR}" 
+		dk_call dk_mkdir "${DKTOOLS_DIR}" 
 	fi  
 }
 

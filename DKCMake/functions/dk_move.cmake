@@ -34,7 +34,7 @@ function(dk_move from to) # FLAGS: OVERWRITE, NO_HALT
 	
 	# the base directory of the ${to} path must exist.    
 	dk_dirname(${to} PARENT_DIR)
-	dk_makeDirectory(${PARENT_DIR})
+	dk_mkdir(${PARENT_DIR})
 	
 	file(RENAME ${from} ${to})
 endfunction()
@@ -57,11 +57,11 @@ function(DKTEST)
     dk_fileWrite(moveMe.file "dk_move test")
     dk_move(moveMe.file iWasMoved.txt OVERWRITE)
     
-    dk_makeDirectory("$ENV{DKDOWNLOAD_DIR}/moveMe")
+    dk_mkdir("$ENV{DKDOWNLOAD_DIR}/moveMe")
 #endfunction()
 
     dk_move("$ENV{DKDOWNLOAD_DIR}/moveMe" "$ENV{DIGITALKNOB_DIR}/iWasMoved" OVERWRITE)
     
-    dk_makeDirectory(moveMe)
+    dk_mkdir(moveMe)
     dk_move(moveMe iWasMoved OVERWRITE)
 endfunction()

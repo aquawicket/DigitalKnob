@@ -19,7 +19,7 @@ function Global:dk_DKCACHE_DIR() {
 	$global:DKCACHE_DIR = "${DKHOME_DIR}/.dk" 
 	
 	if(!(Test-Path $DKCACHE_DIR)){ 
-		dk_call dk_makeDirectory "${DKCACHE_DIR}" 
+		dk_call dk_mkdir "${DKCACHE_DIR}" 
 	}
 }
 

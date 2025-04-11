@@ -37,7 +37,7 @@ setlocal
 	
 	:: the base directory of the %_to_% path must exist.	
 	%dk_call% dk_dirname "%_to_%"
-	if not exist "%dk_dirname%" (%dk_call% dk_makeDirectory "%dk_dirname%")
+	if not exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
 	
 	move /Y "%_from_:/=\%" "%_to_:/=\%" %NO_STDOUT%
 	
@@ -61,6 +61,6 @@ setlocal
 	%dk_call% dk_fileWrite "%DKCACHE_DIR%/renameMe.file" "dk_rename test"
 	%dk_call% dk_rename "%DKCACHE_DIR%/renameMe.file" "%DKCACHE_DIR%/iWasRenamed.txt" OVERWRITE
 	
-	%dk_call% dk_makeDirectory "%DKCACHE_DIR%/renameMe"
+	%dk_call% dk_mkdir "%DKCACHE_DIR%/renameMe"
 	%dk_call% dk_rename "%DKCACHE_DIR%/renameMe" "%DKCACHE_DIR%/iWasRenamed" OVERWRITE
 %endfunction%

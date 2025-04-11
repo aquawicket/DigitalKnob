@@ -26,7 +26,7 @@ setlocal
 
 	set "REG_BACKUP_DIR=%CD:\=/%/REGISTRY_BACKUP"
 	%dk_call% dk_echo "REG_BACKUP_DIR = %REG_BACKUP_DIR%"
-	%dk_call% dk_makeDirectory "%REG_BACKUP_DIR%"
+	%dk_call% dk_mkdir "%REG_BACKUP_DIR%"
 	
 	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
 	

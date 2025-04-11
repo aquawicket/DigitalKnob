@@ -15,7 +15,7 @@ function(dk_createWindowsIcon)
 	dk_depend(imagemagick)
 	
 	dk_dirname("${ARGV1}" dirname)
-	dk_makeDirectory("${dirname}")
+	dk_mkdir("${dirname}")
 	
 	dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
 	dk_nativePath("${IMAGEMAGICK_CONVERT_EXE}" IMAGEMAGICK_CONVERT_EXE_WIN)

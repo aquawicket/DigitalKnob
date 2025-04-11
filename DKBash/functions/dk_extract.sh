@@ -11,7 +11,7 @@ dk_extract() {
 	#local src="${1}"
 	#local dest="${2}"
 	
-	dk_call dk_pathExists "${2}" || dk_call dk_makeDirectory "${2}"
+	dk_call dk_pathExists "${2}" || dk_call dk_mkdir "${2}"
 	dk_call dk_getExtension "${1}" extension
 	
 	if [ "${extension}" = "zip" ]; then
