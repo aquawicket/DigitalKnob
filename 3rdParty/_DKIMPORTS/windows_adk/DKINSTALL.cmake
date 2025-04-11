@@ -15,7 +15,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ###### Download the Windows ADK 10.1.26100.2454 (December 2024) ######
 # https://download.microsoft.com/download/2/d/9/2d9c8902-3fcd-48a6-a22a-432b08bed61e/ADK/adksetup.exe
-#if(NOT EXISTS "C:/Program Files (x86)/Windows Kits/10/Assessment and Deployment Kit")
+#if(NOT EXISTS "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Assessment and Deployment Kit")
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 if(NOT EXISTS "$ENV{DKTOOLS_DIR}/ADK")
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
@@ -32,7 +32,7 @@ endif()
 
 ###### Download the Windows PE add-on for the Windows ADK 10.1.26100.2454 (December 2024) ######
 # https://download.microsoft.com/download/5/5/6/556e01ec-9d78-417d-b1e1-d83a2eff20bc/ADKWinPEAddons/adkwinpesetup.exe
-#if(NOT EXISTS "C:/Program Files (x86)/Windows Kits/10/Assessment and Deployment Kit/Windows Preinstallation Environment")
+#if(NOT EXISTS "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Assessment and Deployment Kit/Windows Preinstallation Environment")
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 if(NOT EXISTS "$ENV{DKTOOLS_DIR}/ADKWinPEAddons")
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")

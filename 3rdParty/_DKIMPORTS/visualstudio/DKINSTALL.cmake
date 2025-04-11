@@ -15,8 +15,8 @@ dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 
 
-#if(EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
-	dk_firewallAllow("VS_SETUP" "C:/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
+#if(EXISTS "$ENV{SystemDrive}/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
+	dk_firewallAllow("VS_SETUP" "$ENV{SystemDrive}/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
 #endif()
 
 #############################################################################################################
@@ -37,7 +37,7 @@ dk_set(VS_MAJOR 			17)													# 17
 
 ###### VS_INSTALL_PATH ######
 if(NOT VS_INSTALL_PATH)
-	set(VS_INSTALL_PATH		"C:/Program Files (x86)/Microsoft Visual Studio")
+	set(VS_INSTALL_PATH		"$ENV{SystemDrive}/Program Files (x86)/Microsoft Visual Studio")
 else()
 	set(VS_INSTALL_FLAG		--path install=${VS_INSTALL_PATH})
 endif()
@@ -46,7 +46,7 @@ endif()
 if(NOT VS_CACHE_PATH)
 	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	#set(VS_CACHE_PATH	"$ENV{DKDOWNLOAD_DIR}/VS")
-	set(VS_CACHE_PATH	"C:/Program Files \(x86\)/Microsoft Visual Studio/DL")
+	set(VS_CACHE_PATH	"$ENV{SystemDrive}/Program Files \(x86\)/Microsoft Visual Studio/DL")
 endif()
 set(VS_CACHE_FLAG			--path cache=${VS_CACHE_PATH})		
 
@@ -132,13 +132,13 @@ if(NOT EXISTS "${VS}")
 
 	### wait for vs_setup_bootstrapper.exe to exist in C:/windows/temp ###
 	while(NOT VS_SETUP_BOOTSTRAPPER_EXE)
-		dk_findProgram(VS_SETUP_BOOTSTRAPPER_EXE vs_setup_bootstrapper.exe "C:/Windows/Temp")
+		dk_findProgram(VS_SETUP_BOOTSTRAPPER_EXE vs_setup_bootstrapper.exe "$ENV{SystemDrive}/Windows/Temp")
 	endwhile()
 	dk_printVar(VS_SETUP_BOOTSTRAPPER_EXE)
 	dk_firewallAllow("VS_SETUP_BOOTSTRAPPER" "${VS_SETUP_BOOTSTRAPPER_EXE}")
 	
 	while(NOT EXISTS "${VS_SETUP_EXE}")
-		dk_findProgram(VS_SETUP_EXE setup.exe "C:/Program Files (x86)/Microsoft Visual Studio/Installer")
+		dk_findProgram(VS_SETUP_EXE setup.exe "$ENV{SystemDrive}/Program Files (x86)/Microsoft Visual Studio/Installer")
 	endwhile()
 	dk_printVar(VS_SETUP_EXE)
 	dk_firewallAllow("VS_SETUP_EXE" "${VS_SETUP_EXE}")

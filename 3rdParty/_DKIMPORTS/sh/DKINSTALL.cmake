@@ -51,7 +51,7 @@ endif()
 ## We should be able to find sh while inside a WSL instance
 ## Using sh outside of WSL will cause problems
 ### WSL sh ###
-#dk_findProgram(WSL_SH_EXE sh.exe "C:/Windows/System32")
+#dk_findProgram(WSL_SH_EXE sh.exe "$ENV{SystemDrive}/Windows/System32")
 #if(EXISTS "${WSL_SH_EXE}")
 #	dk_printVar(WSL_SH_EXE)
 #	if(NOT SH_EXE)

@@ -24,13 +24,12 @@ setlocal enableDelayedExpansion
 	::set "VCCOMP140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcomp140d.dll"
 	::set "VCRUNTIME140_X86_DLL=C:/Windows/SysWOW64/vcruntime140.dll"
 	::set "VCRUNTIME140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcruntime140d.dll"
-	::### INSTALL ###
-	::if not exist "%VCCOMP140_X86_DLL%" if not exist "%VCCOMP140_X86_DEBUG_DLL%" (
+	::if exist "%VCCOMP140_X86_DLL%" OR if exist "%VCCOMP140_X86_DEBUG_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_IMPORT%
-		%dk_call% dk_info "Installing Visual C Redistributable - !dk_basename!"
-		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		%dk_call% dk_info "Uninstalling Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_IMPORT!"
-		"!DKDOWNLOAD_DIR!/!dk_basename!" /uninstall /quiet /norestart 	&rem /log $ENV{DK3RDPARTY_DIR}/vc_redist_install_log.txt
+		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		"!DKDOWNLOAD_DIR!/!dk_basename!" /uninstall /quiet /norestart
 	::)
 	
 	::### 64Bit ###
@@ -40,15 +39,13 @@ setlocal enableDelayedExpansion
 	::set "VCCOMP140_X86_64_DEBUG_DLL=C:/Windows/System32/vcomp140d.dll"
 	::set "VCRUNTIME140_X86_64_DLL=C:/Windows/System32/vcruntime140.dll"
 	::set "VCRUNTIME140_X86_64_DEBUG_DLL=C:/Windows/System32/vcruntime140d.dll"
-	::### INSTALL ###
-	::if not exist "%VCCOMP140_X86_64_DLL%" if not exist "%VCCOMP140_X86_64_DEBUG_DLL%" (
+	::if exist "%VCCOMP140_X86_64_DLL%" OR if exist "%VCCOMP140_X86_64_DEBUG_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_64_IMPORT%
-		%dk_call% dk_info "Installing Visual C Redistributable - !dk_basename!"
-		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		%dk_call% dk_info "Uninstalling Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_64_IMPORT!"
-		"!DKDOWNLOAD_DIR!/!dk_basename!" /uninstall /quiet /norestart 	&rem /log $ENV{DK3RDPARTY_DIR}/vc_redist_install_log.txt
+		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		"!DKDOWNLOAD_DIR!/!dk_basename!" /uninstall /quiet /norestart
 	::)
-
 %endfunction%
 
 
