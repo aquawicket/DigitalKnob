@@ -22,6 +22,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_ADB_EXE
+	%dk_call% Android/dk_ADB_EXE
 	%dk_call% dk_echo "ADB_EXE = '%ADB_EXE%'"
 %endfunction%
