@@ -79,11 +79,11 @@ function(DKTEST)
 	#dk_callDKBatch(dk_test "abc" "1 2 4")
 	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 	
-	#dk_callDKBatch(dk_test "C:\Program Files (x86)\Edrum Monitor\EdrumMon.exe" "dk_callDKBatch.cmake")
+	#dk_callDKBatch(dk_test "$ENV{SystemDrive}/Program Files (x86)/Edrum Monitor/EdrumMon.exe" "dk_callDKBatch.cmake")
 	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 
-	#dk_callDKBatch(dk_firewallAllow "Edrum Monitor" "C:/ProgramFiles (x86)/Edrum Monitor/EdrumMon.exe")
+	#dk_callDKBatch(dk_firewallAllow "Edrum Monitor" "$ENV{SystemDrive}/ProgramFiles (x86)/Edrum Monitor/EdrumMon.exe")
 
-	#dk_callDKBatch(dk_registryKeyExists rtn_var "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\QEMU")
+	#dk_callDKBatch(dk_registryKeyExists rtn_var "HKEY_LOCAL_MACHINE/Software/Microsoft/Windows/CurrentVersion/Uninstall/QEMU")
 	#dk_echo("rtn_var = ${rtn_var}")
 endfunction()
