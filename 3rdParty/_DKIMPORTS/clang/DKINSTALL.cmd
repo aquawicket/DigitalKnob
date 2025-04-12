@@ -6,13 +6,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKINSTALL()
 ::#
 :DKINSTALL
-::setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/clang/DKINSTALL.cmake)" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 	%dk_call% dk_assertVar CLANG_C_COMPILER
 	%dk_call% dk_assertVar CLANG_CXX_COMPILER
+	endlocal & (
+		set "CLANG_C_COMPILER=%CLANG_C_COMPILER%"
+		set "CLANG_CXX_COMPILER=%CLANG_CXX_COMPILER%"
+	)
 %endfunction%
 
 
