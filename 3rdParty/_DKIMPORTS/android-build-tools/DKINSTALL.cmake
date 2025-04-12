@@ -17,17 +17,17 @@ dk_mkdir(${ANDROID_SDK}/build-tools)
 # 30.0.3
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_VERSION)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_WIN_DL)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_MAC_DL)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_LINUX_DL)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_WIN_IMPORT)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_MAC_IMPORT)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_LINUX_IMPORT)
 
 dk_validate(host_triple "dk_host_triple()")
 if(WIN_HOST)
-	dk_import(${ANDROID_BUILD_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
+	dk_import(${ANDROID_BUILD_TOOLS_WIN_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 elseif(MAC_HOST)
-	dk_import(${ANDROID_BUILD_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
+	dk_import(${ANDROID_BUILD_TOOLS_MAC_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 elseif(LINUX_HOST OR ANDROID_HOST)
-    dk_import(${ANDROID_BUILD_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
+    dk_import(${ANDROID_BUILD_TOOLS_LINUX_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 endif()
 
 # 31.0.0
