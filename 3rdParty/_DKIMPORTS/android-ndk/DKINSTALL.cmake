@@ -14,63 +14,63 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/jzinferno2/termux-ndk/releases
 
 ### r17c ###
-#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r17c-aarch64.zip)
+#dk_set(ANDROID_NDK_ANDROID_IMPORT  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r17c-aarch64.zip)
 
 ### r18b ###
-#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r18b-aarch64.zip)
+#dk_set(ANDROID_NDK_ANDROID_IMPORT  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r18b-aarch64.zip)
 
 ### r19c ###
-#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r19c-aarch64.zip)
+#dk_set(ANDROID_NDK_ANDROID_IMPORT  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r19c-aarch64.zip)
 
 ### r20b ###
-#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r20b-aarch64.zip)
+#dk_set(ANDROID_NDK_ANDROID_IMPORT  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r20b-aarch64.zip)
 
 ### r21e ###
 #dk_set(ANDROID_NDK_VERSION 	r21e)
 #dk_set(ANDROID_NDK_BUILD 		21.4.7075529)
-#dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip)
-#dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg)
-#dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip)
-#dk_set(ANDROID_NDK_ANDROID_DL	https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r21e-aarch64.zip)
+#dk_set(ANDROID_NDK_WIN_IMPORT 		https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip)
+#dk_set(ANDROID_NDK_MAC_IMPORT 		https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg)
+#dk_set(ANDROID_NDK_LINUX_IMPORT 	https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip)
+#dk_set(ANDROID_NDK_ANDROID_IMPORT	https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r21e-aarch64.zip)
 
 ### r22b ###
 #dk_set(ANDROID_NDK_VERSION 	r22b)
 #dk_set(ANDROID_NDK_BUILD 		22.1.7171670)
-#dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)
-#dk_set(ANDROID_NDK_MAC_DL 		http://mirrors.cloud.tencent.com/AndroidSDK/android-ndk-r22b-darwin-x86_64.zip)
-#dk_set(ANDROID_NDK_LINUX_DL 	http://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip)
-#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r22b-aarch64.zip)
+#dk_set(ANDROID_NDK_WIN_IMPORT 		https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)
+#dk_set(ANDROID_NDK_MAC_IMPORT 		http://mirrors.cloud.tencent.com/AndroidSDK/android-ndk-r22b-darwin-x86_64.zip)
+#dk_set(ANDROID_NDK_LINUX_IMPORT 	http://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip)
+#dk_set(ANDROID_NDK_ANDROID_IMPORT  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r22b-aarch64.zip)
 
 ### r23b ###
 #dk_set(ANDROID_NDK_VERSION 	r23b)
 #dk_set(ANDROID_NDK_BUILD 		23.1.7779620)
-#dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r23b-windows.zip)
-#dk_set(ANDROID_NDK_MAC_DL 		http://dl.google.com/android/repository/android-ndk-r23b-darwin.zip)
-#dk_set(ANDROID_NDK_LINUX_DL 	http://dl.google.com/android/repository/android-ndk-r23b-linux.zip)
-#dk_set(ANDROID_NDK_ANDROID_DL  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r23b-aarch64.zip)
+#dk_set(ANDROID_NDK_WIN_IMPORT 		https://dl.google.com/android/repository/android-ndk-r23b-windows.zip)
+#dk_set(ANDROID_NDK_MAC_IMPORT 		http://dl.google.com/android/repository/android-ndk-r23b-darwin.zip)
+#dk_set(ANDROID_NDK_LINUX_IMPORT 	http://dl.google.com/android/repository/android-ndk-r23b-linux.zip)
+#dk_set(ANDROID_NDK_ANDROID_IMPORT  https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r23b-aarch64.zip)
 
 ### r23c ###
 #dk_set(ANDROID_NDK_VERSION		r23c)
 #dk_set(ANDROID_NDK_BUILD 		"23.2.8568313")
-#dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r23c-windows.zip)
-#dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip)
-#dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r23c-linux.zip)
-#dk_set(ANDROID_NDK_ANDROID_DL 	https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip)
+#dk_set(ANDROID_NDK_WIN_IMPORT 		https://dl.google.com/android/repository/android-ndk-r23c-windows.zip)
+#dk_set(ANDROID_NDK_MAC_IMPORT 		https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip)
+#dk_set(ANDROID_NDK_LINUX_IMPORT 	https://dl.google.com/android/repository/android-ndk-r23c-linux.zip)
+#dk_set(ANDROID_NDK_ANDROID_IMPORT 	https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip)
 
 ### r24 ###
 #dk_set(ANDROID_NDK_VERSION 	r24)
 #dk_set(ANDROID_NDK_BUILD 		24.0.8215888)
-#dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r24-windows.zip)
-#dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r24-darwin.zip)
-#dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r24-linux.zip)
-#dk_set(ANDROID_NDK_LINUX_DL 	https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r24-aarch64.zip)
+#dk_set(ANDROID_NDK_WIN_IMPORT 		https://dl.google.com/android/repository/android-ndk-r24-windows.zip)
+#dk_set(ANDROID_NDK_MAC_IMPORT 		https://dl.google.com/android/repository/android-ndk-r24-darwin.zip)
+#dk_set(ANDROID_NDK_LINUX_IMPORT 	https://dl.google.com/android/repository/android-ndk-r24-linux.zip)
+#dk_set(ANDROID_NDK_LINUX_IMPORT 	https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r24-aarch64.zip)
 
 ### r25 ###
 #dk_set(ANDROID_NDK_VERSION 	r25)
 #dk_set(ANDROID_NDK_BUILD 		25.0.8775105)
-#dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r25-windows.zip)
-#dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r25-darwin.zip)
-#dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r25-linux.zip)
+#dk_set(ANDROID_NDK_WIN_IMPORT 		https://dl.google.com/android/repository/android-ndk-r25-windows.zip)
+#dk_set(ANDROID_NDK_MAC_IMPORT 		https://dl.google.com/android/repository/android-ndk-r25-darwin.zip)
+#dk_set(ANDROID_NDK_LINUX_IMPORT 	https://dl.google.com/android/repository/android-ndk-r25-linux.zip)
 
 ### DEPEND ###
 dk_depend(android-sdk)
@@ -78,10 +78,10 @@ dk_depend(android-sdk)
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_VERSION)
 dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_BUILD)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_WIN_DL)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_MAC_DL)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_LINUX_DL)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_ANDROID_DL)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_WIN_IMPORT)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_MAC_IMPORT)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_LINUX_IMPORT)
+dk_getFileParam($ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt ANDROID_NDK_ANDROID_IMPORT)
 
 ###### INSTALL ######
 
@@ -90,15 +90,15 @@ dk_set(ANDROID_NDK "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
 
 dk_mkdir	("${ANDROID_SDK_DIR}/ndk")
 if(WIN_HOST)
-	dk_import		(${ANDROID_NDK_WIN_DL} 		PATH "${ANDROID_NDK}" VERSION "${ANDROID_NDK_BUILD}" PATCH)
+	dk_import		(${ANDROID_NDK_WIN_IMPORT} 		PATH "${ANDROID_NDK}" VERSION "${ANDROID_NDK_BUILD}" PATCH)
 elseif(MAC_HOST)
-	dk_import		(${ANDROID_NDK_MAC_DL} 		PATH "${ANDROID_NDK}" PATCH)
+	dk_import		(${ANDROID_NDK_MAC_IMPORT} 		PATH "${ANDROID_NDK}" PATCH)
 elseif(ANDROID_HOST OR LINUX_ARM64_HOST)
-	dk_import		(${ANDROID_NDK_ANDROID_DL} 	PATH "${ANDROID_NDK}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage
+	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	PATH "${ANDROID_NDK}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage
 elseif(LINUX_ARM64_HOST)
-	dk_import		(${ANDROID_NDK_ANDROID_DL} 	PATH "${ANDROID_NDK}")
+	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	PATH "${ANDROID_NDK}")
 elseif(LINUX_HOST)
-	dk_import		(${ANDROID_NDK_LINUX_DL} 	PATH "${ANDROID_NDK}" PATCH)
+	dk_import		(${ANDROID_NDK_LINUX_IMPORT} 	PATH "${ANDROID_NDK}" PATCH)
 endif()
 
 
