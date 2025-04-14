@@ -20,7 +20,7 @@ setlocal enableDelayedExpansion
 	
 	::### 32Bit ###
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_getFileParam "%DKIMPORTS_DIR%/vc_redist/dkconfig.txt" VC_REDIST_X86_IMPORT
+	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" VC_REDIST_X86_IMPORT
 	::set "VCCOMP140_X86_DLL=C:/Windows/SysWOW64/vcomp140.dll"
 	::set "VCCOMP140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcomp140d.dll"
 	::set "VCRUNTIME140_X86_DLL=C:/Windows/SysWOW64/vcruntime140.dll"
@@ -35,7 +35,7 @@ setlocal enableDelayedExpansion
 	
 	::### 64Bit ###
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_getFileParam "%DKIMPORTS_DIR%/vc_redist/dkconfig.txt" VC_REDIST_X86_64_IMPORT
+	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" VC_REDIST_X86_64_IMPORT
 	::set "VCCOMP140_X86_64_DLL=C:/Windows/System32/vcomp140.dll"
 	::set "VCCOMP140_X86_64_DEBUG_DLL=C:/Windows/System32/vcomp140d.dll"
 	::set "VCRUNTIME140_X86_64_DLL=C:/Windows/System32/vcruntime140.dll"

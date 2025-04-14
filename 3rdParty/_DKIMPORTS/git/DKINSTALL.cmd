@@ -3,9 +3,9 @@ if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%../..
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
-
-%dk_call% dk_getFileParam dkconfig.txt GIT_DL_WIN_X86
-%dk_call% dk_getFileParam dkconfig.txt GIT_DL_WIN_X86_64
+%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" GIT_DL_WIN_X86
+%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" GIT_DL_WIN_X86_64
 
 :: https://stackoverflow.com/a/67714373
 %dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
