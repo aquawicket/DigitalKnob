@@ -12,6 +12,14 @@ dk_buildMain() {
 	# exec > >(tee DKBuilder.log)
 	
 	dk_call dk_validateSudo
+	dk_call dk_validate DKDESKTOP_DIR		"dk_call dk_DKDESKTOP_DIR"
+	dk_call dk_validate DIGITALKNOB_DIR		"dk_call dk_DIGITALKNOB_DIR"
+	dk_call dk_validate DKBRANCH_DIR		"dk_call dk_DKBRANCH_DIR"
+	
+	if [ ! -e "${DKDESKTOP_DIR}/digitalknob" ]; then
+		dk_call dk_createSymlink "${DKDESKTOP_DIR}/digitalknob" "${DIGITALKNOB_DIR}"
+	fi
+	#dk_call dk_pinToQuickAccess "${DIGITALKNOB_DIR}"
 	
 	if dk_call dk_defined WSLENV; then 
 		dk_call dk_info "WSLENV is on"

@@ -4,9 +4,10 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::####################################################################
-::# dk_uninstallNotepadppFileAssociations()
+::# DKUNINSTALL()
 ::#
-:dk_uninstallNotepadppFileAssociations
+:DKUNINSTALL
+setlocal
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
@@ -42,12 +43,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_uninstallFileAssoc .plist
 	%dk_call% dk_uninstallFileAssoc .pro
 	%dk_call% dk_uninstallFileAssoc .properties
-	::%dk_call% dk_uninstallFileAssoc .ps1
+	%dk_call% dk_uninstallFileAssoc .ps1
 	%dk_call% dk_uninstallFileAssoc .rc
 	%dk_call% dk_uninstallFileAssoc .reference
 	%dk_call% dk_uninstallFileAssoc .rsp
 	%dk_call% dk_uninstallFileAssoc .sed
-	::%dk_call% dk_uninstallFileAssoc .sh
+	%dk_call% dk_uninstallFileAssoc .sh
 	%dk_call% dk_uninstallFileAssoc .storyboard
 	%dk_call% dk_uninstallFileAssoc .targets
 	%dk_call% dk_uninstallFileAssoc .traineddata
@@ -64,8 +65,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
 	
-    %dk_call% dk_uninstallNotepadppFileAssociations
+    call :DKUNINSTALL
 %endfunction%
