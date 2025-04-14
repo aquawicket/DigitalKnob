@@ -7,9 +7,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKINSTALL()
 ::#
 :DKINSTALL
-	%dk_call% dk_debugFunc 0
 ::setlocal	
-	
+	%dk_call% dk_debugFunc 0
+
 	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate NUGET_EXE        "%dk_call% %DKIMPORTS_DIR%\nuget\DKINSTALL.cmd"
 	%NUGET_EXE% install Microsoft.UI.Xaml
@@ -24,5 +24,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
  setlocal
  
-	%dk_call% DKINSTALL
+	call :DKINSTALL
 %endfunction%

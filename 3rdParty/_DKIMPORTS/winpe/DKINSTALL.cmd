@@ -7,7 +7,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKINSTALL
 ::#
 :DKINSTALL
-setlocal
+::setlocal
 	%dk_call% dk_debugFunc 0
 	::###### WINPE_DL ######
 	::set "WINPE_DL=https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
@@ -74,5 +74,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% DKINSTALL
+	call :DKINSTALL
 %endfunction%

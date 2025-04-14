@@ -35,7 +35,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% DKINSTALL
+	call :DKINSTALL
 	%dk_call% dk_wslFixNet
 	%dk_call% dk_wslFixFileAccess
 	%WSL_EXE% --shutdown

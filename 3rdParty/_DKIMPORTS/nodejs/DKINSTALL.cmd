@@ -7,8 +7,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKINSTALL()
 ::#
 :DKINSTALL
+::setlocal
 	%dk_call% dk_debugFunc 0
- ::setlocal
+
 
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
     if defined linux_arm64_host       (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz")
@@ -47,5 +48,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 setlocal
 	%dk_call% dk_debugFunc 0
  
-	%dk_call% DKINSTALL
+	call :DKINSTALL
 %endfunction%

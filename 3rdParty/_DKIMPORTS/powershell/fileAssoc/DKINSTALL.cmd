@@ -4,9 +4,9 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::####################################################################
-::# dk_installPowershellFileAssociations()
+::# DKINSTALL()
 ::#
-:dk_installPowershellFileAssociations
+:DKINSTALL
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
@@ -26,5 +26,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_installPowershellFileAssociations
+	call :DKINSTALL
 %endfunction%

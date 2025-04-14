@@ -9,6 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#     https://github.com/microsoft/terminal
 ::# 
 :DKINSTALL
+::setlocal
 	%dk_call% dk_debugFunc 0	
 	
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
@@ -47,6 +48,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% DKINSTALL
+	call :DKINSTALL
 %endfunction%
 
