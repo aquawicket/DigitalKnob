@@ -22,10 +22,10 @@ setlocal enableDelayedExpansion
 	)
 	%COMSPEC% /c exit /b 0   &::NOTE:  what is this doing, why is it needed?
 
-	::### set dk_exec_exit_status ###
+	::### set dk_exec_status ###
 	set /a "exit_status_line=i-1"
 	::set /a "dk_exec[%exit_status_line%]=13"   &::DEBUG: Test error return
-	set /a "dk_exec_exit_status=!dk_exec[%exit_status_line%]!"
+	set /a "dk_exec_status=!dk_exec[%exit_status_line%]!"
 	set "dk_exec[%exit_status_line%]="   &:: clear the errorline from the array
 	
 	::### set dk_exec ###
@@ -35,15 +35,15 @@ setlocal enableDelayedExpansion
 	::############### Print call details ###############
 	if defined dk_exec_PRINT_COMMANDS (
 		echo #######################################################
-		echo ##                          command: = '%*'
+		echo ##        command: = '%*'
 		echo ##
 		for /l %%x in (0, 1, %exit_status_line%) do (
 			if defined dk_exec[%%x] (
-		echo ##        dk_exec[%%x]: = !dk_exec[%%x]!
+		echo ##     dk_exec[%%x]: = !dk_exec[%%x]!
 			)
 		)
-		echo ##             dk_exec: = !dk_exec!
-		echo ## dk_exec_exit_status: = %dk_exec_exit_status%
+		echo ##        dk_exec: = !dk_exec!
+		echo ## dk_exec_status: = %dk_exec_status%
 		echo ##
 	)
 	::##################################################
@@ -54,7 +54,7 @@ setlocal enableDelayedExpansion
 		if defined currentScope endlocal
 		set "%%b"
 	)
-exit /b %dk_exec_exit_status%
+exit /b %dk_exec_status%
 ::%endfunction%
 
 
@@ -81,6 +81,6 @@ setlocal
 	%dk_call% dk_exec "%myCommand%"
 	%dk_call% dk_printVar dk_exec
 	%dk_call% dk_echo "dk_exec = %dk_exec%"
-	%dk_call% dk_echo "dk_exec_exit_status = %dk_exec_exit_status%"
+	%dk_call% dk_echo "dk_exec_status = %dk_exec_status%"
 
 %endfunction%
