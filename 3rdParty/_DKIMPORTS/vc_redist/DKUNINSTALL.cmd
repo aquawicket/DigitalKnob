@@ -58,5 +58,5 @@ setlocal enableDelayedExpansion
 setlocal
 	%dk_call% dk_debugFunc 0
 	
-	call :DKUNINSTALL
+	%dk_call% DKUNINSTALL
 %endfunction%

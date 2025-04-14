@@ -30,7 +30,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
  
-	call :DKINSTALL
+	%dk_call% DKINSTALL
 %endfunction%
 
 
