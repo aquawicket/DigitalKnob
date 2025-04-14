@@ -72,7 +72,7 @@ setlocal
 		set "defaultButton=%option_3%"
 		set "options=%option_5%"
 
-        %dk_call% dk_powershell "[Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms');${env:dk_commandToVariable} = [Windows.Forms.MessageBox]::show('%text%', '%caption%', %buttons%, %icon%, %defaultButton%, %options%);"
+        %dk_call% dk_powershell "[Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms');${env:dk_exec} = [Windows.Forms.MessageBox]::show('%text%', '%caption%', %buttons%, %icon%, %defaultButton%, %options%);"
         endlocal & set dk_messageBox=!dk_powershell!
     %return%
 %endfunction%

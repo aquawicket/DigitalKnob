@@ -16,10 +16,10 @@ setlocal
 	if not "%~1" equ "" (echo|set/p=%~1|clip)
 
 	:: ###### GET ######
-	%dk_call% dk_commandToVariable powershell -command Get-Clipboard
+	%dk_call% dk_exec powershell -command Get-Clipboard
 
 	endlocal & (
-		set "dk_clipboard=%dk_commandToVariable%"
+		set "dk_clipboard=%dk_exec%"
 	)
 %endfunction%
 

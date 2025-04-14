@@ -43,9 +43,9 @@ setlocal
 ::		set "dk_callDKPython=%dk_callDKPython%"
 ::	)
 
-	%dk_call% dk_commandToVariable %DKPYTHON_COMMAND%
+	%dk_call% dk_exec %DKPYTHON_COMMAND%
 	endlocal & (
-		set "dk_callDKPython=%dk_commandToVariable%"
+		set "dk_callDKPython=%dk_exec%"
 	)
 %endfunction%
 

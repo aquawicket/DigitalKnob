@@ -27,7 +27,7 @@ dk_DKDOWNLOAD_DIR = function dk_DKDOWNLOAD_DIR_f(){
 	var DKDOWNLOAD_DIR = DIGITALKNOB_DIR+"/download";
 	console.log("DKDOWNLOAD_DIR = "+DKDOWNLOAD_DIR);
 	
-	//if exist "!WSLPATH_EXE!"        !dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
+	//if exist "!WSLPATH_EXE!"        !dk_call! dk_exec "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
 
 	dk_assertPath(DKDOWNLOAD_DIR)
 }

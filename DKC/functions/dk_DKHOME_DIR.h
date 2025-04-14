@@ -29,7 +29,7 @@ int dk_DKHOME_DIR(){
 	DKHOME_DIR = getenv("USERPROFILE");
 //	DKHOME_DIR=%DKHOME_DIR:\=/%"
 	
-	// if exist "!WSLPATH_EXE!"   !dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
+	// if exist "!WSLPATH_EXE!"   !dk_call! dk_exec "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
 
 //	dk_assertPath(DKHOME_DIR);
 	return 0;

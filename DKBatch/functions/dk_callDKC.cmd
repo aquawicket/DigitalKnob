@@ -100,9 +100,9 @@ setlocal enableDelayedExpansion
 	)
 
 	::###### run executable ######
-	%dk_call% dk_commandToVariable %_app_exe_% %_args_%
+	%dk_call% dk_exec %_app_exe_% %_args_%
 	endlocal & (
-		set "dk_callDKC=%dk_commandToVariable%"
+		set "dk_callDKC=%dk_exec%"
 	)
 %endfunction%
 

@@ -26,7 +26,7 @@ dk_DKHOME_DIR = function dk_DKHOME_DIR_f(){
 	//if not defined HOMEPATH         !dk_call! dk_warning "HOMEPATH is invalid"
 	
 	var DKHOME_DIR = dk_getEnv("USERPROFILE");
-	//if exist "!WSLPATH_EXE!"        !dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
+	//if exist "!WSLPATH_EXE!"        !dk_call! dk_exec "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
 
 	dk_assertPath(DKHOME_DIR)
 	

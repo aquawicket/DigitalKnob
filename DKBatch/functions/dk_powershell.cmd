@@ -41,9 +41,9 @@ setlocal
 	set DKPOWERSHELL_COMMAND="%POWERSHELL_EXE%" -Command %*
 	echo "DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%"
 	
-	call dk_commandToVariable "%DKPOWERSHELL_COMMAND%"
+	call dk_exec "%DKPOWERSHELL_COMMAND%"
 	endlocal & (
-		set "dk_powershell=%dk_commandToVariable%"
+		set "dk_powershell=%dk_exec%"
 	)
 	
 	(set "dk_powershell=")

@@ -54,9 +54,9 @@ setlocal enableDelayedExpansion
 	set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %ALL_BUT_FIRST%
 
 	::echo DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%
-	%dk_call% dk_commandToVariable "%DKPOWERSHELL_COMMAND%"
+	%dk_call% dk_exec "%DKPOWERSHELL_COMMAND%"
 	endlocal & (
-		set "dk_callPowershell=%dk_commandToVariable%"
+		set "dk_callPowershell=%dk_exec%"
 	)
 %endfunction%
 

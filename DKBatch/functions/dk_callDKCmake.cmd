@@ -51,8 +51,8 @@ setlocal
 ::	::echo command = %command%
 ::	set DKCOMMAND=%~1(%ALL_BUT_FIRST%)
 ::	(set command=%CMAKE_EXE% -DDKCOMMAND=%DKCOMMAND% "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_% -P %DKCMAKE_DIR%/DKEval.cmake)
-::	%dk_call% dk_commandToVariable "%command%"
-::	endlocal & (set dk_callDKCmake=%dk_commandToVariable%)
+::	%dk_call% dk_exec "%command%"
+::	endlocal & (set dk_callDKCmake=%dk_exec%)
 
 %endfunction%
 

@@ -19,15 +19,15 @@ setlocal
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
-    %dk_call% dk_commandToVariable "%GIT_EXE%" -C %DKBRANCH_DIR% config --global credential.helper
-	set "STORE=%dk_commandToVariable%"
+    %dk_call% dk_exec "%GIT_EXE%" -C %DKBRANCH_DIR% config --global credential.helper
+	set "STORE=%dk_exec%"
     if not "%STORE%" equ "store" (
         "%GIT_EXE%" -C %DKBRANCH_DIR% config --global credential.helper store
         echo "git credential.helper is now set to store"
     )
         
-    %dk_call% dk_commandToVariable "%GIT_EXE%" -C %DKBRANCH_DIR% config --global user.email
-	set "USER_EMAIL=%dk_commandToVariable%"
+    %dk_call% dk_exec "%GIT_EXE%" -C %DKBRANCH_DIR% config --global user.email
+	set "USER_EMAIL=%dk_exec%"
     if "%USER_EMAIL%" equ "" (
         %dk_call% dk_echo
         %dk_call% dk_echo "please enter an email address"
@@ -38,8 +38,8 @@ setlocal
         %dk_call% dk_echo
     )
         
-    %dk_call% dk_commandToVariable "%GIT_EXE%" -C %DKBRANCH_DIR% config --global user.name
-	set "USER_NAME=%dk_commandToVariable%"
+    %dk_call% dk_exec "%GIT_EXE%" -C %DKBRANCH_DIR% config --global user.name
+	set "USER_NAME=%dk_exec%"
     if "%USER_NAME%" equ "" (
         %dk_call% dk_echo
         %dk_call% dk_echo "please enter a username"

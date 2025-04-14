@@ -26,7 +26,7 @@ dk_DKTOOLS_DIR = function dk_DKTOOLS_DIR(){
 	
 	var DKTOOLS_DIR = DIGITALKNOB_DIR+"/DKTools";
 	
-	//if exist "!WSLPATH_EXE!"        !dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
+	//if exist "!WSLPATH_EXE!"        !dk_call! dk_exec "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
 
 	dk_assertPath(DKTOOLS_DIR);
 	window["DKTOOLS_DIR"] = DKTOOLS_DIR;

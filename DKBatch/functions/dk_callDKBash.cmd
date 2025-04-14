@@ -75,11 +75,11 @@ setlocal
 	)
 	::echo DKBASH_COMMAND = %DKBASH_COMMAND%
 	echo ############################################
-	%dk_call% dk_commandToVariable "%DKBASH_COMMAND%"
+	%dk_call% dk_exec "%DKBASH_COMMAND%"
 	echo ############################################
 	echo echo "errorlevel = %errorlevel%"
 
-	endlocal & set "dk_callDKBash=%dk_commandToVariable%"
+	endlocal & set "dk_callDKBash=%dk_exec%"
 %endfunction%
 
 

@@ -27,7 +27,7 @@ dk_DIGITALKNOB_DIR = function dk_DIGITALKNOB_DIR_f(){
 	var DIGITALKNOB_DIR = DKHOME_DIR+"/digitalknob";
 	console.log("DIGITALKNOB_DIR = "+DIGITALKNOB_DIR);
 	
-	//if exist "!WSLPATH_EXE!"        !dk_call! dk_commandToVariable "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
+	//if exist "!WSLPATH_EXE!"        !dk_call! dk_exec "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
 
 	dk_assertPath(DIGITALKNOB_DIR)
 }
