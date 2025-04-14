@@ -11,6 +11,7 @@ setlocal
 	%dk_call% dk_debugFunc 2
 
 	set "src=%~1"
+	%dk_call% dk_isFile "%src%" || %dk_call% dk_fatal "src:'%src%' is not a file"
 	set "dest=%~2"
 
 	%dk_call% dk_realpath "%src%" src_realpath
@@ -22,11 +23,11 @@ setlocal
 	%dk_call% dk_dirname "%dest_realpath%" dest_dirname
 	%dk_call% dk_basename "%dest_realpath%" dest_folder
 
-::  if not exist "%dest_realpath%" %dk_call% dk_mkdir "%dest_realpath%"
+::  if not exist "%dest_realpath%" (%dk_call% dk_mkdir "%dest_realpath%")
 
     %dk_call% dk_info "Extracting %src_realpath%  to  %src_extractPath%"
 	
-::	if exist "%src_extractPath%"  %dk_call% dk_delete "%src_extractPath%"
+::	if exist "%src_extractPath%" (%dk_call% dk_delete "%src_extractPath%")
 	
 	%dk_call% dk_extract "%src_realpath%" "%src_extractPath%"
 	

@@ -141,7 +141,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem ### PLUGIN_URL_LIST
 	set "PLUGIN_URL_LIST="
 	%dk_call% dk_replaceAll !PLUGIN_URL!  "/"  ";"  PLUGIN_URL_LIST 					
-	%dk_call% dk_printVar PLUGIN_URL_LIST 										&rem PLUGIN_URL_LIST		: https:;github.com;madler;zlib;archive;refs;heads;master.zip
+	rem %dk_call% dk_printVar PLUGIN_URL_LIST 									&rem PLUGIN_URL_LIST		: https:;github.com;madler;zlib;archive;refs;heads;master.zip
 	
 	rem ### PLUGIN_GIT
 	set "PLUGIN_GIT="

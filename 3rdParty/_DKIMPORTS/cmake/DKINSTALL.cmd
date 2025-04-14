@@ -25,6 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined WIN_X86_64_HOST		(set "CMAKE_IMPORT=%CMAKE_WIN_X86_64_IMPORT%")
 	if defined WIN_X86_HOST			(set "CMAKE_IMPORT=%CMAKE_WIN_X86_IMPORT%")
 	%dk_call% dk_assertVar CMAKE_IMPORT
+	%dk_call% dk_basename "%CMAKE_IMPORT%" CMAKE_IMPORT_FILE
 
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %CMAKE_IMPORT% NAME cmake ROOT %DKTOOLS_DIR%
