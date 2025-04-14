@@ -42,5 +42,6 @@
 
 int main(){
 	printf("Hello world! I was self-compiled!\n");
+	//return 0;
 	return 13;
 }

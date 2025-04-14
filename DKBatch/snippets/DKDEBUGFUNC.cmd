@@ -5,7 +5,7 @@ if not defined in_subprocess (%COMSPEC% /k set in_subprocess=y ^& %0 %*) & exit 
 
 goto END_DKDEBUGFUNC
 :DKDEBUGFUNC
-	setlocal
+setlocal
 	::echo :DKDEBUGFUNC(%0 %1 %2 %3 %4 %5 %6 %7 %8 %9)
 	::set args=%*
 	::echo :DKDEBUGFUNC(%0 %args%)

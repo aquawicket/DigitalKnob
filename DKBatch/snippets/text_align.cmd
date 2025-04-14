@@ -18,7 +18,7 @@ echo. & pause >nul
 goto:eof
 
 :echo-align <align> <text>
-	setlocal EnableDelayedExpansion
+setlocal EnableDelayedExpansion
 	(set^ tmp=%~2)
 	if defined tmp (
 		set "len=1"

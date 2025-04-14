@@ -23,7 +23,7 @@ setlocal enableDelayedExpansion
 ::	%dk_call% dk_assertPath "%_file_%"
 
 	%dk_call% dk_registryContains "HKLM/SYSTEM/ControlSet001/Services/SharedAccess/Parameters/FirewallPolicy/FirewallRules" "%_file_:/=\%" && (
-		%dk_call% dk_notice "registry already contains a firewall rule for %_file_%"
+		%dk_call% dk_notice "registry already contains a firewall rule for '%_file_%'"
 		exit /b 0
 	) || (echo not found)
 

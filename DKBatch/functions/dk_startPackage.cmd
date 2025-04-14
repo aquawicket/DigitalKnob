@@ -17,7 +17,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	setlocal disableDelayedExpansion
 	set "rtn_var=%rtn_var:#33=!%
 	start %rtn_var%
-	
 %endfunction%
 
 

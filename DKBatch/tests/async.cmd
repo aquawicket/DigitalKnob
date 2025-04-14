@@ -1,7 +1,7 @@
 @echo off
 if not "%~1" equ "" goto %~1
 :MAIN
-	setlocal
+setlocal
 	echo Here I am in the MAIN thread
 	start "" /B %COMSPEC% /D /C "%~f0" :ASYNC
 	echo Here I am in the MAIN thread again
@@ -13,7 +13,7 @@ if not "%~1" equ "" goto %~1
 exit /b 0
 
 :ASYNC
-	setlocal
+setlocal
 	echo Now I am in the ASYNC thread
 	
 	set /P REPLY="Press a key"

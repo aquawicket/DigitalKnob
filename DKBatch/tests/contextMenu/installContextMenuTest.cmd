@@ -7,6 +7,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_installGitContextMenu()
 ::#
 :installContextMenuTest
+::setlocal
 	%dk_call% dk_debugFunc 0
 	
 	set "TITLE=TEST"
@@ -24,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
 	
     call installContextMenuTest

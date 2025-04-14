@@ -21,7 +21,7 @@ call ../functions/DK.cmd
 	echo %testB%
 	
 	:: MACRO
-	setlocal enableDelayedExpansion
+setlocal enableDelayedExpansion
 	set Macro=&(%\n%
 		%dk_call% dk_echo "Macro()" %\n%
 	)
@@ -29,7 +29,7 @@ call ../functions/DK.cmd
 	%Macro%
 	
 	:: MACRO One Argument
-	setlocal enableDelayedExpansion
+setlocal enableDelayedExpansion
 	set MacroWithOneArg=for %%# in (1 2) do if %%#==2 ( for /f "tokens=1-2" %%1 in ("^!args^!") do (%\n%
 		%dk_call% dk_echo "MacroWithOneArg(%%~1)" %\n%
 		echo ARG1 = %%~1 %\n%
@@ -39,7 +39,7 @@ call ../functions/DK.cmd
 	
 	
 	:: MACRO Two Arguments
-	setlocal enableDelayedExpansion
+setlocal enableDelayedExpansion
 	set MacroWithArgs=for %%# in (1 2) do if %%#==2 ( for /f "tokens=1-2" %%1 in ("^!args^!") do (%\n%
 		%dk_call% dk_echo "MacroWithArgs(%%~1, %%~2)" %\n%
 		echo ARG1 = %%~1 %\n%

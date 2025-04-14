@@ -39,7 +39,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_wslFixFileAccess

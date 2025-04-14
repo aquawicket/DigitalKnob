@@ -6,6 +6,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 ::# DKINSTALL()
 ::#
 :DKINSTALL
+::setlocal
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
@@ -17,7 +18,7 @@ if not defined DK_CMD (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
 	
     %dk_call% DKINSTALL

@@ -46,9 +46,9 @@ setlocal enableDelayedExpansion
 	echo 30		036		1E		00011110			^&#30;		^			Record Separator
 	echo 31		037		1F		00011111			^&#31;		^			Unit Separator
 	echo 32		040		20		00100000	SP		^&#32;		^			Space
-	setlocal disable DelayedExpansion
+setlocal disable DelayedExpansion
 	echo 33		041		21		00100001	!		^&#33;		^&excl;		Exclamation mark
-	endlocal
+endlocal
 	echo 34		042		22		00100010	^"		^&#34;		^&quot;		Double quotes (or speech marks)
 	echo 35		043		23		00100011	#		^&#35;		^&num;	 	Number sign
 	echo 36		044		24		00100100	$		^&#36;		^&dollar;	Dollar
