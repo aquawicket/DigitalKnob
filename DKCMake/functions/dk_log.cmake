@@ -144,13 +144,14 @@ dk_if(NOT DEFINED dk_log_FATAL_HALT			[[ set(dk_log_FATAL_HALT		1				CACHE INTER
 #
 function(dk_log)
 	#dk_debugFunc()
-
+	
 	dk_getOption(NO_HALT REMOVE)
-
+	
 	if(NOT ${dk_log_ENABLE} EQUAL 1)
 		dk_return()
 	endif()
 
+	
 	if(${ARGC} EQUAL 1)
 		set(_level_ "DEFAULT")
 		set(_message_ "${ARGV0}")
@@ -164,43 +165,42 @@ function(dk_log)
 		dk_return()
 	endif()
 
-	#dk_echo("${bg_RGB}0;0;50m${dk_log_${_level_}_COLOR}${dk_log_${_level_}_TAG}${_message_}${clr}")
 	dk_echo("${dk_log_${_level_}_COLOR}${dk_log_${_level_}_TAG}${_message_}${clr}")
 
 	### TRACE ###
-	if(dk_log_${_level_}_TRACE) #OR TRACE AND NOT NO_TRACE)
+	if((dk_log_${_level_}_TRACE) AND (NOT NO_TRACE))
 		dk_echo("${dk_log_${_level_}_COLOR}*** TRACE_ON_${_level_} ***")
 		dk_stacktrace()
 		message("${clr}")
 	endif()
 
 	### LINE ###
-	if(dk_log_${_level_}_LINE) #OR HALT AND NOT NO_HALT)
+	if((dk_log_${_level_}_LINE) AND (NOT NO_LINE))
 		dk_echo("${dk_log_${_level_}_COLOR}*** LINE_ON_${_level_} ***")
 		#d_k_showFileLine("${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}")
 		message("${clr}")
 	endif()
 
 	### SOUND ###
-	if(dk_log_${_level_}_SOUND) #OR SOUND AND NOT NO_SOUND)
+	if((dk_log_${_level_}_SOUND) AND (NOT NO_SOUND))
 		dk_echo("${dk_log_${_level_}_COLOR}*** SOUND_ON_${_level_} ***${clr}")
 		dk_beeps(dk_log_${_level_}_SOUND)
 	endif()
 
 	### PAUSE ###
-	if(dk_log_${_level_}_PAUSE) #OR PAUSE AND NOT NO_PAUSE)
+	if((dk_log_${_level_}_PAUSE) AND (NOT NO_PAUSE))
 		dk_echo("${dk_log_${_level_}_COLOR}*** PAUSE_ON_${_level_} ***${clr}")
 		dk_pause()
 	endif()
 
 	### TIMEOUT ###
-	if(dk_log_${_level_}_TIMEOUT) #OR TIMEOUT AND NOT TIMEOUT)
+	if((dk_log_${_level_}_TIMEOUT) AND (NOT NO_TIMEOUT))
 		dk_echo("${dk_log_${_level_}_COLOR}*** TIMEOUT_ON_${_level_} ***${clr}")
 		dk_timeout(dk_log_${_level_}_TIMEOUT)
 	endif()
 
 	### HALT ###
-	if(dk_log_${_level_}_HALT) #OR HALT AND NOT NO_HALT)
+	if((dk_log_${_level_}_HALT) AND (NOT NO_HALT))
 		dk_echo("${dk_log_${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
 		dk_exit(13)
 	endif()

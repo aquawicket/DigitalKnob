@@ -26,5 +26,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
+	dk_fatal("test dk_fatal message w/ NO HALT" NO_HALT)
 	dk_fatal("test dk_fatal message")
 endfunction()
