@@ -16,7 +16,7 @@ if(WIN_HOST)
 	dk_import(https://github.com/sganis/pyportable/releases/download/v2.7.10rc1/pyportable-2.7.10rc1.zip)
 
 	if(NOT EXISTS ${pyportable}/Scripts/pip.exe)
-		dk_executeProcess(${PYTHON_EXE} -m ensurepip)
+		dk_exec(${PYTHON_EXE} -m ensurepip)
 	endif()
 
 	dk_prependEnvPath("${pyportable}")

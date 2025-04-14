@@ -61,7 +61,7 @@ if(NOT EXISTS "${PYTHON_EXE}")
 		#dk_nativePath(${PYTHON_DIR} PYTHON_WINPATH)
 		dk_replaceAll(${PYTHON_DIR} "/" "\\" PYTHON_WINPATH)
 		dk_fileWrite("${PYTHON_DIR}\\python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
-		dk_executeProcess(${PYTHON_DIR}/python_install.cmd)
+		dk_exec(${PYTHON_DIR}/python_install.cmd)
 	elseif(LINUX_HOST)
 		dk_import(${PYTHON_DL})
 		####   Code below used To run the command in a fresh environment    ####
@@ -107,12 +107,12 @@ endif()
 if(WIN_HOST)
 	dk_findProgram(PIP_EXE pip ${PYTHON_DIR}/Scripts)
 	if(NOT EXISTS ${PIP_EXE})
-		dk_executeProcess(${PYTHON_EXE} -m ensurepip)
+		dk_exec(${PYTHON_EXE} -m ensurepip)
 	endif()
 	dk_findProgram(PIP_EXE pip ${PYTHON_DIR}/Scripts)
 	
 	dk_assertPath(PIP_EXE)
-	dk_executeProcess(${PYTHON_EXE} -m pip install --upgrade pip)
+	dk_exec(${PYTHON_EXE} -m pip install --upgrade pip)
 endif()
 
 

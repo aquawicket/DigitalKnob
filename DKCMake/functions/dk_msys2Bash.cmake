@@ -62,11 +62,11 @@ function(dk_msys2Bash)
 	
 	### run bash as a file
 	#dk_fileWrite($ENV{DKCACHE_DIR}/dkscript.tmp ${bash})
-	#dk_executeProcess(${MSYS2_DIR}/usr/bin/bash $ENV{DKCACHE_DIR}/dkscript.tmp NOECHO)	
+	#dk_exec(${MSYS2_DIR}/usr/bin/bash $ENV{DKCACHE_DIR}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
 	#dk_info("\n${clr}${magenta} dk_msys2Bash> ${bash}\n")
-	dk_executeProcess(${MSYS2_DIR}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
+	dk_exec(${MSYS2_DIR}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 	
 	if(OUTPUT_VARIABLE)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)

@@ -36,13 +36,13 @@ function(dk_resizeImage)
 		endif()
 
 	elseif(MAC_HOST)
-		dk_executeProcess(sips -z ${width} ${height} ${inpath} --out ${outpath})
+		dk_exec(sips -z ${width} ${height} ${inpath} --out ${outpath})
 
 	else()
 		dk_depend(imagemagick)
 		dk_findProgram(IMAGEMAGICK_CONVERT_EXE convert ${IMAGEMAGICK})
 		dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
-		dk_executeProcess(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath})
+		dk_exec(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath})
 	
 	endif()
 endfunction()

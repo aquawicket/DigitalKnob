@@ -27,9 +27,9 @@ function(dk_extract src dest)
 		endif()
 		#dk_getExtension(${src} EXTENSION)
 		#if("${EXTENSION}" STREQUAL ".zip")
-		#	dk_executeProcess(unzip ${src} -d ${dest} ${NO_HALT})
+		#	dk_exec(unzip ${src} -d ${dest} ${NO_HALT})
 		#else
-		dk_executeProcess(${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest} ${NO_HALT})
+		dk_exec(${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest} ${NO_HALT})
 		#endif
 	endif()
 endfunction()

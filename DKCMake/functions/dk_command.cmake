@@ -29,7 +29,7 @@ function(dk_command)
 	if(BASH_ENV)
 		dk_bashEnv(${MERGED})
 	else()
-		dk_executeProcess(${MERGED})
+		dk_exec(${MERGED})
 	endif()
 
 	if(${RESULT_VARIABLE})

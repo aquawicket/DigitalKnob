@@ -14,7 +14,7 @@ function(dk_killProcess)
 	#set(name ${ARGV0})
 	
 	dk_findProgram(TASKKILL_EXE taskkill.exe "C:/Windows/System32")
-	dk_executeProcess("${TASKKILL_EXE} /f /im ${ARGV0}" NO_HALT)
+	dk_exec("${TASKKILL_EXE} /f /im ${ARGV0}" NO_HALT)
 endfunction()
 
 

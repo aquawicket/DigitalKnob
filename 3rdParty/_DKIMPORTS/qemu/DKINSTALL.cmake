@@ -28,8 +28,8 @@ if(NOT EXISTS ${QEMU_IMG_EXE})
 	dk_nativePath(${QEMU_DIR} QEMU_DIR_NATIVE)
 	dk_echo("Installing ${QEMU_FOLDER} . . .")
 	dk_set(command_string "$ENV{DKDOWNLOAD_DIR}/${QEMU_DL_FILE}" /S /D=${QEMU_DIR_NATIVE})
-	dk_executeProcess(echo ${command_string})
-	dk_executeProcess(${command_string})
+	dk_exec(echo ${command_string})
+	dk_exec(${command_string})
 endif()
 
 

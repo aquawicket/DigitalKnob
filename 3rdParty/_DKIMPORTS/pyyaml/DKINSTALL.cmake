@@ -12,9 +12,9 @@ dk_validate(host_triple "dk_host_triple()")
 
 ### INSTALL ###
 if(WIN_HOST)
-	dk_executeProcess(${PYTHON}/Scripts/pip install PyYAML)
+	dk_exec(${PYTHON}/Scripts/pip install PyYAML)
 elseif(MAC_HOST)
-	dk_executeProcess(pip install PyYAML)
+	dk_exec(pip install PyYAML)
 else()
 	dk_installPackage(python-yaml)
 endif()

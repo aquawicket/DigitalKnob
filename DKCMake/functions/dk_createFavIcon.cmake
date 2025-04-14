@@ -13,7 +13,7 @@ function(dk_createFavIcon inpath outpath)
 	
 	dk_depend(imagemagick)
 	dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
-	dk_executeProcess(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -define icon:auto-resize=16 ${outpath})
+	dk_exec(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -define icon:auto-resize=16 ${outpath})
 endfunction()
 
 

@@ -38,7 +38,7 @@ function(dk_visualStudioDebug path) #target #arch
 		else()
 			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${target_triple}/${sln_file} /p:Configuration=Debug)
 		endif()
-		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${target_triple})
+		dk_exec(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${target_triple})
 	endif()
 endfunction()
 

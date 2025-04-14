@@ -3,7 +3,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ###############################################################################
-# dk_executeProcess(commands) NO_HALT NOECHO OUTPUT <output_variable>
+# dk_exec(commands) NO_HALT NOECHO OUTPUT <output_variable>
 #
 #	@commands	- TODO
 #	@NO_HALT	- don't halt cmake if an error occurs
@@ -30,7 +30,7 @@ include_guard()
 #					[ECHO_ERROR_VARIABLE]
 #					[COMMAND_ERROR_IS_FATAL <ANY|LAST>])
 #
-function(dk_executeProcess)
+function(dk_exec)
 	dk_debugFunc()
 	
 	set(cmd1 										${ARGV})
@@ -301,5 +301,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_executeProcess(echo "Hello World" ERROR_VARIABLE test_error OUTPUT_VARIABLE test_output)
+	dk_exec(echo "Hello World" ERROR_VARIABLE test_error OUTPUT_VARIABLE test_output)
 endfunction()

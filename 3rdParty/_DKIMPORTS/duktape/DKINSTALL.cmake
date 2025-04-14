@@ -47,8 +47,8 @@ endif()
 
 ### GENERATE ###
 if(NOT EXISTS ${DUKTAPE_DIR}/src/duktape.c)
-	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE_DIR}/util/dist.py)  # default generator	
-	dk_executeProcess(${PYTHON_EXE} ${DUKTAPE_DIR}/tools/configure.py
+	#dk_exec(${PYTHON_EXE} ${DUKTAPE_DIR}/util/dist.py)  # default generator	
+	dk_exec(${PYTHON_EXE} ${DUKTAPE_DIR}/tools/configure.py
 		--output-directory ${DUKTAPE_DIR}/src
 		-DDUK_CMDLINE_DEBUGGER_SUPPORT
 		-DDUK_USE_DEBUGGER_DUMPHEAP
@@ -57,7 +57,7 @@ if(NOT EXISTS ${DUKTAPE_DIR}/src/duktape.c)
 		-DDUK_USE_FATAL_HANDLER
 		-DDUK_USE_GLOBAL_BINDING
 		-DDUK_USE_INTERRUPT_COUNTER)
-	#dk_executeProcess(${NODE_EXE} ${DUKTAPE_DIR}/src-tools/index.js configure --output-directory ${DUKTAPE_DIR}/src --source-directory ${DUKTAPE_DIR}/src-input --config-directory ${DUKTAPE_DIR}/config)
+	#dk_exec(${NODE_EXE} ${DUKTAPE_DIR}/src-tools/index.js configure --output-directory ${DUKTAPE_DIR}/src --source-directory ${DUKTAPE_DIR}/src-input --config-directory ${DUKTAPE_DIR}/config)
 endif()
 
 dk_configure(${DUKTAPE_DIR})
