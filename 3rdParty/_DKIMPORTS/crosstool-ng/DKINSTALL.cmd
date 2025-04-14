@@ -8,13 +8,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKINSTALL()
 ::#
 :DKINSTALL
-::setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
     %dk_call% dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/crosstool-ng/DKINSTALL.cmake')" "CROSSTOOL_NG"
     %dk_call% dk_assertVar CROSSTOOL_NG
 
+	endlocal & (
+		set "CROSSTOOL_NG=%CROSSTOOL_NG%"
+	)
 %endfunction%
 
 

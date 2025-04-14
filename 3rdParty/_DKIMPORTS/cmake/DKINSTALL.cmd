@@ -39,10 +39,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%CMAKE_IMPORT_FILE%" "%CMAKE%"
 
 	%dk_call% dk_firewallAllow "CMake" "%CMAKE%/bin/cmake.exe"
-	::if NOT exist "%CMAKE_EXE%" (%dk_call% dk_error "cannot find CMAKE_EXE:%CMAKE_EXE%")
-	:installed
-	::### install DKCMake
-	:: TODO
+	%dk_call% dk_assertPath "%CMAKE_EXE%"
 
 	:: Add cmake to git_bash (symlink)
 	::%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
