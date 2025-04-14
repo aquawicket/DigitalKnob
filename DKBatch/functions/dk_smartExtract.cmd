@@ -11,7 +11,7 @@ setlocal
 	%dk_call% dk_debugFunc 2
 
 	set "src=%~1"
-	%dk_call% dk_isFile "%src%" || %dk_call% dk_fatal "src:'%src%' is not a file"
+	%dk_call% dk_assertFile "%src%"
 	set "dest=%~2"
 
 	%dk_call% dk_realpath "%src%" src_realpath
