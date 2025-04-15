@@ -116,7 +116,7 @@ function(dk_host_triple)
 		dk_fatal("CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
 	endif()
 	dk_assertVar(Host_Arch)
-	#d_k_toCamel(${Host_Arch} Host_Arch)     # Host_Arch = Arm64
+	#d_k_toCamel(${Host_Arch} Host_Arch)    # Host_Arch = Arm64
 	dk_toLower(${Host_Arch} host_arch)      # host_arch = arm64
 	dk_toUpper(${Host_Arch} HOST_ARCH)      # HOST_ARCH = ARM64
 	dk_set(Host_Arch ${Host_Arch})			# Globalize

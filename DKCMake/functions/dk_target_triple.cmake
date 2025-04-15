@@ -27,17 +27,18 @@ function(dk_target_triple)
 	dk_debugFunc(0 1)
 	message("dk_target_triple(${ARGV})")
 
-	#set(default_target_os "${host_os}")
-	#set(default_target_arch "${host_arch}")
-	set(default_target_env "clang")
+	#set(Default_Target_Os "${Host_Os}")
+	#set(Default_Target_Arch "${Host_Arch}")
+	set(Default_Target_Env "Clang")
 	message("")
 	
 	### Get Target_Dir ###
 	dk_getFullPath("${CMAKE_BINARY_DIR}" Target_Dir)
+	#d_k_toCamel(${Target_Dir} Target_Dir)
 	dk_toLower(${Target_Dir} target_dir)
 	dk_toUpper(${Target_Dir} TARGET_DIR)
+	dk_printVar(Target_Dir)								# Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
 	dk_printVar(target_dir)								# target_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang/debug
-	dk_printVar(Target_Dir)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
 	dk_printVar(TARGET_DIR)								# TARGET_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG/DEBUG
 	message("")
 
@@ -48,21 +49,27 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 	else()
 		dk_set(Target_Type Debug)						# Target_Type = Debug (DEFAULT)
 	endif()
+	#d_k_toCamel(${Target_Type} Target_Type)
 	dk_toLower(${Target_Type} target_type)
 	dk_toUpper(${Target_Type} TARGET_TYPE)
-	dk_set(${TARGET_TYPE} 1)
-	dk_printVar(target_type)							# target_type = debug
 	dk_printVar(Target_Type)							# Target_Type = Debug
+	dk_printVar(target_type)							# target_type = debug
 	dk_printVar(TARGET_TYPE)							# TARGET_TYPE = DEBUG
+	dk_set(${Target_Type} 1)
+	dk_set(${target_type} 1)
+	dk_set(${TARGET_TYPE} 1)
+	dk_printVar(${Target_Type})							# Debug		  = 1
+	dk_printVar(${target_type})							# debug		  = 1
 	dk_printVar(${TARGET_TYPE})							# DEBUG		  = 1
 	
 message("${CMAKE_CURRENT_LIST_LINE}")		
 	### Set Target_Triple_Dir ###
-	dk_dirname(${Target_Dir} Target_Triple_Dir)			
+	dk_dirname(${Target_Dir} Target_Triple_Dir)	
+	#d_k_toCamel(${Target_Triple_Dir} Target_Triple_Dir)	
 	dk_toLower(${Target_Triple_Dir} target_triple_dir)	
-	dk_toUpper(${Target_Triple_Dir} TARGET_TRIPLE_DIR)	
-	dk_printVar(target_triple_dir)						# target_triple_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang
+	dk_toUpper(${Target_Triple_Dir} TARGET_TRIPLE_DIR)
 	dk_printVar(Target_Triple_Dir)						# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
+	dk_printVar(target_triple_dir)						# target_triple_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang
 	dk_printVar(TARGET_TRIPLE_DIR)						# TARGET_TRIPLE_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG
 	message("")
 	
@@ -111,17 +118,18 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 	if(NOT DEFINED Target_Triple)
 		dk_basename(${Target_Triple_Dir} Target_Triple)		# Target_Triple = Win_x86_64_Clang
 	endif()
+	#d_k_toCamel(${Target_Triple} Target_Triple)	
 	dk_toLower(${Target_Triple} target_triple)			
 	dk_toUpper(${Target_Triple} TARGET_TRIPLE)		
 	dk_set(target_triple ${target_triple})			# Globalize the variable
 	dk_set(Target_Triple ${Target_Triple})			# Globalize the variable
 	dk_set(TARGET_TRIPLE ${TARGET_TRIPLE})			# Globalize the variable
-	dk_set(${target_triple} 1)
-	dk_set(${Target_Triple} 1)
-	dk_set(${TARGET_TRIPLE} 1)
 	dk_printVar(target_triple)						# target_triple	= win_x86_64_clang
 	dk_printVar(Target_Triple)						# Target_Triple	= Win_X86_64_Clang
 	dk_printVar(TARGET_TRIPLE)						# TARGET_TRIPLE	= WIN_X86_64_CLANG
+	dk_set(${target_triple} 1)
+	dk_set(${Target_Triple} 1)
+	dk_set(${TARGET_TRIPLE} 1)
 	dk_printVar(${target_triple})					# win_x86_64_clang = 1
 	dk_printVar(${Target_Triple})					# Win_X86_64_Clang = 1
 	dk_printVar(${TARGET_TRIPLE})					# WIN_X86_64_CLANG = 1
@@ -149,7 +157,8 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 	elseif(target_triple MATCHES "cosmopolitan")
 		dk_set(Target_Os Cosmopolitan)	
 	else()
-		dk_error("The target target_triple:'${target_triple}' does not contain a valid target_os")
+		dk_error("The target Target_Triple:'${Target_Triple}' does not contain a valid Target_Os")
+		dk_unset(Target_Triple)
 		dk_unset(target_triple)
 		dk_unset(TARGET_TRIPLE)
 		message("######calling dk_target_triple_SET()#####")
@@ -157,14 +166,15 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 		message("######returned from dk_target_triple_SET()#####")
 	endif()
 	if(Target_Os)
+		#d_k_toCamel(${Target_Os} Target_Os)
 		dk_toLower(${Target_Os} target_os)
 		dk_toUpper(${target_os} TARGET_OS)
+		dk_set(Target_Os ${Target_Os})
 		dk_set(target_os ${target_os})
 		dk_set(TARGET_OS ${TARGET_OS})
+		dk_set(${Target_Os} 1)
 		dk_set(${target_os} 1)
 		dk_set(${TARGET_OS} 1)
-		#dk_set(${target_os}_target 1)
-		#dk_set(${TARGET_OS}_TARGET 1)
 	endif()
 
 message("${CMAKE_CURRENT_LIST_LINE}")	
@@ -186,14 +196,15 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 		message("######returned from dk_target_triple_SET()#####")
 	endif()
 	if(Target_Arch)
+		#d_k_toCamel(${Target_Arch} Target_Arch)
 		dk_toLower(${Target_Arch} target_arch)
 		dk_toUpper(${Target_Arch} TARGET_ARCH)
+		dk_set(Target_Arch ${Target_Arch})
 		dk_set(target_arch ${target_arch})
 		dk_set(TARGET_ARCH ${TARGET_ARCH})
+		dk_set(${Target_Arch} 1)
 		dk_set(${target_arch} 1)
 		dk_set(${TARGET_ARCH} 1)
-		#dk_set(${target_arch}_target 1)
-		#dk_set(${TARGET_ARCH}_TARGET 1)
 	endif()
 
 message("${CMAKE_CURRENT_LIST_LINE}")	
@@ -210,35 +221,35 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 		dk_set(Target_Env Cosmopolitan)
 	else()
 		dk_warning("The target target_triple:${target_triple} does not contain a valid target_env")
-		dk_set(Target_Env ${default_target_env})
+		dk_set(Target_Env ${Default_Target_Env})
 	endif()
 	if(Target_Env)
+		#d_k_toCamel(${Target_Env} Target_Env)
 		dk_toLower(${Target_Env} target_env)
 		dk_toUpper(${target_env} TARGET_ENV)
+		dk_set(Target_Env ${Target_Env})
 		dk_set(target_env ${target_env})
 		dk_set(TARGET_ENV ${TARGET_ENV})
+		dk_set(${Target_Env} 1)
 		dk_set(${target_env} 1)
 		dk_set(${TARGET_ENV} 1)
-		#dk_set(${target_env}_target 1)
-		#dk_set(${TARGET_ENV}_TARGET 1)
 	endif()
+	dk_depend(${target_env})
 
 message("${CMAKE_CURRENT_LIST_LINE}")	
 	### Set MSYSTEM
-	if(${TARGET_ENV})
+	if(${Target_Env})
 		dk_validate(MSYSTEM "dk_MSYSTEM()")
 	endif()
 	
 message("${CMAKE_CURRENT_LIST_LINE}")		
 	### Set target_os_arch / TARGET_OS_ARCH ###
+	dk_set(Target_Os_Arch "${Target_Os}_${Target_Arch}")
 	dk_set(target_os_arch "${target_os}_${target_arch}")
 	dk_set(TARGET_OS_ARCH "${TARGET_OS}_${TARGET_ARCH}")
-	#dk_set(target_os_arch "${target_os_arch}")
-	#dk_set(TARGET_OS_ARCH "${TARGET_OS_ARCH}")
+	dk_set(${Target_Os_Arch} 1)
 	dk_set(${target_os_arch} 1)
 	dk_set(${TARGET_OS_ARCH} 1)
-	#dk_set(${target_os_arch}_target 1)
-	#dk_set(${TARGET_OS_ARCH}_TARGET 1)
 
 	### Set DEBUG_DIR and RELEASE_DIR variables
 	if(IOS)
