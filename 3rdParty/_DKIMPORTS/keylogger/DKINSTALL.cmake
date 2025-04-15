@@ -8,7 +8,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ###### Install keylogger ######
 # https://github.com/GiacomoLaw/Keylogger
 # https://github.com/GiacomoLaw/Keylogger/archive/142eebd7dee0ac6067642804e80df4b4f375a7bd.zip
-# https://github.com/GiacomoLaw/Keylogger/archive/142eebd7.zip
+# https://github.com/GiacomoLaw/Keylogger/archive/142eebd.zip
+
 
 ### INSTALL ###
 dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")

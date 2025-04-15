@@ -63,7 +63,7 @@ function(dk_importVariables)
 	
 	unset(NAME)
 	dk_getOptionValue(NAME)			# zlib
-#	dk_printVar(NAME)
+	dk_printVar(NAME)
 	
 	unset(PATH)
 	dk_getOptionValue(PATH)			# C:/Users/name/digitalknob/Development/3rdParty/zlib-master
@@ -230,7 +230,7 @@ function(dk_importVariables)
 		# PLUGIN_GIT_FILENAME
 		unset(PLUGIN_GIT_FILENAME)
 		list(GET PLUGIN_URL_LIST 3 PLUGIN_GIT_FILENAME)										
-#		dk_printVar(PLUGIN_GIT_FILENAME)								# PLUGIN_GIT_FILENAME: zlib
+		dk_printVar(PLUGIN_GIT_FILENAME)								# PLUGIN_GIT_FILENAME: zlib
 		
 		# PLUGIN_GIT_NAME
 		unset(PLUGIN_GIT_NAME)
