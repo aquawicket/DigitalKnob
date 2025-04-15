@@ -108,11 +108,13 @@ function(DKINIT)
 	dk_load(dk_logo)
 	dk_load(dk_watch)
 	dk_load(dk_messageBox)
-	
+
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
-		#if("$ENV{DKSCRIPT_DIR}" STREQUAL "$ENV{DKCMAKE_FUNCTIONS_DIR}")
+
+		message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
 		string(FIND "$ENV{DKSCRIPT_DIR}" "$ENV{DKCMAKE_FUNCTIONS_DIR}" isChildOf)
+
 		if(${isChildOf} GREATER -1)
 			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### $ENV{DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
 			include($ENV{DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded

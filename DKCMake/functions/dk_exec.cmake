@@ -257,7 +257,7 @@ function(dk_exec)
 #		dk_echo("${lblue}command> ${lcyan}${cmd1}${clr}")
 #	endif()
 
-	dk_echo("${lblue}execute_process> ${lcyan}${ARGV}${clr}")
+	dk_echo("${lblue}dk_exec> ${lcyan}${ARGV}${clr}")
 	execute_process(${ARGV})
 	
 #	if(NOT ${result_variable} EQUAL 0)

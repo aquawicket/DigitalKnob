@@ -5,6 +5,20 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::################################################################################
 ::# dk_getAttributes(<pathname>, <rtn_var>:optional)
 ::#
+::#		Reference: https://ss64.com/nt/syntax-args.html#attributes
+::#
+::#		 Attribute                    Expansion 
+::#		 FILE_ATTRIBUTE_DIRECTORY     d-------- 
+::#		 FILE_ATTRIBUTE_READONLY      -r------- 
+::#		 FILE_ATTRIBUTE_ARCHIVE       --a------ 
+::#		 FILE_ATTRIBUTE_HIDDEN        ---h----- 
+::#		 FILE_ATTRIBUTE_SYSTEM        ----s---- 
+::#		 FILE_ATTRIBUTE_COMPRESSED    -----c--- 
+::#		 FILE_ATTRIBUTE_OFFLINE       ------o-- 
+::#		 FILE_ATTRIBUTE_TEMPORARY     -------t- 
+::#		 FILE_ATTRIBUTE_REPARSE_POINT --------l
+::#		 FILE_ATTRIBUTE_NORMAL        ---------
+::#
 :dk_getAttributes
 setlocal
 	%dk_call% dk_debugFunc 2
@@ -15,7 +29,6 @@ setlocal
 	if "%pathname:~-1%" equ "\"   set "pathname=%pathname:~0,-1%"
 
 	for %%Z in ("%pathname%") do set "dk_getAttributes=%%~aZ"
-::	set "dk_getAttributes=%dk_getAttributes:\=/%"
 
 	endlocal & (
 		set "dk_getAttributes=%dk_getAttributes%"
@@ -27,15 +40,13 @@ setlocal
 
 
 
-
-
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_set myPath "DK.cmd"
-	%dk_call% dk_set myPath "DK.cmd"
+	set "myPath=C:/Users/Administrator/Desktop/digitalknob"
 	%dk_call% dk_getAttributes "%myPath%" attributes
-	%dk_call% dk_printVar attributes
+	%dk_call% dk_echo "dk_getAttributes = %dk_getAttributes%"
+	%dk_call% dk_echo "attributes = %attributes%"
 %endfunction%
