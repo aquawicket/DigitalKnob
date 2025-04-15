@@ -11,8 +11,18 @@ setlocal
 	%dk_call% dk_debugFunc 2
 
     tasklist | find /i "%1" > nul
-    if "%ERRORLEVEL%" equ "0" endlocal & set "%2=1" && dk_return
-    endlocal & set "%2=0"
+    if "%ERRORLEVEL%" equ "0" (
+		set "dk_processIsRunning=0"
+	) else (
+		set "dk_processIsRunning=1"
+	)
+	
+	endlocal & (
+		set "dk_processIsRunning=%dk_processIsRunning%"
+		if "%~2" neq "" (set "%~2=%dk_processIsRunning%")
+	)
+	
+	exit /b %dk_processIsRunning%
 %endfunction%
 
 
@@ -25,9 +35,9 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_processIsRunning cmd cmdIsRunning
-	%dk_call% dk_echo "cmdIsRunning = %cmdIsRunning%"
-	
-	%dk_call% dk_processIsRunning nonExisent nonExisentIsRunning
-	%dk_call% dk_echo "nonExisentIsRunning = %nonExisentIsRunning%"
+	set "process=cmd"
+    %dk_call% dk_processIsRunning %process% && echo %process% is running || echo %process% is NOT running
+
+	set "process=nonExisent"
+    %dk_call% dk_processIsRunning %process% && echo %process% is running || echo %process% is NOT running
 %endfunction%

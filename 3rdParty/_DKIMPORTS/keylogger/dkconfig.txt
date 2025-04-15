@@ -1,1 +1,1 @@
-KEYLOGGER_IMPORT=https://github.com/GiacomoLaw/Keylogger/archive/142eebd7dee0ac6067642804e80df4b4f375a7bd.zip
+KEYLOGGER_IMPORT=https://github.com/GiacomoLaw/Keylogger/archive/142eebd.zip

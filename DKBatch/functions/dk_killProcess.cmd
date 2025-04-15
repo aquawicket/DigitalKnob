@@ -15,6 +15,8 @@ setlocal
 	%dk_call% dk_debugFunc 1
     set "process=%~1"
 
+    %dk_call% dk_processIsRunning %process% || %return%
+
     tasklist /fi "imagename eq %process%" |find ":" >nul
     if errorlevel 1 taskkill /f /im "%process%
 %endfunction%
