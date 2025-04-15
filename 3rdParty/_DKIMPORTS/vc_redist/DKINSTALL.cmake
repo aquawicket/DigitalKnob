@@ -9,7 +9,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://docs.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-160#visual-studio-2015-2017-2019-and-2022
 # https://aka.ms/vs/16/release/vc_redist.x86.exe
 # https://softmany.com/microsoft-visual-c-redistributable-package/download/
-# VCRUNTIME140.dll
 #
 dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
