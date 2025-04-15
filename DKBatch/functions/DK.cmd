@@ -129,6 +129,7 @@ echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	if not defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
 	if defined DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist & exit /b -1)
+	
 %endfunction%
 
 ::##################################################################################

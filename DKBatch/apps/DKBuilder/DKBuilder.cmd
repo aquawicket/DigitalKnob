@@ -4,10 +4,10 @@
 setlocal enableDelayedExpansion
 
 	set "ENABLE_dk_debug=1"
-	set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"
+	if not defined HDK (set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd")
 	if not defined DIGITALKNOB (set "DIGITALKNOB=digitalknob")
 	if not defined DKBRANCH (set "DKBRANCH=Development")
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
 	set "DK=%DKBATCH_FUNCTIONS_DIR_%/DK.cmd"
 
@@ -23,7 +23,7 @@ setlocal enableDelayedExpansion
 		echo DK.cmd Failed
 	)
 
-	call "%DK%" %~0 %*
+	call "%DK%" "%~0" %*
 
 	::takeown /F %DKF% /R /D "Y"
 	%dk_call% dk_buildMain
