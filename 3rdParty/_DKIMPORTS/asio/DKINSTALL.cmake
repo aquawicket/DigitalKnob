@@ -6,10 +6,30 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ############ asio ############
+# https://github.com/chriskohlhoff/asio
 #
+dk_depend			(clang)
+dk_depend			(make)
+dk_basename			("${CMAKE_CURRENT_LIST_DIR}" current_plugin)
+dk_getFileParam		(${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt ${current_plugin}_import)
+#dk_importVariables	(${${current_plugin}_import} NAME ${current_plugin})
+dk_import			(${${current_plugin}_import} NAME ${current_plugin})
 
-dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/asio/dkconfig.txt ASIO_IMPORT)
-dk_import		(${ASIO_IMPORT})
 
-# TODO
+
+### LINK ###
+dk_toUpper("${current_plugin}" CURRENT_PLUGIN)
+dk_include			(${${CURRENT_PLUGIN}}/asio/include)
+if(MSVC)
+	dk_libDebug		(${${CURRENT_PLUGIN}_DEBUG_DIR}/${current_plugin}.lib)
+	dk_libRelease	(${${CURRENT_PLUGIN}_RELEASE_DIR}/${current_plugin}.lib)
+else()
+	dk_libDebug		(${${CURRENT_PLUGIN}_DEBUG_DIR}/lib${current_plugin}.a)
+	dk_libRelease	(${${CURRENT_PLUGIN}_RELEASE_DIR}/lib${current_plugin}.a)
+endif()
+
+
+dk_configure("${${CURRENT_PLUGIN}}" ${CMAKE_MAKE_PROGRAM} -f "${${CURRENT_PLUGIN}}/asio/src/Makefile.mgw")
+
+
+dk_build("${${CURRENT_PLUGIN}}")

@@ -7,23 +7,22 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ zlib ############
 # https://github.com/madler/zlib.git
-# http://www.zlib.net/
+# http://www.zlib.net
+# https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz
 
 ### IMPORT ###
-dk_validate(host_triple "dk_host_triple()")
-dk_validate(target_triple "dk_target_triple()")
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam("$ENV{DKIMPORTS_DIR}/zlib/dkconfig.txt" ZLIB_DL)
-dk_import(${ZLIB_DL})
-#dk_import(https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz)
+#dk_validate(host_triple "dk_host_triple()")
+#dk_validate(target_triple "dk_target_triple()")
+dk_getFileParam("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt" ZLIB_IMPORT)
+dk_import(${ZLIB_IMPORT} NAME zlib)
 
 ### DKBIN ###
-#set(ZLIB			 "$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  # C:/Users/Administrator/digitalknob/DKBIN/include/zlib
-#set(ZLIB_INC		 "$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  # C:/Users/Administrator/digitalknob/DKBIN/include/zlib
-#set(ZLIB_CONFIG_DIR  "${ZLIB_INC}/${CONFIG_PATH}")			   # //DKBIN/include/zlib/win_x86_64_clang (MULTI_CONFIG), //DKBIN/include/zlib/win_x86_64_clang/Debug (SINGLE_CONFIG)
-#set(ZLIB_LIB		 "$ENV{DIGITALKNOB_DIR}/DKBIN/lib/zlib")	   # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib
-#set(ZLIB_DEBUG_DIR	 "${ZLIB_LIB}/${target_triple}/${DEBUG_DIR}")	   # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Debug
-#set(ZLIB_RELEASE_DIR "${ZLIB_LIB}/${target_triple}/${RELEASE_DIR}")   # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Release
+#set(ZLIB			 	"$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  	# C:/Users/Administrator/digitalknob/DKBIN/include/zlib
+#set(ZLIB_INC		 	"$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  	# C:/Users/Administrator/digitalknob/DKBIN/include/zlib
+#set(ZLIB_CONFIG_DIR  	"${ZLIB_INC}/${CONFIG_PATH}")					# //DKBIN/include/zlib/win_x86_64_clang (MULTI_CONFIG), //DKBIN/include/zlib/win_x86_64_clang/Debug (SINGLE_CONFIG)
+#set(ZLIB_LIB		 	"$ENV{DIGITALKNOB_DIR}/DKBIN/lib/zlib")	   		# C:/Users/Administrator/digitalknob/DKBIN/lib/zlib
+#set(ZLIB_DEBUG_DIR		"${ZLIB_LIB}/${target_triple}/${DEBUG_DIR}")	# C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Debug
+#set(ZLIB_RELEASE_DIR 	"${ZLIB_LIB}/${target_triple}/${RELEASE_DIR}")  # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Release
 
 ### LINK ###
 dk_include				(${ZLIB}								ZLIB_INCLUDE_DIR)
@@ -52,9 +51,9 @@ endif()
 ### 3RDPARTY LINK ###
 # https://cmake.org/cmake/help/latest/module/FindZLIB.html
 dk_append(ZLIB_CMAKE 
-	-DZLIB_INCLUDE_DIR=${ZLIB_INCLUDE_DIR}
-	-DZLIB_LIBRARY_DEBUG=${ZLIB_LIBRARY_DEBUG} 
-	-DZLIB_LIBRARY_RELEASE=${ZLIB_LIBRARY_RELEASE})
+	"-DZLIB_INCLUDE_DIR=${ZLIB_INCLUDE_DIR}"
+	"-DZLIB_LIBRARY_DEBUG=${ZLIB_LIBRARY_DEBUG}" 
+	"-DZLIB_LIBRARY_RELEASE=${ZLIB_LIBRARY_RELEASE}")
 if(WIN AND MSVC)
 	dk_append(ZLIB_CMAKE 
 		"-DCMAKE_C_FLAGS=/I${ZLIB_INCLUDE_DIR} /I${ZLIB_INCLUDE_DIR2}" 
