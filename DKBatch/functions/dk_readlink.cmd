@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::################################################################################
-::# dk_readlink(path "-f" rtn_var)
+::# dk_readlink(path rtn_var)
 ::#
 ::#    read the contents of a symbolic link
 ::#
@@ -12,13 +12,28 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_readlink
 setlocal
-    %dk_call% dk_debugFunc 2
+    %dk_call% dk_debugFunc 1 2
     
-    set _input=%1
-    set _input=%_input:"=%
-    if "%_input:~-1%" equ "\" set _input=%_input:~0,-1%
-    if "%_input:~-1%" equ "/" set _input=%_input:~0,-1%
-    endlocal & for %%Z in ("%_input%") do set "%2=%%~fZ"
+	%dk_call% dk_assertPath "%~1"
+	set "dk_readlink="
+    set _path_=%1
+    set _path_=%_path_:"=%
+	set _path_=%_path_:/=\%
+    if "%_path_:~-1%" equ "\" set _path_=%_path_:~0,-1%
+    for /f "tokens=2 delims=[]" %%i in ('dir %_path_%* ^| FIND "<SYMLINK"') do set "dk_readlink=%%i"
+	
+	if not defined dk_readlink (
+		endlocal & (
+			set "dk_readlink=%_path_:\=/%"
+			if "%~2" neq "" (set "%~2=%_path_:\=/%")
+			%return%
+		)
+	)
+	
+	endlocal & (
+		set "dk_readlink=%dk_readlink:\=/%"
+		if "%~2" neq "" (set "%~2=%dk_readlink:\=/%")
+	)
 %endfunction%
 
 
@@ -30,7 +45,15 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
    
-    %dk_call% dk_set myPath "DK.cmd"
-    %dk_call% dk_readlink "%myPath%" realpath
-    %dk_call% dk_printVar realpath
+	%dk_call% dk_set myPath "C:/Users/Administrator/Desktop/DKBuilder.cmd"
+    %dk_call% dk_readlink "%myPath%"
+    %dk_call% dk_printVar dk_readlink
+	
+    %dk_call% dk_set myPath "C:/Users/Administrator/Desktop/digitalknob"
+    %dk_call% dk_readlink "%myPath%"
+    %dk_call% dk_printVar dk_readlink
+	
+	%dk_call% dk_set myPath "C:/Users/Administrator/Desktop"
+    %dk_call% dk_readlink "%myPath%"
+    %dk_call% dk_printVar dk_readlink
 %endfunction%
