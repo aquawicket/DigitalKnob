@@ -105,7 +105,7 @@ setlocal enableDelayedExpansion
 	echo 1 = %1
 	set "cmnd_out="
 	::echo 2 = %2
-	::for /f "usebackq tokens=*" %%a in (`%1`) do set "%2=%%a"
+	::for /f "usebackq tokens=*" %%a in (`%1`) do set "%~2=%%a"
 	for /f "usebackq tokens=*" %%a in (`%1`) do set "cmnd_out=%%a"
 %endfunction%
 

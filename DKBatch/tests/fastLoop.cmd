@@ -51,7 +51,9 @@ set whileResult=1
     set /a whileResult*=num, num+=1
     if !num! gtr %1 set _break=1
 )
-endlocal & if "%2" neq "" (set %2=%whileResult%) else echo %whileResult%
+endlocal & (
+	if "%~2" neq "" (set "%~2=%whileResult%") else (echo %whileResult%)
+)
 exit /b
 
 :lcm n1 n2 lcm=
@@ -63,5 +65,7 @@ set /a "whileResult=%1, j=%2"
     if !j! equ 0 set _break=1
 )
 set /a j=%1*%2/whileResult
-endlocal & if "%3" neq "" (set %3=%j%) else echo %j%
+endlocal & (
+	if "%~3" neq "" (set %3=%j%) else (echo %j%)
+)
 exit /B

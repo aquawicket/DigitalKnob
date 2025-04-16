@@ -18,7 +18,11 @@ setlocal
 			set %%c=%%f
 		)
 	)
-	endlocal & set "%1=%dd%" & set "%2=%mm%" & set "%3=%yy%"
+	endlocal & (
+		set "%~1=%dd%"
+		set "%~2=%mm%"
+		set "%~3=%yy%"
+	)
 %endfunction%
 
 

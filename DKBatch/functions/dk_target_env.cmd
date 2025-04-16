@@ -30,7 +30,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo "Please select a build environment."
     
     %dk_call% dk_keyboardInput choice
-    ::%dk_call% dk_keyboardInputTimeout choice 1 60 
+    ::%dk_call% dk_keyboardInputTimeout 1 60 choice
 
     if "%choice%" equ "1" endlocal & set "%1=CLANGARM64"   && %return%
     if "%choice%" equ "2" endlocal & set "%1=CLANG32"   	&& %return%

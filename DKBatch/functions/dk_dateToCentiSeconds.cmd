@@ -30,8 +30,11 @@ setlocal
     set /a "Days_ss=%dd%*24*60*60+%Hours_ss%
     set /a "Months_ss=(%mm%*304/10)*24*60*60+%Days_ss%"
     set /a "Years_ss=(%yy%*12*304/10)*24*60*60+%Months_ss%"
-    if %Years_ss% gtr 99999999 set /a "Years_ss=Years_ss+2160000"
-    endlocal & set "%1=%Years_ss%" & set "%2=%CentiSeconds_cs%"
+    if %Years_ss% gtr 99999999 (set /a "Years_ss=Years_ss+2160000")
+    endlocal & (
+		set "%~1=%Years_ss%"
+		set "%~2=%CentiSeconds_cs%"
+	)
 %endfunction%
 
 

@@ -19,6 +19,6 @@
 		if "%parent_folder%" neq "digitalknob" goto find_dkbranch_dir_loop
 		if "%parent_dir:~-1%" equ "\" set "parent_dir=%parent_dir:~0,-1%"
 		if "%parent_dir:~-1%" equ "/" set "parent_dir=%parent_dir:~0,-1%"
-		set "%1=%parent_dir%"
-		set "%2=%current_folder%"
+		set "%~1=%parent_dir%"
+		set "%~2=%current_folder%"
 %endfunction%

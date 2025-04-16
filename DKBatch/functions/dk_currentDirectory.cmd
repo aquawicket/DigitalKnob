@@ -14,7 +14,7 @@ setlocal
 
 	endlocal & (
 		set "dk_currentDirectory=%dk_currentDirectory%"
-		if "%1" neq "" set "%1=%dk_currentDirectory%"
+		if "%~1" neq "" (set "%~1=%dk_currentDirectory%")
 	)
 %endfunction%
 

@@ -73,8 +73,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo "Please select a target_app to build"
     
     %dk_call% dk_keyboardInput choice
-
-    :: %dk_call% dk_keyboardInputTimeout choice 23 60 
+    :: %dk_call% dk_keyboardInputTimeout 23 60 choice
     
     %dk_call% dk_echo "!dk_getDirectories[%choice%]!"
     

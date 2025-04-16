@@ -36,7 +36,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
     %dk_call% dk_keyboardInput choice
-    ::%dk_call% dk_keyboardInputTimeout choice 13 60
+    ::%dk_call% dk_keyboardInputTimeout 13 60 choice
 		
     if "%choice%" equ "0"  %dk_call% dk_set target_app %_target_app_% & %dk_call% dk_set target_triple %_target_triple_% & %dk_call% dk_set target_type %_target_type_%
     if "%choice%" equ "1"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
