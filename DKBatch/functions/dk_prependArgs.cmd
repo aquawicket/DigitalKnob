@@ -7,15 +7,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_prependArgs
-setlocal
+setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 2 99
 
-
-	set ALL_BUT_FIRST=%*
-	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
+	%dk_call% dk_allButFirstArgs %*
 	
-    if defined %~1 endlocal & call set "%~1=%ALL_BUT_FIRST% %%%~1%% "
-    if not defined %~1 endlocal & set "%~1=%ALL_BUT_FIRST%"
+	endlocal & (
+		if defined %~1 (
+			set "%~1=%dk_allButFirstArgs% !%~1!"
+		) else (
+			set "%~1=%dk_allButFirstArgs%"
+		)
+	)
 %endfunction%
 
 
@@ -32,6 +35,9 @@ setlocal
     %dk_call% dk_prependArgs myVar abc 123
     %dk_call% dk_printVar myVar
 
-    %dk_call% dk_prependArgs myVar xyz 789
+    %dk_call% dk_prependArgs myVar def 456
+    %dk_call% dk_printVar myVar
+	
+	%dk_call% dk_prependArgs myVar ghi 789
     %dk_call% dk_printVar myVar
 %endfunction%

@@ -30,14 +30,13 @@ setlocal enableDelayedExpansion
 	%dk_call% %COMSPEC% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
 
 	::### ALL_BUT_FIRST ###
-	set ALL_BUT_FIRST=%*
-	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
-
+	%dk_call% dk_allButFirstArgs %*
+	
 	::### LAST_ARG ###
 	for %%a in (%*) do set LAST_ARG=%%a
 
 :: ::Call DKPowershell function
-:: set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH ^= '%DKSCRIPT_PATH%'^; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1^; %~1 %ALL_BUT_FIRST%
+:: set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH ^= '%DKSCRIPT_PATH%'^; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1^; %~1 %dk_allButFirstArgs%
 :: ::echo %DKPOWERSHELL_COMMAND%
 :: for /f "delims=" %%Z in ('%DKPOWERSHELL_COMMAND%') do (
 :: 	echo %%Z				&rem  Display the other shell's stdout
@@ -51,7 +50,7 @@ setlocal enableDelayedExpansion
 ::	)
 
 	::###### run command ######
-	set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %ALL_BUT_FIRST%
+	set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%
 
 	::echo DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%
 	%dk_call% dk_exec "%DKPOWERSHELL_COMMAND%"

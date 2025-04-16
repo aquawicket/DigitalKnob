@@ -28,9 +28,6 @@ setlocal
 
 	%dk_call% dk_validate BASH_EXE "%dk_call% dk_BASH_EXE"
 
-::	set ALL_BUT_FIRST=%*
-::	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
-
 	:: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
 

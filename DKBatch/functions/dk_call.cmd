@@ -30,6 +30,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	(set __FILE__=%__FILE__:\=/%)
 	(set __FILENAME__=%~nx1)
 	(set __FUNC__=%~n1)
+	
+	::%dk_call% dk_allButFirstArgs %*
 	set __ARGV__=%*
 	if defined __ARGV__ (set __ARGV__=!__ARGV__:*%1=!)
 
@@ -200,6 +202,7 @@ exit /b !errorlevel!
 ::# :setGlobal(name value)
 ::#
 :setGlobal
+	::%dk_call% dk_allButFirstArgs %*
 	set argv=%*
 	if defined argv (set argv=!argv:*%1=!)
 	(set %~1=%argv%)

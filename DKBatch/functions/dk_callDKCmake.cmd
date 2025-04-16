@@ -26,10 +26,6 @@ setlocal
 
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
-	::### ALL_BUT_FIRST ###
-	::set ALL_BUT_FIRST=%*
-	::if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
-
 	::Create Run function Script
 	::set "DKCOMMAND=%~1(%ALL_BUT_FIRST%)"
 	set DKCOMMAND=%~1

@@ -11,18 +11,20 @@ setlocal enableDelayedExpansion
 ::	%dk_call% dk_debugFunc 2 99
 
 	set _name_=%~1
-	set "_args_=%*"
-	set "_args_=!_args_:*%1=!"
+	
+	::set "_args_=%*"
+	::set "_args_=!_args_:*%1=!"
+	%dk_call% dk_allButFirstArgs %*
 	
 	set /a "_argc_=0"
-	for %%Z in (%_args_%) do (
+	for %%Z in (%dk_allButFirstArgs%) do (
 		set /a _argc_+=1
 	)
 	if "%_argc_%" equ "1" (
-		for %%Z in (%_args_%) do set _args_=%%~Z
+		for %%Z in (%dk_allButFirstArgs%) do set dk_allButFirstArgs=%%~Z
 	)
 	
-	endlocal & (set "%~1=%_args_%")
+	endlocal & (set "%~1=%dk_allButFirstArgs%")
 
 	%dk_call% dk_printVar %~1 
 %endfunction%
