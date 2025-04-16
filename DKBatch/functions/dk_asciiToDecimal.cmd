@@ -16,7 +16,7 @@ setlocal
 
 	endlocal & (
 		set "dk_asciiToDecimal=%dk_hexToDecimal%"
-		if "%2" neq "" set "%2=%dk_hexToDecimal%"
+		if "%~2" neq "" (set "%~2=%dk_hexToDecimal%")
 	)
 %endfunction%
 

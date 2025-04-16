@@ -20,7 +20,7 @@ setlocal
 	
     endlocal & (
 		set "dk_nativePath=%dk_nativePath%"
-		if "%2" neq "" set "%2=%dk_nativePath%"
+		if "%~2" neq "" (set "%~2=%dk_nativePath%")
 	)	
 
 %endfunction%

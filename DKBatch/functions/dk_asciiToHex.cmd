@@ -25,7 +25,7 @@ setlocal
 
 	endlocal & (
 		set "dk_asciiToHex=%dk_asciiToHex%"
-		if "%2" neq "" set "%2=%dk_asciiToHex%"
+		if "%~2" neq "" (set "%~2=%dk_asciiToHex%")
 	)
 	
 ::DEBUG	

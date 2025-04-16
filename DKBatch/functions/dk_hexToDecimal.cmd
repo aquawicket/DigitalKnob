@@ -16,7 +16,7 @@ setlocal
     set /a dk_hexToDecimal=0x%hex:~-2%
     endlocal & (
 		set "dk_hexToDecimal=%dk_hexToDecimal%"
-		if "%2" neq "" set "%2=%dk_hexToDecimal%"
+		if "%~2" neq "" (set "%~2=%dk_hexToDecimal%")
 	)
 %endfunction%
 

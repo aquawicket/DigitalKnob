@@ -27,7 +27,7 @@ setlocal enableDelayedExpansion
 	
     endlocal & (
 		set "dk_realpath=%dk_realpath:\=/%"
-		if "%2" neq "" (set "%2=%dk_realpath:\=/%")
+		if "%~2" neq "" (set "%~2=%dk_realpath:\=/%")
 	)
 %endfunction%
 

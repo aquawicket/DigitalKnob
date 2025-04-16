@@ -32,7 +32,7 @@ setlocal
 
 	endlocal & (
 		set "dk_getAttributes=%dk_getAttributes%"
-		if "%2" neq "" set "%2=%dk_getAttributes%"
+		if "%~2" neq "" (set "%~2=%dk_getAttributes%")
 	)	
 %endfunction%
 

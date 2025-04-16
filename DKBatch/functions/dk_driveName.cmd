@@ -20,7 +20,7 @@ setlocal
 	
 	endlocal & (
 		set "dk_driveName=%dk_driveName%"
-		if "%2" neq "" set "%2=%dk_driveName%"
+		if "%~2" neq "" (set "%~2=%dk_driveName%")
 	)
 %endfunction%
 

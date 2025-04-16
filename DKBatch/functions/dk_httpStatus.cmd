@@ -23,7 +23,7 @@ setlocal
     )
 	endlocal & (
 		set "%~2=%dk_httpStatus%"
-		if "%2" neq "" set "%2=%dk_httpStatus%"
+		if "%~2" neq "" (set "%~2=%dk_httpStatus%")
 	)
 %endfunction%
 
