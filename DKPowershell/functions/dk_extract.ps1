@@ -5,7 +5,7 @@ if(!$dk_extract){ $dk_extract = 1 } else{ return } #include guard
 # dk_extract(file, destination)
 #
 #
-function Global:dk_extract($file, $destination) {
+function Global:dk_extract($file, $destination){
 	dk_debugFunc 2
 
 	dk_call dk_info "Extracting $file to $destination . . ."
@@ -27,7 +27,7 @@ function Global:dk_extract($file, $destination) {
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
-function Global:DKTEST() {
+function Global:DKTEST(){
 	dk_debugFunc 0
 	
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
