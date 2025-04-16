@@ -22,7 +22,7 @@ dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 ###### init the pacman keyring ######
 #dk_delete("${MSYS2_GPGDir}")
 if(NOT EXISTS "${MSYS2_GPGDir}")
-	set(ENV{PATH} "$ENV{PATH}:/usr/bin")
+	#set(ENV{PATH} "$ENV{PATH}:/usr/bin")
 	set(ENV{PATH} "${MSYS2}/usr/bin:$ENV{PATH}")
 	set(ENV{MAKEPKG_LIBRARY} "${MSYS2}/usr/share/makepkg")
 	dk_findProgram(BASH_EXE bash "${MSYS2}/usr/bin")
