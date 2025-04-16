@@ -11,7 +11,7 @@ setlocal
     %dk_call% dk_debugFunc 1 99
 
 	set dk_allButFirstArgs=%*
-	if defined dk_allButFirstArgs (set "dk_allButFirstArgs=!dk_allButFirstArgs:*%1 =!")
+	if defined dk_allButFirstArgs (set "dk_allButFirstArgs=!dk_allButFirstArgs:*%1=!")
 	
 	endlocal & (
 		set "dk_allButFirstArgs=%dk_allButFirstArgs%"

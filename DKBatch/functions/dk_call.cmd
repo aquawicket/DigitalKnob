@@ -31,10 +31,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	(set __FILENAME__=%~nx1)
 	(set __FUNC__=%~n1)
 	
+	set dk_allButFirstArgs=%*
+	if defined dk_allButFirstArgs (set __ARGV__=!dk_allButFirstArgs:*%1=!)
 	::%dk_call% dk_allButFirstArgs %*
-	set __ARGV__=%*
-	if defined __ARGV__ (set __ARGV__=!__ARGV__:*%1=!)
-
+	
 	::TODO - use dk_getFileLine to add the file line to the stack entry
 	call :pushStack %*
 

@@ -12,8 +12,6 @@ setlocal enableDelayedExpansion
 
 	set _name_=%~1
 	
-	::set "_args_=%*"
-	::set "_args_=!_args_:*%1=!"
 	%dk_call% dk_allButFirstArgs %*
 	
 	set /a "_argc_=0"
@@ -24,7 +22,9 @@ setlocal enableDelayedExpansion
 		for %%Z in (%dk_allButFirstArgs%) do set dk_allButFirstArgs=%%~Z
 	)
 	
-	endlocal & (set "%~1=%dk_allButFirstArgs%")
+	endlocal & (
+		set "%~1=%dk_allButFirstArgs%"
+	)
 
 	%dk_call% dk_printVar %~1 
 %endfunction%
