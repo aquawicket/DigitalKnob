@@ -110,12 +110,24 @@ function(DKINIT)
 	dk_load(dk_messageBox)
 
 	###### DKTEST MODE ######
-	if(ENABLE_DKTEST)
+#	if(ENABLE_DKTEST)
+#		message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
+#		string(FIND "$ENV{DKSCRIPT_DIR}" "$ENV{DKCMAKE_FUNCTIONS_DIR}" isChildOf)
+#
+#		if(${isChildOf} GREATER -1)
+#			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### $ENV{DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
+#			include($ENV{DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
+#			DKTEST()
+#			dk_echo("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")
+#			dk_exit(0)
+#		endif()
+#	endif()
 
-		message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
-		string(FIND "$ENV{DKSCRIPT_DIR}" "$ENV{DKCMAKE_FUNCTIONS_DIR}" isChildOf)
-
-		if(${isChildOf} GREATER -1)
+	###### DKTEST MODE ######
+	if((ENABLE_DKTEST) AND ($ENV{DKSCRIPT_EXT} STREQUAL ".cmake"))
+		dk_load(dk_fileIncludes)
+		dk_fileIncludes("$ENV{DKSCRIPT_PATH}" "function(DKTEST)")
+		if(dk_fileIncludes)
 			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### $ENV{DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
 			include($ENV{DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
 			DKTEST()
@@ -123,7 +135,6 @@ function(DKINIT)
 			dk_exit(0)
 		endif()
 	endif()
-	
 endfunction()
 
 
