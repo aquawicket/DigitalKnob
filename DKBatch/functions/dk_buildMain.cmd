@@ -25,7 +25,7 @@ setlocal enableDelayedExpansion
 	)
 	
 	if not exist "%DKDESKTOP_DIR%/DKBuilder.cmd" (
-		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd"
+		%dk_call% dk_createSymlink "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%DKDESKTOP_DIR%/DKBuilder.cmd"
 	)
 
 	::%dk_call% dk_assertPath DKSCRIPT_DIR
