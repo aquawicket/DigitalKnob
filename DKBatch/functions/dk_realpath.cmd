@@ -9,26 +9,23 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_realpath
 setlocal enableDelayedExpansion
-    %dk_call% dk_debugFunc 2
+    %dk_call% dk_debugFunc 1 2
     
 	set "pathname=%1"
     set "pathname=%pathname:"=%"
 	
-::	if not "X!pathname:/=!X" equ "X%pathname%X" (set fslashes=1)
-
-::  if "%pathname:~-1%" equ "\" (set pathname=%pathname:~0,-1%)
-::  if "%pathname:~-1%" equ "/" (set pathname=%pathname:~0,-1%)
-
-    for %%Z in ("%pathname%") do set "dk_realpath=%%~fZ"
+    for %%A in ("%pathname%") do (set "dk_realpath=%%~fA")
 	if "%dk_realpath:~-1%" equ "\" (set "dk_realpath=%dk_realpath:~0,-1%")
 	
-::	if defined fslashes (set dk_realpath=%dk_realpath:\=/%)
-::	%dk_call% dk_assertPath %dk_realpath%
+	%dk_call% dk_readlink "%dk_realpath:\=/%" dk_realpath
 	
     endlocal & (
 		set "dk_realpath=%dk_realpath:\=/%"
 		if "%~2" neq "" (set "%~2=%dk_realpath:\=/%")
 	)
+	
+	if exist "%dk_realpath%" exit /b 0
+	exit /b 1
 %endfunction%
 
 
@@ -41,10 +38,26 @@ setlocal
 	%dk_call% dk_debugFunc 0
    
     %dk_call% dk_set myPath "DK.cmd"
-    %dk_call% dk_realpath "%myPath%" realpath
-    %dk_call% dk_printVar realpath
+    %dk_call% dk_realpath "%myPath%"
+    %dk_call% dk_printVar dk_realpath
 	
-	%dk_call% dk_set myPath "C:/Windows/System32/cmd.exe"
-    %dk_call% dk_realpath "%myPath%" realpath
-    %dk_call% dk_printVar realpath
+	%dk_call% dk_set myPath "Test"
+    %dk_call% dk_realpath "%myPath%"
+    %dk_call% dk_printVar dk_realpath
+	
+	%dk_call% dk_set myPath "../functions"
+    %dk_call% dk_realpath "%myPath%"
+    %dk_call% dk_printVar dk_realpath
+	
+	%dk_call% dk_set myPath "C:/Users/Administrator/Desktop/DKBuilder.cmd"
+	%dk_call% dk_realpath "%myPath%"
+    %dk_call% dk_printVar dk_realpath
+	
+	%dk_call% dk_set myPath "C:/Users/Administrator/Desktop/digitalknob"
+	%dk_call% dk_realpath "%myPath%"
+    %dk_call% dk_printVar dk_realpath
+	
+	%dk_call% dk_set myPath "NonExistent"
+    %dk_call% dk_realpath "%myPath%"
+    %dk_call% dk_printVar dk_realpath
 %endfunction%
