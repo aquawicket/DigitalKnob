@@ -34,46 +34,43 @@ function(dk_target_triple)
 	
 	### Get Target_Dir ###
 	dk_getFullPath("${CMAKE_BINARY_DIR}" Target_Dir)
-	#d_k_toCamel(${Target_Dir} Target_Dir)
-	dk_toLower(${Target_Dir} target_dir)
-	dk_toUpper(${Target_Dir} TARGET_DIR)
-	dk_printVar(Target_Dir)								# Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
-	dk_printVar(target_dir)								# target_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang/debug
-	dk_printVar(TARGET_DIR)								# TARGET_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG/DEBUG
+	#d_k_toCamel(${Target_Dir} Target_Dir)				# Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
+	dk_toLower(${Target_Dir} target_dir)				# target_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang/debug
+	dk_toUpper(${Target_Dir} TARGET_DIR)				# TARGET_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG/DEBUG
+	#dk_printVar(Target_Dir)								
+	#dk_printVar(target_dir)								
+	#dk_printVar(TARGET_DIR)								
 	message("")
-
-message("${CMAKE_CURRENT_LIST_LINE}")	
+	
 	### Set Target_Type ###
 	if(Target_Dir MATCHES "Release")
 		dk_set(Target_Type Release)						# Target_Type = Release
 	else()
 		dk_set(Target_Type Debug)						# Target_Type = Debug (DEFAULT)
 	endif()
-	#d_k_toCamel(${Target_Type} Target_Type)
-	dk_toLower(${Target_Type} target_type)
-	dk_toUpper(${Target_Type} TARGET_TYPE)
-	dk_printVar(Target_Type)							# Target_Type = Debug
-	dk_printVar(target_type)							# target_type = debug
-	dk_printVar(TARGET_TYPE)							# TARGET_TYPE = DEBUG
-	dk_set(${Target_Type} 1)
-	dk_set(${target_type} 1)
-	dk_set(${TARGET_TYPE} 1)
-	dk_printVar(${Target_Type})							# Debug		  = 1
-	dk_printVar(${target_type})							# debug		  = 1
-	dk_printVar(${TARGET_TYPE})							# DEBUG		  = 1
+	#d_k_toCamel(${Target_Type} Target_Type)			# Target_Type = Debug
+	dk_toLower(${Target_Type} target_type)				# target_type = debug
+	dk_toUpper(${Target_Type} TARGET_TYPE)				# TARGET_TYPE = DEBUG
+	#dk_printVar(Target_Type)							
+	#dk_printVar(target_type)							
+	#dk_printVar(TARGET_TYPE)							
+	dk_set(${Target_Type} 1)							# Debug		  = 1
+	dk_set(${target_type} 1)							# debug		  = 1
+	dk_set(${TARGET_TYPE} 1)							# DEBUG		  = 1
+	#dk_printVar(${Target_Type})							
+	#dk_printVar(${target_type})							
+	#dk_printVar(${TARGET_TYPE})							
 	
-message("${CMAKE_CURRENT_LIST_LINE}")		
 	### Set Target_Triple_Dir ###
 	dk_dirname(${Target_Dir} Target_Triple_Dir)	
-	#d_k_toCamel(${Target_Triple_Dir} Target_Triple_Dir)	
-	dk_toLower(${Target_Triple_Dir} target_triple_dir)	
-	dk_toUpper(${Target_Triple_Dir} TARGET_TRIPLE_DIR)
-	dk_printVar(Target_Triple_Dir)						# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
-	dk_printVar(target_triple_dir)						# target_triple_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang
-	dk_printVar(TARGET_TRIPLE_DIR)						# TARGET_TRIPLE_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG
+	#d_k_toCamel(${Target_Triple_Dir} Target_Triple_Dir)	# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang	
+	dk_toLower(${Target_Triple_Dir} target_triple_dir)		# target_triple_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang
+	dk_toUpper(${Target_Triple_Dir} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG
+	#dk_printVar(Target_Triple_Dir)						
+	#dk_printVar(target_triple_dir)						
+	#dk_printVar(TARGET_TRIPLE_DIR)						
 	message("")
 	
-message("${CMAKE_CURRENT_LIST_LINE}")		
 	if( (target_dir MATCHES "android")		OR
 		(target_dir MATCHES "emscripten")	OR
 		(target_dir MATCHES "ios")			OR
@@ -88,53 +85,48 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 		message("######calling dk_target_triple_SET()#####")
 		dk_target_triple_SET()
 		message("######returned from dk_target_triple_SET()#####")
-		dk_printVar(Target_Triple)
-		dk_printVar(target_triple)
-		dk_printVar(TARGET_TRIPLE)
+		#dk_printVar(Target_Triple)
+		#dk_printVar(target_triple)
+		#dk_printVar(TARGET_TRIPLE)
 		dk_set(Target_Triple_Dir ${Target_Dir}/${Target_Triple})
 	endif()
-	dk_printVar(Target_Triple_Dir)						# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
-	dk_printVar(target_triple_dir)						# target_triple_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang
-	dk_printVar(TARGET_TRIPLE_DIR)						# TARGET_TRIPLE_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG
-	message("")
 	
-message("${CMAKE_CURRENT_LIST_LINE}")	
+	#dk_printVar(Target_Triple_Dir)						# Target_Triple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
+	#dk_printVar(target_triple_dir)						# target_triple_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang
+	#dk_printVar(TARGET_TRIPLE_DIR)						# TARGET_TRIPLE_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG
+	
 	if(NOT EXISTS ${Target_Triple_Dir})
-		dk_warning("Target_Triple_Dir:${Target_Triple_Dir} does not exits.")
-		dk_debug("Creating directory . . .${Target_Triple_Dir} ")
+		dk_warning("Target_Triple_Dir:${Target_Triple_Dir} does not exits. Creating directory . . .")
 		dk_mkdir(${Target_Triple_Dir})
 	endif()
 	dk_assertPath(Target_Triple_Dir)
 	
-message("${CMAKE_CURRENT_LIST_LINE}")		
 	### Set DK_Project_Dir ###
 	dk_dirname(${Target_Triple_Dir} DK_Project_Dir)
 	dk_set(DK_Project_Dir ${DK_Project_Dir})
-	dk_printVar(DK_Project_Dir)	
+	#dk_printVar(DK_Project_Dir)	
 	dk_assertPath(DK_Project_Dir)
 	
-message("${CMAKE_CURRENT_LIST_LINE}")	
 	### Set Target_Triple
 	if(NOT DEFINED Target_Triple)
-		dk_basename(${Target_Triple_Dir} Target_Triple)		# Target_Triple = Win_x86_64_Clang
+		dk_basename(${Target_Triple_Dir} Target_Triple)	# Target_Triple = Win_x86_64_Clang
 	endif()
-	#d_k_toCamel(${Target_Triple} Target_Triple)	
-	dk_toLower(${Target_Triple} target_triple)			
-	dk_toUpper(${Target_Triple} TARGET_TRIPLE)		
-	dk_set(target_triple ${target_triple})			# Globalize the variable
-	dk_set(Target_Triple ${Target_Triple})			# Globalize the variable
-	dk_set(TARGET_TRIPLE ${TARGET_TRIPLE})			# Globalize the variable
-	dk_printVar(target_triple)						# target_triple	= win_x86_64_clang
-	dk_printVar(Target_Triple)						# Target_Triple	= Win_X86_64_Clang
-	dk_printVar(TARGET_TRIPLE)						# TARGET_TRIPLE	= WIN_X86_64_CLANG
-	dk_set(${target_triple} 1)
-	dk_set(${Target_Triple} 1)
-	dk_set(${TARGET_TRIPLE} 1)
-	dk_printVar(${target_triple})					# win_x86_64_clang = 1
-	dk_printVar(${Target_Triple})					# Win_X86_64_Clang = 1
-	dk_printVar(${TARGET_TRIPLE})					# WIN_X86_64_CLANG = 1
+	#d_k_toCamel(${Target_Triple} Target_Triple)		# Target_Triple	= Win_X86_64_Clang
+	dk_toLower(${Target_Triple} target_triple)			# target_triple	= win_x86_64_clang	
+	dk_toUpper(${Target_Triple} TARGET_TRIPLE)			# TARGET_TRIPLE	= WIN_X86_64_CLANG
+	dk_set(Target_Triple ${Target_Triple})				# Globalize the variable
+	dk_set(target_triple ${target_triple})				# Globalize the variable
+	dk_set(TARGET_TRIPLE ${TARGET_TRIPLE})				# Globalize the variable
+	#dk_printVar(target_triple)							
+	#dk_printVar(Target_Triple)							
+	#dk_printVar(TARGET_TRIPLE)							
+	dk_set(${Target_Triple} 1)							# Win_X86_64_Clang = 1
+	dk_set(${target_triple} 1)							# win_x86_64_clang = 1
+	dk_set(${TARGET_TRIPLE} 1)							# WIN_X86_64_CLANG = 1
+	#dk_printVar(${Target_Triple})						
+	#dk_printVar(${target_triple})						
+	#dk_printVar(${TARGET_TRIPLE})						
 
-message("${CMAKE_CURRENT_LIST_LINE}")	
 	### Set target_os / TARGET_OS / <target_os>_target / <TARGET_OS>_TARGET
 		if(target_triple MATCHES "android")
 		dk_set(Target_Os Android)
@@ -177,7 +169,6 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 		dk_set(${TARGET_OS} 1)
 	endif()
 
-message("${CMAKE_CURRENT_LIST_LINE}")	
 	### Get target_arch / TARGET_ARCH
 		if(target_triple MATCHES "arm64")
 		dk_set(Target_Arch Arm64)
@@ -207,7 +198,6 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 		dk_set(${TARGET_ARCH} 1)
 	endif()
 
-message("${CMAKE_CURRENT_LIST_LINE}")	
 	### Set evn / TARGET_ENV 
 		if(target_triple MATCHES "clang")
 		dk_set(Target_Env Clang)
@@ -235,14 +225,12 @@ message("${CMAKE_CURRENT_LIST_LINE}")
 		dk_set(${TARGET_ENV} 1)
 	endif()
 	dk_depend(${target_env})
-
-message("${CMAKE_CURRENT_LIST_LINE}")	
+	
 	### Set MSYSTEM
 	if(${Target_Env})
 		dk_validate(MSYSTEM "dk_MSYSTEM()")
 	endif()
 	
-message("${CMAKE_CURRENT_LIST_LINE}")		
 	### Set target_os_arch / TARGET_OS_ARCH ###
 	dk_set(Target_Os_Arch "${Target_Os}_${Target_Arch}")
 	dk_set(target_os_arch "${target_os}_${target_arch}")
