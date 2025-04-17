@@ -52,7 +52,7 @@ setlocal enableDelayedExpansion
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal enableDelayedExpansion
+setlocal
 	%dk_call% dk_debugFunc 0
 	
 
@@ -60,7 +60,7 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar PWSH_EXE
 
-	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" || %dk_call% dk_printLastError
+	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "C:\Windows\System32" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar POWERSHELL_EXE
 
 	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "C:/Windows/System32" || %dk_call% dk_printLastError

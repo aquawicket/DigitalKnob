@@ -1,5 +1,5 @@
 @echo off
-if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%../../../DKBatch/functions/")
+if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../../../DKBatch/functions/")
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
@@ -23,30 +23,30 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" VC_REDIST_X86_IMPORT
 	::set "VCCOMP140_X86_DLL=C:/Windows/SysWOW64/vcomp140.dll"
 	::set "VCCOMP140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcomp140d.dll"
-	::set "VCRUNTIME140_X86_DLL=C:/Windows/SysWOW64/vcruntime140.dll"
-	::set "VCRUNTIME140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcruntime140d.dll"
-	::if exist "%VCCOMP140_X86_DLL%" OR if exist "%VCCOMP140_X86_DEBUG_DLL%" (
+	set "VCRUNTIME140_X86_DLL=C:/Windows/SysWOW64/vcruntime140.dll"
+	set "VCRUNTIME140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcruntime140d.dll"
+	if exist "%VCRUNTIME140_X86_DLL%" ( &rem OR if exist "%VCRUNTIME140_X86_DEBUG_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_IMPORT%
 		%dk_call% dk_info "Uninstalling Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_IMPORT!"
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 		"!DKDOWNLOAD_DIR!/!dk_basename!" /uninstall /quiet /norestart
-	::)
+	)
 	
 	::### 64Bit ###
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" VC_REDIST_X86_64_IMPORT
 	::set "VCCOMP140_X86_64_DLL=C:/Windows/System32/vcomp140.dll"
 	::set "VCCOMP140_X86_64_DEBUG_DLL=C:/Windows/System32/vcomp140d.dll"
-	::set "VCRUNTIME140_X86_64_DLL=C:/Windows/System32/vcruntime140.dll"
-	::set "VCRUNTIME140_X86_64_DEBUG_DLL=C:/Windows/System32/vcruntime140d.dll"
-	::if exist "%VCCOMP140_X86_64_DLL%" OR if exist "%VCCOMP140_X86_64_DEBUG_DLL%" (
+	set "VCRUNTIME140_X86_64_DLL=C:/Windows/System32/vcruntime140.dll"
+	set "VCRUNTIME140_X86_64_DEBUG_DLL=C:/Windows/System32/vcruntime140d.dll"
+	if exist "%VCRUNTIME140_X86_64_DLL%" ( &rem OR if exist "%VCRUNTIME140_X86_64_DEBUG_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_64_IMPORT%
 		%dk_call% dk_info "Uninstalling Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_64_IMPORT!"
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 		"!DKDOWNLOAD_DIR!/!dk_basename!" /uninstall /quiet /norestart
-	::)
+	)
 %endfunction%
 
 
