@@ -14,7 +14,7 @@ dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam		("$ENV{DKIMPORTS_DIR}/ida/dkconfig.txt" IDA_IMPORT)
 dk_validate			(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 dk_basename			(${IDA_IMPORT} IDA_DL_FILE)
-dk_importVariables	(${IDA_IMPORT})
+dk_importVariables	(${IDA_IMPORT} NAME IDA)
 dk_set				(IDA64_EXE "$ENV{DKTOOLS_DIR}/Ida/ida64.exe")
 
 if(EXISTS "${IDA64_EXE}")
