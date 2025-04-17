@@ -12,8 +12,10 @@ setlocal
 	%dk_call% dk_debugFunc 1 99
 
 	::set "USE_WSL=1"
-	if defined USE_WSL   (%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR")
-	if defined USE_WSL   (%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd")
+	if defined USE_WSL (
+		%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+		%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd"
+	)
 
 	::### Get DKBASH_FUNCTIONS_DIR
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
@@ -70,13 +72,16 @@ setlocal
 		rem set DKBASH_COMMAND=%BASH_EXE% -c 'export RELOAD_WITH_BASH=; . %bash_file%; %1 %ALL_BUT_FIRST%'
 		set DKBASH_COMMAND=%BASH_EXE% -c '. %bash_file%; %*'
 	)
-	::echo DKBASH_COMMAND = %DKBASH_COMMAND%
+	
 	echo ############################################
+	echo DKBASH_COMMAND = %DKBASH_COMMAND%
 	%dk_call% dk_exec "%DKBASH_COMMAND%"
 	echo ############################################
-	echo echo "errorlevel = %errorlevel%"
+	echo "errorlevel = %errorlevel%"
 
-	endlocal & set "dk_callDKBash=%dk_exec%"
+	endlocal & (
+		set "dk_callDKBash=%dk_exec%"
+	)
 %endfunction%
 
 
