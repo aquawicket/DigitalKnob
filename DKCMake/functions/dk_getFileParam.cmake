@@ -1,6 +1,13 @@
 #!/usr/bin/cmake -P
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+#include_guard()
 
 ################################################################################
 # dk_getFileParam(file, var_name) value
@@ -34,6 +41,6 @@ function(DKTEST)
     dk_debugFunc(0)
   
 	dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-    dk_getFileParam($ENV{DKIMPORTS_DIR}/git/git.txt VERSION)
-	dk_printVar(VERSION)
+    dk_getFileParam("$ENV{DKIMPORTS_DIR}/git/dkconfig.txt" GIT_DL_WIN_X86_64)
+	dk_printVar(GIT_DL_WIN_X86_64)
 endfunction()

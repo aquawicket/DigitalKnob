@@ -392,7 +392,7 @@ function(dk_importVariables)
 	# <PLUGIN>_DL_FILE
 	unset($ENV{CURRENT_PLUGIN}_DL_FILE)
 	dk_set($ENV{CURRENT_PLUGIN}_DL_FILE ${PLUGIN_URL_FILENAME})
-#	dk_printVar($ENV{CURRENT_PLUGIN}_DL_FILE)								# ZLIB_DL_FILE: master.zip
+	dk_printVar($ENV{CURRENT_PLUGIN}_DL_FILE)								# ZLIB_DL_FILE: master.zip
 	
 	# <PLUGIN>_VERSION
 	unset($ENV{CURRENT_PLUGIN}_VERSION)
