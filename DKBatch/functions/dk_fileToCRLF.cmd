@@ -13,7 +13,7 @@ setlocal
 	set "_file_=%~1"
     set "_file_=%_file_:/=\%"
 	
-    %dk_call% dk_isCRLF "%_file_%" && %dk_call% dk_echo "%_file_% is already CRLF" && %return%
+    %dk_call% dk_isCRLF "%_file_%" && %dk_call% dk_notice "%_file_% is already CRLF" && %return%
     %dk_call% dk_rename "%_file_%" "%_file_%_toCRLF" OVERWRITE
     if not exist "%_file_%_toCRLF" %dk_call% dk_error "failed to rename %_file_%"
     if exist "%_file_%" %dk_call% dk_echo "cannot rename file, destination already exists"
@@ -35,5 +35,5 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_fileToCRLF dk_appendArgs.cmd
+    %dk_call% dk_fileToCRLF TODO
 %endfunction%

@@ -7,14 +7,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_allButFirstArgs
-setlocal
+setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 1 99
 
 	set dk_allButFirstArgs=%*
-	if defined dk_allButFirstArgs (set "dk_allButFirstArgs=!dk_allButFirstArgs:*%1=!")
-	
-	endlocal & (
-		set "dk_allButFirstArgs=%dk_allButFirstArgs%"
+	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (
+		set dk_allButFirstArgs=%%b
 	)
 %endfunction%
 
@@ -27,27 +25,38 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-    call :DKTEST_funcA abc 123 def 456
 	
-	call :DKTEST_funcA %dk_allButFirstArgs%
-	call :DKTEST_funcA %dk_allButFirstArgs%
-	call :DKTEST_funcA %dk_allButFirstArgs%
+    call :DKTEST_func abc 123 def 456
+	call :DKTEST_func "abc" "123" "def" "456"
+	call :DKTEST_func	abc	123	def	456
 %endfunction%
 
-:DKTEST_funcA
+:DKTEST_func
 setlocal
 	%dk_call% dk_debugFunc 0 99
 	
-	echo: 
-	echo DKTEST_funcA
-	echo  * = %*
-	echo ~1 = %~1
-	echo ~2 = %~2
-	echo ~3 = %~3
-	echo ~4 = %~4
+	echo:
+	echo: before
+	call :DKTEST_printArgs %*
 	
-	%dk_call% dk_allButFirstArgs %*
-	endlocal & (
-		set "dk_allButFirstArgs=%dk_allButFirstArgs%"
-	)
+	call :dk_allButFirstArgs %*
+	
+	echo: after
+	call :DKTEST_printArgs %dk_allButFirstArgs%
+%endfunction%
+	
+:DKTEST_printArgs
+setlocal
+	%dk_call% dk_debugFunc 0 99
+	
+	echo * = '%*'
+	if "%~1" neq "" (echo 1 = '%1')
+	if "%~2" neq "" (echo 2 = '%2')
+	if "%~3" neq "" (echo 3 = '%3')
+	if "%~4" neq "" (echo 4 = '%4')
+	if "%~5" neq "" (echo 5 = '%5')
+	if "%~6" neq "" (echo 6 = '%6')
+	if "%~7" neq "" (echo 7 = '%7')
+	if "%~8" neq "" (echo 8 = '%8')
+	if "%~9" neq "" (echo 9 = '%9')
 %endfunction%

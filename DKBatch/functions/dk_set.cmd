@@ -10,17 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 setlocal enableDelayedExpansion
 ::	%dk_call% dk_debugFunc 2 99
 
-	set _name_=%~1
-	
 	%dk_call% dk_allButFirstArgs %*
-	
-	set /a "_argc_=0"
-	for %%Z in (%dk_allButFirstArgs%) do (
-		set /a _argc_+=1
-	)
-	if "%_argc_%" equ "1" (
-		for %%Z in (%dk_allButFirstArgs%) do set dk_allButFirstArgs=%%~Z
-	)
 	
 	endlocal & (
 		set "%~1=%dk_allButFirstArgs%"
