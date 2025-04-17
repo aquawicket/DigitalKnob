@@ -3,15 +3,15 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::####################################################################
-::# dk_createSymlink(symlink_path, src_path)
+::# dk_createSymlink(src_path, symlink_path)
 ::#
 ::#
 :dk_createSymlink
 setlocal
 	%dk_call% dk_debugFunc 2
 	
-	set "symlink_path=%~1"
-	set "src_path=%~2"
+	set "src_path=%~1"
+	set "symlink_path=%~2"
 	
 	%dk_call% dk_assertPath %src_path%
 	
@@ -41,11 +41,11 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	::### Create a directory symlink ###
-    %dk_call% dk_createSymlink "C:/Users/Administrator/Desktop/digitalknob" "C:/Users/Administrator/digitalknob"
+    %dk_call% dk_createSymlink "C:/Users/Administrator/digitalknob" "C:/Users/Administrator/Desktop/digitalknob"
 	
 	::### Create a file symlink ###
-	%dk_call% dk_createSymlink "C:/Users/Administrator/Desktop/DKBuilder.cmd" "C:/Users/Administrator/digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd" &rem OVERWRITE
+	%dk_call% dk_createSymlink "C:/Users/Administrator/digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd" "C:/Users/Administrator/Desktop/DKBuilder.cmd" &rem OVERWRITE
 	
 	::### Test Non-Existent Error ###
-    ::%dk_call% dk_createSymlink "C:/Users/Administrator/Desktop/Non-Existent" "C:/Non-Existent"
+    ::%dk_call% dk_createSymlink "C:/Non-Existent" "C:/Users/Administrator/Desktop/Non-Existent" 
 %endfunction%

@@ -15,7 +15,7 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_validate DKBRANCH_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	
 	if not exist "%DKDESKTOP_DIR%/digitalknob" (
-		%dk_call% dk_createSymlink "%DKDESKTOP_DIR%/digitalknob" "%DIGITALKNOB_DIR%"
+		%dk_call% dk_createSymlink "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/digitalknob"
 	)
 	
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"

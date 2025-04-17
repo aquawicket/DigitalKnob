@@ -2,7 +2,7 @@
 [ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ##################################################################################
-# dk_createSymlink(<path> <symlink>)
+# dk_createSymlink(src_path, symlink_path)
 #
 #
 dk_createSymlink() {
@@ -20,5 +20,12 @@ dk_createSymlink() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_createSymlink dk_createSymlink.sh dk_createSymlink
+	### Create a directory symlink ###
+    dk_call dk_createSymlink "${DKHOME_DIR}/digitalknob" "${DKHOME_DIR}/Desktop/digitalknob"
+	
+	### Create a file symlink ###
+	dk_call dk_createSymlink "${DKHOME_DIR}/digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.sh" "${DKHOME_DIR}/Desktop/DKBuilder.sh" &rem OVERWRITE
+	
+	### Test Non-Existent Error ###
+    dk_call dk_createSymlink "${DKHOME_DIR}/Non-Existent" "${DKHOME_DIR}/Desktop/Non-Existent" 
 }
