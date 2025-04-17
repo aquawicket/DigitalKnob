@@ -128,8 +128,10 @@ echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 :dk_DKSCRIPT_PATH
 	if not defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
 	if defined DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
+::	if defined DKSCRIPT_PATH		(call :readlink %DKSCRIPT_PATH% DKSCRIPT_PATH)
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist & exit /b -1)
 	
+	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 %endfunction%
 
 ::##################################################################################
@@ -158,6 +160,9 @@ echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	if exist 	 "%DKSCRIPT_DIR%"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:\=/%")
 	if "%DKSCRIPT_DIR:~-1%" equ "/"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%")
 	if not exist "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit -1)
+	
+	cd "%DKSCRIPT_DIR%"
+	echo CD = %CD%
 %endfunction%
 
 ::##################################################################################
@@ -242,6 +247,27 @@ echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	::( >NUL reg delete HKCU\Console\digitalknob /f )
 %endfunction%
 
+::##################################################################################
+::# dk_readlink
+::#
+:dk_readlink
+setlocal
+    %dk_call% dk_debugFunc 1 2
+    
+    set dk_readlink=%1
+	::if not exist "%dk_readlink%" (%return%)
+	
+    set dk_readlink=%dk_readlink:"=%
+	set dk_readlink=%dk_readlink:/=\%
+    if "%dk_readlink:~-1%" equ "\" set dk_readlink=%dk_readlink:~0,-1%
+
+	for /f "tokens=2 delims=[]" %%i in ('dir %dk_readlink%* ^| FIND "<SYMLINK"') do (set "dk_readlink=%%i")
+	
+	endlocal & (
+		set "dk_readlink=%dk_readlink:\=/%"
+		if "%~2" neq "" (set "%~2=%dk_readlink:\=/%")
+	)
+%endfunction%
 
 
 

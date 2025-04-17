@@ -66,6 +66,7 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/curl-8.6.0
 3rdParty/duktape-0701a46
 3rdParty/emsdk-861ce44b
+3rdParty/filezilla-master
 3rdParty/fmt-fade652a
 3rdParty/freetype-2.5.5
 3rdParty/giflib-1aa11b06
@@ -91,9 +92,11 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/openjdk-8-u41-b04-windows-i586-14_jan_2020
 3rdParty/openssl-2f362e9
 3rdParty/pcre2-7c215fa
+3rdParty/processexplorer-master
 3rdParty/pugixml-1.6
 3rdParty/python-2.7.18.amd64
 3rdParty/python3-python-3.11.8-embed-win32
+3rdParty/python3-python-3.11.8-embed-amd64
 3rdParty/rmlui-a903d8f7
 3rdParty/sdl-release-2.26.1
 3rdParty/sdl_image-release-2.6.2

@@ -21,7 +21,7 @@ dk_buildMain() {
 	fi
 	
 	if [ ! -e "${DKDESKTOP_DIR}/DKBuilder.sh" ]; then
-		dk_call dk_createSymlink "${DKBRANCH_DIR}/DKBatch/apps/DKBuilder/DKBuilder.sh" "${DKDESKTOP_DIR}/DKBuilder.sh"
+		dk_call dk_createSymlink "${DKBRANCH_DIR}/DKBash/apps/DKBuilder/DKBuilder.sh" "${DKDESKTOP_DIR}/DKBuilder.sh"
 	fi
 	
 	#dk_call dk_pinToQuickAccess "${DIGITALKNOB_DIR}"
