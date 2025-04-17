@@ -32,7 +32,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	set "CMAKE_EXE=%CMAKE%/bin/cmake.exe"
 
-	if exist "%CMAKE_EXE%" goto installed
+	if exist "%CMAKE_EXE%" (%return%)
 	%dk_call% dk_notice "Installing CMake . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 

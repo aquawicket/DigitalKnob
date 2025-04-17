@@ -10,7 +10,7 @@ include_guard()
 #	@msg	- The message to print
 #
 function(dk_echo)
-	dk_debugFunc(1 2)
+	dk_debugFunc(0 2)
 	if(${ARGC} EQUAL 0)
 		message("") # newline
 		return()
