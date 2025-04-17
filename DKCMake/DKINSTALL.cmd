@@ -4,7 +4,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 :runDKCMake
 	echo DKINSTALL.cmd %*
 	set "CMAKE_EXE=%~1"
-	::set "DKCMAKE_FUNCTIONS_DIR_=%~2"
+	set "DKCMAKE_FUNCTIONS_DIR_=%~2"
 	set "DKSCRIPT_PATH=%~3"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
