@@ -25,7 +25,9 @@ setlocal enableDelayedExpansion
 	::set "VCCOMP140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcomp140d.dll"
 	set "VCRUNTIME140_X86_DLL=C:/Windows/SysWOW64/vcruntime140.dll"
 	set "VCRUNTIME140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcruntime140d.dll"
-	if exist "%VCRUNTIME140_X86_DLL%" ( &rem OR if exist "%VCRUNTIME140_X86_DEBUG_DLL%" (
+	
+	rem OR if exist "%VCRUNTIME140_X86_DEBUG_DLL%" (
+	if exist "%VCRUNTIME140_X86_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_IMPORT%
 		%dk_call% dk_info "Uninstalling Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_IMPORT!"
@@ -40,7 +42,9 @@ setlocal enableDelayedExpansion
 	::set "VCCOMP140_X86_64_DEBUG_DLL=C:/Windows/System32/vcomp140d.dll"
 	set "VCRUNTIME140_X86_64_DLL=C:/Windows/System32/vcruntime140.dll"
 	set "VCRUNTIME140_X86_64_DEBUG_DLL=C:/Windows/System32/vcruntime140d.dll"
-	if exist "%VCRUNTIME140_X86_64_DLL%" ( &rem OR if exist "%VCRUNTIME140_X86_64_DEBUG_DLL%" (
+	
+	rem OR if exist "%VCRUNTIME140_X86_64_DEBUG_DLL%" (
+	if exist "%VCRUNTIME140_X86_64_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_64_IMPORT%
 		%dk_call% dk_info "Uninstalling Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_64_IMPORT!"

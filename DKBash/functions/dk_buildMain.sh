@@ -17,11 +17,15 @@ dk_buildMain() {
 	dk_call dk_validate DKBRANCH_DIR		"dk_call dk_DKBRANCH_DIR"
 	
 	if [ ! -e "${DKDESKTOP_DIR}/digitalknob" ]; then
-		dk_call dk_createSymlink "${DIGITALKNOB_DIR}" "${DKDESKTOP_DIR}/digitalknob"
+		if [ -e "${DKDESKTOP_DIR}" ]; then
+			dk_call dk_createSymlink "${DIGITALKNOB_DIR}" "${DKDESKTOP_DIR}/digitalknob"
+		fi
 	fi
 	
 	if [ ! -e "${DKDESKTOP_DIR}/DKBuilder.sh" ]; then
-		dk_call dk_createSymlink "${DKBRANCH_DIR}/DKBash/apps/DKBuilder/DKBuilder.sh" "${DKDESKTOP_DIR}/DKBuilder.sh"
+		if [ -e "${DKBRANCH_DIR}/DKBash/apps/DKBuilder/DKBuilder.sh" ]; then
+			dk_call dk_createSymlink "${DKBRANCH_DIR}/DKBash/apps/DKBuilder/DKBuilder.sh" "${DKDESKTOP_DIR}/DKBuilder.sh"
+		fi
 	fi
 	
 	#dk_call dk_pinToQuickAccess "${DIGITALKNOB_DIR}"

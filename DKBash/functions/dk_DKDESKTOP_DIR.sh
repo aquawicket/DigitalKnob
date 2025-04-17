@@ -14,7 +14,7 @@ dk_DKDESKTOP_DIR() {
 
 	############ GET ############
 	else
-		dk_call dk_validate DKHOME_DIR "dk_DKHOME_DIR" 
+		dk_call dk_validate DKHOME_DIR "dk_call dk_DKHOME_DIR" 
 		export DKDESKTOP_DIR="${DKHOME_DIR}/Desktop"  
 	fi 
 }
