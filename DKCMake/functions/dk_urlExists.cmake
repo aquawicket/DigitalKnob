@@ -7,13 +7,29 @@ include_guard()
 # dk_urlExists(url)
 #
 function(dk_urlExists)
-	dk_debugFunc(1)# 2)
+	dk_debugFunc(1)
 
 	###### CMD ######
 	dk_depend(cmd)
 	if(CMD_EXE)
 		dk_callDKBatch(dk_urlExists "${ARGV0}")
 		set(dk_urlExists "${dk_callDKBatch}" PARENT_SCOPE)
+		return()
+	endif()
+	
+	###### BASH ######
+	dk_depend(bash)
+	if(BASH_EXE)
+		dk_callDKBash(dk_urlExists "${ARGV0}")
+		set(dk_urlExists "${dk_callDKBash}" PARENT_SCOPE)
+		return()
+	endif()
+	
+	###### POWERSHELL ######
+	dk_depend(powershell)
+	if(POWERSHELL_EXE)
+		dk_callDKPowershell(dk_urlExists "${ARGV0}")
+		set(dk_urlExists "${dk_callDKPowershell}" PARENT_SCOPE)
 		return()
 	endif()
 

@@ -121,6 +121,14 @@ echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 %endfunction%
 
 
+::##################################################################################
+::# dk_DKSCRIPT_ARGS
+::#
+:dk_DKSCRIPT_ARGS
+	if not defined DKSCRIPT_ARGS	(set DKSCRIPT_ARGS=%*)
+	if defined DKSCRIPT_ARGS		(call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%~1 =%%")
+%endfunction%
+
 
 ::##################################################################################
 ::# dk_DKSCRIPT_PATH
@@ -134,13 +142,7 @@ echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 %endfunction%
 
-::##################################################################################
-::# dk_DKSCRIPT_ARGS
-::#
-:dk_DKSCRIPT_ARGS
-	if not defined DKSCRIPT_ARGS	(set DKSCRIPT_ARGS=%*)
-	if defined DKSCRIPT_ARGS		(call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%~1 =%%")
-%endfunction%
+
 
 ::##################################################################################
 ::# dk_DKSCRIPT_FILE

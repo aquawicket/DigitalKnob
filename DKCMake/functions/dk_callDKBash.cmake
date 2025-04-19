@@ -6,7 +6,7 @@ include_guard()
 # dk_callDKBash(function, arguments...)
 #
 #
-funtion(dk_callDKBash)
+function(dk_callDKBash)
 	#dk_debugFunc()
 	set(RTN_var ${ARGV0})
 	set(func 	${ARGV0})
@@ -14,7 +14,7 @@ funtion(dk_callDKBash)
 	### get required variables ###
 	dk_depend(bash)
 	dk_validate(DKBASH_FUNCTIONS_DIR_    "dk_DKBRANCH_DIR()")
-	dk_assertPath("{DKBASH_FUNCTIONS_DIR_})
+	dk_assertPath("${DKBASH_FUNCTIONS_DIR_}")
 
 	### get ALL_BUT_FIRST_ARGS ###
 	#set(ALL_BUT_FIRST_ARGS              ${ARGN})
@@ -22,12 +22,10 @@ funtion(dk_callDKBash)
 	### get LAST_ARG ###
 	#list(GET ARGN -1 LAST_ARG)
 
-
 #	### Call DKBash function
 #	dk_set(DKBASH_COMMAND "${BASH_EXE} -c ${DKBASH_FUNCTIONS_DIR_}${func}.sh ${ARGN}")
 #	dk_echo("${DKBASH_COMMAND}")
 #	execute_process(COMMAND ${DKBASH_COMMAND} WORKING_DIRECTORY "${DKBASH_FUNCTIONS_DIR}" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
-
 
 #	### process the return value ###
 #	#dk_echo("output = ${output}")
