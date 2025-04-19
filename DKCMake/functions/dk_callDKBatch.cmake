@@ -18,22 +18,22 @@ function(dk_callDKBatch func)
 
 	#set(func "${ARGV0}")
 	set(args ${ARGN})
-	dk_replaceAll("${args}" "(" "#40" args)
-	dk_replaceAll("${args}" ")" "#41" args)
+	#dk_replaceAll("${args}" "(" "#40" args)
+	#dk_replaceAll("${args}" ")" "#41" args)
 
 	### get ALL_BUT_FIRST_ARGS ###
 	#set(ALL_BUT_FIRST_ARGS                  ${ARGN})
 	### get LAST_ARG ###
 	#list(GET ARGN -1 LAST_ARG)
 
-	if("${dk_callDKBatch_PRINT_OUTPUT}" EQUAL 1)
+	if(${dk_callDKBatch_PRINT_OUTPUT} EQUAL 1)
 		set(ECHO_OUTPUT_VARIABLE "ECHO_OUTPUT_VARIABLE")
 	endif()
 
 	### Call DKBatch function ###
 	dk_validate(CMD_EXE "dk_CMD_EXE()")
 	dk_validate(ENV{DKBATCH_FUNCTIONS_DIR_}		"dk_DKBRANCH_DIR()")	
-	set(DKBATCH_COMMAND ${CMD_EXE} /V:ON /c call $ENV{DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
+	set(DKBATCH_COMMAND ${CMD_EXE} /V:ON /c call cd $ENV{DKBATCH_FUNCTIONS_DIR_} & $ENV{DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
 
 	if("${dk_callDKBatch_PRINT_COMMAND}" EQUAL 1)
 		message("DKBATCH_COMMAND = '${DKBATCH_COMMAND}'")
@@ -42,8 +42,9 @@ function(dk_callDKBatch func)
 	### FIXME ###
 	message("\n${DKBATCH_COMMAND}\n")
 	execute_process(COMMAND ${DKBATCH_COMMAND} OUTPUT_VARIABLE output_variable ECHO_OUTPUT_VARIABLE RESULT_VARIABLE result_variable WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
-	#execute_process(COMMAND "${DKBATCH_COMMAND}" OUTPUT_VARIABLE output_variable RESULT_VARIABLE result_variable ${ECHO_OUTPUT_VARIABLE} WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
 
+	dk_pause()
+	
 	### process the return value ###
 	string(FIND "${output_variable}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
 	if(last_newline_pos GREATER -1)
