@@ -12,6 +12,7 @@ endif()
 # dk_callDKBatch(<func>, <args...>)
 #
 #
+
 function(dk_callDKBatch func)
 	dk_debugFunc(1 99)
 
@@ -31,13 +32,17 @@ function(dk_callDKBatch func)
 
 	### Call DKBatch function ###
 	dk_validate(CMD_EXE "dk_CMD_EXE()")
-	dk_validate(ENV{DKBATCH_FUNCTIONS_DIR_}		"dk_DKBRANCH_DIR()")
-	set(DKBATCH_COMMAND "${CMD_EXE}" /V:ON /c call "$ENV{DKBATCH_FUNCTIONS_DIR_}${func}.cmd" "${args}" & echo !${func}! OUTPUT_VARIABLE output_variable RESULT_VARIABLE result_variable ${ECHO_OUTPUT_VARIABLE} WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
+	dk_validate(ENV{DKBATCH_FUNCTIONS_DIR_}		"dk_DKBRANCH_DIR()")	
+	set(DKBATCH_COMMAND ${CMD_EXE} /V:ON /c call $ENV{DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
 
 	if("${dk_callDKBatch_PRINT_COMMAND}" EQUAL 1)
 		message("DKBATCH_COMMAND = '${DKBATCH_COMMAND}'")
 	endif()
-	execute_process(COMMAND ${DKBATCH_COMMAND})
+
+	### FIXME ###
+	message("\n${DKBATCH_COMMAND}\n")
+	execute_process(COMMAND ${DKBATCH_COMMAND} OUTPUT_VARIABLE output_variable ECHO_OUTPUT_VARIABLE RESULT_VARIABLE result_variable WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
+	#execute_process(COMMAND "${DKBATCH_COMMAND}" OUTPUT_VARIABLE output_variable RESULT_VARIABLE result_variable ${ECHO_OUTPUT_VARIABLE} WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 	### process the return value ###
 	string(FIND "${output_variable}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
@@ -46,8 +51,9 @@ function(dk_callDKBatch func)
 	endif()
 	string(STRIP "${output_variable}" output_variable)
 
-	#message("output_variable = ${output_variable}")
-	#message("result_variable = ${result_variable}")
+	message("        command = ${DKBATCH_COMMAND}\n")
+	message("output_variable = ${output_variable}")
+	message("result_variable = ${result_variable}")
 	set(dk_callDKBatch "${output_variable}" PARENT_SCOPE)
 endfunction()
 
@@ -67,8 +73,8 @@ function(DKTEST)
 	#execute_process(COMMAND ${CMD_EXE} /V:ON /c "set /p input=& echo !input!" OUTPUT_VARIABLE input)
 	#dk_echo("input = ${input}")
 
-	#dk_callDKBatch(dk_debug "abc 1 2 4")
-	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	dk_callDKBatch(dk_test "abc" "1 2 4")
+	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 	
 	dk_callDKBatch(dk_urlExists "http://www.google.com/index.html")
 	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
