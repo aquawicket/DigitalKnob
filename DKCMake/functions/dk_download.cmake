@@ -23,7 +23,8 @@ function(dk_download)
 	dk_debugFunc(1 3)
 	message("dk_download(${ARGV})")
 	
-	
+	set(CMAKE_TLS_VERIFY=0)
+
 	dk_includes("${ARGV}" "${ARGV0}")
 	if(dk_includes)
 		set(url "${ARGV0}")
