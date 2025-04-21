@@ -70,22 +70,20 @@ function DK() {
 	
 	###### DKTEST MODE ######
 	if(!("${DKSCRIPT_EXT}" -eq ".ps1")){ return }
-	#if(!("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIR}")){ return }
-	if(dk_call dk_isChildPathOf $DKSCRIPT_DIR $DKPOWERSHELL_FUNCTIONS_DIR){
-		Write-Output "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
-		Write-Output ""
-		Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
-		Write-Output ""
-		#$include_guard = $DKSCRIPT_NAME.Substring(0, $DKSCRIPT_NAME.lastIndexOf('.'))
-		#dk_unset $include_guard
-		. ${DKSCRIPT_PATH}
-		DKTEST
-		Write-Output ""
-		Write-Output "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}"
-		Write-Output ""
-		Read-Host -Prompt "Press Enter to exit" 
-		exit
-	}
+	#if(!(dk_call dk_fileContains "function DKTEST()")){ return }
+
+	Write-Output ""
+	Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
+	Write-Output ""
+	#$include_guard = $DKSCRIPT_NAME.Substring(0, $DKSCRIPT_NAME.lastIndexOf('.'))
+	#dk_unset $include_guard
+	. ${DKSCRIPT_PATH}
+	DKTEST
+	Write-Output ""
+	Write-Output "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}"
+	Write-Output ""
+	Read-Host -Prompt "Press Enter to exit" 
+	exit
 }
 
 

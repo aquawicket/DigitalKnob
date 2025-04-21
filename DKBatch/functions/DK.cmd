@@ -96,8 +96,6 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::%dk_call% dk_validateDK || set "RELOADED=" && call :dk_DKSCRIPT_PATH "%~1" %*
 	::%DK% dk_load %DKSCRIPT_PATH%
 
-echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
-
 	::###### DKTEST MODE ######
 	if not "%DKSCRIPT_EXT%" equ ".cmd" (%return%)
 	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 0
