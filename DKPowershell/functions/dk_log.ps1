@@ -3,14 +3,18 @@ if(!$dk_log){ $dk_log = 1 } else{ return } #include guard
 
 if(!(${dk_log_ENABLE}))  { $global:dk_log_ENABLE = 1 }
 
-# DEFAULT
-if(!(${dk_log_DEFAULT_ENABLE})) { $global:dk_log_DEFAULT_ENABLE = 1 }
-if(!(${dk_log_DEFAULT_COLOR}))  { $global:dk_log_DEFAULT_COLOR = ${white} }
-#if(!(${dk_log_DEFAULT_TAG}))   { $global:dk_log_DEFAULT_TAG = bat>: " }
-if(!(${dk_log_DEFAULT_PAUSE}))  { $global:dk_log_DEFAULT_PAUSE = 0 }
-if(!(${dk_log_DEFAULT_TRACE}))  { $global:dk_log_DEFAULT_TRACE = 0 }
-if(!(${dk_log_DEFAULT_LINE}))   { $global:dk_log_DEFAULT_LINE = 0 }
-if(!(${dk_log_DEFAULT_HALT}))   { $global:dk_log_DEFAULT_HALT = 0 }
+#	0 VERBOSE		dk_verbose
+#	1 DEBUG			dk_debug
+#	  DEFAULT		dk_default
+#	2 INFO			dk_info
+#	3 SUCCESS		dk_success
+#	4 TODO			dk_todo
+#	5 NOTICE		dk_notice
+#	6 FIXME			dk_fixme
+#	7 WARNING		dk_warning
+#	8 DEPRECATED	dk_deprecated
+#	9 ERROR			dk_error
+#  10 FATAL			dk_fatal
 
 # VERBOSE
 if(!(${dk_log_VERBOSE_ENABLE})) { $global:dk_log_VERBOSE_ENABLE = 1 }
@@ -30,6 +34,15 @@ if(!(${dk_log_DEBUG_TRACE}))    { $global:dk_log_DEBUG_TRACE = 0 }
 if(!(${dk_log_DEBUG_LINE}))     { $global:dk_log_DEBUG_LINE = 0 }
 if(!(${dk_log_DEBUG_HALT}))     { $global:dk_log_DEBUG_HALT = 0 }
 
+# DEFAULT
+if(!(${dk_log_DEFAULT_ENABLE})) { $global:dk_log_DEFAULT_ENABLE = 1 }
+if(!(${dk_log_DEFAULT_COLOR}))  { $global:dk_log_DEFAULT_COLOR = ${white} }
+#if(!(${dk_log_DEFAULT_TAG}))   { $global:dk_log_DEFAULT_TAG = bat>: " }
+if(!(${dk_log_DEFAULT_PAUSE}))  { $global:dk_log_DEFAULT_PAUSE = 0 }
+if(!(${dk_log_DEFAULT_TRACE}))  { $global:dk_log_DEFAULT_TRACE = 0 }
+if(!(${dk_log_DEFAULT_LINE}))   { $global:dk_log_DEFAULT_LINE = 0 }
+if(!(${dk_log_DEFAULT_HALT}))   { $global:dk_log_DEFAULT_HALT = 0 }
+
 # INFO
 if(!(${dk_log_INFO_ENABLE}))    { $global:dk_log_INFO_ENABLE = 1 }
 if(!(${dk_log_INFO_COLOR}))     { $global:dk_log_INFO_COLOR = ${white} }
@@ -38,15 +51,6 @@ if(!(${dk_log_INFO_PAUSE}))     { $global:dk_log_INFO_PAUSE = 0 }
 if(!(${dk_log_INFO_TRACE}))     { $global:dk_log_INFO_TRACE = 0 }
 if(!(${dk_log_INFO_LINE}))      { $global:dk_log_INFO_LINE = 0 }
 if(!(${dk_log_INFO_HALT}))      { $global:dk_log_INFO_HALT = 0 }
-
-# NOTICE
-if(!(${dk_log_NOTICE_ENABLE}))  { $global:dk_log_NOTICE_ENABLE = 1 }
-if(!(${dk_log_NOTICE_COLOR}))   { $global:dk_log_NOTICE_COLOR = ${lyellow} }
-if(!(${dk_log_NOTICE_TAG}))     { $global:dk_log_NOTICE_TAG = "NOTICE: " }
-if(!(${dk_log_NOTICE_PAUSE}))   { $global:dk_log_NOTICE_PAUSE = 0 }
-if(!(${dk_log_NOTICE_TRACE}))   { $global:dk_log_NOTICE_TRACE = 0 }
-if(!(${dk_log_NOTICE_LINE}))    { $global:dk_log_NOTICE_LINE = 0 }
-if(!(${dk_log_NOTICE_HALT}))    { $global:dk_log_NOTICE_HALT = 0 }
 
 # SUCCESS
 if(!(${dk_log_SUCCESS_ENABLE}))  { $global:dk_log_SUCCESS_ENABLE = 1 }
@@ -57,6 +61,33 @@ if(!(${dk_log_SUCCESS_TRACE}))   { $global:dk_log_SUCCESS_TRACE = 0 }
 if(!(${dk_log_SUCCESS_LINE}))    { $global:dk_log_SUCCESS_LINE = 0 }
 if(!(${dk_log_SUCCESS_HALT}))    { $global:dk_log_SUCCESS_HALT = 0 }
 
+# TODO
+if(!(${dk_log_TODO_ENABLE}))    { $global:dk_log_TODO_ENABLE = 1 }
+if(!(${dk_log_TODO_COLOR}))     { $global:dk_log_TODO_COLOR = ${lblue} }
+if(!(${dk_log_TODO_TAG}))       { $global:dk_log_TODO_TAG = "TODO: " }
+if(!(${dk_log_TODO_PAUSE}))     { $global:dk_log_TODO_PAUSE = 1 }
+if(!(${dk_log_TODO_TRACE}))     { $global:dk_log_TODO_TRACE = 0 }
+if(!(${dk_log_TODO_LINE}))      { $global:dk_log_TODO_LINE = 0 }
+if(!(${dk_log_TODO_HALT}))      { $global:dk_log_TODO_HALT = 0 }
+
+# NOTICE
+if(!(${dk_log_NOTICE_ENABLE}))  { $global:dk_log_NOTICE_ENABLE = 1 }
+if(!(${dk_log_NOTICE_COLOR}))   { $global:dk_log_NOTICE_COLOR = ${lyellow} }
+if(!(${dk_log_NOTICE_TAG}))     { $global:dk_log_NOTICE_TAG = "NOTICE: " }
+if(!(${dk_log_NOTICE_PAUSE}))   { $global:dk_log_NOTICE_PAUSE = 0 }
+if(!(${dk_log_NOTICE_TRACE}))   { $global:dk_log_NOTICE_TRACE = 0 }
+if(!(${dk_log_NOTICE_LINE}))    { $global:dk_log_NOTICE_LINE = 0 }
+if(!(${dk_log_NOTICE_HALT}))    { $global:dk_log_NOTICE_HALT = 0 }
+
+# FIXME
+if(!(${dk_log_FIXME_ENABLE}))   { $global:dk_log_FIXME_ENABLE = 1 }
+if(!(${dk_log_FIXME_COLOR}))    { $global:dk_log_FIXME_COLOR = ${lred} }
+if(!(${dk_log_FIXME_TAG}))      { $global:dk_log_FIXME_TAG = "FIXME: " }
+if(!(${dk_log_FIXME_PAUSE}))    { $global:dk_log_FIXME_PAUSE = 1 }
+if(!(${dk_log_FIXME_TRACE}))    { $global:dk_log_FIXME_TRACE = 0 }
+if(!(${dk_log_FIXME_LINE}))     { $global:dk_log_FIXME_LINE = 0 }
+if(!(${dk_log_FIXME_HALT}))     { $global:dk_log_FIXME_HALT = 0 }
+
 # WARNING
 if(!(${dk_log_WARNING_ENABLE})) { $global:dk_log_WARNING_ENABLE = 1 }
 if(!(${dk_log_WARNING_COLOR}))  { $global:dk_log_WARNING_COLOR = ${yellow} }
@@ -65,6 +96,15 @@ if(!(${dk_log_WARNING_PAUSE}))  { $global:dk_log_WARNING_PAUSE = 0 }
 if(!(${dk_log_WARNING_TRACE}))  { $global:dk_log_WARNING_TRACE = 0 }
 if(!(${dk_log_WARNING_LINE}))   { $global:dk_log_WARNING_LINE = 0 }
 if(!(${dk_log_WARNING_HALT}))   { $global:dk_log_WARNING_HALT = 0 }
+
+# DEPRECATED
+if(!(${dk_log_DEPRECATED_ENABLE}))   { $global:dk_log_DEPRECATED_ENABLE = 1 }
+if(!(${dk_log_DEPRECATED_COLOR}))    { $global:dk_log_DEPRECATED_COLOR = ${lred} }
+if(!(${dk_log_DEPRECATED_TAG}))      { $global:dk_log_DEPRECATED_TAG = "DEPRECATED: " }
+if(!(${dk_log_DEPRECATED_PAUSE}))    { $global:dk_log_DEPRECATED_PAUSE = 1 }
+if(!(${dk_log_DEPRECATED_TRACE}))    { $global:dk_log_DEPRECATED_TRACE = 0 }
+if(!(${dk_log_DEPRECATED_LINE}))     { $global:dk_log_DEPRECATED_LINE = 0 }
+if(!(${dk_log_DEPRECATED_HALT}))     { $global:dk_log_DEPRECATED_HALT = 0 }
 
 # ERROR
 if(!(${dk_log_ERROR_ENABLE}))   { $global:dk_log_ERROR_ENABLE = 1 }
@@ -75,23 +115,16 @@ if(!(${dk_log_ERROR_TRACE}))    { $global:dk_log_ERROR_TRACE = 0 }
 if(!(${dk_log_ERROR_LINE}))     { $global:dk_log_ERROR_LINE = 0 }
 if(!(${dk_log_ERROR_HALT}))     { $global:dk_log_ERROR_HALT = 0 }
 
-# TODO
-if(!(${dk_log_TODO_ENABLE}))    { $global:dk_log_TODO_ENABLE = 1 }
-if(!(${dk_log_TODO_COLOR}))     { $global:dk_log_TODO_COLOR = ${lblue} }
-if(!(${dk_log_TODO_TAG}))       { $global:dk_log_TODO_TAG = "TODO: " }
-if(!(${dk_log_TODO_PAUSE}))     { $global:dk_log_TODO_PAUSE = 1 }
-if(!(${dk_log_TODO_TRACE}))     { $global:dk_log_TODO_TRACE = 0 }
-if(!(${dk_log_TODO_LINE}))      { $global:dk_log_TODO_LINE = 0 }
-if(!(${dk_log_TODO_HALT}))      { $global:dk_log_TODO_HALT = 0 }
+# FATAL
+if(!(${dk_log_FATAL_ENABLE}))   { $global:dk_log_FATAL_ENABLE = 1 }
+if(!(${dk_log_FATAL_COLOR}))    { $global:dk_log_FATAL_COLOR = ${red} }
+if(!(${dk_log_FATAL_TAG}))      { $global:dk_log_FATAL_TAG = "FATAL: " }
+if(!(${dk_log_FATAL_PAUSE}))    { $global:dk_log_FATAL_PAUSE = 1 }
+if(!(${dk_log_FATAL_TRACE}))    { $global:dk_log_FATAL_TRACE = 0 }
+if(!(${dk_log_FATAL_LINE}))     { $global:dk_log_FATAL_LINE = 0 }
+if(!(${dk_log_FATAL_HALT}))     { $global:dk_log_FATAL_HALT = 0 }
 
-# FIXME
-if(!(${dk_log_FIXME_ENABLE}))   { $global:dk_log_FIXME_ENABLE = 1 }
-if(!(${dk_log_FIXME_COLOR}))    { $global:dk_log_FIXME_COLOR = ${lred} }
-if(!(${dk_log_FIXME_TAG}))      { $global:dk_log_FIXME_TAG = "FIXME: " }
-if(!(${dk_log_FIXME_PAUSE}))    { $global:dk_log_FIXME_PAUSE = 1 }
-if(!(${dk_log_FIXME_TRACE}))    { $global:dk_log_FIXME_TRACE = 0 }
-if(!(${dk_log_FIXME_LINE}))     { $global:dk_log_FIXME_LINE = 0 }
-if(!(${dk_log_FIXME_HALT}))     { $global:dk_log_FIXME_HALT = 0 }
+
 
 
 ################################################################################
@@ -134,19 +167,18 @@ function Global:dk_log($_level_, $_message_) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	echo "dk_log TEST"
-	
 	dk_debugFunc 0
 	
-	dk_log "test dk_log message"
-	
-	dk_call dk_log VERBOSE "test dk_log VERBOSE message"
-	dk_call dk_log DEBUG   "test dk_log DEBUG message"
-	dk_call dk_log INFO    "test dk_log INFO message"
-	dk_call dk_log NOTICE  "test dk_log NOTICE message"
-	dk_call dk_log SUCCESS "test dk_log SUCCESS message"
-	dk_call dk_log WARNING "test dk_log WARNING message"
-	dk_call dk_log TODO    "test dk_log TODO message"
-	dk_call dk_log FIXME   "test dk_log FIXME message"
-	dk_call dk_log ERROR   "test dk_log ERROR message"
+	dk_call dk_log VERBOSE		"test dk_log VERBOSE message"
+	dk_call dk_log DEBUG		"test dk_log DEBUG message"
+	dk_call dk_log				"test dk_log message"
+	dk_call dk_log INFO			"test dk_log INFO message"
+	dk_call dk_log SUCCESS		"test dk_log SUCCESS message"
+	dk_call dk_log TODO			"test dk_log TODO message"
+	dk_call dk_log NOTICE		"test dk_log NOTICE message"
+	dk_call dk_log FIXME		"test dk_log FIXME message"
+	dk_call dk_log WARNING		"test dk_log WARNING message"
+	dk_call dk_log DEPRECATED	"test dk_log DEPRECATED message"
+	dk_call dk_log ERROR		"test dk_log ERROR message"
+	dk_call dk_log FATAL		"test dk_log FATAL message"
 }

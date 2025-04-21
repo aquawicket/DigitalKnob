@@ -28,6 +28,9 @@ def DK(*args):
     print("DKSCRIPT_PATH = "+DKSCRIPT_PATH)
     print("")
 
+    if sys.version_info[0] < 3:
+        raise Exception("Python version 3 or greater required")
+        
     # TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
     global DKSCRIPT_DIR;            DKSCRIPT_DIR = os.path.dirname(DKSCRIPT_PATH)
     global DKSCRIPT_FILE;           DKSCRIPT_FILE = os.path.basename(DKSCRIPT_PATH)
@@ -37,19 +40,20 @@ def DK(*args):
     #global DKSCRIPT_ARGS;          DKSCRIPT_ARGS = ' '.join(sys.argv[1:])
     global DKSCRIPT_ARGS;           DKSCRIPT_ARGS = sys.argv[0]
     global DKHOME_DIR;              DKHOME_DIR = os.environ['USERPROFILE']
-    global DKDESKTOP_DIR;           DKDESKTOP_DIR = f"{DKHOME_DIR}\\Desktop"
-    global DKCACHE_DIR;             DKCACHE_DIR = f"{DKHOME_DIR}\\.dk"
-    global DIGITALKNOB;             DIGITALKNOB = "DigitalKnob"
-    global DIGITALKNOB_DIR;         DIGITALKNOB_DIR = f"{DKHOME_DIR}\\{DIGITALKNOB}"
-    global DKDOWNLOAD_DIR;          DKDOWNLOAD_DIR = f"{DIGITALKNOB_DIR}\\download"
-    global DKTOOLS_DIR;             DKTOOLS_DIR = f"{DIGITALKNOB_DIR}\\DKTools"
-    global DKBRANCH;                DKBRANCH = "Developemnt"
-    global DKBRANCH_DIR;            DKBRANCH_DIR = f"{DIGITALKNOB_DIR}\\{DKBRANCH}"
-    global DK3RDPARTY_DIR;          DK3RDPARTY_DIR = f"{DKBRANCH_DIR}\\3rdParty"
-    global DKCPP_APPS_DIR;          DKCPP_APPS_DIR = f"{DKBRANCH_DIR}\\DKCpp\\apps"
-    global DKPYTHON_DIR;            DKPYTHON_DIR = f"{DKBRANCH_DIR}\\DKPython"
-    global DKPYTHON_FUNCTIONS_DIR;  DKPYTHON_FUNCTIONS_DIR = f"{DKPYTHON_DIR}\\function"
-    global DKPYTHON_FUNCTIONS_DIR_; DKPYTHON_FUNCTIONS_DIR_ = f"{DKPYTHON_FUNCTIONS_DIR}\\"
+#    global DKDESKTOP_DIR;           DKDESKTOP_DIR = f"{DKHOME_DIR}\\Desktop"
+#   global DKCACHE_DIR;             DKCACHE_DIR = f"{DKHOME_DIR}\\.dk"
+#    global DIGITALKNOB;             DIGITALKNOB = "DigitalKnob"
+#    global DIGITALKNOB_DIR;         DIGITALKNOB_DIR = f"{DKHOME_DIR}\\{DIGITALKNOB}"
+#    global DKDOWNLOAD_DIR;          DKDOWNLOAD_DIR = f"{DIGITALKNOB_DIR}\\download"
+#    global DKTOOLS_DIR;             DKTOOLS_DIR = f"{DIGITALKNOB_DIR}\\DKTools"
+#    global DKBRANCH;                DKBRANCH = "Developemnt"
+#    global DKBRANCH_DIR;            DKBRANCH_DIR = f"{DIGITALKNOB_DIR}\\{DKBRANCH}"
+#    global DK3RDPARTY_DIR;          DK3RDPARTY_DIR = f"{DKBRANCH_DIR}\\3rdParty"
+#    global DKCPP_APPS_DIR;          DKCPP_APPS_DIR = f"{DKBRANCH_DIR}\\DKCpp\\apps"
+#    global DKPYTHON_DIR;            DKPYTHON_DIR = f"{DKBRANCH_DIR}\\DKPython"
+#    global DKPYTHON_FUNCTIONS_DIR;  DKPYTHON_FUNCTIONS_DIR = f"{DKPYTHON_DIR}\\function"
+#    global DKPYTHON_FUNCTIONS_DIR_; DKPYTHON_FUNCTIONS_DIR_ = f"{DKPYTHON_FUNCTIONS_DIR}\\"
+
 DK()
 
 
@@ -57,7 +61,7 @@ DK()
 if DKSCRIPT_EXT == ".py": 
     #dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 0
     print()
-    print(f"{bg_magenta}{white}###### DKTEST MODE ###### {DKSCRIPT_NAME}.cmd ###### DKTEST MODE ######{clr}")
+    print(f"{bg_magenta}{white}###### DKTEST MODE ###### {DKSCRIPT_FILE} ###### DKTEST MODE ######{clr}")
     print()
 
 #    if DKSCRIPT_NAME == "DK":
@@ -67,7 +71,7 @@ if DKSCRIPT_EXT == ".py":
         mod.DKTEST()
 
         print()
-        print(f"{bg_magenta}{white}######## END TEST ####### {DKSCRIPT_NAME}.cmd ######## END TEST #######{clr}")
+        print(f"{bg_magenta}{white}######## END TEST ####### {DKSCRIPT_FILE} ######## END TEST #######{clr}")
         print()
         #pause
         #exit %ERRORLEVEL%

@@ -4,18 +4,30 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 if not defined dk_log_ENABLE	(set "dk_log_ENABLE=1")
 
-::	0 VERBOSE		dk_verbose
-::	1 DEBUG			dk_debug
-::	  DEFAULT		dk_default
-::	2 INFO			dk_info
-::	3 SUCCESS		dk_success
-::	4 TODO			dk_todo
-::	5 NOTICE		dk_notice
-::	6 FIXME			dk_fixme
-::	7 WARNING		dk_warning
-::	8 DEPRECATED	dk_deprecated
-::	9 ERROR			dk_error
-:: 10 FATAL			dk_fatal
+::###### level order ######
+::#		0 VERBOSE		dk_verbose
+::#		1 DEBUG			dk_debug
+::#		  DEFAULT		dk_default
+::#		2 INFO			dk_info
+::#		3 SUCCESS		dk_success
+::#		4 TODO			dk_todo
+::#		5 NOTICE		dk_notice
+::#		6 FIXME			dk_fixme
+::#		7 WARNING		dk_warning
+::#		8 DEPRECATED	dk_deprecated
+::#		9 ERROR			dk_error
+::#    10 FATAL			dk_fatal
+
+::### option order ###
+::# 	ENABLE
+::# 	COLOR
+::# 	TAG
+::# 	TRACE
+::# 	LINE
+::# 	SOUND
+::# 	PAUSE
+::# 	TIMEOUT
+::# 	HALT
 
 ::### VERBOSE ###
 if not defined dk_log_VERBOSE_ENABLE		(set "dk_log_VERBOSE_ENABLE=1")
@@ -178,7 +190,7 @@ setlocal enableDelayedExpansion
 	::	%dk_call% dk_set _message_ %_message_:~1,-1%	&rem if _message_ starts and ends with quotes, remove them
 	::)
 
-	::###### ECHO MASSAGE ######
+	::###### ECHO MESSAGE ######
 	%dk_call% dk_echo "!dk_log_%_level_%_COLOR!!dk_log_%_level_%_TAG!%_message_%%clr%"
 
 	::###### TRACE ######

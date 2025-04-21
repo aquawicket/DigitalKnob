@@ -10,8 +10,9 @@ if "%~1" equ "" (goto DKINSTALL)
 	if not defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
 
 	::###### run script ######
-	:: /K		keep the window open at the CMD prompt.
-	:: /V:ON	enable delayed expansion
+	:: "%COMSPEC%"	path to cmd.exe
+	:: /V:ON		enable delayed expansion
+	:: /K			keep the window open at the CMD prompt.
 	"%COMSPEC%" /V:ON /K call "%DKSCRIPT_PATH%"
 	::"%COMSPEC%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 

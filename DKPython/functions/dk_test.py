@@ -8,7 +8,7 @@ from DK import *
 def dk_test(*args):
 #   dk_debugFunc 0 99
 
-    print(f" ################# dk_test.py ################")
+    #print(f" ################# dk_test.py ################ ")
     if len(args) > 0:                           print(f"                       0 = {args[0]}")
     if len(args) > 1:                           print(f"                       1 = {args[1]}")
     if len(args) > 2:                           print(f"                       2 = {args[2]}")

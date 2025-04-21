@@ -2,18 +2,15 @@
 if "%~1" equ "" (goto DKINSTALL)
 
 :runDKPowershell
-	echo runDKPowershell %*
 	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
-	echo DKPOWERSHELL_FUNCTIONS_DIR = %DKPOWERSHELL_FUNCTIONS_DIR%
-
 	set "POWERSHELL_EXE=%~2"
-	echo POWERSHELL_EXE = %POWERSHELL_EXE%
-
 	set "DKSCRIPT_PATH=%~3"
-	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 
 	::###### run script ######
-	%COMSPEC% /v:on /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	:: "%COMSPEC%"	path to cmd.exe
+	:: /V:ON		enable delayed expansion
+	:: /K			keep the window open at the CMD prompt.
+	%COMSPEC% /V:ON /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
 
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (

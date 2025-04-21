@@ -8,11 +8,13 @@
 dk_createSymlink() {
 	dk_debugFunc 2
 	
-	[ ! -e ${1} ] && dk_call dk_error "${1} does not exist"
-	[ -e ${2} ] && dk_call dk_error "${2} already exists"
+	[ ! -e ${1} ] && dk_call dk_error "${1} does not exist" & return
+	[ -e ${2} ] && dk_call dk_error "${2} already exists" & return
 	dk_call dk_basename ${2}
-	[ ! -e ${dk_basename} ] && dk_error "${2} not found" & return
-	ln -s ${1} ${2}
+	[ ! -e ${dk_basename} ] && dk_error "${dk_basename} not found" & return
+	
+	LN_EXE=$(command -v ln)
+	${LN_EXE} -s ${1} ${2}
 }
 
 
