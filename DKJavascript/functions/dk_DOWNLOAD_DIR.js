@@ -42,6 +42,5 @@ DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 
 	dk_DKDOWNLOAD_DIR();
-	//console.log("dk_DKHOME_DIR:DKTEST()")
-	//dk_DKHOME_DIR()
+	console.log("DKDOWNLOAD_DIR = "+DKDOWNLOAD_DIR);
 };

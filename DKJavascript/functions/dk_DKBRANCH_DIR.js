@@ -42,4 +42,5 @@ DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 
 	dk_DKBRANCH_DIR();
+	console.log("DKBRANCH_DIR = "+DKBRANCH_DIR);
 };

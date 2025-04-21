@@ -3,10 +3,10 @@ if(typeof dk_assertPath === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions
 //(1, eval)(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js").OpenTextFile(url, 1).ReadAll();
 
 //####################################################################
-//# dk_DKTOOLS_DIR()
+//# dk_DKIMPORTS_DIR()
 //#
 //#
-dk_DKTOOLS_DIR = function dk_DKTOOLS_DIR(){
+dk_DKIMPORTS_DIR = function dk_DKIMPORTS_DIR_(){
     //dk_debugFunc(0 1);
 
 	//###### Print 'function(arguments)' ######
@@ -16,20 +16,20 @@ dk_DKTOOLS_DIR = function dk_DKTOOLS_DIR(){
 
 	//############ SET ############
 	if(arguments[0]){ 
-		DKTOOLS_DIR = arguments[0];
+		DKIMPORTS_DIR = arguments[0];
 	} 
 	//############ GET ############
 	else {
-		if(typeof dk_DIGITALKNOB_DIR === "undefined"){ 
-			dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DIGITALKNOB_DIR.js", function(){
-				dk_DIGITALKNOB_DIR()
+		if(typeof dk_DK3RDPARTY_DIR === "undefined"){ 
+			dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DK3RDPARTY_DIR.js", function(){
+				dk_DK3RDPARTY_DIR()
 			}); 
 		}
-		DKTOOLS_DIR = DIGITALKNOB_DIR+"/DKTools";
+		DKIMPORTS_DIR = DK3RDPARTY_DIR+"/_DKIMPORTS";
 	}
 
-	dk_assertPath(DKTOOLS_DIR);
-	//window["DKTOOLS_DIR"] = DKTOOLS_DIR;
+	dk_assertPath(DKIMPORTS_DIR);
+	//window["DKIMPORTS_DIR"] = DKIMPORTS_DIR;
 }
 
 
@@ -41,7 +41,7 @@ dk_DKTOOLS_DIR = function dk_DKTOOLS_DIR(){
 DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 
-	dk_DKTOOLS_DIR();
-	console.log("DKTOOLS_DIR = "+DKTOOLS_DIR);
+	dk_DKIMPORTS_DIR();
+	console.log("DKIMPORTS_DIR = "+DKIMPORTS_DIR);
 };
 

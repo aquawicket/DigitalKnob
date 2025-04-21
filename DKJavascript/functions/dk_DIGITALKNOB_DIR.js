@@ -42,6 +42,5 @@ DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 
 	dk_DIGITALKNOB_DIR();
-	//console.log("dk_DKHOME_DIR:DKTEST()")
-	//dk_DKHOME_DIR()
+	console.log("DIGITALKNOB_DIR = "+DIGITALKNOB_DIR);
 };
