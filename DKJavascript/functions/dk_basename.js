@@ -3,13 +3,18 @@
 //#
 //#    https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/filesystemobject-object
 //#
-dk_basename = function dk_basename_f(path){
+dk_basename = function dk_basename_f(path, basename){
 	//dk_debugFunc(1);
 	
 	if(typeof filesystem === "undefined"){ 
 		filesystem = new ActiveXObject("Scripting.FileSystemObject");
 	}
-	return filesystem.GetBaseName(path);
+	
+	if(typeof filesystem !== "undefined"){ 
+		dk_basename.value = filesystem.GetBaseName(path);
+		return 0;
+	}
+	return 1;
 }
 
 
@@ -17,10 +22,15 @@ dk_basename = function dk_basename_f(path){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_f(){
+DKTEST = function DKTEST_callback(){
 	//dk_debugFunc(0);
 	
 	var myPath = "C:/Windows/System32";
-    var basename = dk_basename(myPath);
-    console.log("basename = "+basename);
+
+	console.log("dk_basename.value before = "+dk_basename.value);
+    var ret = dk_basename(myPath);
+	console.log("dk_basename.value after = "+dk_basename.value);
+	
+	//console.log("ret = "+ret);
+	return ret;
 }

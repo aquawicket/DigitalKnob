@@ -10,7 +10,7 @@
 #endif
 
 //###### level order ######
-//#		0 VERBOSE		dk_verbose/
+//#		0 VERBOSE		dk_verbose
 //#		1 DEBUG			dk_debug
 //#		  DEFAULT		dk_default
 //#		2 INFO			dk_info
@@ -90,6 +90,9 @@
 #ifndef dk_log_DEBUG_LINE
 	#define dk_log_DEBUG_LINE 0
 #endif
+#ifndef dk_log_DEBUG_TIMEOUT
+	#define dk_log_DEBUG_TIMEOUT 0
+#endif
 #ifndef dk_log_DEBUG_PAUSE
 	#define dk_log_DEBUG_PAUSE 0
 #endif
@@ -112,6 +115,9 @@
 #endif
 #ifndef dk_log_DEFAULT_LINE
 	#define dk_log_DEFAULT_LINE 0
+#endif
+#ifndef dk_log_DEFAULT_TIMEOUT
+	#define dk_log_DEFAULT_TIMEOUT 0
 #endif
 #ifndef dk_log_DEFAULT_PAUSE
 	#define dk_log_DEFAULT_PAUSE 0
@@ -136,6 +142,9 @@
 #ifndef dk_log_INFO_LINE
 	#define dk_log_INFO_LINE 0
 #endif
+#ifndef dk_log_INFO_TIMEOUT
+	#define dk_log_INFO_TIMEOUT 0
+#endif
 #ifndef dk_log_INFO_PAUSE
 	#define dk_log_INFO_PAUSE 0
 #endif
@@ -158,6 +167,9 @@
 #endif
 #ifndef dk_log_SUCCESS_LINE
 	#define dk_log_SUCCESS_LINE 0
+#endif
+#ifndef dk_log_SUCCESS_TIMEOUT
+	#define dk_log_SUCCESS_TIMEOUT 0
 #endif
 #ifndef dk_log_SUCCESS_PAUSE
 	#define dk_log_SUCCESS_PAUSE 0
@@ -182,8 +194,11 @@
 #ifndef dk_log_TODO_LINE
 	#define dk_log_TODO_LINE 0
 #endif
+#ifndef dk_log_TODO_TIMEOUT
+	#define dk_log_TODO_TIMEOUT 1
+#endif
 #ifndef dk_log_TODO_PAUSE
-	#define dk_log_TODO_PAUSE 1
+	#define dk_log_TODO_PAUSE 0
 #endif
 #ifndef dk_log_TODO_HALT
 	#define dk_log_TODO_HALT 0
@@ -204,6 +219,9 @@
 #endif
 #ifndef dk_log_NOTICE_LINE
 	#define dk_log_NOTICE_LINE 0
+#endif
+#ifndef dk_log_NOTICE_TIMEOUT
+	#define dk_log_NOTICE_TIMEOUT 0
 #endif
 #ifndef dk_log_NOTICE_PAUSE
 	#define dk_log_NOTICE_PAUSE 0
@@ -228,8 +246,11 @@
 #ifndef dk_log_FIXME_LINE
 	#define dk_log_FIXME_LINE 0
 #endif
+#ifndef dk_log_FIXME_TIMEOUT
+	#define dk_log_FIXME_TIMEOUT 1
+#endif
 #ifndef dk_log_FIXME_PAUSE
-	#define dk_log_FIXME_PAUSE 1
+	#define dk_log_FIXME_PAUSE 0
 #endif
 #ifndef dk_log_FIXME_HALT
 	#define dk_log_FIXME_HALT 0
@@ -251,11 +272,40 @@
 #ifndef dk_log_WARNING_LINE
 	#define dk_log_WARNING_LINE 0
 #endif
+#ifndef dk_log_WARNING_TIMEOUT
+	#define dk_log_WARNING_TIMEOUT 0
+#endif
 #ifndef dk_log_WARNING_PAUSE
 	#define dk_log_WARNING_PAUSE 0
 #endif
 #ifndef dk_log_WARNING_HALT
 	#define dk_log_WARNING_HALT 0
+#endif
+
+//### DEPRECATED ###
+#ifndef dk_log_DEPRECATED_ENABLED
+	#define dk_log_DEPRECATED_ENABLED 1;
+#endif	
+#ifndef dk_log_DEPRECATED_COLOR
+	#define dk_log_DEPRECATED_COLOR yellow
+#endif
+#ifndef dk_log_DEPRECATED_TAG
+	#define dk_log_DEPRECATED_TAG "DEPRECATED: "
+#endif
+#ifndef dk_log_DEPRECATED_TRACE	
+	#define dk_log_DEPRECATED_TRACE 0
+#endif
+#ifndef dk_log_DEPRECATED_LINE
+	#define dk_log_DEPRECATED_LINE 0
+#endif
+#ifndef dk_log_DEPRECATED_TIMEOUT
+	#define dk_log_DEPRECATED_TIMEOUT 1
+#endif
+#ifndef dk_log_DEPRECATED_PAUSE
+	#define dk_log_DEPRECATED_PAUSE 0
+#endif
+#ifndef dk_log_DEPRECATED_HALT
+	#define dk_log_DEPRECATED_HALT 0
 #endif
 
 //### ERROR ###
@@ -274,8 +324,11 @@
 #ifndef dk_log_ERROR_LINE
 	#define dk_log_ERROR_LINE 0
 #endif
+#ifndef dk_log_ERROR_TIMEOUT
+	#define dk_log_ERROR_TIMEOUT 1
+#endif
 #ifndef dk_log_ERROR_PAUSE
-	#define dk_log_ERROR_PAUSE 1
+	#define dk_log_ERROR_PAUSE 0
 #endif
 #ifndef dk_log_ERROR_HALT
 	#define dk_log_ERROR_HALT 0
@@ -297,8 +350,11 @@
 #ifndef dk_log_FATAL_LINE
 	#define dk_log_FATAL_LINE 0
 #endif
+#ifndef dk_log_FATAL_TIMEOUT
+	#define dk_log_FATAL_TIMEOUT 1
+#endif
 #ifndef dk_log_FATAL_PAUSE
-	#define dk_log_FATAL_PAUSE 1
+	#define dk_log_FATAL_PAUSE 0
 #endif
 #ifndef dk_log_FATAL_HALT
 	#define dk_log_FATAL_HALT 1
@@ -315,22 +371,12 @@ int v_dk_log(int level, const char* format, va_list args) {
 		return 1;
 	#endif
 	
-	//###### option order ######
-//#		ENABLE
-//#		COLOR
-//#		TAG
-//#		TRACE
-//#		LINE
-//#		SOUND
-//#		TIMEOUT
-//#		PAUSE
-//#		HALT
-
 	int level_enable  = dk_log_DEFAULT_ENABLED;
 	char* level_color = (char *)dk_log_DEFAULT_COLOR;
 	char* level_tag   = (char *)dk_log_DEFAULT_TAG;
 	int level_trace   = dk_log_DEFAULT_TRACE;
 	int level_line    = dk_log_DEFAULT_LINE;
+	int level_timeout = dk_log_DEFAULT_TIMEOUT;
 	int level_pause	  = dk_log_DEFAULT_PAUSE;
 	int level_halt    = dk_log_DEFAULT_HALT;
 	if(level == VERBOSE){
@@ -339,6 +385,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_VERBOSE_TAG;
 		level_trace   = dk_log_VERBOSE_TRACE;
 		level_line    = dk_log_VERBOSE_LINE;
+		level_timeout = dk_log_VERBOSE_TIMEOUT;
 		level_pause	  = dk_log_VERBOSE_PAUSE;
 		level_halt    = dk_log_VERBOSE_HALT;
 	}
@@ -348,6 +395,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_DEBUG_TAG;
 		level_trace   = dk_log_DEBUG_TRACE;
 		level_line    = dk_log_DEBUG_LINE;
+		level_timeout = dk_log_DEBUG_TIMEOUT;
 		level_pause	  = dk_log_DEBUG_PAUSE;
 		level_halt    = dk_log_DEBUG_HALT;
 	}
@@ -357,6 +405,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_INFO_TAG;
 		level_trace   = dk_log_INFO_TRACE;
 		level_line    = dk_log_INFO_LINE;
+		level_timeout = dk_log_INFO_TIMEOUT;
 		level_pause	  = dk_log_INFO_PAUSE;
 		level_halt    = dk_log_INFO_HALT;
 	}
@@ -366,6 +415,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_SUCCESS_TAG;
 		level_trace   = dk_log_SUCCESS_TRACE;
 		level_line    = dk_log_SUCCESS_LINE;
+		level_timeout = dk_log_SUCCESS_TIMEOUT;
 		level_pause	  = dk_log_SUCCESS_PAUSE;
 		level_halt    = dk_log_SUCCESS_HALT;
 	}
@@ -375,6 +425,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_TODO_TAG;
 		level_trace   = dk_log_TODO_TRACE;
 		level_line    = dk_log_TODO_LINE;
+		level_timeout = dk_log_TODO_TIMEOUT;
 		level_pause	  = dk_log_TODO_PAUSE;
 		level_halt    = dk_log_TODO_HALT;
 	}
@@ -384,6 +435,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_NOTICE_TAG;
 		level_trace   = dk_log_NOTICE_TRACE;
 		level_line    = dk_log_NOTICE_LINE;
+		level_timeout = dk_log_NOTICE_TIMEOUT;
 		level_pause	  = dk_log_NOTICE_PAUSE;
 		level_halt    = dk_log_NOTICE_HALT;
 	}
@@ -393,6 +445,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_FIXME_TAG;
 		level_trace   = dk_log_FIXME_TRACE;
 		level_line    = dk_log_FIXME_LINE;
+		level_timeout = dk_log_FIXME_TIMEOUT;
 		level_pause	  = dk_log_FIXME_PAUSE;
 		level_halt    = dk_log_FIXME_HALT;
 	}
@@ -402,8 +455,19 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_WARNING_TAG;
 		level_trace   = dk_log_WARNING_TRACE;
 		level_line    = dk_log_WARNING_LINE;
+		level_timeout = dk_log_WARNING_TIMEOUT;
 		level_pause	  = dk_log_WARNING_PAUSE;
 		level_halt    = dk_log_WARNING_HALT;
+	}
+	if(level == DEPRECATED){
+		level_enable  = dk_log_DEPRECATED_ENABLED;
+		level_color   = (char *)dk_log_DEPRECATED_COLOR;
+		level_tag     = (char *)dk_log_DEPRECATED_TAG;
+		level_trace   = dk_log_DEPRECATED_TRACE;
+		level_line    = dk_log_DEPRECATED_LINE;
+		level_timeout = dk_log_DEPRECATED_TIMEOUT;
+		level_pause	  = dk_log_DEPRECATED_PAUSE;
+		level_halt    = dk_log_DEPRECATED_HALT;
 	}
 	if(level == ERROR){
 		level_enable  = dk_log_ERROR_ENABLED;
@@ -411,6 +475,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_ERROR_TAG;
 		level_trace   = dk_log_ERROR_TRACE;
 		level_line    = dk_log_ERROR_LINE;
+		level_timeout = dk_log_ERROR_TIMEOUT;
 		level_pause	  = dk_log_ERROR_PAUSE;
 		level_halt    = dk_log_ERROR_HALT;
 	}
@@ -420,6 +485,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 		level_tag     = (char *)dk_log_FATAL_TAG;
 		level_trace   = dk_log_FATAL_TRACE;
 		level_line    = dk_log_FATAL_LINE;
+		level_timeout = dk_log_FATAL_TIMEOUT;
 		level_pause	  = dk_log_FATAL_PAUSE;
 		level_halt    = dk_log_FATAL_HALT;
 	}
@@ -428,7 +494,7 @@ int v_dk_log(int level, const char* format, va_list args) {
 
 	// Get the message string from variable args
 //	va_list args;
-//    va_start(args, format);
+//  va_start(args, format);
 	char message[1028];
 	vsprintf(message, format, args);
 //	va_end(args);
@@ -436,8 +502,28 @@ int v_dk_log(int level, const char* format, va_list args) {
 	// Apply level color
 	sprintf(message, "%s%s%s", level_color, message, clr);
 	
-	// Print message
-	return printf("%s", message);
+	//###### ECHO MESSAGE ######
+	int ret = printf("%s", message);
+	
+	//###### TRACE ######
+	//todo
+	
+	//###### LINE ######
+	//todo
+	
+	//###### SOUND ######
+	//todo
+	
+	//###### TIMEOUT ######
+	//todo
+	
+	//###### PAUSE ######
+	//todo
+	
+	//###### HALT ######
+	//todo
+	
+	return ret;
 };
 
 	

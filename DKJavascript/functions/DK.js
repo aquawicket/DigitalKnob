@@ -123,42 +123,54 @@ dk_check('XMLHttpRequest');
 
 //############ dk_source ############
 if(typeof dk_source === "undefined"){
-	dk_source = function(url, callback){
+	dk_source = function(url, dk_source_callback){
 		//console.log("dk_source("+url+")");
 		var url = url.replaceAll("\\", "/");
 		//############ Msxml2.XMLHTTP.6.0 ############
 		if(typeof WScript === "object"){
 			if(USE_FILESYSTEM == 1){
 				// C:/Path/Format
+				var url = url.replaceAll("file:///", "");
+				console.log("url = "+url);
 				(1, eval)((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(url, 1).ReadAll());
 			} else {
 				// file:///C:/Path/Format
 				var xmlHttpRequest = new XMLHttpRequest;
 				xmlHttpRequest.open("GET", url, true);
 				xmlHttpRequest.send();
-				//console.log(xmlHttpRequest.responseText);
-				eval(xmlHttpRequest.responseText);
+				
+				//if(typeof xmlHttpRequest.responseText !== "undefined"){
+					//console.log("###################################################################");
+					//console.log("###################################################################");
+					//console.log("###################################################################");
+					//console.log(xmlHttpRequest.responseText);
+					eval(xmlHttpRequest.responseText);
+					//console.log("###################################################################");
+					//console.log("###################################################################");
+					//console.log("###################################################################");
+				//}
 			}
-			console.log("checking for callback");
-			if(callback){
-				callback();
+			//console.log("checking for callback");
+			if(dk_source_callback){
+				console.log("dk_source_callback");
+				dk_source_callback();
 				return;
 			} else {
-				console.log("no callback");
+				console.log("no dk_source_callback");
 			}
 		} else { //############ Browsers ############
 			// file:///C:/Path/Format
 			var script = document.createElement("script");
 			script.src = url;  
-			if (callback){
+			if (dk_source_callback){
 				script.onreadystatechange = function (){ // IE < 7, does not support onload
 					if (script.readyState === "loaded" || script.readyState === "complete"){
 						script.onreadystatechange = null; // no need to be notified again
-						callback();
+						dk_source_callback();
 					}
 				};
 				script.onload = function (){ // other browsers
-					callback();
+					dk_source_callback();
 				};
 			}
 			document.documentElement.firstChild.appendChild(script);
@@ -396,7 +408,7 @@ function body_onload(){
 		
 	if(DKSCRIPT_FILE === "index.html"){
 		var APP_NAME = DKSCRIPT_DIR.substr(DKSCRIPT_DIR.lastIndexOf("/")+1);
-		dk_source(DKJAVASCRIPT_DIR+"/apps/"+APP_NAME+"/main.js", function(){
+		dk_source(DKJAVASCRIPT_DIR+"/apps/"+APP_NAME+"/main.js", function dk_source_callback(){
 			main();
 		});
 	}
@@ -418,7 +430,6 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(
 //############ DKTEST ############
 //if(typeof DKSCRIPT_PATH !== "string" && DKSCRIPT_EXT === ".js"){
 //if(typeof ARGV !== "undefined" && ARGV.length > 0){
-	//if(typeof ARGV(0) === "string"){
 	if(typeof ARGV !== "undefined"){ 
 		if(ARGC > 0){ var JS_PATH = ARGV[0]; }
 		if(ARGC > 1){ var JS_ARGS = ARGV[1]; }
@@ -426,12 +437,16 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(
 		var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
 		var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
 		var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
-		dk_source(JS_PATH, function(){
-			if(typeof JS_ARGS !== "undefined"){
-				window[JS_NAME](JS_ARGS);
-			} else {
-				window[JS_NAME]();
-			}
+		dk_source(JS_PATH, function dk_source_callback(){
+
+			//############ DKTEST MODE ############
+			if(JS_EXT !== ".js"){ return }
+			//if(dk_fileContains(DKSCRIPT_PATH, "DKTEST = function DKTEST_callback()") > 1){ return }
+			console.log(bg_magenta+white+"\n###### DKTEST MODE ###### "+JS_FILE+" ###### DKTEST MODE ######"+clr+"\n");
+			DKTEST(); // if(DKTEST() !== 0){return;}
+			console.log(bg_magenta+white+"\n######## END TEST ####### "+JS_FILE+" ######## END TEST #######"+clr+"\n");
+			//dk_pause();
+			//exit %errorlevel%
 		});
 	} else {
 		console.log("TODO");
@@ -465,7 +480,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(
 			var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
 			var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
 			var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
-			dk_source(JS_PATH, function(){
+			dk_source(JS_PATH, function dk_source_callback(){
 				if(typeof JS_ARGS !== "undefined"){
 					window[JS_NAME](JS_ARGS);
 				} else {
