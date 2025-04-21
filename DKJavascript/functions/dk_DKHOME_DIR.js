@@ -1,6 +1,6 @@
-if(typeof dk_getEnv === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_getEnv.js", function(){}); }
+if(typeof dk_env === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js", function(){}); }
 if(typeof dk_assertPath === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); }
-//(1, eval)(DKJAVASCRIPT_DIR+"/functions/dk_getEnv.js").OpenTextFile(url, 1).ReadAll();
+//(1, eval)(DKJAVASCRIPT_DIR+"/functions/dk_env.js").OpenTextFile(url, 1).ReadAll();
 
 //####################################################################
 //# dk_DKHOME_DIR()
@@ -23,7 +23,7 @@ dk_DKHOME_DIR = function dk_DKHOME_DIR_f(){
 		
 	//############ GET ############
 	else {
-		DKHOME_DIR = dk_getEnv("USERPROFILE").replaceAll("\\", "/");
+		DKHOME_DIR = dk_env("USERPROFILE").replaceAll("\\", "/");
 	}
 
 	

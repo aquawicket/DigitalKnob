@@ -1,4 +1,4 @@
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_getEnv.js");
+dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js");
 //################################################################################
 //# dk_callDKBatch(function args)
 //#
@@ -11,22 +11,26 @@ dk_callDKBatch = function dk_callDKBatch_f(){
 	console.log("dk_callDKBatch("+arguments[0]+")");
 
 	DKBATCH_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKBatch/functions/";
-	COMSPEC = dk_getEnv("%COMSPEC%")
+	COMSPEC = dk_env("%COMSPEC%")
 	WShell = new ActiveXObject("WScript.Shell");
 	
 	//var ret = WShell.Run("start /b cmd /V:ON /c set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/& C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
 	
 	//var ret = WShell.Exec("cmd /V:ON /c set DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKBatch/functions/& C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
 	
-	//var ret = WShell.Exec("cmd /V:ON /c call C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
+	
 	
 	//var ret = WShell.Run("C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd");
 	
 	//var oExec = WShell.Run('cmd /c dir', 1 /* SW_SHOWNORMAL */, true /* bWaitOnReturn */);
 	//WScript.Echo("ret " + ret);
 
-	var oExec = WShell.Exec('cmd /c echo %errorlevel%');
+	//var oExec = WShell.Exec('cmd /V:ON /c dir');
+	var oExec = WShell.Exec('cmd /V:ON /c test.cmd');
+	//var oExec = WShell.Exec('cmd /V:ON /c call C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd');
 	
+	
+
 	/*
 	var input = "";
 	while (true) {
@@ -44,21 +48,55 @@ dk_callDKBatch = function dk_callDKBatch_f(){
 	WScript.Echo("stdin = "+stdin);
 	*/
 	
-	var stdout = oExec.StdOut.ReadAll();
-	WScript.Echo("stdout = "+stdout);
+	if(typeof oExec !== "undefined"){
+/*	
+	while(oExec.Status === 0){
+			//WScript.Echo("### status = "+oExec.Status+" (running)");
+			var stdoutA = oExec.StdOut.ReadAll();
+			WScript.Echo(stdoutA);
+			WScript.Sleep(1000);
+		}
+*/		
+		var stdout = "";
+		var stderr = "";
+		
+		while(!oExec.Status){
+			if(!oExec.StdOut.AtEndOfStream){
+				var stdout_line = oExec.StdOut.ReadLine();
+				WScript.StdOut.WriteLine(stdout_line);
+				stdout += stdout_line += "\n";
+			}
+			
+			if(!oExec.StdErr.AtEndOfStream){
+				var stderr_line = oExec.StdErr.ReadLine();
+				WScript.StdErr.WriteLine(stderr_line);
+				stderr += stderr_line += "\n";
+			}
+        }
+		
+		WScript.Echo("### status = "+oExec.Status+" (done)");
+		
+		var processid = oExec.ProcessID;
+		WScript.Echo("### processid = "+processid);
+		
+		var exitcode = oExec.ExitCode;
+		WScript.Echo("### exitcode = "+exitcode);
+		
+		WScript.Echo("\n######################## STDOUT ########################");
+		stdout += oExec.StdOut.ReadAll();
+		WScript.Echo(stdout);
 
-	var stderr = oExec.StdErr.ReadAll();
-	WScript.Echo("stderr = "+stderr);
-	
-	var processid = oExec.ProcessID;
-	WScript.Echo("processid = "+processid);
-	
-	var status = oExec.Status;
-	WScript.Echo("status = "+status);
-	
-	var exitcode = oExec.ExitCode;
-	WScript.Echo("exitcode = "+exitcode);
-
+		WScript.Echo("\n######################## STDERR ########################");
+		stderr += oExec.StdErr.ReadAll();
+		WScript.Echo(stderr);
+		
+		if(exitcode === 1){
+			WScript.Echo("failed");	
+		}
+	}
+	if(typeof oRun !== "undefined"){
+		
+	}
 }
 
 

@@ -40,7 +40,7 @@ if(USE_NODEJS){
 	dk_validate(DKIMPORTS_DIR, "dk_DKIMPORTS_DIR");
 	dk_validate(NODEJS_EXE, DKIMPORTS_DIR+"/nodejs/dk_install.js")
 	
-	//COMSPEC = dk_getEnv("%COMSPEC%")
+	//COMSPEC = dk_env("%COMSPEC%")
 	WShell = new ActiveXObject("WScript.Shell");
 	WShell.Run('start '+NODEJS_EXE+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
 	WShell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
