@@ -1,6 +1,6 @@
 var index = "file:///C:/Users/Administrator/digitalknob/Development/DKHtml/index.html";
 var assets = "file:///C:/Users/Administrator/digitalknob/Development";
-var USE_FILESYSTEM = 0;
+var USE_FILESYSTEM = 1;
 var USE_NODEJS=0;
 
 
@@ -47,21 +47,113 @@ if(USE_NODEJS){
 }
 
 //########### DKENGINE ###########
-if(typeof ScriptEngine !== "undefined"){
-	var DKENGINE = ScriptEngine();
-	var DKENGINE_VERSION = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
-}
-dk_check('DKENGINE');
-
-//############ DKSHELL ############
-if(typeof ActiveXObject === "function"){
-	if(typeof WScript !== "object"){ // JScript
-		DKENGINE = "DKHta"; 
+if(typeof DKScriptEngine === "undefined"){
+	if(typeof ScriptEngine !== "undefined"){
+		var DKScriptEngine = ScriptEngine();
+		var DKScriptEngine_Version = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
 	}
-} else { 
-	DKENGINE = "Browser" 
+}
+dk_check('DKScriptEngine');
+dk_check('DKScriptEngine_Version');
+
+
+//############ globalThis ############
+if(typeof globalThis === "undefined"){
+	var globalThis = (function (){  
+		return this || (1, eval)('this');  
+	}());
+	console.log("globalThis = "+typeof globalThis);
+}
+dk_check('globalThis');
+
+//############ window ############
+if(typeof window === "undefined"){
+	var window = (function (){  
+		return this || (1, eval)('this');  
+	}());
+	console.log("window = "+typeof window);
+}
+dk_check('window');
+
+
+
+
+valid = function valid_f(str){
+	//console.log("valid("+str+")");
+	var arry = str.split(".");
+	if(typeof window === "undefined"){ 
+		console.error("window is invalid");
+		return false; 
+	}
+	var output = true;
+	if(output && (arry.length > 0)){ output = (typeof window !== "undefined") }
+	if(output && (arry.length > 1)){ output = (typeof window[arry[1]] !== "undefined") }
+	if(output && (arry.length > 2)){ output = (typeof window[arry[1]][arry[2]] !== "undefined") }
+	if(output && (arry.length > 3)){ output = (typeof window[arry[1]][arry[2]][arry[3]] !== "undefined") }
+	if(output && (arry.length > 4)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]] !== "undefined") }
+	if(output && (arry.length > 5)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]] !== "undefined") }
+	if(output && (arry.length > 6)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]][arry[6]] !== "undefined") }
+	if(output && (arry.length > 7)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]][arry[6]][arry[7]] !== "undefined") }
+	if(output && (arry.length > 8)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]][arry[6]][arry[7]][arry[8]] !== "undefined") }
+	if(output && (arry.length > 9)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]][arry[6]][arry[7]][arry[8]][arry[9]] !== "undefined") }
+	
+	///console.log("output = "+output);
+	return output;
 }
 
+//############ DKBrowser ############
+DKBrowser = function DKBrowser_f(){
+	var output = [];
+
+	var hasNavigator = valid('window.navigator');
+	console.log("hasNavigator = "+hasNavigator);
+	
+	// Hta
+	var isHta = valid("window.ActiveXObject") && valid("window.WScript");
+	if(isHta){ output.push("isHta"); }
+
+	// Brave
+	var isBrave = valid("window.navigator.brave.isBrave.name");
+	if(isBrave){ output.push("isBrave"); }
+
+	// Opera 8.0+
+	var isOpera = valid("window.opr.addons") || valid("window.oprera") || (valid("navigator.userAgent.indexOf") && (navigator.userAgent.indexOf(' OPR/') >= 0));
+	if(isOpera){ output.push("isOpera"); }
+
+	// Firefox 1.0+
+	var isFirefox = valid("window.InstallTrigger");
+	if(isFirefox){ output.push("isFirefox"); }
+
+	// Safari 3.0+ "[object HTMLElementConstructor]" 
+	var isSafari = valid("window.HTMLElement") && /constructor/i.test(window.HTMLElement) 
+	|| (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+	if(isSafari){ output.push("isSafari"); }
+
+	// Internet Explorer 6-11
+	var isIE = /*@cc_on!@*/false || valid("document.documentMode");
+	if(isIE){ output.push("isIE"); }
+
+	// Edge 20+
+	var isEdge = !isIE && valid("window.StyleMedia");
+	if(isEdge){ output.push("isEdge"); }
+
+	// Chrome 1 - 79
+	var isChrome = valid("window.chrome") && valid("window.chrome.webstore") || valid("window.chrome.runtime");
+	if(isChrome){ output.push("isChrome"); }
+
+	// Edge (based on chromium) detection
+	var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
+	if(isEdgeChromium){ output.push("isEdgeChromium"); }
+
+	// Blink engine detection
+	var isBlink = (isChrome || isOpera) && valid("window.CSS");
+	if(isBlink){ output.push("isBlink"); }
+
+	return output.toString();
+}
+console.log("DKBrowser() = "+DKBrowser());
+
+//dk_check('DKBrowser');
 
 
 
@@ -80,24 +172,10 @@ if(typeof WScript === "object"){
 	//console.log("ARGC = "+ARGC+"\n");
 }
 
-//############ globalThis ############
-if(typeof globalThis === "undefined"){
-	var globalThis = (function (){  
-		return this || (1, eval)('this');  
-	}());
-	console.log("globalThis = "+typeof globalThis);
-}
-dk_check('globalThis');
 
 
-//############ window ############
-if(typeof window === "undefined"){
-	var window = (function (){  
-		return this || (1, eval)('this');  
-	}());
-	console.log("window = "+typeof window);
-}
-dk_check('window');
+
+
 
 
 //############ String.prototype.replaceAll (polyfill) ############
@@ -428,8 +506,50 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(
 
 
 //############ DKTEST ############
-//if(typeof DKSCRIPT_PATH !== "string" && DKSCRIPT_EXT === ".js"){
-//if(typeof ARGV !== "undefined" && ARGV.length > 0){
+if(typeof ARGV !== "undefined"){ 
+	if(ARGC > 0){ var JS_PATH = ARGV[0]; }
+	if(ARGC > 1){ var JS_ARGS = ARGV[1]; }
+	var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
+	var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
+	var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
+	var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
+	dk_source(JS_PATH, function dk_source_callback(){
+
+		//############ DKTEST MODE ############
+		if(JS_EXT !== ".js"){ return }
+		//if(dk_fileContains(DKSCRIPT_PATH, "DKTEST = function DKTEST_callback()") > 1){ return }
+		console.log(bg_magenta+white+"\n######## DKJAVASCRIPT TEST MODE ###### "+JS_FILE+" ######## DKJAVASCRIPT TEST MODE ######"+clr+"\n");
+		DKTEST(); // if(DKTEST() !== 0){return;}
+		console.log(bg_magenta+white+"\n######## DKJAVASCRIPT END TEST ####### "+JS_FILE+" ######## DKJAVASCRIPT END TEST #######"+clr+"\n");
+		//dk_pause();
+		//exit %errorlevel%
+	});
+	
+} else {
+	console.log("TODO");
+}
+		
+/*
+if(typeof ARGV !== "undefined"){
+	FUNC_NAME = ARGV[0].substr(ARGV[0].lastIndexOf("/")+1, (ARGV[0].lastIndexOf(".") - ARGV[0].lastIndexOf("/")-1)); 
+	alert("FUNC_NAME = "+FUNC_NAME);
+		
+	document.title = FUNC_NAME;
+	if(typeof globalThis[FUNC_NAME] === "undefined"){
+
+		dk_source(ARGV[0], function dk_source_callback(){
+			//if(DKSCRIPT_EXT !== ".js"){ return }
+			//if(!dk_fileContains(DKSCRIPT_PATH, ":DKTEST")){ return }
+			console.log("")
+			console.log(bg_magenta+white+"###### DKTEST MODE ###### "+DKSCRIPT_FILE+" ###### DKTEST MODE ######"+clr)
+			console.log("")
+			DKTEST()//function DKTEST_callback(){});
+			console.log("")
+			console.log(bg_magenta+white+"######## END TEST ####### "+DKSCRIPT_FILE+" ######## END TEST #######"+clr)
+			console.log("")
+		});
+	}
+} else {
 	if(typeof ARGV !== "undefined"){ 
 		if(ARGC > 0){ var JS_PATH = ARGV[0]; }
 		if(ARGC > 1){ var JS_ARGS = ARGV[1]; }
@@ -438,58 +558,14 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(
 		var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
 		var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
 		dk_source(JS_PATH, function dk_source_callback(){
-
-			//############ DKTEST MODE ############
-			if(JS_EXT !== ".js"){ return }
-			//if(dk_fileContains(DKSCRIPT_PATH, "DKTEST = function DKTEST_callback()") > 1){ return }
-			console.log(bg_magenta+white+"\n###### DKTEST MODE ###### "+JS_FILE+" ###### DKTEST MODE ######"+clr+"\n");
-			DKTEST(); // if(DKTEST() !== 0){return;}
-			console.log(bg_magenta+white+"\n######## END TEST ####### "+JS_FILE+" ######## END TEST #######"+clr+"\n");
-			//dk_pause();
-			//exit %errorlevel%
+			if(typeof JS_ARGS !== "undefined"){
+				window[JS_NAME](JS_ARGS);
+			} else {
+				window[JS_NAME]();
+			}
 		});
-	} else {
-		console.log("TODO");
 	}
-		
-	/*
-	if(typeof ARGV !== "undefined"){
-		FUNC_NAME = ARGV[0].substr(ARGV[0].lastIndexOf("/")+1, (ARGV[0].lastIndexOf(".") - ARGV[0].lastIndexOf("/")-1)); 
-		alert("FUNC_NAME = "+FUNC_NAME);
-		
-		document.title = FUNC_NAME;
-		if(typeof globalThis[FUNC_NAME] === "undefined"){
+}
+*/
 
-			dk_source(ARGV[0], function dk_source_callback(){
-				//if(DKSCRIPT_EXT !== ".js"){ return }
-				//if(!dk_fileContains(DKSCRIPT_PATH, ":DKTEST")){ return }
-				console.log("")
-				console.log(bg_magenta+white+"###### DKTEST MODE ###### "+DKSCRIPT_FILE+" ###### DKTEST MODE ######"+clr)
-				console.log("")
-				DKTEST()//function DKTEST_callback(){});
-				console.log("")
-				console.log(bg_magenta+white+"######## END TEST ####### "+DKSCRIPT_FILE+" ######## END TEST #######"+clr)
-				console.log("")
-			});
-		}
-	} else {
-		if(typeof ARGV !== "undefined"){ 
-			if(ARGC > 0){ var JS_PATH = ARGV[0]; }
-			if(ARGC > 1){ var JS_ARGS = ARGV[1]; }
-			var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
-			var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
-			var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
-			var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
-			dk_source(JS_PATH, function dk_source_callback(){
-				if(typeof JS_ARGS !== "undefined"){
-					window[JS_NAME](JS_ARGS);
-				} else {
-					window[JS_NAME]();
-				}
-			});
-		}
-	}
-	*/
-	//}
-//}
 

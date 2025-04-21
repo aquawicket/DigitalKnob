@@ -26,8 +26,8 @@ dk_callDKBatch = function dk_callDKBatch_f(){
 	//WScript.Echo("ret " + ret);
 
 	//var oExec = WShell.Exec('cmd /V:ON /c dir');
-	var oExec = WShell.Exec('cmd /V:ON /c test.cmd');
-	//var oExec = WShell.Exec('cmd /V:ON /c call C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd');
+	//var oExec = WShell.Exec('cmd /V:ON /c test.cmd');
+	var oExec = WShell.Exec('%COMSPEC% /V:ON /c call C:/Users/Administrator/digitalknob/Development/DKBatch/functions/dk_test.cmd');
 	
 	
 
@@ -49,14 +49,7 @@ dk_callDKBatch = function dk_callDKBatch_f(){
 	*/
 	
 	if(typeof oExec !== "undefined"){
-/*	
-	while(oExec.Status === 0){
-			//WScript.Echo("### status = "+oExec.Status+" (running)");
-			var stdoutA = oExec.StdOut.ReadAll();
-			WScript.Echo(stdoutA);
-			WScript.Sleep(1000);
-		}
-*/		
+
 		var stdout = "";
 		var stderr = "";
 		
@@ -66,12 +59,13 @@ dk_callDKBatch = function dk_callDKBatch_f(){
 				WScript.StdOut.WriteLine(stdout_line);
 				stdout += stdout_line += "\n";
 			}
-			
+			/*
 			if(!oExec.StdErr.AtEndOfStream){
 				var stderr_line = oExec.StdErr.ReadLine();
 				WScript.StdErr.WriteLine(stderr_line);
 				stderr += stderr_line += "\n";
 			}
+			*/
         }
 		
 		WScript.Echo("### status = "+oExec.Status+" (done)");
