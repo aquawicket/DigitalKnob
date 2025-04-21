@@ -9,27 +9,27 @@ dk_DIGITALKNOB_DIR = function dk_DIGITALKNOB_DIR_f(){
     //dk_debugFunc(0 1);
 	console.log("dk_DIGITALKNOB_DIR()")
 
+	//###### Print 'function(arguments)' ######
+	//var _ARGV_ = "";
+	//for (var i = 0; i < arguments.length; i++) {_ARGV_ += arguments[i];}
+	//console.log("dk_DIGITALKNOB_DIR("+_ARGV_+")");
+
 	//############ SET ############
-//	if(arguments[0] !== "undefined"){ 
-//		var DKHOME_DIR = "arguments[0]";
-//		return;
-//	)
-
+	if(arguments[0]){ 
+		DIGITALKNOB_DIR = arguments[0];
+	} 
 	//############ GET ############
-	
-	//###### WSLPATH_EXE ######
-	//dk_set(WSLPATH_EXE   WSL_EXE+" wslpath")
-	//dk_printVar(WSLPATH_EXE)
-
-	//if not defined HOMEDRIVE        !dk_call! dk_warning "HOMEDRIVE is invalid"
-	//if not defined HOMEPATH         !dk_call! dk_warning "HOMEPATH is invalid"
-	
-	var DIGITALKNOB_DIR = DKHOME_DIR+"/digitalknob";
-	console.log("DIGITALKNOB_DIR = "+DIGITALKNOB_DIR);
-	
-	//if exist "!WSLPATH_EXE!"        !dk_call! dk_exec "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
+	else {
+		if(typeof dk_DKHOME_DIR === "undefined"){ 
+			dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DKHOME_DIR.js", function(){
+				dk_DKHOME_DIR()
+			}); 
+		}
+		DIGITALKNOB_DIR = DKHOME_DIR+"/digitalknob";
+	}
 
 	dk_assertPath(DIGITALKNOB_DIR)
+	//window["DIGITALKNOB_DIR"] = DIGITALKNOB_DIR;
 }
 
 

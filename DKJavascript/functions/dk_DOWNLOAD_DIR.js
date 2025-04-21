@@ -7,30 +7,30 @@ if(typeof dk_assertPath === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions
 //#
 dk_DKDOWNLOAD_DIR = function dk_DKDOWNLOAD_DIR_f(){
     //dk_debugFunc(0 1);
-	console.log("dk_DKDOWNLOAD_DIR()")
+
+	//###### Print 'function(arguments)' ######
+	//var _ARGV_ = "";
+	//for (var i = 0; i < arguments.length; i++) {_ARGV_ += arguments[i];}
+	//console.log("dk_DKDOWNLOAD_DIR("+_ARGV_+")");
 
 	//############ SET ############
-//	if(arguments[0] !== "undefined"){ 
-//		var DKHOME_DIR = "arguments[0]";
-//		return;
-//	)
-
+	if(arguments[0]){ 
+		DKDOWNLOAD_DIR = arguments[0];
+	} 
 	//############ GET ############
-	
-	//###### WSLPATH_EXE ######
-	//dk_set(WSLPATH_EXE   WSL_EXE+" wslpath")
-	//dk_printVar(WSLPATH_EXE)
+	else {
+		if(typeof dk_DIGITALKNOB_DIR === "undefined"){ 
+			dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DIGITALKNOB_DIR.js", function(){
+				dk_DIGITALKNOB_DIR()
+			}); 
+		}
+		DKDOWNLOAD_DIR = DIGITALKNOB_DIR+"/download";
+	}
 
-	//if not defined HOMEDRIVE        !dk_call! dk_warning "HOMEDRIVE is invalid"
-	//if not defined HOMEPATH         !dk_call! dk_warning "HOMEPATH is invalid"
-	
-	var DKDOWNLOAD_DIR = DIGITALKNOB_DIR+"/download";
-	console.log("DKDOWNLOAD_DIR = "+DKDOWNLOAD_DIR);
-	
-	//if exist "!WSLPATH_EXE!"        !dk_call! dk_exec "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
-
-	dk_assertPath(DKDOWNLOAD_DIR)
+	dk_assertPath(DKDOWNLOAD_DIR);
+	//window["DKDOWNLOAD_DIR"] = DKDOWNLOAD_DIR;
 }
+
 
 
 

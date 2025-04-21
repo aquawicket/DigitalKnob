@@ -14,7 +14,7 @@ dk_basename = function dk_basename_f(path, basename){
 		dk_basename.value = filesystem.GetBaseName(path);
 		return 0;
 	}
-	return 1;
+	return 1; // error
 }
 
 
@@ -31,6 +31,5 @@ DKTEST = function DKTEST_callback(){
     var ret = dk_basename(myPath);
 	console.log("dk_basename.value after = "+dk_basename.value);
 	
-	//console.log("ret = "+ret);
 	return ret;
 }

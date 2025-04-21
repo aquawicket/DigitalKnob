@@ -19,6 +19,7 @@ dk_assertPath = function dk_assertPath_f(){
 	};
 	
 	dk_error("ASSERTION: dk_assertPath("+arguments[0]+"): path not found!");
+	return 1;
 };
 
 
@@ -44,8 +45,8 @@ DKTEST = function DKTEST_f(callback){
 	//# As a variable name
     dk_assertPath(myPath);								//OK
 	//# As a variable name quoted
-//    dk_assertPath("myPath")							//OK
-//	//# CMD.exe
+	dk_assertPath("myPath")								//ASSERT
+	//# CMD.exe
 //	dk_assertPath("%COMSPEC%")							//OK
 	
     //dk_assertPath("C:/NonExistentPath");				//ASSERT
