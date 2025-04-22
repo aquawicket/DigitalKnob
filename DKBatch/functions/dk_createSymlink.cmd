@@ -2,9 +2,11 @@
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
+
 ::####################################################################
 ::# dk_createSymlink(src_path, symlink_path)
 ::#
+::#		FIXME:  mklink is a internal command only in Windows Vista and up
 ::#
 :dk_createSymlink
 setlocal
@@ -27,6 +29,12 @@ setlocal
 	::FIXME:  mklink is a internal command only in Windows Vista and up
 	mklink %/D% "%symlink_path:/=\%" "%src_path:/=\%"	
 %endfunction%
+
+
+
+
+
+
 
 
 
