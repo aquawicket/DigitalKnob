@@ -119,44 +119,46 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 %endfunction%
 
 
+
 ::##################################################################################
-::# dk_echo
+::# dk_DKHTTP_VARS
 ::#
-:dk_echo
-	echo %~1
+:dk_DKHTTP_VARS
+	if not defined DKHTTP_DIGITALKNOB_DIR		(set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob")
+	if not defined DKHTTP_DKBRANCH_DIR			(set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development")
+	if not defined DKHTTP_DKBATCH_DIR			(set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch")
+	if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR	(set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions")
 %endfunction%
 
-
 ::##################################################################################
-::# dk_DKSCRIPT_ARGS
+::# dk_DKCACHE_DIR
 ::#
-:dk_DKSCRIPT_ARGS
-	if not defined DKSCRIPT_ARGS	(set DKSCRIPT_ARGS=%*)
-	if defined DKSCRIPT_ARGS		(call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%~1 =%%")
+:dk_DKCACHE_DIR
+	if not exist "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
+	if not exist "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
+	if exist "%DKCACHE_DIR%" (
+		if "%DKSCRIPT_NAME%" equ "DKBuilder" (
+			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul)
+		)
+	)
 %endfunction%
 
-
 ::##################################################################################
-::# dk_DKSCRIPT_PATH
+::# dk_DKSCRIPT_EXT
 ::#
-:dk_DKSCRIPT_PATH
-	if not defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
-	if defined DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
-::	if defined DKSCRIPT_PATH		(call :readlink %DKSCRIPT_PATH% DKSCRIPT_PATH)
-	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist & exit /b -1)
-	
-	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
-%endfunction%
-
-
-
-::##################################################################################
-::# dk_DKSCRIPT_FILE
-::#
-:dk_DKSCRIPT_FILE
+:dk_DKSCRIPT_EXT
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
-	if not defined DKSCRIPT_FILE	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_FILE=%%~nxZ")
-	if not defined DKSCRIPT_FILE	(echo DKSCRIPT_FILE:%DKSCRIPT_FILE% not defined & pause & exit -1)
+	if not defined DKSCRIPT_EXT		(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ")
+	if not defined DKSCRIPT_EXT		(echo DKSCRIPT_EXT:%DKSCRIPT_EXT% not defined & pause & exit -1)
+%endfunction%
+
+::##################################################################################
+::# dk_DKSCRIPT_NAME
+::#
+:dk_DKSCRIPT_NAME
+	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
+	if not defined DKSCRIPT_NAME	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ")
+	if not defined DKSCRIPT_NAME	(echo DKSCRIPT_NAME:%DKSCRIPT_NAME% not defined & pause & exit -1)
 %endfunction%
 
 ::##################################################################################
@@ -174,44 +176,39 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 %endfunction%
 
 ::##################################################################################
-::# dk_DKSCRIPT_NAME
+::# dk_echo
 ::#
-:dk_DKSCRIPT_NAME
+:dk_echo
+	echo %~1
+%endfunction%
+
+::##################################################################################
+::# dk_DKSCRIPT_FILE
+::#
+:dk_DKSCRIPT_FILE
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
-	if not defined DKSCRIPT_NAME	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ")
-	if not defined DKSCRIPT_NAME	(echo DKSCRIPT_NAME:%DKSCRIPT_NAME% not defined & pause & exit -1)
+	if not defined DKSCRIPT_FILE	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_FILE=%%~nxZ")
+	if not defined DKSCRIPT_FILE	(echo DKSCRIPT_FILE:%DKSCRIPT_FILE% not defined & pause & exit -1)
 %endfunction%
 
 ::##################################################################################
-::# dk_DKSCRIPT_EXT
+::# dk_DKSCRIPT_ARGS
 ::#
-:dk_DKSCRIPT_EXT
-	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
-	if not defined DKSCRIPT_EXT		(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ")
-	if not defined DKSCRIPT_EXT		(echo DKSCRIPT_EXT:%DKSCRIPT_EXT% not defined & pause & exit -1)
+:dk_DKSCRIPT_ARGS
+	if not defined DKSCRIPT_ARGS	(set DKSCRIPT_ARGS=%*)
+	if defined DKSCRIPT_ARGS		(call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%~1 =%%")
 %endfunction%
 
 ::##################################################################################
-::# dk_DKCACHE_DIR
+::# dk_DKSCRIPT_PATH
 ::#
-:dk_DKCACHE_DIR
-	if not exist "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
-	if not exist "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
-	if exist "%DKCACHE_DIR%" (
-		if "%DKSCRIPT_NAME%" equ "DKBuilder" (
-			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul)
-		)
-	)
-%endfunction%
-
-::##################################################################################
-::# dk_DKHTTP_VARS
-::#
-:dk_DKHTTP_VARS
-	if not defined DKHTTP_DIGITALKNOB_DIR		(set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob")
-	if not defined DKHTTP_DKBRANCH_DIR			(set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development")
-	if not defined DKHTTP_DKBATCH_DIR			(set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch")
-	if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR	(set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions")
+:dk_DKSCRIPT_PATH
+	if not defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
+	if defined DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
+::	if defined DKSCRIPT_PATH		(call :readlink %DKSCRIPT_PATH% DKSCRIPT_PATH)
+	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist & exit /b -1)
+	
+	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 %endfunction%
 
 ::##################################################################################

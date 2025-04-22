@@ -7,15 +7,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_replaceAll
-setlocal
+setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 3 4
 
     set "_input_=%~1"
     set "dk_replaceAll=!_input_:%~2=%~3!"
+	
 	endlocal & (
 		set "dk_replaceAll=%dk_replaceAll%"
 		if "%~4" neq "" (set "%~4=%dk_replaceAll%")
 	)
+		
+	::endlocal & (
+	::	%dk_call% dk_set dk_replaceAll "%dk_replaceAll%"
+	::	if "%~4" neq "" (%dk_call% dk_set %~4 "%dk_replaceAll%")
+	::)
 %endfunction%
 
 

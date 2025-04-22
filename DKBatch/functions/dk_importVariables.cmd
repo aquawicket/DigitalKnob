@@ -128,15 +128,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem ##############################################
 	rem ############ PLUGIN_URL VARIABLES ############
 	rem ##############################################					################################# EXAMPLE ##########################
+	
 	rem ### PLUGIN_URL
-	set "PLUGIN_URL="
-	set "PLUGIN_URL=%URL:\=/%"
-	%dk_call% dk_printVar PLUGIN_URL 											&rem PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	rem set "PLUGIN_URL="
+	rem set "PLUGIN_URL=%URL:\=/%"
+	%dk_call% dk_set PLUGIN_URL "%URL:\=/%"										&rem PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	rem %dk_call% dk_printVar PLUGIN_URL 										
 
 	rem ### PLUGIN_URL_FILENAME
-	set "PLUGIN_URL_FILENAME="
-	%dk_call% dk_basename !PLUGIN_URL! PLUGIN_URL_FILENAME 							
-	%dk_call% dk_printVar PLUGIN_URL_FILENAME 									&rem PLUGIN_URL_FILENAME	: master.zip
+	rem set "PLUGIN_URL_FILENAME="
+	%dk_call% dk_basename !PLUGIN_URL! PLUGIN_URL_FILENAME 						&rem PLUGIN_URL_FILENAME	: master.zip
+	rem %dk_call% dk_printVar PLUGIN_URL_FILENAME 									
 	
 	rem ### PLUGIN_URL_LIST
 	set "PLUGIN_URL_LIST="

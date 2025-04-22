@@ -19,8 +19,8 @@ setlocal
 	for %%A in ("%pathname%") do (set "dk_basename=%%~nxA")
 	
 	endlocal & (
-		if "%~2" neq "" (set "%~2=%dk_basename%")
-		set "dk_basename=%dk_basename%"
+		%dk_call% dk_set dk_basename "%dk_basename%"
+		if "%~2" neq "" (%dk_call% dk_set %~2 "%dk_basename%")
 	)
 %endfunction%
 

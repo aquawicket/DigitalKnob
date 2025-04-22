@@ -39,13 +39,13 @@ setlocal enableDelayedExpansion
 	echo 23		027		17		00010111			^&#23;		^			End of Transmission Block
 	echo 24		030		18		00011000			^&#24;		^			Cancel
 	echo 25		031		19		00011001			^&#25;		^			End of medium
-	echo 26		032		1A		00011010	SUB		^&#26;		^			Substitute
-	echo 27		033		1B		00011011	ESC		^&#27;		^			Escape
+	echo 26		032		1A		00011010			^&#26;		^			Substitute
+	echo 27		033		1B		00011011			^&#27;		^			Escape
 	echo 28		034		1C		00011100			^&#28;		^			File Separator
 	echo 29		035		1D		00011101			^&#29;		^			Group Separator
 	echo 30		036		1E		00011110			^&#30;		^			Record Separator
 	echo 31		037		1F		00011111			^&#31;		^			Unit Separator
-	echo 32		040		20		00100000	SP		^&#32;		^			Space
+	echo 32		040		20		00100000	 		^&#32;		^			Space
 setlocal disable DelayedExpansion
 	echo 33		041		21		00100001	!		^&#33;		^&excl;		Exclamation mark
 endlocal
