@@ -6,6 +6,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::##################################################################################
 ::# dk_wslFixNet(message)
 ::#
+::# https://home.unicode.org
 ::#	https://en.wikipedia.org/wiki/Code_page_437
 ::#
 :dk_wslFixNet
