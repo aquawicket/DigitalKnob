@@ -39,7 +39,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	call :pushStack %*
 
 	::###### Print function entry ####
-	if defined dk_call_PRINTENTRY (call :dk_call_PRINTENTRY)
+	if "%dk_call_PRINTENTRY%" equ "1" (call :dk_call_PRINTENTRY)
 
 	if %LVL% lss 1 (exit /b !errorlevel!)
 
@@ -52,7 +52,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 
 ::###### Entry ############################################################################################
-	if defined dk_call_PRINTCALLS (echo dk_call ^> %__CMND__% !__ARGV__!)
+	if "%dk_call_PRINTCALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__% %__ARGV__% && (
 		(set "LAST_STATUS=!errorlevel!")
@@ -64,7 +64,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::###### Exit #############################################################################################
 
 	::###### Print function exit ######
-	if defined dk_call_PRINTEXIT (call :dk_call_PRINTEXIT)
+	if "%dk_call_PRINTEXIT%" equ "1" (call :dk_call_PRINTEXIT)
 
 	call :popStack
 exit /b %LAST_STATUS%

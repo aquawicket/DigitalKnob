@@ -1,0 +1,4 @@
+dk_call_PRINTCALLS=0
+dk_call_PRINTENTRY=0
+dk_call_PRINTEXIT=0
+dk_call_IGNORE=dk_debugFunc;dk_echo;

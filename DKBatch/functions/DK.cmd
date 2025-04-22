@@ -76,6 +76,10 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	
 	call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd init
 	
+	if exist "%DKSCRIPT_DIR%/dkconfig.txt" (
+		%dk_call% dk_getAllFileParams "%DKSCRIPT_DIR%/dkconfig.txt"
+	)
+	
 	::############ Elevate Permissions ############
 	::set "ENABLE_dk_elevate=1"
 	if not "%ENABLE_dk_elevate%" equ "1" (goto skip_elevate)
