@@ -1,13 +1,15 @@
-@echo off
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
 
-if defined %~1   %return%
+
 ::################################################################################
 ::# dk_assertVar(var)
 ::#
 ::#		Check if a variable is defined and throw an Assertion if it is not.
 ::#
+if defined %~1   %return%
 :dk_assertVar
 setlocal
 	%dk_call% dk_debugFunc 1

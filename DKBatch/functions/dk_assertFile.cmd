@@ -1,7 +1,10 @@
-@echo off
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
 
+
+::###################### dk_assertFile options ###################################
 set "dk_assertFile_FORWARD_SLASHES=1"
 set "dk_assertFile_CASE_SENSITIVE=1"
 ::################################################################################
