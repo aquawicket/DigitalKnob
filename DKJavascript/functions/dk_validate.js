@@ -8,6 +8,8 @@ dk_validate = function dk_validate_f(){
 	var _ARGV_ = "";
 	for (var i = 0; i < arguments.length; i++) {_ARGV_ += arguments[i];}
 	console.log("dk_validate("+_ARGV_+")");
+	
+	//TODO
 }
 
 

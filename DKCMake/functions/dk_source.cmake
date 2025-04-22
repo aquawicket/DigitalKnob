@@ -7,11 +7,12 @@ include_guard()
 #
 #
 function(dk_source func)
-	dk_debugFunc()
+	dk_debugFunc(1)
 	
-	# load if it's an existing full path file
+	# load if it's an existing full file path
 	if(EXISTS ${func})
 		include(${func})
+		return()
 	endif()
 	
 	# If it's a dk_function, download if it doesn't exist then load it
