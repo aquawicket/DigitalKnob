@@ -2,20 +2,17 @@
 [ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ################################################################################
-# dk_getFileParam(file, var_name) value
+# dk_getAllFileParams(filepath)
 #
 # todo: add optional 3rd parameter for output value
-dk_getFileParam() {
-    dk_debugFunc 2
+dk_getAllFileParams() {
+    dk_debugFunc 1
     
-	 for line in $(cat "$1"); do
-		 IFS='=' read -r A B <<< "$line"
-		 # echo "$A = $B"
-		 if [ "$A" == "$2" ]; then
-			 unset "$2"
-			 export "$2=$B"
-		 fi
-	 done
+	for line in $(cat "$1"); do
+		IFS='=' read -r A B <<< "$line"
+		echo "$A = $B"
+		export "$A=$B"
+	done
 }
 
 
@@ -25,7 +22,7 @@ dk_getFileParam() {
 DKTEST() {
     dk_debugFunc 0
   
-	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
-    dk_call dk_getFileParam ${DKIMPORTS_DIR}/git/dkconfig.txt GIT_DL_VERSION
-	dk_call dk_printVar GIT_DL_VERSION
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
+    dk_call dk_getAllFileParams ${DKBRANCH_DIR}/dkconfig.txt
+	echo "dk_getAllFileParams_ENABLE = ${dk_getAllFileParams_ENABLE}"
 }

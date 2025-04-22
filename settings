@@ -1,6 +1,6 @@
 dk_call_PRINTENTRY=1
 dk_call_PRINTEXIT=1
-dk_log_DEBUG_COLOR=%lblue%
+dk_log_DEBUG_COLOR=${lblue}
 dk_log_DEBUG_ENABLE=1
 dk_log_DEBUG_HALT=0
 dk_log_DEBUG_LINE=0

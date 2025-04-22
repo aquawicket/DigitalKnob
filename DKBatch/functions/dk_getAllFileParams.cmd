@@ -12,9 +12,12 @@ setlocal
 	set "_file_=%~1"
 
 	for /f "delims== tokens=1,2" %%A in (%_file_:/=\%) do (
-		echo %%A = %%B
+		set "B=%%B"
+		set "B=!B:${=%%!"
+		set "B=!B:}=%%!"
+		echo %%A = !B!
 		endlocal & (
-			set "%%A=%%B"
+			set "%%A=!B!"
 		)
 	)
 %endfunction%
