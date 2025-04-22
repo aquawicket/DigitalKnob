@@ -61,6 +61,11 @@ function DK() {
 	dk_call dk_color 1
 	dk_call dk_logo
 	
+	if(Test-Path "${DKSCRIPT_DIR}/dkconfig.txt"){
+		dk_call dk_getAllFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
+	} elseif(Test-Path "${DKBRANCH_DIR}/dkconfig.txt"){
+		dk_call dk_getAllFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+	}
 	#dk_source ${DKSCRIPT_PATH}
 	
 	#Write-Output "env:PATH = $env:PATH"
