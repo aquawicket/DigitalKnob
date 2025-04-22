@@ -114,4 +114,5 @@ dk_log_WARNING_SOUND=0
 dk_log_WARNING_TAG=WARNING: 
 dk_log_WARNING_TIMEOUT=0
 dk_log_WARNING_TRACE=1
+dk_printVar_ENABLE=0
 dk_set_DEBUG=0
