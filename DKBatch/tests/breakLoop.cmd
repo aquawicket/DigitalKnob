@@ -1,6 +1,10 @@
-:: https://stackoverflow.com/a/61752820/688352
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
 
-@echo off
+
+:: https://stackoverflow.com/a/61752820/688352
 echo Press Y to break
 call:function
 

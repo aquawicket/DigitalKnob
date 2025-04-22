@@ -1,47 +1,82 @@
-@echo off
-if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../functions/"
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+:: https://reactos.org/archives/public/ros-diffs/2020-September/074204.html
+:: https://stackoverflow.com/a/34987886/688352
+:: https://stackoverflow.com/a/34987886
+
+set "ErrCode[1073750988]=Unbalanced parentheses"
+set "ErrCode[1073750989]=Missing operand"
+set "ErrCode[1073750990]=Syntax error"
+set "ErrCode[1073750991]=Invalid number"
+set "ErrCode[1073750992]=Number larger than 32-bits"
+set "ErrCode[1073750993]=Division by zero"
+
 if not "%~1" equ "" (call %~1)
 %endfunction%
-
-
-:: https://stackoverflow.com/a/34987886/688352
 
 ::############ set /a error codes ############
 ::1073750988 = Unbalanced parentheses
 :testA
-	set /a "up=1+8-(2*5"
+	echo: 
+	echo Running testA . . .
+	set /a "total=(2+1"
+	
+	echo ERROR:%errorlevel%: !ErrCode[%errorlevel%]!
 %endfunction%
 
 ::1073750989 = Missing operand
 :testB
-	:: TODO
+	echo: 
+	echo Running testB . . .
+	set /a "total=5*"
+	
+	echo ERROR:%errorlevel%: !ErrCode[%errorlevel%]!
 %endfunction%
 
 ::1073750990 = Syntax error
 :testC
-	A SYNTAX ERROR
+	echo: 
+	echo Running testC . . .
+	set /a "total=7$3"
+	
+	echo ERROR:%errorlevel%: !ErrCode[%errorlevel%]!
 %endfunction%
 
 ::1073750991 = Invalid number
 :testD
-	:: TODO
+	echo: 
+	echo Running testD . . .
+	set /a "total=0xdeadbeeg"
+	
+	echo ERROR:%errorlevel%: !ErrCode[%errorlevel%]!
 %endfunction%
 
 ::1073750992 = Number larger than 32-bits
+:: largest number allowed is 2,147,483,647
 :testE
-	:: TODO
+	echo: 
+	echo Running testE . . .
+	set /a "num=2147483648"
+	
+	echo ERROR:%errorlevel%: !ErrCode[%errorlevel%]!
 %endfunction%
 
 ::1073750993 = Division by zero.
 :testF
+	echo: 
+	echo Running testF . . .
 	set /a 1/0
+	
+	echo ERROR:%errorlevel%: !ErrCode[%errorlevel%]!
 %endfunction%
 
 
 :errorFunc
 	%dk_call% dk_debug "test_CatchErrors"
-	A SYNTAX ERROR
 %endfunction%
 
 :noErrorFunc

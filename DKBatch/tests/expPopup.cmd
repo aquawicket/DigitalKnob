@@ -1,7 +1,7 @@
 ;@echo off
 ;setlocal
 
-;set ppopup_executable=popupe.exe
+;set ppopup_executable=popup.exe
 ;set "message2=%~1"
 ;
 ;del /q /f %tmp%\yes >nul 2>&1

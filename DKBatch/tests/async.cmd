@@ -1,4 +1,9 @@
-@echo off
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
 if not "%~1" equ "" goto %~1
 :MAIN
 setlocal
@@ -10,6 +15,12 @@ setlocal
 	call :loop
 	echo at end of MAIN
 	pause
+exit /b 0
+
+:loop
+	echo main loop
+	%dk_call% dk_sleep 1
+goto :loop
 exit /b 0
 
 :ASYNC
@@ -24,4 +35,4 @@ setlocal
 	echo at end of ASYNC
 exit /b 0
 
-echo should not get here
+echo ### SHOULD NOT GET HERE ###
