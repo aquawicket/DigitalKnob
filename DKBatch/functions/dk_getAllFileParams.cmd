@@ -2,6 +2,7 @@
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
+if not defined dk_getAllFileParams_PRINT_VARIABLES (set "dk_getAllFileParams_PRINT_VARIABLES=0")
 ::################################################################################
 ::# dk_getAllFileParams(<file>)
 ::#
@@ -15,7 +16,9 @@ setlocal
 		set "B=%%B"
 		set "B=!B:${=%%!"
 		set "B=!B:}=%%!"
-		echo %%A = !B!
+		if "%dk_getAllFileParams_PRINT_VARIABLES%" equ "1" (
+			echo %%A = !B!
+		)
 		endlocal & (
 			set "%%A=!B!"
 		)

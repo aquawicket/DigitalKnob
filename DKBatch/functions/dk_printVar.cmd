@@ -2,6 +2,7 @@
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
+::################## dk_printVar SETTINGS ####################
 if not defined dk_printVar_ENABLE (set "dk_printVar_ENABLE=1")
 if "%dk_printVar_ENABLE%" neq "1" (%return%)
 ::################################################################################
@@ -11,14 +12,6 @@ if "%dk_printVar_ENABLE%" neq "1" (%return%)
 :dk_printVar
 setlocal
     ::%dk_call% dk_debugFunc 1
-
-
- ::setlocal enableDelayedExpansion
- ::setlocal disableDelayedExpansion
- ::if "!DE!" equ "" (echo delayed expansion ON) else (echo delayed expansion OFF)
-	
-    if not defined dk_printVar set "dk_printVar=1"
-    if "%dk_printVar%" neq "1" dk_return
     
     %dk_call% dk_isVariableName "%~1" || dk_return
     
