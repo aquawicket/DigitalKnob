@@ -2,6 +2,7 @@
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
+if not defined dk_set_DEBUG (set "dk_set_DEBUG=0")
 ::################################################################################
 ::# dk_set(name, value...)
 ::#
@@ -16,7 +17,9 @@ setlocal enableDelayedExpansion
 		set "%~1=%dk_allButFirstArgs%"
 	)
 
-	%dk_call% dk_printVar %~1 
+	if "%dk_set_DEBUG%" equ "1" (
+		%dk_call% dk_printVar %~1
+	)
 %endfunction%
 
 

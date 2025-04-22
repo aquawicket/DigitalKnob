@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
-set /a "dk_return_PRINT=1"
+if not defined dk_return_PRINT (set "dk_return_PRINT=0")
 if not defined dk_return (set "dk_return=dk_return")
 ::################################################################################
 ::dk_return(exit_code, message)

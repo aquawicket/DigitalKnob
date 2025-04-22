@@ -2,7 +2,7 @@
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%A IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpA")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
-%dk_call% dk_set VERSION_dk_messageBox 4
+%dk_call% dk_set dk_messageBox_VERSION 4
 ::##############################################################################################################
 ::# dk_messageBox(text, caption, flags, timeout)
 ::#
@@ -20,12 +20,12 @@ setlocal
 	echo flags = %flags%
 	echo timeout = %timeout%
 
-    if %VERSION_dk_messageBox%==1 goto messageBox_1
-    if %VERSION_dk_messageBox%==2 goto messageBox_2 
-    if %VERSION_dk_messageBox%==3 goto messageBox_3
-    if %VERSION_dk_messageBox%==4 goto messageBox_4 
-    if %VERSION_dk_messageBox%==5 goto messageBox_5 
-    if %VERSION_dk_messageBox%==6 goto messageBox_6 
+    if %dk_messageBox_VERSION%==1 goto messageBox_1
+    if %dk_messageBox_VERSION%==2 goto messageBox_2 
+    if %dk_messageBox_VERSION%==3 goto messageBox_3
+    if %dk_messageBox_VERSION%==4 goto messageBox_4 
+    if %dk_messageBox_VERSION%==5 goto messageBox_5 
+    if %dk_messageBox_VERSION%==6 goto messageBox_6 
     
     :messageBox_1 
         mshta javascript:alert("%text%");close();
