@@ -1,4 +1,7 @@
 dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js");
+
+var dk_exec_ECHO_STDOUT = 1;
+var dk_exec_ECHO_STDERR = 1;
 //################################################################################
 //# dk_exec()
 //#
@@ -13,8 +16,6 @@ dk_exec = function dk_exec_f(){
 	COMSPEC = dk_env("%COMSPEC%")
 	WShell = new ActiveXObject("WScript.Shell");
 	
-	//var oExec = WShell.Exec('cmd /V:ON /c dir');
-	//var oExec = WShell.Exec('cmd /V:ON /c test.cmd');
 	var oExec = WShell.Exec(_ARGV_);
 	
 	/*
@@ -39,39 +40,36 @@ dk_exec = function dk_exec_f(){
 		var stderr = "";
 
 		WScript.Echo("\n######################## STDOUT ########################");
-		while(!oExec.Status){
-			if(!oExec.StdOut.AtEndOfStream){
-				var stdout_line = oExec.StdOut.ReadLine();
-				WScript.StdOut.WriteLine(stdout_line);
-				stdout += stdout_line += "\n";
+		
+		dk_exec.stdout = [];
+		//while(!oExec.Status){
+		while(!oExec.StdOut.AtEndOfStream){
+			dk_exec.stdout.push(oExec.StdOut.ReadLine());
+			if(dk_exec_ECHO_STDOUT == 1){ 
+				WScript.StdOut.WriteLine(dk_exec.stdout[dk_exec.stdout.length-1]); 
 			}
-			/*
-			if(!oExec.StdErr.AtEndOfStream){
-				var stderr_line = oExec.StdErr.ReadLine();
-				WScript.StdErr.WriteLine(stderr_line);
-				stderr += stderr_line += "\n";
-			}
-			*/
-        }
-		
-		stdout = oExec.StdOut.ReadAll();
-		WScript.Echo(stdout);
-
-		WScript.Echo("\n######################## STDERR ########################");
-		stderr = oExec.StdErr.ReadAll();
-		WScript.Echo(stderr);
-		
-		WScript.Echo("### status = "+oExec.Status+" (done)");
-		
-		var processid = oExec.ProcessID;
-		WScript.Echo("### processid = "+processid);
-		
-		var exitcode = oExec.ExitCode;
-		WScript.Echo("### exitcode = "+exitcode);
-		
-		if(exitcode === 1){
-			WScript.Echo("failed");	
 		}
+		if(dk_exec_ECHO_STDOUT == 1){ 
+			stdout = oExec.StdOut.ReadAll();
+			WScript.StdOut.Write(stdout);
+		}
+		
+		WScript.Echo("\n######################## STDERR ########################");
+		dk_exec.stderr = [];
+		while(!oExec.StdErr.AtEndOfStream){
+			dk_exec.stderr.push(oExec.StdErr.ReadLine());
+			if(dk_exec_ECHO_STDERR == 1){ 
+				WScript.StdErr.WriteLine(dk_exec.stderr[dk_exec.stderr.length-1]);
+			}
+		}
+		if(dk_exec_ECHO_STDERR == 1){ 
+			stderr = oExec.StdErr.ReadAll();
+			WScript.StdErr.Write(stderr);
+		}
+		
+		dk_exec.status = oExec.Status;		
+		dk_exec.processId = oExec.ProcessID;
+		dk_exec.exitcode = oExec.ExitCode;
 	}
 }
 
@@ -83,6 +81,12 @@ DKTEST = function DKTEST_callback(){
 	//dk_debugFunc(0);
 	
 	//dk_exec("cmd /c dir");
-	
 	dk_exec("dk_exec_TEST.cmd");
+	
+	console.log("\n\n");
+	console.log("  STATUS:  "+dk_exec.status);
+	console.log("     PID:  "+dk_exec.processId);
+	console.log("EXITCODE:  "+dk_exec.exitcode);
+	console.log("  STDOUT:\n"+dk_exec.stdout.toString().replaceAll(",", "\n"));
+	console.log("  STDERR:\n"+dk_exec.stderr.toString().replaceAll(",", "\n"));
 }
