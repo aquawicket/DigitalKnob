@@ -88,12 +88,12 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_httpResponse "%~1"
 	::echo dk_httpResponse = %dk_httpResponse%
 
-	if !dk_httpResponse! equ 200 (
-		set "dk_urlExists=0"
-	) else if !dk_httpResponse! equ 301 (
-		set "dk_urlExists=0"
-	) else if !dk_httpResponse! equ 302 (
-		set "dk_urlExists=0"
+	if !dk_httpResponse! equ 200 ( 
+		set "dk_urlExists=0" &rem					200 - OK
+	) else if !dk_httpResponse! equ 301 ( 
+		set "dk_urlExists=0" &rem					301 - Moved Permanently
+	) else if !dk_httpResponse! equ 302 ( 
+		set "dk_urlExists=0" &rem					302 - Found
 	) else (
 		set "dk_urlExists=1"
 	)
