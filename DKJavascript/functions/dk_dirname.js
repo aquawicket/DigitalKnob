@@ -5,7 +5,7 @@
 //#
 dk_fileSystem = function dk_fileSystem_f(){
 	//dk_debugFunc(0);
-	if(dk_valid("window.ActiveXObject")){
+	if(dk_valid("ActiveXObject")){
 		return new ActiveXObject("Scripting.FileSystemObject");
 	}
 }
