@@ -8,20 +8,20 @@
 
 
 
-
-var dk_log_ENABLE = 1;
+//############ dk_log SETTINGS ############
+if(!dk_valid("dk_log_ENABLE"))			{ var dk_log_ENABLE = 1; }
 
 //### DEFAULT ###
-var DEFAULT="DEFAULT"
-var dk_log_DEFAULT_ENABLE=1;
-var dk_log_DEFAULT_COLOR=white
-var dk_log_DEFAULT_TAG=""
-var dk_log_DEFAULT_TRACE=0
-var dk_log_DEFAULT_LINE=0
-var dk_log_DEFAULT_SOUND=0
-var dk_log_DEFAULT_TIMEOUT=0
-var dk_log_DEFAULT_PAUSE=0
-var dk_log_DEFAULT_HALT=0
+if(!dk_valid("DEFAULT"))				{ var DEFAULT="DEFAULT" 			}
+if(!dk_valid("dk_log_DEFAULT_ENABLE"))	{ var dk_log_DEFAULT_ENABLE=1; 		}
+if(!dk_valid("dk_log_DEFAULT_COLOR"))	{ var dk_log_DEFAULT_COLOR=white 	}
+if(!dk_valid("dk_log_DEFAULT_TAG"))		{ var dk_log_DEFAULT_TAG="" 		}
+if(!dk_valid("dk_log_DEFAULT_TRACE"))	{ var dk_log_DEFAULT_TRACE=0		}
+if(!dk_valid("dk_log_DEFAULT_LINE"))	{ var dk_log_DEFAULT_LINE=0 		}
+if(!dk_valid("dk_log_DEFAULT_SOUND"))	{ var dk_log_DEFAULT_SOUND=0 		}
+if(!dk_valid("dk_log_DEFAULT_TIMEOUT"))	{ var dk_log_DEFAULT_TIMEOUT=0 		}
+if(!dk_valid("dk_log_DEFAULT_PAUSE"))	{ var dk_log_DEFAULT_PAUSE=0 		}
+if(!dk_valid("dk_log_DEFAULT_HALT"))	{ var dk_log_DEFAULT_HALT=0 		}
 
 //### VERBOSE ###
 var VERBOSE="VERBOSE"

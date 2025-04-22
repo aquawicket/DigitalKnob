@@ -1,7 +1,7 @@
 dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js");
 
-var dk_exec_ECHO_STDOUT = 1;
-var dk_exec_ECHO_STDERR = 1;
+if(!dk_valid("dk_exec_ECHO_STDOUT")){ var dk_exec_ECHO_STDOUT = 1; }
+if(!dk_valid("dk_exec_ECHO_STDERR")){ var dk_exec_ECHO_STDERR = 1; }
 //################################################################################
 //# dk_exec()
 //#
