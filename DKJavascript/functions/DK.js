@@ -66,87 +66,158 @@ if(typeof globalThis === "undefined"){
 }
 dk_check('globalThis');
 
+
+
 //############ window ############
 if(typeof window === "undefined"){
-	var window = (function (){  
+	var window = (function Window(){
 		return this || (1, eval)('this');  
 	}());
+	
+	window.constructor = (function Constructor(){
+		return this || (1, eval)('this');  
+	}());
+	
+	window.constructor.name = "window";
 	console.log("window = "+typeof window);
 }
 dk_check('window');
 
 
 
+//##############################################################
+//# dk_valid(<objectPath>)
+//#
+//#		Takes a string of an object path to test. I.E. dk_valid('window.navigator.userAgent')
+//#		Returns true if the object path exists and False if the object path is undefined.
+//#
+dk_valid = function(){
+	
+	if(typeof arguments[0] !== "string"){
+		console.error("dk_valid(): arg1 must be a string");
+		return -1;
+	}
+	if(typeof globalThis === "undefined"){
+		console.error("dk_valid(): requires a valid globalThis object.");
+		return -1;
+	}
+	
+	var arry = arguments[0].split(".");
+	if(arry[0] === "globalThis"){ arry.shift(); }
+	if(arry[0] === "window"){ arry.shift(); }
+	if(arry[0] === "self"){ arry.shift(); }
 
-valid = function valid_f(str){
-	//console.log("valid("+str+")");
-	var arry = str.split(".");
+	currentObject = globalThis;
+	result = true;
+	
+	for (var i = 0; i < arry.length; i++) {
+		result = false;
+		if(typeof currentObject[arry[i]] !== "undefined"){
+			currentObject = currentObject[arry[i]];
+			result = true;
+		}
+		if(result === false){
+			break;
+		}
+	}
+	
+	return result;
+}
+
+
+dk_call = function dk_call(){
+	var _ARGV_ = "";
+	for (var i = 0; i < arguments.length; i++) {_ARGV_ += ", "+arguments[i];}
+	console.log("dk_call("+_ARGV_+")");
+
+	var arry = arguments[0].split(".");
 	if(typeof window === "undefined"){ 
 		console.error("window is invalid");
 		return false; 
 	}
-	var output = true;
-	if(output && (arry.length > 0)){ output = (typeof window !== "undefined") }
-	if(output && (arry.length > 1)){ output = (typeof window[arry[1]] !== "undefined") }
-	if(output && (arry.length > 2)){ output = (typeof window[arry[1]][arry[2]] !== "undefined") }
-	if(output && (arry.length > 3)){ output = (typeof window[arry[1]][arry[2]][arry[3]] !== "undefined") }
-	if(output && (arry.length > 4)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]] !== "undefined") }
-	if(output && (arry.length > 5)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]] !== "undefined") }
-	if(output && (arry.length > 6)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]][arry[6]] !== "undefined") }
-	if(output && (arry.length > 7)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]][arry[6]][arry[7]] !== "undefined") }
-	if(output && (arry.length > 8)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]][arry[6]][arry[7]][arry[8]] !== "undefined") }
-	if(output && (arry.length > 9)){ output = (typeof window[arry[1]][arry[2]][arry[3]][arry[4]][arry[5]][arry[6]][arry[7]][arry[8]][arry[9]] !== "undefined") }
+
+	var currentObject = window;
+	for (var i = 1; i < arry.length-1; i++) {
+		console.log("\n")
+		if(typeof currentObject[arry[i]] === "object"){
+			currentObject = currentObject[arry[i]];
+		}
+		if(typeof currentObject[arry[i]] === "function"){
+			currentObject = currentObject[arry[i]]();
+		}
+
+		console.log("typeof currentObject "+i+" = "+ typeof currentObject);
+		
+
+		/*
+		if(typeof window[arry[i]] !== "undefined"){
+			console.log("typeof currentObject.arry["+i+"] = "+ typeof currentObject.arry[i]);
+		}
+		*/
+	}
 	
-	///console.log("output = "+output);
-	return output;
+	/*
+	if(arry.length > 0){ dk_call.valid = (typeof window !== "undefined") }
+	if(dk_call.valid && (arry.length > 1)){ dk_call.valid = (typeof window[arry[1]] !== "undefined") }
+	if(dk_call.valid && (arry.length > 1)){
+		console.log("typeof window[arry[1]] = "+typeof window[arry[1]]);
+		if(typeof window[arry[1]] === "function"){
+			console.log('call -> window['+arry[1]+']()');
+			dk_call.value = window[arry[1]]();
+		}
+	}
+	
+	console.log("typeof dk_call.value = "+ typeof dk_call.value);
+	return dk_call.value;
+	*/
 }
 
 //############ DKBrowser ############
 DKBrowser = function DKBrowser_f(){
 	var output = [];
 
-	var hasNavigator = valid('window.navigator');
+	var hasNavigator = dk_valid('window.navigator');
 	console.log("hasNavigator = "+hasNavigator);
 	
 	// Hta
-	var isHta = valid("window.ActiveXObject") && valid("window.WScript");
+	var isHta = dk_valid("window.ActiveXObject") && dk_valid("window.WScript");
 	if(isHta){ output.push("isHta"); }
 
 	// Brave
-	var isBrave = valid("window.navigator.brave.isBrave.name");
+	var isBrave = dk_valid("window.navigator.brave.isBrave.name");
 	if(isBrave){ output.push("isBrave"); }
 
 	// Opera 8.0+
-	var isOpera = valid("window.opr.addons") || valid("window.oprera") || (valid("navigator.userAgent.indexOf") && (navigator.userAgent.indexOf(' OPR/') >= 0));
+	var isOpera = dk_valid("window.opr.addons") || dk_valid("window.oprera") || (dk_valid("navigator.userAgent.indexOf") && (navigator.userAgent.indexOf(' OPR/') >= 0));
 	if(isOpera){ output.push("isOpera"); }
 
 	// Firefox 1.0+
-	var isFirefox = valid("window.InstallTrigger");
+	var isFirefox = dk_valid("window.InstallTrigger");
 	if(isFirefox){ output.push("isFirefox"); }
 
 	// Safari 3.0+ "[object HTMLElementConstructor]" 
-	var isSafari = valid("window.HTMLElement") && /constructor/i.test(window.HTMLElement) 
+	var isSafari = dk_valid("window.HTMLElement") && /constructor/i.test(window.HTMLElement) 
 	|| (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
 	if(isSafari){ output.push("isSafari"); }
 
 	// Internet Explorer 6-11
-	var isIE = /*@cc_on!@*/false || valid("document.documentMode");
+	var isIE = /*@cc_on!@*/false || dk_valid("document.documentMode");
 	if(isIE){ output.push("isIE"); }
 
 	// Edge 20+
-	var isEdge = !isIE && valid("window.StyleMedia");
+	var isEdge = !isIE && dk_valid("window.StyleMedia");
 	if(isEdge){ output.push("isEdge"); }
 
 	// Chrome 1 - 79
-	var isChrome = valid("window.chrome") && valid("window.chrome.webstore") || valid("window.chrome.runtime");
+	var isChrome = dk_valid("window.chrome") && dk_valid("window.chrome.webstore") || dk_valid("window.chrome.runtime");
 	if(isChrome){ output.push("isChrome"); }
 
 	// Edge (based on chromium) detection
-	var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
+	var isEdgeChromium = isChrome && dk_valid("window.navigator.userAgent.indexOf") && (window.navigator.userAgent.indexOf("Edg") != -1);
 	if(isEdgeChromium){ output.push("isEdgeChromium"); }
 
 	// Blink engine detection
-	var isBlink = (isChrome || isOpera) && valid("window.CSS");
+	var isBlink = (isChrome || isOpera) && dk_valid("window.CSS");
 	if(isBlink){ output.push("isBlink"); }
 
 	return output.toString();

@@ -26,10 +26,7 @@ DKTEST = function DKTEST_callback(){
 	//dk_debugFunc(0);
 	
 	var myPath = "C:/Windows/System32";
-
-	console.log("dk_basename.value before = "+dk_basename.value);
     var ret = dk_basename(myPath);
-	console.log("dk_basename.value after = "+dk_basename.value);
-	
+	console.log("myPath:'"+myPath+"' dk_basename.value = "+dk_basename.value);
 	return ret;
 }
