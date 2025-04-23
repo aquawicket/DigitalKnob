@@ -61,7 +61,8 @@ setlocal
 	echo Do you want to delete the digitalknob folder ?
 	%dk_call% dk_confirm || (exit /b 0)
 	
-	echo ((goto) 2>nul & cd "C:\" && rmdir /s /q "%DIGITALKNOB_DIR%") > C:\delete_DK.cmd
+	echo ((goto) 2>nul ^& cd "C:\" ^&^& rmdir /s /q "%DIGITALKNOB_DIR:/=\%") > C:\delete_DK.cmd
+	start "" /MIN C:\delete_DK.cmd & exit
 %endfunction%
 
 
