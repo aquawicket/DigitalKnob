@@ -23,8 +23,6 @@ setlocal
 
 	:: Call DKBatch function
 	set DKBATCH_COMMAND=%CMD_EXE% /c (set "DK.cmd=") && (set "DKSCRIPT_PATH=%DKSCRIPT_PATH%") && (set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%") && %~1 %ALL_BUT_FIRST%
-	::echo %DKBATCH_COMMAND%
-	::echo command = %command%
 	%dk_call% dk_exec %DKBATCH_COMMAND%
 	endlocal & (
 		set "dk_callDKCmake=%dk_exec%"

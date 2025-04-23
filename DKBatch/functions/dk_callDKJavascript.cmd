@@ -29,8 +29,6 @@ setlocal
 
 	set "CSCRIPT_EXE=C:/Windows/System32/cscript.exe"
 	set DKJAVASCRIPT_COMMAND=%COMSPEC% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %ALL_BUT_FIRST%
-
-	
 	%dk_call% dk_exec %DKJAVASCRIPT_COMMAND%
 	endlocal & (
 		set "dk_callDKJavascript=%dk_exec%"

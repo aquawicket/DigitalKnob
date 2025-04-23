@@ -122,10 +122,10 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::###### DK_C_COMPILER ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-	if "%target_env%" equ "cosmocc"	(%dk_call% dk_validate SH_EXE				"%dk_call% %DKIMPORTS_DIR%/sh/DKINSTALL.cmd")
-	if "%target_env%" equ "cosmocc"	(%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd")
-	if "%target_env%" equ "clang"	(%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/clang/DKINSTALL.cmd")
-	if "%target_env%" equ "gcc"		(%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd")
+	if "%target_env%" equ "cosmocc"	(%dk_call% dk_validate SH_EXE				"call %DKIMPORTS_DIR%/sh/DKINSTALL.cmd")
+	if "%target_env%" equ "cosmocc"	(%dk_call% dk_validate COSMOCC_C_COMPILER	"call %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd")
+	if "%target_env%" equ "clang"	(%dk_call% dk_validate CLANG_C_COMPILER		"call %DKIMPORTS_DIR%/clang/DKINSTALL.cmd")
+	if "%target_env%" equ "gcc"		(%dk_call% dk_validate GCC_C_COMPILER		"call %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd")
 
 	if "%target_env%" equ "cosmocc"	(set "DK_C_COMPILER=%SH_EXE% %COSMOCC_C_COMPILER%")
 	if "%target_env%" equ "clang"	(set "DK_C_COMPILER=%CLANG_C_COMPILER%")
