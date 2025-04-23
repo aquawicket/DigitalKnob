@@ -35,9 +35,11 @@ setlocal
 	:: the base directory of the %to% path must exist.	
 	%dk_call% dk_dirname "%_to_%" _parent_dir_
 	%dk_call% dk_printVar _parent_dir_
-	%dk_call% dk_mkdir "%_parent_dir_%"
+	if not exist "%_parent_dir_%" (
+		%dk_call% dk_mkdir "%_parent_dir_%"
+	)
 
-	move /Y "%_from_:/=\%" "%_to_:/=\%" %NO_STDOUT%
+	move /Y "%_from_:/=\%" "%_to_:/=\%"
 
 	::TODO
 	::[ ? = "success" ]
