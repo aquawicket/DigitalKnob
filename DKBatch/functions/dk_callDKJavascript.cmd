@@ -30,14 +30,12 @@ setlocal
 	set "CSCRIPT_EXE=C:/Windows/System32/cscript.exe"
 	set DKJAVASCRIPT_COMMAND=%COMSPEC% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %ALL_BUT_FIRST%
 
-	echo DKJAVASCRIPT_COMMAND = %DKJAVASCRIPT_COMMAND%
-	for /f "delims=" %%Z in ('%DKJAVASCRIPT_COMMAND%') do (
-		echo %%Z						&rem  Display the command's stdout
-		set "dk_callDKJavascript=%%Z"	&rem  Set the return value to the last line of output
-	)
+	
+	%dk_call% dk_exec %DKJAVASCRIPT_COMMAND%
 	endlocal & (
-		set "dk_callDKJavascript=%dk_callDKJavascript%"
+		set "dk_callDKJavascript=%dk_exec%"
 	)
+
 %endfunction%
 
 

@@ -34,19 +34,6 @@ setlocal enableDelayedExpansion
 	::### LAST_ARG ###
 	for %%a in (%*) do set LAST_ARG=%%a
 
-:: ::Call DKPhp function
-:: set DKPHP_COMMAND=%PHP_EXE% -Command $global:DKSCRIPT_PATH ^= '%DKSCRIPT_PATH%'^; . %DKPHP_FUNCTIONS_DIR%/%~1.ps1^; %~1 %dk_allButFirstArgs%
-:: ::echo %DKPHP_COMMAND%
-:: for /f "delims=" %%Z in ('%DKPHP_COMMAND%') do (
-:: 	echo %%Z				&rem  Display the other shell's stdout
-:: 		set "rtn_value=%%Z"	 &rem  Set the return value to the last line of output
-:: )
-:: ::echo rtn_value = !rtn_value!
-::
-::	endlocal & (
-::		set "dk_callDKBash=%dk_callDKPhp%""
-::		if "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKPhp%")
-::	)
 
 	::###### run command ######
 	set DKPHP_COMMAND="%COMSPEC%" /V:ON /c call "%PHP_EXE%" "%DKPHP_FUNCTIONS_DIR%/%~1.php"

@@ -53,13 +53,6 @@ setlocal enableDelayedExpansion
 	::NOTE:  what is this doing, why is it needed?
 	%COMSPEC% /c exit /b 0 
 	
-	::### set dk_exec_exitcode ###
-	::set /a "exit_status_line=i-1"
-	::set /a "dk_exec_exitcode=!dk_exec_stdout[%exit_status_line%]!"
-
-	:: clear the errorline from the array
-	::set "dk_exec_stdout[%exit_status_line%]="   
-	
 	::### set dk_exec ###
 	set /a "last_output_line=i-2"
 	set "dk_exec=!dk_exec_stdout[%last_output_line%]!"
@@ -68,8 +61,8 @@ setlocal enableDelayedExpansion
 	set "currentScope=1"
 	for /F "delims=" %%b in ('set dk_exec_stdout') do (
 		if defined currentScope endlocal
-		set "dk_exec_exitcode=%dk_exec_exitcode%"
 		set "dk_exec=%dk_exec%"
+		set "dk_exec_exitcode=%dk_exec_exitcode%"
 		set "%%b"
 	)
 exit /b %dk_exec_exitcode%

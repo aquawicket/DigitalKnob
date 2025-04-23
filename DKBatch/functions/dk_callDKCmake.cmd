@@ -35,22 +35,12 @@ setlocal
 
 	:: Call DKCmake function
 	set command=%CMAKE_EXE% "-DDKCOMMAND=%DKCOMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DQUEUE_BUILD=ON" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
-	echo %command%	
-	for /f "delims=" %%Z in ('%command%') do (
-		set "dk_callDKCmake=%%Z"
-	)
-
-	rem for %%a in (%*) do set LAST_ARG=%%a
-	endlocal & (
-		set "dk_callDKCmake=%dk_callDKCmake%"
-		rem if "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKCmake%")
-	)
 	
-::	::echo command = %command%
-::	set DKCOMMAND=%~1(%ALL_BUT_FIRST%)
-::	(set command=%CMAKE_EXE% -DDKCOMMAND=%DKCOMMAND% "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_% -P %DKCMAKE_DIR%/DKEval.cmake)
-::	%dk_call% dk_exec "%command%"
-::	endlocal & (set dk_callDKCmake=%dk_exec%)
+	::echo command = %command%
+	%dk_call% dk_exec %command%
+	endlocal & (
+		set "dk_callDKCmake=%dk_exec%"
+	)
 
 %endfunction%
 

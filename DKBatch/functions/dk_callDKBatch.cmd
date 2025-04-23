@@ -24,17 +24,11 @@ setlocal
 	:: Call DKBatch function
 	set DKBATCH_COMMAND=%CMD_EXE% /c (set "DK.cmd=") && (set "DKSCRIPT_PATH=%DKSCRIPT_PATH%") && (set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%") && %~1 %ALL_BUT_FIRST%
 	::echo %DKBATCH_COMMAND%
-	for /f "delims=" %%Z in ('%DKBATCH_COMMAND%') do (
-		echo %%Z					&rem  Display the other shell's stdout
-		set "dk_callDKBatch=%%Z"	&rem  Set the return value to the last line of output
-	)
-	::echo rtn_value = !rtn_value!
-
+	::echo command = %command%
+	%dk_call% dk_exec %DKBATCH_COMMAND%
 	endlocal & (
-		set "dk_callDKBatch=%dk_callDKBatch%"
-		rem if "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKBatch%")
+		set "dk_callDKCmake=%dk_exec%"
 	)
-	echo dk_callDKBatch = %dk_callDKBatch%
 %endfunction%
 
 

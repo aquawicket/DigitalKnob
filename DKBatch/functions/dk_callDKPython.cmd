@@ -32,18 +32,9 @@ setlocal
 	%dk_call% dk_validate PYTHON3_EXE "%dk_call% %DKIMPORTS_DIR%/python3/DKINSTALL.cmd"
 
 	%dk_call% dk_validate CMD_EXE "dk_CMD_EXE.cmd"
-	set DKPYTHON_COMMAND="%CMD_EXE:/=\%" /V:ON /k call "%PYTHON3_EXE:\=/%" "%DKPYTHON_FUNCTIONS_DIR:\=/%/%1.py" %ALL_BUT_FIRST%
-	echo DKPYTHON_COMMAND = %DKPYTHON_COMMAND%
+	set DKPYTHON_COMMAND=%COMSPEC% /V:ON /c call "%PYTHON3_EXE:\=/%" "%DKPYTHON_FUNCTIONS_DIR:\=/%/%1.py" %ALL_BUT_FIRST%
+
 	::set DKPYTHON_COMMAND=%COMSPEC% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKPYTHON_FUNCTIONS_DIR%/DK.py; %DKPYTHON_FUNCTIONS_DIR%/%1.py; %ALL_BUT_FIRST%
-
-
-::	for /f "delims=" %%Z in ("%DKPYTHON_COMMAND%") do (
-::		echo %%Z						&rem  Display the command's stdout
-::		set "dk_callDKPython=%%Z"		&rem  Set the return value to the last line of output
-::  )
-::	endlocal & (
-::		set "dk_callDKPython=%dk_callDKPython%"
-::	)
 
 	%dk_call% dk_exec %DKPYTHON_COMMAND%
 	endlocal & (
