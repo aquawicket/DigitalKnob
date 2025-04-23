@@ -1,8 +1,11 @@
 @echo off
 if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 
+::TODO - switch to UNICODE code page
+::chcp 65001 >NUL
+
 ::####################################################################
-::# DK
+::# DK(<DKSCRIPT_PATH>, <DKSCRIPT_ARGS>)
 ::#
 :DK
 	::if not exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
@@ -172,7 +175,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if not exist "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit -1)
 	
 	cd "%DKSCRIPT_DIR%"
-	echo CD = %CD%
+	::echo CD = %CD%
 %endfunction%
 
 ::##################################################################################
@@ -215,9 +218,9 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_initFiles
 ::#
 :dk_initFiles
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"	powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"		powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"	powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd')"
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd')"
 %endfunction%
 
@@ -232,6 +235,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	set "RELOADED=1"
 	set "DK.cmd="
 
+	cls
 	"%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" 	&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
 
 	:: Change console settings
