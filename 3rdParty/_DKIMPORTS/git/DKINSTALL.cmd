@@ -5,8 +5,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" GIT_DL_WIN_X86
-%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" GIT_DL_WIN_X86_64
+%dk_call% dk_getAllFileParams "%~dp0/dkconfig.txt"
+
 
 :: https://stackoverflow.com/a/67714373
 %dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"

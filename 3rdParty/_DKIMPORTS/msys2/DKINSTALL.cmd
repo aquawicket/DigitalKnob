@@ -20,7 +20,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%endfunction%
 	::###### CMD INSTALL DISABLED (DEBUG) ####
 	::%dk_call% dk_set MSYS2_DL "https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe"
-	%dk_call% dk_getFileParam %~dp0\dkconfig.txt MSYS2_DL
+	%dk_call% dk_getAllFileParams "%~dp0/dkconfig.txt"
 	
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"

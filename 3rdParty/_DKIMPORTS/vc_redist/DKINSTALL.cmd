@@ -13,9 +13,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
 	
-	::### 32Bit ###
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" VC_REDIST_X86_IMPORT
+	%dk_call% dk_getAllFileParams "%~dp0/dkconfig.txt"
+	
+	::###### 32Bit ######
 	set "VCCOMP140_X86_DLL=C:/Windows/SysWOW64/vcomp140.dll"
 	set "VCCOMP140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcomp140d.dll"
 	set "VCRUNTIME140_X86_DLL=C:/Windows/SysWOW64/vcruntime140.dll"
@@ -28,9 +28,7 @@ setlocal enableDelayedExpansion
 		"!DKDOWNLOAD_DIR!/!dk_basename!" /install /quiet /norestart
 	)
 	
-	::### 64Bit ###
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" VC_REDIST_X86_64_IMPORT
+	::###### 64Bit ######
 	set "VCCOMP140_X86_64_DLL=C:/Windows/System32/vcomp140.dll"
 	set "VCCOMP140_X86_64_DEBUG_DLL=C:/Windows/System32/vcomp140d.dll"
 	set "VCRUNTIME140_X86_64_DLL=C:/Windows/System32/vcruntime140.dll"

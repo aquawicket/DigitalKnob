@@ -11,13 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::setlocal
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" CMAKE_WIN_ARM64_IMPORT
-	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" CMAKE_LINUX_AARCH64_IMPORT
-	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" CMAKE_LINUX_X86_64_IMPORT
-	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" CMAKE_MAC_UNIVERSAL_IMPORT
-	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" CMAKE_WIN_X86_64_IMPORT
-	%dk_call% dk_getFileParam "%~dp0/dkconfig.txt" CMAKE_WIN_X86_IMPORT
-
+	%dk_call% dk_getAllFileParams "%~dp0/dkconfig.txt"
 	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 	if defined WIN_ARM64_HOST		(set "CMAKE_IMPORT=%CMAKE_WIN_ARM64_IMPORT%")
 	if defined LINUX_ARM64_HOST		(set "CMAKE_IMPORT=%CMAKE_LINUX_AARCH64_IMPORT%")

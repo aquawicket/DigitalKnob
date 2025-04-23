@@ -54,7 +54,7 @@ setlocal
 	echo: >>																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
 	echo ### INSTALL ### >>																			"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
 	echo dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()") >>							"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo dk_getFileParam	("$ENV{DKIMPORTS_DIR}/%name%/dkconfig.txt" %dk_toUpper%_IMPORT) >>		"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+	echo dk_getAllFileParama("$ENV{DKIMPORTS_DIR}/%name%/dkconfig.txt") >>							"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
 	echo dk_import		(${%dk_toUpper%_IMPORT} NAME %name%) >>											"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
 
 %endfunction%
