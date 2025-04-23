@@ -34,11 +34,16 @@ setlocal enableDelayedExpansion
 
 	::### set dk_exec_stdout[] ###
 	set /a "i=0"
-	for /f "usebackq delims=" %%Z in (`%dk_exec_command% ^& call echo %%^^errorlevel%%`) do (
-		if "%dk_exec_ECHO_STDOUT%" equ "1" (
-			echo dk_exec_stdout ^> %%Z
-		) 
-		set "dk_exec_stdout[!i!]=%%Z"
+	for /f "usebackq delims=" %%Z in (`%dk_exec_command% ^& call echo ExItCoDe%%^^errorlevel%%`) do (
+		set "line=%%Z"
+		if "%%Z" equ "!line:ExItCoDe=!" (
+			if "%dk_exec_ECHO_STDOUT%" equ "1" (
+				echo dk_exec_stdout ^> %%Z
+			) 
+			set "dk_exec_stdout[!i!]=%%Z"
+		) else (
+			set /a "dk_exec_exitcode=!line:ExItCoDe=!"
+		)
 		set /a "i+=1"
 	)
 		
@@ -49,11 +54,11 @@ setlocal enableDelayedExpansion
 	%COMSPEC% /c exit /b 0 
 	
 	::### set dk_exec_exitcode ###
-	set /a "exit_status_line=i-1"
-	set /a "dk_exec_exitcode=!dk_exec_stdout[%exit_status_line%]!"
+	::set /a "exit_status_line=i-1"
+	::set /a "dk_exec_exitcode=!dk_exec_stdout[%exit_status_line%]!"
 
 	:: clear the errorline from the array
-	set "dk_exec_stdout[%exit_status_line%]="   
+	::set "dk_exec_stdout[%exit_status_line%]="   
 	
 	::### set dk_exec ###
 	set /a "last_output_line=i-2"
