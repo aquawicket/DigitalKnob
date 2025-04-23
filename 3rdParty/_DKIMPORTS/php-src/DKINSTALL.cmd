@@ -25,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_importVariables %PHP_SRC_DL% IMPORT_PATH %DKIMPORTS_DIR%\php-src
 
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	%dk_call% dk_set PHP_EXE "%PHP_SRC%/php.exe"
+	set "PHP_EXE=%PHP_SRC%/php.exe"
 
 	if exist "%PHP_EXE%" (%return%)
 

@@ -14,7 +14,8 @@ setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
-	
+	echo VC_REDIST_X86_IMPORT = %VC_REDIST_X86_IMPORT%
+	echo VC_REDIST_X86_IMPORT = !VC_REDIST_X86_IMPORT!
 	::###### 32Bit ######
 	set "VCCOMP140_X86_DLL=C:/Windows/SysWOW64/vcomp140.dll"
 	set "VCCOMP140_X86_DEBUG_DLL=C:/Windows/SysWOW64/vcomp140d.dll"

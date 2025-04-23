@@ -8,7 +8,7 @@ if not defined dk_getAllFileParams_PRINT_VARIABLES (set "dk_getAllFileParams_PRI
 ::# dk_getFileParams(<file>)
 ::#
 :dk_getFileParams
-setlocal
+::setlocal
 	%dk_call% dk_debugFunc 2
 
 	set "_file_=%~1"
@@ -20,9 +20,10 @@ setlocal
 		if "%dk_getAllFileParams_PRINT_VARIABLES%" equ "1" (
 			echo %%A = !B!
 		)
-		endlocal & (
+		rem endlocal & (
+			echo "%%A=!B!"
 			set "%%A=!B!"
-		)
+		rem )
 	)
 %endfunction%
 
