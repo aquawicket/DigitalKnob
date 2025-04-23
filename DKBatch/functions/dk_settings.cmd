@@ -13,7 +13,7 @@ setlocal
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_getAllFileParams "%DKBRANCH_DIR%/dkconfig.txt"
+	%dk_call% dk_getFileParams "%DKBRANCH_DIR%/dkconfig.txt"
 %endfunction%
 
 

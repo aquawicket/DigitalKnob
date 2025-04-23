@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 setlocal enableDelayedExpansion
     %dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_getAllFileParams "%~dp0/dkconfig.txt"
+	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	
 	::###### 32Bit ######
 	::set "VCCOMP140_X86_DLL=C:/Windows/SysWOW64/vcomp140.dll"

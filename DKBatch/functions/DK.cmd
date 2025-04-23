@@ -82,9 +82,9 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::############ load dkconfig.txt ############
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if exist "%DKSCRIPT_DIR%/dkconfig.txt" (
-		%dk_call% dk_getAllFileParams "%DKSCRIPT_DIR%/dkconfig.txt"
+		%dk_call% dk_getFileParams "%DKSCRIPT_DIR%/dkconfig.txt"
 	) else if exist "%DKBRANCH_DIR%/dkconfig.txt" (
-		%dk_call% dk_getAllFileParams "%DKBRANCH_DIR%/dkconfig.txt"
+		%dk_call% dk_getFileParams "%DKBRANCH_DIR%/dkconfig.txt"
 	)
 	
 	::############ Elevate Permissions ############

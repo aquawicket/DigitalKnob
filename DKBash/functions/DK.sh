@@ -71,9 +71,9 @@ DK(){
 	############ dkconfig.txt settings ###########
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	if [ -e "${DKSCRIPT_DIR}/dkconfig.txt" ]; then
-		dk_call dk_getAllFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
+		dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
 	elif [ -e "${DKBRANCH_DIR}/dkconfig.txt" ]; then
-		dk_call dk_getAllFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+		dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
 	fi
 
     ###### DKTEST MODE ######

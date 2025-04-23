@@ -62,9 +62,9 @@ function DK() {
 	dk_call dk_logo
 	
 	if(Test-Path "${DKSCRIPT_DIR}/dkconfig.txt"){
-		dk_call dk_getAllFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
+		dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
 	} elseif(Test-Path "${DKBRANCH_DIR}/dkconfig.txt"){
-		dk_call dk_getAllFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+		dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
 	}
 	#dk_source ${DKSCRIPT_PATH}
 	

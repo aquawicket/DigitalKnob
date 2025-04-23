@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
  
 ### INSTALL ### 
 dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()") 
-dk_getAllFileParams("$ENV{DKIMPORTS_DIR}/browsh/dkconfig.txt")
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/browsh/dkconfig.txt")
 
 dk_validate(dk_host_triple "dk_host_triple()")
 if(WIN_HOST)
