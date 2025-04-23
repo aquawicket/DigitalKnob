@@ -4,7 +4,6 @@ dk_call_PRINTCALLS=0
 dk_call_PRINTENTRY=0
 dk_call_PRINTEXIT=0
 dk_embedBin_DELETE_CMD_ON_EXTRACT=0
-dk_exec_PRINT_COMMANDS=0
 dk_exit_PAUSE=1
 dk_getAllFileParams_ENABLE=1
 dk_getAllFileParams_PRINT_VARIABLES=1

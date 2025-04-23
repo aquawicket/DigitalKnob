@@ -13,7 +13,7 @@ dk_exec = function dk_exec_f(){
 	for(var i = 0; i < arguments.length; i++){ _ARGV_ += arguments[i]; }
 	console.log("dk_exec("+_ARGV_+")");
 
-	COMSPEC = dk_env("%COMSPEC%")
+	ComSpec = dk_env("%ComSpec%")
 	WShell = new ActiveXObject("WScript.Shell");
 	
 	var oExec = WShell.Exec(_ARGV_);

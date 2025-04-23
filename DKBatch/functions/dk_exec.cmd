@@ -5,60 +5,69 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::############ dk_exec SETTINGS ############
-if not defined dk_exec_PRINT_COMMANDS (set "dk_exec_PRINT_COMMANDS=0")
+if not defined dk_exec_ECHO_COMMAND 	(set "dk_exec_ECHO_COMMAND=1"	) 	&:: dk_exec_command
+if not defined dk_exec_ECHO_STDOUT		(set "dk_exec_ECHO_STDOUT=1" 	)	&:: dk_exec_stdout[]
+if not defined dk_exec_ECHO_STDERR 		(set "dk_exec_ECHO_STDERR=1" 	)	&:: dk_exec_stderr[]
+::if not defined dk_exec_ECHO_EXITCODE 	(set "dk_exec_ECHO_EXITCODE=1"	)	&:: dk_exec_exitcode
+
 
 ::####################################################################
 ::# dk_exec(<command> <ret:optional>)
 ::#
 ::#		reference: https://stackoverflow.com/a/5807218
 ::#
+::#		dk_exec_stdout[] - an array containing the executable's output from stdout
+::#		dk_exec_stderr[] - an array containing the exexutable's output fomr stderr
+::#		dk_exec_exitcode - variable containng the exit status from the executable
+::#		dk_exec          - variable containng the last line of output from the executable
+::#
+::#
 :dk_exec
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1 99
 
-	set "_command_=%*"
+	::### set dk_exec_command ###
+	set "dk_exec_command=%*"
+	if "%dk_exec_ECHO_COMMAND%" equ "1" (
+		echo dk_exec_command ^> %dk_exec_command%
+	)
 
-	::### set dk_exec[] array ###
+	::### set dk_exec_stdout[] ###
 	set /a "i=0"
-	for /f "usebackq delims=" %%Z in (`%_command_% ^& call echo %%^^errorlevel%%`) do (
-		set "dk_exec[!i!]=%%Z"
+	for /f "usebackq delims=" %%Z in (`%dk_exec_command% ^& call echo %%^^errorlevel%%`) do (
+		if "%dk_exec_ECHO_STDOUT%" equ "1" (
+			echo dk_exec_stdout ^> %%Z
+		) 
+		set "dk_exec_stdout[!i!]=%%Z"
 		set /a "i+=1"
 	)
-	%COMSPEC% /c exit /b 0   &::NOTE:  what is this doing, why is it needed?
+		
+	::### set dk_exec_stderr[] ###
+	:: TODO
 
-	::### set dk_exec_status ###
+	::NOTE:  what is this doing, why is it needed?
+	%COMSPEC% /c exit /b 0 
+	
+	::### set dk_exec_exitcode ###
 	set /a "exit_status_line=i-1"
-	::set /a "dk_exec[%exit_status_line%]=13"   &::DEBUG: Test error return
-	set /a "dk_exec_status=!dk_exec[%exit_status_line%]!"
-	set "dk_exec[%exit_status_line%]="   &:: clear the errorline from the array
+	set /a "dk_exec_exitcode=!dk_exec_stdout[%exit_status_line%]!"
+
+	:: clear the errorline from the array
+	set "dk_exec_stdout[%exit_status_line%]="   
 	
 	::### set dk_exec ###
 	set /a "last_output_line=i-2"
-	set "dk_exec=!dk_exec[%last_output_line%]!"
-
-	::############### Print call details ###############
-	if "%dk_exec_PRINT_COMMANDS%" equ "1" (
-		echo #######################################################
-		echo ##        command: = '%*'
-		echo ##
-		for /l %%x in (0, 1, %exit_status_line%) do (
-			if defined dk_exec[%%x] (
-		echo ##     dk_exec[%%x]: = !dk_exec[%%x]!
-			)
-		)
-		echo ##        dk_exec: = !dk_exec!
-		echo ## dk_exec_status: = %dk_exec_status%
-		echo ##
-	)
-	::##################################################
+	set "dk_exec=!dk_exec_stdout[%last_output_line%]!"
 
 	::### Return the array to the calling scope ###
 	set "currentScope=1"
-	for /F "delims=" %%b in ('set dk_exec') do (
+	for /F "delims=" %%b in ('set dk_exec_stdout') do (
 		if defined currentScope endlocal
+		set "dk_exec_exitcode=%dk_exec_exitcode%"
+		set "dk_exec=%dk_exec%"
 		set "%%b"
 	)
-exit /b %dk_exec_status%
+exit /b %dk_exec_exitcode%
 ::%endfunction%
 
 
@@ -71,20 +80,21 @@ exit /b %dk_exec_status%
 setlocal
 	%dk_call% dk_debugFunc 0
 
-::	%dk_call% dk_set myCommand ver
-::	%dk_call% dk_exec "%myCommand%" RTNVAR
-::	%dk_call% dk_printVar dk_exec
-::	%dk_call% dk_printVar RTNVAR
+	set myCommand=cmd /c dir
+	%dk_call% dk_exec %myCommand%
+	%dk_call% dk_printVar dk_exec_stdout
+	%dk_call% dk_printVar dk_exec
+	%dk_call% dk_printVar dk_exec_exitcode
 
 ::	%dk_call% dk_set myCommand ""%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three""
 ::	%dk_call% dk_exec "%myCommand%"
 ::	%dk_call% dk_printVar dk_exec
 	
-	%dk_call% dk_validate ADB_EXE "%dk_call% ANDROID::dk_ADB_EXE"
-	%dk_call% dk_set myCommand ""%ADB_EXE%" shell pm list packages" &::-f string
-	%dk_call% dk_exec "%myCommand%"
-	%dk_call% dk_printVar dk_exec
-	%dk_call% dk_echo "dk_exec = %dk_exec%"
-	%dk_call% dk_echo "dk_exec_status = %dk_exec_status%"
+::	%dk_call% dk_validate ADB_EXE "%dk_call% ANDROID::dk_ADB_EXE"
+::	%dk_call% dk_set myCommand ""%ADB_EXE%" shell pm list packages" &::-f string
+::	%dk_call% dk_exec "%myCommand%"
+::	%dk_call% dk_printVar dk_exec
+::	%dk_call% dk_echo "dk_exec = %dk_exec%"
+::	%dk_call% dk_echo "dk_exec_exitcode = %dk_exec_status%"
 
 %endfunction%
