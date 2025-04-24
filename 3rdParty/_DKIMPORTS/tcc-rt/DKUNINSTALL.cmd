@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKUNINSTALL
 ::#
 :DKUNINSTALL
-::setlocal
+setlocal
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
@@ -17,12 +17,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_importVariables %TCC_RT_IMPORT% ROOT %DKTOOLS_DIR%
 	
 	%dk_call% dk_set TCC_RT_EXE "%TCC_RT%/tcc.exe"
+	if not exist "%TCC_RT_EXE%" (%return%)
 	
 	:: UNINSTALL
-	if not exist "%TCC_RT_EXE%" (exit /b 0)
 	%dk_call% dk_echo   
     %dk_call% dk_info "UnInstalling tcc-rt . . ."
-	"%WINDIR%\MsiExec.exe" /uninstall {B11E65DB-66DF-4987-9D13-014EFC915DF2} /quiet
+	"MsiExec.exe" /uninstall {B11E65DB-66DF-4987-9D13-014EFC915DF2} /quiet
 %endfunction%
 
 
