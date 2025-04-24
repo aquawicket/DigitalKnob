@@ -32,9 +32,9 @@ setlocal
 	%dk_call% dk_validate PYTHON3_EXE "%dk_call% %DKIMPORTS_DIR%/python3/DKINSTALL.cmd"
 
 	%dk_call% dk_validate CMD_EXE "dk_CMD_EXE.cmd"
-	set DKPYTHON_COMMAND=%COMSPEC% /V:ON /c call "%PYTHON3_EXE:\=/%" "%DKPYTHON_FUNCTIONS_DIR:\=/%/%1.py" %ALL_BUT_FIRST%
+	set DKPYTHON_COMMAND=%ComSpec% /V:ON /c call "%PYTHON3_EXE:\=/%" "%DKPYTHON_FUNCTIONS_DIR:\=/%/%1.py" %ALL_BUT_FIRST%
 
-	::set DKPYTHON_COMMAND=%COMSPEC% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKPYTHON_FUNCTIONS_DIR%/DK.py; %DKPYTHON_FUNCTIONS_DIR%/%1.py; %ALL_BUT_FIRST%
+	::set DKPYTHON_COMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKPYTHON_FUNCTIONS_DIR%/DK.py; %DKPYTHON_FUNCTIONS_DIR%/%1.py; %ALL_BUT_FIRST%
 
 	%dk_call% dk_exec %DKPYTHON_COMMAND%
 	endlocal & (

@@ -13,7 +13,7 @@ setlocal
     %dk_call% dk_debugFunc 0
     
 	
-    if not defined in_subprocess (%COMSPEC% /k set in_subprocess=y ^& %DKSCRIPT_PATH%) & exit ) :: keep window open
+    if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %DKSCRIPT_PATH%) & exit ) :: keep window open
 %endfunction%
 
 

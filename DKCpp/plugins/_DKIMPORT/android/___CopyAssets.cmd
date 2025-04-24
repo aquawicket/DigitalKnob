@@ -22,7 +22,7 @@ echo Deleting folder
 echo.
 echo. PATH: %DEVICE_PATH%
 echo.
-%COMSPEC% /c "%ANDROID_HOME%/platform-tools/adb" shell rm -r %DEVICE_PATH%
+%ComSpec% /c "%ANDROID_HOME%/platform-tools/adb" shell rm -r %DEVICE_PATH%
 ::%IF_ERROR% "Failed to delete the folder on the device"
 
 
@@ -31,7 +31,7 @@ echo.
 echo FROM: %ASSETS%
 echo   TO: %DEVICE_PATH%
 echo.
-%COMSPEC% /c "%ANDROID_HOME%/platform-tools/adb" push %ASSETS% %DEVICE_PATH%
+%ComSpec% /c "%ANDROID_HOME%/platform-tools/adb" push %ASSETS% %DEVICE_PATH%
 %IF_ERROR% "Failed to copy assets to the device"
 
 

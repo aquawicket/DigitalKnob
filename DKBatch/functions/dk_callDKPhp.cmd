@@ -36,7 +36,7 @@ setlocal enableDelayedExpansion
 
 
 	::###### run command ######
-	set DKPHP_COMMAND="%COMSPEC%" /V:ON /c call "%PHP_EXE%" "%DKPHP_FUNCTIONS_DIR%/%~1.php"
+	set DKPHP_COMMAND="%ComSpec%" /V:ON /c call "%PHP_EXE%" "%DKPHP_FUNCTIONS_DIR%/%~1.php"
 	%dk_call% dk_exec "%DKPHP_COMMAND%"
 	endlocal & (
 		set "dk_callDKPhp=%dk_exec%"

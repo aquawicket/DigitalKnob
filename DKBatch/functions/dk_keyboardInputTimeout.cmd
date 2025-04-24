@@ -24,7 +24,7 @@ setlocal
     echo ^@echo off> %thread_file%
     echo set /p var=>> %thread_file%
     echo ^> %cache_file% echo %%var%%>> %thread_file%
-    start /b %COMSPEC% /c %thread_file%
+    start /b %ComSpec% /c %thread_file%
     
     set "ESC="
     for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"

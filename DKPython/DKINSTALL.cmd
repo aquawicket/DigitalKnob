@@ -9,7 +9,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	
 	::###### run script ######
 	::title %DKSCRIPT_PATH%
-	%COMSPEC% /V:ON /K call "%PYTHON3_EXE:\=/%" "%DKSCRIPT_PATH:\=/%"
+	%ComSpec% /V:ON /K call "%PYTHON3_EXE:\=/%" "%DKSCRIPT_PATH:\=/%"
 
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
@@ -54,7 +54,7 @@ exit /b %ERRORLEVEL%
 	%dk_call% dk_validate DKIMPORTS_DIR				"%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate PYTHON3_EXE				"%dk_call% %DKIMPORTS_DIR%/python3/DKINSTALL.cmd"
 
-	ftype DKPython="%COMSPEC%" /V:ON /K call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON3_EXE%" "%%1" %*
+	ftype DKPython="%ComSpec%" /V:ON /K call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON3_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR/DKPython/DefaultIcon" "" "REG_SZ" "%PYTHON3_EXE%"	
 	assoc .py=DKPython
 

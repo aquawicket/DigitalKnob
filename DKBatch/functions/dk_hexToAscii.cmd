@@ -17,7 +17,7 @@ setlocal
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
     %dk_call% dk_fileWrite %DKCACHE_DIR%\hex.tmp %hex:~-2%
     
-    ::for /f %%b in ('forfiles /c "%COMSPEC% /c echo 0x1b"') do set "ESC=%%b"
+    ::for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x1b"') do set "ESC=%%b"
     
 	set "CERTUTIL_EXE=%WINDIR%\System32\certutil.exe"
 	::%dk_call% dk_validate CERTUTIL_EXE "%dk_call% d_CERTUTIL_EXE"

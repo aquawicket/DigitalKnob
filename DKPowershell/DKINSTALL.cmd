@@ -7,10 +7,10 @@ if "%~1" equ "" (goto DKINSTALL)
 	set "DKSCRIPT_PATH=%~3"
 
 	::###### run script ######
-	:: "%COMSPEC%"	path to cmd.exe
+	:: "%ComSpec%"	path to cmd.exe
 	:: /V:ON		enable delayed expansion
 	:: /K			keep the window open at the CMD prompt.
-	%COMSPEC% /V:ON /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	%ComSpec% /V:ON /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
 
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
@@ -53,7 +53,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
 
 	::###### DKPowershell ######
-	ftype DKPowershell="%COMSPEC%" /V:ON /K call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
+	ftype DKPowershell="%ComSpec%" /V:ON /K call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR/DKPowershell/DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 
 	::###### .ps1 ######

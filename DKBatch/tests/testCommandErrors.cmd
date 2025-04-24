@@ -23,5 +23,5 @@ call :main
 	call call_command :true 
 	call call_command :false
 
-	%COMSPEC% /k
+	%ComSpec% /k
 %endfunction%

@@ -23,7 +23,7 @@
 :: SOFTWARE.
 @echo off
 setlocal EnableDelayedExpansion
-if not defined in_subprocess (%COMSPEC% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: cmake_eval eval_code error
 ::

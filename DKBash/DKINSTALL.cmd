@@ -52,9 +52,9 @@ if "%~1" equ "" (goto DKINSTALL)
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
 	%~1
-	::ftype DKBash="%COMSPEC%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
-	ftype DKBash="%COMSPEC%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
-	::ftype DKBash=%COMSPEC% /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%BASH_EXE%" "%%1" %*
+	::ftype DKBash="%ComSpec%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
+	ftype DKBash="%ComSpec%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
+	::ftype DKBash=%ComSpec% /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%BASH_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"
 	assoc .sh=DKBash
 

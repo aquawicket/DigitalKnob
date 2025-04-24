@@ -34,7 +34,7 @@ setlocal enableDelayedExpansion
 
 	::### set dk_exec_stdout[] ###
 	set /a "i=0"
-	for /f "usebackq delims=" %%Z in (`%dk_exec_command% ^& call echo ExItCoDe%%^^errorlevel%%`) do (
+	for /f "usebackq delims=" %%Z in (`%dk_exec_command% 2^>^&1 ^& call echo ExItCoDe%%^^errorlevel%%`) do (
 		set "line=%%Z"
 		if "%%Z" equ "!line:ExItCoDe=!" (
 			if "%dk_exec_ECHO_STDOUT%" equ "1" (
@@ -51,7 +51,7 @@ setlocal enableDelayedExpansion
 	:: TODO
 
 	::NOTE:  what is this doing, why is it needed?
-	%COMSPEC% /c exit /b 0 
+	%ComSpec% /c exit /b 0 
 	
 	::### set dk_exec ###
 	set /a "last_output_line=i-2"

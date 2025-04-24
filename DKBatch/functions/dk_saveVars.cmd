@@ -16,7 +16,7 @@ setlocal
 	::	rem We need a temporary file to store the original environment
 	::for %%f in ("original_vars.tmp") do (
 	::	rem Retrieve the original environment to the temporary file
-	::	start /i /wait /min "" "%COMSPEC%" /c">""%%~ff"" set "
+	::	start /i /wait /min "" "%ComSpec%" /c">""%%~ff"" set "
 	::)
 
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"

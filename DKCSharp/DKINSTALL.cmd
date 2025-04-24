@@ -29,7 +29,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	::###### run executable ######
 	cls
 	title %DKCSharp_FILE%
-	"%COMSPEC%" /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
+	"%ComSpec%" /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
@@ -78,7 +78,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	for /r "%SystemRoot%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
 	set "COMPILER_EXE=%CSC_EXE:\=/%"
 	%dk_call% dk_assertPath COMPILER_EXE
-	ftype DKCSharp="%COMSPEC%" /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
+	ftype DKCSharp="%ComSpec%" /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	assoc .cs=DKCSharp
 	
 	%dk_call% dk_success "DKCSharp install complete"

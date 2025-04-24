@@ -11,7 +11,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::if not exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 
 	::### DKSHELL_PATH ###
-	if defined COMSPEC (set "DKSHELL_PATH=%COMSPEC:\=/%")
+	if defined ComSpec (set "DKSHELL_PATH=%ComSpec:\=/%")
 
 	::### DKSHELL_NAME ###
 	for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL_NAME=%%~nZ")
@@ -236,11 +236,11 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	set "DK.cmd="
 
 	cls
-	"%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" 	&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
+	"%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" 	&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
 
 	:: Change console settings
 	:: >nul REG ADD HKCU\Console\digitalknob FontSize /t reg_sz /d "Consolas" /f
-	:: start "digitalknob" "%COMSPEC%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+	:: start "digitalknob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 	:: exit
 
 	::####################################

@@ -13,7 +13,7 @@ if not "%~1"=="" (goto runDKJavascript)
 	%dk_call% dk_validate DKJAVASCRIPT_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
 	%dk_call% dk_registryDeleteKey "HKCR/DKJavascript"
-	ftype DKJavascript=%COMSPEC% /c call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
+	ftype DKJavascript=%ComSpec% /c call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR/DKJavascript/DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKCR/.js"
@@ -29,9 +29,9 @@ if not "%~1"=="" (goto runDKJavascript)
 	set "WSCRIPT_EXE=%~2"
 	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3
 	set "DKSCRIPT_PATH=%~4"
-	set "CMD_EXE=%COMSPEC%"
+	set "CMD_EXE=%ComSpec%"
 	
     %CMD_EXE% /c %CSCRIPT_EXE% //d //nologo //e:javascript "%DKJAVASCRIPT_FUNCTIONS_DIR%/main_file_local.js" "%DKSCRIPT_PATH%"
-	::%COMSPEC% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
+	::%ComSpec% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
 	pause
 %endfunction%

@@ -25,7 +25,7 @@ setlocal
     %dk_call% dk_debugFunc 0 3 || %dk_call% dk_error "%dk_call% dk_debugFunc failed!"
     
     rem Start Keyboard_Loop in a parallel process
-    start "" /B %COMSPEC% /C "%dk_call% dk_keyboard :dk_keyboard.Keyboard_Loop" || echo Keyboard_Loop returned error
+    start "" /B %ComSpec% /C "%dk_call% dk_keyboard :dk_keyboard.Keyboard_Loop" || echo Keyboard_Loop returned error
 %endfunction%
 
 :dk_keyboard.Keyboard_Loop

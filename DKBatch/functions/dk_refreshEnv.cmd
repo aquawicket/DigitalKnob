@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_refreshEnv()
 ::#
 ::#	   This will pull un environment variable changed with setx or chenged from outside
-::#    of the context without restarting the COMSPEC 
+::#    of the context without restarting the ComSpec 
 ::#
 ::#    Reference: https://stackoverflow.com/a/171737/688352
 ::#

@@ -130,7 +130,7 @@ javac -source 1.8 -target 1.8 -Xlint -bootclasspath "%JAVA_HOME%/jre/lib/rt.jar"
 
 
 echo 6. Translate the .class files in /build/obj/ to Dalvik byte code with dx tool
-%COMSPEC% /c "%BUILD_TOOLS_PATH%/dx" --dex --output=%APP_PATH%/build/apk/classes.dex %APP_PATH%/build/obj
+%ComSpec% /c "%BUILD_TOOLS_PATH%/dx" --dex --output=%APP_PATH%/build/apk/classes.dex %APP_PATH%/build/obj
 %IF_ERROR% "Failed to Translate the .class files in /build/obj/ to Dalvik byte code with dx tool"
 
 
@@ -180,7 +180,7 @@ call CopyPath %APP_PATH%\libs\%ABI%\libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.
 if %compiler% neq CLANG goto :end
 echo Compiling with NDK Toolchain
 call MakeDirectory %APP_PATH%/build/apk/lib/%ABI%
-%COMSPEC% /c %ANDROID_TOOLCHAIN% -shared -o %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/cpp/main.c
+%ComSpec% /c %ANDROID_TOOLCHAIN% -shared -o %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/cpp/main.c
 call CopyPath %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -197,7 +197,7 @@ set "GRADLE_USER_HOME=%USERPROFILE%\digitalknob\Development\3rdParty\gradle"
 setx GRADLE_USER_HOME %GRADLE_USER_HOME%
 
 echo 2. Run gradle clean build
-%COMSPEC% /c %APP_ROOT%gradlew --project-dir %APP_ROOT% %GRADLE_SETTING% --info clean build 
+%ComSpec% /c %APP_ROOT%gradlew --project-dir %APP_ROOT% %GRADLE_SETTING% --info clean build 
 %IF_ERROR% "Gradle Build Failed"
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -225,7 +225,7 @@ if not exist "%APP_PATH%/build/keystore.jks" "%JAVA_HOME%/bin/keytool" -genkeypa
 
 
 echo 13. Sign the APK with apksigner tool
-%COMSPEC% /c "%BUILD_TOOLS_PATH%/apksigner" sign --ks %APP_PATH%/build/keystore.jks --ks-key-alias androidkey --ks-pass pass:%keypass% --out %APP_PATH%/build/%APK_NAME%.apk %APP_PATH%/build/%APK_NAME%.aligned.apk
+%ComSpec% /c "%BUILD_TOOLS_PATH%/apksigner" sign --ks %APP_PATH%/build/keystore.jks --ks-key-alias androidkey --ks-pass pass:%keypass% --out %APP_PATH%/build/%APK_NAME%.apk %APP_PATH%/build/%APK_NAME%.aligned.apk
 %IF_ERROR% "Failed to Sign the APK with apksigner tool"
 
 

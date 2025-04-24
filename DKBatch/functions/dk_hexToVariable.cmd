@@ -14,7 +14,7 @@ setlocal
 	%dk_call% dk_debugFunc 1 2
 
     set "hex=%~1"
-    for /f %%b in ('forfiles /c "%COMSPEC% /c echo 0x%hex:~-2%"') do endlocal & (
+    for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x%hex:~-2%"') do endlocal & (
 		set "dk_hexToVariable=%%b"
 		if "%~2" neq "" (set "%~2=%dk_hexToVariable%")
 	)

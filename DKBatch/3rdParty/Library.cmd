@@ -433,7 +433,7 @@ set LF=^
 %# The two blank lines here are necessary. #%
 
 :# Define a CR variable containing a Carriage Return ('\x0D')
-for /f %%a in ('copy /Z %COMSPEC% nul') do set "CR=%%a"
+for /f %%a in ('copy /Z %ComSpec% nul') do set "CR=%%a"
 
 :# Define a BS variable containing a BackSpace ('\x08')
 :# Use prompt to store a  backspace+space+backspace into a DEL variable.

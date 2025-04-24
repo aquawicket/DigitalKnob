@@ -56,7 +56,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	echo:
 	echo %bg_magenta%%white%###### DKTEST MODE ###### %APP_NAME%.c ###### DKTEST MODE ######%clr%
 	echo:
-	"%COMSPEC%" /v:on /c "%APP_FILE%"
+	"%ComSpec%" /v:on /c "%APP_FILE%"
 	echo:
 	echo %bg_magenta%%white%######## END TEST ####### %APP_NAME%.c ######## END TEST #######%clr%
 	echo:
@@ -133,7 +133,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	%dk_call% dk_assertPath DK_C_COMPILER
 
 	%dk_call% dk_registryDeleteKey "HKCR/DKC"
-	ftype DKC="%COMSPEC%" /v:on /k call "%~f0" "%DK_C_COMPILER%" "%%1" %%*
+	ftype DKC="%ComSpec%" /v:on /k call "%~f0" "%DK_C_COMPILER%" "%%1" %%*
 
 	%dk_call% dk_registryDeleteKey "HKCR/.c"
 	%dk_call% dk_registryDeleteKey "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.c"

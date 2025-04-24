@@ -54,7 +54,7 @@ setlocal enableDelayedExpansion
 	if exist "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
 	if exist "%WFCUI_EXE%"		(set "WFC_APP=%WFCUI_EXE%")
 	if exist "%WFC_APP%"		(set cmnd="%WFC_APP%" -allow "%_file_:/=\%")
-	if not exist "%CMD_EXE%"	(set "CMD_EXE=%COMSPEC%")
+	if not exist "%CMD_EXE%"	(set "CMD_EXE=%ComSpec%")
 	if not exist "%CMD_EXE%"	(%dk_call% dk_error "CMD_EXE is invalid")
 	::echo cmnd ^> "%CMD_EXE%" /c "%cmnd%"
 	"%CMD_EXE%" /c "%cmnd%"

@@ -8,7 +8,7 @@ if not "%~1" equ "" goto %~1
 :MAIN
 setlocal
 	echo Here I am in the MAIN thread
-	start "" /B %COMSPEC% /D /C "%~f0" :ASYNC
+	start "" /B %ComSpec% /D /C "%~f0" :ASYNC
 	echo Here I am in the MAIN thread again
 	endlocal
 	

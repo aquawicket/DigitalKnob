@@ -2,7 +2,7 @@ if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 
 if(!$dk_quickAccessPin){ $dk_quickAccessPin = 1 } else{ return } #include guard
 
 ################################################################################
-# dk_quickAccessPin(path)
+# dk_quickAccessPin("$path")
 #
 #
 function Global:dk_quickAccessPin() {

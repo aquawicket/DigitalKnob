@@ -49,7 +49,7 @@ setlocal
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     :wipe   
     ::do we need admin rights?
-    ::runas /user:Administrator %COMSPEC%
+    ::runas /user:Administrator %ComSpec%
     ::do we need to uninstall any apps?
     ::do we need to remove any environment variables?
       

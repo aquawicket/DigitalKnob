@@ -44,7 +44,7 @@
 
 :InvokeCmd
   ECHO args = "/c """ + "!batchPath!" + """ " + args >> "%vbsGetPrivileges%"
-  ECHO UAC.ShellExecute "%COMSPEC%", args, "", "runas", 1 >> "%vbsGetPrivileges%"
+  ECHO UAC.ShellExecute "%ComSpec%", args, "", "runas", 1 >> "%vbsGetPrivileges%"
 
 :ExecElevation
  "%SystemRoot%\%winSysFolder%\WScript.exe" "%vbsGetPrivileges%" %*
@@ -59,4 +59,4 @@
  ::::::::::::::::::::::::::::
  REM Run shell as admin (example) - put here code as you like
  ECHO %batchName% Arguments: P1=%1 P2=%2 P3=%3 P4=%4 P5=%5 P6=%6 P7=%7 P8=%8 P9=%9
- %COMSPEC% /k
+ %ComSpec% /k

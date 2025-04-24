@@ -9,9 +9,9 @@ if "%~1" equ "" (goto:DKINSTALL)
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
 	::###### run script ######'
-	echo "%COMSPEC%" /V:ON /K call %PHP_EXE% "%DKSCRIPT_PATH%"
-	"%COMSPEC%" /V:ON /K call %PHP_EXE% "%DKSCRIPT_PATH%"
-	::"%COMSPEC%" /V:ON /K call "%PHP_EXE%" -r "include('%DKSCRIPT_PATH:\=/%');DKTEST();"
+	echo "%ComSpec%" /V:ON /K call %PHP_EXE% "%DKSCRIPT_PATH%"
+	"%ComSpec%" /V:ON /K call %PHP_EXE% "%DKSCRIPT_PATH%"
+	::"%ComSpec%" /V:ON /K call "%PHP_EXE%" -r "include('%DKSCRIPT_PATH:\=/%');DKTEST();"
 	::###### exit_code ######
 ::	if %ERRORLEVEL% neq 0 (
 ::		echo ERROR:%ERRORLEVEL%
@@ -53,7 +53,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	%dk_call% dk_validate PHP_EXE "%dk_call% dk_PHP_EXE"
 	%dk_call% dk_assertPath PHP_EXE
 
-	ftype DKPhp=%COMSPEC% /V:ON /K call "%~f0" "%DKPHP_FUNCTIONS_DIR%" "%PHP_EXE%" "%%1" %*
+	ftype DKPhp=%ComSpec% /V:ON /K call "%~f0" "%DKPHP_FUNCTIONS_DIR%" "%PHP_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR/DKPhp/DefaultIcon" "" "REG_SZ" "%PHP_EXE%"
 	assoc .php=DKPhp
 

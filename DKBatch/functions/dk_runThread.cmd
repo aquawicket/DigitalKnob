@@ -17,7 +17,7 @@ setlocal
 	echo dk_runThread
  
     :: Start dk_timeLoop in a parallel process
-    start "" /B %COMSPEC% /C call dk_timeLoop
+    start "" /B %ComSpec% /C call dk_timeLoop
 	echo Time is displayed in the titlebar in a seperate process
 %endfunction%
 

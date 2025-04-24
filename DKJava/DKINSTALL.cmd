@@ -29,7 +29,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	::###### run executable ######
 	cls
 	title %DKJava_FILE%
-    %COMSPEC% /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
+    %ComSpec% /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
@@ -78,7 +78,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	for /r "%SystemRoot%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
 	set "COMPILER_EXE=%CSC_EXE%"
 	%dk_call% dk_assertVar COMPILER_EXE
-	ftype DKJava=%COMSPEC% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
+	ftype DKJava=%ComSpec% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	assoc .java=DKJava
 	
 	%dk_call% dk_success "DKJava install complete"

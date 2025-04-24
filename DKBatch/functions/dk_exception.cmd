@@ -11,7 +11,7 @@
 ::   v1.4 2016-08-16  Improved detection of command line delayed expansion
 ::                    using an original idea by jeb
 ::   v1.3 2015-12-12  Added paged help option via MORE
-::   v1.2 2015-07-16  Use COMSPEC instead of OS to detect delayed expansion
+::   v1.2 2015-07-16  Use ComSpec instead of OS to detect delayed expansion
 ::   v1.1 2015-07-03  Preserve ! in exception attributes when delayed expansion enabled
 ::   v1.0 2015-06-26  Initial versioned release with embedded documentation
 ::
@@ -96,7 +96,7 @@ setlocal disableDelayedExpansion
 if not exist "%temp%\Kill.Yes" call :buildYes
 call :CtrlC <"%temp%\Kill.Yes" 1>nul 2>&1
 :CtrlC
-@%COMSPEC% /c exit -1073741510
+@%ComSpec% /c exit -1073741510
 
 :buildYes - Establish a Yes file for the language used by the OS
 pushd "%temp%"

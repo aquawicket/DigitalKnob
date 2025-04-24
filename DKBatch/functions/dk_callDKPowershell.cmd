@@ -29,7 +29,7 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
 
 	:: https://stackoverflow.com/a/4732316/688352
-	%dk_call% %COMSPEC% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
+	%dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
 
 	::### ALL_BUT_FIRST ###
 	%dk_call% dk_allButFirstArgs %*

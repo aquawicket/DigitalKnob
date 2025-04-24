@@ -17,7 +17,7 @@ setlocal
 
 	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
 	::"%POWERSHELL_EXE%" -windowstyle hidden -command "$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \"%_path_%\" /r /d ' + $Y + ' && icacls \"%path%\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs"
-	%COMSPEC% /c "%WINDIR%\System32\takeown.exe" /f "%_path_%"
+	%ComSpec% /c "%WINDIR%\System32\takeown.exe" /f "%_path_%"
 
 %endfunction%
 

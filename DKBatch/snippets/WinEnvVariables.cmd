@@ -13,7 +13,7 @@ set
 ::echo CommonProgramFiles(x86) = %CommonProgramFiles(x86)%
 ::echo CommonProgramW6432 = %CommonProgramW6432%
 ::echo COMPUTERNAME = %COMPUTERNAME%
-::echo COMSPEC = %COMSPEC%
+::echo ComSpec = %ComSpec%
 ::echo DEFLOGDIR = %DEFLOGDIR%
 ::echo FP_NO_HOST_CHECK = %FP_NO_HOST_CHECK%
 ::echo HOMEDRIVE = %HOMEDRIVE%

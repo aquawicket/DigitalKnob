@@ -28,7 +28,7 @@ cscript //nologo "%~f0?.wsf" %* & exit
 	args = args & strArg & " "  
 	Next
 	args = "/c """ + batchPath + """ " + args 
-	UAC.ShellExecute "%COMSPEC%", args, "", "runas", 1
+	UAC.ShellExecute "%ComSpec%", args, "", "runas", 1
 </script></job><!--
 
 :gotPrivileges
@@ -39,7 +39,7 @@ cscript //nologo "%~f0?.wsf" %* & exit
 
 :: Elevated User code 
 echo %batchName% Arguments: P1=%1 P2=%2 P3=%3 P4=%4 P5=%5 P6=%6 P7=%7 P8=%8 P9=%9
-%COMSPEC% /k 
+%ComSpec% /k 
 pause
  
 

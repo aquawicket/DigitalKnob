@@ -10,10 +10,10 @@ if "%~1" equ "" (goto:DKINSTALL)
 	set "ENGINE=javascript"
 	::set "ENGINE={16d51579-a30b-4c8b-a276-0ff4dc41e755}"
 	
-	"%COMSPEC%" /c %CSCRIPT_EXE% //D //E:%ENGINE% //X //NoLogo "%DKJAVASCRIPT_FUNCTIONS_DIR:\=/%/DK.js" "%DKSCRIPT_PATH:\=/%" 
+	"%ComSpec%" /c %CSCRIPT_EXE% //D //E:%ENGINE% //X //NoLogo "%DKJAVASCRIPT_FUNCTIONS_DIR:\=/%/DK.js" "%DKSCRIPT_PATH:\=/%" 
 	
 	::&& (echo: & echo exit_status:true %errorlevel%) || (echo: & echo exit_status:false %errorlevel%)
-	::%COMSPEC% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
+	::%ComSpec% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
 
 %endfunction%
 
@@ -57,7 +57,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	set "WSCRIPT_EXE=wscript.exe"
 	%dk_call% dk_validate DKJAVASCRIPT_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
-	ftype DKJavascript=%COMSPEC% /V:ON /K call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
+	ftype DKJavascript=%ComSpec% /V:ON /K call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR\DKJavascript\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
 	assoc .js=DKJavascript
 	

@@ -25,7 +25,7 @@ setlocal enableDelayedExpansion
 						(echo             ERRORLEVEL = '%ERRORLEVEL%')
 						(echo                   DATE = '%DATE%')
 						(echo                   TIME = '%TIME: =%')
-						(echo                COMSPEC = '%COMSPEC%')
+						(echo                ComSpec = '%ComSpec%')
 						(echo:)
 						(echo             ###### DK variables ######)
 						(echo                   test = '%test%')

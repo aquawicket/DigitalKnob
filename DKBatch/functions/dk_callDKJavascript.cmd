@@ -28,7 +28,7 @@ setlocal
 	if defined ALL_BUT_FIRST (set "ALL_BUT_FIRST=!ALL_BUT_FIRST:%~1 =!")
 
 	set "CSCRIPT_EXE=C:/Windows/System32/cscript.exe"
-	set DKJAVASCRIPT_COMMAND=%COMSPEC% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %ALL_BUT_FIRST%
+	set DKJAVASCRIPT_COMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %ALL_BUT_FIRST%
 	%dk_call% dk_exec %DKJAVASCRIPT_COMMAND%
 	endlocal & (
 		set "dk_callDKJavascript=%dk_exec%"
