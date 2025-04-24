@@ -1,0 +1,1 @@
+FILEZILLA_IMPORT=https://filezilla-project.org/nightlies/2025-04-17/win64/FileZilla.zip

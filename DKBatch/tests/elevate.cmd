@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::::::::::::::::::::::::::::::::::::::::::::
 :: Elevate.cmd - Version 5
@@ -5,7 +13,11 @@
 :: see "https://stackoverflow.com/a/12264592/1016343" for description
 ::::::::::::::::::::::::::::::::::::::::::::
 
+<<<<<<< HEAD
 @echo off
+=======
+
+>>>>>>> Development
  cls
  echo:
  echo =============================
@@ -63,4 +75,8 @@ pause
  ::::::::::::::::::::::::::::
  REM Run shell as admin (example) - put here code as you like
  echo %batchName% Arguments: P1=%1 P2=%2 P3=%3 P4=%4 P5=%5 P6=%6 P7=%7 P8=%8 P9=%9
+<<<<<<< HEAD
  cmd /k %1 %2 %3 %4 %5 %6 %7 %8 %9
+=======
+ %ComSpec% /k %1 %2 %3 %4 %5 %6 %7 %8 %9
+>>>>>>> Development

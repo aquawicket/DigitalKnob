@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # dk_installEmscripten()
@@ -8,7 +13,11 @@
 dk_installEmscripten() {
 	dk_debugFunc 0
 
+<<<<<<< HEAD
 	dk_call dk_cmakeEval "include('${DKIMPORTS_DIR}/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+=======
+	dk_call dk_cmakeEval "include('${DKIMPORTS_DIR}/emsdk/DKINSTALL.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+>>>>>>> Development
 	dk_call dk_printVar EMSDK
 	dk_call dk_printVar EMSDK_ENV
 	dk_call dk_printVar EMSDK_GENERATOR

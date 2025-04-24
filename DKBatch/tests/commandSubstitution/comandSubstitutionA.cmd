@@ -1,5 +1,9 @@
 @echo off
+<<<<<<< HEAD
 call ..\functions\DK.cmd
+=======
+call ../functions/DK.cmd
+>>>>>>> Development
 
 echo %ver%
 pause

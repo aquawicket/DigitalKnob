@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
@@ -5,6 +6,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::https://www.msys2.org/wiki/Launchers
 
 set "MSYS2=%DKBRANCH_DIR%\3rdParty\msys2-x86_64-20221216"
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+::https://www.msys2.org/wiki/Launchers
+%dk_call% dk_installMsys2.cmd
+::set "MSYS2=%DKBRANCH_DIR%\3rdParty\msys2-x86_64-20221216"
+>>>>>>> Development
 
 goto main
 :: env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"
@@ -28,24 +40,39 @@ goto main
 
 ::###### MINGW64 ######
 :console
+<<<<<<< HEAD
 	TITLE DigitalKnob - CONSOLE
 	cls
 	%dk_call% dk_echo You are in a Windows console environment
 	%dk_call% dk_echo
 	%dk_call% dk_echo PATH = %PATH%
+=======
+	cls
+	%dk_call% dk_echo "You are in a Windows console environment"
+	%dk_call% dk_echo ""
+	%dk_call% dk_echo "PATH = %PATH%"
+>>>>>>> Development
 	pause
 %endfunction% 
 
 ::###### MINGW64 ######
 :mingw64
+<<<<<<< HEAD
 	TITLE DigitalKnob - MINGW64
+=======
+>>>>>>> Development
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && echo You are in a MINGW64 terminal environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction% 
 
 ::###### Main ######
 :main
+<<<<<<< HEAD
 	%dk_call% dk_echo This will alernate between different shell environments
 	%dk_call% dk_echo
+=======
+	%dk_call% dk_echo "This will alernate between different shell environments"
+	%dk_call% dk_echo ""
+>>>>>>> Development
 	pause
 	
 	call:console

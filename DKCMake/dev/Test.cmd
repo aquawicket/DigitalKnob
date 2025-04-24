@@ -1,6 +1,10 @@
 @echo off
 setlocal EnableDelayedExpansion
+<<<<<<< HEAD
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+=======
+if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+>>>>>>> Development
 
 :main
 	:: find DigitalKnob directories
@@ -30,12 +34,21 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 	set current_dir=%~dp0
 	:find_dkbranch_dir_loop
 		for %%a in ("%current_dir%") do for %%b in ("%%~dpa\.") do set "current_folder=%%~nxb"
+<<<<<<< HEAD
 		for %%x in ("%current_dir%\..\") do set parent_dir=%%~dpx
 		for %%a in ("%parent_dir%") do for %%b in ("%%~dpa\.") do set "parent_folder=%%~nxb"
 		set current_dir=%parent_dir%
 		if "%parent_folder%" neq "digitalknob" goto find_dkbranch_dir_loop
 		if [%parent_dir:~-1%] == [\] set "parent_dir=%parent_dir:~0,-1%"
 		if [%parent_dir:~-1%] == [/] set "parent_dir=%parent_dir:~0,-1%"
+=======
+		for %%x in ("%current_dir%/../") do set parent_dir=%%~dpx
+		for %%a in ("%parent_dir%") do for %%b in ("%%~dpa\.") do set "parent_folder=%%~nxb"
+		set current_dir=%parent_dir%
+		if "%parent_folder%" neq "digitalknob" goto find_dkbranch_dir_loop
+		if "%parent_dir:~-1%"=="\" set "parent_dir=%parent_dir:~0,-1%"
+		if "%parent_dir:~-1%"=="/" set "parent_dir=%parent_dir:~0,-1%"
+>>>>>>> Development
 		set %1=%parent_dir%
 		set %2=%current_folder%
 %endfunction%

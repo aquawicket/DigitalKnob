@@ -1,11 +1,17 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_readCache()
 #
 #
+<<<<<<< HEAD
 function(dk_readCache APP target_triple TYPE)
 	dk_debugFunc()
 #	if(NOT ${ARGC} EQUAL 3)
@@ -48,16 +54,66 @@ function(dk_readCache APP target_triple TYPE)
 	set(${APP}		${_APP_}	PARENT_SCOPE)
 	set(${target_triple} 	${_target_triple_}	PARENT_SCOPE)
 	set(${TYPE}		${_TYPE_}	PARENT_SCOPE)
+=======
+function(dk_readCache)
+#	dk_debugFunc(3)
+	
+	dk_validate(ENV{DKCACHE_DIR} "dk_DKCACHE_DIR()")
+	if(NOT EXISTS "$ENV{DKCACHE_DIR}/DKBuilder.cache")
+		dk_return()
+	endif()
+	#dk_unset(_target_app_)
+	#dk_unset(_target_triple_)
+	#dk_unset(_target_type_)
+	
+	dk_echo("reading DKBuilder.cache...")
+	set(count 0)
+#	while read p; do
+#		[ "${count}" = "0" ] && _target_app_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "1" ] && _target_triple_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "2" ] &&	_target_type_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "3" ] && _target_env_=$(echo ${p} | tr -d '\r')
+#		count=$((count + 1))
+#	done < "$ENV{DKCACHE_DIR}"/DKBuilder.cache
+
+#	file(STRINGS "$ENV{DKCACHE_DIR}/DKBuilder.cache" lines)
+#	foreach(line ${lines})
+#		if(${count} EQUAL 0)
+#			set(${ARGV0} ${line})
+#		endif()
+#		if(${count} EQUAL 1)
+#			set(${ARGV1} ${line})
+#		endif()
+#		if(${count} EQUAL 2)
+#			set(${ARGV2} ${line})
+#		endif()
+#		math(EXPR count "${count}+1")
+#	endforeach()
+	
+	#dk_echo("target_app = ${target_app}, target_triple = ${target_triple}, target_type = ${target_type}")
+	#set(${target_app}		"${target_app}")
+	#set(${target_triple} 	"${target_triple}")
+	#set(${target_type}		"${target_type}")
+>>>>>>> Development
 endfunction()
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_readCache(APP target_triple TYPE)
 	#dk_printVar(APP)
 	#dk_printVar(target_triple)
 	#dk_printVar(TYPE)
+=======
+	dk_debugFunc(0)
+	
+	#dk_readCache(target_app target_triple target_type)
+	#dk_printVar(target_app)
+	#dk_printVar(target_triple)
+	#dk_printVar(target_type)
+>>>>>>> Development
 endfunction()

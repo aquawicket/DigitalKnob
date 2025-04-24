@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # dk_extract(file_path, destination)
@@ -11,7 +16,11 @@ dk_extract() {
 	#local src="${1}"
 	#local dest="${2}"
 	
+<<<<<<< HEAD
 	dk_call dk_pathExists "${2}" || dk_call dk_makeDirectory "${2}"
+=======
+	dk_call dk_pathExists "${2}" || dk_call dk_mkdir "${2}"
+>>>>>>> Development
 	dk_call dk_getExtension "${1}" extension
 	
 	if [ "${extension}" = "zip" ]; then
@@ -30,6 +39,10 @@ dk_extract() {
 DKTEST() {
 	dk_debugFunc 0
 	
+<<<<<<< HEAD
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+=======
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+>>>>>>> Development
 	dk_call dk_extract "${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64.zip" "${HOME}"
 }

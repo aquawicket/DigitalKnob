@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_append(<variable> <value>)
@@ -13,9 +18,16 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #		   If the variable does not exist, we need to define if we are creating a list 
 #		   or a string.
 #
+<<<<<<< HEAD
 function(dk_append variable) #value
 	dk_debugFunc()
 	
+=======
+function(dk_append variable)
+	dk_debugFunc()
+	#set(variable ${ARGV0})
+
+>>>>>>> Development
 	if(NOT ARGN)
 		dk_warning("dk_append(${variable}) ARGN:${ARGN} is invalid")
 		return()
@@ -25,11 +37,16 @@ function(dk_append variable) #value
 	else()
 		dk_set(${variable} ${ARGN})
 	endif()
+<<<<<<< HEAD
 
 # DEBUG
 #	dk_printVar(variable)
 endfunction()
 dk_createOsMacros("dk_append")
+=======
+endfunction()
+
+>>>>>>> Development
 
 
 

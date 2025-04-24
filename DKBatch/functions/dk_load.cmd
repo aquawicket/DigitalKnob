@@ -1,9 +1,21 @@
+<<<<<<< HEAD
 @echo off
 if exist "%DKBATCH_FUNCTIONS_DIR%\%~n1.cmd" (goto:eof)
 if exist "%~1" (goto:eof)
 ::if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+if exist "%DKBATCH_FUNCTIONS_DIR_%%~n1.cmd" (goto:eof)
+if exist "%~1" (goto:eof)
+::if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
+>>>>>>> Development
 
 ::####################################################################
 ::# dk_load(funcName OR funcPath)
@@ -13,6 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# @funcName OR funcPath  - The name of an existing "functions/funcname.cmd" file, or a full filepath to a .cmd file.
 ::#
 :dk_load
+<<<<<<< HEAD
     ::call dk_debugFunc 0
  setlocal
  
@@ -25,21 +38,47 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_source dk_error
     call dk_source dk_debugFunc
     call dk_debugFunc 1
+=======
+setlocal
+    ::%dk_call% dk_debugFunc 0
+ 
+ 
+    %dk_call% dk_notice "dk_load is temporarily disabled. Use dk_call and dk_source to download, load and run functions."
+    goto:eof
+    ::%dk_call% dk_debugFunc
+    
+    %dk_call% dk_source dk_echo
+    %dk_call% dk_source dk_info
+    %dk_call% dk_source dk_error
+    %dk_call% dk_source dk_debugFunc
+    %dk_call% dk_debugFunc 1
+>>>>>>> Development
     
     if exist "%~1" (
         set "funcPath=%~1"
         for %%Z in ("%funcPath%") do set "funcName=%%~nZ"
     ) else (
         set "funcName=%~n1"
+<<<<<<< HEAD
         set "funcPath=%DKBATCH_FUNCTIONS_DIR%\%~n1.cmd"
+=======
+        set "funcPath=%DKBATCH_FUNCTIONS_DIR_%%~n1.cmd"
+>>>>>>> Development
     )
 
     if not exist "%funcPath%" echo Downloading %funcName%
     call dk_source dk_set
+<<<<<<< HEAD
     call dk_source dk_getFullPath
     call dk_source dk_download
     if not exist "%funcPath%" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName%.cmd" "%funcPath%"
     if not exist "%funcPath%" call dk_error "ERROR: %funcPath%: file not found"
+=======
+    call dk_source dk_realpath
+    call dk_source dk_download
+    if not exist "%funcPath%" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName%.cmd" "%funcPath%"
+    if not exist "%funcPath%" %dk_call% dk_error "ERROR: %funcPath%: file not found"
+>>>>>>> Development
     
     goto:eof
     :: TODO
@@ -93,8 +132,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
  setlocal
     call dk_debugFunc
     
+=======
+setlocal
+    %dk_call% dk_debugFunc
+    
+	
+>>>>>>> Development
     call dk_load dk_printVar
 %endfunction%

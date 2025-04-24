@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::###############################################################################
 ::# dk_pad(str padchar left right align rtn_var)
@@ -14,8 +22,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#	  @rtn_var	- The returned string w/padding
 ::#
 :dk_pad
+<<<<<<< HEAD
     call dk_debugFunc 1 99
  setlocal
+=======
+setlocal
+    %dk_call% dk_debugFunc 1 99
+
+>>>>>>> Development
 	
 	set "str=%~1"
 	set "padchar=%~2"
@@ -38,10 +52,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		set "padR=!padR!!padchar!"
 	)
 	
+<<<<<<< HEAD
 	if "%align%"=="L" (
 		set "rtn_var=!padL!!str!!padR!"
 	)
 	if "%align%"=="R" (
+=======
+	if "%align%" equ "L" (
+		set "rtn_var=!padL!!str!!padR!"
+	)
+	if "%align%" equ "R" (
+>>>>>>> Development
 		set "rtn_var=!padR!!str!!padL!"
 	)
 	
@@ -54,9 +75,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+
+>>>>>>> Development
 	%dk_call% dk_pad "padded string A" " " 3 18 L strA 
 	%dk_call% dk_echo "%strA%" 
 

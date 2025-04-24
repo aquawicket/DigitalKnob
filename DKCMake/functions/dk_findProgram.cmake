@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_findProgram (<VAR> filename [path1 path2 ...])
@@ -24,7 +29,11 @@ function(dk_findProgram VAR filename)
 	#endif()
 	
 	if(${VAR})
+<<<<<<< HEAD
 		dk_fatal("error {VAR} already set to ${VAR}")
+=======
+		dk_error("error {VAR} already set to ${VAR}")
+>>>>>>> Development
 	endif()
 	
 	if(ARGN)
@@ -32,6 +41,7 @@ function(dk_findProgram VAR filename)
 		list(REMOVE_DUPLICATES SEARCH_DIRS)
 	endif()
 	if(SEARCH_DIRS)
+<<<<<<< HEAD
 		dk_info("find_program(${VAR} ${filename} ${ARGN};${SEARCH_DIRS} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)")
 		find_program(${VAR} ${filename} ${ARGN};${SEARCH_DIRS} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)
 	elseif(ARGN)
@@ -39,11 +49,24 @@ function(dk_findProgram VAR filename)
 		find_program(${VAR} ${filename} ${ARGN} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)
 	else()
 		dk_info("find_program(${VAR} ${filename})")
+=======
+#		dk_info("find_program(${VAR} ${filename} ${ARGN};${SEARCH_DIRS} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)")
+		find_program(${VAR} ${filename} ${ARGN};${SEARCH_DIRS} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)
+	elseif(ARGN)
+#		dk_info("find_program(${VAR} ${filename} ${ARGN} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)")
+		find_program(${VAR} ${filename} ${ARGN} NO_DEFAULT_PATH NO_SYSTEM_ENVIRONMENT_PATH)
+	else()
+#		dk_info("find_program(${VAR} ${filename})")
+>>>>>>> Development
 		find_program(${VAR} ${filename})
 	endif()
 	
 	if(EXISTS ${${VAR}})
+<<<<<<< HEAD
 		dk_info("FOUND ${filename} at ${${VAR}}")
+=======
+#		dk_info("FOUND ${filename} at ${${VAR}}")
+>>>>>>> Development
 		dk_set(${VAR} "${${VAR}}")
 		return()
 	#elseif(${VAR}_second_pass)
@@ -62,7 +85,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_findProgram(PYTHON_EXE python)
 endfunction()

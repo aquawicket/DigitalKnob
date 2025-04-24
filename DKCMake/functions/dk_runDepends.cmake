@@ -1,11 +1,20 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_runDepends(plugin)
 #
+<<<<<<< HEAD
 #	Strip everything from the library's DKMAKE.cmake file except dk_depend() commands AND conditionals.
+=======
+#	Strip everything from the library's DKINSTALL.cmake file except dk_depend() commands AND conditionals.
+>>>>>>> Development
 #	Conditionals and flow control statements such as if(), else(), elseif(), endif(), return() will remain included during the sorting process. 
 #	WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
 #
@@ -18,9 +27,15 @@ function(dk_runDepends plugin)
 	if(NOT plugin_path)
 		dk_fatal("${plugin} plugin not found")
 	endif()
+<<<<<<< HEAD
 	dk_verbose("FOUND ${plugin} DKMAKE.cmake at ${plugin_path}")
 	
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
+=======
+	dk_verbose("FOUND ${plugin} DKINSTALL.cmake at ${plugin_path}")
+	
+	file(STRINGS ${plugin_path}/DKINSTALL.cmake lines)
+>>>>>>> Development
 	dk_unset(disable_script)
 	dk_unset(depends_script)
 	dk_unset(index)
@@ -82,7 +97,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_runDepends(plugin) #TODO
 endfunction()

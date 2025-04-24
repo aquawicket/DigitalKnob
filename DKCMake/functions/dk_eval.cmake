@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_eval(code)
@@ -10,6 +15,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 macro(dk_eval)
 	#dk_debugFunc()
+<<<<<<< HEAD
 	set(code "${ARGV}")
 	message("${lblue}dk_eval> ${lcyan}${code}\n ${clr}")
 	
@@ -19,6 +25,16 @@ macro(dk_eval)
 	#dk_printVar(code)
 	if(COMMAND cmake_language)
 		#dk_printVar(code)
+=======
+	
+	set(code "${ARGV}")
+	message("${lblue}dk_eval> ${lcyan}${code}\n ${clr}")
+
+	#dk_replaceAll("${code}"  ";"  "\n"  code)
+	#dk_replaceAll("${code}"  "'"  "\""  code)
+	
+	if(COMMAND cmake_language)
+>>>>>>> Development
 		cmake_language(EVAL CODE ${code})
 	else()
 		# Evaluate expression (faster version)
@@ -27,12 +43,17 @@ macro(dk_eval)
 		# eval will not modify ans (the code evaluated may modify ans)
 		# vars starting with __eval should not be used in code
 
+<<<<<<< HEAD
 		# one file per execution of cmake (if this file were in memory it would probably be faster...)
 		#fwrite_temp("" ".cmake")
 		#ans(dk_evel_temp)
 		# speedup: statically write filename so eval boils down to 3 function calls
 		dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")
 		set(dk_evel_temp ${DKCACHE_DIR}/dk_evel_temp.cmake)
+=======
+		dk_validate(ENV{DKCACHE_DIR} "dk_DKCACHE_DIR()")
+		set(dk_evel_temp $ENV{DKCACHE_DIR}/dk_evel_temp.cmake)
+>>>>>>> Development
 		dk_fileWrite("${dk_evel_temp}" "
 			function(eval code)
 			dk_fileWrite(${dk_evel_temp} \"\${code}\")
@@ -40,13 +61,17 @@ macro(dk_eval)
 			#set(__ans \${__ans} PARENT_SCOPE)
 			endfunction()
 		")
+<<<<<<< HEAD
 		#include("${dk_evel_temp}")
+=======
+>>>>>>> Development
 		dk_load("${dk_evel_temp}")
 		eval("${code}")
 	endif()
 endmacro()
 
 
+<<<<<<< HEAD
 #function(dk_eval code)
 #	# one file per execution of cmake (if this file were in memory it would probably be faster...)
 #	# this is where the temporary eval file will be stored.  it will only be used once per eval
@@ -64,14 +89,25 @@ endmacro()
 #	## (which calls the second definition of eval).
 #	eval("${code}")
 #endfunction()
+=======
+
+
+>>>>>>> Development
 
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 
 	set(test "test")
 	dk_eval([[message("test = ${test}")]])
+=======
+	dk_debugFunc(0)
+
+	set(test "test")
+	dk_eval([[  message("test = ${test}")   ]])
+>>>>>>> Development
 endfunction()

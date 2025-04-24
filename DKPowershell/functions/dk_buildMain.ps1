@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_buildMain){ $dk_buildMain = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_buildMain){ $dk_buildMain = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ####################################################################
 # dk_buildMain()
@@ -41,19 +46,32 @@ function Global:dk_buildMain() {
 	
 	$running=1
 	while($running){  
+<<<<<<< HEAD
 		if(!${UPDATE})    { dk_call dk_pickUpdate;  continue; }
 		if(!${APP})       { dk_call dk_pickApp;     continue; }
 		if(!${triple}) { dk_call dk_pickOs;      continue; }
 		if(!${TYPE})      { dk_call dk_pickType;    continue; }
+=======
+		if(!${UPDATE}) 		  { dk_call dk_pickUpdate;  		continue; }
+		if(!${target_app})    { dk_call dk_target_app;     	continue; }
+		if(!${target_triple}) { dk_call dk_target_triple_SET;  continue; }
+		if(!${target_type})   { dk_call dk_target_type;    	continue; }
+>>>>>>> Development
 		
 		dk_call dk_createCache
 		dk_call dk_generate	
 		dk_call dk_buildApp
 		
 		dk_call dk_unset UPDATE
+<<<<<<< HEAD
 		dk_call dk_unset APP
 		dk_call dk_unset triple
 		dk_call dk_unset TYPE
+=======
+		dk_call dk_unset target_app
+		dk_call dk_unset target_triple
+		dk_call dk_unset target_type
+>>>>>>> Development
 	}  
 }
 

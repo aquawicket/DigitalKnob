@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 # https://git-scm.com
 # https://github.com/git-for-windows/git
@@ -14,8 +19,13 @@ function(dk_installGit)
 
 	### DOWNLOAD ###
 	dk_validate(host_triple "dk_host_triple()")
+<<<<<<< HEAD
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	dk_getFileParam("${DKIMPORTS_DIR}/git/git.txt" GIT_DL_VERSION)
+=======
+	dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+	dk_getFileParam("$ENV{DKIMPORTS_DIR}/git/git.txt" GIT_DL_VERSION)
+>>>>>>> Development
 	
 	### DOWNLOAD ###
 	if(WIN_X86_HOST)
@@ -31,8 +41,13 @@ function(dk_installGit)
 
 	### Get GIT variables ###
 	if(GIT_DL)
+<<<<<<< HEAD
 		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 		dk_importVariables(${GIT_DL} ROOT ${DKTOOLS_DIR})
+=======
+		dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+		dk_importVariables(${GIT_DL} NAME git ROOT $ENV{DKTOOLS_DIR})
+>>>>>>> Development
 	endif()
 
 	### First Check ###
@@ -48,10 +63,17 @@ function(dk_installGit)
 	if(NOT GIT_EXE)
 		dk_debug(" Installing git . . . . ")
 		if(WIN_HOST)
+<<<<<<< HEAD
 			#dk_download(${GIT_DL} ${DKDOWNLOAD_DIR})
 			dk_download(${GIT_DL})			
 			dk_getNativePath("${DKDOWNLOAD_DIR}/${GIT_DL_FILE}" GIT_DL_FILE_NATIVE)
 			dk_getNativePath("${GIT}" GIT_NATIVE)
+=======
+			#dk_download(${GIT_DL} $ENV{DKDOWNLOAD_DIR})
+			dk_download(${GIT_DL})			
+			dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${GIT_DL_FILE}" GIT_DL_FILE_NATIVE)
+			dk_nativePath("${GIT}" GIT_NATIVE)
+>>>>>>> Development
 			execute_process(COMMAND ${GIT_DL_FILE_NATIVE} -y -o ${GIT_NATIVE} COMMAND_ECHO STDOUT)
 			# setx PATH
 		else()
@@ -79,7 +101,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_installGit()
 endfunction()

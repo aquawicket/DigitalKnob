@@ -1,7 +1,12 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include(${DKCMAKE_FUNCTIONS_DIR}/dk_createOsMacros.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_unset(variable)
@@ -27,14 +32,22 @@ function(dk_unset variable)
 	unset(${variable} PARENT_SCOPE)
 	
 endfunction()
+<<<<<<< HEAD
 dk_createOsMacros("dk_unset")
+=======
+#dk_createOsMacros("dk_unset")
+>>>>>>> Development
 
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	set(myVar "value of myVar")
 	dk_printVar(myVar)

@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 @echo off
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::####################################################################
 ::# test_dk_dumpStack.cmd
@@ -16,6 +24,10 @@
 	::	call echo 0 = %%~0
 	::	echo returned from func2
 	::)
+<<<<<<< HEAD
+=======
+	pause
+>>>>>>> Development
 %endfunction%
 
 :func2
@@ -48,6 +60,11 @@
 
 :func5
 	echo :func5 %*
+<<<<<<< HEAD
 <:dk_dumpStackReturn <nul call dk_dumpStack
 	echo returned from dk_dumpStack
+=======
+<:dk_dumpStackReturn <nul call dk_callstack
+	echo returned from dk_callstack
+>>>>>>> Development
 %endfunction%

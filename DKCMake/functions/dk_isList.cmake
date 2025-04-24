@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
@@ -22,6 +23,29 @@ function(dk_isList rtn_var)
 		if(${count} GREATER 1)
 			set(${rtn_var} 1 PARENT_SCOPE)
 		endif()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+
+###############################################################################
+# dk_isList(arg)
+#
+#	Test if (arg) is a list
+#
+#	@arg		- The argument to test
+#	@dk_isList	- 1 if arg is a list, 0 if otherwise.
+#
+function(dk_isList)
+	dk_debugFunc()
+
+	dk_getArg(0 _arg0_)
+	
+	dk_getArgCount(count ${_arg0_})
+	if(${count} GREATER 1)
+		set(dk_isList 1 PARENT_SCOPE)
+	else()
+		set(dk_isList 0 PARENT_SCOPE)
+>>>>>>> Development
 	endif()
 endfunction()
 
@@ -31,18 +55,28 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	list(APPEND myList "myList item 0")
 	list(APPEND myList "myList item 1")
 	list(APPEND myList "myList item 2")
+<<<<<<< HEAD
 	dk_isList(isList myList)
 	if(isList)
+=======
+	dk_isList(myList)
+	if(dk_isList)
+>>>>>>> Development
 		dk_echo("'myList' is a list")
 	else()
 		dk_echo("'myList' is NOT a list")
 	endif()
 	
+<<<<<<< HEAD
 	string(APPEND myString "Hello ")
 	string(APPEND myString "World")
 	dk_isList(isList myString)
@@ -54,13 +88,31 @@ function(DKTEST)
 	
 	dk_isList(isList "abc;123;456")
 	if(isList)
+=======
+	dk_isList("abc;123;456")
+	if(dk_isList)
+>>>>>>> Development
 		dk_echo("'abc;123;456' is a list")
 	else()
 		dk_echo("'abc;123;456' is NOT a list")
 	endif()
 	
+<<<<<<< HEAD
 	dk_isList(isList "Hello World")
 	if(isList)
+=======
+	string(APPEND myString "Hello ")
+	string(APPEND myString "World")
+	dk_isList(myString)
+	if(dk_isList)
+		dk_echo("'myString' is a list")
+	else()
+		dk_echo("'myString' is NOT a list")
+	endif()
+	
+	dk_isList("Hello World")
+	if(dk_isList)
+>>>>>>> Development
 		dk_echo("'Hello World' is a list")
 	else()
 		dk_echo("'Hello World' is NOT a list")

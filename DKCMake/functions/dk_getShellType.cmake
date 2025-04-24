@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 
 ## We are looking for a good way to determin the path type we should use at any given moment in CMake.
@@ -36,7 +41,11 @@ function(dk_getShellType)
 	execute_process(COMMAND dk_polyglot OUTPUT_VARIABLE RAW_ECHO)
 	message(STATUS "RAW_ECHO = ${RAW_ECHO}")
 	
+<<<<<<< HEAD
 	execute_process(COMMAND cmd /c echo %COMSPEC% OUTPUT_VARIABLE CMD_PATH)
+=======
+	execute_process(COMMAND ${CMD_EXE} /c echo %COMSPEC% OUTPUT_VARIABLE CMD_PATH)
+>>>>>>> Development
 	message(STATUS "CMD_PATH = ${CMD_PATH}")
 	
 	execute_process(COMMAND powershell -c Write-Host "(Get-Process -Id $pid).Path" OUTPUT_VARIABLE POWERSHELL_PATH)
@@ -48,7 +57,11 @@ function(dk_getShellType)
 	execute_process(COMMAND bash -c "echo $0" OUTPUT_VARIABLE BASH_PATH)
 	message(STATUS "BASH_PATH = ${BASH_PATH}")
 	
+<<<<<<< HEAD
 #	dk_fileWrite(dkpstemp.cmake "message('CMAKE_COMMAND = ${CMAKE_COMMAND}')")
+=======
+#	dk_fileWrite(dkpstemp.cmake "message(\"CMAKE_COMMAND = ${CMAKE_COMMAND}\")")
+>>>>>>> Development
 #	execute_process(COMMAND ${CMAKE_COMMAND} -p ${dkpstemp.cmake} OUTPUT_VARIABLE CMAKE_PATH)
 #	message(STATUS "CMAKE_PATH = ${CMAKE_PATH}")
 endfunction()
@@ -60,7 +73,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_getShellType(ShellType)
 	#dk_printVar(ShellType)

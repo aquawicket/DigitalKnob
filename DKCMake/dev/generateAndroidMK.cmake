@@ -1,10 +1,18 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+>>>>>>> Development
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
+<<<<<<< HEAD
 # Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+# Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files(the "Software"), to deal
@@ -23,6 +31,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+<<<<<<< HEAD
 #include_guard()
 
 function(generateAndroidMK)
@@ -34,6 +43,19 @@ function(generateAndroidMK)
 			dk_set(PWD ${plugin_path}/${triple}/Debug)
 			dk_makeDirectory(${PWD})
 			dk_makeDirectory(${PWD}/jni)
+=======
+include_guard()
+
+function(generateAndroidMK)
+	if(ANDROID_LIBMK)
+		dk_set(PWD ${plugin_path}/${target_triple})
+		dk_mkdir(${PWD})
+		if(DEBUG)
+			message(STATUS "Creating DEBUG Application.mk file for ${plugin}....")
+			dk_set(PWD ${plugin_path}/${target_triple}/Debug)
+			dk_mkdir(${PWD})
+			dk_mkdir(${PWD}/jni)
+>>>>>>> Development
 			
 			dk_set(APPMK_FILE "APP_PLATFORM := android-15 \n")
 			dk_set(APPMK_FILE ${APPMK_FILE} "APP_ABI      := armeabi-v7a \n")
@@ -46,7 +68,11 @@ function(generateAndroidMK)
 			foreach(each_define ${DKDEFINES_LIST})
 		        dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
 	        endforeach()
+<<<<<<< HEAD
 			dk_set(ANDROID_LIBMK ${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${DKPLUGINS_DIR}\n")
+=======
+			dk_set(ANDROID_LIBMK ${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${DKCPP_PLUGINS_DIR}\n")
+>>>>>>> Development
 			foreach(each_include ${DKINCLUDES_LIST})
 				dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${each_include}\n")
 			endforeach()
@@ -61,9 +87,15 @@ function(generateAndroidMK)
 		endif()
 		if(RELEASE)
 			message(STATUS "Creating RELEASE Application.mk file for ${plugin}....")
+<<<<<<< HEAD
 			dk_set(PWD ${plugin_path}/${triple}/Release)
 			dk_makeDirectory(${PWD})
 			dk_makeDirectory(${PWD}/jni)
+=======
+			dk_set(PWD ${plugin_path}/${target_triple}/Release)
+			dk_mkdir(${PWD})
+			dk_mkdir(${PWD}/jni)
+>>>>>>> Development
 			
 			dk_set(APPMK_FILE "APP_PLATFORM := android-15 \n")
 			dk_set(APPMK_FILE ${APPMK_FILE} "APP_ABI      := armeabi-v7a \n")
@@ -76,7 +108,11 @@ function(generateAndroidMK)
            foreach(each_define ${DKDEFINES_LIST})
 		        dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
 	        endforeach()
+<<<<<<< HEAD
 			dk_set(ANDROID_LIBMK ${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${DKPLUGINS_DIR}\n")
+=======
+			dk_set(ANDROID_LIBMK ${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${DKCPP_PLUGINS_DIR}\n")
+>>>>>>> Development
 			foreach(each_include ${DKINCLUDES_LIST})
 				dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${each_include}\n")
 			endforeach()

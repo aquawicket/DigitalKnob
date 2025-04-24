@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 if(NOT dk_loading_list)
 	set(dk_loading_list "" CACHE INTERNAL "")
@@ -17,6 +22,7 @@ set(indent_count 0 CACHE INTERNAL "")
 #
 #	@var  - The name of an eisting function/file or a full file path to a .cmake file.
 #
+<<<<<<< HEAD
 macro(dk_load var)
 	#dk_debugFunc()
 	#dk_echo("dk_load(${var})")
@@ -30,6 +36,23 @@ macro(dk_load var)
 			set(fn ${fnDir})
 		endif()
 		dk_basename("${fn}" fnName)
+=======
+#	NOTE: dk_load should not use any dk_ functions. It may attempt to use said function before it has loaded it.
+#		  Only use raw cmake functions here.
+#
+macro(dk_load var)
+	#dk_debugFunc()
+	#message("dk_load(${var})")
+	
+	string(STRIP ${var} fn)
+	get_filename_component(name_we "${fn}" NAME_WE)
+	if("${name_we}" STREQUAL "DKINSTALL")
+		get_filename_component(fnDir "${fn}" DIRECTORY)
+		if(fnDir)
+			set(fn ${fnDir})
+		endif()
+		get_filename_component(fnName "${fn}" NAME)
+>>>>>>> Development
 		if(fnName)
 			set(fn ${fnName})
 		endif()
@@ -41,6 +64,7 @@ macro(dk_load var)
 		list(APPEND dk_loading_list "${fn}")
 		
 		math(EXPR indent_count "${indent_count}+1")
+<<<<<<< HEAD
 		if(CMAKE_VERSION VERSION_GREATER "3.15")
 			string(REPEAT "-" ${indent_count} indent)
 		endif()
@@ -61,6 +85,20 @@ macro(dk_load var)
 			string(REPEAT "-" ${indent_count} indent)
 		endif()
 		
+=======
+		if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
+			string(REPEAT "-" ${indent_count} indent)
+		endif()
+		
+#		message("${indent}> dk_load(${var})")	
+		dk_parseFunctionsAndLoad(${fn} ${var})	#NOTE: Loading a file with the name of an existing function will cause this to fail
+#		message("${indent}< dk_load(${var})")
+
+		math(EXPR indent_count "${indent_count}-1")
+		if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
+			string(REPEAT "-" ${indent_count} indent)
+		endif()
+>>>>>>> Development
 	else()
 		#message("${var} already loading")
 	endif()
@@ -70,7 +108,12 @@ endmacro()
 
 
 macro(dk_parseFunctionsAndLoad fn fpath)
+<<<<<<< HEAD
 	#dk_echo("dk_parseFunctionsAndLoad(${fn})")
+=======
+	#dk_debugFunc()
+	#message("dk_parseFunctionsAndLoad(${ARGV})")
+>>>>>>> Development
 	
 	if(NOT dk_load_list)
 		set(dk_load_list "" CACHE INTERNAL "")
@@ -81,6 +124,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	#	dk_echo(WARNING "${fn} is NOT a valid function name")
 	#endif()
 	
+<<<<<<< HEAD
 	if(EXISTS ${DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake)
 		set(${fn}_file ${DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake)
 	elseif(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
@@ -94,6 +138,21 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	endif()
 	
 	
+=======
+	#message("fpath = ${fpath}")
+	if(EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake")
+		set(${fn}_file $ENV{DKCMAKE_FUNCTIONS_DIR_}${fpath}.cmake)
+	elseif(EXISTS "$ENV{DKCMAKE_DIR}/functions/${fpath}.cmake")
+		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
+	elseif(EXISTS "${fpath}")
+		set(${fn}_file "${fpath}")
+	elseif(EXISTS "${fpath}.cmake")
+		set(${fn}_file ${fpath}.cmake)
+	else()
+		message(FATAL_ERROR "could not locate fpath:${fpath}")
+	endif()
+	
+>>>>>>> Development
 	#if(${${fn}_file} IN_LIST dk_load_list)
 		#dk_debug("dk_load(${fn}) function already in list @ ${${fn}_file}")
 		#dk_verbose("dk_load_list = ${dk_load_list}")
@@ -144,11 +203,19 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 				#	message("fpath = ${fpath}")
 				#	message("fn_file} = ${${fn}_file}")
 				#	message("fn_item} = ${${fn}_item}")
+<<<<<<< HEAD
 				#	message("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
 				#	message("DKSCRIPT_NAME = ${DKSCRIPT_NAME}")
 				#endif()
 
 				#if(NOT ${${fn}_file} STREQUAL "${DKSCRIPT_PATH}")
+=======
+				#	message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
+				#	message("DKSCRIPT_NAME = $ENV{DKSCRIPT_NAME}")
+				#endif()
+
+				#if(NOT ${${fn}_file} STREQUAL "$ENV{DKSCRIPT_PATH}")
+>>>>>>> Development
 				#if(NOT ${fn} IN_LIST dk_loaded_list)
 					#if(${fn} IN_LIST dk_loading_list)
 					#	include(${${fn}_file})
@@ -159,13 +226,20 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 			endif()
 		endforeach()
 
+<<<<<<< HEAD
 		if(NOT "${${fn}_file}" STREQUAL "${DKSCRIPT_PATH}")
+=======
+		if(NOT "${${fn}_file}" STREQUAL "$ENV{DKSCRIPT_PATH}")
+>>>>>>> Development
 			#dk_echo("${fn} -> include(${${fn}_file})")
 		#if(NOT ${fn} IN_LIST dk_loading_list)
 			include(${${fn}_file})
 		endif()
 		
+<<<<<<< HEAD
 		
+=======
+>>>>>>> Development
 		### variable clean-up ###
 		unset(${fn}_file)
 		unset(${fn}_item)

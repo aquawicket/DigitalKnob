@@ -1,0 +1,2 @@
+ANDROID_SOURCES_VERSION=26
+ANDROID_SOURCES_DL=https://dl.google.com/android/repository/sources-26_r01.zip

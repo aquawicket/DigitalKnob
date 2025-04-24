@@ -1,12 +1,24 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#################################################################################
 ::# dk_keyboardInputTimeout(result, default, timeout)
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+::#################################################################################
+::# dk_keyboardInputTimeout(<default>, <timeout>, <ret>:OPTIONAL)
+>>>>>>> Development
 ::#
 ::# reference: https://stackoverflow.com/a/7703584/688352
 ::#            https://stackoverflow.com/a/33206814/688352
 ::#
+<<<<<<< HEAD
 :dk_keyboardInputTimeout <result> <default> <timeout>
     call dk_debugFunc 3
  setlocal
@@ -17,6 +29,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     set "cache_file=%DKCACHE_DIR%\keyboardInputTimeout_cache.tmp"
     set "thread_file=%DKCACHE_DIR%\keyboardInputTimeout_thread.cmd"
+=======
+:dk_keyboardInputTimeout
+setlocal
+	%dk_call% dk_debugFunc 0 3
+    
+    set "default=%~1"
+    set /a "timeout=%~2"
+    
+    set "cache_file=%DKCACHE_DIR%/keyboardInputTimeout_cache.tmp"
+    set "thread_file=%DKCACHE_DIR%/keyboardInputTimeout_thread.cmd"
+>>>>>>> Development
     %dk_call% dk_delete %cache_file% %NO_OUTPUT%
     
     echo ^@echo off> %thread_file%
@@ -28,6 +51,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"
     
     :keyboard_input_timeout_loop
+<<<<<<< HEAD
     set /a "timeout-=1"
     ::<nul set /p "=.!ASCII_13!     %timeout%" <NUL
     <nul set /p "="<NUL
@@ -42,10 +66,22 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     :: clear line and console title
     ::<nul set /p "=.!ASCII_13!    %timeout% " <NUL
     %dk_call% dk_setTitle
+=======
+		set /a "timeout-=1"
+		%dk_call% dk_title %timeout%
+		::<nul set /p "=.!ASCII_13!     %timeout%" <NUL
+		::<nul set /p "="<NUL
+
+		ping -n 2 localhost %NO_OUTPUT%
+		if !timeout! GTR 0 (
+			if not exist %cache_file% goto keyboard_input_timeout_loop
+		)
+>>>>>>> Development
     
     :keyboard_input_timeout_result
     del %thread_file% %NO_OUTPUT%
     if exist %cache_file% (
+<<<<<<< HEAD
         set /p result=<%cache_file%
         %dk_call% dk_delete %cache_file% %NO_OUTPUT%
     ) else ( 
@@ -54,6 +90,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     ::echo RESULT=%result%
     endlocal & set "%1=%result%"
+=======
+        set /p dk_keyboardInputTimeout=<%cache_file%
+        %dk_call% dk_delete %cache_file% %NO_OUTPUT%
+    ) else ( 
+        set "dk_keyboardInputTimeout=%default%"
+    )
+
+    endlocal & (
+		set "dk_keyboardInputTimeout=%dk_keyboardInputTimeout%"
+		if "%~3" neq "" (set "%~3=%dk_keyboardInputTimeout%")
+	)
+>>>>>>> Development
 %endfunction%
 
 
@@ -64,11 +112,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
     echo Type some input and press enter, this will time out in 5 seconds
     %dk_call% dk_keyboardInputTimeout  rtn_var "default" 10
     echo result = %rtn_var%
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+    %dk_call% dk_echo "Type some input and press enter, this will time out in 10 seconds"
+    %dk_call% dk_keyboardInputTimeout "default" 10
+    %dk_call% dk_printVar dk_keyboardInputTimeout
+>>>>>>> Development
 %endfunction%
 

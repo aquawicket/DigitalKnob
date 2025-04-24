@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_printVar(variable)
@@ -21,6 +26,7 @@ function(dk_printVar)
 	#dk_echo("")
 	
 	###### ENV ######
+<<<<<<< HEAD
 	if(DEFINED "ENV{${ARGV}}")
 		dk_isList(isList "$ENV{${ARGV}}")
 		if(isList)
@@ -30,11 +36,23 @@ function(dk_printVar)
 		else()
 			#dk_echo("${cyan}\$ENV{${ARGV}}${white} is a ENV STRING variable${clr}")
 			dk_echo("${cyan}\$ENV{${ARGV}}:string = ${blue}'$ENV{${ARGV}}'${clr}")
+=======
+	if(DEFINED ENV{${ARGV}})
+		dk_isList("$ENV{${ARGV}}")
+		if(dk_isList)
+			#dk_echo("${cyan}\$ENV{${ARGV}}${white} is a ENV LIST variable ${clr}")
+			dk_pad("${blue} '$ENV{${ARGV}}' ${clr}" " " 3 30 L strA)
+			dk_echo("${cyan}\$ENV{${ARGV}}:list = ${strA}")
+		else()
+			#dk_echo("${cyan}\$ENV{${ARGV}}${white} is a ENV STRING variable${clr}")
+			dk_echo("${cyan}\$ENV{${ARGV}}:string =${blue} '$ENV{${ARGV}}' ${clr}")
+>>>>>>> Development
 		endif()
 	endif()	
 		
 	###### CACHE ######
 	if(DEFINED "CACHE{${ARGV}}")
+<<<<<<< HEAD
 		dk_isList(isList "$CACHE{${ARGV}}")
 		if(isList)
 			#dk_echo("${cyan}\$CACHE{${ARGV}}${white} is a CACHE LIST variable${clr}")
@@ -42,11 +60,21 @@ function(dk_printVar)
 		else()
 			#dk_echo("${cyan}\$CACHE{${ARGV}}${white} is a CACHE STRING variable${clr}")
 			dk_echo("${cyan}\$CACHE{${ARGV}}:string = ${blue}'$CACHE{${ARGV}}'${clr}")
+=======
+		dk_isList("$CACHE{${ARGV}}")
+		if(dk_isList)
+			#dk_echo("${cyan}\$CACHE{${ARGV}}${white} is a CACHE LIST variable${clr}")
+			dk_echo("${cyan}\$CACHE{${ARGV}}:list =${blue} '$CACHE{${ARGV}}' ${clr}")
+		else()
+			#dk_echo("${cyan}\$CACHE{${ARGV}}${white} is a CACHE STRING variable${clr}")
+			dk_echo("${cyan}\$CACHE{${ARGV}}:string =${blue} '$CACHE{${ARGV}}' ${clr}")
+>>>>>>> Development
 		endif()
 	endif()
 		
 	###### LOCAL ######
 	if(DEFINED "${ARGV}")
+<<<<<<< HEAD
 		dk_isList(isList "${ARGV}")
 		if(isList)
 			#dk_echo("${cyan}\${${ARGV}}${white} is a LOCAL LIST variable${clr}")
@@ -54,10 +82,20 @@ function(dk_printVar)
 		else()
 			#dk_echo("${cyan}\${${ARGV}}${white} is a LOCAL STRING variable${clr}")
 			dk_echo("${cyan}\${${ARGV}}:string = ${blue}'${${ARGV}}'${clr}")
+=======
+		dk_isList("${ARGV}")
+		if(dk_isList)
+			#dk_echo("${cyan}\${${ARGV}}${white} is a LOCAL LIST variable${clr}")
+			dk_echo("${cyan}\${${ARGV}}:list =${blue} '${${ARGV}}' ${clr}")
+		else()
+			#dk_echo("${cyan}\${${ARGV}}${white} is a LOCAL STRING variable${clr}")
+			dk_echo("${cyan}\${${ARGV}}:string =${blue} '${${ARGV}}' ${clr}")
+>>>>>>> Development
 		endif()	
 	endif()	
 		
 	###### MACRO ######
+<<<<<<< HEAD
 	dk_isMacro(isMacro "${ARGV}")
 	if(isMacro)
 		dk_echo("${cyan}MACRO:${ARGV}()${white} is a MACRO${clr}")
@@ -68,6 +106,18 @@ function(dk_printVar)
 	if(isFunction)
 		dk_echo("${cyan}FUNC:${ARGV}()${white} is a FUNCTION${clr}")
 	endif()		
+=======
+#	dk_isMacro("${ARGV}")
+#	if(dk_isMacro)
+#		dk_echo("${cyan}MACRO:${ARGV}()${white} is a MACRO${clr}")
+#	endif()
+	
+	###### FUNCTION ######
+#	dk_isFunction("${ARGV}")
+#	if(dk_isFunction)
+#		dk_echo("${cyan}FUNC:${ARGV}()${white} is a FUNCTION${clr}")
+#	endif()		
+>>>>>>> Development
 		
 
 #	if(DEFINED "${${ARGV}}")
@@ -81,7 +131,11 @@ function(dk_printVar)
 #	endif()
 			
 	if((NOT DEFINED "${ARGV}") AND (NOT DEFINED "ENV{${ARGV}}") AND (NOT DEFINED "CACHE{${ARGV}}") AND (NOT isFunction) AND (NOT isMacro))
+<<<<<<< HEAD
 		dk_echo("${cyan}${ARGV}${red} is UNDEFINED${clr}")
+=======
+		dk_echo("${cyan}${ARGV}${red} is UNDEFINED ${clr}")
+>>>>>>> Development
 	endif()
 endfunction()
 
@@ -90,7 +144,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	###### UNDEFINED ######
 	dk_printVar(myUndefined)

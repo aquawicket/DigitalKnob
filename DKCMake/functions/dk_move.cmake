@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_move(from to) OVERWRITE NO_HALT
@@ -15,8 +20,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_move from to) # FLAGS: OVERWRITE, NO_HALT
 	dk_debugFunc()
 	
+<<<<<<< HEAD
 	dk_getOption(OVERWRITE ${ARGV})
 	dk_getOption(NO_HALT ${ARGV})
+=======
+	dk_getOption(OVERWRITE)
+	dk_getOption(NO_HALT)
+>>>>>>> Development
 	
 	dk_info("Moving ${from} to ${to}")
 	if(NOT EXISTS ${from})
@@ -34,17 +44,27 @@ function(dk_move from to) # FLAGS: OVERWRITE, NO_HALT
 	
 	# the base directory of the ${to} path must exist.    
 	dk_dirname(${to} PARENT_DIR)
+<<<<<<< HEAD
 	dk_makeDirectory(${PARENT_DIR})
 	
 	file(RENAME ${from} ${to})
 endfunction()
 #dk_createOsMacros("dk_move")
+=======
+	dk_mkdir(${PARENT_DIR})
+	
+	file(RENAME ${from} ${to})
+endfunction()
+
+
+>>>>>>> Development
 
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
@@ -52,15 +72,33 @@ function(DKTEST)
 	dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
     dk_fileWrite("${DKDOWNLOAD_DIR}/moveMe.file" "dk_move test")
     dk_move("${DKDOWNLOAD_DIR}/moveMe.file" "${DIGITALKNOB_DIR}/iWasMoved.txt" OVERWRITE)
+=======
+	dk_debugFunc(0)
+	
+	dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
+    
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+    dk_fileWrite("$ENV{DKDOWNLOAD_DIR}/moveMe.file" "dk_move test")
+    dk_move("$ENV{DKDOWNLOAD_DIR}/moveMe.file" "$ENV{DIGITALKNOB_DIR}/iWasMoved.txt" OVERWRITE)
+>>>>>>> Development
     
     dk_fileWrite(moveMe.file "dk_move test")
     dk_move(moveMe.file iWasMoved.txt OVERWRITE)
     
+<<<<<<< HEAD
     dk_makeDirectory("${DKDOWNLOAD_DIR}/moveMe")
 #endfunction()
 
     dk_move("${DKDOWNLOAD_DIR}/moveMe" "${DIGITALKNOB_DIR}/iWasMoved" OVERWRITE)
     
     dk_makeDirectory(moveMe)
+=======
+    dk_mkdir("$ENV{DKDOWNLOAD_DIR}/moveMe")
+#endfunction()
+
+    dk_move("$ENV{DKDOWNLOAD_DIR}/moveMe" "$ENV{DIGITALKNOB_DIR}/iWasMoved" OVERWRITE)
+    
+    dk_mkdir(moveMe)
+>>>>>>> Development
     dk_move(moveMe iWasMoved OVERWRITE)
 endfunction()

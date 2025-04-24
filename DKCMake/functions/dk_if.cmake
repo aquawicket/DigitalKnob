@@ -1,13 +1,23 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_if(condition... "code")
 #
 #	@condition  - The input args to be evaluated
+<<<<<<< HEAD
 #	@code	   - The code to run if the condition is true."
+=======
+#	@code	    - The code to run if the condition is true."
+>>>>>>> Development
 #
 macro(dk_if)
 	dk_debugFunc()
@@ -16,8 +26,13 @@ macro(dk_if)
 	unset(argv)
 	list(APPEND argv ${ARGV})
 	
+<<<<<<< HEAD
 	if(CMAKE_VERSION VERSION_GREATER "3.15")
 		list(POP_BACK argv code)	# POP_BACK cmake 3.15.
+=======
+	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
+		list(POP_BACK argv code)
+>>>>>>> Development
 	else()
 		list(LENGTH argv argv_length)
 		math(EXPR argv_last_index "${argv_length} - 1")
@@ -48,6 +63,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	set(TEST_VAR 0)
@@ -57,4 +73,15 @@ function(DKTEST)
 	dk_if(NOT DEFINED TEST_VAR 	"message('TEST_VAR is NOT defined')")
 	dk_if(${TEST_VAR} EQUAL 1 	"message('TEST_VAR is EQUAL to 1')")
 	dk_if(NOT DEFINED ENABLE_dk_debug "set(ENABLE_dk_debug 1 CACHE INTERNAL '')")
+=======
+	dk_debugFunc(0)
+	
+	set(TEST_VAR 0)
+	dk_if(TRUE					"message(\"dk_if(TRUE) = true\")")
+	dk_if(TEST_VAR 				"message(\"TEST_VAR is true\")")
+	dk_if(DEFINED TEST_VAR 		"message(\"TEST_VAR is defined\")")
+	dk_if(NOT DEFINED TEST_VAR 	"message(\"TEST_VAR is NOT defined\")")
+	dk_if(${TEST_VAR} EQUAL 1 	"message(\"TEST_VAR is EQUAL to 1\")")
+	dk_if(NOT DEFINED ENABLE_dk_debug "set(ENABLE_dk_debug 1 CACHE INTERNAL \"\")")
+>>>>>>> Development
 endfunction()

@@ -1,6 +1,14 @@
 @if (@X) == (@Y) @end /*
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::##################################################################################
 ::# dk_pause(pause_msg)
@@ -8,8 +16,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    Pause execution and wait for <enter> keypress to continue
 ::#
 :dk_pause
+<<<<<<< HEAD
  setlocal
     call dk_debugFunc 0 1
+=======
+setlocal
+    %dk_call% dk_debugFunc 0 1
+>>>>>>> Development
     
     if "%~1" equ "" (set "pause_msg=Press any key to continue...") else (set "pause_msg=%~1")
     if "%~1" neq " " %dk_call% dk_echo "%pause_msg%"
@@ -23,9 +36,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
     
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+   
+>>>>>>> Development
     %dk_call% dk_pause
     %dk_call% dk_pause "Pause with a custom message"
     %dk_call% dk_pause "%red%Pause %green%with %blue%colorful %yellow%message%clr%"

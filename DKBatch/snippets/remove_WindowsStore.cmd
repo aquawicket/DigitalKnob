@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 @echo off
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r

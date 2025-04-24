@@ -1,29 +1,51 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
+<<<<<<< HEAD
 include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
+=======
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${CMAKE_SOURCE_DIR}/functions/")
+endif()
+set(ENV{DKSCRIPT_PATH} "${CMAKE_SOURCE_DIR}/CMakeLists.txt")
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+>>>>>>> Development
 include_guard()
 
 ### CMakeLists.txt for DKCMake ###
 ###
+<<<<<<< HEAD
 ### 	source_path = thisDirectory
 ###      build_path = AppDirectory/Platform+Architecture/BuildType
 ###
+=======
+###		source_path = thisDirectory
+###		build_path = AppDirectory/Platform+Architecture/BuildType
+>>>>>>> Development
 ###
 ### *** DKCMake ***
 ### This is the main CMakeLists.txt file for all projects within the code base.
 ### All Apps, Tools, 3rd party libraries, plugins and executables will be build from here.
 ### All dependencies will be downloaded, aquired and built for the project as needed. 
+<<<<<<< HEAD
 ### All DKPlugins and DKApp executables will be included into the Generated solution,
+=======
+### All DKCpp/plugins and DKApp executables will be included into the Generated solution,
+>>>>>>> Development
 ### while any 3rd party libraries will be built prior and referenced externally to the project solution.
 ###
 ### *** DKBuilder ***
 ### A text menu based build app called "DKBuilder" exists to simplify the build process for all DK projects.
 ### And For convienience, there is also a build script provided, build.sh(unix) or build.cmd(windows), that can 
+<<<<<<< HEAD
 ### genrate and build any of the initial apps included in the DKApps directory, including the DKBuilder app itself.
+=======
+### genrate and build any of the initial apps included in the DKCpp/apps directory, including the DKBuilder app itself.
+>>>>>>> Development
 ### This is the method that is encourcaged for getting started on generating and compiling DigitalKnob applications.
 ###
 ### *** building from the command line **
 ### DKCmake works a bit differenct than traditional CMake in that this CMakeFile.txt location is always used as the source directory.
 ### The app, platform and architecture are chosen by where the build directory is set to. For examples: say we want to build an app
+<<<<<<< HEAD
 ### in the DKApps directory called "MyApp" for linux x32_86 Debug.  The cmake source directory will be set here, /Users/username/digitalknob/Development ,
 ### and the build directy will be set to /Users/username/digitalknob/Development/DKApps/MyApp/linux_x86_64/Debug. The set build directoy tells DKCMake everything 
 ### it needs to know to begine to process, acuire all dependencies and build the project. 
@@ -33,6 +55,17 @@ include_guard()
 ### Example 3: 
 ### 	cd /Users/username/digitalknob/Development/DKApps/DKTestAll/linux_x86_64/Release
 ###     cmake -G "Unix Makefiles" /Users/username/digitalknob/Development
+=======
+### in the DKCpp/apps directory called "MyApp" for linux x32_86 Debug.  The cmake source directory will be set here, /Users/username/digitalknob/Development ,
+### and the build directy will be set to /Users/username/digitalknob/Development/DKCpp/apps/MyApp/linux_x86_64/Debug. The set build directoy tells DKCMake everything 
+### it needs to know to begine to process, acuire all dependencies and build the project. 
+###
+### Example 2:  cmake -G "Visual Studio 17 2022" -A x64 -B C:/Users/username/digitalknob/Development/DKCpp/apps/DKBuilder/win_x86_64 -S C:/Users/username/digitalknob/Development
+###
+### Example 3: 
+###		cd /Users/username/digitalknob/Development/DKCpp/apps/DKTestAll/linux_x86_64/Release
+###		cmake -G "Unix Makefiles" /Users/username/digitalknob/Development
+>>>>>>> Development
 ###
 ###
 ### TODO: DKCMake options and variables 
@@ -54,6 +87,7 @@ message("##############################################################")
 
 
 dk_load(dk_dumpAllVariables)
+<<<<<<< HEAD
 
 		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
@@ -74,3 +108,18 @@ PROJECT(DigitalKnob)
 dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
 
 		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)
+=======
+		dk_dumpAllVariables("${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp")
+
+#Load all cmake flags prior to calling PROJECT()
+dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake")
+dk_load("$ENV{DKCMAKE_DIR}/DKBuildFlags.cmake")
+		dk_dumpAllVariables("${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp")
+
+message("################# PROJECT(DigitalKnob) #################")
+PROJECT(DigitalKnob)
+		dk_dumpAllVariables("${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp")
+
+dk_load("$ENV{DKCMAKE_DIR}/DKGenerate.cmake")
+		dk_dumpAllVariables("${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp")
+>>>>>>> Development

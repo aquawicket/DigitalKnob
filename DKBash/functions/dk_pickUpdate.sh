@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 
 ##################################################################################
@@ -17,7 +22,11 @@ dk_pickUpdate() {
 
 	if [ $behind -lt 1 ]; then
 		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
+<<<<<<< HEAD
 			dk_call dk_echo " 0) Repeat cache [$_APP_ - $_triple_ - $_TYPE_]"
+=======
+			dk_call dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_triple_ - $_TYPE_]"
+>>>>>>> Development
 		fi
 		dk_call dk_echo " 1) Git Update"   
 				dk_echo " 2) Git Commit"
@@ -27,9 +36,17 @@ dk_pickUpdate() {
 				dk_echo " 6) Reset All"
 				dk_echo " 7) Remove All"
 				dk_echo " 8) Clear Screen"
+<<<<<<< HEAD
 				dk_echo " 9) Clear cmake cache and .tmp files"
 				dk_echo "10) Reload"
 				dk_echo "11) Exit"
+=======
+				dk_echo " 9) Reload"
+				dk_echo "10) Exit"
+				dk_call dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
+				[ -e "${DKBRANCH_DIR}/build_list.txt" ] && dk_echo "11) Run 'build_list.txt'"
+	
+>>>>>>> Development
 				dk_echo
 				dk_echo " Press Enter To Skip"
 	else
@@ -37,7 +54,11 @@ dk_pickUpdate() {
 		dk_call dk_echo
 		dk_echo "${red}" 
 		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
+<<<<<<< HEAD
 			dk_echo " 0) Repeat cache [${_APP_} - ${_triple_} - ${_TYPE_}]"
+=======
+			dk_echo " 0) Repeat DKBuilder.cache [${_APP_} - ${_triple_} - ${_TYPE_}]"
+>>>>>>> Development
 		fi
 		dk_echo "${green}"
 		dk_echo " 1) Git Update"
@@ -49,9 +70,14 @@ dk_pickUpdate() {
 		dk_echo " 6) Reset All"
 		dk_echo " 7) Remove All"
 		dk_echo " 8) Clear Screen"
+<<<<<<< HEAD
 		dk_echo " 9) Clear cmake cache and .tmp files"
 		dk_echo "10) Reload"
 		dk_echo "11) Exit"
+=======
+		dk_echo " 9) Reload"
+		dk_echo "10) Exit"
+>>>>>>> Development
 		dk_echo
 		dk_echo "Press Enter To Skip"
 		dk_echo "${clr}"
@@ -62,9 +88,15 @@ dk_pickUpdate() {
 	
 	if [ "${choice}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
+<<<<<<< HEAD
 		APP=${_APP_}
 		triple=${_triple_}
 		TYPE=${_TYPE_}
+=======
+		target_app=${_APP_}
+		target_triple=${_triple_}
+		target_type=${_TYPE_}
+>>>>>>> Development
 		UPDATE=1
 	elif [ "${choice}" = "1" ]; then
 		dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
@@ -83,12 +115,22 @@ dk_pickUpdate() {
 	elif [ "${choice}" = "8" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "9" ]; then
+<<<<<<< HEAD
 		dk_call dk_clearCmakeCache
 		dk_call dk_deleteTempFiles
 	elif [ "${choice}" = "10" ]; then
 		dk_call dk_reload
 	elif [ "${choice}" = "11" ]; then
 		dk_call dk_exit 0	
+=======
+		dk_call dk_reload
+	elif [ "${choice}" = "10" ]; then
+		dk_call dk_exit 0
+	elif [ "${choice}" = "11" ]; then
+		BUILD_LIST_FILE="${DKBRANCH_DIR}/build_list.txt"
+		UPDATE=1
+		return 1
+>>>>>>> Development
 	elif [ "${choice}" = "" ]; then
 		UPDATE=1
 	else

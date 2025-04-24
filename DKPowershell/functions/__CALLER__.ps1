@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 #if(!$DK_CALLER){ $DK_CALLER = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+#if(!$__CALLER__){ $__CALLER__ = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ##################################################################################
 # __CALLER__(frame)

@@ -1,18 +1,32 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 
 ##################################################################################
 # dk_stacktrace()
 #
 #
+<<<<<<< HEAD
 function(dk_stacktrace)
     dk_debugFunc()
 	if(NOT ${ARGC} EQUAL 0)
 		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 
+=======
+macro(dk_stacktrace)
+    #dk_debugFunc(0)
+
+	message(WARNING)
+
+#[[
+>>>>>>> Development
 	string(TIMESTAMP __TIME__ "%M:%S:%f")
 	string(SUBSTRING "${__TIME__}" 0 10 __TIME__)
 	list(PREPEND CMAKE_TIME ${__TIME__})
@@ -45,6 +59,10 @@ function(dk_stacktrace)
 		dk_echo("${cyan}[${_TIME_}]${indent} ${_FILE_}:${_LINE_}   ${blue}${_FUNCTION_}()")
 		math(EXPR n "${n}+1")
 	endwhile()
+<<<<<<< HEAD
+=======
+]]
+>>>>>>> Development
 
 #	while [ "${i}" -lt "${stack_size}" ]; do
 #		i=$(( i + 1 ))
@@ -84,13 +102,21 @@ function(dk_stacktrace)
 #		echo >&2 [${i}] ${file}:${line} ${func}(): $(sed -n ${line}p ${file})
 #		((i++))
 #	done
+<<<<<<< HEAD
 endfunction()
+=======
+endmacro()
+>>>>>>> Development
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_info("called a function")
 	dk_stacktrace()

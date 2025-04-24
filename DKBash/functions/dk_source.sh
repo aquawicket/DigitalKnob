@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # dk_source(function_name)
@@ -8,6 +13,10 @@
 #
 dk_source(){
 	#(command -v dk_debugFunc &>/dev/null) && dk_debugFunc 1
+<<<<<<< HEAD
+=======
+	#echo "dk_source $*"
+>>>>>>> Development
 
 	# load if it's an existing full path file
 	[ -e ${1} ] && . ${1} && return ${?}

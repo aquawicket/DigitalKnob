@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_libRelease(lib_path)
@@ -35,8 +40,15 @@ function(dk_libRelease lib_path)
 	
 	if(INSTALL_DKLIBS)
 		if(EXISTS ${lib_path})
+<<<<<<< HEAD
 			dk_basename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
 			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${triple}/Release)
+=======
+			#dk_assertVar($ENV{CURRENT_PLUGIN}_IMPORT_NAME)
+			#set(LIB_NAME ${$ENV{CURRENT_PLUGIN}_IMPORT_NAME}) # get the import folder name of the plugin
+			#file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${target_triple}/Release)
+			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${target_triple}/Release)
+>>>>>>> Development
 		endif()
 	endif()
 	
@@ -45,7 +57,11 @@ function(dk_libRelease lib_path)
 	endif()
 	
 endfunction()
+<<<<<<< HEAD
 dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
+=======
+
+>>>>>>> Development
 
 
 
@@ -53,7 +69,13 @@ dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	dk_libRelease(todo) # TODO
+>>>>>>> Development
 endfunction()

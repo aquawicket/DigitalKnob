@@ -1,18 +1,34 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+>>>>>>> Development
 
 ::https://stackoverflow.com/a/11576816
 
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
+<<<<<<< HEAD
 if ":" == "%func:~0,1%" ( goto %func% )
+=======
+if ":" equ "%func:~0,1%" ( goto %func% )
+>>>>>>> Development
 
 if not defined frame (set /a frame=0)
 if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 
 :dk_dumpStack
+<<<<<<< HEAD
     call dk_debugFunc 1 99
  ::setlocal
+=======
+::setlocal
+    %dk_call% dk_debugFunc 1 99
+>>>>>>> Development
 (   
     setlocal DisableDelayedExpansion
     if %frame% neq 0 (goto) 2>nul & (goto) 2>nul
@@ -58,15 +74,26 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
     
     
     echo "%caller%" = "%DKTEST_caller%"
+<<<<<<< HEAD
     if "%caller%"=="%DKTEST_caller%" (echo THEY ARE EQUAL!)
     
     if "%caller%"=="" (
         call dk_debug "CALLER IS EMPTY"
+=======
+    if "%caller%" equ "%DKTEST_caller%" (echo THEY ARE EQUAL!)
+    
+    if "%caller%" equ "" (
+        %dk_call% dk_debug "CALLER IS EMPTY"
+>>>>>>> Development
         setlocal DisableDelayedExpansion
         set /a frame+=1
         call "%~d0\:dk_dumpStack\..%~pnx0" %*
     ) else if "%caller%" neq "%DKTEST_caller%" (
+<<<<<<< HEAD
         call dk_debug "CALLER neq DKTEST AND CALLER neq CALLERFUNC"
+=======
+        %dk_call% dk_debug "CALLER neq DKTEST AND CALLER neq CALLERFUNC"
+>>>>>>> Development
         setlocal DisableDelayedExpansion
         set /a frame+=1
         call "%~d0\:dk_dumpStack\..%~pnx0" %*
@@ -85,15 +112,27 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 %endfunction%
 
 :call_return
+<<<<<<< HEAD
 	::call dk_dkebugFunc 0
  ::setlocal	
+=======
+::setlocal
+	::call dk_dkebugFunc 0
+
+>>>>>>> Development
  
     call :dk_dumpStackReturn
 %endfunction%
 
 :dk_dumpStackReturn
+<<<<<<< HEAD
 	::call dk_dkebugFunc 0
  ::setlocal	
+=======
+::setlocal
+	::call dk_dkebugFunc 0
+	
+>>>>>>> Development
  
     endlocal
     %caller[1].fullpath% %caller[1].args%
@@ -105,8 +144,14 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  ::setlocal
+=======
+::setlocal
+    %dk_call% dk_debugFunc 0
+
+>>>>>>> Development
  
     call :DKTEST_main
     %endfunction%

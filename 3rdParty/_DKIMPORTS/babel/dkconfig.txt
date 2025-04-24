@@ -1,0 +1,1 @@
+BABEL_IMPORT=https://unpkg.com/@babel/standalone@7.14.4/babel.min.js

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/bin/sh
+=======
+#!/usr/bin/env sh
+>>>>>>> Development
 
 # https://stackoverflow.com/a/4017175
 

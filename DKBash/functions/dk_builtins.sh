@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 # this overwrites the echo command with our own, and call the built-in.
 # https://unix.stackexchange.com/a/241060

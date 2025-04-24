@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
@@ -35,6 +36,24 @@ function(dk_clearCmakeCache)
 	
 	#execute_process(COMMAND cmd /c for /r %i in (CMakeCache.*) do del "%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
     #execute_process(COMMAND cmd /c for /d /r %i in (*CMakeFiles*) do rd /s /q "%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+
+##################################################################################
+# dk_clearCmakeCache(path)
+#
+#   Clear the cmake cache files recursivley for the given directory
+#
+function(dk_clearCmakeCache)
+	dk_debugFunc(1)
+	
+    dk_info("Deleting CMake cache files in ${ARGV0}")
+
+	dk_delete("${ARGV0}/CMakeFiles")
+	dk_delete("${ARGV0}/CMakeCache.txt")
+	dk_delete("${ARGV0}/cmake_install.cmake")
+>>>>>>> Development
 endfunction()
 
 
@@ -51,7 +70,13 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_clearCmakeCache()
+=======
+	dk_debugFunc(0)
+	
+	dk_clearCmakeCache("C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/win_x86_64_clang/Debug")
+>>>>>>> Development
 endfunction()

@@ -1,12 +1,24 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+=======
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	file(TO_CMAKE_PATH "$ENV{USERPROFILE}$ENV{HOME}/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+>>>>>>> Development
 include_guard()
 
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
+<<<<<<< HEAD
 # Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+# Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files(the "Software"), to deal
@@ -86,12 +98,33 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 endif()
 
 
+<<<<<<< HEAD
+=======
+if(DEFINED "ENV{COSMOPOLITAN}")
+	dk_set(COSMOPOLITAN "$ENV{COSMOPOLITAN}")
+	dk_set(cosmopolitan "cosmopolitan")
+endif()
+if(COSMOPOLITAN)
+	message(COSMOPOLITAN)
+	#dk_set(CMAKE_HOST_SYSTEM_NAME "COSMOPOLITAN")
+	#dk_set(CMAKE_HOST_UNIX 1)
+	#dk_unset(CMAKE_HOST_WIN32)
+	#dk_unset(CMAKE_HOST_APPLE)
+	#dk_unset(WIN32)
+endif()
+
+
+>>>>>>> Development
 ###### Set MSYSTEM and ${MSYSTEM} variables ######
 if(DEFINED "ENV{MSYSTEM}")
 	dk_set(MSYSTEM "$ENV{MSYSTEM}")		
 endif()
 if(MSYSTEM)
 	dk_set(${MSYSTEM} TRUE)
+<<<<<<< HEAD
+=======
+	message(MSYSTEM)
+>>>>>>> Development
 endif()
 
 
@@ -104,15 +137,25 @@ dk_validate(CONFIG_PATH   "dk_CONFIG_PATH()")
 ###############################################################
 ## Set variables for paths
 ###############################################################
+<<<<<<< HEAD
 dk_validate(DIGITALKNOB_DIR  "dk_DIGITALKNOB_DIR()")
 
 dk_cd(${DIGITALKNOB_DIR})
+=======
+dk_validate(ENV{DIGITALKNOB_DIR}  "dk_DIGITALKNOB_DIR()")
+
+dk_chdir($ENV{DIGITALKNOB_DIR})
+>>>>>>> Development
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
 
 ### Install DKBIN binary directory ###
 if(INSTALL_DKLIBS)
+<<<<<<< HEAD
 	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB_DIR}/DKBIN)
+=======
+	dk_set(CMAKE_INSTALL_PREFIX $ENV{DIGITALKNOB_DIR}/DKBIN)
+>>>>>>> Development
 endif()
 
 
@@ -169,6 +212,16 @@ elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 	dk_set(GNU 1)
 	message(GNU)
 	
+<<<<<<< HEAD
+=======
+elseif(CMAKE_GENERATOR STREQUAL "NMake Makefiles")
+	if(MSVC)
+		dk_fatal("MSVC was allready set")
+	endif()
+	dk_set(MSVC 1)
+	message(MSVC)
+
+>>>>>>> Development
 else()
 	dk_fatal("Could not determin Environment Variable")
 endif()
@@ -183,7 +236,11 @@ if(error)
 	dk_printVar(XCODE)
 
 	dk_error("Either not enough, or too many compiler Flags are set")
+<<<<<<< HEAD
 	dk_notice("FIXME: COSMO causes both GNU and MINGW flags to be set. we will let this error pass for now.")
+=======
+	dk_notice("FIXME: COSMOPOLITAN causes both GNU and MINGW flags to be set. we will let this error pass for now.")
+>>>>>>> Development
 endif()
 
 ###########################################################################
@@ -231,7 +288,11 @@ endif()
 
 
 ########### Determine if we are building a DKApp, DKPlugin or 3rdParty #############
+<<<<<<< HEAD
 #if(CMAKE_BINARY_DIR MATCHES "/DKApps/")
+=======
+#if(CMAKE_BINARY_DIR MATCHES "/DKCpp/apps/")
+>>>>>>> Development
 #	dk_info("Building DKApp . . .")
 #	dk_set(DKAPP 1)
 #	add_definitions(-DDKAPP)
@@ -280,12 +341,15 @@ if(CMAKE_HOST_SYSTEM_VERSION)
 	endif()
 endif()
 
+<<<<<<< HEAD
 ### Display OS info to user ###
 dk_info("")
 dk_info("")
 dk_info("*** Creating ${triple} Project Files ***")
 dk_info("")
 
+=======
+>>>>>>> Development
 
 ### Set CMAKE_SKIP_RPATH ###
 dk_set(CMAKE_SKIP_RPATH 1)
@@ -300,8 +364,14 @@ endif()
 
 
 if(NOT CMAKE_SCRIPT_MODE_FILE)
+<<<<<<< HEAD
 	if(NOT triple)
 		#dk_printVar(CMAKE_BINARY_DIR)	
 		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
+=======
+	if(NOT target_triple)
+		dk_printVar(CMAKE_BINARY_DIR)	
+		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are cosmopolitan,android_arm32,android_arm64,android_x86,android_x86_64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKCpp/apps/MyApp/win_x86")
+>>>>>>> Development
 	endif()
 endif()

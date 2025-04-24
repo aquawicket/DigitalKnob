@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 
 ##################################################################################
@@ -36,7 +41,11 @@ dk_move() {
 	# the base directory of the ${_to_} path must exist.    
 	_parent_dir_=$(dk_call dk_dirname "${_to_}")
 	dk_call dk_printVar _parent_dir_
+<<<<<<< HEAD
 	dk_call dk_makeDirectory "${_parent_dir_}"
+=======
+	dk_call dk_mkdir "${_parent_dir_}"
+>>>>>>> Development
 	
 	mv "${_from_}" "${_to_}"
 }
@@ -54,9 +63,16 @@ DKTEST(){
 	echo "dk_move test" > moveMe.file
 	dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
+<<<<<<< HEAD
 	dk_makeDirectory ${DKDOWNLOAD_DIR}/moveMe
 	dk_move ${DKDOWNLOAD_DIR}/moveMe ${DIGITALKNOB_DIR}/iWasMoved OVERWRITE
 	
 	dk_makeDirectory moveMe
+=======
+	dk_mkdir ${DKDOWNLOAD_DIR}/moveMe
+	dk_move ${DKDOWNLOAD_DIR}/moveMe ${DIGITALKNOB_DIR}/iWasMoved OVERWRITE
+	
+	dk_mkdir moveMe
+>>>>>>> Development
 	dk_move moveMe iWasMoved OVERWRITE
 }

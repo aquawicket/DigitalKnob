@@ -1,7 +1,11 @@
 // supressed entries will not be logged.
 var supress = ["mousemove", "mouseover", "mouseout", "mouseleave"];
 
+<<<<<<< HEAD
 function DKEventMonitor() {
+=======
+DKEventMonitor = function DKEventMonitor_j(){
+>>>>>>> Development
 	document.addEventListener("DOMContentLoaded", function(event){ DKEventMonitor.prototype.debugEvent(event, document); });
 }
 
@@ -103,7 +107,11 @@ DKEventMonitor.prototype.monitorEvents = function DKEventMonitor_monitorEvents(o
 	obj.addEventListener("rejectionhandled", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });
 	obj.addEventListener("storage", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });
 	obj.addEventListener("unhandledrejection", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });
+<<<<<<< HEAD
 	obj.addEventListener("unload", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });
+=======
+	//obj.addEventListener("unload", function(event){ DKEventMonitor.prototype.debugEvent(event, obj) });	//deprecated
+>>>>>>> Development
 }
 
 DKEventMonitor.prototype.supressed = function DKEventMonitor_supressed(str){
@@ -118,3 +126,29 @@ DKEventMonitor.prototype.debugEvent = function DKEventMonitor_debugEvent(event, 
 	dkconsole.log(str);
 	//document.title = str;
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST = function DKTEST_f(){
+	//dk_debugFunc(0);
+	
+	dk_source(DKJAVASCRIPT_DIR+"/functions/DKHtmlConsole.js", function(){
+		dkconsole = new DKHtmlConsole;
+		dkconsole.create("","0px","0px","0px","","25%");
+		dk_source(DKJAVASCRIPT_DIR+"/functions/DKEventMonitor.js", function(){
+			eventmonitor = new DKEventMonitor;
+			eventmonitor.monitorEvents(window);
+			eventmonitor.monitorEvents(document);
+			eventmonitor.monitorEvents(document.body);
+		});
+	});	
+}
+>>>>>>> Development

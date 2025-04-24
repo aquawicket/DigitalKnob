@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # __ARGV__(<frame>)
@@ -19,6 +24,10 @@ __ARGV__() {
 	for (( i=$begin; i>((begin-argc)); i-- )); do
 		argv+=(${BASH_ARGV[${i}]-})
 	done
+<<<<<<< HEAD
+=======
+	[ ${argc} = 0 ] && return
+>>>>>>> Development
 	
 	local argv_string=${argv[@]}
 	dk_return "${argv_string}"; return

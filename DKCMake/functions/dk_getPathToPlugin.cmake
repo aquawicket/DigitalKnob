@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 
 ###############################################################################
@@ -18,6 +23,7 @@ function(dk_getPathToPlugin plugin rtn_var)
 		return()
 	endif()
 
+<<<<<<< HEAD
 	#file(GLOB children RELATIVE ${DIGITALKNOB_DIR} ${DIGITALKNOB_DIR}/*)
  	#foreach(child ${children})
 		#dk_printVar(child)
@@ -38,6 +44,28 @@ function(dk_getPathToPlugin plugin rtn_var)
 		dk_validate(DKPLUGINS_DIR "dk_DKPLUGINS_DIR()")
 		if(EXISTS ${DKPLUGINS_DIR}/${plugin}/DKMAKE.cmake)
 			set(${rtn_var} "${DKPLUGINS_DIR}/${plugin}" PARENT_SCOPE)
+=======
+	#file(GLOB children RELATIVE $ENV{DIGITALKNOB_DIR} $ENV{DIGITALKNOB_DIR}/*)
+ 	#foreach(child ${children})
+		#dk_printVar(child)
+		#if(EXISTS $ENV{DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${plugin}/DKINSTALL.cmake)
+		#	set(${rtn_var} "$ENV{DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${plugin}" PARENT_SCOPE)
+		#	return()
+    	#endif()
+		#dk_debug($ENV{DKIMPORTS_DIR}/${plugin}/DKINSTALL.cmake)
+		dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+		if(EXISTS $ENV{DKIMPORTS_DIR}/${plugin}/DKINSTALL.cmake)
+			set(${rtn_var} "$ENV{DKIMPORTS_DIR}/${plugin}" PARENT_SCOPE)
+			return()
+    	endif()
+		#if(EXISTS $ENV{DIGITALKNOB_DIR}/${child}/plugins/${plugin}/DKINSTALL.cmake)
+		#	set(${rtn_var} "$ENV{DIGITALKNOB_DIR}/${child}/plugins/${plugin}" PARENT_SCOPE)
+		#	return()
+    	#endif()
+		dk_validate(DKCPP_PLUGINS_DIR "dk_DKBRANCH_DIR()")
+		if(EXISTS ${DKCPP_PLUGINS_DIR}/${plugin}/DKINSTALL.cmake)
+			set(${rtn_var} "${DKCPP_PLUGINS_DIR}/${plugin}" PARENT_SCOPE)
+>>>>>>> Development
 			return()
     	endif()
   	#endforeach()
@@ -52,7 +80,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_todo()
 endfunction()

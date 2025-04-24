@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_commandExists()
@@ -20,8 +25,13 @@ function(dk_commandExists shell commandName rtn_var)
 	## Test for command in CMD
 	elseif("${shell}" STREQUAL "CMD")
 		dk_depend(cmd)
+<<<<<<< HEAD
 		dk_validate(DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
 		execute_process(COMMAND ${CMD_EXE} /c call "${DKBATCH_FUNCTIONS_DIR}/dk_commandExists.cmd" ${commandName} result & echo !result! OUTPUT_VARIABLE output)
+=======
+		dk_validate(ENV{DKBATCH_FUNCTIONS_DIR} "dk_DKBRANCH_DIR()")
+		execute_process(COMMAND ${CMD_EXE} /c call "$ENV{DKBATCH_FUNCTIONS_DIR}/dk_commandExists.cmd" ${commandName} result & echo !result! OUTPUT_VARIABLE output)
+>>>>>>> Development
 		set(${rtn_var} ${output} PARENT_SCOPE)
 		#dk_printVar(output)
 		return()
@@ -51,7 +61,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_commandExists(CMAKE "echo" cmake_echo)
 	if(cmake_echo)

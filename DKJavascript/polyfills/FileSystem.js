@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 (function(fs) {
+=======
+(function(fs){
+>>>>>>> Development
 	if(typeof WScript === "object"){
 		var FileSystem = function(){ return new ActiveXObject("Scripting.FileSystemObject"); }
 		globalThis.FileSystem = FileSystem

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/bin/sh
+=======
+#!/usr/bin/env sh
+>>>>>>> Development
 
 ###### Load Function files ######
 . ../functions/DK

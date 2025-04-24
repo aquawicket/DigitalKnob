@@ -1,10 +1,18 @@
 @echo off
+<<<<<<< HEAD
 call ..\functions\DK.cmd
+=======
+call ../functions/DK.cmd
+>>>>>>> Development
 
 ::echo func = %func%
 ::echo args = %*
 ::for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
+<<<<<<< HEAD
 ::if ":" == "%func:~0,1%" ( goto %func% )
+=======
+::if ":" equ "%func:~0,1%" ( goto %func% )
+>>>>>>> Development
 
 
 
@@ -21,7 +29,11 @@ call ..\functions\DK.cmd
 	echo %testB%
 	
 	:: MACRO
+<<<<<<< HEAD
 	setlocal enableDelayedExpansion
+=======
+setlocal enableDelayedExpansion
+>>>>>>> Development
 	set Macro=&(%\n%
 		%dk_call% dk_echo "Macro()" %\n%
 	)
@@ -29,7 +41,11 @@ call ..\functions\DK.cmd
 	%Macro%
 	
 	:: MACRO One Argument
+<<<<<<< HEAD
 	setlocal enableDelayedExpansion
+=======
+setlocal enableDelayedExpansion
+>>>>>>> Development
 	set MacroWithOneArg=for %%# in (1 2) do if %%#==2 ( for /f "tokens=1-2" %%1 in ("^!args^!") do (%\n%
 		%dk_call% dk_echo "MacroWithOneArg(%%~1)" %\n%
 		echo ARG1 = %%~1 %\n%
@@ -39,7 +55,11 @@ call ..\functions\DK.cmd
 	
 	
 	:: MACRO Two Arguments
+<<<<<<< HEAD
 	setlocal enableDelayedExpansion
+=======
+setlocal enableDelayedExpansion
+>>>>>>> Development
 	set MacroWithArgs=for %%# in (1 2) do if %%#==2 ( for /f "tokens=1-2" %%1 in ("^!args^!") do (%\n%
 		%dk_call% dk_echo "MacroWithArgs(%%~1, %%~2)" %\n%
 		echo ARG1 = %%~1 %\n%
@@ -105,7 +125,11 @@ call ..\functions\DK.cmd
 	echo 1 = %1
 	set "cmnd_out="
 	::echo 2 = %2
+<<<<<<< HEAD
 	::for /f "usebackq tokens=*" %%a in (`%1`) do set "%2=%%a"
+=======
+	::for /f "usebackq tokens=*" %%a in (`%1`) do set "%~2=%%a"
+>>>>>>> Development
 	for /f "usebackq tokens=*" %%a in (`%1`) do set "cmnd_out=%%a"
 %endfunction%
 

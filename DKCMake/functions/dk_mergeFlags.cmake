@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_mergeFlags(args rtn_var)
@@ -13,7 +18,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_mergeFlags args rtn_var)
 	dk_debugFunc()
 	
+<<<<<<< HEAD
 	#dk_debug("BEFORE: dk_mergeFlags(${ARGV})")
+=======
+>>>>>>> Development
 	set(args ${args} ${rtn_var} ${ARGN})
 	list(GET args -1 rtn_var)
 	list(REMOVE_AT args -1)
@@ -62,7 +70,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_todo()
 endfunction()

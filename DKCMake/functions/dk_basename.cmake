@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 
 ##################################################################################
@@ -8,6 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_basename path rtn_var)
+<<<<<<< HEAD
 	dk_debugFunc()
 	if(NOT ${ARGC} EQUAL 2)
 		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
@@ -17,14 +23,41 @@ function(dk_basename path rtn_var)
 	#dk_printVar(basename)
 	set(${rtn_var} ${basename} PARENT_SCOPE)
 	#dk_printVar(rtn_var)
+=======
+	dk_debugFunc(2)
+	
+	#dk_getArg(0 path)
+	#dk_getArg(1 rtn_var)
+	
+	get_filename_component(fullpath ${path} ABSOLUTE)
+	get_filename_component(basename "${fullpath}" NAME)
+	set(${rtn_var} ${basename} PARENT_SCOPE)
+>>>>>>> Development
 endfunction()
 
 
 
+<<<<<<< HEAD
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 	dk_debugFunc()
 	
 	
 	dk_basename("/path/to/a/filename.txt" basename)
 	dk_info("basename of /path/to/a/filename.txt = ${basename}")
+=======
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST) 
+	dk_debugFunc(0)
+	
+	dk_basename("/path/to/a/filename.txt" basename)
+	dk_info("basename of /path/to/a/filename.txt = ${basename}")
+	
+	dk_basename("C:/Windows/System32" basename)
+	dk_info("basename of C:/Windows/System32 = ${basename}")
+	
+	dk_basename("C:/Windows/System32/" basename)
+	dk_info("basename of C:/Windows/System32/ = ${basename}")
+>>>>>>> Development
 endfunction()

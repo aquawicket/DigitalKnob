@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_make(path lib)
@@ -14,13 +19,22 @@ function(dk_make path) #lib
 	dk_debugFunc()
 	
 	dk_assertPath(${path})
+<<<<<<< HEAD
+=======
+	
+	dk_depend(make)
+>>>>>>> Development
 	dk_printVar(CMAKE_MAKE_PROGRAM)
 	
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(EMSCRIPTEN)
 		dk_fatal("No proper dk_make() implemented for emscripten" NO_HALT)
 		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
+<<<<<<< HEAD
 		dk_cd(${path}/${CONFIG_PATH})
+=======
+		dk_chdir(${path}/${CONFIG_PATH})
+>>>>>>> Development
 		
 		if(${ARGC} GREATER 1)
 			dk_queueCommand(${EMMAKE} ${CMAKE_MAKE_PROGRAM} ${lib})
@@ -32,11 +46,16 @@ function(dk_make path) #lib
 		#RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
 	else()
 		set(lib ${ARGV1})
+<<<<<<< HEAD
 		#dk_cd(${path}/${CONFIG_PATH})
 		#dk_validate(CMAKE_MAKE_PROGRAM "dk_depend(make)")
 		
 		dk_assertVar(CMAKE_MAKE_PROGRAM)
 		dk_printVar(CMAKE_MAKE_PROGRAM)
+=======
+		#dk_chdir(${path}/${CONFIG_PATH})
+		
+>>>>>>> Development
 		if(XCODE)
 			if(${ARGC} GREATER 1)
 				dk_queueCommand(make ${lib})
@@ -71,7 +90,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_make()
 endfunction()

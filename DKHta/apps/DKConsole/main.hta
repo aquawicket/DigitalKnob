@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<HTA:APPLICATION
+	   APPLICATIONNAME="Load HTA"
+	   BORDER="thin"
+	   BORDERSTYLE="normal"
+	   CAPTION="yes"
+	   CONTEXTMENU="yes"
+	   ICON="favicon.ico"
+	   ID="oHTA"
+	   INNERBORDER="no"
+	   MAXIMIZEBUTTON="yes"
+	   MINIMIZEBUTTON="yes"
+	   NAVIGABLE="yes"
+	   SCROLL="yes"
+	   SCROLLFLAT="no"
+	   SELECTION="yes"
+	   SHOWINTASKBAR="yes"
+	   SINGLEINSTANCE="yes"
+	   SYSMENU="yes"
+	   VERSION="1.0"
+	   WINDOWSTATE="normal"
+	/>
+	<head>
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Expires" content="0" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="x-ua-compatible" content="ie=9">
+		<meta name="referrer" content="no-referrer"></meta>
+		
+		<link rel="shortcut icon" id="favicon.ico" href="favicon.ico"></link>
+		<title>DKHta</title>
+		<script type="text/javascript">
+			document.title = "DKHta - "+location.href;
+			location.href = "../../../DKHtml/apps/DKConsole/index.html";
+		</script>
+	</head>
+	<body>
+	<script type="text/javascript">
+	function window.onload(){
+		oHTAString =
+            "border           = " + oHTA.border          + "\n" +
+            "borderStyle      = " + oHTA.borderStyle     + "\n" + 
+            "caption          = " + oHTA.caption         + "\n" +
+            "commandLine      = " + oHTA.commandLine     + "\n" +
+            "icon             = " + oHTA.icon            + "\n" +
+            "maximizeButton   = " + oHTA.maximizeButton  + "\n" +
+            "minimizeButton   = " + oHTA.minimizeButton  + "\n" + 
+            "showInTaskBar    = " + oHTA.showInTaskbar   + "\n" +
+            "singleInstance   = " + oHTA.singleInstance  + "\n" +  
+            "sysMenu          = " + oHTA.sysMenu         + "\n" + 
+            "version          = " + oHTA.version         + "\n" + 
+            "windowState      = " + oHTA.windowState     + "\n" ;
+		console.log(oHTAString)      
+	}
+	</script>
+	</body>
+</html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
@@ -15,6 +16,14 @@ if not defined DKSTACK[0].__FUNCTION__ set "DKSTACK[0].__FUNCTION__=DK"
 if not defined DKSTACK[0].__ARGS__     set "DKSTACK[0].__ARGS__= "
 if not defined DKSTACK_length          set /a "DKSTACK_length=1"
 if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+>>>>>>> Development
 ::################################################################################
 ::# dk_debugFunc()
 ::#
@@ -48,6 +57,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::#   <TIMESTAMP>
 ::#   
 :dk_debugFunc
+<<<<<<< HEAD
     ::if "%~3" neq "" call dk_error "dk_debugFunc: too many arguments (%*)"
  ::setlocal
 
@@ -132,14 +142,34 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
     echo %indent%%cyan%%basename%:%__LINE__%    %blue%%__FUNCTION__%:%__ARGS__%%clr%
     ::echo %indent%%blue%%__FUNCTION__%%clr%
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  
+=======
+setlocal enableDelayedExpansion	
+	
+	if "%__FUNC__%" equ "dk_debugFunc" %endfunction%
+	if not defined __FUNC__ (%endfunction%)
+	
+    :: ###### VALIDATE ARGUMENTS ######
+    if "%~1" equ ""													(%dk_call% dk_fatal "%FUNC%(%ARGV%): dk_debugFunc ArgsMin ArgsMax is not set.")
+    if not "%~1" equ ""	if defined __ARGC__ if %__ARGC__% lss %~1	(%dk_call% dk_fatal "%FUNC%(%ARGV%): not enough arguments. Minimum is %~1, got %__ARGC__%")
+    if "%~2" equ ""		if defined __ARGC__ if %__ARGC__% gtr %~1	(%dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~1, got %__ARGC__%")
+    if not "%~2" equ ""	if defined __ARGC__ if %__ARGC__% gtr %~2	(%dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~2, got %__ARGC__%")
+
+>>>>>>> Development
 %endfunction%
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
 	:::::::::::::::::::::::::
+=======
+setlocal enableDelayedExpansion	
+
+    %dk_call% dk_debugFunc 0
+
+>>>>>>> Development
 %endfunction%
 

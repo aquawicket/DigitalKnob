@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
@@ -31,6 +32,31 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if %dk_stacktrace_count% GEQ 0 goto dk_stacktrace_Loop
     
     echo done
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+::####################################################################
+::# dk_stacktrace()
+::#
+:dk_stacktrace
+setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 0
+	
+	echo:
+	echo ############ CALLSTACK ############
+	for /l %%x in (0, 1, 100) do (
+		(set /a num=100-%%x)
+		(set /a numb=99-%%x)
+		if defined __STACK__!num! (
+			call echo !num!: %%__STACK__!num!%%
+		)
+	)
+	echo:
+>>>>>>> Development
 %endfunction%
 
 
@@ -38,6 +64,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 
+<<<<<<< HEAD
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
@@ -75,3 +102,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     pause
     %dk_call% dk_stacktrace
 %endfunction%
+=======
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+setlocal
+	%dk_call% dk_debugFunc 0
+	
+	%dk_call% dk_stacktrace
+%endfunction%
+>>>>>>> Development

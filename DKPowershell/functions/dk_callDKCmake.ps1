@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_callDKCmake){ $dk_callDKCmake = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_callDKCmake){ $dk_callDKCmake = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ##################################################################################
 # dk_callDKCmake(func) args

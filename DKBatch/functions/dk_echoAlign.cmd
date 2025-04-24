@@ -1,16 +1,31 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::##################################################################################
 ::# dk_echoAlign(align text)
 ::#
 ::#
 :dk_echoAlign
+<<<<<<< HEAD
     call dk_debugFunc 2
  setlocal enabledelayedexpansion  
     
     if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     
+=======
+setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 2  
+
+    if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
+>>>>>>> Development
     (set^ tmp=%~2)
     if defined tmp (
         set "len=1"
@@ -21,12 +36,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
             )
             if "!DE!" neq "" if "%tmp:~%%p,1%" neq "" (
                 set /a "len+=%%p"
+<<<<<<< HEAD
                 call set "tmp=%%tmp:~%%p%%" &:: FIXME: remove the need for call here
             )
         )
     ) else (
         set len=0
     )
+=======
+                call set "tmp=%%tmp:~%%p%%" &rem FIXME: remove the need for call here
+            )
+        )
+    ) else (
+	    set len=0
+	)
+>>>>>>> Development
 
     for /f "skip=4 tokens=2 delims=:" %%i in ('mode con') do (
         set /a cols=%%i
@@ -54,13 +78,23 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
     %dk_call% dk_echoAlign center "centered text"
     %dk_call% dk_echoAlign right "right aligned text"
     %dk_call% dk_echo "text on the left side"
     set "prep_text="
+<<<<<<< HEAD
+=======
+
+>>>>>>> Development
     for /l %%Z in (1 1 7) do (
         if "!DE!" equ "" set "prep_text=!prep_text!aR"
         if "!DE!" equ "" %dk_call% dk_echoAlign center "!prep_text!"

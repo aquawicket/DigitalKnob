@@ -1,6 +1,21 @@
 #!/usr/bin/cmake -P
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
+<<<<<<< HEAD
 include_guard()		# include_guard
+=======
+include_guard()
+
+set(DK.cmake  ${CMAKE_PARENT_LIST_FILE} CACHE INTERNAL "")
+set(ENV{DK.cmake} ${DK.cmake})
+message("ENV{DKSCRIPT_PATH} = $ENV{DKSCRIPT_PATH}")
+if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
+	file(TO_CMAKE_PATH "$ENV{DKSCRIPT_PATH}" DKSCRIPT_PATH)
+endif()
+if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
+	set(ENV{DKSCRIPT_PATH} "${CMAKE_PARENT_LIST_FILE}")
+endif()
+#set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
+>>>>>>> Development
 
 ### Print Version Info ###
 message("")
@@ -9,6 +24,7 @@ set(DKSHELL_VERSION ${CMAKE_VERSION})
 set(DKSHELL_PATH ${CMAKE_COMMAND})
 string(ASCII 27 ESC)
 message("${ESC}[46m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m")
+<<<<<<< HEAD
 message("  ${DKSHELL_PATH}")
 message("")
 
@@ -25,18 +41,51 @@ cmake_policy(SET CMP0126 NEW)   # https://cmake.org/cmake/help/latest/policy/CMP
 endif()
 
 # Note: Using DK() as the function name will cause DK/DKMAKE.cmake to fail in dk_load.cmake
+=======
+message("DKSHELL_PATH = ${DKSHELL_PATH}")
+message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
+message("")
+
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	message("setting DKCMAKE_FUNCTIONS_DIR_")
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR ${CMAKE_CURRENT_LIST_DIR} REALPATH)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR} "${DKCMAKE_FUNCTIONS_DIR}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+		message(FATAL_ERROR "ENV{DKCMAKE_FUNCTIONS_DIR_}:$ENV{DKCMAKE_FUNCTIONS_DIR_} does not exist")
+	endif()
+else()
+	message("ENV{DKCMAKE_FUNCTIONS_DIR_}:'$ENV{DKCMAKE_FUNCTIONS_DIR_}' already exists")
+endif()
+
+message("CMAKE_GENERATOR = ${CMAKE_GENERATOR}")
+
+
+############ dk_cmakePolicies ############
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}/dk_cmakePolicies.cmake")
+dk_cmakePolicies()
+
+# Note: Using DK() as the function name will cause DK/DKINSTALL.cmake to fail in dk_load.cmake
+>>>>>>> Development
 #####################################################################
 # DKINIT()
 #
 #
 function(DKINIT)
 	#dk_echo("DKINIT()")
+<<<<<<< HEAD
 	message(STATUS "CMake version ${CMAKE_VERSION}")
+=======
+>>>>>>> Development
 	
 	###### Get Privledges ahead of time ######
 	if(CMAKE_HOST_UNIX)
 		message("calling sudo at beginning of script . . .")
+<<<<<<< HEAD
 		execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
+=======
+		execute_process(COMMAND sudo echo WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}") #ask for sudo password ahead of time
+>>>>>>> Development
 	endif()
 
 	###### Initialize Language specifics ######
@@ -47,18 +96,34 @@ function(DKINIT)
 	
 	############ Get DKCMAKE variables ############
 	dk_DKCMAKE_VARS()
+<<<<<<< HEAD
 	#dk_echo("DKCMAKE_DIR = ${DKCMAKE_DIR}")
 	#dk_echo("DKCMAKE_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
 	
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS()
 	#dk_echo("DKHTTP_DKCMAKE_FUNCTIONS_DIR = ${DKHTTP_DKCMAKE_FUNCTIONS_DIR}")
+=======
+	#dk_echo("DKCMAKE_DIR = $ENV{DKCMAKE_DIR}")
+	#dk_echo("DKCMAKE_FUNCTIONS_DIR = $ENV{DKCMAKE_FUNCTIONS_DIR}")
+	
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_load.cmake")
+	dk_load("dk_fatal")
+	
+	############ Get DKHTTP variables ############
+	dk_DKHTTP_VARS()
+	#dk_echo("DKHTTP_DKCMAKE_FUNCTIONS_DIR = $ENV{DKHTTP_DKCMAKE_FUNCTIONS_DIR}")
+>>>>>>> Development
 
 	############ Setup dk_callStack ############
 	dk_setupCallstack()
 	#d k_callStack()
 	#:dk_callStackReturn
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> Development
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS()
 	
@@ -71,12 +136,22 @@ function(DKINIT)
 	set(ENABLE_DKTEST 1 CACHE INTERNAL "")
 
 	############ LOAD FUNCTION FILES ############
+<<<<<<< HEAD
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 	dk_load(dk_dirname)
 	dk_load(dk_basename)
 	dk_load(${DKSCRIPT_PATH})
 	#dk_load(__TIME__)
 	dk_load(dk_createOsMacros)
+=======
+	#include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	dk_load(dk_dirname)
+	dk_load(dk_basename)
+	if("$ENV{DKSCRIPT_EXT}" STREQUAL ".cmake")
+		dk_load("$ENV{DKSCRIPT_PATH}")
+	endif()
+	#dk_load(__TIME__)
+>>>>>>> Development
 	dk_load(__FILE__)
 	dk_load(__LINE__)
 	dk_load(__FUNCTION__)
@@ -86,6 +161,7 @@ function(DKINIT)
 	dk_load(dk_color)
 	dk_load(dk_logo)
 	dk_load(dk_watch)
+<<<<<<< HEAD
 	
 #	dk_load(dk_messageBox)
 #	variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
@@ -95,11 +171,45 @@ function(DKINIT)
 		if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
 			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
 			include(${DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
+=======
+	dk_load(dk_messageBox)
+
+	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
+	if(EXISTS "$ENV{DKSCRIPT_DIR}/dkconfig.txt")
+		dk_load(dk_getFileParams)
+		dk_getFileParams("$ENV{DKSCRIPT_DIR}/dkconfig.txt")
+	elseif(EXISTS "$ENV{DKBRANCH_DIR}/dkconfig.txt")
+		dk_load(dk_getFileParams)
+		dk_getFileParams("$ENV{DKBRANCH_DIR}/dkconfig.txt")
+	endif()
+	###### DKTEST MODE ######
+#	if(ENABLE_DKTEST)
+#		message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
+#		string(FIND "$ENV{DKSCRIPT_DIR}" "$ENV{DKCMAKE_FUNCTIONS_DIR}" isChildOf)
+#
+#		if(${isChildOf} GREATER -1)
+#			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### $ENV{DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
+#			include($ENV{DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
+#			DKTEST()
+#			dk_echo("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")
+#			dk_exit(0)
+#		endif()
+#	endif()
+
+	###### DKTEST MODE ######
+	if((ENABLE_DKTEST) AND ($ENV{DKSCRIPT_EXT} STREQUAL ".cmake"))
+		dk_load(dk_fileIncludes)
+		dk_fileIncludes("$ENV{DKSCRIPT_PATH}" "function(DKTEST)")
+		if(dk_fileIncludes)
+			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### $ENV{DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
+			include($ENV{DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
+>>>>>>> Development
 			DKTEST()
 			dk_echo("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")
 			dk_exit(0)
 		endif()
 	endif()
+<<<<<<< HEAD
 	
 endfunction()
 
@@ -112,6 +222,10 @@ macro(dk_onVariableWatch variable access value current_list_file stack)
 		dk_messageBox("${variable} = ${value}")
 	endif()
 endmacro()
+=======
+endfunction()
+
+>>>>>>> Development
 
 ##################################################################################
 # dk_echo()
@@ -138,16 +252,24 @@ endfunction()
 # dk_DKCMAKE_VARS()
 #
 function(dk_DKCMAKE_VARS)
+<<<<<<< HEAD
 	get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
 	set(DKCMAKE_DIR ${DKCMAKE_DIR} CACHE INTERNAL "")
 	set(DKCMAKE_FUNCTIONS_DIR ${DKCMAKE_DIR}/functions CACHE INTERNAL "")
 	set(DKCMAKE_FUNCTIONS_DIR_ ${DKCMAKE_FUNCTIONS_DIR}/ CACHE INTERNAL "")
+=======
+	get_filename_component(DKCMAKE_DIR	"${CMAKE_CURRENT_LIST_DIR}" DIRECTORY)
+	set(ENV{DKCMAKE_DIR} 				"${DKCMAKE_DIR}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR}		"$ENV{DKCMAKE_DIR}/functions")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_}		"$ENV{DKCMAKE_FUNCTIONS_DIR}/")
+>>>>>>> Development
 endfunction(dk_DKCMAKE_VARS)
 
 ##################################################################################
 # dk_DKHTTP_VARS()
 #
 function(dk_DKHTTP_VARS)
+<<<<<<< HEAD
 	set(DKHTTP_DIGITALKNOB_DIR			"https://raw.githubusercontent.com/aquawicket/DigitalKnob" CACHE INTERNAL "")
 	set(DKHTTP_DKBRANCH_DIR				"${DKHTTP_DIGITALKNOB_DIR}/Development" CACHE INTERNAL "")
 	set(DKHTTP_DKCMAKE_DIR				"${DKHTTP_DKBRANCH_DIR}/DKCMake" CACHE INTERNAL "")
@@ -238,6 +360,14 @@ macro(dk_onCallstack variable access value current_list_file stack)
 		#dk_echo("${cyan}${indent}${__TIME__}${__FILE__}:${__LINE__}   ${__FUNCTION__}(${__ARGV__})")
 	endif()
 endmacro()
+=======
+	set(ENV{DKHTTP_DIGITALKNOB_DIR}			"https://raw.githubusercontent.com/aquawicket/DigitalKnob")
+	set(ENV{DKHTTP_DKBRANCH_DIR}			"$ENV{DKHTTP_DIGITALKNOB_DIR}/Development")
+	set(ENV{DKHTTP_DKCMAKE_DIR}				"$ENV{DKHTTP_DKBRANCH_DIR}/DKCMake")
+	set(ENV{DKHTTP_DKCMAKE_FUNCTIONS_DIR}	"$ENV{DKHTTP_DKCMAKE_DIR}/functions")
+endfunction()
+
+>>>>>>> Development
 
 ##################################################################################
 # dk_setupCallstack()
@@ -245,15 +375,26 @@ endmacro()
 function(dk_setupCallstack)
 	dk_echo("dk_setupCallstack()")
 	
+<<<<<<< HEAD
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onCallstack)
 	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onCallstack)
 endfunction()
 
+=======
+	dk_load("dk_onVariableWatch")
+	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onVariableWatch)
+	#variable_watch(CMAKE_CURRENT_FUNCTION_LINE dk_onVariableWatch)
+	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onVariableWatch)
+endfunction()
+
+
+>>>>>>> Development
 ##################################################################################
 # dk_DKSCRIPT_VARS()
 #
 function(dk_DKSCRIPT_VARS)
 	###### DKSCRIPT_PATH ######
+<<<<<<< HEAD
 	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}" CACHE INTERNAL "")
 	if(NOT EXISTS "${DKSCRIPT_PATH}")
 		set(DKSCRIPT_PATH "${CMAKE_CURRENT_LIST_FILE}" CACHE INTERNAL "")
@@ -278,6 +419,34 @@ function(dk_DKSCRIPT_VARS)
 	###### DKSCRIPT_EXT ######
 	get_filename_component(DKSCRIPT_EXT ${DKSCRIPT_PATH} LAST_EXT)
 	set(DKSCRIPT_EXT ${DKSCRIPT_EXT} CACHE INTERNAL "")
+=======
+	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
+		set(ENV{DKSCRIPT_PATH} "${CMAKE_PARENT_LIST_FILE}")
+	endif()
+	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
+		set(ENV{DKSCRIPT_PATH} "${CMAKE_CURRENT_LIST_FILE}")
+	endif()
+	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
+		message(FATAL_ERROR "ENV{DKSCRIPT_PATH}:$ENV{DKSCRIPT_PATH} not found")
+	endif()
+	###### DKSCRIPT_ARGS ######
+	set(ENV{DKSCRIPT_ARGS} ${ARGS})
+
+	###### DKSCRIPT_DIR ######
+	get_filename_component(DKSCRIPT_DIR "$ENV{DKSCRIPT_PATH}" DIRECTORY)
+	set(ENV{DKSCRIPT_DIR} "${DKSCRIPT_DIR}")
+	if(NOT EXISTS "$ENV{DKSCRIPT_DIR}")
+		dk_fatal("ENV{DKSCRIPT_DIR}:$ENV{DKSCRIPT_DIR} not found!")
+	endif()
+	
+	###### DKSCRIPT_NAME ######
+	get_filename_component(DKSCRIPT_NAME "$ENV{DKSCRIPT_PATH}" NAME)
+	set(ENV{DKSCRIPT_NAME} "${DKSCRIPT_NAME}")
+	
+	###### DKSCRIPT_EXT ######
+	get_filename_component(DKSCRIPT_EXT "$ENV{DKSCRIPT_PATH}" LAST_EXT)
+	set(ENV{DKSCRIPT_EXT} "${DKSCRIPT_EXT}")
+>>>>>>> Development
 endfunction()
 
 ##################################################################################

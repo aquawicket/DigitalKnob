@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ####################################################################
 # dk_CMD_EXE()
@@ -16,10 +21,17 @@ function(dk_CMD_EXE)
 	
 	###### CMD_EXE ######
 	if(NOT EXISTS "${CMD_EXE}")
+<<<<<<< HEAD
 		dk_findProgram(CMD_EXE cmd.exe)
 	endif()
 	if(NOT EXISTS "${CMD_EXE}")
 		dk_set(CMD_EXE "$ENV{COMSPEC}")
+=======
+		dk_set(CMD_EXE "$ENV{COMSPEC}")
+	endif()
+	if(NOT EXISTS "${CMD_EXE}")
+		dk_findProgram(CMD_EXE "cmd.exe")
+>>>>>>> Development
 	endif()
 	if(NOT EXISTS "${CMD_EXE}")
 		dk_set(CMD_EXE "$ENV{CMD_EXE}")
@@ -45,7 +57,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
     dk_debugFunc()
+=======
+    dk_debugFunc(0)
+>>>>>>> Development
  
     dk_CMD_EXE()
     dk_printVar(CMD_EXE)

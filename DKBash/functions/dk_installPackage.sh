@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # dk_installPackage(package)
@@ -49,7 +54,11 @@ dk_installPackage() {
 		dk_run ${SUDO_EXE} pkg install "${1}"				# Termux
 		return
 	elif (command -v pacman); then
+<<<<<<< HEAD
 		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+=======
+		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+>>>>>>> Development
 		dk_run ${SUDO_EXE} pacman -S "${1}" --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}	# Pacman
 		return
 	elif (command -v swupd); then

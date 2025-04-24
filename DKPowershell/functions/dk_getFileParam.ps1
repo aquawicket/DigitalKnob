@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_getFileParam){ $dk_getFileParam = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_getFileParam){ $dk_getFileParam = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ################################################################################
 # dk_getFileParam(file, var_name) value
@@ -34,7 +39,11 @@ function Global:dk_getFileParam() {
 function Global:DKTEST() {
     dk_debugFunc 0
   
+<<<<<<< HEAD
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKBRANCH_DIR"
+=======
+	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
+>>>>>>> Development
     $VERSION = $(dk_getFileParam ${DKIMPORTS_DIR}/git/version.txt VERSION)
 	#dk_call dk_getFileParam "${DKIMPORTS_DIR}/git/version.txt" VERSION
 	dk_call dk_printVar VERSION

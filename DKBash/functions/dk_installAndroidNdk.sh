@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # dk_installAndroidNdk()
@@ -8,7 +13,11 @@
 dk_installAndroidNdk() {
 	dk_debugFunc 0
 
+<<<<<<< HEAD
 	dk_call dk_cmakeEval "include('${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
+=======
+	dk_call dk_cmakeEval "include('${DKIMPORTS_DIR}/android-ndk/DKINSTALL.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
+>>>>>>> Development
 	dk_call dk_printVar ANDROID_NDK
 	dk_call dk_printVar ANDROID_GENERATOR
 	dk_call dk_printVar ANDROID_TOOLCHAIN_FILE

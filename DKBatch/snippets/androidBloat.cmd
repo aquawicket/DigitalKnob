@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 @echo off
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 set "DIGITALKNOB_DIR=%USERPROFILE%\digitalknob"
 set "ADB=%DIGITALKNOB_DIR%\Development\3rdParty\android-sdk\platform-tools\adb.exe"
@@ -393,7 +401,11 @@ goto:eof
 
 
 :: List packages constaining string
+<<<<<<< HEAD
 :: pm list packages -f string
+=======
+:: "%ADB%" shell pm list packages -f string
+>>>>>>> Development
 
 ::Optional
 ::Theme Module ==> "com.android.thememanager.module"

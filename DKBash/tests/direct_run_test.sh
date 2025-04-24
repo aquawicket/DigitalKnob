@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/bin/sh
+=======
+#!/usr/bin/env sh
+>>>>>>> Development
 
 LIB_PATH=$(dirname $(realpath ${0}))
 PATH=${PATH}:${LIB_PATH}

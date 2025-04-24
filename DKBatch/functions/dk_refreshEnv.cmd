@@ -1,6 +1,13 @@
 <!-- : BATCH SCRIPT
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+>>>>>>> Development
 
 
 ::################################################################################
@@ -13,11 +20,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_refreshEnv
 :: setloal
+<<<<<<< HEAD
 	call dk_debugFunc 0
 	
 	cscript.exe //nologo "%~f0?.wsf"
 	if not exist "%TEMP%\refreshEnv.bat" call dk_error "%TEMP%\refreshEnv.bat does not exist"
 	call "%TEMP%\refreshEnv.bat"
+=======
+	%dk_call% dk_debugFunc 0
+	
+	cscript.exe //nologo "%~f0?.wsf"
+	if not exist "%TEMP%\refreshEnv.bat" %dk_call% dk_error "%TEMP%\refreshEnv.bat does not exist"
+	%dk_call% "%TEMP%\refreshEnv.bat"
+>>>>>>> Development
 		
 	exit /b %errorlevel%
 %endfunction%
@@ -28,9 +43,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
     
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+   
+>>>>>>> Development
 	set "MYVAR="
 	echo The MYVAR variable should be empty
 	echo MYVAR = %MYVAR%

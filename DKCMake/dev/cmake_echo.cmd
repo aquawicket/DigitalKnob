@@ -2,7 +2,11 @@
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
+<<<<<<< HEAD
 :: Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 ::
 :: Permission is hereby granted, free of charge, to any person obtaining a copy
 :: of this software and associated documentation files(the "Software"), to deal
@@ -22,7 +26,11 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 @echo off
+<<<<<<< HEAD
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+=======
+if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+>>>>>>> Development
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: cmake_echo <command> <file.ext>
 ::

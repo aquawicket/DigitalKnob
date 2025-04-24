@@ -1,8 +1,15 @@
 //"use strict";
+<<<<<<< HEAD
 
 function DKHtmlConsole() {}
 
 DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, bottom, left, right, width, height) {
+=======
+function DKHtmlConsole(){}
+
+DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, bottom, left, right, width, height){
+	//alert("DKHtmlConsole.create");
+>>>>>>> Development
 	if(!window){ alert("windows is invalid"); return; }
 	if(!window.document){ alert("document is invalid"); return; }
 	var dkhtmlconsole = window.document.createElement("div");
@@ -27,8 +34,27 @@ DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, bottom, left
 	console = this //overwrite the console
 }
 
+<<<<<<< HEAD
 DKHtmlConsole.prototype.log = function DKHtmlConsole_log(message) {
+=======
+DKHtmlConsole.prototype.log = function DKHtmlConsole_log(message){
+>>>>>>> Development
 	this.dkhtmlconsole.innerHTML = this.dkhtmlconsole.innerHTML + "<a>" + message + "</a></br>";
 	this.dkhtmlconsole.scrollTop = this.dkhtmlconsole.scrollHeight;
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST = function DKTEST_f(){
+	//dk_debugFunc(0);
+	
+	dkconsole = new DKHtmlConsole;
+	dkconsole.create("","0px","0px","0px","","25%");
+}
+>>>>>>> Development

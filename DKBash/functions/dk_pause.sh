@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 
 ##################################################################################
@@ -10,7 +15,11 @@
 dk_pause() {
 	dk_debugFunc 0 1
 
+<<<<<<< HEAD
 	[ -z "${1-}" ] && pause_msg="Press and any to continue..." || pause_msg="${1}"
+=======
+	[ -z "${1-}" ] && pause_msg="Press enter to continue..." || pause_msg="${1}"
+>>>>>>> Development
 	#read -rp 'Press enter to continue...'; # key; echo ${key}
 	echo "${pause_msg}"
 	read -rp ''

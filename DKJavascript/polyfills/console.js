@@ -1,14 +1,24 @@
 
 
+<<<<<<< HEAD
 (function(con) {
+=======
+(function(con){
+>>>>>>> Development
 	'use strict';
 	var prop, method;
 	var empty = {};
 	if(typeof ActiveXObject === "function"){
 		if(typeof WScript === "object"){
+<<<<<<< HEAD
 			var print = function(msg) { WScript.StdOut.Write(msg+"\n"); };
 		} else {
 			var print = function(msg) {
+=======
+			var print = function(msg){ WScript.StdOut.Write(msg+"\n"); };
+		} else {
+			var print = function(msg){
+>>>>>>> Development
 				// https://stackoverflow.com/a/52793021/688352
 				//var WShell = new ActiveXObject('WScript.Shell');
 				//var WShellExec = WShell.Exec("cmd /c echo "+msg);

@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+>>>>>>> Development
 
 :: ASCII Table - https://www.ascii-code.com
 :: ANSI Escape Sequences - https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
@@ -9,9 +16,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_escapeSequences
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
 ::  set ASCII_length=0
     :: ASCII control characters (character code 0-31)
     ::                  SYMBOL  DEC     OCT     HEX     HTML    Description
@@ -132,8 +145,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :ASCII_ADD
+<<<<<<< HEAD
     call dk_debugFunc 7
  setlocal
+=======
+setlocal
+    %dk_call% dk_debugFunc 7
+>>>>>>> Development
  
     if "%~1" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 1 is invalid"
     if "%~2" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 2 is invalid"
@@ -157,9 +175,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :ASCII_SHOW
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
     %dk_call% dk_info "%%ASCII[%~1].DEC%%   %%ASCII[%~1].SYMBOL%%   %%ASCII[%~1].DEC%%  %%ASCII[%~1].OCT%%  %%ASCII[%~1].HEX%%  %%ASCII[%~1].HTML%% %%ASCII[%~1].INFO%%"
 %endfunction%
 
@@ -168,8 +192,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
     %dk_call% dk_escapeSequences
 %endfunction%

@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
@@ -10,6 +11,26 @@ if(NOT COMMAND __LINE__)
 endif()
 if(NOT COMMAND __FUNCTION__)
 	dk_load(${DKCMAKE_FUNCTIONS_DIR}/__FUNCTION__.cmake)
+=======
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+
+if(NOT COMMAND __FILE__)
+	dk_load($ENV{DKCMAKE_FUNCTIONS_DIR}/__FILE__.cmake)
+endif()
+if(NOT COMMAND __LINE__)
+	dk_load($ENV{DKCMAKE_FUNCTIONS_DIR}/__LINE__.cmake)
+endif()
+if(NOT COMMAND __FUNCTION__)
+	dk_load($ENV{DKCMAKE_FUNCTIONS_DIR}/__FUNCTION__.cmake)
+>>>>>>> Development
 endif()
 ##################################################################################
 # __FRAME__(rtn_var, frame)

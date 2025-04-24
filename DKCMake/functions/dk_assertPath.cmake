@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_assertPath(path)
@@ -12,6 +17,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_assertPath)
 	dk_debugFunc(1)
 
+<<<<<<< HEAD
 	set(path ${ARGV0})
 	
 	dk_varToString(path path_value)
@@ -38,6 +44,23 @@ function(dk_assertPath)
 #	dk_printVar(CMAKE_CURRENT_LIST_LINE)
 #	dk_printVar(CMAKE_SCRIPT_MODE_FILE)
 #	dk_printVar(CMAKE_CURRENT_SOURCE_DIR)
+=======
+	set(_path_ "${ARGV0}")
+#	if(DEFINED ${_path_})
+#		set(_path_ ${${_path_}})
+#	endif()
+	#dk_printVar(_path_)
+	
+	#dk_varToString(_path_ path_value)
+	#dk_printVar(path_value)
+	
+	if((EXISTS "${_path_}") OR (EXISTS "${${_path_}}") OR (EXISTS "$ENV{_path_}"))
+		return()
+	endif()
+		
+	dk_fatal("${bg_red}${white}Assertion failed: Path Not Found path:'${_path_}:${${_path_}}'")
+
+>>>>>>> Development
 endfunction()
 
 
@@ -48,7 +71,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_assertPath("C:/Windows/System32")
 	
@@ -56,5 +83,12 @@ function(DKTEST)
 	dk_assertPath(${myPathVar})
 	dk_assertPath("${myPathVar}")
 	dk_assertPath(myPathVar)
+<<<<<<< HEAD
 	dk_assertPath("C:/Non/Existent/path")
+=======
+	
+	set(myPathVarB "C:/NonExistentPath")
+	#dk_assertPath(myPathVarB)
+	dk_assertPath(myPathVarB)
+>>>>>>> Development
 endfunction()

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # dk_printVar(variable)
@@ -7,7 +12,13 @@
 #
 dk_printVar() {
 	dk_debugFunc 1
+<<<<<<< HEAD
 
+=======
+	#[ -z ${dk_printVar-} ] && dk_printVar=1
+	#( ${dk_printVar} eq 1 ) || return 0
+	
+>>>>>>> Development
 	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 	
 	varname=${1}

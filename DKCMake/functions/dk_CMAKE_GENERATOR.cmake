@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ####################################################################
 # dk_CMAKE_GENERATOR()
@@ -9,7 +14,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_CMAKE_GENERATOR)
     dk_debugFunc()
 
+<<<<<<< HEAD
 	dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
+=======
+	dk_validate(TARGET_TRIPLE "dk_target_triple()")
+>>>>>>> Development
 	
 	if(android_arm32)    
 		set(CMAKE_GENERATOR "Unix Makefiles")
@@ -19,8 +28,13 @@ function(dk_CMAKE_GENERATOR)
 		set(CMAKE_GENERATOR "Unix Makefiles")
 	elseif(android_x86_64)
 		set(CMAKE_GENERATOR "Unix Makefiles")
+<<<<<<< HEAD
 	elseif(emscripten)          
 		set(CMAKE_GENERATOR "Unix Makefiles") 
+=======
+	elseif(emscripten_x86)          
+		set(CMAKE_GENERATOR "Unix Makefiles")
+>>>>>>> Development
     elseif(ios_arm32)           
 		set(CMAKE_GENERATOR "Xcode")
     elseif(ios_arm64)           
@@ -49,7 +63,11 @@ function(dk_CMAKE_GENERATOR)
 		set(MSVC 1)
 	elseif(win_x86_clang)       
 		set(CMAKE_GENERATOR "MinGW Makefiles")
+<<<<<<< HEAD
 	elseif(win_x86_mingw)       
+=======
+	elseif(win_x86_gcc)       
+>>>>>>> Development
 		set(CMAKE_GENERATOR "MinGW Makefiles")
 	elseif(win_x86_msvc)        
 		set(CMAKE_GENERATOR "Visual Studio 17 2022")
@@ -57,7 +75,11 @@ function(dk_CMAKE_GENERATOR)
 		set(MSVC 1)
     elseif(win_x86_64_clang)    
 		set(CMAKE_GENERATOR "MinGW Makefiles")
+<<<<<<< HEAD
     elseif(win_x86_64_mingw)   
+=======
+    elseif(win_x86_64_gcc)   
+>>>>>>> Development
 		set(CMAKE_GENERATOR "MinGW Makefiles")
     elseif(win_x86_64_msvc)     
 		set(CMAKE_GENERATOR "Visual Studio 17 2022")
@@ -65,8 +87,15 @@ function(dk_CMAKE_GENERATOR)
 		set(MSVC 1)
     elseif(win_x86_64_ucrt)     
 		set(CMAKE_GENERATOR "MinGW Makefiles")
+<<<<<<< HEAD
 	else()
 		dk_fatal("Could not get CMAKE_GENERATOR from triple:${triple}")
+=======
+	elseif(cosmopolitan)     
+		set(CMAKE_GENERATOR "MSYS Makefiles")
+	else()
+		dk_fatal("Could not get CMAKE_GENERATOR from target_triple:${target_triple}")
+>>>>>>> Development
 	endif()
 endfunction()
 
@@ -77,7 +106,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
     dk_debugFunc()
+=======
+    dk_debugFunc(0)
+>>>>>>> Development
  
     dk_CMAKE_GENERATOR()
     dk_printVar(CMAKE_GENERATOR)

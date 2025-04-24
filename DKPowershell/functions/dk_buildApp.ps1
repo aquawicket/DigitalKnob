@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_buildApp){ $dk_buildApp = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_buildApp){ $dk_buildApp = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ##################################################################################
 # dk_buildApp()
@@ -10,6 +15,7 @@ function Global:dk_buildApp() {
 
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
+<<<<<<< HEAD
 	dk_call dk_echo "****** Building $APP - $triple - $TYPE - $DKLEVEL ******"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
@@ -31,11 +37,38 @@ function Global:dk_buildApp() {
 			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR/$APP/$triple" --config Release --verbose
 		}
 		else{dk_call dk_error "Could not find CMakeCache.txt in $APP/$triple/Release or $APP/$triple"}
+=======
+	dk_call dk_echo "****** Building $target_app - $target_triple - $target_type - $target_level ******"
+	dk_call dk_echo "##################################################################"
+	dk_call dk_echo
+	
+	if($target_type -eq "Debug" -or $target_type -eq "All"){
+		if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_triple/Debug/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" "--build" "$DKCPP_APPS_DIR/$target_app/$target_triple/Debug" "--config Debug" "--verbose"
+		}
+		elseif(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_triple/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" "--build" "$DKCPP_APPS_DIR/$target_app/$target_triple" "--config Debug" "--verbose"
+		}
+		else{dk_call dk_error "Could not find CMakeCache.txt in $target_app/$target_triple/Debug or $target_app/$target_triple"}
+	}
+	if($target_type -eq "Release" -or $target_type -eq "All"){
+		if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_triple/Release/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" --build "$DKCPP_APPS_DIR/$target_app/$target_triple/Release" --config Release --verbose
+		}
+		elseif(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_triple/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" --build "$DKCPP_APPS_DIR/$target_app/$target_triple" --config Release --verbose
+		}
+		else{dk_call dk_error "Could not find CMakeCache.txt in $target_app/$target_triple/Release or $target_app/$target_triple"}
+>>>>>>> Development
 	}
 	
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
+<<<<<<< HEAD
 	dk_call dk_echo "****** Done Building $APP - $triple - $TYPE - $DKLEVEL ******"
+=======
+	dk_call dk_echo "****** Done Building $target_app - $target_triple - $target_type - $target_level ******"
+>>>>>>> Development
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 }

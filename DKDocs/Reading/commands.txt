@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 make an app open on startup (Linux)
 https://unix.stackexchange.com/a/523605    https://www.linode.com/docs/guides/start-service-at-boot/
 
@@ -49,3 +50,56 @@ print a variables value
 Associate a file extention via command line  (Windows)
 EXAMPLE: to fix .bat or .cmd files
 Open console as Administrator and type: assoc .bat=batfile
+=======
+make an app open on startup (Linux)
+https://unix.stackexchange.com/a/523605    https://www.linode.com/docs/guides/start-service-at-boot/
+
+print contents of X events (Linux)
+xev 
+
+
+
+create a file from terminal (Unix)
+sudo touch filname.ext
+
+give file execute permissions (Unix)
+sudo chmod +x filepath/filename.ext
+
+give ALL permissions (Unix)
+sudo chmod +777 filepath/filename.ext
+
+printenv (Unix)
+print list of currect environment variables
+
+See a list of required shared library of an executable (Unix)
+ldd executable.name
+
+
+
+Have the Mac terminal close when your app exits (Mac)
+in Terminal.app
+Preferences > Profiles > (Select a Profile) > Shell.
+on 'When the shell exits' chosen 'Close the window'
+
+
+
+
+Delete a non-empty directory without comfirmation and spaces in the name (Windows)
+rmdir /Q /S "folder name"
+
+Search for a foldername\file.name combination recursivley (Windows)
+for /r %a in (foldername) do @if exist "%~fa\file.name" echo %~fa
+
+Run cmd as administrator from cmd (Windows)
+runas /netonly /user:administrator-pc\administrator cmd
+
+set (Windows)
+print list of currect environment variables
+
+ser %VARIABLE%  (Windows)
+print a variables value
+
+Associate a file extention via command line  (Windows)
+EXAMPLE: to fix .bat or .cmd files
+Open console as Administrator and type: assoc .bat=batfile
+>>>>>>> Development

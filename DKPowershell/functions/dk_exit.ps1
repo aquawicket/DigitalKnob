@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_exit){ $dk_exit = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_exit){ $dk_exit = 1 } else{ return } #include guard
+>>>>>>> Development
 
 if(!(${PAUSE_ON_EXIT})) { $global:PAUSE_ON_EXIT = 0 }
 ##################################################################################

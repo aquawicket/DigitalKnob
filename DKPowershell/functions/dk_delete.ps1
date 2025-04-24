@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_delete){ $dk_delete = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_delete){ $dk_delete = 1 } else{ return } #include guard
+>>>>>>> Development
 
 #####################################################################
 # dk_delete(path)
@@ -8,7 +13,10 @@ if(!$dk_delete){ $dk_delete = 1 } else{ return }
 function Global:dk_delete($path) {
 	dk_debugFunc 1
 
+<<<<<<< HEAD
 	#$path = dk_call dk_replaceAll $path "/" "\"
+=======
+>>>>>>> Development
 	if(!(dk_call dk_pathExists $path)){
 		dk_call dk_warning "dk_delete $path does not exist"
 		return

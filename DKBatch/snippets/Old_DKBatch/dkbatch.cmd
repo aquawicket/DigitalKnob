@@ -2,7 +2,11 @@
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
+<<<<<<< HEAD
 :: Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 ::
 :: Permission is hereby granted, free of charge, to any person obtaining a copy
 :: of this software and associated documentation files(the "Software"), to deal
@@ -36,14 +40,24 @@ if not defined DKBATCH_PATH ( set "DKBATCH_PATH=%~dp0" )
 if not defined DKSETTNGS ( call %DKBATCH_PATH%settings )
 
 ::################## %ALL_BUT_FIRST$ ##################
+<<<<<<< HEAD
 for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
 
+=======
+set ALL_BUT_FIRST=%*
+if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
+	
+>>>>>>> Development
 ::################## %DKIN% ##################
 set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^([0m[35m%ALL_BUT_FIRST%[0m[94m^)[0m"
 
 ::################## %DKEND% ##################
 set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m "
+<<<<<<< HEAD
 if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & if "!STAY_OPEN!"=="1" ( goto:eof ) else ( if "!DKLOADED!"=="%~1" ( timeout 30 & exit %ERRORLEVEL% ) else ( goto:eof ) )
+=======
+if "%~2" equ "DKEND" %DOEND%:[35m!%1![0m & echo. & if "!STAY_OPEN!" equ "1" ( goto:eof ) else ( if "!DKLOADED!" equ "%~1" ( timeout 30 & exit %ERRORLEVEL% ) else ( goto:eof ) )
+>>>>>>> Development
 set "DKEND=call %0 %%0 DKEND & call return %%0 %%0"
 
 ::: NO_RELATIVE_PATHS() :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -62,13 +76,21 @@ if not exist "%~1" ( echo [91m cannot find "%~1" [0m & goto :end )
 >nul findstr /i /c:"%%DKEND%%" "%~1" || ( echo.>>"%~1" & echo.>>"%~1" &echo %%DKEND%%>>"%~1" )
 :end
 	
+<<<<<<< HEAD
 ::: prepareLineNumbers() ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+=======
+::###### prepareLineNumbers() ######
+>>>>>>> Development
 >nul 2>nul (
 	call %DKBATCH_PATH%3rdParty\jrepl "(\x25#=\x25)\d*(\x25=#\x25)" "$1+ln+$2" /j /f "%~f1" /o "%~f1.new"
 	fc /b "%~f1" "%~f1.new" && del "%~f1.new" || move /y "%~f1.new" "%~f1"
 )
 
+<<<<<<< HEAD
 :::: DKLOADED() ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+=======
+::###### DKLOADED() ######
+>>>>>>> Development
 if defined DKLOADED (
 	%DKIN%
 	if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
@@ -84,6 +106,7 @@ if defined DKLOADED (
 ::     DKBATCH first run entry point (NOT LOADED YET)
 ::#########################################################################
 
+<<<<<<< HEAD
 ::: %TRY_FATAL% :::::::::::::::::::
 set "TRY_FATAL=DKERROR ERROR %1 "
 
@@ -97,6 +120,21 @@ set "ERROR=call DKERROR ERROR %1 "
 set "IF_FATAL=call DKERROR IF_FATAL %1 "
 
 ::: %FATAL% :::::::::::::::::
+=======
+::###### %TRY_FATAL% ######
+set "TRY_FATAL=DKERROR ERROR %1 "
+
+::###### %IF_ERROR% ######
+set "IF_ERROR=call DKERROR IF_ERROR %1 "
+
+::###### %ERROR% ######
+set "ERROR=call DKERROR ERROR %1 "
+
+::###### %IF_FATAL% ######
+set "IF_FATAL=call DKERROR IF_FATAL %1 "
+
+::###### %FATAL% ######
+>>>>>>> Development
 set "FATAL=DKERROR ERROR %1 "
 
 ::set "REQUIRED_1=if [%%1]==[] echo [91m	%~n0(%*): argument 1 is invalid [0m & goto:eof"
@@ -104,10 +142,17 @@ set "FATAL=DKERROR ERROR %1 "
 ::set "REQUIRED_3=if [%%3]==[] echo [91m	%~n0(%*): argument 3 is invalid [0m & goto:eof"
 
 set caller=%0
+<<<<<<< HEAD
 if not "%1"=="" set "caller=%~1"
 ::if "%1"=="" ( set "caller=%0" ) else ( set "caller=%1" )
 
 if not "%STAY_OPEN%"=="" (
+=======
+if not "%1" equ "" set "caller=%~1"
+::if "%1" equ "" ( set "caller=%0" ) else ( set "caller=%1" )
+
+if not "%STAY_OPEN%" equ "" (
+>>>>>>> Development
 	if not defined in_subprocess (cmd /k set in_subprocess=y ^& "%caller%" %ALL_BUT_FIRST%) & exit )
 )
 
@@ -122,16 +167,28 @@ if not "%STAY_OPEN%"=="" (
 if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
 
 :: import %DKBATCH% command to global environment variables
+<<<<<<< HEAD
 if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 %%* & @setlocal enableextensions enabledelayedexpansion"
 
 
 :: Add dkbatch subfolders to the user PATH environment variable
 ::: AddDKPaths() ::::::::::::::::::::::::::::::::::::::::::::::::::
+=======
+if "%DKBATCH%" equ "" setx DKBATCH "@echo off & call %0 %%0 %%* & @setlocal enableextensions enabledelayedexpansion"
+
+
+:: Add dkbatch subfolders to the user PATH environment variable
+::###### AddDKPaths() ######
+>>>>>>> Development
 setlocal enabledelayedexpansion
 set "folders=%DKBATCH_PATH%"
 for /d %%D in (%DKBATCH_PATH%*) do ( set "folders=!folders!;%%D" ) 
 endlocal & set "PATH=%PATH%;%folders%"
+<<<<<<< HEAD
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+=======
+::##########################
+>>>>>>> Development
 
 
 

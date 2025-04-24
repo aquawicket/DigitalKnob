@@ -151,7 +151,11 @@ function(dk_getGithubDownload url) #install_path #Patch
 		dk_set(${LIBVAR}_DL https://github.com/${org}/${Lib}/archive/${ZIP})
 		#dk_printVar(tag)
 		
+<<<<<<< HEAD
 		## update DKMAKE.cmake file
+=======
+		## update DKINSTALL.cmake file
+>>>>>>> Development
 		dk_copy(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)
 		file(READ ${CMAKE_CURRENT_LIST_FILE} DKMAKE_FILE)
 		dk_replaceAll(${DKMAKE_FILE} "dk_import(${url})" "#dk_import(${url})\ndk_import(${${LIBVAR}_DL})" DKMAKE_FILE)

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+echo "dk_debug after DK_SH"
+>>>>>>> Development
 ##################################################################################
 # dk_debug(message)
 #

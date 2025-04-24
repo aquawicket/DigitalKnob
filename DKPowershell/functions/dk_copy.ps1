@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_copy){ $dk_copy = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_copy){ $dk_copy = 1 } else{ return } #include guard
+>>>>>>> Development
 
 #################################################################################
 # dk_copy(from to)
@@ -39,7 +44,11 @@ function Global:dk_copy($from, $to) {
 	
 	# the base directory of the ${to} path must exist.    
 	$_parent_dir_ = dk_call dk_dirname "${to}" _parent_dir_
+<<<<<<< HEAD
 	dk_call dk_makeDirectory "${_parent_dir_}"
+=======
+	dk_call dk_mkdir "${_parent_dir_}"
+>>>>>>> Development
 	
 	#cp -r "${from}" "${to}"
 }
@@ -57,9 +66,16 @@ DKTEST() {
 	echo "dk_copy test" > copyMe.file
 	dk_call dk_copy copyMe.file iWasCopied.txt OVERWRITE
 	
+<<<<<<< HEAD
 	dk_call dk_makeDirectory ${DKDOWNLOAD_DIR}/copyMe
 	dk_call dk_copy ${DKDOWNLOAD_DIR}/copyMe ${DIGITALKNOB_DIR}/iWasCopied OVERWRITE
 	
 	dk_call dk_makeDirectory copyMe
+=======
+	dk_call dk_mkdir ${DKDOWNLOAD_DIR}/copyMe
+	dk_call dk_copy ${DKDOWNLOAD_DIR}/copyMe ${DIGITALKNOB_DIR}/iWasCopied OVERWRITE
+	
+	dk_call dk_mkdir copyMe
+>>>>>>> Development
 	dk_call dk_copy copyMe iWasCopied OVERWRITE
 }

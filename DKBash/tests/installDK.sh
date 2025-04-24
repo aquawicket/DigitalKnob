@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/bin/sh
+=======
+#!/usr/bin/env sh
+>>>>>>> Development
 
 # wget http://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/installDK.sh
 # chmod sudo 777 installDK.sh
@@ -23,12 +27,20 @@ fi
 dk_source dk_validate
 dk_source dk_installGit
 dk_source dk_DKBRANCH_DIR
+<<<<<<< HEAD
 dk_source dk_stringContains
+=======
+dk_source dk_contains
+>>>>>>> Development
 dk_source dk_DIGITALKNOB_DIR
 dk_source dk_host_triple
 dk_source dk_getExtension
 dk_source dk_removeExtension
+<<<<<<< HEAD
 dk_source dk_makeDirectory
+=======
+dk_source dk_mkdir
+>>>>>>> Development
 dk_source dk_replaceAll
 #dk_source dk_convertToCIdentifier
 dk_source dk_toLower

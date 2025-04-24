@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 
 CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
@@ -28,6 +33,7 @@ dk_installCmake() {
 	[ "${host_triple}" = "linux_arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${host_triple}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${WSL_DISTRO_NAME-}" = "Alpine" ]		 && CMAKE_IMPORT=cmake
+<<<<<<< HEAD
 	#[ "${triple}" = "android_arm32" ]       	 && CMAKE_IMPORT=cmake
 	#[ "${triple-}" = "win_arm64_clang" ]    	 && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
 	#[ "${triple-}" = "win_x86_clang" ]      	 && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
@@ -35,6 +41,15 @@ dk_installCmake() {
 	#[ "${triple-}" = "win_x86_64_clang" ]   	 && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
 	#[ "${triple-}" = "win_x86_64_mingw" ]   	 && CMAKE_IMPORT=mingw-w64-x86_64-cmake
 	#[ "${triple-}" = "win_x86_64_ucrt" ]    	 && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+=======
+	#[ "${target_triple}" = "android_arm32" ]       	 && CMAKE_IMPORT=cmake
+	#[ "${target_triple-}" = "win_arm64_clang" ]    	 && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	#[ "${target_triple-}" = "win_x86_clang" ]      	 && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+	#[ "${target_triple-}" = "win_x86_mingw" ]      	 && CMAKE_IMPORT=mingw-w64-i686-cmake
+	#[ "${target_triple-}" = "win_x86_64_clang" ]   	 && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	#[ "${target_triple-}" = "win_x86_64_mingw" ]   	 && CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	#[ "${target_triple-}" = "win_x86_64_ucrt" ]    	 && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+>>>>>>> Development
 	[ -z ${CMAKE_IMPORT-} ] 					 && CMAKE_IMPORT=cmake  #Default
 	dk_call dk_assertVar CMAKE_IMPORT
 	
@@ -45,9 +60,15 @@ dk_installCmake() {
 		dk_call dk_removeExtension ${CMAKE_DL_FILE} CMAKE_FOLDER
 		#dk_call dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
 		dk_call dk_toLower ${CMAKE_FOLDER} CMAKE_FOLDER
+<<<<<<< HEAD
 		CMAKE_DIR="${DKTOOLS_DIR}/${CMAKE_FOLDER}"
 		
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DIGITALKNOB_DIR"
+=======
+		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
+		CMAKE_DIR="${DKTOOLS_DIR}/${CMAKE_FOLDER}"
+		
+>>>>>>> Development
 		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${CMAKE_DIR}/bin/cmake.exe
 		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${CMAKE_DIR}/CMake.app/Contents/bin/cmake
 		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
@@ -59,6 +80,10 @@ dk_installCmake() {
 		
 		dk_call dk_echo
 		dk_call dk_info "Installing cmake . . ."
+<<<<<<< HEAD
+=======
+		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+>>>>>>> Development
 		dk_call dk_download "${CMAKE_IMPORT}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
 		#dk_call dk_extract "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
 		dk_call dk_smartExtract	"${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${CMAKE_DIR}"

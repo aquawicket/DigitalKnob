@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_import(url) #args
@@ -20,16 +25,24 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_import url)
 	dk_debugFunc()
 	
+<<<<<<< HEAD
 	dk_getOption(NO_HALT  ${ARGV} REMOVE)
 	
 	dk_importVariables(${url} ${ARGN})
 	dk_assertVar(CURRENT_PLUGIN)
+=======
+	dk_getOption(NO_HALT REMOVE)
+	
+	dk_importVariables(${url} ${ARGN})
+	dk_assertVar(ENV{CURRENT_PLUGIN})
+>>>>>>> Development
 
 	if(NOT DKOFFLINE)
 		###### Import from Git Repository ######
 		dk_getExtension(${url} extension)
 		if("${extension}" STREQUAL ".git")
 			
+<<<<<<< HEAD
 			dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 			dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")
 			
@@ -51,10 +64,33 @@ function(dk_import url)
 			dk_command(${GIT_EXE} pull)
 			if(${CURRENT_PLUGIN}_TAG)
 				dk_command(${GIT_EXE} checkout ${${CURRENT_PLUGIN}_TAG})
+=======
+			dk_depend(git)
+			
+			if(NOT EXISTS ${$ENV{CURRENT_PLUGIN}_DIR}/.git)
+				dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
+				dk_chdir($ENV{DK3RDPARTY_DIR})
+				if(EXISTS ${$ENV{CURRENT_PLUGIN}_DIR})
+					dk_delete(${$ENV{CURRENT_PLUGIN}_DIR})
+				endif()
+				if(NOT EXISTS ${$ENV{CURRENT_PLUGIN}_DIR})
+					dk_mkdir(${$ENV{CURRENT_PLUGIN}_DIR})
+				endif()
+				dk_chdir(${$ENV{CURRENT_PLUGIN}_DIR})
+				dk_command(${GIT_EXE} clone ${$ENV{CURRENT_PLUGIN}_URL} ${$ENV{CURRENT_PLUGIN}_DIR})
+			endif()
+			dk_chdir(${$ENV{CURRENT_PLUGIN}_DIR})
+			dk_command(${GIT_EXE} checkout -- .)
+			dk_command(${GIT_EXE} checkout ${$ENV{CURRENT_PLUGIN}_BRANCH})
+			dk_command(${GIT_EXE} pull)
+			if(${CURRENT_PLUGIN}_TAG)
+				dk_command(${GIT_EXE} checkout ${$ENV{CURRENT_PLUGIN}_TAG})
+>>>>>>> Development
 			endif()
 			
 		###### Import from Download File ######
 		else()
+<<<<<<< HEAD
 			dk_printVar(CURRENT_PLUGIN)
 			dk_printVar(${CURRENT_PLUGIN}_IMPORT_NAME)
 			dk_verbose("dk_install(${${CURRENT_PLUGIN}_IMPORT_NAME} ${ARGN})")
@@ -70,6 +106,23 @@ function(dk_import url)
 	
 endfunction()
 dk_createOsMacros("dk_import")
+=======
+			dk_printVar(ENV{CURRENT_PLUGIN})
+			dk_printVar($ENV{CURRENT_PLUGIN}_IMPORT_NAME)
+			dk_verbose("dk_install(${$ENV{CURRENT_PLUGIN}_IMPORT_NAME} ${ARGN})")
+			
+			dk_install($ENV{CURRENT_PLUGIN} ${ARGN} ${NO_HALT})
+		endif()
+	endif()
+	
+	#dk_getOption(PATCH ${ARGV})
+	dk_getOption(PATCH)
+	if(PATCH)
+		dk_patch(${$ENV{CURRENT_PLUGIN}_IMPORT_NAME} ${$ENV{CURRENT_PLUGIN}_DIR})
+	endif()
+	
+endfunction()
+>>>>>>> Development
 
 
 
@@ -78,7 +131,14 @@ dk_createOsMacros("dk_import")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_import(https://github.com/madler/zlib/archive/d476828316d05d54c6fd6a068b121b30c147b5cd.zip)
+=======
+	dk_debugFunc(0)
+	
+	#dk_import("https://github.com/madler/zlib/archive/d4768283.zip")
+	dk_import("https://www.dependencywalker.com/depends22_x64.zip")
+>>>>>>> Development
 endfunction()

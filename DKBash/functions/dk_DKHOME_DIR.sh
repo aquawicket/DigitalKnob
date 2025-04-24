@@ -1,13 +1,30 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ####################################################################
 # dk_DKHOME_DIR()
 #
 #
 dk_DKHOME_DIR() {
+<<<<<<< HEAD
     dk_debugFunc 0
 
+=======
+    dk_debugFunc 0 1
+
+	############ SET ############
+	if [ -n "${1-}" ]; then  
+		export DKHOME_DIR="${1}" 
+		return 0
+	fi
+		
+	############ GET ############
+>>>>>>> Development
     [ -e "${DKHOME_DIR-}" ] 	&& return 0 	# already exists
     	
 	###### CMD_EXE ######
@@ -31,6 +48,7 @@ dk_DKHOME_DIR() {
 	[   -e "${WSLPATH_EXE-}" ]	&& export DKHOME_DIR=$(wslpath -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
 	
 	### DKHOME_DIR ###
+<<<<<<< HEAD
 	[ ! -e "${DKHOME_DIR-}" ]   && [ -e "$(grep -o "/storage/....-...." /proc/mounts)" ] && export DKHOME_DIR=$(grep -o "/storage/....-...." /proc/mounts) # Android sdcard
 	[ ! -e "${DKHOME_DIR-}" ] 	&& export DKHOME_DIR="${HOME}"
 	[ ! -e "${DKHOME_DIR}" ] 	&& 	dk_call dk_fatal "DKHOME_DIR not found"
@@ -57,6 +75,13 @@ dk_DKHOME_DIR() {
 
 #${DKDEBUG}
 	#dk_call dk_printVar DKHOME_DIR
+=======
+#	[ ! -e "${DKHOME_DIR-}" ]   && [ -e "$(grep -o "/storage/....-...." /proc/mounts)" ] && export DKHOME_DIR=$(grep -o "/storage/....-...." /proc/mounts) # Android sdcard
+	[ ! -e "${DKHOME_DIR-}" ] 	&& export DKHOME_DIR="${HOME}"
+	[ ! -e "${DKHOME_DIR}" ] 	&& 	dk_call dk_fatal "DKHOME_DIR not found"
+
+	true
+>>>>>>> Development
 }
 
 
@@ -68,9 +93,21 @@ dk_DKHOME_DIR() {
 DKTEST() {
     dk_debugFunc 0
  
+<<<<<<< HEAD
     dk_call dk_DKHOME_DIR
 	
     dk_call dk_printVar DKHOME_DIR
 	dk_call dk_printVar DKCACHE_DIR
 	dk_call dk_printVar DKDESKTOP_DIR
+=======
+	dk_call dk_echo
+	dk_call dk_echo "Test Getting DKHOME_DIR . . ."
+    dk_call dk_DKHOME_DIR
+    dk_call dk_printVar DKHOME_DIR
+	
+	dk_call dk_echo
+	dk_call dk_echo "Test Setting DKHOME_DIR . . ."
+	dk_call dk_DKHOME_DIR "/C/"
+	dk_call dk_printVar DKHOME_DIR 
+>>>>>>> Development
 }

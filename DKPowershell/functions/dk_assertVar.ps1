@@ -1,14 +1,26 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_assertVar){ $dk_assertVar = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_assertVar){ $dk_assertVar = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ##################################################################################
 # dk_assertVar(expression)
 #
 #
+<<<<<<< HEAD
 function Global:dk_assertVar($expression) {
 	dk_debugFunc 1
 
 	if((${!expression})){
+=======
+function Global:dk_assertVar($var) {
+	dk_debugFunc 1
+
+	if((${!var})){
+>>>>>>> Development
 		return #${true}
 	}
 	

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/bin/sh
+=======
+#!/usr/bin/env sh
+>>>>>>> Development
 
 foo(){ echo "foo ${1}"; }
 $(command -v foo) || foo(){ echo "foo_fallback ${1}"; }

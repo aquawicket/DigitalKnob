@@ -2,7 +2,11 @@
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
+<<<<<<< HEAD
 :: Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 ::
 :: Permission is hereby granted, free of charge, to any person obtaining a copy
 :: of this software and associated documentation files(the "Software"), to deal
@@ -30,7 +34,11 @@ echo I'm sending 11 to TestReturn2
 call TestReturn2 11
 
 echo The final number I got back from TestReturn2 is %TestReturn2%.
+<<<<<<< HEAD
 set /A var=%TestReturn2%-11
+=======
+set /a var=%TestReturn2%-11
+>>>>>>> Development
 echo That's %var% more than the 11 we started with. Our work here is done.  
   
 %DKEND% 

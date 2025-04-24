@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_registryKeyExists() <reg_path>
@@ -8,7 +13,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_registryKeyExists)
     dk_debugFunc()
 	
+<<<<<<< HEAD
 	set(cmnd cmd /c "reg.exe" query %~1)
+=======
+	dk_depend(cmd)
+	set(cmnd ${CMD_EXE} /c "reg.exe" query %~1)
+>>>>>>> Development
 	execute_process(COMMAND echo ${cmnd} RESULT_VARIABLE result)
 	message("result = ${result}")
 endfunction()

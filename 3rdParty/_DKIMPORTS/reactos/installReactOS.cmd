@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\..\..\DKBatch\functions\"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 :: https://reactos.org
 :: https://reactos.org/wiki/QEMU
@@ -9,6 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_installReactOS()
 ::#
 :dk_installReactOS
+<<<<<<< HEAD
 	call dk_debugFunc 0
 	
 	set "REACTOS_DL=https://sourceforge.net/projects/reactos/files/ReactOS/0.4.14/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"
@@ -21,10 +30,26 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	setlocal
 		if exist "%REACTOS_IMG%" %return%
+=======
+::setlocal
+	%dk_call% dk_debugFunc 0
+	
+	set "REACTOS_DL=https://sourceforge.net/projects/reactos/files/ReactOS/0.4.14/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"
+	
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+	%dk_call% dk_set REACTOS_DIR "%DKTOOLS_DIR%\ReactOS"
+	%dk_call% dk_set REACTOS_IMG %REACTOS_DIR%\reactos.img
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\DKINSTALL.cmd"
+	
+	setlocal
+		if exist "%REACTOS_IMG%" (%return%)
+>>>>>>> Development
 		
 		%dk_call% dk_info "Installing ReactOS . . ."
 		%dk_call% dk_basename %REACTOS_DL% REACTOS_DL_FILE
 		%dk_call% dk_download %REACTOS_DL%
+<<<<<<< HEAD
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 		%dk_call% dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE%
 		
@@ -34,10 +59,22 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		
 		:::::: Install the OS to the .img file
 		:: (Install from the running virtual OS)
+=======
+		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		%dk_call% dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE%
+		
+		::###### create and cd into install directory ######
+		%dk_call% dk_mkdir %REACTOS_DIR% 
+		%dk_call% dk_chdir %REACTOS_DIR%
+		
+		::###### Install the OS to the .img file ######
+		::###### (Install from the running virtual OS) ######
+>>>>>>> Development
 		%dk_call% dk_info "########### ReactOS -install- ###############"
 		%dk_call% dk_info " "
 		%dk_call% dk_info ". Setup Instructions TODO here"
 		
+<<<<<<< HEAD
 		:::::: Create the virtual image (10gb)
 		%QEMU_IMG_EXE% create -f qcow2 %REACTOS_IMG% 10G
 
@@ -47,6 +84,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		:: create ReactOS Launcher
 		%dk_call% dk_set REACTOS_launcher "%REACTOS_DIR%\LAUNCH.cmd"
 		if exist "%REACTOS_launcher%" %return%	
+=======
+		::###### Create the virtual image (10gb) ######
+		%QEMU_IMG_EXE% create -f qcow2 %REACTOS_IMG% 10G
+
+		::###### Launching the VM ######
+		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso/ReactOS-0.4.14-release-119-gce0b4ff.iso -boot menu=on -drive file=%REACTOS_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+		
+		::###### create ReactOS Launcher ######
+		%dk_call% dk_set REACTOS_launcher "%REACTOS_DIR%\LAUNCH.cmd"
+		if exist "%REACTOS_launcher%" (%return%)
+>>>>>>> Development
 		%dk_call% dk_fileWrite "%REACTOS_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%REACTOS_IMG% -cpu max -smp 2 -vga virtio -display sdl"
 %endfunction%
 
@@ -56,7 +104,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
 	call dk_debugFunc 0
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+>>>>>>> Development
 	
 	%dk_call% dk_installReactOS
 %endfunction%

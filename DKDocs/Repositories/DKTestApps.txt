@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 // Copy this file to the root DigitalKnob directory to add this repository to DKBuilder
 
 [MYGIT] https://github.com/aquawicket/DKTestApps.git
+=======
+// Copy this file to the root DigitalKnob directory to add this repository to DKBuilder
+
+[MYGIT] https://github.com/aquawicket/DKTestApps.git
+>>>>>>> Development
 [MYSVN] https://github.com/aquawicket/DKTestApps/trunk/

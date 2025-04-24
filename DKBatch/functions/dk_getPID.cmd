@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::################################################################################
 ::# dk_getPID(rtn_var)
@@ -10,7 +18,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   RtnVar. If called without any argument, then simply write the PID to stdout.
 ::#
 :dk_getPID  [RtnVar]
+<<<<<<< HEAD
 :: setlocal
+=======
+::setlocal
+>>>>>>> Development
     
 ::  title mycmd
 ::  tasklist /fo csv | findstr /i "mycmd"
@@ -22,9 +34,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
     for /f "tokens=1* delims=   : " %%a in ('%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process | Where-Object ProcessId -EQ "$PID""') do (
             echo %%a, %%b
+<<<<<<< HEAD
             if /I "%%a"=="ProcessId"       set "%%a=%%b"
             if /I "%%a"=="ParentProcessId" set "%%a=%%b"
             if /I "%%a"=="ExecutablePath"  set "%%a=%%b"
+=======
+            if /I "%%a" equ "ProcessId"       set "%%a=%%b"
+            if /I "%%a" equ "ParentProcessId" set "%%a=%%b"
+            if /I "%%a" equ "ExecutablePath"  set "%%a=%%b"
+>>>>>>> Development
     )
     echo ProcessId = %ProcessId%
     echo ParentProcessId = %ParentProcessId%
@@ -33,9 +51,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     for /f "tokens=1* delims=   : " %%a in ('%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process | Where-Object ParentProcessId -EQ "%ParentProcessId%""') do (
             echo %%a, %%b
+<<<<<<< HEAD
             if /I "%%a"=="ProcessId"       set "%%a=%%b"
             if /I "%%a"=="ParentProcessId" set "%%a=%%b"
             if /I "%%a"=="ExecutablePath"  set "%%a=%%b"
+=======
+            if /I "%%a" equ "ProcessId"       set "%%a=%%b"
+            if /I "%%a" equ "ParentProcessId" set "%%a=%%b"
+            if /I "%%a" equ "ExecutablePath"  set "%%a=%%b"
+>>>>>>> Development
     )
     echo ProcessId = %ProcessId%
     echo ParentProcessId = %ParentProcessId%
@@ -88,9 +112,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
     %dk_call% dk_getPID PID
     %dk_call% dk_printVar PID
     

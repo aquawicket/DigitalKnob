@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 #!/bin/sh
+=======
+#!/usr/bin/env sh
+>>>>>>> Development
 
 # https://blog.opstree.com/2020/02/11/shell-initialization-files/
 # https://www.tecmint.com/understanding-shell-initialization-files-and-user-profiles-linux/
 
+<<<<<<< HEAD
 ###### Load DK Function files (DKINIT) ######
+=======
+###### Load DK Function files ######
+>>>>>>> Development
 . ../functions/DK
 
 

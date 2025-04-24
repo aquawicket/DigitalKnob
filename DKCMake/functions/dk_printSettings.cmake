@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_printSettings()
@@ -19,8 +24,13 @@ function(dk_printSettings)
 	dk_buildLog(DKBRANCH_DIR)
 	dk_buildLog(DK3RDPARTY_DIR)
 	dk_buildLog(DKIMPORTS_DIR)
+<<<<<<< HEAD
 	dk_buildLog(DKAPPS_DIR)
 	dk_buildLog(DKPLUGINS_DIR)
+=======
+	dk_buildLog(DKCPP_APPS_DIR)
+	dk_buildLog(DKCPP_PLUGINS_DIR)
+>>>>>>> Development
 	dk_buildLog(CONFIG_PATH)
 	
 	dk_buildLog("#################  CMAKE VARIABLES  ################")
@@ -76,7 +86,11 @@ function(dk_printSettings)
 	dk_buildLog(MULTI_CONFIG)
 	dk_buildLog(SINGLE_CONFIG)
 	dk_buildLog(APP_NAME)
+<<<<<<< HEAD
 	dk_buildLog(DK_PROJECT_DIR)
+=======
+	dk_buildLog(DK_Project_Dir)
+>>>>>>> Development
 	dk_buildLog(DEBUG_DIR)
 	dk_buildLog(RELEASE_DIR)
 	dk_buildLog(VS_STARTUP_PROJECT)
@@ -120,7 +134,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_todo()
 endfunction()

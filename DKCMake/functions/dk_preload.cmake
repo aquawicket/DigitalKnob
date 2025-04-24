@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_preload(fn)
@@ -14,7 +19,11 @@ macro(dk_preload var)
 	string(STRIP ${var} fn)
 	
 	get_filename_component(name_we "${fn}" NAME_WE)
+<<<<<<< HEAD
 	if("${name_we}" STREQUAL "DKMAKE")
+=======
+	if("${name_we}" STREQUAL "DKINSTALL")
+>>>>>>> Development
 		dk_dirname("${fn}" fnDir)
 		#dk_echo("fnDir = ${fnDir}")
 		if(fnDir)
@@ -40,8 +49,13 @@ endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
 	dk_echo("dk_parseFunctionsAndLoad(${ARGV})")
+<<<<<<< HEAD
 	if(EXISTS ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
 		set(${fn}_file ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
+=======
+	if(EXISTS $ENV{DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
+		set(${fn}_file $ENV{DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
+>>>>>>> Development
 	elseif(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 	elseif(EXISTS ${fpath})
@@ -119,9 +133,15 @@ endif()
 #	dk_dirname(${CMAKE_CURRENT_LIST_DIR} DKCMAKE_DIR)
 #	dk_basename(${CMAKE_CURRENT_LIST_DIR} DKCMAKE)
 #	if(${DKCMAKE} STREQUAL "DKCMake")
+<<<<<<< HEAD
 #		set(DKCMAKE_DIR ${DKCMAKE_DIR} CACHE INTERNAL "" FORCE)
 #	endif()
 #	dk_echo("DKCMAKE_DIR = ${DKCMAKE_DIR}")
+=======
+#		set(ENV{DKCMAKE_DIR} $ENV{DKCMAKE_DIR} CACHE INTERNAL "" FORCE)
+#	endif()
+#	dk_echo("DKCMAKE_DIR = $ENV{DKCMAKE_DIR}")
+>>>>>>> Development
 #endif()
 	
 #dk_preload(dk_DIGITALKNOB_DIR)
@@ -133,7 +153,11 @@ endif()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_todo()
 endfunction()

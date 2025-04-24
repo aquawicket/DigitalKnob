@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 https://cliutils.gitlab.io/modern-cmake/chapters/testing/googletest.html
 https://cmake.org/cmake/help/v3.10/manual/cmake-generator-expressions.7.html#manual:cmake-generator-expressions(7)
+=======
+https://cliutils.gitlab.io/modern-cmake/chapters/testing/googletest.html
+https://cmake.org/cmake/help/v3.10/manual/cmake-generator-expressions.7.html#manual:cmake-generator-expressions(7)
+>>>>>>> Development

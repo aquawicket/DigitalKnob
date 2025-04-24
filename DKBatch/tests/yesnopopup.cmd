@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  @if (@x)==(@y) @end /***** jscript comment ******
      @echo off
 
@@ -5,6 +6,14 @@
      exit /b 0
 
  @if (@x)==(@y) @end ******  end comment *********/
+=======
+@if (@x)==(@y) @end /***** jscript comment ******
+    @echo off
+
+    cscript //E:javascript //nologo "%~f0" "%~nx0" %*
+    exit /b %errorlevel%
+@if (@x)==(@y) @end ******  end comment *********/
+>>>>>>> Development
  
 
 var wshShell = WScript.CreateObject("WScript.Shell");
@@ -29,26 +38,42 @@ if (args.Item(1).toLowerCase() == "-help" ||  args.Item(1).toLowerCase() == "-h"
 	WScript.Quit(0);
 }
 
+<<<<<<< HEAD
 if (WScript.Arguments.Length % 2 == 0 ) {
+=======
+if (WScript.Arguments.Length % 2 == 0) {
+>>>>>>> Development
 	WScript.Echo("Illegal arguments ");
 	printHelp();
 	WScript.Quit(10);
 }
 
 for (var arg = 1 ; arg<args.Length;arg=arg+2) {
+<<<<<<< HEAD
 		
 	if (args.Item(arg).toLowerCase() == "-title") {
 		title = args.Item(arg+1);
 	}
 	
+=======
+
+	if (args.Item(arg).toLowerCase() == "-title") {
+		title = args.Item(arg+1);
+	}
+
+>>>>>>> Development
 	if (args.Item(arg).toLowerCase() == "-timeout") {
 		timeout = parseInt(args.Item(arg+1));
 		if (isNaN(timeout)) {
 			timeout=-1;
 		}
 	}
+<<<<<<< HEAD
 	
 	
+=======
+
+>>>>>>> Development
 	if (args.Item(arg).toLowerCase() == "-message") {
 		message = args.Item(arg+1);
 	}
@@ -58,17 +83,31 @@ function runPopup(){
 	var btn = wshShell.Popup(message, timeout, title, 0x4 + 0x20);
 	//WScript.Echo(btn)
 	switch(btn) {
+<<<<<<< HEAD
 		// yes pressed.
 		case 6:
 			WScript.Echo("yes");
 			WScript.Quit(btn);
 			break;
+=======
+		
+		// yes pressed
+		case 6: 
+			WScript.Echo("yes");
+			WScript.Quit(btn);
+			break;
+			
+>>>>>>> Development
 		// no  pressed.
 		case 7:
 			WScript.Echo("no");
 			WScript.Quit(btn);
 			break;
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> Development
 		// Timed out.
 		case -1:
 		   WScript.Echo("timeout");
@@ -76,5 +115,8 @@ function runPopup(){
 		   break;
 	}
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> Development
 runPopup();

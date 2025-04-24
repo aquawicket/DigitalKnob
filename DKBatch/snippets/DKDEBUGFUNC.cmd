@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @echo off
 setlocal EnableDelayedExpansion
 ::### keep window open ###
@@ -6,6 +7,21 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 goto END_DKDEBUGFUNC
 :DKDEBUGFUNC
 	setlocal
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+setlocal EnableDelayedExpansion
+::### keep window open ###
+if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit )
+
+goto END_DKDEBUGFUNC
+:DKDEBUGFUNC
+setlocal
+>>>>>>> Development
 	::echo :DKDEBUGFUNC(%0 %1 %2 %3 %4 %5 %6 %7 %8 %9)
 	::set args=%*
 	::echo :DKDEBUGFUNC(%0 %args%)

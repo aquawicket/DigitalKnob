@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>Process Manager</title>
+
+<style>
+#processTable {
+	font-family: arial, sans-serif;
+	font-size: 10pt;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#processTable td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 3px;
+}
+</style>
+
+<script language="JavaScript">
+	// More info about GetObject("WinMgmts:").InstancesOf("Win32_Process"), see: https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-process
+	
+	var searchString = ""
+	
+	function clearSearchProcess(){
+		searchString = ""
+		document.getElementById("searchProcessName").value = "";
+		getSysRunningProccesses();
+	}
+	
+	function teminateProcess(processId, processName){
+		if (confirm('Are you sure you want to terminate the process "' + processName + '"?')) {
+			var WshShell = new ActiveXObject("WScript.Shell");
+			var oExec = WshShell.Run("taskkill /F /PID " + processId, 0, true);
+			//var oExec = WshShell.Exec("taskkill /f /pid " + processId);
+			getSysRunningProccesses()
+		}
+	}
+
+	function getProcessListAndDisplayInHTML()
+	{
+		searchString = document.getElementById("searchProcessName").value;
+		
+		var procs = GetObject("WinMgmts:").InstancesOf("Win32_Process");
+		var tableRowsHTML = "";
+		var i = 1
+		procEnum = new Enumerator(procs);
+	  
+		for ( ; !procEnum.atEnd(); procEnum.moveNext())
+		{
+			var proc = procEnum.item();
+			
+			var isShow = false;
+			
+			if (searchString != "") {
+				if (proc.Name.toLowerCase().indexOf(searchString.toLowerCase()) != -1
+					|| proc.Description.toLowerCase().indexOf(searchString.toLowerCase()) != -1) {
+					isShow = true;
+				}
+			} else {
+				isShow = true;
+			}
+			if (isShow) {
+				tableRowsHTML += 	'<tr><td>' + i.toString()
+										+ '</td><td>' + proc.Name
+										+ '</td><td>' + proc.ProcessID 
+										+ '</td><td>' + proc.ParentProcessID
+										+ '</td><td>' + proc.Status							
+										+ '</td><td>' + proc.Description
+										+ '</td><td>' + proc.ThreadCount							
+										+ '</td><td style="width:200px"><button onclick=\'teminateProcess('
+										+ proc.ProcessID.toString() + ', "' + proc.Name + '")\'>Terminate</button></td></tr>\n';
+			}
+			i++;
+		}
+		
+		var htmlTable = '<table id="processTable" style="position: absolute;">'
+						+ '<tr>'
+						+ '	<th>No.</th>'
+						+ '	<th>Process Name</th>'
+						+ '	<th>Process ID</th>'
+						+ '	<th>Parent Process ID</th>'
+						+ '	<th>Status</th>'
+						+ '	<th>Description</th>'
+						+ '	<th>Thread Count</th>'
+						+ '	<th>Action</th>'
+						+ '</tr>'
+						+ tableRowsHTML + '</table>'
+		
+		return htmlTable;
+	}
+
+	function getSysRunningProccesses()
+	{
+		var oOutput = document.getElementById("processTableDisplay");
+		oOutput.innerHTML = "";
+		oOutput.innerHTML = getProcessListAndDisplayInHTML();
+	}
+
+	window.onload = function() {
+		getSysRunningProccesses()
+	}
+	refreshInterval = setInterval(getSysRunningProccesses, 2000);
+</script>
+</head>
+
+<body bgcolor="#FFFFFF">
+	<input id="searchProcessName" type="text" onClick="this.select();"></input>
+	<button onclick="clearSearchProcess()">Clear Search</button>
+	<br/><br/>
+    <div style="height:90%; overflow:auto; width:100%" id="processTableDisplay"></div>
+</body>
+</html>

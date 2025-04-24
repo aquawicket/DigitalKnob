@@ -1,14 +1,26 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
 # dk_libDebug(lib_path)
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+
+###############################################################################
+# dk_libDebug(<lib_path>, <alias>:optional)
+>>>>>>> Development
 #
 #	TODO
 #
 #	@lib_path	- TODO
+<<<<<<< HEAD
 #	@variable (optional)	- Create a variable to store the lib_path in.
+=======
+#	@alias (optional)	- Create a variable to store the lib_path in.
+>>>>>>> Development
 #
 function(dk_libDebug lib_path)
 	dk_debugFunc()
@@ -35,8 +47,15 @@ function(dk_libDebug lib_path)
 
 	if(INSTALL_DKLIBS)
 		if(EXISTS ${lib_path})
+<<<<<<< HEAD
 			dk_basename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
 			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${triple}/Debug)
+=======
+			#dk_assertVar($ENV{CURRENT_PLUGIN}_IMPORT_NAME)
+			#set(LIB_NAME ${$ENV{CURRENT_PLUGIN}_IMPORT_NAME}) # get the import folder name of the plugin
+			#file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${target_triple}/Debug)
+			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${target_triple}/Debug)
+>>>>>>> Development
 		endif()
 	endif()
 	
@@ -45,7 +64,11 @@ function(dk_libDebug lib_path)
 	endif()
 	
 endfunction()
+<<<<<<< HEAD
 dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
+=======
+
+>>>>>>> Development
 
 
 
@@ -53,7 +76,13 @@ dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	dk_libDebug(todo) #TODO
+>>>>>>> Development
 endfunction()

@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_install(PLUGIN_IMPORT_NAME)
@@ -16,8 +21,14 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	dk_debugFunc()
+<<<<<<< HEAD
 	
 	dk_getOption(NO_HALT  ${ARGV} REMOVE)
+=======
+	message("dk_install(${ARGV})")
+	
+	dk_getOption(NO_HALT  REMOVE)
+>>>>>>> Development
 	
 	set(PLUGIN_IMPORT_NAME 	${${PLUGIN_VAR_PREFIX}_IMPORT_NAME})
 	set(PLUGIN_URL 			${${PLUGIN_VAR_PREFIX}_URL})
@@ -33,7 +44,11 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	#if(NOT ${PLUGIN_IMPORT_NAME} STREQUAL ${plugin_lower})
 	#	dk_fatal("ERROR:  dk_install() (${PLUGIN_IMPORT_NAME}) must be all lowercase")
 	#endif()
+<<<<<<< HEAD
 	dk_assertPath(${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}) # "dk_install():36")
+=======
+	dk_assertPath($ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME})
+>>>>>>> Development
 	
 	if(EXISTS ${PLUGIN_DIR}/installed)
 		dk_info("${PLUGIN_IMPORT_NAME} already installed")
@@ -44,18 +59,31 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	endif()
 	#dk_echo(" ")
 	#dk_printVar(PLUGIN_URL)
+<<<<<<< HEAD
 	dk_getDirectory(${PLUGIN_URL} PLUGIN_URL_DIR)
+=======
+	dk_dirname(${PLUGIN_URL} PLUGIN_URL_DIR)
+>>>>>>> Development
 	dk_basename(${PLUGIN_URL} PLUGIN_URL_FILENAME)
 	dk_getExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_EXTENSION)
 	#dk_echo(" ")
 	#dk_printVar(PLUGIN_DIR)
+<<<<<<< HEAD
 	dk_getDirectory(${PLUGIN_DIR} dest_directory)
+=======
+	dk_dirname(${PLUGIN_DIR} dest_directory)
+>>>>>>> Development
 	dk_basename(${PLUGIN_DIR} dest_filename)
 	dk_getExtension(${dest_filename} dest_extension)
 	#dk_echo(" ")
 	
 	### set the PLUGIN_DL_DIR
+<<<<<<< HEAD
 	set(PLUGIN_DL_DIR ${DKDOWNLOAD_DIR})
+=======
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	set(PLUGIN_DL_DIR "$ENV{DKDOWNLOAD_DIR}")
+>>>>>>> Development
 	
 	### set the PLUGIN_DL_FILENAME ###
 	# let's check that the PLUGIN_URL_FILENAME has at least the PLUGIN_IMPORT_NAME in it somewhere, or else we gotta rename it
@@ -77,17 +105,32 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		set(PLUGIN_DL_FILENAME ${PLUGIN_URL_FILENAME})
 	endif()
 	
+<<<<<<< HEAD
 	dk_download(${PLUGIN_URL} ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} NO_HALT)
 	dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}) # "The download file does not exist")
+=======
+	dk_download("${PLUGIN_URL}" "${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}" NO_HALT)
+	dk_assertPath("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}") # "if the download file does not exist"
+>>>>>>> Development
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${PLUGIN_URL_EXTENSION} STREQUAL "")
 		if(${PLUGIN_URL_EXTENSION} STREQUAL ".AppImage")
 			set(FILETYPE "Executable")
+<<<<<<< HEAD
+=======
+		elseif(${PLUGIN_URL_EXTENSION} STREQUAL ".bat")
+			set(FILETYPE "Executable")
+>>>>>>> Development
 		elseif(${PLUGIN_URL_EXTENSION} STREQUAL ".bz")
 			set(FILETYPE "Archive")
 		elseif(${PLUGIN_URL_EXTENSION} STREQUAL ".bz2")
 			set(FILETYPE "Archive")
+<<<<<<< HEAD
+=======
+		elseif(${PLUGIN_URL_EXTENSION} STREQUAL ".cmd")
+			set(FILETYPE "Executable")
+>>>>>>> Development
 		elseif(${PLUGIN_URL_EXTENSION} STREQUAL ".dmg")
 			set(FILETYPE "BYPASS")
 		elseif(${PLUGIN_URL_EXTENSION} STREQUAL ".exe")
@@ -162,18 +205,31 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		dk_smartExtract("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}" "${PLUGIN_DIR}")
 
 	elseif(${FILETYPE} STREQUAL "Executable")
+<<<<<<< HEAD
 		dk_cd(${PLUGIN_DL_DIR})
+=======
+		dk_chdir(${PLUGIN_DL_DIR})
+>>>>>>> Development
 		dk_set(QUEUE_BUILD ON)
 		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}) # "dk_install():167")
 		
 		if(${PLUGIN_URL_EXTENSION} STREQUAL ".pkg")
 			if(MAC_HOST)
+<<<<<<< HEAD
 				dk_executeProcess(chmod 777 ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
 				dk_depend(sudo)
 				dk_executeProcess(${SUDO_EXE} -s installer -pkg ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} -target /)
 			endif()
 		else()
 			dk_executeProcess(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+=======
+				dk_exec(chmod 777 ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+				dk_depend(sudo)
+				dk_exec(${SUDO_EXE} -s installer -pkg ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} -target /)
+			endif()
+		else()
+			dk_exec(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+>>>>>>> Development
 		endif()
 	elseif(${FILETYPE} STREQUAL "BYPASS")
 		# (BYPASS) do nothing
@@ -188,21 +244,34 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	if(ARGN MATCHES "PATCH")
 		dk_patch(${PLUGIN_IMPORT_NAME} ${PLUGIN_DIR})
 	else()
+<<<<<<< HEAD
 		file(GLOB ITEMS ${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/*)
 		list(LENGTH ITEMS count)
 		if(${count} GREATER 1)
 			dk_notice(" Found ${count} items in the ${PLUGIN_IMPORT_NAME} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in ${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/DKMAKE.cmake ")
+=======
+		file(GLOB ITEMS $ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/*)
+		list(LENGTH ITEMS count)
+		if(${count} GREATER 1)
+			dk_notice(" Found ${count} items in the ${PLUGIN_IMPORT_NAME} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in $ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}/DKINSTALL.cmake ")
+>>>>>>> Development
 		endif()
 	endif()
 	
 	dk_fileWrite(${PLUGIN_DIR}/installed "${dest_filename} ")
 	
 	if(DELETE_DOWNLOADS) # conserve disk space 
+<<<<<<< HEAD
 		dk_info("deleting ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}. . .")
 		dk_delete(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
 	endif()
 endfunction()
 #dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
+=======
+		dk_delete(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+	endif()
+endfunction()
+>>>>>>> Development
 
 
 
@@ -210,7 +279,13 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	dk_install(todo)	#TODO
+>>>>>>> Development
 endfunction()

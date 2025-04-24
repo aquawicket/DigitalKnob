@@ -1,13 +1,26 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::################################################################################
 ::# dk_gitApplyPatch(directory, patchFile)
 ::#
 ::#
 :dk_gitApplyPatch
+<<<<<<< HEAD
     call dk_debugFunc 2
  setlocal  
+=======
+setlocal
+	%dk_call% dk_debugFunc 2  
+>>>>>>> Development
 
 	::set "directory=C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master"
 	::set "patchFile=C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master/termux.patch"
@@ -16,13 +29,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	:: NOTE: We must cd out of the .git local repository, or git apply wont work.
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+<<<<<<< HEAD
 	%dk_call% dk_cd %DIGITALKNOB_DIR%
+=======
+	%dk_call% dk_chdir %DIGITALKNOB_DIR%
+>>>>>>> Development
 	
 ::	%dk_call% dk_validate PATCH_EXE "%dk_call% dk_installGit"
 ::	"%PATCH_EXE%" --directory=%directory% < %patchFile% --verbose --dry-run
 	
 	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+<<<<<<< HEAD
 	"%GIT_EXE%" apply --verbose --no-index --unsafe-paths --directory=%directory% %patchFile%
+=======
+	"%GIT_EXE%" "-C %DKBRANCH_DIR% apply --verbose --no-index --unsafe-paths --directory=%directory% %patchFile%
+>>>>>>> Development
 	
 %endfunction%
 
@@ -31,9 +52,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
 	::%dk_call% dk_selectFolder directory
 	::%dk_call% dk_selectFile patchFile
     ::%dk_call% dk_gitApplyPatch "%directory%" "%patchFile%"

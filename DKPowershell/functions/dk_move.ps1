@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_move){ $dk_move = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_move){ $dk_move = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ##################################################################################
 # dk_move(from to)
@@ -31,7 +36,11 @@ function Global:dk_move($_from_, $_to_) {
 	# the base directory of the $_to_ path must exist.    
 	$_parent_dir_ = dk_call dk_dirname "${_to_}"
 	dk_call dk_printVar _parent_dir_
+<<<<<<< HEAD
 	dk_call dk_makeDirectory ${_parent_dir_}
+=======
+	dk_call dk_mkdir ${_parent_dir_}
+>>>>>>> Development
 	
 	mv "$_from_" "$_to_"
 }
@@ -49,9 +58,16 @@ function Global:DKTEST(){
 	dk_call dk_fileWrite moveMe.file "dk_move test"
 	dk_call dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
+<<<<<<< HEAD
 	dk_call dk_makeDirectory $DKDOWNLOAD_DIR/moveMe
 	dk_call dk_move $DKDOWNLOAD_DIR/moveMe $DIGITALKNOB_DIR/iWasMoved OVERWRITE
 	
 	dk_call dk_makeDirectory moveMe
+=======
+	dk_call dk_mkdir $DKDOWNLOAD_DIR/moveMe
+	dk_call dk_move $DKDOWNLOAD_DIR/moveMe $DIGITALKNOB_DIR/iWasMoved OVERWRITE
+	
+	dk_call dk_mkdir moveMe
+>>>>>>> Development
 	dk_call dk_move moveMe iWasMoved OVERWRITE
 }

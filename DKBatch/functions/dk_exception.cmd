@@ -11,7 +11,11 @@
 ::   v1.4 2016-08-16  Improved detection of command line delayed expansion
 ::                    using an original idea by jeb
 ::   v1.3 2015-12-12  Added paged help option via MORE
+<<<<<<< HEAD
 ::   v1.2 2015-07-16  Use COMSPEC instead of OS to detect delayed expansion
+=======
+::   v1.2 2015-07-16  Use ComSpec instead of OS to detect delayed expansion
+>>>>>>> Development
 ::   v1.1 2015-07-03  Preserve ! in exception attributes when delayed expansion enabled
 ::   v1.0 2015-06-26  Initial versioned release with embedded documentation
 ::

@@ -1,23 +1,50 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_source){ $dk_source = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_source){ $dk_source = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ####################################################################
 # dk_source(milliseconds)
 #
 function Global:dk_source($func) {
 	#if(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1"){ dk_debugFunc 1 }
+<<<<<<< HEAD
 
 	# load if it's an existing full path file
 	if(Test-Path "${func}"){
+=======
+	$all_args = $PsBoundParameters.Values + ${args}
+	#Write-Host "dk_source($all_args)"
+
+	if(!${func}){
+		Write-Host "ERROR: func:${func} is invalid";
+		return;
+	}
+	
+	# load if it's an existing full path file
+	if((${func}) -and (Test-Path "${func}")){
+>>>>>>> Development
 		. "${func}"
 		return
 	}
 	
+<<<<<<< HEAD
+=======
+	#Write-Host "func = ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1";
+>>>>>>> Development
 	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1")){ Write-Host "downloading ${func} . . ." }
 	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/${func}.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1" }
 	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1")){ Write-Host "ERROR: Failed to download ${func}."; return }
 	
+<<<<<<< HEAD
 	. ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1
+=======
+	#Write-Host "func = ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1";
+	. ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;
+>>>>>>> Development
 }
 
 

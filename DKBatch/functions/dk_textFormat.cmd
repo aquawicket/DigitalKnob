@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::################################################################################
 ::# dk_textFormat(OUTPUT. column1, column2, column3, column4)
@@ -8,12 +16,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#   
 ::#
 :dk_textFormat
+<<<<<<< HEAD
     call dk_debugFunc 4 5
  setlocal
  
     set "spaces=                                        "
     set "col1=%~2%spaces%"
     set col1=%col1:~0,10%
+=======
+setlocal
+    %dk_call% dk_debugFunc 4 99
+ 
+    set "spaces=                                        "
+    set "col1=%~2%spaces%"
+    set col1=%col1:~0,15%
+>>>>>>> Development
     
     set "col2=%~3%spaces%"
     set col2=%col2:~0,30%
@@ -35,9 +52,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
     %dk_call% dk_textFormat output "column1" "column2" "column3" "column4"
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+    %dk_call% dk_textFormat output "column1[15]" "column2[30]" "column3[20]" "column4[100]"
+>>>>>>> Development
     %dk_call% dk_echo "%output%"
 %endfunction%

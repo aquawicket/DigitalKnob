@@ -2,7 +2,11 @@
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
+<<<<<<< HEAD
 :: Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 ::
 :: Permission is hereby granted, free of charge, to any person obtaining a copy
 :: of this software and associated documentation files(the "Software"), to deal
@@ -25,7 +29,11 @@
 %dkbatch%
 
 echo got %1, adding 2 and sending to TestReturn3
+<<<<<<< HEAD
 set /A var=%1+2
+=======
+set /a var=%1+2
+>>>>>>> Development
 
 
 call TestReturn3 %var%
@@ -34,6 +42,10 @@ call TestReturn3 %var%
 echo TestReturn3 gave me back %TestReturn3%.
 echo I'm gonna subtract 10 and pass it down to TestReturn.
 
+<<<<<<< HEAD
 set /A %0=%TestReturn3%-10  
+=======
+set /a %0=%TestReturn3%-10  
+>>>>>>> Development
   
 %DKEND% 

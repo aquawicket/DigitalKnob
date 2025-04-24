@@ -1,9 +1,17 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
 # dk_getOption(name ${ARGV}) REMOVE
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+
+###############################################################################
+# dk_getOption(name) REMOVE
+>>>>>>> Development
 #
 #	Check if the parameter exists in the calling function by <name>
 #	If the named parameter was defined, set it's value to it's name.
@@ -15,6 +23,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #	EXAMPLE: dk_getOption(MY_ARG ${ARGV})
 #
+<<<<<<< HEAD
 function(dk_getOption name)
 	dk_debugFunc()
 	
@@ -38,13 +47,93 @@ function(dk_getOption name)
 		#dk_debug("${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
 	endif()
 endfunction()
+=======
+macro(dk_getOption)
+	dk_debugFunc()
+	
+	###### ARGV - dk_getOption args ######
+	#message("dk_getOption(ARGC = ${ARGC})")
+	#message("dk_getOption(ARGV = ${ARGV})")
+	
+	###### ARGN - dk_getOption extra args ######
+	#message("dk_getOption(ARGN = ${ARGN})")
+	
+	###### PARGV - Parent Function args ######
+	set(PARGC 0)
+	unset(PARGV)
+	foreach(arg IN LISTS ARGV)
+		math(EXPR PARGC "${PARGC} + 1" OUTPUT_FORMAT DECIMAL)
+		list(APPEND PARGV ${arg})
+	endforeach()
+	#message("PARGC = ${PARGC}")
+	#message("PARGV = ${PARGV}")
+
+	#########################################
+	
+	set(dk_getOption_NAME ${ARGV0})
+	cmake_parse_arguments(ARG ${dk_getOption_NAME} "" "" ${PARGV})
+	cmake_parse_arguments(ARG REMOVE "" "" ${ARGV})
+
+	if(ARG_${dk_getOption_NAME})
+		set(${dk_getOption_NAME} "${dk_getOption_NAME}")
+		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOption_NAME} set to "${dk_getOption_NAME}")
+		
+		if(ARG_REMOVE)
+			list(REMOVE_ITEM ARGV ${dk_getOption_NAME})	# remove arg from the functions ARGV list
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOption_NAME} REMOVED from ARGV")
+			
+			list(REMOVE_ITEM ARGN ${dk_getOption_NAME})	# remove arg from the functions ARGN list
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOption_NAME} REMOVED from ARGN")
+		endif()
+	else()
+		unset(${dk_getOption_NAME})
+		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOption_NAME} unset")
+	endif()
+	
+	set(PARGC 0)
+	foreach(arg IN LISTS ARGV)
+		math(EXPR PARGC "${PARGC} + 1" OUTPUT_FORMAT DECIMAL)
+	endforeach()
+	set(ARGC ${PARGC})
+endmacro()
+>>>>>>> Development
 
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	TEST_dk_getOption(abc OPTION1 OPTION2 123 OPTION4)
+endfunction()
+
+function(TEST_dk_getOption input1)
+	dk_debugFunc(1 99)
+	
+	message("TEST_dk_getOption(${ARGV})")
+	set(OPTION1 "UNDEFINED")
+	set(OPTION2 "UNDEFINED")
+	set(OPTION3 "UNDEFINED")
+	set(OPTION4 "UNDEFINED")
+	
+	dk_getOption(OPTION1)
+	dk_getOption(OPTION2 REMOVE)
+	dk_getOption(OPTION3)
+	dk_getOption(OPTION4)
+	
+	message("")
+	message("######## AFTER ##################")
+	message("ARGV = ${ARGV}")
+	message("ARGN = ${ARGN}")
+	message("OPTION1 = ${OPTION1}")
+	message("OPTION2 = ${OPTION2}")
+	message("OPTION3 = ${OPTION3}")
+	message("OPTION4 = ${OPTION4}")
+>>>>>>> Development
 endfunction()

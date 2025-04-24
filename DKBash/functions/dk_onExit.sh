@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 #[ -z "${KEY_WAIT_ON_EXIT-}" ] && dk_export KEY_WAIT_ON_EXIT 1
 #[ -z "${STAY_OPEN_ON_EXIT-}" ] && dk_export STAY_OPEN_ON_EXIT 0

@@ -1,0 +1,1 @@
+BZIP2_DL=https://gitlab.com/bzip2/bzip2/-/archive/66c46b8/bzip2-66c46b8.zip

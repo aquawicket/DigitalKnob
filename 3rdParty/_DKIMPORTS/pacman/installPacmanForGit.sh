@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 #!/bin/sh
 
 # https://stackoverflow.com/a/65204171/688352
 [ -z "${DKBASH_FUNCTIONS_DIR_-}" ] && export DKBASH_FUNCTIONS_DIR_="../../../DKBash/functions/"
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+
+# https://stackoverflow.com/a/65204171/688352
+[ -z "${DKBASH_FUNCTIONS_DIR_-}" ] && export DKBASH_FUNCTIONS_DIR_="../../../DKBash/functions/"
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ################################################################################
 # installPacman()
@@ -36,7 +44,11 @@ installPacman() {
 		"
 		zstd=zstd-1.5.2-1-x86_64.pkg.tar.xz
 	fi
+<<<<<<< HEAD
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+=======
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+>>>>>>> Development
 	
 	dk_call dk_download https://raw.githubusercontent.com/msys2/MSYS2-packages/7858ee9c236402adf569ac7cff6beb1f883ab67c/pacman/pacman.conf ${DKDOWNLOAD_DIR}/pacman.conf
 	dk_call dk_copy "${DKDOWNLOAD_DIR}/pacman.conf" "/etc/pacman.conf" OVERWRITE

@@ -1,11 +1,23 @@
+<<<<<<< HEAD
 @echo off
 ::if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::https://stackoverflow.com/a/43123617/688352
 
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
+<<<<<<< HEAD
 if ":" == "%func:~0,1%" ( goto %func% )
+=======
+if ":" equ "%func:~0,1%" ( goto %func% )
+>>>>>>> Development
 
 
 :: *** Get the filename of the caller of this script, needed for later restart

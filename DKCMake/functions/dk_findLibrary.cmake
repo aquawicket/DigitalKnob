@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_findLibrary(name) NO_HALT
@@ -12,7 +17,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_findLibrary name)
 	dk_debugFunc()
 	
+<<<<<<< HEAD
 	dk_getOption(NO_HALT ${ARGV})
+=======
+	dk_getOption(NO_HALT)
+>>>>>>> Development
 	
 	find_library(${name}_LIBRARY ${name} ${ARGN})
 	if(NOT WIN)
@@ -28,7 +37,10 @@ function(dk_findLibrary name)
 		dk_lib(${name})
 	endif()
 endfunction()
+<<<<<<< HEAD
 dk_createOsMacros("dk_findLibrary")
+=======
+>>>>>>> Development
 
 
 
@@ -37,7 +49,13 @@ dk_createOsMacros("dk_findLibrary")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	dk_findLibrary(todo) # TODO
+>>>>>>> Development
 endfunction()

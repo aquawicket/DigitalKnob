@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 (function(doc) {
+=======
+(function(doc){
+>>>>>>> Development
 	if(typeof WScript === "object"){
 		var document = function(){ return new ActiveXObject("Msxml2.DOMDocument.6.0"); 
 			document.async = false;

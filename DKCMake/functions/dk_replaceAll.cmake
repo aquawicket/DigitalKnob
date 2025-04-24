@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 
 ##################################################################################
@@ -9,9 +14,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_replaceAll input searchValue newValue rtn_var)
 	dk_debugFunc()
+<<<<<<< HEAD
 	if(NOT ${ARGC} EQUAL 4)
 		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments:${ARGC}")
 	endif()
+=======
+>>>>>>> Development
 		
 	string(REPLACE "${searchValue}" "${newValue}" replaceAll "${input}")
 	

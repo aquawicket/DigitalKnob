@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::################################################################################
 ::# dk_uptime(days hours minutes seconds)
@@ -12,9 +20,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::# 
 :dk_uptime
+<<<<<<< HEAD
     call dk_debugFunc 4
  setlocal enableExtensions
  
+=======
+setlocal enableExtensions
+    %dk_call% dk_debugFunc 4
+	
+>>>>>>> Development
     set "c=net statistics work"
     set "t=2"
     if "%date%z" lss "A" set "t=1"
@@ -83,9 +97,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
     %dk_call% dk_uptime d h m s
     echo System uptime: days:%d% hours:%h% minutes:%m% seconds:%s%
 %endfunction%    

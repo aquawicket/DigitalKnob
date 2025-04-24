@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_installCmake){ $dk_installCmake = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_installCmake){ $dk_installCmake = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ####################################################################
 # dk_installCmake()
@@ -22,7 +27,11 @@ function Global:dk_installCmake() {
 	${CMAKE_FOLDER} = dk_call dk_removeExtension ${CMAKE_DL_FILE}
     #${CMAKE_FOLDER} = dk_call dk_convertToCIdentifier ${CMAKE_FOLDER} 
     #${CMAKE_FOLDER} = dk_call dk_toLower ${CMAKE_FOLDER}
+<<<<<<< HEAD
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DIGITALKNOB_DIR"
+=======
+	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
+>>>>>>> Development
 	$global:CMAKE_DIR = "$DKTOOLS_DIR/$CMAKE_FOLDER"
     $global:CMAKE_EXE = "$CMAKE_DIR/bin/cmake.exe"
         

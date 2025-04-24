@@ -14,12 +14,20 @@ dk_load dk_validate
 dk_load dk_pathExists
 dk_load dk_installGit
 dk_load dk_DKBRANCH_DIR
+<<<<<<< HEAD
 dk_load dk_stringContains
+=======
+dk_load dk_contains
+>>>>>>> Development
 dk_load dk_DIGITALKNOB_DIR
 dk_load dk_host_triple
 dk_load dk_getExtension
 dk_load dk_removeExtension
+<<<<<<< HEAD
 dk_load dk_makeDirectory
+=======
+dk_load dk_mkdir
+>>>>>>> Development
 dk_load dk_replaceAll
 dk_load dk_convertToCIdentifier
 dk_load dk_toLower

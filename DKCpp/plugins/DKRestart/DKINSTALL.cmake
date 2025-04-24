@@ -1,0 +1,128 @@
+#!/usr/bin/cmake -P
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+
+
+############ DKRestart ############
+dk_set(QUEUE_BUILD ON)
+dk_executable(DKRestart)
+
+if(WIN)
+	if(DEBUG)
+		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${target_triple}/${DEBUG_DIR}/DKRestart.exe ${DK_Project_Dir}/assets/DKRestart/${target_triple}Debug OVERWRITE)
+	endif()
+	if(RELEASE)
+		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${target_triple}/${RELEASE_DIR}/DKRestart.exe ${DK_Project_Dir}/assets/DKRestart/${target_triple}Release OVERWRITE)
+	endif()
+endif()
+
+
+if(MAC)
+	if(DEBUG)
+		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${target_triple}/${DEBUG_DIR}/DKRestart.app ${DK_Project_Dir}/assets/DKRestart/${target_triple}Debug/DKRestart.app OVERWRITE)
+	endif()
+	if(RELEASE)
+		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${target_triple}/${RELEASE_DIR}/DKRestart.app ${DK_Project_Dir}/assets/DKRestart/${target_triple}Release/DKRestart.app OVERWRITE)
+	endif()
+endif()
+
+
+if(LINUX)
+	if(DEBUG)
+		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${target_triple}/${DEBUG_DIR}/DKRestart ${DK_Project_Dir}/assets/${target_triple}Debug/DKRestart OVERWRITE)
+	endif()
+	if(RELEASE)
+		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${target_triple}/${RELEASE_DIR}/DKRestart ${DK_Project_Dir}/assets/${target_triple}Release/DKRestart OVERWRITE)
+	endif()
+endif()
+
+
+if(RASPBERRY)
+	if(DEBUG)
+		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${target_triple}/${DEBUG_DIR}/DKRestart ${DK_Project_Dir}/assets/${target_triple}Debug/DKRestart OVERWRITE)
+	endif()
+	if(RELEASE)
+		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${target_triple}/${RELEASE_DIR}/DKRestart ${DK_Project_Dir}/assets/${target_triple}Release/DKRestart OVERWRITE)
+	endif()
+endif()
+
+
+
+## DKRestart win
+if(WIN)
+#	dk_appendCmake("include_directories(${DKCPP_PLUGINS_DIR}) \n")
+#	dk_appendCmake("find_library(DKd DK.lib ${DK}/${target_triple}/${DEBUG_DIR}) \n")
+#	dk_appendCmake("list(APPEND DEBUG_DKLIBS debug \${DKd}) \n")
+#	dk_appendCmake("find_library(DK DK.lib ${DK}/${target_triple}/${RELEASE_DIR}) \n")
+#	dk_appendCmake("list(APPEND RELEASE_DKLIBS optimized \${DK}) \n")	
+	dk_appendCmake("file(GLOB DKRestart_SRC ${DKCPP_PLUGINS_DIR}/DKRestart/*.cpp ${DKCPP_PLUGINS_DIR}/DKRestart/*.manifest) \n")	
+	if(WIN_X86)
+		dk_appendCmake("add_executable(DKRestart WIN32 \${DKRestart_SRC}) \n")
+	endif()
+	if(WIN_X86_64)
+		dk_appendCmake("add_executable(DKRestart WIN64 \${DKRestart_SRC}) \n")
+	endif()
+#	dk_appendCmake("target_link_libraries(DKRestart \${DEBUG_DKLIBS} \${RELEASE_DKLIBS}) \n")
+	dk_appendCmake("set_target_properties(DKRestart PROPERTIES LINK_FLAGS_DEBUG \"/MANIFESTUAC:NO /SUBSYSTEM:CONSOLE /SAFESEH:NO\" LINK_FLAGS_RELEASE \"/INCREMENTAL:NO /OPT:NOREF /MANIFESTUAC:NO /SUBSYSTEM:CONSOLE /FORCE /SAFESEH:NO\") \n")
+endif()
+
+
+## DKRestart mac
+if(MAC)
+#	dk_appendCmake("include_directories(${DKCPP_PLUGINS_DIR}) \n")
+#	dk_appendCmake("find_library(DKd libDK.a ${DK}/${target_triple}/${DEBUG_DIR}) \n")
+#	dk_appendCmake("list(APPEND DEBUG_DKLIBS debug \${DKd}) \n")
+#	dk_appendCmake("find_library(DK libDK.a ${DK}/${target_triple}/${RELEASE_DIR}) \n")
+#	dk_appendCmake("list(APPEND RELEASE_DKLIBS optimized \${DK}) \n")
+	dk_appendCmake("file(GLOB DKRestart_SRC ${DKCPP_PLUGINS_DIR}/DKRestart/*.cpp) \n")
+	if(MAC_X86)
+		dk_appendCmake("set(CMAKE_OSX_ARCHITECTURES \"i386\") \n")
+	endif()
+	if(MAC_X86_64)
+		dk_appendCmake("set(CMAKE_OSX_ARCHITECTURES \"x86_64\") \n")
+	endif()
+	dk_appendCmake("add_executable(DKRestart MACOSX_BUNDLE \${DKRestart_SRC}) \n")
+#	dk_appendCmake("target_link_libraries(DKRestart \${DEBUG_DKLIBS} \${RELEASE_DKLIBS}) \n")
+endif()
+
+
+## DKRestart linux
+if(LINUX)
+	#dk_appendCmake("include_directories(${DKCPP_PLUGINS_DIR}) \n")
+	if(DEBUG)
+		#dk_appendCmake("find_library(DKd libDK.a ${DK}/${target_triple}/${DEBUG_DIR}) \n")
+		#dk_appendCmake("list(APPEND DEBUG_DKLIBS debug \${DKd}) \n")
+		dk_appendCmake("file(GLOB DKRestart_SRC ${DKCPP_PLUGINS_DIR}/DKRestart/*.cpp) \n")
+		dk_appendCmake("add_executable(DKRestart \${DKRestart_SRC}) \n")
+		#dk_appendCmake("target_link_libraries(DKRestart  \${DEBUG_DKLIBS}) \n")
+	endif()
+	if(RELEASE)
+		#dk_appendCmake("find_library(DK libDK.a ${DK}/${target_triple}/${RELEASE_DIR}) \n")
+		#dk_appendCmake("list(APPEND RELEASE_DKLIBS optimized \${DK}) \n")
+		dk_appendCmake("file(GLOB DKRestart_SRC ${DKCPP_PLUGINS_DIR}/DKRestart/*.cpp) \n")
+		dk_appendCmake("add_executable(DKRestart \${DKRestart_SRC}) \n")
+		#dk_appendCmake("target_link_libraries(DKRestart  \${RELEASE_DKLIBS}) \n")
+	endif()
+endif()
+
+
+## DKRestart raspberry
+if(RASPBERRY)
+	#dk_appendCmake("include_directories(${DKCPP_PLUGINS_DIR}) \n")
+	if(DEBUG)
+		#dk_appendCmake("find_library(DKd libDK.a ${DK}/${target_triple}/${DEBUG_DIR}) \n")
+		#dk_appendCmake("list(APPEND DEBUG_DKLIBS debug \${DKd}) \n")
+		dk_appendCmake("file(GLOB DKRestart_SRC ${DKCPP_PLUGINS_DIR}/DKRestart/*.cpp) \n")
+		dk_appendCmake("add_executable(DKRestart \${DKRestart_SRC}) \n")
+		#dk_appendCmake("target_link_libraries(DKRestart  \${DEBUG_DKLIBS}) \n")
+	endif()
+	if(RELEASE)
+		#dk_appendCmake("find_library(DK libDK.a ${DK}/${target_triple}/${RELEASE_DIR}) \n")
+		#dk_appendCmake("list(APPEND RELEASE_DKLIBS optimized \${DK}) \n")
+		dk_appendCmake("file(GLOB DKRestart_SRC ${DKCPP_PLUGINS_DIR}/DKRestart/*.cpp) \n")
+		dk_appendCmake("add_executable(DKRestart \${DKRestart_SRC}) \n")
+		#dk_appendCmake("target_link_libraries(DKRestart  \${RELEASE_DKLIBS}) \n")
+	endif()
+endif()

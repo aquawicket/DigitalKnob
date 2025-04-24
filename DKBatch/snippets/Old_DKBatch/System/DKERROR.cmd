@@ -2,7 +2,11 @@
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
+<<<<<<< HEAD
 :: Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 ::
 :: Permission is hereby granted, free of charge, to any person obtaining a copy
 :: of this software and associated documentation files(the "Software"), to deal
@@ -38,6 +42,7 @@
 ::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set ERROR_CODE=%ERRORLEVEL%
+<<<<<<< HEAD
 if "%~1"=="IF_ERROR" (goto :IF_ERROR)
 if "%~1"=="ERROR" (goto :ERROR)
 if "%~1"=="IF_FATAL" (goto :IF_FATAL)
@@ -45,6 +50,15 @@ if "%~1"=="FATAL" (goto :FATAL)
 
 :IF_ERROR
 if not "%ERROR_CODE%"=="0" (
+=======
+if "%~1" equ "IF_ERROR" (goto :IF_ERROR)
+if "%~1" equ "ERROR" (goto :ERROR)
+if "%~1" equ "IF_FATAL" (goto :IF_FATAL)
+if "%~1" equ "FATAL" (goto :FATAL)
+
+:IF_ERROR
+if not "%ERROR_CODE%" equ "0" (
+>>>>>>> Development
 	echo [91m ERROR: %ERROR_CODE%   %3 [0m
 	call :print_error %*
 	pause
@@ -61,7 +75,11 @@ exit /b %ERROR_CODE%
 
 
 :IF_FATAL
+<<<<<<< HEAD
 if not "%ERROR_CODE%"=="0" (
+=======
+if not "%ERROR_CODE%" equ "0" (
+>>>>>>> Development
 	echo [31m FATAL: %ERROR_CODE%   %3 [0m
 	call :print_error %*
 	echo Press any key to exit . . .
@@ -85,9 +103,15 @@ exit %ERROR_CODE%
 	echo ~3 = %~3
 	for /f "delims=:" %%a in ('findstr /n /c:"%~3" "%~f2"') do set "line=%%a"
 	echo [91m  File: %~f2: !line! [0m
+<<<<<<< HEAD
 	set /A n=1
 	set /A min=!line!-6
 	set /A max=!line!+6
+=======
+	set /a n=1
+	set /a min=!line!-6
+	set /a max=!line!+6
+>>>>>>> Development
 	for /f "delims=" %%a in ('findstr /n /r /c:"^" "%~f2"') do (
 		if !n! LSS !max! (
 			if !n! GTR !min! (

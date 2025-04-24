@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # dk_copy(<from> <to>)
@@ -36,7 +41,11 @@ dk_copy() {
 	
 	# the base directory of the ${_to_} path must exist.    
 	_parent_dir_=$(dk_call dk_dirname "${_to_}")
+<<<<<<< HEAD
 	dk_call dk_makeDirectory "${_parent_dir_}"
+=======
+	dk_call dk_mkdir "${_parent_dir_}"
+>>>>>>> Development
 	
 	cp -r "${_from_}" "${_to_}"
 
@@ -60,9 +69,16 @@ DKTEST() {
 	dk_call dk_echo "dk_copy test" > copyMe.file
 	dk_call dk_copy copyMe.file iWasCopied.txt OVERWRITE
 	
+<<<<<<< HEAD
 	dk_call dk_makeDirectory ${DKDOWNLOAD_DIR}/copyMe
 	dk_call dk_copy ${DKDOWNLOAD_DIR}/copyMe ${DIGITALKNOB_DIR}/iWasCopied OVERWRITE
 	
 	dk_call dk_makeDirectory copyMe
+=======
+	dk_call dk_mkdir ${DKDOWNLOAD_DIR}/copyMe
+	dk_call dk_copy ${DKDOWNLOAD_DIR}/copyMe ${DIGITALKNOB_DIR}/iWasCopied OVERWRITE
+	
+	dk_call dk_mkdir copyMe
+>>>>>>> Development
 	dk_call dk_copy copyMe iWasCopied OVERWRITE
 }

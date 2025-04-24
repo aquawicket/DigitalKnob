@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_assertVar(variable)
@@ -9,6 +14,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #	@variable:  The variable to be evaluated. If this variable evaluates to false, this causes an assertion
 #
+<<<<<<< HEAD
 function(dk_assertVar variable)
 	dk_debugFunc()	
 	
@@ -42,6 +48,21 @@ function(dk_assertVar variable)
 
 # DEBUG	
 #	dk_printVar(${variable})
+=======
+function(dk_assertVar)
+	dk_debugFunc(1)
+	set(variable ${ARGV0})
+	
+	if(NOT DEFINED ${variable})
+		dk_echo("\n\n${bg_red}Assertion failed: at ${variable}${clr}")
+		
+		if("${var}")
+			dk_fatal("${bg_red}${white} { \"${var}\" : \"${${var}}\" } ${clr}")
+		else()
+			dk_fatal("${bg_red}${white} ${variable} ${clr}")
+		endif()
+	endif()
+>>>>>>> Development
 endfunction()
 
 
@@ -51,7 +72,13 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	dk_assertVar(todo) # TODO
+>>>>>>> Development
 endfunction()

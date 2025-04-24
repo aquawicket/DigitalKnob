@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 @echo off
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+>>>>>>> Development
 setlocal EnableDelayedExpansion
 
 echo DKTest.cmd()
@@ -6,16 +15,22 @@ echo DKTest.cmd()
 call dk_clearScreen
 call dk_clearScreen
 
+<<<<<<< HEAD
 ::############ Load Function files ############
 call functions\DK.cmd
 
 
+=======
+>>>>>>> Development
 call dk_info dk_info
 call dk_debug dk_debug
 call dk_warning dk_warning
 call dk_debug "SCRIPT(%*)"
 set "TEST_VAR=this is a test variable"
+<<<<<<< HEAD
 call dk_printVar TEST_VAR
+=======
+>>>>>>> Development
 
 
 ::############ main ############

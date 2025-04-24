@@ -25,4 +25,8 @@ call :copyTo .ps1 && powershell ".\dk_polyglot" && del dk_polyglot.ps1
 
 
 echo: & echo ########################### BASH ###########################
+<<<<<<< HEAD
 C:\Users\Administrator\digitalknob\DKTools\portablegit_2_44_0_64_bit_7z\bin\bash.exe dk_polyglot
+=======
+%USERPROFILE%\digitalknob\DKTools\portablegit_2_44_0_64_bit_7z\bin\bash.exe dk_polyglot
+>>>>>>> Development

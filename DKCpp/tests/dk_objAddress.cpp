@@ -7,7 +7,11 @@
 //################################################################################
 //# same(str, str2)
 //#
+<<<<<<< HEAD
 bool same(const std::string& str, const std::string& str2) {
+=======
+bool same(const std::string& str, const std::string& str2){
+>>>>>>> Development
 	//DKDEBUGFUNC(str, str2);
 	if(str.compare(str2) == 0)
 		return true;
@@ -29,14 +33,22 @@ template < typename T = const void > T* as_pointer_to( const std::string& addres
 }
 
 
+<<<<<<< HEAD
 void* addressToObject(const std::string& address) {
+=======
+void* addressToObject(const std::string& address){
+>>>>>>> Development
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	
 	//FIXME:  Error example (win_x86_64_mingw64_gcc)
 	//		0x0x23aefc8: the address is not a valid hex notation
 	//
 	void* object = nullptr;
+<<<<<<< HEAD
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos) {
+=======
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos){
+>>>>>>> Development
 		
 		std::cout << (address+": the address is not a valid hex notation\n");
 		
@@ -53,13 +65,21 @@ void* addressToObject(const std::string& address) {
 	std::stringstream ss;
 	ss << address.substr(2, address.size() - 2);
 	std::uint64_t tmp;
+<<<<<<< HEAD
 	if (!(ss >> std::hex >> tmp)) {
+=======
+	if (!(ss >> std::hex >> tmp)){
+>>>>>>> Development
 		std::cout << (address + ": invalid address\n");
 		return NULL;
 	}
 	object = reinterpret_cast<void*>(tmp);
 	
+<<<<<<< HEAD
 	if (!object) {
+=======
+	if (!object){
+>>>>>>> Development
 		printf("invalid object\n");
 		return NULL;
 	}
@@ -71,9 +91,15 @@ void* addressToObject(const std::string& address) {
 //################################################################################
 //# objectToAddress(element)
 //#
+<<<<<<< HEAD
 std::string objectToAddress(void* object) {
 	//DKDEBUGFUNC(element);  //EXCESSIVE LOGGING
 	if (!object) {
+=======
+std::string objectToAddress(void* object){
+	//DKDEBUGFUNC(element);  //EXCESSIVE LOGGING
+	if (!object){
+>>>>>>> Development
 		std::cout << ("invalid object\n");
 		return "";
 	}
@@ -85,7 +111,11 @@ std::string objectToAddress(void* object) {
 	//	address.insert(0, "0x");
 	//}
 
+<<<<<<< HEAD
 	if (same("0xDDDDDDDD", address)) {
+=======
+	if (same("0xDDDDDDDD", address)){
+>>>>>>> Development
 		std::cout << ("address = 0xDDDDDDDD\n");
 		return "";
 	}
@@ -95,7 +125,11 @@ std::string objectToAddress(void* object) {
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifdef DKTEST
+<<<<<<< HEAD
 int main() {
+=======
+int main(int argc, char** argv){
+>>>>>>> Development
 	const std::string str = "000000000018FB74" ;
     const void* pv = as_pointer_to<const void>(str) ;
     std::cout << pv << '\n' ;

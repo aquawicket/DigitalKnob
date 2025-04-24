@@ -1,13 +1,26 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::#########################################################################################################
 ::# dk_dateToCentiSeconds(seconds centiseconds %centisecond% %second% %minute% %hour% %day% %month% %year%)
 ::#
 ::#
 :dk_dateToCentiSeconds
+<<<<<<< HEAD
     call dk_debugFunc 1 9
  setlocal
+=======
+setlocal
+    %dk_call% dk_debugFunc 1 9
+>>>>>>> Development
  
     ::if "%~3" equ "" (set "cs=0")    else (set /a "cs=%~3")
     if "%~3" equ "" (set "cs=0")    else (set /a "cs=100%~3%%100")
@@ -29,8 +42,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set /a "Days_ss=%dd%*24*60*60+%Hours_ss%
     set /a "Months_ss=(%mm%*304/10)*24*60*60+%Days_ss%"
     set /a "Years_ss=(%yy%*12*304/10)*24*60*60+%Months_ss%"
+<<<<<<< HEAD
     if %Years_ss% gtr 99999999 set /a "Years_ss=Years_ss+2160000"
     endlocal & set "%1=%Years_ss%" & set "%2=%CentiSeconds_cs%"
+=======
+    if %Years_ss% gtr 99999999 (set /a "Years_ss=Years_ss+2160000")
+    endlocal & (
+		set "%~1=%Years_ss%"
+		set "%~2=%CentiSeconds_cs%"
+	)
+>>>>>>> Development
 %endfunction%
 
 
@@ -38,9 +59,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
     %dk_call% dk_getDate Day Month Year
     %dk_call% dk_getTime CentiSecond Second Minute Hour
     echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%

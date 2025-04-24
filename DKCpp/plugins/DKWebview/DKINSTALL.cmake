@@ -1,0 +1,14 @@
+#!/usr/bin/cmake -P
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+
+
+############ DKWebView ############
+if(NOT ANDROID)
+	dk_return()
+endif()
+
+dk_generateCmake(DKWebview)
+dk_assets(DKWebview)

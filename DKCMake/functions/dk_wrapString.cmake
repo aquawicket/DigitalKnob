@@ -1,5 +1,9 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+>>>>>>> Development
 #include_guard()
 
 ###############################################################################
@@ -37,7 +41,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 
 	dk_todo()
 endfunction()

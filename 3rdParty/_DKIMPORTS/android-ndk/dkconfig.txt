@@ -1,0 +1,7 @@
+ANDROID_NDK_VERSION=r23c
+ANDROID_NDK_BUILD=23.2.8568313
+ANDROID_NDK_WIN_IMPORT=https://dl.google.com/android/repository/android-ndk-r23c-windows.zip
+ANDROID_NDK_MAC_IMPORT=https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip
+ANDROID_NDK_LINUX_IMPORT=https://dl.google.com/android/repository/android-ndk-r23c-linux.zip
+#ANDROID_NDK_ANDROID_IMPORT=https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip
+ANDROID_NDK_ANDROID_IMPORT=https://www.aquawicket.com/downloads/android-ndk-r23c-aarch64.zip

@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
+=======
+#!/usr/bin/env sh
+[ -n "${DK_SH-}" ] && return
+export DK_SH=1
+$(true)
+>>>>>>> Development
 
 ### Print Shell Path ad Version ###
 export ESC=""  # escape character
@@ -8,11 +15,20 @@ export DKSHELL=$(basename ${DKSHELL_PATH})
 export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
 echo ""
 echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
+<<<<<<< HEAD
 echo "  ${DKSHELL_PATH}"
 echo ""
 
 ##################################################################################
 # DKINIT()
+=======
+echo "DKSHELL_PATH  ${DKSHELL_PATH}"
+echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}"
+echo ""
+
+##################################################################################
+# DK()
+>>>>>>> Development
 #
 DK(){
 	###### SUDO_EXE ######
@@ -24,16 +40,27 @@ DK(){
     
 	###### Reload Main Script with bash ######
 	[ $# -eq 0 ] && dkreloadWithBash || dkreloadWithBash $*
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> Development
 	############ Set Options ############
     dksetOptions
 	
 	############ load dk_source ######
 	export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
     export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
+<<<<<<< HEAD
     [ -e "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR}/dk_source.sh
     [ -e "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" ] && . "${DKBASH_FUNCTIONS_DIR}/dk_source.sh"
     
+=======
+	export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/"
+    [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
+    [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] && . "${DKBASH_FUNCTIONS_DIR_}dk_source.sh"
+ 
+>>>>>>> Development
     ############ LOAD FUNCTION FILES ############
 	#dk_source dk_callStack
     dk_source dk_return
@@ -47,6 +74,7 @@ DK(){
     dk_source __CALLER__
     dk_source dk_debugFunc
     dk_source dk_onExit        # EXIT handler
+<<<<<<< HEAD
     dk_source dk_onError       # ERR handler
 	dk_source dk_realpath
 	dk_source dk_call
@@ -54,12 +82,23 @@ DK(){
     dk_call dk_color
     dk_call dk_logo
     
+=======
+	dk_source dk_onError       # ERR handler
+	dk_source dk_realpath
+	dk_source dk_call
+	dk_source dk_download
+	dk_source dk_isChildPathOf
+    dk_call dk_color
+    dk_call dk_logo
+  
+>>>>>>> Development
 #	dk_call dk_wslFixNet
 #	dk_call dk_wslFixFileAccess
 #	sudo apt-get update
 #	sudo apt-get upgrade
 #	/mnt/c/Windows/System32/cmd.exe /c 'wsl --shutdown'
 
+<<<<<<< HEAD
 	
 	
 	############ Get DKSCRIPT variables ############
@@ -82,6 +121,34 @@ DK(){
         dk_call dk_echo
         dk_call dk_pause
         dk_call dk_exit 0
+=======
+	############ Get DKSCRIPT variables ############
+    DKSCRIPT_VARS
+	
+	############ dkconfig.txt settings ###########
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
+	if [ -e "${DKSCRIPT_DIR}/dkconfig.txt" ]; then
+		dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
+	elif [ -e "${DKBRANCH_DIR}/dkconfig.txt" ]; then
+		dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+	fi
+
+    ###### DKTEST MODE ######
+    [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
+	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || return 0
+    dk_call dk_echo
+    dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
+	dk_call dk_echo
+    #dk_call dk_echo "${bg_RGB}20;20;20m"
+    dk_source "${DKSCRIPT_PATH}"
+    #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
+    #dk_call dk_echo "${clr}"
+    DKTEST
+    dk_call dk_echo
+    dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
+    dk_call dk_echo
+    dk_call dk_exit 0
+>>>>>>> Development
 }
 
 ##################################################################################
@@ -92,12 +159,17 @@ dkreloadWithBash(){
 	(command -v bash &>/dev/null) || dk_installPackage bash
 	(command -v bash &>/dev/null) && export BASH_EXE=$(command -v bash) || echo "ERROR: bash not found" || exit 1
 	echo "Reloading ${0} with ${BASH_EXE} . . ."
+<<<<<<< HEAD
 	unset DKINIT
+=======
+	unset DK_SH
+>>>>>>> Development
 	exec ${BASH_EXE} "${0}"
 	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}'
 }
 
 ##################################################################################
+<<<<<<< HEAD
 # dkinit()
 #
 dkinit(){
@@ -113,6 +185,8 @@ dkinit(){
 }
 
 ##################################################################################
+=======
+>>>>>>> Development
 # dk_download(url, destination)
 #
 #
@@ -138,14 +212,22 @@ dk_download() {
 # WSLPATH_EXE()
 #
 WSLPATH_EXE(){
+<<<<<<< HEAD
 	(command -v wslpath) || echo "wslpath Not Found"  >&2
+=======
+	(command -v wslpath >&2) || echo "wslpath Not Found"  >&2
+>>>>>>> Development
 }
 
 ##################################################################################
 # CYGPATH_EXE()
 #
 CYGPATH_EXE(){
+<<<<<<< HEAD
 	(command -v cygpath) || echo "cygpath Not Found"  >&2
+=======
+	(command -v cygpath >&2) || echo "cygpath Not Found"  >&2
+>>>>>>> Development
 }
 
 ##################################################################################
@@ -156,7 +238,10 @@ DKSCRIPT_VARS(){
 	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0})) 	# Windows subsystem for linux
 	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}))	# Git for Windows
 	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0})													# Default
+<<<<<<< HEAD
 	echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+=======
+>>>>>>> Development
     [ -e "${DKSCRIPT_PATH}" ]	 && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}" || echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found" || exit 1    
     export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"						
     export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
@@ -241,7 +326,10 @@ DK
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Development
 #DK_TRY_CATCH() {
     # Don't pipe the subshell into anything or we won't be able to see its exit status
 #    set +e; ( set -e

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_pickUpdate){ $dk_pickUpdate = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_pickUpdate){ $dk_pickUpdate = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ##################################################################################
 # dk_pickUpdate()
@@ -19,7 +24,11 @@ function Global:dk_pickUpdate() {
 	
 	if($behind -lt 1){
 		if(${_APP_} -and ${_triple_} -and ${_TYPE_}){
+<<<<<<< HEAD
 			dk_call dk_echo " 0) Repeat cache [$_APP_ - $_triple_ - $_TYPE_]"
+=======
+			dk_call dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_triple_ - $_TYPE_]"
+>>>>>>> Development
 		}
 		dk_call dk_echo " 1) Git Update"   
 		dk_call dk_echo " 2) Git Commit"
@@ -39,7 +48,11 @@ function Global:dk_pickUpdate() {
 		dk_call dk_echo
 		dk_call dk_echo "${red}" 
 		if(${_APP_} -and ${_triple_} -and ${_TYPE_}){
+<<<<<<< HEAD
 			dk_call dk_echo " 0) Repeat cache [${_APP_} - ${_triple_} - ${_TYPE_}]"
+=======
+			dk_call dk_echo " 0) Repeat DKBuilder.cache [${_APP_} - ${_triple_} - ${_TYPE_}]"
+>>>>>>> Development
 		}
 		dk_call dk_echo "${green}"
 		dk_call dk_echo " 1) Git Update"
@@ -62,9 +75,15 @@ function Global:dk_pickUpdate() {
 	$input = Read-Host
 	if($input -eq "0"){
 		dk_call dk_echo "repeating last selection"
+<<<<<<< HEAD
 		$global:APP = ${_APP_}
 		$global:triple = ${_triple_}
 		$global:TYPE = ${_TYPE_}
+=======
+		$global:target_app = ${_APP_}
+		$global:target_triple = ${_triple_}
+		$global:target_type = ${_TYPE_}
+>>>>>>> Development
 		$global:UPDATE = 1
 	}
 	elseif($input -eq  "1"){ dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development }

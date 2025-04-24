@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # try(<args..>)
@@ -56,7 +61,11 @@ try() {
 dk_host_triple() {
 	dk_debugFunc 0
 
+<<<<<<< HEAD
 	# currently, our host triple consists of only 2 variable needed
+=======
+	# currently, our host_triple consists of only 2 variable needed
+>>>>>>> Development
 	# host_triple=${HOST_OS}_${HOST_ARCH}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
@@ -165,6 +174,7 @@ dk_host_triple() {
 		else
 			UNAME_OS="-$(try uname -s)" && dk_call dk_toLower "${UNAME_OS}" UNAME_OS
 		fi
+<<<<<<< HEAD
 
 		if dk_call dk_stringContains "$(try uname -o)" "GNU"; then
 			UNAME_ENV="-gnu"
@@ -172,19 +182,34 @@ dk_host_triple() {
 			UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
 		else
 			UNAME_ENV=""
+=======
+		dk_call dk_printVar UNAME_OS
+
+		if dk_call dk_containsCI "$(try uname -o)" "GNU"; then
+			UNAME_ENV="-gnu"
+		elif dk_call dk_containsCI "$(try uname -o)" "Android"; then
+			UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
+		else
+			UNAME_ENV="gcc" # Default
+>>>>>>> Development
 		fi
 
 		#UNAME_ObjectFormat=""
 
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_call dk_printVar UNAME_TRIPLE
+<<<<<<< HEAD
 
+=======
+		dk_call dk_printVar HOST_OS
+>>>>>>> Development
 		[ -z "${host_triple}" ] && host_triple=${UNAME_TRIPLE} && dk_call dk_printVar host_triple
 		[ -z "${HOST_ARCH}" ]   && HOST_ARCH=${UNAME_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z "${HOST_VENDOR}" ] && HOST_VENDOR=${UNAME_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z "${HOST_OS}" ]     && HOST_OS=${UNAME_OS}         && dk_call dk_printVar HOST_OS
 		[ -z "${HOST_ENV}" ]    && HOST_ENV=${UNAME_ENV}       && dk_call dk_printVar HOST_ENV
 	fi
+<<<<<<< HEAD
 	
 	
 	### Get the HOST_OS ###
@@ -198,6 +223,24 @@ dk_host_triple() {
  	elif dk_call dk_stringContains "${UNAME_a}" "Linux"; then			# linux
 		HOST_OS="linux"
 	elif dk_call dk_stringContains "${UNAME_a}" "Msys"; then			# win
+=======
+	dk_call dk_printVar HOST_OS
+	
+	dk_call dk_printVar UNAME_a
+	### Get the HOST_OS ###
+	# https://llvm.org/doxygen/Triple_8h_source.html
+	if dk_call dk_containsCI "${UNAME_a}" "Android"; then
+		HOST_OS="android"
+	elif dk_call dk_containsCI "${UNAME_a}" "Darwin"; then
+		HOST_OS="mac"
+	elif dk_call dk_containsCI "${UNAME_a}" "raspberrypi"; then
+		HOST_OS="raspberry"
+ 	elif dk_call dk_containsCI "${UNAME_a}" "LiNuX"; then
+		HOST_OS="linux"
+	elif dk_call dk_containsCI "${UNAME_a}" "Msys"; then
+		HOST_OS="win"
+	elif dk_call dk_containsCI "${UNAME_a}" "Cygwin"; then
+>>>>>>> Development
 		HOST_OS="win"
 	else
 		dk_call dk_error "Unsupported HOST_OS: ${UNAME_a}"
@@ -319,6 +362,7 @@ dk_host_triple() {
 
 	host_triple=${HOST_OS}_${HOST_ARCH}
 	dk_call dk_printVar host_triple
+<<<<<<< HEAD
 	
 	if [ "${HOST_OS}" = "win" ]; then
 		HOST_ENV=clang
@@ -326,6 +370,16 @@ dk_host_triple() {
 		#host_triple=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
 		dk_call dk_printVar host_triple
 	fi
+=======
+
+# OBSOLETE - remove me
+#	if [ "${HOST_OS}" = "win" ]; then
+#		HOST_ENV=clang
+#		host_triple=${host_triple}_${HOST_ENV}
+#		#host_triple=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
+#		dk_call dk_printVar host_triple
+#	fi
+>>>>>>> Development
 }
 
 

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
@@ -8,8 +13,14 @@
 dk_cmakeEval() {
 	dk_debugFunc 1 3
 	
+<<<<<<< HEAD
 	dk_call dk_validate CMAKE_EXE "dk_call dk_installCmake"
 	dk_call dk_validate DKCMAKE_DIR "dk_call dk_DKBRANCH_DIR"
+=======
+	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
+	dk_call dk_validate CMAKE_EXE     "dk_call ${DKIMPORTS_DIR}/cmake/dk_install"
+	dk_call dk_validate DKCMAKE_DIR   "dk_call dk_DKBRANCH_DIR"
+>>>>>>> Development
 	
 	DKCOMMAND="${1}"
 	DKRETURN="${2-}"

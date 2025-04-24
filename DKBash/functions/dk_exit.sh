@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
 [ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=0
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+
+[ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=1
+>>>>>>> Development
 ##################################################################################
 # dk_exit(exit_code)
 #
@@ -14,7 +21,11 @@ dk_exit() {
 	[ $? -gt ${exit_code} ] && export exit_code=$?
 	[ ${1-} -gt ${exit_code} ] && export exit_code=$1
 	
+<<<<<<< HEAD
 	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT: exit_code:${exit_code} ***" && dk_call dk_pause
+=======
+	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT: exit_code:${exit_code} ***" && dk_call dk_pause || $(true)
+>>>>>>> Development
 	
 	exit ${exit_code}
 }

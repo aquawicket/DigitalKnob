@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 
 ##################################################################################
@@ -22,7 +27,11 @@ dk_smartExtract() {
 	dest_fullpath="${dest}"
 	dest_folder="$(dk_call dk_basename "${dest_fullpath}")"
 	if ! dk_call dk_pathExists "${dest_fullpath}"; then
+<<<<<<< HEAD
 		dk_call dk_makeDirectory "${dest_fullpath}"
+=======
+		dk_call dk_mkdir "${dest_fullpath}"
+>>>>>>> Development
 	fi
 
 	dk_call dk_info "Extracting $src_filename . . ."
@@ -61,11 +70,19 @@ dk_smartExtract() {
 DKTEST() {
 	dk_debugFunc 0
 	
+<<<<<<< HEAD
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
 	dk_call dk_download "https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip"
 	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1"
 	
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+=======
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+	dk_call dk_download "https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip"
+	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1"
+	
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+>>>>>>> Development
 	dk_call dk_download "https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz"
 	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6"
 }

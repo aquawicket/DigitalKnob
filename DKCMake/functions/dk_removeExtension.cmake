@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_removeExtension(path ret_var) NO_HALT
@@ -13,7 +18,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_removeExtension path ret_var)
 	dk_debugFunc()
+<<<<<<< HEAD
 	dk_getOption(NO_HALT ${ARGV})
+=======
+	
+	dk_getOption(NO_HALT)
+>>>>>>> Development
 	
 	string(FIND ${path} "." includes REVERSE)
 	if(${includes} EQUAL -1)
@@ -32,7 +42,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	set(myPath "C:/Users/yourname/awsomeFile.txt")
 	dk_removeExtension("${myPath}" myPath)

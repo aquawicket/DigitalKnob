@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
@@ -29,10 +30,29 @@ function(dk_depend plugin)
 #		dk_dump(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable plugin ARGV, no value
 #	endif()
 
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+
+
+###############################################################################
+# dk_depend(plugin) target
+#
+#	Each plugin invoked will fill a a varaible or it's name to the path where it
+#   is installed..   
+#   I.E.  dk_depend(zlib) =  dk_validate(ZLIB "dk_dependB(zlib)") 
+#   Which says, "if ZLIB variable is not set,  call  3rdParty/_DKIMPORTS/zlib/DKINSTALL.cmake
+#   to fill fill ZLIB with the path zlib is installed to.
+#
+function(dk_depend plugin) #target
+	dk_debugFunc(1 2)
+	
+>>>>>>> Development
 	if(plugin IN_LIST dk_disabled_list)
 		if(DISABLED_LIBS MATCHES "${plugin}")
 			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
 		endif()
+<<<<<<< HEAD
 		dk_notice("${plugin} IS DISABLED")
 		return()
 	endif()
@@ -67,6 +87,35 @@ function(dk_depend plugin)
 #	endif()
 endfunction()
 dk_createOsMacros("dk_depend")
+=======
+		#dk_notice("${plugin} IS DISABLED")
+		return()
+	endif()
+	
+	dk_toUpper("${plugin}" PLUGIN)
+	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
+	set(${PLUGIN}_IMPORT_NAME ${plugin})
+	if((NOT EXISTS ${PLUGIN}) OR (NOT EXISTS ${${PLUGIN}_DIR}))
+		
+		###### Push Plugin to the PLUGIN_STACK ######
+		dk_envList(PLUGIN PUSH "${PLUGIN}")
+		#############################################
+
+		
+		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
+		dk_dependB(${plugin})
+	
+	
+		###### Pop Plugin from the PLUGIN_STACK ######
+		dk_envList(PLUGIN POP)
+		#############################################
+		
+	else()
+		dk_notice("dk_depend(): ${PLUGIN} is already loaded")
+	endif()
+endfunction()
+
+>>>>>>> Development
 
 
 
@@ -75,7 +124,13 @@ dk_createOsMacros("dk_depend")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	dk_depend(zlib)
+>>>>>>> Development
 endfunction()

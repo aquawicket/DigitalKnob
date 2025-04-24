@@ -1,0 +1,2 @@
+ANDROID_PLATFORMS_DL=https://dl.google.com/android/repository/platform-26_r02.zip
+ANDROID_PLATFORMS_FOLDER=android-26

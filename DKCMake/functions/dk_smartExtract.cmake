@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_smartExtract(src, dest)
@@ -8,14 +13,22 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_smartExtract src dest)
     dk_debugFunc()
+<<<<<<< HEAD
  
 	dk_getOptionValues(NO_HALT 			${ARGV})
 	#dk_getOptionValues(EXTRACT_PATH 	${ARGV})
+=======
+	dk_debug("dk_smartExtract(${ARGV})")
+ 
+	dk_getOptionValues(NO_HALT)
+	#dk_getOptionValues(EXTRACT_PATH)
+>>>>>>> Development
 	
     #set(src ${ARGV1})
     #set(dest ${ARGV2})
     
     dk_realpath("${src}" src_realpath)
+<<<<<<< HEAD
 	#dk_printVar(src_realpath)
     
     dk_dirname("${src_realpath}" src_dirname)
@@ -26,6 +39,18 @@ function(dk_smartExtract src dest)
     
     dk_basename("${src_basename}" src_folder)
 	#dk_printVar(src_folder)
+=======
+	dk_printVar(src_realpath)
+    
+    dk_dirname("${src_realpath}" src_dirname)
+	dk_printVar(src_dirname)
+    
+    dk_basename("${src_realpath}" src_basename)
+	dk_printVar(src_basename)
+    
+    dk_basename("${src_basename}" src_folder)
+	dk_printVar(src_folder)
+>>>>>>> Development
 	
 	#if(EXTRACT_PATH)
 	#	dk_set(src_extractPath "${EXTRACT_PATH}/${src_basename}_EXTRACTED")
@@ -35,6 +60,7 @@ function(dk_smartExtract src dest)
 	#dk_printVar(src_extractPath)
     
     dk_realpath("${dest}" dest_realpath)
+<<<<<<< HEAD
 	#dk_printVar(dest_realpath)
     
     dk_dirname("${dest_realpath}" dest_dirname)
@@ -49,6 +75,22 @@ function(dk_smartExtract src dest)
 #  if not exist "${dest_realpath}" dk_makeDirectory "${dest_realpath}"
 
     #dk_info "Extracting ${src_realpath}  to  ${src_extractPath}"
+=======
+	dk_printVar(dest_realpath)
+    
+    dk_dirname("${dest_realpath}" dest_dirname)
+	dk_printVar(dest_dirname)
+	
+    dk_set(src_extractPath "${dest_dirname}/${src_basename}_EXTRACTED")
+	dk_printVar(src_extractPath)
+	
+    dk_basename("${dest_realpath}" dest_folder)
+	dk_printVar(dest_folder)
+
+#  if not exist "${dest_realpath}" dk_mkdir "${dest_realpath}"
+
+    dk_info("Extracting ${src_realpath}  to  ${src_extractPath}")
+>>>>>>> Development
 	
 	if(EXISTS "${src_extractPath}")
 		dk_delete("${src_extractPath}")
@@ -57,6 +99,7 @@ function(dk_smartExtract src dest)
 	dk_extract("${src_realpath}" "${src_extractPath}" ${NO_HALT})
 	
 	dk_getDirectories("${src_extractPath}" directories)
+<<<<<<< HEAD
     #dk_printVar(directories)
 	
     dk_arrayLength("${directories}" dir_count)
@@ -72,6 +115,28 @@ function(dk_smartExtract src dest)
 		if(${file_count} LESS 2)
 			# rename/move EXTRACTED/root folder to dest path"
 			list(GET directories 0 directories_0)
+=======
+    dk_printVar(directories)
+	
+    dk_arrayLength("${directories}")
+	set(dir_count ${dk_arrayLength})
+    dk_printVar(dir_count)
+    
+	dk_getFiles("${src_extractPath}")
+	dk_printVar(dk_getFiles)
+	
+    dk_arrayLength("${dk_getFiles}")
+	set(file_count ${dk_arrayLength})
+    dk_printVar(file_count)
+	
+    if("${dir_count}" STREQUAL "1") 
+		dk_debug("dir_count EQUAL 1")
+		if(${file_count} LESS 2)
+			dk_debug("file_count LESS 2")
+			# rename/move EXTRACTED/root folder to dest path"
+			list(GET directories 0 directories_0)
+			dk_debug("directories_0 = ${directories_0}")
+>>>>>>> Development
 			dk_move("${directories_0}" "${dest_realpath}" OVERWRITE)
 			if(EXISTS "${src_extractPath}")
 				dk_delete("${src_extractPath}")
@@ -94,6 +159,7 @@ endfunction()
 function(DKTEST)
     dk_debugFunc()
 	
+<<<<<<< HEAD
 	dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
 	dk_download("https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip")
 	dk_smartExtract("${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1")
@@ -101,4 +167,13 @@ function(DKTEST)
 	#dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
 	#dk_download("https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz")
     #dk_smartExtract("${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6")
+=======
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	dk_download("https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "$ENV{DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip")
+	dk_smartExtract("$ENV{DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip" "$ENV{DKDOWNLOAD_DIR}/sdl-release-2.26.1")
+	
+	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
+	#dk_download("https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "$ENV{DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz")
+    #dk_smartExtract("$ENV{DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz" "$ENV{DKDOWNLOAD_DIR}/xz-5.4.6")
+>>>>>>> Development
 endfunction()

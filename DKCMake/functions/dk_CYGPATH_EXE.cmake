@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ####################################################################
 # dk_CYGPATH_EXE()
@@ -15,7 +20,11 @@ function(dk_CYGPATH_EXE)
 	endif()
 	
 	dk_validate(CMD_EXE "dk_CMD_EXE()")
+<<<<<<< HEAD
 	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+=======
+	dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+>>>>>>> Development
 	
 	###### CYGPATH_EXE ######
 	if(NOT EXISTS "${CYGPATH_EXE}")

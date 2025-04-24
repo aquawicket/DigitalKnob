@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_gitApplyPatch(<directory> <patch_file>)
@@ -11,6 +16,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	https://stackoverflow.com/a/66755317/688352
 #
 function(dk_gitApplyPatch directory patch_file)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
@@ -18,6 +24,11 @@ function(dk_gitApplyPatch directory patch_file)
 	if("${CURRENT_PLUGIN}" STREQUAL "GIT" AND PREV_PLUGIN)				
 		dk_set(CURRENT_PLUGIN ${PREV_PLUGIN})							# so we will pop the stack here
 	endif()
+=======
+	dk_debugFunc(2)
+	
+	dk_depend(git) # dk_import will push to the PLUGIN stack
+>>>>>>> Development
 	
 	dk_unset(COMMAND_ARGS)
 	dk_append(COMMAND_ARGS ${GIT_EXE})
@@ -29,7 +40,11 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_append(COMMAND_ARGS ${patch_file})
 	dk_append(COMMAND_ARGS --reject)
 	execute_process(COMMAND ${COMMAND_ARGS}
+<<<<<<< HEAD
 					WORKING_DIRECTORY ${DIGITALKNOB_DIR}
+=======
+					WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR}
+>>>>>>> Development
 					RESULT_VARIABLE result
 					OUTPUT_VARIABLE output
 					OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -50,7 +65,11 @@ function(dk_gitApplyPatch directory patch_file)
 #	dk_append(COMMAND_ARGS --directory=${directory})
 #	dk_append(COMMAND_ARGS ${patch_file})
 #	execute_process(COMMAND ${COMMAND_ARGS}
+<<<<<<< HEAD
 #					WORKING_DIRECTORY ${DIGITALKNOB_DIR}
+=======
+#					WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR}
+>>>>>>> Development
 #					RESULT_VARIABLE result
 #					OUTPUT_VARIABLE output
 #					OUTPUT_STRIP_TRAILING_WHITESPACE)

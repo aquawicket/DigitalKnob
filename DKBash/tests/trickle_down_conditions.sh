@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 
 echo "DKTEST ${0} (${*})"
@@ -47,7 +52,11 @@ echo "DKTEST ${0} (${*})"
 # No comments
 #
 if ( [ "$DKTEST" = "" ]                  ||
+<<<<<<< HEAD
      [ "$DKTEST" = "${0}" ]                ||
+=======
+     [ "$DKTEST" = "${0}" ]              ||
+>>>>>>> Development
      [ "$DKTEST" = "${BASH_SOURCE[0]}" ] ||
      [ "$DKTEST" = "${BASH_SOURCE[1]}" ] ||
      [ "$DKTEST" = "${BASH_SOURCE[2]}" ] ); then

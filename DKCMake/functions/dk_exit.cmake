@@ -1,9 +1,17 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 if(NOT DEFINED PAUSE_ON_EXIT) 
 	set(PAUSE_ON_EXIT 1 CACHE INTERNAL "")
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+
+if(NOT DEFINED PAUSE_ON_EXIT) 
+	set(PAUSE_ON_EXIT 0 CACHE INTERNAL "")
+>>>>>>> Development
 endif()
 ###############################################################################
 # dk_exit(exit_code)
@@ -16,8 +24,15 @@ function(dk_exit) # exit_code)
 	if(NOT exit_code)
 		set(exit_code 0 CACHE INTERNAL "")
 	endif()
+<<<<<<< HEAD
 	if(${ARGV0} GREATER ${exit_code})
 		set(exit_code ${ARGV0})
+=======
+	if(${ARGV0}) 
+		if(${ARGV0} GREATER ${exit_code})
+			set(exit_code ${ARGV0})
+		endif()
+>>>>>>> Development
 	endif()
 	
 	if(PAUSE_ON_EXIT)
@@ -43,9 +58,15 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	#dk_exit()
+=======
+	dk_debugFunc(0)
+	
+	dk_exit()
+>>>>>>> Development
 	#dk_exit(0)
 	dk_exit(13)
 endfunction()

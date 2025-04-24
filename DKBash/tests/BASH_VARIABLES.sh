@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/bin/sh
+=======
+#!/usr/bin/env sh
+>>>>>>> Development
 . ../functions/DK.sh
 
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html

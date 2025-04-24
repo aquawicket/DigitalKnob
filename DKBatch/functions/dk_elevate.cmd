@@ -4,10 +4,17 @@
 net session >nul 2>&1
 if %ERRORLEVEL% equ 0 goto elevated
 :dk_elevate
+<<<<<<< HEAD
 	::call dk_debugFunc 0
  ::setlocal
  
     if "%~2" == "gotPrivileges" goto gotPrivileges
+=======
+::setlocal
+	::%dk_call% dk_debugFunc 0
+	
+    if "%~2" equ "gotPrivileges" goto gotPrivileges
+>>>>>>> Development
         echo "elevating permissions . . ."
         setlocal DisableDelayedExpansion
         set "THIS_PATH=%~dpnx0"

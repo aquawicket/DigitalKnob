@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::call dk_source dk_log
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+::%dk_call% dk_source dk_log
+>>>>>>> Development
 ::################################################################################
 ::# dk_notice(message)
 ::#
@@ -10,8 +19,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    @message - The message to print
 ::#
 :dk_notice
+<<<<<<< HEAD
  setlocal
     call dk_debugFunc 1
+=======
+setlocal
+    %dk_call% dk_debugFunc 1
+>>>>>>> Development
     
     %dk_call% dk_log NOTICE "%~1"
 %endfunction%
@@ -21,8 +35,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
     
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+   
+>>>>>>> Development
     %dk_call% dk_notice "test dk_notice message"
 %endfunction%

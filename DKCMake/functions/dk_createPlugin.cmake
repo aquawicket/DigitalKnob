@@ -1,11 +1,20 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_createPlugin(url)
 #
+<<<<<<< HEAD
 #	Generate a folder/DKMAKE.cmake for a new plugin
+=======
+#	Generate a folder/DKINSTALL.cmake for a new plugin
+>>>>>>> Development
 #
 #	@url	- TODO
 #
@@ -30,7 +39,13 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	dk_createPlugin(todo) 	# dk_createPlugin
+>>>>>>> Development
 endfunction()

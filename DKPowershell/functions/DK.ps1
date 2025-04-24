@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 if(${DKINIT}){return} else{ $global:DKINIT=1 }	# include_guard
+=======
+if(${env:DK_PS1}){return} else{ ${env:DK_PS1}=1 }	# include_guard
+>>>>>>> Development
 
 ### Print Version Info ###
 Write-Host ""
@@ -7,12 +11,22 @@ $DKSHELL_VERSION = $PSVersionTable.PSVersion.ToString()
 $DKSHELL_PATH = (get-command $DKSHELL).Path
 $global:ESC = "$([char]27)" 				# escape character
 Write-Host "${ESC}[44m ${ESC}[30m $DKSHELL Version $DKSHELL_VERSION ${ESC}[0m"
+<<<<<<< HEAD
 Write-Host "  $DKSHELL_PATH"
 Write-Host ""
 
 
 #####################################################################
 # DKINIT()
+=======
+Write-Host "DKSHELL_PATH = $DKSHELL_PATH"
+Write-Host "DKSCRIPT_PATH = $DKSCRIPT_PATH"
+Write-Host "'"
+
+
+#####################################################################
+# DK()
+>>>>>>> Development
 #
 #	# Reference: https://ss64.com/ps
 #
@@ -60,6 +74,14 @@ function DK() {
 	dk_call dk_color 1
 	dk_call dk_logo
 	
+<<<<<<< HEAD
+=======
+	if(Test-Path "${DKSCRIPT_DIR}/dkconfig.txt"){
+		dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
+	} elseif(Test-Path "${DKBRANCH_DIR}/dkconfig.txt"){
+		dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+	}
+>>>>>>> Development
 	#dk_source ${DKSCRIPT_PATH}
 	
 	#Write-Output "env:PATH = $env:PATH"
@@ -68,6 +90,7 @@ function DK() {
 	#. DKPOWERSHELL_FUNCTIONS_DIR/dk_thisFunction
 	
 	###### DKTEST MODE ######
+<<<<<<< HEAD
 	if(!("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIR}")){ return }
 	if(!("${DKSCRIPT_EXT}" -eq ".ps1")){ return }
 		Write-Output "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
@@ -83,6 +106,23 @@ function DK() {
 		Write-Output ""
 		Read-Host -Prompt "Press Enter to exit" 
 		exit
+=======
+	if(!("${DKSCRIPT_EXT}" -eq ".ps1")){ return }
+	#if(!(dk_call dk_fileContains "function DKTEST()")){ return }
+
+	Write-Output ""
+	Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
+	Write-Output ""
+	#$include_guard = $DKSCRIPT_NAME.Substring(0, $DKSCRIPT_NAME.lastIndexOf('.'))
+	#dk_unset $include_guard
+	. ${DKSCRIPT_PATH}
+	DKTEST
+	Write-Output ""
+	Write-Output "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}"
+	Write-Output ""
+	Read-Host -Prompt "Press Enter to exit" 
+	exit
+>>>>>>> Development
 }
 
 

@@ -22,19 +22,31 @@ T *restore_pointer(const std::string &s){
 }
 */
 
+<<<<<<< HEAD
 template< typename T > const std::uintptr_t objectToAddress(T& obj) {
+=======
+template< typename T > const std::uintptr_t objectToAddress(T& obj){
+>>>>>>> Development
 	std::cout << "objectToAddress(" << obj << ")" << std::endl;
 	const void* v_ptr = (const void*)&obj;
 	return (std::uintptr_t)v_ptr;
 }
 
+<<<<<<< HEAD
 template< typename T > T addressToObjectB(const std::uintptr_t& address) {
+=======
+template< typename T > T addressToObjectB(const std::uintptr_t& address){
+>>>>>>> Development
 	std::cout << "addressToPointer(" << address << ")" << std::endl;
 	const void* v_ptr = (const void*)address;
 	return *(T*)v_ptr;
 }
 
+<<<<<<< HEAD
 int main() {
+=======
+int main(int argc, char** argv){
+>>>>>>> Development
 	
 	//////// Object -> Address -> Object /////////////////////////
 	std::string myStringA = "String converted to address and back";

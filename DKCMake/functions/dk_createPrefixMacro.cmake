@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 
 ###############################################################################
@@ -19,9 +24,16 @@ function(dk_createPrefixMacro func) #ARGN
 	string(REPLACE ";" " AND " prefix_if "${ARGN}")
 	set(MACRO_STRING "macro(${prefix_name}_${func})\n   if(${prefix_if})\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	
+<<<<<<< HEAD
 	if(CMAKE_VERSION VERSION_GREATER "3.18")
 		cmake_language(EVAL CODE "${MACRO_STRING}")
 	endif()
+=======
+	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")
+		cmake_language(EVAL CODE "${MACRO_STRING}")
+	endif()
+	#dk_eval("${MACRO_STRING}")
+>>>>>>> Development
 endfunction()
 
 
@@ -29,7 +41,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_todo()
 endfunction()

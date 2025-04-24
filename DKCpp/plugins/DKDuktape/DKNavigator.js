@@ -1,0 +1,344 @@
+//https://developer.mozilla.org/en-US/docs/Web/API/Navigator
+
+<<<<<<< HEAD:DKPlugins/DKDuktape/DKNavigator.js
+var Navigator = function Navigator(pointer) {
+=======
+var Navigator = function Navigator(pointer){
+>>>>>>> Development:DKCpp/plugins/DKDuktape/DKNavigator.js
+    //Properties (Standard)
+    Object.defineProperty(this, "activeVRDisplays", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "appCodeName", {
+        //Read only
+        configurable: true,
+        value: "Mozilla",
+    });
+    Object.defineProperty(this, "appName", {
+        //Read only
+        configurable: true,
+        value: "Netscape",
+    });
+    Object.defineProperty(this, "appVersion", {
+        //Read only
+        configurable: true,
+        value: "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36 Rml/3.3",
+        //TODO - pull this value from C++
+    });
+    Object.defineProperty(this, "battery", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "connection", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "cookieEnabled", {
+        //Read only
+        configurable: true,
+        value: "false",
+    });
+    Object.defineProperty(this, "geolocation", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "hardwareConcurrency", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "javaEnabled", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "keyboard ", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "language", {
+        //Read only
+        configurable: true,
+        value: "en-US",
+    });
+    Object.defineProperty(this, "languages", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "locks", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "mediaCapabilities", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "maxTouchPoints", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "mimeTypes", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "onLine", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "permissions", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "platform", {
+        //Read only
+        configurable: true,
+<<<<<<< HEAD:DKPlugins/DKDuktape/DKNavigator.js
+        get: function platform() {
+=======
+        get: function platform(){
+>>>>>>> Development:DKCpp/plugins/DKDuktape/DKNavigator.js
+            return CPP_DKNavigatorplatform();
+        }
+    });
+    Object.defineProperty(this, "plugins", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "product", {
+        //Read only
+        configurable: true,
+        value: "Duktape",
+    });
+    Object.defineProperty(this, "serviceWorker", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "storage", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "userAgent", {
+        //Read only
+        configurable: true,
+        value: "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36 Rml/3.3",
+        //TODO - pull this value from C++
+    });
+    Object.defineProperty(this, "webdriver", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "xr", {
+        //Read only
+        configurable: true,
+        value: "TODO",
+    });
+
+    //Properties (Non-standard)
+    Object.defineProperty(this, "buildID", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "credentials", {
+        //Not standardized	
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "deviceMemory", {
+        //Read only, Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "doNotTrack", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "mediaDevices", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "mediaSession", {
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "mozNotification", {
+        //Obsolete
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "webkitNotification", {
+        //Obsolete
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "mozSocial", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "oscpu", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "presentation", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "productSub", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "securitypolicy", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "standalone", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "storageQuota", {
+        //Read only, Experimental
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "vendor", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "vendorSub", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+    Object.defineProperty(this, "webkitPointer", {
+        //Not standardized
+        configurable: true,
+        value: "TODO",
+    });
+
+    //Methods (Standard)
+<<<<<<< HEAD:DKPlugins/DKDuktape/DKNavigator.js
+    Navigator.prototype.canShare = function canShare() {
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.getVRDisplays = function getVRDisplays() {
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.getUserMedia = function getUserMedia() {
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.registerContentHandler = function registerContentHandler() {
+        //Obsolete
+        return "TODO";
+    }
+    Navigator.prototype.registerProtocolHandler = function registerProtocolHandler() {
+        return "TODO";
+    }
+    Navigator.prototype.requestMediaKeySystemAccess = function requestMediaKeySystemAccess() {
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.sendBeacon = function sendBeacon() {
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.share = function share() {
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.taintEnabled = function taintEnabled() {
+        //Obsolete, Experimental
+        return "TODO";
+    }
+    Navigator.prototype.vibrate = function vibrate() {
+=======
+    Navigator.prototype.canShare = function canShare(){
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.getVRDisplays = function getVRDisplays(){
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.getUserMedia = function getUserMedia(){
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.registerContentHandler = function registerContentHandler(){
+        //Obsolete
+        return "TODO";
+    }
+    Navigator.prototype.registerProtocolHandler = function registerProtocolHandler(){
+        return "TODO";
+    }
+    Navigator.prototype.requestMediaKeySystemAccess = function requestMediaKeySystemAccess(){
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.sendBeacon = function sendBeacon(){
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.share = function share(){
+        //Experimental
+        return "TODO";
+    }
+    Navigator.prototype.taintEnabled = function taintEnabled(){
+        //Obsolete, Experimental
+        return "TODO";
+    }
+    Navigator.prototype.vibrate = function vibrate(){
+>>>>>>> Development:DKCpp/plugins/DKDuktape/DKNavigator.js
+        //Obsolete, Experimental
+        return "TODO";
+    }
+
+    //Methods (Non-standard)
+<<<<<<< HEAD:DKPlugins/DKDuktape/DKNavigator.js
+    Navigator.prototype.mozIsLocallyAvailable = function mozIsLocallyAvailable() {
+        //Not standardized
+        return "TODO";
+    }
+    Navigator.prototype.mozPay = function mozPay() {
+=======
+    Navigator.prototype.mozIsLocallyAvailable = function mozIsLocallyAvailable(){
+        //Not standardized
+        return "TODO";
+    }
+    Navigator.prototype.mozPay = function mozPay(){
+>>>>>>> Development:DKCpp/plugins/DKDuktape/DKNavigator.js
+        //Not standardized
+        return "TODO";
+    }
+}
+
+var navigator = new Navigator("navigator");
+window.navigator = navigator;

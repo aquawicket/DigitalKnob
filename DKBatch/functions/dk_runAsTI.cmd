@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+>>>>>>> Development
 
 
 ::##################################################################################
@@ -8,9 +15,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# Run as Trusted Installer
 ::#
 :dk_runAsTI
+<<<<<<< HEAD
     call dk_debugFunc 1
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 1
+	
+>>>>>>> Development
     set ^ #=
     set "0=%~f0"
     set 1=%*
@@ -21,12 +34,23 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
     ::%dk_call% dk_runAsTI regedit
     ::%dk_call% dk_runAsTI cmd.exe
 	%dk_call% dk_runAsTi services.msc
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+    ::%dk_call% dk_runAsTI regedit
+    ::%dk_call% dk_runAsTI cmd.exe
+	::%dk_call% dk_runAsTI services.msc
+	%dk_call% dk_inputBox rtn_var
+	%dk_call% dk_runAsTi %rtn_var%
+>>>>>>> Development
 %endfunction%
 
 

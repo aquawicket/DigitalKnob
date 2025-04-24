@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 
 ##################################################################################
@@ -10,6 +15,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #	@msg	- The message to print
 #
+<<<<<<< HEAD
 function(dk_todo)
 	dk_debugFunc()
 
@@ -23,6 +29,14 @@ function(dk_todo)
 	dk_log(TODO "CMAKE_CURRENT_FUNCTION_LIST_FILE = ${CMAKE_CURRENT_FUNCTION_LIST_FILE}")
 	dk_log(TODO "CMAKE_CURRENT_FUNCTION_LIST_LINE = ${CMAKE_CURRENT_FUNCTION_LIST_LINE}")
 endfunction()
+=======
+macro(dk_todo)
+	dk_debugFunc()
+
+	dk_stacktrace()
+	dk_log(TODO "'${ARGV0}'")
+endmacro()
+>>>>>>> Development
 
 
 

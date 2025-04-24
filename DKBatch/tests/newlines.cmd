@@ -1,8 +1,20 @@
+<<<<<<< HEAD
 @echo off
 :: https://stackoverflow.com/questions/3294599/do-batch-files-support-multiline-variables
 
 ::::::::::::::::::::::::::::::::::::
 :::: newline (echo: version) :::::::
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+:: https://stackoverflow.com/questions/3294599/do-batch-files-support-multiline-variables
+
+::###### newline (echo: version) ######
+>>>>>>> Development
 set \n=^&echo:
 
 :: echo text with newlines
@@ -16,8 +28,13 @@ echo first line %\n%second line %\n%third line %\n%
 pause
 
 
+<<<<<<< HEAD
 ::::::::::::::::::::::::::::::::::::::::::::::::
 :::: newline (delayed expansion version) :::::::
+=======
+
+::###### newline (delayed expansion version) ######
+>>>>>>> Development
 setlocal enableDelayedExpansion
 set \n=^
 
@@ -36,8 +53,12 @@ pause
 
 
 :: https://stackoverflow.com/a/5642300
+<<<<<<< HEAD
 ::::::::::::::::::::::::::::::::::::::::::::::::
 :::: newline (without delayed expansion) :::::::
+=======
+::###### newline (without delayed expansion) ######
+>>>>>>> Development
 (SET LF=^
 %=this line is empty=%
 )

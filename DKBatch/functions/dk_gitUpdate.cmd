@@ -1,16 +1,32 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::################################################################################
 ::# dk_gitUpdate(url, branch, NO_CONFIRM)
 ::#
 ::#
 :dk_gitUpdate
+<<<<<<< HEAD
     call dk_debugFunc 2 3
  setlocal
  
     if "%~1" neq "" (set "_url_=%~1") else (set "_url_=https://github.com/aquawicket/DigitalKnob.git")
     if "%~2" neq "" (set "branch=%~2") else (set "branch=Development")
+=======
+setlocal
+	%dk_call% dk_debugFunc 2 3
+ 
+    if "%~1" neq "" (set "_url_=%~1") else (set "_url_=https://github.com/aquawicket/DigitalKnob.git")
+    if "%~2" neq "" (set "_branch_=%~2") else (set "_branch_=Development")
+>>>>>>> Development
     
     ::if "%3" neq "NO_CONFIRM" (
     ::    echo Git Update? Any local changes will be lost.
@@ -20,6 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
     
+<<<<<<< HEAD
     if NOT exist "%DKBRANCH_DIR%\.git" ("%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%")
 
     ::%dk_call% dk_cd "%DKBRANCH_DIR%"
@@ -32,6 +49,49 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         "%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %branch% main
         "%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %branch%
     )
+=======
+    if NOT exist "%DKBRANCH_DIR%\.git" (
+		
+		rem NOTE: 	This must cloan and update within the parentheses. rd /s /q "%DKBRANCH_DIR%" removes the current DigitalKnob
+		rem			folder, leaving the current running batch process abandoned until it's cloned again. It seems like when we are 
+		rem 		in the scope of called batch files, we loose all references to those deleted file once we leave the parentheses.
+		rem         This includes variables, functions, etc. So to fix this, after we delete the very files our context is running 
+		rem			from, we must stay in parentheses until those files are restored and updated, or we will lose the context.
+		rem ####################################################################		
+		if exist "%DKBRANCH_DIR%" (
+			rem ###### Backup Branch directory and clone ######
+			%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
+			set "PATH=%DKBRANCH_DIR%_BACKUP\DKBatch\functions;%PATH%"
+			rd /s /q "%DKBRANCH_DIR%"
+			"%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%"
+			"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
+			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
+			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %_branch_%
+			
+			if NOT "%ERRORLEVEL%" equ "0" (
+				%dk_call% dk_echo "Remote has no '%_branch_%' branch. Creating..."
+				"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
+				"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
+			)
+			%return%
+		)
+		rem ####################################################################
+		
+		rem ###### Clone into empty branch directory ######
+		"%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%"
+	)
+	
+	::###### Update ######
+	"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
+	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
+	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %_branch_%
+			
+	if NOT "%ERRORLEVEL%" equ "0" (
+		%dk_call% dk_echo "Remote has no '%_branch_%' branch. Creating..."
+		"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %_branch_% main
+		"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %_branch_%
+	)
+>>>>>>> Development
 %endfunction%
 
 
@@ -41,9 +101,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
     ::%dk_call% dk_gitUpdate
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
     %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
 %endfunction%

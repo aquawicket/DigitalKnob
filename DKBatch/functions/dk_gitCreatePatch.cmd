@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::################################################################################
 ::# dk_gitCreatePatch(fileA, fileB, patchFile)
@@ -9,17 +17,29 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#	  patchFile is the file created, it can be created to anywhere.
 ::#
 :dk_gitCreatePatch
+<<<<<<< HEAD
     call dk_debugFunc 3
+=======
+    %dk_call% dk_debugFunc 3
+>>>>>>> Development
  ::setlocal
  
     echo dk_gitCreatePatch %*
 	
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+<<<<<<< HEAD
     ::%dk_call% dk_cd %DKBRANCH_DIR%
     
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	
 	::%dk_call% dk_cd %~dp1
+=======
+    ::%dk_call% dk_chdir %DKBRANCH_DIR%
+    
+    %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+	
+	::%dk_call% dk_chdir %~dp1
+>>>>>>> Development
 	::%dk_call% dk_rename %~1 %~1.old
 	::%dk_call% dk_copy %~2 %~1 OVERWRITE
 	::set "fileA=%~nx1.old"
@@ -27,7 +47,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::"%GIT_EXE%" diff --relative --no-index  --unified --default-prefix --output=%~3 %fileA% %fileB%
 	::%dk_call% dk_move %~1.old %~1 OVERWRITE
 	
+<<<<<<< HEAD
 	%dk_call% dk_cd %~dp1
+=======
+	%dk_call% dk_chdir %~dp1
+>>>>>>> Development
 	%dk_call% dk_copy %~2 %~1.patch OVERWRITE
 	set "fileA=%~nx1"
 	set "fileB=%~nx1.patch"
@@ -42,9 +66,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
 	%dk_call% dk_selectFile fileA
 	%dk_call% dk_selectFile fileB
 	%dk_call% dk_saveFile patchFile

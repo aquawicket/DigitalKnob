@@ -1,23 +1,38 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_createIcons(image)
 #
+<<<<<<< HEAD
 #	@image		- Full path of the image file to use (.png)
+=======
+#	@image		- Full path of the image file to use (icon.png)
+>>>>>>> Development
 #	@outpath	- Full path of the output file to save to (.ico)
 #
 function(dk_createIcons)
 	dk_debugFunc(1)
 	
+<<<<<<< HEAD
 	set(image ${ARGV0})
 	if(NOT EXISTS ${image})
 		dk_warning("dk_createIcons(): image:${image} not found.")
+=======
+	if(NOT EXISTS "${ARGV0}")
+		dk_error("dk_createIcons(): image:${ARGV0} not found.")
+>>>>>>> Development
 		return()
 	endif()
 
 	dk_assertVar(APP_NAME)
+<<<<<<< HEAD
 	dk_assertVar(OS)
 	dk_info("Building ${OS} icons for ${APP_NAME} . . .")
 	
@@ -90,6 +105,79 @@ function(dk_createIcons)
 		set(app_ICONS ${DK_PROJECT_DIR}/icons/ios/icons.icns)
 		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 		#dk_createFavIcon(${image} ${DK_PROJECT_DIR}/assets/favicon.ico)
+=======
+	dk_assertVar(target_os)
+	dk_info("Building ${target_os} icons for ${APP_NAME} . . .")
+	
+	dk_assertPath("${DK_Project_Dir}")
+	dk_mkdir("${DK_Project_Dir}/assets")
+	dk_copy("${ARGV0}" "${DK_Project_Dir}/assets/icon.png" OVERWRITE)
+	
+	if(ANDROID)
+		if(DEBUG)
+			dk_resizeImage("${ARGV0}" 36 36   "${DK_Project_Dir}/${target_triple}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 48 48   "${DK_Project_Dir}/${target_triple}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 72 72   "${DK_Project_Dir}/${target_triple}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 96 96   "${DK_Project_Dir}/${target_triple}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 144 144 "${DK_Project_Dir}/${target_triple}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 192 192 "${DK_Project_Dir}/${target_triple}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png")
+		endif()
+		if(RELEASE)
+			dk_resizeImage("${ARGV0}" 36 36   "${DK_Project_Dir}/${target_triple}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 48 48   "${DK_Project_Dir}/${target_triple}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 72 72   "${DK_Project_Dir}/${target_triple}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 96 96   "${DK_Project_Dir}/${target_triple}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 144 144 "${DK_Project_Dir}/${target_triple}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png")
+			dk_resizeImage("${ARGV0}" 192 192 "${DK_Project_Dir}/${target_triple}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png")
+		endif()
+		#dk_createFavIcon("${ARGV0}" "${DK_Project_Dir}/assets/favicon.ico")
+	endif()
+	
+	if(IOS OR IOSSIM)
+		dk_mkdir("${DK_Project_Dir}/icons/ios")
+		dk_mkdir("${DK_Project_Dir}/icons/ios/icons.iconset")
+		dk_resizeImage("${ARGV0}" 16 16     "${DK_Project_Dir}/icons/ios/icons.iconset/icon_16x16.png")
+		dk_resizeImage("${ARGV0}" 32 32     "${DK_Project_Dir}/icons/ios/icons.iconset/icon_16x16@2x.png")
+		dk_resizeImage("${ARGV0}" 32 32     "${DK_Project_Dir}/icons/ios/icons.iconset/icon_32x32.png")
+		dk_resizeImage("${ARGV0}" 64 64     "${DK_Project_Dir}/icons/ios/icons.iconset/icon_32x32@2x.png")
+		dk_resizeImage("${ARGV0}" 128 128   "${DK_Project_Dir}/icons/ios/icons.iconset/icon_128x128.png")
+		dk_resizeImage("${ARGV0}" 256 256   "${DK_Project_Dir}/icons/ios/icons.iconset/icon_128x128@2x.png")
+		dk_resizeImage("${ARGV0}" 256 256   "${DK_Project_Dir}/icons/ios/icons.iconset/icon_256x256.png")
+		dk_resizeImage("${ARGV0}" 512 512   "${DK_Project_Dir}/icons/ios/icons.iconset/icon_256x256@2x.png")
+		dk_resizeImage("${ARGV0}" 512 512   "${DK_Project_Dir}/icons/ios/icons.iconset/icon_512x512.png")
+		dk_resizeImage("${ARGV0}" 1024 1024 "${DK_Project_Dir}/icons/ios/icons.iconset/icon_512x512@2x.png")
+		dk_exec(iconutil -c icns -o "${DK_Project_Dir}/icons/ios/icons.icns" "${DK_Project_Dir}/icons/ios/icons.iconset")
+		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
+		set(app_ICONS "${DK_Project_Dir}/icons/ios/icons.icns")
+		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+		#dk_createFavIcon(${ARGV0} ${DK_Project_Dir}/assets/favicon.ico)
+	endif()
+	
+	if(MAC)
+		dk_mkdir("${DK_Project_Dir}/icons/mac")
+		dk_mkdir("${DK_Project_Dir}/icons/mac/icons.iconset")
+		dk_resizeImage("${ARGV0}" 16 16     "${DK_Project_Dir}/icons/mac/icons.iconset/icon_16x16.png")
+		dk_resizeImage("${ARGV0}" 32 32     "${DK_Project_Dir}/icons/mac/icons.iconset/icon_16x16@2x.png")
+		dk_resizeImage("${ARGV0}" 32 32     "${DK_Project_Dir}/icons/mac/icons.iconset/icon_32x32.png")
+		dk_resizeImage("${ARGV0}" 64 64     "${DK_Project_Dir}/icons/mac/icons.iconset/icon_32x32@2x.png")
+		dk_resizeImage("${ARGV0}" 128 128   "${DK_Project_Dir}/icons/mac/icons.iconset/icon_128x128.png")
+		dk_resizeImage("${ARGV0}" 256 256   "${DK_Project_Dir}/icons/mac/icons.iconset/icon_128x128@2x.png")
+		dk_resizeImage("${ARGV0}" 256 256   "${DK_Project_Dir}/icons/mac/icons.iconset/icon_256x256.png")
+		dk_resizeImage("${ARGV0}" 512 512   "${DK_Project_Dir}/icons/mac/icons.iconset/icon_256x256@2x.png")
+		dk_resizeImage("${ARGV0}" 512 512   "${DK_Project_Dir}/icons/mac/icons.iconset/icon_512x512.png")
+		dk_resizeImage("${ARGV0}" 1024 1024 "${DK_Project_Dir}/icons/mac/icons.iconset/icon_512x512@2x.png")
+		dk_exec(iconutil -c icns -o "${DK_Project_Dir}/icons/mac/icons.icns" "${DK_Project_Dir}/icons/mac/icons.iconset")
+		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
+		set(app_ICONS "${DK_Project_Dir}/icons/mac/icons.icns")
+		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+		#dk_createFavIcon(${ARGV0} ${DK_Project_Dir}/assets/favicon.ico)
+	endif()
+	
+	if(WIN)
+		dk_createWindowsIcon("${ARGV0}" "${DK_Project_Dir}/icons/windows/icon.ico")
+		dk_copy("${DK_Project_Dir}/icons/windows/icon.ico" "${DK_Project_Dir}/assets/icon.ico" OVERWRITE)
+		dk_createFavIcon("${ARGV0}" "${DK_Project_Dir}/assets/favicon.ico")
+>>>>>>> Development
 	endif()
 endfunction()
 
@@ -98,9 +186,16 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	
 	dk_validate(triple "dk_builder()")
 	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+=======
+	dk_debugFunc(0)
+	
+	dk_validate(target_triple "dk_target_triple()")
+	dk_createIcons("${DK_Project_Dir}/icons/icon.png")
+>>>>>>> Development
 endfunction()

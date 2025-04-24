@@ -2,7 +2,11 @@
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
+<<<<<<< HEAD
 # Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+# Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files(the "Software"), to deal
@@ -21,7 +25,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+<<<<<<< HEAD
 #include_guard()
+=======
+include_guard()
+>>>>>>> Development
 
 
 # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
@@ -192,15 +200,26 @@ endfunction()
 #	Add javascript like access to functions. Experamental  
 #
 if(string_Ext)
+<<<<<<< HEAD
 	#execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB_DIR}/Development/DKCMake/)
 	#dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
 	#dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### This file was automatically generated from DKFunctions.cmake ###\n\n")
+=======
+	#execute_process(COMMAND ${CMAKE_COMMAND} -E remove $ENV{DIGITALKNOB_DIR}/Development/DKCMake/)
+	#dk_fileAppend($ENV{DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
+	#dk_fileAppend($ENV{DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### This file was automatically generated from DKFunctions.cmake ###\n\n")
+>>>>>>> Development
 
 	function(CreateStringFunc str)
 		dk_debugFunc()
 		
+<<<<<<< HEAD
 		dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "${str}")
 		include(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake)
+=======
+		dk_fileAppend($ENV{DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "${str}")
+		include($ENV{DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake)
+>>>>>>> Development
 	endfunction()
 
 	set(stringified "test" CACHE INTERNAL "")

@@ -1,9 +1,16 @@
 #*          text eol=lf
 *.bash      text eol=lf
+<<<<<<< HEAD
 *.bat       text eol=crlf
 *.c 		text eol=lf
 *.cmake		text eol=lf
 *.cmd       text eol=crlf
+=======
+*.bat       text eol=lf
+*.c 		text eol=lf
+*.cmake		text eol=lf
+*.cmd       text eol=lf
+>>>>>>> Development
 *.cpp 		text eol=lf
 *.cs 		text eol=lf
 *.h 		text eol=lf
@@ -16,8 +23,14 @@
 *.php		text eol=lf
 *.ps1		text eol=lf
 *.py		text eol=lf
+<<<<<<< HEAD
 *.reg       text eol=crlf
 *.sh        text eol=lf
+=======
+#*.reg       text eol=crlf
+*.sh        text eol=lf
+*.txt		text eol=lf
+>>>>>>> Development
 *.vbs       text eol=lf
 #/DKBash/*  text eol=lf
 #/DKBatch/* text eol=crlf

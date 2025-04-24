@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 
 ##################################################################################
@@ -41,4 +46,9 @@ DKTEST(){
 	
 	dk_realpath "DK.sh" realpathB
 	dk_echo "realpathB = ${realpathB}"
+<<<<<<< HEAD
+=======
+	
+	C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\usr\bin\cygpath.exe
+>>>>>>> Development
 }

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ##################################################################################
 # dk_resetAll()
@@ -34,7 +39,11 @@ dk_resetAll() {
 	# Backup main script file to ${DKCACHE_DIR}
 	#dk_call dk_delete "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
 	dk_call dk_copy "${DKSCRIPT_PATH}" "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
+<<<<<<< HEAD
 	dk_call dk_cd "${DKCACHE_DIR}"
+=======
+	dk_call dk_chdir "${DKCACHE_DIR}"
+>>>>>>> Development
 	dk_call dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
 	dk_call dk_delete "${DKBRANCH_DIR}"
 	
@@ -45,7 +54,10 @@ dk_resetAll() {
 #	#dk_call dk_info "Restarting ${DKSCRIPT_NAME}. . ."
 #	#dk_call dk_sleep 3
 	
+<<<<<<< HEAD
 #	unset DKINIT
+=======
+>>>>>>> Development
 #	unset DKHOME_DIR
 #	unset DK
 #	unset DKF

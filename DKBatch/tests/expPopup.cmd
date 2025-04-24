@@ -1,7 +1,11 @@
 ;@echo off
 ;setlocal
 
+<<<<<<< HEAD
 ;set ppopup_executable=popupe.exe
+=======
+;set ppopup_executable=popup.exe
+>>>>>>> Development
 ;set "message2=%~1"
 ;
 ;del /q /f %tmp%\yes >nul 2>&1
@@ -45,7 +49,11 @@ AdminQuietInstCmd=%AdminQuietInstCmd%
 UserQuietInstCmd=%UserQuietInstCmd%
 SourceFiles=SourceFiles
 [SourceFiles]
+<<<<<<< HEAD
 SourceFiles0=C:\Windows\System32\
+=======
+SourceFiles0=%WINDIR%\System32\
+>>>>>>> Development
 [SourceFiles0]
 %FILE0%=
 

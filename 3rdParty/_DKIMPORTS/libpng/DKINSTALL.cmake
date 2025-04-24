@@ -1,0 +1,150 @@
+#!/usr/bin/cmake -P
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+
+
+dk_load(dk_builder)
+# https://github.com/glennrp/libpng
+# http://www.libpng.org/pub/png/libpng.html
+
+
+### DEPEND ###
+if(EMSCRIPTEN)
+	dk_depend(m)
+endif()
+dk_depend(zlib)
+
+
+### IMPORT ###
+if(MAC)
+	#dk_import(https://github.com/glennrp/libpng.git)
+	dk_import(https://github.com/pnggroup/libpng/archive/refs/heads/libpng16.zip)
+else()
+	dk_import(https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip PATCH)
+	dk_set(LIBPNG_MAJOR 1)
+	dk_set(LIBPNG_MINOR 6)
+	dk_set(LIBPNG_BUILD 35)
+endif()
+
+
+### LINK ###
+dk_define					(PNG_STATIC)
+dk_include					(${LIBPNG_DIR}  														PNG_INCLUDE_DIR)
+dk_include					(${LIBPNG_CONFIG_DIR}													PNG_INCLUDE_DIR2)
+
+if(MSVC)
+	if(ANDROID)
+		dk_libDebug			(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
+		dk_libRelease		(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
+	endif()
+	if(WIN)
+		dk_libDebug			(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
+		dk_libRelease		(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
+	endif()
+elseif(APPLE)
+	dk_libDebug				(${LIBPNG_DEBUG_DIR}/libpng16d.a										PNG_LIBRARY_DEBUG)
+	dk_libRelease			(${LIBPNG_RELEASE_DIR}/libpng16d.a										PNG_LIBRARY_RELEASE)
+else()
+	dk_libDebug				(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
+	dk_libRelease			(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
+endif()
+
+
+### 3RDPARTY LINK ###
+if(MSVC)
+	if(WIN)
+		dk_set(LIBPNG_CMAKE 
+		"-DCMAKE_C_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}" 
+		"-DCMAKE_CXX_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}" 
+		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
+		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2} 
+		-DPNG_PNG_INCLUDE_DIR=${PNG_INCLUDE_DIR2} 
+		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
+		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
+	
+	elseif(ANDROID)
+		dk_set(LIBPNG_CMAKE 
+		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
+		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
+		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
+		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2} 
+		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
+		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE}
+		-DPNG_PNG_INCLUDE_DIR=${PNG_INCLUDE_DIR2})
+	endif()
+elseif(APPLE)
+	dk_set(LIBPNG_CMAKE 
+	"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
+	"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
+	-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR} 
+	-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2}
+	-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
+	-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})	
+elseif(RASPBERRY)
+	if(DEBUG)
+		dk_set(LIBPNG_CMAKE 
+		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
+		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}"  
+		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
+		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2}
+		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
+		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
+	endif()
+	if(RELEASE)
+		dk_set(LIBPNG_CMAKE 
+		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
+		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
+		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
+		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2} 
+		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
+		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
+	endif()
+else()
+	if(DEBUG)
+		dk_set(LIBPNG_CMAKE 
+		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}"
+		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}"
+		"-DCMAKE_EXE_LINKER_FLAGS=${PNG_LIBRARY_DEBUG}"
+		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
+		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2}
+		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG}
+		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
+	endif()
+	if(RELEASE)
+		dk_set(LIBPNG_CMAKE 
+		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
+		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
+		"-DCMAKE_EXE_LINKER_FLAGS=${PNG_LIBRARY_RELEASE}"
+		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR} 
+		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2}
+		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
+		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
+	endif()
+endif()
+
+
+
+### GENERATE ###
+dk_configure(${LIBPNG_DIR}
+	-DPNG_BUILD_ZLIB=OFF 			# "Custom zlib Location, otherwise find_package is used" OFF
+	-DPNG_STATIC=ON					# "Build shared lib" ON
+	-DPNG_SHARED=OFF				# "Build static lib" ON
+	-DPNG_TESTS=OFF 				# "Build libpng tests" ON
+	-DPNG_FRAMEWORK=OFF				# "Build OS X framework" OFF
+	-DPNG_DEBUG=OFF    				# "Build with debug output" OFF
+	-DPNGARG=OFF       				# "Disable ANSI-C prototypes" OFF
+	-DPNG_HARDWARE_OPTIMIZATIONS=ON	# "Enable Hardware Optimizations" ON
+	#-DPNG_PREFIX="" 				# "Prefix to add to the API function names"
+	#-DDFA_XTRA=""					# "File containing extra configuration settings"
+	-Dld-version-script=ON			# "Enable linker version script" ON
+	-DSKIP_INSTALL_LIBRARIES=ON 
+	-DSKIP_INSTALL_ALL=ON
+	${ZLIB_CMAKE})  
+
+
+
+### COMPILE ###
+dk_build(${LIBPNG_DIR} png_static)
+

@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ################################################################################
 # dk_reparseCmakeCommand(CMD_LIST)
@@ -19,8 +24,13 @@ function(dk_reparseCmakeCommand CMD_LIST)
 		dk_return()
 	endif()
 	
+<<<<<<< HEAD
 	dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")
 	file(REMOVE ${DKCACHE_DIR}/cmake_reparsed.txt)
+=======
+	dk_validate(ENV{DKCACHE_DIR} "dk_DKCACHE_DIR()")
+	file(REMOVE $ENV{DKCACHE_DIR}/cmake_reparsed.txt)
+>>>>>>> Development
 	list(REMOVE_ITEM ARGV COMMAND)
 	foreach(item IN LISTS ARGV)
 		if(${item} MATCHES "=")
@@ -44,7 +54,11 @@ function(dk_reparseCmakeCommand CMD_LIST)
 				set(item "${firstC_part} \"${secondC_part}\" CACHE INTERNAL \"\" FORCE)")
 			endif()
 
+<<<<<<< HEAD
 			file(APPEND ${DKCACHE_DIR}/cmake_reparsed.txt "${item}\n")
+=======
+			file(APPEND $ENV{DKCACHE_DIR}/cmake_reparsed.txt "${item}\n")
+>>>>>>> Development
 		endif() 
 	endforeach()
 	
@@ -61,7 +75,11 @@ function(dk_reparseCmakeCommand CMD_LIST)
 	list(SUBLIST ARGV 0 ${first_ep_arg} CMAKE_ARGS)
 	list(SUBLIST ARGV ${first_ep_arg} -1 EP_ARGS)
 
+<<<<<<< HEAD
 	list(APPEND CMAKE_ARGS "-C;${DKCACHE_DIR}/cmake_reparsed.txt")
+=======
+	list(APPEND CMAKE_ARGS "-C;$ENV{DKCACHE_DIR}/cmake_reparsed.txt")
+>>>>>>> Development
 	#message("CMAKE_ARGS = ${CMAKE_ARGS}\n")
 	#message("EP_ARGS = ${EP_ARGS}\n")
 	list(APPEND NEW_ARGV "COMMAND")
@@ -75,7 +93,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	set(myCmakeCommand "COMMAND;cmd;/c;C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20240727/clang32/bin/cmake.exe;-G;MinGW Makefiles;-DBUILD_SHARED_LIBS=0;-DBUILD_STATIC_LIBS=1;-DBUILD_TESTING=0;-DCMAKE_BUILD_TYPE=Debug;-DCMAKE_MAKE_PROGRAM=C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20240727/clang32/bin/mingw32-make.exe;-DCMAKE_C_COMPILER=C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20240727/clang32/bin/clang.exe;-DCMAKE_C_FLAGS=-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17;-DCMAKE_C_FLAGS_DEBUG=-DDEBUG -D_DEBUG -g;-DCMAKE_C_FLAGS_RELEASE=-O3 -DNDEBUG;-DCMAKE_CXX_COMPILER=C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20240727/clang32/bin/clang++.exe;-DCMAKE_CXX_FLAGS=-frtti -march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17;-DCMAKE_CXX_FLAGS_DEBUG=-DDEBUG -D_DEBUG -g;-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG;-DAOM_TARGET_CPU=generic;-S;C:/Users/Administrator/digitalknob/Development/3rdParty/aom-c2fe6bf;-B;C:/Users/Administrator/digitalknob/Development/3rdParty/aom-c2fe6bf/win_x86_clang/Debug;OUTPUT_VARIABLE;echo_output;ERROR_VARIABLE;echo_output;WORKING_DIRECTORY;C:/Users/Administrator/digitalknob/Development/3rdParty/aom-c2fe6bf/win_x86_clang/Debug;RESULT_VARIABLE;result_variable;COMMAND_ECHO;STDOUT;OUTPUT_STRIP_TRAILING_WHITESPACE")
 	

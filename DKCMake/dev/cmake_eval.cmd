@@ -2,7 +2,11 @@
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
+<<<<<<< HEAD
 :: Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 ::
 :: Permission is hereby granted, free of charge, to any person obtaining a copy
 :: of this software and associated documentation files(the "Software"), to deal
@@ -23,7 +27,11 @@
 :: SOFTWARE.
 @echo off
 setlocal EnableDelayedExpansion
+<<<<<<< HEAD
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+=======
+if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+>>>>>>> Development
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: cmake_eval eval_code error
 ::
@@ -77,7 +85,11 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 		
 	::echo return code: %ERRORLEVEL%
 	
+<<<<<<< HEAD
 	:::: work with cmake return code files ::::
+=======
+	::###### work with cmake return code files ######
+>>>>>>> Development
 	:: std::out
 	set out=
 	if exist "cmake_eval.out" (

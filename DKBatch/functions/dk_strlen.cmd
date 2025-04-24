@@ -1,11 +1,20 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::####################################################################
 ::# dk_strlen(string_var rtn_var)
 ::#
 ::#
 :dk_strlen
+<<<<<<< HEAD
     call dk_debugFunc 2
  setlocal
  
@@ -13,6 +22,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "len=0"
     for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
         if "!s:~%%N,1!" neq "" (
+=======
+setlocal enableDelayedExpansion
+	%dk_call% dk_debugFunc 2
+
+    set "s=#!%~1!"
+    set "len=0"
+    for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
+        if not "!s:~%%N,1!" equ "" (
+>>>>>>> Development
             set /a "len+=%%N"
             set "s=!s:~%%N!"
         )
@@ -28,9 +46,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
     %dk_call% dk_set str "some example string"
     %dk_call% dk_strlen str length
 	%dk_call% dk_echo "%str%"

@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_patch(import_name dest_path)
@@ -15,11 +20,19 @@ function(dk_patch import_name dest_path)
 
 	dk_notice("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
 	dk_notice("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the dk_import or dk_install command")
+<<<<<<< HEAD
 	dk_notice("located in ${DKIMPORTS_DIR}/${import_name}/DKMAKE.cmake")
 	
 	dk_assertPath(${DKIMPORTS_DIR}/${import_name})
 	dk_assertPath(${dest_path})
 	dk_copy(${DKIMPORTS_DIR}/${import_name}/ ${dest_path}/ OVERWRITE)
+=======
+	dk_notice("located in $ENV{DKIMPORTS_DIR}/${import_name}/DKINSTALL.cmake")
+	
+	dk_assertPath($ENV{DKIMPORTS_DIR}/${import_name})
+	dk_assertPath(${dest_path})
+	dk_copy("$ENV{DKIMPORTS_DIR}/${import_name}/" "${dest_path}/" OVERWRITE)
+>>>>>>> Development
 endfunction()
 
 
@@ -28,7 +41,13 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	dk_patch(todo "todo")
+>>>>>>> Development
 endfunction()

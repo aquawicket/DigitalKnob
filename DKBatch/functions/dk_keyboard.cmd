@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @echo off
 ::echo dk_keyboard.cmd()
 ::echo 0 = %~0
@@ -8,12 +9,23 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 if "%~1" equ "dk_keyboard.BeginReceiving" goto %1
 if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+if "%~1" equ ":dk_keyboard.BeginReceiving" goto %1
+if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
+>>>>>>> Development
 
 ::################################################################################
 ::# dk_keyboard()
 ::#
 ::#
 :dk_keyboard
+<<<<<<< HEAD
     ::call dk_debugFunc 0
  setlocal
  
@@ -30,6 +42,25 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 :dk_keyboard.Keyboard_Loop
     ::call dk_debugFunc 0
  setlocal
+=======
+setlocal
+    ::%dk_call% dk_debugFunc 0
+
+ 
+    echo dk_keyboard %*
+    
+    if "%~1" equ "callback" set callback=%~2 %~3
+    ::if defined callback echo callback = %callback%
+    %dk_call% dk_debugFunc 0 3 || %dk_call% dk_error "%dk_call% dk_debugFunc failed!"
+    
+    rem Start Keyboard_Loop in a parallel process
+    start "" /B %ComSpec% /C "%dk_call% dk_keyboard :dk_keyboard.Keyboard_Loop" || echo Keyboard_Loop returned error
+%endfunction%
+
+:dk_keyboard.Keyboard_Loop
+    ::%dk_call% dk_debugFunc 0
+ ::setlocal
+>>>>>>> Development
     ::echo dk_keyboard.Keyboard_Loop %*
     
     :: Read keys via PowerShell
@@ -43,8 +74,13 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 %endfunction%
 
 :dk_keyboard.BeginReceiving
+<<<<<<< HEAD
     ::call dk_debugFunc 0
  setlocal
+=======
+    ::%dk_call% dk_debugFunc 0
+ ::setlocal
+>>>>>>> Development
  
     echo dk_keyboard.BeginReceiving %*
     
@@ -53,12 +89,21 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
     set /P "="
     
     :: enter keyboard polling loop
+<<<<<<< HEAD
     call :dk_keyboard.pollKeys || call dk_error "call :pollKeys failed!"
 %endfunction%
     
 :dk_keyboard.pollKeys
     ::call dk_debugFunc 0
  setlocal
+=======
+    call :dk_keyboard.pollKeys || %dk_call% dk_error "call :pollKeys failed!"
+%endfunction%
+    
+:dk_keyboard.pollKeys
+    ::%dk_call% dk_debugFunc 0
+ ::setlocal
+>>>>>>> Development
     ::echo dk_keyboard.pollKeys %*
 
     :: Process keys in Batch
@@ -66,15 +111,24 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
     set /P "="  
     
     if defined callback call %callback% %keyCode% || echo callback returned error && %return%
+<<<<<<< HEAD
     ::if not defined callback call :dk_keyboard.onKeyDown %keyCode% || call dk_error "call :onKeyDown %keyCode% failed!"
+=======
+    ::if not defined callback call :dk_keyboard.onKeyDown %keyCode% || %dk_call% dk_error "call :onKeyDown %keyCode% failed!"
+>>>>>>> Development
     ::if defined stopPollKeys %return%
     goto dk_keyboard.pollKeys
 %endfunction%
 
 
 :dk_keyboard.onKeyDown
+<<<<<<< HEAD
     ::call dk_debugFunc 0
  setlocal
+=======
+    %dk_call% dk_debugFunc 0
+ ::setlocal
+>>>>>>> Development
     ::echo dk_keyboard.onKeyDown %*
     
     set "keyCode=%1"
@@ -98,6 +152,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     ::call dk_debugFunc 0
  setlocal
  
@@ -106,4 +161,15 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
     dk_call dk_keyboard || call dk_error "call dk_keyboard failed!"
     
     %dk_call% dk_echo "press escape to exit keyboard loop" || call dk_error "%dk_call% dk_echo failed!"
+=======
+setlocal
+    ::%dk_call% dk_debugFunc 0
+
+ 
+    %dk_call% dk_debugFunc 0 || %dk_call% dk_error "%dk_call% dk_debugFunc failed!"
+    
+    dk_call dk_keyboard || %dk_call% dk_error "%dk_call% dk_keyboard failed!"
+    
+    %dk_call% dk_echo "press escape to exit keyboard loop" || %dk_call% dk_error "%dk_call% dk_echo failed!"
+>>>>>>> Development
 %endfunction%

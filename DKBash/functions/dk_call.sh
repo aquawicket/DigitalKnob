@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 
 ##################################################################################
@@ -11,6 +16,7 @@ dk_call(){
 	if ! (command -v ${1} &>/dev/null); then
 		
 		# Is it a dk_ prefixed function?
+<<<<<<< HEAD
 		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then
 			dk_source ${1}	
 		
@@ -19,6 +25,16 @@ dk_call(){
 			(command -v dk_installPackage &>/dev/null) || dk_source dk_installPackage
 			dk_installPackage ${1}
 		fi
+=======
+#	if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then
+			dk_source ${1}	
+		
+		# Not a dk_ prefixed function
+#		else								
+#			(command -v dk_installPackage &>/dev/null) || dk_source dk_installPackage
+#			dk_installPackage ${1}
+#		fi
+>>>>>>> Development
 		
 		
 		if ! (command -v ${1} &>/dev/null); then

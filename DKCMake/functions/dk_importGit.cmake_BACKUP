@@ -16,7 +16,11 @@ function(dk_importGit url) #branch #id #PATCH
 	
 	dk_getOption(PATCH ${ARGV})
 	
+<<<<<<< HEAD
 	dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
+=======
+	dk_load(${DKIMPORTS_DIR}/git/DKINSTALL.cmake)
+>>>>>>> Development
 	DKASSERT(GIT_EXE)
 	
 	dk_replaceAll(${url} "/" ";" url_list)  #split url path into list
@@ -125,7 +129,11 @@ function(dk_importGit url) #branch #id #PATCH
 			dk_delete(${${LIBVAR}})
 		endif()
 		if(NOT EXISTS ${${LIBVAR}})
+<<<<<<< HEAD
 			dk_makeDirectory(${${LIBVAR}})
+=======
+			dk_mkdir(${${LIBVAR}})
+>>>>>>> Development
 		endif()
 		dk_cd(${${LIBVAR}})
 		dk_command(${GIT_EXE} clone ${url} ${${LIBVAR}})

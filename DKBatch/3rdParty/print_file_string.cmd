@@ -62,6 +62,7 @@ set "FLAGS="
 rem flags always at first
 set "FLAG=%~1"
 
+<<<<<<< HEAD
 if not "%FLAG%" == "" ^
 if not "%FLAG:~0,1%" == "-" set "FLAG="
 
@@ -69,6 +70,15 @@ if not "%FLAG%" == "" (
   if "%FLAG%" == "-n" set FLAG_PRINT_LINE_NUMBER_PREFIX=1
   if "%FLAG%" == "-f1" set FLAG_F1_LINE_NUMBER_FILTER=1
   if "%FLAG%" == "-pe" set FLAG_FILE_FORMAT_PE=1
+=======
+if not "%FLAG%" equ "" ^
+if not "%FLAG:~0,1%" equ "-" set "FLAG="
+
+if not "%FLAG%" equ "" (
+  if "%FLAG%" equ "-n" set FLAG_PRINT_LINE_NUMBER_PREFIX=1
+  if "%FLAG%" equ "-f1" set FLAG_F1_LINE_NUMBER_FILTER=1
+  if "%FLAG%" equ "-pe" set FLAG_FILE_FORMAT_PE=1
+>>>>>>> Development
   shift
 
   rem read until no flags
@@ -79,15 +89,25 @@ set "DIR_PATH=%~dpf1"
 set "FILE_PATH=%~2"
 
 set "FILE_PATH_PREFIX="
+<<<<<<< HEAD
 if not "%DIR_PATH%" == "" set "FILE_PATH_PREFIX=%DIR_PATH%\"
 
 if not "%FILE_PATH_PREFIX%" == "" ^
+=======
+if not "%DIR_PATH%" equ "" set "FILE_PATH_PREFIX=%DIR_PATH%\"
+
+if not "%FILE_PATH_PREFIX%" equ "" ^
+>>>>>>> Development
 if not exist "%FILE_PATH_PREFIX%" (
   echo.%?~nx0%: error: Directory path does not exist: "%FILE_PATH_PREFIX%"
   exit /b 1
 ) >&2
 
+<<<<<<< HEAD
 if "%FILE_PATH%" == "" (
+=======
+if "%FILE_PATH%" equ "" (
+>>>>>>> Development
   echo.%?~nx0%: error: File path does not set.
   exit /b 2
 ) >&2
@@ -100,16 +120,27 @@ if not exist "%FILE_PATH_PREFIX%%FILE_PATH%" (
 set "LINE_NUMBERS=%~3"
 
 set "FINDSTR_LINES_FILTER_CMD_LINE="
+<<<<<<< HEAD
 if "%LINE_NUMBERS%" == "" goto FINDSTR_LINES_FILTER_END
+=======
+if "%LINE_NUMBERS%" equ "" goto FINDSTR_LINES_FILTER_END
+>>>>>>> Development
 
 set LINE_NUMBER_INDEX=1
 :FINDSTR_LINES_FILTER_LOOP
 set "LINE_NUMBER="
 for /F "tokens=%LINE_NUMBER_INDEX% delims=:" %%i in ("%LINE_NUMBERS%") do set "LINE_NUMBER=%%i"
+<<<<<<< HEAD
 if "%LINE_NUMBER%" == "" goto FINDSTR_LINES_FILTER_END
 
 set FINDSTR_LINES_FILTER_CMD_LINE=!FINDSTR_LINES_FILTER_CMD_LINE! /C:"!LINE_NUMBER!:"
 set /A LINE_NUMBER_INDEX+=1
+=======
+if "%LINE_NUMBER%" equ "" goto FINDSTR_LINES_FILTER_END
+
+set FINDSTR_LINES_FILTER_CMD_LINE=!FINDSTR_LINES_FILTER_CMD_LINE! /C:"!LINE_NUMBER!:"
+set /a LINE_NUMBER_INDEX+=1
+>>>>>>> Development
 goto FINDSTR_LINES_FILTER_LOOP
 
 :FINDSTR_LINES_FILTER_END
@@ -123,13 +154,21 @@ set "FINDSTR_FIRST_FILTER_CMD_LINE="
 :FINDSTR_FIRST_FILTER_LOOP
 set ARG=%1
 
+<<<<<<< HEAD
 if not "!ARG!" == "" (
+=======
+if not "!ARG!" equ "" (
+>>>>>>> Development
   set FINDSTR_FIRST_FILTER_CMD_LINE=!FINDSTR_FIRST_FILTER_CMD_LINE! !ARG!
   shift
   goto FINDSTR_FIRST_FILTER_LOOP
 )
 
+<<<<<<< HEAD
 if "!FINDSTR_FIRST_FILTER_CMD_LINE!" == "" set FINDSTR_FIRST_FILTER_CMD_LINE=/R /C:".*"
+=======
+if "!FINDSTR_FIRST_FILTER_CMD_LINE!" equ "" set FINDSTR_FIRST_FILTER_CMD_LINE=/R /C:".*"
+>>>>>>> Development
 
 set OUTPUT_HAS_NUMBER_PREFIX=0
 
@@ -140,7 +179,11 @@ rem 1. add /N parameter to first filter if must print line prefixes and -f1 flag
 rem 2. flags prefixed output if must print line prefixes.
 if %FLAG_PRINT_LINE_NUMBER_PREFIX% neq 0 (
   if %FLAG_F1_LINE_NUMBER_FILTER% equ 0 (
+<<<<<<< HEAD
     if "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" == "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
+=======
+    if "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" equ "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
+>>>>>>> Development
       set "FINDSTR_FIRST_FILTER_CMD_LINE=/N !FINDSTR_FIRST_FILTER_CMD_LINE!"
     )
   )
@@ -149,14 +192,24 @@ if %FLAG_PRINT_LINE_NUMBER_PREFIX% neq 0 (
 
 rem 1. add /N parameter to first filter and flags prefixed output if lines filter is not empty and -f1 flag is not set.
 rem 2. add /B parameter to lines filter if lines filter is not empty
+<<<<<<< HEAD
 if not "!FINDSTR_LINES_FILTER_CMD_LINE!" == "" (
   if %FLAG_F1_LINE_NUMBER_FILTER% equ 0 (
     if "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" == "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
+=======
+if not "!FINDSTR_LINES_FILTER_CMD_LINE!" equ "" (
+  if %FLAG_F1_LINE_NUMBER_FILTER% equ 0 (
+    if "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" equ "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
+>>>>>>> Development
       set "FINDSTR_FIRST_FILTER_CMD_LINE=/N !FINDSTR_FIRST_FILTER_CMD_LINE!"
       set OUTPUT_HAS_NUMBER_PREFIX=1
     )
   )
+<<<<<<< HEAD
   if "!FINDSTR_LINES_FILTER_CMD_LINE:/B =!" == "!FINDSTR_LINES_FILTER_CMD_LINE!" (
+=======
+  if "!FINDSTR_LINES_FILTER_CMD_LINE:/B =!" equ "!FINDSTR_LINES_FILTER_CMD_LINE!" (
+>>>>>>> Development
     set "FINDSTR_LINES_FILTER_CMD_LINE=/B !FINDSTR_LINES_FILTER_CMD_LINE!"
   )
 )
@@ -164,15 +217,25 @@ if not "!FINDSTR_LINES_FILTER_CMD_LINE!" == "" (
 rem 1. remove /N parameter from first filter if -f1 flag is set.
 rem 2. flags prefixed output if -f1 flag is set.
 if %FLAG_F1_LINE_NUMBER_FILTER% neq 0 (
+<<<<<<< HEAD
   if not "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" == "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
+=======
+  if not "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" equ "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
+>>>>>>> Development
     set "FINDSTR_FIRST_FILTER_CMD_LINE=!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!"
   )
   set OUTPUT_HAS_NUMBER_PREFIX=1
 )
 
+<<<<<<< HEAD
 if "%TOOLS_PATH%" == "" set "TOOLS_PATH=%?~dp0%"
 rem set "TOOLS_PATH=%TOOLS_PATH:\=/%"
 if "%TOOLS_PATH:~-1%" == "\" set "TOOLS_PATH=%TOOLS_PATH:~0,-1%"
+=======
+if "%TOOLS_PATH%" equ "" set "TOOLS_PATH=%?~dp0%"
+rem set "TOOLS_PATH=%TOOLS_PATH:\=/%"
+if "%TOOLS_PATH:~-1%" equ "\" set "TOOLS_PATH=%TOOLS_PATH:~0,-1%"
+>>>>>>> Development
 
 if %FLAG_FILE_FORMAT_PE% equ 0 (
   set CMD_LINE=type "%FILE_PATH_PREFIX%%FILE_PATH%" ^| findstr !FINDSTR_FIRST_FILTER_CMD_LINE!
@@ -185,7 +248,11 @@ if %FLAG_FILE_FORMAT_PE% equ 0 (
 )
 
 if %FLAG_F1_LINE_NUMBER_FILTER% neq 0 set CMD_LINE=!CMD_LINE! ^| findstr /N /R /C:".*"
+<<<<<<< HEAD
 if not "!FINDSTR_LINES_FILTER_CMD_LINE!" == "" set CMD_LINE=!CMD_LINE! ^| findstr !FINDSTR_LINES_FILTER_CMD_LINE!
+=======
+if not "!FINDSTR_LINES_FILTER_CMD_LINE!" equ "" set CMD_LINE=!CMD_LINE! ^| findstr !FINDSTR_LINES_FILTER_CMD_LINE!
+>>>>>>> Development
 
 rem echo !CMD_LINE! >&2
 (

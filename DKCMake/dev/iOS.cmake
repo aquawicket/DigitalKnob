@@ -2,7 +2,11 @@
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
+<<<<<<< HEAD
 # Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
+=======
+# Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+>>>>>>> Development
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files(the "Software"), to deal
@@ -21,7 +25,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+<<<<<<< HEAD
 #include_guard()
+=======
+include_guard()
+>>>>>>> Development
 
 set(MACOSX_BUNDLE_GUI_IDENTIFIER com.example)
 set(CMAKE_MACOSX_BUNDLE YES)

@@ -1,7 +1,19 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
 #include_guard()
+=======
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_color(on/off)
@@ -181,7 +193,11 @@ dk_color(1)
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_echo()
 	dk_echo("${black}${bg_lblack}           Styles            ${clr}")

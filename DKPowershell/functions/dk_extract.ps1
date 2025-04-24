@@ -1,11 +1,20 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_extract){ $dk_extract = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_extract){ $dk_extract = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ####################################################################
 # dk_extract(file, destination)
 #
 #
+<<<<<<< HEAD
 function Global:dk_extract($file, $destination) {
+=======
+function Global:dk_extract($file, $destination){
+>>>>>>> Development
 	dk_debugFunc 2
 
 	dk_call dk_info "Extracting $file to $destination . . ."
@@ -27,9 +36,16 @@ function Global:dk_extract($file, $destination) {
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+<<<<<<< HEAD
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+=======
+function Global:DKTEST(){
+	dk_debugFunc 0
+	
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+>>>>>>> Development
 	dk_call dk_extract $DKDOWNLOAD_DIR/cmake-3.29.5-windows-x86_64.zip $DKDOWNLOAD_DIR
 }

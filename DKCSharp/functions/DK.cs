@@ -1,10 +1,18 @@
+<<<<<<< HEAD
+=======
+// TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
+
+>>>>>>> Development
 using System;					// https://learn.microsoft.com/en-us/dotnet/api/system?view=net-8.0
 using System.CodeDom.Compiler;	// https://learn.microsoft.com/en-us/dotnet/api/system.codedom.compiler?view=net-8.0
 using Microsoft.CSharp;			// https://learn.microsoft.com/en-us/dotnet/api/microsoft.csharp?view=net-8.0
 using System.Reflection;		// https://learn.microsoft.com/en-us/dotnet/api/system.reflection?view=net-8.0
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Development
 namespace DKAPP{ 
 public class APP{
 

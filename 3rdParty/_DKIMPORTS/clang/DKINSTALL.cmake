@@ -1,0 +1,77 @@
+#!/usr/bin/cmake -P
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+
+
+############ clang ############
+# https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
+dk_validate(host_triple			"dk_host_triple()")
+dk_validate(ENV{target_triple}	"dk_target_triple()")
+dk_set($ENV{target_triple} 		1)
+
+#dk_getFileParam("$ENV{DKIMPORTS_DIR}/clang/dkconfig.txt" VERSION)
+#if(clang OR mingw OR ucrt)
+if(MSYSTEM)
+	dk_validate(MSYS2 "dk_depend(msys2)")
+endif()
+dk_installPackage(clang)
+	
+if(win_x86_clang)
+	dk_validate(MSYS2 			"dk_depend(msys2)")
+	dk_set(CLANG32_BIN		  	"${MSYS2}/clang32/bin")
+	dk_set(CLANG_C_COMPILER   	"${CLANG32_BIN}/clang.exe")
+	dk_set(CLANG_CXX_COMPILER	"${CLANG32_BIN}/clang++.exe")
+	dk_set(CLANG_RC_COMPILER  	"${CLANG32_BIN}/windres.exe")
+elseif(win_x86_64_clang)
+	dk_validate(MSYS2 			"dk_depend(msys2)")
+	dk_set(CLANG64_BIN		  	"${MSYS2}/clang64/bin")
+	dk_set(CLANG_C_COMPILER   	"${CLANG64_BIN}/clang.exe")
+	dk_set(CLANG_CXX_COMPILER 	"${CLANG64_BIN}/clang++.exe")
+	dk_set(CLANG_RC_COMPILER  	"${CLANG64_BIN}/windres.exe")
+endif()
+#	
+#	dk_replaceAll("${MSYS2}" 	"/" "\\" 	MSYS2_WIN)
+#	dk_set(MSYS2_WIN "${MSYS2_WIN}") # globalize
+#	
+#	dk_replaceAll("${CLANG64_BIN}" 	"/" "\\" 	CLANG64_BIN_WIN)
+#	dk_set(CLANG64_BIN_WIN "${CLANG64_BIN_WIN}") # globalize
+#	
+#	dk_replaceAll("${MSYS2_BIN}" 	"/" "\\"	MSYS2_BIN_WIN)
+#	
+#elseif(win_arm64_clang)
+#	dk_set(CLANGARM64_BIN		"${MSYS2}/clangarm64/bin")
+#	dk_set(CLANG_C_COMPILER   	"${CLANGARM64_BIN}/clang.exe")
+#	dk_set(CLANG_CXX_COMPILER 	"${CLANGARM64_BIN}/clang++.exe")
+#	dk_set(CLANG_RC_COMPILER  	"${CLANGARM64_BIN}/windres.exe")
+#elseif(win_x86_gcc)
+#	dk_set(MINGW32_BIN			"${MSYS2}/mingw32/bin")
+#	dk_set(CLANG_C_COMPILER   	"${MINGW32_BIN}/clang.exe")
+#	dk_set(CLANG_CXX_COMPILER 	"${MINGW32_BIN}/clang++.exe")
+#	dk_set(CLANG_RC_COMPILER  	"${MINGW32_BIN}/windres.exe")
+#elseif(win_x86_64_gcc)
+#	dk_set(MINGW64_BIN			"${MSYS2}/mingw64/bin")
+#	dk_set(CLANG_C_COMPILER   	"${MINGW64_BIN}/clang.exe")
+#	dk_set(CLANG_CXX_COMPILER 	"${MINGW64_BIN}/clang++.exe")
+#	dk_set(CLANG_RC_COMPILER  	"${MINGW64_BIN}/windres.exe")
+#elseif(win_x86_64_ucrt)
+#	dk_set(UCRT64_BIN			"${MSYS2}/ucrt64/bin")
+#	dk_set(CLANG_C_COMPILER   	"${UCRT64_BIN}/clang.exe")
+#	dk_set(CLANG_CXX_COMPILER 	"${UCRT64_BIN}/clang++.exe")
+#	dk_set(CLANG_RC_COMPILER  	"${UCRT64_BIN}/windres.exe")
+#elseif(LINUX_HOST)
+#	dk_set(USR_BIN				"/usr/bin")
+#	dk_set(USR_LOCAL_BIN		"/usr/local/bin")
+#	if(EXISTS /usr/bin/clang)
+#		dk_set(CLANG_C_COMPILER	/usr/bin/clang)
+#	elseif(EXISTS /usr/local/bin/clang)
+#		dk_set(CLANG_C_COMPILER	/usr/local/bin/clang)
+#	endif()
+#
+#	if(EXISTS /usr/bin/clang++)
+#		dk_set(CLANG_CXX_COMPILER	/usr/bin/clang++)
+#	elseif(EXISTS /usr/local/bin/clang++)
+#		dk_set(CLANG_CXX_COMPILER	/usr/local/bin/clang++)
+#	endif()
+#endif()

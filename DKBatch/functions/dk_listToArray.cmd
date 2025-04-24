@@ -1,11 +1,20 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+>>>>>>> Development
 
 ::################################################################################
 ::# dk_listToArray(<list> rtn_var)
 ::#
 ::#
 :dk_listToArray
+<<<<<<< HEAD
  setlocal
     call dk_debugFunc 2
     
@@ -18,6 +27,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         if "!DE!" neq "" call set "%~2[%%i%%]=%%a"
         if "!DE!" equ "" set "%~2[!i!]=%%a"
         set /A i+=1
+=======
+setlocal
+    %dk_call% dk_debugFunc 2
+    
+	
+    set "_list=%~1"
+    if defined !_list! set _list=!%_list%!
+
+    set /a i=0
+    for %%a in (%_list%) do (
+        set "%~2[!i!]=%%a"
+        set /a i+=1
+>>>>>>> Development
     ) 
     
     rem Return the array to the calling scope
@@ -34,8 +56,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+>>>>>>> Development
 
     %dk_call% dk_set myList "a;b;c;d;e;f;g"
 	%dk_call% dk_printVar myList

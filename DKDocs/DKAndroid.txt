@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### Compiling digitalknob on an Android device using Termux ###
 1. download the apk that matches your devices cpu from below
   https://github.com/termux/termux-app/releases/download/v0.118.1/termux-app_v0.118.1+github-debug_arm64-v8a.apk
@@ -30,3 +31,37 @@ termux-open /DKApps/DKSDL/android_arm64/Debug/app/build/output/apk/debug/app-deb
 
 ###### Launch an installed app ######
 am start --user 0 -n com.digitalknob.dk/.DKApp
+=======
+### Compiling digitalknob on an Android device using Termux ###
+1. download the apk that matches your devices cpu from below
+  https://github.com/termux/termux-app/releases/download/v0.118.1/termux-app_v0.118.1+github-debug_arm64-v8a.apk
+  https://github.com/termux/termux-app/releases/download/v0.118.1/termux-app_v0.118.1+github-debug_armeabi-v7a.apk
+  https://github.com/termux/termux-app/releases/download/v0.118.1/termux-app_v0.118.1+github-debug_universal.apk
+  https://github.com/termux/termux-app/releases/download/v0.118.1/termux-app_v0.118.1+github-debug_x86.apk
+  https://github.com/termux/termux-app/releases/download/v0.118.1/termux-app_v0.118.1+github-debug_x86_64.apk
+2. install the downloaded apk
+3. open Termux app
+4. apt update
+5. apt upgrade -y (use 'N' on any prompts)
+6. apt install wget -y
+7. wget https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh
+8. chmod 777 DKBuilder.sh
+9. ./DKBuilder.sh 
+
+
+
+### Termux access to /sdcard or /storage/emulated/0 ###
+# https://wiki.termux.com/wiki/Termux-setup-storage
+1. termux-setup-storage  - "Allow and run it again"
+2. termux-setup-storage
+3. ls /sdcard    		 - to varify access is working
+
+###### Install apk via Termux ###### only works on rooted devices.
+su -c pm install <path/to>/some.apk 
+
+###### Launch an .apk install file ######
+termux-open /DKCpp/apps/DKSDL/android_arm64/Debug/app/build/output/apk/debug/app-debug.apk
+
+###### Launch an installed app ######
+am start --user 0 -n com.digitalknob.dk/.DKApp
+>>>>>>> Development

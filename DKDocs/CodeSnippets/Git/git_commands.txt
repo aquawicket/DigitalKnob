@@ -1,0 +1,87 @@
+############ GIT COMMANDS ############
+
+
+::##########################################################
+::###### print main commit-id 	  
+::#
+::# n=the nth commit from ORIG_HEAD
+::##########################################################
+git rev-parse --verify ORIG_HEAD~n
+
+
+::##########################################################
+::###### print main commit-id (short) 
+::#
+::# n=the nth commit from ORIG_HEAD
+::##########################################################
+git rev-parse --verify --short ORIG_HEAD~n
+
+
+::##########################################################
+::###### print current commit-id:   
+::#
+::# n=the nth commit from HEAD
+::##########################################################
+git rev-parse --verify HEAD~n
+
+
+::##########################################################
+::###### print current commit-id (short)
+::#
+::# n=the nth commit from HEAD
+::##########################################################
+git rev-parse --verify --short HEAD~n
+
+
+::##########################################################
+::###### change git default text editor to notepad++
+::##########################################################
+git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+
+
+::##########################################################
+::###### get list of changed files between commits 
+::##########################################################
+git diff --name-only <commit-id-A> <commit-id-B> > gitDiff.txt
+
+
+::##########################################################
+::###### get list of changes between commits (preserve color)
+::##########################################################
+git diff --color <commit-id-A> <commit-id-B> > gitDiff.txt
+
+
+::##########################################################
+::###### get the short version of a commit-id 
+::##########################################################
+git rev-parse --short <commit-id>
+
+
+::##########################################################
+::###### revert back to a specific commit-id 
+::##########################################################
+git revert --no-commit --noedit <commit-id>..HEAD
+
+
+::##########################################################
+::###### Merge branch into main (gurenteed)
+::#
+::# https://www.quora.com/How-do-you-force-a-merge-with-Git
+::##########################################################
+git pull --all
+git checkout <branch>
+git merge -s ours main
+git checkout main
+git merge <branch>
+
+
+::##########################################################
+::###### Squash last n commits together
+::# https://stackoverflow.com/a/5190323/688352
+::#
+::# <N> = number of commits from the HEAD to squash together
+::##########################################################
+git reset --hard HEAD~<N>
+git merge --squash HEAD@{1}
+git commit
+git push --force-with-lease origin <branch>

@@ -14,12 +14,20 @@ call "DKBatch/functions/DK.cmd" %*
 ::###### Load Main Program ######
 call dk_load dk_validate
 call dk_load dk_installGit
+<<<<<<< HEAD
 call dk_load dk_stringContains
+=======
+call dk_load dk_contains
+>>>>>>> Development
 call dk_load dk_DIGITALKNOB_DIR
 call dk_load dk_host_triple
 call dk_load dk_getExtension
 call dk_load dk_removeExtension
+<<<<<<< HEAD
 call dk_load dk_makeDirectory
+=======
+call dk_load dk_mkdir
+>>>>>>> Development
 call dk_load dk_replaceAll
 ::call dk_load dk_convertToCIdentifier
 call dk_load dk_toLower
@@ -27,8 +35,13 @@ call dk_load dk_pause
 call dk_load dk_exit
 
 ::###### Run Program ######
+<<<<<<< HEAD
 %dk_call% dk_validate DKBRANCH_DIR "call dk_DKBRANCH_DIR"
 %dk_call% dk_validate GIT_EXE "call dk_installGit"
+=======
+%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+>>>>>>> Development
 if NOT exist "%DKBRANCH_DIR%\.git" (
 	"%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
 	cd "%DKBRANCH_DIR%"

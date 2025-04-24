@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_download){ $dk_download = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_download){ $dk_download = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ####################################################################
 # dk_download(url destination)
@@ -15,7 +20,11 @@ function Global:dk_download($url, $destination) {
 	
 	if($args[0]){ $destination = dk_call dk_realpath $args[0] }
 	if(!(${destination})){    
+<<<<<<< HEAD
 		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+=======
+		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+>>>>>>> Development
 		$destination = "${DKDOWNLOAD_DIR}/${url_filename}"
 	}
 	if(!(${destination})){ dk_call dk_error "destination is invalid" }
@@ -29,7 +38,11 @@ function Global:dk_download($url, $destination) {
 	# make sure the destination parent directory exists
 	$destination_dir = dk_call dk_dirname "${destination}"
 	if(!(${destination_dir})){ dk_call dk_error "destination_dir is invalid" }
+<<<<<<< HEAD
 	if(!(Test-Path "${destination_dir}")){ dk_call dk_makeDirectory "${destination_dir}" }
+=======
+	if(!(Test-Path "${destination_dir}")){ dk_call dk_mkdir "${destination_dir}" }
+>>>>>>> Development
 	
 	# method 1
 	Invoke-WebRequest -URI ${url} -OutFile ${destination} #-SkipHttpErrorCheck

@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+>>>>>>> Development
 
 
 
@@ -9,11 +16,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747
 ::#
 :dk_wslFixNet
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_validate WSL_EXE "call %DKIMPORTS_DIR%\wsl\dk_installWsl.cmd"
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%\wsl\DKINSTALL.cmd"
+>>>>>>> Development
 
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if not exist "%DKBASH_FUNCTIONS_DIR%" 		set "DKBASH_FUNCTIONS_DIR=%CD%\DKBash\functions"
@@ -38,7 +53,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
 	call dk_debugFunc 0
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+>>>>>>> Development
 	
 	%dk_call% dk_wslFixNet
 %endfunction%

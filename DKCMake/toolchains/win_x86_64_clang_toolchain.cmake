@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
@@ -21,3 +22,32 @@ set(CLANG64_DIR "${MSYS2_DIR}/clang64")
 set(CMAKE_MAKE_PROGRAM ${CLANG64_DIR}/bin/mingw32-make.exe CACHE FILEPATH "")
 set(CMAKE_C_COMPILER ${CLANG64_DIR}/bin/clang.exe)
 set(CMAKE_CXX_COMPILER ${CLANG64_DIR}/bin/clang++.exe)
+=======
+message("############################################################################")
+message("################### windoows_x86_64_clang_toolchain.cmake ##################")
+message("############################################################################")
+
+if(NOT WIN_HOST)
+	dk_exit()
+endif()
+
+dk_validate(MSYS2 "dk_depend(msys2)")
+dk_depend(clang)
+
+dk_set(MSYSTEM 						CLANG64)
+dk_prependEnvPath(					"${MSYS2}/usr/bin")
+dk_prependEnvPath(					"${${MSYSTEM}_BIN}")
+set(ENV{ACLOCAL_PATH} 				"${MSYS2}/usr/share/aclocal")
+
+dk_set(CMAKE_GENERATOR				"MinGW Makefiles")
+dk_set(CMAKE_MAKE_PROGRAM 			"${${MSYSTEM}_BIN}/mingw32-make.exe")
+dk_set(CMAKE_C_COMPILER				"${${MSYSTEM}_BIN}/clang.exe")
+dk_set(CMAKE_CXX_COMPILER 			"${${MSYSTEM}_BIN}/clang++.exe")
+dk_set(CMAKE_RC_COMPILER  			"${${MSYSTEM}_BIN}/windres.exe")
+
+dk_append(CMAKE_C_FLAGS				-march=x86-64 -DMSYSTEM=${MSYSTEM} -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
+dk_append(CMAKE_CXX_FLAGS			-march=x86-64 -DMSYSTEM=${MSYSTEM} -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
+dk_append(CMAKE_EXE_LINKER_FLAGS	-static) # -mconsole -s)
+
+dk_append(DKCONFIGURE_FLAGS			--build=x86_64-w64-mingw32)
+>>>>>>> Development

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 
 ##################################################################################
@@ -34,7 +39,11 @@ dk_rename() {
 	# the base directory of the ${_to_} path must exist.    
 	parent_dir=$(dk_dirname ${_to_})
 	dk_call dk_printVar parent_dir
+<<<<<<< HEAD
 	dk_call dk_makeDirectory "${parent_dir}"
+=======
+	dk_call dk_mkdir "${parent_dir}"
+>>>>>>> Development
 	
 	mv -i ${_from_} ${_to_}   # -i means interactive, to prevent overwrite
 	#TODO
@@ -49,6 +58,10 @@ DKTEST() {
 	echo "rename this file" > renameMe.txt
 	dk_rename renameMe.txt iWasRenamed.txt
 	
+<<<<<<< HEAD
 	dk_makeDirectory renameMe
+=======
+	dk_mkdir renameMe
+>>>>>>> Development
 	dk_rename renameMe iWasRenamed
 }

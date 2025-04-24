@@ -1,0 +1,5 @@
+[APP_NAME]_VERSION 1.0
+[APP_NAME]_NAME=[APP_NAME].exe
+[APP_NAME]_DL=https://[APP_NAME].com
+[APP_NAME]=${ProgramFiles_x86}/[APP_NAME]
+[APP_NAME]_EXE=[APP_NAME].exe

@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_echo(msg)
@@ -10,7 +15,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@msg	- The message to print
 #
 function(dk_echo)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0 2)
+>>>>>>> Development
 	if(${ARGC} EQUAL 0)
 		message("") # newline
 		return()
@@ -38,7 +47,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	message("This is a normal message commmand")
 	dk_echo()

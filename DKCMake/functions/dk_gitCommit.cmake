@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_gitCommit()
@@ -14,8 +19,13 @@ function(dk_gitCommit)
 	dk_info("Please enter some details about this commit, Then press ENTER.")
 	dk_keyboardInput(commit_msg)
 	
+<<<<<<< HEAD
 	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
 	dk_cd("${DKBRANCH_DIR}")
+=======
+	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
+	dk_chdir("$ENV{DKBRANCH_DIR}")
+>>>>>>> Development
 	
 	execute_process(COMMAND "${GIT_EXE}" config credential.helper WORKING_DIRECTORY ${PWD} OUTPUT_VARIABLE STORE)
 	if(NOT STORE)
@@ -69,7 +79,11 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(0)
+>>>>>>> Development
 	
 	dk_gitCommit()
 endfunction()

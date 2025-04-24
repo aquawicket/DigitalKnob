@@ -1,5 +1,12 @@
 <!-- :
+<<<<<<< HEAD
 @echo off
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+>>>>>>> Development
 
 ::::::::::::::::::::::::::::::::::::::::::::
 :: Elevate.cmd - Version 5
@@ -36,7 +43,11 @@ cscript //nologo "%~f0?.wsf" %* & exit
 
 :: Elevated User code 
 echo %batchName% Arguments: P1=%1 P2=%2 P3=%3 P4=%4 P5=%5 P6=%6 P7=%7 P8=%8 P9=%9
+<<<<<<< HEAD
 cmd /k 
+=======
+%ComSpec% /k 
+>>>>>>> Development
 pause
  
 

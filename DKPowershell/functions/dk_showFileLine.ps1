@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_showFileLine){ $dk_showFileLine = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_showFileLine){ $dk_showFileLine = 1 } else{ return } #include guard
+>>>>>>> Development
 
 if(!$MAX_LINES){ $global:MAX_LINES = 30 }
 ################################################################################

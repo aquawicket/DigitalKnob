@@ -1,17 +1,34 @@
+<<<<<<< HEAD
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::if defined include_guard_dk_includeGuard (%return%) else set include_guard_dk_includeGuard=1
 ::if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %* & call :TEST_dk_includeGuard
 
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+::if defined include_guard_dk_includeGuard (%return%) else set include_guard_dk_includeGuard=1
+::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) & call :TEST_dk_includeGuard
+>>>>>>> Development
 ::##################################################################################
 ::# dk_includeGuard()
 ::#
 ::#
 :dk_includeGuard
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
  
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+
+>>>>>>> Development
     :: since batch calls scripts by file and not by function, there is no need to use include guards
     
 ::  (
@@ -39,8 +56,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+<<<<<<< HEAD
     call dk_debugFunc 0
  setlocal
+=======
+setlocal
+	%dk_call% dk_debugFunc 0
+>>>>>>> Development
 
 	::(goto) 2>nul & call set caller=%%~0 & echo %caller%
     

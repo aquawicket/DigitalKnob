@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 import DK
+=======
+import sys 
+sys.path.append(".")
+from DK import *
+
+>>>>>>> Development
 import os 
 
 ##################################################################################
@@ -12,7 +19,11 @@ def dk_realpath(path):
     
     _realpath_ = os.path.realpath(path)
     return _realpath_
+<<<<<<< HEAD
     
+=======
+##################################################################################
+>>>>>>> Development
     
     
     
@@ -25,4 +36,8 @@ def DKTEST():
     
     rp = dk_realpath(DK.DKSCRIPT_PATH)
     print(rp)
+<<<<<<< HEAD
+=======
+############################################################################
+>>>>>>> Development
 DKTEST()

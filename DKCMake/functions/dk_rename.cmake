@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_rename(from to) OVERWRITE NO_HALT
@@ -15,10 +20,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_rename from to) # FLAGS: OVERWRITE, NO_HALT
 	dk_debugFunc()
 	
+<<<<<<< HEAD
 	dk_getOption(OVERWRITE ${ARGV})
 	dk_getOption(NO_HALT ${ARGV})
 	
 	dk_info("Renameing ${from} to ${to}")
+=======
+	dk_getOption(OVERWRITE)
+	dk_getOption(NO_HALT)
+	
+	dk_debug("Renameing ${from} to ${to}")
+>>>>>>> Development
 	if(NOT EXISTS ${from})
 		if(NOT NO_HALT)
 			dk_fatal("from:${from} not found")
@@ -34,18 +46,31 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NO_HALT
 	
 	# the base directory of the ${to} path must exist.    
 	dk_dirname(${to} PARENT_DIR)
+<<<<<<< HEAD
 	dk_makeDirectory(${PARENT_DIR})
 	
 	file(RENAME ${from} ${to})
 endfunction()
 dk_createOsMacros("dk_rename")
+=======
+	dk_mkdir(${PARENT_DIR})
+	
+	file(RENAME ${from} ${to})
+endfunction()
+>>>>>>> Development
 
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+	dk_rename(todo)
+>>>>>>> Development
 endfunction()

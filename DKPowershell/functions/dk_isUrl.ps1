@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_isUrl){ $dk_isUrl = 1 } else{ return }
+=======
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_isUrl){ $dk_isUrl = 1 } else{ return } #include guard
+>>>>>>> Development
 
 ##################################################################################
 # dk_isUrl(str)
@@ -8,7 +13,11 @@ if(!$dk_isUrl){ $dk_isUrl = 1 } else{ return }
 function Global:dk_isUrl($str) {
 	dk_debugFunc 1
 	
+<<<<<<< HEAD
 	if(dk_call dk_stringContains $str "://"){ $isUrl = $true }
+=======
+	if(dk_call dk_contains $str "://"){ $isUrl = $true }
+>>>>>>> Development
 	else{ $isUrl = $false }
 	dk_call dk_printVar isUrl
 	return $isUrl

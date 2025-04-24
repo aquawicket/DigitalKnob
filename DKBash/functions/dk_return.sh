@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 #!/bin/sh
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+=======
+#!/usr/bin/env sh
+[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+>>>>>>> Development
 
 ORIGINAL_IFS=${IFS}
 ##################################################################################
 # dk_return()
 #
+<<<<<<< HEAD
+=======
+echo "dk_return($*)"
+>>>>>>> Development
 alias dk_return='ret_val "${ret_val-}"'
 ret_val() {
 	if [ "${1-}" = "" ]; then

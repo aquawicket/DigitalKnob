@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ###############################################################################
 # dk_include(path) variable
@@ -11,7 +16,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   @variable (optional)	- Create a variable to store the path in.
 #
 function(dk_include path)
+<<<<<<< HEAD
 	dk_debugFunc()
+=======
+	dk_debugFunc(1 2)
+>>>>>>> Development
 	
 	if(NOT EXISTS "${path}")
 		dk_warning("dk_include(): path:${path} does not exist")
@@ -39,7 +48,11 @@ function(dk_include path)
 	endif()
 
 endfunction()
+<<<<<<< HEAD
 dk_createOsMacros("dk_include")
+=======
+
+>>>>>>> Development
 
 
 
@@ -48,8 +61,13 @@ dk_createOsMacros("dk_include")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	dk_todo()
+=======
+	dk_debugFunc(0)
+	
+>>>>>>> Development
 	dk_include("TODO")
 endfunction()

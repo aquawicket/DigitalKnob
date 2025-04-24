@@ -1,5 +1,15 @@
+<<<<<<< HEAD
 ::https://www.dostips.com/forum/viewtopic.php?p=67983#p67983
 @echo off
+=======
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+
+::https://www.dostips.com/forum/viewtopic.php?p=67983#p67983
+>>>>>>> Development
 setlocal EnableDelayedExpansion
 
 set max=16
@@ -25,6 +35,7 @@ echo/
 
 echo Calculation of e:
 echo/
+<<<<<<< HEAD
 set /A digits=8, one=1
 for /L %%i in (1,1,%digits%) do set one=!one!0
 set /A num=0, fact=1, term=1, whileResult=0
@@ -33,6 +44,16 @@ echo #- #   term=1/#    summation
     set /A term=one/fact, whileResult+=term
     echo !num!- !fact!    !term!    !whileResult!
     set /A num+=1, fact*=num
+=======
+set /a digits=8, one=1
+for /L %%i in (1,1,%digits%) do set one=!one!0
+set /a num=0, fact=1, term=1, whileResult=0
+echo #- #   term=1/#    summation
+%loop% (
+    set /a term=one/fact, whileResult+=term
+    echo !num!- !fact!    !term!    !whileResult!
+    set /a num+=1, fact*=num
+>>>>>>> Development
     if !term! leq 0 set _break=1
 )
 echo/
@@ -48,10 +69,19 @@ setlocal
 set num=1
 set whileResult=1
 %loop% (
+<<<<<<< HEAD
     set /A whileResult*=num, num+=1
     if !num! gtr %1 set _break=1
 )
 endlocal & if "%2" neq "" (set %2=%whileResult%) else echo %whileResult%
+=======
+    set /a whileResult*=num, num+=1
+    if !num! gtr %1 set _break=1
+)
+endlocal & (
+	if "%~2" neq "" (set "%~2=%whileResult%") else (echo %whileResult%)
+)
+>>>>>>> Development
 exit /b
 
 :lcm n1 n2 lcm=
@@ -63,5 +93,11 @@ set /a "whileResult=%1, j=%2"
     if !j! equ 0 set _break=1
 )
 set /a j=%1*%2/whileResult
+<<<<<<< HEAD
 endlocal & if "%3" neq "" (set %3=%j%) else echo %j%
+=======
+endlocal & (
+	if "%~3" neq "" (set %3=%j%) else (echo %j%)
+)
+>>>>>>> Development
 exit /B

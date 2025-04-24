@@ -1,17 +1,26 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ##################################################################################
 # dk_convertToCIdentifier(<input> <output>)
 #
 #
 function(dk_convertToCIdentifier input output)
+<<<<<<< HEAD
 	dk_debugFunc()
 	
 	if(NOT ${ARGC} EQUAL 2)
 		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
+=======
+	dk_debugFunc(2)
+>>>>>>> Development
 		
 	string(MAKE_C_IDENTIFIER ${input} c_identifier)	
 	

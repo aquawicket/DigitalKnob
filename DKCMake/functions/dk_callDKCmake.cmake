@@ -1,6 +1,11 @@
 #!/usr/bin/cmake -P
+<<<<<<< HEAD
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
+=======
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+>>>>>>> Development
 
 ################################################################################
 # dk_callDKCmake(function, arguments..., rtn_var)
@@ -10,6 +15,7 @@ function(dk_callDKCmake func rtn_var)
     dk_debugFunc()
     
     ### get required variables ###
+<<<<<<< HEAD
     dk_validate(DKIMPORTS_DIR           "dk_DKBRANCH_DIR()")
     dk_validate(CMAKE_EXE               "dk_depend(cmake)")
 	dk_validate(DKCMAKE_DIR             "dk_DKBRANCH_DIR()")
@@ -17,6 +23,15 @@ function(dk_callDKCmake func rtn_var)
 	set(DKCMAKE_FUNCTIONS_DIR           "${DKCMAKE_FUNCTIONS_DIR:\=/%")
 	set(DKCMAKE_FUNCTIONS_DIR_          "${DKCMAKE_FUNCTIONS_DIR}/")
 	set(DKSCRIPT_PATH                   "${DKSCRIPT_PATH:\=/}")
+=======
+    dk_validate(ENV{DKIMPORTS_DIR}           "dk_DKBRANCH_DIR()")
+	dk_depend(cmake)
+	dk_validate(ENV{DKCMAKE_DIR}             "dk_DKBRANCH_DIR()")
+    dk_validate(DKCMAKE_FUNCTIONS_DIR   "dk_DKBRANCH_DIR()")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR}           "$ENV{DKCMAKE_FUNCTIONS_DIR}")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_}          "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
+	set(ENV{DKSCRIPT_PATH}                   "$ENV{DKSCRIPT_PATH}")
+>>>>>>> Development
     
     
     ### get ALL_BUT_FIRST_ARGS ###
@@ -28,9 +43,15 @@ function(dk_callDKCmake func rtn_var)
     
     ### Call DKCmake function ###
     set(DKCOMMAND "${func}(${ARGN})")
+<<<<<<< HEAD
     set(DKCMAKE_COMMAND=${CMAKE_EXE} -DDKCOMMAND=${DKCOMMAND} -DDKSCRIPT_PATH=${DKSCRIPT_PATH} -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_=${DKCMAKE_FUNCTIONS_DIR_} -P ${DKCMAKE_DIR}/DKEval.cmake)
     #dk_echo("${DKCMAKE_COMMAND}")
     execute_process(COMMAND ${DKCMAKE_COMMAND} WORKING_DIRECTORY "${DKCMAKE_FUNCTIONS_DIR}" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
+=======
+    set(DKCMAKE_COMMAND "${CMAKE_EXE} -DDKCOMMAND=${DKCOMMAND} -DDKSCRIPT_PATH=$ENV{DKSCRIPT_PATH} -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_=$ENV{DKCMAKE_FUNCTIONS_DIR_} -P $ENV{DKCMAKE_DIR}/DKEval.cmake")
+    #dk_echo("${DKCMAKE_COMMAND}")
+    execute_process(COMMAND ${DKCMAKE_COMMAND} WORKING_DIRECTORY "$ENV{DKCMAKE_FUNCTIONS_DIR}" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
+>>>>>>> Development
     
     
     ### process the return value ###
