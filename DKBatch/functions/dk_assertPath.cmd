@@ -23,35 +23,26 @@ setlocal enableDelayedExpansion
 	(set _var_=%_var_: =%)
 	if defined %_var_% (set _val_="!%_var_:"=%!") else (set "_var_=path")
 	set _val_="%_val_:"=%"
-	
-	
+
+
 	for %%Z in ("%_val_:"=%") do (set _real_="%%~fZ")
 
 	if defined dk_assertPath_FORWARD_SLASHES set "_real_=%_real_:\=/%"
 
 	::### Test case sensitive ###
-	if defined dk_assertPath_CASE_SENSITIVE if not [%_val_%]==[%_real_%] (
-		echo %red% %_var_%:'%_val_%' _real_:'%_real_%' mismatch %clr%
-		%dk_call% dk_error "ASSERTION: dk_assertPath path:'%_val_:"=%' mismatch"
-		%return%
-	)
+	if defined dk_assertPath_CASE_SENSITIVE if not [%_val_%]==[%_real_%] echo %red% %_var_%:'%_val_%' _real_:'%_real_%' mismatch %clr% & %return%
 
 	::### Test path exists ###
-	if not exist "%_val_:"=%" (
-		%dk_call% dk_error "ASSERTION: dk_assertPath %_var_%:'%_val_:"=%' not found"
-		%return%
-	)
+	if not exist "%_val_:"=%" %dk_call% dk_error "ASSERTION: dk_assertPath %_var_%:'%_val_:"=%' not found" & %return%
 
-	if "%dk_DEBUG%" equ "1" (
-		%dk_call% dk_debug "dk_assertPath %_var_% = %_val_%"
-	)
+	if "%dk_DEBUG%" equ "1" %dk_call% dk_debug "dk_assertPath %_var_% = %_val_%"
 %endfunction%
 
 
 
 
 
-goto:eof
+
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal
@@ -163,7 +154,7 @@ setlocal
 	::%dk_call% dk_assertPath C:\Program Files (x86)\Common Files		&::CMD ERROR
 	::# trailing backslash
 	::%dk_call% dk_assertPath C:\Program Files (x86)\Common Files\		&::CMD ERROR
-	
+
 	::###### THESE SHOULD ALL BE (NOT FOUND) ######
 	::# nonexistent path
 	%dk_call% dk_assertPath "C:/NonExistent (x86)/Common Files"	&::ASSERT

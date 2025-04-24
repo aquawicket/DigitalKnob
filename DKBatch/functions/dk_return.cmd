@@ -21,7 +21,8 @@ if not defined dk_return (set "dk_return=dk_return")
 ::setlocal enableDelayedExpansion
 	::if 1%1 neq +1%1 (echo %~1 is not_numeric) else (echo %~1 is numeric)
 	
-	if "%~1" equ "" endlocal & (
+	::if "%~1" equ "" endlocal & (
+	if "%~1" equ "" (
 		set "dk_return_PRINT=%dk_return_PRINT%"
 		set "LAST_STATUS=%errorlevel%"
 		set "LAST_FILE=!__FILENAME__!"
@@ -30,7 +31,8 @@ if not defined dk_return (set "dk_return=dk_return")
 		set "LAST_MESSAGE=dk_return generic"
 		if "%dk_return_PRINT%" equ "1" (call dk_printLastError)
 	)
-	if "%~2" equ "" endlocal & (
+	::if "%~2" equ "" endlocal & (
+	if "%~2" equ "" (
 		set "dk_return_PRINT=%dk_return_PRINT%"
 		set "LAST_STATUS=%errorlevel%"
 		set "LAST_FILE=!__FILENAME__!"
@@ -39,7 +41,8 @@ if not defined dk_return (set "dk_return=dk_return")
 		set "LAST_MESSAGE=%~1"
 		if "%dk_return_PRINT%" equ "1" call dk_printLastError
 	)
-	if "%~2" neq "" endlocal & (
+	::if "%~2" neq "" endlocal & (
+	if "%~2" neq "" (
 		set "dk_return_PRINT=%dk_return_PRINT%"
 		set "LAST_STATUS=%~1"
 		set "LAST_FILE=!__FILENAME__!"

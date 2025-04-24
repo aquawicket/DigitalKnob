@@ -62,7 +62,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		(set ETB=)							&:: End of Transmission Block - End of a transmission block of data when data are divided into such blocks.
 		(set CAN=)							&:: Cancel - Indicates that the data preceding it are in error or are to be disregarded.
 		(set EM=)							&:: End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
-		(set SUB=)							&:: Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
+		set "SUB="							&:: Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
 		(set ESC=)							&:: Escape - Alters the meaning of a limited number of following bytes.
 		(set FS=)							&:: File Separator - Can be used as delimiters to mark fields of data structures. 
 		(set GS=)							&:: Group Separator

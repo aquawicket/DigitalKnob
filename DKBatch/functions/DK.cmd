@@ -288,5 +288,5 @@ setlocal
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0
 
-	%DKSCRIPT_PATH%
+	%DKSCRIPT_PATH:/=\%
 %endfunction%

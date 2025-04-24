@@ -59,10 +59,7 @@ if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 	call %__CMND__:/=\% %__ARGV__% && (
 		set "LAST_STATUS=!errorlevel!"
 		set "LAST_BOOL=0"
-	) || (
-		set "LAST_STATUS=!errorlevel!"
-		set "LAST_BOOL=1"
-	)
+	) || (set "LAST_STATUS=!errorlevel!" & set "LAST_BOOL=1")
 ::###### Exit #############################################################################################
 
 	::###### Print function exit ######
