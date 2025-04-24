@@ -77,7 +77,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::############ get dk_source and dk_call ######
 	call :dk_initFiles
 	
-	call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd init
+	call %DKBATCH_FUNCTIONS_DIR_:/=\%dk_call.cmd init
 	
 	::############ load dkconfig.txt ############
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
@@ -141,7 +141,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if not exist "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
 	if exist "%DKCACHE_DIR%" (
 		if "%DKSCRIPT_NAME%" equ "DKBuilder" (
-			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul)
+			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul
 		)
 	)
 %endfunction%

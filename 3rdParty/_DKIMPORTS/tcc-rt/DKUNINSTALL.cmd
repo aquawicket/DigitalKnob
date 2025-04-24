@@ -8,11 +8,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKUNINSTALL
 ::#
 :DKUNINSTALL
-setlocal
+::setlocal
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	if not defined TCC_RT_IMPORT	(%dk_call% dk_error "TCC_RT_IMPORT is invalid")
+	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %TCC_RT_IMPORT% ROOT %DKTOOLS_DIR%
 	

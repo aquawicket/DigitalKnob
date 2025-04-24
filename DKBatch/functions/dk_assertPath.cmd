@@ -42,14 +42,16 @@ setlocal enableDelayedExpansion
 		%return%
 	)
 
-	::%dk_call% dk_debug "dk_assertPath %_var_% = %_val_%"
+	if "%dk_DEBUG%" equ "1" (
+		%dk_call% dk_debug "dk_assertPath %_var_% = %_val_%"
+	)
 %endfunction%
 
 
 
 
 
-
+goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal

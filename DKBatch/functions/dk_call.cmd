@@ -56,12 +56,12 @@ if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 ::###### Entry ############################################################################################
 	if "%dk_call_PRINTCALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
 
-	call %__CMND__% %__ARGV__% && (
-		(set "LAST_STATUS=!errorlevel!")
-		(set "LAST_BOOL=0")
+	call %__CMND__:/=\% %__ARGV__% && (
+		set "LAST_STATUS=!errorlevel!"
+		set "LAST_BOOL=0"
 	) || (
-		(set "LAST_STATUS=!errorlevel!")
-		(set "LAST_BOOL=1")
+		set "LAST_STATUS=!errorlevel!"
+		set "LAST_BOOL=1"
 	)
 ::###### Exit #############################################################################################
 

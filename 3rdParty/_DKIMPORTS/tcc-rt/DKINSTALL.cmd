@@ -15,12 +15,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not defined TCC_RT_IMPORT	(%dk_call% dk_error "TCC_RT_IMPORT is invalid")
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_importVariables %TCC_RT_IMPORT% ROOT %DKTOOLS_DIR%
+	%dk_call% dk_importVariables %TCC_RT_IMPORT% NAME tcc-rt ROOT %DKTOOLS_DIR%
+	set "TCC_RT_EXE=%TCC_RT%/tcc.exe"
 	
-	
-	%dk_call% dk_set TCC_RT_EXE "%TCC_RT%/tcc.exe"
-	
-	if exist "%TCC_RT_EXE%" (exit /b 0)
+	if exist "%TCC_RT_EXE%" (
+		%dk_call% dk_notice "TCC_RT_EXE:%TCC_RT_EXE% already found"
+		%return%
+	)
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing tcc . . ."
     %dk_call% dk_download %TCC_RT_IMPORT%
