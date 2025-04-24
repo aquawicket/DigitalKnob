@@ -28,7 +28,7 @@ dk_buildMain() {
 		fi
 	fi
 	
-	#dk_call dk_pinToQuickAccess "${DIGITALKNOB_DIR}"
+	#dk_call dk_quickAccessPin "${DIGITALKNOB_DIR}"
 	
 	if dk_call dk_defined WSLENV; then 
 		dk_call dk_info "WSLENV is on"

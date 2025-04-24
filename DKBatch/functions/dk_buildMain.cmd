@@ -20,7 +20,7 @@ setlocal enableDelayedExpansion
 		%dk_call% dk_createShortcut "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/digitalknob.lnk"
 	)
 	
-	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
+	%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"
 	
 	if not exist "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" (
 		%dk_call% dk_download "%DKHTTP_DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd"
