@@ -1,9 +1,11 @@
-@echo off
-if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
 
-set "dk_embedBin_DELETE_CMD_ON_EXTRACT=0"
-set "dk_embedBin_OVERWRITE_OUTPUT=1"
+
+if not defined dk_embedBin_DELETE_CMD_ON_EXTRACT 	(set "dk_embedBin_DELETE_CMD_ON_EXTRACT=0")
+if not defined dk_embedBin_OVERWRITE_OUTPUT			(set "dk_embedBin_OVERWRITE_OUTPUT=1")
 ::##################################################################################
 ::# Base64::dk_embedBin(inputFile)
 ::# Base64::dk_embedBin(inputFile, outputFile)

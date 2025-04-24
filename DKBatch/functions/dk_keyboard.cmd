@@ -1,11 +1,9 @@
-@echo off
-::echo dk_keyboard.cmd()
-::echo 0 = %~0
-::echo 1 = %~1
-::echo 2 = %~2
-::echo 3 - %~3
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
 
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+
 if "%~1" equ ":dk_keyboard.BeginReceiving" goto %1
 if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
 

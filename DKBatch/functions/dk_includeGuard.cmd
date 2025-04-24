@@ -3,6 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
 ::#################################################################################################################################################
 
+
 ::if defined include_guard_dk_includeGuard (%return%) else set include_guard_dk_includeGuard=1
 ::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) & call :TEST_dk_includeGuard
 

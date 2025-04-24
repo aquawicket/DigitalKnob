@@ -3,6 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
 ::#################################################################################################################################################
 
+
 if not defined dk_log_ENABLE	(set "dk_log_ENABLE=1")
 
 ::###### level order ######
