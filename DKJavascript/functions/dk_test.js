@@ -1,9 +1,11 @@
+dk_source(DKJAVASCRIPT_DIR+"/functions/dk_debugFunc.js");
+
 //################################################################################
 //# dk_test()
 //#
 //#
 dk_test = function dk_test_f(){
-	//dk_debugFunc(0);
+	dk_debugFunc(0, 99);
 	
 	console.log("################# dk_test.js ################");
 	if(typeof DKBrowser !== "undefined")				{ console.log("                  DKBrowser = '"+DKBrowser()+"' ");				}
@@ -114,7 +116,7 @@ dk_test = function dk_test_f(){
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST = function DKTEST_f(){
-	//dk_debugFunc(0);
+	dk_debugFunc(0);
 	
 	console.log("DKTEST()")
 	dk_test("from :DKTEST", "to dk_test");
