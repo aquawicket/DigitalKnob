@@ -32,8 +32,8 @@ setlocal
 
 	%dk_call% dk_validate BASH_EXE "%dk_call% dk_BASH_EXE"
 
-	:: get LAST_ARG
-	for %%a in (%*) do set LAST_ARG=%%a
+	::### All but first Args ###
+	%dk_call% dk_allButFirstArgs %*
 
 	::set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:=/c%"
@@ -48,9 +48,8 @@ setlocal
 	if defined USE_WSL (set WSLENV=DKSCRIPT_PATH/u:DKINIT/u:RELOAD_WITH_BASH/u:DKBASH_FUNCTIONS_DIR_/u)
 
 	:: Call DKBash function
-::  if not defined USE_WSL set DKBASH_COMMAND=%BASH_EXE% -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST%'
-::	if defined USE_WSL (set DKBASH_COMMAND="%WSL_EXE% bash -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST%'")
-
+::  if not defined USE_WSL set DKBASH_COMMAND=%BASH_EXE% -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %dk_allButFirstArgs%'
+::	if defined USE_WSL (set DKBASH_COMMAND="%WSL_EXE% bash -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %dk_allButFirstArgs%'")
 
 ::	::echo %DKBASH_COMMAND%
 ::	for /f "delims=" %%Z in ('%DKBASH_COMMAND%') do (
@@ -68,19 +67,16 @@ setlocal
 	::###### run command ######
 	set "bash_file=%DKBASH_FUNCTIONS_DIR:\=/%/%~1.sh"
 	if defined USE_WSL (
-		rem set DKBASH_COMMAND=%WSL_EXE% bash -c 'export RELOAD_WITH_BASH=; . %bash_file%; %1 %ALL_BUT_FIRST%'
-		set DKBASH_COMMAND=%WSL_EXE% bash -c '. %bash_file%; %*'
+		rem set DKCOMMAND=%WSL_EXE% bash -c 'export RELOAD_WITH_BASH=; . %bash_file%; %1 %dk_allButFirstArgs%'
+		set DKCOMMAND=%WSL_EXE% bash -c '. %bash_file%; %*'
 	) else (
-		rem set DKBASH_COMMAND=%BASH_EXE% -c 'export RELOAD_WITH_BASH=; . %bash_file%; %1 %ALL_BUT_FIRST%'
-		set DKBASH_COMMAND=%BASH_EXE% -c '. %bash_file%; %*'
+		rem set DKCOMMAND=%BASH_EXE% -c 'export RELOAD_WITH_BASH=; . %bash_file%; %1 %dk_allButFirstArgs%'
+		set DKCOMMAND=%BASH_EXE% -c '. %bash_file%; %*'
 	)
 	
-	echo ############################################
-	echo DKBASH_COMMAND = %DKBASH_COMMAND%
-	%dk_call% dk_exec "%DKBASH_COMMAND%"
-	echo ############################################
-	echo "errorlevel = %errorlevel%"
-
+	::############ DKBash function call ############
+	echo DKCOMMAND = %DKCOMMAND%
+	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKBash=%dk_exec%"
 	)

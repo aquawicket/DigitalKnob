@@ -18,18 +18,18 @@ setlocal
 	::### Get DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR
 	if not defined DKHTTP_DKJAVASCRIPT_DIR				(set "DKHTTP_DKJAVASCRIPT_DIR=%DKHTTP_DKBRANCH_DIR%/DKJavascript")
 	if not defined DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR	(set "DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR=%DKHTTP_DKJAVASCRIPT_DIR%/functions")
-
 	::### Download files if missing
 	if not exist %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js		(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js" "%DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js")
 	if not exist %DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js	(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js" "%DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js")
 
-	::### ALL_BUT_FIRST ###
-	set "ALL_BUT_FIRST=%*"
-	if defined ALL_BUT_FIRST (set "ALL_BUT_FIRST=!ALL_BUT_FIRST:%~1 =!")
+	::### All but first Args ###
+	%dk_call% dk_allButFirstArgs %*
 
 	set "CSCRIPT_EXE=C:/Windows/System32/cscript.exe"
-	set DKJAVASCRIPT_COMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %ALL_BUT_FIRST%
-	%dk_call% dk_exec %DKJAVASCRIPT_COMMAND%
+	
+	::############ DKJavascript function call ############
+	set DKCOMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %dk_allButFirstArgs%
+	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKJavascript=%dk_exec%"
 	)

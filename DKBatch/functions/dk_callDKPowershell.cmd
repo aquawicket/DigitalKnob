@@ -34,14 +34,9 @@ setlocal enableDelayedExpansion
 	::### ALL_BUT_FIRST ###
 	%dk_call% dk_allButFirstArgs %*
 	
-	::### LAST_ARG ###
-	for %%a in (%*) do set LAST_ARG=%%a
-
-	::###### run command ######
-	set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%
-
-	::echo DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%
-	%dk_call% dk_exec "%DKPOWERSHELL_COMMAND%"
+	::############ DKPowershell function call ############
+	set DKCOMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%
+	%dk_call% dk_exec "%DKCOMMAND%"
 	endlocal & (
 		set "dk_callPowershell=%dk_exec%"
 	)

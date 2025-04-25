@@ -28,16 +28,12 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate PHP_EXE "call %DKIMPORTS_DIR%/php-src/DKINSTALL.cmd"
 
-	::### ALL_BUT_FIRST ###
+	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*
 	
-	::### LAST_ARG ###
-	for %%a in (%*) do set LAST_ARG=%%a
-
-
-	::###### run command ######
-	set DKPHP_COMMAND="%ComSpec%" /V:ON /c call "%PHP_EXE%" "%DKPHP_FUNCTIONS_DIR%/%~1.php"
-	%dk_call% dk_exec "%DKPHP_COMMAND%"
+	::############ DKPhp function call ############
+	set DKCOMMAND="%ComSpec%" /V:ON /c call "%PHP_EXE%" "%DKPHP_FUNCTIONS_DIR%/%~1.php" &::%dk_allButFirstArgs%
+	%dk_call% dk_exec "%DKCOMMAND%"
 	endlocal & (
 		set "dk_callDKPhp=%dk_exec%"
 	)

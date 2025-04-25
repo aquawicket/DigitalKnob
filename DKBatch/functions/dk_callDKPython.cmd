@@ -23,19 +23,17 @@ setlocal
 	if not exist %DKPYTHON_FUNCTIONS_DIR%/DK.py		(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/DK.py" "%DKPYTHON_FUNCTIONS_DIR%/DK.py")
 	if not exist %DKPYTHON_FUNCTIONS_DIR%/%~1.py	(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/%~1.py" "%DKPYTHON_FUNCTIONS_DIR%/%~1.py")
 
-	::### ALL_BUT_FIRST ###
-	set "ALL_BUT_FIRST=%*"
-	if defined ALL_BUT_FIRST (set "ALL_BUT_FIRST=!ALL_BUT_FIRST:%~1 =!")
+	::### All but first Args ###
+	%dk_call% dk_allButFirstArgs %*
 	
-
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate PYTHON3_EXE "%dk_call% %DKIMPORTS_DIR%/python3/DKINSTALL.cmd"
-
+	%dk_call% dk_validate PYTHON3_EXE 	"%dk_call% %DKIMPORTS_DIR%/python3/DKINSTALL.cmd"
 	%dk_call% dk_validate CMD_EXE "dk_CMD_EXE.cmd"
-	set DKPYTHON_COMMAND=%ComSpec% /V:ON /c call "%PYTHON3_EXE:\=/%" "%DKPYTHON_FUNCTIONS_DIR:\=/%/%1.py" %ALL_BUT_FIRST%
-
+	
 	::set DKPYTHON_COMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKPYTHON_FUNCTIONS_DIR%/DK.py; %DKPYTHON_FUNCTIONS_DIR%/%1.py; %ALL_BUT_FIRST%
 
+	::############ DKPython function call ############
+	set DKPYTHON_COMMAND=%ComSpec% /V:ON /c call "%PYTHON3_EXE:\=/%" "%DKPYTHON_FUNCTIONS_DIR:\=/%/%1.py" %dk_allButFirstArgs% &:: %ALL_BUT_FIRST%
 	%dk_call% dk_exec %DKPYTHON_COMMAND%
 	endlocal & (
 		set "dk_callDKPython=%dk_exec%"

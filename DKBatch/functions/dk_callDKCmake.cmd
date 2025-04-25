@@ -28,14 +28,15 @@ setlocal
 
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
-	::Create Run function Script
-	::set "DKCOMMAND=%~1(%ALL_BUT_FIRST%)"
-	set DKCOMMAND=%~1
+	::### All but first Args ###
+	::%dk_call% dk_allButFirstArgs %*
+	
+	set CMAKE_COMMAND=%~1
 	::set "DKCOMMAND=%DKCOMMAND:"='%"
 
-	:: Call DKCmake function
-	set DKCMAKE_COMMAND=%CMAKE_EXE% "-DDKCOMMAND=%DKCOMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DQUEUE_BUILD=ON" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
-	%dk_call% dk_exec %DKCMAKE_COMMAND%
+	::############ DKCMake function call ############
+	set DKCOMMAND=%CMAKE_EXE% "-DDKCOMMAND=%CMAKE_COMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DQUEUE_BUILD=ON" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
+	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKCmake=%dk_exec%"
 	)

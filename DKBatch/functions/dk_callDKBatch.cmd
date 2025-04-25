@@ -15,15 +15,12 @@ setlocal
 
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
 
-	set "ALL_BUT_FIRST=%*"
-	if defined ALL_BUT_FIRST (set "ALL_BUT_FIRST=!ALL_BUT_FIRST:%1 =!")
+	::### All but first Args ###
+	%dk_call% dk_allButFirstArgs %*
 
-	:: get LAST_ARG
-	for %%a in (%*) do set LAST_ARG=%%a
-
-	:: Call DKBatch function
-	set DKBATCH_COMMAND=%CMD_EXE% /c (set "DK.cmd=") && (set "DKSCRIPT_PATH=%DKSCRIPT_PATH%") && (set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%") && %~1 %ALL_BUT_FIRST%
-	%dk_call% dk_exec %DKBATCH_COMMAND%
+	::############ DKBatch function call ############
+	set DKCOMMAND=%CMD_EXE% /c (set "DK.cmd=") && (set "DKSCRIPT_PATH=%DKSCRIPT_PATH%") && (set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%") && %~1 %dk_allButFirstArgs%
+	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKCmake=%dk_exec%"
 	)

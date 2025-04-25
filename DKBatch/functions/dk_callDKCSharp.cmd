@@ -26,12 +26,8 @@ setlocal enableDelayedExpansion
 	::###### _func_ ######
 	set "_func_=%~1"
 
-	::###### _args_ ######
-	set _args_=%*
-	if defined _args_ (set _args_=!_args_:%~1 =!)
-
-	::###### _last_arg_ ######
-	for %%a in (%*) do set _last_arg_=%%a
+	::### All but first Args ###
+	%dk_call% dk_allButFirstArgs %*
 
 	::###### DKC_FUNCTIONS_DIR ######
 	%dk_call% dk_validate DKCSHARP_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
@@ -89,7 +85,8 @@ setlocal enableDelayedExpansion
 	)
 
 	::###### run executable ######
-	%dk_call% dk_exec %_app_exe_% %_args_%
+	set DKCOMMAND=%_app_exe_% %dk_allButFirstArgs%
+	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKCpp=%dk_exec%"
 	)
