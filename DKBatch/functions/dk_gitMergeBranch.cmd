@@ -7,28 +7,42 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::####################################################################
 ::# dk_installGit()
 ::#
-::  ###### Steps to manually merge ######
-::
-:: 1. cd C:\Users\Administrator\digitalknob\Development
-:: 2. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" checkout Development
-:: 3. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" pull
-:: 4. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" checkout main
-:: 5. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" pull origin main
-::
-::		###### Resolve any conflicts then continue ######
-::			https://software.codidact.com/posts/286835
-::	
-::	  "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" checkout --ours -- *
-::
-:: 6. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" merge --no-ff --no-commit Development
-:: 7. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" commit -a -m "Merge Development Branch in to main"
-:: 9. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" push origin main
-::10. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" checkout Development
-::11. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" merge main
-::12. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" push
-::
-::
-::
+::#
+::# 	 ###### Steps to manually merge (Method A) ######
+::#		https://stackoverflow.com/a/2763118
+::#
+::#	1	git checkout Development         				# This is the branch whose commits you want to keep
+::#	2a	git merge --strategy=ours master -m "Merge Development into main"
+::#				OR
+::#	2b	git merge --strategy=ours --no-commit main		# keep the content of this branch, but record a merge
+::#	2b	git commit          							# add information to the template merge message
+::# 3   git push
+::#	4	git checkout main                 				# You want to **lose** all changes on this branch
+::#	5	git merge Development             				# fast-forward main up to the merge
+::# 6	git push
+::#
+::#  ###### Steps to manually merge (Method B )######
+::#
+::# 	1. cd C:\Users\Administrator\digitalknob\Development
+::# 	2. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" checkout Development
+::# 	3. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" pull
+::# 	4. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" checkout main
+::# 	5. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" pull origin main
+::#
+::#		###### Resolve any conflicts then continue ######
+::#			https://software.codidact.com/posts/286835
+::#	
+::#	 	    "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" checkout --ours -- *
+::#
+::# 	 6. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" merge --no-ff --no-commit Development
+::# 	 7. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" commit -a -m "Merge Development Branch in to main"
+::#		 9. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" push origin main
+::#		10. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" checkout Development
+::#		11. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" merge main
+::#		12. "C:\Users\Administrator\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "C:\Users\Administrator\digitalknob\Development" push
+::#
+::#
+::#
 :dk_gitMergeBranch
 ::setlocal
 	%dk_call% dk_debugFunc 0
