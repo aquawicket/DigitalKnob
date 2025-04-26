@@ -2,11 +2,20 @@
 
 
 //################################################################################
-//# dk_exit(msg)
+//# dk_exit(exitcode)
 //#
+//#		Reference: https://www.tutorialspoint.com/how-to-terminate-a-script-in-javascript
 //#
 dk_exit = function dk_exit_f() {
+	//dk_debugFunc(0);
 	
+	//### JScript ###
+	if(dk_valid("WScript.Quit")){
+		console.debug("WScript.Quit("+arguments[0]+");");
+		WScript.Quit(arguments[0]);
+	}
+	
+	//### Generic ###
 	try{
 		throw new Error("_"+arguments[0]);
 	}

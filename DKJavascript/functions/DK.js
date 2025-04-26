@@ -113,7 +113,10 @@ dk_valid = function(){
 	for (var i = 0; i < arry.length; i++) {
 		result = false;
 		if(typeof currentObject[arry[i]] !== "undefined"){
-			currentObject = currentObject[arry[i]];
+			if(i < arry.length-1){
+				currentObject = currentObject[arry[i]];
+				continue;
+			}
 			result = true;
 		}
 		if(result === false){
