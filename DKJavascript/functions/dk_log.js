@@ -3,7 +3,7 @@ if(!dk_valid("dk_color"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js",
 
 
 //############ dk_log SETTINGS ############
-if(!dk_valid("dk_log_ENABLE"))				{ var dk_log_ENABLE = 1; }
+if(!dk_valid("dk_log_ENABLE"))				{ var dk_log_ENABLE = 1; 					}
 
 //### DEFAULT ###
 if(!dk_valid("DEFAULT"))					{ var DEFAULT="DEFAULT"; 					}
@@ -151,6 +151,7 @@ if(!dk_valid("dk_log_FATAL_HALT"))			{ var dk_log_FATAL_HALT=1; 					}
 
 
 //##################################################################################
+//# dk_log(message)
 //# dk_log(level, message)
 //#
 //#    Print a log message to the console
@@ -161,7 +162,8 @@ if(!dk_valid("dk_log_FATAL_HALT"))			{ var dk_log_FATAL_HALT=1; 					}
 dk_log = function dk_log_f(){
 	//dk_debugFunc(1 2);
 	
-	//if(dk_log_ENABLE !== 1){return} 
+	if(dk_log_ENABLE !== 1){ return; }
+	
 	if(typeof arguments[1] === "undefined"){
 		_level_="DEFAULT";
 		_message_=arguments[0];
@@ -173,7 +175,7 @@ dk_log = function dk_log_f(){
 	
 	if(eval('dk_log_'+_level_+'_ENABLE') !== 1){ return; }
 
-	//###### ECHO MASSAGE ######
+	//###### ECHO MESSAGE ######
 	console.log(eval('dk_log_'+_level_+'_COLOR')+eval('dk_log_'+_level_+'_TAG')+_message_+clr);
 	
 	//###### TRACE ######
@@ -194,22 +196,23 @@ dk_log = function dk_log_f(){
 		// TODO
 	}
 	
-	//###### PAUSE ######
-	if(eval('dk_log_'+_level_+'_PAUSE') === 1){ 
-		console.log(eval('dk_log_'+_level_+'_COLOR')+"*** PAUSE_ON_"+_level_+" ***"+clr);
-		dk_pause();
-	}
-	
 	//###### TIMEOUT ######
 	if(eval('dk_log_'+_level_+'_TIMEOUT') === 1){ 
 		console.log(eval('dk_log_'+_level_+'_COLOR')+"*** TIMEOUT_ON_"+_level_+" ***"+clr);
 		// TODO
 	}
 	
+	//###### PAUSE ######
+	if(eval('dk_log_'+_level_+'_PAUSE') === 1){ 
+		console.log(eval('dk_log_'+_level_+'_COLOR')+"*** PAUSE_ON_"+_level_+" ***"+clr);
+		dk_pause();
+	}
+	
 	//###### HALT ######
 	if(eval('dk_log_'+_level_+'_HALT') === 1){ 
 		console.log(eval('dk_log_'+_level_+'_COLOR')+"*** HALT_ON_"+_level_+" ***"+clr);
-		// TODO
+		dk_exit(13);
+		dk_echo(clr);
 	}
 }
 
