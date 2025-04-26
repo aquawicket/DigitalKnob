@@ -1,3 +1,6 @@
+//if(!dk_valid("DK"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});			}
+if(!dk_valid("dk_echo")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js", function(){}); 	}
+
 //####################################################################
 //# dk_env(<VAR> <set:OPTIONAL>)
 //#
@@ -7,11 +10,13 @@ dk_env = function dk_env_f(){
 	
 	//############ SET ############
 	if(arguments[1]){ 
-		
+		dk_echo("dk_env():SET");
 	} 
+	
 	//############ GET ############
 	else {
-		if(typeof WScript === "object"){
+		dk_echo("dk_env():GET");
+		if(dk_valid("WScript")){
 			WScript_Shell = new ActiveXObject("WScript.Shell");
 			return WScript_Shell.ExpandEnvironmentStrings("%"+arguments[0]+"%");
 		}
@@ -28,5 +33,5 @@ DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
 	COMSPEC = dk_env("COMSPEC");
-	console.log("COMSPEC = "+COMSPEC)
+	dk_echo("COMSPEC = "+COMSPEC)
 };

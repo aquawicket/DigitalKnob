@@ -36,7 +36,7 @@ dk_exec = function dk_exec_f(){
 	while (oExec.Status != 1)
     WScript.Sleep(100);
 	var stdin = oExec.StdIn.ReadAll();
-	WScript.Echo("stdin = "+stdin);
+	dk_echo("stdin = "+stdin);
 	*/
 	
 	if(typeof oExec !== "undefined"){
@@ -44,7 +44,6 @@ dk_exec = function dk_exec_f(){
 		var stderr = "";
 
 		dk_echo("\n######################## STDOUT ########################");
-		
 		dk_exec.stdout = [];
 		//while(!oExec.Status){
 		while(!oExec.StdOut.AtEndOfStream){

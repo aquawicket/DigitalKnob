@@ -1,4 +1,4 @@
-//if(!dk_valid("DK"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){}); 			}
+//if(!dk_valid("DK"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){}); 		}
 if(!dk_valid("dk_echo"))		{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js", function(){});	}
 
 //####################################################################
@@ -15,12 +15,12 @@ dk_DIGITALKNOB_DIR = function dk_DIGITALKNOB_DIR_f(){
 
 	//############ SET ############
 	if(arguments.length > 0){
-		console.log("dk_DIGITALKNOB_DIR():SET");
+		dk_echo("dk_DIGITALKNOB_DIR():SET");
 		DIGITALKNOB_DIR = arguments[0];
 	} 
 	//############ GET ############
 	else {
-		console.log("dk_DIGITALKNOB_DIR():GET");
+		dk_echo("dk_DIGITALKNOB_DIR():GET");
 		if(!dk_valid("dk_DKHOME_DIR")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DKHOME_DIR.js", function(){ dk_DKHOME_DIR() }); }
 		DIGITALKNOB_DIR = DKHOME_DIR+"/digitalknob";
 	}
