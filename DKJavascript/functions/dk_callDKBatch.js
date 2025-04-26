@@ -1,8 +1,9 @@
-//dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js");
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js");
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js");
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_exec.js");
-
+//if(!dk_valid("DK"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){}); 			}
+if(!dk_valid("dk_debugFunc"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_debugFunc.js"); }
+if(!dk_valid("dk_env"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js"); 		}
+if(!dk_valid("dk_exec"))		{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_exec.js"); 		}
+if(!dk_valid("dk_DKBRANCH_DIR")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DKBRANCH_DIR"); }
+if(!dk_valid("dk_echo"))		{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js"); 		}
 
 
 //################################################################################
