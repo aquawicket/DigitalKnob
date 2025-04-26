@@ -1,6 +1,8 @@
 //#!/bin/sh
 //[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
+//if(!dk_valid("DK"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});	
+
 //##################################################################################
 //# dk_color(on/off)
 //#
@@ -96,12 +98,12 @@ dk_color = function dk_color_f(){
 		this.bg_lwhite = ESC+"[107m";	// Bright Background White		- Applies bold/bright white to background
 		
 		// Foreground RGB Colors
-		this.RGB = ESC+"[38;2;"			// ${RGB}50;100;150m        	= ${ESC}[38;2;50;100;150m
+		this.RGB = ESC+"[38;2;";		// ${RGB}50;100;150m        	= ${ESC}[38;2;50;100;150m
 		
 		// Background RGB Colors
-		this.bg_RGB = ESC+"[48;2;"		// ${bg_RGB}150;100;50m     	= ${ESC}[38;2;150;100;50m
+		this.bg_RGB = ESC+"[48;2;";		// ${bg_RGB}150;100;50m     	= ${ESC}[38;2;150;100;50m
 		
-		console.log(blue+"C"+green+"O"+red+"L"+magenta+"O"+cyan+"R"+blue+" O"+green+"N"+clr)
+		console.log(blue+"C"+green+"O"+red+"L"+magenta+"O"+cyan+"R"+blue+" O"+green+"N"+clr);
 
 	} else {
 		delete this.ESC;

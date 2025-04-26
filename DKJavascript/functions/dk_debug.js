@@ -1,4 +1,4 @@
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_log.js");
+//if(!dk_valid("DK"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});	
 
 //################################################################################
 //# dk_debug(msg)
@@ -8,6 +8,11 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_log.js");
 //#     @msg    - The message to print
 //#
 dk_debug = function dk_debug_f(){
+	//dk_debugFunc(1)
+	
+	if(!dk_valid("dk_log")){
+		dk_source(DKJAVASCRIPT_DIR+"/functions/dk_log.js");
+	}
 	dk_log("DEBUG", arguments[0]);
 }
 

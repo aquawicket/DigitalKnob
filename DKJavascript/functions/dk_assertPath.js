@@ -1,4 +1,5 @@
-if(typeof dk_error === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_error.js", function(){}); }
+//if(!dk_valid("DK"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});			}
+if(!dk_valid("dk_error")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_error.js", function(){}); }
 
 //################################################################################
 //# dk_assertPath(path)
@@ -7,15 +8,18 @@ if(typeof dk_error === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_e
 //#
 dk_assertPath = function dk_assertPath_f(){
 	//dk_debugFunc(0 99);
-
-	_path_ = arguments[0];
-	console.log("_path_ = "+_path_);
 	
-	if(typeof fileSystemObject === "undefined"){ 
+	var _ARGV_ = "";
+	for (var i = 0; i < arguments.length; i++){ _ARGV_ += arguments[i]; }
+	console.log('dk_assertPath('+_ARGV_+')');
+	
+	if(dk_valid("ActiveXObject")){ 
 		fileSystemObject = new ActiveXObject("Scripting.FileSystemObject");
 	};
-	if(fileSystemObject.FolderExists(_path_) || fileSystemObject.FileExists(_path_)){
-		return 0
+	if(dk_valid("fileSystemObject.FolderExists")){
+		if(fileSystemObject.FolderExists(arguments[0]) || fileSystemObject.FileExists(arguments[0])){
+			return 0
+		};
 	};
 	
 	dk_error("ASSERTION: dk_assertPath("+arguments[0]+"): path not found!");

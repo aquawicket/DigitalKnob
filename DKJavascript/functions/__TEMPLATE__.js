@@ -1,4 +1,4 @@
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_log.js");
+//if(!dk_valid("DK"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});			}
 
 //################################################################################
 //# __TEMPLATE__()
