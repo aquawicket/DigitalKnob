@@ -30,11 +30,6 @@ var USE_NODEJS=0;
 	while (method = methods.pop()) con[method] = con[method] || print;
 })(this.console = this.console || {});
 
-//############ dk_check ############
-dk_check = function(object){
-	if(typeof this[object] === "undefined"){console.error(object+" is invalid\n");}
-}
-
 //############ NodeJS ############
 if(USE_NODEJS){
 	dk_validate(DKIMPORTS_DIR, "dk_DKIMPORTS_DIR");
@@ -46,45 +41,6 @@ if(USE_NODEJS){
 	WShell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
 }
 
-//########### DKENGINE ###########
-if(typeof DKScriptEngine === "undefined"){
-	if(typeof ScriptEngine !== "undefined"){
-		var DKScriptEngine = ScriptEngine();
-		var DKScriptEngine_Version = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
-	}
-}
-dk_check('DKScriptEngine');
-dk_check('DKScriptEngine_Version');
-
-
-//############ globalThis ############
-if(typeof globalThis === "undefined"){
-	var globalThis = (function (){  
-		return this || (1, eval)('this');  
-	}());
-	console.log("globalThis = "+typeof globalThis);
-}
-dk_check('globalThis');
-
-
-
-//############ window ############
-if(typeof window === "undefined"){
-	var window = (function Window(){
-		return this || (1, eval)('this');  
-	}());
-	
-	window.constructor = (function Constructor(){
-		return this || (1, eval)('this');  
-	}());
-	
-	window.constructor.name = "window";
-	console.log("window = "+typeof window);
-}
-dk_check('window');
-
-
-
 //##############################################################
 //# dk_valid(<objectPath>)
 //#
@@ -92,22 +48,28 @@ dk_check('window');
 //#		Returns true if the object path exists and False if the object path is undefined.
 //#
 dk_valid = function(){
-	
 	if(typeof arguments[0] !== "string"){
 		console.error("dk_valid(): arg1 must be a string");
 		return -1;
 	}
-	if(typeof globalThis === "undefined"){
-		console.error("dk_valid(): requires a valid globalThis object.");
+	if(typeof this === "undefined"){
+		console.error("dk_valid(): requires a valid 'this' object.");
 		return -1;
 	}
 	
 	var arry = arguments[0].split(".");
+	if(typeof this[arry[0]] === "undefined"){
+		//console.error("dk_valid(): "+arry[0]+" is invalid.");
+		return false;
+	}
+	
+	/*
 	if(arry[0] === "globalThis"){ arry.shift(); }
 	if(arry[0] === "window"){ arry.shift(); }
 	if(arry[0] === "self"){ arry.shift(); }
-
-	currentObject = globalThis;
+	*/
+	
+	currentObject = this;
 	result = true;
 	
 	for (var i = 0; i < arry.length; i++) {
@@ -123,11 +85,52 @@ dk_valid = function(){
 			break;
 		}
 	}
-	
 	return result;
 }
 
+//############ dk_assert ############
+dk_assert = function(object){
+	if(!dk_valid(object)){console.error(object+" is invalid\n");}
+}
 
+
+
+
+
+
+
+
+
+
+
+//########### DKENGINE ###########
+if(!dk_valid("DKScriptEngine")){
+	if(dk_valid("ScriptEngine")){
+		var DKScriptEngine = ScriptEngine();
+		var DKScriptEngine_Version = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
+	}
+}
+dk_assert("DKScriptEngine");
+dk_assert("DKScriptEngine_Version");
+
+//############ globalThis ############
+if(typeof globalThis === "undefined"){
+	var globalThis = (function (){  
+		return this || (1, eval)('this');  
+	}());
+	console.log("globalThis = "+typeof globalThis);
+}
+dk_assert("globalThis");
+
+//############ window ############
+if(typeof window === "undefined"){
+	var window = (function Window(){
+		return this || (1, eval)('this');  
+	}());
+}
+dk_assert('window');
+
+//############ dk_call ############
 dk_call = function dk_call(){
 	var _ARGV_ = "";
 	for (var i = 0; i < arguments.length; i++) {_ARGV_ += ", "+arguments[i];}
@@ -148,31 +151,8 @@ dk_call = function dk_call(){
 		if(typeof currentObject[arry[i]] === "function"){
 			currentObject = currentObject[arry[i]]();
 		}
-
 		console.log("typeof currentObject "+i+" = "+ typeof currentObject);
-		
-
-		/*
-		if(typeof window[arry[i]] !== "undefined"){
-			console.log("typeof currentObject.arry["+i+"] = "+ typeof currentObject.arry[i]);
-		}
-		*/
 	}
-	
-	/*
-	if(arry.length > 0){ dk_call.valid = (typeof window !== "undefined") }
-	if(dk_call.valid && (arry.length > 1)){ dk_call.valid = (typeof window[arry[1]] !== "undefined") }
-	if(dk_call.valid && (arry.length > 1)){
-		console.log("typeof window[arry[1]] = "+typeof window[arry[1]]);
-		if(typeof window[arry[1]] === "function"){
-			console.log('call -> window['+arry[1]+']()');
-			dk_call.value = window[arry[1]]();
-		}
-	}
-	
-	console.log("typeof dk_call.value = "+ typeof dk_call.value);
-	return dk_call.value;
-	*/
 }
 
 //############ DKBrowser ############
@@ -191,7 +171,7 @@ DKBrowser = function DKBrowser_f(){
 	if(isBrave){ output.push("isBrave"); }
 
 	// Opera 8.0+
-	var isOpera = dk_valid("window.opr.addons") || dk_valid("window.oprera") || (dk_valid("navigator.userAgent.indexOf") && (navigator.userAgent.indexOf(' OPR/') >= 0));
+	var isOpera = dk_valid("window.opr.addons") || dk_valid("window.oprera") || (dk_valid("window.navigator.userAgent.indexOf") && (navigator.userAgent.indexOf(' OPR/') >= 0));
 	if(isOpera){ output.push("isOpera"); }
 
 	// Firefox 1.0+
@@ -227,7 +207,7 @@ DKBrowser = function DKBrowser_f(){
 }
 console.log("DKBrowser() = "+DKBrowser());
 
-//dk_check('DKBrowser');
+//dk_assert('DKBrowser');
 
 
 
@@ -258,7 +238,7 @@ if(typeof String.prototype.replaceAll === "undefined"){
 		return this.split(search).join(replace); 
 	}
 }
-//dk_check('String.prototype.replaceAll');
+//dk_assert('String.prototype.replaceAll');
 
 
 //############ XMLHttpRequest ############
@@ -270,7 +250,7 @@ if(typeof XMLHttpRequest == "undefined"){ // || !ie7xmlhttp){
 		console.log("XMLHttpRequest = "+typeof XMLHttpRequest);
 	}
 }
-dk_check('XMLHttpRequest');
+dk_assert('XMLHttpRequest');
 
 
 //############ dk_source ############
@@ -329,7 +309,7 @@ if(typeof dk_source === "undefined"){
 		}	
 	}
 }
-dk_check('dk_source');
+dk_assert('dk_source');
 
 
 //############ DOMDocument ############
@@ -346,7 +326,7 @@ if(typeof ActiveXObject === "function"){
 		}
 	}
 }
-dk_check('document');
+dk_assert('document');
 
 
 //############ WShell ############
@@ -356,7 +336,7 @@ if(typeof ActiveXObject === "function"){
 		console.log("WShell = "+typeof WShell);
 	}
 }
-//dk_check('WShell');
+//dk_assert('WShell');
 
 /*
 //############ documentElement ############
@@ -364,7 +344,7 @@ if(typeof documentElement === "undefined"){
 	var documentElement = document.documentElement;
 	//console.log("documentElement: "+documentElement.xml+"\n\n");
 }
-dk_check('documentElement');
+dk_assert('documentElement');
 */
 
 
@@ -372,7 +352,7 @@ dk_check('documentElement');
 if(typeof location === "undefined"){ 
 	var location = new Object;
 }
-dk_check('location');
+dk_assert('location');
 
 //######### location.href #########
 if(typeof location.href === "undefined"){
@@ -491,7 +471,7 @@ if(typeof location === "object"){
 		queryString=location.href.split('?')[1];
 	}
 }
-//dk_check('queryString');
+//dk_assert('queryString');
 
 //###### DKSCRIPT variables ######
 //if(typeof ARGV !== "undefined" && ARGV.length > 0){
@@ -515,7 +495,7 @@ if(typeof alert === "undefined"){
 		//alert("test");
 	});
 }
-dk_check('alert');
+dk_assert('alert');
 
 /*
 //############ console ############
@@ -524,7 +504,7 @@ if(typeof console === "undefined"){
 		console.log("loaded console.js");
 	});
 }
-dk_check('console');
+dk_assert('console');
 */
 
 //############ onDOMContentLoaded ############
@@ -542,13 +522,13 @@ if(typeof onDOMContentLoaded === "undefined"){
 		}
 	}
 }
-dk_check('onDOMContentLoaded');
+dk_assert('onDOMContentLoaded');
 
 //############ document.addEventListener ############
 if(typeof document.addEventListener !== "undefined"){
 	document.addEventListener("DOMContentLoaded", onDOMContentLoaded());
 }
-//dk_check('document.addEventListener');
+//dk_assert('document.addEventListener');
 
 //############ body_onload ############
 function body_onload(){
@@ -565,7 +545,7 @@ function body_onload(){
 		});
 	}
 }
-dk_check('body_onload');
+dk_assert('body_onload');
 
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
 //dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");

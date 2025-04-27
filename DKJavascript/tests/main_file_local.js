@@ -7,8 +7,8 @@ for (i=0; i<ARGV.length; i++){
 var index = "../../DKHtml/index.html";
 var assets = "file:///C:/Users/Administrator/digitalknob/Development";
 
-//###### dk_check (function) ######
-dk_check = function(object){
+//###### dk_assert (function) ######
+dk_assert = function(object){
 	if(typeof this[object] !== 'undefined'){WScript.StdOut.Write(object+" is valid\n");} else {WScript.StdOut.Write(object+" is invalid\n");}
 }
 
@@ -63,13 +63,13 @@ DKTEST();
 
 
 
-dk_check('alert');
-dk_check('console');
-dk_check('globalThis');
-dk_check('window');
-dk_check('document');
-dk_check('dk_func');
-dk_check('dk_source');
+dk_assert('alert');
+dk_assert('console');
+dk_assert('globalThis');
+dk_assert('window');
+dk_assert('document');
+dk_assert('dk_func');
+dk_assert('dk_source');
 
 
 
