@@ -414,7 +414,7 @@ console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
 
 //###### DKHOME_DIR variables ######
 if(!dk_valid("DIGITALKNOB")){ var DIGITALKNOB = "digitalknob"; }
-var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1);
+var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1).replaceAll("file:///", "");
 var DKCACHE_DIR = DKHOME_DIR+"/.dk"
 var DKDESKTOP_DIR = DKHOME_DIR+"/Desktop"
 
