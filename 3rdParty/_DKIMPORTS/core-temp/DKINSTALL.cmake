@@ -6,29 +6,31 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ###### [core-temp] ######
-# https://www.alcpu.com/CoreTemp/
+# https://www.alcpu.com/CoreTemp
 # https://www.alcpu.com/CoreTemp/Core-Temp-setup-v1.18.1.0.exe
 # https://www.alcpu.com/CoreTemp/CoreTemp32.zip
 # https://www.alcpu.com/CoreTemp/CoreTemp64.zip
 
-### DEPENDS ###
-#dk_depend(depend_name)
 
 ### INSTALL ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/core-temp/dkconfig.txt CORE_TEMP_DL)
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/core-temp/dkconfig.txt CORE_TEMP_WIN32_DL)
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/core-temp/dkconfig.txt CORE_TEMP_WIN64_DL)
+dk_getFileParams($ENV{DKIMPORTS_DIR}/core-temp/dkconfig.txt)
 
-#dk_validate(host_triple "dk_host_triple()")
-#if(WIN_X86_HOST)
-#	dk_set	(CORE_TEMP_DL   ${CORE_TEMP_WIN32_DL})
-#elseif(WIN_X86_64_HOST)
-#	dk_set	(CORE_TEMP_DL   ${CORE_TEMP_WIN64_DL})
-#endif()
+dk_validate(host_triple "dk_host_triple()")
+if(WIN_X86_HOST)
+	dk_set	(CORE_TEMP_IMPORT   ${CORE_TEMP_WIN32_IMPORT})
+elseif(WIN_X86_64_HOST)
+	dk_set	(CORE_TEMP_IMPORT   ${CORE_TEMP_WIN64_IMPORT})
+else()
+	dk_set	(CORE_TEMP_IMPORT   ${CORE_TEMP_EXE_IMPORT})
+endif()
 
-###### OVERRIDE ######
-dk_import	(${CORE_TEMP_DL})
+set(CORE_TEMP_EXE "${CORE_TEMP}/Core Temp.exe")
+dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+dk_import(${CORE_TEMP_IMPORT} ROOT "${DKTOOLS_DIR}" PATCH)
+
+set(CORE_TEMP_EXE "${CORE_TEMP}/Core Temp.exe")
+
 
 
 
