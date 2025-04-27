@@ -279,7 +279,9 @@ if(!dk_valid("dk_source")){
 					//console.log("###################################################################");
 					//console.log("###################################################################");
 					//console.log(xmlHttpRequest.responseText);
-					eval(xmlHttpRequest.responseText);
+					//eval(xmlHttpRequest.responseText);
+					var fn = Function(xmlHttpRequest.responseText);
+					fn();
 					//console.log("###################################################################");
 					//console.log("###################################################################");
 					//console.log("###################################################################");
