@@ -10,14 +10,14 @@ dk_callDKBash = function dk_callDKBash_f(){
 
 	DKBASH_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKBash/functions/";
 	COMSPEC = dk_env("%COMSPEC%")
-	WShell = new ActiveXObject("WScript.Shell");
+	WScript_Shell = new ActiveXObject("WScript.Shell");
 	
-	//var oExec = WShell.Run('cmd /c dir', 1 /* SW_SHOWNORMAL */, true /* bWaitOnReturn */);
+	//var oExec = WScript_Shell.Run('cmd /c dir', 1 /* SW_SHOWNORMAL */, true /* bWaitOnReturn */);
 	//WScript.Echo("ret " + ret);
 
-	//var oExec = WShell.Exec('cmd /V:ON /c dir');
-	//var oExec = WShell.Exec('cmd /V:ON /c test.cmd');
-	var oExec = WShell.Exec('%COMSPEC% /V:ON /c call C:/Users/Administrator/digitalknob/Development/DKBash/functions/dk_test.sh');
+	//var oExec = WScript_Shell.Exec('cmd /V:ON /c dir');
+	//var oExec = WScript_Shell.Exec('cmd /V:ON /c test.cmd');
+	var oExec = WScript_Shell.Exec('%COMSPEC% /V:ON /c call C:/Users/Administrator/digitalknob/Development/DKBash/functions/dk_test.sh');
 	
 	/*
 	var input = "";

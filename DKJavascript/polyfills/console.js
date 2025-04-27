@@ -10,8 +10,8 @@
 		} else {
 			var print = function(msg){
 				// https://stackoverflow.com/a/52793021/688352
-				//var WShell = new ActiveXObject('WScript.Shell');
-				//var WShellExec = WShell.Exec("cmd /c echo "+msg);
+				//var WScript_Shell = new ActiveXObject('WScript.Shell');
+				//var WScript_Shell_Exec = WScript_Shell.Exec("cmd /c echo "+msg);
 				if(typeof dkconsole === "object"){
 					dkconsole.log(msg);
 				}

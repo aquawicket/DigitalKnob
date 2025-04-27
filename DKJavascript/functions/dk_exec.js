@@ -18,9 +18,9 @@ dk_exec = function dk_exec_f(){
 	console.log("dk_exec("+_ARGV_+")");
 
 	//ComSpec = dk_env("ComSpec")
-	WShell = new ActiveXObject("WScript.Shell");
+	WScript_Shell = new ActiveXObject("WScript.Shell");
 	
-	var oExec = WShell.Exec(_ARGV_);
+	var oExec = WScript_Shell.Exec(_ARGV_);
 	
 	/*
 	var input = "";
