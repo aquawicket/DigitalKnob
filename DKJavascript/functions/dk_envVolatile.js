@@ -1,3 +1,5 @@
+//if(!dk_valid("DK"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});			}
+
 //################################################################################
 //# dk_envVolatile(name)
 //# dk_envVolatile(name, value)

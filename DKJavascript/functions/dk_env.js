@@ -1,36 +1,39 @@
 //if(!dk_valid("DK"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});			}
-if(!dk_valid("dk_echo")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js", function(){}); 	}
 
-//####################################################################
-//# dk_env(<VAR> <set:OPTIONAL>)
+//################################################################################
+//# dk_env(name)
+//# dk_env(name, value)
 //#
+//#		Reference: https://www.robvanderwoude.com/vbstech_data_environment.php
 //#
 dk_env = function dk_env_f(){
-    //dk_debugFunc(1 2);
+	//dk_debugFunc(1, 2);
 	
-	//############ SET ############
-	if(arguments[1]){ 
-		dk_echo("dk_env():SET");
-		if(dk_valid("ActiveXObject")){
-			WScript_Shell = new ActiveXObject("WScript.Shell");
-			
-			wshSystemEnv = WScript_Shell.Environment("USER");
-			wshSystemEnv("TEST") = "Test User";
-
-			//return WScript_Shell.ExpandEnvironmentStrings("%"+arguments[0]+"%");
-		}
-	} 
+	//var _ARGV_ = "";
+	//for (var i = 0; i < arguments.length; i++){ _ARGV_ += arguments[i]; }
+	//console.log("dk_env("+_ARGV_+")");
 	
-	//############ GET ############
-	else {
-		dk_echo("dk_env():GET");
-		if(dk_valid("ActiveXObject")){
-			WScript_Shell = new ActiveXObject("WScript.Shell");
-			return WScript_Shell.ExpandEnvironmentStrings("%"+arguments[0]+"%");
+	var shell = WScript.CreateObject("WScript.Shell");
+	var env = shell.Environment("PROCESS");
+	//var env = shell.Environment("SYSTEM");
+	//var env = shell.Environment("USER");
+	//var env = shell.Environment("VOLATILE");
+	
+	//### SET ###
+	if(arguments.length > 1){
+		if(arguments[1]){
+			//console.log("setting ...");
+			env(arguments[0]) = arguments[1];
+		} 
+		else if(env(arguments[0])){
+			//console.log("removing ...");
+			env.Remove(arguments[0]);
 		}
 	}
-};
-
+	
+	//### GET ###
+	return env(arguments[0]);
+}
 
 
 
@@ -40,15 +43,38 @@ dk_env = function dk_env_f(){
 DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
-	COMSPEC = dk_env("COMSPEC");
-	dk_echo("COMSPEC = "+COMSPEC);
 	
-
-	TEST = dk_env("TEST");
-	dk_echo("TEST = "+TEST);
+	console.log('var TEST = dk_env("TEST");');
+	var TEST = dk_env("TEST");
+	console.log("TEST = '"+TEST+"'");
 	
-	dk_env("TEST", "123");
-	TEST = dk_env("TEST");
-	dk_echo("TEST = "+TEST);
-
-};
+	console.log('');
+	console.log('var TEST = dk_env("TEST", "the value of test");');
+	var TEST = dk_env("TEST", "the value of test");
+	console.log("TEST = '"+TEST+"'");
+	
+	console.log('');
+	console.log('var TEST = dk_env("TEST");');
+	var TEST = dk_env("TEST");
+	console.log("TEST = '"+TEST+"'");
+	
+	console.log('');
+	console.log('var TEST = dk_env("TEST", "");');
+	var TEST = dk_env("TEST", "");
+	console.log("TEST = '"+TEST+"'");
+	
+	console.log('');
+	console.log('var TEST = dk_env("TEST");');
+	var TEST = dk_env("TEST");
+	console.log("TEST = '"+TEST+"'");
+	
+	console.log('');
+	console.log('var TEST = dk_env("TEST", "the value of test");');
+	var TEST = dk_env("TEST", "the value of test");
+	console.log("TEST = '"+TEST+"'");
+	
+	console.log('');
+	console.log('var USERPROFILE = dk_env("USERPROFILE");');
+	var USERPROFILE = dk_env("USERPROFILE");
+	console.log("USERPROFILE = '"+USERPROFILE+"'");
+}

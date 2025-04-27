@@ -118,7 +118,6 @@ if(!dk_valid("globalThis")){
 	var globalThis = (function (){  
 		return this || (1, eval)('this');  
 	}());
-	console.log("globalThis = "+typeof globalThis);
 }
 dk_assert("globalThis");
 
@@ -259,7 +258,7 @@ dk_assert('XMLHttpRequest');
 
 //############ dk_source ############
 if(!dk_valid("dk_source")){
-	dk_source = function(url, dk_source_callback){
+	dk_source = function dk_source_f(url, dk_source_callback){
 		//console.log("dk_source("+url+")");
 		var url = url.replaceAll("\\", "/");
 		//############ Msxml2.XMLHTTP.6.0 ############
@@ -288,13 +287,15 @@ if(!dk_valid("dk_source")){
 			}
 			//console.log("checking for callback");
 			if(dk_source_callback){
-				console.log("dk_source_callback");
+				//console.log("dk_source_callback");
 				dk_source_callback();
 				return;
 			} else {
-				console.log("no dk_source_callback");
+				//console.log("no dk_source_callback");
 			}
-		} else { //############ Browsers ############
+		
+		//################## Browsers ##################
+		} else if(dk_valid("document.createElement")){ 
 			// file:///C:/Path/Format
 			var script = document.createElement("script");
 			script.src = url;  
@@ -338,7 +339,7 @@ if(typeof ActiveXObject === "function"){
 			WScript_Shell = new ActiveXObject("WScript.Shell");
 			return WScript_Shell;
 		}
-	}
+	} 
 }
 //dk_assert('WScript_Shell');
 
@@ -369,7 +370,7 @@ console.log("location.href = "+location.href);
 //######### DKSCRIPT_PATH / DKSCRIPT_ARGS #########
 if(!dk_valid("DKSCRIPT_PATH")){
 		
-	if(dk_valid("location.hrefXXX")){
+	if(dk_valid("location.href")){
 		var DKSCRIPT_PATH = location.href;
 	}
 	else if(dk_valid("WScript_Shell")){
@@ -412,7 +413,7 @@ dk_assert("DKSCRIPT_EXT");
 console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
 
 //###### DKHOME_DIR variables ######
-var DIGITALKNOB = "digitalknob"
+if(!dk_valid("DIGITALKNOB")){ var DIGITALKNOB = "digitalknob"; }
 var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1);
 var DKCACHE_DIR = DKHOME_DIR+"/.dk"
 var DKDESKTOP_DIR = DKHOME_DIR+"/Desktop"
@@ -537,12 +538,16 @@ if(dk_valid("document.addEventListener")){
 
 //############ body_onload ############
 function body_onload(){
-	console.log("body_onload()")
+	console.log("body_onload()");
+	
+	dk_assert('window.document.body');
+	/*
 	if(!dk_valid("window.document.body")){ 
 		alert("window.document.body is invalid"); 
 		return; 
 	}
-		
+	*/
+	
 	if(DKSCRIPT_FILE === "index.html"){
 		var APP_NAME = DKSCRIPT_DIR.substr(DKSCRIPT_DIR.lastIndexOf("/")+1);
 		dk_source(DKJAVASCRIPT_DIR+"/apps/"+APP_NAME+"/main.js", function dk_source_callback(){
