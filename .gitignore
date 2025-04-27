@@ -92,6 +92,7 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/openjdk-8-u41-b04-windows-i586-14_jan_2020
 3rdParty/openssl-2f362e9
 3rdParty/pcre2-7c215fa
+3rdParty/php-src-php-8.0.30-win32-vs16-x64
 3rdParty/processexplorer-master
 3rdParty/pugixml-1.6
 3rdParty/python-2.7.18.amd64
@@ -142,4 +143,6 @@ DKCpp/apps/DKCore/main.cpp
 DKCpp/apps/DKJavascript/main.cpp
 DKCpp/apps/DKSDL/main.cpp
 DKCpp/apps/DKSDLRml/main.cpp
+
+DKPython/functions/__pycache__
 
