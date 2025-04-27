@@ -90,7 +90,7 @@ dk_valid = function(){
 
 //############ dk_assert ############
 dk_assert = function(object){
-	if(!dk_valid(object)){console.error(object+" is invalid\n");}
+	if(!dk_valid(object)){ console.error(object+" is invalid\n"); }
 }
 
 
@@ -114,7 +114,7 @@ dk_assert("DKScriptEngine");
 dk_assert("DKScriptEngine_Version");
 
 //############ globalThis ############
-if(typeof globalThis === "undefined"){
+if(!dk_valid("globalThis")){
 	var globalThis = (function (){  
 		return this || (1, eval)('this');  
 	}());
@@ -123,7 +123,7 @@ if(typeof globalThis === "undefined"){
 dk_assert("globalThis");
 
 //############ window ############
-if(typeof window === "undefined"){
+if(!dk_valid("window")){
 	var window = (function Window(){
 		return this || (1, eval)('this');  
 	}());
@@ -131,83 +131,87 @@ if(typeof window === "undefined"){
 dk_assert('window');
 
 //############ dk_call ############
-dk_call = function dk_call(){
-	var _ARGV_ = "";
-	for (var i = 0; i < arguments.length; i++) {_ARGV_ += ", "+arguments[i];}
-	console.log("dk_call("+_ARGV_+")");
+if(!dk_valid("dk_call")){
+	dk_call = function dk_call(){
+		var _ARGV_ = "";
+		for (var i = 0; i < arguments.length; i++) {_ARGV_ += ", "+arguments[i];}
+		console.log("dk_call("+_ARGV_+")");
 
-	var arry = arguments[0].split(".");
-	if(typeof window === "undefined"){ 
-		console.error("window is invalid");
-		return false; 
-	}
+		var arry = arguments[0].split(".");
+		if(!dk_valid("window")){ 
+			console.error("window is invalid");
+			return false; 
+		}
 
-	var currentObject = window;
-	for (var i = 1; i < arry.length-1; i++) {
-		console.log("\n")
-		if(typeof currentObject[arry[i]] === "object"){
-			currentObject = currentObject[arry[i]];
+		var currentObject = window;
+		for (var i = 1; i < arry.length-1; i++) {
+			console.log("\n")
+			if(typeof currentObject[arry[i]] === "object"){
+				currentObject = currentObject[arry[i]];
+			}
+			if(typeof currentObject[arry[i]] === "function"){
+				currentObject = currentObject[arry[i]]();
+			}
+			console.log("typeof currentObject "+i+" = "+ typeof currentObject);
 		}
-		if(typeof currentObject[arry[i]] === "function"){
-			currentObject = currentObject[arry[i]]();
-		}
-		console.log("typeof currentObject "+i+" = "+ typeof currentObject);
 	}
 }
 
 //############ DKBrowser ############
-DKBrowser = function DKBrowser_f(){
-	var output = [];
+if(!dk_valid("DKBrowser")){
+	DKBrowser = function DKBrowser_f(){
+		var output = [];
+		var hasNavigator = dk_valid('window.navigator');
+		console.log("hasNavigator = "+hasNavigator);
+		
+		// Hta
+		var isHta = dk_valid("window.ActiveXObject") && dk_valid("window.WScript");
+		if(isHta){ output.push("isHta"); }
 
-	var hasNavigator = dk_valid('window.navigator');
-	console.log("hasNavigator = "+hasNavigator);
-	
-	// Hta
-	var isHta = dk_valid("window.ActiveXObject") && dk_valid("window.WScript");
-	if(isHta){ output.push("isHta"); }
+		// Brave
+		var isBrave = dk_valid("window.navigator.brave.isBrave.name");
+		if(isBrave){ output.push("isBrave"); }
 
-	// Brave
-	var isBrave = dk_valid("window.navigator.brave.isBrave.name");
-	if(isBrave){ output.push("isBrave"); }
+		// Opera 8.0+
+		var isOpera = dk_valid("window.opr.addons") || dk_valid("window.oprera") || (dk_valid("window.navigator.userAgent.indexOf") && (navigator.userAgent.indexOf(' OPR/') >= 0));
+		if(isOpera){ output.push("isOpera"); }
 
-	// Opera 8.0+
-	var isOpera = dk_valid("window.opr.addons") || dk_valid("window.oprera") || (dk_valid("window.navigator.userAgent.indexOf") && (navigator.userAgent.indexOf(' OPR/') >= 0));
-	if(isOpera){ output.push("isOpera"); }
+		// Firefox 1.0+
+		var isFirefox = dk_valid("window.InstallTrigger");
+		if(isFirefox){ output.push("isFirefox"); }
 
-	// Firefox 1.0+
-	var isFirefox = dk_valid("window.InstallTrigger");
-	if(isFirefox){ output.push("isFirefox"); }
+		// Safari 3.0+ "[object HTMLElementConstructor]" 
+		var isSafari = dk_valid("window.HTMLElement") && /constructor/i.test(window.HTMLElement) 
+		|| (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+		if(isSafari){ output.push("isSafari"); }
 
-	// Safari 3.0+ "[object HTMLElementConstructor]" 
-	var isSafari = dk_valid("window.HTMLElement") && /constructor/i.test(window.HTMLElement) 
-	|| (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
-	if(isSafari){ output.push("isSafari"); }
+		// Internet Explorer 6-11
+		var isIE = /*@cc_on!@*/false || dk_valid("document.documentMode");
+		if(isIE){ output.push("isIE"); }
 
-	// Internet Explorer 6-11
-	var isIE = /*@cc_on!@*/false || dk_valid("document.documentMode");
-	if(isIE){ output.push("isIE"); }
+		// Edge 20+
+		var isEdge = !isIE && dk_valid("window.StyleMedia");
+		if(isEdge){ output.push("isEdge"); }
 
-	// Edge 20+
-	var isEdge = !isIE && dk_valid("window.StyleMedia");
-	if(isEdge){ output.push("isEdge"); }
+		// Chrome 1 - 79
+		var isChrome = dk_valid("window.chrome") && dk_valid("window.chrome.webstore") || dk_valid("window.chrome.runtime");
+		if(isChrome){ output.push("isChrome"); }
 
-	// Chrome 1 - 79
-	var isChrome = dk_valid("window.chrome") && dk_valid("window.chrome.webstore") || dk_valid("window.chrome.runtime");
-	if(isChrome){ output.push("isChrome"); }
+		// Edge (based on chromium) detection
+		var isEdgeChromium = isChrome && dk_valid("window.navigator.userAgent.indexOf") && (window.navigator.userAgent.indexOf("Edg") != -1);
+		if(isEdgeChromium){ output.push("isEdgeChromium"); }
 
-	// Edge (based on chromium) detection
-	var isEdgeChromium = isChrome && dk_valid("window.navigator.userAgent.indexOf") && (window.navigator.userAgent.indexOf("Edg") != -1);
-	if(isEdgeChromium){ output.push("isEdgeChromium"); }
+		// Blink engine detection
+		var isBlink = (isChrome || isOpera) && dk_valid("window.CSS");
+		if(isBlink){ output.push("isBlink"); }
 
-	// Blink engine detection
-	var isBlink = (isChrome || isOpera) && dk_valid("window.CSS");
-	if(isBlink){ output.push("isBlink"); }
-
-	return output.toString();
+		return output.toString();
+	}
 }
+dk_assert('DKBrowser');
 console.log("DKBrowser() = "+DKBrowser());
 
-//dk_assert('DKBrowser');
+
 
 
 
@@ -215,7 +219,7 @@ console.log("DKBrowser() = "+DKBrowser());
 
 
 //############ ARGV, ARGC ############
-if(typeof WScript === "object"){
+if(dk_valid("WScript")){
 	ARGC = WScript.Arguments.Count();
 	var ARGV = new Array(ARGC);
     for(var i = 0; i < ARGV.length; ++i){
@@ -233,16 +237,16 @@ if(typeof WScript === "object"){
 
 
 //############ String.prototype.replaceAll (polyfill) ############
-if(typeof String.prototype.replaceAll === "undefined"){
+if(!dk_valid("String.prototype.replaceAll")){
 	String.prototype.replaceAll = function replaceAll(search, replace){ 
 		return this.split(search).join(replace); 
 	}
 }
-//dk_assert('String.prototype.replaceAll');
+dk_assert('String.prototype.replaceAll');
 
 
 //############ XMLHttpRequest ############
-if(typeof XMLHttpRequest == "undefined"){ // || !ie7xmlhttp){
+if(!dk_valid("XMLHttpRequest")){ // || !ie7xmlhttp){
 	if(typeof ActiveXObject === "function"){
 		XMLHttpRequest = function(){
 			return new ActiveXObject("Msxml2.XMLHTTP.6.0");
@@ -254,7 +258,7 @@ dk_assert('XMLHttpRequest');
 
 
 //############ dk_source ############
-if(typeof dk_source === "undefined"){
+if(!dk_valid("dk_source")){
 	dk_source = function(url, dk_source_callback){
 		//console.log("dk_source("+url+")");
 		var url = url.replaceAll("\\", "/");
@@ -331,7 +335,7 @@ dk_assert('document');
 
 //############ WShell ############
 if(typeof ActiveXObject === "function"){
-	if(typeof WShell === "undefined"){ 
+	if(!dk_valid("WShell")){ 
 		var WShell = new ActiveXObject("WScript.Shell");
 		console.log("WShell = "+typeof WShell);
 	}
@@ -340,7 +344,7 @@ if(typeof ActiveXObject === "function"){
 
 /*
 //############ documentElement ############
-if(typeof documentElement === "undefined"){ 
+if(!dk_valid("documentElement")){ 
 	var documentElement = document.documentElement;
 	//console.log("documentElement: "+documentElement.xml+"\n\n");
 }
@@ -508,7 +512,7 @@ dk_assert('console');
 */
 
 //############ onDOMContentLoaded ############
-if(typeof onDOMContentLoaded === "undefined"){
+if(!dk_valid("onDOMContentLoaded")){
 	function onDOMContentLoaded(){
 		console.log("onDOMContentLoaded()")
 		if(!window){ alert("window is invalid"); return; }
@@ -525,7 +529,7 @@ if(typeof onDOMContentLoaded === "undefined"){
 dk_assert('onDOMContentLoaded');
 
 //############ document.addEventListener ############
-if(typeof document.addEventListener !== "undefined"){
+if(dk_valid("document.addEventListener")){
 	document.addEventListener("DOMContentLoaded", onDOMContentLoaded());
 }
 //dk_assert('document.addEventListener');
@@ -533,7 +537,7 @@ if(typeof document.addEventListener !== "undefined"){
 //############ body_onload ############
 function body_onload(){
 	console.log("body_onload()")
-	if(!window.document.body){ 
+	if(!dk_valid("window.document.body")){ 
 		alert("window.document.body is invalid"); 
 		return; 
 	}
@@ -560,7 +564,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(
 
 
 //############ DKTEST ############
-if(typeof ARGV !== "undefined"){ 
+if(dk_valid("ARGV")){ 
 	if(ARGC > 0){ var JS_PATH = ARGV[0]; }
 	if(ARGC > 1){ var JS_ARGS = ARGV[1]; }
 	var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
