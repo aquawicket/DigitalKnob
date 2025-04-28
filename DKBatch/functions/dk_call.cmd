@@ -18,9 +18,9 @@ if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 	if "%~1" equ "" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13)
 	
 	:: don't add these functions to the callstack, just call them
-	if "%~1" equ "init"				(call :%* & exit /b !errorlevel!)
+	if "%~1" equ "init"					(call :%* & exit /b !errorlevel!)
 	if "%~1" equ "pushStack"			(call :%* & exit /b !errorlevel!)
-	if "%~1" equ "popStack"			(call :%* & exit /b !errorlevel!)
+	if "%~1" equ "popStack"				(call :%* & exit /b !errorlevel!)
 	if "%~1" equ "setGlobal" 			(call :%* & exit /b !errorlevel!)
 	if "%~1" equ "setReturn" 			(call :%* & exit /b !errorlevel!)
 	if "%~1" equ "printStackVariables"	(call :%* & exit /b !errorlevel!)
@@ -46,8 +46,8 @@ if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 	if %LVL% lss 1 (exit /b !errorlevel!)
 
 ::##### Prepair ###########################################################################################
-	if exist "%__CMND__%.cmd" (set __CMND__=%__CMND__%.cmd)
-	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__%.cmd)
+	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
+	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
 
 	if not exist "%__CMND__%" (
 		call dk_source "%__CMND__%"

@@ -27,14 +27,18 @@ setlocal enableDelayedExpansion
 
 	%dk_call% dk_exec where %_recursive_% "%_pattern_%" "%_filename_%" 2>nul
 	if not defined dk_exec (
-		if "%~4" equ "NO_HALT" (
+		if "%~4" equ "NO_ERROR" (
+			dk_return
+		) else if "%~4" equ "NO_HALT" (
 			dk_return "%_filename_% not found"
 		) else ( 
 			dk_return -1 "%_filename_% not found"
 		)
 	)
 
-	%dk_call% dk_assertPath "%dk_exec:\=/%"
+	if "%~4" neq "NO_ERROR" (
+		%dk_call% dk_assertPath "%dk_exec:\=/%"
+	)
 	set "dk_findProgram=%dk_exec:\=/%"
 
 	endlocal & (

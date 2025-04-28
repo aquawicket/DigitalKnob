@@ -42,7 +42,7 @@ setlocal
     call dk_source dk_set
     call dk_source dk_realpath
     call dk_source dk_download
-    if not exist "%funcPath%" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName%.cmd" "%funcPath%"
+    if not exist "%funcPath%" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName:.cmd=%.cmd" "%funcPath%"
     if not exist "%funcPath%" %dk_call% dk_error "ERROR: %funcPath%: file not found"
     
     goto:eof
