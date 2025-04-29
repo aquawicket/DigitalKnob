@@ -103,11 +103,11 @@ setlocal enableDelayedExpansion
 	::############ DKCOMMAND ############
 	set DKCOMMAND=%_exe_% &::%dk_allButFirstArgs%
 	
-	echo %dk_call% dk_exec %DKCOMMAND%
+	:::echo %dk_call% dk_exec %DKCOMMAND%
 	%dk_call% dk_exec %DKCOMMAND%
-::	endlocal & (
-::		set "dk_evalDKC=%dk_exec%"
-::	)
+	endlocal & (
+		set "dk_evalDKC=%dk_exec%"
+	)
 %endfunction%
 
 

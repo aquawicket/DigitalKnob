@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 if not defined dk_exec_ECHO_COMMAND 	(set "dk_exec_ECHO_COMMAND=1"	) 	&:: dk_exec_command
 if not defined dk_exec_ECHO_STDOUT		(set "dk_exec_ECHO_STDOUT=1" 	)	&:: dk_exec_stdout[]
 if not defined dk_exec_ECHO_STDERR 		(set "dk_exec_ECHO_STDERR=1" 	)	&:: dk_exec_stderr[]
-::if not defined dk_exec_ECHO_EXITCODE 	(set "dk_exec_ECHO_EXITCODE=1"	)	&:: dk_exec_exitcode
+if not defined dk_exec_ECHO_EXITCODE 	(set "dk_exec_ECHO_EXITCODE=1"	)	&:: dk_exec_exitcode
 
 
 ::####################################################################
@@ -44,7 +44,7 @@ setlocal enableDelayedExpansion
 		
 			rem ###### set !dk_exec_stdout! ######
 			set "dk_exec_stdout=!line!"
-			set "dk_exec_stdout[!i!]=%%G"
+			set "dk_exec_stdout[!i!]=!dk_exec_stdout!"
 			
 			rem ###### print !dk_exec_stdout! ######
 			if "%dk_exec_ECHO_STDOUT%" equ "1" (
@@ -58,6 +58,11 @@ setlocal enableDelayedExpansion
 		set /a "i+=1"
 	)
 		
+	rem ###### print !dk_exec_stdout! ######
+	if "%dk_exec_ECHO_EXITCODE%" equ "1" (
+		echo dk_exec_exitcode ^> !dk_exec_exitcode!
+	)
+			
 	::### set dk_exec_stderr[] ###
 	:: TODO
 
@@ -66,7 +71,8 @@ setlocal enableDelayedExpansion
 	
 	::### set dk_exec ###
 	set /a "last_output_line=i-2"
-	set "dk_exec=!dk_exec_stdout[%last_output_line%]!"
+	::set "dk_exec=!dk_exec_stdout[%last_output_line%]!"
+	set "dk_exec=!dk_exec_stdout!"
 
 	::### Return the array to the calling scope ###
 	set "currentScope=1"
