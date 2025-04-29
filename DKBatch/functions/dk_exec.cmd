@@ -26,22 +26,33 @@ if not defined dk_exec_ECHO_STDERR 		(set "dk_exec_ECHO_STDERR=1" 	)	&:: dk_exec
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1 99
 
-	::### set dk_exec_command ###
+	::### set %dk_exec_command% ###
 	set "dk_exec_command=%*"
+	
+	::###### print %dk_exec_command% ######
 	if "%dk_exec_ECHO_COMMAND%" equ "1" (
 		echo dk_exec_command ^> %dk_exec_command%
 	)
 
-	::### set dk_exec_stdout[] ###
+	rem ### set %dk_exec_stdout[]% ###
 	set /a "i=0"
-	for /f "usebackq delims=" %%Z in (`%dk_exec_command% 2^>^&1 ^& call echo ExItCoDe%%^^errorlevel%%`) do (
-		set "line=%%Z"
-		if "%%Z" equ "!line:ExItCoDe=!" (
+	for /f "usebackq delims=" %%G in (`%dk_exec_command% 2^>^&1 ^& call echo ExItCoDe%%^^errorlevel%%`) do (
+		set "line=%%G"
+		
+		rem ###### set dk_exec_stdout ######
+		if "!line!" equ "!line:ExItCoDe=!" (
+		
+			rem ###### set !dk_exec_stdout! ######
+			set "dk_exec_stdout=!line!"
+			set "dk_exec_stdout[!i!]=%%G"
+			
+			rem ###### print !dk_exec_stdout! ######
 			if "%dk_exec_ECHO_STDOUT%" equ "1" (
-				echo dk_exec_stdout ^> %%Z
-			) 
-			set "dk_exec_stdout[!i!]=%%Z"
+				echo dk_exec_stdout ^> !dk_exec_stdout!
+			)
+			
 		) else (
+			rem ###### set !dk_exec_exitcode! ######
 			set /a "dk_exec_exitcode=!line:ExItCoDe=!"
 		)
 		set /a "i+=1"
@@ -59,11 +70,11 @@ setlocal enableDelayedExpansion
 
 	::### Return the array to the calling scope ###
 	set "currentScope=1"
-	for /F "delims=" %%b in ('set dk_exec_stdout') do (
+	for /F "delims=" %%G in ('set dk_exec_stdout') do (
 		if defined currentScope endlocal
 		set "dk_exec=%dk_exec%"
 		set "dk_exec_exitcode=%dk_exec_exitcode%"
-		set "%%b"
+		set "%%G"
 	)
 exit /b %dk_exec_exitcode%
 ::%endfunction%
@@ -78,21 +89,18 @@ exit /b %dk_exec_exitcode%
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	set myCommand=cmd /c dir
+::	%dk_call% dk_validate ADB_EXE "%dk_call% ANDROID::dk_ADB_EXE"
+::	%dk_call% dk_set myCommand ""%ADB_EXE%" shell pm list packages" &::-f string
+
+::	%dk_call% dk_set myCommand ""%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three""
+	
+::	set myCommand=C:\Users\Administrator\.dk\DKC_BUILD_DIR\dk_evalDKC_TEMP.exe
+	
+	set myCommand=ver
+	
 	%dk_call% dk_exec %myCommand%
 	%dk_call% dk_printVar dk_exec_stdout
 	%dk_call% dk_printVar dk_exec
 	%dk_call% dk_printVar dk_exec_exitcode
-
-::	%dk_call% dk_set myCommand ""%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three""
-::	%dk_call% dk_exec "%myCommand%"
-::	%dk_call% dk_printVar dk_exec
-	
-::	%dk_call% dk_validate ADB_EXE "%dk_call% ANDROID::dk_ADB_EXE"
-::	%dk_call% dk_set myCommand ""%ADB_EXE%" shell pm list packages" &::-f string
-::	%dk_call% dk_exec "%myCommand%"
-::	%dk_call% dk_printVar dk_exec
-::	%dk_call% dk_echo "dk_exec = %dk_exec%"
-::	%dk_call% dk_echo "dk_exec_exitcode = %dk_exec_status%"
 
 %endfunction%
