@@ -38,7 +38,7 @@ setlocal enableDelayedExpansion
 
 		%dk_call% dk_keyboardInput input
 		
-		if "!input!" equ "0"	(set "Target_Os=!Host_OS!")
+		if "!input!" equ "0"	(set "Target_Os=!Host_Os!")
 		if "!input!" equ "1" 	(set "Target_Os=Android")
 		if "!input!" equ "2" 	(set "Target_Os=Cosmopolitan")
 		if "!input!" equ "3" 	(set "Target_Os=Emscripten")
