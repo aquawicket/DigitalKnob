@@ -5,9 +5,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################## dk_evalDKC settings ########################
-if not defined dk_evalDKC_DEFAULT_TARGET_OS		(set "dk_evalDKC_DEFAULT_TARGET_OS=cosmocc")
-if not defined dk_evalDKC_DEFAULT_TARGET_ARCH	(set "dk_evalDKC_DEFAULT_TARGET_ARCH=cosmocc")
-if not defined dk_evalDKC_DEFAULT_TARGET_ENV	(set "dk_evalDKC_DEFAULT_TARGET_ENV=cosmocc")	&:: clang, cosmocc, gcc, msvc 
+::if not defined dk_evalDKC_DEFAULT_TARGET_OS	(set "dk_evalDKC_DEFAULT_TARGET_OS=cosmocc")
+::if not defined dk_evalDKC_DEFAULT_TARGET_ARCH	(set "dk_evalDKC_DEFAULT_TARGET_ARCH=cosmocc")
+::if not defined dk_evalDKC_DEFAULT_TARGET_ENV	(set "dk_evalDKC_DEFAULT_TARGET_ENV=cosmocc")		&:: clang, cosmocc, gcc, msvc 
 ::#####################################################################
 ::# dk_evalDKC(<code>)
 ::#
@@ -46,6 +46,11 @@ setlocal enableDelayedExpansion
 ::	if not exist %DKC_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
 ::	::if not exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
+	if not defined host_os (%dk_call% dk_host_triple)
+	if not defined dk_evalDKC_DEFAULT_TARGET_OS (set "dk_evalDKC_DEFAULT_TARGET_OS=%host_os%")
+	if not defined dk_evalDKC_DEFAULT_TARGET_ARCH (set "dk_evalDKC_DEFAULT_TARGET_ARCH=%host_arch%")
+	if not defined dk_evalDKC_DEFAULT_TARGET_ENV (set "dk_evalDKC_DEFAULT_TARGET_ENV=clang")
+	
 	::###### target_os ######
 	if not defined target_os (set "target_os=%dk_evalDKC_DEFAULT_TARGET_OS%")
 	%dk_call% dk_debug "target_os = %target_os%"
@@ -57,6 +62,13 @@ setlocal enableDelayedExpansion
 	::###### target_env ######
 	if not defined target_env (set "target_env=%dk_evalDKC_DEFAULT_TARGET_ENV%")
 	%dk_call% dk_debug "target_env = %target_env%"
+	
+	if "%target_env%" equ "cosmocc" (
+		set "target_os=cosmocc"
+		set "target_arch=cosmocc"
+	)
+	
+	if not defined target_triple (set "target_triple=%target_os%_%target_arch%_%target_env%")
 
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
