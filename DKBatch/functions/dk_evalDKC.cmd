@@ -4,9 +4,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-::####################################################################
-::# dk_evalDKC(function, arguments...)
-::# dk_evalDKC(function, arguments..., rtn_var)
+::######################## dk_evalDKC settings ########################
+if not defined dk_evalDKC_DEFAULT_TARGET_OS		(set "dk_evalDKC_DEFAULT_TARGET_OS=cosmocc")
+if not defined dk_evalDKC_DEFAULT_TARGET_ARCH	(set "dk_evalDKC_DEFAULT_TARGET_ARCH=cosmocc")
+if not defined dk_evalDKC_DEFAULT_TARGET_ENV	(set "dk_evalDKC_DEFAULT_TARGET_ENV=cosmocc")	&:: clang, cosmocc, gcc, msvc 
+::#####################################################################
+::# dk_evalDKC(<code>)
 ::#
 ::#
 :dk_evalDKC
@@ -16,12 +19,6 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	::echo %~1 > "%DKCACHE_DIR%/dk_evalDKC_TEMP.c"
 	
-	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmocc, gcc, msvc 
-	set "default_target_os=cosmocc"
-	set "default_target_arch=cosmocc"
-	set "default_target_env=cosmocc"
-
 	::###### DKC_BUILD_DIR ######
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	set "DKC_BUILD_DIR=%DKCACHE_DIR%/DKC_BUILD_DIR"
@@ -50,15 +47,15 @@ setlocal enableDelayedExpansion
 ::	::if not exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
 	::###### target_os ######
-	if not defined target_os (set "target_os=%default_target_os%")
+	if not defined target_os (set "target_os=%dk_evalDKC_DEFAULT_TARGET_OS%")
 	%dk_call% dk_debug "target_os = %target_os%"
 
 	::###### target_arch ######
-	if not defined target_arch (set "target_arch=%default_target_arch%")
+	if not defined target_arch (set "target_arch=%dk_evalDKC_DEFAULT_TARGET_ARCH%")
 	%dk_call% dk_debug "target_arch = %target_arch%"
 
 	::###### target_env ######
-	if not defined target_env (set "target_env=%default_target_env%")
+	if not defined target_env (set "target_env=%dk_evalDKC_DEFAULT_TARGET_ENV%")
 	%dk_call% dk_debug "target_env = %target_env%"
 
 	::###### COMPILER_EXE ######
