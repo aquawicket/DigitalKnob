@@ -74,6 +74,7 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/harfbuzz-c1c0e82e
 3rdParty/imagemagick-7.1.1-41-portable-q16-x86
 3rdParty/imagemagick-7.1.1-43-portable-q16-x64
+3rdParty/keylogger-142eebd
 3rdParty/libarchive-6567375
 3rdParty/libexpat-b70c8f5
 3rdParty/libiconv-1.14
