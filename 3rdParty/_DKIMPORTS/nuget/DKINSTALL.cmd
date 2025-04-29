@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
 	if defined win_host		(set "NUGET_DL=https://dist.nuget.org/win-x86-commandline/latest/nuget.exe")
 	if not defined NUGET_DL	(%dk_call% dk_error "NUGET_DL is invalid")
 

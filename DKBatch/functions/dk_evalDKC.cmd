@@ -44,9 +44,9 @@ setlocal enableDelayedExpansion
 ::	if not exist %DKC_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
 ::	::if not exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
-	if not defined host_os (%dk_call% dk_host_triple)
-	if not defined dk_evalDKC_DEFAULT_TARGET_OS (set "dk_evalDKC_DEFAULT_TARGET_OS=%host_os%")
-	if not defined dk_evalDKC_DEFAULT_TARGET_ARCH (set "dk_evalDKC_DEFAULT_TARGET_ARCH=%host_arch%")
+	if not defined Host_Triple (%dk_call% dk_Host_Triple)
+	if not defined dk_evalDKC_DEFAULT_TARGET_OS (set "dk_evalDKC_DEFAULT_TARGET_OS=%Host_Os%")
+	if not defined dk_evalDKC_DEFAULT_TARGET_ARCH (set "dk_evalDKC_DEFAULT_TARGET_ARCH=%Host_Arch%")
 	
 	::###### target_os ######
 	if not defined target_os (set "target_os=%dk_evalDKC_DEFAULT_TARGET_OS%")

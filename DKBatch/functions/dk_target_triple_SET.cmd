@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_validate Host_Triple "%dk_call% dk_host_triple"
+	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
 
 	echo: 
 	echo  1^) !host_triple!

@@ -97,7 +97,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### Install DKC ######
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
 
 	::###### target_os ######
 	if not defined target_os (set "target_os=win")

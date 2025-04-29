@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% "%DKIMPORTS_DIR%/vc_redist/DKINSTALL.cmd"
 
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
 	if defined win_x86_host			(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip")
 	if defined win_x86_64_host		(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip")
 	if not defined PHP_SRC_DL		(%dk_call% dk_error "PHP_SRC_DL is invalid")

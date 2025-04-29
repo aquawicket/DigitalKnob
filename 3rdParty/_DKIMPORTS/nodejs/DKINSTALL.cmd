@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
     if defined linux_arm64_host       (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz")
     if defined linux_x86_64_host      (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz")
     if defined mac_arm64_host         (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz")

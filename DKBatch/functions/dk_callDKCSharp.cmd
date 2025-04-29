@@ -19,8 +19,8 @@ setlocal enableDelayedExpansion
  
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
-	set "default_target_os=%host_os%"
-	set "default_target_arch=%host_arch%"
+	set "default_target_os=%Host_Os%"
+	set "default_target_arch=%Host_Arch%"
 	set "default_target_env=csc"
 
 	::###### _func_ ######

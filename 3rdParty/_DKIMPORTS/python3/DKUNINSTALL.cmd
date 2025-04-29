@@ -14,7 +14,7 @@ setlocal
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
 	if defined MAC_X86_HOST           (set "PYTHON3_IMPORT=%PYTHON3_MAC_X86_64_IMPORT%")
 	if defined WIN_ARM64_HOST         (set "PYTHON3_IMPORT=%PYTHON3_WIN_ARM64_IMPORT%")
 	if defined WIN_X86_HOST           (set "PYTHON3_IMPORT=%PYTHON3_WIN_X86_IMPORT%")

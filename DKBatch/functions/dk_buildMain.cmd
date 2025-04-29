@@ -49,9 +49,9 @@ setlocal enableDelayedExpansion
 				set /a _line_+=1
 				goto :skipTarget
 			)
-			rem Each host_arch will have a list of compatible triples
-			rem The the current host_arch doesn't have the target_tripple in it's allowed list
-			rem We goto skipTarget, we could also have a disabled list for each host_arch to do the same:
+			rem Each Host_Arch will have a list of compatible triples
+			rem The the current Host_Arch doesn't have the target_tripple in it's allowed list
+			rem We goto skipTarget, we could also have a disabled list for each Host_Arch to do the same:
 			rem A block list could be good, because everything will be attempted by default instead of enabled.
 			rem Example win_x86 mac ios iossim	=	win_x86_host's will skip all instaces of mac, ios and iossim
 

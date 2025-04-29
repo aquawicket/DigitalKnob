@@ -14,7 +14,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::setlocal
     %dk_call% dk_debugFunc 0
 
-    %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+    %dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
     if defined win_x86_host     (set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20240903.exe")
     if defined win_x86_64_host  (set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe")
     if not defined QEMU_DL 		(%dk_call% dk_error "QEMU_DL is invalid")
