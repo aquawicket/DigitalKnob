@@ -5,9 +5,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################## dk_evalDKC settings ########################
-::if not defined dk_evalDKC_DEFAULT_TARGET_OS	(set "dk_evalDKC_DEFAULT_TARGET_OS=cosmocc")
-::if not defined dk_evalDKC_DEFAULT_TARGET_ARCH	(set "dk_evalDKC_DEFAULT_TARGET_ARCH=cosmocc")
-::if not defined dk_evalDKC_DEFAULT_TARGET_ENV	(set "dk_evalDKC_DEFAULT_TARGET_ENV=cosmocc")		&:: clang, cosmocc, gcc, msvc 
+if not defined dk_evalDKC_DEFAULT_TARGET_ENV (set "dk_evalDKC_DEFAULT_TARGET_ENV=clang")
 ::#####################################################################
 ::# dk_evalDKC(<code>)
 ::#
@@ -49,7 +47,6 @@ setlocal enableDelayedExpansion
 	if not defined host_os (%dk_call% dk_host_triple)
 	if not defined dk_evalDKC_DEFAULT_TARGET_OS (set "dk_evalDKC_DEFAULT_TARGET_OS=%host_os%")
 	if not defined dk_evalDKC_DEFAULT_TARGET_ARCH (set "dk_evalDKC_DEFAULT_TARGET_ARCH=%host_arch%")
-	if not defined dk_evalDKC_DEFAULT_TARGET_ENV (set "dk_evalDKC_DEFAULT_TARGET_ENV=clang")
 	
 	::###### target_os ######
 	if not defined target_os (set "target_os=%dk_evalDKC_DEFAULT_TARGET_OS%")
