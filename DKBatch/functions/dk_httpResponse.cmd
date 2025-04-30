@@ -88,11 +88,24 @@ setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 1 2
 
 	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
-	for /f "usebackq tokens=*" %%A in (`%CURL_EXE% -sI -o nul -w "%%{http_code}" "%~1"`) do (set "dk_httpResponse=%%A")
+	
+	::"C:\Windows\System32\curl.exe" -sI -o nul -w "%{http_code}" "http://www.google.com/index.html"
+	
+	::%dk_call% dk_setEx command "%CURL_EXE% -sI -o nul -w %%{http_code} %~1"
+	::set command=%CURL_EXE% -sI -o nul -w "%%{http_code}" "%~1"
 
+	set command=%CURL_EXE% "%~1" -sI -o nul -w "%%%%%%%%{http_code}\n"
+	%dk_call% dk_exec %command%
+	set "dk_httpResponse=%dk_exec%"
+	
+	
+::	for /f "usebackq tokens=*" %%A in (`%command%`) do (
+::		set "dk_httpResponse=%%A"
+::	)
+::
 	endlocal & (
 		set "dk_httpResponse=%dk_httpResponse%"
-		if "%~2" neq "" (set "%~2=%dk_httpResponse%")
+		rem if "%~2" neq "" (set "%~2=%dk_httpResponse%")
 	)
 %endfunction%
 

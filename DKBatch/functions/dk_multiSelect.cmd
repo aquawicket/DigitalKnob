@@ -84,7 +84,7 @@ setlocal
 			var line=input.ReadLine();
 		
 			addSelection(line);
-			for (let i = 0; i < line.length; i++) {
+			for(var i = 0; i < line.length; i++) {
 				addSelection(line[i]);
 			}
 		}

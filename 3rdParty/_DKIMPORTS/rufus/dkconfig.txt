@@ -1,0 +1,1 @@
+RUFUS_IMPORT=https://github.com/pbatard/rufus/releases/download/v4.7/rufus-4.7p.exe 

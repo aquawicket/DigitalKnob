@@ -24,14 +24,22 @@ if not defined dk_exec_ECHO_EXITCODE 	(set "dk_exec_ECHO_EXITCODE=1"	)	&:: dk_ex
 ::#
 :dk_exec
 setlocal enableDelayedExpansion
-	%dk_call% dk_debugFunc 1 99
+	::%dk_call% dk_debugFunc 1 99
 
 	::### set %dk_exec_command% ###
+	::set "dk_exec_command=%*"
 	set "dk_exec_command=%*"
 	
 	::###### print %dk_exec_command% ######
 	if "%dk_exec_ECHO_COMMAND%" equ "1" (
-		echo dk_exec_command ^> %dk_exec_command%
+		echo dk_exec_command ^> !dk_exec_command!
+		echo dk_exec_arg1    ^> %~1
+		echo dk_exec_arg2    ^> %~2
+		echo dk_exec_arg3    ^> %~3
+		echo dk_exec_arg4    ^> %~4
+		echo dk_exec_arg5    ^> %~5
+		echo dk_exec_arg6    ^> %~6
+		echo dk_exec_arg7    ^> %~7
 	)
 
 	rem ### set %dk_exec_stdout[]% ###
@@ -102,9 +110,14 @@ setlocal
 	
 ::	set myCommand=C:\Users\Administrator\.dk\DKC_BUILD_DIR\dk_evalDKC_TEMP.exe
 	
-	set myCommand=ver
+::	set myCommand=ver
 	
-	%dk_call% dk_exec %myCommand%
+	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
+	set "url=http://www.google.com/index.html"
+	set myCommand=%CURL_EXE% -sI -o nul -w "%%{http_code}\n" "%url%"
+	echo myCommand = !myCommand!
+	
+	%dk_call% dk_exec !myCommand!
 	%dk_call% dk_printVar dk_exec_stdout
 	%dk_call% dk_printVar dk_exec
 	%dk_call% dk_printVar dk_exec_exitcode
