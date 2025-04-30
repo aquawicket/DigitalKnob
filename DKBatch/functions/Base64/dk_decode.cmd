@@ -17,7 +17,7 @@ setlocal
 
 	set "inputFile=%~1"
 	%dk_call% dk_removeExtension %inputFile% outputFile
-	if not "%~2" equ "" set "outputFile=%~2"
+	if "%~2" neq "" set "outputFile=%~2"
 
 	if not exist "%inputFile%" %dk_call% dk_error "%inputFile% not found"
 	if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"

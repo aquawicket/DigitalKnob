@@ -17,7 +17,7 @@ setlocal
 
 	set "inputFile=%~1"
 	set "outputFile=%~nx1.cmd"
-	if not "%~2" equ "" (set "outputFile=%~2")
+	if "%~2" neq "" (set "outputFile=%~2")
 
 	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
 	if exist "%outputFile%" (del %outputFile%)
@@ -78,8 +78,8 @@ setlocal
 	::set "input=%DKBRANCH_DIR%/DKBuilder.cmd"
 	::set "output=%DKBRANCH_DIR%/DKBuilder.cmd.b64"
 
-	%dk_call% dk_selectFile input
-	%dk_call% dk_embedFile "%input%"
+	%dk_call% dk_selectFile
+	%dk_call% dk_embedFile "%dk_selectFile%"
 
 	::%dk_call% Base64::dk_encode "%input%" "test.b64"
 %endfunction%

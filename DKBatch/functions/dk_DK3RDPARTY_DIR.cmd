@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::setlocal
 	%dk_call% dk_debugFunc 0 1
 	
-	if not "%~1" equ "" (
+	if "%~1" neq "" (
 		set "DK3RDPARTY_DIR=%~1"
 		%return%
 	)

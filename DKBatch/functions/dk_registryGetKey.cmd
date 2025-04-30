@@ -21,8 +21,8 @@ setlocal
     for /F "tokens=2* skip=2" %%a in ('%REG_EXE% query "%_reg_path_:/=\%" /v "%_key_:/=\%"') do ( 
         if defined currentScope endlocal
 		set "dk_registryGetKey=%%b"
-		if not "%~2" equ "" (set "%~2=%%b")
-		if not "%~3" equ "" (set "%~3=%%b")
+		if "%~2" neq "" (set "%~2=%%b")
+		if "%~3" neq "" (set "%~3=%%b")
     )
 %endfunction%
 

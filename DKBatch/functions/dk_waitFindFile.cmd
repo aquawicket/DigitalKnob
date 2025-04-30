@@ -15,7 +15,7 @@ setlocal enableDelayedExpansion
 
 	set /a "seconds=0"
 	set /a "timeout=30"
-	if not "%~3" equ "" (set /a "timeout=%~3")
+	if "%~3" neq "" (set /a "timeout=%~3")
 	
 	echo Looking for %filename% in %searchPath% for %timeout% seconds. press q to skip
 	:dk_waitFindFile_LOOP

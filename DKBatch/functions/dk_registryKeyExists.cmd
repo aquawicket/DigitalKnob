@@ -27,7 +27,7 @@ setlocal
 
 	endlocal & (
 		set "dk_registryKeyExists=%dk_registryKeyExists%"
-		if not "%~2" equ "" (set "%~2=%dk_registryKeyExists%")
+		if "%~2" neq "" (set "%~2=%dk_registryKeyExists%")
 		exit /b %dk_registryKeyExists%
 	) 
 %endfunction%

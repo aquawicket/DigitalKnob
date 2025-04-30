@@ -23,7 +23,7 @@ setlocal enableDelayedExpansion
 	
     endlocal & (
 		set "dk_dirname=%dk_dirname:\=/%"
-		if not "%~2" equ "" set "%~2=%dk_dirname:\=/%"
+		if "%~2" neq "" set "%~2=%dk_dirname:\=/%"
 	)
 %endfunction%
 

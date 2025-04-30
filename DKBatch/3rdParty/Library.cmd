@@ -532,7 +532,7 @@ goto:eof
 if "!!" equ "" (	:# The local scope has expansion on
   :# Prepare one variable, in a local scope with !expansion! on, for %expansion% in another scope with !expansion! on
   :Prep2ExpandVar.Eon INVAR [OUTVAR]
-  if not "%~2" equ "" set "%~2=!%~1!" & shift
+  if "%~2" neq "" set "%~2=!%~1!" & shift
   if defined %1 (
     for %%e in (sp tab cr lf quot amp vert lt gt hat percnt) do ( :# Encode named character entities
       for %%c in ("!@%%e!") do (
@@ -549,7 +549,7 @@ if "!!" equ "" (	:# The local scope has expansion on
   setlocal EnableDelayedExpansion
   set "VALUE=!%~1!"
   call :Prep2ExpandVar.Eon VALUE
-  if not "%~2" equ "" shift
+  if "%~2" neq "" shift
   endlocal & set "%~1=%VALUE%"
   exit /b
 )
@@ -1993,7 +1993,7 @@ for /l %%n in (1,1,24) do if not "!ECHO.FILE:~%%n!" equ "" <nul set /p "=%ECHO.D
 :# Remove the other unwanted characters "\..\: ##-"
 <nul set /p "=%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%"
 :# Append the optional CRLF
-if not "%~3" equ "" echo.&if defined LOGFILE %>>LOGFILE% echo.
+if "%~3" neq "" echo.&if defined LOGFILE %>>LOGFILE% echo.
 endlocal & endlocal & goto:eof
 
 :Echo.Color.Var %1=Color %2=StrVar [%3=/n]
@@ -2074,7 +2074,7 @@ set "str=!str:"=\"!"
 pushd "%TEMP%"
 findstr /P /L /A:%~1 "%ECHO.BS%" "!str!\..\x" nul
 popd
-if not "%~3" equ "" echo.
+if "%~3" neq "" echo.
 endlocal & goto:eof
 
 :Echo.Color1.Init
@@ -2268,7 +2268,7 @@ exit /b
 :strcpy
 %FUNCTION%
 %UPVAR% %~1
-if not "%~1" equ "%~2" call set "%~1=%%%~2%%"
+if "%~1" neq "%~2" call set "%~1=%%%~2%%"
 %RETURN%
 
 :# Append the content of a variable to another one
@@ -3269,7 +3269,7 @@ exit /b
 :# Compute the depth of a pathname. %1=pathname. Ex: A\B\C -> 3 ; \A -> 1 ; A\ -> 1
 :path_depth
 %FUNCTION%
-if not "%~2" equ "" set "RETVAR=%~2"
+if "%~2" neq "" set "RETVAR=%~2"
 call :path_depth2 %*
 %UPVAR% %RETVAR%
 set %RETVAR%=%RETVAL%
@@ -3519,7 +3519,7 @@ if defined FULL_SHORT for %%x in ("!FULL_SHORT:\=" "!") do ( :# Loop on all shor
   )
   set "FULL_LONG=!FULL_LONG!\!LONG_NAME!"
 ) else set "FULL_LONG=%~d1\"
-endlocal & if not "%~2" equ "" (set "%~2=%FULL_LONG%") else echo %FULL_LONG%
+endlocal & if "%~2" neq "" (set "%~2=%FULL_LONG%") else echo %FULL_LONG%
 exit /b
 
 :#----------------------------------------------------------------------------#
@@ -3900,7 +3900,7 @@ setlocal
 set /a "YEAR=10000%~1 %% 10000, MONTH=100%~2 %% 100, DAY=100%~3 %% 100" &:# Make sure they have no leading 0
 if %YEAR% LSS 100 set /a YEAR+=2000 &:# Assume two digit years are in the 21st century
 set /a JD=DAY-32075+1461*(YEAR+4800+(MONTH-14)/12)/4+367*(MONTH-2-(MONTH-14)/12*12)/12-3*((YEAR+4900+(MONTH-14)/12)/100)/4
-endlocal & if not "%~4" equ "" (set %~4=%JD%) else (echo.%JD%)
+endlocal & if "%~4" neq "" (set %~4=%JD%) else (echo.%JD%)
 exit /b
 
 :# Extract components from an ISO 8601 date/time
@@ -4604,9 +4604,9 @@ set "H0=^^"		&:# Return a Hat ^ with QUOTE_MODE 0=off
 set "H1=^"		&:# Return a Hat ^ with QUOTE_MODE 1=on
 if %CallerExp%==1 set "H0=!H0!!H0!" & set "H1=!H1!!H1!" &:# !escape our return value
 set "NPESC=1"			  &:# Default number of %expansion escaping to do
-if not "%~3" equ "" set "NPESC=%~3"  &:# specified # of extra %expansion escaping to do 
+if "%~3" neq "" set "NPESC=%~3"  &:# specified # of extra %expansion escaping to do 
 set /a "NXESC=%CallerExp%*NPESC"  &:# Default number of !expansion escaping to do
-if not "%~4" equ "" set "NXESC=%~4"  &:# specified # of extra !expansion escaping to do
+if "%~4" neq "" set "NXESC=%~4"  &:# specified # of extra !expansion escaping to do
 for /l %%i in (1,1,%NXESC%) do set "H0=!H0!!H0!" & set "H1=!H1!!H1!"
 for /l %%i in (1,1,%NPESC%) do set "H0=!H0!!H0!"
 :# Define characters that need escaping outside of quotes

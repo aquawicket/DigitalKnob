@@ -14,7 +14,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:: https://stackoverflow.com/a/33662275
 	:: If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
 
-::	if not "%~1" equ "" (
+::	if "%~1" neq "" (
 ::		set "DKBRANCH_DIR=%~1"
 ::	)
 

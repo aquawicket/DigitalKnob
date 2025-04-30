@@ -29,7 +29,7 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_selectFile _file_
-	%dk_call% dk_crlfToLf "%_file_%"
+	%dk_call% dk_selectFile
+	%dk_call% dk_crlfToLf "%dk_selectFile%"
 	
 %endfunction%

@@ -37,9 +37,9 @@ setlocal
 setlocal
 	%dk_call% dk_debugFunc 0
 
-	::%dk_call% dk_selectFolder directory
-	::%dk_call% dk_selectFile patchFile
-    ::%dk_call% dk_gitApplyPatch "%directory%" "%patchFile%"
+	::%dk_call% dk_selectFolder
+	::%dk_call% dk_selectFile
+    ::%dk_call% dk_gitApplyPatch "%dk_selectFolder%" "%dk_selectFile%"
 	
 	set "directory=C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master"
 	set "patchFile=C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/rmlui/termux.patch"

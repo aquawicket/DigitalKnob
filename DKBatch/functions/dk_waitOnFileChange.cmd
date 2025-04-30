@@ -15,7 +15,7 @@ setlocal enableDelayedExpansion
 	for %%a in (%_file_%) do set last_fdate=%%~ta.%%~za.%%~aa
 	set /a "seconds=0"
 	set /a "timeout=30"
-	if not "%~2" equ "" (set /a "timeout=%~2")
+	if "%~2" neq "" (set /a "timeout=%~2")
 	
 	echo Waiting for change in %_file_%.   press q to skip
 	:dk_waitOnFileChange_LOOP

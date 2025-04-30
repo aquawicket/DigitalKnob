@@ -15,7 +15,7 @@ set "ErrCode[1073750991]=Invalid number"
 set "ErrCode[1073750992]=Number larger than 32-bits"
 set "ErrCode[1073750993]=Division by zero"
 
-if not "%~1" equ "" (call %~1)
+if "%~1" neq "" (call %~1)
 %endfunction%
 
 ::############ set /a error codes ############

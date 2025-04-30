@@ -55,6 +55,6 @@ setlocal enableDelayedExpansion
 setlocal
     %dk_call% dk_debugFunc 0
  
-    %dk_call% dk_selectFile input
-    %dk_call% dk_extract "%input%"
+    %dk_call% dk_selectFile
+    %dk_call% dk_extract "%dk_selectFile%"
 %endfunction%

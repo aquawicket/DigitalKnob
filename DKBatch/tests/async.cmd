@@ -4,7 +4,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-if not "%~1" equ "" goto %~1
+if "%~1" neq "" goto %~1
 :MAIN
 setlocal
 	echo Here I am in the MAIN thread

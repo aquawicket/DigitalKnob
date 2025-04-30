@@ -23,7 +23,7 @@ goto End
 :: A function to return false to emulate calling a function that has a failure.
 setlocal
 set "xResult=false"
-endlocal & if not "%~1" equ "" set "%~1=%xResult%"
+endlocal & if "%~1" neq "" set "%~1=%xResult%"
 goto:eof
 
 

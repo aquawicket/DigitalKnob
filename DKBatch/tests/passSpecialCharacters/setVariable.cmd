@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	goto :end
 	:setargs
 		echo %~1 %~2
-		if not "%~1" equ "%~2" set args=%args% %~2
+		if "%~1" neq "%~2" set args=%args% %~2
 		goto:eof
 	:end
 	echo %args%

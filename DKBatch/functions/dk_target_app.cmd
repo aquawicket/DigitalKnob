@@ -87,7 +87,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     )
     
     endlocal & !commands[%choice%]!
-    if not "%~1" equ "" (endlocal & set "%1=%target_app%")
+    if "%~1" neq "" (endlocal & set "%1=%target_app%")
 	
     %dk_call% dk_deleteArray dk_getDirectories
     %dk_call% dk_deleteArray commands
