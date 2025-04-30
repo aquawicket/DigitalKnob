@@ -1,6 +1,6 @@
 <!-- :
 @echo off
-@setlocal enableextensions enabledelayedexpansion
+@setlocal enableExtensions enableDelayedExpansion
 
 ::######## Pass batch variable into HTA
 set "fromBatch=a b c"
@@ -16,26 +16,27 @@ pause
 exit /b
 
 
+
 <html>
 <head><title>Vairiable transfer</title>
 <HTA:APPLICATION>
 </head>
 	<body>
 		
-		<!--######### Pass batch variable into HTA ######################################-->
-		<p>The variable pass in from batch is '{fromBatch}'</p>	
+		<!--######### Pass batch variable to HTA ########################################-->
+		<p>The variable send from batch is '{fromBatch}'</p>	
 		<script language='javascript'>
 			window.resizeTo(400,200);
-			var input= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(0);
+			var input = new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(0);
 			var line=input.ReadLine();
 			document.body.innerHTML = document.body.innerHTML.replace('{fromBatch}', line);
 		</script>	
 		<!--#############################################################################-->
 		
 		
-		<!--########## Pass Hta variable back to Batch ###################################-->
+		<!--########## Pass Hta variable to Batch ########################################-->
 		<script language='javascript' >
-			function pipePass(){
+			function sendVar(){
 				var fromHta=document.getElementById('fromHta').value;
 				var fso= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1);
 				close(fso.Write(fromHta));
@@ -44,6 +45,6 @@ exit /b
 		<!--##############################################################################-->
 		
 		<input name='fromHta' size='16'></input>
-		<button onclick='pipePass()'>Submit</button>
+		<button onclick='sendVar()'>Submit</button>
 	</body>
 </html>

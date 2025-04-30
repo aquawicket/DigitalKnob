@@ -12,13 +12,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 setlocal enableDelayedExpansion
 	%dk_call% dk_debugFunc 0 1
 
-	for /f "tokens=* delims=" %%A in ('cmd /c mshta.exe "%~f0"') do (
-		set "dk_inputBox=%%A"
+	set "CMD_EXE=cmd.exe"
+	set "MSHTA_EXE=mshta.exe"
+
+	for /f "tokens=* delims=" %%A in ('echo %%input%%^|%MSHTA_EXE% "%~f0"') do (
+		set "output=%%A"
 	)
 	
 	endlocal & (
-		set "dk_inputBox=%dk_inputBox%"
-		if "%1" neq "" (set "%2=%dk_inputBox%")
+		set "dk_inputBox=%output%"
+		if "%1" neq "" (set "%2=%output%")
 	)
 %endfunction%
 

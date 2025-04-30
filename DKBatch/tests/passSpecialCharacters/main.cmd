@@ -37,17 +37,16 @@ set PRINT_DE_STATUS=if "^!DE^!" equ "" (echo [32mdelayed expansion = ON[0m) el
 setlocal enableDelayedExpansion
 	::setlocal disableDelayedExpansion
 	::call setVariable complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? %"
-	
-	::setlocal disableDelayedExpansion & call setVariable complex "'" "`" "(" ")" "!" "\" "/" "[" "]" "." "^" "," ";" "=" "?" "|" "<" ">" "&" "*" & setlocal enableDelayedExpansion
-	setlocal disableDelayedExpansion & call setVariable complex "' ` ( ) ! \ / [ ] . ^ , ; = ? | < > & *" & setlocal enableDelayedExpansion
+	setlocal disableDelayedExpansion & call setVariable complex "'" "`" "(" ")" "!" "\" "/" "[" "]" "." "^" "," ";" "=" "?" "|" "<" ">" "&" "*" & setlocal enableDelayedExpansion
+	::setlocal disableDelayedExpansion & call setVariable complex "' ` ( ) ! \ / [ ] . ^ , ; = ? | < > & *" & setlocal enableDelayedExpansion
 	::setlocal disableDelayedExpansion & call setVariable complex "abc" "123" "x y z"  & setlocal enableDelayedExpansion
 	::%setVar% complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? % " %}%
 	
 	:: delayed expansion is lost here, use of "%var%" requires quotes 
-	echo main: complex = '!complex!'
+	::echo main: complex = '!complex!'
 	
 	:: with delayed expansion regained, no quotes are required for !var!
-	echo main: complex = '!complex!'
+	::echo main: complex = '!complex!'
 	
 	call printVariable complex
 	
