@@ -1,0 +1,1 @@
+VENTOY_IMPORT=https://psychz.dl.sourceforge.net/project/ventoy/v1.1.05/ventoy-1.1.05-windows.zip
