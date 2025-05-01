@@ -5,9 +5,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# DKINSTALL
+::# DKUNINSTALL
 ::#
-:DKINSTALL
+:DKUNINSTALL
 %setlocal%
 	%dk_call% dk_debugFunc 0 
 
@@ -22,5 +22,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0 
 
-	call :DKINSTALL
+	call :DKUNINSTALL
 %endfunction%
