@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "_needle_=%_needle_::=%"
     if "%_needle_:~0,1%" equ "\" set "_needle_=%_needle_:~1%"
 
-    if not "x!_haystack_:%_needle_%=!x" equ "x%_haystack_%x" (
+    if "x!_haystack_:%_needle_%=!x" neq "x%_haystack_%x" (
         if "%~3" neq "" endlocal & (
 			set "dk_isChildPathOf=true"
 			if "%~3" neq "" set "%3=%dk_isChildPathOf%"

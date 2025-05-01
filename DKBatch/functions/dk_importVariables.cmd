@@ -335,7 +335,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	
 	if defined PLUGIN_IMPORT_NAME_LOWER (
 		if defined PLUGIN_GIT_NAME_LOWER (
-			if NOT "!PLUGIN_IMPORT_NAME_LOWER!" equ "!PLUGIN_GIT_NAME_LOWER!" (
+			if "!PLUGIN_IMPORT_NAME_LOWER!" neq "!PLUGIN_GIT_NAME_LOWER!" (
 				%dk_call% dk_warning "PLUGIN_IMPORT_NAME:!PLUGIN_IMPORT_NAME_LOWER! and PLUGIN_GIT_NAME:!PLUGIN_GIT_NAME_LOWER! do not match"
 			)
 		)
@@ -345,7 +345,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	set "CURRENT_PLUGIN="
 	%dk_call% dk_set CURRENT_PLUGIN !PLUGIN_IMPORT_NAME_UPPER!
 	%dk_call% dk_convertToCIdentifier !CURRENT_PLUGIN! CURRENT_PLUGIN 
-	if not "!PLUGIN_IMPORT_NAME_UPPER!" equ "!CURRENT_PLUGIN!" (
+	if "!PLUGIN_IMPORT_NAME_UPPER!" neq "!CURRENT_PLUGIN!" (
 		%dk_call% dk_notice "!PLUGIN_IMPORT_NAME_UPPER! contains non-alphanumeric characters and is changed to !CURRENT_PLUGIN!" 
 	)  
 	rem %dk_call% dk_printVar CURRENT_PLUGIN 									&rem CURRENT_PLUGIN			: ZLIB
@@ -357,7 +357,7 @@ rem ### PLUGIN_IMPORT_NAME_UPPER ###
 	
 	rem ### <PLUGIN>_DIR     ### DO NOT USE GIT_DIR ###
 	set "!CURRENT_PLUGIN!_DIR="
-	if not "!CURRENT_PLUGIN!" equ "GIT" ( 
+	if "!CURRENT_PLUGIN!" neq "GIT" ( 
 		%dk_call% dk_set !CURRENT_PLUGIN!_DIR !PLUGIN_INSTALL_PATH! 
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DIR 							& rem ZLIB_DIR				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	)

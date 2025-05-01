@@ -42,7 +42,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	set "NO_STDOUT=1>nul"
 	set "NO_STDERR=2>nul"
 	set "NO_OUTPUT=1>nul 2>nul"
-	set "exit_status=^!errorlevel^!"
+	set "exit_code=^!errorlevel^!"
 	set "endfunction=exit /b ^!errorlevel^!"
 	set "return=exit /b ^!errorlevel^!"
 	
@@ -56,7 +56,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 
 	::###### Reload Main Script with cmd ######
 	call :dk_reload
-	if not "!DE!" equ "" (
+	if "!DE!" neq "" (
 		echo ERROR: DKBatch requires delayed expansion
 		pause
 		exit 13
@@ -80,7 +80,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	
 	::############ Elevate Permissions ############
 	::set "ENABLE_dk_elevate=1"
-	if not "%ENABLE_dk_elevate%" equ "1" (goto skip_elevate)
+	if "%ENABLE_dk_elevate%" neq "1" (goto skip_elevate)
 		net session >nul 2>&1
 		if %ERRORLEVEL% equ 0 (goto skip_elevate)
 		if "%2" equ "elevated" (set "elevated=1")
@@ -217,7 +217,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_reload
 ::#
 :dk_reload
-	if not "%DKSCRIPT_EXT%" equ ".cmd" (exit /b -1)
+	if "%DKSCRIPT_EXT%" neq ".cmd" (exit /b -1)
 	if defined RELOADED (exit /b -1)
 
 	echo "reloading with /v:on 'delayed expansion',  /k 'keep terminal open' . . . ."
@@ -235,12 +235,15 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::####################################
 	::############ EXIT POINT ############
 	::####################################
-	set "exit_status=%errorlevel%"
+	set "exit_code=%errorlevel%"
 	echo:
-	echo exit_status = %exit_status%
-	echo:
-	if not "%exit_status%" equ "0" pause
-	exit %exit_status%
+	echo exit_code = %exit_code%
+	if "%exit_code%" neq "0" (
+		echo:
+		echo Press any key to exit . . .
+		pause >nul
+	)
+	exit %exit_code%
 
 	::( >NUL reg delete HKCU\Console\digitalknob /f )
 %endfunction%
@@ -250,7 +253,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::#
 :dk_readlink
 %setlocal%
-%dk_call% dk_debugFunc 1 2
+	%dk_call% dk_debugFunc 1 2
     
     set dk_readlink=%1
 	::if not exist "%dk_readlink%" (%return%)

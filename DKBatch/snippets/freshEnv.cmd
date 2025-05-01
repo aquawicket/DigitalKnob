@@ -38,7 +38,7 @@ call :SetFromReg "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environm
 setlocal
 set u=
 call :SetFromReg "HKCU\Environment" Path u
-endlocal&if not "%Path%" equ "" if not "%u%" equ "" set Path=%Path%;%u%
+endlocal&if "%Path%" neq "" if "%u%" neq "" set Path=%Path%;%u%
 
 REM Restore TEMP/TMP
 set TEMP=%save_TEMP%

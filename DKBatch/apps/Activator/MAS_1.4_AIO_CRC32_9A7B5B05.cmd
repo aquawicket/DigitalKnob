@@ -2425,7 +2425,7 @@ if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseS" set KMS38=1
 if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseSN" set KMS38=1
 if "%osedition%" equ "EnterpriseG" set KMS38=1
 if "%osedition%" equ "EnterpriseGN" set KMS38=1
-if not "%instype%" equ "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
+if "%instype%" neq "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
 
 if defined KMS38 (
 call "%~dp0KMS38_Activation_AIO.cmd" /u
@@ -2476,7 +2476,7 @@ if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseS" set KMS38=1
 if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseSN" set KMS38=1
 if "%osedition%" equ "EnterpriseG" set KMS38=1
 if "%osedition%" equ "EnterpriseGN" set KMS38=1
-if not "%instype%" equ "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
+if "%instype%" neq "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
 
 if defined KMS38 (
 call "%~dp0KMS38_Activation_AIO.cmd" /u
@@ -2912,12 +2912,12 @@ set "wlecho=Checking %_2%                        [Service Status -%wl_state%] [S
 set "specho=Checking %_3%                         [Service Status -%sp_state%] [Startup Type -%sp_start_type%]"
 set "wuecho=Checking %_4%                       [Service Status -%wu_state%] [Startup Type -%wu_start_type%]"
 
-if not "%Cl_start_type%" equ "Demand"       (call :DL_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
-if not "%wl_start_type%" equ "Demand"       (call :DL_color "%wlecho%" %Red% & set wlst_e=1) else (echo %wlecho%)
-if not "%sp_start_type%" equ "Delayed-Auto" (call :DL_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
+if "%Cl_start_type%" neq "Demand"       (call :DL_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
+if "%wl_start_type%" neq "Demand"       (call :DL_color "%wlecho%" %Red% & set wlst_e=1) else (echo %wlecho%)
+if "%sp_start_type%" neq "Delayed-Auto" (call :DL_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
 
 if "%wu_start_type%" equ "Disabled" (set "_C=%Red%") else (set "_C=%Gray%")
-if not "%wu_start_type%" equ "Auto"         (call :DL_color "%wuecho%" %_C% & set wust_e=1) else (echo %wuecho%)
+if "%wu_start_type%" neq "Auto"         (call :DL_color "%wuecho%" %_C% & set wust_e=1) else (echo %wuecho%)
 
 echo:
 if defined Clst_e (sc config %_1% start= Demand %nul%       && set Clst_s=%_1%-Demand || set Clst_u=%_1%-Demand )
@@ -2931,10 +2931,10 @@ if defined st_s (echo Changing services Startup Type to       [ %Clst_s%%wlst_s%
 for %%# in (Clst_u,wlst_u,spst_u,wust_u) do if defined %%# set st_u=1
 if defined st_u (call :DL_color "Error in changing Startup Type to       [ %Clst_u%%wlst_u%%spst_u%%wust_u%]" %Red%)
 
-if not "%Cl_state%" equ "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
-if not "%wl_state%" equ "Running" (%_psc% start-service %_2% %nul% && set wl_s=%_2% || set wl_u=%_2% )
-if not "%sp_state%" equ "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
-if not "%wu_state%" equ "Running" (%_psc% start-service %_4% %nul% && set wu_s=%_4% || set wu_u=%_4% )
+if "%Cl_state%" neq "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
+if "%wl_state%" neq "Running" (%_psc% start-service %_2% %nul% && set wl_s=%_2% || set wl_u=%_2% )
+if "%sp_state%" neq "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
+if "%wu_state%" neq "Running" (%_psc% start-service %_4% %nul% && set wu_s=%_4% || set wu_u=%_4% )
 
 for %%# in (Cl_s,wl_s,sp_s,wu_s) do if defined %%# set s_s=1
 if defined s_s (echo Starting services                       [ %Cl_s%%wl_s%%sp_s%%wu_s%] [Successful])
@@ -3034,7 +3034,7 @@ echo %copyfiles% [%SystemRoot%\Temp\_Ticket_Work\] [Successful]
 
 set "GatherMod=Creating modified gatherosstate        "
 
-if not "%arch%" equ "ARM64" (
+if "%arch%" neq "ARM64" (
 rundll32 "%temp_%\slc.dll",PatchGatherosstate %nul%
 if not exist "%temp_%\gatherosstatemodified.exe" (
 call :DL_color "%GatherMod% [Unsuccessful] Aborting" %Red%
@@ -3125,7 +3125,7 @@ call :DL_CheckPermAct
 if defined PermAct goto DL_Act_successful
 
 call :DL_ReTry
-if not "%ErrCode%" equ "" set "Error_Code_=[Error Code %ErrCode%]"
+if "%ErrCode%" neq "" set "Error_Code_=[Error Code %ErrCode%]"
 call :DL_CheckPermAct
 
 :DL_Act_successful
@@ -11203,8 +11203,8 @@ for %%# in (%_1% %_3%) do call :K38_ServiceCheck %%#
 set "CLecho=Checking %_1%                        [Service Status -%Cl_state%] [Startup Type -%Cl_start_type%]"
 set "specho=Checking %_3%                         [Service Status -%sp_state%] [Startup Type -%sp_start_type%]"
 
-if not "%Cl_start_type%" equ "Demand"       (call :K38_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
-if not "%sp_start_type%" equ "Delayed-Auto" (call :K38_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
+if "%Cl_start_type%" neq "Demand"       (call :K38_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
+if "%sp_start_type%" neq "Delayed-Auto" (call :K38_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
 
 echo:
 if defined Clst_e (sc config %_1% start= Demand %nul%       && set Clst_s=%_1%-Demand || set Clst_u=%_1%-Demand )
@@ -11216,8 +11216,8 @@ if defined st_s (echo Changing services Startup Type to       [ %Clst_s%%spst_s%
 for %%# in (Clst_u,spst_u) do if defined %%# set st_u=1
 if defined st_u (call :K38_color "Error in changing Startup Type to       [ %Clst_u%%spst_u%]" %Red%)
 
-if not "%Cl_state%" equ "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
-if not "%sp_state%" equ "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
+if "%Cl_state%" neq "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
+if "%sp_state%" neq "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
 
 for %%# in (Cl_s,sp_s) do if defined %%# set s_s=1
 if defined s_s (echo Starting services                       [ %Cl_s%%sp_s%] [Successful])
@@ -21342,7 +21342,7 @@ set "_PRIDs="
 set "_LicensesPath="
 set "_Integrator="
 for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath" %_Nul6%') do if not errorlevel 1 (set "_InstallRoot=%%b\root")
-if not "%_InstallRoot%" equ "" (
+if "%_InstallRoot%" neq "" (
   for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v PackageGUID" %_Nul6%') do if not errorlevel 1 (set "_GUID=%%b")
   for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration /v ProductReleaseIds" %_Nul6%') do if not errorlevel 1 (set "_ProductIds=%%b")
   set "_Config=HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration"
@@ -21371,7 +21371,7 @@ set "_PR15IDs="
 set "_OSPP15Ready="
 set "_Licenses15Path="
 for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath" %_Nul6%') do if not errorlevel 1 (set "_Install15Root=%%b\root")
-if not "%_Install15Root%" equ "" (
+if "%_Install15Root%" neq "" (
   for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration /v ProductReleaseIds" %_Nul6%') do if not errorlevel 1 (set "_Product15Ids=%%b")
   set "_Con15fig=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration /v ProductReleaseIds"
   set "_PR15IDs=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\ProductReleaseIDs"
@@ -21800,7 +21800,7 @@ goto :GVLKC2R
 :InsLic
 set "_ID=%1Volume"
 set "_pkey="
-if not "%2" equ "" (
+if "%2" neq "" (
 set "_ID=%1Retail"
 set "_pkey=PidKey=%2"
 )
@@ -21817,7 +21817,7 @@ exit /b
 set "_ID=%1Volume"
 set "_patt=%1VL_"
 set "_pkey="
-if not "%2" equ "" (
+if "%2" neq "" (
 set "_ID=%1Retail"
 set "_patt=%1R_"
 set "_pkey=%2"
@@ -23693,7 +23693,7 @@ setlocal EnableDelayedExpansion
 set instype=
 for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if not errorlevel 1 set "instype=%%b"
 
-if not "%instype%" equ "Client" (
+if "%instype%" neq "Client" (
 %ELine%
 echo Unsupported OS version [Server] Detected.
 echo OS Requirement - Windows 10 [17134] 1803 and later builds.

@@ -1,6 +1,6 @@
 @echo off
 
-if not "%~1"=="" (goto runDKJavascript)
+if "%~1" neq "" (goto runDKJavascript)
 :installDKJavascript
 	::#################################################### DigitalKnob DKBatch ########################################################################
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")

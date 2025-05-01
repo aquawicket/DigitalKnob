@@ -61,8 +61,8 @@ if "%~1" equ "" (goto:DKINSTALL)
 	echo %bg_magenta%%white%######## END TEST ####### %APP_NAME%.c ######## END TEST #######%clr%
 	echo:
 
-	set "exit_status=%ERRORLEVEL%"
-	echo exit_status = %exit_status%
+	set "exit_code=%ERRORLEVEL%"
+	echo exit_code = %exit_code%
 	pause
 
 %endfunction%

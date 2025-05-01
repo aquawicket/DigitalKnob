@@ -378,7 +378,7 @@ goto:eof
 	for /f "tokens=1,* delims=:" %%n in ( 'findstr /i /n /r "<?xml.*?>" "%~f1"' ) do for /f "tokens=1,2,* delims=?" %%a in ( "%%~o" ) do for /f "tokens=1,*" %%d in ( "%%b" ) do (
 		set "CMDIZE_ERROR_WSF="
 		if %%n neq 1 set "CMDIZE_ERROR_WSF=1"
-		if not "%%a" equ "<" set "CMDIZE_ERROR_WSF=1"
+		if "%%a" neq "<" set "CMDIZE_ERROR_WSF=1"
 		if defined CMDIZE_ERROR_WSF (
 			call :warn Incorrect XML declaration: it must be at the beginning of the script
 			exit /b 1

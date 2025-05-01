@@ -35,7 +35,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo:
 	for /f "tokens=*" %%g in ('%systemroot%\system32\robocopy.exe "%base_path%" "null" "%filename%" /fp /l /lev:%search_depth% /nc /ndl /njh /njs /ns /s') do (
 		set "string=%%g"
-		if not "!string:%file_pattern%=!" equ "!string!" (
+		if "!string:%file_pattern%=!" neq "!string!" (
 			echo *** %%g
 			set "dk_fileSearch=%%g"
 		) else (

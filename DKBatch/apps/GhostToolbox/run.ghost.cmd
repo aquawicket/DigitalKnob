@@ -59,7 +59,7 @@ set "build=17763.2145"
 )
 @ECHO ON
 @ECHO OFF
-if not "%1" equ "am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
+if "%1" neq "am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 @ECHO ON
 @ECHO OFF
 ::fodhelper
@@ -77,7 +77,7 @@ if not "%1" equ "am_admin" (powershell start -verb runas '%0' am_admin & exit /b
 ::goto hello
 goto skip_hello
 @ECHO ON
-::if not "%1" equ "am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
+::if "%1" neq "am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 
 :firstrun
 @echo off

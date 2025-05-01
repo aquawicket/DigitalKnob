@@ -25,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         for %%a in (%FN%) do set fdate=%%~ta.%%~za.%%~aa
 
         :: Different attributes found?
-        if not "%last_fdate%" equ "%fdate%" (
+        if "%last_fdate%" neq "%fdate%" (
             cls
 			echo Monitoring %FN% for changes
 			echo    last file info = %last_fdate%

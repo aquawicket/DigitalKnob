@@ -37,7 +37,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     :endloop1
 
     :: prepend cache selection if available
-    if exist "%DKCACHE_DIR%\DKBuilder.cache" if not "%_target_app_%" equ "" if not "%_target_triple_%" equ "" if not "%_target_type_%" equ "" (
+    if exist "%DKCACHE_DIR%\DKBuilder.cache" if "%_target_app_%" neq "" if "%_target_triple_%" neq "" if "%_target_type_%" neq "" (
         %dk_call% Array/dk_unshift dk_getDirectories "re-run [%_target_app_% - %_target_triple_% - %_target_type_%]"
         %dk_call% Array/dk_unshift commands "call:runCache"
     )

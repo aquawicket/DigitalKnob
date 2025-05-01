@@ -2,7 +2,7 @@
 :: https://developer.android.com/studio/projects
 
 set "PACKAGE_NAME=com.digitalknob.dk"
-::if not "%1"=="" set PACKAGE_NAME=%~1
+::if "%1" neq "" set PACKAGE_NAME=%~1
 
 
 set APP_ROOT=%~dp0

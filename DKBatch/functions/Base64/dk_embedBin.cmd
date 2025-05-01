@@ -24,12 +24,12 @@ if not defined dk_embedBin_OVERWRITE_OUTPUT			(set "dk_embedBin_OVERWRITE_OUTPUT
 	::if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
 	:: Find OVERWRITE in any of the arguments
 	set "args=%*"
-	if not "X%args:OVERWRITE=%X" equ "X%args%X" (set "OVERWRITE=1")
+	if "X%args:OVERWRITE=%X" neq "X%args%X" (set "OVERWRITE=1")
 	
 
 	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
 	if exist "%outputFile%" (
-		if not "%OVERWRITE%" equ "1" (
+		if "%OVERWRITE%" neq "1" (
 			%dk_call% dk_error "dk_embedBin Cannot embed file. Destiantion already exists and OVERWRITE is not set"
 		)
 		del "%outputFile:/=\%"
@@ -38,7 +38,7 @@ if not defined dk_embedBin_OVERWRITE_OUTPUT			(set "dk_embedBin_OVERWRITE_OUTPUT
 	if "%dk_embedBin_DELETE_CMD_ON_EXTRACT%" equ "1" (
 		set DELETE_CMD_ON_EXTRACT=echo ;;;===,,,del "%outputFile:/=\%"
 	)
-	if not "%dk_embedBin_OVERWRITE_OUTPUT%" equ "1" (
+	if "%dk_embedBin_OVERWRITE_OUTPUT%" neq "1" (
 		set OVERWRITE_OUTPUT=echo ;;;===,,,if exist "%inputFilename%" echo ERROR: outputfile already exists ^& pause ^& exit /b %%errorlevel%%
 	)
 	set "tempCmd=%inputFile%.tmp"

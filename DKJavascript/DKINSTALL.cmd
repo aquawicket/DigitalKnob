@@ -14,14 +14,14 @@ if "%~1" equ "" (goto:DKINSTALL)
 	echo ###### DKJavascript/DKINSTALL.cmd:14 - SHOULD NOT GET HERE ######
 	goto:exitdone
 	:exittrue
-		set "exitcode=%errorlevel%"
+		set "exit_code=%errorlevel%"
 		set "exitbool=true"
 		goto:exitdone
 	:exitfalse
-		set "exitcode=%errorlevel%"
+		set "exit_code=%errorlevel%"
 		set "exitbool=false"
 	:exitdone
-	echo exitcode = %exitcode%
+	echo exit_code = %exit_code%
 	echo exitbool = %exitbool%
 
 %endfunction%

@@ -247,7 +247,7 @@
 
 :# Check Windows version: minimum requirement Windows
 :# 2000, but useful only for Windows XP SP2 and later
-if not "%OS%" equ "Windows_NT"     goto Err9X
+if "%OS%" neq "Windows_NT"     goto Err9X
 ver | find "Windows NT" >NUL && goto ErrNT
 
 :# Mechanism for calling subroutines in this library, either locally or from another script.
@@ -272,7 +272,7 @@ if '%1'=='-call' !ARGS:~1!& exit /b
 :# Mechanism for "sourcing" this library from another script.
 if '%1'=='source' (
   endlocal & endlocal &:# Define everything in the context of the caller script
-  if not "!!" equ "" >&2 echo "%SFULL%" %1 Error: Must be called with DelayedExpansion ENABLED. & exit /b 1
+  if "!!" neq "" >&2 echo "%SFULL%" %1 Error: Must be called with DelayedExpansion ENABLED. & exit /b 1
   set ^"LCALL=call "%SFULL%" call^"	&rem :# This is the full path of this library's ARG0
 ) else (
   set "LCALL=call"
@@ -1470,7 +1470,7 @@ set Exec.Cmd=%Exec.Cmd:">>&"=">"">""&"%
 set Exec.Cmd=%Exec.Cmd:">&"=">""&"%
 :# If there are output redirections, then cancel any attempt at redirecting output to the log file.
 set "Exec.Cmd1=%Exec.Cmd:"=%" &:# Remove quotes in the command string, to allow quoting the whole string.
-if not "%Exec.Cmd1:>=%" equ "%Exec.Cmd1%" set "Exec.Redir="
+if "%Exec.Cmd1:>=%" neq "%Exec.Cmd1%" set "Exec.Redir="
 if defined Exec.Redir set "Exec.NOREDIR=1" &:# make sure child scripts do not try to redirect output again 
 :# Second stage: Convert quoted redirection operators (Ex: ">") to a usable (Ex: >) and a displayable (Ex: ^>) value.
 :# Must be done once for each of the four < > | & operators.
@@ -1796,7 +1796,7 @@ if errorlevel 1 (
 set VAR=before
 if "%VAR%" equ "before" (
   set VAR=after
-  if not "!VAR!" equ "after" goto :EnableExpansionFailed
+  if "!VAR!" neq "after" goto :EnableExpansionFailed
 )
 :# Success
 exit /b 0
@@ -1832,7 +1832,7 @@ if errorlevel 1 (
 set VAR=before
 if "%VAR%" equ "before" (
   set VAR=after
-  if not "!VAR!" equ "after" (
+  if "!VAR!" neq "after" (
     >&2 echo Error: Delayed environment variable expansion must be enabled.
     >&2 echo Please restart your cmd.exe shell with the /V option,
     >&2 echo or set HKLM\Software\Microsoft\Command Processor\DelayedExpansion=1
@@ -1989,7 +1989,7 @@ pushd "%ECHO.DIR%"
 findstr /p /r /a:%~1 "^^##-" "!str!\..\!ECHO.FILE!" nul
 popd
 :# Remove the name of this script from the output. (Dependant on its length.)
-for /l %%n in (1,1,24) do if not "!ECHO.FILE:~%%n!" equ "" <nul set /p "=%ECHO.DEL%"
+for /l %%n in (1,1,24) do if "!ECHO.FILE:~%%n!" neq "" <nul set /p "=%ECHO.DEL%"
 :# Remove the other unwanted characters "\..\: ##-"
 <nul set /p "=%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%"
 :# Append the optional CRLF
@@ -2050,7 +2050,7 @@ echo three
   for /f "delims=" %%s in ('findstr /r "^-" "%ECHO.FULL%"') do set "ECHO.TMP=%%s"
   %ECHOVARS% ECHO.TMP
 )
-  if not "%ECHO.TMP:~1%" equ "" >&2 echo Error: Please remove all CRLF after the trailing -
+  if "%ECHO.TMP:~1%" neq "" >&2 echo Error: Please remove all CRLF after the trailing -
 
 :#----------------------------------------------------------------------------#
 
@@ -2227,7 +2227,7 @@ if "%~2" equ "" %RETURN% 1 &:# Missing argument
 set "%~2=0"
 if defined %~1 for /l %%b in (12,-1,0) do (
   set /a "i=(%~2|(1<<%%b))-1"
-  for %%i in (!i!) do if not "!%~1:~%%i,1!" equ "" set /a "%~2=%%i+1"
+  for %%i in (!i!) do if "!%~1:~%%i,1!" neq "" set /a "%~2=%%i+1"
 )
 %RETURN%
 
@@ -2236,7 +2236,7 @@ setlocal EnableDelayedExpansion
 set "len=0"
 if defined %~1 for /l %%b in (12,-1,0) do (
   set /a "i=(len|(1<<%%b))-1"
-  for %%i in (!i!) do if not "!%~1:~%%i,1!" equ "" set /a "len=%%i+1"
+  for %%i in (!i!) do if "!%~1:~%%i,1!" neq "" set /a "len=%%i+1"
 )
 endlocal & if "%~2" neq "" set "%~2=%len%"
 exit /b
@@ -2334,7 +2334,7 @@ set "I=0"
 :strchr.loop
 set "C=!%~1:~%I%,1!"
 if not defined C set "I=-1" & goto :strchr.exit
-if not "%C%%C%" equ "%C0%%C0%" set /a "I+=1" & goto :strchr.loop
+if "%C%%C%" neq "%C0%%C0%" set /a "I+=1" & goto :strchr.loop
 :strchr.exit
 endlocal & if "%~3" neq "" set "%~3=%I%"
 exit /b
@@ -2359,7 +2359,7 @@ set "I=0"
 :strstr.loop
 if %I% GTR %IMAX% set "I=-1" & goto :strstr.exit
 set "SS=!%~1:~%I%,%L%!"
-if not "!SS!" equ "!%~2!" set /a "I+=1" & goto :strstr.loop
+if "!SS!" neq "!%~2!" set /a "I+=1" & goto :strstr.loop
 :strstr.exit
 %ECHO.D% return %~3=%I%
 endlocal & if "%~3" neq "" set "%~3=%I%"
@@ -2571,7 +2571,7 @@ for /F "delims==" %%v in ('set $_ 2^>NUL') do set "%%v=" &:# Clear existing $_XX
 :# $_=input  $f=Termination flag  $v=output value  $r=replacement var
 set "$_=!%~1!." & set "$f=1" & set "$v=" & set "$r=%~2"
 if /i "!$_:%$_%=%$_%!" equ "!$_!" %RETURN% 0	&:# No = sign in $_. Return now to save time
-if defined $r if not "!$r:~0,1!" equ "=" (set "$r=!%~2!") else set "$r=!$r:~1!" &:# $r=replacement value
+if defined $r if "!$r:~0,1!" neq "=" (set "$r=!%~2!") else set "$r=!$r:~1!" &:# $r=replacement value
 set "$o=%~3" & if not defined $o set "$o=%~1"
 for /L %%i in (0,1,256) do if defined $f (
   for /F "delims==" %%a in ('set $_') do (
@@ -2801,7 +2801,7 @@ set RETVAR=%~2
 if "%RETVAR%" equ "" set RETVAR=%~1
 for %%c in (" " "&" "(" ")" "@" "," ";" "[" "]" "{" "}" "=" "'" "+" "`" "~") do (
   :# Note: Cannot directly nest for loops, due to incorrect handling of /f in the inner loop.
-  cmd /c "for /f "tokens=1,* delims=%%~c" %%a in (".%%P%%.") do @if not "%%b" equ "" exit 1"
+  cmd /c "for /f "tokens=1,* delims=%%~c" %%a in (".%%P%%.") do @if "%%b" neq "" exit 1"
   if errorlevel 1 (
     set P="%P%"
     goto :condquote_ret
@@ -3290,8 +3290,8 @@ goto:eof
 :path_depth1
 set RETVAL=0
 for /f "tokens=1* delims=\" %%i in ("%~1") do (
-  if not "%%j" equ "" call :path_depth1 "%%j"
-  if not "%%i" equ "" set /a RETVAL=RETVAL+1
+  if "%%j" neq "" call :path_depth1 "%%j"
+  if "%%i" neq "" set /a RETVAL=RETVAL+1
 )
 goto:eof
 
@@ -3318,7 +3318,7 @@ for /f "delims=" %%a in ("%~a1") do set "%~2=%%~a"
 exit /b
 
 :is_dir pathname       -- Check if a pathname refers to an existing directory
-for /f "tokens=1,2 delims=d" %%a in ("-%~a1") do if not "%%~b" equ "" exit /b 0
+for /f "tokens=1,2 delims=d" %%a in ("-%~a1") do if "%%~b" neq "" exit /b 0
 exit /b 1
 
 :is_dir2 pathname       -- Check if a pathname refers to an existing directory
@@ -3420,7 +3420,7 @@ if "%RETVAR%" equ "" set "RETVAR=RETVAL"
 set "NAME=!%~1!"
 :basename.trim_path
 set "NAME=%NAME:*\=%"
-if not "%NAME%" equ "%NAME:\=%" goto :basename.trim_path
+if "%NAME%" neq "%NAME:\=%" goto :basename.trim_path
 %UPVAR% %RETVAR%
 set "%RETVAR%=%NAME%"
 %RETURN%
@@ -3607,7 +3607,7 @@ if errorlevel 1 (
 set VAR=before
 if "%VAR%" equ "before" (
   set VAR=after
-  if not "!VAR!" equ "after" (
+  if "!VAR!" neq "after" (
     >&2 echo Error: Failed to enable delayed environment variable expansion.
     >&2 echo This script requires Windows XP or later.
     endlocal & set "RETVAL=1" & goto:eof
@@ -3991,11 +3991,11 @@ setlocal EnableExtensions EnableDelayedExpansion
 set "NUM1="
 for /f "tokens=* delims=0" %%a in ("%~1") do set "NUM1=%%a" &:# Trim left 0s
 if not defined NUM1 set "NUM1=0"
-if not "%NUM1%" equ "%~1" %ECHOVARS.D% NUM1
+if "%NUM1%" neq "%~1" %ECHOVARS.D% NUM1
 set "NUM2="
 for /f "tokens=* delims=0" %%a in ("%~2") do set "NUM2=%%a" &:# Trim left 0s
 if not defined NUM2 set "NUM2=0"
-if not "%NUM2%" equ "%~2" %ECHOVARS.D% NUM2
+if "%NUM2%" neq "%~2" %ECHOVARS.D% NUM2
 if %NUM1% LSS %NUM2% endlocal & set "%~3=<" & exit /b 0
 if %NUM1% GTR %NUM2% endlocal & set "%~3=>" & exit /b 0
 endlocal & set "%~3==" & exit /b 0
@@ -4016,11 +4016,11 @@ for /f "delims=.-_ tokens=1,2,3" %%i in ("%~2") do (
 if not defined V1MAJOR exit /b 1
 if not defined V2MAJOR exit /b 1
 call :compare_vernum "%V1MAJOR%" "%V2MAJOR%" DIF
-if not "%DIF%" equ "=" endlocal & set "%~3=%DIF%" & exit /b 0
+if "%DIF%" neq "=" endlocal & set "%~3=%DIF%" & exit /b 0
 call :compare_vernum "%V1MINOR%" "%V2MINOR%" DIF
-if not "%DIF%" equ "=" endlocal & set "%~3=%DIF%" & exit /b 0
+if "%DIF%" neq "=" endlocal & set "%~3=%DIF%" & exit /b 0
 call :compare_vernum "%V1PATCH%" "%V2PATCH%" DIF
-if not "%DIF%" equ "=" endlocal & set "%~3=%DIF%" & exit /b 0
+if "%DIF%" neq "=" endlocal & set "%~3=%DIF%" & exit /b 0
 endlocal  & set "%~3==" & exit /b 0
 
 :#----------------------------------------------------------------------------#
@@ -4052,7 +4052,7 @@ for /f "delims=" %%l in ('netsh advfirewall firewall show rule name^=%1 verbose'
   for /f "tokens=1,* delims=:" %%a in ('echo.%%l') do (
     set "RULE.NAME=%%a"  &:# Property name
     set "RULE.VALUE=%%b" &:# Property value
-    if not "%%b" equ "" (
+    if "%%b" neq "" (
       if "!RULE.NAME!" equ "Rule Name" ( :# It's a new rule
       	set "RULE.I=!RULE.N!"
 	set "RULE.LIST=!RULE.LIST! !RULE.I!"
@@ -4123,7 +4123,7 @@ for /f "tokens=1,2" %%a in ('nslookup %NAME% 2^>NUL') do (
   %ECHOVARS.D% A B
   set "ADDRESS=%%b"			&REM Normally the address is the second token.
   if "%%b" equ "" set "ADDRESS=%%a"	&REM But for final addresses it may be the first.
-  if not "!A!" equ "!A::=!" set /a "NFIELD=NFIELD+1" &REM Count lines with a NAME: header.
+  if "!A!" neq "!A::=!" set /a "NFIELD=NFIELD+1" &REM Count lines with a NAME: header.
   if "!NFIELD!" equ "0" set "ADDRESS="	&REM The first two values are for the DNS server, not for the target server.
   if "!NFIELD!" equ "1" set "ADDRESS="
   if "!NFIELD!" equ "2" set "ADDRESS="
@@ -4226,7 +4226,7 @@ set "SEPARATOR="
   set "LINE=!LINE:~4!"
   :# But extra lines of multi-lined values are indented by >20 spaces.
   set "HEAD2=!LINE:~0,4!"
-  if "!HEAD!" equ "    " if not "!HEAD2!" equ "    " (
+  if "!HEAD!" equ "    " if "!HEAD2!" neq "    " (
     :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB. 
     :# Change the 4-spaces around the REG_XX type word to a TAB.
     set "TOKENS=!LINE:    =	!"
@@ -4300,7 +4300,7 @@ set "RETCODE=1"
   set "LINE=!LINE:~4!"
   :# But extra lines of multi-lined values are indented by >20 spaces.
   set "HEAD2=!LINE:~0,4!"
-  if "!HEAD!" equ "    " if not "!HEAD2!" equ "    " (
+  if "!HEAD!" equ "    " if "!HEAD2!" neq "    " (
     :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB. 
     :# Change the 4-spaces around the REG_XX type word to a TAB.
     set "TOKENS=!LINE:    =	!"
@@ -4497,7 +4497,7 @@ call :extensions.show
 %UPVAR% RETVAL
 :# Do not use parenthesis, in case there are some in the return value
 if "!!" equ "" set "RETVAL=!ARGS:* =!"
-if not "!!" equ "" set "RETVAL=%ARGS:* =%"
+if "!!" neq "" set "RETVAL=%ARGS:* =%"
 %RETURN% %~1
 
 :noop3d %1=retcode %2=string to return in RETVAL
@@ -4638,7 +4638,7 @@ set "N=-1"
   ) else if defined EscapeCmdString.NE["!C!"] ( :# Characters that need escaping outside of quotes
     if "!QUOTE_MODE!" equ "0" set "RESULT=!RESULT!!H0:~1!"
   )
-  if not "!C!" equ "^" set "ESCAPE=0"
+  if "!C!" neq "^" set "ESCAPE=0"
   set "RESULT=!RESULT!!C!"
   %ECHOSVARS.D% RESULT
 goto :EscapeCmdString.loop
@@ -4678,7 +4678,7 @@ for %%e in (quot lt gt amp vert rpar lpar rbrack lbrack sp bs cr lf hat) do (
 :# So use the % character instead
 set "ARG=!ARG:%%=[percnt]!" &:# Make sure there are no % characters in ARG
 set "ARG2=!ARG:[excl]=%%!"
-if not "!ARG2!" equ "!ARG!" ( :# If ARG does contain ! characters
+if "!ARG2!" neq "!ARG!" ( :# If ARG does contain ! characters
   set "ARG="		  &:# Then individually convert each % to an !
   set "N=0"
   :ConvertEntities.loop

@@ -29,6 +29,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
    
+	%dk_call% dk_echo  "Pause with default message"
     %dk_call% dk_pause
     %dk_call% dk_pause "Pause with a custom message"
     %dk_call% dk_pause "%red%Pause %green%with %blue%colorful %yellow%message%clr%"

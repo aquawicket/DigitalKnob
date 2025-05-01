@@ -35,7 +35,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         CHOICE /T 1 /C "yq" /D y > nul
 
         :: User pressed Q? just quit
-        if not "%errorlevel%" equ "1" (goto :eof)
+        if "%errorlevel%" neq "1" (goto :eof)
 
         :: Repeat until file changed, timeout elapsed, user quits or Ctrl-C
 		if %seconds% gtr %timeout% (

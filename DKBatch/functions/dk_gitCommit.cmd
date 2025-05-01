@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
     %dk_call% dk_exec "%GIT_EXE%" -C %DKBRANCH_DIR% config --global credential.helper
 	set "STORE=%dk_exec%"
-    if not "%STORE%" equ "store" (
+    if "%STORE%" neq "store" (
         "%GIT_EXE%" -C %DKBRANCH_DIR% config --global credential.helper store
         echo "git credential.helper is now set to store"
     )

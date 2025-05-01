@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	for /f "usebackq delims=" %%a in (`%REG_EXE% query "%_reg_path_:/=\%"`) do (
 		set "line=%%a"
-		if not "x!line:%~2=!x" equ "x!line!x" (
+		if "x!line:%~2=!x" neq "x!line!x" (
 			exit /b 0
 		)
 	)

@@ -105,10 +105,10 @@ set "FATAL=DKERROR ERROR %1 "
 ::set "REQUIRED_3=if [%%3]==[] echo [91m	%~n0(%*): argument 3 is invalid [0m & goto:eof"
 
 set caller=%0
-if not "%1" equ "" set "caller=%~1"
+if "%1" neq "" set "caller=%~1"
 ::if "%1" equ "" ( set "caller=%0" ) else ( set "caller=%1" )
 
-if not "%STAY_OPEN%" equ "" (
+if "%STAY_OPEN%" neq "" (
 	if not defined in_subprocess (cmd /k set in_subprocess=y ^& "%caller%" %ALL_BUT_FIRST%) & exit )
 )
 

@@ -227,4 +227,4 @@ set "TEST_VAR=this is a test variable"
 ::[ "$@" -ne "" ] && "$@"
 ::main "$@"
 ::
-::#exit $?  #exitcode
+::#exit $?  #exit_code

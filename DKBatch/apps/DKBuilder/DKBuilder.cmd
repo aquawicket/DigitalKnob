@@ -34,7 +34,7 @@ exit /b %errorlevel%
 setlocal enableDelayedExpansion
 	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
 		set "str=%%a"
-		if not "x!str:%~2=!x" equ "x!str!x" (exit /b 0)
+		if "x!str:%~2=!x" neq "x!str!x" (exit /b 0)
 	)
     exit /b 1
 %endfunction%

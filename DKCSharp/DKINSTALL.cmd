@@ -63,7 +63,7 @@ if "%~1" equ "" (goto DKINSTALL)
 
 
 :DKINSTALL
-	if not "%~1"=="" (goto:eof)
+	if "%~1" neq "" (goto:eof)
 	
 	echo Installing DKCSharp . . .
 	

@@ -26,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not exist "%_from_%" (%dk_call% dk_error "dk_copy:'%_from_%' not found")
 
 	if exist "%_to_%" (
-		if not "%OVERWRITE%" equ "1" (
+		if "%OVERWRITE%" neq "1" (
 			%dk_call% dk_error "dk_copy Cannot copy file. Destiantion already exists and OVERWRITE is not set"
 		)
 		%dk_call% dk_delete %_to_%

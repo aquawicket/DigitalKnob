@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_haystack_=%~1"
 	set "_needle_=%~2"
 	
-	if not "XXX!_haystack_:%_needle_%=!XXX" equ "XXX%_haystack_%XXX" (
+	if "XXX!_haystack_:%_needle_%=!XXX" neq "XXX%_haystack_%XXX" (
 		set "_haystack_="
 		set "_needle_="
 		endlocal & (

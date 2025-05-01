@@ -73,7 +73,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" pull origin %destination%
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" merge --no-ff --no-commit %branch%
 
-	if NOT "%ERRORLEVEL%" equ "0" (
+	if "%ERRORLEVEL%" neq "0" (
 	:conflicts
 		echo THERE WAS AN ERROR MERGING.
 		echo You will need to fix any existing conflicts to complete the merge.
@@ -86,7 +86,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo Pushing merge to %destination%
 	pause
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" commit -a -m "Merge %branch% Branch in to %destination%"
-	if NOT "%ERRORLEVEL%" equ "0" (
+	if "%ERRORLEVEL%" neq "0" (
 		echo THERE WAN AN ERROR COMMITING.
 		goto :conflicts
 	) 

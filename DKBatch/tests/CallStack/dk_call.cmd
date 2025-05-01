@@ -48,7 +48,7 @@
 	
 	::###### Print function entry #####
 	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
-	if not "%_codepage_%" equ "65001" (chcp 65001>nul)
+	if "%_codepage_%" neq "65001" (chcp 65001>nul)
 	echo %pad%╚═► !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
 	call :printStackVariables
 	::##################################

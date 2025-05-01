@@ -22,7 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 																					::# $_=input  $f=Termination flag  $v=output value  $r=replacement var
 	set "$_=!%~1!." & set "$f=1" & set "$v=" & set "$r=%~2"
 ::	if /i "!$_:%$_%=%$_%!" equ "!$_!" exit /b 0										&::# No = sign in $_. Return now to save time
-	if defined $r if not "!$r:~0,1!" equ "=" (set "$r=!%~2!") else set "$r=!$r:~1!" 	&::# $r=replacement value
+	if defined $r if "!$r:~0,1!" neq "=" (set "$r=!%~2!") else set "$r=!$r:~1!" 	&::# $r=replacement value
 	set "$o=%~3" & if not defined $o set "$o=%~1"
 	for /L %%i in (0,1,256) do if defined $f (
 		for /F "delims==" %%a in ('set $_') do (

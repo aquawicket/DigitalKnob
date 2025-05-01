@@ -14,7 +14,7 @@ echo: & echo %bg_blue%-^> Test/Test/dk_test(%*)%clr%
 	
 	echo ################# Test/Test/dk_test.cmd ################
 						(echo            ###### cmd variables ######)
-	if not "%~0" equ ""	(echo                      0 = '%~0')
+	if "%~0" neq ""		(echo                      0 = '%~0')
 						(echo                      * = '%*')
 	if "%~1" neq ""		(echo                      1 = '%~1')
 	if "%~2" neq ""		(echo                      2 = '%~2')

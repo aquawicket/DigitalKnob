@@ -21,7 +21,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         for %%a in (%_file_%) do set fdate=%%~ta.%%~za.%%~aa
 
         :: Different attributes found?
-        if not "%last_fdate%" equ "%fdate%" (
+        if "%last_fdate%" neq "%fdate%" (
             cls
 			echo Monitoring %_file_% for changes
 			echo    last file info = !last_fdate!
@@ -36,7 +36,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         CHOICE /T 1 /C "yq" /D y > nul
 
         :: User pressed Q? just quit
-        if not "%errorlevel%" equ "1" (goto :eof)
+        if "%errorlevel%" neq "1" (goto :eof)
 
         :: Repeat until user quits or Ctrl-C
     goto watchFile_loop

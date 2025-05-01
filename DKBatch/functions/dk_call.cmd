@@ -14,7 +14,7 @@ if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 ::# dk_call(command args)
 ::#
 :dk_call
-	if "%~1" equ "" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13)
+	if "%~1" equ "" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit -1)
 	
 	:: don't add these functions to the callstack, just call them
 	if "%~1" equ "init"					(call :%* & exit /b !errorlevel!)
@@ -93,9 +93,9 @@ exit /b %LAST_STATUS%
 		^& call set %%_line_:dk.gbl.=%%) 2^>nul
 
 	::set dk_time=(call echo %%time%%)
-	::set checkError=(if not "!errorlevel!" equ "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
+	::set checkError=(if "!errorlevel!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
 
-::	set checkError=(if not "!errorlevel!" equ "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
+::	set checkError=(if "!errorlevel!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
 
 ::	set endfunction=exit /b !errorlevel!)
 ::	set return=exit /b !errorlevel!)
@@ -125,11 +125,11 @@ exit /b !errorlevel!
 ::# :dk_call_PRINT_ENTRY
 ::#
 :dk_call_PRINT_ENTRY
-	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X" equ "X%dk_call_IGNORE%X" (%endfunction%)
+	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%endfunction%)
 	call :updateIndent
 
 ::	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
-::	if not "%_codepage_%" equ "65001" chcp 65001>nul
+::	if "%_codepage_%" neq "65001" chcp 65001>nul
 ::	echo %pad% !__FUNC__!(!__ARGV__!)
 
 	echo %pad%È !__FUNC__!(!__ARGV__!)
@@ -141,7 +141,7 @@ exit /b !errorlevel!
 ::# :dk_call_PRINT_EXIT
 ::#
 :dk_call_PRINT_EXIT
-	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X" equ "X%dk_call_IGNORE%X" (%endfunction%)
+	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%endfunction%)
 	call :updateIndent
 	::echo %pad% !__FUNC__!(!__ARGV__!)
 	::echo %pad%

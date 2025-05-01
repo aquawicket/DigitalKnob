@@ -109,7 +109,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     
 ::  %setlocal%
 ::  set "var=!var:%%%%=_!"
-::  if not "!var!" equ "!org!" %dk_call% dk_echo "%% characters removed
+::  if "!var!" neq "!org!" %dk_call% dk_echo "%% characters removed
 ::  set "org=!var!"
 ::  endlocal & set "org=%org%"
     
