@@ -4,18 +4,21 @@ include_guard()
 
 
 ##################################################################################
-# dk_basename(path, rtn_var)
+# dk_basename(<path>, <rtn_var:optional>)
 #
 #
-function(dk_basename path rtn_var)
-	dk_debugFunc(2)
+function(dk_basename)
+	dk_debugFunc(1 2)
 	
-	#dk_getArg(0 path)
-	#dk_getArg(1 rtn_var)
+	set (path 		"${ARGV0}")
+	set (rtn_var	"${ARGV1}")
 	
 	get_filename_component(fullpath ${path} ABSOLUTE)
-	get_filename_component(basename "${fullpath}" NAME)
-	set(${rtn_var} ${basename} PARENT_SCOPE)
+	get_filename_component(dk_basename "${fullpath}" NAME)
+	set(dk_basename ${dk_basename} PARENT_SCOPE)
+	if(rtn_var)
+		set(${rtn_var} ${dk_basename} PARENT_SCOPE)
+	endif()
 endfunction()
 
 
@@ -26,12 +29,15 @@ endfunction()
 function(DKTEST) 
 	dk_debugFunc(0)
 	
-	dk_basename("/path/to/a/filename.txt" basename)
-	dk_info("basename of /path/to/a/filename.txt = ${basename}")
+	dk_echo("")
+	dk_basename("/path/to/a/filename.txt")
+	dk_info("basename of /path/to/a/filename.txt = ${dk_basename}")
 	
-	dk_basename("C:/Windows/System32" basename)
-	dk_info("basename of C:/Windows/System32 = ${basename}")
+	dk_echo("")
+	dk_basename("C:/Windows/System32")
+	dk_info("basename of C:/Windows/System32 = ${dk_basename}")
 	
-	dk_basename("C:/Windows/System32/" basename)
-	dk_info("basename of C:/Windows/System32/ = ${basename}")
+	dk_echo("")
+	dk_basename("C:/Windows/System32/" myBasename)
+	dk_info("basename of C:/Windows/System32/ = ${myBasename}")
 endfunction()
