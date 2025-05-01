@@ -1,8 +1,8 @@
 dk_DEBUG=1
 dk_call_IGNORE=dk_debugFunc;dk_echo;
-dk_call_PRINTCALLS=0
-dk_call_PRINTENTRY=0
-dk_call_PRINTEXIT=0
+dk_call_PRINT_CALLS=0
+dk_call_PRINT_ENTRY=0
+dk_call_PRINT_EXIT=0
 dk_embedBin_DELETE_CMD_ON_EXTRACT=0
 # dk_evalDKC_DEFAULT_TARGET_ARCH=cosmocc
 # dk_evalDKC_DEFAULT_TARGET_ENV=cosmocc

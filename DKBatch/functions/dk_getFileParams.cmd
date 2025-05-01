@@ -37,5 +37,5 @@ if not defined dk_getAllFileParams_PRINT_VARIABLES (set "dk_getAllFileParams_PRI
 
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_getFileParams %DKBRANCH_DIR%/DKBatch/apps/DKBuilder/dkconfig.txt
-	%dk_call% dk_printVar dk_call_PRINTCALLS
+	%dk_call% dk_printVar dk_call_PRINT_CALLS
 %endfunction%

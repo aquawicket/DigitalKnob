@@ -4,13 +4,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-::###### SETTINGS ######
-if not defined dk_call_PRINTCALLS	(set "dk_call_PRINTCALLS=0") 
-if not defined dk_call_PRINTENTRY	(set "dk_call_PRINTENTRY=0")
-if not defined dk_call_PRINTEXIT	(set "dk_call_PRINTEXIT=0") 
+::######################## dk_call settings ##########################
+if not defined dk_call_PRINT_CALLS	(set "dk_call_PRINT_CALLS=0") 
+if not defined dk_call_PRINT_ENTRY	(set "dk_call_PRINT_ENTRY=0")
+if not defined dk_call_PRINT_EXIT	(set "dk_call_PRINT_EXIT=0")
+if not defined dk_call_PRINT_SCOPE	(set "dk_call_PRINT_SCOPE=0") 
 if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;") 
-
-
 ::####################################################################
 ::# dk_call(command args)
 ::#
@@ -41,7 +40,7 @@ if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 	call :pushStack %*
 
 	::###### Print function entry ####
-	if "%dk_call_PRINTENTRY%" equ "1" (call :dk_call_PRINTENTRY)
+	if "%dk_call_PRINT_ENTRY%" equ "1" (call :dk_call_PRINT_ENTRY)
 
 	if %LVL% lss 1 (exit /b !errorlevel!)
 
@@ -54,7 +53,7 @@ if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 	)
 
 ::###### Entry ############################################################################################
-	if "%dk_call_PRINTCALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
+	if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__:/=\% %__ARGV__% && (
 		set "LAST_STATUS=!errorlevel!"
@@ -63,7 +62,7 @@ if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 ::###### Exit #############################################################################################
 
 	::###### Print function exit ######
-	if "%dk_call_PRINTEXIT%" equ "1" (call :dk_call_PRINTEXIT)
+	if "%dk_call_PRINT_EXIT%" equ "1" (call :dk_call_PRINT_EXIT)
 
 	call :popStack
 exit /b %LAST_STATUS%
@@ -75,7 +74,18 @@ exit /b %LAST_STATUS%
 ::# :init
 ::#
 :init
+	set "setlocal=setlocal EnableDelayedExpansion
+	::###### _SCOPE ######
+	if "%dk_call_PRINT_SCOPE%" equ "1" (
+		(set "_SCOPE_=DK")
+		(set /a "_SCOPE_LVL_=0")
+		echo SCOPE: !_SCOPE_LVL_!:!_SCOPE_!
+		(set "setlocal=setlocal EnableDelayedExpansion & (set _SCOPE_=^!__FUNC__^!) & (set /a _SCOPE_LVL_+=1) & echo SCOPE: ^!_SCOPE_LVL_^!:^!_SCOPE_^!")
+		rem set "setlocal=setlocal EnableDelayedExpansion & (set _SCOPE_=^!_SCOPE_^!-^!__FUNC__^!) & echo SCOPE: ^!_SCOPE_^!"
+	)
+
 	set "dk_call=call dk_call"
+	
 	set globalize=(for /F "delims=" %%a in ('set dk.') do ^
 		endlocal^
 		^& call set _line_=%%a^
@@ -89,7 +99,7 @@ exit /b %LAST_STATUS%
 
 ::	set endfunction=exit /b !errorlevel!)
 ::	set return=exit /b !errorlevel!)
-
+	
 	set endfunction=(call dk_return^& exit /b ^!errorlevel^!)
 	set return=(call dk_return^& exit /b ^!errorlevel^!)
 
@@ -112,9 +122,9 @@ exit /b !errorlevel!
 exit /b !errorlevel!
 
 ::####################################################################
-::# :dk_call_PRINTENTRY
+::# :dk_call_PRINT_ENTRY
 ::#
-:dk_call_PRINTENTRY
+:dk_call_PRINT_ENTRY
 	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X" equ "X%dk_call_IGNORE%X" (%endfunction%)
 	call :updateIndent
 
@@ -128,9 +138,9 @@ exit /b !errorlevel!
 exit /b !errorlevel!
 
 ::####################################################################
-::# :dk_call_PRINTEXIT
+::# :dk_call_PRINT_EXIT
 ::#
-:dk_call_PRINTEXIT
+:dk_call_PRINT_EXIT
 	if defined dk_call_IGNORE if not "X!dk_call_IGNORE:%__FUNC__%=!X" equ "X%dk_call_IGNORE%X" (%endfunction%)
 	call :updateIndent
 	::echo %pad% !__FUNC__!(!__ARGV__!)

@@ -8,6 +8,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# DK(<DKSCRIPT_PATH>, <DKSCRIPT_ARGS>)
 ::#
 :DK
+	
 	::if not exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 
 	::### DKSHELL_PATH ###
@@ -35,8 +36,9 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 
 	::###### PATH ######
 	set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
-
-	set "setlocal=setlocal EnableDelayedExpansion"
+	
+	::###### _SCOPE ######
+	set "setlocal=setlocal EnableDelayedExpansion
 	set "NO_STDOUT=1>nul"
 	set "NO_STDERR=2>nul"
 	set "NO_OUTPUT=1>nul 2>nul"

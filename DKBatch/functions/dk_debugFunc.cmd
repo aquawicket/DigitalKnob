@@ -37,15 +37,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   <TIMESTAMP>
 ::#   
 :dk_debugFunc
-%setlocal%	
+setlocal EnableDelayedExpansion
 	
 	if "%__FUNC__%" equ "dk_debugFunc" %endfunction%
 	if not defined __FUNC__ (%endfunction%)
 	
     :: ###### VALIDATE ARGUMENTS ######
-    if "%~1" equ ""													(%dk_call% dk_fatal "%FUNC%(%ARGV%): dk_debugFunc ArgsMin ArgsMax is not set.")
+    if "%~1" equ ""												(%dk_call% dk_fatal "%FUNC%(%ARGV%): dk_debugFunc ArgsMin ArgsMax is not set.")
     if "%~1" neq ""	if defined __ARGC__ if %__ARGC__% lss %~1	(%dk_call% dk_fatal "%FUNC%(%ARGV%): not enough arguments. Minimum is %~1, got %__ARGC__%")
-    if "%~2" equ ""		if defined __ARGC__ if %__ARGC__% gtr %~1	(%dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~1, got %__ARGC__%")
+    if "%~2" equ ""	if defined __ARGC__ if %__ARGC__% gtr %~1	(%dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~1, got %__ARGC__%")
     if "%~2" neq ""	if defined __ARGC__ if %__ARGC__% gtr %~2	(%dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~2, got %__ARGC__%")
 
 %endfunction%
