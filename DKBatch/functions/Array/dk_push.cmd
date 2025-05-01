@@ -21,7 +21,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 ::#
 :dk_push
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 2
 
 	%dk_call% Array/dk_length %~1
@@ -34,7 +34,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% Array/dk_push myArrayA "a b c"

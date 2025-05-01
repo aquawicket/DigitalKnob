@@ -43,7 +43,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	(set G#1=196)

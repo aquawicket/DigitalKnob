@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_createFunctionList
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     :: create a list of all dk_functions and store them in _functionList_
@@ -33,7 +33,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_createFunctionList

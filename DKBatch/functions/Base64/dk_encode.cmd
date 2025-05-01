@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	https://github.com/base64code/examples
 ::#
 :dk_encode
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 3
 
 	set "inputFile=%~1"
@@ -35,7 +35,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_selectFile

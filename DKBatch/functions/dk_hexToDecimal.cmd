@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToDecimal
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 
     set "hex=%~1"
@@ -28,7 +28,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_hexToDecimal 0x1b

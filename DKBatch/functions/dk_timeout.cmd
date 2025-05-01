@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    Pause execution and wait for <enter> keypress or until <n> amount of seconds have passed to continue 
 ::#
 :dk_timeout
-setlocal
+%setlocal%
     %dk_call% dk_debugFunc 0 1
     
 	if "%~1" equ "" (set "seconds=10") else (set "seconds=%~1")
@@ -31,7 +31,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
    
     %dk_call% dk_timeout 1

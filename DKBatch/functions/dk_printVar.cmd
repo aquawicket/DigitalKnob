@@ -12,7 +12,7 @@ if "%dk_printVar_ENABLE%" neq "1" (%return%)
 ::#
 ::#
 :dk_printVar
-setlocal
+%setlocal%
     ::%dk_call% dk_debugFunc 1
     
     %dk_call% dk_isVariableName "%~1" || dk_return
@@ -69,7 +69,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 

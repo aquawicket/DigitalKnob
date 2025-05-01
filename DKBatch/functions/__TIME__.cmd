@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :__TIME__
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 ::    nanoseconds="$(date +%s%N)"
@@ -114,7 +114,7 @@ setlocal
 %endfunction%
 
 :::dk_getHour
-::::setlocal
+::::%setlocal%
 	%dk_call% dk_debugFunc 0
 :: 
 ::    set hour=%time:~0,2%
@@ -125,7 +125,7 @@ setlocal
     
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     echo date time = %date% %time%

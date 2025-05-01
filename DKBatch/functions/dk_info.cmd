@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    @message - The message to print
 ::#
 :dk_info
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1
     %dk_call% dk_log INFO "%~1"
 %endfunction%
@@ -22,7 +22,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_info "test string from dk_info"

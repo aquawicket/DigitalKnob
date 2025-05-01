@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   Reference: https://stackoverflow.com/questions/34451444/how-to-get-a-returned-value-from-powershell-and-get-it-in-a-batch-file
 ::#
 :dk_callDKBash
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 99
 
 	::set "USE_WSL=1"
@@ -87,7 +87,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_callDKBash dk_test "arg 1" "arg 2" "arg 3"

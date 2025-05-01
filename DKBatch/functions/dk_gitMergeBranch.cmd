@@ -44,7 +44,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_gitMergeBranch
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	:: Choose the repositoy and the branch to merge in to a destination(usually main)
@@ -116,7 +116,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_gitMergeBranch

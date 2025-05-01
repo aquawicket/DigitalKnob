@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_commandExists(<command> rtn_var)
 ::#
 :dk_commandExists
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
  
     %ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
@@ -30,7 +30,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     ::###### Using if return value

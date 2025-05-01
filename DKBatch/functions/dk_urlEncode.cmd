@@ -34,7 +34,7 @@ setlocal EnableDelayedExpansion
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	set "url=https://example.com/api?query=test^&test=test"

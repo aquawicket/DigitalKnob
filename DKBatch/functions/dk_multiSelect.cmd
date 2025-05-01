@@ -36,7 +36,7 @@ echo %rtn_var%
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0 99
  
     %dk_call% dk_multiSelect rtn_var "one, two, three"

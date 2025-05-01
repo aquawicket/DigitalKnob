@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   new instance. Further investigation is required. 
 ::#
 :dk_restartExplorer
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	::taskkill /im explorer.exe /f
@@ -32,7 +32,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_restartExplorer

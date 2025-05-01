@@ -30,7 +30,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
 ::#
 :dk_split
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 	
 	set "str=%~1"
@@ -59,7 +59,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% String/dk_split "abc;123;def;456;ghi;789;jkl"

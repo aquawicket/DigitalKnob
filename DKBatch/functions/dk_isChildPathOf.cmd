@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   https://en.wikipedia.org/wiki/Dirname
 ::#
 :dk_isChildPathOf
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 2 3
  
 	set "_haystack_=%~1"
@@ -49,7 +49,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
     %dk_call% dk_debugFunc 0
 
 

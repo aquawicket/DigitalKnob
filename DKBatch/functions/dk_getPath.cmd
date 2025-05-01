@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    reference: https://stackoverflow.com/a/59739663/688352
 ::#
 :dk_getPath
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 
     set "_input=%1"
@@ -30,7 +30,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_set myPath "DK.cmd"

@@ -64,7 +64,7 @@ if not defined dk_Target_Env_DEFAULT (set "dk_Target_Env_DEFAULT=Clang64")
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	::###### GET ######

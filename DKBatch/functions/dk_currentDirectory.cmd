@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
 :dk_currentDirectory
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1
 	set "dk_currentDirectory=%CD%"
 
@@ -26,7 +26,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_currentDirectory

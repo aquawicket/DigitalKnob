@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_includeGuard
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     :: since batch calls scripts by file and not by function, there is no need to use include guards
@@ -41,7 +41,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	::(goto) 2>nul & call set caller=%%~0 & echo %caller%

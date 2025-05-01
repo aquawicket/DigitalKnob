@@ -22,7 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		 FILE_ATTRIBUTE_NORMAL        ---------
 ::#
 :dk_getAttributes
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 2
 
 	set "pathname=%1"
@@ -44,7 +44,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	set "myPath=C:/Users/Administrator/Desktop/digitalknob"

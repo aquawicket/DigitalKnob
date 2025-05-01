@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_compileCpp
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
  
     set "filepath=%~1"
@@ -30,7 +30,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     set "MSYSTEM=CLANG64"

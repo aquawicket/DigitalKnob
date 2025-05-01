@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_gitClone
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 2 3
     
 	if not defined _URL_ (set "_URL_=%~1")
@@ -46,7 +46,7 @@ setlocal
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	echo dk_gitClone :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
     %dk_call% dk_gitClone https://github.com/aquawicket/DigitalKnob.git "D:\digitalknob\Development"

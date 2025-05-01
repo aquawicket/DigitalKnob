@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 if defined %~1   %return%
 :dk_assertVar
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1
 
 	%dk_call% dk_fatal "ASSERTION: dk_assertVar(%*): %~1 not defined"
@@ -25,7 +25,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_set myVar string

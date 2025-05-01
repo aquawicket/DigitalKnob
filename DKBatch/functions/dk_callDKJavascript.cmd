@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_callDKJavascript
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 99
 
 	::### Get DKJAVASCRIPT_FUNCTIONS_DIR
@@ -41,7 +41,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_callDKJavascript dk_test "arg 1" "arg 2" "arg 3"

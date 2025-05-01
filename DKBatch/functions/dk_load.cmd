@@ -16,7 +16,7 @@ if exist "%~1" (goto:eof)
 ::# @funcName OR funcPath  - The name of an existing "functions/funcname.cmd" file, or a full filepath to a .cmd file.
 ::#
 :dk_load
-setlocal
+%setlocal%
     ::%dk_call% dk_debugFunc 0
  
  
@@ -97,7 +97,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
     %dk_call% dk_debugFunc
     
 	

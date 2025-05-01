@@ -97,7 +97,7 @@ dk_callDKCSharp
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_callDKCpp dk_test "arg 1" "arg 2" "arg 3"

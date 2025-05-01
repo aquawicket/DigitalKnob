@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    https://stackoverflow.com/a/41872317/688352
 ::#
 :dk_saveVars
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	::	rem We need a temporary file to store the original environment
@@ -38,7 +38,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_saveVars

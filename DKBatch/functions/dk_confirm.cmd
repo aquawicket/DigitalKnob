@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_confirm()
 ::#
 :dk_confirm
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     set /P REPLY="%yellow% Are you sure ? [Y/N] %clr%"
@@ -29,7 +29,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     ::###### Using && and || conditionals

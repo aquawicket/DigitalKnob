@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		Exports all subkeys and values of the key MyApp to the file AppBkUp.reg
 ::#
 :dk_registryBackup
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	set "REG_BACKUP_DIR=%CD:\=/%/REGISTRY_BACKUP"
@@ -48,7 +48,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_registryBackup

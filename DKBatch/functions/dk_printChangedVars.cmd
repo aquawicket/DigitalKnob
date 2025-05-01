@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    https://stackoverflow.com/a/41872317/688352
 ::#
 :dk_printChangedVars
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
@@ -69,7 +69,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_delete "%DKCACHE_DIR%/vars.tmp"

@@ -14,7 +14,7 @@ if not defined dk_embedBin_OVERWRITE_OUTPUT			(set "dk_embedBin_OVERWRITE_OUTPUT
 ::#	https://stackoverflow.com/a/19596027/688352
 ::#
 :dk_embedBin
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 3
 
 	set "inputFile=%~1"
@@ -63,7 +63,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_selectFile

@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :: dk_registryKeyExists(reg_path, rtn_var)
 ::
 :dk_registryKeyExists
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 
 	set "_reg_path_=%~1"
@@ -38,7 +38,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_registryKeyExists "HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.txt" 	&& %dk_call% dk_info "key exists" || %dk_call% dk_info "key does NOT exist"

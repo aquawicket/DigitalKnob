@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
 :dk_getTime
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 4
     for /f "tokens=1-3 delims=1234567890 " %%a in ("%time%") do set "delims=%%a%%b%%c" 
     for /f "tokens=1-4 delims=%delims%" %%A in ("%time%") do (
@@ -38,7 +38,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     echo time = %time%

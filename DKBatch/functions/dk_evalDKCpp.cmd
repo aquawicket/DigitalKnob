@@ -112,7 +112,7 @@ if not defined dk_evalDKCpp_DEFAULT_TARGET_ENV	(set "dk_evalDKCpp_DEFAULT_TARGET
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_evalDKCpp "printf("test dk_evalDKCpp");"

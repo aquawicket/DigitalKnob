@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		duration - The duration of the beep measured in milliseconds.
 ::#
 :dk_beep
-::setlocal
+::%setlocal%
 	::%dk_call% dk_debugFunc 0 2
  
 	::### Method 1 - powershell beep ###
@@ -37,7 +37,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	(set G#1=196)

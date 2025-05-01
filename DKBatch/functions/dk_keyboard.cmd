@@ -12,7 +12,7 @@ if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
 ::#
 ::#
 :dk_keyboard
-setlocal
+%setlocal%
     ::%dk_call% dk_debugFunc 0
 
  
@@ -28,7 +28,7 @@ setlocal
 
 :dk_keyboard.Keyboard_Loop
     ::%dk_call% dk_debugFunc 0
- ::setlocal
+ ::%setlocal%
     ::echo dk_keyboard.Keyboard_Loop %*
     
     :: Read keys via PowerShell
@@ -43,7 +43,7 @@ setlocal
 
 :dk_keyboard.BeginReceiving
     ::%dk_call% dk_debugFunc 0
- ::setlocal
+ ::%setlocal%
  
     echo dk_keyboard.BeginReceiving %*
     
@@ -57,7 +57,7 @@ setlocal
     
 :dk_keyboard.pollKeys
     ::%dk_call% dk_debugFunc 0
- ::setlocal
+ ::%setlocal%
     ::echo dk_keyboard.pollKeys %*
 
     :: Process keys in Batch
@@ -73,7 +73,7 @@ setlocal
 
 :dk_keyboard.onKeyDown
     %dk_call% dk_debugFunc 0
- ::setlocal
+ ::%setlocal%
     ::echo dk_keyboard.onKeyDown %*
     
     set "keyCode=%1"
@@ -97,7 +97,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
     ::%dk_call% dk_debugFunc 0
 
  

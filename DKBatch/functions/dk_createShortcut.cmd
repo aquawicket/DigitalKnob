@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_createShortcut
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 2 3
  
 	set "src_path=%~1"
@@ -50,7 +50,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_createShortcut "C:/Users/Administrator/digitalknob" "C:/Users/Administrator/Desktop/digitalknob.lnk"

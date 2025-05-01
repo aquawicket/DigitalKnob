@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_wifiPasses()
 ::#
 :dk_wifiPasses
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     set "tempfile=%DKCACHE_DIR%\temp.txt"
@@ -41,7 +41,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_wifiPasses

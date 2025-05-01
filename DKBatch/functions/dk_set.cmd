@@ -29,7 +29,7 @@ if not defined dk_set_DEBUG (set "dk_set_DEBUG=0")
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST 
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 ::	%dk_call% dk_set myVar word

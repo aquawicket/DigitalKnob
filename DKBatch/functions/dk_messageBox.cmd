@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_messageBox
-setlocal
+%setlocal%
     %dk_call% dk_debugFunc 2 7
 
 	if "%~1" equ "" (set "text=chose a selection") 	else (set "text=%~1")
@@ -83,7 +83,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 :: 16, 256, 4096, 65536, 1048576, 16777216

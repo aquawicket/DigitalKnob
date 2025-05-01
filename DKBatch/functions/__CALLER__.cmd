@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# __CALLER__(frame)
 ::#
 :__CALLER__
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0 1
  
 	if "%~1" equ "" (set "_FRAME_=0") else (set "_FRAME_=%1")
@@ -24,7 +24,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
  

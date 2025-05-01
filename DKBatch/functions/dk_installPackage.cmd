@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_installPackage
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	%dk_call% dk_debug "dk_installPackage[%*]"
 	
@@ -63,7 +63,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_installPackage zlib

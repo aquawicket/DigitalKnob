@@ -8,7 +8,7 @@ if not defined dk_getAllFileParams_PRINT_VARIABLES (set "dk_getAllFileParams_PRI
 ::# dk_getFileParams(<file>)
 ::#
 :dk_getFileParams
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 2
 
 	set "_file_=%~1"
@@ -32,7 +32,7 @@ if not defined dk_getAllFileParams_PRINT_VARIABLES (set "dk_getAllFileParams_PRI
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"

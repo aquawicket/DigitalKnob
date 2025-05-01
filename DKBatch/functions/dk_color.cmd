@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 ::#
 :dk_color
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 0 1
 
 	(set USE_COLOR=1)
@@ -317,7 +317,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	echo:

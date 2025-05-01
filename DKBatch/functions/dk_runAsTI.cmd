@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# Run as Trusted Installer
 ::#
 :dk_runAsTI
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1
 	
     set ^ #=
@@ -23,7 +23,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     ::%dk_call% dk_runAsTI regedit

@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    @function_name   - the function name of the file to source and download if needed
 ::#
 :dk_source
-setlocal
+%setlocal%
     ::%dk_call% dk_debugFunc 1
 	
     :: load if it's an existing full path file
@@ -66,7 +66,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST 
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_source dk_info

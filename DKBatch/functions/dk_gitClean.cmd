@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_gitClean
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
  
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
@@ -22,7 +22,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_gitClean 

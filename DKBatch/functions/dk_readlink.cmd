@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    C:     https://pubs.opengroup.org/onlinepubs/9699919799/functions/readlink.html
 ::#
 :dk_readlink
-setlocal
+%setlocal%
     %dk_call% dk_debugFunc 1 2
     
     set dk_readlink=%1
@@ -37,7 +37,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
    
 	%dk_call% dk_set myPath "C:/Users/Administrator/Desktop/DKBuilder.cmd"

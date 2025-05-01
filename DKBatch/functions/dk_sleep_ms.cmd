@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_sleep_ms(milliseconds)
 ::#
 :dk_sleep_ms
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1
 	
     :: Method 1 - javascript (fastest)
@@ -33,7 +33,7 @@ setlocal
 
 ::############################ DKTEST ############################
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_echo "sleeping for 3000 milliseconds . . ."

@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :::__ARGV__
 ::	%dk_call% dk_debugFunc 0 1
-::setlocal
+::%setlocal%
 :: 
 ::	if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
 ::	::set /a _FRAME_-=1
@@ -25,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
  
 	call :DKTEST_func abc 123 def 456 ghi 789
@@ -33,7 +33,7 @@ setlocal
 
 
 :DKTEST_func
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 6
 
  

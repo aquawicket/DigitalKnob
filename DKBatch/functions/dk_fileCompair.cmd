@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_fileCompair
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	set "fileA=%~1"
@@ -28,7 +28,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_set file1 "C:/Windows/notepad.exe"

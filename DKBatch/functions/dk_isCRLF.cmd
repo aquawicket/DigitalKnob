@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_isCRLF
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
  
     call type "%~1" | %WINDIR%\System32\find.exe "" /v > "%~1.temp"
@@ -51,7 +51,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     

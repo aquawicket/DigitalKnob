@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_getOptionValue(OPTION)
 ::#
 :dk_getOptionValue
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0 99
 
 	:getParameter_loop
@@ -34,7 +34,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
  
@@ -43,7 +43,7 @@ setlocal
 
 
 :TEST_getOptionValue ARG1 ARG2 ARG3 ARG4
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0 99
 
 	%dk_call% :dk_getOptionValue INPUT %*

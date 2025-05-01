@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
 :dk_getDate
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 3
 	set t=2&if "%date%z" LSS "A" set t=1
 	for /f "skip=1 tokens=2-4 delims=(-)" %%a in ('echo/^|date') do (
@@ -33,7 +33,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_echo "date = %date%"

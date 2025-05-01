@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_logo()
 ::#
 :dk_logo
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	echo %black%"%lblue% ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______ 
@@ -28,7 +28,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_logo

@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	@replace	- The string to replace the found string with
 ::#
 :dk_fileReplace
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 3 4
 	
 	set "filePath=%~1"
@@ -29,7 +29,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_fileReplace C:/Users/Administrator/digitalknob/Development/README.md Digitalknob replaced

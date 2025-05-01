@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#            https://stackoverflow.com/a/33206814/688352
 ::#
 :dk_keyboardInputTimeout
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0 3
     
     set "default=%~1"
@@ -63,7 +63,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_echo "Type some input and press enter, this will time out in 10 seconds"

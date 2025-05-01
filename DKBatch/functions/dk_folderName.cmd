@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_folderName
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 2
 
 	for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "dk_folderName=%%~nxb"
@@ -26,7 +26,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_folderName "C:/Windows/System32"

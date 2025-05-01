@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_escapeSequences
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 ::  set ASCII_length=0
@@ -134,7 +134,7 @@ setlocal
 %endfunction%
 
 :ASCII_ADD
-setlocal
+%setlocal%
     %dk_call% dk_debugFunc 7
  
     if "%~1" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 1 is invalid"
@@ -159,7 +159,7 @@ setlocal
 %endfunction%
 
 :ASCII_SHOW
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_info "%%ASCII[%~1].DEC%%   %%ASCII[%~1].SYMBOL%%   %%ASCII[%~1].DEC%%  %%ASCII[%~1].OCT%%  %%ASCII[%~1].HEX%%  %%ASCII[%~1].HTML%% %%ASCII[%~1].INFO%%"
@@ -170,7 +170,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_escapeSequences

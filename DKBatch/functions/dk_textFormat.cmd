@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   
 ::#
 :dk_textFormat
-setlocal
+%setlocal%
     %dk_call% dk_debugFunc 4 99
  
     set "spaces=                                        "
@@ -38,7 +38,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_textFormat output "column1[15]" "column2[30]" "column3[20]" "column4[100]"

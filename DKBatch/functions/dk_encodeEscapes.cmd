@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#  https://www.robvanderwoude.com/escapechars.php
 ::#
 :dk_encodeEscapes
-::setlocal
+::%setlocal%
     %dk_call% dk_debugFunc 1 2
    
     set org=%*
@@ -146,7 +146,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     

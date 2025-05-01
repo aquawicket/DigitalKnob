@@ -32,7 +32,7 @@ if not defined dk_exit_PAUSE (set "dk_exit_PAUSE=1")
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     ::%dk_call% dk_exit

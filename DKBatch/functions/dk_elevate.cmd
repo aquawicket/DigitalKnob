@@ -4,7 +4,7 @@
 net session >nul 2>&1
 if %ERRORLEVEL% equ 0 goto elevated
 :dk_elevate
-::setlocal
+::%setlocal%
 	::%dk_call% dk_debugFunc 0
 	
     if "%~2" equ "gotPrivileges" goto gotPrivileges

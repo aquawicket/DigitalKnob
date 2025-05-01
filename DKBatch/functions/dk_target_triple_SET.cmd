@@ -283,7 +283,7 @@ rem %dk_call% dk_set !target_triple! 1
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
  
 	%dk_call% dk_target_triple_SET

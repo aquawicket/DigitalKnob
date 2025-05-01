@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	Reference: https://en.wikipedia.org/wiki/Basename
 ::#
 :dk_basename
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 	echo dk_basename(%*)
 
@@ -33,7 +33,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_echo

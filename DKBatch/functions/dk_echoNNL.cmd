@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#     @msg    - The message to print
 ::#
 :dk_echoNNL
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0 1
 
 	if "%~1" equ "" (goto:eof)
@@ -32,7 +32,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	echo This is a normal echo commmand

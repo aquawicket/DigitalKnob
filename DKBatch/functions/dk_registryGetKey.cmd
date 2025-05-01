@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_registryGetKey
-setlocal
+%setlocal%
     %dk_call% dk_debugFunc 2 3
 
 	set "_reg_path_=%~1"
@@ -31,7 +31,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
    
     %dk_call% dk_registryGetKey "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework" "InstallRoot" rtn_var

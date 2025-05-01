@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# https://stackoverflow.com/a/85932/688352
 ::#
 :dk_isFunction
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1
     %ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
     if %ERRORLEVEL% equ 0 (
@@ -37,7 +37,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
    
     %dk_call% dk_isFunction "dk_debugFunc" && %dk_call% dk_info "'dk_debugFunc' is a function" || %dk_call% dk_info "'dk_debugFunc' is NOT a function"

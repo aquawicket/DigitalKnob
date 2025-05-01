@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_hasLabel
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 2 3
  
 	findstr /ri /c:"^ *:%~2 " /c:"^ *:%~2$" "%~1" >nul 2>nul && (
@@ -37,7 +37,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_hasLabel "%~0" "DKTEST"       && %dk_call% dk_info "'DKTEST' is a label"       || %dk_call% dk_info "'DKTEST' is NOT a label"

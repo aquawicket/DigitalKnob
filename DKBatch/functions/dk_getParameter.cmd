@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_getParameter(NAME rtn_var)
 ::#
 :dk_getParameter NAME rtn_var
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0 99
 
 	
@@ -33,7 +33,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
  
@@ -42,7 +42,7 @@ setlocal
 
 
 :TEST_getParameter ARG1 ARG2 ARG3 ARG4
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0 99
 
 	

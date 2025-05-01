@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
 :dk_getUnixTime
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0 1
     for /f %%x in ('wmic path win32_utctime get /format:list ^| findstr "="') do (set %%x)
     set /a z=(14-100%Month%%%100)/12, y=10000%Year%%%10000-z
@@ -28,7 +28,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_getUnixTime

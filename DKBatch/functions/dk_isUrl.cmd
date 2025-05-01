@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#  https://stackoverflow.com/a/17584764
 ::#
 :dk_isUrl
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
  
 	set "_arg0_=%~0"
@@ -32,7 +32,7 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     ::### http:// ###

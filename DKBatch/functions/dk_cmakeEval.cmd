@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_cmakeEval(cmake_commands, return_variables, -DVARS)
 ::#
 :dk_cmakeEval
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 1 4
 
 	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
@@ -98,7 +98,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_cmakeEval "dk_test('test dk_info message')" "return_valueA;return_valueB"

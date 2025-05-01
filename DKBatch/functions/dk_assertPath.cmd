@@ -45,7 +45,7 @@ set "dk_assertPath_CASE_SENSITIVE=1"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	::###### THESE SHOULD ALL BE FOUND ######
