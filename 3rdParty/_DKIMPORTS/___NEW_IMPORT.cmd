@@ -35,30 +35,43 @@ setlocal
 	%dk_call% dk_toUpper "%name%"
 	%dk_call% dk_printVar dk_toUpper
 	
-	:: dkconfig.txt
-	echo %dk_toUpper%_IMPORT=%link%> 					"%DKIMPORTS_DIR%/%name%/dkconfig.txt"
+::###### dkconfig.txt ######
+echo %dk_toUpper%_IMPORT=%link%> 											"%DKIMPORTS_DIR%/%name%/dkconfig.txt"
 
-	:: DKINSTALL.cmake
-	echo #!/usr/bin/cmake -P >																		"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}") >>											"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/") >>						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo endif() >>																					"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake") >>											"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo: >>																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo: >>																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo ###### %name% ###### >>																	"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo # %link% >>																				"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	::echo: >>																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	::echo ### DEPENDS ### >>																		"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	::echo #dk_depend(depend_name) >> 																"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo: >>																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo ### INSTALL ### >>																			"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()") >>							"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo dk_getAllFileParama("$ENV{DKIMPORTS_DIR}/%name%/dkconfig.txt") >>							"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
-	echo dk_import		(${%dk_toUpper%_IMPORT} NAME %name%) >>										"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+::###### DKINSTALL.cmake ######
+echo #!/usr/bin/cmake -P>													"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")>>						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")>>	"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo endif()>>																"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")>>						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo:>>																		"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo:>>																		"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo ###### %name% ######>>													"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo # %link%>>																"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo:>>																		"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo ### INSTALL ###>>														"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")>>			"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo dk_getAllFileParama("$ENV{DKIMPORTS_DIR}/%name%/dkconfig.txt")>>		"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
+echo dk_import			(${%dk_toUpper%_IMPORT} NAME %name%)>>				"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake"
 
+::###### DKUNINSTALL.cmake ######
+echo #!/usr/bin/cmake -P>													"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")>>						"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")>>	"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo endif()>>																"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")>>						"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo:>>																		"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo:>>																		"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo ###### %name% ######>>													"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo # %link%>>																"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo:>>																		"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo ### UnINSTALL ###>>													"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")>>			"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo dk_getAllFileParama("$ENV{DKIMPORTS_DIR}/%name%/dkconfig.txt")>>		"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo dk_importVariables	(${%dk_toUpper%_IMPORT} NAME %name%)>>				"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
+echo dk_delete			("${%dk_toUpper%}")>>								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
 
-:: DKINSTALL.cmake.cmd
+::###### DKINSTALL.cmake.cmd ######
 echo @echo off^&::########################################## DigitalKnob DKBatch ########################################################################> 			"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo if not exist "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" for /F "tokens=*" %%%%G IN ('where /r "%%USERPROFILE%%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%%%~dpG")>>	"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo if not defined DK.cmd (call "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" "%%~0" %%*)>>																					"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
@@ -69,7 +82,7 @@ echo ::####################################################################>>			
 echo ::# DKINSTALL>>																																				"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo ::#>>																																							"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo :DKINSTALL>>																																					"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
-echo setlocal>>																																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
+echo %%setlocal%%>>																																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo %%dk_call%% dk_debugFunc 0>>																																	"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo		%%dk_call%% dk_validate DKIMPORTS_DIR "%%dk_call%% dk_DKIMPORTS_DIR">>																					"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
@@ -81,12 +94,42 @@ echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKINSTALL
 echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######>>																				"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo :DKTEST>>																																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
-echo setlocal>>																																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
+echo %%setlocal%%>>																																						"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo 	%%dk_call%% dk_debugFunc 0>>																																"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo		call :DKINSTALL>>																																		"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo %%endfunction%%>>																																				"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
-	
+
+::###### DKUNINSTALL.cmake.cmd ######
+echo @echo off^&::########################################## DigitalKnob DKBatch ########################################################################> 			"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo if not exist "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" for /F "tokens=*" %%%%G IN ('where /r "%%USERPROFILE%%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%%%~dpG")>>	"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo if not defined DK.cmd (call "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" "%%~0" %%*)>>																					"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo ::#################################################################################################################################################>> 			"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo ::####################################################################>>																						"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo ::# DKUNINSTALL>>																																				"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo ::#>>																																							"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo :DKUNINSTALL>>																																					"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo %%setlocal%%>>																																						"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo %%dk_call%% dk_debugFunc 0>>																																	"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo		%%dk_call%% dk_validate DKIMPORTS_DIR "%%dk_call%% dk_DKIMPORTS_DIR">>																					"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo    	%%dk_call%% dk_cmakeEval "dk_load('%%~dp0DKUNINSTALL.cmake')">>																							"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo %%endfunction%%>>																																				"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######>>																				"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo :DKTEST>>																																						"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo %%setlocal%%>>																																						"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo 	%%dk_call%% dk_debugFunc 0>>																																"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo:>>																																								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo		call :DKUNINSTALL>>																																		"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo %%endfunction%%>>																																				"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+
+
 %endfunction%
 
 
