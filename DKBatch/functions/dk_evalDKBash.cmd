@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# 
 ::# 
 :dk_evalDKBash 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 0 
  
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
@@ -36,7 +36,7 @@ setlocal enableDelayedExpansion
  
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 :DKTEST 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 0 
   
 	%dk_call% dk_evalDKBash "echo 'testing dk_evalDKBash'"

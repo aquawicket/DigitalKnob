@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     set org=%*
     if defined %* call set "org=%%%org%%%"  &:: FIXME: remove the need for call here
-    setlocal enableDelayedExpansion
+    %setlocal%
         if "!DE!" equ "" if "" == %org:~0,1%%org:~-1% set "org=!org:~1,-1!" &:: remove any surrounding quotes
         if "!DE!" neq "" if "" == %org:~0,1%%org:~-1% set "org=%org:~1,-1%" &:: remove any surrounding quotes
     endlocal & set "org=%org%"
@@ -39,7 +39,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "var=%org%"
     if defined %* endlocal & set "%1=%var%"
     
-    ::setlocal enableDelayedExpansion   
+    ::%setlocal%   
     ::set "org=!org:%=%%!"
     ::endlocal & set "org=%org%"
     
@@ -107,7 +107,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::  set "var=%var:^|=_%"
 ::  set "org=%var%"
     
-::  setlocal enableDelayedExpansion
+::  %setlocal%
 ::  set "var=!var:%%%%=_!"
 ::  if not "!var!" equ "!org!" %dk_call% dk_echo "%% characters removed
 ::  set "org=!var!"
@@ -127,7 +127,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %endfunction%
 
 :replaceEqualSign variable replaceWith
-setlocal enableDelayedExpansion
+%setlocal%
 	 ::%dk_call% dk_debugFunc 0
         set "equal=="
         set "with=%~2"

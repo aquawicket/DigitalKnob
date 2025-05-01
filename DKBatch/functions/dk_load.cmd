@@ -75,7 +75,7 @@ setlocal
             call set "temp=%%temp:$= %%"
             call set "temp=%%temp:,= %%"
             call set "temp=%%temp: = %%"
-            setlocal enableDelayedExpansion
+            %setlocal%
             for %%i in (!temp!) do (
                 call set "temp=%%i"
                 goto done

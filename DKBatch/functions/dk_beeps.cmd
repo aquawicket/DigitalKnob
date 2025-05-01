@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		duration - The duration of the beep measured in milliseconds.
 ::#
 :dk_beeps
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1
 	
 	set /a "n=0"

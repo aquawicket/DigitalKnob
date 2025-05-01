@@ -84,7 +84,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# 	511 Network Authentication Required
 ::#
 :dk_urlExists
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 
 	%dk_call% dk_httpResponse "%~1"

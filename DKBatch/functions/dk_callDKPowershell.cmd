@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   Reference: https://stackoverflow.com/questions/34451444/how-to-get-a-returned-value-from-powershell-and-get-it-in-a-batch-file
 ::#
 :dk_callPowershell
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1 99
 
 	::### Get DKC_FUNCTIONS_DIR

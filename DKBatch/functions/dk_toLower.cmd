@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_toLower
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 2
 
         set "_lower_=%~1"

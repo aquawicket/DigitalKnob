@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_buildDebug()
 ::#
 :dk_buildDebug
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_assertVar TARGET_PATH
@@ -37,7 +37,7 @@ setlocal enableDelayedExpansion
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_buildDebug

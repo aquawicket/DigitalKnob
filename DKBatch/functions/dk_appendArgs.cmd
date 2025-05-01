@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_appendArgs
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 2 99
 
 	%dk_call% dk_allButFirstArgs %*

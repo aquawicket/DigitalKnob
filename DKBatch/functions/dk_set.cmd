@@ -9,7 +9,7 @@ if not defined dk_set_DEBUG (set "dk_set_DEBUG=0")
 ::#
 ::#
 :dk_set
-setlocal enableDelayedExpansion
+%setlocal%
 ::	%dk_call% dk_debugFunc 2 99
 
 	%dk_call% dk_allButFirstArgs %*

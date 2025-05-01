@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		Reference: https://stackoverflow.com/a/26079981
 ::#
 :dk_trim 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 0 
  
 	set Params=dummy %*
@@ -30,7 +30,7 @@ setlocal enableDelayedExpansion
  
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 :DKTEST 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 0 
   
 	set myValue=   a b c  

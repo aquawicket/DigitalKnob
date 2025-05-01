@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_target_app
-::setlocal enableDelayedExpansion
+::%setlocal%
 	%dk_call% dk_debugFunc 0 1 
 	
     :: read DKBuilder.cache file

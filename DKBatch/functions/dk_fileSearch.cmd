@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#   Example:  %dk_call% dk_fileSearch "C:\Users\Administrator\digitalknob" "\bin\bash.exe" 7 BASH_EXE
 :dk_fileSearch
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 3 4
 	set "base_path=%~1"
 	set "base_path=%base_path:/=\%"

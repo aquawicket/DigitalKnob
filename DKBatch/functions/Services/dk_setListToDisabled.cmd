@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_setListToDisabled
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1
 	
 	:: loop through services_MyList.txt, stop and diable any service in the list

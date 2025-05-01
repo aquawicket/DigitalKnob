@@ -174,7 +174,7 @@ if not defined dk_log_FATAL_TIMEOUT			(set "dk_log_FATAL_TIMEOUT=9")
 ::#		@message - The message to print
 ::#
 :dk_log
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 
 	if "%dk_log_ENABLE%" neq "1" (

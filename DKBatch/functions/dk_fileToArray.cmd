@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#  reference: https://stackoverflow.com/a/49042678
 ::#
 :dk_fileToArray
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 2
 
 	set "_file_=%~f1"

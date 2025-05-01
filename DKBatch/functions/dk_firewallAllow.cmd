@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   @executable	- The path to the executable to allow
 ::#
 :dk_firewallAllow
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 2
 
 	set "_name_=%~1"

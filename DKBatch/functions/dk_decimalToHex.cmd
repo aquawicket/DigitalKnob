@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	reference: https://www.ascii-code.com
 ::#
 :dk_decimalToHex
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1
 
 	set "_LOOKUP_=0123456789abcdef"

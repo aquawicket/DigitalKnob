@@ -36,33 +36,21 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::###### PATH ######
 	set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
 
+	set "setlocal=setlocal EnableDelayedExpansion"
 	set "NO_STDOUT=1>nul"
 	set "NO_STDERR=2>nul"
 	set "NO_OUTPUT=1>nul 2>nul"
 	set "exit_status=^!errorlevel^!"
 	set "endfunction=exit /b ^!errorlevel^!"
 	set "return=exit /b ^!errorlevel^!"
-
+	
 	call :dk_DKSCRIPT_PATH "%~1"
-	::echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
-
 	call :dk_DKSCRIPT_ARGS "%~1"
-	::echo DKSCRIPT_ARGS = %DKSCRIPT_ARGS%
-
 	call :dk_DKSCRIPT_FILE
-	::echo DKSCRIPT_FILE = %DKSCRIPT_FILE%
-
 	call :dk_DKSCRIPT_DIR
-	::echo DKSCRIPT_DIR = %DKSCRIPT_DIR%
-
 	call :dk_DKSCRIPT_NAME
-	::echo DKSCRIPT_NAME = %DKSCRIPT_NAME%
-
 	call :dk_DKSCRIPT_EXT
-	::echo DKSCRIPT_EXT = %DKSCRIPT_EXT%
-
 	call :dk_DKCACHE_DIR
-	::echo DKCACHE_DIR = %DKCACHE_DIR%
 
 	::###### Reload Main Script with cmd ######
 	call :dk_reload
@@ -77,6 +65,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::############ get dk_source and dk_call ######
 	call :dk_initFiles
 	
+	::############### init dk_call ###############
 	call %DKBATCH_FUNCTIONS_DIR_:/=\%dk_call.cmd init
 	
 	::############ load dkconfig.txt ############
@@ -108,7 +97,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::%DK% dk_load %DKSCRIPT_PATH%
 
 	::###### DKTEST MODE ######
-	if not "%DKSCRIPT_EXT%" equ ".cmd" (%return%)
+	if "%DKSCRIPT_EXT%" neq ".cmd" (%return%)
 	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 0
 	%dk_call% dk_echo
 	%dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%"
@@ -117,8 +106,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	%dk_call% dk_echo
 	%dk_call% dk_echo "%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%"
 	%dk_call% dk_echo
-	pause
-	exit %errorlevel%
+	%dk_call% dk_exit %errorlevel%
 %endfunction%
 
 
@@ -175,7 +163,6 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if not exist "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit -1)
 	
 	cd "%DKSCRIPT_DIR%"
-	::echo CD = %CD%
 %endfunction%
 
 ::##################################################################################
@@ -260,8 +247,8 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_readlink
 ::#
 :dk_readlink
-setlocal
-    %dk_call% dk_debugFunc 1 2
+%setlocal%
+%dk_call% dk_debugFunc 1 2
     
     set dk_readlink=%1
 	::if not exist "%dk_readlink%" (%return%)
@@ -285,8 +272,8 @@ setlocal
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal enableDelayedExpansion
-	%dk_call% dk_debugFunc 0
+%setlocal%
+%dk_call% dk_debugFunc 0
 
 	%DKSCRIPT_PATH:/=\%
 %endfunction%

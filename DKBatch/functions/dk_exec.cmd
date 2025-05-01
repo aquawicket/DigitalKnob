@@ -23,7 +23,7 @@ if not defined dk_exec_ECHO_EXITCODE 	(set "dk_exec_ECHO_EXITCODE=1"	)	&:: dk_ex
 ::#
 ::#
 :dk_exec
-setlocal enableDelayedExpansion
+%setlocal%
 	::%dk_call% dk_debugFunc 1 99
 
 	::### set %dk_exec_command% ###

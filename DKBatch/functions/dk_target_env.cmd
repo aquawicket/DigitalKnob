@@ -12,7 +12,7 @@ if not defined dk_Target_Env_DEFAULT (set "dk_Target_Env_DEFAULT=Clang64")
 ::#	  Target_Env = Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows
 ::#
 :dk_Target_Env
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 0 1
 
 	rem ###### SET ######

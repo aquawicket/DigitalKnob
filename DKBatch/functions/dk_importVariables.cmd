@@ -45,7 +45,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#															master
 ::#
 :dk_importVariables
-::setlocal enableDelayedExpansion
+::%setlocal%
 	::dk_debugFunc 1 9
 	
 	set "URL=%~1"

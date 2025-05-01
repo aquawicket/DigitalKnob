@@ -11,7 +11,7 @@ if not defined dk_evalDKC_DEFAULT_TARGET_ENV (set "dk_evalDKC_DEFAULT_TARGET_ENV
 ::#
 ::#
 :dk_evalDKC
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1 99
  
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"

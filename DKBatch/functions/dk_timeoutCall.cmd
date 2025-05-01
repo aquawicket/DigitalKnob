@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    Call a command after timeout
 ::#
 :dk_timeoutCall
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 2
 
 	

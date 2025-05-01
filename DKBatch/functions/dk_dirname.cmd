@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   Reference: https://en.wikipedia.org/wiki/Dirname
 ::#
 :dk_dirname
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 
     set "pathname=%1"

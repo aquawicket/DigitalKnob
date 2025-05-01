@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    Check if a variable is valid, otherwise run code to validate the variable
 ::#
 :dk_validatePath
-::setlocal enableDelayedExpansion
+::%setlocal%
     %dk_call% dk_debugFunc 2
 
     if exist "!%~1!" (%return%)

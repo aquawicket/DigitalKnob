@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_showFileLine
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 2
  
 	set "_filepath_=%~f1"

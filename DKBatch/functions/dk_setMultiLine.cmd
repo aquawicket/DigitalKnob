@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# 
 ::# 
 :dk_setMultiLine 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 0 
  
 	::##### DO NOT ALTER #############
@@ -57,7 +57,7 @@ setlocal enableDelayedExpansion
  
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 :DKTEST 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 0 
   
 

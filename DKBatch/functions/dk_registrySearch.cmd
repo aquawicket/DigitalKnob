@@ -22,7 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		REG QUERY HKCU /s /f "DKCMake" /d
 ::#
 :dk_registrySearch
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 2
 
 	set "_haystack_=%~1"
@@ -75,7 +75,7 @@ setlocal enableDelayedExpansion
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_inputBox

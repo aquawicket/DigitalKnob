@@ -20,7 +20,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::#
 :dk_timer
-setlocal enableDelayedExpansion
+%setlocal%
 	::%dk_call% dk_debugFunc 0
 
     ::%dk_call% dk_getTime centisecond second minute hour

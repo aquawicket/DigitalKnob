@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# 
 ::# 
 :dk_evalDKJavascript 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 0 
  
 	set "CSCRIPT_EXE=C:/Windows/System32/cscript.exe"
@@ -37,7 +37,7 @@ setlocal enableDelayedExpansion
  
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 :DKTEST 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 0 
   
 	%dk_call% dk_evalDKJavascript "WScript.Echo('testing dk_evalDKJavascript');"

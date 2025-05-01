@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# Drawback: Does not work on strings with LF or '!' characters
 ::#
 :dk_replaceEqual
-setlocal enableDelayedExpansion
+%setlocal%
 
     %dk_call% dk_debugFunc 4
 

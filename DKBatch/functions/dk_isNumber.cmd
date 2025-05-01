@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		Reference: https://stackoverflow.com/a/17584764
 ::#
 :dk_isNumber
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 
 	set "_val_=%~1"

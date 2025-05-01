@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# 
 ::# 
 :dk_tee 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 2
  
 	set "command=%~1"
@@ -32,7 +32,7 @@ setlocal enableDelayedExpansion
  
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 :DKTEST 
-setlocal enableDelayedExpansion 
+%setlocal% 
 	%dk_call% dk_debugFunc 0 
   
 	%dk_call% dk_tee "cmd /c dir nonexisent" "C:\TEE.txt"

@@ -13,7 +13,7 @@ if not defined dk_evalDKCpp_DEFAULT_TARGET_ENV	(set "dk_evalDKCpp_DEFAULT_TARGET
 ::#
 ::#
 :dk_evalDKCpp
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1 99
  
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"

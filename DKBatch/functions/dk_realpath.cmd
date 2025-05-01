@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    SHELL: https://man7.org/linux/man-pages/man1/realpath.1.html
 ::#
 :dk_realpath
-setlocal enableDelayedExpansion
+%setlocal%
     %dk_call% dk_debugFunc 1 2
     
 	set "pathname=%1"

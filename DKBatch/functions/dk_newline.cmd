@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    creates a newline variable assigned to %\n%
 ::#
 :dk_newline
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 :: ###### METHOD A:  work with !\n!, Can be quoted or unquoted ######
@@ -32,7 +32,7 @@ endlocal & (set \n=^
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_newline

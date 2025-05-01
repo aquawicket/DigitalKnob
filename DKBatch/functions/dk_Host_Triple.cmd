@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_Host_Triple
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 0 1
  		
 	rem ###### SET ######

@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_waitOnFileChange(<filename> <searchpath> <timeout>:optional)
 ::#
 :dk_waitFindFile
-setlocal enableDelayedExpansion
+%setlocal%
 	::%dk_call% dk_debugFunc 1 2
 	set "filename=%~1"
 	set "searchPath=%~2"

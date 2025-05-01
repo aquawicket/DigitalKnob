@@ -11,7 +11,7 @@ set "dk_assertFile_CASE_SENSITIVE=1"
 ::# dk_assertFile(path)
 ::#
 :dk_assertFile
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 0 99
 
 	::### var/val path from all arguments ###

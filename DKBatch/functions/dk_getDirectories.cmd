@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   reference: https://stackoverflow.com/a/138581
 ::#
 :dk_getDirectories
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 1
 
 	set "_path_=%~1"

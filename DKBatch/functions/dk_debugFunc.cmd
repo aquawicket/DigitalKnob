@@ -37,7 +37,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   <TIMESTAMP>
 ::#   
 :dk_debugFunc
-setlocal enableDelayedExpansion	
+%setlocal%	
 	
 	if "%__FUNC__%" equ "dk_debugFunc" %endfunction%
 	if not defined __FUNC__ (%endfunction%)
@@ -54,7 +54,7 @@ setlocal enableDelayedExpansion
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal enableDelayedExpansion	
+%setlocal%	
 
     %dk_call% dk_debugFunc 0
 

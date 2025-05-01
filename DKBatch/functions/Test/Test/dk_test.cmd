@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :Test/Test/dk_test
 echo: & echo %bg_blue%-^> Test/Test/dk_test(%*)%clr%
-setlocal enableDelayedExpansion
+%setlocal%
 	::%dk_call% dk_debugFunc 0 99
 	
 	echo ################# Test/Test/dk_test.cmd ################
@@ -103,7 +103,7 @@ echo %bg_blue%^<- Test/dk_test(%*)%clr% & echo:
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal enableDelayedExpansion
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% Test/Test/dk_test ":DKTEST" "Test/Test/dk_test" "Test/Test:DKTEST" "1 2 3"

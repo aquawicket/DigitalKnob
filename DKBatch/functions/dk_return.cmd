@@ -18,7 +18,7 @@ if not defined dk_return (set "dk_return=dk_return")
 ::#		dk_return  1 "error message"	fail
 ::#
 :dk_return
-::setlocal enableDelayedExpansion
+::%setlocal%
 	::if 1%1 neq +1%1 (echo %~1 is not_numeric) else (echo %~1 is numeric)
 	
 	::if "%~1" equ "" endlocal & (
