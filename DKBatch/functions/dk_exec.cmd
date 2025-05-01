@@ -6,6 +6,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::############ dk_exec SETTINGS ############
 if not defined dk_exec_ECHO_COMMAND 	(set "dk_exec_ECHO_COMMAND=1"	) 	&:: dk_exec_command
+if not defined dk_exec_ECHO_ARGS	 	(set "dk_exec_ECHO_ARGS=1"		) 	&:: dk_exec_arg<N>
 if not defined dk_exec_ECHO_STDOUT		(set "dk_exec_ECHO_STDOUT=1" 	)	&:: dk_exec_stdout[]
 if not defined dk_exec_ECHO_STDERR 		(set "dk_exec_ECHO_STDERR=1" 	)	&:: dk_exec_stderr[]
 if not defined dk_exec_ECHO_EXITCODE 	(set "dk_exec_ECHO_EXITCODE=1"	)	&:: dk_exec_exitcode
@@ -33,13 +34,18 @@ if not defined dk_exec_ECHO_EXITCODE 	(set "dk_exec_ECHO_EXITCODE=1"	)	&:: dk_ex
 	::###### print %dk_exec_command% ######
 	if "%dk_exec_ECHO_COMMAND%" equ "1" (
 		echo dk_exec_command ^> !dk_exec_command!
-		echo dk_exec_arg1    ^> %~1
-		echo dk_exec_arg2    ^> %~2
-		echo dk_exec_arg3    ^> %~3
-		echo dk_exec_arg4    ^> %~4
-		echo dk_exec_arg5    ^> %~5
-		echo dk_exec_arg6    ^> %~6
-		echo dk_exec_arg7    ^> %~7
+	)
+	
+	if "%dk_exec_ECHO_ARGS%" equ "1" (
+		if "%~1" neq "" (echo dk_exec_arg1    ^> %~1)
+		if "%~2" neq "" (echo dk_exec_arg2    ^> %~2)
+		if "%~3" neq "" (echo dk_exec_arg3    ^> %~3)
+		if "%~4" neq "" (echo dk_exec_arg4    ^> %~4)
+		if "%~5" neq "" (echo dk_exec_arg5    ^> %~5)
+		if "%~6" neq "" (echo dk_exec_arg6    ^> %~6)
+		if "%~7" neq "" (echo dk_exec_arg7    ^> %~7)
+		if "%~8" neq "" (echo dk_exec_arg8    ^> %~8)
+		if "%~9" neq "" (echo dk_exec_arg9    ^> %~9)
 	)
 
 	rem ### set %dk_exec_stdout[]% ###
