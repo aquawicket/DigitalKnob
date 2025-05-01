@@ -18,7 +18,4 @@ dk_validate		(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 dk_mkdir		("$ENV{DKTOOLS_DIR}/rufus")
 dk_validate		(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 dk_basename		("${RUFUS_IMPORT}")
-dk_copy			("$ENV{DKDOWNLOAD_DIR}/${dk_basename}")
-
-#dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR")
-#dk_import		("${RUFUS_IMPORT}" NAME rufus ROOT "${DKTOOLS_DIR}") 
+dk_copy			("$ENV{DKDOWNLOAD_DIR}/${dk_basename}" "$ENV{DKTOOLS_DIR}/rufus/${dk_basename}")
