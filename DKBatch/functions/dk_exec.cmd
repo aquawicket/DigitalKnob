@@ -24,26 +24,32 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_exec
 %setlocal%
 	::%dk_call% dk_debugFunc 1 99
-
+	set dk_exec_command=%*
+	:DeEscape
+	echo %dk_exec_command% | findstr /c:"^^" >nul && (
+		set dk_exec_command=%dk_exec_command:^^=^%
+		goto :DeEscape
+	)
+	
 	::###### dk_exec_command ######
-	set "dk_exec_command=%*"
+	::set dk_exec_command=%_ARGS_%
 	
 	::###### dk_exec_PRINT_COMMAND ######
 	if "%dk_exec_PRINT_COMMAND%" equ "1" (
-		echo dk_exec_command ^> !dk_exec_command!
+		echo "dk_exec_command > !dk_exec_command!"
 	)
 	
 	::###### dk_exec_PRINT_ARGS ######
 	if "%dk_exec_PRINT_ARGS%" equ "1" (
-		if "%~1" neq "" (echo dk_exec_arg1    ^> %~1)
-		if "%~2" neq "" (echo dk_exec_arg2    ^> %~2)
-		if "%~3" neq "" (echo dk_exec_arg3    ^> %~3)
-		if "%~4" neq "" (echo dk_exec_arg4    ^> %~4)
-		if "%~5" neq "" (echo dk_exec_arg5    ^> %~5)
-		if "%~6" neq "" (echo dk_exec_arg6    ^> %~6)
-		if "%~7" neq "" (echo dk_exec_arg7    ^> %~7)
-		if "%~8" neq "" (echo dk_exec_arg8    ^> %~8)
-		if "%~9" neq "" (echo dk_exec_arg9    ^> %~9)
+		if "%~1" neq "" (echo "dk_exec_arg1    > %~1")
+		if "%~2" neq "" (echo "dk_exec_arg2    > %~2")
+		if "%~3" neq "" (echo "dk_exec_arg3    > %~3")
+		if "%~4" neq "" (echo "dk_exec_arg4    > %~4")
+		if "%~5" neq "" (echo "dk_exec_arg5    > %~5")
+		if "%~6" neq "" (echo "dk_exec_arg6    > %~6")
+		if "%~7" neq "" (echo "dk_exec_arg7    > %~7")
+		if "%~8" neq "" (echo "dk_exec_arg8    > %~8")
+		if "%~9" neq "" (echo "dk_exec_arg9    > %~9")
 	)
 
 	::###### dk_exec_stdout[] ######
@@ -60,7 +66,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			
 			rem ###### dk_exec_PRINT_STDOUT ######
 			if "%dk_exec_PRINT_STDOUT%" equ "1" (
-				echo dk_exec_stdout ^> !dk_exec_stdout!
+				echo "dk_exec_stdout > !dk_exec_stdout!"
 			)
 			
 		) else (
@@ -72,7 +78,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		
 	::###### dk_exec_PRINT_EXITCODE ######
 	if "%dk_exec_PRINT_EXITCODE%" equ "1" (
-		echo dk_exec_exitcode ^> !dk_exec_exitcode!
+		echo "dk_exec_exitcode > !dk_exec_exitcode!"
 	)
 			
 	::###### TODO: dk_exec_PRINT_STDERR ###### 

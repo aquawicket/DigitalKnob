@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
 ::#################################################################################################################################################
 
-if not defined dk_set_DEBUG (set "dk_set_DEBUG=0")
+::if not defined dk_set_PRINT_VARIABLE (set "dk_set_PRINT_VARIABLE=0")
 ::################################################################################
 ::# dk_set(name, value...)
 ::#
@@ -18,7 +18,7 @@ if not defined dk_set_DEBUG (set "dk_set_DEBUG=0")
 		set "%~1=%dk_allButFirstArgs%"
 	)
 
-	if "%dk_set_DEBUG%" equ "1" (
+	if "%dk_set_PRINT_VARIABLE%" equ "1" (
 		%dk_call% dk_printVar %~1
 	)
 %endfunction%

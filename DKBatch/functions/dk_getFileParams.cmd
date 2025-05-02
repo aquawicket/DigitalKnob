@@ -3,7 +3,8 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
 ::#################################################################################################################################################
 
-if not defined dk_getAllFileParams_PRINT_VARIABLES (set "dk_getAllFileParams_PRINT_VARIABLES=0")
+::############ dk_getFileParams settings #########################################
+::if not defined dk_getAllFileParams_PRINT_VARIABLES (set "dk_getAllFileParams_PRINT_VARIABLES=0")
 ::################################################################################
 ::# dk_getFileParams(<file>)
 ::#
