@@ -4,8 +4,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-if not defined dk_embedBin_DELETE_CMD_ON_EXTRACT 	(set "dk_embedBin_DELETE_CMD_ON_EXTRACT=0")
-if not defined dk_embedBin_OVERWRITE_OUTPUT			(set "dk_embedBin_OVERWRITE_OUTPUT=1")
+::###################### dk_embedBin settings ######################################
+::if not defined dk_embedBin_DELETE_CMD_ON_EXTRACT 	(set "dk_embedBin_DELETE_CMD_ON_EXTRACT=0")
+::if not defined dk_embedBin_OVERWRITE_OUTPUT		(set "dk_embedBin_OVERWRITE_OUTPUT=0")
 ::##################################################################################
 ::# Base64::dk_embedBin(inputFile)
 ::# Base64::dk_embedBin(inputFile, outputFile)

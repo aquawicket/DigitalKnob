@@ -47,7 +47,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::###### Using if return value
 	set "myPath=C:/Windows/notepad.exe"
     %dk_call% dk_isFile "%myPath%"
-    if %dk_isFile% equ 0 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
+    if "%dk_isFile%" equ "0" (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
 	::###### Using if ERRORLEVEL
 	%dk_call% dk_isFile "%myPath%"
     if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")

@@ -19,11 +19,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	rem ###### GET ######	
 	) else (
-		if "%PROCESSOR_ARCHITECTURE%" equ "x86"   (set "Host_Arch=X86")
-		if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (set "Host_Arch=X86_64")
-		if "%PROCESSOR_ARCHITECTURE%" equ "IA64"  (set "Host_Arch=X86_64")
-		if "%PROCESSOR_ARCHITECTURE%" equ "EM64T" (set "Host_Arch=X86_64")
-		if "%PROCESSOR_ARCHITECTURE%" equ "ARM64" (set "Host_Arch=Arm64")
+		if /i "%PROCESSOR_ARCHITECTURE%" equ "x86"   (set "Host_Arch=X86")
+		if /i "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (set "Host_Arch=X86_64")
+		if /i "%PROCESSOR_ARCHITECTURE%" equ "IA64"  (set "Host_Arch=X86_64")
+		if /i "%PROCESSOR_ARCHITECTURE%" equ "EM64T" (set "Host_Arch=X86_64")
+		if /i "%PROCESSOR_ARCHITECTURE%" equ "ARM64" (set "Host_Arch=Arm64")
 	)
 	
 	endlocal & (

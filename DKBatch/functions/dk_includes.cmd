@@ -44,13 +44,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "needle"
     %dk_call% dk_includes "%string%" "%substring%" result
-    if %result% equ 0 (%dk_call% dk_echo "'%string%' CONTAINS '%substring%'") else (%dk_call% dk_echo "'%string%' DOES NOT CONTAIN '%substring%'")
+    if "%result%" equ "0" (%dk_call% dk_echo "'%string%' CONTAINS '%substring%'") else (%dk_call% dk_echo "'%string%' DOES NOT CONTAIN '%substring%'")
     
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "straw"
     %dk_call% dk_includes "%string%" "%substring%" result
-    if %result% equ 0 (%dk_call% dk_echo "'%string%' CONTAINS '%substring%'") else (%dk_call% dk_echo "'%string%' DOES NOT CONTAIN '%substring%'")
+    if "%result%" equ "0" (%dk_call% dk_echo "'%string%' CONTAINS '%substring%'") else (%dk_call% dk_echo "'%string%' DOES NOT CONTAIN '%substring%'")
     ::FIXME: ERRORLEVEL is still 1 
     
     

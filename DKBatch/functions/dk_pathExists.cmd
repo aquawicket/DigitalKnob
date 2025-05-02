@@ -37,12 +37,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo
     set "_path_=C:/Windows"
     %dk_call% dk_pathExists "%_path_%" result
-    if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exist)
+    if /i "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exist)
     
     %dk_call% dk_echo
     set "_path_=C:/NonExistent"
     %dk_call% dk_pathExists "%_path_%" result
-    if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exist)
+    if /i "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exist)
     ::FIXME: ERRORLEVEL is still 1 
     
     

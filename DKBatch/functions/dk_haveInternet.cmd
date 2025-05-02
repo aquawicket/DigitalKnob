@@ -14,7 +14,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
  
     %ComSpec% /c ping -n 1 8.8.8.8 > nul 2> nul"
-    if %ERRORLEVEL% equ 0 (
+    if "%errorlevel%" equ "0" (
         if "%~2" neq "" (endlocal & set "%2=true")
         exit /b 0
     )

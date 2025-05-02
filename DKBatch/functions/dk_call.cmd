@@ -5,11 +5,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################## dk_call settings ##########################
-if not defined dk_call_PRINT_CALLS	(set "dk_call_PRINT_CALLS=0") 
-if not defined dk_call_PRINT_ENTRY	(set "dk_call_PRINT_ENTRY=0")
-if not defined dk_call_PRINT_EXIT	(set "dk_call_PRINT_EXIT=0")
-if not defined dk_call_PRINT_SCOPE	(set "dk_call_PRINT_SCOPE=0") 
-if not defined dk_call_IGNORE		(set "dk_call_IGNORE=dk_debugFunc;dk_echo;") 
+::if not defined dk_call_PRINT_CALLS	(set "dk_call_PRINT_CALLS=1") 
+::if not defined dk_call_PRINT_ENTRY	(set "dk_call_PRINT_ENTRY=1")
+::if not defined dk_call_PRINT_EXIT		(set "dk_call_PRINT_EXIT=1")
+::if not defined dk_call_PRINT_SCOPE	(set "dk_call_PRINT_SCOPE=1") 
+::if not defined dk_call_IGNORE			(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
 ::####################################################################
 ::# dk_call(command args)
 ::#

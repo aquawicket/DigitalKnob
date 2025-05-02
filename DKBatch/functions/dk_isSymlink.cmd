@@ -34,11 +34,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::###### Using if return value
 ::	set "myPath=C:/Windows/notepad.exe"
 ::  %dk_call% dk_isSymlink "%myPath%" result
-::  if "%result%" equ "true" (%dk_call% dk_info "'%myPath%' is a symlink") else (%dk_call% dk_info "'%myPath%' is NOT a symlink")
+::  if /i "%result%" equ "true" (%dk_call% dk_info "'%myPath%' is a symlink") else (%dk_call% dk_info "'%myPath%' is NOT a symlink")
    
 ::	set "myPath=C:/NotADir"
 ::  %dk_call% dk_isSymlink "%myPath%" result
-::  if "%result%" equ "true" (%dk_call% dk_info "'%myPath%' is a symlink") else (%dk_call% dk_info "'%myPath%' is NOT a symlink")
+::  if /i "%result%" equ "true" (%dk_call% dk_info "'%myPath%' is a symlink") else (%dk_call% dk_info "'%myPath%' is NOT a symlink")
     
 ::  ::###### Using if ERRORLEVEL
 ::	set "myPath=C:/Windows"

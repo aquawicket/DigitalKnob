@@ -58,13 +58,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "childPath=C:/Program Files/Internet Explorer/en-US"
     set "parentPath=C:/Program Files"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%" result
-    if "%result%" equ "true" (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
+    if /i "%result%" equ "true" (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
     
     %dk_call% dk_echo
 	set "childPath=/C:/Users/Administrator/digitalknob/nonexistant"
     set "parentPath=Administrator/digitalknob"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%" result
-    if "%result%" equ "true" (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
+    if /i "%result%" equ "true" (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
     ::FIXME: ERRORLEVEL is still 1 
     
     

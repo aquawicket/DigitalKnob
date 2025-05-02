@@ -21,8 +21,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     for /f %%a in ('%WINDIR%\System32\findstr /R /N "^" "%~1" ^| %WINDIR%\System32\find /C ":"') do set lines=%%a
     del "%~1.temp"
     
-    if %size1plus2% equ %size2% (
-        if %lines% equ 2 (
+    if "%size1plus2%" equ "%size2%" (
+        if "%lines%" equ "2" (
             rem echo File uses LF line endings!
         ) else (
             rem echo File uses CRLF or has no line endings!

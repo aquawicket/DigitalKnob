@@ -4,6 +4,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
+::################## dk_callDKCpp settings ###########################
+::if not defined dk_callDKCpp_TARGET_OS 	(set "dk_callDKC_TARGET_OS=cosmocc")	&::  android, cosmocc, emscripten, ios, iossim, linux, mac, win
+::if not defined dk_callDKCpp_TARGET_ARCH 	(set "dk_callDKC_TARGET_ARCH=cosmocc")	&::  arm32, arm64, cosmocc, x86, x86_64 
+::if not defined dk_callDKCpp_TARGET_ENV 	(set "dk_callDKC_TARGET_ENV=cosmocc")	&::  clang, cosmocc, gcc, msvc 
 ::####################################################################
 ::# dk_callDKCpp(function, arguments...)
 ::# dk_callDKCpp(function, arguments..., rtn_var)
@@ -13,12 +17,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 
-	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmocc, gcc, msvc 
-	set "default_target_os=%Host_Os%"
-	set "default_target_arch=%Host_Arch%"
-	set "default_target_env=clang"
-
 	::###### _func_ ######
 	set "_func_=%~1"
 
@@ -26,28 +24,28 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_allButFirstArgs %*
 
 	::###### DKC_FUNCTIONS_DIR ######
-	%dk_call% dk_validate DKCPP_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKCPP_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_assertPath DKCPP_FUNCTIONS_DIR
 
 	::###### DKHTTP_DKC_FUNCTIONS_DIR ######
 	%dk_call% dk_assertVar DKHTTP_DKBRANCH_DIR
-	if not defined DKHTTP_DKCPP_DIR		 	 (set "DKHTTP_DKCPP_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
-	if not defined DKHTTP_DKCPP_FUNCTIONS_DIR  (set "DKHTTP_DKCPP_FUNCTIONS_DIR=%DKHTTP_DKCPP_DIR%/functions")
+	if not defined DKHTTP_DKCPP_DIR				(set "DKHTTP_DKCPP_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
+	if not defined DKHTTP_DKCPP_FUNCTIONS_DIR	(set "DKHTTP_DKCPP_FUNCTIONS_DIR=%DKHTTP_DKCPP_DIR%/functions")
 
 	::###### Download files if missing ######
 	if not exist %DKCPP_FUNCTIONS_DIR%/DK.hpp	(%dk_call% dk_download "%DKHTTP_DKCPP_FUNCTIONS_DIR%/DK.hpp" "%DKCPP_FUNCTIONS_DIR%/DK.hpp")
-	if not exist %DKCPP_FUNCTIONS_DIR%/%~1.cpp   (%dk_call% dk_download "%DKHTTP_DKCPP_FUNCTIONS_DIR%/%~1.cpp" "%DKCPP_FUNCTIONS_DIR%/%~1.cpp")
+	if not exist %DKCPP_FUNCTIONS_DIR%/%~1.cpp	(%dk_call% dk_download "%DKHTTP_DKCPP_FUNCTIONS_DIR%/%~1.cpp" "%DKCPP_FUNCTIONS_DIR%/%~1.cpp")
 
 	::###### target_os ######
-	if not defined target_os (set "target_os=%default_target_os%")
+	if not defined target_os 					(set "target_os=%dk_callDKCpp_TARGET_OS%")
 	%dk_call% dk_debug "target_os = %target_os%"
 
 	::###### target_arch ######
-	if not defined target_arch (set "target_arch=%default_target_arch%")
+	if not defined target_arch 					(set "target_arch=%dk_callDKCpp_TARGET_ARCH%")
 	%dk_call% dk_debug "target_arch = %target_arch%"
 
 	::###### target_env ######
-	if not defined target_env (set "target_env=%default_target_env%")
+	if not defined target_env 					(set "target_env=%dk_callDKCpp_TARGET_ENV%")
 	%dk_call% dk_debug "target_env = %target_env%"
 
 	::###### COMPILER_EXE ######
@@ -65,7 +63,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "COMPILER_EXE=!CLANG_CXX_COMPILER!"
 	)
 	if "%target_env%" equ "gcc" (
-		%dk_call% dk_validate GCC_CXX_COMPILER		"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
+		%dk_call% dk_validate GCC_CXX_COMPILER			"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
 		%dk_call% dk_assertPath GCC_CXX_COMPILER
 		set "COMPILER_EXE=!GCC_CXX_COMPILER!"
 	)

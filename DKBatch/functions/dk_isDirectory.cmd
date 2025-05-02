@@ -35,11 +35,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::###### Using if return value
 	set "myPath=C:/Windows"
     %dk_call% dk_isDirectory "%myPath%" result
-    if "%result%" equ "true" (%dk_call% dk_info "'%myPath%' is a directory") else (%dk_call% dk_info "'%myPath%' is NOT a directory")
+    if /i "%result%" equ "true" (%dk_call% dk_info "'%myPath%' is a directory") else (%dk_call% dk_info "'%myPath%' is NOT a directory")
    
 	set "myPath=C:/NotADir"
     %dk_call% dk_isDirectory "%myPath%" result
-    if "%result%" equ "true" (%dk_call% dk_info "'%myPath%' is a directory") else (%dk_call% dk_info "'%myPath%' is NOT a directory")
+    if /i "%result%" equ "true" (%dk_call% dk_info "'%myPath%' is a directory") else (%dk_call% dk_info "'%myPath%' is NOT a directory")
     
     ::###### Using if ERRORLEVEL
 	set "myPath=C:/Windows"

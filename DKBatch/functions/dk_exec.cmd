@@ -4,14 +4,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-::############ dk_exec SETTINGS ############
-if not defined dk_exec_PRINT_COMMAND 	(set "dk_exec_PRINT_COMMAND=0"	) 	&:: dk_exec_command
-if not defined dk_exec_PRINT_ARGS	 	(set "dk_exec_PRINT_ARGS=0"		) 	&:: dk_exec_arg<N>
-if not defined dk_exec_PRINT_STDOUT		(set "dk_exec_PRINT_STDOUT=0" 	)	&:: dk_exec_stdout[]
-if not defined dk_exec_PRINT_STDERR 	(set "dk_exec_PRINT_STDERR=0" 	)	&:: dk_exec_stderr[]
-if not defined dk_exec_PRINT_EXITCODE 	(set "dk_exec_PRINT_EXITCODE=0"	)	&:: dk_exec_exitcode
-
-
+::######################### dk_exec SETTINGS #########################
+::if not defined dk_exec_PRINT_COMMAND 	(set "dk_exec_PRINT_COMMAND=1"	) 	&:: dk_exec_command
+::if not defined dk_exec_PRINT_ARGS	 	(set "dk_exec_PRINT_ARGS=1"		) 	&:: dk_exec_arg<N>
+::if not defined dk_exec_PRINT_STDOUT	(set "dk_exec_PRINT_STDOUT=1" 	)	&:: dk_exec_stdout[]
+::if not defined dk_exec_PRINT_STDERR 	(set "dk_exec_PRINT_STDERR=1" 	)	&:: dk_exec_stderr[]
+::if not defined dk_exec_PRINT_EXITCODE (set "dk_exec_PRINT_EXITCODE=1"	)	&:: dk_exec_exitcode
 ::####################################################################
 ::# dk_exec(<command> <ret:optional>)
 ::#

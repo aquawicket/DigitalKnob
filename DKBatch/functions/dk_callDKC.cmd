@@ -4,6 +4,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
+::################## dk_callDKC settings #############################
+::if not defined dk_callDKC_TARGET_OS 	(set "dk_callDKC_TARGET_OS=cosmocc")	&::  android, cosmocc, emscripten, ios, iossim, linux, mac, win
+::if not defined dk_callDKC_TARGET_ARCH (set "dk_callDKC_TARGET_ARCH=cosmocc")	&::  arm32, arm64, cosmocc, x86, x86_64
+::if not defined dk_callDKC_TARGET_ENV 	(set "dk_callDKC_TARGET_ENV=cosmocc")	&::  clang, cosmocc, gcc, msvc
 ::####################################################################
 ::# dk_callDKC(function, arguments...)
 ::# dk_callDKC(function, arguments..., rtn_var)
@@ -13,12 +17,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
  
-	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmocc, gcc, msvc 
-	set "default_target_os=cosmocc"
-	set "default_target_arch=cosmocc"
-	set "default_target_env=cosmocc"
-
 	::###### _func_ ######
 	set "_func_=%~1"
 
@@ -39,32 +37,49 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
 	::###### target_os ######
-	if not defined target_os (set "target_os=%default_target_os%")
+	if not defined target_os (
+		if not defined dk_callDKC_TARGET_OS (
+			%dk_call% dk_validate Host_Os "%dk_call% dk_Host_Os"
+			set "dk_callDKC_TARGET_OS=!Host_Os!"
+		)
+		set "target_os=!dk_callDKC_TARGET_OS!"
+	)
 	%dk_call% dk_debug "target_os = %target_os%"
 
 	::###### target_arch ######
-	if not defined target_arch (set "target_arch=%default_target_arch%")
+	if not defined target_arch (
+		if not defined dk_callDKC_TARGET_ARCH (
+			%dk_call% dk_validate Host_Arch "%dk_call% dk_Host_Arch"
+			set "dk_callDKC_TARGET_ARCH=!Host_Arch!"
+		)
+		set "target_arch=!dk_callDKC_TARGET_ARCH!"
+	)
 	%dk_call% dk_debug "target_arch = %target_arch%"
 
 	::###### target_env ######
-	if not defined target_env (set "target_env=%default_target_env%")
+	if not defined target_env (
+		if not defined dk_callDKC_TARGET_ENV (
+			set "dk_callDKC_TARGET_ENV=Clang"
+		)
+		set "target_env=!dk_callDKC_TARGET_ENV!"
+	)
 	%dk_call% dk_debug "target_env = %target_env%"
 
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if "%target_env%" equ "cosmocc" (
+	if /i "%target_env%" equ "cosmocc" (
 		%dk_call% dk_validate SH_EXE				"%dk_call% %DKIMPORTS_DIR%/sh/DKINSTALL.cmd"
 		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd"
 		%dk_call% dk_assertPath COSMOCC_C_COMPILER
 		set "COMPILER_EXE=!SH_EXE! !COSMOCC_C_COMPILER!"
 	)
 
-	if "%target_env%" equ "clang" (
+	if /i "%target_env%" equ "clang" (
 		%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/clang/DKINSTALL.cmd"
 		%dk_call% dk_assertPath CLANG_C_COMPILER
 		set "COMPILER_EXE=!CLANG_C_COMPILER!"
 	)
-	if "%target_env%" equ "gcc" (
+	if /i "%target_env%" equ "gcc" (
 		%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
 		%dk_call% dk_assertPath GCC_C_COMPILER
 		set "COMPILER_EXE=!GCC_C_COMPILER!"

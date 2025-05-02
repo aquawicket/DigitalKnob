@@ -38,9 +38,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     ::###### Using if return value
     %dk_call% dk_isEmptyDirectory "C:/Windows" result
-    if "%result%" equ "true" (%dk_call% dk_info "'C:/Windows' is a directory") else (%dk_call% dk_info "'C:/Windows' is NOT a directory")
+    if /i "%result%" equ "true" (%dk_call% dk_info "'C:/Windows' is a directory") else (%dk_call% dk_info "'C:/Windows' is NOT a directory")
     %dk_call% dk_isEmptyDirectory "C:/NotADir" result
-    if "%result%" equ "true" (%dk_call% dk_info "'C:/Windows' is a directory") else (%dk_call% dk_info "'C:/Windows' is NOT a directory")
+    if /i "%result%" equ "true" (%dk_call% dk_info "'C:/Windows' is a directory") else (%dk_call% dk_info "'C:/Windows' is NOT a directory")
     
     ::###### Using if ERRORLEVEL
     %dk_call% dk_isEmptyDirectory "C:/Windows"
