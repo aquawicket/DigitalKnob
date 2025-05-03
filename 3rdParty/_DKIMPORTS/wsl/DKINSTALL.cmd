@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#    Troubleshooting: https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
 ::#    Custom Distro:   https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro
 :DKINSTALL
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_findProgram WSL_EXE wsl.exe
@@ -84,7 +84,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% DKINSTALL

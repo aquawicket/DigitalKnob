@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_installPacman()
 ::#
 :dk_installPacman
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGIT"
@@ -27,7 +27,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_installPacman

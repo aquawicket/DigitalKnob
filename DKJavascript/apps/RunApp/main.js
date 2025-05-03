@@ -1,18 +1,13 @@
-function RunFile(){
-	if(typeof ActiveXObject === "function"){
-		WshShell = new ActiveXObject("WScript.Shell");
-		WshShell.Run("c:/windows/system32/notepad.exe", 1, false);
-	} else {
-		console.error("ActiveXObject not available in browsers");
-		alert("ActiveXObject not available in browsers");
-	}
+//if(!dk_valid("DK")){ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){}); }
+
+function runApp(){
+	dk_run("C:/Windows/System32/notepad.exe");
 }
-	
-	
-function main(){
+
+function main() {
 	window.resizeTo(350, 350);
 	window.moveTo(10, 10);
-		
-	var gui = '<input type="button" value="Run Notepad" onclick="RunFile();"/>'
-	document.body.innerHTML = gui;
-}
+	if(!dk_valid("dk_run"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_run.js", function() {
+		document.body.innerHTML = '<input type="button" value="Run Notepad" onclick="runApp()"/>';
+	});	}
+};

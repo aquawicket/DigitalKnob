@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKUNINSTALL()
 ::#
 :DKUNINSTALL
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
@@ -33,7 +33,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% DKUNINSTALL

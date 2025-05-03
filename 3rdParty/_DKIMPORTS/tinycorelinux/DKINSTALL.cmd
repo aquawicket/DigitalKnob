@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKINSTALL()
 ::#
 :DKINSTALL
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	set "TINYCORELINUX_RPI=http://www.tinycorelinux.net/15.x/aarch64/test_releases/RPi/piCore64-15.0.0-beta2.zip"
@@ -22,7 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\DKINSTALL.cmd"
 	
-	setlocal
+	%setlocal%
 		if exist "%TINYCORELINUX_IMG%" (%return%)
 		
 		%dk_call% dk_info "Installing tiny-core-linux . . ."
@@ -66,7 +66,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% DKINSTALL

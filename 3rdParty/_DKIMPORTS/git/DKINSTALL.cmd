@@ -17,7 +17,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 ::# DKINSTALL
 ::#
 :DKINSTALL
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 0	
 	
 	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
@@ -55,7 +55,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
     %dk_call% DKINSTALL

@@ -8,9 +8,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKINSTALL()
 ::#
 :DKINSTALL
-::setlocal
+::%setlocal%
 	%dk_call% dk_debugFunc 0
-::setlocal
+::%setlocal%
 	
 	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
 	if defined win_arm64_host   	(set "POWERSHELL_DL=https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-arm64.zip")
@@ -52,7 +52,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
+%setlocal%
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% DKINSTALL
