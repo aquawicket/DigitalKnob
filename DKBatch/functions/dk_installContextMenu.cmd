@@ -10,14 +10,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_installContextMenu
 %setlocal%
 	%dk_call% dk_debugFunc 3
-	set "_menuTitle_=%~1"
+    set "_menuTitle_=%~1"
     set "_icon_exe_=%~2"
-	set "_icon_exe_=%_icon_exe_:/=\%"
-    set "_command_=%~3"
-	set "_command_=%_command_:/=\%"
+	set "_command_=%~3"
+	::set "_icon_exe_=%_icon_exe_:/=\%"
+	::set "_command_=%_command_:/=\%"
     
     %dk_call% dk_info "Adding '%_menuTitle_%' context menu to Registry"
-	%dk_call% dk_info "using %_icon_exe_% for the icon"
+	%dk_call% dk_info "using '%_icon_exe_%' for the icon"
     
     ::### delete existing key ###
  ::   %dk_call% dk_registryDeleteKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%"
