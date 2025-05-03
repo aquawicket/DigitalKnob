@@ -80,7 +80,7 @@ dk_exec = function dk_exec_f(){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_callback(){
+DKTEST = function DKTEST_f(){
 	dk_debugFunc(0);
 	
 	//dk_exec("cmd /c dir");
