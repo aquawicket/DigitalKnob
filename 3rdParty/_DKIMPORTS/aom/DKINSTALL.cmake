@@ -15,7 +15,7 @@ dk_depend			(nasm)
 
 ### IMPORT ###
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam		($ENV{DKIMPORTS_DIR}/aom/dkconfig.txt AOM_IMPORT)
+dk_getFileParams	("$ENV{DKIMPORTS_DIR}/aom/dkconfig.txt")
 dk_import			(${AOM_IMPORT} NAME aom)
 
 ### LINK ###

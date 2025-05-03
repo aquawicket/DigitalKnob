@@ -19,7 +19,7 @@ endif()
 
 ############ MSYS2 variables ############
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam		("$ENV{DKIMPORTS_DIR}/msys2/dkconfig.txt" MSYS2_DL)
+dk_getFileParams	("$ENV{DKIMPORTS_DIR}/msys2/dkconfig.txt")
 dk_importVariables	("${MSYS2_DL}")
 dk_validate			(DKDOWNLOAD_DIR 	"dk_DKDOWNLOAD_DIR()")
 dk_set				(MSYS2_DBPath		"${MSYS2_DIR}/var/lib/pacman")

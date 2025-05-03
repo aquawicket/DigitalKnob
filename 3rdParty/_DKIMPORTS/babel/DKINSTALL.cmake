@@ -12,6 +12,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ### IMPORT ###
 
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/babel/dkconfig.txt BABEL_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/babel/dkconfig.txt")
 dk_import		(${BABEL_IMPORT})
 

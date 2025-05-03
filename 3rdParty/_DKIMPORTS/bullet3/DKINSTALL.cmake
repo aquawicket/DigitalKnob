@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ### IMPORT ###
 dk_load(dk_builder)
 
-dk_getFileParam($ENV{DKIMPORTS_DIR}/bullet3/dkconfig.txt BULLET3_DL)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/bullet3/dkconfig.txt")
 dk_import("${BULLET3_DL}")
 
 ### LINK ###

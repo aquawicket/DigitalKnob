@@ -19,7 +19,7 @@ endif()
 
 
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam("$ENV{DKIMPORTS_DIR}/windows_firewall_control/dkconfig.txt" WINDOWS_FIREWALL_CONTROL_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/windows_firewall_control/dkconfig.txt")
 dk_set(WFCUI_EXE "${ProgramFiles}/Malwarebytes/Windows Firewall Control/wfcUI.exe")
 
 ### INSTALL ###

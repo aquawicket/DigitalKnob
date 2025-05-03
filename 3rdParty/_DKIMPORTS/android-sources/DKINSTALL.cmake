@@ -10,12 +10,11 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://androidsdkoffline.blogspot.com/p/android-sdk-sources-download.html
 
 
-dk_depend(android-sdk)
-dk_mkdir(${ANDROID_SDK}/sources)
+dk_depend		(android-sdk)
+dk_mkdir		(${ANDROID_SDK}/sources)
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/android-sources/dkconfig.txt ANDROID_SOURCES_DL)
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/android-sources/dkconfig.txt ANDROID_SOURCES_VERSION)
-dk_import(${ANDROID_SOURCES_DL} PATH ${ANDROID_SDK}/sources/android-${ANDROID_SOURCES_VERSION})
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-sources/dkconfig.txt")
+dk_import		(${ANDROID_SOURCES_DL} PATH ${ANDROID_SDK}/sources/android-${ANDROID_SOURCES_VERSION})
 
 #dk_import(https://dl.google.com/android/repository/sources-27_r01.zip PATH ${ANDROID_SDK}/sources/android-27)
 #dk_import(https://dl.google.com/android/repository/sources-28_r01.zip PATH ${ANDROID_SDK}/sources/android-28)

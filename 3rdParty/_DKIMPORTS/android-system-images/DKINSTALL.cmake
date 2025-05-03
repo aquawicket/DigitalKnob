@@ -40,8 +40,8 @@ dk_mkdir(${ANDROID_SDK}/system-images)
 #dk_import(https://dl.google.com/android/repository/sys-img/android/x86_64-28_r04.zip PATH ${ANDROID_SDK}/system-images/28)
 
 
-dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_import		("https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-24_r07.zip")
+dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+dk_import			("https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-24_r07.zip")
 
-#dk_getFileParam($ENV{DKIMPORTS_DIR}/android-system-images/dkconfig.txt ANDROID_SYSTEM_IMAGES_DL)
-#dk_import		(${ANDROID_SYSTEM_IMAGES_DL} PATH ${ANDROID_SDK}/system-images/${ANDROID_SYSTEM_IMAGES_VERSION})
+#dk_getFileParams	("$ENV{DKIMPORTS_DIR}/android-system-images/dkconfig.txt")
+#dk_import			(${ANDROID_SYSTEM_IMAGES_DL} PATH ${ANDROID_SDK}/system-images/${ANDROID_SYSTEM_IMAGES_VERSION})

@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### IMPORT ###
 dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam	("$ENV{DKIMPORTS_DIR}/backward-cpp/dkconfig.txt" BACKWARD_CPP_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/backward-cpp/dkconfig.txt")
 dk_import		("${BACKWARD_CPP_IMPORT}")
 
 ### LINK ###

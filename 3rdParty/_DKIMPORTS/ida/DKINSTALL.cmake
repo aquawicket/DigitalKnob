@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam		("$ENV{DKIMPORTS_DIR}/ida/dkconfig.txt" IDA_IMPORT)
+dk_getFileParams	("$ENV{DKIMPORTS_DIR}/ida/dkconfig.txt")
 dk_validate			(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 dk_basename			(${IDA_IMPORT} IDA_DL_FILE)
 dk_importVariables	(${IDA_IMPORT} NAME IDA)

@@ -16,10 +16,7 @@ dk_mkdir(${ANDROID_SDK}/build-tools)
 
 # 30.0.3
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_VERSION)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_WIN_IMPORT)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_MAC_IMPORT)
-dk_getFileParam($ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt ANDROID_BUILD_TOOLS_LINUX_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt")
 
 dk_validate(host_triple "dk_host_triple()")
 if(WIN_HOST)

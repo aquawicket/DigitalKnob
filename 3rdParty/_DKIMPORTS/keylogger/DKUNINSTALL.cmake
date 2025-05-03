@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### UNINSTALL ###
 dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam	("$ENV{DKIMPORTS_DIR}/keylogger/dkconfig.txt" KEYLOGGER_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/keylogger/dkconfig.txt")
 dk_importVariables("${KEYLOGGER_IMPORT}" NAME keylogger)
 
 # TODO - kill keylogger process

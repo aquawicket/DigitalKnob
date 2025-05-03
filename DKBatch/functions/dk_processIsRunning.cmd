@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2
 
-    tasklist | find /i "%1" > nul
+    tasklist | find /i "%~1" > nul
     if "%ERRORLEVEL%" equ "0" (
 		set "dk_processIsRunning=0"
 	) else (
@@ -37,9 +37,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	set "process=cmd"
+	set "process=cmd.exe"
     %dk_call% dk_processIsRunning %process% && echo %process% is running || echo %process% is NOT running
 
 	set "process=nonExisent"
+    %dk_call% dk_processIsRunning %process% && echo %process% is running || echo %process% is NOT running
+	
+	set "process=cmake-gui.exe"
     %dk_call% dk_processIsRunning %process% && echo %process% is running || echo %process% is NOT running
 %endfunction%

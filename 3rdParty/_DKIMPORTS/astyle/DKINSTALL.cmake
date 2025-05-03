@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### IMPORT ###
 dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam		($ENV{DKIMPORTS_DIR}/astyle/dkconfig.txt ASTYLE_IMPORT)
+dk_getFileParams	($ENV{DKIMPORTS_DIR}/astyle/dkconfig.txt)
 dk_import			(${ASTYLE_IMPORT})
 
 ### LINK ###

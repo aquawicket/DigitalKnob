@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ### IMPORT ###
 #dk_validate(host_triple "dk_host_triple()")
 #dk_validate(target_triple "dk_target_triple()")
-dk_getFileParam("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt" ZLIB_IMPORT)
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import(${ZLIB_IMPORT} NAME zlib)
 
 ### DKBIN ###

@@ -12,7 +12,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### INSTALL ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/debo/dkconfig.txt DENO_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/debo/dkconfig.txt")
 dk_import		(DENO_IMPORT)
 
 ### LINK ###

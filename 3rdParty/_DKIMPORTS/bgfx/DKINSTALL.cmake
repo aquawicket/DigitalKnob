@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/bkaradzic/bgfx/archive/refs/heads/master.zip
 #
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	("$ENV{DKIMPORTS_DIR}/babel/dkconfig.txt" BGFX_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/babel/dkconfig.txt")
 dk_import		(${BGFX_IMPORT})
 
 ### LINK ###

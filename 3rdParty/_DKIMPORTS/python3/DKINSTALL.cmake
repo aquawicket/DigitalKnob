@@ -11,10 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://wiki.termux.com/wiki/Python
 
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam("$ENV{DKIMPORTS_DIR}/python3/dkconfig.txt" PYTHON3_MAC_X86_64_IMPORT)
-dk_getFileParam("$ENV{DKIMPORTS_DIR}/python3/dkconfig.txt" PYTHON3_WIN_ARM64_IMPORT)
-dk_getFileParam("$ENV{DKIMPORTS_DIR}/python3/dkconfig.txt" PYTHON3_WIN_X86_64_IMPORT)
-dk_getFileParam("$ENV{DKIMPORTS_DIR}/python3/dkconfig.txt" PYTHON3_WIN_X86_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/python3/dkconfig.txt")
 
 dk_validate(host_triple "dk_host_triple()")
 if(MAC_X86_64_HOST)

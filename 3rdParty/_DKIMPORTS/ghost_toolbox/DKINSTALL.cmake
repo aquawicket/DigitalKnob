@@ -12,7 +12,7 @@ include_guard()
 
 ### INSTALL ###
 dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam	("$ENV{DKIMPORTS_DIR}/ghost_toolbox/dkconfig.txt" GHOST_TOOLBOX_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/ghost_toolbox/dkconfig.txt")
 dk_import		("${GHOST_TOOLBOX_IMPORT}")
 
 dk_copy	("${DK3RDPARTY_DIR}/ghost_toolbox-b43ed1d2b3661eb1f76083330ba40e18bc9e36e8" "$ENV{SystemDrive}/Ghost Toolbox")

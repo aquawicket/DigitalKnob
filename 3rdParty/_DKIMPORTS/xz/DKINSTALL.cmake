@@ -13,7 +13,7 @@ dk_load(dk_builder)
 ### IMPORT ###
 
 #dk_import(https://github.com/tukaani-project/xz.git)
-dk_getFileParam("$ENV{DKIMPORTS_DIR}/xz/dkconfig.txt" XZ_DL)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/xz/dkconfig.txt")
 dk_import("${XZ_DL}")
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")

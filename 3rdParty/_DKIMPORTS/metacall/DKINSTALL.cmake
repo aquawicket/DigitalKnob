@@ -12,10 +12,10 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #dk_depend(metacall)
 
 ### INSTALL ###
-dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-#dk_getFileParam	($ENV{DKIMPORTS_DIR}/metacall/dkconfig.txt METACALL_IMPORT)
-set				(METACALL_DL https://github.com/metacall/core/archive/5b592ac0.zip)
-dk_import		(${METACALL_DL})
+dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+#dk_getFileParams	("$ENV{DKIMPORTS_DIR}/metacall/dkconfig.txt")
+set					(METACALL_DL https://github.com/metacall/core/archive/5b592ac0.zip)
+dk_import			(${METACALL_DL})
 
 ### LINK ###
 dk_include			(${METACALL}/include)

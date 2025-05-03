@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_depend			(clang)
 dk_depend			(make)
 dk_basename			("${CMAKE_CURRENT_LIST_DIR}" current_plugin)
-dk_getFileParam		(${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt ${current_plugin}_import)
+dk_getFileParams	(${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt)
 #dk_importVariables	(${${current_plugin}_import} NAME ${current_plugin})
 dk_import			(${${current_plugin}_import} NAME ${current_plugin})
 

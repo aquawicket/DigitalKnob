@@ -11,5 +11,5 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### INSTALL ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/pe-explorer/dkconfig.txt PE_EXPLORER_IMPORT)
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/pe-explorer/dkconfig.txt")
 dk_import		(${PE_EXPLORER_IMPORT} NAME PE_EXPLORER)

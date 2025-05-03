@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_validate(host_triple "dk_host_triple()")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-#dk_getFileParam("$ENV{DKIMPORTS_DIR}/tdm-gcc/dkconfig.txt" VERSION)
+#dk_getFileParams("$ENV{DKIMPORTS_DIR}/tdm-gcc/dkconfig.txt")
 
 
 ### DOWNLOAD ###

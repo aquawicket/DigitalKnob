@@ -9,6 +9,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/apache/ant.git
 #
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam		($ENV{DKIMPORTS_DIR}/ant/dkconfig.txt ANT_IMPORT)
+dk_getFileParams	("$ENV{DKIMPORTS_DIR}/ant/dkconfig.txt")
 dk_importVariables	(${ANT_IMPORT} NAME ant)
 dk_delete			("${ANT}")

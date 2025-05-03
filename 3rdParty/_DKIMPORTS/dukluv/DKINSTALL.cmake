@@ -17,7 +17,7 @@ dk_depend(libuv)
 
 ### IMPORT ###
 dk_validate				(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam 		("$ENV{DKIMPORTS_DIR}/dukluv/dkconfig.txt" DUKLUV_DL)
+dk_getFileParams 		("$ENV{DKIMPORTS_DIR}/dukluv/dkconfig.txt")
 dk_import				(${DUKLUV_DL})
 
 ### LINK ###

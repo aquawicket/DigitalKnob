@@ -15,7 +15,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### INSTALL ###
 #dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-#dk_getFileParam	($ENV{DKIMPORTS_DIR}/[lib_name]/dkconfig.txt [LIB_NAME]_IMPORT)
+#dk_getFileParams	("$ENV{DKIMPORTS_DIR}/[lib_name]/dkconfig.txt")
 dk_import			("https://github.com/batterycenter/embed/archive/465081903d97ff1ed05e1fd5d0b3c8032a4a26a6.zip")
 
 ### LINK ###
