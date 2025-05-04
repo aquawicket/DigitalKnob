@@ -53,14 +53,14 @@ if "%~1" equ "" (goto DKINSTALL)
 	if not exist "%CMD_EXE%"				(set "CMD_EXE=%~2")
 	if not exist "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
 	if not defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
-	if not exist "%TCC_EXE%"				(set "TCC_EXE=C:/Users/Administrator/digitalknob/DKTools/tcc-rt-master/tcc.exe")
+	::if not exist "%TCC_EXE%"				(set "TCC_EXE=C:/Users/Administrator/digitalknob/DKTools/tcc-rt-master/tcc.exe")
 	
 	::###### run script ######
 	:: "%ComSpec%"	path to cmd.exe
 	:: /V:ON		enable delayed expansion
 	:: /K			keep the window open at the CMD prompt.
 	start "" "%CMD_EXE:/=\%" /V:ON /K "%DKSCRIPT_PATH%"
-	(start "" /b "%TCC_EXE:/=\%" /V:ON /K %DKSCRIPT_PATH% & pause)
+	::(start "" /b "%TCC_EXE:/=\%" /V:ON /K %DKSCRIPT_PATH% & pause)
 
 	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 
