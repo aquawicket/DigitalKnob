@@ -187,7 +187,7 @@ dk_generate() {
 	###### CMake Configure ######
 	dk_call dk_installCmake
 	#dk_call dk_validate DKIMPORTS_DIR "dk_DKIMPORTS_DIR"
-	#dk_call ${DKIMPORTS_DIR}/cmake/dk_install.sh
+	#dk_call ${DKIMPORTS_DIR}/cmake/DKINSTALL.sh
 	
 	dk_call dk_echo
 	dk_call dk_echo "****** CMAKE COMMAND ******"

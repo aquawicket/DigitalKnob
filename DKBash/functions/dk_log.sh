@@ -186,7 +186,7 @@ dk_log() {
 	[ ${!level_LINE} -eq 1 ]  && dk_echo "${!level_COLOR}*** LINE_ON_${_level_} ***${clr}"  && dk_call dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; true
 	
 	###### SOUND ######
-	[ ${!level_SOUND} -ne 0 ] && dk_echo "${!level_COLOR}*** SOUND_ON_${_level_} ***${clr}" && true #dk_call dk_stacktrace; true
+	[ ! "${!level_SOUND-}" = "0" ] && dk_echo "${!level_COLOR}*** SOUND_ON_${_level_} ***${clr}" && true #dk_call dk_stacktrace; true
 	
 	###### TIMEOUT ######
 	[ ${!level_TIMEOUT} -gt 0 ] && dk_echo "${!level_COLOR}*** TIMEOUT_ON_${_level_} ***${clr}" && dk_call dk_timeout ${!level_TIMEOUT}; true

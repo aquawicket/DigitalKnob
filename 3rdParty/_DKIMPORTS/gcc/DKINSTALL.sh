@@ -2,10 +2,10 @@
 [ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-../../../}DK.sh"
 
 ##################################################################################
-# dk_install()
+# DKINSTALL()
 #
 #
-dk_install() {
+DKINSTALL() {
 	dk_call dk_debugFunc 0
 
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"

@@ -8,7 +8,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# DK(<DKSCRIPT_PATH>, <DKSCRIPT_ARGS>)
 ::#
 :DK
-	
+::%setlocal%
 	::if not exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 
 	::### DKSHELL_PATH ###

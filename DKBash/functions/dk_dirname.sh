@@ -9,12 +9,12 @@
 dk_dirname() {
 	dk_debugFunc 1 2
 	
-	local _dirname_=$(dirname "${1}")
+	local dk_dirname=$(dirname "${1}")
 	
 	### return value ###
-	dk_call dk_printVar _dirname_
-	[ ${#} -gt 1 ] && eval "${2}=${_dirname_}" && return  # return value when using rtn_var parameter 
-	dk_return ${_dirname_}; return						  # return value when using command substitution 
+	dk_call dk_printVar dk_dirname
+	[ ${#} -gt 1 ] && eval "${2}=${dk_dirname}" && return  # return value when using rtn_var parameter 
+	dk_return ${dk_dirname}; return						  # return value when using command substitution 
 }
 
 
@@ -26,9 +26,9 @@ dk_dirname() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dirnameA=$(dk_call dk_dirname "/path/to/a/filename.txt")
-	dk_call dk_echo "dirnameA = ${dirnameA}"
+	dk_dirname=$(dk_call dk_dirname "/path/to/a/filename.txt")
+	dk_call dk_echo "dk_dirname = ${dk_dirname}"
 	
-	dk_call dk_dirname "/path/to/a/filename.txt" dirnameB
-	dk_call dk_echo "dirnameB = ${dirnameB}"
+	dk_call dk_dirname "/path/to/a/filename.txt" dk_dirname
+	dk_call dk_echo "dk_dirname = ${dk_dirname}"
 }

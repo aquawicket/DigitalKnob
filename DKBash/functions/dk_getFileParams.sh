@@ -10,6 +10,10 @@ dk_getFileParams() {
     
 	for line in $(cat "$1"); do
 		IFS='=' read -r A B <<< "$line"
+		
+		# if first character is #, skip
+		[ "${A:0:1}" = "#" ] && return
+
 		echo "$A = $B"
 		export "$A=$B"
 	done

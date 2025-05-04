@@ -1,10 +1,10 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_install){ $dk_install = 1 } else{ return }
+if(!$DKINSTALL){ $DKINSTALL = 1 } else{ return }
 
 ####################################################################
-# dk_install()
+# DKINSTALL()
 #
-function Global:dk_install() {
+function Global:DKINSTALL() {
 	dk_debugFunc 0
 
 	dk_call dk_validate HOST_OS "dk_call dk_host_triple"
@@ -42,5 +42,5 @@ function Global:dk_install() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_install
+	dk_call DKINSTALL
 }

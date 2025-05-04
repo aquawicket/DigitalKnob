@@ -15,7 +15,7 @@ if "%~1" equ "" (goto DKINSTALL)
 
 	::###### run script ######
 	::"%GITBASH_EXE%" %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
-	"%BASH_EXE%" -c %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
+	cmd /V:ON /k "%BASH_EXE%" -c %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
 
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (

@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKUNINSTALL()
 ::#
 :DKUNINSTALL
-%setlocal%
+::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
 	::######### kill cmake.exe process #########
@@ -17,20 +17,34 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::######### kill cmake-gui.exe process #########
 	%dk_call% dk_killProcess cmake-gui.exe
 	
-	%dk_call% dk_getFileParams 			"%~dp0/dkconfig.txt"
-	%dk_call% dk_validate Host_Triple 	"%dk_call% dk_Host_Triple"
-	if defined WIN_ARM64_HOST			(set "CMAKE_IMPORT=%CMAKE_WIN_ARM64_IMPORT%")
-	if defined LINUX_ARM64_HOST			(set "CMAKE_IMPORT=%CMAKE_LINUX_AARCH64_IMPORT%")
-	if defined LINUX_X86_64_HOST		(set "CMAKE_IMPORT=%CMAKE_LINUX_X86_64_IMPORT%")
-	if defined MAC_HOST					(set "CMAKE_IMPORT=%CMAKE_MAC_UNIVERSAL_IMPORT%")
-	if defined WIN_X86_64_HOST			(set "CMAKE_IMPORT=%CMAKE_WIN_X86_64_IMPORT%")
-	if defined WIN_X86_HOST				(set "CMAKE_IMPORT=%CMAKE_WIN_X86_IMPORT%")
-    %dk_call% dk_assertVar 				CMAKE_IMPORT
+	%dk_call% dk_getFileParams 		"%~dp0/dkconfig.txt"
+	%dk_call% dk_validate 			Host_Triple "%dk_call% dk_Host_Triple"
+	if defined LINUX_ARM64_HOST		(set "CMAKE_IMPORT=%CMAKE_LINUX_AARCH64_IMPORT%")
+	if defined LINUX_X86_64_HOST	(set "CMAKE_IMPORT=%CMAKE_LINUX_X86_64_IMPORT%")
+	if defined MAC_HOST				(set "CMAKE_IMPORT=%CMAKE_MAC_UNIVERSAL_IMPORT%")
+	if defined WIN_ARM64_HOST		(set "CMAKE_IMPORT=%CMAKE_WIN_ARM64_IMPORT%")
+	if defined WIN_X86_64_HOST		(set "CMAKE_IMPORT=%CMAKE_WIN_X86_64_IMPORT%")
+	if defined WIN_X86_HOST			(set "CMAKE_IMPORT=%CMAKE_WIN_X86_IMPORT%")
+	%dk_call% dk_assertVar 			CMAKE_IMPORT
+	
 	%dk_call% dk_basename 				"%CMAKE_IMPORT%" CMAKE_IMPORT_FILE
 	
 	%dk_call% dk_validate 				DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables		%CMAKE_DL% NAME cmake ROOT %DKTOOLS_DIR%
-		
+	
+	set "CMAKE_EXE=%CMAKE%/bin/cmake.exe"
+	
+::	if exist "%CMAKE_EXE%" 			(%return%)
+	%dk_call% dk_notice 			"UnInstalling CMake . . ."
+::	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+
+::	%dk_call% dk_download 			"%CMAKE_IMPORT%" "%DKDOWNLOAD_DIR%/%CMAKE_IMPORT_FILE%"
+::	%dk_call% dk_smartExtract 		"%DKDOWNLOAD_DIR%/%CMAKE_IMPORT_FILE%" "%CMAKE%"
+
+::	%dk_call% dk_firewallAllow 		"CMake" "%CMAKE%/bin/cmake.exe"
+::	%dk_call% dk_assertPath 		"%CMAKE_EXE%"
+	
+	%dk_call% dk_echo 					"%CMAKE%"
 	%dk_call% dk_delete 				"%CMAKE%"
 %endfunction%
 
@@ -42,5 +56,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% DKUNINSTALL
+	call :DKUNINSTALL
 %endfunction%

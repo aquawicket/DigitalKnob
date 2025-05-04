@@ -9,7 +9,7 @@ dk_cmakeEval() {
 	dk_debugFunc 1 3
 	
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
-	dk_call dk_validate CMAKE_EXE     "dk_call ${DKIMPORTS_DIR}/cmake/dk_install"
+	dk_call dk_validate CMAKE_EXE     "dk_call ${DKIMPORTS_DIR}/cmake/DKINSTALL.cmake.sh"
 	dk_call dk_validate DKCMAKE_DIR   "dk_call dk_DKBRANCH_DIR"
 	
 	DKCOMMAND="${1}"

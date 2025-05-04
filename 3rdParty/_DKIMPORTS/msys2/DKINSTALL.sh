@@ -3,10 +3,10 @@
 dk_includeGuard
 
 ##################################################################################
-# dk_install()
+# DKINSTALL()
 #
 #
-dk_install() {
+DKINSTALL() {
 	dk_debugFunc 0
 
 	dk_call dk_validate DKIMPORTS_DIR "dk_DKIMPORTS_DIR"
@@ -16,4 +16,4 @@ dk_install() {
 	dk_call dk_assertVar CLANG64_EXE
 }
 
-dk_install
+DKINSTALL

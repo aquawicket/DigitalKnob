@@ -1,5 +1,5 @@
-[APP_NAME]_VERSION 1.0
-[APP_NAME]_NAME=[APP_NAME].exe
-[APP_NAME]_DL=https://[APP_NAME].com
-[APP_NAME]=${ProgramFiles_x86}/[APP_NAME]
-[APP_NAME]_EXE=[APP_NAME].exe
+TEMPLATE_APP_VERSION=1.0
+TEMPLATE_APP_NAME=template_app
+TEMPLATE_APP_DL=https://www.template_app.com
+TEMPLATE_APP=${ProgramFiles_x86}/template_app
+TEMPLATE_APP_EXE=template_app.exe

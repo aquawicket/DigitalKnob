@@ -24,7 +24,7 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_return()
 endif()
 
-###### DOWNLOAD ######
+###### CMAKE_IMPORT ######
 dk_validate			(DKIMPORTS_DIR 		"dk_DKIMPORTS_DIR()")
 dk_getFileParams	("$ENV{DKIMPORTS_DIR}/cmake/dkconfig.txt")
 dk_validate			(host_triple 		"dk_host_triple()")
@@ -39,7 +39,7 @@ dk_if				(WIN_X86_64_HOST	"dk_set(CMAKE_IMPORT ${CMAKE_WIN_X86_64_IMPORT})")
 dk_assertVar		(CMAKE_IMPORT)
 dk_importVariables	(${CMAKE_IMPORT})
 
-###### IMPORT ######
+###### INSTALL ######
 if(ANDROID_HOST)
 	dk_installPackage(cmake)
 	dk_findProgram(CMAKE_EXE cmake)
