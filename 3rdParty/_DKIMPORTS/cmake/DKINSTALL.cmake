@@ -37,7 +37,8 @@ dk_if				(WIN_ARM64_HOST		"dk_set(CMAKE_IMPORT ${CMAKE_WIN_ARM64_IMPORT})")
 dk_if				(WIN_X86_HOST		"dk_set(CMAKE_IMPORT ${CMAKE_WIN_X86_IMPORT})")
 dk_if				(WIN_X86_64_HOST	"dk_set(CMAKE_IMPORT ${CMAKE_WIN_X86_64_IMPORT})")
 dk_assertVar		(CMAKE_IMPORT)
-dk_importVariables	(${CMAKE_IMPORT})
+dk_validate			(DKTOOLS_DIR 		"dk_DKTOOLS_DIR()")
+dk_importVariables	(${CMAKE_IMPORT} NAME cmake ROOT ${DKTOOLS_DIR})
 
 ###### INSTALL ######
 if(ANDROID_HOST)
@@ -97,7 +98,7 @@ if(NOT CMAKE_EXE)
 	dk_set(CMAKE_EXE ${CMAKE_COMMAND})
 endif()
 
-dk_firewallAllow("CMake" "${CMAKE_EXE}")
+dk_firewallAllow("CMake" "$ENV{CMAKE_EXE}")
 
 
 #execute_process(COMMAND ${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_EXE_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)

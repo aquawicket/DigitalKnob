@@ -51,6 +51,7 @@ dk_if(NOT DEFINED dk_log_INFO_ENABLE		[[ set(dk_log_INFO_ENABLE		1 				CACHE INT
 dk_if(NOT DEFINED dk_log_INFO_COLOR			[[ set(dk_log_INFO_COLOR		"${white}" 		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED dk_log_INFO_TAG			[[ set(dk_log_INFO_TAG			"INFO: " 		CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED dk_log_INFO_PAUSE			[[ set(dk_log_INFO_PAUSE		0 				CACHE INTERNAL '') ]])
+dk_if(NOT DEFINED dk_log_INFO_SOUND			[[ set(dk_log_INFO_SOUND		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED dk_log_INFO_TIMEOUT		[[ set(dk_log_INFO_TIMEOUT		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED dk_log_INFO_TRACE			[[ set(dk_log_INFO_TRACE		0 				CACHE INTERNAL '') ]])
 dk_if(NOT DEFINED dk_log_INFO_LINE			[[ set(dk_log_INFO_LINE			0				CACHE INTERNAL '') ]])
@@ -182,8 +183,10 @@ function(dk_log)
 	endif()
 
 	### SOUND ###
-	if((dk_log_${_level_}_SOUND) AND (NOT NO_SOUND))
+	message("dk_log_${_level_}_SOUND = ${dk_log_${_level_}_SOUND}")
+	if(dk_log_${_level_}_SOUND)
 		dk_echo("${dk_log_${_level_}_COLOR}*** SOUND_ON_${_level_} ***${clr}")
+		dk_pause()
 		dk_beeps(dk_log_${_level_}_SOUND)
 	endif()
 

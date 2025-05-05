@@ -37,13 +37,17 @@ dk_if				(WIN_ARM64_HOST		"dk_set(CMAKE_IMPORT ${CMAKE_WIN_ARM64_IMPORT})")
 dk_if				(WIN_X86_HOST		"dk_set(CMAKE_IMPORT ${CMAKE_WIN_X86_IMPORT})")
 dk_if				(WIN_X86_64_HOST	"dk_set(CMAKE_IMPORT ${CMAKE_WIN_X86_64_IMPORT})")
 dk_assertVar		(CMAKE_IMPORT)
-dk_importVariables	(${CMAKE_IMPORT})
 
-dk_echo("CMAKE = ${CMAKE}")
-dk_pause
+
 
 ###### UNINSTALL ######
 dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("$ENV{DKIMPORTS_DIR}/cmake/dkconfig.txt")
-dk_importVariables	(${CMAKE_IMPORT} NAME cmake)
-dk_delete			("${CMAKE}")
+dk_validate			(DKTOOLS_DIR 		"dk_DKTOOLS_DIR()")
+dk_importVariables	(${CMAKE_IMPORT} NAME cmake ROOT ${DKTOOLS_DIR})
+
+message("CMAKE = $ENV{CMAKE}")
+dk_assertPath("$ENV{CMAKE}")
+dk_delete			("$ENV{CMAKE}")
+
+

@@ -54,13 +54,14 @@ DKINSTALL() {
 
 		dk_call dk_echo
 		dk_call dk_info "Installing cmake . . ."
+		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
 		dk_call dk_download "${CMAKE_IMPORT}" "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}"
 		#dk_call dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}" "${DKTOOLS_DIR}"
 		#dk_call dk_removeExtension ${CMAKE_IMPORT_NAME} CMAKE_IMPORT_NAME
 		#dk_call dk_rename "${DKTOOLS_DIR}/${CMAKE_IMPORT_NAME}" "${CMAKE_FOLDER}"
 		#echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}\${CMAKE_FOLDER}\installed"
 		dk_call dk_smartExtract "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}" "${DKTOOLS_DIR}"
-		if ! dk_call dk_pathExists ${CMAKE_EXE}; then dk_call dk_error "cannot find cmake"; fi
+		dk_call dk_pathExists "${CMAKE_EXE}" || dk_call dk_error "cannot find cmake.exe"; return -1
 
 	else	# linux package
 		dk_call dk_info "Installing CMake from package managers"
