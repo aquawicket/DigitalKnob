@@ -323,6 +323,9 @@ dk_host_triple() {
 
 	host_triple=${HOST_OS}_${HOST_ARCH}
 	dk_call dk_printVar host_triple
+	
+	#${host_triple}="1"
+	#dk_call dk_printVar ${host_triple}
 
 # OBSOLETE - remove me
 #	if [ "${HOST_OS}" = "win" ]; then

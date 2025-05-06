@@ -15,7 +15,7 @@ dk_basename() {
 	### return value ###
 	#dk_call dk_printVar dk_basename 	# ERROR: causes infinate loop
 	[ ${#} -gt 1 ] && eval "${2}=${dk_basename}" && return $?	# return value when using rtn_var parameter 
-	dk_return ${dk_basename}; return	$?				      		# return value when using command substitution
+	dk_return ${dk_basename}; return	$?				      	# return value when using command substitution
 	
 #DEBUG
 #	dk_call dk_printVar dk_basename
