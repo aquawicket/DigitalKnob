@@ -145,56 +145,72 @@ dk_importVariables() {
 	### PLUGIN_URL_LIST
 	PLUGIN_URL_LIST=""
 	dk_call dk_replaceAll "${PLUGIN_URL}" "/" ";" PLUGIN_URL_LIST 					
-	dk_call dk_printVar PLUGIN_URL_LIST 										# PLUGIN_URL_LIST			: https:;github.com;madler;zlib;archive;refs;heads;master.zip
+	# dk_call dk_printVar PLUGIN_URL_LIST 										# PLUGIN_URL_LIST			: https:;github.com;madler;zlib;archive;refs;heads;master.zip
 	
 	### PLUGIN_GIT
 	PLUGIN_GIT=""
 	$(dk_call dk_includes "${PLUGIN_URL}" "https://github.com") && PLUGIN_GIT=1 || PLUGIN_GIT=0			
-	dk_call dk_printVar PLUGIN_GIT 												# PLUGIN_GIT				: 1
+	# dk_call dk_printVar PLUGIN_GIT 												# PLUGIN_GIT				: 1
 	
 	### PLUGIN_URL_EXTENSION
 	PLUGIN_URL_EXTENSION=""
 	dk_call dk_getExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_EXTENSION			
-	dk_call dk_printVar PLUGIN_URL_EXTENSION 									# PLUGIN_URL_EXTENSION		: .zip
+	# dk_call dk_printVar PLUGIN_URL_EXTENSION 									# PLUGIN_URL_EXTENSION		: .zip
 
 	### PLUGIN_URL_FILE
 	PLUGIN_URL_FILE=""
 	dk_call dk_removeExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_FILE			
-	dk_call dk_printVar PLUGIN_URL_FILE 										# PLUGIN_URL_FILE			: master
+	# dk_call dk_printVar PLUGIN_URL_FILE 										# PLUGIN_URL_FILE			: master
 
 	### PLUGIN_URL_NODE n 
-	# split the url into list converting / to divider ;
-#	index=0 
-#	foreach PLUGIN_URL_ITEM ${PLUGIN_URL_LIST} 
-#		PLUGIN_URL_NODE${index}="${PLUGIN_URL_ITEM}"						
-#		dk_call dk_printVar PLUGIN_URL_NODE${index} 							# PLUGIN_URL_NODE(n 		: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
-#		math EXPR index ${index}+1 
-#	endforeach  
+	dk_call dk_listToArray "${PLUGIN_URL_LIST}" PLUGIN_URL_ARRAY				# PLUGIN_URL_NODE n 		: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
+	# dk_call dk_printVar PLUGIN_URL_ARRAY  
 	
 	### PLUGIN_URL_LENGTH
-#	list LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH 							
-#	dk_call dk_printVar PLUGIN_URL_LENGTH 										# PLUGIN_URL_LENGTH			: 8
-	
+	PLUGIN_URL_LENGTH=""
+#	dk_call Array/dk_length PLUGIN_URL_ARRAY
+	dk_call dk_arrayLength PLUGIN_URL_ARRAY PLUGIN_URL_LENGTH
+#	PLUGIN_URL_LENGTH="${dk_length}"											# PLUGIN_URL_LENGTH		: 8
+	dk_call dk_printVar PLUGIN_URL_LENGTH 
+
+
 
 	#######################################################
 	############### PLUGIN_IMPORT VARIABLES ###############
 	#######################################################
-	#dk_call dk_assertPath CMAKE_CURRENT_LIST_DIR
-	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR" 
-	$(dk_call dk_includes "${CMAKE_CURRENT_LIST_DIR}" "${DKIMPORTS_DIR}") && PLUGIN_IMPORT=1 || PLUGIN_IMPORT=0		
+	[ -n "${IMPORT_PATH}" ] || IMPORT_PATH="${PWD}"
+	#[ "${IMPORT_PATH:~-1}" = "/"] && IMPORT_PATH="${IMPORT_PATH:~0,-1}"
+	#dk_call dk_printVar IMPORT_PATH
 	
 	# PLUGIN_IMPORT
-	dk_call dk_assertVar PLUGIN_IMPORT 
-	dk_call dk_printVar PLUGIN_IMPORT 											# PLUGIN_IMPORT			 	: 1
+	PLUGIN_IMPORT=""
+	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
+	$(dk_call dk_includes "${IMPORT_PATH}" "${DKIMPORTS_DIR}") && PLUGIN_IMPORT="1"
+	#dk_call dk_printVar PLUGIN_IMPORT 											# PLUGIN_IMPORT			 	: 1
 	
 	# PLUGIN_IMPORT_PATH
-	PLUGIN_IMPORT_PATH="${CMAKE_CURRENT_LIST_DIR}"						
-	dk_call dk_printVar PLUGIN_IMPORT_PATH 										# PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+	PLUGIN_IMPORT_PATH=""
+	PLUGIN_IMPORT_PATH="${IMPORT_PATH}"						
+	#dk_call dk_printVar PLUGIN_IMPORT_PATH 										# PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 
 	# PLUGIN_IMPORT_NAME
-	PLUGIN_IMPORT_NAME=$(dk_call dk_basename "${PLUGIN_IMPORT_PATH}")				
-	dk_call dk_printVar PLUGIN_IMPORT_NAME 										# PLUGIN_IMPORT_NAME		: zlib
+	PLUGIN_IMPORT_NAME=""
+	if [ -n "${NAME}" ]; then
+		PLUGIN_IMPORT_NAME="${NAME}"
+	else
+		PLUGIN_IMPORT_NAME=$(dk_call dk_basename "${PLUGIN_IMPORT_PATH}")
+	fi		
+	#dk_call dk_printVar PLUGIN_IMPORT_NAME 										# PLUGIN_IMPORT_NAME		: zlib
 
+	### PLUGIN_IMPORT_NAME_LOWER ###
+	PLUGIN_IMPORT_NAME_LOWER=""
+	dk_call dk_toLower "${PLUGIN_IMPORT_NAME}" PLUGIN_IMPORT_NAME_LOWER				# PLUGIN_IMPORT_NAME_LOWER	: zlib
+	dk_call dk_printVar PLUGIN_IMPORT_NAME_LOWER				         	
+	
+	### PLUGIN_IMPORT_NAME_UPPER ###
+	PLUGIN_IMPORT_NAME_UPPER=""
+	dk_call dk_toUpper "${PLUGIN_IMPORT_NAME}" PLUGIN_IMPORT_NAME_UPPER				# PLUGIN_IMPORT_NAME_UPPER	: ZLIB
+	dk_call dk_printVar PLUGIN_IMPORT_NAME_UPPER		
 
 	##############################################
 	############ PLUGIN_GIT VARIABLES ############

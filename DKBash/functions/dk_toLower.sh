@@ -2,19 +2,19 @@
 [ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ##################################################################################
-# dk_toLower(<input> <output>)
+# dk_toLower(<input> <rtn_var:OPTIONAL>)
 #
 #
 dk_toLower() {
 	dk_debugFunc 1 2
-
-	local _toLower_=$(builtin echo "${1}" | tr '[:upper:]' '[:lower:]')
-	echo "_toLower_ = ${_toLower_}"
+	
+	local _toLower=$(builtin echo "${1}" | tr '[:upper:]' '[:lower:]')
+	#local _toLower=${1,,}  # bash 4.0+
 	
 	### return value ###
-	dk_call dk_printVar _toLower_
-	[ ${#} -gt 1 ] && eval "${2}=${_toLower_}" && return  # return value when using rtn_var parameter 
-	dk_return "${_toLower_}"; return						  # return value when using command substitution
+	eval "dk_toLower=\"${_toLower}\""							# return value in FUNCTION_NAME
+	[ ${#} -gt 1 ] && eval "${2}=\"${_toLower}\""				# return value in RETURN_VAR
+	dk_return "${_toLower}"										# return value in COMMAND_SUBSTITUTION
 }
 
 
@@ -23,14 +23,29 @@ dk_toLower() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	myVar="CoNvErT sTrInG tO aLl LoWeRcAse"
-	echo "myVar = ${myVar,,}"  # bash 4.0+ for easy method
+	### Special Characters ###
+	#     ALL:  ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+	#   VALID:  !   # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _   { | } ~
+	# INVALID:    "                                                   `        
+	dk_call dk_echo
+	myVar="a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0 ! # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ { | } ~"
+	dk_call dk_printVar myVar
 	
-	myVar="CoNvErT sTrInG tO aLl LoWeRcAse"
-	lowercase="$(dk_call dk_toLower "${myVar}")"
-	echo "lowercase = ${lowercase}"
+	# return value in FUNCTION_NAME
+	dk_call dk_echo
+	dk_call dk_toLower "${myVar}"					
+	dk_call dk_printVar dk_toLower
 	
-	myVar="CoNvErT sTrInG tO aLl LoWeRcAse"
-	dk_call dk_toLower "${myVar}" lowercase
-	echo "lowercase = ${lowercase}"
+	# return value in RETURN_VAR
+	dk_call dk_echo
+	dk_call dk_toLower "${myVar}" rv_toLower		
+	dk_call dk_printVar rv_toLower
+	
+	# return value in COMMAND_SUBSTITUTION
+	dk_call dk_echo
+	cs_toLower=$(dk_call dk_toLower "${myVar}")		
+	dk_call dk_printVar cs_toLower
+	
+	# NOTE:
+	# echo "myVar to lowercase = ${myVar,,}"  # bash 4.0+ for easy method
 }

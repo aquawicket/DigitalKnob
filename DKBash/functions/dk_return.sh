@@ -5,9 +5,10 @@ ORIGINAL_IFS=${IFS}
 ##################################################################################
 # dk_return()
 #
-echo "dk_return($*)"
+
 alias dk_return='ret_val "${ret_val-}"'
 ret_val() {
+	#echo "dk_return($*)"
 	if [ "${1-}" = "" ]; then
 		[ -z "${2-}" ] && return $(false)
 		[ -v "${2-}" ] && if [ ${2-} -gt 9 ]; then  # [ ${2-} -gt 9 ] = don't test names that match 0-9, positional parameters
@@ -21,7 +22,7 @@ ret_val() {
 			return $(true);
 		fi
 		
-		builtin echo "${2-}"
+		[ "${BASH_SUBSHELL}" = "0" ] || builtin echo "${2-}"
 		#trap '' EXIT
 		#exit
 	else
