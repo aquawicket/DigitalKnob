@@ -172,7 +172,7 @@ dksetOptions(){
     # $(set -m) && set -m	# Job control is enabled. All processes run in a separate process group. When a background job completes, the shell prints a line containing its exit status.
     # $(set -n) && set -n	# Read commands but do not execute them. This may be used to check a script for syntax errors. This option is ignored by interactive shells.
     # $(set -o) && set -o	# Set the option corresponding to option-name:
-    # $(set -o) && set +o	# Unset the option corresponding to option-name:
+    # $(set +o) && set +o	# Unset the option corresponding to option-name:
     # $(set -u) && set -u	# Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’, as an error when performing parameter expansion.
     # $(set -v) && set -v	# Print shell input lines as they are read.
     # $(set -x) && set -x	# Print a trace of simple commands, for commands, case commands, select commands, and arithmetic for commands and their arguments or associated word lists.
