@@ -22,11 +22,11 @@ dk_arrayAt() {
 	#dk_call dk_validateArgs array int optional:rtn_var
 	
 	eval local _arrayAt='${'${1}'[${2}]}'
+	[ -n "${3-}" ] && local rtn_var="${3}" || local rtn_var="dk_arrayAt"
 	
 	### return value ###
-	eval "dk_arrayAt=\"${_arrayAt}\""				# return value in FUNCTION_NAME
-	[ ${#} -gt 2 ] && eval "${3}=\"${_arrayAt}\""	# return value in RETURN_VAR
-	dk_return "${_arrayAt}"							# return value in COMMAND_SUBSTITUTION
+	eval "${rtn_var}=\"${_arrayAt}\"" 	# return value in FUNCTION_NAME or RETURN_VAR
+	dk_return "${_arrayAt}"				# return value in COMMAND_SUBSTITUTION
 }
 
 

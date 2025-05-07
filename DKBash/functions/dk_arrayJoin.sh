@@ -56,12 +56,15 @@ DKTEST() {
 	# return value in FUNCTION_NAME
 	dk_call dk_arrayJoin myArray
 	dk_call dk_printVar dk_arrayJoin
+	[ "${dk_arrayJoin}" = "a b c,1 2 3,d e f,4 5 6,h i j" ] && dk_call dk_success "dk_arrayJoin() suceeded" || dk_call dk_error "dk_arrayJoin() failed"
 	
 	# return value in RETURN_VAR
 	dk_call dk_arrayJoin myArray "," rv_arrayJoin
 	dk_call dk_printVar rv_arrayJoin
+	[ "${rv_arrayJoin}" = "a b c,1 2 3,d e f,4 5 6,h i j" ] && dk_call dk_success "dk_arrayJoin() suceeded" || dk_call dk_error "dk_arrayJoin() failed"
 	
 	# return value in COMMAND_SUBSTITUTION
 	cs_arrayAt=$(dk_call dk_arrayJoin myArray ",")
 	dk_call dk_printVar cs_arrayAt
+	[ "${cs_arrayAt}" = "a b c,1 2 3,d e f,4 5 6,h i j" ] && dk_call dk_success "dk_arrayJoin() suceeded" || dk_call dk_error "dk_arrayJoin() failed"
 }
