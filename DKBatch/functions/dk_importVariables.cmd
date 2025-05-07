@@ -53,7 +53,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem %dk_call% dk_printVar URL
 	
 	set "IMPORT_PATH="
-	%dk_call% dk_getParameterValue  IMPORT_PATH %* 	&rem C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
+	%dk_call% dk_getParameterValue	IMPORT_PATH	%*		&rem C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
 	if defined IMPORT_PATH (set "IMPORT_PATH=%IMPORT_PATH:\=/%")
 	rem %dk_call% dk_printVar IMPORT_PATH
 	

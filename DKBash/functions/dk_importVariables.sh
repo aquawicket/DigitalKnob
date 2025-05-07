@@ -53,36 +53,36 @@ dk_importVariables() {
 	#dk_call dk_printVar URL
 	
 	IMPORT_PATH=""
-	dk_call dk_getOptionValue IMPORT_PATH 	$*		# /c/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
+	dk_call dk_getParameterValue IMPORT_PATH 	"$@"		# /c/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
 	#[ -n "${IMPORT_PATH}" ] && IMPORT_PATH=${IMPORT_PATH:\=/}
 	# dk_call dk_printVar IMPORT_PATH
 	
 	BRANCH=""
-	dk_call dk_getOptionValue BRANCH		$*		# master
+	dk_call dk_getParameterValue BRANCH			"$@"		# master
 	# dk_call dk_printVar BRANCH
 	
 	FOLDER=""
-	dk_call dk_getOptionValue  FOLDER		$*     	# zlib-master
+	dk_call dk_getParameterValue  FOLDER		"$@"     	# zlib-master
 	# dk_call# dk_printVar FOLDER
 
 	NAME=""
-	dk_call dk_getOptionValue  NAME			$*     	# zlib
+	dk_call dk_getParameterValue  NAME			"$@"     	# zlib
 	# dk_call dk_printVar NAME
 	
 	DIR=""
-	dk_call dk_getOptionValue  DIR			$*     	# C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	dk_call dk_getParameterValue  DIR			"$@"     	# C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	# dk_call dk_printVar DIR
 	
 	ROOT=""
-	dk_call dk_getOptionValue  ROOT			$*     	# C:/Users/Administrator/digitalknob/Development/3rdParty
+	dk_call dk_getParameterValue  ROOT			"$@"     	# C:/Users/Administrator/digitalknob/Development/3rdParty
 	# dk_call dk_printVar ROOT
 	
 	TAG=""
-	dk_call dk_getOptionValue  TAG			$*     	# v1.3.1
+	dk_call dk_getParameterValue  TAG			"$@"     	# v1.3.1
 	# dk_call dk_printVar TAG
 	
 	VERSION=""
-	dk_call dk_getOptionValue  VERSION		$*     	# master
+	dk_call dk_getParameterValue  VERSION		"$@"     	# master
 	# dk_call dk_printVar VERSION
 	
 	###### POPULATE VARIABLES ######
@@ -134,7 +134,7 @@ dk_importVariables() {
 	### PLUGIN_URL
 	# set "PLUGIN_URL="
 	# set "PLUGIN_URL=${URL:\=/}"
-	dk_call dk_set PLUGIN_URL "${URL:\=/}"										# PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	dk_call dk_set PLUGIN_URL "${URL}"											# PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	# dk_call dk_printVar PLUGIN_URL 
 	
 	### PLUGIN_URL_FILENAME
@@ -179,7 +179,7 @@ dk_importVariables() {
 	#######################################################
 	############### PLUGIN_IMPORT VARIABLES ###############
 	#######################################################
-	dk_call dk_assertPath CMAKE_CURRENT_LIST_DIR
+	#dk_call dk_assertPath CMAKE_CURRENT_LIST_DIR
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR" 
 	$(dk_call dk_includes "${CMAKE_CURRENT_LIST_DIR}" "${DKIMPORTS_DIR}") && PLUGIN_IMPORT=1 || PLUGIN_IMPORT=0		
 	
