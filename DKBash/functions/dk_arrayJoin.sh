@@ -2,6 +2,7 @@
 [ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 
 ################################################################################
+# dk_arrayJoin(array)
 # dk_arrayJoin(array, separator)
 # dk_arrayJoin(array, separator, rtn_var)
 #
@@ -19,20 +20,24 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
 dk_arrayJoin() {
-	dk_debugFunc 2 3
+	dk_debugFunc 1 3
 	#dk_call dk_validateArgs array string optional:rtn_var
 
 	eval local _array_='("${'$1'[@]}")'			#typeset -n _array_=${1}
+	[ -n "${2-}" ] && local separator="${2}" || local separator=","
+	[ -n "${3-}" ] && local rtn_var="${3}" || local rtn_var="dk_arrayJoin"
+	
 	for ((i=0; i < ${#_array_[@]}; i++ )); do
-		if [ -z "${arrayJoin-}" ]; then
-			local arrayJoin="${_array_[${i}]}"
+		if [ -z "${_arrayJoin-}" ]; then
+			local _arrayJoin="${_array_[${i}]}"
 		else
-		    local arrayJoin="${arrayJoin}${2}${_array_[${i}]}"
+		    local _arrayJoin="${_arrayJoin}${separator}${_array_[${i}]}"
 		fi
 	done
 	
-	[ ${#} -gt 2 ] && eval ${3}='"${arrayJoin}"' && return
-	dk_return "${arrayJoin}" && return	
+	### return value ###
+	eval "${rtn_var}=\"${_arrayJoin}\"" 	# return value in FUNCTION_NAME or RETURN_VAR
+	dk_return "${_arrayJoin}"				# return value in COMMAND_SUBSTITUTION
 }
 
 
@@ -42,22 +47,21 @@ dk_arrayJoin() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	myArrayA[0]="a b c"
-	myArrayA[1]="1 2 3"
-	myArrayA[2]="d e f"
-	myArrayA[3]="4 5 6"
-	myArrayA[4]="h i j"
+	myArray[0]="a b c"
+	myArray[1]="1 2 3"
+	myArray[2]="d e f"
+	myArray[3]="4 5 6"
+	myArray[4]="h i j"
 	
-	dk_call dk_arrayJoin myArrayA "," myStringA
-	dk_call dk_printVar myStringA
+	# return value in FUNCTION_NAME
+	dk_call dk_arrayJoin myArray
+	dk_call dk_printVar dk_arrayJoin
 	
+	# return value in RETURN_VAR
+	dk_call dk_arrayJoin myArray "," rv_arrayJoin
+	dk_call dk_printVar rv_arrayJoin
 	
-	myArrayB[0]="h i j"
-	myArrayB[1]="4 5 6"
-	myArrayB[2]="d e f"
-	myArrayB[3]="1 2 3"
-	myArrayB[4]="a b c"
-	
-	myStringB=$(dk_call dk_arrayJoin myArrayB ",")
-	dk_call dk_printVar myStringB
+	# return value in COMMAND_SUBSTITUTION
+	cs_arrayAt=$(dk_call dk_arrayJoin myArray ",")
+	dk_call dk_printVar cs_arrayAt
 }
