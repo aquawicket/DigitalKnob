@@ -12,9 +12,9 @@ dk_toLower() {
 	#local _toLower=${1,,}  # bash 4.0+
 	
 	### return value ###
-	eval "dk_toLower=\"${_toLower}\""							# return value in FUNCTION_NAME
-	[ ${#} -gt 1 ] && eval "${2}=\"${_toLower}\""				# return value in RETURN_VAR
-	dk_return "${_toLower}"										# return value in COMMAND_SUBSTITUTION
+	eval "dk_toLower=\"${_toLower}\""				# return value in FUNCTION_NAME
+	[ ${#} -gt 1 ] && eval "${2}=\"${_toLower}\""	# return value in RETURN_VAR
+	dk_return "${_toLower}"							# return value in COMMAND_SUBSTITUTION
 }
 
 
@@ -45,7 +45,4 @@ DKTEST() {
 	dk_call dk_echo
 	cs_toLower=$(dk_call dk_toLower "${myVar}")		
 	dk_call dk_printVar cs_toLower
-	
-	# NOTE:
-	# echo "myVar to lowercase = ${myVar,,}"  # bash 4.0+ for easy method
 }
