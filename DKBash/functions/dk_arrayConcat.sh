@@ -24,12 +24,19 @@ dk_arrayConcat() {
 	
 	eval local arrayA='("${'$1'[@]}")'		#typeset -n arrayA="${1}"
 	eval local arrayB='("${'$2'[@]}")'		#typeset -n arrayB="${2}"
-	new_array=("${arrayA[@]}" "${arrayB[@]}");
-	# eval local new_array=(("${'$1'[@]}") ("${'$2'[@]}"));
+	_arrayConcat=("${arrayA[@]}" "${arrayB[@]}");
+
 
 	### return value ###
-	[ ${#} -gt 2 ] && eval ${3}='("${new_array[@]}")' && return  	# return using parameter rtn_var
-	dk_return "${new_array[@]}" && return							# FIXME
+	eval dk_arrayConcat='("${_arrayConcat[@]}")'			# return value in FUNCTION_NAME
+	[ ${#} -gt 2 ] && eval ${3}='("${_arrayConcat[@]}")'	# return value in RETURN_VAR
+	dk_return "${_arrayConcat[*]}"							# return value in COMMAND_SUBSTITUTION
+	
+	# #NOTE: IFS=$'\n' must be call in parent before COMMAND_SUBSTITUTION 
+	# EXAMPLE
+	# 	IFS=$'\n'
+	# 	myNewArry=($(dk_call dk_arrayConcat array1 array2))
+	# 	IFS=$' \t\n'
 }
 
 
@@ -42,40 +49,61 @@ DKTEST() {
 	myArray1[0]="a b c"
 	myArray1[1]="d e f"
 	myArray1[2]="g h i"
+	dk_call dk_printVar myArray1
 	
 	myArray2[0]="1 2 3"
 	myArray2[1]="4 5 6"
 	myArray2[2]="7 8 9"
+	dk_call dk_printVar myArray2
 	
-	dk_call dk_arrayConcat myArray1 myArray2 myNewArrayA
-	dk_call dk_printVar myNewArrayA
+	# return value in FUNCTION_NAME
+	dk_call dk_arrayConcat myArray1 myArray2
+	dk_call dk_printVar dk_arrayConcat
+	[ "${dk_arrayConcat[0]-}" = "a b c" ] && \
+	[ "${dk_arrayConcat[1]-}" = "d e f" ] && \
+	[ "${dk_arrayConcat[2]-}" = "g h i" ] && \
+	[ "${dk_arrayConcat[3]-}" = "1 2 3" ] && \
+	[ "${dk_arrayConcat[4]-}" = "4 5 6" ] && \
+	[ "${dk_arrayConcat[5]-}" = "7 8 9" ] && \
+	dk_call dk_success "dk_arrayConcat succeeded" || \
+	dk_call dk_error "dk_arrayConcat failed"
 	
-	[ "${myNewArrayA[0]-}" = "a b c" ] && \
-	[ "${myNewArrayA[1]-}" = "d e f" ] && \
-	[ "${myNewArrayA[2]-}" = "g h i" ] && \
-	[ "${myNewArrayA[3]-}" = "1 2 3" ] && \
-	[ "${myNewArrayA[4]-}" = "4 5 6" ] && \
-	[ "${myNewArrayA[5]-}" = "7 8 9" ] && \
-	dk_call dk_echo "dk_arrayConcat succeeded" || \
-	dk_call dk_echo "dk_arrayConcat failed"
+	# return value in RETURN_VAR
+	dk_call dk_arrayConcat myArray1 myArray2 rv_arrayConcat
+	dk_call dk_printVar rv_arrayConcat
+	[ "${rv_arrayConcat[0]-}" = "a b c" ] && \
+	[ "${rv_arrayConcat[1]-}" = "d e f" ] && \
+	[ "${rv_arrayConcat[2]-}" = "g h i" ] && \
+	[ "${rv_arrayConcat[3]-}" = "1 2 3" ] && \
+	[ "${rv_arrayConcat[4]-}" = "4 5 6" ] && \
+	[ "${rv_arrayConcat[5]-}" = "7 8 9" ] && \
+	dk_call dk_success "dk_arrayConcat succeeded" || \
+	dk_call dk_error "dk_arrayConcat failed"
 	
-	myArray3[0]="a b c"
-	myArray3[1]="d e f"
-	myArray3[2]="g h i"
+	# return value in COMMAND_SUBSTITUTION
+	IFS=$'\n'
+	cs_arrayConcat=($(dk_call dk_arrayConcat myArray1 myArray2))
+	IFS=$' \t\n'
+	dk_call dk_printVar cs_arrayConcat
+	[ "${cs_arrayConcat[0]-}" = "a b c" ] && \
+	[ "${cs_arrayConcat[1]-}" = "d e f" ] && \
+	[ "${cs_arrayConcat[2]-}" = "g h i" ] && \
+	[ "${cs_arrayConcat[3]-}" = "1 2 3" ] && \
+	[ "${cs_arrayConcat[4]-}" = "4 5 6" ] && \
+	[ "${cs_arrayConcat[5]-}" = "7 8 9" ] && \
+	dk_call dk_success "dk_arrayConcat succeeded" || \
+	dk_call dk_error "dk_arrayConcat failed"
 	
-	myArray4[0]="1 2 3"
-	myArray4[1]="4 5 6"
-	myArray4[2]="7 8 9"
-	
-	IFS=$'\n' myNewArrayB=($(dk_call dk_arrayConcat myArray3 myArray4))
-	dk_call dk_printVar myNewArrayB
-	
-	[ "${myNewArrayB[0]-}" = "a b c" ] && \
-	[ "${myNewArrayB[1]-}" = "d e f" ] && \
-	[ "${myNewArrayB[2]-}" = "g h i" ] && \
-	[ "${myNewArrayB[3]-}" = "1 2 3" ] && \
-	[ "${myNewArrayB[4]-}" = "4 5 6" ] && \
-	[ "${myNewArrayB[5]-}" = "7 8 9" ] && \
-	dk_call dk_echo "dk_arrayConcat succeeded" || \
-	dk_call dk_echo "dk_arrayConcat failed"
+	# return value in COMMAND_SUBSTITUTION without IFS=$'\n'
+	# ######### FIXME #########
+	#cs_arrayConcat_B=($(dk_call dk_arrayConcat myArray1 myArray2))
+	#dk_call dk_printVar cs_arrayConcat_B
+	#[ "${cs_arrayConcat_B[0]-}" = "a b c" ] && \
+	#[ "${cs_arrayConcat_B[1]-}" = "d e f" ] && \
+	#[ "${cs_arrayConcat_B[2]-}" = "g h i" ] && \
+	#[ "${cs_arrayConcat_B[3]-}" = "1 2 3" ] && \
+	#[ "${cs_arrayConcat_B[4]-}" = "4 5 6" ] && \
+	#[ "${cs_arrayConcat_B[5]-}" = "7 8 9" ] && \
+	#dk_call dk_success "dk_arrayConcat succeeded" || \
+	#dk_call dk_error "dk_arrayConcat failed"
 }
