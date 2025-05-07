@@ -3,7 +3,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ###############################################################################
-# dk_getOption(name) REMOVE
+# dk_getParameter(name) REMOVE
 #
 #	Check if the parameter exists in the calling function by <name>
 #	If the named parameter was defined, set it's value to it's name.
@@ -13,17 +13,17 @@ include_guard()
 #	@${ARGV} - The parameter list of the function
 #	@REMOVE (optional) - Remove the parameter from ARGV after setting the state   
 #
-#	EXAMPLE: dk_getOption(MY_ARG ${ARGV})
+#	EXAMPLE: dk_getParameter(MY_ARG ${ARGV})
 #
-macro(dk_getOption)
+macro(dk_getParameter)
 	dk_debugFunc()
 	
-	###### ARGV - dk_getOption args ######
-	#message("dk_getOption(ARGC = ${ARGC})")
-	#message("dk_getOption(ARGV = ${ARGV})")
+	###### ARGV - dk_getParameter args ######
+	#message("dk_getParameter(ARGC = ${ARGC})")
+	#message("dk_getParameter(ARGV = ${ARGV})")
 	
-	###### ARGN - dk_getOption extra args ######
-	#message("dk_getOption(ARGN = ${ARGN})")
+	###### ARGN - dk_getParameter extra args ######
+	#message("dk_getParameter(ARGN = ${ARGN})")
 	
 	###### PARGV - Parent Function args ######
 	set(PARGC 0)
@@ -37,24 +37,24 @@ macro(dk_getOption)
 
 	#########################################
 	
-	set(dk_getOption_NAME ${ARGV0})
-	cmake_parse_arguments(ARG ${dk_getOption_NAME} "" "" ${PARGV})
+	set(dk_getParameter_NAME ${ARGV0})
+	cmake_parse_arguments(ARG ${dk_getParameter_NAME} "" "" ${PARGV})
 	cmake_parse_arguments(ARG REMOVE "" "" ${ARGV})
 
-	if(ARG_${dk_getOption_NAME})
-		set(${dk_getOption_NAME} "${dk_getOption_NAME}")
-		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOption_NAME} set to "${dk_getOption_NAME}")
+	if(ARG_${dk_getParameter_NAME})
+		set(${dk_getParameter_NAME} "${dk_getParameter_NAME}")
+		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getParameter_NAME} set to "${dk_getParameter_NAME}")
 		
 		if(ARG_REMOVE)
-			list(REMOVE_ITEM ARGV ${dk_getOption_NAME})	# remove arg from the functions ARGV list
-			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOption_NAME} REMOVED from ARGV")
+			list(REMOVE_ITEM ARGV ${dk_getParameter_NAME})	# remove arg from the functions ARGV list
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getParameter_NAME} REMOVED from ARGV")
 			
-			list(REMOVE_ITEM ARGN ${dk_getOption_NAME})	# remove arg from the functions ARGN list
-			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOption_NAME} REMOVED from ARGN")
+			list(REMOVE_ITEM ARGN ${dk_getParameter_NAME})	# remove arg from the functions ARGN list
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getParameter_NAME} REMOVED from ARGN")
 		endif()
 	else()
-		unset(${dk_getOption_NAME})
-		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getOption_NAME} unset")
+		unset(${dk_getParameter_NAME})
+		#dk_notice("${CMAKE_CURRENT_FUNCTION}(): ${dk_getParameter_NAME} unset")
 	endif()
 	
 	set(PARGC 0)
@@ -71,22 +71,22 @@ endmacro()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	TEST_dk_getOption(abc OPTION1 OPTION2 123 OPTION4)
+	TEST_dk_getParameter(abc OPTION1 OPTION2 123 OPTION4)
 endfunction()
 
-function(TEST_dk_getOption input1)
+function(TEST_dk_getParameter input1)
 	dk_debugFunc(1 99)
 	
-	message("TEST_dk_getOption(${ARGV})")
+	message("TEST_dk_getParameter(${ARGV})")
 	set(OPTION1 "UNDEFINED")
 	set(OPTION2 "UNDEFINED")
 	set(OPTION3 "UNDEFINED")
 	set(OPTION4 "UNDEFINED")
 	
-	dk_getOption(OPTION1)
-	dk_getOption(OPTION2 REMOVE)
-	dk_getOption(OPTION3)
-	dk_getOption(OPTION4)
+	dk_getParameter(OPTION1)
+	dk_getParameter(OPTION2 REMOVE)
+	dk_getParameter(OPTION3)
+	dk_getParameter(OPTION4)
 	
 	message("")
 	message("######## AFTER ##################")

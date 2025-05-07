@@ -12,7 +12,7 @@ include_guard()
 function(dk_fatal msg)
 	dk_debugFunc()
 
-	dk_getOption(NO_HALT  REMOVE)
+	dk_getParameter(NO_HALT  REMOVE)
 	
 	dk_log(FATAL "${ARGV0}" ${NO_HALT})
 endfunction()

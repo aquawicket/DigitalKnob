@@ -50,35 +50,35 @@ function(dk_importVariables)
 #	dk_printVar(URL)
 	
 	unset(IMPORT_PATH)
-	dk_getOptionValue(IMPORT_PATH) 	# C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
+	dk_getParameterValue(IMPORT_PATH) 	# C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
 #	dk_printVar(IMPORT_PATH)
 	
 	unset(BRANCH)
-	dk_getOptionValue(BRANCH) 		# master
+	dk_getParameterValue(BRANCH) 		# master
 #	dk_printVar(BRANCH)
 	
 	unset(FOLDER)
-	dk_getOptionValue(FOLDER)		# zlib-master
+	dk_getParameterValue(FOLDER)		# zlib-master
 #	dk_printVar(FOLDER)
 	
 	unset(NAME)
-	dk_getOptionValue(NAME)			# zlib
+	dk_getParameterValue(NAME)			# zlib
 	dk_printVar(NAME)
 	
 	unset(PATH)
-	dk_getOptionValue(PATH)			# C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+	dk_getParameterValue(PATH)			# C:/Users/name/digitalknob/Development/3rdParty/zlib-master
 #	dk_printVar(PATH)
 	
 	unset(ROOT)
-	dk_getOptionValue(ROOT)			# C:/Users/name/digitalknob/Development/3rdParty
+	dk_getParameterValue(ROOT)			# C:/Users/name/digitalknob/Development/3rdParty
 #	dk_printVar(ROOT)
 	
 	unset(TAG)
-	dk_getOptionValue(TAG)			# v1.3.1
+	dk_getParameterValue(TAG)			# v1.3.1
 #	dk_printVar(TAG)
 	
 	unset(VERSION)
-	dk_getOptionValue(VERSION)		# master
+	dk_getParameterValue(VERSION)		# master
 #	dk_printVar(VERSION)
 	
 	

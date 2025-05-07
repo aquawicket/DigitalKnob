@@ -39,7 +39,7 @@ function(dk_download)
 	endif()
 	dk_echo("dest_path = ${dest_path}")
 	
-	dk_getOption(NO_HALT REMOVE)
+	dk_getParameter(NO_HALT REMOVE)
 	dk_echo("NO_HALT = ${NO_HALT}")
 	
 	# Setup all url variables

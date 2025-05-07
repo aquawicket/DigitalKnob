@@ -15,7 +15,7 @@ include_guard()
 function(dk_findFiles path pattern rtn_var)
 	dk_debugFunc()
 	
-	dk_getOption(RECURSE)
+	dk_getParameter(RECURSE)
 
 	if(RECURSE)
 		file(GLOB_RECURSE findFiles "${path}/" "${path}/${pattern}")

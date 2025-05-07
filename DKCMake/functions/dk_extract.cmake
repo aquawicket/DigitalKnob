@@ -13,7 +13,7 @@ include_guard()
 function(dk_extract src dest)
 	dk_debugFunc()
 	
-	dk_getOption(NO_HALT  REMOVE)
+	dk_getParameter(NO_HALT  REMOVE)
 	
 	if(NOT EXISTS ${dest})
 		dk_mkdir(${dest})

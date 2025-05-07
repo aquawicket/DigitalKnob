@@ -15,8 +15,8 @@ include_guard()
 function(dk_copy from to) # OVERWRITE NO_HALT
 	dk_debugFunc()
 	
-	dk_getOption(OVERWRITE)
-	dk_getOption(NO_HALT)
+	dk_getParameter(OVERWRITE)
+	dk_getParameter(NO_HALT)
 	
 	if(EXISTS ${from})
 		if(IS_DIRECTORY ${from})

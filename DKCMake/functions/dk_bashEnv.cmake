@@ -26,9 +26,9 @@ function(dk_bashEnv)
 		dk_error("No working dirctory set. Use dk_chdir() to set the working directory before running Bash commands.")
 	endif()
 	
-	dk_getOption		(NO_HALT 			REMOVE)
-	dk_getOption		(NOECHO				REMOVE)
-	dk_getOptionValue	(OUTPUT_VARIABLE 	REMOVE)
+	dk_getParameter		(NO_HALT 			REMOVE)
+	dk_getParameter		(NOECHO				REMOVE)
+	dk_getParameterValue	(OUTPUT_VARIABLE 	REMOVE)
 	
 	set(EXTRA_ARGS "")
 	if(OUTPUT_VARIABLE)

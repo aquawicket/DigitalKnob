@@ -13,7 +13,7 @@ include_guard()
 function(dk_delete)
 	dk_debugFunc(1 2)
 	
-	dk_getOption(NO_HALT)
+	dk_getParameter(NO_HALT)
 
 	if(NOT EXISTS "${ARGV0}")
 		dk_warning("${ARGV0} does not exist")

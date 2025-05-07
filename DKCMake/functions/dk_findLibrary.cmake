@@ -12,7 +12,7 @@ include_guard()
 function(dk_findLibrary name)
 	dk_debugFunc()
 	
-	dk_getOption(NO_HALT)
+	dk_getParameter(NO_HALT)
 	
 	find_library(${name}_LIBRARY ${name} ${ARGN})
 	if(NOT WIN)

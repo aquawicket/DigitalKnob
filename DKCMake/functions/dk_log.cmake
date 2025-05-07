@@ -146,7 +146,7 @@ dk_if(NOT DEFINED dk_log_FATAL_HALT			[[ set(dk_log_FATAL_HALT		1				CACHE INTER
 function(dk_log)
 	#dk_debugFunc()
 	
-	dk_getOption(NO_HALT REMOVE)
+	dk_getParameter(NO_HALT REMOVE)
 	
 	if(NOT ${dk_log_ENABLE} EQUAL 1)
 		dk_return()

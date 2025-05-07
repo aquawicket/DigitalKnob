@@ -12,7 +12,7 @@ include_guard()
 function(dk_buildLog entry)
 	dk_debugFunc()
 	
-	dk_getOptionValue(PATH)
+	dk_getParameterValue(PATH)
 	
 	if(DEFINED "${entry}")
 		set(msg "${entry} = ${${entry}}")
