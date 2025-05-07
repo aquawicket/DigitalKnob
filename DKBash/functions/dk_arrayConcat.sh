@@ -24,13 +24,14 @@ dk_arrayConcat() {
 	
 	eval local arrayA='("${'$1'[@]}")'		#typeset -n arrayA="${1}"
 	eval local arrayB='("${'$2'[@]}")'		#typeset -n arrayB="${2}"
+	[ -n "${3-}" ] && local rtn_var="${3}" || local rtn_var="dk_arrayConcat"
+	
+	
 	_arrayConcat=("${arrayA[@]}" "${arrayB[@]}");
 
-
 	### return value ###
-	eval dk_arrayConcat='("${_arrayConcat[@]}")'			# return value in FUNCTION_NAME
-	[ ${#} -gt 2 ] && eval ${3}='("${_arrayConcat[@]}")'	# return value in RETURN_VAR
-	dk_return "${_arrayConcat[*]}"							# return value in COMMAND_SUBSTITUTION
+	eval ${rtn_var}='("${_arrayConcat[@]}")'	# return value in FUNCTION_NAME or RETURN_VAR
+	dk_return "${_arrayConcat[*]}"				# return value in COMMAND_SUBSTITUTION
 	
 	# #NOTE: IFS=$'\n' must be call in parent before COMMAND_SUBSTITUTION 
 	# EXAMPLE
