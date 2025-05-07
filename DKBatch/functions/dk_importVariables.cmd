@@ -53,36 +53,36 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem %dk_call% dk_printVar URL
 	
 	set "IMPORT_PATH="
-	%dk_call% dk_getOptionValue  IMPORT_PATH %* 	&rem C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
+	%dk_call% dk_getParameterValue  IMPORT_PATH %* 	&rem C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
 	if defined IMPORT_PATH (set "IMPORT_PATH=%IMPORT_PATH:\=/%")
 	rem %dk_call% dk_printVar IMPORT_PATH
 	
 	set "BRANCH="
-	%dk_call% dk_getOptionValue  BRANCH      %*     &rem master
+	%dk_call% dk_getParameterValue  BRANCH      %*     &rem master
 	rem %dk_call% dk_printVar BRANCH
 	
 	set "FOLDER="
-	%dk_call% dk_getOptionValue  FOLDER      %*     &rem zlib-master
+	%dk_call% dk_getParameterValue  FOLDER      %*     &rem zlib-master
 	rem %dk_call% dk_printVar FOLDER
 	
 	set "NAME="
-	%dk_call% dk_getOptionValue  NAME        %*     &rem zlib
+	%dk_call% dk_getParameterValue  NAME        %*     &rem zlib
 	rem %dk_call% dk_printVar NAME
 	
 	set "DIR="
-	%dk_call% dk_getOptionValue  DIR         %*     &rem C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	%dk_call% dk_getParameterValue  DIR         %*     &rem C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	rem %dk_call% dk_printVar DIR
 	
 	set "ROOT="
-	%dk_call% dk_getOptionValue  ROOT        %*     &rem C:/Users/Administrator/digitalknob/Development/3rdParty
+	%dk_call% dk_getParameterValue  ROOT        %*     &rem C:/Users/Administrator/digitalknob/Development/3rdParty
 	rem %dk_call% dk_printVar ROOT
 	
 	set "TAG="
-	%dk_call% dk_getOptionValue  TAG         %*     &rem v1.3.1
+	%dk_call% dk_getParameterValue  TAG         %*     &rem v1.3.1
 	rem %dk_call% dk_printVar TAG
 	
 	set "VERSION="
-	%dk_call% dk_getOptionValue  VERSION     %*     &rem master
+	%dk_call% dk_getParameterValue  VERSION     %*     &rem master
 	rem %dk_call% dk_printVar VERSION
 
 	rem ###### POPULATE VARIABLES ######
