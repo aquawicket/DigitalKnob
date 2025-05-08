@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+############################## DigitalKnob DKBash ################################
+[ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) $0 $*
+##################################################################################
 
 [ -z ${dk_log_ENABLE-} ]  && dk_log_ENABLE=1
 

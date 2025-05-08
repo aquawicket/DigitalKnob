@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+############################## DigitalKnob DKBash ################################
+[ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*
+##################################################################################
+
 
 #[ -z "${KEY_WAIT_ON_EXIT-}" ] && dk_export KEY_WAIT_ON_EXIT 1
 #[ -z "${STAY_OPEN_ON_EXIT-}" ] && dk_export STAY_OPEN_ON_EXIT 0

@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+############################## DigitalKnob DKBash ################################
+[ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*
+##################################################################################
+
 
 ################################################################################
 # dk_arrayUnshift(array, element)
@@ -20,14 +23,16 @@
 dk_arrayUnshift() {
 	dk_debugFunc 2 99
 	
-	eval local array='("${'$1'[@]}")'					# typeset -n array=${1}
+	eval local array='("${'$1'[@]}")'
+	local rtn_var="dk_arrayUnshift"
+	
 	array=("${@:2}" "${array[@]}");
-	local _length_=${#array[@]}
+	local _arrayUnshift=${#array[@]}
 	
 	### return value ###
-	#eval ${1}='("${array[@]}")'						# FIXME: subshell cannot alter parent variables
-	#[ ${#} -gt 2 ] && eval ${3}=${_length_} && return	# return value using return variable
-	dk_return ${_length_} && return						# return value using command substitution
+	eval ${1}='("${array[@]}")'						
+	eval ${rtn_var}='${_arrayUnshift}'		# return value in FUNCTION_NAME or RETURN_VAR
+	dk_return "${_arrayUnshift}"			# FIXME: command substitution cannot alter parent variables
 }
 
 
@@ -37,45 +42,49 @@ dk_arrayUnshift() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_arrayUnshift myArrayA "a b c" #new_lengthA
-	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
+	dk_call dk_echo
+	dk_call dk_arrayUnshift myArray "a b c"
+	dk_call dk_printVar myArray
+	dk_call dk_printVar dk_arrayUnshift
 	
-	dk_call dk_arrayUnshift myArrayA "1 2 3" #new_lengthA
-	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
+	dk_call dk_echo
+	dk_call dk_arrayUnshift myArray "1 2 3"
+	dk_call dk_printVar myArray
+	dk_call dk_printVar dk_arrayUnshift
 	
-	dk_call dk_arrayUnshift myArrayA "d e f" #new_lengthA
-	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
+	dk_call dk_echo
+	dk_call dk_arrayUnshift myArray "d e f"
+	dk_call dk_printVar myArray
+	dk_call dk_printVar dk_arrayUnshift
 	
-	dk_call dk_arrayUnshift myArrayA "4 5 6" #new_lengthA
-	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
+	dk_call dk_echo
+	dk_call dk_arrayUnshift myArray "4 5 6"
+	dk_call dk_printVar myArray
+	dk_call dk_printVar dk_arrayUnshift
 	
-	dk_call dk_arrayUnshift myArrayA "h i j" #new_lengthA
-	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
-	
+	dk_call dk_echo
+	dk_call dk_arrayUnshift myArray "h i j"
+	dk_call dk_printVar myArray
+	dk_call dk_printVar dk_arrayUnshift
 	
 	# FIXME: command substitution cannot alter parent variables
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "h i j")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "4 5 6")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "d e f")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "1 2 3")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "a b c")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
+#	new_lengthB=$(dk_call dk_arrayUnshift myArray "h i j")
+#	dk_call dk_printVar myArray
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayUnshift myArray "4 5 6")
+#	dk_call dk_printVar myArray
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayUnshift myArray "d e f")
+#	dk_call dk_printVar myArray
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayUnshift myArray "1 2 3")
+#	dk_call dk_printVar myArray
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayUnshift myArray "a b c")
+#	dk_call dk_printVar myArray
+#	dk_call dk_printVar new_lengthB
 }

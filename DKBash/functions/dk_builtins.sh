@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+############################## DigitalKnob DKBash ################################
+[ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*
+##################################################################################
+
 
 # this overwrites the echo command with our own, and call the built-in.
 # https://unix.stackexchange.com/a/241060

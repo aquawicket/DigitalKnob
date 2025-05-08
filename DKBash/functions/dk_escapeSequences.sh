@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+############################## DigitalKnob DKBash ################################
+[ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*
+##################################################################################
+
 
 # https://www.ascii-code.com
 # https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797

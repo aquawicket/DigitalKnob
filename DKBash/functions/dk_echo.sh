@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+############################## DigitalKnob DKBash ################################
+[ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*
+##################################################################################
 
 # The reason we are overwriting echo is to try and keep junk echo's out of command substitution returns.
 #   result=$(myFunction thing) <- if anything writes to stdout durring this, it will junk up the result value.

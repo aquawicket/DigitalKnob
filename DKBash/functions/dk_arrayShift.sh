@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+############################## DigitalKnob DKBash ################################
+[ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*
+##################################################################################
+
 
 ################################################################################
 # dk_arrayShift(array)
@@ -23,7 +26,6 @@ dk_arrayShift() {
 	#dk_call dk_validateArgs array
 	
 	eval local array='("${'$1'[@]}")'						#typeset -n array=${1}
-#	[ -n "${2-}" ] && local rtn_var="${2}" || local rtn_var="dk_arrayShift"
 	local rtn_var="dk_arrayShift"
 	
 	eval local _arrayShift='("${'array'[0]}")'
@@ -31,10 +33,10 @@ dk_arrayShift() {
 	
 	### return value ###
 	eval ${1}='("${array[@]}")'
-	eval ${rtn_var}='("${_arrayShift[@]}")'	# return value in FUNCTION_NAME or RETURN_VAR
+	eval ${rtn_var}='("${_arrayShift[@]}")'		# return value in FUNCTION_NAME or RETURN_VAR
 	
 	# FIXME: command substitution cannot alter parent variables
-	dk_return "${_arrayShift}" && return						# return value using command substitution
+	dk_return "${_arrayShift}" 					# return value using command substitution
 }
 
 

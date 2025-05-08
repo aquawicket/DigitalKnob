@@ -2,6 +2,7 @@
 [ -n "${DK_SH-}" ] && return
 export DK_SH=1
 $(true)
+[ -z "${DKSCRIPT_PATH-}" ] && DKSCRIPT_PATH="${1-}"
 
 ### Print Shell Path ad Version ###
 export ESC=""  # escape character
