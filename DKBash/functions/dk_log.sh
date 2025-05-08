@@ -34,6 +34,7 @@
 [ -z ${dk_log_VERBOSE_TAG-} ]			&& dk_log_VERBOSE_TAG="VERBOSE: "
 [ -z ${dk_log_VERBOSE_TRACE-} ]			&& dk_log_VERBOSE_TRACE=0
 [ -z ${dk_log_VERBOSE_LINE-} ]			&& dk_log_VERBOSE_LINE=0
+[ -z ${dk_log_VERBOSE_SOUND-} ]			&& dk_log_VERBOSE_SOUND=0
 [ -z ${dk_log_VERBOSE_TIMEOUT-} ]		&& dk_log_VERBOSE_TIMEOUT=0
 [ -z ${dk_log_VERBOSE_PAUSE-} ]			&& dk_log_VERBOSE_PAUSE=0
 [ -z ${dk_log_VERBOSE_HALT-} ]			&& dk_log_VERBOSE_HALT=0
@@ -44,6 +45,7 @@
 [ -z ${dk_log_DEBUG_TAG-} ]				&& dk_log_DEBUG_TAG="DEBUG: "
 [ -z ${dk_log_DEBUG_TRACE-} ]			&& dk_log_DEBUG_TRACE=0
 [ -z ${dk_log_DEBUG_LINE-} ]			&& dk_log_DEBUG_LINE=0
+[ -z ${dk_log_DEBUG_SOUND-} ]			&& dk_log_DEBUG_SOUND=0
 [ -z ${dk_log_DEBUG_TIMEOUT-} ]			&& dk_log_DEBUG_TIMEOUT=0
 [ -z ${dk_log_DEBUG_PAUSE-} ]			&& dk_log_DEBUG_PAUSE=0
 [ -z ${dk_log_DEBUG_HALT-} ]			&& dk_log_DEBUG_HALT=0
@@ -54,6 +56,7 @@
 [ -z ${dk_log_DEFAULT_TAG-} ]			&& dk_log_DEFAULT_TAG=""
 [ -z ${dk_log_DEFAULT_TRACE-} ]			&& dk_log_DEFAULT_TRACE=0
 [ -z ${dk_log_DEFAULT_LINE-} ]			&& dk_log_DEFAULT_LINE=0
+[ -z ${dk_log_DEFAULT_SOUND-} ]			&& dk_log_DEFAULT_SOUND=0
 [ -z ${dk_log_DEFAULT_TIMEOUT-} ]		&& dk_log_DEFAULT_TIMEOUT=0
 [ -z ${dk_log_DEFAULT_PAUSE-} ]			&& dk_log_DEFAULT_PAUSE=0
 [ -z ${dk_log_DEFAULT_HALT-} ]			&& dk_log_DEFAULT_HALT=0
@@ -64,6 +67,7 @@
 [ -z ${dk_log_INFO_TAG-} ] 				&& dk_log_INFO_TAG="INFO: "
 [ -z ${dk_log_INFO_TRACE-} ]			&& dk_log_INFO_TRACE=0
 [ -z ${dk_log_INFO_LINE-} ]				&& dk_log_INFO_LINE=0
+[ -z ${dk_log_INFO_SOUND-} ]			&& dk_log_INFO_SOUND=0
 [ -z ${dk_log_INFO_TIMEOUT-} ]			&& dk_log_INFO_TIMEOUT=0
 [ -z ${dk_log_INFO_PAUSE-} ]			&& dk_log_INFO_PAUSE=0
 [ -z ${dk_log_INFO_HALT-} ]				&& dk_log_INFO_HALT=0
@@ -74,6 +78,7 @@
 [ -z ${dk_log_SUCCESS_TAG-} ]			&& dk_log_SUCCESS_TAG="SUCCESS: "
 [ -z ${dk_log_SUCCESS_TRACE-} ]			&& dk_log_SUCCESS_TRACE=0
 [ -z ${dk_log_SUCCESS_LINE-} ]			&& dk_log_SUCCESS_LINE=0
+[ -z ${dk_log_SUCCESS_SOUND-} ]			&& dk_log_SUCCESS_SOUND=0
 [ -z ${dk_log_SUCCESS_TIMEOUT-} ]		&& dk_log_SUCCESS_TIMEOUT=0
 [ -z ${dk_log_SUCCESS_PAUSE-} ]			&& dk_log_SUCCESS_PAUSE=0
 [ -z ${dk_log_SUCCESS_HALT-} ]			&& dk_log_SUCCESS_HALT=0
@@ -84,6 +89,7 @@
 [ -z ${dk_log_TODO_TAG-} ] 				&& dk_log_TODO_TAG="TODO: "
 [ -z ${dk_log_TODO_TRACE-} ]			&& dk_log_TODO_TRACE=0
 [ -z ${dk_log_TODO_LINE-} ]				&& dk_log_TODO_LINE=0
+[ -z ${dk_log_TODO_SOUND-} ]			&& dk_log_TODO_SOUND=0
 [ -z ${dk_log_TODO_TIMEOUT-} ]			&& dk_log_TODO_TIMEOUT=1
 [ -z ${dk_log_TODO_PAUSE-} ]			&& dk_log_TODO_PAUSE=0
 [ -z ${dk_log_TODO_HALT-} ]				&& dk_log_TODO_HALT=0
@@ -94,6 +100,7 @@
 [ -z ${dk_log_NOTICE_TAG-} ]			&& dk_log_NOTICE_TAG="NOTICE: "
 [ -z ${dk_log_NOTICE_TRACE-} ]			&& dk_log_NOTICE_TRACE=0
 [ -z ${dk_log_NOTICE_LINE-} ]			&& dk_log_NOTICE_LINE=0
+[ -z ${dk_log_NOTICE_SOUND-} ]			&& dk_log_NOTICE_SOUND=0
 [ -z ${dk_log_NOTICE_TIMEOUT-} ]		&& dk_log_NOTICE_TIMEOUT=0
 [ -z ${dk_log_NOTICE_PAUSE-} ]			&& dk_log_NOTICE_PAUSE=0
 [ -z ${dk_log_NOTICE_HALT-} ]			&& dk_log_NOTICE_HALT=0
@@ -104,6 +111,7 @@
 [ -z ${dk_log_FIXME_TAG-} ]				&& dk_log_FIXME_TAG="FIXME: "
 [ -z ${dk_log_FIXME_TRACE-} ]			&& dk_log_FIXME_TRACE=0
 [ -z ${dk_log_FIXME_LINE-} ]			&& dk_log_FIXME_LINE=0
+[ -z ${dk_log_FIXME_SOUND-} ]			&& dk_log_FIXME_SOUND=0
 [ -z ${dk_log_FIXME_TIMEOUT-} ]			&& dk_log_FIXME_TIMEOUT=3
 [ -z ${dk_log_FIXME_PAUSE-} ]			&& dk_log_FIXME_PAUSE=0
 [ -z ${dk_log_FIXME_HALT-} ]			&& dk_log_FIXME_HALT=0
@@ -114,6 +122,7 @@
 [ -z ${dk_log_WARNING_TAG-} ]			&& dk_log_WARNING_TAG="WARNING: "
 [ -z ${dk_log_WARNING_TRACE-} ]			&& dk_log_WARNING_TRACE=0
 [ -z ${dk_log_WARNING_LINE-} ]			&& dk_log_WARNING_LINE=0
+[ -z ${dk_log_WARNING_SOUND-} ]			&& dk_log_WARNING_SOUND=0
 [ -z ${dk_log_WARNING_TIMEOUT-} ]		&& dk_log_WARNING_TIMEOUT=0
 [ -z ${dk_log_WARNING_PAUSE-} ]			&& dk_log_WARNING_PAUSE=0
 [ -z ${dk_log_WARNING_HALT-} ]			&& dk_log_WARNING_HALT=0
@@ -124,6 +133,7 @@
 [ -z ${dk_log_DEPRECATED_TAG-} ]		&& dk_log_DEPRECATED_TAG="DEPRECATED: "
 [ -z ${dk_log_DEPRECATED_TRACE-} ]		&& dk_log_DEPRECATED_TRACE=0
 [ -z ${dk_log_DEPRECATED_LINE-} ]		&& dk_log_DEPRECATED_LINE=0
+[ -z ${dk_log_DEPRECATED_SOUND-} ]		&& dk_log_DEPRECATED_SOUND=0
 [ -z ${dk_log_DEPRECATED_TIMEOUT-} ]	&& dk_log_DEPRECATED_TIMEOUT=0
 [ -z ${dk_log_DEPRECATED_PAUSE-} ]		&& dk_log_DEPRECATED_PAUSE=0
 [ -z ${dk_log_DEPRECATED_HALT-} ]		&& dk_log_DEPRECATED_HALT=0
@@ -134,6 +144,7 @@
 [ -z ${dk_log_ERROR_TAG-} ]				&& dk_log_ERROR_TAG="ERROR: "
 [ -z ${dk_log_ERROR_TRACE-} ]			&& dk_log_ERROR_TRACE=1
 [ -z ${dk_log_ERROR_LINE-} ]			&& dk_log_ERROR_LINE=0
+[ -z ${dk_log_ERROR_SOUND-} ]			&& dk_log_ERROR_SOUND=0
 [ -z ${dk_log_ERROR_TIMEOUT-} ]			&& dk_log_ERROR_TIMEOUT=3
 [ -z ${dk_log_ERROR_PAUSE-} ]			&& dk_log_ERROR_PAUSE=0
 [ -z ${dk_log_ERROR_HALT-} ]			&& dk_log_ERROR_HALT=0
@@ -144,6 +155,7 @@
 [ -z ${dk_log_FATAL_TAG-} ]				&& dk_log_FATAL_TAG="FATAL: "
 [ -z ${dk_log_FATAL_TRACE-} ]			&& dk_log_FATAL_TRACE=1
 [ -z ${dk_log_FATAL_LINE-} ]			&& dk_log_FATAL_LINE=0
+[ -z ${dk_log_FATAL_SOUND-} ]			&& dk_log_FATAL_SOUND=0
 [ -z ${dk_log_FATAL_TIMEOUT-} ]			&& dk_log_FATAL_TIMEOUT=9
 [ -z ${dk_log_FATAL_PAUSE-} ]			&& dk_log_FATAL_PAUSE=0
 [ -z ${dk_log_FATAL_HALT-} ]			&& dk_log_FATAL_HALT=0
@@ -186,7 +198,7 @@ dk_log() {
 	[ ${!level_LINE} -eq 1 ]  && dk_echo "${!level_COLOR}*** LINE_ON_${_level_} ***${clr}"  && dk_call dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; true
 	
 	###### SOUND ######
-	[ ! "${!level_SOUND-}" = "0" ] && dk_echo "${!level_COLOR}*** SOUND_ON_${_level_} ***${clr}" && true #dk_call dk_stacktrace; true
+	[ ${!level_SOUND-} -gt 0 ] && dk_echo "${!level_COLOR}*** SOUND_ON_${_level_} ***${clr}" && true #dk_call dk_stacktrace; true
 	
 	###### TIMEOUT ######
 	[ ${!level_TIMEOUT} -gt 0 ] && dk_echo "${!level_COLOR}*** TIMEOUT_ON_${_level_} ***${clr}" && dk_call dk_timeout ${!level_TIMEOUT}; true
