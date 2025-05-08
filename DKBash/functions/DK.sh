@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 [ -n "${DK_SH-}" ] && return
 export DK_SH=1
-$(true)
+
 [ -z "${DKSCRIPT_PATH-}" ] && DKSCRIPT_PATH="${1-}"
 
 ### Print Shell Path ad Version ###
@@ -19,6 +19,7 @@ echo ""
 # DK()
 #
 DK(){
+	builtin echo "DK()"
 	###### SUDO_EXE ######
 	SUDO_EXE(){
 		[ -e "${SUDO_EXE-}" ]	|| export SUDO_EXE=$(command -v sudo) || true
@@ -68,7 +69,7 @@ DK(){
 
 	############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
-	
+
 	############ dkconfig.txt settings ###########
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	if [ -e "${DKSCRIPT_DIR}/dkconfig.txt" ]; then
@@ -78,26 +79,29 @@ DK(){
 	fi
 
     ###### DKTEST MODE ######
-    [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
-	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || return 0
-    dk_call dk_echo
-    dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
-	dk_call dk_echo
-    #dk_call dk_echo "${bg_RGB}20;20;20m"
-    dk_source "${DKSCRIPT_PATH}"
-    #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
-    #dk_call dk_echo "${clr}"
-    DKTEST
-    dk_call dk_echo
-    dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
-    dk_call dk_echo
-    dk_call dk_exit 0
+    [ ! "${DKSCRIPT_EXT}" = ".sh" ] && return
+	if dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()"; then
+		dk_call dk_echo
+		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
+		dk_call dk_echo
+		#dk_call dk_echo "${bg_RGB}20;20;20m"
+		dk_source "${DKSCRIPT_PATH}"
+		#dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
+		#dk_call dk_echo "${clr}"
+		DKTEST
+		dk_call dk_echo
+		dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
+		dk_call dk_echo
+		dk_call dk_exit 0
+	fi
 }
 
 ##################################################################################
 # dkreloadWithBash()
 #
 dkreloadWithBash(){
+	builtin echo "dkreloadWithBash()"
+	
 	[ -n "${BASH-}" ] && return
 	(command -v bash &>/dev/null) || dk_installPackage bash
 	(command -v bash &>/dev/null) && export BASH_EXE=$(command -v bash) || echo "ERROR: bash not found" || exit 1
@@ -112,6 +116,8 @@ dkreloadWithBash(){
 #
 #
 dk_download() {
+	builtin echo "dk_download()"
+	
     if [ -e "${2-}" ]; then
         echo "WARNING: dk_download(): ${2} already exists"
         return 0
@@ -133,6 +139,8 @@ dk_download() {
 # WSLPATH_EXE()
 #
 WSLPATH_EXE(){
+	builtin echo "WSLPATH_EXE()"
+	
 	(command -v wslpath >&2) || echo "wslpath Not Found"  >&2
 }
 
@@ -140,6 +148,8 @@ WSLPATH_EXE(){
 # CYGPATH_EXE()
 #
 CYGPATH_EXE(){
+	builtin echo "CYGPATH_EXE()"
+	
 	(command -v cygpath >&2) || echo "cygpath Not Found"  >&2
 }
 
@@ -147,14 +157,15 @@ CYGPATH_EXE(){
 # DKSCRIPT_VARS()
 #
 DKSCRIPT_VARS(){
-	#echo "0 = ${0}"
-	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0})) 	# Windows subsystem for linux
-	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}))	# Git for Windows
-	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0})													# Default
+	builtin echo "DKSCRIPT_VARS()"
+	
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0}))	 	# Windows subsystem for linux
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}))		# Git for Windows	
+	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0})														# Default
     [ -e "${DKSCRIPT_PATH}" ]	 && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}" || echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found" || exit 1    
-    export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"						
-    export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-    export DKSCRIPT_NAME=$(basename "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+    export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"				
+    export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"	
+    export DKSCRIPT_NAME=$(basename "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"	
     export DKSCRIPT_EXT=".${DKSCRIPT_NAME##*.}"				&& echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
 } 
 
@@ -162,6 +173,8 @@ DKSCRIPT_VARS(){
 # dksetOptions()
 #
 dksetOptions(){
+	builtin echo "dksetOptions()"
+	
     # https://pubs.opengroup.org/onlinepubs/007904875/utilities/set.html
 	# https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
     # $(set -a) && set -a	# Each variable or function that is created or modified is given the export attribute and marked for export to the environment of subsequent commands.
@@ -201,6 +214,8 @@ dksetOptions(){
 #   https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 #
 dk_installPackage() {
+	builtin echo "dk_installPackage()"
+	
     (command -v ${1} &>/dev/null) && return $(true) 
     echo "installing ${1}. . ."
     (command -v apk)           					&& ${SUDO_EXE} apk add ${1} && return				# Alpine Package Keeper (alpine linux)
