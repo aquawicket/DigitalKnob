@@ -5,9 +5,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::################## dk_callDKC settings #############################
-::if not defined dk_callDKC_TARGET_OS 	(set "dk_callDKC_TARGET_OS=cosmocc")	&::  android, cosmocc, emscripten, ios, iossim, linux, mac, win
-::if not defined dk_callDKC_TARGET_ARCH (set "dk_callDKC_TARGET_ARCH=cosmocc")	&::  arm32, arm64, cosmocc, x86, x86_64
-::if not defined dk_callDKC_TARGET_ENV 	(set "dk_callDKC_TARGET_ENV=cosmocc")	&::  clang, cosmocc, gcc, msvc
+::if not defined dk_callDKC_Target_Os 	(set "dk_callDKC_Target_Os=%Host_Os%")		&::  android, cosmocc, emscripten, ios, iossim, linux, mac, win
+::if not defined dk_callDKC_Target_Arch (set "dk_callDKC_Target_Arch=%Host_Arch%")	&::  arm32, arm64, cosmocc, x86, x86_64
+::if not defined dk_callDKC_Target_Env 	(set "dk_callDKC_Target_Env=Clang")			&::  clang, cosmocc, gcc, msvc
 ::####################################################################
 ::# dk_callDKC(function, arguments...)
 ::# dk_callDKC(function, arguments..., rtn_var)
@@ -36,50 +36,56 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not exist %DKC_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
 	if not exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
-	::###### target_os ######
-	if not defined target_os (
-		if not defined dk_callDKC_TARGET_OS (
+	::###### Target_Os ######
+	if not defined Target_Os (
+		if not defined dk_callDKC_Target_Os (
 			%dk_call% dk_validate Host_Os "%dk_call% dk_Host_Os"
-			set "dk_callDKC_TARGET_OS=!Host_Os!"
+			set "dk_callDKC_Target_Os=!Host_Os!"
 		)
-		set "target_os=!dk_callDKC_TARGET_OS!"
+		set "Target_Os=!dk_callDKC_Target_Os!"
 	)
-	%dk_call% dk_debug "target_os = %target_os%"
+	%dk_call% dk_debug "Target_Os = %Target_Os%"
 
-	::###### target_arch ######
-	if not defined target_arch (
-		if not defined dk_callDKC_TARGET_ARCH (
+	::###### Target_Arch ######
+	if not defined Target_Arch (
+		if not defined dk_callDKC_Target_Arch (
 			%dk_call% dk_validate Host_Arch "%dk_call% dk_Host_Arch"
-			set "dk_callDKC_TARGET_ARCH=!Host_Arch!"
+			set "dk_callDKC_Target_Arch=!Host_Arch!"
 		)
-		set "target_arch=!dk_callDKC_TARGET_ARCH!"
+		set "Target_Arch=!dk_callDKC_Target_Arch!"
 	)
-	%dk_call% dk_debug "target_arch = %target_arch%"
+	%dk_call% dk_debug "Target_Arch = %Target_Arch%"
 
-	::###### target_env ######
-	if not defined target_env (
-		if not defined dk_callDKC_TARGET_ENV (
-			set "dk_callDKC_TARGET_ENV=Clang"
+	::###### Target_Env ######
+	if not defined Target_Env (
+		if not defined dk_callDKC_Target_Env (
+			set "dk_callDKC_Target_Env=Clang"
 		)
-		set "target_env=!dk_callDKC_TARGET_ENV!"
+		set "Target_Env=!dk_callDKC_Target_Env!"
 	)
-	%dk_call% dk_debug "target_env = %target_env%"
+	%dk_call% dk_debug "Target_Env = %Target_Env%"
 
+	::###### Target_Triple ######
+	if not defined Target_Triple (
+		set "Target_Triple=%Target_Os%_%Target_Arch%_%Target_Env%"
+	)
+	%dk_call% dk_debug "Target_Triple = %Target_Triple%"
+	
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if /i "%target_env%" equ "cosmocc" (
+	if /i "%Target_Env%" equ "cosmocc" (
 		%dk_call% dk_validate SH_EXE				"%dk_call% %DKIMPORTS_DIR%/sh/DKINSTALL.cmd"
 		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd"
 		%dk_call% dk_assertPath COSMOCC_C_COMPILER
 		set "COMPILER_EXE=!SH_EXE! !COSMOCC_C_COMPILER!"
 	)
 
-	if /i "%target_env%" equ "clang" (
+	if /i "%Target_Env%" equ "clang" (
 		%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/clang/DKINSTALL.cmd"
 		%dk_call% dk_assertPath CLANG_C_COMPILER
 		set "COMPILER_EXE=!CLANG_C_COMPILER!"
 	)
-	if /i "%target_env%" equ "gcc" (
+	if /i "%Target_Env%" equ "gcc" (
 		%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
 		%dk_call% dk_assertPath GCC_C_COMPILER
 		set "COMPILER_EXE=!GCC_C_COMPILER!"
