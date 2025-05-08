@@ -23,17 +23,19 @@ dk_arrayPush() {
 	
 	eval local array='("${'$1'[@]}")'	#typeset -n array=${1}
 	array=("${array[@]}" "${@:2}");
+	local rtn_var="dk_arrayPush"
 	
 	# FIXME: the new array does not get assigned in command substitution.
 	# i.e.  new_length=$(dk_arrayPush myArray "new item") 
 
 	### return value ###
 	eval ${1}='("${array[@]}")'
-
+	local _arrayPush=${#array[@]}
 	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} && return	# variable parameter return
 	
 										# FIXME: the new array does not get assigned in command substitution.
-	dk_return ${#array[@]} && return	# command substitution return
+	eval ${rtn_var}="${_arrayPush}"		# return value in FUNCTION_NAME or RETURN_VAR
+	dk_return "${_arrayPush}"			# command substitution return
 }
 
 
@@ -44,30 +46,36 @@ dk_arrayPush() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_arrayPush myArrayA "a b c" # new_lengthA
-	dk_call dk_printVar myArrayA
-	# dk_call dk_printVar new_lengthA
+	dk_call echo
+	dk_call dk_arrayPush myArray "a b c"
+	dk_call dk_printVar myArray
+	dk_call dk_printVar dk_arrayPush
 	
-	dk_call dk_arrayPush myArrayA "1 2 3" "d e f" # new_lengthA
-	dk_call dk_printVar myArrayA
-	# dk_call dk_printVar new_lengthA
+	dk_call echo
+	dk_call dk_arrayPush myArray "1 2 3" "d e f"
+	dk_call dk_printVar myArray
+	dk_call dk_printVar dk_arrayPush
 	
-	dk_call dk_arrayPush myArrayA "4 5 6" "h i j" # new_lengthA
-	dk_call dk_printVar myArrayA
-	# dk_call dk_printVar new_lengthA
+	dk_call echo
+	dk_call dk_arrayPush myArray "4 5 6" "h i j"
+	dk_call dk_printVar myArray
+	dk_call dk_printVar dk_arrayPush
 	
 	
 	
 	# FIXME: the new array does not get assigned in command substitution.
-	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "h i j")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
+#	dk_call echo
+#	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "h i j")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
 	
-	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "4 5 6" "d e f")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
+#	dk_call echo
+#	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "4 5 6" "d e f")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
 	
-	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "1 2 3" "a b c")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
+#	dk_call echo
+#	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "1 2 3" "a b c")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
 }

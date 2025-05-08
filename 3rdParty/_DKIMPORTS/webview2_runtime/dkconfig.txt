@@ -1,0 +1,2 @@
+WEBVIEW2_RUNTIME_IMPORT=https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/eb295810-08dc-4e76-b709-2dc2d52a4d37/MicrosoftEdgeWebView2RuntimeInstallerX64.exe
+#WEBVIEW2_RUNTIME_IMPORT=https://go.microsoft.com/fwlink/?linkid=2124701
