@@ -9,7 +9,6 @@ include_guard()
 #	  Host_Os = Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows
 #
 function(dk_Host_Os)
-
 	dk_debugFunc(0 1)
 
 	###### SET ######
@@ -23,13 +22,13 @@ function(dk_Host_Os)
 			dk_unset(CMAKE_HOST_UNIX)
 			dk_unset(CMAKE_HOST_APPLE)
 		endif()
-		
+			
 		if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MINGW")
 			set(CMAKE_HOST_WIN32 1)
 			dk_unset(CMAKE_HOST_UNIX)
 			dk_unset(CMAKE_HOST_APPLE)
 		endif()
-		
+			
 		###### Set host_os / HOST_OS, <os>_host / <OS>_HOST ######
 		if(CMAKE_HOST_WIN32)
 			dk_set(Host_Os				Win)
@@ -49,10 +48,7 @@ function(dk_Host_Os)
 	endif()
 
 	dk_assertVar(Host_Os)
-	dk_printVar(Host_Os)				# Host_Os = "Win"
-	
 	dk_set(${Host_Os}_Host 1)				
-	dk_printVar(${Host_Os}_Host)		# Win_Host = 1
 endfunction()
 
 
@@ -62,7 +58,6 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-
 	dk_debugFunc(0)
 
 	###### GET ######
@@ -74,5 +69,4 @@ function(DKTEST)
 	dk_Host_Os("Windows")
 	dk_printVar(Host_Os)
 	dk_printVar(${Host_Os}_Host)
-	
 endfunction()
