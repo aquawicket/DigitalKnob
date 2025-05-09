@@ -17,7 +17,7 @@ function(dk_Host_Arch)
 	
 	###### GET ######
 	else()
-		### Set host_arch/HOST_ARCH
+		### Set Host_Arch ###
 		if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
 			if(CMAKE_HOST_WIN32)
 				if (DEFINED ENV{PROCESSOR_ARCHITEW6432})

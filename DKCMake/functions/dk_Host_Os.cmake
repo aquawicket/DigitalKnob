@@ -29,7 +29,7 @@ function(dk_Host_Os)
 			dk_unset(CMAKE_HOST_APPLE)
 		endif()
 			
-		###### Set host_os / HOST_OS, <os>_host / <OS>_HOST ######
+		###### Set Host_Os and <Os>_Host ######
 		if(CMAKE_HOST_WIN32)
 			dk_set(Host_Os				Win)
 		elseif(CMAKE_HOST_UNIX)
