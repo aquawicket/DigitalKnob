@@ -9,14 +9,14 @@ include_guard()
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 #   i.e.  win_x86_64_clang
 #
-#	If the CMAKE_BINARY_DIR is missing the <TARGET_OS> or the <TARGET_ARCH>, dk_target_tuple_SET will be called to get those variables
+#	If the CMAKE_BINARY_DIR is missing the <TARGET_OS> or the <Target_Arch>, dk_target_tuple_SET will be called to get those variables
 #
 #	target_os   							= android, emscripten, ios, iossim, linux, mac, raspberry, windows
 #	Target_Os   							= Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows 
 #	TARGET_OS   							= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
 #	target_arch								= arm32, arm64, x86, x86_64
 #	Target_Arch								= Arm32, Arm64, X86, X86_64
-#	TARGET_ARCH								= ARM32, ARM64, X86, X86_64
+#	Target_Arch								= ARM32, ARM64, X86, X86_64
 #	target_env								= clang, cosmopolitan, mingw, msvc, ucrt
 #	Target_Env								= Clang, Cosmopolitan, Mingw, Msvc, Ucrt
 #	TARGET_ENV								= CLANG, COSMOPOLITAN, MINGW, MSVC, UCRT
@@ -169,7 +169,7 @@ function(dk_target_tuple)
 		dk_set(${TARGET_OS} 1)
 	endif()
 
-	### Get target_arch / TARGET_ARCH
+	### Get target_arch / Target_Arch
 		if(target_tuple MATCHES "arm64")
 		dk_set(Target_Arch Arm64)
 	elseif(target_tuple MATCHES "arm32")
@@ -189,13 +189,13 @@ function(dk_target_tuple)
 	if(Target_Arch)
 		#d_k_toCamel(${Target_Arch} Target_Arch)
 		dk_toLower(${Target_Arch} target_arch)
-		dk_toUpper(${Target_Arch} TARGET_ARCH)
+		dk_toUpper(${Target_Arch} Target_Arch)
 		dk_set(Target_Arch ${Target_Arch})
 		dk_set(target_arch ${target_arch})
-		dk_set(TARGET_ARCH ${TARGET_ARCH})
+		dk_set(Target_Arch ${Target_Arch})
 		dk_set(${Target_Arch} 1)
 		dk_set(${target_arch} 1)
-		dk_set(${TARGET_ARCH} 1)
+		dk_set(${Target_Arch} 1)
 	endif()
 
 	### Set evn / TARGET_ENV 
@@ -234,7 +234,7 @@ function(dk_target_tuple)
 	### Set target_os_arch / TARGET_OS_ARCH ###
 	dk_set(Target_Os_Arch "${Target_Os}_${Target_Arch}")
 	dk_set(target_os_arch "${target_os}_${target_arch}")
-	dk_set(TARGET_OS_ARCH "${TARGET_OS}_${TARGET_ARCH}")
+	dk_set(TARGET_OS_ARCH "${TARGET_OS}_${Target_Arch}")
 	dk_set(${Target_Os_Arch} 1)
 	dk_set(${target_os_arch} 1)
 	dk_set(${TARGET_OS_ARCH} 1)

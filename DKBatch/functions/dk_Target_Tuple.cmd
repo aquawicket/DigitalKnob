@@ -11,12 +11,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 ::#   i.e.  win_x86_64_clang
 ::#
-::#	If the CMAKE_BINARY_DIR is missing the <TARGET_OS> or the <TARGET_ARCH>, dk_Target_Tuple_SET will be called to get those variables
+::#	If the CMAKE_BINARY_DIR is missing the <TARGET_OS> or the <Target_Arch>, dk_Target_Tuple_SET will be called to get those variables
 ::#
 ::#	Target_Os   							= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
 ::#	TARGET_OS   							= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
 ::#	Target_Arch								= arm32, arm64, x86, x86_64
-::#	TARGET_ARCH								= ARM32, ARM64, X86, X86_64
+::#	Target_Arch								= ARM32, ARM64, X86, X86_64
 ::#	Target_Env								= clang, cosmopolitan, mingw, msvc, ucrt
 ::#	TARGET_ENV								= CLANG, cosmopolitan, MINGW, MSVC, UCRT
 ::# <Target_Os>_<Target_Arch>				= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
@@ -77,7 +77,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	!dk_call! dk_set DK_PROJECT_DIR !DK_PROJECT_DIR!
 	!dk_call! dk_assertPath DK_PROJECT_DIR
 
-	::### Set Target_Tuple/Target_Tuple, <Target_Os>_<Target_Arch>_<Target_Env>/<TARGET_OS>_<TARGET_ARCH>_<TARGET_ENV> ###
+	::### Set Target_Tuple/Target_Tuple, <Target_Os>_<Target_Arch>_<Target_Env>/<TARGET_OS>_<Target_Arch>_<TARGET_ENV> ###
 	!dk_call! dk_basename !Target_Tuple_DIR! Target_Tuple		&:: Target_Tuple 	= win_x86_64_clang
 	!dk_call! dk_set Target_Tuple !Target_Tuple!				&:: Globalize the variable
 	!dk_call! dk_set Target_Tuple !Target_Tuple!				&:: Target_Tuple	= win_x86_64_clang
@@ -113,7 +113,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		!dk_call! dk_set !Target_Os!_target 1
 		!dk_call! dk_set !TARGET_OS!_TARGET 1
 	)
-	::### Get Target_Arch / TARGET_ARCH
+	::### Get Target_Arch / Target_Arch
 	%dk_call% dk_containsCI "!Target_Tuple!" "arm64" 			&& !dk_call! dk_set Target_Arch arm64
 	%dk_call% dk_containsCI "!Target_Tuple!" "arm32" 			&& !dk_call! dk_set Target_Arch arm32
 	%dk_call% dk_containsCI "!Target_Tuple!" "x86_64" 			&& !dk_call! dk_set Target_Arch x86_64
@@ -123,14 +123,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		!dk_call! dk_warning "The target Target_Tuple:!Target_Tuple! does not contain a valid Target_Arch"
 		!dk_call! dk_Target_Tuple_SET
 	) else (
-		!dk_call! dk_toUpper !Target_Arch! TARGET_ARCH
-		!dk_call! dk_set TARGET_ARCH !TARGET_ARCH!
+		!dk_call! dk_toUpper !Target_Arch! Target_Arch
+		!dk_call! dk_set Target_Arch !Target_Arch!
 		!dk_call! dk_set Target_Arch !Target_Arch!)
-		!dk_call! dk_set TARGET_ARCH !TARGET_ARCH!)
+		!dk_call! dk_set Target_Arch !Target_Arch!)
 		!dk_call! dk_set !Target_Arch! 1
-		!dk_call! dk_set !TARGET_ARCH! 1
+		!dk_call! dk_set !Target_Arch! 1
 		!dk_call! dk_set !Target_Arch!_target 1)
-		!dk_call! dk_set !TARGET_ARCH!_TARGET 1)
+		!dk_call! dk_set !Target_Arch!_TARGET 1)
 	)
 
 	::### Set evn / TARGET_ENV 
@@ -157,7 +157,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined !TARGET_ENV! (
 		if defined CLANG if defined ARM64 (
 			!dk_call! dk_set msystem "!Target_Env!!Target_Arch!"	&rem msystem = clangarm64
-			!dk_call! dk_set MSYSTEM "!TARGET_ENV!!TARGET_ARCH!"	&rem MSYSTEM = CLANGARM64
+			!dk_call! dk_set MSYSTEM "!TARGET_ENV!!Target_Arch!"	&rem MSYSTEM = CLANGARM64
 		) else if defined X86_64 (
 			!dk_call! dk_set msystem "!Target_Env!64"				&rem msystem = clang64, mingw64, ucrt64
 			!dk_call! dk_set MSYSTEM "!TARGET_ENV!64"				&rem MSYSTEM = CLANG64, MINGW64, UCRT64

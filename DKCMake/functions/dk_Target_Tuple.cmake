@@ -104,7 +104,7 @@ function(dk_Target_Tuple)
 		dk_set(${Target_Os} 1)
 	endif()
 
-	### Get target_arch / TARGET_ARCH
+	### Get target_arch / Target_Arch
 		if(Target_Tuple MATCHES "Arm64")
 		dk_set(Target_Arch Arm64)
 	elseif(Target_Tuple MATCHES "Arm32")

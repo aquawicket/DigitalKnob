@@ -7,10 +7,10 @@
 #dk_embedBin_DELETE_CMD_ON_EXTRACT=1
 #dk_embedBin_OVERWRITE_OUTPUT=1
 #dk_callDKC_TARGET_OS=cosmocc
-#dk_callDKC_TARGET_ARCH=cosmocc
+#dk_callDKC_Target_Arch=cosmocc
 #dk_callDKC_TARGET_ENV=cosmocc
 #dk_callDKCpp_TARGET_OS=cosmocc
-#dk_callDKCpp_TARGET_ARCH=cosmocc
+#dk_callDKCpp_Target_Arch=cosmocc
 #dk_callDKCpp_TARGET_ENV=cosmocc
 dk_exec_PRINT_COMMAND=1
 dk_exec_PRINT_ARGS=1
