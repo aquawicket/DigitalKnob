@@ -217,15 +217,12 @@ function(dk_Target_Triple_SET)
 		
 		dk_assertVar(Target_Os)
 		dk_set(${Target_Os} 1)
-		dk_assertVar(${Target_Os})
 
 		dk_assertVar(Target_Arch)
 		dk_set(${Target_Arch} 1)
-		dk_assertVar(${Target_Arch})
 
 		if(Target_Env)
 			dk_set(${Target_Env} 1)
-			dk_assertVar(${Target_Env})
 			dk_depend(${target_env})
 		endif()
 		
@@ -236,7 +233,6 @@ function(dk_Target_Triple_SET)
 		endif()
 		dk_assertVar(Target_Triple)
 		dk_set(${Target_Triple} 1)
-		dk_assertVar(${Target_Triple})
 		
 		### Set DEBUG_DIR and RELEASE_DIR variables
 		if(IOS)
