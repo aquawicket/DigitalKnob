@@ -8,11 +8,11 @@ if(!$dk_host_tuple){ $dk_host_tuple = 1 } else{ return } #include guard
 function Global:dk_host_tuple() {
 	dk_debugFunc 0
 
-	###### host_os and <host_os>_host ######
+	###### Host_Os and <Host_Os>_Host ######
 	$global:Host_Os="Win"
 	New-Variable -Name "$($Host_Os)_Host" -Value 1 -Force
 
-	###### host_arch and <arch>_host ######
+	###### Host_Arch and <Host_Arch>_Host ######
 	if( $Env:PROCESSOR_ARCHITECTURE -eq "x86")   { $global:Host_Arch = "X86" }
 	if( $Env:PROCESSOR_ARCHITECTURE -eq "AMD64") { $global:Host_Arch = "X86_64" }
 	if( $Env:PROCESSOR_ARCHITECTURE -eq "IA64")  { $global:Host_Arch = "X86_64" }
@@ -20,7 +20,7 @@ function Global:dk_host_tuple() {
 	if( $Env:PROCESSOR_ARCHITECTURE -eq "ARM64") { $global:Host_Arch = "Arm64" }
 	New-Variable -Name "$($Host_Arch)_Host" -Value 1 -Force
 	
-	###### host_env and <host_env>_host ######
+	###### Host_Env and <Host_Env>_Host ######
 	$global:Host_Env="Clang"
 	if($Host_Env){
 		New-Variable -Name "$($Host_Env)_Host" -Value 1 -Force
@@ -32,7 +32,7 @@ function Global:dk_host_tuple() {
 		New-Variable -Name "$($Host_Tuple)_Host" -Value 1 -Force
 	}
 	
-	if($host_env){
+	if($Host_eEnv){
 		$global:Host_Tuple = (-join($Host_Os, "_", $Host_Arch, "_", $Host_Env))
 		New-Variable -Name "$($Host_Tuple)_Host" -Value 1 -Force
 	}

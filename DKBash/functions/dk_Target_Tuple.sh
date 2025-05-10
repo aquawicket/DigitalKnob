@@ -9,127 +9,114 @@
 #
 #	Set the cached target variables
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
-#   i.e.  win_x86_64_clang
+#   i.e.  Win_X86_64_Clang
 #
 #	If the CMAKE_BINARY_DIR is missing the <Target_Os> or the <Target_Arch>, dk_Target_Tuple_SET will be called to get those variables
 #
-#   <Target_Os>_<Target_Arch>				= Android_arm64, Emscripten_arm64, Ios_arm64, Iossim_arm64, Linux_arm64, Mac_arm64, Raspberry_arm64, windows_arm64
-#   <Target_Os>_<Target_Arch>_<Target_Env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
+#   <Target_Os>_<Target_Arch>				= Android_Arm64, Emscripten_Arm64, Ios_Arm64, Iossim_Arm64, Linux_Arm64, Mac_Arm64, Raspberry_Arm64, Windows_Arm64
+#   <Target_Os>_<Target_Arch>_<Target_Env>	= Android_Arm64_Clang, Emscripten_Arm64_Clang, Ios_Arm64_Clang, Iossim_Arm64_Clang, Linux_Arm64_Clang, Mac_Arm64_Clang, Raspberry_Arm64_Clang, Windows_Arm64_Clang
 #
 dk_Target_Tuple() {
 	dk_debugFunc 0
 
-	#CMAKE_BINARY_DIR="C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/win_x86_64_clang/Debug"
+	#CMAKE_BINARY_DIR="C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/Win_X86_64_Clang/Debug"
 	default_Target_Env="clang"
 
-	### Get TARGET_DIR ###
-	dk_call dk_realpath "${CMAKE_BINARY_DIR}" TARGET_DIR
-	dk_call dk_printVar TARGET_DIR 							# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
+	### Get Target_Dir ###
+	dk_call dk_realpath "${CMAKE_BINARY_DIR}" Target_Dir
+	dk_call dk_printVar Target_Dir 							# Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang/Debug
 
 	#### Set target_type / TARGET_TYPE ###
-	if [ "${TARGET_DIR}" = "Debug" ]; then	
+	if [ "${Target_Dir}" = "Debug" ]; then	
 		### Get DEBUG ###
 		dk_call dk_set DKBUILD_TYPE DEBUG					# DKBUILD_TYPE	= DEBUG
 		dk_call dk_set ${DKBUILD_TYPE} 1					# DEBUG = 1	
-		dk_call dk_dirname TARGET_DIR TARGET_TUPLE_DIR		# TARGET_TUPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
-	elif [ "${TARGET_DIR}" = "Release" ]; then
+		dk_call dk_dirname Target_Dir Target_Tuple_Dir		# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
+	elif [ "${Target_Dir}" = "Release" ]; then
 		### Get RELEASE ###
 		dk_call dk_set DKBUILD_TYPE RELEASE 				# DKBUILD_TYPE = RELEASE
 		dk_call dk_set ${DKBUILD_TYPE} 1					# RELEASE = 1	
-		dk_call dk_dirname ${TARGET_DIR} TARGET_TUPLE_DIR	# TARGET_TUPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
+		dk_call dk_dirname ${Target_Dir} Target_Tuple_Dir	# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
 	fi
 
-	if ( ( dk_call dk_containsCI "${TARGET_DIR}" "android"      ) ||
-		 ( dk_call dk_containsCI "${TARGET_DIR}" "android"      ) ||
-		 ( dk_call dk_containsCI "${TARGET_DIR}" "emscripten"   ) ||
-		 ( dk_call dk_containsCI "${TARGET_DIR}" "ios"          ) ||
-		 ( dk_call dk_containsCI "${TARGET_DIR}" "iossim"       ) ||
-		 ( dk_call dk_containsCI "${TARGET_DIR}" "linux"        ) ||
-		 ( dk_call dk_containsCI "${TARGET_DIR}" "mac"          ) ||
-		 ( dk_call dk_containsCI "${TARGET_DIR}" "raspberry"    ) ||
-		 ( dk_call dk_containsCI "${TARGET_DIR}" "windows"      ) ||
-		 ( dk_call dk_containsCI "${TARGET_DIR}" "cosmopolitan"	) ); then
-		     dk_call dk_set TARGET_TUPLE_DIR ${TARGET_DIR}
+	if ( ( dk_call dk_containsCI "${Target_Dir}" "android"      ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "android"      ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "emscripten"   ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "ios"          ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "iossim"       ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "linux"        ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "mac"          ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "raspberry"    ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "windows"      ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "cosmopolitan"	) ); then
+		     dk_call dk_set Target_Tuple_Dir ${Target_Dir}
 	else
 		dk_call dk_Target_Tuple_SET
-		dk_call dk_set TARGET_TUPLE_DIR ${TARGET_DIR}/${Target_Tuple}
+		dk_call dk_set Target_Tuple_Dir ${Target_Dir}/${Target_Tuple}
 	fi
 
-	if [ -e "${TARGET_TUPLE_DIR}" ]; then
-		dk_call dk_assertPath TARGET_TUPLE_DIR
+	if [ -e "${Target_Tuple_Dir}" ]; then
+		dk_call dk_assertPath Target_Tuple_Dir
 	else
-		dk_call dk_warning "TARGET_TUPLE_DIR:${TARGET_TUPLE_DIR} does not exits."
-		dk_call dk_debug "Creating directory . . .${TARGET_TUPLE_DIR}"
-		dk_call dk_mkdir "${TARGET_TUPLE_DIR}"
+		dk_call dk_warning "Target_Tuple_Dir:${Target_Tuple_Dir} does not exits."
+		dk_call dk_debug "Creating directory . . .${Target_Tuple_Dir}"
+		dk_call dk_mkdir "${Target_Tuple_Dir}"
 	fi
 
 	#### Set DK_PROJECT_DIR ###
-	dk_call dk_dirname "${TARGET_TUPLE_DIR}" DK_PROJECT_DIR
+	dk_call dk_dirname "${Target_Tuple_Dir}" DK_PROJECT_DIR
 	dk_call dk_set DK_PROJECT_DIR "${DK_PROJECT_DIR}"
 	dk_call dk_assertPath DK_PROJECT_DIR
 
-	#### Set Target_Tuple/TARGET_TUPLE, <target_os>_<target_arch>_<Target_Env>/<Target_Os>_<Target_Arch>_<Target_Env> ###
-	dk_call dk_basename ${TARGET_TUPLE_DIR} Target_Tuple			# Target_Tuple 	= win_x86_64_clang
+	#### Set Target_Tuple, <Target_Os>_<Target_Arch>_<Target_Env> ###
+	dk_call dk_basename ${Target_Tuple_Dir} Target_Tuple		# Target_Tuple 	= Win_X86_64_Clang
 	dk_call dk_set Target_Tuple ${Target_Tuple}					# Globalize the variable
-	dk_call dk_toUpper ${Target_Tuple} TARGET_TUPLE				# TARGET_TUPLE	= WIN_X86_64_CLANG
-	dk_call dk_set TARGET_TUPLE ${TARGET_TUPLE}					# Globalize the variable
-	dk_call dk_set ${Target_Tuple} 1								# win_x86_64_clang = 1
-	dk_call dk_set ${TARGET_TUPLE} 1								# WIN_X86_64_CLANG = 1
-	dk_call dk_printVar Target_Tuple 
-	dk_call dk_printVar TARGET_TUPLE 
+	dk_call dk_set ${Target_Tuple} 1							# Win_X86_64_Clang = 1
 
-	#### Set target_os / Target_Os / <target_os>_target / <Target_Os>_TARGET
-	dk_call dk_containsCI "${TARGET_TUPLE}" "android" 		&& dk_call dk_set target_os android
-	dk_call dk_containsCI "${TARGET_TUPLE}" "emscripten" 	&& dk_call dk_set target_os emscripten
-	dk_call dk_containsCI "${TARGET_TUPLE}" "iossim" 		&& dk_call dk_set target_os iossim 
-	dk_call dk_containsCI "${TARGET_TUPLE}" "ios" 			&& dk_call dk_set target_os ios
-	dk_call dk_containsCI "${TARGET_TUPLE}" "linux" 			&& dk_call dk_set target_os linux
-	dk_call dk_containsCI "${TARGET_TUPLE}" "mac" 			&& dk_call dk_set target_os mac
-	dk_call dk_containsCI "${TARGET_TUPLE}" "raspberry" 		&& dk_call dk_set target_os raspberry
-	dk_call dk_containsCI "${TARGET_TUPLE}" "windows" 		&& dk_call dk_set target_os windows
-	dk_call dk_containsCI "${TARGET_TUPLE}" "win"			&& dk_call dk_set target_os win
-	dk_call dk_containsCI "${TARGET_TUPLE}" "cosmopolitan"	&& dk_call dk_set target_os cosmopolitan
-	if [ -z "${target_os-}" ]; then
-		# dk_call dk_warning "The target Target_Tuple:${Target_Tuple} does not contain a valid target_os"
+	#### Set Target_Os / <Target_Os>_Target
+	dk_call dk_containsCI "${Target_Tuple}" "Android" 		&& dk_call dk_set Target_Os Android
+	dk_call dk_containsCI "${Target_Tuple}" "Emscripten" 	&& dk_call dk_set Target_Os Emscripten
+	dk_call dk_containsCI "${Target_Tuple}" "Iossim" 		&& dk_call dk_set Target_Os Iossim 
+	dk_call dk_containsCI "${Target_Tuple}" "Ios" 			&& dk_call dk_set Target_Os Ios
+	dk_call dk_containsCI "${Target_Tuple}" "Linux" 		&& dk_call dk_set Target_Os Linux
+	dk_call dk_containsCI "${Target_Tuple}" "Mac" 			&& dk_call dk_set Target_Os Mac
+	dk_call dk_containsCI "${Target_Tuple}" "Raspberry" 	&& dk_call dk_set Target_Os Raspberry
+	dk_call dk_containsCI "${Target_Tuple}" "Windows" 		&& dk_call dk_set Target_Os Windows
+	dk_call dk_containsCI "${Target_Tuple}" "Win"			&& dk_call dk_set Target_Os Win
+	dk_call dk_containsCI "${Target_Tuple}" "Cosmopolitan"	&& dk_call dk_set Target_Os Cosmopolitan
+	if [ -z "${Target_Os-}" ]; then
+		# dk_call dk_warning "The target Target_Tuple:${Target_Tuple} does not contain a valid Target_Os"
 		dk_call dk_unset Target_Tuple
-		dk_call dk_unset TARGET_TUPLE 
+		dk_call dk_unset Target_Tuple 
 		dk_call dk_Target_Tuple_SET
 	else
-		dk_call dk_toUpper ${target_os} Target_Os
-		dk_call dk_set target_os ${target_os}
-		dk_call dk_set Target_Os ${Target_Os} 
-		dk_call dk_set ${target_os} 1
+		dk_call dk_set Target_Os ${Target_Os}
 		dk_call dk_set ${Target_Os} 1
-		dk_call dk_set ${target_os}_target 1
-		dk_call dk_set ${Target_Os}_TARGET 1
+		dk_call dk_set ${Target_Os}_Target 1
 	fi
 	
-	#### Get target_arch / Target_Arch
-	dk_call dk_containsCI "${Target_Tuple}" "arm64" 			&& dk_call dk_set target_arch arm64
-	dk_call dk_containsCI "${Target_Tuple}" "arm32" 			&& dk_call dk_set target_arch arm32
-	dk_call dk_containsCI "${Target_Tuple}" "x86_64" 			&& dk_call dk_set target_arch x86_64
-	dk_call dk_containsCI "${Target_Tuple}" "x86" 				&& dk_call dk_set target_arch x86
-	dk_call dk_containsCI "${Target_Tuple}" "cosmopolitan" 	&& dk_call dk_set target_arch cosmopolitan	
+	#### Get Target_Arch
+	dk_call dk_containsCI "${Target_Tuple}" "Arm64" 			&& dk_call dk_set Target_Arch arm64
+	dk_call dk_containsCI "${Target_Tuple}" "Arm32" 			&& dk_call dk_set Target_Arch arm32
+	dk_call dk_containsCI "${Target_Tuple}" "X86_64" 			&& dk_call dk_set Target_Arch x86_64
+	dk_call dk_containsCI "${Target_Tuple}" "X86" 				&& dk_call dk_set Target_Arch x86
+	dk_call dk_containsCI "${Target_Tuple}" "Cosmopolitan" 		&& dk_call dk_set Target_Arch cosmopolitan	
 	
-	if [ -z "${target_arch-}" ]; then
-		dk_call dk_warning "The target Target_Tuple:${Target_Tuple} does not contain a valid target_arch"
+	if [ -z "${Target_Arch-}" ]; then
+		dk_call dk_warning "The target Target_Tuple:${Target_Tuple} does not contain a valid Target_Arch"
 		dk_call dk_Target_Tuple_SET
 	else
-		dk_call dk_toUpper ${target_arch} Target_Arch
-		dk_call dk_set target_arch ${target_arch}
 		dk_call dk_set Target_Arch ${Target_Arch}
-		dk_call dk_set ${target_arch} 1
 		dk_call dk_set ${Target_Arch} 1
-		dk_call dk_set ${target_arch}_target 1
-		dk_call dk_set ${Target_Arch}_TARGET 1
+		dk_call dk_set ${Target_Arch}_Target 1
 	fi
 
-	#### Set evn / Target_Env 
-	dk_call dk_containsCI "${Target_Tuple}" "clang" 			&& dk_call dk_set Target_Env clang
-	dk_call dk_containsCI "${Target_Tuple}" "mingw" 			&& dk_call dk_set Target_Env mingw
-	dk_call dk_containsCI "${Target_Tuple}" "ucrt"  			&& dk_call dk_set Target_Env ucrt
-	dk_call dk_containsCI "${Target_Tuple}" "msvc"  			&& dk_call dk_set Target_Env msvc
-	dk_call dk_containsCI "${Target_Tuple}" "cosmopolitan" 	&& dk_call dk_set Target_Env cosmopolitan
+	#### Set Target_Env 
+	dk_call dk_containsCI "${Target_Tuple}" "Clang" 			&& dk_call dk_set Target_Env Clang
+	dk_call dk_containsCI "${Target_Tuple}" "Mingw" 			&& dk_call dk_set Target_Env Mingw
+	dk_call dk_containsCI "${Target_Tuple}" "Ucrt"  			&& dk_call dk_set Target_Env Ucrt
+	dk_call dk_containsCI "${Target_Tuple}" "Msvc"  			&& dk_call dk_set Target_Env Msvc
+	dk_call dk_containsCI "${Target_Tuple}" "Cosmopolitan" 		&& dk_call dk_set Target_Env Cosmopolitan
 	if [ -z "${Target_Env-}" ]; then
 		dk_call dk_warning "The target Target_Tuple:${Target_Tuple} does not contain a valid Target_Env"
 		dk_call dk_set Target_Env ${default_Target_Env}
@@ -142,19 +129,19 @@ dk_Target_Tuple() {
 	if [ -n "${Target_Env-}" ]; then
 		if [ -n "${CLANG-}" ]; then 
 			if [ -n "${ARM64-}" ]; then
-				dk_call dk_set msystem "${Target_Env}${Target_Arch}"	# Msystem = Clangarm64
+				dk_call dk_set Msystem "${Target_Env}${Target_Arch}"	# Msystem = Clangarm64
 			elif [ -n "${X86_64-}" ]; then
 				dk_call dk_set Msystem "${Target_Env}64"				# Msystem = Clang64, Mingw64, Ucrt64
 			elif [ -n "${X86-}" ]; then
-				dk_call dk_set msystem "${Target_Env}32"				# Msystem = Clang32, Mingw32
+				dk_call dk_set Msystem "${Target_Env}32"				# Msystem = Clang32, Mingw32
 			else
 				dk_call dk_fatal "The target Target_Tuple:${Target_Tuple} does not contain a valid Target_Env or msystem"
 			fi
 		fi
-		dk_call dk_set ${MSYSTEM} 1										# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
+		dk_call dk_set ${Msystem} 1										# Clangarm64, Clang64, Clang32, Mingw64, Mingw32, Ucrt64 = 1
 	fi
 	
-	### Set target_os_arch / Target_Os_ARCH ###
+	### Set Target_Os_arch / Target_Os_ARCH ###
 	dk_call dk_set Target_Os_Arch "${Target_Os}_${Target_Arch}"
 	dk_call dk_set ${Target_Os_Arch} 1
 	dk_call dk_set ${Target_Os_Arch}_Target 1

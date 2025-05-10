@@ -63,37 +63,24 @@ function(dk_target_tuple)
 	
 	### Set Target_Tuple_Dir ###
 	dk_dirname(${Target_Dir} Target_Tuple_Dir)	
-	#d_k_toCamel(${Target_Tuple_Dir} Target_Tuple_Dir)	# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang	
-	dk_toLower(${Target_Tuple_Dir} target_tuple_dir)		# target_tuple_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang
-	dk_toUpper(${Target_Tuple_Dir} TARGET_TUPLE_DIR)		# TARGET_TUPLE_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG
-	#dk_printVar(Target_Tuple_Dir)						
-	#dk_printVar(target_tuple_dir)						
-	#dk_printVar(TARGET_TUPLE_DIR)						
 	message("")
 	
-	if( (target_dir MATCHES "android")		OR
-		(target_dir MATCHES "emscripten")	OR
-		(target_dir MATCHES "ios")			OR
-		(target_dir MATCHES "iossim")		OR
-		(target_dir MATCHES "linux")		OR
-		(target_dir MATCHES "mac")			OR
-		(target_dir MATCHES "raspberry")	OR
-		(target_dir MATCHES "win")			OR
-		(target_dir MATCHES "cosmopolitan") )
+	if( (target_dir MATCHES "Android")		OR
+		(target_dir MATCHES "Emscripten")	OR
+		(target_dir MATCHES "Ios")			OR
+		(target_dir MATCHES "Iossim")		OR
+		(target_dir MATCHES "Linux")		OR
+		(target_dir MATCHES "Mac")			OR
+		(target_dir MATCHES "Raspberry")	OR
+		(target_dir MATCHES "Win")			OR
+		(target_dir MATCHES "Cosmopolitan") )
 		dk_set(Target_Tuple_Dir ${Target_Dir})
 	else()
 		message("######calling dk_target_tuple_SET()#####")
 		dk_target_tuple_SET()
 		message("######returned from dk_target_tuple_SET()#####")
-		#dk_printVar(Target_Tuple)
-		#dk_printVar(target_tuple)
-		#dk_printVar(TARGET_TUPLE)
 		dk_set(Target_Tuple_Dir ${Target_Dir}/${Target_Tuple})
 	endif()
-	
-	#dk_printVar(Target_Tuple_Dir)						# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
-	#dk_printVar(target_tuple_dir)						# target_tuple_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang
-	#dk_printVar(TARGET_TUPLE_DIR)						# TARGET_TUPLE_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG
 	
 	if(NOT EXISTS ${Target_Tuple_Dir})
 		dk_warning("Target_Tuple_Dir:${Target_Tuple_Dir} does not exits. Creating directory . . .")
