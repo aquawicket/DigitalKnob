@@ -18,7 +18,7 @@ dk_mkdir(${ANDROID_SDK}/build-tools)
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt")
 
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 if(WIN_HOST)
 	dk_import(${ANDROID_BUILD_TOOLS_WIN_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 elseif(MAC_HOST)

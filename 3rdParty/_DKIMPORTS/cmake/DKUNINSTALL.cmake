@@ -27,7 +27,7 @@ endif()
 ###### CMAKE_IMPORT ######
 dk_validate			(DKIMPORTS_DIR 		"dk_DKIMPORTS_DIR()")
 dk_getFileParams	("$ENV{DKIMPORTS_DIR}/cmake/dkconfig.txt")
-dk_validate			(host_triple 		"dk_host_triple()")
+dk_validate			(Host_Triple 		"dk_Host_Triple()")
 dk_assertVar		(CMAKE_WIN_X86_64_IMPORT)
 dk_if				(ANDROID_HOST		"dk_set(CMAKE_IMPORT ${CMAKE_LINUX_AARCH64_IMPORT})")
 dk_if				(LINUX_ARM64_HOST	"dk_set(CMAKE_IMPORT ${CMAKE_LINUX_AARCH64_IMPORT})")

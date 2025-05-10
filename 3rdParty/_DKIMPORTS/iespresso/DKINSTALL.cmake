@@ -9,6 +9,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://ss64.com/nt/iexpress.html
 # https://www.partitionwizard.com/partitionmanager/bat-to-exe.html
 
-#dk_validate(host_triple "dk_host_triple()")
+#dk_validate(Host_Triple "dk_Host_Triple()")
 
 dk_import(https://github.com/markgollnick/iespresso/archive/57c23127.zip PATCH)

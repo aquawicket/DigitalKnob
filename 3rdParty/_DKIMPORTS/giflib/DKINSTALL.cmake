@@ -54,7 +54,7 @@ if(GIFLIB_USE_CMAKE)
 else()
 	### LINK ###
 	dk_include			(${GIFLIB_DIR}/lib							GIF_INCLUDE_DIR)
-	#dk_include			(${GIFLIB}/${target_triple}						GIF_INCLUDE_DIR2)
+	#dk_include			(${GIFLIB}/${Target_Triple}						GIF_INCLUDE_DIR2)
 	dk_include			(${GIFLIB_CONFIG_DIR}						GIF_INCLUDE_DIR2)
 	dk_libDebug			(${GIFLIB_DEBUG_DIR}/lib/.libs/libgif.a		GIF_LIBRARY_DEBUG)
 	dk_libRelease		(${GIFLIB_RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)

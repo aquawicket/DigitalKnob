@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/ArtifexSoftware/ghostpdl-downloads
 # https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe
 # https://silentinstallhq.com/ghostscript-silent-install-how-to-guide
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 if(NOT WIN_HOST)
 	dk_undepend(ghostscript)
 	dk_return()

@@ -7,7 +7,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ boxer ############
 # https://github.com/aaronmjacobs/Boxer.git
-dk_validate(target_triple "dk_target_triple()")
+dk_validate(Target_Triple "dk_Target_Triple()")
 if(ANDROID OR RASPBERRY)
 	dk_undepend(boxer)
 	dk_return()

@@ -13,7 +13,7 @@ if(EXISTS "${SH_EXE}")
 	dk_return()
 endif()
 
-#dk_validate(target_triple "dk_target_triple()")
+#dk_validate(Target_Triple "dk_Target_Triple()")
 
 ### shell command sh ###
 execute_process(COMMAND command -v sh OUTPUT_VARIABLE SHELL_SH)

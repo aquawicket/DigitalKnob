@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/dotnet/ILMerge
 # https://www.nuget.org/packages/ilmerge
 
-#dk_validate(host_triple "dk_host_triple()")
+#dk_validate(Host_Triple "dk_Host_Triple()")
 
 dk_import(https://github.com/dotnet/ILMerge/archive/9ec1b3f2.zip)
 

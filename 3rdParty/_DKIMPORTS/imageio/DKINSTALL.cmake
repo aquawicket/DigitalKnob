@@ -7,7 +7,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ imageio ###########
 # https://developer.apple.com/documentation/imageio
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 if(NOT MAC_HOST)
 	dk_undepend(imageio)
 	dk_return()

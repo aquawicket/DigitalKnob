@@ -7,7 +7,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ tdm-gcc ############
 # https://github.com/jmeubank/tdm-gcc
 
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 #dk_getFileParams("$ENV{DKIMPORTS_DIR}/tdm-gcc/dkconfig.txt")
 

@@ -11,8 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz
 
 ### IMPORT ###
-#dk_validate(host_triple "dk_host_triple()")
-#dk_validate(target_triple "dk_target_triple()")
+#dk_validate(Host_Triple "dk_Host_Triple()")
+#dk_validate(Target_Triple "dk_Target_Triple()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import(${ZLIB_IMPORT} NAME zlib)
 
@@ -21,8 +21,8 @@ dk_import(${ZLIB_IMPORT} NAME zlib)
 #set(ZLIB_INC		 	"$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  	# C:/Users/Administrator/digitalknob/DKBIN/include/zlib
 #set(ZLIB_CONFIG_DIR  	"${ZLIB_INC}/${CONFIG_PATH}")					# //DKBIN/include/zlib/win_x86_64_clang (MULTI_CONFIG), //DKBIN/include/zlib/win_x86_64_clang/Debug (SINGLE_CONFIG)
 #set(ZLIB_LIB		 	"$ENV{DIGITALKNOB_DIR}/DKBIN/lib/zlib")	   		# C:/Users/Administrator/digitalknob/DKBIN/lib/zlib
-#set(ZLIB_DEBUG_DIR		"${ZLIB_LIB}/${target_triple}/${DEBUG_DIR}")	# C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Debug
-#set(ZLIB_RELEASE_DIR 	"${ZLIB_LIB}/${target_triple}/${RELEASE_DIR}")  # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Release
+#set(ZLIB_DEBUG_DIR		"${ZLIB_LIB}/${Target_Triple}/${DEBUG_DIR}")	# C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Debug
+#set(ZLIB_RELEASE_DIR 	"${ZLIB_LIB}/${Target_Triple}/${RELEASE_DIR}")  # C:/Users/Administrator/digitalknob/DKBIN/lib/zlib/win_x86_64_clang/Release
 
 ### LINK ###
 dk_include				(${ZLIB}								ZLIB_INCLUDE_DIR)

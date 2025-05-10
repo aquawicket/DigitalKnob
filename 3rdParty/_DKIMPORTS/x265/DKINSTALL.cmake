@@ -14,7 +14,7 @@ dk_import(https://bitbucket.org/multicoreware/x265_git/get/dd594f59.zip)
 
 ### LINK ###
 dk_include		(${X265}/include)
-dk_include		(${X265}/${target_triple})
+dk_include		(${X265}/${Target_Triple})
 dk_libDebug		(${X265_DEBUG_DIR}/libx265.a)
 dk_libRelease	(${X265_RELEASE_DIR}/libx265.a)
 

@@ -19,7 +19,7 @@ dk_import(https://github.com/uNetworking/uWebSockets/archive/refs/tags/v0.14.8.z
 
 ### LINK ###
 dk_include				(${UWEBSOCKETS})
-dk_include				(${UWEBSOCKETS}/${target_triple})
+dk_include				(${UWEBSOCKETS}/${Target_Triple})
 if(MSVC)
 	WIN_dk_libDebug		(${UWEBSOCKETS_DEBUG_DIR}/uWS.lib)
 	WIN_dk_libRelease	(${UWEBSOCKETS_RELEASE_DIR}/uWS.lib)

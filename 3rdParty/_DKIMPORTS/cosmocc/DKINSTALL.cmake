@@ -16,7 +16,7 @@ dk_import(https://cosmo.zip/pub/cosmocc/cosmocc.zip)
 #dk_set(COSMO		 							1)
 #dk_set(COSMOPOLITAN 							1)
 
-#dk_validate(host_triple 						"dk_host_triple()")
+#dk_validate(Host_Triple 						"dk_Host_Triple()")
 #dk_validate(ENV{DKIMPORTS_DIR}						"dk_DKIMPORTS_DIR()")
 ################## COSMOCC Variables ##################
 #dk_set(COSMOCC_SYSTEM_NAME 					Generic)

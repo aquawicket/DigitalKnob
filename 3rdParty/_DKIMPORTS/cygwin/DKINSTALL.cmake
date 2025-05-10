@@ -9,7 +9,7 @@ set(CYGWIN 1)
 # https://www.cygwin.com
 # https://cygwin.com/faq/faq.html#faq.setup.cli
 if(CYGWIN)
-	dk_validate(host_triple "dk_host_triple()")
+	dk_validate(Host_Triple "dk_Host_Triple()")
 	if(NOT WIN_HOST)
 		dk_undepend(cygwin)
 		return()

@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://aka.ms/vs/16/release/vc_redist.x86.exe
 # https://softmany.com/microsoft-visual-c-redistributable-package/download/
 #
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 if(NOT WIN_HOST)
 	dk_undepend(vc_redist)
 	dk_return()

@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/notepad-plus-plus.git
 dk_load(dk_builder)
 
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
 WIN_ARM64_HOST_dk_set	(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip)
 WIN_X86_HOST_dk_set		(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip)

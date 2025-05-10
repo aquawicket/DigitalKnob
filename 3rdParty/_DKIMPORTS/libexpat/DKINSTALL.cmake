@@ -14,7 +14,7 @@ dk_import(https://github.com/libexpat/libexpat/archive/b70c8f5.zip)
 
 ### LINK ###
 dk_include			(${LIBEXPAT}/include				    	LIBEXPAT_INCLUDE_DIR)
-dk_include			(${LIBEXPAT}/${target_triple})
+dk_include			(${LIBEXPAT}/${Target_Triple})
 if(MSVC)
 	dk_libDebug		(${LIBEXPAT_DEBUG_DIR}/libexpatdMT.lib		LIBEXPAT_LIBRARY_DEBUG)
 	dk_libRelease	(${LIBEXPAT_RELEASE_DIR}/libexpatdMT.lib	LIBEXPAT_LIBRARY_RELEASE)

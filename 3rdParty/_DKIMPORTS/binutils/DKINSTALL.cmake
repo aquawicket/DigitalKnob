@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ binutils ############
 # https://wiki.termux.com/wiki/ASM
 
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 
 if(ANDROID_HOST)
 	dk_installPackage(binutils)

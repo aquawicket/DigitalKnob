@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://developer.apple.com/documentation/appkit?language=objc
 #
 
-dk_validate(host_triple ${host_triple})
+dk_validate(Host_Triple ${Host_Triple})
 if(NOT MAC_HOST)
 	dk_undepend(appkit)
 	dk_return()

@@ -15,7 +15,7 @@ dk_import(https://github.com/xiph/opus/archive/7db26934.zip)
 
 ### LINK ###
 dk_include			(${OPUS}/include					OpusFile_INCLUDE_PATH)
-dk_include			(${OPUS}/${target_triple})
+dk_include			(${OPUS}/${Target_Triple})
 if(MSVC)
 	dk_libDebug		(${OPUS_DEBUG_DIR}/opus.lib			OpusFile_LIBRARY_DEBUG)
 	dk_libRelease	(${OPUS_RELEASE_DIR}/opus.lib		OpusFile_LIBRARY_RELEASE)

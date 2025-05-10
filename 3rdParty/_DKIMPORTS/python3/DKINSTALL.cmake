@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/python3/dkconfig.txt")
 
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 if(MAC_X86_64_HOST)
 	set(PYTHON3_IMPORT ${PYTHON3_MAC_X86_64_IMPORT})
 elseif(WIN_ARM64_HOST)

@@ -12,7 +12,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()") 
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/browsh/dkconfig.txt")
 
-dk_validate(dk_host_triple "dk_host_triple()")
+dk_validate(dk_Host_Triple "dk_Host_Triple()")
 if(WIN_HOST)
 	set(BROWSH_IMPORT "${BROWSH_WIN_X86_64_IMPORT}")
 endif()

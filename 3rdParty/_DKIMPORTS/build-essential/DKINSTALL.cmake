@@ -7,7 +7,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ build-essential ############
 # https://packages.ubuntu.com/focal/build-essential
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 if(WIN_HOST)
 	dk_undepend(build-essential)
 	dk_return()

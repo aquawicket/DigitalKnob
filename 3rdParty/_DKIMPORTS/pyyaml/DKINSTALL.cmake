@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ pyyaml ############
 # https://github.com/yaml/pyyaml
 dk_validate(PYTHON "dk_depend(python)")
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Triple "dk_Host_Triple()")
 
 ### INSTALL ###
 if(WIN_HOST)

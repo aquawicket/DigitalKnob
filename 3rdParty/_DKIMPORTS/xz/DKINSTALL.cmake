@@ -113,11 +113,11 @@ dk_return()
 #LINUX_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 #RASPBERRY_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
 #RASPBERRY_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#ANDROID_dk_libDebug(${XZ}/${target_triple}/obj/local/armeabi-v7a/liblzma.a)
-#ANDROID_dk_libRelease(${XZ}/${target_triple}/obj/local/armeabi-v7a/liblzma.a)
+#ANDROID_dk_libDebug(${XZ}/${Target_Triple}/obj/local/armeabi-v7a/liblzma.a)
+#ANDROID_dk_libRelease(${XZ}/${Target_Triple}/obj/local/armeabi-v7a/liblzma.a)
 
 ### 3RDPARTY LINK ###
-ANDROID_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${target_triple}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${target_triple}/obj/local/armeabi-v7a/liblzma.a)
+ANDROID_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${Target_Triple}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${Target_Triple}/obj/local/armeabi-v7a/liblzma.a)
 APPLE_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 LINUX_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 RASPBERRY_dk_set(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
@@ -125,7 +125,7 @@ WIN_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA
 
 
 ### GENERATE / COMPILE ###
-ANDROID_dk_chdir				(${XZ}/${target_triple})
+ANDROID_dk_chdir				(${XZ}/${Target_Triple})
 ANDROID_dk_queueCommand			(${DKCMAKE_BUILD} ${XZ})
 ANDROID_dk_visualStudio			(${XZ} liblzma)
 

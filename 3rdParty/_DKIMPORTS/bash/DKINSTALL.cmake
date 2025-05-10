@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://www.gnu.org/software/bash/
 # https://packages.msys2.org/package/bash
 
-#	HOST		SHELL		BASH	TARGET_OS
+#	HOST		SHELL		BASH	Target_Os
 #	android		termux		bash	android
 #	linux		tinycore	bash	android, linux
 #	linux		ubuntu		bash	android, linux
@@ -31,7 +31,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #	dk_return()
 #endif()
 
-dk_validate(target_triple "dk_target_triple()")
+dk_validate(Target_Triple "dk_Target_Triple()")
 
 ### shell command bash ###
 execute_process(COMMAND command -v bash OUTPUT_VARIABLE SHELL_BASH)
