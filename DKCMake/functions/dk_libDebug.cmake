@@ -37,8 +37,8 @@ function(dk_libDebug lib_path)
 		if(EXISTS ${lib_path})
 			#dk_assertVar($ENV{CURRENT_PLUGIN}_IMPORT_NAME)
 			#set(LIB_NAME ${$ENV{CURRENT_PLUGIN}_IMPORT_NAME}) # get the import folder name of the plugin
-			#file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${target_triple}/Debug)
-			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${target_triple}/Debug)
+			#file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${Target_Triple}/Debug)
+			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${Target_Triple}/Debug)
 		endif()
 	endif()
 	

@@ -14,8 +14,8 @@ function(dk_MSYSTEM)
 	
 	if(WIN AND ${target_env})
 		if(CLANG AND ARM64)
-			dk_set(msystem "${target_env}${target_arch}")	# msystem = clangarm64
-			dk_set(MSYSTEM "${TARGET_ENV}${TARGET_ARCH}")	# MSYSTEM = CLANGARM64
+			dk_set(msystem "${target_env}${Target_Arch}")	# msystem = clangarm64
+			dk_set(MSYSTEM "${TARGET_ENV}${Target_Arch}")	# MSYSTEM = CLANGARM64
 		elseif(X86_64)
 			dk_set(msystem "${target_env}64")				# msystem = clang64, mingw64, ucrt64
 			dk_set(MSYSTEM "${TARGET_ENV}64")				# MSYSTEM = CLANG64, MINGW64, UCRT64
@@ -23,7 +23,7 @@ function(dk_MSYSTEM)
 			dk_set(msystem "${target_env}32")				# msystem = clang32, mingw32
 			dk_set(MSYSTEM "${TARGET_ENV}32")				# MSYSTEM = CLANG32, MINGW32
 		else()
-			dk_warning("The target_triple:${target_triple} does not contain a valid msystem")
+			dk_warning("The target_triple:${Target_Triple} does not contain a valid msystem")
 		endif()
 		if(MSYSTEM)
 			dk_set(${MSYSTEM} 1)							# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1

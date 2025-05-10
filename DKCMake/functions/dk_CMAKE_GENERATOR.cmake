@@ -68,7 +68,7 @@ function(dk_CMAKE_GENERATOR)
 	elseif(cosmopolitan)     
 		set(CMAKE_GENERATOR "MSYS Makefiles")
 	else()
-		dk_fatal("Could not get CMAKE_GENERATOR from target_triple:${target_triple}")
+		dk_fatal("Could not get CMAKE_GENERATOR from target_triple:${Target_Triple}")
 	endif()
 endfunction()
 

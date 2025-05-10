@@ -11,7 +11,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc()
 	
 	dk_assertPath(SOURCE_DIR)
-	dk_validate(target_type "dk_target_type()")
+	dk_validate(Target_Type "dk_Target_Type()")
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 	
 	dk_assertPath($ENV{CURRENT_PLUGIN})
