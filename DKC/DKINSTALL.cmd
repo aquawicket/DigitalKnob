@@ -97,7 +97,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### Install DKC ######
-	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
+	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 
 	::###### target_os ######
 	if not defined target_os (set "target_os=win")
@@ -108,9 +108,9 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::###### target_env ######
 	if not defined target_env (set "target_env=clang")
 
-	::###### target_triple ######
-	if not defined target_triple (set "target_triple=%target_os%_%target_arch%_%target_env%")
-	set "%target_triple%=1"
+	::###### target_tuple ######
+	if not defined target_tuple (set "target_tuple=%target_os%_%target_arch%_%target_env%")
+	set "%target_tuple%=1"
 
 	::###### MSYSTEM ######
 	::if not defined MSYSTEM  if /i "%target_env%" equ "clang" if "%target_arch%" equ "x86"    set "MSYSTEM=CLANG32"

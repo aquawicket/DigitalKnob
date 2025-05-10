@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%%setlocal%%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
+	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 	if defined android_host      	(set "OPENJDK_DL=openjdk-17")
 	if defined linux_x86_64_host 	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz")
 	if defined mac_x86_64_host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz")

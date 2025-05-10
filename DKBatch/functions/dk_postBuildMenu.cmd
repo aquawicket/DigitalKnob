@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_debugFunc 0
     
     %dk_call% dk_echo
-    echo %target_app% %target_triple% %target_type%
+    echo %target_app% %Target_Tuple% %target_type%
         
     %dk_call% dk_echo
 %endfunction%

@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %%setlocal%%
     %dk_call% dk_debugFunc 0
  
-    %dk_call% dk_validate Host_Triple	"%dk_call% dk_Host_Triple"
+    %dk_call% dk_validate Host_Tuple	"%dk_call% dk_Host_Tuple"
     ::if defined win_arm32_host        	(set "GIT_DL=")
     ::if defined win_arm64_host        	(set "GIT_DL=")
     if defined win_x86_host            	(set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe")

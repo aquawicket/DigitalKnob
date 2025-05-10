@@ -40,8 +40,8 @@ dk_include					(${CURL_DIR}/include 					CURL_INCLUDE_DIR)
 dk_include					(${CURL_CONFIG_DIR}/lib					CURL_INCLUDE_DIR2)
 
 if(MULTI_CONFIG)
-	set(CURL_DEBUG_DIR 		${CURL_TRIPLE_DIR}/lib/${DEBUG_DIR})
-	set(CURL_RELEASE_DIR 	${CURL_TRIPLE_DIR}/lib/${RELEASE_DIR})
+	set(CURL_DEBUG_DIR 		${CURL_TUPLE_DIR}/lib/${DEBUG_DIR})
+	set(CURL_RELEASE_DIR 	${CURL_TUPLE_DIR}/lib/${RELEASE_DIR})
 else()
 	set(CURL_DEBUG_DIR 		${CURL_DEBUG_DIR}/lib)
 	set(CURL_RELEASE_DIR 	${CURL_RELEASE_DIR}/lib)
@@ -66,9 +66,9 @@ dk_set(CURL_CMAKE
 	-DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} 
 	-DCURL_LIBRARY=${CURL_LIBRARY})
 if(MSVC)
-	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=/I${CURL_TRIPLE_DIR}/include/curl")
+	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=/I${CURL_TUPLE_DIR}/include/curl")
 elseif()
-	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL_TRIPLE_DIR}/include")
+	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL_TUPLE_DIR}/include")
 endif()
 
 ### GENERATE ###

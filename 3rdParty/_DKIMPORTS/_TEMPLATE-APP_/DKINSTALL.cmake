@@ -31,4 +31,4 @@ dk_import		(${__APP_NAME__})
 #    MYLIB_BUILD_DIR  =		....3rdParty/myLib-13/win_x86_64/Debug				....3rdParty/myLib-13/win_x86_64/Debug
 #    MYLIB_DEBUG_DIR  = 	....3rdParty/myLib-13/win_x86_64/Debug				....3rdParty/myLib-13/win_x86_64/Debug
 #  MYLIB_RELEASE_DIR  = 	....3rdParty/myLib-13/win_x86_64/Release			....3rdParty/myLib-13/win_x86_64/Release
-#   MYLIB_TRIPLE_DIR  = 	....3rdParty/myLib-13/win_x86_64					....3rdParty/myLib-13/win_x86_64
+#   MYLIB_TUPLE_DIR  = 	....3rdParty/myLib-13/win_x86_64					....3rdParty/myLib-13/win_x86_64

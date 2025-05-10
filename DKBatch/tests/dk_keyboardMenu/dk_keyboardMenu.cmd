@@ -44,7 +44,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%choice%" equ "40" %dk_call% dk_exit             & %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
-    %dk_call% dk_unset target_triple
+    %dk_call% dk_unset Target_Tuple
 %endfunction%
 
 

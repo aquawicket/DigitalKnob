@@ -15,15 +15,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar TARGET_PATH
 
 	if defined MSYSTEM (
-		(set cmnd=%MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%target_triple%/%target_type% --config %target_type% --verbose")
+		(set cmnd=%MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%Target_Tuple%/%target_type% --config %target_type% --verbose")
 	)
 
-	if exist "%TARGET_PATH%\%target_triple%\%target_type%\CMakeCache.txt" (
-		(set cmnd="%CMAKE_EXE%" --build %TARGET_PATH%/%target_triple%/%target_type% --config %target_type% --verbose)
+	if exist "%TARGET_PATH%\%Target_Tuple%\%target_type%\CMakeCache.txt" (
+		(set cmnd="%CMAKE_EXE%" --build %TARGET_PATH%/%Target_Tuple%/%target_type% --config %target_type% --verbose)
 	)
 
-	if exist "%TARGET_PATH%\%target_triple%\CMakeCache.txt" (
-		(set cmnd="%CMAKE_EXE%" --build %TARGET_PATH%/%target_triple% --config %target_type% --verbose)
+	if exist "%TARGET_PATH%\%Target_Tuple%\CMakeCache.txt" (
+		(set cmnd="%CMAKE_EXE%" --build %TARGET_PATH%/%Target_Tuple% --config %target_type% --verbose)
 	)
 
 	%cmnd% && (

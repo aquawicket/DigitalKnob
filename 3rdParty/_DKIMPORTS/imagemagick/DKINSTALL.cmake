@@ -72,7 +72,7 @@ if(DKAPP)
 if(NOT ANDROID)
 if(NOT WIN)
 	### LINK ###
-	dk_include			(${IMAGEMAGICK_TRIPLE_DIR})
+	dk_include			(${IMAGEMAGICK_TUPLE_DIR})
 
 	if(UNIX)
 		dk_libDebug		(${IMAGEMAGICK_DEBUG_DIR}/libimagemagick.a)

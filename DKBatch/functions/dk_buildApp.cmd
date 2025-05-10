@@ -12,10 +12,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_title "Building %target_app% - %target_triple% - %target_type%"
+	%dk_call% dk_title "Building %target_app% - %Target_Tuple% - %target_type%"
 	%dk_call% dk_echo
 	%dk_call% dk_echo "####################################################################"
-	%dk_call% dk_echo " Building %target_app% - %target_triple% - %target_type% - %target_level%"
+	%dk_call% dk_echo " Building %target_app% - %Target_Tuple% - %target_type% - %target_level%"
 	%dk_call% dk_echo "####################################################################"
 	%dk_call% dk_echo
 
@@ -26,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_echo
 	%dk_call% dk_echo "####################################################################"
-	%dk_call% dk_echo " Done Building %target_app% - %target_triple% - %target_type% - %target_level%"
+	%dk_call% dk_echo " Done Building %target_app% - %Target_Tuple% - %target_type% - %target_level%"
 	%dk_call% dk_echo "####################################################################"
 	%dk_call% dk_echo
 %endfunction%

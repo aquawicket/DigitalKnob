@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_killProcess cmake-gui.exe
 	
 	%dk_call% dk_getFileParams 		"%~dp0/dkconfig.txt"
-	%dk_call% dk_validate 			Host_Triple "%dk_call% dk_Host_Triple"
+	%dk_call% dk_validate 			Host_Tuple "%dk_call% dk_Host_Tuple"
 	if defined LINUX_ARM64_HOST		(set "CMAKE_IMPORT=%CMAKE_LINUX_AARCH64_IMPORT%")
 	if defined LINUX_X86_64_HOST	(set "CMAKE_IMPORT=%CMAKE_LINUX_X86_64_IMPORT%")
 	if defined MAC_HOST				(set "CMAKE_IMPORT=%CMAKE_MAC_UNIVERSAL_IMPORT%")

@@ -20,7 +20,7 @@ dk_depend(libglu1-mesa-dev)
 
 ### IMPORT ###
 dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
-dk_copy(${GLEW_DIR}/build/cmake ${GLEW_TRIPLE_DIR}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
+dk_copy(${GLEW_DIR}/build/cmake ${GLEW_TUPLE_DIR}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
 
 ### LINK ###
 dk_define			(GLEW_STATIC)

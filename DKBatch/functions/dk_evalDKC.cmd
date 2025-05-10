@@ -44,7 +44,7 @@ if not defined dk_evalDKC_DEFAULT_TARGET_ENV (set "dk_evalDKC_DEFAULT_TARGET_ENV
 ::	if not exist %DKC_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
 ::	::if not exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
-	if not defined Host_Triple						(%dk_call% dk_Host_Triple)
+	if not defined Host_Tuple						(%dk_call% dk_Host_Tuple)
 	if not defined dk_evalDKC_DEFAULT_TARGET_OS		(set "dk_evalDKC_DEFAULT_TARGET_OS=%Host_Os%")
 	if not defined dk_evalDKC_DEFAULT_TARGET_ARCH	(set "dk_evalDKC_DEFAULT_TARGET_ARCH=%Host_Arch%")
 	
@@ -65,7 +65,7 @@ if not defined dk_evalDKC_DEFAULT_TARGET_ENV (set "dk_evalDKC_DEFAULT_TARGET_ENV
 		set "target_arch=cosmocc"
 	)
 	
-	if not defined target_triple (set "target_triple=%target_os%_%target_arch%_%target_env%")
+	if not defined Target_Tuple (set "Target_Tuple=%target_os%_%target_arch%_%target_env%")
 
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"

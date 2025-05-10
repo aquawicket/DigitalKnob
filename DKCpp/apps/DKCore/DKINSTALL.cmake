@@ -24,7 +24,7 @@ dk_depend(DK)
 
 
 	############ CONFIGURE APP ############
-	dk_configure(${DK_Project_Dir} -DDKCMAKE_FUNCTIONS_DIR=$ENV{DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
+	dk_configure(${DK_Project_Dir} -DDKCMAKE_FUNCTIONS_DIR=$ENV{DKCMAKE_FUNCTIONS_DIR} -DTUPLE=${TUPLE})
 
 
 	############ BUILD APP ############

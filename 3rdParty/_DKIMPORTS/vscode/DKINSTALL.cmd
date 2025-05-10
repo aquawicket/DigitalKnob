@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
+	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 	if defined mac_host          (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-darwin-universal.zip")
 	if defined linux_arm32_host  (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz")
 	if defined linux_arm64_host  (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-arm64-1709684476.tar.gz")

@@ -39,7 +39,7 @@ dk_import(https://github.com/libarchive/libarchive/archive/6567375.zip)
 ### LINK ###
 dk_define					(LIBARCHIVE_STATIC)
 dk_include					(${LIBARCHIVE_DIR}/libarchive)
-dk_include					(${LIBARCHIVE_TRIPLE_DIR})
+dk_include					(${LIBARCHIVE_TUPLE_DIR})
 if(ANDROID)
 	dk_include				(${LIBARCHIVE_DIR}/contrib/android/include)
 endif()
@@ -47,23 +47,23 @@ endif()
 if(MULTI_CONFIG)
 	if(MSVC)
 		if(WIN)
-			dk_libDebug		(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${DEBUG_DIR}/archive.lib)
-			dk_libRelease	(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${RELEASE_DIR}/archive.lib)
+			dk_libDebug		(${LIBARCHIVE_TUPLE_DIR}/libarchive/${DEBUG_DIR}/archive.lib)
+			dk_libRelease	(${LIBARCHIVE_TUPLE_DIR}/libarchive/${RELEASE_DIR}/archive.lib)
 		endif()
 	else()
-		dk_libDebug			(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${DEBUG_DIR}/libarchive.a)
-		dk_libRelease		(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${RELEASE_DIR}/libarchive.a)
+		dk_libDebug			(${LIBARCHIVE_TUPLE_DIR}/libarchive/${DEBUG_DIR}/libarchive.a)
+		dk_libRelease		(${LIBARCHIVE_TUPLE_DIR}/libarchive/${RELEASE_DIR}/libarchive.a)
 	endif()
 else()
-	dk_libDebug				(${LIBARCHIVE_TRIPLE_DIR}/${DEBUG_DIR}/libarchive/libarchive.a)
-	dk_libRelease			(${LIBARCHIVE_TRIPLE_DIR}/${RELEASE_DIR}/libarchive/libarchive.a)
+	dk_libDebug				(${LIBARCHIVE_TUPLE_DIR}/${DEBUG_DIR}/libarchive/libarchive.a)
+	dk_libRelease			(${LIBARCHIVE_TUPLE_DIR}/${RELEASE_DIR}/libarchive/libarchive.a)
 endif()
 
 
 ### GENERATE ###
 if(ANDROID)
 	dk_configure(${LIBARCHIVE_DIR}
-		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_TRIPLE_DIR} -I${LIBARCHIVE_DIR}/contrib/android/include"
+		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_TUPLE_DIR} -I${LIBARCHIVE_DIR}/contrib/android/include"
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -239,12 +239,12 @@ if(IOS)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 if(IOSSIM)
@@ -306,12 +306,12 @@ if(IOSSIM)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 if(LINUX)

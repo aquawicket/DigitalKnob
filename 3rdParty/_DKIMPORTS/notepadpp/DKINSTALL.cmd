@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate Host_Triple "%dk_call% dk_Host_Triple"
+	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 	if defined win_arm64_host	(set "NOTEPADPP_IMPORT=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip")
     if defined win_x86_host		(set "NOTEPADPP_IMPORT=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip")
     if defined win_x86_64_host	(set "NOTEPADPP_IMPORT=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip")

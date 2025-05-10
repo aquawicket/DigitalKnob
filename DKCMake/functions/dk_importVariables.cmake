@@ -117,7 +117,7 @@ function(dk_importVariables)
 # <PLUGIN>_IMPORT_NAME		- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
 # <PLUGIN>_BRANCH			- from PLUGIN_GIT_BRANCH						:ZLIB_BRANCH		: master
 # <PLUGIN>_TAG				- from PLUGIN_GIT_TAG							:ZLIB_TAG			: 
-# <PLUGIN>_TRIPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple	:ZLIB_TRIPLE_DIR	: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
+# <PLUGIN>_TUPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple	:ZLIB_TUPLE_DIR	: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
 # <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 # <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
 # <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
@@ -434,11 +434,11 @@ function(dk_importVariables)
 	endif()
 	dk_validate(Target_Tuple "dk_Target_Tuple()")
 	
-	# <PLUGIN>_TRIPLE_DIR
-	unset($ENV{CURRENT_PLUGIN}_TRIPLE_DIR)
+	# <PLUGIN>_TUPLE_DIR
+	unset($ENV{CURRENT_PLUGIN}_TUPLE_DIR)
 	if(Target_Tuple)
-		dk_set($ENV{CURRENT_PLUGIN}_TRIPLE_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_TRIPLE_DIR)						# ZLIB_TRIPLE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
+		dk_set($ENV{CURRENT_PLUGIN}_TUPLE_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple})
+#		dk_printVar($ENV{CURRENT_PLUGIN}_TUPLE_DIR)						# ZLIB_TUPLE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
 	endif()
 	
 	# <PLUGIN>_CONFIG_DIR

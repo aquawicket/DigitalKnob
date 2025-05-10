@@ -65,11 +65,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 
-	::###### Target_Triple ######
-	if not defined Target_Triple (
-		set "Target_Triple=%Target_Os%_%Target_Arch%_%Target_Env%"
+	::###### Target_Tuple ######
+	if not defined Target_Tuple (
+		set "Target_Tuple=%Target_Os%_%Target_Arch%_%Target_Env%"
 	)
-	%dk_call% dk_debug "Target_Triple = %Target_Triple%"
+	%dk_call% dk_debug "Target_Tuple = %Target_Tuple%"
 	
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"

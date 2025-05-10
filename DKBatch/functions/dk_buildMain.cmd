@@ -34,7 +34,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_unset UPDATE
 	%dk_call% dk_unset target_app
-	%dk_call% dk_unset target_triple
+	%dk_call% dk_unset Target_Tuple
 	%dk_call% dk_unset target_type
 
 	::set "BUILD_LIST_FILE=%DKCACHE_DIR%/build_list.txt"
@@ -49,7 +49,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 				set /a _line_+=1
 				goto :skipTarget
 			)
-			rem Each Host_Arch will have a list of compatible triples
+			rem Each Host_Arch will have a list of compatible tuples
 			rem The the current Host_Arch doesn't have the target_tripple in it's allowed list
 			rem We goto skipTarget, we could also have a disabled list for each Host_Arch to do the same:
 			rem A block list could be good, because everything will be attempted by default instead of enabled.
@@ -59,7 +59,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			if defined BUILD_LIST[!_line_!][2] (
 				set "UPDATE=1"
 				call set "target_app=%%BUILD_LIST[!_line_!][0]%%"
-				call set "target_triple=%%BUILD_LIST[!_line_!][1]%%"
+				call set "Target_Tuple=%%BUILD_LIST[!_line_!][1]%%"
 				call set "target_type=%%BUILD_LIST[!_line_!][2]%%"
 				set /a _line_+=1
 			) else (
@@ -69,20 +69,20 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 		if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE			& goto :while_loop
 		if not defined target_app		%dk_call% dk_target_app target_app		& goto :while_loop
-		if not defined target_triple	%dk_call% dk_target_triple_SET			& goto :while_loop
+		if not defined Target_Tuple	%dk_call% dk_Target_Tuple_SET			& goto :while_loop
 		if not defined target_type		%dk_call% dk_target_type target_type	& goto :while_loop
 
 		:: save selections to DKBuilder.cache file
 		%dk_call% dk_echo "creating DKBuilder.cache..."
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-		%dk_call% dk_fileWrite "%DKCACHE_DIR%/DKBuilder.cache" "%target_app% %target_triple% %target_type%"
+		%dk_call% dk_fileWrite "%DKCACHE_DIR%/DKBuilder.cache" "%target_app% %Target_Tuple% %target_type%"
 
 		%dk_call% dk_generate
 		%dk_call% dk_buildApp
 
 		%dk_call% dk_unset UPDATE
 		%dk_call% dk_unset target_app
-		%dk_call% dk_unset target_triple
+		%dk_call% dk_unset Target_Tuple
 		%dk_call% dk_unset target_type
 	goto while_loop
 %endfunction%
