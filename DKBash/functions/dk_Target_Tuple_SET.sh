@@ -5,18 +5,18 @@
 
 
 ###############################################################################
-# dk_target_triple_SET()
+# dk_target_tuple_SET()
 #
 #
-dk_target_triple_SET() {
+dk_target_tuple_SET() {
 	dk_debugFunc 0
 
 
-	dk_call dk_validate host_triple "dk_call dk_host_triple"
+	dk_call dk_validate host_tuple "dk_call dk_host_tuple"
 	dk_call dk_set default_target_env clang
 
 	dk_call dk_echo ""
-	dk_call dk_echo " 1) ${host_triple}_${default_target_env}"
+	dk_call dk_echo " 1) ${Host_Tuple}_${default_target_env}"
 	dk_call dk_echo ""
 	dk_call dk_echo " 2) cosmopolitan"
 	dk_call dk_echo " 3) android_arm32_clang"
@@ -68,7 +68,7 @@ dk_target_triple_SET() {
 		#dk_call dk_set target_os 	${_target_os_}
 		#dk_call dk_set target_type ${_target_type_}
 	elif [ "${input}" = "1" ]; then
-		dk_call dk_set target_triple 	${host_triple}
+		dk_call dk_set target_tuple 	${Host_Tuple}
 		dk_call dk_set target_os     	${HOST_OS}
 		dk_call dk_set target_arch  	${HOST_ARCH}
 		if [ -n "${default_target_env-}" ]; then
@@ -272,20 +272,20 @@ dk_target_triple_SET() {
 	fi
 		
 	if [ -n "${target_env-}" ]; then
-		dk_call dk_set target_triple "${target_os}_${target_arch}_${target_env}"
-		dk_call dk_set TARGET_TRIPLE "${TARGET_OS}_${TARGET_ARCH}_${TARGET_ENV}"
+		dk_call dk_set target_tuple "${target_os}_${target_arch}_${target_env}"
+		dk_call dk_set TARGET_TUPLE "${TARGET_OS}_${TARGET_ARCH}_${TARGET_ENV}"
 	else
-		dk_call dk_set target_triple "${target_os}_${target_arch}"
-		dk_call dk_set TARGET_TRIPLE "${TARGET_OS}_${TARGET_ARCH}"
+		dk_call dk_set target_tuple "${target_os}_${target_arch}"
+		dk_call dk_set TARGET_TUPLE "${TARGET_OS}_${TARGET_ARCH}"
 	fi
-	dk_call dk_assertVar target_triple
-	dk_call dk_assertVar TARGET_TRIPLE
-	dk_call dk_set ${target_triple} 1	
-	dk_call dk_set ${TARGET_TRIPLE} 1	
-	dk_call dk_printVar target_triple
-	dk_call dk_printVar TARGET_TRIPLE
-	dk_call dk_printVar ${target_triple}
-	dk_call dk_printVar ${TARGET_TRIPLE}	
+	dk_call dk_assertVar target_tuple
+	dk_call dk_assertVar TARGET_TUPLE
+	dk_call dk_set ${target_tuple} 1	
+	dk_call dk_set ${TARGET_TUPLE} 1	
+	dk_call dk_printVar target_tuple
+	dk_call dk_printVar TARGET_TUPLE
+	dk_call dk_printVar ${target_tuple}
+	dk_call dk_printVar ${TARGET_TUPLE}	
 
 	### Set DEBUG_DIR and RELEASE_DIR variables
 	if [ -n "${IOS-}" ]; then
@@ -303,7 +303,7 @@ dk_target_triple_SET() {
 	dk_call dk_printVar DEBUG_DIR
 	dk_call dk_printVar RELEASE_DIR
 	#else
-	#dk_call dk_target_triple
+	#dk_call dk_target_tuple
 }
 
 
@@ -315,5 +315,5 @@ dk_target_triple_SET() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_target_triple_SET
+	dk_call dk_target_tuple_SET
 }

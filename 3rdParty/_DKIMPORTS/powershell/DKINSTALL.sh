@@ -21,7 +21,7 @@ DKINSTALL() {
 	dk_debugFunc 0
 
 	
-	dk_validate HOST_OS "dk_host_triple"
+	dk_validate HOST_OS "dk_host_tuple"
 	######################################################################################################
 	[ "${HOST_OS}_${HOST_ARCH}" = "linux_arm32" ]	&& PWSH_DL=${PWSH_DL_LINUX_ARM32}
 	[ "${HOST_OS}_${HOST_ARCH}" = "linux_arm64" ]	&& PWSH_DL=${PWSH_DL_LINUX_ARM64}

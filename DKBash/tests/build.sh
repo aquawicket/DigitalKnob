@@ -109,8 +109,8 @@ dk_buildMain() {
 	dk_printVar DKSCRIPT_DIR
 	dk_printVar DKSCRIPT_NAME
 	
-	### Get the host_triple and other HOST variables
-	dk_host_triple
+	### Get the host_tuple and other HOST variables
+	dk_host_tuple
 	
 	dk_DIGITALKNOB_DIR
 
@@ -134,7 +134,7 @@ dk_buildMain() {
 	do
 		if [ -z "${UPDATE-}" ];     then dk_pickUpdate;  continue; fi
 		if [ -z "${target_app-}" ];        then dk_target_app;     continue; fi
-		if [ -z "${target_triple-}" ];  then dk_pickOs;      continue; fi
+		if [ -z "${target_tuple-}" ];  then dk_pickOs;      continue; fi
 		if [ -z "${target_type-}" ];       then dk_target_type;    continue; fi
 		
 		dk_createCache
@@ -143,7 +143,7 @@ dk_buildMain() {
 		
 		unset UPDATE
 		unset target_app
-		unset target_triple
+		unset target_tuple
 		unset target_type
 	done
 }
@@ -164,12 +164,12 @@ dk_pickUpdate() {
 	dk_echo
 	
 	#dk_printVar _APP_
-	#dk_printVar _triple_ 
+	#dk_printVar _tuple_ 
 	#dk_printVar _TYPE_
 	
 	if [ $behind -lt 1 ]; then
-		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_triple_ - $_TYPE_]"
+		if [ -n "${_APP_-}" ] && [ -n "${_tuple_-}" ] && [ -n "${_TYPE_-}" ]; then
+			dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_tuple_ - $_TYPE_]"
 		fi
 		dk_echo " 1) Git Update"   
 		dk_echo " 2) Git Commit"
@@ -186,8 +186,8 @@ dk_pickUpdate() {
 		dk_warning "Your local repository is behind, please git update"
 		dk_echo
 		dk_echo "${red}" 
-		if [ -n "$_APP_" ] && [ -n "$_triple_" ] && [ -n "$_TYPE_" ]; then
-			dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_triple_ - $_TYPE_]"
+		if [ -n "$_APP_" ] && [ -n "$_tuple_" ] && [ -n "$_TYPE_" ]; then
+			dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_tuple_ - $_TYPE_]"
 		fi
 		dk_echo "${green}"
 		dk_echo " 1) Git Update"
@@ -209,7 +209,7 @@ dk_pickUpdate() {
 	if [ "${input}" = "0" ]; then
 		dk_echo "repeating last selection"
 		target_app=$_APP_
-		target_triple=$_triple_
+		target_tuple=$_tuple_
 		target_type=$_TYPE_
 		UPDATE=1
 	elif [ "${input}" = "1" ]; then
@@ -247,7 +247,7 @@ dk_target_app() {
 
 
 	dk_echo
-	dk_echo "${target_app-}  ${target_triple-} ${target_type-}"
+	dk_echo "${target_app-}  ${target_tuple-} ${target_type-}"
 	
 	dk_echo
     dk_echo " 1) HelloWorld"
@@ -303,9 +303,9 @@ dk_pickOs() {
 
 
 	dk_echo
-	dk_echo "${target_app} ${target_triple-} ${target_type-}"
+	dk_echo "${target_app} ${target_tuple-} ${target_type-}"
 	dk_echo	""
-    dk_echo " 1) ${host_triple-}"
+    dk_echo " 1) ${host_tuple-}"
 	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
@@ -348,75 +348,75 @@ dk_pickOs() {
 	
 	read input
 	if [ "${input}" = "1" ]; then
-		target_triple="${host_triple-}"
+		target_tuple="${host_tuple-}"
 	elif [ "${input}" = "2" ]; then
-		target_triple="android_arm32"
+		target_tuple="android_arm32"
 	elif [ "${input}" = "3" ]; then
-		target_triple="android_arm64"
+		target_tuple="android_arm64"
 	elif [ "${input}" = "4" ]; then
-		target_triple="android_x86"
+		target_tuple="android_x86"
 	elif [ "${input}" = "5" ]; then
-		target_triple="android_x86_64"
+		target_tuple="android_x86_64"
 	elif [ "${input}" = "6" ]; then
-		target_triple="emscripten"
+		target_tuple="emscripten"
 	elif [ "${input}" = "7" ]; then
-		target_triple="ios_arm32"
+		target_tuple="ios_arm32"
 	elif [ "${input}" = "8" ]; then
-		target_triple="ios_arm64"
+		target_tuple="ios_arm64"
 	elif [ "${input}" = "9" ]; then
-		target_triple="ios_x86"
+		target_tuple="ios_x86"
 	elif [ "${input}" = "10" ]; then
-		target_triple="ios_x86_64"
+		target_tuple="ios_x86_64"
 	elif [ "${input}" = "11" ]; then
-		target_triple="iossim_arm32"
+		target_tuple="iossim_arm32"
 	elif [ "${input}" = "12" ]; then
-		target_triple="iossim_arm64"
+		target_tuple="iossim_arm64"
 	elif [ "${input}" = "13" ]; then
-		target_triple="iossim_x86"
+		target_tuple="iossim_x86"
 	elif [ "${input}" = "14" ]; then
-		target_triple="iossim_x86_64"
+		target_tuple="iossim_x86_64"
 	elif [ "${input}" = "15" ]; then
-		target_triple="linux_arm32"
+		target_tuple="linux_arm32"
 	elif [ "${input}" = "16" ]; then
-		target_triple="linux_arm64"
+		target_tuple="linux_arm64"
 	elif [ "${input}" = "17" ]; then
-		target_triple="linux_x86"
+		target_tuple="linux_x86"
 	elif [ "${input}" = "18" ]; then
-		target_triple="linux_x86_64"
+		target_tuple="linux_x86_64"
 	elif [ "${input}" = "19" ]; then
-		target_triple="mac_arm32"
+		target_tuple="mac_arm32"
 	elif [ "${input}" = "20" ]; then
-		target_triple="mac_arm64"
+		target_tuple="mac_arm64"
 	elif [ "${input}" = "21" ]; then
-		target_triple="mac_x86"
+		target_tuple="mac_x86"
 	elif [ "${input}" = "22" ]; then
-		target_triple="mac_x86_64"
+		target_tuple="mac_x86_64"
 	elif [ "${input}" = "23" ]; then
-		target_triple="raspberry_arm32"
+		target_tuple="raspberry_arm32"
 	elif [ "${input}" = "24" ]; then
-		target_triple="raspberry_arm64"
+		target_tuple="raspberry_arm64"
 	elif [ "${input}" = "25" ]; then
-		target_triple="raspberry_x86"
+		target_tuple="raspberry_x86"
 	elif [ "${input}" = "26" ]; then
-		target_triple="raspberry_x64"
+		target_tuple="raspberry_x64"
 	elif [ "${input}" = "27" ]; then
-		target_triple="win_arm32"
+		target_tuple="win_arm32"
 	elif [ "${input}" = "28" ]; then
-		target_triple="win_arm64_clang"
+		target_tuple="win_arm64_clang"
 	elif [ "${input}" = "29" ]; then
-		target_triple="win_x86_mingw"
+		target_tuple="win_x86_mingw"
 	elif [ "${input}" = "30" ]; then
-		target_triple="win_x86_clang"
+		target_tuple="win_x86_clang"
 	elif [ "${input}" = "31" ]; then
-		target_triple="win_x86_msvc"
+		target_tuple="win_x86_msvc"
 	elif [ "${input}" = "32" ]; then
-		target_triple="win_x86_64_mingw"
+		target_tuple="win_x86_64_mingw"
 	elif [ "${input}" = "33" ]; then
-		target_triple="win_x86_64_clang"
+		target_tuple="win_x86_64_clang"
 	elif [ "${input}" = "34" ]; then
-		target_triple="win_x86_64_ucrt"
+		target_tuple="win_x86_64_ucrt"
 	elif [ "${input}" = "35" ]; then
-		target_triple="win_x86_64_msvc"
+		target_tuple="win_x86_64_msvc"
 	elif [ "${input}" = "36" ]; then
 		clear
 	elif [ "${input}" = "37" ]; then
@@ -438,7 +438,7 @@ dk_target_type() {
 
 
 	dk_echo
-	dk_echo "${target_app} ${target_triple} ${target_type-}"
+	dk_echo "${target_app} ${target_tuple} ${target_type-}"
 	dk_echo	""
     dk_echo " 1) Debug"
 	dk_echo " 2) Release"
@@ -458,7 +458,7 @@ dk_target_type() {
 	elif [ "${input}" = "4" ]; then
 		clear
 	elif [ "${input}" = "5" ]; then
-		target_triple=
+		target_tuple=
 	elif [ "${input}" = "6" ]; then
 		exit 0
 	else
@@ -503,7 +503,7 @@ dk_generate() {
 	
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "     Generating ${target_app} - ${target_triple} - ${target_type} - ${target_level-}"
+	dk_echo "     Generating ${target_app} - ${target_tuple} - ${target_type} - ${target_level-}"
 	dk_echo "##################################################################"
 	dk_echo
 
@@ -512,8 +512,8 @@ dk_generate() {
 
 	TARGET_PATH="${DKCPP_APPS_DIR}"/"${target_app}"
 	dk_printVar TARGET_PATH
-	mkdir -p "${TARGET_PATH}"/"${target_triple}"
-	cd "${TARGET_PATH}"/"${target_triple}"
+	mkdir -p "${TARGET_PATH}"/"${target_tuple}"
+	cd "${TARGET_PATH}"/"${target_tuple}"
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
 	dk_printVar CMAKE_SOURCE_DIR
 	if ! dk_pathExists "${CMAKE_SOURCE_DIR}"; then
@@ -558,7 +558,7 @@ dk_generate() {
 		set -- "${@}" "-DSHARED=ON"
 	fi
 	
-	CMAKE_BINARY_DIR=${CMAKE_TARGET_PATH}/${target_triple}/${target_type}
+	CMAKE_BINARY_DIR=${CMAKE_TARGET_PATH}/${target_tuple}/${target_type}
 	dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
@@ -583,91 +583,91 @@ dk_generate() {
 	#set -- "${@}" "--warn-unused-vars"
 	#set -- "${@}" "--check-system-vars"
 	
-	if [ "${target_triple}" = "android_arm32" ]; then
+	if [ "${target_tuple}" = "android_arm32" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 
-	if [ "${target_triple}" = "android_arm64" ]; then
+	if [ "${target_tuple}" = "android_arm64" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "emscripten" ]; then
+	if [ "${target_tuple}" = "emscripten" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "ios_arm32" ]; then
+	if [ "${target_tuple}" = "ios_arm32" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "ios_arm64" ]; then
+	if [ "${target_tuple}" = "ios_arm64" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "iossim_x86" ]; then
+	if [ "${target_tuple}" = "iossim_x86" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "iossim_x86_64" ]; then
+	if [ "${target_tuple}" = "iossim_x86_64" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "linux_x86" ]; then
+	if [ "${target_tuple}" = "linux_x86" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "linux_x86_64" ]; then
+	if [ "${target_tuple}" = "linux_x86_64" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "mac_x86" ]; then
+	if [ "${target_tuple}" = "mac_x86" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "mac_x86_64" ]; then
+	if [ "${target_tuple}" = "mac_x86_64" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "raspberry_arm32" ]; then
+	if [ "${target_tuple}" = "raspberry_arm32" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "raspberry_arm64" ]; then
+	if [ "${target_tuple}" = "raspberry_arm64" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "win_arm64_clang" ]; then
+	if [ "${target_tuple}" = "win_arm64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "win_x86_clang" ]; then
+	if [ "${target_tuple}" = "win_x86_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "win_x86_mingw" ]; then
+	if [ "${target_tuple}" = "win_x86_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
 	#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
-	if [ "${target_triple}" = "win_x86_64_clang" ]; then
+	if [ "${target_tuple}" = "win_x86_64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "win_x86_64_mingw" ]; then
+	if [ "${target_tuple}" = "win_x86_64_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${target_triple}" = "win_x86_64_ucrt" ]; then
+	if [ "${target_tuple}" = "win_x86_64_ucrt" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 
 	###### CMAKE_TOOLCHAIN_FILE ######
-#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake"
+#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${target_tuple}_toolchain.cmake"
 #	dk_echo "TOOLCHAIN = $TOOLCHAIN"
 #	if dk_pathExists "$TOOLCHAIN"; then
 #		set -- "${@}" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
@@ -700,32 +700,32 @@ dk_buildApp() {
 
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "****** Building ${target_app} - ${target_triple} - ${target_type} - ${target_level} ******"
+	dk_echo "****** Building ${target_app} - ${target_tuple} - ${target_type} - ${target_level} ******"
 	dk_echo "##################################################################"
 	dk_echo
 	
 	if [ "${target_type}" = "Debug" ] || [ "${target_type}" = "All" ]; then
-		if dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Debug/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Debug" "--config Debug" "--verbose"
-		elif dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${target_app}/${target_triple}" "--config Debug" "--verbose"
+		if dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_tuple}/Debug/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${target_app}/${target_tuple}/Debug" "--config Debug" "--verbose"
+		elif dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_tuple}/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${target_app}/${target_tuple}" "--config Debug" "--verbose"
 		else
-			dk_error "Could not find CMakeCache.txt in ${target_app}/${target_triple}/Debug or ${target_app}/${target_triple}"
+			dk_error "Could not find CMakeCache.txt in ${target_app}/${target_tuple}/Debug or ${target_app}/${target_tuple}"
 		fi
 	fi
 	if [ "${target_type}" = "Release" ] || [ "${target_type}" = "All" ]; then
-		if dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Release/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/Release" --config Release --verbose
-		elif dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_triple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${target_app}/${target_triple}" --config Release --verbose
+		if dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_tuple}/Release/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${target_app}/${target_tuple}/Release" --config Release --verbose
+		elif dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${target_tuple}/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${target_app}/${target_tuple}" --config Release --verbose
 		else
-			dk_error "Could not find CMakeCache.txt in ${target_app}/${target_triple}/Release or ${target_app}/${target_triple}"
+			dk_error "Could not find CMakeCache.txt in ${target_app}/${target_tuple}/Release or ${target_app}/${target_tuple}"
 		fi
 	fi
 	
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "****** Done Building ${target_app} - ${target_triple} - ${target_type} - ${target_level} ******"
+	dk_echo "****** Done Building ${target_app} - ${target_tuple} - ${target_type} - ${target_level} ******"
 	dk_echo "##################################################################"
 	dk_echo
 }
@@ -782,21 +782,21 @@ dk_installCmake() {
 	
 	######################################################################################################
 	if [ "${HOST_OS}" 		= "android" ]; 			then CMAKE_IMPORT=cmake;							fi
-	if [ "${host_triple}" 	= "win_arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
-	if [ "${host_triple}" 	= "win_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
-	if [ "${host_triple}" 	= "win_x86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
-	if [ "${host_triple}"	= "win_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
+	if [ "${Host_Tuple}" 	= "win_arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
+	if [ "${Host_Tuple}" 	= "win_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
+	if [ "${Host_Tuple}" 	= "win_x86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
+	if [ "${Host_Tuple}"	= "win_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
 	if [ "${HOST_OS}" 		= "mac" ];				then CMAKE_IMPORT=$CMAKE_DL_MAC;					fi
-	if [ "${host_triple}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
-	if [ "${host_triple}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${host_triple}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${target_triple}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
-	if [ "${target_triple}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
-	if [ "${target_triple}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
-	if [ "${target_triple}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
-	if [ "${target_triple}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
-	if [ "${target_triple}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
-	if [ "${target_triple}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
+	if [ "${Host_Tuple}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
+	if [ "${Host_Tuple}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${Host_Tuple}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${target_tuple}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
+	if [ "${target_tuple}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
+	if [ "${target_tuple}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
+	if [ "${target_tuple}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
+	if [ "${target_tuple}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
+	if [ "${target_tuple}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
+	if [ "${target_tuple}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
 	
 	dk_printVar CMAKE_IMPORT
 	if dk_url ${CMAKE_IMPORT}; then
@@ -2024,7 +2024,7 @@ dk_createCache() {
 	
 	# write variable values line by line
 	echo "${target_app}">"${DKCACHE_DIR}/DKBuilder.cache"
-	echo "${target_triple}">>"${DKCACHE_DIR}/DKBuilder.cache"
+	echo "${target_tuple}">>"${DKCACHE_DIR}/DKBuilder.cache"
 	echo "${target_type}">>"${DKCACHE_DIR}/DKBuilder.cache"
 	#echo "$DKENV">>"${DKCACHE_DIR}/DKBuilder.cache"
 }
@@ -2042,7 +2042,7 @@ dk_readCache() {
 		return 0
 	fi
 	_APP_=
-	_triple_=
+	_tuple_=
 	_TYPE_=
 	
 	dk_echo "reading DKBuilder.cache..."
@@ -2053,8 +2053,8 @@ dk_readCache() {
 			#dk_printVar _APP_
 		fi
 		if [ "${count}" = "1" ]; then
-			_triple_=$(echo "$p" | tr -d '\r')
-			#dk_printVar _triple_ 
+			_tuple_=$(echo "$p" | tr -d '\r')
+			#dk_printVar _tuple_ 
 		fi
 		if [ "${count}" = "2" ]; then
 			_TYPE_=$(echo "$p" | tr -d '\r')
@@ -2113,35 +2113,35 @@ try() {
 
 
 ##################################################################################
-# dk_host_triple(input)
+# dk_host_tuple(input)
 #
 #	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
-#	and build the accoring host_triple variable.  I.E. windows_x86_64_msys2
+#	and build the accoring host_tuple variable.  I.E. windows_x86_64_msys2
 #
-dk_host_triple() {
-	dk_verbose "dk_host_triple(${*})"
+dk_host_tuple() {
+	dk_verbose "dk_host_tuple(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
-	# currently, our host target_triple consists of only 2 variable needed
-	# host_triple=${HOST_OS}_${HOST_ARCH}
+	# currently, our host target_tuple consists of only 2 variable needed
+	# host_tuple=${HOST_OS}_${HOST_ARCH}
 	
-	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
+	# https://unix.stackexchange.com/questions/225350/how-to-find-out-tuplet-without-gcc
 	# https://en.wikipedia.org/wiki/Uname
 	
 	# g++ -dumpmachine
 	# gcc -print-multiarch
-	# clang -print-effective-target_triple
-	# clang -print-target-target_triple
-	# clang++ -print-effective-target_triple
-	# clang++ -print-target-target_triple
+	# clang -print-effective-target_tuple
+	# clang -print-target-target_tuple
+	# clang++ -print-effective-target_tuple
+	# clang++ -print-target-target_tuple
 
 	#[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
 	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
 
 	if dk_commandExists clang; then  
-		CLANG_TRIPLE=$(try clang -dumpmachine) && dk_printVar CLANG_TRIPLE	
+		CLANG_TUPLE=$(try clang -dumpmachine) && dk_printVar CLANG_TUPLE	
 
-		remainder="$CLANG_TRIPLE"
+		remainder="$CLANG_TUPLE"
 		CLANG_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar CLANG_ARCH
 		CLANG_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
@@ -2151,16 +2151,16 @@ dk_host_triple() {
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar CLANG_ENV
 
-		[ -z ${host_triple-} ] && host_triple=${CLANG_TRIPLE} && dk_printVar host_triple
+		[ -z ${host_tuple-} ] && host_tuple=${CLANG_TUPLE} && dk_printVar host_tuple
 		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${CLANG_ARCH} && dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS-} ] && HOST_OS=${CLANG_OS} && dk_printVar HOST_OS
 		[ -z ${HOST_ENV-} ] && HOST_ENV=${CLANG_ENV} && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists gcc; then
-		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_printVar GCC_TRIPLE
+		GCC_TUPLE=$(try gcc -dumpmachine) && dk_printVar GCC_TUPLE
 
-		remainder="${GCC_TRIPLE}"
+		remainder="${GCC_TUPLE}"
 		GCC_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_ARCH
 		GCC_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
@@ -2170,17 +2170,17 @@ dk_host_triple() {
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_ENV
 
-		[ -z ${host_triple-} ] && host_triple=${GCC_TRIPLE} && dk_printVar host_triple
+		[ -z ${host_tuple-} ] && host_tuple=${GCC_TUPLE} && dk_printVar host_tuple
 		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${GCC_ARCH} && dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS-} ] && HOST_OS=${GCC_OS} && dk_printVar HOST_OS
 		[ -z ${HOST_ENV-} ] && HOST_ENV=${GCC_ENV} && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists bash; then
-		BASH_TRIPLE=$(bash -c "echo \${MACHTYPE}")
-		dk_printVar BASH_TRIPLE
+		BASH_TUPLE=$(bash -c "echo \${MACHTYPE}")
+		dk_printVar BASH_TUPLE
 
-		remainder="${BASH_TRIPLE}"
+		remainder="${BASH_TUPLE}"
 		BASH_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_ARCH
 		BASH_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
@@ -2190,7 +2190,7 @@ dk_host_triple() {
 		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_ENV
 
-		[ -z ${host_triple-} ] && host_triple=$BASH_TRIPLE && dk_printVar host_triple
+		[ -z ${host_tuple-} ] && host_tuple=$BASH_TUPLE && dk_printVar host_tuple
 		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$BASH_ARCH && dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$BASH_VENDOR && dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS-} ] && HOST_OS=$BASH_OS && dk_printVar HOST_OS
@@ -2238,10 +2238,10 @@ dk_host_triple() {
 
 		#UNAME_ObjectFormat=""
 
-		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
-		dk_printVar UNAME_TRIPLE
+		UNAME_TUPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
+		dk_printVar UNAME_TUPLE
 
-		[ -z $host_triple ] && host_triple=$UNAME_TRIPLE && dk_printVar host_triple
+		[ -z $host_tuple ] && host_tuple=$UNAME_TUPLE && dk_printVar host_tuple
 		[ -z $HOST_ARCH ] && HOST_ARCH=$UNAME_ARCH && dk_printVar HOST_ARCH
 		[ -z $HOST_VENDOR ] && HOST_VENDOR=$UNAME_VENDOR && dk_printVar HOST_VENDOR
 		[ -z $HOST_OS ] && HOST_OS=$UNAME_OS && dk_printVar HOST_OS
@@ -2380,8 +2380,8 @@ dk_host_triple() {
 		dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
 	fi
 
-	host_triple=${HOST_OS}_${HOST_ARCH}
-	dk_printVar host_triple
+	host_tuple=${HOST_OS}_${HOST_ARCH}
+	dk_printVar host_tuple
 }
 
 

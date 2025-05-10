@@ -9,7 +9,7 @@ function Global:dk_target_app() {
 	dk_debugFunc 0
 	
 	dk_call dk_echo
-	dk_call dk_echo "${target_app} ${target_triple} ${target_type}"
+	dk_call dk_echo "${target_app} ${target_tuple} ${target_type}"
 	
 	dk_call dk_echo
     dk_call dk_echo " 1) HelloWorld"

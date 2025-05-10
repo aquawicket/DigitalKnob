@@ -12,7 +12,7 @@ dk_target_type() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_echo "${target_app-} ${target_triple-} ${target_type-}"
+	dk_echo "${target_app-} ${target_tuple-} ${target_type-}"
 	dk_echo	
     dk_echo " 1) Debug"
 	dk_echo " 2) Release"
@@ -34,7 +34,7 @@ dk_target_type() {
 	elif [ "${choice}" = "4" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "5" ]; then
-		unset target_triple
+		unset target_tuple
 		return 1
 	elif [ "${choice}" = "6" ]; then
 		dk_call dk_exit 0

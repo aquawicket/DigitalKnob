@@ -8,12 +8,12 @@
 dk_pickOs() {
 	dk_debugFunc 0
 
-	dk_call dk_validate host_triple "dk_call dk_host_triple" 
+	dk_call dk_validate host_tuple "dk_call dk_host_tuple" 
 	
 	dk_call dk_echo
-	dk_echo "${APP-} ${target_triple-} ${TYPE-}"
+	dk_echo "${APP-} ${target_tuple-} ${TYPE-}"
 	dk_echo	""
-    dk_echo " 1) ${host_triple}"
+    dk_echo " 1) ${Host_Tuple}"
 	dk_echo
 	dk_echo " 2) cosmopolitan"
 	dk_echo " 3) Android arm32"
@@ -60,79 +60,79 @@ dk_pickOs() {
 	dk_call dk_keyboardInputTimeout choice 1 60
 	
 	if [ "${choice}" = "1" ]; then
-		target_triple="${host_triple-}"
+		target_tuple="${host_tuple-}"
 	elif [ "${choice}" = "2" ]; then
-		target_triple="cosmo"
+		target_tuple="cosmo"
 	elif [ "${choice}" = "3" ]; then
-		target_triple="android_arm32"
+		target_tuple="android_arm32"
 	elif [ "${choice}" = "4" ]; then
-		target_triple="android_arm64"
+		target_tuple="android_arm64"
 	elif [ "${choice}" = "5" ]; then
-		target_triple="android_x86"
+		target_tuple="android_x86"
 	elif [ "${choice}" = "6" ]; then
-		target_triple="android_x86_64"
+		target_tuple="android_x86_64"
 	elif [ "${choice}" = "7" ]; then
-		target_triple="emscripten"
+		target_tuple="emscripten"
 	elif [ "${choice}" = "8" ]; then
-		target_triple="ios_arm32"
+		target_tuple="ios_arm32"
 	elif [ "${choice}" = "9" ]; then
-		target_triple="ios_arm64"
+		target_tuple="ios_arm64"
 	elif [ "${choice}" = "10" ]; then
-		target_triple="ios_x86"
+		target_tuple="ios_x86"
 	elif [ "${choice}" = "11" ]; then
-		target_triple="ios_x86_64"
+		target_tuple="ios_x86_64"
 	elif [ "${choice}" = "12" ]; then
-		target_triple="iossim_arm32"
+		target_tuple="iossim_arm32"
 	elif [ "${choice}" = "13" ]; then
-		target_triple="iossim_arm64"
+		target_tuple="iossim_arm64"
 	elif [ "${choice}" = "14" ]; then
-		target_triple="iossim_x86"
+		target_tuple="iossim_x86"
 	elif [ "${choice}" = "15" ]; then
-		target_triple="iossim_x86_64"
+		target_tuple="iossim_x86_64"
 	elif [ "${choice}" = "16" ]; then
-		target_triple="linux_arm32"
+		target_tuple="linux_arm32"
 	elif [ "${choice}" = "17" ]; then
-		target_triple="linux_arm64"
+		target_tuple="linux_arm64"
 	elif [ "${choice}" = "18" ]; then
-		target_triple="linux_x86"
+		target_tuple="linux_x86"
 	elif [ "${choice}" = "19" ]; then
-		target_triple="linux_x86_64_clang"
+		target_tuple="linux_x86_64_clang"
 	elif [ "${choice}" = "20" ]; then
-		target_triple="linux_x86_64_gcc"
+		target_tuple="linux_x86_64_gcc"
 	elif [ "${choice}" = "21" ]; then
-		target_triple="mac_arm32"
+		target_tuple="mac_arm32"
 	elif [ "${choice}" = "22" ]; then
-		target_triple="mac_arm64"
+		target_tuple="mac_arm64"
 	elif [ "${choice}" = "23" ]; then
-		target_triple="mac_x86"
+		target_tuple="mac_x86"
 	elif [ "${choice}" = "24" ]; then
-		target_triple="mac_x86_64"
+		target_tuple="mac_x86_64"
 	elif [ "${choice}" = "25" ]; then
-		target_triple="raspberry_arm32"
+		target_tuple="raspberry_arm32"
 	elif [ "${choice}" = "26" ]; then
-		target_triple="raspberry_arm64"
+		target_tuple="raspberry_arm64"
 	elif [ "${choice}" = "27" ]; then
-		target_triple="raspberry_x86"
+		target_tuple="raspberry_x86"
 	elif [ "${choice}" = "28" ]; then
-		target_triple="raspberry_x64"
+		target_tuple="raspberry_x64"
 	elif [ "${choice}" = "29" ]; then
-		target_triple="win_arm32"
+		target_tuple="win_arm32"
 	elif [ "${choice}" = "30" ]; then
-		target_triple="win_arm64_clang"
+		target_tuple="win_arm64_clang"
 	elif [ "${choice}" = "31" ]; then
-		target_triple="win_x86_mingw"
+		target_tuple="win_x86_mingw"
 	elif [ "${choice}" = "32" ]; then
-		target_triple="win_x86_clang"
+		target_tuple="win_x86_clang"
 	elif [ "${choice}" = "33" ]; then
-		target_triple="win_x86_msvc"
+		target_tuple="win_x86_msvc"
 	elif [ "${choice}" = "34" ]; then
-		target_triple="win_x86_64_mingw"
+		target_tuple="win_x86_64_mingw"
 	elif [ "${choice}" = "35" ]; then
-		target_triple="win_x86_64_clang"
+		target_tuple="win_x86_64_clang"
 	elif [ "${choice}" = "36" ]; then
-		target_triple="win_x86_64_ucrt"
+		target_tuple="win_x86_64_ucrt"
 	elif [ "${choice}" = "37" ]; then
-		target_triple="win_x86_64_msvc"
+		target_tuple="win_x86_64_msvc"
 	elif [ "${choice}" = "38" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "39" ]; then

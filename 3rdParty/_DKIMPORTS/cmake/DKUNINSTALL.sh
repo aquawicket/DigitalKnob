@@ -21,13 +21,13 @@ DKUNINSTALL() {
 	dk_call dk_printVar _dk_dirname
 	
 	dk_call dk_getFileParams 		"${_dk_dirname}/dkconfig.txt"
-	dk_call dk_validate host_triple "dk_call dk_host_triple"
-	[ "${host_triple}" = "linux_arm64" ] 	&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
-	[ "${host_triple}" = "linux_x86_64" ] 	&& CMAKE_IMPORT=${CMAKE_LINUX_X86_64_IMPORT}
-	[ "${host_triple}" = "mac_x86_64" ] 	&& CMAKE_IMPORT=${CMAKE_MAC_UNIVERSAL_IMPORT}
-	[ "${host_triple}" = "win_arm64" ] 		&& CMAKE_IMPORT=${CMAKE_WIN_ARM64_IMPORT}
-	[ "${host_triple}" = "win_x86_64" ] 	&& CMAKE_IMPORT=${CMAKE_WIN_X86_64_IMPORT}
-	[ "${host_triple}" = "win_x86" ] 		&& CMAKE_IMPORT=${CMAKE_WIN_X86_IMPORT}
+	dk_call dk_validate host_tuple "dk_call dk_host_tuple"
+	[ "${host_tuple}" = "linux_arm64" ]		&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
+	[ "${host_tuple}" = "linux_x86_64" ]	&& CMAKE_IMPORT=${CMAKE_LINUX_X86_64_IMPORT}
+	[ "${host_tuple}" = "mac_x86_64" ]		&& CMAKE_IMPORT=${CMAKE_MAC_UNIVERSAL_IMPORT}
+	[ "${host_tuple}" = "win_arm64" ]		&& CMAKE_IMPORT=${CMAKE_WIN_ARM64_IMPORT}
+	[ "${host_tuple}" = "win_x86_64" ]		&& CMAKE_IMPORT=${CMAKE_WIN_X86_64_IMPORT}
+	[ "${host_tuple}" = "win_x86" ]			&& CMAKE_IMPORT=${CMAKE_WIN_X86_IMPORT}
 	dk_call dk_assertVar CMAKE_IMPORT
 	
 	CMAKE_CURRENT_LIST_DIR="${_dk_dirname}"

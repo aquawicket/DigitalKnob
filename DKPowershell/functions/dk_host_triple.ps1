@@ -1,11 +1,11 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_host_triple){ $dk_host_triple = 1 } else{ return } #include guard
+if(!$dk_host_tuple){ $dk_host_tuple = 1 } else{ return } #include guard
 
 #####################################################################
-# dk_host_triple()
+# dk_host_tuple()
 #
 #
-function Global:dk_host_triple() {
+function Global:dk_host_tuple() {
 	dk_debugFunc 0
 
 	###### host_os and <host_os>_host ######
@@ -26,15 +26,15 @@ function Global:dk_host_triple() {
 		New-Variable -Name "$($Host_Env)_Host" -Value 1 -Force
     }
 	
-	###### host_triple and <host_triple>_host ######
+	###### host_tuple and <host_tuple>_host ######
 	if($Host_Arch){
-		$global:Host_Triple = (-join($Host_Os, "_", $Host_Arch))
-		New-Variable -Name "$($Host_Triple)_Host" -Value 1 -Force
+		$global:Host_Tuple = (-join($Host_Os, "_", $Host_Arch))
+		New-Variable -Name "$($Host_Tuple)_Host" -Value 1 -Force
 	}
 	
 	if($host_env){
-		$global:Host_Triple = (-join($Host_Os, "_", $Host_Arch, "_", $Host_Env))
-		New-Variable -Name "$($Host_Triple)_Host" -Value 1 -Force
+		$global:Host_Tuple = (-join($Host_Os, "_", $Host_Arch, "_", $Host_Env))
+		New-Variable -Name "$($Host_Tuple)_Host" -Value 1 -Force
 	}
 
 	
@@ -50,8 +50,8 @@ function Global:dk_host_triple() {
 	dk_call dk_printVar ${Host_Env}_Host
 	dk_call dk_printVar ${Host_Os}_${Host_Arch}_${Host_Env}_Host
 	
-	dk_call dk_printVar Host_Triple
-	dk_call dk_printVar ${Host_Triple}_Host
+	dk_call dk_printVar Host_Tuple
+	dk_call dk_printVar ${Host_Tuple}_Host
 }
 
 
@@ -65,5 +65,5 @@ function Global:dk_host_triple() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_host_triple
+	dk_call dk_host_tuple
 }

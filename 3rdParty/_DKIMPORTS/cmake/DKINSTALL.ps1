@@ -7,7 +7,7 @@ if(!$DKINSTALL){ $DKINSTALL = 1 } else{ return }
 function Global:DKINSTALL() {
 	dk_debugFunc 0
 
-	dk_call dk_validate HOST_OS "dk_call dk_host_triple"
+	dk_call dk_validate HOST_OS "dk_call dk_host_tuple"
 	
 #   if("${HOST_OS}_${HOST_ARCH}" -eq "win_arm32"    { ${CMAKE_DL} = "https://todo" }
     if("${HOST_OS}_${HOST_ARCH}" -eq "win_arm64")   { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip" }

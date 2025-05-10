@@ -4,11 +4,11 @@
 *** DIGITALKNOB ***
 ********************
 
-Merge dk_target_triple.cmake and dk_target_triple_SET.cmake into one file.
+Merge dk_target_tuple.cmake and dk_target_tuple_SET.cmake into one file.
 
-Finish coding dk_target_triple.sh
+Finish coding dk_target_tuple.sh
 
-Start coding dk_target_triple.ps1
+Start coding dk_target_tuple.ps1
 
 remove all dk_load(dk_builder) lines from /_DKIMPORTS/lib/DKINSTALL.cmake
 

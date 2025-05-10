@@ -12,7 +12,7 @@ function Global:dk_createCache() {
 	
 	# write variable values line by line
 	echo "$target_app">"${DKCACHE_DIR}/DKBuilder.cache"
-	echo "$target_triple">>"${DKCACHE_DIR}/DKBuilder.cache"
+	echo "$target_tuple">>"${DKCACHE_DIR}/DKBuilder.cache"
 	echo "$target_type">>"${DKCACHE_DIR}/DKBuilder.cache"
 	#echo "$DKENV">>"${DKCACHE_DIR}/DKBuilder.cache"
 }

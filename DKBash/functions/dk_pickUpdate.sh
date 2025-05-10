@@ -12,15 +12,15 @@
 dk_pickUpdate() {
 	dk_debugFunc 0
 
-	dk_call dk_readCache _APP_ _triple_ _TYPE_
+	dk_call dk_readCache _APP_ _tuple_ _TYPE_
 	
 	dk_call dk_echo
 	dk_call dk_gitCheckRemote
 	dk_call dk_echo
 
 	if [ $behind -lt 1 ]; then
-		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_call dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_triple_ - $_TYPE_]"
+		if [ -n "${_APP_-}" ] && [ -n "${_tuple_-}" ] && [ -n "${_TYPE_-}" ]; then
+			dk_call dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_tuple_ - $_TYPE_]"
 		fi
 		dk_call dk_echo " 1) Git Update"   
 				dk_echo " 2) Git Commit"
@@ -41,8 +41,8 @@ dk_pickUpdate() {
 		dk_call dk_warning "Your local repository is behind, please git update"
 		dk_call dk_echo
 		dk_echo "${red}" 
-		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_echo " 0) Repeat DKBuilder.cache [${_APP_} - ${_triple_} - ${_TYPE_}]"
+		if [ -n "${_APP_-}" ] && [ -n "${_tuple_-}" ] && [ -n "${_TYPE_-}" ]; then
+			dk_echo " 0) Repeat DKBuilder.cache [${_APP_} - ${_tuple_} - ${_TYPE_}]"
 		fi
 		dk_echo "${green}"
 		dk_echo " 1) Git Update"
@@ -67,7 +67,7 @@ dk_pickUpdate() {
 	if [ "${choice}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
 		target_app=${_APP_}
-		target_triple=${_triple_}
+		target_tuple=${_tuple_}
 		target_type=${_TYPE_}
 		UPDATE=1
 	elif [ "${choice}" = "1" ]; then

@@ -12,7 +12,7 @@ dk_target_app() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_echo "${target_app-} ${target_triple-} ${target_type-}"
+	dk_echo "${target_app-} ${target_tuple-} ${target_type-}"
 	dk_echo
     dk_echo " 1) HelloWorld"
 	dk_echo " 2) DKPreprocessor"

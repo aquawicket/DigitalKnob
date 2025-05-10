@@ -27,8 +27,8 @@ function Global:dk_buildMain() {
 	#dk_call dk_printVar DKSCRIPT_DIR
 	#dk_call dk_printVar DKSCRIPT_NAME
 	
-	### Get the host_triple and other HOST variables
-	dk_call dk_host_triple
+	### Get the host_tuple and other HOST variables
+	dk_call dk_host_tuple
 	dk_call dk_DIGITALKNOB_DIR
 	dk_call dk_installGit
 	dk_call dk_DKBRANCH_DIR
@@ -43,7 +43,7 @@ function Global:dk_buildMain() {
 	while($running){  
 		if(!${UPDATE}) 		  { dk_call dk_pickUpdate;  		continue; }
 		if(!${target_app})    { dk_call dk_target_app;     	continue; }
-		if(!${target_triple}) { dk_call dk_target_triple_SET;  continue; }
+		if(!${target_tuple}) { dk_call dk_target_tuple_SET;  continue; }
 		if(!${target_type})   { dk_call dk_target_type;    	continue; }
 		
 		dk_call dk_createCache
@@ -52,7 +52,7 @@ function Global:dk_buildMain() {
 		
 		dk_call dk_unset UPDATE
 		dk_call dk_unset target_app
-		dk_call dk_unset target_triple
+		dk_call dk_unset target_tuple
 		dk_call dk_unset target_type
 	}  
 }

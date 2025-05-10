@@ -972,7 +972,7 @@ message(STATUS "Using CXX compiler: ${CMAKE_CXX_COMPILER}")
 message(STATUS "Using libtool: ${BUILD_LIBTOOL}")
 message(STATUS "Using install name tool: ${CMAKE_INSTALL_NAME_TOOL}")
 if(DEFINED APPLE_Target_Tuple)
-  message(STATUS "Autoconf target triple: ${APPLE_Target_Tuple}")
+  message(STATUS "Autoconf target tuple: ${APPLE_Target_Tuple}")
 endif()
 message(STATUS "Using minimum deployment version: ${DEPLOYMENT_TARGET}"
         " (SDK version: ${SDK_VERSION})")
