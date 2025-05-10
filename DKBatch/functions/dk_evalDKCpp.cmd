@@ -5,9 +5,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################## dk_evalDKCpp settings ######################
-if not defined dk_evalDKCpp_DEFAULT_TARGET_OS	(set "dk_evalDKCpp_DEFAULT_TARGET_OS=cosmocc")
-if not defined dk_evalDKCpp_DEFAULT_TARGET_ARCH	(set "dk_evalDKCpp_DEFAULT_TARGET_ARCH=cosmocc")
-if not defined dk_evalDKCpp_DEFAULT_TARGET_ENV	(set "dk_evalDKCpp_DEFAULT_TARGET_ENV=cosmocc")	&:: clang, cosmocc, gcc, msvc 
+if not defined dk_evalDKCpp_Default_Target_Os	(set "dk_evalDKCpp_Default_Target_Os=cosmocc")
+if not defined dk_evalDKCpp_Default_Target_Arch	(set "dk_evalDKCpp_Default_Target_Arch=cosmocc")
+if not defined dk_evalDKCpp_Default_Target_Env	(set "dk_evalDKCpp_Default_Target_Env=cosmocc")	&:: clang, cosmocc, gcc, msvc 
 ::#####################################################################
 ::# dk_evalDKCpp(<code>)
 ::#
@@ -47,15 +47,15 @@ if not defined dk_evalDKCpp_DEFAULT_TARGET_ENV	(set "dk_evalDKCpp_DEFAULT_TARGET
 ::	::if not exist %DKCPP_FUNCTIONS_DIR%/%~1.cpp	(%dk_call% dk_download "%DKHTTP_DKCPP_FUNCTIONS_DIR%/%~1.cpp" "%DKCPP_FUNCTIONS_DIR%/%~1.cpp")
 
 	::###### Target_Os ######
-	if not defined Target_Os (set "Target_Os=%dk_evalDKCpp_DEFAULT_TARGET_OS%")
+	if not defined Target_Os (set "Target_Os=%dk_evalDKCpp_Default_Target_Os%")
 	%dk_call% dk_debug "Target_Os = %Target_Os%"
 
 	::###### Target_Arch ######
-	if not defined Target_Arch (set "Target_Arch=%dk_evalDKCpp_DEFAULT_TARGET_ARCH%")
+	if not defined Target_Arch (set "Target_Arch=%dk_evalDKCpp_Default_Target_Arch%")
 	%dk_call% dk_debug "Target_Arch = %Target_Arch%"
 
 	::###### Target_Env ######
-	if not defined Target_Env (set "Target_Env=%dk_evalDKCpp_DEFAULT_TARGET_ENV%")
+	if not defined Target_Env (set "Target_Env=%dk_evalDKCpp_Default_Target_Env%")
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 
 	::###### COMPILER_EXE ######

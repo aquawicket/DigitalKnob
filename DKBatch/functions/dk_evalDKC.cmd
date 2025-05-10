@@ -5,7 +5,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################## dk_evalDKC settings ########################
-if not defined dk_evalDKC_DEFAULT_TARGET_ENV (set "dk_evalDKC_DEFAULT_TARGET_ENV=clang")
+if not defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env=clang")
 ::#####################################################################
 ::# dk_evalDKC(<code>)
 ::#
@@ -45,19 +45,19 @@ if not defined dk_evalDKC_DEFAULT_TARGET_ENV (set "dk_evalDKC_DEFAULT_TARGET_ENV
 ::	::if not exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
 	if not defined Host_Tuple						(%dk_call% dk_Host_Tuple)
-	if not defined dk_evalDKC_DEFAULT_TARGET_OS		(set "dk_evalDKC_DEFAULT_TARGET_OS=%Host_Os%")
-	if not defined dk_evalDKC_DEFAULT_TARGET_ARCH	(set "dk_evalDKC_DEFAULT_TARGET_ARCH=%Host_Arch%")
+	if not defined dk_evalDKC_Default_Target_Os		(set "dk_evalDKC_Default_Target_Os=%Host_Os%")
+	if not defined dk_evalDKC_Default_Target_Arch	(set "dk_evalDKC_Default_Target_Arch=%Host_Arch%")
 	
 	::###### Target_Os ######
 	if not defined Target_Os (set "Target_Os=%dk_evalDKC_DEFAULT_TARGET_OS%")
 	%dk_call% dk_debug "Target_Os = %Target_Os%"
 
 	::###### Target_Arch ######
-	if not defined Target_Arch (set "Target_Arch=%dk_evalDKC_DEFAULT_TARGET_ARCH%")
+	if not defined Target_Arch (set "Target_Arch=%dk_evalDKC_Default_Target_Arch%")
 	%dk_call% dk_debug "Target_Arch = %Target_Arch%"
 
 	::###### Target_Env ######
-	if not defined Target_Env (set "Target_Env=%dk_evalDKC_DEFAULT_TARGET_ENV%")
+	if not defined Target_Env (set "Target_Env=%dk_evalDKC_Default_Target_Env%")
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 	
 	if "%Target_Env%" equ "cosmocc" (
