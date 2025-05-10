@@ -5,7 +5,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_target_type(rtn_var:target_type)
+::# dk_target_type(rtn_var:Target_Type)
 ::#
 ::#
 :dk_target_type
@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0 1
  
     %dk_call% dk_echo
-    %dk_call% dk_echo "%target_app% %Target_Tuple% %target_type%"
+    %dk_call% dk_echo "%Target_App% %Target_Tuple% %Target_Type%"
     %dk_call% dk_echo
     echo 1) Debug
     echo 2) Release
@@ -38,7 +38,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%choice%" equ "7" (%dk_call% dk_exit					& %return%)
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
-    %dk_call% dk_unset target_type
+    %dk_call% dk_unset Target_Type
 %endfunction%
 
 

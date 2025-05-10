@@ -7,7 +7,7 @@ call %APP_ROOT%___Clean
 
 echo 1. Set and map all variables and environment variables
 :: Build architecture and type
-set "target_type=Debug"
+set "Target_Type=Debug"
 ::set "ABI=armeabi-v7a"
 set "ABI=arm64-v8a"
 ::set "ABI=i686"
@@ -29,7 +29,7 @@ echo #############  BUILD SETTINGS ###############
 echo      compiler = %compiler%
 echo        GRADLE = %GRADLE%
 echo           ABI = %ABI%
-echo    target_type = %target_type%
+echo    Target_Type = %Target_Type%
 echo #############################################
 
 
@@ -163,7 +163,7 @@ echo Compiling with CMAKE
 "%CMAKE_EXE%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
 %IF_ERROR% "CMAKE failed to generate the project files."
 "%CMAKE_EXE%" --build %CMAKE_BINARY_DIR% --target main
-::call CopyPath %CMAKE_BINARY_DIR%/%target_type%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
+::call CopyPath %CMAKE_BINARY_DIR%/%Target_Type%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

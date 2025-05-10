@@ -13,14 +13,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
     %dk_call% dk_echo
     %dk_call% dk_info "####################################################################"
-    %dk_call% dk_info "****** Done Building %target_app% - %Target_Tuple% - %target_type% - %target_level% ******"
+    %dk_call% dk_info "****** Done Building %Target_App% - %Target_Tuple% - %Target_Type% - %target_level% ******"
     %dk_call% dk_info "####################################################################"
     %dk_call% dk_echo
         
     set "UPDATE="
-    set "target_app="
+    set "Target_App="
     set "Target_Tuple="
-    set "target_type="
+    set "Target_Type="
 %endfunction%
 
 

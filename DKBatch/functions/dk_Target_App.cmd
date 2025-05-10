@@ -5,7 +5,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_target_app(RTN:target_app)
+::# dk_target_app(RTN:Target_App)
 ::#
 ::#
 :dk_target_app
@@ -31,7 +31,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     :loop1
         if not defined dk_getDirectories[%n%] goto endloop1
         for %%Z in ("!dk_getDirectories[%n%]!") do set "dk_getDirectories[%n%]=%%~nxZ"
-        set "commands[%n%]=%dk_call% dk_set target_app !dk_getDirectories[%n%]!"
+        set "commands[%n%]=%dk_call% dk_set Target_App !dk_getDirectories[%n%]!"
         set /a n+=1
         goto loop1 
     :endloop1
@@ -44,7 +44,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     goto end_runCache
     :runCache
         %dk_call% dk_info "re-running cached dk_getDirectories..."
-        %dk_call% dk_set target_app %_target_app_% && %dl_call% dk_set Target_Tuple %_Target_Tuple_% && call dk_set target_type %_target_type_% && %return%
+        %dk_call% dk_set Target_App %_target_app_% && %dl_call% dk_set Target_Tuple %_Target_Tuple_% && call dk_set Target_Type %_target_type_% && %return%
     :end_runCache
     
     ::### Append remaining dk_getDirectories with commands ###
@@ -73,7 +73,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     :endloop2
     
     %dk_call% dk_echo 
-    %dk_call% dk_echo "Please select a target_app to build"
+    %dk_call% dk_echo "Please select a Target_App to build"
     
     %dk_call% dk_keyboardInput choice
     :: %dk_call% dk_keyboardInputTimeout 23 60 choice
@@ -82,12 +82,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     
     if not defined commands[%choice%] (
         %dk_call% dk_echo "%choice%: invalid selection, please try again"
-        %dk_call% dk_unset target_app
+        %dk_call% dk_unset Target_App
         %return%
     )
     
     endlocal & !commands[%choice%]!
-    if "%~1" neq "" (endlocal & set "%1=%target_app%")
+    if "%~1" neq "" (endlocal & set "%1=%Target_App%")
 	
     %dk_call% dk_deleteArray dk_getDirectories
     %dk_call% dk_deleteArray commands
@@ -95,7 +95,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     
 	:: TODO
 	:: %dk_call% dk_echo "%choice%: invalid selection, please try again"
-	:: %dk_call% dk_unset target_app
+	:: %dk_call% dk_unset Target_App
 %endfunction%
 
 
@@ -105,6 +105,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
     %dk_call% dk_debugFunc 0
 
-    %dk_call% dk_target_app target_app
-	%dk_call% dk_echo "target_app = %target_app%"
+    %dk_call% dk_target_app Target_App
+	%dk_call% dk_echo "Target_App = %Target_App%"
 %endfunction%

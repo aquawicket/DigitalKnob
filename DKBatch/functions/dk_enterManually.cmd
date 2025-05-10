@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	%dk_call% dk_keyboardInput input
 
-	set "target_app=_%input%_"
+	set "Target_App=_%input%_"
 
 	::Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
 	::%dk_call% dk_chdir %DIGITALKNOB_DIR%
@@ -33,15 +33,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_printVar parent
 
 	if "%parent%" equ "apps" %return%
-	%dk_call% dk_mkdir "%DKCPP_APPS_DIR%\%target_app%"
+	%dk_call% dk_mkdir "%DKCPP_APPS_DIR%\%Target_App%"
 
-	:: create apps/<target_app>/DKINSTALL.cmake
-	echo dk_depend(%input%) > "%DKCPP_APPS_DIR%\%target_app%\DKINSTALL.cmake"
-	::%dk_call% dk_fileWrite "%DKCPP_APPS_DIR%\%target_app%\DKINSTALL.cmake" dk_depend(%input%)
+	:: create apps/<Target_App>/DKINSTALL.cmake
+	echo dk_depend(%input%) > "%DKCPP_APPS_DIR%\%Target_App%\DKINSTALL.cmake"
+	::%dk_call% dk_fileWrite "%DKCPP_APPS_DIR%\%Target_App%\DKINSTALL.cmake" dk_depend(%input%)
 
-	:: create apps/<target_app>/main.cpp
-	echo int main(int argc, char** argv) { return 0; } > "%DKCPP_APPS_DIR%\%target_app%\main.cpp"
-	::%dk_call% dk_fileWrite "%DKCPP_APPS_DIR%\%target_app%\main.cpp" "int main(int argc, char** argv) { return 0; }"
+	:: create apps/<Target_App>/main.cpp
+	echo int main(int argc, char** argv) { return 0; } > "%DKCPP_APPS_DIR%\%Target_App%\main.cpp"
+	::%dk_call% dk_fileWrite "%DKCPP_APPS_DIR%\%Target_App%\main.cpp" "int main(int argc, char** argv) { return 0; }"
 %endfunction%
 
 

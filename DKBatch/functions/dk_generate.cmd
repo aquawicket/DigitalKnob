@@ -12,15 +12,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
  ::%setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_title "Generating %target_app% - %Target_Tuple% - %target_type%"
+	%dk_call% dk_title "Generating %Target_App% - %Target_Tuple% - %Target_Type%"
 	%dk_call% dk_echo
 	%dk_call% dk_info "##################################################################"
-	%dk_call% dk_info "	  Generating %target_app% - %Target_Tuple% - %target_type%"
+	%dk_call% dk_info "	  Generating %Target_App% - %Target_Tuple% - %Target_Type%"
 	%dk_call% dk_info "##################################################################"
 	%dk_call% dk_echo
 
 	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	set "TARGET_PATH=%DKCPP_APPS_DIR%/%target_app%"
+	set "TARGET_PATH=%DKCPP_APPS_DIR%/%Target_App%"
 	if not exist "%TARGET_PATH%/%Target_Tuple%" (%dk_call% dk_mkdir "%TARGET_PATH%\%Target_Tuple%")
 	
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
@@ -32,9 +32,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "DKLINK=Static"
 
 	set "CMAKE_ARGS="
-	if /i "%target_type%" equ "Debug"		(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
-	if /i "%target_type%" equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	if /i "%target_type%" equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	if /i "%Target_Type%" equ "Debug"		(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
+	if /i "%Target_Type%" equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	if /i "%Target_Type%" equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
 	if /i "%target_level%" equ "Build"		(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
 	if /i "%target_level%" equ "Rebuild"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
 	if /i "%target_level%" equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
@@ -94,7 +94,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
 
 	if defined MULTI_CONFIG							(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%")
-	if defined SINGLE_CONFIG						(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%/%target_type%")
+	if defined SINGLE_CONFIG						(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%/%Target_Type%")
 	%dk_call% dk_assertVar CMAKE_BINARY_DIR
 	%dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 
@@ -156,7 +156,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### linux_x86_64 (WSL) ######
 	if defined WSL_EXE (%dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR)
-	if defined WSL_EXE (%WSL_EXE% sh -c "export UPDATE=1 && export target_app=%target_app% && export Target_Tuple=%Target_Tuple% && export target_type=%target_type% && %DKSCRIPT_DIR:\=/%/DKBuilder.sh && exit $(true)")
+	if defined WSL_EXE (%WSL_EXE% sh -c "export UPDATE=1 && export Target_App=%Target_App% && export Target_Tuple=%Target_Tuple% && export Target_Type=%Target_Type% && %DKSCRIPT_DIR:\=/%/DKBuilder.sh && exit $(true)")
 	if defined WSL_EXE (%return%)
 
 	::###### CMake Configure ######

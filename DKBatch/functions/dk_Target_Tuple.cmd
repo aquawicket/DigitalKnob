@@ -29,42 +29,40 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::set "CMAKE_BINARY_DIR=C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/win_x86_64_clang/Debug"
 	set "default_target_env=clang"
 
-	::### Get TARGET_DIR ###
-	if defined CMAKE_BINARY_DIR (%dk_call% dk_realpath "%CMAKE_BINARY_DIR%" TARGET_DIR)
+	::### Get Target_Dir ###
+	if defined CMAKE_BINARY_DIR (%dk_call% dk_realpath "%CMAKE_BINARY_DIR%" Target_Dir)
 
-	%dk_call% dk_printVar TARGET_DIR 							&:: TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
+	%dk_call% dk_printVar Target_Dir 							&:: Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
 
-	::### Set target_type / TARGET_TYPE ###
-	if "!TARGET_DIR!" equ "Debug" (	
+	::### Set Target_Type ###
+	if "!Target_Dir!" equ "Debug" (	
 		rem ### Get DEBUG ###
-		!dk_call! dk_set target_type DEBUG						&rem 	    target_type	= DEBUG
-		!dk_call! dk_set !target_type! 1						&rem 			  DEBUG = 1	
-		rem !dk_call! dk_set TARGET_TYPE Debug					&rem 		TARGET_TYPE	= Debug
-		!dk_call! dk_dirname TARGET_DIR Target_Tuple_DIR		&rem  Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
-	) else if "!TARGET_DIR!" equ "Release" (
+		!dk_call! dk_set Target_Type Debug						&rem 	    Target_Type	= Debug
+		!dk_call! dk_set !Target_Type! 1						&rem 			  Debug = 1	
+		!dk_call! dk_dirname Target_Dir Target_Tuple_DIR		&rem  Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
+	) else if "!Target_Dir!" equ "Release" (
 		rem ### Get RELEASE ###
-		!dk_call! dk_set target_type RELEASE 					&rem 	    target_type = RELEASE
-		!dk_call! dk_set !target_type! 1						&rem 			RELEASE = 1	
-		rem !dk_call! dk_set TARGET_TYPE Release				&rem 		TARGET_TYPE = Release
-		!dk_call! dk_dirname !TARGET_DIR! Target_Tuple_DIR		&rem  Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
+		!dk_call! dk_set Target_Type Release 					&rem 	    Target_Type = Release
+		!dk_call! dk_set !Target_Type! 1						&rem 			Release = 1	
+		!dk_call! dk_dirname !Target_Dir! Target_Tuple_DIR		&rem  Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	)
 
-	%dk_call% dk_containsCI "!TARGET_DIR!" "android" 		&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "android" 		&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "emscripten" 	&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "ios" 			&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "iossim"			&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "linux" 			&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "mac"			&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "raspberry" 		&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "windows"		&& goto if
-	%dk_call% dk_containsCI "!TARGET_DIR!" "cosmopolitan"	&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Android" 		&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Android" 		&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Emscripten" 	&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Ios" 			&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Iossim"			&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Linux" 			&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Mac"			&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Raspberry" 		&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Windows"		&& goto if
+	%dk_call% dk_containsCI "!Target_Dir!" "Cosmopolitan"	&& goto if
 	goto else
 	:if
-		!dk_call! dk_set Target_Tuple_DIR !TARGET_DIR!			&:: Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
+		!dk_call! dk_set Target_Tuple_DIR !Target_Dir!			&:: Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
 	:else
 		!dk_call! dk_Target_Tuple_SET
-		!dk_call! dk_set Target_Tuple_DIR !TARGET_DIR!/!Target_Tuple!
+		!dk_call! dk_set Target_Tuple_DIR !Target_Dir!/!Target_Tuple!
 	:endif
 
 	if exist !Target_Tuple_DIR! (goto Target_Tuple_DIR_EXISTS)

@@ -33,9 +33,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_assertPath DKSCRIPT_DIR
 	
 	%dk_call% dk_unset UPDATE
-	%dk_call% dk_unset target_app
+	%dk_call% dk_unset Target_App
 	%dk_call% dk_unset Target_Tuple
-	%dk_call% dk_unset target_type
+	%dk_call% dk_unset Target_Type
 
 	::set "BUILD_LIST_FILE=%DKCACHE_DIR%/build_list.txt"
 	:while_loop
@@ -58,9 +58,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 			if defined BUILD_LIST[!_line_!][2] (
 				set "UPDATE=1"
-				call set "target_app=%%BUILD_LIST[!_line_!][0]%%"
+				call set "Target_App=%%BUILD_LIST[!_line_!][0]%%"
 				call set "Target_Tuple=%%BUILD_LIST[!_line_!][1]%%"
-				call set "target_type=%%BUILD_LIST[!_line_!][2]%%"
+				call set "Target_Type=%%BUILD_LIST[!_line_!][2]%%"
 				set /a _line_+=1
 			) else (
 				set "BUILD_LIST_FILE="
@@ -68,22 +68,22 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		)
 
 		if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE			& goto :while_loop
-		if not defined target_app		%dk_call% dk_target_app target_app		& goto :while_loop
+		if not defined Target_App		%dk_call% dk_Target_App Target_App		& goto :while_loop
 		if not defined Target_Tuple	%dk_call% dk_Target_Tuple_SET			& goto :while_loop
-		if not defined target_type		%dk_call% dk_target_type target_type	& goto :while_loop
+		if not defined Target_Type		%dk_call% dk_target_type Target_Type	& goto :while_loop
 
 		:: save selections to DKBuilder.cache file
 		%dk_call% dk_echo "creating DKBuilder.cache..."
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-		%dk_call% dk_fileWrite "%DKCACHE_DIR%/DKBuilder.cache" "%target_app% %Target_Tuple% %target_type%"
+		%dk_call% dk_fileWrite "%DKCACHE_DIR%/DKBuilder.cache" "%Target_App% %Target_Tuple% %Target_Type%"
 
 		%dk_call% dk_generate
 		%dk_call% dk_buildApp
 
 		%dk_call% dk_unset UPDATE
-		%dk_call% dk_unset target_app
+		%dk_call% dk_unset Target_App
 		%dk_call% dk_unset Target_Tuple
-		%dk_call% dk_unset target_type
+		%dk_call% dk_unset Target_Type
 	goto while_loop
 %endfunction%
 
