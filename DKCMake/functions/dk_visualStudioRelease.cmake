@@ -20,7 +20,7 @@ function(dk_visualStudioRelease path) #target #arch
 		dk_fatal("dk_visualStudioRelease(${path}) path does not exist")
 	endif()
 	
-	dk_findFiles(${path}/${Target_Triple} *.sln sln_file)
+	dk_findFiles(${path}/${Target_Tuple} *.sln sln_file)
 	dk_basename(${sln_file} sln_file)
 	
 	dk_getExtension(${sln_file} extension)
@@ -29,17 +29,17 @@ function(dk_visualStudioRelease path) #target #arch
 	endif()
 	
 	if(RELEASE AND QUEUE_BUILD)
-		if(NOT EXISTS ${path}/${Target_Triple}/${sln_file})
-			dk_fatal("CANNOT FIND: ${path}/${Target_Triple}/${sln_file}")
+		if(NOT EXISTS ${path}/${Target_Tuple}/${sln_file})
+			dk_fatal("CANNOT FIND: ${path}/${Target_Tuple}/${sln_file}")
 		endif()
 		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Triple}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
 		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Triple}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Triple}/${sln_file} /p:Configuration=Release)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Tuple}/${sln_file} /p:Configuration=Release)
 		endif()
-		dk_exec(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${Target_Triple})
+		dk_exec(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${Target_Tuple})
 	endif()
 endfunction()
 

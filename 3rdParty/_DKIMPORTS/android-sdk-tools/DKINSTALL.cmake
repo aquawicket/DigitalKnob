@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://androidsdkoffline.blogspot.com/p/android-sdk-tools.html
 
 dk_depend(android-sdk)
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-sdk-tools/dkconfig.txt")
 if(WIN_HOST)
 	dk_import		(${ANDROID_SDK_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/tools PATCH)

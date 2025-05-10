@@ -16,7 +16,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/core-temp/dkconfig.txt")
 
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(WIN_X86_HOST)
 	dk_set	(CORE_TEMP_IMPORT   ${CORE_TEMP_WIN32_IMPORT})
 elseif(WIN_X86_64_HOST)

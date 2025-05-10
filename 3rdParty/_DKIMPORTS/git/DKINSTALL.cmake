@@ -14,7 +14,7 @@ dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/git/dkconfig.txt")
 
 ### DOWNLOAD ###
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(WIN_X86_HOST)
 	set(GIT_DL "${GIT_DL_WIN_X86}")
 endif()

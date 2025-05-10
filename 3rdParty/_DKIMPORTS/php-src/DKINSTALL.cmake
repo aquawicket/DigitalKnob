@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/php/php-src.git
 # https://www.php.net
 # https://windows.php.net/downloads/releases
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 
 if(NOT WIN_HOST)
 	dk_undepend(php-src)

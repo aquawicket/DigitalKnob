@@ -9,7 +9,7 @@ include_guard()
 function(dk_CMAKE_GENERATOR)
     dk_debugFunc()
 
-	dk_validate(TARGET_TRIPLE "dk_target_triple()")
+	dk_validate(Target_Tuple "dk_Target_Tuple()")
 	
 	if(android_arm32)    
 		set(CMAKE_GENERATOR "Unix Makefiles")
@@ -68,7 +68,7 @@ function(dk_CMAKE_GENERATOR)
 	elseif(cosmopolitan)     
 		set(CMAKE_GENERATOR "MSYS Makefiles")
 	else()
-		dk_fatal("Could not get CMAKE_GENERATOR from target_triple:${Target_Triple}")
+		dk_fatal("Could not get CMAKE_GENERATOR from Target_Tuple:${Target_Tuple}")
 	endif()
 endfunction()
 

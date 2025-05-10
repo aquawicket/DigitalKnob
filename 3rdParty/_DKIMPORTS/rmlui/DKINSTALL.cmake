@@ -23,7 +23,7 @@ dk_load(dk_builder)
 #
 #  freetype also needed a folder moved up one heirarchy level
 # 
-#  -DSDL2_DIR=${SDL}/${Target_Triple}/Debug
+#  -DSDL2_DIR=${SDL}/${Target_Tuple}/Debug
 ######################################################################################################################## 
 
 

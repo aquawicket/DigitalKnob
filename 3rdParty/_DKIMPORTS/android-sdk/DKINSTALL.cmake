@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #dk_depend(openjdk-8)
 #dk_depend(android-cmdline-tools)
 
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 #if(ANDROID_HOST)
 #	dk_set(ANDROID_SDK "$ENV{HOME}/digitalknob/3rdParty/android-sdk")
 #	dk_set(ANDROID_SDK_DIR "$ENV{HOME}/digitalknob/3rdParty/android-sdk")

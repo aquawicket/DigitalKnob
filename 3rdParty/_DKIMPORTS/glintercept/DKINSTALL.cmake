@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ########### glintercept ############
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 # https://github.com/dtrebilco/glintercept.git
 # https://github.com/dtrebilco/glintercept/archive/e204189eff4045c24d48b82c93d4f012ed44e166.zip
 # https://github.com/dtrebilco/glintercept/releases/download/1.3.4/GLIntercept_1_3_4.exe

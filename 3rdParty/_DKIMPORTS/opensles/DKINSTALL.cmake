@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ opensles ############
 # https://www.khronos.org/opensles/
 
-dk_validate(Target_Triple "dk_Target_Triple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(NOT ANDROID AND NOT IOS AND NOT IOSSIM)
 	dk_undepend(opensles)
 	dk_return()

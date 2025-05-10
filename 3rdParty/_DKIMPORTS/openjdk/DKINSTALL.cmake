@@ -17,7 +17,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java11/java110151/jdk-11.0.15.1_windows-x64_bin.zip
 # https://gist.github.com/douglarek/bbda8cc23a562cb5d5798717d57bc9e9
 
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/openjdk/dkconfig.txt")
 

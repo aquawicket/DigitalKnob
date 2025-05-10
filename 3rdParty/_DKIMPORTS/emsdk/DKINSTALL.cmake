@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(WIN_HOST)
 	dk_depend(python3)
 	dk_nativePath("${PYTHON3_DIR}" PYTHON3_DIR_WIN)

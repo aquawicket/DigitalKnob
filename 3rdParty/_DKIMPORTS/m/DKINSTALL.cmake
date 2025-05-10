@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ m ############
 # https://sourceware.org/newlib/libm.html
 
-dk_validate(Target_Triple "dk_Target_Triple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(ANDROID)
 	dk_depend(android-ndk)
 endif()

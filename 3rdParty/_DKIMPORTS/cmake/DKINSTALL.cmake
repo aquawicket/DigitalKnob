@@ -27,7 +27,7 @@ endif()
 ###### CMAKE_IMPORT ######
 dk_validate			(DKIMPORTS_DIR 		"dk_DKIMPORTS_DIR()")
 dk_getFileParams	("$ENV{DKIMPORTS_DIR}/cmake/dkconfig.txt")
-dk_validate			(Host_Triple 		"dk_Host_Triple()")
+dk_validate			(Host_Tuple 		"dk_Host_Tuple()")
 dk_assertVar		(CMAKE_WIN_X86_64_IMPORT)
 dk_if				(ANDROID_HOST		"dk_set(CMAKE_IMPORT ${CMAKE_LINUX_AARCH64_IMPORT})")
 dk_if				(LINUX_ARM64_HOST	"dk_set(CMAKE_IMPORT ${CMAKE_LINUX_AARCH64_IMPORT})")
@@ -149,7 +149,7 @@ if(COMPILE_CMAKE)
 		endif()
 		
 		dk_include				(${CMAKE}									CMAKE_INCLUDE_DIR)
-		dk_include				(${CMAKE}/${Target_Triple})
+		dk_include				(${CMAKE}/${Target_Tuple})
 		DEBUG_dk_include		(${CMAKE_DEBUG_DIR})
 		RELEASE_dk_include		(${CMAKE_RELEASE_DIR})
 

@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ############ bzip2 ############
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 # https://www.sourceware.org/bzip2
 # https://gitlab.com/bzip2/bzip2
 # https://github.com/kiyolee/bzip2-win-build

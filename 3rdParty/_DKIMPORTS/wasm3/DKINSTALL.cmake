@@ -14,15 +14,15 @@ dk_import(https://github.com/wasm3/wasm3/archive/79d412ea.zip)
 
 ### LINK ###
 dk_include				(${WASM3})
-dk_include				(${WASM3}/${Target_Triple})
-APPLE_dk_libDebug		(${WASM3}/${Target_Triple}/source/${DEBUG_DIR}/libm3.a)
-APPLE_dk_libRelease		(${WASM3}/${Target_Triple}/source/${RELEASE_DIR}/libm3.a)
+dk_include				(${WASM3}/${Target_Tuple})
+APPLE_dk_libDebug		(${WASM3}/${Target_Tuple}/source/${DEBUG_DIR}/libm3.a)
+APPLE_dk_libRelease		(${WASM3}/${Target_Tuple}/source/${RELEASE_DIR}/libm3.a)
 if(NOT APPLE)
 	UNIX_dk_libDebug	(${WASM3_DEBUG_DIR}/source/libm3.a)
 	UNIX_dk_libRelease	(${WASM3_RELEASE_DIR}/source/libm3.a)
 endif()
-WIN_dk_libDebug			(${WASM3}/${Target_Triple}/source/${DEBUG_DIR}/m3.lib)
-WIN_dk_libRelease		(${WASM3}/${Target_Triple}/source/${RELEASE_DIR}/m3.lib)
+WIN_dk_libDebug			(${WASM3}/${Target_Tuple}/source/${DEBUG_DIR}/m3.lib)
+WIN_dk_libRelease		(${WASM3}/${Target_Tuple}/source/${RELEASE_DIR}/m3.lib)
 
 ### GENERATE ###
 dk_configure(${WASM3})

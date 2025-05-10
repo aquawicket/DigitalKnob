@@ -24,7 +24,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 #dk_load(dk_builder)
-dk_validate(Target_Triple "dk_Target_Triple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 #if(ANDROID OR IOS OR IOSSIM OR MAC)
 #	dk_undepend(upx)

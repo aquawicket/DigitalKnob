@@ -10,7 +10,7 @@ function(dk_MSYSTEM)
 	dk_debugFunc()
 
 	### Set MSYSTEM
-	dk_validate(target_env "dk_target_triple()")
+	dk_validate(target_env "dk_Target_Tuple()")
 	
 	if(WIN AND ${target_env})
 		if(CLANG AND ARM64)
@@ -23,7 +23,7 @@ function(dk_MSYSTEM)
 			dk_set(msystem "${target_env}32")				# msystem = clang32, mingw32
 			dk_set(MSYSTEM "${TARGET_ENV}32")				# MSYSTEM = CLANG32, MINGW32
 		else()
-			dk_warning("The target_triple:${Target_Triple} does not contain a valid msystem")
+			dk_warning("The Target_Tuple:${Target_Tuple} does not contain a valid msystem")
 		endif()
 		if(MSYSTEM)
 			dk_set(${MSYSTEM} 1)							# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1

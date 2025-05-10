@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ bcm_host ############
 #
 
-dk_validate(Target_Triple "dk_Target_Triple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 if(RASPBERRY)
 	dk_lib	(bcm_host)

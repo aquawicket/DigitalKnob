@@ -14,7 +14,7 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
-dk_validate(Target_Triple "dk_Target_Triple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
 dk_set			(SDL2_GIF_NAME SDL2_gif)
 dk_set			(SDL2_GIF $ENV{DK3RDPARTY_DIR}/${SDL2_GIF_NAME})

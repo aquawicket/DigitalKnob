@@ -11,7 +11,7 @@ function(dk_CONFIG_PATH)
 	dk_debugFunc()
 	
 	dk_validate(Target_Type  	"dk_Target_Type()")     # get {DEBUG} {RELEASE}
-	dk_validate(target_triple   "dk_target_triple()")	# get {target_triple}
+	dk_validate(Target_Tuple   "dk_Target_Tuple()")	# get {Target_Tuple}
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -22,11 +22,11 @@ function(dk_CONFIG_PATH)
 		
 		dk_set(MULTI_CONFIG 1)
 		dk_unset(SINGLE_CONFIG)
-		dk_set(CONFIG_PATH ${Target_Triple})
+		dk_set(CONFIG_PATH ${Target_Tuple})
 		if(DEBUG)
-			dk_set(BUILD_PATH   ${Target_Triple}/${DEBUG_DIR})
+			dk_set(BUILD_PATH   ${Target_Tuple}/${DEBUG_DIR})
 		elseif(RELEASE)
-			dk_set(BUILD_PATH   ${Target_Triple}/${RELEASE_DIR})
+			dk_set(BUILD_PATH   ${Target_Tuple}/${RELEASE_DIR})
 		endif()
 		dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
 		dk_info("*** ${CMAKE_GENERATOR}: Generator is MULTI_CONFIG (${CMAKE_CONFIGURATION_TYPES}) ***")
@@ -44,15 +44,15 @@ function(dk_CONFIG_PATH)
 		dk_unset(MULTI_CONFIG)
 		if(DEBUG)
 			dk_set	(CMAKE_BUILD_TYPE Debug)
-			dk_set	(CONFIG_PATH ${Target_Triple}/${DEBUG_DIR})
-			dk_set	(BUILD_PATH ${Target_Triple}/${DEBUG_DIR})
+			dk_set	(CONFIG_PATH ${Target_Tuple}/${DEBUG_DIR})
+			dk_set	(BUILD_PATH ${Target_Tuple}/${DEBUG_DIR})
 			
 			dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
 			dk_info("*** ${CMAKE_GENERATOR}: Generator is SINGLE_CONFIG (${CMAKE_BUILD_TYPE}) ***")
 		elseif(RELEASE)
 			dk_set	(CMAKE_BUILD_TYPE Release)
-			dk_set	(CONFIG_PATH ${Target_Triple}/${RELEASE_DIR})
-			dk_set	(BUILD_PATH ${Target_Triple}/${RELEASE_DIR})
+			dk_set	(CONFIG_PATH ${Target_Tuple}/${RELEASE_DIR})
+			dk_set	(BUILD_PATH ${Target_Tuple}/${RELEASE_DIR})
 			
 			dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
 			dk_info("*** ${CMAKE_GENERATOR}: Generator is SINGLE_CONFIG (${CMAKE_BUILD_TYPE}) ***")

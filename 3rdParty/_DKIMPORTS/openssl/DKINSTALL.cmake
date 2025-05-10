@@ -16,7 +16,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #	dk_envList(PLUGIN PUSH "OPENSSL")
 #endif()
 
-dk_validate(Target_Triple "dk_Target_Triple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(win_x86_msvc)
 	dk_disable(openssl)
 	dk_return()

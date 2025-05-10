@@ -19,7 +19,7 @@ dk_getFileParams	("$ENV{DKIMPORTS_DIR}/aom/dkconfig.txt")
 dk_import			(${AOM_IMPORT} NAME aom)
 
 ### LINK ###
-dk_validate			(Target_Triple "dk_Target_Triple()")
+dk_validate			(Target_Tuple "dk_Target_Tuple()")
 dk_include			(${AOM_DIR})
 if(MSVC)
 	dk_libDebug		(${AOM_DEBUG_DIR}/aom.lib)

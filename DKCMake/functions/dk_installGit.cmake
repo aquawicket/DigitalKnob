@@ -13,7 +13,7 @@ function(dk_installGit)
 	dk_debugFunc()
 
 	### DOWNLOAD ###
-	dk_validate(host_triple "dk_host_triple()")
+	dk_validate(Host_Tuple "dk_Host_Tuple()")
 	dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 	dk_getFileParams("$ENV{DKIMPORTS_DIR}/git/git.txt")
 	

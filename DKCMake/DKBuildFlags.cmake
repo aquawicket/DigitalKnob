@@ -132,8 +132,8 @@ include_guard()
 #endif()
 
 
-dk_validate(host_triple   "dk_host_triple()")
-dk_validate(target_triple "dk_target_triple()")
+dk_validate(Host_Tuple   "dk_Host_Tuple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 ########### CORE DEPENDENCIES ############
 dk_depend(cmake)
 
@@ -307,10 +307,10 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 
 #################### TOOLCHAINS ##########################
-if(NOT EXISTS "$ENV{DKCMAKE_DIR}/toolchains/${Target_Triple}_toolchain.cmake")
-	dk_error("$ENV{DKCMAKE_DIR}/toolchains/${Target_Triple}_toolchain.cmake Not Found")
+if(NOT EXISTS "$ENV{DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake")
+	dk_error("$ENV{DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake Not Found")
 endif()
-dk_load($ENV{DKCMAKE_DIR}/toolchains/${Target_Triple}_toolchain.cmake)
+dk_load($ENV{DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake)
 
 #[[
 ### android_arm32
@@ -486,11 +486,11 @@ endif()
 
 # GENERATOR			CONFIG_PATH		  		  	BUILD_PATH
 # -----------------------------------------------------------------------
-# Visual Studio  	${Target_Triple}					${Target_Triple}/${Target_Type}		
-# XCODE			    ${Target_Triple}					${Target_Triple}/${Target_Type} 
-# MinGW Makefiles   ${Target_Triple}/${Target_Type}	${Target_Triple}/${Target_Type} 
-# Unix Makefiles    ${Target_Triple}/${Target_Type}   ${Target_Triple}/${Target_Type}  
-# ./configure       ${Target_Triple}/${Target_Type}   ${Target_Triple}/${Target_Type}
+# Visual Studio  	${Target_Tuple}					${Target_Tuple}/${Target_Type}		
+# XCODE			    ${Target_Tuple}					${Target_Tuple}/${Target_Type} 
+# MinGW Makefiles   ${Target_Tuple}/${Target_Type}	${Target_Tuple}/${Target_Type} 
+# Unix Makefiles    ${Target_Tuple}/${Target_Type}   ${Target_Tuple}/${Target_Type}  
+# ./configure       ${Target_Tuple}/${Target_Type}   ${Target_Tuple}/${Target_Type}
 
 # https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
 # https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html

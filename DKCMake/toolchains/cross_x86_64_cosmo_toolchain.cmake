@@ -10,7 +10,7 @@ dk_set(COSMOPOLITAN 						1)
 set(CMAKE_SKIP_RPATH 						ON)
 set(CMAKE_CROSSCOMPILING 					OFF)
 
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(WIN_HOST)
 	set(CMAKE_GENERATOR						"MSYS Makefiles")
 else()

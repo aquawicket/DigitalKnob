@@ -22,7 +22,7 @@ dk_import				(${DUKLUV_DL})
 
 ### LINK ###
 dk_include				(${DUKLUV}/include)
-dk_include				(${DUKLUV}/${Target_Triple})
+dk_include				(${DUKLUV}/${Target_Tuple})
 if(MSVC)
 	WIN_dk_libDebug		(${DUKLUV_DEBUG_DIR}/dukluv.lib)
 	WIN_dk_libRelease	(${DUKLUV_RELEASE_DIR}/dukluv.lib)

@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_depend(android-sdk)
 
 # 3.18.1
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-cmake/dkconfig.txt")
 if(WIN_HOST)

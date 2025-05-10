@@ -14,7 +14,7 @@ if(EXISTS "${CMD_EXE}")
 endif()
 
 ### Windows Host Only ###
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(NOT WIN_HOST)
 	dk_undepend(cmd)
 	dk_return()

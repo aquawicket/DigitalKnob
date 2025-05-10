@@ -31,7 +31,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #	dk_return()
 #endif()
 
-dk_validate(Target_Triple "dk_Target_Triple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 ### shell command bash ###
 execute_process(COMMAND command -v bash OUTPUT_VARIABLE SHELL_BASH)

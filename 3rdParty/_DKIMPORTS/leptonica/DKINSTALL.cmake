@@ -28,17 +28,17 @@ dk_import(https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip)
 
 ### LINK ###
 dk_include					(${LEPTONICA})
-dk_include					(${LEPTONICA}/${Target_Triple}/src)
+dk_include					(${LEPTONICA}/${Target_Tuple}/src)
 dk_include					(${LEPTONICA_RELEASE_DIR}/src)
 if(MULTI_CONFIG)
  if(MSVC)
-	WIN_dk_libDebug			(${LEPTONICA}/${Target_Triple}/src/${DEBUG_DIR}/leptonica-1.84.0d.lib)
-	WIN_dk_libRelease		(${LEPTONICA}/${Target_Triple}/src/${RELEASE_DIR}/leptonica-1.84.0.lib)
-	ANDROID_dk_libDebug		(${LEPTONICA}/${Target_Triple}/src/${DEBUG_DIR}/libleptonica.a)
-	ANDROID_dk_libRelease	(${LEPTONICA}/${Target_Triple}/src/${RELEASE_DIR}/libleptonica.a)
+	WIN_dk_libDebug			(${LEPTONICA}/${Target_Tuple}/src/${DEBUG_DIR}/leptonica-1.84.0d.lib)
+	WIN_dk_libRelease		(${LEPTONICA}/${Target_Tuple}/src/${RELEASE_DIR}/leptonica-1.84.0.lib)
+	ANDROID_dk_libDebug		(${LEPTONICA}/${Target_Tuple}/src/${DEBUG_DIR}/libleptonica.a)
+	ANDROID_dk_libRelease	(${LEPTONICA}/${Target_Tuple}/src/${RELEASE_DIR}/libleptonica.a)
  else()
-	dk_libDebug				(${LEPTONICA}/${Target_Triple}/src/${DEBUG_DIR}/libleptonica.a)
-	dk_libRelease			(${LEPTONICA}/${Target_Triple}/src/${RELEASE_DIR}/libleptonica.a)
+	dk_libDebug				(${LEPTONICA}/${Target_Tuple}/src/${DEBUG_DIR}/libleptonica.a)
+	dk_libRelease			(${LEPTONICA}/${Target_Tuple}/src/${RELEASE_DIR}/libleptonica.a)
  endif()
 else()
 	dk_libDebug				(${LEPTONICA_DEBUG_DIR}/src/libleptonica.a)
@@ -50,7 +50,7 @@ dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_CONFIG_DIR})
 
 ### GENERATE ###
 #dk_configure(${LEPTONICA_DIR} 
-#	"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO}/${Target_Triple} /I${LIBPNG} /I${LIBPNG}/${Target_Triple} /I${TIFF}/${Target_Triple}/libtiff" 
+#	"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO}/${Target_Tuple} /I${LIBPNG} /I${LIBPNG}/${Target_Tuple} /I${TIFF}/${Target_Tuple}/libtiff" 
 #	-DSTATIC=ON 
 #	-DCMAKE_INSTALL_PREFIX=${LEPTONICA} 
 #	-DSW_BUILD=OFF 

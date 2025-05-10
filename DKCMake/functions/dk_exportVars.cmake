@@ -9,7 +9,7 @@ include_guard()
 function(dk_exportVars var_name var_value)
 	dk_debugFunc()
 	
-	dk_validate(host_triple "dk_host_triple()")
+	dk_validate(Host_Tuple "dk_Host_Tuple()")
 	if(WIN_HOST)
 		set(export "set")
 	else()

@@ -17,7 +17,7 @@ dk_getFileParams	($ENV{DKIMPORTS_DIR}/astyle/dkconfig.txt)
 dk_import			(${ASTYLE_IMPORT})
 
 ### LINK ###
-dk_validate			(Target_Triple "dk_Target_Triple()")
+dk_validate			(Target_Tuple "dk_Target_Tuple()")
 dk_include			(${ASTYLE_DIR}/src)
 
 if(WIN)

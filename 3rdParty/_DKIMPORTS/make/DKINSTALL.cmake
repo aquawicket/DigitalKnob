@@ -23,8 +23,8 @@ endif()
 #endif()
 
 
-#dk_validate(Target_Triple "dk_Target_Triple()")
-#dk_validate(Host_Triple "dk_Host_Triple()")
+#dk_validate(Target_Tuple "dk_Target_Tuple()")
+#dk_validate(Host_Tuple "dk_Host_Tuple()")
 
 dk_installPackage("make")
 

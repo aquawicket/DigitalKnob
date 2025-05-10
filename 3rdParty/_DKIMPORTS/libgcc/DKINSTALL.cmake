@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ########### libgcc ############
 # https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
 
-dk_validate(Target_Triple "dk_Target_Triple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 #if(MSYSTEM)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 	#set(LIBGCC_VERSION "13.2.0")

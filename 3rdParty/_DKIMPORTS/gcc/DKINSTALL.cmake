@@ -7,9 +7,9 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ gcc ############
 # https://packages.msys2.org/package/mingw-w64-x86_64-gcc?repo=mingw64
-dk_validate(Host_Triple			"dk_Host_Triple()")
-dk_validate(ENV{Target_Triple}	"dk_Target_Triple()")
-dk_set($ENV{Target_Triple}		1)
+dk_validate(Host_Tuple			"dk_Host_Tuple()")
+dk_validate(ENV{Target_Tuple}	"dk_Target_Tuple()")
+dk_set($ENV{Target_Tuple}		1)
 
 #dk_getFileParams("$ENV{DKIMPORTS_DIR}/clang/dkconfig.txt")
 #if(clang OR mingw OR ucrt)

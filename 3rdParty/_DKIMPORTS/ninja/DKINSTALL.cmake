@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############# ninja binary ############
 # https://github.com/ninja-build/ninja.git
 
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(WIN_HOST)
 	dk_import(https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-win.zip)
 	dk_findProgram(NINJA_EXE ninja ${NINJA})

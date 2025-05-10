@@ -18,7 +18,7 @@ dk_prependEnvPath("${COSMOCC}/bin")
 
 dk_prependEnvPath("${COSMOPOLITAN}/tool/cosmocc/bin")
 
-dk_validate(host_triple "dk_host_triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(WIN_HOST)
 	dk_set(CMAKE_GENERATOR					"MSYS Makefiles")
 else()

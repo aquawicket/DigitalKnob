@@ -19,10 +19,10 @@ dk_import(https://github.com/warmcat/libwebsockets/archive/6b950e86.zip)
 
 ### LINK ###
 dk_include			(${LIBWEBSOCKETS}/lib)
-dk_include			(${LIBWEBSOCKETS}/${Target_Triple})
+dk_include			(${LIBWEBSOCKETS}/${Target_Tuple})
 if(MSVC)
-	dk_libDebug		(${LIBWEBSOCKETS}/${Target_Triple}/lib/${DEBUG_DIR}/websockets_static.lib)
-	dk_libRelease	(${LIBWEBSOCKETS}/${Target_Triple}/lib/${RELEASE_DIR}/websockets_static.lib)
+	dk_libDebug		(${LIBWEBSOCKETS}/${Target_Tuple}/lib/${DEBUG_DIR}/websockets_static.lib)
+	dk_libRelease	(${LIBWEBSOCKETS}/${Target_Tuple}/lib/${RELEASE_DIR}/websockets_static.lib)
 else()
 	dk_libDebug		(${LIBWEBSOCKETS_DEBUG_DIR}/lib/libwebsockets_static.a)
 	dk_libRelease	(${LIBWEBSOCKETS_RELEASE_DIR}/lib/libwebsockets_static.a)

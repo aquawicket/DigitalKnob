@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://services.gradle.org/distributions/gradle-7.3-bin.zip
 
 ###### set ${bat} variable for windows ######
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(WIN_HOST)
 	dk_set(bat ".bat")
 endif()

@@ -15,7 +15,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #
 
 ###### IMPORT ######
-dk_validate(Host_Triple "dk_Host_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(LINUX_HOST)	
 	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
 elseif(MAC_HOST)

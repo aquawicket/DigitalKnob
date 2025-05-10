@@ -4,16 +4,16 @@ if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
-dk_validate(Host_Triple "dk_Host_Triple()")
-dk_validate(Target_Triple "dk_Target_Triple()")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 ############ webview2_in_mingw ############
 dk_import("https://github.com/jchv/webview2-in-mingw/archive/c003dd6e.zip" PATCH)
 
 dk_assertPath("${WEBVIEW2_IN_MINGW}")
 dk_include("${WEBVIEW2_IN_MINGW}/WebView/include")
 
-set(WEBVIEW2_IN_MINGW_DEBUG_DIR "${WEBVIEW2_IN_MINGW}/${Target_Triple}/Debug")
-set(WEBVIEW2_IN_MINGW_RELEASE_DIR "${WEBVIEW2_IN_MINGW}/${Target_Triple}/Release")
+set(WEBVIEW2_IN_MINGW_DEBUG_DIR "${WEBVIEW2_IN_MINGW}/${Target_Tuple}/Debug")
+set(WEBVIEW2_IN_MINGW_RELEASE_DIR "${WEBVIEW2_IN_MINGW}/${Target_Tuple}/Release")
 dk_libDebug("${WEBVIEW2_IN_MINGW_DEBUG_DIR}/webview2.exe")
 dk_libRelease("${WEBVIEW2_IN_MINGW_RELEASE_DIR}/webview2.exe")
 
