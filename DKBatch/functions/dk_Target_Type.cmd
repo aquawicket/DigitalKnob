@@ -5,10 +5,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_target_type(rtn_var:Target_Type)
+::# dk_Target_Type(rtn_var:Target_Type)
 ::#
 ::#
-:dk_target_type
+:dk_Target_Type
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 1
  
@@ -49,5 +49,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_target_type
+    %dk_call% dk_Target_Type
 %endfunction%

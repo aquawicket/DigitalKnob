@@ -17,12 +17,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	:: read DKBuilder.cache file
 	if exist "%DKCACHE_DIR%/DKBuilder.cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%/DKBuilder.cache" words)
-	set "_target_app_=%words[0][0]%"
+	set "_Target_App_=%words[0][0]%"
 	set "_Target_Tuple_=%words[0][1]%"
-	set "_target_type_=%words[0][2]%"
+	set "_Target_Type_=%words[0][2]%"
     
     %dk_call% dk_echo
-    if exist "%DKCACHE_DIR%/DKBuilder.cache" if "%_target_app_%" neq "" if "%_Target_Tuple_%" neq "" if "%_target_type_%" neq "" echo  0) Repeat cache [%_target_app_% - %_Target_Tuple_% - %_target_type_%]
+    if exist "%DKCACHE_DIR%/DKBuilder.cache" if "%_Target_App_%" neq "" if "%_Target_Tuple_%" neq "" if "%_Target_Type_%" neq "" echo  0) Repeat cache [%_Target_App_% - %_Target_Tuple_% - %_Target_Type_%]
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Download DigitalKnob
@@ -40,7 +40,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_keyboardInput choice
     ::%dk_call% dk_keyboardInputTimeout 13 60 choice
 		
-    if "%choice%" equ "0"  %dk_call% dk_set Target_App %_target_app_% & %dk_call% dk_set Target_Tuple %_Target_Tuple_% & %dk_call% dk_set Target_Type %_target_type_%
+    if "%choice%" equ "0"  %dk_call% dk_set Target_App %_Target_App_% & %dk_call% dk_set Target_Tuple %_Target_Tuple_% & %dk_call% dk_set Target_Type %_Target_Type_%
     if "%choice%" equ "1"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
     if "%choice%" equ "2"  %dk_call% dk_gitCommit
     if "%choice%" equ "3"  %dk_call% dk_downloadDK

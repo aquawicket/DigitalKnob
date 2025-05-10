@@ -28,16 +28,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "CMAKE_TARGET_PATH=%TARGET_PATH%"
 
 	::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
-	set "target_level=RebuildAll"
+	set "Target_Level=RebuildAll"
 	set "DKLINK=Static"
 
 	set "CMAKE_ARGS="
 	if /i "%Target_Type%" equ "Debug"		(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
 	if /i "%Target_Type%" equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
 	if /i "%Target_Type%" equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	if /i "%target_level%" equ "Build"		(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
-	if /i "%target_level%" equ "Rebuild"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
-	if /i "%target_level%" equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
+	if /i "%Target_Level%" equ "Build"		(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
+	if /i "%Target_Level%" equ "Rebuild"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
+	if /i "%Target_Level%" equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
 	if /i "%DKLINK%" equ "Static"			(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
 	if /i "%DKLINK%" equ "Shared"			(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
 	::if "%Target_Tuple%==emscripten" 		(%dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON)

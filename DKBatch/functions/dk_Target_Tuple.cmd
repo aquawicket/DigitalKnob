@@ -27,7 +27,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	::set "CMAKE_BINARY_DIR=C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/win_x86_64_clang/Debug"
-	set "default_target_env=clang"
+	set "default_Target_Env=clang"
 
 	::### Get Target_Dir ###
 	if defined CMAKE_BINARY_DIR (%dk_call% dk_realpath "%CMAKE_BINARY_DIR%" Target_Dir)
@@ -141,7 +141,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_containsCI "!Target_Tuple!" "cosmopolitan" 	&& !dk_call! dk_set Target_Env cosmopolitan
 	if not defined Target_Env (
 		!dk_call! dk_warning "The target Target_Tuple:!Target_Tuple! does not contain a valid Target_Env"
-		!dk_call! dk_set Target_Env !default_target_env!
+		!dk_call! dk_set Target_Env !default_Target_Env!
 	) else (
 		!dk_call! dk_toUpper !Target_Env! TARGET_ENV
 		!dk_call! dk_set TARGET_ENV !TARGET_ENV!
@@ -170,15 +170,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		!dk_call! dk_set !MSYSTEM! 1								&rem CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
 	)
 		
-	::### Set target_os_arch / TARGET_OS_ARCH ###
-	!dk_call! dk_set target_os_arch "!Target_Os!_!Target_Arch!"
-	!dk_call! dk_set TARGET_OS_ARCH "!TARGET_OS!_!TARGET_ARCH!"
-	!dk_call! dk_set target_os_arch "!target_os_arch!"
-	!dk_call! dk_set TARGET_OS_ARCH "!TARGET_OS_ARCH!"
-	!dk_call! dk_set !target_os_arch! 1
-	!dk_call! dk_set !TARGET_OS_ARCH! 1
-	!dk_call! dk_set !target_os_arch!_target 1
-	!dk_call! dk_set !TARGET_OS_ARCH!_TARGET 1
+	::### Set Target_Os_Arch ###
+	!dk_call! dk_set Target_Os_Arch "!Target_Os!_!Target_Arch!"
+	!dk_call! dk_set !Target_Os_Arch! 1
+	::!dk_call! dk_set !Target_Os_Arch!_Target 1
 
 	::### Set DEBUG_DIR and RELEASE_DIR variables
 	if defined IOS (

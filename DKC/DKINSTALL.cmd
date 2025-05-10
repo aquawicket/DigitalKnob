@@ -108,9 +108,9 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::###### Target_Env ######
 	if not defined Target_Env (set "Target_Env=clang")
 
-	::###### target_tuple ######
-	if not defined target_tuple (set "target_tuple=%Target_Os%_%Target_Arch%_%Target_Env%")
-	set "%target_tuple%=1"
+	::###### Target_Tuple ######
+	if not defined Target_Tuple (set "Target_Tuple=%Target_Os%_%Target_Arch%_%Target_Env%")
+	set "%Target_Tuple%=1"
 
 	::###### MSYSTEM ######
 	::if not defined MSYSTEM  if /i "%Target_Env%" equ "clang" if "%Target_Arch%" equ "x86"    set "MSYSTEM=CLANG32"

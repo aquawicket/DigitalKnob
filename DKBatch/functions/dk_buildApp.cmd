@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_title "Building %Target_App% - %Target_Tuple% - %Target_Type%"
 	%dk_call% dk_echo
 	%dk_call% dk_echo "####################################################################"
-	%dk_call% dk_echo " Building %Target_App% - %Target_Tuple% - %Target_Type% - %target_level%"
+	%dk_call% dk_echo " Building %Target_App% - %Target_Tuple% - %Target_Type% - %Target_Level%"
 	%dk_call% dk_echo "####################################################################"
 	%dk_call% dk_echo
 
@@ -26,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_echo
 	%dk_call% dk_echo "####################################################################"
-	%dk_call% dk_echo " Done Building %Target_App% - %Target_Tuple% - %Target_Type% - %target_level%"
+	%dk_call% dk_echo " Done Building %Target_App% - %Target_Tuple% - %Target_Type% - %Target_Level%"
 	%dk_call% dk_echo "####################################################################"
 	%dk_call% dk_echo
 %endfunction%

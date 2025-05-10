@@ -50,7 +50,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 				goto :skipTarget
 			)
 			rem Each Host_Arch will have a list of compatible tuples
-			rem The the current Host_Arch doesn't have the target_tripple in it's allowed list
+			rem The the current Host_Arch doesn't have the Target_Tuple in it's allowed list
 			rem We goto skipTarget, we could also have a disabled list for each Host_Arch to do the same:
 			rem A block list could be good, because everything will be attempted by default instead of enabled.
 			rem Example win_x86 mac ios iossim	=	win_x86_host's will skip all instaces of mac, ios and iossim
@@ -69,8 +69,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 		if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE			& goto :while_loop
 		if not defined Target_App		%dk_call% dk_Target_App Target_App		& goto :while_loop
-		if not defined Target_Tuple	%dk_call% dk_Target_Tuple_SET			& goto :while_loop
-		if not defined Target_Type		%dk_call% dk_target_type Target_Type	& goto :while_loop
+		if not defined Target_Tuple		%dk_call% dk_Target_Tuple_SET			& goto :while_loop
+		if not defined Target_Type		%dk_call% dk_Target_Type Target_Type	& goto :while_loop
 
 		:: save selections to DKBuilder.cache file
 		%dk_call% dk_echo "creating DKBuilder.cache..."

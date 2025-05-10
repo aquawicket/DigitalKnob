@@ -19,9 +19,9 @@ dk_callDKCSharp
  
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc 
-	set "default_target_os=%Host_Os%"
-	set "default_target_arch=%Host_Arch%"
-	set "default_target_env=csc"
+	set "default_Target_Os=%Host_Os%"
+	set "default_Target_Arch=%Host_Arch%"
+	set "default_Target_Env=csc"
 
 	::###### _func_ ######
 	set "_func_=%~1"
@@ -43,15 +43,15 @@ dk_callDKCSharp
 	if not exist %DKCSHARP_FUNCTIONS_DIR%/%~1.cs   (%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/%~1.cs" "%DKCSHARP_FUNCTIONS_DIR%/%~1.cs")
 
 	::###### Target_Os ######
-	if not defined Target_Os (set "Target_Os=%default_target_os%")
+	if not defined Target_Os (set "Target_Os=%default_Target_Os%")
 	%dk_call% dk_debug "Target_Os = %Target_Os%"
 
 	::###### Target_Arch ######
-	if not defined Target_Arch (set "Target_Arch=%default_target_arch%")
+	if not defined Target_Arch (set "Target_Arch=%default_Target_Arch%")
 	%dk_call% dk_debug "Target_Arch = %Target_Arch%"
 
 	::###### Target_Env ######
-	if not defined Target_Env (set "Target_Env=%default_target_env%")
+	if not defined Target_Env (set "Target_Env=%default_Target_Env%")
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 
 	::###### CSC_EXE ######

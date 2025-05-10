@@ -5,18 +5,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_target_app(RTN:Target_App)
+::# dk_Target_App(RTN:Target_App)
 ::#
 ::#
-:dk_target_app
+:dk_Target_App
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 1 
 	
     :: read DKBuilder.cache file
 	if exist "%DKCACHE_DIR%\DKBuilder.cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%\DKBuilder.cache" words)
-	set "_target_app_=%words[0][0]%"
+	set "_Target_App_=%words[0][0]%"
 	set "_Target_Tuple_=%words[0][1]%"
-	set "_target_type_=%words[0][2]%"
+	set "_Target_Type_=%words[0][2]%"
 	
     :: get a list of the directories in DKCpp/apps
 	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
@@ -37,14 +37,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     :endloop1
 
     :: prepend cache selection if available
-    if exist "%DKCACHE_DIR%\DKBuilder.cache" if "%_target_app_%" neq "" if "%_Target_Tuple_%" neq "" if "%_target_type_%" neq "" (
-        %dk_call% Array/dk_unshift dk_getDirectories "re-run [%_target_app_% - %_Target_Tuple_% - %_target_type_%]"
+    if exist "%DKCACHE_DIR%\DKBuilder.cache" if "%_Target_App_%" neq "" if "%_Target_Tuple_%" neq "" if "%_Target_Type_%" neq "" (
+        %dk_call% Array/dk_unshift dk_getDirectories "re-run [%_Target_App_% - %_Target_Tuple_% - %_Target_Type_%]"
         %dk_call% Array/dk_unshift commands "call:runCache"
     )
     goto end_runCache
     :runCache
         %dk_call% dk_info "re-running cached dk_getDirectories..."
-        %dk_call% dk_set Target_App %_target_app_% && %dl_call% dk_set Target_Tuple %_Target_Tuple_% && call dk_set Target_Type %_target_type_% && %return%
+        %dk_call% dk_set Target_App %_Target_App_% && %dl_call% dk_set Target_Tuple %_Target_Tuple_% && call dk_set Target_Type %_Target_Type_% && %return%
     :end_runCache
     
     ::### Append remaining dk_getDirectories with commands ###
@@ -105,6 +105,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
     %dk_call% dk_debugFunc 0
 
-    %dk_call% dk_target_app Target_App
+    %dk_call% dk_Target_App Target_App
 	%dk_call% dk_echo "Target_App = %Target_App%"
 %endfunction%
