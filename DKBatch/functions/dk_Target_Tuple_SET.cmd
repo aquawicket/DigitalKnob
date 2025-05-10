@@ -215,43 +215,43 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 
 	%dk_call% dk_assertVar Target_Os
-rem	%dk_call% dk_assertVar target_os
+rem	%dk_call% dk_assertVar Target_Os
 rem	%dk_call% dk_assertVar TARGET_OS
 rem %dk_call% dk_toCamel !Target_Os! Target_Os
-rem %dk_call% dk_toLower !Target_Os! target_os
+rem %dk_call% dk_toLower !Target_Os! Target_Os
 	%dk_call% dk_toUpper !Target_Os! TARGET_OS
 rem	%dk_call% dk_set !Target_Os! 1
-rem	%dk_call% dk_set !target_os! 1
+rem	%dk_call% dk_set !Target_Os! 1
 	%dk_call% dk_set !TARGET_OS! 1
 	
 	%dk_call% dk_assertVar Target_Arch
-rem %dk_call% dk_assertVar target_arch
+rem %dk_call% dk_assertVar Target_Arch
 rem %dk_call% dk_assertVar TARGET_ARCH
 rem %dk_call% dk_toUpper !Target_Arch! Target_Arch
-rem %dk_call% dk_toUpper !Target_Arch! target_arch
+rem %dk_call% dk_toUpper !Target_Arch! Target_Arch
 	%dk_call% dk_toUpper !Target_Arch! TARGET_ARCH
 rem %dk_call% dk_set !Target_Arch! 1
-rem %dk_call% dk_set !target_arch! 1
+rem %dk_call% dk_set !Target_Arch! 1
 	%dk_call% dk_set !TARGET_ARCH! 1
 
 	if not defined Target_Env (
 		%dk_call% dk_set Target_Env Clang
-	rem %dk_call% dk_set target_env clang
+	rem %dk_call% dk_set Target_Env clang
 	rem %dk_call% dk_set TARGET_ENV CLANG
 	)
 	if defined Target_Env (
 	rem %dk_call% dk_toCamel !Target_Env! Target_Env
-	rem %dk_call% dk_toLower !Target_Env! target_env
+	rem %dk_call% dk_toLower !Target_Env! Target_Env
 		%dk_call% dk_toUpper !Target_Env! TARGET_ENV
 	rem %dk_call% dk_set !Target_Env! 1
-	rem %dk_call% dk_set !target_env! 1
+	rem %dk_call% dk_set !Target_Env! 1
 		%dk_call% dk_set !TARGET_ENV! 1
 	rem %dk_call% dk_set Target_Tuple !Target_Os!_!Target_Arch!_!Target_Env!
-	rem %dk_call% dk_set Target_Tuple !target_os!_!target_arch!_!target_env!
+	rem %dk_call% dk_set Target_Tuple !Target_Os!_!Target_Arch!_!Target_Env!
 		%dk_call% dk_set Target_Tuple !TARGET_OS!_!TARGET_ARCH!_!TARGET_ENV!
 	) else (
 	rem %dk_call% dk_set Target_Tuple !Target_Os!_!Target_Arch!
-	rem %dk_call% dk_set Target_Tuple !target_os!_!target_arch!
+	rem %dk_call% dk_set Target_Tuple !Target_Os!_!Target_Arch!
 		%dk_call% dk_set Target_Tuple !TARGET_OS!_!TARGET_ARCH!
 	)
 rem %dk_call% dk_assertVar Target_Tuple

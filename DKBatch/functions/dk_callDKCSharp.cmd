@@ -42,17 +42,17 @@ dk_callDKCSharp
 	if not exist %DKCSHARP_FUNCTIONS_DIR%/DK.cs	(%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/DK.cs" "%DKCSHARP_FUNCTIONS_DIR%/DK.cs")
 	if not exist %DKCSHARP_FUNCTIONS_DIR%/%~1.cs   (%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/%~1.cs" "%DKCSHARP_FUNCTIONS_DIR%/%~1.cs")
 
-	::###### target_os ######
-	if not defined target_os (set "target_os=%default_target_os%")
-	%dk_call% dk_debug "target_os = %target_os%"
+	::###### Target_Os ######
+	if not defined Target_Os (set "Target_Os=%default_target_os%")
+	%dk_call% dk_debug "Target_Os = %Target_Os%"
 
-	::###### target_arch ######
-	if not defined target_arch (set "target_arch=%default_target_arch%")
-	%dk_call% dk_debug "target_arch = %target_arch%"
+	::###### Target_Arch ######
+	if not defined Target_Arch (set "Target_Arch=%default_target_arch%")
+	%dk_call% dk_debug "Target_Arch = %Target_Arch%"
 
-	::###### target_env ######
-	if not defined target_env (set "target_env=%default_target_env%")
-	%dk_call% dk_debug "target_env = %target_env%"
+	::###### Target_Env ######
+	if not defined Target_Env (set "Target_Env=%default_target_env%")
+	%dk_call% dk_debug "Target_Env = %Target_Env%"
 
 	::###### CSC_EXE ######
 	:: TODO:  note, reference DKINSTALL.cmd for how to call DKCSharp methods from batch script

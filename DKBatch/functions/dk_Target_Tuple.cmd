@@ -13,14 +13,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#	If the CMAKE_BINARY_DIR is missing the <TARGET_OS> or the <TARGET_ARCH>, dk_Target_Tuple_SET will be called to get those variables
 ::#
-::#	target_os   							= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
+::#	Target_Os   							= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
 ::#	TARGET_OS   							= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
-::#	target_arch								= arm32, arm64, x86, x86_64
+::#	Target_Arch								= arm32, arm64, x86, x86_64
 ::#	TARGET_ARCH								= ARM32, ARM64, X86, X86_64
-::#	target_env								= clang, cosmopolitan, mingw, msvc, ucrt
+::#	Target_Env								= clang, cosmopolitan, mingw, msvc, ucrt
 ::#	TARGET_ENV								= CLANG, cosmopolitan, MINGW, MSVC, UCRT
-::# <target_os>_<target_arch>				= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
-::# <target_os>_<target_arch>_<target_env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
+::# <Target_Os>_<Target_Arch>				= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
+::# <Target_Os>_<Target_Arch>_<Target_Env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 ::#
 :dk_Target_Tuple
 ::%setlocal%
@@ -77,7 +77,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	!dk_call! dk_set DK_PROJECT_DIR !DK_PROJECT_DIR!
 	!dk_call! dk_assertPath DK_PROJECT_DIR
 
-	::### Set Target_Tuple/Target_Tuple, <target_os>_<target_arch>_<target_env>/<TARGET_OS>_<TARGET_ARCH>_<TARGET_ENV> ###
+	::### Set Target_Tuple/Target_Tuple, <Target_Os>_<Target_Arch>_<Target_Env>/<TARGET_OS>_<TARGET_ARCH>_<TARGET_ENV> ###
 	!dk_call! dk_basename !Target_Tuple_DIR! Target_Tuple		&:: Target_Tuple 	= win_x86_64_clang
 	!dk_call! dk_set Target_Tuple !Target_Tuple!				&:: Globalize the variable
 	!dk_call! dk_set Target_Tuple !Target_Tuple!				&:: Target_Tuple	= win_x86_64_clang
@@ -87,91 +87,91 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	!dk_call! dk_set !Target_Tuple! 1						    &:: win_x86_64_clang = 1
 	!dk_call! dk_set !Target_Tuple! 1						    &:: WIN_X86_64_CLANG = 1
 
-	::### Set target_os / TARGET_OS / <target_os>_target / <TARGET_OS>_TARGET
-	%dk_call% dk_containsCI "!Target_Tuple!" "android" 		&& !dk_call! dk_set target_os android
-	%dk_call% dk_containsCI "!Target_Tuple!" "emscripten" 		&& !dk_call! dk_set target_os emscripten
-	%dk_call% dk_containsCI "!Target_Tuple!" "ios" 			&& !dk_call! dk_set target_os ios
-	%dk_call% dk_containsCI "!Target_Tuple!" "iossim" 			&& !dk_call! dk_set target_os iossim 
-	%dk_call% dk_containsCI "!Target_Tuple!" "linux" 			&& !dk_call! dk_set target_os linux
-	%dk_call% dk_containsCI "!Target_Tuple!" "mac" 			&& !dk_call! dk_set target_os mac
-	%dk_call% dk_containsCI "!Target_Tuple!" "raspberry" 		&& !dk_call! dk_set target_os raspberry
-	%dk_call% dk_containsCI "!Target_Tuple!" "windows" 		&& !dk_call! dk_set target_os windows
-	%dk_call% dk_containsCI "!Target_Tuple!" "win"				&& !dk_call! dk_set target_os win
-	%dk_call% dk_containsCI "!Target_Tuple!" "cosmopolitan"	&& !dk_call! dk_set target_os cosmopolitan
-	if not defined target_os (
-		!dk_call! dk_warning "The target Target_Tuple:!Target_Tuple! does not contain a valid target_os"
+	::### Set Target_Os / TARGET_OS / <Target_Os>_target / <TARGET_OS>_TARGET
+	%dk_call% dk_containsCI "!Target_Tuple!" "android" 		&& !dk_call! dk_set Target_Os android
+	%dk_call% dk_containsCI "!Target_Tuple!" "emscripten" 		&& !dk_call! dk_set Target_Os emscripten
+	%dk_call% dk_containsCI "!Target_Tuple!" "ios" 			&& !dk_call! dk_set Target_Os ios
+	%dk_call% dk_containsCI "!Target_Tuple!" "iossim" 			&& !dk_call! dk_set Target_Os iossim 
+	%dk_call% dk_containsCI "!Target_Tuple!" "linux" 			&& !dk_call! dk_set Target_Os linux
+	%dk_call% dk_containsCI "!Target_Tuple!" "mac" 			&& !dk_call! dk_set Target_Os mac
+	%dk_call% dk_containsCI "!Target_Tuple!" "raspberry" 		&& !dk_call! dk_set Target_Os raspberry
+	%dk_call% dk_containsCI "!Target_Tuple!" "windows" 		&& !dk_call! dk_set Target_Os windows
+	%dk_call% dk_containsCI "!Target_Tuple!" "win"				&& !dk_call! dk_set Target_Os win
+	%dk_call% dk_containsCI "!Target_Tuple!" "cosmopolitan"	&& !dk_call! dk_set Target_Os cosmopolitan
+	if not defined Target_Os (
+		!dk_call! dk_warning "The target Target_Tuple:!Target_Tuple! does not contain a valid Target_Os"
 		!dk_call! dk_unset Target_Tuple
 		!dk_call! dk_unset Target_Tuple 
 		!dk_call! dk_Target_Tuple_SET
 	) else (
-		!dk_call! dk_toUpper !target_os! TARGET_OS
+		!dk_call! dk_toUpper !Target_Os! TARGET_OS
 		!dk_call! dk_set TARGET_OS !TARGET_OS! 
-		!dk_call! dk_set target_os !target_os!
+		!dk_call! dk_set Target_Os !Target_Os!
 		!dk_call! dk_set TARGET_OS !TARGET_OS!
-		!dk_call! dk_set !target_os! 1
+		!dk_call! dk_set !Target_Os! 1
 		!dk_call! dk_set !TARGET_OS! 1
-		!dk_call! dk_set !target_os!_target 1
+		!dk_call! dk_set !Target_Os!_target 1
 		!dk_call! dk_set !TARGET_OS!_TARGET 1
 	)
-	::### Get target_arch / TARGET_ARCH
-	%dk_call% dk_containsCI "!Target_Tuple!" "arm64" 			&& !dk_call! dk_set target_arch arm64
-	%dk_call% dk_containsCI "!Target_Tuple!" "arm32" 			&& !dk_call! dk_set target_arch arm32
-	%dk_call% dk_containsCI "!Target_Tuple!" "x86_64" 			&& !dk_call! dk_set target_arch x86_64
-	%dk_call% dk_containsCI "!Target_Tuple!" "x86" 			&& !dk_call! dk_set target_arch x86
-	%dk_call% dk_containsCI "!Target_Tuple!" "cosmopolitan" 	&& !dk_call! dk_set target_arch cosmopolitan	
-	if not defined target_arch (
-		!dk_call! dk_warning "The target Target_Tuple:!Target_Tuple! does not contain a valid target_arch"
+	::### Get Target_Arch / TARGET_ARCH
+	%dk_call% dk_containsCI "!Target_Tuple!" "arm64" 			&& !dk_call! dk_set Target_Arch arm64
+	%dk_call% dk_containsCI "!Target_Tuple!" "arm32" 			&& !dk_call! dk_set Target_Arch arm32
+	%dk_call% dk_containsCI "!Target_Tuple!" "x86_64" 			&& !dk_call! dk_set Target_Arch x86_64
+	%dk_call% dk_containsCI "!Target_Tuple!" "x86" 			&& !dk_call! dk_set Target_Arch x86
+	%dk_call% dk_containsCI "!Target_Tuple!" "cosmopolitan" 	&& !dk_call! dk_set Target_Arch cosmopolitan	
+	if not defined Target_Arch (
+		!dk_call! dk_warning "The target Target_Tuple:!Target_Tuple! does not contain a valid Target_Arch"
 		!dk_call! dk_Target_Tuple_SET
 	) else (
-		!dk_call! dk_toUpper !target_arch! TARGET_ARCH
+		!dk_call! dk_toUpper !Target_Arch! TARGET_ARCH
 		!dk_call! dk_set TARGET_ARCH !TARGET_ARCH!
-		!dk_call! dk_set target_arch !target_arch!)
+		!dk_call! dk_set Target_Arch !Target_Arch!)
 		!dk_call! dk_set TARGET_ARCH !TARGET_ARCH!)
-		!dk_call! dk_set !target_arch! 1
+		!dk_call! dk_set !Target_Arch! 1
 		!dk_call! dk_set !TARGET_ARCH! 1
-		!dk_call! dk_set !target_arch!_target 1)
+		!dk_call! dk_set !Target_Arch!_target 1)
 		!dk_call! dk_set !TARGET_ARCH!_TARGET 1)
 	)
 
 	::### Set evn / TARGET_ENV 
-	%dk_call% dk_containsCI "!Target_Tuple!" "clang" 			&& !dk_call! dk_set target_env clang
-	%dk_call% dk_containsCI "!Target_Tuple!" "mingw" 			&& !dk_call! dk_set target_env mingw
-	%dk_call% dk_containsCI "!Target_Tuple!" "ucrt"  			&& !dk_call! dk_set target_env ucrt
-	%dk_call% dk_containsCI "!Target_Tuple!" "msvc"  			&& !dk_call! dk_set target_env msvc
-	%dk_call% dk_containsCI "!Target_Tuple!" "cosmopolitan" 	&& !dk_call! dk_set target_env cosmopolitan
-	if not defined target_env (
-		!dk_call! dk_warning "The target Target_Tuple:!Target_Tuple! does not contain a valid target_env"
-		!dk_call! dk_set target_env !default_target_env!
+	%dk_call% dk_containsCI "!Target_Tuple!" "clang" 			&& !dk_call! dk_set Target_Env clang
+	%dk_call% dk_containsCI "!Target_Tuple!" "mingw" 			&& !dk_call! dk_set Target_Env mingw
+	%dk_call% dk_containsCI "!Target_Tuple!" "ucrt"  			&& !dk_call! dk_set Target_Env ucrt
+	%dk_call% dk_containsCI "!Target_Tuple!" "msvc"  			&& !dk_call! dk_set Target_Env msvc
+	%dk_call% dk_containsCI "!Target_Tuple!" "cosmopolitan" 	&& !dk_call! dk_set Target_Env cosmopolitan
+	if not defined Target_Env (
+		!dk_call! dk_warning "The target Target_Tuple:!Target_Tuple! does not contain a valid Target_Env"
+		!dk_call! dk_set Target_Env !default_target_env!
 	) else (
-		!dk_call! dk_toUpper !target_env! TARGET_ENV
+		!dk_call! dk_toUpper !Target_Env! TARGET_ENV
 		!dk_call! dk_set TARGET_ENV !TARGET_ENV!
-		!dk_call! dk_set target_env !target_env!
+		!dk_call! dk_set Target_Env !Target_Env!
 		!dk_call! dk_set TARGET_ENV !TARGET_ENV!
-		!dk_call! dk_set !target_env! 1
+		!dk_call! dk_set !Target_Env! 1
 		!dk_call! dk_set !TARGET_ENV! 1
-		!dk_call! dk_set !target_env!_target 1
+		!dk_call! dk_set !Target_Env!_target 1
 		!dk_call! dk_set !TARGET_ENV!_TARGET 1
 	)
 
 	::### Set MSYSTEM
 	if defined !TARGET_ENV! (
 		if defined CLANG if defined ARM64 (
-			!dk_call! dk_set msystem "!target_env!!target_arch!"	&rem msystem = clangarm64
+			!dk_call! dk_set msystem "!Target_Env!!Target_Arch!"	&rem msystem = clangarm64
 			!dk_call! dk_set MSYSTEM "!TARGET_ENV!!TARGET_ARCH!"	&rem MSYSTEM = CLANGARM64
 		) else if defined X86_64 (
-			!dk_call! dk_set msystem "!target_env!64"				&rem msystem = clang64, mingw64, ucrt64
+			!dk_call! dk_set msystem "!Target_Env!64"				&rem msystem = clang64, mingw64, ucrt64
 			!dk_call! dk_set MSYSTEM "!TARGET_ENV!64"				&rem MSYSTEM = CLANG64, MINGW64, UCRT64
 		) else if defined X86 (
-			!dk_call! dk_set msystem "!target_env!32"				&rem msystem = clang32, mingw32
+			!dk_call! dk_set msystem "!Target_Env!32"				&rem msystem = clang32, mingw32
 			!dk_call! dk_set MSYSTEM "!TARGET_ENV!32"				&rem MSYSTEM = CLANG32, MINGW32
 		) else (
-			!dk_call! dk_fatal "The target Target_Tuple:!Target_Tuple! does not contain a valid target_env or msystem"
+			!dk_call! dk_fatal "The target Target_Tuple:!Target_Tuple! does not contain a valid Target_Env or msystem"
 		)
 		!dk_call! dk_set !MSYSTEM! 1								&rem CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
 	)
 		
 	::### Set target_os_arch / TARGET_OS_ARCH ###
-	!dk_call! dk_set target_os_arch "!target_os!_!target_arch!"
+	!dk_call! dk_set target_os_arch "!Target_Os!_!Target_Arch!"
 	!dk_call! dk_set TARGET_OS_ARCH "!TARGET_OS!_!TARGET_ARCH!"
 	!dk_call! dk_set target_os_arch "!target_os_arch!"
 	!dk_call! dk_set TARGET_OS_ARCH "!TARGET_OS_ARCH!"
