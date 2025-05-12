@@ -5,42 +5,31 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_Target_Arch()
+::# dk_Target_Tuple()
 ::#
-::#	  Target_Arch = Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows
+::#	  Target_Tuple = TODO
 ::#
-:dk_Target_Arch
+:dk_Target_Tuple
 %setlocal%
 	%dk_call% dk_debugFunc 0 1
 
 	rem ###### SET ######
 	if "%~1" neq "" (
-		set "Target_Arch=%~1"
+		set "Target_Tuple=%~1"
 	
 	rem ###### GET ######	
 	) else (
-		echo: 
-		if not defined Host_Arch (%dk_call% dk_Host_Arch)
-		echo  0^) !Host_Arch!
-		echo:
-		echo  1^) Arm32
-		echo  2^) Arm64
-		echo  3^) X86
-		echo  4^) X86_64
-		echo:
-
-		%dk_call% dk_keyboardInput input
+		rem TODO
+		%dk_call% dk_validate Target_Os		"%dk_call% dk_Target_Os"
+		%dk_call% dk_validate Target_Arch	"%dk_call% dk_Target_Arch"
+		%dk_call% dk_validate Target_Env	"%dk_call% dk_Target_Env"
 		
-		if "!input!" equ "0"	(set "Target_Arch=!Host_Arch!")
-		if "!input!" equ "1" 	(set "Target_Arch=Arm32")
-		if "!input!" equ "2" 	(set "Target_Arch=Arm64")
-		if "!input!" equ "3" 	(set "Target_Arch=X86")
-		if "!input!" equ "4" 	(set "Target_Arch=X86_64")
+		set "Target_Tuple=!Target_Os!_!Target_Arch!_!Target_Env!"
 	)
 	
 	endlocal & (
-		set "Target_Arch=%Target_Arch%"
-		set "%Target_Arch%=1"
+		set "Target_Tuple=%Target_Tuple%"
+		set "%Target_Tuple%=1"
 	)
 %endfunction%
 
@@ -55,13 +44,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	::###### GET ######
-    %dk_call% dk_Target_Arch
-	%dk_call% dk_printVar Target_Arch
-	%dk_call% dk_printVar %Target_Arch%
+    %dk_call% dk_Target_Tuple
+	%dk_call% dk_printVar Target_Tuple
+	%dk_call% dk_printVar %Target_Tuple%
 	
 	::###### SET ######
-	%dk_call% dk_Target_Arch "I686"
-	%dk_call% dk_printVar Target_Arch
-	%dk_call% dk_printVar %Target_Arch%
+	%dk_call% dk_Target_Tuple "Windows_X86_64_Clang"
+	%dk_call% dk_printVar Target_Tuple
+	%dk_call% dk_printVar %Target_Tuple%
 	
 %endfunction%
