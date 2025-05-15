@@ -53,7 +53,7 @@ function(dk_assets plugin)
 		PATTERN iossim_x86_64 EXCLUDE
 		PATTERN linux_x86 EXCLUDE
 		PATTERN linux_x86_64 EXCLUDE
-		PATTERN android_arm32 EXCLUDE
+		PATTERN Android_Arm32 EXCLUDE
 		PATTERN android_arm64 EXCLUDE
 		PATTERN android_x86 EXCLUDE
 		PATTERN android_x86_64 EXCLUDE

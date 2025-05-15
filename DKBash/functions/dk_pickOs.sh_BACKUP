@@ -64,7 +64,7 @@ dk_pickOs() {
 	elif [ "${choice}" = "2" ]; then
 		target_tuple="cosmo"
 	elif [ "${choice}" = "3" ]; then
-		target_tuple="android_arm32"
+		target_tuple="Android_Arm32"
 	elif [ "${choice}" = "4" ]; then
 		target_tuple="android_arm64"
 	elif [ "${choice}" = "5" ]; then
@@ -128,7 +128,7 @@ dk_pickOs() {
 	elif [ "${choice}" = "34" ]; then
 		target_tuple="win_x86_64_mingw"
 	elif [ "${choice}" = "35" ]; then
-		target_tuple="win_x86_64_clang"
+		target_tuple="Win_X86_64_Clang"
 	elif [ "${choice}" = "36" ]; then
 		target_tuple="win_x86_64_ucrt"
 	elif [ "${choice}" = "37" ]; then

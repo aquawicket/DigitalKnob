@@ -99,8 +99,8 @@ dk_info("DK_Project_Dir = ${DK_Project_Dir}")
 	
 if(1)
 	
-# android_arm32
-if(${DK_BINARY_OSARCH} MATCHES "android_arm32")
+# Android_Arm32
+if(${DK_BINARY_OSARCH} MATCHES "Android_Arm32")
 	dk_set(ANDROID_NDK 						"$ENV{DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
 	dk_set(ANDROID_NDK_GENERATOR 			"Unix Makefiles")
 	dk_set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe")

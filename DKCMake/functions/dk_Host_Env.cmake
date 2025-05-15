@@ -28,7 +28,17 @@ function(dk_Host_Env)
 		endif()
 		dk_assertVar(Host_Env)		#  Host_Env = Msys		
 	endif()
-	dk_set(${Host_Env}_Host 1)		# Msys_Host = 1		
+	dk_set(${Host_Env}_Host 1)		# Msys_Host = 1
+
+
+	###### VALIDATE RESULT ######
+	if(Msys_Host)
+	elseif(MinGw_Host)
+	elseif(Msvc_Host)
+	elseif(Windows_Host)
+	else()
+		dk_fatal("Host_Env:'${Host_Env}' is INVALID!")
+	endif()	
 endfunction()
 
 

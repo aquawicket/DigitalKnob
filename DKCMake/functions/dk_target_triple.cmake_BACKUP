@@ -7,7 +7,7 @@ include_guard()
 #
 #	Set the cached target variables
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
-#   i.e.  win_x86_64_clang
+#   i.e.  Win_X86_64_Clang
 #
 #	If the CMAKE_BINARY_DIR is missing the <TARGET_OS> or the <Target_Arch>, dk_target_tuple_SET will be called to get those variables
 #
@@ -34,9 +34,9 @@ function(dk_target_tuple)
 	
 	### Get Target_Dir ###
 	dk_getFullPath("${CMAKE_BINARY_DIR}" Target_Dir)
-	#d_k_toCamel(${Target_Dir} Target_Dir)				# Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
-	dk_toLower(${Target_Dir} target_dir)				# target_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/win_x86_64_clang/debug
-	dk_toUpper(${Target_Dir} TARGET_DIR)				# TARGET_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/WIN_X86_64_CLANG/DEBUG
+	#d_k_toCamel(${Target_Dir} Target_Dir)				# Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang/Debug
+	dk_toLower(${Target_Dir} target_dir)				# target_dir = c:/users/administrator/digitalknob/development/dkcpp/apps/dksample/Win_X86_64_Clang/debug
+	dk_toUpper(${Target_Dir} TARGET_DIR)				# TARGET_DIR = C:/USERS/ADMINISTRATOR/DIGITALKNOB/DEVELOPMENT/DKCPP/APPS/DKSAMPLE/Win_X86_64_Clang/DEBUG
 	#dk_printVar(Target_Dir)								
 	#dk_printVar(target_dir)								
 	#dk_printVar(TARGET_DIR)								
@@ -96,11 +96,11 @@ function(dk_target_tuple)
 	
 	### Set Target_Tuple
 	if(NOT DEFINED Target_Tuple)
-		dk_basename(${Target_Tuple_Dir} Target_Tuple)	# Target_Tuple = Win_x86_64_Clang
+		dk_basename(${Target_Tuple_Dir} Target_Tuple)	# Target_Tuple = Win_X86_64_Clang
 	endif()
 	#d_k_toCamel(${Target_Tuple} Target_Tuple)		# Target_Tuple	= Win_X86_64_Clang
-	dk_toLower(${Target_Tuple} target_tuple)			# target_tuple	= win_x86_64_clang	
-	dk_toUpper(${Target_Tuple} TARGET_TUPLE)			# TARGET_TUPLE	= WIN_X86_64_CLANG
+	dk_toLower(${Target_Tuple} target_tuple)			# target_tuple	= Win_X86_64_Clang	
+	dk_toUpper(${Target_Tuple} TARGET_TUPLE)			# TARGET_TUPLE	= Win_X86_64_Clang
 	dk_set(Target_Tuple ${Target_Tuple})				# Globalize the variable
 	dk_set(target_tuple ${target_tuple})				# Globalize the variable
 	dk_set(TARGET_TUPLE ${TARGET_TUPLE})				# Globalize the variable
@@ -108,8 +108,8 @@ function(dk_target_tuple)
 	#dk_printVar(Target_Tuple)							
 	#dk_printVar(TARGET_TUPLE)							
 	dk_set(${Target_Tuple} 1)							# Win_X86_64_Clang = 1
-	dk_set(${target_tuple} 1)							# win_x86_64_clang = 1
-	dk_set(${TARGET_TUPLE} 1)							# WIN_X86_64_CLANG = 1
+	dk_set(${target_tuple} 1)							# Win_X86_64_Clang = 1
+	dk_set(${TARGET_TUPLE} 1)							# Win_X86_64_Clang = 1
 	#dk_printVar(${Target_Tuple})						
 	#dk_printVar(${target_tuple})						
 	#dk_printVar(${TARGET_TUPLE})						

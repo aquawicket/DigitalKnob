@@ -225,10 +225,10 @@
 #		define DKOS_VERSION "UNKNOWN" //TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #	if DKBITS == 32
-#		ifndef ANDROID_ARM32
-#			define ANDROID_ARM32 1
+#		ifndef Android_Arm32
+#			define Android_Arm32 1
 #		endif
-#		define DKOS "ANDROID_ARM32"
+#		define DKOS "Android_Arm32"
 #		define DKOS_VERSION "UNKNOWN" //TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #elif __linux__

@@ -350,7 +350,7 @@ dk_pickOs() {
 	if [ "${input}" = "1" ]; then
 		target_tuple="${host_tuple-}"
 	elif [ "${input}" = "2" ]; then
-		target_tuple="android_arm32"
+		target_tuple="Android_Arm32"
 	elif [ "${input}" = "3" ]; then
 		target_tuple="android_arm64"
 	elif [ "${input}" = "4" ]; then
@@ -412,7 +412,7 @@ dk_pickOs() {
 	elif [ "${input}" = "32" ]; then
 		target_tuple="win_x86_64_mingw"
 	elif [ "${input}" = "33" ]; then
-		target_tuple="win_x86_64_clang"
+		target_tuple="Win_X86_64_Clang"
 	elif [ "${input}" = "34" ]; then
 		target_tuple="win_x86_64_ucrt"
 	elif [ "${input}" = "35" ]; then
@@ -583,7 +583,7 @@ dk_generate() {
 	#set -- "${@}" "--warn-unused-vars"
 	#set -- "${@}" "--check-system-vars"
 	
-	if [ "${target_tuple}" = "android_arm32" ]; then
+	if [ "${target_tuple}" = "Android_Arm32" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 
@@ -651,7 +651,7 @@ dk_generate() {
 	fi
 	
 	#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
-	if [ "${target_tuple}" = "win_x86_64_clang" ]; then
+	if [ "${target_tuple}" = "Win_X86_64_Clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
@@ -790,11 +790,11 @@ dk_installCmake() {
 	if [ "${Host_Tuple}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
 	if [ "${Host_Tuple}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
 	if [ "${Host_Tuple}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${target_tuple}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
+	if [ "${target_tuple}" 	= "Android_Arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
 	if [ "${target_tuple}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
 	if [ "${target_tuple}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
 	if [ "${target_tuple}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
-	if [ "${target_tuple}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
+	if [ "${target_tuple}"		= "Win_X86_64_Clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
 	if [ "${target_tuple}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
 	if [ "${target_tuple}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
 	

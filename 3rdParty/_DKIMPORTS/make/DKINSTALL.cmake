@@ -58,7 +58,7 @@ dk_installPackage("make")
 #	dk_installPackage("make")
 #	#dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang32/bin")
 #	
-#elseif(win_x86_64_clang)
+#elseif(Win_X86_64_Clang)
 #	dk_validate(MSYS2 "dk_depend(msys2)")
 #	dk_installPackage("make")
 #	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang64/bin")	

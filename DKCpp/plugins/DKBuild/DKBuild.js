@@ -1,6 +1,6 @@
 //CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
 var UPDATE = "" //allow the first screen to loop
-var OS = ""   //win_x86,win_x86_64,mac_x86,mac_x86_64,linux_x86,linux_x86_64,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,android_arm32,android_arm64,raspberry_arm32,raspberry_arm64 
+var OS = ""   //win_x86,win_x86_64,mac_x86,mac_x86_64,linux_x86,linux_x86_64,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,Android_Arm32,android_arm64,raspberry_arm32,raspberry_arm64 
 var APP = ""  //DKAppname
 var TYPE = ""  //Debug, Release, ALL
 var LINK = "Static" //, Dynamic
@@ -566,7 +566,7 @@ function DKBuild_DoResults(){
 	}
 	
 	////// ANDROID armeabi-v7a //////
-	if(OS === "android_arm32"){
+	if(OS === "Android_Arm32"){
 		DKBuild_ValidateNDK()
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
@@ -575,11 +575,11 @@ function DKBuild_DoResults(){
 		if(CPP_DK_GetOS() === "Windows"){
 			if(!DKBuild_Command(DIGITALKNOB_DIR+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 				return false
-			if(!DKBuild_Command(CMAKE_EXE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+"android_arm32"))
+			if(!DKBuild_Command(CMAKE_EXE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+"Android_Arm32"))
 				return false
 		}
 		else{
-			if(!DKBuild_Command(CMAKE_EXE+" -G \"Unix Makefiles\" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+"android_arm32"))
+			if(!DKBuild_Command(CMAKE_EXE+" -G \"Unix Makefiles\" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+"Android_Arm32"))
 				return false
 		}
 		

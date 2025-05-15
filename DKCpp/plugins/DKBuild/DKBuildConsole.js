@@ -141,7 +141,7 @@ function DKBuildConsole_SelectOs(){
 		//if(arch === "x86_64"){
 			OSes.push("win_x86_64")
 		//}
-		OSes.push("android_arm32")
+		OSes.push("Android_Arm32")
 		OSes.push("android_arm64")
 		OSes.push("emscripten")
 	}
@@ -154,7 +154,7 @@ function DKBuildConsole_SelectOs(){
 		OSes.push("ios_arm64")
 		//OSes.push("iossim_x86")
 		OSes.push("iossim_x86_64")
-		OSes.push("android_arm32")
+		OSes.push("Android_Arm32")
 		OSes.push("android_arm64")
 		OSes.push("emscripten")
 	}
@@ -170,7 +170,7 @@ function DKBuildConsole_SelectOs(){
 		else{
 			console.log("ERROR: Unrecognized architecture")
 		}
-		OSes.push("android_arm32")
+		OSes.push("Android_Arm32")
 		OSes.push("android_arm64")
 		OSes.push("emscripten")
 	}
@@ -183,7 +183,7 @@ function DKBuildConsole_SelectOs(){
 		//else if(arch = "amrv7l64")
 			//OSes.push("raspberry_arm64")
 		//}
-		//OSes.push("android_arm32")
+		//OSes.push("Android_Arm32")
 		//OSes.push("android_arm64")
 		//OSes.push("emscripten")
 	}

@@ -48,7 +48,21 @@ function(dk_Host_Os)
 	endif()
 
 	dk_assertVar(Host_Os)
-	dk_set(${Host_Os}_Host 1)				
+	dk_set(${Host_Os}_Host 1)
+
+
+	###### VALIDATE RESULT ######
+	if(Android_Host)
+	elseif(Emscripten_Host)
+	elseif(Ios_Host)
+	elseif(Iossim_Host)
+	elseif(Linux_Host)
+	elseif(Mac_Host)
+	elseif(Raspberry_Host)
+	elseif(Win_Host)
+	else()
+		dk_fatal("Host_OS:'${Host_OS}' is INVALID!")
+	endif()
 endfunction()
 
 

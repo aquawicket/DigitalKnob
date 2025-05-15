@@ -321,7 +321,7 @@ The build system will differenciate the appropriate scripts to use when the outp
 EXAMPLE: "<DKCpp/apps/MyApp/ios_arm64>" <br>
 
 Valid <'OS'>'s are <br>
-android_arm32 <br>
+Android_Arm32 <br>
 android_arm64 <br>
 emscripten <br>
 ios_arm32 <br>

@@ -86,7 +86,7 @@ function Global:dk_target_tuple_SET() {
 	elseif(${input} -eq "30"){ $global:target_tuple = "win_x86_clang" }
 	elseif(${input} -eq "31"){ $global:target_tuple = "win_x86_gcc" }
 	elseif(${input} -eq "32"){ $global:target_tuple = "win_x86_msvc" }
-	elseif(${input} -eq "33"){ $global:target_tuple = "win_x86_64_clang" }
+	elseif(${input} -eq "33"){ $global:target_tuple = "Win_X86_64_Clang" }
 	elseif(${input} -eq "34"){ $global:target_tuple = "win_x86_64_gcc" }
 	elseif(${input} -eq "35"){ $global:target_tuple = "win_x86_64_msvc" }
 	elseif(${input} -eq "36"){ $global:target_tuple = "win_x86_64_ucrt" }

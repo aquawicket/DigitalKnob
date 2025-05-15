@@ -49,10 +49,20 @@ function(dk_Host_Arch)
 		else()
 			dk_fatal("CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
 		endif()
-	endif()
-	
+	endif()	
 	dk_assertVar(Host_Arch)			#  Host_Arch = Arm64
 	dk_set(${Host_Arch}_Host 1)		# Arm64_Host = 1
+	
+	
+	###### VALIDATE RESULT ######
+	if(Arm32_Host)
+	elseif(Arm64_Host)
+	elseif(X86_Host)
+	elseif(X86_64_Host)
+	elseif(Cosmopolitan_Host)
+	else()
+		dk_fatal("Host_Arch:'${Host_Arch}' is INVALID!")
+	endif()
 endfunction()
 
 

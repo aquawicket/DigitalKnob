@@ -130,7 +130,7 @@ function(dk_installPackage)
 		if(win_x86_clang)
 			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")		# CLANG32
 			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-i686-${package} --needed --noconfirm)									# CLANG32
-		elseif(win_x86_64_clang)
+		elseif(Win_X86_64_Clang)
 			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")	# CLANG64
 			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-x86_64-${package} --needed --noconfirm)									# CLANG64
 		elseif(win_arm64_clang)

@@ -5,7 +5,7 @@
 * When running Cmake, the source path is always the /digitalknob folder, where the CMakeLists.txt file is located. 
 * The build directory is the path to the app followed by the OS.  i.e  DKCpp/apps/DKMyApp/win_x86  
 	* Output Build OS's are
-		* /android_arm32
+		* /Android_Arm32
 		* /android_arm64
 		* /emscripten
 		* /ios_arm32

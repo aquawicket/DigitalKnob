@@ -38,7 +38,7 @@ HelloWorld	WIN_ARM64_MSVC			Debug
 HelloWorld	WIN_X86_CLANG			Debug	#NOTE:	Msys2 dropped support for clang32
 HelloWorld	WIN_X86_GCC				Debug
 HelloWorld	WIN_X86_MSVC			Debug
-HelloWorld	WIN_X86_64_CLANG		Debug
+HelloWorld	Win_X86_64_Clang		Debug
 HelloWorld	WIN_X86_64_GCC			Debug
 HelloWorld	WIN_X86_64_MSVC			Debug
 HelloWorld	WIN_X86_64_UCRT			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
@@ -84,7 +84,7 @@ DKCore 		WIN_ARM64_MSVC				Debug
 DKCore 		WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
 DKCore 		WIN_X86_GCC					Debug
 DKCore 		WIN_X86_MSVC				Debug
-DKCore 		WIN_X86_64_CLANG			Debug
+DKCore 		Win_X86_64_Clang			Debug
 DKCore 		WIN_X86_64_GCC				Debug
 DKCore 		WIN_X86_64_MSVC				Debug
 DKCore 		WIN_X86_64_UCRT 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
@@ -130,7 +130,7 @@ DKJavascript 	WIN_ARM64_MSVC				Debug
 DKJavascript 	WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
 DKJavascript 	WIN_X86_GCC					Debug
 DKJavascript 	WIN_X86_MSVC				Debug
-DKJavascript 	WIN_X86_64_CLANG			Debug
+DKJavascript 	Win_X86_64_Clang			Debug
 DKJavascript 	WIN_X86_64_GCC				Debug
 DKJavascript 	WIN_X86_64_MSVC				Debug
 DKJavascript 	WIN_X86_64_UCRT 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
@@ -176,7 +176,7 @@ DKSDL 		WIN_ARM64_MSVC				Debug
 DKSDL 		WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
 DKSDL	 	WIN_X86_GCC					Debug
 DKSDL 		WIN_X86_MSVC				Debug
-DKSDL 		WIN_X86_64_CLANG			Debug
+DKSDL 		Win_X86_64_Clang			Debug
 DKSDL	 	WIN_X86_64_GCC				Debug
 DKSDL 		WIN_X86_64_MSVC				Debug
 DKSDL 		WIN_X86_64_UCRT 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
@@ -222,7 +222,7 @@ DKSDLRml 		WIN_ARM64_MSVC				Debug
 DKSDLRml 		WIN_X86_CLANG				Debug	#NOTE:	Msys2 dropped support for clang32
 DKSDLRml 		WIN_X86_GCC					Debug
 DKSDLRml 		WIN_X86_MSVC				Debug
-DKSDLRml 		WIN_X86_64_CLANG			Debug
+DKSDLRml 		Win_X86_64_Clang			Debug
 DKSDLRml 		WIN_X86_64_GCC				Debug
 DKSDLRml 		WIN_X86_64_MSVC				Debug
 DKSDLRml 		WIN_X86_64_UCRT 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64

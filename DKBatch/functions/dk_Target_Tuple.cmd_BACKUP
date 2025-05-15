@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#	Set the cached target variables
 ::#   This information is pulled from the folder name of the CMAKE_BINARY_DIR
-::#   i.e.  win_x86_64_clang
+::#   i.e.  Win_X86_64_Clang
 ::#
 ::#	If the CMAKE_BINARY_DIR is missing the <TARGET_OS> or the <Target_Arch>, dk_Target_Tuple_SET will be called to get those variables
 ::#
@@ -32,24 +32,24 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	rem ###### GET ######	
 	) else (
-		rem set "CMAKE_BINARY_DIR=C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/win_x86_64_clang/Debug"
+		rem set "CMAKE_BINARY_DIR=C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/Win_X86_64_Clang/Debug"
 		set "default_Target_Env=clang"
 
 		rem ### Get Target_Dir ###
 		if defined CMAKE_BINARY_DIR (%dk_call% dk_realpath "%CMAKE_BINARY_DIR%" Target_Dir)
-		%dk_call% dk_printVar Target_Dir 							&rem Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang/Debug
+		%dk_call% dk_printVar Target_Dir 							&rem Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang/Debug
 
 		rem ### Set Target_Type ###
 		if "!Target_Dir!" equ "Debug" (	
 			rem ### Get DEBUG ###
 			!dk_call! dk_set Target_Type Debug						&rem 	    Target_Type	= Debug
 			!dk_call! dk_set !Target_Type! 1						&rem 			  Debug = 1	
-			!dk_call! dk_dirname Target_Dir Target_Tuple_DIR		&rem  Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
+			!dk_call! dk_dirname Target_Dir Target_Tuple_DIR		&rem  Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
 		) else if "!Target_Dir!" equ "Release" (
 			rem ### Get RELEASE ###
 			!dk_call! dk_set Target_Type Release 					&rem 	    Target_Type = Release
 			!dk_call! dk_set !Target_Type! 1						&rem 			Release = 1	
-			!dk_call! dk_dirname !Target_Dir! Target_Tuple_DIR		&rem  Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
+			!dk_call! dk_dirname !Target_Dir! Target_Tuple_DIR		&rem  Target_Tuple_DIR = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
 		)
 
 		%dk_call% dk_containsCI "!Target_Dir!" "Android" 		&& goto if
@@ -64,7 +64,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_containsCI "!Target_Dir!" "Cosmopolitan"	&& goto if
 		goto else
 		:if
-			!dk_call! dk_set Target_Tuple_Dir !Target_Dir!			&rem Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/win_x86_64_clang
+			!dk_call! dk_set Target_Tuple_Dir !Target_Dir!			&rem Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
 		:else
 			!dk_call! dk_Target_Tuple_SET
 			!dk_call! dk_set Target_Tuple_Dir !Target_Dir!/!Target_Tuple!
@@ -86,7 +86,7 @@ goto:eof
 		rem ### Set Target_Tuple, <Target_Os>_<Target_Arch>_<Target_Env> ###
 		!dk_call! dk_basename !Target_Tuple_DIR! Target_Tuple		&rem Target_Tuple 	= Win_X86_64_Clang
 		!dk_call! dk_set Target_Tuple !Target_Tuple!				&rem Globalize the variable
-		!dk_call! dk_set !Target_Tuple! 1						    &rem win_x86_64_clang = 1
+		!dk_call! dk_set !Target_Tuple! 1						    &rem Win_X86_64_Clang = 1
 
 
 		rem ### Set Target_Os / TARGET_OS / <Target_Os>_target / <TARGET_OS>_TARGET

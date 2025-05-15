@@ -147,7 +147,7 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
-	elif [ "${target_tuple,,}" = "win_x86_64_clang" ]; then
+	elif [ "${target_tuple,,}" = "Win_X86_64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}

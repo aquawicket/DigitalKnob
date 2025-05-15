@@ -23,11 +23,11 @@ DKINSTALL() {
 	[ "${host_tuple}" = "linux_arm64" ]				&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
 	[ "${host_tuple}" = "raspberry_arm64" ]			&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
 	
-	#[ "${target_tuple}" = "android_arm32" ]		&& CMAKE_IMPORT=cmake
+	#[ "${target_tuple}" = "Android_Arm32" ]		&& CMAKE_IMPORT=cmake
 	[ "${target_tuple-}" = "win_arm64_clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
 	[ "${target_tuple-}" = "win_x86_clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
 	[ "${target_tuple-}" = "win_x86_mingw" ]		&& CMAKE_IMPORT=mingw-w64-i686-cmake
-	[ "${target_tuple-}" = "win_x86_64_clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	[ "${target_tuple-}" = "Win_X86_64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
 	[ "${target_tuple-}" = "win_x86_64_mingw" ]		&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
 	[ "${target_tuple-}" = "win_x86_64_ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	dk_call dk_printVar CMAKE_IMPORT

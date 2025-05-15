@@ -36,7 +36,7 @@ function Global:dk_generate() {
 	$DKLINK = "Static"
 	
 	$CMAKE_ARGS = @()
-	if($target_tuple -eq "android_arm32")  	{ $CMAKE_ARGS += "-G Unix Makefiles" }
+	if($target_tuple -eq "Android_Arm32")  	{ $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($target_tuple -eq "android_arm64")  { $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($target_tuple -eq "emscripten")     { $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($target_tuple -eq "ios_arm32")      { $CMAKE_ARGS += "-G Xcode" }
@@ -73,7 +73,7 @@ function Global:dk_generate() {
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW32"
 	}
-	elseif($target_tuple -eq "win_x86_64_clang"){
+	elseif($target_tuple -eq "Win_X86_64_Clang"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang64\bin;$env:PATH"
 		#$CMAKE_ARGS += "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"

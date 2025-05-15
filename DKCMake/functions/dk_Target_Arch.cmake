@@ -17,10 +17,9 @@ function(dk_Target_Arch)
 	###### GET ######	
 	else()
 		dk_echo()
-		if(NOT Target_Arch_Cache)
-			#d_k_Target_Arch_Cache()
+		if(Target_Arch_Cache)
+			dk_echo(" 0) ${Target_Arch_Cache}")
 		endif()
-		dk_echo(" 0) ${Target_Arch_Cache}")
 		if(NOT Host_Arch)
 			dk_Host_Arch()
 		endif()
@@ -60,7 +59,18 @@ function(dk_Target_Arch)
 	endif()
 	
 	dk_assertVar(Target_Arch)
+	dk_set(${Target_Arch} 1)
 	#dk_set(${Target_Arch}_Target 1)	
+	
+	
+	###### VALIDATE RESULT ######
+	if(Arm32)
+	elseif(Arm64)
+	elseif(X86)
+	elseif(X86_64)
+	else()
+		dk_fatal("Target_Arch:'${Target_Arch}' is INVALID!")
+	endif()
 endfunction()
 
 
@@ -76,7 +86,7 @@ function(DKTEST)
 	#dk_printVar(${Target_Arch}_Target)
 	
 	###### SET ######
-	dk_Target_Arch("Linux")
+	dk_Target_Arch("I686")
 	dk_printVar(Target_Arch)
 	#dk_printVar(${Target_Arch}_Target)
 endfunction()

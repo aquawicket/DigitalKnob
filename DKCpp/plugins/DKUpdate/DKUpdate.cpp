@@ -49,7 +49,7 @@
 // ios_arm64     - http://DigitalKnob.com/Download/DKApp_ios_arm64.zip
 // iossim_x86  - http://DigitalKnob.com/Download/DKApp_iossim_x86.zip
 // iossim_x86_64  - http://DigitalKnob.com/Download/DKApp_iossim_x86_64.zip
-// android_arm32 - http://DigitalKnob.com/Download/DKApp.apk
+// Android_Arm32 - http://DigitalKnob.com/Download/DKApp.apk
 // android_arm64 - http://DigitalKnob.com/Download/DKApp_64.apk
 
 DKString DKUpdate::url;
@@ -96,7 +96,7 @@ bool DKUpdate::Init(){
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS_ARM64]", url);
 	if(url.empty()){ url = downloads+app+"_ios_arm64.zip"; }
 #endif
-#if ANDROID_ARM32
+#if Android_Arm32
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID_ARM32]", url);
 	if(url.empty()){ url = downloads+app+".apk"; }
 #endif

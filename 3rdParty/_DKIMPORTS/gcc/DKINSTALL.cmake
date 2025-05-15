@@ -35,7 +35,7 @@ endif()
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clang32/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clang32/bin/g++.exe)
 #	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/clang32/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
-#elseif(win_x86_64_clang)
+#elseif(Win_X86_64_Clang)
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clang64/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clang64/bin/g++.exe)
 #	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/clang64/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres

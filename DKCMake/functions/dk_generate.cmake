@@ -162,7 +162,7 @@ function(dk_generate)
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "win_x86_64_clang")
+	if("${Target_Tuple}" STREQUAL "Win_X86_64_Clang")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
 		# TODO: export MSYSTEM=CLANG64
 		#dk_arrayUnshift(CMAKE_ARGS "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole")

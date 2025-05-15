@@ -313,8 +313,8 @@ endif()
 dk_load($ENV{DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake)
 
 #[[
-### android_arm32
-if(ANDROID_ARM32)
+### Android_Arm32
+if(Android_Arm32)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
 endif()
 
@@ -424,7 +424,7 @@ if(win_x86_64_msvc)
 endif()
 
 ### Windows x86_64 - CLANG64 ###
-if(win_x86_64_clang)
+if(Win_X86_64_Clang)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
 endif()
 

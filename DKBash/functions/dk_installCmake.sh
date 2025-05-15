@@ -31,11 +31,11 @@ dk_installCmake() {
 	[ "${Host_Tuple}" = "linux_arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${Host_Tuple}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${WSL_DISTRO_NAME-}" = "Alpine" ]		 && CMAKE_IMPORT=cmake
-	#[ "${target_tuple}" = "android_arm32" ]       	 && CMAKE_IMPORT=cmake
+	#[ "${target_tuple}" = "Android_Arm32" ]       	 && CMAKE_IMPORT=cmake
 	#[ "${target_tuple-}" = "win_arm64_clang" ]    	 && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
 	#[ "${target_tuple-}" = "win_x86_clang" ]      	 && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
 	#[ "${target_tuple-}" = "win_x86_mingw" ]      	 && CMAKE_IMPORT=mingw-w64-i686-cmake
-	#[ "${target_tuple-}" = "win_x86_64_clang" ]   	 && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	#[ "${target_tuple-}" = "Win_X86_64_Clang" ]   	 && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
 	#[ "${target_tuple-}" = "win_x86_64_mingw" ]   	 && CMAKE_IMPORT=mingw-w64-x86_64-cmake
 	#[ "${target_tuple-}" = "win_x86_64_ucrt" ]    	 && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	[ -z ${CMAKE_IMPORT-} ] 					 && CMAKE_IMPORT=cmake  #Default

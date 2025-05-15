@@ -27,7 +27,7 @@ elseif(win_x86_clang)
 	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/clang32/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
-elseif(win_x86_64_clang)
+elseif(Win_X86_64_Clang)
 	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/clang64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
