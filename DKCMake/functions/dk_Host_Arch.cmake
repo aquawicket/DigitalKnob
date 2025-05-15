@@ -12,11 +12,11 @@ function(dk_Host_Arch)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
+	if(ARGV)
 		dk_set(Host_Arch "${ARGV0}")
 	
 	###### GET ######
-	else()
+	elseif(NOT DEFINED ENV{Host_Arch})
 		### Set Host_Arch ###
 		if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
 			if(CMAKE_HOST_WIN32)
@@ -49,6 +49,8 @@ function(dk_Host_Arch)
 		else()
 			dk_fatal("CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
 		endif()
+	else()
+		dk_set(Host_Arch "$ENV{Host_Arch}")
 	endif()	
 	dk_assertVar(Host_Arch)			#  Host_Arch = Arm64
 	dk_set(${Host_Arch}_Host 1)		# Arm64_Host = 1

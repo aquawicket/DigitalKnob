@@ -19,23 +19,26 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	rem ###### GET ######	
 	) else (
-		echo: 
-		if not defined Host_Arch (%dk_call% dk_Host_Arch)
-		echo  0^) !Host_Arch!
 		echo:
-		echo  1^) Arm32
-		echo  2^) Arm64
-		echo  3^) X86
-		echo  4^) X86_64
+		::if not defined Target_Arch_Cache (%dk_call% Target_Arch_Cache)
+		echo  0^) !Target_Arch_Cache!
+		echo:
+		if not defined Host_Arch (%dk_call% dk_Host_Arch)
+		echo  1^) !Host_Arch!
+		echo  2^) Arm32
+		echo  3^) Arm64
+		echo  4^) X86
+		echo  5^) X86_64
 		echo:
 
 		%dk_call% dk_keyboardInput input
 		
-		if "!input!" equ "0"	(set "Target_Arch=!Host_Arch!")
-		if "!input!" equ "1" 	(set "Target_Arch=Arm32")
-		if "!input!" equ "2" 	(set "Target_Arch=Arm64")
-		if "!input!" equ "3" 	(set "Target_Arch=X86")
-		if "!input!" equ "4" 	(set "Target_Arch=X86_64")
+		if "!input!" equ "1"	(set "Target_Arch=!Target_Arch_Cache!")
+		if "!input!" equ "1"	(set "Target_Arch=!Host_Arch!")
+		if "!input!" equ "2" 	(set "Target_Arch=Arm32")
+		if "!input!" equ "3" 	(set "Target_Arch=Arm64")
+		if "!input!" equ "4" 	(set "Target_Arch=X86")
+		if "!input!" equ "5" 	(set "Target_Arch=X86_64")
 	)
 	
 	endlocal & (

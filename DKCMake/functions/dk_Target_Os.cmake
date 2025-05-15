@@ -11,18 +11,17 @@ function(dk_Target_Os)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
+	if(ARGV)
 		dk_set(Target_Os "${ARGV0}")
 	
 	###### GET ######	
-	else()
+	elseif(NOT DEFINED ENV{Target_Os})
 		dk_echo()
-		if(NOT Target_Os_Cache)
-			#d_k_Target_Os_Cache()
-		endif()
 		if(Target_Os_Cache)
 			dk_echo(" 0) ${Target_Os_Cache}")
 		endif()
+		
+		dk_echo()
 		if(NOT Host_Os)
 			dk_Host_Os()
 		endif()
@@ -65,6 +64,8 @@ function(dk_Target_Os)
 		else()
 			dk_warning("invalid selection: '${input}'")
 		endif()
+	else()
+		dk_set(Target_Os "${Target_Os}")
 	endif()
 	
 	dk_assertVar(Target_Os)

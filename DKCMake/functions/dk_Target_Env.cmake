@@ -14,15 +14,17 @@ function(dk_Target_Env)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
+	if(ARGV)
 		dk_set(Target_Env "${ARGV0}")
 	
 	###### GET ######	
-	else()
+	elseif(NOT DEFINED ENV{Target_Env})
 		dk_echo()
 		if(Target_Env_Cache)
 			dk_echo(" 0) ${Target_Env_Cache}")
 		endif()
+		
+		dk_echo()
 		if(NOT Host_Env)
 			dk_Host_Env()
 		endif()
@@ -56,6 +58,8 @@ function(dk_Target_Env)
 		else()
 			dk_warning("invalid selection: '${input}'")
 		endif()
+	else()
+		dk_set(Target_Env "$ENV{Target_Env}")
 	endif()
 	
 	dk_assertVar(Target_Env)

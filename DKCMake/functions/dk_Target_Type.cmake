@@ -11,16 +11,16 @@ function(dk_Target_Type)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
+	if(ARGV)
 		dk_set(Target_Type "${ARGV0}")
 	
 	###### GET ######	
-	else()
+	elseif(NOT DEFINED ENV{Target_Type})
 		dk_echo()
-		if(NOT Target_Type_Cache)
-			#d_k_Target_Type_Cache()
+		if(Target_Type_Cache)
+			dk_echo(" 0) ${Target_Type_Cache}")
 		endif()
-		dk_echo(" 0) ${Target_Type_Cache}")
+		
 		dk_echo()
 		dk_echo(" 1) Debug")
 		dk_echo(" 2) Release")
@@ -42,6 +42,8 @@ function(dk_Target_Type)
 		else()
 			dk_warning("invalid selection: '${input}'")
 		endif()
+	else()
+		dk_set(Target_Type "$ENV{Target_Type}")
 	endif()
 	
 	dk_assertVar(Target_Type)

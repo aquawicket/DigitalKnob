@@ -12,11 +12,11 @@ function(dk_Host_Os)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
+	if(ARGV)
 		dk_set(Host_Os "${ARGV0}")
 
-	###### GET ######	
-	else()
+	###### GET ######
+	elseif(NOT DEFINED ENV{Host_Os})
 		if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
 			set(CMAKE_HOST_WIN32 1)
 			dk_unset(CMAKE_HOST_UNIX)
@@ -45,6 +45,8 @@ function(dk_Host_Os)
 		else()
 			dk_fatal("CMAKE_HOST_???: Unknown host")
 		endif()
+	else()
+		dk_set(Host_Os "$ENV{Host_Os}")
 	endif()
 
 	dk_assertVar(Host_Os)

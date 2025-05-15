@@ -21,34 +21,35 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		echo: 
 		
-		if not defined Host_Os (%dk_call% dk_Host_Os)
-		echo  0^) !Host_Os!
+		::if not defined Target_Os_Cache (%dk_call% dk_Target_Os_Cache)
+		echo  0^) !Target_Os_Cache!
 		echo:
-		echo  1^) Android
-		echo  2^) Cosmopolitan
-		echo  3^) Emscripten
-		echo  4^) Ios
-		echo  5^) Iossim
-		echo  6^) Linux
-		echo  7^) Mac
-		echo  8^) Raspberry
-		echo  9^) Windows
-		echo 10^) NONE
+		if not defined Host_Os (%dk_call% dk_Host_Os)
+		echo  1^) !Host_Os!
+		echo  2^) Android
+		echo  3^) Cosmopolitan
+		echo  4^) Emscripten
+		echo  5^) Ios
+		echo  6^) Iossim
+		echo  7^) Linux
+		echo  8^) Mac
+		echo  9^) Raspberry
+		echo 10^) Windows
 		echo:
 
 		%dk_call% dk_keyboardInput input
 		
-		if "!input!" equ "0"	(set "Target_Os=!Host_Os!")
-		if "!input!" equ "1" 	(set "Target_Os=Android")
-		if "!input!" equ "2" 	(set "Target_Os=Cosmopolitan")
-		if "!input!" equ "3" 	(set "Target_Os=Emscripten")
-		if "!input!" equ "4" 	(set "Target_Os=Ios")
-		if "!input!" equ "5" 	(set "Target_Os=Iossim")
-		if "!input!" equ "6" 	(set "Target_Os=Linux")
-		if "!input!" equ "7" 	(set "Target_Os=Mac")
-		if "!input!" equ "8" 	(set "Target_Os=Raspberry")
-		if "!input!" equ "9" 	(set "Target_Os=Windows")
-		if "!input!" equ "10"	(set "Target_Os=")
+		if "!input!" equ "0"	(set "Target_Os=!Target_Os_Cache!")
+		if "!input!" equ "1"	(set "Target_Os=!Host_Os!")
+		if "!input!" equ "2" 	(set "Target_Os=Android")
+		if "!input!" equ "3" 	(set "Target_Os=Cosmopolitan")
+		if "!input!" equ "4" 	(set "Target_Os=Emscripten")
+		if "!input!" equ "5" 	(set "Target_Os=Ios")
+		if "!input!" equ "6" 	(set "Target_Os=Iossim")
+		if "!input!" equ "7" 	(set "Target_Os=Linux")
+		if "!input!" equ "8" 	(set "Target_Os=Mac")
+		if "!input!" equ "9" 	(set "Target_Os=Raspberry")
+		if "!input!" equ "10" 	(set "Target_Os=Windows")
 	)
 	
 	endlocal & (

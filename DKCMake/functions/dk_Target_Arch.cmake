@@ -11,20 +11,21 @@ function(dk_Target_Arch)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
+	if(ARGV)
 		dk_set(Target_Arch "${ARGV0}")
 	
 	###### GET ######	
-	else()
+	elseif(NOT DEFINED ENV{Target_Arch})
 		dk_echo()
 		if(Target_Arch_Cache)
 			dk_echo(" 0) ${Target_Arch_Cache}")
 		endif()
+		
+		dk_echo()
 		if(NOT Host_Arch)
 			dk_Host_Arch()
 		endif()
 		dk_echo(" 1) ${Host_Arch}")
-		dk_echo()
 		dk_echo(" 2) Arm32")
 		dk_echo(" 3) Arm64")
 		dk_echo(" 4) X86")
@@ -56,6 +57,8 @@ function(dk_Target_Arch)
 		else()
 			dk_warning("invalid selection: '${input}'")
 		endif()
+	else()
+		dk_set(Target_Arch "$ENV{Target_Arch}")
 	endif()
 	
 	dk_assertVar(Target_Arch)

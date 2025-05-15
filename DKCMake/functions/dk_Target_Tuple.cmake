@@ -11,11 +11,11 @@ function(dk_Target_Tuple)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
+	if(ARGV)
 		dk_set(Target_Tuple "${ARGV0}")
 	
 	###### GET ######	
-	else()
+	elseif(NOT DEFINED ENV{Target_Tuple})
 		if(NOT Target_Os)
 			dk_Target_Os()
 		endif()
@@ -32,6 +32,8 @@ function(dk_Target_Tuple)
 		dk_assertVar(Target_Env)
 		
 		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}_${Target_Env}")
+	else()
+		dk_set(Target_Tuple "$ENV{Target_Tuple}")
 	endif()
 	
 	dk_assertVar(Target_Tuple)

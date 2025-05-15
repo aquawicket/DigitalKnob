@@ -11,14 +11,18 @@ include_guard()
 #   <Os>_<Arch>_<Env>_Host	= Android_Arm64_Clang_Host, Emscripten_Arm64_Clang_Host, Ios_Arm64_Clang_Host, Iossim_Arm64_Clang_Host, Linux_Arm64_Clang_Host, Mac_Arm64_Clang_Host, Raspberry_Arm64_Clang_Host, Windows_Arm64_Clang_Host 
 #
 function(dk_Host_Tuple)
+	dk_debug("dk_Host_Tuple(ARGV='${ARGV}', ARGV0='${ARGV0}', ARGV1='${ARGV1}')")
 	dk_debugFunc(0 1)
 	
+	dk_debug("Host_Tuple = ${Host_Tuple}")
 	###### SET ######
-	if(ARGV0)
+	if(ARGV)
+		dk_debug("SET: Host_Tuple")
 		dk_set(Host_Tuple "${ARGV0}")
-		
+		dk_debug("Host_Tuple = ${Host_Tuple}")
 	###### GET ######	
-	else()
+	elseif(NOT DEFINED ENV{Host_Tuple})
+		dk_debug("GET: Host_Tuple")
 		if(NOT Host_Os)
 			dk_Host_Os()
 		endif()
@@ -29,17 +33,22 @@ function(dk_Host_Tuple)
 			dk_Host_Env()
 		endif()
 		
-		if((Host_Os) AND (Host_Arch))
+		dk_debug("Host_Tuple = ${Host_Tuple}")
+		#if((Host_Os) AND (Host_Arch))
 			dk_set(Host_Tuple "${Host_Os}_${Host_Arch}")
-		endif()
+		#endif()
 		#if((Host_Os) AND (Host_Arch) AND (Host_Env))
 		#	dk_set(Host_Tuple "${Host_Os}_${Host_Arch}_${Host_Env}")
 		#endif()
+	else()
+		dk_set(Host_Tuple "$ENV{Host_Tuple}")
 	endif()
 	
+	dk_debug("Host_Tuple = ${Host_Tuple}")
 	dk_set(${Host_Tuple}_Host 1)
 	
-	
+	dk_debug("Host_Tuple = ${Host_Tuple}")
+
 	###### VALIDATE RESULT ######
 	if(Android_Arm32_Host)
 	elseif(Android_Arm64_Host)

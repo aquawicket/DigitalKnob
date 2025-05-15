@@ -18,12 +18,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "Target_Tuple=%~1"
 	
 	rem ###### GET ######	
-	) else (
-		rem TODO
+	) else if not defined Target_Tuple (
 		%dk_call% dk_validate Target_Os		"%dk_call% dk_Target_Os"
 		%dk_call% dk_validate Target_Arch	"%dk_call% dk_Target_Arch"
 		%dk_call% dk_validate Target_Env	"%dk_call% dk_Target_Env"
-		
 		set "Target_Tuple=!Target_Os!_!Target_Arch!_!Target_Env!"
 	)
 	

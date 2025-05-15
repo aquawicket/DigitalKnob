@@ -22,19 +22,21 @@ if not defined dk_Target_Env_DEFAULT (set "dk_Target_Env_DEFAULT=Clang")
 	
 	rem ###### GET ######	
 	) else (
-		echo: 
-		echo  0^) %dk_Target_Env_DEFAULT%
 		echo:
-		echo  1^) Clang
-		echo  2^) Gcc
-		echo  3^) Msvc
+		echo  0^) !Target_Env_Cache!
+		echo:
+		echo  1^) %dk_Target_Env_DEFAULT%
+		echo  2^) Clang
+		echo  3^) Gcc
+		echo  4^) Msvc
 		echo:
 
 		%dk_call% dk_keyboardInput input
-		if "!input!" equ "0"	(set "Target_Env=%dk_Target_Env_DEFAULT%")
-		if "!input!" equ "1" 	(set "Target_Env=Clang")
-		if "!input!" equ "2" 	(set "Target_Env=Gcc")
-		if "!input!" equ "3" 	(set "Target_Env=Msvc")
+		if "!input!" equ "0"	(set "Target_Env=%Target_Env_Cache%")
+		if "!input!" equ "1"	(set "Target_Env=%dk_Target_Env_DEFAULT%")
+		if "!input!" equ "2" 	(set "Target_Env=Clang")
+		if "!input!" equ "3" 	(set "Target_Env=Gcc")
+		if "!input!" equ "4" 	(set "Target_Env=Msvc")
 	)
 	
 	endlocal & (

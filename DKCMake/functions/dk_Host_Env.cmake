@@ -12,11 +12,11 @@ function(dk_Host_Env)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGV0)
+	if(ARGV)
 		dk_set(Host_Env "${ARGV0}")	#  Host_Env = MyEnv	
 
 	###### GET ######	
-	else()
+	elseif(NOT DEFINED ENV{Host_Env})
 		if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
 			dk_set(Host_Env 	"Msys")
 		elseif("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MINGW")
@@ -26,7 +26,9 @@ function(dk_Host_Env)
 		else()
 			dk_set(Host_Env 	"${CMAKE_HOST_SYSTEM_NAME}")
 		endif()
-		dk_assertVar(Host_Env)		#  Host_Env = Msys		
+		dk_assertVar(Host_Env)		#  Host_Env = Msys
+	else()
+		dk_set(Host_Env "$ENV{Host_Env}")
 	endif()
 	dk_set(${Host_Env}_Host 1)		# Msys_Host = 1
 
