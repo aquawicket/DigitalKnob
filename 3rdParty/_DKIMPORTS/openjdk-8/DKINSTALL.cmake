@@ -16,7 +16,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-windows-x64.zip
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(WIN_HOST)
+if(Win_Host)
 	dk_import	(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
 endif()
 if(MAC_HOST)
@@ -27,7 +27,7 @@ if(LINUX_HOST)
 endif()
 
 
-if(WIN_HOST)
+if(Win_Host)
 	###### JAVA_VERSION ######
 	set(ENV{JAVA_VERSION} 1.8.0_41)
 	

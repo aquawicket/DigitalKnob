@@ -74,7 +74,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${SOURCE_DIR}/configure)
-			if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
+			if(Win_Host AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 				dk_depend(bash)
 				dk_queueCommand(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}" OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)# ECHO_OUTPUT_VARIABLE)
 				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
@@ -93,7 +93,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_notice("###### configure type not detected for $ENV{CURRENT_PLUGIN}. Running provided commands unaltered ######")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
 		
-		#f(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
+		#f(Win_Host AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		#	dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 		#	dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		#else()

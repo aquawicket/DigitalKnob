@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_load(dk_builder)
 
 ### INSTALL ###
-if(WIN_HOST)
+if(Win_Host)
 	dk_set(PYTHON_EXE ${pyportable}/python.exe)
 	
 	dk_import(https://github.com/sganis/pyportable/releases/download/v2.7.10rc1/pyportable-2.7.10rc1.zip)

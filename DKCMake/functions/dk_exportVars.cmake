@@ -10,7 +10,7 @@ function(dk_exportVars var_name var_value)
 	dk_debugFunc()
 	
 	dk_validate(Host_Tuple "dk_Host_Tuple()")
-	if(WIN_HOST)
+	if(Win_Host)
 		set(export "set")
 	else()
 		set(export "export")

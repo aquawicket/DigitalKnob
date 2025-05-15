@@ -10,9 +10,9 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
 
-dk_validate(Host_Tuple "dk_Host_Tuple()")
+dk_validate(Host_Os "dk_Host_Os()")
 
-if(NOT DEFINED WIN_HOST)
+if(NOT DEFINED Win_Host)
 	dk_undepend(msys2)
 	return()
 endif()

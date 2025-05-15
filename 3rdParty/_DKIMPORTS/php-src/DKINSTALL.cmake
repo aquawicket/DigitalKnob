@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://windows.php.net/downloads/releases
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 
-if(NOT WIN_HOST)
+if(NOT Win_Host)
 	dk_undepend(php-src)
 	dk_return()
 endif()
@@ -36,7 +36,7 @@ WIN_X86_64_dk_import(${PHP_SRC_WIN_X86_64_DL})		# win x86_64 binary
 
 
 ### Copy VCRUNTIME library to PHP_SRC folder
-if(WIN_HOST)
+if(Win_Host)
 	if(NOT EXISTS "${PHP_SRC}/vcruntime140.dll")
 		if(WIN_X86_HOST)
 			if(EXISTS "${VCRUNTIME140_X86_DEBUG_DLL}")

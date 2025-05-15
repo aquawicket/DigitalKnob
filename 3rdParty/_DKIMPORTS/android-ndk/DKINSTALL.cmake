@@ -84,7 +84,7 @@ dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-ndk/dkconfig.txt")
 dk_set(ANDROID_NDK "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
 
 dk_mkdir	("${ANDROID_SDK_DIR}/ndk")
-if(WIN_HOST)
+if(Win_Host)
 	dk_import		(${ANDROID_NDK_WIN_IMPORT} 		PATH "${ANDROID_NDK}" VERSION "${ANDROID_NDK_BUILD}" PATCH)
 elseif(MAC_HOST)
 	dk_import		(${ANDROID_NDK_MAC_IMPORT} 		PATH "${ANDROID_NDK}" PATCH)

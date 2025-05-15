@@ -21,7 +21,7 @@ endif()
 if(WIN_X86_64_HOST)
 	set(GIT_DL "${GIT_DL_WIN_X86_64}")
 endif()
-if(WIN_HOST AND NOT GIT_DL)
+if(Win_Host AND NOT GIT_DL)
 	dk_fatal("GIT_DL is invalid!")
 endif()
 
@@ -32,7 +32,7 @@ if(GIT_DL)
 endif()
 
 ### First Check ###
-if(WIN_HOST)
+if(Win_Host)
 	dk_debug("dk_findProgram(GIT_EXE git.exe ${GIT}/bin)")
 	dk_findProgram(GIT_EXE git.exe ${GIT}/bin)
 elseif(ANDROID_HOST)
@@ -44,7 +44,7 @@ endif()
 ### INSTALL ###
 if(NOT GIT_EXE)
 	dk_debug(" Installing git . . . . ")
-	if(WIN_HOST)
+	if(Win_Host)
 		dk_download(${GIT_DL} $ENV{DKDOWNLOAD_DIR})			
 		dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${GIT_DL_FILE}" GIT_INSTALL_FILE)
 		dk_nativePath("${GIT}" GIT_INSTALL_PATH)
@@ -62,7 +62,7 @@ if(NOT GIT_EXE)
 endif()
 
 ## Second Check ###
-if(WIN_HOST)
+if(Win_Host)
 	dk_findProgram(GIT_EXE git ${GIT}/bin)
 elseif(ANDROID_HOST)
 	dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
@@ -104,7 +104,7 @@ dk_return()
 #else()
 
 
-#	if(WIN_HOST)
+#	if(Win_Host)
 #		dk_set(GIT_EXE ${GIT}/bin/git.exe)
 #		if(NOT EXISTS ${GIT_EXE})
 #			### INSTALL ###

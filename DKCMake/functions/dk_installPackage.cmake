@@ -24,7 +24,7 @@ function(dk_installPackage)
 #	endif()
 #	
 	dk_info("dk_installPackage(): installing ${package}. . .")
-	dk_if(WIN_HOST "dk_depend(msys2)")
+	dk_if(Win_Host "dk_depend(msys2)")
 	set(ENV{DKSHELL} sh) # HACK
 
 	### Termux ###

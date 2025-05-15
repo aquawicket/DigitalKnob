@@ -33,7 +33,7 @@ dk_convertToCIdentifier(${VSCODE_FOLDER} VSCODE_FOLDER)
 dk_toLower(${VSCODE_FOLDER} VSCODE_FOLDER)
 
 dk_set(VSCODE $ENV{DKTOOLS_DIR}/${VSCODE_FOLDER})
-if(WIN_HOST)
+if(Win_Host)
 	dk_set(VSCODE_EXE ${VSCODE}/Code.exe)
 else()
 	dk_set(VSCODE_EXE ${VSCODE}/code)

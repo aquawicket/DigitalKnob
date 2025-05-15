@@ -20,7 +20,7 @@ function(dk_appendEnvPath)
 	#if(ENV{PATH} MATCHED "${nativePath}")   # UNTESTED
 		dk_notice("${nativePath} is already in the PATH environment list\n")
 	else()
-		if(WIN_HOST)
+		if(Win_Host)
 			set(ENV{PATH} "$ENV{PATH};${nativePath}")
 		else()
 			set(ENV{PATH} "$ENV{PATH}:${nativePath}")

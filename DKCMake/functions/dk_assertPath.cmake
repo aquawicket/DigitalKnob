@@ -10,7 +10,7 @@ include_guard()
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
 function(dk_assertPath)
-	dk_debugFunc(1)
+	dk_debugFunc()
 
 	set(_path_ "${ARGV0}")
 #	if(DEFINED ${_path_})

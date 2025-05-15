@@ -157,7 +157,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 		if(NOT "${${fn}_file}" STREQUAL "$ENV{DKSCRIPT_PATH}")
 			#dk_echo("${fn} -> include(${${fn}_file})")
 		#if(NOT ${fn} IN_LIST dk_loading_list)
-			include(${${fn}_file})
+			include("${${fn}_file}")
 		endif()
 		
 		### variable clean-up ###

@@ -14,7 +14,7 @@ if((NOT DKUPDATE) AND (EXISTS ${CMAKE_MAKE_PROGRAM}))
 endif()
 
 
-#if(WIN_HOST)
+#if(Win_Host)
 #	if(DEFINED ENV{MSYSTEM})
 #		dk_set(MSYSTEM "$ENV{MSYSTEM}")
 #		dk_set($ENV{MSYSTEM} 1)
@@ -30,7 +30,7 @@ dk_installPackage("make")
 
 
 #if(cosmopolitan)
-#	if(WIN_HOST)
+#	if(Win_Host)
 #		dk_validate(MSYS2 "dk_depend(msys2)")
 #		dk_installPackage(make)
 #		dk_exportVars(PATH "${MSYS2_DIR}/usr/bin;$ENV{PATH}")
@@ -40,7 +40,7 @@ dk_installPackage("make")
 #	endif()
 #	
 #elseif(emscripten)
-#	if(WIN_HOST)
+#	if(Win_Host)
 #		dk_validate(MSYS2 "dk_depend(msys2)")
 #		dk_installPackage(make)
 #		#dk_findProgram(CMAKE_MAKE_PROGRAM make "${MSYS2_DIR}/usr/bin")

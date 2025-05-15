@@ -28,7 +28,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set VSCODE_DIR "%DKTOOLS_DIR%\%VSCODE_FOLDER%"
 	
-	if defined win_host (
+	if defined Win_Host (
 		%dk_call% dk_set VSCODE_EXE %VSCODE_DIR%\Code.exe
 	) else (
 		%dk_call% dk_set VSCODE_EXE %VSCODE_DIR%\code

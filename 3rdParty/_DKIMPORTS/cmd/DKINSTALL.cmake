@@ -15,7 +15,7 @@ endif()
 
 ### Windows Host Only ###
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(NOT WIN_HOST)
+if(NOT Win_Host)
 	dk_undepend(cmd)
 	dk_return()
 endif()

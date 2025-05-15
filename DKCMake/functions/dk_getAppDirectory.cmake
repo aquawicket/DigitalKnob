@@ -13,7 +13,7 @@ function(dk_getAppDirectory rtn_var)
 	dk_debugFunc()
 	
 	set(USE_32BIT 1)
-	if(WIN_HOST)
+	if(Win_Host)
 		set(appDirectory "C:/Program Files")
 		if(${USE_32BIT} AND ${WIN_X86_64_HOST})
 			set(appDirectory "C:/Program Files (x86)")

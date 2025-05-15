@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://www.msys2.org
 dk_load(dk_builder)
 
-if(NOT WIN_HOST)
+if(NOT Win_Host)
 	dk_undepend(msys2)
 	dk_return()
 endif()
@@ -20,7 +20,7 @@ endif()
 #endif()
 
 
-if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
+if(Win_Host AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")
 	
 	### Install toolchain ###

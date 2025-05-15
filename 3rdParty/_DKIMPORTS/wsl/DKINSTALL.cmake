@@ -18,7 +18,7 @@ if(EXISTS "${WSL_EXE}")
 	dk_return()
 endif()
 
-#if(NOT WIN_HOST)
+#if(NOT Win_Host)
 #	dk_undepend(wsl)
 #	dk_return()
 #endif()

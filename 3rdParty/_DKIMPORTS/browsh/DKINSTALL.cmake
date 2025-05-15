@@ -13,7 +13,7 @@ dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/browsh/dkconfig.txt")
 
 dk_validate(dk_Host_Tuple "dk_Host_Tuple()")
-if(WIN_HOST)
+if(Win_Host)
 	set(BROWSH_IMPORT "${BROWSH_WIN_X86_64_IMPORT}")
 endif()
 dk_import		(${BROWSH_IMPORT} NAME browsh) 

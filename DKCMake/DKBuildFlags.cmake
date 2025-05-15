@@ -209,7 +209,7 @@ endif()
 ###### POSITION_INDEPENDENT_CODE ######
 # https://stackoverflow.com/a/3544211/688352   -fPIC vs -fpic
 # https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fPIC
-if(WIN_HOST)
+if(Win_Host)
 	dk_set(POSITION_INDEPENDENT_CODE 0)
 endif()
 if(POSITION_INDEPENDENT_CODE)

@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #dk_depend(ghostscript)
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(WIN_HOST)
+if(Win_Host)
 	dk_depend(vc_redist)
 endif()
 
@@ -31,7 +31,7 @@ endif()
 
 
 ### Copy OpenMP library to imagemagic folder
-if(WIN_HOST)
+if(Win_Host)
 	if(NOT EXISTS "${IMAGEMAGICK}/vcomp140.dll")
 		if(WIN_X86_HOST)
 			if(EXISTS "${VCCOMP140_X86_DEBUG_DLL}")
@@ -52,7 +52,7 @@ endif()
 
 
 if(NOT EXISTS "${IMAGEMAGICK_CONVERT_EXE}")
-	if(WIN_HOST)
+	if(Win_Host)
 		dk_findProgram	(IMAGEMAGICK_CONVERT_EXE magick.exe "${IMAGEMAGICK}")
 		dk_assertPath	(IMAGEMAGICK_CONVERT_EXE)
 	endif()

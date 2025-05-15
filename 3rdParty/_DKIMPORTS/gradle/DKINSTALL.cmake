@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ###### set ${bat} variable for windows ######
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(WIN_HOST)
+if(Win_Host)
 	dk_set(bat ".bat")
 endif()
 

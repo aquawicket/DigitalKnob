@@ -48,7 +48,7 @@ function(dk_deleteTempFiles)
 		#dk_delete("${file}")
 	endforeach()
 	
-	#if(WIN_HOST)
+	#if(Win_Host)
 	#	dk_exec(for /r %%Z in (*.tmp) do @if %%~xZ==.tmp del "%%Z" WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR})
 	#	dk_exec(for /r %%Z in (*.TMP) do @if %%~xZ==.TMP del "%%Z" WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR})
 	#else()

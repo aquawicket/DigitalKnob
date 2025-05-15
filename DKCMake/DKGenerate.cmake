@@ -38,8 +38,47 @@ dk_info("######################  DigitalKnob  #######################")
 dk_info("############################################################")
 dk_info("\n")
 
-dk_validate(DK_Project_Dir "dk_Target_Tuple()")
-dk_assertPath(${DK_Project_Dir})
+
+
+
+
+############ DK_Project_Dir ############
+dk_getFullPath("${CMAKE_BINARY_DIR}" Target_Dir)
+if(Target_Dir MATCHES "Release")
+	dk_set(Target_Type Release)		# Target_Type = Release
+else()
+	dk_set(Target_Type Debug)		# Target_Type = Debug (DEFAULT)
+endif()
+dk_dirname(${Target_Dir} Target_Tuple_Dir)	
+if((target_dir MATCHES "Android")		OR
+	(target_dir MATCHES "Emscripten")	OR
+	(target_dir MATCHES "Ios")			OR
+	(target_dir MATCHES "Iossim")		OR
+	(target_dir MATCHES "Linux")		OR
+	(target_dir MATCHES "Mac")			OR
+	(target_dir MATCHES "Raspberry")	OR
+	(target_dir MATCHES "Win")			OR
+	(target_dir MATCHES "Cosmopolitan") )
+	dk_set(Target_Tuple_Dir ${Target_Dir})
+else()
+	dk_set(Target_Tuple_Dir ${Target_Dir}/${Target_Tuple})
+endif()
+if(NOT EXISTS ${Target_Tuple_Dir})
+	dk_mkdir(${Target_Tuple_Dir})
+endif()
+dk_assertPath(Target_Tuple_Dir)
+dk_dirname(${Target_Tuple_Dir} DK_Project_Dir)
+dk_set(DK_Project_Dir ${DK_Project_Dir})
+dk_assertPath(DK_Project_Dir)
+#######################################	
+	
+	
+	
+	
+	
+
+	
+dk_assertPath("${DK_Project_Dir}")
 
 dk_basename(${DK_Project_Dir} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
@@ -498,13 +537,13 @@ if(ANDROID)
 	
 	####################### Gradle Build #####################
 	if(CMAKE_ANDROID_GUI)
-		#if(WIN_HOST)
+		#if(Win_Host)
 		#	dk_command(${OPENJDK}/registerJDK.cmd)
 		#endif()
 		dk_depend(openjdk)
 		dk_depend(gradle)
 		
-		if(WIN_HOST)
+		if(Win_Host)
 			set(setVar "set")
 		else()
 			set(setVar "export")
@@ -649,7 +688,7 @@ if(EMSCRIPTEN)
 	################### Create Run.sh #################################
 	dk_info("Creating Run scripts . . .")
 	if(DEBUG)
-		if(WIN_HOST)
+		if(Win_Host)
 			set(RUN_SCRIPT_DEBUG
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.html"
 			)
@@ -663,7 +702,7 @@ if(EMSCRIPTEN)
 		endif()
 	endif()
 	if(RELEASE)
-		if(WIN_HOST)
+		if(Win_Host)
 			set(RUN_SCRIPT_RELEASE
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.html"
 			)
