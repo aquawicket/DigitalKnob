@@ -15,22 +15,22 @@ function(dk_getAppDirectory rtn_var)
 	set(USE_32BIT 1)
 	if(Win_Host)
 		set(appDirectory "C:/Program Files")
-		if(${USE_32BIT} AND ${WIN_X86_64_HOST})
+		if(${USE_32BIT} AND ${Win_X86_64_Host})
 			set(appDirectory "C:/Program Files (x86)")
 		endif()
 	elseif(Mac_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
-	elseif(IOS_HOST)
+	elseif(Ios_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	elseif(Linux_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
-	elseif(RASPBERRY_HOST)
+	elseif(Raspberry_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
-	elseif(ANDROID_ANDROID)
+	elseif(Android_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	endif()

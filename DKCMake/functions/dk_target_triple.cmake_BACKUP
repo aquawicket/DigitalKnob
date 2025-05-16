@@ -18,7 +18,7 @@ include_guard()
 #	Target_Arch								= Arm32, Arm64, X86, X86_64
 #	Target_Arch								= ARM32, ARM64, X86, X86_64
 #	target_env								= clang, cosmopolitan, mingw, msvc, ucrt
-#	Target_Env								= Clang, Cosmopolitan, Mingw, Msvc, Ucrt
+#	Target_Env								= Clang, Cosmopolitan, MinGW, Msvc, Ucrt
 #	TARGET_ENV								= CLANG, COSMOPOLITAN, MINGW, MSVC, UCRT
 #   <target_os>_<target_arch>				= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
 #   <target_os>_<target_arch>_<target_env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
@@ -99,47 +99,47 @@ function(dk_target_tuple)
 		dk_basename(${Target_Tuple_Dir} Target_Tuple)	# Target_Tuple = Win_X86_64_Clang
 	endif()
 	#d_k_toCamel(${Target_Tuple} Target_Tuple)		# Target_Tuple	= Win_X86_64_Clang
-	dk_toLower(${Target_Tuple} target_tuple)			# target_tuple	= Win_X86_64_Clang	
-	dk_toUpper(${Target_Tuple} TARGET_TUPLE)			# TARGET_TUPLE	= Win_X86_64_Clang
+	dk_toLower(${Target_Tuple} Target_Tuple)			# Target_Tuple	= Win_X86_64_Clang	
+	dk_toUpper(${Target_Tuple} Target_Tuple)			# Target_Tuple	= Win_X86_64_Clang
 	dk_set(Target_Tuple ${Target_Tuple})				# Globalize the variable
-	dk_set(target_tuple ${target_tuple})				# Globalize the variable
-	dk_set(TARGET_TUPLE ${TARGET_TUPLE})				# Globalize the variable
-	#dk_printVar(target_tuple)							
+	dk_set(Target_Tuple ${Target_Tuple})				# Globalize the variable
+	dk_set(Target_Tuple ${Target_Tuple})				# Globalize the variable
 	#dk_printVar(Target_Tuple)							
-	#dk_printVar(TARGET_TUPLE)							
+	#dk_printVar(Target_Tuple)							
+	#dk_printVar(Target_Tuple)							
 	dk_set(${Target_Tuple} 1)							# Win_X86_64_Clang = 1
-	dk_set(${target_tuple} 1)							# Win_X86_64_Clang = 1
-	dk_set(${TARGET_TUPLE} 1)							# Win_X86_64_Clang = 1
+	dk_set(${Target_Tuple} 1)							# Win_X86_64_Clang = 1
+	dk_set(${Target_Tuple} 1)							# Win_X86_64_Clang = 1
 	#dk_printVar(${Target_Tuple})						
-	#dk_printVar(${target_tuple})						
-	#dk_printVar(${TARGET_TUPLE})						
+	#dk_printVar(${Target_Tuple})						
+	#dk_printVar(${Target_Tuple})						
 
 	### Set target_os / TARGET_OS / <target_os>_target / <TARGET_OS>_TARGET
-		if(target_tuple MATCHES "android")
+		if(Target_Tuple MATCHES "android")
 		dk_set(Target_Os Android)
-	elseif(target_tuple MATCHES "emscripten")
+	elseif(Target_Tuple MATCHES "emscripten")
 		dk_set(Target_Os Emscripten)
-	elseif(target_tuple MATCHES "iossim")
+	elseif(Target_Tuple MATCHES "iossim")
 		dk_set(Target_Os IosSim)
-	elseif(target_tuple MATCHES "ios")
+	elseif(Target_Tuple MATCHES "ios")
 		dk_set(Target_Os Ios)
-	elseif(target_tuple MATCHES "linux")
+	elseif(Target_Tuple MATCHES "linux")
 		dk_set(Target_Os Linux)
-	elseif(target_tuple MATCHES "mac")
+	elseif(Target_Tuple MATCHES "mac")
 		dk_set(Target_Os Mac)
-	elseif(target_tuple MATCHES "raspberry")
+	elseif(Target_Tuple MATCHES "raspberry")
 		dk_set(Target_Os Raspberry)
-	elseif(target_tuple MATCHES "windows")
+	elseif(Target_Tuple MATCHES "windows")
 		dk_set(Target_Os Windows)
-	elseif(target_tuple MATCHES "win")
+	elseif(Target_Tuple MATCHES "win")
 		dk_set(Target_Os Win)
-	elseif(target_tuple MATCHES "cosmopolitan")
+	elseif(Target_Tuple MATCHES "cosmopolitan")
 		dk_set(Target_Os Cosmopolitan)	
 	else()
 		dk_error("The target Target_Tuple:'${Target_Tuple}' does not contain a valid Target_Os")
 		dk_unset(Target_Tuple)
-		dk_unset(target_tuple)
-		dk_unset(TARGET_TUPLE)
+		dk_unset(Target_Tuple)
+		dk_unset(Target_Tuple)
 		message("######calling dk_target_tuple_SET()#####")
 		dk_target_tuple_SET()
 		message("######returned from dk_target_tuple_SET()#####")
@@ -157,18 +157,18 @@ function(dk_target_tuple)
 	endif()
 
 	### Get target_arch / Target_Arch
-		if(target_tuple MATCHES "arm64")
+		if(Target_Tuple MATCHES "arm64")
 		dk_set(Target_Arch Arm64)
-	elseif(target_tuple MATCHES "arm32")
+	elseif(Target_Tuple MATCHES "arm32")
 		dk_set(Target_Arch Arm32)
-	elseif(target_tuple MATCHES "x86_64")
+	elseif(Target_Tuple MATCHES "x86_64")
 		dk_set(Target_Arch X86_64)
-	elseif(target_tuple MATCHES "x86")
+	elseif(Target_Tuple MATCHES "x86")
 		dk_set(Target_Arch X86)
-	elseif(target_tuple MATCHES "cosmopolitan")
+	elseif(Target_Tuple MATCHES "cosmopolitan")
 		dk_set(Target_Arch Cosmopolitan)	
 	else()
-		dk_warning("The target target_tuple:${target_tuple} does not contain a valid target_arch")
+		dk_warning("The target Target_Tuple:${Target_Tuple} does not contain a valid target_arch")
 		message("######calling dk_target_tuple_SET()#####")
 		dk_target_tuple_SET()
 		message("######returned from dk_target_tuple_SET()#####")
@@ -186,18 +186,18 @@ function(dk_target_tuple)
 	endif()
 
 	### Set evn / TARGET_ENV 
-		if(target_tuple MATCHES "clang")
+		if(Target_Tuple MATCHES "Clang")
 		dk_set(Target_Env Clang)
-	elseif(target_tuple MATCHES "mingw")
-		dk_set(Target_Env Mingw)
-	elseif(target_tuple MATCHES "ucrt")
+	elseif(Target_Tuple MATCHES "MinGW")
+		dk_set(Target_Env MinGW)
+	elseif(Target_Tuple MATCHES "Ucrt")
 		dk_set(Target_Env Ucrt)
-	elseif(target_tuple MATCHES "msvc")
+	elseif(Target_Tuple MATCHES "Msvc")
 		dk_set(Target_Env Msvc)
-	elseif(target_tuple MATCHES "cosmopolitan")
+	elseif(Target_Tuple MATCHES "Cosmopolitan")
 		dk_set(Target_Env Cosmopolitan)
 	else()
-		dk_warning("The target target_tuple:${target_tuple} does not contain a valid target_env")
+		dk_warning("The target Target_Tuple:${Target_Tuple} does not contain a valid target_env")
 		dk_set(Target_Env ${Default_Target_Env})
 	endif()
 	if(Target_Env)

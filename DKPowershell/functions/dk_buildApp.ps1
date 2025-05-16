@@ -10,32 +10,32 @@ function Global:dk_buildApp() {
 
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "****** Building $target_app - $target_tuple - $target_type - $target_level ******"
+	dk_call dk_echo "****** Building $target_app - $Target_Tuple - $target_type - $target_level ******"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 	
 	if($target_type -eq "Debug" -or $target_type -eq "All"){
-		if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_tuple/Debug/CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" "--build" "$DKCPP_APPS_DIR/$target_app/$target_tuple/Debug" "--config Debug" "--verbose"
+		if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$Target_Tuple/Debug/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" "--build" "$DKCPP_APPS_DIR/$target_app/$Target_Tuple/Debug" "--config Debug" "--verbose"
 		}
-		elseif(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_tuple/CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" "--build" "$DKCPP_APPS_DIR/$target_app/$target_tuple" "--config Debug" "--verbose"
+		elseif(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$Target_Tuple/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" "--build" "$DKCPP_APPS_DIR/$target_app/$Target_Tuple" "--config Debug" "--verbose"
 		}
-		else{dk_call dk_error "Could not find CMakeCache.txt in $target_app/$target_tuple/Debug or $target_app/$target_tuple"}
+		else{dk_call dk_error "Could not find CMakeCache.txt in $target_app/$Target_Tuple/Debug or $target_app/$Target_Tuple"}
 	}
 	if($target_type -eq "Release" -or $target_type -eq "All"){
-		if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_tuple/Release/CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" --build "$DKCPP_APPS_DIR/$target_app/$target_tuple/Release" --config Release --verbose
+		if(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$Target_Tuple/Release/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" --build "$DKCPP_APPS_DIR/$target_app/$Target_Tuple/Release" --config Release --verbose
 		}
-		elseif(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$target_tuple/CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" --build "$DKCPP_APPS_DIR/$target_app/$target_tuple" --config Release --verbose
+		elseif(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app/$Target_Tuple/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" --build "$DKCPP_APPS_DIR/$target_app/$Target_Tuple" --config Release --verbose
 		}
-		else{dk_call dk_error "Could not find CMakeCache.txt in $target_app/$target_tuple/Release or $target_app/$target_tuple"}
+		else{dk_call dk_error "Could not find CMakeCache.txt in $target_app/$Target_Tuple/Release or $target_app/$Target_Tuple"}
 	}
 	
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "****** Done Building $target_app - $target_tuple - $target_type - $target_level ******"
+	dk_call dk_echo "****** Done Building $target_app - $Target_Tuple - $target_type - $target_level ******"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 }

@@ -124,7 +124,7 @@ goto:eof
 
 		rem ### Set evn / TARGET_ENV 
 		%dk_call% dk_containsCI "!Target_Tuple!" "Clang" 			&& !dk_call! dk_set Target_Env Clang
-		%dk_call% dk_containsCI "!Target_Tuple!" "Mingw" 			&& !dk_call! dk_set Target_Env Mingw
+		%dk_call% dk_containsCI "!Target_Tuple!" "MinGW" 			&& !dk_call! dk_set Target_Env MinGW
 		%dk_call% dk_containsCI "!Target_Tuple!" "Ucrt"  			&& !dk_call! dk_set Target_Env Ucrt
 		%dk_call% dk_containsCI "!Target_Tuple!" "Msvc"  			&& !dk_call! dk_set Target_Env Msvc
 		%dk_call% dk_containsCI "!Target_Tuple!" "Cosmopolitan" 	&& !dk_call! dk_set Target_Env Cosmopolitan

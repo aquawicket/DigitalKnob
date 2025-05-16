@@ -1,6 +1,6 @@
 //CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
 var UPDATE = "" //allow the first screen to loop
-var OS = ""   //win_x86,win_x86_64,mac_x86,mac_x86_64,linux_x86,linux_x86_64,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,Android_Arm32,android_arm64,raspberry_arm32,raspberry_arm64 
+var OS = ""   //win_x86,win_x86_64,mac_x86,mac_x86_64,linux_x86,linux_x86_64,ios_arm32,ios_arm64,Iossim_X86,iossim_x86_64,Android_Arm32,android_arm64,raspberry_arm32,raspberry_arm64 
 var APP = ""  //DKAppname
 var TYPE = ""  //Debug, Release, ALL
 var LINK = "Static" //, Dynamic
@@ -507,7 +507,7 @@ function DKBuild_DoResults(){
 	}
 	
 	///// IOSSIM_X86 //////
-	if(OS === "iossim_x86"){
+	if(OS === "Iossim_X86"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB_DIR+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+OS))

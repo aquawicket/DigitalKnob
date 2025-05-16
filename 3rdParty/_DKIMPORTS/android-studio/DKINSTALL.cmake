@@ -19,7 +19,7 @@ dk_depend(android-ndk)
 
 ### IMPORT ###
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-studio/dkconfig.txt")
-if(WIN_X86_64_HOST)
+if(Win_X86_64_Host)
 	if(NOT EXISTS "${ProgramFiles}/Android/Android Studio/bin/studio64.exe")
 		dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 		dk_basename		(${ANDROID_STUDIO_WIN_DL} ANDROID_STUDIO_DL_NAME)

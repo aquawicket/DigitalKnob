@@ -18,10 +18,10 @@ function(dk_installGit)
 	dk_getFileParams("$ENV{DKIMPORTS_DIR}/git/git.txt")
 	
 	### DOWNLOAD ###
-	if(WIN_X86_HOST)
+	if(Win_X86_Host)
 		set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_DL_VERSION}.windows.1/PortableGit-${GIT_DL_VERSION}-32-bit.7z.exe)
 	endif()
-	if(WIN_X86_64_HOST)
+	if(Win_X86_64_Host)
 		set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_DL_VERSION}.windows.1/PortableGit-${GIT_DL_VERSION}-64-bit.7z.exe)
 	endif()
 	if(Win_Host AND NOT GIT_DL)

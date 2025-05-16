@@ -356,11 +356,11 @@
 #	define DKCOMPILER 				STR(llvm)
 #	define DKCOMPILER_FULL 			STR(llvm DKMAJOR.DKMINOR.DKPATCH)
 #elif __MINGW64__
-#	define DKCOMPILER 				STR(Mingw64)
-#	define DKCOMPILER_FULL 			STR(Mingw64 DKMAJOR.DKMINOR.DKPATCH)
+#	define DKCOMPILER 				STR(MinGW64)
+#	define DKCOMPILER_FULL 			STR(MinGW64 DKMAJOR.DKMINOR.DKPATCH)
 #elif __MINGW32__
-#	define DKCOMPILER 				STR(Mingw32)
-#	define DKCOMPILER_FULL 			STR(Mingw32 DKMAJOR.DKMINOR.DKPATCH)
+#	define DKCOMPILER 				STR(MinGW32)
+#	define DKCOMPILER_FULL 			STR(MinGW32 DKMAJOR.DKMINOR.DKPATCH)
 #elif _MSC_VER	// https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
 #	define DKCOMPILER 				STR(Microsoft Visual C++)
 #	define DKCOMPILER_FULL 			STR(Microsoft Visual C++ DKMAJOR.DKMINOR.DKPATCH)

@@ -13,10 +13,10 @@ try() {
 }
 
 ##################################################################################
-# dk_host_tuple()
+# dk_Host_Tuple()
 #
 #	Get host variable such as 'HOST_ARCH', 'HOST_VENDOR', 'HOST_OS', 'HOST_ENV'
-#	and build the accoring host_tuple variable.  I.E. x86_64_windows_msys2
+#	and build the accoring Host_Tuple variable.  I.E. x86_64_windows_msys2
 #
 #   TUPLE:
 #   architecture	The target’s architecture. If none is specified, an unknown architecture is assumed.
@@ -56,11 +56,11 @@ try() {
 #              https://llvm-swift.github.io/LLVMSwift/Structs/Triple.html
 #              https://stackoverflow.com/questions/47010422/cross-compilation-terminologies-build-host-and-target
 #
-dk_host_tuple() {
+dk_Host_Tuple() {
 	dk_debugFunc 0
 
-	# currently, our host_tuple consists of only 2 variable needed
-	# host_tuple=${HOST_OS}_${HOST_ARCH}
+	# currently, our Host_Tuple consists of only 2 variable needed
+	# Host_Tuple=${HOST_OS}_${HOST_ARCH}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
 	# https://en.wikipedia.org/wiki/Uname
@@ -88,7 +88,7 @@ dk_host_tuple() {
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar CLANG_ENV
 
-		[ -z "${host_tuple-}" ] && host_tuple=${CLANG_TUPLE} && dk_call dk_printVar host_tuple
+		[ -z "${Host_Tuple-}" ] && Host_Tuple=${CLANG_TUPLE} && dk_call dk_printVar Host_Tuple
 		[ -z "${HOST_ARCH-}" ]   && HOST_ARCH=${CLANG_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${CLANG_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z "${HOST_OS-}" ]     && HOST_OS=${CLANG_OS}         && dk_call dk_printVar HOST_OS
@@ -110,7 +110,7 @@ dk_host_tuple() {
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar GCC_ENV
 
-		[ -z "${host_tuple-}" ] && host_tuple=${GCC_TUPLE} && dk_call dk_printVar host_tuple
+		[ -z "${Host_Tuple-}" ] && Host_Tuple=${GCC_TUPLE} && dk_call dk_printVar Host_Tuple
 		[ -z "${HOST_ARCH-}" ]   && HOST_ARCH=${GCC_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${GCC_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z "${HOST_OS-}" ]     && HOST_OS=${GCC_OS}         && dk_call dk_printVar HOST_OS
@@ -133,7 +133,7 @@ dk_host_tuple() {
 		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar BASH_ENV
 
-		[ -z "${host_tuple-}" ] && host_tuple=${BASH_TUPLE} && dk_call dk_printVar host_tuple
+		[ -z "${Host_Tuple-}" ] && Host_Tuple=${BASH_TUPLE} && dk_call dk_printVar Host_Tuple
 		[ -z "${HOST_ARCH-}" ]   && HOST_ARCH=${BASH_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${BASH_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z "${HOST_OS-}" ]     && HOST_OS=${BASH_OS}         && dk_call dk_printVar HOST_OS
@@ -183,7 +183,7 @@ dk_host_tuple() {
 		UNAME_TUPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_call dk_printVar UNAME_TUPLE
 		dk_call dk_printVar HOST_OS
-		[ -z "${Host_Tuple}" ] && host_tuple=${UNAME_TUPLE} && dk_call dk_printVar host_tuple
+		[ -z "${Host_Tuple}" ] && Host_Tuple=${UNAME_TUPLE} && dk_call dk_printVar Host_Tuple
 		[ -z "${HOST_ARCH}" ]   && HOST_ARCH=${UNAME_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z "${HOST_VENDOR}" ] && HOST_VENDOR=${UNAME_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z "${HOST_OS}" ]     && HOST_OS=${UNAME_OS}         && dk_call dk_printVar HOST_OS
@@ -324,8 +324,8 @@ dk_host_tuple() {
 		dk_call dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
 	fi
 
-	host_tuple=${HOST_OS}_${HOST_ARCH}
-	dk_call dk_printVar host_tuple
+	Host_Tuple=${HOST_OS}_${HOST_ARCH}
+	dk_call dk_printVar Host_Tuple
 	
 	#${Host_Tuple}="1"
 	#dk_call dk_printVar ${Host_Tuple}
@@ -333,9 +333,9 @@ dk_host_tuple() {
 # OBSOLETE - remove me
 #	if [ "${HOST_OS}" = "win" ]; then
 #		HOST_ENV=clang
-#		host_tuple=${Host_Tuple}_${HOST_ENV}
-#		#host_tuple=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
-#		dk_call dk_printVar host_tuple
+#		Host_Tuple=${Host_Tuple}_${HOST_ENV}
+#		#Host_Tuple=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
+#		dk_call dk_printVar Host_Tuple
 #	fi
 }
 
@@ -346,6 +346,6 @@ dk_host_tuple() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_host_tuple
-	dk_call dk_info "host_tuple = ${Host_Tuple}"
+	dk_call dk_Host_Tuple
+	dk_call dk_info "Host_Tuple = ${Host_Tuple}"
 }

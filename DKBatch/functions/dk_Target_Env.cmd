@@ -9,7 +9,7 @@ if not defined dk_Target_Env_DEFAULT (set "dk_Target_Env_DEFAULT=Clang")
 ::#####################################################################
 ::# dk_Target_Env()
 ::#
-::#	  ::Target_Env = Clang32, Clang64, Cygwin, MinGw32, Mingw64, Msvc, Ucrt64, Wsl
+::#	  ::Target_Env = Clang32, Clang64, Cygwin, MinGw32, MinGW64, Msvc, Ucrt64, Wsl
 ::#	  Target_Env = Clang, Gcc, Msvc
 ::#
 :dk_Target_Env

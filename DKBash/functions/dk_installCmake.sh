@@ -19,25 +19,25 @@ CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/c
 dk_installCmake() {
 	dk_debugFunc 0
 	
-	dk_call dk_validate HOST_OS "dk_call dk_host_tuple"	
+	dk_call dk_validate HOST_OS "dk_call dk_Host_Tuple"	
 	######################################################################################################
-	#[ "${HOST_OS}" = "android" ]                && CMAKE_IMPORT=cmake
+	#[ "${HOST_OS}" = "Android" ]                && CMAKE_IMPORT=cmake
 	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm32" ]  && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
 	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm64" ]  && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
 	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86" ]    && CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
 	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ] && CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
 	[ "${HOST_OS}" = "mac" ]                     && CMAKE_IMPORT=${CMAKE_DL_MAC}
 	[ "${Host_Tuple}" = "linux_x86_64" ]        && CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
-	[ "${Host_Tuple}" = "linux_arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
+	[ "${Host_Tuple}" = "Linux_Arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${Host_Tuple}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${WSL_DISTRO_NAME-}" = "Alpine" ]		 && CMAKE_IMPORT=cmake
-	#[ "${target_tuple}" = "Android_Arm32" ]       	 && CMAKE_IMPORT=cmake
-	#[ "${target_tuple-}" = "win_arm64_clang" ]    	 && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
-	#[ "${target_tuple-}" = "win_x86_clang" ]      	 && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	#[ "${target_tuple-}" = "win_x86_mingw" ]      	 && CMAKE_IMPORT=mingw-w64-i686-cmake
-	#[ "${target_tuple-}" = "Win_X86_64_Clang" ]   	 && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	#[ "${target_tuple-}" = "win_x86_64_mingw" ]   	 && CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	#[ "${target_tuple-}" = "win_x86_64_ucrt" ]    	 && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+	#[ "${Target_Tuple}" = "Android_Arm32" ]       	 && CMAKE_IMPORT=cmake
+	#[ "${Target_Tuple-}" = "win_arm64_clang" ]    	 && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	#[ "${Target_Tuple-}" = "win_x86_clang" ]      	 && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+	#[ "${Target_Tuple-}" = "win_x86_mingw" ]      	 && CMAKE_IMPORT=mingw-w64-i686-cmake
+	#[ "${Target_Tuple-}" = "Win_X86_64_Clang" ]   	 && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	#[ "${Target_Tuple-}" = "win_x86_64_mingw" ]   	 && CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	#[ "${Target_Tuple-}" = "win_x86_64_ucrt" ]    	 && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	[ -z ${CMAKE_IMPORT-} ] 					 && CMAKE_IMPORT=cmake  #Default
 	dk_call dk_assertVar CMAKE_IMPORT
 	

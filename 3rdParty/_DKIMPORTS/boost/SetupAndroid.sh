@@ -18,33 +18,33 @@ case "$HOST_ARCH" in
 esac
 
 HOST_EXE=""
-HOST_OS=`uname -s`
-case "$HOST_OS" in
+Host_Os=`uname -s`
+case "$Host_Os" in
     Darwin)
-        HOST_OS=darwin
+        Host_Os=darwin
         ;;
     Linux)
-        HOST_OS=linux
+        Host_Os=linux
         ;;
     FreeBsd)  # not tested
-        HOST_OS=freebsd
+        Host_Os=freebsd
         ;;
     CYGWIN*|*_NT-*)
-        HOST_OS=windows
+        Host_Os=windows
         HOST_EXE=.exe
         if [ "x$OSTYPE" = xcygwin ] ; then
-            HOST_OS=cygwin
+            Host_Os=cygwin
         fi
         ;;
 esac
 
 compute_host_tag ()
 {
-    case "$HOST_OS" in
+    case "$Host_Os" in
         windows|cygwin)
             HOST_TAG="windows"
             ;;
-        *)  HOST_TAG="${HOST_OS}-${HOST_ARCH}"
+        *)  HOST_TAG="${Host_Os}-${HOST_ARCH}"
     esac
 }
 compute_host_tag

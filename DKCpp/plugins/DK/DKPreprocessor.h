@@ -273,10 +273,10 @@
 #	define DKCOMPILER "llvm"
 #   define DKCOMPILER_VERSION "UNKNOWN" //STR(__llvm__)  FIXME: defining from another macro
 #elif __MINGW64__
-#	define DKCOMPILER "Mingw64"
+#	define DKCOMPILER "MinGW64"
 #	define DKCOMPILER_VERSION STR(__MINGW64_VERSION_MAJOR) "." STR(__MINGW64_VERSION_MINOR) "." STR(__MINGW64_VERSION_BUGFIX)
 #elif __MINGW32__
-#	define DKCOMPILER "Mingw32"
+#	define DKCOMPILER "MinGW32"
 #	define DKCOMPILER_VERSION STR(__MINGW32_VERSION_MAJOR) "." STR(__MINGW32_VERSION_MINOR) "." STR(__MINGW32_VERSION_BUGFIX)
 #elif _MSC_VER	// https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
 #	define DKCOMPILER "Microsoft Visual C++"

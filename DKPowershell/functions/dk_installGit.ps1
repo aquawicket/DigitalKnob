@@ -11,7 +11,7 @@ function Global:dk_installGit() {
 	${GIT_DL_WIN_X86}    = "https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-32-bit.7z.exe"
 	${GIT_DL_WIN_X86_64} = "https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe"
 
-	dk_call dk_validate "HOST_ARCH" "dk_call dk_host_tuple"
+	dk_call dk_validate "HOST_ARCH" "dk_call dk_Host_Tuple"
     if(${HOST_ARCH} -eq "arm32") { ${GIT_DL} = ${GIT_DL_WIN_ARM} }
     if(${HOST_ARCH} -eq "arm64") { ${GIT_DL} = ${GIT_DL_WIN_ARM64} }
     if(${HOST_ARCH} -eq "x86")   { ${GIT_DL} = ${GIT_DL_WIN_X86} }

@@ -12,9 +12,9 @@ dk_load(dk_builder)
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
-WIN_ARM64_HOST_dk_set	(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip)
-WIN_X86_HOST_dk_set		(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip)
-WIN_X86_64_HOST_dk_set	(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip)
+Win_Arm64_Host_dk_set	(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip)
+Win_X86_Host_dk_set		(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip)
+Win_X86_64_Host_dk_set	(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip)
 dk_importVariables(${NOTEPADPP_IMPORT})
 
 ### IMPORT ###

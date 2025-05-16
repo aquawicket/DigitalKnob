@@ -10,26 +10,26 @@ DKINSTALL() {
 #	dk_debugFunc 0
 
 	dk_call dk_getFileParams "$(dk_call dk_dirname $0)/dkconfig.txt"
-	dk_call dk_validate HOST_OS "dk_host_tuple"
+	dk_call dk_validate Host_Tuple "dk_Host_Tuple"
 	######################################################################################################
-	[ "${HOST_OS}" = "android" ]					&& CMAKE_IMPORT=cmake
+	[ "${Host_Os}" = "Android" ]					&& CMAKE_IMPORT=cmake
 	[ "${WSL_DISTRO_NAME-}" = "${Alpine-}" ]		&& CMAKE_IMPORT=cmake
-	[ "${host_tuple}" = "win_arm32" ]				&& CMAKE_IMPORT=${CMAKE_WIN_ARM32_IMPORT}
-	[ "${host_tuple}" = "win_arm64" ]				&& CMAKE_IMPORT=${CMAKE_WIN_ARM64_IMPORT}
-	[ "${host_tuple}" = "win_x86" ]					&& C1MAKE_IMPORT=${CMAKE_WIN_X86_IMPORT}
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ]	&& CMAKE_IMPORT=${CMAKE_WIN_X86_64_IMPORT}
-	[ "${HOST_OS}" = "mac" ]						&& CMAKE_IMPORT=${CMAKE_MAC_10_IMPORT}
-	[ "${host_tuple}" = "linux_x86_64" ]			&& CMAKE_IMPORT=${CMAKE_LINUX_X86_64_IMPORT}
-	[ "${host_tuple}" = "linux_arm64" ]				&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
-	[ "${host_tuple}" = "raspberry_arm64" ]			&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
+	[ "${Host_Tuple}" = "Win_Arm32" ]				&& CMAKE_IMPORT=${CMAKE_Win_ARM32_IMPORT}
+	[ "${Host_Tuple}" = "Win_Arm64" ]				&& CMAKE_IMPORT=${CMAKE_Win_ARM64_IMPORT}
+	[ "${Host_Tuple}" = "Win_X86" ]					&& C1MAKE_IMPORT=${CMAKE_Win_X86_IMPORT}
+	[ "${Host_Os}_${Host_Arch}" = "Win_X86_64" ]	&& CMAKE_IMPORT=${CMAKE_WIN_X86_64_IMPORT}
+	[ "${Host_Os}" = "Mac" ]						&& CMAKE_IMPORT=${CMAKE_MAC_10_IMPORT}
+	[ "${Host_Tuple}" = "Linux_X86_64" ]			&& CMAKE_IMPORT=${CMAKE_LINUX_X86_64_IMPORT}
+	[ "${Host_Tuple}" = "Linux_Arm64" ]				&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
+	[ "${Host_Tuple}" = "Raspberry_Arm64" ]			&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
 	
-	#[ "${target_tuple}" = "Android_Arm32" ]		&& CMAKE_IMPORT=cmake
-	[ "${target_tuple-}" = "win_arm64_clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
-	[ "${target_tuple-}" = "win_x86_clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	[ "${target_tuple-}" = "win_x86_mingw" ]		&& CMAKE_IMPORT=mingw-w64-i686-cmake
-	[ "${target_tuple-}" = "Win_X86_64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	[ "${target_tuple-}" = "win_x86_64_mingw" ]		&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	[ "${target_tuple-}" = "win_x86_64_ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+	#[ "${Target_Tuple}" = "Android_Arm32" ]		&& CMAKE_IMPORT=cmake
+	[ "${Target_Tuple-}" = "Win_arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	[ "${Target_Tuple-}" = "Win_X86_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+	[ "${Target_Tuple-}" = "Win_x86_MinGW" ]		&& CMAKE_IMPORT=mingw-w64-i686-cmake
+	[ "${Target_Tuple-}" = "Win_X86_64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	[ "${Target_Tuple-}" = "Win_x86_64_MinGW" ]		&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	[ "${Target_Tuple-}" = "Win_x86_64_Ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	dk_call dk_printVar CMAKE_IMPORT
 	
 	[ -z "${CMAKE_IMPORT}" ] && dk_call dk_error "CMAKE_IMPORT is invalid"
@@ -43,10 +43,10 @@ DKINSTALL() {
 		dk_call dk_toLower "${CMAKE_FOLDER}" CMAKE_FOLDER
 		
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
-		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
-		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
-		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${Host_Os}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
+		[ "${Host_Os}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
+		[ "${Host_Os}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${Host_Os}" = "raspberry" ] && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
 		[ -z ${CMAKE_EXE} ]            && dk_call dk_error "no cmake for this OS"
 		dk_call dk_printVar CMAKE_EXE
 		

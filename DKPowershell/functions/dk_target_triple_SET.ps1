@@ -9,9 +9,9 @@ function Global:dk_target_tuple_SET() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "${target_app} ${target_tuple} ${target_type}"
+	dk_call dk_echo "${target_app} ${Target_Tuple} ${target_type}"
 	dk_call dk_echo	
-    dk_call dk_echo " 1) ${host_tuple}"
+    dk_call dk_echo " 1) ${Host_Tuple}"
 	dk_call dk_echo
 	dk_call dk_echo " 2) cosmopolitan"
 	dk_call dk_echo " 3) android_arm32_clang"
@@ -54,42 +54,42 @@ function Global:dk_target_tuple_SET() {
 	dk_call dk_echo
 	
 	$input = Read-Host
-	    if(${input} -eq  "1"){ $global:target_tuple = "${host_tuple}" }
-	elseif(${input} -eq  "2"){ $global:target_tuple = "cosmopolitan" }
-	elseif(${input} -eq  "3"){ $global:target_tuple = "android_arm32_clang" }
-	elseif(${input} -eq  "4"){ $global:target_tuple = "android_arm64_clang" }
-	elseif(${input} -eq  "5"){ $global:target_tuple = "android_x86_clang" }
-	elseif(${input} -eq  "6"){ $global:target_tuple = "android_x86_64_clang" }
-	elseif(${input} -eq  "7"){ $global:target_tuple = "emscripten_clang" }
-	elseif(${input} -eq  "8"){ $global:target_tuple = "ios_arm32_clang" }
-	elseif(${input} -eq  "9"){ $global:target_tuple = "ios_arm64_clang" }
-	elseif(${input} -eq "10"){ $global:target_tuple = "ios_x86_clang" }
-	elseif(${input} -eq "11"){ $global:target_tuple = "ios_x86_64_clang" }
-	elseif(${input} -eq "12"){ $global:target_tuple = "iossim_arm32_clang" }
-	elseif(${input} -eq "13"){ $global:target_tuple = "iossim_arm64_clang" }
-	elseif(${input} -eq "14"){ $global:target_tuple = "iossim_x86_clang" }
-	elseif(${input} -eq "15"){ $global:target_tuple = "iossim_x86_64_clang" }
-	elseif(${input} -eq "16"){ $global:target_tuple = "linux_arm32_clang" }
-	elseif(${input} -eq "17"){ $global:target_tuple = "linux_arm64_clang" }
-	elseif(${input} -eq "18"){ $global:target_tuple = "linux_x86_clang" }
-	elseif(${input} -eq "19"){ $global:target_tuple = "linux_x86_64_clang" }
-	elseif(${input} -eq "20"){ $global:target_tuple = "mac_arm32_clang" }
-	elseif(${input} -eq "21"){ $global:target_tuple = "mac_arm64_clang" }
-	elseif(${input} -eq "22"){ $global:target_tuple = "mac_x86_clang" }
-	elseif(${input} -eq "23"){ $global:target_tuple = "mac_x86_64_clang" }
-	elseif(${input} -eq "24"){ $global:target_tuple = "raspberry_arm32_clang" }
-	elseif(${input} -eq "25"){ $global:target_tuple = "raspberry_arm64_clang" }
-	elseif(${input} -eq "26"){ $global:target_tuple = "raspberry_x86_clang" }
-	elseif(${input} -eq "27"){ $global:target_tuple = "raspberry_x64_clang" }
-	elseif(${input} -eq "28"){ $global:target_tuple = "win_arm32_clang" }
-	elseif(${input} -eq "29"){ $global:target_tuple = "win_arm64_clang" }
-	elseif(${input} -eq "30"){ $global:target_tuple = "win_x86_clang" }
-	elseif(${input} -eq "31"){ $global:target_tuple = "win_x86_gcc" }
-	elseif(${input} -eq "32"){ $global:target_tuple = "win_x86_msvc" }
-	elseif(${input} -eq "33"){ $global:target_tuple = "Win_X86_64_Clang" }
-	elseif(${input} -eq "34"){ $global:target_tuple = "win_x86_64_gcc" }
-	elseif(${input} -eq "35"){ $global:target_tuple = "win_x86_64_msvc" }
-	elseif(${input} -eq "36"){ $global:target_tuple = "win_x86_64_ucrt" }
+	    if(${input} -eq  "1"){ $global:Target_Tuple = "${Host_Tuple}" }
+	elseif(${input} -eq  "2"){ $global:Target_Tuple = "cosmopolitan" }
+	elseif(${input} -eq  "3"){ $global:Target_Tuple = "android_arm32_clang" }
+	elseif(${input} -eq  "4"){ $global:Target_Tuple = "android_arm64_clang" }
+	elseif(${input} -eq  "5"){ $global:Target_Tuple = "android_x86_clang" }
+	elseif(${input} -eq  "6"){ $global:Target_Tuple = "android_x86_64_clang" }
+	elseif(${input} -eq  "7"){ $global:Target_Tuple = "emscripten_clang" }
+	elseif(${input} -eq  "8"){ $global:Target_Tuple = "ios_arm32_clang" }
+	elseif(${input} -eq  "9"){ $global:Target_Tuple = "ios_arm64_clang" }
+	elseif(${input} -eq "10"){ $global:Target_Tuple = "ios_x86_clang" }
+	elseif(${input} -eq "11"){ $global:Target_Tuple = "ios_x86_64_clang" }
+	elseif(${input} -eq "12"){ $global:Target_Tuple = "iossim_arm32_clang" }
+	elseif(${input} -eq "13"){ $global:Target_Tuple = "iossim_arm64_clang" }
+	elseif(${input} -eq "14"){ $global:Target_Tuple = "iossim_x86_clang" }
+	elseif(${input} -eq "15"){ $global:Target_Tuple = "iossim_x86_64_clang" }
+	elseif(${input} -eq "16"){ $global:Target_Tuple = "linux_arm32_clang" }
+	elseif(${input} -eq "17"){ $global:Target_Tuple = "linux_arm64_clang" }
+	elseif(${input} -eq "18"){ $global:Target_Tuple = "linux_x86_clang" }
+	elseif(${input} -eq "19"){ $global:Target_Tuple = "linux_x86_64_clang" }
+	elseif(${input} -eq "20"){ $global:Target_Tuple = "mac_arm32_clang" }
+	elseif(${input} -eq "21"){ $global:Target_Tuple = "mac_arm64_clang" }
+	elseif(${input} -eq "22"){ $global:Target_Tuple = "mac_x86_clang" }
+	elseif(${input} -eq "23"){ $global:Target_Tuple = "mac_x86_64_clang" }
+	elseif(${input} -eq "24"){ $global:Target_Tuple = "raspberry_arm32_clang" }
+	elseif(${input} -eq "25"){ $global:Target_Tuple = "raspberry_arm64_clang" }
+	elseif(${input} -eq "26"){ $global:Target_Tuple = "raspberry_x86_clang" }
+	elseif(${input} -eq "27"){ $global:Target_Tuple = "raspberry_x64_clang" }
+	elseif(${input} -eq "28"){ $global:Target_Tuple = "win_arm32_clang" }
+	elseif(${input} -eq "29"){ $global:Target_Tuple = "win_arm64_clang" }
+	elseif(${input} -eq "30"){ $global:Target_Tuple = "win_x86_clang" }
+	elseif(${input} -eq "31"){ $global:Target_Tuple = "win_x86_gcc" }
+	elseif(${input} -eq "32"){ $global:Target_Tuple = "win_x86_msvc" }
+	elseif(${input} -eq "33"){ $global:Target_Tuple = "Win_X86_64_Clang" }
+	elseif(${input} -eq "34"){ $global:Target_Tuple = "win_x86_64_gcc" }
+	elseif(${input} -eq "35"){ $global:Target_Tuple = "win_x86_64_msvc" }
+	elseif(${input} -eq "36"){ $global:Target_Tuple = "win_x86_64_ucrt" }
 	elseif(${input} -eq "37"){ dk_call dk_clearScreen }
 	elseif(${input} -eq "38"){ dk_call dk_unset target_app }
 	elseif(${input} -eq "39"){ dk_call dk_exit 0 }

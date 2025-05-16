@@ -6,7 +6,7 @@
 
 
 ##################################################################################
-# dk_readCache(rtn:target_app, rtn:target_tuple, rtn:target_type)
+# dk_readCache(rtn:target_app, rtn:Target_Tuple, rtn:target_type)
 #
 #
 dk_readCache() {
@@ -30,8 +30,8 @@ dk_readCache() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_readCache target_app target_tuple target_type
+	dk_call dk_readCache target_app Target_Tuple target_type
 	dk_call dk_printVar target_app
-	dk_call dk_printVar target_tuple
+	dk_call dk_printVar Target_Tuple
 	dk_call dk_printVar target_type
 }

@@ -39,16 +39,16 @@ dk_Target_Tuple() {
 		dk_call dk_dirname ${Target_Dir} Target_Tuple_Dir	# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
 	fi
 
-	if ( ( dk_call dk_containsCI "${Target_Dir}" "android"      ) ||
-		 ( dk_call dk_containsCI "${Target_Dir}" "android"      ) ||
-		 ( dk_call dk_containsCI "${Target_Dir}" "emscripten"   ) ||
-		 ( dk_call dk_containsCI "${Target_Dir}" "ios"          ) ||
-		 ( dk_call dk_containsCI "${Target_Dir}" "iossim"       ) ||
-		 ( dk_call dk_containsCI "${Target_Dir}" "linux"        ) ||
-		 ( dk_call dk_containsCI "${Target_Dir}" "mac"          ) ||
-		 ( dk_call dk_containsCI "${Target_Dir}" "raspberry"    ) ||
-		 ( dk_call dk_containsCI "${Target_Dir}" "windows"      ) ||
-		 ( dk_call dk_containsCI "${Target_Dir}" "cosmopolitan"	) ); then
+	if ( ( dk_call dk_containsCI "${Target_Dir}" "Android"      ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "Android"      ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "Emscripten"   ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "Ios"          ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "Iossim"       ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "Linux"        ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "Mac"          ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "Raspberry"    ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "Windows"      ) ||
+		 ( dk_call dk_containsCI "${Target_Dir}" "Cosmopolitan"	) ); then
 		     dk_call dk_set Target_Tuple_Dir ${Target_Dir}
 	else
 		dk_call dk_Target_Tuple_SET
@@ -113,7 +113,7 @@ dk_Target_Tuple() {
 
 	#### Set Target_Env 
 	dk_call dk_containsCI "${Target_Tuple}" "Clang" 			&& dk_call dk_set Target_Env Clang
-	dk_call dk_containsCI "${Target_Tuple}" "Mingw" 			&& dk_call dk_set Target_Env Mingw
+	dk_call dk_containsCI "${Target_Tuple}" "MinGW" 			&& dk_call dk_set Target_Env MinGW
 	dk_call dk_containsCI "${Target_Tuple}" "Ucrt"  			&& dk_call dk_set Target_Env Ucrt
 	dk_call dk_containsCI "${Target_Tuple}" "Msvc"  			&& dk_call dk_set Target_Env Msvc
 	dk_call dk_containsCI "${Target_Tuple}" "Cosmopolitan" 		&& dk_call dk_set Target_Env Cosmopolitan
@@ -131,14 +131,14 @@ dk_Target_Tuple() {
 			if [ -n "${ARM64-}" ]; then
 				dk_call dk_set Msystem "${Target_Env}${Target_Arch}"	# Msystem = Clangarm64
 			elif [ -n "${X86_64-}" ]; then
-				dk_call dk_set Msystem "${Target_Env}64"				# Msystem = Clang64, Mingw64, Ucrt64
+				dk_call dk_set Msystem "${Target_Env}64"				# Msystem = Clang64, MinGW64, Ucrt64
 			elif [ -n "${X86-}" ]; then
-				dk_call dk_set Msystem "${Target_Env}32"				# Msystem = Clang32, Mingw32
+				dk_call dk_set Msystem "${Target_Env}32"				# Msystem = Clang32, MinGW32
 			else
 				dk_call dk_fatal "The target Target_Tuple:${Target_Tuple} does not contain a valid Target_Env or msystem"
 			fi
 		fi
-		dk_call dk_set ${Msystem} 1										# Clangarm64, Clang64, Clang32, Mingw64, Mingw32, Ucrt64 = 1
+		dk_call dk_set ${Msystem} 1										# Clangarm64, Clang64, Clang32, MinGW64, MinGW32, Ucrt64 = 1
 	fi
 	
 	### Set Target_Os_arch / Target_Os_ARCH ###

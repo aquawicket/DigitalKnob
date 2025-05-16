@@ -176,8 +176,8 @@ if(${DK_BINARY_OSARCH} MATCHES "ios_arm64")
 	dk_set(DEPLOYMENT_TARGET				"${IOS_DEPLOYMENT_TARGET}")
 endif()
 
-# iossim_x86
-if(${DK_BINARY_OSARCH} MATCHES "iossim_x86")
+# Iossim_X86
+if(${DK_BINARY_OSARCH} MATCHES "Iossim_X86")
 	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"SIMULATOR")
 	dk_set(IOS_SDK_VERSION					"15.0")

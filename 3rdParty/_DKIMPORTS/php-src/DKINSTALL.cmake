@@ -38,13 +38,13 @@ WIN_X86_64_dk_import(${PHP_SRC_WIN_X86_64_DL})		# win x86_64 binary
 ### Copy VCRUNTIME library to PHP_SRC folder
 if(Win_Host)
 	if(NOT EXISTS "${PHP_SRC}/vcruntime140.dll")
-		if(WIN_X86_HOST)
+		if(Win_X86_Host)
 			if(EXISTS "${VCRUNTIME140_X86_DEBUG_DLL}")
 				dk_copy("${VCRUNTIME140_X86_DEBUG_DLL}" "${PHP_SRC}/vcruntime140.dll") #rename
 			elseif(EXISTS "${VCRUNTIME140_X86_DLL}")
 				dk_copy("${VCRUNTIME140_X86_DLL}" "${PHP_SRC}/vcruntime140.dll")
 			endif()
-		elseif(WIN_X86_64_HOST)
+		elseif(Win_X86_64_Host)
 			if(EXISTS "${VCRUNTIME140_X86_64_DEBUG_DLL}")
 				dk_copy("${VCRUNTIME140_X86_64_DEBUG_DLL}" "${PHP_SRC}/vcruntime140.dll") # rename
 			elseif(EXISTS "${VCRUNTIME140_X86_64_DLL}")

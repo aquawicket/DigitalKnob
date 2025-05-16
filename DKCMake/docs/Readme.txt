@@ -10,7 +10,7 @@
 		* /emscripten
 		* /ios_arm32
 		* /ios_arm64
-		* /iossim_x86
+		* /Iossim_X86
 		* /iossim_x86_64
 		* /linux_x86
 		* /linux_x86_64

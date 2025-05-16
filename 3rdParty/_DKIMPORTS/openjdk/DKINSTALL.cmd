@@ -14,10 +14,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	if defined android_host      	(set "OPENJDK_DL=openjdk-17")
-	if defined linux_x86_64_host 	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz")
-	if defined mac_x86_64_host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz")
-	if defined win_x86_64_host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip")
+	if defined Android_Host      	(set "OPENJDK_DL=openjdk-17")
+	if defined Linux_X86_64_Host 	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz")
+	if defined Mac_X86_64_Host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz")
+	if defined Win_X86_64_Host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip")
 	if not defined OPENJDK_DL		(%dk_call% dk_error "OPENJDK_DL is invalid")
 	
 	::%dk_call% dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
@@ -32,9 +32,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
 	%dk_call% dk_nativePath %OPENJDK% OPENJDK_NATIVE
 	
-	if defined win_host   (%dk_call% :dk_installOpenJdkWin)
-	if defined mac_host   (%dk_call% :dk_installOpenJdkMac)
-	if defined linux_host (%dk_call% :dk_installOpenJdkLinux)
+	if defined Win_Host   (%dk_call% :dk_installOpenJdkWin)
+	if defined Mac_Host   (%dk_call% :dk_installOpenJdkMac)
+	if defined Linux_Host (%dk_call% :dk_installOpenJdkLinux)
 %endfunction%	
 	
 :dk_installOpenJdkWin
@@ -74,7 +74,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::	%dk_call% dk_set CURRENT_DIR /usr
 	::)
 	
-	::if defined android_host (
+	::if defined Android_Host (
 	::	%dk_call% dk_set SUDO ""
 	::	%dk_call% dk_set APT "apt"
 	::) else (
@@ -82,7 +82,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::	%dk_call% dk_set APT "apt-get"
 	::)
 	
-	if defined android_host (
+	if defined Android_Host (
 		%dk_call% dk_command pkg install openjdk-17 -y
 	) else (
 		%dk_call% dk_command %SUDO% apt update

@@ -3,28 +3,18 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ###############################################################################
-# dk_host_tuple()
+# dk_Host_Tuple()
 #
 #	set the cached host variables 
 #
-#	host_os 				= android, emscripten, ios, iossim, linux, mac, raspberry, windows
-#	host_os 				= Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows
-#	HOST_OS 				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
-#	host_arch				= arm32, arm64, x86, x86_64
-#	Host_Arch				= Arm32, Arm64, X86, X86_64
-#	HOST_ARCH				= ARM32, ARM64, X86, X86_64
-#	host_env				= clang, mingw, msvc, ucrt
-#	Host_Env				= Clang, Mingw, Msvc, Ucrt
-#	HOST_ENV				= CLANG, MINGW, MSVC, UCRT
-#	<os>_host 				= android_host, emscripten_host, ios_host, iossim_host, linux_host, mac_host, raspberry_host, windows_host
-#	<os>_host 				= Android_Host, Emscripten_Host, Ios_Host, Iossim_Host, Linux_Host, Mac_Host, Raspberry_Host, Windows_Host
-#	<OS>_HOST 				= ANDROID_HOST, EMSCRIPTEN_HOST, IOS_HOST, IOSSIM_HOST, LINUX_HOST, MAC_HOST, RASPBERRY_HOST, WINDOWS_HOST 
-#   <os>_<arch>_host		= android_arm64_host, emscripten_arm64_host, ios_arm64_host, iossim_arm64_host, linux_arm64_host, mac_arm64_host, raspberry_arm64_host, windows_arm64_host
-#   <os>_<arch>_host		= Android_Arm64_Host, Emscripten_Arm64_Host, Ios_Arm64_Host, Iossim_Arm64_Host, Linux_Arm64_Host, Mac_Arm64_Host, Raspberry_Arm64_Host, Windows_Arm64_Host
-#   <OS>_<ARCH>_HOST		= ANDROID_ARM64_HOST, EMSCRIPTEN_ARM64_HOST, IOS_ARM64_HOST, IOSSIM_ARM64_HOST, LINUX_ARM64_HOST, MAC_ARM64_HOST, RASPBERRY_ARM64_HOST, WINDOWS_ARM64_HOST 
-#   <OS>_<ARCH>_<ENV>_HOST	= ANDROID_ARM64_CLANG_HOST, EMSCRIPTEN_ARM64_CLANG_HOST, IOS_ARM64_CLANG_HOST, IOSSIM_ARM64_CLANG_HOST, LINUX_ARM64_CLANG_HOST, MAC_ARM64_CLANG_HOST, RASPBERRY_ARM64_CLANG_HOST, WINDOWS_ARM64_CLANG_HOST 
+#	Host_Os 								= Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows
+#	Host_Arch								= Arm32, Arm64, X86, X86_64
+#	Host_Env								= Clang, MinGW, Msvc, Ucrt
+#	{Host_Os}_Host 							= Android_Host, Emscripten_Host, Ios_Host, Iossim_Host, Linux_Host, Mac_Host, Raspberry_Host, Windows_Host
+#   {Host_Os}_{Host_Arch}_Host				= Android_Arm64_Host, Emscripten_Arm64_Host, Ios_Arm64_Host, Iossim_Arm64_Host, Linux_Arm64_Host, Mac_Arm64_Host, Raspberry_Arm64_Host, Windows_Arm64_Host
+#   {Host_Os}_{Host_Arch}_{Host_Env}_Host	= Android_Arm64_Clang_Host, Emscripten_Arm64_Clang_Host, Ios_Arm64_Clang_Host, Iossim_Arm64_Clang_Host, Linux_Arm64_Clang_Host, Mac_Arm64_Clang_Host, Raspberry_Arm64_Clang_Host, Windows_Arm64_Clang_Host 
 #
-function(dk_host_tuple)
+function(dk_Host_Tuple)
 	dk_debugFunc()
 
 #:: NOTICE: default environment moved to dk_target_tuple()
@@ -162,48 +152,48 @@ function(dk_host_tuple)
 		dk_printVar(${HOST_ENV}_HOST)
 	endif()
 	
-	### set host_tuple ###
+	### set Host_Tuple ###
 	if(Host_Arch)
 		dk_set(Host_Tuple "${Host_Os}_${Host_Arch}")
-		dk_set(host_tuple "${host_os}_${host_arch}")
-		dk_set(HOST_TUPLE "${HOST_OS}_${HOST_ARCH}")
+		dk_set(Host_Tuple "${host_os}_${host_arch}")
+		dk_set(Host_Tuple "${HOST_OS}_${HOST_ARCH}")
 		dk_set(${Host_Tuple}_Host 1)
-		dk_set(${host_tuple}_host 1)
-		dk_set(${HOST_TUPLE}_HOST 1)
+		dk_set(${Host_Tuple}_host 1)
+		dk_set(${Host_Tuple}_HOST 1)
 		dk_printVar(${Host_Tuple}_Host)
-		dk_printVar(${host_tuple}_host)
-		dk_printVar(${HOST_TUPLE}_HOST)
+		dk_printVar(${Host_Tuple}_host)
+		dk_printVar(${Host_Tuple}_HOST)
 	endif()
 	if(Host_Env)
 		dk_set(Host_Tuple "${Host_Os}_${Host_Arch}_${Host_Env}")
-		dk_set(host_tuple "${host_os}_${host_arch}_${host_env}")
-		dk_set(HOST_TUPLE "${HOST_OS}_${HOST_ARCH}_${HOST_ENV}")
+		dk_set(Host_Tuple "${host_os}_${host_arch}_${host_env}")
+		dk_set(Host_Tuple "${HOST_OS}_${HOST_ARCH}_${HOST_ENV}")
 		dk_set(${Host_Tuple}_Host 1)
-		dk_set(${host_tuple}_host 1)		
-		dk_set(${HOST_TUPLE}_HOST 1)
+		dk_set(${Host_Tuple}_host 1)		
+		dk_set(${Host_Tuple}_HOST 1)
 		dk_printVar(${Host_Tuple}_Host)
-		dk_printVar(${host_tuple}_host)
-		dk_printVar(${HOST_TUPLE}_HOST)
+		dk_printVar(${Host_Tuple}_host)
+		dk_printVar(${Host_Tuple}_HOST)
 	endif()
 		
 	if((NOT Host_Tuple) AND (cosmopolitan OR cosmopolitan OR COSMOPOLITAN))
 		dk_set(Host_Tuple "Cosmopolitan")
-		dk_set(host_tuple "cosmopolitan")
-		dk_set(HOST_TUPLE "COSMOPOLITAN")
+		dk_set(Host_Tuple "cosmopolitan")
+		dk_set(Host_Tuple "COSMOPOLITAN")
 		dk_set(${Host_Tuple}_Host 1)
-		dk_set(${host_tuple}_host 1)
-		dk_set(${HOST_TUPLE}_HOST 1)
+		dk_set(${Host_Tuple}_host 1)
+		dk_set(${Host_Tuple}_HOST 1)
 		dk_printVar(${Host_Tuple}_Host)
-		dk_printVar(${host_tuple}_host)
-		dk_printVar(${HOST_TUPLE}_HOST)
+		dk_printVar(${Host_Tuple}_host)
+		dk_printVar(${Host_Tuple}_HOST)
 	endif()
 
 	dk_printVar(Host_Tuple)
-	dk_printVar(host_tuple)
-	dk_printVar(HOST_TUPLE)
+	dk_printVar(Host_Tuple)
+	dk_printVar(Host_Tuple)
 	dk_printVar(${Host_Tuple}_Host)
-	dk_printVar(${host_tuple}_host)
-	dk_printVar(${HOST_TUPLE}_HOST)	
+	dk_printVar(${Host_Tuple}_host)
+	dk_printVar(${Host_Tuple}_HOST)	
 endfunction()
 
 
@@ -216,5 +206,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_host_tuple()
+	dk_Host_Tuple()
 endfunction()

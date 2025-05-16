@@ -16,7 +16,7 @@ dk_load dk_installGit
 dk_load dk_DKBRANCH_DIR
 dk_load dk_contains
 dk_load dk_DIGITALKNOB_DIR
-dk_load dk_host_tuple
+dk_load dk_Host_Tuple
 dk_load dk_getExtension
 dk_load dk_removeExtension
 dk_load dk_mkdir

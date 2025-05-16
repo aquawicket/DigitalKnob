@@ -7,16 +7,16 @@ if(!$DKINSTALL){ $DKINSTALL = 1 } else{ return }
 function Global:DKINSTALL() {
 	dk_debugFunc 0
 
-	dk_call dk_validate HOST_OS "dk_call dk_host_tuple"
+	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
 	
-#   if("${HOST_OS}_${HOST_ARCH}" -eq "win_arm32"    { ${CMAKE_DL} = "https://todo" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "win_arm64")   { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "win_x86")     { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "win_x86_64")  { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip" }
-    if("$HOST_OS" -eq "mac")                        { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz" }
-#	if("$HOST_OS" -eq "mac")                        { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "linux_x86_64"){ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "linux_arm64") { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz" }
+#   if("${Host_Os}_${Host_Arch}" -eq "Win_Arm32"    { ${CMAKE_DL} = "https://todo" }
+    if("${Host_Os}_${Host_Arch}" -eq "Win_Arm64")   { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip" }
+    if("${Host_Os}_${Host_Arch}" -eq "Win_X86")     { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip" }
+    if("${Host_Os}_${Host_Arch}" -eq "Win_X86_64")  { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip" }
+    if("$Host_Os" -eq "Mac")                        { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz" }
+#	if("$Host_Os" -eq "Mac")                        { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz" }
+    if("${Host_Os}_${Host_Arch}" -eq "Linux_X86_64"){ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz" }
+    if("${Host_Os}_${Host_Arch}" -eq "Linux_Arm64") { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz" }
     
     ${CMAKE_DL_FILE} = dk_call dk_basename ${CMAKE_DL}
 	${CMAKE_FOLDER} = dk_call dk_removeExtension ${CMAKE_DL_FILE}

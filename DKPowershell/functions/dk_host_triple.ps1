@@ -1,11 +1,11 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_host_tuple){ $dk_host_tuple = 1 } else{ return } #include guard
+if(!$dk_Host_Tuple){ $dk_Host_Tuple = 1 } else{ return } #include guard
 
 #####################################################################
-# dk_host_tuple()
+# dk_Host_Tuple()
 #
 #
-function Global:dk_host_tuple() {
+function Global:dk_Host_Tuple() {
 	dk_debugFunc 0
 
 	###### Host_Os and <Host_Os>_Host ######
@@ -26,7 +26,7 @@ function Global:dk_host_tuple() {
 		New-Variable -Name "$($Host_Env)_Host" -Value 1 -Force
     }
 	
-	###### host_tuple and <host_tuple>_host ######
+	###### Host_Tuple and <Host_Tuple>_host ######
 	if($Host_Arch){
 		$global:Host_Tuple = (-join($Host_Os, "_", $Host_Arch))
 		New-Variable -Name "$($Host_Tuple)_Host" -Value 1 -Force
@@ -65,5 +65,5 @@ function Global:dk_host_tuple() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_host_tuple
+	dk_call dk_Host_Tuple
 }

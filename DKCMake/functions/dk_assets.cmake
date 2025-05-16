@@ -49,7 +49,7 @@ function(dk_assets plugin)
 		PATTERN mac_x86_64 EXCLUDE
 		PATTERN ios_arm32 EXCLUDE
 		PATTERN ios_arm64 EXCLUDE
-		PATTERN iossim_x86 EXCLUDE
+		PATTERN Iossim_X86 EXCLUDE
 		PATTERN iossim_x86_64 EXCLUDE
 		PATTERN linux_x86 EXCLUDE
 		PATTERN linux_x86_64 EXCLUDE

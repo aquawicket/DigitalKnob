@@ -15,11 +15,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	if defined MAC_X86_HOST           (set "PYTHON3_IMPORT=%PYTHON3_MAC_X86_64_IMPORT%")
-	if defined WIN_ARM64_HOST         (set "PYTHON3_IMPORT=%PYTHON3_WIN_ARM64_IMPORT%")
-	if defined WIN_X86_HOST           (set "PYTHON3_IMPORT=%PYTHON3_WIN_X86_IMPORT%")
-	if defined WIN_X86_64_HOST        (set "PYTHON3_IMPORT=%PYTHON3_WIN_X86_64_IMPORT%")
-	if defined LINUX_X86_64_HOST      (set "PYTHON3_IMPORT=%PYTHON3_LINUX_X86_64_IMPORT%")
+	if defined Mac_X86_Host           (set "PYTHON3_IMPORT=%PYTHON3_MAC_X86_64_IMPORT%")
+	if defined Win_Arm64_Host         (set "PYTHON3_IMPORT=%PYTHON3_WIN_ARM64_IMPORT%")
+	if defined Win_X86_Host           (set "PYTHON3_IMPORT=%PYTHON3_WIN_X86_IMPORT%")
+	if defined Win_X86_64_Host        (set "PYTHON3_IMPORT=%PYTHON3_WIN_X86_64_IMPORT%")
+	if defined Linux_X86_64_Host      (set "PYTHON3_IMPORT=%PYTHON3_LINUX_X86_64_IMPORT%")
 ::	if not defined PYTHON3_IMPORT     (set "PYTHON3_IMPORT=python3")
 	
 	::%dk_call% dk_isUrl %PYTHON3_IMPORT% && (

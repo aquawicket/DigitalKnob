@@ -9,7 +9,7 @@ function Global:dk_target_type() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "${target_app} ${target_tuple} ${target_type}"
+	dk_call dk_echo "${target_app} ${Target_Tuple} ${target_type}"
 	dk_call dk_echo	
     dk_call dk_echo " 1) Debug"
 	dk_call dk_echo " 2) Release"
@@ -24,7 +24,7 @@ function Global:dk_target_type() {
 	elseif(${input} -eq "2"){ $global:target_type = "Release" }
 	elseif(${input} -eq "3"){ $global:target_type = "All" }
 	elseif(${input} -eq "4"){ dk_call dk_clearScreen }
-	elseif(${input} -eq "5"){ dk_call dk_unset target_tuple }
+	elseif(${input} -eq "5"){ dk_call dk_unset Target_Tuple }
 	elseif(${input} -eq "6"){ dk_call dk_exit 0 }
 	else{ dk_call dk_warning "invalid selection" }
 }

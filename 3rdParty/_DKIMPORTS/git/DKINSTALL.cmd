@@ -21,9 +21,9 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	%dk_call% dk_debugFunc 0	
 	
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-    if defined win_arm64_host  (set "GIT_DL=%GIT_DL_WIN_ARM64%")
-    if defined win_x86_host    (set "GIT_DL=%GIT_DL_WIN_X86%")
-    if defined win_x86_64_host (set "GIT_DL=%GIT_DL_WIN_X86_64%")
+    if defined Win_Arm64_Host  (set "GIT_DL=%GIT_DL_WIN_ARM64%")
+    if defined Win_X86_Host    (set "GIT_DL=%GIT_DL_WIN_X86%")
+    if defined Win_X86_64_Host (set "GIT_DL=%GIT_DL_WIN_X86_64%")
     %dk_call% dk_assertVar GIT_DL
     
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"

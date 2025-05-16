@@ -7,8 +7,8 @@ include_guard()
 #
 #	set the cached host variables 
 #
-#   <Os>_<Arch>_Host		= Android_Arm64_Host, Emscripten_Arm64_Host, Ios_Arm64_Host, Iossim_Arm64_Host, Linux_Arm64_Host, Mac_Arm64_Host, Raspberry_Arm64_Host, Windows_Arm64_Host
-#   <Os>_<Arch>_<Env>_Host	= Android_Arm64_Clang_Host, Emscripten_Arm64_Clang_Host, Ios_Arm64_Clang_Host, Iossim_Arm64_Clang_Host, Linux_Arm64_Clang_Host, Mac_Arm64_Clang_Host, Raspberry_Arm64_Clang_Host, Windows_Arm64_Clang_Host 
+#   {Host_Os}_{Host_Arch}_Host				= Android_Arm64_Host, Emscripten_Arm64_Host, Ios_Arm64_Host, Iossim_Arm64_Host, Linux_Arm64_Host, Mac_Arm64_Host, Raspberry_Arm64_Host, Windows_Arm64_Host
+#   {Host_Os}_{Host_Arch}_{Host_Env}_Host	= Android_Arm64_Clang_Host, Emscripten_Arm64_Clang_Host, Ios_Arm64_Clang_Host, Iossim_Arm64_Clang_Host, Linux_Arm64_Clang_Host, Mac_Arm64_Clang_Host, Raspberry_Arm64_Clang_Host, Windows_Arm64_Clang_Host 
 #
 function(dk_Host_Tuple)
 	dk_debug("dk_Host_Tuple(ARGV='${ARGV}', ARGV0='${ARGV0}', ARGV1='${ARGV1}')")

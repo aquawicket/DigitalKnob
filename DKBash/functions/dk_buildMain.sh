@@ -63,7 +63,7 @@ dk_buildMain() {
 			else
 				if [ -n "${BUILD_LIST[${_line},2]-}" ]; then
 					target_app="${BUILD_LIST[${_line},0]}"
-					target_tuple="${BUILD_LIST[${_line},1]}"
+					Target_Tuple="${BUILD_LIST[${_line},1]}"
 					target_type="${BUILD_LIST[${_line},2]}"
 #					echo ""
 #					echo "UPDATE = ${UPDATE-}"
@@ -80,17 +80,17 @@ dk_buildMain() {
 		fi
 		echo "UPDATE = ${UPDATE-}"
 		echo "target_app = ${target_app-}"
-		echo "target_tuple = ${target_tuple-}"
+		echo "Target_Tuple = ${Target_Tuple-}"
 		echo "target_type = ${target_type-}"
 		
 		[ -z "${target_app-}" ] && dk_call dk_target_app
-		[ -z "${target_tuple-}" ] && dk_call dk_target_tuple_SET
+		[ -z "${Target_Tuple-}" ] && dk_call dk_target_tuple_SET
 		[ -z "${target_type-}" ] && dk_call dk_target_type
 		
 		# save selections to DKBuilder.cache file
 		dk_call dk_echo "creating DKBuilder.cache..."
 		dk_call dk_validate DKCACHE_DIR "dk_DKCACHE_DIR"
-		dk_call dk_fileWrite "${DKCACHE_DIR}/DKBuilder.cache" "${target_app-} ${target_tuple-} ${target_type-}"
+		dk_call dk_fileWrite "${DKCACHE_DIR}/DKBuilder.cache" "${target_app-} ${Target_Tuple-} ${target_type-}"
 	
 		dk_call dk_generate	
 		dk_call dk_buildApp
@@ -99,7 +99,7 @@ dk_buildMain() {
 			dk_call dk_unset UPDATE
 		fi
 		dk_call dk_unset target_app
-		dk_call dk_unset target_tuple
+		dk_call dk_unset Target_Tuple
 		dk_call dk_unset target_type
 	done
 }

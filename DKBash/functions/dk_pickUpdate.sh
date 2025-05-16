@@ -67,7 +67,7 @@ dk_pickUpdate() {
 	if [ "${choice}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
 		target_app=${_APP_}
-		target_tuple=${_tuple_}
+		Target_Tuple=${_tuple_}
 		target_type=${_TYPE_}
 		UPDATE=1
 	elif [ "${choice}" = "1" ]; then

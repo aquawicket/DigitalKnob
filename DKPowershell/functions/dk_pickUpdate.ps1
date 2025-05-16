@@ -63,7 +63,7 @@ function Global:dk_pickUpdate() {
 	if($input -eq "0"){
 		dk_call dk_echo "repeating last selection"
 		$global:target_app = ${_APP_}
-		$global:target_tuple = ${_tuple_}
+		$global:Target_Tuple = ${_tuple_}
 		$global:target_type = ${_TYPE_}
 		$global:UPDATE = 1
 	}

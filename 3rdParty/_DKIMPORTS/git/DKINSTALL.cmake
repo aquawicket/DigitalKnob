@@ -15,10 +15,10 @@ dk_getFileParams("$ENV{DKIMPORTS_DIR}/git/dkconfig.txt")
 
 ### DOWNLOAD ###
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(WIN_X86_HOST)
+if(Win_X86_Host)
 	set(GIT_DL "${GIT_DL_WIN_X86}")
 endif()
-if(WIN_X86_64_HOST)
+if(Win_X86_64_Host)
 	set(GIT_DL "${GIT_DL_WIN_X86_64}")
 endif()
 if(Win_Host AND NOT GIT_DL)

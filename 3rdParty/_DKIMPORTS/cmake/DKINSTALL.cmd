@@ -19,12 +19,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_getFileParams 		"%~dp0/dkconfig.txt"
 	%dk_call% dk_validate 			Host_Tuple "%dk_call% dk_Host_Tuple"
-	if defined LINUX_ARM64_HOST		(set "CMAKE_IMPORT=%CMAKE_LINUX_AARCH64_IMPORT%")
-	if defined LINUX_X86_64_HOST	(set "CMAKE_IMPORT=%CMAKE_LINUX_X86_64_IMPORT%")
+	if defined Linux_Arm64_Host		(set "CMAKE_IMPORT=%CMAKE_LINUX_AARCH64_IMPORT%")
+	if defined Linux_X86_64_Host	(set "CMAKE_IMPORT=%CMAKE_LINUX_X86_64_IMPORT%")
 	if defined Mac_Host				(set "CMAKE_IMPORT=%CMAKE_MAC_UNIVERSAL_IMPORT%")
-	if defined WIN_ARM64_HOST		(set "CMAKE_IMPORT=%CMAKE_WIN_ARM64_IMPORT%")
-	if defined WIN_X86_64_HOST		(set "CMAKE_IMPORT=%CMAKE_WIN_X86_64_IMPORT%")
-	if defined WIN_X86_HOST			(set "CMAKE_IMPORT=%CMAKE_WIN_X86_IMPORT%")
+	if defined Win_Arm64_Host		(set "CMAKE_IMPORT=%CMAKE_WIN_ARM64_IMPORT%")
+	if defined Win_X86_64_Host		(set "CMAKE_IMPORT=%CMAKE_WIN_X86_64_IMPORT%")
+	if defined Win_X86_Host			(set "CMAKE_IMPORT=%CMAKE_WIN_X86_IMPORT%")
 	%dk_call% dk_assertVar 			CMAKE_IMPORT
 	
 	%dk_call% dk_basename 			"%CMAKE_IMPORT%" CMAKE_IMPORT_FILE
