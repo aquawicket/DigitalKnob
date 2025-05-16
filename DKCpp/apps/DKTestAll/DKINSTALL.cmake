@@ -11,6 +11,6 @@ dk_load(dk_builder)
 
 dk_dependAll() ## ADD any and all plugins
 
-if(LINUX_HOST)
+if(Linux_Host)
 	dk_set(EXCLUDE_ASSETS ON) #assets are too large to embed on my old 1gb x86 dell laptop
 endif()

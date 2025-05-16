@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/KDE/kdevelop
 # https://www.kdevelop.org/
 dk_load(dk_builder)
-if(NOT LINUX_HOST)
+if(NOT Linux_Host)
 	dk_undepend(kdevelop)
 	dk_return()
 endif()

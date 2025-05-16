@@ -16,7 +16,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ###### IMPORT ######
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(LINUX_HOST)	
+if(Linux_Host)	
 	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
 elseif(Mac_Host)
 	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
@@ -62,7 +62,7 @@ if(NOT EXISTS "${PYTHON_EXE}")
 		dk_replaceAll(${PYTHON_DIR} "/" "\\" PYTHON_WINPATH)
 		dk_fileWrite("${PYTHON_DIR}\\python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
 		dk_exec(${PYTHON_DIR}/python_install.cmd)
-	elseif(LINUX_HOST)
+	elseif(Linux_Host)
 		dk_import(${PYTHON_DL})
 		####   Code below used To run the command in a fresh environment    ####
 		#### exec env -i HOME="$HOME" PATH="$PATH" bash -l -c '>>COMMAND<<' ####
@@ -91,7 +91,7 @@ if(EXISTS "${PYTHON_DIR}/libs")
 endif()
 
 
-if((NOT LINUX_HOST) AND (NOT ANDROID_HOST))
+if((NOT Linux_Host) AND (NOT ANDROID_HOST))
 	dk_assertPath(PYTHON)
 	dk_assertPath(PYTHON_EXE)
 endif()

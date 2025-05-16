@@ -92,7 +92,7 @@ elseif(ANDROID_HOST OR LINUX_ARM64_HOST)
 	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	PATH "${ANDROID_NDK}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage
 elseif(LINUX_ARM64_HOST)
 	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	PATH "${ANDROID_NDK}")
-elseif(LINUX_HOST)
+elseif(Linux_Host)
 	dk_import		(${ANDROID_NDK_LINUX_IMPORT} 	PATH "${ANDROID_NDK}" PATCH)
 endif()
 

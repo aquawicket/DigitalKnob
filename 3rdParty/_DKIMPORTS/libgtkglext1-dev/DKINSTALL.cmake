@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############# libgtkglext1-dev ############
 
 dk_load(dk_builder)
-if(NOT LINUX_HOST)
+if(NOT Linux_Host)
 	dk_undepend(libgtkglext1-dev)
 	dk_return()
 endif()

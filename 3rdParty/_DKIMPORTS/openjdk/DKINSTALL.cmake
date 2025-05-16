@@ -27,7 +27,7 @@ if(ANDROID_HOST)
 	dk_command(java --version)
 endif()
 
-if(LINUX_HOST)
+if(Linux_Host)
 	dk_installPackage(openjdk-11-jdk)
 	
 	dk_command(java --version)

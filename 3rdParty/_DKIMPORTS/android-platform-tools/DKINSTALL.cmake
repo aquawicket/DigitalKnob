@@ -61,7 +61,7 @@ elseif(ANDROID_HOST)
 		dk_exec(rm -rf META-INF NOTICE aapt2 WORKING_DIRECTORY ${AAPT2})
 		dk_pause()
 	endif()
-elseif(LINUX_HOST)
+elseif(Linux_Host)
 	dk_import(${ANDROID_PLATFORM_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/platform-tools)
 endif()
 

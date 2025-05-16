@@ -52,7 +52,7 @@ if(NOT GIT_EXE)
 		# setx PATH
 	elseif(ANDROID_HOST)
 		dk_installPackage(git)
-	elseif(LINUX_HOST)
+	elseif(Linux_Host)
 		# https://stackoverflow.com/a/27469489z
 		#dk_command(${SUDO_EXE} apt-get -y install git)
 		#dk_command(${SUDO_EXE} apt-get install apt-rdepends)

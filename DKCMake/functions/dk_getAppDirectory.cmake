@@ -24,7 +24,7 @@ function(dk_getAppDirectory rtn_var)
 	elseif(IOS_HOST)
 		dk_todo() #TODO
 		set(appDirectory "/")
-	elseif(LINUX_HOST)
+	elseif(Linux_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	elseif(RASPBERRY_HOST)

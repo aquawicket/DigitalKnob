@@ -25,7 +25,7 @@ if(LINUX_X86_HOST)
 	dk_set(NASM_EXE ${NASM_DIR}/nasm)
 endif()
 
-if(LINUX_HOST)
+if(Linux_Host)
 	#dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/linux/nasm-2.16.01-0.fc36.x86_64.rpm)
 	#dk_depend(rpm)
 	#dk_command(${SUDO_EXE} rpm -i $ENV{DKDOWNLOAD_DIR}/nasm-2.16.01-0.fc36.x86_64.rpm)

@@ -3,7 +3,7 @@ message("###################### linux_arm32_gcc_toolchain.cmake ################
 message("############################################################################")
 # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 
-if(NOT LINUX_HOST)
+if(NOT Linux_Host)
 	dk_exit()
 endif()
 

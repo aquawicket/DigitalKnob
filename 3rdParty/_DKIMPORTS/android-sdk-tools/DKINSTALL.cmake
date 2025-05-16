@@ -16,7 +16,7 @@ if(Win_Host)
 	dk_import		(${ANDROID_SDK_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/tools PATCH)
 elseif(Mac_Host)
 	dk_import		(${ANDROID_SDK_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/tools PATCH)
-elseif(LINUX_HOST)
+elseif(Linux_Host)
 	dk_import		(${ANDROID_SDK_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/tools PATCH)
 endif()
 

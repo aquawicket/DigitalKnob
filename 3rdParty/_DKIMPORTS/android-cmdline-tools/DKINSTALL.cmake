@@ -29,7 +29,7 @@ if(Win_Host)
 	dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
 elseif(Mac_Host)
 	dk_import(https://dl.google.com/android/repository/commandlinetools-mac-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
-elseif(LINUX_HOST)
+elseif(Linux_Host)
 	dk_import(https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
 endif()
 
@@ -136,7 +136,7 @@ endif()
 
 
 
-#if(LINUX_HOST)
+#if(Linux_Host)
 #	if(NOT EXISTS ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 #		dk_info("Installing Android build-tools: ${ANDROID_BUILD_TOOLS_VERSION} . . .")
 #		set(ARGUMNTS "${ANDROID_SDK}/bin/sdkmanager --install build-tools\\;${ANDROID_BUILD_TOOLS_VERSION} --sdk_root=${ANDROID_SDK}")

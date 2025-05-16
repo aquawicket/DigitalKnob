@@ -22,7 +22,7 @@ endif()
 if(Mac_Host)
 	dk_import	(https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-macosx-x64.dmg)
 endif()
-if(LINUX_HOST)
+if(Linux_Host)
 	dk_import	(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz)
 endif()
 

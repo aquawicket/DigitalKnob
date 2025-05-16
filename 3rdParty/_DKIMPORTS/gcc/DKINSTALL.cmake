@@ -55,7 +55,7 @@ endif()
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/ucrt64/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/ucrt64/bin/g++.exe)
 #	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/ucrt64/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
-#elseif(LINUX_HOST)
+#elseif(Linux_Host)
 #	if(EXISTS /usr/bin/gcc)
 #		dk_set(GCC_C_COMPILER	/usr/bin/gcc)
 #	elseif(EXISTS /usr/local/bin/gcc)
