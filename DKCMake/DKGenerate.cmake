@@ -50,7 +50,7 @@ else()
 	dk_set(Target_Type Debug)		# Target_Type = Debug (DEFAULT)
 endif()
 dk_dirname(${Target_Dir} Target_Tuple_Dir)	
-if((target_dir MATCHES "Android")		OR
+if( (target_dir MATCHES "Android")		OR
 	(target_dir MATCHES "Emscripten")	OR
 	(target_dir MATCHES "Ios")			OR
 	(target_dir MATCHES "Iossim")		OR
@@ -74,11 +74,7 @@ dk_assertPath(DK_Project_Dir)
 	
 	
 	
-	
-	
 
-	
-dk_assertPath("${DK_Project_Dir}")
 
 dk_basename(${DK_Project_Dir} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
@@ -414,7 +410,7 @@ include_directories(${DKCPP_PLUGINS_DIR})
 
 
 ###########
-if(ANDROID)
+if(Android)
 	################################ CMAKE_ANDROID_GUI ########################################
 	if(CMAKE_ANDROID_GUI) # CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake
 		########################## CREATE ICONS ###############################
@@ -598,11 +594,11 @@ if(ANDROID)
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 	endif()
-endif(ANDROID)
+#endif(ANDROID)
 
 
 #############
-if(Cosmopolitan)
+elseif(Cosmopolitan)
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
 	
@@ -619,11 +615,11 @@ if(Cosmopolitan)
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-endif(Cosmopolitan)
+#endif(Cosmopolitan)
 
 
 ##############
-if(EMSCRIPTEN)
+elseif(Emscripten)
 	# TODO: https://schellcode.github.io/webassembly-without-emscripten
 	
 	########################## CREATE ICONS ###############################
@@ -748,11 +744,11 @@ if(EMSCRIPTEN)
 	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.js" "${DK_Project_Dir}/assets/"
 	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.wasm" "${DK_Project_Dir}/assets/")
 	#endif()
-endif(EMSCRIPTEN)
+#endif(Emscripten)
 
 
 #################
-if(IOS OR IOSSIM)
+elseif(Ios OR Iossim)
 	# https://github.com/forexample/testapp/blob/master/CMakeLists.txt
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
@@ -874,12 +870,12 @@ if(IOS OR IOSSIM)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
-endif(IOS OR IOSSIM)
+#endif(Ios OR Iossim)
 
 
 #########
-if(LINUX)
-if(NOT RASPBERRY)
+elseif(Linux)
+if(NOT Raspberry)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
@@ -989,12 +985,12 @@ if(NOT RASPBERRY)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
 	#CPP_Execute("chmod +x "+app_path+OS+"/${DEBUG_DIR}/"+target_app)
-endif()
-endif(LINUX)
+endif(NOT Raspberry)
+#endif(Linux)
 
 
 #######
-if(MAC)
+elseif(Mac)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
@@ -1161,11 +1157,11 @@ if(MAC)
 #				CPP_Execute(command)
 #			}
 #			*/
-endif(MAC)
+#endif(Mac)
 
 
-#############
-if(RASPBERRY)
+#################
+elseif(Raspberry)
 	########################## CREATE ICONS ###############################
 	if(EXISTS "${DK_Project_Dir}/icons/icon.png")
 		dk_createIcons("${DK_Project_Dir}/icons/icon.png")
@@ -1257,11 +1253,11 @@ if(RASPBERRY)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
 	#CPP_Execute("chmod +x "+app_path+OS+"/${DEBUG_DIR}/"+target_app)
-endif(RASPBERRY)
+#endif(Raspberry)
 
 
-##########
-if(WIN_X86)
+###############
+elseif(Win_X86)
 	########################## CREATE ICONS ###############################
 	if(EXISTS "${DK_Project_Dir}/icons/icon.png")
 		dk_createIcons("${DK_Project_Dir}/icons/icon.png")
@@ -1386,11 +1382,12 @@ if(WIN_X86)
 	
 	#CPP_DKFile_Copy(app_path+OS+"/${RELEASE_DIR}/"+target_app+".pdb", app_path+"assets/"+target_app+".pdb", true)
 	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${RELEASE_DIR}/"+target_app+".exe")
-endif(WIN_X86)
+#endif(Win_X86)
 	
-	
-##########
-if(WIN_X86_64)
+
+		
+##################
+elseif(Win_X86_64)
 	########################## CREATE ICONS ###############################
 	if(EXISTS "${DK_Project_Dir}/icons/icon.png")
 		dk_createIcons("${DK_Project_Dir}/icons/icon.png")
@@ -1497,8 +1494,11 @@ if(WIN_X86_64)
 	#)
 	#CPP_DKFile_Copy(app_path+OS+"/${RELEASE_DIR}/"+target_app+".pdb", app_path+"assets/"+target_app+".pdb", true)
 	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${RELEASE_DIR}/"+target_app+".exe")
-endif(WIN_X86_64)
+#endif(Win_X86_64)
 
+else()
+	dk_error("DKGenerate.cmake:  No Generate Proceedure for Target_Tuple:'${Target_Tuple}'")
+endif()
 
 
 dk_buildLog("\n\n")
