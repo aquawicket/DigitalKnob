@@ -62,9 +62,9 @@ function Global:dk_pickUpdate() {
 	$input = Read-Host
 	if($input -eq "0"){
 		dk_call dk_echo "repeating last selection"
-		$global:target_app = ${_APP_}
+		$global:Target_App = ${_APP_}
 		$global:Target_Tuple = ${_tuple_}
-		$global:target_type = ${_TYPE_}
+		$global:Target_Type = ${_TYPE_}
 		$global:UPDATE = 1
 	}
 	elseif($input -eq  "1"){ dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development }

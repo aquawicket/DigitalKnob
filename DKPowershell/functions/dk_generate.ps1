@@ -10,14 +10,14 @@ function Global:dk_generate() {
 	
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "     Generating $target_app - $Target_Tuple - $target_type - $target_level"
+	dk_call dk_echo "     Generating $Target_App - $Target_Tuple - $Target_Type - $Target_Level"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
 	dk_call dk_clearCmakeCache
 	dk_call dk_deleteTempFiles
 
-	$TARGET_PATH = "$DKCPP_APPS_DIR/$target_app"
+	$TARGET_PATH = "$DKCPP_APPS_DIR/$Target_App"
 	dk_call dk_printVar TARGET_PATH
 	dk_call dk_mkdir "$TARGET_PATH/$Target_Tuple"
 	cd "$TARGET_PATH/$Target_Tuple"
@@ -32,7 +32,7 @@ function Global:dk_generate() {
 	$CMAKE_TARGET_PATH = $CMAKE_TARGET_PATH -replace '\\', '/';
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
-	$target_level = "RebuildAll"
+	$Target_Level = "RebuildAll"
 	$DKLINK = "Static"
 	
 	$CMAKE_ARGS = @()
@@ -100,25 +100,25 @@ function Global:dk_generate() {
 	}
 
 	
-	if($target_type -eq "Debug"){
+	if($Target_Type -eq "Debug"){
 		$CMAKE_ARGS += "-DDEBUG=ON"
 		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
-	if($target_type -eq "Release"){ 
+	if($Target_Type -eq "Release"){ 
 		$CMAKE_ARGS += "-DDEBUG=OFF"
 		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
-	if($target_type -eq "All"){ 
+	if($Target_Type -eq "All"){ 
 		$CMAKE_ARGS += "-DDEBUG=ON"
 		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
-	if($target_level -eq "Build"){ 
+	if($Target_Level -eq "Build"){ 
 		$CMAKE_ARGS += "-DBUILD=ON"
 	}
-	if($target_level -eq "Rebuild"){ 
+	if($Target_Level -eq "Rebuild"){ 
 		$CMAKE_ARGS += "-DREBUILD=ON"
 	}
-	if($target_level -eq "RebuildAll"){ 
+	if($Target_Level -eq "RebuildAll"){ 
 		$CMAKE_ARGS += "-DREBUILDALL=ON"
 	}
 	if($DKLINK -eq "Static"){ 
@@ -132,11 +132,11 @@ function Global:dk_generate() {
 	::###### linux (WSL) ######
 	if($DK_SHELL){ $DKSCRIPT_DIR = $DKSCRIPT_DIR -replace "C:", "/mnt/c" }
 	if($DK_SHELL){ $DKSCRIPT_DIR = $DKSCRIPT_DIR -replace '\\', '/' }
-	if($DK_SHELL){ dk_call "C:\Windows\System32\wsl.exe" bash -c "export UPDATE=1 && export target_app=${target_app} && export Target_Tuple=${Target_Tuple} && export target_type=${target_type} && ${DKSCRIPT_DIR}/DKBuilder.sh && exit $(true)" }
+	if($DK_SHELL){ dk_call "C:\Windows\System32\wsl.exe" bash -c "export UPDATE=1 && export Target_App=${Target_App} && export Target_Tuple=${Target_Tuple} && export Target_Type=${Target_Type} && ${DKSCRIPT_DIR}/DKBuilder.sh && exit $(true)" }
 	if($DK_SHELL){ return }
 	
 	
-	$CMAKE_BINARY_DIR = "$CMAKE_TARGET_PATH\$Target_Tuple\$target_type"
+	$CMAKE_BINARY_DIR = "$CMAKE_TARGET_PATH\$Target_Tuple\$Target_Type"
 	$CMAKE_BINARY_DIR = $CMAKE_BINARY_DIR -replace '\\', '/';
 	dk_call dk_printVar CMAKE_BINARY_DIR
 	

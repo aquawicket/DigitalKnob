@@ -42,18 +42,18 @@ function Global:dk_buildMain() {
 	$running=1
 	while($running){  
 		if(!${UPDATE}) 		  { dk_call dk_pickUpdate;  		continue; }
-		if(!${target_app})    { dk_call dk_target_app;     	continue; }
+		if(!${Target_App})    { dk_call dk_target_app;     	continue; }
 		if(!${Target_Tuple}) { dk_call dk_target_tuple_SET;  continue; }
-		if(!${target_type})   { dk_call dk_target_type;    	continue; }
+		if(!${Target_Type})   { dk_call dk_target_type;    	continue; }
 		
 		dk_call dk_createCache
 		dk_call dk_generate	
 		dk_call dk_buildApp
 		
 		dk_call dk_unset UPDATE
-		dk_call dk_unset target_app
+		dk_call dk_unset Target_App
 		dk_call dk_unset Target_Tuple
-		dk_call dk_unset target_type
+		dk_call dk_unset Target_Type
 	}  
 }
 

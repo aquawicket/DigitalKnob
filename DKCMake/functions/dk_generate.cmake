@@ -38,7 +38,7 @@ function(dk_generate)
 	elseif("${Target_Type}" STREQUAL "All")
 		dk_arrayPush(CMAKE_ARGS "-DDEBUG=ON" "-DRELEASE=ON")
 	else()
-		dk_error("target_type:${Target_Type} is invalid")
+		dk_error("Target_Type:${Target_Type} is invalid")
 	endif()
 	
 	##############################################################

@@ -58,9 +58,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_keyboardInput input
 	if "!input!" equ "0" (
 		#%dk_call% dk_echo "repeating last selection"
-		#%dk_call% dk_set Target_App	"!_Target_App_!"
-		#%dk_call% dk_set Target_Tuple	"!_Target_Tuple_!"
-		#%dk_call% dk_set Target_Type	"!_Target_Type_!"
+		#%dk_call% dk_set Target_App	"!Target_App_Cache!"
+		#%dk_call% dk_set Target_Tuple	"!Target_Tuple_Cache!"
+		#%dk_call% dk_set Target_Type	"!Target_Type_Cache!"
 	) else if "!input!" equ "1" (
 		%dk_call% dk_set Target_Tuple 	"!Host_Tuple!"
 		%dk_call% dk_set Target_Os		"!Host_Os!"

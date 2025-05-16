@@ -133,18 +133,18 @@ dk_buildMain() {
 	while :
 	do
 		if [ -z "${UPDATE-}" ];     then dk_pickUpdate;  continue; fi
-		if [ -z "${target_app-}" ];        then dk_target_app;     continue; fi
+		if [ -z "${Target_App-}" ];        then dk_target_app;     continue; fi
 		if [ -z "${Target_Tuple-}" ];  then dk_pickOs;      continue; fi
-		if [ -z "${target_type-}" ];       then dk_target_type;    continue; fi
+		if [ -z "${Target_Type-}" ];       then dk_target_type;    continue; fi
 		
 		dk_createCache
 		dk_generate	
 		dk_buildApp
 		
 		unset UPDATE
-		unset target_app
+		unset Target_App
 		unset Target_Tuple
-		unset target_type
+		unset Target_Type
 	done
 }
 
@@ -208,9 +208,9 @@ dk_pickUpdate() {
 	read input
 	if [ "${input}" = "0" ]; then
 		dk_echo "repeating last selection"
-		target_app=$_APP_
+		Target_App=$_APP_
 		Target_Tuple=$_tuple_
-		target_type=$_TYPE_
+		Target_Type=$_TYPE_
 		UPDATE=1
 	elif [ "${input}" = "1" ]; then
 		dk_gitUpdate
@@ -247,7 +247,7 @@ dk_target_app() {
 
 
 	dk_echo
-	dk_echo "${target_app-}  ${Target_Tuple-} ${target_type-}"
+	dk_echo "${Target_App-}  ${Target_Tuple-} ${Target_Type-}"
 	
 	dk_echo
     dk_echo " 1) HelloWorld"
@@ -266,19 +266,19 @@ dk_target_app() {
 	
 	read input
 	if [ "${input}" = "1" ]; then
-		target_app="HelloWorld"
+		Target_App="HelloWorld"
 	elif [ "${input}" = "2" ]; then
-		target_app="DKCore"
+		Target_App="DKCore"
 	elif [ "${input}" = "3" ]; then
-		target_app="DKJavascript"
+		Target_App="DKJavascript"
 	elif [ "${input}" = "4" ]; then
-		target_app="DKSDL"
+		Target_App="DKSDL"
 	elif [ "${input}" = "5" ]; then
-		target_app="DKSDLRml"
+		Target_App="DKSDLRml"
 	elif [ "${input}" = "6" ]; then
-		target_app="DKDomTest"
+		Target_App="DKDomTest"
 	elif [ "${input}" = "7" ]; then
-		target_app="DKTestAll"
+		Target_App="DKTestAll"
 	elif [ "${input}" = "8" ]; then
 		dk_enterManually
 	elif [ "${input}" = "9" ]; then
@@ -303,7 +303,7 @@ dk_pickOs() {
 
 
 	dk_echo
-	dk_echo "${target_app} ${Target_Tuple-} ${target_type-}"
+	dk_echo "${Target_App} ${Target_Tuple-} ${Target_Type-}"
 	dk_echo	""
     dk_echo " 1) ${Host_Tuple-}"
 	dk_echo
@@ -420,7 +420,7 @@ dk_pickOs() {
 	elif [ "${input}" = "36" ]; then
 		clear
 	elif [ "${input}" = "37" ]; then
-		target_app=
+		Target_App=
 	elif [ "${input}" = "38" ]; then
 		exit 0
 	else
@@ -438,7 +438,7 @@ dk_target_type() {
 
 
 	dk_echo
-	dk_echo "${target_app} ${Target_Tuple} ${target_type-}"
+	dk_echo "${Target_App} ${Target_Tuple} ${Target_Type-}"
 	dk_echo	""
     dk_echo " 1) Debug"
 	dk_echo " 2) Release"
@@ -450,11 +450,11 @@ dk_target_type() {
 	
 	read input
 	if [ "${input}" = "1" ]; then
-		target_type="Debug"
+		Target_Type="Debug"
 	elif [ "${input}" = "2" ]; then
-		target_type="Release"
+		Target_Type="Release"
 	elif [ "${input}" = "3" ]; then
-		target_type="All"
+		Target_Type="All"
 	elif [ "${input}" = "4" ]; then
 		clear
 	elif [ "${input}" = "5" ]; then
@@ -503,14 +503,14 @@ dk_generate() {
 	
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "     Generating ${target_app} - ${Target_Tuple} - ${target_type} - ${target_level-}"
+	dk_echo "     Generating ${Target_App} - ${Target_Tuple} - ${Target_Type} - ${Target_Level-}"
 	dk_echo "##################################################################"
 	dk_echo
 
 	dk_clearCmakeCache
 	dk_deleteTempFiles
 
-	TARGET_PATH="${DKCPP_APPS_DIR}"/"${target_app}"
+	TARGET_PATH="${DKCPP_APPS_DIR}"/"${Target_App}"
 	dk_printVar TARGET_PATH
 	mkdir -p "${TARGET_PATH}"/"${Target_Tuple}"
 	cd "${TARGET_PATH}"/"${Target_Tuple}"
@@ -524,31 +524,31 @@ dk_generate() {
 	dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
-	target_level="RebuildAll"
+	Target_Level="RebuildAll"
 	DKLINK="Static"
 	
 	#declare -a CMAKE_ARGS
 	set --											#clear the positional parameters
-	if [ "${target_type}" = "Debug" ]; then
+	if [ "${Target_Type}" = "Debug" ]; then
 		#set -- "-DDEBUG=ON" )
 		set -- "${@}" "-DDEBUG=ON"
 		set -- "${@}" "-DRELEASE=OFF"
 	fi
-	if [ "${target_type}" = "Release" ]; then
+	if [ "${Target_Type}" = "Release" ]; then
 		set -- "${@}" "-DDEBUG=OFF"
 		set -- "${@}" "-DRELEASE=ON"
 	fi
-	if [ "${target_type}" = "All" ]; then
+	if [ "${Target_Type}" = "All" ]; then
 		set -- "${@}" "-DDEBUG=ON"
 		set -- "${@}" "-DRELEASE=ON"
 	fi
-	if [ "${target_level}" = "Build" ]; then
+	if [ "${Target_Level}" = "Build" ]; then
 		set -- "${@}" "-DBUILD=ON"
 	fi
-	if [ "${target_level}" = "Rebuild" ]; then
+	if [ "${Target_Level}" = "Rebuild" ]; then
 		set -- "${@}" "-DREBUILD=ON"
 	fi
-	if [ "${target_level}" = "RebuildAll" ]; then
+	if [ "${Target_Level}" = "RebuildAll" ]; then
 		set -- "${@}" "-DREBUILDALL=ON"
 	fi
 	if [ "$DKLINK" = "Static" ]; then
@@ -558,7 +558,7 @@ dk_generate() {
 		set -- "${@}" "-DSHARED=ON"
 	fi
 	
-	CMAKE_BINARY_DIR=${CMAKE_TARGET_PATH}/${Target_Tuple}/${target_type}
+	CMAKE_BINARY_DIR=${CMAKE_TARGET_PATH}/${Target_Tuple}/${Target_Type}
 	dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
@@ -700,32 +700,32 @@ dk_buildApp() {
 
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "****** Building ${target_app} - ${Target_Tuple} - ${target_type} - ${target_level} ******"
+	dk_echo "****** Building ${Target_App} - ${Target_Tuple} - ${Target_Type} - ${Target_Level} ******"
 	dk_echo "##################################################################"
 	dk_echo
 	
-	if [ "${target_type}" = "Debug" ] || [ "${target_type}" = "All" ]; then
-		if dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${Target_Tuple}/Debug/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${target_app}/${Target_Tuple}/Debug" "--config Debug" "--verbose"
-		elif dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${Target_Tuple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${target_app}/${Target_Tuple}" "--config Debug" "--verbose"
+	if [ "${Target_Type}" = "Debug" ] || [ "${Target_Type}" = "All" ]; then
+		if dk_pathExists "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Debug/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Debug" "--config Debug" "--verbose"
+		elif dk_pathExists "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" "--config Debug" "--verbose"
 		else
-			dk_error "Could not find CMakeCache.txt in ${target_app}/${Target_Tuple}/Debug or ${target_app}/${Target_Tuple}"
+			dk_error "Could not find CMakeCache.txt in ${Target_App}/${Target_Tuple}/Debug or ${Target_App}/${Target_Tuple}"
 		fi
 	fi
-	if [ "${target_type}" = "Release" ] || [ "${target_type}" = "All" ]; then
-		if dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${Target_Tuple}/Release/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${target_app}/${Target_Tuple}/Release" --config Release --verbose
-		elif dk_pathExists "${DKCPP_APPS_DIR}/${target_app}/${Target_Tuple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${target_app}/${Target_Tuple}" --config Release --verbose
+	if [ "${Target_Type}" = "Release" ] || [ "${Target_Type}" = "All" ]; then
+		if dk_pathExists "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Release/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Release" --config Release --verbose
+		elif dk_pathExists "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/CMakeCache.txt"; then
+			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" --config Release --verbose
 		else
-			dk_error "Could not find CMakeCache.txt in ${target_app}/${Target_Tuple}/Release or ${target_app}/${Target_Tuple}"
+			dk_error "Could not find CMakeCache.txt in ${Target_App}/${Target_Tuple}/Release or ${Target_App}/${Target_Tuple}"
 		fi
 	fi
 	
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "****** Done Building ${target_app} - ${Target_Tuple} - ${target_type} - ${target_level} ******"
+	dk_echo "****** Done Building ${Target_App} - ${Target_Tuple} - ${Target_Type} - ${Target_Level} ******"
 	dk_echo "##################################################################"
 	dk_echo
 }
@@ -1985,7 +1985,7 @@ dk_enterManually() {
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
 	
-	target_app="_${input}_"
+	Target_App="_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
 	if test -f "${DKIMPORTS_DIR}"/"${input}"/DKINSTALL.cmake; then
@@ -2000,15 +2000,15 @@ dk_enterManually() {
 	fi
 	dk_printVar TARGET_PATH
 	
-	if [ ! -d "${DKCPP_APPS_DIR}"/"${target_app}" ]; then
-		mkdir -p "${DKCPP_APPS_DIR}"/"${target_app}";
+	if [ ! -d "${DKCPP_APPS_DIR}"/"${Target_App}" ]; then
+		mkdir -p "${DKCPP_APPS_DIR}"/"${Target_App}";
 	fi
 	
-	# create apps/<target_app>/DKINSTALL.cmake 
-	echo "dk_depend(${input})" > "${DKCPP_APPS_DIR}"/"${target_app}"/DKINSTALL.cmake
+	# create apps/<Target_App>/DKINSTALL.cmake 
+	echo "dk_depend(${input})" > "${DKCPP_APPS_DIR}"/"${Target_App}"/DKINSTALL.cmake
 	
-	# create apps/<target_app>/main.cpp
-	echo "int main(int argc, char** argv) { return 0; }" > "${DKCPP_APPS_DIR}"/"${target_app}"/main.cpp
+	# create apps/<Target_App>/main.cpp
+	echo "int main(int argc, char** argv) { return 0; }" > "${DKCPP_APPS_DIR}"/"${Target_App}"/main.cpp
 }
 
 
@@ -2023,9 +2023,9 @@ dk_createCache() {
 	dk_echo "creating DKBuilder.cache..."
 	
 	# write variable values line by line
-	echo "${target_app}">"${DKCACHE_DIR}/DKBuilder.cache"
+	echo "${Target_App}">"${DKCACHE_DIR}/DKBuilder.cache"
 	echo "${Target_Tuple}">>"${DKCACHE_DIR}/DKBuilder.cache"
-	echo "${target_type}">>"${DKCACHE_DIR}/DKBuilder.cache"
+	echo "${Target_Type}">>"${DKCACHE_DIR}/DKBuilder.cache"
 	#echo "$DKENV">>"${DKCACHE_DIR}/DKBuilder.cache"
 }
 

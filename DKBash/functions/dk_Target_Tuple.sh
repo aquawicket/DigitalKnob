@@ -26,16 +26,16 @@ dk_Target_Tuple() {
 	dk_call dk_realpath "${CMAKE_BINARY_DIR}" Target_Dir
 	dk_call dk_printVar Target_Dir 							# Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang/Debug
 
-	#### Set target_type / TARGET_TYPE ###
+	#### Set Target_Type / TARGET_TYPE ###
 	if [ "${Target_Dir}" = "Debug" ]; then	
 		### Get DEBUG ###
-		dk_call dk_set DKBUILD_TYPE DEBUG					# DKBUILD_TYPE	= DEBUG
-		dk_call dk_set ${DKBUILD_TYPE} 1					# DEBUG = 1	
+		dk_call dk_set Target_Type DEBUG					# Target_Type	= DEBUG
+		dk_call dk_set ${Target_Type} 1					# DEBUG = 1	
 		dk_call dk_dirname Target_Dir Target_Tuple_Dir		# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
 	elif [ "${Target_Dir}" = "Release" ]; then
 		### Get RELEASE ###
-		dk_call dk_set DKBUILD_TYPE RELEASE 				# DKBUILD_TYPE = RELEASE
-		dk_call dk_set ${DKBUILD_TYPE} 1					# RELEASE = 1	
+		dk_call dk_set Target_Type RELEASE 				# Target_Type = RELEASE
+		dk_call dk_set ${Target_Type} 1					# RELEASE = 1	
 		dk_call dk_dirname ${Target_Dir} Target_Tuple_Dir	# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
 	fi
 

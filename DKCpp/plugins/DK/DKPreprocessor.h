@@ -331,9 +331,9 @@
 
 // BUILD_TYPE
 #if DEBUG
-#	define DKBUILD_TYPE "DEBUG"
+#	define Target_Type "DEBUG"
 #else
-#	define DKBUILD_TYPE "RELEASE"
+#	define Target_Type "RELEASE"
 #endif
 
 // RTTI

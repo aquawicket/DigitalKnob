@@ -43,16 +43,16 @@ function(dk_Target_Tuple)
 		dk_set(Target_Type Debug)						# Target_Type = Debug (DEFAULT)
 	endif()
 	#d_k_toCamel(${Target_Type} Target_Type)			# Target_Type = Debug
-	dk_toLower(${Target_Type} target_type)				# target_type = debug
+	dk_toLower(${Target_Type} Target_Type)				# Target_Type = debug
 	dk_toUpper(${Target_Type} TARGET_TYPE)				# TARGET_TYPE = DEBUG
 	#dk_printVar(Target_Type)							
-	#dk_printVar(target_type)							
+	#dk_printVar(Target_Type)							
 	#dk_printVar(TARGET_TYPE)							
 	dk_set(${Target_Type} 1)							# Debug		  = 1
-	dk_set(${target_type} 1)							# debug		  = 1
+	dk_set(${Target_Type} 1)							# debug		  = 1
 	dk_set(${TARGET_TYPE} 1)							# DEBUG		  = 1
 	#dk_printVar(${Target_Type})							
-	#dk_printVar(${target_type})							
+	#dk_printVar(${Target_Type})							
 	#dk_printVar(${TARGET_TYPE})							
 	
 	### Set Target_Tuple_Dir ###

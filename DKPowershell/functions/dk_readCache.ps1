@@ -5,7 +5,7 @@ if(!$dk_readCache){ $dk_readCache = 1 } else{ return } #include guard
 # dk_readCache()
 #
 #
-function Global:dk_readCache($target_app, $Target_Tuple, $target_type) {
+function Global:dk_readCache($Target_App, $Target_Tuple, $Target_Type) {
 	dk_debugFunc 3
 	
 	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
@@ -17,13 +17,13 @@ function Global:dk_readCache($target_app, $Target_Tuple, $target_type) {
 	
 	foreach($line in Get-Content "${DKCACHE_DIR}/DKBuilder.cache") {
 		if("${count}" -eq "0"){
-			Set-Variable -scope global -Name "$target_app" -Value $line
+			Set-Variable -scope global -Name "$Target_App" -Value $line
 		}
 		if("${count}" -eq "1"){
 			Set-Variable -scope global -Name "$Target_Tuple" -Value $line
 		}
 		if("${count}" -eq "2"){
-			Set-Variable -scope global -Name "$target_type" -Value $line
+			Set-Variable -scope global -Name "$Target_Type" -Value $line
 		}
 		$count++
 	}

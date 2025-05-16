@@ -11,7 +11,7 @@ function Global:dk_enterManually() {
 	dk_call dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	
 	$input = Read-Host
-	$global:target_app = "_${input}_"
+	$global:Target_App = "_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
 	if(dk_call dk_pathExists "$DKIMPORTS_DIR/$input/DKINSTALL.cmake"){
@@ -26,15 +26,15 @@ function Global:dk_enterManually() {
 	}
 	dk_call dk_printVar TARGET_PATH
 	
-	if(!(dk_call dk_pathExists "$DKCPP_APPS_DIR/$target_app")){
-		dk_call dk_mkdir "$DKCPP_APPS_DIR/$target_app"
+	if(!(dk_call dk_pathExists "$DKCPP_APPS_DIR/$Target_App")){
+		dk_call dk_mkdir "$DKCPP_APPS_DIR/$Target_App"
 	}
 	
-	# create DKCpp/apps/<target_app>/DKINSTALL.cmake 
-	echo "dk_call dk_depend($input)" > "$DKCPP_APPS_DIR/$target_app/DKINSTALL.cmake"
+	# create DKCpp/apps/<Target_App>/DKINSTALL.cmake 
+	echo "dk_call dk_depend($input)" > "$DKCPP_APPS_DIR/$Target_App/DKINSTALL.cmake"
 	
-	# create DKCpp/apps/<target_app>/main.cpp
-	echo "int main(int argc, char** argv) { return 0; }" > "$DKCPP_APPS_DIR/$target_app/main.cpp"
+	# create DKCpp/apps/<Target_App>/main.cpp
+	echo "int main(int argc, char** argv) { return 0; }" > "$DKCPP_APPS_DIR/$Target_App/main.cpp"
 }
 
 

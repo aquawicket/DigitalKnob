@@ -39,7 +39,7 @@ int main(int argc, char** argv){
 	//printf("Compiler    = %s %s \n", DKCOMPILER, DKCOMPILER_VERSION);
 	printf("C Version   = %s \n", DKC_LANGUAGE_VERSION);
 	printf("C++ Version = %s \n", DKCPP_LANGUAGE_VERSION);
-	printf("Build type  = %s \n", DKBUILD_TYPE);
+	printf("Target_Type = %s \n", Target_Type);
 	
 	printf("Hello World! from printf\n");
     std::cout << "Hello World! from std::cout" << std::endl;

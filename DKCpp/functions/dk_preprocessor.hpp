@@ -421,11 +421,11 @@
 #	define DKCPP_LANGUAGE_VERSION 	STR(UNKNOWN)
 #endif
 
-////// DKBUILD_TYPE //////
+////// Target_Type //////
 #if DEBUG
-#	define DKBUILD_TYPE 			STR(DEBUG)
+#	define Target_Type 			STR(DEBUG)
 #else
-#	define DKBUILD_TYPE 			STR(RELEASE)
+#	define Target_Type 			STR(RELEASE)
 #endif
 
 // RTTI

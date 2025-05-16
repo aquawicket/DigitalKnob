@@ -165,7 +165,7 @@ DKApp::DKApp(int _argc, char** _argv){
 	GetOSFlag(osFlag);
 	DKString buildType;
 
-	DKINFO(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE) + "\n");
+	DKINFO(appName + " " + version + " " + osFlag + " " + toString(Target_Type) + "\n");
 	DKINFO("OS:          " + toString(DKOS) + "\n");
 	DKINFO("OS Version:  " + toString(DKOS_VERSION) + "\n");
 	DKINFO("Processor:   " + toString(DKARCH) + "\n");
@@ -173,11 +173,11 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKINFO("Compiler:    " + toString(DKCOMPILER) + " " + toString(DKCOMPILER_VERSION)+ "\n");
 	DKINFO("C Version:   " + toString(DKC_LANGUAGE_VERSION) + "\n");
 	DKINFO("C++ Version: " + toString(DKCPP_LANGUAGE_VERSION) + "\n");
-	DKINFO("Build type:  " + toString(DKBUILD_TYPE) + "\n");
+	DKINFO("Target_Type: " + toString(Target_Type) + "\n");
 
 	#if WIN
 		DKWindows::CreateConsoleHandler();
-		DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE));
+		DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(Target_Type));
 	#endif
 	DKString osInfo;
 	GetOSInfo(osInfo);

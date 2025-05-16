@@ -52,7 +52,7 @@ int main(int argc, char** argv){
 	printf("DKCOMPILER_VERSION     = %s \n", DKCOMPILER_VERSION);
 	printf("DKC_LANGUAGE_VERSION   = %s \n", DKC_LANGUAGE_VERSION);
 	printf("DKCPP_LANGUAGE_VERSION = %s \n", DKCPP_LANGUAGE_VERSION);
-	printf("DKBUILD_TYPE           = %s \n", DKBUILD_TYPE);
+	printf("Target_Type            = %s \n", Target_Type);
 	
 	return 0;
 }

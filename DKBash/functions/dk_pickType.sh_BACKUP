@@ -9,7 +9,7 @@ dk_pickType() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_echo "${APP-} ${Target_Tuple-} ${target_type-}"
+	dk_echo "${APP-} ${Target_Tuple-} ${Target_Type-}"
 	dk_echo	
     dk_echo " 1) Debug"
 	dk_echo " 2) Release"
@@ -23,11 +23,11 @@ dk_pickType() {
 	dk_call dk_keyboardInputTimeout choice 1 60 
 	
 	if [ "${choice}" = "1" ]; then
-		target_type="Debug"
+		Target_Type="Debug"
 	elif [ "${choice}" = "2" ]; then
-		target_type="Release"
+		Target_Type="Release"
 	elif [ "${choice}" = "3" ]; then
-		target_type="All"
+		Target_Type="All"
 	elif [ "${choice}" = "4" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "5" ]; then

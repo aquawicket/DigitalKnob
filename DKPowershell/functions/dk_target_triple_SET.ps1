@@ -9,7 +9,7 @@ function Global:dk_target_tuple_SET() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "${target_app} ${Target_Tuple} ${target_type}"
+	dk_call dk_echo "${Target_App} ${Target_Tuple} ${Target_Type}"
 	dk_call dk_echo	
     dk_call dk_echo " 1) ${Host_Tuple}"
 	dk_call dk_echo
@@ -91,7 +91,7 @@ function Global:dk_target_tuple_SET() {
 	elseif(${input} -eq "35"){ $global:Target_Tuple = "Win_X86_64_Msvc" }
 	elseif(${input} -eq "36"){ $global:Target_Tuple = "Win_X86_64_Ucrt" }
 	elseif(${input} -eq "37"){ dk_call dk_clearScreen }
-	elseif(${input} -eq "38"){ dk_call dk_unset target_app }
+	elseif(${input} -eq "38"){ dk_call dk_unset Target_App }
 	elseif(${input} -eq "39"){ dk_call dk_exit 0 }
 	else{ dk_call dk_warning "invalid selection" }
 }

@@ -11,9 +11,9 @@ function Global:dk_createCache() {
 	dk_call dk_echo "creating DKBuilder.cache..."
 	
 	# write variable values line by line
-	echo "$target_app">"${DKCACHE_DIR}/DKBuilder.cache"
+	echo "$Target_App">"${DKCACHE_DIR}/DKBuilder.cache"
 	echo "$Target_Tuple">>"${DKCACHE_DIR}/DKBuilder.cache"
-	echo "$target_type">>"${DKCACHE_DIR}/DKBuilder.cache"
+	echo "$Target_Type">>"${DKCACHE_DIR}/DKBuilder.cache"
 	#echo "$DKENV">>"${DKCACHE_DIR}/DKBuilder.cache"
 }
 

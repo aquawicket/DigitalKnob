@@ -12,7 +12,7 @@ dk_target_app() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_echo "${target_app-} ${Target_Tuple-} ${target_type-}"
+	dk_echo "${Target_App-} ${Target_Tuple-} ${Target_Type-}"
 	dk_echo
     dk_echo " 1) HelloWorld"
 	dk_echo " 2) DKPreprocessor"
@@ -33,21 +33,21 @@ dk_target_app() {
 	dk_call dk_keyboardInputTimeout choice 23 60 
 	
 	if [ "${choice}" = "1" ]; then
-		target_app="HelloWorld"
+		Target_App="HelloWorld"
 	elif [ "${choice}" = "2" ]; then
-		target_app="DKPreprocessor"
+		Target_App="DKPreprocessor"
 	elif [ "${choice}" = "3" ]; then
-		target_app="DKCore"
+		Target_App="DKCore"
 	elif [ "${choice}" = "4" ]; then
-		target_app="DKJavascript"
+		Target_App="DKJavascript"
 	elif [ "${choice}" = "5" ]; then
-		target_app="DKSDL"
+		Target_App="DKSDL"
 	elif [ "${choice}" = "6" ]; then
-		target_app="DKSDLRml"
+		Target_App="DKSDLRml"
 	elif [ "${choice}" = "7" ]; then
-		target_app="DKDomTest"
+		Target_App="DKDomTest"
 	elif [ "${choice}" = "8" ]; then
-		target_app="DKTestAll"
+		Target_App="DKTestAll"
 	elif [ "${choice}" = "9" ]; then
 		dk_call dk_enterManually
 	elif [ "${choice}" = "10" ]; then

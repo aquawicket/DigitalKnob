@@ -13,12 +13,12 @@ dk_generate() {
 
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "     Generating ${target_app-} - ${Target_Tuple-} - ${target_type-} - ${target_level-}"
+	dk_call dk_echo "     Generating ${Target_App-} - ${Target_Tuple-} - ${Target_Type-} - ${Target_Level-}"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
 	dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
-	TARGET_PATH="${DKCPP_APPS_DIR}/${target_app}"
+	TARGET_PATH="${DKCPP_APPS_DIR}/${Target_App}"
 	#dk_call dk_printVar TARGET_PATH
 	dk_call dk_mkdir "${TARGET_PATH}/${Target_Tuple,,}"
 	dk_call dk_chdir "${TARGET_PATH}/${Target_Tuple,,}"
@@ -34,33 +34,33 @@ dk_generate() {
 	#dk_call dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
-	target_level="RebuildAll"
+	Target_Level="RebuildAll"
 	DKLINK="Static"
 	
 	#declare -a CMAKE_ARGS
 	#set --											#clear the positional parameters
 	CMAKE_ARGS=()
 	dk_call dk_arrayPush CMAKE_ARGS "-DDKCMAKE_FUNCTIONS_DIR_=${DKCMAKE_FUNCTIONS_DIR_}"
-	if [ "${target_type}" = "Debug" ]; then
+	if [ "${Target_Type}" = "Debug" ]; then
 		#set -- "-DDEBUG=ON" )
 		#set -- "${@}" "-DDEBUG=ON"
 		dk_call dk_arrayPush CMAKE_ARGS "-DDEBUG=ON" "-DRELEASE=OFF"
-	elif [ "${target_type}" = "Release" ]; then
+	elif [ "${Target_Type}" = "Release" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DDEBUG=OFF" "-DRELEASE=ON"
-	elif [ "${target_type}" = "All" ]; then
+	elif [ "${Target_Type}" = "All" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DDEBUG=ON" "-DRELEASE=ON"
 	else
-		dk_call dk_error "target_type:${target_type} is invalid"
+		dk_call dk_error "Target_Type:${Target_Type} is invalid"
 	fi
 	
-	if [ "${target_level}" = "Build" ]; then
+	if [ "${Target_Level}" = "Build" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DBUILD=ON"
-	elif [ "${target_level}" = "Rebuild" ]; then
+	elif [ "${Target_Level}" = "Rebuild" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DREBUILD=ON"
-	elif [ "${target_level}" = "RebuildAll" ]; then
+	elif [ "${Target_Level}" = "RebuildAll" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DREBUILDALL=ON"
 	else
-		dk_call dk_error "target_level:${target_level} is invalid"
+		dk_call dk_error "Target_Level:${Target_Level} is invalid"
 	fi
 	
 	if [ "${DKLINK}" = "Static" ]; then
@@ -70,7 +70,7 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-DSHARED=ON"
 	fi
 	
-	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${Target_Tuple,,}/${target_type}"
+	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${Target_Tuple,,}/${Target_Type}"
 	dk_call dk_mkdir "${CMAKE_BINARY_DIR}"
 	#dk_call dk_printVar CMAKE_BINARY_DIR
 	

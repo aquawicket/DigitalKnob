@@ -89,7 +89,7 @@ int main(int argc, char** argv){
 	std::cout << "DKCOMPILER_VERSION     	" << DKCOMPILER_VERSION << "\n";
 	std::cout << "DKC_LANGUAGE_VERSION   	" << DKC_LANGUAGE_VERSION << "\n";
 	std::cout << "DKCPP_LANGUAGE_VERSION	" << DKCPP_LANGUAGE_VERSION << "\n";
-	std::cout << "DKBUILD_TYPE           	" << DKBUILD_TYPE << "\n";
+	std::cout << "Target_Type           	" << Target_Type << "\n";
 
 	return 0;
 }

@@ -64,9 +64,9 @@ dk_Target_Tuple_SET() {
 	dk_call dk_keyboardInput input
 	if [ "${input}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
-		#dk_call dk_set Target_App 	${_Target_App_)
+		#dk_call dk_set Target_App 	${Target_App_Cache)
 		#dk_call dk_set Target_Os 	${_Target_Os_}
-		#dk_call dk_set Target_Type ${_Target_Type_}
+		#dk_call dk_set Target_Type ${Target_Type_Cache}
 	elif [ "${input}" = "1" ]; then
 		dk_call dk_set Target_Tuple 	${Host_Tuple}
 		dk_call dk_set Target_Os     	${Host_Os}
