@@ -86,7 +86,7 @@ dk_set(ANDROID_NDK "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
 dk_mkdir	("${ANDROID_SDK_DIR}/ndk")
 if(Win_Host)
 	dk_import		(${ANDROID_NDK_WIN_IMPORT} 		PATH "${ANDROID_NDK}" VERSION "${ANDROID_NDK_BUILD}" PATCH)
-elseif(MAC_HOST)
+elseif(Mac_Host)
 	dk_import		(${ANDROID_NDK_MAC_IMPORT} 		PATH "${ANDROID_NDK}" PATCH)
 elseif(ANDROID_HOST OR LINUX_ARM64_HOST)
 	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	PATH "${ANDROID_NDK}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage

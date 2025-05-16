@@ -33,7 +33,7 @@ if(LINUX_HOST)
 	dk_command(java --version)
 endif()
 
-if(MAC_HOST)
+if(Mac_Host)
 	if(NOT EXISTS /Library/Java/JavaVirtualMachines/jdk-11.jdk)
 		dk_download(${OPENJDK_DL_MAC_X86_64} $ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 		dk_command(tar xf $ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)

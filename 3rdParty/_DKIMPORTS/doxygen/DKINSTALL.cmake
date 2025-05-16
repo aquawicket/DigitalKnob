@@ -28,7 +28,7 @@ if(NOT EXISTS ${DOXYGEN_EXE})
 	if(Win_Host)
 		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6-setup.exe)
 		dk_command($ENV{DKDOWNLOAD_DIR}/doxygen-1.9.6-setup.exe)
-	elseif(MAC_HOST)
+	elseif(Mac_Host)
 		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/Doxygen-1.9.6.dmg) #FIXME:  The Downloaded file is a BYPASS file .dmg
 		dk_command($ENV{DKDOWNLOAD_DIR}/Doxygen-1.9.6.dmg)
 	else()

@@ -13,7 +13,7 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 ### INSTALL ###
 if(Win_Host)
 	dk_exec(${PYTHON}/Scripts/pip install PyYAML)
-elseif(MAC_HOST)
+elseif(Mac_Host)
 	dk_exec(pip install PyYAML)
 else()
 	dk_installPackage(python-yaml)

@@ -8,8 +8,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ agl ############
 # https://developer.apple.com/documentation/agl/agl?language=objc
 
-dk_validate(Host_Tuple ${Host_Tuple})
-if(NOT MAC_HOST)
+dk_validate(Host_Os ${Host_Os})
+if(NOT Mac_Host)
 	dk_undepend(agl)
 	dk_return()
 endif()

@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #
 
 dk_validate(Host_Tuple ${Host_Tuple})
-if(NOT MAC_HOST)
+if(NOT Mac_Host)
 	dk_undepend(appkit)
 	dk_return()
 endif()

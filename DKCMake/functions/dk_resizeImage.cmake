@@ -35,7 +35,7 @@ function(dk_resizeImage)
 			set(cmnd ${BASH_EXE} -c "${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath}")
 		endif()
 
-	elseif(MAC_HOST)
+	elseif(Mac_Host)
 		dk_exec(sips -z ${width} ${height} ${inpath} --out ${outpath})
 
 	else()

@@ -12,7 +12,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://www.xmodulo.com/fix-failed-to-run-aclocal.html
 # https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install
 
-if(MAC_HOST)
+if(Mac_Host)
 	dk_depend			(autogen)
 	dk_depend			(autoconf)
 	dk_depend			(automake)

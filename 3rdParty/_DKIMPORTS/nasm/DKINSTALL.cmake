@@ -37,7 +37,7 @@ if(LINUX_HOST)
 	dk_set(NASM_EXE ${NASM_DIR}/nasm)
 endif()
 
-if(MAC_HOST)
+if(Mac_Host)
 	dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/macosx/nasm-2.16.01-macosx.zip)
 	dk_set(NASM_EXE ${NASM_DIR}/nasm)
 endif()

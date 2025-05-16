@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ imageio ###########
 # https://developer.apple.com/documentation/imageio
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(NOT MAC_HOST)
+if(NOT Mac_Host)
 	dk_undepend(imageio)
 	dk_return()
 endif()

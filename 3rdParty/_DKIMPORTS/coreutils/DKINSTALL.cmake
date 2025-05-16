@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ coreutils ############
 # https://formulae.brew.sh/formula/coreutils
 
-if(NOT MAC_HOST)
+if(NOT Mac_Host)
 	dk_undepend(coreutils)
 	dk_return()
 endif()

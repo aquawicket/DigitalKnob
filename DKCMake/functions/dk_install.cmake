@@ -173,7 +173,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}) # "dk_install():167")
 		
 		if(${PLUGIN_URL_EXTENSION} STREQUAL ".pkg")
-			if(MAC_HOST)
+			if(Mac_Host)
 				dk_exec(chmod 777 ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
 				dk_depend(sudo)
 				dk_exec(${SUDO_EXE} -s installer -pkg ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} -target /)

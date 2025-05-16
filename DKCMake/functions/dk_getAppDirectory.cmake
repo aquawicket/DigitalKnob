@@ -18,7 +18,7 @@ function(dk_getAppDirectory rtn_var)
 		if(${USE_32BIT} AND ${WIN_X86_64_HOST})
 			set(appDirectory "C:/Program Files (x86)")
 		endif()
-	elseif(MAC_HOST)
+	elseif(Mac_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	elseif(IOS_HOST)

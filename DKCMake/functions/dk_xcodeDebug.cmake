@@ -13,7 +13,7 @@ include_guard()
 function(dk_xcodeDebug path)
 	dk_debugFunc()
 	
-	if(NOT MAC_HOST)
+	if(NOT Mac_Host)
 		dk_return()
 	endif()
 	

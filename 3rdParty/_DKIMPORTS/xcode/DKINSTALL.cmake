@@ -12,7 +12,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_load(dk_builder)
 
-if(NOT MAC_HOST)
+if(NOT Mac_Host)
 	dk_undepend(xcode)
 	dk_return()
 endif()
