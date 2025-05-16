@@ -17,10 +17,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	TARGET_OS   							= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
 ::#	Target_Arch								= arm32, arm64, x86, x86_64
 ::#	Target_Arch								= ARM32, ARM64, X86, X86_64
-::#	Target_Env								= clang, cosmopolitan, mingw, msvc, ucrt
-::#	TARGET_ENV								= CLANG, cosmopolitan, MINGW, MSVC, UCRT
+::#	Target_Env								= clang, Cosmopolitan, mingw, msvc, ucrt
+::#	TARGET_ENV								= CLANG, Cosmopolitan, MINGW, MSVC, UCRT
 ::# <Target_Os>_<Target_Arch>				= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
-::# <Target_Os>_<Target_Arch>_<Target_Env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
+::# <Target_Os>_<Target_Arch>_<Target_Env>	= Android_Arm64_Clang, emscripten_arm64_clang, Ios_Arm64_Clang, Iossim_Arm64_Clang, Linux_Arm64_Clang, Mac_Arm64_Clang, Raspberry_Arm64_Clang, windows_arm64_clang
 ::#
 :dk_Target_Tuple
 ::%setlocal%
@@ -113,7 +113,7 @@ goto:eof
 		%dk_call% dk_containsCI "!Target_Tuple!" "Arm32" 			&& !dk_call! dk_set Target_Arch Arm32
 		%dk_call% dk_containsCI "!Target_Tuple!" "X86_64" 			&& !dk_call! dk_set Target_Arch X86_64
 		%dk_call% dk_containsCI "!Target_Tuple!" "X86" 				&& !dk_call! dk_set Target_Arch X86
-		%dk_call% dk_containsCI "!Target_Tuple!" "Cosmopolitan" 	&& !dk_call! dk_set Target_Arch cosmopolitan	
+		%dk_call% dk_containsCI "!Target_Tuple!" "Cosmopolitan" 	&& !dk_call! dk_set Target_Arch Cosmopolitan	
 		if not defined Target_Arch (
 			!dk_call! dk_warning "The target Target_Tuple:!Target_Tuple! does not contain a valid Target_Arch"
 			!dk_call! dk_Target_Tuple_SET

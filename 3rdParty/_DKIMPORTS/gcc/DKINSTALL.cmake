@@ -31,7 +31,7 @@ elseif(Win_X86_64_Gcc)
 	dk_set(GCC_CXX_COMPILER 	"${MINGW64_BIN}/g++.exe")
 	dk_set(GCC_RC_COMPILER  	"${MINGW64_BIN}/windres.exe")
 endif()
-#if(win_x86_clang)
+#if(Win_X86_Clang)
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clang32/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clang32/bin/g++.exe)
 #	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/clang32/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
@@ -39,7 +39,7 @@ endif()
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clang64/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clang64/bin/g++.exe)
 #	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/clang64/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
-#elseif(win_arm64_clang)
+#elseif(Win_Arm64_Clang)
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clangarm64/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clangarm64/bin/g++.exe)
 #	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/clangarm64/bin/windres.exe)	# TODO:  move to DKIMPORTS/windres
@@ -51,7 +51,7 @@ endif()
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/mingw64/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/mingw64/bin/g++.exe)
 #	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/mingw64/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
-#elseif(win_x86_64_ucrt)
+#elseif(Win_X86_64_Ucrt)
 #	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/ucrt64/bin/gcc.exe)
 #	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/ucrt64/bin/g++.exe)
 #	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/ucrt64/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres

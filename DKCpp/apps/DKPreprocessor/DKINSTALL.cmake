@@ -27,7 +27,7 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "	${CMAKE_CURRENT_LIST_D
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "list(FILTER App_SRC EXCLUDE REGEX \"${CMAKE_CURRENT_LIST_DIR}/assets/*\") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "list(FILTER App_SRC EXCLUDE REGEX \"${CMAKE_CURRENT_LIST_DIR}/${Target_Tuple}/*\") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")
-dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "dk_validate(Target_Tuple \"dk_target_tuple()\") \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "dk_validate(Target_Tuple \"dk_Target_Tuple()\") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "if(MSVC) \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "	add_executable(${APP_NAME} WIN32 \${App_SRC}) \n")

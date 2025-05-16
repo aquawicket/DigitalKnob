@@ -18,7 +18,7 @@ Ios_X86_64_Clang
 Iossim_Arm32_Clang
 Iossim_Arm64_Clang
 Iossim_X86_Clang
-Iossim_X86_64_Clang
+Iossim_X86_Clang
 Linux_Arm32_Clang
 Linux_Arm64_Clang
 Linux_X86_Clang

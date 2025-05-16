@@ -100,7 +100,7 @@ dk_Target_Tuple() {
 	dk_call dk_containsCI "${Target_Tuple}" "Arm32" 			&& dk_call dk_set Target_Arch arm32
 	dk_call dk_containsCI "${Target_Tuple}" "X86_64" 			&& dk_call dk_set Target_Arch x86_64
 	dk_call dk_containsCI "${Target_Tuple}" "X86" 				&& dk_call dk_set Target_Arch x86
-	dk_call dk_containsCI "${Target_Tuple}" "Cosmopolitan" 		&& dk_call dk_set Target_Arch cosmopolitan	
+	dk_call dk_containsCI "${Target_Tuple}" "Cosmopolitan" 		&& dk_call dk_set Target_Arch Cosmopolitan	
 	
 	if [ -z "${Target_Arch-}" ]; then
 		dk_call dk_warning "The target Target_Tuple:${Target_Tuple} does not contain a valid Target_Arch"

@@ -86,7 +86,7 @@ function(dk_generate)
 	#dk_arrayPush(CMAKE_ARGS "--warn-unused-vars")
 	#dk_arrayPush(CMAKE_ARGS "--check-system-vars")
 	
-	if("${Target_Tuple}" STREQUAL "cosmopolitan")
+	if("${Target_Tuple}" STREQUAL "Cosmopolitan")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
@@ -94,70 +94,70 @@ function(dk_generate)
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "android_arm32_clang")
+	if("${Target_Tuple}" STREQUAL "Android_Arm32_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 
-	if("${Target_Tuple}" STREQUAL "android_arm64_clang")
+	if("${Target_Tuple}" STREQUAL "Android_Arm64_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "emscripten_x86_clang")
+	if("${Target_Tuple}" STREQUAL "Emscripten_X86_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "ios_arm32_clang")
+	if("${Target_Tuple}" STREQUAL "Ios_Arm32_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "ios_arm64_clang")
+	if("${Target_Tuple}" STREQUAL "Ios_Arm64_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "iossim_x86_clang")
+	if("${Target_Tuple}" STREQUAL "Iossim_X86_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "iossim_x86_64_clang")
+	if("${Target_Tuple}" STREQUAL "Iossim_X86_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "linux_x86_clang")
+	if("${Target_Tuple}" STREQUAL "Linux_X86_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "linux_x86_64_clang")
+	if("${Target_Tuple}" STREQUAL "Linux_X86_64_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "mac_x86_clang")
+	if("${Target_Tuple}" STREQUAL "Mac_X86_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "mac_x86_64_clang")
+	if("${Target_Tuple}" STREQUAL "Mac_X86_64_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "raspberry_arm32_clang")
+	if("${Target_Tuple}" STREQUAL "Raspberry_Arm32_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "raspberry_arm64_clang")
+	if("${Target_Tuple}" STREQUAL "Raspberry_Arm64_Clang")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "win_arm64_clang")
+	if("${Target_Tuple}" STREQUAL "Win_Arm64_Clang")
 		dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "win_x86_clang")
+	if("${Target_Tuple}" STREQUAL "Win_X86_Clang")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "win_x86_gcc")
+	if("${Target_Tuple}" STREQUAL "Win_X86_Gcc")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32")
 	endif()
@@ -169,17 +169,17 @@ function(dk_generate)
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "win_x86_64_gcc")
+	if("${Target_Tuple}" STREQUAL "Win_X86_64_Gcc")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "win_x86_64_ucrt")
+	if("${Target_Tuple}" STREQUAL "Win_X86_64_Ucrt")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "win_x86_64_msvc")
+	if("${Target_Tuple}" STREQUAL "Win_X86_64_Msvc")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Visual Studio 17 2022")
 	endif()
 

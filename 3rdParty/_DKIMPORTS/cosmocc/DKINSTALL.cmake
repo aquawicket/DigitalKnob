@@ -14,7 +14,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_import(https://cosmo.zip/pub/cosmocc/cosmocc.zip)
 
 #dk_set(COSMO		 							1)
-#dk_set(COSMOPOLITAN 							1)
+#dk_set(Cosmopolitan 							1)
 
 #dk_validate(Host_Tuple 						"dk_Host_Tuple()")
 #dk_validate(ENV{DKIMPORTS_DIR}						"dk_DKIMPORTS_DIR()")

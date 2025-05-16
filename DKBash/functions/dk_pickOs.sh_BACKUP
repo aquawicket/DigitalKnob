@@ -15,7 +15,7 @@ dk_pickOs() {
 	dk_echo	""
     dk_echo " 1) ${Host_Tuple}"
 	dk_echo
-	dk_echo " 2) cosmopolitan"
+	dk_echo " 2) Cosmopolitan"
 	dk_echo " 3) Android arm32"
 	dk_echo " 4) Android arm64"
 	dk_echo " 5) Android x86"
@@ -96,9 +96,9 @@ dk_pickOs() {
 	elif [ "${choice}" = "18" ]; then
 		Target_Tuple="linux_x86"
 	elif [ "${choice}" = "19" ]; then
-		Target_Tuple="linux_x86_64_clang"
+		Target_Tuple="Linux_X86_64_Clang"
 	elif [ "${choice}" = "20" ]; then
-		Target_Tuple="linux_x86_64_gcc"
+		Target_Tuple="Linux_X86_64_Gcc"
 	elif [ "${choice}" = "21" ]; then
 		Target_Tuple="mac_arm32"
 	elif [ "${choice}" = "22" ]; then
@@ -118,21 +118,21 @@ dk_pickOs() {
 	elif [ "${choice}" = "29" ]; then
 		Target_Tuple="win_arm32"
 	elif [ "${choice}" = "30" ]; then
-		Target_Tuple="win_arm64_clang"
+		Target_Tuple="Win_Arm64_Clang"
 	elif [ "${choice}" = "31" ]; then
 		Target_Tuple="win_x86_mingw"
 	elif [ "${choice}" = "32" ]; then
-		Target_Tuple="win_x86_clang"
+		Target_Tuple="Win_X86_Clang"
 	elif [ "${choice}" = "33" ]; then
-		Target_Tuple="win_x86_msvc"
+		Target_Tuple="Win_X86_Msvc"
 	elif [ "${choice}" = "34" ]; then
 		Target_Tuple="win_x86_64_mingw"
 	elif [ "${choice}" = "35" ]; then
 		Target_Tuple="Win_X86_64_Clang"
 	elif [ "${choice}" = "36" ]; then
-		Target_Tuple="win_x86_64_ucrt"
+		Target_Tuple="Win_X86_64_Ucrt"
 	elif [ "${choice}" = "37" ]; then
-		Target_Tuple="win_x86_64_msvc"
+		Target_Tuple="Win_X86_64_Msvc"
 	elif [ "${choice}" = "38" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "39" ]; then

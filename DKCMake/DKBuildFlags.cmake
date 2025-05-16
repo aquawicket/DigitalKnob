@@ -333,8 +333,8 @@ if(ANDROID_X86_64)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_x86_64_toolchain.cmake)
 endif()
 
-### cosmopolitan ###
-if(COSMOPOLITAN)
+### Cosmopolitan ###
+if(Cosmopolitan)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/cosmopolitan_toolchain.cmake)
 endif()
 
@@ -369,12 +369,12 @@ if(LINUX_X86)
 endif()
 
 #### Linux x86_64 - clang ###
-if(LINUX_X86_64_CLANG)
+if(Linux_X86_64_Clang)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/linux_x86_64_clang_toolchain.cmake)
 endif()
 
 #### Linux x86_64 - gcc ###
-if(LINUX_X86_64_GCC)
+if(Linux_X86_64_Gcc)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/linux_x86_64_gcc_toolchain.cmake)
 endif()
 
@@ -399,27 +399,27 @@ if(RASPBERRY_ARM64)
 endif()
 
 ### Windows arm64 - CLANGARM64 ###
-if(win_arm64_clang)
+if(Win_Arm64_Clang)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_arm64_clang_toolchain.cmake)
 endif()
 
 ### Windows x86 - MSVC ###
-if(win_x86_msvc)
+if(Win_X86_Msvc)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_msvc_toolchain.cmake)
 endif()
 
 ### Windows x86 - MINGW32 ###
-if(win_x86_gcc)
+if(Win_X86_Gcc)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86 - CLANG32 ###
-if(win_x86_clang)
+if(Win_X86_Clang)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_clang_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MSVC ###
-if(win_x86_64_msvc)
+if(Win_X86_64_Msvc)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_msvc_toolchain.cmake)
 endif()
 
@@ -429,12 +429,12 @@ if(Win_X86_64_Clang)
 endif()
 
 ### Windows x86_64 - MINGW64 ###
-if(win_x86_64_gcc)
+if(Win_X86_64_Gcc)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - UCRT64 ###
-if(win_x86_64_ucrt)
+if(Win_X86_64_Ucrt)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_ucrt_toolchain.cmake)
 endif()
 

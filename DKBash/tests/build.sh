@@ -402,21 +402,21 @@ dk_pickOs() {
 	elif [ "${input}" = "27" ]; then
 		Target_Tuple="win_arm32"
 	elif [ "${input}" = "28" ]; then
-		Target_Tuple="win_arm64_clang"
+		Target_Tuple="Win_Arm64_Clang"
 	elif [ "${input}" = "29" ]; then
 		Target_Tuple="win_x86_mingw"
 	elif [ "${input}" = "30" ]; then
-		Target_Tuple="win_x86_clang"
+		Target_Tuple="Win_X86_Clang"
 	elif [ "${input}" = "31" ]; then
-		Target_Tuple="win_x86_msvc"
+		Target_Tuple="Win_X86_Msvc"
 	elif [ "${input}" = "32" ]; then
 		Target_Tuple="win_x86_64_mingw"
 	elif [ "${input}" = "33" ]; then
 		Target_Tuple="Win_X86_64_Clang"
 	elif [ "${input}" = "34" ]; then
-		Target_Tuple="win_x86_64_ucrt"
+		Target_Tuple="Win_X86_64_Ucrt"
 	elif [ "${input}" = "35" ]; then
-		Target_Tuple="win_x86_64_msvc"
+		Target_Tuple="Win_X86_64_Msvc"
 	elif [ "${input}" = "36" ]; then
 		clear
 	elif [ "${input}" = "37" ]; then
@@ -635,12 +635,12 @@ dk_generate() {
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "win_arm64_clang" ]; then
+	if [ "${Target_Tuple}" = "Win_Arm64_Clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "win_x86_clang" ]; then
+	if [ "${Target_Tuple}" = "Win_X86_Clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
@@ -661,7 +661,7 @@ dk_generate() {
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "win_x86_64_ucrt" ]; then
+	if [ "${Target_Tuple}" = "Win_X86_64_Ucrt" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
@@ -791,12 +791,12 @@ dk_installCmake() {
 	if [ "${Host_Tuple}" 	= "Linux_Arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
 	if [ "${Host_Tuple}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
 	if [ "${Target_Tuple}" 	= "Android_Arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
-	if [ "${Target_Tuple}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
-	if [ "${Target_Tuple}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
+	if [ "${Target_Tuple}" 	= "Win_Arm64_Clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
+	if [ "${Target_Tuple}" 	= "Win_X86_Clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
 	if [ "${Target_Tuple}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
 	if [ "${Target_Tuple}"		= "Win_X86_64_Clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
 	if [ "${Target_Tuple}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
-	if [ "${Target_Tuple}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
+	if [ "${Target_Tuple}" 	= "Win_X86_64_Ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
 	
 	dk_printVar CMAKE_IMPORT
 	if dk_url ${CMAKE_IMPORT}; then

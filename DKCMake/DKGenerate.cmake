@@ -602,7 +602,7 @@ endif(ANDROID)
 
 
 #############
-if(COSMOPOLITAN)
+if(Cosmopolitan)
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
 	
@@ -619,7 +619,7 @@ if(COSMOPOLITAN)
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-endif(COSMOPOLITAN)
+endif(Cosmopolitan)
 
 
 ##############

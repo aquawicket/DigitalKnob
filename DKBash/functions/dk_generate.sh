@@ -103,47 +103,47 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
 	elif [ "${Target_Tuple,,}" = "cygwin" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${Target_Tuple,,}" = "android_arm32_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Android_Arm32_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${Target_Tuple,,}" = "android_arm64_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Android_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${Target_Tuple,,}" = "android_x86_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Android_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${Target_Tuple,,}" = "android_x86_64_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Android_X86_64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${Target_Tuple,,}" = "emscripten_x86_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Emscripten_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${Target_Tuple,,}" = "ios_arm32_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Ios_Arm32_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${Target_Tuple,,}" = "ios_arm64_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Ios_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${Target_Tuple,,}" = "iossim_x86_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Iossim_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${Target_Tuple,,}" = "iossim_x86_64_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Iossim_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${Target_Tuple,,}" = "linux_x86_gcc" ]; then
+	elif [ "${Target_Tuple,,}" = "Linux_X86_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${Target_Tuple,,}" = "linux_x86_64_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Linux_X86_64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${Target_Tuple,,}" = "linux_x86_64_gcc" ]; then
+	elif [ "${Target_Tuple,,}" = "Linux_X86_64_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${Target_Tuple,,}" = "mac_x86_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Mac_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${Target_Tuple,,}" = "mac_x86_64_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Mac_X86_64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${Target_Tuple,,}" = "raspberry_arm32_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Raspberry_Arm32_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${Target_Tuple,,}" = "raspberry_arm64_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Raspberry_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${Target_Tuple,,}" = "win_arm64_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Win_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "win_x86_clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Win_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "win_x86_gcc" ]; then
+	elif [ "${Target_Tuple,,}" = "Win_X86_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
@@ -151,15 +151,15 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "win_x86_64_gcc" ]; then
+	elif [ "${Target_Tuple,,}" = "Win_X86_64_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "win_x86_64_ucrt" ]; then
+	elif [ "${Target_Tuple,,}" = "Win_X86_64_Ucrt" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "win_x86_64_msvc" ]; then
+	elif [ "${Target_Tuple,,}" = "Win_X86_64_Msvc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Visual Studio 17 2022"
 	else
 		dk_call dk_fatal "Could no determine Target_Tuple:${Target_Tuple,,}"

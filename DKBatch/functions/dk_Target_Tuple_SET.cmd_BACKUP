@@ -17,30 +17,30 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo: 
 	echo  1^) !Host_Tuple!
 	echo: 
-	echo  2) cosmopolitan
-	echo  3) android_arm32_clang
-	echo  4) android_arm64_clang
-	echo  5) android_x86_clang
-	echo  6) android_x86_64_clang
-	echo  7) emscripten_x86_clang
-	echo  8) ios_arm32_clang
-	echo  9) ios_arm64_clang
-	echo 10) ios_x86_clang
-	echo 11) ios_x86_64_clang
-	echo 12) iossim_arm32_clang
-	echo 13) iossim_arm64_clang
-	echo 14) iossim_x86_clang
-	echo 15) iossim_x86_64_clang
-	echo 16) linux_arm32_clang
-	echo 17) linux_arm64_clang
-	echo 18) linux_x86_clang
-	echo 19) linux_x86_64_clang
-	echo 20) mac_arm32_clang
-	echo 21) mac_arm64_clang
-	echo 22) mac_x86_clang
-	echo 23) mac_x86_64_clang
-	echo 24) raspberry_arm32_clang
-	echo 25) raspberry_arm64_clang
+	echo  2) Cosmopolitan
+	echo  3) Android_Arm32_Clang
+	echo  4) Android_Arm64_Clang
+	echo  5) Android_X86_Clang
+	echo  6) Android_X86_64_Clang
+	echo  7) Emscripten_X86_Clang
+	echo  8) Ios_Arm32_Clang
+	echo  9) Ios_Arm64_Clang
+	echo 10) Ios_X86_Clang
+	echo 11) Ios_X86_64_Clang
+	echo 12) Iossim_Arm32_Clang
+	echo 13) Iossim_Arm64_Clang
+	echo 14) Iossim_X86_Clang
+	echo 15) Iossim_X86_Clang
+	echo 16) Linux_Arm32_Clang
+	echo 17) Linux_Arm64_Clang
+	echo 18) Linux_X86_Clang
+	echo 19) Linux_X86_64_Clang
+	echo 20) Mac_Arm32_Clang
+	echo 21) Mac_Arm64_Clang
+	echo 22) Mac_X86_Clang
+	echo 23) Mac_X86_64_Clang
+	echo 24) Raspberry_Arm32_Clang
+	echo 25) Raspberry_Arm64_Clang
 	echo 26) raspberry_x86_clang
 	echo 27) raspberry_x86_64_clang
 	echo 28) windows_arm32_clang

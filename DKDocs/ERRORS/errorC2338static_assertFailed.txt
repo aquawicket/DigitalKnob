@@ -2,20 +2,20 @@ ClCompile:
   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\HostX64\x86\CL.exe /c /I"C:\Users\Administrator\digitalknob\Development\3rdParty\backward-cpp-master" /I"C:\Users\Admini
   strator\digitalknob\Development\3rdParty\fmt-master\include" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\duktape-master\src" /IC:\Users\Administrator\digitalknob\Development\DKCpp\plugins\DKDukta
   pe /I"C:\Users\Administrator\digitalknob\Development\3rdParty\libiconv-1.14" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\libiconv-1.14\include" /I"C:\Users\Administrator\digitalknob\Developme
-  nt\3rdParty\libiconv-1.14\win_x86_msvc" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\libiconv-1.14\win_x86_msvc\Release" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\xz-5.4.6\src
-  \liblzma\api" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\win_x86_msvc" /I"C:\Users\Administrator\digitalkn
+  nt\3rdParty\libiconv-1.14\Win_X86_Msvc" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\libiconv-1.14\Win_X86_Msvc\Release" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\xz-5.4.6\src
+  \liblzma\api" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master\Win_X86_Msvc" /I"C:\Users\Administrator\digitalkn
   ob\Development\3rdParty\libxml2-v2.12.5" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\libxml2-v2.12.5\include" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\libxml2-v2.12.5\win_x8
   6_msvc" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\zstd-release\lib" /I"C:\Users\Administrator\digitalknob\Development\3rdParty\libarchive-master\libarchive" /I"C:\Users\Administrator\digita
-  lknob\Development\3rdParty\libarchive-master\win_x86_msvc" /IC:\Users\Administrator\digitalknob\Development\DKCpp\plugins /Zi /nologo /W4 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN /D WIN_X86 /D _WI
+  lknob\Development\3rdParty\libarchive-master\Win_X86_Msvc" /IC:\Users\Administrator\digitalknob\Development\DKCpp\plugins /Zi /nologo /W4 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN /D WIN_X86 /D _WI
   NDOWS /D _CRT_SECURE_NO_WARNINGS /D _USING_V110_SDK71_ /D DEBUG /D _DEBUG /D HAVE_cmd /D HAVE_pacman /D HAVE_cygpath /D HAVE_msys2 /D HAVE_DK /D HAVE_psapi /D HAVE_pdh_lib /D HAVE_dxva2 /D HAVE_backward_cpp
    /D HAVE_fmt /D HAVE_DKDuktape /D HAVE_duktape /D HAVE_python /D HAVE_pyyaml /D HAVE_sudo /D HAVE_DKDuktapeDebugger /D HAVE_DKArchive /D HAVE_libarchive /D HAVE_libgcc /D HAVE_libiconv /D HAVE_libxml2 /D HA
   VE_autoconf /D HAVE_automake /D HAVE_libtool /D HAVE_xz /D HAVE_zlib /D HAVE_lzo /D HAVE_pcre2 /D HAVE_zstd /D HAVE_DKAssets /D HAVE_DKFmt /D FMT_HEADER_ONLY /D DUK_F_VBCC /D LZMA_API_STATIC /D LIBXML_STATI
   C /D LIBARCHIVE_STATIC /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"DKFmt.dir\Debug\\" /Fd"C:\Users\Administrator\digitalknob\Deve
-  lopment\DKPlugins\DKFmt\win_x86_msvc\Debug\DKFmt.pdb" /external:W4 /Gd /TP /analyze- /errorReport:queue  /Zm500 /Zc:__cplusplus /bigobj C:\Users\Administrator\digitalknob\Development\DKCpp\plugins\DKFmt\DKFmt.c
+  lopment\DKPlugins\DKFmt\Win_X86_Msvc\Debug\DKFmt.pdb" /external:W4 /Gd /TP /analyze- /errorReport:queue  /Zm500 /Zc:__cplusplus /bigobj C:\Users\Administrator\digitalknob\Development\DKCpp\plugins\DKFmt\DKFmt.c
   pp C:\Users\Administrator\digitalknob\Development\DKCpp\plugins\DKFmt\DKFmtJS.cpp C:\Users\Administrator\digitalknob\Development\DKCpp\plugins\DKFmt\DKFmtV8.cpp
   DKFmt.cpp
 C:\Users\Administrator\digitalknob\Development\3rdParty\fmt-master\include\fmt\base.h(473,28): error C2338: static_assert failed: 'Unicode support requires compiling with /utf-8' [C:\Users\Administrator\digit
-alknob\Development\DKCpp\plugins\DKFmt\win_x86_msvc\DKFmt.vcxproj]
+alknob\Development\DKCpp\plugins\DKFmt\Win_X86_Msvc\DKFmt.vcxproj]
   (compiling source file '../DKFmt.cpp')
   
   

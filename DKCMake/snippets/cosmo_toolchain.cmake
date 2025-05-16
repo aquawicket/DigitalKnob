@@ -25,7 +25,7 @@ if (NOT CMAKE_C_COMPILER)
   message(FATAL_ERROR "cosmocc was not found in PATH")
 endif()
 
-set(COSMOPOLITAN 1)
+set(Cosmopolitan 1)
 set(UNIX 1)
 
 # Cosmopolitan uses only static libraries and no RPATH

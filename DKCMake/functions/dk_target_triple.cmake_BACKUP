@@ -3,7 +3,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ###############################################################################
-# dk_target_tuple()
+# dk_Target_Tuple()
 #
 #	Set the cached target variables
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
@@ -11,21 +11,15 @@ include_guard()
 #
 #	If the CMAKE_BINARY_DIR is missing the <TARGET_OS> or the <Target_Arch>, dk_target_tuple_SET will be called to get those variables
 #
-#	target_os   							= android, emscripten, ios, iossim, linux, mac, raspberry, windows
 #	Target_Os   							= Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows 
-#	TARGET_OS   							= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
-#	target_arch								= arm32, arm64, x86, x86_64
 #	Target_Arch								= Arm32, Arm64, X86, X86_64
-#	Target_Arch								= ARM32, ARM64, X86, X86_64
-#	target_env								= clang, cosmopolitan, mingw, msvc, ucrt
 #	Target_Env								= Clang, Cosmopolitan, MinGW, Msvc, Ucrt
-#	TARGET_ENV								= CLANG, COSMOPOLITAN, MINGW, MSVC, UCRT
-#   <target_os>_<target_arch>				= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
-#   <target_os>_<target_arch>_<target_env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
+#   {Target_Os}_{Target_Arch}				= Android_Arm64, Emscripten_Arm64, Ios_Arm64, Iossim_Arm64, Linux_Arm64, Mac_Arm64, Raspberry_Arm64, Windows_arm64
+#   {Target_Os}_{Target_Arch}_{Target_Env}	= Android_Arm64_Clang, Emscripten_Arm64_Clang, Ios_Arm64_Clang, Iossim_Arm64_Clang, Linux_Arm64_Clang, Mac_Arm64_Clang, Raspberry_Arm64_Clang, Windows_Arm64_Clang
 #
-function(dk_target_tuple)
+function(dk_Target_Tuple)
 	dk_debugFunc(0 1)
-	message("dk_target_tuple(${ARGV})")
+	message("dk_Target_Tuple(${ARGV})")
 
 	#set(Default_Target_Os "${Host_Os}")
 	#set(Default_Target_Arch "${Host_Arch}")
@@ -133,7 +127,7 @@ function(dk_target_tuple)
 		dk_set(Target_Os Windows)
 	elseif(Target_Tuple MATCHES "win")
 		dk_set(Target_Os Win)
-	elseif(Target_Tuple MATCHES "cosmopolitan")
+	elseif(Target_Tuple MATCHES "Cosmopolitan")
 		dk_set(Target_Os Cosmopolitan)	
 	else()
 		dk_error("The target Target_Tuple:'${Target_Tuple}' does not contain a valid Target_Os")
@@ -165,7 +159,7 @@ function(dk_target_tuple)
 		dk_set(Target_Arch X86_64)
 	elseif(Target_Tuple MATCHES "x86")
 		dk_set(Target_Arch X86)
-	elseif(Target_Tuple MATCHES "cosmopolitan")
+	elseif(Target_Tuple MATCHES "Cosmopolitan")
 		dk_set(Target_Arch Cosmopolitan)	
 	else()
 		dk_warning("The target Target_Tuple:${Target_Tuple} does not contain a valid target_arch")
@@ -248,5 +242,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 
-	dk_target_tuple()
+	dk_Target_Tuple()
 endfunction()

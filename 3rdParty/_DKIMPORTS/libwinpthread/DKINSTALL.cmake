@@ -10,13 +10,13 @@ dk_load(dk_builder)
 
 dk_validate(MSYS2 "dk_depend(msys2)")
 
-if(WIN_X86_CLANG)
+if(Win_X86_Clang)
 	dk_set(LIBWINPTHREAD ${MSYS2_DIR}/clang32/lib)
 elseif(Win_X86_64_Clang)
 	dk_set(LIBWINPTHREAD ${MSYS2_DIR}/clang64/lib)
-elseif(WIN_X86_GCC)
+elseif(Win_X86_Gcc)
 	dk_set(LIBWINPTHREAD ${MSYS2_DIR}/mingw32/lib)
-elseif(WIN_X86_64_GCC)
+elseif(Win_X86_64_Gcc)
 	dk_set(LIBWINPTHREAD ${MSYS2_DIR}/mingw64/lib)
 endif()
 

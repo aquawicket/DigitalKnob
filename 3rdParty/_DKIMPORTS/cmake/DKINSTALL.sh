@@ -24,12 +24,12 @@ DKINSTALL() {
 	[ "${Host_Tuple}" = "Raspberry_Arm64" ]			&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
 	
 	#[ "${Target_Tuple}" = "Android_Arm32" ]		&& CMAKE_IMPORT=cmake
-	[ "${Target_Tuple-}" = "Win_arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	[ "${Target_Tuple-}" = "Win_Arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
 	[ "${Target_Tuple-}" = "Win_X86_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
 	[ "${Target_Tuple-}" = "Win_x86_MinGW" ]		&& CMAKE_IMPORT=mingw-w64-i686-cmake
 	[ "${Target_Tuple-}" = "Win_X86_64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
 	[ "${Target_Tuple-}" = "Win_x86_64_MinGW" ]		&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	[ "${Target_Tuple-}" = "Win_x86_64_Ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+	[ "${Target_Tuple-}" = "Win_X86_64_Ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	dk_call dk_printVar CMAKE_IMPORT
 	
 	[ -z "${CMAKE_IMPORT}" ] && dk_call dk_error "CMAKE_IMPORT is invalid"

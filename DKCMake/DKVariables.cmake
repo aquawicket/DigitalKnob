@@ -208,7 +208,7 @@ if(error)
 	dk_printVar(XCODE)
 
 	dk_error("Either not enough, or too many compiler Flags are set")
-	dk_notice("FIXME: COSMOPOLITAN causes both GNU and MINGW flags to be set. we will let this error pass for now.")
+	dk_notice("FIXME: Cosmopolitan causes both GNU and MINGW flags to be set. we will let this error pass for now.")
 endif()
 
 ###########################################################################
@@ -321,6 +321,6 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT Target_Tuple)
 		dk_printVar(CMAKE_BINARY_DIR)	
-		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are cosmopolitan,Android_Arm32,android_arm64,android_x86,android_x86_64,emscripten,ios_arm32,ios_arm64,Iossim_X86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKCpp/apps/MyApp/win_x86")
+		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are Cosmopolitan,Android_Arm32,android_arm64,android_x86,android_x86_64,emscripten,ios_arm32,ios_arm64,Iossim_X86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKCpp/apps/MyApp/win_x86")
 	endif()
 endif()
