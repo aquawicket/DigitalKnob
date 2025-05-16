@@ -2,9 +2,9 @@ message("#######################################################################
 message("################# emscripten_x86_clang_toolchain.cmake #####################")
 message("############################################################################")
 
-if(ANDROID_HOST)
+if(Android_Host)
 	dk_pause()
-	message("paused in emscripten toolchain because ANDROID_HOST")
+	message("paused in emscripten toolchain because Android_Host")
 	dk_exit()
 endif()
 

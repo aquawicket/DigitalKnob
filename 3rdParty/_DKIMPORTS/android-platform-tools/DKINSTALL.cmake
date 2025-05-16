@@ -28,7 +28,7 @@ if(Win_Host)
 	dk_import(${ANDROID_PLATFORM_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/platform-tools)
 elseif(Mac_Host)
 	dk_import(${ANDROID_PLATFORM_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/platform-tools)
-elseif(ANDROID_HOST)
+elseif(Android_Host)
 	dk_import(${ANDROID_PLATFORM_TOOLS_ANDROID_DL} PATH ${ANDROID_SDK}/termux)
 	dk_copy(${ANDROID_SDK}/termux/build-tools ${ANDROID_SDK}/build-tools/30.0.3 OVERWRITE)		# copy termux/build-tools to android-sdk
 	dk_copy(${ANDROID_SDK}/termux/platform-tools ${ANDROID_SDK}/platform-tools OVERWRITE)		# copy termux/platform-tools to android-sdk
@@ -69,7 +69,7 @@ dk_set(ADB_EXE "${ANDROID_SDK}/platform-tools/adb.exe")
 # 34.0.3
 #WIN_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r34.0.3-windows.zip PATH ${ANDROID_SDK}/platform-tools)
 #MAC_HOST_dk_import(https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r34.0.3-darwin.zip PATH ${ANDROID_SDK}/platform-tools)
-#if(NOT ANDROID_HOST)
+#if(NOT Android_Host)
 #	LINUX_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r34.0.3-linux.zip PATH ${ANDROID_SDK}/platform-tools)
 #else()
 	#ANDROID_HOST_dk_import(https://github.com/lzhiyong/android-sdk-tools/releases/download/34.0.3/android-sdk-tools-static-aarch64.zip PATH ${ANDROID_SDK}/termux)

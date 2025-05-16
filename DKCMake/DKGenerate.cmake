@@ -577,7 +577,7 @@ if(ANDROID)
 		
 	#################### Install apk to device ################
 	#dk_set(INSTALL_APK ON)
-	if(NOT ANDROID_HOST AND INSTALL_APK)
+	if(NOT Android_Host AND INSTALL_APK)
 		dk_depend(cmd)	
 		if(DEBUG)
 			dk_validate(CMD_EXE "dk_CMD_EXE()")

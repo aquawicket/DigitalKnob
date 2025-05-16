@@ -88,7 +88,7 @@ if(Win_Host)
 	dk_import		(${ANDROID_NDK_WIN_IMPORT} 		PATH "${ANDROID_NDK}" VERSION "${ANDROID_NDK_BUILD}" PATCH)
 elseif(Mac_Host)
 	dk_import		(${ANDROID_NDK_MAC_IMPORT} 		PATH "${ANDROID_NDK}" PATCH)
-elseif(ANDROID_HOST OR LINUX_ARM64_HOST)
+elseif(Android_Host OR LINUX_ARM64_HOST)
 	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	PATH "${ANDROID_NDK}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage
 elseif(LINUX_ARM64_HOST)
 	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	PATH "${ANDROID_NDK}")

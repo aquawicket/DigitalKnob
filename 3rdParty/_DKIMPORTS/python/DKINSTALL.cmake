@@ -91,7 +91,7 @@ if(EXISTS "${PYTHON_DIR}/libs")
 endif()
 
 
-if((NOT Linux_Host) AND (NOT ANDROID_HOST))
+if((NOT Linux_Host) AND (NOT Android_Host))
 	dk_assertPath(PYTHON)
 	dk_assertPath(PYTHON_EXE)
 endif()

@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/MasterDevX/Termux-ADB
 dk_load(dk_builder)
 
-if(NOT ANDROID_HOST)
+if(NOT Android_Host)
 	return()
 endif()
 

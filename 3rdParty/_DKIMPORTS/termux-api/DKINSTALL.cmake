@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/termux/termux-api/releases/download/v0.50.1/termux-api_v0.50.1+github-debug.apk
 dk_load(dk_builder)
 
-if(NOT ANDROID_HOST)
+if(NOT Android_Host)
 	return()
 endif()
 

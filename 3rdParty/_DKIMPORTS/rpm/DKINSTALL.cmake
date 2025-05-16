@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_load(dk_builder)
 # https://www.thegeekdiary.com/rpm-command-not-found
 
-if(NOT Linux_Host OR ANDROID_HOST)
+if(NOT Linux_Host OR Android_Host)
 	dk_undepend(rpm)
 	dk_return()
 endif()

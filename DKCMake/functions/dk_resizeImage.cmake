@@ -22,7 +22,7 @@ function(dk_resizeImage)
 	dk_mkdir(${outdir})
 	dk_assertPath(${outdir})
 	
-	if(ANDROID_HOST)
+	if(Android_Host)
 		dk_installPackage(imagemagick)
 
 		###### BASH ######

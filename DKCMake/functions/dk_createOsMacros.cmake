@@ -19,7 +19,7 @@ function(dk_createOsMacros func)
 	endif()
 	
 	### HOST Prefix functions ###
-	dk_createPrefixMacro(${func} ANDROID_HOST)
+	dk_createPrefixMacro(${func} Android_Host)
 	dk_createPrefixMacro(${func} ANDROID_ARM32_HOST)
 	dk_createPrefixMacro(${func} ANDROID_ARM64_HOST)
 	dk_createPrefixMacro(${func} ANDROID_X86_64_HOST)

@@ -133,7 +133,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		#dk_todo("replace this section with dk _smartExtract() function")
 		dk_info("Extracting ${PLUGIN_DL_FILENAME}")
 		
-#		if(ANDROID_HOST)
+#		if(Android_Host)
 #			set(src_extractPath "$ENV{HOME}/dkdownload")
 #		else()
 #			set(src_extractPath "${PLUGIN_DL_DIR}/UNZIPPED")

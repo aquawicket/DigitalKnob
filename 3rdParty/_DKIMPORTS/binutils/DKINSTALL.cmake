@@ -10,6 +10,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 
-if(ANDROID_HOST)
+if(Android_Host)
 	dk_installPackage(binutils)
 endif()

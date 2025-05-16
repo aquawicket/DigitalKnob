@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://www.nasm.us
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(ANDROID_HOST)
+if(Android_Host)
 	return()
 endif()
 

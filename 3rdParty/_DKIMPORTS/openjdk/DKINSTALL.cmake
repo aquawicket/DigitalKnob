@@ -21,7 +21,7 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/openjdk/dkconfig.txt")
 
-if(ANDROID_HOST)
+if(Android_Host)
 	dk_installPackage(openjdk-17)
 		
 	dk_command(java --version)

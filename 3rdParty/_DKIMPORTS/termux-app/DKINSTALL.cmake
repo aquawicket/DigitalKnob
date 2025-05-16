@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://www.macrodroidforum.com/index.php?threads/guide-setting-up-and-using-adb-commands-with-termux.5640/
 dk_load(dk_builder)
 
-if(NOT ANDROID_HOST)
+if(NOT Android_Host)
 	return()
 endif()
 
