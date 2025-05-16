@@ -27,6 +27,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	endlocal & (
 		set "Target_Tuple=%Target_Tuple%"
+		set "%Target_Tuple%_Target=1"
 		set "%Target_Tuple%=1"
 	)
 %endfunction%
@@ -44,11 +45,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### GET ######
     %dk_call% dk_Target_Tuple
 	%dk_call% dk_printVar Target_Tuple
+	%dk_call% dk_printVar %Target_Tuple%_Target
 	%dk_call% dk_printVar %Target_Tuple%
 	
 	::###### SET ######
 	%dk_call% dk_Target_Tuple "Windows_X86_64_Clang"
 	%dk_call% dk_printVar Target_Tuple
+	%dk_call% dk_printVar %Target_Tuple%_Target
 	%dk_call% dk_printVar %Target_Tuple%
 	
 %endfunction%

@@ -43,6 +43,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	endlocal & (
 		set "Target_Arch=%Target_Arch%"
+		set "%Target_Arch%_Target=1"
 		set "%Target_Arch%=1"
 	)
 %endfunction%
@@ -60,11 +61,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### GET ######
     %dk_call% dk_Target_Arch
 	%dk_call% dk_printVar Target_Arch
+	%dk_call% dk_printVar %Target_Arch%_Target
 	%dk_call% dk_printVar %Target_Arch%
 	
 	::###### SET ######
 	%dk_call% dk_Target_Arch "I686"
 	%dk_call% dk_printVar Target_Arch
+	%dk_call% dk_printVar %Target_Arch%_Target
 	%dk_call% dk_printVar %Target_Arch%
 	
 %endfunction%

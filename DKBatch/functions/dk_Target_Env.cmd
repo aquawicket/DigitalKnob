@@ -41,6 +41,7 @@ if not defined dk_Target_Env_DEFAULT (set "dk_Target_Env_DEFAULT=Clang")
 	
 	endlocal & (
 		set "Target_Env=%Target_Env%"
+		set "%Target_Env%_Target=1"
 		set "%Target_Env%=1"
 	)
 %endfunction%
@@ -58,11 +59,13 @@ if not defined dk_Target_Env_DEFAULT (set "dk_Target_Env_DEFAULT=Clang")
 	::###### GET ######
     %dk_call% dk_Target_Env
 	%dk_call% dk_printVar Target_Env
+	%dk_call% dk_printVar %Target_Env%_Target
 	%dk_call% dk_printVar %Target_Env%
 	
 	::###### SET ######
 	%dk_call% dk_Target_Env "Clang"
 	%dk_call% dk_printVar Target_Env
+	%dk_call% dk_printVar %Target_Env%_Target
 	%dk_call% dk_printVar %Target_Env%
 	
 %endfunction%

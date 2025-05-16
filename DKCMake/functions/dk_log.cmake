@@ -183,7 +183,6 @@ function(dk_log)
 	endif()
 
 	### SOUND ###
-	message("dk_log_${_level_}_SOUND = ${dk_log_${_level_}_SOUND}")
 	if(dk_log_${_level_}_SOUND)
 		dk_echo("${dk_log_${_level_}_COLOR}*** SOUND_ON_${_level_} ***${clr}")
 		dk_pause()

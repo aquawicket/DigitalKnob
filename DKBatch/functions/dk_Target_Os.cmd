@@ -54,6 +54,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	endlocal & (
 		set "Target_Os=%Target_Os%"
+		set "%Target_Os%_Target=1"
 		set "%Target_Os%=1"
 	)
 %endfunction%
@@ -71,11 +72,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### GET ######
     %dk_call% dk_Target_Os
 	%dk_call% dk_printVar Target_Os
+	%dk_call% dk_printVar %Target_Os%_Target
 	%dk_call% dk_printVar %Target_Os%
 	
 	::###### SET ######
 	%dk_call% dk_Target_Os "Windows"
 	%dk_call% dk_printVar Target_Os
+	%dk_call% dk_printVar %Target_Os%_Target
 	%dk_call% dk_printVar %Target_Os%
 	
 %endfunction%
