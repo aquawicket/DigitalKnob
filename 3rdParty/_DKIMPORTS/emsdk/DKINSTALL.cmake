@@ -12,7 +12,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(Win_Host)
+if(Windows_Host)
 	dk_depend(python3)
 	dk_nativePath("${PYTHON3_DIR}" PYTHON3_DIR_WIN)
 	set(bat ".bat")
@@ -30,7 +30,7 @@ dk_import(https://github.com/emscripten-core/emsdk/archive/861ce44b.zip)
 # https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/mingw_4.6.2_32bit.zip										-> ${EMSDK}/mingw/4.6.2_32bit
 
 # Download and install the latest SDK tools.
-if(Win_Host)
+if(Windows_Host)
 	dk_validate(CMD_EXE "dk_depend(cmd)")
 	dk_validate(CMAKE_EXE "dk_depend(cmake)")
 	dk_nativePath(${CMD_EXE} CMD_EXE)
@@ -41,21 +41,21 @@ else()
 endif()
 
 # Make the "latest" SDK "active" for the current user. (writes .emscripten file)
-if(Win_Host)
+if(Windows_Host)
 	execute_process(COMMAND ${CMD_EXE} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_DIR_WIN}	"${EMSDK}/emsdk.bat" activate latest 				COMMAND_ECHO STDOUT)  # --permanent
 else()
 	execute_process(COMMAND                                         					"${EMSDK}/emsdk"     activate latest 				COMMAND_ECHO STDOUT)
 endif()
 
 # Activate PATH and other environment variables in the current terminal
-if(Win_Host)
+if(Windows_Host)
 	execute_process(COMMAND ${CMD_EXE} /c call											"${EMSDK}/emsdk_env.bat" 							COMMAND_ECHO STDOUT)
 else()
 	execute_process(COMMAND chmod 777 													"${EMSDK}/emsdk_env.sh"  							COMMAND_ECHO STDOUT)
 	execute_process(COMMAND                                         					"${EMSDK}/emsdk_env"     							COMMAND_ECHO STDOUT)
 endif()
 
-#if(Win_Host)
+#if(Windows_Host)
 #	execute_process(COMMAND ${CMD_EXE} /c call 											"${EMSDK}/emsdk.bat" install mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
 #	execute_process(COMMAND ${CMD_EXE} /c call 											"${EMSDK}/emsdk.bat" activate mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
 #endif()
@@ -73,7 +73,7 @@ if(EXISTS "${EMSDK}/upstream/emscripten/src/settings.js")
 	dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false"	"var USE_PTHREADS = true"		NO_HALT)
 endif()
 
-if(Win_Host)
+if(Windows_Host)
 	set(ENV{EMSDK_PYTHON} "${EMSDK}/python/3.9.2-nuget_64bit/python")
 	dk_exportVars(EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
 endif()
@@ -84,7 +84,7 @@ dk_set				(EMSDK_TOOLCHAIN_FILE 		"${EMSDK}/upstream/emscripten/cmake/Modules/Pl
 dk_set				(EMSDK_GENERATOR 			"Unix Makefiles")
 dk_set				(EMSDK_AR 					"${EMSDK}/upstream/emscripten/emar${bat}")				# Name of archiving tool for static libraries.
 dk_assertPath		(EMSDK_AR)
-if(Win_Host)
+if(Windows_Host)
 	dk_validate		(MSYS2 						"dk_depend(msys2)")
 	dk_installPackage(make)
 	dk_findProgram	(EMSDK_MAKE_PROGRAM make 	"${MSYS2}/usr/bin")

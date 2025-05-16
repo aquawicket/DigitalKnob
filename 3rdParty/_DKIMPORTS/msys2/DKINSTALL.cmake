@@ -12,7 +12,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_validate(Host_Os "dk_Host_Os()")
 
-if(NOT DEFINED Win_Host)
+if(NOT DEFINED Windows_Host)
 	dk_undepend(msys2)
 	return()
 endif()

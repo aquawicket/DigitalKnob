@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 dk_load(dk_builder)
-if(NOT Win_Host)
+if(NOT Windows_Host)
 	dk_undepend(msinttypes)
 	dk_return()
 endif()

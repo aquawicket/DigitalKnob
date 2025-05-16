@@ -7,7 +7,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ###### visualstudio ######
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-#if(NOT Win_Host)
+#if(NOT Windows_Host)
 #	dk_undepend(visualstudio)
 #	dk_return()
 #endif()

@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ build-essential ############
 # https://packages.ubuntu.com/focal/build-essential
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(Win_Host)
+if(Windows_Host)
 	dk_undepend(build-essential)
 	dk_return()
 endif()

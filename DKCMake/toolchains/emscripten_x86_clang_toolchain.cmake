@@ -11,7 +11,7 @@ endif()
 dk_validate(EMSDK							"dk_depend(emsdk)")
 
 dk_set(CMAKE_GENERATOR						"Unix Makefiles")
-if(Win_Host)
+if(Windows_Host)
 	dk_validate(MSYS2 						"dk_depend(msys2)")
 	dk_installPackage(						make)
 	dk_findProgram(CMAKE_MAKE_PROGRAM make 	"${MSYS2}/usr/bin")

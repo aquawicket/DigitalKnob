@@ -1,8 +1,8 @@
 message("############################################################################")
-message("################### windoows_arm64_clang_toolchain.cmake ###################")
+message("################### Windoows_Arm64_Clang_Toolchain.cmake ###################")
 message("############################################################################")
 
-if(NOT Win_Host)
+if(NOT Windows_Host)
 	dk_exit()
 endif()
 

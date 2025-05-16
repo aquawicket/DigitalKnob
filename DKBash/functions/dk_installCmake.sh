@@ -21,24 +21,24 @@ dk_installCmake() {
 	
 	dk_call dk_validate HOST_OS "dk_call dk_Host_Tuple"	
 	######################################################################################################
-	#[ "${HOST_OS}" = "Android" ]                && CMAKE_IMPORT=cmake
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm32" ]  && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm64" ]  && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86" ]    && CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ] && CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
-	[ "${HOST_OS}" = "mac" ]                     && CMAKE_IMPORT=${CMAKE_DL_MAC}
-	[ "${Host_Tuple}" = "linux_x86_64" ]        && CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
-	[ "${Host_Tuple}" = "Linux_Arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
-	[ "${Host_Tuple}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
-	[ "${WSL_DISTRO_NAME-}" = "Alpine" ]		 && CMAKE_IMPORT=cmake
-	#[ "${Target_Tuple}" = "Android_Arm32" ]       	 && CMAKE_IMPORT=cmake
-	#[ "${Target_Tuple-}" = "Win_Arm64_Clang" ]    	 && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
-	#[ "${Target_Tuple-}" = "Win_X86_Clang" ]      	 && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	#[ "${Target_Tuple-}" = "win_x86_mingw" ]      	 && CMAKE_IMPORT=mingw-w64-i686-cmake
-	#[ "${Target_Tuple-}" = "Win_X86_64_Clang" ]   	 && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	#[ "${Target_Tuple-}" = "win_x86_64_mingw" ]   	 && CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	#[ "${Target_Tuple-}" = "Win_X86_64_Ucrt" ]    	 && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
-	[ -z ${CMAKE_IMPORT-} ] 					 && CMAKE_IMPORT=cmake  #Default
+	#[ "${HOST_OS}" = "Android" ]                		&& CMAKE_IMPORT=cmake
+	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm32" ]  		&& CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
+	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm64" ]  		&& CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
+	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86" ]    		&& CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
+	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ] 		&& CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
+	[ "${HOST_OS}" = "mac" ]                     		&& CMAKE_IMPORT=${CMAKE_DL_MAC}
+	[ "${Host_Tuple}" = "linux_x86_64" ]        		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
+	[ "${Host_Tuple}" = "Linux_Arm64" ]         		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
+	[ "${Host_Tuple}" = "raspberry_arm64" ]     		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
+	[ "${WSL_DISTRO_NAME-}" = "Alpine" ]		 		&& CMAKE_IMPORT=cmake
+	#[ "${Target_Tuple}" = "Android_Arm32" ]			&& CMAKE_IMPORT=cmake
+	#[ "${Target_Tuple-}" = "Windows_Arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+	#[ "${Target_Tuple-}" = "win_x86_mingw" ]			&& CMAKE_IMPORT=mingw-w64-i686-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_64_Clang" ]	&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	#[ "${Target_Tuple-}" = "win_x86_64_mingw" ]		&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_64_Ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+	[ -z ${CMAKE_IMPORT-} ]								&& CMAKE_IMPORT=cmake  #Default
 	dk_call dk_assertVar CMAKE_IMPORT
 	
 	if dk_call dk_isUrl "${CMAKE_IMPORT}"; then

@@ -57,7 +57,7 @@ if( (target_dir MATCHES "Android")		OR
 	(target_dir MATCHES "Linux")		OR
 	(target_dir MATCHES "Mac")			OR
 	(target_dir MATCHES "Raspberry")	OR
-	(target_dir MATCHES "Win")			OR
+	(target_dir MATCHES "Windows")		OR
 	(target_dir MATCHES "Cosmopolitan") )
 	dk_set(Target_Tuple_Dir ${Target_Dir})
 else()
@@ -533,13 +533,13 @@ if(Android)
 	
 	####################### Gradle Build #####################
 	if(CMAKE_ANDROID_GUI)
-		#if(Win_Host)
+		#if(Windows_Host)
 		#	dk_command(${OPENJDK}/registerJDK.cmd)
 		#endif()
 		dk_depend(openjdk)
 		dk_depend(gradle)
 		
-		if(Win_Host)
+		if(Windows_Host)
 			set(setVar "set")
 		else()
 			set(setVar "export")
@@ -684,7 +684,7 @@ elseif(Emscripten)
 	################### Create Run.sh #################################
 	dk_info("Creating Run scripts . . .")
 	if(DEBUG)
-		if(Win_Host)
+		if(Windows_Host)
 			set(RUN_SCRIPT_DEBUG
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.html"
 			)
@@ -698,7 +698,7 @@ elseif(Emscripten)
 		endif()
 	endif()
 	if(RELEASE)
-		if(Win_Host)
+		if(Windows_Host)
 			set(RUN_SCRIPT_RELEASE
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.html"
 			)
@@ -1257,7 +1257,7 @@ elseif(Raspberry)
 
 
 ###############
-elseif(Win_X86)
+elseif(Windows_X86)
 	########################## CREATE ICONS ###############################
 	if(EXISTS "${DK_Project_Dir}/icons/icon.png")
 		dk_createIcons("${DK_Project_Dir}/icons/icon.png")
@@ -1382,12 +1382,12 @@ elseif(Win_X86)
 	
 	#CPP_DKFile_Copy(app_path+OS+"/${RELEASE_DIR}/"+Target_App+".pdb", app_path+"assets/"+Target_App+".pdb", true)
 	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${RELEASE_DIR}/"+Target_App+".exe")
-#endif(Win_X86)
+#endif(Windows_X86)
 	
 
 		
 ##################
-elseif(Win_X86_64)
+elseif(Windows_X86_64)
 	########################## CREATE ICONS ###############################
 	if(EXISTS "${DK_Project_Dir}/icons/icon.png")
 		dk_createIcons("${DK_Project_Dir}/icons/icon.png")
@@ -1494,7 +1494,7 @@ elseif(Win_X86_64)
 	#)
 	#CPP_DKFile_Copy(app_path+OS+"/${RELEASE_DIR}/"+Target_App+".pdb", app_path+"assets/"+Target_App+".pdb", true)
 	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${RELEASE_DIR}/"+Target_App+".exe")
-#endif(Win_X86_64)
+#endif(Windows_X86_64)
 
 else()
 	dk_error("DKGenerate.cmake:  No Generate Proceedure for Target_Tuple:'${Target_Tuple}'")

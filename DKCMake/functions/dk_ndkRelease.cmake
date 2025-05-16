@@ -17,7 +17,7 @@ function(dk_ndkRelease path)
 	endif()
 	
 	if(RELEASE AND QUEUE_BUILD)
-		if(Win_Host)
+		if(Windows_Host)
 			dk_exec(${ANDROID_NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${Target_Tuple}/Release)
 		endif()
 		if(UNIX_HOST)

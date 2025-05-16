@@ -12,7 +12,7 @@ include_guard()
 #function(dk_currentDirectory rtn_var)
 #	dk_debugFunc()
 
-#	if(Win_Host)
+#	if(Windows_Host)
 #		execute_process(COMMAND echo "hello world" ECHO_OUTPUT_VARIABLE currentDirectory WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 #	else()
 #		execute_process(COMMAND pwd ECHO_OUTPUT_VARIABLE currentDirectory WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})

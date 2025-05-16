@@ -13,14 +13,14 @@ dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 
 
 ### DOWNLOAD ###
-if(Win_X86_Host)
+if(Windows_X86_Host)
 	set(TDM-GCC_DL https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm-1/tdm-gcc-10.3.0.exe)
 endif()
-if(Win_X86_64_Host)
+if(Windows_X86_64_Host)
 	set(TDM-GCC_DL https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm64-2/tdm64-gcc-10.3.0-2.exe)
 	#set(TDM-GCC_DL https://github.com/jmeubank/tdm-gcc-src/releases/download/v10.3.0-tdm64-1/gcc-10.3.0-tdm64-1-c++.zip)
 endif()
-if(Win_Host AND NOT TDM-GCC_DL)
+if(Windows_Host AND NOT TDM-GCC_DL)
 	dk_fatal("TDM-GCC_DL is invalid!")
 endif()
 

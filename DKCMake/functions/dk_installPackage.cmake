@@ -24,7 +24,7 @@ function(dk_installPackage)
 #	endif()
 #	
 	dk_info("dk_installPackage(): installing ${package}. . .")
-	dk_if(Win_Host "dk_depend(msys2)")
+	dk_if(Windows_Host "dk_depend(msys2)")
 	set(ENV{DKSHELL} sh) # HACK
 
 	### Termux ###
@@ -127,22 +127,22 @@ function(dk_installPackage)
 		#dk_mkdir("${MSYS2_CacheDir}")
 		dk_assertPath(MSYS2_CacheDir)
 		
-		if(Win_X86_Clang)
+		if(Windows_X86_Clang)
 			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")		# CLANG32
 			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-i686-${package} --needed --noconfirm)									# CLANG32
-		elseif(Win_X86_64_Clang)
+		elseif(Windows_X86_64_Clang)
 			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")	# CLANG64
 			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-x86_64-${package} --needed --noconfirm)									# CLANG64
-		elseif(Win_Arm64_Clang)
+		elseif(Windows_Arm64_Clang)
 			set(comand "${PACMAN_EXE}" -S mingw-w64-clang-aarch64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")	# CLANGARM64
 			#set(comand "${PACMAN_EXE}" -S mingw-w64-clang-aarch64-${package} --needed --noconfirm)									# CLANGARM64
-		elseif(Win_X86_Gcc)
+		elseif(Windows_X86_Gcc)
 			set(comand "${PACMAN_EXE}" -S mingw-w64-i686-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")			# MINGW32
 			#set(comand "${PACMAN_EXE}" -S mingw-w64-i686-${package} --needed --noconfirm)											# MINGW32
-		elseif(Win_X86_64_Gcc)
+		elseif(Windows_X86_64_Gcc)
 			set(comand "${PACMAN_EXE}" -S mingw-w64-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")			# MINGW64
 			#set(comand "${PACMAN_EXE}" -S mingw-w64-x86_64-${package} --needed --noconfirm)										# MINGW64
-		elseif(Win_X86_64_Ucrt)
+		elseif(Windows_X86_64_Ucrt)
 			set(comand "${PACMAN_EXE}" -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm --cachedir "${MSYS2_CacheDir}")		# UCRT64
 			#set(comand "${PACMAN_EXE}" -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm)									# UCRT64
 		else()

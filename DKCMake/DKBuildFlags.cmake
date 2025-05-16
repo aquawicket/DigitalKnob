@@ -209,7 +209,7 @@ endif()
 ###### POSITION_INDEPENDENT_CODE ######
 # https://stackoverflow.com/a/3544211/688352   -fPIC vs -fpic
 # https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fPIC
-if(Win_Host)
+if(Windows_Host)
 	dk_set(POSITION_INDEPENDENT_CODE 0)
 endif()
 if(POSITION_INDEPENDENT_CODE)
@@ -399,42 +399,42 @@ if(RASPBERRY_ARM64)
 endif()
 
 ### Windows arm64 - CLANGARM64 ###
-if(Win_Arm64_Clang)
+if(Windows_Arm64_Clang)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_arm64_clang_toolchain.cmake)
 endif()
 
 ### Windows x86 - MSVC ###
-if(Win_X86_Msvc)
+if(Windows_X86_Msvc)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_msvc_toolchain.cmake)
 endif()
 
 ### Windows x86 - MINGW32 ###
-if(Win_X86_Gcc)
+if(Windows_X86_Gcc)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86 - CLANG32 ###
-if(Win_X86_Clang)
+if(Windows_X86_Clang)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_clang_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MSVC ###
-if(Win_X86_64_Msvc)
+if(Windows_X86_64_Msvc)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_msvc_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - CLANG64 ###
-if(Win_X86_64_Clang)
+if(Windows_X86_64_Clang)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MINGW64 ###
-if(Win_X86_64_Gcc)
+if(Windows_X86_64_Gcc)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - UCRT64 ###
-if(Win_X86_64_Ucrt)
+if(Windows_X86_64_Ucrt)
 	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_ucrt_toolchain.cmake)
 endif()
 

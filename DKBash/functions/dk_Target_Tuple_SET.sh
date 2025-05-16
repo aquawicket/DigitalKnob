@@ -195,39 +195,39 @@ dk_Target_Tuple_SET() {
 		dk_call dk_set Target_Arch "X86_64"
 		dk_call dk_set Target_Env "Clang"
 	elif [ "${input}" = "32" ]; then
-		dk_call dk_set Target_Os "Win"
+		dk_call dk_set Target_Os "Windows"
 		dk_call dk_set Target_Arch "Arm32"
 		dk_call dk_set Target_Env "Clang"
 	elif [ "${input}" = "33" ]; then
-		dk_call dk_set Target_Os "Win"
+		dk_call dk_set Target_Os "Windows"
 		dk_call dk_set Target_Arch "Arm64"
 		dk_call dk_set Target_Env "Clang"
 	elif [ "${input}" = "34" ]; then
-		dk_call dk_set Target_Os "Win"
+		dk_call dk_set Target_Os "Windows"
 		dk_call dk_set Target_Arch "X86"
 		dk_call dk_set Target_Env "Clang"
 	elif [ "${input}" = "35" ]; then
-		dk_call dk_set Target_Os "Win"
+		dk_call dk_set Target_Os "Windows"
 		dk_call dk_set Target_Arch "X86"
 		dk_call dk_set Target_Env "Gcc"
 	elif [ "${input}" = "36" ]; then
-		dk_call dk_set Target_Os "Win"
+		dk_call dk_set Target_Os "Windows"
 		dk_call dk_set Target_Arch "X86"
 		dk_call dk_set Target_Env "Msvc"
 	elif [ "${input}" = "37" ]; then
-		dk_call dk_set Target_Os "Win"
+		dk_call dk_set Target_Os "Windows"
 		dk_call dk_set Target_Arch "X86_64"
 		dk_call dk_set Target_Env "Clang"
 	elif [ "${input}" = "38" ]; then
-		dk_call dk_set Target_Os "Win"
+		dk_call dk_set Target_Os "Windows"
 		dk_call dk_set Target_Arch "X86_64"
 		dk_call dk_set Target_Env "Gcc"
 	elif [ "${input}" = "39" ]; then
-		dk_call dk_set Target_Os "Win"
+		dk_call dk_set Target_Os "Windows"
 		dk_call dk_set Target_Arch "X86_64"
 		dk_call dk_set Target_Env "Msvc"
 	elif [ "${input}" = "40" ]; then
-		dk_call dk_set Target_Os "Win"
+		dk_call dk_set Target_Os "Windows"
 		dk_call dk_set Target_Arch "X86_64"
 		dk_call dk_set Target_Env "Ucrt"
 	elif [ "${input}" = "41" ]; then

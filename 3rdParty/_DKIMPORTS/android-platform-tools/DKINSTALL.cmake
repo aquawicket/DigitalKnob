@@ -24,7 +24,7 @@ dk_depend(android-sdk)
 
 # 33.0.3
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-platform-tools/dkconfig.txt")
-if(Win_Host)
+if(Windows_Host)
 	dk_import(${ANDROID_PLATFORM_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/platform-tools)
 elseif(Mac_Host)
 	dk_import(${ANDROID_PLATFORM_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/platform-tools)

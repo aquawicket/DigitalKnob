@@ -17,7 +17,7 @@ function(dk_ndkDebug path)
 	endif()
 	
 	if(DEBUG AND QUEUE_BUILD)
-		if(Win_Host)
+		if(Windows_Host)
 			dk_exec(${ANDROID_NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${Target_Tuple}/Debug)
 		endif()
 		if(UNIX_HOST)

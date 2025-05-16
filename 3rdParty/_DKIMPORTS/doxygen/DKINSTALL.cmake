@@ -11,13 +11,13 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # FIXME:  Install to /3rdParty only
 dk_load(dk_builder)
 
-if(NOT Win_Host)
+if(NOT Windows_Host)
 	dk_undepend(doxygen)
 	dk_return()
 endif()
 
 ### IMPORT ###
-if(Win_Host)
+if(Windows_Host)
 	dk_set(DOXYGEN_EXE "${ProgramFiles}/doxygen/bin/doxygen.exe")
 else()
 	dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
@@ -25,7 +25,7 @@ endif()
 
 
 if(NOT EXISTS ${DOXYGEN_EXE})
-	if(Win_Host)
+	if(Windows_Host)
 		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6-setup.exe)
 		dk_command($ENV{DKDOWNLOAD_DIR}/doxygen-1.9.6-setup.exe)
 	elseif(Mac_Host)

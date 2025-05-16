@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-x.tar.gz/download
 # https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-sources.tar.gz/download
 dk_load(dk_builder)
-if(NOT Win_Host)
+if(NOT Windows_Host)
 	dk_undepend(far)
 	dk_return()
 endif()

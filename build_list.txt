@@ -29,19 +29,19 @@ HelloWorld	Raspberry_Arm32_Clang	Debug
 HelloWorld	Raspberry_Arm32_Gcc		Debug
 HelloWorld	Raspberry_Arm64_Clang	Debug
 HelloWorld	Raspberry_Arm64_Gcc		Debug
-HelloWorld	Win_Arm32_Clang			Debug
-HelloWorld	Win_Arm32_Gcc			Debug
-HelloWorld	Win_Arm32_Msvc			Debug
-HelloWorld	Win_Arm64_Clang			Debug
-HelloWorld	Win_Arm64_Gcc			Debug
-HelloWorld	Win_Arm64_Msvc			Debug
-HelloWorld	Win_X86_Clang			Debug	#NOTE:	Msys2 dropped support for clang32
-HelloWorld	Win_X86_Gcc				Debug
-HelloWorld	Win_X86_Msvc			Debug
-HelloWorld	Win_X86_64_Clang		Debug
-HelloWorld	Win_X86_64_Gcc			Debug
-HelloWorld	Win_X86_64_Msvc			Debug
-HelloWorld	Win_X86_64_Ucrt			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
+HelloWorld	Windows_Arm32_Clang		Debug
+HelloWorld	Windows_Arm32_Gcc		Debug
+HelloWorld	Windows_Arm32_Msvc		Debug
+HelloWorld	Windows_Arm64_Clang		Debug
+HelloWorld	Windows_Arm64_Gcc		Debug
+HelloWorld	Windows_Arm64_Msvc		Debug
+HelloWorld	Windows_X86_Clang		Debug	#NOTE:	Msys2 dropped support for clang32
+HelloWorld	Windows_X86_Gcc			Debug
+HelloWorld	Windows_X86_Msvc		Debug
+HelloWorld	Windows_X86_64_Clang	Debug
+HelloWorld	Windows_X86_64_Gcc		Debug
+HelloWorld	Windows_X86_64_Msvc		Debug
+HelloWorld	Windows_X86_64_Ucrt		Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
 
 
 ############ DKCore ############
@@ -75,19 +75,19 @@ DKCore		Raspberry_Arm32_Clang		Debug
 DKCore		Raspberry_Arm32_Gcc			Debug
 DKCore		Raspberry_Arm64_Clang		Debug
 DKCore		Raspberry_Arm64_Gcc			Debug
-DKCore 		Win_Arm32_Clang				Debug
-DKCore 		Win_Arm32_Gcc				Debug
-DKCore 		Win_Arm32_Msvc				Debug
-DKCore 		Win_Arm64_Clang				Debug
-DKCore 		Win_Arm64_Gcc				Debug
-DKCore 		Win_Arm64_Msvc				Debug
-DKCore 		Win_X86_Clang				Debug	#NOTE:	Msys2 dropped support for clang32
-DKCore 		Win_X86_Gcc					Debug
-DKCore 		Win_X86_Msvc				Debug
-DKCore 		Win_X86_64_Clang			Debug
-DKCore 		Win_X86_64_Gcc				Debug
-DKCore 		Win_X86_64_Msvc				Debug
-DKCore 		Win_X86_64_Ucrt 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
+DKCore 		Windows_Arm32_Clang			Debug
+DKCore 		Windows_Arm32_Gcc			Debug
+DKCore 		Windows_Arm32_Msvc			Debug
+DKCore 		Windows_Arm64_Clang			Debug
+DKCore 		Windows_Arm64_Gcc			Debug
+DKCore 		Windows_Arm64_Msvc			Debug
+DKCore 		Windows_X86_Clang			Debug	#NOTE:	Msys2 dropped support for clang32
+DKCore 		Windows_X86_Gcc				Debug
+DKCore 		Windows_X86_Msvc			Debug
+DKCore 		Windows_X86_64_Clang		Debug
+DKCore 		Windows_X86_64_Gcc			Debug
+DKCore 		Windows_X86_64_Msvc			Debug
+DKCore 		Windows_X86_64_Ucrt 		Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
 
 
 ############ DKJavascript ############
@@ -121,19 +121,19 @@ DKJavascript	Raspberry_Arm32_Clang		Debug
 DKJavascript	Raspberry_Arm32_Gcc			Debug
 DKJavascript	Raspberry_Arm64_Clang		Debug
 DKJavascript	Raspberry_Arm64_Gcc			Debug
-DKJavascript 	Win_Arm32_Clang				Debug
-DKJavascript 	Win_Arm32_Gcc				Debug
-DKJavascript 	Win_Arm32_Msvc				Debug
-DKJavascript 	Win_Arm64_Clang				Debug
-DKJavascript 	Win_Arm64_Gcc				Debug
-DKJavascript 	Win_Arm64_Msvc				Debug
-DKJavascript 	Win_X86_Clang				Debug	#NOTE:	Msys2 dropped support for clang32
-DKJavascript 	Win_X86_Gcc					Debug
-DKJavascript 	Win_X86_Msvc				Debug
-DKJavascript 	Win_X86_64_Clang			Debug
-DKJavascript 	Win_X86_64_Gcc				Debug
-DKJavascript 	Win_X86_64_Msvc				Debug
-DKJavascript 	Win_X86_64_Ucrt 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
+DKJavascript 	Windows_Arm32_Clang			Debug
+DKJavascript 	Windows_Arm32_Gcc			Debug
+DKJavascript 	Windows_Arm32_Msvc			Debug
+DKJavascript 	Windows_Arm64_Clang			Debug
+DKJavascript 	Windows_Arm64_Gcc			Debug
+DKJavascript 	Windows_Arm64_Msvc			Debug
+DKJavascript 	Windows_X86_Clang			Debug	#NOTE:	Msys2 dropped support for clang32
+DKJavascript 	Windows_X86_Gcc				Debug
+DKJavascript 	Windows_X86_Msvc			Debug
+DKJavascript 	Windows_X86_64_Clang		Debug
+DKJavascript 	Windows_X86_64_Gcc			Debug
+DKJavascript 	Windows_X86_64_Msvc			Debug
+DKJavascript 	Windows_X86_64_Ucrt 		Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
 
 
 ############ DKSDL ############
@@ -167,19 +167,19 @@ DKSDL		Raspberry_Arm32_Clang		Debug
 DKSDL		Raspberry_Arm32_Gcc			Debug
 DKSDL		Raspberry_Arm64_Clang		Debug
 DKSDL		Raspberry_Arm64_Gcc			Debug
-DKSDL 		Win_Arm32_Clang				Debug
-DKSDL 		Win_Arm32_Gcc				Debug
-DKSDL 		Win_Arm32_Msvc				Debug
-DKSDL 		Win_Arm64_Clang				Debug
-DKSDL 		Win_Arm64_Gcc				Debug
-DKSDL 		Win_Arm64_Msvc				Debug
-DKSDL 		Win_X86_Clang				Debug	#NOTE:	Msys2 dropped support for clang32
-DKSDL	 	Win_X86_Gcc					Debug
-DKSDL 		Win_X86_Msvc				Debug
-DKSDL 		Win_X86_64_Clang			Debug
-DKSDL	 	Win_X86_64_Gcc				Debug
-DKSDL 		Win_X86_64_Msvc				Debug
-DKSDL 		Win_X86_64_Ucrt 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
+DKSDL 		Windows_Arm32_Clang			Debug
+DKSDL 		Windows_Arm32_Gcc			Debug
+DKSDL 		Windows_Arm32_Msvc			Debug
+DKSDL 		Windows_Arm64_Clang			Debug
+DKSDL 		Windows_Arm64_Gcc			Debug
+DKSDL 		Windows_Arm64_Msvc			Debug
+DKSDL 		Windows_X86_Clang			Debug	#NOTE:	Msys2 dropped support for clang32
+DKSDL	 	Windows_X86_Gcc				Debug
+DKSDL 		Windows_X86_Msvc			Debug
+DKSDL 		Windows_X86_64_Clang		Debug
+DKSDL	 	Windows_X86_64_Gcc			Debug
+DKSDL 		Windows_X86_64_Msvc			Debug
+DKSDL 		Windows_X86_64_Ucrt 		Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
 
 
 ############ DKSDLRml ############
@@ -213,16 +213,16 @@ DKSDLRml		Raspberry_Arm32_Clang		Debug
 DKSDLRml		Raspberry_Arm32_Gcc			Debug
 DKSDLRml		Raspberry_Arm64_Clang		Debug
 DKSDLRml		Raspberry_Arm64_Gcc			Debug
-DKSDLRml 		Win_Arm32_Clang				Debug
-DKSDLRml 		Win_Arm32_Gcc				Debug
-DKSDLRml 		Win_Arm32_Msvc				Debug
-DKSDLRml 		Win_Arm64_Clang				Debug
-DKSDLRml 		Win_Arm64_Gcc				Debug
-DKSDLRml 		Win_Arm64_Msvc				Debug
-DKSDLRml 		Win_X86_Clang				Debug	#NOTE:	Msys2 dropped support for clang32
-DKSDLRml 		Win_X86_Gcc					Debug
-DKSDLRml 		Win_X86_Msvc				Debug
-DKSDLRml 		Win_X86_64_Clang			Debug
-DKSDLRml 		Win_X86_64_Gcc				Debug
-DKSDLRml 		Win_X86_64_Msvc				Debug
-DKSDLRml 		Win_X86_64_Ucrt 			Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64
+DKSDLRml 		Windows_Arm32_Clang			Debug
+DKSDLRml 		Windows_Arm32_Gcc			Debug
+DKSDLRml 		Windows_Arm32_Msvc			Debug
+DKSDLRml 		Windows_Arm64_Clang			Debug
+DKSDLRml 		Windows_Arm64_Gcc			Debug
+DKSDLRml 		Windows_Arm64_Msvc			Debug
+DKSDLRml 		Windows_X86_Clang			Debug	#NOTE:	Msys2 dropped support for clang32
+DKSDLRml 		Windows_X86_Gcc				Debug
+DKSDLRml 		Windows_X86_Msvc			Debug
+DKSDLRml 		Windows_X86_64_Clang		Debug
+DKSDLRml 		Windows_X86_64_Gcc			Debug
+DKSDLRml 		Windows_X86_64_Msvc			Debug
+DKSDLRml 		Windows_X86_64_Ucrt 		Debug	#FIXME: Change to WIN_X86_64_GCC_UCRT64

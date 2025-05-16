@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/ninja-build/ninja.git
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(Win_Host)
+if(Windows_Host)
 	dk_import(https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-win.zip)
 	dk_findProgram(NINJA_EXE ninja ${NINJA})
 elseif(Mac_Host)

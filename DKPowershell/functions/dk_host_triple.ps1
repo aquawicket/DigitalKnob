@@ -9,7 +9,7 @@ function Global:dk_Host_Tuple() {
 	dk_debugFunc 0
 
 	###### Host_Os and <Host_Os>_Host ######
-	$global:Host_Os="Win"
+	$global:Host_Os="Windows"
 	New-Variable -Name "$($Host_Os)_Host" -Value 1 -Force
 
 	###### Host_Arch and <Host_Arch>_Host ######

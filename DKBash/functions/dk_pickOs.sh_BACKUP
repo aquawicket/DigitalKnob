@@ -118,21 +118,21 @@ dk_pickOs() {
 	elif [ "${choice}" = "29" ]; then
 		Target_Tuple="win_arm32"
 	elif [ "${choice}" = "30" ]; then
-		Target_Tuple="Win_Arm64_Clang"
+		Target_Tuple="Windows_Arm64_Clang"
 	elif [ "${choice}" = "31" ]; then
 		Target_Tuple="win_x86_mingw"
 	elif [ "${choice}" = "32" ]; then
-		Target_Tuple="Win_X86_Clang"
+		Target_Tuple="Windows_X86_Clang"
 	elif [ "${choice}" = "33" ]; then
-		Target_Tuple="Win_X86_Msvc"
+		Target_Tuple="Windows_X86_Msvc"
 	elif [ "${choice}" = "34" ]; then
 		Target_Tuple="win_x86_64_mingw"
 	elif [ "${choice}" = "35" ]; then
-		Target_Tuple="Win_X86_64_Clang"
+		Target_Tuple="Windows_X86_64_Clang"
 	elif [ "${choice}" = "36" ]; then
-		Target_Tuple="Win_X86_64_Ucrt"
+		Target_Tuple="Windows_X86_64_Ucrt"
 	elif [ "${choice}" = "37" ]; then
-		Target_Tuple="Win_X86_64_Msvc"
+		Target_Tuple="Windows_X86_64_Msvc"
 	elif [ "${choice}" = "38" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "39" ]; then

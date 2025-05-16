@@ -19,34 +19,34 @@ dk_validate(MSYSTEM "dk_MSYSTEM()")
 dk_validate(MSYS2 "dk_depend(msys2)")
 dk_installPackage(perl)
 
-if(Win_Arm64_Clang)
+if(Windows_Arm64_Clang)
 	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/clangarm64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
-elseif(Win_X86_Clang)
+elseif(Windows_X86_Clang)
 	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/clang32/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
-elseif(Win_X86_64_Clang)
+elseif(Windows_X86_64_Clang)
 	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/clang64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
-elseif(Win_X86_Gcc)
+elseif(Windows_X86_Gcc)
 	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/mingw32/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
-elseif(Win_X86_64_Gcc)
+elseif(Windows_X86_64_Gcc)
 	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/mingw64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
-elseif(Win_X86_64_Ucrt)
+elseif(Windows_X86_64_Ucrt)
 	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/ucrt64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
-elseif(Win_X86_Msvc)
+elseif(Windows_X86_Msvc)
 	dk_depend(strawberry-perl)
 	
-elseif(Win_X86_64_Msvc)
+elseif(Windows_X86_64_Msvc)
 	dk_depend(strawberry-perl)
 	
 else()

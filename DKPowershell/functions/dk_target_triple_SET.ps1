@@ -81,15 +81,15 @@ function Global:dk_target_tuple_SET() {
 	elseif(${input} -eq "25"){ $global:Target_Tuple = "Raspberry_Arm64_Clang" }
 	elseif(${input} -eq "26"){ $global:Target_Tuple = "raspberry_x86_clang" }
 	elseif(${input} -eq "27"){ $global:Target_Tuple = "raspberry_x64_clang" }
-	elseif(${input} -eq "28"){ $global:Target_Tuple = "Win_Arm32_Clang" }
-	elseif(${input} -eq "29"){ $global:Target_Tuple = "Win_Arm64_Clang" }
-	elseif(${input} -eq "30"){ $global:Target_Tuple = "Win_X86_Clang" }
-	elseif(${input} -eq "31"){ $global:Target_Tuple = "Win_X86_Gcc" }
-	elseif(${input} -eq "32"){ $global:Target_Tuple = "Win_X86_Msvc" }
-	elseif(${input} -eq "33"){ $global:Target_Tuple = "Win_X86_64_Clang" }
-	elseif(${input} -eq "34"){ $global:Target_Tuple = "Win_X86_64_Gcc" }
-	elseif(${input} -eq "35"){ $global:Target_Tuple = "Win_X86_64_Msvc" }
-	elseif(${input} -eq "36"){ $global:Target_Tuple = "Win_X86_64_Ucrt" }
+	elseif(${input} -eq "28"){ $global:Target_Tuple = "Windows_Arm32_Clang" }
+	elseif(${input} -eq "29"){ $global:Target_Tuple = "Windows_Arm64_Clang" }
+	elseif(${input} -eq "30"){ $global:Target_Tuple = "Windows_X86_Clang" }
+	elseif(${input} -eq "31"){ $global:Target_Tuple = "Windows_X86_Gcc" }
+	elseif(${input} -eq "32"){ $global:Target_Tuple = "Windows_X86_Msvc" }
+	elseif(${input} -eq "33"){ $global:Target_Tuple = "Windows_X86_64_Clang" }
+	elseif(${input} -eq "34"){ $global:Target_Tuple = "Windows_X86_64_Gcc" }
+	elseif(${input} -eq "35"){ $global:Target_Tuple = "Windows_X86_64_Msvc" }
+	elseif(${input} -eq "36"){ $global:Target_Tuple = "Windows_X86_64_Ucrt" }
 	elseif(${input} -eq "37"){ dk_call dk_clearScreen }
 	elseif(${input} -eq "38"){ dk_call dk_unset Target_App }
 	elseif(${input} -eq "39"){ dk_call dk_exit 0 }

@@ -17,8 +17,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined Linux_Arm32_Host  (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz")
 	if defined Linux_Arm64_Host  (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-arm64-1709684476.tar.gz")
 	if defined Linux_X86_64_Host (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-x64-1709684476.tar.gz")
-	if defined Win_Arm64_Host    (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-arm64-1.87.1.zip")
-	if defined Win_X86_64_Host   (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-x64-1.87.1.zip")
+	if defined Windows_Arm64_Host    (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-arm64-1.87.1.zip")
+	if defined Windows_X86_64_Host   (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-x64-1.87.1.zip")
 	if not defined VSCODE_DL	 (%dk_call% dk_error "VSCODE_DL is invalid")
 	
 	%dk_call% dk_basename %VSCODE_DL% VSCODE_DL_FILE
@@ -28,7 +28,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set VSCODE_DIR "%DKTOOLS_DIR%/%VSCODE_FOLDER%"
 	
-	if defined Win_Host (
+	if defined Windows_Host (
 		%dk_call% dk_set VSCODE_EXE %VSCODE_DIR%/Code.exe
 	) else (
 		%dk_call% dk_set VSCODE_EXE %VSCODE_DIR%/code

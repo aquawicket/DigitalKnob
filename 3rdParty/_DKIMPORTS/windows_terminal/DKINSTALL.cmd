@@ -14,9 +14,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0	
 	
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	if defined Win_Arm64_Host   (set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_arm64.zip")
-    if defined Win_X86_Host     (set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x86.zip")
-    if defined Win_X86_64_Host  (set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x64.zip")
+	if defined Windows_Arm64_Host   (set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_arm64.zip")
+    if defined Windows_X86_Host     (set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x86.zip")
+    if defined Windows_X86_64_Host  (set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x64.zip")
 	if not defined WINDOWS_TERMINAL_DL (%dk_call% dk_error "WINDOWS_TERMINAL_DL is invalid")
 	
 	%dk_call% dk_basename %WINDOWS_TERMINAL_DL% WINDOWS_TERMINAL_DL_FILE

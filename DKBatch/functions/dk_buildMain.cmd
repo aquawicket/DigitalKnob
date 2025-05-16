@@ -53,7 +53,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			rem The the current Host_Arch doesn't have the Target_Tuple in it's allowed list
 			rem We goto skipTarget, we could also have a disabled list for each Host_Arch to do the same:
 			rem A block list could be good, because everything will be attempted by default instead of enabled.
-			rem Example win_x86 mac ios iossim	=	Win_X86_Host's will skip all instaces of mac, ios and iossim
+			rem Example win_x86 mac ios iossim	=	Windows_X86_Host's will skip all instaces of mac, ios and iossim
 
 
 			if defined BUILD_LIST[!_line_!][2] (

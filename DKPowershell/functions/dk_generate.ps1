@@ -55,13 +55,13 @@ function Global:dk_generate() {
 	elseif($Target_Tuple -eq "mac_x86_64")     { $CMAKE_ARGS += "-G Xcode" }
 	elseif($Target_Tuple -eq "raspberry_arm32"){ $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($Target_Tuple -eq "raspberry_arm64"){ $CMAKE_ARGS += "-G Unix Makefiles" }
-	elseif($Target_Tuple -eq "Win_Arm64_Clang"){ 
+	elseif($Target_Tuple -eq "Windows_Arm64_Clang"){ 
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 	    $env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clangarm64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANGARM64"
 	}
-	elseif($Target_Tuple -eq "Win_X86_Clang"){
+	elseif($Target_Tuple -eq "Windows_X86_Clang"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
@@ -73,7 +73,7 @@ function Global:dk_generate() {
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW32"
 	}
-	elseif($Target_Tuple -eq "Win_X86_64_Clang"){
+	elseif($Target_Tuple -eq "Windows_X86_64_Clang"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang64\bin;$env:PATH"
 		#$CMAKE_ARGS += "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
@@ -86,13 +86,13 @@ function Global:dk_generate() {
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW64"
 	}
-	elseif($Target_Tuple -eq "Win_X86_64_Ucrt"){
+	elseif($Target_Tuple -eq "Windows_X86_64_Ucrt"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\ucrt64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=UCRT64"
 	}
-	elseif($Target_Tuple -eq "Win_X86_64_Msvc"){ 
+	elseif($Target_Tuple -eq "Windows_X86_64_Msvc"){ 
 		$CMAKE_ARGS += "-G Visual Studio 17 2022"
 	}
 	else{

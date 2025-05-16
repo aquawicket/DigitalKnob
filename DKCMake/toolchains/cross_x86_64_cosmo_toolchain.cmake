@@ -11,7 +11,7 @@ set(CMAKE_SKIP_RPATH 						ON)
 set(CMAKE_CROSSCOMPILING 					OFF)
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(Win_Host)
+if(Windows_Host)
 	set(CMAKE_GENERATOR						"MSYS Makefiles")
 else()
 	set(CMAKE_GENERATOR						"Unix Makefiles")

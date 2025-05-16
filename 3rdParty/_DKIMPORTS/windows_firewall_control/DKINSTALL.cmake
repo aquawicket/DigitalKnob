@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://www.binisoft.org/download/wfc6setup.exe
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(NOT Win_Host)
+if(NOT Windows_Host)
 	dk_undepend(windows_firewall_control)
 	dk_return()
 endif()

@@ -25,7 +25,7 @@ dk_mkdir(${ANDROID_SDK})
 dk_mkdir(${ANDROID_SDK}/cmdline-tools)
 
 # 7583922
-if(Win_Host)
+if(Windows_Host)
 	dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
 elseif(Mac_Host)
 	dk_import(https://dl.google.com/android/repository/commandlinetools-mac-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
@@ -51,7 +51,7 @@ dk_set(SDKMANAGER_BAT ${ANDROID_CMDLINE_TOOLS}/bin/sdkmanager.bat)
 dk_return()
 
 
-if(Win_Host)
+if(Windows_Host)
 	dk_exec(sdkmanager --sdk_root=${ANDROID_SDK} WORKING_DIRECTORY ${ANDROID_CMDLINE_TOOLS}/bin)
 	if(NOT EXISTS ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 		dk_info("Installing Android build-tools: ${ANDROID_BUILD_TOOLS_VERSION} . . .")

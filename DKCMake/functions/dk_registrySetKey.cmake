@@ -15,7 +15,7 @@ function(dk_registrySetKey key value data)
 	dk_debugFunc()
 
 	
-	if(Win_Host)
+	if(Windows_Host)
 		dk_replaceAll(${key}  "/"  "\\"  key)
 		dk_replaceAll(${value}  "/"  "\\"  value)
 		dk_replaceAll(${data}  "/"  "\\"  data)

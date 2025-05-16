@@ -309,7 +309,7 @@ endif()
 ### Set CMAKE_SKIP_RPATH ###
 dk_set(CMAKE_SKIP_RPATH 1)
 
-if(Win_Host)
+if(Windows_Host)
 	dk_set(exe .exe)
 	dk_set(bat .bat)
 endif()

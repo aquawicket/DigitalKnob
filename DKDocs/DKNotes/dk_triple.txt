@@ -12,33 +12,33 @@ endfunction()
 
 dk_tupleAppend(HOST OS "WIN")
 	HOST_OS = WIN
-	Win_Host = 1
+	Windows_Host = 1
 	
 dk_tupleAppend(HOST ARCH "ARM64")
 	HOST_OS = WIN
-	Win_Host = 1
+	Windows_Host = 1
 	HOST_ARCH = ARM64
 	ARM64_HOST = 1
 	HOST_OS_ARCH = WIN_ARM64
-	Win_Arm64_Host = 1
+	Windows_Arm64_Host = 1
 	
 dk_tupleAppend(HOST ENV "MSVC")
 	HOST_OS = WIN
-	Win_Host = 1
+	Windows_Host = 1
 	HOST_ARCH = ARM64
 	ARM64_HOST = 1
 	HOST_ENV = MSVC
 	MSVC_HOST = 1
 	HOST_OS_ARCH = WIN_ARM64
-	Win_Arm64_Host = 1
+	Windows_Arm64_Host = 1
 	HOST_OS_ENV = WIN_MSVC
 	WIN_MSVC_HOST = 1
 	HOST_ARCH_ENV = ARM64_MSVC
 	ARM64_MSVC_HOST = 1
 	
 dk_tupleAppend(HOST YEAR "2024")
-	HOST_OS = WIN						Win_Host                = 1
-	HOST_OS_ARCH = WIN_ARM64			Win_Arm64_Host          = 1
+	HOST_OS = WIN						Windows_Host                = 1
+	HOST_OS_ARCH = WIN_ARM64			Windows_Arm64_Host          = 1
 	HOST_OS_ENV = WIN_MSVC				WIN_MSVC_HOST           = 1
 	HOST_OS_YEAR = WIN_2024				WIN_2024_HOST           = 1
 		HOST_ARCH = ARM64					ARM64_HOST          = 1	 

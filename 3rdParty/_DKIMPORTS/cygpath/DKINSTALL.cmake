@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ############ cygpath ############
-if(NOT Win_Host)
+if(NOT Windows_Host)
 	dk_undepend(cygpath)
 	dk_return()
 endif()

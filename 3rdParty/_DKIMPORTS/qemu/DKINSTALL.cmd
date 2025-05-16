@@ -15,8 +15,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_debugFunc 0
 
     %dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-    if defined Win_X86_Host     (set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20240903.exe")
-    if defined Win_X86_64_Host  (set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe")
+    if defined Windows_X86_Host     (set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20240903.exe")
+    if defined Windows_X86_64_Host  (set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe")
     if not defined QEMU_DL 		(%dk_call% dk_error "QEMU_DL is invalid")
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"

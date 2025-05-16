@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #dk_depend(ghostscript)
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(Win_Host)
+if(Windows_Host)
 	dk_depend(vc_redist)
 endif()
 
@@ -23,23 +23,23 @@ if(ANDROID_HSOST)
 	execute_process(COMMAND command -v convert OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE)	
 elseif(UNIX_HOST)
 	dk_import("https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip")
-elseif(Win_X86_Host)
+elseif(Windows_X86_Host)
 	dk_import("https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-43-portable-Q16-x86.zip")
-elseif(Win_X86_64_Host)
+elseif(Windows_X86_64_Host)
 	dk_import("https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-43-portable-Q16-x64.zip")
 endif()
 
 
 ### Copy OpenMP library to imagemagic folder
-if(Win_Host)
+if(Windows_Host)
 	if(NOT EXISTS "${IMAGEMAGICK}/vcomp140.dll")
-		if(Win_X86_Host)
+		if(Windows_X86_Host)
 			if(EXISTS "${VCCOMP140_X86_DEBUG_DLL}")
 				dk_copy("${VCCOMP140_X86_DEBUG_DLL}" "${IMAGEMAGICK}/vcomp140.dll") #rename
 			elseif(EXISTS "${VCCOMP140_X86_DLL}")
 				dk_copy("${VCCOMP140_X86_DLL}" "${IMAGEMAGICK}/vcomp140.dll")
 			endif()
-		elseif(Win_X86_64_Host)
+		elseif(Windows_X86_64_Host)
 			if(EXISTS "${VCCOMP140_X86_64_DEBUG_DLL}")
 				dk_copy("${VCCOMP140_X86_64_DEBUG_DLL}" "${IMAGEMAGICK}/vcomp140.dll") # rename
 			elseif(EXISTS "${VCCOMP140_X86_64_DLL}")
@@ -52,7 +52,7 @@ endif()
 
 
 if(NOT EXISTS "${IMAGEMAGICK_CONVERT_EXE}")
-	if(Win_Host)
+	if(Windows_Host)
 		dk_findProgram	(IMAGEMAGICK_CONVERT_EXE magick.exe "${IMAGEMAGICK}")
 		dk_assertPath	(IMAGEMAGICK_CONVERT_EXE)
 	endif()

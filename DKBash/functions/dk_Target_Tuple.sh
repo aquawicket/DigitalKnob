@@ -9,7 +9,7 @@
 #
 #	Set the cached target variables
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
-#   i.e.  Win_X86_64_Clang
+#   i.e.  Windows_X86_64_Clang
 #
 #	If the CMAKE_BINARY_DIR is missing the <Target_Os> or the <Target_Arch>, dk_Target_Tuple_SET will be called to get those variables
 #
@@ -19,24 +19,24 @@
 dk_Target_Tuple() {
 	dk_debugFunc 0
 
-	#CMAKE_BINARY_DIR="C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/Win_X86_64_Clang/Debug"
+	#CMAKE_BINARY_DIR="C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Debug"
 	default_Target_Env="clang"
 
 	### Get Target_Dir ###
 	dk_call dk_realpath "${CMAKE_BINARY_DIR}" Target_Dir
-	dk_call dk_printVar Target_Dir 							# Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang/Debug
+	dk_call dk_printVar Target_Dir 							# Target_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Windows_X86_64_Clang/Debug
 
 	#### Set Target_Type / TARGET_TYPE ###
 	if [ "${Target_Dir}" = "Debug" ]; then	
 		### Get DEBUG ###
 		dk_call dk_set Target_Type DEBUG					# Target_Type	= DEBUG
 		dk_call dk_set ${Target_Type} 1					# DEBUG = 1	
-		dk_call dk_dirname Target_Dir Target_Tuple_Dir		# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
+		dk_call dk_dirname Target_Dir Target_Tuple_Dir		# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Windows_X86_64_Clang
 	elif [ "${Target_Dir}" = "Release" ]; then
 		### Get RELEASE ###
 		dk_call dk_set Target_Type RELEASE 				# Target_Type = RELEASE
 		dk_call dk_set ${Target_Type} 1					# RELEASE = 1	
-		dk_call dk_dirname ${Target_Dir} Target_Tuple_Dir	# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Win_X86_64_Clang
+		dk_call dk_dirname ${Target_Dir} Target_Tuple_Dir	# Target_Tuple_Dir = C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKSample/Windows_X86_64_Clang
 	fi
 
 	if ( ( dk_call dk_containsCI "${Target_Dir}" "Android"      ) ||
@@ -69,9 +69,9 @@ dk_Target_Tuple() {
 	dk_call dk_assertPath DK_PROJECT_DIR
 
 	#### Set Target_Tuple, <Target_Os>_<Target_Arch>_<Target_Env> ###
-	dk_call dk_basename ${Target_Tuple_Dir} Target_Tuple		# Target_Tuple 	= Win_X86_64_Clang
+	dk_call dk_basename ${Target_Tuple_Dir} Target_Tuple		# Target_Tuple 	= Windows_X86_64_Clang
 	dk_call dk_set Target_Tuple ${Target_Tuple}					# Globalize the variable
-	dk_call dk_set ${Target_Tuple} 1							# Win_X86_64_Clang = 1
+	dk_call dk_set ${Target_Tuple} 1							# Windows_X86_64_Clang = 1
 
 	#### Set Target_Os / <Target_Os>_Target
 	dk_call dk_containsCI "${Target_Tuple}" "Android" 		&& dk_call dk_set Target_Os Android
@@ -82,7 +82,6 @@ dk_Target_Tuple() {
 	dk_call dk_containsCI "${Target_Tuple}" "Mac" 			&& dk_call dk_set Target_Os Mac
 	dk_call dk_containsCI "${Target_Tuple}" "Raspberry" 	&& dk_call dk_set Target_Os Raspberry
 	dk_call dk_containsCI "${Target_Tuple}" "Windows" 		&& dk_call dk_set Target_Os Windows
-	dk_call dk_containsCI "${Target_Tuple}" "Win"			&& dk_call dk_set Target_Os Win
 	dk_call dk_containsCI "${Target_Tuple}" "Cosmopolitan"	&& dk_call dk_set Target_Os Cosmopolitan
 	if [ -z "${Target_Os-}" ]; then
 		# dk_call dk_warning "The target Target_Tuple:${Target_Tuple} does not contain a valid Target_Os"

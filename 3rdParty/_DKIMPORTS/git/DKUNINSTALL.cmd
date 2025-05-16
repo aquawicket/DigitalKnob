@@ -18,11 +18,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_debugFunc 0
  
     %dk_call% dk_validate Host_Tuple	"%dk_call% dk_Host_Tuple"
-    ::if defined Win_Arm32_Host        	(set "GIT_DL=")
-    ::if defined Win_Arm64_Host        	(set "GIT_DL=")
-    if defined Win_X86_Host            	(set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe")
-    if defined Win_X86_64_Host         	(set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe")
-    if not defined GIT_DL              	(%dk_call% dk_error "GIT_DL is invalid")
+    ::if defined Windows_Arm32_Host		(set "GIT_DL=")
+    ::if defined Windows_Arm64_Host		(set "GIT_DL=")
+    if defined Windows_X86_Host			(set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe")
+    if defined Windows_X86_64_Host		(set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe")
+    if not defined GIT_DL				(%dk_call% dk_error "GIT_DL is invalid")
 	
 ::  %dk_call% dk_basename %GIT_DL% GIT_DL_FILE
 ::  %dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER

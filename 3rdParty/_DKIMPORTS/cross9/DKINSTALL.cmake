@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_load(dk_builder)
 
-if((NOT Win_Host) OR (NOT Cosmopolitan))
+if((NOT Windows_Host) OR (NOT Cosmopolitan))
 	dk_undepend(cross9)
 	dk_return()
 endif()

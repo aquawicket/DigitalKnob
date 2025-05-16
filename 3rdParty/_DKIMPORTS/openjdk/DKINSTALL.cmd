@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined Android_Host      	(set "OPENJDK_DL=openjdk-17")
 	if defined Linux_X86_64_Host 	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz")
 	if defined Mac_X86_64_Host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz")
-	if defined Win_X86_64_Host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip")
+	if defined Windows_X86_64_Host	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip")
 	if not defined OPENJDK_DL		(%dk_call% dk_error "OPENJDK_DL is invalid")
 	
 	::%dk_call% dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
@@ -32,7 +32,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
 	%dk_call% dk_nativePath %OPENJDK% OPENJDK_NATIVE
 	
-	if defined Win_Host   (%dk_call% :dk_installOpenJdkWin)
+	if defined Windows_Host   (%dk_call% :dk_installOpenJdkWin)
 	if defined Mac_Host   (%dk_call% :dk_installOpenJdkMac)
 	if defined Linux_Host (%dk_call% :dk_installOpenJdkLinux)
 %endfunction%	

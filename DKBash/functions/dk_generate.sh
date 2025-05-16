@@ -135,31 +135,31 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
 	elif [ "${Target_Tuple,,}" = "Raspberry_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${Target_Tuple,,}" = "Win_Arm64_Clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Windows_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "Win_X86_Clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Windows_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "Win_X86_Gcc" ]; then
+	elif [ "${Target_Tuple,,}" = "Windows_X86_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "Win_X86_64_Clang" ]; then
+	elif [ "${Target_Tuple,,}" = "Windows_X86_64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "Win_X86_64_Gcc" ]; then
+	elif [ "${Target_Tuple,,}" = "Windows_X86_64_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "Win_X86_64_Ucrt" ]; then
+	elif [ "${Target_Tuple,,}" = "Windows_X86_64_Ucrt" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
-	elif [ "${Target_Tuple,,}" = "Win_X86_64_Msvc" ]; then
+	elif [ "${Target_Tuple,,}" = "Windows_X86_64_Msvc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Visual Studio 17 2022"
 	else
 		dk_call dk_fatal "Could no determine Target_Tuple:${Target_Tuple,,}"

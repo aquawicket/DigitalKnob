@@ -18,8 +18,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% "%DKIMPORTS_DIR%/vc_redist/DKINSTALL.cmd"
 
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	if defined Win_X86_Host			(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip")
-	if defined Win_X86_64_Host		(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip")
+	if defined Windows_X86_Host		(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip")
+	if defined Windows_X86_64_Host	(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip")
 	if not defined PHP_SRC_DL		(%dk_call% dk_error "PHP_SRC_DL is invalid")
 
 	%dk_call% dk_importVariables %PHP_SRC_DL% IMPORT_PATH %DKIMPORTS_DIR%\php-src

@@ -46,7 +46,7 @@ if(Mac_Host)
 	dk_command(java --version)
 endif()
 
-if(Win_Host)
+if(Windows_Host)
 	dk_import(${OPENJDK_DL_WIN_X86_64})
 	dk_assertPath(OPENJDK)
 	

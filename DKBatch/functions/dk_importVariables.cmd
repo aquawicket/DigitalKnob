@@ -120,11 +120,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem <PLUGIN>_IMPORT_NAME	- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
 	rem <PLUGIN>_BRANCH			- from PLUGIN_GIT_BRANCH						:ZLIB_BRANCH		: master
 	rem <PLUGIN>_TAG			- from PLUGIN_GIT_TAG							:ZLIB_TAG			: 
-	rem <PLUGIN>_TUPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple	:ZLIB_TUPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang
-	rem <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang/Debug
-	rem <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang/Debug
-	rem <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang/Debug
-	rem <PLUGIN>_RELEASE_DIR	- from PLUGIN_INSTALL_PATH and RELEASE_DIR		:ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang/Release
+	rem <PLUGIN>_TUPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple	:ZLIB_TUPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
+	rem <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	rem <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	rem <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	rem <PLUGIN>_RELEASE_DIR	- from PLUGIN_INSTALL_PATH and RELEASE_DIR		:ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	
 	
 rem ##############################################
@@ -414,35 +414,35 @@ rem ### <PLUGIN>_TUPLE_DIR
 	set "!CURRENT_PLUGIN!_TUPLE_DIR="
 	if defined Target_Tuple (
 		%dk_call% dk_set !CURRENT_PLUGIN!_TUPLE_DIR "!PLUGIN_INSTALL_PATH!/!Target_Tuple!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_TUPLE_DIR 					&rem ZLIB_TUPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_TUPLE_DIR 					&rem ZLIB_TUPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	)  
 	
 rem ### <PLUGIN>_CONFIG_DIR
 	set "!CURRENT_PLUGIN!_CONFIG_DIR="
 	if defined CONFIG_PATH (
 		%dk_call% dk_set !CURRENT_PLUGIN!_CONFIG_DIR "!PLUGIN_INSTALL_PATH!/!CONFIG_PATH!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_CONFIG_DIR 					&rem ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang/Debug
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_CONFIG_DIR 					&rem ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	)  
 	
 rem ### <PLUGIN>_BUILD_DIR
 	set "!CURRENT_PLUGIN!_BUILD_DIR="
 	if defined BUILD_PATH (
 		%dk_call% dk_set !CURRENT_PLUGIN!_BUILD_DIR "!PLUGIN_INSTALL_PATH!/!BUILD_PATH!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_BUILD_DIR 					&rem ZLIB_BUILD_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang/Debug
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_BUILD_DIR 					&rem ZLIB_BUILD_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	)  
 	
 rem ### <PLUGIN>_DEBUG_DIR
 	set "!CURRENT_PLUGIN!_DEBUG_DIR="
 	if defined DEBUG_DIR (
 		%dk_call% dk_set !CURRENT_PLUGIN!_DEBUG_DIR "!PLUGIN_INSTALL_PATH!/!Target_Tuple!/!DEBUG_DIR!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DEBUG_DIR 					&rem ZLIB_DEBUG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang/Debug
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DEBUG_DIR 					&rem ZLIB_DEBUG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	)  
 	
 rem ### <PLUGIN>_RELEASE_DIR
 	set "!CURRENT_PLUGIN!_RELEASE_DIR="
 	if defined RELEASE_DIR (
 		%dk_call% dk_set !CURRENT_PLUGIN!_RELEASE_DIR "!PLUGIN_INSTALL_PATH!/!Target_Tuple!/!RELEASE_DIR!" 
-		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_RELEASE_DIR 					&rem ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Win_X86_64_Clang/Release
+		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_RELEASE_DIR 					&rem ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	)  
 
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN! 

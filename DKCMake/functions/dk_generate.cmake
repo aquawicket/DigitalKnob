@@ -146,40 +146,40 @@ function(dk_generate)
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Win_Arm64_Clang")
+	if("${Target_Tuple}" STREQUAL "Windows_Arm64_Clang")
 		dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Win_X86_Clang")
+	if("${Target_Tuple}" STREQUAL "Windows_X86_Clang")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Win_X86_Gcc")
+	if("${Target_Tuple}" STREQUAL "Windows_X86_Gcc")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Win_X86_64_Clang")
+	if("${Target_Tuple}" STREQUAL "Windows_X86_64_Clang")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
 		# TODO: export MSYSTEM=CLANG64
 		#dk_arrayUnshift(CMAKE_ARGS "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Win_X86_64_Gcc")
+	if("${Target_Tuple}" STREQUAL "Windows_X86_64_Gcc")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Win_X86_64_Ucrt")
+	if("${Target_Tuple}" STREQUAL "Windows_X86_64_Ucrt")
 		# TODO: export PATH=$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
 		dk_arrayUnshift(CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Win_X86_64_Msvc")
+	if("${Target_Tuple}" STREQUAL "Windows_X86_64_Msvc")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Visual Studio 17 2022")
 	endif()
 

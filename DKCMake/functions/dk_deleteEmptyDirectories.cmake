@@ -16,7 +16,7 @@ function(dk_deleteEmptyDirectories path)
 		dk_warning("dk_deleteEmptyDirectories(): path:${path} does not exist")
 		dk_return()
 	endif()
-	if(Win_Host)
+	if(Windows_Host)
 		#execute_process(COMMAND for /f "delims=" %d in ('dir /s /b /ad ^| sort /r') do rd "%d" WORKING_DIRECTORY ${path})
 		# https://stackoverflow.com/a/30138960/688352
 		

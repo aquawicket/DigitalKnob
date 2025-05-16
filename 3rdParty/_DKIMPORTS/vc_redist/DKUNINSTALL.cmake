@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://softmany.com/microsoft-visual-c-redistributable-package/download/
 #
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(NOT Win_Host)
+if(NOT Windows_Host)
 	dk_undepend(vc_redist)
 	dk_return()
 endif()
