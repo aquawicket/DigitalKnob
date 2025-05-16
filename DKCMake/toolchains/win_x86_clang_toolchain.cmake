@@ -10,7 +10,10 @@ dk_validate(MSYS2 "dk_depend(msys2)")
 dk_depend(clang)
 
 dk_set(MSYSTEM 						CLANG32)
-dk_prependEnvPath("${${MSYSTEM}_BIN}")
+dk_prependEnvPath(					"${MSYS2}/usr/bin")
+dk_prependEnvPath(					"${${MSYSTEM}_BIN}")
+set(ENV{ACLOCAL_PATH} 				"${MSYS2}/usr/share/aclocal")
+
 dk_set(CMAKE_GENERATOR				"MinGW Makefiles")
 dk_set(CMAKE_MAKE_PROGRAM 			"${${MSYSTEM}_BIN}/mingw32-make.exe")
 dk_set(CMAKE_C_COMPILER				"${${MSYSTEM}_BIN}/clang.exe")
