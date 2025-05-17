@@ -17,7 +17,10 @@ function(dk_Target_Os)
 		dk_set(Target_Os "${ARGV0}")
 	
 	###### GET ######	
-	elseif(NOT DEFINED ENV{Target_Os})
+	elseif(DEFINED ENV{Target_Os})
+		dk_set(Target_Os "$ENV{Target_Os}")
+	
+	else()
 		dk_echo()
 		if(Target_Os_Cache)
 			dk_echo(" 0) ${Target_Os_Cache}")
@@ -66,13 +69,12 @@ function(dk_Target_Os)
 		else()
 			dk_warning("invalid selection: '${input}'")
 		endif()
-	else()
-		dk_set(Target_Os "$ENV{Target_Os}")
 	endif()
 	
 	dk_assertVar(Target_Os)
+	dk_set(${Target_Os}_Target 1)
 	dk_set(${Target_Os} 1)
-	#dk_set(${Target_Os}_Target 1)
+	
 	
 	###### VALIDATE RESULT ######
 	if(Android)
@@ -98,10 +100,10 @@ function(DKTEST)
 	###### GET ######
     dk_Target_Os()
 	dk_printVar(Target_Os)
-	#dk_printVar(${Target_Os}_Target)
+	dk_printVar(${Target_Os}_Target)
 	
 	###### SET ######
 	dk_Target_Os("Linux")
 	dk_printVar(Target_Os)
-	#dk_printVar(${Target_Os}_Target)
+	dk_printVar(${Target_Os}_Target)
 endfunction()

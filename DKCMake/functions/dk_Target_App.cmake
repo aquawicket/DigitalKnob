@@ -14,16 +14,14 @@ function(dk_Target_App)
 		dk_set(Target_App "${ARGV0}")
 	
 	###### GET ######	
-	elseif(NOT DEFINED ENV{Target_App})	
+	elseif(DEFINED ENV{Target_App})	
+		dk_set(Target_Type "$ENV{Target_Type}")
 		
-		#dk_validate(Target_Tuple "dk_Target_Tuple()")
-		#dk_validate(Target_Type "dk_Target_Type()")
-
+	else()
 		dk_echo()
 		if(Target_App_Cache)
 			dk_echo(" 0) ${Target_App_Cache}")
 		endif()
-		
 		dk_echo()
 		dk_echo(" 1) HelloWorld")
 		dk_echo(" 2) DKCore")
@@ -73,8 +71,6 @@ function(dk_Target_App)
 		else()
 			dk_warning("invalid selection: '${input}'")
 		endif()
-	else()
-		dk_set(Target_Type "$ENV{Target_Type}")
 	endif()
 	
 endfunction()

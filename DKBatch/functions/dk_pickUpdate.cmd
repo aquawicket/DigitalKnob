@@ -15,11 +15,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo
     %dk_call% dk_commandExists "git" && %dk_call% dk_gitCheckRemote
 
-	:: read DKBuilder.cache file
-	::if exist "%DKCACHE_DIR%/DKBuilder.cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%/DKBuilder.cache" words)
-	::set "Target_App_Cache=%words[0][0]%"
-	::set "Target_Type_Cache=%words[0][2]%"
-    ::set "Target_Tuple_Cache=%words[0][1]%"
+	::### Load DKBuilder.cache ###
+	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	if exist "%DKCACHE_DIR%/DKBuilder.cache" (
 		%dk_call% dk_getFileParams "%DKCACHE_DIR%/DKBuilder.cache"
 	)
@@ -51,7 +48,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_set Target_Arch	%Target_Arch_Cache%
 		%dk_call% dk_set Target_Env		%Target_Env_Cache%
 		%dk_call% dk_set Target_Type	%Target_Type_Cache%
-		rem %dk_call% dk_set Target_Tuple	%Target_Tuple_Cache%
 	)
     if "%choice%" equ "1"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
     if "%choice%" equ "2"  %dk_call% dk_gitCommit

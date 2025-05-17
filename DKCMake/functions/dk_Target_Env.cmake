@@ -18,7 +18,10 @@ function(dk_Target_Env)
 		dk_set(Target_Env "${ARGV0}")
 	
 	###### GET ######	
-	elseif(NOT DEFINED ENV{Target_Env})
+	elseif(DEFINED ENV{Target_Env})
+		dk_set(Target_Env "$ENV{Target_Env}")
+		
+	else()
 		dk_echo()
 		if(Target_Env_Cache)
 			dk_echo(" 0) ${Target_Env_Cache}")
@@ -58,13 +61,12 @@ function(dk_Target_Env)
 		else()
 			dk_warning("invalid selection: '${input}'")
 		endif()
-	else()
-		dk_set(Target_Env "$ENV{Target_Env}")
 	endif()
 	
 	dk_assertVar(Target_Env)
+	dk_set(${Target_Env}_Target 1)	
 	dk_set(${Target_Env} 1)	
-	#dk_set(${Target_Env}_Target 1)	
+	
 	
 	
 	###### VALIDATE RESULT ######
@@ -87,10 +89,10 @@ function(DKTEST)
 	###### GET ######
     dk_Target_Env()
 	dk_printVar(Target_Env)
-	#dk_printVar(${Target_Env}_Target)
+	dk_printVar(${Target_Env}_Target)
 	
 	###### SET ######
 	dk_Target_Env("Ucrt")
 	dk_printVar(Target_Env)
-	#dk_printVar(${Target_Env}_Target)
+	dk_printVar(${Target_Env}_Target)
 endfunction()

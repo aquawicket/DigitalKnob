@@ -15,7 +15,9 @@ function(dk_Target_Tuple)
 		dk_set(Target_Tuple "${ARGV0}")
 	
 	###### GET ######	
-	#elseif(NOT DEFINED ENV{Target_Tuple})
+	#elseif(DEFINED ENV{Target_Tuple})
+	#	dk_set(Target_Tuple "$ENV{Target_Tuple}")
+	
 	else()
 		if(NOT Target_Os)
 			dk_Target_Os()
@@ -117,9 +119,6 @@ function(dk_Target_Tuple)
 		else()
 			dk_fatal("Target_Tuple:'${Target_Tuple}' is INVALID!")
 		endif()
-		
-	#else()
-	#	dk_set(Target_Tuple "$ENV{Target_Tuple}")
 	endif()
 	
 	dk_assertVar(Target_Tuple)
@@ -135,13 +134,12 @@ function(DKTEST)
 	
 	###### GET ######
     dk_Target_Tuple()
-	dk_printVar(${Target_Tuple}_Target)
 	dk_printVar(Target_Tuple)
-	
+	dk_printVar(${Target_Tuple}_Target)
 	
 	###### SET ######
 	dk_Target_Tuple("Windows_X86_Gcc")
-	dk_printVar(${Target_Tuple}_Target)
 	dk_printVar(Target_Tuple)
+	dk_printVar(${Target_Tuple}_Target)
 	
 endfunction()

@@ -11,7 +11,6 @@
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 #   i.e.  Windows_X86_64_Clang
 #
-#	If the CMAKE_BINARY_DIR is missing the <Target_Os> or the <Target_Arch>, dk_Target_Tuple_SET will be called to get those variables
 #
 #   <Target_Os>_<Target_Arch>				= Android_Arm64, Emscripten_Arm64, Ios_Arm64, Iossim_Arm64, Linux_Arm64, Mac_Arm64, Raspberry_Arm64, Windows_Arm64
 #   <Target_Os>_<Target_Arch>_<Target_Env>	= Android_Arm64_Clang, Emscripten_Arm64_Clang, Ios_Arm64_Clang, Iossim_Arm64_Clang, Linux_Arm64_Clang, Mac_Arm64_Clang, Raspberry_Arm64_Clang, Windows_Arm64_Clang

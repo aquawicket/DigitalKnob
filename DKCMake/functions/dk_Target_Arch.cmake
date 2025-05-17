@@ -16,7 +16,10 @@ function(dk_Target_Arch)
 		dk_set(Target_Arch "${ARGV0}")
 	
 	###### GET ######	
-	elseif(NOT DEFINED ENV{Target_Arch})
+	elseif(DEFINED ENV{Target_Arch})
+		dk_set(Target_Arch "$ENV{Target_Arch}")
+	
+	else()
 		dk_echo()
 		if(Target_Arch_Cache)
 			dk_echo(" 0) ${Target_Arch_Cache}")
@@ -58,13 +61,12 @@ function(dk_Target_Arch)
 		else()
 			dk_warning("invalid selection: '${input}'")
 		endif()
-	else()
-		dk_set(Target_Arch "$ENV{Target_Arch}")
 	endif()
 	
 	dk_assertVar(Target_Arch)
+	dk_set(${Target_Arch}_Target 1)
 	dk_set(${Target_Arch} 1)
-	#dk_set(${Target_Arch}_Target 1)	
+		
 	
 	
 	###### VALIDATE RESULT ######
@@ -87,10 +89,10 @@ function(DKTEST)
 	###### GET ######
     dk_Target_Arch()
 	dk_printVar(Target_Arch)
-	#dk_printVar(${Target_Arch}_Target)
+	dk_printVar(${Target_Arch}_Target)
 	
 	###### SET ######
 	dk_Target_Arch("I686")
 	dk_printVar(Target_Arch)
-	#dk_printVar(${Target_Arch}_Target)
+	dk_printVar(${Target_Arch}_Target)
 endfunction()
