@@ -14,6 +14,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	set "_file_=%~1"
 
+	if "%dk_getFileParams_PRINT_VARIABLES%" equ "1" (
+		echo:
+		echo ### %_file_% Parameters ###
+	)
+
+			
 	for /f "delims== tokens=1,2" %%A in (%_file_:/=\%) do (
 		set "_A_=%%A"
 		if "!_A_:~0,1!" neq "#" (
@@ -27,6 +33,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		
 			set "%%A=!B!"
 		)
+	)
+	
+	if "%dk_getFileParams_PRINT_VARIABLES%" equ "1" (
+		echo:
 	)
 %endfunction%
 
