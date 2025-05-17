@@ -5,10 +5,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_pickUpdate(rtn_var:UPDATE)
+::# dk_pickUpdate()
 ::#
 ::#
-:dk_pickUpdate UPDATE
+:dk_pickUpdate
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 1
  
@@ -62,7 +62,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%dk_keyboardInput%" equ "11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
       
     ::endlocal & (
-		set "UPDATE=1"
+		set "dk_pickUpdate=1"
 	::)
 %endfunction%
 

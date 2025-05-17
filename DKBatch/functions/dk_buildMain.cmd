@@ -32,7 +32,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::%dk_call% dk_assertPath DKSCRIPT_DIR
 	
-	%dk_call% dk_unset UPDATE
+	%dk_call% dk_unset dk_pickUpdate
 	%dk_call% dk_unset Target_App
 	%dk_call% dk_unset Target_Tuple
 	%dk_call% dk_unset Target_Type
@@ -57,7 +57,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 			if defined BUILD_LIST[!_line_!][2] (
-				set "UPDATE=1"
+				set "dk_pickUpdate=1"
 				call set "Target_App=%%BUILD_LIST[!_line_!][0]%%"
 				call set "Target_Tuple=%%BUILD_LIST[!_line_!][1]%%"
 				call set "Target_Type=%%BUILD_LIST[!_line_!][2]%%"
@@ -67,7 +67,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			)
 		)
 
-		if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE	& goto :while_loop
+		if not defined dk_pickUpdate	%dk_call% dk_pickUpdate			& goto :while_loop
 		if not defined Target_App		%dk_call% dk_Target_App			& goto :while_loop
 		if not defined Target_Os		%dk_call% dk_Target_Os			& goto :while_loop
 		if not defined Target_Arch		%dk_call% dk_Target_Arch		& goto :while_loop
@@ -88,7 +88,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_generate
 		%dk_call% dk_buildApp
 
-		%dk_call% dk_unset UPDATE
+		%dk_call% dk_unset dk_pickUpdate
 		%dk_call% dk_unset Target_App
 		%dk_call% dk_unset Target_Tuple
 		%dk_call% dk_unset Target_Type
