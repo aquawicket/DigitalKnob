@@ -5,10 +5,10 @@
 
 
 ##################################################################################
-# dk_target_app()
+# dk_Target_App()
 #
 #
-dk_target_app() {
+dk_Target_App() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
@@ -73,5 +73,5 @@ dk_target_app() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_target_app
+	dk_call dk_Target_App
 }

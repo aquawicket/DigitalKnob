@@ -133,7 +133,7 @@ dk_buildMain() {
 	while :
 	do
 		if [ -z "${UPDATE-}" ];     then dk_pickUpdate;  continue; fi
-		if [ -z "${Target_App-}" ];        then dk_target_app;     continue; fi
+		if [ -z "${Target_App-}" ];        then dk_Target_App;     continue; fi
 		if [ -z "${Target_Tuple-}" ];  then dk_pickOs;      continue; fi
 		if [ -z "${Target_Type-}" ];       then dk_target_type;    continue; fi
 		
@@ -239,10 +239,10 @@ dk_pickUpdate() {
 
 
 ##################################################################################
-# dk_target_app()
+# dk_Target_App()
 #
 #
-dk_target_app() {
+dk_Target_App() {
 	dk_debugFunc 0
 
 
