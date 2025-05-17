@@ -41,10 +41,10 @@ function Global:dk_buildMain() {
 	
 	$running=1
 	while($running){  
-		if(!${UPDATE}) 		  { dk_call dk_pickUpdate;  		continue; }
-		if(!${Target_App})    { dk_call dk_Target_App;     	continue; }
-		if(!${Target_Tuple}) { dk_call dk_target_tuple_SET;  continue; }
-		if(!${Target_Type})   { dk_call dk_target_type;    	continue; }
+		if(!${UPDATE})			{ dk_call dk_pickUpdate;  	continue; }
+		if(!${Target_App})		{ dk_call dk_Target_App;    continue; }
+		if(!${Target_Tuple})	{ dk_call dk_Target_Tuple;  continue; }
+		if(!${Target_Type})		{ dk_call dk_Target_Type;   continue; }
 		
 		dk_call dk_createCache
 		dk_call dk_generate	

@@ -135,7 +135,7 @@ dk_buildMain() {
 		if [ -z "${UPDATE-}" ];     then dk_pickUpdate;  continue; fi
 		if [ -z "${Target_App-}" ];        then dk_Target_App;     continue; fi
 		if [ -z "${Target_Tuple-}" ];  then dk_pickOs;      continue; fi
-		if [ -z "${Target_Type-}" ];       then dk_target_type;    continue; fi
+		if [ -z "${Target_Type-}" ];       then dk_Target_Type;    continue; fi
 		
 		dk_createCache
 		dk_generate	
@@ -430,10 +430,10 @@ dk_pickOs() {
 
 
 ##################################################################################
-# dk_target_type()
+# dk_Target_Type()
 #
 #
-dk_target_type() {
+dk_Target_Type() {
 	dk_debugFunc 0
 
 

@@ -5,10 +5,10 @@
 
 
 ##################################################################################
-# dk_target_type()
+# dk_Target_Type()
 #
 #
-dk_target_type() {
+dk_Target_Type() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
@@ -52,5 +52,5 @@ dk_target_type() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_target_type
+	dk_call dk_Target_Type
 }

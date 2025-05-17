@@ -1,11 +1,11 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_target_type){ $dk_target_type = 1 } else{ return } #include guard
+if(!$dk_Target_Type){ $dk_Target_Type = 1 } else{ return } #include guard
 
 ##################################################################################
-# dk_target_type()
+# dk_Target_Type()
 #
 #
-function Global:dk_target_type() {
+function Global:dk_Target_Type() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
@@ -35,5 +35,5 @@ function Global:dk_target_type() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_target_type
+	dk_call dk_Target_Type
 }

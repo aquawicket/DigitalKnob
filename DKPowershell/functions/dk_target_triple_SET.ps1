@@ -1,11 +1,11 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_target_tuple_SET){ $dk_target_tuple_SET = 1 } else{ return } #include guard
+if(!$dk_Target_Type_SET){ $dk_Target_Type_SET = 1 } else{ return } #include guard
 
 ##################################################################################
-# dk_target_tuple_SET()
+# dk_Target_Type_SET()
 #
 #
-function Global:dk_target_tuple_SET() {
+function Global:dk_Target_Type_SET() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
@@ -102,5 +102,5 @@ function Global:dk_target_tuple_SET() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_target_tuple_SET
+	dk_call dk_Target_Type_SET
 }
