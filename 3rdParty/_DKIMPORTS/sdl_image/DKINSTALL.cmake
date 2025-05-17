@@ -14,13 +14,13 @@ dk_load(dk_builder)
 #
 # Notes:  VS compiler options
 #
-# DEBUG flags
+# Debug flags
 # Debug Information Format:         C7 compatible (/Z7)
 # Enable Enhanced Instruction Set:  Streaming SIMD Extensions (/arch:SSE)
 # Inline function expansion:        Default
 # Preprocessor Definitions:         _DEBUG WIN_X86 _WINDOWS LOAD_BMP LOAD_GIF LOAD_JPG LOAD_LBM LOAD_PCX LOAD_PNG LOAD_PNM LOAD_SVG LOAD_TGA LOAD_TIF LOAD_WEBP LOAD_XPM LOAD_XV 
 #
-# RELEASE flags)
+# Release flags)
 # Debug information format:         Program Database (/Zi)
 # Diagnostics Format:               OFF
 # Enable C++ Exceptions             Yes (/EHsc)
@@ -75,7 +75,7 @@ endif()
 #	-DSDL2_IMAGE_LIBRARY_RELEASE=${SDL2_IMAGE_LIBRARY_RELEASE}
 #	-DSDL2_IMAGE_LIBRARY_TEMP=${SDL2_IMAGE_LIBRARY_RELEASE})
 	
-if(DEBUG)
+if(Debug)
 	dk_set(SDL_IMAGE_CMAKE
 		-DSDL2_IMAGE_INCLUDE_DIR=${SDL2_IMAGE_INCLUDE_DIR}
 		-DSDL2_IMAGE_LIBRARY=${SDL2_IMAGE_LIBRARY_DEBUG}
@@ -84,7 +84,7 @@ if(DEBUG)
 		-DSDL2_IMAGE_LIBRARY_TEMP=${SDL2_IMAGE_LIBRARY_RELEASE}
 		"-DCMAKE_EXE_LINKER_FLAGS=${SDL2_IMAGE_LIBRARY_DEBUG}")
 endif()
-if(RELEASE)
+if(Release)
 	dk_set(SDL_IMAGE_CMAKE
 		-DSDL2_IMAGE_INCLUDE_DIR=${SDL2_IMAGE_INCLUDE_DIR}
 		-DSDL2_IMAGE_LIBRARY=${SDL2_IMAGE_LIBRARY_RELEASE}

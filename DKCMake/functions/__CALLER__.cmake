@@ -24,9 +24,6 @@ macro(__CALLER__ rtn_var)
 	math(EXPR _FRAME_ "${_FRAME_}+1" OUTPUT_FORMAT DECIMAL)
 	
 	set(${rtn_var} "${CMAKE_CURRENT_FUNCTION}")
-	
-# DEBUG
-#	dk_printVar(rtn_var)
 endmacro()
 
 

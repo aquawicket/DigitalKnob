@@ -23,9 +23,6 @@ macro(__ARGV__ rtn_var)
 	endif()
 	
 	set(${rtn_var} ${ARGV} PARENT_SCOPE)
-
-# DEBUG
-#	dk_printVar(rtn_var)
 endmacro()
 
 

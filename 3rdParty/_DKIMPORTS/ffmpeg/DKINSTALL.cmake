@@ -139,7 +139,7 @@ WIN_X86_DEBUG_dk_configure			(${FFMPEG_DIR} --pkg-config-flags=--static --disabl
 WIN_X86_64_DEBUG_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64) # --cc=${CLANG_C_COMPILER} --cxx=${CLANG_CXX_COMPILER})
 
 
-if(DEBUG)
+if(Debug)
 	dk_build(${FFMPEG_DIR})
 endif()
 
@@ -189,7 +189,7 @@ WIN_X86_64_RELEASE_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --di
 
 
 
-if(RELEASE)
+if(Release)
 	dk_build(${FFMPEG_DIR})
 endif()
 

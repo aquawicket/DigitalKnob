@@ -47,9 +47,6 @@ function(dk_callDKCmake func rtn_var)
         set(${rtn_var} "${rtn_value}" PARENT_SCOPE)
         execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${rtn_value}")
     #endif()
-    
-# DEBUG
-#	dk_printVar(rtn_value)
 endfunction()
 
 

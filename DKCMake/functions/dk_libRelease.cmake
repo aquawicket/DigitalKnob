@@ -13,7 +13,7 @@ include_guard()
 function(dk_libRelease lib_path)
 	dk_debugFunc()
 	
-	if(NOT RELEASE)
+	if(NOT Release)
 		return()
 	endif()
 	

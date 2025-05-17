@@ -39,7 +39,7 @@ function(dk_Target_Type)
 		elseif("${input}" EQUAL "2")
 			dk_set(Target_Type "Release")
 		elseif("${input}" EQUAL "3")
-			#dk_unset(ENV{UPDATE})
+			#dk_unset(dk_pickUpdate)
 		elseif("${input}" EQUAL "4")
 			dk_exit(0)
 		else()
@@ -47,8 +47,15 @@ function(dk_Target_Type)
 		endif()
 	endif()
 	
-	dk_assertVar(Target_Type)
+	dk_set(${Target_Type} 1)	
 	dk_set(${Target_Type}_Target 1)	
+	
+	###### VALIDATE RESULT ######
+	if(Debug)
+	elseif(Release)
+	else()
+		dk_fatal("Target_Type:'${Target_Type}' is INVALID!")
+	endif()
 endfunction()
 
 

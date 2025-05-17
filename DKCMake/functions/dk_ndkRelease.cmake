@@ -16,7 +16,7 @@ function(dk_ndkRelease path)
 		dk_fatal("dk_ndkRelease(${path}) path does not exist")
 	endif()
 	
-	if(RELEASE AND QUEUE_BUILD)
+	if(Release AND QUEUE_BUILD)
 		if(Windows_Host)
 			dk_exec(${ANDROID_NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${Target_Tuple}/Release)
 		endif()

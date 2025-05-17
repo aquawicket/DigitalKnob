@@ -88,10 +88,10 @@ function(dk_configureApp)
 		
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
-			if(DEBUG)
+			if(Debug)
 				dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 			endif()
-			if(RELEASE)
+			if(Release)
 				dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 			endif()
 		endif()
@@ -128,9 +128,9 @@ function(dk_configureApp)
 		if(MULTI_CONFIG)
 			target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 		else()
-			if(DEBUG)
+			if(Debug)
 				target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
-			elseif(RELEASE)
+			elseif(Release)
 				target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 			endif()
 		endif()
@@ -161,9 +161,6 @@ function(dk_configureApp)
 			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
 		endif()
 	endif(WIN_X86_64)
-		
-# DEBUG
-#	TODO
 endfunction()
 
 

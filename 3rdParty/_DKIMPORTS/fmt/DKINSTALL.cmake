@@ -20,7 +20,7 @@ dk_import(https://github.com/fmtlib/fmt/archive/fade652a.zip)
 ### INCLUDE/LINK ###
 dk_define(FMT_HEADER_ONLY)
 dk_include(${FMT_DIR}/include)
-###### DEBUG for FMT LIBRARY ######
+###### Debug for FMT LIBRARY ######
 
 # moved to DKBuildFlags.cmake
 # needed by FMT library

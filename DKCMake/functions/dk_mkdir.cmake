@@ -18,9 +18,6 @@ function(dk_mkdir)
 		dk_return()
 	endif()	
 	make_directory("${path}")  # requires full path
-	
-# DEBUG
-#	dk_printVar(path)
 endfunction()
 
 

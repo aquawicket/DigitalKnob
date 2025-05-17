@@ -16,9 +16,6 @@ function(dk_addToPluginList plugin_name)
 	endif()
 	dk_include(${plugin_path})
 	dk_append(DKPLUGIN_LIST "${plugin_name}")
-	
-# DEBUG
-#	dk_printVar(DKPLUGIN_LIST)
 endfunction()
 
 

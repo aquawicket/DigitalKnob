@@ -10,7 +10,8 @@ include_guard()
 function(dk_CONFIG_PATH)
 	dk_debugFunc()
 	
-	dk_validate(Target_Type  	"dk_Target_Type()")     # get {DEBUG} {RELEASE}
+	dk_validate(Target_Type  	"dk_Target_Type()") # get {Debug} {Release}
+	dk_printVar(Target_Type)
 	dk_validate(Target_Tuple   "dk_Target_Tuple()")	# get {Target_Tuple}
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
@@ -23,9 +24,9 @@ function(dk_CONFIG_PATH)
 		dk_set(MULTI_CONFIG 1)
 		dk_unset(SINGLE_CONFIG)
 		dk_set(CONFIG_PATH ${Target_Tuple})
-		if(DEBUG)
+		if(Debug)
 			dk_set(BUILD_PATH   ${Target_Tuple}/${DEBUG_DIR})
-		elseif(RELEASE)
+		elseif(Release)
 			dk_set(BUILD_PATH   ${Target_Tuple}/${RELEASE_DIR})
 		endif()
 		dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
@@ -42,14 +43,14 @@ function(dk_CONFIG_PATH)
 		
 		dk_set(SINGLE_CONFIG 1)
 		dk_unset(MULTI_CONFIG)
-		if(DEBUG)
+		if(Debug)
 			dk_set	(CMAKE_BUILD_TYPE Debug)
 			dk_set	(CONFIG_PATH ${Target_Tuple}/${DEBUG_DIR})
 			dk_set	(BUILD_PATH ${Target_Tuple}/${DEBUG_DIR})
 			
 			dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
 			dk_info("*** ${CMAKE_GENERATOR}: Generator is SINGLE_CONFIG (${CMAKE_BUILD_TYPE}) ***")
-		elseif(RELEASE)
+		elseif(Release)
 			dk_set	(CMAKE_BUILD_TYPE Release)
 			dk_set	(CONFIG_PATH ${Target_Tuple}/${RELEASE_DIR})
 			dk_set	(BUILD_PATH ${Target_Tuple}/${RELEASE_DIR})

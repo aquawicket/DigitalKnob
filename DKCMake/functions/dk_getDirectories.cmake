@@ -27,9 +27,6 @@ function(dk_getDirectories path rtn_var)
 
     # Return the array to the calling scope
 	set(${rtn_var} ${_directories_} PARENT_SCOPE)
-	
-# DEBUG
-#	dk_printVar(_directories_)
 endfunction()
 
 

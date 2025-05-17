@@ -165,9 +165,9 @@ foreach(plugin ${dkdepend_list})
 			#if(MULTI_CONFIG)
 			#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${Target_Tuple})
 			#else()
-			#	if(DEBUG)
+			#	if(Debug)
 			#		add_subdirectory(${plugin_path} ${plugin_path}/${Target_Tuple}/Debug)
-			#	elseif(RELEASE)
+			#	elseif(Release)
 			#		add_subdirectory(${plugin_path} ${plugin_path}/${Target_Tuple}/Release)
 			#	endif()
 			#endif()
@@ -208,9 +208,9 @@ foreach(plugin ${dkdepend_list})
 				#if(MULTI_CONFIG)
 				#	add_subdirectory(${plugin_path} ${plugin_path}/${Target_Tuple})
 				#else()
-				#	if(DEBUG)
+				#	if(Debug)
 				#		add_subdirectory(${plugin_path} ${plugin_path}/${Target_Tuple}/Debug)
-				#	elseif(RELEASE)
+				#	elseif(Release)
 				#		add_subdirectory(${plugin_path} ${plugin_path}/${Target_Tuple}/Release)
 				#	endif()
 				#endif()
@@ -263,7 +263,7 @@ foreach(plugin ${dkdepend_list})
 #					RELEASE_dk_queueCommand			(${CMAKE_COMMAND} --build . --config Release)
 #				else()
 #					dk_fatal("This is still being used")
-#					if(DEBUG)
+#					if(Debug)
 #						dk_fatal("This is still being used")
 #						###### Configure ######
 #						ANDROID_ARM32_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM32=ON 	${plugin_path})
@@ -287,7 +287,7 @@ foreach(plugin ${dkdepend_list})
 #						###### Build ######
 #						DEBUG_dk_queueCommand					(${CMAKE_COMMAND} --build . --config Debug)
 #						
-#					elseif(RELEASE)
+#					elseif(Release)
 #						dk_fatal("This is still being used")
 #						###### Configure ######
 #						ANDROID_ARM32_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON 		${plugin_path})
@@ -424,17 +424,17 @@ if(Android)
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
 			if(MULTI_CONFIG)
-				if(DEBUG)
+				if(Debug)
 					dk_rename(${DK_Project_Dir}/${Target_Tuple}/app/build/outputs/apk/debug/app-debug.apk ${DK_Project_Dir}/${Target_Tuple}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
 				endif()
-				if(RELEASE)
+				if(Release)
 					dk_rename(${DK_Project_Dir}/${Target_Tuple}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_Project_Dir}/${Target_Tuple}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
 				endif()
 			else()
-				if(DEBUG)
+				if(Debug)
 					dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/app/build/outputs/apk/debug/app-debug.apk ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
 				endif()
-				if(RELEASE)
+				if(Release)
 					dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
 				endif()
 			endif()
@@ -453,7 +453,7 @@ if(Android)
 		set(localProperties "sdk.dir=${ANDROID_SDK}")
 	
 		####### Import Android Gui Build files ############################################
-		if(DEBUG)
+		if(Debug)
 			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/android/ ${DK_Project_Dir}/${Target_Tuple}/Debug)
 			if(EXISTS ${DKCPP_PLUGINS_DIR}/_DKIMPORT/${Target_Tuple})
 				dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/${Target_Tuple}/ ${DK_Project_Dir}/${Target_Tuple}/Debug)
@@ -467,7 +467,7 @@ if(Android)
 			endif()
 			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
 		endif()
-		if(RELEASE)
+		if(Release)
 			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/android/ ${DK_Project_Dir}/${Target_Tuple}/Release)
 			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/${Target_Tuple}/ ${DK_Project_Dir}/${Target_Tuple}/Release)
 			dk_copy(${DK_Project_Dir}/assets ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/app/src/main/assets OVERWRITE)
@@ -503,10 +503,10 @@ if(Android)
 	#if(MSVC)
 	#	target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	#else()
-		if(DEBUG)
+		if(Debug)
 			target_link_libraries(main ${DEBUG_LIBS} ${LIBS})
 		endif()
-		if(RELEASE)
+		if(Release)
 			target_link_libraries(main ${RELEASE_LIBS} ${LIBS})
 		endif()
 	#endif()
@@ -545,7 +545,7 @@ if(Android)
 			set(setVar "export")
 		endif()
 	
-		if(DEBUG)
+		if(Debug)
 			add_custom_command(
 				TARGET main
 				POST_BUILD
@@ -555,7 +555,7 @@ if(Android)
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
 		endif()
-		if(RELEASE)
+		if(Release)
 			add_custom_command(
 				TARGET main
 				POST_BUILD
@@ -575,7 +575,7 @@ if(Android)
 	#dk_set(INSTALL_APK ON)
 	if(NOT Android_Host AND INSTALL_APK)
 		dk_depend(cmd)	
-		if(DEBUG)
+		if(Debug)
 			dk_validate(CMD_EXE "dk_CMD_EXE()")
 			add_custom_command(
 				POST_BUILD
@@ -583,7 +583,7 @@ if(Android)
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
 				COMMAND ${CMD_EXE} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
-		if(RELEASE)
+		if(Release)
 		endif()
 			dk_validate(CMD_EXE "dk_CMD_EXE()")
 			add_custom_command(
@@ -603,9 +603,9 @@ elseif(Cosmopolitan)
 	add_executable(${APP_NAME} ${App_SRC})
 	
 	########################### Add libraries ##########################
-	if(DEBUG)
+	if(Debug)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
-	elseif(RELEASE)
+	elseif(Release)
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 	endif()
 
@@ -641,12 +641,12 @@ elseif(Emscripten)
 	
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
-		if(DEBUG)
+		if(Debug)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.data ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.html ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.js ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.wasm ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
-		elseif(RELEASE)
+		elseif(Release)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.data ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.html ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.js ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
@@ -656,9 +656,9 @@ elseif(Emscripten)
 	
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
-	if(DEBUG)
+	if(Debug)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
-	elseif(RELEASE)
+	elseif(Release)
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 	endif()
 	set(CMAKE_EXECUTABLE_SUFFIX ".html")
@@ -683,7 +683,7 @@ elseif(Emscripten)
 	
 	################### Create Run.sh #################################
 	dk_info("Creating Run scripts . . .")
-	if(DEBUG)
+	if(Debug)
 		if(Windows_Host)
 			set(RUN_SCRIPT_DEBUG
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.html"
@@ -697,7 +697,7 @@ elseif(Emscripten)
 			dk_exec(chmod 777 ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/Run.sh)
 		endif()
 	endif()
-	if(RELEASE)
+	if(Release)
 		if(Windows_Host)
 			set(RUN_SCRIPT_RELEASE
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.html"
@@ -725,7 +725,7 @@ elseif(Emscripten)
 	#)
 	
 	###################### Copy WASM files to /assets #################
-	#if(DEBUG)
+	#if(Debug)
 	#	add_custom_command(
 	#		TARGET ${APP_NAME} 
 	#		POST_BUILD
@@ -752,13 +752,13 @@ elseif(Ios OR Iossim)
 	# https://github.com/forexample/testapp/blob/master/CMakeLists.txt
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
-		if(DEBUG)
+		if(Debug)
 			if(EXISTS ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.app)
 				dk_delete(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.app.backup)
 				dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
 			endif()
 		endif()
-		if(RELEASE)
+		if(Release)
 			if(EXISTS ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.app)
 				dk_delete(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.app.backup)
 				dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
@@ -838,7 +838,7 @@ elseif(Ios OR Iossim)
 	################### Create Run.sh #################################
 	if(IOSSIM)
 		dk_info("Creating Run.sh . . .")
-		if(DEBUG)
+		if(Debug)
 			set(RUN_SCRIPT_DEBUG
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
@@ -848,7 +848,7 @@ elseif(Ios OR Iossim)
 			dk_fileWrite(${DK_Project_Dir}/iossim_x86_64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
 			dk_exec(chmod 777 ${DK_Project_Dir}/iossim_x86_64/Debug-iphonesimulator/Run.sh)
 		endif()
-		if(RELEASE)
+		if(Release)
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
@@ -878,9 +878,9 @@ elseif(Linux)
 if(NOT Raspberry)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
-		if(DEBUG)
+		if(Debug)
 			dk_copy(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME} ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
-		elseif(RELEASE)
+		elseif(Release)
 			dk_copy(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME} ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
@@ -910,9 +910,9 @@ if(NOT Raspberry)
 	
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
-	if(DEBUG)
+	if(Debug)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
-	elseif(RELEASE)
+	elseif(Release)
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 	endif()
 	
@@ -925,7 +925,7 @@ if(NOT Raspberry)
 	
 	############# Create .desktop Icon Files / Install ################
 	## https://specifications.freedesktop.org
-	if(DEBUG)
+	if(Debug)
 		set(DESKTOP_FILE
 			"[Desktop Entry]\n"
 			"Encoding=UTF-8\n"
@@ -937,7 +937,7 @@ if(NOT Raspberry)
 			"Icon=${DK_Project_Dir}/icons/icon.png\n")
 		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 		dk_fileWrite("${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.desktop" "${DESKTOP_FILE}")
-	elseif(RELEASE)
+	elseif(Release)
 		set(DESKTOP_FILE
 			"[Desktop Entry]\n"
 			"Encoding=UTF-8\n"
@@ -955,11 +955,11 @@ if(NOT Raspberry)
 	if(DEFINED ENV{WSL_DISTRO_NAME})
 		dk_info("creating WSL shortcut")
 		dk_depend(wsl)
-		if(DEBUG)
+		if(Debug)
 			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
 			dk_debug("WSL SHORTCUT_PATH = ${SHORTCUT_PATH}")
 			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}")
-		elseif(RELEASE)
+		elseif(Release)
 			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
 			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}")
 		endif()
@@ -967,9 +967,9 @@ if(NOT Raspberry)
 	
 	# Install shortcut of Release build to the apps menu
 	if(NOT TINYCORE)
-		if(DEBUG)
+		if(Debug)
 			#dk_exec(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR})
-		elseif(RELEASE)
+		elseif(Release)
 			dk_exec(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR})
 		endif()
 	endif()
@@ -993,10 +993,10 @@ endif(NOT Raspberry)
 elseif(Mac)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
-		if(DEBUG)
+		if(Debug)
 			dk_copy(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
 		endif()
-		if(RELEASE)
+		if(Release)
 			dk_copy(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.app ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
@@ -1184,18 +1184,18 @@ elseif(Raspberry)
 	
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
-		if(DEBUG)
+		if(Debug)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME} ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
-		elseif(RELEASE)
+		elseif(Release)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME} ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
-	if(DEBUG)
+	if(Debug)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
-	elseif(RELEASE)
+	elseif(Release)
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 	endif()
 
@@ -1208,7 +1208,7 @@ elseif(Raspberry)
 		
 	############# Create .desktop Icon Files and Install ##############
 	## https://specifications.freedesktop.org
-	if(DEBUG)
+	if(Debug)
 	# Create .desktop file for Debug
 	dk_set(DESKTOP_FILE
 		"[Desktop Entry]\n"
@@ -1222,7 +1222,7 @@ elseif(Raspberry)
 	list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 	dk_fileWrite(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
-	if(RELEASE)
+	if(Release)
 	# Create .desktop file for Release
 	dk_set(DESKTOP_FILE
 		"[Desktop Entry]\n"
@@ -1238,7 +1238,7 @@ elseif(Raspberry)
 	endif()
 	
 	# Install shortcut of Release build to the apps menu
-	if(RELEASE)
+	if(Release)
 		dk_exec(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_Project_Dir}/${Target_Tuple}/Release)
 	endif()
 		
@@ -1278,10 +1278,10 @@ elseif(Windows_X86)
 		
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
-		if(DEBUG)
+		if(Debug)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
-		if(RELEASE)
+		if(Release)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
@@ -1319,9 +1319,9 @@ elseif(Windows_X86)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	else()
 		#target_link_libraries(${APP_NAME} -static -static-libgcc -static-libstdc++ winpthread)# -dynamic)
-		if(DEBUG)
+		if(Debug)
 			target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
-		elseif(RELEASE)
+		elseif(Release)
 			target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 		endif()
 	endif()
@@ -1409,10 +1409,10 @@ elseif(Windows_X86_64)
 
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
-		if(DEBUG)
+		if(Debug)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
-		if(RELEASE)
+		if(Release)
 			dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
@@ -1449,9 +1449,9 @@ elseif(Windows_X86_64)
 	if(MULTI_CONFIG)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	else()
-		if(DEBUG)
+		if(Debug)
 			target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
-		elseif(RELEASE)
+		elseif(Release)
 			target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 		endif()
 	endif()

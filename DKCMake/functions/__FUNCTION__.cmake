@@ -30,9 +30,6 @@ macro(__FUNCTION__ rtn_var)
 		endif()
 		list(GET FUNCNAME ${index} ${rtn_var})
 	endif()
-	
-# DEBUG	
-#	dk_printVar(rtn_var)
 endmacro()
 
 

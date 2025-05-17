@@ -46,9 +46,6 @@ macro(__FRAME__ rtn_var)
 		#list(GET CALLER ${index} _caller_)
 		set(${rtn_var} "${_file_}:${_line_}    ${_function_}()")
 	endif()
-	
-# DEBUG
-#	dk_printVar(rtn_var)
 endmacro()
 
 

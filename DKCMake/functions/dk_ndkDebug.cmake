@@ -16,7 +16,7 @@ function(dk_ndkDebug path)
 		dk_fatal("dk_ndkDebug(${path}) path does not exist")
 	endif()
 	
-	if(DEBUG AND QUEUE_BUILD)
+	if(Debug AND QUEUE_BUILD)
 		if(Windows_Host)
 			dk_exec(${ANDROID_NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${Target_Tuple}/Debug)
 		endif()

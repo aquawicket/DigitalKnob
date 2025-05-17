@@ -26,9 +26,6 @@ function(Array::dk_arrayConcat array)
 	dk_debugFunc()
 
 	dk_todo("Array::dk_arrayConcat")
-
-# DEBUG
-#	TODO
 endfunction()
 
 

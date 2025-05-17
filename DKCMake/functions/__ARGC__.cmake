@@ -23,9 +23,6 @@ macro(__ARGC__ rtn_var)
 	endif()
 
 	set(${rtn_var} ${ARGC})
-
-# DEBUG
-#	dk_printVar(rtn_var)
 endmacro()
 
 

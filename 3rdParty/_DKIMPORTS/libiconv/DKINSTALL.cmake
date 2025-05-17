@@ -24,10 +24,10 @@ dk_import(http://ftp.vim.org/ftp/gnu/libiconv/libiconv-1.14.tar.gz PATCH)
 dk_include				(${LIBICONV_DIR})
 dk_include				(${LIBICONV_DIR}/include 				LIBICONV_INCLUDE_DIR)
 dk_include				(${LIBICONV_CONFIG_DIR})
-if(DEBUG)
+if(Debug)
 	dk_include			(${LIBICONV_DEBUG_DIR})
 endif()
-if(RELEASE)
+if(Release)
 	dk_include			(${LIBICONV_RELEASE_DIR})
 endif()
 
@@ -53,9 +53,9 @@ else()
 	dk_libRelease		(${LIBICONV_RELEASE_DIR}/libiconv.a		LIBICONV_LIBRARY_RELEASE)
 endif()
 
-if(DEBUG)
+if(Debug)
 	dk_set(Iconv_LIBRARY "${LIBICONV_LIBRARY_DEBUG}")
-elseif(RELEASE)
+elseif(Release)
 	dk_set(Iconv_LIBRARY "${LIBICONV_LIBRARY_RELEASE}")
 endif()
 
@@ -72,7 +72,7 @@ if(MULTI_CONFIG)
 		-DIconv_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
 		-DIconv_LIBRARY=${Iconv_LIBRARY})
 else()
-	if(DEBUG)
+	if(Debug)
 		dk_set(LIBICONV_CMAKE
 			#-DLIBICONV_PATH=${LIBICONV}
 			#-DICONV_DIR=${LIBICONV}
@@ -83,7 +83,7 @@ else()
 			-DIconv_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
 			-DIconv_LIBRARY=${Iconv_LIBRARY})
 	endif()
-	if(RELEASE)
+	if(Release)
 		dk_set(LIBICONV_CMAKE 
 			#-DLIBICONV_PATH=${LIBICONV}
 			#-DICONV_DIR=${LIBICONV}

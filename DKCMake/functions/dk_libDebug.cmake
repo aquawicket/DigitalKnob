@@ -13,7 +13,7 @@ include_guard()
 function(dk_libDebug lib_path)
 	dk_debugFunc()
 	
-	if(NOT DEBUG)
+	if(NOT Debug)
 		return()
 	endif()	
 	

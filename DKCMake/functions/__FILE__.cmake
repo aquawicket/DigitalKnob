@@ -32,9 +32,6 @@ macro(__FILE__ file_rtn_var)
 		endif()
 		list(GET CMAKE_SOURCE ${index} ${file_rtn_var})
 	endif()
-	
-# DEBUG
-#	dk_printVar(rtn_var)
 endmacro()
 
 

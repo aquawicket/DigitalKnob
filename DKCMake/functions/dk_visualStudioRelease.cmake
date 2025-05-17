@@ -28,7 +28,7 @@ function(dk_visualStudioRelease path) #target #arch
 		dk_fatal("extension does not equal .sln")
 	endif()
 	
-	if(RELEASE AND QUEUE_BUILD)
+	if(Release AND QUEUE_BUILD)
 		if(NOT EXISTS ${path}/${Target_Tuple}/${sln_file})
 			dk_fatal("CANNOT FIND: ${path}/${Target_Tuple}/${sln_file}")
 		endif()

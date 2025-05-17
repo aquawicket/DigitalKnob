@@ -21,9 +21,6 @@ function(dk_nativePath input output)
 	else()
 		set(${output} "${native_path}" PARENT_SCOPE)	# regular variable
 	endif()
-
-#DEBUG
-#	dk_printVar(native_path)
 endfunction()
 
 

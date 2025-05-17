@@ -214,12 +214,12 @@ endif()
 ###########################################################################
 ## Get variables for Build Type
 ###########################################################################
-option(DEBUG "Build Debug Binaries" 0)
-option(RELEASE "Build Release Binaries" 0)
-if(NOT DEBUG AND NOT RELEASE)
-	dk_info("No Build type selected. Defaulting to DEBUG and RELEASE")
-	dk_set(DEBUG 1)
-	dk_set(RELEASE 1)
+option(Debug "Build Debug Binaries" 0)
+option(Release "Build Release Binaries" 0)
+if(NOT Debug AND NOT Release)
+	dk_info("No Build type selected. Defaulting to Debug and Release")
+	dk_set(Debug 1)
+	dk_set(Release 1)
 endif()
 
 

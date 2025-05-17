@@ -86,10 +86,10 @@ if(ANDROID)
 	dk_include	(${ANDROID_NDK}/sources/android/cpufeatures)
 	dk_include	(${SDL}/src)
 endif()
-if(DEBUG)
+if(Debug)
 	dk_include	(${SDL_DEBUG_DIR}/include)
 endif()
-if(RELEASE)
+if(Release)
 	dk_include	(${SDL_RELEASE_DIR}/include)
 endif()
 if(RASPBERRY)
@@ -111,10 +111,10 @@ else()
 	dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2.a			SDL2_LIBRARY_RELEASE)
 endif()
 
-if(DEBUG)
+if(Debug)
 	dk_set				(SDL2_LIBRARY							${SDL2_LIBRARY_DEBUG})
 endif()
-if(RELEASE)
+if(Release)
 	dk_set				(SDL2_LIBRARY							${SDL2_LIBRARY_RELEASE})
 endif()
 #endif()
@@ -182,7 +182,7 @@ if(MULTI_CONFIG)
 		-DSDL2MAIN_LIBRARY_DEBUG=${SDL2MAIN_LIBRARY_DEBUG}
 		-DSDL2MAIN_LIBRARY_RELEASE=${SDL2MAIN_LIBRARY_RELEASE})
 else()
-	if(DEBUG)
+	if(Debug)
 		dk_set(SDL_CMAKE
 		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
@@ -198,7 +198,7 @@ else()
 		-DSDL2MAIN_LIBRARY_DEBUG=${SDL2MAIN_LIBRARY_DEBUG})
 	endif()	
 		
-	if(RELEASE)
+	if(Release)
 		dk_set(SDL_CMAKE
 		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
