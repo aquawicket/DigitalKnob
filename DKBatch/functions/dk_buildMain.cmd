@@ -56,11 +56,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			rem Example win_x86 mac ios iossim	=	Windows_X86_Host's will skip all instaces of mac, ios and iossim
 
 
-			if defined BUILD_LIST[!_line_!][2] (
+			if defined BUILD_LIST[!_line_!][0] (
 				set "dk_pickUpdate=1"
 				call set "Target_App=%%BUILD_LIST[!_line_!][0]%%"
-				call set "Target_Tuple=%%BUILD_LIST[!_line_!][1]%%"
-				call set "Target_Type=%%BUILD_LIST[!_line_!][2]%%"
+				call set "Target_Os=%%BUILD_LIST[!_line_!][1]%%"
+				call set "Target_Arch=%%BUILD_LIST[!_line_!][2]%%"
+				call set "Target_Env=%%BUILD_LIST[!_line_!][3]%%"
+				call set "Target_Type=%%BUILD_LIST[!_line_!][4]%%"
 				set /a _line_+=1
 			) else (
 				set "BUILD_LIST_FILE="
