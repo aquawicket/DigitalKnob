@@ -21,8 +21,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		echo:
 		::if not defined Target_Arch_Cache (%dk_call% Target_Arch_Cache)
-		echo  0^) !Target_Arch_Cache!
-		echo:
+		if defined Target_Arch_Cache (
+			echo  0^) !Target_Arch_Cache!
+			echo:
+		)	
 		if not defined Host_Arch (%dk_call% dk_Host_Arch)
 		echo  1^) !Host_Arch!
 		echo  2^) Arm32
