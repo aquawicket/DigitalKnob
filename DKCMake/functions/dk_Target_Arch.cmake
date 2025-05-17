@@ -10,6 +10,7 @@ include_guard()
 function(dk_Target_Arch)
 	dk_debugFunc(0 1)
 
+	
 	###### SET ######
 	if(ARGV)
 		dk_set(Target_Arch "${ARGV0}")

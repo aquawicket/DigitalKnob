@@ -16,13 +16,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_commandExists "git" && %dk_call% dk_gitCheckRemote
 
 	:: read DKBuilder.cache file
-	if exist "%DKCACHE_DIR%/DKBuilder.cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%/DKBuilder.cache" words)
-	set "Target_App_Cache=%words[0][0]%"
-	set "Target_Tuple_Cache=%words[0][1]%"
-	set "Target_Type_Cache=%words[0][2]%"
-    
+	::if exist "%DKCACHE_DIR%/DKBuilder.cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%/DKBuilder.cache" words)
+	::set "Target_App_Cache=%words[0][0]%"
+	::set "Target_Type_Cache=%words[0][2]%"
+    ::set "Target_Tuple_Cache=%words[0][1]%"
+	if exist "%DKCACHE_DIR%/DKBuilder.cache" (
+		%dk_call% dk_getFileParams "%DKCACHE_DIR%/DKBuilder.cache"
+	)
+	
     %dk_call% dk_echo
-    if exist "%DKCACHE_DIR%/DKBuilder.cache" if "%Target_App_Cache%" neq "" if "%Target_Tuple_Cache%" neq "" if "%Target_Type_Cache%" neq "" echo  0) Repeat cache [%Target_App_Cache% - %Target_Tuple_Cache% - %Target_Type_Cache%]
+	if defined Target_App_Cache if defined Target_Os_Cache if defined Target_Arch_Cache if defined Target_Env_Cache if defined Target_Type_Cache (
+		echo  0^) Repeat cache '%Target_App_Cache%_%Target_Os_Cache%_%Target_Arch_Cache%_%Target_Env_Cache%_%Target_Type_Cache%'
+	)
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Download DigitalKnob
@@ -42,8 +47,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		
     if "%choice%" equ "0" (
 		%dk_call% dk_set Target_App		%Target_App_Cache%
-		%dk_call% dk_set Target_Tuple	%Target_Tuple_Cache%
+		%dk_call% dk_set Target_Os		%Target_Os_Cache%
+		%dk_call% dk_set Target_Arch	%Target_Arch_Cache%
+		%dk_call% dk_set Target_Env		%Target_Env_Cache%
 		%dk_call% dk_set Target_Type	%Target_Type_Cache%
+		rem %dk_call% dk_set Target_Tuple	%Target_Tuple_Cache%
 	)
     if "%choice%" equ "1"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
     if "%choice%" equ "2"  %dk_call% dk_gitCommit
@@ -57,8 +65,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%choice%" equ "10" %dk_call% dk_exit 0
 	if "%choice%" equ "11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
       
-    ::endlocal & 
-	set "UPDATE=1"
+    ::endlocal & (
+		set "UPDATE=1"
+	::)
 %endfunction%
 
 

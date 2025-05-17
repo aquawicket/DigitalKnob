@@ -19,10 +19,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "B=!B:${=%%!"
 		set "B=!B:}=%%!"
 		if "%dk_getAllFileParams_PRINT_VARIABLES%" equ "1" (
-			echo %%A = !B!
+			echo %%A = '!B!'
 		)
 		rem endlocal & (
-			echo "%%A=!B!"
+			echo %%A = '!B!'
 			set "%%A=!B!"
 		rem )
 	)
@@ -37,6 +37,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_getFileParams %DKBRANCH_DIR%/DKBatch/apps/DKBuilder/dkconfig.txt
+	%dk_call% dk_getFileParams "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/dkconfig.txt"
 	%dk_call% dk_printVar dk_call_PRINT_CALLS
 %endfunction%

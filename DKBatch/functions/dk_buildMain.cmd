@@ -69,14 +69,28 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 		if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE			& goto :while_loop
 		if not defined Target_App		%dk_call% dk_Target_App Target_App		& goto :while_loop
-		if not defined Target_Tuple		%dk_call% dk_Target_Tuple				& goto :while_loop
+		if not defined Target_Os		%dk_call% dk_Target_Os					& goto :while_loop
+		if not defined Target_Arch		%dk_call% dk_Target_Arch				& goto :while_loop
+		if not defined Target_Env		%dk_call% dk_Target_Env					& goto :while_loop
 		if not defined Target_Type		%dk_call% dk_Target_Type Target_Type	& goto :while_loop
+		if not defined Target_Tuple		%dk_call% dk_Target_Tuple
 
 		:: save selections to DKBuilder.cache file
 		%dk_call% dk_echo "creating DKBuilder.cache..."
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-		%dk_call% dk_fileWrite "%DKCACHE_DIR%/DKBuilder.cache" "%Target_App% %Target_Tuple% %Target_Type%"
-
+		::%dk_call% dk_fileWrite "%DKCACHE_DIR%/DKBuilder.cache" "%Target_App% %Target_Tuple% %Target_Type%"
+		%dk_call% dk_assertVar Target_App
+		%dk_call% dk_fileWrite	"%DKCACHE_DIR%/DKBuilder.cache" "Target_App_Cache=%Target_App%"
+		%dk_call% dk_assertVar Target_Os
+		%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Os_Cache=%Target_Os%"
+		%dk_call% dk_assertVar Target_Arch
+		%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Arch_Cache=%Target_Arch%"
+		%dk_call% dk_assertVar Target_Env
+		%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Env_Cache=%Target_Env%"
+		%dk_call% dk_assertVar Target_Type
+		%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Type_Cache=%Target_Type%"
+		::%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Tuple_Cache=%Target_Tuple%"
+		
 		%dk_call% dk_generate
 		%dk_call% dk_buildApp
 

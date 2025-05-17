@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2
 
-    echo %~2 > "%~1"
+    echo %~2> "%~1"
 %endfunction%
 
 
