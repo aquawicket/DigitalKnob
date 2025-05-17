@@ -12,29 +12,36 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 1
  
-    %dk_call% dk_echo
-    %dk_call% dk_echo "%Target_App% %Target_Tuple% %Target_Type%"
-    %dk_call% dk_echo
-    echo 1) Debug
-    echo 2) Release
-    echo 3) All
-    echo 4) Go Back
-    echo 5) Exit
+	rem ###### SET ######
+	if "%~1" neq "" (
+		set "Target_Type=%~1"
+		set "!Target_Type!=1"
+		
+	rem ###### GET ######	
+	) else (
+			
+		%dk_call% dk_echo
+		echo 1^) Debug
+		echo 2^) Release
+		echo 3^) All
+		echo 4^) Go Back
+		echo 5^) Exit
     
-    %dk_call% dk_echo 
-    %dk_call% dk_echo "Please select a build type."
+		%dk_call% dk_echo 
+		%dk_call% dk_echo "Please select a build type."
     
-    %dk_call% dk_keyboardInput
-    ::%dk_call% dk_keyboardInputTimeout 1 60
+		%dk_call% dk_keyboardInput
+		rem %dk_call% dk_keyboardInputTimeout 1 60
 
-    if "%dk_keyboardInput%" equ "1" (endlocal & set "%1=Debug"			& %return%)
-    if "%dk_keyboardInput%" equ "2" (endlocal & set "%1=Release"			& %return%)
-    if "%dk_keyboardInput%" equ "3" (endlocal & set "%1=All"				& %return%)
-    if "%dk_keyboardInput%" equ "4" (%dk_call% dk_unset Target_Tuple		& %return%)
-    if "%dk_keyboardInput%" equ "5" (%dk_call% dk_exit					& %return%)
+		if "!dk_keyboardInput!" equ "1" (endlocal & set "Target_Type=Debug"		& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "2" (endlocal & set "Target_Type=Release"	& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "3" (endlocal & set "Target_Type=All"		& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "4" (%dk_call% dk_unset Target_Tuple		& %return%)
+		if "!dk_keyboardInput!" equ "5" (%dk_call% dk_exit						& %return%)
 
-    %dk_call% dk_echo %dk_keyboardInput%: invalid selection, please try again
-    %dk_call% dk_unset Target_Type
+		%dk_call% dk_echo !dk_keyboardInput!: invalid selection, please try again
+		%dk_call% dk_unset Target_Type
+	)
 %endfunction%
 
 
@@ -51,7 +58,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_printVar %Target_Type%
 	
 	::###### SET ######
-	%dk_call% dk_Target_Type "Windows"
+	%dk_call% dk_Target_Type "Release"
 	%dk_call% dk_printVar Target_Type
 	%dk_call% dk_printVar %Target_Type%
 %endfunction%

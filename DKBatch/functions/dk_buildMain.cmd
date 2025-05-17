@@ -67,12 +67,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			)
 		)
 
-		if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE			& goto :while_loop
-		if not defined Target_App		%dk_call% dk_Target_App Target_App		& goto :while_loop
-		if not defined Target_Os		%dk_call% dk_Target_Os					& goto :while_loop
-		if not defined Target_Arch		%dk_call% dk_Target_Arch				& goto :while_loop
-		if not defined Target_Env		%dk_call% dk_Target_Env					& goto :while_loop
-		if not defined Target_Type		%dk_call% dk_Target_Type Target_Type	& goto :while_loop
+		if not defined UPDATE			%dk_call% dk_pickUpdate UPDATE	& goto :while_loop
+		if not defined Target_App		%dk_call% dk_Target_App			& goto :while_loop
+		if not defined Target_Os		%dk_call% dk_Target_Os			& goto :while_loop
+		if not defined Target_Arch		%dk_call% dk_Target_Arch		& goto :while_loop
+		if not defined Target_Env		%dk_call% dk_Target_Env			& goto :while_loop
+		if not defined Target_Type		%dk_call% dk_Target_Type		& goto :while_loop
 		if not defined Target_Tuple		%dk_call% dk_Target_Tuple
 
 		:: save selections to DKBuilder.cache file
