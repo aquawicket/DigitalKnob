@@ -46,7 +46,7 @@ dk_buildMain() {
 		if [ -e "${BUILD_LIST_FILE-}" ]; then
 			UPDATE=1
 			declare -A BUILD_LIST
-			dk_call dk_fileToGrid "${BUILD_LIST_FILE}" BUILD_LIST
+			dk_call dk_fileToMatrix "${BUILD_LIST_FILE}" BUILD_LIST
 			[ -n "${_line-}" ] || _line=0
 			
 			echo ""

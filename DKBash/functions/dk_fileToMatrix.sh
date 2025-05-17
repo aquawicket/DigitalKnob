@@ -5,10 +5,10 @@
 
 
 ################################################################################
-# dk_fileToGrid(path associative_array)
+# dk_fileToMatrix(path associative_array)
 #
 #
-dk_fileToGrid() {
+dk_fileToMatrix() {
 	dk_debugFunc 2
 
 	OLDIFS=${IFS}
@@ -44,7 +44,7 @@ DKTEST() {
 
 	declare -A myArray
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
-	dk_call dk_fileToGrid "${DKBRANCH_DIR}/build_list.txt" myArray
+	dk_call dk_fileToMatrix "${DKBRANCH_DIR}/build_list.txt" myArray
 	#dk_call dk_printVar myArray
 	
 	echo "${myArray[0,0]:0:1}"

@@ -40,7 +40,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::set "BUILD_LIST_FILE=%DKCACHE_DIR%/build_list.txt"
 	:while_loop
 		if exist "%BUILD_LIST_FILE%" (
-			%dk_call% dk_fileToGrid "%BUILD_LIST_FILE%" BUILD_LIST
+			%dk_call% dk_fileToMatrix "%BUILD_LIST_FILE%" BUILD_LIST
 			if not defined _line_ (set /a _line_=0)
 			:skipTarget
 			call set "comment_check=%%BUILD_LIST[!_line_!][0]%%"

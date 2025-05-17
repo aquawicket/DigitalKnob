@@ -5,12 +5,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::################################################################################
-::# dk_fileToGrid(path rtn_var)
+::# dk_fileToMatrix(path rtn_var)
 ::#
 ::#  Read lines of a file into an grid and echo them back
 ::#
 ::#
-:dk_fileToGrid
+:dk_fileToMatrix
 %setlocal%
 	%dk_call% dk_debugFunc 2
 
@@ -45,9 +45,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_fileToGrid "%DKBRANCH_DIR%\build_list.txt" MyGrid
+	%dk_call% dk_fileToMatrix "%DKBRANCH_DIR%\build_list.txt" MyGrid
 
-	::%dk_call% dk_fileToGrid "fileToGrid_TEST.txt" MyGrid
+	::%dk_call% dk_fileToMatrix "fileToGrid_TEST.txt" MyGrid
 
 	:: print items individually
 	%dk_call% dk_printVar MyGrid[0][0]
