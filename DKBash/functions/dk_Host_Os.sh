@@ -100,7 +100,6 @@ dk_Host_Os() {
 #		fi
 	fi
 	
-	dk_call dk_printVar Host_Os
 	export ${Host_Os}_Host=1
 }
 
