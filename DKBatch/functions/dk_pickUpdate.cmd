@@ -39,27 +39,27 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist "%DKBRANCH_DIR%/build_list.txt"  echo 11) Run 'build_list.txt'
     
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
-    %dk_call% dk_keyboardInput choice
-    ::%dk_call% dk_keyboardInputTimeout 13 60 choice
+    %dk_call% dk_keyboardInput
+    ::%dk_call% dk_keyboardInputTimeout 13 60
 		
-    if "%choice%" equ "0" (
+    if "%dk_keyboardInput%" equ "0" (
 		%dk_call% dk_set Target_App		%Target_App_Cache%
 		%dk_call% dk_set Target_Os		%Target_Os_Cache%
 		%dk_call% dk_set Target_Arch	%Target_Arch_Cache%
 		%dk_call% dk_set Target_Env		%Target_Env_Cache%
 		%dk_call% dk_set Target_Type	%Target_Type_Cache%
 	)
-    if "%choice%" equ "1"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
-    if "%choice%" equ "2"  %dk_call% dk_gitCommit
-    if "%choice%" equ "3"  %dk_call% dk_downloadDK
-    if "%choice%" equ "4"  %dk_call% dk_pushAssets
-    if "%choice%" equ "5"  %dk_call% dk_pullAssets
-    if "%choice%" equ "6"  %dk_call% dk_resetAll
-    if "%choice%" equ "7"  %dk_call% dk_removeAll
-    if "%choice%" equ "8"  %dk_call% dk_clearScreen
-    if "%choice%" equ "9"  %dk_call% dk_reload
-    if "%choice%" equ "10" %dk_call% dk_exit 0
-	if "%choice%" equ "11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
+    if "%dk_keyboardInput%" equ "1"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
+    if "%dk_keyboardInput%" equ "2"  %dk_call% dk_gitCommit
+    if "%dk_keyboardInput%" equ "3"  %dk_call% dk_downloadDK
+    if "%dk_keyboardInput%" equ "4"  %dk_call% dk_pushAssets
+    if "%dk_keyboardInput%" equ "5"  %dk_call% dk_pullAssets
+    if "%dk_keyboardInput%" equ "6"  %dk_call% dk_resetAll
+    if "%dk_keyboardInput%" equ "7"  %dk_call% dk_removeAll
+    if "%dk_keyboardInput%" equ "8"  %dk_call% dk_clearScreen
+    if "%dk_keyboardInput%" equ "9"  %dk_call% dk_reload
+    if "%dk_keyboardInput%" equ "10" %dk_call% dk_exit 0
+	if "%dk_keyboardInput%" equ "11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
       
     ::endlocal & (
 		set "UPDATE=1"

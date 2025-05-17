@@ -24,16 +24,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo 
     %dk_call% dk_echo "Please select a build type."
     
-    %dk_call% dk_keyboardInput choice
-    ::%dk_call% dk_keyboardInputTimeout 1 60 choice
+    %dk_call% dk_keyboardInput
+    ::%dk_call% dk_keyboardInputTimeout 1 60
 
-    if "%choice%" equ "1" (endlocal & set "%1=Debug"			& %return%)
-    if "%choice%" equ "2" (endlocal & set "%1=Release"			& %return%)
-    if "%choice%" equ "3" (endlocal & set "%1=All"				& %return%)
-    if "%choice%" equ "4" (%dk_call% dk_unset Target_Tuple		& %return%)
-    if "%choice%" equ "5" (%dk_call% dk_exit					& %return%)
+    if "%dk_keyboardInput%" equ "1" (endlocal & set "%1=Debug"			& %return%)
+    if "%dk_keyboardInput%" equ "2" (endlocal & set "%1=Release"			& %return%)
+    if "%dk_keyboardInput%" equ "3" (endlocal & set "%1=All"				& %return%)
+    if "%dk_keyboardInput%" equ "4" (%dk_call% dk_unset Target_Tuple		& %return%)
+    if "%dk_keyboardInput%" equ "5" (%dk_call% dk_exit					& %return%)
 
-    %dk_call% dk_echo %choice%: invalid selection, please try again
+    %dk_call% dk_echo %dk_keyboardInput%: invalid selection, please try again
     %dk_call% dk_unset Target_Type
 %endfunction%
 

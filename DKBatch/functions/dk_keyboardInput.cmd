@@ -12,8 +12,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
     %dk_call% dk_debugFunc 1
     
-	
-    endlocal & set /p "%~1=" || (call )  			&:: NOTE:   || (call ) is added to supress onErrors
+    endlocal & (
+		set /p "dk_keyboardInput=" || (call )  			&:: NOTE:   || (call ) is added to supress onErrors
+		if "%~1" neq "" (set "%~1=!dk_keyboardInput!")
+	)
 %endfunction%
 
 
@@ -27,6 +29,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
    
     %dk_call% dk_echo "Type some input and press enter when done"
-    %dk_call% dk_keyboardInput input
-    %dk_call% dk_echo "you typed '%input%'"
+    %dk_call% dk_keyboardInput
+    %dk_call% dk_echo "you typed '%dk_keyboardInput%'"
 %endfunction%

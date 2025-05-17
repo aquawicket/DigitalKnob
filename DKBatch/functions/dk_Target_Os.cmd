@@ -37,19 +37,19 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo 10^) Windows
 		echo:
 
-		%dk_call% dk_keyboardInput input
+		%dk_call% dk_keyboardInput
 		
-		if "!input!" equ "0"	(set "Target_Os=!Target_Os_Cache!")
-		if "!input!" equ "1"	(set "Target_Os=!Host_Os!")
-		if "!input!" equ "2" 	(set "Target_Os=Android")
-		if "!input!" equ "3" 	(set "Target_Os=Cosmopolitan")
-		if "!input!" equ "4" 	(set "Target_Os=Emscripten")
-		if "!input!" equ "5" 	(set "Target_Os=Ios")
-		if "!input!" equ "6" 	(set "Target_Os=Iossim")
-		if "!input!" equ "7" 	(set "Target_Os=Linux")
-		if "!input!" equ "8" 	(set "Target_Os=Mac")
-		if "!input!" equ "9" 	(set "Target_Os=Raspberry")
-		if "!input!" equ "10" 	(set "Target_Os=Windows")
+		if "!dk_keyboardInput!" equ "0"		(set "Target_Os=!Target_Os_Cache!")
+		if "!dk_keyboardInput!" equ "1"		(set "Target_Os=!Host_Os!")
+		if "!dk_keyboardInput!" equ "2" 	(set "Target_Os=Android")
+		if "!dk_keyboardInput!" equ "3" 	(set "Target_Os=Cosmopolitan")
+		if "!dk_keyboardInput!" equ "4" 	(set "Target_Os=Emscripten")
+		if "!dk_keyboardInput!" equ "5" 	(set "Target_Os=Ios")
+		if "!dk_keyboardInput!" equ "6" 	(set "Target_Os=Iossim")
+		if "!dk_keyboardInput!" equ "7" 	(set "Target_Os=Linux")
+		if "!dk_keyboardInput!" equ "8" 	(set "Target_Os=Mac")
+		if "!dk_keyboardInput!" equ "9" 	(set "Target_Os=Raspberry")
+		if "!dk_keyboardInput!" equ "10"	(set "Target_Os=Windows")
 	)
 	
 	endlocal & (

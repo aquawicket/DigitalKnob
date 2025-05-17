@@ -31,19 +31,19 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo 
     %dk_call% dk_echo "Please select an Option"
     
-    ::%dk_call% dk_keyboardInput choice
-    %dk_call% dk_keyboardInputTimeout choice 1 60
+    %dk_call% dk_keyboardInput
+    ::%dk_call% dk_keyboardInputTimeout 1 60
         
-    if "%choice%" equ "1"  endlocal & set "%1=option1"	  & %return%
-	if "%choice%" equ "2"  endlocal & set "%1=option2"   & %return%
-    if "%choice%" equ "3"  endlocal & set "%1=option3"   & %return%
-    if "%choice%" equ "4"  endlocal & set "%1=option4"   & %return%
-    if "%choice%" equ "5"  endlocal & set "%1=option5"   & %return%
-    if "%choice%" equ "38" %dk_call% Option6             & %return%
-    if "%choice%" equ "39" %dk_call% Option7             & %return%
-    if "%choice%" equ "40" %dk_call% dk_exit             & %return%
+    if "%dk_keyboardInput%" equ "1"  endlocal & set "%1=option1"	& %return%
+	if "%dk_keyboardInput%" equ "2"  endlocal & set "%1=option2"	& %return%
+    if "%dk_keyboardInput%" equ "3"  endlocal & set "%1=option3"	& %return%
+    if "%dk_keyboardInput%" equ "4"  endlocal & set "%1=option4"	& %return%
+    if "%dk_keyboardInput%" equ "5"  endlocal & set "%1=option5"	& %return%
+    if "%dk_keyboardInput%" equ "38" %dk_call% Option6				& %return%
+    if "%dk_keyboardInput%" equ "39" %dk_call% Option7				& %return%
+    if "%dk_keyboardInput%" equ "40" %dk_call% dk_exit				& %return%
 
-    %dk_call% dk_echo %choice%: invalid selection, please try again
+    %dk_call% dk_echo %dk_keyboardInput%: invalid selection, please try again
     %dk_call% dk_unset Target_Tuple
 %endfunction%
 

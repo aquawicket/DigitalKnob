@@ -12,16 +12,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 1 
 	
-    :: read DKBuilder.cache file
-	::if exist "%DKCACHE_DIR%\DKBuilder.cache" (%dk_call% dk_fileToGrid "%DKCACHE_DIR%\DKBuilder.cache" words)
-	::set "Target_App_Cache=%words[0][0]%"
-	::set "Target_Tuple_Cache=%words[0][1]%"
-	::set "Target_Type_Cache=%words[0][2]%"
+    ::### read DKBuilder.cache file ###
 	if exist "%DKCACHE_DIR%/DKBuilder.cache" (
 		%dk_call% dk_getFileParams "%DKCACHE_DIR%/DKBuilder.cache"
 	)
 	
-    :: get a list of the directories in DKCpp/apps
+    ::### get a list of the directories in DKCpp/apps ###
 	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
 	%dk_call% dk_deleteArray dk_getDirectories
@@ -29,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "dk_getDirectories=%dk_getDirectories%"
 	%dk_call% dk_deleteArray commands
 	
-    :: rename the list elements to the folder basename and add a matching command
+    ::### rename the list elements to the folder basename and add a matching command ###
     set /a "n=0"
     :loop1
         if not defined dk_getDirectories[%n%] goto endloop1
@@ -39,7 +35,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         goto loop1 
     :endloop1
 
-    :: prepend cache selection if available
+    ::### prepend cache selection if available ###
     if defined Target_App_Cache if defined Target_Os_Cache if defined Target_Arch_Cache if defined Target_Env_Cache if defined Target_Type_Cache (
         %dk_call% Array/dk_unshift dk_getDirectories "re-run '%Target_App_Cache%_%Target_Os_Cache%_%Target_Arch_Cache%_%Target_Env_Cache%_%Target_Type_Cache%'"
         %dk_call% Array/dk_unshift commands "call:runCache"
@@ -83,26 +79,30 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo 
     %dk_call% dk_echo "Please select a Target_App to build"
     
-    %dk_call% dk_keyboardInput choice
-    :: %dk_call% dk_keyboardInputTimeout 23 60 choice
+    %dk_call% dk_keyboardInput
+    :: %dk_call% dk_keyboardInputTimeout 23 60
     
-    %dk_call% dk_echo "!dk_getDirectories[%choice%]!"
+    %dk_call% dk_echo "!dk_getDirectories[%dk_keyboardInput%]!"
     
-    if not defined commands[%choice%] (
-        %dk_call% dk_echo "%choice%: invalid selection, please try again"
+    if not defined commands[%dk_keyboardInput%] (
+        %dk_call% dk_echo "%dk_keyboardInput%: invalid selection, please try again"
         %dk_call% dk_unset Target_App
         %return%
     )
     
-    endlocal & !commands[%choice%]!
-    if "%~1" neq "" (endlocal & set "%1=%Target_App%")
+	endlocal & (
+		!commands[%dk_keyboardInput%]!
+	)
+	endlocal & (
+		set "Target_App=%Target_App%"
+	)
 	
     %dk_call% dk_deleteArray dk_getDirectories
     %dk_call% dk_deleteArray commands
     %return%
     
 	:: TODO
-	:: %dk_call% dk_echo "%choice%: invalid selection, please try again"
+	:: %dk_call% dk_echo "%dk_keyboardInput%: invalid selection, please try again"
 	:: %dk_call% dk_unset Target_App
 %endfunction%
 
@@ -113,6 +113,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
     %dk_call% dk_debugFunc 0
 
-    %dk_call% dk_Target_App Target_App
-	%dk_call% dk_echo "Target_App = %Target_App%"
+    %dk_call% dk_Target_App
+	%dk_call% dk_printVar Target_App
 %endfunction%

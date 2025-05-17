@@ -31,12 +31,12 @@ if not defined dk_Target_Env_DEFAULT (set "dk_Target_Env_DEFAULT=Clang")
 		echo  4^) Msvc
 		echo:
 
-		%dk_call% dk_keyboardInput input
-		if "!input!" equ "0"	(set "Target_Env=%Target_Env_Cache%")
-		if "!input!" equ "1"	(set "Target_Env=%dk_Target_Env_DEFAULT%")
-		if "!input!" equ "2" 	(set "Target_Env=Clang")
-		if "!input!" equ "3" 	(set "Target_Env=Gcc")
-		if "!input!" equ "4" 	(set "Target_Env=Msvc")
+		%dk_call% dk_keyboardInput
+		if "!dk_keyboardInput!" equ "0"	(set "Target_Env=%Target_Env_Cache%")
+		if "!dk_keyboardInput!" equ "1"	(set "Target_Env=%dk_Target_Env_DEFAULT%")
+		if "!dk_keyboardInput!" equ "2" (set "Target_Env=Clang")
+		if "!dk_keyboardInput!" equ "3" (set "Target_Env=Gcc")
+		if "!dk_keyboardInput!" equ "4" (set "Target_Env=Msvc")
 	)
 	
 	endlocal & (

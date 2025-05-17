@@ -33,14 +33,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo  5^) X86_64
 		echo:
 
-		%dk_call% dk_keyboardInput input
+		%dk_call% dk_keyboardInput
 		
-		if "!input!" equ "1"	(set "Target_Arch=!Target_Arch_Cache!")
-		if "!input!" equ "1"	(set "Target_Arch=!Host_Arch!")
-		if "!input!" equ "2" 	(set "Target_Arch=Arm32")
-		if "!input!" equ "3" 	(set "Target_Arch=Arm64")
-		if "!input!" equ "4" 	(set "Target_Arch=X86")
-		if "!input!" equ "5" 	(set "Target_Arch=X86_64")
+		if "!dk_keyboardInput!" equ "1"	(set "Target_Arch=!Target_Arch_Cache!")
+		if "!dk_keyboardInput!" equ "1"	(set "Target_Arch=!Host_Arch!")
+		if "!dk_keyboardInput!" equ "2" (set "Target_Arch=Arm32")
+		if "!dk_keyboardInput!" equ "3" (set "Target_Arch=Arm64")
+		if "!dk_keyboardInput!" equ "4" (set "Target_Arch=X86")
+		if "!dk_keyboardInput!" equ "5" (set "Target_Arch=X86_64")
 	)
 	
 	endlocal & (
