@@ -163,13 +163,13 @@ dk_pickUpdate() {
 	dk_gitCheckRemote
 	dk_echo
 	
-	#dk_printVar _APP_
-	#dk_printVar _tuple_ 
-	#dk_printVar _TYPE_
+	#dk_printVar Target_App_Cache
+	#dk_printVar Target_Tuple_Cache 
+	#dk_printVar Target_Type_Cache
 	
 	if [ $behind -lt 1 ]; then
-		if [ -n "${_APP_-}" ] && [ -n "${_tuple_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_tuple_ - $_TYPE_]"
+		if [ -n "${Target_App_Cache-}" ] && [ -n "${Target_Tuple_Cache-}" ] && [ -n "${Target_Type_Cache-}" ]; then
+			dk_echo " 0) Repeat DKBuilder.cache [$Target_App_Cache - $Target_Tuple_Cache - $Target_Type_Cache]"
 		fi
 		dk_echo " 1) Git Update"   
 		dk_echo " 2) Git Commit"
@@ -186,8 +186,8 @@ dk_pickUpdate() {
 		dk_warning "Your local repository is behind, please git update"
 		dk_echo
 		dk_echo "${red}" 
-		if [ -n "$_APP_" ] && [ -n "$_tuple_" ] && [ -n "$_TYPE_" ]; then
-			dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_tuple_ - $_TYPE_]"
+		if [ -n "$Target_App_Cache" ] && [ -n "$Target_Tuple_Cache" ] && [ -n "$Target_Type_Cache" ]; then
+			dk_echo " 0) Repeat DKBuilder.cache [$Target_App_Cache - $Target_Tuple_Cache - $Target_Type_Cache]"
 		fi
 		dk_echo "${green}"
 		dk_echo " 1) Git Update"
@@ -208,9 +208,9 @@ dk_pickUpdate() {
 	read input
 	if [ "${input}" = "0" ]; then
 		dk_echo "repeating last selection"
-		Target_App=$_APP_
-		Target_Tuple=$_tuple_
-		Target_Type=$_TYPE_
+		Target_App=$Target_App_Cache
+		Target_Tuple=$Target_Tuple_Cache
+		Target_Type=$Target_Type_Cache
 		UPDATE=1
 	elif [ "${input}" = "1" ]; then
 		dk_gitUpdate
@@ -2041,24 +2041,24 @@ dk_readCache() {
 	if ! dk_pathExists "${DKCACHE_DIR}"/DKBuilder.cache; then
 		return 0
 	fi
-	_APP_=
-	_tuple_=
-	_TYPE_=
+	Target_App_Cache=
+	Target_Tuple_Cache=
+	Target_Type_Cache=
 	
 	dk_echo "reading DKBuilder.cache..."
 	count=0
 	while read p; do
 		if [ "${count}" = "0" ]; then 
-			_APP_=$(echo "$p" | tr -d '\r')
-			#dk_printVar _APP_
+			Target_App_Cache=$(echo "$p" | tr -d '\r')
+			#dk_printVar Target_App_Cache
 		fi
 		if [ "${count}" = "1" ]; then
-			_tuple_=$(echo "$p" | tr -d '\r')
-			#dk_printVar _tuple_ 
+			Target_Tuple_Cache=$(echo "$p" | tr -d '\r')
+			#dk_printVar Target_Tuple_Cache 
 		fi
 		if [ "${count}" = "2" ]; then
-			_TYPE_=$(echo "$p" | tr -d '\r')
-			#dk_printVar _TYPE_
+			Target_Type_Cache=$(echo "$p" | tr -d '\r')
+			#dk_printVar Target_Type_Cache
 		fi
 		#if [ "${count}" = "3" ]; then
 		#	_DKENV_=$(echo $p | tr -d '\r')

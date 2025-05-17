@@ -88,11 +88,11 @@ dk_Host_Tuple() {
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar CLANG_ENV
 
-		[ -z "${Host_Tuple-}" ] && Host_Tuple=${CLANG_TUPLE} && dk_call dk_printVar Host_Tuple
-		[ -z "${HOST_ARCH-}" ]   && HOST_ARCH=${CLANG_ARCH}     && dk_call dk_printVar HOST_ARCH
-		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${CLANG_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z "${HOST_OS-}" ]     && HOST_OS=${CLANG_OS}         && dk_call dk_printVar HOST_OS
-		[ -z "${HOST_ENV-}" ]    && HOST_ENV=${CLANG_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z "${Host_Tuple-}" ]		&& Host_Tuple=${CLANG_TUPLE}	&& dk_call dk_printVar Host_Tuple
+		[ -z "${HOST_ARCH-}" ]		&& HOST_ARCH=${CLANG_ARCH}		&& dk_call dk_printVar HOST_ARCH
+		[ -z "${HOST_VENDOR-}" ]	&& HOST_VENDOR=${CLANG_VENDOR}	&& dk_call dk_printVar HOST_VENDOR
+		[ -z "${HOST_OS-}" ]		&& HOST_OS=${CLANG_OS}			&& dk_call dk_printVar HOST_OS
+		[ -z "${HOST_ENV-}" ]		&& HOST_ENV=${CLANG_ENV}		&& dk_call dk_printVar HOST_ENV
 	fi
 	if dk_call dk_commandExists gcc; then
 		GCC_TUPLE=$(try gcc -dumpmachine) && dk_call dk_printVar GCC_TUPLE

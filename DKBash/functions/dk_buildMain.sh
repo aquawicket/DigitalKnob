@@ -78,19 +78,29 @@ dk_buildMain() {
 				fi
 			fi
 		fi
-		echo "UPDATE = ${UPDATE-}"
-		echo "Target_App = ${Target_App-}"
-		echo "Target_Tuple = ${Target_Tuple-}"
-		echo "Target_Type = ${Target_Type-}"
+		echo "UPDATE 		= ${UPDATE-}"
+		echo "Target_App 	= ${Target_App-}"
+		echo "Target_Os 	= ${Target_Os-}"
+		echo "Target_Arch 	= ${Target_Arch-}"
+		echo "Target_Env 	= ${Target_Env-}"
+		echo "Target_Type 	= ${Target_Type-}"
+		#echo "Target_Tuple 	= ${Target_Tuple-}"
 		
-		[ -z "${Target_App-}" ] && dk_call dk_target_app
-		[ -z "${Target_Tuple-}" ] && dk_call dk_target_tuple_SET
-		[ -z "${Target_Type-}" ] && dk_call dk_target_type
+		[ -z "${Target_App-}" ]		&& dk_call dk_Target_App
+		[ -z "${Target_Os-}" ]		&& dk_call dk_Target_Os
+		[ -z "${Target_Arch-}" ]	&& dk_call dk_Target_Arch
+		[ -z "${Target_Env-}" ]		&& dk_call dk_Target_Env
+		[ -z "${Target_Type-}" ] 	&& dk_call dk_Target_Type
+		#[ -z "${Target_Tuple-}" ] && dk_call dk_target_tuple
 		
 		# save selections to DKBuilder.cache file
-		dk_call dk_echo "creating DKBuilder.cache..."
 		dk_call dk_validate DKCACHE_DIR "dk_DKCACHE_DIR"
-		dk_call dk_fileWrite "${DKCACHE_DIR}/DKBuilder.cache" "${Target_App-} ${Target_Tuple-} ${Target_Type-}"
+		dk_call dk_fileWrite "${DKCACHE_DIR}/DKBuilder.cache" "Target_App=${Target_App-}"
+		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Os=${Target_Os-}"
+		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Arch=${Target_Arch-}"
+		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Env=${Target_Env-}"
+		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Type=${Target_Type-}"
+		#dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Tuple=${Target_Tuple-}"
 	
 		dk_call dk_generate	
 		dk_call dk_buildApp
@@ -99,8 +109,11 @@ dk_buildMain() {
 			dk_call dk_unset UPDATE
 		fi
 		dk_call dk_unset Target_App
-		dk_call dk_unset Target_Tuple
+		dk_call dk_unset Target_Os
+		dk_call dk_unset Target_Arch
+		dk_call dk_unset Target_Env
 		dk_call dk_unset Target_Type
+		#dk_call dk_unset Target_Tuple
 	done
 }
 

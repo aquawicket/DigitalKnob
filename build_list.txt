@@ -1,5 +1,5 @@
 ############ HelloWorld ############
-HelloWorld	Android_Arm32_Clang		Debug
+HelloWorld	Android Arm32 Clang		Debug
 HelloWorld	Android_Arm64_Clang		Debug
 HelloWorld	Android_X86_Clang		Debug
 HelloWorld	Android_X86_64_Clang 	Debug

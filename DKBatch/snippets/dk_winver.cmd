@@ -15,8 +15,3 @@ for /f "tokens=1* delims==" %%A in ('wmic os get OSArchitecture^,Caption^,BuildN
 echo Build_Number = %Build_Number%
 echo OS_Name = %OS_Name%
 echo OS_Architecture = %OS_Architecture%
-
-
-dk_OS_BUILD
-dk_OS_NAME
-dk_OS_ARCH

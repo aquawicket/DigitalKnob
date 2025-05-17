@@ -12,15 +12,17 @@
 dk_pickUpdate() {
 	dk_debugFunc 0
 
-	dk_call dk_readCache _APP_ _tuple_ _TYPE_
+	#dk_call dk_readCache Target_App_Cache Target_Tuple_Cache Target_Type_Cache
+	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
+	dk_call dk_pathExists "${DKCACHE_DIR-}/DKBuilder.cache" && dk_call dk_getFileParams "${DKCACHE_DIR-}/DKBuilder.cache"
 	
 	dk_call dk_echo
 	dk_call dk_gitCheckRemote
 	dk_call dk_echo
 
 	if [ $behind -lt 1 ]; then
-		if [ -n "${_APP_-}" ] && [ -n "${_tuple_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_call dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_tuple_ - $_TYPE_]"
+		if [ -n "${Target_App_Cache-}" ] && [ -n "${Target_Os_Cache-}" ] && [ -n "${Target_Arch_Cache-}" ] && [ -n "${Target_Env_Cache-}" ] && [ -n "${Target_Type_Cache-}" ]; then
+			dk_call dk_echo " 0) Repeat Cache '${Target_App_Cache}_${Target_Os_Cache}_${Target_Arch_Cache}_${Target_Env_Cache}_${Target_Type_Cache}'"
 		fi
 		dk_call dk_echo " 1) Git Update"   
 				dk_echo " 2) Git Commit"
@@ -41,8 +43,8 @@ dk_pickUpdate() {
 		dk_call dk_warning "Your local repository is behind, please git update"
 		dk_call dk_echo
 		dk_echo "${red}" 
-		if [ -n "${_APP_-}" ] && [ -n "${_tuple_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_echo " 0) Repeat DKBuilder.cache [${_APP_} - ${_tuple_} - ${_TYPE_}]"
+		if [ -n "${Target_App_Cache-}" ] && [ -n "${Target_Os_Cache-}" ] && [ -n "${Target_Arch_Cache-}" ] && [ -n "${Target_Env_Cache-}" ] && [ -n "${Target_Type_Cache-}" ]; then
+			dk_call dk_echo " 0) Repeat Cache '${Target_App_Cache}_${Target_Os_Cache}_${Target_Arch_Cache}_${Target_Env_Cache}_${Target_Type_Cache}'"
 		fi
 		dk_echo "${green}"
 		dk_echo " 1) Git Update"
@@ -66,9 +68,12 @@ dk_pickUpdate() {
 	
 	if [ "${choice}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
-		Target_App=${_APP_}
-		Target_Tuple=${_tuple_}
-		Target_Type=${_TYPE_}
+		Target_App=${Target_App_Cache-}
+		Target_Os=${Target_Os_Cache-}
+		Target_Arch=${Target_Arch_Cache-}
+		Target_Env=${Target_Env_Cache-}
+		Target_Type=${Target_Type_Cache-}
+		#Target_Tuple=${Target_Tuple_Cache-}
 		UPDATE=1
 	elif [ "${choice}" = "1" ]; then
 		dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
