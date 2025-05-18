@@ -18,7 +18,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     endif()
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     set(SFML_OS_UNIX 1)
-    if(ANDROID)
+    if(Android)
         set(SFML_OS_ANDROID 1)
         # use the OpenGL ES implementation on Android
         set(OPENGL_ES 1)

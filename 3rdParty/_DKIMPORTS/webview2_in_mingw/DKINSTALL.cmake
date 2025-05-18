@@ -17,9 +17,9 @@ set(WEBVIEW2_IN_MINGW_RELEASE_DIR "${WEBVIEW2_IN_MINGW}/${Target_Tuple}/Release"
 dk_libDebug("${WEBVIEW2_IN_MINGW_DEBUG_DIR}/webview2.exe")
 dk_libRelease("${WEBVIEW2_IN_MINGW_RELEASE_DIR}/webview2.exe")
 
-if(WIN_X86)
+if(Windows_X86)
 	set(ARCH "Win32")
-else(WIN_X86_64)
+else(Windows_X86_64)
 	set(ARCH "x64")
 endif()
 dk_assertVar(ARCH)

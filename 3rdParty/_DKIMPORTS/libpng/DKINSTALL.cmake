@@ -35,11 +35,11 @@ dk_include					(${LIBPNG_DIR}  														PNG_INCLUDE_DIR)
 dk_include					(${LIBPNG_CONFIG_DIR}													PNG_INCLUDE_DIR2)
 
 if(MSVC)
-	if(ANDROID)
+	if(Android)
 		dk_libDebug			(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
 		dk_libRelease		(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
 	endif()
-	if(WIN)
+	if(Windows)
 		dk_libDebug			(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
 		dk_libRelease		(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
 	endif()
@@ -54,7 +54,7 @@ endif()
 
 ### 3RDPARTY LINK ###
 if(MSVC)
-	if(WIN)
+	if(Windows)
 		dk_set(LIBPNG_CMAKE 
 		"-DCMAKE_C_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}" 
 		"-DCMAKE_CXX_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}" 

@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://docs.microsoft.com/en-us/windows/win32/winsock/creating-a-basic-winsock-application
 dk_load(dk_builder)
 
-if(NOT WIN)
+if(NOT Windows)
 	dk_undepend(ws2_32)
 	dk_return()
 endif()

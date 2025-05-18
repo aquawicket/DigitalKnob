@@ -23,23 +23,23 @@ dk_import(https://github.com/kiyolee/bzip2-win-build/archive/8baa40cf.zip)
 
 ### LINK ###
 dk_include				(${BZIP2_WIN_BUILD_DIR}											BZIP2_INCLUDE_DIR)
-if(WIN_X86)
+if(Windows_X86)
 	dk_libDebug		(${BZIP2_WIN_BUILD_TUPLE_DIR}/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
 endif()
-if(WIN_X86)	
+if(Windows_X86)	
 	dk_libRelease	(${BZIP2_WIN_BUILD_TUPLE_DIR}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
 endif()
-if(WIN_X86_64)
+if(Windows_X86_64)
 	dk_libDebug	(${BZIP2_WIN_BUILD_TUPLE_DIR}/x64/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
 endif()
-if(WIN_X86_64)	
+if(Windows_X86_64)	
 	dk_libRelease(${BZIP2_WIN_BUILD_TUPLE_DIR}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
 endif()
 ### 3RDPARTY LINK ###
 dk_set(BZIP2_WIN_BUILD_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
 	
 ### COMPILE ###
-if(WIN_X86)
+if(Windows_X86)
 	dk_define		(BZ_NO_STDIO)
 	dk_copy			(${BZIP2_WIN_BUILD}/build-VS2022 ${BZIP2_WIN_BUILD_TUPLE_DIR})
 	dk_fileReplace	(${BZIP2_WIN_BUILD_TUPLE_DIR}/bzip2-static/bzip2-static.vcxproj "v142" "v143")
@@ -48,7 +48,7 @@ if(WIN_X86)
 	dk_build		(${BZIP2_WIN_BUILD} libbz2-static)
 endif()
 
-if(WIN_X86_64)
+if(Windows_X86_64)
 	dk_copy			(${BZIP2_WIN_BUILD}/win32/bzip2.rc ${BZIP2_WIN_BUILD_TUPLE_DIR}/bzip2.rc) #copy project files that came with bzip
 	dk_copy			(${BZIP2_WIN_BUILD}/win32/bzip2recover.rc ${BZIP2_WIN_BUILD_TUPLE_DIR}/bzip2recover.rc)
 	dk_copy			(${BZIP2_WIN_BUILD}/win32/bzip2_version.h ${BZIP2_WIN_BUILD_TUPLE_DIR}/bzip2_version.h)

@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ############ DKSDLVideo ############
-if(WIN)
+if(Windows)
 	RETURN()
 endif()
 

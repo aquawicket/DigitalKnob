@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ pdh ############
 
 dk_load(dk_builder)
-if(NOT WIN)
+if(NOT Windows)
 	dk_undepend(pdh)
 	dk_return()
 endif()

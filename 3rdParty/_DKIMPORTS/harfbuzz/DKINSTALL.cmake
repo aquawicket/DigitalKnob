@@ -18,7 +18,7 @@ dk_import(https://github.com/harfbuzz/harfbuzz/archive/c1c0e82e.zip)
 
 ### LINK ###
 dk_include			(${HARFBUZZ_DIR}/src						HARFBUZZ_INCLUDE_DIR)
-if(MSVC AND WIN)
+if(MSVC AND Windows)
 	dk_libDebug		(${HARFBUZZ_DEBUG_DIR}/harfbuzz.lib			HARFBUZZ_DEBUG_LIBRARY)
 	dk_libRelease	(${HARFBUZZ_RELEASE_DIR}/harfbuzz.lib		HARFBUZZ_RELEASE_LIBRARY)
 else()

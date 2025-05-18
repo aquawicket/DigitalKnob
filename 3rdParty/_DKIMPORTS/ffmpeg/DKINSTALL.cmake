@@ -29,7 +29,7 @@ dk_depend(x264)
 dk_depend(xz)
 dk_depend(zlib)
 
-#FIXME:  WIN_X86 - 9 unresolved externals
+#FIXME:  Windows_X86 - 9 unresolved externals
 
 ### IMPORT ###
 dk_import(https://git.ffmpeg.org/ffmpeg.git)

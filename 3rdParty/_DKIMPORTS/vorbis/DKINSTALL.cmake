@@ -26,7 +26,7 @@ dk_import("${VORBIS_DL}")
 dk_include				(${VORBIS_DIR}/include										VORBIS_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	if(WIN AND MSVC)
+	if(Windows AND MSVC)
 		dk_libDebug		(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/vorbis.lib			VORBIS_DEBUG_LIB)
 		dk_libDebug		(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/vorbisenc.lib		VORBISENC_DEBUG_LIB)
 		dk_libDebug		(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/vorbisfile.lib		VORBISFILE_DEBUG_LIB)

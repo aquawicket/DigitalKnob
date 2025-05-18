@@ -17,7 +17,7 @@ dk_load(dk_builder)
 dk_depend(winmm)
 
 ### IMPORT ###
-if(ANDROID)	
+if(Android)	
 	dk_import	(https://openal.org/downloads/OpenAL11CoreSDK.zip)
 else()
 	dk_import	(https://www.openal-soft.org/openal-releases/openal-soft-1.21.1.tar.bz2)
@@ -70,13 +70,13 @@ endif()
 ### GENERATE ###
 if(UNIX)
 	dk_configure(${OPENAL_DIR} -DLIBTYPE=STATIC -DEXAMPLES=OFF ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-elseif(WIN)
+elseif(Windows)
 	dk_configure(${OPENAL_DIR} -DLIBTYPE=STATIC -DEXAMPLES=OFF ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DFORCE_STATIC_VCRT=ON "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC")
 endif()
 
 
 ### COMPILE ###
-if(ANDROID)
+if(Android)
 	dk_ndk(${OPENAL_DIR}) 
 else()
 	dk_build(${OPENAL_DIR} OpenAL)

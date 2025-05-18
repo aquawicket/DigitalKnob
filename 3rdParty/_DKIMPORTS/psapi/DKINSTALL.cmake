@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_load(dk_builder)
 # https://learn.microsoft.com/en-us/windows/win32/psapi/psapi-functions
 
-if(NOT WIN)
+if(NOT Windows)
 	dk_undepend(psapi)
 	dk_return()
 endif()

@@ -14,7 +14,7 @@ dk_depend(nodejs)
 dk_import(https://github.com/w3c/webref/archive/48fcf557.zip PATCH)
 
 ### Build Interface Tree ###
-if(WIN)
+if(Windows)
 	dk_command(${NODE_EXE} ${WEBREF}/DKBuildInterfaces.js)
 endif()
 

@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKBuild ############
 dk_depend(DKCurl)
 dk_depend(DKArchive)
-if(WIN)
+if(Windows)
 	dk_depend(imagemagick)
 endif()
 

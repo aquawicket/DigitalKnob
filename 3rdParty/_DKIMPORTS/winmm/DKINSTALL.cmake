@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://docs.microsoft.com/en-us/windows/win32/multimedia/windows-multimedia-start-page?redirectedfrom=MSDN
 dk_load(dk_builder)
 
-if(NOT WIN)
+if(NOT Windows)
 	dk_undepend(winmm)
 	dk_return()
 endif()

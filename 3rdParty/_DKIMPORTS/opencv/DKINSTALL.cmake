@@ -515,7 +515,7 @@ endif()
 
 
 ### GENERATE ###
-if(WIN)
+if(Windows)
 	string(REPLACE "/std:c++17" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "  " " " 		DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 endif()

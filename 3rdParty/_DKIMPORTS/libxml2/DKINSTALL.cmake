@@ -47,7 +47,7 @@ else()
 endif()
 
 if(MSVC)
-	if(WIN)
+	if(Windows)
 		dk_libDebug		(${LIBXML2_DEBUG_DIR}/libxml2sd.lib		LIBXML2_LIBRARY_DEBUG)
 		dk_libRelease	(${LIBXML2_RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
 	endif()

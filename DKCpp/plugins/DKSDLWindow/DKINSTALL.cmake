@@ -11,7 +11,7 @@ dk_depend(sdl)
 dk_depend(DKWindow)
 
 # DKCMake/DKGenerate.cmake will build android with or without GUI per the CMAKE_ANDROID_GUI variable.
-if(ANDROID)
+if(Android)
 	dk_set(CMAKE_ANDROID_GUI 1)
 	dk_depend(openjdk)
 	dk_depend(openjdk-8)

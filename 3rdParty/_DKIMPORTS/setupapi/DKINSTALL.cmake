@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
-if(NOT WIN)
+if(NOT Windows)
 	dk_undepend(setupapi)
 	dk_return()
 endif()

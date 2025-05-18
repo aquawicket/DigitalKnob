@@ -26,7 +26,7 @@ dk_import(https://github.com/libsdl-org/SDL_mixer/archive/a90b86e.zip PATCH) 		#
 
 ### LINK ###
 dk_include			(${SDL_MIXER_DIR}/include							SDL_MIXER_INCLUDE_DIR)
-if(WIN AND MSVC)
+if(Windows AND MSVC)
 	dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
 	dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/SDL2_mixer-static.lib		SDL_MIXER_LIBRARY_RELEASE)
 elseif(ANDROID)

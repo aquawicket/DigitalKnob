@@ -36,7 +36,7 @@ dk_import(https://github.com/mikke89/RmlUi/archive/64b36dc4775e3c2eefcd93bdb873c
 dk_fileReplace(${RMLUI}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
 
 # ANDROID FIX
-if(ANDROID)
+if(Android)
 	dk_fileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
 endif()
 

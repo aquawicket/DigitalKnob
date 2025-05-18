@@ -35,7 +35,7 @@ dk_validate(Target_Tuple "dk_Target_Tuple()")
 	endif()
 
 	### 3RDPARTY LINK ###
-	if(WIN)
+	if(Windows)
 		dk_set(LIBGCC_CMAKE -DLIBGCC_LIBRARIES=${LIBGCC})
 		#dk_set(LIBGCC_CMAKE -DLIBGCC_LIBRARIES="${LIBGCC_LIBRARY_DEBUG} ${LIBGCC_LIBRARY_RELEASE}")
 	endif()

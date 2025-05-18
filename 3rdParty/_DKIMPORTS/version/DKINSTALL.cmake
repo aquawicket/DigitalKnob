@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://learn.microsoft.com/en-us/windows/win32/api/winver/nf-winver-getfileversioninfoa
 dk_load(dk_builder)
 
-if(NOT WIN)
+if(NOT Windows)
 	dk_undepend(version)
 	dk_return()
 endif()

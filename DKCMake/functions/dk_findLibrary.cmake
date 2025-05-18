@@ -15,7 +15,7 @@ function(dk_findLibrary name)
 	dk_getParameter(NO_HALT)
 	
 	find_library(${name}_LIBRARY ${name} ${ARGN})
-	if(NOT WIN)
+	if(NOT Windows)
 		if(NOT ${name}_LIBRARY)
 				dk_fatal("Could not locate ${name} Library" ${NO_HALT})
 				if(NO_HALT)

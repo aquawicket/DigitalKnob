@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #if(LINUX)
 #	dk_return()
 #endif()
-#if(ANDROID)
+#if(Android)
 #	dk_return()
 #endif()
 

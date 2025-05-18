@@ -32,7 +32,7 @@ dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD_DEBUG_DIR}/libmd.a)
 
 
 ### COMPILE ###
-if(ANDROID)
+if(Android)
 	ANDROID_dk_ndk			(${LIBMD})
 else()
 	DEBUG_dk_chdir			(${LIBMD})

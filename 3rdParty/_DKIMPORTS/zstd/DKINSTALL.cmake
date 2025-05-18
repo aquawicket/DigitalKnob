@@ -16,7 +16,7 @@ dk_import(${ZSTD_DL})
 ### LINK ###
 dk_include				(${ZSTD_DIR}/lib										ZSTD_INCLUDE_DIR)
 if(MSVC)
-	if(WIN)
+	if(Windows)
 		dk_libDebug		(${ZSTD_CONFIG_DIR}/lib/${DEBUG_DIR}/zstd_static.lib	Zstd_LIBRARY_DEBUG)
 		dk_libRelease	(${ZSTD_CONFIG_DIR}/lib/${RELEASE_DIR}/zstd_static.lib	Zstd_LIBRARY_RELEASE)
 	else()

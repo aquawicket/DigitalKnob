@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 dk_load(dk_builder)
-if(ANDROID)
+if(Android)
 	#dk_findLibrary(OpenGLES ${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/sysroot/usr/include)
 	dk_define(GL_GLEXT_PROTOTYPES)
 	dk_lib(GLESv1_CM)
@@ -33,7 +33,7 @@ endif()
 	#dk_depend(opengl)
 #endif()	
 
-#if(WIN)
+#if(Windows)
 	#dk_depend(opengl)
 #endif()
 

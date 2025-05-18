@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://sourceware.org/newlib/libm.html
 
 dk_validate(Target_Tuple "dk_Target_Tuple()")
-if(ANDROID)
+if(Android)
 	dk_depend(android-ndk)
 endif()
 if(EMSCRIPTEN)

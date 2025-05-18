@@ -28,7 +28,7 @@ dk_depend(zstd)
 ### IMPORT ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/curl/dkconfig.txt")
-if(WIN)
+if(Windows)
 	dk_import	(${CURL_WIN_DL})
 else()
 	dk_import	(${CURL_UNIX_DL})
@@ -47,7 +47,7 @@ else()
 	set(CURL_RELEASE_DIR 	${CURL_RELEASE_DIR}/lib)
 endif()
 
-if(MSVC AND WIN)
+if(MSVC AND Windows)
 	dk_libDebug			(${CURL_CONFIG_DIR}/lib/${DEBUG_DIR}		CURL_DEBUG_LIBRARY)
 	dk_libRelease		(${CURL_CONFIG_DIR}/lib/${RELEASE_DIR}		CURL_RELEASE_LIBRARY)
 else()	
@@ -72,7 +72,7 @@ elseif()
 endif()
 
 ### GENERATE ###
-if(MSVC AND WIN)
+if(MSVC AND Windows)
 	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON

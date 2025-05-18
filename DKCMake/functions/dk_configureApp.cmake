@@ -68,7 +68,7 @@ function(dk_configureApp)
 	include_directories(${DKCPP_PLUGINS_DIR})
 
 	##############
-	if(WIN_X86_64)
+	if(Windows_X86_64)
 		########################## CREATE ICONS ###############################
 		dk_createIcons(${DK_Project_Dir}/icons/icon.png)
 		
@@ -160,7 +160,7 @@ function(dk_configureApp)
 			set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
 		endif()
-	endif(WIN_X86_64)
+	endif(Windows_X86_64)
 endfunction()
 
 

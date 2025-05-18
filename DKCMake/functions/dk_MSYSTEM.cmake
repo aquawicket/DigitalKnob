@@ -12,7 +12,7 @@ function(dk_MSYSTEM)
 	### Set MSYSTEM
 	dk_validate(target_env "dk_Target_Tuple()")
 	
-	if(WIN AND ${target_env})
+	if(Windows AND ${target_env})
 		if(CLANG AND ARM64)
 			dk_set(msystem "${target_env}${Target_Arch}")	# msystem = clangarm64
 			dk_set(MSYSTEM "${TARGET_ENV}${Target_Arch}")	# MSYSTEM = CLANGARM64

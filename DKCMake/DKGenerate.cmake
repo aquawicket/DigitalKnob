@@ -1376,7 +1376,7 @@ elseif(Windows_X86)
     #POST_BUILD
     #COMMAND "mt.exe" -nologo
     #        -manifest \"${DK_Project_Dir}/compatibility.manifest\"
-    #        -outputresource:"${DK_Project_Dir}/win_x86/${DEBUG_DIR}/${APP_NAME}.exe"\;\#1
+    #        -outputresource:"${DK_Project_Dir}/Windows_X86/${DEBUG_DIR}/${APP_NAME}.exe"\;\#1
     #COMMENT "Adding manifest..."
     #)
 	
@@ -1560,7 +1560,7 @@ endforeach()
 #elseif(MAC OR IOS)
 	# TODO
 	#dk_command(otool -L ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.app)
-#elseif(WIN)	
+#elseif(Windows)	
 	# TODO
 	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.exe
 #endif()

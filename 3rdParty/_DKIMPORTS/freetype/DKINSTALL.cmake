@@ -24,7 +24,7 @@ dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freety
 dk_include				(${FREETYPE_DIR}/include					FREETYPE_INCLUDE_DIR)
 dk_include				(${FREETYPE_CONFIG_DIR}/include/freetype2	FREETYPE_INCLUDE_DIR2)
 if(MSVC)
-	if(WIN)
+	if(Windows)
 		dk_libDebug		(${FREETYPE_DEBUG_DIR}/freetype.lib			FREETYPE_LIBRARY_DEBUG)
 		dk_libRelease	(${FREETYPE_RELEASE_DIR}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
 	endif()

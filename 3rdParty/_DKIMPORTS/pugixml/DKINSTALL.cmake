@@ -14,6 +14,6 @@ dk_load(dk_builder)
 dk_import(https://github.com/zeux/pugixml/releases/download/v1.6/pugixml-1.6.zip PATCH)
 
 
-if(ANDROID)
+if(Android)
 	dk_define(PUGIXML_NO_EXCEPTIONS)
 endif()

@@ -24,12 +24,12 @@ endif()
 
 
 ### LINK ###
-if(WIN)
+if(Windows)
 	dk_libDebug(${LIBMINGWEX}/libmingwex.a)
 	dk_libRelease(${LIBMINGWEX}/libmingwex.a)
 endif()
 
 ### 3RDPARTY LINK ###
-if(WIN)
+if(Windows)
 	dk_set(LIBMINGWEX_CMAKE -DLIBMINGWEX_LIBRARIES=${LIBMINGWEX})
 endif()

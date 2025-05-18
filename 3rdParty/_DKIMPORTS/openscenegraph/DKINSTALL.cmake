@@ -2106,7 +2106,7 @@ WIN_dk_set					(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=/DOSG_LIBRARY_STATIC" "-
 
 
 ### GENERATE ###
-if(ANDROID)
+if(Android)
 	string(REPLACE "-std=c++17" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "  " " " 		DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 endif()
@@ -2604,7 +2604,7 @@ RASPBERRY_RELEASE_dk_configure(${OPENSCENEGRAPH}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 
-if(WIN)
+if(Windows)
 	string(REPLACE "/std:c++17" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "  " " " 		DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 endif()

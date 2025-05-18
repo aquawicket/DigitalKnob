@@ -40,13 +40,13 @@ dk_import(https://github.com/libarchive/libarchive/archive/6567375.zip)
 dk_define					(LIBARCHIVE_STATIC)
 dk_include					(${LIBARCHIVE_DIR}/libarchive)
 dk_include					(${LIBARCHIVE_TUPLE_DIR})
-if(ANDROID)
+if(Android)
 	dk_include				(${LIBARCHIVE_DIR}/contrib/android/include)
 endif()
 
 if(MULTI_CONFIG)
 	if(MSVC)
-		if(WIN)
+		if(Windows)
 			dk_libDebug		(${LIBARCHIVE_TUPLE_DIR}/libarchive/${DEBUG_DIR}/archive.lib)
 			dk_libRelease	(${LIBARCHIVE_TUPLE_DIR}/libarchive/${RELEASE_DIR}/archive.lib)
 		endif()
@@ -61,7 +61,7 @@ endif()
 
 
 ### GENERATE ###
-if(ANDROID)
+if(Android)
 	dk_configure(${LIBARCHIVE_DIR}
 		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_TUPLE_DIR} -I${LIBARCHIVE_DIR}/contrib/android/include"
 		-DENABLE_ACL=ON
@@ -492,7 +492,7 @@ if(RASPBERRY)
 endif()
 
 if(MSVC)
-	if(WIN)
+	if(Windows)
 		dk_configure(${LIBARCHIVE_DIR}
 			-DENABLE_ACL=ON
 			-DENABLE_BZip2=${BZIP2}
@@ -551,7 +551,7 @@ if(MSVC)
 			${ZSTD_CMAKE})
 	endif()
 else()
-	if(WIN)
+	if(Windows)
 		dk_configure(${LIBARCHIVE_DIR}
 			"-DCMAKE_C_FLAGS=-DLIBXML_STATIC"
 			-DCMAKE_FIND_USE_CMAKE_PATH=FALSE

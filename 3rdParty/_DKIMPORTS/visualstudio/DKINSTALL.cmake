@@ -177,7 +177,7 @@ dk_set(VS_X86_64_DUMPBIN 			"${VS}/VC/Tools/MSVC/${VS_VERSION}/bin/Hostx86/x64/d
 
 
 ###### Patch Android Files ######
-if(ANDROID)	
+if(Android)	
 	if(EXISTS "${VS}/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets")
 		dk_info("Patching Android.Common.targets. . .")
 		dk_fileReplace("${VS}/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">ARM7</GradlePlatform>" "></GradlePlatform>")

@@ -14,6 +14,6 @@ dk_import(https://github.com/microsoft/vcpkg/archive/cff6ed45.zip)
 
 dk_chdir(${VCPKG})
 
-if(WIN)
+if(Windows)
 	dk_queueCommand(bootstrap-vcpkg.bat)
 endif()

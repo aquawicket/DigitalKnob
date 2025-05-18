@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_load(dk_builder)
 # https://learn.microsoft.com/en-us/windows/win32/api/userenv/
 
-if(NOT WIN)
+if(NOT Windows)
 	dk_undepend(userenv)
 	dk_return()
 endif()

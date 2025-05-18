@@ -45,6 +45,6 @@ if(MAC)
 endif()
 
 
-if(WIN)
+if(Windows)
 	dk_lib(opengl32.lib)
 endif()

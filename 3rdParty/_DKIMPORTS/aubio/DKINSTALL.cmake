@@ -13,7 +13,7 @@ dk_getFileParams	("$ENV{DKIMPORTS_DIR}/aubio/dkconfig.txt")
 dk_import			(${AUBIO_IMPORT})
 
 dk_include			(${AUBIO_DIR}/src)
-if(WIN AND MSVC)
+if(Windows AND MSVC)
 	dk_libDebug		(${AUBIO_DEBUG_DIR}/aubio.lib)
 	dk_libRelease	(${AUBIO_RELEASE_DIR}/aubio.lib)
 else()

@@ -27,11 +27,11 @@ dk_import(https://github.com/aquawicket/duktape/archive/0701a46.zip PATCH) #NOTE
 
 ### LINK ###
 if(MSVC)
-	if(WIN)
+	if(Windows)
 		dk_define	(DUK_F_VBCC)
 	endif()
 endif()
-if(ANDROID)
+if(Android)
 	dk_define		(DUK_F_32BIT_PTRS)
 endif()
 dk_include			(${DUKTAPE_DIR}/src)

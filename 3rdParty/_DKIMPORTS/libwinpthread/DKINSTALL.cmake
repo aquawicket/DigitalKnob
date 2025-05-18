@@ -22,7 +22,7 @@ endif()
 
 
 ### LINK ###
-if(WIN)
+if(Windows)
 	dk_libDebug(${LIBWINPTHREAD}/libwinpthread.a)
 	dk_libRelease(${LIBWINPTHREAD}/libwinpthread.a)
 	

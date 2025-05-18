@@ -18,7 +18,7 @@ dk_load(dk_builder)
 # Debug Information Format:         C7 compatible (/Z7)
 # Enable Enhanced Instruction Set:  Streaming SIMD Extensions (/arch:SSE)
 # Inline function expansion:        Default
-# Preprocessor Definitions:         _DEBUG WIN_X86 _WINDOWS LOAD_BMP LOAD_GIF LOAD_JPG LOAD_LBM LOAD_PCX LOAD_PNG LOAD_PNM LOAD_SVG LOAD_TGA LOAD_TIF LOAD_WEBP LOAD_XPM LOAD_XV 
+# Preprocessor Definitions:         _DEBUG Windows_X86 _WINDOWS LOAD_BMP LOAD_GIF LOAD_JPG LOAD_LBM LOAD_PCX LOAD_PNG LOAD_PNM LOAD_SVG LOAD_TGA LOAD_TIF LOAD_WEBP LOAD_XPM LOAD_XV 
 #
 # Release flags)
 # Debug information format:         Program Database (/Zi)
@@ -50,11 +50,11 @@ dk_import("${SDL_IMAGE_DL}" PATCH)
 ### LINK ###
 dk_include				(${SDL_IMAGE_DIR}											SDL2_IMAGE_INCLUDE_DIR)
 if(MSVC)
-	if(ANDROID)
+	if(Android)
 		dk_libDebug		(${SDL_IMAGE_CONFIG_DIR}/lib/${DEBUG_DIR}/SDL_image.a		SDL2_IMAGE_LIBRARY_DEBUG)
 		dk_libRelease	(${SDL_IMAGE_CONFIG_DIR}/lib/${RELEASE_DIR}/SDL_image.a		SDL2_IMAGE_LIBRARY_RELEASE)
 	endif()
-	if(WIN)
+	if(Windows)
 		dk_libDebug		(${SDL_IMAGE_CONFIG_DIR}/lib/${DEBUG_DIR}/SDL_image.lib		SDL2_IMAGE_LIBRARY_DEBUG)
 		dk_libRelease	(${SDL_IMAGE_CONFIG_DIR}/lib/${RELEASE_DIR}/SDL_image.lib	SDL2_IMAGE_LIBRARY_RELEASE)
 	endif()

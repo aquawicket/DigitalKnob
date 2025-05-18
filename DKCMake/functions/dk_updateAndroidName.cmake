@@ -13,7 +13,7 @@ function(dk_updateAndroidName app_name)
 	dk_debugFunc()
 	
 	dk_toLower(${app_name} app_name)
-	if(ANDROID)
+	if(Android)
 		# update all files and folders recursivley
 		file(GLOB_RECURSE allfiles LIST_DIRECTORIES true RELATIVE "${DK_Project_Dir}/${Target_Tuple}/" "${DK_Project_Dir}/${Target_Tuple}/*")
 		dk_verbose("Getting a list of files in ${DK_Project_Dir}/${Target_Tuple}")

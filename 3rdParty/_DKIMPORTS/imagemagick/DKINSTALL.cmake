@@ -70,7 +70,7 @@ return()
 
 if(DKAPP)
 if(NOT ANDROID)
-if(NOT WIN)
+if(NOT Windows)
 	### LINK ###
 	dk_include			(${IMAGEMAGICK_TUPLE_DIR})
 

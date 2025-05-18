@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 ### DEPEND ###
-if(WIN)
+if(Windows)
 	dk_depend(winmm)
 endif()
 

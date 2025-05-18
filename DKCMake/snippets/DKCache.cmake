@@ -15,7 +15,7 @@ if(NOT OS)
 endif()
 
 #project(HelloWorld C CXX)
-##set(OS win_x86 CACHE PATH "" FORCE)
+##set(OS Windows_X86 CACHE PATH "" FORCE)
 set(DK3RDPARTY_DIR "C:/Users/$ENV{USERNAME}/digitalknob/Development/3rdParty" CACHE PATH "" FORCE)
 
 ##${STDINT}

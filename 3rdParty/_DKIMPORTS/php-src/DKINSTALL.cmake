@@ -30,8 +30,8 @@ dk_depend(vc_redist) #for VCRUNTIME140.dll
 #dk_import			(https://github.com/php/php-src.git)											# git
 #dk_import			(https://github.com/php/php-src/archive/refs/heads/master.zip)					# zip
 UNIX_dk_import		(${PHP_SRC_UNIX})				# unix binary
-WIN_X86_dk_import   (${PHP_SRC_WIN_X86_DL})			# win_x86 binary
-WIN_X86_64_dk_import(${PHP_SRC_WIN_X86_64_DL})		# win x86_64 binary
+WIN_X86_dk_import   (${PHP_SRC_WIN_X86_DL})			# Windows_X86 binary
+WIN_X86_64_dk_import(${PHP_SRC_WIN_X86_64_DL})		# Windows_x86_64 binary
 
 
 

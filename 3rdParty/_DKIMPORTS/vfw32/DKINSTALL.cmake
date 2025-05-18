@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_load(dk_builder)
 
-if(NOT WIN)
+if(NOT Windows)
 	dk_undepend(vfw32)
 	dk_return()
 endif()

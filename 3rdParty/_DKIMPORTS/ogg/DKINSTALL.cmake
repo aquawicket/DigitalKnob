@@ -13,7 +13,7 @@ dk_load(dk_builder)
 # https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
 
 ### DEPEND ###
-if(WIN)
+if(Windows)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 endif()
 
@@ -47,7 +47,7 @@ if(Release)
 endif()
 
 ### GENERATE ###
-#if(ANDROID)
+#if(Android)
 dk_configure(${OGG_DIR} 
 	-DBUILD_FRAMEWORK=OFF				# "Build Framework bundle for OSX" OFF
 	-DINSTALL_CMAKE_PACKAGE_MODULE=ON	# "Install CMake package configuration module" ON

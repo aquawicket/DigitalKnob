@@ -20,7 +20,7 @@ dk_import			(${ASTYLE_IMPORT})
 dk_validate			(Target_Tuple "dk_Target_Tuple()")
 dk_include			(${ASTYLE_DIR}/src)
 
-if(WIN)
+if(Windows)
 	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyleLib.a)
 	dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyleLib.a)
 else()

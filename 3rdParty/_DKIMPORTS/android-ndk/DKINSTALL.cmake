@@ -201,7 +201,7 @@ dk_set(ANDROID_BASH					"export ANDROID_NDK_ROOT=${ANDROID_NDK_ROOT};"
 
 
 ###### ANDROID TARGET ENVIRONMENT VARIABLES ######
-if(ANDROID)
+if(Android)
 	dk_setEnv						("AR"				"${ANDROID_AR}")
 	dk_setEnv						("CC" 				"${ANDROID_C_COMPILER}")
 	dk_setEnv						("CXX"				"${ANDROID_CXX_COMPILER}")

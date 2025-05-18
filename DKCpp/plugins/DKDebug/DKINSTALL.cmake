@@ -28,7 +28,7 @@ dk_generateCmake(DKDebug)
 dk_assets(DKDebug)
 
 if(DKAPP)
-	if(WIN)
+	if(Windows)
 		LIST(APPEND RELEASE_LINK_FLAGS /DEBUG)
 	endif()
 endif()

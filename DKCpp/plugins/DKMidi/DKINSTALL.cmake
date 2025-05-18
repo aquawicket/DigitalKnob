@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ############ DKMidi ############
-if(ANDROID)
+if(Android)
 	RETURN()
 endif()
 if(IOS)

@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ cfgmgr32 ############
 # https://learn.microsoft.com/en-us/windows/win32/api/setupapi
 dk_load(dk_builder)
-if(NOT WIN)
+if(NOT Windows)
 	dk_undepend(cfgmgr32.lib)
 	dk_return()
 endif()

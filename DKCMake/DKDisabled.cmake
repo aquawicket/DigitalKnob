@@ -163,7 +163,7 @@ dk_disable(Pyportable)
 #dk_disable(visualstudio)
 
 # Disabled for Android targets
-if(ANDROID)
+if(Android)
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
 	dk_disable(DKHandles)			# could not find DKHandles
@@ -203,7 +203,7 @@ if(ANDROID)
 endif(ANDROID)
 
 # Disabled for Android 64bit targets
-if(ANDROID_ARM64)
+if(Android_Arm64)
 	###
 endif(ANDROID_ARM64)
 
@@ -435,12 +435,12 @@ endif(MSVC)
 
 
 # Disabled for Windows 64bit (MSVC) targets
-if(MSVC AND WIN_X86_64)
+if(MSVC AND Windows_X86_64)
 	#dk_disable(DKVncClient)			# requires libvncserver
 	#dk_disable(DKVncServer)			# requires libvncserver
 	#dk_disable(libvncserver)		# build errors
 	##dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
-endif(MSVC AND WIN_X86_64)
+endif(MSVC AND Windows_X86_64)
 
 
 # Disabled for Windows (MINGW) targets

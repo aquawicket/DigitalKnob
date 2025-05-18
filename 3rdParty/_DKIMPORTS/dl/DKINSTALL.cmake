@@ -13,7 +13,7 @@ if(NOT UNIX)
 	dk_return()
 endif()
 
-if(ANDROID)
+if(Android)
 	dk_depend(android-ndk)
 endif()
 

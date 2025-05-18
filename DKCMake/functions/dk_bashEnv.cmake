@@ -43,7 +43,7 @@ function(dk_bashEnv)
 	dk_depend(cygpath)
 	dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_CYGPATH)
 	
-	if(ANDROID)
+	if(Android)
 		dk_assertVar(ANDROID_BASH)
 		list(APPEND BASH_COMMANDS ${ANDROID_BASH})
 	elseif(Windows_X86_Clang)

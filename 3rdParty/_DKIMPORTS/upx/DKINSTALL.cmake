@@ -31,9 +31,9 @@ dk_validate(Target_Tuple "dk_Target_Tuple()")
 #	dk_return()
 #endif()
 
-if(WIN_X86)	
+if(Windows_X86)	
 	dk_import(https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win32.zip)
-elseif(WIN_X86_64)	
+elseif(Windows_X86_64)	
 	dk_import(https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip)
 elseif(LINUX_X86)
 	dk_import(https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-i386_linux.tar.xz)
@@ -46,7 +46,7 @@ elseif(RASPBERRY)
 endif()
 
 
-if(WIN)
+if(Windows)
 	dk_set(UPX_EXE "${UPX}/upx.exe")
 endif()
 

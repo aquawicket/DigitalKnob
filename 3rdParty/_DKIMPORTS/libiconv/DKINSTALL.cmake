@@ -33,7 +33,7 @@ endif()
 
 # libcharset
 if(MSVC)
-	if(WIN)
+	if(Windows)
 		dk_libDebug		(${LIBICONV_DEBUG_DIR}/charset.lib		LIBICONV_CHARSET_LIBRARY_DEBUG)
 		dk_libRelease	(${LIBICONV_RELEASE_DIR}/charset.lib	LIBICONV_CHARSET_LIBRARY_RELEASE)
 	endif()
@@ -44,7 +44,7 @@ endif()
 
 #libiconv
 if(MSVC)
-	if(WIN)
+	if(Windows)
 		dk_libDebug		(${LIBICONV_DEBUG_DIR}/iconv.lib		LIBICONV_LIBRARY_DEBUG)
 		dk_libRelease	(${LIBICONV_RELEASE_DIR}/iconv.lib		LIBICONV_LIBRARY_RELEASE)
 	endif()
