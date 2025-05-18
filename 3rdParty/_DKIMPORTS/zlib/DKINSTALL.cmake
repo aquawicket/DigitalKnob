@@ -16,6 +16,11 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import(${ZLIB_IMPORT} NAME zlib)
 
+dk_assertPath("${ZLIB}")
+dk_assertPath("${ZLIB_CONFIG_DIR}")
+dk_assertPath("${ZLIB_DEBUG_DIR}")
+dk_assertPath("${ZLIB_RELEASE_DIR}")
+
 ### DKBIN ###
 #set(ZLIB			 	"$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  	# C:/Users/Administrator/digitalknob/DKBIN/include/zlib
 #set(ZLIB_INC		 	"$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  	# C:/Users/Administrator/digitalknob/DKBIN/include/zlib

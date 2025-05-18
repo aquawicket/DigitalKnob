@@ -429,9 +429,9 @@ function(dk_importVariables)
 	############# TARGET <PLUGIN>_VARIABLES #############
 	#####################################################
 	# These variables require a Target_Tuple
-	if(NOT Target_Tuple)
-		return()
-	endif()
+#	if(NOT Target_Tuple)
+#		return()
+#	endif()
 	dk_validate(Target_Tuple "dk_Target_Tuple()")
 	
 	# <PLUGIN>_TUPLE_DIR

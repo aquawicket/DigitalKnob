@@ -200,15 +200,15 @@ if(Android)
 	dk_disable(rtaudio)				# build errors
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl_rtf)
-endif(ANDROID)
+endif(Android)
 
 # Disabled for Android 64bit targets
 if(Android_Arm64)
 	###
-endif(ANDROID_ARM64)
+endif(Android_Arm64)
 
 # Disabled for Emscripten targets
-if(EMSCRIPTEN) 
+if(Emscripten) 
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKAudio)
 	dk_disable(DKCef)
@@ -270,11 +270,11 @@ if(EMSCRIPTEN)
 	dk_disable(sdl_rtf)
 	dk_disable(system_configuration)
 	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
-endif(EMSCRIPTEN) 
+endif(Emscripten) 
 
 
 # Disabled for iOS and iOS-Simulator targets
-if(IOS OR IOSSIM)  
+if(Ios OR Iossim)  
 	dk_disable(DKCef)				# requires cef_binary
 	#dk_disable(DKCefChild)			# requires cef_binary
 	#dk_disable(DKJerryscript)		# requires jerryscript
@@ -309,17 +309,17 @@ if(IOS OR IOSSIM)
 	#dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file not found
 	#dk_disable(sdl_rtf)
 	##dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
-endif(IOS OR IOSSIM)
+endif(Ios OR Iossim)
 
 
 # Disabled for iOS targets
-if(IOS AND NOT IOSSIM)  
+if(Ios AND NOT Iossim)  
 	#TODO
-endif(IOS AND NOT IOSSIM)
+endif(Ios AND NOT Iossim) 
 
 
 # Disabled for Linux targets
-if(LINUX)
+if(Linux)
 	#dk_disable(DKJerryscript)		# requires jerryscript
 	#dk_disable(DKOcr)				# requires tesseract
 	##dk_disable(DKSDLWaave)			# requires waave
@@ -340,11 +340,11 @@ if(LINUX)
 	#dk_disable(python)
 	#dk_disable(sdl_rtf)
 	##dk_disable(smpeg2)				# can't open patch
-endif(LINUX)
+endif(Linux)
 
 
 # Disabled for Mac targets
-if(MAC) 
+if(Mac) 
 	#dk_disable(DKOcr)				# requires tesseract
 	##dk_disable(DKSDLWaave)			# requires waave
 	#dk_disable(DKSDLWav)			# build errors
@@ -362,11 +362,11 @@ if(MAC)
 	#dk_disable(sdl_rtf)
 	##dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	#dk_disable(zstd)				# https://github.com/facebook/zstd/issues/3622
-endif(MAC)
+endif(Mac)
 
 
 # Disabled for Raspberry Pi targets
-if(RASPBERRY) 
+if(Raspberry) 
 	#dk_disable(DKJerryscript)		# requires jerryscript
 	#dk_disable(DKMidi)				# requires rtmidi
 	#dk_disable(DKOcr)				# requires tesseract
@@ -399,18 +399,18 @@ if(RASPBERRY)
 	#dk_disable(rtmidi)
 	#dk_disable(sdl_rtf)
 	#dk_disable(upx)
-endif(RASPBERRY)
+endif(Raspberry)
 
 
 # Disabled for tinycore targets
-if(TINYCORE)
+if(Tinycore)
 	#dk_disable(glew)
 	#dk_disable(libasound2-dev)
 	#dk_disable(libgl1-mesa-dev)	
 #	#dk_disable(mesa)
 	#dk_disable(opengl)
 	#dk_disable(pyyaml)
-endif(TINYCORE)
+endif(Tinycore)
 
 
 # Disabled for Windows (MSVC) targets
