@@ -3,7 +3,6 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
 ::#################################################################################################################################################
 
-echo dk_getAllFileParams(%*)
 ::############ dk_getFileParams settings #########################################
 ::if not defined dk_getAllFileParams_PRINT_VARIABLES (set "dk_getFileParams_PRINT_VARIABLES=1")
 ::################################################################################
@@ -19,20 +18,22 @@ echo dk_getAllFileParams(%*)
 		echo:
 		echo ### %_file_% Parameters ###
 	)
-
-			
-	for /f "delims== tokens=1,2" %%A in (%_file_:/=\%) do (
-		set "_A_=%%A"
-		if "!_A_:~0,1!" neq "#" (
-		
-			set "B=%%B"
-			set "B=!B:${=%%!"
-			set "B=!B:}=%%!"
+	
+	::### Remove comments from line
+	set "line=todo"
+	for /f "tokens=*" %%G in (%_file_:/=\%) do (
+		set "line= %%G"
+		for /f "delims=#" %%i in ("!line!") do (set "line=%%i")
+		set line=!line:~1!
+		rem echo line = !line!
+		for /f "delims== tokens=1,2" %%A in ("!line!") do (
+			set "Value=%%B"
+			set "Value=!Value:${=%%!"
+			set "Value=!Value:}=%%!"
 			if "%dk_getFileParams_PRINT_VARIABLES%" equ "1" (
-				echo %%A = '!B!'
+				echo %%A = '!Value!'
 			)
-		
-			set "%%A=!B!"
+			set "%%A=!Value!"
 		)
 	)
 	

@@ -9,25 +9,48 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #include_guard()
 
+
+################## dk_getFileParams settings ###################################
+if(NOT DEFINED dk_getFileParams_PRINT_VARIABLES)
+	set(dk_getFileParams_PRINT_VARIABLES 1)
+endif()
 ################################################################################
-# dk_getFileParams(file, var_name) value
+# dk_getFileParams(file)
 #
-# todo: add optional 3rd parameter for output value
 function(dk_getFileParams)
     dk_debugFunc(1)
     
 	file(READ "${ARGV0}" file_content)
 	string(REGEX REPLACE "\n" ";" file_content_list "${file_content}")
+	
+	if("${dk_getFileParams_PRINT_VARIABLES}" EQUAL 1)
+		message("\n### ${ARGV0} Parameters ###")
+	endif()
+				
+	# iterate through each line
 	foreach(line IN LISTS file_content_list)
-	string(FIND "${line}" "=" pos)
-    if(pos GREATER -1)
-        string(SUBSTRING "${line}" 0 ${pos} A)
-		math(EXPR pos "${pos}+1" OUTPUT_FORMAT DECIMAL) 
-        string(SUBSTRING "${line}" ${pos} -1 B)
-			message("${A} = ${B}")
-			set(${A} "${B}" PARENT_SCOPE)
+		
+		# remove comments - everything after # 
+		string(FIND "${line}" "#" comment)
+		if(comment GREATER -1)
+			string(SUBSTRING "${line}" 0 ${comment} line)	
+		endif()
+		
+		string(FIND "${line}" "=" pos)
+		if(pos GREATER -1)
+			string(SUBSTRING "${line}" 0 ${pos} Var)
+			math(EXPR pos "${pos}+1" OUTPUT_FORMAT DECIMAL) 
+			string(SUBSTRING "${line}" ${pos} -1 Value)
+				set(${Var} "${Value}" PARENT_SCOPE)
+				if("${dk_getFileParams_PRINT_VARIABLES}" EQUAL 1)
+					message("${Var} = ${Value}")
+				endif()
 		endif()
 	endforeach()
+	
+	if("${dk_getFileParams_PRINT_VARIABLES}" EQUAL 1)
+		message(" ")
+	endif()
 endfunction()
 
 

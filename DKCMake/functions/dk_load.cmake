@@ -22,7 +22,6 @@ set(indent_count 0 CACHE INTERNAL "")
 #
 macro(dk_load var)
 	#dk_debugFunc()
-	#message("dk_load(${var})")
 	
 	string(STRIP ${var} fn)
 	get_filename_component(name_we "${fn}" NAME_WE)
@@ -65,7 +64,6 @@ endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
 	#dk_debugFunc()
-	#message("dk_parseFunctionsAndLoad(${ARGV})")
 	
 	if(NOT dk_load_list)
 		set(dk_load_list "" CACHE INTERNAL "")
@@ -123,7 +121,6 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 			#dk_verbose("item-stripped = ${${fn}_item}")
 					
 			#dk_verbose("${fn}_item  ${${fn}_item}")
-			#if(${${fn}_item} IN_LIST dk_load_list)
 			if(${${fn}_item} IN_LIST dk_loading_list)
 				#dk_verbose("${fn} -> ${${fn}_item} already in list")
 				continue()
@@ -155,8 +152,6 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 		endforeach()
 
 		if(NOT "${${fn}_file}" STREQUAL "$ENV{DKSCRIPT_PATH}")
-			#dk_echo("${fn} -> include(${${fn}_file})")
-		#if(NOT ${fn} IN_LIST dk_loading_list)
 			include("${${fn}_file}")
 		endif()
 		
@@ -164,7 +159,6 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 		unset(${fn}_file)
 		unset(${fn}_item)
 		unset(${fn}_matches)
-	#endif()
 endmacro()
 
 function(dk_parseFunctionsAndLoadFromString str)
