@@ -44,8 +44,8 @@ dk_installCmake() {
 	if dk_call dk_isUrl "${CMAKE_IMPORT}"; then
 		dk_call dk_info "Installing CMake from file download"
 		
-		CMAKE_DL_FILE=$(dk_call dk_basename "${CMAKE_IMPORT}")
-		dk_call dk_removeExtension ${CMAKE_DL_FILE} CMAKE_FOLDER
+		CMAKE_IMPORT_FILE=$(dk_call dk_basename "${CMAKE_IMPORT}")
+		dk_call dk_removeExtension ${CMAKE_IMPORT_FILE} CMAKE_FOLDER
 		#dk_call dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
 		dk_call dk_toLower ${CMAKE_FOLDER} CMAKE_FOLDER
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
@@ -63,11 +63,11 @@ dk_installCmake() {
 		dk_call dk_echo
 		dk_call dk_info "Installing cmake . . ."
 		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-		dk_call dk_download "${CMAKE_IMPORT}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
-		#dk_call dk_extract "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
-		dk_call dk_smartExtract	"${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${CMAKE_DIR}"
+		dk_call dk_download "${CMAKE_IMPORT}" "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}"
+		#dk_call dk_extract "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}" "${DKTOOLS_DIR}"
+		dk_call dk_smartExtract	"${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}" "${CMAKE_DIR}"
 		
-		#dk_call dk_removeExtension ${CMAKE_DL_FILE} CMAKE_DL_NAME
+		#dk_call dk_removeExtension ${CMAKE_IMPORT_FILE} CMAKE_DL_NAME
 		#dk_call dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_DIR}"
         
 		dk_call dk_pathExists "${CMAKE_EXE}" || dk_call dk_error "cannot find cmake"

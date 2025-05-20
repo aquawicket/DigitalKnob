@@ -36,8 +36,8 @@ DKINSTALL() {
 	[ -z "${PWSH_DL}" ] && dk_error "PWSH_DL is invalid"
 	dk_printVar PWSH_DL
 	
-	dk_basename "${PWSH_DL}" PWSH_DL_FILE
-	dk_removeExtension "${PWSH_DL_FILE}" PWSH_FOLDER
+	dk_basename "${PWSH_DL}" PWSH_IMPORT_FILE
+	dk_removeExtension "${PWSH_IMPORT_FILE}" PWSH_FOLDER
 	#dk_convertToCIdentifier "${PWSH_FOLDER}" PWSH_FOLDER
 	dk_toLower "${PWSH_FOLDER}" PWSH_FOLDER
 	dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
@@ -55,8 +55,8 @@ DKINSTALL() {
 	
 	dk_echo
 	dk_info "Installing Pwsh . . ."
-	dk_download "${PWSH_DL}" "${DKDOWNLOAD_DIR}/${PWSH_DL_FILE}"
-	dk_smartExtract "${DKDOWNLOAD_DIR}/${PWSH_DL_FILE}" "${PWSH}"
+	dk_download "${PWSH_DL}" "${DKDOWNLOAD_DIR}/${PWSH_IMPORT_FILE}"
+	dk_smartExtract "${DKDOWNLOAD_DIR}/${PWSH_IMPORT_FILE}" "${PWSH}"
 }
 DKINSTALL
 exit

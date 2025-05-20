@@ -18,8 +18,8 @@ function Global:DKINSTALL() {
     if("${Host_Os}_${Host_Arch}" -eq "Linux_X86_64")	{ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz" }
     if("${Host_Os}_${Host_Arch}" -eq "Linux_Arm64") 	{ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz" }
     
-    ${CMAKE_DL_FILE} = dk_call dk_basename ${CMAKE_DL}
-	${CMAKE_FOLDER} = dk_call dk_removeExtension ${CMAKE_DL_FILE}
+    ${CMAKE_IMPORT_FILE} = dk_call dk_basename ${CMAKE_DL}
+	${CMAKE_FOLDER} = dk_call dk_removeExtension ${CMAKE_IMPORT_FILE}
     #${CMAKE_FOLDER} = dk_call dk_convertToCIdentifier ${CMAKE_FOLDER} 
     #${CMAKE_FOLDER} = dk_call dk_toLower ${CMAKE_FOLDER}
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
@@ -30,8 +30,8 @@ function Global:DKINSTALL() {
        
     dk_call dk_echo
     dk_call dk_info "Installing CMake . . ."
-    dk_call dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}"
-	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${CMAKE_DIR}"
+    dk_call dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}"
+	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}" "${CMAKE_DIR}"
     
     if(!(dk_call dk_pathExists "${CMAKE_EXE}")){ dk_call dk_error "cannot find cmake" }
 }

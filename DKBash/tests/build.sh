@@ -803,12 +803,12 @@ dk_installCmake() {
 		dk_info "Installing CMake from dl files"
 		dk_printVar CMAKE_IMPORT
 		
-		dk_basename "$CMAKE_IMPORT" CMAKE_DL_FILE
-		dk_printVar CMAKE_DL_FILE
+		dk_basename "$CMAKE_IMPORT" CMAKE_IMPORT_FILE
+		dk_printVar CMAKE_IMPORT_FILE
 		
-		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
+		CMAKE_FOLDER="${CMAKE_IMPORT_FILE%.*}"		# remove everything past last dot
 		dk_printVar CMAKE_FOLDER
-		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
+		dk_debug "CMAKE_IMPORT_FILE extension = ${CMAKE_FOLDER##*.}"
 		if [ "${CMAKE_FOLDER##*.}" = "tar" ]; then
 			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		fi
@@ -836,8 +836,8 @@ dk_installCmake() {
 
 		dk_echo
 		dk_info "Installing cmake . . ."
-		dk_download "$CMAKE_DL" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
-		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
+		dk_download "$CMAKE_DL" "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}"
+		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}" "${DKTOOLS_DIR}"
 		
 		#if ! dk_pathExists ${CMAKE_EXE}; then error "cannot find cmake"; fi
 

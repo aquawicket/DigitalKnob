@@ -18,8 +18,8 @@ function Global:dk_installGit() {
     if(${HOST_ARCH} -eq "x86_64"){ ${GIT_DL} = ${GIT_DL_WIN_X86_64} }
     if(!${GIT_DL}){ dk_call dk_error "GIT_DL is invalid"; return ${false} }
 	  
-    ${GIT_DL_FILE} = dk_call dk_basename ${GIT_DL}
-	${GIT_FOLDER}  = dk_call dk_removeExtension ${GIT_DL_FILE}
+    ${GIT_IMPORT_FILE} = dk_call dk_basename ${GIT_DL}
+	${GIT_FOLDER}  = dk_call dk_removeExtension ${GIT_IMPORT_FILE}
 	${GIT_FOLDER}  = dk_call dk_removeExtension ${GIT_FOLDER}
 	#${GIT_FOLDER} = dk_call dk_convertToCIdentifier ${GIT_FOLDER} 
 	#${GIT_FOLDER} = dk_call dk_toLower ${GIT_FOLDER}
@@ -40,9 +40,9 @@ function Global:dk_installGit() {
     dk_call dk_info ""  
     dk_call dk_info "Installing git . . ."
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-    dk_call dk_download ${GIT_DL} ${DKDOWNLOAD_DIR}/${GIT_DL_FILE}
-	dk_call dk_info "${DKDOWNLOAD_DIR}/${GIT_DL_FILE} -y -o ${GIT}"
-	dk_call ${env:COMSPEC} /c "${DKDOWNLOAD_DIR}/${GIT_DL_FILE}" -y -o ${GIT}
+    dk_call dk_download ${GIT_DL} ${DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}
+	dk_call dk_info "${DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE} -y -o ${GIT}"
+	dk_call ${env:COMSPEC} /c "${DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" -y -o ${GIT}
 	   
     if(!(dk_call dk_pathExists ${GIT_EXE})){ dk_call dk_error "cannot find git" }
 }
