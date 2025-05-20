@@ -14,7 +14,7 @@ if(Android)
 	RETURN()
 endif()
 
-if(IOSSIM)
+if(Iossim)
 	RETURN()
 endif()
 

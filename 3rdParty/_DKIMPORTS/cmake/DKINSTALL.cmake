@@ -150,8 +150,8 @@ if(COMPILE_CMAKE)
 		
 		dk_include				(${CMAKE}									CMAKE_INCLUDE_DIR)
 		dk_include				(${CMAKE}/${Target_Tuple})
-		DEBUG_dk_include		(${CMAKE_DEBUG_DIR})
-		RELEASE_dk_include		(${CMAKE_RELEASE_DIR})
+		Debug_dk_include		(${CMAKE_DEBUG_DIR})
+		Release_dk_include		(${CMAKE_RELEASE_DIR})
 
 		dk_libDebug		(${CMAKE_DEBUG_DIR}/libcmake.a				CMAKE_LIBRARY_DEBUG)
 		dk_libRelease	(${CMAKE_RELEASE_DIR}/libcmake.a			CMAKE_LIBRARY_RELEASE)

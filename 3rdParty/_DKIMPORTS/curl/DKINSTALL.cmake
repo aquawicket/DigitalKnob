@@ -150,7 +150,7 @@ if(MSVC AND Windows)
 		${WS2_32_LIB_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
-elseif(ANDROID)
+elseif(Android)
 	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=OFF
 		-DBUILD_CURL_TESTS=OFF
@@ -166,7 +166,7 @@ elseif(ANDROID)
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
-elseif(IOS OR IOSSIM)
+elseif(IOS OR Iossim)
 	dk_configure(${CURL_DIR}
 		#-DHAVE_POSIX_STRERROR_R=advanced
 		#-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=advanced
@@ -186,7 +186,7 @@ elseif(IOS OR IOSSIM)
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
-elseif(MAC)
+elseif(Mac)
 	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
@@ -260,7 +260,7 @@ elseif(MAC)
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
-elseif(LINUX)
+elseif(Linux)
 	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON

@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #
 
 dk_load(dk_builder)
-if(NOT ANDROID)
+if(NOT Android)
 	dk_undepend(log)
 	dk_return()
 endif()

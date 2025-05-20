@@ -12,7 +12,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_load(dk_builder)
 
-if(NOT MAC)
+if(NOT Mac)
 	dk_undepend(xquartz)
 	dk_return()
 endif()

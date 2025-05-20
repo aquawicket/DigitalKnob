@@ -35,7 +35,7 @@ dk_import(https://github.com/mikke89/RmlUi/archive/64b36dc4775e3c2eefcd93bdb873c
 # Version fix #
 dk_fileReplace(${RMLUI}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
 
-# ANDROID FIX
+# Android FIX
 if(Android)
 	dk_fileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
 endif()
@@ -54,8 +54,8 @@ dk_addTarget	(rmlui RmlDebugger)
 
 if(rmlui_RmlCore)
 	if(MSVC)
-		WIN_dk_libDebug		(${RMLUI_DEBUG_DIR}/RmlCore.lib)
-		WIN_dk_libRelease	(${RMLUI_RELEASE_DIR}/RmlCore.lib)
+		Windows_dk_libDebug		(${RMLUI_DEBUG_DIR}/RmlCore.lib)
+		Windows_dk_libRelease	(${RMLUI_RELEASE_DIR}/RmlCore.lib)
 	else()
 		dk_libDebug			(${RMLUI_DEBUG_DIR}/libRmlCore.a)
 		dk_libRelease		(${RMLUI_RELEASE_DIR}/libRmlCore.a)
@@ -65,8 +65,8 @@ endif()
 if(rmlui_RmlDebugger)
 	dk_define				(HAVE_rmlui_debugger)
 	if(MSVC)
-		WIN_dk_libRelease	(${RMLUI_RELEASE_DIR}/RmlDebugger.lib)
-		WIN_dk_libDebug		(${RMLUI_DEBUG_DIR}/RmlDebugger.lib)
+		Windows_dk_libRelease	(${RMLUI_RELEASE_DIR}/RmlDebugger.lib)
+		Windows_dk_libDebug		(${RMLUI_DEBUG_DIR}/RmlDebugger.lib)
 	else()
 		dk_libDebug			(${RMLUI_DEBUG_DIR}/libRmlDebugger.a)
 		dk_libRelease		(${RMLUI_RELEASE_DIR}/libRmlDebugger.a)
@@ -75,7 +75,7 @@ endif()
 
 ### GENERATE ###
 if(MSVC)
-	WIN_dk_configure(${RMLUI}
+	Windows_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF

@@ -19,10 +19,10 @@ endif()
 dk_import(https://github.com/thestk/rtmidi/archive/24b3a3bf.zip)
 
 ### LINK ###
-if(APPLE)
+if(Apple)
 	dk_define		(__MACOSX_CORE__)
 endif()
-if(LINUX OR RASPBERRY OR ANDROID)
+if(Linux OR Raspberry OR Android)
 	dk_define		(__LINUX_ALSA__)
 endif()
 dk_include			(${RTMIDI})

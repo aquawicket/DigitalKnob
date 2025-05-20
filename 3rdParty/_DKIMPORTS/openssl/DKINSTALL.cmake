@@ -25,7 +25,7 @@ endif()
 
 ### DEPEND ###
 #dk_depend(openssl-cmake)
-#if(EMSCRIPTEN)
+#if(Emscripten)
 #	dk_depend(python3)
 #endif()
 dk_depend(dl)
@@ -41,7 +41,7 @@ dk_depend(nasm)
 ### IMPORT ###
 dk_import(https://github.com/openssl/openssl/archive/2f362e9.zip)
 
-#if(EMSCRIPTEN)
+#if(Emscripten)
 #	dk_copy(${OPENSSL_CMAKE} ${OPENSSL})
 #endif()
 
@@ -115,7 +115,7 @@ endif()
 
 # https://wiki.openssl.org/index.php/Compilation_and_Installation
 ### GENERATE ###
-#EMSCRIPTEN_DEBUG_dk_configure(${OPENSSL} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_EXE})
+#Emscripten_Debug_dk_configure(${OPENSSL} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_EXE})
 if(Debug)
 	if(Android_Arm32)
 		dk_configure		(${OPENSSL} ${PERL_EXE} ../../Configure no-shared --debug android-arm CC=clang -D__ANDROID_API__=${ANDROID_API})

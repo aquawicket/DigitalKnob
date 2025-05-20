@@ -12,7 +12,7 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 # https://github.com/kiyolee/bzip2-win-build
 # https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
 # https://gitlab.com/bzip2/bzip2/-/archive/bzip2-1.0.8/bzip2-bzip2-1.0.8.zip
-# https://gist.github.com/DanAlbert/c7b6b2d93d4f6d672707803a6715095e			# ANDROID COMPILE
+# https://gist.github.com/DanAlbert/c7b6b2d93d4f6d672707803a6715095e			# Android COMPILE
 
 ### DEPEND ###
 #dk_depend(libgcc)

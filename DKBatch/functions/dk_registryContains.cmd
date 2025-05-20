@@ -13,12 +13,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 2
  
 	set "_reg_path_=%~1"
+	set "_find_=%~2"
  
 	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
 	
 	for /f "usebackq delims=" %%a in (`%REG_EXE% query "%_reg_path_:/=\%"`) do (
 		set "line=%%a"
-		if "x!line:%~2=!x" neq "x!line!x" (
+		if "x!line:%_find_:/=\%=!x" neq "x!line:/=\!x" (
 			exit /b 0
 		)
 	)
@@ -34,8 +35,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
    
-	set "key=HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
-	set "exe=C:/ProgramFiles (x86)/Edrum Monitor/EdrumMon.exe"
+	set "key=HKLM/SYSTEM/ControlSet001/Services/SharedAccess/Parameters/FirewallPolicy/FirewallRules"
+	::set "exe=C:/ProgramFiles (x86)/Edrum Monitor/EdrumMon.exe"
+	set "exe=C:/ghost toolbox/wget/wget.exe"
    
     %dk_call% dk_registryContains "%key%" "%exe%" && (
 		%dk_call% dk_echo "FirewallRules contains %exe%"

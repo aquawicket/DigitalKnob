@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://developer.apple.com/documentation/coremotion?language=objc
 
 dk_load(dk_builder)
-if(NOT APPLE)
+if(NOT Apple)
 	dk_undepend(core_motion)
 	dk_return()
 endif()

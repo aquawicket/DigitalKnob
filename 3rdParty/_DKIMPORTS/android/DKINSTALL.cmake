@@ -7,7 +7,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ android ############
 dk_validate(Host_Tuple ${Host_Tuple})
-if(NOT ANDROID)
+if(NOT Android)
 	dk_undepend(android)
 	dk_return()
 endif()

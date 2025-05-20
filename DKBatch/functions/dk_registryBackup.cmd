@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		/reg:64  Specifies the key should be accessed using the 64-bit registry view.
 ::#
 ::#	Examples:
-::#		'REG EXPORT HKLM\Software\MyCo\MyApp AppBkUp.reg'
+::#		'REG EXPORT HKLM/Software/MyCo/MyApp AppBkUp.reg'
 ::#		Exports all subkeys and values of the key MyApp to the file AppBkUp.reg
 ::#
 :dk_registryBackup

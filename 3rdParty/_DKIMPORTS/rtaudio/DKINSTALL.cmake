@@ -21,10 +21,10 @@ dk_import(https://github.com/thestk/rtaudio/archive/refs/heads/master.zip)
 
 
 ### LINK ###
-if(APPLE)
+if(Apple)
 	dk_define			(__MACOSX_CORE__)
 endif()
-if(LINUX OR RASPBERRY OR ANDROID)
+if(Linux OR Raspberry OR Android)
 	dk_define			(__LINUX_ALSA__)
 endif()
 dk_include				(${RTAUDIO})

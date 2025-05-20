@@ -1,5 +1,5 @@
 dk_echo(STATUS "#####################################################################")
-dk_echo(STATUS "################ android_x86_64_clang_toolchain.cmake ###############")
+dk_echo(STATUS "################ Android_X86_64_Clang_Toolchain.cmake ###############")
 dk_echo(STATUS "#####################################################################")
 # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 

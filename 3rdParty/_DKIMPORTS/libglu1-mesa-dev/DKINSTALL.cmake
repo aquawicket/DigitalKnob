@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ libglu1-mesa-dev ############
 
 dk_load(dk_builder)
-if(NOT LINUX AND NOT RASPBERRY)
+if(NOT Linux AND NOT Raspberry)
 	dk_undepend(libglu1-mesa-dev)
 	dk_return()
 endif()

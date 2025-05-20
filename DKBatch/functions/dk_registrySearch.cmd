@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_registrySearch(haystack, needle)
 ::#
 ::#   haystack - the registry path to search 
-::#		i.e.  HKLM\Software
+::#		i.e.  HKLM/Software
 ::#
 ::#   needle - the string to look for
 ::#
@@ -59,7 +59,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     )
 %endfunction%
 
-::EXAMPLE:  HKEY_CURRENT_USER\Control Panel\Desktop\Colors   ButtonFace  REG_SZ   "212 208 200"
+::EXAMPLE:  HKEY_CURRENT_USER/Control Panel/Desktop/Colors   ButtonFace  REG_SZ   "212 208 200"
 :: 	HIVE				HKEY_CURRENT_USER
 :: 		Key					Control Pane
 :: 			SubKey			    Desktop
@@ -69,7 +69,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::					VALUE_TYPE			REG_SZ
 ::					VALUE_DATA			"212 208 200"
 ::
-::	Path =  HKEY_CURRENT_USER\Control Panel\Desktop\Colors
+::	Path =  HKEY_CURRENT_USER/Control Panel/Desktop/Colors
 ::  Value = ButtonFace  REG_SZ   "212 208 200"
 
 

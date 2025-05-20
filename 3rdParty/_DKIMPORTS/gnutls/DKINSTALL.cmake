@@ -9,10 +9,10 @@ dk_load(dk_builder)
 
 
 ### INSTALL ###
-if(LINUX)
+if(Linux)
 	dk_installPackage(libgnutls)
 endif()
-if(MAC)
+if(Mac)
 	#dk_command(brew install gnutls)
 	dk_installPackage(gnutls)
 	dk_include(/usr/local/include)

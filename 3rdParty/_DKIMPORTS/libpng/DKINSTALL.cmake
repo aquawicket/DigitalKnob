@@ -11,14 +11,14 @@ dk_load(dk_builder)
 
 
 ### DEPEND ###
-if(EMSCRIPTEN)
+if(Emscripten)
 	dk_depend(m)
 endif()
 dk_depend(zlib)
 
 
 ### IMPORT ###
-if(MAC)
+if(Mac)
 	#dk_import(https://github.com/glennrp/libpng.git)
 	dk_import(https://github.com/pnggroup/libpng/archive/refs/heads/libpng16.zip)
 else()
@@ -43,7 +43,7 @@ if(MSVC)
 		dk_libDebug			(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
 		dk_libRelease		(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
 	endif()
-elseif(APPLE)
+elseif(Apple)
 	dk_libDebug				(${LIBPNG_DEBUG_DIR}/libpng16d.a										PNG_LIBRARY_DEBUG)
 	dk_libRelease			(${LIBPNG_RELEASE_DIR}/libpng16d.a										PNG_LIBRARY_RELEASE)
 else()
@@ -64,7 +64,7 @@ if(MSVC)
 		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
 		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
 	
-	elseif(ANDROID)
+	elseif(Android)
 		dk_set(LIBPNG_CMAKE 
 		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
@@ -74,7 +74,7 @@ if(MSVC)
 		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE}
 		-DPNG_PNG_INCLUDE_DIR=${PNG_INCLUDE_DIR2})
 	endif()
-elseif(APPLE)
+elseif(Apple)
 	dk_set(LIBPNG_CMAKE 
 	"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 	"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
@@ -82,7 +82,7 @@ elseif(APPLE)
 	-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2}
 	-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
 	-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})	
-elseif(RASPBERRY)
+elseif(Raspberry)
 	if(Debug)
 		dk_set(LIBPNG_CMAKE 
 		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 

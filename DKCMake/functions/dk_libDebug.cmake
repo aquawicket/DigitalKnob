@@ -27,7 +27,7 @@ function(dk_libDebug lib_path)
 		return() # The library is already in the list
 	endif()
 	
-	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
+	if(Linux OR Raspberry OR Android OR Emscripten OR MINGW) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
 		dk_prepend(DEBUG_LIBS debug ${lib_path}) # Add to beginning of list
 	else()
 		dk_append(DEBUG_LIBS debug ${lib_path}) # Add to end of list

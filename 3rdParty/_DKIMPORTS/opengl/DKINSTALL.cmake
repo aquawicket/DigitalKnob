@@ -8,12 +8,12 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_load(dk_builder)
 
 
-if(ANDROID OR IOS OR IOSSIM)
+if(Android OR IOS OR Iossim)
 	dk_depend(opengles)
 endif()
 
 
-if(EMSCRIPTEN)
+if(Emscripten)
 	find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
@@ -25,7 +25,7 @@ if(EMSCRIPTEN)
 endif()
 
 
-if(LINUX OR RASPBERRY)
+if(Linux OR Raspberry)
 	dk_depend(mesa)
 	dk_depend(libgl1-mesa-dev)
 
@@ -40,7 +40,7 @@ if(LINUX OR RASPBERRY)
 endif()
 
 
-if(MAC)
+if(Mac)
 	dk_findLibrary(OpenGL)
 endif()
 

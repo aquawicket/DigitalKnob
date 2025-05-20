@@ -16,7 +16,7 @@ dk_load(dk_builder)
 
 ### DEPENDS ###
 dk_depend(core_media)
-if(RASPBERRY)
+if(Raspberry)
 	dk_depend(libatomic)
 endif()
 dk_depend(libgcc)
@@ -37,7 +37,7 @@ dk_import(https://git.ffmpeg.org/ffmpeg.git)
 
 ### LINK ###
 dk_include			(${FFMPEG_DIR})
-DEBUG_dk_include	(${FFMPEG_CONFIG_DIR})
+Debug_dk_include	(${FFMPEG_CONFIG_DIR})
 
 # libavdevice
 dk_libDebug			(${FFMPEG_DEBUG_DIR}/libavdevice/libavdevice.a)
@@ -69,7 +69,7 @@ dk_libRelease		(${FFMPEG_RELEASE_DIR}/libavformat/libavformat.a)
 
 
 ### GENERATE / COMPILE ###
-EMSCRIPTEN_DEBUG_dk_configure(${FFMPEG_DIR}
+Emscripten_Debug_dk_configure(${FFMPEG_DIR}
 	--pkg-config-flags=--static 
 	--disable-shared 
 	--enable-static
@@ -147,7 +147,7 @@ endif()
 
 
 
-EMSCRIPTEN_RELEASE_dk_configure(${FFMPEG_DIR}
+Emscripten_Release_dk_configure(${FFMPEG_DIR}
 	--pkg-config-flags=--static 
 	--disable-shared 
 	--enable-static

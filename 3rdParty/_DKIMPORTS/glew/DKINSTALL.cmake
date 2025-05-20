@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # http://glew.sourceforge.net
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
 dk_load(dk_builder)
-if(IOS OR IOSSIM OR ANDROID)
+if(IOS OR Iossim OR Android)
 	dk_disable(glew)
 	dk_return()
 endif()
@@ -25,7 +25,7 @@ dk_copy(${GLEW_DIR}/build/cmake ${GLEW_TUPLE_DIR}/CMakeFiles/Export/lib/cmake/gl
 ### LINK ###
 dk_define			(GLEW_STATIC)
 dk_include			(${GLEW_DIR}/include									GLEW_INCLUDE_DIR)
-if(APPLE)
+if(Apple)
 	dk_libDebug		(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libGLEWd.a			GLEW_DEBUG_LIBRARY)
 	dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libGLEW.a		GLEW_RELEASE_LIBRARY)
 elseif(MSVC)

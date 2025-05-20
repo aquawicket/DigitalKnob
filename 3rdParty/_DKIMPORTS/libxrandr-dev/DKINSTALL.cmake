@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 dk_load(dk_builder)
-if(NOT LINUX AND NOT RASPBERRY)
+if(NOT Linux AND NOT Raspberry)
 	dk_undepend(libxrandr-dev)
 	dk_return()
 endif()

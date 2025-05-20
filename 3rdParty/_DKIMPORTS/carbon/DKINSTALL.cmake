@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://developer.apple.com/documentation/coreservices/carbon_core?language=objc
 
 
-if(NOT MAC)
+if(NOT Mac)
 	dk_undepend(carbon)
 	dk_return()
 endif()

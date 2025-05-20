@@ -551,7 +551,7 @@ if(CMAKE_EXE_LINKER_FLAGS)
 	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_EXE_LINKER_FLAGS=${CMAKE_EXE_LINKER_FLAGS})
 endif()
 
-###### ANDROID FLAGS ######
+###### Android FLAGS ######
 if(ANDROID_ABI)
 	dk_append				(DKCMAKE_FLAGS 		-DANDROID_ABI=${ANDROID_ABI})
 endif()
@@ -618,7 +618,7 @@ dk_printVar(DKCONFIGURE_FLAGS)
 
 
 ###### Set DKCMAKE_BUILD and DKCONFIGURE_BUILD variables ######
-if(EMSCRIPTEN)
+if(Emscripten)
 	dk_set(DKCMAKE_BUILD ${CMAKE_COMMAND} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 	dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
 else()

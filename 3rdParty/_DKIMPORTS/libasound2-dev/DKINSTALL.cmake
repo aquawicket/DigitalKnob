@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ libasound2-dev ############
 dk_load(dk_builder)
 
-if(NOT LINUX AND NOT RASPBERRY)
+if(NOT Linux AND NOT Raspberry)
 	dk_undepend(libasound2-dev)
 	dk_return()
 endif()

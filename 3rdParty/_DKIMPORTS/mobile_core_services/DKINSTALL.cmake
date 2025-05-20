@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_load(dk_builder)
 
-if(NOT IOS AND NOT IOSSIM)
+if(NOT IOS AND NOT Iossim)
 	dk_undepend(mobile_core_services)
 	dk_return()
 endif()

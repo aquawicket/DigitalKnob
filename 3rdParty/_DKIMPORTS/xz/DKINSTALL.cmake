@@ -101,8 +101,8 @@ dk_return()
 #else()
 
 ################## autotools #################################################
-#WIN_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#WIN_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+#Windows_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
+#Windows_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 #MAC_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
 #MAC_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 #IOS_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
@@ -118,10 +118,10 @@ dk_return()
 
 ### 3RDPARTY LINK ###
 ANDROID_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${Target_Tuple}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${Target_Tuple}/obj/local/armeabi-v7a/liblzma.a)
-APPLE_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+Apple_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 LINUX_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 RASPBERRY_dk_set(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-WIN_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+Windows_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 
 
 ### GENERATE / COMPILE ###

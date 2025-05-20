@@ -1,8 +1,8 @@
 message("############################################################################")
-message("##################### cosmopolitan_toolchain.cmake #########################")
+message("##################### Cosmopolitan_Toolchain.cmake #########################")
 message("############################################################################")
 
-dk_depend(Cosmopolitan)
+dk_depend(cosmopolitan)
 #dk_depend(make)
 
 #dk_set(Cosmopolitan 						1)

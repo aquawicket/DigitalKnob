@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://developer.apple.com/documentation/corehaptics?language=objc
 
 dk_load(dk_builder)
-if(NOT APPLE)
+if(NOT Apple)
 	dk_undepend(core_haptics)
 	dk_return()
 endif()

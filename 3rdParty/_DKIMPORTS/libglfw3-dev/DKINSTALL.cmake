@@ -13,10 +13,10 @@ if(NOT UNIX_HOST)
 endif()
 
 ### INSTALL ###
-if(LINUX)
+if(Linux)
 	dk_installPackage(libglfw3-dev)
 endif()
-if(MAC)
+if(Mac)
 	#dk_command(brew install glfw3)
 	dk_installPackage(glfw3)
 	dk_include(/usr/local/include)

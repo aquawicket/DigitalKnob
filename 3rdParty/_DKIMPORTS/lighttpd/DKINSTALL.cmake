@@ -16,12 +16,12 @@ dk_import(https://github.com/lighttpd/lighttpd1.4/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include			(${LIGHTTPD}/lib)
-DEBUG_dk_include	(${LIGHTTPD_DEBUG_DIR})
-RELEASE_dk_include	(${LIGHTTPD_RELEASE_DIR})
+Debug_dk_include	(${LIGHTTPD_DEBUG_DIR})
+Release_dk_include	(${LIGHTTPD_RELEASE_DIR})
 UNIX_dk_libDebug	(${LIGHTTPD}/${Target_Tuple}/lib/${DEBUG_DIR}/liblighttpd.a)
 UNIX_dk_libRelease	(${LIGHTTPD}/${Target_Tuple}/lib/${RELEASE_DIR}/liblighttpd.a)
-WIN_dk_libDebug		(${LIGHTTPD}/${Target_Tuple}/lib/${DEBUG_DIR}/liblighttpd.lib)
-WIN_dk_libRelease	(${LIGHTTPD}/${Target_Tuple}/lib/${RELEASE_DIR}/liblighttpd.lib)
+Windows_dk_libDebug		(${LIGHTTPD}/${Target_Tuple}/lib/${DEBUG_DIR}/liblighttpd.lib)
+Windows_dk_libRelease	(${LIGHTTPD}/${Target_Tuple}/lib/${RELEASE_DIR}/liblighttpd.lib)
 
 
 ### GENERATE ###

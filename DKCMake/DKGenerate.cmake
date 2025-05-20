@@ -598,7 +598,7 @@ if(Android)
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 	endif()
-#endif(ANDROID)
+#endif(Android)
 
 
 #############
@@ -840,7 +840,7 @@ elseif(Ios OR Iossim)
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${APP_NAME})
 	
 	################### Create Run.sh #################################
-	if(IOSSIM)
+	if(Iossim)
 		dk_info("Creating Run.sh . . .")
 		if(Debug)
 			set(RUN_SCRIPT_DEBUG
@@ -1559,9 +1559,9 @@ endforeach()
 # This needs to be a Post-Build after the executable is available
 #dk_buildLog("\n")
 #dk_buildLog(" ### Dynamic libraries ###")
-#if(LINUX OR RASPBERRY OR ANDROID)
+#if(Linux OR Raspberry OR Android)
 #	dk_command(ldd >> ${DK_Project_Dir}/${Target_Tuple}/DKBUILD.log)
-#elseif(MAC OR IOS)
+#elseif(Mac OR IOS)
 	# TODO
 	#dk_command(otool -L ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.app)
 #elseif(Windows)	

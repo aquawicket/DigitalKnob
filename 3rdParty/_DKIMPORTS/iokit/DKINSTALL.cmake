@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ iokit ############
 # https://developer.apple.com/documentation/IOKit
 
-if(NOT APPLE)
+if(NOT Apple)
 	dk_undepend(iokit)
 	dk_return()
 endif()

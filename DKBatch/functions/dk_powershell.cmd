@@ -28,7 +28,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::    :: install pwsh.exe and try again
 ::    %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 ::    if not exist "%DKIMPORTS_DIR%" %dk_call% dk_notice "DKIMPORTS not found" && exit /b 1
-::    %dk_call% "%DKIMPORTS_DIR%\powershell\DKINSTALL.cmd"
+::    %dk_call% "%DKIMPORTS_DIR%/powershell/DKINSTALL.cmd"
 ::    %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 ::    if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_OUTPUT% && goto found
     

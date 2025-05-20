@@ -35,8 +35,8 @@ LINUX_dk_libDebug			(${JERRYSCRIPT_DEBUG_DIR}/lib/libjerry-core.a)
 LINUX_dk_libRelease			(${JERRYSCRIPT_RELEASE_DIR}/lib/libjerry-core.a)
 RASPBERRY_dk_libDebug		(${JERRYSCRIPT_DEBUG_DIR}/lib/libjerry-core.a)
 RASPBERRY_dk_libRelease		(${JERRYSCRIPT_RELEASE_DIR}/lib/libjerry-core.a)
-WIN_dk_libDebug				(${JERRYSCRIPT}/${Target_Tuple}/lib/${DEBUG_DIR}/jerry-core.lib)
-WIN_dk_libRelease			(${JERRYSCRIPT}/${Target_Tuple}/lib/${RELEASE_DIR}/jerry-core.lib)
+Windows_dk_libDebug				(${JERRYSCRIPT}/${Target_Tuple}/lib/${DEBUG_DIR}/jerry-core.lib)
+Windows_dk_libRelease			(${JERRYSCRIPT}/${Target_Tuple}/lib/${RELEASE_DIR}/jerry-core.lib)
 
 # jerry-ext
 if(MSVC)
@@ -54,8 +54,8 @@ LINUX_dk_libDebug			(${JERRYSCRIPT_DEBUG_DIR}/lib/libjerry-ext.a)
 LINUX_dk_libRelease			(${JERRYSCRIPT_RELEASE_DIR}/lib/libjerry-ext.a)
 RASPBERRY_dk_libDebug		(${JERRYSCRIPT_DEBUG_DIR}/lib/libjerry-ext.a)
 RASPBERRY_dk_libRelease		(${JERRYSCRIPT_RELEASE_DIR}/lib/libjerry-ext.a)
-WIN_dk_libDebug				(${JERRYSCRIPT}/${Target_Tuple}/lib/${DEBUG_DIR}/jerry-ext.lib)
-WIN_dk_libRelease			(${JERRYSCRIPT}/${Target_Tuple}/lib/${RELEASE_DIR}/jerry-ext.lib)
+Windows_dk_libDebug				(${JERRYSCRIPT}/${Target_Tuple}/lib/${DEBUG_DIR}/jerry-ext.lib)
+Windows_dk_libRelease			(${JERRYSCRIPT}/${Target_Tuple}/lib/${RELEASE_DIR}/jerry-ext.lib)
 
 # jerry-port
 if(MSVC)
@@ -73,17 +73,17 @@ LINUX_dk_libDebug			(${JERRYSCRIPT_DEBUG_DIR}/lib/libjerry-port.a)
 LINUX_dk_libRelease			(${JERRYSCRIPT_RELEASE_DIR}/lib/libjerry-port.a)
 RASPBERRY_dk_libDebug		(${JERRYSCRIPT_DEBUG_DIR}/lib/libjerry-port.a)
 RASPBERRY_dk_libRelease		(${JERRYSCRIPT_RELEASE_DIR}/lib/libjerry-port.a)
-WIN_dk_libDebug				(${JERRYSCRIPT}/${Target_Tuple}/lib/${DEBUG_DIR}/jerry-port.lib)
-WIN_dk_libRelease			(${JERRYSCRIPT}/${Target_Tuple}/lib/${RELEASE_DIR}/jerry-port.lib)
+Windows_dk_libDebug				(${JERRYSCRIPT}/${Target_Tuple}/lib/${DEBUG_DIR}/jerry-port.lib)
+Windows_dk_libRelease			(${JERRYSCRIPT}/${Target_Tuple}/lib/${RELEASE_DIR}/jerry-port.lib)
 
 
 ### GENERATE ###
 ANDROID_dk_configure		(${JERRYSCRIPT_DIR})
-APPLE_dk_configure			(${JERRYSCRIPT_DIR})
+Apple_dk_configure			(${JERRYSCRIPT_DIR})
 EMSCRIPTEN_dk_configure		(${JERRYSCRIPT_DIR} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
 LINUX_dk_configure			(${JERRYSCRIPT_DIR} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
 RASPBERRY_dk_configure		(${JERRYSCRIPT_DIR} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
-WIN_dk_configure			(${JERRYSCRIPT_DIR})
+Windows_dk_configure			(${JERRYSCRIPT_DIR})
 
 
 ### COMPILE ###

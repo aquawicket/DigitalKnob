@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if not defined appname (set "appname=temp")
     
     %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_validate GXX_EXE "%dk_call% %DKIMPORTS_DIR%\gcc\DKINSTALL.cmd"
+    %dk_call% dk_validate GXX_EXE "%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
     
     ::gcc -o [executable_name] [source_file].c
     %GXX_EXE% -o %appname% -static "%filepath:/=\%"

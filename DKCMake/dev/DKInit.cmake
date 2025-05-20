@@ -208,13 +208,13 @@ endif()
 # mac_x86
 if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86")
 	dk_set(CMAKE_OSX_ARCHITECTURES			"i686")
-	dk_set(MAC_X86							"ON")
+	dk_set(Mac_X86							"ON")
 endif()
 
 # mac_x86_64
 if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86_64")
 	dk_set(CMAKE_OSX_ARCHITECTURES			"x86_64")
-	dk_set(MAC_X86_64						"ON")
+	dk_set(Mac_X86_64						"ON")
 endif()
 
 endif()

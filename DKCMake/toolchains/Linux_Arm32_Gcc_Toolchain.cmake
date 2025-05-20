@@ -1,5 +1,5 @@
 message("############################################################################")
-message("###################### Linux_Arm32_gcc_toolchain.cmake #####################")
+message("###################### Linux_Arm32_Gcc_Toolchain.cmake #####################")
 message("############################################################################")
 # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 

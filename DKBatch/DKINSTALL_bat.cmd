@@ -54,7 +54,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	(echo DKbat installed ^& "%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%DKCACHE_DIR%" "%%1" %%*) else ^
 	(echo DKbat not installed ^& "%%1" %%*)
 
-	%dk_call% dk_registrySetKey "HKCR\DKbat\DefaultIcon" "" "REG_SZ" "%ComSpec%"
+	%dk_call% dk_registrySetKey "HKCR/DKbat/DefaultIcon" "" "REG_SZ" "%ComSpec%"
 	assoc .cmd=DKbat
 
 	%dk_call% dk_success "DKbat install complete"

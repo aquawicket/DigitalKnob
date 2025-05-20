@@ -45,7 +45,7 @@ function(dk_DKHOME_DIR)
 		return()
 	endif()
 
-	########### UNIX ############
+	########### Unix ############
 	file(REAL_PATH "~" DKHOME_DIR EXPAND_TILDE) # EXPAND_TILDE - Added in version 3.21.
 	dk_set(DKHOME_DIR "${DKHOME_DIR}")
 		

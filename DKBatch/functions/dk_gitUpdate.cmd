@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
     
-    if NOT exist "%DKBRANCH_DIR%\.git" (
+    if NOT exist "%DKBRANCH_DIR%/.git" (
 		
 		rem NOTE: 	This must cloan and update within the parentheses. rd /s /q "%DKBRANCH_DIR%" removes the current DigitalKnob
 		rem			folder, leaving the current running batch process abandoned until it's cloned again. It seems like when we are 
@@ -34,7 +34,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if exist "%DKBRANCH_DIR%" (
 			rem ###### Backup Branch directory and clone ######
 			%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
-			set "PATH=%DKBRANCH_DIR%_BACKUP\DKBatch\functions;%PATH%"
+			set "PATH=%DKBRANCH_DIR%_BACKUP/DKBatch/functions;%PATH%"
 			rd /s /q "%DKBRANCH_DIR%"
 			"%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%"
 			"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all

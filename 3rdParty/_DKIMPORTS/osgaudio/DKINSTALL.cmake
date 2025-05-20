@@ -37,8 +37,8 @@ LINUX_dk_libDebug(${OSGAUDIO_DEBUG_DIR}/lib/libopenalppd.a)
 LINUX_dk_libRelease(${OSGAUDIO_RELEASE_DIR}/lib/libopenalpp.a)
 RASPBERRY_dk_libDebug(${OSGAUDIO_DEBUG_DIR}/lib/libopenalppd.a)
 RASPBERRY_dk_libRelease(${OSGAUDIO_RELEASE_DIR}/lib/libopenalpp.a)
-WIN_dk_libDebug(${OSGAUDIO}/${Target_Tuple}/lib/${DEBUG_DIR}/openalppd.lib)
-WIN_dk_libRelease(${OSGAUDIO}/${Target_Tuple}/lib/${RELEASE_DIR}/openalpp.lib)
+Windows_dk_libDebug(${OSGAUDIO}/${Target_Tuple}/lib/${DEBUG_DIR}/openalppd.lib)
+Windows_dk_libRelease(${OSGAUDIO}/${Target_Tuple}/lib/${RELEASE_DIR}/openalpp.lib)
 
 # osgAudio
 ANDROID_dk_libDebug(${OSGAUDIO_DEBUG_DIR}/obj/local/armeabi-v7a/libosgAudio.a)
@@ -51,8 +51,8 @@ LINUX_dk_libDebug(${OSGAUDIO_DEBUG_DIR}/lib/libosgAudiod.a)
 LINUX_dk_libRelease(${OSGAUDIO_RELEASE_DIR}/lib/libosgAudio.a)
 RASPBERRY_dk_libDebug(${OSGAUDIO_DEBUG_DIR}/lib/libosgAudiod.a)
 RASPBERRY_dk_libRelease(${OSGAUDIO_RELEASE_DIR}/lib/libosgAudio.a)
-WIN_dk_libDebug(${OSGAUDIO}/${Target_Tuple}/lib/${DEBUG_DIR}/osgAudiod.lib)
-WIN_dk_libRelease(${OSGAUDIO}/${Target_Tuple}/lib/${RELEASE_DIR}/osgAudio.lib)
+Windows_dk_libDebug(${OSGAUDIO}/${Target_Tuple}/lib/${DEBUG_DIR}/osgAudiod.lib)
+Windows_dk_libRelease(${OSGAUDIO}/${Target_Tuple}/lib/${RELEASE_DIR}/osgAudio.lib)
 
 # osgdb_osgAudio
 ANDROID_dk_libDebug(${OSGAUDIO_DEBUG_DIR}/obj/local/armeabi-v7a/libosgdb_osgAudio.a)
@@ -65,8 +65,8 @@ LINUX_dk_libDebug(${OSGAUDIO_DEBUG_DIR}/lib/libosgdb_osgAudiod.a)
 LINUX_dk_libRelease(${OSGAUDIO_RELEASE_DIR}/lib/libosgdb_osgAudio.a)
 RASPBERRY_dk_libDebug(${OSGAUDIO_DEBUG_DIR}/lib/libosgdb_osgAudiod.a)
 RASPBERRY_dk_libRelease(${OSGAUDIO_RELEASE_DIR}/lib/libosgdb_osgAudio.a)
-WIN_dk_libDebug(${OSGAUDIO}/${Target_Tuple}/lib/${DEBUG_DIR}/osgdb_osgAudiod.lib)
-WIN_dk_libRelease(${OSGAUDIO}/${Target_Tuple}/lib/${RELEASE_DIR}/osgdb_osgAudio.lib)
+Windows_dk_libDebug(${OSGAUDIO}/${Target_Tuple}/lib/${DEBUG_DIR}/osgdb_osgAudiod.lib)
+Windows_dk_libRelease(${OSGAUDIO}/${Target_Tuple}/lib/${RELEASE_DIR}/osgdb_osgAudio.lib)
 
 
 ### GENERATE ###

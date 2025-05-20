@@ -1,4 +1,4 @@
-cd %USERPROFILE%\digitalknob\Development
+cd %USERPROFILE:\=/%/digitalknob/Development
 wsl sh -c ./DKBuilder.sh
 
 echo "Shutting down WSL"

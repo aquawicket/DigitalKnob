@@ -2,8 +2,8 @@
 
 ::###### install DK.cmd ######
 set "DKHTTP_DKBATCH_FUNCTIONS_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions"
-if not exist "DKBatch\functions" mkdir DKBatch\functions
-if not exist "DKBatch\functions\DK.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd', 'DKBatch\functions\DK.cmd')"
+if not exist "DKBatch/functions" mkdir DKBatch\functions
+if not exist "DKBatch/functions/DK.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd', 'DKBatch\functions\DK.cmd')"
 
 
 

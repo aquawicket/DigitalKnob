@@ -4,7 +4,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-call :splitArgs dk_cmake -G "MinGW Makefiles" -DTEST=1 "-DSTRING=Test string" "-SC:Windows\System32"
+call :splitArgs dk_cmake -G "MinGW Makefiles" -DTEST=1 "-DSTRING=Test string" "-SC:Windows/System32"
 call :splitArgs dk_cmakeEval "dk_test('test dk_info message')" "return_valueA;return_valueB"
 pause
 

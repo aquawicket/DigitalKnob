@@ -121,7 +121,7 @@ if(Android)
 		${ZSTD_CMAKE})
 endif()
 
-if(EMSCRIPTEN)
+if(Emscripten)
 	dk_configure(${LIBARCHIVE_DIR}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
@@ -247,7 +247,7 @@ if(IOS)
 	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-if(IOSSIM)
+if(Iossim)
 	dk_configure(${LIBARCHIVE_DIR}
 		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive"
 		-DENABLE_ACL=ON
@@ -314,7 +314,7 @@ if(IOSSIM)
 	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-if(LINUX)
+if(Linux)
 	dk_configure(${LIBARCHIVE_DIR}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
@@ -373,7 +373,7 @@ if(LINUX)
 		${ZSTD_CMAKE})
 endif()
 
-if(MAC)
+if(Mac)
 	dk_configure(${LIBARCHIVE_DIR}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
@@ -432,7 +432,7 @@ if(MAC)
 		${ZSTD_CMAKE})
 endif()
 
-if(RASPBERRY)
+if(Raspberry)
 	dk_configure(${LIBARCHIVE_DIR}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}

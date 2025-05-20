@@ -104,7 +104,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	(echo DKcmd installed ^& "%CMD_EXE:/=\%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%CMD_EXE%" "%%1" %%*) else ^
 	(echo DKcmd not installed ^& "%%1" %%*)
 
-	%dk_call% dk_registrySetKey "HKCR\DKcmd\DefaultIcon" "" "REG_SZ" "%CMD_EXE%"
+	%dk_call% dk_registrySetKey "HKCR/DKcmd/DefaultIcon" "" "REG_SZ" "%CMD_EXE%"
 	assoc .cmd=DKcmd
 
 	%dk_call% dk_success "DKcmd install complete"

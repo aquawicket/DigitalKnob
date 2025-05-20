@@ -276,8 +276,8 @@ endif()
 ## WORK IN PROGRESS ##
 ## Working to consolidate and remove the need for seperate raspberry pi functions
 ## The build setup is almost Identicle to linux. We will try to compile Rpi by excluding
-## the RASPBERRY flag variables in place of the LINUX functions. In this conversion,
-## Raspberry will listen to LINUX x86/64 and RPI x86/64.   The RASPBERRY flags will do nothing
+## the Raspberry flag variables in place of the Linux functions. In this conversion,
+## Raspberry will listen to Linux x86/64 and RPI x86/64.   The Raspberry flags will do nothing
 ## and we should be able to remove them once everythng is working.
 
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################

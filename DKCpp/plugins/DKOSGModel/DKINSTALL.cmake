@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKOSGModel ############
 dk_depend(DKOSGWindow)
 #dk_depend(openscenegraph osgdb_3dc)
-#if(NOT ANDROID)
+#if(NOT Android)
 #	dk_depend(openscenegraph osgdb_3ds)
 #	dk_depend(openscenegraph osgdb_ive)
 #	dk_depend(openscenegraph osgdb_lwo)

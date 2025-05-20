@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://developer.apple.com/documentation/foundation?language=objc
 
 dk_load(dk_builder)
-if(NOT APPLE)
+if(NOT Apple)
 	dk_undepend(foundation)
 	dk_return()
 endif()

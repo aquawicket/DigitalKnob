@@ -117,7 +117,7 @@ endif()
 
 
 
-### MAC UNINTALL ###
+### Mac UNINTALL ###
 # Remove the third-party Python 2.7 framework
 # sudo rm -rf /Library/Frameworks/Python.framework/Versions/2.7
 	

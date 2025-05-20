@@ -20,7 +20,7 @@ include_guard()
 ##
 ##    I.E. 
 ##
-##		      UNIX =                          ${HOME}
+##		      Unix =                          ${HOME}
 ##		   WINDOWS =					%USERPROFILE%
 ##			   cmd =				C:\Users\username 
 ##		  git bash =				/c/Users/username

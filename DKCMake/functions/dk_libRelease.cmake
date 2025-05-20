@@ -27,7 +27,7 @@ function(dk_libRelease lib_path)
 		return() # The library is already in the list
 	endif()	
 	
-	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW)
+	if(Linux OR Raspberry OR Android OR Emscripten OR MINGW)
 		dk_prepend(RELEASE_LIBS optimized ${lib_path})  # Add to beginning of list
 	else()
 		dk_append(RELEASE_LIBS optimized ${lib_path})  # Add to end of list

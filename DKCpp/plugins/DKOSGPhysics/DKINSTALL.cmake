@@ -7,7 +7,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ DKOSGPhysics ############
 
-#if(LINUX)
+#if(Linux)
 #	dk_return()
 #endif()
 #if(Android)

@@ -6,7 +6,7 @@ setlocal
 rem del /q /f "%~n0.exe" >nul 2>nul
 :: find csc.exe
 set "csc="
-for /r "%SystemRoot%\Microsoft.NET\Framework\" %%# in ("*csc.exe") do  set "csc=%%#"
+for /r "%SystemRoot:\=/%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "csc=%%#"
 if not exist "%csc%" (
    echo no .net framework installed
    exit /b 10

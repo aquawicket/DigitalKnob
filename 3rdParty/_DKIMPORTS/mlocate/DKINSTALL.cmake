@@ -9,7 +9,7 @@ dk_load(dk_builder)
 # mlocate
 # EXAMPLE Usage:   $ locate libx11.a
 
-if(NOT UNIX_HOST OR ANDROID)
+if(NOT UNIX_HOST OR Android)
 	dk_undepend(mlocate)
 	dk_return()
 endif()

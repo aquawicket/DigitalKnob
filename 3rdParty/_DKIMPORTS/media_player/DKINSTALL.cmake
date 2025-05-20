@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_load(dk_builder)
 
-if(NOT APPLE)
+if(NOT Apple)
 	dk_undepend(media_player)
 	dk_return()
 endif()

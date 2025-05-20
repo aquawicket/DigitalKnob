@@ -83,7 +83,7 @@ function(dk_bashEnv)
 	
 	### BASH_COMMANDS Adjustments ###
 	if(Windows_Host)
-	if(NOT ANDROID)
+	if(NOT Android)
 		dk_replaceAll("${BASH_COMMANDS}"  "C:/"  "/c/"  BASH_COMMANDS)
 		dk_replaceAll("${BASH_COMMANDS}"  "${CMAKE_GENERATOR}"  "'${CMAKE_GENERATOR}'"  BASH_COMMANDS)
 	endif()

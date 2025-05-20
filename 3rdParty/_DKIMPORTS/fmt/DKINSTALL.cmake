@@ -31,8 +31,8 @@ dk_include(${FMT_DIR}/include)
 
 #UNIX_dk_libDebug	(${FMT_DEBUG_DIR}/libfmtd.a)
 #UNIX_dk_libRelease	(${FMT_RELEASE_DIR}/libfmt.a)
-#WIN_dk_libDebug	(${FMT_DEBUG_DIR}/fmtd.lib)
-#WIN_dk_libRelease	(${FMT_RELEASE_DIR}/fmt.lib)
+#Windows_dk_libDebug	(${FMT_DEBUG_DIR}/fmtd.lib)
+#Windows_dk_libRelease	(${FMT_RELEASE_DIR}/fmt.lib)
 
 ### GENERATE ###
 #dk_configure(${FMT_DIR} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)

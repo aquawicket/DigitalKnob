@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_load(dk_builder)
 
-if(APPLE)
+if(Apple)
 	#dk_depend(sudo)
 	#dk_command(${SUDO_EXE} port install fontconfig)
 	dk_installPackage(fontconfig)

@@ -19,8 +19,8 @@ dk_include			(${LIBCACA}/include)
 dk_include			(${LIBCACA}/${Target_Tuple})
 UNIX_dk_libDebug	(${LIBCACA_DEBUG_DIR}/libcacad.a)
 UNIX_dk_libRelease	(${LIBCACA_RELEASE_DIR}/libcaca.a)
-WIN_dk_libDebug		(${LIBCACA_DEBUG_DIR}/libcacad.lib)
-WIN_dk_libRelease	(${LIBCACA_RELEASE_DIR}/libcaca.lib)
+Windows_dk_libDebug		(${LIBCACA_DEBUG_DIR}/libcacad.lib)
+Windows_dk_libRelease	(${LIBCACA_RELEASE_DIR}/libcaca.lib)
 
 ### GENERATE ####
 dk_configure(${LIBCACA_DIR})

@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_load(dk_builder)
 
-if(LINUX OR RASPBERRY)
+if(Linux OR Raspberry)
 	dk_lib(pthread)
 endif()
 

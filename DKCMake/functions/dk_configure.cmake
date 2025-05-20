@@ -74,7 +74,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${SOURCE_DIR}/configure)
-			if(Windows_Host AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
+			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 				dk_depend(bash)
 				dk_queueCommand(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}" OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)# ECHO_OUTPUT_VARIABLE)
 				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
@@ -93,7 +93,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_notice("###### configure type not detected for $ENV{CURRENT_PLUGIN}. Running provided commands unaltered ######")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
 		
-		#f(Windows_Host AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
+		#f(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 		#	dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 		#	dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		#else()
@@ -106,7 +106,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	
 	#### restore any altered flags ####
 	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
-	if(EMSCRIPTEN)
+	if(Emscripten)
 		dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
 	else()
 		dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})

@@ -20,7 +20,7 @@ endif()
 #endif()
 
 
-if(Windows_Host AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
+if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")
 	
 	### Install toolchain ###

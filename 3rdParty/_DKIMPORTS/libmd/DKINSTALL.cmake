@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ libmd ############
 # https://github.com/guillemj/libmd.git
 dk_load(dk_builder)
-if(NOT IOSSIM)
+if(NOT Iossim)
 	dk_undepend(libmd)
 	dk_return()
 endif()
@@ -23,8 +23,8 @@ dk_import(https://github.com/guillemj/libmd/archive/refs/heads/main.zip)
 dk_include			(${LIBMD}/include)
 UNIX_dk_libDebug	(${LIBMD_DEBUG_DIR}/liblibmdd.a)
 UNIX_dk_libRelease	(${LIBMD_RELEASE_DIR}/liblibmd.a)
-WIN_dk_libDebug		(${LIBMD_DEBUG_DIR}/libmdd.lib)
-WIN_dk_libRelease	(${LIBMD_RELEASE_DIR}/libmd.lib)
+Windows_dk_libDebug		(${LIBMD_DEBUG_DIR}/libmdd.lib)
+Windows_dk_libRelease	(${LIBMD_RELEASE_DIR}/libmd.lib)
 
 
 ### 3RDPARTY LINK ###

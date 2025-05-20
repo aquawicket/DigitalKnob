@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ############ DKWebView ############
-if(NOT ANDROID)
+if(NOT Android)
 	dk_return()
 endif()
 

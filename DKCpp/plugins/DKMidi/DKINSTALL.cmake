@@ -12,7 +12,7 @@ endif()
 if(IOS)
 	RETURN()
 endif()
-if(IOSSIM)
+if(Iossim)
 	RETURN()
 endif()
 

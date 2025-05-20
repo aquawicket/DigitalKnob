@@ -12,4 +12,4 @@ dk_load(dk_builder)
 
 
 WIN_dk_import(https://sourceforge.net/projects/miniweb/files/miniweb/0.8/miniweb-win32-20130309.zip)
-WIN_dk_set(MINIWEB_EXE "${MINIWEB}/miniweb.exe")
+Windows_dk_set(MINIWEB_EXE "${MINIWEB}/miniweb.exe")

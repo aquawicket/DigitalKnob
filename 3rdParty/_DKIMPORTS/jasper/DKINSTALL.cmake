@@ -27,8 +27,8 @@ LINUX_dk_libDebug		(${JASPER_DEBUG_DIR}/src/libjasper/libjasper.a)
 LINUX_dk_libRelease		(${JASPER_RELEASE_DIR}/src/libjasper/libjasper.a)
 RASPBERRY_dk_libDebug	(${JASPER_DEBUG_DIR}/src/libjasper/libjasper.a)
 RASPBERRY_dk_libRelease	(${JASPER_RELEASE_DIR}/src/libjasper/libjasper.a)
-WIN_dk_libDebug			(${JASPER}/${Target_Tuple}/src/libjasper/jasperd.lib)
-WIN_dk_libRelease		(${JASPER}/${Target_Tuple}/src/libjasper/jasper.lib)
+Windows_dk_libDebug			(${JASPER}/${Target_Tuple}/src/libjasper/jasperd.lib)
+Windows_dk_libRelease		(${JASPER}/${Target_Tuple}/src/libjasper/jasper.lib)
 
 
 ### GENERATE ###

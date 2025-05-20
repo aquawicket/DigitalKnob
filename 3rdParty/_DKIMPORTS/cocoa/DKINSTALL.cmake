@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ cocoa ############
 # https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html
 dk_load(dk_builder)
-if(NOT APPLE)
+if(NOT Apple)
 	dk_undepend(cocoa)
 	dk_return()
 endif()

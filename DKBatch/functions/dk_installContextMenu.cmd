@@ -20,22 +20,22 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_info "using '%_icon_exe_%' for the icon"
     
     ::### delete existing key ###
- ::   %dk_call% dk_registryDeleteKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%"
+ ::   %dk_call% dk_registryDeleteKey "HKCR/AllFilesystemObjects/shell/%_menuTitle_%"
     
     ::### Menu Title ###
-    ::%dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%" "" "" "&%_menuTitle_%"
-    ::echo REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
-    ::REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
+    ::%dk_call% dk_registrySetKey "HKCR/*/shell/%_menuTitle_%" "" "" "&%_menuTitle_%"
+    ::echo REG ADD "HKCR/*/shell/%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
+    ::REG ADD "HKCR/*/shell/%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
     
     ::### ICON ###
-    ::%dk_call% dk_registrySetKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
-    echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
-    REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
+    ::%dk_call% dk_registrySetKey "HKCR/AllFilesystemObjects/shell/%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
+    echo REG ADD "HKCR/AllFilesystemObjects/shell/%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
+    REG ADD "HKCR/AllFilesystemObjects/shell/%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
     
     ::### COMMAND <args> ###
-    ::%dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%\command" "" "" "%_command_%"
-    echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
-    REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+    ::%dk_call% dk_registrySetKey "HKCR/*/shell/%_menuTitle_%/command" "" "" "%_command_%"
+    echo REG ADD "HKCR/AllFilesystemObjects/shell/%_menuTitle_%/command" /ve /d "%_command_%" /f
+    REG ADD "HKCR/AllFilesystemObjects/shell/%_menuTitle_%/command" /ve /d "%_command_%" /f
 %endfunction%
 
 
@@ -49,6 +49,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_validate GIT_EXE "%dk_call% %DKIMPORTS_DIR%\git\DKINSTALL.cmd"
+    %dk_call% dk_validate GIT_EXE "%dk_call% %DKIMPORTS_DIR%/git/DKINSTALL.cmd"
     %dk_call% dk_installContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"%GIT_EXE%\" add \"%%1\""
 %endfunction%

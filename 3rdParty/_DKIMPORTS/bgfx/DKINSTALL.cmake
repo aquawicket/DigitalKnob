@@ -16,7 +16,7 @@ dk_import		(${BGFX_IMPORT})
 
 ### LINK ###
 dk_include			("${BGFX_DIR}/include")
-if(UNIX)
+if(Unix)
 	dk_libDebug		("${BGFX_DEBUG_DIR}/libbgfx.a")
 	dk_libRelease	("${BGFX_RELEASE_DIR}/libbgfx.a")
 elseif()

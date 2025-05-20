@@ -89,7 +89,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
 	
-	::"C:\Windows\System32\curl.exe" -sI -o nul -w "%{http_code}" "http://www.google.com/index.html"
+	::"C:/Windows/System32/curl.exe" -sI -o nul -w "%{http_code}" "http://www.google.com/index.html"
 	
 	::%dk_call% dk_setEx command "%CURL_EXE% -sI -o nul -w %%{http_code} %~1"
 	::set command=%CURL_EXE% -sI -o nul -w "%%{http_code}" "%~1"

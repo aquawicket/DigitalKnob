@@ -221,7 +221,7 @@ check_symbol_exists ( nl_langinfo "langinfo.h" HAVE_LANGINFO_CODESET )
 check_symbol_exists ( mbstate_t "wchar.h" HAVE_MBSTATE_T )
 
 # Other
-if ( APPLE )
+if ( Apple )
   set ( HAVE_CFLOCALECOPYCURRENT 1 )
   set ( HAVE_CFPREFERENCESCOPYAPPVALUE 1 )
   set ( HAVE__NSGETEXECUTABLEPATH 1 )

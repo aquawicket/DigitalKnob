@@ -12,7 +12,7 @@ dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(Android)
 	dk_depend(android-ndk)
 endif()
-if(EMSCRIPTEN)
+if(Emscripten)
 	dk_depend(emsdk)
 endif()
 

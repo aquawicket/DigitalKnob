@@ -20,8 +20,8 @@ dk_include			(${OSGRMLUI}/include)
 dk_include			(${OSGRMLUI}/${Target_Tuple})
 UNIX_dk_libDebug	(${OSGRMLUI_DEBUG_DIR}/libosgrmlui.a)
 UNIX_dk_libRelease	(${OSGRMLUI_RELEASE_DIR}/libosgrmlui.a)
-WIN_dk_libDebug		(${OSGRMLUI_DEBUG_DIR}/osgrmlui.lib)
-WIN_dk_libRelease	(${OSGRMLUI_RELEASE_DIR}/osgrmlui.lib)
+Windows_dk_libDebug		(${OSGRMLUI_DEBUG_DIR}/osgrmlui.lib)
+Windows_dk_libRelease	(${OSGRMLUI_RELEASE_DIR}/osgrmlui.lib)
 
 
 ### GENERATE ###

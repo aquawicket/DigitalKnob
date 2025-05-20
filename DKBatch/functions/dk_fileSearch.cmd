@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_fileSearch(<base_path>, <file_pattern>, <search_depth>, optional:<rtn_var>)
 ::#
 ::#
-::#   Example:  %dk_call% dk_fileSearch "C:\Users\Administrator\digitalknob" "\bin\bash.exe" 7 BASH_EXE
+::#   Example:  %dk_call% dk_fileSearch "C:/Users/Administrator/digitalknob" "/bin/bash.exe" 7 BASH_EXE
 :dk_fileSearch
 %setlocal%
 	%dk_call% dk_debugFunc 3 4
@@ -33,7 +33,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:: /njs		- No Job Summary.
 	:: /ns		- No Size - don't log file sizes.
 	echo:
-	for /f "tokens=*" %%g in ('%systemroot%\system32\robocopy.exe "%base_path%" "null" "%filename%" /fp /l /lev:%search_depth% /nc /ndl /njh /njs /ns /s') do (
+	for /f "tokens=*" %%g in ('%systemroot:\=/%/system32/robocopy.exe "%base_path%" "null" "%filename%" /fp /l /lev:%search_depth% /nc /ndl /njh /njs /ns /s') do (
 		set "string=%%g"
 		if "!string:%file_pattern%=!" neq "!string!" (
 			echo *** %%g
@@ -64,6 +64,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	%dk_call% dk_fileSearch "%DK3RDPARTY_DIR%" "\usr\bin\bash.exe" 4 BASH_EXE
+	%dk_call% dk_fileSearch "%DK3RDPARTY_DIR%" "/usr/bin/bash.exe" 4 BASH_EXE
 	%dk_call% dk_printVar BASH_EXE
 %endfunction%

@@ -1,8 +1,8 @@
 message("############################################################################")
-message("################## cross_x86_64_cosmo_toolchain.cmake ######################")
+message("################## Cross_x86_64_Cosmo_Toolchain.cmake ######################")
 message("############################################################################")
 
-dk_depend(Cosmopolitan)
+dk_depend(cosmopolitan)
 #dk_depend(make)
 
 #dk_set(CMAKE_SYSTEM_NAME 					Generic)

@@ -34,7 +34,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
    
-    %dk_call% dk_registryGetKey "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework" "InstallRoot" rtn_var
+    %dk_call% dk_registryGetKey "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/.NETFramework" "InstallRoot" rtn_var
 	%dk_call% dk_printVar dk_registryGetKey
 	%dk_call% dk_printVar InstallRoot
 	%dk_call% dk_printVar rtn_var

@@ -119,7 +119,7 @@ dk_set(LIBXML2_CMAKE
 #	${ZLIB_CMAKE})
 
 ##APPLE_dk_queueCommand(${DKCONFIGURE_BUILD})
-#APPLE_dk_configure(${LIBXML2} 
+#Apple_dk_configure(${LIBXML2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 

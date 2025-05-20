@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://developer.apple.com/documentation/ForceFeedback
 
 dk_load(dk_builder)
-if(NOT MAC)
+if(NOT Mac)
 	dk_undepend(force_feedback)
 	dk_return()
 endif()

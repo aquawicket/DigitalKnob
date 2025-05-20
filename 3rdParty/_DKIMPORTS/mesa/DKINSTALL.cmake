@@ -8,7 +8,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_load(dk_builder)
 # https://www.mesa3d.org
 
-if(NOT LINUX AND NOT RASPBERRY)
+if(NOT Linux AND NOT Raspberry)
 	dk_undepend(mesa)
 	dk_return()
 endif()

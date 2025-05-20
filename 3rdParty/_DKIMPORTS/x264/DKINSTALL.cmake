@@ -23,7 +23,7 @@ dk_libDebug		(${X264_DEBUG_DIR}/libx264.a)
 dk_libRelease	(${X264_RELEASE_DIR}/libx264.a)
 
 ### GENERATE / COMPILE ###
-if(EMSCRIPTEN)
+if(Emscripten)
 	dk_configure(${X264} --disable-asm --host=i686-pc-linux-gnu --enable-static --disable-cli) #--extra-cflags="-s USE_PTHREADS=1"
 else()
 	dk_configure(${X264} --disable-asm)

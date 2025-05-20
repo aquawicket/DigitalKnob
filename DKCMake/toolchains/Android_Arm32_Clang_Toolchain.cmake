@@ -1,5 +1,5 @@
 message(STATUS "#####################################################################")
-message(STATUS "################ android_arm32_clang_toolchain.cmake ################")
+message(STATUS "################ Android_Arm32_Clang_Toolchain.cmake ################")
 message(STATUS "#####################################################################")
 # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 

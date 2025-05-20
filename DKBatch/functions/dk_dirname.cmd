@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "pathname=%pathname:"=%"
 	
     for %%Z in ("%pathname%") do set "dk_dirname=%%~dpZ"
-	if "%dk_dirname:~-1%" equ "\" set "dk_dirname=%dk_dirname:~0,-1%"
+	if "%dk_dirname:~-1%" equ "/" set "dk_dirname=%dk_dirname:~0,-1%"
 	
     endlocal & (
 		set "dk_dirname=%dk_dirname:\=/%"
@@ -45,11 +45,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_dirname "%myPath%"
     %dk_call% dk_echo "%myPath%: dirname = %dk_dirname%"
 	
-	%dk_call% dk_set myPath "C:\Windows\System32"
+	%dk_call% dk_set myPath "C:/Windows/System32"
     %dk_call% dk_dirname "%myPath%"
     %dk_call% dk_echo "%myPath%: dirname = %dk_dirname%"
 	
-	%dk_call% dk_set myPath "C:\Windows\System32\"
+	%dk_call% dk_set myPath "C:/Windows/System32/"
     %dk_call% dk_dirname "%myPath%"
     %dk_call% dk_echo "%myPath%: dirname = %dk_dirname%"
 	

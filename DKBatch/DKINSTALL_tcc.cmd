@@ -79,11 +79,11 @@ if "%~1" equ "" (goto :DKINSTALL)
 	%dk_call% dk_validate TCC_RT_EXE 			"%dk_call% %DKIMPORTS_DIR%/tcc-rt/DKINSTALL.cmd"
 	%dk_call% dk_assertPath "%TCC_RT_EXE%"
 	
-	::%dk_call% dk_registryDeleteKey 	"HKCR\DKtcc"
+	::%dk_call% dk_registryDeleteKey 	"HKCR/DKtcc"
 	ftype DKtcc="%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%TCC_RT_EXE%" "%%1" %%*
-	%dk_call% dk_registrySetKey 	"HKCR\DKtcc\DefaultIcon" "" "REG_SZ" "%TCC_RT_EXE%"
-	::%dk_call% dk_registryDeleteKey 	"HKCR\.cmd"
-	::%dk_call% dk_registryDeleteKey 	"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
+	%dk_call% dk_registrySetKey 	"HKCR/DKtcc/DefaultIcon" "" "REG_SZ" "%TCC_RT_EXE%"
+	::%dk_call% dk_registryDeleteKey 	"HKCR/.cmd"
+	::%dk_call% dk_registryDeleteKey 	"HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.cmd"
 	assoc .cmd=DKtcc
 	::assoc .tcc=DKtcc
 	

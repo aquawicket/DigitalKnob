@@ -19,7 +19,7 @@ if(Windows)
 endif()
 
 
-if(MAC)
+if(Mac)
 	if(Debug)
 		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${Target_Tuple}/${DEBUG_DIR}/DKRestart.app ${DK_Project_Dir}/assets/DKRestart/${Target_Tuple}Debug/DKRestart.app OVERWRITE)
 	endif()
@@ -29,7 +29,7 @@ if(MAC)
 endif()
 
 
-if(LINUX)
+if(Linux)
 	if(Debug)
 		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${Target_Tuple}/${DEBUG_DIR}/DKRestart ${DK_Project_Dir}/assets/${Target_Tuple}Debug/DKRestart OVERWRITE)
 	endif()
@@ -39,7 +39,7 @@ if(LINUX)
 endif()
 
 
-if(RASPBERRY)
+if(Raspberry)
 	if(Debug)
 		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${Target_Tuple}/${DEBUG_DIR}/DKRestart ${DK_Project_Dir}/assets/${Target_Tuple}Debug/DKRestart OVERWRITE)
 	endif()
@@ -70,7 +70,7 @@ endif()
 
 
 ## DKRestart mac
-if(MAC)
+if(Mac)
 #	dk_appendCmake("include_directories(${DKCPP_PLUGINS_DIR}) \n")
 #	dk_appendCmake("find_library(DKd libDK.a ${DK}/${Target_Tuple}/${DEBUG_DIR}) \n")
 #	dk_appendCmake("list(APPEND DEBUG_DKLIBS debug \${DKd}) \n")
@@ -89,7 +89,7 @@ endif()
 
 
 ## DKRestart linux
-if(LINUX)
+if(Linux)
 	#dk_appendCmake("include_directories(${DKCPP_PLUGINS_DIR}) \n")
 	if(Debug)
 		#dk_appendCmake("find_library(DKd libDK.a ${DK}/${Target_Tuple}/${DEBUG_DIR}) \n")
@@ -109,7 +109,7 @@ endif()
 
 
 ## DKRestart raspberry
-if(RASPBERRY)
+if(Raspberry)
 	#dk_appendCmake("include_directories(${DKCPP_PLUGINS_DIR}) \n")
 	if(Debug)
 		#dk_appendCmake("find_library(DKd libDK.a ${DK}/${Target_Tuple}/${DEBUG_DIR}) \n")

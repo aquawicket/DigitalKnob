@@ -34,8 +34,8 @@ LINUX_dk_libDebug		(${LIBTORRENT_DEBUG_DIR}/libtorrent-rasterbar.a)
 LINUX_dk_libRelease		(${LIBTORRENT_RELEASE_DIR}/libtorrent-rasterbar.a)
 MAC_dk_libDebug			(${LIBTORRENT}/${Target_Tuple}/lib/${DEBUG_DIR}/libtorrent-rasterbar.a)
 MAC_dk_libRelease		(${LIBTORRENT}/${Target_Tuple}/lib/${RELEASE_DIR}/libtorrent-rasterbar.a)
-WIN_dk_libDebug			(${LIBTORRENT_DEBUG_DIR}/torrent-rasterbar.lib)
-WIN_dk_libRelease		(${LIBTORRENT_RELEASE_DIR}/torrent-rasterbar.lib)
+Windows_dk_libDebug			(${LIBTORRENT_DEBUG_DIR}/torrent-rasterbar.lib)
+Windows_dk_libRelease		(${LIBTORRENT_RELEASE_DIR}/torrent-rasterbar.lib)
 
 
 ### GENERATE ###

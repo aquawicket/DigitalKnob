@@ -32,7 +32,7 @@ function(dk_exit) # exit_code)
 	endif()
 	
 	### fallback methods ###
-	if(UNIX)
+	if(Unix)
 		execute_process(COMMAND killall -9 cmake)
 	else()
 		execute_process(COMMAND taskkill /IM cmake.exe /F)

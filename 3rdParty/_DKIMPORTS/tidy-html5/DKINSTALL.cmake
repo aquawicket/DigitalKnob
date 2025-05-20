@@ -21,7 +21,7 @@ dk_fileReplace			("${TIDY_HTML5_DIR}/CMakeLists.txt" "add_definitions ( -DLIBTID
 dk_fileReplace			("${TIDY_HTML5_DIR}/CMakeLists.txt" "add_definitions ( -DRELEASE_DATE"    	"#add_definitions ( -DRELEASE_DATE")
 
 ### LINK ###
-if(EMSCRIPTEN)
+if(Emscripten)
 	dk_define			(HAS_FUTIME=0)
 endif()
 dk_include				(${TIDY_HTML5_DIR})
@@ -41,7 +41,7 @@ endif()
 
 
 ### GENERATE ###
-if(EMSCRIPTEN) 
+if(Emscripten) 
 	dk_configure		(${TIDY_HTML5_DIR} ${ZLIB_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0") # -DBUILD_SHARED_LIB=OFF 
 else()
 	dk_configure		(${TIDY_HTML5_DIR} ${ZLIB_CMAKE}) # -DBUILD_SHARED_LIB=OFF

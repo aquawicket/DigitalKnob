@@ -4,13 +4,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 %dk_call% dk_validate DKIMPORTS_DIR     	   "%dk_call% dk_DKIMPORTS_DIR"
-if not exist "%DKIMPORTS_DIR%/git/dkconfig.txt" %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt"  "%DKIMPORTS_DIR%\git\dkconfig.txt"
+if not exist "%DKIMPORTS_DIR%/git/dkconfig.txt" %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt"  "%DKIMPORTS_DIR%/git/dkconfig.txt"
 
 %dk_call% dk_getFileParams "%DKIMPORTS_DIR%/git/dkconfig.txt"
 
 :: https://stackoverflow.com/a/67714373
-if not defined GIT_CONFIG_SYSTEM  (set GIT_CONFIG_SYSTEM=%DKCACHE_DIR%\.gitSystem)
-if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGlobal)
+if not defined GIT_CONFIG_SYSTEM  (set GIT_CONFIG_SYSTEM=%DKCACHE_DIR%/.gitSystem)
+if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGlobal)
 
 ::####################################################################
 ::# dk_installGit()
@@ -46,7 +46,7 @@ if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGloba
     %dk_call% dk_echo "Installing git . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_download %GIT_IMPORT% &::"%DKDOWNLOAD_DIR%"
-    "%DKDOWNLOAD_DIR%\%GIT_IMPORT_FILE%" -y -o "%GIT%"
+    "%DKDOWNLOAD_DIR%/%GIT_IMPORT_FILE%" -y -o "%GIT%"
  
     if NOT exist "%GIT_EXE%" %dk_call% dk_error "cannot find git")
 %endfunction%

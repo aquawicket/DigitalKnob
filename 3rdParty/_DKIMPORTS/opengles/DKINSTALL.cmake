@@ -17,19 +17,19 @@ if(IOS)
 	dk_findLibrary(OpenGLES)
 endif()
 
-if(IOSSIM)
+if(Iossim)
 	dk_findLibrary(OpenGLES)
 endif()
 
-#if(LINUX)
+#if(Linux)
 	#dk_depend(opengl)
 #endif()
 
-#if(MAC)
+#if(Mac)
 	#dk_depend(opengl)
 #endif()
 
-#if(RASPBERRY)
+#if(Raspberry)
 	#dk_depend(opengl)
 #endif()	
 
