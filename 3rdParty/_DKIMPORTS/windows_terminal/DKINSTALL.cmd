@@ -19,8 +19,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if defined Windows_X86_64_Host  (set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x64.zip")
 	if not defined WINDOWS_TERMINAL_DL (%dk_call% dk_error "WINDOWS_TERMINAL_DL is invalid")
 	
-	%dk_call% dk_basename %WINDOWS_TERMINAL_DL% WINDOWS_TERMINAL_DL_FILE
-	%dk_call% dk_removeExtension %WINDOWS_TERMINAL_DL_FILE% WINDOWS_TERMINAL_FOLDER
+	%dk_call% dk_basename %WINDOWS_TERMINAL_DL% WINDOWS_TERMINAL_IMPORT_FILE
+	%dk_call% dk_removeExtension %WINDOWS_TERMINAL_IMPORT_FILE% WINDOWS_TERMINAL_FOLDER
 	::%dk_call% dk_convertToCIdentifier %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
 	%dk_call% dk_toLower %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
@@ -33,7 +33,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_info "Installing Windows Terminal . . ."
     %dk_call% dk_download %WINDOWS_TERMINAL_DL%
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-    %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%WINDOWS_TERMINAL_DL_FILE%" "%WINDOWS_TERMINAL_DIR%"
+    %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%WINDOWS_TERMINAL_IMPORT_FILE%" "%WINDOWS_TERMINAL_DIR%"
 	if NOT exist "%WINDOWS_TERMINAL_EXE%" (%dk_call% dk_error "cannot find wt.exe")
 	:windows_terminal_installed
 

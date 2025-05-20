@@ -114,13 +114,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem <CURRENT_PLUGIN>		- from <PLUGIN>									:ZLIB				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	rem <PLUGIN>_DIR			- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	rem <PLUGIN>_URL			- from PLUGIN_URL								:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
-	rem <PLUGIN>_DL_FILE		- from PLUGIN_URL_FILENAME						:ZLIB_DL_FILE		: master.zip
+	rem <PLUGIN>_IMPORT_FILE	- from PLUGIN_URL_FILENAME						:ZLIB_IMPORT_FILE	: master.zip
 	rem <PLUGIN>_VERSION        - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
 	rem <PLUGIN>_FOLDER			- from PLUGIN_INSTALL_FOLDER					:ZLIB_FOLDER		: zlib-master
 	rem <PLUGIN>_IMPORT_NAME	- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
 	rem <PLUGIN>_BRANCH			- from PLUGIN_GIT_BRANCH						:ZLIB_BRANCH		: master
 	rem <PLUGIN>_TAG			- from PLUGIN_GIT_TAG							:ZLIB_TAG			: 
-	rem <PLUGIN>_TUPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple	:ZLIB_TUPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
+	rem <PLUGIN>_TUPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple		:ZLIB_TUPLE_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	rem <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	rem <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	rem <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
@@ -371,10 +371,10 @@ rem ### <PLUGIN>_URL
 	%dk_call% dk_set !CURRENT_PLUGIN!_URL !PLUGIN_URL! 
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_URL 								&rem ZLIB_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
-rem ### <PLUGIN>_DL_FILE
+rem ### <PLUGIN>_IMPORT_FILE
 	set "!CURRENT_PLUGIN!_DK_FILE="
-	%dk_call% dk_set !CURRENT_PLUGIN!_DL_FILE !PLUGIN_URL_FILENAME! 
-	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DL_FILE 							&rem ZLIB_DL_FILE 			: master.zip
+	%dk_call% dk_set !CURRENT_PLUGIN!_IMPORT_FILE !PLUGIN_URL_FILENAME! 
+	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_IMPORT_FILE 							&rem ZLIB_IMPORT_FILE 			: master.zip
 	
 rem ### <PLUGIN>_VERSION
 	set "!CURRENT_PLUGIN!_VERSION="
@@ -465,7 +465,7 @@ rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	%dk_call% dk_echo "GIT             = %GIT%"
 	%dk_call% dk_echo "GIT_DIR         = %GIT_DIR%"
 	%dk_call% dk_echo "GIT_URL         = %GIT_URL%"
-	%dk_call% dk_echo "GIT_DL_FILE     = %GIT_DL_FILE%"
+	%dk_call% dk_echo "GIT_IMPORT_FILE = %GIT_IMPORT_FILE%"
 	%dk_call% dk_echo "GIT_VERSION     = %GIT_VERSION%"
 	%dk_call% dk_echo "GIT_FOLDER      = %GIT_FOLDER%"
 	%dk_call% dk_echo "GIT_IMPORT_NAME = %GIT_IMPORT_NAME%"

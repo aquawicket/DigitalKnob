@@ -20,8 +20,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined Windows_X86_64_Host	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip")
 	if not defined OPENJDK_DL		(%dk_call% dk_error "OPENJDK_DL is invalid")
 	
-	::%dk_call% dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
-	::%dk_call% dk_removeExtension %OPENJDK_DL_FILE% OPENJDK_FOLDER
+	::%dk_call% dk_basename %OPENJDK_DL% OPENJDK_IMPORT_FILE
+	::%dk_call% dk_removeExtension %OPENJDK_IMPORT_FILE% OPENJDK_FOLDER
 	::%dk_call% dk_convertToCIdentifier %OPENJDK_FOLDER% OPENJDK_FOLDER
 	::%dk_call% dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
@@ -63,9 +63,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_download %OPENJDK_DL%
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_command tar xf %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
+	%dk_call% dk_command tar xf %DKDOWNLOAD_DIR%/%OPENJDK_IMPORT_FILE%
 	%dk_call% dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
-	%dk_call% dk_delete %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
+	%dk_call% dk_delete %DKDOWNLOAD_DIR%/%OPENJDK_IMPORT_FILE%
 	%dk_call% dk_command java --version 
 %endfunction%
 

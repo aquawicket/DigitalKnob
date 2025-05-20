@@ -26,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if exist "%TINYCORELINUX_IMG%" (%return%)
 		
 		%dk_call% dk_info "Installing tiny-core-linux . . ."
-		%dk_call% dk_basename %TINYCORELINUX_DL% TINYCORELINUX_DL_FILE
+		%dk_call% dk_basename %TINYCORELINUX_DL% TINYCORELINUX_IMPORT_FILE
 		%dk_call% dk_download %TINYCORELINUX_DL%
 		
 		::###### create and cd into install directory ######
@@ -53,7 +53,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		
 		::###### Launching the VM ######
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_DL_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_IMPORT_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	
 		::###### create TinyCoreLinux Launcher ######
 		%dk_call% dk_set TINYCORELINUX_launcher "%TINYCORELINUX_DIR%\LAUNCH.cmd"

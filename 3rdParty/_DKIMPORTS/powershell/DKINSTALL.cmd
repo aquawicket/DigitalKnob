@@ -19,8 +19,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not defined POWERSHELL_DL 	(%dk_call% dk_error "POWERSHELL_DL is invalid")
 	
 	::###### POWERSHELL_DL -> TO -> POWERSHELL_DIR ######
-	%dk_call% dk_basename %POWERSHELL_DL% POWERSHELL_DL_FILE
-	%dk_call% dk_removeExtension %POWERSHELL_DL_FILE% POWERSHELL_FOLDER
+	%dk_call% dk_basename %POWERSHELL_DL% POWERSHELL_IMPORT_FILE
+	%dk_call% dk_removeExtension %POWERSHELL_IMPORT_FILE% POWERSHELL_FOLDER
 	::%dk_call% dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	%dk_call% dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
@@ -33,7 +33,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_info "Installing powershell . . ."
 		%dk_call% dk_download %POWERSHELL_DL%
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-		%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%POWERSHELL_DL_FILE%" "%POWERSHELL_DIR%"
+		%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%POWERSHELL_IMPORT_FILE%" "%POWERSHELL_DIR%"
 		if NOT exist "%POWERSHELL_EXE%" (%dk_call% dk_error "cannot find pwsh.exe")
 	:powershell_installed
 	

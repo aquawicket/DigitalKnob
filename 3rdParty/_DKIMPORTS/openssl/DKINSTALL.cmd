@@ -15,8 +15,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	%dk_call% dk_importVariables %OPENSSL_DL% IMPORT_PATH %DKIMPORTS_DIR%/openssl ROOT %DK3RDPARTY_DIR%
 
-::	%dk_call% dk_basename %OPENSSL_DL% OPENSSL_DL_FILE
-::	%dk_call% dk_removeExtension %OPENSSL_DL_FILE% OPENSSL_FOLDER
+::	%dk_call% dk_basename %OPENSSL_DL% OPENSSL_IMPORT_FILE
+::	%dk_call% dk_removeExtension %OPENSSL_IMPORT_FILE% OPENSSL_FOLDER
 ::	set "OPENSSL=%DK3RDPARTY_DIR%/openssl-%OPENSSL_FOLDER%"
 
 	if exist %OPENSSL%/Configure" (

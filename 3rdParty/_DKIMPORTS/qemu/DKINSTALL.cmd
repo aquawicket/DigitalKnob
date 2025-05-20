@@ -23,8 +23,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_importVariables %QEMU_DL% IMPORT_PATH %~0 ROOT %DKTOOLS_DIR%
 	
-    ::%dk_call% dk_basename %QEMU_DL% QEMU_DL_FILE
-    ::%dk_call% dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER
+    ::%dk_call% dk_basename %QEMU_DL% QEMU_IMPORT_FILE
+    ::%dk_call% dk_removeExtension %QEMU_IMPORT_FILE% QEMU_FOLDER
     ::%dk_call% dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
     ::%dk_call% dk_toLower %QEMU_FOLDER% QEMU_FOLDER
 	::%dk_call% dk_importVariables %QEMU_DL%
@@ -38,8 +38,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_download %QEMU_DL%
 	%dk_call% dk_nativePath %QEMU_DIR% QEMU_INSTALL_PATH
-	%dk_call% dk_echo "Installing %QEMU_DL_FILE% . . ."
-	%dk_call% dk_set command_string ""%DKDOWNLOAD_DIR%\%QEMU_DL_FILE%" /S /D=%QEMU_INSTALL_PATH%"
+	%dk_call% dk_echo "Installing %QEMU_IMPORT_FILE% . . ."
+	%dk_call% dk_set command_string ""%DKDOWNLOAD_DIR%\%QEMU_IMPORT_FILE%" /S /D=%QEMU_INSTALL_PATH%"
 	%dk_call% %command_string%
 	
 	if NOT exist "%QEMU_IMG_EXE%" (%dk_call% dk_error "cannot find qemu")

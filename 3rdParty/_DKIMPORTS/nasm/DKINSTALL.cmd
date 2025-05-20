@@ -17,8 +17,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	%dk_call% dk_importVariables %NASM_DL% IMPORT_PATH %DKIMPORTS_DIR%\nasm ROOT %DK3RDPARTY_DIR%
 
-::	%dk_call% dk_basename %NASM_DL% NASM_DL_FILE
-::	%dk_call% dk_removeExtension %NASM_DL_FILE% NASM_FOLDER
+::	%dk_call% dk_basename %NASM_DL% NASM_IMPORT_FILE
+::	%dk_call% dk_removeExtension %NASM_IMPORT_FILE% NASM_FOLDER
 	
 ::	set "NASM=%DK3RDPARTY_DIR%\nasm-%NASM_FOLDER%"
 	

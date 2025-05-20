@@ -17,8 +17,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if defined Windows_X86_64_Host        (set "POWERSHELL_DL=https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x64.zip")
 	if not defined POWERSHELL_DL      (%dk_call% dk_error "POWERSHELL_DL is invalid")
 	
-	%dk_call% dk_basename %POWERSHELL_DL% POWERSHELL_DL_FILE
-	%dk_call% dk_removeExtension %POWERSHELL_DL_FILE% POWERSHELL_FOLDER
+	%dk_call% dk_basename %POWERSHELL_DL% POWERSHELL_IMPORT_FILE
+	%dk_call% dk_removeExtension %POWERSHELL_IMPORT_FILE% POWERSHELL_FOLDER
 	::%dk_call% dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	%dk_call% dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"

@@ -26,10 +26,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if exist "%REACTOS_IMG%" (%return%)
 		
 		%dk_call% dk_info "Installing ReactOS . . ."
-		%dk_call% dk_basename %REACTOS_DL% REACTOS_DL_FILE
+		%dk_call% dk_basename %REACTOS_DL% REACTOS_IMPORT_FILE
 		%dk_call% dk_download %REACTOS_DL%
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-		%dk_call% dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE%
+		%dk_call% dk_extract %DKDOWNLOAD_DIR%/%REACTOS_IMPORT_FILE%
 		
 		::###### create and cd into install directory ######
 		%dk_call% dk_mkdir %REACTOS_DIR% 

@@ -17,8 +17,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined Windows_X86_Host      (set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe")
 	if defined Windows_X86_64_Host   (set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe")
 	
-	%dk_call% dk_basename %QEMU_DL% QEMU_DL_FILE
-    %dk_call% dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER
+	%dk_call% dk_basename %QEMU_DL% QEMU_IMPORT_FILE
+    %dk_call% dk_removeExtension %QEMU_IMPORT_FILE% QEMU_FOLDER
     ::%dk_call% dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
     %dk_call% dk_toLower %QEMU_FOLDER% QEMU_FOLDER
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"

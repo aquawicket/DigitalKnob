@@ -31,7 +31,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_download "%PHP_SRC_DL%"
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%PHP_SRC_DL_FILE%" "%PHP_SRC%"
+	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%PHP_SRC_IMPORT_FILE%" "%PHP_SRC%"
 
 	if not exist "%PHP_EXE%" (%dk_call% dk_error "cannot find PHP_EXE:%PHP_EXE%")
 %endfunction%
