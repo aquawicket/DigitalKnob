@@ -82,8 +82,8 @@ dk_addTarget(sfml sfml-system)
 dk_addTarget(sfml sfml-window)
 
 if(sfml_sfml-audio)
-	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
+	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-audio-s-d.a)
+	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-audio-s.a)
 	EMSCRIPTEN_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-audio-s-d.a)
 	EMSCRIPTEN_dk_libRelease(${SFML_RELEASE_DIR}/lib/libsfml-audio-s.a)
 	IOSSIM_dk_libDebug		(${SFML}/${Target_Tuple}/lib/Debug/libsfml-audio-s-d.a)
@@ -92,17 +92,17 @@ if(sfml_sfml-audio)
 	IOS_dk_libRelease		(${SFML}/${Target_Tuple}/lib/Release/libsfml-audio-s.a)
 	LINUX_dk_libDebug		(${SFML_DEBUG_DIR}/lib/libsfml-audio-s-d.a)
 	LINUX_dk_libRelease		(${SFML_RELEASE_DIR}/lib/libsfml-audio-s.a)
-	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
-	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
+	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-audio-s-d.a)
+	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-audio-s.a)
 	RASPBERRY_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-audio-s-d.a)
 	RASPBERRY_dk_libRelease	(${SFML_RELEASE_DIR}/lib/libsfml-audio-s.a)
-	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-audio-s-d.lib)
-	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-audio-s.lib)
+	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-audio-s-d.lib)
+	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-audio-s.lib)
 endif()
 
 if(sfml_sfml-graphics)
-	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-graphics-s.a)
+	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-graphics-s-d.a)
+	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-graphics-s.a)
 	EMSCRIPTEN_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-graphics-s-d.a)
 	EMSCRIPTEN_dk_libRelease(${SFML_RELEASE_DIR}/lib/libsfml-graphics-s.a)
 	IOSSIM_dk_libDebug		(${SFML}/${Target_Tuple}/lib/Debug/libsfml-graphics-s-d.a)
@@ -111,22 +111,22 @@ if(sfml_sfml-graphics)
 	IOS_dk_libRelease		(${SFML}/${Target_Tuple}/lib/Release/libsfml-graphics-s.a)
 	LINUX_dk_libDebug		(${SFML_DEBUG_DIR}/lib/libsfml-graphics-s-d.a)
 	LINUX_dk_libRelease		(${SFML_RELEASE_DIR}/lib/libsfml-graphics-s.a)
-	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
-	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-graphics-s.a)
+	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-graphics-s-d.a)
+	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-graphics-s.a)
 	RASPBERRY_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-graphics-s-d.a)
 	RASPBERRY_dk_libRelease	(${SFML_RELEASE_DIR}/lib/libsfml-graphics-s.a)
-	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-graphics-s-d.lib)
-	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-graphics-s.lib)
+	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-graphics-s-d.lib)
+	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-graphics-s.lib)
 endif()
 
 if(sfml_sfml-main)
-	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-main-d.lib)
-	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-main.lib)
+	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-main-d.lib)
+	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-main.lib)
 endif()
 
 if(sfml_sfml-network)
-	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-network-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-network-s.a)
+	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-network-s-d.a)
+	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-network-s.a)
 	EMSCRIPTEN_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-network-s-d.a)
 	EMSCRIPTEN_dk_libRelease(${SFML_RELEASE_DIR}/lib/libsfml-network-s.a)
 	IOSSIM_dk_libDebug		(${SFML}/${Target_Tuple}/lib/Debug/libsfml-network-s-d.a)
@@ -135,17 +135,17 @@ if(sfml_sfml-network)
 	IOS_dk_libRelease		(${SFML}/${Target_Tuple}/lib/Release/libsfml-network-s.a)
 	LINUX_dk_libDebug		(${SFML_DEBUG_DIR}/lib/libsfml-network-s-d.a)
 	LINUX_dk_libRelease		(${SFML_RELEASE_DIR}/lib/libsfml-network-s.a)
-	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-network-s-d.a)
-	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-network-s.a)
+	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-network-s-d.a)
+	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-network-s.a)
 	RASPBERRY_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-network-s-d.a)
 	RASPBERRY_dk_libRelease	(${SFML_RELEASE_DIR}/lib/libsfml-network-s.a)
-	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-network-s-d.lib)
-	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-network-s.lib)
+	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-network-s-d.lib)
+	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-network-s.lib)
 endif()
 
 if(sfml_sfml-system)
-	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-system-s.a)
+	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-system-s-d.a)
+	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-system-s.a)
 	EMSCRIPTEN_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-system-s-d.a)
 	EMSCRIPTEN_dk_libRelease(${SFML_RELEASE_DIR}/lib/libsfml-system-s.a)
 	IOSSIM_dk_libDebug		(${SFML}/${Target_Tuple}/lib/Debug/libsfml-system-s-d.a)
@@ -154,17 +154,17 @@ if(sfml_sfml-system)
 	IOS_dk_libRelease		(${SFML}/${Target_Tuple}/lib/Release/libsfml-system-s.a)
 	LINUX_dk_libDebug		(${SFML_DEBUG_DIR}/lib/libsfml-system-s-d.a)
 	LINUX_dk_libRelease		(${SFML_RELEASE_DIR}/lib/libsfml-system-s.a)
-	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
-	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-system-s.a)
+	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-system-s-d.a)
+	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-system-s.a)
 	RASPBERRY_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-system-s-d.a)
 	RASPBERRY_dk_libRelease	(${SFML_RELEASE_DIR}/lib/libsfml-system-s.a)
-	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-system-s-d.lib)
-	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-system-s.lib)
+	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-system-s-d.lib)
+	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-system-s.lib)
 endif()
 
 if(sfml_sfml-window)
-	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-window-s.a)
+	ANDROID_dk_libDebug		(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-window-s-d.a)
+	ANDROID_dk_libRelease	(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-window-s.a)
 	EMSCRIPTEN_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-window-s-d.a)
 	EMSCRIPTEN_dk_libRelease(${SFML_RELEASE_DIR}/lib/libsfml-window-s.a)
 	IOSSIM_dk_libDebug		(${SFML}/${Target_Tuple}/lib/Debug/libsfml-window-s-d.a)
@@ -173,28 +173,28 @@ if(sfml_sfml-window)
 	IOS_dk_libRelease		(${SFML}/${Target_Tuple}/lib/Release/libsfml-window-s.a)
 	LINUX_dk_libDebug		(${SFML_DEBUG_DIR}/lib/libsfml-window-s-d.a)
 	LINUX_dk_libRelease		(${SFML_RELEASE_DIR}/lib/libsfml-window-s.a)
-	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
-	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/libsfml-window-s.a)
+	MAC_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/libsfml-window-s-d.a)
+	MAC_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/libsfml-window-s.a)
 	RASPBERRY_dk_libDebug	(${SFML_DEBUG_DIR}/lib/libsfml-window-s-d.a)
 	RASPBERRY_dk_libRelease	(${SFML_RELEASE_DIR}/lib/libsfml-window-s.a)
-	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-window-s-d.lib)
-	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-window-s.lib)
+	Windows_dk_libDebug			(${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-window-s-d.lib)
+	Windows_dk_libRelease		(${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-window-s.lib)
 endif()
 
 
 ### 3RDPARTY LINK ###
 Windows_dk_set(SFML_CMAKE
 	-DSFML_INCLUDE_DIR=${SFML}/include
-	-DSFML_AUDIO_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-audio-s-d.lib
-	-DSFML_AUDIO_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-audio-s.lib
-	-DSFML_GRAPHICS_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-graphics-s-d.lib
-	-DSFML_GRAPHICS_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-graphics-s.lib
-	-DSFML_MAIN_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-main-d.lib
-	-DSFML_MAIN_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-main.lib
-	-DSFML_SYSTEM_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-system-s-d.lib
-	-DSFML_SYSTEM_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-system-s.lib
-	-DSFML_WINDOW_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${DEBUG_DIR}/sfml-window-s-d.lib
-	-DSFML_WINDOW_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${RELEASE_DIR}/sfml-window-s.lib)
+	-DSFML_AUDIO_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-audio-s-d.lib
+	-DSFML_AUDIO_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-audio-s.lib
+	-DSFML_GRAPHICS_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-graphics-s-d.lib
+	-DSFML_GRAPHICS_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-graphics-s.lib
+	-DSFML_MAIN_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-main-d.lib
+	-DSFML_MAIN_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-main.lib
+	-DSFML_SYSTEM_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-system-s-d.lib
+	-DSFML_SYSTEM_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-system-s.lib
+	-DSFML_WINDOW_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-window-s-d.lib
+	-DSFML_WINDOW_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-window-s.lib)
 
 
 ### GENERATE ###

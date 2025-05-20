@@ -54,10 +54,10 @@ dk_include(${OPENFRAMEWORKS}/libs/poco/include)
 dk_include(${OPENFRAMEWORKS}/libs/tess2/include)
 dk_include(${OPENFRAMEWORKS}/libs/utf8cpp/include)
 dk_include(${OPENFRAMEWORKS}/libs/videoInput/include)
-UNIX_dk_libDebug	(${OPENFRAMEWORKS}/${Target_Tuple}/lib/${DEBUG_DIR}/libopenframeworks.a)
-UNIX_dk_libRelease	(${OPENFRAMEWORKS}/${Target_Tuple}/lib/${RELEASE_DIR}/libopenframeworks.a)
-Windows_dk_libDebug		(${OPENFRAMEWORKS}/${Target_Tuple}/lib/${DEBUG_DIR}/openFrameworks.lib)
-Windows_dk_libRelease	(${OPENFRAMEWORKS}/${Target_Tuple}/lib/${RELEASE_DIR}/openFrameworks.lib)
+UNIX_dk_libDebug	(${OPENFRAMEWORKS}/${Target_Tuple}/lib/${Debug_Dir}/libopenframeworks.a)
+UNIX_dk_libRelease	(${OPENFRAMEWORKS}/${Target_Tuple}/lib/${Release_Dir}/libopenframeworks.a)
+Windows_dk_libDebug		(${OPENFRAMEWORKS}/${Target_Tuple}/lib/${Debug_Dir}/openFrameworks.lib)
+Windows_dk_libRelease	(${OPENFRAMEWORKS}/${Target_Tuple}/lib/${Release_Dir}/openFrameworks.lib)
 
 
 ### GENERATE ###

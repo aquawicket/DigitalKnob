@@ -121,8 +121,8 @@ function(dk_importVariables)
 # <PLUGIN>_TUPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple	:ZLIB_TUPLE_DIR	: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 # <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 # <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-# <PLUGIN>_RELEASE_DIR		- from PLUGIN_INSTALL_PATH and RELEASE_DIR		:ZLIB_RELEASE_DIR	: :/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
+# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and Debug_Dir		:ZLIB_DEBUG_DIR		: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+# <PLUGIN>_RELEASE_DIR		- from PLUGIN_INSTALL_PATH and Release_Dir		:ZLIB_RELEASE_DIR	: :/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	
 	
 	##############################################
@@ -466,15 +466,15 @@ function(dk_importVariables)
 	
 	# <PLUGIN>_DEBUG_DIR
 	dk_unset(${CURRENT_PLUGIN}_DEBUG_DIR)
-	if(DEBUG_DIR)
-		dk_set(${CURRENT_PLUGIN}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${DEBUG_DIR})
+	if(Debug_Dir)
+		dk_set(${CURRENT_PLUGIN}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Debug_Dir})
 		dk_printVar(${CURRENT_PLUGIN}_DEBUG_DIR)						# ZLIB_DEBUG_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	endif()
 	
 	# <PLUGIN>_RELEASE_DIR
 	dk_unset(${CURRENT_PLUGIN}_RELEASE_DIR)
-	if(RELEASE_DIR)
-		dk_set(${CURRENT_PLUGIN}_RELEASE_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${RELEASE_DIR})
+	if(Release_Dir)
+		dk_set(${CURRENT_PLUGIN}_RELEASE_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Release_Dir})
 		dk_printVar(${CURRENT_PLUGIN}_RELEASE_DIR)						# ZLIB_RELEASE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	endif()
 	

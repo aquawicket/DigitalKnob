@@ -125,21 +125,21 @@ function(dk_Target_Tuple)
 	dk_assertVar(${Target_Tuple})
 	
 	
-	### Set DEBUG_DIR and RELEASE_DIR variables
+	### Set Debug_Dir and Release_Dir variables
 	if(Ios)
-		dk_set(DEBUG_DIR Debug-iphoneos)
-		dk_set(RELEASE_DIR Release-iphoneos)
+		dk_set(Debug_Dir Debug-iphoneos)
+		dk_set(Release_Dir Release-iphoneos)
 	elseif(Iossim)
-		dk_set(DEBUG_DIR Debug-iphonesimulator)
-		dk_set(RELEASE_DIR Release-iphonesimulator)
+		dk_set(Debug_Dir Debug-iphonesimulator)
+		dk_set(Release_Dir Release-iphonesimulator)
 	else()
-		dk_set(DEBUG_DIR Debug)
-		dk_set(RELEASE_DIR Release)
+		dk_set(Debug_Dir Debug)
+		dk_set(Release_Dir Release)
 	endif()
-	dk_assertVar(DEBUG_DIR)
-	dk_assertVar(RELEASE_DIR)
-	dk_printVar(DEBUG_DIR)
-	dk_printVar(RELEASE_DIR)
+	dk_assertVar(Debug_Dir)
+	dk_assertVar(Release_Dir)
+	dk_printVar(Debug_Dir)
+	dk_printVar(Release_Dir)
 endfunction()
 
 

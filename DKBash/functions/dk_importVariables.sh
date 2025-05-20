@@ -126,8 +126,8 @@ dk_importVariables() {
 	# <PLUGIN>_TUPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple	:ZLIB_TUPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	# <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	# <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	# <PLUGIN>_RELEASE_DIR		- from PLUGIN_INSTALL_PATH and RELEASE_DIR		:ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
+	# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and Debug_Dir		:ZLIB_DEBUG_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	# <PLUGIN>_RELEASE_DIR		- from PLUGIN_INSTALL_PATH and Release_Dir		:ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 		
 		
 	##############################################
@@ -406,14 +406,14 @@ dk_importVariables() {
 	fi  
 	
 	# <PLUGIN>_DEBUG_DIR
-	if [ -n "${DEBUG_DIR-}" ]; then 
-		dk_call dk_set ${PLUGIN_PREFIX}_DEBUG_DIR "${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${DEBUG_DIR}" 
+	if [ -n "${Debug_Dir-}" ]; then 
+		dk_call dk_set ${PLUGIN_PREFIX}_DEBUG_DIR "${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Debug_Dir}" 
 		dk_call dk_printVar ${PLUGIN_PREFIX}_DEBUG_DIR 							# ZLIB_DEBUG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	fi  
 	
 	# <PLUGIN>_RELEASE_DIR
-	if [ -n "${RELEASE_DIR-}" ]; then 
-		dk_call dk_set ${PLUGIN_PREFIX}_RELEASE_DIR "${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${RELEASE_DIR}" 
+	if [ -n "${Release_Dir-}" ]; then 
+		dk_call dk_set ${PLUGIN_PREFIX}_RELEASE_DIR "${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Release_Dir}" 
 		dk_call dk_printVar ${PLUGIN_PREFIX}_RELEASE_DIR 						# ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	fi  
 	

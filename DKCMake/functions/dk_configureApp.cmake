@@ -89,10 +89,10 @@ function(dk_configureApp)
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
 			if(Debug)
-				dk_rename(${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+				dk_rename(${DK_Project_Dir}/${Target_Tuple}/${Debug_Dir}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${Debug_Dir}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 			endif()
 			if(Release)
-				dk_rename(${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+				dk_rename(${DK_Project_Dir}/${Target_Tuple}/${Release_Dir}/${APP_NAME}.exe ${DK_Project_Dir}/${Target_Tuple}/${Release_Dir}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 			endif()
 		endif()
 		
