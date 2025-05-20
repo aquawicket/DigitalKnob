@@ -61,6 +61,6 @@ dk_mkdir("${MSYS2_CacheDir}")
 #	
 #	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 #	#dk_download(${MSYS2_DL} $ENV{DKDOWNLOAD_DIR})
-#	#dk_command("$ENV{DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2}" --confirm-command)
+#	#dk_command("$ENV{DKDOWNLOAD_DIR}/${MSYS2_IMPORT_FILE}" install --root "${MSYS2}" --confirm-command)
 #endif()
 

@@ -59,28 +59,28 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	set(PLUGIN_DL_DIR "$ENV{DKDOWNLOAD_DIR}")
 	
-	### set the PLUGIN_DL_FILENAME ###
+	### set the PLUGIN_IMPORT_FILENAME ###
 	# let's check that the PLUGIN_URL_FILENAME has at least the PLUGIN_IMPORT_NAME in it somewhere, or else we gotta rename it
 	dk_toLower(${PLUGIN_URL_FILENAME} plugin_url_filename)
 	if(NOT plugin_url_filename MATCHES "${PLUGIN_IMPORT_NAME}")
 		dk_debug("The download filename:${PLUGIN_URL_FILENAME} does not contaian the import name:${PLUGIN_IMPORT_NAME}")
 		dk_toLower(${dest_filename} dest_filename_lower)
 		if(dest_filename_lower MATCHES "${PLUGIN_IMPORT_NAME}")
-			set(PLUGIN_DL_FILENAME "${dest_filename}${PLUGIN_URL_EXTENSION}")
+			set(PLUGIN_IMPORT_FILENAME "${dest_filename}${PLUGIN_URL_EXTENSION}")
 		else()
-			set(PLUGIN_DL_FILENAME "${PLUGIN_IMPORT_NAME}-${dest_filename}${PLUGIN_URL_EXTENSION}") 
+			set(PLUGIN_IMPORT_FILENAME "${PLUGIN_IMPORT_NAME}-${dest_filename}${PLUGIN_URL_EXTENSION}") 
 		endif()
 	elseif(NOT ${PLUGIN_URL_FILENAME} MATCHES "[0-9]")
 		dk_debug("The download filename ${PLUGIN_URL_FILENAME} does not contain any numbers to identify it's version")
 		dk_debug("Normally we would rename the downloaded filename to ${dest_filename}${PLUGIN_URL_EXTENSION}, but we'll let it pass.")
-# 		set(PLUGIN_DL_FILENAME "${dest_filename}${PLUGIN_URL_EXTENSION}")
-		set(PLUGIN_DL_FILENAME ${PLUGIN_URL_FILENAME})
+# 		set(PLUGIN_IMPORT_FILENAME "${dest_filename}${PLUGIN_URL_EXTENSION}")
+		set(PLUGIN_IMPORT_FILENAME ${PLUGIN_URL_FILENAME})
 	else()
-		set(PLUGIN_DL_FILENAME ${PLUGIN_URL_FILENAME})
+		set(PLUGIN_IMPORT_FILENAME ${PLUGIN_URL_FILENAME})
 	endif()
 	
-	dk_download("${PLUGIN_URL}" "${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}" NO_HALT)
-	dk_assertPath("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}") # "if the download file does not exist"
+	dk_download("${PLUGIN_URL}" "${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}" NO_HALT)
+	dk_assertPath("${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}") # "if the download file does not exist"
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${PLUGIN_URL_EXTENSION} STREQUAL "")
@@ -124,14 +124,14 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	endif()
 	# If the file type is unknown, we'll still try to extract it like a compressed file anyway
 	# It's better the have a chance at success.
-	dk_debug("The Downloaded file ${${PLUGIN_DL_FILENAME}} is a ${FILETYPE} file ${PLUGIN_URL_EXTENSION}")
+	dk_debug("The Downloaded file ${${PLUGIN_IMPORT_FILENAME}} is a ${FILETYPE} file ${PLUGIN_URL_EXTENSION}")
 	if(${FILETYPE} STREQUAL "UNKNOWN")
 		set(FILETYPE "Archive")
 		dk_debug("We will try to extract it in case it's an archive, but it may fail.")
 	endif()
 	if(${FILETYPE} STREQUAL "Archive")
 		#dk_todo("replace this section with dk _smartExtract() function")
-		dk_info("Extracting ${PLUGIN_DL_FILENAME}")
+		dk_info("Extracting ${PLUGIN_IMPORT_FILENAME}")
 		
 #		if(Android_Host)
 #			set(src_extractPath "$ENV{HOME}/dkdownload")
@@ -141,8 +141,8 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		#dk_delete(${PLUGIN_DL_DIR}/UNZIPPED NO_HALT)
 #		dk_delete(${src_extractPath} NO_HALT)
 		
-		#dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${PLUGIN_DL_DIR}/UNZIPPED)
-#		dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${src_extractPath} ${NO_HALT})
+		#dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME} ${PLUGIN_DL_DIR}/UNZIPPED)
+#		dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME} ${src_extractPath} ${NO_HALT})
 #		dk_copy("${src_extractPath}" "${PLUGIN_DIR}")
 
 #		# We either have a root folder in /UNZIPPED, or multiple files without a root folder
@@ -165,28 +165,28 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 #				dk_delete(${src_extractPath})
 #			endif() 
 #		endif()
-		dk_smartExtract("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}" "${PLUGIN_DIR}")
+		dk_smartExtract("${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}" "${PLUGIN_DIR}")
 
 	elseif(${FILETYPE} STREQUAL "Executable")
 		dk_chdir(${PLUGIN_DL_DIR})
 		dk_set(QUEUE_BUILD ON)
-		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}) # "dk_install():167")
+		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}) # "dk_install():167")
 		
 		if(${PLUGIN_URL_EXTENSION} STREQUAL ".pkg")
 			if(Mac_Host)
-				dk_exec(chmod 777 ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+				dk_exec(chmod 777 ${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME})
 				dk_depend(sudo)
-				dk_exec(${SUDO_EXE} -s installer -pkg ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} -target /)
+				dk_exec(${SUDO_EXE} -s installer -pkg ${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME} -target /)
 			endif()
 		else()
-			dk_exec(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+			dk_exec(${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME})
 		endif()
 	elseif(${FILETYPE} STREQUAL "BYPASS")
 		# (BYPASS) do nothing
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}) # "dk_install():181")
-		dk_copy(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${PLUGIN_DIR}/${PLUGIN_DL_FILENAME} OVERWRITE)
-		dk_debug("dk_copy(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${PLUGIN_DIR}/${PLUGIN_DL_FILENAME} OVERWRITE)")
+		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}) # "dk_install():181")
+		dk_copy(${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME} ${PLUGIN_DIR}/${PLUGIN_IMPORT_FILENAME} OVERWRITE)
+		dk_debug("dk_copy(${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME} ${PLUGIN_DIR}/${PLUGIN_IMPORT_FILENAME} OVERWRITE)")
 	endif()
 	
 	#string(FIND "${ARGN}" "PATCH" index)
@@ -204,7 +204,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	dk_fileWrite(${PLUGIN_DIR}/installed "${dest_filename} ")
 	
 	if(DELETE_DOWNLOADS) # conserve disk space 
-		dk_delete(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+		dk_delete(${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME})
 	endif()
 endfunction()
 

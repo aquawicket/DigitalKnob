@@ -112,7 +112,7 @@ function(dk_importVariables)
 # <CURRENT_PLUGIN>			- from <PLUGIN>									:ZLIB				: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
 # <PLUGIN>_DIR				- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
 # <PLUGIN>_URL				- from PLUGIN_URL								:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
-# <PLUGIN>_DL_FILE			- from PLUGIN_URL_FILENAME						:ZLIB_DL_FILE		: master.zip
+# <PLUGIN>_IMPORT_FILE			- from PLUGIN_URL_FILENAME						:ZLIB_IMPORT_FILE		: master.zip
 # <PLUGIN>_VERSION          - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
 # <PLUGIN>_FOLDER			- from PLUGIN_INSTALL_FOLDER					:ZLIB_FOLDER		: zlib-master
 # <PLUGIN>_IMPORT_NAME		- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
@@ -395,10 +395,10 @@ function(dk_importVariables)
 	dk_set($ENV{CURRENT_PLUGIN}_URL ${PLUGIN_URL})
 	dk_printVar($ENV{CURRENT_PLUGIN}_URL)									# ZLIB_URL: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
-	# <PLUGIN>_DL_FILE
-	dk_unset(${CURRENT_PLUGIN}_DL_FILE)
-	dk_set(${CURRENT_PLUGIN}_DL_FILE ${PLUGIN_URL_FILENAME})
-	dk_printVar(${CURRENT_PLUGIN}_DL_FILE)								# ZLIB_DL_FILE: master.zip
+	# <PLUGIN>_IMPORT_FILE
+	dk_unset(${CURRENT_PLUGIN}_IMPORT_FILE)
+	dk_set(${CURRENT_PLUGIN}_IMPORT_FILE ${PLUGIN_URL_FILENAME})
+	dk_printVar(${CURRENT_PLUGIN}_IMPORT_FILE)								# ZLIB_IMPORT_FILE: master.zip
 	
 	# <PLUGIN>_VERSION
 	dk_unset(${CURRENT_PLUGIN}_VERSION)

@@ -27,8 +27,8 @@ Windows_X86_64_Host_dk_set		(VSCODE_DL https://vscode.download.prss.microsoft.co
 
 dk_assertVar(VSCODE_DL)
 
-dk_basename(${VSCODE_DL} VSCODE_DL_FILE)
-dk_removeExtension(${VSCODE_DL_FILE} VSCODE_FOLDER)
+dk_basename(${VSCODE_DL} VSCODE_IMPORT_FILE)
+dk_removeExtension(${VSCODE_IMPORT_FILE} VSCODE_FOLDER)
 dk_convertToCIdentifier(${VSCODE_FOLDER} VSCODE_FOLDER)
 dk_toLower(${VSCODE_FOLDER} VSCODE_FOLDER)
 

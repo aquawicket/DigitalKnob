@@ -111,8 +111,8 @@ dk_set(VS	"${VS_INSTALL_PATH}/${VS_YEAR}/${VS_TYPE}")
 ###### INSTALL Visual Studio ######
 if(NOT EXISTS "${VS}")
 	dk_info("Installing Visual Studio ${VS_TYPE} ${VS_YEAR} ${VS_VERSION}. . .")
-	dk_basename(${VS_DL} VS_DL_FILE)
-	dk_download(${VS_DL} $ENV{DKDOWNLOAD_DIR}/${VS_DL_FILE})
+	dk_basename(${VS_DL} VS_IMPORT_FILE)
+	dk_download(${VS_DL} $ENV{DKDOWNLOAD_DIR}/${VS_IMPORT_FILE})
 	#dk_download(${VS_DL})
 	
 	# Visual Studio Installer Options
@@ -127,8 +127,8 @@ if(NOT EXISTS "${VS}")
 	# --quiet				- Prevents any user interface from being displayed
 	
 	
-	#execute_process(COMMAND cmd /c start /wait $ENV{DKDOWNLOAD_DIR}/${VS_DL_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall)
-	execute_process(COMMAND $ENV{DKDOWNLOAD_DIR}/${VS_DL_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall TIMEOUT 1)
+	#execute_process(COMMAND cmd /c start /wait $ENV{DKDOWNLOAD_DIR}/${VS_IMPORT_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall)
+	execute_process(COMMAND $ENV{DKDOWNLOAD_DIR}/${VS_IMPORT_FILE} ${VS_INSTALL_FLAG} ${VS_CACHE_FLAG} --cache --downloadThenInstall TIMEOUT 1)
 
 	### wait for vs_setup_bootstrapper.exe to exist in C:/windows/temp ###
 	while(NOT VS_SETUP_BOOTSTRAPPER_EXE)

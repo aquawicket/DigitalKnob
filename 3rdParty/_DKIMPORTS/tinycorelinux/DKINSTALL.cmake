@@ -19,8 +19,8 @@ dk_set(TINYCORELINUX $ENV{DKTOOLS_DIR}/TinyCoreLinux)
 if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 	dk_info("Installing tiny-core-linux . . .")
 	
-	dk_basename(${TINYCORELINUX_DL} TINYCORELINUX_DL_FILE)
-	dk_download(${TINYCORELINUX_DL} $ENV{DKDOWNLOAD_DIR}/${TINYCORELINUX_DL_FILE})
+	dk_basename(${TINYCORELINUX_DL} TINYCORELINUX_IMPORT_FILE)
+	dk_download(${TINYCORELINUX_DL} $ENV{DKDOWNLOAD_DIR}/${TINYCORELINUX_IMPORT_FILE})
 
 	##### EAMPLE with tinycorelinux #####
 	# cd into install directory
