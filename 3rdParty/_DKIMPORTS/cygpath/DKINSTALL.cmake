@@ -5,7 +5,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 message("cygpath/DKINSTALL.cmake")
-dk_validate(Host_Os "dk_HostOs()")
+dk_validate(Host_Os "dk_Host_Os()")
 ############ cygpath ############
 if(NOT Windows_Host)
 	dk_undepend(cygpath)

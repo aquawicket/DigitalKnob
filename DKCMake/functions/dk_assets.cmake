@@ -15,8 +15,8 @@ function(dk_assets plugin)
 	if(NOT DKAPP)
 		return()
 	endif()	
-	dk_getPathToPlugin(${plugin} plugin_path)
-	if(NOT plugin_path)
+	dk_getPathToPlugin(${plugin} Plugin_Path)
+	if(NOT Plugin_Path)
 		dk_fatal("${plugin} plugin not found")
 	endif()
 	dk_info("Importing ${plugin} assets...")
@@ -62,7 +62,7 @@ function(dk_assets plugin)
 		PATTERN emscripten EXCLUDE
 		PATTERN dktest EXCLUDE)
 	
-	file(COPY ${plugin_path} DESTINATION ${DK_Project_Dir}/assets ${ASSETS})
+	file(COPY ${Plugin_Path} DESTINATION ${DK_Project_Dir}/assets ${ASSETS})
 endfunction()
 
 

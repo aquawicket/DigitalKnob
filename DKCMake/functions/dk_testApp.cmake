@@ -12,13 +12,13 @@ include_guard()
 function(dk_testApp plugin_name)
 	dk_debugFunc()
 	
-	dk_getPathToPlugin(${plugin_name} plugin_path)
-	if(NOT EXISTS "${plugin_path}/test")
+	dk_getPathToPlugin(${plugin_name} Plugin_Path)
+	if(NOT EXISTS "${Plugin_Path}/test")
 		dk_info("dk_testApp(): ${plugin_name}_test app not found")
 		dk_return()
 	endif()
 	dk_info("building ${plugin_name}_test app")
-	dk_set(test_path "${plugin_path}/test")
+	dk_set(test_path "${Plugin_Path}/test")
 	
 	# Create CmakeLists.txt file
 	dk_delete("${test_path}/CMakeLists.txt")
