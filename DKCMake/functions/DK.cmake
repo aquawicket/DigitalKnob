@@ -2,6 +2,11 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include_guard()
 
+message("CMAKE_HOST_SYSTEM_NAME = ${CMAKE_HOST_SYSTEM_NAME}")
+message("\n############## ENVIRONMENT VARIABLES ###############")
+execute_process(COMMAND "${CMAKE_COMMAND}" "-E" "environment")
+message("####################################################\n")
+
 set(DK.cmake  ${CMAKE_PARENT_LIST_FILE} CACHE INTERNAL "")
 set(ENV{DK.cmake} ${DK.cmake})
 message("ENV{DKSCRIPT_PATH} = $ENV{DKSCRIPT_PATH}")

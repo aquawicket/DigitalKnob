@@ -21,13 +21,13 @@ if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGloba
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-    if defined Windows_Arm64_Host  set "GIT_DL=%GIT_DL_WIN_ARM64%"
-    if defined Windows_X86_Host    set "GIT_DL=%GIT_DL_WIN_X86%"
-    if defined Windows_X86_64_Host set "GIT_DL=%GIT_DL_WIN_X86_64%"
-    %dk_call% dk_assertVar GIT_DL
+    if defined Windows_Arm64_Host  set "GIT_IMPORT=%GIT_WIN_ARM64_IMPORT%"
+    if defined Windows_X86_Host    set "GIT_IMPORT=%GIT_WIN_X86_IMPORT%"
+    if defined Windows_X86_64_Host set "GIT_IMPORT=%GIT_WIN_X86_64_IMPORT%"
+    %dk_call% dk_assertVar GIT_IMPORT
     
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_importVariables %GIT_DL% NAME git ROOT %DKTOOLS_DIR%
+	%dk_call% dk_importVariables %GIT_IMPORT% NAME git ROOT %DKTOOLS_DIR%
 
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::### DO NOT USE GIT_DIR ###
@@ -45,8 +45,8 @@ if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGloba
     %dk_call% dk_echo   
     %dk_call% dk_echo "Installing git . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-    %dk_call% dk_download %GIT_DL% &::"%DKDOWNLOAD_DIR%"
-    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT%"
+    %dk_call% dk_download %GIT_IMPORT% &::"%DKDOWNLOAD_DIR%"
+    "%DKDOWNLOAD_DIR%\%GIT_IMPORT_FILE%" -y -o "%GIT%"
  
     if NOT exist "%GIT_EXE%" %dk_call% dk_error "cannot find git")
 %endfunction%

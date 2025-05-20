@@ -4,7 +4,8 @@ if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
-
+message("cygpath/DKINSTALL.cmake")
+dk_validate(Host_Os "dk_HostOs()")
 ############ cygpath ############
 if(NOT Windows_Host)
 	dk_undepend(cygpath)
@@ -12,6 +13,7 @@ if(NOT Windows_Host)
 endif()
 
 if(EXISTS "${CYGPATH_EXE}")
+	message("CYGPATH_EXE:'${CYGPATH_EXE}' already exists")
 	dk_return()
 endif()
 

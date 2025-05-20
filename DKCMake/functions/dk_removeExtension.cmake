@@ -11,9 +11,10 @@ include_guard()
 #	@ret_var			- TODO
 #   NO_HALT (optional)	- if one of the parameters is NO_HALT, dk_fatal() messages will not be displayed
 #
-function(dk_removeExtension path ret_var)
+function(dk_removeExtension)
 	dk_debugFunc()
 	
+	set(path "${ARGV0}")
 	dk_getParameter(NO_HALT)
 	
 	string(FIND ${path} "." includes REVERSE)
@@ -22,10 +23,17 @@ function(dk_removeExtension path ret_var)
 		dk_return()
 	endif()
 	
-	dk_getExtension("${path}" ext)
-	dk_replaceAll("${path}" "${ext}" "" removeExtension)
-	#string(SUBSTRING ${path} 0 ${includes} removeExtension)
-    set(${ret_var} ${removeExtension} PARENT_SCOPE)
+	dk_getExtension("${path}")
+	dk_replaceAll("${path}" "${dk_getExtension}" "" dk_removeExtension)
+	#string(SUBSTRING ${path} 0 ${includes} dk_removeExtension)
+	
+	### return ###
+    set(dk_removeExtension ${dk_removeExtension} PARENT_SCOPE)
+	
+	### rtn_var: OPTIONAL ###
+	if(ARGV1)
+		set(${ARGV1} ${dk_removeExtension} PARENT_SCOPE)
+	endif()
 endfunction()
 
 
@@ -36,6 +44,9 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	set(myPath "C:/Users/yourname/awsomeFile.txt")
-	dk_removeExtension("${myPath}" myPath)
-	dk_info("${myPath}")
+	dk_removeExtension("${myPath}")
+	dk_info("${dk_removeExtension}")
+	
+	dk_removeExtension("${myPath}" result)
+	dk_info("${result}")
 endfunction()

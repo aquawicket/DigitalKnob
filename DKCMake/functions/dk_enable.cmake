@@ -19,7 +19,7 @@ function(dk_enable plugin)
 			dk_convertToCIdentifier(${ARGV1} argv1_macro)   # In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
 			dk_define(HAVE_${argv1_macro})
 		else()
-			dk_set(${plugin} ON)
+			#dk_set(${plugin} ON)
 			dk_set(HAVE_${plugin} ON)
 			dk_convertToCIdentifier(${plugin} plugin_macro) # In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
 			dk_define(HAVE_${plugin_macro})

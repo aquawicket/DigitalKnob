@@ -11,10 +11,9 @@ function(dk_DKHOME_DIR)
 
 	###### SET ######
 	if(ARGV)
-		set(ENV{DKHOME_DIR} "${ARGV}")
+		dk_set(DKHOME_DIR "${ARGV}")
 		return()
 	endif()
-
 
 	###### GET ######
 	if(EXISTS "$ENV{DKHOME_DIR}")
@@ -22,24 +21,62 @@ function(dk_DKHOME_DIR)
 		return()
 	endif()
 
+	
+
+	########### CMD #############
+	if("${CMAKE_HOST_SYSTEM_NAME}" EQUAL "Windows")
+		file(TO_CMAKE_PATH "$ENV{USERPROFILE}" DKHOME_DIR)
+		dk_set(DKHOME_DIR "${DKHOME_DIR}")
+		return()
+	endif()
+	
+	########### MSYS ###########
+	set(CYGPATH_EXE "/usr/bin/cygpath.exe")
+	if(EXISTS "${CYGPATH_EXE}")
+		execute_process(COMMAND ${CYGPATH_EXE} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+		dk_set(DKHOME_DIR "${DKHOME_DIR}")
+		return()
+	endif()
+		
+	########### WSL ###########
+	if(EXISTS "${WSLPATH_EXE}")
+		execute_process(COMMAND ${WSLPATH_EXE} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+		dk_set(DKHOME_DIR "${DKHOME_DIR}")
+		return()
+	endif()
+
+	########### UNIX ############
+	file(REAL_PATH "~" DKHOME_DIR EXPAND_TILDE) # EXPAND_TILDE - Added in version 3.21.
+	dk_set(DKHOME_DIR "${DKHOME_DIR}")
+		
+
+	
+	
+	
+
+	
 #	###### CMD_EXE ######
 #	dk_validate(CMD_EXE "dk_CMD_EXE()")
 #	if(NOT EXISTS "${CMD_EXE}")
 #		dk_set(CMD_EXE "/mnt/c/Windows/System32/cmd.exe")
 #	endif()
+	
 #	if(NOT EXISTS "${CMD_EXE}")
 #		dk_warning("CMD_EXE:${CMD_EXE} not found")
 #	else()
-#		dk_set(CMD_EXE "${CMD_EXE}")				# Globalize the variable
+#		dk_set(CMD_EXE "${CMD_EXE}")
 #		dk_printVar(CMD_EXE)
-#		set(ENV{CMD_EXE} "${CMD_EXE}")				# Set Environment Varible
-#		dk_printVar(ENV{CMD_EXE})
 #	endif()
 
 #	###### CYGPATH_EXE ######
 #	if(NOT EXISTS "${CYGPATH_EXE}")
-#		if(CMD_EXE)
+#		if(EXISTS "/usr/bin/cygpath.exe")
+#			dk_set(CYGPATH_EXE "/usr/bin/cygpath.exe")
+#		endif()
+#	endif()
+#	if(CMD_EXE)
 #			execute_process(COMMAND where /R C:\\Users\\Administrator cygpath.exe OUTPUT_VARIABLE CYGPATH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+#			dk_printVar(CYGPATH_EXE)
 #		endif()
 #	endif()
 #	if(NOT EXISTS "${CYGPATH_EXE}")
@@ -72,42 +109,23 @@ function(dk_DKHOME_DIR)
 
 #	dk_validate(CMD_EXE "dk_CMD_EXE()")
 
-	###### DKHOME_DIR ######
-#	if(NOT EXISTS "$ENV{DKHOME_DIR}")
-#		dk_debug("setting DKHOME_DIR from environment variable ENV{DKHOME_DIR}:$ENV{DKHOME_DIR}")
-#		set(DKHOME_DIR "$ENV{DKHOME_DIR}")
-#	endif()
 
 #	if(NOT EXISTS "$ENV{DKHOME_DIR}")
-#		if(CYGPATH_EXE)
-#			dk_debug("setting DKHOME_DIR from CYGPATH of %USERPROFILE%")
-#			execute_process(COMMAND ${CYGPATH_EXE} -u "$ENV{DKHOME_DIR}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
-#		elseif(WSLPATH_EXE)
-#			dk_debug("setting DKHOME_DIR from WSLPATH of %USERPROFILE%")
-#			execute_process(COMMAND ${WSLPATH_EXE} -u "$ENV{DKHOME_DIR}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
-#		elseif(CMD_EXE)
-#			dk_nativePath("${CMD_EXE}" CMD_EXE)	
-#			dk_debug("setting DKHOME_DIR from CMD_EXE of %USERPROFILE%")
-#			execute_process(COMMAND ${CMD_EXE} /c "echo %USERPROFILE%" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
-#		else()
-#			dk_debug("setting DKHOME_DIR from CMAKE NATIVE PATH of %USERPROFILE%")
-#			execute_process(COMMAND ${CMD_EXE} /c "echo %USERPROFILE%" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
-#			#cmake_path(NATIVE_PATH DKHOME_DIR NORMALIZE DKHOME_DIR)
-#			dk_nativePath("$ENV{DKHOME_DIR}" DKHOME_DIR)
-#			set(ENV{DKHOME_DIR} $ENV{DKHOME_DIR})
-#		endif()
+#		file(REAL_PATH "~" DKHOME_DIR EXPAND_TILDE) # EXPAND_TILDE - Added in version 3.21.
+#		dk_set(DKHOME_DIR "${DKHOME_DIR}")
 #	endif()
-
-	if(NOT EXISTS "$ENV{DKHOME_DIR}")
-		file(REAL_PATH "~" DKHOME_DIR EXPAND_TILDE) # EXPAND_TILDE - Added in version 3.21.
-		set(ENV{DKHOME_DIR} ${DKHOME_DIR})
-	endif()
+	
 #	if(NOT EXISTS "$ENV{DKHOME_DIR}")
 #		set(ENV{DKHOME_DIR} "$ENV{USERPROFILE}")
 #	endif()
 #	if(NOT EXISTS "$ENV{DKHOME_DIR}")
 #		set(ENV{DKHOME_DIR} "$ENV{HOME}")
 #	endif()
+	
+	if(EXISTS ${DKHOME_DIR})
+		dk_printVar(DKHOME_DIR)
+		dk_set(DKHOME_DIR "${DKHOME_DIR}")
+	endif()
 	
 	if(NOT EXISTS "$ENV{DKHOME_DIR}")
 		dk_fatal("ENV{DKHOME_DIR}:$ENV{DKHOME_DIR} not found")

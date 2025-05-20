@@ -21,6 +21,7 @@ dk_DKHOME_DIR() {
     [ -e "${DKHOME_DIR-}" ] 	&& return 0 	# already exists
     	
 	###### CMD_EXE ######
+	echo "###### CMD_EXE ######"
 	[ ! -e "${CMD_EXE-}" ]		&& export CMD_EXE=$(command -v cmd.exe) || $(true)
 	[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE="C:/Windows/System32/cmd.exe"
 	[ ! -e "${CMD_EXE}" ]		&& unset CMD_EXE
@@ -43,7 +44,8 @@ dk_DKHOME_DIR() {
 	### DKHOME_DIR ###
 #	[ ! -e "${DKHOME_DIR-}" ]   && [ -e "$(grep -o "/storage/....-...." /proc/mounts)" ] && export DKHOME_DIR=$(grep -o "/storage/....-...." /proc/mounts) # Android sdcard
 	[ ! -e "${DKHOME_DIR-}" ] 	&& export DKHOME_DIR="${HOME}"
-	[ ! -e "${DKHOME_DIR}" ] 	&& 	dk_call dk_fatal "DKHOME_DIR not found"
+	[   -e "${DKHOME_DIR-}" ]	&& dk_call dk_printVar DKHOME_DIR
+	[ ! -e "${DKHOME_DIR}" ] 	&& dk_call dk_fatal "DKHOME_DIR not found"
 
 	true
 }

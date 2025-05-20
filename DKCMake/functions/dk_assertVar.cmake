@@ -13,14 +13,32 @@ function(dk_assertVar)
 	dk_debugFunc(1)
 	set(variable ${ARGV0})
 	
+	###### Scoped Variable ######
 	if(NOT DEFINED ${variable})
-		dk_echo("\n\n${bg_red}Assertion failed: at ${variable}${clr}")
-		
-		if("${var}")
-			dk_fatal("${bg_red}${white} { \"${var}\" : \"${${var}}\" } ${clr}")
-		else()
-			dk_fatal("${bg_red}${white} ${variable} ${clr}")
+		dk_echo("\n\n${bg_red}${white}Variable Assertion${clr}")
+		dk_fatal("${variable} not defined")
+	endif()
+	
+	###### Global Variable ######
+	if(DEFINED CACHE{${variable}})
+		if(NOT "${${variable}}" STREQUAL "$CACHE{${variable}}")	### Do {variable} and CACHE{variable} match ?
+			dk_echo("\n\n${bg_red}${white}Variable Assertion${clr}")
+			dk_fatal("${variable}:'${${variable}}' != CACHE:${variable}:'$CACHE{${variable}}'")
 		endif()
+	#else()
+	#	dk_echo("\n\n${bg_red}${white}Variable Assertion${clr}")
+	#	dk_fatal("CACHE:${variable} not defined")
+	endif()
+	
+	###### Global Environment Variable ######
+	if(DEFINED ENV{${variable}})
+		if(NOT "${${variable}}" STREQUAL "$ENV{${variable}}")	### Do {variable} and ENV{variable} match ?
+			dk_echo("\n\n${bg_red}${white}Variable Assertion${clr}")
+			dk_fatal("${variable}:'${${variable}}' != ENV:${variable}:'$ENV{${variable}}'")
+		endif()
+	#else()
+	#	dk_echo("\n\n${bg_red}${white}Variable Assertion${clr}")
+	#	dk_fatal("ENV:${variable} not defined")
 	endif()
 endfunction()
 
@@ -33,5 +51,13 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_assertVar(todo) # TODO
+	set(varA "varA_value")
+	dk_assertVar(varA)
+	
+	set(varB "varB_value" CACHE INTERNAL "")
+	dk_assertVar(varB)
+	
+	dk_set(varC "varC_value")
+	dk_assertVar(varC)
+
 endfunction()

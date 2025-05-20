@@ -81,3 +81,7 @@ if(NOT SH_EXE)
 	set(SH_EXE sh CACHE INTERNAL "")
 	dk_warning("SH_EXE is not found. setting SH_EXE to 'sh'")
 endif()
+
+
+
+#execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE SH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)

@@ -3,19 +3,24 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ###############################################################################
-# dk_toLower(str, rtn_var)
+# dk_toLower(<str> <rtn_var:OPTIONAL>)
 #
 #	Convert a string to lower case
 #
-#	<str>   	- The input string to convert
-#	<rtn_var>	- Returns the converted output string
+#	<str>   		- The input string to convert
+#	<dk_toLower>	- Returns the converted output string
 #
-function(dk_toLower str rtn_var)
-	dk_debugFunc()
+function(dk_toLower)
+	dk_debugFunc(1 2)
 	
-	string(TOLOWER "${str}" toLower)
-	#dk_printVar(toLower)
-	set(${rtn_var} "${toLower}" PARENT_SCOPE)
+	set(str "${ARGV0}")
+	string(TOLOWER "${str}" dk_toLower)
+	set(dk_toLower "${dk_toLower}" PARENT_SCOPE)
+	
+	# return_var: OPTIONAL
+	if(ARGV1)
+		set(${ARGV1} ${dk_toLower} PARENT_SCOPE)
+	endif()
 endfunction()
 
 
@@ -27,8 +32,12 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	# Can't handle these characters yet->    [ ] \ ' . / ~ " ? < >
-	set(myVar "a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0 ` - = ; , ! @ # $ % ^ & * ( ) _ + { } | :")
-	dk_toLower("${myVar}" lower)
-	dk_info("lower = ${lower}")
+#    (ALL_Chars "a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0   ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~")
+set(Valid_Chars "a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0   !   # $ % & ' ( ) * + , - . / : ; < = > ? @ [   ] ^ _ ` { | } ~")
+#(Invalid_Chars "																			     								                 "                                           \			      ")
+	
+	message("     myVar = ${myVar}") 
+	dk_toLower("${myVar}")
+	message("dk_toLower = ${dk_toLower}")
+
 endfunction()
