@@ -1,16 +1,16 @@
-@echo off&rem  ########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG"
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-rem  #################################################################################################################################################
-
-%dk_call% dk_echo "############################################################################"
-%dk_call% dk_echo "###################### Linux_Arm32_Gcc_Toolchain.cmake #####################"
-%dk_call% dk_echo "############################################################################"
-rem # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
+::@echo off&rem  ########################################## DigitalKnob DKBatch ########################################################################
+::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG"
+::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::######################################################################################################################################################
 
 if(NOT Linux_Host)
-	%dk_call% dk_exit
+	%return%
 )
+
+%dk_call% dk_echo "############################################################################"
+%dk_call% dk_echo "###################### Linux_Arm32_Gcc_Toolchain.cmd #####################"
+%dk_call% dk_echo "############################################################################"
+rem # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 
 rem %dk_call% dk_depend build-essential)
 %dk_call% dk_depend gcc)

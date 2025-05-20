@@ -1,15 +1,15 @@
-@echo off&rem  ########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG"
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-rem  #################################################################################################################################################
-
-%dk_call% dk_echo "############################################################################"
-%dk_call% dk_echo "################### Windows_X86_Clang_Toolchain.cmake ######################"
-%dk_call% dk_echo "############################################################################"
+::@echo off&rem  ########################################## DigitalKnob DKBatch ########################################################################
+::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG"
+::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::######################################################################################################################################################
 
 if not defined Windows_Host (
-	%dk_call% dk_exit
+	%return%
 )
+
+%dk_call% dk_echo "############################################################################"
+%dk_call% dk_echo "################### Windows_X86_Clang_Toolchain.cmd ######################"
+%dk_call% dk_echo "############################################################################"
 
 %dk_call% dk_validate 			MSYS2 						"%dk_call% dk_depend msys2"
 %dk_call% dk_depend 			clang

@@ -19,9 +19,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_info "##################################################################"
 	%dk_call% dk_echo
 
+	%dk_call% dk_validate Host_Os "%dk_call% dk_Host_Os"
+	%dk_call% dk_assertVar Host_Os
+	
 	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	set "TARGET_PATH=%DKCPP_APPS_DIR%/%Target_App%"
-	if not exist "%TARGET_PATH%/%Target_Tuple%" (%dk_call% dk_mkdir "%TARGET_PATH%\%Target_Tuple%")
+	set "Target_Path=%DKCPP_APPS_DIR%/%Target_App%"
+	if not exist "%Target_Path%/%Target_Tuple%" (%dk_call% dk_mkdir "%Target_Path%\%Target_Tuple%")
 	
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
 	set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
@@ -32,14 +35,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "DKLINK=Static"
 
 	set "CMAKE_ARGS="
-	if /i "%Target_Type%" equ "Debug"		(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
-	if /i "%Target_Type%" equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	if /i "%Target_Type%" equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	if /i "%Target_Type%"  equ "Debug"		(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
+	if /i "%Target_Type%"  equ "Release"	(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	if /i "%Target_Type%"  equ "All"		(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
 	if /i "%Target_Level%" equ "Build"		(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
 	if /i "%Target_Level%" equ "Rebuild"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
 	if /i "%Target_Level%" equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
-	if /i "%DKLINK%" equ "Static"			(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
-	if /i "%DKLINK%" equ "Shared"			(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
+	if /i "%DKLINK%" 	   equ "Static"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
+	if /i "%DKLINK%"       equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
 	::if "%Target_Tuple%==emscripten" 		(%dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON)
 
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
@@ -73,11 +76,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if /i "%Target_Tuple%" equ "Windows_Arm64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64)
 	if /i "%Target_Tuple%" equ "Windows_x86_Clang"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32)
 	if /i "%Target_Tuple%" equ "Windows_x86_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32)
-	if /i "%Target_Tuple%" equ "Windows_x86_64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64)
+::	if /i "%Target_Tuple%" equ "Windows_x86_64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64)
 	if /i "%Target_Tuple%" equ "Windows_x86_64_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64)
 	if /i "%Target_Tuple%" equ "Windows_x86_64_Ucrt"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64)
 
-	if /i "%Target_Tuple%" equ "Ios_Arm32_Clang"		(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Ios_Arm32_Clang"		(set "MULTI_CONFIG=1")
 	if /i "%Target_Tuple%" equ "Ios_Arm64_Clang"		(set "MULTI_CONFIG=1")
 	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set "MULTI_CONFIG=1")
 	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set "MULTI_CONFIG=1")
@@ -113,7 +116,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if /i "%Target_Tuple%" equ "Android_X86_Clang"		(set CMAKE_GENERATOR="Unix Makefiles")
 	if /i "%Target_Tuple%" equ "Android_X86_64_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
 	if /i "%Target_Tuple%" equ "Emscripten_X86_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
-	if /i "%Target_Tuple%" equ "Ios_Arm32_Clang"		(set CMAKE_GENERATOR="Xcode")
+::	if /i "%Target_Tuple%" equ "Ios_Arm32_Clang"		(set CMAKE_GENERATOR="Xcode")
 	if /i "%Target_Tuple%" equ "Ios_Arm64_Clang"		(set CMAKE_GENERATOR="Xcode")
 	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set CMAKE_GENERATOR="Xcode")
 	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set CMAKE_GENERATOR="Xcode")
@@ -140,22 +143,31 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if /i "%Target_Tuple%" equ "Windows_X86_Gcc"		(set CMAKE_GENERATOR="MinGW Makefiles")
 	if /i "%Target_Tuple%" equ "Windows_X86_Msvc"		(set CMAKE_GENERATOR="Visual Studio 17 2022" -A Win32)
 	if /i "%Target_Tuple%" equ "Windows_X86_64"			(set CMAKE_GENERATOR="MinGW Makefiles")
-	if /i "%Target_Tuple%" equ "Windows_X86_64_Clang"	(set CMAKE_GENERATOR="MinGW Makefiles")
+::	if /i "%Target_Tuple%" equ "Windows_X86_64_Clang"	(set CMAKE_GENERATOR="MinGW Makefiles")
 	if /i "%Target_Tuple%" equ "Windows_X86_64_Gcc"		(set CMAKE_GENERATOR="MinGW Makefiles")
 	if /i "%Target_Tuple%" equ "Windows_X86_64_Msvc"	(set CMAKE_GENERATOR="Visual Studio 17 2022" -A x64)
 	if /i "%Target_Tuple%" equ "Windows_X86_64_Ucrt"	(set CMAKE_GENERATOR="MinGW Makefiles")
+	
+	
+	:: 	###### DKBATCH_TOOLCHAIN ######
+	%dk_call% dk_set DKBATCH_TOOLCHAIN %DKBATCH_DIR%/toolchains/%Target_Tuple%_Toolchain.cmd
+ 	%dk_call% dk_assertPath %DKBATCH_TOOLCHAIN%
+echo call %DKBATCH_TOOLCHAIN:/=\%
+	call %DKBATCH_TOOLCHAIN:/=\%
+
+::  %dk_call% dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
+::  if exist %TOOLCHAIN% (%dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%)
+
+	if not defined CMAKE_GENERATOR (
+		%dk_call% dk_notice "CMAKE_GENERATOR invalid for %Target_Tuple%. skipping..."
+		%return%
+	)
+	
 	%dk_call% dk_assertVar CMAKE_GENERATOR
 	%dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%
 
-:: ###### CMAKE_TOOLCHAIN_FILE ######
-:: %dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%Target_Tuple%_toolchain.cmake"
-:: %dk_call% dk_assertPath TOOLCHAIN
-:: %dk_call% dk_printVar TOOLCHAIN
-:: %dk_call% dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
-:: if exist %TOOLCHAIN% (%dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%)
-
-:: ###### WSL CMake Fix ######
-:: if defined WSLENV; then 
+::  ###### WSL CMake Fix ######
+::  if defined WSLENV; then 
 ::		%dk_call% dk_chdir "$DKCMAKE_DIR"
 ::		set -- "$@" "."
 ::	fi

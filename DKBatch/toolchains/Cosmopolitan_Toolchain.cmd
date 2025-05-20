@@ -1,10 +1,10 @@
-@echo off&rem  ########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG"
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-rem  #################################################################################################################################################
+::@echo off&rem  ########################################## DigitalKnob DKBatch ########################################################################
+::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG"
+::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::######################################################################################################################################################
 
 %dk_call% dk_echo "############################################################################"
-%dk_call% dk_echo "##################### Cosmopolitan_Toolchain.cmake #########################"
+%dk_call% dk_echo "##################### Cosmopolitan_Toolchain.cmd #########################"
 %dk_call% dk_echo "############################################################################"
 
 %dk_call% 						dk_depend 						cosmopolitan
@@ -36,7 +36,7 @@ rem  %dk_call% dk_append 		CMAKE_EXE_LINKER_FLAGS			-static  &rem  -s)
 
 %dk_call% dk_validate 			%DKIMPORTS_DIR%					"dk_DKIMPORTS_DIR"
 rem  %dk_call% dk_append 		DKCMAKE_FLAGS
-rem	-DCMAKE_USER_MAKE_RULES_OVERRIDE=$%DKIMPORTS_DIR%/Cosmopolitan/cosmopolitan_user_make_rules_override.cmake
+rem	-DCMAKE_USER_MAKE_RULES_OVERRIDE=$%DKIMPORTS_DIR%/Cosmopolitan/cosmopolitan_user_make_rules_override.cmd
 rem -DCMAKE_C_COMPILER_WORKS=1
 rem	-DCMAKE_CXX_COMPILER_WORKS=1
 	
@@ -59,7 +59,7 @@ rem	-DCMAKE_CXX_COMPILER_WORKS=1
 rem %dk_call% dk_set 			CMAKE_LINKER						
 rem %dk_call% dk_set 			CMAKE_MAKE_PROGRAM					
 %dk_call% dk_set 				CMAKE_RANLIB					"%Cosmopolitan%/tool/cosmocc/bin/cosmoranlib"
-%dk_call% dk_set 				CMAKE_USER_MAKE_RULES_OVERRIDE 	"%DKIMPORTS_DIR%/Cosmopolitan/cosmopolitan_user_make_rules_override.cmake"
+%dk_call% dk_set 				CMAKE_USER_MAKE_RULES_OVERRIDE 	"%DKIMPORTS_DIR%/Cosmopolitan/cosmopolitan_user_make_rules_override.cmd"
 
 
 
