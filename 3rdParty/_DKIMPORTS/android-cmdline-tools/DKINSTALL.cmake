@@ -34,9 +34,9 @@ elseif(Linux_Host)
 endif()
 
 # 8512546
-#WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-8512546_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
+#Windows_Host_dk_import(https://dl.google.com/android/repository/commandlinetools-win-8512546_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
 #Mac_Host_dk_import(https://dl.google.com/android/repository/commandlinetools-mac-8512546_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
-#LINUX_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
+#Linux_Host_dk_import(https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
 
 
 dk_set(SDKMANAGER_BAT ${ANDROID_CMDLINE_TOOLS}/bin/sdkmanager.bat)

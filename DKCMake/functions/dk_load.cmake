@@ -97,7 +97,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 		#dk_verbose("${fn}_file = ${${fn}_file}")
 		file(READ ${${fn}_file} ${fn}_contents)
 				
-		## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_, MAC_X86_64_dk_, dk_
+		## Match text that contains *dk_*( 		I.E.  Windows_Host_dk_, MAC_X86_64_dk_, dk_
 		string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_matches "${${fn}_contents}")
 		unset(${fn}_contents)
 		list(REMOVE_DUPLICATES ${fn}_matches)
@@ -109,7 +109,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 				
 			#dk_verbose("item-in = ${${fn}_item}")
 				
-			## remove any prefix to dk_*( 		I.E.  WIN_HOST_dk_  becomes dk_
+			## remove any prefix to dk_*( 		I.E.  Windows_Host_dk_  becomes dk_
 			string(REGEX MATCH "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_item ${${fn}_item})
 			#dk_verbose("item-out = ${${fn}_item}")
 				
@@ -164,7 +164,7 @@ endmacro()
 function(dk_parseFunctionsAndLoadFromString str)
 	#dk_echo("dk_debugFunc()") #dk_debugFunc()
 	
-	## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_function(,  MAC_X86_64_dk_function(  or  dk_function(
+	## Match text that contains *dk_*( 		I.E.  Windows_Host_dk_function(,  MAC_X86_64_dk_function(  or  dk_function(
 	string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" matches "${str}")
 	unset(str)
 	list(REMOVE_DUPLICATES matches)
@@ -175,7 +175,7 @@ function(dk_parseFunctionsAndLoadFromString str)
 				
 		#dk_verbose("item-in = ${item}")
 				
-		## remove any prefix to dk_*( 		I.E.  WIN_HOST_dk_  becomes dk_
+		## remove any prefix to dk_*( 		I.E.  Windows_Host_dk_  becomes dk_
 		string(REGEX MATCH "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" item ${item})
 		#dk_verbose("item-out = ${item}")
 				

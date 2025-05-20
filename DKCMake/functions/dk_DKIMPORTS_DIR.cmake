@@ -11,12 +11,12 @@ function(dk_DKIMPORTS_DIR)
 
 	###### SET ######
 	if(ARGN)
-		dk_set(ENV{DKIMPORTS_DIR} "${ARGN}")
+		dk_set(DKIMPORTS_DIR "${ARGN}")
 
 	###### GET ######
 	else()
 		dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
-		dk_set(ENV{DKIMPORTS_DIR} "$ENV{DK3RDPARTY_DIR}/_DKIMPORTS")
+		dk_set(DKIMPORTS_DIR "$ENV{DK3RDPARTY_DIR}/_DKIMPORTS")
 	endif()
 endfunction()
 

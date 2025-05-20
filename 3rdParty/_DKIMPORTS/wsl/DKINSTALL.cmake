@@ -12,7 +12,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://learn.microsoft.com/en-us/windows/wsl/install-manual
 
 
-#WIN_HOST_dk_command(wsl --install)
+#Windows_Host_dk_command(wsl --install)
 
 if(EXISTS "${WSL_EXE}")
 	dk_return()

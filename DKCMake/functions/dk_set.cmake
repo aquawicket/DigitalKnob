@@ -55,7 +55,7 @@ function(DKTEST)
 	dk_set(myVariableA "String Value of myVariableA")
 #	dk_echo("myVariableA = ${myVariableA}")
 
-#	dk_set(ENV{myVariableB} "String Value of myVariableB")
+#	dk_set(myVariableB "String Value of myVariableB")
 #	dk_echo("ENV{myVariableB} = $ENV{myVariableB}")
 
 #	dk_set(CACHE{myVariableC} "String Value of myVariableC")
@@ -64,7 +64,7 @@ function(DKTEST)
 #	dk_set(myVariableA "String Value of myVariableA2")
 #	dk_echo("myVariableA = ${myVariableA}")
 	
-#	dk_set(ENV{myVariableB} "String Value of myVariableB2")
+#	dk_set(myVariableB "String Value of myVariableB2")
 #	dk_echo("ENV{myVariableB} = $ENV{myVariableB}")
 
 #	dk_set(CACHE{myVariableC} "String Value of myVariableC2")

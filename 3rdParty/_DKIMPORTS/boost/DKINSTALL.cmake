@@ -132,7 +132,7 @@ dk_set(BOOST_CMAKE -DBOOST_ROOT=${BOOST_DIR} -DBOOST_LIBRARYDIR=${BOOST_TUPLE_DI
 dk_chdir(${BOOST_DIR})
 if(MSVC)
 	if(NOT EXISTS ${BOOST_DIR}/b2.exe)
-		WIN_HOST_dk_queueCommand(${BOOST_DIR}/bootstrap.bat vc143)
+		Windows_Host_dk_queueCommand(${BOOST_DIR}/bootstrap.bat vc143)
 	endif()
 else()
 	if(NOT EXISTS ${BOOST_DIR}/b2)

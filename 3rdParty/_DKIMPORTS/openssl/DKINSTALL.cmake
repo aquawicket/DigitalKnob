@@ -206,12 +206,12 @@ dk_build(${OPENSSL})
 # https://slproweb.com/products/Win32OpenSSL.html
 # https://slproweb.com/download/Win64OpenSSL-3_0_4.exe
 ### INSTALL ###
-# WIN_HOST_dk_set(OPENSSL_BINARY "${ProgramFiles}/OpenSSL-Win64")
-# WIN_HOST_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/bin/openssl.exe)
+# Windows_Host_dk_set(OPENSSL_BINARY "${ProgramFiles}/OpenSSL-Win64")
+# Windows_Host_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/bin/openssl.exe)
 # Mac_Host_dk_set(OPENSSL_BINARY /usr/bin)
 # Mac_Host_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/openssl)
-# LINUX_HOST_dk_set(OPENSSL_BINARY /usr/bin)
-# LINUX_HOST_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/openssl)
+# Linux_Host_dk_set(OPENSSL_BINARY /usr/bin)
+# Linux_Host_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/openssl)
 # if(NOT EXISTS ${OPENSSL_BINARY_EXE})
 # 	dk_info("Installing openssl_binary")
 # 	if(Windows_Host)	

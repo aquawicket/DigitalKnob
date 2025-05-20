@@ -9,8 +9,8 @@ dk_load(dk_builder)
 # https://terminator-gtk3.readthedocs.io/en/latest/
 
 
-#LINUX_HOST_dk_chdir(/usr)
+#Linux_Host_dk_chdir(/usr)
 dk_depend(sudo)
-#LINUX_HOST_dk_command(${SUDO_EXE} apt -y install terminator) #FIXME sudo needed
+#Linux_Host_dk_command(${SUDO_EXE} apt -y install terminator) #FIXME sudo needed
 #Mac_Host_dk_command(brew install terminator)
 dk_installPackage(terminator)

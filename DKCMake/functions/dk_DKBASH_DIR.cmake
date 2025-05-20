@@ -11,7 +11,7 @@ function(dk_DKBASH_DIR)
 
 	###### SET ######
 	if(ARGN)
-		dk_set(ENV{DKBASH_DIR} "${ARGN}")
+		dk_set(DKBASH_DIR "${ARGN}")
 
 	###### GET ######
 	else()

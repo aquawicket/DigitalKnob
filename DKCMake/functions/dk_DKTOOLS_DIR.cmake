@@ -11,12 +11,12 @@ function(dk_DKTOOLS_DIR)
 
 	###### SET ######
 	if(ARGN)
-		dk_set(ENV{DKTOOLS_DIR} "${ARGN}")
+		dk_set(DKTOOLS_DIR "${ARGN}")
 
 	###### GET ######
 	else()
 		dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
-		dk_set(ENV{DKTOOLS_DIR} "$ENV{DIGITALKNOB_DIR}/DKTools")
+		dk_set(DKTOOLS_DIR "$ENV{DIGITALKNOB_DIR}/DKTools")
 	endif()
 
 	if(NOT EXISTS "$ENV{DKTOOLS_DIR}") 
