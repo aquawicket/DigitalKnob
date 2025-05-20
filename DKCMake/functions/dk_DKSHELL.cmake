@@ -52,7 +52,8 @@ function(dk_DKSHELL)
 	
 	elseif("$ENV{PATHEXT}" MATCHES ";.CPL")
 		#message("POWERSHELL")
-		execute_process(COMMAND powershell -c Write-Host "(Get-Process -Id $pid).Path" OUTPUT_VARIABLE DKSHELL_PATH)
+		execute_process(COMMAND powershell -c Write-Host "(Get-Process -Id $pid).Path" OUTPUT_VARIABLE DKSHELL_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
+		file(TO_CMAKE_PATH "${DKSHELL_PATH}" DKSHELL_PATH)
 
 	elseif(DEFINED ENV{BASH})
 		#message("BASH")

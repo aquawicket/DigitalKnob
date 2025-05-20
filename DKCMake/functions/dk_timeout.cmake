@@ -1,4 +1,11 @@
 #!/usr/bin/cmake -P
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
@@ -18,8 +25,12 @@ function(dk_timeout)
 	endif()
 	dk_assertVar(seconds)
 
-	if("${CMAKE_HOST_SYSTEM_NAME}" EQUAL "Windows")
-		###### CMD ######
+	#if("${CMAKE_HOST_SYSTEM_NAME}" EQUAL "Windows")
+	
+	dk_DKSHELL()
+	
+	###### CMD ######
+	if("${DKSHELL}" STREQUAL "CMD")
 		dk_validate(CMD_EXE "dk_depend(cmd)")
 		if(EXISTS "${CMD_EXE}")
 			dk_validate(TIMEOUT_EXE "dk_TIMEOUT_EXE()")
@@ -29,8 +40,10 @@ function(dk_timeout)
 			execute_process(COMMAND "${CMD_EXE}" /c "${command}")
 			return()
 		endif()
+	endif()
 		
-		###### POWERSHELL ######
+	###### POWERSHELL ######
+	if("${DKSHELL}" STREQUAL "POWERSHELL")
 		dk_validate(POWERSHELL_EXE "dk_depend(powershell)")
 		if(EXISTS "${POWERSHELL_EXE}")
 			set(command "Write-Host 'Waiting for ${seconds} seconds, press a key to continue ..'; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }")
@@ -40,24 +53,29 @@ function(dk_timeout)
 			return()
 		endif()
 	endif()
+	
 	###### BASH ######
-	dk_validate(BASH_EXE "dk_depend(bash)")
-	if(EXISTS "${BASH_EXE}")
-		set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\n\"")
-		message("\nBASH_EXE = ${BASH_EXE}")
-		message("BASH> ${command}")
-		execute_process(COMMAND "${BASH_EXE}" -c ${command})
-		return()
+	if("${DKSHELL}" STREQUAL "BASH")
+		dk_validate(BASH_EXE "dk_depend(bash)")
+		if(EXISTS "${BASH_EXE}")
+			set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\n\"")
+			message("\nBASH_EXE = ${BASH_EXE}")
+			message("BASH> ${command}")
+			execute_process(COMMAND "${BASH_EXE}" -c ${command})
+			return()
+		endif()
 	endif()
 	
 	###### SH ######
-	dk_validate(SH_EXE "dk_depend(sh)")
-	if(SH_EXE)
-		set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
-		message("\nSH_EXE = ${SH_EXE}")
-		message("SH> ${command}")
-		execute_process(COMMAND "${SH_EXE}" -c ${command})
-		return()
+	if("${DKSHELL}" STREQUAL "SH")
+		dk_validate(SH_EXE "dk_depend(sh)")
+		if(SH_EXE)
+			set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
+			message("\nSH_EXE = ${SH_EXE}")
+			message("SH> ${command}")
+			execute_process(COMMAND "${SH_EXE}" -c ${command})
+			return()
+		endif()
 	endif()
 	
 	dk_fatal("dk_pause() failed:  cant find CMD, BASH, SH OR POWERSHELL")

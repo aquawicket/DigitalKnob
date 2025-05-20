@@ -14,6 +14,7 @@ include_guard()
 function(dk_removeExtension)
 	dk_debugFunc()
 	
+	set(dk_removeExtension ${ARGV0} PARENT_SCOPE) # Allow the input variable to pass through in case of failure
 	set(path "${ARGV0}")
 	dk_getParameter(NO_HALT)
 	
