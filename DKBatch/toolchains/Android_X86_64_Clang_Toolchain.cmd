@@ -3,12 +3,14 @@
 ::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
 ::######################################################################################################################################################
 
+:: FIXME
+%return%
+
+
 %dk_call% dk_echo "#####################################################################"
 %dk_call% dk_echo "################ Android_X86_64_Clang_Toolchain.cmd ###############"
 %dk_call% dk_echo "#####################################################################"
 rem # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
-
-%return%
 
 rem  %dk_call% dk_validate 	ANDROID_NDK						"%dk_call% dk_depend android-ndk"
 %dk_call% dk_set 			ANDROID_ABI						x86_64

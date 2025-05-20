@@ -15,11 +15,12 @@ if not defiend Windows_Host (
 ::%dk_call% dk_depend 			gcc
 
 %dk_call% dk_set 				MSYSTEM 				UCRT64
-::%dk_call% dk_prependEnvPath 	"!%MSYSTEM%_BIN!"
-
 %dk_call% dk_set 				SINGLE_CONFIG			1
 %dk_call% dk_prependArgs 		CMAKE_ARGS 				-DMSYSTEM=UCRT64
 %dk_call% dk_set 				CMAKE_GENERATOR			"MinGW Makefiles"
+
+::%dk_call% dk_prependEnvPath 	"!%MSYSTEM%_BIN!"
+
 ::%dk_call% dk_set 				CMAKE_MAKE_PROGRAM 		"!%MSYSTEM%_BIN!/mingw32-make.exe"
 ::%dk_call% dk_set 				CMAKE_C_COMPILER		"!%MSYSTEM%_BIN!/gcc.exe"
 ::%dk_call% dk_set 				CMAKE_CXX_COMPILER 		"!%MSYSTEM%_BIN!/g++.exe"

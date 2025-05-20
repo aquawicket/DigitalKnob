@@ -77,8 +77,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if /i "%Target_Tuple%" equ "Windows_x86_Clang"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32)
 	if /i "%Target_Tuple%" equ "Windows_x86_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32)
 ::	if /i "%Target_Tuple%" equ "Windows_x86_64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64)
-	if /i "%Target_Tuple%" equ "Windows_x86_64_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64)
-	if /i "%Target_Tuple%" equ "Windows_x86_64_Ucrt"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64)
+::	if /i "%Target_Tuple%" equ "Windows_x86_64_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64)
+::	if /i "%Target_Tuple%" equ "Windows_x86_64_Ucrt"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64)
 
 ::	if /i "%Target_Tuple%" equ "Ios_Arm32_Clang"		(set "MULTI_CONFIG=1")
 	if /i "%Target_Tuple%" equ "Ios_Arm64_Clang"		(set "MULTI_CONFIG=1")
@@ -144,9 +144,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if /i "%Target_Tuple%" equ "Windows_X86_Msvc"		(set CMAKE_GENERATOR="Visual Studio 17 2022" -A Win32)
 	if /i "%Target_Tuple%" equ "Windows_X86_64"			(set CMAKE_GENERATOR="MinGW Makefiles")
 ::	if /i "%Target_Tuple%" equ "Windows_X86_64_Clang"	(set CMAKE_GENERATOR="MinGW Makefiles")
-	if /i "%Target_Tuple%" equ "Windows_X86_64_Gcc"		(set CMAKE_GENERATOR="MinGW Makefiles")
+::	if /i "%Target_Tuple%" equ "Windows_X86_64_Gcc"		(set CMAKE_GENERATOR="MinGW Makefiles")
 	if /i "%Target_Tuple%" equ "Windows_X86_64_Msvc"	(set CMAKE_GENERATOR="Visual Studio 17 2022" -A x64)
-	if /i "%Target_Tuple%" equ "Windows_X86_64_Ucrt"	(set CMAKE_GENERATOR="MinGW Makefiles")
+::	if /i "%Target_Tuple%" equ "Windows_X86_64_Ucrt"	(set CMAKE_GENERATOR="MinGW Makefiles")
 	
 	
 	:: 	###### DKBATCH_TOOLCHAIN ######
