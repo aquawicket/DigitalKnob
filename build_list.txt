@@ -2,7 +2,7 @@
 HelloWorld		Android 		Arm32		Clang		Debug
 HelloWorld		Android 		Arm64 		Clang		Debug
 HelloWorld		Android 		X86 		Clang		Debug
-HelloWorld		Android 		X86_64 		Clang		Debug
+# HelloWorld	Android 		X86_64 		Clang		Debug
 HelloWorld		Cosmopolitan							Debug
 HelloWorld		Emscripten 		X86 		Clang		Debug
 HelloWorld		Ios 			Arm32 		Clang		Debug
@@ -48,7 +48,7 @@ HelloWorld		Windows 		X86_64 		Ucrt		Debug	#FIXME: Change to WIN X86_64 GCC UCRT
 DKCore 			Android 		Arm32 		Clang		Debug
 DKCore 			Android 		Arm64 		Clang 		Debug
 DKCore 			Android 		X86 		Clang		Debug
-DKCore 			Android 		X86_64 		Clang 		Debug
+# DKCore 		Android 		X86_64 		Clang 		Debug
 # DKCore 		Cosmopolitan 							Debug
 DKCore 			Emscripten 		X86 		Clang		Debug
 DKCore			Ios 			Arm32 		Clang		Debug
@@ -94,8 +94,8 @@ DKCore 			Windows 		X86_64 		Ucrt 		Debug	#FIXME: Change to Windows X86_64 Gcc U
 DKJavascript 	Android 		Arm32 		Clang		Debug
 DKJavascript 	Android 		Arm64 		Clang 		Debug
 DKJavascript 	Android 		X86 		Clang		Debug
-DKJavascript 	Android 		X86_64 		Clang 		Debug
-# DKJavascript 	Cosmopolitan 							Debug
+# DKJavascript 	Android 		X86_64 		Clang 		Debug
+# DKJavascript	Cosmopolitan 							Debug
 DKJavascript 	Emscripten 		X86 		Clang		Debug
 DKJavascript	Ios 			Arm32 		Clang		Debug
 DKJavascript	Ios 			Arm64 		Clang		Debug
@@ -140,7 +140,7 @@ DKJavascript 	Windows 		X86_64 		Ucrt 		Debug	#FIXME: Change to WIN X86_64 GCC U
 DKSDL 			Android 		Arm32 		Clang		Debug
 DKSDL 			Android 		Arm64 		Clang 		Debug
 DKSDL 			Android 		X86 		Clang		Debug
-DKSDL 			Android 		X86_64 		Clang 		Debug
+# DKSDL 		Android 		X86_64 		Clang 		Debug
 # DKSDL 		Cosmopolitan 				Debug
 # DKSDL 		Emscripten 		X86 		Clang		Debug
 DKSDL			Ios 			Arm32 		Clang		Debug
@@ -186,7 +186,7 @@ DKSDL 			Windows 		X86_64 		Ucrt 		Debug	#FIXME: Change to WIN X86_64 GCC UCRT64
 DKSDLRml 		Android 		Arm32 		Clang		Debug
 DKSDLRml 		Android 		Arm64 		Clang 		Debug
 DKSDLRml 		Android 		X86		 	Clang		Debug
-DKSDLRml 		Android 		X86_64 		Clang 		Debug
+# DKSDLRml 		Android 		X86_64 		Clang 		Debug
 # DKSDLRml 		Cosmopolitan 							Debug
 # DKSDLRml 		Emscripten 		X86 		Clang		Debug
 DKSDLRml		Ios 			Arm32 		Clang		Debug

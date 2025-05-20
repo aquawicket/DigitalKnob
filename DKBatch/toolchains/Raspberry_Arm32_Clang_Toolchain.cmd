@@ -1,0 +1,22 @@
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+::#################################################################################################################################################
+
+message("############################################################################")
+message("################### Raspberry_Arm32_Clang_Toolchain.cmake ##################")
+message("############################################################################")
+
+if(NOT Raspberry_Host)
+	dk_exit()
+endif()
+
+#dk_depend(build-essential)
+dk_depend(clang)
+dk_depend(make)
+	
+dk_append(CMAKE_C_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
+dk_append(CMAKE_CXX_FLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
+#dk_append(DKCONFIGURE_CFLAGS		-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l 
+#dk_append(DKCONFIGURE_CXXFLAGS		-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
+#dk_append(CMAKE_EXE_LINKER_FLAGS	-static) # -s)
