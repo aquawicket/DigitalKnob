@@ -33,17 +33,20 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_assertPath DKSCRIPT_DIR
 	
 	%dk_call% dk_unset dk_pickUpdate
-	%dk_call% dk_unset Target_App
-	%dk_call% dk_unset Target_Tuple
 	%dk_call% dk_unset Target_Type
+	%dk_call% dk_unset Target_Tuple
+	%dk_call% dk_unset Target_Env
+	%dk_call% dk_unset Target_Arch
+	%dk_call% dk_unset Target_Os
+	%dk_call% dk_unset Target_App
 
 	::set "BUILD_LIST_FILE=%DKCACHE_DIR%/build_list.txt"
 	:while_loop
 		if exist "%BUILD_LIST_FILE%" (
-			%dk_call% dk_fileToMatrix "%BUILD_LIST_FILE%" BUILD_LIST
+			%dk_call% dk_fileToMatrix "%BUILD_LIST_FILE%" BUILD_MATRIX
 			if not defined _line_ (set /a _line_=0)
 			:skipTarget
-			call set "comment_check=%%BUILD_LIST[!_line_!][0]%%"
+			call set "comment_check=%%BUILD_MATRIX[!_line_!][0]%%"
 			if "!comment_check:~0,1!" equ "#" (
 				rem echo skipping _line_ . . .
 				set /a _line_+=1
@@ -56,13 +59,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			rem Example win_x86 mac ios iossim	=	Windows_X86_Host's will skip all instaces of mac, ios and iossim
 
 
-			if defined BUILD_LIST[!_line_!][0] (
+			if defined BUILD_MATRIX[!_line_!][0] (
 				set "dk_pickUpdate=1"
-				call set "Target_App=%%BUILD_LIST[!_line_!][0]%%"
-				call set "Target_Os=%%BUILD_LIST[!_line_!][1]%%"
-				call set "Target_Arch=%%BUILD_LIST[!_line_!][2]%%"
-				call set "Target_Env=%%BUILD_LIST[!_line_!][3]%%"
-				call set "Target_Type=%%BUILD_LIST[!_line_!][4]%%"
+				call set "Target_App=%%BUILD_MATRIX[!_line_!][0]%%"
+				call set "Target_Os=%%BUILD_MATRIX[!_line_!][1]%%"
+				call set "Target_Arch=%%BUILD_MATRIX[!_line_!][2]%%"
+				call set "Target_Env=%%BUILD_MATRIX[!_line_!][3]%%"
+				call set "Target_Type=%%BUILD_MATRIX[!_line_!][4]%%"
 				set /a _line_+=1
 			) else (
 				set "BUILD_LIST_FILE="
@@ -75,8 +78,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if not defined Target_Arch		%dk_call% dk_Target_Arch		& goto :while_loop
 		if not defined Target_Env		%dk_call% dk_Target_Env			& goto :while_loop
 		if not defined Target_Type		%dk_call% dk_Target_Type		& goto :while_loop
-		if not defined Target_Tuple		%dk_call% dk_Target_Tuple
+		if not defined Target_Tuple		%dk_call% dk_Target_Tuple		& goto :while_loop
 
+
+		echo pickUpdate   = %pickUpdate%
+		echo Target_App   = %Target_App%
+		echo Target_Os    = %Target_Os%
+		echo Target_Arch  = %Target_Arch%
+		echo Target_Env   = %Target_Env%
+		echo Target_Type  = %Target_Type%
+		echo Target_Tuple = %Target_Tuple%
+		
+		
 		:: save selections to DKBuilder.cache file
 		%dk_call% dk_echo "creating DKBuilder.cache..."
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
@@ -90,10 +103,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_generate
 		%dk_call% dk_buildApp
 
+	
 		%dk_call% dk_unset dk_pickUpdate
 		%dk_call% dk_unset Target_App
-		%dk_call% dk_unset Target_Tuple
+		%dk_call% dk_unset Target_Os
+		%dk_call% dk_unset Target_Arch
+		%dk_call% dk_unset Target_Env
 		%dk_call% dk_unset Target_Type
+		%dk_call% dk_unset Target_Tuple
+		
 	goto while_loop
 %endfunction%
 

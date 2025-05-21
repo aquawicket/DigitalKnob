@@ -3,8 +3,9 @@
 ::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
 ::######################################################################################################################################################
 
-if nor defined Raspberry_Host (
-	%return%
+if not defined Raspberry_Host (
+	set "CMAKE_GENERATOR="
+	exit /b 0
 )
 
 %dk_call% dk_echo "############################################################################"

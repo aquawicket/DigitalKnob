@@ -4,7 +4,8 @@
 ::#################################################################################################################################################
 
 if not defined Mac_Host (
-	%return%
+	set "CMAKE_GENERATOR="
+	exit /b 0
 )
 
 %dk_call% dk_echo "##########################################################################"
@@ -15,9 +16,9 @@ if not defined Mac_Host (
 ::%dk_call% dk_depend make
 	
 %dk_call% dk_set  MULTI_CONFIG					1
-%dk_call% dk_set  CMAKE_GENERATOR				"Xcode"	
-::%dk_call% dk_set CMAKE_TOOLCHAIN_FILE			"%IOS_TOOLCHAIN_FILE%"
+%dk_call% dk_set  CMAKE_GENERATOR				"Xcode"
 
+rem  %dk_call% dk_set CMAKE_TOOLCHAIN_FILE		"%IOS_TOOLCHAIN_FILE%"
 rem  %dk_call% dk_append CMAKE_C_FLAGS			-DIOS -DIOS_ARM32 -std=c17 -x objective-c
 rem  %dk_call% dk_append CMAKE_CXX_FLAGS		-DIOS -DIOS_ARM32 -std=c++17 -x objective-c++
 rem  %dk_call% dk_append DKCONFIGURE_FLAGS		--host arm-apple-%IOS_DARWIN%

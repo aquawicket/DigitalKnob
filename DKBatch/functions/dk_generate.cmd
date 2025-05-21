@@ -109,7 +109,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined SINGLE_CONFIG							(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%/%Target_Type%")
 	%dk_call% dk_assertVar CMAKE_BINARY_DIR
 	%dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
-
+	set "CMAKE_GENERATOR="
+	
 	if /i "%Target_Tuple%" equ "Cosmopolitan"			(set CMAKE_GENERATOR="MSYS Makefiles")
 	if /i "%Target_Tuple%" equ "Android_Arm32_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
 	if /i "%Target_Tuple%" equ "Android_Arm64_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
