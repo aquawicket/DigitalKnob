@@ -22,7 +22,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar Target_Type
 	if "%Target_Type%" equ "All"		%dk_call% dk_buildAll
 	if "%Target_Type%" equ "Release"	%dk_call% dk_buildRelease
-pause
 	if "%Target_Type%" equ "Debug"		%dk_call% dk_buildDebug
 
 	%dk_call% dk_echo

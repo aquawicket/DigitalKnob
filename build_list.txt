@@ -3,7 +3,7 @@ HelloWorld		Android 		Arm32			Clang		Debug
 HelloWorld		Android 		Arm64 			Clang		Debug
 HelloWorld		Android 		X86 			Clang		Debug
 HelloWorld		Android 		X86_64 			Clang		Debug
-HelloWorld		Cosmopolitan								Debug
+HelloWorld		Cosmo			X86			Cosmo		Debug
 HelloWorld		Emscripten 		X86 			Clang		Debug
 HelloWorld		Ios 			Arm32 			Clang		Debug
 HelloWorld		Ios 			Arm64 			Clang		Debug

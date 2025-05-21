@@ -14,23 +14,39 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_title "Generating %Target_App% - %Target_Tuple% - %Target_Type%"
 	%dk_call% dk_echo
-	%dk_call% dk_info "##################################################################"
-	%dk_call% dk_info "	  Generating %Target_App% - %Target_Tuple% - %Target_Type%"
-	%dk_call% dk_info "##################################################################"
+	%dk_call% dk_echo "##################################################################"
+	%dk_call% dk_echo "	  Generating %Target_App% - %Target_Tuple% - %Target_Type%"
+	%dk_call% dk_echo "##################################################################"
 	%dk_call% dk_echo
 
+	::###### DKBATCH_TOOLCHAIN ######
+	%dk_call% dk_set DKBATCH_TOOLCHAIN %DKBATCH_DIR%/toolchains/%Target_Tuple%_Toolchain.cmd
+ 	%dk_call% dk_assertPath %DKBATCH_TOOLCHAIN%
+	call "%DKBATCH_TOOLCHAIN:/=\%"
+
+	if not defined CMAKE_GENERATOR (
+		%dk_call% dk_notice "CMAKE_GENERATOR invalid for %Target_Tuple%. skipping..."
+		exit /b 0
+	)
+	
+	
+	::############ Host_Os ############
 	%dk_call% dk_validate Host_Os "%dk_call% dk_Host_Os"
 	%dk_call% dk_assertVar Host_Os
 	
+	::############ Target_Path ############
 	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	set "Target_Path=%DKCPP_APPS_DIR%/%Target_App%"
+	
+	::############ Create Debug / Release Folder ############
 	if not exist "%Target_Path%/%Target_Tuple%" (%dk_call% dk_mkdir "%Target_Path%\%Target_Tuple%")
 	
+	::############ set CMAKE Variables ###########
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
 	set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
 	set "CMAKE_TARGET_PATH=%TARGET_PATH%"
 
-	::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
+	::############ Create CMAKE_ARGS array ############
 	set "Target_Level=RebuildAll"
 	set "DKLINK=Static"
 
@@ -45,6 +61,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if /i "%DKLINK%"       equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
 	::if "%Target_Tuple%==emscripten" 		(%dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON)
 
+	::############ DKCMAKE_FUNCTIONS_DIR_ ############
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
 	set "DKCMAKE_FUNCTIONS_DIR_=!DKCMAKE_FUNCTIONS_DIR_:\=/!"   
 	%dk_call% dk_appendArgs CMAKE_ARGS -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
@@ -66,32 +83,32 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_appendArgs CMAKE_ARGS --warn-unused-vars
 	::%dk_call% dk_appendArgs CMAKE_ARGS --check-system-vars
 
-	if /i "%Target_Tuple%" equ "Cosmopolitan"			(%dk_call% dk_prependArgs CMAKE_ARGS -DCOSMOPOLITAN=1)
-	if /i "%Target_Tuple%" equ "Windows_Arm64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64)
-	if /i "%Target_Tuple%" equ "Windows_X86_Clang"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32)
-	if /i "%Target_Tuple%" equ "Windows_X86_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32)
-	if /i "%Target_Tuple%" equ "Windows_X86_64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64)
-	if /i "%Target_Tuple%" equ "Windows_X86_64_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64)
-	if /i "%Target_Tuple%" equ "Windows_X86_64_Ucrt"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64)
-	if /i "%Target_Tuple%" equ "Windows_Arm64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64)
-	if /i "%Target_Tuple%" equ "Windows_x86_Clang"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32)
-	if /i "%Target_Tuple%" equ "Windows_x86_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32)
+	::if /i "%Target_Tuple%" equ "Cosmopolitan"			(%dk_call% dk_prependArgs CMAKE_ARGS -DCOSMOPOLITAN=1)
+	::if /i "%Target_Tuple%" equ "Windows_Arm64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64)
+	::if /i "%Target_Tuple%" equ "Windows_X86_Clang"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32)
+	::if /i "%Target_Tuple%" equ "Windows_X86_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32)
+	::if /i "%Target_Tuple%" equ "Windows_X86_64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64)
+	::if /i "%Target_Tuple%" equ "Windows_X86_64_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64)
+	::if /i "%Target_Tuple%" equ "Windows_X86_64_Ucrt"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64)
+	::if /i "%Target_Tuple%" equ "Windows_Arm64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64)
+	::if /i "%Target_Tuple%" equ "Windows_x86_Clang"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32)
+	::if /i "%Target_Tuple%" equ "Windows_x86_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32)
 ::	if /i "%Target_Tuple%" equ "Windows_x86_64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64)
 ::	if /i "%Target_Tuple%" equ "Windows_x86_64_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64)
 ::	if /i "%Target_Tuple%" equ "Windows_x86_64_Ucrt"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64)
 
 ::	if /i "%Target_Tuple%" equ "Ios_Arm32_Clang"		(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Ios_Arm64_Clang"		(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Mac_X86_Clang"			(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Mac_X86_64_Clang"		(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Windows_Arm64_Msvc"		(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Windows_X86_Msvc"		(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Windows_X86_64_Msvc"	(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Windows_Arm64_Msvc"		(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Windows_x86_Msvc"		(set "MULTI_CONFIG=1")
-	if /i "%Target_Tuple%" equ "Windows_x86_64_Msvc"	(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Ios_Arm64_Clang"		(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Mac_X86_Clang"			(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Mac_X86_64_Clang"		(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Windows_Arm64_Msvc"		(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Windows_X86_Msvc"		(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Windows_X86_64_Msvc"	(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Windows_Arm64_Msvc"		(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Windows_x86_Msvc"		(set "MULTI_CONFIG=1")
+::	if /i "%Target_Tuple%" equ "Windows_x86_64_Msvc"	(set "MULTI_CONFIG=1")
 	if not defined MULTI_CONFIG							(set "SINGLE_CONFIG=1")
 
 	if /i "%Target_Tuple%" equ "Linux_Arm32_Clang"		(set "WSL_EXE=wsl")
@@ -109,7 +126,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined SINGLE_CONFIG							(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%/%Target_Type%")
 	%dk_call% dk_assertVar CMAKE_BINARY_DIR
 	%dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
-	set "CMAKE_GENERATOR="
 	
 ::	if /i "%Target_Tuple%" equ "Cosmopolitan"			(set CMAKE_GENERATOR="MSYS Makefiles")
 ::	if /i "%Target_Tuple%" equ "Android_Arm32_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
@@ -148,17 +164,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	if /i "%Target_Tuple%" equ "Windows_X86_64_Gcc"		(set CMAKE_GENERATOR="MinGW Makefiles")
 ::	if /i "%Target_Tuple%" equ "Windows_X86_64_Msvc"	(set CMAKE_GENERATOR="Visual Studio 17 2022" -A x64)
 ::	if /i "%Target_Tuple%" equ "Windows_X86_64_Ucrt"	(set CMAKE_GENERATOR="MinGW Makefiles")
-	
-	
-	::###### DKBATCH_TOOLCHAIN ######
-	%dk_call% dk_set DKBATCH_TOOLCHAIN %DKBATCH_DIR%/toolchains/%Target_Tuple%_Toolchain.cmd
- 	%dk_call% dk_assertPath %DKBATCH_TOOLCHAIN%
-	call %DKBATCH_TOOLCHAIN:/=\%
-
-	if not defined CMAKE_GENERATOR (
-		%dk_call% dk_notice "CMAKE_GENERATOR invalid for %Target_Tuple%. skipping..."
-		exit /b 0
-	)
 	
 	%dk_call% dk_assertVar CMAKE_GENERATOR
 	%dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%

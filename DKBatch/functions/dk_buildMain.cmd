@@ -33,12 +33,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_assertPath DKSCRIPT_DIR
 	
 	%dk_call% dk_unset dk_pickUpdate
-	%dk_call% dk_unset Target_Type
-	%dk_call% dk_unset Target_Tuple
-	%dk_call% dk_unset Target_Env
-	%dk_call% dk_unset Target_Arch
-	%dk_call% dk_unset Target_Os
 	%dk_call% dk_unset Target_App
+	%dk_call% dk_unset Target_Os
+	%dk_call% dk_unset Target_Arch
+	%dk_call% dk_unset Target_Env
+	%dk_call% dk_unset Target_Tuple
+	%dk_call% dk_unset Target_Type
 
 	::set "BUILD_LIST_FILE=%DKCACHE_DIR%/build_list.txt"
 	:while_loop
@@ -80,16 +80,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if not defined Target_Type		%dk_call% dk_Target_Type		& goto :while_loop
 		if not defined Target_Tuple		%dk_call% dk_Target_Tuple		& goto :while_loop
 
-
-		echo pickUpdate   = %pickUpdate%
-		echo Target_App   = %Target_App%
-		echo Target_Os    = %Target_Os%
-		echo Target_Arch  = %Target_Arch%
-		echo Target_Env   = %Target_Env%
-		echo Target_Type  = %Target_Type%
-		echo Target_Tuple = %Target_Tuple%
-		
-		
 		:: save selections to DKBuilder.cache file
 		%dk_call% dk_echo "creating DKBuilder.cache..."
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
@@ -103,7 +93,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_generate
 		%dk_call% dk_buildApp
 
-	
 		%dk_call% dk_unset dk_pickUpdate
 		%dk_call% dk_unset Target_App
 		%dk_call% dk_unset Target_Os

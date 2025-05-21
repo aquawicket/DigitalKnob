@@ -3,11 +3,11 @@ if not defined Windows_Host (
 	exit /b 0
 )
 %dk_call% dk_echo "############################################################################"
-%dk_call% dk_echo "################## Windows_X86_64_Msvc_Toolchain.cmd #######################"
+%dk_call% dk_echo "################## Windows_Arm64_Msvc_Toolchain.cmd #######################"
 %dk_call% dk_echo "############################################################################"
 
 %dk_call% dk_set  MULTI_CONFIG		1
-(set CMAKE_GENERATOR="Visual Studio 17 2022" -A x64)
+(set CMAKE_GENERATOR="Visual Studio 17 2022" -A Arm64)
 
 
 
