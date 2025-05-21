@@ -70,7 +70,7 @@ function(dk_Target_Env)
 	
 	
 	###### VALIDATE RESULT ######
-	if(Clang)
+		if(Clang)
 	elseif(Gcc)
 	elseif(Msvc)
 	elseif(Ucrt)

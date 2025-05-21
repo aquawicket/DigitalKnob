@@ -77,7 +77,7 @@ function(dk_Target_Os)
 	
 	
 	###### VALIDATE RESULT ######
-	if(Android)
+		if(Android)
 	elseif(Emscripten)
 	elseif(Ios)
 	elseif(Iossim)

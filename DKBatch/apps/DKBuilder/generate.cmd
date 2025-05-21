@@ -14,9 +14,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### DKBATCH_TOOLCHAIN ######
 	%dk_call% dk_set DKBATCH_TOOLCHAIN %DKBATCH_DIR%/toolchains/%Target_Tuple%_Toolchain.cmd
- 	%dk_call% dk_assertPath %DKBATCH_TOOLCHAIN%
+ 	if not exist "%DKBATCH_TOOLCHAIN%" (
+		%dk_call% dk_notice "%DKBATCH_TOOLCHAIN% not found. skipping..."
+		%dk_call% dk_unset CMAKE_GENERATOR
+		exit /b 0
+	)
 	%dk_call% "%DKBATCH_TOOLCHAIN:/=\%"
-
 	if not defined CMAKE_GENERATOR (
 		%dk_call% dk_notice "CMAKE_GENERATOR invalid for %Target_Tuple%. skipping..."
 		exit /b 0

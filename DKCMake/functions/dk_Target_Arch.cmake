@@ -70,8 +70,9 @@ function(dk_Target_Arch)
 	
 	
 	###### VALIDATE RESULT ######
-	if(Arm32)
+		if(Arm32)
 	elseif(Arm64)
+	elseif(Cosmo)
 	elseif(X86)
 	elseif(X86_64)
 	else()

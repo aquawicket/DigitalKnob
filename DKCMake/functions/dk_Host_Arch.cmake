@@ -57,11 +57,11 @@ function(dk_Host_Arch)
 	
 	
 	###### VALIDATE RESULT ######
-	if(Arm32_Host)
+		if(Arm32_Host)
 	elseif(Arm64_Host)
 	elseif(X86_Host)
 	elseif(X86_64_Host)
-	elseif(Cosmopolitan_Host)
+	elseif(Cosmo_Host)
 	else()
 		dk_fatal("Host_Arch:'${Host_Arch}' is INVALID!")
 	endif()

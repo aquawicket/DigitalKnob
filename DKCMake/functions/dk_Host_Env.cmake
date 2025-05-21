@@ -34,9 +34,13 @@ function(dk_Host_Env)
 
 
 	###### VALIDATE RESULT ######
-	if(Msys_Host)
+		if(Android_Host)
+	elseif(Linux_Host)
+	elseif(Mac_Host)
 	elseif(MinGW_Host)
 	elseif(Msvc_Host)
+	elseif(Msys_Host)
+	elseif(Raspberry_Host)
 	elseif(Windows_Host)
 	else()
 		dk_fatal("Host_Env:'${Host_Env}' is INVALID!")

@@ -32,45 +32,36 @@ include_guard()
 ## 
 ## TEST: lets make a quick test the can be called from any shell, at any subshell level, and gets the correct path.
 ## Eventually we can expand on this class and add support for url's, xpaths, php, etc.
-## Side note: maybe we can expand on dk_realpath to additionallu meet these requirements.
+## Side note: maybe we can expand on dk_realpath to additionally meet these requirements.
 
 ###############################################################################
 # dk_DKSHELL()
 #
 #
 function(dk_DKSHELL)
-	#dk_debugFunc()
+	dk_debugFunc(0)
+	
 	#execute_process(COMMAND dk_polyglot OUTPUT_VARIABLE RAW_ECHO)
 	#message(STATUS "RAW_ECHO = ${RAW_ECHO}")
+	
 	dk_unset(DKSHELL)
 	dk_unset(DKSHELL_PATH)
 	
-	#message(STATUS "PROMPT = $ENV{PROMPT}")
 	if("$ENV{PROMPT}" STREQUAL "\$P\$G")
-		#message("CMD")
-		dk_set(DKSHELL_PATH "$ENV{ComSpec}")
-	
+		set(DKSHELL_PATH "$ENV{ComSpec}")
 	elseif("$ENV{PATHEXT}" MATCHES ";.CPL")
-		#message("POWERSHELL")
 		execute_process(COMMAND powershell -c Write-Host "(Get-Process -Id $pid).Path" OUTPUT_VARIABLE DKSHELL_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
 		file(TO_CMAKE_PATH "${DKSHELL_PATH}" DKSHELL_PATH)
-
 	elseif(DEFINED ENV{BASH})
-		#message("BASH")
-		dk_set(DKSHELL_PATH "$ENV{BASH}")
-	
+		set(DKSHELL_PATH "$ENV{BASH}")
 	elseif(DEFINED ENV{SHELL})
 		if("$ENV{SHELL}" MATCHES "/bash")
-			#message("BASH")
 		elseif("$ENV{SHELL}" MATCHES "/sh")
-			#message("SH")
 		else()
 			message("UNKNOWN")
 		endif()
-		dk_set(DKSHELL_PATH "$ENV{SHELL}")
-		
+		set(DKSHELL_PATH "$ENV{SHELL}")
 	else()
-		
 		dk_fatal("dk_DKSHELL(): Could not determine shell type")
 	endif()
 	
@@ -79,11 +70,8 @@ function(dk_DKSHELL)
 	dk_basename("${DKSHELL_PATH}")
 	dk_removeExtension("${dk_basename}")
 	dk_toUpper("${dk_removeExtension}")
-	dk_set(DKSHELL "${dk_toUpper}")
+	set(DKSHELL "${dk_toUpper}")
 
-	#dk_printVar(DKSHELL)
-	#dk_printVar(DKSHELL_PATH)
-	
 	set(DKSHELL "${DKSHELL}" PARENT_SCOPE)
 endfunction()
 
@@ -96,18 +84,17 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	### CMD ###
+	### Run in CMD terminal ###
 # 	C:/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake.exe -P C:/Users/Administrator/digitalknob/Development/DKCMake/functions/dk_DKSHELL.cmake
 	
-	### POWERSHELL ###
+	### Run in POWERSHELL terminal ###
 # 	C:/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake.exe -P C:/Users/Administrator/digitalknob/Development/DKCMake/functions/dk_DKSHELL.cmake
 	
-	### SH ###
+	### Run in SH terminal ###
 # 	cd /c/Users/Administrator/digitalknob/Development/DKCMake/functions && ./dk_DKSHELL.cmake
 	
-	### BASH ###
+	### Run in BASH terminal ###
 # 	cd /c/Users/Administrator/digitalknob/Development/DKCMake/functions && ./dk_DKSHELL.cmake
-	
 	
 	dk_DKSHELL()
 	message("DKSHELL = ${DKSHELL}")
