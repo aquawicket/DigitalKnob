@@ -83,87 +83,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_appendArgs CMAKE_ARGS --warn-unused-vars
 	::%dk_call% dk_appendArgs CMAKE_ARGS --check-system-vars
 
-	::if /i "%Target_Tuple%" equ "Cosmopolitan"			(%dk_call% dk_prependArgs CMAKE_ARGS -DCOSMOPOLITAN=1)
-	::if /i "%Target_Tuple%" equ "Windows_Arm64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64)
-	::if /i "%Target_Tuple%" equ "Windows_X86_Clang"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32)
-	::if /i "%Target_Tuple%" equ "Windows_X86_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32)
-	::if /i "%Target_Tuple%" equ "Windows_X86_64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64)
-	::if /i "%Target_Tuple%" equ "Windows_X86_64_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64)
-	::if /i "%Target_Tuple%" equ "Windows_X86_64_Ucrt"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64)
-	::if /i "%Target_Tuple%" equ "Windows_Arm64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64)
-	::if /i "%Target_Tuple%" equ "Windows_x86_Clang"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32)
-	::if /i "%Target_Tuple%" equ "Windows_x86_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32)
-::	if /i "%Target_Tuple%" equ "Windows_x86_64_Clang"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64)
-::	if /i "%Target_Tuple%" equ "Windows_x86_64_Gcc"		(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64)
-::	if /i "%Target_Tuple%" equ "Windows_x86_64_Ucrt"	(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64)
+	if not defined MULTI_CONFIG		(set "SINGLE_CONFIG=1")
 
-::	if /i "%Target_Tuple%" equ "Ios_Arm32_Clang"		(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Ios_Arm64_Clang"		(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Mac_X86_Clang"			(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Mac_X86_64_Clang"		(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Windows_Arm64_Msvc"		(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Windows_X86_Msvc"		(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Windows_X86_64_Msvc"	(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Windows_Arm64_Msvc"		(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Windows_x86_Msvc"		(set "MULTI_CONFIG=1")
-::	if /i "%Target_Tuple%" equ "Windows_x86_64_Msvc"	(set "MULTI_CONFIG=1")
-	if not defined MULTI_CONFIG							(set "SINGLE_CONFIG=1")
-
-	if /i "%Target_Tuple%" equ "Linux_Arm32_Clang"		(set "WSL_EXE=wsl")
-	if /i "%Target_Tuple%" equ "Linux_Arm32_Gcc"		(set "WSL_EXE=wsl")
-	if /i "%Target_Tuple%" equ "Linux_Arm64_Clang"		(set "WSL_EXE=wsl")
-	if /i "%Target_Tuple%" equ "Linux_Arm64_Gcc"		(set "WSL_EXE=wsl")
-	if /i "%Target_Tuple%" equ "Linux_X86_Clang"		(set "WSL_EXE=wsl")
-	if /i "%Target_Tuple%" equ "Linux_X86_Gcc"			(set "WSL_EXE=wsl")
-	if /i "%Target_Tuple%" equ "Linux_X86_64_Clang"		(set "WSL_EXE=wsl")
-	if /i "%Target_Tuple%" equ "Linux_X86_64_Gcc"		(set "WSL_EXE=wsl")
+	if /i "%Target_Os%" equ "Linux"	(set "WSL_EXE=wsl")
 
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
 
-	if defined MULTI_CONFIG								(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%")
-	if defined SINGLE_CONFIG							(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%/%Target_Type%")
+	if defined MULTI_CONFIG			(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%")
+	if defined SINGLE_CONFIG		(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%/%Target_Type%")
+	
 	%dk_call% dk_assertVar CMAKE_BINARY_DIR
 	%dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
-	
-::	if /i "%Target_Tuple%" equ "Cosmopolitan"			(set CMAKE_GENERATOR="MSYS Makefiles")
-::	if /i "%Target_Tuple%" equ "Android_Arm32_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Android_Arm64_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Android_X86_Clang"		(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Android_X86_64_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Emscripten_X86_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Ios_Arm32_Clang"		(set CMAKE_GENERATOR="Xcode")
-::	if /i "%Target_Tuple%" equ "Ios_Arm64_Clang"		(set CMAKE_GENERATOR="Xcode")
-::	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set CMAKE_GENERATOR="Xcode")
-::	if /i "%Target_Tuple%" equ "Iossim_X86_Clang"		(set CMAKE_GENERATOR="Xcode")
-::	if /i "%Target_Tuple%" equ "Linux_Arm32_Clang"		(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Linux_Arm32_Gcc"		(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Linux_Arm64_Clang"		(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Linux_Arm64_Gcc"		(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Linux_X86_Clang"		(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Linux_X86_Gcc"			(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Linux_X86_64_Clang"		(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Linux_X86_64_Gcc"		(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Mac_Arm32_Clang"		(set CMAKE_GENERATOR="Xcode")
-::	if /i "%Target_Tuple%" equ "Mac_Arm64_Clang"		(set CMAKE_GENERATOR="Xcode")
-::	if /i "%Target_Tuple%" equ "Mac_X86_Clang"			(set CMAKE_GENERATOR="Xcode")
-::	if /i "%Target_Tuple%" equ "Mac_X86_64_Clang"		(set CMAKE_GENERATOR="Xcode")
-::	if /i "%Target_Tuple%" equ "Raspberry_Arm32_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Raspberry_Arm32_Gcc"	(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Raspberry_Arm64_Clang"	(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Raspberry_Arm64_Gcc"	(set CMAKE_GENERATOR="Unix Makefiles")
-::	if /i "%Target_Tuple%" equ "Windows_Arm64_Clang"	(set CMAKE_GENERATOR="MinGW Makefiles")
-::	if /i "%Target_Tuple%" equ "Windows_Arm64_Gcc"		(set CMAKE_GENERATOR="MinGW Makefiles")
-::	if /i "%Target_Tuple%" equ "Windows_Arm64_Msvc"		(set CMAKE_GENERATOR="Visual Studio 17 2022" -A Arm64)
-::	if /i "%Target_Tuple%" equ "Windows_X86_Clang"		(set CMAKE_GENERATOR="MinGW Makefiles")
-::	if /i "%Target_Tuple%" equ "Windows_X86_Gcc"		(set CMAKE_GENERATOR="MinGW Makefiles")
-::	if /i "%Target_Tuple%" equ "Windows_X86_Msvc"		(set CMAKE_GENERATOR="Visual Studio 17 2022" -A Win32)
-::	if /i "%Target_Tuple%" equ "Windows_X86_64"			(set CMAKE_GENERATOR="MinGW Makefiles")
-::	if /i "%Target_Tuple%" equ "Windows_X86_64_Clang"	(set CMAKE_GENERATOR="MinGW Makefiles")
-::	if /i "%Target_Tuple%" equ "Windows_X86_64_Gcc"		(set CMAKE_GENERATOR="MinGW Makefiles")
-::	if /i "%Target_Tuple%" equ "Windows_X86_64_Msvc"	(set CMAKE_GENERATOR="Visual Studio 17 2022" -A x64)
-::	if /i "%Target_Tuple%" equ "Windows_X86_64_Ucrt"	(set CMAKE_GENERATOR="MinGW Makefiles")
 	
 	%dk_call% dk_assertVar CMAKE_GENERATOR
 	%dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%
@@ -185,15 +115,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR  "%dk_call% dk_DKIMPORTS_DIR"
 	if not defined CMAKE_EXE (call "%DKIMPORTS_DIR%/cmake/DKINSTALL.cmd")
-	::%dk_call% dk_validate CMAKE_EXE call "%DKIMPORTS_DIR%/cmake/DKINSTALL.cmd"
 
 	::###### Delete Cmake Cache files ######
 	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"
 
-	%dk_call% dk_info "****** CMAKE COMMAND ******"
+	::########### CMAKE Command ###################
 	echo "%CMAKE_EXE%" %CMAKE_ARGS%
-
-	::############################################
 	%dk_call% "%CMAKE_EXE%" %CMAKE_ARGS% && (
 		%dk_call% dk_success "CMake Generation Successful"
 	) || (

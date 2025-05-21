@@ -3,7 +3,7 @@ if not defined Raspberry_Host (
 	exit /b 0
 )
 %dk_call% dk_echo "############################################################################"
-%dk_call% dk_echo "################## Raspberry_Arm64_Clang_Toolchain.cmd ###################"
+%dk_call% dk_echo "################## Raspberry_Arm64_Clang_Toolchain.cmd #####################"
 %dk_call% dk_echo "############################################################################"
 
 set CMAKE_GENERATOR="Unix Makefiles"

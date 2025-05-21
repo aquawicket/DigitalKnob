@@ -9,6 +9,9 @@ if not defined Mac_Host (
 %dk_call% dk_set  MULTI_CONFIG		1
 %dk_call% dk_set  CMAKE_GENERATOR	"Xcode"
 
+
+
+
 ::%dk_call% dk_depend xcode
 ::%dk_call% dk_depend make
 rem  %dk_call% dk_set CMAKE_TOOLCHAIN_FILE		"%IOS_TOOLCHAIN_FILE%"

@@ -5,6 +5,13 @@ rem # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMai
 
 set CMAKE_GENERATOR="Unix Makefiles"
 
+
+
+
+
+
+
+
 rem  %dk_call% dk_validate 		ANDROID_NDK					"%dk_call% dk_depend android-ndk"
 ::%dk_call% dk_set 				ANDROID_ABI					x86_64
 ::%dk_call% dk_set 				ANDROID_CPP_FEATURES		"rtti exceptions"
