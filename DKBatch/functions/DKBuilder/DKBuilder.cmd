@@ -20,13 +20,13 @@ setlocal enableDelayedExpansion
 		powershell -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
 		certutil -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1 || ^
 		curl -f "!HDK!" -o "!DK!" >nul 2>&1 || ^
-		echo DK.cmd Failed
+		echo DK.cmd download Failed
 	)
 
 	call "%DK%" "%~0" %*
 
 	::takeown /F %DKF% /R /D "Y"
-	%dk_call% main.cmd
+	%dk_call% DKBuilder/main.cmd
 exit /b %errorlevel%
 
 

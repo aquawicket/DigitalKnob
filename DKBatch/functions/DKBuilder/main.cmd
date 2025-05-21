@@ -24,12 +24,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"
 	
-	if not exist "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" (
-		%dk_call% dk_download "%DKHTTP_DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd"
+	if not exist "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" (
+		%dk_call% dk_download "%DKHTTP_DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd"
 	)
 	
 	if not exist "%DKDESKTOP_DIR%/DKBuilder.cmd" (
-		%dk_call% dk_createSymlink "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%DKDESKTOP_DIR%/DKBuilder.cmd"
+		%dk_call% dk_createSymlink "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKDESKTOP_DIR%/DKBuilder.cmd"
 	)
 
 	::%dk_call% dk_assertPath DKSCRIPT_DIR
@@ -69,13 +69,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			)
 		)
 		
-		if not defined pickUpdate		%dk_call% pickUpdate		& goto :while_loop
-		if not defined Target_App		%dk_call% Target_App		& goto :while_loop
-		if not defined Target_Os		%dk_call% Target_Os			& goto :while_loop
-		if not defined Target_Arch		%dk_call% Target_Arch		& goto :while_loop
-		if not defined Target_Env		%dk_call% Target_Env		& goto :while_loop
-		if not defined Target_Type		%dk_call% Target_Type		& goto :while_loop
-		if not defined Target_Tuple		%dk_call% Target_Tuple
+		if not defined pickUpdate		%dk_call% DKBuilder/pickUpdate		& goto :while_loop
+		if not defined Target_App		%dk_call% DKBuilder/Target_App		& goto :while_loop
+		if not defined Target_Os		%dk_call% DKBuilder/Target_Os		& goto :while_loop
+		if not defined Target_Arch		%dk_call% DKBuilder/Target_Arch		& goto :while_loop
+		if not defined Target_Env		%dk_call% DKBuilder/Target_Env		& goto :while_loop
+		if not defined Target_Type		%dk_call% DKBuilder/Target_Type		& goto :while_loop
+		if not defined Target_Tuple		%dk_call% DKBuilder/Target_Tuple
 		
 		:: save selections to DKBuilder.cache file
 		%dk_call% dk_echo "creating DKBuilder.cache..."
@@ -86,8 +86,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if defined Target_Env	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Env_Cache=%Target_Env%")
 		if defined Target_Type	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Type_Cache=%Target_Type%")
 		
-		%dk_call% generate
-		%dk_call% buildApp
+		%dk_call% DKBuilder/generate
+		%dk_call% DKBuilder/buildApp
 
 		%dk_call% dk_unset pickUpdate
 		%dk_call% dk_unset Target_App

@@ -20,9 +20,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo
 
 	%dk_call% dk_assertVar Target_Type
-	if "%Target_Type%" equ "All"		%dk_call% buildAll
-	if "%Target_Type%" equ "Release"	%dk_call% buildRelease
-	if "%Target_Type%" equ "Debug"		%dk_call% buildDebug
+	if "%Target_Type%" equ "All"		%dk_call% DKBuilder/buildAll
+	if "%Target_Type%" equ "Release"	%dk_call% DKBuilder/buildRelease
+	if "%Target_Type%" equ "Debug"		%dk_call% DKBuilder/buildDebug
 
 	%dk_call% dk_echo
 	%dk_call% dk_echo "####################################################################"
