@@ -62,7 +62,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% Array/dk_push commands "%dk_call% dk_reload"
     
     %dk_call% Array/dk_push dk_getDirectories "Go Back"
-    %dk_call% Array/dk_push commands "%dk_call% dk_unset dk_BUILDER_pickUpdate"
+    %dk_call% Array/dk_push commands "%dk_call% dk_unset pickUpdate"
     
     %dk_call% Array/dk_push dk_getDirectories "Exit"
     %dk_call% Array/dk_push commands "%dk_call% dk_exit"

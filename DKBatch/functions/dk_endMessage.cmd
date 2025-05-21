@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_info "####################################################################"
     %dk_call% dk_echo
         
-    set "dk_pickUpdate="
+    set "dk_BUILDER_pickUpdate="
     set "Target_App="
     set "Target_Tuple="
     set "Target_Type="
