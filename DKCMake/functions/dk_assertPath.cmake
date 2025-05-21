@@ -12,10 +12,12 @@ include_guard()
 function(dk_assertPath)
 	dk_debugFunc()
 
+	set(_name_ "PATH")
 	set(_path_ "${ARGV0}")
-#	if(DEFINED ${_path_})
-#		set(_path_ ${${_path_}})
-#	endif()
+	if(DEFINED ${_path_})
+		set(_name_ ${_path_})
+		set(_path_ ${${_path_}})
+	endif()
 	#dk_printVar(_path_)
 	
 	#dk_varToString(_path_ path_value)
@@ -25,8 +27,8 @@ function(dk_assertPath)
 		return()
 	endif()
 		
-	dk_fatal("${bg_red}${white}Assertion failed: Path Not Found path:'${_path_}:${${_path_}}'")
-
+	dk_echo("${bg_red}${white}Assertion failed: Path Not Found '${_name_}':'${_path_}' ${clr}")
+	dk_fatal()
 endfunction()
 
 

@@ -3,7 +3,7 @@ HelloWorld		Android 		Arm32			Clang		Debug
 HelloWorld		Android 		Arm64 			Clang		Debug
 HelloWorld		Android 		X86 			Clang		Debug
 HelloWorld		Android 		X86_64 			Clang		Debug
-HelloWorld		Cosmo			X86			Cosmo		Debug
+HelloWorld		Cosmo			Cosmo			Cosmo		Debug
 HelloWorld		Emscripten 		X86 			Clang		Debug
 HelloWorld		Ios 			Arm32 			Clang		Debug
 HelloWorld		Ios 			Arm64 			Clang		Debug
@@ -49,7 +49,7 @@ DKCore 			Android 		Arm32 			Clang		Debug
 DKCore 			Android 		Arm64 			Clang 		Debug
 DKCore 			Android 		X86 			Clang		Debug
 DKCore 			Android 		X86_64 			Clang 		Debug
-DKCore 			Cosmopolitan 								Debug
+DKCore 			Cosmo 			Cosmo			Cosmo		Debug
 DKCore 			Emscripten 		X86 			Clang		Debug
 DKCore			Ios 			Arm32 			Clang		Debug
 DKCore			Ios 			Arm64 			Clang		Debug
@@ -95,7 +95,7 @@ DKJavascript 	Android 		Arm32 			Clang		Debug
 DKJavascript 	Android 		Arm64 			Clang 		Debug
 DKJavascript 	Android 		X86 			Clang		Debug
 DKJavascript 	Android 		X86_64 			Clang 		Debug
-DKJavascript	Cosmopolitan 	Cosmopolitan	Cosmopolitan						Debug
+DKJavascript	Cosmo 			Cosmo			Cosmo		Debug
 DKJavascript 	Emscripten 		X86 			Clang		Debug
 DKJavascript	Ios 			Arm32 			Clang		Debug
 DKJavascript	Ios 			Arm64 			Clang		Debug
@@ -141,7 +141,7 @@ DKSDL 			Android 		Arm32 			Clang		Debug
 DKSDL 			Android 		Arm64 			Clang 		Debug
 DKSDL 			Android 		X86 			Clang		Debug
 DKSDL 			Android 		X86_64 			Clang 		Debug
-DKSDL 			Cosmopolitan 					Debug
+DKSDL 			Cosmo 			Cosmo			Cosmo 		Debug
 DKSDL 			Emscripten 		X86 			Clang		Debug
 DKSDL			Ios 			Arm32 			Clang		Debug
 DKSDL			Ios 			Arm64 			Clang		Debug
@@ -187,7 +187,7 @@ DKSDLRml 		Android 		Arm32 			Clang		Debug
 DKSDLRml 		Android 		Arm64 			Clang 		Debug
 DKSDLRml 		Android 		X86		 		Clang		Debug
 DKSDLRml 		Android 		X86_64 			Clang 		Debug
-DKSDLRml 		Cosmopolitan 								Debug
+DKSDLRml 		Cosmo 			Cosmo			Cosmo		Debug
 DKSDLRml 		Emscripten 		X86 			Clang		Debug
 DKSDLRml		Ios 			Arm32 			Clang		Debug
 DKSDLRml		Ios 			Arm64 			Clang		Debug

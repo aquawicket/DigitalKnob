@@ -5,10 +5,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#################################################################################
-:: dk_buildAll()
+:: dk_BUILDER_buildAll()
 ::
 ::
-:dk_buildAll
+:dk_BUILDER_buildAll
 %setlocal%
 	%dk_call% dk_debugFunc 0
 

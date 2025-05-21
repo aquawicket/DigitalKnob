@@ -3,4 +3,4 @@ endlocal&(set "DK=%DK%"&set "DKF=%DKF%")
 call "%DK%" %~0 %*
 ::takeown /F %DKF% /R /D "Y"
 ::####################
-%dk_call% dk_buildMain
+%dk_call% dk_BUILDER_main

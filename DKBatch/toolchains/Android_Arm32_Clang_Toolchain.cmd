@@ -1,4 +1,4 @@
-rem # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
+::# https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 %dk_call% dk_echo "#####################################################################"
 %dk_call% dk_echo "################ Android_Arm32_Clang_Toolchain.cmd ##################"
 %dk_call% dk_echo "#####################################################################"

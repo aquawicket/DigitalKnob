@@ -14,7 +14,7 @@ include_guard()
 # 8 ERROR		dk_error
 # 9 FATAL		dk_fatal
 
-dk_if(NOT DEFINED dk_log_ENABLE}		[[ dk_set(dk_log_ENABLE 			1) ]])
+dk_if(NOT DEFINED dk_log_ENABLE}			[[ dk_set(dk_log_ENABLE 			1) ]])
 #dk_if(NOT DEFINED ENV{dk_log_NOHALT}		[[ dk_set(dk_log_NOHALT 			1) ]])
 
 # DEFAULT
@@ -104,7 +104,7 @@ dk_if(NOT DEFINED dk_log_WARNING_COLOR		[[ dk_set(dk_log_WARNING_COLOR		"${yello
 dk_if(NOT DEFINED dk_log_WARNING_TAG		[[ dk_set(dk_log_WARNING_TAG		"WARNING: ") ]])
 dk_if(NOT DEFINED dk_log_WARNING_PAUSE		[[ dk_set(dk_log_WARNING_PAUSE		0) ]])
 dk_if(NOT DEFINED dk_log_WARNING_TIMEOUT	[[ dk_set(dk_log_WARNING_TIMEOUT	0) ]])
-dk_if(NOT DEFINED dk_log_WARNING_TRACE		[[ dk_set(dk_log_WARNING_TRACE		1) ]])
+dk_if(NOT DEFINED dk_log_WARNING_TRACE		[[ dk_set(dk_log_WARNING_TRACE		0) ]])
 dk_if(NOT DEFINED dk_log_WARNING_LINE		[[ dk_set(dk_log_WARNING_LINE		0) ]])
 dk_if(NOT DEFINED dk_log_WARNING_HALT		[[ dk_set(dk_log_WARNING_HALT		0) ]])
 

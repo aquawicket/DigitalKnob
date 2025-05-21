@@ -5,10 +5,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_buildApp()
+::# dk_BUILDER_buildApp()
 ::#
 ::#
-:dk_buildApp
+:dk_BUILDER_buildApp
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
@@ -20,9 +20,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo
 
 	%dk_call% dk_assertVar Target_Type
-	if "%Target_Type%" equ "All"		%dk_call% dk_buildAll
-	if "%Target_Type%" equ "Release"	%dk_call% dk_buildRelease
-	if "%Target_Type%" equ "Debug"		%dk_call% dk_buildDebug
+	if "%Target_Type%" equ "All"		%dk_call% dk_BUILDER_buildAll
+	if "%Target_Type%" equ "Release"	%dk_call% dk_BUILDER_buildRelease
+	if "%Target_Type%" equ "Debug"		%dk_call% dk_BUILDER_buildDebug
 
 	%dk_call% dk_echo
 	%dk_call% dk_echo "####################################################################"
@@ -41,5 +41,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_buildApp
+	%dk_call% dk_BUILDER_buildApp
 %endfunction%

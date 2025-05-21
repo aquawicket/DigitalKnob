@@ -9,7 +9,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#  Read lines of a file into an grid and echo them back
 ::#
-::#
 :dk_fileToMatrix
 %setlocal%
 	%dk_call% dk_debugFunc 2
@@ -19,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	set /a _row_=0
 	for /F "usebackq delims=" %%r in ("%_file_%") do (
-	rem for /f "tokens=*" %%r in ("%_file_%") do (
+
 		set /a _column_=0
 		for %%c IN (%%r) do (
 			set "%~2[!_row_!][!_column_!]=%%c"
@@ -34,6 +33,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if defined currentScope endlocal
 		set "%%a"
 	)
+	
+::	endlocal & (
+::		for /F "delims=" %%a in ('set %~2[') do (
+::			set "%%a"
+::		)
+::	)
 %endfunction%
 
 

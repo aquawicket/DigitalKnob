@@ -35,7 +35,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 		%dk_call% dk_keyboardInput
 		
-		if "!dk_keyboardInput!" equ "1"	(set "Target_Arch=!Target_Arch_Cache!")
+		if "!dk_keyboardInput!" equ "0"	(set "Target_Arch=!Target_Arch_Cache!")
 		if "!dk_keyboardInput!" equ "1"	(set "Target_Arch=!Host_Arch!")
 		if "!dk_keyboardInput!" equ "2" (set "Target_Arch=Arm32")
 		if "!dk_keyboardInput!" equ "3" (set "Target_Arch=Arm64")

@@ -5,10 +5,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_buildRelease()
+::# dk_BUILDER_buildRelease()
 ::#
 ::#
-:dk_buildRelease
+:dk_BUILDER_buildRelease
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
@@ -43,5 +43,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_buildRelease
+	%dk_call% dk_BUILDER_buildRelease
 %endfunction%

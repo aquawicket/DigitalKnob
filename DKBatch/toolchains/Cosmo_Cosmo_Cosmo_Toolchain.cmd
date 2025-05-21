@@ -1,5 +1,5 @@
 %dk_call% dk_echo "################################################################################"
-%dk_call% dk_echo "############ Cosmopolitan_Cosmopolitan_Cosmopolitan_Toolchain.cmd ############"
+%dk_call% dk_echo "####################### Cosmo_Cosmo_Cosmo_Toolchain.cmd ########################"
 %dk_call% dk_echo "################################################################################"
 
 %dk_call% dk_prependArgs CMAKE_ARGS -DCOSMOPOLITAN=1

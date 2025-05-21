@@ -5,13 +5,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_buildMain()
+::# dk_BUILDER_main()
 ::#
 ::#
-:dk_buildMain
+:dk_BUILDER_main
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
+	::############ Host_Os ############
+	%dk_call% dk_validate Host_Os 			"%dk_call% dk_Host_Os"
 	%dk_call% dk_validate DKDESKTOP_DIR		"%dk_call% dk_DKDESKTOP_DIR"
 	%dk_call% dk_validate DIGITALKNOB_DIR	"%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_validate DKBRANCH_DIR		"%dk_call% dk_DKBRANCH_DIR"
@@ -40,24 +42,19 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_unset Target_Tuple
 	%dk_call% dk_unset Target_Type
 
-	::set "BUILD_LIST_FILE=%DKCACHE_DIR%/build_list.txt"
 	:while_loop
 		if exist "%BUILD_LIST_FILE%" (
-			%dk_call% dk_fileToMatrix "%BUILD_LIST_FILE%" BUILD_MATRIX
+			if not defined BUILD_MATRIX[0][0] (
+				%dk_call% dk_fileToMatrix "%BUILD_LIST_FILE%" BUILD_MATRIX
+			)
+			
 			if not defined _line_ (set /a _line_=0)
-			:skipTarget
+			:skipLine
 			call set "comment_check=%%BUILD_MATRIX[!_line_!][0]%%"
 			if "!comment_check:~0,1!" equ "#" (
-				rem echo skipping _line_ . . .
 				set /a _line_+=1
-				goto :skipTarget
+				goto :skipLine
 			)
-			rem Each Host_Arch will have a list of compatible tuples
-			rem The the current Host_Arch doesn't have the Target_Tuple in it's allowed list
-			rem We goto skipTarget, we could also have a disabled list for each Host_Arch to do the same:
-			rem A block list could be good, because everything will be attempted by default instead of enabled.
-			rem Example win_x86 mac ios iossim	=	Windows_X86_Host's will skip all instaces of mac, ios and iossim
-
 
 			if defined BUILD_MATRIX[!_line_!][0] (
 				set "dk_pickUpdate=1"
@@ -71,15 +68,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 				set "BUILD_LIST_FILE="
 			)
 		)
-
+		
 		if not defined dk_pickUpdate	%dk_call% dk_pickUpdate			& goto :while_loop
 		if not defined Target_App		%dk_call% dk_Target_App			& goto :while_loop
 		if not defined Target_Os		%dk_call% dk_Target_Os			& goto :while_loop
 		if not defined Target_Arch		%dk_call% dk_Target_Arch		& goto :while_loop
 		if not defined Target_Env		%dk_call% dk_Target_Env			& goto :while_loop
 		if not defined Target_Type		%dk_call% dk_Target_Type		& goto :while_loop
-		if not defined Target_Tuple		%dk_call% dk_Target_Tuple		& goto :while_loop
-
+		if not defined Target_Tuple		%dk_call% dk_Target_Tuple
+		
 		:: save selections to DKBuilder.cache file
 		%dk_call% dk_echo "creating DKBuilder.cache..."
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
@@ -88,10 +85,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if defined Target_Arch	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Arch_Cache=%Target_Arch%")
 		if defined Target_Env	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Env_Cache=%Target_Env%")
 		if defined Target_Type	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Type_Cache=%Target_Type%")
-		if defined Target_Tuple	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Tuple_Cache=%Target_Tuple%")
+		::if defined Target_Tuple	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Tuple_Cache=%Target_Tuple%")
 		
 		%dk_call% dk_generate
-		%dk_call% dk_buildApp
+		%dk_call% dk_BUILDER_buildApp
 
 		%dk_call% dk_unset dk_pickUpdate
 		%dk_call% dk_unset Target_App
@@ -115,5 +112,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_buildMain
+	%dk_call% dk_BUILDER_main
 %endfunction%
