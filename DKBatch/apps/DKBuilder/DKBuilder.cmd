@@ -26,7 +26,7 @@ setlocal enableDelayedExpansion
 	call "%DK%" "%~0" %*
 
 	::takeown /F %DKF% /R /D "Y"
-	%dk_call% dk_BUILDER_main.cmd
+	%dk_call% main.cmd
 exit /b %errorlevel%
 
 
