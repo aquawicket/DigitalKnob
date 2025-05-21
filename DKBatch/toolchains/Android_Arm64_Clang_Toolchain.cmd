@@ -34,3 +34,5 @@ rem %dk_call% dk_set 			CMAKE_MAKE_PROGRAM			"%MSYS2_BIN%/make.exe"
 %dk_call% dk_set 				CMAKE_ANDROID_STL_TYPE		"%ANDROID_STL%"
 rem  %dk_call% dk_append 		CMAKE_C_FLAGS				-DANDROID -DANDROID_ARM64 -std=c17
 rem  %dk_call% dk_append 		CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM64 -std=c++1z
+
+%dk_call% dk_set				CMAKE_GENERATOR				"Unix Makefiles"

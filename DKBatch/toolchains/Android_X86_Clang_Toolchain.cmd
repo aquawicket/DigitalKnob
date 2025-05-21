@@ -3,9 +3,6 @@
 ::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
 ::######################################################################################################################################################
 
-:: FIXME
-set "CMAKE_GENERATOR="
-exit /b 0
 
 %dk_call% dk_echo "#####################################################################"
 %dk_call% dk_echo "################ Android_X86_Clang_Toolchain.cmd ##################"
@@ -32,5 +29,7 @@ rem %dk_call% dk_set 			CMAKE_MAKE_PROGRAM			"%MSYS2_BIN%/make.exe"
 %dk_call% dk_set 				CMAKE_C_COMPILER			"%ANDROID_NDK%/toolchains/llvm/prebuilt/%Android_Host_Tag%/bin/clang%exe%"
 %dk_call% dk_set 				CMAKE_CXX_COMPILER			"%ANDROID_NDK%/toolchains/llvm/prebuilt/%Android_Host_Tag%/bin/clang++%exe%"
 %dk_call% dk_set 				CMAKE_ANDROID_STL_TYPE		"%ANDROID_STL%"
+%dk_call% dk_set				CMAKE_GENERATOR				"Unix Makefiles"
 rem  %dk_call% dk_append	 	CMAKE_C_FLAGS				-DANDROID -DANDROID_ARM64 -std=c17
 rem  %dk_call% dk_append 		CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM64 -std=c++1z
+%dk_call% dk_set				CMAKE_GENERATOR				"Unix Makefiles"

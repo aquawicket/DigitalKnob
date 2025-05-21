@@ -16,6 +16,7 @@ if not defined Mac_Host (
 %dk_call% dk_depend make
 	
 %dk_call% dk_set CMAKE_TOOLCHAIN_FILE			"%IOS_TOOLCHAIN_FILE%"
+%dk_call% dk_set CMAKE_GENERATOR				"Xcode"
 rem  %dk_call% dk_append CMAKE_C_FLAGS			-DIOS -DIOS -DIOS_X86 -std=c17 -x objective-c
 rem  %dk_call% dk_append CMAKE_CXX_FLAGS			-DIOS -DIOS -DIOS_X86 -std=c++17 -x objective-c++
 rem  %dk_call% dk_append DKCONFIGURE_FLAGS		--host i686-apple-%IOS_DARWIN%
