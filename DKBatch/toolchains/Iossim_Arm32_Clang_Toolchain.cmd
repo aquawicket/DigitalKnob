@@ -2,7 +2,7 @@ if not defined Mac_Host (
 	exit /b 1
 )
 %dk_call% dk_echo "##########################################################################"
-%dk_call% dk_echo "#################### Ios_Arm32_Clang_Toolchain.cmd #######################"
+%dk_call% dk_echo "#################### Iosdim_Arm32_Clang_Toolchain.cmd ####################"
 %dk_call% dk_echo "##########################################################################"
 
 %dk_call% dk_set  MULTI_CONFIG		1

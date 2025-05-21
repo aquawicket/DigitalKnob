@@ -1,6 +1,5 @@
 if not defined Linux_Host (
-	set "CMAKE_GENERATOR="
-	exit /b 0
+	exit /b 1
 )
 %dk_call% dk_echo "############################################################################"
 %dk_call% dk_echo "#################### Linux_X86_64_Clang_Toolchain.cmd ######################"

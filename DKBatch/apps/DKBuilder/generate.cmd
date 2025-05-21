@@ -19,9 +19,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_unset CMAKE_GENERATOR
 		exit /b 0
 	)
-	%dk_call% "%DKBATCH_TOOLCHAIN:/=\%"
-	if not defined CMAKE_GENERATOR (
-		%dk_call% dk_notice "CMAKE_GENERATOR invalid for %Target_Tuple%. skipping..."
+	%dk_call% "%DKBATCH_TOOLCHAIN:/=\%" || (
+		%dk_call% dk_notice "%Target_Tuple% invalid. skipping..."
 		exit /b 0
 	)
 

@@ -1,6 +1,5 @@
 if not defined Windows_Host (
-	set "CMAKE_GENERATOR="
-	exit /b 0
+	exit /b 1
 )
 %dk_call% dk_echo "############################################################################"
 %dk_call% dk_echo "################### Windows_Arm64_Clang_Toolchain.cmd ######################"
