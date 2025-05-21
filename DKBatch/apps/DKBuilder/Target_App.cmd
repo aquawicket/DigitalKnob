@@ -5,10 +5,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_Target_App(RTN:Target_App)
+::# Target_App(RTN:Target_App)
 ::#
 ::#
-:dk_Target_App
+:Target_App
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 1 
 	
@@ -113,6 +113,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
     %dk_call% dk_debugFunc 0
 
-    %dk_call% dk_Target_App
+    %dk_call% Target_App
 	%dk_call% dk_printVar Target_App
 %endfunction%

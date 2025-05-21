@@ -88,7 +88,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		::if defined Target_Tuple	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Tuple_Cache=%Target_Tuple%")
 		
 		%dk_call% dk_generate
-		%dk_call% mainbuildApp
+		%dk_call% buildApp
 
 		%dk_call% dk_unset pickUpdate
 		%dk_call% dk_unset Target_App

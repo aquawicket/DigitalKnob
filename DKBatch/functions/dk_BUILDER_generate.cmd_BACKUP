@@ -5,10 +5,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_generate()
+::# dk_BUILDER_generate()
 ::#
 ::#
-:dk_generate
+:dk_BUILDER_generate
  ::%setlocal%
 	%dk_call% dk_debugFunc 0
 
@@ -132,5 +132,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_generate
+	%dk_call% dk_BUILDER_generate
 %endfunction%

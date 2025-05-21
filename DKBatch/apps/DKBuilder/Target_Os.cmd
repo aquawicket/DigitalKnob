@@ -5,11 +5,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_Target_Os()
+::# Target_Os()
 ::#
 ::#	  Target_Os = Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows
 ::#
-:dk_Target_Os
+:Target_Os
 %setlocal%
 	%dk_call% dk_debugFunc 0 1
 
@@ -21,7 +21,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		echo: 
 		
-		::if not defined Target_Os_Cache (%dk_call% dk_Target_Os_Cache)
+		::if not defined Target_Os_Cache (%dk_call% Target_Os_Cache)
 		echo  0^) !Target_Os_Cache!
 		echo:
 		if not defined Host_Os (%dk_call% dk_Host_Os)
@@ -70,13 +70,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	::###### GET ######
-    %dk_call% dk_Target_Os
+    %dk_call% Target_Os
 	%dk_call% dk_printVar Target_Os
 	%dk_call% dk_printVar %Target_Os%_Target
 	%dk_call% dk_printVar %Target_Os%
 	
 	::###### SET ######
-	%dk_call% dk_Target_Os "Windows"
+	%dk_call% Target_Os "Windows"
 	%dk_call% dk_printVar Target_Os
 	%dk_call% dk_printVar %Target_Os%_Target
 	%dk_call% dk_printVar %Target_Os%

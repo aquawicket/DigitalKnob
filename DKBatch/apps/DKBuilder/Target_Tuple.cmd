@@ -5,11 +5,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#####################################################################
-::# dk_Target_Tuple()
+::# Target_Tuple()
 ::#
 ::#	  Target_Tuple = TODO
 ::#
-:dk_Target_Tuple
+:Target_Tuple
 %setlocal%
 	%dk_call% dk_debugFunc 0 1
 
@@ -19,9 +19,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	rem ###### GET ######	
 	) else if not defined Target_Tuple (
-		%dk_call% dk_validate Target_Os		"%dk_call% dk_Target_Os"
-		%dk_call% dk_validate Target_Arch	"%dk_call% dk_Target_Arch"
-		%dk_call% dk_validate Target_Env	"%dk_call% dk_Target_Env"
+		%dk_call% dk_validate Target_Os		"%dk_call% Target_Os"
+		%dk_call% dk_validate Target_Arch	"%dk_call% Target_Arch"
+		%dk_call% dk_validate Target_Env	"%dk_call% Target_Env"
 		set "Target_Tuple=!Target_Os!_!Target_Arch!_!Target_Env!"
 	)
 	
@@ -43,13 +43,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	::###### GET ######
-    %dk_call% dk_Target_Tuple
+    %dk_call% Target_Tuple
 	%dk_call% dk_printVar Target_Tuple
 	%dk_call% dk_printVar %Target_Tuple%_Target
 	%dk_call% dk_printVar %Target_Tuple%
 	
 	::###### SET ######
-	%dk_call% dk_Target_Tuple "Windows_X86_64_Clang"
+	%dk_call% Target_Tuple "Windows_X86_64_Clang"
 	%dk_call% dk_printVar Target_Tuple
 	%dk_call% dk_printVar %Target_Tuple%_Target
 	%dk_call% dk_printVar %Target_Tuple%
