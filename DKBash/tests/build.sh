@@ -523,7 +523,7 @@ dk_generate() {
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	Target_Level="RebuildAll"
-	DKLINK="Static"
+	Target_Link="Static"
 	
 	#declare -a CMAKE_ARGS
 	set --											#clear the positional parameters
@@ -549,10 +549,10 @@ dk_generate() {
 	if [ "${Target_Level}" = "RebuildAll" ]; then
 		set -- "${@}" "-DREBUILDALL=ON"
 	fi
-	if [ "$DKLINK" = "Static" ]; then
+	if [ "$Target_Link" = "Static" ]; then
 		set -- "${@}" "-DSTATIC=ON"
 	fi
-	if [ "$DKLINK" = "Shared" ]; then
+	if [ "$Target_Link" = "Shared" ]; then
 		set -- "${@}" "-DSHARED=ON"
 	fi
 	

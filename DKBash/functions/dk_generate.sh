@@ -33,7 +33,7 @@ dk_generate() {
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	Target_Level="RebuildAll"
-	DKLINK="Static"
+	Target_Link="Static"
 	
 	#declare -a CMAKE_ARGS
 	#set --											#clear the positional parameters
@@ -61,10 +61,10 @@ dk_generate() {
 		dk_call dk_error "Target_Level:${Target_Level} is invalid"
 	fi
 	
-	if [ "${DKLINK}" = "Static" ]; then
+	if [ "${Target_Link}" = "Static" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DSTATIC=ON"
 	fi
-	if [ "${DKLINK}" = "Shared" ]; then
+	if [ "${Target_Link}" = "Shared" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DSHARED=ON"
 	fi
 	

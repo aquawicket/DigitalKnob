@@ -17,23 +17,21 @@ function Global:dk_generate() {
 	dk_call dk_clearCmakeCache
 	dk_call dk_deleteTempFiles
 
-	$TARGET_PATH = "$DKCPP_APPS_DIR/$Target_App"
-	dk_call dk_printVar TARGET_PATH
-	dk_call dk_mkdir "$TARGET_PATH/$Target_Tuple"
-	cd "$TARGET_PATH/$Target_Tuple"
+	$Target_App_Dir = "$DKCPP_APPS_DIR/$Target_App"
+	dk_call dk_printVar Target_App_Dir
+	dk_call dk_mkdir "$Target_App_Dir/$Target_Tuple"
+	cd "$Target_App_Dir/$Target_Tuple"
 	$CMAKE_SOURCE_DIR = "$DKCMAKE_DIR"
 	$CMAKE_SOURCE_DIR = $CMAKE_SOURCE_DIR -replace '\\', '/';
 	dk_call dk_printVar CMAKE_SOURCE_DIR
 	if(!(dk_call dk_pathExists "$CMAKE_SOURCE_DIR")){
 		dk_call dk_error "CMAKE_SOURCE_DIR does not exist"
 	}
-	$CMAKE_TARGET_PATH = $TARGET_PATH
-	dk_call dk_printVar CMAKE_TARGET_PATH
-	$CMAKE_TARGET_PATH = $CMAKE_TARGET_PATH -replace '\\', '/';
+	$Target_App_Dir = $Target_App_Dir -replace '\\', '/';
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	$Target_Level = "RebuildAll"
-	$DKLINK = "Static"
+	$Target_Link = "Static"
 	
 	$CMAKE_ARGS = @()
 	if($Target_Tuple -eq "Android_Arm32")  	{ $CMAKE_ARGS += "-G Unix Makefiles" }
@@ -121,10 +119,10 @@ function Global:dk_generate() {
 	if($Target_Level -eq "RebuildAll"){ 
 		$CMAKE_ARGS += "-DREBUILDALL=ON"
 	}
-	if($DKLINK -eq "Static"){ 
+	if($Target_Link -eq "Static"){ 
 		$CMAKE_ARGS += "-DSTATIC=ON"
 	}
-	if($DKLINK -eq "Shared"){ 
+	if($Target_Link -eq "Shared"){ 
 		$CMAKE_ARGS += "-DSHARED=ON"
 	}
 	
@@ -136,7 +134,7 @@ function Global:dk_generate() {
 	if($DK_SHELL){ return }
 	
 	
-	$CMAKE_BINARY_DIR = "$CMAKE_TARGET_PATH\$Target_Tuple\$Target_Type"
+	$CMAKE_BINARY_DIR = "${Target_App_Dir}\${Target_Tuple}\${Target_Type}"
 	$CMAKE_BINARY_DIR = $CMAKE_BINARY_DIR -replace '\\', '/';
 	dk_call dk_printVar CMAKE_BINARY_DIR
 	
