@@ -42,8 +42,8 @@ HelloWorld		Windows 		X86_64 			Clang		Debug
 HelloWorld		Windows 		X86_64 			Gcc			Debug
 HelloWorld		Windows 		X86_64 			Msvc		Debug
 HelloWorld		Windows 		X86_64 			Ucrt		Debug	#FIXME: Change to WIN X86_64 GCC_UCRT64
-		
-
+#		
+#
 ########################### DKCore ##############################
 DKCore 			Android 		Arm32 			Clang		Debug
 DKCore 			Android 		Arm64 			Clang 		Debug
@@ -88,8 +88,8 @@ DKCore 			Windows 		X86_64 			Clang		Debug
 DKCore 			Windows 		X86_64 			Gcc			Debug
 DKCore 			Windows 		X86_64 			Msvc		Debug
 DKCore 			Windows 		X86_64 			Ucrt 		Debug	#FIXME: Change to Windows X86_64 Gcc Ucrt64
-
-
+#
+#
 ########################### DKJavascript ########################
 DKJavascript 	Android 		Arm32 			Clang		Debug
 DKJavascript 	Android 		Arm64 			Clang 		Debug
@@ -134,8 +134,8 @@ DKJavascript 	Windows 		X86_64 			Clang		Debug
 DKJavascript 	Windows 		X86_64 			Gcc			Debug
 DKJavascript 	Windows 		X86_64 			Msvc		Debug
 DKJavascript 	Windows 		X86_64 			Ucrt 		Debug	#FIXME: Change to WIN X86_64 GCC UCRT64
-	
-	
+#	
+#	
 ########################### DKSDL ###############################
 DKSDL 			Android 		Arm32 			Clang		Debug
 DKSDL 			Android 		Arm64 			Clang 		Debug
@@ -180,8 +180,8 @@ DKSDL 			Windows 		X86_64 			Clang		Debug
 DKSDL	 		Windows 		X86_64 			Gcc			Debug
 DKSDL 			Windows 		X86_64 			Msvc		Debug
 DKSDL 			Windows 		X86_64 			Ucrt 		Debug	#FIXME: Change to WIN X86_64 GCC UCRT64
-	
-
+#	
+#
 ########################### DKSDLRml ###########################
 DKSDLRml 		Android 		Arm32 			Clang		Debug
 DKSDLRml 		Android 		Arm64 			Clang 		Debug
