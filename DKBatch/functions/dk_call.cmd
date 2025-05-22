@@ -5,11 +5,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################## dk_call settings ##########################
-::if not defined dk_call_PRINT_CALLS	(set "dk_call_PRINT_CALLS=1") 
-::if not defined dk_call_PRINT_ENTRY	(set "dk_call_PRINT_ENTRY=1")
-::if not defined dk_call_PRINT_EXIT		(set "dk_call_PRINT_EXIT=1")
-::if not defined dk_call_PRINT_SCOPE	(set "dk_call_PRINT_SCOPE=1") 
-::if not defined dk_call_IGNORE			(set "dk_call_IGNORE=dk_debugFunc;dk_echo;")
+::set "dk_call_PRINT_CALLS=1"
+::set "dk_call_PRINT_ENTRY=1"
+::set "dk_call_PRINT_EXIT=1"
+::set "dk_call_PRINT_SCOPE=1"
+::set "dk_call_IGNORE=dk_debugFunc;dk_echo;"
 ::####################################################################
 ::# dk_call(command args)
 ::#
@@ -47,11 +47,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::##### Prepair ###########################################################################################
 	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
-
 	if not exist "%__CMND__%" (
 		call dk_source "%__CMND__%"
 	)
-
+	
+	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
+	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
+	
 ::###### Entry ############################################################################################
 	if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
 
