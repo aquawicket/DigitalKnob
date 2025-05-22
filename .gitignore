@@ -58,6 +58,8 @@ DKCMAKE_START_VARIABLES.temp
 DKCMAKE_PROJECT_VARIABLES.temp
 DKCMAKE_FLAG_VARIABLES.temp
 
+3rdParty/android-build-tools-91936d4ee3ccc839f0addd53c9ebf087b1e39251.build-tools_r30.0.3-windows
+3rdParty/android-platform-tools-platform-tools_r33.0.3-windows
 3rdParty/android-ndk-23.2.8568313
 3rdParty/android-sdk
 3rdParty/backward-cpp-51f0700
