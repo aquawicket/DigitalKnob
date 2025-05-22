@@ -12,16 +12,16 @@ dk_generate() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "     Generating ${Target_App-} - ${Target_Tuple-} - ${Target_Type-} - ${Target_Level-}"
-	dk_call dk_echo "##################################################################"
+	dk_call dk_echo "###################################################################################"
+	dk_call dk_echo "  Generating ${Target_App-} - ${Target_Tuple-} - ${Target_Type-} - ${Target_Level-}"
+	dk_call dk_echo "###################################################################################"
 	dk_call dk_echo
 
 	dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
-	TARGET_PATH="${DKCPP_APPS_DIR}/${Target_App}"
-	#dk_call dk_printVar TARGET_PATH
-	dk_call dk_mkdir "${TARGET_PATH}/${Target_Tuple,,}"
-	dk_call dk_chdir "${TARGET_PATH}/${Target_Tuple,,}"
+	Target_App_Dir="${DKCPP_APPS_DIR}/${Target_App}"
+	#dk_call dk_printVar Target_App_Dir
+	dk_call dk_mkdir "${Target_App_Dir}/${Target_Tuple,,}"
+	dk_call dk_chdir "${Target_App_Dir}/${Target_Tuple,,}"
 	dk_call dk_assertPath DKCMAKE_DIR
 	#dk_call dk_assertPath ${DKCMAKE_DIR}
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
@@ -30,8 +30,6 @@ dk_generate() {
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
 	#$(dk_call dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_call dk_error "CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist"
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
-	CMAKE_TARGET_PATH="${TARGET_PATH}"
-	#dk_call dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	Target_Level="RebuildAll"
@@ -70,7 +68,7 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-DSHARED=ON"
 	fi
 	
-	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${Target_Tuple,,}/${Target_Type}"
+	CMAKE_BINARY_DIR="${Target_App_Dir}/${Target_Tuple}/${Target_Type}"
 	dk_call dk_mkdir "${CMAKE_BINARY_DIR}"
 	#dk_call dk_printVar CMAKE_BINARY_DIR
 	

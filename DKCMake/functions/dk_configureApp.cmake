@@ -10,11 +10,11 @@ function(dk_configureApp)
 	dk_debugFunc()
 	
 	set(Target_App_Dir ${ARGV0})
-	dk_basename(${Target_App_Dir} APP_NAME)
+	dk_basename(${Target_App_Dir} Target_App)
 	
 	dk_info("\n")
 	dk_info("##############################################")
-	dk_info("############ Creating ${APP_NAME} ############")
+	dk_info("############ Creating ${Target_App} ############")
 	dk_info("##############################################\n")
 
 	# Create version from date
@@ -89,10 +89,10 @@ function(dk_configureApp)
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
 			if(Debug)
-				dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${APP_NAME}.exe ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+				dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
 			endif()
 			if(Release)
-				dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${APP_NAME}.exe ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+				dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
 			endif()
 		endif()
 		
@@ -110,28 +110,28 @@ function(dk_configureApp)
 
 		# https://stackoverflow.com/a/74491601
 		if(MSVC)
-			add_executable(${APP_NAME} WIN32 ${App_SRC})
+			add_executable(${Target_App} WIN32 ${App_SRC})
 		else()
-			add_executable(${APP_NAME} ${App_SRC})
+			add_executable(${Target_App} ${App_SRC})
 		endif()
 		
 		########################## Add Dependencies ########################
 		if(PROJECT_INCLUDE_DKPLUGINS)
 			foreach(plugin ${dkdepend_list})
 				if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-					add_dependencies(${APP_NAME} ${plugin})
+					add_dependencies(${Target_App} ${plugin})
 				endif()	
 			endforeach()
 		endif()
 		
 		############# Link Libraries, Set Startup Project #################
 		if(MULTI_CONFIG)
-			target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+			target_link_libraries(${Target_App} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 		else()
 			if(Debug)
-				target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
+				target_link_libraries(${Target_App} ${DEBUG_LIBS} ${LIBS})
 			elseif(Release)
-				target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
+				target_link_libraries(${Target_App} ${RELEASE_LIBS} ${LIBS})
 			endif()
 		endif()
 		
@@ -157,8 +157,8 @@ function(dk_configureApp)
 			list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 			dk_replaceAll("${RELEASE_LINK_FLAGS}"  ";"  " "  RELEASE_FLAGS)
 		
-			set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
+			set_target_properties(${Target_App} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${Target_App})
 		endif()
 	endif(Windows_X86_64)
 endfunction()

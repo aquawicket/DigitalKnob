@@ -510,18 +510,16 @@ dk_generate() {
 	dk_clearCmakeCache
 	dk_deleteTempFiles
 
-	TARGET_PATH="${DKCPP_APPS_DIR}"/"${Target_App}"
-	dk_printVar TARGET_PATH
-	mkdir -p "${TARGET_PATH}"/"${Target_Tuple}"
-	cd "${TARGET_PATH}"/"${Target_Tuple}"
+	Target_App_Dir="${DKCPP_APPS_DIR}"/"${Target_App}"
+	dk_printVar Target_App_Dir
+	mkdir -p "${Target_App_Dir}"/"${Target_Tuple}"
+	cd "${Target_App_Dir}"/"${Target_Tuple}"
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
 	dk_printVar CMAKE_SOURCE_DIR
 	if ! dk_pathExists "${CMAKE_SOURCE_DIR}"; then
 		dk_error "CMAKE_SOURCE_DIR does not exist"
 	fi
 	dk_printVar CMAKE_SOURCE_DIR
-	CMAKE_TARGET_PATH=${TARGET_PATH}
-	dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	Target_Level="RebuildAll"
@@ -558,7 +556,7 @@ dk_generate() {
 		set -- "${@}" "-DSHARED=ON"
 	fi
 	
-	CMAKE_BINARY_DIR=${CMAKE_TARGET_PATH}/${Target_Tuple}/${Target_Type}
+	CMAKE_BINARY_DIR=${Target_App_Dir}/${Target_Tuple}/${Target_Type}
 	dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
@@ -1989,16 +1987,16 @@ dk_enterManually() {
 	
 	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
 	if test -f "${DKIMPORTS_DIR}"/"${input}"/DKINSTALL.cmake; then
-		TARGET_PATH=${DKIMPORTS_DIR}/${input}
+		Target_App_Dir=${DKIMPORTS_DIR}/${input}
 	fi
 	if test -f "${DKCPP_PLUGINS_DIR}"/"${input}"/DKINSTALL.cmake; then
-		TARGET_PATH=${DKCPP_PLUGINS_DIR}/${input}
+		Target_App_Dir=${DKCPP_PLUGINS_DIR}/${input}
 	fi
 	if test -f "${DKCPP_APPS_DIR}"/"${input}"/DKINSTALL.cmake; then
-		TARGET_PATH=${DKCPP_APPS_DIR}/${input}
+		Target_App_Dir=${DKCPP_APPS_DIR}/${input}
 		return $(true)
 	fi
-	dk_printVar TARGET_PATH
+	dk_printVar Target_App_Dir
 	
 	if [ ! -d "${DKCPP_APPS_DIR}"/"${Target_App}" ]; then
 		mkdir -p "${DKCPP_APPS_DIR}"/"${Target_App}";

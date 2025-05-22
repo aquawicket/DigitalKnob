@@ -16,9 +16,9 @@ function(dk_createIcons)
 		return()
 	endif()
 
-	dk_assertVar(APP_NAME)
+	dk_assertVar(Target_App)
 	dk_assertVar(Target_Os)
-	dk_info("Building ${Target_Os} icons for ${APP_NAME} . . .")
+	dk_info("Building ${Target_Os} icons for ${Target_App} . . .")
 	
 	dk_assertPath("${Target_App_Dir}")
 	dk_mkdir("${Target_App_Dir}/assets")

@@ -16,7 +16,7 @@ function(dk_generateAppCmake Target_App_Dir)
 	endif()
 	dk_load(dk_builder)
 	
-	dk_basename(${Target_App_Dir} APP_NAME)
+	dk_basename(${Target_App_Dir} Target_App)
 	
 	dk_fileWrite(${Target_App_Dir}/CMakeLists.txt
 ####################################################
@@ -36,9 +36,9 @@ endforeach()
 ##########################
 set(CMAKE_SYSTEM_NAME Generic)
 
-project(${APP_NAME}_PROJECT)
+project(${Target_App}_PROJECT)
 
-dk_set(APP_NAME	${APP_NAME})
+dk_set(Target_App	${Target_App})
 dk_configureApp(${Target_App_Dir})
 
 ###################################################

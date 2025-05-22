@@ -18,18 +18,18 @@ dk_enterManually() {
 	
 	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
 	if test -f "${DKIMPORTS_DIR}/${input}/DKINSTALL.cmake"; then
-		TARGET_PATH=${DKIMPORTS_DIR}/${input}
+		Target_App_Dir=${DKIMPORTS_DIR}/${input}
 	fi
 	if test -f "${DKCPP_PLUGINS_DIR}/${input}/DKINSTALL.cmake"; then
-		TARGET_PATH=${DKCPP_PLUGINS_DIR}/${input}
+		Target_App_Dir=${DKCPP_PLUGINS_DIR}/${input}
 	fi
 	
 	dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
 	if test -f "${DKCPP_APPS_DIR}/${input}/DKINSTALL.cmake"; then
-		TARGET_PATH=${DKCPP_APPS_DIR}/${input}
+		Target_App_Dir=${DKCPP_APPS_DIR}/${input}
 		return $(true)
 	fi
-	dk_call dk_printVar TARGET_PATH
+	dk_call dk_printVar Target_App_Dir
 	
 	if [ ! -d "${DKCPP_APPS_DIR}/${Target_App}" ]; then
 		dk_call dk_mkdir "${DKCPP_APPS_DIR}/${Target_App}";
