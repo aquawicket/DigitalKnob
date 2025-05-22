@@ -278,7 +278,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-%dk_call% dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
 
 	%DKSCRIPT_PATH:/=\%
 %endfunction%

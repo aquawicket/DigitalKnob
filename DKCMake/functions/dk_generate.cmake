@@ -25,7 +25,7 @@ function(dk_generate)
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	set(Target_Level "RebuildAll")
-	set(DKLINK "Static")
+	set(Target_Link "Static")
 	
 	set(CMAKE_ARGS "")
 	dk_assertPath($ENV{DKCMAKE_FUNCTIONS_DIR_})
@@ -51,10 +51,10 @@ function(dk_generate)
 		dk_error("Target_Level:${Target_Level} is invalid")
 	endif()
 	
-	if("${DKLINK}" STREQUAL "Static")
+	if("${Target_Link}" STREQUAL "Static")
 		dk_arrayPush(CMAKE_ARGS "-DSTATIC=ON")
 	endif()
-	if("${DKLINK}" STREQUAL "Shared")
+	if("${Target_Link}" STREQUAL "Shared")
 		dk_arrayPush(CMAKE_ARGS "-DSHARED=ON")
 	endif()
 	
