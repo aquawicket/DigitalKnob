@@ -31,31 +31,31 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	%dk_call% dk_echo "##################################################################"
 ::	%dk_call% dk_echo
 	
-	::############ Target_Path ############
+	::############ Target_App_Dir ############
 	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	set "Target_Path=%DKCPP_APPS_DIR%/%Target_App%"
+	set "Target_App_Dir=%DKCPP_APPS_DIR%/%Target_App%"
 	
-	::############ Create Debug / Release Folder ############
-	if not exist "%Target_Path%/%Target_Tuple%" (%dk_call% dk_mkdir "%Target_Path%/%Target_Tuple%")
+	::############ Target_Tuple_Dir ############
+	set "Target_Tuple_Dir=%Target_App_Dir%/%Target_Tuple%"
+	if not exist "%Target_Tuple_Dir%" (%dk_call% dk_mkdir "%Target_Tuple_Dir%")
 	
 	::############ set CMAKE Variables ###########
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
 	set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
-	set "CMAKE_TARGET_PATH=%Target_Path%"
 
 	::############ Create CMAKE_ARGS array ############
 	set "Target_Level=RebuildAll"
-	set "DKLINK=Static"
+	set "Target_Link=Static"
 
 	set "CMAKE_ARGS="
-	if /i "%Target_Type%"  equ "Debug"		(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
-	if /i "%Target_Type%"  equ "Release"	(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	if /i "%Target_Type%"  equ "All"		(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	if /i "%Target_Level%" equ "Build"		(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
-	if /i "%Target_Level%" equ "Rebuild"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
-	if /i "%Target_Level%" equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
-	if /i "%DKLINK%" 	   equ "Static"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
-	if /i "%DKLINK%"       equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
+	if /i "%Target_Type%"	equ "Debug"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
+	if /i "%Target_Type%"	equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	if /i "%Target_Type%"	equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	if /i "%Target_Level%"	equ "Build"			(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
+	if /i "%Target_Level%"	equ "Rebuild"		(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
+	if /i "%Target_Level%"	equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
+	if /i "%Target_Link%"	equ "Static"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
+	if /i "%Target_Link%"	equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
 
 	::############ DKCMAKE_FUNCTIONS_DIR_ ############
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
@@ -84,8 +84,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::############ CMAKE_BINARY_DIR ############
 	if not defined MULTI_CONFIG	(set "SINGLE_CONFIG=1")
-	if defined MULTI_CONFIG		(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%")
-	if defined SINGLE_CONFIG	(set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%Target_Tuple%/%Target_Type%")
+	if defined MULTI_CONFIG		(set "CMAKE_BINARY_DIR=%Target_Tuple_Dir%")
+	if defined SINGLE_CONFIG	(set "CMAKE_BINARY_DIR=%Target_Tuple_Dir%/%Target_Type%")
 	%dk_call% dk_assertVar CMAKE_BINARY_DIR
 	%dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 	

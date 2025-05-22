@@ -11,17 +11,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_assertVar Target_Path
+	%dk_call% dk_assertVar Target_App_Dir
 
 	if defined MSYSTEM (
 		(set cmnd=%MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_Target_Path%/%Target_Tuple%/%Target_Type% --config %Target_Type% --verbose")
 	)
 
-	if exist "%Target_Path%/%Target_Tuple%/%Target_Type%/CMakeCache.txt" (
-		(set cmnd="%CMAKE_EXE%" --build %Target_Path%/%Target_Tuple%/%Target_Type% --config %Target_Type% --verbose)
+	if exist "%Target_App_Dir%/%Target_Tuple%/%Target_Type%/CMakeCache.txt" (
+		(set cmnd="%CMAKE_EXE%" --build %Target_App_Dir%/%Target_Tuple%/%Target_Type% --config %Target_Type% --verbose)
 	)
-	if exist "%Target_Path%/%Target_Tuple%/CMakeCache.txt" (
-		(set cmnd="%CMAKE_EXE%" --build %Target_Path%/%Target_Tuple% --config %Target_Type% --verbose)
+	if exist "%Target_App_Dir%/%Target_Tuple%/CMakeCache.txt" (
+		(set cmnd="%CMAKE_EXE%" --build %Target_App_Dir%/%Target_Tuple% --config %Target_Type% --verbose)
 	)
 
 	if "%cmnd%" equ "" (%return%)

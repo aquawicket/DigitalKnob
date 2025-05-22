@@ -16,13 +16,12 @@ function(dk_generate)
 	dk_echo("")
 	
 	dk_validate(DKCPP_APPS_DIR "dk_DKBRANCH_DIR()")
-	set(TARGET_PATH "$ENV{DKCPP_APPS_DIR}/${Target_App}")
-	dk_printVar(TARGET_PATH)
-	dk_mkdir("${TARGET_PATH}/${Target_Tuple}")
-	dk_chdir("${TARGET_PATH}/${Target_Tuple}")
+	set(Target_App_Dir "$ENV{DKCPP_APPS_DIR}/${Target_App}")
+	dk_printVar(Target_App_Dir)
+	dk_mkdir("${Target_App_Dir}/${Target_Tuple}")
+	dk_chdir("${Target_App_Dir}/${Target_Tuple}")
 	set(CMAKE_SOURCE_DIR "$ENV{DKCMAKE_DIR}")
 	dk_assertPath(CMAKE_SOURCE_DIR)
-	set(CMAKE_TARGET_PATH "${TARGET_PATH}")
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	set(Target_Level "RebuildAll")
@@ -59,7 +58,7 @@ function(dk_generate)
 		dk_arrayPush(CMAKE_ARGS "-DSHARED=ON")
 	endif()
 	
-	set(CMAKE_BINARY_DIR "${CMAKE_TARGET_PATH}/${Target_Tuple}/${Target_Type}")
+	set(CMAKE_BINARY_DIR "${Target_App_Dir}/${Target_Tuple}/${Target_Type}")
 	#dk_printVar(CMAKE_BINARY_DIR)
 	
 	if(NOT DEFINED ENV{WSLENV})
