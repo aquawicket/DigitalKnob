@@ -45,36 +45,18 @@ dk_info("\n")
 ############ DK_Project_Dir ############
 dk_getFullPath("${CMAKE_BINARY_DIR}" Target_Dir)
 if(Target_Dir MATCHES "Release")
-	dk_set(Target_Type Release)		# Target_Type = Release
+	dk_dirname(${Target_Dir} Target_Tuple_Dir)
+elseif(Target_Dir MATCHES "Debug")
+	dk_dirname(${Target_Dir} Target_Tuple_Dir)
 else()
-	dk_set(Target_Type Debug)		# Target_Type = Debug (DEFAULT)
+	set(Target_Tuple_Dir ${Target_Dir})
 endif()
-dk_dirname(${Target_Dir} Target_Tuple_Dir)	
-if( (target_dir MATCHES "Android")		OR
-	(target_dir MATCHES "Emscripten")	OR
-	(target_dir MATCHES "Ios")			OR
-	(target_dir MATCHES "Iossim")		OR
-	(target_dir MATCHES "Linux")		OR
-	(target_dir MATCHES "Mac")			OR
-	(target_dir MATCHES "Raspberry")	OR
-	(target_dir MATCHES "Windows")		OR
-	(target_dir MATCHES "Cosmopolitan") )
-	dk_set(Target_Tuple_Dir ${Target_Dir})
-else()
-	dk_set(Target_Tuple_Dir ${Target_Dir}/${Target_Tuple})
-endif()
-if(NOT EXISTS ${Target_Tuple_Dir})
-	dk_mkdir(${Target_Tuple_Dir})
-endif()
-dk_assertPath(Target_Tuple_Dir)
 dk_dirname(${Target_Tuple_Dir} DK_Project_Dir)
 dk_set(DK_Project_Dir ${DK_Project_Dir})
 dk_assertPath(DK_Project_Dir)
-#######################################	
+########################################	
 	
 	
-	
-
 
 dk_basename(${DK_Project_Dir} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
