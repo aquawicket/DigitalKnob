@@ -1,4 +1,10 @@
-rem # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
+::# https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
+
+::### FIXME ###
+exit /b 1
+
+
+
 %dk_call% dk_echo "#####################################################################"
 %dk_call% dk_echo "################ Android_X86_64_Clang_Toolchain.cmd #################"
 %dk_call% dk_echo "#####################################################################"

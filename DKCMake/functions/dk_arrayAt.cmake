@@ -75,17 +75,17 @@ function(DKTEST)
 
 	set(at 4)
 	dk_arrayAt(myArray at)
-	dk_info("dk_arrayAt 4 = ${dk_arrayAt}")
+	dk_info("dk_arrayAt ${at} = ${dk_arrayAt}")
 
 	set(at 5)
 	dk_arrayAt(myArray "at")
-	dk_info("dk_arrayAt 5 = ${dk_arrayAt}")
+	dk_info("dk_arrayAt ${at} = ${dk_arrayAt}")
 
 	set(at 6)
 	dk_arrayAt(myArray ${at})
-	dk_info("dk_arrayAt 6 = ${dk_arrayAt}")
+	dk_info("dk_arrayAt ${at} = ${dk_arrayAt}")
 
 	set(at 7)
 	dk_arrayAt(myArray "${at}")
-	dk_info("dk_arrayAt 7 = ${dk_arrayAt}")
+	dk_info("dk_arrayAt ${at} = ${dk_arrayAt}")
 endfunction()

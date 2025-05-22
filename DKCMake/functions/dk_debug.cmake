@@ -27,5 +27,4 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_debug("test dk_debug message" "test")
-	dk_debug()
 endfunction()

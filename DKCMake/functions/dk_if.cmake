@@ -1,7 +1,7 @@
 #!/usr/bin/cmake -P
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
-include_guard()
+#include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
+#include_guard()
 
 ###############################################################################
 # dk_if(condition... "code")
@@ -35,6 +35,9 @@ macro(dk_if)
 	endwhile()
 
 	if(${arg0} ${arg1} ${arg2} ${arg3} ${arg4} ${arg5} ${arg6} ${arg7} ${arg8} ${arg9})
+		if(NOT COMMAND dk_eval)
+			include("${DKCMAKE_FUNCTIONS_DIR_}dk_eval.cmake")
+		endif()
 		dk_eval("${code}")
 	else()
 		#message("${argv} = false")

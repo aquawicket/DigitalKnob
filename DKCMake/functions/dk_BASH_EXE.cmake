@@ -14,29 +14,21 @@ function(dk_BASH_EXE)
 		return()
 	endif()
 
-	###### BASH_EXE ######
-	### environment variable bash ###
-	if(DEFINED ENV{BASH})
-		if(EXISTS "$ENV{BASH}")
-			dk_printVar(ENV{BASH})
-			if(NOT BASH_EXE)
-				dk_set(BASH_EXE "$ENV{BASH}")
-				dk_printVar(BASH_EXE)
-			endif()
-		endif()
+	### from BASH environment variable ###
+	if(NOT EXISTS "${BASH_EXE}")
+		dk_set(BASH_EXE "$ENV{BASH}")
 	endif()
 
 	### Msys2 bash ###
-	if(MSYSTEM)
+	if(NOT EXISTS "${BASH_EXE}")
 		dk_validate(MSYS2 "dk_depend(msys2)")
-		dk_findProgram(MSYS2_BASH_EXE bash "${MSYS2_DIR}/usr/bin")
-		if(EXISTS "${MSYS2_BASH_EXE}")
-			dk_printVar(MSYS2_BASH_EXE)
-			if(NOT BASH_EXE)
-				dk_set(BASH_EXE ${MSYS2_BASH_EXE})
-				dk_printVar(BASH_EXE)
-			endif()
-		endif()
+		dk_findProgram(MSYS2_BASH_EXE bash "${MSYS2}/usr/bin")
+		dk_set(BASH_EXE ${MSYS2_BASH_EXE})
+	endif()
+	
+	if(NOT EXISTS "${BASH_EXE}")
+		dk_fatal("BASH_EXE:${BASH_EXE} not found")
+		return()
 	endif()
 endfunction()
 

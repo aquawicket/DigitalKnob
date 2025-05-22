@@ -25,5 +25,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_addToPluginList(todo) # TODO
+	dk_addToPluginList(zlib) # TODO
 endfunction()

@@ -1,3 +1,7 @@
+::### FIXME ###
+exit /b 1
+
+
 if not defined Windows_Host (
 	exit /b 1
 )

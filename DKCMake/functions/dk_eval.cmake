@@ -1,7 +1,10 @@
 #!/usr/bin/cmake -P
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+#include_guard()
 
+if(NOT DEFINED dk_eval_DEBUG)
+	set(dk_eval_DEBUG	0)
+endif()
 ###############################################################################
 # dk_eval(code)
 #
@@ -12,7 +15,9 @@ macro(dk_eval)
 	#dk_debugFunc()
 	
 	set(code "${ARGV}")
-	message("${lblue}dk_eval> ${lcyan}${code}\n ${clr}")
+	if("${dk_eval_DEBUG}" STREQUAL "1")
+		message("${lblue}dk_eval> ${lcyan}${code}\n ${clr}")
+	endif()
 
 	#dk_replaceAll("${code}"  ";"  "\n"  code)
 	#dk_replaceAll("${code}"  "'"  "\""  code)
@@ -52,5 +57,7 @@ function(DKTEST)
 	dk_debugFunc(0)
 
 	set(test "test")
-	dk_eval([[  message("test = ${test}")   ]])
+	#dk_load(dk_eval)
+	#dk_eval([[  message("testing dk_eval")   ]])
+	dk_eval("message(\"testing dk_eval\")")
 endfunction()

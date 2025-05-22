@@ -59,5 +59,9 @@ function(DKTEST)
 	
 	dk_set(varC "varC_value")
 	dk_assertVar(varC)
+	
+	dk_set(varD "")
+	dk_unset(varD)
+	dk_assertVar(varD)
 
 endfunction()

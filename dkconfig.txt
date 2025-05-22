@@ -12,6 +12,7 @@
 #dk_callDKCpp_TARGET_OS=cosmocc
 #dk_callDKCpp_Target_Arch=cosmocc
 #dk_callDKCpp_TARGET_ENV=cosmocc
+#dk_eval_DEBUG=1
 #dk_exec_PRINT_COMMAND=1
 #dk_exec_PRINT_ARGS=1
 #dk_exec_PRINT_STDOUT=1
