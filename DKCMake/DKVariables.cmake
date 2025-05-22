@@ -82,15 +82,17 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 	dk_assertVar(CMAKE_SOURCE_DIR)
 	dk_getFullPath(${CMAKE_SOURCE_DIR} CMAKE_SOURCE_DIR)
 	dk_assertPath(CMAKE_SOURCE_DIR)
+dk_echo("CMAKE_SOURCE_DIR:             '${CMAKE_SOURCE_DIR}'")
 
 	###### Get CMAKE_BINARY_DIR ######
 	dk_assertVar(CMAKE_BINARY_DIR)
 	dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
 	dk_assertPath(CMAKE_BINARY_DIR)
+dk_echo("CMAKE_BINARY_DIR:             '${CMAKE_BINARY_DIR}'")
 endif()
 
 
-if(DEFINED "ENV{Cosmopolitan}")
+if((NOT DEFINED Cosmopolitan) AND (DEFINED "ENV{Cosmopolitan}"))
 	dk_set(Cosmopolitan "$ENV{Cosmopolitan}")
 endif()
 if(Cosmopolitan)
@@ -104,95 +106,102 @@ endif()
 
 
 ###### Set MSYSTEM and ${MSYSTEM} variables ######
-if(DEFINED "ENV{MSYSTEM}")
+if((NOT DEFINED MSYSTEM) AND (DEFINED "ENV{MSYSTEM}"))
 	dk_set(MSYSTEM "$ENV{MSYSTEM}")		
 endif()
 if(MSYSTEM)
-	dk_set(${MSYSTEM} TRUE)
-	message(MSYSTEM)
+	dk_set(${MSYSTEM} 1)
 endif()
+dk_echo("MSYSTEM:                      '${MSYSTEM}'")
+dk_echo("${MSYSTEM}:                   '${${MSYSTEM}}'")
 
 
 ############ Get Host Variables ############
 dk_validate(Host_Tuple   "dk_Host_Tuple()")
+dk_echo("Host_Os:                      '${Host_Os}'")
+dk_echo("Host_Arch:                    '${Host_Arch}'")
+dk_echo("Host_Tuple:                   '${Host_Tuple}'")
 
 ############ Get Target Variables ############
 dk_validate(CONFIG_PATH   "dk_CONFIG_PATH()")
+dk_echo("CONFIG_PATH:                  '${CONFIG_PATH}'")
 
 ###############################################################
 ## Set variables for paths
 ###############################################################
-dk_validate(ENV{DIGITALKNOB_DIR}  "dk_DIGITALKNOB_DIR()")
+dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
+dk_echo("DIGITALKNOB_DIR:              '${DIGITALKNOB_DIR}'")
 
-dk_chdir($ENV{DIGITALKNOB_DIR})
+dk_chdir("${DIGITALKNOB_DIR}")
 
-dk_set(CMAKE_SUPPRESS_REGENERATION true)
+dk_set(CMAKE_SUPPRESS_REGENERATION 1)
+dk_echo("CMAKE_SUPPRESS_REGENERATION:  '${CMAKE_SUPPRESS_REGENERATION}'")
 
 ### Install DKBIN binary directory ###
 if(INSTALL_DKLIBS)
 	dk_set(CMAKE_INSTALL_PREFIX $ENV{DIGITALKNOB_DIR}/DKBIN)
 endif()
+dk_echo("CMAKE_INSTALL_PREFIX:     '${CMAKE_INSTALL_PREFIX}'")
 
-
-dk_haveLongPaths(longPaths)
-dk_printVar(longPaths)
+dk_haveLongPaths()
+dk_echo("dk_haveLongPaths: '${dk_haveLongPaths}'")
 
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
-dk_printVar(CMAKE_C_COMPILER_ID)
-dk_printVar(CMAKE_CXX_COMPILER_ID)
-dk_printVar(CMAKE_GENERATOR)
-dk_printVar(CMAKE_GENERATOR_PLATFORM)
+dk_echo("CMAKE_C_COMPILER_ID:          '${CMAKE_C_COMPILER_ID}'")
+dk_echo("CMAKE_CXX_COMPILER_ID:        '${CMAKE_CXX_COMPILER_ID}'")
+dk_echo("CMAKE_GENERATOR:              '${CMAKE_GENERATOR}'")
+dk_echo("CMAKE_GENERATOR_PLATFORM:     '${CMAKE_GENERATOR_PLATFORM}'")
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	if(GNU)
 		dk_warning("GNU was allready set")
 	endif()
 	dk_set(GNU 1)
-	message(GNU)
+dk_echo("GNU:                          '${GNU}'")
 	
 elseif(CMAKE_GENERATOR MATCHES "Visual Studio")
 	if(MSVC)
 		dk_warning("MSVC was allready set")
 	endif()
 	dk_set(MSVC 1)
-	message(MSVC)
+dk_echo("MSVC:                         '${MSVC}'")
 	
 elseif(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
 	if(MINGW)
 		dk_warning("MINGW was allready set")
 	endif()
 	dk_set(MINGW 1)
-	message(MINGW)
+dk_echo("MINGW:                        '${MINGW}'")
 	
 elseif(CMAKE_GENERATOR STREQUAL "MSYS Makefiles")
 	if(MSYS)
 		dk_warning("MSYS was allready set")
 	endif()
 	dk_set(MSYS 1)
-	message(MSYS)
+dk_echo("MSYS:                         '${MSYS}'")
 	
 elseif(CMAKE_GENERATOR STREQUAL "Xcode")
 	if(XCODE)
 		dk_warning("XCODE was allready set")
 	endif()
 	dk_set(XCODE 1)
-	message(XCODE)
+dk_echo("XCODE:                        '${XCODE}'")
 	
 elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 	if(GNU)
 		dk_warning("GNU was allready set")
 	endif()
 	dk_set(GNU 1)
-	message(GNU)
+dk_echo("GNU:                          '${GNU}'")
 	
 elseif(CMAKE_GENERATOR STREQUAL "NMake Makefiles")
 	if(MSVC)
 		dk_fatal("MSVC was allready set")
 	endif()
 	dk_set(MSVC 1)
-	message(MSVC)
+dk_echo("MSVC:                         '${MSVC}'")
 
 else()
 	dk_fatal("Could not determin Environment Variable")
@@ -221,7 +230,8 @@ if(NOT Debug AND NOT Release)
 	dk_set(Debug 1)
 	dk_set(Release 1)
 endif()
-
+dk_echo("Debug:                        '${Debug}'")
+dk_echo("Release:                      '${Release}'")
 
 ###########################################################################
 ## Get variables for Build Level
@@ -233,7 +243,9 @@ if(NOT BUILD AND NOT REBUILD AND NOT REBUILDALL)
 	dk_info("No Build level selected, defaulting to REBUILDALL")
 	dk_set(REBUILDALL 1)
 endif()
-
+dk_echo("Build:                        '${Build}'")
+dk_echo("Rebuild:                      '${Rebuild}'")
+dk_echo("RebuildAll:                   '${RebuildAll}'")
 
 ###########################################################################
 ## Get variables for Library Build Type (STATIC or SHARED)
@@ -243,16 +255,17 @@ option(SHARED "Build Shared Libraries and Plugins" 0)
 if(NOT STATIC AND NOT SHARED)
 	dk_set(STATIC 1)
 endif()
-
+dk_echo("Static:                       '${Static}'")
+dk_echo("Shared:                       '${Shared}'")
 
 ###########################################################################
 ## Get variables for CEF
 ###########################################################################
 option(DKCEF "Use Chromium Embeded Framework" 0)
-if(${DKCEF} STREQUAL "ON")
+if(${DKCEF})
 	add_definitions(-DHAVE_DKCef)
 endif()
-
+dk_echo("DKCEF:                        '${DKCEF}'")
 
 
 ########### Determine if we are building a DKApp, DKPlugin or 3rdParty #############
@@ -304,10 +317,11 @@ if(CMAKE_HOST_SYSTEM_VERSION)
 		dk_set(TINYCORE 1)
 	endif()
 endif()
-
+dk_echo("CMAKE_HOST_SYSTEM_VERSION:    '${CMAKE_HOST_SYSTEM_VERSION}'")
 
 ### Set CMAKE_SKIP_RPATH ###
 dk_set(CMAKE_SKIP_RPATH 1)
+dk_echo("CMAKE_SKIP_RPATH:             '${CMAKE_SKIP_RPATH}'")
 
 if(Windows_Host)
 	dk_set(exe .exe)

@@ -12,6 +12,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
  ::%setlocal%
 	%dk_call% dk_debugFunc 0
 
+	set "CMAKE_ARGS="
+	
 	::###### DKBATCH_TOOLCHAIN ######
 	%dk_call% dk_set DKBATCH_TOOLCHAIN %DKBATCH_DIR%/toolchains/%Target_Tuple%_Toolchain.cmd
  	if not exist "%DKBATCH_TOOLCHAIN%" (
@@ -47,19 +49,28 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "Target_Level=RebuildAll"
 	set "Target_Link=Static"
 
-	set "CMAKE_ARGS="
-	if /i "%Target_Type%"	equ "Debug"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
-	if /i "%Target_Type%"	equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	if /i "%Target_Type%"	equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	if /i "%Target_Level%"	equ "Build"			(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
-	if /i "%Target_Level%"	equ "Rebuild"		(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
-	if /i "%Target_Level%"	equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
-	if /i "%Target_Link%"	equ "Static"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
-	if /i "%Target_Link%"	equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
+	::if /i "%Target_Type%"	equ "Debug"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
+	::if /i "%Target_Type%"	equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	::if /i "%Target_Type%"	equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	::if /i "%Target_Level%" equ "Build"		(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
+	::if /i "%Target_Level%" equ "Rebuild"		(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
+	::if /i "%Target_Level%" equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
+	::if /i "%Target_Link%"	equ "Static"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
+	::if /i "%Target_Link%"	equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
+	
+	if /i "%Target_Type%"	equ "Debug"			(%dk_call% dk_set Debug 1)
+	if /i "%Target_Type%"	equ "Release"		(%dk_call% dk_set Release 1)
+	if /i "%Target_Type%"	equ "All"			(%dk_call% dk_set Debug 1) && (%dk_call% dk_set Release 1)
+	if /i "%Target_Level%"	equ "Build"			(%dk_call% dk_set Build 1)
+	if /i "%Target_Level%"	equ "Rebuild"		(%dk_call% dk_set Rebuild 1)
+	if /i "%Target_Level%"	equ "RebuildAll"	(%dk_call% dk_set RebuildAll 1)
+	if /i "%Target_Link%"	equ "Static"		(%dk_call% dk_set Static 1)
+	if /i "%Target_Link%"	equ "Shared"		(%dk_call% dk_set Shared 1)
+	
 
 	::############ DKCMAKE_FUNCTIONS_DIR_ ############
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_appendArgs CMAKE_ARGS -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
+	::%dk_call% dk_appendArgs CMAKE_ARGS -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
 
 	::############ CMake Options ############
 	%dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_VERBOSE_MAKEFILE=1

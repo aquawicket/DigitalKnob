@@ -5,7 +5,8 @@ if not defined Windows_Host (
 %dk_call% dk_echo "################### Windows_X86_64_Ucrt_Toolchain.cmd ######################"
 %dk_call% dk_echo "############################################################################"
 
-%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
+::%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
+set "MSYSTEM=UCRT64"
 set CMAKE_GENERATOR="MinGW Makefiles"
 
 

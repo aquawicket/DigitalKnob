@@ -11,7 +11,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::###### run script ######
 	set cmnd="%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -P "%DKSCRIPT_PATH%"
 	echo %cmnd%
-	%cmnd%
+	%cmnd% & echo success || echo failed
 
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (

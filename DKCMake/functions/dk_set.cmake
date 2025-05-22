@@ -1,6 +1,13 @@
 #!/usr/bin/cmake -P
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_set(variable value)
@@ -11,7 +18,9 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #	@value		The value to set the variable to. 
 #
 function(dk_set variable) #, value)
-	dk_debugFunc(2 256)
+	if(COMMAND dk_debugFunc)
+		dk_debugFunc(2 256)
+	endif()
 
 	if(${ARGC} LESS 2)
 		dk_fatal("dk_set(${ARGV}): not enough arguments, expected at least 2, got ${ARGC}")

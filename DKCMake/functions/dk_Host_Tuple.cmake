@@ -1,4 +1,11 @@
 #!/usr/bin/cmake -P
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
@@ -21,14 +28,15 @@ function(dk_Host_Tuple)
 	###### GET ######	
 	#elseif(NOT DEFINED ENV{Host_Tuple})
 	else()
-		if(NOT Host_Os)
+		if(NOT DEFINED Host_Os)
 			dk_Host_Os()
 		endif()
 		
-		###### First Tuple ######
-		if(NOT Host_Arch)
+		if(NOT DEFINED Host_Arch)
 			dk_Host_Arch()
 		endif()
+		
+		###### First Tuple ######
 		dk_set(Host_Tuple "${Host_Os}_${Host_Arch}")
 		dk_set(${Host_Tuple}_Host 1)
 			### VALIDATE RESULT ###

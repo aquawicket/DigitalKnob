@@ -5,8 +5,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#################### dk_exit settings ##########################################
-::if not defined dk_exit_PAUSE_ON_EXIT 	(set "dk_exit_PAUSE_ON_EXIT=0")
-::if not defined dk_exit_PAUSE_ON_ERROR	(set "dk_exit_PAUSE_ON_ERROR=0")
+:: set "dk_exit_PAUSE_ON_EXIT=1"
+:: set "dk_exit_PAUSE_ON_ERROR=1"
 ::################################################################################
 ::# dk_exit(exit_code)
 ::#

@@ -11,9 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ################## dk_getFileParams settings ###################################
-if(NOT DEFINED dk_getFileParams_PRINT_VARIABLES)
-	set(dk_getFileParams_PRINT_VARIABLES 1)
-endif()
+#	set(dk_getFileParams_PRINT_VARIABLES 1)
 ################################################################################
 # dk_getFileParams(file)
 #

@@ -5,7 +5,8 @@ if not defined Windows_Host (
 %dk_call% dk_echo "##################### Windows_X86_Gcc_Toolchain.cmd ########################"
 %dk_call% dk_echo "############################################################################"
 
-(%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32)
+::%dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32
+set "MSYSTEM=MINGW32"
 set CMAKE_GENERATOR="MinGW Makefiles"
 
 
