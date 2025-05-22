@@ -11,9 +11,9 @@ dk_dll(DKPlugin2)
 dk_assets(DKPlugin2)
 
 if(Windows_X86)
-	dk_copy(${DKCPP_PLUGINS_DIR}/DKPlugin2/Windows_X86/Release/DKPlugin2.dll ${DK_Project_Dir}/assets/Development/DKPlugin2 OVERWRITE)
+	dk_copy(${DKCPP_PLUGINS_DIR}/DKPlugin2/Windows_X86/Release/DKPlugin2.dll ${Target_App_Dir}/assets/Development/DKPlugin2 OVERWRITE)
 endif()
 
 if(Windows_X86_64)
-	dk_copy(${DKCPP_PLUGINS_DIR}/DKPlugin2/Windows_X86_64/Release/DKPlugin2.dll ${DK_Project_Dir}/assets/Development/DKPlugin2 OVERWRITE)
+	dk_copy(${DKCPP_PLUGINS_DIR}/DKPlugin2/Windows_X86_64/Release/DKPlugin2.dll ${Target_App_Dir}/assets/Development/DKPlugin2 OVERWRITE)
 endif()

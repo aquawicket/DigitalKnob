@@ -17,8 +17,8 @@ function(dk_undepend plugin)
 	
 	# Only allow dk_undepend command from these filters	
 #	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL $ENV{DKCMAKE_DIR})
-#		if(DK_Project_Dir)
-#			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DK_Project_Dir})
+#		if(Target_App_Dir)
+#			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${Target_App_Dir})
 #				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL $ENV{DKIMPORTS_DIR}/${plugin})
 #					if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCPP_PLUGINS_DIR}/${plugin})
 #						dk_fatal("dk_undepend() Can only be used from a plugin directory. This is to avoid having disabled libraries hideing everywhere")

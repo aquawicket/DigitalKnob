@@ -10,16 +10,16 @@ function(dk_generate)
 	dk_debugFunc()
 
 	dk_echo("")
-	dk_echo("########################################################################")
-	dk_echo("     Generating ${Target_App} - ${Target_Tuple} - ${Target_Type} - ${Target_Level}")
-	dk_echo("########################################################################")
+	dk_echo("##################################################################################")
+	dk_echo("  Generating ${Target_App} - ${Target_Tuple} - ${Target_Type} - ${Target_Level}")
+	dk_echo("##################################################################################")
 	dk_echo("")
 	
 	dk_validate(DKCPP_APPS_DIR "dk_DKBRANCH_DIR()")
 	set(Target_App_Dir "$ENV{DKCPP_APPS_DIR}/${Target_App}")
-	dk_printVar(Target_App_Dir)
-	dk_mkdir("${Target_App_Dir}/${Target_Tuple}")
-	dk_chdir("${Target_App_Dir}/${Target_Tuple}")
+	set(Target_Tuple_Dir "${Target_App}/${Target_Tuple}")
+	dk_mkdir("${Target_Tuple_Dir}")
+	dk_chdir("${Target_Tuple_Dir}")
 	set(CMAKE_SOURCE_DIR "$ENV{DKCMAKE_DIR}")
 	dk_assertPath(CMAKE_SOURCE_DIR)
 	
@@ -58,7 +58,7 @@ function(dk_generate)
 		dk_arrayPush(CMAKE_ARGS "-DSHARED=ON")
 	endif()
 	
-	set(CMAKE_BINARY_DIR "${Target_App_Dir}/${Target_Tuple}/${Target_Type}")
+	set(CMAKE_BINARY_DIR "${Target_Tuple_Dir}/${Target_Type}")
 	#dk_printVar(CMAKE_BINARY_DIR)
 	
 	if(NOT DEFINED ENV{WSLENV})
@@ -85,63 +85,35 @@ function(dk_generate)
 	#dk_arrayPush(CMAKE_ARGS "--warn-unused-vars")
 	#dk_arrayPush(CMAKE_ARGS "--check-system-vars")
 	
-	if("${Target_Tuple}" STREQUAL "Cosmopolitan")
+	if("${Target_Tuple}" MATCHES "Cosmo")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "cygwin")
+	if("${Target_Tuple}" MATCHES "Cygwin")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Android_Arm32_Clang")
+	if("${Target_Tuple}" MATCHES "Android")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 
-	if("${Target_Tuple}" STREQUAL "Android_Arm64_Clang")
+	if("${Target_Tuple}" MATCHES "Emscripten")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Emscripten_X86_Clang")
+	if("${Target_Tuple}" MATCHES "Ios")
+		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
+	endif()
+	
+	if("${Target_Tuple}" MATCHES "Linux")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Ios_Arm32_Clang")
+	if("${Target_Tuple}" MATCHES "Mac")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
 	endif()
 	
-	if("${Target_Tuple}" STREQUAL "Ios_Arm64_Clang")
-		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
-	endif()
-	
-	if("${Target_Tuple}" STREQUAL "Iossim_X86_Clang")
-		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
-	endif()
-	
-	if("${Target_Tuple}" STREQUAL "Iossim_X86_Clang")
-		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
-	endif()
-	
-	if("${Target_Tuple}" STREQUAL "Linux_X86_Clang")
-		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
-	endif()
-	
-	if("${Target_Tuple}" STREQUAL "Linux_X86_64_Clang")
-		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
-	endif()
-	
-	if("${Target_Tuple}" STREQUAL "Mac_X86_Clang")
-		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
-	endif()
-	
-	if("${Target_Tuple}" STREQUAL "Mac_X86_64_Clang")
-		dk_arrayUnshift(CMAKE_ARGS "-G" "Xcode")
-	endif()
-	
-	if("${Target_Tuple}" STREQUAL "Raspberry_Arm32_Clang")
-		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
-	endif()
-	
-	if("${Target_Tuple}" STREQUAL "Raspberry_Arm64_Clang")
+	if("${Target_Tuple}" MATCHES "Raspberry")
 		dk_arrayUnshift(CMAKE_ARGS "-G" "Unix Makefiles")
 	endif()
 	

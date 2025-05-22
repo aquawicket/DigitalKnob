@@ -64,8 +64,8 @@ function(dk_Target_Env)
 	endif()
 	
 	dk_assertVar(Target_Env)
-	dk_set(${Target_Env}_Target 1)	
-	dk_set(${Target_Env} 1)	
+	dk_set(${Target_Env}_Target  1)	
+	dk_set(${Target_Env}         1)	
 	
 	
 	

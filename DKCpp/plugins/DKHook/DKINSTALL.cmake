@@ -32,8 +32,8 @@ dk_appendCmake("SET_TARGET_PROPERTIES(hookdll PROPERTIES LINKER_LANGUAGE CPP) \n
 
 # FIXME - these should be post built operations. hookdll.dll will not exist yet
 if(EXISTS ${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_Msvc/Release/hookdll.dll)
-	dk_copy(${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_Msvc/Release/hookdll.dll ${DK_Project_Dir}/assets/DKHook OVERWRITE)
+	dk_copy(${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_Msvc/Release/hookdll.dll ${Target_App_Dir}/assets/DKHook OVERWRITE)
 endif()
 if(EXISTS ${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_64_Msvc/Release/hookdll.dll)
-	dk_copy(${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_64_Msvc/Release/hookdll.dll ${DK_Project_Dir}/assets/DKHook OVERWRITE)
+	dk_copy(${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_64_Msvc/Release/hookdll.dll ${Target_App_Dir}/assets/DKHook OVERWRITE)
 endif()

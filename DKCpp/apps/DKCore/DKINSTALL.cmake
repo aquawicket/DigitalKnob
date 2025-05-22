@@ -19,14 +19,14 @@ dk_depend(DK)
 
 
 	############ GENERATE APP CMAKE ############
-	set(DK_Project_Dir ${CMAKE_SOURCE_DIR})
-	dk_generateAppCmake(${DK_Project_Dir} "zlib;DK")
+	set(Target_App_Dir ${CMAKE_SOURCE_DIR})
+	dk_generateAppCmake(${Target_App_Dir} "zlib;DK")
 
 
 	############ CONFIGURE APP ############
-	dk_configure(${DK_Project_Dir} -DDKCMAKE_FUNCTIONS_DIR=$ENV{DKCMAKE_FUNCTIONS_DIR} -DTUPLE=${TUPLE})
+	dk_configure(${Target_App_Dir} -DDKCMAKE_FUNCTIONS_DIR=$ENV{DKCMAKE_FUNCTIONS_DIR} -DTUPLE=${TUPLE})
 
 
 	############ BUILD APP ############
-	dk_build(${DK_Project_Dir})
+	dk_build(${Target_App_Dir})
 ]]

@@ -21,10 +21,10 @@ function(dk_buildLog entry)
 	endif()
 	dk_info("${msg}")
 	
-	dk_validate(DK_Project_Dir "dk_Target_Tuple()")  #TODO - move to 'dk_DK_Project_Dir.cmake'
+	dk_validate(Target_App_Dir "dk_Target_Tuple()")  #TODO - move to 'dk_DK_Project_Dir.cmake'
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
-	dk_assertPath("${DK_Project_Dir}/${CONFIG_PATH}")
-	dk_fileAppend("${DK_Project_Dir}/${CONFIG_PATH}/DKBUILD.log" "${msg}\n")
+	dk_assertPath("${Target_App_Dir}/${CONFIG_PATH}")
+	dk_fileAppend("${Target_App_Dir}/${CONFIG_PATH}/DKBUILD.log" "${msg}\n")
 endfunction()
 
 
