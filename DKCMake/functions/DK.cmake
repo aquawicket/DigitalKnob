@@ -14,14 +14,15 @@ if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR} "${DKCMAKE_FUNCTIONS_DIR}")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
 	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-		message(FATAL_ERROR "ENV{DKCMAKE_FUNCTIONS_DIR_}:$ENV{DKCMAKE_FUNCTIONS_DIR_} does not exist")
+		message(FATAL_ERROR "ENV{DKCMAKE_FUNCTIONS_DIR_}:'$ENV{DKCMAKE_FUNCTIONS_DIR_}' does not exist")
 	endif()
 endif()
 
 
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_set.cmake")
+dk_set(DKCMAKE_FUNCTIONS_DIR "$ENV{DKCMAKE_FUNCTIONS_DIR}")
+dk_set(DKCMAKE_FUNCTIONS_DIR_ "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 dk_set(DK.cmake "${CMAKE_PARENT_LIST_FILE}")
-dk_set(DK.cmake "${DK.cmake}")
 
 file(TO_CMAKE_PATH "$ENV{DKSCRIPT_PATH}" DKSCRIPT_PATH)
 if(NOT EXISTS "${DKSCRIPT_PATH}")
@@ -29,7 +30,6 @@ if(NOT EXISTS "${DKSCRIPT_PATH}")
 endif()
 dk_set(DKSCRIPT_PATH "${DKSCRIPT_PATH}")
 
-#set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 
 ### Print Version Info ###
 message("")
@@ -39,16 +39,13 @@ set(DKSHELL_PATH ${CMAKE_COMMAND})
 string(ASCII 27 ESC)
 message("${ESC}[46m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m")
 message("DKSHELL_PATH = ${DKSHELL_PATH}")
-message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
+message("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
 message("")
-
-
 
 message("CMAKE_GENERATOR = ${CMAKE_GENERATOR}")
 
-
 ############ dk_cmakePolicies ############
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}/dk_cmakePolicies.cmake")
+include("${DKCMAKE_FUNCTIONS_DIR_}/dk_cmakePolicies.cmake")
 dk_cmakePolicies()
 
 # Note: Using DK() as the function name will cause DK/DKINSTALL.cmake to fail in dk_load.cmake
@@ -73,15 +70,12 @@ function(DKINIT)
 	
 	############ Get DKCMAKE variables ############
 	dk_DKCMAKE_VARS()
-	#dk_echo("DKCMAKE_DIR = $ENV{DKCMAKE_DIR}")
-	#dk_echo("DKCMAKE_FUNCTIONS_DIR = $ENV{DKCMAKE_FUNCTIONS_DIR}")
 	
-	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_load.cmake")
+	include("${DKCMAKE_FUNCTIONS_DIR_}dk_load.cmake")
 	dk_load("dk_fatal")
 	
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS()
-	#dk_echo("DKHTTP_DKCMAKE_FUNCTIONS_DIR = $ENV{DKHTTP_DKCMAKE_FUNCTIONS_DIR}")
 
 	############ Setup dk_callStack ############
 	dk_setupCallstack()
@@ -101,7 +95,6 @@ function(DKINIT)
 	set(ENABLE_DKTEST 1 CACHE INTERNAL "")
 
 	############ LOAD FUNCTION FILES ############
-	#include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 	dk_load(dk_dirname)
 	dk_load(dk_basename)
 	if("$ENV{DKSCRIPT_EXT}" STREQUAL ".cmake")
@@ -119,7 +112,7 @@ function(DKINIT)
 	dk_load(dk_watch)
 	dk_load(dk_messageBox)
 
-	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
+	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
 	if(EXISTS "$ENV{DKSCRIPT_DIR}/dkconfig.txt")
 		dk_load(dk_getFileParams)
 		if(COMMAND dk_getFileParams)
@@ -187,8 +180,8 @@ endfunction()
 function(dk_DKCMAKE_VARS)
 	get_filename_component(DKCMAKE_DIR	"${CMAKE_CURRENT_LIST_DIR}" DIRECTORY)
 	set(ENV{DKCMAKE_DIR} 				"${DKCMAKE_DIR}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR}		"$ENV{DKCMAKE_DIR}/functions")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_}		"$ENV{DKCMAKE_FUNCTIONS_DIR}/")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR}		"${DKCMAKE_DIR}/functions")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_}		"${DKCMAKE_FUNCTIONS_DIR}/")
 endfunction(dk_DKCMAKE_VARS)
 
 ##################################################################################

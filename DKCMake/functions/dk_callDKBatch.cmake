@@ -39,7 +39,7 @@ function(dk_callDKBatch func)
 
 	### Call DKBatch function ###
 	dk_validate(CMD_EXE "dk_CMD_EXE()")
-	dk_validate(ENV{DKBATCH_FUNCTIONS_DIR_}		"dk_DKBRANCH_DIR()")	
+	dk_validate(DKBATCH_FUNCTIONS_DIR_		"dk_DKBRANCH_DIR()")	
 	set(DKBATCH_COMMAND ${CMD_EXE} /V:ON /c $ENV{DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
 
 	if("${dk_callDKBatch_PRINT_COMMAND}" EQUAL 1)

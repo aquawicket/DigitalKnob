@@ -124,7 +124,7 @@ include_guard()
 #	dk_printVar(CMAKE_TOOLCHAIN_FILE)
 #elseif(DKCMAKE_LOAD_FILE_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_LOAD_FILE_TOOLCHAIN")
-#	#dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_X86_64_clang_toolchain.cmake)
+#	#dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_64_clang_toolchain.cmake)
 #elseif(DKCMAKE_INTERNAL_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_INTERNAL_TOOLCHAIN")
 #else()
@@ -307,140 +307,140 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 
 #################### TOOLCHAINS ##########################
-if(NOT EXISTS "$ENV{DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake")
-	dk_error("$ENV{DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake Not Found")
+if(NOT EXISTS "${DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake")
+	dk_error("${DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake Not Found")
 endif()
-dk_load($ENV{DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake)
+dk_load(${DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake)
 
 #[[
 ### Android_Arm32
 if(Android_Arm32)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Android_Arm32_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Android_Arm32_toolchain.cmake)
 endif()
 
 ### Android_arm64
 if(Android_Arm64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Android_Arm32_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Android_Arm32_toolchain.cmake)
 endif()
 
 ### Android_x86
 if(Android_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Android_X86_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Android_X86_toolchain.cmake)
 endif()
 
 ### Android_X86_64
 if(Android_X86_64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Android_X86_64_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Android_X86_64_toolchain.cmake)
 endif()
 
 ### Cosmopolitan ###
 if(Cosmopolitan)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Cosmopolitan_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Cosmopolitan_toolchain.cmake)
 endif()
 
 ### Emscripten_x86 ###
 if(Emscripten_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Emscripten_X86_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Emscripten_X86_toolchain.cmake)
 endif()
 
 ### ios_arm32 - XCODE ###
 if(Ios_Arm32)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Ios_Arm32_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Ios_Arm32_toolchain.cmake)
 endif()
 
 ### ios_arm64 - XCODE ###
 if(Ios_Arm64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Ios_Arm64_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Ios_Arm64_toolchain.cmake)
 endif()
 
 ### iOS Simulator x86 - XCODE ###
 if(Iossim_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Iossim_X86_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Iossim_X86_toolchain.cmake)
 endif()
 
 ### iOS Simulator x86_64 - XCODE ###
 if(Iossim_X86_64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Iossim_X86_64_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Iossim_X86_64_toolchain.cmake)
 endif()
 
 ### Linux x86 ###
 if(Linux_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Linux_X86_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Linux_X86_toolchain.cmake)
 endif()
 
 #### Linux x86_64 - clang ###
 if(Linux_X86_64_Clang)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Linux_X86_64_clang_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Linux_X86_64_clang_toolchain.cmake)
 endif()
 
 #### Linux x86_64 - gcc ###
 if(Linux_X86_64_Gcc)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Linux_X86_64_gcc_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Linux_X86_64_gcc_toolchain.cmake)
 endif()
 
 ### Mac x86 - XCODE ###
 if(Mac_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Mac_X86_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Mac_X86_toolchain.cmake)
 endif()
 
 ### Mac x86_64 - XCODE ###
 if(Mac_X86_64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Mac_X86_64_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Mac_X86_64_toolchain.cmake)
 endif()
 
 ### Raspbery arm32 ###
 if(Raspberry_Arm32)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Raspberry_Arm32_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Raspberry_Arm32_toolchain.cmake)
 endif()
 
 ### Raspbery arm64 ###
 if(Raspberry_Arm64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Raspberry_Arm64_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Raspberry_Arm64_toolchain.cmake)
 endif()
 
 ### Windows arm64 - CLANGARM64 ###
 if(Windows_Arm64_Clang)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_Arm64_clang_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Windows_Arm64_clang_toolchain.cmake)
 endif()
 
 ### Windows x86 - MSVC ###
 if(Windows_X86_Msvc)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_X86_msvc_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_msvc_toolchain.cmake)
 endif()
 
 ### Windows x86 - MINGW32 ###
 if(Windows_X86_Gcc)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_X86_gcc_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86 - CLANG32 ###
 if(Windows_X86_Clang)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_X86_clang_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_clang_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MSVC ###
 if(Windows_X86_64_Msvc)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_X86_64_msvc_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_64_msvc_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - CLANG64 ###
 if(Windows_X86_64_Clang)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_X86_64_clang_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_64_clang_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MINGW64 ###
 if(Windows_X86_64_Gcc)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_X86_64_gcc_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_64_gcc_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - UCRT64 ###
 if(Windows_X86_64_Ucrt)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_X86_64_ucrt_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_64_ucrt_toolchain.cmake)
 endif()
 
 ### Windows x86_64 - MSYS ###
 if(Win_X86_64_Msys)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/Windows_X86_64_msys_toolchain.cmake)
+	dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_64_msys_toolchain.cmake)
 endif()
 ]]
 

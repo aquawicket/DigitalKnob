@@ -17,13 +17,13 @@ function(dk_callDKCmake func rtn_var)
     dk_debugFunc()
     
     ### get required variables ###
-    dk_validate(ENV{DKIMPORTS_DIR}           "dk_DKBRANCH_DIR()")
+    dk_validate(DKIMPORTS_DIR           "dk_DKBRANCH_DIR()")
 	dk_depend(cmake)
-	dk_validate(ENV{DKCMAKE_DIR}             "dk_DKBRANCH_DIR()")
+	dk_validate(DKCMAKE_DIR             "dk_DKBRANCH_DIR()")
     dk_validate(DKCMAKE_FUNCTIONS_DIR   "dk_DKBRANCH_DIR()")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR}           "$ENV{DKCMAKE_FUNCTIONS_DIR}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_}          "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
-	set(ENV{DKSCRIPT_PATH}                   "$ENV{DKSCRIPT_PATH}")
+	dk_set(DKCMAKE_FUNCTIONS_DIR      	"$ENV{DKCMAKE_FUNCTIONS_DIR}")
+	dk_set(DKCMAKE_FUNCTIONS_DIR_     	"$ENV{DKCMAKE_FUNCTIONS_DIR}/")
+	dk_set(DKSCRIPT_PATH              	"$ENV{DKSCRIPT_PATH}")
     
     
     ### get ALL_BUT_FIRST_ARGS ###
