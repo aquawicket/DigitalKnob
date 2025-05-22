@@ -11,10 +11,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
     %dk_call% dk_debugFunc 1 4
  
-    if "%~1" neq "" (set "_reg_path_=%~1") else 	(%dk_call% dk_error "dk_registrySetKey: _reg_path_ is invalid" & %return%)
+    if "%~1" neq "" (set "_reg_path_=%~1")	else 	(%dk_call% dk_error "dk_registrySetKey: _reg_path_ is invalid" & %return%)
     if "%~2" neq "" (set "_key_=/v %~2")	else	(set "_key_=/ve")
     if "%~3" neq "" (set "_type_=/t %~3")	else 	(set "_type_=")
-    if "%~4" neq "" (set "_value_=%~4")	else	(set "_value_=")
+    if "%~4" neq "" (set "_value_=%~4")		else	(set "_value_=")
 
 	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
 	

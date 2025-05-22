@@ -19,6 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_info "Adding '%_menuTitle_%' context menu to Registry"
 	%dk_call% dk_info "using '%_icon_exe_%' for the icon"
     
+	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
     ::### delete existing key ###
  ::   %dk_call% dk_registryDeleteKey "HKCR/AllFilesystemObjects/shell/%_menuTitle_%"
     
@@ -28,14 +29,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::REG ADD "HKCR/*/shell/%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
     
     ::### ICON ###
-    ::%dk_call% dk_registrySetKey "HKCR/AllFilesystemObjects/shell/%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
-    echo REG ADD "HKCR/AllFilesystemObjects/shell/%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
-    REG ADD "HKCR/AllFilesystemObjects/shell/%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
+echo %REG_EXE% ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
+     %REG_EXE% ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
+::echo %dk_call% dk_registrySetKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "\"%_icon_exe_%\""
+::	 %dk_call% dk_registrySetKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "\"%_icon_exe_%\""
     
     ::### COMMAND <args> ###
-    ::%dk_call% dk_registrySetKey "HKCR/*/shell/%_menuTitle_%/command" "" "" "%_command_%"
-    echo REG ADD "HKCR/AllFilesystemObjects/shell/%_menuTitle_%/command" /ve /d "%_command_%" /f
-    REG ADD "HKCR/AllFilesystemObjects/shell/%_menuTitle_%/command" /ve /d "%_command_%" /f
+echo %REG_EXE% ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+     %REG_EXE% ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+::echo %dk_call% dk_registrySetKey "HKCR/AllFilesystemObjects/shell/%_menuTitle_%/command" "" "" "%_command_%"
+::     %dk_call% dk_registrySetKey "HKCR/AllFilesystemObjects/shell/%_menuTitle_%/command" "" "" "%_command_%"
 %endfunction%
 
 
