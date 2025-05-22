@@ -55,7 +55,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%commit_msg%" equ "" (set "commit_msg=git commit %date%")
         
     %dk_call% dk_echo
-    %dk_call% dk_echo "git commit message: '%commit_msg%'"
+    %dk_call% dk_echo "commit message: '%commit_msg%'"
 
     %dk_call% dk_confirm || (%return%)
     
