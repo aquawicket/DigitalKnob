@@ -1,5 +1,5 @@
 @echo off
-   
+  
 mode 78,45 & color 07
 
 ::: This can be put in a seperate bat file
@@ -21,8 +21,8 @@ echo  ^| %fg`magenta-%Hello World!%`r% ^| %%fg`magenta-%%
 echo  ^| %fg`cyan-%Hello World!%`r% ^| %%fg`cyan-%%
 echo  ^| %fg`white-%Hello World!%`r% ^| %%fg`white-%%
 echo:
-echo  %`u%%fg`white%Light foreground%`r%                  %`u%%fg`white%Usage%`r% 
-echo:                                                   
+echo  %`u%%fg`white%Light foreground%`r%                  %`u%%fg`white%Usage%`r%
+echo:                                                  
 echo  ^| %fg`black%Hello World!%`r% ^| %%fg`black%%       Before using %`b%cl%`r% plugin, add '%fg`black%call cl.bat%`r%'
 echo  ^| %fg`red%Hello World!%`r% ^| %%fg`red%%         to your code. It will save colors to
 echo  ^| %fg`green%Hello World!%`r% ^| %%fg`green%%       variables. After that, you can now use it.
@@ -35,7 +35,7 @@ echo                                         %fg`black%fg%`r% foreground
 echo  %`u%%fg`white%Dark background%`r%                      %fg`black%cyan%`r% color
 echo                                          %fg`black%-%`r% darker color
 echo  ^| %bg`black-%Hello World!%`r% ^| %%bg`black-%%
-echo  ^| %bg`red-%Hello World!%`r% ^| %%bg`red-%%        %`u%%fg`white%Compatibility%`r% 
+echo  ^| %bg`red-%Hello World!%`r% ^| %%bg`red-%%        %`u%%fg`white%Compatibility%`r%
 echo  ^| %bg`green-%Hello World!%`r% ^| %%bg`green-%%
 echo  ^| %bg`yellow-%Hello World!%`r% ^| %%bg`yellow-%%     If you are running Windows older than 10,
 echo  ^| %bg`blue-%Hello World!%`r% ^| %%bg`blue-%%       %`b%cl%`r% will automatically set it to legacy
@@ -53,4 +53,4 @@ echo  ^| %bg`blue%Hello World!%`r% ^| %%bg`blue-%%       %fg`black%instagram.com
 echo  ^| %bg`magenta%Hello World!%`r% ^| %%bg`magenta-%%
 echo  ^| %bg`cyan%Hello World!%`r% ^| %%bg`cyan-%%
 echo  ^| %bg`white%Hello World!%`r% ^| %%bg`white-%%
-for /l %%i in (0,0,1) do pause >nul 
+for /l %%i in (0,0,1) do pause >nul

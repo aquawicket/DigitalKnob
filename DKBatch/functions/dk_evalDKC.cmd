@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -13,7 +13,7 @@ if not defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 :dk_evalDKC
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
- 
+
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	::echo %~1 > "%DKCACHE_DIR%/dk_evalDKC_TEMP.c"
 	

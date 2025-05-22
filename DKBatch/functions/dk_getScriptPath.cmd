@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -31,7 +31,7 @@ if ":" equ "%func:~0,1%" ( goto %func% )
     (goto) 2>nul
     (goto) 2>nul
     ::setlocal DisableDelayedExpansion
-    set "_returnVar=%_returnVar%"   
+    set "_returnVar=%_returnVar%"  
     set "_lastpath=%_lastpath%"
     set "_lastargs=%_lastargs%"
     call set "_path=%%~f0"

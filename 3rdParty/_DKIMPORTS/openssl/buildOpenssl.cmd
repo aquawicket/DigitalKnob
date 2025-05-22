@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate OPENSSL "%dk_call% %DKIMPORTS_DIR%\openssl\DKINSTALL.cmd"
 	%dk_call% dk_validate NASM "%dk_call% %DKIMPORTS_DIR%\nasm\DKINSTALL.cmd"
 	%dk_call% dk_delete %OPENSSL%\%Target_Tuple%
-	%dk_call% dk_mkdir %OPENSSL%\%Target_Tuple%\Debug 
+	%dk_call% dk_mkdir %OPENSSL%\%Target_Tuple%\Debug
 	
 	::############ Windows_X86_64_Clang ##########
 	if "%Target_Tuple%"=="Windows_X86_64_Clang" (

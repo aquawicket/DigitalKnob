@@ -43,7 +43,7 @@ setlocal DisableDelayedExpansion
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
- 
+
 	set "file=dk_fileReplaceLine_TEST.txt"
 	echo one> %file%
 	echo two>> %file%

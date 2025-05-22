@@ -29,13 +29,13 @@
 :replace_substring <input> <replace> <with> rtn_var
    set "input_string=%1"
    call set "%4=%%input_string:%2=%3%%"
-   
+  
    ::set "replace=%2"
    ::call set "%4=%%input:%replace%=%with%%%"
-   
+  
    ::set "with=%3"
    ::call set "%4=%%input:%2=%with%%%"
-   
+  
    ::set "output=%4"
    ::call set "output=%%input:%replace%=%with%%%"
 %endfunction%

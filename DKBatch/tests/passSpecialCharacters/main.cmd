@@ -1,10 +1,10 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-::	%	%%	 
+::	%	%%	
 ::	^	^^	May not always be required in doublequoted strings, but it won't hurt
 ::	&	^&
 ::	<	^<
@@ -42,7 +42,7 @@ setlocal enableDelayedExpansion
 	::setlocal disableDelayedExpansion & call setVariable complex "abc" "123" "x y z"  & setlocal enableDelayedExpansion
 	::%setVar% complex "^ & < > | ' ` , ; = ( ) ! \ / [ ] . * ? % " %}%
 	
-	:: delayed expansion is lost here, use of "%var%" requires quotes 
+	:: delayed expansion is lost here, use of "%var%" requires quotes
 	::echo main: complex = '!complex!'
 	
 	:: with delayed expansion regained, no quotes are required for !var!

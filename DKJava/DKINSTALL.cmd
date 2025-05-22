@@ -20,7 +20,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	%COMPILER_EXE% /nologo /out:%APP%.exe *.java
 	
 	if not exist "%APP%.exe" (
-		echo: 
+		echo:
 		echo ERROR: compilation of %DKJava_FILE% failed.
 		pause
 		goto:eof

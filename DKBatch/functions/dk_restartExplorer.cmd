@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	  dk scri[t ran after will invoke this again. I believe this ocours because after
 ::#   a script header runs DK.cmd, it continues after DK.cmd's execution completes.
 ::#   And since explorer has been restarted, it may be holding variables withing the
-::#   new instance. Further investigation is required. 
+::#   new instance. Further investigation is required.
 ::#
 :dk_restartExplorer
 %setlocal%

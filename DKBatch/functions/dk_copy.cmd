@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_copy
 %setlocal%
 	%dk_call% dk_debugFunc 2 3
- 
+
 	set "_from_=%~1"	
 	set "_to_=%~2"
 	if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
@@ -32,7 +32,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_delete %_to_%
 	)
 
-	:: the base directory of the %to% path must exist.    
+	:: the base directory of the %to% path must exist.   
 	%dk_call% dk_dirname "%_to_%"
 	%dk_call% dk_mkdir "%dk_dirname%"
 

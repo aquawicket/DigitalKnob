@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 ::https://stackoverflow.com/a/11576816
@@ -15,15 +15,15 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 :dk_dumpStack
 ::%setlocal%
     %dk_call% dk_debugFunc 1 99
-(   
+(  
     setlocal DisableDelayedExpansion
     if %frame% neq 0 (goto) 2>nul & (goto) 2>nul
-    
+   
     echo #################################################
     set /a "frame=%frame%"
     set "_returnVar=%~1"
 
-    
+   
     &:: FIXME: remove the need for calls here
     call set "caller[%frame%]=%%~0"
     call set "caller[%frame%].fullpath=%%~f0"
@@ -39,7 +39,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
     call set "caller.func=%%~n0"
     call set "DKTEST_caller=:DKTEST_%%~n0"
     call set "caller.args=%%*"
-    
+   
     echo caller                         = %caller%
     echo caller.fullpath                = %caller.fullpath%
     echo caller.directory               = %caller.directory%
@@ -49,19 +49,19 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
     echo caller.args                    = %caller.args%
     call set _caller=%%caller[%frame%].fullpath:*%%~f0=%%
     echo _caller                        = %_caller%
-    
-    
+   
+   
     call echo caller[%frame%]           = %%caller[%frame%]%%
     call echo caller[%frame%].fullpath  = %%caller[%frame%].fullpath%%
     call echo caller[%frame%].directory = %%caller[%frame%].directory%%
     call echo caller[%frame%].filename  = %%caller[%frame%].filename%%
     call echo caller[%frame%].func      = %%caller[%frame%].func%%
     call echo caller[%frame%].args      = %%caller[%frame%].args%%
-    
-    
+   
+   
     echo "%caller%" = "%DKTEST_caller%"
     if "%caller%" equ "%DKTEST_caller%" (echo THEY ARE EQUAL!)
-    
+   
     if "%caller%" equ "" (
         %dk_call% dk_debug "CALLER IS EMPTY"
         setlocal DisableDelayedExpansion
@@ -90,7 +90,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 ::%setlocal%
 	::call dk_dkebugFunc 0
 
- 
+
     call :dk_dumpStackReturn
 %endfunction%
 
@@ -98,7 +98,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 ::%setlocal%
 	::call dk_dkebugFunc 0
 	
- 
+
     endlocal
     %caller[1].fullpath% %caller[1].args%
 %endfunction%
@@ -112,7 +112,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 ::%setlocal%
     %dk_call% dk_debugFunc 0
 
- 
+
     call :DKTEST_main
     %endfunction%
 
@@ -123,7 +123,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
     :DKTEST_dk_dumpStack
         %dk_call% dk_info ":DKTEST  %*"
         call:func1
-        
+       
         %dk_call% dk_info "caller[0] = %caller[0]%"
         %dk_call% dk_info "caller[1] = %caller[1]%"
         %dk_call% dk_info "caller[2] = %caller[2]%"
@@ -133,7 +133,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
         %dk_call% dk_info "caller[6] = %caller[6]%"
         %dk_call% dk_info "caller[7] = %caller[7]%"
         %dk_call% dk_info "returned from :DKTEST"
-        
+       
         %dk_call% dk_exit
     %endfunction%
 

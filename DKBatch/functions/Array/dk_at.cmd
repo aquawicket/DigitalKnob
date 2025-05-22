@@ -1,13 +1,13 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::################################################################################
 ::# Array/dk_at(array, index)
 ::#
-::#	Takes an array instance with an integer value and returns the item at that index, 
+::#	Takes an array instance with an integer value and returns the item at that index,
 ::#	allowing for positive and negative integers. Negative integers count back from the last item in the array  <-- TODO
 ::#
 ::#	PARAMETERS
@@ -47,7 +47,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% Array/dk_at MyArrayA 2
 	%dk_call% dk_echo "Array/dk_at[MyArrayA 2] = %dk_at%"
 	if "%dk_at%" neq "d e f" (%dk_call% dk_error "Array/dk_at[] failed")
-	if "%dk_at%" equ "d e f" (%dk_call% dk_success "Array/dk_at[] suceeded") 
+	if "%dk_at%" equ "d e f" (%dk_call% dk_success "Array/dk_at[] suceeded")
 
 	set "myArrayB[0]=h i j"
 	set "myArrayB[1]=4 5 6"

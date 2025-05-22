@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::    microseconds="$(( nanoseconds / 1000))"
 ::    date_microseconds="$((microseconds % 1000))"
-      
+     
 ::    milliseconds="$(( nanoseconds / 1000000))"
 ::    date_milliseconds="$((milliseconds % 1000000))"
 
@@ -53,7 +53,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::    ::years="$((seconds/60/60/24/365))"
 ::    years="$((seconds/31556952))"
 ::    date_years="$(date -d@"$seconds" +"%Y")"
-::    t_years="$((seconds/60/60/24/7%12))" 
+::    t_years="$((seconds/60/60/24/7%12))"
 
 ::    decades="$((seconds/315569520))"
 ::    ::date_decades="$((date_years / 10))"
@@ -116,13 +116,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :::dk_getHour
 ::::%setlocal%
 	%dk_call% dk_debugFunc 0
-:: 
+::
 ::    set hour=%time:~0,2%
 ::    if "%hour:~0,1%" equ " " set hour=0%hour:~1,1%
 ::    echo %hour%
 ::%endfunction%
 
-    
+   
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
@@ -151,27 +151,27 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::  set weeks=%time:~0,2%
 ::  if "%weeks:~0,1%" equ " " set weeks=0%weeks:~1,1%
 ::  echo weeks=%weeks%
-    
+   
 ::  set days=%time:~0,2%
 ::  if "%days:~0,1%" equ " " set days=0%days:~1,1%
 ::  echo days=%days%
-    
+   
     set hours=%time:~0,2%
     if "%hours:~0,1%" equ " " set hours=0%hours:~1,1%
     echo hours=%hours%
-    
+   
     set minutes=%time:~3,2%
     if "%minutes:~0,1%" equ " " set minutes=0%minutes:~1,1%
     echo minutes=%minutes%
-    
+   
     set seconds=%time:~6,2%
     if "%seconds:~0,1%" equ " " set seconds=0%seconds:~1,1%
     echo seconds=%seconds%
-    
+   
     set milliseconds=%time:~9,2%
     if "%milliseconds:~0,1%" equ " " set milliseconds=0%milliseconds:~1,1%
     echo milliseconds=%milliseconds%
-    
+   
 ::  set microseconds=%time:~9,2%
 ::  if "%microseconds:~0,1%" equ " " set microseconds=0%microseconds:~1,1%
 ::  echo microseconds=%microseconds%

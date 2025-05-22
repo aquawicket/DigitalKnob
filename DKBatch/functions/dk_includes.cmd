@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_includes
 %setlocal%
 	%dk_call% dk_debugFunc 2 3
-    
+   
     set "_haystack_=%~1"
     set "_needle_=%~2"
 	
@@ -20,7 +20,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		set "dk_includes=1"
 	)
-    
+   
 	set "_haystack_="
 	set "_needle_="
     endlocal & (
@@ -45,30 +45,30 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_set substring "needle"
     %dk_call% dk_includes "%string%" "%substring%" result
     if "%result%" equ "0" (%dk_call% dk_echo "'%string%' CONTAINS '%substring%'") else (%dk_call% dk_echo "'%string%' DOES NOT CONTAIN '%substring%'")
-    
+   
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "straw"
     %dk_call% dk_includes "%string%" "%substring%" result
     if "%result%" equ "0" (%dk_call% dk_echo "'%string%' CONTAINS '%substring%'") else (%dk_call% dk_echo "'%string%' DOES NOT CONTAIN '%substring%'")
-    ::FIXME: ERRORLEVEL is still 1 
-    
-    
+    ::FIXME: ERRORLEVEL is still 1
+   
+   
     ::###### Using if ERRORLEVEL
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "needle"
     %dk_call% dk_includes "%string%" "%substring%"
     if not ERRORLEVEL 1 (%dk_call% dk_echo "'%string%' CONTAINS '%substring%'") else (%dk_call% dk_echo "'%string%' DOES NOT CONTAIN '%substring%'")
-    
+   
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "straw"
     %dk_call% dk_includes "%string%" "%substring%"
     if not ERRORLEVEL 1 (%dk_call% dk_echo "'%string%' CONTAINS '%substring%'") else (%dk_call% dk_echo "'%string%' DOES NOT CONTAIN '%substring%'")
-    ::FIXME: ERRORLEVEL is still 1 
-    
-    
+    ::FIXME: ERRORLEVEL is still 1
+   
+   
     ::###### Using && and || conditionals
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"

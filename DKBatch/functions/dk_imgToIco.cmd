@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -11,18 +11,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_imgToIco
 %setlocal%
 	%dk_call% dk_debugFunc 2 3
- 
+
     set "imgFile=%~1"
 	set "imgFile=%imgFile:/=\%"
     set "icoFile=%~2"
 	set "icoFile=%icoFile:/=\%"
     set "OVERWRITE=%~3"
-    
+   
     if not defined OVERWRITE if exist "%icoFile%" (%dk_call% dk_warning "%icoFile% already exists" && %return%)
 	if exist "%icoFile%" (%dk_call% dk_delete "%icoFile%")
 
 	%dk_call% dk_callDKPowershell dk_imgToIco "%imgFile% %icoFile%"
-    
+   
     if not exist %icoFile% (%dk_call% dk_fatal "Failed to create shortcut:%icoFile%")
 %endfunction%
 

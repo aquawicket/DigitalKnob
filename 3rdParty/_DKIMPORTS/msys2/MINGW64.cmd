@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -10,9 +10,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 goto main
 :: env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"
-:: /usr/bin/bash -li 	 
+:: /usr/bin/bash -li
 
-::   -l				= "invoke a new shell process"    
+::   -l				= "invoke a new shell process"
 ::   -i 			= "make the shell interactive"
 ::   -c <command> 	= "run a command"
 
@@ -35,12 +35,12 @@ goto main
 	%dk_call% dk_echo ""
 	%dk_call% dk_echo "PATH = %PATH%"
 	pause
-%endfunction% 
+%endfunction%
 
 ::###### MINGW64 ######
 :mingw64
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && echo You are in a MINGW64 terminal environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
-%endfunction% 
+%endfunction%
 
 ::###### Main ######
 :main

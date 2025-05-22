@@ -254,7 +254,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 :dk_readlink
 %setlocal%
 	%dk_call% dk_debugFunc 1 2
-    
+   
     set dk_readlink=%1
 	::if not exist "%dk_readlink%" (%return%)
 	

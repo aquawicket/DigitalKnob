@@ -9,7 +9,7 @@ goto MAS_Start
 
    Microsoft Activation Scripts (MAS):
 
-   A collection of scripts for activating Microsoft products using HWID / KMS38 / Online KMS 
+   A collection of scripts for activating Microsoft products using HWID / KMS38 / Online KMS
    activation methods with a focus on open-source code, less antivirus detection and user-friendliness.
 
    These scripts are mostly a fork of other honourable developer's tools and scripts.
@@ -21,7 +21,7 @@ goto MAS_Start
 
    Maintained by @WindowsAddict
 
-   To achieve this I have used the following projects as the base of this activator.  
+   To achieve this I have used the following projects as the base of this activator. 
    I would like to say thanks to the following authors for making such awesome projects.
 
 ====================================
@@ -33,14 +33,14 @@ goto MAS_Start
    *Anonymous    https://www.nsaneforums.com/topic/316668--/?do=findComment&comment=1497887
                  https://github.com/massgravel/MASSGRAVE
                  https://gitlab.com/massgrave/massgrave
-  
+ 
    @vyvojar      Original slshim (slc.dll)
                  https://github.com/vyvojar/slshim/releases
 
 ====================================
 
    HWID/KMS38 methods Suggestions and improvements:-
-  
+ 
    @sponpa       New ideas for the HWID/KM38 Generation
                  https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 
@@ -48,7 +48,7 @@ goto MAS_Start
                  https://www.nsaneforums.com/topic/316668--/page/22/?tab=comments#comment-1438005
 
 ====================================
-   Online KMS Activation: 
+   Online KMS Activation:
 ====================================
 
    @abbodi1406   Activate.cmd (KMS_VL_ALL)
@@ -94,7 +94,7 @@ goto MAS_Start
 
    @dbenham      Set buffer height independently of window height
                  https://stackoverflow.com/a/13351373
-                 
+                
    @Ratiborus    Ratiborus Tools
                  http://forum.ru-board.com/topic.cgi?forum=2&topic=5734#1
 
@@ -109,9 +109,9 @@ goto MAS_Start
 ====================================
    Kind Help:
 ====================================
-   
+  
    Thanks to the following people for answering all of my queries. (In no particular order)
-   
+  
    @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 
    @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -228,7 +228,7 @@ if exist "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
 echo:
 echo:
 echo                   _______________________________________________________________
-echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [1] Read Me                                              ^|
 echo                  ^|      ___________________________________________________      ^|
@@ -249,7 +249,7 @@ echo                  ^|                                                        
 echo                  ^|      [7] Credits         [8] Homepages          [9] Exit      ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
-echo:          
+echo:         
 choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
 if errorlevel  9 goto:Exit
@@ -327,7 +327,7 @@ echo               KMS activates for 180 Days.^(For core/ProWMC edition it is 30
 echo               Use Read Me for the more details.
 echo              _________________________________________________________________________
 echo:
-echo                      _________________________________________________________   
+echo                      _________________________________________________________  
 echo                     ^|                                                         ^|
 echo                     ^|                                                         ^|
 echo                     ^|     [1] Activate - Windows /Server /Office              ^|
@@ -339,7 +339,7 @@ echo                     ^|                                                     
 echo                     ^|     [4] Go to Main Menu                                 ^|
 echo                     ^|                                                         ^|
 echo                     ^|_________________________________________________________^|
-echo:                                                                               
+echo:                                                                              
 choice /C:1234 /N /M ">                     Enter Your Choice [1,2,3,4] : "
 
 if errorlevel 4 goto:MainMenu
@@ -376,7 +376,7 @@ echo                    ^|                                                      
 echo                    ^|      [6] Go to Main Menu                                 ^|
 echo                    ^|                                                          ^|
 echo                    ^|__________________________________________________________^|
-echo:                
+echo:               
 choice /C:123456 /N /M ">                     Enter Your Choice [1,2,3,4,5,6] : "
 
 if errorlevel 6 goto:MainMenu
@@ -418,7 +418,7 @@ echo                      ^|                                                    
 echo                      ^|   [8] Go to Main Menu                                 ^|
 echo                      ^|                                                       ^|
 echo                      ^|_______________________________________________________^|
-echo:     
+echo:    
 choice /C:12345678 /N /M ">                     Enter Your Choice [1,2,3,4,5,6,7,8] : "
 
 if errorlevel 8 goto:MainMenu
@@ -450,7 +450,7 @@ Activation Type       Supported Product             Activation Period
 
 Digital License    -  Windows 10                 -  Permanent
 KMS38              -  Windows 10 / Server        -  Until the year 2038
-Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task needs to be 
+Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task needs to be
                                                     created for lifetime auto activation.
 
 ----------------------------------------------------------------------------------------------
@@ -467,13 +467,13 @@ Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task n
  - This activation does not store any files in your system.
  - This activation is a permanent activation for your system Hardware.
 
- - On a system, this activation can be created for all the supported editions, and all can be 
+ - On a system, this activation can be created for all the supported editions, and all can be
    linked to Microsoft account without any issues.
 
- - Once a system is activated, this activation cannot be removed. (Because the license is stored in 
+ - Once a system is activated, this activation cannot be removed. (Because the license is stored in
    the Microsoft servers and not in the user's system.)
 
- - Any significant changes in the Hardware (such as a motherboard) may deactivate the system. 
+ - Any significant changes in the Hardware (such as a motherboard) may deactivate the system.
    It is possible to reactivate a system that was deactivated because of significant hardware
    changes, IF your activation, was linked to an online Microsoft account.
 
@@ -485,7 +485,7 @@ Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task n
    - The Internet is required. (Only at the time of activation)
    - The system will auto-activate if Retail (Consumer) media was used for the installation.
    - The system will NOT auto-activate if VL (Business) media was used for the installation.
-     In this case, the user will have to insert that windows edition Retail/OEM key (find keys below 
+     In this case, the user will have to insert that windows edition Retail/OEM key (find keys below
      in this page) to activate, if the user doesn't wish to activate again using this script.
 
  - Possible reasons for activation failure:
@@ -641,17 +641,17 @@ ________________________________________________________________________________
    WYPNQ-8C467-V2W6J-TX4WX-WT2RQ    ProfessionalWorkstationN
    NJCF7-PW8QT-3324D-688JX-2YV66    ServerRdsh
    XQQYW-NFFMW-XJPBH-K8732-CKFFD    IoTEnterprise
-   
+  
    -------------------------------------------------------------------------------------------------
 
  - Make sure the Windows Update Service and internet are both enabled.
- - Open a command prompt (run cmd.exe) as administrator, and enter following listed commands in the 
+ - Open a command prompt (run cmd.exe) as administrator, and enter following listed commands in the
    the sequence in which they are given.
  - Enter Retail/OEM Key, (Replace '%key%' with the key from the above list) with the following command:
 
 cscript /nologo %windir%\system32\slmgr.vbs /ipk %key%
 
- - Make sure slc.dll and gatherosstate.exe files are located in the folder, "C:\Files" and enter 
+ - Make sure slc.dll and gatherosstate.exe files are located in the folder, "C:\Files" and enter
    the following commands to generate GenuineTicket.xml file.
 
    For x86-x64 systems,
@@ -664,7 +664,7 @@ call "C:\Files\gatherosstatemodified.exe"
 
 call "C:\Files\gatherosstate.exe"
 
- - Now a GenuineTicket.xml file should be created in the folder "C:\Files\", copy and paste this file in the 
+ - Now a GenuineTicket.xml file should be created in the folder "C:\Files\", copy and paste this file in the
    folder named, "C:\ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\"
 
  - Now apply this ticket using the following commands in this sequence:
@@ -690,17 +690,17 @@ cscript /nologo %windir%\system32\slmgr.vbs /xpr
 ====================================================================================================
 
  - Make sure the internet is connected.
- 
+
  - Open CMD and type services.msc and hit Enter, When Services opens up, look for 'Windows Update'
-   and Make sure its startup type is set to Automatic. Some update blocking tools and scripts 
+   and Make sure its startup type is set to Automatic. Some update blocking tools and scripts
    usually permanently block the update service, you need to make sure it's not the case.
 
- - VPN, privacy-based hosts and/or firewall rules may cause problems with the activation. Disable 
+ - VPN, privacy-based hosts and/or firewall rules may cause problems with the activation. Disable
    them if you are facing problems in activation.
 
  - Reboot the system.
 
- - Now run the script to activate Windows 10, and if unsuccessful, 
+ - Now run the script to activate Windows 10, and if unsuccessful,
    Try the troubleshoot button in the settings activation page.
    If still unsuccessful then read additional troubleshoot options listed below.
 
@@ -710,34 +710,34 @@ cscript /nologo %windir%\system32\slmgr.vbs /xpr
 
 Dism /online /Cleanup-Image /RestoreHealth
 
-   - After it's done, reboot the system and open CMD as administrator again, and enter the 
+   - After it's done, reboot the system and open CMD as administrator again, and enter the
      following command:
 
 sfc.exe /scannow
 
-   - After it's done, reboot the system and run the activation script, and if unsuccessful, 
+   - After it's done, reboot the system and run the activation script, and if unsuccessful,
      open CMD as administrator again, and enter the following command:
 
 slmgr.vbs /rearm
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      You may try to rebuild licensing Tokens.dat as suggested in https://support.microsoft.com/en-us/help/2736303
      (this will require to repair Office afterwards.)
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      try cleaning the clipup using the following commands, it will reset all the HWID/KMS38 installed
-     licences in the current system installation. open CMD as administrator again, and enter the 
+     licences in the current system installation. open CMD as administrator again, and enter the
      following commands one by one:
 
 net stop ClipSVC
 rundll32 clipc.dll,ClipCleanUpState
 
-   - Reboot the system (important) and run the activation script, and if unsuccessful, 
+   - Reboot the system (important) and run the activation script, and if unsuccessful,
      Make sure hardware component proper drivers are installed, check manufacturer site/Windows-
      update for drivers.
 
    - After it's done, reboot the system and run the activation script, and if unsuccessful,
-     it may be time to start over from the very beginning and do a clean install of windows :D 
+     it may be time to start over from the very beginning and do a clean install of windows :D
 
 -------------------------------------------
  Activation is blocked in some countries -
@@ -769,7 +769,7 @@ rundll32 clipc.dll,ClipCleanUpState
 ---------------------------------------------------------------------------------------------------------
 
    HWID/KMS38 methods Suggestions and improvements:-
-  
+ 
    @sponpa       New ideas for the HWID/KM38 Generation
                  https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 
@@ -781,7 +781,7 @@ rundll32 clipc.dll,ClipCleanUpState
    Kind Help:-
 
    Thanks for having my back and answering all of my queries. (In no particular order)
-   
+  
    @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 
    @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -800,7 +800,7 @@ rundll32 clipc.dll,ClipCleanUpState
 
    Maintained by @WindowsAddict
 
-   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only 
+   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only
    manage batch script tool which is based on the above mentioned original co-authors activation methods.
 
 =========================================================================================================
@@ -811,25 +811,25 @@ rundll32 clipc.dll,ClipCleanUpState
    KMS38 Activation:
 ====================================================================================================
 
- - This activation method activates Windows 10 and Windows Server (14393 and later builds), 
+ - This activation method activates Windows 10 and Windows Server (14393 and later builds),
    until the year 2038.
  - This activation method does not store any files on the system.
 
  - Make sure the following things have been accounted for, before applying KMS38 Activation:
-   - Before the activation, if any KMS activator is installed, then make sure to uninstall it 
+   - Before the activation, if any KMS activator is installed, then make sure to uninstall it
      completely.
-   - After KMS38 activation for the Windows Operating System has been achieved, if you want to 
-     additionally, use the 180 Days KMS Activator for MS Office, then you must make sure that 
-     it (the 180 Days KMS Activator for MS Office) is compatible with Windows KMS38 activation. 
-     FYI, the following activators are compatible and can activate Office 
+   - After KMS38 activation for the Windows Operating System has been achieved, if you want to
+     additionally, use the 180 Days KMS Activator for MS Office, then you must make sure that
+     it (the 180 Days KMS Activator for MS Office) is compatible with Windows KMS38 activation.
+     FYI, the following activators are compatible and can activate Office
      without disrupting the Windows KMS38 activation.
 
      KMS_VL_ALL by @abbodi1406     https://forums.mydigitallife.net/posts/838808
      Online KMS Activation Script  https://www.nsaneforums.com/topic/316668-microsoft-activation-scripts/
 
- - Any KMS Activator which is not compatible with KMS38, may overwrite the KMS38 activation for 
-   Windows with its own 180 days activation, thereby destroying the KMS38 activation for Windows. 
-   To prevent this accidental overwriting, you can apply KMS38 protection for Windows, check 
+ - Any KMS Activator which is not compatible with KMS38, may overwrite the KMS38 activation for
+   Windows with its own 180 days activation, thereby destroying the KMS38 activation for Windows.
+   To prevent this accidental overwriting, you can apply KMS38 protection for Windows, check
    the Extras folder for more details.
 
  - Why is the script setting the specific KMS host to 127.0.0.2 (localhost)?
@@ -848,7 +848,7 @@ reg delete "HKU\S-1-5-20\%SPPk%\55c92734-d682-4d71-983e-d6ec3f16059f" /f
    Included topics-
 
    How does it work?
-   
+  
    https://pastebin.com/raw/7Xyaf15Z
    Mirror Link-
    https://textuploader.com/1dg8d/raw
@@ -963,9 +963,9 @@ ________________________________________________________________________________
  - Prerequisite:
 
    For Windows 10 / Server x86-x64 system, you need following files,
-   48d928b1bec25a56fe896c430c2c034b7866aa7a *ClipUp.exe       
+   48d928b1bec25a56fe896c430c2c034b7866aa7a *ClipUp.exe      
    fabb5a0fc1e6a372219711152291339af36ed0b5 *gatherosstate.exe
-   ca3a51fdfc8749b8be85f7904b1c238a6dfba135 *slc.dll           
+   ca3a51fdfc8749b8be85f7904b1c238a6dfba135 *slc.dll          
    * ClipUp.exe is only required to activate Server Cor and Acor editions.
 
    For Windows 10 ARM64 system, you need following files,
@@ -977,7 +977,7 @@ ________________________________________________________________________________
 
    -------------------------------------------------------------------------------------------------
 
-           GVLK                      Windows 10 Editions          
+           GVLK                      Windows 10 Editions         
 
    TX9XD-98N7V-6WMQ6-BX7FG-H8Q99     Core
    PVMJN-6DFY6-9CCP6-7BKTT-D3WVR     CoreCountrySpecific
@@ -1001,9 +1001,9 @@ ________________________________________________________________________________
    9FNHH-K3HBT-3W4TD-6383H-6XYWF     ProfessionalWorkstationN
    7NBT4-WGBQX-MP4H7-QXFF8-YP3KX     ServerRdsh                            [Less than 1809]
    CPWHC-NT2C7-VYW78-DHDB2-PG3GK     ServerRdsh                     [Greater or Equal 1809]
-   
-           GVLK                      Windows Server Editions    
-   
+  
+           GVLK                      Windows Server Editions   
+  
    QN4C6-GBJD2-FB422-GHWJK-GJG2R     ServerCloudStorage                       [Server 2016]
    CB7KF-BWN84-R7R2Y-793K2-8XDDG     ServerDatacenter, ServerDatacenterCor    [Server 2016]
    WMDGN-G9PQG-XVVXX-R3X43-63DFG     ServerDatacenter, ServerDatacenterCor    [Server 2019]
@@ -1020,13 +1020,13 @@ ________________________________________________________________________________
 
  - Make sure to properly and completely remove any previously-installed KMS activator if one already exists.
  - Open CMD as Admin, and enter the following listed commands in the sequence in which they are given.
- - Enter Generic Volume License Key (GVLK) (Replace '%key%' with the key from the above list) 
+ - Enter Generic Volume License Key (GVLK) (Replace '%key%' with the key from the above list)
    with the following command:
-   
+  
 cscript /nologo %windir%\system32\slmgr.vbs /ipk %key%
 
  - Set specific KMS host to 127.0.0.2 [Localhost] with the following command: (Run one by one)
-   - By doing this, the global KMS IP can not replace the KMS38 activation, and can then safely be used with MS Office 
+   - By doing this, the global KMS IP can not replace the KMS38 activation, and can then safely be used with MS Office
      and other Windows Editions.
    - It's optional.
 
@@ -1037,12 +1037,12 @@ wmic path %spp% where ID='%app%' call ClearKeyManagementServicePort
 wmic path %spp% where ID='%app%' call SetKeyManagementServiceMachine MachineName="127.0.0.2"
 wmic path %spp% where ID='%app%' call SetKeyManagementServicePort 1688
 
- - Make sure slc.dll and gatherosstate.exe files are located in the folder, "C:\Files" and enter 
+ - Make sure slc.dll and gatherosstate.exe files are located in the folder, "C:\Files" and enter
    following command to generate GenuineTicket.xml file.
 
 call "C:\Files\gatherosstate.exe"
 
- - Now a GenuineTicket.xml file should be created in the folder "C:\Files\", copy and paste this file in the 
+ - Now a GenuineTicket.xml file should be created in the folder "C:\Files\", copy and paste this file in the
    folder named, "C:\ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\"
 
  - Now apply this ticket using the following commands in this sequence:
@@ -1051,11 +1051,11 @@ call "C:\Files\gatherosstate.exe"
 net stop ClipSVC
 net start ClipSVC
 
- - Check the expiry date of the activation with the following command: 
+ - Check the expiry date of the activation with the following command:
 
 cscript /nologo %windir%\system32\slmgr.vbs /xpr
 
- - If the expiry date is not in the year 2038, then enter the following command: 
+ - If the expiry date is not in the year 2038, then enter the following command:
 
 cscript /nologo %windir%\system32\slmgr.vbs /rearm-app 55c92734-d682-4d71-983e-d6ec3f16059f
 set spp=SoftwareLicensingProduct
@@ -1070,12 +1070,12 @@ cscript /nologo %windir%\system32\slmgr.vbs /rearm-sku %app%
    Troubleshoot activation issues:
 ====================================================================================================
 
- - Make sure to completely remove any previously-installed KMS activators if any exist, before 
+ - Make sure to completely remove any previously-installed KMS activators if any exist, before
    installing KMS38 activation.
 
  - Reboot the system.
 
- - Now run the script to activate Windows 10, and if unsuccessful, 
+ - Now run the script to activate Windows 10, and if unsuccessful,
    Try the troubleshoot button in settings activation page.
    If still unsuccessful then read additional troubleshoot options listed below.
 
@@ -1089,25 +1089,25 @@ Dism /online /Cleanup-Image /RestoreHealth
 
 sfc.exe /scannow
 
-   - After it's done, reboot the system and run the activation script, and if unsuccessful, 
+   - After it's done, reboot the system and run the activation script, and if unsuccessful,
      open CMD as administrator again, and enter the following command:
 
 slmgr.vbs /rearm
 
-   - Reboot the system (important) and run the activation script, and if unsuccessful, 
+   - Reboot the system (important) and run the activation script, and if unsuccessful,
      You may try to rebuild licensing Tokens.dat as suggested in https://support.microsoft.com/en-us/help/2736303
      (this will require to repair Office afterwards.)
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      try cleaning the clipup using the following commands, it will reset all the HWID/KMS38 installed
-     licences in the current system installation. open CMD as administrator again, and enter the 
+     licences in the current system installation. open CMD as administrator again, and enter the
      following commands one by one:
 
 net stop ClipSVC
 rundll32 clipc.dll,ClipCleanUpState
 
-   - Reboot the system (important) and run the activation script, and if unsuccessful, it may be 
-     time to start over from the very beginning and do a clean install of windows :D 
+   - Reboot the system (important) and run the activation script, and if unsuccessful, it may be
+     time to start over from the very beginning and do a clean install of windows :D
 
 ----------------------------------------------------------------------------------------------------
 
@@ -1130,7 +1130,7 @@ rundll32 clipc.dll,ClipCleanUpState
 ---------------------------------------------------------------------------------------------------------
 
    HWID/KMS38 methods Suggestions and improvements:-
-  
+ 
    @sponpa       New ideas for the HWID/KM38 Generation
                  https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 
@@ -1142,7 +1142,7 @@ rundll32 clipc.dll,ClipCleanUpState
    Kind Help:-
 
    Thanks for having my back and answering all of my queries. (In no particular order)
-   
+  
    @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 
    @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -1161,7 +1161,7 @@ rundll32 clipc.dll,ClipCleanUpState
 
    Maintained by @WindowsAddict
 
-   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only 
+   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only
    manage batch script tool which is based on the above mentioned original co-authors activation methods.
 
 =========================================================================================================
@@ -1173,7 +1173,7 @@ rundll32 clipc.dll,ClipCleanUpState
    Online KMS Activation script is just a fork of @abbodi1406's KMS_VL_ALL Project.
    KMS_VL_ALL homepage: https://forums.mydigitallife.net/posts/838808
 
-   This fork was made to avoid having any KMS binary files and system can be activated using 
+   This fork was made to avoid having any KMS binary files and system can be activated using
    some manual commands or transparent batch script files.
 
    This script is a part of 'Microsoft Activation Scripts' project.
@@ -1191,7 +1191,7 @@ rundll32 clipc.dll,ClipCleanUpState
 
  - This KMS script skips the activation of any permanently / KMS38-activated product.
  - This KMS script can activate both Retail and VL Windows / Server installation.
- - This KMS script can activate C2R Retail and VL Office, but not 2010/2013 MSI Retail Office. 
+ - This KMS script can activate C2R Retail and VL Office, but not 2010/2013 MSI Retail Office.
 
  ----------------------
  - Activation Renewal
@@ -1199,15 +1199,15 @@ rundll32 clipc.dll,ClipCleanUpState
 
  - KMS activates Windows / Server / Office for 180 Days. (For Core/ProWMC edition it is 30/45 Days)
 
- - By design, using the KMS activation method, the system contacts the registered server every 7 
-   days, and if contacted successfully it will automatically renew and reset the activation for the 
+ - By design, using the KMS activation method, the system contacts the registered server every 7
+   days, and if contacted successfully it will automatically renew and reset the activation for the
    the full period of 180 days again, starting from the day of successful contact.
-   If the system cannot contact the server, it will be deactivated after 180 days and it will 
+   If the system cannot contact the server, it will be deactivated after 180 days and it will
    remain deactivated until contact can be restored.
-   
- - The KMS servers I've added have been working steadily for two to three years, but there can be 
-   no guarantee that they will remain online indefinitely. If a registered server goes 
-   down, you will need to create a renewal task, or do a manual renewal, for the lifetime of the 
+  
+ - The KMS servers I've added have been working steadily for two to three years, but there can be
+   no guarantee that they will remain online indefinitely. If a registered server goes
+   down, you will need to create a renewal task, or do a manual renewal, for the lifetime of the
    activation.
 
    There are 3 ways you can renew the KMS server and as a result, renew the activation.
@@ -1215,7 +1215,7 @@ rundll32 clipc.dll,ClipCleanUpState
  1- Activate.cmd
 
    Run this file whenever the system needs activation. Depending upon the particular (never fully-knowable)
-   circumstances, a successful activation may last for a period of a MINIMUM of 180 days, 
+   circumstances, a successful activation may last for a period of a MINIMUM of 180 days,
    or a maximum of the full life of the machine it's running on, and you may never need to run it again.
 
  2- Manual Renewal via Desktop Context Menu
@@ -1233,7 +1233,7 @@ rundll32 clipc.dll,ClipCleanUpState
    It creates an easy to reach Desktop context menu for the manual activation renewal.
 
  3- Automatic Renewal via Task Scheduler
-   
+  
    This method put the following files in,
    C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx64.exe
    C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe
@@ -1245,8 +1245,8 @@ rundll32 clipc.dll,ClipCleanUpState
    The scheduled task runs only if the system is connected to the Internet.
    With this method, the Activation task can also be created which will run on the system login
    and after successful activation, this task will delete itself.
-  
-   IMPORTANT NOTE - Some sensitive AV's may flag the Automatic Renewal via the Task, and not 
+ 
+   IMPORTANT NOTE - Some sensitive AV's may flag the Automatic Renewal via the Task, and not
    because of KMS, because for them it's suspicious to run long scripts in the background as Tasks.
 
    It's recommended to set exclusions in Antivirus for
@@ -1260,11 +1260,11 @@ rundll32 clipc.dll,ClipCleanUpState
  - Remarks
  ----------------------
 
- - This Online KMS Activation provides immediate global activation for Windows 8.1 and Windows 10, which 
-   means that in the following three scenarios, the system will self-activate when connected to the 
+ - This Online KMS Activation provides immediate global activation for Windows 8.1 and Windows 10, which
+   means that in the following three scenarios, the system will self-activate when connected to the
    internet, and also means that users will not need to manually run the activation script again.
 
-   Scenario 1: Subsequent installation or alteration of any 2013, 2016, or 2019 Volume License 
+   Scenario 1: Subsequent installation or alteration of any 2013, 2016, or 2019 Volume License
                (VL) Office product.
    Scenario 2: Windows edition change (with GVLK).
    Scenario 3: Date change, system hardware change, etc.
@@ -1274,23 +1274,23 @@ rundll32 clipc.dll,ClipCleanUpState
      After activation, it leaves only the KMS Server name in the registry, which helps you to get the
      above-mentioned global activation feature whereby the system auto-renews the activations,
      so it's a good thing if you leave the server name in the registry.
-     However, you can clear this registered KMS Server name upon activation, and do that, open 
+     However, you can clear this registered KMS Server name upon activation, and do that, open
      the script with notepad and set Clear-KMS-Cache to 1 from 0.
      What is left in the system when Renewal methods are installed, has been mentioned.
 
- - This script includes the most-stable KMS servers (6+) list. The server selection process is 
+ - This script includes the most-stable KMS servers (6+) list. The server selection process is
    fully automatic. You don't need to worry about the server's availability.
 
- - If your system date is incorrect (beyond 180 days) and you are offline, the system will be 
-   deactivated, but will automatically reactivate when you correct the system date. 
+ - If your system date is incorrect (beyond 180 days) and you are offline, the system will be
+   deactivated, but will automatically reactivate when you correct the system date.
 
  - Why should you choose the Online KMS activation method over offline KMS?
    The main benefit of Online KMS activation is that it doesn't need any KMS binary file and system
    can be activated using some manual commands or transparent batch script files.
-   So this is for those who don't like/have difficulties/trust issue in offline KMS because of its 
+   So this is for those who don't like/have difficulties/trust issue in offline KMS because of its
    binary files and antivirus detections.
 
-   If you prefer offline KMS then checkout an open-source activator, 
+   If you prefer offline KMS then checkout an open-source activator,
    @abbodi1406's KMS_VL_ALL   https://forums.mydigitallife.net/posts/838808
 
 ----------------------------------------------------------------------------------------------------
@@ -1300,14 +1300,14 @@ rundll32 clipc.dll,ClipCleanUpState
  --------------------------------------
 
    This activation script will convert Office C2R Retail to Volume without needing separate tools.
-   
+  
    - Supports: Office 365, Office 2019, Office 2016, Office 2013
    - Activated Retail products will be skipped from conversion
      this includes valid Office 365 subscriptions, or perpetual Office (MAK, OEM, MSDN, Retail..)
    - Current Office licenses will be cleaned up (unless retail-activated Office detected)
      then, proper Volume licenses will be installed based on the detected Product IDs
    - Office Mondo suite cover all products, if detected, only its licenses will be installed
-   - Office 365 products will be converted with Mondo licenses by default  
+   - Office 365 products will be converted with Mondo licenses by default 
      also, corresponding Office 365 Retail Grace Key will be installed
    - Office 2016 products will be converted with corresponding Office 2019 licenses
    - Office Professional suite will be converted with Office 2019 ProPlus licenses
@@ -1315,21 +1315,21 @@ rundll32 clipc.dll,ClipCleanUpState
    - If Office 2019 RTM licenses are not detected, Office 2016 licenses will be used instead
    - Office 2013 products follow the same logic but handled separately
    - If main products SKUs are detected, single apps licenses will not be installed to avoid duplication
-   
-   - SKUs:  
-   O365ProPlus, O365Business, O365SmallBusPrem, O365HomePrem, O365EduCloud  
+  
+   - SKUs: 
+   O365ProPlus, O365Business, O365SmallBusPrem, O365HomePrem, O365EduCloud 
    ProPlus, Professional, Standard, HomeBusiness, HomeStudent, Visio, Project
-   
-   * Apps:  
-   Access, Excel, InfoPath, Onenote, Outlook, PowerPoint, Publisher, SkypeForBusiness, Word, 
+  
+   * Apps: 
+   Access, Excel, InfoPath, Onenote, Outlook, PowerPoint, Publisher, SkypeForBusiness, Word,
    Groove (OneDrive for Business)
-   
-   - O365ProPlus, O365Business, O365SmallBusPrem, ProPlus cover all apps  
-   Professional cover all apps except SkypeForBusiness  
+  
+   - O365ProPlus, O365Business, O365SmallBusPrem, ProPlus cover all apps 
+   Professional cover all apps except SkypeForBusiness 
    Standard cover all apps except Access, SkypeForBusiness
-   
+  
    ## Notice
-   
+  
    - On Windows 7, Office 2016/2019 licensing service require Universal C Runtime to work correctly
    - UCRT is available in the latest Monthly Rollup, or the separate update KB3118401
    - Additionally, Office programs themselves require recent Windows 7 updates to start properly
@@ -1342,10 +1342,10 @@ rundll32 clipc.dll,ClipCleanUpState
    39ed8659e7ca16aaccb86def94ce6cec4c847dd6 *cleanosppx86.exe                   Virus Total = 1/66
 
    Virus Total Report Date: 12-11-2019
-   
-   These files are official Microsoft files and in this script, these are used in 
+  
+   These files are official Microsoft files and in this script, these are used in
    cleaning office license in C2R Retail office to VL conversion process.
-   
+  
    The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
    You can get the original file here https://s.put.re/WFuXpyWA.zip
 
@@ -1364,11 +1364,11 @@ rundll32 clipc.dll,ClipCleanUpState
 
    Supported Products: [Only Volume-capable]
 
-   Windows 8 / 8.1 / 10 (all official editions, except Windows 10 S)  
-   Windows 7 (Enterprise /N/E, Professional /N/E, Embedded Standard/POSReady/ThinPC)  
-   Windows Server 2008 R2 / 2012 / 2012 R2 / 2016 / 2019  
+   Windows 8 / 8.1 / 10 (all official editions, except Windows 10 S) 
+   Windows 7 (Enterprise /N/E, Professional /N/E, Embedded Standard/POSReady/ThinPC) 
+   Windows Server 2008 R2 / 2012 / 2012 R2 / 2016 / 2019 
    Office Volume 2010 / 2013 / 2016 / 2019
-   
+  
    [Activation script will convert Office C2R Retail O365/2013/2016/2019 to Volume]
 
 ----------------------------------------------------------------------------------------------------
@@ -1376,23 +1376,23 @@ rundll32 clipc.dll,ClipCleanUpState
    Unsupported Products:
 
    Office Retail [Office MSI Retail 2010/2013]
-   Windows Editions which do not support KMS activation by design:  
-   Windows Evaluation Editions  
-   Windows 7 (Starter, HomeBasic, HomePremium, Ultimate)  
-   Windows 10 (Cloud "S", IoTEnterprise, IoTEnterpriseS, ProfessionalSingleLanguage... etc)  
-   Windows Server (Server Foundation, Storage Server, Home Server 2011... etc) 
+   Windows Editions which do not support KMS activation by design: 
+   Windows Evaluation Editions 
+   Windows 7 (Starter, HomeBasic, HomePremium, Ultimate) 
+   Windows 10 (Cloud "S", IoTEnterprise, IoTEnterpriseS, ProfessionalSingleLanguage... etc) 
+   Windows Server (Server Foundation, Storage Server, Home Server 2011... etc)
 
 ----------------------------------------------------------------------------------------------------
 
    These editions are only KMS-activatable for 45 days at max:
-   Windows 10 Home edition variants  
+   Windows 10 Home edition variants 
    Windows 8.1 Core edition variants, Pro with Media Center, Pro Student
 
    These editions are only KMS-activatable for 30 days at max:
    Windows 8 Core edition variants, Pro with Media Center
 
-   Notes:  
-   Supported Windows products do need volume conversion, only the GVLK (KMS key) is needed, which 
+   Notes: 
+   Supported Windows products do need volume conversion, only the GVLK (KMS key) is needed, which
    the script will install accordingly.
    KMS Activation works in all (MBR, GPT, UEFI, BIOS) systems.
 
@@ -1426,29 +1426,29 @@ Renewal_Setup.cmd /dcm /swa
  - Activate.cmd
 
    - To run the script in Debug mode to find out the cause of errors in activation or just details,
-     search "set _Debug=" and change the value from 0 to 1. 
+     search "set _Debug=" and change the value from 0 to 1.
 
-   - To replace KMS38 activation with KMS activation, search "set SkipKMS38=" and change the value 
-     from 1 to 0. 
+   - To replace KMS38 activation with KMS activation, search "set SkipKMS38=" and change the value
+     from 1 to 0.
 
    - To skip Windows activation, search "set ActWindows=" and change the value from 1 to 0.
    - To skip Office activation, search "set ActOffice=" and change the value from 1 to 0.
      - This is not effective if Windows and/or Office installation is already Volume (GVLK installed)
-     - In [Online KMS + HWID] $OEM$ preactivation, Windows KMS activation is turned off 
+     - In [Online KMS + HWID] $OEM$ preactivation, Windows KMS activation is turned off
        by default.
 
-   - To turn OFF auto conversion for Office C2R Retail to Volume, search "set AutoR2V=" and 
+   - To turn OFF auto conversion for Office C2R Retail to Volume, search "set AutoR2V=" and
      change the value from 1 to 0.
 
    - To set the script to use only one specific KMS server address, search "set KMS_Server="
      paste the server address after the = sign.
 
    - To clear the KMS cache, search "set Clear-KMS-Cache=" and change the value from 0 to 1.
-     - Registered KMS server address (cache) enables the system to automatically renew the license 
+     - Registered KMS server address (cache) enables the system to automatically renew the license
        (for next 180 days) every 7 days, as long as the server is online.
-     - This process is the same as how the legal KMS works, so no security program will flag 
+     - This process is the same as how the legal KMS works, so no security program will flag
        this behavior.
-     - Changing this option here won't have any effect if manual (Desktop Context menu) and/or auto, 
+     - Changing this option here won't have any effect if manual (Desktop Context menu) and/or auto,
        renewal activation script is installed. [default (0)].
      - I recommend leaving this option as default (0).
 
@@ -1458,12 +1458,12 @@ Renewal_Setup.cmd /dcm /swa
 
  - Prerequisite:
 
-   online Public KMS Server List: 
+   online Public KMS Server List:
 
    kms.srv.crsoo.com
    kms.loli.beer
    kms8.MSGuides.com
-   
+  
    kms9.MSGuides.com
    kms.zhuxiaole.org
    kms.lolico.moe
@@ -1472,10 +1472,10 @@ Renewal_Setup.cmd /dcm /swa
    Generic Volume License Key (GVLK):
    Thanks to @abbodi1406 for the Key collection.
 
-        GVLK                        Edition                
-   
+        GVLK                        Edition               
+  
    Windows 10
-   
+  
    TX9XD-98N7V-6WMQ6-BX7FG-H8Q99    Home
    3KHY7-WNT83-DGQKR-F7HPR-844BM    Home N
    7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH    Home Single Language
@@ -1501,9 +1501,9 @@ Renewal_Setup.cmd /dcm /swa
    CPWHC-NT2C7-VYW78-DHDB2-PG3GK    Enterprise for Virtual Desktops
    7NBT4-WGBQX-MP4H7-QXFF8-YP3KX    Remote Server
    NBTWJ-3DR69-3C4V8-C26MC-GQ9M6    Lean
-   
+  
    Windows 8.1
-   
+  
    M9Q9P-WNJJT-6PXPY-DWX8H-6XWKK    Core
    7B9N3-D94CG-YTVHR-QBPX3-RJP64    Core N
    BB6NG-PQ82V-VRDPW-8XVD2-V8P66    Core Single Language
@@ -1523,9 +1523,9 @@ Renewal_Setup.cmd /dcm /swa
    R962J-37N87-9VVK2-WJ74P-XTMHR    with Bing China
    MX3RK-9HNGX-K3QKC-6PJ3F-W8D7B    Pro for Students
    TNFGH-2R6PB-8XM3K-QYHX2-J4296    Pro for Students N
-   
+  
    Windows 8
-   
+  
    BN3D2-R7TKB-3YPBD-8DRP2-27GG4    Core
    8N2M2-HWPGY-7PGT9-HGDD8-GVGGY    Core N
    2WN2H-YGCQR-KFX6K-CD6TF-84YXQ    Core Single Language
@@ -1538,9 +1538,9 @@ Renewal_Setup.cmd /dcm /swa
    JMNMF-RHW7P-DMY6X-RF3DR-X2BQT    Enterprise N
    RYXVT-BNQG7-VD29F-DBMRY-HT73M    Embedded Industry Pro
    NKB3R-R2F8T-3XCDP-7Q2KW-XWYQ2    Embedded Industry Enterprise
-   
+  
    Windows 7
-   
+  
    FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4    Professional
    MRPKT-YTG23-K7D7T-X2JMM-QY7MG    Professional N
    W82YF-2Q76Y-63HXB-FGJG9-GF7QX    Professional E
@@ -1550,9 +1550,9 @@ Renewal_Setup.cmd /dcm /swa
    YBYF6-BHCR3-JPKRB-CDW7B-F9BK4    Embedded POSReady 7
    XGY72-BRBBT-FF8MH-2GG8H-W7KCW    Embedded Standard
    73KQT-CD9G6-K7TQG-66MRP-CQ22C    Embedded ThinPC
-   
+  
    Windows Server 2019
-   
+  
    N69G4-B89J2-4G8F4-WWYCC-J464C    Standard
    WMDGN-G9PQG-XVVXX-R3X43-63DFG    Datacenter
    WVDHN-86M7X-466P6-VHXV7-YY726    Essentials
@@ -1560,9 +1560,9 @@ Renewal_Setup.cmd /dcm /swa
    N2KJX-J94YW-TQVFB-DG9YT-724CC    Standard ACor
    6NMRW-2C8FM-D24W7-TQWMY-CWH2D    Datacenter ACor
    GRFBW-QNDC4-6QBHG-CCK3B-2PR88    ServerARM64
-   
+  
    Windows Server 2016
-   
+  
    WC2BQ-8NRM3-FDDYY-2BFGV-KHKQY    Standard
    CB7KF-BWN84-R7R2Y-793K2-8XDDG    Datacenter
    JCKRF-N37P4-C2D82-9YXRT-4M63B    Essentials
@@ -1571,23 +1571,23 @@ Renewal_Setup.cmd /dcm /swa
    PTXN8-JFHJM-4WC78-MPCBR-9W4KR    Standard ACor
    2HXDN-KRXHB-GPYC7-YCKFJ-7FVDG    Datacenter ACor
    K9FYF-G6NCK-73M32-XMVPY-F9DRR    ServerARM64
-   
+  
    Windows Server 2012 R2
-   
+  
    D2N9P-3P6X9-2R39C-7RTCD-MDVJX    Standard
    W3GGN-FT8W3-Y4M27-J84CP-Q3VJ9    Datacenter
    KNC87-3J2TX-XB4WP-VCPJV-M4FWM    Essentials
    3NPTF-33KPT-GGBPR-YX76B-39KDD    Cloud Storage
-   
+  
    Windows Server 2012
-   
+  
    XC9B7-NBPP2-83J2H-RHMBY-92BT4    Standard
    48HP8-DN98B-MYWDG-T2DCC-8W83P    Datacenter
    HM7DN-YVMH3-46JC3-XYTG7-CYQJJ    MultiPoint Standard
    XNH6W-2V9GX-RGJ4K-Y8X6F-QGJ2G    MultiPoint Premium
-   
+  
    Windows Server 2008 R2
-   
+  
    6TPJF-RBVHG-WBW2R-86QPH-6RTM4    Web
    TT8MH-CG224-D3D7Q-498W2-9QCTX    HPC
    YC6KT-GKW9T-YTKYR-T4X34-R7VHC    Standard
@@ -1595,106 +1595,106 @@ Renewal_Setup.cmd /dcm /swa
    489J6-VHDMP-X63PK-3K798-CPX3Y    Enterprise
    GT63C-RJFQ3-4GMB6-BRFB9-CB83V    Itanium
    736RG-XDKJK-V34PF-BHK87-J6X3K    MultiPoint Server
-     
+    
    ----------------------------------------------------------------------------------------------------
-   
+  
    ----------------------------------------------
-    Windows /Server (All VL Supported Versions) 
+    Windows /Server (All VL Supported Versions)
    ----------------------------------------------
-   
- - Connect to the internet. 
+  
+ - Connect to the internet.
  - Open CMD as Admin, and enter the following listed commands in the sequence in which they are given.
- - Enter Generic Volume License Key (GVLK) (Replace %key% with the key from above list) with 
+ - Enter Generic Volume License Key (GVLK) (Replace %key% with the key from above list) with
    the following command:
 
 slmgr.vbs /ipk %key%
 
- - Register the KMS Server, (Replace %server% with one of the above-listed servers) 
+ - Register the KMS Server, (Replace %server% with one of the above-listed servers)
    (If activation is unsuccessful then try a different server) with the following command:
 
 slmgr.vbs /skms %server%
 
  - Activate Windows with the following command:
-   
+  
 slmgr.vbs /ato
-   
+  
  - Check Activation Status with the following command:
 
 slmgr.vbs /dli
-   
+  
  - Check Activation Expiry Date with the following command:
-   
+  
 slmgr.vbs /xpr
-   
- - Clear the name of the KMS server (Optional) (It'll prevent activation auto-renewal) with the following command: 
-   
+  
+ - Clear the name of the KMS server (Optional) (It'll prevent activation auto-renewal) with the following command:
+  
 slmgr.vbs /ckms
-   
- - Done. 
+  
+ - Done.
 
    ----------------------------------------------------------------------------
     Office VL Activation (Office 2010, 2013, 2016, 2019) -
    ----------------------------------------------------------------------------
-   
- - Connect to the internet. 
+  
+ - Connect to the internet.
  - Open CMD as Admin, and enter the following listed commands in the sequence in which they are given.
- - If Office is installed as VL (Volume License) then there is no need to enter its key. 
+ - If Office is installed as VL (Volume License) then there is no need to enter its key.
  - If Office is installed as Retail, then you need to convert it to VL, by using C2R-R2V by @abbodi1406
-   https://forums.mydigitallife.net/posts/1150042 
+   https://forums.mydigitallife.net/posts/1150042
 
  - Change to the directory where Office is installed.
    If your system is 32-bit Office on 32-bit Windows or 64-bit Office on 64-bit Windows use the following:
-   
+  
    For Office 2016 or 2019 enter the command:
-   
+  
 cd "C:\Program Files\Microsoft Office\Office16"
-   
+  
    For Office 2013 enter the command:
-   
+  
 cd "C:\Program Files\Microsoft Office\Office15"
-   
+  
    For Office 2010 enter the command:
-   
+  
 cd "C:\Program Files\Microsoft Office\Office14"
-   
+  
    --------------------------------------------------------------------------------
-   
+  
    If your system is 32-bit Office on 64-bit Windows, use the following:
-   
+  
    For Office 2016 or 2019 enter the command:
-   
+  
 cd "C:\Program Files (x86)\Microsoft Office\Office16"
-   
+  
    For Office 2013 enter the command:
-   
+  
 cd "C:\Program Files (x86)\Microsoft Office\Office15"
-   
+  
    For Office 2010 enter the command:
-   
+  
 cd "C:\Program Files (x86)\Microsoft Office\Office14"
-   
+  
    --------------------------------------------------------------------------------
-   
+  
  - Once all of that is done correctly, you must register the KMS Server, (In the following,
-   replace %server% with one of the above-listed servers.) (If activation is unsuccessful 
+   replace %server% with one of the above-listed servers.) (If activation is unsuccessful
    then try a different server.) with the following command:
 
-cscript ospp.vbs /sethst:%server% 
+cscript ospp.vbs /sethst:%server%
 
- - Activate Office with the following command: 
-   
-cscript ospp.vbs /act 
-   
+ - Activate Office with the following command:
+  
+cscript ospp.vbs /act
+  
  - Check Activation Status with the following command:
-   
+  
 cscript ospp.vbs /dstatus
- 
+
  - Clear the name of the KMS server, (Optional) (It'll prevent activation auto-renewal)
    with the appropriate following commands:
-   
+  
    To clear the KMS Server name for Office in Win 7, or Office 2010 on Win 8 or Win 10,
    enter each of the following commands in the sequence which is given:
-   
+  
 set "OSPP=HKLM\SOFTWARE\Microsoft\OfficeSoftwareProtectionPlatform"
 reg delete "%OSPP%" /f /v KeyManagementServiceName 2>nul
 reg delete "%OSPP%" /f /v KeyManagementServicePort 2>nul
@@ -1709,7 +1709,7 @@ reg delete "HKLM\%SPPk%" /f /v KeyManagementServicePort 2>nul
 reg delete "HKLM\%SPPk%\0ff1ce15-a989-479d-af46-f275c6370663" /f 2>nul
 reg delete "HKEY_USERS\S-1-5-20\%SPPk%\0ff1ce15-a989-479d-af46-f275c6370663" /f 2>nul
 
- - Done. 
+ - Done.
 
 ====================================================================================================
    Troubleshoot activation issues:
@@ -1726,25 +1726,25 @@ Dism /online /Cleanup-Image /RestoreHealth
 
 sfc.exe /scannow
 
-   - After it's done, reboot the system and run the activation script, and if unsuccessful, 
+   - After it's done, reboot the system and run the activation script, and if unsuccessful,
      open CMD as administrator again, and enter the following command:
 
 slmgr.vbs /rearm
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      You may try to rebuild licensing Tokens.dat as suggested in https://support.microsoft.com/en-us/help/2736303
      (this will require to repair Office afterwards.)
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      Try KMS_VL_ALL by @abbodi1406 https://forums.mydigitallife.net/posts/838808/
-     If still unsuccessful, it may be time to start over from the very beginning 
-     and do a clean install of windows :D 
+     If still unsuccessful, it may be time to start over from the very beginning
+     and do a clean install of windows :D
 
    -------------------------------
 
    - If you have issues with Office activation, or got undesired or duplicate licenses (e.g. Office 2016 and 2019):
      Download Office Scrubber pack from https://forums.mydigitallife.net/posts/1466365/
-     To get rid of any conflicted licenses, run Uninstall_Licenses.cmd, then you must start any 
+     To get rid of any conflicted licenses, run Uninstall_Licenses.cmd, then you must start any
      Office program to repair the licensing. You may also try Uninstall_Keys.cmd for similar manner.
 
      If you wish to remove Office and leftovers completely and start clean:
@@ -1754,9 +1754,9 @@ slmgr.vbs /rearm
    - Can't activate Windows 7 with KMS: [Error 0xC004F035]
      Some OEM licensed computers cannot be activated with KMS on WINDOWS 7.
      Quote from the MS page https://tinyurl.com/yy8wfu5m
-     'Computers obtained through OEM channels that have an ACPI_SLIC table in the (BIOS) are 
+     'Computers obtained through OEM channels that have an ACPI_SLIC table in the (BIOS) are
      required to have a valid Windows marker in the same ACPI_SLIC table.
-     ---Computers that have an ACPI_SLIC table without a valid Windows marker generate an error 
+     ---Computers that have an ACPI_SLIC table without a valid Windows marker generate an error
      when a volume edition of Windows 7 is installed.'
 
 ====================================================================================================
@@ -1800,9 +1800,9 @@ slmgr.vbs /rearm
    KMS server 1688 port test with Powershell
    Multi KMS server integration
    Scheduled task to renew the activation
-                    
+                   
    And for solving countless problems in this batch script.
-   
+  
 ----------------------------------------------------------------------------------------------------
 
    Kind Help:-
@@ -1834,30 +1834,30 @@ slmgr.vbs /rearm
 
  - To create a Preactivated Windows installation .iso, do the following things:
    Copy the "$OEM$" folder to the "sources" folder in the Windows installation media (.iso or USB).
-   The directory will appear like this: \sources\$OEM$ in your altered .iso or on your bootable 
+   The directory will appear like this: \sources\$OEM$ in your altered .iso or on your bootable
    USB drive.
-   Now use this .iso or bootable USB drive to install Windows and it will either already be activated 
-   (KMS38) as soon as it boots, or will self-activate at first internet contact. 
+   Now use this .iso or bootable USB drive to install Windows and it will either already be activated
+   (KMS38) as soon as it boots, or will self-activate at first internet contact.
 
 ----------------------------------------------------------------------------------------------------
    HWID:
 ----------------------------------------------------------------------------------------------------
 
- - When using Digital License (HWID), no files are stored on the system, and when connected to the 
+ - When using Digital License (HWID), no files are stored on the system, and when connected to the
    internet for the first time, the system will self-activate at that time.
-   
+  
 ----------------------------------------------------------------------------------------------------
    KMS38:
 ----------------------------------------------------------------------------------------------------
 
- - When using KMS38, no files are stored on the system, and Windows becomes activated immediately 
+ - When using KMS38, no files are stored on the system, and Windows becomes activated immediately
    without further actions or connectivity of any kind being required.
 
 ----------------------------------------------------------------------------------------------------
    Online KMS (separately, or in combination with HWID or KMS38):
 ----------------------------------------------------------------------------------------------------
 
- - It creates the following 2 Activation/Renewal Methods. You can turn off any of them in 
+ - It creates the following 2 Activation/Renewal Methods. You can turn off any of them in
    setupcomplete.cmd file
 
    ----------------------------------------------------------
@@ -1877,12 +1877,12 @@ slmgr.vbs /rearm
    \Online_KMS_Activation_Script-Run_Once (Activation Task)
 
    The scheduled task runs only if the system is connected to the Internet.
-   Activation Task will run on the system login and after successful activation and registering 
-   online KMS server, this task will delete itself. leaving behind only one task to run weekly 
-   for the lifetime of the system. 
+   Activation Task will run on the system login and after successful activation and registering
+   online KMS server, this task will delete itself. leaving behind only one task to run weekly
+   for the lifetime of the system.
 
    ----------------------------------------------------------
-   
+  
    2- Manual Renewal via Desktop Context Menu---
 
    It creates Desktop context Menu for manual activation and renewal.
@@ -1893,63 +1893,63 @@ slmgr.vbs /rearm
    C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe
    C:\ProgramData\Online_KMS_Activation\Activate.cmd
    C:\ProgramData\Online_KMS_Activation\Info.txt
-   
+  
    Registry entries:
    HKCR\DesktopBackground\shell\Activate Windows - Office
    HKCR\DesktopBackground\shell\Activate Windows - Office\command
 
    It creates an easy to reach the Desktop context menu for the manual activation renewal.
-   
+  
    ----------------------------------------------------------
 
    d30a0e4e5911d3ca705617d17225372731c770e2 *cleanosppx64.exe                   Virus Total = 0/66
    39ed8659e7ca16aaccb86def94ce6cec4c847dd6 *cleanosppx86.exe                   Virus Total = 1/66
 
    Virus Total Report Date: 12-11-2019
-   
-   These files are official Microsoft files and in this script, these are used in 
+  
+   These files are official Microsoft files and in this script, these are used in
    cleaning office license in C2R Retail office to VL conversion process.
-   
+  
    The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
    You can get the original file here https://s.put.re/WFuXpyWA.zip
 
    ----------------------------------------------------------
-   
-   IMPORTANT NOTE - Some sensitive AV's may flag the Automatic Renewal via the Task, and not 
+  
+   IMPORTANT NOTE - Some sensitive AV's may flag the Automatic Renewal via the Task, and not
    because of KMS, because for them it's suspicious to run long scripts in the background as Tasks.
 
    It's recommended to set exclusions in Antivirus for
    C:\ProgramData\Online_KMS_Activation\Activate.cmd
 
    ----------------------------------------------------------
-   
- - When using Online KMS plus HWID Digital License, Online KMS script will be set to skip Windows 
-   activation (if the HWID activation was applied but was not successful due to lack of internet 
-   at the time of installation of Windows) but will register the KMS for other products, and all 
-   later installed Volume License (VL) products (MS Office) will self-activate when going online. 
+  
+ - When using Online KMS plus HWID Digital License, Online KMS script will be set to skip Windows
+   activation (if the HWID activation was applied but was not successful due to lack of internet
+   at the time of installation of Windows) but will register the KMS for other products, and all
+   later installed Volume License (VL) products (MS Office) will self-activate when going online.
 
- - When using Online KMS plus KMS38, Online KMS will not skip Windows activation but skip KMS38 
-   activation and will register the KMS for other products, and all subsequently-installed Volume 
+ - When using Online KMS plus KMS38, Online KMS will not skip Windows activation but skip KMS38
+   activation and will register the KMS for other products, and all subsequently-installed Volume
    License (VL) products (MS Office) will self-activate when going online.
 
 ----------------------------------------------------------------------------------------------------
    HWID (Fallback to KMS38):
 ----------------------------------------------------------------------------------------------------
-  
- - In this method, KMS38 will be used for the activation in case the Windows version is not 
+ 
+ - In this method, KMS38 will be used for the activation in case the Windows version is not
    supported by HWID. For example, Windows 10 LTSC and Windows server.
 
 ----------------------------------------------------------------------------------------------------
    Activation Type       Supported Product             Activation Period
 ----------------------------------------------------------------------------------------------------
-   
+  
    Digital License    -  Windows 10                 -  Permanent
    KMS38              -  Windows 10 / Server        -  Until the year 2038
-   Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task needs to be 
+   Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task needs to be
                                                        created for lifetime auto-activation.
-   
+  
 ----------------------------------------------------------------------------------------------------
-   
+  
    * For more details, use the ReadMe.txt included in the respective activation folders.
 :5:
 
@@ -1960,18 +1960,18 @@ slmgr.vbs /rearm
 
  - If you don't know what KMS38 is, then first check it in the Read Me.
 
- - By default, a KMS38 Activation is vulnerable to unintended overwriting/replacement and 
+ - By default, a KMS38 Activation is vulnerable to unintended overwriting/replacement and
    neutralization by a 180-Day KMS Activator (non-KMS38 Activator).
-   However, with a few tricks you can ensure that no alternative KMS Activator can replace KMS38 
+   However, with a few tricks you can ensure that no alternative KMS Activator can replace KMS38
    Activation by accident or even on purpose. This script demonstrate how to do/undo that.
 
  - Protect KMS38:
    - How does KMS38 Protection work?
-     In the KMS activation method, the Windows Operating System first checks the KMS IP registered 
+     In the KMS activation method, the Windows Operating System first checks the KMS IP registered
      as a specific KMS, and if that is not defined then it checks the Global KMS IP.
      Another fact is that if LocalHost (127.0.0.2) is defined as KMS IP in the Windows 8.1 and 10 OS's
      then Windows will not accept it as a valid KMS IP.
-     This script simply utilizes the above facts to protect the KMS38 activation from being 
+     This script simply utilizes the above facts to protect the KMS38 activation from being
      overwritten by any alternative 'normal' 180-Day KMS Activation.
 
      Script steps-
@@ -2009,13 +2009,13 @@ where X is Windows edition Activation ID.
    What are those big blocks of text in this script? [MAS_1.4_AIO]
 ====================================================================================================
 
-   These big blocks of text contain the files required for the Activations, and Office Retail 2 VL 
+   These big blocks of text contain the files required for the Activations, and Office Retail 2 VL
    conversion.
 
    The file to text, and text to file, conversions are done with the script named "Compressed2TXT"
    by @AveYo aka BAU https://github.com/AveYo/Compressed2TXT
 
-   The purpose behind doing this is straightforward. It is to make an All-in-One script, and an 
+   The purpose behind doing this is straightforward. It is to make an All-in-One script, and an
    All-in-One script can't be created without file to text conversion.
    But still if you are not feeling comfortable in using it then you can use another version I've made,
 
@@ -2025,7 +2025,7 @@ where X is Windows edition Activation ID.
    GitHub: https://github.com/massgravel/Microsoft-Activation-Scripts
    GitLab: https://gitlab.com/massgrave/microsoft-activation-scripts
 
-   When required, the script extracts the files into the "C:\Windows\Temp\_MAS" and / or 
+   When required, the script extracts the files into the "C:\Windows\Temp\_MAS" and / or
    "C:\Windows\Temp\_Ticket_Work\" folder.
 
    ================================================
@@ -2033,27 +2033,27 @@ where X is Windows edition Activation ID.
    ================================================
 
    1st big block of unreadable text contains following 4 files:
- 
+
    fabb5a0fc1e6a372219711152291339af36ed0b5 *gatherosstate.exe                  Virus Total = 0/71
    ca3a51fdfc8749b8be85f7904b1c238a6dfba135 *slc.dll                            Virus Total = 0/68
    578364cb2319da7999acd8c015b4ce8da8f1b282 *ARM64_gatherosstate.exe            Virus Total = 0/69
    5dbea3a580cf60391453a04a5c910a3ceca2b810 *ARM64_slc.dll                      Virus Total = 0/67
- 
+
    Virus Total Report Date: 2020-01-21
- 
+
   - File Sources:
-  
+ 
     - gatherosstate.exe (Original):
       From Windows 10 x86 14393 ADK
- 
+
     - ARM64_gatherosstate.exe (Original):
       From Windows 10 ARM64 18362 ISO
- 
+
     - ARM64_slc.dll and slc.dll:
- 
+
       Original slshim
       https://github.com/vyvojar/slshim
- 
+
       Improved by @mspaintmsi
       https://www.nsaneforums.com/topic/316668--/?do=findComment&comment=1497887
       https://github.com/massgravel/MASSGRAVE
@@ -2068,13 +2068,13 @@ where X is Windows edition Activation ID.
    =======================================================
 
    2nd big block of unreadable text contains this one file:
-  
+ 
    48d928b1bec25a56fe896c430c2c034b7866aa7a *ClipUp.exe                         Virus Total = 0/68
-  
+ 
    Virus Total Report Date: 2020-01-21
-  
+ 
    - File Sources:
-  
+ 
    - ClipUp.exe (Original):
      From Windows server 2016 x64 ISO
      This file is required to KMS38 activate Server Cor and Acor editions.
@@ -2084,16 +2084,16 @@ where X is Windows edition Activation ID.
    =======================================================
 
    3rd big block of unreadable text contains these 3 files:
-  
+ 
    d30a0e4e5911d3ca705617d17225372731c770e2 *cleanosppx64.exe                   Virus Total = 0/66
    39ed8659e7ca16aaccb86def94ce6cec4c847dd6 *cleanosppx86.exe                   Virus Total = 1/66
    9d5b4b3e761cca9531d64200dfbbfa0dec94f5b0 *_Info.txt                          Virus Total = 0/59
-  
+ 
    Virus Total Report Date: 12-11-2019
-   
-   These .exe files are official Microsoft files and in this script, these are used in 
+  
+   These .exe files are official Microsoft files and in this script, these are used in
    cleaning office license in C2R Retail office to VL conversion process.
-   
+  
    The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
    You can get the original file here https://s.put.re/WFuXpyWA.zip
 
@@ -2313,7 +2313,7 @@ exit /b
 :: Change value from 1 to 0 to disable KMS Renewal And Activation Task
 set Renewal_And_Activation_Task=1
 
-:: Change value from 1 to 0 to disable KMS activation desktop context menu 
+:: Change value from 1 to 0 to disable KMS activation desktop context menu
 set Desktop_context_menu=1
 
 ============================================================================
@@ -2342,7 +2342,7 @@ exit /b
 :: Change value from 1 to 0 to disable KMS Renewal And Activation Task
 set Renewal_And_Activation_Task=1
 
-:: Change value from 1 to 0 to disable KMS activation desktop context menu 
+:: Change value from 1 to 0 to disable KMS activation desktop context menu
 set Desktop_context_menu=1
 
 ============================================================================
@@ -2374,7 +2374,7 @@ exit /b
 :: Change value from 1 to 0 to disable KMS Renewal And Activation Task
 set Renewal_And_Activation_Task=1
 
-:: Change value from 1 to 0 to disable KMS activation desktop context menu 
+:: Change value from 1 to 0 to disable KMS activation desktop context menu
 set Desktop_context_menu=1
 
 ============================================================================
@@ -2446,7 +2446,7 @@ exit /b
 :: Change value from 1 to 0 to disable KMS Renewal And Activation Task
 set Renewal_And_Activation_Task=1
 
-:: Change value from 1 to 0 to disable KMS activation desktop context menu 
+:: Change value from 1 to 0 to disable KMS activation desktop context menu
 set Desktop_context_menu=1
 
 ============================================================================
@@ -2635,7 +2635,7 @@ goto OnlineKMSActivation
 ::---------------------------------------------------------------------------------------------------------
 ::
 ::   HWID/KMS38 methods Suggestions and improvements:-
-::  
+:: 
 ::   @sponpa       New ideas for the HWID/KM38 Generation
 ::                 https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 ::
@@ -2647,7 +2647,7 @@ goto OnlineKMSActivation
 ::   Kind Help:-
 ::
 ::   Thanks for having my back and answering all of my queries. (In no particular order)
-::   
+::  
 ::   @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 ::
 ::   @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -2666,7 +2666,7 @@ goto OnlineKMSActivation
 ::
 ::   Maintained by @WindowsAddict
 ::
-::   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only 
+::   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only
 ::   manage batch script tool which is based on the above mentioned original co-authors activation methods.
 ::
 ::=========================================================================================================
@@ -2865,7 +2865,7 @@ echo [%winos% ^| %winbuild% ^| SKU:%osSKU%] HWID Activation is Not Supported.
 goto DL_Done
 )
 
-::  Check Windows Architecture 
+::  Check Windows Architecture
 
 set arch=
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > nul && set arch=x86|| set arch=x64
@@ -3386,7 +3386,7 @@ exit /b
 ::  Virus Total Report Date: 2020-01-21
 ::
 :: - File Sources:
-:: 
+::
 ::   - gatherosstate.exe (Original):
 ::     From Windows 10 x86 14393 ADK
 ::
@@ -10925,7 +10925,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::---------------------------------------------------------------------------------------------------------
 ::
 ::   HWID/KMS38 methods Suggestions and improvements:-
-::  
+:: 
 ::   @sponpa       New ideas for the HWID/KM38 Generation
 ::                 https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 ::
@@ -10937,7 +10937,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::   Kind Help:-
 ::
 ::   Thanks for having my back and answering all of my queries. (In no particular order)
-::   
+::  
 ::   @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 ::
 ::   @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -10956,7 +10956,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::
 ::   Maintained by @WindowsAddict
 ::
-::   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only 
+::   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only
 ::   manage batch script tool which is based on the above mentioned original co-authors activation methods.
 ::
 ::=========================================================================================================
@@ -11160,7 +11160,7 @@ goto K38_Done
 set app=
 for /f "tokens=2 delims==" %%a in ('"wmic path %slp% where (ApplicationID='%wApp%' and LicenseFamily='%osedition%' and Description like '%%KMSCLIENT%%') get ID /VALUE" 2^>nul') do set "app=%%a"
 
-::  Check Windows Architecture 
+::  Check Windows Architecture
 
 set arch=
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > nul && set arch=x86|| set arch=x64
@@ -20217,8 +20217,8 @@ set KMS_Port=1688
 ::  This script is a fork of 'KMS_VL_ALL - Smart Activation Script' Project
 ::  The main project is maintained by @abbodi1406
 ::  https://forums.mydigitallife.net/posts/838808
- 
-::  This fork was made to avoid having any KMS binary files and system can be activated using 
+
+::  This fork was made to avoid having any KMS binary files and system can be activated using
 ::  some manual commands or transparent batch script files.
 ::  Thanks to @RPO (MDL), for providing great help in making of this fork.
 
@@ -20396,7 +20396,7 @@ exit /b
 if exist "%ProgramData%\Online_KMS_Activation\Activate.cmd" exit /b
 if %Clear-KMS-Cache% NEQ 1 exit /b
 
-::  Clear-KMS-Cache.cmd  
+::  Clear-KMS-Cache.cmd 
 ::  https://forums.mydigitallife.net/posts/1511883
 ::  Written by @abbodi1406 (MDL)
 
@@ -22564,10 +22564,10 @@ exit /b 0
 ::  9d5b4b3e761cca9531d64200dfbbfa0dec94f5b0 *_Info.txt                          Virus Total = 0/59
 ::
 ::  Virus Total Report Date: 12-11-2019
-::  
-::  These files are official Microsoft files and in this script, these are used in 
+:: 
+::  These files are official Microsoft files and in this script, these are used in
 ::  cleaning office license in C2R Retail office to VL conversion process.
-::  
+:: 
 ::  The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
 ::  You can get the original file here https://s.put.re/WFuXpyWA.zip
 
@@ -23192,9 +23192,9 @@ goto ActivationRenewal
    Online KMS Activation:
 ====================================================================================================
 
-   The use of this script is to activate / renew your Windows /Server /Office license 
+   The use of this script is to activate / renew your Windows /Server /Office license
    using online KMS.
-   
+  
  - Scheduled task name (If Renewal Task is created) (Weekly).
    \Online_KMS_Activation_Script-Renewal
 
@@ -23202,11 +23202,11 @@ goto ActivationRenewal
    \Online_KMS_Activation_Script-Run_Once
 
    The scheduled task runs only if the system is connected to the Internet.
-   Activation Task will run on the system login and after successful activation, this task will 
+   Activation Task will run on the system login and after successful activation, this task will
    delete itself.
-   
- - If system preactivation is done via HWID + Online KMS, and HWID was applied but was not 
-   successful due to lack of internet at the time of installation of Windows, in that case, 
+  
+ - If system preactivation is done via HWID + Online KMS, and HWID was applied but was not
+   successful due to lack of internet at the time of installation of Windows, in that case,
    Online KMS script will be set to skip Windows activation.
 
  - Registry entry name and location (If desktop context menu is created).
@@ -23222,10 +23222,10 @@ goto ActivationRenewal
    39ed8659e7ca16aaccb86def94ce6cec4c847dd6 *cleanosppx86.exe                   Virus Total = 1/66
 
    Virus Total Report Date: 12-11-2019
-   
-   These files are official Microsoft files and in this script, these are used in 
+  
+   These files are official Microsoft files and in this script, these are used in
    cleaning office license in C2R Retail office to VL conversion process.
-   
+  
    The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
    You can get the original file here https://s.put.re/WFuXpyWA.zip
 
@@ -23234,7 +23234,7 @@ goto ActivationRenewal
    Online KMS Activation script is just a fork of @abbodi1406's KMS_VL_ALL Project.
    KMS_VL_ALL homepage: https://forums.mydigitallife.net/posts/838808
 
-   This fork was made to avoid having any KMS binary files and system can be activated using 
+   This fork was made to avoid having any KMS binary files and system can be activated using
    some manual commands or transparent batch script files.
 
    Online KMS Activation script is a part of 'Microsoft Activation Scripts'
@@ -23466,7 +23466,7 @@ echo:
 
 ::========================================================================================================================================
 
-::  Clear-KMS-Cache.cmd  
+::  Clear-KMS-Cache.cmd 
 ::  https://forums.mydigitallife.net/posts/1511883
 ::  Written by @abbodi1406 (MDL)
 
@@ -23614,7 +23614,7 @@ goto Ins_Done
 cls
 echo ___________________________________________________________________________________________
 echo:
-echo  Install [%winos% ^| %winbuild%] Retail/OEM Key 
+echo  Install [%winos% ^| %winbuild%] Retail/OEM Key
 echo  [%key%]
 echo ___________________________________________________________________________________________
 echo:
@@ -23639,7 +23639,7 @@ for /f "tokens=2 delims==" %%# in ('wmic path %slp% where "ApplicationID='%wApp%
 wmic path %sls% where __CLASS='%sls%' call RefreshLicenseStatus %nul%
 echo:
 echo [%winos% ^| %winbuild%]
-call echo Installing %%_channel%% Key [%key%] 
+call echo Installing %%_channel%% Key [%key%]
 echo [Successful]
 ) || (
 %ELine%
@@ -23719,7 +23719,7 @@ echo:
 echo  Note 1 - This script can not change 'Core'(Home) to 'Non-Core' (Pro) Editions.
 echo           You'll have to do the above manually, Follow these steps.
 echo         - Disable internet.
-echo         - Go to Settings ^> Update ^& Security ^> Activation and 
+echo         - Go to Settings ^> Update ^& Security ^> Activation and
 echo           Insert 'Pro' Edition Product Key VK7JG-NPHTM-C97JM-9MPGT-3V66T
 echo         - Follow on screen instructions, Done. [Incase of errors, restart the system.]
 echo:
@@ -23757,7 +23757,7 @@ wmic path %sls% where __CLASS='%sls%' call InstallProductKey ProductKey="!key!" 
 for /f "tokens=2 delims==" %%# in ('wmic path %slp% where "ApplicationID='%wApp%' and PartialProductKey<>null" Get ProductKeyChannel /value 2^>nul') do set "_channel=%%#"
 wmic path %sls% where __CLASS='%sls%' call RefreshLicenseStatus %nul%
 echo:
-call echo Installing %%_channel%% Key [!key!] 
+call echo Installing %%_channel%% Key [!key!]
 echo [Successful]
 echo:
 echo Reboot is required to properly change the Edition.
@@ -24071,9 +24071,9 @@ echo:
 echo %line%
 echo:
 echo    [1] Protect KMS38 Activation from being overwritten by 180 days KMS Activators
-echo:   
+echo:  
 echo    [2] Undo changes
-echo:   
+echo:  
 echo    [3] Go back
 echo:
 echo %line%

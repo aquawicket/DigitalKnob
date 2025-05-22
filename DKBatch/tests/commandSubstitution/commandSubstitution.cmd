@@ -3,7 +3,7 @@
 :: display the delayed expansion state
 set "if_DE=if "!DE!" equ """
 set "if_NDE=if "!DE!" neq """
-set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)" 
+set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)"
 
 
 
@@ -43,7 +43,7 @@ echo macroD = %macroD%
 
 
 :: TestE
-:: Chain multiple subs together 
+:: Chain multiple subs together
 ::echo:
 ::%_DE_%
 ::set hour=&for /f "usebackq tokens=*" %%a in (`bat_echo.cmd hour`) do set "hour=%%a"
@@ -59,7 +59,7 @@ set macroGetTime=&(%\n%
 )
 
 %macroGetTime% arg1 arg2
-echo time = %time% 
+echo time = %time%
 
 
 

@@ -13,7 +13,7 @@ if not exist "%csc%" (
 )
 if not exist "%~n0.exe" (
    call %csc% /nologo /warn:0 /out:"%~n0.exe" "%~dpsfnx0" || (
-      exit /b %errorlevel% 
+      exit /b %errorlevel%
    )
 )
 

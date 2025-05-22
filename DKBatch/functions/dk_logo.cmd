@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -11,12 +11,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	echo %black%"%lblue% ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______ 
+	echo %black%"%lblue% ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______
 	echo %black%"%lblue% |     \   |   |  ____   |      |    |_____| |      |____/  | \  | |     | |_____]
 	 echo %black%"%blue% |_____/ __|__ |_____| __|__    |    |     | |_____ |    \_ |  \_| |_____| |_____]
-	echo %black%"%lcyan%                                                             __     __            
-	echo %black%"%lcyan%                                                            |  \|_/|__) _ |_ _|_  
-	 echo %black%"%cyan%                                                            |__/| \|__)(_||_(_| ) 
+	echo %black%"%lcyan%                                                             __     __           
+	echo %black%"%lcyan%                                                            |  \|_/|__) _ |_ _|_ 
+	 echo %black%"%cyan%                                                            |__/| \|__)(_||_(_| )
 	echo %clr%
 %endfunction%
 

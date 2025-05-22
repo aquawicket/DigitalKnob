@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -30,7 +30,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_download %TINYCORELINUX_DL%
 		
 		::###### create and cd into install directory ######
-		%dk_call% dk_mkdir %TINYCORELINUX_DIR% 
+		%dk_call% dk_mkdir %TINYCORELINUX_DIR%
 		%dk_call% dk_chdir %TINYCORELINUX_DIR%
 		
 		::###### Install the OS to the .img file ######

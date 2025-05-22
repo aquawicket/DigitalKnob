@@ -25,7 +25,7 @@ rem %dk_call% dk_depend cosmopolitan
 ::	%dk_call% dk_set CMAKE_GENERATOR					"Unix Makefiles"
 ::)
 rem  %dk_call% dk_set CMAKE_FORCE_UNIX_PATHS 			1
-rem  %dk_call% dk_append CMAKE_C_FLAGS					-DCOSMOPOLITAN)# -std=gnu17)   # -D_CRT_SECURE_NO_WARNINGS 
+rem  %dk_call% dk_append CMAKE_C_FLAGS					-DCOSMOPOLITAN)# -std=gnu17)   # -D_CRT_SECURE_NO_WARNINGS
 rem  %dk_call% dk_append CMAKE_CXX_FLAGS				-DCOSMOPOLITAN)# -std=gnu++17) # -D_CRT_SECURE_NO_WARNINGS
 rem  %dk_call% dk_append CMAKE_EXE_LINKER_FLAGS			"-static"  &rem  -s)
 rem  %dk_call% dk_append DKCONFIGURE_FLAGS				"--build=x86_64-w64"

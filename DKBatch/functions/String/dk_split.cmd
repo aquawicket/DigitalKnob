@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# String/split(string, separator)
 ::# String/split(string, separator, array:optional)
 ::#
-::#	The split() method of String values takes a pattern and divides this string into an ordered list of substrings by searching for the pattern, 
+::#	The split() method of String values takes a pattern and divides this string into an ordered list of substrings by searching for the pattern,
 ::# puts these substrings into an array, and returns the array.
 ::#
 ::#	PARAMETERS
@@ -16,14 +16,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# 	The pattern describing where each split should occur. Can be undefined, a string, or an object with a Symbol.split method — the typical example being a regular expression.
 ::# 	Omitting separator or passing undefined causes split() to return an array with the calling string as a single element. All values that are not undefined or objects with a
 ::# 	[Symbol.split]() method are coerced to strings.
-::#   
+::#  
 ::#  limit Optional
 ::#		A non-negative integer specifying a limit on the number of substrings to be included in the array. If provided, splits the string at each occurrence of the specified
 ::#		separator, but stops when limit entries have been placed in the array. Any leftover text is not included in the array at all.
 ::#
 ::#  Return value
 ::# 	If separator is a string, an Array of strings is returned, split at each point where the separator occurs in the given string.
-::#		If separator is a regex, the returned Array also contains the captured groups for each separator match; see below for details. The capturing groups may be unmatched, 
+::#		If separator is a regex, the returned Array also contains the captured groups for each separator match; see below for details. The capturing groups may be unmatched,
 ::#		in which case they are undefined in the array.
 ::#
 ::#  REFERENCE

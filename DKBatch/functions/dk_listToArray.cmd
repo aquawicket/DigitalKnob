@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_listToArray
 %setlocal%
     %dk_call% dk_debugFunc 2
-    
+   
 	
     set "_list=%~1"
     if defined !_list! set _list=!%_list%!
@@ -20,8 +20,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     for %%a in (%_list%) do (
         set "%~2[!i!]=%%a"
         set /a i+=1
-    ) 
-    
+    )
+   
     rem Return the array to the calling scope
     set "currentScope=1"
     for /F "delims=" %%a in ('set %~2[') do (

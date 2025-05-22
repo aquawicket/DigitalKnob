@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -11,24 +11,24 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_gitUpdate
 %setlocal%
 	%dk_call% dk_debugFunc 2 3
- 
+
     if "%~1" neq "" (set "_url_=%~1") else (set "_url_=https://github.com/aquawicket/DigitalKnob.git")
     if "%~2" neq "" (set "_branch_=%~2") else (set "_branch_=Development")
-    
+   
     ::if "%3" neq "NO_CONFIRM" (
     ::    echo Git Update? Any local changes will be lost.
     ::    %dk_call% dk_confirm || %return%
     ::)
-        
+       
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
-    
+   
     if NOT exist "%DKBRANCH_DIR%/.git" (
 		
 		rem NOTE: 	This must cloan and update within the parentheses. rd /s /q "%DKBRANCH_DIR%" removes the current DigitalKnob
-		rem			folder, leaving the current running batch process abandoned until it's cloned again. It seems like when we are 
+		rem			folder, leaving the current running batch process abandoned until it's cloned again. It seems like when we are
 		rem 		in the scope of called batch files, we loose all references to those deleted file once we leave the parentheses.
-		rem         This includes variables, functions, etc. So to fix this, after we delete the very files our context is running 
+		rem         This includes variables, functions, etc. So to fix this, after we delete the very files our context is running
 		rem			from, we must stay in parentheses until those files are restored and updated, or we will lose the context.
 		rem ####################################################################		
 		if exist "%DKBRANCH_DIR%" (

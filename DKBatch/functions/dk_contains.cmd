@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -47,7 +47,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal   
+setlocal  
 	%dk_call% dk_debugFunc 0
 
 	::###### Using dk_contains return value
@@ -62,7 +62,7 @@ setlocal
 	%dk_call% dk_set substring "straw"
 	%dk_call% dk_contains "%string%" "%substring%"
 	if "%dk_contains%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
-	::FIXME: ERRORLEVEL is still 1 
+	::FIXME: ERRORLEVEL is still 1
 
 	::###### Using user defined return value
 	%dk_call% dk_echo
@@ -76,7 +76,7 @@ setlocal
 	%dk_call% dk_set substring "straw"
 	%dk_call% dk_contains "%string%" "%substring%" myResult
 	if "%myResult%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
-	::FIXME: ERRORLEVEL is still 1 
+	::FIXME: ERRORLEVEL is still 1
 
 	::###### Using if ERRORLEVEL
 	%dk_call% dk_echo
@@ -90,7 +90,7 @@ setlocal
 	%dk_call% dk_set substring "straw"
 	%dk_call% dk_contains "%string%" "%substring%"
 	if not ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
-	::FIXME: ERRORLEVEL is still 1 
+	::FIXME: ERRORLEVEL is still 1
 
 
 	::###### Using && and || conditionals

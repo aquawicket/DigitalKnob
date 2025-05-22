@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -35,14 +35,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_getDirectories "%src_extractPath%"
 	
-    %dk_call% Array/dk_length dk_getDirectories 
+    %dk_call% Array/dk_length dk_getDirectories
 	set "dir_count=%dk_length%"
 	
 	%dk_call% dk_getFiles "%src_extractPath%"
 	
     %dk_call% Array/dk_length dk_getFiles
 	set "file_count=%dk_length%"
-    
+   
     if %dir_count% equ 1 (
 		if %file_count% equ 0 (
 			rem rename/move EXTRACTED/root folder to dest path"

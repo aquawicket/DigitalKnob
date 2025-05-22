@@ -1,7 +1,7 @@
 <!-- :
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -160,7 +160,7 @@ setlocal
 			SINGLEINSTANCE="yes"
 			SYSMENU="no"
 			VERSION="1.0"/>
-	</head> 
+	</head>
 	<body onLoad='load(event)' onkeypress='keyPress(event)'>
 		LINK: <input type="text" id="link" value="" style="width:80%">
 		NAME: <input type="text" id="name" value="" style="width:80%">
@@ -171,7 +171,7 @@ setlocal
 			function load(e){
 				var link = document.getElementById('link');
 				var name = document.getElementById('name');
-				link.select(); 
+				link.select();
 			}
 			function keyPress(e){
 				if (e.keyCode == 13) {
@@ -191,4 +191,4 @@ setlocal
 			}
 		</script>
 	</body>
-</html> 
+</html>

@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -53,7 +53,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 		if defined Windows_X86_64_Host (set "WSL_DL=https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi")
 		%dk_call% dk_basename %WSL_DL% WSL_IMPORT_FILE
-		%dk_call% dk_echo   
+		%dk_call% dk_echo  
 		%dk_call% dk_info "Installing Wsl Update . . ."
 		%dk_call% dk_download %WSL_DL%
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
@@ -64,7 +64,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:: Step 5 - Set WSL 2 as your default version
 	wsl --set-default-version 2
 	
-	::wsl --install --web-download --distribution Ubuntu                          
+	::wsl --install --web-download --distribution Ubuntu                         
 	::wsl --install --web-download --distribution Debian
 	::wsl --install --web-download --distribution kali-linux
 	::wsl --install --web-download --distribution Ubuntu-18.04

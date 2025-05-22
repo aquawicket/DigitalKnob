@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#	PARAMETERS
 ::#	target
-::#		Zero-based index at which to copy the sequence to, converted to an integer. This corresponds to where the element at start will be copied to, 
+::#		Zero-based index at which to copy the sequence to, converted to an integer. This corresponds to where the element at start will be copied to,
 ::#		and all elements between start and end are copied to succeeding indices.
 ::#			Negative index counts back from the end of the array — if -Array/length <= target < 0, target + Array/length is used.
 ::#			if target < -Array/length, 0 is used.

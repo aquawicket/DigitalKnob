@@ -50,7 +50,7 @@ setlocal DisableDelayedExpansion
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
- 
+
 	set "file=C:\Users\Administrator\Desktop\test.txt"
 	%dk_call% dk_setFileParam "%file%" one "123"
 	%dk_call% dk_setFileParam "%file%" two 234

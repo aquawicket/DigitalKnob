@@ -21,7 +21,7 @@ if "%~1" equ "" (
 )
 
 if "%2" equ ":TeeProcess" goto TeeProcess
-   
+  
 rem Get the output of CLS command
 for /F %%a in ('cls') do set "cls=%%a"
 

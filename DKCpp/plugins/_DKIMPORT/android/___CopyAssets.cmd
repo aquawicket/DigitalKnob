@@ -7,7 +7,7 @@ set "PACKAGE_NAME=com.digitalknob.dk"
 
 set APP_ROOT=%~dp0
 
-if not exist %ANDROID_HOME% ( 
+if not exist %ANDROID_HOME% (
 	%ERROR% "ANDROID_HOME environment variable not set"
 )
 

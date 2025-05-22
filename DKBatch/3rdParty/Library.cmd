@@ -11,7 +11,7 @@
 :#                  of the debugging library to the header of the main routine#
 :#                  (Always keep the whole debugging library at the beginning,#
 :#                  even if you have no immediate need for it. The first time #
-:#		    you'll have a bug, it'll be priceless!)                   # 
+:#		    you'll have a bug, it'll be priceless!)                   #
 :#                  Update the header and the main routine.                   #
 :#                                                                            #
 :#                  Microsoft reference page on batch files:		      #
@@ -281,7 +281,7 @@ if '%1'=='source' (
 :# Initialize the most commonly used library components.
 call :Library.Init
 
-if '%1'=='source' exit /b 0	&:# If we're sourcing this lib, we're done. 
+if '%1'=='source' exit /b 0	&:# If we're sourcing this lib, we're done.
 
 :# Go process command-line arguments
 goto Main
@@ -539,7 +539,7 @@ if "!!" equ "" (	:# The local scope has expansion on
 	set "%~1=!%~1:%%~c= @%%e !"
       )
     )
-    call set "%~1=%%%~1:^!= @excl %%" 	& rem :# Encode exclamation points                          
+    call set "%~1=%%%~1:^!= @excl %%" 	& rem :# Encode exclamation points                         
     call set "%~1=%%%~1: =^!%%"		& rem :# Encode final expandable entities
   )
   exit /b
@@ -687,7 +687,7 @@ set "MACRO=for %%$ in (1 2) do if %%$==2"				&:# Prolog code of a macro
 set "/MACRO=else setlocal enableDelayedExpansion %&% set MACRO.ARGS="	&:# Epilog code of a macro
 set "ENDMACRO=endlocal"	&:# Ends the macro local scope started in /MACRO. Necessary before macro exit.
 
-set "ON_MACRO_EXIT=for /f "delims=" %%r in ('echo"	&:# Begin the return variables definitions 
+set "ON_MACRO_EXIT=for /f "delims=" %%r in ('echo"	&:# Begin the return variables definitions
 set "/ON_MACRO_EXIT=') do %ENDMACRO% %&% %%r"		&:# End the return variables definitions
 
 :# Primitive macro debugging definitions
@@ -698,7 +698,7 @@ set "/ON_MACRO_EXIT=') do %ENDMACRO% %&% %%r"		&:# End the return variables defi
 :# Ex: %IF_XDLEVEL% 2 set VARIABLE
 :# Recommended: Use set, instead of echo, to display variable values. This is sometimes
 :# annoying because this displays other unwanted variables. But this is the only way
-:# to be sure to display _all_ tricky characters correctly in any expansion mode. 
+:# to be sure to display _all_ tricky characters correctly in any expansion mode.
 :# Note: These debugging macros slow down a lot their enclosing macro.
 :#       They should be removed from the released code.
 set "XDLEVEL=0" &:# 0=No macro debug; 1=medium debug; 2=full debug; 3=Even more debug
@@ -798,7 +798,7 @@ goto:eof
 :#                                                                            #
 :#  Notes           All output from these routines is sent to the log file.   #
 :#                  The debug output is sent stdout or stderr, depending on   #
-:#                  variable %>DEBUGOUT%.				      # 
+:#                  variable %>DEBUGOUT%.				      #
 :#                                                                            #
 :#                  Traced functions are indented, based on the call depth.   #
 :#                  Use %ECHO% to get the same indentation of normal output.  #
@@ -928,7 +928,7 @@ set "LOG=%LCALL% :Echo.Log"
 set ">>LOGFILE=>>%LOGFILE%"
 if not defined LOGFILE set "LOG=rem" & set ">>LOGFILE=rem"
 if .%LOGFILE%.==.NUL. set "LOG=rem" & set ">>LOGFILE=rem"
-if .%NOREDIR%.==.1. set "LOG=rem" & set ">>LOGFILE=rem" &:# A parent script is already redirecting output. Trying to do it again here would fail. 
+if .%NOREDIR%.==.1. set "LOG=rem" & set ">>LOGFILE=rem" &:# A parent script is already redirecting output. Trying to do it again here would fail.
 set "ECHO.V=%LCALL% :Echo.Verbose"
 set "ECHO.D=%LCALL% :Echo.Debug"
 set "ECHOVARS.V=%LCALL% :EchoVars.Verbose"
@@ -1415,7 +1415,7 @@ goto :Echo.Log
 exit /b %1
 
 :# Execute a command, logging its output.
-:# Use for informative commands that should always be run, even in NOEXEC mode. 
+:# Use for informative commands that should always be run, even in NOEXEC mode.
 :Do
 set "Exec.ErrorLevel=%ERRORLEVEL%" &:# Save the initial errorlevel
 setlocal EnableExtensions DisableDelayedExpansion &:# Clears the errorlevel
@@ -1471,7 +1471,7 @@ set Exec.Cmd=%Exec.Cmd:">&"=">""&"%
 :# If there are output redirections, then cancel any attempt at redirecting output to the log file.
 set "Exec.Cmd1=%Exec.Cmd:"=%" &:# Remove quotes in the command string, to allow quoting the whole string.
 if "%Exec.Cmd1:>=%" neq "%Exec.Cmd1%" set "Exec.Redir="
-if defined Exec.Redir set "Exec.NOREDIR=1" &:# make sure child scripts do not try to redirect output again 
+if defined Exec.Redir set "Exec.NOREDIR=1" &:# make sure child scripts do not try to redirect output again
 :# Second stage: Convert quoted redirection operators (Ex: ">") to a usable (Ex: >) and a displayable (Ex: ^>) value.
 :# Must be done once for each of the four < > | & operators.
 :# Since each operation removes half of ^ escape characters, then insert
@@ -1792,7 +1792,7 @@ if errorlevel 1 (
   >&2 echo or set HKCU\Software\Microsoft\Command Processor\DelayedExpansion=1
   exit /b 1
 )
-:# Check if delayed variable expansion works now 
+:# Check if delayed variable expansion works now
 set VAR=before
 if "%VAR%" equ "before" (
   set VAR=after
@@ -1969,7 +1969,7 @@ goto:eof
 :#   2017-01-25 JFL Changed the final string to valid PowerShell comment ##-  #
 :#                                                                            #
 :#----------------------------------------------------------------------------#
- 
+
 call :Echo.Color.Init
 goto Echo.Color.End
 
@@ -2155,13 +2155,13 @@ set ";line="   &:# Output string. Initially empty.
 set ";spac=                                                     "
 set ";i=1"     &:# Argument index. 1=fmt; 2=str1; ...
 :# %ECHOVARS.D% ";fmt" ";line" ";spac" ";i"
-:# For each substring in fmt split at each "]"... (So looking like "Fixed text[SIZE]".) 
+:# For each substring in fmt split at each "]"... (So looking like "Fixed text[SIZE]".)
 for /f "tokens=1,2 delims=[" %%a in ('"echo..%;fmt:]=&echo..%"') do ( :# %%a=Fixed text before "["; %%b=size after "["
   call set /a ";i=%%;i%%+1"                            &:# Compute the next str argument index.
   call call set ";subst=%%%%~%%;i%%%;spac%%%%%~%%;i%%" &:# Append that str at both ends of the spacer
 :# %ECHOVARS.D% ";i" ";subst"
   if "%%b" equ "" (         :# Unspecified width. Use the string as it is.
-    call call set ";subst=%%%%~%%;i%%" 
+    call call set ";subst=%%%%~%%;i%%"
   ) else if %%b0 GEQ 0 ( :# Cut a left-aligned field at the requested size.
     call set ";subst=%%;subst:~0,%%b%%"
   ) else (               :# Cut a right-aligned field at the requested size.
@@ -2924,7 +2924,7 @@ for /f "tokens=2,9*" %%a in ('tasklist /v /nh /fi "IMAGENAME eq cmd.exe" ^| find
 :# Gotcha: Sometimes the above command returns a wrong TITLENOW, containing "N/A". (What would it be in localized versions of Windows?)
 :# Maybe there's a small (variable?) delay before and entry with the new title appears in Windows task list?
 :# Maybe it's another instance with the findstr command itself that disrupts the test?
-:# Anyway, double check the result, and try again up to 3 times if it's bad. 
+:# Anyway, double check the result, and try again up to 3 times if it's bad.
 echo "%TITLENOW%" | findstr "%RDMTITLE%" >nul
 if errorlevel 1 (
   if .%DEBUG%.==.1. (
@@ -2957,7 +2957,7 @@ call set "PREFIX=%%TITLENOW:%RDMTITLE%=";rem %%
 :# Now trim the possible prefix and suffix from the title
 :# In the absence of a special char (like ^) to anchor the match string at the beginning,
 :# prefix the prefix with our random string, to avoid problems if the prefix string is repeated elsewhere in the string
-:# Additional gotcha: Initially there's 1 space between the prefix and title; 
+:# Additional gotcha: Initially there's 1 space between the prefix and title;
 :# but the title command always ends up putting 2 spaces there. So erase all spaces there.
 call :trimright PREFIX
 set "TITLE=%RDMTITLE% %TITLE%"
@@ -3363,7 +3363,7 @@ exit /b
 
 :# Check if a directory has subdirectories (files will not be counted)
 :has_dirs %1=Directory name - Returns errorlevel 0 if directory has files
-2>NUL dir /b /ad "%~1\*" | >NUL findstr "^" 
+2>NUL dir /b /ad "%~1\*" | >NUL findstr "^"
 exit /b
 
 :#----------------------------------------------------------------------------#
@@ -3632,7 +3632,7 @@ endlocal & set "RETVAL=0" & goto:eof
 :#----------------------------------------------------------------------------#
 
 :# Find the current IP address
-:get_IP_address %1=Ouput variable name; Default name: MYIP   
+:get_IP_address %1=Ouput variable name; Default name: MYIP  
 %FUNCTION%
 set "RETVAR=%~1"
 if "%RETVAR%" equ "" set "RETVAR=MYIP"
@@ -4216,7 +4216,7 @@ if "%FULLPATH%" equ "1" set "BEFORE=%KEY%\"
 :# Use reg.exe to get the key information
 set CMD=reg query "%KEY%" /f !PATTERN! !OPTS!
 %ECHO.D% %CMD%
-:# For each line in CMD output... 
+:# For each line in CMD output...
 set "SEPARATOR="
 %FOREACHLINE% %%i in ('%CMD%') do (
   set "LINE=%%i"
@@ -4227,7 +4227,7 @@ set "SEPARATOR="
   :# But extra lines of multi-lined values are indented by >20 spaces.
   set "HEAD2=!LINE:~0,4!"
   if "!HEAD!" equ "    " if "!HEAD2!" neq "    " (
-    :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB. 
+    :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB.
     :# Change the 4-spaces around the REG_XX type word to a TAB.
     set "TOKENS=!LINE:    =	!"
     %ECHOVARS.D% TOKENS
@@ -4301,7 +4301,7 @@ set "RETCODE=1"
   :# But extra lines of multi-lined values are indented by >20 spaces.
   set "HEAD2=!LINE:~0,4!"
   if "!HEAD!" equ "    " if "!HEAD2!" neq "    " (
-    :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB. 
+    :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB.
     :# Change the 4-spaces around the REG_XX type word to a TAB.
     set "TOKENS=!LINE:    =	!"
     %ECHOVARS.D% TOKENS
@@ -4411,7 +4411,7 @@ echo set "RETURN=%RETURN%"
 %ECHOVARS.D% RETURN
 
 for %%f in ("A%%A" "BB" "CC") do @echo f=%%f
-  
+ 
 set A=a
 set B=b
 set V=A
@@ -4604,7 +4604,7 @@ set "H0=^^"		&:# Return a Hat ^ with QUOTE_MODE 0=off
 set "H1=^"		&:# Return a Hat ^ with QUOTE_MODE 1=on
 if %CallerExp%==1 set "H0=!H0!!H0!" & set "H1=!H1!!H1!" &:# !escape our return value
 set "NPESC=1"			  &:# Default number of %expansion escaping to do
-if "%~3" neq "" set "NPESC=%~3"  &:# specified # of extra %expansion escaping to do 
+if "%~3" neq "" set "NPESC=%~3"  &:# specified # of extra %expansion escaping to do
 set /a "NXESC=%CallerExp%*NPESC"  &:# Default number of !expansion escaping to do
 if "%~4" neq "" set "NXESC=%~4"  &:# specified # of extra !expansion escaping to do
 for /l %%i in (1,1,%NXESC%) do set "H0=!H0!!H0!" & set "H1=!H1!!H1!"
@@ -5321,7 +5321,7 @@ if "!ARG!" equ "-c" goto :call_all_cmds
 if "!ARG!" equ "-C" goto :call_cmd_line
 if "!ARG!" equ "-d" call :Debug.On & %ECHOVARS% CMDLINE ARG ARGS & goto next_arg
 if "!ARG!" equ "-d0" set ">DEBUGOUT=>NUL" & call :Debug.On & goto next_arg	&:# Useful for library performance measurements
-if "!ARG!" equ "-d1" set ">DEBUGOUT=>&3" & call :Debug.On & goto next_arg	&:# Useful to test debug output routines to 
+if "!ARG!" equ "-d1" set ">DEBUGOUT=>&3" & call :Debug.On & goto next_arg	&:# Useful to test debug output routines to
 if "!ARG!" equ "-d2" set ">DEBUGOUT=>&2" & call :Debug.On & goto next_arg	&:# Useful to test debug output routines
 if "!ARG!" equ "-e" goto EchoArgs
 if "!ARG!" equ "-E" goto :exec_cmd_line

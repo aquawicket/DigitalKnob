@@ -2,7 +2,7 @@
 call :dk_magicEcho.init
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -56,9 +56,9 @@ for /F "usebackq delims=:" %%O in (`findstr /o "^" "%~f0"`) DO (
             )
         )
         set /a fill=charCount-len-1
-        for /F %%L in ("!fill!") DO set "output=!output!!empty:~0,%%L!!LF!"                
+        for /F %%L in ("!fill!") DO set "output=!output!!empty:~0,%%L!!LF!"               
         set /a cnt+=1
-        set "line!cnt!=!output!"                
+        set "line!cnt!=!output!"               
         set /a charCount=0, sl=lnr, preChars=offset
     )
 )
@@ -107,7 +107,7 @@ echo FAIL
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     %dk_call% dk_debugFunc 0
-    
+   
     %dk_magicEcho% This is impossible %path% ^& | <> "^& | <>" ^
     echo Or not?
-%endfunction%   
+%endfunction%  

@@ -1,13 +1,13 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::################## dk_callDKCpp settings ###########################
 ::if not defined dk_callDKCpp_Target_Os 	(set "dk_callDKC_Target_Os=Cosmocc")	&::  Android, Cosmocc, Emscripten, Ios, Iossim, Linux, Mac, Windows
-::if not defined dk_callDKCpp_Target_Arch 	(set "dk_callDKC_Target_Arch=Cosmocc")	&::  Arm32, Arm64, Cosmocc, X86, X86_64 
-::if not defined dk_callDKCpp_TARGET_ENV 	(set "dk_callDKC_TARGET_ENV=Cosmocc")	&::  Clang, Cosmocc, Gcc, Msvc 
+::if not defined dk_callDKCpp_Target_Arch 	(set "dk_callDKC_Target_Arch=Cosmocc")	&::  Arm32, Arm64, Cosmocc, X86, X86_64
+::if not defined dk_callDKCpp_TARGET_ENV 	(set "dk_callDKC_TARGET_ENV=Cosmocc")	&::  Clang, Cosmocc, Gcc, Msvc
 ::####################################################################
 ::# dk_callDKCpp(function, arguments...)
 ::# dk_callDKCpp(function, arguments..., rtn_var)

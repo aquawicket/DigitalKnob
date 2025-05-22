@@ -4,7 +4,7 @@
     cscript //E:javascript //nologo "%~f0" "%~nx0" %*
     exit /b %errorlevel%
 @if (@x)==(@y) @end ******  end comment *********/
- 
+
 
 var wshShell = WScript.CreateObject("WScript.Shell");
 var args=WScript.Arguments;
@@ -51,14 +51,14 @@ for (var arg = 1 ; arg<args.Length;arg=arg+2) {
 		message = args.Item(arg+1);
 	}
 }
- 
+
 function runPopup(){
 	var btn = wshShell.Popup(message, timeout, title, 0x4 + 0x20);
 	//WScript.Echo(btn)
 	switch(btn) {
 		
 		// yes pressed
-		case 6: 
+		case 6:
 			WScript.Echo("yes");
 			WScript.Quit(btn);
 			break;

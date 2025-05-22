@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -18,18 +18,18 @@ if exist "%~1" (goto:eof)
 :dk_load
 %setlocal%
     ::%dk_call% dk_debugFunc 0
- 
- 
+
+
     %dk_call% dk_notice "dk_load is temporarily disabled. Use dk_call and dk_source to download, load and run functions."
     goto:eof
     ::%dk_call% dk_debugFunc
-    
+   
     %dk_call% dk_source dk_echo
     %dk_call% dk_source dk_info
     %dk_call% dk_source dk_error
     %dk_call% dk_source dk_debugFunc
     %dk_call% dk_debugFunc 1
-    
+   
     if exist "%~1" (
         set "funcPath=%~1"
         for %%Z in ("%funcPath%") do set "funcName=%%~nZ"
@@ -44,24 +44,24 @@ if exist "%~1" (goto:eof)
     call dk_source dk_download
     if not exist "%funcPath%" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName:.cmd=%.cmd" "%funcPath%"
     if not exist "%funcPath%" %dk_call% dk_error "ERROR: %funcPath%: file not found"
-    
+   
     goto:eof
     :: TODO
-    
+   
     :: Convert to windows line endings if only CR found
-    
+   
     :: TODO
     if exist "%funcPath%" (set "%funcName%=%funcPath%") else call dk_error "%funcPath%: file not found")
-    
+   
     echo %DKFUNCTIONS_LIST% | findstr ";%funcName%;" && goto:eof
     set "DKFUNCTIONS_LIST=%DKFUNCTIONS_LIST%;%funcName%;"           &:: Add to list
     echo added %funcName% to DKFUNCTIONS_LIST
-    
+   
     :: read file line by line and store matching lines in array
     for /F "usebackq delims=" %%a in ("%funcPath%") do (
         echo %%a | findstr "\<dk_*" >nul && (
             set "temp=%%a"
-            
+           
             &:: FIXME: remove the need for calls here
             call set "temp=%%temp:*dk_=dk_%%"
             call set "temp=%%temp:*dk_load =%%"
@@ -99,7 +99,7 @@ if exist "%~1" (goto:eof)
 :DKTEST
 %setlocal%
     %dk_call% dk_debugFunc
-    
+   
 	
     call dk_load dk_printVar
 %endfunction%

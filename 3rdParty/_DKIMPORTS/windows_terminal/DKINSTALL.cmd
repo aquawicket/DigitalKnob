@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKINSTALL()
 ::#
 ::#     https://github.com/microsoft/terminal
-::# 
+::#
 :DKINSTALL
 ::%setlocal%
 	%dk_call% dk_debugFunc 0	
@@ -29,7 +29,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_set WINDOWS_TERMINAL_EXE "%WINDOWS_TERMINAL_DIR%\wt.exe"
 	if exist "%WINDOWS_TERMINAL_EXE%" (goto windows_terminal_installed)
-	%dk_call% dk_echo   
+	%dk_call% dk_echo  
     %dk_call% dk_info "Installing Windows Terminal . . ."
     %dk_call% dk_download %WINDOWS_TERMINAL_DL%
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"

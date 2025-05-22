@@ -21,10 +21,10 @@ if %ERRORLEVEL% equ 0 goto elevated
             WScript.Echo "VBScript entry"
             Set oShell = CreateObject( "WScript.Shell" )
             THIS_PATH=oShell.ExpandEnvironmentStrings("%THIS_PATH%")
-            Set UAC = CreateObject("Shell.Application") 
-            args = "" 
-            For Each strArg in WScript.Arguments 
-            args = args & strArg & " "  
+            Set UAC = CreateObject("Shell.Application")
+            args = ""
+            For Each strArg in WScript.Arguments
+            args = args & strArg & " " 
             Next
             args = "/c """ + THIS_PATH + """ " + args
             UAC.ShellExecute "cmd", args, "", "runas", 1

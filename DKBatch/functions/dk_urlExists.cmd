@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		###### Informational responses (100 – 199) ######
 ::# 	100 Continue
 ::# 	101 Switching Protocols
-::# 	102 Processing 
+::# 	102 Processing
 ::# 	103 Early Hints
 ::#
 ::#		###### Successful responses (200 – 299) ######
@@ -90,11 +90,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_httpResponse "%~1"
 	::echo dk_httpResponse = %dk_httpResponse%
 
-	if !dk_httpResponse! equ 200 ( 
+	if !dk_httpResponse! equ 200 (
 		set "dk_urlExists=0" &rem					200 - OK
-	) else if !dk_httpResponse! equ 301 ( 
+	) else if !dk_httpResponse! equ 301 (
 		set "dk_urlExists=0" &rem					301 - Moved Permanently
-	) else if !dk_httpResponse! equ 302 ( 
+	) else if !dk_httpResponse! equ 302 (
 		set "dk_urlExists=0" &rem					302 - Found
 	) else (
 		set "dk_urlExists=1"
@@ -130,7 +130,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_urlExists "%url%"
 	if %dk_urlExists% equ 0 (echo %url% exists) else (echo %url% does NOT exist)
 	echo dk_urlExists = %dk_urlExists%
-	::FIXME: ERRORLEVEL is still 1 
+	::FIXME: ERRORLEVEL is still 1
 	
 	
 	::###### Using if ERRORLEVEL
@@ -145,7 +145,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_urlExists "%url%"
 	if not ERRORLEVEL 1 (echo %url% exists) else (echo %url% does NOT exist)
 	echo dk_urlExists = %dk_urlExists%
-	::FIXME: ERRORLEVEL is still 1 
+	::FIXME: ERRORLEVEL is still 1
 	
 	
 	::###### Using && and || conditionals
@@ -155,10 +155,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo dk_urlExists = %dk_urlExists%
 	
 	%dk_call% dk_echo
-	set "url=http://www.nonexisting.com/nofile.no"  
+	set "url=http://www.nonexisting.com/nofile.no" 
 	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
 	echo dk_urlExists = %dk_urlExists%
-	(call )		&::FIXME: ERRORLEVEL is still 1 
+	(call )		&::FIXME: ERRORLEVEL is still 1
 	
 	
 	
@@ -169,10 +169,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo dk_urlExists = %dk_urlExists%
 	
 	echo:
-	set "url=https://aka.ms/vs/16/release/VC_redist.x64.exe" 
+	set "url=https://aka.ms/vs/16/release/VC_redist.x64.exe"
 	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
 	echo dk_urlExists = %dk_urlExists%
-	(call )		&::FIXME: ERRORLEVEL is still 1 
+	(call )		&::FIXME: ERRORLEVEL is still 1
 	
 	::###### Experimental
 	::  %dk_call% dk_echo

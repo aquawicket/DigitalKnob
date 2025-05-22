@@ -98,7 +98,7 @@ if not defined TEST_DKGETDATA goto :end
 	echo #################################
 	echo ##      TESTING GetData        ##
 	echo #################################
-	call GetData result 
+	call GetData result
 	echo GetData returned: %result%
 	echo:
 :end
@@ -145,7 +145,7 @@ if not defined TEST_DKERRORS goto :end
 	
 	set ERRORLEVEL=1
 	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is not 0, and continues"
-	echo: 
+	echo:
 
 	%ERROR% "ERROR: This throws an error, and continues"
 	echo:

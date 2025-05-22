@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -22,7 +22,7 @@ if exist "%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe" (set "OPENSSL_EXE=%Progr
 ::The /F parameter tells taskkill to Force the process(es) to kill.
 ::The /IM parameter allows you to specify the name of the process executable(s) to kill.
 ::The /T switch specifies to terminate all child processes along with the parent process
-taskkill /F /IM /T "java.exe" 
+taskkill /F /IM /T "java.exe"
 
 :: list the keys
 :: keytool.exe -list

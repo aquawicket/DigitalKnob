@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#	fromIndex :optional
 ::#		Zero-based index at which to start searching, converted to an integer.
-::#			Negative index counts back from the end of the array — if -Array/length <= fromIndex < 0, fromIndex + Array/length is used. However, 
+::#			Negative index counts back from the end of the array — if -Array/length <= fromIndex < 0, fromIndex + Array/length is used. However,
 ::#			the array is still searched from front to back in this case.
 ::#			If fromIndex < -Array/length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
 ::#			If fromIndex >= Array/length, the array is not searched and false is returned.
@@ -112,7 +112,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "ASCII[50]=2"
 	set "ASCII[51]=3"
 	set "ASCII[52]=4"
-	set "ASCII[53]=5" 
+	set "ASCII[53]=5"
 	set "ASCII[54]=6"
 	set "ASCII[55]=7"
 	set "ASCII[56]=8"
@@ -241,7 +241,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% Array/dk_includes ASCII 2	&& echo 2 = true 		|| echo 2 = false
 	%dk_call% Array/dk_includes ASCII 3	&& echo 3 = true 		|| echo 3 = false
 	%dk_call% Array/dk_includes ASCII 4	&& echo 4 = true 		|| echo 4 = false
-	%dk_call% Array/dk_includes ASCII 5	&& echo 5 = true 		|| echo 5 = false 
+	%dk_call% Array/dk_includes ASCII 5	&& echo 5 = true 		|| echo 5 = false
 	%dk_call% Array/dk_includes ASCII 6	&& echo 6 = true 		|| echo 6 = false
 	%dk_call% Array/dk_includes ASCII 7	&& echo 7 = true 		|| echo 7 = false
 	%dk_call% Array/dk_includes ASCII 8	&& echo 8 = true 		|| echo 8 = false

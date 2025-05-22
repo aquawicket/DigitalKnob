@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_secondsToDate(%seconds% second minute hour day month year)
 ::#
 ::#
-:dk_secondsToDate 
+:dk_secondsToDate
 %setlocal%
     %dk_call% dk_debugFunc 1 7
 
@@ -72,7 +72,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_getDate Day Month Year
     %dk_call% dk_getTime CentiSecond Second Minute Hour
     echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
-    
+   
     %dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month% %Year%
     %dk_call% dk_secondsToDate %seconds% SecondB MinuteB HourB DayB MonthB YearB
     echo TIMESTAMP = %YearB%-%MonthB%-%DayB%T%HourB%:%MinuteB%:%SecondB%

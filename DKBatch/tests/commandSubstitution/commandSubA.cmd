@@ -1,6 +1,6 @@
 @echo off
 setlocal enableDelayedExpansion
-if "!DE!" neq "" echo "delayed expansion is required" && pause && exit 
+if "!DE!" neq "" echo "delayed expansion is required" && pause && exit
 
 set "second=UNDEFINED"
 set $time=>NULL<call:getTime
@@ -14,7 +14,7 @@ goto main
 
 
 
-  
+ 
 :getTime
 	echo :getTime
 	:: https://stackoverflow.com/a/42199181/688352

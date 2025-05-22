@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -25,7 +25,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     if defined Windows_X86_Host    (set "GIT_IMPORT=%GIT_WIN_X86_IMPORT%")
     if defined Windows_X86_64_Host (set "GIT_IMPORT=%GIT_WIN_X86_64_IMPORT%")
     %dk_call% dk_assertVar GIT_IMPORT
-    
+  
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	if not defined GIT (%dk_call% dk_importVariables %GIT_IMPORT% NAME git ROOT %DKTOOLS_DIR%)
 	%dk_call% dk_assertVar GIT
@@ -38,9 +38,9 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	set "BASH_EXE=%GIT%\bin\bash.exe"
     set "GITBASH_EXE=%GIT%\git-bash.exe"
 	set "PATCH_EXE=%GIT%\usr\bin\patch.exe"
-     
+   
     if exist "%GIT_EXE%" (%return%)
-    %dk_call% dk_echo   
+    %dk_call% dk_echo 
     %dk_call% dk_info "Installing git . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_download %GIT_IMPORT%
@@ -48,7 +48,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	
 	::###### Install Git Context Menu ######
 	"contextMenu/DKINSTALL.cmd"
-       
+     
     if NOT exist "%GIT_EXE%" (%dk_call% dk_error "cannot find git")
 %endfunction%
 

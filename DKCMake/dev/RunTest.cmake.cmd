@@ -37,6 +37,6 @@ if not exist "%CMAKE_EXE%" ( ERROR "Could not locate CMAKE_EXE" )
 cls
 
 set "file=%DKCMAKE_DIR%/other/Test.cmake"
-"%CMAKE_EXE%" -DDKCMAKE_DIR=%DKCMAKE_DIR% -P "%file%" 
- 
-pause 
+"%CMAKE_EXE%" -DDKCMAKE_DIR=%DKCMAKE_DIR% -P "%file%"
+
+pause

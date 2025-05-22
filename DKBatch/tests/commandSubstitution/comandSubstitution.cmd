@@ -19,7 +19,7 @@ set $time=^&call:getTime^&echo
 %endfunction%
 
 
-  
+ 
 :getTime
 	::echo :getTime
 	:: https://stackoverflow.com/a/42199181/688352

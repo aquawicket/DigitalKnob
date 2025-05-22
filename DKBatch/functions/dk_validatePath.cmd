@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if exist "!%~1!" (%return%)
 	
     %~2
-    
+   
 	if "%~3" equ "NO_HALT" (%return%)
     if not defined %~1		%dk_call% dk_error "dk_validatePath was unable to set the path variable:%~1 with the code provided"
 	if not exist "!%~1!"    %dk_call% dk_error "dk_validatePath was unable to locate the path:%~1 with the code provided"

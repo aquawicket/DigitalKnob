@@ -11,9 +11,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 goto main
 :: env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"
-:: /usr/bin/bash -li 	 
+:: /usr/bin/bash -li 	
 
-::   -l				= "invoke a new shell process"    
+::   -l				= "invoke a new shell process"   
 ::   -i 			= "make the shell interactive"
 ::   -c <command> 	= "run a command"
 
@@ -37,7 +37,7 @@ goto main
 	echo:
 	%dk_call% dk_echo "PATH = %PATH%"
 	pause
-%endfunction% 
+%endfunction%
 
 ::###### GIT_CMD ######
 :GIT_CMD
@@ -46,7 +46,7 @@ goto main
 	cls
 	echo You are in a GIT_CMD environment
 	echo:
-	echo PATH = %PATH% 
+	echo PATH = %PATH%
 	pause
 %endfunction%
 
@@ -97,14 +97,14 @@ goto main
 	%dk_call% dk_title "Digitalknob MINGW64_BASH"
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc ^
 	"clear && echo You are in a MINGW64_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
-%endfunction% 
+%endfunction%
 
 ::###### UCRT64 ######
 :UCRT64_BASH
 	%dk_call% dk_title "Digitalknob UCRT64_BASH"
 	%MSYS2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -lc ^
 	"clear && echo You are in a UCRT64_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
-%endfunction% 
+%endfunction%
 
 ::###### Main ######
 :main

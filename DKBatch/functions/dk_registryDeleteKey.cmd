@@ -1,13 +1,13 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::#################################################################################
 :: dk_registryDeleteKey(reg_path)
 ::
-:: reg.exe /? 
+:: reg.exe /?
 ::  REG DELETE KeyName [/v ValueName | /ve | /va] [/f] [/reg:32 | /reg:64]
 ::
 ::  KeyName    [\\Machine\]FullKey
@@ -50,7 +50,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_warning "dk_registryDeleteKey: _reg_path_:%_reg_path_% does not exist"
 		%return%
 	)
-    
+   
 	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
 	
     "%REG_EXE%" delete "%_reg_path_:/=\%" /f

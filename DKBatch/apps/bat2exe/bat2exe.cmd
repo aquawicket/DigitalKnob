@@ -14,7 +14,7 @@ if not exist "%~n0.exe" (
 
 echo %~n0.exe  "%JSC_EXE%" %*
 %~n0.exe  "%JSC_EXE%" %*
-::del /q /f %~n0.exe 1>nul 2>nul 
+::del /q /f %~n0.exe 1>nul 2>nul
 endlocal & exit /b %errorlevel%
 */
 

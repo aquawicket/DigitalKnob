@@ -32,7 +32,7 @@ set $last=^&call:last
 :last
 	echo ###%0###
 %endfunction%
-  
+ 
 
 
 

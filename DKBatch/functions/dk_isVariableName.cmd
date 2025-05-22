@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_isVariableName
 %setlocal%
 	%dk_call% dk_debugFunc 1 2
- 
+
     ::set "arg1=%~1"
     ::if defined "%~1" call set "arg1=%%%arg1%%%"
 	
@@ -26,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		set "dk_isVariableName=1"
 	)
-    
+   
 	endlocal & (
 		set "dk_isVariableName=%dk_isVariableName%"
 		if "%~2" neq "" (set "%2=%dk_isVariableName%")

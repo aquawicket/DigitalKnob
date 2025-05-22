@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -15,13 +15,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
     %dk_call% dk_debugFunc 0 1
 
-    if "%~1" equ "" (echo: & %endfunction%)   
-    ::set "_message_=%~1" 
-        
+    if "%~1" equ "" (echo: & %endfunction%)  
+    ::set "_message_=%~1"
+       
     :: if msg starts and ends with quotes, remove the first and last characters
     ::%if_NDE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=%_message_:~1,-1%"
     ::%if_DE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
-        
+       
     ::echo %_message_%
 	set message=%*
 	for /f "tokens=*" %%G IN (%message%) do echo %%~G
@@ -37,7 +37,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
     %dk_call% dk_debugFunc 0
 
- 
+
     echo This is a normal echo commmand
     %dk_call% dk_echo
     %dk_call% dk_echo ""

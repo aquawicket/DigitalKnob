@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -81,13 +81,13 @@ if not defined dk_exec_PRINT_EXITCODE 	(set "dk_exec_PRINT_EXITCODE=0"	)	&:: dk_
 		echo "dk_exec_exitcode > !dk_exec_exitcode!"
 	)
 			
-	::###### TODO: dk_exec_PRINT_STDERR ###### 
+	::###### TODO: dk_exec_PRINT_STDERR ######
 	::if "%dk_exec_PRINT_STDERR%" equ "1" (
 	::	echo dk_exec_stderr ^> !dk_exec_stderr!
 	::)
 
 	::###### NOTE: what is this doing, why is it needed? ######
-	%ComSpec% /c exit /b 0 
+	%ComSpec% /c exit /b 0
 	
 	::###### dk_exec ######
 	set /a "last_output_line=i-2"

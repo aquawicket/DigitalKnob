@@ -1,4 +1,4 @@
-Windows Registry Editor Version 5.00 
+Windows Registry Editor Version 5.00
 
 ;@(cls & %__APPDIR__%reg.exe import "%~f0" 2>nul >nul & goto :EOF)
 

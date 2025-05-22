@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -9,15 +9,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#		Reference: https://ss64.com/nt/syntax-args.html#attributes
 ::#
-::#		 Attribute                    Expansion 
-::#		 FILE_ATTRIBUTE_DIRECTORY     d-------- 
-::#		 FILE_ATTRIBUTE_READONLY      -r------- 
-::#		 FILE_ATTRIBUTE_ARCHIVE       --a------ 
-::#		 FILE_ATTRIBUTE_HIDDEN        ---h----- 
-::#		 FILE_ATTRIBUTE_SYSTEM        ----s---- 
-::#		 FILE_ATTRIBUTE_COMPRESSED    -----c--- 
-::#		 FILE_ATTRIBUTE_OFFLINE       ------o-- 
-::#		 FILE_ATTRIBUTE_TEMPORARY     -------t- 
+::#		 Attribute                    Expansion
+::#		 FILE_ATTRIBUTE_DIRECTORY     d--------
+::#		 FILE_ATTRIBUTE_READONLY      -r-------
+::#		 FILE_ATTRIBUTE_ARCHIVE       --a------
+::#		 FILE_ATTRIBUTE_HIDDEN        ---h-----
+::#		 FILE_ATTRIBUTE_SYSTEM        ----s----
+::#		 FILE_ATTRIBUTE_COMPRESSED    -----c---
+::#		 FILE_ATTRIBUTE_OFFLINE       ------o--
+::#		 FILE_ATTRIBUTE_TEMPORARY     -------t-
 ::#		 FILE_ATTRIBUTE_REPARSE_POINT --------l
 ::#		 FILE_ATTRIBUTE_NORMAL        ---------
 ::#

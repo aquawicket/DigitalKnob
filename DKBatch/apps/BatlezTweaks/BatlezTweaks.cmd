@@ -42,7 +42,7 @@ cls
 echo.
 echo.
 echo.
-echo.                  
+echo.                 
 echo     %b%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
 echo         ██╔══██╗██╔══██╗╚══██╔══╝██║     ██╔════╝╚════██║  ╚══██╔══╝ ██║  ██╗  ██║██╔════╝██╔══██╗██║ ██╔╝██╔════╝
 echo         ██████╦╝███████║   ██║   ██║     █████╗    ███╔═╝     ██║    ╚██╗████╗██╔╝█████╗  ███████║█████═╝ ╚█████╗  %u%
@@ -54,8 +54,8 @@ echo.
 echo.
 echo %w%                                                 Developed by Croakq
 echo %w%                                          Thank you for using Batlez Tweaks
-echo %w%                                            %g%Press any key to get started%u%            
-echo.                                
+echo %w%                                            %g%Press any key to get started%u%           
+echo.                               
 pause >nul
 
 :legit
@@ -65,7 +65,7 @@ echo.
 echo.
 echo.
 echo.
-echo %u%[%g%+%u%] %g%Successful! 
+echo %u%[%g%+%u%] %g%Successful!
 echo.
 echo %u%Developed by: %g%Croakq
 echo %u%Github: %g%https://github.com/Batlez
@@ -83,7 +83,7 @@ echo.
 echo %b%Blue%u%, %d%Cyan%u%, %g%Green%u%, %y%Yellow%u%, %r%Red%u%, %gold%Gold%u%, %m%Pink%u%, %p%Purple%u%, %lime%Lime%u%, %brown%Brown%u%, %orange%Orange%u%, or %w%White%u%
 echo.
 echo.
-set /p preset= 
+set /p preset=
 
 if /i "%preset%" equ "Gold" goto Gold
 if /i "%preset%" equ "Blue" goto Blue
@@ -176,7 +176,7 @@ goto menu
 :menu
 cls
 chcp 437>nul
-chcp 65001 >nul 
+chcp 65001 >nul
 echo.
 echo.
 echo     %c%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
@@ -184,14 +184,14 @@ echo         ██╔══██╗██╔══██╗╚══██╔�
 echo         ██████╦╝███████║   ██║   ██║     █████╗    ███╔═╝     ██║    ╚██╗████╗██╔╝█████╗  ███████║█████═╝ ╚█████╗  %u%
 echo         ██╔══██╗██╔══██║   ██║   ██║     ██╔══╝  ██╔══╝       ██║     ████╔═████║ ██╔══╝  ██╔══██║██╔═██╗  ╚═══██╗
 echo         ██████╦╝██║  ██║   ██║   ███████╗███████╗███████╗     ██║     ╚██╔╝ ╚██╔╝ ███████╗██║  ██║██║ ╚██╗██████╔╝
-echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝╚══════╝     ╚═╝      ╚═╝   ╚═╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝   
+echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝╚══════╝     ╚═╝      ╚═╝   ╚═╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  
 echo.
 echo.
 echo.
-echo                                 %c%Batlez is a tweaking script that optimizes your system%u% 
+echo                                 %c%Batlez is a tweaking script that optimizes your system%u%
 echo                                    %c%to provide the best gaming experience possible.%u%
 echo.
-echo.                                    
+echo.                                   
 echo.
 echo                                            [%c%1%u%] Optimizations   [%c%2%u%] Hardware
 echo.
@@ -202,10 +202,10 @@ echo.
 echo.
 echo.
 echo                                             [%c%6%u%] Advanced      [%c%7%u%] More Info
-echo. 
 echo.
 echo.
-echo                                                      %c%[ X to close ]%u%  
+echo.
+echo                                                      %c%[ X to close ]%u% 
 echo.
 set /p M="%c%Choose an option »%u% "
 set choice=%errorlevel%
@@ -222,7 +222,7 @@ goto Menu
 :Comingsoon
 cls
 chcp 437>nul
-chcp 65001 >nul 
+chcp 65001 >nul
 echo.
 echo     %c%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
 echo         ██╔══██╗██╔══██╗╚══██╔══╝██║     ██╔════╝╚════██║  ╚══██╔══╝ ██║  ██╗  ██║██╔════╝██╔══██╗██║ ██╔╝██╔════╝
@@ -233,13 +233,13 @@ echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══�
 echo.
 echo.
 echo.
-echo                                    %c%Batlez is a tweaking script that optimizes your system%u% 
+echo                                    %c%Batlez is a tweaking script that optimizes your system%u%
 echo                                       %c%to provide the best gaming experience possible.%u%
 echo.
 echo.
 echo.
 echo.
-echo                              %r%This feature has not been finished yet but will be coming out soon.  
+echo                              %r%This feature has not been finished yet but will be coming out soon. 
 echo.
 echo.
 echo.
@@ -251,7 +251,7 @@ goto menu
 :More
 cls
 chcp 437>nul
-chcp 65001 >nul 
+chcp 65001 >nul
 echo.
 echo.
 echo     %c%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
@@ -259,28 +259,28 @@ echo         ██╔══██╗██╔══██╗╚══██╔�
 echo         ██████╦╝███████║   ██║   ██║     █████╗    ███╔═╝     ██║    ╚██╗████╗██╔╝█████╗  ███████║█████═╝ ╚█████╗  %u%
 echo         ██╔══██╗██╔══██║   ██║   ██║     ██╔══╝  ██╔══╝       ██║     ████╔═████║ ██╔══╝  ██╔══██║██╔═██╗  ╚═══██╗
 echo         ██████╦╝██║  ██║   ██║   ███████╗███████╗███████╗     ██║     ╚██╔╝ ╚██╔╝ ███████╗██║  ██║██║ ╚██╗██████╔╝
-echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝╚══════╝     ╚═╝      ╚═╝   ╚═╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝   
+echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝╚══════╝     ╚═╝      ╚═╝   ╚═╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  
 echo.
 echo.
 echo.
-echo                                    %c%Batlez is a tweaking script that optimizes your system%u% 
+echo                                    %c%Batlez is a tweaking script that optimizes your system%u%
 echo                                       %c%to provide the best gaming experience possible.%u%
 echo.
-echo.                                    
+echo.                                   
 echo.
 echo                                                 [%c%1%u%] About     [%c%2%u%] Disclaimer
 echo.
 echo.
 echo.
-echo                                                 [%c%3%u%] Credits   [%c%4%u%] Changelog   
+echo                                                 [%c%3%u%] Credits   [%c%4%u%] Changelog  
 echo.
 echo.
 echo.
 echo                                                          [%c%5%u%] Back
-echo. 
 echo.
 echo.
-echo                                                       %c%[ X to close ]%u%  
+echo.
+echo                                                       %c%[ X to close ]%u% 
 echo.
 set /p M="%c%Choose an option »%u% "
 set choice=%errorlevel%
@@ -300,7 +300,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo              %c%About%u%         
+echo              %c%About%u%        
 echo %g%_____________________________________
 echo.
 echo.
@@ -321,27 +321,27 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo              %c%Disclaimer%u%         
+echo              %c%Disclaimer%u%        
 echo %g%_____________________________________
 echo.
 echo.
 echo.
-echo %c%Batlez Tweaks is a tweaking script that optimizes your%u% 
+echo %c%Batlez Tweaks is a tweaking script that optimizes your%u%
 echo %c%system to provide the best gaming experience possible.%u%
 echo.
-echo %c%Please be advised that%u% %r%I cannot guarantee an FPS increase%u% %c%by 
+echo %c%Please be advised that%u% %r%I cannot guarantee an FPS increase%u% %c%by
 echo implementing the suggested optimizations. Each system and%u%
 echo %c%configuration may have varying results.%u%
 echo.
-echo %c%It is important to note that everything presented here will be used at your%u% 
-echo %r%own risk.%u% %c%I will not be held liable for any damages caused due to failure to%u% 
+echo %c%It is important to note that everything presented here will be used at your%u%
+echo %r%own risk.%u% %c%I will not be held liable for any damages caused due to failure to%u%
 echo %c%follow the instructions carefully.%u%
 echo.
-echo %c%If you need clarification on a tweak, please refrain from using it and %u% 
-echo %c%contact me for further assistance.%u% 
+echo %c%If you need clarification on a tweak, please refrain from using it and %u%
+echo %c%contact me for further assistance.%u%
 echo.
-echo %c%I recommend creating a manual restore point before%u% 
-echo %c%executing any tweaks.%u% 
+echo %c%I recommend creating a manual restore point before%u%
+echo %c%executing any tweaks.%u%
 echo.
 echo %c%If you have any questions or concerns, please get in touch with me%u%
 echo %c%on%u% %y%Discord at Croakq%u%
@@ -359,7 +359,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo              %c%Credits%u%         
+echo              %c%Credits%u%        
 echo %g%_____________________________________
 echo.
 echo.
@@ -380,7 +380,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo              %c%Changelog%u%         
+echo              %c%Changelog%u%        
 echo %g%_____________________________________
 echo.
 echo.
@@ -395,7 +395,7 @@ goto More
 :Backup
 cls
 chcp 437>nul
-chcp 65001 >nul 
+chcp 65001 >nul
 echo.
 echo     %c%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
 echo         ██╔══██╗██╔══██╗╚══██╔══╝██║     ██╔════╝╚════██║  ╚══██╔══╝ ██║  ██╗  ██║██╔════╝██╔══██╗██║ ██╔╝██╔════╝
@@ -406,7 +406,7 @@ echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══�
 echo.
 echo.
 echo.
-echo                                    %c%Batlez is a tweaking script that optimizes your system%u% 
+echo                                    %c%Batlez is a tweaking script that optimizes your system%u%
 echo                                       %c%to provide the best gaming experience possible.%u%
 echo.
 echo.
@@ -456,7 +456,7 @@ if %SR_STATUS%==0 (
 ) else (
     echo Failed to create a restore point. Please ensure System Protection is enabled on the C: drive.
 )
-set /p deleteOld=Do you want to remove old restore points? (Yes/No): 
+set /p deleteOld=Do you want to remove old restore points? (Yes/No):
 
 if /i "%deleteOld%" equ "Yes" (
     echo Removing old system restore points...
@@ -478,7 +478,7 @@ goto menu
 :TweaksMenu
 cls
 chcp 437>nul
-chcp 65001 >nul 
+chcp 65001 >nul
 echo.
 echo     %c%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
 echo         ██╔══██╗██╔══██╗╚══██╔══╝██║     ██╔════╝╚════██║  ╚══██╔══╝ ██║  ██╗  ██║██╔════╝██╔══██╗██║ ██╔╝██╔════╝
@@ -542,17 +542,17 @@ echo.
 echo.
 echo %g%_____________________________________
 echo.
-echo      %c%Applying Custom Power Plan%u%         
+echo      %c%Applying Custom Power Plan%u%        
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
 powercfg -restoredefaultschemes
 powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/1145945307205611623/1219858329312952400/BatlezTweaks.pow?ex=66a86599&is=66a71419&hm=c95fa894df1850327db4d4d910d9ec4691da35ca3ccc3bc10c96d6476f0438cd&" -OutFile "%temp%\Batlez_Tweaks.pow"
 cls
-powercfg /d 44444444-4444-4444-4444-444444444449 >nul 2>&1 
-powercfg -import "%temp%\Batlez_Tweaks.pow" 44444444-4444-4444-4444-444444444449 >nul 2>&1 
-powercfg -SETACTIVE "44444444-4444-4444-4444-444444444449" >nul 2>&1 
-powercfg /changename 44444444-4444-4444-4444-444444444449 "Batlez's Power Plan" "The Ultimate Power Plan to increase FPS, improve latency and reduce input lag." >nul 2>&1 
+powercfg /d 44444444-4444-4444-4444-444444444449 >nul 2>&1
+powercfg -import "%temp%\Batlez_Tweaks.pow" 44444444-4444-4444-4444-444444444449 >nul 2>&1
+powercfg -SETACTIVE "44444444-4444-4444-4444-444444444449" >nul 2>&1
+powercfg /changename 44444444-4444-4444-4444-444444444449 "Batlez's Power Plan" "The Ultimate Power Plan to increase FPS, improve latency and reduce input lag." >nul 2>&1
 del "%temp%\Batlez_Tweaks.pow"
 echo.
 echo %g%======PRESS ANY KEY TO CONTINUE======
@@ -568,7 +568,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo           %c%Windows Cleaner%u%         
+echo           %c%Windows Cleaner%u%        
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -661,7 +661,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo         %c%Custom Regedit%u%         
+echo         %c%Custom Regedit%u%        
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -674,10 +674,10 @@ bcdedit /set bootmenupolicy legacy
 bcdedit /set hypervisorlaunchtype off
 bcdedit /set tpmbootentropy ForceDisable
 bcdedit /set linearaddress57 OptOut
-bcdedit /set firstmegabytepolicy UseAll 
+bcdedit /set firstmegabytepolicy UseAll
 bcdedit /set nolowmem Yes
-bcdedit /set allowedinmemorysettings 0 
-bcdedit /set isolatedcontext No 
+bcdedit /set allowedinmemorysettings 0
+bcdedit /set isolatedcontext No
 cls
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0001" /v "*RSSProfile" /t reg_SZ /d "3" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0001\Ndi\Params\*RSSProfile" /v "ParamDesc" /t reg_SZ /d "RSS load balancing profile" /f
@@ -729,7 +729,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo         %c%GPU Optimizations (AMD)%u%              
+echo         %c%GPU Optimizations (AMD)%u%             
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -927,22 +927,22 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo            %c%Network Tweaks%u%             
+echo            %c%Network Tweaks%u%            
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
 netsh advfirewall firewall set rule group="Network Discovery" new enable=Yes
-netsh int tcp set heuristics disabled 
+netsh int tcp set heuristics disabled
 netsh int tcp set supp internet congestionprovider=ctcp
 netsh int tcp set global rss=enabled
 netsh int tcp set global chimney=enabled
 netsh int tcp set global ecncapability=enabled
 netsh int tcp set global timestamps=disabled
 netsh int tcp set global initialRto=2000
-netsh int tcp set global timestamps=disabled 
-netsh int tcp set global rsc=disabled 
+netsh int tcp set global timestamps=disabled
+netsh int tcp set global rsc=disabled
 netsh int tcp set global nonsackttresiliency=disabled
-netsh int tcp set global MaxSynRetransmissions=2 
+netsh int tcp set global MaxSynRetransmissions=2
 netsh int tcp set global fastopen=enabled
 netsh int tcp set global fastopenfallback=enabled
 netsh int tcp set global pacingprofile=off
@@ -960,8 +960,8 @@ netsh interface ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent
 netsh interface ipv4 set subinterface Ethernet mtu=1500 store=persistent
 
 for /f %%r in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" /f "1" /d /s^|Findstr HKEY_') do (
-reg add %%r /v "NonBestEffortLimit" /t reg_DWORD /d "0" /f 
-reg add %%r /v "DeadGWDetectDefault" /t reg_DWORD /d "1" /f 
+reg add %%r /v "NonBestEffortLimit" /t reg_DWORD /d "0" /f
+reg add %%r /v "DeadGWDetectDefault" /t reg_DWORD /d "1" /f
 reg add %%r /v "PerformRouterDiscovery" /t reg_DWORD /d "1" /f
 reg add %%r /v "TCPNoDelay" /t reg_DWORD /d "1" /f
 reg add %%r /v "TcpAckFrequency" /t reg_DWORD /d "1" /f
@@ -1024,7 +1024,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo           %c%CPU Optimizations%u%                
+echo           %c%CPU Optimizations%u%               
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -1050,7 +1050,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo          %c%Memory Optimizer%u%            
+echo          %c%Memory Optimizer%u%           
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -1063,7 +1063,7 @@ wmic process where ProcessId=%pid% CALL setpriority "realtime"
 sc start Dhcp
 for /f "tokens=3" %%a in ('sc queryex "Dhcp" ^| findstr "PID"') do (set pid=%%a)
 wmic process where ProcessId=%pid% CALL setpriority "realtime"
-sc start DPS 
+sc start DPS
 for /f "tokens=3" %%a in ('sc queryex "DPS" ^| findstr "PID"') do (set pid=%%a)
 wmic process where ProcessId=%pid% CALL setpriority "realtime"
 sc start Dnscache
@@ -1134,7 +1134,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo        %c%Mouse/Keyboard Tweaks%u%             
+echo        %c%Mouse/Keyboard Tweaks%u%            
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -1153,7 +1153,7 @@ reg add "HKCU\Control Panel\Accessibility\MouseKeys" /v "Flags" /t reg_SZ /d "38
 reg add "HKCU\Control Panel\Keyboard" /v "InitialKeyboardIndicators" /t reg_SZ /d "0" /f
 reg add "HKCU\Control Panel\Keyboard" /v "KeyboardDelay" /t reg_SZ /d "0" /f
 reg add "HKCU\Control Panel\Keyboard" /v "KeyboardSpeed" /t reg_SZ /d "31" /f
-reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "SmoothMouseYCurve" /t reg_BINARY /d 
+reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "SmoothMouseYCurve" /t reg_BINARY /d
 reg add "HKU\.DEFAULT\Control Panel\Mouse" /v "MouseHoverTime" /t reg_SZ /d "100" /f
 :: Set registry values for mouse settings
 :: HKEY_USERS\.DEFAULT\Control Panel\Mouse
@@ -1198,7 +1198,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo         %c%Internet Refresher%u%             
+echo         %c%Internet Refresher%u%            
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -1225,7 +1225,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo             %c%Service Tweaks%u%              
+echo             %c%Service Tweaks%u%             
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -1241,9 +1241,9 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NcaSvc" /v "Start"
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagsvc" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UserDataSvc" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\stisvc" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AdobeFlashPlayerUpdateSvc" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1 
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AdobeFlashPlayerUpdateSvc" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TrkWks" /v "Start" /t reg_DWORD /d "4" /f  >nul 2>&1
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dmwappushservice" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1  
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dmwappushservice" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1 
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PimIndexMaintenanceSvc" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\GoogleChromeElevationService" /v "Start" /t reg_DWORD /d "4" /f >nul 2>&1
@@ -1274,12 +1274,12 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wuauserv" /v "Star
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertPropSvc" /v "Start" /t reg_DWORD /d "3" /f >nul 2>&1
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Ndu" /v "Start" /d "00000002" /t REG_DWORD /f >nul 2>&1
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TimeBrokerSvc" /v "Start" /d "00000003" /t REG_DWORD /f >nul 2>&1
-reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v "Attributes" /t REG_DWORD /d "0" 
-reg add "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v "Attributes" /t REG_DWORD /d "0" 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSync" /t REG_DWORD /d "1" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSyncNGSC" /t REG_DWORD /d "1" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableMeteredNetworkFileSync" /t REG_DWORD /d "0" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableLibrariesDefaultSaveToOneDrive" /t REG_DWORD /d "0" /f 
+reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v "Attributes" /t REG_DWORD /d "0"
+reg add "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v "Attributes" /t REG_DWORD /d "0"
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSync" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSyncNGSC" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableMeteredNetworkFileSync" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableLibrariesDefaultSaveToOneDrive" /t REG_DWORD /d "0" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWORD /d 4 /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FontCache" /v "Start" /t REG_DWORD /d 4 /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FontCache3.0.0.0" /v "Start" /t REG_DWORD /d 4 /f
@@ -1303,7 +1303,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo            %c%Debloater%u%        
+echo            %c%Debloater%u%       
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -1579,7 +1579,7 @@ goto TweaksMenu
 :HardwareMenu
 cls
 chcp 437>nul
-chcp 65001 >nul 
+chcp 65001 >nul
 echo.
 echo     %c%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
 echo         ██╔══██╗██╔══██╗╚══██╔══╝██║     ██╔════╝╚════██║  ╚══██╔══╝ ██║  ██╗  ██║██╔════╝██╔══██╗██║ ██╔╝██╔════╝
@@ -1589,8 +1589,8 @@ echo         ██████╦╝██║  ██║   ██║   ██�
 echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝╚══════╝     ╚═╝      ╚═╝   ╚═╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝
 echo.
 echo %c%                       ╔══════════════════════════════════════════════════╗ %u%
-echo                        %c%║%u%           [%c%1%u%] GPU Optimizations                  %c%║%u% 
-echo                        %c%║%u%           [%c%2%u%] CPU Optimizations                  %c%║%u% 
+echo                        %c%║%u%           [%c%1%u%] GPU Optimizations                  %c%║%u%
+echo                        %c%║%u%           [%c%2%u%] CPU Optimizations                  %c%║%u%
 echo                        %c%║%u%           [%c%3%u%] RAM Management                     %c%║%u%
 echo                        %c%║%u%           [%c%4%u%] Network Tweaks                     %c%║%u%
 echo                        %c%║%u%           [%c%5%u%] Driver Updates                     %c%║%u%
@@ -1633,7 +1633,7 @@ goto HardwareMenu
 :WindowsMenu
 cls
 chcp 437>nul
-chcp 65001 >nul 
+chcp 65001 >nul
 echo.
 echo     %c%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
 echo         ██╔══██╗██╔══██╗╚══██╔══╝██║     ██╔════╝╚════██║  ╚══██╔══╝ ██║  ██╗  ██║██╔════╝██╔══██╗██║ ██╔╝██╔════╝
@@ -1643,8 +1643,8 @@ echo         ██████╦╝██║  ██║   ██║   ██�
 echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝╚══════╝     ╚═╝      ╚═╝   ╚═╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝
 echo.
 echo %c%                       ╔══════════════════════════════════════════════════╗ %u%
-echo                        %c%║%u%           [%c%1%u%] Background Services                %c%║%u% 
-echo                        %c%║%u%           [%c%2%u%] Startup Programs                   %c%║%u% 
+echo                        %c%║%u%           [%c%1%u%] Background Services                %c%║%u%
+echo                        %c%║%u%           [%c%2%u%] Startup Programs                   %c%║%u%
 echo                        %c%║%u%           [%c%3%u%] Visual Effects                     %c%║%u%
 echo                        %c%║%u%           [%c%4%u%] Registry Clean-Up                  %c%║%u%
 echo                        %c%║%u%           [%c%5%u%] Power Settings                     %c%║%u%
@@ -1687,7 +1687,7 @@ goto WindowsMenu
 :PrivacyMenu
 cls
 chcp 437>nul
-chcp 65001 >nul 
+chcp 65001 >nul
 echo.
 echo     %c%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
 echo         ██╔══██╗██╔══██╗╚══██╔══╝██║     ██╔════╝╚════██║  ╚══██╔══╝ ██║  ██╗  ██║██╔════╝██╔══██╗██║ ██╔╝██╔════╝
@@ -1697,8 +1697,8 @@ echo         ██████╦╝██║  ██║   ██║   ██�
 echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝╚══════╝     ╚═╝      ╚═╝   ╚═╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝
 echo.
 echo %c%                       ╔══════════════════════════════════════════════════╗ %u%
-echo                        %c%║%u%           [%c%1%u%] Privacy Cleanup                    %c%║%u% 
-echo                        %c%║%u%           [%c%2%u%] Firewall Configuration             %c%║%u% 
+echo                        %c%║%u%           [%c%1%u%] Privacy Cleanup                    %c%║%u%
+echo                        %c%║%u%           [%c%2%u%] Firewall Configuration             %c%║%u%
 echo                        %c%║%u%           [%c%3%u%] Anti-Virus Software                %c%║%u%
 echo                        %c%║%u%           [%c%4%u%] Browser Privacy                    %c%║%u%
 echo                        %c%║%u%           [%c%5%u%] Security Improvements              %c%║%u%
@@ -1746,7 +1746,7 @@ echo.
 cls
 echo %g%_____________________________________
 echo.
-echo            %c%Antitracking%u%        
+echo            %c%Antitracking%u%       
 echo %g%_____________________________________
 timeout /t 3 >nul
 cls
@@ -1826,7 +1826,7 @@ goto :PrivacyMenu
 :GameBoosters
 cls
 chcp 437>nul
-chcp 65001 >nul 
+chcp 65001 >nul
 echo.
 echo     %c%    ██████╗ █████╗  ████████╗██╗     ███████╗███████╗  ████████╗ ██╗       ██╗███████╗ █████╗ ██╗  ██╗ ██████╗
 echo         ██╔══██╗██╔══██╗╚══██╔══╝██║     ██╔════╝╚════██║  ╚══██╔══╝ ██║  ██╗  ██║██╔════╝██╔══██╗██║ ██╔╝██╔════╝
@@ -1836,8 +1836,8 @@ echo         ██████╦╝██║  ██║   ██║   ██�
 echo         ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝╚══════╝     ╚═╝      ╚═╝   ╚═╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝
 echo.
 echo %c%                       ╔══════════════════════════════════════════════════╗ %u%
-echo                        %c%║%u%           [%c%1%u%] Batlez Toolbox                     %c%║%u% 
-echo                        %c%║%u%           [%c%2%u%] Game Boosters                      %c%║%u% 
+echo                        %c%║%u%           [%c%1%u%] Batlez Toolbox                     %c%║%u%
+echo                        %c%║%u%           [%c%2%u%] Game Boosters                      %c%║%u%
 echo                        %c%║%u%           [%c%3%u%] Scheduled Tasks                    %c%║%u%
 echo                        %c%║%u%           [%c%4%u%] MSI Mode                           %c%║%u%
 echo                        %c%║%u%           [%c%5%u%] Program Debloats                   %c%║%u%
@@ -1887,8 +1887,8 @@ echo 0. Go Back
 echo 1. Windows Debloat
 echo 2. Discord Debloat
 echo 3. OBS Debloat
-echo 4. Spotify Debloat    
-echo 5. Firefox Debloat                                                                                                                                                                                                                                                        
+echo 4. Spotify Debloat   
+echo 5. Firefox Debloat                                                                                                                                                                                                                                                       
 echo ---------------------------------------------------------------------------------------------------------------------
 set choice=
 set /p choice=Type A Number:
@@ -3890,7 +3890,7 @@ echo 1. Valorant
 echo 2. Counter-Strike 2
 echo 3. Minecraft
 echo 4. Fortnite
-echo 5. Warzone                                                                                                                                                                                                                                                             
+echo 5. Warzone                                                                                                                                                                                                                                                            
 echo --------------------------------------------------------------------------------------------------------------------
 set choice=
 set /p choice=Type A Number:
@@ -3913,27 +3913,27 @@ bcdedit /set nointegritychecks Off
 ::reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222222222222222222222222222222222222" /f
 ::reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "232222222223222222222222222222222222222222222222" /f
 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Version" /t REG_SZ /d "1.0" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Application Name" /t REG_SZ /d "valorant.exe" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Protocol" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local Port" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local IP" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local IP Prefix Length" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote Port" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote IP" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote IP Prefix Length" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "DSCP Value" /t REG_SZ /d "46" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Throttle Rate" /t REG_SZ /d "-1" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Version" /t REG_SZ /d "1.0" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Application Name" /t REG_SZ /d "VALORANT-Win64-Shipping.exe" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Protocol" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local Port" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local IP" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local IP Prefix Length" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote Port" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote IP" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote IP Prefix Length" /t REG_SZ /d "*" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "DSCP Value" /t REG_SZ /d "46" /f 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Version" /t REG_SZ /d "1.0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Application Name" /t REG_SZ /d "valorant.exe" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Protocol" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local Port" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local IP" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local IP Prefix Length" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote Port" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote IP" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote IP Prefix Length" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "DSCP Value" /t REG_SZ /d "46" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Throttle Rate" /t REG_SZ /d "-1" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Version" /t REG_SZ /d "1.0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Application Name" /t REG_SZ /d "VALORANT-Win64-Shipping.exe" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Protocol" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local Port" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local IP" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Local IP Prefix Length" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote Port" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote IP" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Remote IP Prefix Length" /t REG_SZ /d "*" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "DSCP Value" /t REG_SZ /d "46" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\VALORANT" /v "Throttle Rate" /t REG_SZ /d "-1" /f
 wmic process where name="RiotClientServices.exe" CALL setpriority "high priority"
 reg add "HKCU\Software\Riot Games\Riot Client" /v "autoUpdateOnLaunch" /t REG_DWORD /d 0 /f
@@ -4134,7 +4134,7 @@ echo.
 echo       %c%Tweaks and Software%u%
 echo _______________________________________________________________________________________________________________________
 echo %c%0%u% Go Back
-echo %c%1%u% Software Installs (Chocolately)                                                                                                                                                                                                                                                               
+echo %c%1%u% Software Installs (Chocolately)                                                                                                                                                                                                                                                              
 echo.
 echo.
 echo.
@@ -4201,7 +4201,7 @@ echo 9. DirectX                       25. Discord and Discord Canary
 echo 10. VMware 16.0                  26. Spotify and Toastify Mod
 echo 11. Adobe Acrobat Reader DC      27. Razer Cortex
 echo 12. JavaSE RuntimeEnvironment 8  28. ApowerMirror
-echo 13. Notepad++                    29. Aimp 
+echo 13. Notepad++                    29. Aimp
 echo 14. VLC                          30. Google Chrome
 echo 15. Pyhton                       31. Google Drive
 echo 16. Office 365 Business          32. Steam
@@ -4219,7 +4219,7 @@ echo 53. Adobe Shockwave Player       54. Roblox
 echo 55. Opera Browser                56. Mario Bros
 echo 57. Popcorn Time                 58. Qbitorrent
 echo 59. TeamViewer                   60. AnyDesk
-echo 61. OneDrive                     62. Process Hacker    
+echo 61. OneDrive                     62. Process Hacker   
 echo _______________________________________________________________________________________________________________________
 echo 0. Back to menu
 set choice=
@@ -4231,7 +4231,7 @@ if '%choice%'=='3' choco install audacity -y
 if '%choice%'=='4' choco install blender -y
 if '%choice%'=='5' choco install vcredist2005 vcredist2008 vcredist2010  vcredist2012 msvisualcplusplus2012-redist vcredist2013 msvisualcplusplus2013-redis vcredist2017 vcredist140 vcredist-all -y
 if '%choice%'=='6' choco install office365business -y
-if '%choice%'=='7' DISM /Online /Enable-Feature /FeatureName:NetFx3 /All 
+if '%choice%'=='7' DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
 if '%choice%'=='8' choco install winrar -y
 if '%choice%'=='9' choco install directx -y
 if '%choice%'=='10' choco install vmware-workstation-player -y
@@ -4296,10 +4296,10 @@ if '%choice%'== '55' choco install opera -y
 if '%choice%'== '56' choco install super-mario-bros-java -y
 if '%choice%'== '57' choco install popcorntime -y
 if '%choice%'== '58' choco install qbittorrent-enhanced -y
-if '%choice%'== '59' choco install teamviewer -y  
+if '%choice%'== '59' choco install teamviewer -y 
 if '%choice%'== '60' choco install anydesk -y
 if '%choice%'== '61' choco install onedrive onedrivebully -y
-if '%choice%'== '62' choco install processhacker.install -y 
+if '%choice%'== '62' choco install processhacker.install -y
 if '%choice%'=='0' goto Toolbox
 ECHO.
 timeout /t 2 >nul
@@ -4308,7 +4308,7 @@ goto 89
 :Destruct
 title Thanks for using Batlez Tweaks!
 cls
-echo.            
+echo.           
 echo %u%Developed by: %c%Croakq
 echo %u%Github: %c%https://github.com/Batlez
 timeout /t 5 >nul

@@ -1,17 +1,17 @@
-@echo off&::########################################## DigitalKnob DKBatch ######################################################################## 
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG") 
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::################################################################################################################################################# 
- 
- 
-::############################################################################ 
-::# dk_setEx() 
-::# 
-::# 
-:dk_setEx 
+@echo off&::########################################## DigitalKnob DKBatch ########################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+::#################################################################################################################################################
+
+
+::############################################################################
+::# dk_setEx()
+::#
+::#
+:dk_setEx
 ::setlocal disableDelayedExpansion
 ::setlocal EnableDelayedExpansion
-	::%dk_call% dk_debugFunc 0 
+	::%dk_call% dk_debugFunc 0
 	echo %*
 	
 	set "Params=%*"
@@ -31,21 +31,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	endlocal & (
 ::		set "%~1=%_args_%"
 ::	)
-%endfunction% 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-:DKTEST 
-setlocal enableDelayedExpansion 
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+setlocal enableDelayedExpansion
 
 
 @echo off
@@ -64,12 +64,12 @@ ___DATA___
 ___ATAD___
 
 
-rem # 
-rem # 
+rem #
+rem #
 
 
-	%dk_call% dk_debugFunc 0 
-  
+	%dk_call% dk_debugFunc 0
+ 
 	::	                 ALL: "  ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~"
 	::                 VALID: "      # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~"
 	%dk_call% dk_setEx myVar1 "      # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~"
@@ -78,11 +78,11 @@ rem #
 	%dk_call% dk_echo "^^!myVar1^^! = !myVar1!"
 	
 	::	                 ALL: " !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
-	::                 VALID: 
+	::                 VALID:
 	%dk_call% dk_setEx myVar2 "   #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
 	::	             INVALID: " !"  %                           "
 	echo "%%myVar2%%" = "%myVar2%"
 	echo   ^^!myVar2^^! = '!myVar2!'
 	
-%endfunction% 
- 
+%endfunction%
+

@@ -2,7 +2,7 @@
 	@echo off
 	setlocal
 	cls
-	echo compiling %~n0.exe. . .																							 
+	echo compiling %~n0.exe. . .																							
 	set "SH_EXE=%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\bash.exe"
 	#set "COSMO_C_COMPILER=/C/Users/Administrator/digitalknob/Development/3rdParty/cosmopolitan-e4d6eb3/bin/cosmocc"
 	set "COSMO_C_COMPILER=/C/Users/Administrator/digitalknob/Development/3rdParty/cosmopolitan-e4d6eb3/bin/x86_64-unknown-cosmo-c++"
@@ -29,7 +29,7 @@
 	)
 	del %C_FILE%
 	
-	cls 
+	cls
 	%APP_EXE%
 	set exit_code=%ERRORLEVEL%
 

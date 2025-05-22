@@ -1,6 +1,6 @@
 @echo off
 setlocal enableDelayedExpansion
-if "!DE!" neq "" echo "delayed expansion is required" && pause && exit 
+if "!DE!" neq "" echo "delayed expansion is required" && pause && exit
 
 set "first=0"
 set "middle=1"
@@ -50,7 +50,7 @@ goto main
 	echo ###%0### first=%first% middle=%middle% last=%last%
 %endfunction%
 
-  
+ 
 :getTime
 	echo :getTime
 	:: https://stackoverflow.com/a/42199181/688352

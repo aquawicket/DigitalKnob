@@ -1,12 +1,12 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::##############################################################################
 ::# dk_hasLabel(file label) -> rtn_var
-::# 
+::#
 ::# Test if a string is a dk_hasLabel name
 ::#
 ::# @file   - The file to search
@@ -17,12 +17,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_hasLabel
 %setlocal%
 	%dk_call% dk_debugFunc 2 3
- 
+
 	findstr /ri /c:"^ *:%~2 " /c:"^ *:%~2$" "%~1" >nul 2>nul && (
         if "%~3" neq "" (endlocal & set "%3=true")
         exit /b 0
     )
-    
+   
     if "%~3" neq "" (endlocal & set "%3=false")
     exit /b 1
 %endfunction%

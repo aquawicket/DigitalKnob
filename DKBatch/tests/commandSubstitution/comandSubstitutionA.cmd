@@ -27,7 +27,7 @@ set ")=echo :%subfunc%"
 ::	%dk_call% dk_echo "myVar = %myVar%"
 	
 ::	set var=%$(%cmnd%)%
-::	echo var = ,%var%, 
+::	echo var = ,%var%,
 ::	pause
 
 

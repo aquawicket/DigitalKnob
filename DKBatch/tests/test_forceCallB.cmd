@@ -2,8 +2,8 @@
 
 :test_forCall
 	if defined __callTest__ (
-		set "startMethod=%__callTest__%" 
-		set "__callTest__=" 
+		set "startMethod=%__callTest__%"
+		set "__callTest__="
 		goto test_forceCallB
 	)
 	

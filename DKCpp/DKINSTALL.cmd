@@ -80,7 +80,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	echo Installing DKCpp . . .
 	
 	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmocc, gcc, msvc 
+	:: clang, cosmocc, gcc, msvc
 	::if not defined Target_Os		(set "Target_Os=cosmocc")
 	::if not defined Target_Arch	(set "Target_Arch=cosmocc")
 	::if not defined Target_Env		(set "Target_Env=cosmocc")

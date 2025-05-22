@@ -12,7 +12,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	
 	::"%ComSpec%" /V:ON /K "%CSCRIPT_EXE%" //E:vbscript //H:CScript "%DKSCRIPT_PATH%"
 	::"%ComSpec%" /c %CSCRIPT_EXE% //D //E:%ENGINE% //X //NoLogo "%DKVB_FUNCTIONS_DIR:\=/%/DK.vbs" "%DKSCRIPT_PATH:\=/%"
-	"%ComSpec%" /c %CSCRIPT_EXE% //D //E:%ENGINE% //X //NoLogo "%DKSCRIPT_PATH:\=/%" 
+	"%ComSpec%" /c %CSCRIPT_EXE% //D //E:%ENGINE% //X //NoLogo "%DKSCRIPT_PATH:\=/%"
 	
 	::&& (echo: & echo exit_code:true %errorlevel%) || (echo: & echo exit_code:false %errorlevel%)
 	::%ComSpec% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"

@@ -5,8 +5,8 @@
 ::######## Pass batch variable into HTA
 set "fromBatch=a b c"
 for /f "tokens=* delims=" %%a in ('echo %%fromBatch%%^|mshta.exe "%~f0"') do (
-    ::########## Pass Hta variable back to Batch 
-	set fromHta=%%a 
+    ::########## Pass Hta variable back to Batch
+	set fromHta=%%a
 )
 
 echo The variable passed back from hta is '!fromHta!'

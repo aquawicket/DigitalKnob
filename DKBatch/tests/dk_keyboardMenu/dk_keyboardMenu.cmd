@@ -10,11 +10,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_keyboardMenu
     ::%dk_call% dk_debugFunc 1 99
  setlocal
- 
+
 	if "%~1" equ "NEW" echo dk_keyboardMenu NEW
 	if "%~1" equ "ADD" echo dk_keyboardMenu ADD
 	if "%~1" equ "RUN" echo dk_keyboardMenu RUN
-       
+      
     %dk_call% dk_echo
     echo  1)  Option1
 	echo  2)  Option2
@@ -26,14 +26,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     echo  8)  Option8
     echo  9)  Option9
     echo  10) Option10
-    echo  11) Option11 
-    
-    %dk_call% dk_echo 
+    echo  11) Option11
+   
+    %dk_call% dk_echo
     %dk_call% dk_echo "Please select an Option"
-    
+   
     %dk_call% dk_keyboardInput
     ::%dk_call% dk_keyboardInputTimeout 1 60
-        
+       
     if "%dk_keyboardInput%" equ "1"  endlocal & set "%1=option1"	& %return%
 	if "%dk_keyboardInput%" equ "2"  endlocal & set "%1=option2"	& %return%
     if "%dk_keyboardInput%" equ "3"  endlocal & set "%1=option3"	& %return%
@@ -54,7 +54,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 setlocal
 	%dk_call% dk_debugFunc 0
-   
+  
 	:: TODO: This is the desired functionality of the menu
     %dk_call% dk_keyboardMenu NEW myMenu
 	%dk_call% dk_keyboardMenu ADD myMenu option1

@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#	fromIndex :optional
 ::#		Zero-based index at which to start searching, converted to an integer.
-::#			Negative index counts back from the end of the array — if -Array/length <= fromIndex < 0, fromIndex + Array/length is used. 
+::#			Negative index counts back from the end of the array — if -Array/length <= fromIndex < 0, fromIndex + Array/length is used.
 ::#			Note, the array is still searched from front to back in this case.
 ::#			If fromIndex < -Array/length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
 ::#			If fromIndex >= Array/length, the array is not searched and -1 is returned.

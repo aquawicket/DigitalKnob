@@ -15,7 +15,7 @@ set "ABI=arm64-v8a"
 set compiler=CMAKE
 
 :: Use gradle to compile Java and Generate apk pagkage?
-:: Otherwide the normal android tools will be used 
+:: Otherwide the normal android tools will be used
 set GRADLE=1
 
 
@@ -60,7 +60,7 @@ echo 2. Install 3rd party tools
 if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does not exist" )
 
 :: JDK
-if %GRADLE% equ 0 ( 
+if %GRADLE% equ 0 (
 	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
 ) else (
 	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-11_windows-x64_bin"
@@ -127,7 +127,7 @@ echo 15. Uninstall any previous matching package
 ::echo error level from list packages is %ERRORLEVEL%
 "%ANDROID_HOME%/platform-tools/adb" shell pm list packages %PACKAGE_NAME% | findstr /I /C:"%PACKAGE_NAME%"
 ::echo error level from list packages findstr is %ERRORLEVEL%
-if %ERRORLEVEL% equ 0 ( 
+if %ERRORLEVEL% equ 0 (
 	echo uninstalling previous %PACKAGE_NAME%  package . . .
 	"%ANDROID_HOME%/platform-tools/adb" shell pm uninstall %PACKAGE_NAME%
 	%IF_ERROR% "Failed to Uninstall previous package"

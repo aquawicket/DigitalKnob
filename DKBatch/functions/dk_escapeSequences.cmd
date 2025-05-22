@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 :: ASCII Table - https://www.ascii-code.com
@@ -55,11 +55,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::  set /a ASCII_length+=1
     ::  goto ASCII_length_Loop
     ::)
-    
+   
 ::  %dk_call% dk_echo
 ::  echo        SYMBOL  DEC OCT HEX HTML    Description
 ::  for /L %%i IN (0,1,%ASCII_length%) DO (
-::      call:ASCII_SHOW %%i 
+::      call:ASCII_SHOW %%i
 ::  )
 ::  %dk_call% dk_echo
 
@@ -104,7 +104,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::%dk_call% dk_decimalToVariable EOT 4
     ::%dk_call% dk_decimalToVariable ENQ 5
     ::%dk_call% dk_decimalToVariable ACK 6
-    ::%dk_call% dk_decimalToVariable BEL 7 
+    ::%dk_call% dk_decimalToVariable BEL 7
     ::%dk_call% dk_decimalToVariable BS  8
     ::%dk_call% dk_decimalToVariable TAB 9
     ::%dk_call% dk_decimalToVariable LF  10
@@ -136,7 +136,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :ASCII_ADD
 %setlocal%
     %dk_call% dk_debugFunc 7
- 
+
     if "%~1" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 1 is invalid"
     if "%~2" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 2 is invalid"
     if "%~3" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 3 is invalid"
@@ -144,7 +144,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%~5" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 5 is invalid"
     if "%~6" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 6 is invalid"
     if "%~7" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
-    
+   
     ::%dk_call% dk_debug "ASCII_ADD (%*"
     ::%dk_call% dk_debug "echo %~1  %~2     %~3     %~4     %~5     %~6"
     set ID=%~2
@@ -154,7 +154,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set ASCII[%ID%].HEX=%~4
     set ASCII[%ID%].HTML=%~5
     set ASCII[%ID%].INFO=%6
-    
+   
     set /a ASCII_length+=1
 %endfunction%
 

@@ -13,7 +13,7 @@ if "%~1" equ "" (goto DKINSTALL)
 
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
-		echo ERROR:%ERRORLEVEL% 
+		echo ERROR:%ERRORLEVEL%
 		pause
 	)
 	pause

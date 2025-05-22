@@ -1,13 +1,13 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::######################## dk_evalDKCpp settings ######################
 if not defined dk_evalDKCpp_Default_Target_Os	(set "dk_evalDKCpp_Default_Target_Os=cosmocc")
 if not defined dk_evalDKCpp_Default_Target_Arch	(set "dk_evalDKCpp_Default_Target_Arch=cosmocc")
-if not defined dk_evalDKCpp_Default_Target_Env	(set "dk_evalDKCpp_Default_Target_Env=cosmocc")	&:: clang, cosmocc, gcc, msvc 
+if not defined dk_evalDKCpp_Default_Target_Env	(set "dk_evalDKCpp_Default_Target_Env=cosmocc")	&:: clang, cosmocc, gcc, msvc
 ::#####################################################################
 ::# dk_evalDKCpp(<code>)
 ::#
@@ -15,7 +15,7 @@ if not defined dk_evalDKCpp_Default_Target_Env	(set "dk_evalDKCpp_Default_Target
 :dk_evalDKCpp
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
- 
+
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	::echo %~1 > "%DKCACHE_DIR%/dk_evalDKCpp_TEMP.cpp"
 	

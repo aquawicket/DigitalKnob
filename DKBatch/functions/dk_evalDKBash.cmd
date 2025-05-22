@@ -1,17 +1,17 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
- 
-::############################################################################ 
-::# dk_evalDKBash() 
-::# 
-::# 
-:dk_evalDKBash 
-%setlocal% 
-	%dk_call% dk_debugFunc 0 
- 
+
+::############################################################################
+::# dk_evalDKBash()
+::#
+::#
+:dk_evalDKBash
+%setlocal%
+	%dk_call% dk_debugFunc 0
+
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	echo %~1 > "%DKCACHE_DIR%/dk_evalDKBash_TEMP.sh"
 	
@@ -22,23 +22,23 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "dk_evalDKBash=%dk_exec%"
 	)
 
-%endfunction% 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-:DKTEST 
-%setlocal% 
-	%dk_call% dk_debugFunc 0 
-  
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+%setlocal%
+	%dk_call% dk_debugFunc 0
+
 	%dk_call% dk_evalDKBash "echo 'testing dk_evalDKBash'"
 	
 	::### Print Shell Path ad Version ###
@@ -55,5 +55,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo ""
 	)
 
-%endfunction% 
- 
+%endfunction%
+

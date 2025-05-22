@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -107,7 +107,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::############ Linux_x86_64 (WSL) ############
 	if /i "%Target_Os%" equ "Linux"	(set "WSL_EXE=wsl")
 ::  ###### WSL CMake Fix ######
-::  if defined WSLENV; then 
+::  if defined WSLENV; then
 ::		%dk_call% dk_chdir "$DKCMAKE_DIR"
 ::		set -- "$@" "."
 ::	fi

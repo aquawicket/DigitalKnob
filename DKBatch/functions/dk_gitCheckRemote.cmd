@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	::%dk_call% dk_chdir "%DKBRANCH_DIR%"
 	"%GIT_EXE%" -C %DKBRANCH_DIR% remote update
-    
+   
     %dk_call% dk_exec "%GIT_EXE%" -C %DKBRANCH_DIR% rev-parse --abbrev-ref HEAD
 	set "branch=%dk_exec%"
     %dk_call% dk_exec "%GIT_EXE%" -C %DKBRANCH_DIR% rev-list --count origin/%branch%..%branch%

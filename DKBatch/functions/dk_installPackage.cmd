@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -13,17 +13,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	%dk_call% dk_debug "dk_installPackage[%*]"
 	
-::  [ -n "$(command -v "${1}")" ] && return    # 
+::  [ -n "$(command -v "${1}")" ] && return    #
 ::  #if dk_call dk_packageInstalled ${1}; then
 ::	dk_call dk_warning "${1} already installed"
 ::	return $(false);
 ::   fi
-::   
+::  
 ::   dk_call dk_info "installing ${1}. . ."
 ::   # https://en.wikipedia.org/wiki/List_of_software_package_management_systems
 ::   # https://en.wikipedia.org/wiki/Package_manager
 ::   # https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
-::   
+::  
 ::   if dk_call dk_commandExists apk; then
 ::   	dk_call apk add "${1}"					# Alpine Package Keeper (alpine linux)
 ::   elif dk_call dk_commandExists apt-get; then

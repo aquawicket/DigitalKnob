@@ -1,7 +1,7 @@
 <!-- :
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 ::::::::::::::::::::::::::::::::::::::::::::
@@ -22,12 +22,12 @@ cscript //nologo "%~f0?.wsf" %* & exit
 --><job><script language="VBScript">
 	Set oShell = CreateObject( "WScript.Shell" )
 	batchPath=oShell.ExpandEnvironmentStrings("%batchPath%")
-	Set UAC = CreateObject("Shell.Application") 
-	args = "ELEV " 
-	For Each strArg in WScript.Arguments 
-	args = args & strArg & " "  
+	Set UAC = CreateObject("Shell.Application")
+	args = "ELEV "
+	For Each strArg in WScript.Arguments
+	args = args & strArg & " " 
 	Next
-	args = "/c """ + batchPath + """ " + args 
+	args = "/c """ + batchPath + """ " + args
 	UAC.ShellExecute "%ComSpec%", args, "", "runas", 1
 </script></job><!--
 
@@ -37,9 +37,9 @@ cscript //nologo "%~f0?.wsf" %* & exit
 ::-->
 
 
-:: Elevated User code 
+:: Elevated User code
 echo %batchName% Arguments: P1=%1 P2=%2 P3=%3 P4=%4 P5=%5 P6=%6 P7=%7 P8=%8 P9=%9
-%ComSpec% /k 
+%ComSpec% /k
 pause
- 
+
 

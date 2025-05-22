@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -22,8 +22,8 @@ wevtutil.exe cl %1
 
 :noAdmin
 echo Danger, Will Robinson!
-echo This bat file must be run as administrator 
-echo Press the Enter key to close this window 
-echo Right-click on "Clear All Event Logs.bat" and select "Run as administrator"  
+echo This bat file must be run as administrator
+echo Press the Enter key to close this window
+echo Right-click on "Clear All Event Logs.bat" and select "Run as administrator" 
 pause >nul
 %endfunction%

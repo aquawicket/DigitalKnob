@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -170,7 +170,7 @@ if not defined dk_log_FATAL_TIMEOUT			(set "dk_log_FATAL_TIMEOUT=9")
 ::#
 ::#		Print a log message to the console
 ::#
-::#		@level   - The message level: VERBOSE, DEBUG, DEFAULT, INFO, SUCCESS, TODO, NOTICE, FIXME, WARNING, ERROR, FATAL 
+::#		@level   - The message level: VERBOSE, DEBUG, DEFAULT, INFO, SUCCESS, TODO, NOTICE, FIXME, WARNING, ERROR, FATAL
 ::#		@message - The message to print
 ::#
 :dk_log
@@ -222,21 +222,21 @@ if not defined dk_log_FATAL_TIMEOUT			(set "dk_log_FATAL_TIMEOUT=9")
 		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** SOUND_ON_%_level_% ***"
 		%dk_call% Array/dk_push errorBeeps "440,500"
 		%dk_call% Array/dk_push errorBeeps "440,500"
-		%dk_call% Array/dk_push errorBeeps "440,500" 
-		%dk_call% Array/dk_push errorBeeps "349,350" 
-		%dk_call% Array/dk_push errorBeeps "523,150" 
-		%dk_call% Array/dk_push errorBeeps "440,500" 
-		%dk_call% Array/dk_push errorBeeps "349,350" 
-		%dk_call% Array/dk_push errorBeeps "523,150" 
+		%dk_call% Array/dk_push errorBeeps "440,500"
+		%dk_call% Array/dk_push errorBeeps "349,350"
+		%dk_call% Array/dk_push errorBeeps "523,150"
+		%dk_call% Array/dk_push errorBeeps "440,500"
+		%dk_call% Array/dk_push errorBeeps "349,350"
+		%dk_call% Array/dk_push errorBeeps "523,150"
 		%dk_call% Array/dk_push errorBeeps "440,1000"
-		%dk_call% Array/dk_push errorBeeps "659,500" 
-		%dk_call% Array/dk_push errorBeeps "659,500" 
-		%dk_call% Array/dk_push errorBeeps "659,500" 
-		%dk_call% Array/dk_push errorBeeps "698,350" 
-		%dk_call% Array/dk_push errorBeeps "523,150" 
-		%dk_call% Array/dk_push errorBeeps "415,500" 
-		%dk_call% Array/dk_push errorBeeps "349,350" 
-		%dk_call% Array/dk_push errorBeeps "523,150" 
+		%dk_call% Array/dk_push errorBeeps "659,500"
+		%dk_call% Array/dk_push errorBeeps "659,500"
+		%dk_call% Array/dk_push errorBeeps "659,500"
+		%dk_call% Array/dk_push errorBeeps "698,350"
+		%dk_call% Array/dk_push errorBeeps "523,150"
+		%dk_call% Array/dk_push errorBeeps "415,500"
+		%dk_call% Array/dk_push errorBeeps "349,350"
+		%dk_call% Array/dk_push errorBeeps "523,150"
 		%dk_call% Array/dk_push errorBeeps "440,1000"
 		%dk_call% dk_beeps errorBeeps
 		%dk_call% dk_echo "%clr%"

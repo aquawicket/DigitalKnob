@@ -19,7 +19,7 @@ set "SPACE= "
 
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -29,7 +29,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :DKApp
-	::echo %ESC%[19;200H                     
+	::echo %ESC%[19;200H                    
 	::echo %ESC%[19;20HF:%~nx0 %*
 	
 	::dk_debugFuncv _argc _argv
@@ -43,7 +43,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %endfunction%
 
 :DKApp.init
-	::echo %ESC%[19;200H                     
+	::echo %ESC%[19;200H                    
 	::echo %ESC%[19;20HF:%~nx0 %*
 	set "DKApp.active=1"
 	
@@ -61,7 +61,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %endfunction%
 
 :DKApp.exit
-	::echo %ESC%[19;200H                  
+	::echo %ESC%[19;200H                 
 	::echo %ESC%[19;20HF:%~nx0 %*
 	
 	echo dk_exit

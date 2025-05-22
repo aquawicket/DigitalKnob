@@ -38,7 +38,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
     if "!DE!" equ "" (
       endlocal
       setlocal disableDelayedExpansion
-      call set "funcName=%%~0"  
+      call set "funcName=%%~0" 
       call set "batName=%%~f0"
       if defined exception.Restart (set "exception.Restart=") else call set "exception.Stack=%%funcName%%%%S"
       setlocal EnableDelayedExpansion

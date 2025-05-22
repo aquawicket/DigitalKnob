@@ -1,7 +1,7 @@
 <!-- :
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -54,24 +54,24 @@ exit /b
 
   /* This function also retrieves the value of the commandLine property,
      which cannot be set as an attribute.  */
-   
+  
   function window.onload()
   {
 	/* window.resizeTo(300,150); */
-     sTempStr = "applicationName  = " + oHTA.applicationName + "\n" + 
+     sTempStr = "applicationName  = " + oHTA.applicationName + "\n" +
                 "border           = " + oHTA.border          + "\n" +
-                "borderStyle      = " + oHTA.borderStyle     + "\n" + 
+                "borderStyle      = " + oHTA.borderStyle     + "\n" +
                 "caption          = " + oHTA.caption         + "\n" +
                 "commandLine      = " + oHTA.commandLine     + "\n" +
                 "icon             = " + oHTA.icon            + "\n" +
                 "maximizeButton   = " + oHTA.maximizeButton  + "\n" +
-                "minimizeButton   = " + oHTA.minimizeButton  + "\n" + 
+                "minimizeButton   = " + oHTA.minimizeButton  + "\n" +
                 "showInTaskBar    = " + oHTA.showInTaskbar   + "\n" +
-                "singleInstance   = " + oHTA.singleInstance  + "\n" +  
-                "sysMenu          = " + oHTA.sysMenu         + "\n" + 
-                "version          = " + oHTA.version         + "\n"; 
-          
-     oPre.innerText = sTempStr;       
+                "singleInstance   = " + oHTA.singleInstance  + "\n" + 
+                "sysMenu          = " + oHTA.sysMenu         + "\n" +
+                "version          = " + oHTA.version         + "\n";
+         
+     oPre.innerText = sTempStr;      
   }
   </SCRIPT>
 </HEAD>

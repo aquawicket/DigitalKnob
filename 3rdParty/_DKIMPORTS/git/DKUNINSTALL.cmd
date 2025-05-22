@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKUNINSTALL
 %%setlocal%%
     %dk_call% dk_debugFunc 0
- 
+
     %dk_call% dk_validate Host_Tuple	"%dk_call% dk_Host_Tuple"
     ::if defined Windows_Arm32_Host		(set "GIT_IMPORT=")
     ::if defined Windows_Arm64_Host		(set "GIT_IMPORT=")
@@ -41,7 +41,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::FIXME: kill git.exe process
     %dk_call% dk_delete "%GIT%"
-        
+      
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	
 	::### Uninstall Context Menu ###

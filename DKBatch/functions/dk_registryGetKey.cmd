@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
 	
 	set "currentScope=1"
-    for /F "tokens=2* skip=2" %%a in ('%REG_EXE% query "%_reg_path_:/=\%" /v "%_key_:/=\%"') do ( 
+    for /F "tokens=2* skip=2" %%a in ('%REG_EXE% query "%_reg_path_:/=\%" /v "%_key_:/=\%"') do (
         if defined currentScope endlocal
 		set "dk_registryGetKey=%%b"
 		if "%~2" neq "" (set "%~2=%%b")
@@ -33,7 +33,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 %setlocal%
 	%dk_call% dk_debugFunc 0
-   
+  
     %dk_call% dk_registryGetKey "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/.NETFramework" "InstallRoot" rtn_var
 	%dk_call% dk_printVar dk_registryGetKey
 	%dk_call% dk_printVar InstallRoot

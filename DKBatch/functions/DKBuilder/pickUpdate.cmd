@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :pickUpdate
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 1
- 
+
     %dk_call% dk_echo
     %dk_call% dk_commandExists "git" && %dk_call% dk_gitCheckRemote
 
@@ -37,7 +37,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     echo 10) Exit
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if exist "%DKBRANCH_DIR%/build_list.txt"  echo 11) Run 'build_list.txt'
-    
+   
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
     %dk_call% dk_keyboardInput
     ::%dk_call% dk_keyboardInputTimeout 13 60
@@ -60,7 +60,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%dk_keyboardInput%" equ "9"  %dk_call% dk_reload
     if "%dk_keyboardInput%" equ "10" %dk_call% dk_exit 0
 	if "%dk_keyboardInput%" equ "11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
-      
+     
     ::endlocal & (
 		set "pickUpdate=1"
 	::)
@@ -74,6 +74,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 %setlocal%
 	%dk_call% dk_debugFunc 0
-   
+  
     %dk_call% DKBuilder/pickUpdate
 %endfunction%

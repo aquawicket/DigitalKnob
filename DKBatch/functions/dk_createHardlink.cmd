@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -46,7 +46,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_createHardlink "C:/Users/Administrator/test.txt" "C:/Users/Administrator/Desktop/test.txt"
 	
 	::### Create a directory symlink ###
-    %dk_call% dk_createHardlink "C:/Users/Administrator/test" "C:/Users/Administrator/Desktop/test" 
+    %dk_call% dk_createHardlink "C:/Users/Administrator/test" "C:/Users/Administrator/Desktop/test"
 	
 	::### Test Non-Existent Error ###
     ::%dk_call% dk_createHardlink "C:/Users/Administrator/Desktop/Non-Existent" "C:/Non-Existent"

@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -13,22 +13,22 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_keyboardInputTimeout
 %setlocal%
 	%dk_call% dk_debugFunc 0 3
-    
+   
     set "default=%~1"
     set /a "timeout=%~2"
-    
+   
     set "cache_file=%DKCACHE_DIR%/keyboardInputTimeout_cache.tmp"
     set "thread_file=%DKCACHE_DIR%/keyboardInputTimeout_thread.cmd"
     %dk_call% dk_delete %cache_file% %NO_OUTPUT%
-    
+   
     echo ^@echo off> %thread_file%
     echo set /p var=>> %thread_file%
     echo ^> %cache_file% echo %%var%%>> %thread_file%
     start /b %ComSpec% /c %thread_file%
-    
+   
     set "ESC="
     for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"
-    
+   
     :keyboard_input_timeout_loop
 		set /a "timeout-=1"
 		%dk_call% dk_title %timeout%
@@ -39,13 +39,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if !timeout! GTR 0 (
 			if not exist %cache_file% goto keyboard_input_timeout_loop
 		)
-    
+   
     :keyboard_input_timeout_result
     del %thread_file% %NO_OUTPUT%
     if exist %cache_file% (
         set /p dk_keyboardInputTimeout=<%cache_file%
         %dk_call% dk_delete %cache_file% %NO_OUTPUT%
-    ) else ( 
+    ) else (
         set "dk_keyboardInputTimeout=%default%"
     )
 

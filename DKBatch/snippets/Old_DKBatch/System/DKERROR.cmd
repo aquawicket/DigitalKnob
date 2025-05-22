@@ -92,7 +92,7 @@ exit %ERROR_CODE%
 		if !n! LSS !max! (
 			if !n! GTR !min! (
 				set str=%%a
-				set str=!str::=:	! 
+				set str=!str::=:	!
 				if !n! equ !line! (
 					echo [30;41m^>  !str![0m
 				) else (

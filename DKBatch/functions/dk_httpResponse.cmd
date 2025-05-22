@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		###### Informational responses (100 – 199) ######
 ::# 	100 Continue
 ::# 	101 Switching Protocols
-::# 	102 Processing 
+::# 	102 Processing
 ::# 	103 Early Hints
 ::#
 ::#		###### Successful responses (200 – 299) ######
@@ -131,7 +131,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_httpResponse "%url%"
 	echo url:'%url%' dk_httpResponse = %dk_httpResponse%
 	
-	set "url=https://aka.ms/vs/16/release/VC_redist.x64.exe" 
+	set "url=https://aka.ms/vs/16/release/VC_redist.x64.exe"
 	%dk_call% dk_httpResponse "%url%"
 	echo url:'%url%' dk_httpResponse = %dk_httpResponse%
 

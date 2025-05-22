@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -38,7 +38,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:: append %DKVARS% to CMAKE_ARGS with quotes removed
 ::	if defined DKVARS	 (call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%)
 	if defined DKVARS	 set CMAKE_ARGS=%CMAKE_ARGS% %DKVARS%
- 
+
 	::set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
 	set CMAKE_ARGS=%CMAKE_ARGS% "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_:\=/%"
 	set CMAKE_ARGS=%CMAKE_ARGS% -P
@@ -58,7 +58,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::  ## these lines are deprecated ###
 ::  if not defined DKRETURN %return%
 ::  if not exist %DKCMAKE_DIR%\cmake_vars.cmd %return%
-::   
+::  
 ::  endlocal
 ::  %dk_call% %DKCMAKE_DIR%\cmake_vars.cmd
 ::  del %DKCMAKE_DIR%\cmake_vars.cmd
@@ -89,7 +89,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::del cmake_eval.out
 	::err contains all of the lines
 	::echo %err%
-	  
+	 
 	::%dk_call% dk_checkError
 %endfunction%
 

@@ -195,7 +195,7 @@ rem echo !CMD_LINE! >&2
   if %OUTPUT_HAS_NUMBER_PREFIX% neq 0 (
     if %FLAG_PRINT_LINE_NUMBER_PREFIX% neq 0 (
       %CMD_LINE% 2>nul
-    ) else ( 
+    ) else (
       for /F "usebackq eol= tokens=1,* delims=:" %%i in (`^(%CMD_LINE: | findstr = ^| findstr %^) 2^>nul`) do echo.%%j
     )
   ) else (

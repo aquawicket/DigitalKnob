@@ -6,7 +6,7 @@
 ::
 :: The game should work on any Windows machine from XP onward using only batch
 :: and native external commands. However, the default configuration will most
-:: likely have some screen flicker due to the CLS command issued upon every 
+:: likely have some screen flicker due to the CLS command issued upon every
 :: screen refresh. There are two ways to eliminate screen flicker:
 ::
 :: 1 - "Pure batch" via VT100 escape sequences:
@@ -891,7 +891,7 @@ if defined replay (
   if defined hi%diffCode% (set "hi=!hi%diffCode%!") else set "hi=0"
   cls
   (%draw%)
-  >"!gameLog!" ( 
+  >"!gameLog!" (
     for %%A in (!configOptions!) do (echo %%A=!%%A!)
     (echo END)
   )

@@ -130,7 +130,7 @@ if "%DKBATCH%" equ "" setx DKBATCH "@echo off & call %0 %%0 %%* & @setlocal enab
 ::###### AddDKPaths() ######
 setlocal enabledelayedexpansion
 set "folders=%DKBATCH_PATH%"
-for /d %%D in (%DKBATCH_PATH%*) do ( set "folders=!folders!;%%D" ) 
+for /d %%D in (%DKBATCH_PATH%*) do ( set "folders=!folders!;%%D" )
 endlocal & set "PATH=%PATH%;%folders%"
 ::##########################
 

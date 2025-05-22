@@ -23,8 +23,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	echo #### Windows Services ####
 	for /f "tokens=*" %%a in ("%list_file%") do (
-		echo %%a 
-		sc stop %%a 
+		echo %%a
+		sc stop %%a
 		sc config "%%a" start=demand
 		reg add HKLM\SYSTEM\CurrentControlSet\Services\%%a /t REG_DWORD /v Start /d 3 /f
 	)

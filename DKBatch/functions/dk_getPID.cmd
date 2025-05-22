@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -14,13 +14,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_getPID  [RtnVar]
 ::%setlocal%
-    
+   
 ::  title mycmd
 ::  tasklist /fo csv | findstr /i "mycmd"
-    
+   
     ::for /F "tokens=* USEBACKQ" %%F IN (`tasklist /fo csv | findstr /i "mycmd"`) do set "LINE=%%F"
     ::echo LINE = %LINE%
-    
+   
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
 	
     for /f "tokens=1* delims=   : " %%a in ('%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process | Where-Object ProcessId -EQ "$PID""') do (
@@ -44,24 +44,24 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     echo ParentProcessId = %ParentProcessId%
     echo ExecutablePath = %ExecutablePath%
     pause
-    
-    
+   
+   
     FOR /F "tokens=* USEBACKQ" %%F IN (`%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process -Filter ProcessId=$PID | Select-Object -Property ProcessId, ParentProcessId"`) DO (
         set "PID=%%F"
-    ) 
+    )
     echo PID = %PID%
 
 ::  FOR /F "tokens=* USEBACKQ" %%F IN (`%POWERSHELL_EXE% -c "(Get-WmiObject Win32_Process -Filter ProcessId=$PID | Select-Object -Property ProcessId, ParentProcessId"`) DO (
 ::      set "PPID=%%F"
-::  ) 
+::  )
 ::  echo PPID = %PPID%
-    
+   
     FOR /F "tokens=* USEBACKQ" %%F IN (`%POWERSHELL_EXE%  -c "(gwmi win32_process | ? processid -eq ((gwmi win32_process | ? processid -eq  $PID).parentprocessid)).parentprocessid"`) DO (
         echo %%a, %%b
         SET PPPID=%%F
     )
     ECHO PS sent %PPPID%
-    tasklist /fi "pid eq %PPPID%" 
+    tasklist /fi "pid eq %PPPID%"
 
     setlocal disableDelayedExpansion
     :getLock
@@ -96,7 +96,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
     %dk_call% dk_getPID PID
     %dk_call% dk_printVar PID
-    
-    tasklist /fi "pid eq %PID%" 
+   
+    tasklist /fi "pid eq %PID%"
 %endfunction%
 

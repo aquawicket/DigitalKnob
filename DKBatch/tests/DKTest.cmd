@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -67,7 +67,7 @@ set "TEST_VAR=this is a test variable"
 ::	$echo ""
 ::
 ::	### test ###
-::	evaluate test  
+::	evaluate test 
 ::	evaluate test 0
 ::	evaluate test 1
 ::	evaluate test abc
@@ -92,7 +92,7 @@ set "TEST_VAR=this is a test variable"
 ::	evaluate test "v_abc"
 ::	$echo ""
 ::	
-::	evaluate [        ] 
+::	evaluate [        ]
 ::	evaluate [ 0      ]
 ::	evaluate [ 1      ]
 ::	evaluate [ abc    ]
@@ -119,7 +119,7 @@ set "TEST_VAR=this is a test variable"
 ::	$echo ""
 ::
 ::	################ (BASH ONLY) #################
-::	### [[ ]] ### (BASH ONLY) 
+::	### [[ ]] ### (BASH ONLY)
 ::	#           $echo "[[   ]] is $error"
 ::	#[[ 0 ]] && $echo "[[ 0 ]] is $true" || $echo "[[ 0 ]] is $false"
 ::	#[[ 1 ]] && $echo "[[ 1 ]] is $true" || $echo "[[ 1 ]] is $false"

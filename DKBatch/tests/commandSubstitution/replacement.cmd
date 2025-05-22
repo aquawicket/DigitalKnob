@@ -86,11 +86,11 @@ set $SECOND=!%$_SECOND:%$SECOND%=%second%!
 :last
 	echo ###%0### first=%first% middle=%middle% last=%last%
 %endfunction%
-  
-  
-  
-  
-  
+ 
+ 
+ 
+ 
+ 
 :getTime
 	echo :getTime
 	:: https://stackoverflow.com/a/42199181/688352

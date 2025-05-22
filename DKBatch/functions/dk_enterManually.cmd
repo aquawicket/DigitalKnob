@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	set "Target_App=_%dk_keyboardInput%_"
 
-	::Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
+	::Search digitalknob for the matching entry containing a DKINSTALL.cmake file 
 	::%dk_call% dk_chdir %DIGITALKNOB_DIR%
 	::for /f "delims=" %%a in ('dir /b /s /a-d DKINSTALL.cmake ^| findstr /E /R "%dk_keyboardInput%\\DKINSTALL.cmake" ') do set "path=%%a"
 	::set "Target_App_Dir=%path:~0,-13%"

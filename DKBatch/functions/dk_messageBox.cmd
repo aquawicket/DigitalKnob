@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 %dk_call% dk_set dk_messageBox_VERSION 4
@@ -22,28 +22,28 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo timeout = %timeout%
 
     if %dk_messageBox_VERSION%==1 goto messageBox_1
-    if %dk_messageBox_VERSION%==2 goto messageBox_2 
+    if %dk_messageBox_VERSION%==2 goto messageBox_2
     if %dk_messageBox_VERSION%==3 goto messageBox_3
-    if %dk_messageBox_VERSION%==4 goto messageBox_4 
-    if %dk_messageBox_VERSION%==5 goto messageBox_5 
-    if %dk_messageBox_VERSION%==6 goto messageBox_6 
-    
-    :messageBox_1 
+    if %dk_messageBox_VERSION%==4 goto messageBox_4
+    if %dk_messageBox_VERSION%==5 goto messageBox_5
+    if %dk_messageBox_VERSION%==6 goto messageBox_6
+   
+    :messageBox_1
         mshta javascript:alert("%text%");close();
         endlocal & set dk_messageBox=!errorlevel!
-    %return%    
-        
+    %return%   
+       
     :messageBox_2
         :: https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.msgboxstyle?view=net-8.0
 		:: https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/msgbox-constants
         mshta.exe vbscript:Execute("MsgBox ""%text%"", %flags%, ""%caption%""")(window.close)
         endlocal & set dk_messageBox=!errorlevel!
     %return%
-        
+       
     :messageBox_3
         :: https://stackoverflow.com/a/12523614
         :: https://www.vbsedit.com/html/f482c739-3cf9-4139-a6af-3bde299b8009.asp
-        
+       
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
         echo set WshShell = WScript.CreateObject("WScript.Shell") > %DKCACHE_DIR%/dk_messageBox.vbs
 		
@@ -55,7 +55,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         endlocal & set dk_messageBox=!errorlevel!
 		::%dk_call% dk_delete "%DKCACHE_DIR%/dk_messageBox.vbs"
     %return%
-        
+       
     :messageBox_4
 		set /a options=6
 		set /a multiplyer=16

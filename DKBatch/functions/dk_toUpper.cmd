@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -14,7 +14,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	set "dk_toUpper=%~1"
 	for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do set "dk_toUpper=!dk_toUpper:%%#=%%#!")
-    
+   
 	endlocal & (
 		set "dk_toUpper=%dk_toUpper%"
 		if "%~2" neq "" (set "%~2=%dk_toUpper%")

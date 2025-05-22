@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -15,12 +15,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
 	%dk_call% dk_assertPath POWERSHELL_EXE
-    
+   
 ::    :: try pwsh.exe
 ::    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 ::    %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 ::	if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_OUTPUT% && goto found	
-    
+   
 ::    :: try powershell.exe
 ::    %dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
 ::    if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_OUTPUT% && goto found
@@ -31,11 +31,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::    %dk_call% "%DKIMPORTS_DIR%/powershell/DKINSTALL.cmd"
 ::    %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 ::    if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_OUTPUT% && goto found
-    
+   
 ::    :notfound
 ::    %dk_call% dk_fatal "POWERSHELL_EXE invalid"
 ::    %return%
-      
+     
 ::   :found
     if "%~1" equ "" (%return%)
 	

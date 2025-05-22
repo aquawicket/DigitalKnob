@@ -286,7 +286,7 @@ cls
 goto chcp
 :beginx
 FOR /F "tokens=2*" %%A in ('
-    REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Youtube_DL 2^>nul 
+    REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Youtube_DL 2^>nul
 ') do set "YT_DL=%%B"
 :: YTDL/ADB FUNC if exist (
 REG DELETE "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /f >nul 2>nul
@@ -324,8 +324,8 @@ IF EXIST "yesno.vbs" DEL /s /q "yesno.vbs" >nul 2>nul
 color 07
 @echo off
 %nhcolor% 07 " ====================================================================================================================="
-::%nhcolor% 07 "  GHOST TOOLBOX %Cyan%1.9 %White%| %Cyan%%GARC% %White%| 
-::%nhcolor% 07 "  GHOST TOOLBOX %Cyan%1.9.0 %White%| %Cyan%%GARC% %White%| USER: %Yellow%%USERNAME% %White%| %White%COMPUTERNAME: %Yellow%%USERDOMAIN% %White%| %White%NETFX4: %Yellow%%FNETFX4% 
+::%nhcolor% 07 "  GHOST TOOLBOX %Cyan%1.9 %White%| %Cyan%%GARC% %White%|
+::%nhcolor% 07 "  GHOST TOOLBOX %Cyan%1.9.0 %White%| %Cyan%%GARC% %White%| USER: %Yellow%%USERNAME% %White%| %White%COMPUTERNAME: %Yellow%%USERDOMAIN% %White%| %White%NETFX4: %Yellow%%FNETFX4%
 %nhcolor% 07 "  USER: %Yellow%%USERNAME% %White%| %White%COMPUTERNAME: %Yellow%%USERDOMAIN% %White%| %White%NETFX4: %Yellow%%FNETFX4% %White%| %TPMX% %White%| MD5: %HASHMD5%
 ::%nhcolor% 07 "  USER: %Yellow%%USERNAME% %White%| %White%COMPUTERNAME: %Yellow%%USERDOMAIN% %White%| %White%NETFX4: %Yellow%%FNETFX4% %White%| POWER: %Yellow%%PWRPLAN1% %PWRPLAN2%
 ::%nhcolor% 0F "  SYSTEMINFO CPU: %DFMT4% | MODEL: %DFMT1% | M.FACTURER: %DFMT2% | BIOS VER: %DFMT3% |
@@ -346,7 +346,7 @@ color 07
 %nhcolor% 03 " [8] | Stops Windows Updates until 2077                     [37] | 7-Zip 24.04 - 2024-04-05                           "
 %nhcolor% 03 " [9] | Compact | LZX compression                            [27] | Users Request                                      "
 %nhcolor% 00 "                                                                                                                      "
-%nhcolor% 09 " UWP APPX | OTHER                                           OTHER | ETC | 
+%nhcolor% 09 " UWP APPX | OTHER                                           OTHER | ETC |
 %nhcolor% 0E " -----------------                                          -------------
 %nhcolor% 0A " [10] | Microsoft Store & Xbox Console Companion / UWP      [22] | Microsoft Disk Benchmark                           "
 %nhcolor% 0A " [11] | Microsoft Xbox Game Bar                             [24] | Ghost Personalize                                  "
@@ -365,7 +365,7 @@ color 07
 %nhcolor% 04 " [17] | %Lightgray%DirectX (system)                                    %Red%: by State or Country & Sync now. Type Timezone to Change.:"
 %nhcolor% 0E " ----------------------                                     %Red%:    NOTE: Please use %Yellow%Google DNS %White%or %Yellow%Cloudflare DNS.       %Red%:"
 %nhcolor% 04 " [99] | %Lightgray%Ghost Toolbox Changelogs / Update                   %Red%----------------------------------------------------------- "
-%nhcolor% 04 "                                                           
+%nhcolor% 04 "                                                          
 set /p firstindex=" Type option:%green%"
 if "%firstindex%" equ "1" goto windows10op
 if "%firstindex%" equ "2" goto op2
@@ -413,7 +413,7 @@ if "%firstindex%" equ "43" goto wingetoption
 if "%firstindex%" equ "sound" goto sound
 if "%firstindex%" equ "terminal" goto term
 if "%firstindex%" equ "storetest" goto storetest001
-if "%firstindex%" equ "timezone" goto tymezone 
+if "%firstindex%" equ "timezone" goto tymezone
 if "%firstindex%" equ "Timezone" goto tymezone
 if "%firstindex%" equ "zunemusic2020" goto zunemusic2020
 if "%firstindex%" equ "test123" goto test123
@@ -666,13 +666,13 @@ set GhostMode6GB=Mode 2
 set GhostMode8GB=Mode 3
 set GhostMode10=
 cls
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\01" 2>nul | find /i "0" > NUL &&  set "GhostMode1=%green%Enabled" || set "GhostMode1=%red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\02" 2>nul | find /i "0" > NUL &&  set "GhostMode2=%green%Enabled" || set "GhostMode2=%red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\04" 2>nul | find /i "0" > NUL &&  set "GhostMode3=%green%Enabled" || set "GhostMode3=%red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\05" 2>nul | find /i "0" > NUL &&  set "GhostMode4=%green%Enabled" || set "GhostMode4=%red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\07" 2>nul | find /i "0" > NUL &&  set "GhostMode5=%green%Enabled" || set "GhostMode5=%red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\08" 2>nul | find /i "0" > NUL &&  set "GhostMode6=%green%Enabled" || set "GhostMode6=%red%Disabled" 
-reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode" 2>nul | find /i "GhostMode" > NUL &&  set "GhostModea=%green%Enabled" || set "GhostModea=%red%Disabled" 
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\01" 2>nul | find /i "0" > NUL &&  set "GhostMode1=%green%Enabled" || set "GhostMode1=%red%Disabled"
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\02" 2>nul | find /i "0" > NUL &&  set "GhostMode2=%green%Enabled" || set "GhostMode2=%red%Disabled"
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\04" 2>nul | find /i "0" > NUL &&  set "GhostMode3=%green%Enabled" || set "GhostMode3=%red%Disabled"
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\05" 2>nul | find /i "0" > NUL &&  set "GhostMode4=%green%Enabled" || set "GhostMode4=%red%Disabled"
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\07" 2>nul | find /i "0" > NUL &&  set "GhostMode5=%green%Enabled" || set "GhostMode5=%red%Disabled"
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode\Shell\08" 2>nul | find /i "0" > NUL &&  set "GhostMode6=%green%Enabled" || set "GhostMode6=%red%Disabled"
+reg Query "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GhostMode" 2>nul | find /i "GhostMode" > NUL &&  set "GhostModea=%green%Enabled" || set "GhostModea=%red%Disabled"
 FOR /F "tokens=1*" %%A in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" ^| find /i "380000"') do set GhostMode7=Default
 FOR /F "tokens=1*" %%A in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" ^| find /i "4000000"') do set GhostMode7=Mode 1
 FOR /F "tokens=1*" %%A in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" ^| find /i "6000000"') do set GhostMode7=Mode 2
@@ -1112,7 +1112,7 @@ color 0b
 %nhcolor% 03 "  [10] | %green%Notepad for Windows 11
 %nhcolor% 03 "  [11] | %green%HEVC + AV1 Video Codec for Windows 11
 %nhcolor% 03 "  [12] | %green%Custom Patcher Taskbar/Explorer for Windows 11
-%nhcolor% 03 "  [13] | %green%Enable Windows Hello (Biometrics) for %yellow%SUPERLITE/SE" 
+%nhcolor% 03 "  [13] | %green%Enable Windows Hello (Biometrics) for %yellow%SUPERLITE/SE"
 %nhcolor% 03 "  [14] | %green%Windows 11 Widgets
 %nhcolor% 03 "  [15] | %green%Explorer Tab for Windows 11 22H2 (Sun Valley 2)
 %nhcolor% 03 "  [16] | %green%Enable/Disable Filter Administrator Account for %yellow%SUPERLITE/SE"
@@ -1154,7 +1154,7 @@ cls
 goto :opwin11
 
 :win1120
-reg Query "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" 2>nul | find /i "IsDynamicSearchBoxEnabled" > NUL &&  set "HI1X=%red%Disabled" || set "HI1X=%green%Enabled" 
+reg Query "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" 2>nul | find /i "IsDynamicSearchBoxEnabled" > NUL &&  set "HI1X=%red%Disabled" || set "HI1X=%green%Enabled"
 cls
 color 0b
 echo.
@@ -1569,7 +1569,7 @@ if "%version%" equ "Windows 11" (
 cls
 for /f "tokens=1" %%a in ('winget.exe -v') do goto GETWGETCHECK
 )
-goto :GETWGET 
+goto :GETWGET
 :GETWGET
 cls
 echo %lblack%Updating Microsoft Windows Package Manager.. Please Wait..
@@ -1725,7 +1725,7 @@ cls
 %nhcolor% 07 "  %green%[1] %white%- %yellow%Install UWP Apps
 %nhcolor% 07 "  %green%[2] %white%- %yellow%Install UWP Apps from list %white%(GhostToolbox\list.txt)
 %nhcolor% 07 "  %green%[3] %white%- %yellow%Search Apps
-%nhcolor% 07 "  %green%[4] %white%- %yellow%Check update if are available %white%(UWP|ANY) | %lmagenta%NOTE: To update all Type > %yellow%upgrade all     
+%nhcolor% 07 "  %green%[4] %white%- %yellow%Check update if are available %white%(UWP|ANY) | %lmagenta%NOTE: To update all Type > %yellow%upgrade all    
 ::%nhcolor% 07 "  %green%[5] %white%- %yellow%WPM Option
 %nhcolor% 07 "  %green%[5] %white%- %yellow%Uninstall UWP Apps
 ::%nhcolor% 07 "  %green%[7] %white%- %yellow%Import/Expor Packages
@@ -1811,7 +1811,7 @@ RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
 endlocal
 goto winG04
 :winG05
-cls 
+cls
 winget install -e -s msstore --accept-source-agreements >nul
 cls
 echo %white%Name                                         Id                                                                Source
@@ -1940,11 +1940,11 @@ cls
 #:: double-click to run or just copy-paste into powershell - it's a standalone hybrid script
 #::
 #:: ChrEdgeFkOff - make start menu web search or widgets links open in your chosen default browser - by AveYo
-#:: v2.0 only redirects microsoft-edge: links, no longer blocks msedge.exe (with a junction trick); v2.1 fix help urls    
-#:: 
+#:: v2.0 only redirects microsoft-edge: links, no longer blocks msedge.exe (with a junction trick); v2.1 fix help urls   
+#::
 $_Paste_in_Powershell = {
 $vbs = @'
-' ChrEdgeFkOff - make start menu web search or widgets links open in your chosen default browser - by AveYo  
+' ChrEdgeFkOff - make start menu web search or widgets links open in your chosen default browser - by AveYo 
 Dim C, A: For Each i in WScript.Arguments: A = A&" """&i&"""": Next '
 Set W = CreateObject("WScript.Shell"): Set E = W.Environment( "Process" ): E("CL") = A : C = ""
 C = C & "$U = get-itemproperty 'HKCU:\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice' 'ProgID';"
@@ -1954,21 +1954,21 @@ C = C & "if ($UserChoice -like '*Microsoft\Edge\Application\msedge.exe*') {iex('
 C = C & "if ($env:CL -notlike '*microsoft-edge:*') {iex('&'+$MSE); return 1};"
 C = C & "start $UserChoice $($q+ ([uri]::unescapedatastring(($env:CL -split'(?=http[s]?)',2)[1]) -replace $q) +$q); return 0"
 W.Run "powershell -nop -c " & C, 0, False
-'@ 
+'@
 $DATA = [Environment]::GetFolderPath('CommonApplicationData'); $file = join-path $DATA "ChrEdgeFkOff.vbs"
 $PROF = [Environment]::GetFolderPath('ProgramFiles'+('x86','')[![Environment]::Is64BitOperatingSystem])
 $EDGE = join-path $PROF 'Microsoft\Edge\'; $CREDGE = join-path $PROF 'Microsoft\ChrEdge\'
 $IFEO = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msedge.exe'
 if (test-path "$IFEO\0") {
-  remove-item "$IFEO\0" -rec -force -ea 0 >''; remove-itemproperty $IFEO 'Debugger' -force -ea 0 >'' 
+  remove-item "$IFEO\0" -rec -force -ea 0 >''; remove-itemproperty $IFEO 'Debugger' -force -ea 0 >''
   del $file -force -ea 0 >''; rmdir $CREDGE -rec -force -ea 0 >'';
   write-host -fore 0xf -back 0xd "`n [REMOVED] run again to install "
-} else {                              
-  new-item "$IFEO\0" -force -ea 0 >''; remove-itemproperty $IFEO 'Debugger' -force -ea 0 >'' 
+} else {                             
+  new-item "$IFEO\0" -force -ea 0 >''; remove-itemproperty $IFEO 'Debugger' -force -ea 0 >''
   [io.file]::WriteAllText($file, $vbs) >''; start -nonew cmd "/d/x/r mklink /J ""$CREDGE"" ""$EDGE"" >nul"
   set-itemproperty $IFEO 'UseFilter' 1 -type dword -force -ea 0
-  set-itemproperty "$IFEO\0" 'FilterFullPath' $(join-path $PROF 'Microsoft\Edge\Application\msedge.exe') -force -ea 0 
-  set-itemproperty "$IFEO\0" 'Debugger' "wscript $file //B //T:5" -force -ea 0 
+  set-itemproperty "$IFEO\0" 'FilterFullPath' $(join-path $PROF 'Microsoft\Edge\Application\msedge.exe') -force -ea 0
+  set-itemproperty "$IFEO\0" 'Debugger' "wscript $file //B //T:5" -force -ea 0
   write-host -fore 0xf -back 0x2 "`n [INSTALLED] run again to remove " } ; timeout /t 5
 } ; start -verb runas powershell -args "-nop -c & {`n`n$($_Paste_in_Powershell-replace'"','\"')}"
 $_Press_Enter
@@ -2863,7 +2863,7 @@ cls
 ::COPY /Y "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Powershell.lnk" >nul 2>nul
 timeout /t 1 >nul
 del /Q "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" >nul 2>nul
-if not exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" ( 
+if not exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" (
 rd /s /q "%LocalAppData%\Microsoft\Windows\WinX\Group4\" >nul 2>nul
 )
 taskkill /F /IM explorer.exe >nul 2>nul
@@ -2885,7 +2885,7 @@ cls
 COPY /Y "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Command.lnk" >nul 2>nul
 timeout /t 1 >nul
 del /Q "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" >nul 2>nul
-if not exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" ( 
+if not exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" (
 rd /s /q "%LocalAppData%\Microsoft\Windows\WinX\Group4\" >nul 2>nul
 )
 taskkill /F /IM explorer.exe >nul 2>nul
@@ -3510,7 +3510,7 @@ set yellow=%ESC%[33m
 set white=%ESC%[37m
 set bright=%ESC%[1m
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 0D "  %white%Editions that can be upgraded to 
+%nhcolor% 0D "  %white%Editions that can be upgraded to
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  [1]  | %green%Professional"
 %nhcolor% 03 "  [2]  | %green%Professional Education"
@@ -3525,7 +3525,7 @@ set bright=%ESC%[1m
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 0E "  %white%Windows 10 Activated"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [9]  | %green%Activated 
+%nhcolor% 03 "  [9]  | %green%Activated
 %nhcolor% 03 "  [10] | %green%Reset
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  NOTE: Internet connection required for Activated.
@@ -3720,15 +3720,15 @@ goto opwin11
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Windows Recovery x64 (winre) | WIN11.21H1-22H2/ 20H2 / 2004 / 1909 / 1903 / 1803 / LTSC / 1709 / 1703   
+%nhcolor% 07 "  Windows Recovery x64 (winre) | WIN11.21H1-22H2/ 20H2 / 2004 / 1909 / 1903 / 1803 / LTSC / 1709 / 1703  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Download                              
+%nhcolor% 07 "  %green%[1] | Download                             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%Arch    : %cyan%X64                                             
-%nhcolor% 07 "  %red%Size    : %cyan%4xxMB  
-%nhcolor% 07 "  %red%Required internet to download                             
+%nhcolor% 07 "  %red%Arch    : %cyan%X64                                            
+%nhcolor% 07 "  %red%Size    : %cyan%4xxMB 
+%nhcolor% 07 "  %red%Required internet to download                            
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Recovery is the process of recovering and restoring Windows OS to its normal or last known good configuration
 %nhcolor% 07 "  after it crashed, became corrupted or stopped working normally. It is a Windows default process that aids users in
@@ -3890,26 +3890,26 @@ goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft .NET Framework 2.x/3.x/4.x                     
+%nhcolor% 07 "  Microsoft .NET Framework 2.x/3.x/4.x                    
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %green%[1] | %white%Enable .NET Framework 3/2 & %yellow%(Disable force .NetFramework 4.x)
 ::%nhcolor% 07 "  %green%[1] | Enable .NET Framework 3/2 %white%- %red%X64 %white%- %yellow%64bit for WIN10 VERSION %green%1909/1903
 ::%nhcolor% 07 "  %green%[2] | Enable .NET Framework 3/2 %white%- %red%X86 %white%- %yellow%32bit for WIN10 VERSION %green%1909/1903
 ::%nhcolor% 07 "  %green%[3] | Enable .NET Framework 3/2 %white%- %red%X64 %white%- %yellow%64bit for WIN10 VERSION %green%LTSC/1809
 ::%nhcolor% 07 "  %green%[4] | Enable .NET Framework 3/2 %white%- %red%X86 %white%- %yellow%32bit for WIN10 VERSION %green%LTSC/1809
-::%nhcolor% 07 "  %green%[5] | Enable .NET Framework 3/2 %white%- %red%X64/x86 for WIN10 VERSION %green%2004/20H1  
+::%nhcolor% 07 "  %green%[5] | Enable .NET Framework 3/2 %white%- %red%X64/x86 for WIN10 VERSION %green%2004/20H1 
 %nhcolor% 07 "  %green%[7] | %white%Force to using Latest .Net Framework 4.x %yellow%(Enable force .NetFramework 4.x)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] Back to menu                                         
+%nhcolor% 07 "  %green%[0] Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%Servers : %cyan%Microsoft tlu.dl.delivery                           
-%nhcolor% 07 "  %red%Arch    : %cyan%x64 | x86                                            
-%nhcolor% 07 "  %red%Size    : %cyan%69MB | 37MB                                         
-%nhcolor% 07 "  %red%Required internet for download .NET Framework 3/2.         
+%nhcolor% 07 "  %red%Servers : %cyan%Microsoft tlu.dl.delivery                          
+%nhcolor% 07 "  %red%Arch    : %cyan%x64 | x86                                           
+%nhcolor% 07 "  %red%Size    : %cyan%69MB | 37MB                                        
+%nhcolor% 07 "  %red%Required internet for download .NET Framework 3/2.        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%NOTE Framework 3.x only works on Compact/Superlite Update 3 or newest   
+%nhcolor% 07 "  %red%NOTE Framework 3.x only works on Compact/Superlite Update 3 or newest  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%By default Superlite latest ver + and Compact version already force to using latest .Net Framework 4.          
+%nhcolor% 07 "  %red%By default Superlite latest ver + and Compact version already force to using latest .Net Framework 4.         
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
 if "%op%" equ "1" goto netframework5
@@ -4031,19 +4031,19 @@ goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft OneDrive                                       
+%nhcolor% 07 "  Microsoft OneDrive                                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Download and Install                                 
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                                
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%Servers : %cyan%Microsoft                                       
-%nhcolor% 07 "  %red%Version : %cyan%19.174.0902.0013                                
-%nhcolor% 07 "  %red%Size    : %cyan%33.4MB                                          
-%nhcolor% 07 "  %red%Required internet to download.                            
+%nhcolor% 07 "  %red%Servers : %cyan%Microsoft                                      
+%nhcolor% 07 "  %red%Version : %cyan%19.174.0902.0013                               
+%nhcolor% 07 "  %red%Size    : %cyan%33.4MB                                         
+%nhcolor% 07 "  %red%Required internet to download.                           
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Alternative                                              
+%nhcolor% 07 "  Alternative                                             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[2] RaiDrive Standard Edition                            
+%nhcolor% 07 "  %green%[2] RaiDrive Standard Edition                           
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
 if "%op%" equ "1" goto onedrive1
@@ -4073,14 +4073,14 @@ goto onedrive0
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  DriverEasy (Portable)                                    
+%nhcolor% 07 "  DriverEasy (Portable)                                   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Download and Install                                 
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                                
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%Version : %cyan%5.6.15.34863                       
-%nhcolor% 07 "  %red%Size    : %cyan%4.13MB                                          
-%nhcolor% 07 "  %red%Required internet to download.                            
+%nhcolor% 07 "  %red%Version : %cyan%5.6.15.34863                      
+%nhcolor% 07 "  %red%Size    : %cyan%4.13MB                                         
+%nhcolor% 07 "  %red%Required internet to download.                           
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -4167,31 +4167,31 @@ goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Ghost Personalize                                        
+%nhcolor% 07 "  Ghost Personalize                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%[1] Download Ghostspectre Wallpaper                      
+%nhcolor% 07 "  %red%[1] Download Ghostspectre Wallpaper                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %yellow%[2] Colors - | Dark  Purple] | Dark  Explorer  | Dark  Taskbar |
-%nhcolor% 07 "  %yellow%[3] Colors - | Dark  Purple] | Dark  Explorer  | White Taskbar |  
-%nhcolor% 07 "  %yellow%[4] Colors - | Light Purple] | White Explorer  | White Taskbar |  
-%nhcolor% 07 "  %yellow%[5] Colors - | Light Purple] | White Explorer  | Dark  Taskbar |  
-%nhcolor% 07 "  %yellow%[6] Colors - | Light Purple] | Dark  Explorer  | Dark  Taskbar |   
-%nhcolor% 07 "  %yellow%[7] Colors - | Light Purple] | Dark  Explorer  | White Taskbar |  
-%nhcolor% 07 "  %yellow%[8] Colors - | Windows 10 Default White |                   
-%nhcolor% 07 "  %yellow%[9] Colors - | Windows 10 Default Dark  |                   
+%nhcolor% 07 "  %yellow%[3] Colors - | Dark  Purple] | Dark  Explorer  | White Taskbar | 
+%nhcolor% 07 "  %yellow%[4] Colors - | Light Purple] | White Explorer  | White Taskbar | 
+%nhcolor% 07 "  %yellow%[5] Colors - | Light Purple] | White Explorer  | Dark  Taskbar | 
+%nhcolor% 07 "  %yellow%[6] Colors - | Light Purple] | Dark  Explorer  | Dark  Taskbar |  
+%nhcolor% 07 "  %yellow%[7] Colors - | Light Purple] | Dark  Explorer  | White Taskbar | 
+%nhcolor% 07 "  %yellow%[8] Colors - | Windows 10 Default White |                  
+%nhcolor% 07 "  %yellow%[9] Colors - | Windows 10 Default Dark  |                  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Explorer UI Ribbon  
-%nhcolor% 07 "  %green%[10] Enable  : Explorer UI Ribbon                        
-%nhcolor% 07 "  %green%[11] Disable : Explorer UI Ribbon         
-%nhcolor% 07 "  %red%NOTE: Do not disable Ribbon if your software Use Ribbon ex. (Office/Paint/etc etc)         
+%nhcolor% 07 "  Explorer UI Ribbon 
+%nhcolor% 07 "  %green%[10] Enable  : Explorer UI Ribbon                       
+%nhcolor% 07 "  %green%[11] Disable : Explorer UI Ribbon        
+%nhcolor% 07 "  %red%NOTE: Do not disable Ribbon if your software Use Ribbon ex. (Office/Paint/etc etc)        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Transparency Taskbar  
-%nhcolor% 07 "  %green%[12] Enable  : Transparency Taskbar                      
-%nhcolor% 07 "  %green%[13] Disable : Transparency Taskbar                      
+%nhcolor% 07 "  Transparency Taskbar 
+%nhcolor% 07 "  %green%[12] Enable  : Transparency Taskbar                     
+%nhcolor% 07 "  %green%[13] Disable : Transparency Taskbar                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  New Start menu Icons for Windows 10 Version 2004 (build %yellow%19041.421 %white%or higher build) 
-%nhcolor% 07 "  %green%[14] Unlocked New Startmenu Icon                                          
-%nhcolor% 07 "  %green%[15] Revert to Old Startmenu Icon                                          
+%nhcolor% 07 "  New Start menu Icons for Windows 10 Version 2004 (build %yellow%19041.421 %white%or higher build)
+%nhcolor% 07 "  %green%[14] Unlocked New Startmenu Icon                                         
+%nhcolor% 07 "  %green%[15] Revert to Old Startmenu Icon                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Windows 10/11 Themes & Iconpack for version 2009/2004/1909 (64bit)
 %nhcolor% 07 "  %green%[16] %white%Windows Themes
@@ -4199,7 +4199,7 @@ cls
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %green%[18] %white%Nilesoft Shell (Right click menu)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] Back to menu                                        
+%nhcolor% 07 "  %green%[0] Back to menu                                       
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -4237,15 +4237,15 @@ goto ghst
 :nilesoft
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Nilesoft Shell (Right click menu)                             
+%nhcolor% 07 "  Nilesoft Shell (Right click menu)                            
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %green%[1] %white% Download & install
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Nilesoft Shell Themes     
+%nhcolor% 07 "  Nilesoft Shell Themes    
 %nhcolor% 07 "  %green%[2] %white% Change to Dark
 %nhcolor% 07 "  %green%[3] %white% Change to White
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] Back to menu                                        
+%nhcolor% 07 "  %green%[0] Back to menu                                       
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -4350,11 +4350,11 @@ del /q /f /s theme.Penumbra10.7z >nul 2>nul
 del /q /f /s theme.HNY.7z >nul 2>nul
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Ghost Personalize - Windows Themes                                       
+%nhcolor% 07 "  Ghost Personalize - Windows Themes                                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %yellow%[1]  %cyan%> %green%GHOST SPECTRE - DARK LIGHT PURPLE V1"
 %nhcolor% 07 "  %yellow%[2]  %cyan%> %green%GHOST SPECTRE - DARK LIGHT PURPLE V2"
-%nhcolor% 07 "  %yellow%[3]  %cyan%> %green%GHOST SPECTRE - DARK LIGHT PURPLE V3" 
+%nhcolor% 07 "  %yellow%[3]  %cyan%> %green%GHOST SPECTRE - DARK LIGHT PURPLE V3"
 %nhcolor% 07 "  %yellow%[4]  %cyan%> %green%GHOST SPECTRE - FULL DARK (beta test)"
 %nhcolor% 07 "  %yellow%[5]  %cyan%> %green%GHOST SPECTRE - GHOST NOID X1"
 %nhcolor% 07 "  %yellow%[6]  %cyan%> %green%GHOST SPECTRE - GHOST NOID X2"
@@ -4405,7 +4405,7 @@ cls
 goto ghst
 :theme99
 cls
-if not exist "%PROGRAMFILES%\7-Zip\7zG.exe" ( 
+if not exist "%PROGRAMFILES%\7-Zip\7zG.exe" (
 cd "%GHOST_DATA%"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.7-zip.org/a/7z2103-x64.exe" -o"7z2103-x64.exe"
 7z2103-x64.exe /S
@@ -4773,7 +4773,7 @@ REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /
 REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /f
 REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "StartColorMenu" /f
 REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentColorMenu" /f
-REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentPalette" /f 
+REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentPalette" /f
 cls
 goto ghst
 :ghost09
@@ -4796,7 +4796,7 @@ REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /
 REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /f
 REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "StartColorMenu" /f
 REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentColorMenu" /f
-REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentPalette" /f 
+REG DELETE "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentPalette" /f
 REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d "0" /f
 REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d "0" /f
 cls
@@ -4805,14 +4805,14 @@ goto ghst
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Disk Benchmark Test (Write/Read)               
+%nhcolor% 07 "  Microsoft Disk Benchmark Test (Write/Read)              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%Type %red%C%white%, %red%D%white%, %red%E%white%, to %red%Z for %white%Benchmark your Drives             
+%nhcolor% 07 "  %green%Type %red%C%white%, %red%D%white%, %red%E%white%, to %red%Z for %white%Benchmark your Drives            
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
-set /p op=Benchmark Drive : 
+set /p op=Benchmark Drive :
 if "%op%" equ "C" goto diskc
 if "%op%" equ "c" goto diskc
 if "%op%" equ "D" goto diskd
@@ -5109,27 +5109,27 @@ pause
 goto opdisk
 :edgeop
 cls
-echo %red% NOTE: Original Microsoft Edge is dead, Alternative Web Browsers you can using 
+echo %red% NOTE: Original Microsoft Edge is dead, Alternative Web Browsers you can using
 echo %red%       Microsoft Edge Chromium/Google Chrome/Firefox/Brave/Yandex/Opera/etc etc.
 timeout /t 5 >nul
 goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Edge (Original version) - Browser              
+%nhcolor% 07 "  Microsoft Edge (Original version) - Browser             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Download and Install (479)                           
-%nhcolor% 07 "  %green%[2] | Download and Install (449)                           
-%nhcolor% 07 "  %green%[3] | Download and Install (418)                           
-%nhcolor% 07 "  [0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install (479)                          
+%nhcolor% 07 "  %green%[2] | Download and Install (449)                          
+%nhcolor% 07 "  %green%[3] | Download and Install (418)                          
+%nhcolor% 07 "  [0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%File Size : %cyan%37MB                                         
-%nhcolor% 07 "  %green%Arch      : %cyan%x64                                         
-%nhcolor% 07 "  %green%Version   : %cyan%18363.479 / 18363.449 / 18363.418            
-%nhcolor% 07 "  %green%Servers   : %cyan%Google Cloud Storage                         
-%nhcolor% 07 "  %green%Required internet to download.                           
+%nhcolor% 07 "  %green%File Size : %cyan%37MB                                        
+%nhcolor% 07 "  %green%Arch      : %cyan%x64                                        
+%nhcolor% 07 "  %green%Version   : %cyan%18363.479 / 18363.449 / 18363.418           
+%nhcolor% 07 "  %green%Servers   : %cyan%Google Cloud Storage                        
+%nhcolor% 07 "  %green%Required internet to download.                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%NOTE: Microsoft Edge cannot be removed after installed. 
+%nhcolor% 07 "  %green%NOTE: Microsoft Edge cannot be removed after installed.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %red%Microsoft Edge original version will be dead soon please stop using this browser.
 %nhcolor% 07 "  %red%Alternative Web Browsers you can using Edge Chromium/Google Chrome/Firefox/Brave/Yandex and etc etc.
@@ -5246,17 +5246,17 @@ goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Connect Apps (Miracast) %red%for Windows 10 version 1909/1903                  
+%nhcolor% 07 "  Microsoft Connect Apps (Miracast) %red%for Windows 10 version 1909/1903                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Download and Install                                 
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                                
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%Servers : %cyan%Google Cloud Storage                           
-%nhcolor% 07 "  %green%Arch    : %cyan%x64                                      
-%nhcolor% 07 "  %green%Required internet to download.                           
-%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------" 
-%nhcolor% 07 "  %red%NOTE: For Windows 10 Version 2004/2009 Connect app for wireless projection using Miracast is no longer installed 
-%nhcolor% 07 "  %red%      by default, but is available as an optional feature. To install the app, 
+%nhcolor% 07 "  %green%Servers : %cyan%Google Cloud Storage                          
+%nhcolor% 07 "  %green%Arch    : %cyan%x64                                     
+%nhcolor% 07 "  %green%Required internet to download.                          
+%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 07 "  %red%NOTE: For Windows 10 Version 2004/2009 Connect app for wireless projection using Miracast is no longer installed
+%nhcolor% 07 "  %red%      by default, but is available as an optional feature. To install the app,
 %nhcolor% 07 "  %red%      click on %yellow%Settings %white%> %yellow%Apps %white%> %yellow%Optional features %white%> %yellow%Add a feature and then install the Wireless Display app.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
@@ -5346,12 +5346,12 @@ goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Clipboard                                      
+%nhcolor% 07 "  Microsoft Clipboard                                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Enable | %cyan%Required internet for download dependencies (1.9MB)                                    
-%nhcolor% 07 "  %green%[2] | Disable                                                                                    
+%nhcolor% 07 "  %green%[1] | Enable | %cyan%Required internet for download dependencies (1.9MB)                                   
+%nhcolor% 07 "  %green%[2] | Disable                                                                                   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%NOTE: Superlite version you need enable Action Center & Notification to using Clipboard or Snip & sketch. 
+%nhcolor% 07 "  %red%NOTE: Superlite version you need enable Action Center & Notification to using Clipboard or Snip & sketch.
 %nhcolor% 07 "   Superlite or Compact Version 2004/2009 Dependencies required to enable Clipboard
 %nhcolor% 07 "  - %yellow%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
 %nhcolor% 07 "  - %yellow%Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64
@@ -5359,9 +5359,9 @@ cls
 %nhcolor% 07 "  - %yellow%Microsoft.VCLibs.140.00_14.0.27810.0_x86
 echo.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Microsoft Touch Keyboard (For Tablet Users or Enable Touchpad keyboard)                                      
+%nhcolor% 07 "  Microsoft Touch Keyboard (For Tablet Users or Enable Touchpad keyboard)                                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[3] | Enable | %cyan%Required internet for download dependencies (1.9MB)                                       
+%nhcolor% 07 "  %green%[3] | Enable | %cyan%Required internet for download dependencies (1.9MB)                                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Superlite or Compact Version 2004/2009 Dependencies required to enable Touch Keyboard
 %nhcolor% 07 "  - %yellow%Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64
@@ -5576,23 +5576,23 @@ goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  COMPACT OS LZX (for SSD/NvME)                            
+%nhcolor% 07 "  COMPACT OS LZX (for SSD/NvME)                           
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | COMPACT OS LZX [LZMS]                                
-%nhcolor% 07 "  %green%[2] | COMPACT OS NORMAL                                    
+%nhcolor% 07 "  %green%[1] | COMPACT OS LZX [LZMS]                               
+%nhcolor% 07 "  %green%[2] | COMPACT OS NORMAL                                   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "                                %red% /_\ HDD Highly Not recommended to Use LZX /_\          
+%nhcolor% 07 "                                %red% /_\ HDD Highly Not recommended to Use LZX /_\         
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  %white%Folder and files be compressed                      
-%nhcolor% 07 "  %red%"C:\Program Files"                                       
-%nhcolor% 07 "  %red%"C:\Program Files (x86)"                                 
-%nhcolor% 07 "  %red%"C:\ProgramData"                                         
-%nhcolor% 07 "  %red%"C:\Users"                                               
-%nhcolor% 07 "  %red%"C:\Windows"                                             
+%nhcolor% 07 "  %white%Folder and files be compressed                     
+%nhcolor% 07 "  %red%"C:\Program Files"                                      
+%nhcolor% 07 "  %red%"C:\Program Files (x86)"                                
+%nhcolor% 07 "  %red%"C:\ProgramData"                                        
+%nhcolor% 07 "  %red%"C:\Users"                                              
+%nhcolor% 07 "  %red%"C:\Windows"                                            
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "                           %red% NOTE: it take 5min~10min on SSD to finish (HDD 30m~1h)   
+%nhcolor% 07 "                           %red% NOTE: it take 5min~10min on SSD to finish (HDD 30m~1h)  
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -5665,8 +5665,8 @@ set bright=%ESC%[1m
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 07 "  %white%Stops Windows Updates until 2077 (for version 1703 or higher version)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 " [1] | %cyan%Pause Windows Update until 2077         
-%nhcolor% 07 " [0] | %cyan%Back to menu                
+%nhcolor% 07 " [1] | %cyan%Pause Windows Update until 2077        
+%nhcolor% 07 " [0] | %cyan%Back to menu               
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 " NOTE: This only to stop Windows Update (Cumulative update), %yellow%Drivers%white%/%yellow%MS Store%white%/%yellow%Defenders %white%Update will works as normal.
 %nhcolor% 07 " NOTE: To Pause in Windows 11 > Click > Windows Update > Click Pause and press 1 to Pause until 2077.
@@ -5797,13 +5797,13 @@ goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  %green%[1] %cyan%>%white% Action Center and Notification                           
-%nhcolor% 07 "  %green%[2] %cyan%>%white% Print Spooler for Printer (services)                                                  
+%nhcolor% 07 "  %green%[1] %cyan%>%white% Action Center and Notification                          
+%nhcolor% 07 "  %green%[2] %cyan%>%white% Print Spooler for Printer (services)                                                 
 %nhcolor% 07 "  %green%[3] %cyan%>%white% Windows Hello (Biometrics) for Superlite - Non Administrator
 %nhcolor% 07 "  %green%[4] %cyan%>%white% TabletInputService (services)
 %nhcolor% 07 "  %green%[5] %cyan%>%white% Bing Search Highlights
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] %yellow%Back to menu                                  
+%nhcolor% 07 "  %green%[0] %yellow%Back to menu                                 
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
@@ -5825,12 +5825,12 @@ goto windows10op
 
 :w0001
 cls
-%nhcolor% 07 "  Action Center and Notification   
-%nhcolor% 07 " ====================================================================================================================="                   
-%nhcolor% 07 "  [1] > Enable                                                  
+%nhcolor% 07 "  Action Center and Notification  
+%nhcolor% 07 " ====================================================================================================================="                  
+%nhcolor% 07 "  [1] > Enable                                                 
 %nhcolor% 07 "  [2] > Disable
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  [0] > Back to menu                                  
+%nhcolor% 07 "  [0] > Back to menu                                 
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
@@ -5933,14 +5933,14 @@ goto w0001
 
 :w0002
 cls
-%nhcolor% 07 "  Print Spooler for Printer (services)    
+%nhcolor% 07 "  Print Spooler for Printer (services)   
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  [1] > Enable                                                  
+%nhcolor% 07 "  [1] > Enable                                                 
 %nhcolor% 07 "  [2] > Disable
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  NOTE: %red%Windows 10/11 SUPERLITE/SE is %yellow%Disable %red%by Default.                      
+%nhcolor% 07 "  NOTE: %red%Windows 10/11 SUPERLITE/SE is %yellow%Disable %red%by Default.                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  [0] > Back to menu                                  
+%nhcolor% 07 "  [0] > Back to menu                                 
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
@@ -5958,12 +5958,12 @@ goto w0002
 cls
 %nhcolor% 07 "  Hello (Biometrics) for Superlite - Non Administrator
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  [1] > Enable                                                  
+%nhcolor% 07 "  [1] > Enable                                                 
 %nhcolor% 07 "  [2] > Disable
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  NOTE: %red%SUPERLITE/SE Bionmetric only working on Non Administrator Account.                      
+%nhcolor% 07 "  NOTE: %red%SUPERLITE/SE Bionmetric only working on Non Administrator Account.                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  [0] > Back to menu                                  
+%nhcolor% 07 "  [0] > Back to menu                                 
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
@@ -5996,14 +5996,14 @@ goto windows10op
 
 :w0004
 cls
-%nhcolor% 07 "  TabletInputService (services)    
+%nhcolor% 07 "  TabletInputService (services)   
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  [1] > Enable                                                  
+%nhcolor% 07 "  [1] > Enable                                                 
 %nhcolor% 07 "  [2] > Disable
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  %yellow%NOTE: If you cant typing in some Apps please enable TabletInputService for SUPERLITE/SE.             
+%nhcolor% 03 "  %yellow%NOTE: If you cant typing in some Apps please enable TabletInputService for SUPERLITE/SE.            
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  [0] > Back to menu                                  
+%nhcolor% 07 "  [0] > Back to menu                                 
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
@@ -6021,10 +6021,10 @@ goto w0004
 cls
 %nhcolor% 07 "  Bing Search Highlights Taskbar
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  [1] > Enable                                                  
-%nhcolor% 07 "  [2] > Disable         
+%nhcolor% 07 "  [1] > Enable                                                 
+%nhcolor% 07 "  [2] > Disable        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  [0] > Back to menu                                  
+%nhcolor% 07 "  [0] > Back to menu                                 
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 1 >nul
 set /p op=Type option:
@@ -6082,26 +6082,26 @@ goto windows10op
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Action Center and Notification                           
+%nhcolor% 07 "  Action Center and Notification                          
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Enable                                               
-%nhcolor% 07 "  %green%[2] | Disable                                              
+%nhcolor% 07 "  %green%[1] | Enable                                              
+%nhcolor% 07 "  %green%[2] | Disable                                             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Cortana                                                  
+%nhcolor% 07 "  Cortana                                                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[3] | Enable                                               
-%nhcolor% 07 "  %green%[4] | Disable                                              
+%nhcolor% 07 "  %green%[3] | Enable                                              
+%nhcolor% 07 "  %green%[4] | Disable                                             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Print Spooler for Printer (services)                                         
+%nhcolor% 07 "  Print Spooler for Printer (services)                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[5] | Enable  | Service Auto                                              
+%nhcolor% 07 "  %green%[5] | Enable  | Service Auto                                             
 %nhcolor% 07 "  %green%[6] | Disable | Service Manual
-%nhcolor% 07 "  NOTE: %red%Windows 10 SUPERLITE/SE is %yellow%Disable %red%by Default.                                          
+%nhcolor% 07 "  NOTE: %red%Windows 10 SUPERLITE/SE is %yellow%Disable %red%by Default.                                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Cortana Beta for %yellow%Windows 10 Version 2004/2009                                                  
+%nhcolor% 07 "  Cortana Beta for %yellow%Windows 10 Version 2004/2009                                                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %green%[7] | Install Cortana Beta   | %red%Required internet for downloads (84.4MB) | %yellow%2.2007.9736.0
-%nhcolor% 07 "  %green%[8] | Uninstall Cortana Beta |  
+%nhcolor% 07 "  %green%[8] | Uninstall Cortana Beta | 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 0D "  %white%Windows Hello (Biometrics) for Superlite - Non Administrator
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -6112,7 +6112,7 @@ cls
 %nhcolor% 03 "  [12]  | %green%Disable - TabletInputService"
 %nhcolor% 03 "  %yellow%NOTE: If you cant typing in some Apps please enable TabletInputService for SUPERLITE/SE.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -6267,10 +6267,10 @@ goto begin
 color 0D
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Cleanup Windows Store Cache and Delivery Optimization  
+%nhcolor% 07 "  Cleanup Windows Store Cache and Delivery Optimization 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Cleanup now                                        
-%nhcolor% 07 "  %green%[0] | Back to menu                                       
+%nhcolor% 07 "  %green%[1] | Cleanup now                                       
+%nhcolor% 07 "  %green%[0] | Back to menu                                      
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -6287,7 +6287,7 @@ cls
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %cyan%  Do Cleaning.                                          
+echo %cyan%  Do Cleaning.                                         
 %nhcolor% 07 " ====================================================================================================================="
 net stop DoSvc
 timeout /t 5 >nul
@@ -6301,7 +6301,7 @@ timeout /t 5 >nul
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %cyan%  Do Cleaning...                                           
+echo %cyan%  Do Cleaning...                                          
 %nhcolor% 07 " ====================================================================================================================="
 rd /Q /S  "%WINDIR%\SoftwareDistribution\Download\" >nul 2>nul
 rd /Q /S  "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\" >nul 2>nul
@@ -6309,7 +6309,7 @@ timeout /t 5 >nul
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %cyan%  Do Cleaning....                                           
+echo %cyan%  Do Cleaning....                                          
 %nhcolor% 07 " ====================================================================================================================="
 rd /Q /S "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\" >nul 2>nul
 rd /Q /S "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Logs\" >nul 2>nul
@@ -6319,7 +6319,7 @@ timeout /t 5 >nul
 cls
 color 0E
 %nhcolor% 07 " ====================================================================================================================="
-echo %cyan%  Do Cleaning.....                                                
+echo %cyan%  Do Cleaning.....                                               
 %nhcolor% 07 " ====================================================================================================================="
 mkdir "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache" >nul 2>nul
 mkdir "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Logs" >nul 2>nul
@@ -6346,12 +6346,12 @@ goto begin
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo  Clear Event Viewer Logs                                  
+echo  Clear Event Viewer Logs                                 
 %nhcolor% 07 " ====================================================================================================================="
-echo  [1] Cleanup now               
+echo  [1] Cleanup now              
 echo  [2] Disable some event logs
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  [0] Back to menu                                         
+echo  [0] Back to menu                                        
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -6425,21 +6425,21 @@ echo.
 For /f "tokens=*" %%W in ('
     cscript /Nologo "C:\Windows\System32\slmgr.vbs" /xpr
 ') Do Set "WinVerAct=!WinVerAct! %%W"
-if Not defined WinVerAct ( 
+if Not defined WinVerAct (
 Echo:No response from slmgr.vbs
     Exit /B 1
 )
 Echo   %white%Activation Status:%yellow%%WinVerAct:~0%
-echo.                               
+echo.                              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | %yellow%Activated Windows 10 Pro (non-CORE)  - (activation trial - 6 month)                      
-%nhcolor% 07 "  %green%[2] | %yellow%Activated for Windows 10 Home (CORE) - (activation trial - 6 month) 
+%nhcolor% 07 "  %green%[1] | %yellow%Activated Windows 10 Pro (non-CORE)  - (activation trial - 6 month)                     
+%nhcolor% 07 "  %green%[2] | %yellow%Activated for Windows 10 Home (CORE) - (activation trial - 6 month)
 %nhcolor% 07 "  %green%[3] | %yellow%Enter Your Product Key (if you have your own product key please enter here)
 %nhcolor% 07 "  %green%[4] | %yellow%Reset
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] | %yellow%Back to menu                                        
+%nhcolor% 07 "  %green%[0] | %yellow%Back to menu                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%Required Internet for Activated.                        
+%nhcolor% 07 "  %green%Required Internet for Activated.                       
 %nhcolor% 07 "  %red%NOTE: If you like Windows 10 please buy a original product key.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
@@ -6490,56 +6490,56 @@ goto op4
 :ac1
 cls
 echo  %white%=====================================================================================================================
-echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID% 
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
 timeout /t 3 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[                                        ]   
+echo   [LOADING]   %green%[                                        ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ =                                      ]   
+echo   [LOADING]   %green%[ =                                      ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ ===                                    ]   
+echo   [LOADING]   %green%[ ===                                    ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ ======                                 ]   
+echo   [LOADING]   %green%[ ======                                 ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ =========                              ]   
+echo   [LOADING]   %green%[ =========                              ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ ===============                        ]   
+echo   [LOADING]   %green%[ ===============                        ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ ======================                 ]   
+echo   [LOADING]   %green%[ ======================                 ]  
 echo  %white%=====================================================================================================================
 cscript //B "%windir%\system32\slmgr.vbs" /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul
 timeout /t 2 >nul
@@ -6547,21 +6547,21 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ ===========================            ]   
+echo   [LOADING]   %green%[ ===========================            ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ ===============================        ]   
+echo   [LOADING]   %green%[ ===============================        ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ ===================================    ]   
+echo   [LOADING]   %green%[ ===================================    ]  
 echo  %white%=====================================================================================================================
 cscript //B "%windir%\system32\slmgr.vbs" /skms kms8.msguides.com >nul
 cscript //B "%windir%\system32\slmgr.vbs" /skms kms8.msguides.com >nul
@@ -6570,21 +6570,7 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ ====================================== ]   
-echo  %white%=====================================================================================================================
-timeout /t 1 >nul
-cls
-echo  %white%=====================================================================================================================
-echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
-echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ ====================================== ]   
-echo  %white%=====================================================================================================================
-timeout /t 1 >nul
-cls
-echo  %white%=====================================================================================================================
-echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
-echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ] 
+echo   [LOADING]   %green%[ ====================================== ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
@@ -6598,21 +6584,35 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]   
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ xxxxxxxx Windows is Activated xxxxxxxx ]   
+echo   [LOADING]   %green%[ ====================================== ] 
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
 echo  %white%---------------------------------------------------------------------------------------------------------------------
-echo   [LOADING]   %green%[ xxxxxxxx Windows is Activated xxxxxxxx ]   
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]  
+echo  %white%=====================================================================================================================
+timeout /t 1 >nul
+cls
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ xxxxxxxx Windows is Activated xxxxxxxx ]  
+echo  %white%=====================================================================================================================
+timeout /t 1 >nul
+cls
+echo  %white%=====================================================================================================================
+echo   %red%Auto Activated for Windows 10%white% : %yellow%%EditionID%
+echo  %white%---------------------------------------------------------------------------------------------------------------------
+echo   [LOADING]   %green%[ xxxxxxxx Windows is Activated xxxxxxxx ]  
 echo  %white%=====================================================================================================================
 timeout /t 3 >nul
 cls
@@ -6638,7 +6638,7 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ] 
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]
 echo  %white%=====================================================================================================================
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /t REG_SZ /d "" /f >nul
 timeout /t 1 >nul
@@ -6646,7 +6646,7 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]   
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]  
 echo  %white%=====================================================================================================================
 cscript //B "%windir%\system32\slmgr.vbs" -ipk VK7JG-NPHTM-C97JM-9MPGT-3V66T >nul
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /f >nul
@@ -6655,14 +6655,14 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]   
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]   
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]  
 echo  %white%=====================================================================================================================
 timeout /t 5 >nul
 cls
@@ -6687,7 +6687,7 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ] 
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]
 echo  %white%=====================================================================================================================
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /t REG_SZ /d "" /f >nul
 timeout /t 1 >nul
@@ -6695,7 +6695,7 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]   
+echo   [LOADING]   %green%[ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]  
 echo  %white%=====================================================================================================================
 cscript //B "%windir%\system32\slmgr.vbs" -ipk YTMG3-N6DKC-DKB77-7M9GH-8HVX7 >nul
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /f >nul
@@ -6704,14 +6704,14 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]   
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]   
+echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]  
 echo  %white%=====================================================================================================================
 timeout /t 5 >nul
 cls
@@ -6728,19 +6728,19 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Paging file (virtual memory)                             
+%nhcolor% 07 "  Paging file (virtual memory)                            
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Disable : Pagefile.sys                               
-%nhcolor% 07 "  %green%[2] | Enable  : Pagefile.sys [set to 256MB]                
-%nhcolor% 07 "  %green%[3] | Enable  : Pagefile.sys [set to 3.0GB]                
-%nhcolor% 07 "  %green%[4] | Enable  : Pagefile.sys [set to 4.0GB]                
-%nhcolor% 07 "  %green%[5] | Enable  : Pagefile.sys [set to 8.0GB]                
-%nhcolor% 07 "  %green%[6] | Enable  : Pagefile.sys [set to 16.0GB]               
-%nhcolor% 07 "  %green%[7] | Enable  : Pagefile.sys [Default System managed]      
+%nhcolor% 07 "  %green%[1] | Disable : Pagefile.sys                              
+%nhcolor% 07 "  %green%[2] | Enable  : Pagefile.sys [set to 256MB]               
+%nhcolor% 07 "  %green%[3] | Enable  : Pagefile.sys [set to 3.0GB]               
+%nhcolor% 07 "  %green%[4] | Enable  : Pagefile.sys [set to 4.0GB]               
+%nhcolor% 07 "  %green%[5] | Enable  : Pagefile.sys [set to 8.0GB]               
+%nhcolor% 07 "  %green%[6] | Enable  : Pagefile.sys [set to 16.0GB]              
+%nhcolor% 07 "  %green%[7] | Enable  : Pagefile.sys [Default System managed]     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %red%NOTE: Default System managed ex. 4GB of ram Pagefile.sys be using 4GB of size on your drives.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  [0] | Back to menu                                   
+%nhcolor% 07 "  [0] | Back to menu                                  
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -6820,20 +6820,20 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Hibernation / Fastboot / Sleep mode                      
+%nhcolor% 07 "  Hibernation / Fastboot / Sleep mode                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Disable : hiberfil.sys                               
-%nhcolor% 07 "  %green%[2] | Enable  : hiberfil.sys (Full Hibernate will uses 13gb space on your drive)       
+%nhcolor% 07 "  %green%[1] | Disable : hiberfil.sys                              
+%nhcolor% 07 "  %green%[2] | Enable  : hiberfil.sys (Full Hibernate will uses 13gb space on your drive)      
 %nhcolor% 07 "  %green%[5] | Enable  : Enable fastboot without hibernation
-::%nhcolor% 07 "  %green%[5] | %yellow%Go here if still not enabled         
-%nhcolor% 07 "        %red%NOTE: Windows 10/11 Superlite/SE Hibernation/Fastboot disable by default.                      
+::%nhcolor% 07 "  %green%[5] | %yellow%Go here if still not enabled        
+%nhcolor% 07 "        %red%NOTE: Windows 10/11 Superlite/SE Hibernation/Fastboot disable by default.                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Sysmain / Superfetch                                    
+%nhcolor% 07 "  Sysmain / Superfetch                                   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[3] | Disable : Sysmain / Superfetch                       
-%nhcolor% 07 "  %green%[4] | Enable  : Sysmain / Superfetch                       
+%nhcolor% 07 "  %green%[3] | Disable : Sysmain / Superfetch                      
+%nhcolor% 07 "  %green%[4] | Enable  : Sysmain / Superfetch                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %red%NOTE: for Laptops/Desktops users can enable hibernation if you want to using sleepmode/standby mode.
 %nhcolor% 07 "  %red%NOTE: for HDD users enable Sysmain and hibernation for better boot up times and application.
@@ -6903,23 +6903,23 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Xbox Game Bar                                  
+%nhcolor% 07 "  Microsoft Xbox Game Bar                                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Download and Install                          
-%nhcolor% 07 "  %green%[2] | Removed Xbox Game Bar                         
+%nhcolor% 07 "  %green%[1] | Download and Install                         
+%nhcolor% 07 "  %green%[2] | Removed Xbox Game Bar                        
 %nhcolor% 07 "  %green%[3] | Enable or Disable Xbox Game Bar
-%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"                             
-%nhcolor% 07 "  %green%[0] | Back to menu                                       
+%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"                            
+%nhcolor% 07 "  %green%[0] | Back to menu                                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%File Size : %cyan%56MB                                       
-%nhcolor% 07 "  %red%Arch      : %cyan%x64 | x86                                                           
-%nhcolor% 07 "  %red%Required Internet for download.                          
+%nhcolor% 07 "  %red%File Size : %cyan%56MB                                      
+%nhcolor% 07 "  %red%Arch      : %cyan%x64 | x86                                                          
+%nhcolor% 07 "  %red%Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %red%Microsoft XboxGamingOverlay | %cyan%5.621.3231.0
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %white%Last updated - 03/28/2021               
+%nhcolor% 07 "  %white%Last updated - 03/28/2021              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%NOTE: Close or Minimize GHOST TOOLBOX after finished Installed.                                                 
+%nhcolor% 07 "  %red%NOTE: Close or Minimize GHOST TOOLBOX after finished Installed.                                                
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %red%NOTE: FPS Counter is not supported when running as an administrator account, pls use on non-Administrator account.
 %nhcolor% 07 "  %red%NOTE: If Xbox Game Bar cannot running on Windows 11 Superlite Please use on Non-Administrator Account.
@@ -7149,27 +7149,27 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Xbox Game Pass for PC (Beta) (Supported Windows 10 version 2004/1909/1903 or Higher)  
+%nhcolor% 07 "  Microsoft Xbox Game Pass for PC (Beta) (Supported Windows 10 version 2004/1909/1903 or Higher) 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Download and Install                                
-%nhcolor% 07 "  %green%[2] | Removed Xbox Game Pass                               
-%nhcolor% 07 "  %green%[3] | Join Game Pass (website)                             
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                               
+%nhcolor% 07 "  %green%[2] | Removed Xbox Game Pass                              
+%nhcolor% 07 "  %green%[3] | Join Game Pass (website)                            
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%File Size    : %cyan%152MB                                     
-%nhcolor% 07 "  %red%Architecture : %cyan%x64 / x86                                 
-%nhcolor% 07 "  %red%Servers      : %cyan%Microsoft                                 
-%nhcolor% 07 "  %red%Required Internet for download.                          
+%nhcolor% 07 "  %red%File Size    : %cyan%152MB                                    
+%nhcolor% 07 "  %red%Architecture : %cyan%x64 / x86                                
+%nhcolor% 07 "  %red%Servers      : %cyan%Microsoft                                
+%nhcolor% 07 "  %red%Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%Microsoft Xbox Game Pass | %cyan%1910.1001.7.0                 
-%nhcolor% 07 "  %red%7-Zip 19.00                                              
+%nhcolor% 07 "  %red%Microsoft Xbox Game Pass | %cyan%1910.1001.7.0                
+%nhcolor% 07 "  %red%7-Zip 19.00                                             
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %red%Apps Requires: Windows Store/Purchaseapps/XboxIdentityProvider/XboxGamebar/Xbox live
 %nhcolor% 07 "  %red%(If some Apps is missing you can download through Xbox Game Pass Apps)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%Discover your next favorite game. Unlimited access to over 100 high-quality PC games for an introductory 
-%nhcolor% 07 "  %red%price of $1.00 per month (MSRP $4.99 per month). With a huge variety of games from every genre, theres 
-%nhcolor% 07 "  %red%something for everyone and enjoy exclusive member deals and discounts. With games 
+%nhcolor% 07 "  %red%Discover your next favorite game. Unlimited access to over 100 high-quality PC games for an introductory
+%nhcolor% 07 "  %red%price of $1.00 per month (MSRP $4.99 per month). With a huge variety of games from every genre, theres
+%nhcolor% 07 "  %red%something for everyone and enjoy exclusive member deals and discounts. With games
 %nhcolor% 07 "  %red%added all the time, youll always have something new to play.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
@@ -7209,17 +7209,17 @@ goto xpass
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Zune Music (Groove Music)                                    
+%nhcolor% 07 "  Microsoft Zune Music (Groove Music)                                   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Download and Install                                 
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | Download and Install                                
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%File Size : %cyan%45.4MB                                       
-%nhcolor% 07 "  %red%Arch      : %cyan%x64 / x86 / ARM                              
-%nhcolor% 07 "  %red%Servers   : %cyan%OneDrive Business                         
-%nhcolor% 07 "  %red%Required Internet for download.                          
+%nhcolor% 07 "  %red%File Size : %cyan%45.4MB                                      
+%nhcolor% 07 "  %red%Arch      : %cyan%x64 / x86 / ARM                             
+%nhcolor% 07 "  %red%Servers   : %cyan%OneDrive Business                        
+%nhcolor% 07 "  %red%Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%Microsoft.ZuneMusic | %cyan%2019.20032.12616.0 - Last Update 08/17/2020            
+%nhcolor% 07 "  %red%Microsoft.ZuneMusic | %cyan%2019.20032.12616.0 - Last Update 08/17/2020           
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -7882,22 +7882,22 @@ goto beginx
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Your Phone                                    
+%nhcolor% 07 "  Microsoft Your Phone                                   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Download and Install                                 
-%nhcolor% 07 "  %green%[2] | Remove Your Phone         
+%nhcolor% 07 "  %green%[1] | Download and Install                                
+%nhcolor% 07 "  %green%[2] | Remove Your Phone        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%File Size : %cyan%92.2MB                                       
-%nhcolor% 07 "  %red%Arch      : %cyan%x64 | x86 | ARM                              
-%nhcolor% 07 "  %red%Servers   : %cyan%Microsoft OneDrive Business                     
-%nhcolor% 07 "  %red%Required Internet for download.                          
+%nhcolor% 07 "  %red%File Size : %cyan%92.2MB                                      
+%nhcolor% 07 "  %red%Arch      : %cyan%x64 | x86 | ARM                             
+%nhcolor% 07 "  %red%Servers   : %cyan%Microsoft OneDrive Business                    
+%nhcolor% 07 "  %red%Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%Microsoft.YourPhone | %cyan%2020.724.243.0   
+%nhcolor% 07 "  %red%Microsoft.YourPhone | %cyan%2020.724.243.0  
 %nhcolor% 07 "  %red%NOTE: YourPhone only works on Compact version
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %white%Last updated - 07/25/2020           
+%nhcolor% 07 "  %white%Last updated - 07/25/2020          
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -8337,14 +8337,14 @@ cd "%GHOST_DATA%" >nul 2>nul
 del /s /q "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" >nul 2>nul
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Store and Xbox Console Companion / %yellow%UWP               
+%nhcolor% 07 "  Microsoft Store and Xbox Console Companion / %yellow%UWP              
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 06 " %green%OPT  %yellow%|     %white%| LIST                                            | %red%SIZE   %white%| %red%Desc
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 06 " %green%[1]  %yellow%| %white%UWP | Microsoft Store & Xbox Console Companion        | %red%188MB  %white%|
-%nhcolor% 06 " %green%[2]  %yellow%| %white%UWP | Removed Microsoft Store and Xbox Apps                                                    
+%nhcolor% 06 " %green%[2]  %yellow%| %white%UWP | Removed Microsoft Store and Xbox Apps                                                   
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 06 " %green%     %yellow%|     %white%| LIST / USERS REQUEST                                       
+%nhcolor% 06 " %green%     %yellow%|     %white%| LIST / USERS REQUEST                                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 06 " %green%[10] %yellow%| %white%UWP | Microsoft 3D Paint [Latest Version]             | %red% 63MB  %white%|
 %nhcolor% 06 " %green%[11] %yellow%| %white%UWP | Microsoft Snip & Sketch [Latest Version]        | %red% 15MB  %white%|
@@ -8366,7 +8366,7 @@ cls
 %nhcolor% 06 " %green%[27] %yellow%| %white%UWP | WhatsApp Desktop x64 [Latest Version]           | %red%154MB  %white%| Windows Version 2004 or higher required
 %nhcolor% 06 " %green%[28] %yellow%| %white%UWP | Telegram Desktop [Latest Version]               | %red% 54MB  %white%|
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 06 " %green%[0]  %yellow%|%white% Back to menu      
+%nhcolor% 06 " %green%[0]  %yellow%|%white% Back to menu     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %red%NOTE: if CONTROL PANEL USING "%yellow%UWP" PLS INSTALL MS STORE. %white%(Intel HD/Realtek/Razer/Alienware/Acer/Asus/etc etc)
 %nhcolor% 07 "  %yellow%NOTE: For Windows 11 user Please update microsoft store before use.
@@ -8610,11 +8610,11 @@ if %ERRORLEVEL% EQU 1 goto startisbacknotfound
 :startisbackfound
 :: SE or nonSE
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition" 2^> nul') do set "var=%%b"
-if "%var%" equ "SUPERLITE SE" ( 
+if "%var%" equ "SUPERLITE SE" (
 goto startisbackchecking
 )
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition" 2^> nul') do set "var=%%b"
-if "%var%" equ "SUPERLITE SE + DEF" ( 
+if "%var%" equ "SUPERLITE SE + DEF" (
 goto startisbackchecking
 )
 goto nonSE
@@ -8624,7 +8624,7 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Win
 if "%var%" equ "14393" goto SKIPSTARTISBACK
 cls
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\StartIsBack" /v "DisplayVersion" 2^>nul') do set "var=%%b"
-if "%var%" equ "2.9.20" ( 
+if "%var%" equ "2.9.20" (
 goto noupdate
 )
 if exist "%Windir%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" goto killstartmenu
@@ -8637,7 +8637,7 @@ taskkill /F /IM StartMenuExperienceHost.exe >nul
 ::NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide cmd /c rd /q /s "%Windir%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy" >nul
 :skipkillstartmenu
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\StartIsBack" /v "DisplayVersion" 2^>nul') do set "var=%%b"
-if "%var%" equ "2.9.20" ( 
+if "%var%" equ "2.9.20" (
 goto noupdate
 )
 goto :getlateststartisback
@@ -8704,18 +8704,18 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Daum Potplayer x64 / x86                                 
+%nhcolor% 07 "  Daum Potplayer x64 / x86                                
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | x64 Download                                         
-%nhcolor% 07 "  %green%[2] | x32 Download                                         
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | x64 Download                                        
+%nhcolor% 07 "  %green%[2] | x32 Download                                        
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%File Size : %cyan%27MB                                         
-%nhcolor% 07 "  %green%Arch      : %cyan%x86 / x64                                    
-%nhcolor% 07 "  %green%Servers   : %cyan%potplayer.daum.net                           
-%nhcolor% 07 "  %green%Required Internet for download.                          
+%nhcolor% 07 "  %green%File Size : %cyan%27MB                                        
+%nhcolor% 07 "  %green%Arch      : %cyan%x86 / x64                                   
+%nhcolor% 07 "  %green%Servers   : %cyan%potplayer.daum.net                          
+%nhcolor% 07 "  %green%Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%Latest version                                           
+%nhcolor% 07 "  %green%Latest version                                          
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -8755,24 +8755,24 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Microsoft Edge Stable / Beta / Dev / Canary (browser)  
+%nhcolor% 07 "  Microsoft Edge Stable / Beta / Dev / Canary (browser) 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | %white%Download Edge Chromium (Stable release) %yellow%(use this version for Tiktok/Messenger/Instagram/etc etc)             
-%nhcolor% 07 "  %green%[2] | %white%Download Edge Chromium (Beta)                        
-%nhcolor% 07 "  %green%[3] | %white%Download Edge Chromium (Developer)                          
-%nhcolor% 07 "  %green%[4] | %white%Download Edge Chromium (Canary)  
+%nhcolor% 07 "  %green%[1] | %white%Download Edge Chromium (Stable release) %yellow%(use this version for Tiktok/Messenger/Instagram/etc etc)            
+%nhcolor% 07 "  %green%[2] | %white%Download Edge Chromium (Beta)                       
+%nhcolor% 07 "  %green%[3] | %white%Download Edge Chromium (Developer)                         
+%nhcolor% 07 "  %green%[4] | %white%Download Edge Chromium (Canary) 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 " %red% NOTE: For Windows 11 to use UWP Apps tiktok/reddit/messenger/facebook/etc, please enable adminfilter option 42.
-%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"   
-%nhcolor% 07 "  %green%[5] | %white%Download Webview2  
-%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"                     
-%nhcolor% 07 "  %green%[0] | %white%Back to menu                                        
+%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"  
+%nhcolor% 07 "  %green%[5] | %white%Download Webview2 
+%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"                    
+%nhcolor% 07 "  %green%[0] | %white%Back to menu                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Servers : %cyan%microsoft                                      
-%nhcolor% 07 "  Arch    : %cyan%x86 / x64                                      
-%nhcolor% 07 "  Required Internet for download.                          
+%nhcolor% 07 "  Servers : %cyan%microsoft                                     
+%nhcolor% 07 "  Arch    : %cyan%x86 / x64                                     
+%nhcolor% 07 "  Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  Version : Latest                                         
+%nhcolor% 07 "  Version : Latest                                        
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -8839,16 +8839,16 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo  %white%Mozilla Firefox (browser)                                
+echo  %white%Mozilla Firefox (browser)                               
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %green%[1] %white%Download                                             
-echo  %green%[0] %white%Back to menu                                         
+echo  %green%[1] %white%Download                                            
+echo  %green%[0] %white%Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  Servers : %yellow%mozilla                                        
-echo  Arch    : %yellow%x86 / x64                                      
-echo  %white%Required Internet for download.                          
+echo  Servers : %yellow%mozilla                                       
+echo  Arch    : %yellow%x86 / x64                                     
+echo  %white%Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %green%Version : %white%Latest                                         
+echo  %green%Version : %white%Latest                                        
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -8906,13 +8906,13 @@ for /f "tokens=2 delims=()" %%a in ('wmic timezone get caption /value') do set t
 ::for /f "tokens=5,*" %%f in ('powercfg -list ^| findstr \*') do set PWRPLAN1=%%f
 ::for /f "tokens=6,*" %%f in ('powercfg -list ^| findstr \*') do set PWRPLAN2=%%f
 FOR /F "tokens=2*" %%A in ('
-    REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v DisplayVersion 2^> nul 
+    REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v DisplayVersion 2^> nul
 ') do set "CODENAME=%bg_green%%lblack% %%B "
 FOR /F "tokens=2*" %%A in ('
-    REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Edition 2^> nul 
+    REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Edition 2^> nul
 ') do set "Edition=%bg_lgreen%%lblack% %%B "
 FOR /F "tokens=2*" %%A in ('
-    REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Youtube_DL 2^> nul 
+    REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Youtube_DL 2^> nul
 ') do set "YT_DL=%%B"
 ::for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 ::if "%var%" equ "22000" (
@@ -8960,20 +8960,20 @@ goto error_7zp
 :op14
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo  Google Chrome (browser)                                  
+echo  Google Chrome (browser)                                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 echo  %red%[1] %white%Download - Standalone x64 x86
-::echo  %red%[2] %white%Download (Standalone Install) - x64 (68MB)                                          
+::echo  %red%[2] %white%Download (Standalone Install) - x64 (68MB)                                         
 ::echo  %red%[3] %white%Download (Standalone Install) - x86 (66MB)
 ::http://dl.google.com/update2/installers/ChromeSetup.exe
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %red%[0] %green%Back to menu                                         
+echo  %red%[0] %green%Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %cyan%Servers : Google                                         
-echo  %cyan%Arch    : x86 / x64                                      
-echo  %cyan%Required Internet for download.                          
+echo  %cyan%Servers : Google                                        
+echo  %cyan%Arch    : x86 / x64                                     
+echo  %cyan%Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %cyan%Version : Latest                                         
+echo  %cyan%Version : Latest                                        
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -9141,16 +9141,16 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo   %white%Visual C++ Redistributables AIO x86 x64 (80)                 
+echo   %white%Visual C++ Redistributables AIO x86 x64 (80)                
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 echo   %green%[1] %white%Microsoft Visual C++ 2002-2003-2005-2008-2010-2012-2013-2022 (AIO)
 echo   %green%[2] %white%Microsoft Visual C++ 2015-2017-2019-2022 %yellow%v17 %red%x64-x86
-echo   %green%[0] %white%Back to menu 
+echo   %green%[0] %white%Back to menu
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 echo   %red%File Size : 29.6MB
 echo   %red%Arch      : x86 / x64
 echo   %red%Servers   : github
-echo   %red%Required Internet for download. 
+echo   %red%Required Internet for download.
 echo   %red%NOTE: If of some software cannot be install or running please try Option 2.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 echo   Latest version
@@ -9320,17 +9320,17 @@ echo off
 color 0E
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo  %white%DirectX Runtime Web Installer                            
+echo  %white%DirectX Runtime Web Installer                           
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [1]  | %green%Online Installer      
-%nhcolor% 03 "  [2]  | %green%Offline Installer %yellow%(95.6MB)                              
-%nhcolor% 03 "  [0]  | %green%Back to menu                                         
+%nhcolor% 03 "  [1]  | %green%Online Installer     
+%nhcolor% 03 "  [2]  | %green%Offline Installer %yellow%(95.6MB)                             
+%nhcolor% 03 "  [0]  | %green%Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %red%Servers : Microsoft                                      
-echo  %red%Arch    : x86 / x64                                      
-echo  %red%Required Internet for download.                          
+echo  %red%Servers : Microsoft                                     
+echo  %red%Arch    : x86 / x64                                     
+echo  %red%Required Internet for download.                         
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %red%Latest version                                           
+echo  %red%Latest version                                          
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -10436,7 +10436,7 @@ cls
 winget install -e --silent --accept-source-agreements --accept-package-agreements --id 9MZ95KL8MR0L
 timeout /t 2 >nul
 RD /S /Q "%GHOST_TEMP%\Winget" >nul 2>nul
-cls 
+cls
 goto snipsnips01
 ::Old
 cd "%GHOST_DATA%"
@@ -10730,7 +10730,7 @@ echo. The program is being installed... Wait for the operation to complete.
 timeout /t 3 >nul
 cd "IOBit.Driver.Booster.v9.3.0.209.repack"
 FOR %%i in ("Driver.Booster.*.exe") do Set FileName="%%i"
-%FileName% /VERYSILENT /I /EN   
+%FileName% /VERYSILENT /I /EN  
 cd..
 rd /s /q "IOBit.Driver.Booster.v9.3.0.209.repack" >nul 2>nul
 timeout /t 2 >nul
@@ -10840,17 +10840,17 @@ cls
 cd "%GHOST_DATA%"
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Master Lu (Ludashi)%yellow% - Portable                  
+%nhcolor% 07 "  Master Lu (Ludashi)%yellow% - Portable                 
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | MasterLU - 5.1020.1295.1215 (Classic)                               
-%nhcolor% 07 "  %green%[0] | Back to menu                                         
+%nhcolor% 07 "  %green%[1] | MasterLU - 5.1020.1295.1215 (Classic)                              
+%nhcolor% 07 "  %green%[0] | Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%Language : %cyan%Only Available in Chinese Language.                           
-%nhcolor% 07 "  %green%Arch     : %cyan%x64                                                            
-%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------" 
-%nhcolor% 07 "  %red%Master Lu is a professional and excellent hardware detection tool in China. 
-%nhcolor% 07 "  %red%Master Lu has Hardware Computer Testing, Performance Testing, Real-time Temperature detection, Battery protection, 
-%nhcolor% 07 "  %red%Computer Protection, Driver Update, CPU / GPU / Phones Ranking, Mobile phone evaluation and other functions. 
+%nhcolor% 07 "  %green%Language : %cyan%Only Available in Chinese Language.                          
+%nhcolor% 07 "  %green%Arch     : %cyan%x64                                                           
+%nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
+%nhcolor% 07 "  %red%Master Lu is a professional and excellent hardware detection tool in China.
+%nhcolor% 07 "  %red%Master Lu has Hardware Computer Testing, Performance Testing, Real-time Temperature detection, Battery protection,
+%nhcolor% 07 "  %red%Computer Protection, Driver Update, CPU / GPU / Phones Ranking, Mobile phone evaluation and other functions.
 %nhcolor% 07 " ====================================================================================================================="
 set /p op=Type option:
 if "%op%" equ "1" goto LuDaShi1
@@ -10890,10 +10890,10 @@ wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/LuDaShi.5.102
 echo %white%=======================================================================
 cls
 :ludashinote
-%nhcolor% 07 "  Do you want Install now?                 
+%nhcolor% 07 "  Do you want Install now?                
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[1] | Yes                                
-%nhcolor% 07 "  %green%[0] | No                                         
+%nhcolor% 07 "  %green%[1] | Yes                               
+%nhcolor% 07 "  %green%[0] | No                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 set /p op=Type option:
 if "%op%" equ "1" goto LuDaShi1yes
@@ -11258,7 +11258,7 @@ goto usersrequest
 :iconspacks
 cls
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto iconspack1st
-if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is not supported for this. && timeout /t 5 >nul && goto ghst 
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is not supported for this. && timeout /t 5 >nul && goto ghst
 cls
 :iconspack1st
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -11270,7 +11270,7 @@ echo %green%Nope...not for this version. Available Only For Version 1909/2004/20
 :iconsmenu
 cls
 %nhcolor% 07 " ====================================================================================================================="
-%nhcolor% 07 "  Ghost Personalize - Icons Pack                                       
+%nhcolor% 07 "  Ghost Personalize - Icons Pack                                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %yellow%[1] %cyan%> %green%Default Windows 10/11 Icons Pack
 %nhcolor% 07 "  %yellow%[2] %cyan%> %green%ARC Regular Blue Icons Pack
@@ -12064,7 +12064,7 @@ goto YTCONS
 cls
 :youwhotemate
 cls
-%nhcolor% 07 " You want to Enable Youtube Downloader Features? 
+%nhcolor% 07 " You want to Enable Youtube Downloader Features?
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %green%[1] | > %white%YES
 %nhcolor% 07 "  %green%[2] | > %white%NO
@@ -13070,7 +13070,7 @@ start https://bit.ly/3oPzo8a
 goto begin
 :web21H1
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionId') do set "var=%%b"
-if "%var%" equ "Core" ( 
+if "%var%" equ "Core" (
 start https://www.youtube.com/watch?v=cSUr-BZMgWA
 goto begin
 )
@@ -13078,7 +13078,7 @@ start https://bit.ly/3x0SlWQ
 goto begin
 :web2009
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionId') do set "var=%%b"
-if "%var%" equ "Core" ( 
+if "%var%" equ "Core" (
 start https://www.youtube.com/watch?v=cSUr-BZMgWA
 goto begin
 )
@@ -13138,10 +13138,10 @@ for /f "tokens=2 delims=()" %%a in ('wmic timezone get caption /value') do set t
 ::for /f "tokens=5,*" %%f in ('powercfg -list ^| findstr \*') do set PWRPLAN1=%%f
 ::for /f "tokens=6,*" %%f in ('powercfg -list ^| findstr \*') do set PWRPLAN2=%%f
 FOR /F "tokens=2*" %%A in ('
-    REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v DisplayVersion 2^> nul 
+    REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v DisplayVersion 2^> nul
 ') do set "CODENAME=%bg_green%%lblack% %%B "
 FOR /F "tokens=2*" %%A in ('
-    REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Edition 2^> nul 
+    REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Edition 2^> nul
 ') do set "Edition=%bg_lgreen%%lblack% %%B "
 ::for /f "tokens=11 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set TPMVER=%%i
 ::for /f "tokens=2 delims=," %%i in ('wmic /namespace:\\root\cimv2\security\microsofttpm path win32_tpm get * /format:csv 2^> nul') do set TPM=%%i
@@ -13264,7 +13264,7 @@ goto begin
 
 :winstore11
 cls
-echo This version only for windows 10, i will upload soon for windows 11 please wait a few days ty. 
+echo This version only for windows 10, i will upload soon for windows 11 please wait a few days ty.
 timeout /t 10 >nul
 goto begin
 
@@ -14945,7 +14945,7 @@ cls
 %nhcolor% 07 "  %green%[4] | %white%Here's is the list of all the supported sites.
 %nhcolor% 07 "  %green%[5] | %white%Tutorial How to Download from Youtube. %cyan%https://dai.ly/k3S3CBo3AISVU3zv54i
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %green%[0] | %white%Back to menu                                        
+%nhcolor% 07 "  %green%[0] | %white%Back to menu                                       
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "      | %white%Press %cyan%0 %white%to Cancel or Back
 %nhcolor% 07 "      | %white%Files you've download are automatically saved in  | %red%'%GHOST_DIR%\Youtube Video' %white% |
@@ -14973,7 +14973,7 @@ goto startyoutubexx
 :YTWEBSITE2
 start https://bit.ly/3uYAQb2
 goto youwhotemate
-:YTWEBSITE 
+:YTWEBSITE
 start https://bit.ly/2R8pYWP
 goto startyoutubexx
 
@@ -16221,11 +16221,11 @@ for /f "tokens=4 delims=4,9 " %%a in ('net user "%USERNAME%" ^|find "Local Group
 
 %nhcolor% 07 " ====================================================================================================================="
 echo.
-%nhcolor% 07 "  Accounts Information 
+%nhcolor% 07 "  Accounts Information
 echo.
 ::FOR /F "tokens=* delims=0" %%A in ('net user %USERNAME%') do ECHO.%%A
 FOR /F "tokens=1 delims=," %%G in ('net user "%USERNAME%"') do @echo   %%G
-::%nhcolor% 07 "  %white%Current User     : %yellow%%USERNAME% %Magenta% 
+::%nhcolor% 07 "  %white%Current User     : %yellow%%USERNAME% %Magenta%
 ::%nhcolor% 07 "  %white%Account expires  : %yellow%%AXP1%
 ::%nhcolor% 07 "  %white%Password expires : %yellow%%AXP2%
 ::%nhcolor% 07 "  %white%Local Group      : %yellow%%AXP3%
@@ -16236,7 +16236,7 @@ echo.
 %nhcolor% 03 "  [3]  | %green%Add user with microsoft accounts %yellow%(email) %green%/ Change Administrator username / Delete users / Etc
 %nhcolor% 03 "  [4]  | %green%Set Current User Password to %yellow%Never Expires
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %green%Back to menu                         
+%nhcolor% 03 "  [0]  | %green%Back to menu                        
 %nhcolor% 07 " ====================================================================================================================="
 %nhcolor% 06 ""
 set /p op=%yellow%Type option:%white%
@@ -16269,7 +16269,7 @@ echo  %white%Created Your new username and password %yellow%(without Symbol) %cy
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  %red%NOTE: Don't forget set your new user to Administrator Group. (recommends)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %green%Back to menu                                      
+%nhcolor% 03 "  [0]  | %green%Back to menu                                     
 %nhcolor% 07 " ====================================================================================================================="
 echo.
 :username
@@ -16549,7 +16549,7 @@ goto :firstrun
 :standaloneupdate
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo   %white%Standalone Windows Update                       
+echo   %white%Standalone Windows Update                      
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  [1]  | %green%Check for latest updates. If updates are available.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -16558,7 +16558,7 @@ echo   %white%Standalone Windows Update
 %nhcolor% 03 "  [2]  | %green%Enable (message popup)
 %nhcolor% 03 "  [3]  | %green%Disable (message popup)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [0]  | %green%Back to menu                                         
+%nhcolor% 03 "  [0]  | %green%Back to menu                                        
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -16607,7 +16607,7 @@ cls
 %nhcolor% D3 " %white%FxSound                                                                                                                "
 %nhcolor% 03 " [3] | %white%FxSound                                                         | x64  |  64MB  |
 %nhcolor% D3 " %white%Old Version for Windows 10                                                                                             "
-%nhcolor% 03 " [4] | %white%Old Version for Windows 10                                      
+%nhcolor% 03 " [4] | %white%Old Version for Windows 10                                     
 %nhcolor% 08 " [0] | Back to menu                                                                                                     "
 echo.
 set /p firstindex=" %red%Type option : "
@@ -17045,10 +17045,10 @@ del /q /f /s "analytic" >nul 2>nul
 cls
 %nhcolor% D3 " %white% Upscaling AMD FSR / Nvidia Image Scaling | Game Monitor OSD | Etc                                                    "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [1]  | %white%Upscaling Tools " 
-%nhcolor% 03 " [2]  | %white%Game Monitor OSD" 
-%nhcolor% 03 " [3]  | %white%Old Tweaked Windows 10" 
-%nhcolor% 03 " [0]  | %green%Back to menu                                         
+%nhcolor% 03 " [1]  | %white%Upscaling Tools "
+%nhcolor% 03 " [2]  | %white%Game Monitor OSD"
+%nhcolor% 03 " [3]  | %white%Old Tweaked Windows 10"
+%nhcolor% 03 " [0]  | %green%Back to menu                                        
 %nhcolor% 07 " ======================================================================================================================"
 set /p firstindex=" %red%Type option : "
 if "%firstindex%" equ "1" goto upS01
@@ -17065,14 +17065,14 @@ goto gamingmode
 cls
 %nhcolor% D3 " %white% Upscaling AMD FSR / Nvidia Image Scaling                                                                             "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [1]  | %white%Magpie v0.10.1 " 
-%nhcolor% 03 " [2]  | %white%Lossless Scaling 2.6.0.6 " 
+%nhcolor% 03 " [1]  | %white%Magpie v0.10.1 "
+%nhcolor% 03 " [2]  | %white%Lossless Scaling 2.6.0.6 "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [3]  | %white%How to Use upscaling tools " 
+%nhcolor% 03 " [3]  | %white%How to Use upscaling tools "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [0]  | %green%Back to menu                                         
+%nhcolor% 03 " [0]  | %green%Back to menu                                        
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " %yellow%How to use > The game must be running in windowed mode. 
+%nhcolor% 03 " %yellow%How to use > The game must be running in windowed mode.
 %nhcolor% 03 " %yellow%e.g your native screen 1080p > set in-game 720p window mode then use upscaling shortcut key.
 echo.
 %nhcolor% 03 " %red%NOTE: If cant launch please install Visual C++ Redistributables AIO.
@@ -17124,11 +17124,11 @@ goto upS01
 cls
 %nhcolor% D3 " %white%Game Monitor OSD                                                                                                      "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [1]  | %white%CapFrameX + Monitor + Analysis + Etc" 
-%nhcolor% 03 " [2]  | %white%MSI Afterburner + Monitor + GPU Overclocking + Etc" 
-%nhcolor% 03 " [3]  | %white%GamePP + Monitor + Benchmark + Upscaling + Reshade + Etc (Language: english+chinese)" 
+%nhcolor% 03 " [1]  | %white%CapFrameX + Monitor + Analysis + Etc"
+%nhcolor% 03 " [2]  | %white%MSI Afterburner + Monitor + GPU Overclocking + Etc"
+%nhcolor% 03 " [3]  | %white%GamePP + Monitor + Benchmark + Upscaling + Reshade + Etc (Language: english+chinese)"
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [0]  | %green%Back to menu                                         
+%nhcolor% 03 " [0]  | %green%Back to menu                                        
 %nhcolor% 07 " ======================================================================================================================"
 set /p firstindex=" %red%Type option : "
 if "%firstindex%" equ "1" goto osd001
@@ -17174,7 +17174,7 @@ goto upS02
 cls
 %nhcolor% D3 " %white%Old Tweak                                                                                                             "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [1]  | %white%HPET (High Precision Event Timer) " 
+%nhcolor% 03 " [1]  | %white%HPET (High Precision Event Timer) "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " %white%Windows 10 Startup Delay (Boot up times login screen)                                           "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
@@ -17200,7 +17200,7 @@ cls
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " [14] | %white%Enable or Disable                                                                                   "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [0]  | %green%Back to menu                                         
+%nhcolor% 03 " [0]  | %green%Back to menu                                        
 %nhcolor% 07 " ======================================================================================================================"
 set /p firstindex=" %red%Type option : "
 if "%firstindex%" equ "1" goto gamingmodehpet
@@ -17225,17 +17225,17 @@ cls
 cd "%GHOST_DATA%"                                                                                       "
 %nhcolor% 03 " %white%HPET (High Precision Event Timer)                                        "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [1]  | %white%HPET Disable                                                   
+%nhcolor% 03 " [1]  | %white%HPET Disable                                                  
 %nhcolor% 03 " [2]  | %white%HPET Enable %red%(not recommended for AMD Cards)
 %nhcolor% 03 " [3]  | %white%Set to Default %yellow%(Windows 10)
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " %white%HPET (High Precision Event Timer) / DynamicTick / Tscsync - (V2)
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [4]  | %white%HPET: Enable  / Dynamictick: Yes / Tscsync: Enhanced %red%(not recommended for AMD Cards)         
-%nhcolor% 03 " [5]  | %white%HPET: Disable / Dynamictick: Yes / Tscsync: Enhanced                 
-%nhcolor% 03 " [6]  | %white%Set to Default %yellow%(Windows 10)        
+%nhcolor% 03 " [4]  | %white%HPET: Enable  / Dynamictick: Yes / Tscsync: Enhanced %red%(not recommended for AMD Cards)        
+%nhcolor% 03 " [5]  | %white%HPET: Disable / Dynamictick: Yes / Tscsync: Enhanced                
+%nhcolor% 03 " [6]  | %white%Set to Default %yellow%(Windows 10)       
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [0]  | %green%Back to menu             
+%nhcolor% 03 " [0]  | %green%Back to menu            
 %nhcolor% 07 " ======================================================================================================================"
 set /p firstindex=" %red%Type option : "
 if "%firstindex%" equ "1" goto gamingmode1
@@ -17250,7 +17250,7 @@ color 0b
 echo This function not available yet
 timeout /t 2 >nul
 cls
-goto gamingmodehpet                                                         
+goto gamingmodehpet                                                        
 :gamingmode1
 cls
 bcdedit /set useplatformclock false
@@ -17258,7 +17258,7 @@ cls
 echo HPET is disable
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto gamingmodehpet
@@ -17269,7 +17269,7 @@ cls
 echo HPET is enable
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto gamingmodehpet
@@ -17280,7 +17280,7 @@ cls
 echo Set to default Windows 10
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto gamingmodehpet
@@ -17293,7 +17293,7 @@ cls
 echo HPET Enable / Dynamictick Yes / Tscsync Enhanced
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto gamingmodehpet
@@ -17306,7 +17306,7 @@ cls
 echo HPET Disable / Dynamictick Yes / Tscsync Enhanced
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto gamingmodehpet
@@ -17319,7 +17319,7 @@ cls
 echo Set to default Windows 10
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto gamingmodehpet
@@ -17330,7 +17330,7 @@ cls
 echo Windows 10 Startup Delay is disable
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto upS03
@@ -17341,7 +17341,7 @@ cls
 echo Windows 10 Startup Delay is set to default
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto upS03
@@ -17353,7 +17353,7 @@ cls
 echo Disable mitigations for CVE-2017-5715 (Spectre Variant 2) and CVE-2017-5754 (Meltdown)
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto upS03
@@ -17365,7 +17365,7 @@ cls
 echo Enable mitigations for CVE-2017-5715 (Spectre Variant 2) and CVE-2017-5754 (Meltdown)
 timeout /t 2 >nul
 cls
-echo Restart the computer for the changes to take effect. 
+echo Restart the computer for the changes to take effect.
 timeout /t 2 >nul
 cls
 goto upS03
@@ -19944,11 +19944,11 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto nvx64
-if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is not supported for this Drivers. && timeout /t 5 >nul && goto usersrequest 
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is not supported for this Drivers. && timeout /t 5 >nul && goto usersrequest
 :nvx64
 REG QUERY "HKEY_CURRENT_USER\SOFTWARE\NVIDIA Corporation" >nul 2>&1
 if %ERRORLEVEL% EQU 0 goto nvdown
-if %ERRORLEVEL% EQU 1 echo %white%Sorry.. you are not using Nvidia Video Card. && timeout /t 8 >nul && goto usersrequest 
+if %ERRORLEVEL% EQU 1 echo %white%Sorry.. you are not using Nvidia Video Card. && timeout /t 8 >nul && goto usersrequest
 :nvdown
 cls
 ::echo %white%If you cant download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
@@ -21575,27 +21575,27 @@ goto usersrequest
 color 07
 cls
 %nhcolor% 07 " ====================================================================================================================="
-echo  Game Client                                
+echo  Game Client                               
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 08 "  %green%[1]  %yellow%> %white%Steam          
-%nhcolor% 08 "  %green%[2]  %yellow%> %white%Origin         
+%nhcolor% 08 "  %green%[1]  %yellow%> %white%Steam         
+%nhcolor% 08 "  %green%[2]  %yellow%> %white%Origin        
 %nhcolor% 08 "  %green%[3]  %yellow%> %white%Ubisoft Connect
-%nhcolor% 08 "  %green%[4]  %yellow%> %white%GOG GALAXY 2.0 
-%nhcolor% 08 "  %green%[5]  %yellow%> %white%Epic Games     
-%nhcolor% 08 "  %green%[6]  %yellow%> %white%Battle.net     
-%nhcolor% 08 "  %green%[7]  %yellow%> %white%itch.io        
-%nhcolor% 08 "  %green%[8]  %yellow%> %white%Bethesda Net   
-%nhcolor% 08 "  %green%[9]  %yellow%> %white%EA App         
+%nhcolor% 08 "  %green%[4]  %yellow%> %white%GOG GALAXY 2.0
+%nhcolor% 08 "  %green%[5]  %yellow%> %white%Epic Games    
+%nhcolor% 08 "  %green%[6]  %yellow%> %white%Battle.net    
+%nhcolor% 08 "  %green%[7]  %yellow%> %white%itch.io       
+%nhcolor% 08 "  %green%[8]  %yellow%> %white%Bethesda Net  
+%nhcolor% 08 "  %green%[9]  %yellow%> %white%EA App        
 %nhcolor% 08 "  %green%[10] %yellow%> %white%Xbox App %red%(For Windows 10 20H2/21H1 or higher)
-%nhcolor% 08 "  %green%[11] %yellow%> %white%Rockstar Games Launcher      
-%nhcolor% 08 "  %green%[12] %yellow%> %white%Amazon Games App   
+%nhcolor% 08 "  %green%[11] %yellow%> %white%Rockstar Games Launcher     
+%nhcolor% 08 "  %green%[12] %yellow%> %white%Amazon Games App  
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %green%[0] %white%Back to menu                                         
+echo  %green%[0] %white%Back to menu                                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 echo  %red%NOTE: Please install %yellow%"Visual C++ Redistributables AIO" %red%before Install this game client.
-echo  %red%NOTE: Required Internet for download.                         
+echo  %red%NOTE: Required Internet for download.                        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-echo  %yellow%Version : Latest                                     
+echo  %yellow%Version : Latest                                    
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -23914,7 +23914,7 @@ goto :AndroidWSA2304
 :startAndroidWSA2304YT
 start https://youtu.be/8X32xaEBhAA
 cls
-goto AndroidWSA2304 
+goto AndroidWSA2304
 
 :ANDROIDX2304NON
 cd "%GHOST_DIR%"
@@ -24993,7 +24993,7 @@ goto :AndroidWSA2305
 :startAndroidWSA2305YT
 start https://youtu.be/8X32xaEBhAA
 cls
-goto AndroidWSA2305 
+goto AndroidWSA2305
 
 :ANDROIDX2305NON
 cd "%GHOST_DIR%"
@@ -26108,7 +26108,7 @@ goto :AndroidWSA2309
 :startAndroidWSA2309YT
 start https://youtu.be/8X32xaEBhAA
 cls
-goto AndroidWSA2309 
+goto AndroidWSA2309
 
 :ANDROIDX2309NON
 cd "%GHOST_DIR%"
@@ -27418,7 +27418,7 @@ cls
 ::%nhcolor% 07 " %red%(NOTE: To using Latest Xbox App OS Build 1904x.1055 or Higher OS Build is required)
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 08 "  %green%[1] %yellow%> %white%Xbox App %red%
-%nhcolor% 08 "  %green%[0] %yellow%> %white%Back          
+%nhcolor% 08 "  %green%[0] %yellow%> %white%Back         
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
 set /p op=Type option:
@@ -28064,11 +28064,11 @@ cls
 :startALLBX
 cls
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition" 2^> nul') do set "var=%%b"
-if "%var%" equ "SUPERLITE SE" ( 
+if "%var%" equ "SUPERLITE SE" (
 goto installstartallback
 )
 for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition" 2^> nul') do set "var=%%b"
-if "%var%" equ "SUPERLITE SE + DEF" ( 
+if "%var%" equ "SUPERLITE SE + DEF" (
 goto installstartallback
 )
 
@@ -28109,7 +28109,7 @@ del /q /f /s "StartAllBack.v3.7.8.bin" >nul
 echo %white%=======================================================================
 )
 :: Uhub
-cls 
+cls
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/scl/fi/aubzeqrcqiqfs982mtcut/StartAllBack.v3.7.8.bin?rlkey=uj31mroy31c88z7j6babmzp4c&dl=1" -t 5 -O"StartAllBack.v3.7.8.bin"
 ::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/ac93deef" -t 5 -O"StartAllBack.v3.7.8.bin"
 timeout /t 2 >nul
@@ -28238,7 +28238,7 @@ if "%var%" equ "22631" cls && goto WIN11L
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%" equ "19045" cls && goto WIN11L
 cls
-echo  Only for Windows 10 22H2 / windows 11 22H2 / 23H2 or higher version. && timeout /t 4 >nul && goto begin 
+echo  Only for Windows 10 22H2 / windows 11 22H2 / 23H2 or higher version. && timeout /t 4 >nul && goto begin
 :WIN11L
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
 if "%var%" equ "22621" (
@@ -28680,7 +28680,7 @@ goto start
 echo.
 %nhcolor% 09 "  %white%Copilot Preview
 echo.
-%nhcolor% 09 " %yellow% [1] %white% Copilot is > %CopilotTEXT% 
+%nhcolor% 09 " %yellow% [1] %white% Copilot is > %CopilotTEXT%
 
 echo.
 %nhcolor% 09 " %yellow% [0] %white% Back to main menu

@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :Target_Type
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 1
- 
+
 	rem ###### SET ######
 	if "%~1" neq "" (
 		set "Target_Type=%~1"
@@ -26,10 +26,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo 3^) All
 		echo 4^) Go Back
 		echo 5^) Exit
-    
-		%dk_call% dk_echo 
+   
+		%dk_call% dk_echo
 		%dk_call% dk_echo "Please select a build type."
-    
+   
 		%dk_call% dk_keyboardInput
 		rem %dk_call% dk_keyboardInputTimeout 1 60
 

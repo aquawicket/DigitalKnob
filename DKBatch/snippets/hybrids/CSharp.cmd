@@ -11,7 +11,7 @@ setlocal
 	:found_version
 	set csc=%framework%\%version%\csc.exe
 	set program=%~n0.exe
-	call %csc% /nologo /out:"%program%" "%~dpsfnx0" 
+	call %csc% /nologo /out:"%program%" "%~dpsfnx0"
 	%program%
 endlocal & set "exit_code=%ERRORLEVEL%" & del /f "%program%"
 echo exit_code = %exit_code% && pause

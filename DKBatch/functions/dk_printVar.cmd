@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -14,9 +14,9 @@ if "%dk_printVar_ENABLE%" neq "1" (%return%)
 :dk_printVar
 %setlocal%
     ::%dk_call% dk_debugFunc 1
-    
+   
     %dk_call% dk_isVariableName "%~1" || dk_return
-    
+   
     :array
 		if not defined %~1[0] goto pointer
         set /a "n=0"
@@ -30,7 +30,7 @@ if "%dk_printVar_ENABLE%" neq "1" (%return%)
 			if "!DE!" equ "" %dk_call% dk_echo "%cyan% ARRAY:%~1[%n%] =%blue% !%~1[%n%]! %clr%"
 
             set /a n+=1
-        goto :loop1 
+        goto :loop1
 	dk_return
 
     :pointer

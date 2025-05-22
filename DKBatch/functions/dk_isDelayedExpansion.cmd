@@ -1,10 +1,10 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)" 
+set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)"
 
 ::####################################################################
 ::# dk_isDelayedExpansion(<ret>:OPTIONAL)

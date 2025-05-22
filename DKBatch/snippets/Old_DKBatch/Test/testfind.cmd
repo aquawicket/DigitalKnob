@@ -32,5 +32,5 @@ if %errorlevel% == 1 (
 ) else (
     echo APP ALREADY INSTALLED
 )
- 
-%DKEND% 
+
+%DKEND%

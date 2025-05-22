@@ -445,11 +445,10 @@ function(dk_importVariables)
 #	if(NOT Target_Tuple)
 #		return()
 #	endif()
-	dk_validate(Target_Tuple "dk_Target_Tuple()")
-	dk_assertVar(Target_Tuple)
 	
 	# <PLUGIN>_TUPLE_DIR
 	dk_unset(${CURRENT_PLUGIN}_TUPLE_DIR)
+#	dk_validate(Target_Tuple "dk_Target_Tuple()")
 	if(Target_Tuple)
 		dk_set(${CURRENT_PLUGIN}_TUPLE_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple})
 		dk_printVar(${CURRENT_PLUGIN}_TUPLE_DIR)						# ZLIB_TUPLE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
@@ -457,7 +456,7 @@ function(dk_importVariables)
 	
 	# <PLUGIN>_CONFIG_DIR
 	dk_unset(${CURRENT_PLUGIN}_CONFIG_DIR)
-	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
+#	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 	if(CONFIG_PATH)
 		dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${CONFIG_PATH})
 		dk_printVar(${CURRENT_PLUGIN}_CONFIG_DIR)						# ZLIB_CONFIG_DIR: C:/Users/user/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
@@ -465,7 +464,7 @@ function(dk_importVariables)
 	
 	# <PLUGIN>_BUILD_DIR
 	dk_unset(${CURRENT_PLUGIN}_BUILD_DIR)
-	dk_validate(BUILD_PATH "dk_CONFIG_PATH()")
+#	dk_validate(BUILD_PATH "dk_CONFIG_PATH()")
 	if(BUILD_PATH)
 		dk_set(${CURRENT_PLUGIN}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${BUILD_PATH})
 		dk_printVar(${CURRENT_PLUGIN}_BUILD_DIR)						# ZLIB_BUILD_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug

@@ -1,7 +1,7 @@
 @if (@X)==(@Y) @end /* javascript comment
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -19,20 +19,20 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     )
 
     ::if not exist "%~n0.exe" (
-        "%jsc%" /nologo /out:"dk_PPID.exe" "%~dpsfnx0" 
+        "%jsc%" /nologo /out:"dk_PPID.exe" "%~dpsfnx0"
     ::)
 
     :exe_exists
     for /F "tokens=* USEBACKQ" %%F IN (`dk_PPID.exe`) do (
         set "PPID=%%F"
     )
-    
-    
+   
+   
     if not defined PPID (dk_PPID.exe)
     if not defined PPID (set "PPID=%errorlevel%")
-    
+   
     if defined PPID (echo PPID = %PPID%)
-    
+   
     if not defined PPID (%dk_call% dk_error "Could not get PPID")
     endlocal & (
 		set "PPID=%PPID%"
@@ -50,10 +50,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
     %dk_call% dk_PPID PPID
     %dk_call% dk_printVar PPID
-    
+   
     %dk_call% dk_PPID PPID
     %dk_call% dk_printVar PPID
-    
+   
     %dk_call% dk_PPID PPID
     %dk_call% dk_printVar PPID
 %endfunction%

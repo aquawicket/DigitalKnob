@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -22,10 +22,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_notice "TCC_RT_EXE:%TCC_RT_EXE% already found"
 		%return%
 	)
-	%dk_call% dk_echo   
+	%dk_call% dk_echo  
     %dk_call% dk_info "Installing tcc . . ."
     %dk_call% dk_download %TCC_RT_IMPORT%
-    
+   
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_basename "%TCC_RT_IMPORT%" TCC_RT_IMPORT_FILE
 	

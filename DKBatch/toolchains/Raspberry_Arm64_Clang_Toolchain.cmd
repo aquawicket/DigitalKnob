@@ -15,7 +15,7 @@ rem %dk_call% dk_depend 	build-essential
 ::%dk_call% dk_depend clang
 ::%dk_call% dk_depend make	
 rem  %dk_call% dk_append 	CMAKE_C_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11 				&rem -march=armv7l
-rem  %dk_call% dk_append 	CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs 	&rem -march=armv7l 
-rem  %dk_call% dk_append 	DKCONFIGURE_CFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11 				&rem -march=armv7l 
+rem  %dk_call% dk_append 	CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs 	&rem -march=armv7l
+rem  %dk_call% dk_append 	DKCONFIGURE_CFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11 				&rem -march=armv7l
 rem  %dk_call% dk_append 	DKCONFIGURE_CXXFLAGS		-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs 	&rem -march=armv7l
 rem  %dk_call% dk_append 	CMAKE_EXE_LINKER_FLAGS		"-static"  &rem  -s

@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#     process:  the name of the task to kill.  I.E. cale.exe
 ::#
 ::#     Example:  %dk_call% dk_killProcess iexplore.exe
-::#    
+::#   
 :dk_killProcess
 %setlocal%
 	%dk_call% dk_debugFunc 1
@@ -31,7 +31,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 %setlocal%
 	%dk_call% dk_debugFunc 0
-   
+  
     start mspaint.exe
     %dk_call% dk_sleep 3
     %dk_call% dk_killProcess mspaint.exe

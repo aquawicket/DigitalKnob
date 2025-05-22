@@ -1,7 +1,7 @@
 <!-- :
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -14,7 +14,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::######## Pass batch variable into HTA
 set "selections=One;Two;Three"
 for /f "tokens=* delims=" %%a in ('echo %%selections%%^|mshta.exe "%~f0"') do (
-    ::########## Pass Hta variable back to Batch 
+    ::########## Pass Hta variable back to Batch
 	set "rtn_var=%%a"
 )
 endlocal & set "%~1=%rtn_var%"
@@ -38,7 +38,7 @@ echo %rtn_var%
 :DKTEST
 %setlocal%
 	%dk_call% dk_debugFunc 0 99
- 
+
     %dk_call% dk_multiSelect rtn_var "one, two, three"
     %dk_call% dk_printVar rtn_var
 %endfunction%
@@ -49,7 +49,7 @@ echo %rtn_var%
 <html>
     <head>
         <TITLE>dk_multiSelect</TITLE>
-        <HTA:APPLICATION 
+        <HTA:APPLICATION
 			ID="dk_multiSelect"
             APPLICATIONNAME="dk_multiSelect"
             BORDER="thin"
@@ -65,7 +65,7 @@ echo %rtn_var%
             SYSMENU="yes"
             VERSION="1.0"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    </head> 
+    </head>
 	
 <body onLoad='load(event)' onkeypress='keyPress(event)'>
 	<div class="wrapper" style="width:100%">
@@ -112,4 +112,4 @@ echo %rtn_var%
         }
     </script>
 </body>
-</html> 
+</html>

@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_isAlphanumeric
 %setlocal%
 	%dk_call% dk_debugFunc 1 2
- 
+
     ::set "arg1=%~1"
     ::if defined "%~1" call set "arg1=%%%arg1%%%"
     for /f "delims=0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" %%i in ("%~1") do set "bad_characters=%%i"
@@ -25,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		)
         exit /b 0
     )
-    
+   
     set "bad_characters="
     endlocal & (
 		set "dk_isAlphanumeric=false"
@@ -54,7 +54,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_isAlphanumeric 1.23       && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
     %dk_call% dk_isAlphanumeric -42        && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
     %dk_call% dk_isAlphanumeric "36"       && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
-    
+   
     %dk_call% dk_isAlphanumeric "36a"      && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
     %dk_call% dk_isAlphanumeric word       && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
     %dk_call% dk_isAlphanumeric 123456789  && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"

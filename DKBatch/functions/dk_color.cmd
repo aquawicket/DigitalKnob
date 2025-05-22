@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -63,7 +63,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		(set EM=)							&:: End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
 		(set SUB=)							&:: Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
 		(set ESC=)							&:: Escape - Alters the meaning of a limited number of following bytes.
-		(set FS=)							&:: File Separator - Can be used as delimiters to mark fields of data structures. 
+		(set FS=)							&:: File Separator - Can be used as delimiters to mark fields of data structures.
 		(set GS=)							&:: Group Separator
 		(set RS=)							&:: Record Separator
 		(set US=)							&:: Unit Separator - US is the lowest level
@@ -667,7 +667,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo   %bg_RGB%0;0;10m      bg_RGB 0;0;10      %clr%
 	echo   %bg_RGB%0;0;5m      bg_RGB 0;0;5       %clr%
 	echo   %bg_RGB%0;0;0m      bg_RGB 0;0;0       %clr%
-	echo: 
+	echo:
 	echo:
 	echo %black% %bg_lblack%              Combinations              %clr%
 	echo  negative                  %negative%       inverse foreground / background        %clr%
@@ -680,7 +680,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo:
 	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr%
 	echo   %bg_blue%  * * * * * * * *  %bg_white%                                %clr%
-	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr% 
+	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr%
 	echo   %bg_blue%  * * * * * * * *  %bg_white%                                %clr%
 	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr%
 	echo   %bg_blue%  * * * * * * * *  %bg_white%                                %clr%

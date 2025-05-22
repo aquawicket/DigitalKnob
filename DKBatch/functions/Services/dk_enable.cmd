@@ -10,8 +10,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_enable
 %setlocal%
 	%dk_call% dk_debugFunc 0
-	set "SERVICE_NAME=%~1"   
-	  
+	set "SERVICE_NAME=%~1"  
+	 
 	reg add HKLM\SYSTEM\CurrentControlSet\Services\%SERVICE_NAME% /t REG_DWORD /v Start /d 3 /f
 	sc config "%SERVICE_NAME%" start=auto
 	sc start %SERVICE_NAME%

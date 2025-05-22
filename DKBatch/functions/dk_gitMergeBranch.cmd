@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -89,7 +89,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%ERRORLEVEL%" neq "0" (
 		echo THERE WAN AN ERROR COMMITING.
 		goto :conflicts
-	) 
+	)
 
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" push origin %destination%
 
@@ -98,7 +98,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout %branch%
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" merge %destination%
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" push
-	 
+	
 	%dk_call% dk_success "THE MERGE IS COMPLETE."
 %endfunction%
 

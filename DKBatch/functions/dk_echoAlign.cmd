@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_echoAlign
 %setlocal%
-	%dk_call% dk_debugFunc 2  
+	%dk_call% dk_debugFunc 2 
 
     if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     (set^ tmp=%~2)
@@ -67,7 +67,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     for /l %%Z in (1 1 7) do (
         if "!DE!" equ "" set "prep_text=!prep_text!aR"
         if "!DE!" equ "" %dk_call% dk_echoAlign center "!prep_text!"
-        
+       
         if "!DE!" neq "" call set "prep_text=%%prep_text%%aR"
         if "!DE!" neq "" %dk_call% dk_echoAlign center "%%prep_text%%"
     )

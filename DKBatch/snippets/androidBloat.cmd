@@ -1,13 +1,13 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 set "DIGITALKNOB_DIR=%USERPROFILE%\digitalknob"
 set "ADB=%DIGITALKNOB_DIR%\Development\3rdParty\android-sdk\platform-tools\adb.exe"
 
-::set /p Y=Enter adb.exe folder path:    
+::set /p Y=Enter adb.exe folder path:   
 ::cd %Y%
 "%ADB%" devices
 for %%X in (
@@ -407,4 +407,4 @@ goto:eof
 ::Google Login Service ==> "com.google.android.gsf.login"
 ::Explorer ==> "com.mi.android.globalFileexplorer"
 ::Find device ==> "com.xiaomi.finddevice"
-::END-80# 
+::END-80#

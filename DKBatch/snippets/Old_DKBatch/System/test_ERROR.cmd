@@ -37,7 +37,7 @@ echo:
 	
 set ERRORLEVEL=1
 %IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is not 0, and continues"
-echo: 
+echo:
 
 %ERROR% "ERROR: This throws an error, and continues"
 echo:
@@ -57,5 +57,5 @@ echo This will never be reached since the IF_FATAL above exits the program
 %FATAL% "FATAL: This throws an error, and exits the program"
 echo:
 
- 
-%DKEND% 
+
+%DKEND%

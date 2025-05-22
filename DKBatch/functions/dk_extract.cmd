@@ -1,6 +1,6 @@
 @echo off&::########################################## DigitalKnob DKBatch ########################################################################
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_dest_=%~2"
 	
 	if not exist "%_file_%" (%dk_call% dk_error "%_file_% does not exist")
-	 
+	
 	::###### validate destination ######
     ::## if the destination isn't provided, we should extract to a folder named the same as the file
     ::## in the same diretory the archive file is in.
@@ -54,7 +54,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 %setlocal%
     %dk_call% dk_debugFunc 0
- 
+
     %dk_call% dk_selectFile
     %dk_call% dk_extract "%dk_selectFile%"
 %endfunction%
