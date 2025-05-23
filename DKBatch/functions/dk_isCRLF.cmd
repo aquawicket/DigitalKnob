@@ -12,13 +12,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	::%dk_call% dk_debugFunc 1 2
 
-    call type "%~1" | %WINDIR%\System32\find.exe "" /v > "%~1.temp"
+    call type "%~1" | %windir%\System32\find.exe "" /v > "%~1.temp"
     set size1=%~z1
     rem add 2 in case the file doesn't have a trailing newline, since find will add it
     set /a size1plus2=%size1%+2
     call :setsize2 "%~1.temp%"
    
-    for /f %%a in ('%WINDIR%\System32\findstr /R /N "^" "%~1" ^| %WINDIR%\System32\find /C ":"') do set lines=%%a
+    for /f %%a in ('%windir%\System32\findstr /R /N "^" "%~1" ^| %windir%\System32\find /C ":"') do set lines=%%a
     del "%~1.temp"
    
     if "%size1plus2%" equ "%size2%" (

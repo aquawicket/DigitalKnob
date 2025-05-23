@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     ::for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x1b"') do set "ESC=%%b"
    
-	set "CERTUTIL_EXE=%WINDIR\=/%/System32/certutil.exe"
+	set "CERTUTIL_EXE=%windir\=/%/System32/certutil.exe"
 	::%dk_call% dk_validate CERTUTIL_EXE "%dk_call% d_CERTUTIL_EXE"
     %dk_call% %CERTUTIL_EXE% -decodehex %DKCACHE_DIR%/hex.tmp %DKCACHE_DIR%/ascii.tmp >nul
     set "dk_hexToAscii="

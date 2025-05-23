@@ -14,8 +14,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
   
     if exist "%REG_EXE%" (%return%)
 
-	set "REG_EXE=%WINDIR:\=/%/System32/reg.exe"
-	if not exist "%REG_EXE%" (%dk_call% dk_findProgram REG_EXE "reg.exe" "%WINDIR:\=/%/System32")
+	set "REG_EXE=%windir:\=/%/System32/reg.exe"
+	if not exist "%REG_EXE%" (%dk_call% dk_findProgram REG_EXE "reg.exe" "%windir:\=/%/System32")
 	%dk_call% dk_assertPath "%REG_EXE%"
 	
 	endlocal & (

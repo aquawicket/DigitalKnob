@@ -45,7 +45,7 @@ AdminQuietInstCmd=%AdminQuietInstCmd%
 UserQuietInstCmd=%UserQuietInstCmd%
 SourceFiles=SourceFiles
 [SourceFiles]
-SourceFiles0=%WINDIR%\System32\
+SourceFiles0=%windir%\System32\
 [SourceFiles0]
 %FILE0%=
 

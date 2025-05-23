@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     :: <_extension_>  i.e. ".txt"
     set "_extension_=%~1"
    
-    :: <_exe_>  i.e. "%WINDIR\=/%/System32/calc.exe"
+    :: <_exe_>  i.e. "%windir\=/%/System32/calc.exe"
     set "_exe_=%~2"
     if not exist %_exe_% %dk_call% dk_error "%_exe_% does not exist"
     %dk_call% dk_basename "%~2" _exeName_
@@ -93,6 +93,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_installFileAssoc ".txt" "%WINDIR\=/%/System32/notepad.exe"
+    %dk_call% dk_installFileAssoc ".txt" "%windir\=/%/System32/notepad.exe"
 %endfunction%
     

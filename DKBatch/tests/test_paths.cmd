@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 :main
 ::	set IN=%0
-set "IN=%WINDIR%\NonExistent.file
+set "IN=%windir%\NonExistent.file
 ::	set "IN=%0"
 ::	set IN=%~0
 ::	set "IN=%~0"

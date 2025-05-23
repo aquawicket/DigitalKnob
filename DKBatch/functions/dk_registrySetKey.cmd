@@ -31,7 +31,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
   
-    %dk_call% dk_set NOTEPAD_EXE "%WINDIR:\=/%/notepad.exe"
+    %dk_call% dk_set NOTEPAD_EXE "%windir:\=/%/notepad.exe"
     %dk_call% dk_registrySetKey "HKCR/*/shell/Edit with Notepad" "Icon" "REG_SZ" "\"%NOTEPAD_EXE:/=\%\""
     %dk_call% dk_registrySetKey "HKCR/*/shell/Edit with Notepad/command" "" "" "\"%NOTEPAD_EXE:/=\%\" \"%%%%%%%%1\""
 	

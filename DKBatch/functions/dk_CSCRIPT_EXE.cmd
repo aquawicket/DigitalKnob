@@ -14,7 +14,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	if exist "%CSCRIPT_EXE%" (%return%)
 
-	if not exist "%CSCRIPT_EXE%" (%dk_call% dk_findProgram CSCRIPT_EXE "cscript.exe" "%WINDIR:\=/%/System32")
+	if not exist "%CSCRIPT_EXE%" (%dk_call% dk_findProgram CSCRIPT_EXE "cscript.exe" "%windir:\=/%/System32")
 	%dk_call% dk_assertPath "%CSCRIPT_EXE%"
 
 	endlocal & (

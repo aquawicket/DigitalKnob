@@ -14,8 +14,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	if defined CURL_EXE (%return%)
 
-	set "CURL_EXE=%WINDIR:\=/%/System32/curl.exe"
-	if not exist "%CURL_EXE%" (%dk_call% dk_findProgram CURL_EXE "curl.exe" "%WINDIR:\=/%/System32")
+	set "CURL_EXE=%windir:\=/%/System32/curl.exe"
+	if not exist "%CURL_EXE%" (%dk_call% dk_findProgram CURL_EXE "curl.exe" "%windir:\=/%/System32")
 	%dk_call% dk_assertPath "%CURL_EXE%"
 	
 	endlocal & (

@@ -5,4 +5,4 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ctfmon.exe
-reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Run /t REG_SZ /v ctfmon /d %WINDIR%\System32\ctfmon.exe /f
+reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Run /t REG_SZ /v ctfmon /d %windir%\System32\ctfmon.exe /f

@@ -12,11 +12,11 @@ if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	if not defined DKBRANCH (set "DKBRANCH=Development")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
-	set "DK=%DKBATCH_FUNCTIONS_DIR_%/DK.cmd"
+	set "DK=%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-	set "CURL_EXE=%WINDIR:\=/%/System32/curl.exe"
-	set "CERTUTIL_EXE=%WINDIR:\=/%/System32/certutil.exe"
-	set "POWERSHELL_EXE=%WINDIR:\=/%/System32/WindowsPowershell/v1.0/powershell.exe"
+	set "CURL_EXE=%windir:\=/%/System32/curl.exe"
+	set "CERTUTIL_EXE=%windir:\=/%/System32/certutil.exe"
+	set "POWERSHELL_EXE=%windir:\=/%/System32/WindowsPowershell/v1.0/powershell.exe"
 	set "GIT_REMOTE_HTTPS_EXE=%USERPROFILE:\=/%/digitalknob/DKTools/git-portable-2.46.2-64-bit/mingw64/libexec/git-core/git-remote-https.exe"
 
 	::###### firewall allow ######
@@ -27,7 +27,7 @@ if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 
 	if not exist "%DK%" (
 		"%CURL_EXE%" -f "!HDK!" -o "!DK!" >nul 2>&1 || ^
-		%POWERSHELL_EXE% -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
+		"%POWERSHELL_EXE%" -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
 		"%CERTUTIL_EXE%" -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1 || ^
 		echo ERROR: DK.cmd download Failed
 	)
