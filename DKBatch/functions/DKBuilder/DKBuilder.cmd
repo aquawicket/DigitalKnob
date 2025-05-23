@@ -13,14 +13,14 @@ if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
 	set "DK=%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
-
-
-	::###### TEMPORARY #######
-	if "%SystemDrive%" equ "X:" (copy C:\Windows\System32\curl.exe X:\Windows\System32\curl.exe)
-	if "%SystemDrive%" equ "X:" (copy C:\Windows\System32\certutil.exe X:\Windows\System32\certutil.exe)
-	if "%SystemDrive%" equ "X:" (echo D|xcopy "C:\Windows\System32\WindowsPowershell" "X:\Windows\System32\WindowsPowershell" /S /E /H /Y)
-	::########################
 	
+	::###### TEMPORARY #######
+	if "%SystemDrive%" equ "X:" (
+		if not exist "X:\Windows\System32\curl.exe" 	(copy C:\Windows\System32\curl.exe X:\Windows\System32\curl.exe)
+		if not exist "X:\Windows\System32\certutil.exe" (copy C:\Windows\System32\certutil.exe X:\Windows\System32\certutil.exe)
+		if not exist "X:\Windows\System32\WindowsPowershell\v1.0\powershell.exe" (echo D|xcopy "C:\Windows\System32\WindowsPowershell" "X:\Windows\System32\WindowsPowershell" /S /E /H /Y)
+	)
+	::########################
 	
 	set "CURL_EXE=%windir:\=/%/System32/curl.exe"
 	set "CERTUTIL_EXE=%windir:\=/%/System32/certutil.exe"
