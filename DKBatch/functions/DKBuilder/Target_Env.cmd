@@ -18,7 +18,11 @@ if not defined Target_Env_DEFAULT (set "Target_Env_DEFAULT=Clang")
 
 	rem ###### SET ######
 	if "%~1" neq "" (
-		set "Target_Env=%~1"
+		endlocal & (
+			set "Target_Env=%~1"
+			set "%Target_Env%=1"
+			rem set "%Target_Env%_Target=1"
+		)
 	
 	rem ###### GET ######	
 	) else (
@@ -26,23 +30,23 @@ if not defined Target_Env_DEFAULT (set "Target_Env_DEFAULT=Clang")
 		echo  0^) !Target_Env_Cache!
 		echo:
 		echo  1^) %Target_Env_DEFAULT%
-		echo  2^) Clang
-		echo  3^) Gcc
-		echo  4^) Msvc
+		echo  2^) Gcc
+		echo  3^) Msvc
+		echo  4^) Gcc-Ucrt
+		echo  5^) Go Back
+		echo  6^) Exit
 		echo:
 
 		%dk_call% dk_keyboardInput
-		if "!dk_keyboardInput!" equ "0"	(set "Target_Env=%Target_Env_Cache%")
-		if "!dk_keyboardInput!" equ "1"	(set "Target_Env=%Target_Env_DEFAULT%")
-		if "!dk_keyboardInput!" equ "2" (set "Target_Env=Clang")
-		if "!dk_keyboardInput!" equ "3" (set "Target_Env=Gcc")
-		if "!dk_keyboardInput!" equ "4" (set "Target_Env=Msvc")
-	)
-	
-	endlocal & (
-		set "Target_Env=%Target_Env%"
-		set "%Target_Env%_Target=1"
-		set "%Target_Env%=1"
+		if "!dk_keyboardInput!" equ "0"	endlocal & (%dk_call% dk_set 	Target_Env 	%Target_Env_Cache% 		& set "!Target_Env!=1"	&	%return%)
+		if "!dk_keyboardInput!" equ "1"	endlocal & (%dk_call% dk_set 	Target_Env 	%Target_Env_DEFAULT% 	& set "!Target_Env!=1"	&	%return%)
+		if "!dk_keyboardInput!" equ "2" endlocal & (%dk_call% dk_set 	Target_Env 	Gcc						& set "!Target_Env!=1"	&	%return%)
+		if "!dk_keyboardInput!" equ "3" endlocal & (%dk_call% dk_set 	Target_Env 	Msvc					& set "!Target_Env!=1"	&	%return%)
+		if "!dk_keyboardInput!" equ "4" endlocal & (%dk_call% dk_set	Target_Env 	Ucrt					& set "!Target_Env!=1"	&	%return%)
+		if "!dk_keyboardInput!" equ "5"	endlocal & (%dk_call% dk_unset	Target_Arch							& set "!Target_Env!=1"	&	%return%)
+		if "!dk_keyboardInput!" equ "6"	endlocal & (%dk_call% dk_exit 	0											 )
+										endlocal & (%dk_call% dk_unset 	Target_Env	& %dk_call% dk_unset %Target_Env%)
+		%dk_call% dk_echo !dk_keyboardInput!: invalid selection, please try again
 	)
 %endfunction%
 
@@ -63,7 +67,7 @@ if not defined Target_Env_DEFAULT (set "Target_Env_DEFAULT=Clang")
 	%dk_call% dk_printVar %Target_Env%
 	
 	::###### SET ######
-	%dk_call% Target_Env "Clang"
+	%dk_call% Target_Env "MyEnvironment"
 	%dk_call% dk_printVar Target_Env
 	%dk_call% dk_printVar %Target_Env%_Target
 	%dk_call% dk_printVar %Target_Env%

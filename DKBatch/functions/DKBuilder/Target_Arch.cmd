@@ -31,6 +31,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo  3^) Arm64
 		echo  4^) X86
 		echo  5^) X86_64
+		echo  6^) Go Back
+		echo  7^) Exit
 		echo:
 
 		%dk_call% dk_keyboardInput
@@ -41,6 +43,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if "!dk_keyboardInput!" equ "3" (set "Target_Arch=Arm64")
 		if "!dk_keyboardInput!" equ "4" (set "Target_Arch=X86")
 		if "!dk_keyboardInput!" equ "5" (set "Target_Arch=X86_64")
+		if "!dk_keyboardInput!" equ "6"	(
+			endlocal & (
+				%dk_call% dk_unset Target_Os
+				%return%
+			)
+		)
+		if "!dk_keyboardInput!" equ "7"	(%dk_call% dk_exit 0)
 	)
 	
 	endlocal & (

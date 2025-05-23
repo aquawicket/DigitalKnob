@@ -35,6 +35,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo  8^) Mac
 		echo  9^) Raspberry
 		echo 10^) Windows
+		echo 11^) Go Back
+		echo 12^) Exit
 		echo:
 
 		%dk_call% dk_keyboardInput
@@ -50,6 +52,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if "!dk_keyboardInput!" equ "8" 	(set "Target_Os=Mac")
 		if "!dk_keyboardInput!" equ "9" 	(set "Target_Os=Raspberry")
 		if "!dk_keyboardInput!" equ "10"	(set "Target_Os=Windows")
+		if "!dk_keyboardInput!" equ "11"	(
+			endlocal & (
+				%dk_call% dk_unset Target_App
+				%return%
+			)
+		)
+		if "!dk_keyboardInput!" equ "12"	(%dk_call% dk_exit 0)
 	)
 	
 	endlocal & (

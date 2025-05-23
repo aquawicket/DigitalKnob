@@ -1,0 +1,1 @@
+FOLDER-LOCKER_IMPORT=https://github.com/Albert-W/Folder-locker/archive/refs/heads/master.zip

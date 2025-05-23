@@ -9,13 +9,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :Target_Type
-::%setlocal%
+%setlocal%
 	%dk_call% dk_debugFunc 0 1
 
 	rem ###### SET ######
 	if "%~1" neq "" (
-		set "Target_Type=%~1"
-		set "!Target_Type!=1"
+		endlocal & (
+			set "Target_Type=%~1"
+			set "!Target_Type!=1"
+		)
 		
 	rem ###### GET ######	
 	) else (
@@ -33,14 +35,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_keyboardInput
 		rem %dk_call% dk_keyboardInputTimeout 1 60
 
-		if "!dk_keyboardInput!" equ "1" (endlocal & set "Target_Type=Debug"		& set "!Target_Type!=1"	& %return%)
-		if "!dk_keyboardInput!" equ "2" (endlocal & set "Target_Type=Release"	& set "!Target_Type!=1"	& %return%)
-		if "!dk_keyboardInput!" equ "3" (endlocal & set "Target_Type=All"		& set "!Target_Type!=1"	& %return%)
-		if "!dk_keyboardInput!" equ "4" (%dk_call% dk_unset Target_Tuple		& %return%)
-		if "!dk_keyboardInput!" equ "5" (%dk_call% dk_exit						& %return%)
+		if "!dk_keyboardInput!" equ "1" endlocal & (set "Target_Type=Debug"			& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "2" endlocal & (set "Target_Type=Release"		& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "3" endlocal & (set "Target_Type=All"			& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "4" endlocal & (%dk_call% dk_unset Target_Env	& %return%)
+		if "!dk_keyboardInput!" equ "5" (%dk_call% dk_exit 0						& %return%)
 
 		%dk_call% dk_echo !dk_keyboardInput!: invalid selection, please try again
-		%dk_call% dk_unset Target_Type
+		endlocal & (%dk_call% dk_unset Target_Type)
 	)
 %endfunction%
 
