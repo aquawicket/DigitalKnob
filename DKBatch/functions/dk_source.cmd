@@ -41,7 +41,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::if exist "%DKBATCH_FUNCTIONS_DIR_%%~1.cmd" exit /b 0
    
     :: Try powershell
-    powershell /? %NO_STDOUT% && powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_:.cmd=%.cmd', '%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd')"
+    %POWERSHELL_EXE% /? %NO_STDOUT% && %POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_:.cmd=%.cmd', '%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd')"
     if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd" exit /b 0
    
     :: Try dk_powershell
@@ -49,11 +49,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd" exit /b 0
    
     :: Try curl
-    curl --help %NO_STDOUT% && curl "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_:.cmd=%.cmd" -o "%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd"
+    %CURL_EXE% --help %NO_STDOUT% && curl "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_:.cmd=%.cmd" -o "%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd"
     if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd" exit /b 0
    
     :: Try certutil
-    certutil.exe /? %NO_STDOUT% && certutil.exe -urlcache -split -f "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_:.cmd=%.cmd" "%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd"
+    %CERTUTIL_EXE% /? %NO_STDOUT% && %CERTUTIL_EXE% -urlcache -split -f "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_:.cmd=%.cmd" "%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd"
     if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd" exit /b 0
    
     if not exist "%DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd" echo [31m failed to download %_file_:.cmd=%.cmd [0m

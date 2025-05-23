@@ -11,7 +11,7 @@ set "DKBATCH_DIR=%CD%\DKBatch"
 set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
 set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_DIR%\functions\"
 if not exist "%DKBATCH_FUNCTIONS_DIR%" mkdir "%DKBATCH_FUNCTIONS_DIR%"
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd', '%DKBATCH_FUNCTIONS_DIR_%DK.cmd')"
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd', '%DKBATCH_FUNCTIONS_DIR_%DK.cmd')"
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 

@@ -78,7 +78,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     if defined DISABLE_curl (goto end_curl_dl)
     %dk_call% dk_log DEBUG "Downloading via dk_curl"
 	%dk_call% dk_validate CURL_EXE "dk_CURL_EXE"
-    if not exist "%destination%_DOWNLOADING" (%CURL_EXE% --help %NO_OUTPUT% && curl -L "%url%" -o "%destination%_DOWNLOADING")
+    if not exist "%destination%_DOWNLOADING" (%CURL_EXE% --help %NO_OUTPUT% && %CURL_EXE% -L "%url%" -o "%destination%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
     if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
     if exist "%destination%_DOWNLOADING" (goto download_done)
@@ -88,7 +88,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     :certitil_dl
     if defined DISABLE_certutil (goto end_certutil_dl)
     %dk_call% dk_log DEBUG "Downloading via certutil"
-    if not exist "%destination%_DOWNLOADING" (certutil.exe %NO_OUTPUT% && certutil.exe -urlcache -split -f "%url%" "%destination%_DOWNLOADING")
+    if not exist "%destination%_DOWNLOADING" (%CERTUTIL_EXE% %NO_OUTPUT% && %CERTUTIL_EXE%  -urlcache -split -f "%url%" "%destination%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
     if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
     if exist "%destination%_DOWNLOADING" (goto download_done)

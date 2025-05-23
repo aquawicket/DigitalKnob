@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
 	if exist "%outputFile%" (%dk_call% dk_error "%outputFile% already exists and cannot be overwritten")
 
-	certutil -encode -f "%inputFile:/=\%" "%outputFile:/=\%.tmp" 1>nul
+	%CERTUTIL_EXE% -encode -f "%inputFile:/=\%" "%outputFile:/=\%.tmp" 1>nul
 
 	type "%outputFile:/=\%.tmp"|find /v "CERTIFICATE-----">"%outputFile:/=\%"
 	del "%outputFile:/=\%.tmp"

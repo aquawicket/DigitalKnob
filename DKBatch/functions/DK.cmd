@@ -207,10 +207,10 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_initFiles
 ::#
 :dk_initFiles
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd')"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd')"
 %endfunction%
 
 ::##################################################################################

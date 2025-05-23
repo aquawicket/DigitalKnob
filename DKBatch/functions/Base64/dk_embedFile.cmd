@@ -52,7 +52,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo for /f "useback skip=%%MBEGIN%% tokens=* delims=" %%%%a in ("%%~f0"^) DO (
 	echo 	echo %%%%a ^>^>"%%~1.tmp"
 	echo ^)
-	echo certutil -decode "%%~1.tmp" "%%~1" ^>nul 2^>^&1
+	echo %CERTUTIL_EXE% -decode "%%~1.tmp" "%%~1" ^>nul 2^>^&1
 	echo del "%%~1.tmp"
 	echo:
 	echo endlocal
@@ -60,7 +60,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo:
 	) >"%outputFile%"
 
-	certutil -encode -f "%inputFile%" "encoded.tmp"
+	%CERTUTIL_EXE% -encode -f "%inputFile%" "encoded.tmp"
 	type "encoded.tmp">>"%outputFile%"
 	del "encoded.tmp"
 %endfunction%

@@ -29,7 +29,7 @@ for /f "useback skip=%MBEGIN% tokens=* delims=" %%a in ("%~f0") DO (
 	echo %%a >>"%~1.tmp"
 )
 
-certutil -decode "%~1.tmp" "%~1" >nul 2>&1
+%CERTUTIL_EXE%  -decode "%~1.tmp" "%~1" >nul 2>&1
 del "%~1.tmp"
 
 endlocal
