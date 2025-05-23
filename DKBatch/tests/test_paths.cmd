@@ -29,7 +29,7 @@ set "IN=%WINDIR%\NonExistent.file
 ::	set "IN=..\..\DKBatch\functions\DK.cmd"
 ::	set "IN=..\..\DKBatch\..\Batch\functions\DK.cmd"
 ::	set IN=%USERPROFILE%\digitalknob\Development\DKBatch\
-::	set "IN=%USERPROFILE%/digitalknob/Development/DKBatch/DK.cmd"
+::	set "IN=%USERPROFILE:\=/%/digitalknob/Development/DKBatch/DK.cmd"
 ::	set "IN=%USERPROFILE%\digitalknob\Development\DKBatch"
 
 	echo IN         = "%IN%"

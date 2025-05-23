@@ -75,7 +75,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	::###### Install DKCSharp ######
 	::###### COMPILER_EXE ######
 	:: find csc.exe
-	for /r "%SystemRoot%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
+	for /r "%SystemRoot:\=/%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
 	set "COMPILER_EXE=%CSC_EXE%"
 	%dk_call% dk_assertVar COMPILER_EXE
 	ftype DKJava=%ComSpec% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*

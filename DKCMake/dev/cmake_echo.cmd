@@ -40,7 +40,7 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	if [%1] == []  goto:eof
 	
 	set "DKBRANCH=Development"
-	set "DIGITALKNOB_DIR=%USERPROFILE%/digitalknob"
+	set "DIGITALKNOB_DIR=%USERPROFILE:\=/%/digitalknob"
 	set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%/DKCMake"
 	if exist "%ProgramFiles:\=/%/CMake/bin/cmake.exe" 		set "CMAKE_EXE=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
 	if exist "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" 	set "CMAKE_EXE=%ProgramFiles(x86)"\=/%/CMake/bin/cmake.exe"
