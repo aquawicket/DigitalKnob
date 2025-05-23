@@ -62,7 +62,6 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	:: Try curl
     :curl_dl
     if defined DISABLE_curl (goto end_curl_dl)
-    %dk_call% dk_log DEBUG "Downloading via dk_curl"
 	%dk_call% dk_validate CURL_EXE "dk_CURL_EXE"
     if not exist "%destination%_DOWNLOADING" (%CURL_EXE% --help %NO_OUTPUT% && %CURL_EXE% -L "%url%" -o "%destination%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
@@ -73,7 +72,6 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	:: Try certutil
     :certitil_dl
     if defined DISABLE_certutil (goto end_certutil_dl)
-    %dk_call% dk_log DEBUG "Downloading via certutil"
     if not exist "%destination%_DOWNLOADING" (%CERTUTIL_EXE% %NO_OUTPUT% && %CERTUTIL_EXE%  -urlcache -split -f "%url%" "%destination%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
     if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
@@ -84,7 +82,6 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     :powershell_dl
     if defined DISABLE_powershell (goto end_powershell_dl)
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
-    %dk_call% dk_log DEBUG "Downloading via powershell"
     set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     if not exist "%destination%_DOWNLOADING" %POWERSHELL_EXE% -Command "$cli = New-Object System.Net.WebClient; "^
         "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
@@ -103,7 +100,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     %dk_call% dk_rename "%destination%_DOWNLOADING" "%destination%"
     if not exist "%destination%" (%dk_call% dk_error "failed to rename %destination%_DOWNLOADING")
    
-    %dk_call% dk_log SUCCESS "Download complete"
+    ::%dk_call% dk_log SUCCESS "Download complete"
 %endfunction%
 
 
