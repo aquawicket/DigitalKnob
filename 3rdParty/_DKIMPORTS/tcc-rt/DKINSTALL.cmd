@@ -29,7 +29,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_basename "%TCC_RT_IMPORT%" TCC_RT_IMPORT_FILE
 	
-	::C:\Users\Administrator\digitalknob\download\tcc-rt.exe /qn APPDIR=C:\Users\Administrator\digitalknob\DKTools\tcc-rt
+	::%USERPROFILE%\digitalknob\download\tcc-rt.exe /qn APPDIR=%USERPROFILE%\digitalknob\DKTools\tcc-rt
 	call "%DKDOWNLOAD_DIR%/%TCC_RT_IMPORT_FILE%" /qn APPDIR="%TCC_RT:/=\%"
 	
 	

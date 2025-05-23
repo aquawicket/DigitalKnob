@@ -20,7 +20,7 @@
 	
 	::### Constant Variables ###
 	if not defined dk_call 		(set "dk_call=call dk_call")
-	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
+	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=%SystemDrive%/GLOBAL.txt")
 	if not defined LVL			(set /a "LVL=-1")
 	
 	(set "pad=")

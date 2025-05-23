@@ -34,7 +34,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_set myPath "C:\Windows"
+	%dk_call% dk_set myPath "C:/Windows"
 	%dk_call% dk_driveName "%myPath%" drive
 	%dk_call% dk_printVar drive
 	

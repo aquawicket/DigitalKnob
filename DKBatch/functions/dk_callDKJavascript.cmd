@@ -25,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*
 
-	set "CSCRIPT_EXE=C:/Windows/System32/cscript.exe"
+	set "CSCRIPT_EXE=%windir:\=/%/System32/cscript.exe"
 	
 	::############ DKJavascript function call ############
 	set DKCOMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %dk_allButFirstArgs%

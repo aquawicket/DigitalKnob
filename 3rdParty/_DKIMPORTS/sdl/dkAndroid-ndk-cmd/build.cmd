@@ -17,14 +17,14 @@ gradlew clean build --info
 gradlew build --info
 
 :: Files Created with build.cmd
-:: C:/Uses/%USERNAME%/.gradle/*
+:: %USERPROFILE:\=/%/.gradle/*
 :: android-project2/.gradle/*
 :: android-project2/app/.cxx/*
 :: android-project2/app/build/*
 
 
 :: Files Created with SDL2_project.sln
-:: C:/Uses/%USERNAME%/.gradle/*
+:: %USERPROFILE:\=/%/.gradle/*
 :: android-project2/.gradle/*
 :: android-project2/.vs/*
 :: android-project2/ARM/*

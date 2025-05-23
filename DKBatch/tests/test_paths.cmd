@@ -14,7 +14,7 @@ set "IN=%WINDIR%\NonExistent.file
 ::	set "IN=%~0"
 ::	set "IN=%ProgramFiles%\WSL\wsl.exe"
 ::	set "IN=%USERPROFILE%\digitalknob\Development\DKBatch\tests\test_blank.cmd"
-::	set "IN=C:/Program Files/WSL/wsl.exe"
+::	set "IN=%ProgramFiles:\=/%/WSL/wsl.exe"
 ::  set "IN=test_dk_echo.cmd"
 ::  set "IN=/test_dk_echo.cmd"
 ::  set "IN=\test_dk_echo.cmd"

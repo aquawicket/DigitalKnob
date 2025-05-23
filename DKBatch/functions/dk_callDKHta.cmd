@@ -25,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*
 
-	set "MSHTA_EXE=C:/Windows/System32/mshta.exe"
+	set "MSHTA_EXE=%windir:\=/%/System32/mshta.exe"
 	
 	::############ DKHta function call ############
 	set DKCOMMAND=%ComSpec% /c %DKHTA_FUNCTIONS_DIR%/%1.hta; %dk_allButFirstArgs%

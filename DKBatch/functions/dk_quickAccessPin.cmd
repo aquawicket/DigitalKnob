@@ -24,5 +24,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
   
-    %dk_call% dk_quickAccessPin "C:/Users/Administrator/digitalknob"
+    %dk_call% dk_quickAccessPin "%USERPROFILE:\=/%/digitalknob"
 %endfunction%

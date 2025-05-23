@@ -74,13 +74,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::[HKCR/emeditor.txt/shell/open]
 
     ::[HKCR/emeditor.txt/shell/open/command]
-    ::@="\"C:/Program Files/EmEditor/EMEDITOR.EXE\" \"%1\""
+    ::@="\"%ProgramFiles:\=/%/EmEditor/EMEDITOR.EXE\" \"%1\""
     ::%dk_call% dk_registrySetKey "HKCR/%_dkname_%/shell/open/command" "" "REG_EXPAND_SZ" "\"%_exe_%\" \"%%%%^1\""
    
     ::[HKCR/emeditor.txt/shell/print]
 
     ::[HKCR/emeditor.txt/shell/print/command]
-    ::@="\"C:/Program Files/EmEditor/EMEDITOR.EXE\" /p \"%1\""
+    ::@="\"%ProgramFiles:\=/%/EmEditor/EMEDITOR.EXE\" /p \"%1\""
     ::%dk_call% dk_registrySetKey "HKCR/%_dkname_%/shell/print/command" "@" "REG_SZ" "\"%_exe_%\" /p \"%1\""
 %endfunction%
 

@@ -46,6 +46,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	::%dk_call% dk_appendEvnPath "%DKBATCH_FUNCTIONS_DIR%"
 
-	%dk_call% dk_appendEvnPath "C:/Users/Administrator/digitalknob/Development/DKCMake"
+	%dk_call% dk_appendEvnPath "%USERPROFILE:\=/%/digitalknob/Development/DKCMake"
 	echo %PATH%
 %endfunction%

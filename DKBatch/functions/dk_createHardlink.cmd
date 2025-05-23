@@ -43,11 +43,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	::### Create a file symlink ###
-	%dk_call% dk_createHardlink "C:/Users/Administrator/test.txt" "C:/Users/Administrator/Desktop/test.txt"
+	%dk_call% dk_createHardlink "%USERPROFILE:\=/%/test.txt" "%USERPROFILE:\=/%/Desktop/test.txt"
 	
 	::### Create a directory symlink ###
-    %dk_call% dk_createHardlink "C:/Users/Administrator/test" "C:/Users/Administrator/Desktop/test"
+    %dk_call% dk_createHardlink "%USERPROFILE:\=/%/test" "%USERPROFILE:\=/%/Desktop/test"
 	
 	::### Test Non-Existent Error ###
-    ::%dk_call% dk_createHardlink "C:/Users/Administrator/Desktop/Non-Existent" "C:/Non-Existent"
+    ::%dk_call% dk_createHardlink "%USERPROFILE:\=/%/Desktop/Non-Existent" "C:/Non-Existent"
 %endfunction%

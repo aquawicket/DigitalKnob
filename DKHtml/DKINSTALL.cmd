@@ -37,7 +37,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::###### Install DKHtml ######
-	set "BROWSER_EXE=C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
+	set "BROWSER_EXE=%ProgramFiles:\=/%/BraveSoftware/Brave-Browser/Application/brave.exe"
 	%dk_call% dk_assertPath BROWSER_EXE
 	set "DKHTML_FUNCTIONS_DIR=../DKHtml/functions"
 	ftype DKHtml=%BROWSER_EXE% "%%1" %*

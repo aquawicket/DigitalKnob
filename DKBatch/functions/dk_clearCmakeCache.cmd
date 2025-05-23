@@ -31,5 +31,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_clearCmakeCache "C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Debug"
+	%dk_call% dk_clearCmakeCache "%USERPROFILE:\=/%/digitalknob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Debug"
 %endfunction%

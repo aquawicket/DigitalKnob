@@ -72,7 +72,7 @@ setlocal
 	%dk_call% dk_confirm || (exit /b 0)
 	
 	::###### Create a deleter and run is in a new process and exit this script
-	echo ((goto) 2^>nul ^& cd "C:\" ^&^& rmdir /s /q "%DIGITALKNOB_DIR:/=\%") > "%TEMP%\delete_DK.cmd"
+	echo ((goto) 2^>nul ^& cd "%SystemDrive%\" ^&^& rmdir /s /q "%DIGITALKNOB_DIR:/=\%") > "%TEMP%\delete_DK.cmd"
 	echo ((goto) 2^>nul ^& del "%TEMP%\delete_DK.cmd" ^& cmd /c exit /b 0) >> "%TEMP%\delete_DK.cmd"
 	start "" /MIN "%TEMP%\delete_DK.cmd" & exit
 %endfunction%

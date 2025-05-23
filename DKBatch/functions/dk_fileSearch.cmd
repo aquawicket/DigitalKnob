@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_fileSearch(<base_path>, <file_pattern>, <search_depth>, optional:<rtn_var>)
 ::#
 ::#
-::#   Example:  %dk_call% dk_fileSearch "C:/Users/Administrator/digitalknob" "/bin/bash.exe" 7 BASH_EXE
+::#   Example:  %dk_call% dk_fileSearch "%USERPROFILE:\=/%/digitalknob" "/bin/bash.exe" 7 BASH_EXE
 :dk_fileSearch
 %setlocal%
 	%dk_call% dk_debugFunc 3 4

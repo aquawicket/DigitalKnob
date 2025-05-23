@@ -36,7 +36,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 
 ::	g++.exe -frtti -fexceptions -march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -DDEBUG -D_DEBUG -g -static -Wl,--whole-archive CMakeFiles/HelloWorld.dir/objects.a -Wl,--no-whole-archive -o HelloWorld.exe -Wl,--out-implib,libHelloWorld.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/HelloWorld.dir/linkLibs.rsp
 
-	::set "LDFLAGS=-static -static-libgcc -static-libstdc++ C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-base-x86_64-20241208/mingw64/lib/libwinpthread.a"
+	::set "LDFLAGS=-static -static-libgcc -static-libstdc++ %USERPROFILE:\=/%/digitalknob/Development/3rdParty/msys2-base-x86_64-20241208/mingw64/lib/libwinpthread.a"
 	set COMPILE_COMMAND="%DK_C_COMPILER%" -v -o "%APP_FILE%" -static "%DKC_FILE%" -lgdi32
 	::set COMPILE_COMMAND=%DK_C_COMPILER% -v -frtti -fexceptions -march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -DDEBUG -D_DEBUG -g -static -o HelloWorld.exe
 

@@ -37,7 +37,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
   
 	set "key=HKLM/SYSTEM/ControlSet001/Services/SharedAccess/Parameters/FirewallPolicy/FirewallRules"
 	::set "exe=C:/ProgramFiles (x86)/Edrum Monitor/EdrumMon.exe"
-	set "exe=C:/ghost toolbox/wget/wget.exe"
+	set "exe=%SystemDrive%/ghost toolbox/wget/wget.exe"
   
     %dk_call% dk_registryContains "%key%" "%exe%" && (
 		%dk_call% dk_echo "FirewallRules contains %exe%"

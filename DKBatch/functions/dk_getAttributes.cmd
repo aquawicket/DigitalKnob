@@ -47,7 +47,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	set "myPath=C:/Users/Administrator/Desktop/digitalknob"
+	set "myPath=%USERPROFILE:\=/%/Desktop/digitalknob"
 	%dk_call% dk_getAttributes "%myPath%" attributes
 	%dk_call% dk_echo "dk_getAttributes = %dk_getAttributes%"
 	%dk_call% dk_echo "attributes = %attributes%"

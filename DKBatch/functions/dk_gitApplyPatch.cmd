@@ -12,8 +12,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2 
 
-	::set "directory=C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master"
-	::set "patchFile=C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master/termux.patch"
+	::set "directory=%USERPROFILE:\=/%/digitalknob/Development/3rdParty/rmlui-master"
+	::set "patchFile=%USERPROFILE:\=/%/digitalknob/Development/3rdParty/rmlui-master/termux.patch"
 	set directory=%~1
 	set patchFile=%~2
 	
@@ -41,8 +41,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_selectFile
     ::%dk_call% dk_gitApplyPatch "%dk_selectFolder%" "%dk_selectFile%"
 	
-	set "directory=C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master"
-	set "patchFile=C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/rmlui/termux.patch"
+	set "directory=%USERPROFILE:\=/%/digitalknob/Development/3rdParty/rmlui-master"
+	set "patchFile=%USERPROFILE:\=/%/digitalknob/Development/3rdParty/_DKIMPORTS/rmlui/termux.patch"
     %dk_call% dk_gitApplyPatch "%directory%" "%patchFile%"
 
 %endfunction%

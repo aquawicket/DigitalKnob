@@ -120,7 +120,7 @@ exit /b %dk_exec_exitcode%
 
 ::	%dk_call% dk_set myCommand ""%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three""
 	
-::	set myCommand=C:/Users/Administrator/.dk/DKC_BUILD_DIR/dk_evalDKC_TEMP.exe
+::	set myCommand=%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_evalDKC_TEMP.exe
 	
 ::	set myCommand=ver
 	

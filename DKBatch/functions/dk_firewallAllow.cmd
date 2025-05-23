@@ -27,7 +27,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_notice "Adding firewall allow rule for %_file_% . . ."
 	
-	%dk_call% dk_findProgram NETSH_EXE netsh.exe "C:/Windows/System32"
+	%dk_call% dk_findProgram NETSH_EXE netsh.exe "%windir:\=/%/System32"
 	%NETSH_EXE% advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_:/=\%" enable=yes profile=any >nul
 	%NETSH_EXE% advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any >nul
 	

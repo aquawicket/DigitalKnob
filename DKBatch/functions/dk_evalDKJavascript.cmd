@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	set "CSCRIPT_EXE=C:/Windows/System32/cscript.exe"
+	set "CSCRIPT_EXE=%windir:\=/%/System32/cscript.exe"
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	echo %~1 > "%DKCACHE_DIR%/dk_evalJavascript_TEMP.js"
 	

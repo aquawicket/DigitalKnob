@@ -69,7 +69,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "C:\Windows\System32" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar POWERSHELL_EXE
 
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "C:/Windows/System32" || %dk_call% dk_printLastError
+	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%windir:\=/%/System32" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar CMD_EXE
 
 	%dk_call% dk_findProgram CMD_EXE "cmd.exe" || %dk_call% dk_printLastError

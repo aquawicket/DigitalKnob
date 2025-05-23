@@ -6,7 +6,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~2
 	set "DKSCRIPT_PATH=%~3"
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKJAVASCRIPT_FILE=%%~nxZ"
-	cd C:\
+	cd %SystemDrive%\
     start %NODEJS_EXE% %DKJAVASCRIPT_FUNCTIONS_DIR%\DKNodeServer.js
 	explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST=%DKSCRIPT_PATH%"
 %endfunction%

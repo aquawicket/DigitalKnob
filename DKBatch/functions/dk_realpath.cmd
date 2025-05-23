@@ -51,11 +51,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_realpath "%myPath%"
     %dk_call% dk_printVar dk_realpath
 	
-	%dk_call% dk_set myPath "C:/Users/Administrator/Desktop/DKBuilder.cmd"
+	%dk_call% dk_set myPath "%USERPROFILE:\=/%/Desktop/DKBuilder.cmd"
 	%dk_call% dk_realpath "%myPath%"
     %dk_call% dk_printVar dk_realpath
 	
-	%dk_call% dk_set myPath "C:/Users/Administrator/Desktop/digitalknob"
+	%dk_call% dk_set myPath "%USERPROFILE:\=/%/Desktop/digitalknob"
 	%dk_call% dk_realpath "%myPath%"
     %dk_call% dk_printVar dk_realpath
 	

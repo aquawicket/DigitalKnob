@@ -50,12 +50,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::  if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a symlink") else (%dk_call% dk_info "'%myPath%' is NOT a symlink")
    
 	::###### Using && and || conditionals
-	set "myPath=C:/Users/Administrator/Desktop/DKBuilder.cmd"
+	set "myPath=%USERPROFILE:\=/%/Desktop/DKBuilder.cmd"
     %dk_call% dk_isSymlink "%myPath%" && %dk_call% dk_info "'%myPath%' is a symlink" || %dk_call% dk_info "'%myPath%' is NOT a symlink"
 	
-	set "myPath=C:/Users/Administrator/Desktop/digitalknob"
+	set "myPath=%USERPROFILE:\=/%/Desktop/digitalknob"
     %dk_call% dk_isSymlink "%myPath%" && %dk_call% dk_info "'%myPath%' is a symlink" || %dk_call% dk_info "'%myPath%' is NOT a symlink"
 	
-	set "myPath=C:/Users/Administrator/Desktop"
+	set "myPath=%USERPROFILE:\=/%/Desktop"
     %dk_call% dk_isSymlink "%myPath%" && %dk_call% dk_info "'%myPath%' is a symlink" || %dk_call% dk_info "'%myPath%' is NOT a symlink"
 %endfunction%

@@ -25,8 +25,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_info "UnInstalling tcc-rt . . ."
 	"MsiExec.exe" /uninstall {B11E65DB-66DF-4987-9D13-014EFC915DF2} /quiet
 	
-	if exist "C:/Users/Public/Desktop/TCC-RT 32.lnk" (
-		%dk_call% dk_delete "C:/Users/Public/Desktop/TCC-RT 32.lnk"
+	if exist "%SystemDrive%/Users/Public/Desktop/TCC-RT 32.lnk" (
+		%dk_call% dk_delete "%SystemDrive%/Users/Public/Desktop/TCC-RT 32.lnk"
 	)
 %endfunction%
 
