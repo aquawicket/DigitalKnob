@@ -1,7 +1,10 @@
 @echo off
 
+::set "dk_firewallAllow_DISABLE=1"
+
 :MAIN
 setlocal enableDelayedExpansion
+if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 
 	set "ENABLE_dk_debug=1"
 	if not defined HDK (set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd")
@@ -11,16 +14,22 @@ setlocal enableDelayedExpansion
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
 	set "DK=%DKBATCH_FUNCTIONS_DIR_%/DK.cmd"
 
-	:: firewall
-	call :dk_firewallAllow powershell "%WINDIR:\=/%/System32/WindowsPowershell/v1.0/powershell.exe"
-	call :dk_firewallAllow curl "%WINDIR:\=/%/System32/curl.exe"
-	call :dk_firewallAllow git "%USERPROFILE:\=/%/digitalknob/DKTools/git-portable-2.46.2-64-bit/mingw64/libexec/git-core/git-remote-https.exe"
+	set curl.exe="%WINDIR:\=/%/System32/curl.exe"
+	set certutil.exe="%WINDIR:\=/%/System32/certutil.exe"
+	set powershell.exe="%WINDIR:\=/%/System32/WindowsPowershell/v1.0/powershell.exe"
+	set git-remote-https.exe="%USERPROFILE:\=/%/digitalknob/DKTools/git-portable-2.46.2-64-bit/mingw64/libexec/git-core/git-remote-https.exe"
 
-	if not exist %DK% (
-		powershell -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
-		certutil -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1 || ^
-		curl -f "!HDK!" -o "!DK!" >nul 2>&1 || ^
-		echo DK.cmd download Failed
+	::###### firewall allow ######
+	call :dk_firewallAllow curl "%curl.exe%"
+	call :dk_firewallAllow certutil "%certutil.exe%"
+	call :dk_firewallAllow powershell "%powershell.exe%"
+	call :dk_firewallAllow git-remote-https "%git-remote-https.exe%"
+
+	if not exist "%DK%" (
+		"%powershell.exe%" -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
+		"%certutil.exe%" -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1 || ^
+		"%curl.exe%" -f "!HDK!" -o "!DK!" >nul 2>&1 || ^
+		echo ERROR: DK.cmd download Failed
 	)
 
 	call "%DK%" "%~0" %*
@@ -41,6 +50,7 @@ setlocal enableDelayedExpansion
 
 
 :dk_firewallAllow
+if "%dk_firewallAllow_DISABLE%" equ 1 (exit /b 0)
 setlocal enableDelayedExpansion
 	set "_name_=%~1"
 	set "_file_=%~2"
