@@ -26,9 +26,9 @@ if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	call :dk_firewallAllow git-remote-https "%git-remote-https.exe%"
 
 	if not exist "%DK%" (
+		"%curl.exe%" -f "!HDK!" -o "!DK!" >nul 2>&1 || ^
 		"%powershell.exe%" -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
 		"%certutil.exe%" -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1 || ^
-		"%curl.exe%" -f "!HDK!" -o "!DK!" >nul 2>&1 || ^
 		echo ERROR: DK.cmd download Failed
 	)
 
