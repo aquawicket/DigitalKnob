@@ -59,8 +59,8 @@ setlocal enableDelayedExpansion
 	netsh advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_:/=\%" enable=yes profile=any 1>nul 2>nul
 	netsh advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any 1>nul 2>nul
 	::###### Windows Firewall Control ######
-	if not exist "%WFC_EXE%" 	(set "WFC_EXE=C:/Program Files/Malwarebytes/Windows Firewall Control/wfc.exe")
-	if not exist "%WFCUI_EXE%" 	(set "WFCUI_EXE=C:/Program Files/Malwarebytes/Windows Firewall Control/wfcUI.exe")
+	if not exist "%WFC_EXE%" 	(set "WFC_EXE=%ProgramFiles%/Malwarebytes/Windows Firewall Control/wfc.exe")
+	if not exist "%WFCUI_EXE%" 	(set "WFCUI_EXE=%ProgramFiles%/Malwarebytes/Windows Firewall Control/wfcUI.exe")
 	if exist "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
 	if exist "%WFCUI_EXE%"		(set "WFC_APP=%WFCUI_EXE%")
 	if exist "%WFC_APP%"		(set cmnd="%WFC_APP%" -allow "%_file_:/=\%")
