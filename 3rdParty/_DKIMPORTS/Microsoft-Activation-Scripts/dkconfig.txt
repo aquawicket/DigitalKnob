@@ -1,0 +1,1 @@
+MICROSOFT-ACTIVATION-SCRIPTS_IMPORT=https://github.com/massgravel/Microsoft-Activation-Scripts/archive/refs/heads/master.zip

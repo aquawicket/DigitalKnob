@@ -4,20 +4,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-::################################################################################
-::# dk_clearScreen()
+::####################################################################
+::# DKUNINSTALL
 ::#
-::#
-:dk_clearScreen
+:DKUNINSTALL
 %setlocal%
-	%dk_call% dk_debugFunc 0
+	%dk_call% dk_debugFunc 0 
 
-	cls
+	%dk_call% dk_cmakeEval "dk_load('%~dpn0')"
 %endfunction%
-
-
-::########## MACRO ############
-
 
 
 
@@ -25,8 +20,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
+	%dk_call% dk_debugFunc 0 
 
-	echo Testing dk_clearScreen
-	%dk_call% dk_clearScreen
+	call :DKUNINSTALL
 %endfunction%
