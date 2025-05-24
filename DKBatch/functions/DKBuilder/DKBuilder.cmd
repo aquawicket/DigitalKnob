@@ -16,9 +16,9 @@ if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	
 	::###### TEMPORARY #######
 	if "%SystemDrive%" equ "X:" (
-		if not exist "X:\Windows\System32\curl.exe" 	(copy C:\Windows\System32\curl.exe X:\Windows\System32\curl.exe)
-		if not exist "X:\Windows\System32\certutil.exe" (copy C:\Windows\System32\certutil.exe X:\Windows\System32\certutil.exe)
-		if not exist "X:\Windows\System32\WindowsPowershell\v1.0\powershell.exe" (echo D|xcopy "C:\Windows\System32\WindowsPowershell" "X:\Windows\System32\WindowsPowershell" /S /E /H /Y)
+		if not exist "%windir:\=/%/System32/curl.exe" 								(copy "C:\Windows\System32\curl.exe"					"%windir%\System32\curl.exe")
+		if not exist "%windir:\=/%/System32/certutil.exe" 							(copy "C:\Windows\System32\certutil.exe" 				"%windir%\System32\certutil.exe")
+		if not exist "%windir:\=/%/System32/WindowsPowershell/v1.0/powershell.exe" 	(echo D|xcopy "C:\Windows\System32\WindowsPowershell" 	"%windir%\System32\WindowsPowershell" /S /E /H /Y)
 	)
 	::########################
 	

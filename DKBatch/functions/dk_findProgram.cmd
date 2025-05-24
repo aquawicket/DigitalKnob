@@ -36,6 +36,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		)
 	)
 
+	for %%G in ("%dk_exec%") do (set dk_exec="%%~fG")   &:: get the real path
 	if "%~4" neq "NO_ERROR" (
 		%dk_call% dk_assertPath "%dk_exec:\=/%"
 	)
