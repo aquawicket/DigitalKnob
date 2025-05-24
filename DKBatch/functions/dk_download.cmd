@@ -38,28 +38,15 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     ::### make sure the destination parent directory exists ###
     %dk_call% dk_dirname "%destination%"
     if not exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
+   
+    set "DISABLE_curl=1"
+    set "DISABLE_certutil=1"
+	::set "DISABLE_bitsadmin=1"
+	set "DISABLE_powershell=1"
+	
 
    
-    ::set "DISABLE_powershell=1"
-    ::set "DISABLE_curl=1"
-    ::set "DISABLE_certutil=1"
-	
-::    goto end_dk_powershell_dl
-::    :: Try dk_powershell
-::    :dk_powershell_dl
-::    if defined DISABLE_dk_powershell goto end_dk_powershell_dl
-::    if not defined POWERSHELL_EXE goto end_dk_powershell_dl
-::    %dk_call% dk_echo "Downloading via dk_powershell"
-::    set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-::    if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershell "$cli = New-Object System.Net.WebClient; "^
-::        "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
-::        "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
-::    %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
-::    if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
-::    if exist "%destination%_DOWNLOADING" goto download_done
-::    :end_dk_powershell_dl
-   
-	:: Try curl
+	:: curl
     :curl_dl
     if defined DISABLE_curl (goto end_curl_dl)
 	%dk_call% dk_validate CURL_EXE "dk_CURL_EXE"
@@ -69,16 +56,28 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     if exist "%destination%_DOWNLOADING" (goto download_done)
     :end_curl_dl
 	
-	:: Try certutil
+	:: certutil
     :certitil_dl
     if defined DISABLE_certutil (goto end_certutil_dl)
+::	%dk_call% dk_validate CERTUTIL_EXE "dk_CERTUTIL_EXE"
     if not exist "%destination%_DOWNLOADING" (%CERTUTIL_EXE% %NO_OUTPUT% && %CERTUTIL_EXE%  -urlcache -split -f "%url%" "%destination%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
     if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
     if exist "%destination%_DOWNLOADING" (goto download_done)
     :end_certutil_dl
 	
-    :: Try powershell
+	:: bitsadmin
+    :bitsadmin_dl
+    if defined DISABLE_bitsadmin (goto end_bitsadmin_dl)
+	set "BITSADMIN_EXE=%windir:\=/%/System32/bitsadmin.exe"
+::	%dk_call% dk_validate BITSADMIN_EXE "dk_BITSADMIN_EXE"
+    if not exist "%destination%_DOWNLOADING" ("%BITSADMIN_EXE%" /transfer /Download /priority Foreground "%url%" "%destination:/=\%_DOWNLOADING")
+    %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
+    if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+    if exist "%destination%_DOWNLOADING" (goto download_done)
+    :end_bitsadmin_dl
+	
+    :: powershell
     :powershell_dl
     if defined DISABLE_powershell (goto end_powershell_dl)
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
@@ -90,6 +89,20 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
     if exist "%destination%_DOWNLOADING" (goto download_done)
     :end_powershell_dl
+	
+	:: dk_powershell
+    :dk_powershell_dl
+::    if defined DISABLE_dk_powershell goto end_dk_powershell_dl
+::    if not defined POWERSHELL_EXE goto end_dk_powershell_dl
+::    %dk_call% dk_echo "Downloading via dk_powershell"
+::    set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+::    if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershell "$cli = New-Object System.Net.WebClient; "^
+::        "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
+::        "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
+::    %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
+::    if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
+::    if exist "%destination%_DOWNLOADING" goto download_done
+::    :end_dk_powershell_dl
 
     :download_done
     :: If Dowload Failed

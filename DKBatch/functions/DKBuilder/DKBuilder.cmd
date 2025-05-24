@@ -16,27 +16,28 @@ if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	
 	::###### TEMPORARY #######
 	if "%SystemDrive%" equ "X:" (
-		if not exist "%windir:\=/%/System32/curl.exe" 								(copy "C:\Windows\System32\curl.exe"					"%windir%\System32\curl.exe")
-		if not exist "%windir:\=/%/System32/certutil.exe" 							(copy "C:\Windows\System32\certutil.exe" 				"%windir%\System32\certutil.exe")
-		if not exist "%windir:\=/%/System32/WindowsPowershell/v1.0/powershell.exe" 	(echo D|xcopy "C:\Windows\System32\WindowsPowershell" 	"%windir%\System32\WindowsPowershell" /S /E /H /Y)
+		if not exist "%windir:\=/%/System32/curl.exe" 		(copy "C:\Windows\System32\curl.exe"		"%windir%\System32\curl.exe")
+		if not exist "%windir:\=/%/System32/certutil.exe" 	(copy "C:\Windows\System32\certutil.exe" 	"%windir%\System32\certutil.exe")
 	)
 	::########################
-	
 	set "CURL_EXE=%windir:\=/%/System32/curl.exe"
 	set "CERTUTIL_EXE=%windir:\=/%/System32/certutil.exe"
+	set "BITSADMIN_EXE=%windir:\=/%/System32/bitsadmin.exe"
 	set "POWERSHELL_EXE=%windir:\=/%/System32/WindowsPowershell/v1.0/powershell.exe"
 	set "GIT_REMOTE_HTTPS_EXE=%USERPROFILE:\=/%/digitalknob/DKTools/git-portable-2.46.2-64-bit/mingw64/libexec/git-core/git-remote-https.exe"
 
 	::###### firewall allow ######
 	call :dk_firewallAllow curl "%CURL_EXE%"
 	call :dk_firewallAllow certutil "%CERTUTIL_EXE%"
+	call :dk_firewallAllow bitsadmin "%BITSADMIN_EXE%"
 	call :dk_firewallAllow powershell "%POWERSHELL_EXE%"
 	call :dk_firewallAllow git-remote-https "%GIT_REMOTE_HTTPS_EXE%"
 
 	if not exist "%DK%" (
 		"%CURL_EXE%" -L "!HDK!" -o "!DK!" >nul 2>&1 || ^
-		"%POWERSHELL_EXE%" -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
 		"%CERTUTIL_EXE%" -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1 || ^
+		"%BITSADMIN_EXE%" /transfer /Download /priority Foreground "!HDK!" "!DK:/=\!" >nul 2>&1 || ^
+		"%POWERSHELL_EXE%" -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
 		echo ERROR: DK.cmd download Failed
 	)
 
