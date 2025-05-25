@@ -11,7 +11,9 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://azeria-labs.com/emulate-raspberry-pi-with-qemu	# Emulate Raspberry Pi
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-Windows_Host_dk_set	(QEMU_DL https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe)
+if(Windows_Host)
+	dk_set	(QEMU_DL https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe)
+endif()
 dk_assertVar(QEMU_DL)
 
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")

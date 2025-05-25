@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 if(NOT DEFINED Target_Env_Default)
-	set(Target_Env_Default "Clang")
+	dk_set(Target_Env_Default "Clang")
 endif()
 ##################################################################################
 # dk_Target_Env()
@@ -50,7 +50,7 @@ function(dk_Target_Env)
 		
 		dk_keyboardInput(input)
 		if("${input}" EQUAL "0")
-			dk_set(Target_Env ${Target_Env_Cache})
+			dk_set(Target_Env "${Target_Env_Cache}")
 		elseif("${input}" EQUAL "1")
 			dk_set(Target_Env "${Target_Env_Default}")
 		elseif("${input}" EQUAL "2")
@@ -71,7 +71,8 @@ function(dk_Target_Env)
 	endif()
 	
 	dk_assertVar(Target_Env)
-	dk_set(${Target_Env}_Target  1)	
+	dk_set(${Target_Env}_Target  1)
+	message("dk_set(${Target_Env}         1)")
 	dk_set(${Target_Env}         1)	
 	
 	

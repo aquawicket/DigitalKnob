@@ -17,29 +17,30 @@ include_guard()
 function(dk_clearScreen)
 	dk_debugFunc()
 	
+##### !! FIXME !!
+#	### Cmd ###	
+#	dk_depend(cmd)
+#	if(CMD_EXE)
+#		execute_process(COMMAND ${CMD_EXE} /c cls)  # FIXME: only clears 1 line
+#		return()
+#	endif()
+	
 	### Powershell ###
 	find_program(POWERSHELL_EXE powershell.exe)
 	if(POWERSHELL_EXE)
-		execute_process(COMMAND powershell clear)
+		execute_process(COMMAND ${POWERSHELL_EXE} clear)
 		return()
 	endif()
 	
-	### Cmd ###
-	dk_depend(cmd)
-	if(CMD_EXE)
-		execute_process(COMMAND ${CMD_EXE} /c clear)  # FIXME: only clears 1 line
-		return()
-	endif()
+#### !! FIXME !!
+#	### Bash ###
+#	dk_depend(bash)
+#	if(BASH_EXE)
+#		execute_process(COMMAND clear)
+#		return()
+#	endif()
 	
-	### Bash ###
-	dk_depend(bash)
-	if(BASH_EXE)
-		execute_process(COMMAND clear)
-		return()
-	endif()
-	
-	dk_fatal("no clear screen commands available")
-	
+	dk_fatal("Could not command for cmd, powershell, bash or sh)
 endfunction()
 
 

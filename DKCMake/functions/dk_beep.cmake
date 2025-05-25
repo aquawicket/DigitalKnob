@@ -68,7 +68,7 @@ function(dk_beep)
 #		return()
 #	endif()
 #	
-	dk_fatal("Could not locate bash, sh, cmd.exe or powershell.exe")
+	dk_fatal("Could not command for cmd, powershell, bash or sh)
 endfunction()
 
 

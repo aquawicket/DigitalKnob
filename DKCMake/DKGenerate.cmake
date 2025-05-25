@@ -92,6 +92,11 @@ endforeach()
 dk_buildLog("\n")
 
 foreach(plugin ${dkdepend_list})
+	if(plugin IN_LIST dk_disabled_list)
+		dk_notice("plugin:${plugin} disabled, skipping...")
+		continue()
+	endif()
+		
 	dk_set(QUEUE_BUILD 0)
 	dk_set(PREBUILD 0)
 	dk_set(LIBLIST "") # used for double checking
@@ -99,6 +104,7 @@ foreach(plugin ${dkdepend_list})
 	dk_info("############################################################")
 	dk_info("######  Processing   ${plugin} . . .                        ")
 	dk_info("############################################################")
+	dk_debug("plugin = ${plugin} = ${${plugin}}")
 	
 	## Strip any sublibrary named in the plugin, and enable it
 	string(FIND "${plugin}" " " index)
@@ -120,20 +126,17 @@ foreach(plugin ${dkdepend_list})
 	#dk_printVar(Plugin_Path)
 
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKCpp/plugins
-	dk_info("dk_depend(${plugin})")
 	dk_depend(${plugin})
+	#if(NOT "${plugin}")
+	#	dk_error("${plugin} is invalid")
+	#endif()
+	
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
-	
 	dk_toUpper(${plugin} PLUGIN)
-	dk_info("plugin = ${plugin} = ${${plugin}}")
-	dk_info("PLUGIN = ${PLUGIN} = ${${PLUGIN}}")
-	if(NOT ${PLUGIN})
-		if(plugin IN_LIST dk_disabled_list)
-			dk_notice("plugin:${plugin} disabled, skipping...")
-			continue()
-		endif()
-		dk_error("${plugin} variable is invalid")
+	dk_debug("PLUGIN = ${PLUGIN} = ${${PLUGIN}}")
+	if(NOT "${PLUGIN}")
+		dk_error("${PLUGIN}'${${PLUGIN}}' is invalid")
 	endif()
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
@@ -169,7 +172,7 @@ foreach(plugin ${dkdepend_list})
 	####################### DKCpp/plugins #######################
 	# Libraries in the /DKCpp/plugins folder
 	dk_toLower("${DKPLUGIN_LIST}" dkplugin_list)
-	dk_toLower("${PLUGIN}" plugin)
+	#dk_toLower("${PLUGIN}" plugin)
 	string(FIND "${dkplugin_list}" "${plugin}" isDKPlugin)
 	
 	# Install 3rd Party Libs

@@ -18,9 +18,10 @@ include_guard()
 function(dk_timeout) 
 	dk_debugFunc(0 1)
 	
+	### arg0 seconds ###
 	dk_getArg(0 seconds 10)
-	
 	if("${seconds}" STREQUAL "")
+		dk_fatal("seconds:'${seconds}' is invalid")
 		set(seconds 10)
 	endif()
 	dk_assertVar(seconds)
@@ -78,7 +79,7 @@ function(dk_timeout)
 		endif()
 	endif()
 	
-	dk_fatal("dk_pause() failed:  cant find CMD, BASH, SH OR POWERSHELL")
+	dk_fatal("Could not command for cmd, powershell, bash or sh")
 endfunction()
 
 
@@ -97,7 +98,7 @@ function(DKTEST)
 	
 	dk_timeout(1)
 	
-	dk_timeout("2")
+	dk_timeout(2)
 	
 	#set(timeA)
 	dk_timeout(${timeA})
@@ -106,7 +107,7 @@ function(DKTEST)
 	dk_timeout(${timeB})
 	
 	set(timeC 1)
-	dk_timeout("${timeC}")
+	dk_timeout(${timeC})
 	
 	set(timeD 2)
 	dk_timeout(timeD)
