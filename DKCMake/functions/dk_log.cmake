@@ -9,6 +9,9 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
+if(NOT COMMAND dk_color)
+	dk_load(dk_color)
+endif()
 
 # 0 VERBOSE		dk_verbose
 # 1 DEBUG		dk_debug
