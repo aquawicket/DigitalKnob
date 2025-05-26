@@ -10,31 +10,36 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
 ####################################################################
-# dk_BASH_EXE()
+# dk_SH_EXE()
 #
 #
-function(dk_BASH_EXE)
+function(dk_SH_EXE)
 	dk_debugFunc()
 
-	if(EXISTS "${BASH_EXE}")
-		dk_debug("BASH_EXE:${BASH_EXE} already set")
+	if(EXISTS "${SH_EXE}")
+		dk_debug("SH_EXE:${SH_EXE} already set")
 		return()
 	endif()
 
-	### from BASH environment variable ###
-	if(NOT EXISTS "${BASH_EXE}")
-		dk_set(BASH_EXE "$ENV{BASH}")
-	endif()
-
-	### Msys2 bash ###
-	if(NOT EXISTS "${BASH_EXE}")
-		dk_validate(MSYS2 "dk_depend(msys2)")
-		dk_findProgram(MSYS2_BASH_EXE bash "${MSYS2}/usr/bin")
-		dk_set(BASH_EXE ${MSYS2_BASH_EXE})
+	### from SH_EXE environment variable ###
+	if(NOT EXISTS "${SH_EXE}")
+		dk_set(SH_EXE "$ENV{SH_EXE}")
 	endif()
 	
-	if(NOT EXISTS "${BASH_EXE}")
-		dk_fatal("BASH_EXE:${BASH_EXE} not found")
+	### from SH environment variable ###
+	if(NOT EXISTS "${SH_EXE}")
+		dk_set(SH_EXE "$ENV{SH}")
+	endif()
+
+	### from Msys2 bash ###
+	if(NOT EXISTS "${SH_EXE}")
+		dk_validate(MSYS2 "dk_depend(msys2)")
+		dk_findProgram(MSYS2_SH_EXE sh "${MSYS2}/usr/bin")
+		dk_set(SH_EXE ${MSYS2_SH_EXE})
+	endif()
+	
+	if(NOT EXISTS "${SH_EXE}")
+		dk_fatal("SH_EXE:${SH_EXE} not found")
 		return()
 	endif()
 endfunction()
@@ -48,6 +53,10 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 
-	dk_BASH_EXE()
-	dk_printVar(BASH_EXE)
+	dk_SH_EXE()
+	if(EXISTS "${SH_EXE}")
+		dk_success("SH_EXE = ${SH_EXE}")
+	else()
+		dk_error("SH_EXE = ${SH_EXE}")
+	endif()
 endfunction()

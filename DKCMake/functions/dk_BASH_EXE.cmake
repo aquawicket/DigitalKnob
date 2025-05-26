@@ -22,9 +22,9 @@ function(dk_BASH_EXE)
 		return()
 	endif()
 
-	### From command -v ###
+	### from BASH_EXE environment variable ###
 	if(NOT EXISTS "${BASH_EXE}")
-		execute_process(COMMAND command -v bash OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+		dk_set(CMD_EXE "$ENV{BASH_EXE}")
 	endif()
 	
 	### from BASH environment variable ###
@@ -40,6 +40,11 @@ function(dk_BASH_EXE)
 			set(BASH_EXE "$ENV{SHELL}")
 		endif()
 	endif()
+	
+	### From command -v ###
+	if(NOT EXISTS "${BASH_EXE}")
+		execute_process(COMMAND command -v bash OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+	endif()
 
 	### from dk_findProgram in Msys2 ###
 	if(NOT EXISTS "${BASH_EXE}")
@@ -50,9 +55,9 @@ function(dk_BASH_EXE)
 	
 	### Finalize ###
 	if(NOT EXISTS "${BASH_EXE}")
-		dk_fatal("BASH_EXE:${BASH_EXE} not found")
+		dk_warning("BASH_EXE:${BASH_EXE} not found")
 	else()
-		file(TO_CMAKE_PATH "${BASH_EXE}" BASH_EXE)
+		#file(TO_CMAKE_PATH "${BASH_EXE}" BASH_EXE)
 		dk_set(BASH_EXE "${BASH_EXE}") # Globalize the variable
 	endif()
 endfunction()
