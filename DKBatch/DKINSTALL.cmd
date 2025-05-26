@@ -85,25 +85,26 @@ if "%~1" equ "" (goto DKINSTALL)
 
 :DKINSTALL
 	if "%~1" neq "" (goto:eof)
-	echo :DKINSTALL
 	
-
-	::#################################################### DigitalKnob DKBatch ########################################################################
+	echo Installing DKBatch . . .
+	
+	@echo off&::###### DK.cmd #########################################################################################################################
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 
-	echo Installing DKcmd . . .
-	
-	::###### Install DKcmd ######
-	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
 
-	:: Set the registry entry for the exxtension
+	::###### Install DKBatch ######
+	%dk_call% dk_validate CMD_EXE 				"%dk_call% dk_CMD_EXE"
+	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+
+	::###### Set the registry entry for the extension ######
 	ftype DKcmd="%CMD_EXE:/=\%" /c if exist "%~f0" ^
 	(echo DKcmd installed ^& "%CMD_EXE:/=\%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%CMD_EXE%" "%%1" %%*) else ^
 	(echo DKcmd not installed ^& "%%1" %%*)
 
+	::###### Set icons and file association ######
 	%dk_call% dk_registrySetKey "HKCR/DKcmd/DefaultIcon" "" "REG_SZ" "%CMD_EXE%"
 	assoc .cmd=DKcmd
 

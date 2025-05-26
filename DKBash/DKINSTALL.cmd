@@ -2,6 +2,8 @@
 if "%~1" equ "" (goto DKINSTALL)
 
 :runDKBash
+	echo :runDKCMake %*
+	
 	set "DKBASH_FUNCTIONS_DIR=%~1"
 	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:\=/%"
 	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:C:/=/c/%"
@@ -14,7 +16,6 @@ if "%~1" equ "" (goto DKINSTALL)
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:/=/c/%"
 
 	::###### run script ######
-	::"%GITBASH_EXE%" %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
 	cmd /V:ON /k "%BASH_EXE%" -c %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
 
 	::###### exit_code ######
@@ -40,14 +41,16 @@ if "%~1" equ "" (goto DKINSTALL)
 
 	echo Installing DKBash . . .
 
-	::###### DK.cmd ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/")
+	@echo off&::###### DK.cmd #########################################################################################################################
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+	::#################################################################################################################################################
 
 	::###### Install DKBash ######
-	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
+	::%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	
 
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"

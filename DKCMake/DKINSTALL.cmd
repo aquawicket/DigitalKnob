@@ -1,8 +1,9 @@
 @echo off
-if "%~1" equ "" (goto:DKINSTALL)
+if "%~1" equ "" (goto DKINSTALL)
 
 :runDKCMake
-	echo DKINSTALL.cmd %*
+	echo :runDKCMake %*
+	
 	set "CMAKE_EXE=%~1"
 	set "DKCMAKE_FUNCTIONS_DIR_=%~2"
 	set "DKSCRIPT_PATH=%~3"
@@ -38,16 +39,17 @@ if "%~1" equ "" (goto:DKINSTALL)
 	
 	echo Installing DKCmake . . .
 	
-	::###### DK.cmd ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/")
+	@echo off&::###### DK.cmd #########################################################################################################################
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+	::#################################################################################################################################################
+
 
 	::###### Install DKCMake ######
-	%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_DKIMPORTS_DIR"
-	if not defined CMAKE_EXE                 %dk_call% "%DKIMPORTS_DIR%/cmake/DKINSTALL.cmd"
-
-	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR     		"%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate CMAKE_EXE     			"%dk_call% %DKIMPORTS_DIR%/cmake/DKINSTALL.cmd"
+	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ 	"%dk_call% dk_DKBRANCH_DIR"
 
 	ftype DKCmake=%ComSpec% /V:ON /K call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR_%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR/DKCmake/DefaultIcon" "" "REG_SZ" "%CMAKE%/bin/cmake-gui.exe"
