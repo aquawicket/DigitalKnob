@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
 	file(GLOB_RECURSE DK.cmake "/DK.cmake")
@@ -8,6 +9,7 @@ if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
+#########################################################################
 
 # FIXME: This is not fully functional. It take code from dk_getParameterValue() 
 # but has not yet ben set up to recieve multiple variables, or been tested

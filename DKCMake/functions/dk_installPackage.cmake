@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
 	file(GLOB_RECURSE DK.cmake "/DK.cmake")
@@ -8,6 +9,7 @@ if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
+#########################################################################
 # https://en.wikipedia.org/wiki/List_of_software_package_management_systems
 # https://en.wikipedia.org/wiki/Package_manager
 # https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg

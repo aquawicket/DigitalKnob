@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
 	file(GLOB_RECURSE DK.cmake "/DK.cmake")
@@ -7,7 +8,8 @@ if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()	
+include_guard()
+#########################################################################	
 
 ##################################################
 dk_validate(Host_Tuple   		"dk_Host_Tuple()")
