@@ -42,7 +42,7 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "else() \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "	add_executable(${Target_App} \${App_SRC}) \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "endif() \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")	
-dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt "target_link_libraries(${Target_App} dbghelp.lib version.lib winmm.lib ws2_32.lib psapi.lib) \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt "target_link_libraries(${Target_App} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS}) \n")
 
 #dk_clearCmakeCache()
 
