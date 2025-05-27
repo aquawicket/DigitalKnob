@@ -23,15 +23,15 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_validate(Target_Type "dk_Target_Type()")
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 	
-	dk_assertPath($ENV{CURRENT_PLUGIN})
+	dk_assertPath(${CURRENT_PLUGIN})
 	
-	if(NOT EXISTS "${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
-		set($ENV{CURRENT_PLUGIN}_CONFIG_DIR "${$ENV{CURRENT_PLUGIN}}/${CONFIG_PATH}")
-		dk_mkdir("${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
+	if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
+		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${CONFIG_PATH}")
+		dk_mkdir("${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	endif()
-	dk_assertPath($ENV{CURRENT_PLUGIN}_CONFIG_DIR)
+	dk_assertPath(${CURRENT_PLUGIN}_CONFIG_DIR)
 	
-	dk_set(BINARY_DIR "${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
+	dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	dk_assertVar(BINARY_DIR)
 	
 	dk_mkdir("${BINARY_DIR}")
@@ -51,13 +51,13 @@ function(dk_configure SOURCE_DIR) #ARGN
 		unset(cmakelists_path)
 	endif()
 	if(EXISTS ${cmakelists_path})
-		dk_info("###### Configuring $ENV{CURRENT_PLUGIN} with CMake ######")
-		dk_assertPath($ENV{DKCMAKE_DIR})
+		dk_info("###### Configuring ${CURRENT_PLUGIN} with CMake ######")
+		dk_assertPath(${DKCMAKE_DIR})
 		dk_assertPath(SOURCE_DIR)
 		dk_assertPath(BINARY_DIR)
 		
-		dk_validate(DKCMAKE_BUILD "dk_load($ENV{DKCMAKE_DIR}/DKBuildFlags.cmake)")
-		dk_validate(CMAKE_GENERATOR "dk_load($ENV{DKCMAKE_DIR}/DKBuildFlags.cmake)")
+		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
+		dk_validate(CMAKE_GENERATOR "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		
 		#### create thr Cmake configure command ###
 		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S" "${SOURCE_DIR}" "-B" "${BINARY_DIR}")			
@@ -79,7 +79,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	endif()
 	elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${configure_path})
 		# Configure with Autotools	(single_config)
-		dk_info("###### Configuring $ENV{CURRENT_PLUGIN} with ../../configure ######")
+		dk_info("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 		
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${SOURCE_DIR}/configure)
@@ -99,7 +99,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	###### configure with provided commands ######
 	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
 	else()
-		dk_notice("###### configure type not detected for $ENV{CURRENT_PLUGIN}. Running provided commands unaltered ######")
+		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
 		
 		#f(Windows_Host AND (MSYSTEM OR Android OR Emscripten))

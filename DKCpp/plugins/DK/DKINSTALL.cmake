@@ -1,4 +1,18 @@
-dk_info("DK/DKINSTALL.cmake")
+#!/usr/bin/cmake -P
+### DK.cmake ############################################################
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+#########################################################################
+
+dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+
 
 if(Android)
 	dk_depend(log)
@@ -42,9 +56,14 @@ if(Windows)
 endif()
 
 dk_depend(backward-cpp)
-dk_depend(boxer)
+#dk_depend(boxer)
 dk_depend(fmt)
 
-
+############ DK ############
+dk_set(CURRENT_PLUGIN "DK")
 dk_generateCmake(DK)
 dk_assets(DK)
+
+dk_set(DK "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DK")
+dk_configure(${DK})
+dk_build(${DK})
