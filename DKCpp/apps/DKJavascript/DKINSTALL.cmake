@@ -18,6 +18,11 @@ dk_set(Target_App "${dk_basename}")
 dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 
 dk_depend(DK)
+dk_depend(DKDuktape)
+dk_depend(DKDuktapeDebugger)
+dk_depend(DKArchive)
+dk_depend(DKAssets)
+dk_depend(DKFmt)
 
 
 ### dk_generateCmake("${CMAKE_CURRENT_LIST_DIR}") ###
@@ -61,6 +66,6 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt 		"target_link_libraries(
 dk_set(CURRENT_PLUGIN 				${Target_App})
 dk_set(${CURRENT_PLUGIN} 			${CMAKE_SOURCE_DIR})
 dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${CMAKE_CURRENT_LIST_DIR}/${CONFIG_PATH})
-dk_printVar(${CURRENT_PLUGIN}_CONFIG_DIR)
+
 dk_configure(${CMAKE_CURRENT_LIST_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTUPLE=${TUPLE})
 dk_build(${CMAKE_CURRENT_LIST_DIR})

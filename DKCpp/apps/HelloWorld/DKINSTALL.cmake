@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-############ HellowWorld ############
+############ APP ############
 dk_basename("${CMAKE_CURRENT_LIST_DIR}")
 dk_set(Target_App "${dk_basename}")
 dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
