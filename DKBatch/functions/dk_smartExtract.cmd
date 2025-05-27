@@ -15,12 +15,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "src=%~1"
 	%dk_call% dk_assertFile "%src%"
 	set "dest=%~2"
+	::echo dk_smartExtract(%src%, %dest%)
 
 	%dk_call% dk_realpath "%src%" src_realpath
 	%dk_call% dk_dirname "%src_realpath%" src_dirname
 	%dk_call% dk_basename "%src_realpath%" src_basename
 	%dk_call% dk_basename "%src_basename%" src_folder
 	%dk_call% dk_set src_extractPath "%src_dirname%/%src_basename%_EXTRACTED"
+	
 	%dk_call% dk_realpath "%dest%" dest_realpath
 	%dk_call% dk_dirname "%dest_realpath%" dest_dirname
 	%dk_call% dk_basename "%dest_realpath%" dest_folder

@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::### Get DKC_FUNCTIONS_DIR
 	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
-	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(mkdir "%DKPOWERSHELL_FUNCTIONS_DIR:/=\%")
+	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%"			(%dk_call% dk_mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%")
 	%dk_call% dk_assertPath DKPOWERSHELL_FUNCTIONS_DIR
 
 	::### Get DKHTTP_DKPOWERSHELL_DIR
@@ -29,7 +29,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
 
 	:: https://stackoverflow.com/a/4732316/688352
-	%dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
+	%dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command 'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser'
 
 	::### ALL_BUT_FIRST ###
 	%dk_call% dk_allButFirstArgs %*
