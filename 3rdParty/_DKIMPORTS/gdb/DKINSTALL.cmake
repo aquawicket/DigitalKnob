@@ -11,8 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_load(dk_builder)
 
 if(DEFINED ENV{MSYSTEM})
-	dk_set(MSYSTEM "$ENV{MSYSTEM}")
-	dk_set($ENV{MSYSTEM} 1)
+	dk_set(MSYSTEM 		"$ENV{MSYSTEM}")
+	dk_set(${MSYSTEM} 	1)
 endif()
 
 

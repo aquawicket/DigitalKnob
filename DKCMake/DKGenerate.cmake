@@ -29,7 +29,6 @@ include_guard()
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-dk_assertPath("$ENV{DKCMAKE_DIR}/DKDisabled.cmake")
 dk_load("$ENV{DKCMAKE_DIR}/DKDisabled.cmake")
 
 dk_info("\n")
@@ -37,10 +36,6 @@ dk_info("############################################################")
 dk_info("######################  DigitalKnob  #######################")
 dk_info("############################################################")
 dk_info("\n")
-
-
-
-
 
 ############ Target_Tuple_Dir ############
 dk_getFullPath("${CMAKE_BINARY_DIR}" Target_Bin_Dir)
@@ -52,16 +47,19 @@ else()
 	set(Target_Tuple_Dir ${Target_Bin_Dir})
 endif()
 dk_set(Target_Tuple_Dir ${Target_Tuple_Dir})
+dk_debug("Target_Tuple_Dir = ${Target_Tuple_Dir}")
 
 ############ Target_App_Dir ############
 dk_dirname(${Target_Tuple_Dir} Target_App_Dir)
 dk_set(Target_App_Dir ${Target_App_Dir})
 dk_assertPath(Target_App_Dir)	
+dk_debug("Target_App_Dir = ${Target_App_Dir}")
 	
 ############ Target_App ############	
 dk_basename(${Target_App_Dir} Target_App)
 dk_replaceAll(${Target_App} " " "_" Target_App)
-set(Target_App ${Target_App}_APP)
+dk_set(Target_App ${Target_App}_APP)
+dk_debug("Target_App = ${Target_App}")
 
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
@@ -70,20 +68,27 @@ if(NOT TARGET)
 	PROJECT(${Target_App})
 	dk_set(DKAPP ON)
 endif()
+dk_debug("DKAPP = ${DKAPP}")
 
 ######################################################
 ##### Scan the DKCpp/plugins and build the lists #####
 ######################################################
 dk_load(${Target_App_Dir}/DKINSTALL.cmake)
 dk_assertVar(Target_Tuple)
-dk_delete(${Target_App_Dir}/${Target_Tuple}/DKBUILD.log NO_HALT)
+dk_debug("Target_Tuple = ${Target_Tuple}")
+
+### print settings ###
+if(EXISTS "${Target_App_Dir}/${Target_Tuple}/DKBUILD.log")
+	dk_delete("${Target_App_Dir}/${Target_Tuple}/DKBUILD.log")
+endif()
+
 dk_printSettings()
 
 dk_buildLog("##############################################")
 dk_buildLog("######  Enabled Dependencies (sorted)  #######")
 dk_buildLog("##############################################")
 #dk_printVar(dkdepend_list)
-list(REMOVE_DUPLICATES dkdepend_list)
+#list(REMOVE_DUPLICATES dkdepend_list)
 foreach(plugin ${dkdepend_list})
 	if(NOT plugin IN_LIST dk_disabled_list)
 		dk_buildLog("${plugin}")

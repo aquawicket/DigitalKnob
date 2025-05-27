@@ -16,9 +16,9 @@ endif()
 
 #if(Windows_Host)
 #	if(DEFINED ENV{MSYSTEM})
-#		dk_set(MSYSTEM "$ENV{MSYSTEM}")
-#		dk_set($ENV{MSYSTEM} 1)
-#		dk_validate(MSYS2 "dk_depend(msys2)")
+#		dk_set(MSYSTEM 		"$ENV{MSYSTEM}")
+#		dk_set(${MSYSTEM} 	1)
+#		dk_validate(MSYS2 	"dk_depend(msys2)")
 #	endif()
 #endif()
 

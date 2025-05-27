@@ -194,8 +194,8 @@ function(dk_importVariables)
 	
 	# PLUGIN_IMPORT
 	dk_unset(PLUGIN_IMPORT)
-	dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-	if(IMPORT_PATH MATCHES "$ENV{DKIMPORTS_DIR}")
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+	if(IMPORT_PATH MATCHES "${DKIMPORTS_DIR}")
 		set(PLUGIN_IMPORT 1)
 	endif()	
 	dk_printVar(PLUGIN_IMPORT)											# PLUGIN_IMPORT: 1
@@ -211,7 +211,7 @@ function(dk_importVariables)
 	dk_unset(PLUGIN_IMPORT_NAME)
 	dk_dirname(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_DIR)
 	dk_printVar(PLUGIN_IMPORT_DIR)
-	if("${PLUGIN_IMPORT_DIR}" STREQUAL "$ENV{DKIMPORTS_DIR}")
+	if("${PLUGIN_IMPORT_DIR}" STREQUAL "${DKIMPORTS_DIR}")
 		dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)		
 	elseif(NAME)
 		#dk_fixme("PLUGIN_IMPORT_NAME is the parent folder name only if the next parent folder is _DKIMPORTS")
@@ -338,8 +338,8 @@ function(dk_importVariables)
 		set(PLUGIN_INSTALL_ROOT "${ROOT}")
 		dk_unset(ROOT)
 	else()
-		dk_assertPath($ENV{DK3RDPARTY_DIR})
-		set(PLUGIN_INSTALL_ROOT $ENV{DK3RDPARTY_DIR})
+		dk_assertPath(${DK3RDPARTY_DIR})
+		set(PLUGIN_INSTALL_ROOT ${DK3RDPARTY_DIR})
 	endif()
 	dk_printVar(PLUGIN_INSTALL_ROOT)									# PLUGIN_INSTALL_ROOT: C:/Users/name/digitalknob/Development/3rdParty
 
@@ -365,11 +365,10 @@ function(dk_importVariables)
 		dk_envList(PLUGIN PUSH "${PLUGIN_IMPORT_NAME_UPPER}")
 		#dk_set(CURRENT_PLUGIN "${PLUGIN_IMPORT_NAME_UPPER}")
 	endif()
-	#dk_assertVar(ENV{CURRENT_PLUGIN})
 	dk_set(CURRENT_PLUGIN "$ENV{CURRENT_PLUGIN}")
 	dk_assertVar(CURRENT_PLUGIN)
 	
-	message("############# $ENV{CURRENT_PLUGIN}_VARIABLES #############")
+	message("############# ${CURRENT_PLUGIN}_VARIABLES #############")
 	if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_GIT_NAME_LOWER)
 		if(NOT "${PLUGIN_IMPORT_NAME_LOWER}" STREQUAL "${PLUGIN_GIT_NAME_LOWER}")
 			dk_warning("PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match ")
@@ -385,22 +384,22 @@ function(dk_importVariables)
 	#   push the current plugin to the stack, we just need to find a good place to pop from the stack.
 	
 	# <PLUGIN>
-	dk_unset($ENV{CURRENT_PLUGIN})
-	dk_set($ENV{CURRENT_PLUGIN} "${PLUGIN_INSTALL_PATH}")
+	dk_unset(${CURRENT_PLUGIN})
+	dk_set(${CURRENT_PLUGIN} "${PLUGIN_INSTALL_PATH}")
 	dk_assertVar(CURRENT_PLUGIN)
-	dk_printVar($ENV{CURRENT_PLUGIN})										# ZLIB: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+	dk_printVar(CURRENT_PLUGIN)										# ZLIB: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
 	
 	# <PLUGIN>_DIR      ### DO NOT USE GIT_DIR ###
-	dk_unset($ENV{CURRENT_PLUGIN}_DIR)
-	if(NOT "$ENV{CURRENT_PLUGIN}" STREQUAL "GIT")
-		dk_set($ENV{CURRENT_PLUGIN}_DIR ${PLUGIN_INSTALL_PATH})
-		dk_printVar($ENV{CURRENT_PLUGIN}_DIR)								# ZLIB_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+	dk_unset(${CURRENT_PLUGIN}_DIR)
+	if(NOT "${CURRENT_PLUGIN}" STREQUAL "GIT")
+		dk_set(${CURRENT_PLUGIN}_DIR ${PLUGIN_INSTALL_PATH})
+		dk_printVar(${CURRENT_PLUGIN}_DIR)							# ZLIB_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
 	endif()
 	
 	# <PLUGIN>_URL
-	dk_unset($ENV{CURRENT_PLUGIN}_URL)
-	dk_set($ENV{CURRENT_PLUGIN}_URL ${PLUGIN_URL})
-	dk_printVar($ENV{CURRENT_PLUGIN}_URL)									# ZLIB_URL: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	dk_unset(${CURRENT_PLUGIN}_URL)
+	dk_set(${CURRENT_PLUGIN}_URL ${PLUGIN_URL})
+	dk_printVar(${CURRENT_PLUGIN}_URL)									# ZLIB_URL: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
 	# <PLUGIN>_IMPORT_FILE
 	dk_unset(${CURRENT_PLUGIN}_IMPORT_FILE)
@@ -503,5 +502,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"  NAME git   ROOT $ENV{DKTOOLS_DIR})
+	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"  NAME git   ROOT ${DKTOOLS_DIR})
 endfunction()
