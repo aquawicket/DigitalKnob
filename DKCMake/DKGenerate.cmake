@@ -140,7 +140,7 @@ foreach(plugin ${dkdepend_list})
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	dk_toUpper(${plugin} PLUGIN)
 	dk_debug("PLUGIN = ${PLUGIN} = ${${PLUGIN}}")
-	if(NOT "${PLUGIN}")
+	if(NOT DEFINED ${PLUGIN})
 		dk_error("${PLUGIN}'${${PLUGIN}}' is invalid")
 	endif()
 	
