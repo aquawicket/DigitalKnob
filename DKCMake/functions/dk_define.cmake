@@ -27,7 +27,9 @@ function(dk_define str)
 
 	dk_append(DKDEFINES_LIST ${str})
 	
-	if(NOT CMAKE_SCRIPT_MODE_FILE)
+	if(CMAKE_SCRIPT_MODE_FILE)
+		dk_warning("add_definitions() not available in script mode")
+	else()
 		add_definitions(-D${str})
 	endif()
 endfunction()

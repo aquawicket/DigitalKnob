@@ -53,17 +53,18 @@ function(dk_exit) # exit_code)
 	if(CMAKE_SCRIPT_MODE_FILE)
 		message("cmake_language(EXIT ${exit_code})")
 		cmake_language(EXIT ${exit_code})  # => 3.29
-	endif()
-	
-	### fallback methods ###
-	if(Unix)
-		execute_process(COMMAND killall -9 cmake)
 	else()
-		execute_process(COMMAND taskkill /IM cmake /F) #RESULT_VARIABLE result_variable RESULTS_VARIABLE results_variable OUTPUT_VARIABLE output_variable ERROR_VARIABLE error_variable OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_STRIP_TRAILING_WHITESPACE ECHO_OUTPUT_VARIABLE ECHO_ERROR_VARIABLE)
-		#message("result_variable = ${result_variable}")
-		#message("results_variable = ${results_variable}")
-		#message("output_variable = ${output_variable}")
-		#message("error_variable = ${error_variable}")
+	
+		### fallback methods ###
+		if(Unix)
+			execute_process(COMMAND killall -9 cmake)
+		else()
+			execute_process(COMMAND taskkill /IM cmake /F) #RESULT_VARIABLE result_variable RESULTS_VARIABLE results_variable OUTPUT_VARIABLE output_variable ERROR_VARIABLE error_variable OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_STRIP_TRAILING_WHITESPACE ECHO_OUTPUT_VARIABLE ECHO_ERROR_VARIABLE)
+			#message("result_variable = ${result_variable}")
+			#message("results_variable = ${results_variable}")
+			#message("output_variable = ${output_variable}")
+			#message("error_variable = ${error_variable}")
+		endif()
 	endif()
 endfunction()
 

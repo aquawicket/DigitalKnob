@@ -21,14 +21,16 @@ include_guard()
 function(dk_undefine str)
 	dk_debugFunc()
 	
-	if(NOT CMAKE_SCRIPT_MODE_FILE)
+	if(CMAKE_SCRIPT_MODE_FILE)
+		dk_warning("remove_definitions() not available in script mode")
+	else()
 		remove_definitions(${str})
 	endif()
-	if(NOT DKDEFINES_LIST)
-		dk_return()
+	
+	if(DKDEFINES_LIST)
+		list(REMOVE_ITEM DKDEFINES_LIST ${str})
+		dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})	# Globalize the variable
 	endif()
-	list(REMOVE_ITEM DKDEFINES_LIST ${str})
-	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})	# Globalize the variable
 endfunction()
 
 

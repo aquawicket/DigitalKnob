@@ -87,13 +87,13 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 	dk_assertVar(CMAKE_SOURCE_DIR)
 	dk_getFullPath(${CMAKE_SOURCE_DIR} CMAKE_SOURCE_DIR)
 	dk_assertPath(CMAKE_SOURCE_DIR)
-dk_echo("CMAKE_SOURCE_DIR:             '${CMAKE_SOURCE_DIR}'")
+	dk_echo("CMAKE_SOURCE_DIR:             '${CMAKE_SOURCE_DIR}'")
 
 	###### Get CMAKE_BINARY_DIR ######
 	dk_assertVar(CMAKE_BINARY_DIR)
 	dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
 	dk_assertPath(CMAKE_BINARY_DIR)
-dk_echo("CMAKE_BINARY_DIR:             '${CMAKE_BINARY_DIR}'")
+	dk_echo("CMAKE_BINARY_DIR:             '${CMAKE_BINARY_DIR}'")
 endif()
 
 

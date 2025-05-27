@@ -21,18 +21,14 @@ include_guard()
 function(dk_dependB plugin)
 	dk_debugFunc()
 	
-	#if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
-		if(plugin IN_LIST init_list)
-			#dk_debug("${plugin} is allready in init_list")
-			return()  #plugin is already in the init_list
-		endif()
-		dk_append(init_list "${plugin}")
-		
-		dk_getPathToPlugin(${plugin} Plugin_Path)
-		dk_load(${Plugin_Path}/DKINSTALL.cmake)
-		#dk_depend(${plugin})
-		#return()
-	#endif()
+	if(plugin IN_LIST init_list)
+		#dk_debug("${plugin} is allready in init_list")
+		return()  #plugin is already in the init_list
+	endif()
+	dk_append(init_list "${plugin}")
+	
+	dk_getPathToPlugin(${plugin} Plugin_Path)
+	dk_load(${Plugin_Path}/DKINSTALL.cmake)
 	
 #	if(${ARGC} GREATER 1)
 #		dk_info(ARGV)
