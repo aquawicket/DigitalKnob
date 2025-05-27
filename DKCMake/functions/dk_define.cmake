@@ -21,15 +21,15 @@ include_guard()
 function(dk_define str)
 	dk_debugFunc()
 	
-	if(CMAKE_SCRIPT_MODE_FILE)
-		return()
-	endif()
 	if(DKDEFINES_LIST MATCHES "${str}")
 		return() # already in the list
 	endif()
 
 	dk_append(DKDEFINES_LIST ${str})
-	add_definitions(-D${str})
+	
+	if(NOT CMAKE_SCRIPT_MODE_FILE)
+		add_definitions(-D${str})
+	endif()
 endfunction()
 
 

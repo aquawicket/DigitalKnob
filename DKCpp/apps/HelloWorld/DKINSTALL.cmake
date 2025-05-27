@@ -14,7 +14,7 @@ include_guard()
 
 ############ HellowWorld ############
 set(Target_App "HelloWorld")
-dk_load(dk_builder)
+dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
 
 
 #dk_generateCmake(${Target_App})

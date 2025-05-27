@@ -1,8 +1,15 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+#########################################################################
 
 
 ############ verysleepy ############
@@ -10,7 +17,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # http://www.codersnotes.com/sleepy/
 # https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe
 # https://github.com/VerySleepy/verysleepy/archive/refs/tags/v0.91.zip (source)
-dk_load(dk_builder)
+dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
 
 if(NOT Windows_Host)
 	return()

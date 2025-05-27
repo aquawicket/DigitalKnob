@@ -19,9 +19,9 @@ function(dk_MSYSTEM)
 	dk_debugFunc()
 
 	### Set MSYSTEM
-	dk_validate(target_env "dk_Target_Tuple()")
+	dk_validate(target_env "dk_Target_Env()")
 	
-	if(Windows AND ${target_env})
+	if(Windows AND Target_Env)
 		if(CLANG AND ARM64)
 			dk_set(msystem "${target_env}${Target_Arch}")	# msystem = clangarm64
 			dk_set(MSYSTEM "${TARGET_ENV}${Target_Arch}")	# MSYSTEM = CLANGARM64

@@ -14,7 +14,8 @@ include_guard()
 
 ############ DKzlib ############
 set(Target_App "DKzlib")
-dk_load(dk_builder)
+dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+
 dk_depend(zlib)
 
 
