@@ -1,10 +1,16 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	file(TO_CMAKE_PATH "$ENV{USERPROFILE}$ENV{HOME}/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
+### DK.cmake ############################################################
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
+#########################################################################
+
 
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
@@ -61,6 +67,7 @@ dk_replaceAll(${Target_App} " " "_" Target_App)
 dk_set(Target_App ${Target_App}_APP)
 dk_debug("Target_App = ${Target_App}")
 
+
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
@@ -81,7 +88,6 @@ dk_debug("Target_Tuple = ${Target_Tuple}")
 if(EXISTS "${Target_App_Dir}/${Target_Tuple}/DKBUILD.log")
 	dk_delete("${Target_App_Dir}/${Target_Tuple}/DKBUILD.log")
 endif()
-
 dk_printSettings()
 
 dk_buildLog("##############################################")
@@ -111,7 +117,7 @@ foreach(plugin ${dkdepend_list})
 	dk_info("############################################################")
 	dk_debug("plugin = ${plugin} = ${${plugin}}")
 	
-	## Strip any sublibrary named in the plugin, and enable it
+	## Strip any sub-library named in the plugin, and enable it
 	string(FIND "${plugin}" " " index)
 	if(${index} GREATER -1)
 		math(EXPR index "${index}+1")
@@ -121,15 +127,11 @@ foreach(plugin ${dkdepend_list})
 		dk_enable(${arg2})
 	endif()
 	
-	#################### 3rdParty libs #####################
+	#################### Plugin_Path #####################
 	dk_getPathToPlugin(${plugin} Plugin_Path)
-	if(NOT Plugin_Path)
-		DEBUG_LINE()
-		Wait()
-		break()
-	endif()
-	#dk_printVar(Plugin_Path)
-
+	dk_assertPath("${Plugin_Path}")
+	dk_debug("${plugin}:Plugin_Path = ${Plugin_Path}")
+	
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKCpp/plugins
 	dk_depend(${plugin})
 	#if(NOT "${plugin}")
@@ -144,7 +146,7 @@ foreach(plugin ${dkdepend_list})
 		dk_error("${PLUGIN}'${${PLUGIN}}' is invalid")
 	endif()
 	
-	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
+	#NOTE: we won't have the library paths to remove until we've run DKINSTALL.cmake for the library
 	# We can use this to refresh 3rdParty Plugins
 	#if(REBUILDALL)
 		#foreach(lib ${LIBLIST})
@@ -155,7 +157,6 @@ foreach(plugin ${dkdepend_list})
 	
 	# ADD THE 3rdParty library TO THE APP SOLUTION
 	if(PROJECT_INCLUDE_3RDPARTY)
-		dk_toUpper(${plugin} PLUGIN)
 		if(EXISTS "${${PLUGIN}}/CMakeLists.txt")
 			#if(MULTI_CONFIG)
 			#	add_subdirectory(${${PLUGIN}} ${${PLUGIN}}/${Target_Tuple})
@@ -166,7 +167,7 @@ foreach(plugin ${dkdepend_list})
 			#		add_subdirectory(${Plugin_Path} ${Plugin_Path}/${Target_Tuple}/Release)
 			#	endif()
 			#endif()
-			dk_debug("adding ${${PLUGIN}}")
+			dk_debug("adding ${${plugin}}")
 			add_subdirectory(${${PLUGIN}} ${${PLUGIN}}/${CONFIG_PATH})
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
@@ -209,7 +210,7 @@ foreach(plugin ${dkdepend_list})
 				#		add_subdirectory(${Plugin_Path} ${Plugin_Path}/${Target_Tuple}/Release)
 				#	endif()
 				#endif()
-				add_subdirectory(${Plugin_Path} ${Plugin_Path}/${CONFIG_PATH})
+				add_subdirectory("${Plugin_Path}" "${Plugin_Path}/${CONFIG_PATH}")
 			endif()
 		endif()
 		
