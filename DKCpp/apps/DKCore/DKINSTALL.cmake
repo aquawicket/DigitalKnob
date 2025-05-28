@@ -21,6 +21,13 @@ dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 ###### DEPENDENCIES ######
 dk_depend(DK)
 
+#if(HAVE_DK)
+	## copy app default files without overwrite
+	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/icon.png ${Target_App_Dir}/icons.png) 
+	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h)
+	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${Target_App_Dir}/main.cpp)
+#endif()
+
 ###### CREATE ICONS ######
 if(EXISTS "${Target_App_Dir}/icon.png")
 	dk_createIcons("${Target_App_Dir}/icon.png")
