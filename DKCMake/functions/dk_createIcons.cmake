@@ -27,11 +27,12 @@ function(dk_createIcons)
 
 	dk_assertVar(Target_App)
 	dk_assertVar(Target_Os)
+	dk_assertVar(Target_Tuple)
 	dk_info("Building ${Target_Os} icons for ${Target_App} . . .")
 	
 	dk_assertPath("${Target_App_Dir}")
-	dk_mkdir("${Target_App_Dir}/assets")
-	dk_copy("${ARGV0}" "${Target_App_Dir}/assets/icon.png" OVERWRITE)
+	#dk_mkdir("${Target_App_Dir}/assets")
+	#dk_copy("${ARGV0}" "${Target_App_Dir}/assets/icon.png" OVERWRITE)
 	
 	if(Android)
 		if(Debug)
@@ -94,9 +95,10 @@ function(dk_createIcons)
 	endif()
 	
 	if(Windows)
-		dk_createWindowsIcon("${ARGV0}" "${Target_App_Dir}/icons/windows/icon.ico")
-		dk_copy("${Target_App_Dir}/icons/windows/icon.ico" "${Target_App_Dir}/assets/icon.ico" OVERWRITE)
-		dk_createFavIcon("${ARGV0}" "${Target_App_Dir}/assets/favicon.ico")
+		#dk_createWindowsIcon("${ARGV0}" "${Target_App_Dir}/icons/windows/icon.ico")
+		dk_createWindowsIcon("${ARGV0}" "${Target_App_Dir}/windows/icon.ico")
+		#dk_copy("${Target_App_Dir}/icons/windows/icon.ico" "${Target_App_Dir}/assets/icon.ico" OVERWRITE)
+		#dk_createFavIcon("${ARGV0}" "${Target_App_Dir}/assets/favicon.ico")
 	endif()
 endfunction()
 

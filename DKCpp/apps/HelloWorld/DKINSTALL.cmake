@@ -22,24 +22,28 @@ dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 
 
 ###### CREATE ICONS ######
-if(EXISTS "${Target_App_Dir}/icons/icon.png")
-	dk_createIcons("${Target_App_Dir}/icons/icon.png")
+if(EXISTS "${Target_App_Dir}/icon.png")
+	dk_createIcons("${Target_App_Dir}/icon.png")
+	if(Windows)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/icon.h ${Target_App_Dir}/windows/icon.h)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/icon.rc ${Target_App_Dir}/windows/icon.rc)
+	endif()
 endif()
 
 ################# BACKUP USERDATA / INJECT ASSETS #####################
-if(EXISTS "${Target_App_Dir}/assets")
-	dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)
-	dk_delete(${Target_App_Dir}/assets/USER NO_HALT)
-	#Compress the assets, they will be included by resource.rc
-	dk_info("Creating assets.zip . . .")
-	dk_compressAssets(${Target_App_Dir}/assets)
-	# Restore the backed up files
-	dk_copy(${Target_App_Dir}/Backup/ ${Target_App_Dir}/assets/ OVERWRITE NO_HALT)
-	dk_delete(${Target_App_Dir}/Backup NO_HALT)
-	#dummy assets.h file, or the builder wil complain about assets.h missing
-	dk_assertPath(DKCPP_PLUGINS_DIR)
-	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h OVERWRITE NO_HALT)
-endif()
+#if(EXISTS "${Target_App_Dir}/assets")
+#	dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)
+#	dk_delete(${Target_App_Dir}/assets/USER NO_HALT)
+#	#Compress the assets, they will be included by resource.rc
+#	dk_info("Creating assets.zip . . .")
+#	dk_compressAssets(${Target_App_Dir}/assets)
+#	# Restore the backed up files
+#	dk_copy(${Target_App_Dir}/Backup/ ${Target_App_Dir}/assets/ OVERWRITE NO_HALT)
+#	dk_delete(${Target_App_Dir}/Backup NO_HALT)
+#	#dummy assets.h file, or the builder wil complain about assets.h missing
+#	dk_assertPath(DKCPP_PLUGINS_DIR)
+#	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h OVERWRITE NO_HALT)
+#endif()
 
 ###################### Backup Executable ###########################
 if(BACKUP_APP_EXECUTABLES)
@@ -54,13 +58,15 @@ endif()
 ####################### Add Windows Resources ###################
 if(Windows)
 	##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.h ${Target_App_Dir}/resource.h)
-	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.rc ${Target_App_Dir}/resource.rc)
-	file(GLOB_RECURSE resources_SRC 
-		${Target_App_Dir}/*.manifest
-		${Target_App_Dir}/*.rc
-		${Target_App_Dir}/icons/windows/*.rc)
-	list(APPEND App_SRC ${resources_SRC})
+#	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/assets.h ${Target_App_Dir}/assets.h)
+#	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/assets.rc ${Target_App_Dir}/assets.rc)
+
+#	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.h ${Target_App_Dir}/resource.h)
+#	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.rc ${Target_App_Dir}/resource.rc)
+#	file(GLOB_RECURSE resources_SRC 
+#		${Target_App_Dir}/*.manifest
+#		${Target_App_Dir}/*.rc)
+#	list(APPEND App_SRC ${resources_SRC})
 endif()
 	
 ### dk_generateCmake("${CMAKE_CURRENT_LIST_DIR}") ###
@@ -89,6 +95,17 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LI
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.manifest \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.rc \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	") \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"if(Windows) \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    file(GLOB Icon_SRC \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"        ${CMAKE_CURRENT_LIST_DIR}/windows/*.h \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"        ${CMAKE_CURRENT_LIST_DIR}/windows/*.hpp \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"        ${CMAKE_CURRENT_LIST_DIR}/windows/*.c \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"        ${CMAKE_CURRENT_LIST_DIR}/windows/*.cpp \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"        ${CMAKE_CURRENT_LIST_DIR}/windows/*.manifest \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"        ${CMAKE_CURRENT_LIST_DIR}/windows/*.rc \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ) \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    list(APPEND App_SRC \${Icon_SRC}) \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"endif() \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"list(FILTER App_SRC EXCLUDE REGEX \"${CMAKE_CURRENT_LIST_DIR}/assets/*\") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"list(FILTER App_SRC EXCLUDE REGEX \"${CMAKE_CURRENT_LIST_DIR}/${Target_Tuple}/*\") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"\n")
