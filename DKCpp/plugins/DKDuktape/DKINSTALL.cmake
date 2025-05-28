@@ -55,5 +55,11 @@ dk_include(${DKCPP_PLUGINS_DIR}/DKDuktape)
 dk_include(${DUKTAPE}/src)
 dk_define(HAVE_DKDuktape)
 
+############ DKDuktape ############
+dk_set(CURRENT_PLUGIN "DKDuktape")
 dk_generateCmake(DKDuktape)
 dk_assets(DKDuktape)
+
+dk_set(DKDuktape "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDuktape")
+dk_configure(${DKDuktape})
+dk_build(${DKDuktape})

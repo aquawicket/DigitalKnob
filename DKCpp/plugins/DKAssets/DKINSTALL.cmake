@@ -15,5 +15,13 @@ if(HAVE_DKCef)
 	dk_depend(DKCef)
 endif()
 
+
+
+############ DKAssets ############
+dk_set(CURRENT_PLUGIN "DKAssets")
 dk_generateCmake(DKAssets)
 dk_assets(DKAssets)
+
+dk_set(DKAssets "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKAssets")
+dk_configure(${DKAssets})
+dk_build(${DKAssets})

@@ -18,5 +18,15 @@ endif()
 if(HAVE_DKCef)
 	dk_depend(DKCef)
 endif()
+
+
+
+
+############ DKFmt ############
+dk_set(CURRENT_PLUGIN "DKFmt")
 dk_generateCmake(DKFmt)
 dk_assets(DKFmt)
+
+dk_set(DKFmt "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKFmt")
+dk_configure(${DKFmt})
+dk_build(${DKFmt})
