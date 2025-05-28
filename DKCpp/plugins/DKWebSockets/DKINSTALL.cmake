@@ -15,5 +15,10 @@ if(HAVE_DKCef)
 	dk_depend(DKCef)
 endif()
 
-dk_generateCmake(DKWebSockets)
-dk_assets(DKWebSockets)
+############ DKWebSockets ############
+dk_set(CURRENT_PLUGIN "DKWebSockets")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

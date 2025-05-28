@@ -14,8 +14,8 @@ dk_depend(sdl_mixer)
 
 ############ DKSDLAudio ############
 dk_set(CURRENT_PLUGIN "DKSDLAudio")
-dk_generateCmake(DKSDLAudio)
-dk_assets(DKSDLAudio)
-dk_set(DKSDLAudio "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLAudio")
-dk_configure(${DKSDLAudio})
-dk_build(${DKSDLAudio})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

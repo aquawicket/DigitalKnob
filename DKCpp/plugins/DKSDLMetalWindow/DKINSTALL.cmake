@@ -14,8 +14,8 @@ dk_depend(DKWindow)
 
 ############ DKSDLMetalWindow ############
 dk_set(CURRENT_PLUGIN "DKSDLMetalWindow")
-dk_generateCmake(DKSDLMetalWindow)
-dk_assets(DKSDLMetalWindow)
-dk_set(DKSDLMetalWindow "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLMetalWindow")
-dk_configure(${DKSDLMetalWindow})
-dk_build(${DKSDLMetalWindow})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

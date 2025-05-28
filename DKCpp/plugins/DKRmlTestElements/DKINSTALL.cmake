@@ -11,5 +11,12 @@ dk_depend(DKRml)
 #	dk_depend(DKDuktape)
 #endif()
 
-dk_generateCmake(DKRmlTestElements)
-dk_assets(DKRmlTestElements)
+
+
+############ DKRmlTestElements ############
+dk_set(CURRENT_PLUGIN "DKRmlTestElements")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

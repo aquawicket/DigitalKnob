@@ -8,5 +8,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKRmlHTMLElement ############
 dk_depend(DKHTMLElement)
 
-dk_generateCmake(DKRmlHTMLElement)
-dk_assets(DKRmlHTMLElement)
+
+
+
+
+############ DKRmlHTMLElement ############
+dk_set(CURRENT_PLUGIN "DKRmlHTMLElement")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

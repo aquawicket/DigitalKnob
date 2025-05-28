@@ -19,8 +19,8 @@ dk_depend(sdl_image)
 
 ############ DKSDLRml ############
 dk_set(CURRENT_PLUGIN "DKSDLRml")
-dk_generateCmake(DKSDLRml)
-dk_assets(DKSDLRml)
-dk_set(DKSDLRml "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLRml")
-dk_configure(${DKSDLRml})
-dk_build(${DKSDLRml})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

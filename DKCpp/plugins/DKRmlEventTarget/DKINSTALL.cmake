@@ -8,5 +8,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKRmlEventTarget ############
 dk_depend(DKEventTarget)
 
-dk_generateCmake(DKRmlEventTarget)
-dk_assets(DKRmlEventTarget)
+
+
+
+
+############ DKRmlEventTarget ############
+dk_set(CURRENT_PLUGIN "DKRmlEventTarget")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

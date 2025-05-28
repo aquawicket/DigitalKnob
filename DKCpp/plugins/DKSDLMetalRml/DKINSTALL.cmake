@@ -23,8 +23,8 @@ dk_depend(sdl_image)
 
 ############ DKSDLMetalRml ############
 dk_set(CURRENT_PLUGIN "DKSDLMetalRml")
-dk_generateCmake(DKSDLMetalRml)
-dk_assets(DKSDLMetalRml)
-dk_set(DKSDLMetalRml "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLMetalRml")
-dk_configure(${DKSDLMetalRml})
-dk_build(${DKSDLMetalRml})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

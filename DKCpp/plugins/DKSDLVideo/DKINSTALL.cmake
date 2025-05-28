@@ -19,8 +19,8 @@ dk_depend(DKSDLWindow)
 
 ############ DKSDLVideo ############
 dk_set(CURRENT_PLUGIN "DKSDLVideo")
-dk_generateCmake(DKSDLVideo)
-dk_assets(DKSDLVideo)
-dk_set(DKSDLVideo "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLVideo")
-dk_configure(${DKSDLVideo})
-dk_build(${DKSDLVideo})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

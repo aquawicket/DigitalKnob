@@ -15,8 +15,8 @@ dk_depend(DKSDLWindow)
 
 ############ DKSDLWav ############
 dk_set(CURRENT_PLUGIN "DKSDLWav")
-dk_generateCmake(DKSDLWav)
-dk_assets(DKSDLWav)
-dk_set(DKSDLWav "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLWav")
-dk_configure(${DKSDLWav})
-dk_build(${DKSDLWav})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

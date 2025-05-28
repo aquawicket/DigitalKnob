@@ -10,5 +10,12 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 dk_depend(DKInterface)
 
-dk_generateCmake(DKScreen)
-dk_assets(DKScreen)
+
+
+############ DKScreen ############
+dk_set(CURRENT_PLUGIN "DKScreen")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

@@ -14,8 +14,8 @@ dk_depend(openscenegraph)
 
 ############ DKSDLOsg ############
 dk_set(CURRENT_PLUGIN "DKSDLOsg")
-dk_generateCmake(DKSDLOsg)
-dk_assets(DKSDLOsg)
-dk_set(DKSDLOsg "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLOsg")
-dk_configure(${DKSDLOsg})
-dk_build(${DKSDLOsg})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

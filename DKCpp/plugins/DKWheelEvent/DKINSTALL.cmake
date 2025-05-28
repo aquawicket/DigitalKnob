@@ -8,5 +8,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKWheelEvent ############
 dk_depend(DK)
 dk_depend(DKMouseEvent)
-dk_generateCmake(DKWheelEvent)
-dk_assets(DKWheelEvent)
+
+
+
+
+############ DKWheelEvent ############
+dk_set(CURRENT_PLUGIN "DKWheelEvent")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

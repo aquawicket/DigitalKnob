@@ -8,5 +8,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKRmlDocument ############
 dk_depend(DKDocument)
 
-dk_generateCmake(DKRmlDocument)
-dk_assets(DKRmlDocument)
+
+
+
+
+############ DKRmlDocument ############
+dk_set(CURRENT_PLUGIN "DKRmlDocument")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})
