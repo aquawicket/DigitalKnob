@@ -27,7 +27,7 @@ if(EXISTS "${Target_App_Dir}/icons/icon.png")
 endif()
 
 ################# BACKUP USERDATA / INJECT ASSETS #####################
-#if(HAVE_DK)
+if(EXISTS "${Target_App_Dir}/assets")
 	dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)
 	dk_delete(${Target_App_Dir}/assets/USER NO_HALT)
 	#Compress the assets, they will be included by resource.rc
@@ -39,7 +39,7 @@ endif()
 	#dummy assets.h file, or the builder wil complain about assets.h missing
 	dk_assertPath(DKCPP_PLUGINS_DIR)
 	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h OVERWRITE NO_HALT)
-#endif()
+endif()
 
 ###################### Backup Executable ###########################
 if(BACKUP_APP_EXECUTABLES)

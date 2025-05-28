@@ -27,7 +27,7 @@ if(EXISTS "${Target_App_Dir}/icons/icon.png")
 endif()
 
 ################# BACKUP USERDATA / INJECT ASSETS #####################
-if(HAVE_DK)
+#if(HAVE_DK)
 	dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)
 	dk_delete(${Target_App_Dir}/assets/USER NO_HALT)
 	#Compress the assets, they will be included by resource.rc
@@ -39,7 +39,7 @@ if(HAVE_DK)
 	#dummy assets.h file, or the builder wil complain about assets.h missing
 	dk_assertPath(DKCPP_PLUGINS_DIR)
 	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h OVERWRITE NO_HALT)
-endif()
+#endif()
 
 ###################### Backup Executable ###########################
 if(BACKUP_APP_EXECUTABLES)
@@ -83,9 +83,12 @@ foreach(each_linkdir ${DKLINKDIRS_LIST})
 endforeach()
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"file(GLOB App_SRC \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.h \n")
-dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.c \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.hpp \n")
-dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.cpp) \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.c \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.cpp \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.manifest \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"    ${CMAKE_CURRENT_LIST_DIR}/*.rc \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"list(FILTER App_SRC EXCLUDE REGEX \"${CMAKE_CURRENT_LIST_DIR}/assets/*\") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"list(FILTER App_SRC EXCLUDE REGEX \"${CMAKE_CURRENT_LIST_DIR}/${Target_Tuple}/*\") \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"\n")
