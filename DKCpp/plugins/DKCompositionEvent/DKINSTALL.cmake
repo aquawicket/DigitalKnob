@@ -13,9 +13,8 @@ dk_depend(DKUIEvent)
 
 ############ DKCompositionEvent ############
 dk_set(CURRENT_PLUGIN "DKCompositionEvent")
-dk_generateCmake(DKCompositionEvent)
-dk_assets(DKCompositionEvent)
-
-dk_set(DKCompositionEvent "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKCompositionEvent")
-dk_configure(${DKCompositionEvent})
-dk_build(${DKCompositionEvent})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

@@ -15,4 +15,14 @@ dk_depend(DKOSGWindow)
 #dk_depend(openscenegraph osgdb_png)
 #dk_depend(openscenegraph osgdb_freetype)
 
-dk_generateCmake(DKOSGRml)
+
+
+
+
+############ DKOSGRml ############
+dk_set(CURRENT_PLUGIN "DKOSGRml")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

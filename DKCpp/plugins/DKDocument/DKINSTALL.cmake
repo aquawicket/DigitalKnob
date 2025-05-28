@@ -16,8 +16,8 @@ dk_depend(DKElement)
 
 ############ DKDocument ############
 dk_set(CURRENT_PLUGIN "DKDocument")
-dk_generateCmake(DKDocument)
-dk_assets(DKDocument)
-dk_set(DKDocument "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDocument")
-dk_configure(${DKDocument})
-dk_build(${DKDocument})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

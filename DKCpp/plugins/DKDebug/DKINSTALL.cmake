@@ -28,11 +28,11 @@ endif()
 
 ############ DKDebug ############
 dk_set(CURRENT_PLUGIN "DKDebug")
-dk_generateCmake(DKDebug)
-dk_assets(DKDebug)
-dk_set(DKDebug "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDebug")
-dk_configure(${DKDebug})
-dk_build(${DKDebug})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})
 
 
 

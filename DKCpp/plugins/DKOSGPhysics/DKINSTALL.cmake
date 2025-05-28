@@ -44,4 +44,13 @@ dk_depend(osgbullet osgbInteraction)
 dk_depend(osgbullet osgdb_osgbdynamics)
 dk_depend(osgbullet osgdb_sgb)
 
-dk_generateCmake(DKOSGPhysics)
+
+
+
+############ DKOSGPhysics ############
+dk_set(CURRENT_PLUGIN "DKOSGPhysics")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

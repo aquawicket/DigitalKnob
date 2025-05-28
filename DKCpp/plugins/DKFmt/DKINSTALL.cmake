@@ -24,9 +24,8 @@ endif()
 
 ############ DKFmt ############
 dk_set(CURRENT_PLUGIN "DKFmt")
-dk_generateCmake(DKFmt)
-dk_assets(DKFmt)
-
-dk_set(DKFmt "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKFmt")
-dk_configure(${DKFmt})
-dk_build(${DKFmt})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

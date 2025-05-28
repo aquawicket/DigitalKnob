@@ -12,11 +12,12 @@ dk_depend(DKInterface)
 
 
 
+
+
 ############ DKCSSStyleDeclaration ############
 dk_set(CURRENT_PLUGIN "DKCSSStyleDeclaration")
-dk_generateCmake(DKCSSStyleDeclaration)
-dk_assets(DKCSSStyleDeclaration)
-
-dk_set(DKCSSStyleDeclaration "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKCSSStyleDeclaration")
-dk_configure(${DKCSSStyleDeclaration})
-dk_build(${DKCSSStyleDeclaration})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

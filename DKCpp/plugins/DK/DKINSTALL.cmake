@@ -59,11 +59,12 @@ dk_depend(backward-cpp)
 #dk_depend(boxer)
 dk_depend(fmt)
 
+
+
 ############ DK ############
 dk_set(CURRENT_PLUGIN "DK")
-dk_generateCmake(DK)
-dk_assets(DK)
-
-dk_set(DK "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DK")
-dk_configure(${DK})
-dk_build(${DK})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

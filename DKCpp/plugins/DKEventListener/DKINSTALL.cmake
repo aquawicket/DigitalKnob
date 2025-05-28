@@ -13,9 +13,8 @@ dk_depend(DKEvent)
 
 ############ DKEventListener ############
 dk_set(CURRENT_PLUGIN "DKEventListener")
-dk_generateCmake(DKEventListener)
-dk_assets(DKEventListener)
-
-dk_set(DKEventListener "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKEventListener")
-dk_configure(${DKEventListener})
-dk_build(${DKEventListener})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

@@ -21,8 +21,8 @@ endif()
 
 ############ DKCurl ############
 dk_set(CURRENT_PLUGIN "DKCurl")
-dk_generateCmake(DKCurl)
-dk_assets(DKCurl)
-dk_set(DKCurl "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKCurl")
-dk_configure(${DKCurl})
-dk_build(${DKCurl})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

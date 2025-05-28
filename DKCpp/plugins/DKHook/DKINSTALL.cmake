@@ -14,8 +14,17 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 if(HAVE_DKCef)
 	dk_depend(DKCef)
 endif()
-dk_generateCmake(DKHook)
-dk_assets(DKHook)
+
+
+############ DKHook ############
+dk_set(CURRENT_PLUGIN "DKHook")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})
+
+
 
 ## add hoodll.dll to CMakeLists.txt on windows
 dk_appendCmake("\n\n")

@@ -20,8 +20,8 @@ dk_depend(DKInterface)
 
 ############ DKConsole ############
 dk_set(CURRENT_PLUGIN "DKConsole")
-dk_generateCmake(DKConsole)
-dk_assets(DKConsole)
-dk_set(DKConsole "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKConsole")
-dk_configure(${DKConsole})
-dk_build(${DKConsole})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

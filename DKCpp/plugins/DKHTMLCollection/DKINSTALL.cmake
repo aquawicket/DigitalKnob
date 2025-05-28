@@ -10,5 +10,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 dk_depend(DKInterface)
 
-dk_generateCmake(DKHTMLCollection)
-dk_assets(DKHTMLCollection)
+
+
+
+
+############ DKHTMLCollection ############
+dk_set(CURRENT_PLUGIN "DKHTMLCollection")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

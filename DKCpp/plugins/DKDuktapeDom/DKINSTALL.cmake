@@ -13,8 +13,8 @@ dk_depend(DKDuktape)
 
 ############ DKDuktapeDom ############
 dk_set(CURRENT_PLUGIN "DKDuktapeDom")
-dk_generateCmake(DKDuktapeDom)
-dk_assets(DKDuktapeDom)
-dk_set(DKDuktapeDom "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDuktapeDom")
-dk_configure(${DKDuktapeDom})
-dk_build(${DKDuktapeDom})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

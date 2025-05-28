@@ -17,5 +17,10 @@ if(HAVE_DKCef)
 endif()
 
 
-dk_generateCmake(DKHandles)
-dk_assets(DKHandles)
+############ DKHandles ############
+dk_set(CURRENT_PLUGIN "DKHandles")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

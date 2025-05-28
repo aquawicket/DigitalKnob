@@ -20,9 +20,8 @@ dk_depend(DKDuktape)
 
 ############ DKDuktapeDebugger ############
 dk_set(CURRENT_PLUGIN "DKDuktapeDebugger")
-dk_generateCmake(DKDuktapeDebugger)
-dk_assets(DKDuktapeDebugger)
-
-dk_set(DKDuktapeDebugger "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDuktapeDebugger")
-dk_configure(${DKDuktapeDebugger})
-dk_build(${DKDuktapeDebugger})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

@@ -61,9 +61,8 @@ dk_define(HAVE_DKDuktape)
 
 ############ DKDuktape ############
 dk_set(CURRENT_PLUGIN "DKDuktape")
-dk_generateCmake(DKDuktape)
-dk_assets(DKDuktape)
-
-dk_set(DKDuktape "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDuktape")
-dk_configure(${DKDuktape})
-dk_build(${DKDuktape})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

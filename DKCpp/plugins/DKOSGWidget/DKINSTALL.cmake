@@ -9,4 +9,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_depend(DKOSGWindow)
 #dk_depend(openscenegraph osgWidget)
 
-dk_generateCmake(DKOSGWidget)
+
+
+
+
+############ DKOSGWidget ############
+dk_set(CURRENT_PLUGIN "DKOSGWidget")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

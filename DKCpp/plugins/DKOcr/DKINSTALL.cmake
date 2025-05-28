@@ -17,5 +17,10 @@ if(HAVE_DKCef)
 endif()
 
 
-dk_generateCmake(DKOcr)
-dk_assets(DKOcr)
+############ DKOcr ############
+dk_set(CURRENT_PLUGIN "DKOcr")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

@@ -8,5 +8,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKKeyboardEvent ############
 dk_depend(DK)
 dk_depend(DKUIEvent)
-dk_generateCmake(DKKeyboardEvent)
-dk_assets(DKKeyboardEvent)
+
+
+
+
+############ DKKeyboardEvent ############
+dk_set(CURRENT_PLUGIN "DKKeyboardEvent")
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

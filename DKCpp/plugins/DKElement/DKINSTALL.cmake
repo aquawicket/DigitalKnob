@@ -13,9 +13,8 @@ dk_depend(DKNode)
 
 ############ DKElement ############
 dk_set(CURRENT_PLUGIN "DKElement")
-dk_generateCmake(DKElement)
-dk_assets(DKElement)
-
-dk_set(DKElement "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKElement")
-dk_configure(${DKElement})
-dk_build(${DKElement})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

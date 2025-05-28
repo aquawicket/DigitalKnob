@@ -14,8 +14,8 @@ dk_depend(DKEvent)
 
 ############ DKCustomEvent ############
 dk_set(CURRENT_PLUGIN "DKCustomEvent")
-dk_generateCmake(DKCustomEvent)
-dk_assets(DKCustomEvent)
-dk_set(DKCustomEvent "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKCustomEvent")
-dk_configure(${DKCustomEvent})
-dk_build(${DKCustomEvent})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})

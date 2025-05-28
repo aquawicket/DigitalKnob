@@ -14,9 +14,8 @@ dk_depend(DKInterface)
 
 ############ DKEvent ############
 dk_set(CURRENT_PLUGIN "DKEvent")
-dk_generateCmake(DKEvent)
-dk_assets(DKEvent)
-
-dk_set(DKEvent "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKEvent")
-dk_configure(${DKEvent})
-dk_build(${DKEvent})
+dk_generateCmake(${CURRENT_PLUGIN})
+dk_assets(${CURRENT_PLUGIN})
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_configure(${${CURRENT_PLUGIN}})
+dk_build(${${CURRENT_PLUGIN}})
