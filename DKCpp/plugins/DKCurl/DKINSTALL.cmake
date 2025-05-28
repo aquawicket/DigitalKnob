@@ -17,4 +17,12 @@ if(HAVE_DKCef)
 	dk_depend(DKCef)
 endif()
 
+
+
+############ DKCurl ############
+dk_set(CURRENT_PLUGIN "DKCurl")
 dk_generateCmake(DKCurl)
+dk_assets(DKCurl)
+dk_set(DKCurl "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKCurl")
+dk_configure(${DKCurl})
+dk_build(${DKCurl})

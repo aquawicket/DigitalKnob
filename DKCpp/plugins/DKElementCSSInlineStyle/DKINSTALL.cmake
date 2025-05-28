@@ -8,5 +8,15 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKElementCSSInlineStyle ############
 dk_depend(DKInterface)
 
+
+
+
+
+############ DKElementCSSInlineStyle ############
+dk_set(CURRENT_PLUGIN "DKElementCSSInlineStyle")
 dk_generateCmake(DKElementCSSInlineStyle)
 dk_assets(DKElementCSSInlineStyle)
+
+dk_set(DKElementCSSInlineStyle "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKElementCSSInlineStyle")
+dk_configure(${DKElementCSSInlineStyle})
+dk_build(${DKElementCSSInlineStyle})

@@ -10,5 +10,15 @@ dk_depend(DKInterface)
 dk_depend(DKEventListener)
 dk_depend(DKEvent)
 
+
+
+
+
+############ DKEventTarget ############
+dk_set(CURRENT_PLUGIN "DKEventTarget")
 dk_generateCmake(DKEventTarget)
 dk_assets(DKEventTarget)
+
+dk_set(DKEventTarget "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKEventTarget")
+dk_configure(${DKEventTarget})
+dk_build(${DKEventTarget})

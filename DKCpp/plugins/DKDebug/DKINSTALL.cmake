@@ -24,8 +24,17 @@ else()
 	dk_delete(${DKCPP_PLUGINS_DIR}/DKDebug/StackWalker.cpp NO_HALT)
 endif()
 
+
+
+############ DKDebug ############
+dk_set(CURRENT_PLUGIN "DKDebug")
 dk_generateCmake(DKDebug)
 dk_assets(DKDebug)
+dk_set(DKDebug "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDebug")
+dk_configure(${DKDebug})
+dk_build(${DKDebug})
+
+
 
 if(DKAPP)
 	if(Windows)

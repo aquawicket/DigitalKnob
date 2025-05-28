@@ -13,4 +13,14 @@ dk_depend(DKSDLWindow)
 #dk_depend(DKRmlInterface)			//Linux FIX:
 dk_depend(sdl_image)
 
+
+
+
+
+############ DKSDLRmlDocument ############
+dk_set(CURRENT_PLUGIN "DKSDLRmlDocument")
 dk_generateCmake(DKSDLRmlDocument)
+dk_assets(DKSDLRmlDocument)
+dk_set(DKSDLRmlDocument "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLRmlDocument")
+dk_configure(${DKSDLRmlDocument})
+dk_build(${DKSDLRmlDocument})

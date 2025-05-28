@@ -9,5 +9,13 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_depend(DK)
 dk_depend(DKMouseEvent)
 
+
+
+
+############ DKDragEvent ############
+dk_set(CURRENT_PLUGIN "DKDragEvent")
 dk_generateCmake(DKDragEvent)
 dk_assets(DKDragEvent)
+dk_set(DKDragEvent "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDragEvent")
+dk_configure(${DKDragEvent})
+dk_build(${DKDragEvent})

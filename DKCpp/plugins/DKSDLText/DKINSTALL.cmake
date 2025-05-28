@@ -10,5 +10,14 @@ dk_depend(DKAssets)
 dk_depend(DKSDLWindow)
 dk_depend(sdl_ttf)
 
+
+
+
+
+############ DKSDLText ############
+dk_set(CURRENT_PLUGIN "DKSDLText")
 dk_generateCmake(DKSDLText)
 dk_assets(DKSDLText)
+dk_set(DKSDLText "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLText")
+dk_configure(${DKSDLText})
+dk_build(${DKSDLText})

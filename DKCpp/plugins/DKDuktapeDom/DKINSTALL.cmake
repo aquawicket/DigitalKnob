@@ -8,5 +8,13 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKDuktapeDom ############
 dk_depend(DKDuktape)
 
+
+
+
+############ DKDuktapeDom ############
+dk_set(CURRENT_PLUGIN "DKDuktapeDom")
 dk_generateCmake(DKDuktapeDom)
 dk_assets(DKDuktapeDom)
+dk_set(DKDuktapeDom "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDuktapeDom")
+dk_configure(${DKDuktapeDom})
+dk_build(${DKDuktapeDom})

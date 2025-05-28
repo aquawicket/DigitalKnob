@@ -13,4 +13,14 @@ dk_depend(sdl_image)
 ## dk_depend(sdl2_gif) ##Deprecated
 ## dk_depend(sdl2_giflib_sa-master) ##FIXME
 
+
+
+
+
+############ DKSDLRml ############
+dk_set(CURRENT_PLUGIN "DKSDLRml")
 dk_generateCmake(DKSDLRml)
+dk_assets(DKSDLRml)
+dk_set(DKSDLRml "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLRml")
+dk_configure(${DKSDLRml})
+dk_build(${DKSDLRml})

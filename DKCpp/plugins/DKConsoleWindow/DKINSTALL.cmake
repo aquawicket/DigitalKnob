@@ -13,5 +13,14 @@ dk_depend(DKMouseEvent)
 dk_depend(DKWheelEvent)
 dk_depend(DKKeyboardEvent)
 
+
+
+
+############ DKConsoleWindow ############
+dk_set(CURRENT_PLUGIN "DKConsoleWindow")
 dk_generateCmake(DKConsoleWindow)
 dk_assets(DKConsoleWindow)
+
+dk_set(DKConsoleWindow "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKConsoleWindow")
+dk_configure(${DKConsoleWindow})
+dk_build(${DKConsoleWindow})

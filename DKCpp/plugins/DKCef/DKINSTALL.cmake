@@ -38,8 +38,14 @@ dk_depend(DK)
 dk_depend(DKDuktape)
 
 
+############ DKCef ############
+dk_set(CURRENT_PLUGIN "DKCef")
 dk_generateCmake(DKCef)
 dk_assets(DKCef)
+
+dk_set(DKCef "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKCef")
+dk_configure(${DKCef})
+dk_build(${DKCef})
 
 
 if(Windows_X86 AND MSVC)

@@ -23,4 +23,14 @@ dk_depend(DKCef)
 dk_depend(DKCefChild)
 dk_depend(DKAssets)
 
+
+
+
+
+############ DKSDLCef ############
+dk_set(CURRENT_PLUGIN "DKSDLCef")
 dk_generateCmake(DKSDLCef)
+dk_assets(DKSDLCef)
+dk_set(DKSDLCef "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLCef")
+dk_configure(${DKSDLCef})
+dk_build(${DKSDLCef})

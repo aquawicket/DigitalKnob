@@ -12,4 +12,5 @@ if(Windows)
 	dk_depend(imagemagick)
 endif()
 
+
 dk_assets(DKBuild)

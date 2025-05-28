@@ -15,5 +15,15 @@ if(HAVE_DKCef)
 	dk_depend(DKCef)
 endif()
 
+
+
+
+
+############ DKWindow ############
+dk_set(CURRENT_PLUGIN "DKWindow")
 dk_generateCmake(DKWindow)
 dk_assets(DKWindow)
+
+dk_set(DKWindow "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKWindow")
+dk_configure(${DKWindow})
+dk_build(${DKWindow})

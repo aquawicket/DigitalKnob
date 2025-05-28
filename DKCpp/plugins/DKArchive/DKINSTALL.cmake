@@ -21,8 +21,7 @@ endif()
 ############ DKArchive ############
 dk_set(CURRENT_PLUGIN "DKArchive")
 dk_generateCmake(DKArchive)
-#dk_assets(DKArchive)
-
+dk_assets(DKArchive)
 dk_set(DKArchive "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKArchive")
 dk_configure(${DKArchive})
 dk_build(${DKArchive})

@@ -10,5 +10,12 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
 dk_depend(DKEvent)
 
+
+
+############ DKCustomEvent ############
+dk_set(CURRENT_PLUGIN "DKCustomEvent")
 dk_generateCmake(DKCustomEvent)
 dk_assets(DKCustomEvent)
+dk_set(DKCustomEvent "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKCustomEvent")
+dk_configure(${DKCustomEvent})
+dk_build(${DKCustomEvent})

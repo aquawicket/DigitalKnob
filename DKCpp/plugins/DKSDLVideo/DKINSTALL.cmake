@@ -14,5 +14,13 @@ dk_depend(waave)
 dk_depend(DKVideo)
 dk_depend(DKSDLWindow)
 
+
+
+
+############ DKSDLVideo ############
+dk_set(CURRENT_PLUGIN "DKSDLVideo")
 dk_generateCmake(DKSDLVideo)
 dk_assets(DKSDLVideo)
+dk_set(DKSDLVideo "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLVideo")
+dk_configure(${DKSDLVideo})
+dk_build(${DKSDLVideo})

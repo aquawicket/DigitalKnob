@@ -13,5 +13,14 @@ if(HAVE_DKCef)
 	dk_depend(DKCef)
 endif()
 
+
+
+
+############ DKAudio ############
+dk_set(CURRENT_PLUGIN "DKAudio")
 dk_generateCmake(DKAudio)
 dk_assets(DKAudio)
+
+dk_set(DKAudio "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKAudio")
+dk_configure(${DKAudio})
+dk_build(${DKAudio})

@@ -9,4 +9,13 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_depend(sdl)
 dk_depend(DKWindow)
 
+
+
+
+############ DKSDLMetalWindow ############
+dk_set(CURRENT_PLUGIN "DKSDLMetalWindow")
 dk_generateCmake(DKSDLMetalWindow)
+dk_assets(DKSDLMetalWindow)
+dk_set(DKSDLMetalWindow "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLMetalWindow")
+dk_configure(${DKSDLMetalWindow})
+dk_build(${DKSDLMetalWindow})

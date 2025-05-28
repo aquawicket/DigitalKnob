@@ -8,4 +8,12 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKCrypto ############
 dk_depend(cryptopp)
 
+
+
+############ DKCrypto ############
+dk_set(CURRENT_PLUGIN "DKCrypto")
 dk_generateCmake(DKCrypto)
+dk_assets(DKCrypto)
+dk_set(DKCrypto "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKCrypto")
+dk_configure(${DKCrypto})
+dk_build(${DKCrypto})

@@ -12,7 +12,6 @@ include_guard()
 #########################################################################
 
 
-############ DKJavascript ############
 dk_set(Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
 dk_basename("${Target_App_Dir}")
 dk_set(Target_App "${dk_basename}")

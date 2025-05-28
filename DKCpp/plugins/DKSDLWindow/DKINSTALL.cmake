@@ -5,7 +5,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
-############ DKSDLWindow ############
+
 dk_depend(glew)
 dk_depend(sdl)
 dk_depend(DKWindow)
@@ -24,4 +24,13 @@ if(IOS)
 	dk_set(PLUGINS_FILE "${ios_sdl2main} ${PLUGINS_FILE}")
 endif()
 
+
+
+
+############ DKSDLWindow ############
+dk_set(CURRENT_PLUGIN "DKSDLWindow")
 dk_generateCmake(DKSDLWindow)
+dk_assets(DKSDLWindow)
+dk_set(DKSDLWindow "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKSDLWindow")
+dk_configure(${DKSDLWindow})
+dk_build(${DKSDLWindow})

@@ -9,5 +9,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_depend(DKDuktape)
 dk_depend(DKRml)  #let's make the Dom only require javascript
 
+
+
+
+############ DKDom ############
+dk_set(CURRENT_PLUGIN "DKDom")
 dk_generateCmake(DKDom)
 dk_assets(DKDom)
+
+dk_set(DKDom "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDom")
+dk_configure(${DKDom})
+dk_build(${DKDom})

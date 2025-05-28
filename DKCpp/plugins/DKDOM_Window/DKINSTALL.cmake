@@ -9,5 +9,12 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_depend(uriparser)
 dk_depend(DKEventTarget)
 
-dk_generateCmake(DKWindow)
-dk_assets(DKWindow)
+
+
+############ DKDOM_Window ############
+dk_set(CURRENT_PLUGIN "DKDOM_Window")
+dk_generateCmake(DKDOM_Window)
+dk_assets(DKDOM_Window)
+dk_set(DKDOM_Window "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/DKDOM_Window")
+dk_configure(${DKDOM_Window})
+dk_build(${DKDOM_Window})

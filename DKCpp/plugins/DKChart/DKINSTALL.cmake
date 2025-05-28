@@ -17,4 +17,6 @@ if(CHART.JS)
 	dk_copy(${CHART.JS}/ ${DKCPP_PLUGINS_DIR}/DKChart/)
 	dk_rename(${DKCPP_PLUGINS_DIR}/DKChart/chart.js-Chart.min.js ${DKCPP_PLUGINS_DIR}/DKChart/chart.min.js OVERWRITE)
 endif()
+
+
 dk_assets(DKChart)
