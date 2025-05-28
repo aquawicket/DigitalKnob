@@ -412,8 +412,8 @@ if(Android)
 	################################ CMAKE_ANDROID_GUI ########################################
 	if(CMAKE_ANDROID_GUI) # CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake
 		########################## CREATE ICONS ###############################
-		if(EXISTS "${Target_App_Dir}/icons/icon.png")
-			dk_createIcons("${Target_App_Dir}/icons/icon.png")
+		if(EXISTS "${Target_App_Dir}/icon.png")
+			dk_createIcons("${Target_App_Dir}/icon.png")
 		endif()
 		#if(EXISTS ${Target_App_Dir}/icons/icon.png)
 		#	dk_copy(${Target_App_Dir}/icons/icon.png ${Target_App_Dir}/assets/icon.png OVERWRITE)
@@ -621,8 +621,8 @@ elseif(Emscripten)
 	# TODO: https://schellcode.github.io/webassembly-without-emscripten
 	
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icons/icon.png")
-		dk_createIcons("${Target_App_Dir}/icons/icon.png")
+	if(EXISTS "${Target_App_Dir}/icon.png")
+		dk_createIcons("${Target_App_Dir}/icon.png")
 	endif()
 
 	############### BACKUP USERDATA / inject assets #######################
@@ -774,8 +774,8 @@ elseif(Ios OR Iossim)
 	#	dk_delete(${Target_App_Dir}/Backup)
 	
 	########################## ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icons/icon.png")
-		dk_createIcons("${Target_App_Dir}/icons/icon.png")
+	if(EXISTS "${Target_App_Dir}/icon.png")
+		dk_createIcons("${Target_App_Dir}/icon.png")
 	endif()
 	
 	####################### Storyboards ############################
@@ -884,8 +884,8 @@ if(NOT Raspberry)
 	endif()
 	
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icons/icon.png")
-		dk_createIcons("${Target_App_Dir}/icons/icon.png")
+	if(EXISTS "${Target_App_Dir}/icon.png")
+		dk_createIcons("${Target_App_Dir}/icon.png")
 	endif()
 	#if(EXISTS ${Target_App_Dir}/icons/icon.png)
 	#	dk_copy(${Target_App_Dir}/icons/icon.png ${Target_App_Dir}/assets/icon.png OVERWRITE)
@@ -1000,8 +1000,8 @@ elseif(Mac)
 	endif()
 		
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icons/icon.png")
-		dk_createIcons("${Target_App_Dir}/icons/icon.png")
+	if(EXISTS "${Target_App_Dir}/icon.png")
+		dk_createIcons("${Target_App_Dir}/icon.png")
 	endif()
 	#if(EXISTS ${Target_App_Dir}/icons/icon.png)
 	#	dk_mkdir(${Target_App_Dir}/icons/mac)
@@ -1161,8 +1161,8 @@ elseif(Mac)
 #################
 elseif(Raspberry)
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icons/icon.png")
-		dk_createIcons("${Target_App_Dir}/icons/icon.png")
+	if(EXISTS "${Target_App_Dir}/icon.png")
+		dk_createIcons("${Target_App_Dir}/icon.png")
 	endif()
 
 	############### BACKUP USERDATA / inject assets #######################
@@ -1257,8 +1257,8 @@ elseif(Raspberry)
 ###############
 elseif(Windows_X86)
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icons/icon.png")
-		dk_createIcons("${Target_App_Dir}/icons/icon.png")
+	if(EXISTS "${Target_App_Dir}/icon.png")
+		dk_createIcons("${Target_App_Dir}/icon.png")
 	endif()
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
@@ -1387,8 +1387,8 @@ elseif(Windows_X86)
 ##################
 elseif(Windows_X86_64)
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icons/icon.png")
-		dk_createIcons("${Target_App_Dir}/icons/icon.png")
+	if(EXISTS "${Target_App_Dir}/icon.png")
+		dk_createIcons("${Target_App_Dir}/icon.png")
 	endif()
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
