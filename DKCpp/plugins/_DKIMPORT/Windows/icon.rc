@@ -27,4 +27,4 @@
 #include "windows.h"
 #include "icon.h"
 
-IDI_ICON	ICON	DISCARDABLE		"windows\\icon.ico"
+IDI_ICON	ICON	DISCARDABLE		"icon.ico"

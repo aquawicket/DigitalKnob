@@ -75,7 +75,7 @@ function(dk_createIcons)
 	endif()
 	
 	if(Windows)
-		dk_createWindowsIcon("${ARGV0}" "${Target_App_Dir}/Windows/icon.ico")
+		dk_createWindowsIcon("${ARGV0}" "${Target_App_Dir}/icon.ico")
 		#dk_copy("${Target_App_Dir}/Windows/icon.ico" "${Target_App_Dir}/assets/icon.ico" OVERWRITE)
 		#dk_createFavIcon("${ARGV0}" "${Target_App_Dir}/assets/favicon.ico")
 	endif()
