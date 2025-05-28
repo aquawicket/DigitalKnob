@@ -1,0 +1,1 @@
+EMBED_IMPORT=https://github.com/MKlimenko/embed/archive/refs/heads/master.zip

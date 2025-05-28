@@ -34,14 +34,6 @@ if(EXISTS "${Target_App_Dir}/icon.png")
 	dk_createIcons("${Target_App_Dir}/icon.png")
 endif()
 
-#if(EXISTS "${Target_App_Dir}/icon.ico")
-#	if(Windows)
-#		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/icon.h ${Target_App_Dir}/windows/icon.h)
-#		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/icon.rc ${Target_App_Dir}/windows/icon.rc)
-#	endif()
-#endif()
-
-
 ################# BACKUP USERDATA / INJECT ASSETS #####################
 if(EXISTS "${Target_App_Dir}/assets")
 	dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)
@@ -67,14 +59,6 @@ if(BACKUP_APP_EXECUTABLES)
 	endif()
 endif()
 
-#	##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-#	file(GLOB_RECURSE resources_SRC 
-#		${Target_App_Dir}/*.manifest
-#		${Target_App_Dir}/*.rc
-#		${Target_App_Dir}/icons/windows/*.rc)
-#	list(APPEND App_SRC ${resources_SRC})
-#endif()
-	
 dk_generateAppCmake()
 
 #dk_clearCmakeCache()
