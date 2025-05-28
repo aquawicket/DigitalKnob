@@ -16,8 +16,8 @@ from DK import *
 def dk_color(*args):
     #dk_debugFunc 0 1
 
-    global USE_COLOR;   USE_COLOR=1
-    #if defined args[0] if args[0] equ 0 USE_COLOR=
+    global dk_color_ENABLE;   dk_color_ENABLE=1
+    #if defined args[0] if args[0] equ 0 dk_color_ENABLE=
 
     # https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
     # https://en.wikipedia.org/wiki/C0_and_C1_control_codes

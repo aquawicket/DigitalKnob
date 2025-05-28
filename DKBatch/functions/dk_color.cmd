@@ -19,11 +19,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 1
 
-	(set USE_COLOR=1)
-	if defined %1 if %1 equ 0 (set USE_COLOR=)
+	(set dk_color_ENABLE=1)
+	if defined %1 if %1 equ 0 (set dk_color_ENABLE=)
 
 	:USE_COLOR_if
-	if not defined USE_COLOR goto USE_COLOR_else
+	if not defined dk_color_ENABLE goto dk_color_DISABLE
 
 		::(set ESC="																&:: escape character	BAD: Uncopyable character
 		::for /f %%A in ('echo prompt $E^| cmd') do (set ESC=%%A)					&:: escape character	BAD: cryptic
@@ -236,7 +236,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 		%dk_call% dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
 	goto USE_COLOR_endif	
-	:USE_COLOR_else
+	:dk_color_DISABLE
 		::%dk_call% dk_unset ESC
 		::%dk_call% dk_unset clr
 

@@ -17,16 +17,16 @@
 dk_color = function dk_color_f(){
 	//dk_debugFunc(0 1)
 	
-	var USE_COLOR = 1;
+	var dk_color_ENABLE = 1;
 	
 /*	if [ ${#} -gt 0 ]; then
 		if [ ${1-} -eq 0 ]; then
-			delete this.USE_COLOR
+			delete this.dk_color_ENABLE
 		fi
 	fi
 */
 
-	if(USE_COLOR){
+	if(dk_color_ENABLE){
 		var ESC = "\x1b";    		 	// escape character
 		
 		// Attributes on

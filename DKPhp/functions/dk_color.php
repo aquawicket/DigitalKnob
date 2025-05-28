@@ -16,12 +16,12 @@ function dk_color(){
 //	echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
 
 /*
-	$USE_COLOR = 0;
+	$dk_color_ENABLE = 0;
 	if(isset($argv[0])){
-		$USE_COLOR = $argv[0];
+		$dk_color_ENABLE = $argv[0];
 	}
 	
-	if($USE_COLOR != 1){
+	if($dk_color_ENABLE != 1){
 		//return 0;
 	}
 */

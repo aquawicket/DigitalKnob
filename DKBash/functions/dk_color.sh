@@ -19,15 +19,15 @@
 dk_color() {
 	dk_debugFunc 0 1
 	
-	export USE_COLOR=1
+	export dk_color_ENABLE=1
 	if [ ${#} -gt 0 ]; then
 		if [ ${1-} -eq 0 ]; then
-			dk_call dk_unset USE_COLOR
+			dk_call dk_unset dk_color_ENABLE
 		fi
 	fi
 	
-	if [ -n ${USE_COLOR-} ]; then
-	#if dk_call dk_defined USE_COLOR; then
+	if [ -n ${dk_color_ENABLE-} ]; then
+	#if dk_call dk_defined dk_color_ENABLE; then
 		export ESC=""     		 		# escape character
 		
 		# Attributes on

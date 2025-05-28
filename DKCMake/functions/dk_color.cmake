@@ -24,14 +24,14 @@ include_guard()
 function(dk_color)
 	dk_debugFunc()
 	
-	set(USE_COLOR 1)
+	set(dk_color_ENABLE 1)
 	if(DEFINED ARGV0)
 		if(NOT ${ARGV0})
-			dk_unset(USE_COLOR)
+			dk_unset(dk_color_ENABLE)
 		endif()
 	endif()
 	
-	if(USE_COLOR)
+	if(dk_color_ENABLE)
 		string(ASCII 27 ESC)
 		set(ESC         "${ESC}" 		CACHE INTERNAL "")   	# escape character
 		

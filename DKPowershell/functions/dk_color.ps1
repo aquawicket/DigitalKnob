@@ -14,14 +14,14 @@ if(!$dk_color){ $dk_color = 1 } else{ return } #include guard
 function Global:dk_color() {
 	dk_debugFunc 0 2
 
-	$global:USE_COLOR = 1
+	$global:dk_color_ENABLE = 1
 	if(Test-Path variable:args){
 		if(!(${args})){
-			dk_call dk_unset USE_COLOR 
+			dk_call dk_unset dk_color_ENABLE 
 		}
 	}
 	
-	if($USE_COLOR){
+	if($dk_color_ENABLE){
 		$global:ESC = "$([char]27)" 				# escape character
 		
 		# Attributes on
