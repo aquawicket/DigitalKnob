@@ -28,6 +28,7 @@ function(dk_envList)
 	
 	# set the CURRENT_<THING>  and push it to the list.
 	if("${CMND}" STREQUAL "PUSH")
+		#dk_notice("###### dk_envList PUSH ${VALUE} ######")
 		set(ENV{CURRENT_${NAME}} "${VALUE}")
 		set(ENV{${NAME}_STACK} "$ENV{CURRENT_${NAME}};$ENV{${NAME}_STACK}")
 		set(${NAME}_list $ENV{${NAME}_STACK})
@@ -39,6 +40,9 @@ function(dk_envList)
 	# Pop the CURRENT_<THING> and drop it fom the list. Update CURRENT_<THING>
 	if("${CMND}" STREQUAL "POP")
 		set(${NAME}_list $ENV{${NAME}_STACK})
+		#list(GET ${NAME}_list 0 FIRST_ITEM)
+		#dk_notice("###### dk_envList POP ${FIRST_ITEM} ######")
+		
 		list(POP_FRONT ${NAME}_list)
 		list(LENGTH ${NAME}_list ${NAME}_length)
 				
@@ -53,6 +57,8 @@ function(dk_envList)
 		#set(ENV{${NAME}_STACK_LENGTH} ${${NAME}_length})
 		#dk_notice("TOP=$ENV{CURRENT_${NAME}}       STACK=$ENV{${NAME}_STACK}     LENGTH=${${NAME}_length}")
 	endif()
+	
+	dk_notice("$ENV{${NAME}_STACK}")
 endfunction()
 
 

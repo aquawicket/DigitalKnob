@@ -83,6 +83,7 @@ endif()
 
 ### IMPORT ###
 dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip)
+dk_assertPath(SDL)
 #dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.30.9.zip)
 #dk_import(https://github.com/libsdl-org/SDL.git BRANCH main) # SDL3
 

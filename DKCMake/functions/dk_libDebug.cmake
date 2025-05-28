@@ -25,7 +25,7 @@ function(dk_libDebug lib_path)
 	if(NOT Debug)
 		return()
 	endif()	
-	
+	dk_append(${CURRENT_PLUGIN}_LIBS ${lib_path})
 	dk_append(LIBLIST ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_echo("${lyellow}MISSING:${yellow} ${lib_path}${clr}")

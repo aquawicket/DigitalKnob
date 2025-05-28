@@ -34,7 +34,7 @@ function(dk_depend plugin) #target
 	dk_toUpper("${plugin}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
 	set(${PLUGIN}_IMPORT_NAME ${plugin})
-	if((NOT EXISTS ${PLUGIN}) OR (NOT EXISTS ${${PLUGIN}_DIR}))
+	if((NOT EXISTS "${PLUGIN}") OR (NOT EXISTS "${${PLUGIN}_DIR}"))
 		
 		###### Push Plugin to the PLUGIN_STACK ######
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
