@@ -25,8 +25,6 @@ include_guard()
 #
 function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	dk_debugFunc()
-	message("dk_install(${ARGV})")
-	
 	dk_getParameter(NO_HALT  REMOVE)
 	
 	set(PLUGIN_IMPORT_NAME 	${${PLUGIN_VAR_PREFIX}_IMPORT_NAME})
@@ -43,9 +41,9 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	#if(NOT ${PLUGIN_IMPORT_NAME} STREQUAL ${plugin_lower})
 	#	dk_fatal("ERROR:  dk_install() (${PLUGIN_IMPORT_NAME}) must be all lowercase")
 	#endif()
-	dk_assertPath($ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME})
+	dk_assertPath("$ENV{DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}")
 	
-	if(EXISTS ${PLUGIN_DIR}/installed)
+	if(EXISTS "${PLUGIN_DIR}/installed")
 		dk_info("${PLUGIN_IMPORT_NAME} already installed")
 		if(ARGN MATCHES "PATCH")
 			dk_patch(${PLUGIN_IMPORT_NAME} ${PLUGIN_DIR})

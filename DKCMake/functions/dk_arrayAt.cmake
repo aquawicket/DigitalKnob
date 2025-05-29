@@ -30,26 +30,12 @@ include_guard()
 function(dk_arrayAt)
 	dk_debugFunc(2 99)
 
-#	if(DEFINED "${ARGV0}")
-#		set(array 	"${${ARGV0}}")
-#	elseif(DEFINED ARGV0)
-#		set(array 	"${ARGV0}")
-#	else()
-#		dk_fatal("dk_arrayLength(${ARGV}): array is invalid.")
-#	endif()
-#	#dk_printVar(array)
 	dk_getArg(0 array)
-
-#	if(DEFINED "${ARGV1}")
-#		set(index 	"${${ARGV1}}")
-#	elseif(DEFINED ARGV0)
-#		set(index 	"${ARGV1}")
-#	else()
-#		dk_fatal("dk_arrayLength(${ARGV}): index is invalid.")
-#	endif()
 	dk_getArg(1 index)
-
+	
 	list(GET array ${index} dk_arrayAt)
+	
+	### return ###
 	set(dk_arrayAt ${dk_arrayAt} PARENT_SCOPE)
 endfunction()
 

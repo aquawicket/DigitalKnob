@@ -2,7 +2,7 @@ if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 
 if(!$dk_beep){ $dk_beep = 1 } else{ return } #include guard
 
 ##################################################################################
-# dk_beep()
+# dk_beep(frequency, duration)
 #
 #
 function Global:dk_beep(){

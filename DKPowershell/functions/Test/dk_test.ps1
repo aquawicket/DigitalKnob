@@ -11,8 +11,6 @@ function GLOBAL:Test:dk_test() {
     $all_args = $PsBoundParameters.Values + ${args}
     
     Write-Host "####################### Test:dk_test.ps1 #######################"
-    Write-Host "                          0 = $0"
-    Write-Host "                          * = $*"
     Write-Host "                   __TIME__ = $(__TIME__)"
     Write-Host "                 __CALLER__ = $(__CALLER__)"
     Write-Host "                   __FILE__ = $(__FILE__)"

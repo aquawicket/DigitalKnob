@@ -18,8 +18,6 @@ include_guard()
 function(dk_beep)
 	dk_debugFunc(0 2)
 	
-	#set(frequency ${ARGV0})
-	#set(duration ${ARGV1})
 	dk_getArg(0 frequency 500)
 	dk_getArg(1 duration 500)
 	
@@ -50,9 +48,11 @@ function(dk_beep)
 #	endif()
 	
 	###### POWERSHELL ######
-	find_program(POWERSHELL_EXE powershell.exe)
+#	find_program(POWERSHELL_EXE powershell.exe)
+	dk_validate(POWERSHELL_EXE "dk_POWERSHELL_EXE()")
 	if(EXISTS "${POWERSHELL_EXE}")
 		set(cmnd ${POWERSHELL_EXE} "[console]::beep(${frequency},${duration})")
+		dk_debug("cmnd = ${cmnd}")
 		execute_process(COMMAND ${cmnd})	
 		return()
 	endif()
@@ -70,7 +70,7 @@ function(dk_beep)
 #		return()
 #	endif()
 #	
-	dk_fatal("Could not command for cmd, powershell, bash or sh)
+	dk_fatal("Could not find cmd, powershell, bash or sh")
 endfunction()
 
 
@@ -81,10 +81,11 @@ endfunction()
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
 	dk_debugFunc(0)
-	
+
 	dk_echo("Testing dk_beep.cmake")
 	dk_beep(500 500)
 	dk_beep(600 750)
 	dk_beep(700 1000)
 	dk_beep()
+	
 endfunction()

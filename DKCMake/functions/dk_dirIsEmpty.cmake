@@ -21,9 +21,8 @@ include_guard()
 #
 function(dk_dirIsEmpty)
 	dk_debugFunc(1 2)
-	
-	set(path 	"${ARGV0}")
-	set(rtn_var	"${ARGV1}")
+	dk_getArg(0 path)
+	dk_getArg(1 rtn_var)
 	
 	if(EXISTS "${path}")
 		file(GLOB items RELATIVE "${path}/" "${path}/*")

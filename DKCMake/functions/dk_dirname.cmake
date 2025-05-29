@@ -23,8 +23,8 @@ include_guard()
 #
 function(dk_dirname)
 	dk_debugFunc(1 2)
-	set(path "${ARGV0}")
-	set(rtn_var "${ARGV1}")
+	dk_getArg(0 path)
+	dk_getArg(1 rtn_var)
 	
 	get_filename_component(fullpath ${path} ABSOLUTE)
 	get_filename_component(dk_dirname "${fullpath}" DIRECTORY)

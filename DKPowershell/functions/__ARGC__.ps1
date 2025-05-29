@@ -14,7 +14,6 @@ function GLOBAL:__ARGC__($_FRAME_=1) {
 	#return $ARGC;
 	
 	return $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count;
-	
 }
 
 

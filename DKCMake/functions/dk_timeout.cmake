@@ -19,17 +19,14 @@ include_guard()
 #
 function(dk_timeout) 
 	dk_debugFunc(0 1)
-	
-	### arg0 seconds ###
 	dk_getArg(0 seconds 10)
-	if("${seconds}" STREQUAL "")
-		dk_fatal("seconds:'${seconds}' is invalid")
-		set(seconds 10)
-	endif()
+	
+#	if("${seconds}" STREQUAL "")
+#		dk_fatal("seconds:'${seconds}' is invalid")
+#		set(seconds 10)
+#	endif()
 	dk_assertVar(seconds)
 
-	#if("${CMAKE_HOST_SYSTEM_NAME}" EQUAL "Windows")
-	
 	dk_DKSHELL()
 	
 	###### CMD ######
