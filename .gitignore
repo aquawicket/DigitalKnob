@@ -72,6 +72,7 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/backward-cpp-51f0700
 3rdParty/batch-file-examples-master
 3rdParty/bzip2-66c46b8
+3rdParty/CMakeRC-master
 3rdParty/cosmocc-master
 3rdParty/cosmopolitan-e4d6eb3
 3rdParty/curl-8.6.0
