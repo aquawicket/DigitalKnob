@@ -18,9 +18,8 @@ include_guard()
 #
 #	@msg	- The message to print
 #
-function(dk_fatal msg)
+function(dk_fatal)
 	dk_debugFunc()
-
 	dk_getParameter(NO_HALT  REMOVE)
 	
 	dk_log(FATAL "${ARGV0}" ${NO_HALT})

@@ -65,8 +65,6 @@ dk_set(IMAGEMAGICK_CONVERT_EXE "${IMAGEMAGICK_CONVERT_EXE}")
 
 
 
-
-
 ### compiling trmporarily disabled ####
 return()
 

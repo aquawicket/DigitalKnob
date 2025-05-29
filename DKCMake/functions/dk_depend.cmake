@@ -27,7 +27,7 @@ function(dk_depend plugin) #target
 		if(DISABLED_LIBS MATCHES "${plugin}")
 			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
 		endif()
-		#dk_notice("${plugin} IS DISABLED")
+		dk_notice("${plugin} IS DISABLED")
 		return()
 	endif()
 	
