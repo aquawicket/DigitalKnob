@@ -20,8 +20,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist "%_path_%/CMakeCache.txt"		%dk_call% dk_delete "%_path_%/CMakeCache.txt"
 	if exist "%_path_%/cmake_install.cmake"	%dk_call% dk_delete "%_path_%/cmake_install.cmake"
 
-	::for /r %_path_% %%i in (CMakeCache.*) do @if exist "%%i" del "%%i"
-	::for /d /r "%_path_%" %%i in (CMakeFiles) do if exist "%%i" rd /s/q "%%i"
+	::for /r %_path_% %%G in (CMakeCache.*) do @if exist "%%G" del "%%G"
+	::for /d /r "%_path_%" %%G in (CMakeFiles) do @if exist "%%G" rd /s/q "%%G"
 %endfunction%
 
 
@@ -31,5 +31,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_clearCmakeCache "%USERPROFILE:\=/%/digitalknob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Debug"
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_clearCmakeCache "%DKBRANCH_DIR%"
 %endfunction%

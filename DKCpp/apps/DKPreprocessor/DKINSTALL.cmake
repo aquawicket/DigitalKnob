@@ -12,6 +12,7 @@ include_guard()
 #########################################################################
 
 
+###### DEFAULT TARGET ######
 dk_validate(Host_Os "dk_Host_Os()")
 dk_validate(Host_Arch "dk_Host_Arch()")
 dk_Target_Os("${Host_Os}")
@@ -28,6 +29,10 @@ dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 
 ###### DEPENDENCIES ######
 
+
+## copy app default files without overwrite
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/icon.png ${Target_App_Dir}/icon.png) 
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${Target_App_Dir}/main.cpp)
 
 ###### CREATE ICONS ######
 if(EXISTS "${Target_App_Dir}/icon.png")
