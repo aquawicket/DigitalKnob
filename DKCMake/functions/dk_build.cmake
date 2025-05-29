@@ -22,7 +22,7 @@ include_guard()
 function(dk_build path) #target NO_HALT
 	dk_debugFunc()
 	
-	#if(NOT REBUILDALL)
+	if(NOT REBUILDALL)
 		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
 			if(NOT DEFINED missing_libs)
 				set(missing_libs 0)
@@ -33,13 +33,11 @@ function(dk_build path) #target NO_HALT
 				dk_notice("${lib} already exists")
 			endif()
 		endforeach()
-		dk_notice("already_built = ${already_built}")
-	
 		if("${missing_libs}" EQUAL "0")
-			dk_notice("${CURRENT_PLUGIN} libs already built. skipping")
+			dk_notice("${CURRENT_PLUGIN} libs already built. skipping...")
 			return()
 		endif()
-	#endif()
+	endif()
 	
 	if(NOT QUEUE_BUILD)
 		dk_return()
