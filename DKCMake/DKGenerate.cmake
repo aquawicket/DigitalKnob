@@ -145,7 +145,7 @@ foreach(plugin ${dkdepend_list})
 	dk_toUpper(${plugin} PLUGIN)
 	dk_debug("PLUGIN = ${PLUGIN} = ${${PLUGIN}}")
 	if(NOT DEFINED ${PLUGIN})
-		dk_error("${PLUGIN}:'${${PLUGIN}}' is invalid")
+		dk_warning("${PLUGIN}:'${${PLUGIN}}' is invalid")
 	endif()
 	
 	#NOTE: we won't have the library paths to remove until we've run DKINSTALL.cmake for the library

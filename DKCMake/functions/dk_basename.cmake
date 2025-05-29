@@ -18,11 +18,13 @@ include_guard()
 function(dk_basename)
 	dk_debugFunc(1 2)
 	
-	set (path 		"${ARGV0}")
-	set (rtn_var	"${ARGV1}")
+	set(path 	"${ARGV0}")
+	set(rtn_var	"${ARGV1}")
 	
 	get_filename_component(fullpath ${path} ABSOLUTE)
 	get_filename_component(dk_basename "${fullpath}" NAME)
+	
+	### return ###
 	set(dk_basename ${dk_basename} PARENT_SCOPE)
 	if(rtn_var)
 		set(${rtn_var} ${dk_basename} PARENT_SCOPE)

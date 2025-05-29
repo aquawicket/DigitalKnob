@@ -22,12 +22,18 @@ include_guard()
 #   Reference	- https://en.wikipedia.org/wiki/Dirname
 #
 function(dk_dirname)
-	dk_debugFunc(2)
-	set(path ${ARGV0})
-	set(rtn_var ${ARGV1})
+	dk_debugFunc(1 2)
+	set(path "${ARGV0}")
+	set(rtn_var "${ARGV1}")
 	
-	get_filename_component(dirname "${path}" DIRECTORY)
-	set(${rtn_var} "${dirname}" PARENT_SCOPE)
+	get_filename_component(fullpath ${path} ABSOLUTE)
+	get_filename_component(dk_dirname "${fullpath}" DIRECTORY)
+	
+	### return ###
+	set(dk_dirname "${dk_dirname}" PARENT_SCOPE)
+	if(rtn_var)
+		set(${rtn_var} "${dk_dirname}" PARENT_SCOPE)
+	endif()
 endfunction()
 
 
@@ -39,6 +45,12 @@ endfunction()
 function(DKTEST) 
 	dk_debugFunc(0)
 	
-	dk_dirname("C:/Windows/System32" dirname)
-	dk_info("dirname = ${dirname}")
+	dk_echo("")
+	dk_dirname("C:/Windows/System32")
+	dk_echo("dk_dirname = ${dk_dirname}")
+	
+	dk_echo("")
+	dk_dirname("C:/Windows/System32/drivers" myRtnVal)
+	dk_echo("dk_dirname = ${dk_dirname}")
+	dk_echo("myRtnVal = ${myRtnVal}")
 endfunction()
