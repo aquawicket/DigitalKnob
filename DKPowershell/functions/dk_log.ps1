@@ -200,7 +200,7 @@ function Global:dk_log($_level_, $_message_) {
 	if(${level_TRACE} -eq 1)	{ dk_call dk_echo "${level_COLOR}*** TRACE_ON_${_level_} ***${clr}"; dk_call dk_stacktrace }
 	
 	###### LINE ######
-	if(${level_LINE} -eq 1)		{  dk_call dk_echo "${level_COLOR}*** LINE_ON_${_level_} ***${clr}"; dk_call dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; }
+	if(${level_LINE} -eq 1)		{  dk_call dk_echo "${level_COLOR}*** LINE_ON_${_level_} ***${clr}"; dk_call dk_showFileLine "${POWERSHELL_SOURCE[1]}" "${POWERSHELL_LINENO[1-1]}"; }
 	
 	###### SOUND ######
 	if(${level_PAUSE} -eq 1)	{ dk_call dk_echo "${level_COLOR}*** SOUND_ON_${_level_} ***${clr}"; } #dk_call dk_sound }
