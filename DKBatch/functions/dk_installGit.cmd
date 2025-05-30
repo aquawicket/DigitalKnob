@@ -28,10 +28,10 @@ if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     if defined Windows_X86_64_Host	(set "GIT_IMPORT=%GIT_WIN_X86_64_IMPORT%")
     if defined Windows_Host			(%dk_call% dk_assertVar GIT_IMPORT)
    
-	if defined GIT_IMPORT (
+	::if defined GIT_IMPORT (
 		%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-		%dk_call% dk_importVariables %GIT_IMPORT% NAME git ROOT !DKTOOLS_DIR!
-	)
+		%dk_call% dk_importVariables %GIT_IMPORT% NAME git ROOT %DKTOOLS_DIR%
+	::)
 
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::###!!! DO NOT USE GIT_DIR !!!###
@@ -53,6 +53,7 @@ if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     %dk_call% dk_echo  
     %dk_call% dk_echo "Installing git . . ."
     %dk_call% dk_download %GIT_IMPORT%
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     "%DKDOWNLOAD_DIR%/%GIT_IMPORT_FILE%" -y -o "%GIT%"
 
     if NOT exist "%GIT_EXE%" (
