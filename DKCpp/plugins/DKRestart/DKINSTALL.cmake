@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 dk_set(QUEUE_BUILD ON)
 dk_executable(DKRestart)
 
-if(Windows)
+if(Windows_Target)
 	if(Debug)
 		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${Target_Tuple}/${Debug_Dir}/DKRestart.exe ${Target_App_Dir}/assets/DKRestart/${Target_Tuple}Debug OVERWRITE)
 	endif()
@@ -19,7 +19,7 @@ if(Windows)
 endif()
 
 
-if(Mac)
+if(Mac_Target)
 	if(Debug)
 		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${Target_Tuple}/${Debug_Dir}/DKRestart.app ${Target_App_Dir}/assets/DKRestart/${Target_Tuple}Debug/DKRestart.app OVERWRITE)
 	endif()
@@ -29,7 +29,7 @@ if(Mac)
 endif()
 
 
-if(Linux)
+if(Linux_Target)
 	if(Debug)
 		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${Target_Tuple}/${Debug_Dir}/DKRestart ${Target_App_Dir}/assets/${Target_Tuple}Debug/DKRestart OVERWRITE)
 	endif()
@@ -39,7 +39,7 @@ if(Linux)
 endif()
 
 
-if(Raspberry)
+if(Raspberry_Target)
 	if(Debug)
 		dk_copy(${DKCPP_PLUGINS_DIR}/DKRestart/${Target_Tuple}/${Debug_Dir}/DKRestart ${Target_App_Dir}/assets/${Target_Tuple}Debug/DKRestart OVERWRITE)
 	endif()
@@ -51,7 +51,7 @@ endif()
 
 
 ## DKRestart win
-if(Windows)
+if(Windows_Target_Target)
 #	dk_appendCmake("include_directories(${DKCPP_PLUGINS_DIR}) \n")
 #	dk_appendCmake("find_library(DKd DK.lib ${DK}/${Target_Tuple}/${Debug_Dir}) \n")
 #	dk_appendCmake("list(APPEND DEBUG_DKLIBS debug \${DKd}) \n")

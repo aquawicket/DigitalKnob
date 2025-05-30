@@ -7,7 +7,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ DKHook ############
 
-#if(NOT Windows AND NOT Linux)
+#if(NOT Windows_Target AND NOT Linux_Target)
 #	dk_return()
 #endif()
 

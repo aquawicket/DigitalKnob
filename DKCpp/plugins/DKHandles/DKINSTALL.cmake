@@ -6,7 +6,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 
 ############ DKHandles ############
-if(NOT Windows)
+if(NOT Windows_Target)
 	RETURN()
 endif()
 if(HAVE_DKDuktape)

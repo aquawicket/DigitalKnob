@@ -355,9 +355,11 @@ if(NOT DKAPP)
 endif()	
 
 dk_info("\n")
-dk_info("##############################################")
+dk_info("################################################")
 dk_info("############ Creating ${Target_App} ############")
-dk_info("##############################################\n")
+dk_info("################################################")
+dk_info("\n")
+dk_pause()
 
 # Create version from date
 string(TIMESTAMP year "%y")
@@ -367,9 +369,9 @@ dk_set(APP_VERSION "${year}.${month}.${day}")
 
 ## Create the DKPlugins.h header file
 if(PLUGINS_FILE)
-	dk_replaceAll("${PLUGINS_FILE}" "#include \"DKWindow.h\""  ""  PLUGINS_FILE)
-	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  "\n"  PLUGINS_FILE)
-	dk_replaceAll("${PLUGINS_FILE}"  ";"  ""  PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
 	dk_fileWrite("${Target_App_Dir}/DKPlugins.h" "${PLUGINS_FILE}")
 endif()
 
@@ -413,7 +415,10 @@ if(EXISTS "${Target_App_Dir}/icon.png")
 	dk_createIcons("${Target_App_Dir}/icon.png")
 endif()
 	
-	
+###################### Backup Executable ###########################
+if(BACKUP_APP_EXECUTABLES)
+	dk_backupExecutable()
+endif()	
 	
 	
 	
@@ -421,36 +426,9 @@ endif()
 	
 	
 ############ ANDROID ############
-if(Android)
+if(Android_Target)
 	################################ CMAKE_ANDROID_GUI ########################################
 	if(CMAKE_ANDROID_GUI) # CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake
-		########################## CREATE ICONS ###############################
-		#if(EXISTS "${Target_App_Dir}/icon.png")
-		#	dk_createIcons("${Target_App_Dir}/icon.png")
-		#endif()
-		#if(EXISTS ${Target_App_Dir}/icons/icon.png)
-		#	dk_copy(${Target_App_Dir}/icons/icon.png ${Target_App_Dir}/assets/icon.png OVERWRITE)
-		#endif()
-	
-		###################### Backup Executable ###########################
-		if(BACKUP_APP_EXECUTABLES)
-			dk_backupExecutable()
-		#	if(MULTI_CONFIG)
-		#		if(Debug)
-		#			dk_rename(${Target_App_Dir}/${Target_Tuple}/app/build/outputs/apk/debug/app-debug.apk ${Target_App_Dir}/${Target_Tuple}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
-		#		endif()
-		#		if(Release)
-		#			dk_rename(${Target_App_Dir}/${Target_Tuple}/app/build/outputs/apk/release/app-release-unsigned.apk ${Target_App_Dir}/${Target_Tuple}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
-		#		endif()
-		#	else()
-		#		if(Debug)
-		#			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/app/build/outputs/apk/debug/app-debug.apk ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
-		#		endif()
-		#		if(Release)
-		#			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/app/build/outputs/apk/release/app-release-unsigned.apk ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
-		#		endif()
-		#	endif()
-		endif()
 	
 		####################### Create Library Target ###################
 		#if(MSVC)
@@ -609,7 +587,7 @@ if(Android)
 
 
 ############ COSMOPOLITAN ############
-elseif(Cosmopolitan)
+elseif(Cosmopolitan_Target)
 
 	### Create Executable Target ###
 	add_executable(${Target_App} ${App_SRC})
@@ -631,15 +609,10 @@ elseif(Cosmopolitan)
 
 
 ############ EMSCRIPTEN ############
-elseif(Emscripten)
+elseif(Emscripten_Target)
 
 	# TODO: https://schellcode.github.io/webassembly-without-emscripten
 	
-	### CREATE ICONS ###
-	#if(EXISTS "${Target_App_Dir}/icon.png")
-	#	dk_createIcons("${Target_App_Dir}/icon.png")
-	#endif()
-
 	### BACKUP USERDATA / inject assets ###
 	if(false)
 		dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)  # backup files not going in the package
@@ -650,22 +623,6 @@ elseif(Emscripten)
 		dk_bin2h(SOURCE_FILE ${Target_App_Dir}/assets.zip HEADER_FILE ${Target_App_Dir}/assets.h VARIABLE_NAME "ASSETS_H")
 		dk_copy(${Target_App_Dir}/Backup/ ${Target_App_Dir}/assets/) # Restore the backed up assets
 		dk_delete(${Target_App_Dir}/Backup)
-	endif()
-	
-	### Backup Executable ###
-	if(BACKUP_APP_EXECUTABLES)
-		dk_backupExecutable()
-		#if(Debug)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.data ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.data.backup OVERWRITE NO_HALT)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.html ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.html.backup OVERWRITE NO_HALT)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.js ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.js.backup OVERWRITE NO_HALT)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.wasm ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.wasm.backup OVERWRITE NO_HALT)
-		#elseif(Release)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.data ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.data.backup OVERWRITE NO_HALT)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.html ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.html.backup OVERWRITE NO_HALT)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.js ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.js.backup OVERWRITE NO_HALT)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.wasm ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.wasm.backup OVERWRITE NO_HALT)
-		#endif()
 	endif()
 	
 	### Create Executable Target ###
@@ -762,25 +719,8 @@ elseif(Emscripten)
 
 
 ############ IOS / IOSSIM ############
-elseif((Ios) OR (Iossim))
+elseif((Ios_Target) OR (Iossim_Target))
 	# https://github.com/forexample/testapp/blob/master/CMakeLists.txt
-	
-	### Backup Executable ###
-	if(BACKUP_APP_EXECUTABLES)
-		dk_backupExecutable()
-		#if(Debug)
-		#	if(EXISTS ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app)
-		#		dk_delete(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app.backup)
-		#		dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app.backup OVERWRITE)
-		#	endif()
-		#endif()
-		#if(Release)
-		#	if(EXISTS ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app)
-		#		dk_delete(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app.backup)
-		#		dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app.backup OVERWRITE)
-		#	endif()
-		#endif()
-	endif()
 	
 	### BACKUP USERDATA ###
 	# Backup files and folders excluded from the package
@@ -790,11 +730,6 @@ elseif((Ios) OR (Iossim))
 	# Restore the backed up files, excluded from assets
 	#	dk_copy(${Target_App_Dir}/Backup/ ${Target_App_Dir}/assets/)
 	#	dk_delete(${Target_App_Dir}/Backup)
-	
-	### ICONS ###
-	if(EXISTS "${Target_App_Dir}/icon.png")
-		dk_createIcons("${Target_App_Dir}/icon.png")
-	endif()
 	
 	### Storyboards ###
 	#TODO
@@ -852,7 +787,7 @@ elseif((Ios) OR (Iossim))
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${Target_App})
 	
 	### Create Run.sh ###
-	if(Iossim)
+	if(Iossim_Target)
 		dk_info("Creating Run.sh . . .")
 		if(Debug)
 			set(RUN_SCRIPT_DEBUG
@@ -890,24 +825,7 @@ elseif((Ios) OR (Iossim))
 
 
 ############ LINUX ############
-elseif((Linux) AND (NOT Raspberry))
-	###################### Backup Executable ###########################
-	if(BACKUP_APP_EXECUTABLES)
-		dk_backupExecutable()
-		#if(Debug)
-		#	dk_copy(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App} ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.backup OVERWRITE NO_HALT)
-		#elseif(Release)
-		#	dk_copy(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App} ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.backup OVERWRITE NO_HALT)
-		#endif()
-	endif()
-	
-	########################## CREATE ICONS ###############################
-	#if(EXISTS "${Target_App_Dir}/icon.png")
-	#	dk_createIcons("${Target_App_Dir}/icon.png")
-	#endif()
-	#if(EXISTS ${Target_App_Dir}/icons/icon.png)
-	#	dk_copy(${Target_App_Dir}/icons/icon.png ${Target_App_Dir}/assets/icon.png OVERWRITE)
-	#endif()
+elseif((Linux_Target) AND (NOT Raspberry_Target))
 	
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -1005,39 +923,7 @@ elseif((Linux) AND (NOT Raspberry))
 
 
 ############ MAC ############
-elseif(Mac)
-	###################### Backup Executable ###########################
-	if(BACKUP_APP_EXECUTABLES)
-		if(Debug)
-			dk_copy(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app.backup OVERWRITE NO_HALT)
-		endif()
-		if(Release)
-			dk_copy(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app.backup OVERWRITE NO_HALT)
-		endif()
-	endif()
-		
-	########################## CREATE ICONS ###############################
-	#if(EXISTS "${Target_App_Dir}/icon.png")
-	#	dk_createIcons("${Target_App_Dir}/icon.png")
-	#endif()
-	#if(EXISTS ${Target_App_Dir}/icons/icon.png)
-	#	dk_mkdir(${Target_App_Dir}/icons/mac)
-	#	dk_mkdir(${Target_App_Dir}/icons/mac/icons.iconset)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 16 16 ${Target_App_Dir}/icons/mac/icons.iconset/icon_16x16.png)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 32 32 ${Target_App_Dir}/icons/mac/icons.iconset/icon_16x16@2x.png)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 32 32 ${Target_App_Dir}/icons/mac/icons.iconset/icon_32x32.png)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 64 64 ${Target_App_Dir}/icons/mac/icons.iconset/icon_32x32@2x.png)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 128 128 ${Target_App_Dir}/icons/mac/icons.iconset/icon_128x128.png)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 256 256 ${Target_App_Dir}/icons/mac/icons.iconset/icon_128x128@2x.png)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 256 256 ${Target_App_Dir}/icons/mac/icons.iconset/icon_256x256.png)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 512 512 ${Target_App_Dir}/icons/mac/icons.iconset/icon_256x256@2x.png)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 512 512 ${Target_App_Dir}/icons/mac/icons.iconset/icon_512x512.png)
-	#	dk_resizeImage(${Target_App_Dir}/icons/icon.png 1024 1024 ${Target_App_Dir}/icons/mac/icons.iconset/icon_512x512@2x.png)
-	#	dk_exec(iconutil -c icns -o ${Target_App_Dir}/icons/mac/icons.icns ${Target_App_Dir}/icons/mac/icons.iconset WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR})
-	#	set(MACOSX_BUNDLE_ICON_FILE icons.icns)
-	#	set(app_ICONS ${Target_App_Dir}/icons/mac/icons.icns)
-	#	set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-	#endif()
+elseif(Mac_Target)
 		
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)
@@ -1176,11 +1062,7 @@ elseif(Mac)
 
 
 ############ RASPBERRY ############
-elseif(Raspberry)
-	########################## CREATE ICONS ###############################
-	#if(EXISTS "${Target_App_Dir}/icon.png")
-	#	dk_createIcons("${Target_App_Dir}/icon.png")
-	#endif()
+elseif(Raspberry_Target)
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -1195,16 +1077,6 @@ elseif(Raspberry)
 		# Restore the backed up assets
 		dk_copy(${Target_App_Dir}/Backup/ ${Target_App_Dir}/assets/)
 		dk_delete(${Target_App_Dir}/Backup)
-	endif()
-	
-	###################### Backup Executable ###########################
-	if(BACKUP_APP_EXECUTABLES)
-		dk_backupExecutable()
-		#if(Debug)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App} ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.backup OVERWRITE NO_HALT)
-		#elseif(Release)
-		#	dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App} ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.backup OVERWRITE NO_HALT)
-		#endif()
 	endif()
 	
 	####################### Create Executable Target ###################
@@ -1272,12 +1144,8 @@ elseif(Raspberry)
 
 
 
-############ WINDOWS X86 ############
-elseif(Windows_X86)
-	########################## CREATE ICONS ###############################
-	#if(EXISTS "${Target_App_Dir}/icon.png")
-	#	dk_createIcons("${Target_App_Dir}/icon.png")
-	#endif()
+############ Windows_X86_Target ############
+elseif(Windows_X86_Target)
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
@@ -1292,17 +1160,6 @@ elseif(Windows_X86)
 		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h OVERWRITE) #required
 	endif()	
 		
-	###################### Backup Executable ###########################
-	if(BACKUP_APP_EXECUTABLES)
-		dk_backupExecutable()
-	#	if(Debug)
-	#		dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
-	#	endif()
-	#	if(Release)
-	#		dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
-	#	endif()
-	endif()
-		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
@@ -1310,8 +1167,8 @@ elseif(Windows_X86)
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc" 		"${Target_App_Dir}/assets.rc")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h" 		"${Target_App_Dir}/icon.h")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc" 		"${Target_App_Dir}/icon.rc")
-		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h"		"${Target_App_Dir}/resource.h")
-		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc" 	"${Target_App_Dir}/resource.rc")
+		#dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h"	"${Target_App_Dir}/resource.h")
+		#dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc" 	"${Target_App_Dir}/resource.rc")
 		file(GLOB_RECURSE resources_SRC 
 			${Target_App_Dir}/*.manifest
 			${Target_App_Dir}/*.rc)
@@ -1407,11 +1264,7 @@ elseif(Windows_X86)
 
 		
 ############ WINDOWS X86_64 ############
-elseif(Windows_X86_64)
-	########################## CREATE ICONS ###############################
-	#if(EXISTS "${Target_App_Dir}/icon.png")
-	#	dk_createIcons("${Target_App_Dir}/icon.png")
-	#endif()
+elseif(Windows_X86_64_Target)
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
@@ -1423,20 +1276,10 @@ elseif(Windows_X86_64)
 		# Restore the backed up files
 		dk_copy(${Target_App_Dir}/Backup/ ${Target_App_Dir}/assets/ OVERWRITE NO_HALT)
 		dk_delete(${Target_App_Dir}/Backup NO_HALT)
-		#dummy assets.h file, or the builder wil complain about assets.h missing
+		#dummy assets.h file, or the builder will complain about assets.h missing
 		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h OVERWRITE NO_HALT)
 	endif()
 
-	###################### Backup Executable ###########################
-	if(BACKUP_APP_EXECUTABLES)
-		if(Debug)
-			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
-		endif()
-		if(Release)
-			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
-		endif()
-	endif()
-		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
@@ -1444,8 +1287,8 @@ elseif(Windows_X86_64)
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc" 		"${Target_App_Dir}/assets.rc")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h" 		"${Target_App_Dir}/icon.h")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc" 		"${Target_App_Dir}/icon.rc")
-		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h"		"${Target_App_Dir}/resource.h")
-		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc" 	"${Target_App_Dir}/resource.rc")
+		#dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h"	"${Target_App_Dir}/resource.h")
+		#dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc" 	"${Target_App_Dir}/resource.rc")
 		file(GLOB_RECURSE resources_SRC 
 			${Target_App_Dir}/*.manifest
 			${Target_App_Dir}/*.rc)
@@ -1517,7 +1360,7 @@ elseif(Windows_X86_64)
 	#)
 	#CPP_DKFile_Copy(app_path+OS+"/${Release_Dir}/"+Target_App+".pdb", app_path+"assets/"+Target_App+".pdb", true)
 	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${Release_Dir}/"+Target_App+".exe")
-#endif(Windows_X86_64)
+#endif(Windows_X86_64_Target)
 
 ############ ERROR ############
 else()
@@ -1585,13 +1428,13 @@ endforeach()
 #elseif(Mac OR IOS)
 	# TODO
 	#dk_command(otool -L ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app)
-#elseif(Windows)	
+#elseif(Windows_Target)	
 	# TODO
 	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe
 #endif()
 
 dk_info("\n\n")
-dk_info("******************************************************")
-dk_info("****** Generated ${Target_App} - ${Target_Tuple}  ************")
-dk_info("******************************************************\n")
+dk_info("###############################################################\n")
+dk_info("###### Generated ${Target_App} - ${Target_Tuple} ##############\n")
+dk_info("###############################################################\n")
 
