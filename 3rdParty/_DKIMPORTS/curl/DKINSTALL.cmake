@@ -173,7 +173,7 @@ elseif(Android)
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
-elseif(IOS OR Iossim)
+elseif(Ios OR Iossim)
 	dk_configure(${CURL_DIR}
 		#-DHAVE_POSIX_STRERROR_R=advanced
 		#-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=advanced

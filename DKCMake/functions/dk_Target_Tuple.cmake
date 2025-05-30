@@ -40,7 +40,6 @@ function(dk_Target_Tuple)
 		dk_assertVar(Target_Arch)
 		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}")
 		dk_set(${Target_Tuple} 1)
-		dk_set(${Target_Tuple}_Target 1)
 			### VALIDATE RESULT ###
 			if(Android_Arm32)
 		elseif(Android_Arm64)
@@ -86,7 +85,6 @@ function(dk_Target_Tuple)
 		dk_assertVar(Target_Env)		
 		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}_${Target_Env}")
 		dk_set(${Target_Tuple} 1)
-		dk_set(${Target_Tuple}_Target 1)
 			### VALIDATE RESULT ###
 			if(Android_Arm32_Clang)
 		elseif(Android_Arm64_Clang)
@@ -175,11 +173,11 @@ function(DKTEST)
 	###### GET ######
     dk_Target_Tuple()
 	dk_printVar(Target_Tuple)
-	dk_printVar(${Target_Tuple}_Target)
+	dk_printVar(${Target_Tuple})
 	
 	###### SET ######
 	dk_Target_Tuple("Windows_X86_Gcc")
 	dk_printVar(Target_Tuple)
-	dk_printVar(${Target_Tuple}_Target)
+	dk_printVar(${Target_Tuple})
 	
 endfunction()

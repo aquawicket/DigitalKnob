@@ -57,7 +57,6 @@ function(dk_Target_Type)
 	endif()
 	
 	dk_set(${Target_Type} 1)	
-	dk_set(${Target_Type}_Target 1)	
 	
 	###### VALIDATE RESULT ######
 	if(Debug)
@@ -77,10 +76,10 @@ function(DKTEST)
 	###### GET ######
     dk_Target_Type()
 	dk_printVar(Target_Type)
-	dk_printVar(${Target_Type}_Target)
+	dk_printVar(${Target_Type})
 	
 	###### SET ######
 	dk_Target_Type("Debug")
 	dk_printVar(Target_Type)
-	dk_printVar(${Target_Type}_Target)
+	dk_printVar(${Target_Type})
 endfunction()

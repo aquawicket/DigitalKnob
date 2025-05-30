@@ -94,10 +94,10 @@ function(DKTEST)
 	###### GET ######
     dk_Target_App()
 	dk_printVar(Target_App)
-	#dk_printVar(${Target_App}_Target)
+	#dk_printVar(${Target_App})
 	
 	###### SET ######
 	dk_Target_App("DKSDLRml")
 	dk_printVar(Target_App)
-	#dk_printVar(${Target_App}_Target)
+	#dk_printVar(${Target_App})
 endfunction()

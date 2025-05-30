@@ -73,7 +73,6 @@ function(dk_Target_Arch)
 	endif()
 	
 	dk_assertVar(Target_Arch)
-	dk_set(${Target_Arch}_Target 1)
 	dk_set(${Target_Arch} 1)
 		
 	
@@ -99,10 +98,10 @@ function(DKTEST)
 	###### GET ######
     dk_Target_Arch()
 	dk_printVar(Target_Arch)
-	dk_printVar(${Target_Arch}_Target)
+	dk_printVar(${Target_Arch})
 	
 	###### SET ######
 	dk_Target_Arch("I686")
 	dk_printVar(Target_Arch)
-	dk_printVar(${Target_Arch}_Target)
+	dk_printVar(${Target_Arch})
 endfunction()

@@ -22,7 +22,7 @@ dk_import		("${BACKWARD_CPP_IMPORT}")
 
 ### LINK ###
 dk_include			("${BACKWARD_CPP_DIR}")
-#if(Unix)
+#if(Uniix)
 #	dk_libDebug		("${BACKWARD_CPP_DEBUG_DIR}/libbackward.a")
 #	dk_libRelease	("${BACKWARD_CPP_RELEASE_DIR}/libbackward.a")
 #elseif(Windows)

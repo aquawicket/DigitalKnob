@@ -187,7 +187,7 @@ if(Emscripten)
 		${ZSTD_CMAKE})
 endif()
 
-if(IOS)
+if(Ios)
 	dk_configure(${LIBARCHIVE_DIR}
 		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive" 
 		-DENABLE_ACL=ON

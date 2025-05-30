@@ -426,7 +426,7 @@ endif()
 	
 	
 ############ ANDROID ############
-if(Android_Target)
+if(Android)
 	################################ CMAKE_ANDROID_GUI ########################################
 	if(CMAKE_ANDROID_GUI) # CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake
 	
@@ -587,7 +587,7 @@ if(Android_Target)
 
 
 ############ COSMOPOLITAN ############
-elseif(Cosmopolitan_Target)
+elseif(Cosmopolitan)
 
 	### Create Executable Target ###
 	add_executable(${Target_App} ${App_SRC})
@@ -609,7 +609,7 @@ elseif(Cosmopolitan_Target)
 
 
 ############ EMSCRIPTEN ############
-elseif(Emscripten_Target)
+elseif(Emscripten)
 
 	# TODO: https://schellcode.github.io/webassembly-without-emscripten
 	
@@ -719,7 +719,7 @@ elseif(Emscripten_Target)
 
 
 ############ IOS / IOSSIM ############
-elseif((Ios_Target) OR (Iossim_Target))
+elseif((Ios) OR (Iossim))
 	# https://github.com/forexample/testapp/blob/master/CMakeLists.txt
 	
 	### BACKUP USERDATA ###
@@ -787,7 +787,7 @@ elseif((Ios_Target) OR (Iossim_Target))
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${Target_App})
 	
 	### Create Run.sh ###
-	if(Iossim_Target)
+	if(Iossim)
 		dk_info("Creating Run.sh . . .")
 		if(Debug)
 			set(RUN_SCRIPT_DEBUG
@@ -825,7 +825,7 @@ elseif((Ios_Target) OR (Iossim_Target))
 
 
 ############ LINUX ############
-elseif((Linux_Target) AND (NOT Raspberry_Target))
+elseif((Linux) AND (NOT Raspberry))
 	
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -923,7 +923,7 @@ elseif((Linux_Target) AND (NOT Raspberry_Target))
 
 
 ############ MAC ############
-elseif(Mac_Target)
+elseif(Mac)
 		
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)
@@ -1062,7 +1062,7 @@ elseif(Mac_Target)
 
 
 ############ RASPBERRY ############
-elseif(Raspberry_Target)
+elseif(Raspberry)
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -1144,8 +1144,8 @@ elseif(Raspberry_Target)
 
 
 
-############ Windows_X86_Target ############
-elseif(Windows_X86_Target)
+############ Windows_X86 ############
+elseif(Windows_X86)
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
@@ -1264,7 +1264,7 @@ elseif(Windows_X86_Target)
 
 		
 ############ WINDOWS X86_64 ############
-elseif(Windows_X86_64_Target)
+elseif(Windows_X86_64)
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
@@ -1360,7 +1360,6 @@ elseif(Windows_X86_64_Target)
 	#)
 	#CPP_DKFile_Copy(app_path+OS+"/${Release_Dir}/"+Target_App+".pdb", app_path+"assets/"+Target_App+".pdb", true)
 	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/${Release_Dir}/"+Target_App+".exe")
-#endif(Windows_X86_64_Target)
 
 ############ ERROR ############
 else()
@@ -1428,7 +1427,7 @@ endforeach()
 #elseif(Mac OR IOS)
 	# TODO
 	#dk_command(otool -L ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app)
-#elseif(Windows_Target)	
+#elseif(Windows)	
 	# TODO
 	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe
 #endif()

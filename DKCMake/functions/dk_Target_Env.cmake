@@ -73,10 +73,7 @@ function(dk_Target_Env)
 	endif()
 	
 	dk_assertVar(Target_Env)
-	dk_set(${Target_Env}_Target  1)
-	message("dk_set(${Target_Env}         1)")
-	dk_set(${Target_Env}         1)	
-	
+	dk_set(${Target_Env}  1)
 	
 	
 	###### VALIDATE RESULT ######
@@ -99,10 +96,10 @@ function(DKTEST)
 	###### GET ######
     dk_Target_Env()
 	dk_printVar(Target_Env)
-	dk_printVar(${Target_Env}_Target)
+	dk_printVar(${Target_Env})
 	
 	###### SET ######
 	dk_Target_Env("Ucrt")
 	dk_printVar(Target_Env)
-	dk_printVar(${Target_Env}_Target)
+	dk_printVar(${Target_Env})
 endfunction()

@@ -44,15 +44,15 @@ dk_getFileParams("$ENV{DKIMPORTS_DIR}/cef_binary/dkconfig.txt")
 #dk_set(CEF_BINARY_VERSION	3.2704.1414.g185cd6c)							# Oldest			
 #dk_set(CEF_BINARY_VERSION	128.4.12+g1d7a1f9+chromium-128.0.6613.138)		# Newest
 
-if(LINUX_ARM32)
+if(Linux_Arm32)
 	dk_set	(CEF_BINARY_OS linuxarm)
-elseif(LINUX_ARM64)
+elseif(lLinux_Arm64)
 	dk_set	(CEF_BINARY_OS linuxarm64)
 elseif(Linux_X86)
 	dk_set	(CEF_BINARY_OS linux32)
 elseif(Linux_X86_64)
 	dk_set	(CEF_BINARY_OS linux64)
-elseif(MAC_ARM64)
+elseif(Mac_Arm64)
 	dk_set	(CEF_BINARY_OS macosarm64)
 elseif(Mac_X86_64)
 	dk_set	(CEF_BINARY_OS macosx64)
