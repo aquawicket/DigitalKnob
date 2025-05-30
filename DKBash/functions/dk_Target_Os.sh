@@ -63,7 +63,6 @@ dk_Target_Os() {
 		fi
 	fi
 	
-	export ${Target_Os}_Target=1
 	export ${Target_Os}=1
 }
 
@@ -79,13 +78,10 @@ DKTEST() {
 	###### GET ######
     dk_call dk_Target_Os
 	dk_call dk_printVar Target_Os
-	dk_call dk_printVar ${Target_Os}_Target
 	dk_call dk_printVar ${Target_Os}
 	
 	###### SET ######
 	dk_call dk_Target_Os "Windows"
 	dk_call dk_printVar Target_Os
-	dk_call dk_printVar ${Target_Os}_Target
 	dk_call dk_printVar ${Target_Os}
-	
 }

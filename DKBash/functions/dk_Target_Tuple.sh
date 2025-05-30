@@ -24,7 +24,6 @@ dk_Target_Tuple() {
 		export Target_Tuple="${Target_Os}_${Target_Arch}_${Target_Env}"
 	fi
 	
-	export ${Target_Tuple}_Target=1
 	export ${Target_Tuple}=1
 }
 
@@ -40,13 +39,11 @@ DKTEST() {
 	###### GET ######
     dk_call dk_Target_Tuple
 	dk_call dk_printVar Target_Tuple
-	dk_call dk_printVar ${Target_Tuple}_Target
 	dk_call dk_printVar ${Target_Tuple}
 	
 	###### SET ######
 	dk_call dk_Target_Tuple "Windows_X86_64_Clang"
 	dk_call dk_printVar Target_Tuple
-	dk_call dk_printVar ${Target_Tuple}_Target
 	dk_call dk_printVar ${Target_Tuple}
 	
 }

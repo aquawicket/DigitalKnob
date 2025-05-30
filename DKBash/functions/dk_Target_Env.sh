@@ -46,7 +46,6 @@ dk_Target_Env() {
 		fi
 	fi
 	
-	export ${Target_Env}_Target=1
 	export ${Target_Env}=1
 }
 
@@ -62,12 +61,10 @@ DKTEST() {
 	###### GET ######
     dk_call dk_Target_Env
 	dk_call dk_printVar Target_Env
-	dk_call dk_printVar ${Target_Env}_Target
 	dk_call dk_printVar ${Target_Env}
 	
 	###### SET ######
 	dk_call dk_Target_Env "Windows"
 	dk_call dk_printVar Target_Env
-	dk_call dk_printVar ${Target_Env}_Target
 	dk_call dk_printVar ${Target_Env}	
 }

@@ -48,7 +48,6 @@ dk_Target_Arch() {
 		fi
 	fi
 	
-	export ${Target_Os}_Target=1
 	export ${Target_Os}=1
 }
 
@@ -64,12 +63,10 @@ DKTEST() {
 	###### GET ######
     dk_call dk_Target_Arch
 	dk_call dk_printVar Target_Arch
-	dk_call dk_printVar ${Target_Arch}_Target
 	dk_call dk_printVar ${Target_Arch}
 	
 	###### SET ######
 	dk_call dk_Target_Arch "Windows"
 	dk_call dk_printVar Target_Arch
-	dk_call dk_printVar ${Target_Arch}_Target
 	dk_call dk_printVar ${Target_Arch}	
 }
