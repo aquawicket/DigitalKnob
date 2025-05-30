@@ -26,8 +26,10 @@ function(dk_dirname)
 	dk_getArg(0 path)
 	dk_getArg(1 rtn_var)
 	
-	get_filename_component(fullpath ${path} ABSOLUTE)
-	get_filename_component(dk_dirname "${fullpath}" DIRECTORY)
+	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.4")
+		get_filename_component(path "${path}" ABSOLUTE)
+	endif()
+	get_filename_component(dk_dirname "${path}" DIRECTORY)
 	
 	### return ###
 	set(dk_dirname "${dk_dirname}" PARENT_SCOPE)

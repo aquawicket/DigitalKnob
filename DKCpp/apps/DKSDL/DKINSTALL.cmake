@@ -58,19 +58,14 @@ if(EXISTS "${Target_App_Dir}/assets")
 	# Restore the backed up files
 	dk_copy(${Target_App_Dir}/Backup/ ${Target_App_Dir}/assets/ OVERWRITE NO_HALT)
 	dk_delete(${Target_App_Dir}/Backup NO_HALT)
-	#dummy assets.h file, or the builder wil complain about assets.h missing
+	#dummy assets.h file, or the builder will complain about assets.h missing
 	dk_assertPath(DKCPP_PLUGINS_DIR)
 	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h OVERWRITE NO_HALT)
 endif()
 
 ###################### Backup Executable ###########################
 if(BACKUP_APP_EXECUTABLES)
-	if(Debug)
-		dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
-	endif()
-	if(Release)
-		dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
-	endif()
+	dk_backupExecutable()
 endif()
 
 dk_generateAppCmake()

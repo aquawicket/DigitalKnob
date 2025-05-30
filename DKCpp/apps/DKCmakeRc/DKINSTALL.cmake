@@ -28,12 +28,7 @@ dk_set(Target_App "${dk_basename}")
 dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 
 ###### DEPENDENCIES ######
-dk_depend(DK)
-dk_depend(DKDuktape)
-dk_depend(DKDuktapeDebugger)
-dk_depend(DKArchive)
-dk_depend(DKAssets)
-dk_depend(DKFmt)
+dk_depend(CMakeRC)
 
 ## copy app default files without overwrite
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/icon.png ${Target_App_Dir}/icon.png) 
