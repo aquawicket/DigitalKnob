@@ -15,7 +15,7 @@ include_guard()
 ############ gcc ############
 # https://packages.msys2.org/package/mingw-w64-x86_64-gcc?repo=mingw64
 dk_validate(Host_Tuple			"dk_Host_Tuple()")
-dk_validate(ENV{Target_Tuple}	"dk_Target_Tuple()")
+dk_validate(Target_Tuple		"dk_Target_Tuple()")
 dk_set(${Target_Tuple}			1)
 
 #dk_getFileParams("$ENV{DKIMPORTS_DIR}/clang/dkconfig.txt")

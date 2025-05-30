@@ -19,9 +19,9 @@ function(dk_CONFIG_PATH)
 	dk_debugFunc()
 	
 	dk_validate(Host_Tuple   	"dk_Host_Tuple()")
-	dk_validate(Target_Type  	"dk_Target_Type()") # get {Debug} {Release}
+	dk_validate(Target_Type  	"dk_Target_Type()")
 	dk_debug("Target_Type = ${Target_Type}")
-	dk_validate(Target_Tuple   "dk_Target_Tuple()")	# get {Target_Tuple}
+	dk_validate(Target_Tuple   "dk_Target_Tuple()")
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)

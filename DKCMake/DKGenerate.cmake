@@ -1306,15 +1306,15 @@ elseif(Windows_X86)
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h 	${Target_App_Dir}/assets.h)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc 	${Target_App_Dir}/assets.rc)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h 		${Target_App_Dir}/icon.h)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc 		${Target_App_Dir}/icon.rc)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h 	${Target_App_Dir}/resource.h)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc 	${Target_App_Dir}/resource.rc)
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h" 		"${Target_App_Dir}/assets.h")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc" 		"${Target_App_Dir}/assets.rc")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h" 		"${Target_App_Dir}/icon.h")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc" 		"${Target_App_Dir}/icon.rc")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h"		"${Target_App_Dir}/resource.h")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc" 	"${Target_App_Dir}/resource.rc")
 		file(GLOB_RECURSE resources_SRC 
 			${Target_App_Dir}/*.manifest
-			${Target_App_Dir}/*.rc
+			${Target_App_Dir}/*.rc)
 		list(APPEND App_SRC ${resources_SRC})
 	endif()
 	
@@ -1440,15 +1440,15 @@ elseif(Windows_X86_64)
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h 	${Target_App_Dir}/assets.h)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc 	${Target_App_Dir}/assets.rc)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h 		${Target_App_Dir}/icon.h)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc 		${Target_App_Dir}/icon.rc)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h 	${Target_App_Dir}/resource.h)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc 	${Target_App_Dir}/resource.rc)
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h" 		"${Target_App_Dir}/assets.h")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc" 		"${Target_App_Dir}/assets.rc")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h" 		"${Target_App_Dir}/icon.h")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc" 		"${Target_App_Dir}/icon.rc")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h"		"${Target_App_Dir}/resource.h")
+		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc" 	"${Target_App_Dir}/resource.rc")
 		file(GLOB_RECURSE resources_SRC 
 			${Target_App_Dir}/*.manifest
-			${Target_App_Dir}/*.rc
+			${Target_App_Dir}/*.rc)
 		list(APPEND App_SRC ${resources_SRC})
 	endif()
 	
