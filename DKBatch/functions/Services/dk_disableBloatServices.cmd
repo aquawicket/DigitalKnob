@@ -13,6 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 :: https://gist.github.com/Aldaviva/0eb62993639da319dc456cc01efa3fe5
+:: https://github.com/djdallmann/GamingPCSetup/blob/master/CONTENT/DOCS/SERVICES/README.md
 
 ::AdobeARMservice							Adobe Acrobat Update Service	
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\AdobeARMservice" 							"Start" "REG_DWORD" "4"
@@ -108,6 +109,65 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\wcncsvc" 									"Start" "REG_DWORD" "4"
 ::WlanSvc									WLAN AutoConfig									Might be needed for Wi-Fi.
 	::%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\WlanSvc" 									"Start" "REG_DWORD" "4"
+
+
+	
+::AJRouter									AllJoyn Router Service
+::BDESVC									BitLocker Drive Encryption Service				You can disable this service if you don’t use BitLocker to encrypt your hard drive.
+::DPS										Diagnostic Policy Service						You can disable it if you don’t use Windows troubleshooters.
+::DevicePickerUserSvc						DevicePicker									You can disable it if you don’t use Miracast, DLNA, and DIAL UI.
+::Netlogon									Netlogon										This service is only for domain networks. You can disable it if your computer isn’t part of such a network.
+::SCPolicySvc								Smart Card Removal Policy						These services are related to authentication on Windows devices. But you can disable them if you prefer using a keyboard for login.
+::SCardSvr									Smart Card										These services are related to authentication on Windows devices. But you can disable them if you prefer using a keyboard for login.
+::ScDeviceEnum								Smart Card Device Enumeration Service			These services are related to authentication on Windows devices. But you can disable them if you prefer using a keyboard for login.
+::SensorService								Sensor Service									Manages integration with sensors like GPS and ambient light sensors.
+::Spooler									Print Spooler									
+::WalletService								WalletService									You can disable it if you don’t use Wallet on Windows 11.
+::WdiServiceHost							Diagnostic Service Host							You can disable it if you don’t use Windows troubleshooters.
+::WdiSystemHost								Diagnostic System Host							You can disable it if you don’t use Windows troubleshooters.
+::WpcMonSvc									Parental Controls
+::defragsvc									Optimize drives									You can disable it if you like to defrag your hard drive manually.
+::workfolderssvc							Work Folders									It syncs files between a centralized server and personal computers.
+::icssvc									Windows Mobile Hotspot Service					
+
+
+::AxInstSV
+::tzautoupdate
+::bthserv
+::dmwappushservice
+::MapsBroker
+::lfsvc
+::SharedAccess
+::lltdsvc
+::AppVClient
+::NetTcpPortSharing
+::CscService
+::PhoneSvc
+::Spooler
+::PrintNotify
+::QWAVE
+::RmSvc
+::RemoteAccess
+::SensorDataService
+::SensrSvc
+::SensorService
+::ShellHWDetection
+::SCardSvr
+::ScDeviceEnum
+::SSDPSRV
+::WiaRpc
+::TabletInputService
+::upnphost
+::UserDataSvc
+::UevAgentService
+::WalletService
+::FrameServer
+::stisvc
+::wisvc
+::icssvc
+::WSearch
+::XblAuthManager
+::XblGameSave
 
 %endfunction%
 
