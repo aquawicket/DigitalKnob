@@ -376,7 +376,7 @@ endif()
 if(HAVE_DK)
 	## copy app default files without overwrite
 	dk_info("Copying DKCpp/plugins/_DKIMPORT/ to App...")
-	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/icons ${Target_App_Dir}/icons) 
+	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/icon.png ${Target_App_Dir}/icon.png) 
 	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h)
 	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${Target_App_Dir}/main.cpp)
 endif()
@@ -408,15 +408,26 @@ add_definitions(-DDKAPP)
 include_directories(${Target_App_Dir})
 include_directories(${DKCPP_PLUGINS_DIR})
 
-
+### CREATE ICONS ###
+if(EXISTS "${Target_App_Dir}/icon.png")
+	dk_createIcons("${Target_App_Dir}/icon.png")
+endif()
+	
+	
+	
+	
+	
+	
+	
+	
 ############ ANDROID ############
 if(Android)
 	################################ CMAKE_ANDROID_GUI ########################################
 	if(CMAKE_ANDROID_GUI) # CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake
 		########################## CREATE ICONS ###############################
-		if(EXISTS "${Target_App_Dir}/icon.png")
-			dk_createIcons("${Target_App_Dir}/icon.png")
-		endif()
+		#if(EXISTS "${Target_App_Dir}/icon.png")
+		#	dk_createIcons("${Target_App_Dir}/icon.png")
+		#endif()
 		#if(EXISTS ${Target_App_Dir}/icons/icon.png)
 		#	dk_copy(${Target_App_Dir}/icons/icon.png ${Target_App_Dir}/assets/icon.png OVERWRITE)
 		#endif()
@@ -625,9 +636,9 @@ elseif(Emscripten)
 	# TODO: https://schellcode.github.io/webassembly-without-emscripten
 	
 	### CREATE ICONS ###
-	if(EXISTS "${Target_App_Dir}/icon.png")
-		dk_createIcons("${Target_App_Dir}/icon.png")
-	endif()
+	#if(EXISTS "${Target_App_Dir}/icon.png")
+	#	dk_createIcons("${Target_App_Dir}/icon.png")
+	#endif()
 
 	### BACKUP USERDATA / inject assets ###
 	if(false)
@@ -891,9 +902,9 @@ elseif((Linux) AND (NOT Raspberry))
 	endif()
 	
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icon.png")
-		dk_createIcons("${Target_App_Dir}/icon.png")
-	endif()
+	#if(EXISTS "${Target_App_Dir}/icon.png")
+	#	dk_createIcons("${Target_App_Dir}/icon.png")
+	#endif()
 	#if(EXISTS ${Target_App_Dir}/icons/icon.png)
 	#	dk_copy(${Target_App_Dir}/icons/icon.png ${Target_App_Dir}/assets/icon.png OVERWRITE)
 	#endif()
@@ -1006,9 +1017,9 @@ elseif(Mac)
 	endif()
 		
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icon.png")
-		dk_createIcons("${Target_App_Dir}/icon.png")
-	endif()
+	#if(EXISTS "${Target_App_Dir}/icon.png")
+	#	dk_createIcons("${Target_App_Dir}/icon.png")
+	#endif()
 	#if(EXISTS ${Target_App_Dir}/icons/icon.png)
 	#	dk_mkdir(${Target_App_Dir}/icons/mac)
 	#	dk_mkdir(${Target_App_Dir}/icons/mac/icons.iconset)
@@ -1167,9 +1178,9 @@ elseif(Mac)
 ############ RASPBERRY ############
 elseif(Raspberry)
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icon.png")
-		dk_createIcons("${Target_App_Dir}/icon.png")
-	endif()
+	#if(EXISTS "${Target_App_Dir}/icon.png")
+	#	dk_createIcons("${Target_App_Dir}/icon.png")
+	#endif()
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -1264,9 +1275,9 @@ elseif(Raspberry)
 ############ WINDOWS X86 ############
 elseif(Windows_X86)
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icon.png")
-		dk_createIcons("${Target_App_Dir}/icon.png")
-	endif()
+	#if(EXISTS "${Target_App_Dir}/icon.png")
+	#	dk_createIcons("${Target_App_Dir}/icon.png")
+	#endif()
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
@@ -1295,12 +1306,15 @@ elseif(Windows_X86)
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.h ${Target_App_Dir}/resource.h)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.rc ${Target_App_Dir}/resource.rc)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h 	${Target_App_Dir}/assets.h)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc 	${Target_App_Dir}/assets.rc)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h 		${Target_App_Dir}/icon.h)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc 		${Target_App_Dir}/icon.rc)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h 	${Target_App_Dir}/resource.h)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc 	${Target_App_Dir}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
 			${Target_App_Dir}/*.manifest
 			${Target_App_Dir}/*.rc
-			${Target_App_Dir}/icons/windows/*.rc)
 		list(APPEND App_SRC ${resources_SRC})
 	endif()
 	
@@ -1395,9 +1409,9 @@ elseif(Windows_X86)
 ############ WINDOWS X86_64 ############
 elseif(Windows_X86_64)
 	########################## CREATE ICONS ###############################
-	if(EXISTS "${Target_App_Dir}/icon.png")
-		dk_createIcons("${Target_App_Dir}/icon.png")
-	endif()
+	#if(EXISTS "${Target_App_Dir}/icon.png")
+	#	dk_createIcons("${Target_App_Dir}/icon.png")
+	#endif()
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
@@ -1426,12 +1440,15 @@ elseif(Windows_X86_64)
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.h ${Target_App_Dir}/resource.h)
-		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.rc ${Target_App_Dir}/resource.rc)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h 	${Target_App_Dir}/assets.h)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc 	${Target_App_Dir}/assets.rc)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h 		${Target_App_Dir}/icon.h)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc 		${Target_App_Dir}/icon.rc)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.h 	${Target_App_Dir}/resource.h)
+		dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/resource.rc 	${Target_App_Dir}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
 			${Target_App_Dir}/*.manifest
 			${Target_App_Dir}/*.rc
-			${Target_App_Dir}/icons/windows/*.rc)
 		list(APPEND App_SRC ${resources_SRC})
 	endif()
 	
