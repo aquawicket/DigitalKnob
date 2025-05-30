@@ -23,6 +23,11 @@ dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/AT.Toolbox.txt" 					
 dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/wget.exe" 		"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/wget.exe")
 dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.exe" 			"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/7z.exe")
 dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.dll" 			"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/7z.dll")
+
+
+dk_fileReplace("${DKTOOLS_DIR}/Ankhtech_Toolbox/AT.Toolbox.bat" "otoupd=2" "otoupd=1")
+
+
 #dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/Tweaks.exe"						"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Tweaks.7z")
 #cd "${DKTOOLS_DIR}/Ankhtech_Toolbox"
 #execute_process(COMMAND "${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/7z.exe" x -y "${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Tweaks.7z" -o"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox")
