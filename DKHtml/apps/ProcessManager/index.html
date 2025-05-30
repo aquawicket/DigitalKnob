@@ -32,7 +32,6 @@
 		if (confirm('Are you sure you want to terminate the process "' + processName + '"?')) {
 			var WshShell = new ActiveXObject("WScript.Shell");
 			var oExec = WshShell.Run("taskkill /F /PID " + processId, 0, true);
-			//var oExec = WshShell.Exec("taskkill /f /pid " + processId);
 			getSysRunningProccesses()
 		}
 	}
@@ -41,7 +40,7 @@
 	{
 		searchString = document.getElementById("searchProcessName").value;
 		
-		var procs = GetObject("WinMgmts:").InstancesOf("Win32_Process");
+		var procs = GetObject("WinMgmts:").InstancesOf("Win32_Process");  // https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-process
 		var tableRowsHTML = "";
 		var i = 1
 		procEnum = new Enumerator(procs);
@@ -50,7 +49,7 @@
 		{
 			var proc = procEnum.item();
 			
-			var isShow = false;
+			var isShow = true;
 			
 			if (searchString != "") {
 				if (proc.Name.toLowerCase().indexOf(searchString.toLowerCase()) != -1
