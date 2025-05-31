@@ -19,7 +19,7 @@ echo ""
 # DK()
 #
 DK(){
-	builtin echo "DK()"
+	echo "DK()"
 	###### SUDO_EXE ######
 	SUDO_EXE(){
 		[ -e "${SUDO_EXE-}" ]	|| export SUDO_EXE=$(command -v sudo) || true
