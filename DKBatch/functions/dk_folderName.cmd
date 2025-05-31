@@ -5,18 +5,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_folderName(<input> rtn_var)
+::# dk_folderName(<path> rtn_var)
 ::#
 ::#
 :dk_folderName
 %setlocal%
 	%dk_call% dk_debugFunc 2
+	set "path=%~1"
 
-	for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "dk_folderName=%%~nxb"
+	for %%a in ("%path%") do for %%b in ("%%~dpa\.") do set "dk_folderName=%%~nxb"
+	
+	::### return ###
 	endlocal & (
 		set "dk_folderName=%dk_folderName%"
+		if "%~2" neq "" (set "%~2=%dk_folderName%")
 	)
-	%dk_call% dk_printVar dk_folderName
 %endfunction%
 
 
@@ -30,4 +33,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_folderName "C:/Windows/System32"
+	%dk_call% dk_echo "dk_folderName = %dk_folderName%"
+	
+	%dk_call% dk_folderName "C:/Windows/System32" myFolderName
+	%dk_call% dk_echo "dk_folderName = %dk_folderName%"
+	%dk_call% dk_echo "myFolderName = %myFolderName%"
 %endfunction%

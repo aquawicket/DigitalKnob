@@ -3,6 +3,10 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
+::set "dk_download_DISABLE_curl=1"
+::set "dk_download_DISABLE_certutil=1"
+::set "dk_download_DISABLE_bitsadmin=1"
+::set "dk_download_DISABLE_powershell=1"
 if not defined dk_download_BACKUP_SERVER		(set "dk_download_BACKUP_SERVER=http://aquawicket.com/download")
 if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TEST=0")
 ::####################################################################
@@ -39,26 +43,22 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     %dk_call% dk_dirname "%destination%"
     if not exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
    
-    set "DISABLE_curl=1"
-    set "DISABLE_certutil=1"
-	::set "DISABLE_bitsadmin=1"
-	set "DISABLE_powershell=1"
-	
-
-   
+    ::####################################################################################  
 	:: curl
     :curl_dl
-    if defined DISABLE_curl (goto end_curl_dl)
-	%dk_call% dk_validate CURL_EXE "dk_CURL_EXE"
-    if not exist "%destination%_DOWNLOADING" (%CURL_EXE% --help %NO_OUTPUT% && %CURL_EXE% -L "%url%" -o "%destination%_DOWNLOADING")
-    %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
-    if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
-    if exist "%destination%_DOWNLOADING" (goto download_done)
+    ::if defined dk_download_DISABLE_curl (goto end_curl_dl)
+	if not defined dk_download_DISABLE_curl (
+		%dk_call% dk_validate CURL_EXE "dk_CURL_EXE"
+		if not exist "%destination%_DOWNLOADING" (!CURL_EXE! --help %NO_OUTPUT% && !CURL_EXE! -L "%url%" -o "%destination%_DOWNLOADING")
+		%dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
+		if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+	)
+	if exist "%destination%_DOWNLOADING" (goto download_done)
     :end_curl_dl
 	
 	:: certutil
     :certitil_dl
-    if defined DISABLE_certutil (goto end_certutil_dl)
+    if defined dk_download_DISABLE_certutil (goto end_certutil_dl)
 ::	%dk_call% dk_validate CERTUTIL_EXE "dk_CERTUTIL_EXE"
     if not exist "%destination%_DOWNLOADING" (%CERTUTIL_EXE% %NO_OUTPUT% && %CERTUTIL_EXE%  -urlcache -split -f "%url%" "%destination%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
@@ -68,7 +68,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	
 	:: bitsadmin
     :bitsadmin_dl
-    if defined DISABLE_bitsadmin (goto end_bitsadmin_dl)
+    if defined dk_download_DISABLE_bitsadmin (goto end_bitsadmin_dl)
 	set "BITSADMIN_EXE=%windir:\=/%/System32/bitsadmin.exe"
 ::	%dk_call% dk_validate BITSADMIN_EXE "dk_BITSADMIN_EXE"
     if not exist "%destination%_DOWNLOADING" ("%BITSADMIN_EXE%" /transfer /Download /priority Foreground "%url%" "%destination:/=\%_DOWNLOADING")
@@ -79,7 +79,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	
     :: powershell
     :powershell_dl
-    if defined DISABLE_powershell (goto end_powershell_dl)
+    if defined dk_download_DISABLE_powershell (goto end_powershell_dl)
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
     set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     if not exist "%destination%_DOWNLOADING" %POWERSHELL_EXE% -Command "$cli = New-Object System.Net.WebClient; "^

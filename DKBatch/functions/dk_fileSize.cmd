@@ -5,7 +5,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::################################################################################
-::# dk_fileSize(path rtn_var)
+::# dk_fileSize(<path> <rtn_var:optional>)
 ::#
 ::#
 :dk_fileSize
@@ -16,7 +16,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set _input=%_input:"=%
 	if "%_input:~-1%" equ "\" set _input=%_input:~0,-1%
 	if "%_input:~-1%" equ "/" set _input=%_input:~0,-1%
-	endlocal & for %%Z in ("%_input%") do set "%2=%%~zZ"
+	for %%Z in ("%_input%") do set "dk_fileSize=%%~zZ"
+	
+	::### return ###
+	endlocal & (
+		set "dk_fileSize=%dk_fileSize%"
+		if "%~2" neq "" (set "%~2=%dk_fileSize%")
+	)
 %endfunction%
 
 
@@ -29,7 +35,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
+	%dk_call% dk_echo 
 	%dk_call% dk_set myPath "DK.cmd"
-	%dk_call% dk_fileSize "%myPath%" fileSize
-	%dk_call% dk_printVar fileSize
+	%dk_call% dk_fileSize "%myPath%"
+	%dk_call% dk_echo "dk_fileSize = %dk_fileSize%"
+	
+	%dk_call% dk_echo 
+	%dk_call% dk_set myPath "dk_fileSize.cmd"
+	%dk_call% dk_fileSize "%myPath%" myFileSize
+	%dk_call% dk_echo "dk_fileSize = %dk_fileSize%"
+	%dk_call% dk_echo "myFileSize = %myFileSize%"
 %endfunction%
