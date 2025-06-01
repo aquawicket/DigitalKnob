@@ -26,6 +26,8 @@ if [ "${OVERWRITE_echo-}" = "1" ]; then
 	}
 fi
 
+
+#[ -z "${dk_echo_PRINT_FILE_LINE-}" ] && export dk_echo_PRINT_FILE_LINE=1
 ##################################################################################
 # dk_echo(message)
 #
@@ -45,9 +47,13 @@ dk_echo() {
 	msg=${msg//\\/\\\\}    # replace all exscapes
 	msg=${msg//\\\\x/\\x}  # put back all \x escapes for color
 	
-	[ -z ${echo_fileline-} ] && echo_fileline="$(__FILE__ 2):$(__LINE__ 2)   "
-	echo ${escapes-}${nonewline-}"${echo_fileline-}  ${msg}"
-	unset echo_fileline #dk_call dk_unset echo_fileline
+	if [ "${dk_echo_PRINT_FILE_LINE-}" = "1" ];then
+		[ -z ${echo_fileline-} ] && echo_fileline="$(__FILE__ 2):$(__LINE__ 2)   "
+		echo ${escapes-}${nonewline-}"${echo_fileline-}  ${msg}"
+		unset echo_fileline #dk_call dk_unset echo_fileline
+	else
+		echo ${escapes-}${nonewline-}"${msg}"
+	fi
 }
 
 
