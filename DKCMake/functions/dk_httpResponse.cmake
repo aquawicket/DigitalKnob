@@ -12,8 +12,8 @@ include_guard()
 #########################################################################
 
 
-#########################################################################
-# dk_urlExists(<url> <ret:optional>)
+####################################################################
+# dk_httpResponse(<url> <ret:optional>)
 #
 #		Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
 #				   https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
@@ -91,33 +91,22 @@ include_guard()
 # 	510 Not Extended
 # 	511 Network Authentication Required
 #
-function(dk_urlExists)
-	dk_debugFunc(1)
+function(dk_httpResponse)
+	dk_debugFunc(1 2)
 
-	###### CMD ######
-	dk_depend(cmd)
-	if(CMD_EXE)
-		dk_callDKBatch(dk_urlExists "${ARGV0}")
-		set(dk_urlExists "${dk_callDKBatch}" PARENT_SCOPE)
-		return()
+	#dk_validate(CURL_EXE "d_k_CURL_EXE()")
+	set(CURL_EXE "C:\\Windows\\System32\\curl.exe")
+	
+	# "%windir:\=/%/System32/curl.exe" -sI -o nul -w "%{http_code}" "http://www.google.com/index.html"
+	set(command "${CURL_EXE} ${ARGV0} -sI -o nul -w %{http_code}")
+	dk_exec(${command})
+	
+	### return ###
+	set(dk_httpResponse "${dk_exec}" PARENT_SCOPE)
+	if(ARGV1)
+		set(${ARGV1} ${dk_httpResponse} PARENT_SCOPE)
 	endif()
 	
-	###### BASH ######
-	dk_depend(bash)
-	if(BASH_EXE)
-		dk_callDKBash(dk_urlExists "${ARGV0}")
-		set(dk_urlExists "${dk_callDKBash}" PARENT_SCOPE)
-		return()
-	endif()
-	
-	###### POWERSHELL ######
-	dk_depend(powershell)
-	if(POWERSHELL_EXE)
-		dk_callDKPowershell(dk_urlExists "${ARGV0}")
-		set(dk_urlExists "${dk_callDKPowershell}" PARENT_SCOPE)
-		return()
-	endif()
-
 endfunction()
 
 
@@ -127,45 +116,22 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 
-	dk_echo()
 	set(url "http://www.google.com/index.html")
-	dk_urlExists("${url}")
-	if(${dk_urlExists} EQUAL 0)
-		dk_echo("url:${url} exists") 
-	else()
-		dk_echo("url:${url} does not exist") 
-	endif()
+	dk_httpResponse("${url}")
+	dk_echo("url:'${url}' dk_httpResponse = ${dk_httpResponse}")
 	
+	set(url "http://www.nonexisting.com/nofile.no")
+	dk_httpResponse("${url}")
+	dk_echo("url:'${url}' dk_httpResponse = ${dk_httpResponse}")
 	
-	dk_echo()
-	set(url "http://www.nXoXnXeXxXiXsXtXiXnXg.com/nofile.no")
-	dk_urlExists("${url}")
-	if(${dk_urlExists} EQUAL 0)
-		dk_echo("url:${url} exists") 
-	else()
-		dk_echo("url:${url} does not exist") 
-	endif()
-	
-	
-	dk_echo()
 	set(url "https://aka.ms/vs/16/release/VC_redist.x86.exe")
-	dk_urlExists("${url}")
-	if(${dk_urlExists} EQUAL 0)
-		dk_echo("url:${url} exists") 
-	else()
-		dk_echo("url:${url} does not exist") 
-	endif()
+	dk_httpResponse("${url}")
+	dk_echo("url:'${url}' dk_httpResponse = ${dk_httpResponse}")
 	
-	
-	dk_echo()
 	set(url "https://aka.ms/vs/16/release/VC_redist.x64.exe")
-	dk_urlExists("${url}")
-	if(${dk_urlExists} EQUAL 0)
-		dk_echo("url:${url} exists") 
-	else()
-		dk_echo("url:${url} does not exist") 
-	endif()
+	dk_httpResponse("${url}")
+	dk_echo("url:'${url}' dk_httpResponse = ${dk_httpResponse}")
 
 endfunction()

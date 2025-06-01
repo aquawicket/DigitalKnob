@@ -17,9 +17,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 :: if "%pathname:~-1%" equ "\" (set "pathname=%pathname:~0,-1%")
 :: if "%pathname:~-1%" equ "/" (set "pathname=%pathname:~0,-1%")
-
 	for %%Z in ("%pathname%") do set "dk_driveName=%%~dZ"
 	
+	::###### return ######
 	endlocal & (
 		set "dk_driveName=%dk_driveName%"
 		if "%~2" neq "" (set "%~2=%dk_driveName%")
