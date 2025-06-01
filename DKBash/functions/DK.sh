@@ -1,8 +1,10 @@
 #!/usr/bin/env sh
+#echo "DK() 0='${0}' 1='${1}' *='${*}'"
 [ -n "${DK_SH-}" ] && return
 export DK_SH=1
 
 [ -z "${DKSCRIPT_PATH-}" ] && DKSCRIPT_PATH="${1-}"
+#echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 
 ### Print Shell Path ad Version ###
 export ESC=""  # escape character
@@ -11,15 +13,16 @@ export DKSHELL=$(basename ${DKSHELL_PATH})
 export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
 echo ""
 echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
-echo "DKSHELL_PATH  ${DKSHELL_PATH}"
-echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}"
+#echo "DKSHELL_PATH  ${DKSHELL_PATH}"
+#echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}"
 echo ""
 
 ##################################################################################
 # DK()
 #
 DK(){
-	echo "DK()"
+	#echo "DK()"
+	
 	###### SUDO_EXE ######
 	SUDO_EXE(){
 		[ -e "${SUDO_EXE-}" ]	|| export SUDO_EXE=$(command -v sudo) || true
@@ -100,14 +103,16 @@ DK(){
 # dkreloadWithBash()
 #
 dkreloadWithBash(){
-	builtin echo "dkreloadWithBash()"
+	#echo "dkreloadWithBash()"
 	
 	[ -n "${BASH-}" ] && return
+	[ -n "${DKBASH_RELOADED-}" ] && return
 	(command -v bash &>/dev/null) || dk_installPackage bash
 	(command -v bash &>/dev/null) && export BASH_EXE=$(command -v bash) || echo "ERROR: bash not found" || exit 1
-	echo "Reloading ${0} with ${BASH_EXE} . . ."
+	echo "Reloading ${DKSCRIPT_PATH} with ${BASH_EXE} . . ."
 	unset DK_SH
-	exec ${BASH_EXE} "${0}"
+	export DKBASH_RELOADED=1
+	exec ${BASH_EXE} "${DKSCRIPT_PATH}"
 	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}'
 }
 
@@ -116,7 +121,7 @@ dkreloadWithBash(){
 #
 #
 dk_download() {
-	builtin echo "dk_download()"
+	#echo "dk_download()"
 	
     if [ -e "${2-}" ]; then
         echo "WARNING: dk_download(): ${2} already exists"
@@ -139,7 +144,7 @@ dk_download() {
 # WSLPATH_EXE()
 #
 WSLPATH_EXE(){
-	builtin echo "WSLPATH_EXE()"
+	#echo "WSLPATH_EXE()"
 	
 	(command -v wslpath >&2) || echo "wslpath Not Found"  >&2
 }
@@ -157,7 +162,7 @@ CYGPATH_EXE(){
 # DKSCRIPT_VARS()
 #
 DKSCRIPT_VARS(){
-	builtin echo "DKSCRIPT_VARS()"
+	#echo "DKSCRIPT_VARS()"
 	
 	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0}))	 	# Windows subsystem for linux
 	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}))		# Git for Windows	
@@ -173,7 +178,7 @@ DKSCRIPT_VARS(){
 # dksetOptions()
 #
 dksetOptions(){
-	builtin echo "dksetOptions()"
+	#echo "dksetOptions()"
 	
     # https://pubs.opengroup.org/onlinepubs/007904875/utilities/set.html
 	# https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
@@ -214,7 +219,7 @@ dksetOptions(){
 #   https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 #
 dk_installPackage() {
-	builtin echo "dk_installPackage()"
+	#echo "dk_installPackage()"
 	
     (command -v ${1} &>/dev/null) && return $(true) 
     echo "installing ${1}. . ."

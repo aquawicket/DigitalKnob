@@ -48,18 +48,20 @@ if "%~1" equ "" (goto DKINSTALL)
 	::#################################################################################################################################################
 
 	::###### Install DKBash ######
-	%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	::%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
+	%dk_call% dk_validate BASH_EXE "%dk_call% %DKIMPORTS_DIR%/bash/DKINSTALL.cmd"
 	::%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	
 
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
-	%~1
+	::%~1
 	::ftype DKBash="%ComSpec%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
-	ftype DKBash="%ComSpec%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
+	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
+	ftype DKBash="%CMD_EXE:/=\%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
 	::ftype DKBash=%ComSpec% /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%BASH_EXE%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"
 	assoc .sh=DKBash
+	%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"
 
 	%dk_call% dk_success "DKBash install complete"
 %endfunction%
