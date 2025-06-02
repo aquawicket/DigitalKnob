@@ -26,17 +26,30 @@ endlocal & exit /b %errorlevel%
 */
 
 using System;
-using System.Runtime.InteropServices; // Required for P/Invoke
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 class Program
 {
     // Declare the external function from User32.dll
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern int MessageBox(IntPtr hWnd, String text, String caption, int options);
+	[DllImport("kernel32.dll", SetLastError = true)]
+    private static extern IntPtr GetConsoleWindow();
+		
+    [DllImport("kernel32.dll", SetLastError = true)]
+	static extern bool SetConsoleIcon(IntPtr hIcon);
 
     static void Main()
     {
-        // Call the external function to show a message box
-        MessageBox(IntPtr.Zero, "Hello from P/Invoke!", "P/Invoke Example", 0);
+        System.Drawing.Icon ico = new System.Drawing.Icon("C:\\icon.ico");
+		this.icon = ico;
+		//SetConsoleIcon(ico);
+		 Console.ReadKey();
     }
+	
+	/*
+	public static void SetConsoleIcon(System.Drawing.Icon icon)
+    {
+            SetConsoleIcon(icon.Handle);
+    }
+	*/
 }
