@@ -1,0 +1,1 @@
+JSCONSOLE_IMPORT=https://github.com/martin-nikolov/jsConsole/archive/refs/heads/master.zip
