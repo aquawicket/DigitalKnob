@@ -15,7 +15,7 @@ include_guard()
 ############ command_line_tools ############
 #command line tools for apple
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 #TODO
 

@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 # https://www.cryptopp.com/
 # https://github.com/weidai11/cryptopp
 

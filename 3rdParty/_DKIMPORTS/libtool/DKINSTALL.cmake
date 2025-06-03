@@ -14,7 +14,7 @@ include_guard()
 
 ############ libtool ############
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 #Android_Host_dk_command(pkg install libtool)
 dk_installPackage(libtool)

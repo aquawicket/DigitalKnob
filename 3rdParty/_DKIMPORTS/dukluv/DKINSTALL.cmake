@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/creationix/dukluv.git
 # https://github.com/creationix/dukluv/archive/f02103bcadd5a5b9280b7a07064649d0a465f70c.zip
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(duktape)

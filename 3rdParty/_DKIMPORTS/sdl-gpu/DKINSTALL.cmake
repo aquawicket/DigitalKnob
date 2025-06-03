@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 # https://github.com/grimfang4/sdl-gpu.git
 # https://github.com/grimfang4/sdl-gpu/issues/77   rmlui with sdl-gpu
 

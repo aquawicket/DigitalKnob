@@ -15,7 +15,7 @@ include_guard()
 ############ gdal ############
 # https://github.com/OSGeo/gdal.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/OSGeo/gdal/archive/5deb1267.zip)

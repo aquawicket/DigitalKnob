@@ -15,7 +15,7 @@ include_guard()
 ############ libevent ############
 # https://github.com/libevent/libevent.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(mbedtls)

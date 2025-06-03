@@ -15,7 +15,7 @@ include_guard()
 ############ dukglue ############
 # https://github.com/Aloshi/dukglue.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_depend(duktape)
 

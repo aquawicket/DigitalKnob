@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/cacalabs/libcaca.git
 # http://caca.zoy.org/wiki/libcaca
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/cacalabs/libcaca/archive/refs/heads/main.zip)

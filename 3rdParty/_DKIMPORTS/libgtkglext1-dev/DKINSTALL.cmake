@@ -14,7 +14,7 @@ include_guard()
 
 ############# libgtkglext1-dev ############
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux_Host)
 	dk_undepend(libgtkglext1-dev)
 	dk_return()

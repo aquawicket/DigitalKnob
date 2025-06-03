@@ -15,7 +15,7 @@ include_guard()
 ############ rocketship ############
 # https://github.com/netpipe/RocketShip
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 #dk_import(https://github.com/netpipe/RocketShip.git BRANCH main)
 dk_import(https://github.com/netpipe/RocketShip/archive/refs/heads/main.zip)

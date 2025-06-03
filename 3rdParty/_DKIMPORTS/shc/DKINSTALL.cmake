@@ -15,7 +15,7 @@ include_guard()
 ###### shc ######
 # https://github.com/neurobin/shc.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 #dk_import(https://github.com/neurobin/shc.git)
 dk_import(https://github.com/neurobin/shc/archive/refs/heads/master.zip)

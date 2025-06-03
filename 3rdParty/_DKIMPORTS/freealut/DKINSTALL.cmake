@@ -15,7 +15,7 @@ include_guard()
 ############ freealut ############
 # https://github.com/vancegroup/freealut.git
 # http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/freealut-1.1.0.tar.gz
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPENDS ###
 dk_depend(msinttypes)

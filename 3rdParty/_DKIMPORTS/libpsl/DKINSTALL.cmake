@@ -15,7 +15,7 @@ include_guard()
 ############# libpsl ############
 # https://github.com/rockdaboot/libpsl.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/rockdaboot/libpsl/archive/490bd6f.zip)

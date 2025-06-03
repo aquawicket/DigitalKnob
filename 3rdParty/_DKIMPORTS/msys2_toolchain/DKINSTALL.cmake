@@ -14,7 +14,7 @@ include_guard()
 
 ###### msys2_toolchain ######
 # https://www.msys2.org
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Windows_Host)
 	dk_undepend(msys2)

@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/libsdl-org/SDL_mixer
 # https://www.libsdl.org/projects/SDL_mixer
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(flac)

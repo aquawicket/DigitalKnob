@@ -18,6 +18,6 @@ include_guard()
 # https://packages.msys2.org/base/lzo2
 # https://github.com/eyeseaevan/lzo-2.10.git
 # https://github.com/eyeseaevan/lzo-2.10.git
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_import(https://github.com/SyntaxSnack/lzo-2.10/archive/f2895503.zip)

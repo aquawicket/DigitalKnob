@@ -13,7 +13,7 @@ include_guard()
 
 
 ############ libbcrypt ############
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT win)
 	dk_undepend(libbcrypt)
 	dk_disable(libbcrypt)

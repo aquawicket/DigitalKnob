@@ -13,7 +13,7 @@ include_guard()
 
 
 ############ dl ############
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Unix)
 	dk_undepend(dl)

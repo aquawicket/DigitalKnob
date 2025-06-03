@@ -17,7 +17,7 @@ include_guard()
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis
 # https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(libgcc)

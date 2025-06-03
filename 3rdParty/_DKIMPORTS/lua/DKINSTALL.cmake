@@ -17,7 +17,7 @@ include_guard()
 # https://www.lua.org/ftp/lua-5.4.3.tar.gz
 # https://github.com/lubgr/lua-cmake.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/lua/lua/archive/fd0e1f53.zip PATCH)

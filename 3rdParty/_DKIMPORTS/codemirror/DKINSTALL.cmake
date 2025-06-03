@@ -15,6 +15,6 @@ include_guard()
 ############ codemirror ############
 # https://github.com/codemirror/CodeMirror.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_import(https://github.com/codemirror/codemirror5/archive/998f328.zip)

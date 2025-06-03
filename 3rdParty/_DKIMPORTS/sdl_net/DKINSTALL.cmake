@@ -15,7 +15,7 @@ include_guard()
 ###### sdl_net ######
 # https://github.com/libsdl-org/SDL_net.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(sdl)

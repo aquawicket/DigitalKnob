@@ -22,7 +22,7 @@ if(NOT Mac_Host)
 	return()
 endif()
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### VERSION ###
 dk_set(MACPORTS_DL https://github.com/macports/macports-base/releases/download/v2.7.1/MacPorts-2.7.1-11-BigSur.pkg)

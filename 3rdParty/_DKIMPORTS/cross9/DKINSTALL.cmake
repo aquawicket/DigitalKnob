@@ -15,7 +15,7 @@ include_guard()
 ###### cross9 ######
 # https://justine.lol/cosmopolitan/windows-compiling.html
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if((NOT Windows_Host) OR (NOT Cosmopolitan))
 	dk_undepend(cross9)

@@ -15,7 +15,7 @@ include_guard()
 ###### sdl_rtf ######
 # https://github.com/libsdl-org/SDL_rtf.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(sdl)

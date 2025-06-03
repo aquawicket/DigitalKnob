@@ -15,7 +15,7 @@ include_guard()
 ############ uikit ############
 # https://developer.apple.com/documentation/UIKit
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT IOS)
 	dk_undepend(uikit)

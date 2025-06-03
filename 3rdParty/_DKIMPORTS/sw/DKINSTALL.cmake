@@ -15,7 +15,7 @@ include_guard()
 ############ sw ############
 # https://github.com/SoftwareNetwork/sw
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 #WIN_dk_import(https://github.com/SoftwareNetwork/sw.git)
 WIN_dk_import(https://github.com/SoftwareNetwork/sw/archive/refs/heads/b0.4.5.zip)

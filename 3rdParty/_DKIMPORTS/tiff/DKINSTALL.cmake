@@ -19,7 +19,7 @@ include_guard()
 # https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip
 # https://gitlab.com/libtiff/libtiff.git
 # https://cmake.org/cmake/help/latest/module/FindTIFF.html
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(libjpeg-turbo)

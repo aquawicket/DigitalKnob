@@ -17,7 +17,7 @@ include_guard()
 # http://www.codersnotes.com/sleepy/
 # https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe
 # https://github.com/VerySleepy/verysleepy/archive/refs/tags/v0.91.zip (source)
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Windows_Host)
 	return()

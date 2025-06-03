@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(Android)
 	#dk_findLibrary(OpenGLES ${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/sysroot/usr/include)
 	dk_define(GL_GLEXT_PROTOTYPES)

@@ -15,7 +15,7 @@ include_guard()
 ############ mobile_core_services ############
 # https://developer.apple.com/documentation/mobilecoreservices
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT IOS AND NOT Iossim)
 	dk_undepend(mobile_core_services)

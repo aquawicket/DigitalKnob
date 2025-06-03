@@ -14,7 +14,7 @@ include_guard()
 
 ############ libwebp ############
 # https://github.com/webmproject/libwebp
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(giflib)

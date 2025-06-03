@@ -15,7 +15,7 @@ include_guard()
 ############ ofxcmake ############
 # https://github.com/tedmoore/ofxCMake
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_import(https://github.com/tedmoore/ofxCMake/archive/8e26e22f.zip)
 

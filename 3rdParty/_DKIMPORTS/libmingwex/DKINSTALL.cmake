@@ -13,7 +13,7 @@ include_guard()
 
 
 ############ libmingwex ############
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 dk_validate(MSYS2 "dk_depend(msys2)")
 
 if(Windows_X86_Clang)

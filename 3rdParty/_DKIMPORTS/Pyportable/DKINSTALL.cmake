@@ -14,7 +14,7 @@ include_guard()
 
 ############ pyportable ############
 # https://github.com/sganis/pyportable
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### INSTALL ###
 if(Windows_Host)

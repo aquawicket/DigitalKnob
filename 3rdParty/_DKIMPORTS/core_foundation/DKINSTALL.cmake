@@ -15,7 +15,7 @@ include_guard()
 ############ core_foundation ############
 # https://developer.apple.com/documentation/corefoundation
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Apple)
 	dk_undepend(core_foundation)
 	dk_return()

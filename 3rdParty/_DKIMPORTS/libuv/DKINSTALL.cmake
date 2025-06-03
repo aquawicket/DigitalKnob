@@ -15,7 +15,7 @@ include_guard()
 ############ libuv ############
 # https://github.com/libuv/libuv.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend			(iphlpapi)

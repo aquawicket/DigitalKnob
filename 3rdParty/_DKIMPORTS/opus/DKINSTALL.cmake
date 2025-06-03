@@ -15,7 +15,7 @@ include_guard()
 ############ opus ############
 # https://github.com/xiph/opus.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/xiph/opus/archive/7db26934.zip)

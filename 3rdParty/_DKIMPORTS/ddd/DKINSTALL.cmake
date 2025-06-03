@@ -16,7 +16,7 @@ include_guard()
 # https://ftp.gnu.org/gnu/ddd/ddd-3.3.12.tar.gz
 
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 #dk_import(https://ftp.gnu.org/gnu/ddd/ddd-3.3.12.tar.gz)

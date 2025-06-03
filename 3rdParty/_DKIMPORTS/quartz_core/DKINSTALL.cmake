@@ -15,7 +15,7 @@ include_guard()
 ############ quartz_core ############
 # https://developer.apple.com/documentation/quartzcore?language=objc
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Apple)
 	dk_undepend(quartz_core)

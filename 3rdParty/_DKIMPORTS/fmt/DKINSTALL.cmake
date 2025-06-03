@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/fmtlib/fmt.git
 # https://fmt.dev/latest/index.html
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPENDS ###
 #dk_depend(python3)

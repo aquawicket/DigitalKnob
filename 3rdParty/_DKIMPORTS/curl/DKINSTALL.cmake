@@ -18,7 +18,7 @@ include_guard()
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
 # https://curl.se/docs/install.html
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(dl)

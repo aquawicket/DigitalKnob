@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 # https://github.com/libsdl-org/SDL
 # https://www.libsdl.org/
 # https://www.libsdl.org/release/SDL2-2.0.18.zip

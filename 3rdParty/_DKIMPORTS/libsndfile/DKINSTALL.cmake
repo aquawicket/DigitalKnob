@@ -14,7 +14,7 @@ include_guard()
 
 ############ libsndfile ############
 # https://github.com/libsndfile/libsndfile.git
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(flac)

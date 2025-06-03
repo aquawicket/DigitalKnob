@@ -15,7 +15,7 @@ include_guard()
 ############ opencv ############
 # https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.4.1/opencv-3.4.1.zip
 # https://github.com/opencv/opencv/archive/refs/tags/4.5.3.zip
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(jasper)

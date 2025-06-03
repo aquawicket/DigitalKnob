@@ -19,7 +19,7 @@ include_guard()
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
 # https://fuchsia.googlesource.com/third_party/libxml2/
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(libiconv)

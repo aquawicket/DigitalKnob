@@ -15,7 +15,7 @@ include_guard()
 ############ gl_kit  ############
 # https://developer.apple.com/documentation/GLKit?language=objc
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Apple)
 	dk_undepend(gl_kit)
 	dk_return()

@@ -15,7 +15,7 @@ include_guard()
 ############ termux-app ############
 # https://github.com/termux/termux-app.git
 # https://www.macrodroidforum.com/index.php?threads/guide-setting-up-and-using-adb-commands-with-termux.5640/
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Android_Host)
 	return()

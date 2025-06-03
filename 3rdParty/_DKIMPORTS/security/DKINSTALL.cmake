@@ -15,7 +15,7 @@ include_guard()
 ###### security ######
 # https://developer.apple.com/documentation/security?language=objc
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Apple)
 	dk_undepend(security)

@@ -17,7 +17,7 @@ include_guard()
 # git://git.savannah.gnu.org/gzip.git
 # https://github.com/kunpengcompute/gzip.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/kunpengcompute/gzip/archive/6a3ebab7e475fb5ca9b01c344eb45c27ea81ef89.zip)

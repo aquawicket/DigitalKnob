@@ -13,11 +13,15 @@ include_guard()
 
 
 #########################################################################
-# dk_Config_Path()
+# dk_Target_Config()
 #
+#	This is where the CMakeLists.txt or configure file is located in a plugin
 #
-function(dk_Config_Path)
-	dk_debugFunc()
+#	SINGLE_CONFIG:	zlib-master/Windows_X86_64_Clang/Debug/CMakeLists.txt
+#   MULTI_CONFIG:	zlib-master/Windows_X86_64_Msvc/CMakeLists.txt
+#
+function(dk_Target_Config)
+	dk_debugFunc(0)
 	
 	dk_validate(Host_Tuple   	"dk_Host_Tuple()")
 	dk_validate(Target_Type  	"dk_Target_Type()")
@@ -32,7 +36,7 @@ function(dk_Config_Path)
 		
 		dk_set(MULTI_CONFIG 1)
 		dk_unset(SINGLE_CONFIG)
-		dk_set(Config_Path ${Target_Tuple})
+		dk_set(Target_Config ${Target_Tuple})
 		if(Debug)
 			dk_set(BUILD_PATH   ${Target_Tuple}/${Debug_Dir})
 		elseif(Release)
@@ -42,7 +46,7 @@ function(dk_Config_Path)
 		dk_debug("*** ${CMAKE_GENERATOR}: Generator is MULTI_CONFIG (${CMAKE_CONFIGURATION_TYPES}) ***")
 		
 		dk_assertVar(MULTI_CONFIG)
-		dk_assertVar(Config_Path)
+		dk_assertVar(Target_Config)
 		dk_assertVar(BUILD_PATH)
 		
 	else() # SINGLE_CONFIG
@@ -54,14 +58,14 @@ function(dk_Config_Path)
 		dk_unset(MULTI_CONFIG)
 		if(Debug)
 			dk_set	(CMAKE_BUILD_TYPE Debug)
-			dk_set	(Config_Path ${Target_Tuple}/${Debug_Dir})
+			dk_set	(Target_Config ${Target_Tuple}/${Debug_Dir})
 			dk_set	(BUILD_PATH ${Target_Tuple}/${Debug_Dir})
 			
 			dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
 			dk_info("*** ${CMAKE_GENERATOR}: Generator is SINGLE_CONFIG (${CMAKE_BUILD_TYPE}) ***")
 		elseif(Release)
 			dk_set	(CMAKE_BUILD_TYPE Release)
-			dk_set	(Config_Path ${Target_Tuple}/${Release_Dir})
+			dk_set	(Target_Config ${Target_Tuple}/${Release_Dir})
 			dk_set	(BUILD_PATH ${Target_Tuple}/${Release_Dir})
 			
 			dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
@@ -70,7 +74,7 @@ function(dk_Config_Path)
 		
 		dk_assertVar(SINGLE_CONFIG)
 		dk_assertVar(CMAKE_BUILD_TYPE)
-		dk_assertVar(Config_Path)
+		dk_assertVar(Target_Config)
 		dk_assertVar(BUILD_PATH)
 	endif()
 endfunction()
@@ -83,5 +87,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_Config_Path()
+	dk_Target_Config()
 endfunction()

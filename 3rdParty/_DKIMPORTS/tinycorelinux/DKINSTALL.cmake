@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 # http://tinycorelinux.net/downloads.html
 # http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso
 

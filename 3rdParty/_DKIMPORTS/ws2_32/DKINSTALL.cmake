@@ -14,7 +14,7 @@ include_guard()
 
 ############ ws2_32 ############
 # https://docs.microsoft.com/en-us/windows/win32/winsock/creating-a-basic-winsock-application
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Windows)
 	dk_undepend(ws2_32)

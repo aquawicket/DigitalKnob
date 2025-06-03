@@ -15,7 +15,7 @@ include_guard()
 ############ kdevelop ############
 # https://github.com/KDE/kdevelop
 # https://www.kdevelop.org/
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux_Host)
 	dk_undepend(kdevelop)
 	dk_return()

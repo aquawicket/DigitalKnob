@@ -14,7 +14,7 @@ include_guard()
 
 ############ openblas ############
 # https://github.com/xianyi/OpenBLAS.git
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/OpenMathLib/OpenBLAS/archive/8a0cd5fc.zip)

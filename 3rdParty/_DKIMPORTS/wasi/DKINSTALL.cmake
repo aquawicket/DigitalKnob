@@ -15,7 +15,7 @@ include_guard()
 ############ wasi ############
 # https://github.com/WebAssembly/WASI.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/WebAssembly/WASI/archive/dbe2733c.zip)

@@ -14,7 +14,7 @@ include_guard()
 
 ############ game_controller ############
 # https://developer.apple.com/documentation/gamecontroller?language=objc
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Apple)
 	dk_undepend(game_controller)
 	dk_return()

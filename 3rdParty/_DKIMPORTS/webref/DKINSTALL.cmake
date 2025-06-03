@@ -14,7 +14,7 @@ include_guard()
 
 ############ webref ############
 # https://github.com/w3c/webref.git
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_depend(nodejs)
 

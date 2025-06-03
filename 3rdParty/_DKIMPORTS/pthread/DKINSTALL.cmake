@@ -14,7 +14,7 @@ include_guard()
 
 ############ pthread ############
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(Linux OR Raspberry)
 	dk_lib(pthread)

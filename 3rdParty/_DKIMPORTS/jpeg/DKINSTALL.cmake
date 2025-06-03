@@ -16,7 +16,7 @@ include_guard()
 # http://www.ijg.org/
 # https://www.ijg.org/files/jpegsr9d.zip
 #
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 
 

@@ -16,7 +16,7 @@ include_guard()
 # https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-wrappers
 
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Windows)
 	dk_undepend(shlwapi)

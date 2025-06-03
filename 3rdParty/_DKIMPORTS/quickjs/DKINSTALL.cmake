@@ -15,7 +15,7 @@ include_guard()
 ############ quickjs ############
 # https://github.com/bellard/quickjs.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 #dk_import(https://github.com/bellard/quickjs.git)
 dk_import(https://github.com/bellard/quickjs/archive/refs/heads/master.zip)

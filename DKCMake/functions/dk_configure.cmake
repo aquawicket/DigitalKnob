@@ -39,12 +39,12 @@ function(dk_configure SOURCE_DIR) #ARGN
 	
 	dk_assertPath(SOURCE_DIR)
 	dk_validate(Target_Type "dk_Target_Type()")
-	dk_validate(Config_Path "dk_Config_Path()")
+	dk_validate(Target_Config "dk_Target_Config()")
 	
 	dk_assertPath(${CURRENT_PLUGIN})
 	
 	if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
-		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${Config_Path}")
+		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${Target_Config}")
 		dk_mkdir("${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	endif()
 	dk_assertPath(${CURRENT_PLUGIN}_CONFIG_DIR)

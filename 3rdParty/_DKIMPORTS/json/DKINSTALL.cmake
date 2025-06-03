@@ -15,7 +15,7 @@ include_guard()
 ############ json ############
 # https://github.com/nlohmann/json.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### NOTES ###
 # This is a header only library, the compileable stuff below is unit testing

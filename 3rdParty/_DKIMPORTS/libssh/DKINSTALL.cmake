@@ -15,7 +15,7 @@ include_guard()
 ############ libssh ############
 # https://github.com/libssh/libssh-mirror
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/libssh/libssh-mirror/archive/ac6d2fad.zip)

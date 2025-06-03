@@ -14,7 +14,7 @@ include_guard()
 
 ############ rlottie ############
 # https://github.com/Samsung/rlottie.git
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_import(https://github.com/Samsung/rlottie/archive/e3026b1e.zip)

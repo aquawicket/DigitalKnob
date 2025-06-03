@@ -15,7 +15,7 @@ include_guard()
 ############ bzip2-win-build ############
 # https://github.com/kiyolee/bzip2-win-build
 # https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(Unix)
 	dk_undepend(bzip2-win-build)
 	dk_return()

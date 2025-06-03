@@ -488,7 +488,7 @@ endif()
 
 
 
-# GENERATOR			Config_Path		  		  	BUILD_PATH
+# GENERATOR			Target_Config		  		  	BUILD_PATH
 # -----------------------------------------------------------------------
 # Visual Studio  	${Target_Tuple}					${Target_Tuple}/${Target_Type}		
 # XCODE			    ${Target_Tuple}					${Target_Tuple}/${Target_Type} 

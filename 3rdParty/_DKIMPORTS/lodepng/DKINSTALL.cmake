@@ -15,6 +15,6 @@ include_guard()
 ############ lodepng ############
 # https://github.com/lvandeve/lodepng
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_import(https://github.com/lvandeve/lodepng/archive/79a61c79.zip)

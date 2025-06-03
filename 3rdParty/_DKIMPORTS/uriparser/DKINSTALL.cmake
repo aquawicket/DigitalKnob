@@ -14,7 +14,7 @@ include_guard()
 
 ############ uriparser ############
 # https://github.com/uriparser/uriparser
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### INSTALL ###
 dk_import(https://github.com/uriparser/uriparser/archive/2ab7b7df.zip)

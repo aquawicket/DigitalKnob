@@ -14,7 +14,7 @@ include_guard()
 
 ############ conio-for-linux ############
 # https://github.com/nowres/conio-for-linux.git
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT UNIX_HOST)
 	dk_undepend(conio-for-linux)
 	dk_return()

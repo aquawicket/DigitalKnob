@@ -13,7 +13,7 @@ include_guard()
 
 
 ########### libglfw3-dev ###########
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT UNIX_HOST)
 	dk_undepend(libglfw3-dev)
 	dk_return()

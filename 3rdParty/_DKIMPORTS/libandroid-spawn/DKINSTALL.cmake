@@ -15,6 +15,6 @@ include_guard()
 ############ libandroid-spawn ############
 # https://github.com/termux/termux-packages/blob/master/packages/libandroid-spawn/build.sh
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_installPackage(libandroid-spawn)

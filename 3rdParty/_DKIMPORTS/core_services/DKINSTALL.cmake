@@ -15,7 +15,7 @@ include_guard()
 ############ core_services ############
 # https://developer.apple.com/documentation/coregraphics?language=objc
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Apple)
 	dk_undepend(core_services)
 	dk_return()

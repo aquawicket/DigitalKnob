@@ -14,7 +14,7 @@ include_guard()
 
 ############ DKCef ############
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 #if(Android OR IOS OR Iossim OR (Windows AND (NOT MSVC)))
 	dk_disable(DKCef)
 	dk_return()

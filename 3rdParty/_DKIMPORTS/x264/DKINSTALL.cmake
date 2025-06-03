@@ -14,7 +14,7 @@ include_guard()
 
 ############ z264 ############
 # https://code.videolan.org/videolan/x264.git
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPENDS ###
 dk_depend		(msys2)

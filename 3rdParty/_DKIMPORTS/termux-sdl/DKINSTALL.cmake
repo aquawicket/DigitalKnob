@@ -14,7 +14,7 @@ include_guard()
 
 ############ termux-sdl ############
 #https://github.com/lzhiyong/termux-sdl.git
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Android_Host)
 	return()

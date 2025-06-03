@@ -25,7 +25,7 @@ dk_Target_Tuple()
 dk_set(Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
 dk_basename("${Target_App_Dir}")
 dk_set(Target_App "${dk_basename}")
-dk_validate(Config_Path "dk_Config_Path()")
+dk_validate(Target_Config "dk_Target_Config()")
 
 ###### DEPENDENCIES ######
 dk_depend(DK)
@@ -70,7 +70,7 @@ dk_generateAppCmake()
 
 dk_set(CURRENT_PLUGIN 				${Target_App})
 dk_set(${CURRENT_PLUGIN} 			${CMAKE_SOURCE_DIR})
-dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${CMAKE_CURRENT_LIST_DIR}/${Config_Path})
+dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${CMAKE_CURRENT_LIST_DIR}/${Target_Config})
 
 dk_configure(${CMAKE_CURRENT_LIST_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTUPLE=${TUPLE})
 dk_build(${CMAKE_CURRENT_LIST_DIR})

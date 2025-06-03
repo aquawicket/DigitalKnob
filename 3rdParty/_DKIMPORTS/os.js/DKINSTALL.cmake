@@ -15,7 +15,7 @@ include_guard()
 ############ os.js ############
 # https://github.com/os-js/OS.js.git
 
-dk_validate(Config_Path  "dk_Config_Path()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 #dk_import(https://github.com/os-js/OS.js.git)
