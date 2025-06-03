@@ -11,6 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+
 ###############################################################################
 # dk_DKBASH_DIR()
 #
@@ -28,6 +29,7 @@ function(dk_DKBASH_DIR)
 		dk_set(DKBASH_DIR "${DKBRANCH_DIR}/DKBash")
 	endif()
 
+	###### FINALIZE ######
 	dk_set(DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions")
 	dk_set(DKBASH_FUNCTIONS_DIR_ "${DKBASH_DIR}/functions/")
 endfunction()

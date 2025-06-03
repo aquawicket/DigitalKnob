@@ -21,50 +21,75 @@ function(dk_DKHOME_DIR)
 	###### SET ######
 	if(ARGV)
 		dk_set(DKHOME_DIR "${ARGV}")
-		return()
-	endif()
 	
 	###### GET ######
+	else()
 
-	############ from ENV{DKHOME_DIR} ############
-	if(NOT EXISTS "${DKHOME_DIR}")
-		set(DKHOME_DIR "$ENV{DKHOME_DIR}")
-	endif()
-
-	########### from CMD #############
-	if(NOT EXISTS "${DKHOME_DIR}")
-	#if("${CMAKE_HOST_SYSTEM_NAME}" EQUAL "Windows")
-		file(TO_CMAKE_PATH "$ENV{USERPROFILE}" DKHOME_DIR)
-	#endif()
-	endif()
-	
-	########### from MSYS ###########
-	if(NOT EXISTS "${DKHOME_DIR}")
-		set(CYGPATH_EXE "/usr/bin/cygpath.exe")
-		if(EXISTS "${CYGPATH_EXE}")
-			execute_process(COMMAND ${CYGPATH_EXE} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+		############ from ENV{DKHOME_DIR} ############
+		if(NOT EXISTS "${DKHOME_DIR}")
+			set(DKHOME_DIR "$ENV{DKHOME_DIR}")
 		endif()
-	endif()
-		
-	########### from WSL ###########
-	if(NOT EXISTS "${DKHOME_DIR}")
-		set(WSLPATH_EXE "wsl.exe")
-		if(EXISTS "${WSLPATH_EXE}")
-			execute_process(COMMAND ${WSLPATH_EXE} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+		########### from CMD #############
+		if(NOT EXISTS "${DKHOME_DIR}")
+		#if("${CMAKE_HOST_SYSTEM_NAME}" EQUAL "Windows")
+			file(TO_CMAKE_PATH "$ENV{USERPROFILE}" DKHOME_DIR)
+		#endif()
 		endif()
-	endif()
-
-	########### from Unix ############
-	if(NOT EXISTS "${DKHOME_DIR}")
-		file(REAL_PATH "~" DKHOME_DIR EXPAND_TILDE) # EXPAND_TILDE - Added in version 3.21.
-	endif()
+	
+		########### from MSYS ###########
+		if(NOT EXISTS "${DKHOME_DIR}")
+			set(CYGPATH_EXE "/usr/bin/cygpath.exe")
+			if(EXISTS "${CYGPATH_EXE}")
+				execute_process(COMMAND ${CYGPATH_EXE} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+			endif()
+		endif()
 		
+		########### from WSL ###########
+		if(NOT EXISTS "${DKHOME_DIR}")
+			set(WSLPATH_EXE "wsl.exe")
+			if(EXISTS "${WSLPATH_EXE}")
+				execute_process(COMMAND ${WSLPATH_EXE} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+			endif()
+		endif()
 
-	
-	
-	
+		########### from Unix ############
+		if(NOT EXISTS "${DKHOME_DIR}")
+			file(REAL_PATH "~" DKHOME_DIR EXPAND_TILDE) # EXPAND_TILDE - Added in version 3.21.
+		endif()
+	endif()	
 
+	###### FINALIZE ######
+	if(NOT EXISTS "${DKHOME_DIR}")
+		dk_fatal("DKHOME_DIR:'${DKHOME_DIR}' not found")
+	endif()
 	
+	dk_set(DKHOME_DIR "${DKHOME_DIR}")
+endfunction()
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc(0)
+ 
+	dk_echo()
+	dk_echo("Test Getting DKHOME_DIR . . .")
+	dk_DKHOME_DIR()
+	dk_echo("DKHOME_DIR = ${DKHOME_DIR}")
+	
+	dk_echo()
+	dk_echo("Test Setting DKHOME_DIR . . .")
+	dk_DKHOME_DIR("C:/")
+	dk_echo("DKHOME_DIR = ${DKHOME_DIR}")
+endfunction()
+
+
+
+
 #	###### CMD_EXE ######
 #	dk_validate(CMD_EXE "dk_CMD_EXE()")
 #	if(NOT EXISTS "${CMD_EXE}")
@@ -116,31 +141,3 @@ function(dk_DKHOME_DIR)
 #		set(ENV{WSLPATH_EXE} "${WSLPATH_EXE}")		# Set Environment Varible
 #		dk_printVar(ENV{WSLPATH_EXE})
 #	endif()
-
-
-	if(NOT EXISTS "${DKHOME_DIR}")
-		dk_fatal("DKHOME_DIR:'${DKHOME_DIR}' not found")
-	endif()
-	
-	dk_set(DKHOME_DIR "${DKHOME_DIR}")
-endfunction()
-
-
-
-
-
-
-###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-function(DKTEST)
-	dk_debugFunc(0)
- 
-	dk_echo()
-	dk_echo("Test Getting DKHOME_DIR . . .")
-	dk_DKHOME_DIR()
-	dk_echo("DKHOME_DIR = ${DKHOME_DIR}")
-	
-	dk_echo()
-	dk_echo("Test Setting DKHOME_DIR . . .")
-	dk_DKHOME_DIR("C:/")
-	dk_echo("DKHOME_DIR = ${DKHOME_DIR}")
-endfunction()

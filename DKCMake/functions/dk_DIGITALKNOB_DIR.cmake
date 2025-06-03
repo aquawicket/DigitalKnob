@@ -21,36 +21,23 @@ function(dk_DIGITALKNOB_DIR)
 	###### SET ######
 	if(ARGV)
 		dk_set(DIGITALKNOB_DIR "${ARGV}")
-		return()
-	endif()
 
-	### DIGITALKNOB_DIR ###
-	dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
-	dk_printVar(DKHOME_DIR)
+	###### GET ######
+	else()
+		dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
 	
-	#if(NOT DEFINED DIGITALKNOB) 
-	#	dk_set(DIGITALKNOB "D i g i t a l K n o b") 
-	#endif()
-	if(NOT DEFINED DIGITALKNOB)
-		dk_set(DIGITALKNOB "digitalknob")
-	endif()
+		if(NOT DEFINED DIGITALKNOB) 
+		#	dk_set(DIGITALKNOB "D i g i t a l K n o b") 
+			dk_set(DIGITALKNOB "digitalknob")
+		endif()
 
-	dk_set(DIGITALKNOB_DIR "${DKHOME_DIR}/${DIGITALKNOB}")
-    if(NOT EXISTS "${DIGITALKNOB_DIR}")
+		dk_set(DIGITALKNOB_DIR "${DKHOME_DIR}/${DIGITALKNOB}")
+	endif()
+	
+	###### FINALIZE ######
+	if(NOT EXISTS "${DIGITALKNOB_DIR}")
 		dk_mkdir("${DIGITALKNOB_DIR}")
 	endif()
-	
-#	### DKDOWNLOAD_DIR ###
-#	#dk_set(DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download")
-#	if(NOT EXISTS "${DKDOWNLOAD_DIR}") 
-#		dk_mkdir("${DKDOWNLOAD_DIR}")
-#	endif()
-	
-#	### DKTOOLS_DIR ###
-#	dk_set(DKTOOLS_DIR "${DIGITALKNOB_DIR}/DKTools")
-#	if(NOT EXISTS "${DKTOOLS_DIR}") 
-#		dk_mkdir("${DKTOOLS_DIR}")
-#	endif()
 endfunction()
 
 
