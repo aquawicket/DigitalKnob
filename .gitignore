@@ -134,17 +134,12 @@ DKCpp/plugins/DK/backward.cpp
 DKCpp/plugins/DKXml/pugixml.cpp
 
 DKCpp/apps/*/.vscode
-DKCpp/apps/*/assets.h
-DKCpp/apps/*/assets.zip
 DKCpp/apps/*/CMakeLists.txt
 DKCpp/apps/*/DKApp.code-workspace
 DKCpp/apps/*/DKPlugins.h
-DKCpp/apps/*/resource.h
-DKCpp/apps/*/resource.rc
-DKCpp/apps/*/assets/favicon.ico
-DKCpp/apps/*/assets/icon.ico
-DKCpp/apps/*/assets/icon.png
-DKCpp/apps/*/assets/log.txt
+DKCpp/apps/*/assets.h
+DKCpp/apps/*/assets.rc
+DKCpp/apps/*/assets.zip
 DKCpp/apps/*/assets/DK
 DKCpp/apps/*/assets/DKAssets
 DKCpp/apps/*/assets/DKAudio
@@ -158,7 +153,16 @@ DKCpp/apps/*/assets/DKSDLText
 DKCpp/apps/*/assets/DKVideo
 DKCpp/apps/*/assets/DKWebTest
 DKCpp/apps/*/assets/DKWindow
+DKCpp/apps/*/assets/favicon.ico
+DKCpp/apps/*/assets/icon.ico
+DKCpp/apps/*/assets/icon.png
+DKCpp/apps/*/assets/log.txt
+DKCpp/apps/*/icon.h
+DKCpp/apps/*/icon.ico
+DKCpp/apps/*/icon.rc
 DKCpp/apps/*/icons/windows
+DKCpp/apps/*/resource.h
+DKCpp/apps/*/resource.rc
 
 DKCpp/apps/DKCore/main.cpp
 DKCpp/apps/DKJavascript/main.cpp
