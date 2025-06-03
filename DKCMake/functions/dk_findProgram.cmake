@@ -11,6 +11,10 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+
+#if(NOT DEFINED dk_findProgram_DEBUG)
+#	dk_set(dk_findProgram_DEBUG 1)
+#endif()
 ###############################################################################
 # dk_findProgram (<VAR> filename [path1 path2 ...])
 #
@@ -24,7 +28,9 @@ function(dk_findProgram VAR filename)
 	dk_debugFunc()
 	
 	if(EXISTS ${${VAR}})
-		dk_debug("already FOUND ${filename} at ${${VAR}}")
+		if("${dk_findProgram_DEBUG}" STREQUAL "1")
+			dk_debug("already FOUND ${filename} at ${${VAR}}")
+		endif()
 		return()
 	endif()
 	
