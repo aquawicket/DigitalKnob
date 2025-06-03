@@ -27,10 +27,13 @@ function(dk_DKCACHE_DIR)
 		dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
 		dk_set(DKCACHE_DIR "${DKHOME_DIR}/.dk")
 	endif()
+	
+	###### FINALIZE ######
 	if(NOT EXISTS "${DKCACHE_DIR}")
 		dk_mkdir("${DKCACHE_DIR}")
 	endif()
 	dk_assertPath(${DKCACHE_DIR})
+	
 endfunction()
 
 

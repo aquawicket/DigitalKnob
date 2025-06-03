@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-####################################################################
+
+#########################################################################
 # dk_DKHOME_DIR()
 #
 #
@@ -32,9 +33,7 @@ function(dk_DKHOME_DIR)
 
 		########### from CMD #############
 		if(NOT EXISTS "${DKHOME_DIR}")
-		#if("${CMAKE_HOST_SYSTEM_NAME}" EQUAL "Windows")
 			file(TO_CMAKE_PATH "$ENV{USERPROFILE}" DKHOME_DIR)
-		#endif()
 		endif()
 	
 		########### from MSYS ###########

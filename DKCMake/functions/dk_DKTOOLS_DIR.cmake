@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-####################################################################
+
+########################################################################
 # dk_DKTOOLS_DIR()
 #
 #
@@ -28,9 +29,12 @@ function(dk_DKTOOLS_DIR)
 		dk_set(DKTOOLS_DIR "$ENV{DIGITALKNOB_DIR}/DKTools")
 	endif()
 
+	###### FINALIZE ######
 	if(NOT EXISTS "$ENV{DKTOOLS_DIR}") 
 		dk_mkdir("$ENV{DKTOOLS_DIR}")
 	endif()
+	dk_assertPath("$ENV{DKTOOLS_DIR}")
+	
 endfunction()
 
 

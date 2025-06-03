@@ -11,6 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+
 ####################################################################
 # dk_DKDESKTOP_DIR()
 #
@@ -27,6 +28,7 @@ function(dk_DKDESKTOP_DIR)
 		dk_validate(ENV{DKHOME_DIR} "dk_DKHOME_DIR()")
 		dk_set(DKDESKTOP_DIR "$ENV{DKHOME_DIR}/Desktop")
 	endif()
+	
 endfunction()
 
 

@@ -28,11 +28,13 @@ function(dk_DKDOWNLOAD_DIR)
 		set(ENV{DKDOWNLOAD_DIR} "$ENV{DIGITALKNOB_DIR}/download")
 	endif()
 	
+	###### FINALIZE ######
 	if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}") 
 		dk_mkdir("$ENV{DKDOWNLOAD_DIR}")
 	endif()
 	
 	dk_assertPath("$ENV{DKDOWNLOAD_DIR}")
+	
 endfunction()
 
 
