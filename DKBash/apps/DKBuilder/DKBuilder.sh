@@ -156,7 +156,9 @@ export HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development
 [ ! -e "${DK}" ] && echo "DK:${DK} does not exist" && exit 1
 
 $(SUDO_EXE) chmod 777 "${DK}"
-. "${DK}" # $0 $*
+. "${DK}" $0 $*
+#"${DK}" $0 $*
+
 
 
 
