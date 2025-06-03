@@ -1,9 +1,12 @@
-if not defined Linux_Host (
+if not defined Linux_Host
 	exit /b 1
 )
 %dk_call% dk_echo "############################################################################"
 %dk_call% dk_echo "###################### Linux_X86_Gcc_Toolchain.cmd #########################"
 %dk_call% dk_echo "############################################################################"
+
+%dk_call% DKIMPORTS_DIR			"%dk_call% dk_DKIMPORTS_DIR"
+%dk_call% dk_validate WSL_EXE 	"%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd"
 
 set CMAKE_GENERATOR="Unix Makefiles"
 
@@ -14,9 +17,9 @@ set CMAKE_GENERATOR="Unix Makefiles"
 rem %dk_call% dk_depend build-essential)
 ::%dk_call% dk_depend gcc)
 ::%dk_call% dk_depend make
-::dk_findProgram(CMAKE_MAKE_PROGRAM 	make
+::dk_findProgram(CMAKE_MAKE_PROGRAM 			make
 ::%dk_call% dk_set CMAKE_GENERATOR 				"Unix Makefiles"
-rem %dk_call% dk_set USR_BIN						"/usr/bin"
+rem %dk_call% dk_set USR_BIN					"/usr/bin"
 rem %dk_call% dk_set USR_LOCAL_BIN				"/usr/local/bin"
 ::###### CMAKE_C_COMPILER ######
 ::if(EXISTS /usr/bin/gcc)
@@ -26,11 +29,11 @@ rem %dk_call% dk_set USR_LOCAL_BIN				"/usr/local/bin"
 ::)
 ::###### CMAKE_CXX_COMPILER ######
 ::if(EXISTS /usr/bin/g++)
-::	%dk_call% dk_set CMAKE_CXX_COMPILER		/usr/bin/g++)
+::	%dk_call% dk_set CMAKE_CXX_COMPILER			/usr/bin/g++)
 ::elseif(EXISTS /usr/local/bin/g++)
-::	%dk_call% dk_set CMAKE_CXX_COMPILER		/usr/local/bin/g++)
+::	%dk_call% dk_set CMAKE_CXX_COMPILER			/usr/local/bin/g++)
 ::)
 rem %dk_call% dk_set CMAKE_RC_COMPILER			%GCC_RC_COMPILER%
-rem  %dk_call% dk_append CMAKE_C_FLAGS				-march=i686 -DLINUX -DLINUX_X86 -std=gnu11
-rem  %dk_call% dk_append CMAKE_CXX_FLAGS			-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
+rem  %dk_call% dk_append CMAKE_C_FLAGS			-march=i686 -DLINUX -DLINUX_X86 -std=gnu11
+rem  %dk_call% dk_append CMAKE_CXX_FLAGS		-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
 rem  %dk_call% dk_append CMAKE_EXE_LINKER_FLAGS	-static  &rem  -s)

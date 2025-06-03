@@ -6,6 +6,9 @@ if not defined Linux_Host (
 %dk_call% dk_echo "###################### Linux_Arm32_Gcc_Toolchain.cmd #######################"
 %dk_call% dk_echo "############################################################################"
 
+%dk_call% DKIMPORTS_DIR			"%dk_call% dk_DKIMPORTS_DIR"
+%dk_call% dk_validate WSL_EXE 	"%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd"
+
 set CMAKE_GENERATOR="Unix Makefiles"
 
 
