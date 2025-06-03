@@ -90,4 +90,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%" || %dk_call% dk_printLastError
 	%dk_call% dk_printVar NOTEPADPP_EXE
 
+	%dk_call% dk_findProgram WSL_EXE "wsl.exe" "%windir:\=/%/System32" || %dk_call% dk_printLastError
+	%dk_call% dk_printVar WSL_EXE
 %endfunction%
