@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ## DKTestAll is the "include all plugins" app.
 ## Here we try to include all plugins and 3rd party libraries for all platforms.

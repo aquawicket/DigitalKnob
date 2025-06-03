@@ -15,7 +15,7 @@ include_guard()
 ############ foundation ############
 # https://developer.apple.com/documentation/foundation?language=objc
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(NOT Apple)
 	dk_undepend(foundation)
 	dk_return()

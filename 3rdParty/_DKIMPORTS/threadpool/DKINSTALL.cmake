@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 ## https://sourceforge.net/projects/threadpool/files/threadpool/0.2.5%20%28Stable%29/threadpool-0_2_5-src.zip/download
 
 

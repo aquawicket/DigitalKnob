@@ -77,8 +77,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if not defined Target_Type		%dk_call% DKBuilder/Target_Type		& goto :while_loop
 		if not defined Target_Tuple		%dk_call% DKBuilder/Target_Tuple
 		
-		:: save selections to DKBuilder.cache file
-		%dk_call% dk_echo "creating DKBuilder.cache..."
+		::###### save selections to DKBuilder.cache file ######
+		::%dk_call% dk_echo "creating DKBuilder.cache..."
 		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 		if defined Target_App	(%dk_call% dk_fileWrite		"%DKCACHE_DIR%/DKBuilder.cache" "Target_App_Cache=%Target_App%")
 		if defined Target_Os	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Os_Cache=%Target_Os%")

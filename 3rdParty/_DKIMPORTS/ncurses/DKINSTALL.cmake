@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 # https://github.com/mirror/ncurses.git
 # https://invisible-island.net/ncurses/ncurses.html
 # https://invisible-island.net/datafiles/release/ncurses.tar.gz

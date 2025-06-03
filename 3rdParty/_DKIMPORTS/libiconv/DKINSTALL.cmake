@@ -19,7 +19,7 @@ include_guard()
 # https://cmake.org/cmake/help/latest/module/FindIconv.html
 #
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 #dk_import(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz PATCH)

@@ -15,7 +15,7 @@ include_guard()
 ############ sun-js ############
 # https://github.com/Triggertrap/sun-js
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 #dk_import(https://github.com/Triggertrap/sun-js.git)
 dk_import(https://github.com/Triggertrap/sun-js/archive/refs/heads/master.zip)

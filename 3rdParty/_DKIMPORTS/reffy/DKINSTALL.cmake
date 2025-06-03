@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 # https://github.com/w3c/reffy.git
 
 dk_depend(nodejs)

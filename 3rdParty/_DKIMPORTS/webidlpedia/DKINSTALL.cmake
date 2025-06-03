@@ -14,7 +14,7 @@ include_guard()
 
 ############ webidlpedia ############
 # https://github.com/dontcallmedom/webidlpedia.git
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 #dk_import(https://github.com/dontcallmedom/webidlpedia/archive/refs/heads/gh-pages.zip)
 dk_import(https://github.com/dontcallmedom/webidlpedia/archive/398a36b0.zip)

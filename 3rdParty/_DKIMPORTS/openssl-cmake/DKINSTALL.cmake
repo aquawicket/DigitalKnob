@@ -15,7 +15,7 @@ include_guard()
 ############ openssl-cmake ############
 # https://github.com/viaduck/openssl-cmake.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()") 
+dk_validate(Config_Path  "dk_Config_Path()") 
 
 #dk_import(https://github.com/viaduck/openssl-cmake.git)
 dk_import(https://github.com/viaduck/openssl-cmake/archive/refs/heads/v3.zip)

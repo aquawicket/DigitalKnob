@@ -14,7 +14,7 @@ include_guard()
 
 ############ x265 ############
 # https://bitbucket.org/multicoreware/x265_git.git
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://bitbucket.org/multicoreware/x265_git/get/dd594f59.zip)

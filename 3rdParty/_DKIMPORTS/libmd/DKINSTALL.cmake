@@ -14,7 +14,7 @@ include_guard()
 
 ############ libmd ############
 # https://github.com/guillemj/libmd.git
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(NOT Iossim)
 	dk_undepend(libmd)
 	dk_return()

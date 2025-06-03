@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/doxygen/doxygen.git
 # https://sourceforge.net/projects/doxygen
 # FIXME:  Install to /3rdParty only
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(NOT Windows_Host)
 	dk_undepend(doxygen)

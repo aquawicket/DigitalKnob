@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 # https://github.com/tesseract-ocr/tesseract
 # https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
 

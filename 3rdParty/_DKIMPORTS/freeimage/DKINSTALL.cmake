@@ -15,7 +15,7 @@ include_guard()
 ############ freeimage ############
 # https://freeimage.sourceforge.io
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://gigenet.dl.sourceforge.net/project/freeimage/Source%20Distribution/3.18.0/FreeImage3180.zip)

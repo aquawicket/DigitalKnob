@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/nigels-com/glew.git
 # http://glew.sourceforge.net
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(IOS OR Iossim OR Android)
 	dk_disable(glew)
 	dk_return()

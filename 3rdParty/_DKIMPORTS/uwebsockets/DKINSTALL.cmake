@@ -13,7 +13,7 @@ include_guard()
 
 ############ uwebsockets ############
 # https://github.com/uNetworking/uWebSockets
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### DEPEND ###
 dk_depend(libuv)

@@ -3,6 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
+
 ::#####################################################################
 ::# dk_Host_Tuple()
 ::#
@@ -11,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0 1
  		
-	rem ###### SET ######
+	:: ###### SET ######
 	if "%~1" neq "" (
 		set "Host_Tuple=%~1"
 	
@@ -19,10 +20,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		if not defined Host_Os		(%dk_call% dk_Host_Os)
 		if not defined Host_Arch	(%dk_call% dk_Host_Arch)
-	
 		set "Host_Tuple=!Host_os!_!Host_Arch!"
 	)
 	
+	:: ###### FINALIZE ######
 	endlocal & (
 		set "Host_Tuple=%Host_Tuple%"
 		set "%Host_Tuple%_Host=1"

@@ -550,9 +550,9 @@ function(dk_importVariables)
 	
 	# <PLUGIN>_CONFIG_DIR
 	dk_unset(${CURRENT_PLUGIN}_CONFIG_DIR)
-#	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
-	if(CONFIG_PATH)
-		dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${CONFIG_PATH})
+#	dk_validate(Config_Path "dk_Config_Path()")
+	if(Config_Path)
+		dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${Config_Path})
 	endif()
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(${CURRENT_PLUGIN}_CONFIG_DIR)						# ZLIB_CONFIG_DIR: C:/Users/user/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
@@ -560,7 +560,7 @@ function(dk_importVariables)
 	
 	# <PLUGIN>_BUILD_DIR
 	dk_unset(${CURRENT_PLUGIN}_BUILD_DIR)
-#	dk_validate(BUILD_PATH "dk_CONFIG_PATH()")
+#	dk_validate(BUILD_PATH "dk_Config_Path()")
 	if(BUILD_PATH)
 		dk_set(${CURRENT_PLUGIN}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${BUILD_PATH})
 	endif()	

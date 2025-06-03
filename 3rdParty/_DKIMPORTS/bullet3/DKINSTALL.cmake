@@ -18,7 +18,7 @@ include_guard()
 # https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
 
 ### IMPORT ###
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/bullet3/dkconfig.txt")
 dk_import("${BULLET3_DL}")

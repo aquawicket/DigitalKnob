@@ -19,7 +19,7 @@ include_guard()
 # https://www.codeproject.com/KB/threads/StackWalker/stackwalker.zip
 # FIXME: Let's replace this with boost::stacktrace for cross platform support.
 # https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(NOT MSVC)
 	dk_undepend	(stackwalker)
 	dk_disable	(stackwalker)

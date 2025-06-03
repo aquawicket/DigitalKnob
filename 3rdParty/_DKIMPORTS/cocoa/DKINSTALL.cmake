@@ -14,7 +14,7 @@ include_guard()
 
 ############ cocoa ############
 # https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(NOT Apple)
 	dk_undepend(cocoa)
 	dk_return()

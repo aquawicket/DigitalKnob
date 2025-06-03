@@ -32,7 +32,7 @@ dk_import		(${__APP_NAME__})
 
 
 #											Single Config									MULTI_CONFIG
-#	     CONFIG_PATH  =			                  Windows_X86_64/Debug								  Windows_X86_64
+#	     Config_Path  =			                  Windows_X86_64/Debug								  Windows_X86_64
 #         BUILD_PATH  =			                  Windows_X86_64/Debug								  Windows_X86_64/Debug
 #   MYLIB_CONFIG_DIR  =		....3rdParty/myLib-13/Windows_X86_64/Debug			....3rdParty/myLib-13/Windows_X86_64
 #    MYLIB_BUILD_DIR  =		....3rdParty/myLib-13/Windows_X86_64/Debug			....3rdParty/myLib-13/Windows_X86_64/Debug

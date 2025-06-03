@@ -14,7 +14,7 @@ include_guard()
 
 ############## vccorlib ############
 # vccorlib
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(NOT Windows)
 	dk_undepend(vccorlib)

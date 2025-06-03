@@ -19,7 +19,7 @@ include_guard()
 # https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
 # https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### DEPEND ###
 if(Windows)

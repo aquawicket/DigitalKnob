@@ -17,7 +17,7 @@ include_guard()
 # https://pewpewthespells.com/blog/buildsettings.html
 # Apple Frameworks https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/OSX_Technology_Overview/SystemFrameworks/SystemFrameworks.html
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(NOT Mac_Host)
 	dk_undepend(xcode)

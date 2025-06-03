@@ -15,7 +15,7 @@ include_guard()
 ############ poco ############
 # https://github.com/pocoproject/poco.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### DEPENDS ###
 dk_depend(iphlpapi)

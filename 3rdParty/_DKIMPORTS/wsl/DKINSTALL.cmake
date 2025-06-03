@@ -13,7 +13,7 @@ include_guard()
 
 
 ############ wsl ############
-#dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+#dk_validate(Config_Path  "dk_Config_Path()")
 # https://learn.microsoft.com/en-us/windows/wsl/
 # https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command
 # https://learn.microsoft.com/en-us/windows/wsl/install-manual

@@ -15,7 +15,7 @@ include_guard()
 ############ vcpkg ############
 # Getting Started  https://vcpkg.io/en/getting-started.html
 # Documentation    https://vcpkg.io/en/docs/README.html
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 dk_import(https://github.com/microsoft/vcpkg/archive/cff6ed45.zip)
 

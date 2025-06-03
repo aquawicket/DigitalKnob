@@ -14,7 +14,7 @@ include_guard()
 
 ############ fftw3 ############
 # https://github.com/FFTW/fftw3.git
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")

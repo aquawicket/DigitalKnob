@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/termux/termux-api.git
 # https://aktermux.in/adb-in-termux/#howto-step-1680021612068
 # https://github.com/termux/termux-api/releases/download/v0.50.1/termux-api_v0.50.1+github-debug.apk
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(NOT Android_Host)
 	return()

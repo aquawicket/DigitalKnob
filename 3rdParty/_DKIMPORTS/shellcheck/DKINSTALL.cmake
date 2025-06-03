@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/koalaman/shellcheck.git
 # https://github.com/koalaman/shellcheck/archive/refs/heads/master.zip
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 #pkg install shellcheck
 dk_installPackage(shellcheck)

@@ -20,7 +20,7 @@ include_guard()
 # https://github.com/svaarala/duktape/archive/refs/heads/master.zip
 # https://wiki.duktape.org/projectsusingduktape
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### DEPEND ###
 dk_depend(python3)

@@ -14,7 +14,7 @@ include_guard()
 
 ############ cfgmgr32 ############
 # https://learn.microsoft.com/en-us/windows/win32/api/setupapi
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(NOT Windows)
 	dk_undepend(cfgmgr32.lib)
 	dk_return()

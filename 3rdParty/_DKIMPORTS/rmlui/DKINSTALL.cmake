@@ -15,7 +15,7 @@ include_guard()
 ############ rmlui ############
 # https://github.com/mikke89/RmlUi.git
 # https://github.com/aquawicket/RmlUi.git
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 #################### NOTE ###########################################################################################
 #  To get the samples to compile with a SDL Renderer backend, I needed to add a few things to 

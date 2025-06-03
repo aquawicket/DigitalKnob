@@ -14,7 +14,7 @@ include_guard()
 
 ######## luajit ########
 # https://github.com/LuaJIT/LuaJIT.git
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 dk_import(https://github.com/LuaJIT/LuaJIT/archive/refs/heads/v2.1.zip)
 

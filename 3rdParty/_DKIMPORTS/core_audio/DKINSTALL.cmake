@@ -14,7 +14,7 @@ include_guard()
 
 ############ core_audio ############
 # https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/CoreAudioOverview/WhatisCoreAudio/WhatisCoreAudio.html
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(NOT Apple)
 	dk_undepend(core_audio)
 	dk_return()

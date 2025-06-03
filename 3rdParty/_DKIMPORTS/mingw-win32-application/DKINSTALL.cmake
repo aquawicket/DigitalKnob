@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 # https://www.transmissionzero.co.uk/computing/win32-apps-with-mingw/
 # https://github.com/TransmissionZero/MinGW-Win32-Application
 

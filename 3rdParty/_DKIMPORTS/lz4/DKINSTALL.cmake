@@ -15,7 +15,7 @@ include_guard()
 ############ lz4 ############
 # https://github.com/lz4/lz4.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 #dk_import(https://github.com/lz4/lz4.git BRANCH dev)

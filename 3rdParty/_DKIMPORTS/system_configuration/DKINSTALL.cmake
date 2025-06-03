@@ -15,7 +15,7 @@ include_guard()
 ############ system_configuration ############
 # https://developer.apple.com/documentation/systemconfiguration?language=objc
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(NOT Apple)
 	dk_undepend(system_configuration)

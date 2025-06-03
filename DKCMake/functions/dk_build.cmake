@@ -54,19 +54,19 @@ function(dk_build path) #target NO_HALT
 	#	list(APPEND BUILD_MODE multi_config)
 	#endif()
 	#list(APPEND BUILD_MODE single_config)
-		#dk_assertVar(CONFIG_PATH)
+		#dk_assertVar(Config_Path)
 
 		# Build with CMake		(multi_config / single_config)
-		if(EXISTS ${path}/${CONFIG_PATH}/cmake_install.cmake)
+		if(EXISTS ${path}/${Config_Path}/cmake_install.cmake)
 			dk_info("Building with CMake (single_config)")
 			dk_validate(CMAKE_EXE "dk_depend(cmake)")
 
 			if(target)
-				dk_if(Debug  "dk_command(${CMAKE_EXE} --build ${path}/${CONFIG_PATH} --config Debug --target ${target} --verbose)")
-				dk_if(Release "dk_command(${CMAKE_EXE} --build ${path}/${CONFIG_PATH} --config Release --target ${target} --verbose)")
+				dk_if(Debug  "dk_command(${CMAKE_EXE} --build ${path}/${Config_Path} --config Debug --target ${target} --verbose)")
+				dk_if(Release "dk_command(${CMAKE_EXE} --build ${path}/${Config_Path} --config Release --target ${target} --verbose)")
 			else()
-				dk_if(Debug "dk_command(${CMAKE_EXE} --build ${path}/${CONFIG_PATH} --config Debug --verbose)")
-				dk_if(Release "dk_command(${CMAKE_EXE} --build ${path}/${CONFIG_PATH} --config Release --verbose)")
+				dk_if(Debug "dk_command(${CMAKE_EXE} --build ${path}/${Config_Path} --config Debug --verbose)")
+				dk_if(Release "dk_command(${CMAKE_EXE} --build ${path}/${Config_Path} --config Release --verbose)")
 			endif()
 			dk_return()
 		endif()
@@ -97,7 +97,7 @@ function(dk_build path) #target NO_HALT
 		endif()
 		
 		# Build with MSBuild		(multi_config)
-		file(GLOB sln "${path}/${CONFIG_PATH}/*.sln")
+		file(GLOB sln "${path}/${Config_Path}/*.sln")
 		if(sln)
 			dk_info("Building with MSBuild")
 			dk_visualStudio(${ARGV})
@@ -105,7 +105,7 @@ function(dk_build path) #target NO_HALT
 		endif()
 		
 		# Build with XCode			(multi_config)
-		file(GLOB xcodeproj "${path}/${CONFIG_PATH}/*.xcodeproj")
+		file(GLOB xcodeproj "${path}/${Config_Path}/*.xcodeproj")
 		if(xcodeproj)
 			dk_info("Building with XCode")
 			dk_xcode(${ARGV})
@@ -114,9 +114,9 @@ function(dk_build path) #target NO_HALT
 		
 		
 		# Build with make			(single_config)
-		if(EXISTS ${path}/${CONFIG_PATH}/Makefile)
-			dk_chdir(${path}/${CONFIG_PATH})
-			dk_info("Building with ${path}/${CONFIG_PATH}/Makefile")
+		if(EXISTS ${path}/${Config_Path}/Makefile)
+			dk_chdir(${path}/${Config_Path})
+			dk_info("Building with ${path}/${Config_Path}/Makefile")
 			dk_make(${ARGV})
 			dk_return()
 		endif()
@@ -133,7 +133,7 @@ function(dk_build path) #target NO_HALT
 					dk_chdir(${path}/${Target_Tuple}/${Debug_Dir})
 					dk_info("Building with ${path}/${Target_Tuple}/${Debug_Dir}/Makefile")
 					dk_make(${ARGV})
-					dk_chdir(${path}/${CONFIG_PATH})
+					dk_chdir(${path}/${Config_Path})
 					dk_return()
 				endif()
 			elseif(Release)
@@ -141,7 +141,7 @@ function(dk_build path) #target NO_HALT
 					dk_chdir(${path}/${Target_Tuple}/${Release_Dir})
 					dk_info("Building with ${path}/${Target_Tuple}/${Release_Dir}/Makefile")
 					dk_make(${ARGV})
-					dk_chdir(${path}/${CONFIG_PATH})
+					dk_chdir(${path}/${Config_Path})
 					dk_return()
 				endif()
 			endif()
@@ -149,7 +149,7 @@ function(dk_build path) #target NO_HALT
 		
 		
 		# Build with Android NDK	(single_config)
-		if(EXISTS ${path}/${CONFIG_PATH}/AndroidManifest.xml)
+		if(EXISTS ${path}/${Config_Path}/AndroidManifest.xml)
 			dk_info("Building with Android NDK")
 			dk_ndk(${ARGV})
 			dk_return()
@@ -160,7 +160,7 @@ function(dk_build path) #target NO_HALT
 					dk_chdir(${path}/${Target_Tuple}/${Debug_Dir})
 					dk_info("Building with Android NDK")
 					dk_ndk(${ARGV})
-					dk_chdir(${path}/${CONFIG_PATH})
+					dk_chdir(${path}/${Config_Path})
 					dk_return()
 				endif()
 			elseif(Release)
@@ -168,7 +168,7 @@ function(dk_build path) #target NO_HALT
 					dk_chdir(${path}/${Target_Tuple}/${Release_Dir})
 					dk_info("Building with Android NDK")
 					dk_ndk(${ARGV})
-					dk_chdir(${path}/${CONFIG_PATH})
+					dk_chdir(${path}/${Config_Path})
 					dk_return()
 				endif()
 			endif()
@@ -176,7 +176,7 @@ function(dk_build path) #target NO_HALT
 		
 	#endforeach()
 	
-	dk_fatal("dk_build(): ${path}/${CONFIG_PATH} has no buildable files")
+	dk_fatal("dk_build(): ${path}/${Config_Path} has no buildable files")
 endfunction()
 
 

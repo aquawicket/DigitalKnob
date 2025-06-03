@@ -18,7 +18,7 @@ include_guard()
 # https://github.com/SFML/SFML/archive/refs/heads/master.zip
 # https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### DEPEND ###
 if(Android)

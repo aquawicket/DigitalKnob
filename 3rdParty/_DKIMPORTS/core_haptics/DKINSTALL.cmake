@@ -15,7 +15,7 @@ include_guard()
 ############ core_haptics ############
 # https://developer.apple.com/documentation/corehaptics?language=objc
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(NOT Apple)
 	dk_undepend(core_haptics)
 	dk_return()

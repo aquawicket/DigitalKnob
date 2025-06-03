@@ -15,7 +15,7 @@ include_guard()
 ############ libjodycode ############
 # https://github.com/jbruchon/libjodycode.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### INSTALL ###
 dk_import(https://github.com/jbruchon/libjodycode.git)

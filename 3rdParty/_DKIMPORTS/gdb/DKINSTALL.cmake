@@ -15,7 +15,7 @@ include_guard()
 ############ gdb ############
 # https://packages.msys2.org/base/gdb
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(DEFINED ENV{MSYSTEM})
 	dk_set(MSYSTEM 		"$ENV{MSYSTEM}")

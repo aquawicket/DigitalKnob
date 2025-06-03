@@ -121,8 +121,8 @@ dk_echo("Host_Arch:                    '${Host_Arch}'")
 dk_echo("Host_Tuple:                   '${Host_Tuple}'")
 
 ############ Get Target Variables ############
-dk_validate(CONFIG_PATH   "dk_CONFIG_PATH()")
-dk_echo("CONFIG_PATH:                  '${CONFIG_PATH}'")
+dk_validate(Config_Path   "dk_Config_Path()")
+dk_echo("Config_Path:                  '${Config_Path}'")
 
 ###############################################################
 ## Set variables for paths

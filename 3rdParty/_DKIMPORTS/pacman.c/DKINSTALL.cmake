@@ -15,7 +15,7 @@ include_guard()
 ############ pacman.c ############
 # https://github.com/floooh/pacman.c.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 #dk_import(https://github.com/floooh/pacman.c.git BRANCH main PATCH)
 dk_import(https://github.com/floooh/pacman.c/archive/refs/heads/main.zip PATCH)

@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 # https://nodejs.org/dist/v14.16.1/node-v14.16.1-win-x86.zip
 # https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip
 

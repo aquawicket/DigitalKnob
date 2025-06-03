@@ -15,7 +15,7 @@ include_guard()
 ############ pcre2 ############
 # https://github.com/PCRE2Project/pcre2.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://github.com/PCRE2Project/pcre2/archive/7c215fa.zip)

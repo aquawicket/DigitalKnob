@@ -15,7 +15,7 @@ include_guard()
 ############ js-yaml ############
 # https://github.com/nodeca/js-yaml.git
 # https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://github.com/nodeca/js-yaml/archive/0d3ca7a2.zip)

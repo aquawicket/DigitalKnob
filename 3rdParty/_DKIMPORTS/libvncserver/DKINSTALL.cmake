@@ -15,7 +15,7 @@ include_guard()
 ############ libvnc ############
 # https://github.com/LibVNC/libvncserver.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### DEPEND ###
 if(Apple)
@@ -95,8 +95,8 @@ endif()
 
 ### PATCH ###
 if(Apple OR Emscripten)
-	dk_fileReplace(${LIBVNCSERVER}/${CONFIG_PATH}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
-	dk_fileReplace(${LIBVNCSERVER}/${CONFIG_PATH}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
+	dk_fileReplace(${LIBVNCSERVER}/${Config_Path}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
+	dk_fileReplace(${LIBVNCSERVER}/${Config_Path}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
 endif()
 
 ### COMPILE ###

@@ -18,7 +18,7 @@ include_guard()
 # https://github.com/native-toolkit/openal-android
 # https://openal.org/downloads/OpenAL11CoreSDK.zip
 # https://www.openal-soft.org/openal-releases/openal-soft-1.21.1.tar.bz2
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### DEPEND ###
 dk_depend(winmm)

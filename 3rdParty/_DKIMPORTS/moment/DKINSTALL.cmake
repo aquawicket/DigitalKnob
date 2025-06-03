@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/moment/moment
 # https://momentjs.com/
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 dk_import(https://github.com/moment/moment/raw/e9680920/moment.js)
 

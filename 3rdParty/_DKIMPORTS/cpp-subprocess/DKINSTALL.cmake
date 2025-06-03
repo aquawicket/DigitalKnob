@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/tsaarni/cpp-subprocess
 # NOTE:		Header only library
 #			Use #include "subprocess.hpp"
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://github.com/tsaarni/cpp-subprocess/archive/3bb8956.zip)

@@ -15,7 +15,7 @@ include_guard()
 ############ harfbuzz ############
 # https://github.com/harfbuzz/harfbuzz.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 dk_depend(freetype)
 dk_depend(python3)

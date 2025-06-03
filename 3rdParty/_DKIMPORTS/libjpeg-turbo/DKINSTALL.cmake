@@ -17,7 +17,7 @@ include_guard()
 # https://libjpeg-turbo.org/
 # For Android - https://github.com/DeviceFarmer/android-libjpeg-turbo
 # https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz/download
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/a927b489.zip)

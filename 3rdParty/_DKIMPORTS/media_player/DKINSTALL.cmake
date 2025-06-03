@@ -15,7 +15,7 @@ include_guard()
 ############ media_player ############
 # https://developer.apple.com/documentation/MediaPlayer?language=objc
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(NOT Apple)
 	dk_undepend(media_player)

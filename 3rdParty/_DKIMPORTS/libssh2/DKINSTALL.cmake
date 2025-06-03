@@ -15,7 +15,7 @@ include_guard()
 ############ libssh2 ############
 # https://github.com/libssh2/libssh2.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 dk_import(https://github.com/libssh2/libssh2/archive/a8bc96c.zip)
 

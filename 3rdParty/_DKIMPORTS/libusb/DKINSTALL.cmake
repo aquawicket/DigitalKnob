@@ -15,7 +15,7 @@ include_guard()
 ############ libusb ############
 # https://github.com/libusb/libusb.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://github.com/libusb/libusb/archive/467b6a88.zip)

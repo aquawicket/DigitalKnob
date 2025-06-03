@@ -14,7 +14,7 @@ include_guard()
 
 ############ wasm3 ############
 # https://github.com/wasm3/wasm3.git
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://github.com/wasm3/wasm3/archive/79d412ea.zip)

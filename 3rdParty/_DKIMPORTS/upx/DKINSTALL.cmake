@@ -30,7 +30,7 @@ include_guard()
 
 
 
-#dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+#dk_validate(Config_Path  "dk_Config_Path()")
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 #if(Android OR IOS OR Iossim OR Mac)

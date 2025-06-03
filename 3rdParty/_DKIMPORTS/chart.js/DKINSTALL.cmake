@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 # https://github.com/chartjs/Chart.js
 # https://github.com/chartjs/Chart.js/releases/download/v2.9.3/Chart.min.js
 # https://www.chartjs.org/

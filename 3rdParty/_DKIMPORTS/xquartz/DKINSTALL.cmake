@@ -17,7 +17,7 @@ include_guard()
 # https://www.xquartz.org/releases/index.html
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(NOT Mac)
 	dk_undepend(xquartz)

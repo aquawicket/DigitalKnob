@@ -14,7 +14,7 @@ include_guard()
 
 ############ version ############
 # https://learn.microsoft.com/en-us/windows/win32/api/winver/nf-winver-getfileversioninfoa
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(NOT Windows)
 	dk_undepend(version)

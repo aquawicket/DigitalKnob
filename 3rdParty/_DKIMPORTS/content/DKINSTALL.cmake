@@ -16,7 +16,7 @@ include_guard()
 #### MDN Web Docs ####
 # https://github.com/mdn/content.git
 # https://www.peterbe.com/plog/how-to-get-all-of-mdn-web-docs-running-locally
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://github.com/mdn/content/archive/50c8e290.zip)

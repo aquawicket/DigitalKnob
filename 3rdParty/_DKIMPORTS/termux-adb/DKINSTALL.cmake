@@ -14,7 +14,7 @@ include_guard()
 
 ############ termux-adb ############
 # https://github.com/MasterDevX/Termux-ADB
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(NOT Android_Host)
 	return()

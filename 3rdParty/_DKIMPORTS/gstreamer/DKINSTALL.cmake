@@ -15,7 +15,7 @@ include_guard()
 ############ gstreamer ############
 # https://gitlab.freedesktop.org/gstreamer/gstreamer.git
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 dk_import(https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/7c3ee65d/gstreamer-7c3ee65d.zip)

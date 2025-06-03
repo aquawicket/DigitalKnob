@@ -14,7 +14,7 @@ include_guard()
 
 ############ crypt32 ############
 # https://learn.microsoft.com/en-us/windows/win32/api/wincrypt
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(NOT Windows)
 	dk_undepend(crypt32)
 	dk_return()

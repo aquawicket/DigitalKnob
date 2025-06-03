@@ -13,7 +13,7 @@ include_guard()
 
 
 ############ wget ############
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 dk_installPackage(wget)
 

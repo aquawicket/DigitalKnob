@@ -16,7 +16,7 @@ include_guard()
 # https://gitlab.freedesktop.org/fontconfig/fontconfig.git
 # https://gitlab.freedesktop.org/fontconfig/fontconfig/-/blob/main/INSTALL
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 if(Apple)
 	#dk_depend(sudo)

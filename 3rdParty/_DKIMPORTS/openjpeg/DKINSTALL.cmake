@@ -15,7 +15,7 @@ include_guard()
 ############ openjpeg ############
 # https://github.com/uclouvain/openjpeg
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 ### IMPORT ###
 #dk_import(https://github.com/uclouvain/openjpeg.git)

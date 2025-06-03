@@ -15,7 +15,7 @@ include_guard()
 ############ core_video #############
 # https://developer.apple.com/documentation/corevideo
 
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 if(NOT Apple)
 	dk_undepend(core_video)
 	dk_return()

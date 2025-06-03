@@ -15,7 +15,7 @@ include_guard()
 ############ notepadpp ############
 # https://notepad-plus-plus.org/
 # https://github.com/notepad-plus-plus.git
-dk_validate(CONFIG_PATH  "dk_CONFIG_PATH()")
+dk_validate(Config_Path  "dk_Config_Path()")
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 ### BINARY DISTRIBUTIONS (PORTABLE) ###

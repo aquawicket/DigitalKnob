@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_Host_Tuple()
 #
 #	set the cached host variables 
@@ -20,15 +21,13 @@ include_guard()
 #   {Host_Os}_{Host_Arch}_{Host_Env}_Host	= Android_Arm64_Clang_Host, Emscripten_Arm64_Clang_Host, Ios_Arm64_Clang_Host, Iossim_Arm64_Clang_Host, Linux_Arm64_Clang_Host, Mac_Arm64_Clang_Host, Raspberry_Arm64_Clang_Host, Windows_Arm64_Clang_Host 
 #
 function(dk_Host_Tuple)
-	dk_debug("dk_Host_Tuple(ARGV='${ARGV}', ARGV0='${ARGV0}', ARGV1='${ARGV1}')")
 	dk_debugFunc(0 1)
 	
-	dk_debug("Host_Tuple = ${Host_Tuple}")
 	###### SET ######
 	if(ARGV)
 		dk_set(Host_Tuple "${ARGV0}")
+		
 	###### GET ######	
-	#elseif(NOT DEFINED ENV{Host_Tuple})
 	else()
 		if(NOT DEFINED Host_Os)
 			dk_Host_Os()
