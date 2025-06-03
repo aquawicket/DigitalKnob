@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_:/cmd=%.cmd" exit /b 0
 	
     :: If it's a dk_function, download if it doesn't exist then load it
-    if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR echo [31m ERROR: DKHTTP_DKBATCH_FUNCTIONS_DIR is invalid [0m & pause
+    if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR (echo [31m ERROR: DKHTTP_DKBATCH_FUNCTIONS_DIR is invalid [0m & pause)
    
     echo downloading %_file_:.cmd=%.cmd &::to %DKBATCH_FUNCTIONS_DIR_%%_file_:.cmd=%.cmd
    

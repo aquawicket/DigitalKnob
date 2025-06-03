@@ -32,7 +32,7 @@ goto main
 ::###### CMD ######
 :CMD
 	%dk_call% dk_title "Digitalknob CMD"
-	cls
+	%dk_call% dk_clearScreen
 	%dk_call% dk_echo "You are in a CMD environment"
 	echo:
 	%dk_call% dk_echo "PATH = %PATH%"
@@ -43,7 +43,7 @@ goto main
 :GIT_CMD
 	%dk_call% dk_title "Digitalknob GIT_CMD"
 	set "PATH=%GIT%\bin;%PATH%"
-	cls
+	%dk_call% dk_clearScreen
 	echo You are in a GIT_CMD environment
 	echo:
 	echo PATH = %PATH%

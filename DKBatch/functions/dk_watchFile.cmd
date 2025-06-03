@@ -22,11 +22,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
         :: Different attributes found?
         if "%last_fdate%" neq "%fdate%" (
-            cls
-			echo Monitoring %_file_% for changes
-			echo    last file info = !last_fdate!
-			echo current file info = !fdate!
-			echo press 'q' to quit
+            %dk_call% dk_clearScreen
+			%dk_call% dk_echo "Monitoring %_file_% for changes"
+			%dk_call% dk_echo "   last file info = !last_fdate!"
+			%dk_call% dk_echo "current file info = !fdate!"
+			%dk_call% dk_echo "press 'q' to quit"
         )
 
         :: Remember the new date/time

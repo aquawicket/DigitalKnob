@@ -42,7 +42,6 @@ if "%~1" equ "" (goto :DKINSTALL)
 	)
 	
 	::###### run executable ######
-	::cls
 	title %DKCPP_FILE%
 	echo:
 	echo %bg_magenta%%white%###### DKTEST MODE ###### %APP_NAME%.cpp ###### DKTEST MODE ######%clr%

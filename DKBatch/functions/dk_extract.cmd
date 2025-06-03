@@ -37,7 +37,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 
 	echo "%dk_extract_dest%"
-	pause
 	
 	::###### Try powershell.exe [System.IO.Compression.ZipFile]::ExtractToDirectory ######
 	if not exist "%dk_extract_dest%" (

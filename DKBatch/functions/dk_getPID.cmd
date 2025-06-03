@@ -32,7 +32,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     echo ProcessId = %ProcessId%
     echo ParentProcessId = %ParentProcessId%
     echo ExecutablePath = %ExecutablePath%
-    pause
 
     for /f "tokens=1* delims=   : " %%a in ('%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process | Where-Object ParentProcessId -EQ "%ParentProcessId%""') do (
             echo %%a, %%b
@@ -43,7 +42,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     echo ProcessId = %ProcessId%
     echo ParentProcessId = %ParentProcessId%
     echo ExecutablePath = %ExecutablePath%
-    pause
    
    
     FOR /F "tokens=* USEBACKQ" %%F IN (`%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process -Filter ProcessId=$PID | Select-Object -Property ProcessId, ParentProcessId"`) DO (

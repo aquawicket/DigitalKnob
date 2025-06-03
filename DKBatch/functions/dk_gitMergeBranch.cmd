@@ -78,13 +78,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo THERE WAS AN ERROR MERGING.
 		echo You will need to fix any existing conflicts to complete the merge.
 		"%GIT_EXE%" -C "%DKBRANCH_DIR%" git status
-		echo AFTER ALL CONFLICTS ARE RESOLVED, CONTINUE.
-		pause
+		%dk_call% dk_pause "AFTER ALL CONFLICTS ARE RESOLVED, CONTINUE."
 	)
 
 	:resolved
-	echo Pushing merge to %destination%
-	pause
+	%dk_call% dk_pause "Pushing merge to %destination%"
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" commit -a -m "Merge %branch% Branch in to %destination%"
 	if "%ERRORLEVEL%" neq "0" (
 		echo THERE WAN AN ERROR COMMITING.

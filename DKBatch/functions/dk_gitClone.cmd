@@ -19,8 +19,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_assertPath "%DKBRANCH_DIR%"
 
 	::###### error if repository already exists
-	if exist "%DKBRANCH_DIR%/.git" %dk_call% dk_error "'%DKBRANCH_DIR%/.git' repository already exists" & %return%
-pause		
+	if exist "%DKBRANCH_DIR%/.git" (%dk_call% dk_error "'%DKBRANCH_DIR%/.git' repository already exists" & %return%)
+		
 	::###### backup if local path already exists and is not empty
 	%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" || (%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE)
 	if not exist ("%DKBRANCH_DIR%_BACKUP" %dk_call% dk_fatal "dk_copy failed")

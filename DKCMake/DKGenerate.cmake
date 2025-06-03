@@ -359,7 +359,6 @@ dk_info("################################################")
 dk_info("############ Creating ${Target_App} ############")
 dk_info("################################################")
 dk_info("\n")
-dk_pause()
 
 # Create version from date
 string(TIMESTAMP year "%y")
