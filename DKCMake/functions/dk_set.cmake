@@ -11,6 +11,9 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+#if(NOT DEFINED dk_set_DEBUG)
+#	set(dk_set_DEBUG 1)
+#endif()
 ###############################################################################
 # dk_set(variable value)
 #	
@@ -32,26 +35,28 @@ function(dk_set variable) #, value)
 	string(REPLACE "CACHE{" "" Var "${Var}")
 	string(REPLACE "}" "" Var "${Var}")
 
-#	#dk_echo()
 #	###### lowercase ######
 #	dk_toLower("${Var}" var)
 #	dk_toLower("${ARGN}" _argn_)
 #	set(${var} "${_argn_}" CACHE INTERNAL "" FORCE) # The $CACHE{var} syntax can be used to do direct cache entry lookups
 #	set(ENV{${var}} "${_argn_}")
-#	#dk_printVar(${var})
 	
 #	###### UPPERCASE ######
 #	dk_toUpper("${Var}" VAR)
 #	dk_toUpper("${ARGN}" _ARGN_)
 #	set(${VAR} "${_ARGN_}" CACHE INTERNAL "" FORCE) # The $CACHE{var} syntax can be used to do direct cache entry lookups
 #	set(ENV{${VAR}} "${_ARGN_}")
-#	#dk_printVar(${VAR})
 	
 	###### CamelCase ######
 	set(${Var} "${ARGN}" CACHE INTERNAL "" FORCE) # The $CACHE{Var} syntax can be used to do direct cache entry lookups
 	set(ENV{${Var}} "${ARGN}")
-	#dk_printVar(${Var})
 	
+	###### dk_set_DEBUG ######
+#	if("${dk_set_DEBUG}" STREQUAL 1)
+#		if(COMMAND dk_debug)
+#			dk_debug("${Var} = ${${Var}}")
+#		endif()
+#	endif()
 endfunction()
 
 
