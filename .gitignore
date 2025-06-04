@@ -84,8 +84,10 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/giflib-1aa11b06
 3rdParty/glew-2.2.0/
 3rdParty/harfbuzz-c1c0e82e
+3rdParty/imagemagick-6.9.13-25-portable-q16-x64
 3rdParty/imagemagick-7.1.1-41-portable-q16-x86
 3rdParty/imagemagick-7.1.1-43-portable-q16-x64
+3rdParty/imagemagick-7.1.1-47-portable-q16-x64
 3rdParty/jsConsole-master
 3rdParty/keylogger-142eebd
 3rdParty/ksodari-Batch-files-master/
