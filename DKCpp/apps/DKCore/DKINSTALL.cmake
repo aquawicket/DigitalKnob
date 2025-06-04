@@ -21,13 +21,28 @@ dk_Target_Env ("Clang")
 dk_Target_Type("Debug")
 dk_Target_Tuple()
 
+### DEPEND ###
+dk_depend(DK)
+
+
+dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
+dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
+dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
+dk_set(LIBS ${LIBS})
+dk_set(DEBUG_LIBS ${DEBUG_LIBS})
+dk_set(RELEASE_LIBS ${RELEASE_LIBS})
 
 ### CURRENT_PLUGIN ###
 dk_basename("${CMAKE_CURRENT_LIST_DIR}")
 dk_set(CURRENT_PLUGIN "${dk_basename}")
 dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
 
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${CMAKE_CURRENT_LIST_DIR}/main.cpp)
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${CMAKE_CURRENT_LIST_DIR}/assets.h)
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt)
+
+
+
 dk_configure(${CMAKE_CURRENT_LIST_DIR})
 
 dk_build(${CMAKE_CURRENT_LIST_DIR})

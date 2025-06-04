@@ -36,15 +36,15 @@ project(${Target_App})
 include_directories(${Target_App_Dir})
 include_directories(${DKCPP_PLUGINS_DIR})
 	
-foreach(each_include ${DKINCLUDES_LIST})
+foreach(each_include $ENV{DKINCLUDES_LIST})
 	include_directories(${each_include})
 endforeach()
 
-foreach(each_define ${DKDEFINES_LIST})
+foreach(each_define $ENV{DKDEFINES_LIST})
 	add_definitions(-D${each_define})
 endforeach()
 
-foreach(each_linkdir ${DKLINKDIRS_LIST})
+foreach(each_linkdir $ENV{DKLINKDIRS_LIST})
 	link_directories(${each_linkdir})
 endforeach()
 
@@ -56,6 +56,10 @@ file(GLOB App_SRC
     ${Target_App_Dir}/*.manifest
     ${Target_App_Dir}/*.rc
 )
+dk_assertVar(App_SRC)
+message("App_SRC = ${App_SRC}")
+dk_pause()
+
 if(Windows)
     file(GLOB Icon_SRC
         ${Target_App_Dir}/Windows/*.h
@@ -83,24 +87,27 @@ if(HAVE_DK)
     endif()
 endif()
 
-list(FILTER App_SRC EXCLUDE REGEX "${Target_App_Dir}/assets/*")
-list(FILTER App_SRC EXCLUDE REGEX "${Target_App_Dir}/${Target_Tuple}/*")
-
 dk_load(dk_Target_Tuple)
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
+list(FILTER App_SRC EXCLUDE REGEX "${Target_App_Dir}/assets/*")
+list(FILTER App_SRC EXCLUDE REGEX "${Target_App_Dir}/${Target_Tuple}/*")
+
+dk_assertVar(App_SRC)
+message("App_SRC = ${App_SRC}")
+dk_pause()
 if(MSVC)
     add_executable(${Target_App} WIN32 ${App_SRC})
 else()
     add_executable(${Target_App} ${App_SRC})
 endif()
 
-if(MULTI_CONFIG)
-    target_link_libraries(${Target_App} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-else()
-    if(Debug)
-        target_link_libraries(${Target_App} ${DEBUG_LIBS} ${LIBS})
-    elseif(Release)
-        target_link_libraries(${Target_App} ${RELEASE_LIBS} ${LIBS})
-    endif()
-endif()
+#if(MULTI_CONFIG)
+    target_link_libraries(${Target_App} $ENV{DEBUG_LIBS} $ENV{RELEASE_LIBS} $ENV{LIBS})
+#else()
+ #   if(Debug)
+  #      target_link_libraries(${Target_App} $ENV{DEBUG_LIBS} ${LIBS})
+  #  elseif(Release)
+  #      target_link_libraries(${Target_App} ${RELEASE_LIBS} ${LIBS})
+  #  endif()
+#endif()

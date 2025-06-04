@@ -22,12 +22,39 @@ dk_Target_Type("Debug")
 dk_Target_Tuple()
 
 
+dk_depend(DK)
+
+### DKINCLUDES_LIST ###
+dk_assertVar(DKINCLUDES_LIST)
+message("DKINCLUDES_LIST = ${DKINCLUDES_LIST}")
+dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
+
+### DKDEFINES_LIST ###
+dk_assertVar(DKDEFINES_LIST)
+message("DKDEFINES_LIST = ${DKDEFINES_LIST}")
+dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
+
+### DKLINKDIRS_LIST ###
+#dk_assertVar(DKLINKDIRS_LIST)
+#message("DKLINKDIRS_LIST = ${DKLINKDIRS_LIST}")
+#dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
+
+### DEBUG_LIBS ###
+dk_assertVar(DEBUG_LIBS)
+message("DEBUG_LIBS = ${DEBUG_LIBS}")
+dk_set(DEBUG_LIBS ${DEBUG_LIBS})
+
 ### CURRENT_PLUGIN ###
 dk_basename("${CMAKE_CURRENT_LIST_DIR}")
 dk_set(CURRENT_PLUGIN "${dk_basename}")
 dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
 
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${CMAKE_CURRENT_LIST_DIR}/main.cpp)
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${CMAKE_CURRENT_LIST_DIR}/assets.h)
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt)
+
+
+
 dk_configure(${CMAKE_CURRENT_LIST_DIR})
 
 dk_build(${CMAKE_CURRENT_LIST_DIR})
