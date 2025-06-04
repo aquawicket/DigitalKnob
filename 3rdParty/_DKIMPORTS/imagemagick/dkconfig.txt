@@ -1,0 +1,4 @@
+IMAGEMAGICK_ANDROID_IMPORT=imagemagick
+IMAGEMAGICK_UNIX_IMPORT=https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip
+IMAGEMAGICK_WINDOWS_X86_IMPORT=https://imagemagick.org/archive/binaries/ImageMagick-6.9.13-25-portable-Q16-x86.zip
+IMAGEMAGICK_WINDOWS_X86_64_IMPORT=https://imagemagick.org/archive/binaries/ImageMagick-6.9.13-25-portable-Q16-x64.zip

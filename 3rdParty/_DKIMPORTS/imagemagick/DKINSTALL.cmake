@@ -18,15 +18,17 @@ if(Windows_Host)
 endif()
 
 ### IMPORT LIBRARY ###
+dk_getFileParams("$ENV{DKIMPORTS_DIR}/imagemagick/dkconfig.txt")
+
 if(Android_Host)
-	dk_installPackage(imagemagick)
+	dk_installPackage("${IMAGEMAGICK_ANDROID_IMPORT}")
 	execute_process(COMMAND command -v convert OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE)	
 elseif(Unix_Host)
-	dk_import("https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip")
+	dk_import("${IMAGEMAGICK_UNIX_IMPORT}")
 elseif(Windows_X86_Host)
-	dk_import("https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-43-portable-Q16-x86.zip")
+	dk_import("${IMAGEMAGICK_WINDOWS_X86_IMPORT}")
 elseif(Windows_X86_64_Host)
-	dk_import("https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-43-portable-Q16-x64.zip")
+	dk_import("${IMAGEMAGICK_WINDOWS_X86_64_IMPORT}")
 endif()
 
 
