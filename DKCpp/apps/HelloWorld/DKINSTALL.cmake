@@ -27,7 +27,7 @@ dk_basename("${CMAKE_CURRENT_LIST_DIR}")
 dk_set(CURRENT_PLUGIN "${dk_basename}")
 dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
 
-dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_" "${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt")
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt)
 dk_configure(${CMAKE_CURRENT_LIST_DIR})
 
 dk_build(${CMAKE_CURRENT_LIST_DIR})

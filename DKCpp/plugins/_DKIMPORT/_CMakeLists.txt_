@@ -14,11 +14,24 @@ include_guard()
 #########################################################################
 
 
+### Target_App_Dir ###
+dk_set(Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
+dk_assertPath(Target_App_Dir)
+
+### Target_App ###
+dk_basename("${Target_App_Dir}")
+dk_set(Target_App "${dk_basename}")
+dk_assertVar(Target_App)
+
+### CURRENT_PLUGIN ###
+dk_set(CURRENT_PLUGIN "${Target_App}")
+dk_assertVar(CURRENT_PLUGIN)
+
+### DKCPP_PLUGINS_DIR ###
+dk_assertPath(DKCPP_PLUGINS_DIR)
 
 
-
-
-### ${Target_App} ###
+message("### ${Target_App} ###")
 project(${Target_App})
 include_directories(${Target_App_Dir})
 include_directories(${DKCPP_PLUGINS_DIR})
