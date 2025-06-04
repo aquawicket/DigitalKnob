@@ -159,8 +159,8 @@ function(dk_Target_Tuple)
 	endif()
 	dk_assertVar(Debug_Dir)
 	dk_assertVar(Release_Dir)
-	dk_printVar(Debug_Dir)
-	dk_printVar(Release_Dir)
+	#dk_printVar(Debug_Dir)
+	#dk_printVar(Release_Dir)
 endfunction()
 
 

@@ -274,7 +274,7 @@ foreach(plugin ${dkdepend_list})
 #						IOS_ARM32_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOS_ARM32=ON 		${Plugin_Path})
 #						IOS_ARM64_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOS_ARM64=ON 		${Plugin_Path})
 #						IOSSIM_X86_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOSSIM_X86=ON 		${Plugin_Path})
-#						IOSSIM_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOSSIM_X86_64=ON 	${Plugin_Path})
+#						Iossim_X86_64_Debug_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOSSIM_X86_64=ON 	${Plugin_Path})
 #						LINUX_X86_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DLINUX_X86=ON 		${Plugin_Path})
 #						LINUX_X86_64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DLINUX_X86_64=ON 	${Plugin_Path})
 #						MAC_X86_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DMAC_X86=ON 			${Plugin_Path})
@@ -717,7 +717,7 @@ elseif(Emscripten)
 
 
 
-############ IOS / IOSSIM ############
+############ Ios / Iossim ############
 elseif((Ios) OR (Iossim))
 	# https://github.com/forexample/testapp/blob/master/CMakeLists.txt
 	

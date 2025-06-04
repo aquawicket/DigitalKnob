@@ -119,7 +119,7 @@ IOS_ARM64_DEBUG_dk_configure(${FFMPEG_DIR}
 
 IOSSIM_X86_DEBUG_dk_configure(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
 
-IOSSIM_X86_64_DEBUG_dk_queueCommand(${FFMPEG_DIR}
+Iossim_X86_64_Debug_dk_queueCommand(${FFMPEG_DIR}
 	--pkg-config-flags=--static
 	--disable-shared
 	--enable-static
