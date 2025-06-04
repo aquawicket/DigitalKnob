@@ -118,14 +118,14 @@ dk_set(LIBXML2_CMAKE
 	#--with-legacy           maximum ABI compatibility (off)
 #endif()
 
-#ANDROID_dk_configure(${LIBXML2} 
+#Android_dk_configure(${LIBXML2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-##APPLE_dk_queueCommand(${DKCONFIGURE_BUILD})
+##Apple_dk_queueCommand(${DKCONFIGURE_BUILD})
 #Apple_dk_configure(${LIBXML2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
@@ -133,29 +133,29 @@ dk_set(LIBXML2_CMAKE
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-##EMSCRIPTEN_dk_queueCommand(${DKCONFIGURE_BUILD})
+##Emscripten_dk_queueCommand(${DKCONFIGURE_BUILD})
 #E#MSCRIPTEN_dk_configure(${LIBXML2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-##LINUX_dk_queueCommand(${DKCONFIGURE_BUILD} --with-python=no)
-#LINUX_dk_configure(${LIBXML2} 
+##Linux_dk_queueCommand(${DKCONFIGURE_BUILD} --with-python=no)
+#Linux_dk_configure(${LIBXML2} 
 #	-DLIBXML2_WITH_PYTHON=OFF 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-##RASPBERRY_dk_queueCommand(${DKCONFIGURE_BUILD})
-#RASPBERRY_dk_configure(${LIBXML2}
+##Raspberry_dk_queueCommand(${DKCONFIGURE_BUILD})
+#Raspberry_dk_configure(${LIBXML2}
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-#WIN_dk_queueCommand(${DKCONFIGURE_BUILD})
+#Windows_dk_queueCommand(${DKCONFIGURE_BUILD})
 dk_configure(${LIBXML2} 
 	-DLIBXML2_WITH_C14N=ON					# Add the Canonicalization support ON
 	-DLIBXML2_WITH_CATALOG=ON				# Add the Catalog support ON

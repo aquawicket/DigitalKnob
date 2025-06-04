@@ -24,25 +24,25 @@ dk_import(https://github.com/Mbed-TLS/mbedtls/archive/67075846.zip)
 dk_include			(${MBEDTLS}/include)
 
 # mbedtls
-UNIX_dk_libDebug	(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/libmbedtls.a)
-UNIX_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedtls.a)
+Unix_dk_libDebug	(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/libmbedtls.a)
+Unix_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedtls.a)
 Windows_dk_libDebug		(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/mbedtls.lib)
 Windows_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedtls.lib)
 
 # mbedcrypto
-UNIX_dk_libDebug	(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/libmbedcrypto.a)
-UNIX_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedcrypto.a)
+Unix_dk_libDebug	(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/libmbedcrypto.a)
+Unix_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedcrypto.a)
 Windows_dk_libDebug		(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/mbedcrypto.lib)
 Windows_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedcrypto.lib)
 
 # mbedx509
-UNIX_dk_libDebug	(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/libmbedx509.a)
-UNIX_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedx509.a)
+Unix_dk_libDebug	(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/libmbedx509.a)
+Unix_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedx509.a)
 Windows_dk_libDebug		(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/mbedx509.lib)
 Windows_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedx509.lib)
 
 ### 3RDPARTY LINK ###
-UNIX_dk_set(MBEDTLS_CMAKE 
+Unix_dk_set(MBEDTLS_CMAKE 
 	-DMBEDTLS_INCLUDE_DIR=${MBEDTLS}/include
 	-DMBEDTLS_LIBRARY=${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedtls.a
 	-DMBEDTLS_CRYPTO_LIBRARY=${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedcrypto.a

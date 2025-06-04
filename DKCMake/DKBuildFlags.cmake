@@ -443,7 +443,7 @@ if(Windows_X86_64_Ucrt)
 endif()
 
 ### Windows x86_64 - MSYS ###
-if(Win_X86_64_Msys)
+if(Windows_X86_64_Msys)
 	dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_64_msys_toolchain.cmake)
 endif()
 ]]

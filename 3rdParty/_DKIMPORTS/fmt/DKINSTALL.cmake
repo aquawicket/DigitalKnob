@@ -36,8 +36,8 @@ dk_include(${FMT_DIR}/include)
 #	dk_append(CMAKE_CXX_FLAGS /utf-8)
 #endif()
 
-#UNIX_dk_libDebug	(${FMT_DEBUG_DIR}/libfmtd.a)
-#UNIX_dk_libRelease	(${FMT_RELEASE_DIR}/libfmt.a)
+#Unix_dk_libDebug	(${FMT_DEBUG_DIR}/libfmtd.a)
+#Unix_dk_libRelease	(${FMT_RELEASE_DIR}/libfmt.a)
 #Windows_dk_libDebug	(${FMT_DEBUG_DIR}/fmtd.lib)
 #Windows_dk_libRelease	(${FMT_RELEASE_DIR}/fmt.lib)
 

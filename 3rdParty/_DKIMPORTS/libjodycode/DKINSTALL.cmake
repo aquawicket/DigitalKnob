@@ -22,8 +22,8 @@ dk_import(https://github.com/jbruchon/libjodycode.git)
 
 ### LINK ###
 dk_include			(${LIBJODYCODE}/include)
-UNIX_dk_libDebug	(${LIBJODYCODE_DEBUG_DIR}/libjodycode.a)
-UNIX_dk_libRelease	(${LIBJODYCODE_RELEASE_DIR}/libjodycode.a)
+Unix_dk_libDebug	(${LIBJODYCODE_DEBUG_DIR}/libjodycode.a)
+Unix_dk_libRelease	(${LIBJODYCODE_RELEASE_DIR}/libjodycode.a)
 Windows_dk_libDebug		(${LIBJODYCODE_DEBUG_DIR}/libjodycode.lib)
 Windows_dk_libRelease	(${LIBJODYCODE_RELEASE_DIR}/libjodycode.lib)
 

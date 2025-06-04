@@ -50,8 +50,8 @@ endif()
 
 ### LINK ###
 dk_define(RMLUI_STATIC_LIB)
-ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
-ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
+Android_dk_define(CHOBO_FLAT_MAP_NO_THROW)
+Android_dk_define(RMLUI_USE_CUSTOM_RTTI)
 
 dk_include		(${RMLUI}/Include					RML_INCLUDE_DIR)
 dk_include		(${RMLUI}/Source)
@@ -112,7 +112,7 @@ if(MSVC)
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE})
 	
-	ANDROID_dk_configure(${RMLUI}
+	Android_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF

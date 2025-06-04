@@ -127,18 +127,18 @@ if(Release)
 endif()
 #endif()
 
-#ANDROID_dk_libDebug(${SDL_DEBUG_DIR}/libhidapi.a)
-#ANDROID_dk_libRelease(${SDL_RELEASE_DIR}/libhidapi.a)
+#Android_dk_libDebug(${SDL_DEBUG_DIR}/libhidapi.a)
+#Android_dk_libRelease(${SDL_RELEASE_DIR}/libhidapi.a)
 
 #if(SDL_SDL2main)
-	#ANDROID_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_DEBUG)
-	#ANDROID_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#LINUX_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
-	#LINUX_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#MAC_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
-	#MAC_dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#RASPBERRY_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
-	#RASPBERRY_dk_libRelease(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#Android_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_DEBUG)
+	#Android_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#Linux_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
+	#Linux_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#Mac_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
+	#Mac_dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#Raspberry_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
+	#Raspberry_dk_libRelease(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
 	#Windows_dk_libDebug		(${SDL_DEBUG_DIR}/SDL2maind.lib		SDL2MAIN_LIBRARY_DEBUG)
 	#Windows_dk_libRelease		(${SDL_RELEASE_DIR}/SDL2main.lib	SDL2MAIN_LIBRARY_RELEASE)
 	if(IOS OR Iossim)
@@ -149,7 +149,7 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-#ANDROID_dk_set(SDL_CMAKE
+#Android_dk_set(SDL_CMAKE
 #	"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
 #	"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
 #	-DSDL2_DIR=${SDL}/cmake

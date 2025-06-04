@@ -30,5 +30,5 @@ if(Linux OR Raspberry)
 	set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -latomic")
 	
 	#static linking
-	#RASPBERRY_dk_lib(/usr/lib/arm-linux-gnueabihf/libatomic.a)
+	#Raspberry_dk_lib(/usr/lib/arm-linux-gnueabihf/libatomic.a)
 endif()

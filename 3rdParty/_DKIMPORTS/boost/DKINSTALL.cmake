@@ -524,13 +524,13 @@ endif(STATIC)
 if(SHARED)
 
 #if(boost_filesystem)
-#	WIN_X86_dk_libDebug(${BOOST_DIR}/${Target_Tuple}/lib/boost_filesystem.lib)
-#	WIN_X86_dk_libRelease(${BOOST_DIR}/${Target_Tuple}/lib/boost_filesystem.lib)
+#	Windows_X86_dk_libDebug(${BOOST_DIR}/${Target_Tuple}/lib/boost_filesystem.lib)
+#	Windows_X86_dk_libRelease(${BOOST_DIR}/${Target_Tuple}/lib/boost_filesystem.lib)
 #endif()
 
 #if(boost_system)
-#	WIN_X86_dk_libDebug(${BOOST_DIR}/${Target_Tuple}/lib/boost_system.lib)
-#	WIN_X86_dk_libRelease(${BOOST_DIR}/${Target_Tuple}/lib/boost_system.lib)
+#	Windows_X86_dk_libDebug(${BOOST_DIR}/${Target_Tuple}/lib/boost_system.lib)
+#	Windows_X86_dk_libRelease(${BOOST_DIR}/${Target_Tuple}/lib/boost_system.lib)
 #endif()
 
 #if(Windows)
