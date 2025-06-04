@@ -55,19 +55,25 @@ else()
 	set(Target_Tuple_Dir ${Target_Bin_Dir})
 endif()
 dk_set(Target_Tuple_Dir ${Target_Tuple_Dir})
-dk_debug("Target_Tuple_Dir = ${Target_Tuple_Dir}")
+#dk_debug("Target_Tuple_Dir = ${Target_Tuple_Dir}")
 
 ### Target_App_Dir ###
 dk_dirname(${Target_Tuple_Dir} Target_App_Dir)
 dk_set(Target_App_Dir ${Target_App_Dir})
 dk_assertPath(Target_App_Dir)	
-dk_debug("Target_App_Dir = ${Target_App_Dir}")
-	
+#dk_debug("Target_App_Dir = ${Target_App_Dir}")
+
+#######################################	
+dk_load(${Target_App_Dir}/DKINSTALL.cmake)
+return()
+######################################
+
+
 ### Target_App ###	
 dk_basename(${Target_App_Dir} Target_App)
 dk_replaceAll(${Target_App} " " "_" Target_App)
 dk_set(Target_App ${Target_App}_APP)
-dk_debug("Target_App = ${Target_App}")
+#dk_debug("Target_App = ${Target_App}")
 
 
 
@@ -78,16 +84,47 @@ if(NOT TARGET)
 	PROJECT(${Target_App})
 	dk_set(DKAPP ON)
 endif()
-dk_debug("DKAPP = ${DKAPP}")
+#dk_debug("DKAPP = ${DKAPP}")
 
 ######################################################
 ##### Scan the DKCpp/plugins and build the lists #####
 ######################################################
 dk_load(${Target_App_Dir}/DKINSTALL.cmake)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 dk_assertVar(Target_Tuple)
 #dk_debug("Target_Tuple = ${Target_Tuple}")
-
-return()
 
 ### print settings ###
 if(EXISTS "${Target_App_Dir}/${Target_Tuple}/DKBUILD.log")
