@@ -70,6 +70,7 @@ dk_set(Target_App ${Target_App}_APP)
 dk_debug("Target_App = ${Target_App}")
 
 
+
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
@@ -84,13 +85,16 @@ dk_debug("DKAPP = ${DKAPP}")
 ######################################################
 dk_load(${Target_App_Dir}/DKINSTALL.cmake)
 dk_assertVar(Target_Tuple)
-dk_debug("Target_Tuple = ${Target_Tuple}")
+#dk_debug("Target_Tuple = ${Target_Tuple}")
+
+return()
 
 ### print settings ###
 if(EXISTS "${Target_App_Dir}/${Target_Tuple}/DKBUILD.log")
 	dk_delete("${Target_App_Dir}/${Target_Tuple}/DKBUILD.log")
 endif()
 dk_printSettings()
+
 
 dk_buildLog("##############################################")
 dk_buildLog("######  Enabled Dependencies (sorted)  #######")

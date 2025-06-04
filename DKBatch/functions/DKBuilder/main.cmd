@@ -87,7 +87,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if defined Target_Type	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Type_Cache=%Target_Type%")
 		
 		%dk_call% DKBuilder/generate
-		%dk_call% DKBuilder/buildApp
+		::%dk_call% DKBuilder/buildApp
 
 		%dk_call% dk_unset pickUpdate
 		%dk_call% dk_unset Target_App
