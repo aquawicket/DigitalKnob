@@ -56,9 +56,6 @@ file(GLOB App_SRC
     ${Target_App_Dir}/*.manifest
     ${Target_App_Dir}/*.rc
 )
-dk_assertVar(App_SRC)
-message("App_SRC = ${App_SRC}")
-dk_pause()
 
 if(Windows)
     file(GLOB Icon_SRC
@@ -93,9 +90,6 @@ dk_validate(Target_Tuple "dk_Target_Tuple()")
 list(FILTER App_SRC EXCLUDE REGEX "${Target_App_Dir}/assets/*")
 list(FILTER App_SRC EXCLUDE REGEX "${Target_App_Dir}/${Target_Tuple}/*")
 
-dk_assertVar(App_SRC)
-message("App_SRC = ${App_SRC}")
-dk_pause()
 if(MSVC)
     add_executable(${Target_App} WIN32 ${App_SRC})
 else()

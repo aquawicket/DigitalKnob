@@ -21,28 +21,27 @@ dk_Target_Env ("Clang")
 dk_Target_Type("Debug")
 dk_Target_Tuple()
 
-
+### DEPEND ###
 dk_depend(DK)
 
-### DKINCLUDES_LIST ###
-dk_assertVar(DKINCLUDES_LIST)
-message("DKINCLUDES_LIST = ${DKINCLUDES_LIST}")
-dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
-
-### DKDEFINES_LIST ###
-dk_assertVar(DKDEFINES_LIST)
-message("DKDEFINES_LIST = ${DKDEFINES_LIST}")
-dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
-
-### DKLINKDIRS_LIST ###
-#dk_assertVar(DKLINKDIRS_LIST)
-#message("DKLINKDIRS_LIST = ${DKLINKDIRS_LIST}")
-#dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
-
-### DEBUG_LIBS ###
-dk_assertVar(DEBUG_LIBS)
-message("DEBUG_LIBS = ${DEBUG_LIBS}")
-dk_set(DEBUG_LIBS ${DEBUG_LIBS})
+if(DKINCLUDES_LIST)
+	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
+endif()
+if(DKDEFINES_LIST)
+	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
+endif()
+if(DKLINKDIRS_LIST)
+	dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
+endif()
+if(LIBS)
+	dk_set(LIBS ${LIBS})
+endif()
+if(DEBUG_LIBS)
+	dk_set(DEBUG_LIBS ${DEBUG_LIBS})
+endif()
+if(RELEASE_LIBS)
+	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
+endif()
 
 ### CURRENT_PLUGIN ###
 dk_basename("${CMAKE_CURRENT_LIST_DIR}")
