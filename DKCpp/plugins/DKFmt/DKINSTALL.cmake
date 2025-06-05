@@ -8,8 +8,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ############ DKFmt ############
 dk_depend(fmt)
 
-dk_append(CMAKE_C_FLAGS "/utf-8")
-dk_append(CMAKE_CXX_FLAGS "/utf-8")
+#dk_append(CMAKE_C_FLAGS "/utf-8")
+#dk_append(CMAKE_CXX_FLAGS "/utf-8")
 
 
 if(HAVE_DKDuktape)

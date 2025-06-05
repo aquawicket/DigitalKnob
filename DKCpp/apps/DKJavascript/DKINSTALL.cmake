@@ -21,12 +21,6 @@ dk_Target_Env ("Clang")
 dk_Target_Type("Debug")
 dk_Target_Tuple()
 
-############ APP ############
-dk_set(Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
-dk_basename("${Target_App_Dir}")
-dk_set(Target_App "${dk_basename}")
-dk_validate(Target_Config "dk_Target_Config()")
-
 ###### DEPENDENCIES ######
 dk_depend(DK)
 dk_depend(DKDuktape)
@@ -35,42 +29,46 @@ dk_depend(DKArchive)
 dk_depend(DKAssets)
 dk_depend(DKFmt)
 
-## copy app default files without overwrite
-dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/icon.png ${Target_App_Dir}/icon.png) 
-dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${Target_App_Dir}/main.cpp)
 
-###### CREATE ICONS ######
-if(EXISTS "${Target_App_Dir}/icon.png")
-	dk_createIcons("${Target_App_Dir}/icon.png")
+### TODO: Add Plugins.h file generation ###
+if(DKINCLUDES_LIST)
+	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
+endif()
+if(DKDEFINES_LIST)
+	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
+endif()
+if(DKLINKDIRS_LIST)
+	dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
+endif()
+if(LIBS)
+	dk_set(LIBS ${LIBS})
+endif()
+if(DEBUG_LIBS)
+	dk_set(DEBUG_LIBS ${DEBUG_LIBS})
+endif()
+if(RELEASE_LIBS)
+	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
 endif()
 
-################# BACKUP USERDATA / INJECT ASSETS #####################
-if(EXISTS "${Target_App_Dir}/assets")
-	dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)
-	dk_delete(${Target_App_Dir}/assets/USER NO_HALT)
-	#Compress the assets, they will be included by resource.rc
-	dk_info("Creating assets.zip . . .")
-	dk_compressAssets(${Target_App_Dir}/assets)
-	# Restore the backed up files
-	dk_copy(${Target_App_Dir}/Backup/ ${Target_App_Dir}/assets/ OVERWRITE NO_HALT)
-	dk_delete(${Target_App_Dir}/Backup NO_HALT)
-	#dummy assets.h file, or the builder will complain about assets.h missing
-	dk_assertPath(DKCPP_PLUGINS_DIR)
-	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h OVERWRITE NO_HALT)
+if(PLUGINS_FILE)
+	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
+	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
+	dk_fileWrite("${CMAKE_CURRENT_LIST_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
 endif()
 
-###################### Backup Executable ###########################
-if(BACKUP_APP_EXECUTABLES)
-	dk_backupExecutable()
-endif()
+### CURRENT_PLUGIN ###
+dk_basename("${CMAKE_CURRENT_LIST_DIR}")
+dk_set(CURRENT_PLUGIN "${dk_basename}")
+dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
 
-dk_generateAppCmake()
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${CMAKE_CURRENT_LIST_DIR}/main.cpp)
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${CMAKE_CURRENT_LIST_DIR}/assets.h)
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt)
 
-#dk_clearCmakeCache()
 
-dk_set(CURRENT_PLUGIN 				${Target_App})
-dk_set(${CURRENT_PLUGIN} 			${CMAKE_SOURCE_DIR})
-dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${CMAKE_CURRENT_LIST_DIR}/${Target_Config})
 
-dk_configure(${CMAKE_CURRENT_LIST_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTUPLE=${TUPLE})
+dk_configure(${CMAKE_CURRENT_LIST_DIR})
+
 dk_build(${CMAKE_CURRENT_LIST_DIR})

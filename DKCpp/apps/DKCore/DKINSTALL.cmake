@@ -45,6 +45,14 @@ if(RELEASE_LIBS)
 	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
 endif()
 
+if(PLUGINS_FILE)
+	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
+	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
+	dk_fileWrite("${CMAKE_CURRENT_LIST_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
+endif()
+
 ### CURRENT_PLUGIN ###
 dk_basename("${CMAKE_CURRENT_LIST_DIR}")
 dk_set(CURRENT_PLUGIN "${dk_basename}")

@@ -24,6 +24,8 @@ dk_Target_Tuple()
 ### DEPEND ###
 dk_depend(DK)
 
+
+### TODO: Add Plugins.h file generation ###
 if(DKINCLUDES_LIST)
 	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
 endif()
@@ -41,6 +43,14 @@ if(DEBUG_LIBS)
 endif()
 if(RELEASE_LIBS)
 	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
+endif()
+
+if(PLUGINS_FILE)
+	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
+	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
+	dk_fileWrite("${CMAKE_CURRENT_LIST_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
 endif()
 
 ### CURRENT_PLUGIN ###
