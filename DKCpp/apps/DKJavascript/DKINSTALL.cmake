@@ -56,25 +56,14 @@ dk_set(CURRENT_PLUGIN "${dk_basename}")
 dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
 
 if(PLUGINS_FILE)
+	message("PLUGINS_FILE = ${PLUGINS_FILE}")
 	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
 	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
 	dk_fileWrite("${CMAKE_CURRENT_LIST_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
 endif()
-#if(${CURRENT_PLUGIN} STREQUAL DK OR BUILD_STATIC_LIBS)
-	file(GLOB HEADER_FILES RELATIVE ${DKCPP_PLUGINS_DIR} ${CMAKE_CURRENT_LIST_DIR}/*.h)
-	foreach(header ${HEADER_FILES})
-		if(NOT PLUGINS_FILE MATCHES "${header}")
-			dk_info("Adding ${header} to header file.")
-			dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
-		endif()
-		#if(NOT PLUGINS_FILE MATCHES "DKHAVE_${plugin_name}")
-		#	dk_info("Adding #define DKHAVE_${plugin_name} 1 to header file.")
-		#	dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#define DKHAVE_${plugin_name} 1\\n")
-		#endif()
-	endforeach()
-#endif()
+
 
 
 
