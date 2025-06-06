@@ -25,14 +25,14 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 #dk_depend(libgcc)
 dk_depend(python3)
 dk_depend(pytest)
-dk_validate(MSYS2 "dk_depend(msys2)")
+dk_depend(msys2)
 
 ### IMPORT ###
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/bzip2/dkconfig.txt")
-dk_import(${BZIP2_DL})
+dk_import(${BZIP2_IMPORT})
 
-dk_include		(${BZIP2_DIR}/							BZIP2_INCLUDE_DIR)
+dk_include			(${BZIP2}/								BZIP2_INCLUDE_DIR)
 if(MSVC)
 	dk_libDebug		(${BZIP2_DEBUG_DIR}/bz2_static.lib		BZIP2_LIBRARY_DEBUG)
 	dk_libRelease	(${BZIP2_RELEASE_DIR}/bz2_static.lib	BZIP2_LIBRARY_RELEASE)
@@ -46,10 +46,10 @@ dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBU
 	
 ### CONFIGURE ###
 if(Linux_Host)
-	dk_configure(${BZIP2_DIR} -DENABLE_SHARED_LIB=${BUILD_SHARED_LIBS} -DENABLE_STATIC_LIB=${BUILD_STATIC_LIBS})
+	dk_configure(${BZIP2} -DENABLE_SHARED_LIB=${BUILD_SHARED_LIBS} -DENABLE_STATIC_LIB=${BUILD_STATIC_LIBS} -DENABLE_TESTS=0)
 else()
-	dk_configure(${BZIP2_DIR} -DENABLE_SHARED_LIB=${BUILD_SHARED_LIBS} -DENABLE_STATIC_LIB=${BUILD_STATIC_LIBS} ${PYTHON3_CMAKE})
+	dk_configure(${BZIP2} -DENABLE_SHARED_LIB=${BUILD_SHARED_LIBS} -DENABLE_STATIC_LIB=${BUILD_STATIC_LIBS} ${PYTHON3_CMAKE} -DENABLE_TESTS=0)
 endif()
 	
 ### COMPILE ###
-dk_build(${BZIP2_DIR})
+dk_build(${BZIP2})

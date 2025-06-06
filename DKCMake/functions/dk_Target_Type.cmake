@@ -79,7 +79,7 @@ function(DKTEST)
 	dk_printVar(${Target_Type})
 	
 	###### SET ######
-	dk_Target_Type("Debug")
+	dk_Target_Type("All")
 	dk_printVar(Target_Type)
 	dk_printVar(${Target_Type})
 endfunction()

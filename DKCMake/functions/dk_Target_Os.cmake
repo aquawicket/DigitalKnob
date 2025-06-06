@@ -19,8 +19,6 @@ include_guard()
 function(dk_Target_Os)
 	dk_debugFunc(0 1)
 
-	message("ENV{Target_Os} = $ENV{Target_Os}")
-	
 	###### SET ######
 	if(ARGV)
 		dk_set(Target_Os "${ARGV0}")

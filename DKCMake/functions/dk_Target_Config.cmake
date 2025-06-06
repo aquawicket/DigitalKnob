@@ -26,9 +26,8 @@ include_guard()
 function(dk_Target_Config)
 	dk_debugFunc(0)
 	
-	dk_validate(Host_Tuple   	"dk_Host_Tuple()")
+	#dk_validate(Host_Tuple   	"dk_Host_Tuple()")
 	dk_validate(Target_Type  	"dk_Target_Type()")
-	dk_validate(Target_Tuple	"dk_Target_Tuple()")
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -41,6 +40,8 @@ function(dk_Target_Config)
 		
 		dk_set(MULTI_CONFIG 1)
 		dk_unset(SINGLE_CONFIG)
+		
+		dk_validate(Target_Tuple	"dk_Target_Tuple()")
 		dk_set(Target_Config ${Target_Tuple})
 		
 		dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
@@ -56,6 +57,7 @@ function(dk_Target_Config)
 		
 		dk_set(SINGLE_CONFIG 1)
 		dk_unset(MULTI_CONFIG)
+		dk_validate(Target_Tuple	"dk_Target_Tuple()")
 		if(Debug)
 			dk_set(CMAKE_BUILD_TYPE Debug)
 			dk_set(Target_Config ${Target_Tuple}/${Debug_Dir})

@@ -21,7 +21,9 @@ function(dk_Target_Tuple)
 
 	###### SET ######
 	if(ARGV)
+		dk_unset(Target_Tuple)
 		dk_set(Target_Tuple "${ARGV0}")
+		dk_set(${Target_Tuple} 1)
 	
 	###### GET ######	
 	#elseif(DEFINED ENV{Target_Tuple})
@@ -32,7 +34,7 @@ function(dk_Target_Tuple)
 			dk_Target_Os()
 		endif()
 		dk_assertVar(Target_Os)
-		
+	
 		###### First Tuple ######
 		if(NOT Target_Arch)
 			dk_Target_Arch()
@@ -40,6 +42,7 @@ function(dk_Target_Tuple)
 		dk_assertVar(Target_Arch)
 		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}")
 		dk_set(${Target_Tuple} 1)
+		
 			### VALIDATE RESULT ###
 			if(Android_Arm32)
 		elseif(Android_Arm64)
@@ -86,7 +89,7 @@ function(dk_Target_Tuple)
 		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}_${Target_Env}")
 		dk_set(${Target_Tuple} 1)
 			### VALIDATE RESULT ###
-			if(Android_Arm32_Clang)
+		if	  (Android_Arm32_Clang)
 		elseif(Android_Arm64_Clang)
 		elseif(Android_X86_64_Clang)
 		elseif(Android_X86_Clang)
@@ -142,6 +145,7 @@ function(dk_Target_Tuple)
 		endif()
 	endif()
 	
+	###### FINALIZE ######	
 	dk_assertVar(Target_Tuple)
 	dk_assertVar(${Target_Tuple})
 	
