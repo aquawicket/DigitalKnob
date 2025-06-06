@@ -12,60 +12,52 @@ include_guard()
 #########################################################################
 
 
-###### DEFAULT TARGET ######
-dk_validate(Host_Os "dk_Host_Os()")
-dk_validate(Host_Arch "dk_Host_Arch()")
-dk_Target_Os("${Host_Os}")
-dk_Target_Arch("${Host_Arch}")
-dk_Target_Env ("Clang")
-dk_Target_Type("Debug")
+dk_DKBRANCH_DIR()
 dk_Target_Tuple()
 
 ### Target_App_Dir ###
-dk_set(Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
-dk_assertPath(Target_App_Dir)
+dk_set(Target_App_Dir 		"${CMAKE_CURRENT_LIST_DIR}")
+dk_basename("${Target_App_Dir}")
 
 ### DEPEND ###
 dk_depend(DK)
-dk_depend(DKAssets)
 dk_depend(DKDuktape)
 #dk_depend(DKDuktapeDom)
+dk_depend(DKAssets)
 dk_depend(DKFile)
 dk_depend(DKSDLText)
 dk_depend(DKSDLWindow)
 dk_depend(DKWindow)
 
-### CURRENT_PLUGIN ###
-dk_basename("${Target_App_Dir}")
-dk_set(CURRENT_PLUGIN "${dk_basename}")
-dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
 
 
-if(DKDEFINES_LIST)
-	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
-endif()
-if(DKLINKDIRS_LIST)
-	dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
-endif()
-if(LIBS)
-	dk_set(LIBS ${LIBS})
-endif()
-if(DEBUG_LIBS)
-	dk_set(DEBUG_LIBS ${DEBUG_LIBS})
-endif()
-if(RELEASE_LIBS)
-	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
-endif()
-
-
-
+#if(DKDEFINES_LIST)
+#	dk_set(DKDEFINES_LIST	${DKDEFINES_LIST})
+#endif()
+#if(DKLINKDIRS_LIST)
+#	dk_set(DKLINKDIRS_LIST 	${DKLINKDIRS_LIST})
+#endif()
+#if(LIBS)
+#	dk_set(LIBS 			${LIBS})
+#endif()
+#if(DEBUG_LIBS)
+#	dk_set(DEBUG_LIBS		${DEBUG_LIBS})
+#endif()
+#if(RELEASE_LIBS)
+#	dk_set(RELEASE_LIBS 	${RELEASE_LIBS})
+#endif()
 if(PLUGINS_FILE)
-	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
-	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
-	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
-	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
-	dk_fileWrite("${CMAKE_CURRENT_LIST_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
+	dk_set(PLUGINS_FILE		${PLUGINS_FILE})
 endif()
+
+
+
+#if(PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  	PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 		PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  					PLUGINS_FILE)
+	dk_fileWrite("${Target_App_Dir}/DKPlugins.h" "${PLUGINS_FILE}")
+#endif()
 #if(${CURRENT_PLUGIN} STREQUAL DK OR BUILD_STATIC_LIBS)
 	file(GLOB HEADER_FILES RELATIVE ${DKCPP_PLUGINS_DIR} ${CMAKE_CURRENT_LIST_DIR}/*.h)
 	foreach(header ${HEADER_FILES})
@@ -80,7 +72,9 @@ endif()
 	endforeach()
 #endif()
 
-
+dk_set(CURRENT_PLUGIN		"${dk_basename}")
+dk_set(${CURRENT_PLUGIN}	"${CMAKE_SOURCE_DIR}")
+dk_set(DKCPP_PLUGINS_DIR 	"${DKCPP_PLUGINS_DIR}")
 
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${Target_App_Dir}/CMakeLists.txt)
 
