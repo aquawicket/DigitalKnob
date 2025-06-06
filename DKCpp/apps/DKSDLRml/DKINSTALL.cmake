@@ -11,6 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+
 ###### DEFAULT TARGET ######
 dk_validate(Host_Os "dk_Host_Os()")
 dk_validate(Host_Arch "dk_Host_Arch()")
@@ -20,13 +21,11 @@ dk_Target_Env ("Clang")
 dk_Target_Type("Debug")
 dk_Target_Tuple()
 
-############ APP ############
+### Target_App_Dir ###
 dk_set(Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
-dk_basename("${Target_App_Dir}")
-dk_set(Target_App "${dk_basename}")
-dk_validate(Target_Config "dk_Target_Config()")
+dk_assertPath(Target_App_Dir)
 
-###### DEPENDENCIES ######
+### DEPEND ###
 dk_depend(imagemagick)
 dk_depend(sdl)	#FIX for DK/DKAndroid.cpp, line:35
 dk_depend(DK)
@@ -45,53 +44,65 @@ dk_depend(DKSDLWindow)
 dk_depend(DKThread)
 dk_depend(DKWebTest)
 dk_depend(DKWindow)
-
-
 #dk_depend(DKDuktapeDom)
 #dk_depend(DKRmlElement)
 
+### CURRENT_PLUGIN ###
+dk_basename("${Target_App_Dir}")
+dk_set(CURRENT_PLUGIN "${dk_basename}")
+dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
 
 
-## copy app default files without overwrite
-dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/icon.png ${Target_App_Dir}/icon.png) 
+### TODO: Add Plugins.h file generation ###
+if(DKINCLUDES_LIST)
+	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
+endif()
+if(DKDEFINES_LIST)
+	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
+endif()
+if(DKLINKDIRS_LIST)
+	dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
+endif()
+if(LIBS)
+	dk_set(LIBS ${LIBS})
+endif()
+if(DEBUG_LIBS)
+	dk_set(DEBUG_LIBS ${DEBUG_LIBS})
+endif()
+if(RELEASE_LIBS)
+	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
+endif()
+
+
+
+if(PLUGINS_FILE)
+	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
+	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
+	dk_fileWrite("${CMAKE_CURRENT_LIST_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
+endif()
+#if(${CURRENT_PLUGIN} STREQUAL DK OR BUILD_STATIC_LIBS)
+	file(GLOB HEADER_FILES RELATIVE ${DKCPP_PLUGINS_DIR} ${CMAKE_CURRENT_LIST_DIR}/*.h)
+	foreach(header ${HEADER_FILES})
+		if(NOT PLUGINS_FILE MATCHES "${header}")
+			dk_info("Adding ${header} to header file.")
+			dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
+		endif()
+		#if(NOT PLUGINS_FILE MATCHES "DKHAVE_${plugin_name}")
+		#	dk_info("Adding #define DKHAVE_${plugin_name} 1 to header file.")
+		#	dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#define DKHAVE_${plugin_name} 1\\n")
+		#endif()
+	endforeach()
+#endif()
+
+
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${Target_App_Dir}/main.cpp)
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h)
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${Target_App_Dir}/CMakeLists.txt)
 
-###### CREATE ICONS ######
-if(EXISTS "${Target_App_Dir}/icon.png")
-	dk_createIcons("${Target_App_Dir}/icon.png")
-endif()
+dk_define(DKAPP)
 
-################# BACKUP USERDATA / INJECT ASSETS #####################
-if(EXISTS "${Target_App_Dir}/assets")
-	dk_copy(${Target_App_Dir}/assets/USER ${Target_App_Dir}/Backup/USER OVERWRITE NO_HALT)
-	dk_delete(${Target_App_Dir}/assets/USER NO_HALT)
-	#Compress the assets, they will be included by resource.rc
-	dk_info("Creating assets.zip . . .")
-	dk_compressAssets(${Target_App_Dir}/assets)
-	# Restore the backed up files
-	dk_copy(${Target_App_Dir}/Backup/ ${Target_App_Dir}/assets/ OVERWRITE NO_HALT)
-	dk_delete(${Target_App_Dir}/Backup NO_HALT)
-	#dummy assets.h file, or the builder will complain about assets.h missing
-	dk_assertPath(DKCPP_PLUGINS_DIR)
-	dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h OVERWRITE NO_HALT)
-endif()
+dk_configure(${Target_App_Dir})
 
-###################### Backup Executable ###########################
-if(BACKUP_APP_EXECUTABLES)
-	dk_backupExecutable()
-endif()
-
-dk_generateAppCmake()
-
-#dk_clearCmakeCache()
-
-dk_set(CURRENT_PLUGIN 				${Target_App})
-dk_set(${CURRENT_PLUGIN} 			${CMAKE_SOURCE_DIR})
-dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${CMAKE_CURRENT_LIST_DIR}/${Target_Config})
-
-dk_configure(${CMAKE_CURRENT_LIST_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTUPLE=${TUPLE})
-dk_build(${CMAKE_CURRENT_LIST_DIR})
-
-
-
-
+dk_build(${Target_App_Dir})

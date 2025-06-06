@@ -16,7 +16,5 @@ dk_depend(DKSDLWindow)
 dk_depend(DKThread)
 dk_depend(DKWebTest)
 dk_depend(DKWindow)
-
-
 #dk_depend(DKDuktapeDom)
 #dk_depend(DKRmlElement)
