@@ -41,10 +41,6 @@ dk_set(CURRENT_PLUGIN "${dk_basename}")
 dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
 
 
-### TODO: Add Plugins.h file generation ###
-if(DKINCLUDES_LIST)
-	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
-endif()
 if(DKDEFINES_LIST)
 	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
 endif()

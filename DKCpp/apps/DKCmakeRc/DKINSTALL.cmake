@@ -23,10 +23,6 @@ dk_basename("${Target_App_Dir}")
 dk_depend(CMakeRC)
 
 
-### TODO: Add Plugins.h file generation ###
-#if(DKINCLUDES_LIST)
-#	dk_set(DKINCLUDES_LIST 	${DKINCLUDES_LIST})
-#endif()
 if(DKDEFINES_LIST)
 	dk_set(DKDEFINES_LIST	${DKDEFINES_LIST})
 endif()

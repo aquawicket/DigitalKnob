@@ -75,10 +75,6 @@ dk_depend(DKRmlHTMLElement)
 dk_depend(DKWebTest)
 
 
-### TODO: Add Plugins.h file generation ###
-#if(DKINCLUDES_LIST)
-#	dk_set(DKINCLUDES_LIST 	${DKINCLUDES_LIST})
-#endif()
 if(DKDEFINES_LIST)
 	dk_set(DKDEFINES_LIST	${DKDEFINES_LIST})
 endif()
