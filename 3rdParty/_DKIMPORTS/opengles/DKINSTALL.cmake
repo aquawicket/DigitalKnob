@@ -20,7 +20,7 @@ if(Android)
 	dk_lib(GLESv2)
 endif()
 
-if(IOS)
+if(Ios)
 	dk_findLibrary(OpenGLES)
 endif()
 

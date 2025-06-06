@@ -11,17 +11,52 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-dk_validate(Target_Config  "dk_Target_Config()")
 
-## DKTestAll is the "include all plugins" app.
-## Here we try to include all plugins and 3rd party libraries for all platforms.
-## DKTestAll is handy for debugging purposes and adding new libraries and plugins
+dk_Target_Tuple()
 
-#dk_enable(HAVE_DK)
-#dk_enable(HAVE_DKCef) ##FIXME: Find a way to remove this requirement
-
+### DEPEND ###
 dk_dependAll() ## ADD any and all plugins
 
-if(Linux_Host)
-	dk_set(EXCLUDE_ASSETS ON) #assets are too large to embed on my old 1gb x86 dell laptop
+
+### TODO: Add Plugins.h file generation ###
+if(DKINCLUDES_LIST)
+	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
 endif()
+if(DKDEFINES_LIST)
+	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
+endif()
+if(DKLINKDIRS_LIST)
+	dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
+endif()
+if(LIBS)
+	dk_set(LIBS ${LIBS})
+endif()
+if(DEBUG_LIBS)
+	dk_set(DEBUG_LIBS ${DEBUG_LIBS})
+endif()
+if(RELEASE_LIBS)
+	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
+endif()
+
+if(PLUGINS_FILE)
+	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
+	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
+	dk_fileWrite("${CMAKE_CURRENT_LIST_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
+endif()
+
+### CURRENT_PLUGIN ###
+dk_basename("${CMAKE_CURRENT_LIST_DIR}")
+dk_set(CURRENT_PLUGIN "${dk_basename}")
+dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
+
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${CMAKE_CURRENT_LIST_DIR}/main.cpp)
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${CMAKE_CURRENT_LIST_DIR}/assets.h)
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt)
+
+
+dk_define(DKAPP)
+dk_configure(${CMAKE_CURRENT_LIST_DIR})
+
+dk_build(${CMAKE_CURRENT_LIST_DIR})

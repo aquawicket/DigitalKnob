@@ -12,13 +12,6 @@ include_guard()
 #########################################################################
 
 
-###### DEFAULT TARGET ######
-dk_validate(Host_Os "dk_Host_Os()")
-dk_validate(Host_Arch "dk_Host_Arch()")
-dk_Target_Os("${Host_Os}")
-dk_Target_Arch("${Host_Arch}")
-dk_Target_Env ("Clang")
-dk_Target_Type("Debug")
 dk_Target_Tuple()
 
 ### Target_App_Dir ###

@@ -12,13 +12,6 @@ include_guard()
 #########################################################################
 
 
-###### DEFAULT TARGET ######
-dk_validate(Host_Os "dk_Host_Os()")
-dk_validate(Host_Arch "dk_Host_Arch()")
-dk_Target_Os("${Host_Os}")
-dk_Target_Arch("${Host_Arch}")
-dk_Target_Env ("Clang")
-dk_Target_Type("Debug")
 dk_Target_Tuple()
 
 ### Target_App_Dir ###
@@ -35,7 +28,7 @@ dk_depend(DKDebug)
 dk_depend(DKDom)
 dk_depend(DKDuktape)
 dk_depend(DKDuktapeDebugger)
-dk_depend(DKRmlAudio)
+#dk_depend(DKRmlAudio)
 dk_depend(DKRmlTestElements)
 dk_depend(DKRmlVideo)
 dk_depend(DKSDLAudio)

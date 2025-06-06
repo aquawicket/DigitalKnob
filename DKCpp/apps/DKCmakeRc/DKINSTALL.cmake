@@ -12,18 +12,10 @@ include_guard()
 #########################################################################
 
 
-###### DEFAULT TARGET ######
-dk_validate(Host_Os "dk_Host_Os()")
-dk_validate(Host_Arch "dk_Host_Arch()")
-dk_Target_Os("${Host_Os}")
-dk_Target_Arch("${Host_Arch}")
-dk_Target_Env ("Clang")
-dk_Target_Type("Debug")
 dk_Target_Tuple()
 
 ### DEPEND ###
 dk_depend(CMakeRC)
-
 
 ### TODO: Add Plugins.h file generation ###
 if(DKINCLUDES_LIST)
@@ -45,11 +37,6 @@ if(RELEASE_LIBS)
 	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
 endif()
 
-### CURRENT_PLUGIN ###
-dk_basename("${CMAKE_CURRENT_LIST_DIR}")
-dk_set(CURRENT_PLUGIN "${dk_basename}")
-dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
-
 if(PLUGINS_FILE)
 	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
 	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
@@ -57,28 +44,18 @@ if(PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
 	dk_fileWrite("${CMAKE_CURRENT_LIST_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
 endif()
-#if(${CURRENT_PLUGIN} STREQUAL DK OR BUILD_STATIC_LIBS)
-	file(GLOB HEADER_FILES RELATIVE ${DKCPP_PLUGINS_DIR} ${CMAKE_CURRENT_LIST_DIR}/*.h)
-	foreach(header ${HEADER_FILES})
-		if(NOT PLUGINS_FILE MATCHES "${header}")
-			dk_info("Adding ${header} to header file.")
-			dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
-		endif()
-		#if(NOT PLUGINS_FILE MATCHES "DKHAVE_${plugin_name}")
-		#	dk_info("Adding #define DKHAVE_${plugin_name} 1 to header file.")
-		#	dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#define DKHAVE_${plugin_name} 1\\n")
-		#endif()
-	endforeach()
-#endif()
 
-
+### CURRENT_PLUGIN ###
+dk_basename("${CMAKE_CURRENT_LIST_DIR}")
+dk_set(CURRENT_PLUGIN "${dk_basename}")
+dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
 
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${CMAKE_CURRENT_LIST_DIR}/main.cpp)
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${CMAKE_CURRENT_LIST_DIR}/assets.h)
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt)
 
 
-
+dk_define(DKAPP)
 dk_configure(${CMAKE_CURRENT_LIST_DIR})
 
 dk_build(${CMAKE_CURRENT_LIST_DIR})

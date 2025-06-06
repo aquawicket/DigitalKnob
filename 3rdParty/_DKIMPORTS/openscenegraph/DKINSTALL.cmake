@@ -2272,7 +2272,7 @@ Emscripten_Release_dk_configure(${OPENSCENEGRAPH}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 
-if(IOS)
+if(Ios)
 	string(REPLACE "-std=c++17" "" DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "  " " " 		DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 endif()

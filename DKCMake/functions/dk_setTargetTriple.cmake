@@ -249,7 +249,7 @@ function(dk_setTargetTuple)
 		dk_printVar(${Target_Tuple})	
 		
 		### Set Debug_Dir and Release_Dir variables
-		if(IOS)
+		if(Ios)
 			dk_set(Debug_Dir Debug-iphoneos)
 			dk_set(Release_Dir Release-iphoneos)
 		elseif(Iossim)
