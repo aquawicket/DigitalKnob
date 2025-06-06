@@ -34,7 +34,6 @@ dk_depend(DKAssets)
 dk_depend(DKFmt)
 
 ### CURRENT_PLUGIN ###
-message("Target_App_Dir = ${Target_App_Dir}")
 dk_basename("${Target_App_Dir}")
 dk_set(CURRENT_PLUGIN "${dk_basename}")
 dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
@@ -88,6 +87,7 @@ dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${Target_App_Dir}/main.cpp)
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${Target_App_Dir}/assets.h)
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${Target_App_Dir}/CMakeLists.txt)
 
+dk_define(DKAPP)
 
 dk_configure(${Target_App_Dir})
 

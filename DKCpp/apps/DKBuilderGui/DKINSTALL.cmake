@@ -97,7 +97,7 @@ dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/main.cpp ${CMAKE_CURRENT_LIST_DIR}/main.c
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/assets.h ${CMAKE_CURRENT_LIST_DIR}/assets.h)
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt)
 
-
+dk_define(DKAPP)
 
 dk_configure(${CMAKE_CURRENT_LIST_DIR})
 
