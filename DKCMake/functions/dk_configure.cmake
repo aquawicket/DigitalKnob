@@ -19,6 +19,8 @@ include_guard()
 function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc()
 	
+	dk_assertPath(SOURCE_DIR)
+	
 	#if(NOT REBUILDALL)
 		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
 			if(NOT DEFINED missing_libs)
@@ -36,18 +38,17 @@ function(dk_configure SOURCE_DIR) #ARGN
 		endif()
 	#endif()
 	
-	
-	dk_assertPath(SOURCE_DIR)
 	dk_validate(Target_Type "dk_Target_Type()")
 	dk_validate(Target_Config "dk_Target_Config()")
 	
-	dk_assertPath(${CURRENT_PLUGIN})
+	dk_assertPath(${${CURRENT_PLUGIN}})
 	
 	if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${Target_Config}")
 		dk_mkdir("${${CURRENT_PLUGIN}_CONFIG_DIR}")
+		#dk_assertPath("${${CURRENT_PLUGIN}}/${Target_Config}")
 	endif()
-	dk_assertPath(${CURRENT_PLUGIN}_CONFIG_DIR)
+	dk_assertPath("${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	
 	dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	dk_assertVar(BINARY_DIR)
