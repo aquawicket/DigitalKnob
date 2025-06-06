@@ -20,15 +20,20 @@ function(dk_DKIMPORTS_DIR)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGN)
-		dk_set(DKIMPORTS_DIR "${ARGN}")
+	if(ARGV)
+		dk_set(DKIMPORTS_DIR "${ARGV0}")
 
 	###### GET ######
+	elseif(DEFINED ENV{DKIMPORTS_DIR})	
+		dk_set(DKIMPORTS_DIR "$ENV{DKIMPORTS_DIR}")
+	
 	else()
-		dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
-		dk_set(DKIMPORTS_DIR "$ENV{DK3RDPARTY_DIR}/_DKIMPORTS")
+		dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
+		dk_set(DKIMPORTS_DIR "${DK3RDPARTY_DIR}/_DKIMPORTS")
 	endif()
 	
+	###### FINALIZE ######
+	#dk_assertPath(DKIMPORTS_DIR)
 endfunction()
 
 
@@ -43,10 +48,18 @@ function(DKTEST)
 	dk_echo()
 	dk_echo("Test Getting DKIMPORTS_DIR . . .")
 	dk_DKIMPORTS_DIR()
-	dk_printVar(ENV{DKIMPORTS_DIR})
+	if(EXISTS "${DKIMPORTS_DIR}")
+		dk_success("DKIMPORTS_DIR = ${DKIMPORTS_DIR}")
+	else()
+		dk_error("DKIMPORTS_DIR:'${DKIMPORTS_DIR}' not found")
+	endif()
 
 	dk_echo()
 	dk_echo("Test Setting DKIMPORTS_DIR . . .")
 	dk_DKIMPORTS_DIR("C:/DK/DKImports")
-	dk_printVar(ENV{DKIMPORTS_DIR})
+	if(EXISTS "${DKIMPORTS_DIR}")
+		dk_success("DKIMPORTS_DIR = ${DKIMPORTS_DIR}")
+	else()
+		dk_error("DKIMPORTS_DIR:'${DKIMPORTS_DIR}' not found")
+	endif()
 endfunction()

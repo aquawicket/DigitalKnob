@@ -21,9 +21,12 @@ function(dk_DKHOME_DIR)
 
 	###### SET ######
 	if(ARGV)
-		dk_set(DKHOME_DIR "${ARGV}")
-	
+		dk_set(DKHOME_DIR "${ARGV0}")
+
 	###### GET ######
+	elseif(DEFINED ENV{DKHOME_DIR})	
+		dk_set(DKHOME_DIR "$ENV{DKHOME_DIR}")
+	
 	else()
 
 		############ from ENV{DKHOME_DIR} ############
@@ -78,12 +81,20 @@ function(DKTEST)
 	dk_echo()
 	dk_echo("Test Getting DKHOME_DIR . . .")
 	dk_DKHOME_DIR()
-	dk_echo("DKHOME_DIR = ${DKHOME_DIR}")
+	if(EXISTS "${DKHOME_DIR}")
+		dk_success("DKHOME_DIR = ${DKHOME_DIR}")
+	else()
+		dk_error("DKHOME_DIR:'${DKHOME_DIR}' not found")
+	endif()
 	
 	dk_echo()
 	dk_echo("Test Setting DKHOME_DIR . . .")
 	dk_DKHOME_DIR("C:/")
-	dk_echo("DKHOME_DIR = ${DKHOME_DIR}")
+	if(EXISTS "${DKHOME_DIR}")
+		dk_success("DKHOME_DIR = ${DKHOME_DIR}")
+	else()
+		dk_error("DKHOME_DIR:'${DKHOME_DIR}' not found")
+	endif()
 endfunction()
 
 

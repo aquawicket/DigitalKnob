@@ -20,9 +20,12 @@ function(dk_DKCACHE_DIR)
 	
 	###### SET ######
 	if(ARGV)
-		dk_set(DKCACHE_DIR "${ARGV}")
-		
+		dk_set(DKCACHE_DIR "${ARGV0}")
+
 	###### GET ######
+	elseif(DEFINED ENV{DKCACHE_DIR})	
+		dk_set(DKCACHE_DIR "$ENV{DKCACHE_DIR}")
+	
 	else()
 		dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
 		dk_set(DKCACHE_DIR "${DKHOME_DIR}/.dk")
@@ -48,10 +51,18 @@ function(DKTEST)
 	dk_echo()
 	dk_echo("Test Getting DKCACHE_DIR . . .")
 	dk_DKCACHE_DIR()
-	dk_printVar(DKCACHE_DIR)
+	if(EXISTS "${DKCACHE_DIR}")
+		dk_success("DKCACHE_DIR = ${DKCACHE_DIR}")
+	else()
+		dk_error("DKCACHE_DIR:'${DKCACHE_DIR}' not found")
+	endif()
 	
 	dk_echo()
 	dk_echo("Test Setting DKCACHE_DIR . . .")
 	dk_DKCACHE_DIR("C:/.dk")
-	dk_printVar(DKCACHE_DIR)
+	if(EXISTS "${DKCACHE_DIR}")
+		dk_success("DKCACHE_DIR = ${DKCACHE_DIR}")
+	else()
+		dk_error("DKCACHE_DIR:'${DKCACHE_DIR}' not found")
+	endif()
 endfunction()

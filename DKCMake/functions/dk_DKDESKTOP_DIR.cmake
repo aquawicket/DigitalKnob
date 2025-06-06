@@ -20,15 +20,20 @@ function(dk_DKDESKTOP_DIR)
     dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGN)
-		dk_set(DKDESKTOP_DIR "${ARGN}")
-		
+	if(ARGV)
+		dk_set(DKDESKTOP_DIR "${ARGV0}")
+
 	###### GET ######
+	elseif(DEFINED ENV{DKDESKTOP_DIR})	
+		dk_set(DKDESKTOP_DIR "$ENV{DKDESKTOP_DIR}")
+	
 	else()
 		dk_validate(ENV{DKHOME_DIR} "dk_DKHOME_DIR()")
 		dk_set(DKDESKTOP_DIR "$ENV{DKHOME_DIR}/Desktop")
 	endif()
 	
+	###### FINALIZE ######
+	#dk_assertPath(${DKDESKTOP_DIR})
 endfunction()
 
 
@@ -43,10 +48,18 @@ function(DKTEST)
 	dk_echo()
 	dk_echo("Test Getting DKDESKTOP_DIR . . .")
 	dk_DKDESKTOP_DIR()
-	dk_printVar(DKDESKTOP_DIR)
+	if(EXISTS "${DKDESKTOP_DIR}")
+		dk_success("DKDESKTOP_DIR = ${DKDESKTOP_DIR}")
+	else()
+		dk_error("DKDESKTOP_DIR:'${DKDESKTOP_DIR}' not found")
+	endif()
 	
 	dk_echo()
 	dk_echo("Test Setting DKDESKTOP_DIR . . .")
 	dk_DKDESKTOP_DIR("C:/Desktop")
-	dk_printVar(DKDESKTOP_DIR)
+	if(EXISTS "${DKDESKTOP_DIR}")
+		dk_success("DKDESKTOP_DIR = ${DKDESKTOP_DIR}")
+	else()
+		dk_error("DKDESKTOP_DIR:'${DKDESKTOP_DIR}' not found")
+	endif()
 endfunction()
