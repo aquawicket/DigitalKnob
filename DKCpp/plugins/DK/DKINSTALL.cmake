@@ -60,7 +60,9 @@ dk_depend(backward-cpp)
 dk_depend(fmt)
 
 
-
+# TODO:  dk_configure and dk_build both use a path as a parameter.  However, dk_generateCmake and dk_assets only use a folder name of the plugin.
+# To make things more conformed and less restrictive, Lets change dk_generateCmake and dk_assets to also use a path as a parameter.
+# All 4 of those functions below should be able to take ("${CMAKE_CURRENT_LIST_DIR}") as the input parameter.
 ############ DK ############
 dk_set(CURRENT_PLUGIN "DK")
 dk_generateCmake(${CURRENT_PLUGIN})
