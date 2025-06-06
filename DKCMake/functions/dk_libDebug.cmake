@@ -41,6 +41,7 @@ function(dk_libDebug lib_path)
 	else()
 		dk_append(DEBUG_LIBS debug ${lib_path}) # Add to end of list
 	endif()
+	dk_set(DEBUG_LIBS "${DEBUG_LIBS}")
 
 	if(INSTALL_DKLIBS)
 		if(EXISTS ${lib_path})

@@ -26,6 +26,7 @@ function(dk_define str)
 	endif()
 
 	dk_append(DKDEFINES_LIST ${str})
+	dk_set(DKDEFINES_LIST "${DKDEFINES_LIST}")
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		dk_warning("add_definitions() not available in script mode")

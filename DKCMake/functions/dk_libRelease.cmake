@@ -41,6 +41,7 @@ function(dk_libRelease lib_path)
 	else()
 		dk_append(RELEASE_LIBS optimized ${lib_path})  # Add to end of list
 	endif()
+	dk_set(RELEASE_LIBS "${RELEASE_LIBS}")
 	
 	if(INSTALL_DKLIBS)
 		if(EXISTS ${lib_path})

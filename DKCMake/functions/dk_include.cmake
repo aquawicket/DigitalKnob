@@ -37,6 +37,7 @@ function(dk_include path)
 	endif()
 		
 	dk_append(DKINCLUDES_LIST ${path})
+	dk_set(DKINCLUDES_LIST "${DKINCLUDES_LIST}")
 	if(CMAKE_SCRIPT_MODE_FILE)
 		dk_warning("include_directories() not available in script mode")
 	else()

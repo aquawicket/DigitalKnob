@@ -26,6 +26,7 @@ function(dk_linkDir path)
 	endif()
 
 	dk_append(DKLINKDIRS_LIST ${path})
+	dk_set(DKLINKDIRS_LIST "${DKLINKDIRS_LIST}")
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		dk_warning("link_directories() not available in script mode")
