@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##################################################################################
+#########################################################################
 # dk_Target_App()
 #
 #
@@ -24,7 +24,7 @@ function(dk_Target_App)
 	
 	###### GET ######	
 	elseif(DEFINED ENV{Target_App})	
-		dk_set(Target_Type "$ENV{Target_Type}")
+		dk_set(Target_App "$ENV{Target_App}")
 		
 	else()
 		dk_echo()
@@ -50,8 +50,6 @@ function(dk_Target_App)
 		if("${input}" EQUAL "0")
 			dk_echo("repeating last selection")
 			dk_set(Target_App ${Target_App_Cache})
-			#dk_set(Target_Tuple ${Target_Tuple_Cache})
-			#dk_set(Target_Type ${Target_Type_Cache})
 			dk_set(UPDATE 1)
 		elseif("${input}" EQUAL "1")
 			dk_set(Target_App "HelloWorld")
@@ -82,6 +80,8 @@ function(dk_Target_App)
 		endif()
 	endif()
 	
+	###### FINALIZE ######
+	#dk_assertVar(Target_App)
 endfunction()
 
 

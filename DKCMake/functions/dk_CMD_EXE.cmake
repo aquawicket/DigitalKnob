@@ -18,42 +18,48 @@ include_guard()
 function(dk_CMD_EXE)
     dk_debugFunc()
 
-	if(EXISTS "${CMD_EXE}")
-		dk_debug("CMD_EXE:${CMD_EXE} already set")
-		return()
-	endif()
-	
-	
-	### from CMD_EXE environment variable ###
-	if(NOT EXISTS "${CMD_EXE}")
+	###### SET ######
+	if(ARGV)
+		dk_set(CMD_EXE "${ARGV0}")
+		
+	###### GET ######
+	elseif(DEFINED ENV{CMD_EXE})	
 		dk_set(CMD_EXE "$ENV{CMD_EXE}")
-	endif()
 	
-	### from COMSPEC environment variable ###
-	if(NOT EXISTS "${CMD_EXE}")
-		dk_set(CMD_EXE "$ENV{ComSpec}")
-	endif()
-	
-	### from dk_findProgram ###
-	if(NOT EXISTS "${CMD_EXE}")
-		dk_findProgram(CMD_EXE "cmd.exe")
-	endif()
-	
-	### from raw Unix path
-	if(NOT EXISTS "${CMD_EXE}")
-		dk_set(CMD_EXE "/c/Windows/System32/cmd.exe")
-	endif()
-	
-	### from raw Wsl path
-	if(NOT EXISTS "${CMD_EXE}")
-		dk_set(CMD_EXE "/mnt/c/Windows/System32/cmd.exe")
-	endif()
-	
-	if(NOT EXISTS "${CMD_EXE}")
-		dk_warning("CMD_EXE:${CMD_EXE} not found")
 	else()
-		dk_set(CMD_EXE "${CMD_EXE}")  # Globalize the variable
+		if(EXISTS "${CMD_EXE}")
+			dk_debug("CMD_EXE:${CMD_EXE} already set")
+			return()
+		endif()
+		
+		### from CMD_EXE environment variable ###
+		if(NOT EXISTS "${CMD_EXE}")
+			dk_set(CMD_EXE "$ENV{CMD_EXE}")
+		endif()
+		
+		### from COMSPEC environment variable ###
+		if(NOT EXISTS "${CMD_EXE}")
+			dk_set(CMD_EXE "$ENV{ComSpec}")
+		endif()
+		
+		### from dk_findProgram ###
+		if(NOT EXISTS "${CMD_EXE}")
+			dk_findProgram(CMD_EXE "cmd.exe")
+		endif()
+		
+		### from raw Unix path
+		if(NOT EXISTS "${CMD_EXE}")
+			dk_set(CMD_EXE "/c/Windows/System32/cmd.exe")
+		endif()
+		
+		### from raw Wsl path
+		if(NOT EXISTS "${CMD_EXE}")
+			dk_set(CMD_EXE "/mnt/c/Windows/System32/cmd.exe")
+		endif()
 	endif()
+	
+	###### FINALIZE ######
+	dk_assertPath(CMD_EXE)
 endfunction()
 
 
@@ -65,10 +71,10 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
  
-    dk_CMD_EXE()
-   if(EXISTS ${CMD_EXE})
+	dk_CMD_EXE()
+	if(EXISTS ${CMD_EXE})
 		dk_success("CMD_EXE = ${CMD_EXE}")
-   else()
+	else()
 		dk_error("CMD_EXE = ${CMD_EXE}")
-   endif()
+	endif()
 endfunction()

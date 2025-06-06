@@ -23,6 +23,9 @@ function(dk_DIGITALKNOB_DIR)
 		dk_set(DIGITALKNOB_DIR "${ARGV}")
 
 	###### GET ######
+	elseif(DEFINED ENV{DIGITALKNOB_DIR})	
+		dk_set(DIGITALKNOB_DIR "$ENV{DIGITALKNOB_DIR}")
+	
 	else()
 		dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
 	
@@ -38,6 +41,8 @@ function(dk_DIGITALKNOB_DIR)
 	if(NOT EXISTS "${DIGITALKNOB_DIR}")
 		dk_mkdir("${DIGITALKNOB_DIR}")
 	endif()
+	
+	#dk_assertPath(DIGITALKNOB_DIR)
 endfunction()
 
 
@@ -49,6 +54,21 @@ endfunction()
 function(DKTEST)
     dk_debugFunc()
    
+	dk_echo()
+	dk_echo("Test Getting DIGITALKNOB_DIR . . .")
 	dk_DIGITALKNOB_DIR()
-    dk_printVar(DIGITALKNOB_DIR)
+	if(EXISTS "${DIGITALKNOB_DIR}")
+		dk_success("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
+	else()
+		dk_error("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
+	endif()
+	
+	dk_echo()
+	dk_echo("Test Setting DIGITALKNOB_DIR . . .")
+	dk_DIGITALKNOB_DIR("C:/digitalknob")
+	if(EXISTS "${DIGITALKNOB_DIR}")
+		dk_success("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
+	else()
+		dk_error("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
+	endif()
 endfunction()

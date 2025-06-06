@@ -20,13 +20,17 @@ function(dk_DKTOOLS_DIR)
 	dk_debugFunc(0 1)
 
 	###### SET ######
-	if(ARGN)
-		dk_set(DKTOOLS_DIR "${ARGN}")
+	if(ARGV)
+		dk_set(DKTOOLS_DIR "${ARGV0}")
 
-	###### GET ######
+	###### GET ######	
+	elseif(DEFINED ENV{DKTOOLS_DIR})	
+		dk_set(DKTOOLS_DIR "$ENV{DKTOOLS_DIR}")
+		
 	else()
 		dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
 		dk_set(DKTOOLS_DIR "$ENV{DIGITALKNOB_DIR}/DKTools")
+		
 	endif()
 
 	###### FINALIZE ######

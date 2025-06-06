@@ -24,11 +24,16 @@ function(dk_DK3RDPARTY_DIR)
 		dk_set(DK3RDPARTY_DIR "${ARGV}")
 	
 	###### GET ######
+	elseif(DEFINED ENV{DK3RDPARTY_DIR})	
+		dk_set(DK3RDPARTY_DIR "$ENV{DK3RDPARTY_DIR}")
+	
 	else()
 		dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
 		dk_set(DK3RDPARTY_DIR "${DKBRANCH_DIR}/3rdParty")
 	endif()
 	
+	###### FINALIZE ######
+	#dk_assertPath(DK3RDPARTY_DIR)
 endfunction()
 
 
@@ -43,10 +48,18 @@ function(DKTEST)
 	dk_echo()
 	dk_echo("Test Getting DK3RDPARTY_DIR . . .")
 	dk_DK3RDPARTY_DIR()
-	dk_printVar(DK3RDPARTY_DIR)
+	if(EXISTS "${DK3RDPARTY_DIR}")
+		dk_success("DK3RDPARTY_DIR = ${DK3RDPARTY_DIR}")
+	else()
+		dk_error("DK3RDPARTY_DIR:'${DK3RDPARTY_DIR}' not found")
+	endif()
 	
 	dk_echo()
 	dk_echo("Test Setting DK3RDPARTY_DIR . . .")
-	dk_DK3RDPARTY_DIR("C:/.dk")
-	dk_printVar(DK3RDPARTY_DIR)
+	dk_DK3RDPARTY_DIR("C:/digitalknob/Development/3rdParty")
+	if(EXISTS "${DK3RDPARTY_DIR}")
+		dk_success("DK3RDPARTY_DIR = ${DK3RDPARTY_DIR}")
+	else()
+		dk_error("DK3RDPARTY_DIR:'${DK3RDPARTY_DIR}' not found")
+	endif()
 endfunction()

@@ -42,8 +42,6 @@ message("DKSHELL_PATH = ${DKSHELL_PATH}")
 message("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
 message("")
 
-message("CMAKE_GENERATOR = ${CMAKE_GENERATOR}")
-
 ############ dk_cmakePolicies ############
 include("${DKCMAKE_FUNCTIONS_DIR_}/dk_cmakePolicies.cmake")
 dk_cmakePolicies()

@@ -210,7 +210,9 @@ function(dk_importVariables)
 	foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})
 		dk_unset(PLUGIN_URL_NODE${index})
 		set(PLUGIN_URL_NODE${index} ${PLUGIN_URL_ITEM})						
-		dk_printVar(PLUGIN_URL_NODE${index})							# PLUGIN_URL_NODE(n): [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
+		if(${dk_importVariables_DEBUG})
+			dk_printVar(PLUGIN_URL_NODE${index})						# PLUGIN_URL_NODE(n): [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
+		endif()
 		math(EXPR index ${index}+1)
 	endforeach()
 	
