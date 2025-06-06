@@ -22,7 +22,7 @@ dk_Target_Type("Debug")
 dk_Target_Tuple()
 
 ### DEPEND ###
-dk_depend(DK)
+# none
 
 if(DKINCLUDES_LIST)
 	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
