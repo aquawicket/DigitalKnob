@@ -56,7 +56,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	elseif(EXISTS ${fpath})
 		set(${fn}_file ${fpath})
 	else()
-		dk_echo(FATAL_ERROR "${fpath}: file not found")
+		dk_echo(FATAL_ERROR "fpath:'${fpath}' file not found")
 	endif()
 			
 	if(${${fn}_file} IN_LIST dk_load_list)

@@ -220,7 +220,7 @@ function(dk_DKSCRIPT_VARS)
 		set(ENV{DKSCRIPT_PATH} "${CMAKE_CURRENT_LIST_FILE}")
 	endif()
 	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
-		message(FATAL_ERROR "ENV{DKSCRIPT_PATH}:$ENV{DKSCRIPT_PATH} not found")
+		message(FATAL_ERROR "ENV{DKSCRIPT_PATH}:'$ENV{DKSCRIPT_PATH}' not found")
 	endif()
 	###### DKSCRIPT_ARGS ######
 	set(ENV{DKSCRIPT_ARGS} ${ARGS})
@@ -229,7 +229,7 @@ function(dk_DKSCRIPT_VARS)
 	get_filename_component(DKSCRIPT_DIR "$ENV{DKSCRIPT_PATH}" DIRECTORY)
 	set(ENV{DKSCRIPT_DIR} "${DKSCRIPT_DIR}")
 	if(NOT EXISTS "$ENV{DKSCRIPT_DIR}")
-		dk_fatal("ENV{DKSCRIPT_DIR}:$ENV{DKSCRIPT_DIR} not found!")
+		dk_fatal("ENV{DKSCRIPT_DIR}:'$ENV{DKSCRIPT_DIR}' not found!")
 	endif()
 	
 	###### DKSCRIPT_NAME ######
