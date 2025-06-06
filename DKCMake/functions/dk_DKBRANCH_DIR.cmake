@@ -20,29 +20,34 @@ function(dk_DKBRANCH_DIR)
 
 	###### SET ######
 	if(ARGV)
-		dk_set(DKBRANCH_DIR "${ARGV}")
+		dk_set(DKBRANCH_DIR "${ARGV0}")
 
 	###### GET ######
+	elseif(DEFINED ENV{DKBRANCH_DIR})	
+		dk_set(DKBRANCH_DIR "$ENV{DKBRANCH_DIR}")
+		
 	else()
-		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-
 		if(NOT DEFINED DKBRANCH)
 			dk_set(DKBRANCH "Development")
 		endif()
+		
+		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
+		
+		# TODO: If the current folder matches the current branch set DKBRANCH, otherwise default to Development
+		# BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
 		if(EXISTS "${DIGITALKNOB_DIR}/${DKBRANCH}/.git")
-			# BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
-			# If the current folder matches the current branch set DKBRANCH, otherwise default to Development
-			dk_dirname(${CMAKE_CURRENT_LIST_DIR} CURRENT_FOLDER)
-			if("${BRANCH}" STREQUAL "${CURRENT_FOLDER}")
-				dk_set(DKBRANCH "${CURRENT_FOLDER}")
+			dk_dirname(${CMAKE_CURRENT_LIST_DIR})
+			dk_basename("${dk_dirname}")
+			if("${BRANCH}" STREQUAL "${dk_basename}")
+				dk_set(DKBRANCH "${dk_basename}")
 			endif()
 		endif()
 	endif()
 
-
 	###### FINALIZE ######
 	### DKBRANCH_DIR ###
-	if(NOT EXISTS "${DKBRANCH_DIR}") 
+	if(NOT EXISTS "${DKBRANCH_DIR}")
+		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 		dk_set(DKBRANCH_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}")
 	endif()
 
@@ -228,10 +233,18 @@ function(DKTEST)
 	dk_echo()
 	dk_echo("Test Getting DKBRANCH_DIR . . .")
 	dk_DKBRANCH_DIR()
-	dk_printVar(DKBRANCH_DIR)
+	if(EXISTS "${DKBRANCH_DIR}")
+		dk_success("DKBRANCH_DIR = ${DKBRANCH_DIR}")
+	else()
+		dk_error("DKBRANCH_DIR:'${DKBRANCH_DIR}' not found")
+	endif()
 	
 	dk_echo()
 	dk_echo("Test Setting DKBRANCH_DIR . . .")
 	dk_DKBRANCH_DIR("C:/DK/Development")
-	dk_printVar(DKBRANCH_DIR)
+	if(EXISTS "${DKBRANCH_DIR}")
+		dk_success("DKBRANCH_DIR = ${DKBRANCH_DIR}")
+	else()
+		dk_error("DKBRANCH_DIR:'${DKBRANCH_DIR}' not found")
+	endif()
 endfunction()
