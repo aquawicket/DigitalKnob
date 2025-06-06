@@ -12,51 +12,48 @@ include_guard()
 #########################################################################
 
 
+dk_DKBRANCH_DIR()
 dk_Target_Tuple()
 
 ### Target_App_Dir ###
-dk_set(Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
+dk_set(Target_App_Dir 		"${CMAKE_CURRENT_LIST_DIR}")
 dk_basename("${Target_App_Dir}")
-dk_set(CURRENT_PLUGIN "${dk_basename}")
-dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
-dk_validate(DKCPP_PLUGINS_DIR "dk_DKBRANCH_DIR()")
-
 
 ### DEPEND ###
 dk_depend(DK)
 
 
 ### TODO: Add Plugins.h file generation ###
-if(DKINCLUDES_LIST)
-	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST})
-endif()
+#if(DKINCLUDES_LIST)
+#	dk_set(DKINCLUDES_LIST 	${DKINCLUDES_LIST})
+#endif()
 if(DKDEFINES_LIST)
-	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
+	dk_set(DKDEFINES_LIST	${DKDEFINES_LIST})
 endif()
 if(DKLINKDIRS_LIST)
-	dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
+	dk_set(DKLINKDIRS_LIST 	${DKLINKDIRS_LIST})
 endif()
 if(LIBS)
-	dk_set(LIBS ${LIBS})
+	dk_set(LIBS 			${LIBS})
 endif()
 if(DEBUG_LIBS)
-	dk_set(DEBUG_LIBS ${DEBUG_LIBS})
+	dk_set(DEBUG_LIBS		${DEBUG_LIBS})
 endif()
 if(RELEASE_LIBS)
-	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
+	dk_set(RELEASE_LIBS 	${RELEASE_LIBS})
 endif()
 if(PLUGINS_FILE)
-	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
+	dk_set(PLUGINS_FILE		${PLUGINS_FILE})
 endif()
 
 
 
-if(PLUGINS_FILE)
+#if(PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
 	dk_fileWrite("${Target_App_Dir}/DKPlugins.h" "${PLUGINS_FILE}")
-endif()
+#endif()
 #if(${CURRENT_PLUGIN} STREQUAL DK OR BUILD_STATIC_LIBS)
 	file(GLOB HEADER_FILES RELATIVE ${DKCPP_PLUGINS_DIR} ${CMAKE_CURRENT_LIST_DIR}/*.h)
 	foreach(header ${HEADER_FILES})
@@ -71,7 +68,9 @@ endif()
 	endforeach()
 #endif()
 
-
+dk_set(CURRENT_PLUGIN		"${dk_basename}")
+dk_set(${CURRENT_PLUGIN}	"${CMAKE_SOURCE_DIR}")
+dk_set(DKCPP_PLUGINS_DIR 	"${DKCPP_PLUGINS_DIR}")
 
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${Target_App_Dir}/CMakeLists.txt)
 
