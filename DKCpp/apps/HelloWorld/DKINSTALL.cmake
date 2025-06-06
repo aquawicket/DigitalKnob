@@ -22,7 +22,7 @@ dk_Target_Type("Debug")
 dk_Target_Tuple()
 
 ### DEPEND ###
-dk_depend(DK)
+#dk_depend(DK)
 
 
 ### TODO: Add Plugins.h file generation ###
