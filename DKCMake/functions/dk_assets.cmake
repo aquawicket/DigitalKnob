@@ -22,9 +22,15 @@ function(dk_assets plugin)
 	dk_debugFunc(1)
 	
 	if(NOT DKAPP)
-		return()
-	endif()	
-	dk_getPathToPlugin(${plugin} Plugin_Path)
+#		return()
+	endif()
+	
+	if(EXISTS "${plugin}")
+		set(Plugin_Path "${plugin}")
+	else()
+		dk_getPathToPlugin(${plugin} Plugin_Path)
+	endif()
+	
 	if(NOT Plugin_Path)
 		dk_fatal("${plugin} plugin not found")
 	endif()

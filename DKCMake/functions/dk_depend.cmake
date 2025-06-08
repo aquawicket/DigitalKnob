@@ -37,6 +37,7 @@ function(dk_depend plugin) #target
 	if((NOT EXISTS "${PLUGIN}") OR (NOT EXISTS "${${PLUGIN}_DIR}"))
 		
 		###### Push Plugin to the PLUGIN_STACK ######
+		message("\n###### ${CURRENT_PLUGIN} -> PUSH: -> ${PLUGIN} ######")
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
 		#############################################
 
@@ -47,6 +48,7 @@ function(dk_depend plugin) #target
 	
 		###### Pop Plugin from the PLUGIN_STACK ######
 		dk_envList(PLUGIN POP)
+		message("\n###### ${CURRENT_PLUGIN} <- POP: <- ${PLUGIN} ######")
 		#############################################
 		
 	else()
