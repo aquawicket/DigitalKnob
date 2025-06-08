@@ -12,55 +12,38 @@ include_guard()
 #########################################################################
 
 
+dk_DKBRANCH_DIR()
 dk_Target_Tuple()
+dk_set(Target_App_Dir 	"${CMAKE_CURRENT_LIST_DIR}")
 
-### DEPEND ###
-dk_depend(DK)
-dk_depend(DKAssets)
-dk_depend(DKDebug)
-dk_depend(DKDuktape)
-#dk_depend(DKDuktapeDom)
-dk_depend(DKFile)
-dk_depend(DKGui)
-dk_depend(DKSDLCef)
-dk_depend(DKSDLText)
-dk_depend(DKSDLWindow)
-dk_depend(DKWindow)
-
-
-if(DKDEFINES_LIST)
-	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})
-endif()
-if(DKLINKDIRS_LIST)
-	dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST})
-endif()
-if(LIBS)
-	dk_set(LIBS ${LIBS})
-endif()
-if(DEBUG_LIBS)
-	dk_set(DEBUG_LIBS ${DEBUG_LIBS})
-endif()
-if(RELEASE_LIBS)
-	dk_set(RELEASE_LIBS ${RELEASE_LIBS})
+if(EXISTS "${Target_App_Dir}/depends.cmake")
+	include("${Target_App_Dir}/depends.cmake")
 endif()
 
+###### Plugins.h file ######
 if(PLUGINS_FILE)
-	dk_set(PLUGINS_FILE ${PLUGINS_FILE})
-	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  PLUGINS_FILE)
-	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 PLUGINS_FILE)
-	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  			PLUGINS_FILE)
-	dk_fileWrite("${CMAKE_CURRENT_LIST_DIR}/DKPlugins.h" "${PLUGINS_FILE}")
+	dk_set(PLUGINS_FILE		${PLUGINS_FILE})
+	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  	PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 		PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  					PLUGINS_FILE)
 endif()
+dk_fileWrite("${Target_App_Dir}/DKPlugins.h" "${PLUGINS_FILE}")
 
-### CURRENT_PLUGIN ###
-dk_basename("${CMAKE_CURRENT_LIST_DIR}")
-dk_set(CURRENT_PLUGIN "${dk_basename}")
-dk_set(${CURRENT_PLUGIN} 	${CMAKE_SOURCE_DIR})
+dk_set(DKCPP_PLUGINS_DIR 	"${DKCPP_PLUGINS_DIR}")
+file(GLOB HEADER_FILES RELATIVE ${DKCPP_PLUGINS_DIR} ${CMAKE_CURRENT_LIST_DIR}/*.h)
+foreach(header ${HEADER_FILES})
+	if(NOT PLUGINS_FILE MATCHES "${header}")
+		dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
+	endif()
+endforeach()
+############################
 
-dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt)
+dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${Target_App_Dir}/CMakeLists.txt)
 
+dk_basename("${Target_App_Dir}")
+dk_set(CURRENT_PLUGIN		"${dk_basename}")
+dk_set(${CURRENT_PLUGIN}	"${CMAKE_SOURCE_DIR}")
 
 dk_define(DKAPP)
-dk_configure(${CMAKE_CURRENT_LIST_DIR})
-
-dk_build(${CMAKE_CURRENT_LIST_DIR})
+dk_configure(${Target_App_Dir})
+dk_build(${Target_App_Dir})

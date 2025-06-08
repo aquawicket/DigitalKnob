@@ -16,7 +16,9 @@ dk_DKBRANCH_DIR()
 dk_Target_Tuple()
 dk_set(Target_App_Dir 	"${CMAKE_CURRENT_LIST_DIR}")
 
-include("${Target_App_Dir}/depends.cmake")
+if(EXISTS "${Target_App_Dir}/depends.cmake")
+	include("${Target_App_Dir}/depends.cmake")
+endif()
 
 ###### Plugins.h file ######
 if(PLUGINS_FILE)
