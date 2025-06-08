@@ -14,70 +14,34 @@ include_guard()
 
 dk_DKBRANCH_DIR()
 dk_Target_Tuple()
+dk_set(Target_App_Dir 	"${CMAKE_CURRENT_LIST_DIR}")
 
-### Target_App_Dir ###
-dk_set(Target_App_Dir 		"${CMAKE_CURRENT_LIST_DIR}")
-dk_basename("${Target_App_Dir}")
+include("${Target_App_Dir}/depends.cmake")
 
-### DEPEND ###
-dk_depend(DK)
-dk_depend(DKDuktape)
-#dk_depend(DKDuktapeDom)
-dk_depend(DKAssets)
-dk_depend(DKFile)
-dk_depend(DKSDLText)
-dk_depend(DKSDLWindow)
-dk_depend(DKWindow)
-
-
-
-#if(DKDEFINES_LIST)
-#	dk_set(DKDEFINES_LIST	${DKDEFINES_LIST})
-#endif()
-#if(DKLINKDIRS_LIST)
-#	dk_set(DKLINKDIRS_LIST 	${DKLINKDIRS_LIST})
-#endif()
-#if(LIBS)
-#	dk_set(LIBS 			${LIBS})
-#endif()
-#if(DEBUG_LIBS)
-#	dk_set(DEBUG_LIBS		${DEBUG_LIBS})
-#endif()
-#if(RELEASE_LIBS)
-#	dk_set(RELEASE_LIBS 	${RELEASE_LIBS})
-#endif()
+###### Plugins.h file ######
 if(PLUGINS_FILE)
 	dk_set(PLUGINS_FILE		${PLUGINS_FILE})
-endif()
-
-#if(PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  	PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 		PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  					PLUGINS_FILE)
-	dk_fileWrite("${Target_App_Dir}/DKPlugins.h" "${PLUGINS_FILE}")
-#endif()
-#if(${CURRENT_PLUGIN} STREQUAL DK OR BUILD_STATIC_LIBS)
-	file(GLOB HEADER_FILES RELATIVE ${DKCPP_PLUGINS_DIR} ${CMAKE_CURRENT_LIST_DIR}/*.h)
-	foreach(header ${HEADER_FILES})
-		if(NOT PLUGINS_FILE MATCHES "${header}")
-			dk_info("Adding ${header} to header file.")
-			dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
-		endif()
-		#if(NOT PLUGINS_FILE MATCHES "DKHAVE_${plugin_name}")
-		#	dk_info("Adding #define DKHAVE_${plugin_name} 1 to header file.")
-		#	dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#define DKHAVE_${plugin_name} 1\\n")
-		#endif()
-	endforeach()
-#endif()
+endif()
+dk_fileWrite("${Target_App_Dir}/DKPlugins.h" "${PLUGINS_FILE}")
 
-dk_set(CURRENT_PLUGIN		"${dk_basename}")
-dk_set(${CURRENT_PLUGIN}	"${CMAKE_SOURCE_DIR}")
 dk_set(DKCPP_PLUGINS_DIR 	"${DKCPP_PLUGINS_DIR}")
+file(GLOB HEADER_FILES RELATIVE ${DKCPP_PLUGINS_DIR} ${CMAKE_CURRENT_LIST_DIR}/*.h)
+foreach(header ${HEADER_FILES})
+	if(NOT PLUGINS_FILE MATCHES "${header}")
+		dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
+	endif()
+endforeach()
+############################
 
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${Target_App_Dir}/CMakeLists.txt)
 
+dk_basename("${Target_App_Dir}")
+dk_set(CURRENT_PLUGIN		"${dk_basename}")
+dk_set(${CURRENT_PLUGIN}	"${CMAKE_SOURCE_DIR}")
+
 dk_define(DKAPP)
-
 dk_configure(${Target_App_Dir})
-
 dk_build(${Target_App_Dir})

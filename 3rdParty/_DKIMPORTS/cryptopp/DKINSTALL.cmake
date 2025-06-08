@@ -25,7 +25,7 @@ endif()
 
 
 ### IMPORT ###
-if(Uniix)
+if(Unix)
 	dk_import	(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
 elseif(MINGW)
 	dk_import	(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)

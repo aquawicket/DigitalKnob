@@ -83,33 +83,50 @@ function(dk_Target_Os)
 	############
 	
 	
+	##### FINALIZE ######
 	dk_assertVar(Target_Os)
 	dk_set(${Target_Os} 1)
 	
-	###### VALIDATE RESULT ######
+	###### Set Platform and Vender variables
 	if(Android)
-		dk_set(Uniix 1)
+		dk_set(Unix 1)
 		dk_set(Google 1)
 	elseif(Emscripten)
-		dk_set(Uniix 1)
+		dk_set(Unix 1)
 	elseif(Ios)
-		dk_set(Uniix 1)
+		dk_set(Unix 1)
 		dk_set(Apple 1)
 	elseif(Iossim)
-		dk_set(Uniix 1)
+		dk_set(Unix 1)
 		dk_set(Apple 1)
 	elseif(Linux)
-		dk_set(Uniix 1)
+		dk_set(Unix 1)
 	elseif(Mac)
-		dk_set(Uniix 1)
+		dk_set(Unix 1)
 		dk_set(Apple 1)
 	elseif(Raspberry)
-		dk_set(Uniix 1)
+		dk_set(Unix 1)
 	elseif(Windows)
 		dk_set(Microsoft 1)
 	else()
 		dk_fatal("Target_Os:'${Target_Os}' is INVALID!")
 	endif()
+	
+	
+	### Set Debug_Dir and Release_Dir variables
+	if(Ios)
+		dk_set(Debug_Dir Debug-iphoneos)
+		dk_set(Release_Dir Release-iphoneos)
+	elseif(Iossim)
+		dk_set(Debug_Dir Debug-iphonesimulator)
+		dk_set(Release_Dir Release-iphonesimulator)
+	else()
+		dk_set(Debug_Dir Debug)
+		dk_set(Release_Dir Release)
+	endif()
+	dk_assertVar(Debug_Dir)
+	dk_assertVar(Release_Dir)
+	
 endfunction()
 
 

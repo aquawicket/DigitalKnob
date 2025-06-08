@@ -43,8 +43,8 @@ function(dk_Target_Tuple)
 		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}")
 		dk_set(${Target_Tuple} 1)
 		
-			### VALIDATE RESULT ###
-			if(Android_Arm32)
+		### VALIDATE RESULT ###
+		if	  (Android_Arm32)
 		elseif(Android_Arm64)
 		elseif(Android_X86_64)
 		elseif(Android_X86)
@@ -149,22 +149,6 @@ function(dk_Target_Tuple)
 	dk_assertVar(Target_Tuple)
 	dk_assertVar(${Target_Tuple})
 	
-	
-	### Set Debug_Dir and Release_Dir variables
-	if(Ios)
-		dk_set(Debug_Dir Debug-iphoneos)
-		dk_set(Release_Dir Release-iphoneos)
-	elseif(Iossim)
-		dk_set(Debug_Dir Debug-iphonesimulator)
-		dk_set(Release_Dir Release-iphonesimulator)
-	else()
-		dk_set(Debug_Dir Debug)
-		dk_set(Release_Dir Release)
-	endif()
-	dk_assertVar(Debug_Dir)
-	dk_assertVar(Release_Dir)
-	#dk_printVar(Debug_Dir)
-	#dk_printVar(Release_Dir)
 endfunction()
 
 

@@ -28,8 +28,8 @@ dk_import(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz PATCH)
 
 
 ### LINK ###
-dk_include				(${LIBICONV_DIR})
-dk_include				(${LIBICONV_DIR}/include 				LIBICONV_INCLUDE_DIR)
+dk_include				(${LIBICONV})
+dk_include				(${LIBICONV}/include 				LIBICONV_INCLUDE_DIR)
 dk_include				(${LIBICONV_CONFIG_DIR})
 if(Debug)
 	dk_include			(${LIBICONV_DEBUG_DIR})
@@ -106,8 +106,8 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${LIBICONV_DIR})
+dk_configure(${LIBICONV})
 
 
 ### COMPILE ###
-dk_build(${LIBICONV_DIR} iconv)
+dk_build(${LIBICONV} iconv)
