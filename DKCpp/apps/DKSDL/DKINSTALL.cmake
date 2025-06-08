@@ -50,8 +50,6 @@ if(PLUGINS_FILE)
 	dk_set(PLUGINS_FILE		${PLUGINS_FILE})
 endif()
 
-
-
 #if(PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  	PLUGINS_FILE)
 	dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 		PLUGINS_FILE)
