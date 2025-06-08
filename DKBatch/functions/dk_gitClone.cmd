@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-
+::set "dk_gitClone_BACKUP=1"
 ::################################################################################
 ::# dk_gitClone(url, branch, dirctory)
 ::#
@@ -22,8 +22,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist "%DKBRANCH_DIR%/.git" (%dk_call% dk_error "'%DKBRANCH_DIR%/.git' repository already exists" & %return%)
 		
 	::###### backup if local path already exists and is not empty
-	%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" || (%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE)
-	if not exist ("%DKBRANCH_DIR%_BACKUP" %dk_call% dk_fatal "dk_copy failed")
+	if "%dk_gitClone_BACKUP%" equ "1" (
+		%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" || (%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE)
+		if not exist ("%DKBRANCH_DIR%_BACKUP" %dk_call% dk_fatal "dk_copy failed")
+	) else (
+		%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" || (%dk_call% dk_delete "%DKBRANCH_DIR%")
+	)
 	
 	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	
