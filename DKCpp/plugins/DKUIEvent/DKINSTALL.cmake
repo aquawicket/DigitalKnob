@@ -20,7 +20,7 @@ dk_depend(DKEvent)
 ############ DKUIEvent ############
 dk_set(CURRENT_PLUGIN "DKUIEvent")
 dk_generateCmake(${CURRENT_PLUGIN})
-dk_assets(${CURRENT_PLUGIN})
+dk_assets("${CMAKE_CURRENT_LIST_DIR}")
 dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
 dk_configure(${CMAKE_CURRENT_LIST_DIR})
 dk_build(${CMAKE_CURRENT_LIST_DIR})
