@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-
+::dk_gitUpdate_BACKUP=1
 ::################################################################################
 ::# dk_gitUpdate(url, branch, NO_CONFIRM)
 ::#
@@ -25,15 +25,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     if NOT exist "%DKBRANCH_DIR%/.git" (
 		
-		rem NOTE: 	This must cloan and update within the parentheses. rd /s /q "%DKBRANCH_DIR%" removes the current DigitalKnob
+		rem NOTE: 	This must clone and update within the parentheses. rd /s /q "%DKBRANCH_DIR%" removes the current DigitalKnob
 		rem			folder, leaving the current running batch process abandoned until it's cloned again. It seems like when we are
 		rem 		in the scope of called batch files, we loose all references to those deleted file once we leave the parentheses.
 		rem         This includes variables, functions, etc. So to fix this, after we delete the very files our context is running
 		rem			from, we must stay in parentheses until those files are restored and updated, or we will lose the context.
 		rem ####################################################################		
 		if exist "%DKBRANCH_DIR%" (
+		
 			rem ###### Backup Branch directory and clone ######
-			%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
+			if "%dk_gitUpdate_BACKUP%" equ "1" (
+				%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
+			)
 			set "PATH=%DKBRANCH_DIR%_BACKUP/DKBatch/functions;%PATH%"
 			rd /s /q "%DKBRANCH_DIR%"
 			"%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%"
