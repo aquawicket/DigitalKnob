@@ -11,7 +11,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-
 dk_validate(Target_Config  "dk_Target_Config()")
 
 
@@ -24,8 +23,8 @@ dk_import(https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
 
 
 ### PATCH FILES ###
-dk_fileReplace			("${TIDY_HTML5_DIR}/CMakeLists.txt" "add_definitions ( -DLIBTIDY_VERSION" 	"#add_definitions ( -DLIBTIDY_VERSION")
-dk_fileReplace			("${TIDY_HTML5_DIR}/CMakeLists.txt" "add_definitions ( -DRELEASE_DATE"    	"#add_definitions ( -DRELEASE_DATE")
+dk_fileReplace			("${TIDY_HTML5}/CMakeLists.txt" "add_definitions ( -DLIBTIDY_VERSION" 	"#add_definitions ( -DLIBTIDY_VERSION")
+dk_fileReplace			("${TIDY_HTML5}/CMakeLists.txt" "add_definitions ( -DRELEASE_DATE"    	"#add_definitions ( -DRELEASE_DATE")
 
 ### LINK ###
 if(Emscripten)
@@ -38,7 +37,7 @@ dk_include				(${TIDY_HTML5_CONFIG_DIR})
 if(MSVC AND Windows)
 	dk_libDebug			(${TIDY_HTML5_DEBUG_DIR}/tidy_staticd.lib)
 	dk_libRelease		(${TIDY_HTML5_RELEASE_DIR}/tidy_static.lib)
-elseif(MINGW AND Windows)
+elseif(Windows) # AND MINGW
 	dk_libDebug			(${TIDY_HTML5_DEBUG_DIR}/libtidy_static.a)
 	dk_libRelease		(${TIDY_HTML5_RELEASE_DIR}/libtidy_static.a)
 else()
@@ -49,9 +48,9 @@ endif()
 
 ### GENERATE ###
 if(Emscripten) 
-	dk_configure		(${TIDY_HTML5_DIR} ${ZLIB_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0") # -DBUILD_SHARED_LIB=OFF 
+	dk_configure		(${TIDY_HTML5_DIR} ${ZLIB_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0")
 else()
-	dk_configure		(${TIDY_HTML5_DIR} ${ZLIB_CMAKE}) # -DBUILD_SHARED_LIB=OFF
+	dk_configure		(${TIDY_HTML5_DIR} ${ZLIB_CMAKE})
 endif()
 
 

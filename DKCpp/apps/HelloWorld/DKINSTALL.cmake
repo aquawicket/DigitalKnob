@@ -20,7 +20,7 @@ if(EXISTS "${Target_App_Dir}/depends.cmake")
 	include("${Target_App_Dir}/depends.cmake")
 endif()
 
-###### Plugins.h file ######
+############ Plugins.h file ############
 if(PLUGINS_FILE)
 	dk_set(PLUGINS_FILE		${PLUGINS_FILE})
 	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  	PLUGINS_FILE)
@@ -36,7 +36,7 @@ foreach(header ${HEADER_FILES})
 		dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
 	endif()
 endforeach()
-############################
+########################################
 
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${Target_App_Dir}/CMakeLists.txt)
 

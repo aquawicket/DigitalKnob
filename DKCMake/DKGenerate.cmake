@@ -446,7 +446,7 @@ if(SRC_EXCLUDE)
 	endforeach()
 endif()
 
-add_definitions(-DDKAPP)
+dk_define(-DDKAPP)
 include_directories(${Target_App_Dir})
 include_directories(${DKCPP_PLUGINS_DIR})
 

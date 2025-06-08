@@ -14,14 +14,14 @@ include_guard()
 
 ############ libbcrypt ############
 dk_validate(Target_Config  "dk_Target_Config()")
-if(NOT win)
+if(NOT Windows)
 	dk_undepend(libbcrypt)
 	dk_disable(libbcrypt)
 	dk_return()
 endif()
 
 
-if(Windows_Arm_msvc)
+if(Windows_Arm_Msvc)
 	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/arm/bcrypt.lib")
 elseif(Windows_Arm64_Clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")

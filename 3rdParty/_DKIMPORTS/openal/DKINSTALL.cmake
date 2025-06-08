@@ -33,28 +33,37 @@ endif()
 
 ### LINK ###
 dk_define					(AL_LIBTYPE_STATIC)
-dk_include					(${OPENAL_DIR}/include)
-dk_include					(${OPENAL_DIR}/include/AL									OPENAL_INCLUDE_DIR)
-ANDROID_Debug_dk_include	(${OPENAL_DEBUG_DIR}/jni)
-Android_Release_dk_include	(${OPENAL_RELEASE_DIR}/jni)
-file(REMOVE ${OPENAL_INCLUDE_DIR}/stdint.h)
-file(REMOVE ${OPENAL_INCLUDE_DIR}/inttypes.h)
-#Android_dk_libDebug		(${OPENAL_DEBUG_DIR}/libopenal.a							OPENAL_LIBRARY_DEBUG)
-#Android_dk_libRelease		(${OPENAL_RELEASE_DIR}/libopenal.a							OPENAL_LIBRARY_RELEASE)
-Android_dk_libDebug			(${OPENAL_DEBUG_DIR}/obj/local/armeabi-v7a/libopenal.a		OPENAL_LIBRARY_DEBUG)
-Android_dk_libRelease		(${OPENAL_RELEASE_DIR}/obj/local/armeabi-v7a/libopenal.a	OPENAL_LIBRARY_RELEASE)
-Apple_dk_libDebug			(${OPENAL_DEBUG_DIR}/libopenal.a							OPENAL_LIBRARY_DEBUG)
-Apple_dk_libRelease			(${OPENAL_RELEASE_DIR}/libopenal.a							OPENAL_LIBRARY_RELEASE)
-Emscripten_dk_libDebug		(${OPENAL_DEBUG_DIR}/libopenal.a							OPENAL_LIBRARY_DEBUG)
-Emscripten_dk_libRelease	(${OPENAL_RELEASE_DIR}/libopenal.a							OPENAL_LIBRARY_RELEASE)
-Linux_dk_libDebug			(${OPENAL_DEBUG_DIR}/libopenal.a							OPENAL_LIBRARY_DEBUG)
-Linux_dk_libRelease			(${OPENAL_RELEASE_DIR}/libopenal.a							OPENAL_LIBRARY_RELEASE)
-Raspberry_dk_libDebug		(${OPENAL_DEBUG_DIR}/libopenal.a							OPENAL_LIBRARY_DEBUG)
-Raspberry_dk_libRelease		(${OPENAL_RELEASE_DIR}/libopenal.a							OPENAL_LIBRARY_RELEASE)
-Windows_dk_libDebug				(${OPENAL_DEBUG_DIR}/OpenAL32.lib							OPENAL_LIBRARY_DEBUG)
-Windows_dk_libRelease			(${OPENAL_RELEASE_DIR}/OpenAL32.lib							OPENAL_LIBRARY_RELEASE)
-Debug_dk_set				(OPENAL_LIBRARY												${OPENAL_LIBRARY_DEBUG})
-Release_dk_set				(OPENAL_LIBRARY												${OPENAL_LIBRARY_RELEASE})
+dk_include					(${OPENAL}/include)
+dk_include					(${OPENAL}/include/AL										OPENAL_INCLUDE_DIR)
+if(Android AND Debug)
+	dk_include				(${OPENAL_DEBUG_DIR}/jni)
+endif()
+if(Android AND Release)	
+	dk_include				(${OPENAL_RELEASE_DIR}/jni)
+endif()
+#dk_rename("${OPENAL_INCLUDE_DIR}/stdint.h" "${OPENAL_INCLUDE_DIR}/stdint.h_BACKUP")
+#dk_rename("${OPENAL_INCLUDE_DIR}/inttypes.h" "${OPENAL_INCLUDE_DIR}/inttypes.h_BACKUP")
+
+
+if(Android AND Debug)
+	dk_libDebug				("${OPENAL_DEBUG_DIR}/obj/local/armeabi-v7a/libopenal.a"	OPENAL_LIBRARY_DEBUG)
+elseif(Android AND Release)
+	dk_libRelease			("${OPENAL_RELEASE_DIR}/obj/local/armeabi-v7a/libopenal.a"	OPENAL_LIBRARY_RELEASE)
+elseif(Windows AND Debug)
+	dk_libDebug				("${OPENAL_DEBUG_DIR}/OpenAL32.lib"							OPENAL_LIBRARY_DEBUG)
+elseif(Windows AND Release)
+	dk_libRelease			("${OPENAL_RELEASE_DIR}/OpenAL32.lib"						OPENAL_LIBRARY_RELEASE)
+elseif(Debug)
+	dk_libDebug				("${OPENAL_DEBUG_DIR}/libopenal.a"							OPENAL_LIBRARY_DEBUG)
+elseif(Release)
+	dk_libRelease			("${OPENAL_RELEASE_DIR}/libopenal.a"						OPENAL_LIBRARY_RELEASE)
+endif()
+
+if(Debug)
+	dk_set(OPENAL_LIBRARY	${OPENAL_LIBRARY_DEBUG})
+elseif(Release)
+	dk_set(OPENAL_LIBRARY	${OPENAL_LIBRARY_RELEASE})
+endif()
 
 ### 3RDPARTY LINK ###
 dk_set(OPENAL_CMAKE
@@ -63,23 +72,23 @@ dk_set(OPENAL_CMAKE
 	-DOPENAL_LIBRARY_DEBUG=${OPENAL_LIBRARY_DEBUG}
 	-DOPENAL_LIBRARY_RELEASE=${OPENAL_LIBRARY_RELEASE})
 if(MSVC)
-dk_append(OPENAL_CMAKE
-	"-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL_INCLUDE_DIR}"
-	"-DCMAKE_CXX_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL_INCLUDE_DIR}")
+	dk_append(OPENAL_CMAKE
+		"-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL_INCLUDE_DIR}"
+		"-DCMAKE_CXX_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL_INCLUDE_DIR}")
 else()
-dk_append(OPENAL_CMAKE
-	"-DCMAKE_C_FLAGS=-DAL_LIBTYPE_STATIC -I${OPENAL_INCLUDE_DIR}"
-	"-DCMAKE_CXX_FLAGS=-DAL_LIBTYPE_STATIC -I${OPENAL_INCLUDE_DIR}")
+	dk_append(OPENAL_CMAKE
+		"-DCMAKE_C_FLAGS=-DAL_LIBTYPE_STATIC -I${OPENAL_INCLUDE_DIR}"
+		"-DCMAKE_CXX_FLAGS=-DAL_LIBTYPE_STATIC -I${OPENAL_INCLUDE_DIR}")
 endif()	
 
 
 
 ### GENERATE ###
-if(Unix)
+#if(Unix)
 	dk_configure(${OPENAL_DIR} -DLIBTYPE=STATIC -DEXAMPLES=OFF ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-elseif(Windows)
-	dk_configure(${OPENAL_DIR} -DLIBTYPE=STATIC -DEXAMPLES=OFF ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DFORCE_STATIC_VCRT=ON "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC")
-endif()
+#elseif(Windows)
+#	dk_configure(${OPENAL_DIR} -DLIBTYPE=STATIC -DEXAMPLES=OFF ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DFORCE_STATIC_VCRT=ON "-DCMAKE_C_FLAGS=-DAL_LIBTYPE_STATIC")
+#endif()
 
 
 ### COMPILE ###

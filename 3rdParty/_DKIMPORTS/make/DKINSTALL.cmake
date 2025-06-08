@@ -23,7 +23,13 @@ endif()
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 
-if(Cosmopolitan)
+if(Android)
+	if(Windows_Host)
+		dk_depend(android-ndk)
+		dk_set(CMAKE_MAKE_PROGRAM	"${ANDROID_NDK}/prebuilt/${Android_Host_Tag}/bin/make.exe")
+	endif()
+	
+elseif(Cosmopolitan)
 	if(Windows_Host)
 		dk_depend(msys2)
 		dk_installPackage(make)
