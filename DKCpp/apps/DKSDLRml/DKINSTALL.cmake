@@ -20,15 +20,15 @@ dk_set(Target_App_Dir 		"${CMAKE_CURRENT_LIST_DIR}")
 dk_basename("${Target_App_Dir}")
 
 ### DEPEND ###
-dk_depend(imagemagick)
-dk_depend(sdl)	#FIX for DK/DKAndroid.cpp, line:35
+#dk_depend(imagemagick)
+#dk_depend(sdl)	#FIX for DK/DKAndroid.cpp, line:35
 dk_depend(DK)
+dk_depend(DKDuktape)
+dk_depend(DKDuktapeDebugger)
 dk_depend(DKArchive)
 dk_depend(DKAssets)
 dk_depend(DKDebug)
 dk_depend(DKDom)
-dk_depend(DKDuktape)
-dk_depend(DKDuktapeDebugger)
 #dk_depend(DKRmlAudio)
 #dk_depend(DKRmlTestElements)
 dk_depend(DKRmlVideo)
