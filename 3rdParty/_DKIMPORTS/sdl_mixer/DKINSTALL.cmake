@@ -21,14 +21,17 @@ dk_validate(Target_Config  "dk_Target_Config()")
 ### DEPEND ###
 dk_depend(flac)
 dk_depend(ogg)
-dk_depend(opus)
+#dk_depend(opus)
+set(OPUS OFF)
 dk_depend(smpeg2)
 dk_depend(vorbis)
-dk_depend(wavpack)
+#dk_depend(wavpack)
+set(WAVPACK OFF)
 
 ### IMPORT ###
 #dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.2.zip PATCH)
-dk_import(https://github.com/libsdl-org/SDL_mixer/archive/a90b86e.zip PATCH) 		# SDL2
+#dk_import(https://github.com/libsdl-org/SDL_mixer/archive/a90b86e.zip PATCH) 		# SDL2
+dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/heads/SDL2.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_mixer/archive/497f149.zip PATCH) 		# SDL3
 
 ### LINK ###
@@ -75,7 +78,7 @@ dk_configure(${SDL_MIXER_DIR}
 	-DSDL2MIXER_MIDI_NATIVE=OFF					# "Support native MIDI output" ON SDL2MIXER_MIDI OFF
 	-DSDL2MIXER_MIDI_TIMIDITY=OFF				# "Support timidity MIDI output" ON SDL2MIXER_MIDI OFF
 	-DSDL2MIXER_OPUS=${OPUS}					# "Enable Opus music" ON
-	-DSDL2MIXER_OPUS_SHARED=OFF					# "Dynamically load libopus" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_OPUS OFF
+#	-DSDL2MIXER_OPUS_SHARED=OFF					# "Dynamically load libopus" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_OPUS OFF
 	-DSDL2MIXER_VORBIS_TREMOR_SHARED=OFF 		# "Dynamically load tremor library" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_VORBIS_TREMOR OFF
 	-DSDL2MIXER_VORBIS_VORBISFILE_SHARED=OFF	# "Dynamically load vorbisfile library" "${SDL2MIXER_DEPS_SHARED}" SDL2MIXER_VORBIS_VORBISFILE OFF
 	-DSDL2MIXER_WAVE=${WAVPACK}					# "Enable streaming WAVE music" ON

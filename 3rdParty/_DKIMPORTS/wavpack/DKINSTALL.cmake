@@ -17,23 +17,40 @@ include_guard()
 
 
 ### INSTALL ###
-dk_import(https://github.com/dbry/WavPack/archive/d9c4a35.zip)
+#dk_import(https://github.com/dbry/WavPack/archive/d9c4a35.zip)
+dk_import(https://github.com/dbry/WavPack/archive/2fbee4e.zip)
 
 
 ### LINK ###
-dk_include			(${WAVPACK}/include)
-dk_validate(Target_Tuple "dk_Target_Tuple()")
+dk_include			(${WAVPACK}/include						WAVPACK_INCLUDE_DIR)
+dk_validate			(Target_Tuple "dk_Target_Tuple()")
 if(MSVC AND Windows)
-	dk_libDebug		(${WAVPACK_DEBUG_DIR}/wavpack.lib)
-	dk_libRelease	(${WAVPACK_RELEASE_DIR}/wavpack.lib)
+	dk_libDebug		(${WAVPACK_DEBUG_DIR}/wavpack.lib		WAVPACK_LIBRARY_DEBUG)
+	dk_libRelease	(${WAVPACK_RELEASE_DIR}/wavpack.lib		WAVPACK_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${WAVPACK_DEBUG_DIR}/libwavpack.a)
-	dk_libRelease	(${WAVPACK_RELEASE_DIR}/libwavpack.a)
+	dk_libDebug		(${WAVPACK_DEBUG_DIR}/libwavpack.a		WAVPACK_LIBRARY_DEBUG)
+	dk_libRelease	(${WAVPACK_RELEASE_DIR}/libwavpack.a	WAVPACK_LIBRARY_RELEASE)
+endif()
+set(wavpack_INCLUDE_PATH ${WAVPACK_INCLUDE_DIR})
+if(Debug)
+	set(wavpack_LIBRARY	${WAVPACK_LIBRARY_DEBUG})
+elseif(Release)
+	set(wavpack_LIBRARY	${WAVPACK_LIBRARY_RELEASE})
 endif()
 
+
+
+### 3rd Party Link ###
+dk_set(WAVPACK_CMAKE
+	-Dwavpack_INCLUDE_PATH=${wavpack_INCLUDE_PATH}
+	-Dwavpack_LIBRARY=${wavpack_LIBRARY}
+)
+	
+	
+	
 ### GENERATE ###
 dk_configure(${WAVPACK})
 
 
 ### COMPILE ###
-dk_build(${WAVPACK} wavpack)
+dk_build(${WAVPACK})
