@@ -15,7 +15,7 @@ include_guard()
 #if(NOT DEFINED dk_findProgram_DEBUG)
 #	dk_set(dk_findProgram_DEBUG 1)
 #endif()
-###############################################################################
+#########################################################################
 # dk_findProgram (<VAR> filename [path1 path2 ...])
 #
 #	TODO

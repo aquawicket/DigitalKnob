@@ -6,7 +6,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
-################################################################################
+#########################################################################
 # Array::dk_arrayConcat(array, {value1, value2, /* …, */ valueN})
 #
 #	 Merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.

@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_assertVar(variable)
 #
 #	If the variable compares equal to false (i.e., the variable is false), a error message is written and abort is called, terminating the scripts execution.

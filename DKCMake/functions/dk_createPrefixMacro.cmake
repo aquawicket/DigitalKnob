@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_createPrefixMacro(func prefix_list)
 #
 #	Prefix a function with <prefix_list>_ macros. Calling the <prefix>_function will only be called if the <prefix_list> are variable that evaluate to true.

@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_append(<variable> <value>)
 #
 #	<variable>	- The name of a variable. It will be created if it doesn't exist.

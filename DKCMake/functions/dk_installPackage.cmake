@@ -14,7 +14,7 @@ include_guard()
 # https://en.wikipedia.org/wiki/Package_manager
 # https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 
-###############################################################################
+#########################################################################
 # dk_installPackage(package)
 #
 function(dk_installPackage)

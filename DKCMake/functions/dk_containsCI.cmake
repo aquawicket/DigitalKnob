@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_containsCI(variable find)
 #
 #	Check if a string contains a substring (Case Insensitive)

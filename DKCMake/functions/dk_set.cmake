@@ -14,7 +14,7 @@ include_guard()
 #if(NOT DEFINED dk_set_DEBUG)
 #	set(dk_set_DEBUG 1)
 #endif()
-###############################################################################
+#########################################################################
 # dk_set(variable value)
 #	
 #	https://stackoverflow.com/a/29250496/688352

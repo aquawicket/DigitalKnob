@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_pathContains(expression rtn_var)
 #
 #	@expression	- The search expression to use. Example: "${path}/subfolder/*.exe"

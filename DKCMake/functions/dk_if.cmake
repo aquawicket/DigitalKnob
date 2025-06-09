@@ -3,7 +3,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
 #include_guard()
 
-###############################################################################
+#########################################################################
 # dk_if(condition... "code")
 #
 #	@condition  - The input args to be evaluated

@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_appendEnvPath(<inputPath>)
 #
 #	<inputPath>	- The CMake / style full path to append the the Environment Path variable

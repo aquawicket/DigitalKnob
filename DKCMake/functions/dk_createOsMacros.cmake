@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_createOsMacros(func)
 #
 #	Prefix a function with <OS>_ macros. Calling the <OS>_function will only be called if the current <OS> or <OS_HOST> is true

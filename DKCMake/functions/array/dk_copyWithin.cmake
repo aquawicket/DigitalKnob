@@ -6,7 +6,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
-################################################################################
+#########################################################################
 # dk_arrayCopyWithin(array, target, start)
 # dk_arrayCopyWithin(array, target, start, end)
 #

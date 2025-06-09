@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_runDepends(plugin)
 #
 #	Strip everything from the library's DKINSTALL.cmake file except dk_depend() commands AND conditionals.

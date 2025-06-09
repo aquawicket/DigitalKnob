@@ -2,7 +2,7 @@
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #include_guard()
 
-###############################################################################
+#########################################################################
 # dk_wrapString()
 #
 #	Function to wrap a given string into multiple lines at the given column position.

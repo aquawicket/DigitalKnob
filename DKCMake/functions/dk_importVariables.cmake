@@ -15,7 +15,7 @@ include_guard()
 #if(NOT DEFINED dk_importVariables_DEBUG)
 #	set(dk_importVariables_DEBUG 1)
 #endif()
-#################################################################################
+#########################################################################
 # dk_importVariables(PLUGIN_URL) BRANCH FOLDER NAME _PATH_ ROOT TAG VERSION
 #
 #	PLUGIN_URL (arg0)					###### EXAMPLES ######

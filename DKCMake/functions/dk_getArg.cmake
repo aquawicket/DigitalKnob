@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##############################################################################
+
+#########################################################################
 # dk_getArg(arg_num, var_name, default)
 #
 #	Get a variable within a function by its position.

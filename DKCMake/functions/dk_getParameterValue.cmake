@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_getParameterValue(name)
 #
 #	TODO: change to dk_getParameterValue(name output ${ARGV}) so we can choose the variable to recieve the option in

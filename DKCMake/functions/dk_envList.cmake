@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-###############################################################################
+#########################################################################
 # dk_envList(<name> PUSH value)
 # dk_envList(<name> POP)
 #
@@ -24,41 +24,33 @@ function(dk_envList)
 
 	set(NAME "${ARGV0}")
 	set(CMND "${ARGV1}")
-	set(VALUE "${ARGV2}")
+	set(_CURRENT_ "${ARGV2}")
 	
-	# set the CURRENT_<THING>  and push it to the list.
+	# copy the env variable to local variable
+	set(_STACK_ "$ENV{${NAME}_STACK}")  
+	
+	# set the _CURRENT_ item and push it to the local _STACK_ list.
 	if("${CMND}" STREQUAL "PUSH")
-		#dk_notice("###### dk_envList PUSH ${VALUE} ######")
-		set(ENV{CURRENT_${NAME}} "${VALUE}")
-		set(ENV{${NAME}_STACK} "$ENV{CURRENT_${NAME}};$ENV{${NAME}_STACK}")
-		set(${NAME}_list $ENV{${NAME}_STACK})
-		list(LENGTH ${NAME}_list ${NAME}_length)
-		#set(ENV{${NAME}_STACK_LENGTH} ${${NAME}_length})
-		#dk_notice("TOP=$ENV{CURRENT_${NAME}}       STACK=$ENV{${NAME}_STACK}     LENGTH=${${NAME}_length}")
+		set(_STACK_ "${_CURRENT_};${_STACK_}")	
+		#list(PREPEND _STACK_ "${_CURRENT_}")	# prepend the local variable
 	endif()
 
 	# Pop the CURRENT_<THING> and drop it fom the list. Update CURRENT_<THING>
 	if("${CMND}" STREQUAL "POP")
-		set(${NAME}_list $ENV{${NAME}_STACK})
-		#list(GET ${NAME}_list 0 FIRST_ITEM)
-		#dk_notice("###### dk_envList POP ${FIRST_ITEM} ######")
-		
-		list(POP_FRONT ${NAME}_list)
-		list(LENGTH ${NAME}_list ${NAME}_length)
-				
-		if(${${NAME}_length} GREATER 0)
-			list(GET ${NAME}_list 0 ${NAME}_item)
-			set(ENV{CURRENT_${NAME}} ${${NAME}_item})
+		list(POP_FRONT _STACK_)
+		list(LENGTH _STACK_ _LENGTH_)
+		if(${_LENGTH_} GREATER 0)
+			list(GET _STACK_ 0 _CURRENT_)
 		else()
-			#unset(ENV{CURRENT_${NAME}})
-			set(ENV{CURRENT_${NAME}} "")
+			set(_CURRENT_ "")
 		endif()
-		set(ENV{${NAME}_STACK} "${${NAME}_list}")
-		#set(ENV{${NAME}_STACK_LENGTH} ${${NAME}_length})
-		#dk_notice("TOP=$ENV{CURRENT_${NAME}}       STACK=$ENV{${NAME}_STACK}     LENGTH=${${NAME}_length}")
 	endif()
 	
-	dk_notice("$ENV{${NAME}_STACK}")
+	dk_set(ENV{CURRENT_${NAME}} 	"${_CURRENT_}")
+	dk_set(ENV{${NAME}_STACK} 		"${_STACK_}")  # copy local variable back to the environment variable
+		
+	#message("ENV{CURRENT_${NAME}} 	= $ENV{CURRENT_${NAME}}")
+	#message("ENV{${NAME}_STACK}  	= $ENV{${NAME}_STACK}")
 endfunction()
 
 

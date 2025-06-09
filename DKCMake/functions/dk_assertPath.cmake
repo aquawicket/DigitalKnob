@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_assertPath(path)
 #
 #	If the expression compares equal to false (i.e., the expression is false), a error message is written and abort is called, terminating the scripts execution.

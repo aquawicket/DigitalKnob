@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_findFiles(path pattern rtn_var) RECURSE
 #
 #	Search for files within a path matching a pattern

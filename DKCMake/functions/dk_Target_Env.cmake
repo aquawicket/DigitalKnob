@@ -14,7 +14,7 @@ include_guard()
 if(NOT DEFINED Target_Env_Default)
 	dk_set(Target_Env_Default "Clang")
 endif()
-##################################################################################
+#########################################################################
 # dk_Target_Env()
 #
 #	Target_Env = Clang, Gcc, Msvc, Ucrt

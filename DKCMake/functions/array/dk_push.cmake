@@ -6,7 +6,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
-################################################################################
+#########################################################################
 # dk_arrayPush(array, element1, element2, /* …, */ elementN)
 #
 #	The push() method of Array instances adds the specified elements to the end of an array and returns the new length of the array.

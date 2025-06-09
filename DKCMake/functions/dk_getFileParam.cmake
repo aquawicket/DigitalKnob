@@ -9,7 +9,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #include_guard()
 
-################################################################################
+#########################################################################
 # dk_getFileParam(file, var_name) value
 #
 # todo: add optional 3rd parameter for output value

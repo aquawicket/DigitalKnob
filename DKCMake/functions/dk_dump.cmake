@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##############################################################################
+
+#########################################################################
 # dk_dump(variable)
 # 
 #	Print the contents of a variable to the screen
@@ -21,7 +22,7 @@ include_guard()
 macro(dk_dump variable)
 	dk_debugFunc()
 	
-	dk_echo(STATUS "\n${cyan}############################### Variable DUMP ##############################################${clr}")	
+	dk_echo(STATUS "\n${cyan}############################## Variable DUMP ##############################${clr}")	
 	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)
 		dk_basename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 	endif()
@@ -42,7 +43,7 @@ macro(dk_dump variable)
 		dk_echo("${cyan}   TYPE:    ${variableType} ${clr}")
 		dk_echo("${cyan}   LENGTH:  ${variableLength} ${clr}")
 		dk_echo("${cyan}   VALUE:   ${${variable}} ${clr}")
-		dk_echo("${cyan}############################################################################################${clr}\n")
+		dk_echo("${cyan}#########################################################################${clr}\n")
 	endif()
 	#dk_timeout()
 endmacro()

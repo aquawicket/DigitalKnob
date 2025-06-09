@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_call(func) args
 #
 #	load a ${func}.cmake file located in the DKCMake path and call the function with arguments

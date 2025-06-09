@@ -2,7 +2,7 @@
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #include_guard()
 
-##################################################################################
+#########################################################################
 # dk_warning(msg)
 #
 #	Print a warning message to the console

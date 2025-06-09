@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_gitApplyPatch(<directory> <patch_file>)
 #
 #	<directory>		- Full path to the directory of the file to patch

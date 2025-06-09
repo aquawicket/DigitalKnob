@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_deleteTempFiles()
 #
 #	Delete all .tmp files recursivly thoughout the digitalknob directory

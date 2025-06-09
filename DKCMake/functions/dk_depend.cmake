@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_depend(plugin) target
 #
 #	Each plugin invoked will fill a a varaible or it's name to the path where it
@@ -37,20 +38,14 @@ function(dk_depend plugin) #target
 	if((NOT EXISTS "${PLUGIN}") OR (NOT EXISTS "${${PLUGIN}_DIR}"))
 		
 		###### Push Plugin to the PLUGIN_STACK ######
-		message("\n###### ${CURRENT_PLUGIN} -> PUSH: -> ${PLUGIN} ######")
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
-		#############################################
-
 		
 		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
 		dk_dependB(${plugin})
 	
-	
 		###### Pop Plugin from the PLUGIN_STACK ######
 		dk_envList(PLUGIN POP)
-		message("\n###### ${CURRENT_PLUGIN} <- POP: <- ${PLUGIN} ######")
-		#############################################
-		
+
 	else()
 		dk_notice("dk_depend(): ${PLUGIN} is already loaded")
 	endif()

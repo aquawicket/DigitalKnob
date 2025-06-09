@@ -6,7 +6,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
-################################################################################
+#########################################################################
 # dk_arrayIndexOf(array, searchElement)
 # dk_arrayIndexOf(array, searchElement, rtn_val)
 # dk_arrayIndexOf(array, searchElement, fromIndex)

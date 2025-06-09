@@ -13,7 +13,7 @@ include_guard()
 
 
 dk_todo()
-################################################################################
+#########################################################################
 # dk_isChildPathOf(haystack, needle, rtn_var)
 #
 #   https://en.wikipedia.org/wiki/Dirname

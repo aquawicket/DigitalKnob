@@ -6,7 +6,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 
-################################################################################
+#########################################################################
 # dk_arrayUnshift(array, element)
 # dk_arrayUnshift(array, element, rtn_var)
 #

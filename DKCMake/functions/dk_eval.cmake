@@ -5,7 +5,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 if(NOT DEFINED dk_eval_DEBUG)
 	set(dk_eval_DEBUG	0)
 endif()
-###############################################################################
+#########################################################################
 # dk_eval(code)
 #
 # 	evals the specified cmake code.

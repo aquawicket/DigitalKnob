@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 ## We are looking for a good way to determin the path type we should use at any given moment in CMake.
 ## Say for example we are on a Windows box, using cmd, calling wsl.  Cmake will need /mnt/c/ type paths
 ## Or if Wsl invokes cmd.exe /c, that instance will require C:\ type paths. 
@@ -36,7 +37,7 @@ include_guard()
 ## Eventually we can expand on this class and add support for url's, xpaths, php, etc.
 ## Side note: maybe we can expand on dk_realpath to additionally meet these requirements.
 
-###############################################################################
+#########################################################################
 # dk_DKSHELL()
 #
 #

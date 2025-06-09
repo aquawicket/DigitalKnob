@@ -144,9 +144,9 @@ dk_echo("CMAKE_INSTALL_PREFIX:     '${CMAKE_INSTALL_PREFIX}'")
 dk_haveLongPaths()
 dk_echo("dk_haveLongPaths: '${dk_haveLongPaths}'")
 
-###########################################################################
+#########################################################################
 ## Set the IDE variable
-###########################################################################
+#########################################################################
 dk_echo("CMAKE_C_COMPILER_ID:          '${CMAKE_C_COMPILER_ID}'")
 dk_echo("CMAKE_CXX_COMPILER_ID:        '${CMAKE_CXX_COMPILER_ID}'")
 dk_echo("CMAKE_GENERATOR:              '${CMAKE_GENERATOR}'")
@@ -218,9 +218,9 @@ if(error)
 	dk_notice("FIXME: Cosmopolitan causes both GNU and MINGW flags to be set. we will let this error pass for now.")
 endif()
 
-###########################################################################
+#########################################################################
 ## Get variables for Build Type
-###########################################################################
+#########################################################################
 option(Debug "Build Debug Binaries" 0)
 option(Release "Build Release Binaries" 0)
 if(NOT Debug AND NOT Release)
@@ -231,9 +231,9 @@ endif()
 dk_echo("Debug:                        '${Debug}'")
 dk_echo("Release:                      '${Release}'")
 
-###########################################################################
+#########################################################################
 ## Get variables for Build Level
-###########################################################################
+#########################################################################
 option(BUILD "Simpily build the app or library" 0)
 option(REBUILD "Rebuild the app" 0)
 option(REBUILDALL "Rebuild the app and all dependencies" 1)
@@ -245,9 +245,9 @@ dk_echo("Build:                        '${Build}'")
 dk_echo("Rebuild:                      '${Rebuild}'")
 dk_echo("RebuildAll:                   '${RebuildAll}'")
 
-###########################################################################
+#########################################################################
 ## Get variables for Library Build Type (STATIC or SHARED)
-###########################################################################
+#########################################################################
 option(STATIC "Build Static Libraries and Plugins" 0)
 option(SHARED "Build Shared Libraries and Plugins" 0)
 if(NOT STATIC AND NOT SHARED)
@@ -256,9 +256,9 @@ endif()
 dk_echo("Static:                       '${Static}'")
 dk_echo("Shared:                       '${Shared}'")
 
-###########################################################################
+#########################################################################
 ## Get variables for CEF
-###########################################################################
+#########################################################################
 option(DKCEF "Use Chromium Embeded Framework" 0)
 if(${DKCEF})
 	add_definitions(-DHAVE_DKCef)
@@ -281,8 +281,8 @@ dk_echo("DKCEF:                        '${DKCEF}'")
 #endif()
 
 
-###########################################################################################
-###########################################################################################
+#########################################################################
+#########################################################################
 ## NOTICE ##
 ## WORK IN PROGRESS ##
 ## Working to consolidate and remove the need for seperate raspberry pi functions

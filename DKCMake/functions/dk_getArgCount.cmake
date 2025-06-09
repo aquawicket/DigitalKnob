@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_getArgCount(rtn_var args)
 #
 #	@rtn_var  - Returns the number of args received (minus the result argument)

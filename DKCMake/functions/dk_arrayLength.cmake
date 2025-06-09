@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-################################################################################
+
+#########################################################################
 # dk_arrayLength(array)
 #
 #	The length data property of an Array instance represents the number of elements in that array. 

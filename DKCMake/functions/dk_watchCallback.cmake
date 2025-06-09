@@ -2,7 +2,7 @@
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #include_guard()
 
-##############################################################################
+#########################################################################
 # dk_watchCallback(variable, access, value, current_list_file, stack)
 # 
 #	Description:  https://cmake.org/cmake/help/latest/command/variable_watch.html
@@ -25,7 +25,7 @@ macro(dk_watchCallback variable access value current_list_file stack)
 	#	dk_echo("${cyan}  file     = ${current_list_file} ${clr}")
 		dk_echo("${cyan}  stack    = ${stack} ${clr}")
 		dk_echo("${cyan}  > ${CMAKE_CURRENT_FUNCTION_LIST_FILE}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}   ${CMAKE_CURRENT_FUNCTION}()")
-	#	dk_echo("${cyan}#########################################################################################################${clr}")
+	#	dk_echo("${cyan}#########################################################################${clr}")
 	endif()
 endmacro()
 

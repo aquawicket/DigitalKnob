@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_onVariableWatch()
 #
 macro(dk_onVariableWatch variable access value current_list_file stack)

@@ -11,14 +11,15 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 if(NOT DEFINED BACKUP_DL_SERVER)
 	dk_set(BACKUP_DL_SERVER "http://aquawicket.com/download")
 endif()
 if(NOT DEFINED TEST_BACKUP_DL_SERVER)
 	dk_set(TEST_BACKUP_DL_SERVER 0)
 endif()
-###############################################################################
+#########################################################################
 # dk_download(url) dest_path NO_HALT
 #
 #	Download a file

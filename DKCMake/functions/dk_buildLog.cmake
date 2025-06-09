@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_buildLog(entry) PATH
 #
 #	Log an entry to a DKBUILD.log file in the projects ouput directory.

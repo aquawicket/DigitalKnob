@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_file_setDigitalknobPath()
 #
 #	Set the digitalknob root directory environment variable

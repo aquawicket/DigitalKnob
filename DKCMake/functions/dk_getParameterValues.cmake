@@ -13,7 +13,7 @@ include_guard()
 
 # FIXME: This is not fully functional. It take code from dk_getParameterValue() 
 # but has not yet ben set up to recieve multiple variables, or been tested
-###############################################################################
+#########################################################################
 # dk_getParameterValues(name)
 #
 #	TODO: change to dk_getParameterValues(name output ${ARGV}) so we can choose the variable to recieve the option in

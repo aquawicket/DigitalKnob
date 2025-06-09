@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_updateLogInfo()
 #
 #	Updates the STACK_HEADER variable with the current filename, line number, function name and arguments

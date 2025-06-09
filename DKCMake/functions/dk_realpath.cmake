@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_realpath(path, rtn_var)
 #
 #    CMAKE: https://cmake.org/cmake/help/latest/command/get_filename_component.html

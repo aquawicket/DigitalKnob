@@ -2,7 +2,7 @@
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #include_guard()
 
-##################################################################################
+#########################################################################
 # dk_verbose(msg) HALT, NO_HALT, TRACE, NO_TRACE, PAUSE, NO_PAUSE
 #
 #	Print a verbose message to the console

@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-##############################################################################
+
+#########################################################################
 # dk_beeps(array)
 #
 #	Play an array of beeps. Each array item is formated as "frequency,dureation" 

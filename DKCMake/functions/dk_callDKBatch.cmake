@@ -17,7 +17,7 @@ endif()
 if(NOT DEFINED dk_callDKBatch_PRINT_OUTPUT)
 	dk_set(dk_callDKBatch_PRINT_OUTPUT 0)
 endif()
-##################################################################################
+#########################################################################
 # dk_callDKBatch(<func>, <args...>)
 #
 #

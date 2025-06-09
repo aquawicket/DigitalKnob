@@ -149,7 +149,7 @@ dk_if(NOT DEFINED dk_log_FATAL_TRACE		[[ dk_set(dk_log_FATAL_TRACE		1) ]])
 dk_if(NOT DEFINED dk_log_FATAL_HALT			[[ dk_set(dk_log_FATAL_HALT			1) ]])
 
 
-################################################################################
+#########################################################################
 # dk_debug(message)
 #
 #	Print a debug message to the console

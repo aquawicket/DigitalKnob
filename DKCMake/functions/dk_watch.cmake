@@ -3,7 +3,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #include_guard()
 
 include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_watchCallback.cmake)
-##############################################################################
+#########################################################################
 # dk_watch(variable)
 # 
 #	Watch a varible reading and writing access events
