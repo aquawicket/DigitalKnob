@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # wget http://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/installDK.sh
 # chmod sudo 777 installDK.sh

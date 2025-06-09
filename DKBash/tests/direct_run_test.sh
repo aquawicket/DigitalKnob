@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 LIB_PATH=$(dirname $(realpath ${0}))
 PATH=${PATH}:${LIB_PATH}

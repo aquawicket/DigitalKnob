@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 #echo "dk_test.sh 0='$0' *='$*'"
 ###### DK.sh #####################################################################
 [ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 ###### DK.sh #####################################################################
 #[ -z "${DK_SH-}" ] && 
 find "${HOME}" -name "DK.sh" -print

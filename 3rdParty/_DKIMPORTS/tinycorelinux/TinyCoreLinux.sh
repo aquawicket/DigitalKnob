@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 ###### Load Function files ######
 . ../../../DKBash/functions/DK.sh

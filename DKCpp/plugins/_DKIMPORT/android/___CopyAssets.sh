@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # to run this script requires privledges 
 # > sudo chmod 777 build
