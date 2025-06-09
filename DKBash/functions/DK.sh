@@ -40,12 +40,29 @@ DK(){
     dksetOptions
 
 	############ load dk_source ######
-	export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
-    export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
-	export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/"
-echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}" 
-	[ -e "${DKBASH_FUNCTIONS_DIR_}DK.sh" ] || (echo "ERROR: DKBASH_FUNCTIONS_DIR:'${DKBASH_FUNCTIONS_DIR}' is incorrect"; exit 1)
-    [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
+#	[ ! -n "${DKBRANCH-}" ]						&& export DKBRANCH="Development"
+	
+#	[ ! -n "${DKHTTP_DKHOME_DIR-}" ]			&& export DKHTTP_DKHOME_DIR="https://raw.githubusercontent.com/aquawicket"
+#	[ ! -n "${DKHTTP_DIGITALKNOB_DIR-}" ]		&& export DKHTTP_DIGITALKNOB_DIR="${DKHTTP_DKHOME_DIR}/DigitalKnob"
+#	[ ! -n "${DKHTTP_DKBRANCH_DIR-}" ]			&& export DKHTTP_DKBRANCH_DIR="${DKHTTP_DIGITALKNOB_DIR}/${DKBRANCH}"
+#	[ ! -n "${DKHTTP_DKBASH_DIR-}" ]			&& export DKHTTP_DKBASH_DIR="${DKHTTP_DKBRANCH_DIR}/DKBash"
+#	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKBASH_DIR}/functions"
+#	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="${DKHTTP_DKBASH_FUNCTIONS_DIR}/"
+	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/"
+	
+#	[ ! -e "${DKHOME_DIR-}" ] 				&& export DKHOME_DIR="${HOME}"
+#	[ ! -n "${DIGITALKNOB_DIR-}" ]			&& export DIGITALKNOB_DIR="${DKHOME_DIR}/digitalknob"
+#	[ ! -n "${DKBRANCH_DIR-}" ]				&& export DKBRANCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}"
+#	[ ! -n "${DKBASH_DIR-}" ]				&& export DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
+#	[ ! -n "${DKBASH_FUNCTIONS_DIR-}" ]		&& export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
+	[ ! -n "${DKBASH_FUNCTIONS_DIR-}" ]		&& export DKBASH_FUNCTIONS_DIR="${HOME}/DigitalKnob/Development/DKBash/functions"
+	[ ! -n "${DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/"
+
+	
+#   export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
+
+#	[ -e "${DKBASH_FUNCTIONS_DIR_}DK.sh" ] || (echo "ERROR: DKBASH_FUNCTIONS_DIR:'${DKBASH_FUNCTIONS_DIR}' is incorrect"; exit 1)
+    [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR_}dk_source.sh ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
     [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] && . "${DKBASH_FUNCTIONS_DIR_}dk_source.sh"
 
     ############ LOAD FUNCTION FILES ############
@@ -135,6 +152,7 @@ dk_download() {
         return 0
     fi
     echo "Downloading $(basename ${1}) . . ."
+	echo "${1} ->  ${2}"
     parentdir="$(dirname "${2}")"
     OLDPWD=${PWD}
     cd "${parentdir}"
