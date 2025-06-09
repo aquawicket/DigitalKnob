@@ -69,14 +69,16 @@ DKCACHE_DIR(){
 
 ###### DIGITALKNOB_DIR ######
 DIGITALKNOB_DIR(){
-	[ ! -e "${DIGITALKNOB_DIR-}" ] && export DIGITALKNOB_DIR="$(DKHOME_DIR)/digitalknob"
-	[ ! -e "${DIGITALKNOB_DIR-}" ] && mkdir "${DIGITALKNOB_DIR}"
-	[   -e "${DIGITALKNOB_DIR-}" ] && echo "${DIGITALKNOB_DIR-}"   	|| echo "DIGITALKNOB_DIR-NOTFOUND"  >&2
+	[ ! -n "${DIGITALKNOB-}" ]		&& export DIGITALKNOB="DigitalKnob"	
+	[ ! -e "${DIGITALKNOB_DIR-}" ]	&& export DIGITALKNOB_DIR="$(DKHOME_DIR)/${DIGITALKNOB}"
+	[ ! -e "${DIGITALKNOB_DIR-}" ]	&& mkdir "${DIGITALKNOB_DIR}"
+	[   -e "${DIGITALKNOB_DIR-}" ]	&& echo "${DIGITALKNOB_DIR-}"   	|| echo "DIGITALKNOB_DIR-NOTFOUND"  >&2
 }
 
 ###### DKBRANCH_DIR ######
 DKBRANCH_DIR(){
-	[ ! -e "${DKBRANCH_DIR-}" ] && export DKBRANCH_DIR="$(DIGITALKNOB_DIR)/Development"
+	[ ! -n "${DKBRANCH-}" ]		&& export DKBRANCH="Development"	
+	[ ! -e "${DKBRANCH_DIR-}" ] && export DKBRANCH_DIR="$(DIGITALKNOB_DIR)/${DKBRANCH}"
 	[ ! -e "${DKBRANCH_DIR-}" ] && mkdir "${DKBRANCH_DIR}"
 	[   -e "${DKBRANCH_DIR-}" ] && echo "${DKBRANCH_DIR-}"   	|| echo "DKBRANCH_DIR-NOTFOUND"  >&2
 }
