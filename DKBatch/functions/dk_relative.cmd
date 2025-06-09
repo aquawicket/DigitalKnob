@@ -51,8 +51,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	echo:
 	
-	%dk_call% dk_set from_path "%USERPROFILE:\=/%/digitalknob/Development/DKBatch/functions"
-	%dk_call% dk_set to_path "%USERPROFILE:\=/%/digitalknob"
+	%dk_call% dk_set from_path "%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch/functions"
+	%dk_call% dk_set to_path "%USERPROFILE:\=/%/DigitalKnob"
 	%dk_call% dk_relative "%to_path%" "%from_path%"
 	%dk_call% dk_printVar dk_relative
 	cd %from_path%
@@ -61,8 +61,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo CD = %CD:\=/%
 	
 	echo:
-	%dk_call% dk_set from_path "%USERPROFILE:\=/%/digitalknob"
-	%dk_call% dk_set to_path "%USERPROFILE:\=/%/digitalknob/Development/DKBatch"
+	%dk_call% dk_set from_path "%USERPROFILE:\=/%/DigitalKnob"
+	%dk_call% dk_set to_path "%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch"
 	%dk_call% dk_relative "%to_path%" "%from_path%"
 	%dk_call% dk_printVar dk_relative
 	cd %from_path%

@@ -13,7 +13,7 @@ set "IN=%windir%\NonExistent.file
 ::	set IN=%~0
 ::	set "IN=%~0"
 ::	set "IN=%ProgramFiles%\WSL\wsl.exe"
-::	set "IN=%USERPROFILE%\digitalknob\Development\DKBatch\tests\test_blank.cmd"
+::	set "IN=%USERPROFILE%\DigitalKnob\Development\DKBatch\tests\test_blank.cmd"
 ::	set "IN=%ProgramFiles:\=/%/WSL/wsl.exe"
 ::  set "IN=test_dk_echo.cmd"
 ::  set "IN=/test_dk_echo.cmd"
@@ -28,9 +28,9 @@ set "IN=%windir%\NonExistent.file
 ::	set "IN=..//functions//DK.cmd"
 ::	set "IN=..\..\DKBatch\functions\DK.cmd"
 ::	set "IN=..\..\DKBatch\..\Batch\functions\DK.cmd"
-::	set IN=%USERPROFILE%\digitalknob\Development\DKBatch\
-::	set "IN=%USERPROFILE:\=/%/digitalknob/Development/DKBatch/DK.cmd"
-::	set "IN=%USERPROFILE%\digitalknob\Development\DKBatch"
+::	set IN=%USERPROFILE%\DigitalKnob\Development\DKBatch\
+::	set "IN=%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch/DK.cmd"
+::	set "IN=%USERPROFILE%\DigitalKnob\Development\DKBatch"
 
 	echo IN         = "%IN%"
 

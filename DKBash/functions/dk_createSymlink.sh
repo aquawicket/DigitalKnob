@@ -28,10 +28,10 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	### Create a directory symlink ###
-    dk_call dk_createSymlink "${DKHOME_DIR}/digitalknob" "${DKHOME_DIR}/Desktop/digitalknob"
+    dk_call dk_createSymlink "${DKHOME_DIR}/DigitalKnob" "${DKHOME_DIR}/Desktop/DigitalKnob"
 	
 	### Create a file symlink ###
-	dk_call dk_createSymlink "${DKHOME_DIR}/digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.sh" "${DKHOME_DIR}/Desktop/DKBuilder.sh" &rem OVERWRITE
+	dk_call dk_createSymlink "${DKHOME_DIR}/DigitalKnob/Development/DKBatch/apps/DKBuilder/DKBuilder.sh" "${DKHOME_DIR}/Desktop/DKBuilder.sh" &rem OVERWRITE
 	
 	### Test Non-Existent Error ###
     dk_call dk_createSymlink "${DKHOME_DIR}/Non-Existent" "${DKHOME_DIR}/Desktop/Non-Existent" 

@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:: https://superuser.com/a/1333539/600216
 	%BASH_EXE% -c "env -i HOME="$HOME" PATH="$PATH" bash -l -c 'env'"
 	
-	%BASH_EXE% -c "env -i HOME="$HOME" PATH="$PATH" bash -l -c '/c/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/pacman/installPacmanForGit.sh'"
+	%BASH_EXE% -c "env -i HOME="$HOME" PATH="$PATH" bash -l -c '/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/pacman/installPacmanForGit.sh'"
 %endfunction%
 
 

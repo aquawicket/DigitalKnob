@@ -23,23 +23,23 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#  ###### Steps to manually merge (Method B )######
 ::#
-::# 	1. cd %USERPROFILE%\digitalknob\Development
-::# 	2. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" checkout Development
-::# 	3. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" pull
-::# 	4. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" checkout main
-::# 	5. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" pull origin main
+::# 	1. cd %USERPROFILE%\DigitalKnob\Development
+::# 	2. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" checkout Development
+::# 	3. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" pull
+::# 	4. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" checkout main
+::# 	5. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" pull origin main
 ::#
 ::#		###### Resolve any conflicts then continue ######
 ::#			https://software.codidact.com/posts/286835
 ::#	
-::#	 	    "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" checkout --ours -- *
+::#	 	    "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" checkout --ours -- *
 ::#
-::# 	 6. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" merge --no-ff --no-commit Development
-::# 	 7. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" commit -a -m "Merge Development Branch in to main"
-::#		 9. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" push origin main
-::#		10. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" checkout Development
-::#		11. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" merge main
-::#		12. "%USERPROFILE%\digitalknob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\digitalknob\Development" push
+::# 	 6. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" merge --no-ff --no-commit Development
+::# 	 7. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" commit -a -m "Merge Development Branch in to main"
+::#		 9. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" push origin main
+::#		10. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" checkout Development
+::#		11. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" merge main
+::#		12. "%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" -C "%USERPROFILE%\DigitalKnob\Development" push
 ::#
 ::#
 ::#

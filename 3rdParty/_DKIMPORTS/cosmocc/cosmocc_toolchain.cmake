@@ -4,7 +4,7 @@ set(BUILD_SHARED_LIBS OFF)
 set(CMAKE_SKIP_RPATH ON)
 set(CMAKE_CROSSCOMPILING OFF)
 
-set(DK3RDPARTY_DIR					"$ENV{SystemDrive}/Users/Administrator/digitalknob/Development/3rdParty"						CACHE INTERNAL "")	
+set(DK3RDPARTY_DIR					"$ENV{SystemDrive}/Users/Administrator/DigitalKnob/Development/3rdParty"						CACHE INTERNAL "")	
 set(CMAKE_USER_MAKE_RULES_OVERRIDE 	"$ENV{DK3RDPARTY_DIR}/_DKIMPORTS/cosmocc/cosmo_user_make_rules_override.cmake"					CACHE INTERNAL "")
 set(CMAKE_MAKE_PROGRAM 				"$ENV{DK3RDPARTY_DIR}/msys2-x86_64-20240727/clang64/bin/mingw32-make.exe" 						CACHE INTERNAL "")
 

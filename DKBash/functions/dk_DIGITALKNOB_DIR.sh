@@ -12,7 +12,7 @@ dk_DIGITALKNOB_DIR() {
 	dk_debugFunc 0 1
 
 	### DIGITALKNOB_DIR ###
-	[ -n "${DIGITALKNOB-}" ] || DIGITALKNOB="digitalknob"
+	[ -n "${DIGITALKNOB-}" ] || DIGITALKNOB="DigitalKnob"
 	
 	############ SET ############
 	if [ -n "${1-}" ]; then  

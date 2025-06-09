@@ -1,6 +1,6 @@
 @echo off
-set "variableA=%USERPROFILE:\=/%/digitalknob/Development/DKBatch/functions/DK"
-set "variableB=%USERPROFILE:\=/%/digitalknob/Development/DKBatch/functions/DK.cmd"
+set "variableA=%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch/functions/DK"
+set "variableB=%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch/functions/DK.cmd"
 
 
 echo variableA = %variableA:.cmd=%.cmd

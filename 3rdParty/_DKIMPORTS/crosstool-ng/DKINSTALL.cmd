@@ -51,4 +51,4 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-%USERPROFILE%\digitalknob\Development\3rdParty\cygwin-setup-x86_64\bin\bash.exe --login -c '/cygdrive/c/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/cygwin/crosstool-ng-build.sh'
+%USERPROFILE%\DigitalKnob\Development\3rdParty\cygwin-setup-x86_64\bin\bash.exe --login -c '/cygdrive/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/cygwin/crosstool-ng-build.sh'

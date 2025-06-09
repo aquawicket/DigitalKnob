@@ -34,7 +34,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	::%dk_call% dk_openLineNumber "%USERPROFILE:\=/%/digitalknob/Development/README.md"
-	%dk_call% dk_openLineNumber "%USERPROFILE:\=/%/digitalknob/Development/README.md" 23
+	::%dk_call% dk_openLineNumber "%USERPROFILE:\=/%/DigitalKnob/Development/README.md"
+	%dk_call% dk_openLineNumber "%USERPROFILE:\=/%/DigitalKnob/Development/README.md" 23
 %endfunction%
 

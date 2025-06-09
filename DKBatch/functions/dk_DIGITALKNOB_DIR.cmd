@@ -20,7 +20,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::############ GET ############
     ::if not defined DIGITALKNOB        (set "DIGITALKNOB=D i g i t a l K n o b")
-    if not defined DIGITALKNOB          (set "DIGITALKNOB=digitalknob")
+    if not defined DIGITALKNOB          (set "DIGITALKNOB=DigitalKnob")
    
 	::### DIGITALKNOB_DIR ###
 	%dk_call% dk_validatePath DKHOME_DIR    "%dk_call% dk_DKHOME_DIR"
@@ -47,6 +47,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Setting DIGITALKNOB_DIR . . ."
-	%dk_call% dk_DIGITALKNOB_DIR "C:/digitalknob"
+	%dk_call% dk_DIGITALKNOB_DIR "C:/DigitalKnob"
 	%dk_call% dk_echo "DIGITALKNOB_DIR = %DIGITALKNOB_DIR%"
 %endfunction%

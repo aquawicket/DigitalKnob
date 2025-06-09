@@ -16,7 +16,7 @@ dk_enterManually() {
 	
 	Target_App="_${input}_"
 	
-	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
+	#Search DigitalKnob for the matching entry containing a DKINSTALL.cmake file  
 	if test -f "${DKIMPORTS_DIR}/${input}/DKINSTALL.cmake"; then
 		Target_App_Dir=${DKIMPORTS_DIR}/${input}
 	fi

@@ -45,10 +45,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	::### Create a directory symlink ###
-    %dk_call% dk_createSymlink "%USERPROFILE:\=/%/digitalknob" "%USERPROFILE:\=/%/Desktop/digitalknob"
+    %dk_call% dk_createSymlink "%USERPROFILE:\=/%/DigitalKnob" "%USERPROFILE:\=/%/Desktop/DigitalKnob"
 	
 	::### Create a file symlink ###
-	%dk_call% dk_createSymlink "%USERPROFILE:\=/%/digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%USERPROFILE:\=/%/Desktop/DKBuilder.cmd" &rem OVERWRITE
+	%dk_call% dk_createSymlink "%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%USERPROFILE:\=/%/Desktop/DKBuilder.cmd" &rem OVERWRITE
 	
 	::### Test Non-Existent Error ###
     ::%dk_call% dk_createSymlink "C:/Non-Existent" "%USERPROFILE:\=/%/Desktop/Non-Existent"

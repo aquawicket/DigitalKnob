@@ -7,7 +7,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :main
     setlocal
 
-	set "file=%USERPROFILE%\digitalknob\Development\TODO.txt"
+	set "file=%USERPROFILE%\DigitalKnob\Development\TODO.txt"
 	
     if "%file%" equ "" goto :help
     if not exist "%file%" (

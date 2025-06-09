@@ -44,7 +44,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_readlink "%myPath%"
     %dk_call% dk_printVar dk_readlink
 	
-    %dk_call% dk_set myPath "%USERPROFILE:\=/%/Desktop/digitalknob"
+    %dk_call% dk_set myPath "%USERPROFILE:\=/%/Desktop/DigitalKnob"
     %dk_call% dk_readlink "%myPath%"
     %dk_call% dk_printVar dk_readlink
 	

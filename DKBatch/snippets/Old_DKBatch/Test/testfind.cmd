@@ -1,4 +1,4 @@
-:: This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+:: This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
@@ -24,7 +24,7 @@
 ::set "STAY_OPEN=1"
 %DKBATCH%
 
-set "PACKAGE_NAME=com.digitalknob.DKJni"
+set "PACKAGE_NAME=com.DigitalKnob.DKJni"
 
 "%ANDROID_HOME%/platform-tools/adb" shell pm list packages %PACKAGE_NAME% | findstr /I /C:"%PACKAGE_NAME%"
 if %errorlevel% == 1 (

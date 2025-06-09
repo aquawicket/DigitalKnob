@@ -53,7 +53,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "myPath=%USERPROFILE:\=/%/Desktop/DKBuilder.cmd"
     %dk_call% dk_isSymlink "%myPath%" && %dk_call% dk_info "'%myPath%' is a symlink" || %dk_call% dk_info "'%myPath%' is NOT a symlink"
 	
-	set "myPath=%USERPROFILE:\=/%/Desktop/digitalknob"
+	set "myPath=%USERPROFILE:\=/%/Desktop/DigitalKnob"
     %dk_call% dk_isSymlink "%myPath%" && %dk_call% dk_info "'%myPath%' is a symlink" || %dk_call% dk_info "'%myPath%' is NOT a symlink"
 	
 	set "myPath=%USERPROFILE:\=/%/Desktop"

@@ -18,8 +18,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DIGITALKNOB_DIR	"%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_validate DKBRANCH_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	
-	if not exist "%DKDESKTOP_DIR%/digitalknob.lnk" (
-		%dk_call% dk_createShortcut "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/digitalknob.lnk"
+	if not exist "%DKDESKTOP_DIR%/DigitalKnob.lnk" (
+		%dk_call% dk_createShortcut "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/DigitalKnob.lnk"
 	)
 	
 	%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"

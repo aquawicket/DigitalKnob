@@ -4,7 +4,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-set "DIGITALKNOB_DIR=%USERPROFILE%\digitalknob"
+set "DIGITALKNOB_DIR=%USERPROFILE%\DigitalKnob"
 set "ADB=%DIGITALKNOB_DIR%\Development\3rdParty\android-sdk\platform-tools\adb.exe"
 
 ::set /p Y=Enter adb.exe folder path:   

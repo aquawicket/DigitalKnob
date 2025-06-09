@@ -25,8 +25,8 @@ dk_validate(Target_Config  "dk_Target_Config()")
 #      -lshlwapi -lCfgmgr32 -lSetupapi -lwinmm
 #
 #  CMAKE_EXE_LINKER_FLAGS 
-#      C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/Windows_X86_64_Clang/Debug/libSDL2maind.a
-#      C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/Windows_X86_64_Clang/Debug/libSDL2d.a
+#      C:/Users/aquawicket/DigitalKnob/Development/3rdParty/sdl-release-2.26.1/Windows_X86_64_Clang/Debug/libSDL2maind.a
+#      C:/Users/aquawicket/DigitalKnob/Development/3rdParty/sdl-release-2.26.1/Windows_X86_64_Clang/Debug/libSDL2d.a
 #
 #  freetype also needed a folder moved up one heirarchy level
 # 

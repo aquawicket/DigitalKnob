@@ -34,7 +34,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	set "imgFile=%USERPROFILE:\=/%/digitalknob/Development/DKCpp/apps/DKCore/icons/icon.png"
-	set "icoFile=%USERPROFILE:\=/%/digitalknob/Development/DKCpp/apps/DKCore/icons/icon.ico"
+	set "imgFile=%USERPROFILE:\=/%/DigitalKnob/Development/DKCpp/apps/DKCore/icons/icon.png"
+	set "icoFile=%USERPROFILE:\=/%/DigitalKnob/Development/DKCpp/apps/DKCore/icons/icon.ico"
 	%dk_call% dk_imgToIco "%imgFile%" "%icoFile%"
 %endfunction%

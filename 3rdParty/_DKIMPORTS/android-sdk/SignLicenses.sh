@@ -11,11 +11,11 @@ echo "machtype = $MACHTYPE"
 
 ### set DIGITALKNOB_DIR
 if [[ -n "$USERPROFILE" ]]; then
-	DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
+	DIGITALKNOB_DIR="$USERPROFILE\DigitalKnob"
 	DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
 	DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
 else
-	DIGITALKNOB_DIR="$HOME/digitalknob"
+	DIGITALKNOB_DIR="$HOME/DigitalKnob"
 fi
 mkdir -p $DIGITALKNOB_DIR
 print_var DIGITALKNOB_DIR

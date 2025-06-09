@@ -46,7 +46,7 @@ elseif(Android_Host)
 	# cd caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff
 	# unzip aapt2-7.0.3-7396180-linux.jar
 	# rm aapt2
-	# cp /data/data/com.termux/files/home/digitalknob/Development/3rdParty/android-sdk/build-tools/30.0.3/aapt2 .
+	# cp /data/data/com.termux/files/home/DigitalKnob/Development/3rdParty/android-sdk/build-tools/30.0.3/aapt2 .
 	# rm aapt2-7.0.3-7396180-linux.jar
 	# zip aapt2-7.0.3-7396180-linux.jar *     #Zip everything back
 	# rm -rf META-INF NOTICE aapt2

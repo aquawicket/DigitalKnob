@@ -41,6 +41,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_callFileLabel "C:\Users\Administrator\digitalknob\Development\DKBatch\functions\dk_debug.cmd" ":DKTEST"
+	%dk_call% dk_callFileLabel "C:\Users\Administrator\DigitalKnob\Development\DKBatch\functions\dk_debug.cmd" ":DKTEST"
 %endfunction%
 

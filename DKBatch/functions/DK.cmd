@@ -234,8 +234,8 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	"%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" 	&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
 
 	:: Change console settings
-	:: >nul REG ADD HKCU/Console/digitalknob FontSize /t reg_sz /d "Consolas" /f
-	:: start "digitalknob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+	:: >nul REG ADD HKCU/Console/DigitalKnob FontSize /t reg_sz /d "Consolas" /f
+	:: start "DigitalKnob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 	:: exit
 
 	::####################################
@@ -251,7 +251,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	)
 	exit %exit_code%
 
-	::( >NUL reg delete HKCU/Console/digitalknob /f )
+	::( >NUL reg delete HKCU/Console/DigitalKnob /f )
 %endfunction%
 
 ::##################################################################################
