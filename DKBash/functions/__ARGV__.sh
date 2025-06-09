@@ -12,9 +12,19 @@ __ARGV__() {
 	[ -z ${1-} ] && local frame=0 || local frame=${1}
 	
 	local marker=0
-	for (( i=0; i<frame; i++ )); do
+	
+	
+#	for (( i=0; i<frame; i++ )); do
+#		marker=$(($marker + ${BASH_ARGC[${i}]-}))
+#	done
+
+	local i=0
+	while [ i<frame ]; do
 		marker=$(($marker + ${BASH_ARGC[${i}]-}))
+		((i++))
 	done
+
+	
 
 	local argv=()	
 	local argc=${BASH_ARGC[${frame}]-}
