@@ -40,9 +40,9 @@ function(dk_callDKBatch func)
 	endif()
 
 	### Call DKBatch function ###
-	dk_validate(CMD_EXE "dk_CMD_EXE()")
-	dk_validate(DKBATCH_FUNCTIONS_DIR_		"dk_DKBRANCH_DIR()")	
-	set(DKBATCH_COMMAND ${CMD_EXE} /V:ON /c $ENV{DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
+	dk_validate(CMD_EXE 					"dk_CMD_EXE()")
+	dk_validate(DKBATCH_FUNCTIONS_DIR_		"dk_DKBRANCH_DIR()")
+	set(DKBATCH_COMMAND ${CMD_EXE} /V:ON /c ${DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
 
 	if("${dk_callDKBatch_PRINT_COMMAND}" EQUAL 1)
 		message("DKBATCH_COMMAND = '${DKBATCH_COMMAND}'")
@@ -50,7 +50,7 @@ function(dk_callDKBatch func)
 
 	### FIXME ###
 	message("\n${DKBATCH_COMMAND}\n")
-	execute_process(COMMAND ${DKBATCH_COMMAND} OUTPUT_VARIABLE output_variable ECHO_OUTPUT_VARIABLE RESULT_VARIABLE result_variable WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
+	execute_process(COMMAND ${DKBATCH_COMMAND} OUTPUT_VARIABLE output_variable ECHO_OUTPUT_VARIABLE RESULT_VARIABLE result_variable WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
 	
 	### process the return value ###
 	string(FIND "${output_variable}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character

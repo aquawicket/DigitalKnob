@@ -69,11 +69,11 @@ function(dk_DKBRANCH_DIR)
 				dk_set(DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions")
 			endif()
 			if(NOT EXISTS "${DKBASH_FUNCTIONS_DIR_}") 
-				dk_set(DKBASH_FUNCTIONS_DIR_ "${DKBASH_DIR}/functions/")
+				dk_set(DKBASH_FUNCTIONS_DIR_ "${DKBASH_FUNCTIONS_DIR}/")
 			endif()
 
 		### DKBATCH ###
-		if(NOT EXISTS "${DKBASH_DIR}") 
+		if(NOT EXISTS "${DKBATCH_DIR}") 
 			dk_set(DKBATCH_DIR "${DKBRANCH_DIR}/DKBatch")
 		endif()
 			if(NOT EXISTS "${DKBATCH_FUNCTIONS_DIR}") 
