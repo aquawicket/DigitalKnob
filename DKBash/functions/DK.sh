@@ -47,8 +47,9 @@ DK(){
 #	[ ! -n "${DKHTTP_DKBRANCH_DIR-}" ]			&& export DKHTTP_DKBRANCH_DIR="${DKHTTP_DIGITALKNOB_DIR}/${DKBRANCH}"
 #	[ ! -n "${DKHTTP_DKBASH_DIR-}" ]			&& export DKHTTP_DKBASH_DIR="${DKHTTP_DKBRANCH_DIR}/DKBash"
 #	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKBASH_DIR}/functions"
-#	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="${DKHTTP_DKBASH_FUNCTIONS_DIR}/"
-	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/"
+	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
+	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="${DKHTTP_DKBASH_FUNCTIONS_DIR}/"
+
 	
 #	[ ! -e "${DKHOME_DIR-}" ] 				&& export DKHOME_DIR="${HOME}"
 #	[ ! -n "${DIGITALKNOB_DIR-}" ]			&& export DIGITALKNOB_DIR="${DKHOME_DIR}/digitalknob"
