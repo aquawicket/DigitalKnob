@@ -13,18 +13,18 @@ include_guard()
 
 
 #########################################################################
-# dk_assets(plugin)
+# dk_assets(path)
 #
 #	Add a library's files to the App's assets
 #
-#	@plugin		- TODO
+#	@path - The path to the library or plugin who's assets we wish to include
 #
 function(dk_assets plugin)
 	dk_debugFunc(1)
 	
-	if(NOT DKAPP)
+	#if(NOT DKAPP)
 #		return()
-	endif()
+	#endif()
 	
 	if(EXISTS "${plugin}")
 		set(Plugin_Path "${plugin}")
@@ -38,12 +38,14 @@ function(dk_assets plugin)
 	dk_info("Importing ${plugin} assets...")
 	
 	set(ASSETS 
-		PATTERN *.h EXCLUDE
+		PATTERN *.TEMP EXCLUDE
+		PATTERN *.TMP EXCLUDE
 		PATTERN *.c EXCLUDE
 		PATTERN *.cmake EXCLUDE
 		PATTERN *.cpp EXCLUDE
 		PATTERN *.dir EXCLUDE
 		PATTERN *.filters EXCLUDE
+		PATTERN *.h EXCLUDE
 		PATTERN *.lib EXCLUDE
 		PATTERN *.manifest EXCLUDE
 		PATTERN *.mm EXCLUDE
@@ -51,32 +53,46 @@ function(dk_assets plugin)
 		PATTERN *.plist EXCLUDE
 		PATTERN *.rc EXCLUDE
 		PATTERN *.sln EXCLUDE
-		PATTERN *.tmp EXCLUDE
-		PATTERN *.TMP EXCLUDE
 		PATTERN *.temp EXCLUDE
-		PATTERN *.TEMP EXCLUDE
+		PATTERN *.tmp EXCLUDE
 		PATTERN *.vcxproj EXCLUDE
+		PATTERN Android_Arm32_* EXCLUDE
+		PATTERN Android_Arm64_* EXCLUDE
+		PATTERN Android_X86_* EXCLUDE
+		PATTERN Android_X86_64_* EXCLUDE
 		PATTERN CMakeFiles EXCLUDE
 		PATTERN CMakeLists.txt EXCLUDE
+		PATTERN Emscripten_Arm32_* EXCLUDE
+		PATTERN Emscripten_Arm64_* EXCLUDE
+		PATTERN Emscripten_X86_* EXCLUDE
+		PATTERN Emscripten_X86_64_* EXCLUDE
+		PATTERN Ios_Arm32_* EXCLUDE
+		PATTERN Ios_Arm64_* EXCLUDE
+		PATTERN Ios_X86_* EXCLUDE
+		PATTERN Ios_X86_64_* EXCLUDE
+		PATTERN Iossim_Arm32_* EXCLUDE
+		PATTERN Iossim_Arm64_* EXCLUDE
+		PATTERN Iossim_X86_* EXCLUDE
+		PATTERN Iossim_X86_64_* EXCLUDE
+		PATTERN Linux_Arm32_* EXCLUDE
+		PATTERN Linux_Arm64_* EXCLUDE
+		PATTERN Linux_X86_* EXCLUDE
+		PATTERN Linux_X86_64_* EXCLUDE
+		PATTERN Mac_Arm32_* EXCLUDE
+		PATTERN Mac_Arm64_* EXCLUDE
+		PATTERN Mac_X86_* EXCLUDE
+		PATTERN Mac_X86_64_* EXCLUDE
+		PATTERN Raspberry_Arm32_* EXCLUDE
+		PATTERN Raspberry_Arm64_* EXCLUDE
+		PATTERN Raspberry_X86_* EXCLUDE
+		PATTERN Raspberry_X86_64_* EXCLUDE
+		PATTERN Windows_Arm32_* EXCLUDE
+		PATTERN Windows_Arm64_* EXCLUDE
+		PATTERN Windows_X86_* EXCLUDE
+		PATTERN Windows_X86_64_* EXCLUDE
+		PATTERN dktest EXCLUDE
 		PATTERN temp.txt EXCLUDE
-		PATTERN Windows_X86 EXCLUDE
-		PATTERN Windows_X86_64 EXCLUDE
-		PATTERN mac_x86 EXCLUDE
-		PATTERN mac_x86_64 EXCLUDE
-		PATTERN ios_arm32 EXCLUDE
-		PATTERN ios_arm64 EXCLUDE
-		PATTERN Iossim_X86 EXCLUDE
-		PATTERN iossim_x86_64 EXCLUDE
-		PATTERN Linux_X86 EXCLUDE
-		PATTERN Linux_X86_64 EXCLUDE
-		PATTERN Android_Arm32 EXCLUDE
-		PATTERN android_arm64 EXCLUDE
-		PATTERN android_x86 EXCLUDE
-		PATTERN android_x86_64 EXCLUDE
-		PATTERN raspberry_arm32 EXCLUDE
-		PATTERN raspberry_arm64 EXCLUDE
-		PATTERN emscripten EXCLUDE
-		PATTERN dktest EXCLUDE)
+	)
 	
 	file(COPY ${Plugin_Path} DESTINATION ${Target_App_Dir}/assets ${ASSETS})
 endfunction()
