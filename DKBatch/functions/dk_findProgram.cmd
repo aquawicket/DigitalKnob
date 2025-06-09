@@ -12,10 +12,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 2 9
 
 	for /F %%G IN ("%~1") do set _var_=%%~G
-	echo _var_ = %_var_%
+	::echo _var_ = %_var_%
 	
 	for /F %%G IN ("!%_var_%!") do set _val_=%%~G
-	echo _val_ = %_val_%
+	::echo _val_ = %_val_%
 
 	::set "_val_=!%_var_%!"
 	if exist "%_val_%" (
@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 
 	for /F %%G IN ("%~2") do set _filename_=%%~G
-	echo _filename_ = %_filename_%
+	::echo _filename_ = %_filename_%
 	
 	for /F %%G IN ("%~3") do set _pattern_=%%~G
 	
@@ -32,8 +32,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "_pattern_=%_pattern_:/=\%"
 		set "_recursive_=/R"
 	)
-	echo _pattern_ = %_pattern_%
-	echo _recursive_ = %_recursive_%
+	::echo _pattern_ = %_pattern_%
+	::echo _recursive_ = %_recursive_%
 
 	%dk_call% dk_exec where %_recursive_% "%_pattern_%" "%_filename_%" 2>nul
 
@@ -46,7 +46,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			dk_return -1 "%_filename_% not found"
 		)
 	)
-	echo dk_exec = %dk_exec%
+	::echo dk_exec = %dk_exec%
 
 	for %%G in ("%dk_exec%") do (set dk_exec="%%~fG")   &:: get the real path
 	set "dk_findProgram=%dk_exec:\=/%"

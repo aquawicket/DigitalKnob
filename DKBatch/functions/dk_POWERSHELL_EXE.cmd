@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertPath "%POWERSHELL_EXE%"
 	
 	endlocal & (
-		set "POWERSHELL_EXE=%POWERSHELL_EXE%"
+		set "POWERSHELL_EXE=%POWERSHELL_EXE:"=%"
 	)
 %endfunction%
 

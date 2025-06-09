@@ -10,11 +10,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_selectFile
 %setlocal%
-	%dk_call% dk_debugFunc 1
+	%dk_call% dk_debugFunc 0 1
 	
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
-    for /f "delims=" %%I in ('%POWERSHELL_EXE% -noprofile "iex (${%~f0} | out-string)"') do (
-		set "dk_selectFile=%%~I"
+    for /f "delims=" %%G in ('%POWERSHELL_EXE:/=\% -noprofile "iex (${%~f0} | out-string)"') do (
+		set "dk_selectFile=%%~G"
     )
 	endlocal & (
 		set "dk_selectFile=%dk_selectFile:\=/%"
