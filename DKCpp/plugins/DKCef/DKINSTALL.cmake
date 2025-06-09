@@ -42,7 +42,7 @@ dk_depend(DKDuktape)
 dk_set(CURRENT_PLUGIN "DKCef")
 dk_generateCmake(${CURRENT_PLUGIN})
 dk_assets("${CMAKE_CURRENT_LIST_DIR}")
-dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/digitalknob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
+dk_set(${CURRENT_PLUGIN} "C:/Users/Administrator/DigitalKnob/Development/DKCpp/plugins/${CURRENT_PLUGIN}")
 dk_configure(${${CURRENT_PLUGIN}})
 dk_build(${${CURRENT_PLUGIN}})
 

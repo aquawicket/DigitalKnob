@@ -16,19 +16,19 @@
 #	fi
 #
 #	if [ "$OSTYPE" = "linux-gnu"* ]; then
-#		DIGITALKNOB_DIR="/home/$USER/digitalknob"
+#		DIGITALKNOB_DIR="/home/$USER/DigitalKnob"
 #	elif [ "$OSTYPE" = "darwin"* ]; then
-#		DIGITALKNOB_DIR="/Users/$USER/digitalknob"
+#		DIGITALKNOB_DIR="/Users/$USER/DigitalKnob"
 #	elif [ "$OSTYPE" = "cygwin" ]; then
-#		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
+#		DIGITALKNOB_DIR="/c/Users/$USERNAME/DigitalKnob"
 #	elif [ "$OSTYPE" = "msys" ]; then
-#		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
+#		DIGITALKNOB_DIR="/c/Users/$USERNAME/DigitalKnob"
 #	elif [ "$OSTYPE" = "win32" ]; then #I'm not sure this can happen
-#		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob" 
+#		DIGITALKNOB_DIR="/c/Users/$USERNAME/DigitalKnob" 
 #	elif [ "$OSTYPE" = "freebsd"* ]; then
 #		dk_call dk_error "TODO: freebsd builder incomplete"
 #	elif [ "$OSTYPE" = "linux-android" ]; then
-#		DIGITALKNOB_DIR="/data/data/com.termux/files/home/digitalknob"
+#		DIGITALKNOB_DIR="/data/data/com.termux/files/home/DigitalKnob"
 #	else
 #		dk_call dk_error "UNKNOWN OS ($OSTYPE)"
 #	fi

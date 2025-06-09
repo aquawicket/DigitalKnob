@@ -1,4 +1,4 @@
-:: This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+:: This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
@@ -40,7 +40,7 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	if [%1] == []  goto:eof
 	
 	set "DKBRANCH=Development"
-	set "DIGITALKNOB_DIR=%USERPROFILE:\=/%/digitalknob"
+	set "DIGITALKNOB_DIR=%USERPROFILE:\=/%/DigitalKnob"
 	set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%/DKCMake"
 	if exist "%ProgramFiles:\=/%/CMake/bin/cmake.exe" 		set "CMAKE_EXE=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
 	if exist "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" 	set "CMAKE_EXE=%ProgramFiles(x86)"\=/%/CMake/bin/cmake.exe"

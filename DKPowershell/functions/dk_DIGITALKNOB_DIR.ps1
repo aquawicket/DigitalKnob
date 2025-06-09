@@ -18,7 +18,7 @@ function Global:dk_DIGITALKNOB_DIR() {
 	dk_call dk_validate DKHOME_DIR  "dk_call dk_DKHOME_DIR"
 
 	### DIGITALKNOB_DIR ###
-	$global:DIGITALKNOB="digitalknob"
+	$global:DIGITALKNOB="DigitalKnob"
 	$global:DIGITALKNOB_DIR="${DKHOME_DIR}/${DIGITALKNOB}"
 	dk_call dk_mkdir $DIGITALKNOB_DIR
 

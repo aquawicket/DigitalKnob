@@ -12,7 +12,7 @@ function Global:dk_removeAll() {
 	dk_call dk_echo
 	dk_call dk_echo
 	dk_call dk_info "Do you want to delete the entire local repository . . . ?"
-	dk_call dk_info "This will delete the local digitalknob branch repository"
+	dk_call dk_info "This will delete the local DigitalKnob branch repository"
 	dk_call dk_info "Save any un-commited changes first."
 	dk_call dk_echo
 		
@@ -29,7 +29,7 @@ function Global:dk_removeAll() {
 		return ${false};
 	}
 		
-	# Backup main script file to digitalknob/
+	# Backup main script file to DigitalKnob/
 #	rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
 #	cp "${DKSCRIPT_PATH}" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
 		

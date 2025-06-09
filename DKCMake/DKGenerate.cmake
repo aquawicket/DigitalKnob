@@ -10,7 +10,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -793,7 +793,7 @@ elseif((Ios) OR (Iossim))
 	endforeach()
 		
 	### Create Info.plist ###
-	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${Target_App})
+	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.DigitalKnob.${Target_App})
 	dk_set(CFBundleDevelopmentRegion en)
 	dk_set(CFBundleDisplayName ${Target_App})
 	dk_set(CFBundleExecutable ${Target_App})
@@ -834,7 +834,7 @@ elseif((Ios) OR (Iossim))
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
 				"xcrun simctl install booted ${Target_App_Dir}/iossim_x86_64/Debug-iphonesimulator/${Target_App}.app\n"
-				"xcrun simctl launch --console-pty booted com.digitalknob.${Target_App}"
+				"xcrun simctl launch --console-pty booted com.DigitalKnob.${Target_App}"
 			)
 			dk_fileWrite(${Target_App_Dir}/iossim_x86_64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
 			dk_exec(chmod 777 ${Target_App_Dir}/iossim_x86_64/Debug-iphonesimulator/Run.sh)
@@ -844,7 +844,7 @@ elseif((Ios) OR (Iossim))
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
 				"xcrun simctl install booted ${Target_App_Dir}/iossim_x86_64/Release-iphonesimulator/${Target_App}.app\n"
-				"xcrun simctl launch --console-pty booted com.digitalknob.${Target_App}"
+				"xcrun simctl launch --console-pty booted com.DigitalKnob.${Target_App}"
 			)
 			dk_fileWrite(${Target_App_Dir}/iossim_x86_64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
 			dk_exec(chmod 777 ${Target_App_Dir}/iossim_x86_64/Release-iphonesimulator/Run.sh)
@@ -988,7 +988,7 @@ elseif(Mac)
 	endforeach()
 		
 	######################### Create Info.plist #######################
-	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${Target_App})
+	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.DigitalKnob.${Target_App})
 	dk_set(CFBundleDevelopmentRegion en)
 	dk_set(CFBundleDisplayName ${Target_App})
 	if(MAC_TERMINAL_WRAPPER)

@@ -13,7 +13,7 @@ function Global:dk_enterManually() {
 	$input = Read-Host
 	$global:Target_App = "_${input}_"
 	
-	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
+	#Search DigitalKnob for the matching entry containing a DKINSTALL.cmake file  
 	if(dk_call dk_pathExists "$DKIMPORTS_DIR/$input/DKINSTALL.cmake"){
 		$global:TARGET_PATH = "$DKIMPORTS_DIR/$input"
 	}

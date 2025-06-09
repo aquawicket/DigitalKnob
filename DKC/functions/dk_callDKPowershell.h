@@ -18,19 +18,19 @@ int dk_callDKPowershell(char* func, char* args, char* rtn_var){
 	//dk_echo("%s(%s)\n", func, args);
 
 	char* POWERSHELL_EXE = "powershell.exe";
-	char* DKSCRIPT_PATH = "C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKPowershell.h";
-	char* DKPOWERSHELL_FUNCTIONS_DIR = "C:/Users/Administrator/digitalknob/Development/DKPowershell/functions";
-	char* DKPOWERSHELL_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKPowershell/functions/";
+	char* DKSCRIPT_PATH = "C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKPowershell.h";
+	char* DKPOWERSHELL_FUNCTIONS_DIR = "C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions";
+	char* DKPOWERSHELL_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/";
 
-	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKPowershell.h")) {
+	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKPowershell.h")) {
       dk_error("putenv failed \n");
       return -1;
     }
-	if(-1 == putenv("DKPOWERSHELL_FUNCTIONS_DIR=C:/Users/Administrator/digitalknob/Development/DKPowershell/functions")) {
+	if(-1 == putenv("DKPOWERSHELL_FUNCTIONS_DIR=C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions")) {
       dk_error("putenv failed \n");
       return -1;
     } 
-	if(-1 == putenv("DKPOWERSHELL_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKPowershell/functions/")) {
+	if(-1 == putenv("DKPOWERSHELL_FUNCTIONS_DIR_=C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/")) {
       dk_error("putenv failed \n");
       return -1;
     } 

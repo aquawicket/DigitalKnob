@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -333,6 +333,6 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT Target_Tuple)
 		dk_printVar(CMAKE_BINARY_DIR)	
-		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are Cosmopolitan,Android_Arm32,android_arm64,android_x86,android_x86_64,emscripten,ios_arm32,ios_arm64,Iossim_X86,iossim_x86_64,Linux_X86,Linux_X86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,Win_X86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKCpp/apps/MyApp/win_x86")
+		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are Cosmopolitan,Android_Arm32,android_arm64,android_x86,android_x86_64,emscripten,ios_arm32,ios_arm64,Iossim_X86,iossim_x86_64,Linux_X86,Linux_X86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,Win_X86,win_x86_64 \n 	EXAMPLE: DigitalKnob/Development/DKCpp/apps/MyApp/win_x86")
 	endif()
 endif()

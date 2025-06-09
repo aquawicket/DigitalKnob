@@ -32,7 +32,7 @@ echo #############################################
 
 :: App package name and lable
 set "TYPE=com"
-set "COMPANY=digitalknob"
+set "COMPANY=DigitalKnob"
 set "APP_NAME=dk"
 set "APP_LABEL=DKApp"
 
@@ -41,7 +41,7 @@ set "APP_LABEL=DKApp"
 set "keypass=123456"
 set "FirstLastName=aquawicket"
 set "Unit=IT"
-set "Orginization=digitalknob"
+set "Orginization=DigitalKnob"
 set "City=Perris"
 set "State=CA"
 set "Country=US"
@@ -61,9 +61,9 @@ if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does no
 
 :: JDK
 if %GRADLE% equ 0 (
-	set "JAVA_HOME=%USERPROFILE:\=/%/digitalknob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
+	set "JAVA_HOME=%USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
 ) else (
-	set "JAVA_HOME=%USERPROFILE:\=/%/digitalknob/Development/3rdParty/openjdk-11_windows-x64_bin"
+	set "JAVA_HOME=%USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/openjdk-11_windows-x64_bin"
 )
 call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"

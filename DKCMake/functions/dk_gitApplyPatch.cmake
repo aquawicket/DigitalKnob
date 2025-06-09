@@ -74,7 +74,7 @@ endfunction()
 function(DKTEST) 
 	dk_debugFunc()
 	
-	dk_gitApplyPatch("C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master" "C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/rmlui/rmlui.patch")
+	dk_gitApplyPatch("C:/Users/Administrator/DigitalKnob/Development/3rdParty/rmlui-master" "C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/rmlui/rmlui.patch")
 endfunction()
 
 

@@ -1,5 +1,5 @@
-var index = "file:///C:/Users/Administrator/digitalknob/Development/DKHtml/index.html";
-var assets = "file:///C:/Users/Administrator/digitalknob/Development";
+var index = "file:///C:/Users/Administrator/DigitalKnob/Development/DKHtml/index.html";
+var assets = "file:///C:/Users/Administrator/DigitalKnob/Development";
 var USE_FILESYSTEM = 0;
 var USE_NODEJS=0;
 
@@ -38,7 +38,7 @@ if(USE_NODEJS){
 	//COMSPEC = dk_env("%COMSPEC%")
 	WScript_Shell = new ActiveXObject("WScript.Shell");
 	WScript_Shell.Run('start '+NODEJS_EXE+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
-	WScript_Shell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
+	WScript_Shell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/DigitalKnob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
 }
 
 //##############################################################
@@ -415,7 +415,7 @@ dk_assert("DKSCRIPT_EXT");
 console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
 
 //###### DKHOME_DIR variables ######
-if(!dk_valid("DIGITALKNOB")){ var DIGITALKNOB = "digitalknob"; }
+if(!dk_valid("DIGITALKNOB")){ var DIGITALKNOB = "DigitalKnob"; }
 var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1).replaceAll("file:///", "");
 var DKCACHE_DIR = DKHOME_DIR+"/.dk"
 var DKDESKTOP_DIR = DKHOME_DIR+"/Desktop"

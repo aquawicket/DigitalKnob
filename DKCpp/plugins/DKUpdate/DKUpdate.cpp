@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -222,7 +222,7 @@ bool DKUpdate::UpdatePlugin(const DKString& url){
 	//TODO - recursive plugin file downloading
 	
 	//ok, here we are going to copy the url to the assets folder
-	//I.E.   digitalknob.com/TradePost/DKBrowser  ->  c:/digitalknob/Development/DKCpp/apps/TradePost/DKBrowser
+	//I.E.   DigitalKnob.com/TradePost/DKBrowser  ->  c:/DigitalKnob/Development/DKCpp/apps/TradePost/DKBrowser
 
 	//first check that the url exists
 	DKCurl::Instance("DKCurlUpdate");
@@ -230,17 +230,17 @@ bool DKUpdate::UpdatePlugin(const DKString& url){
 		return DKERROR("DKUpdate::UpdatePlugin("+url+"): the url does not exist\n");
 	DKINFO("DKUpdate::UpdatePlugin("+url+"): we found it!\n");
 
-	//now we have to find the folder relative to http://digitalknob.com/DKFile/DKFile.php
-	//I.E:  http://digitalknob.com/TradePost/TradePost = ../../TradePost/TradePost
-	//I.E:  http://digitalknob.com/DKInputTest/DKNotePad = ../../DKInputTest/DKNotePad
-	//I.E:  http://digitalknob.com/Digitalknob/DKFpsTest = ../../Digitalknob/DKFpsTest
+	//now we have to find the folder relative to http://DigitalKnob.com/DKFile/DKFile.php
+	//I.E:  http://DigitalKnob.com/TradePost/TradePost = ../../TradePost/TradePost
+	//I.E:  http://DigitalKnob.com/DKInputTest/DKNotePad = ../../DKInputTest/DKNotePad
+	//I.E:  http://DigitalKnob.com/Digitalknob/DKFpsTest = ../../Digitalknob/DKFpsTest
 
-	if(!has(url, "http://digitalknob.com/"))
-		return DKERROR("DKUpdate::UpdatePlugin("+url+"): Plugins can only be obtained from digitalknob.com\n");
+	if(!has(url, "http://DigitalKnob.com/"))
+		return DKERROR("DKUpdate::UpdatePlugin("+url+"): Plugins can only be obtained from DigitalKnob.com\n");
 	
 	DKString url2 = url;
-	replace(url2, "http://digitalknob.com/", "../../");
-	DKString new_url = "http://digitalknob.com/Digitalknob/DKFile/DKFile.php?DirectoryContents="+url2;
+	replace(url2, "http://DigitalKnob.com/", "../../");
+	DKString new_url = "http://DigitalKnob.com/Digitalknob/DKFile/DKFile.php?DirectoryContents="+url2;
 	DKINFO("new_url = "+new_url+"\n");
 	DKString output;
 	if(!DKCurl::Get("DKCurlUpdate")->HttpToString(new_url, output))
@@ -255,7 +255,7 @@ bool DKUpdate::UpdatePlugin(const DKString& url){
 	toStringArray(arry, output, ",");
 	replace(url2, "../../", "");
 	for(unsigned int i=0; i<arry.size(); i++){
-		arry[i] = "http://digitalknob.com/"+url2+"/"+arry[i];
+		arry[i] = "http://DigitalKnob.com/"+url2+"/"+arry[i];
 		DKINFO("arry["+toString(i)+"] = "+arry[i]+"\n");
 	}
 

@@ -26,7 +26,7 @@ include_guard()
 #										https://website.com/executable.exe              				* executable file
 #
 #	IMPORT_PATH (optional)
-#										C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
+#										C:/Users/name/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 #
 #	BRANCH (optional)
 #										develop
@@ -41,11 +41,11 @@ include_guard()
 #										myZLIB
 #
 #	PATH (optional)
-#										C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-#										C:/Users/name/digitalknob/Development/3rdParty/myZLIB
+#										C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
+#										C:/Users/name/DigitalKnob/Development/3rdParty/myZLIB
 #
 #	ROOT (optional)
-#										C:/Users/name/digitalknob/Development/3rdParty
+#										C:/Users/name/DigitalKnob/Development/3rdParty
 #										C:/Users/name/MyLibraries
 #
 #	TAG (optional)
@@ -66,7 +66,7 @@ function(dk_importVariables)
 	endif()
 	
 	dk_unset(IMPORT_PATH)
-	dk_getParameterValue(IMPORT_PATH) 	# C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
+	dk_getParameterValue(IMPORT_PATH) 	# C:/Users/name/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(IMPORT_PATH)
 	endif()
@@ -90,13 +90,13 @@ function(dk_importVariables)
 	endif()
 	
 	dk_unset(_PATH_)
-	dk_getParameterValue(_PATH_)		# C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+	dk_getParameterValue(_PATH_)		# C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(_PATH_)
 	endif()
 	
 	dk_unset(ROOT)
-	dk_getParameterValue(ROOT)			# C:/Users/name/digitalknob/Development/3rdParty
+	dk_getParameterValue(ROOT)			# C:/Users/name/DigitalKnob/Development/3rdParty
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(ROOT)
 	endif()
@@ -124,7 +124,7 @@ function(dk_importVariables)
 # PLUGIN_URL_FILE      		- from PLUGIN_URL_FILENAME											: master
 	
 # PLUGIN_IMPORT				- from CMAKE_CURRENT_LIST_DIR										: 1
-# PLUGIN_IMPORT_PATH		- from CMAKE_CURRENT_LIST_DIR										: C:\Users\name\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+# PLUGIN_IMPORT_PATH		- from CMAKE_CURRENT_LIST_DIR										: C:\Users\name\DigitalKnob\Development\3rdParty\_DKIMPORTS\zlib
 # PLUGIN_IMPORT_NAME		- from PLUGIN_IMPORT_PATH											: zlib
 
 # PLUGIN_GIT				- from PLUGIN_URL													: 1
@@ -136,12 +136,12 @@ function(dk_importVariables)
 # PLUGIN_INSTALL_NAME		- from PLUGIN_IMPORT_NAME, PLUGIN_GIT_NAME or PLUGIN_URL_NAME		: zlib
 # PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE and PLUGIN_IMPORT_NAME						: master
 # PLUGIN_INSTALL_FOLDER     - from PLUGIN_INSTALL_NAME amd PLUGIN_INSTALL_VERSION				: zlib-master
-# PLUGIN_INSTALL_ROOT		- from default:DK3RDPARTY OR arg:ROOT								: C:/Users/name/digitalknob/Development/3rdParty
-# PLUGIN_INSTALL_PATH		- from PLUGIN_INSTALL_ROOT and PLUGIN_INSTALL_FOLDER				: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+# PLUGIN_INSTALL_ROOT		- from default:DK3RDPARTY OR arg:ROOT								: C:/Users/name/DigitalKnob/Development/3rdParty
+# PLUGIN_INSTALL_PATH		- from PLUGIN_INSTALL_ROOT and PLUGIN_INSTALL_FOLDER				: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
 	
-# <PLUGIN>					- from PLUGIN_IMPORT_NAME						:ZLIB   			: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-# <CURRENT_PLUGIN>			- from <PLUGIN>									:ZLIB				: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-# <PLUGIN>_DIR				- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+# <PLUGIN>					- from PLUGIN_IMPORT_NAME						:ZLIB   			: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
+# <CURRENT_PLUGIN>			- from <PLUGIN>									:ZLIB				: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
+# <PLUGIN>_DIR				- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
 # <PLUGIN>_URL				- from PLUGIN_URL								:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
 # <PLUGIN>_IMPORT_FILE			- from PLUGIN_URL_FILENAME						:ZLIB_IMPORT_FILE		: master.zip
 # <PLUGIN>_VERSION          - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
@@ -149,11 +149,11 @@ function(dk_importVariables)
 # <PLUGIN>_IMPORT_NAME		- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
 # <PLUGIN>_BRANCH			- from PLUGIN_GIT_BRANCH						:ZLIB_BRANCH		: master
 # <PLUGIN>_TAG				- from PLUGIN_GIT_TAG							:ZLIB_TAG			: 
-# <PLUGIN>_TUPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple	:ZLIB_TUPLE_DIR	: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
-# <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-# <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and Debug_Dir		:ZLIB_DEBUG_DIR		: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-# <PLUGIN>_RELEASE_DIR		- from PLUGIN_INSTALL_PATH and Release_Dir		:ZLIB_RELEASE_DIR	: :/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
+# <PLUGIN>_TUPLE_DIR		- from PLUGIN_INSTALL_PATH and Target_Tuple	:ZLIB_TUPLE_DIR	: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
+# <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+# <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and Debug_Dir		:ZLIB_DEBUG_DIR		: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+# <PLUGIN>_RELEASE_DIR		- from PLUGIN_INSTALL_PATH and Release_Dir		:ZLIB_RELEASE_DIR	: :/Users/name/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	
 	
 	##############################################
@@ -249,7 +249,7 @@ function(dk_importVariables)
 		set(PLUGIN_IMPORT_PATH "${IMPORT_PATH}")		
 	endif()
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(PLUGIN_IMPORT_PATH)									# PLUGIN_IMPORT_PATH: C:\Users\name\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+		dk_printVar(PLUGIN_IMPORT_PATH)									# PLUGIN_IMPORT_PATH: C:\Users\name\DigitalKnob\Development\3rdParty\_DKIMPORTS\zlib
 	endif()
 	
 	# PLUGIN_IMPORT_DIR
@@ -414,7 +414,7 @@ function(dk_importVariables)
 		set(PLUGIN_INSTALL_ROOT ${DK3RDPARTY_DIR})
 	endif()
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(PLUGIN_INSTALL_ROOT)								# PLUGIN_INSTALL_ROOT: C:/Users/name/digitalknob/Development/3rdParty
+		dk_printVar(PLUGIN_INSTALL_ROOT)								# PLUGIN_INSTALL_ROOT: C:/Users/name/DigitalKnob/Development/3rdParty
 	endif()
 	
 	# PLUGIN_INSTALL_PATH
@@ -427,7 +427,7 @@ function(dk_importVariables)
 		set(PLUGIN_INSTALL_PATH ${PLUGIN_INSTALL_ROOT}/${PLUGIN_INSTALL_FOLDER})			
 	endif()
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(PLUGIN_INSTALL_PATH)								# PLUGIN_INSTALL_PATH: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+		dk_printVar(PLUGIN_INSTALL_PATH)								# PLUGIN_INSTALL_PATH: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
 	endif()
 	
 	
@@ -466,7 +466,7 @@ function(dk_importVariables)
 	dk_set(${CURRENT_PLUGIN} "${PLUGIN_INSTALL_PATH}")
 	dk_assertVar(CURRENT_PLUGIN)
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(CURRENT_PLUGIN)										# ZLIB: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+		dk_printVar(CURRENT_PLUGIN)										# ZLIB: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
 	endif()
 	
 	# <PLUGIN>_DIR      ### DO NOT USE GIT_DIR ###
@@ -475,7 +475,7 @@ function(dk_importVariables)
 		dk_set(${CURRENT_PLUGIN}_DIR ${PLUGIN_INSTALL_PATH})
 	endif()
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(${CURRENT_PLUGIN}_DIR)								# ZLIB_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
+		dk_printVar(${CURRENT_PLUGIN}_DIR)								# ZLIB_DIR: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
 	endif()
 	
 	# <PLUGIN>_URL
@@ -547,7 +547,7 @@ function(dk_importVariables)
 		dk_set(${CURRENT_PLUGIN}_TUPLE_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple})
 	endif()
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(${CURRENT_PLUGIN}_TUPLE_DIR)						# ZLIB_TUPLE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
+		dk_printVar(${CURRENT_PLUGIN}_TUPLE_DIR)						# ZLIB_TUPLE_DIR: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	endif()
 	
 	# <PLUGIN>_CONFIG_DIR
@@ -557,7 +557,7 @@ function(dk_importVariables)
 		dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${Target_Config})
 	endif()
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(${CURRENT_PLUGIN}_CONFIG_DIR)						# ZLIB_CONFIG_DIR: C:/Users/user/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+		dk_printVar(${CURRENT_PLUGIN}_CONFIG_DIR)						# ZLIB_CONFIG_DIR: C:/Users/user/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	endif()
 	
 	# <PLUGIN>_BUILD_DIR
@@ -567,7 +567,7 @@ function(dk_importVariables)
 		dk_set(${CURRENT_PLUGIN}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${Target_Build})
 	endif()	
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(${CURRENT_PLUGIN}_BUILD_DIR)						# ZLIB_BUILD_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+		dk_printVar(${CURRENT_PLUGIN}_BUILD_DIR)						# ZLIB_BUILD_DIR: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	endif()
 	
 	# <PLUGIN>_DEBUG_DIR
@@ -576,7 +576,7 @@ function(dk_importVariables)
 		dk_set(${CURRENT_PLUGIN}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Debug_Dir})
 	endif()
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(${CURRENT_PLUGIN}_DEBUG_DIR)						# ZLIB_DEBUG_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+		dk_printVar(${CURRENT_PLUGIN}_DEBUG_DIR)						# ZLIB_DEBUG_DIR: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	endif()
 	
 	# <PLUGIN>_RELEASE_DIR
@@ -585,7 +585,7 @@ function(dk_importVariables)
 		dk_set(${CURRENT_PLUGIN}_RELEASE_DIR ${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Release_Dir})
 	endif()	
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(${CURRENT_PLUGIN}_RELEASE_DIR)						# ZLIB_RELEASE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
+		dk_printVar(${CURRENT_PLUGIN}_RELEASE_DIR)						# ZLIB_RELEASE_DIR: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	endif()
 endfunction()
 

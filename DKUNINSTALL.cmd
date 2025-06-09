@@ -53,13 +53,13 @@ setlocal
 	::###### Delete DK Simlinks ######
 	echo ### Deleting Simlinks ###
 	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
-	%dk_call% dk_delete "%DKDESKTOP_DIR%/digitalknob"
+	%dk_call% dk_delete "%DKDESKTOP_DIR%/DigitalKnob"
 	%dk_call% dk_delete "%DKDESKTOP_DIR%/DKBuilder.cmd"
 	
 	::###### Delete DK Shortcuts ######
 	echo ### Deleting Shortcuts ###
 	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
-	%dk_call% dk_delete "%DKDESKTOP_DIR%/digitalknob.lnk"
+	%dk_call% dk_delete "%DKDESKTOP_DIR%/DigitalKnob.lnk"
 
 	::###### Delete DK Directories ######
 	echo ### Deleting DKCACHE_DIR ###
@@ -69,7 +69,7 @@ setlocal
 	::###### Deleting DIGITALKNOB_DIR ######
 	echo ### Deleting DIGITALKNOB_DIR ###
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	echo Do you want to delete the digitalknob folder ?
+	echo Do you want to delete the DigitalKnob folder ?
 	%dk_call% dk_confirm || (exit /b 0)
 	
 	::###### Create a deleter and run is in a new process and exit this script

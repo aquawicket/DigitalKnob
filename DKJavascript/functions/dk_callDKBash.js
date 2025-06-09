@@ -8,7 +8,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js");
 dk_callDKBash = function dk_callDKBash_f(){
 	//dk_debugFunc(0);
 
-	DKBASH_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKBash/functions/";
+	DKBASH_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKBash/functions/";
 	COMSPEC = dk_env("%COMSPEC%")
 	WScript_Shell = new ActiveXObject("WScript.Shell");
 	
@@ -17,7 +17,7 @@ dk_callDKBash = function dk_callDKBash_f(){
 
 	//var oExec = WScript_Shell.Exec('cmd /V:ON /c dir');
 	//var oExec = WScript_Shell.Exec('cmd /V:ON /c test.cmd');
-	var oExec = WScript_Shell.Exec('%COMSPEC% /V:ON /c call C:/Users/Administrator/digitalknob/Development/DKBash/functions/dk_test.sh');
+	var oExec = WScript_Shell.Exec('%COMSPEC% /V:ON /c call C:/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_test.sh');
 	
 	/*
 	var input = "";

@@ -52,7 +52,7 @@ DK(){
 
 	
 #	[ ! -e "${DKHOME_DIR-}" ] 				&& export DKHOME_DIR="${HOME}"
-#	[ ! -n "${DIGITALKNOB_DIR-}" ]			&& export DIGITALKNOB_DIR="${DKHOME_DIR}/digitalknob"
+#	[ ! -n "${DIGITALKNOB_DIR-}" ]			&& export DIGITALKNOB_DIR="${DKHOME_DIR}/DigitalKnob"
 #	[ ! -n "${DKBRANCH_DIR-}" ]				&& export DKBRANCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}"
 #	[ ! -n "${DKBASH_DIR-}" ]				&& export DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
 #	[ ! -n "${DKBASH_FUNCTIONS_DIR-}" ]		&& export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"

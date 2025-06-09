@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -25,7 +25,7 @@
 */
 
 // AUTO-GENERATED FILE. "dkapp" is renamed.
-package digitalknob.dkapp;
+package DigitalKnob.dkapp;
 
 import android.app.Activity;
 import android.content.Context;
@@ -119,7 +119,7 @@ public class DK extends Activity
 	{
 		Log.d("DK.java", "OpenActivity("+name+")");
 		Intent intent = new Intent();
-		intent.setClassName("digitalknob.dkapp", "digitalknob.dkapp."+name);
+		intent.setClassName("DigitalKnob.dkapp", "DigitalKnob.dkapp."+name);
 		startActivity(intent);
 	}
 

@@ -1,7 +1,7 @@
 @echo off
 :: https://developer.android.com/studio/projects
 
-set "PACKAGE_NAME=com.digitalknob.dk"
+set "PACKAGE_NAME=com.DigitalKnob.dk"
 ::if "%1" neq "" set PACKAGE_NAME=%~1
 
 

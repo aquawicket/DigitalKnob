@@ -21,7 +21,7 @@ dk_callDKBatch = function dk_callDKBatch_f() {
 	if(!dk_valid("dk_env")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js"); }
 	var ComSpec = dk_env("ComSpec");
 	//DKBATCH_FUNCTIONS_DIR_ = dk_env("DKBATCH_FUNCTIONS_DIR_");
-	//DKBATCH_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKBatch/functions/";
+	//DKBATCH_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKBatch/functions/";
 	
 	var DKCOMMAND = ComSpec+' /V:ON /c call "'+DKBATCH_FUNCTIONS_DIR_+func+'.cmd" '+args
 	dk_exec(DKCOMMAND);

@@ -16,7 +16,7 @@ endif()
 
 #project(HelloWorld C CXX)
 ##set(OS Windows_X86 CACHE PATH "" FORCE)
-set(DK3RDPARTY_DIR "C:/Users/$ENV{USERNAME}/digitalknob/Development/3rdParty" CACHE PATH "" FORCE)
+set(DK3RDPARTY_DIR "C:/Users/$ENV{USERNAME}/DigitalKnob/Development/3rdParty" CACHE PATH "" FORCE)
 
 ##${STDINT}
 

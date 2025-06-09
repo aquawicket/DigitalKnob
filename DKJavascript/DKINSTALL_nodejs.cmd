@@ -8,7 +8,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKJAVASCRIPT_FILE=%%~nxZ"
 	cd %SystemDrive%\
     start %NODEJS_EXE% %DKJAVASCRIPT_FUNCTIONS_DIR%\DKNodeServer.js
-	explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST=%DKSCRIPT_PATH%"
+	explorer "http://127.0.0.1:8080/Users/Administrator/DigitalKnob/Development/DKHtml/index.html?DKTEST=%DKSCRIPT_PATH%"
 %endfunction%
 
 

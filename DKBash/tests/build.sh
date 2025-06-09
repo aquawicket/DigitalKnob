@@ -743,11 +743,11 @@ dk_DIGITALKNOB_DIR() {
 	
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_printVar USERPROFILE
-		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
+		DIGITALKNOB_DIR="$USERPROFILE\DigitalKnob"
 		dk_replaceAll "${DIGITALKNOB_DIR}" "\\" "/" DIGITALKNOB_DIR
 		dk_replaceAll "${DIGITALKNOB_DIR}" "C:" "/c" DIGITALKNOB_DIR
 	else
-		DIGITALKNOB_DIR="$HOME/digitalknob"
+		DIGITALKNOB_DIR="$HOME/DigitalKnob"
 	fi
 	dk_printVar DIGITALKNOB_DIR
 	mkdir -p "${DIGITALKNOB_DIR}"
@@ -1477,19 +1477,19 @@ dk_validatePackage() {
 #	fi
 #
 #	if [ "$OSTYPE" = "linux-gnu"* ]; then
-#		DIGITALKNOB_DIR="/home/$USER/digitalknob"
+#		DIGITALKNOB_DIR="/home/$USER/DigitalKnob"
 #	elif [ "$OSTYPE" = "darwin"* ]; then
-#		DIGITALKNOB_DIR="/Users/$USER/digitalknob"
+#		DIGITALKNOB_DIR="/Users/$USER/DigitalKnob"
 #	elif [ "$OSTYPE" = "cygwin" ]; then
-#		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
+#		DIGITALKNOB_DIR="/c/Users/$USERNAME/DigitalKnob"
 #	elif [ "$OSTYPE" = "msys" ]; then
-#		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
+#		DIGITALKNOB_DIR="/c/Users/$USERNAME/DigitalKnob"
 #	elif [ "$OSTYPE" = "win32" ]; then #I'm not sure this can happen
-#		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob" 
+#		DIGITALKNOB_DIR="/c/Users/$USERNAME/DigitalKnob" 
 #	elif [ "$OSTYPE" = "freebsd"* ]; then
 #		dk_error "TODO: freebsd builder incomplete"
 #	elif [ "$OSTYPE" = "linux-android" ]; then
-#		DIGITALKNOB_DIR="/data/data/com.termux/files/home/digitalknob"
+#		DIGITALKNOB_DIR="/data/data/com.termux/files/home/DigitalKnob"
 #	else
 #		dk_error "UNKNOWN OS ($OSTYPE)"
 #	fi
@@ -1761,7 +1761,7 @@ dk_resetAll() {
 		dk_echo
 		dk_echo
 		dk_info "Do you want to reset the entire local repository . . . ?"
-		dk_info "This will delete digitalknob, everything will be reset,"
+		dk_info "This will delete DigitalKnob, everything will be reset,"
 		dk_info "and the repository will be re-cloned. All libraries and tools"
 		dk_info "will be re downloaded and rebuild from start. Save any changes"
 		dk_info "you wish to commit or save beforehand."
@@ -1836,7 +1836,7 @@ dk_removeAll() {
 		dk_echo
 		dk_echo
 		dk_echo "Do you want to remove the entire local repository . . . ?"
-		dk_echo "This will delete digitalknob, Save any changes"
+		dk_echo "This will delete DigitalKnob, Save any changes"
 		dk_echo "you wish to commit or save beforehand."		
 		dk_echo
 		
@@ -1985,7 +1985,7 @@ dk_enterManually() {
 	
 	Target_App="_${input}_"
 	
-	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
+	#Search DigitalKnob for the matching entry containing a DKINSTALL.cmake file  
 	if test -f "${DKIMPORTS_DIR}"/"${input}"/DKINSTALL.cmake; then
 		Target_App_Dir=${DKIMPORTS_DIR}/${input}
 	fi

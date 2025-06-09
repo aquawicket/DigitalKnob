@@ -19,9 +19,9 @@ dk_buildMain() {
 	dk_call dk_validate DIGITALKNOB_DIR		"dk_call dk_DIGITALKNOB_DIR"
 	dk_call dk_validate DKBRANCH_DIR		"dk_call dk_DKBRANCH_DIR"
 	
-	if [ ! -e "${DKDESKTOP_DIR}/digitalknob" ]; then
+	if [ ! -e "${DKDESKTOP_DIR}/DigitalKnob" ]; then
 		if [ -e "${DKDESKTOP_DIR}" ]; then
-			dk_call dk_createSymlink "${DIGITALKNOB_DIR}" "${DKDESKTOP_DIR}/digitalknob"
+			dk_call dk_createSymlink "${DIGITALKNOB_DIR}" "${DKDESKTOP_DIR}/DigitalKnob"
 		fi
 	fi
 	

@@ -26,7 +26,7 @@ function DK(){
 	#echo("DKSCRIPT_NAME = ${DKSCRIPT_NAME}\n");
 	#echo("DKSCRIPT_EXT = ${DKSCRIPT_EXT}\n");
 
-	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_color.php");
+	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_color.php");
 	include_once("{$DKSCRIPT_PATH}");
 
 	#echo "DKSCRIPT_PATH = ".$GLOBALS['DKSCRIPT_PATH']."\n";

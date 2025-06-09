@@ -15,7 +15,7 @@ dk_resetAll() {
 	dk_call dk_echo
 	dk_call dk_echo
 	dk_call dk_info "Do you want to reset the entire local repository . . . ?"
-	dk_call dk_info "This will delete digitalknob, everything will be reset,"
+	dk_call dk_info "This will delete DigitalKnob, everything will be reset,"
 	dk_call dk_info "and the repository will be re-cloned. All libraries and tools"
 	dk_call dk_info "will be re downloaded and rebuild from start. Save any changes"
 	dk_call dk_info "you wish to commit or save beforehand."

@@ -43,5 +43,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_clearCmakeCache("C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Debug")
+	dk_clearCmakeCache("C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Debug")
 endfunction()

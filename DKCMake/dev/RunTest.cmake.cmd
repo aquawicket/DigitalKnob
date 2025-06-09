@@ -1,4 +1,4 @@
-:: This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+:: This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
@@ -27,7 +27,7 @@
 
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
-set "DIGITALKNOB_DIR=%USERPROFILE%\digitalknob"
+set "DIGITALKNOB_DIR=%USERPROFILE%\DigitalKnob"
 set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/Development/DKCMake"
 if exist "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
 if exist "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"

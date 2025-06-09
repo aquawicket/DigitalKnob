@@ -12,13 +12,13 @@ android {
 	compileSdkVersion 31
 	buildToolsVersion "30.0.3"
 	ndkVersion "23.1.7779620"
-	ndkPath 'C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/23.1.7779620'
+	ndkPath 'C:/Users/Administrator/DigitalKnob/Development/3rdParty/android-sdk/ndk/23.1.7779620'
     defaultConfig {
 		packagingOptions {
 			doNotStrip '**.so'
 		}		
         if (buildAsApplication){
-			applicationId "com.digitalknob.dk"
+			applicationId "com.DigitalKnob.dk"
         }
 		minSdkVersion 19
 		targetSdkVersion 31

@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -660,7 +660,7 @@ bool DKWindows::SetClipboard(const DKString& text){
 
 bool DKWindows::SetClipboardFiles(const DKString& filelist){
 	DKDEBUGFUNC(filelist);
-	//char sFiles[] = "C:/Users/aquawicket/digitalknob/README.md\0";
+	//char sFiles[] = "C:/Users/aquawicket/DigitalKnob/README.md\0";
 	DKString sFiles = filelist;
 	replace(sFiles, ",", "\0"); //not working
 	DROPFILES dobj = { 20, { 0, 0 }, 0, 1 };

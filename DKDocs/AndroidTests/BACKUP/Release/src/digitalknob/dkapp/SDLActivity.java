@@ -1,5 +1,5 @@
 // AUTO-GENERATED FILE. "dkapp" is renamed.
-package digitalknob.dkapp;
+package DigitalKnob.dkapp;
 
 import java.io.File;
 import java.io.FileOutputStream;

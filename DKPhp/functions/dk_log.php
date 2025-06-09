@@ -6,7 +6,7 @@
 function dk_log(){
 	#dk_debugFunc(1 2)
 	#echo("###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n");
-	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_color.php");
+	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_color.php");
 
 	if(!isset($dk_log_ENABLE)){ $dk_log_ENABLE = 1; }
 	if($dk_log_ENABLE != 1){ return 0; }
@@ -224,5 +224,5 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 }}
 
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/DK.php");
 ?>

@@ -56,7 +56,7 @@ function(DKTEST)
 	
 	dk_echo()
 	dk_echo("Test Setting DK3RDPARTY_DIR . . .")
-	dk_DK3RDPARTY_DIR("C:/digitalknob/Development/3rdParty")
+	dk_DK3RDPARTY_DIR("C:/DigitalKnob/Development/3rdParty")
 	if(EXISTS "${DK3RDPARTY_DIR}")
 		dk_success("DK3RDPARTY_DIR = ${DK3RDPARTY_DIR}")
 	else()

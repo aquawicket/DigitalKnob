@@ -15,7 +15,7 @@ include_guard()
 #########################################################################
 # dk_deleteTempFiles()
 #
-#	Delete all .tmp files recursivly thoughout the digitalknob directory
+#	Delete all .tmp files recursivly thoughout the DigitalKnob directory
 #
 function(dk_deleteTempFiles)
 	dk_debugFunc(0)

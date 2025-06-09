@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 
-set(DIGITALKNOB_DIR C:/Users/Administrator/digitalknob)
+set(DIGITALKNOB_DIR C:/Users/Administrator/DigitalKnob)
 set(DK3RDPARTY_DIR ${DIGITALKNOB_DIR}/Development/3rdParty)
 set(DKCPP_PLUGINS_DIR ${DIGITALKNOB_DIR}/Development/DKCpp/plugins)
 

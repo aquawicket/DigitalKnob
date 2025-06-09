@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -58,7 +58,7 @@ void DKOSGVideo::loaddlls(){
 #if WIN
 	//delay loading the DLL to move it's locations
 	//DKClass::DKCreate("DKAssets");
-	DKFile::local_assets = "C:/digitalknob/DKCpp/apps/DKOS/assets/"; //FIXME
+	DKFile::local_assets = "C:/DigitalKnob/DKCpp/apps/DKOS/assets/"; //FIXME
 	DKString path = DKFile::local_assets += "DKFfmpeg";
 	
 	DKString avutil = path + "\\avutil-54.dll";

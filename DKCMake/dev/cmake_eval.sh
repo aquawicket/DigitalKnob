@@ -1,4 +1,4 @@
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -45,7 +45,7 @@ fi
 red="\033[31m"
 
 
-DIGITALKNOB_DIR=/c/Users/aquawicket/digitalknob
+DIGITALKNOB_DIR=/c/Users/aquawicket/DigitalKnob
 DKCMAKE_DIR="$DIGITALKNOB_DIR/Development/DKCMake"
 CMAKE_EXE=$(which cmake)
 #echo "CMAKE_EXE = $CMAKE_EXE"

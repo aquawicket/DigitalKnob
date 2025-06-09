@@ -9,7 +9,7 @@ dk_source = function(url){
 
 var ENABLE_dk_debugFunc = 0;
 var DKHTTP_DK_JS = "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKJavascript/functions/DK.js";
-//var DKBRANCH_DIR = "C:/Users/Administrator/digitalknob/Development"
+//var DKBRANCH_DIR = "C:/Users/Administrator/DigitalKnob/Development"
 var DKSCRIPT_PATH = WScript.ScriptFullName;
 var DKSCRIPT_DIR = new ActiveXObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName);
 var DKBRANCH_DIR = DKSCRIPT_DIR;

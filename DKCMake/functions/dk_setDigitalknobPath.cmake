@@ -15,7 +15,7 @@ include_guard()
 #########################################################################
 # dk_file_setDigitalknobPath()
 #
-#	Set the digitalknob root directory environment variable
+#	Set the DigitalKnob root directory environment variable
 #
 function(dk_setDigitalknobPath)
 	dk_debugFunc()
@@ -23,9 +23,9 @@ function(dk_setDigitalknobPath)
 	
 	# Set the DIGITALKNOB_DIR environment variable 
 	dk_getFullPath(${CMAKE_SOURCE_DIR} path)
-	string(FIND "${path}" "digitalknob" pos)
+	string(FIND "${path}" "DigitalKnob" pos)
 	string(SUBSTRING ${path} 0 ${pos} path)
-	set(DIGITALKNOB_DIR ${path}digitalknob CACHE INTERNAL "")
+	set(DIGITALKNOB_DIR ${path}DigitalKnob CACHE INTERNAL "")
 	set(ENV{DKCMAKE_DIR} $ENV{DIGITALKNOB_DIR}/Development/DKCMake/ CACHE INTERNAL "")
 	set(ENV{DIGITALKNOB_DIR} $ENV{DIGITALKNOB_DIR})
 	set(ENV{DKCMAKE_DIR} $ENV{DKCMAKE_DIR})

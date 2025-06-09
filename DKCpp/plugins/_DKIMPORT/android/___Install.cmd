@@ -10,7 +10,7 @@ set "PACKAGE_NAME=%TYPE%.%COMPANY%.%APP_NAME%"
 
 :: App package name and lable
 set "TYPE=com"
-set "COMPANY=digitalknob"
+set "COMPANY=DigitalKnob"
 set "APP_NAME=dk"
 set "APP_LABEL=DKApp"
 

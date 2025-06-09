@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 return()
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -64,9 +64,9 @@ dk_set(DKBRANCH_DIR "$ENV{DKBRANCH_DIR}")
 dk_info("DKBRANCH_DIR = $ENV{DKBRANCH_DIR}")
 
 ### Set DIGITALKNOB_DIR
-string(FIND "$ENV{DKBRANCH_DIR}" "digitalknob" pos)
+string(FIND "$ENV{DKBRANCH_DIR}" "DigitalKnob" pos)
 string(SUBSTRING $ENV{DKBRANCH_DIR} 0 ${pos} DIGITALKNOB_DIR)
-dk_set(DIGITALKNOB_DIR $ENV{DIGITALKNOB_DIR}digitalknob)
+dk_set(DIGITALKNOB_DIR $ENV{DIGITALKNOB_DIR}DigitalKnob)
 dk_info("DIGITALKNOB_DIR = $ENV{DIGITALKNOB_DIR}")
 
 ### Set DK3RDPARTY_DIR

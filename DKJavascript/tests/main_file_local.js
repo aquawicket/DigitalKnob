@@ -5,7 +5,7 @@ for (i=0; i<ARGV.length; i++){
 }
 
 var index = "../../DKHtml/index.html";
-var assets = "file:///C:/Users/Administrator/digitalknob/Development";
+var assets = "file:///C:/Users/Administrator/DigitalKnob/Development";
 
 //###### dk_assert (function) ######
 dk_assert = function(object){

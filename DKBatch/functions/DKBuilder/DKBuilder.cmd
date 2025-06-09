@@ -7,9 +7,9 @@ setlocal enableDelayedExpansion
 if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 
 	set "ENABLE_dk_debug=1"
-	if not defined HDK (set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd")
 	if not defined DIGITALKNOB (set "DIGITALKNOB=DigitalKnob")
 	if not defined DKBRANCH (set "DKBRANCH=Development")
+	if not defined HDK (set "HDK=https://raw.githubusercontent.com/aquawicket/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/DK.cmd")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
 	set "DK=%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
@@ -24,7 +24,7 @@ if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	set "CERTUTIL_EXE=%windir:\=/%/System32/certutil.exe"
 	set "BITSADMIN_EXE=%windir:\=/%/System32/bitsadmin.exe"
 	set "POWERSHELL_EXE=%windir:\=/%/System32/WindowsPowershell/v1.0/powershell.exe"
-	set "GIT_REMOTE_HTTPS_EXE=%USERPROFILE:\=/%/DigitalKnob/DKTools/git-portable-2.46.2-64-bit/mingw64/libexec/git-core/git-remote-https.exe"
+	set "GIT_REMOTE_HTTPS_EXE=%USERPROFILE:\=/%/%DIGITALKNOB%/DKTools/git-portable-2.46.2-64-bit/mingw64/libexec/git-core/git-remote-https.exe"
 
 	::###### firewall allow ######
 	call :dk_firewallAllow curl "%CURL_EXE%"

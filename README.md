@@ -1,4 +1,4 @@
-![](http://digitalknob.com/Digitalknob/Digitalknob/logo.png)
+![](http://DigitalKnob.com/Digitalknob/Digitalknob/logo.png)
 # Digitalknob
 
 <!-- [![Gitter](https://badges.gitter.im/Digitalknob/community.svg)](https://gitter.im/Digitalknob/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
@@ -337,7 +337,7 @@ raspberry_arm64 <br>
 win_x86 <br>
 win_x86_64 <br>
 
-EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/digitalknob/Development/DKCMake -BC:/Users/<username>/digitalknob/Development/DKCpp/apps/DKCore/win_x86
+EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/DigitalKnob/Development/DKCMake -BC:/Users/<username>/DigitalKnob/Development/DKCpp/apps/DKCore/win_x86
 	"will use Visual Studio 17 2022 to build DKCore for the windows i686 platform"
 "NOTE: using build.sh to build DKBuilder, and using DKBuilder_APP.exe is the prefered and tested way to build DK Apps" 
 

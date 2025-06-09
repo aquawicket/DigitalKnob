@@ -12,7 +12,7 @@
 	],
 	"settings": {
 		//"MSYS2": "${fileDirname}/../../../3rdParty/msys2-x86_64-20231026"
-		"MSYS2": "C:/Users/aquawicket/digitalknob/Development/3rdParty/msys2-x86_64-20231026"
+		"MSYS2": "C:/Users/aquawicket/DigitalKnob/Development/3rdParty/msys2-x86_64-20231026"
 	},
 	"launch": {
 		"configurations": [

@@ -1,5 +1,5 @@
 var index = "blank.html";
-var assets = "file:///C:/Users/Administrator/digitalknob/Development/DKJavascript/JScript";
+var assets = "file:///C:/Users/Administrator/DigitalKnob/Development/DKJavascript/JScript";
 
 var globalThis = (function (){  
     return this || (1, eval)('this');  

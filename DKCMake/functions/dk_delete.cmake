@@ -53,7 +53,7 @@ function(DKTEST)
 	#dk_fileWrite(removeMe.file "created file to test dk_delete")
 	#dk_delete("removeMe.file")
 	
-	set(ENV{CMAKE} "C:/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64")
+	set(ENV{CMAKE} "C:/Users/Administrator/DigitalKnob/DKTools/cmake-3.29.5-windows-x86_64")
 	#dk_delete			("$ENV{CMAKE}")			# CMAKE cannot delete itself
 	dk_callDKBatch(dk_delete "$ENV{CMAKE}")
 endfunction()

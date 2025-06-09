@@ -29,7 +29,7 @@ dk_callDKPhp = function dk_callDKPhp_f() {
 	//PHP_EXE = dk_env('PHP_EXE');
 	
 	//DKBATCH_FUNCTIONS_DIR_ = dk_env("DKBATCH_FUNCTIONS_DIR_");
-	//DKBATCH_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKBatch/functions/";
+	//DKBATCH_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKBatch/functions/";
 	
 	dk_assertPath(ComSpec);
 	//dk_assertPath(PHP_EXE);

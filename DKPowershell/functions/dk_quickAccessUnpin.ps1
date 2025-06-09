@@ -34,5 +34,5 @@ function Global:dk_quickAccessUnpin() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_quickAccessUnpin("C:/Users/Administrator/digitalknob");
+	dk_call dk_quickAccessUnpin("C:/Users/Administrator/DigitalKnob");
 }

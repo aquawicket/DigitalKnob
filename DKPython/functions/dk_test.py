@@ -1,5 +1,5 @@
 import sys 
-sys.path.append("C:/Users/Administrator/digitalknob/Development/DKPython/functions")
+sys.path.append("C:/Users/Administrator/DigitalKnob/Development/DKPython/functions")
 from DK import *
 
 ####################################################################

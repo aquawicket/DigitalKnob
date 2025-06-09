@@ -128,7 +128,7 @@ function DKGit_GitUpdate(){
 }
 
 function DKGit_GitCommit(){
-    //Multipe folders in digitalknob/
+    //Multipe folders in DigitalKnob/
     var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
     if (contents){
         var files = contents.split(",")

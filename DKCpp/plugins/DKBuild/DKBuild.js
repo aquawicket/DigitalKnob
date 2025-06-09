@@ -64,7 +64,7 @@ function DKBuild_init(){
 	CPP_DK_Create("DKArchive")
 
 	if(CPP_DK_GetOS() === "Windows"){
-		DIGITALKNOB_DIR = "C:/Users/"+USERNAME+"/digitalknob/"
+		DIGITALKNOB_DIR = "C:/Users/"+USERNAME+"/DigitalKnob/"
 		if(CPP_DK_GetOSArchitecture() === "32"){
 			CMAKE_EXE = "C:/Program Files/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
@@ -79,17 +79,17 @@ function DKBuild_init(){
 		MSBUILD = CPP_DKFile_GetShortName(MSBUILD)
 	}
 	if(CPP_DK_GetOS() === "Mac"){
-		DIGITALKNOB_DIR = "/Users/"+USERNAME+"/digitalknob/"
+		DIGITALKNOB_DIR = "/Users/"+USERNAME+"/DigitalKnob/"
 		CMAKE_EXE = "/Applications/CMake.app/Contents/bin/cmake"
 		XCODE = "/Applications/Xcode.app"
 	}
 	if(CPP_DK_GetOS() === "Linux"){
-		DIGITALKNOB_DIR = "/home/"+USERNAME+"/digitalknob/"
+		DIGITALKNOB_DIR = "/home/"+USERNAME+"/DigitalKnob/"
 		CMAKE_EXE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
-		DIGITALKNOB_DIR = "/home/"+USERNAME+"/digitalknob/"
+		DIGITALKNOB_DIR = "/home/"+USERNAME+"/DigitalKnob/"
 		CMAKE_EXE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
 	}

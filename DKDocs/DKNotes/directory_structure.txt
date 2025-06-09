@@ -1,19 +1,19 @@
 DIRECTORY STRUCTURE
 
-digitalknob/Development
+DigitalKnob/Development
 			git             <-clean git
 			/3rdParty
 			/DKCpp/apps
 			/DKCMake
 			/DKDocs
 			/DKPlugins
-digitalknob/MyApps
+DigitalKnob/MyApps
 			git				<-clean git
 			/3rdParty
 			/DKCpp/apps
 			/DKDocs
 			/DKPlugins
-digitalknob/Misc
+DigitalKnob/Misc
 			git				<-clean git
 			/3rdParty
 			/DKCpp/apps

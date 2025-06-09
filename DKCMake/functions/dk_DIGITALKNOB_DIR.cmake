@@ -31,7 +31,7 @@ function(dk_DIGITALKNOB_DIR)
 	
 		if(NOT DEFINED DIGITALKNOB) 
 		#	dk_set(DIGITALKNOB "D i g i t a l K n o b") 
-			dk_set(DIGITALKNOB "digitalknob")
+			dk_set(DIGITALKNOB "DigitalKnob")
 		endif()
 
 		dk_set(DIGITALKNOB_DIR "${DKHOME_DIR}/${DIGITALKNOB}")
@@ -65,7 +65,7 @@ function(DKTEST)
 	
 	dk_echo()
 	dk_echo("Test Setting DIGITALKNOB_DIR . . .")
-	dk_DIGITALKNOB_DIR("C:/digitalknob")
+	dk_DIGITALKNOB_DIR("C:/DigitalKnob")
 	if(EXISTS "${DIGITALKNOB_DIR}")
 		dk_success("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
 	else()

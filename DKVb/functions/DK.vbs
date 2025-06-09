@@ -46,7 +46,7 @@ else
 	ENV("DKHOME_DIR")					= WScript_Shell.ExpandEnvironmentStrings(ENV("USERPROFILE"))
 	ENV("DKCACHE_DIR")					= ENV("DKHOME_DIR")+"\.dk"
 	ENV("DKDESKTOP_DIR")				= ENV("DKHOME_DIR")+"\Desktop"
-	ENV("DIGITALKNOB")					= "digitalknob"
+	ENV("DIGITALKNOB")					= "DigitalKnob"
 	ENV("DIGITALKNOB_DIR")				= ENV("DKHOME_DIR")+"\"+ENV("DIGITALKNOB")
 	ENV("DKDOWNLOAD_DIR")				= ENV("DIGITALKNOB_DIR")+"\downloads"
 	ENV("DKTOOLS_DIR")					= ENV("DIGITALKNOB_DIR")+"\DKTools"

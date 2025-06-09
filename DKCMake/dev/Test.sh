@@ -1,6 +1,6 @@
 CMAKE_EXE=$(which cmake)
 #echo CMAKE_EXE = $CMAKE_EXE
-DKCMAKE_DIR=/c/Users/aquawicket/digitalknob/Development/DKCMake
+DKCMAKE_DIR=/c/Users/aquawicket/DigitalKnob/Development/DKCMake
 #echo DKCMAKE_DIR = $DKCMAKE_DIR
 
 

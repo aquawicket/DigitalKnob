@@ -166,7 +166,7 @@ get_root() {
 		dk_printVar DKROOT
 	else
 		echo "setting DKROOT to default directory"
-		set_dkroot $DKHOME/digitalknob
+		set_dkroot $DKHOME/DigitalKnob
 	fi
 }
 

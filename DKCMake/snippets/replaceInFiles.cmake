@@ -13,7 +13,7 @@ include_guard()
 
 
 
-set(myPath "C:/Users/Administrator/digitalknob/Development/DKPowershell/functions")
+set(myPath "C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions")
 dk_getFiles("${myPath}")
 
 foreach(file ${dk_getFiles})

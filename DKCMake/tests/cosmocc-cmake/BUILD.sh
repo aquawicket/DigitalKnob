@@ -3,7 +3,7 @@
 rm -rf build
 
 ###### Configure helloWorld ######
-CMAKE_EXE="/C/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake.exe"
+CMAKE_EXE="/C/Users/Administrator/DigitalKnob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake.exe"
 CMAKE_SOURCE_DIR="${PWD}"
 CMAKE_BINARY_DIR="${PWD}/build"
 ${CMAKE_EXE} -G "MSYS Makefiles" -B${CMAKE_BINARY_DIR} -S${CMAKE_SOURCE_DIR}

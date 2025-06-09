@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -38,7 +38,7 @@ extern const char* BUILD_TIME;
 //public:
 
 /**
-*	@function dk_app(argc, argv) - This is the entry point for digitalknob
+*	@function dk_app(argc, argv) - This is the entry point for DigitalKnob
 *
 *	@param argc ::  Non-negative value representing the number of arguments passed to the program from the environment in which the program is run.
 *	@param argv ::	Pointer to the first element of an array of argc + 1 pointers, of which the last one is null and the previous ones, if any, 

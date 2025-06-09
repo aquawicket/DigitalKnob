@@ -1,5 +1,5 @@
 // AUTO-GENERATED FILE. "dkapp" is renamed.
-package digitalknob.dkapp;
+package DigitalKnob.dkapp;
 
 import android.app.Activity;
 import android.content.Context;
@@ -93,7 +93,7 @@ public class DK extends Activity
 	{
 		Log.d("DK.java", "OpenActivity("+name+")");
 		Intent intent = new Intent();
-		intent.setClassName("digitalknob.dkapp", "digitalknob.dkapp."+name);
+		intent.setClassName("DigitalKnob.dkapp", "DigitalKnob.dkapp."+name);
 		startActivity(intent);
 	}
 

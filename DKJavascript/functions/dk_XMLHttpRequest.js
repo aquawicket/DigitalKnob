@@ -116,7 +116,7 @@ dk_XMLHttpRequest = function dk_XMLHttpRequest_f(httpMethod, url, dk_sendRequest
 DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
-	var url = "file:///C:/Users/Administrator/digitalknob/Development/DKJavascript/functions/dk_echo.js"
+	var url = "file:///C:/Users/Administrator/DigitalKnob/Development/DKJavascript/functions/dk_echo.js"
 	
 	dk_XMLHttpRequest("GET", url, function dk_sendRequest_callback(success, url, data){
 		if(!success){

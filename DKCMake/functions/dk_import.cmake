@@ -15,7 +15,7 @@ include_guard()
 #########################################################################
 # dk_import(url) #args
 #
-#	This is a flexable super function for importing just about anything into digitalknob
+#	This is a flexable super function for importing just about anything into DigitalKnob
 #	The idea is to provide a url or path and dk_import will do the rest. 
 #
 #	@url	- The online path of the .git or file to import

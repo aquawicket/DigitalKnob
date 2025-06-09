@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -25,7 +25,7 @@
 */
 
 
-package com.digitalknob.dk;
+package com.DigitalKnob.dk;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -105,7 +105,7 @@ public class DKApp extends SDLActivity {
 		Context context = this.getApplicationContext();
 		int stringId = context.getApplicationInfo().labelRes;
 		//String appdir = "/mnt/sdcard/"+context.getString(stringId);
-		String appdir = "/sdcard/Android/data/com.digitalknob.dk/files/assets";
+		String appdir = "/sdcard/Android/data/com.DigitalKnob.dk/files/assets";
 		File checkfile = new File(appdir+"/ASSETS");
 
 		if(checkfile.exists()){
@@ -139,7 +139,7 @@ public class DKApp extends SDLActivity {
 			}
 			else{
 				//String fullPath = "/mnt/sdcard/"+context.getString(stringId) + "/" + path;
-				String fullPath = "/sdcard/Android/data/com.digitalknob.dk/files/assets/" + path;
+				String fullPath = "/sdcard/Android/data/com.DigitalKnob.dk/files/assets/" + path;
 				File dir = new File(fullPath);
 				if(!dir.exists()){
 					dir.mkdir();
@@ -170,7 +170,7 @@ public class DKApp extends SDLActivity {
 		try{
 			in = assetManager.open(filename);
 			//String newFileName = "/mnt/sdcard/"+context.getString(stringId) + "/" + filename;
-			String newFileName = "/sdcard/Android/data/com.digitalknob.dk/files/assets/" + filename;
+			String newFileName = "/sdcard/Android/data/com.DigitalKnob.dk/files/assets/" + filename;
 			out = new FileOutputStream(newFileName);
 
 			File file = new File(newFileName);

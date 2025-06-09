@@ -22,7 +22,7 @@ dk_DIGITALKNOB_DIR = function dk_DIGITALKNOB_DIR_f(){
 	else {
 		dk_echo("dk_DIGITALKNOB_DIR():GET");
 		if(!dk_valid("dk_DKHOME_DIR")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DKHOME_DIR.js", function(){ dk_DKHOME_DIR() }); }
-		DIGITALKNOB_DIR = DKHOME_DIR+"/digitalknob";
+		DIGITALKNOB_DIR = DKHOME_DIR+"/DigitalKnob";
 	}
 
 	if(!dk_valid("dk_assertPath")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); }

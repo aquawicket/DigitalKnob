@@ -53,16 +53,16 @@ int dk_callDKBash(char* func, char* args, char* rtn_var) {
 //  set "RELOAD_WITH_BASH=0"
 //  if defined USE_WSL (set WSLENV=DKSCRIPT_PATH/u:DKINIT/u:RELOAD_WITH_BASH/u:DKBASH_FUNCTIONS_DIR_/u)
 
-	char* BASH_EXE = "C:/Users/Administrator/digitalknob/DKTools/git-portable-2.46.2-64-bit/bin/bash.exe";
-	char* DKSCRIPT_PATH = "C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKBash.h";
-	char* DKBASH_FUNCTIONS_DIR_ = "/C/Users/Administrator/digitalknob/Development/DKBash/functions/";
+	char* BASH_EXE = "C:/Users/Administrator/DigitalKnob/DKTools/git-portable-2.46.2-64-bit/bin/bash.exe";
+	char* DKSCRIPT_PATH = "C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKBash.h";
+	char* DKBASH_FUNCTIONS_DIR_ = "/C/Users/Administrator/DigitalKnob/Development/DKBash/functions/";
 
 	
-	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKBash.h")) {
+	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKBash.h")) {
       dk_error("putenv failed \n");
       return -1;
     } 
-	if(-1 == putenv("DKBASH_FUNCTIONS_DIR_=/C/Users/Administrator/digitalknob/Development/DKBash/functions/")) {
+	if(-1 == putenv("DKBASH_FUNCTIONS_DIR_=/C/Users/Administrator/DigitalKnob/Development/DKBash/functions/")) {
       dk_error("putenv failed \n");
       return -1;
     }

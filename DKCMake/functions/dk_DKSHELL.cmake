@@ -101,16 +101,16 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	### Run in CMD terminal ###
-# 	C:/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake.exe -P C:/Users/Administrator/digitalknob/Development/DKCMake/functions/dk_DKSHELL.cmake
+# 	C:/Users/Administrator/DigitalKnob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake.exe -P C:/Users/Administrator/DigitalKnob/Development/DKCMake/functions/dk_DKSHELL.cmake
 	
 	### Run in POWERSHELL terminal ###
-# 	C:/Users/Administrator/digitalknob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake.exe -P C:/Users/Administrator/digitalknob/Development/DKCMake/functions/dk_DKSHELL.cmake
+# 	C:/Users/Administrator/DigitalKnob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake.exe -P C:/Users/Administrator/DigitalKnob/Development/DKCMake/functions/dk_DKSHELL.cmake
 	
 	### Run in SH terminal ###
-# 	cd /c/Users/Administrator/digitalknob/Development/DKCMake/functions && ./dk_DKSHELL.cmake
+# 	cd /c/Users/Administrator/DigitalKnob/Development/DKCMake/functions && ./dk_DKSHELL.cmake
 	
 	### Run in BASH terminal ###
-# 	cd /c/Users/Administrator/digitalknob/Development/DKCMake/functions && ./dk_DKSHELL.cmake
+# 	cd /c/Users/Administrator/DigitalKnob/Development/DKCMake/functions && ./dk_DKSHELL.cmake
 	
 	dk_DKSHELL()
 	message("DKSHELL = ${DKSHELL}")
