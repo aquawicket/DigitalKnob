@@ -12,28 +12,28 @@ __ARGV__() {
 	[ -z ${1-} ] && local frame=0 || local frame=${1}
 	
 	local marker=0
-#	for (( i=0; i<frame; i++ )); do
-#		marker=$(($marker + ${BASH_ARGC[${i}]-}))
-#	done
-	local n=0
-	while [ ${n} -lt ${frame} ]; do
-		marker=$(($marker + ${BASH_ARGC[${n}]-}))
-		n=$((${n}+1))
+	for (( i=0; i<frame; i++ )); do
+		marker=$(($marker + ${BASH_ARGC[${i}]-}))
 	done
+#	local n=0
+#	while [ ${n} -lt ${frame} ]; do
+#		marker=$(($marker + ${BASH_ARGC[${n}]-}))
+#		n=$((${n}+1))
+#	done
 
 	
 
 	local argv=()	
 	local argc=${BASH_ARGC[${frame}]-}
 	local begin=$(($marker+$argc-1))
-#	for (( i=$begin; i>((begin-argc)); i-- )); do
-#		argv+=(${BASH_ARGV[${i}]-})
-#	done
-	local n=$begin
-	while [ ${n} -gt $((${begin} - ${argc})) ]; do
-		argv+=(${BASH_ARGV[${n}]-})
-		n=$((${n}-1))
+	for (( i=$begin; i>((begin-argc)); i-- )); do
+		argv+=(${BASH_ARGV[${i}]-})
 	done
+#	local n=$begin
+#	while [ ${n} -gt $((${begin} - ${argc})) ]; do
+#		argv+=(${BASH_ARGV[${n}]-})
+#		n=$((${n}-1))
+#	done
 
 
 	[ ${argc} = 0 ] && return
