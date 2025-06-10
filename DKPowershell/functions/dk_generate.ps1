@@ -35,8 +35,8 @@ function Global:dk_generate() {
 	
 	$CMAKE_ARGS = @()
 	if($Target_Tuple -eq "Android_Arm32")  	{ $CMAKE_ARGS += "-G Unix Makefiles" }
-	elseif($Target_Tuple -eq "android_arm64")  { $CMAKE_ARGS += "-G Unix Makefiles" }
-	elseif($Target_Tuple -eq "emscripten")     { $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($Target_Tuple -eq "Android_Arm64")  { $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($Target_Tuple -eq "Emscripten")     { $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($Target_Tuple -eq "Ios_Arm32")      { $CMAKE_ARGS += "-G Xcode" }
 	elseif($Target_Tuple -eq "Ios_Arm64")      { $CMAKE_ARGS += "-G Xcode" }
 	elseif($Target_Tuple -eq "Iossim_X86")     { $CMAKE_ARGS += "-G Xcode" }
@@ -49,10 +49,10 @@ function Global:dk_generate() {
 		$CMAKE_ARGS += "-G Unix Makefiles"
 		$DK_SHELL = "wsl"
 	}
-	elseif($Target_Tuple -eq "mac_x86")        { $CMAKE_ARGS += "-G Xcode" }
+	elseif($Target_Tuple -eq "Mac_X86")        { $CMAKE_ARGS += "-G Xcode" }
 	elseif($Target_Tuple -eq "Mac_X86_64")     { $CMAKE_ARGS += "-G Xcode" }
-	elseif($Target_Tuple -eq "raspberry_arm32"){ $CMAKE_ARGS += "-G Unix Makefiles" }
-	elseif($Target_Tuple -eq "raspberry_arm64"){ $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($Target_Tuple -eq "Raspberry_Arm32"){ $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($Target_Tuple -eq "Raspberry_Arm64"){ $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($Target_Tuple -eq "Windows_Arm64_Clang"){ 
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 	    $env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clangarm64\bin;$env:PATH"
@@ -65,7 +65,7 @@ function Global:dk_generate() {
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG32"
 	}
-	elseif($Target_Tuple -eq "Windows_X86_mingw"){
+	elseif($Target_Tuple -eq "Windows_X86_Gcc"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
@@ -78,7 +78,7 @@ function Global:dk_generate() {
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG64"
 	}
-	elseif($Target_Tuple -eq "Windows_X86_64_mingw"){
+	elseif($Target_Tuple -eq "Windows_X86_64_Gcc"){
 		dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"

@@ -4,7 +4,7 @@ message("#######################################################################
 
 if(Android_Host)
 	dk_pause()
-	message("paused in emscripten toolchain because Android_Host")
+	message("paused in Emscripten toolchain because Android_Host")
 	dk_exit()
 endif()
 

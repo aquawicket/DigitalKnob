@@ -4,7 +4,7 @@ ClCompile:
   pe /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\libiconv-1.14" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\libiconv-1.14\include" /I"C:\Users\Administrator\DigitalKnob\Developme
   nt\3rdParty\libiconv-1.14\Windows_X86_Msvc" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\libiconv-1.14\Windows_X86_Msvc\Release" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\xz-5.4.6\src
   \liblzma\api" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\zlib-master" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\zlib-master\Windows_X86_Msvc" /I"C:\Users\Administrator\digitalkn
-  ob\Development\3rdParty\libxml2-v2.12.5" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\libxml2-v2.12.5\include" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\libxml2-v2.12.5\win_x8
+  ob\Development\3rdParty\libxml2-v2.12.5" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\libxml2-v2.12.5\include" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\libxml2-v2.12.5\Windows_x8
   6_msvc" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\zstd-release\lib" /I"C:\Users\Administrator\DigitalKnob\Development\3rdParty\libarchive-master\libarchive" /I"C:\Users\Administrator\digita
   lknob\Development\3rdParty\libarchive-master\Windows_X86_Msvc" /IC:\Users\Administrator\DigitalKnob\Development\DKCpp\plugins /Zi /nologo /W4 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN /D WIN_X86 /D _WI
   NDOWS /D _CRT_SECURE_NO_WARNINGS /D _USING_V110_SDK71_ /D DEBUG /D _DEBUG /D HAVE_cmd /D HAVE_pacman /D HAVE_cygpath /D HAVE_msys2 /D HAVE_DK /D HAVE_psapi /D HAVE_pdh_lib /D HAVE_dxva2 /D HAVE_backward_cpp

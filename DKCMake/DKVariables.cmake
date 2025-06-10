@@ -285,24 +285,24 @@ dk_echo("DKCEF:                        '${DKCEF}'")
 #########################################################################
 ## NOTICE ##
 ## WORK IN PROGRESS ##
-## Working to consolidate and remove the need for seperate raspberry pi functions
+## Working to consolidate and remove the need for seperate Raspberry pi functions
 ## The build setup is almost Identicle to linux. We will try to compile Rpi by excluding
 ## the Raspberry flag variables in place of the Linux functions. In this conversion,
-## Raspberry will listen to Linux x86/64 and RPI x86/64.   The Raspberry flags will do nothing
+## Raspberry will listen to Linux X86/64 and RPI X86/64.   The Raspberry flags will do nothing
 ## and we should be able to remove them once everythng is working.
 
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
 
 ### Set other OS Specific variables ###
 # RPI and RPI32
-#if(DK_BINARY_OS_ARCH MATCHES "raspberry_arm32")
+#if(DK_BINARY_OS_ARCH MATCHES "Raspberry_Arm32")
 #	dk_set(RPI 1)
 #	dk_set(RPI32 1)
 #	dk_printVar(RPI)
 #	dk_printVar(RPI32)
 #endif()
 # RPI and RPI64
-#if(DK_BINARY_OS_ARCH MATCHES "raspberry_arm64")
+#if(DK_BINARY_OS_ARCH MATCHES "Raspberry_Arm64")
 #	dk_set(RPI 1)
 #	dk_set(RPI64 1)
 #	dk_printVar(RPI)
@@ -333,6 +333,6 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT Target_Tuple)
 		dk_printVar(CMAKE_BINARY_DIR)	
-		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are Cosmopolitan,Android_Arm32,android_arm64,android_x86,android_x86_64,emscripten,Ios_Arm32,Ios_Arm64,Iossim_X86,Iossim_x86_64,Linux_X86,Linux_X86_64,mac_x86,Mac_X86_64,raspberry_arm32,raspberry_arm64,Win_X86,Windows_X86_64 \n 	EXAMPLE: DigitalKnob/Development/DKCpp/apps/MyApp/Windows_X86")
+		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are Cosmo,Android_Arm32,Android_Arm64,Android_X86,Android_X86_64,Emscripten,Ios_Arm32,Ios_Arm64,Iossim_X86,Iossim_X86_64,Linux_X86,Linux_X86_64,Mac_X86,Mac_X86_64,Raspberry_Arm32,Raspberry_Arm64,Windows_X86,Windows_X86_64 \n 	EXAMPLE: DigitalKnob/Development/DKCpp/apps/MyApp/Windows_X86")
 	endif()
 endif()

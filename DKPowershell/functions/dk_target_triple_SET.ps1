@@ -60,7 +60,7 @@ function Global:dk_Target_Type_SET() {
 	elseif(${input} -eq  "4"){ $global:Target_Tuple = "Android_Arm64_Clang" }
 	elseif(${input} -eq  "5"){ $global:Target_Tuple = "Android_X86_Clang" }
 	elseif(${input} -eq  "6"){ $global:Target_Tuple = "Android_X86_64_Clang" }
-	elseif(${input} -eq  "7"){ $global:Target_Tuple = "emscripten_clang" }
+	elseif(${input} -eq  "7"){ $global:Target_Tuple = "Emscripten_Clang" }
 	elseif(${input} -eq  "8"){ $global:Target_Tuple = "Ios_Arm32_Clang" }
 	elseif(${input} -eq  "9"){ $global:Target_Tuple = "Ios_Arm64_Clang" }
 	elseif(${input} -eq "10"){ $global:Target_Tuple = "Ios_X86_Clang" }

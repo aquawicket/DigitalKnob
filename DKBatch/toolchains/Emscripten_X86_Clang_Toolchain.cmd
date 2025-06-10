@@ -14,7 +14,7 @@ set CMAKE_GENERATOR="Unix Makefiles"
 
 ::if defined Android_Host (
 ::	%dk_call% dk_pause
-::	%dk_call% dk_echo "paused in emscripten toolchain because Android_Host"
+::	%dk_call% dk_echo "paused in Emscripten toolchain because Android_Host"
 ::	%return%
 ::)
 ::%dk_call% dk_validate EMSDK						"%dk_call% dk_depend emsdk"

@@ -7,7 +7,7 @@
 	* Output Build OS's are
 		* /Android_Arm32
 		* /android_arm64
-		* /emscripten
+		* /Emscripten
 		* /Ios_Arm32
 		* /Ios_Arm64
 		* /Iossim_X86

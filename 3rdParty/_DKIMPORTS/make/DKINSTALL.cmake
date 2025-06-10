@@ -37,7 +37,7 @@ elseif(Cosmopolitan)
 		dk_set(CMAKE_MAKE_PROGRAM "${MSYS2_DIR}/usr/bin/make.exe")
 	endif()
 	
-elseif(emscripten)
+elseif(Emscripten)
 	if(Windows_Host)
 		dk_depend(msys2)
 		dk_installPackage(make)

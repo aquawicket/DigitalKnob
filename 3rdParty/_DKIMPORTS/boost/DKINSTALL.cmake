@@ -470,7 +470,7 @@ elseif(Windows_X86_Release AND MSVC)
 		${BOOST_WITHOUT}
 		--build-dir=${BOOST_RELEASE_DIR}
 		--stagedir=${BOOST_RELEASE_DIR})
-elseif(Win_X86_64_Debug)
+elseif(Windows_X86_64_Debug)
 	dk_queueCommand(${BOOST_DIR}/b2.exe
 		toolset=msvc-14.3
 		address-model=64

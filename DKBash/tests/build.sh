@@ -358,7 +358,7 @@ dk_pickOs() {
 	elif [ "${input}" = "5" ]; then
 		Target_Tuple="android_X86_64"
 	elif [ "${input}" = "6" ]; then
-		Target_Tuple="emscripten"
+		Target_Tuple="Emscripten"
 	elif [ "${input}" = "7" ]; then
 		Target_Tuple="Ios_Arm32"
 	elif [ "${input}" = "8" ]; then

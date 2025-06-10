@@ -30,7 +30,7 @@ function(dk_make path) #lib
 	
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(Emscripten)
-		dk_fatal("No proper dk_make() implemented for emscripten" NO_HALT)
+		dk_fatal("No proper dk_make() implemented for Emscripten" NO_HALT)
 		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
 		dk_chdir(${path}/${Target_Config})
 		

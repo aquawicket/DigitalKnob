@@ -30,11 +30,11 @@
 
 
 bool DKEmscripten::GetScreenHeight(int& h){
-	return DKERROR("not impemented on emscripten")
+	return DKERROR("not impemented on Emscripten")
 }
 
 bool DKEmscripten::GetScreenWidth(int& w){
-	return DKERROR("not impemented on emscripten")
+	return DKERROR("not impemented on Emscripten")
 }
 
 #endif //EMSCRIPTEN
