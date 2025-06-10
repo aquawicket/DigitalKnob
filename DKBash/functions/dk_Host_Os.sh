@@ -18,7 +18,7 @@ dk_Host_Os() {
 	
 	###### GET ######	
 	else
-		echo "OS = ${OS}"
+
 		if [ "${OS-}" = "Windows_NT" ]; then
 			[ -z "${Host_Os-}" ]     && Host_Os="Windows"
 		fi
