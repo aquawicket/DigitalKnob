@@ -34,7 +34,6 @@ endif()
 ### First Check ###
 if(Windows_Host)
 	dk_assertVar(GIT)
-	dk_debug("dk_findProgram(GIT_EXE git.exe ${GIT}/bin)")
 	dk_findProgram(GIT_EXE git.exe ${GIT}/bin)
 elseif(Android_Host)
 	dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)

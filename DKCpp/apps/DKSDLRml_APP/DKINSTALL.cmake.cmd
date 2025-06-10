@@ -9,10 +9,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :DKINSTALL
 %setlocal%
-	%dk_call% dk_debugFunc 0 
+	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_cmakeEval "dk_load('%~dpn0')"
+    %dk_call% dk_cmakeEval "dk_load('%~dpn0')"
 %endfunction%
+
 
 
 
@@ -20,10 +21,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0 
-
-	call :DKINSTALL						&:: works
-	::%dk_call% %0						&:: works
-	::%dk_call% DKINSTALL.cmake.cmd		&:: works
-	::%dk_call% DKINSTALL				&:: TestMe
+	%dk_call% dk_debugFunc 0
+	
+	call :DKINSTALL
 %endfunction%
