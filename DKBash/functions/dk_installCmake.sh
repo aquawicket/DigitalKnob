@@ -19,19 +19,19 @@ CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/c
 dk_installCmake() {
 	dk_debugFunc 0
 	
-	dk_call dk_validate HOST_OS "dk_call dk_Host_Tuple"	
+	dk_call dk_validate Host_Os "dk_call dk_Host_Os"	
 	######################################################################################################
-	#[ "${HOST_OS}" = "Android" ]                		&& CMAKE_IMPORT=cmake
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm32" ]  		&& CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm64" ]  		&& CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86" ]    		&& CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ] 		&& CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
-	[ "${HOST_OS}" = "mac" ]                     		&& CMAKE_IMPORT=${CMAKE_DL_MAC}
-	[ "${Host_Tuple}" = "linux_x86_64" ]        		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
+	#[ "${Host_Os}" = "Android" ]                		&& CMAKE_IMPORT=cmake
+	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm32" ]  	&& CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm64" ]  	&& CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_X86" ]    	&& CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_X86_64" ] 	&& CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
+	[ "${Host_Os}" = "mac" ]                     		&& CMAKE_IMPORT=${CMAKE_DL_MAC}
+	[ "${Host_Tuple}" = "Linux_X86_64" ]        		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
 	[ "${Host_Tuple}" = "Linux_Arm64" ]         		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
-	[ "${Host_Tuple}" = "raspberry_arm64" ]     		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
+	[ "${Host_Tuple}" = "Raspberry_Arm64" ]     		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${WSL_DISTRO_NAME-}" = "Alpine" ]		 		&& CMAKE_IMPORT=cmake
-	#[ "${Target_Tuple}" = "Android_Arm32" ]			&& CMAKE_IMPORT=cmake
+	#[ "${Target_Tuple-}" = "Android_Arm32" ]			&& CMAKE_IMPORT=cmake
 	#[ "${Target_Tuple-}" = "Windows_Arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
 	#[ "${Target_Tuple-}" = "Windows_X86_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
 	#[ "${Target_Tuple-}" = "win_x86_mingw" ]			&& CMAKE_IMPORT=mingw-w64-i686-cmake
@@ -51,10 +51,10 @@ dk_installCmake() {
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
 		CMAKE_DIR="${DKTOOLS_DIR}/${CMAKE_FOLDER}"
 		
-		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${CMAKE_DIR}/bin/cmake.exe
-		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${CMAKE_DIR}/CMake.app/Contents/bin/cmake
-		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
-		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
+		[ "${Host_Os}" = "Windows" ]   && CMAKE_EXE=${CMAKE_DIR}/bin/cmake.exe
+		[ "${Host_Os}" = "Mac" ]       && CMAKE_EXE=${CMAKE_DIR}/CMake.app/Contents/bin/cmake
+		[ "${Host_Os}" = "Linux" ]     && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
+		[ "${Host_Os}" = "Raspberry" ] && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
 		[ -z ${CMAKE_EXE} ]            && dk_call dk_error "no cmake found for this OS"
 		dk_call dk_assertVar CMAKE_EXE
 		

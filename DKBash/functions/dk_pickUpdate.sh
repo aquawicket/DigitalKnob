@@ -66,7 +66,7 @@ dk_pickUpdate() {
 	dk_call dk_keyboardInput choice
 	#dk_call dk_keyboardInputTimeout choice 13 60
 	
-	if [ "${choice}" = "0" ]; then
+	if [ "${choice}" = "FIXME" ]; then
 		dk_call dk_echo "repeating last selection"
 		Target_App=${Target_App_Cache-}
 		Target_Os=${Target_Os_Cache-}
