@@ -15,7 +15,7 @@ try() {
 ##################################################################################
 # dk_Host_Tuple()
 #
-#	Get host variable such as 'Host_Arch', 'HOST_VENDOR', 'Host_Os', 'HOST_ENV'
+#	Get host variable such as 'Host_Arch', 'Host_Vendor', 'Host_Os', 'Host_Env'
 #	and build the accoring Host_Tuple variable.  I.E. X86_64_windows_msys2
 #
 #   TUPLE:
@@ -37,7 +37,7 @@ try() {
 #    <format> = coff, elf, wasm
 #
 #
-#   HOST TUPLES:
+#   Host Tuples:
 #   i686-w64-mingw32
 #   x86_64-alpine-linux-musl
 #   x86_64-pc-msys
@@ -90,9 +90,9 @@ dk_Host_Tuple() {
 
 		[ -z "${Host_Tuple-}" ]		&& Host_Tuple=${CLANG_TUPLE}	&& dk_call dk_printVar Host_Tuple
 		[ -z "${Host_Arch-}" ]		&& Host_Arch=${CLANG_ARCH}		&& dk_call dk_printVar Host_Arch
-		[ -z "${HOST_VENDOR-}" ]	&& HOST_VENDOR=${CLANG_VENDOR}	&& dk_call dk_printVar HOST_VENDOR
+		[ -z "${Host_Vendor-}" ]	&& Host_Vendor=${CLANG_VENDOR}	&& dk_call dk_printVar Host_Vendor
 		[ -z "${Host_Os-}" ]		&& Host_Os=${CLANG_OS}			&& dk_call dk_printVar Host_Os
-		[ -z "${HOST_ENV-}" ]		&& HOST_ENV=${CLANG_ENV}		&& dk_call dk_printVar HOST_ENV
+		[ -z "${Host_Env-}" ]		&& Host_Env=${CLANG_ENV}		&& dk_call dk_printVar Host_Env
 	fi
 	if dk_call dk_commandExists gcc; then
 		GCC_TUPLE=$(try gcc -dumpmachine) && dk_call dk_printVar GCC_TUPLE
@@ -112,9 +112,9 @@ dk_Host_Tuple() {
 
 		[ -z "${Host_Tuple-}" ] && Host_Tuple=${GCC_TUPLE} && dk_call dk_printVar Host_Tuple
 		[ -z "${Host_Arch-}" ]   && Host_Arch=${GCC_ARCH}     && dk_call dk_printVar Host_Arch
-		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${GCC_VENDOR} && dk_call dk_printVar HOST_VENDOR
+		[ -z "${Host_Vendor-}" ] && Host_Vendor=${GCC_VENDOR} && dk_call dk_printVar Host_Vendor
 		[ -z "${Host_Os-}" ]     && Host_Os=${GCC_OS}         && dk_call dk_printVar Host_Os
-		[ -z "${HOST_ENV-}"	]    && HOST_ENV=${GCC_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z "${Host_Env-}"	]    && Host_Env=${GCC_ENV}       && dk_call dk_printVar Host_Env
 	fi
 	if dk_call dk_commandExists bash; then
 		BASH_TUPLE=$(bash -c "builtin echo \${MACHTYPE}")
@@ -135,9 +135,9 @@ dk_Host_Tuple() {
 
 		[ -z "${Host_Tuple-}" ] && Host_Tuple=${BASH_TUPLE} && dk_call dk_printVar Host_Tuple
 		[ -z "${Host_Arch-}" ]   && Host_Arch=${BASH_ARCH}     && dk_call dk_printVar Host_Arch
-		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${BASH_VENDOR} && dk_call dk_printVar HOST_VENDOR
+		[ -z "${Host_Vendor-}" ] && Host_Vendor=${BASH_VENDOR} && dk_call dk_printVar Host_Vendor
 		[ -z "${Host_Os-}" ]     && Host_Os=${BASH_OS}         && dk_call dk_printVar Host_Os
-		[ -z "${HOST_ENV-}" ]    && HOST_ENV=${BASH_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z "${Host_Env-}" ]    && Host_Env=${BASH_ENV}       && dk_call dk_printVar Host_Env
 	fi	
 	
 	if dk_call dk_commandExists uname; then
@@ -185,9 +185,9 @@ dk_Host_Tuple() {
 		dk_call dk_printVar Host_Os
 		[ -z "${Host_Tuple}" ] && Host_Tuple=${UNAME_TUPLE} && dk_call dk_printVar Host_Tuple
 		[ -z "${Host_Arch}" ]   && Host_Arch=${UNAME_ARCH}     && dk_call dk_printVar Host_Arch
-		[ -z "${HOST_VENDOR}" ] && HOST_VENDOR=${UNAME_VENDOR} && dk_call dk_printVar HOST_VENDOR
+		[ -z "${Host_Vendor}" ] && Host_Vendor=${UNAME_VENDOR} && dk_call dk_printVar Host_Vendor
 		[ -z "${Host_Os}" ]     && Host_Os=${UNAME_OS}         && dk_call dk_printVar Host_Os
-		[ -z "${HOST_ENV}" ]    && HOST_ENV=${UNAME_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z "${Host_Env}" ]    && Host_Env=${UNAME_ENV}       && dk_call dk_printVar Host_Env
 	fi
 	dk_call dk_printVar Host_Os
 	
@@ -332,9 +332,9 @@ dk_Host_Tuple() {
 
 # OBSOLETE - remove me
 #	if [ "${Host_Os}" = "win" ]; then
-#		HOST_ENV=clang
-#		Host_Tuple=${Host_Tuple}_${HOST_ENV}
-#		#Host_Tuple=${Host_Arch}-${HOST_VENDOR}-${Host_Os}
+#		Host_Env=clang
+#		Host_Tuple=${Host_Tuple}_${Host_Env}
+#		#Host_Tuple=${Host_Arch}-${Host_Vendor}-${Host_Os}
 #		dk_call dk_printVar Host_Tuple
 #	fi
 }
