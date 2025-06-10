@@ -11,11 +11,11 @@ function Global:dk_installGit() {
 	${GIT_DL_WIN_X86}    = "https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-32-bit.7z.exe"
 	${GIT_DL_WIN_X86_64} = "https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe"
 
-	dk_call dk_validate "HOST_ARCH" "dk_call dk_Host_Tuple"
-    if(${HOST_ARCH} -eq "arm32") { ${GIT_DL} = ${GIT_DL_WIN_ARM} }
-    if(${HOST_ARCH} -eq "arm64") { ${GIT_DL} = ${GIT_DL_WIN_ARM64} }
-    if(${HOST_ARCH} -eq "x86")   { ${GIT_DL} = ${GIT_DL_WIN_X86} }
-    if(${HOST_ARCH} -eq "x86_64"){ ${GIT_DL} = ${GIT_DL_WIN_X86_64} }
+	dk_call dk_validate "Host_Arch" "dk_call dk_Host_Tuple"
+    if(${Host_Arch} -eq "Arm32") { ${GIT_DL} = ${GIT_DL_WIN_ARM} }
+    if(${Host_Arch} -eq "Arm64") { ${GIT_DL} = ${GIT_DL_WIN_ARM64} }
+    if(${Host_Arch} -eq "X86")   { ${GIT_DL} = ${GIT_DL_WIN_X86} }
+    if(${Host_Arch} -eq "X86_64"){ ${GIT_DL} = ${GIT_DL_WIN_X86_64} }
     if(!${GIT_DL}){ dk_call dk_error "GIT_DL is invalid"; return ${false} }
 	  
     ${GIT_IMPORT_FILE} = dk_call dk_basename ${GIT_DL}

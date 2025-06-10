@@ -34,9 +34,9 @@ dk_installCmake() {
 	#[ "${Target_Tuple-}" = "Android_Arm32" ]			&& CMAKE_IMPORT=cmake
 	#[ "${Target_Tuple-}" = "Windows_Arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
 	#[ "${Target_Tuple-}" = "Windows_X86_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	#[ "${Target_Tuple-}" = "win_x86_mingw" ]			&& CMAKE_IMPORT=mingw-w64-i686-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_mingw" ]		&& CMAKE_IMPORT=mingw-w64-i686-cmake
 	#[ "${Target_Tuple-}" = "Windows_X86_64_Clang" ]	&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	#[ "${Target_Tuple-}" = "win_x86_64_mingw" ]		&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_64_mingw" ]	&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
 	#[ "${Target_Tuple-}" = "Windows_X86_64_Ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	[ -z ${CMAKE_IMPORT-} ]								&& CMAKE_IMPORT=cmake  #Default
 	dk_call dk_assertVar CMAKE_IMPORT

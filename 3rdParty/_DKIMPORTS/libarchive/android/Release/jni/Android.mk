@@ -137,7 +137,7 @@ LOCAL_SRC_FILES := \
 	../../../libarchive/filter_fork_posix.c \
 	../../../libarchive/xxhash.c
 
-#ifeq ($(HOST_OS),windows)
+#ifeq ($(Host_Os),Windows)
 #libarchive_host_src_files := \
 #	../../../libarchive/archive_entry_copy_bhfi.c \
 #	../../../libarchive/archive_read_disk_windows.c \

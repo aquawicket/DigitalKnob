@@ -19,13 +19,13 @@ function DKBuildGUI_init(){
 
                 /*
 		if(DK_GetOS() === "Win32" ||  DK_GetOS() === "Win64"){
-			byId("OSList").value = "win_x86";
+			byId("OSList").value = "Windows_X86";
 		}
 		if(DK_GetOS() === "Mac"){
-			byId("OSList").value = "mac_x86_64";
+			byId("OSList").value = "Mac_X86_64";
 		}	
 		if(DK_GetOS() === "Linux"){
-			byId("OSList").value = "linux_x86_64";
+			byId("OSList").value = "Linux_X86_64";
 		}
 		if(DK_GetOS() === "Linux"){
 			byId("BuildType").value = "Release";

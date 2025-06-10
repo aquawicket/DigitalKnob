@@ -15,8 +15,8 @@ try() {
 ##################################################################################
 # dk_Host_Tuple()
 #
-#	Get host variable such as 'HOST_ARCH', 'HOST_VENDOR', 'HOST_OS', 'HOST_ENV'
-#	and build the accoring Host_Tuple variable.  I.E. x86_64_windows_msys2
+#	Get host variable such as 'Host_Arch', 'HOST_VENDOR', 'Host_Os', 'HOST_ENV'
+#	and build the accoring Host_Tuple variable.  I.E. X86_64_windows_msys2
 #
 #   TUPLE:
 #   architecture	The target’s architecture. If none is specified, an unknown architecture is assumed.
@@ -29,7 +29,7 @@ try() {
 #	ARCHITECTURE   -   VENDOR   -   OS   -   ENVIRONMENT
 #	<arch><sub>       <vendor>     <os>      <env><format>
 #
-#	<arch>    = arm, arm64, x86, x86_64, wasm32, wasm64
+#	<arch>    = arm, arm64, X86, X86_64, wasm32, wasm64
 #    <sub>    = i.e on ARM: v5, v6m, v7a, v7m, etc.
 #   <vendor>  = pc, apple
 #   <os>      = darwin, emscripten, ios, linux, macosx, win32, wasi
@@ -60,7 +60,7 @@ dk_Host_Tuple() {
 	dk_debugFunc 0
 
 	# currently, our Host_Tuple consists of only 2 variable needed
-	# Host_Tuple=${HOST_OS}_${HOST_ARCH}
+	# Host_Tuple=${Host_Os}_${Host_Arch}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
 	# https://en.wikipedia.org/wiki/Uname
@@ -89,9 +89,9 @@ dk_Host_Tuple() {
 		dk_call dk_printVar CLANG_ENV
 
 		[ -z "${Host_Tuple-}" ]		&& Host_Tuple=${CLANG_TUPLE}	&& dk_call dk_printVar Host_Tuple
-		[ -z "${HOST_ARCH-}" ]		&& HOST_ARCH=${CLANG_ARCH}		&& dk_call dk_printVar HOST_ARCH
+		[ -z "${Host_Arch-}" ]		&& Host_Arch=${CLANG_ARCH}		&& dk_call dk_printVar Host_Arch
 		[ -z "${HOST_VENDOR-}" ]	&& HOST_VENDOR=${CLANG_VENDOR}	&& dk_call dk_printVar HOST_VENDOR
-		[ -z "${HOST_OS-}" ]		&& HOST_OS=${CLANG_OS}			&& dk_call dk_printVar HOST_OS
+		[ -z "${Host_Os-}" ]		&& Host_Os=${CLANG_OS}			&& dk_call dk_printVar Host_Os
 		[ -z "${HOST_ENV-}" ]		&& HOST_ENV=${CLANG_ENV}		&& dk_call dk_printVar HOST_ENV
 	fi
 	if dk_call dk_commandExists gcc; then
@@ -111,9 +111,9 @@ dk_Host_Tuple() {
 		dk_call dk_printVar GCC_ENV
 
 		[ -z "${Host_Tuple-}" ] && Host_Tuple=${GCC_TUPLE} && dk_call dk_printVar Host_Tuple
-		[ -z "${HOST_ARCH-}" ]   && HOST_ARCH=${GCC_ARCH}     && dk_call dk_printVar HOST_ARCH
+		[ -z "${Host_Arch-}" ]   && Host_Arch=${GCC_ARCH}     && dk_call dk_printVar Host_Arch
 		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${GCC_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z "${HOST_OS-}" ]     && HOST_OS=${GCC_OS}         && dk_call dk_printVar HOST_OS
+		[ -z "${Host_Os-}" ]     && Host_Os=${GCC_OS}         && dk_call dk_printVar Host_Os
 		[ -z "${HOST_ENV-}"	]    && HOST_ENV=${GCC_ENV}       && dk_call dk_printVar HOST_ENV
 	fi
 	if dk_call dk_commandExists bash; then
@@ -134,9 +134,9 @@ dk_Host_Tuple() {
 		dk_call dk_printVar BASH_ENV
 
 		[ -z "${Host_Tuple-}" ] && Host_Tuple=${BASH_TUPLE} && dk_call dk_printVar Host_Tuple
-		[ -z "${HOST_ARCH-}" ]   && HOST_ARCH=${BASH_ARCH}     && dk_call dk_printVar HOST_ARCH
+		[ -z "${Host_Arch-}" ]   && Host_Arch=${BASH_ARCH}     && dk_call dk_printVar Host_Arch
 		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${BASH_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z "${HOST_OS-}" ]     && HOST_OS=${BASH_OS}         && dk_call dk_printVar HOST_OS
+		[ -z "${Host_Os-}" ]     && Host_Os=${BASH_OS}         && dk_call dk_printVar Host_Os
 		[ -z "${HOST_ENV-}" ]    && HOST_ENV=${BASH_ENV}       && dk_call dk_printVar HOST_ENV
 	fi	
 	
@@ -182,38 +182,38 @@ dk_Host_Tuple() {
 
 		UNAME_TUPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_call dk_printVar UNAME_TUPLE
-		dk_call dk_printVar HOST_OS
+		dk_call dk_printVar Host_Os
 		[ -z "${Host_Tuple}" ] && Host_Tuple=${UNAME_TUPLE} && dk_call dk_printVar Host_Tuple
-		[ -z "${HOST_ARCH}" ]   && HOST_ARCH=${UNAME_ARCH}     && dk_call dk_printVar HOST_ARCH
+		[ -z "${Host_Arch}" ]   && Host_Arch=${UNAME_ARCH}     && dk_call dk_printVar Host_Arch
 		[ -z "${HOST_VENDOR}" ] && HOST_VENDOR=${UNAME_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z "${HOST_OS}" ]     && HOST_OS=${UNAME_OS}         && dk_call dk_printVar HOST_OS
+		[ -z "${Host_Os}" ]     && Host_Os=${UNAME_OS}         && dk_call dk_printVar Host_Os
 		[ -z "${HOST_ENV}" ]    && HOST_ENV=${UNAME_ENV}       && dk_call dk_printVar HOST_ENV
 	fi
-	dk_call dk_printVar HOST_OS
+	dk_call dk_printVar Host_Os
 	
 	dk_call dk_printVar UNAME_a
-	### Get the HOST_OS ###
+	### Get the Host_Os ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	if dk_call dk_containsCI "${UNAME_a}" "Android"; then
-		HOST_OS="android"
+		Host_Os="android"
 	elif dk_call dk_containsCI "${UNAME_a}" "Darwin"; then
-		HOST_OS="mac"
+		Host_Os="mac"
 	elif dk_call dk_containsCI "${UNAME_a}" "raspberrypi"; then
-		HOST_OS="raspberry"
+		Host_Os="Raspberry"
  	elif dk_call dk_containsCI "${UNAME_a}" "LiNuX"; then
-		HOST_OS="linux"
+		Host_Os="linux"
 	elif dk_call dk_containsCI "${UNAME_a}" "Msys"; then
-		HOST_OS="win"
+		Host_Os="win"
 	elif dk_call dk_containsCI "${UNAME_a}" "Cygwin"; then
-		HOST_OS="win"
+		Host_Os="win"
 	else
-		dk_call dk_error "Unsupported HOST_OS: ${UNAME_a}"
+		dk_call dk_error "Unsupported Host_Os: ${UNAME_a}"
 	fi
-	[ -z "$HOST_OS" ] && dk_call dk_error "Failed to get HOST_OS variable"
-	dk_call dk_printVar HOST_OS
+	[ -z "$Host_Os" ] && dk_call dk_error "Failed to get Host_Os variable"
+	dk_call dk_printVar Host_Os
 
 
-	### Set HOST_ARCH ###
+	### Set Host_Arch ###
 	# https://stackoverflow.com/a/45125525
 	# aarch64    	- AArch64 (little endian)
     # aarch64_32 	- AArch64 (little endian ILP32)
@@ -289,52 +289,52 @@ dk_Host_Tuple() {
 	# xtensa		-
 	
 	if [ "${UNAME_m}" = "arm" ]; then
-		HOST_ARCH="arm"
+		Host_Arch="arm"
 	elif [ "${UNAME_m}" = "armeb" ]; then
-		HOST_ARCH="arm"
+		Host_Arch="arm"
 	elif [ "${UNAME_m}" = "armv7l" ]; then
-		HOST_ARCH="arm"
+		Host_Arch="arm"
 	elif [ "${UNAME_m}" = "aarch64" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "${UNAME_m}" = "aarch64_32" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "${UNAME_m}" = "aarch64_be" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "${UNAME_m}" = "arm64" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "${UNAME_m}" = "arm64_32" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "${UNAME_m}" = "armv8b" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "${UNAME_m}" = "armv8l" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "${UNAME_m}" = "x86" ]; then
-		HOST_ARCH="x86"
+		Host_Arch="X86"
 	elif [ "${UNAME_m}" = "i386" ]; then
-		HOST_ARCH="x86"
+		Host_Arch="X86"
 	elif [ "${UNAME_m}" = "i686" ]; then
-		HOST_ARCH="x86"
+		Host_Arch="X86"
 	elif [ "${UNAME_m}" = "x86_64" ]; then
-		HOST_ARCH="x86_64"
+		Host_Arch="X86_64"
 	elif [ "${UNAME_m}" = "x86-64" ]; then
-		HOST_ARCH="x86_64"
+		Host_Arch="X86_64"
 	elif [ "${UNAME_m}" = "ia64" ]; then
-		HOST_ARCH="x86_64"
+		Host_Arch="X86_64"
 	else
-		dk_call dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
+		dk_call dk_error "Unsupported Host_Arch: ${UNAME_m}"
 	fi
 
-	Host_Tuple=${HOST_OS}_${HOST_ARCH}
+	Host_Tuple=${Host_Os}_${Host_Arch}
 	dk_call dk_printVar Host_Tuple
 	
 	#${Host_Tuple}="1"
 	#dk_call dk_printVar ${Host_Tuple}
 
 # OBSOLETE - remove me
-#	if [ "${HOST_OS}" = "win" ]; then
+#	if [ "${Host_Os}" = "win" ]; then
 #		HOST_ENV=clang
 #		Host_Tuple=${Host_Tuple}_${HOST_ENV}
-#		#Host_Tuple=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
+#		#Host_Tuple=${Host_Arch}-${HOST_VENDOR}-${Host_Os}
 #		dk_call dk_printVar Host_Tuple
 #	fi
 }

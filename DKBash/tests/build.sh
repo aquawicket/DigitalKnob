@@ -309,38 +309,38 @@ dk_pickOs() {
 	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
-	dk_echo " 4) Android x86"
-	dk_echo " 5) Android x86_64"
+	dk_echo " 4) Android X86"
+	dk_echo " 5) Android X86_64"
 	dk_echo " 6) Emscripten"
 	dk_echo " 7) Ios arm32"
 	dk_echo " 8) Ios arm64"
-	dk_echo " 9) Ios x86"
-	dk_echo "10) Ios x86_64"
+	dk_echo " 9) Ios X86"
+	dk_echo "10) Ios X86_64"
 	dk_echo "11) Iossim arm32"
 	dk_echo "12) Iossim arm64"
-	dk_echo "13) Iossim x86"
-	dk_echo "14) Iossim x86_64"
+	dk_echo "13) Iossim X86"
+	dk_echo "14) Iossim X86_64"
 	dk_echo "15) Linux arm32"
 	dk_echo "16) Linux arm64"
-	dk_echo "17) Linux x86"
-	dk_echo "18) Linux x86_64"
+	dk_echo "17) Linux X86"
+	dk_echo "18) Linux X86_64"
 	dk_echo "19) Mac arm32"
 	dk_echo "20) Mac arm64"
-	dk_echo "21) Mac x86"
-	dk_echo "22) Mac x86_64"
+	dk_echo "21) Mac X86"
+	dk_echo "22) Mac X86_64"
 	dk_echo "23) Raspberry arm32"
 	dk_echo "24) Raspberry arm64"
-	dk_echo "25) Raspberry x86"
-	dk_echo "26) Raspberry x86_64"
+	dk_echo "25) Raspberry X86"
+	dk_echo "26) Raspberry X86_64"
 	dk_echo "27) Windows arm32"
 	dk_echo "28) Windows arm64 (clang)"
-	dk_echo "29) Windows x86 (gcc)"
-	dk_echo "30) Windows x86 (clang)"
-	dk_echo "31) Windows x86 (msvc)"
-	dk_echo "32) Windows x86_64 (gcc)"
-    dk_echo "33) Windows x86_64 (clang)"
-    dk_echo "34) Windows x86_64 (ucrt)"
-    dk_echo "35) Windows x86_64 (msvc)"
+	dk_echo "29) Windows X86 (gcc)"
+	dk_echo "30) Windows X86 (clang)"
+	dk_echo "31) Windows X86 (msvc)"
+	dk_echo "32) Windows X86_64 (gcc)"
+    dk_echo "33) Windows X86_64 (clang)"
+    dk_echo "34) Windows X86_64 (ucrt)"
+    dk_echo "35) Windows X86_64 (msvc)"
 	dk_echo "36) Clear Screen"
 	dk_echo "37) Go Back"
 	dk_echo "38) Exit"
@@ -352,65 +352,65 @@ dk_pickOs() {
 	elif [ "${input}" = "2" ]; then
 		Target_Tuple="Android_Arm32"
 	elif [ "${input}" = "3" ]; then
-		Target_Tuple="android_arm64"
+		Target_Tuple="android_Arm64"
 	elif [ "${input}" = "4" ]; then
-		Target_Tuple="android_x86"
+		Target_Tuple="android_X86"
 	elif [ "${input}" = "5" ]; then
-		Target_Tuple="android_x86_64"
+		Target_Tuple="android_X86_64"
 	elif [ "${input}" = "6" ]; then
 		Target_Tuple="emscripten"
 	elif [ "${input}" = "7" ]; then
-		Target_Tuple="ios_arm32"
+		Target_Tuple="Ios_Arm32"
 	elif [ "${input}" = "8" ]; then
-		Target_Tuple="ios_arm64"
+		Target_Tuple="Ios_Arm64"
 	elif [ "${input}" = "9" ]; then
-		Target_Tuple="ios_x86"
+		Target_Tuple="Ios_X86"
 	elif [ "${input}" = "10" ]; then
-		Target_Tuple="ios_x86_64"
+		Target_Tuple="Ios_X86_64"
 	elif [ "${input}" = "11" ]; then
-		Target_Tuple="iossim_arm32"
+		Target_Tuple="Iossim_Arm32"
 	elif [ "${input}" = "12" ]; then
-		Target_Tuple="iossim_arm64"
+		Target_Tuple="Iossim_Arm64"
 	elif [ "${input}" = "13" ]; then
 		Target_Tuple="Iossim_X86"
 	elif [ "${input}" = "14" ]; then
-		Target_Tuple="iossim_x86_64"
+		Target_Tuple="Iossim_X86_64"
 	elif [ "${input}" = "15" ]; then
-		Target_Tuple="linux_arm32"
+		Target_Tuple="Linux_Arm32"
 	elif [ "${input}" = "16" ]; then
-		Target_Tuple="linux_arm64"
+		Target_Tuple="Linux_Arm64"
 	elif [ "${input}" = "17" ]; then
-		Target_Tuple="linux_x86"
+		Target_Tuple="Linux_X86"
 	elif [ "${input}" = "18" ]; then
-		Target_Tuple="linux_x86_64"
+		Target_Tuple="Linux_X86_64"
 	elif [ "${input}" = "19" ]; then
-		Target_Tuple="mac_arm32"
+		Target_Tuple="Mac_Arm32"
 	elif [ "${input}" = "20" ]; then
-		Target_Tuple="mac_arm64"
+		Target_Tuple="Mac_Arm64"
 	elif [ "${input}" = "21" ]; then
-		Target_Tuple="mac_x86"
+		Target_Tuple="Mac_X86"
 	elif [ "${input}" = "22" ]; then
-		Target_Tuple="mac_x86_64"
+		Target_Tuple="Mac_X86_64"
 	elif [ "${input}" = "23" ]; then
-		Target_Tuple="raspberry_arm32"
+		Target_Tuple="Raspberry_Arm32"
 	elif [ "${input}" = "24" ]; then
-		Target_Tuple="raspberry_arm64"
+		Target_Tuple="Raspberry_Arm64"
 	elif [ "${input}" = "25" ]; then
-		Target_Tuple="raspberry_x86"
+		Target_Tuple="Raspberry_X86"
 	elif [ "${input}" = "26" ]; then
-		Target_Tuple="raspberry_x64"
+		Target_Tuple="Raspberry_X86_64"
 	elif [ "${input}" = "27" ]; then
-		Target_Tuple="win_arm32"
+		Target_Tuple="Windows_Arm32"
 	elif [ "${input}" = "28" ]; then
 		Target_Tuple="Windows_Arm64_Clang"
 	elif [ "${input}" = "29" ]; then
-		Target_Tuple="win_x86_mingw"
+		Target_Tuple="Windows_X86_Gcc"
 	elif [ "${input}" = "30" ]; then
 		Target_Tuple="Windows_X86_Clang"
 	elif [ "${input}" = "31" ]; then
 		Target_Tuple="Windows_X86_Msvc"
 	elif [ "${input}" = "32" ]; then
-		Target_Tuple="win_x86_64_mingw"
+		Target_Tuple="Windows_X86_64_Gcc"
 	elif [ "${input}" = "33" ]; then
 		Target_Tuple="Windows_X86_64_Clang"
 	elif [ "${input}" = "34" ]; then
@@ -605,31 +605,31 @@ dk_generate() {
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "iossim_x86_64" ]; then
+	if [ "${Target_Tuple}" = "Iossim_X86_64" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "linux_x86" ]; then
+	if [ "${Target_Tuple}" = "Linux_X86" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "linux_x86_64" ]; then
+	if [ "${Target_Tuple}" = "Linux_X86_64" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "mac_x86" ]; then
+	if [ "${Target_Tuple}" = "Mac_X86" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "mac_x86_64" ]; then
+	if [ "${Target_Tuple}" = "Mac_X86_64" ]; then
 		set -- "-G Xcode" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "raspberry_arm32" ]; then
+	if [ "${Target_Tuple}" = "Raspberry_Arm32" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "raspberry_arm64" ]; then
+	if [ "${Target_Tuple}" = "Raspberry_Arm64" ]; then
 		set -- "-G Unix Makefiles" "${@}"
 	fi
 	
@@ -643,7 +643,7 @@ dk_generate() {
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "win_x86_mingw" ]; then
+	if [ "${Target_Tuple}" = "Windows_X86_Gcc" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
@@ -654,7 +654,7 @@ dk_generate() {
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
 	
-	if [ "${Target_Tuple}" = "win_x86_64_mingw" ]; then
+	if [ "${Target_Tuple}" = "Windows_X86_64_Gcc" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:$PATH
 		set -- "-G MSYS Makefiles" "${@}"
 	fi
@@ -779,21 +779,21 @@ dk_installCmake() {
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	######################################################################################################
-	if [ "${Host_Os}" 		= "Android" ]; 			then CMAKE_IMPORT=cmake;							fi
-	if [ "${Host_Tuple}" 	= "win_arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
-	if [ "${Host_Tuple}" 	= "win_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
-	if [ "${Host_Tuple}" 	= "win_x86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
-	if [ "${Host_Tuple}"	= "win_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
-	if [ "${Host_Os}" 		= "mac" ];				then CMAKE_IMPORT=$CMAKE_DL_MAC;					fi
-	if [ "${Host_Tuple}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
-	if [ "${Host_Tuple}" 	= "Linux_Arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${Host_Tuple}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${Target_Tuple}" 	= "Android_Arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
+	if [ "${Host_Os}" 		= "Android" ]; 				then CMAKE_IMPORT=cmake;							fi
+	if [ "${Host_Tuple}" 	= "Windows_Arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
+	if [ "${Host_Tuple}" 	= "Windows_Arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
+	if [ "${Host_Tuple}" 	= "Windows_X86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
+	if [ "${Host_Tuple}"	= "Windows_X86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
+	if [ "${Host_Os}" 		= "Mac" ];					then CMAKE_IMPORT=$CMAKE_DL_MAC;					fi
+	if [ "${Host_Tuple}" 	= "Linux_X86_64" ];			then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
+	if [ "${Host_Tuple}" 	= "Linux_Arm64" ];			then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${Host_Tuple}" 	= "Raspberry_Arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${Target_Tuple}" 	= "Android_Arm32" ]; 		then CMAKE_IMPORT=cmake;							fi
 	if [ "${Target_Tuple}" 	= "Windows_Arm64_Clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
 	if [ "${Target_Tuple}" 	= "Windows_X86_Clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
-	if [ "${Target_Tuple}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
-	if [ "${Target_Tuple}"		= "Windows_X86_64_Clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
-	if [ "${Target_Tuple}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
+	if [ "${Target_Tuple}" 	= "Windows_X86_Gcc" ]; 		then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
+	if [ "${Target_Tuple}"	= "Windows_X86_64_Clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
+	if [ "${Target_Tuple}" 	= "Windows_X86_64_Gcc" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
 	if [ "${Target_Tuple}" 	= "Windows_X86_64_Ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
 	
 	dk_printVar CMAKE_IMPORT
@@ -817,7 +817,7 @@ dk_installCmake() {
 		
 		if [ "${Host_Os}" = "win" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake.exe
-		elif [ "${Host_Os}" = "mac" ]; then
+		elif [ "${Host_Os}" = "Mac" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
 		elif [ "${Host_Os}" = "linux" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
@@ -2113,15 +2113,15 @@ try() {
 ##################################################################################
 # dk_Host_Tuple(input)
 #
-#	Get host variable such as 'Host_Os', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
-#	and build the accoring Host_Tuple variable.  I.E. windows_x86_64_msys2
+#	Get host variable such as 'Host_Os', 'Host_Arch', 'HOST_ENV', 'HOST_VENDOR
+#	and build the accoring Host_Tuple variable.  I.E. Windows_X86_64_Clang
 #
 dk_Host_Tuple() {
 	dk_verbose "dk_Host_Tuple(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	# currently, our host Target_Tuple consists of only 2 variable needed
-	# Host_Tuple=${Host_Os}_${HOST_ARCH}
+	# Host_Tuple=${Host_Os}_${Host_Arch}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-tuplet-without-gcc
 	# https://en.wikipedia.org/wiki/Uname
@@ -2150,7 +2150,7 @@ dk_Host_Tuple() {
 		dk_printVar CLANG_ENV
 
 		[ -z ${Host_Tuple-} ] && Host_Tuple=${CLANG_TUPLE} && dk_printVar Host_Tuple
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${CLANG_ARCH} && dk_printVar HOST_ARCH
+		[ -z ${Host_Arch-} ] && Host_Arch=${CLANG_ARCH} && dk_printVar Host_Arch
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_printVar HOST_VENDOR
 		[ -z ${Host_Os-} ] && Host_Os=${CLANG_OS} && dk_printVar Host_Os
 		[ -z ${HOST_ENV-} ] && HOST_ENV=${CLANG_ENV} && dk_printVar HOST_ENV
@@ -2169,7 +2169,7 @@ dk_Host_Tuple() {
 		dk_printVar GCC_ENV
 
 		[ -z ${Host_Tuple-} ] && Host_Tuple=${GCC_TUPLE} && dk_printVar Host_Tuple
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${GCC_ARCH} && dk_printVar HOST_ARCH
+		[ -z ${Host_Arch-} ] && Host_Arch=${GCC_ARCH} && dk_printVar Host_Arch
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_printVar HOST_VENDOR
 		[ -z ${Host_Os-} ] && Host_Os=${GCC_OS} && dk_printVar Host_Os
 		[ -z ${HOST_ENV-} ] && HOST_ENV=${GCC_ENV} && dk_printVar HOST_ENV
@@ -2189,7 +2189,7 @@ dk_Host_Tuple() {
 		dk_printVar BASH_ENV
 
 		[ -z ${Host_Tuple-} ] && Host_Tuple=$BASH_TUPLE && dk_printVar Host_Tuple
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$BASH_ARCH && dk_printVar HOST_ARCH
+		[ -z ${Host_Arch-} ] && Host_Arch=$BASH_ARCH && dk_printVar Host_Arch
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$BASH_VENDOR && dk_printVar HOST_VENDOR
 		[ -z ${Host_Os-} ] && Host_Os=$BASH_OS && dk_printVar Host_Os
 		[ -z ${HOST_ENV-} ] && HOST_ENV=${BASH_ENV-} && dk_printVar HOST_ENV
@@ -2240,7 +2240,7 @@ dk_Host_Tuple() {
 		dk_printVar UNAME_TUPLE
 
 		[ -z $Host_Tuple ] && Host_Tuple=$UNAME_TUPLE && dk_printVar Host_Tuple
-		[ -z $HOST_ARCH ] && HOST_ARCH=$UNAME_ARCH && dk_printVar HOST_ARCH
+		[ -z $Host_Arch ] && Host_Arch=$UNAME_ARCH && dk_printVar Host_Arch
 		[ -z $HOST_VENDOR ] && HOST_VENDOR=$UNAME_VENDOR && dk_printVar HOST_VENDOR
 		[ -z $Host_Os ] && Host_Os=$UNAME_OS && dk_printVar Host_Os
 		[ -z $HOST_ENV ] && HOST_ENV=$UNAME_ENV && dk_printVar HOST_ENV
@@ -2252,8 +2252,8 @@ dk_Host_Tuple() {
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	if dk_contains "${UNAME_a}" "Android"; then			# android
 		Host_Os="android"
-	elif dk_contains "${UNAME_a}" "Darwin"; then			# mac
-		Host_Os="mac"
+	elif dk_contains "${UNAME_a}" "Darwin"; then			# Mac
+		Host_Os="Mac"
 	elif dk_contains "${UNAME_a}" "raspberrypi"; then	# raspberry
 		Host_Os="raspberry"
  	elif dk_contains "${UNAME_a}" "Linux"; then			# linux
@@ -2267,7 +2267,7 @@ dk_Host_Tuple() {
 	dk_printVar Host_Os
 
 
-	### Get the HOST_ARCH ###
+	### Get the Host_Arch ###
 	# https://stackoverflow.com/a/45125525
 	# aarch64    	- AArch64 (little endian)
     # aarch64_32 	- AArch64 (little endian ILP32)
@@ -2343,42 +2343,42 @@ dk_Host_Tuple() {
 	# xtensa		-
 	
 	if [ "$UNAME_m" = "arm" ]; then
-		HOST_ARCH="arm"
+		Host_Arch="arm"
 	elif [ "$UNAME_m" = "armeb" ]; then
-		HOST_ARCH="arm"
+		Host_Arch="arm"
 	elif [ "$UNAME_m" = "armv7l" ]; then
-		HOST_ARCH="arm"
+		Host_Arch="arm"
 	elif [ "$UNAME_m" = "aarch64" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "$UNAME_m" = "aarch64_32" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "$UNAME_m" = "aarch64_be" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "$UNAME_m" = "arm64" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "$UNAME_m" = "arm64_32" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "$UNAME_m" = "armv8b" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "$UNAME_m" = "armv8l" ]; then
-		HOST_ARCH="arm64"
+		Host_Arch="arm64"
 	elif [ "$UNAME_m" = "x86" ]; then
-		HOST_ARCH="x86"
+		Host_Arch="X86"
 	elif [ "$UNAME_m" = "i386" ]; then
-		HOST_ARCH="x86"
+		Host_Arch="X86"
 	elif [ "$UNAME_m" = "i686" ]; then
-		HOST_ARCH="x86"
+		Host_Arch="X86"
 	elif [ "$UNAME_m" = "x86_64" ]; then
-		HOST_ARCH="x86_64"
+		Host_Arch="X86_64"
 	elif [ "$UNAME_m" = "x86-64" ]; then
-		HOST_ARCH="x86_64"
+		Host_Arch="X86_64"
 	elif [ "$UNAME_m" = "ia64" ]; then
-		HOST_ARCH="x86_64"
+		Host_Arch="X86_64"
 	else
-		dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
+		dk_error "Unsupported Host_Arch: ${UNAME_m}"
 	fi
 
-	Host_Tuple=${Host_Os}_${HOST_ARCH}
+	Host_Tuple=${Host_Os}_${Host_Arch}
 	dk_printVar Host_Tuple
 }
 

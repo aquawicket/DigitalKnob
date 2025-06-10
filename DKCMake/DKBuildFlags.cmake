@@ -347,12 +347,12 @@ if(Emscripten_X86)
 	dk_load(${DKCMAKE_DIR}/toolchains/Emscripten_X86_toolchain.cmake)
 endif()
 
-### ios_arm32 - XCODE ###
+### Ios_Arm32 - XCODE ###
 if(Ios_Arm32)
 	dk_load(${DKCMAKE_DIR}/toolchains/Ios_Arm32_toolchain.cmake)
 endif()
 
-### ios_arm64 - XCODE ###
+### Ios_Arm64 - XCODE ###
 if(Ios_Arm64)
 	dk_load(${DKCMAKE_DIR}/toolchains/Ios_Arm64_toolchain.cmake)
 endif()

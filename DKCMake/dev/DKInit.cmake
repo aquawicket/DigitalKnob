@@ -160,8 +160,8 @@ if(${DK_BINARY_OSARCH} MATCHES "android_arm64")
 	dk_set(CMAKE_CXX_FLAGS 					"${ANDROID_NDK_CXX_FLAGS}")
 endif()
 
-# ios_arm32
-if(${DK_BINARY_OSARCH} MATCHES "ios_arm32")
+# Ios_Arm32
+if(${DK_BINARY_OSARCH} MATCHES "Ios_Arm32")
 	dk_set(IOS_PLATFORM 					"OS")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")
@@ -172,8 +172,8 @@ if(${DK_BINARY_OSARCH} MATCHES "ios_arm32")
 	dk_set(DEPLOYMENT_TARGET				"${IOS_DEPLOYMENT_TARGET}")
 endif()
 
-# ios_arm64
-if(${DK_BINARY_OSARCH} MATCHES "ios_arm64")
+# Ios_Arm64
+if(${DK_BINARY_OSARCH} MATCHES "Ios_Arm64")
 	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"OS64")
 	dk_set(IOS_SDK_VERSION					"15.0")
@@ -199,8 +199,8 @@ if(${DK_BINARY_OSARCH} MATCHES "Iossim_X86")
 	dk_set(DEPLOYMENT_TARGET				"${IOS_DEPLOYMENT_TARGET}")
 endif()
 
-# iossim_x86_64
-if(${DK_BINARY_OSARCH} MATCHES "iossim_x86_64")	
+# Iossim_x86_64
+if(${DK_BINARY_OSARCH} MATCHES "Iossim_x86_64")	
 	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"SIMULATOR64")
 	dk_set(IOS_SDK_VERSION					"15.0")
@@ -220,8 +220,8 @@ if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86")
 	dk_set(Mac_X86							"ON")
 endif()
 
-# mac_x86_64
-if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86_64")
+# Mac_X86_64
+if(${DK_BINARY_OSARCH} MATCHES 	"Mac_X86_64")
 	dk_set(CMAKE_OSX_ARCHITECTURES			"x86_64")
 	dk_set(Mac_X86_64						"ON")
 endif()

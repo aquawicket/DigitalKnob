@@ -135,11 +135,11 @@ function DKBuildConsole_SelectOs(){
 		//console.log("arch = "+arch)
 		//if(CPP_DK_GetOSArchitecture() === "i686")
 		//if(arch === "i686" || arch === "x86"){
-			OSes.push("win_x86")
+			OSes.push("Windows_X86")
 		//}
 		//if(CPP_DK_GetOSArchitecture() === "x86_64")
 		//if(arch === "x86_64"){
-			OSes.push("win_x86_64")
+			OSes.push("Windows_X86_64")
 		//}
 		OSes.push("Android_Arm32")
 		OSes.push("android_arm64")
@@ -149,11 +149,11 @@ function DKBuildConsole_SelectOs(){
 		var arch = CPP_DK_Execute("uname -m")
 		//console.log("arch = "+arch)
 		//OSes.push("mac_x86")
-		OSes.push("mac_x86_64")
-		//OSes.push("ios_arm32")
-		OSes.push("ios_arm64")
+		OSes.push("Mac_X86_64")
+		//OSes.push("Ios_Arm32")
+		OSes.push("Ios_Arm64")
 		//OSes.push("Iossim_X86")
-		OSes.push("iossim_x86_64")
+		OSes.push("Iossim_x86_64")
 		OSes.push("Android_Arm32")
 		OSes.push("android_arm64")
 		OSes.push("emscripten")
@@ -162,10 +162,10 @@ function DKBuildConsole_SelectOs(){
 		var arch = CPP_DK_Execute("uname -m")
 		//console.log("arch = "+arch)
 		if(arch === "i686"){
-			OSes.push("linux_x86")
+			OSes.push("Linux_X86")
 		}
 		else if(arch === "x86_64"){
-			OSes.push("linux_x86_64")
+			OSes.push("Linux_X86_64")
 		}
 		else{
 			console.log("ERROR: Unrecognized architecture")
@@ -417,13 +417,13 @@ function DKBuildConsole_Process(){
 
 function DKBuildConsole_FindAppExecutablePath(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
-	if(os === "win_x86" || os === "win_x86_64"){
+	if(os === "Windows_X86" || os === "Windows_X86_64"){
 		const exe_name = app+".exe"
 	}
-	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry_arm32" || os === "raspberry_arm64"){
+	else if(os === "Linux_X86" || os === "Linux_X86_64" || os === "raspberry_arm32" || os === "raspberry_arm64"){
 		const exe_name = app
 	}
-	else if(os === "Mac_X86" || os === "mac_x86_64"){
+	else if(os === "Mac_X86" || os === "Mac_X86_64"){
 		const exe_name = app+".app/Contents/MacOS/wrapper"
 	}
 	else{
@@ -445,13 +445,13 @@ function DKBuildConsole_FindAppExecutablePath(os, app, type){
 function DKBuildConsole_FindAppSolutionPath(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
 	var solution_path
-	if(os === "win_x86" || os === "win_x86_64"){
+	if(os === "Windows_X86" || os === "Windows_X86_64"){
 		solution_path = app_path+os+"/"+app+".sln"
 	}
-	else if(os === "Mac_X86" || os === "mac_x86_64"){
+	else if(os === "Mac_X86" || os === "Mac_X86_64"){
 		solution_path = app_path+os+"/"+app+".xcodeproj"
 	}
-	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry_arm32" || os === "raspberry_arm64"){
+	else if(os === "Linux_X86" || os === "Linux_X86_64" || os === "raspberry_arm32" || os === "raspberry_arm64"){
 		//solution_path = app_path+os+"/"+app+".xcodeproj"
 		console.warn("the OS ("+os+") is not implemented")
 		return false
@@ -477,7 +477,7 @@ function DKBuildConsole_RunApp(os, app, type){
 
 function DKBuildConsole_OpenAppSolution(os, app){
 	const app_path = DKBuild_FindAppPath(app)
-	if(os === "win_x86" || os === "win_x86_64"){
+	if(os === "Windows_X86" || os === "Windows_X86_64"){
 		const solution_name = app+".sln"
 	}
 	else if(os === "Mac_X86" || os === "Mac_X86_64" || os === "Ios_Arm32" || os === "Ios_Arm64" || os === "Iossim_X86" || os === "Iossim_X86_64"){

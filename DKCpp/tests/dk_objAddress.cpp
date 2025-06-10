@@ -32,7 +32,7 @@ template < typename T = const void > T* as_pointer_to( const std::string& addres
 void* addressToObject(const std::string& address){
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	
-	//FIXME:  Error example (win_x86_64_mingw64_gcc)
+	//FIXME:  Error example (Windows_X86_64_mingw64_gcc)
 	//		0x0x23aefc8: the address is not a valid hex notation
 	//
 	void* object = nullptr;

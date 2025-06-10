@@ -17,21 +17,21 @@ include_guard()
 # https://packages.msys2.org/package/bash
 
 #	HOST		SHELL		BASH	Target_Os
-#	android		termux		bash	android
-#	linux		tinycore	bash	android, linux
-#	linux		ubuntu		bash	android, linux
-#	mac     	osx			bash	mac, ios, iossim
-#	raspberry	pi			bash	raspberry
-#	windows 	clang32    	bash	windows
-#	windows 	clang64 	bash	windows
-#	windows 	clangarm64 	bash	windows
-#	windows 	git     	bash	android, windows
-#	windows 	mingw32 	bash	windows
-#	windows 	mingw64 	bash	windows
-#	windows 	msys2  		bash	android, windows
-#	windows 	ucrt64		bash	windows
-#	windows 	wsl_debian	bash	linux
-#	windows 	wsl_ubuntu	bash	linux
+#	Android		termux		bash	Android
+#	linux		tinycore	bash	Android, Linux
+#	Linux		ubuntu		bash	Android, Linux
+#	Mac     	osx			bash	Mac, Ios, Iossim
+#	Raspbery	pi			bash	Raspbery
+#	Windows 	clang32    	bash	Windows
+#	Windows 	clang64 	bash	Windows
+#	Windows 	clangarm64 	bash	Windows
+#	Windows 	git     	bash	Android, Windows
+#	Windows 	mingw32 	bash	Windows
+#	Windows 	mingw64 	bash	Windows
+#	Windows 	msys2  		bash	Android, Windows
+#	Windows 	ucrt64		bash	Windows
+#	Windows 	wsl_debian	bash	Linux
+#	Windows 	wsl_ubuntu	bash	Linux
 
 #if(EXISTS "${BASH_EXE}")
 #	dk_undepend(bash)

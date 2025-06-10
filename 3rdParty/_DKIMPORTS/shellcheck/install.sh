@@ -9,9 +9,9 @@ dk_printVar Host_Os
 dk_printVar Host_Arch
 [ "${Host_Os}_${Host_Arch}" == "Linux_Arm32" ]    && SHELLCHECK_IMPORT_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.linux.armv6hf.tar.xz"
 [ "${Host_Os}_${Host_Arch}" == "Linux_Arm64" ]  && SHELLCHECK_IMPORT_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.aarch64.tar.xz"
-[ "${Host_Os}_${Host_Arch}" == "linux_x86_64" ] && SHELLCHECK_IMPORT_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.x86_64.tar.xz"
-[ "${Host_Os}_${Host_Arch}" == "mac_x86_64" ]   && SHELLCHECK_IMPORT_FILE="shellcheck-${SHELLCHECK_VERSION}.darwin.x86_64.tar.xz"
-[ "${Host_Os}_${Host_Arch}" == "mac_arm64" ]    && SHELLCHECK_IMPORT_FILE="shellcheck-${SHELLCHECK_VERSION}.darwin.aarch64.tar.xz"
+[ "${Host_Os}_${Host_Arch}" == "Linux_X86_64" ] && SHELLCHECK_IMPORT_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.x86_64.tar.xz"
+[ "${Host_Os}_${Host_Arch}" == "Mac_X86_64" ]   && SHELLCHECK_IMPORT_FILE="shellcheck-${SHELLCHECK_VERSION}.darwin.x86_64.tar.xz"
+[ "${Host_Os}_${Host_Arch}" == "Mac_Arm64" ]    && SHELLCHECK_IMPORT_FILE="shellcheck-${SHELLCHECK_VERSION}.darwin.aarch64.tar.xz"
 dk_assertVar SHELLCHECK_IMPORT_FILE
 dk_printVar SHELLCHECK_IMPORT_FILE
 

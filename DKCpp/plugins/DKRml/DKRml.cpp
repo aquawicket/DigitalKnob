@@ -606,7 +606,7 @@ DKString DKRml::eventToAddress(Rml::Event* event){
 Rml::Element* DKRml::addressToElement(const DKString& address){
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	
-	//FIXME:  Error example (win_x86_64_mingw64_gcc)
+	//FIXME:  Error example (Windows_X86_64_mingw64_gcc)
 	//		0x0x23aefc8: the address is not a valid hex notation
 	//
 	Rml::Element* element = nullptr;

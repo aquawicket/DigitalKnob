@@ -5,9 +5,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::################## dk_callDKC settings #############################
-::if not defined dk_callDKC_Target_Os 	(set "dk_callDKC_Target_Os=%Host_Os%")		&::  android, cosmocc, emscripten, ios, iossim, linux, mac, win
-::if not defined dk_callDKC_Target_Arch (set "dk_callDKC_Target_Arch=%Host_Arch%")	&::  arm32, arm64, cosmocc, x86, x86_64
-::if not defined dk_callDKC_Target_Env 	(set "dk_callDKC_Target_Env=Clang")			&::  clang, cosmocc, gcc, msvc
+::if not defined dk_callDKC_Target_Os 	(set "dk_callDKC_Target_Os=%Host_Os%")		&::  Android, Cosmo, Emscripten, Ios, Iossim, Linux, Mac, Win
+::if not defined dk_callDKC_Target_Arch (set "dk_callDKC_Target_Arch=%Host_Arch%")	&::  Arm32, Arm64, Cosmo, X86, X86_64
+::if not defined dk_callDKC_Target_Env 	(set "dk_callDKC_Target_Env=Clang")			&::  Clang, Cosmo, Gcc, Msvc
 ::####################################################################
 ::# dk_callDKC(function, arguments...)
 ::# dk_callDKC(function, arguments..., rtn_var)
@@ -73,20 +73,20 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if /i "%Target_Env%" equ "cosmocc" (
+	if /i "%Target_Env%" equ "Cosmo" (
 		%dk_call% dk_validate SH_EXE				"%dk_call% %DKIMPORTS_DIR%/sh/DKINSTALL.cmd"
-		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd"
+		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% %DKIMPORTS_DIR%/Cosmo/DKINSTALL.cmd"
 		%dk_call% dk_assertPath COSMOCC_C_COMPILER
 		set "COMPILER_EXE=!SH_EXE! !COSMOCC_C_COMPILER!"
 	)
 
-	if /i "%Target_Env%" equ "clang" (
-		%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/clang/DKINSTALL.cmd"
+	if /i "%Target_Env%" equ "Clang" (
+		%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/Clang/DKINSTALL.cmd"
 		%dk_call% dk_assertPath CLANG_C_COMPILER
 		set "COMPILER_EXE=!CLANG_C_COMPILER!"
 	)
-	if /i "%Target_Env%" equ "gcc" (
-		%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
+	if /i "%Target_Env%" equ "Gcc" (
+		%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/Gcc/DKINSTALL.cmd"
 		%dk_call% dk_assertPath GCC_C_COMPILER
 		set "COMPILER_EXE=!GCC_C_COMPILER!"
 	)

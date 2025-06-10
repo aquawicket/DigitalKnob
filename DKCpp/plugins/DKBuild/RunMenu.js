@@ -56,7 +56,7 @@ function RunMenu_onevent(event){
         OS = byId("OSList").value;
         APP = byId("AppList").value;
         if (DK_GetOS() === "Win32" || DK_GetOS() === "Win64"){
-            if (OS === "win_x86"){
+            if (OS === "Windows_X86"){
                 DK_Run(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".exe");
                 var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
                 var files = contents.split(",");
@@ -68,7 +68,7 @@ function RunMenu_onevent(event){
                     }
                 }
             }
-            if (OS === "win_x86_64"){
+            if (OS === "Windows_X86_64"){
                 DK_Run(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
                 DK_Run(DIGITALKNOB_DIR + "/USER/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
 
@@ -99,7 +99,7 @@ function RunMenu_onevent(event){
             }
         }
         if (DK_GetOS() === "Linux"){
-            //if(OS === "linux_x86_64"){
+            //if(OS === "Linux_X86_64"){
             //console.log("TODO: Run linux apps from Linux\n");
             if (dk.file.extist(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")){
                 DK_Run(DIGITALKNOB_DIR + "/DKCpp/apps/" + APP + "/" + OS + "/Release/" + APP + ".desktop");

@@ -1,6 +1,6 @@
 //CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
 var UPDATE = "" //allow the first screen to loop
-var OS = ""   //win_x86,win_x86_64,mac_x86,mac_x86_64,linux_x86,linux_x86_64,ios_arm32,ios_arm64,Iossim_X86,iossim_x86_64,Android_Arm32,android_arm64,raspberry_arm32,raspberry_arm64 
+var OS = ""   //Windows_X86,Windows_X86_64,mac_x86,Mac_X86_64,Linux_X86,Linux_X86_64,Ios_Arm32,Ios_Arm64,Iossim_X86,Iossim_x86_64,Android_Arm32,android_arm64,raspberry_arm32,raspberry_arm64 
 var APP = ""  //DKAppname
 var TYPE = ""  //Debug, Release, ALL
 var LINK = "Static" //, Dynamic
@@ -417,7 +417,7 @@ function DKBuild_DoResults(){
 	const app_path = DKBuild_FindAppPath(APP)
 	
 	////// WIN x86 /////
-	if(OS === "win_x86"){
+	if(OS === "Windows_X86"){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(!DKBuild_Command(CMAKE_EXE+" -G \""+VS_GENERATOR+"\" -A Win32 "+cmake_string+" -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+OS))
@@ -433,7 +433,7 @@ function DKBuild_DoResults(){
 	}
 	
 	////// WIN x86_64 /////
-	if(OS === "win_x86_64"){
+	if(OS === "Windows_X86_64"){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(!DKBuild_Command(CMAKE_EXE+" -G \""+VS_GENERATOR+"\" -A x64 "+cmake_string+" -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+OS))
@@ -451,11 +451,11 @@ function DKBuild_DoResults(){
 	
 	///// MAC_X86 ////
 	if(OS === "mac_x86"){
-		//Copy from mac_x86_64
+		//Copy from Mac_X86_64
 	}
 	
 	///// MAC x86_64 ////
-	if(OS === "mac_x86_64"){
+	if(OS === "Mac_X86_64"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" -T buildsystem=1 -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+" -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+OS))
@@ -472,7 +472,7 @@ function DKBuild_DoResults(){
 	}
 	
 	///// IOS_ARM32 ///////
-	if(OS === "ios_arm32"){
+	if(OS === "Ios_Arm32"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB_DIR+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+OS))
@@ -490,7 +490,7 @@ function DKBuild_DoResults(){
 	}
 	
 	///// IOS_ARM64 ///////
-	if(OS === "ios_arm64"){
+	if(OS === "Ios_Arm64"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB_DIR+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+OS))
@@ -524,7 +524,7 @@ function DKBuild_DoResults(){
 	}
 	
 	///// IOSSIM_X86_64 ///////
-	if(OS === "iossim_x86_64"){
+	if(OS === "Iossim_x86_64"){
 		DKBuild_ValidateXcode()
 		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB_DIR+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB_DIR+"DK/DKCMake -B"+app_path+OS))
 			return false
@@ -540,7 +540,7 @@ function DKBuild_DoResults(){
 	}
 	
 	//////// LINUX,  RASPBERRY //////////////////////////////////////////////////////////////
-	if(OS === "linux_x86" || OS === "linux_x86_64" || OS === "raspberry_arm32" || OS === "raspberry_arm64"){
+	if(OS === "Linux_X86" || OS === "Linux_X86_64" || OS === "raspberry_arm32" || OS === "raspberry_arm64"){
 		DKBuild_ValidateGcc()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){

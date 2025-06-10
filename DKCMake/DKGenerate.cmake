@@ -833,21 +833,21 @@ elseif((Ios) OR (Iossim))
 			set(RUN_SCRIPT_DEBUG
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
-				"xcrun simctl install booted ${Target_App_Dir}/iossim_x86_64/Debug-iphonesimulator/${Target_App}.app\n"
+				"xcrun simctl install booted ${Target_App_Dir}/Iossim_x86_64/Debug-iphonesimulator/${Target_App}.app\n"
 				"xcrun simctl launch --console-pty booted com.DigitalKnob.${Target_App}"
 			)
-			dk_fileWrite(${Target_App_Dir}/iossim_x86_64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
-			dk_exec(chmod 777 ${Target_App_Dir}/iossim_x86_64/Debug-iphonesimulator/Run.sh)
+			dk_fileWrite(${Target_App_Dir}/Iossim_x86_64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_exec(chmod 777 ${Target_App_Dir}/Iossim_x86_64/Debug-iphonesimulator/Run.sh)
 		endif()
 		if(Release)
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
-				"xcrun simctl install booted ${Target_App_Dir}/iossim_x86_64/Release-iphonesimulator/${Target_App}.app\n"
+				"xcrun simctl install booted ${Target_App_Dir}/Iossim_x86_64/Release-iphonesimulator/${Target_App}.app\n"
 				"xcrun simctl launch --console-pty booted com.DigitalKnob.${Target_App}"
 			)
-			dk_fileWrite(${Target_App_Dir}/iossim_x86_64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
-			dk_exec(chmod 777 ${Target_App_Dir}/iossim_x86_64/Release-iphonesimulator/Run.sh)
+			dk_fileWrite(${Target_App_Dir}/Iossim_x86_64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_exec(chmod 777 ${Target_App_Dir}/Iossim_x86_64/Release-iphonesimulator/Run.sh)
 		endif()
 	endif()
 	
@@ -1068,11 +1068,11 @@ elseif(Mac)
 	
 #	CPP_Execute("chmod +x "+app_path+OS+"/${Debug_Dir}/"+Target_App)
 #	if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework")){
-#		CPP_DKFile_MkDir(app_path+"mac_x86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks")
-#		CPP_DKFile_Copy(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework", app_path+"mac_x86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
-#		if(CPP_DKFile_Exists(DKBRANCH_DIR+"/DKCpp/plugins/DKCefChild/mac_x86_64/${Debug_Dir}/DKCefChild.app")){
-#			CPP_DKFile_Copy(DKBRANCH_DIR+"/DKCpp/plugins/DKCefChild/mac_x86_64/${Debug_Dir}/DKCefChild.app", app_path+"mac_x86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks/"+Target_App+" Helper.app", true)
-#			CPP_DKFile_Rename(app_path+"mac_x86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks/"+Target_App+" Helper.app/Contents/MacOS/DKCefChild", app_path+"mac_x86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks/"+Target_App+" Helper.app/Contents/MacOS/"+Target_App+" Helper", true)
+#		CPP_DKFile_MkDir(app_path+"Mac_X86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks")
+#		CPP_DKFile_Copy(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework", app_path+"Mac_X86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
+#		if(CPP_DKFile_Exists(DKBRANCH_DIR+"/DKCpp/plugins/DKCefChild/Mac_X86_64/${Debug_Dir}/DKCefChild.app")){
+#			CPP_DKFile_Copy(DKBRANCH_DIR+"/DKCpp/plugins/DKCefChild/Mac_X86_64/${Debug_Dir}/DKCefChild.app", app_path+"Mac_X86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks/"+Target_App+" Helper.app", true)
+#			CPP_DKFile_Rename(app_path+"Mac_X86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks/"+Target_App+" Helper.app/Contents/MacOS/DKCefChild", app_path+"Mac_X86_64/${Debug_Dir}/"+Target_App+".app/Contents/Frameworks/"+Target_App+" Helper.app/Contents/MacOS/"+Target_App+" Helper", true)
 #		}
 #	}
 #	### update the info.plist to include the logo icon ###

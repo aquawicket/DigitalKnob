@@ -37,17 +37,17 @@ function Global:dk_Target_Type_SET() {
 	dk_call dk_echo "23) Mac_X86_64_Clang"
 	dk_call dk_echo "24) Raspberry_Arm32_Clang"
 	dk_call dk_echo "25) Raspberry_Arm64_Clang"
-	dk_call dk_echo "26) raspberry_x86_clang"
-	dk_call dk_echo "27) raspberry_x86_64_clang"
-	dk_call dk_echo "28) windows_arm32_clang"
-	dk_call dk_echo "29) windows_arm64_clang"
-	dk_call dk_echo "30) windows_x86_clang"
-	dk_call dk_echo "31) windows_x86_gcc"
-	dk_call dk_echo "32) windows_x86_msvc"
-	dk_call dk_echo "33) windows_x86_64_clang"
-	dk_call dk_echo "34) windows_x86_64_gcc"
-	dk_call dk_echo "35) windows_x86_64_msvc"
-	dk_call dk_echo "36) windows_x86_64_ucrt"
+	dk_call dk_echo "26) Raspberry_X86_Clang"
+	dk_call dk_echo "27) Raspberry_X86_64_Clang"
+	dk_call dk_echo "28) Windows_Arm32_Clang"
+	dk_call dk_echo "29) Windows_Arm64_Clang"
+	dk_call dk_echo "30) Windows_X86_Clang"
+	dk_call dk_echo "31) Windows_X86_Gcc"
+	dk_call dk_echo "32) Windows_X86_Msvc"
+	dk_call dk_echo "33) Windows_X86_64_Clang"
+	dk_call dk_echo "34) Windows_X86_64_Gcc"
+	dk_call dk_echo "35) Windows_X86_64_Msvc"
+	dk_call dk_echo "36) Windows_X86_64_Ucrt"
 	dk_call dk_echo "37) Clear Screen"
 	dk_call dk_echo "38) Go Back"
 	dk_call dk_echo "39) Exit"
@@ -79,7 +79,7 @@ function Global:dk_Target_Type_SET() {
 	elseif(${input} -eq "23"){ $global:Target_Tuple = "Mac_X86_64_Clang" }
 	elseif(${input} -eq "24"){ $global:Target_Tuple = "Raspberry_Arm32_Clang" }
 	elseif(${input} -eq "25"){ $global:Target_Tuple = "Raspberry_Arm64_Clang" }
-	elseif(${input} -eq "26"){ $global:Target_Tuple = "raspberry_x86_clang" }
+	elseif(${input} -eq "26"){ $global:Target_Tuple = "Raspberry_X86_Clang" }
 	elseif(${input} -eq "27"){ $global:Target_Tuple = "raspberry_x64_clang" }
 	elseif(${input} -eq "28"){ $global:Target_Tuple = "Windows_Arm32_Clang" }
 	elseif(${input} -eq "29"){ $global:Target_Tuple = "Windows_Arm64_Clang" }

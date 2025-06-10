@@ -12,10 +12,10 @@ Windows x86_64 <br>
 Mac x86_64 <br>
 Linux x86 <br>
 Linux x86_64 <br>
-iPhone/iPad arm64 (<br>
+iPhone/iPad Arm64 (<br>
 iPhone/iPad-Simulator x86_64 <br>
-Android arm32 <br>
-Android arm64 <br>
+Android Arm32 <br>
+Android Arm64 <br>
 Raspberry Pi <br>
 Chrome <br>
 Safari <br>
@@ -318,26 +318,26 @@ Run '/path/to/DKBuilder.sh'
 Digitalknob uses it's own build system powered by the cmake scripting language. (DKCMake) <br>
 Invoking cmake -G"<generator>" -S<DKCMake_directory> -B<DKCpp/apps/MyApp/'OS'> will use a universal /DKCMake/CMakeLists.txt script. <br>
 The build system will differenciate the appropriate scripts to use when the output directory is pointed to a valid <OS> folder
-EXAMPLE: "<DKCpp/apps/MyApp/ios_arm64>" <br>
+EXAMPLE: "<DKCpp/apps/MyApp/Ios_Arm64>" <br>
 
 Valid <'OS'>'s are <br>
 Android_Arm32 <br>
-android_arm64 <br>
-emscripten <br>
-ios_arm32 <br>
-ios_arm64 <br>
+Android_Arm64 <br>
+Emscripten <br>
+Ios_Arm32 <br>
+Ios_Arm64 <br>
 Iossim_X86 <br>
-iossim_x86_64 <br>
-linux_x86 <br>
-linux_x86_64 <br>
-mac_x86 <br>
-mac_x86_64 <br>
-raspberry_arm32 <br>
-raspberry_arm64 <br>
-win_x86 <br>
-win_x86_64 <br>
+Iossim_x86_64 <br>
+Linux_X86 <br>
+Linux_X86_64 <br>
+Mac_x86 <br>
+Mac_X86_64 <br>
+Raspberry_Arm32 <br>
+Raspberry_Arm64 <br>
+Windows_X86 <br>
+Windows_X86_64 <br>
 
-EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/DigitalKnob/Development/DKCMake -BC:/Users/<username>/DigitalKnob/Development/DKCpp/apps/DKCore/win_x86
+EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/DigitalKnob/Development/DKCMake -BC:/Users/<username>/DigitalKnob/Development/DKCpp/apps/DKCore/Windows_X86
 	"will use Visual Studio 17 2022 to build DKCore for the windows i686 platform"
 "NOTE: using build.sh to build DKBuilder, and using DKBuilder_APP.exe is the prefered and tested way to build DK Apps" 
 
