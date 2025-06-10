@@ -48,19 +48,19 @@ dk_Host_Arch() {
 #			[ -z "${Host_Os-}" ]		&& Host_Os=${Gcc_Os}
 #			[ -z "${Host_Env-}"	]		&& Host_Env=${Gcc_Env}
 #		fi
-#		if dk_call dk_commandExists bash; then
-#			Bash_Tuple=$(bash -c "builtin echo \${MACHTYPE}")
-#			remainder="${Bash_Tuple}"
-#			Bash_Arch="${remainder%%-*}"; remainder="${remainder#*-}"
+		if dk_call dk_commandExists bash; then
+			Bash_Tuple=$(bash -c "builtin echo \${MACHTYPE}")
+			remainder="${Bash_Tuple}"
+			Bash_Arch="${remainder%%-*}"; remainder="${remainder#*-}"
 #			Bash_Vendor="${remainder%%-*}"; remainder="${remainder#*-}"
 #			Bash_Os="${remainder%%-*}"; remainder="${remainder#*-}"
 #			Bash_Env="${remainder%%-*}"; remainder="${remainder#*-}"
 #			[ -z "${Host_Tuple-}" ]		&& Host_Tuple=${Bash_Tuple}
-#			[ -z "${Host_Arch-}" ]		&& Host_Arch=${Bash_Arch}
+			[ -z "${Host_Arch-}" ]		&& Host_Arch=${Bash_Arch}
 #			[ -z "${Host_Vendor-}" ]	&& Host_Vendor=${Bash_Vendor}
 #			[ -z "${Host_Os-}" ]		&& Host_Os=${Bash_Os}
 #			[ -z "${Host_Env-}" ]		&& Host_Env=${Bash_Env}
-#		fi
+		fi
 #		if dk_call dk_commandExists uname; then
 #			Uname="$(uname)"         && dk_call dk_printVar Uname
 #			Uname_a="$(uname -a)"    && dk_call dk_printVar Uname_a
@@ -100,7 +100,7 @@ dk_Host_Arch() {
 #		fi
 	fi
 	
-	dk_call dk_printVar Host_Arch
+	#dk_call dk_printVar Host_Arch
 	export ${Host_Arch}_Host=1
 }
 
