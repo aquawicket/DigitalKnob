@@ -134,8 +134,8 @@ if(${DK_BINARY_OSARCH} MATCHES "Android_Arm32")
 	dk_set(CMAKE_CXX_FLAGS 					"${ANDROID_NDK_CXX_FLAGS}")
 endif()
 
-# android_arm64
-if(${DK_BINARY_OSARCH} MATCHES "android_arm64")
+# Android_Arm64
+if(${DK_BINARY_OSARCH} MATCHES "Android_Arm64")
 	dk_set(ANDROID_NDK 						"$ENV{DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
 	dk_set(ANDROID_NDK_GENERATOR 			"Unix Makefiles")
 	dk_set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe")
@@ -214,8 +214,8 @@ if(${DK_BINARY_OSARCH} MATCHES "Iossim_x86_64")
 endif()
 
 
-# mac_x86
-if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86")
+# Mac_X86
+if(${DK_BINARY_OSARCH} MATCHES 	"Mac_X86")
 	dk_set(CMAKE_OSX_ARCHITECTURES			"i686")
 	dk_set(Mac_X86							"ON")
 endif()

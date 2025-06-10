@@ -9,7 +9,7 @@
     },
     "configurations": [
         {
-            "name": "Linux_X86_64_GCC",
+            "name": "Linux_X86_64_Gcc",
             "compilerPath": "/usr/bin/g++.exe",
             "intelliSenseMode": "linux-gcc-x64",
             "includePath": [

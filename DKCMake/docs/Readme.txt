@@ -6,18 +6,35 @@
 * The build directory is the path to the app followed by the OS.  i.e  DKCpp/apps/DKMyApp/Windows_X86  
 	* Output Build OS's are
 		* /Android_Arm32
-		* /android_arm64
-		* /Emscripten
+		* /Android_Arm64
+		* /Android_X86
+		* /Android_X86_64
+		* /Emscripten_Arm32
+		* /Emscripten_Arm64
+		* /Emscripten_X86
+		* /Emscripten_X86_64
 		* /Ios_Arm32
 		* /Ios_Arm64
+		* /Ios_X86
+		* /Ios_X86_64
+		* /Iossim_Arm32
+		* /Iossim_Arm64
 		* /Iossim_X86
 		* /Iossim_x86_64
+		* /Linux_Arm32
+		* /Linux_Arm64
 		* /Linux_X86
 		* /Linux_X86_64
-		* /mac_x86
+		* /Mac_Arm32
+		* /Mac_Arm64
+		* /Mac_X86
 		* /Mac_X86_64
-		* /raspberry_arm32
-		* /raspberry_arm64
+		* /Raspberry_Arm32
+		* /Raspberry_Arm64
+		* /Raspberry_X86
+		* /Raspberry_X86_64
+		* /Windows_Arm32
+		* /Windows_Arm64
 		* /Windows_X86
 		* /Windows_X86_64
 		

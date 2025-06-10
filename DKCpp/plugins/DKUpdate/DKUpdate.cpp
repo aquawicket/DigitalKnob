@@ -39,18 +39,30 @@
 
 //////////////////////////////////////
 //     Default update files
-// Windows_X86     - http://DigitalKnob.com/Download/DKApp.exe
-// win63     - http://DigitalKnob.com/Download/DKApp_64.exe
-// mac_x86     - http://DigitalKnob.com/Download/DKApp_mac_x86.zip
-// Mac_X86_64     - http://DigitalKnob.com/Download/DKApp_mac_x86_64.zip
-// Linux_X86   - http://DigitalKnob.com/Download/DKApp_Linux_X86.zip
-// Linux_X86_64   - http://DigitalKnob.com/Download/DKApp_Linux_X86_64.zip
-// Ios_Arm32     - http://DigitalKnob.com/Download/DKApp_Ios_Arm32.zip
-// Ios_Arm64     - http://DigitalKnob.com/Download/DKApp_Ios_Arm64.zip
-// Iossim_X86  - http://DigitalKnob.com/Download/DKApp_Iossim_x86.zip
-// Iossim_x86_64  - http://DigitalKnob.com/Download/DKApp_Iossim_x86_64.zip
-// Android_Arm32 - http://DigitalKnob.com/Download/DKApp.apk
-// android_arm64 - http://DigitalKnob.com/Download/DKApp_64.apk
+// Windows_Arm32	- http://DigitalKnob.com/Download/DKApp_Windows_Arm32.exe
+// Windows_Arm64	- http://DigitalKnob.com/Download/DKApp_Windows_Arm64.exe
+// Windows_X86		- http://DigitalKnob.com/Download/DKApp_Windows_X86.exe
+// Windows_X86_64	- http://DigitalKnob.com/Download/DKApp_Windows_X86_64.exe
+// Mac_Arm32		- http://DigitalKnob.com/Download/DKApp_Mac_Arm32.zip
+// Mac_Arm64		- http://DigitalKnob.com/Download/DKApp_Mac_Arm64.zip
+// Mac_X86			- http://DigitalKnob.com/Download/DKApp_Mac_X86.zip
+// Mac_X86_64		- http://DigitalKnob.com/Download/DKApp_Mac_X86_64.zip
+// Linux_Arm32		- http://DigitalKnob.com/Download/DKApp_Linux_Arm32.zip
+// Linux_Arm64		- http://DigitalKnob.com/Download/DKApp_Linux_Arm64.zip
+// Linux_X86		- http://DigitalKnob.com/Download/DKApp_Linux_X86.zip
+// Linux_X86_64		- http://DigitalKnob.com/Download/DKApp_Linux_X86_64.zip
+// Ios_Arm32		- http://DigitalKnob.com/Download/DKApp_Ios_Arm32.zip
+// Ios_Arm64		- http://DigitalKnob.com/Download/DKApp_Ios_Arm64.zip
+// Ios_X86			- http://DigitalKnob.com/Download/DKApp_Ios_X86.zip
+// Ios_X86_64		- http://DigitalKnob.com/Download/DKApp_Ios_X86_64.zip
+// Iossim_X86		- http://DigitalKnob.com/Download/DKApp_Iossim_X86.zip
+// Iossim_X86_64	- http://DigitalKnob.com/Download/DKApp_Iossim_X86_64.zip
+// Iossim_Arm32		- http://DigitalKnob.com/Download/DKApp_Iossim_Arm32.zip
+// Iossim_Arm64		- http://DigitalKnob.com/Download/DKApp_Iossim_Arm64.zip
+// Android_Arm32	- http://DigitalKnob.com/Download/DKApp_Android_Arm32.apk
+// Android_Arm64	- http://DigitalKnob.com/Download/DKApp_Android_Arm64.apk
+// Android_X86		- http://DigitalKnob.com/Download/DKApp_Android_X86.apk
+// Android_X86_64	- http://DigitalKnob.com/Download/DKApp_Android_X86_64.apk
 
 DKString DKUpdate::url;
 
@@ -74,11 +86,11 @@ bool DKUpdate::Init(){
 #endif
 #if MAC_X86
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC_X86]", url);
-	if(url.empty()){ url = downloads+app+"_mac_x86.zip"; }
+	if(url.empty()){ url = downloads+app+"_Mac_X86.zip"; }
 #endif
 #if MAC_X86_64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC_X86_64]", url);
-	if(url.empty()){ url = downloads+app+"_mac_x86_64.zip"; }
+	if(url.empty()){ url = downloads+app+"_Mac_X86_64.zip"; }
 #endif
 #ifdef LINUX_X86
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86]", url);
