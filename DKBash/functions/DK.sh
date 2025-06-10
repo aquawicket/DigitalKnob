@@ -129,7 +129,7 @@ dkreloadWithBash(){
 	#echo "dkreloadWithBash()"
 	
 	#[ -n "${BASH-}" ] && return
-	[ "${DKSHELL-}" = "bash" ] && return
+	#[ "${DKSHELL-}" = "bash" ] && return
 	[ -n "${DKBASH_RELOADED-}" ] && return
 	(command -v bash &>/dev/null) || dk_installPackage bash
 	(command -v bash &>/dev/null) && export BASH_EXE=$(command -v bash) || (echo "ERROR: bash not found"; exit 1)
