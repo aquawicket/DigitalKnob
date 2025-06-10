@@ -24,10 +24,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set message=%message:^^=^%
 		goto :DeEscape
 	)
-
+	
 	::set "message=%message:""="%"
-
-	for /f "usebackq delims=" %%G in (`echo:%message%`) do (echo %%~G)
+	for /f "delims=" %%G in (%message%) do (echo:%%~G)
+::	for /f "usebackq delims=" %%G in (`echo:%message%`) do (echo %%~G)
 %endfunction%
 
 
@@ -59,7 +59,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		                       ::VALID: "     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
 							   
 ::			                        echo:"    #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
-for /f "usebackq delims=" %%G in (`echo:"     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"`) do (echo %%~G)
+::             for /f "tokens=*" %%G in ("     #$ &'()*+,-./:;<=>?@[\]^_`{|}~") do (echo:%%~G)
+               for /f "delims=" %%G in ("     #$ &'()*+,-./:;<=>?@[\]^_`{|}~") do (echo:%%~G)
 
 					  ::###### dk_call w/ Valid Characters ######
 					  %dk_call% dk_echo "     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"

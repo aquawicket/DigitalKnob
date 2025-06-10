@@ -11,10 +11,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_trim
 %setlocal%
-	%dk_call% dk_debugFunc 0
+::	%dk_call% dk_debugFunc 0
+	
+::	set dk_trim=%*
+	if "%~2" equ "" (
+		set "dk_trim=%~1"
+	) else (
+		set dk_trim=%*
+	)
+	
+::	echo dk_trim = %dk_trim%
 
-	set Params=dummy %*
-	for /f "tokens=1*" %%a in ("!Params!") do endlocal & set dk_trim=%%b
+	for /f "tokens=*" %%a in ("!dk_trim!") do endlocal & set "dk_trim=%%~a"
 
 %endfunction%
 
@@ -33,14 +41,72 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
  
-	set myValue=   a b c 
-	%dk_call% dk_trim %myValue%
-	%dk_call% dk_echo "myValue = '%myValue%'"
-	%dk_call% dk_echo "dk_trim = '%dk_trim%'"
-	
-	set myValue=   a \ / : * ? " ' < > | ` ~ @ # $ [ ] & ( ) + - _ = z   
-	call dk_trim %myValue%
+	::###### Variable set with quotes ######
+	echo:
+	set "myValue=   a  b  c   "   
 	echo myValue = '%myValue%'
-	echo dk_trim = '%dk_trim%'
+	%dk_call% dk_trim %myValue%
+	echo dk_trim =    '%dk_trim%'
+	
+	::###### Variable set with without quotes ######
+	echo:
+	set myValue=   1  2  3      
+	echo myValue = '%myValue%'
+	%dk_call% dk_trim %myValue%
+	echo dk_trim =    '%dk_trim%'
+	
+	::###### Variable set with without quotes ######
+	echo:
+	set "myValue=   d  e  f    "
+	echo myValue = '%myValue%'
+	%dk_call% dk_trim "%myValue%"
+	echo dk_trim =   '%dk_trim%'
+	
+	::###### Variable set with without quotes ######
+	echo:
+	set myValue=   4  5  6    
+	echo myValue = '%myValue%'
+	%dk_call% dk_trim "%myValue%"
+	echo dk_trim =   '%dk_trim%'
+	
+	::###### Variable with unspecial characters and quotes ######
+	echo:
+          ::ALL:    ! " #  $  % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+        ::VALID:        #  $    & ' (   * + , - . / : ;   =   ? @ [ \ ] ^ _ ` {   } ~
+      ::INVALID:    ! "       % &     )                 <   >           ^       |
+	set "myValue=       #  $      ' (   * + , - . / : ;   =   ? @ [ \ ] ^ _ ` {   } ~     "      
+	echo myValue = '%myValue%'
+	%dk_call% dk_trim %myValue%
+	echo dk_trim =        '%dk_trim%'
+	
+	::###### Variable with unspecial characters and quotes ######
+	echo:
+        ::ALL:    ! " #  $  % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+        ::VALID:      #  $    & ' (   * + , - . / : ;   =   ? @ [ \ ] ^ _ ` {   } ~
+      ::INVALID:  ! "       % &     )                 <   >           ^       |
+	set "myValue=       #  $      ' (   * + , - . / : ;   =   ? @ [ \ ] ^ _ ` {   } ~     "      
+	echo myValue = '%myValue%'
+	%dk_call% dk_trim "%myValue%"
+	echo dk_trim =        '%dk_trim%'
+	
+	::###### Variable with unspecial characters and quotes ######
+	echo:
+          ::ALL:    ! " #  $  % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+        ::VALID:        #  $    & ' (   * + , - . / : ;   =   ? @ [ \ ] ^ _ ` {   } ~
+      ::INVALID:    ! "       % &     )                 <   >           ^       |
+	set "myValue=       #  $    & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~     "   
+	echo "myValue = '%myValue%'"
+	%dk_call% dk_trim "%myValue%"
+	echo "dk_trim =        '%dk_trim%'"
+	
+	
+::	echo:						   
+::	set myValue=     #$ &'()*+,-./:;<=>?@[\]^_`{|}~
+::	echo "myValue = '%myValue%'"
+::	::for /f "delims=" %%G in ("myValue = '%myValue%'") do (echo:%%~G)
+	
+::	call :dk_trim %myValue%
+::	echo dk_trim = '%dk_trim%'
+::	::for /f "delims=" %%G in ("dk_trim = '%dk_trim%'") do (echo:%%~G)
 %endfunction%
 
