@@ -31,6 +31,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
+	::for /r "%DKBRANCH_DIR:/=\%" %%G in (*.*) do echo "%%G"
+	for /r "%DKBRANCH_DIR:/=\%" %%G in (cmake_install.cmake) do @if exist "%%G" (
+		echo deleting "%%G"
+		del "%%G"
+	)
+	for /d /r "%DKBRANCH_DIR:/=\%" %%G in (CMakeFiles) do @if exist "%%G" rd /s/q "%%G"
+	
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_clearCmakeCache "%DKBRANCH_DIR%"
+	
+	
 %endfunction%

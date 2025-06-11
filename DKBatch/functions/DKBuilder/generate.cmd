@@ -43,7 +43,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::############ set CMAKE Variables ###########
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
-	set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
+	::set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
+	set "CMAKE_SOURCE_DIR=%Target_App_Dir%"
 
 	::############ Create CMAKE_ARGS array ############
 	set "Target_Level=RebuildAll"

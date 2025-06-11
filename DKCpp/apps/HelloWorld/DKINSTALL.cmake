@@ -45,5 +45,5 @@ dk_set(CURRENT_PLUGIN		"${dk_basename}")
 dk_set(${CURRENT_PLUGIN}	"${CMAKE_SOURCE_DIR}")
 
 dk_define(DKAPP)
-dk_configure(${Target_App_Dir})
-dk_build(${Target_App_Dir})
+dk_configure("${Target_App_Dir}")
+dk_build("${Target_App_Dir}")

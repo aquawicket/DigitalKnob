@@ -13,6 +13,9 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+#Load all cmake flags prior to calling PROJECT()
+dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake")
+dk_load("$ENV{DKCMAKE_DIR}/DKBuildFlags.cmake")
 
 ### Target_App_Dir ###
 dk_set(Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
