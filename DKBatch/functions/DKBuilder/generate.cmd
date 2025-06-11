@@ -41,6 +41,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "Target_Tuple_Dir=%Target_App_Dir%/%Target_Tuple%"
 	if not exist "%Target_Tuple_Dir%" (%dk_call% dk_mkdir "%Target_Tuple_Dir%")
 	
+	::############ Get CMakeLists.txt file #############
+	%dk_call% dk_copy "%DKCPP_PLUGINS_DIR%/_DKIMPORT/_CMakeLists.txt_" "%Target_App_Dir%/CMakeLists.txt"
+	
 	::############ set CMAKE Variables ###########
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
 	::set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
