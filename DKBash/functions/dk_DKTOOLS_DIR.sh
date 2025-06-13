@@ -16,14 +16,16 @@ dk_DKTOOLS_DIR() {
 		export DKTOOLS_DIR="${1}" 
 
 	############ GET ############
-	else
+	elif [ ! -e "${DKTOOLS_DIR-}" ]; then
 		dk_call dk_validate DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR" 
 		export DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"  
 	fi
 	
 	if [ ! -e "${DKTOOLS_DIR}" ]; then
 		dk_call dk_mkdir "${DKTOOLS_DIR}" 
-	fi  
+	fi
+	
+	builtin echo "${DKTOOLS_DIR-}"
 }
 
 

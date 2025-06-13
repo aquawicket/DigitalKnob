@@ -9,6 +9,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#		Check if a variable is defined and throw an Assertion if it is not.
 ::#
+::# Throw assertion if argument is not a valid variable
+::#
 if defined %~1   %return%
 :dk_assertVar
 %setlocal%

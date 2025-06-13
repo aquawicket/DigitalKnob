@@ -16,10 +16,12 @@ dk_DK3RDPARTY_DIR() {
 		export DK3RDPARTY_DIR="${1}" 
 
 	############ GET ############
-	else
+	elif [ ! -e "${DK3RDPARTY_DIR-}" ]; then
 		dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR" 
 		export DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"   
 	fi
+	
+	builtin echo "${DK3RDPARTY_DIR-}"
 }
 
 

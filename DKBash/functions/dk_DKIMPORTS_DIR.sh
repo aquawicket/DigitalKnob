@@ -16,10 +16,12 @@ dk_DKIMPORTS_DIR() {
 		export DKIMPORTS_DIR="${1}" 
 
 	############ GET ############
-	else
+	elif [ ! -e "${DKIMPORTS_DIR-}" ]; then
 		dk_call dk_validate DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR" 
 		export DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
 	fi
+	
+	builtin echo "${DKIMPORTS_DIR-}"
 }
 
 

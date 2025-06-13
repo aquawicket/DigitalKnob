@@ -10,6 +10,8 @@ set "dk_assertFile_CASE_SENSITIVE=1"
 ::################################################################################
 ::# dk_assertFile(path)
 ::#
+::# Throw assertion if argument is not a valid, existing file
+::#
 :dk_assertFile
 %setlocal%
 	%dk_call% dk_debugFunc 0 99

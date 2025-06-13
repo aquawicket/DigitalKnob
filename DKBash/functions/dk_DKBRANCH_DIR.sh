@@ -90,6 +90,10 @@ dk_DKBRANCH_DIR() {
 		[ -z "${DKPYTHON_DIR-}" ] && export DKPYTHON_DIR="${DKBRANCH_DIR}/DKPython"
 			[ -z "${DKPYTHON_FUNCTIONS_DIR-}" ] && export DKPYTHON_FUNCTIONS_DIR="${DKPYTHON_DIR}/functions"
 			[ -z "${DKPYTHON_FUNCTIONS_DIR_-}" ] && export DKPYTHON_FUNCTIONS_DIR_="${DKPYTHON_FUNCTIONS_DIR}/"
+			
+		[ -z "${DKVB_DIR-}" ] && export DKVB_DIR="${DKBRANCH_DIR}/DKVb"
+			[ -z "${DKVB_FUNCTIONS_DIR-}" ] && export DKVB_FUNCTIONS_DIR="${DKVB_DIR}/functions"
+			[ -z "${DKVB_FUNCTIONS_DIR_-}" ] && export DKVB_FUNCTIONS_DIR_="${DKVB_FUNCTIONS_DIR}/"
 	fi
 }
 

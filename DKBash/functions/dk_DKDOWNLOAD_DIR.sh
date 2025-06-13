@@ -16,7 +16,7 @@ dk_DKDOWNLOAD_DIR() {
 		export DKDOWNLOAD_DIR="${1}" 
 
 	############ GET ############
-	else
+	elif [ ! -e "${DKDOWNLOAD_DIR-}" ]; then
 		dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR" 
 		export DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"   
 	fi 
@@ -24,6 +24,8 @@ dk_DKDOWNLOAD_DIR() {
 	if [ ! -e "${DKDOWNLOAD_DIR}" ]; then
 		dk_call dk_mkdir "${DKDOWNLOAD_DIR}" 
 	fi 
+	
+	builtin echo "${DKDOWNLOAD_DIR-}"
 }
 
 
