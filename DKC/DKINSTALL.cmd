@@ -86,9 +86,9 @@ if "%~1" equ "" (goto:DKINSTALL)
 	:: clang, cosmocc, gcc, msvc
 	:: NOTE: gcc is now working yet.  Need the appropriate command to line libwinpthread and others statically
 
-	::if not defined Target_Os		(set "Target_Os=win")
-	::if not defined Target_Arch	(set "Target_Arch=x86_64")
-	::if not defined Target_Env		(set "Target_Env=gcc")
+	::if not defined Target_Os		(set "Target_Os=Windows")
+	::if not defined Target_Arch	(set "Target_Arch=X86_64")
+	::if not defined Target_Env		(set "Target_Env=Gcc")
 
 	@echo off&::###### DK.cmd #########################################################################################################################
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
@@ -100,36 +100,36 @@ if "%~1" equ "" (goto:DKINSTALL)
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 
 	::###### Target_Os ######
-	if not defined Target_Os (set "Target_Os=win")
+	if not defined Target_Os (set "Target_Os=Windows")
 
 	::###### Target_Arch ######
-	if not defined Target_Arch (set "Target_Arch=x86_64")
+	if not defined Target_Arch (set "Target_Arch=X86_64")
 
 	::###### Target_Env ######
-	if not defined Target_Env (set "Target_Env=clang")
+	if not defined Target_Env (set "Target_Env=Clang")
 
 	::###### Target_Tuple ######
 	if not defined Target_Tuple (set "Target_Tuple=%Target_Os%_%Target_Arch%_%Target_Env%")
 	set "%Target_Tuple%=1"
 
 	::###### MSYSTEM ######
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "clang" if "%Target_Arch%" equ "x86"    set "MSYSTEM=CLANG32"
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "clang" if "%Target_Arch%" equ "x86_64" set "MSYSTEM=CLANG64"
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "clang" if "%Target_Arch%" equ "arm64"  set "MSYSTEM=CLANGARM64"
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "gcc"   if "%Target_Arch%" equ "x86"    set "MSYSTEM=MINGW32"
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "gcc"   if "%Target_Arch%" equ "x86_64" set "MSYSTEM=MINGW64"
+	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Clang" if "%Target_Arch%" equ "X86"    set "MSYSTEM=CLANG32"
+	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Clang" if "%Target_Arch%" equ "X86_64" set "MSYSTEM=CLANG64"
+	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Clang" if "%Target_Arch%" equ "Arm64"  set "MSYSTEM=CLANGARM64"
+	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Gcc"   if "%Target_Arch%" equ "X86"    set "MSYSTEM=MINGW32"
+	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Gcc"   if "%Target_Arch%" equ "X86_64" set "MSYSTEM=MINGW64"
 
 	::###### DK_C_COMPILER ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-	if /i "%Target_Env%" equ "cosmocc"	(%dk_call% dk_validate SH_EXE				"call %DKIMPORTS_DIR%/sh/DKINSTALL.cmd")
-	if /i "%Target_Env%" equ "cosmocc"	(%dk_call% dk_validate COSMOCC_C_COMPILER	"call %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd")
-	if /i "%Target_Env%" equ "clang"	(%dk_call% dk_validate CLANG_C_COMPILER		"call %DKIMPORTS_DIR%/clang/DKINSTALL.cmd")
-	if /i "%Target_Env%" equ "gcc"		(%dk_call% dk_validate GCC_C_COMPILER		"call %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd")
+	if /i "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate SH_EXE				"call %DKIMPORTS_DIR%/sh/DKINSTALL.cmd")
+	if /i "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate COSMOCC_C_COMPILER	"call %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd")
+	if /i "%Target_Env%" equ "Clang"	(%dk_call% dk_validate CLANG_C_COMPILER		"call %DKIMPORTS_DIR%/clang/DKINSTALL.cmd")
+	if /i "%Target_Env%" equ "Gcc"		(%dk_call% dk_validate GCC_C_COMPILER		"call %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd")
 
-	if /i "%Target_Env%" equ "cosmocc"	(set "DK_C_COMPILER=%SH_EXE% %COSMOCC_C_COMPILER%")
-	if /i "%Target_Env%" equ "clang"	(set "DK_C_COMPILER=%CLANG_C_COMPILER%")
-	if /i "%Target_Env%" equ "gcc"		(set "DK_C_COMPILER=%GCC_C_COMPILER%")
+	if /i "%Target_Env%" equ "Cosmocc"	(set "DK_C_COMPILER=%SH_EXE% %COSMOCC_C_COMPILER%")
+	if /i "%Target_Env%" equ "Clang"	(set "DK_C_COMPILER=%CLANG_C_COMPILER%")
+	if /i "%Target_Env%" equ "Gcc"		(set "DK_C_COMPILER=%GCC_C_COMPILER%")
 	%dk_call% dk_assertPath DK_C_COMPILER
 
 	%dk_call% dk_registryDeleteKey "HKCR/DKC"
