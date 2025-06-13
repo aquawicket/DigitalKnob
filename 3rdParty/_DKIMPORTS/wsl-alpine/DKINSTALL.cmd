@@ -12,27 +12,29 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
+
 	%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd"
-	
-	%dk_call% dk_set LAUNCHER_DL "https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe"
 	
 	%dk_call% dk_echo  
     %dk_call% dk_info "Installing WSL-Alpine Linux . . ."
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_set ALPINE_DIR "%DKTOOLS_DIR%/AlpineLinux"
+	set "ALPINE_DIR=%DKTOOLS_DIR%/AlpineLinux"
 	
 	if exist "%LAUNCHER_IMPORT_FILE%" (goto alpine_installed)
 	%dk_call% dk_echo  
     %dk_call% dk_info "Installing Alpine Linux . . ."
-	%dk_call% dk_download %LAUNCHER_DL%
-	%dk_call% dk_mkdir "%DKTOOLS_DIR%/AlpineLinux"
-	%dk_call% dk_basename %LAUNCHER_DL% LAUNCHER_IMPORT_FILE
+	%dk_call% dk_download "%WSL_ALPINE_IMPORT%"
+	%dk_call% dk_mkdir "%ALPINE_DIR%"
+	%dk_call% dk_basename "%WSL_ALPINE_IMPORT%"
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_copy "%DKDOWNLOAD_DIR%/%LAUNCHER_IMPORT_FILE%" "%ALPINE_DIR%/%LAUNCHER_IMPORT_FILE%" OVERWRITE
-	"%ALPINE_DIR%/%LAUNCHER_IMPORT_FILE%" config --default-user root
-	"%ALPINE_DIR%/%LAUNCHER_IMPORT_FILE%"
-	%dk_call% dk_assertPath "%ALPINE_DIR%/%LAUNCHER_IMPORT_FILE%"
+	%dk_call% dk_copy "%DKDOWNLOAD_DIR%/%dk_basename%" "%ALPINE_DIR%/%dk_basename%" OVERWRITE
+	%dk_call% dk_firewallAllow AlpineLinux "%ALPINE_DIR%/%dk_basename%"
+	pause
+	"%ALPINE_DIR%/%dk_basename%" config --default-user root
+	"%ALPINE_DIR%/%dk_basename%"
+	%dk_call% dk_assertPath "%ALPINE_DIR%/%dk_basename%"
 	:alpine_installed
 %endfunction%
 
