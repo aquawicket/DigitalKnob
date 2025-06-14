@@ -3,6 +3,12 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
+%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
+
+:: https://stackoverflow.com/a/67714373
+::%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
+::if not defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem")
+::if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal")
 
 ::%dk_call% dk_source dk_convertToCIdentifier
 ::%dk_call% dk_source dk_basename
@@ -14,42 +20,43 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :DKUNINSTALL
-%%setlocal%%
+%setlocal%
     %dk_call% dk_debugFunc 0
 
     %dk_call% dk_validate Host_Tuple	"%dk_call% dk_Host_Tuple"
-    ::if defined Windows_Arm32_Host		(set "GIT_IMPORT=")
-    ::if defined Windows_Arm64_Host		(set "GIT_IMPORT=")
-    if defined Windows_X86_Host			(set "GIT_IMPORT=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe")
-    if defined Windows_X86_64_Host		(set "GIT_IMPORT=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe")
-    if not defined GIT_IMPORT				(%dk_call% dk_error "GIT_IMPORT is invalid")
-	
-::  %dk_call% dk_basename %GIT_IMPORT% GIT_IMPORT_FILE
-::  %dk_call% dk_removeExtension %GIT_IMPORT_FILE% GIT_FOLDER
-::	%dk_call% dk_removeExtension %GIT_FOLDER% GIT_FOLDER
-::  %dk_call% dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
-::  %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
-    %dk_call% dk_importVariables %GIT_IMPORT%
-	
-	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
-	::### DO NOT USE GIT_DIR ###
-	if defined GIT_DIR (%dk_call% dk_fatal "ERROR: GIT_DIR should not be set.")
-	::### DO NOT USE GIT_DIR ###
+    if defined Windows_Arm64_Host  (set "GIT_IMPORT=%GIT_WIN_ARM64_IMPORT%")
+    if defined Windows_X86_Host    (set "GIT_IMPORT=%GIT_WIN_X86_IMPORT%")
+    if defined Windows_X86_64_Host (set "GIT_IMPORT=%GIT_WIN_X86_64_IMPORT%")
+    %dk_call% dk_assertVar GIT_IMPORT
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
+	if not defined GIT (%dk_call% dk_importVariables %GIT_IMPORT% NAME git ROOT %DKTOOLS_DIR%)
+	%dk_call% dk_assertVar GIT
+	
+	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
+	::############ DO NOT USE GIT_DIR ############
+	if defined GIT_DIR (%dk_call% dk_fatal "ERROR: GIT_DIR should not be set.")   &:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
+	::############ DO NOT USE GIT_DIR ############
+	
+    ::set "GIT_EXE=%GIT%/bin/git.exe"
+	::set "GIT_BASH_EXE=%GIT%/bin/bash.exe"
+    ::set "GIT-BASH_EXE=%GIT%/git-bash.exe"
+	::set "GIT_PATCH_EXE=%GIT%/usr/bin/patch.exe"
 
+    ::if exist "%GIT_EXE%" (%return%)
+	
+	::###### INSTALL ######
+    %dk_call% dk_echo 
+    %dk_call% dk_info "Uninstalling git . . ."
+	
 	::FIXME: kill git.exe process
     %dk_call% dk_delete "%GIT%"
       
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	
 	::### Uninstall Context Menu ###
-	%dk_call% %DKIMPORTS_DIR%\git\dk_uninstallGitContextMenu.cmd
+	%dk_call% "%DKIMPORTS_DIR%/git/contextMenu/DKUNINSTALL.cmd"
 
-	::### Uninstall File Associations ###
-	%dk_call% %DKIMPORTS_DIR%\git\dk_uninstallGitFileAssociations.cmd
-	
 	::### Remove PATH variable
 	:: TODO
 %endfunction%
@@ -61,7 +68,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-%%setlocal%%
+%setlocal%
 	%dk_call% dk_debugFunc 0
 	
     %dk_call% DKUNINSTALL

@@ -4,7 +4,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 %dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 
 
@@ -30,12 +29,13 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	if not defined GIT (%dk_call% dk_importVariables %GIT_IMPORT% NAME git ROOT %DKTOOLS_DIR%)
 	%dk_call% dk_assertVar GIT
 	
+	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::############ DO NOT USE GIT_DIR ############
 	if defined GIT_DIR (%dk_call% dk_fatal "ERROR: GIT_DIR should not be set.")   &:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::############ DO NOT USE GIT_DIR ############
 	
     set "GIT_EXE=%GIT%/bin/git.exe"
-	::set "GIT_BASH_EXE=%GIT%/bin/bash.exe"
+	set "GIT_BASH_EXE=%GIT%/bin/bash.exe"
     ::set "GIT-BASH_EXE=%GIT%/git-bash.exe"
 	::set "GIT_PATCH_EXE=%GIT%/usr/bin/patch.exe"
    
@@ -49,9 +49,10 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     "%DKDOWNLOAD_DIR%/%GIT_IMPORT_FILE%" -y -o "%GIT%"
 	
 	::###### Install Git Context Menu ######
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	"%DKIMPORTS_DIR%/git/contextMenu/DKINSTALL.cmd"
-     
+	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	::"%DKIMPORTS_DIR%/git/contextMenu/DKINSTALL.cmd"
+    %dk_call% dk_depend git/contextMenu  
+	 
     if NOT exist "%GIT_EXE%" (%dk_call% dk_error "cannot find git")
 %endfunction%
 
@@ -64,5 +65,5 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 
 	%dk_call% DKINSTALL
 	%dk_call% dk_echo "GIT = %GIT%"
-	pause
+	%dk_call% dk_echo "GIT_EXE = %GIT_EXE%"
 %endfunction%
