@@ -5,7 +5,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 if not exist "%DKIMPORTS_DIR%/git/DKINSTALL.cmd" (
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt"  "%DKIMPORTS_DIR%/git/DKINSTALL.cmd"
+	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/DKINSTALL.cmd"  "%DKIMPORTS_DIR%/git/DKINSTALL.cmd"
 )
 %dk_call% dk_depend git
 exit /b 0
