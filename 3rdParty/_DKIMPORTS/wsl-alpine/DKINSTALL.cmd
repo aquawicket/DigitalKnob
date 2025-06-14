@@ -14,7 +14,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 
-	%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd"
+	::%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd"
+	%dk_call% dk_depend wsl
 	
 	%dk_call% dk_echo  
     %dk_call% dk_info "Installing WSL-Alpine Linux . . ."
@@ -31,11 +32,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_copy "%DKDOWNLOAD_DIR%/%dk_basename%" "%ALPINE_DIR%/%dk_basename%" OVERWRITE
 	%dk_call% dk_firewallAllow AlpineLinux "%ALPINE_DIR%/%dk_basename%"
-	pause
-	"%ALPINE_DIR%/%dk_basename%" config --default-user root
+
+	echo %ALPINE_DIR%/%dk_basename% config --default-user root
+	%ALPINE_DIR:/=\%\%dk_basename% config --default-user root
+pause
 	"%ALPINE_DIR%/%dk_basename%"
+pause
 	%dk_call% dk_assertPath "%ALPINE_DIR%/%dk_basename%"
-	:alpine_installed
+
 %endfunction%
 
 

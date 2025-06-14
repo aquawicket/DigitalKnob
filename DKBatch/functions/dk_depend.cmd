@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	if exist "%DKIMPORTS_DIR%/%_plugin_%/DKINSTALL.cmd" (
-		call "%DKIMPORTS_DIR%/%_plugin_%/DKINSTALL.cmd"
+		%dk_call% "%DKIMPORTS_DIR%/%_plugin_%/DKINSTALL.cmd"
 		
 		%dk_call% dk_success "found %_plugin_%"
 		%return%
