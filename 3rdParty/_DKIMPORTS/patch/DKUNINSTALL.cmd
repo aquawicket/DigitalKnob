@@ -4,34 +4,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-::############################################################################
-::# dk_depend(plugin)
+::####################################################################
+::# DKUNINSTALL
 ::#
-::#   this will search for a "plugin" to run in the following search path
-::#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
-::#
-:dk_depend
-::%setlocal%
-	
-	set "_plugin_=%~1"
-	
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if exist "%DKIMPORTS_DIR%/%_plugin_%/DKINSTALL.cmd" (
-		%dk_call% "%DKIMPORTS_DIR%/%_plugin_%/DKINSTALL.cmd"
-		
-		%dk_call% dk_success "found %_plugin_%"
-		%return%
-	)
+:DKUNINSTALL
+%setlocal%
+	%dk_call% dk_debugFunc 0 
 
-	%dk_call% dk_fatal "%DKIMPORTS%/%_plugin_%/DKINSTALL.cmd not found"
+	%dk_call% dk_cmakeEval "dk_load('%~dpn0')"
 %endfunction%
-
-
-
-
-
-
-
 
 
 
@@ -39,9 +20,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
+	%dk_call% dk_debugFunc 0 
 
-	%dk_call% dk_depend "git"
-	
-	
+	call :DKUNINSTALL
 %endfunction%
-

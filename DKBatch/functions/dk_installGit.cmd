@@ -39,10 +39,10 @@ if not defined GIT_CONFIG_GLOBAL  (set GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
 	::###!!! DO NOT USE GIT_DIR !!!###
 	
     set "GIT_EXE=%GIT%/bin/git.exe"
-	::set "BASH_EXE=%GIT%/bin/bash.exe"
-    set "GITBASH_EXE=%GIT%/git-bash.exe"
-	::set "PATCH_EXE=%GIT%/usr/bin/patch.exe"
-    %dk_call% dk_firewallAllow "GIT" "%GIT%/mingw64/libexec/git-core/git-remote-https.exe"
+	::set "GIT_BASH_EXE=%GIT%/bin/bash.exe"
+    ::set "GIT-BASH_EXE=%GIT%/git-bash.exe"
+	::set "GIT_PATCH_EXE=%GIT%/usr/bin/patch.exe"
+    %dk_call% dk_firewallAllow "git-remote-https" "%GIT%/mingw64/libexec/git-core/git-remote-https.exe"
 	%dk_call% dk_firewallAllow "lsass" "%windir:\=/%/System32/lsass.exe"
 	
     if exist "%GIT_EXE%" (

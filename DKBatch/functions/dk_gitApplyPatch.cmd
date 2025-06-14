@@ -21,8 +21,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_chdir %DIGITALKNOB_DIR%
 	
-::	%dk_call% dk_validate PATCH_EXE "%dk_call% dk_installGit"
-::	"%PATCH_EXE%" --directory=%directory% < %patchFile% --verbose --dry-run
+::	%dk_call% dk_validate GIT_PATCH_EXE "%dk_call% dk_installGit"
+::	"%GIT_PATCH_EXE%" --directory=%directory% < %patchFile% --verbose --dry-run
 	
 	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	"%GIT_EXE%" "-C %DKBRANCH_DIR% apply --verbose --no-index --unsafe-paths --directory=%directory% %patchFile%

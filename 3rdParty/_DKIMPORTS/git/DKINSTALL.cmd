@@ -35,9 +35,9 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	::############ DO NOT USE GIT_DIR ############
 	
     set "GIT_EXE=%GIT%/bin/git.exe"
-	set "GIT_BASH_EXE=%GIT%/bin/bash.exe"
-    set "GIT-BASH_EXE=%GIT%/git-bash.exe"
-	set "PATCH_EXE=%GIT%/usr/bin/patch.exe"
+	::set "GIT_BASH_EXE=%GIT%/bin/bash.exe"
+    ::set "GIT-BASH_EXE=%GIT%/git-bash.exe"
+	::set "GIT_PATCH_EXE=%GIT%/usr/bin/patch.exe"
    
     if exist "%GIT_EXE%" (%return%)
 	
@@ -62,5 +62,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% DKINSTALL
+	%dk_call% DKINSTALL
+	%dk_call% dk_echo "GIT = %GIT%"
+	pause
 %endfunction%
