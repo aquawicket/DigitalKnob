@@ -53,7 +53,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     "%DKDOWNLOAD_DIR%/%GIT_IMPORT_FILE%" -y -o "%GIT%"
 	
     ::###### Install Git Context Menu ######
-    %dk_call% dk_depend git/contextMenu  
+    ::%dk_call% dk_depend git/contextMenu  
 	 
     if NOT exist "%GIT_EXE%" (%dk_call% dk_error "cannot find git")
 %endfunction%
