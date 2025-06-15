@@ -29,8 +29,9 @@ dk_depend(msys2)
 
 ### IMPORT ###
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/bzip2/dkconfig.txt")
-dk_import(${BZIP2_IMPORT})
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_import(${Bzip2_Import})
+dk_assertVar(BZIP2)
 
 dk_include			(${BZIP2}/								BZIP2_INCLUDE_DIR)
 if(MSVC)

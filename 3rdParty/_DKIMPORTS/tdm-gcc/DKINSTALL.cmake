@@ -16,7 +16,7 @@ include_guard()
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-#dk_getFileParams("$ENV{DKIMPORTS_DIR}/tdm-gcc/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 
 ### DOWNLOAD ###

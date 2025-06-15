@@ -23,7 +23,7 @@ dk_depend			(userenv)
 
 ### IMPORT ###
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParams 	("$ENV{DKIMPORTS_DIR}/libuv/dkconfig.txt")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import			(${LIBUV_DL})
 
 ### LINK ###

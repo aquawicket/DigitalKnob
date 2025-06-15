@@ -25,7 +25,7 @@ endif()
 
 
 ###### 32Bit ######
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/vc_redist/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 #dk_set(VCCOMP140_X86_DLL "$ENV{SystemDrive}/Windows/SysWOW64/vcomp140.dll")
 #dk_set(VCCOMP140_X86_DEBUG_DLL "$ENV{SystemDrive}/Windows/SysWOW64/vcomp140d.dll")
 #dk_set(VCRUNTIME140_X86_DLL "$ENV{SystemDrive}/Windows/SysWOW64/vcruntime140.dll")
@@ -40,7 +40,7 @@ dk_getFileParams("$ENV{DKIMPORTS_DIR}/vc_redist/dkconfig.txt")
 
 
 ###### 64Bit ######
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/vc_redist/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 #dk_set(VCCOMP140_X86_64_DLL "$ENV{SystemDrive}/Windows/System32/vcomp140.dll")
 #dk_set(VCCOMP140_X86_64_DEBUG_DLL "$ENV{SystemDrive}/Windows/System32/vcomp140d.dll")
 #dk_set(VCRUNTIME140_X86_64_DLL "$ENV{SystemDrive}/Windows/System32/vcruntime140.dll")

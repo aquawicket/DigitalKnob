@@ -34,7 +34,7 @@ dk_depend(zstd)
 
 ### IMPORT ###
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/curl/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows)
 	dk_import	(${CURL_WIN_DL})
 else()

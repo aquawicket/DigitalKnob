@@ -13,7 +13,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### INSTALL ###
 dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParams	("$ENV{DKIMPORTS_DIR}/Folder-locker/dkconfig.txt")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import			(${FOLDER-LOCKER_IMPORT} NAME Folder-locker)
 dk_set(folderLocker.exe "${FOLDER-LOCKER}/BIN/folderLocker.exe")
 if(EXISTS ${folderLocker.exe})

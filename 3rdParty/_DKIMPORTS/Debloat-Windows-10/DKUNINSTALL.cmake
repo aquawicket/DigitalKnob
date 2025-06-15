@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/W4RH4WK/Debloat-Windows-10/archive/refs/heads/master.zip
 
 ### UnINSTALL ###
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParams	("$ENV{DKIMPORTS_DIR}/Debloat-Windows-10/dkconfig.txt")
+dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables	(${DEBLOAT-WINDOWS-10_IMPORT} NAME Debloat-Windows-10)
 dk_delete			("${DEBLOAT-WINDOWS-10}")

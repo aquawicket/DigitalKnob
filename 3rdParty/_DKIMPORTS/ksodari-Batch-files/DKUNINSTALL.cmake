@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/ksodari/Batch-files/archive/refs/heads/master.zip
 
 ### UnINSTALL ###
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParams	("$ENV{DKIMPORTS_DIR}/ksodari-Batch-files/dkconfig.txt")
+dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables	(${KSODARI-BATCH-FILES_IMPORT} NAME ksodari-Batch-files)
 dk_delete			("${KSODARI-BATCH-FILES}")

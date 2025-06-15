@@ -33,7 +33,7 @@ endif()
 
 ###### CMAKE_IMPORT ######
 dk_validate			(DKIMPORTS_DIR 			"dk_DKIMPORTS_DIR()")
-dk_getFileParams	("$ENV{DKIMPORTS_DIR}/cmake/dkconfig.txt")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple 			"dk_Host_Tuple()")
 set(CMAKE_IMPORT "${CMake_${Host_Tuple}_Import}")
 #dk_if				(Android_Host			"dk_set(CMAKE_IMPORT ${CMAKE_LINUX_AARCH64_IMPORT})")

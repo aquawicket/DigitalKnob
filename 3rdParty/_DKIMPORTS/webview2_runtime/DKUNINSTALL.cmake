@@ -9,7 +9,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://go.microsoft.com/fwlink/?linkid=2124701
 
 ### UnINSTALL ###
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParams	("$ENV{DKIMPORTS_DIR}/webview2_runtime/dkconfig.txt")
+dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables	(${WEBVIEW2_RUNTIME_IMPORT} NAME webview2_runtime)
 dk_delete			("${WEBVIEW2_RUNTIME}")

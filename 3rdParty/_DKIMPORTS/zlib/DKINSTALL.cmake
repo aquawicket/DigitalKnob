@@ -20,7 +20,7 @@ include_guard()
 ### IMPORT ###
 dk_validate(Target_Config  "dk_Target_Config()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import(${ZLIB_IMPORT} NAME zlib)
+dk_import(${Zlib_Import})
 
 ### DKBIN ###
 #set(ZLIB			 	"$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  	# C:/Users/Administrator/DigitalKnob/DKBIN/include/zlib

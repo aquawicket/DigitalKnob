@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/aubio/aubio.git
 
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParams	("$ENV{DKIMPORTS_DIR}/aubio/dkconfig.txt")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import			(${AUBIO_IMPORT})
 
 dk_include			(${AUBIO_DIR}/src)

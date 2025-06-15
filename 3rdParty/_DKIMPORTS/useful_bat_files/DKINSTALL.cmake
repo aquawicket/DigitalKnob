@@ -10,5 +10,5 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### INSTALL ###
 dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParams	("$ENV{DKIMPORTS_DIR}/useful_bat_files/dkconfig.txt")
-dk_import			(${USEFUL_BAT_FILES_IMPORT} NAME useful_bat_files)
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_import		(${USEFUL_BAT_FILES_IMPORT} NAME useful_bat_files)

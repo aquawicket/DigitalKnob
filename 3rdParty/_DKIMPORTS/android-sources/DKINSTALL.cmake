@@ -20,7 +20,7 @@ include_guard()
 dk_depend		(android-sdk)
 dk_mkdir		(${ANDROID_SDK}/sources)
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-sources/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${ANDROID_SOURCES_DL} PATH ${ANDROID_SDK}/sources/android-${ANDROID_SOURCES_VERSION})
 
 #dk_import(https://dl.google.com/android/repository/sources-27_r01.zip PATH ${ANDROID_SDK}/sources/android-27)

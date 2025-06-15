@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/apache/ant.git
 #
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/ant/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${ANT_IMPORT} NAME ant)
 dk_setEnv		("ANT_HOME" ${ANT})
 dk_setEnv		("VS_AntHome" ${ANT})

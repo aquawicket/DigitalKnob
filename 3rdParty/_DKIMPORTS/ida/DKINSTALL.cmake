@@ -18,7 +18,7 @@ include_guard()
 
 
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParams	("$ENV{DKIMPORTS_DIR}/ida/dkconfig.txt")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 dk_basename			(${IDA_IMPORT} IDA_IMPORT_FILE)
 dk_importVariables	(${IDA_IMPORT} NAME IDA)

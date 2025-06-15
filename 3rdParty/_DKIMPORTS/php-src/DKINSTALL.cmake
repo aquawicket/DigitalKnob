@@ -25,7 +25,7 @@ endif()
 
 
 dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/php-src/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 
 ### DEPEND ###

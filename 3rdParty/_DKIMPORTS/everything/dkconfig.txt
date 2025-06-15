@@ -1,1 +1,1 @@
-EVERYTHING_IMPORT=https://www.voidtools.com/Everything-1.4.1.1027.x64.zip
+Everything_Windows_X86_64_Import=https://www.voidtools.com/Everything-1.4.1.1027.x64.zip

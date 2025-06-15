@@ -32,6 +32,7 @@ function(dk_import url)
 	
 	dk_getParameter(NO_HALT REMOVE)
 	
+	message("dk_importVariables(${url} ${ARGN})")
 	dk_importVariables(${url} ${ARGN})
 	dk_assertVar(ENV{CURRENT_PLUGIN})
 

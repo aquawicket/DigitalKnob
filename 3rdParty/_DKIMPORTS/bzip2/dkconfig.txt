@@ -1,1 +1,1 @@
-BZIP2_IMPORT=https://gitlab.com/bzip2/bzip2/-/archive/66c46b8/bzip2-66c46b8.zip
+Bzip2_Import=https://gitlab.com/bzip2/bzip2/-/archive/66c46b8/bzip2-66c46b8.zip

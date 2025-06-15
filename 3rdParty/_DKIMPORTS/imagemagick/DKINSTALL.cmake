@@ -18,17 +18,17 @@ if(Windows_Host)
 endif()
 
 ### IMPORT LIBRARY ###
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/imagemagick/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 if(Android_Host)
-	dk_installPackage("${IMAGEMAGICK_ANDROID_IMPORT}")
+	dk_installPackage("${Imagemagick_Android_Import}")
 	execute_process(COMMAND command -v convert OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE)	
 elseif(Unix_Host)
-	dk_import("${IMAGEMAGICK_UNIX_IMPORT}")
+	dk_import("${Imagemagick_Unix_Import}")
 elseif(Windows_X86_Host)
-	dk_import("${IMAGEMAGICK_WINDOWS_X86_IMPORT}")
+	dk_import("${Imagemagick_Windows_X86_Import}")
 elseif(Windows_X86_64_Host)
-	dk_import("${IMAGEMAGICK_WINDOWS_X86_64_IMPORT}")
+	dk_import("${Imagemagick_Windows_X86_64_Import}")
 endif()
 
 

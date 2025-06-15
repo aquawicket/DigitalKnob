@@ -18,20 +18,20 @@ include_guard()
 # https://mirrors.cloud.tencent.com/AndroidSDK/
 # Installed Build Tools revision NN.N.N is corrupted" https://stackoverflow.com/a/68430992/688352
 
-dk_depend(android-sdk)
-dk_mkdir(${ANDROID_SDK}/build-tools)
+dk_depend		(android-sdk)
+dk_mkdir		(${ANDROID_SDK}/build-tools)
 
 # 30.0.3
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-build-tools/dkconfig.txt")
+dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
-dk_validate(Host_Tuple "dk_Host_Tuple()")
+dk_validate		(Host_Tuple "dk_Host_Tuple()")
 if(Windows_Host)
-	dk_import(${ANDROID_BUILD_TOOLS_WIN_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
+	dk_import	(${ANDROID_BUILD_TOOLS_WIN_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 elseif(Mac_Host)
-	dk_import(${ANDROID_BUILD_TOOLS_MAC_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
+	dk_import	(${ANDROID_BUILD_TOOLS_MAC_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 elseif(Linux_Host OR Android_Host)
-    dk_import(${ANDROID_BUILD_TOOLS_LINUX_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
+    dk_import	(${ANDROID_BUILD_TOOLS_LINUX_IMPORT} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 endif()
 
 # 31.0.0

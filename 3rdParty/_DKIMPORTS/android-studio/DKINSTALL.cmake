@@ -25,7 +25,7 @@ dk_depend(openjdk-8)
 dk_depend(android-ndk)
 
 ### IMPORT ###
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-studio/dkconfig.txt")
+dk_getFileParams		("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows_X86_64_Host)
 	if(NOT EXISTS "${ProgramFiles}/Android/Android Studio/bin/studio64.exe")
 		dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")

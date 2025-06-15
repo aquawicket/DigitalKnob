@@ -1,1 +1,1 @@
-ZLIB_IMPORT=https://github.com/madler/zlib/archive/d476828.zip
+Zlib_Import=https://github.com/madler/zlib/archive/d476828.zip

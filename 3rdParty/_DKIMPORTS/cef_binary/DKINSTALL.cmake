@@ -40,7 +40,7 @@ dk_depend			(build-essential)
 dk_depend			(libgtk2.0-dev)
 
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/cef_binary/dkconfig.txt")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 #dk_set(CEF_BINARY_VERSION	3.2704.1414.g185cd6c)							# Oldest			
 #dk_set(CEF_BINARY_VERSION	128.4.12+g1d7a1f9+chromium-128.0.6613.138)		# Newest
 

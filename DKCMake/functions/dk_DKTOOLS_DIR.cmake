@@ -28,17 +28,18 @@ function(dk_DKTOOLS_DIR)
 		dk_set(DKTOOLS_DIR "$ENV{DKTOOLS_DIR}")
 		
 	else()
-		dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
-		dk_set(DKTOOLS_DIR "$ENV{DIGITALKNOB_DIR}/DKTools")
+		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
+		dk_set(DKTOOLS_DIR "${DIGITALKNOB_DIR}/DKTools")
 		
 	endif()
 
 	###### FINALIZE ######
-	if(NOT EXISTS "$ENV{DKTOOLS_DIR}") 
-		dk_mkdir("$ENV{DKTOOLS_DIR}")
+	if(NOT EXISTS "${DKTOOLS_DIR}") 
+		dk_mkdir("${DKTOOLS_DIR}")
 	endif()
-	dk_assertPath("$ENV{DKTOOLS_DIR}")
+	dk_assertPath("${DKTOOLS_DIR}")
 	
+#dk_debug("DKTOOLS_DIR = ${DKTOOLS_DIR}")
 endfunction()
 
 
@@ -53,10 +54,10 @@ function(DKTEST)
 	dk_echo()
 	dk_echo("Test Getting DKTOOLS_DIR . . .")
 	dk_DKTOOLS_DIR()
-	dk_printVar(ENV{DKTOOLS_DIR})
+	dk_echo("DKTOOLS_DIR = ${DKTOOLS_DIR}")
 
 	dk_echo()
 	dk_echo("Test Setting DKTOOLS_DIR . . .")
 	dk_DKTOOLS_DIR("C:/DKTools")
-	dk_printVar(ENV{DKTOOLS_DIR})
+	dk_echo("DKTOOLS_DIR = ${DKTOOLS_DIR}")
 endfunction()

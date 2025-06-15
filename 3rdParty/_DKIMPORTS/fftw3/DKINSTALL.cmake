@@ -18,7 +18,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParams 	("$ENV{DKIMPORTS_DIR}/fftw3/dkconfig.txt")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import			(${FFTW3_DL})
 
 ### LINK ###

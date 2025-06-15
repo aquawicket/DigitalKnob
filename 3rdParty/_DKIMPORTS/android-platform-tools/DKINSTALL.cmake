@@ -30,7 +30,7 @@ dk_depend(android-sdk)
 #Linux_Host_dk_import(https://dl.google.com/android/repository/platform-tools_r33.0.2-linux.zip PATH ${ANDROID_SDK}/platform-tools)
 
 # 33.0.3
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/android-platform-tools/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows_Host)
 	dk_import(${ANDROID_PLATFORM_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/platform-tools)
 elseif(Mac_Host)

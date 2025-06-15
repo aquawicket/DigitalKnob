@@ -20,7 +20,7 @@ include_guard()
 ### IMPORT ###
 dk_validate(Target_Config  "dk_Target_Config()")
 
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/bullet3/dkconfig.txt")
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import("${BULLET3_DL}")
 
 ### LINK ###
