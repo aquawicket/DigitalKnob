@@ -34,6 +34,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	%dk_call% dk_isDirectory "%destination%" && set "destination=%destination%/%dk_basename%"
     if exist "%destination%" (
 		%dk_call% dk_info "%destination% already exist"
+		endlocal & (set "dk_download=%destination%")
 		%return%
 	)
 

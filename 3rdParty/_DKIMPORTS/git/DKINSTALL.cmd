@@ -13,8 +13,8 @@ if not exist "%DKIMPORTS_DIR%/git/dkconfig.txt" (
 
 :: https://stackoverflow.com/a/67714373
 %dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-if not defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem")
-if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal")
+if not defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=%DKCACHE_DIR%/.gitSystem")
+if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGlobal")
 
 ::####################################################################
 ::# DKINSTALL
@@ -42,7 +42,6 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	set "GIT_BASH_EXE=%GIT%/bin/bash.exe"
     ::set "GIT-BASH_EXE=%GIT%/git-bash.exe"
 	::set "GIT_PATCH_EXE=%GIT%/usr/bin/patch.exe"
-   
     if exist "%GIT_EXE%" (%return%)
 	
 	::###### INSTALL ######
