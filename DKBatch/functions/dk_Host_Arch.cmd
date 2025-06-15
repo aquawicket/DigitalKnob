@@ -7,7 +7,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#####################################################################
 ::# dk_Host_Arch()
 ::#
-::#	  Host_Arch = Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows
+::#	  Host_Arch = ARM32, ARM64, X86, X86_64
 ::#
 :dk_Host_Arch
 %setlocal%
@@ -44,12 +44,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### GET ######
     %dk_call% dk_Host_Arch
-	%dk_call% dk_printVar Host_Arch
-	%dk_call% dk_printVar %Host_Arch%_Host
+	%dk_call% dk_echo "Host_Arch = %Host_Arch%"
+	%dk_call% dk_echo "%Host_Arch%_Host = !%Host_Arch%_Host!"
 	
 	::###### SET ######
 	%dk_call% dk_Host_Arch "I686"
-	%dk_call% dk_printVar Host_Arch
-	%dk_call% dk_printVar %Host_Arch%_Host
+	%dk_call% dk_echo "Host_Arch = %Host_Arch%"
+	%dk_call% dk_echo "%Host_Arch%_Host = !%Host_Arch%_Host!"
 	
 %endfunction%

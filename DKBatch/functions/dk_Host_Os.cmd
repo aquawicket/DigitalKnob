@@ -26,6 +26,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "Host_Os=%Host_Os%"
 		set "%Host_Os%_Host=1"
 	)
+	
+::	%dk_call% dk_echo "Host_Os = %Host_Os%"
+::	%dk_call% dk_echo "%Host_Os%_Host = !%Host_Os%_Host!"
 %endfunction%
 
 
@@ -40,12 +43,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### GET ######
     %dk_call% dk_Host_Os
-	%dk_call% dk_printVar Host_Os
-	%dk_call% dk_printVar %Host_Os%_Host
+	%dk_call% dk_echo "Host_Os = %Host_Os%"
+	%dk_call% dk_echo "%Host_Os%_Host = !%Host_Os%_Host!"
 	
 	::###### SET ######
 	%dk_call% dk_Host_Os "Windows"
-	%dk_call% dk_printVar Host_Os
-	%dk_call% dk_printVar %Host_Os%_Host
+	%dk_call% dk_echo "Host_Os = %Host_Os%"
+	%dk_call% dk_echo "%Host_Os%_Host = !%Host_Os%_Host!"
 	
 %endfunction%

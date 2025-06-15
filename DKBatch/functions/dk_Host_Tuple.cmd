@@ -20,11 +20,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		if not defined Host_Os		(%dk_call% dk_Host_Os)
 		if not defined Host_Arch	(%dk_call% dk_Host_Arch)
-		set "Host_Tuple=!Host_os!_!Host_Arch!"
+		set "Host_Tuple=!Host_Os!_!Host_Arch!"
 	)
 	
 	:: ###### FINALIZE ######
 	endlocal & (
+		set "Host_Os=%Host_Os%"
+		set "Host_Arch=%Host_Arch%"
 		set "Host_Tuple=%Host_Tuple%"
 		set "%Host_Tuple%_Host=1"
 	)
@@ -42,11 +44,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
     ::###### GET ######
     %dk_call% dk_Host_Tuple
-	%dk_call% dk_printVar Host_Tuple
-	%dk_call% dk_printVar %Host_Tuple%_Host
+	%dk_call% dk_echo "Host_Tuple = %Host_Tuple%"
+	%dk_call% dk_echo "%Host_Tuple%_Host =  !%Host_Tuple%_Host!"
 	
 	::###### SET ######
 	%dk_call% dk_Host_Tuple "Linux_I686"
-	%dk_call% dk_printVar Host_Tuple
-	%dk_call% dk_printVar %Host_Tuple%_Host
+	%dk_call% dk_echo "Host_Tuple = %Host_Tuple%"
+	%dk_call% dk_echo "%Host_Tuple%_Host =  !%Host_Tuple%_Host!"
 %endfunction%

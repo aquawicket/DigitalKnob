@@ -13,12 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-    if defined Linux_Arm64_Host		(set "NODEJS_IMPORT=%NodeJS_Linux_Arm64_Import%")
-    if defined Linux_X86_64_Host	(set "NODEJS_IMPORT=%NodeJS_Linux_X86_64_Import%")
-    if defined Mac_Arm64_Host		(set "NODEJS_IMPORT=%NodeJS_Mac_Arm64_Import%")
-	if defined Mac_X86_64_Host		(set "NODEJS_IMPORT=%NodeJS_Mac_X86_64_Import%")
-    if defined Windows_X86_Host		(set "NODEJS_IMPORT=%NodeJS_Windows_X86_Import%")
-    if defined Windows_X86_64_Host	(set "NODEJS_IMPORT=%NodeJS_Windows_X86_64_Import%")
+	set "NODEJS_IMPORT=!NodeJS_%Host_Tuple%_Import!"
 	%dk_call% dk_assertVar NODEJS_IMPORT
 	
 	%dk_call% dk_importVariables %NODEJS_IMPORT%

@@ -13,9 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	if defined Windows_Arm64_Host   (set "POWERSHELL_IMPORT=%Powershell_Windows_Arm64_Import%")
-    if defined Windows_X86_Host    	(set "POWERSHELL_IMPORT=%Powershell_Windows_X86_Import%")
-    if defined Windows_X86_64_Host	(set "POWERSHELL_IMPORT=%Powershell_Windows_X86_64_Import%")
+	set "POWERSHELL_IMPORT=!Powershell_%Host_Tuple%_Import!"
 	%dk_call% dk_assertVar POWERSHELL_IMPORT
 	
 	::###### POWERSHELL_IMPORT -> TO -> POWERSHELL_DIR ######
