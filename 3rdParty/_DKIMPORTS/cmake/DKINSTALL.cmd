@@ -27,23 +27,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined Windows_X86_Host			(set "CMAKE_IMPORT=%CMAKE_WIN_X86_IMPORT%")
 	%dk_call% dk_assertVar				CMAKE_IMPORT
 	
-	%dk_call% dk_basename				"%CMAKE_IMPORT%" CMAKE_IMPORT_FILE
-
 	%dk_call% dk_validate				DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables		%CMAKE_IMPORT% NAME cmake ROOT %DKTOOLS_DIR%
+	%dk_call% dk_assertVar 				CMAKE
 
 	set "CMAKE_EXE=%CMAKE%/bin/cmake.exe"
+	if exist "%CMAKE_EXE%" 				(%return%)
+	
+	%dk_call% dk_echo
+	%dk_call% dk_info 					"Installing CMake . . ."
+	%dk_call% dk_download 				"%CMAKE_IMPORT%"
+	%dk_call% dk_smartExtract 			"%dk_download%" "%CMAKE%"
 
-	if exist "%CMAKE_EXE%" 			(%return%)
-	%dk_call% dk_notice 			"Installing CMake . . ."
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-
-	%dk_call% dk_download 			"%CMAKE_IMPORT%" "%DKDOWNLOAD_DIR%/%CMAKE_IMPORT_FILE%"
-	%dk_call% dk_smartExtract 		"%DKDOWNLOAD_DIR%/%CMAKE_IMPORT_FILE%" "%CMAKE%"
-
-	%dk_call% dk_firewallAllow 		"CMake" "%CMAKE%/bin/cmake.exe"
-	%dk_call% dk_assertPath 		"%CMAKE_EXE%"
-
+	%dk_call% dk_assertPath 			"%CMAKE_EXE%"
+	%dk_call% dk_firewallAllow 			"CMake" "%CMAKE_EXE%"
+	
 	:: Add cmake to git_bash (symlink)
 	::%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
 	::%BASH_EXE% -c "ln ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/bin/cmake /usr/bin/cmake"

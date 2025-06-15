@@ -27,15 +27,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %POWERSHELL_IMPORT% ROOT %DKTOOLS_DIR%
+	%dk_call% dk_assertVar POWERSHELL
 	
-	%dk_call% dk_set POWERSHELL_EXE "%POWERSHELL_DIR%/pwsh.exe"
-	
+	%dk_call% dk_set POWERSHELL_EXE "%POWERSHELL%/pwsh.exe"
 	if exist "%POWERSHELL_EXE%" (%return%)
 	
 	%dk_call% dk_echo  
 	%dk_call% dk_info "Installing powershell . . ."
 	%dk_call% dk_download %POWERSHELL_IMPORT%
-	%dk_call% dk_smartExtract "%dk_download%" "%POWERSHELL_DIR%"
+	%dk_call% dk_smartExtract "%dk_download%" "%POWERSHELL%"
 	%dk_call% dk_assertFile POWERSHELL_EXE
 	
 	::### Add File Associations ###
