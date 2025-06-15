@@ -25,6 +25,7 @@ endif()
 
 ############ MSYS2 variables ############
 dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+message				("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple "dk_Host_Tuple()")
 dk_importVariables	("${Msys2_${Host_Tuple}_Import}")
@@ -44,7 +45,7 @@ dk_set				(UCRT64_BIN			"${MSYS2}/ucrt64/bin")
 dk_set				(MSYS2_MAKE_PROGRAM "${MSYS2_BIN}/make.exe")
 
 ############ INSTALL ############
-dk_import(${MSYS2_IMPORT})
+dk_import("${Msys2_${Host_Tuple}_Import}")
 dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
 
 ### Save Pacman database, keys and cache to download directory for offline buiding ###
