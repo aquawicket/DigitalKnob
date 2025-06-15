@@ -13,23 +13,16 @@ include_guard()
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/git/dkconfig.txt")
 
-### GIT_IMPORT ###
+### IMPORT ###
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 set(GIT_IMPORT "${Git_${Host_Tuple}_Import}")
-#if(Windows_X86_Host)
-#	set(GIT_IMPORT "${GIT_WIN_X86_IMPORT}")
-#endif()
-#if(Windows_X86_64_Host)
-#	set(GIT_IMPORT "${GIT_WIN_X86_64_IMPORT}")
-#endif()
 dk_assertVar(GIT_IMPORT)
 
 
 ### GIT variables ###
-#if(GIT_IMPORT)
-	dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-	dk_importVariables(${GIT_IMPORT} ROOT $ENV{DKTOOLS_DIR})
-#endif()
+dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+dk_importVariables(${GIT_IMPORT} ROOT $ENV{DKTOOLS_DIR})
+
 
 ### First Check ###
 if(Windows_Host)

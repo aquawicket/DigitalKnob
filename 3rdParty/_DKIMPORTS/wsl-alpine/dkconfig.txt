@@ -1,1 +1,1 @@
-WSL_ALPINE_IMPORT=https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe
+Wsl_Alpine_Windows_X86_64_Import=https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe

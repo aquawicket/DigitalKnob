@@ -11,4 +11,5 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ### INSTALL ###
 dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("$ENV{DKIMPORTS_DIR}/ventoy/dkconfig.txt")
-dk_import			(${VENTOY_IMPORT} NAME ventoy)
+dk_validate			(Host_Tuple "dk_Host_Tuple()")
+dk_import			(${Ventoy_${Host_Tuple}_Import} NAME ventoy)

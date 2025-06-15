@@ -1,5 +1,5 @@
-Python3_Win_Arm64_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-arm64.zip
-Python3_Win_X86_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip
-Python3_Win_X86_64_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip
+Python3_Windows_Arm64_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-arm64.zip
+Python3_Windows_X86_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip
+Python3_Windows_X86_64_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip
 Python3_Mac_X86_64_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg
 Python3_Linux_X86_64_Import=https://www.python.org/ftp/python/3.11.8/Python-3.11.8.tar.xz

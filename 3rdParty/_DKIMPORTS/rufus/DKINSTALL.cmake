@@ -11,7 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 ### INSTALL ### 
 dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("$ENV{DKIMPORTS_DIR}/rufus/dkconfig.txt")
-message("RUFUS_IMPORT = ${RUFUS_IMPORT}")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
+set(RUFUS_IMPORT "${Rufus_${Host_Truple}_Import}")
 
 dk_download		("${RUFUS_IMPORT}")
 dk_validate		(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")

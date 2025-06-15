@@ -11,34 +11,30 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
+	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
+	set "WSL_ALPINE_IMPORT=!Wsl_Alpine_%Host_Tuple%_Import!"
+	%dk_call% dk_assertVar WSL_ALPINE_IMPORT
 
-	::%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd"
 	%dk_call% dk_depend wsl
 	
-	%dk_call% dk_echo  
-    %dk_call% dk_info "Installing WSL-Alpine Linux . . ."
-	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	set "ALPINE_DIR=%DKTOOLS_DIR%/AlpineLinux"
+	%dk_call% dk_importVariables %WSL_ALPINE_IMPORT% ROOT %DKTOOLS_DIR%
 	
-	if exist "%LAUNCHER_IMPORT_FILE%" (goto alpine_installed)
+	if exist "%LAUNCHER_IMPORT_FILE%" (%return%)
 	%dk_call% dk_echo  
     %dk_call% dk_info "Installing Alpine Linux . . ."
 	%dk_call% dk_download "%WSL_ALPINE_IMPORT%"
-	%dk_call% dk_mkdir "%ALPINE_DIR%"
+	%dk_call% dk_mkdir "%WSL_ALPINE%"
 	%dk_call% dk_basename "%WSL_ALPINE_IMPORT%"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_copy "%DKDOWNLOAD_DIR%/%dk_basename%" "%ALPINE_DIR%/%dk_basename%" OVERWRITE
-	%dk_call% dk_firewallAllow AlpineLinux "%ALPINE_DIR%/%dk_basename%"
+	%dk_call% dk_copy "%dk_download%" "%WSL_ALPINE%/%dk_basename%" OVERWRITE
+	%dk_call% dk_firewallAllow AlpineLinux "%WSL_ALPINE%/%dk_basename%"
 
-	echo %ALPINE_DIR%/%dk_basename% config --default-user root
-	%ALPINE_DIR:/=\%\%dk_basename% config --default-user root
-pause
-	"%ALPINE_DIR%/%dk_basename%"
-pause
-	%dk_call% dk_assertPath "%ALPINE_DIR%/%dk_basename%"
+	%dk_call% dk_assertPath "%WSL_ALPINE%/%dk_basename%"
+	::echo %WSL_ALPINE:/=\%\%dk_basename% config --default-user root
+	%WSL_ALPINE:/=\%\%dk_basename% config --default-user root
+	::echo %WSL_ALPINE:/=\%\%dk_basename%
+	%WSL_ALPINE:/=\%\%dk_basename%
 
 %endfunction%
 

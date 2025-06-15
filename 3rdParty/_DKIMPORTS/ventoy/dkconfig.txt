@@ -1,1 +1,1 @@
-VENTOY_IMPORT=https://sourceforge.net/projects/ventoy/files/v1.1.05/ventoy-1.1.05-windows.zip
+Ventoy_Windows_X86_64_Import=https://sourceforge.net/projects/ventoy/files/v1.1.05/ventoy-1.1.05-windows.zip
