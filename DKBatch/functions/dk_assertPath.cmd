@@ -32,7 +32,9 @@ set "dk_assertPath_CASE_SENSITIVE=1"
 	if defined dk_assertPath_FORWARD_SLASHES set "_real_=%_real_:\=/%"
 
 	::### Test case sensitive ###
-	if defined dk_assertPath_CASE_SENSITIVE if not [%_val_%]==[%_real_%] echo %red% %_var_%:'%_val_%' _real_:'%_real_%' mismatch %clr% & %return%
+	if defined dk_assertPath_CASE_SENSITIVE if not [%_val_%]==[%_real_%] (
+		%dk_call% dk_error %red% %_var_%:'%_val_%' _real_:'%_real_%' mismatch %clr% & %return%
+	)
 
 	::### Test path exists ###
 	if not exist "%_val_:"=%" %dk_call% dk_error "ASSERTION: dk_assertPath %_var_%:'%_val_:"=%' not found" & %return%
