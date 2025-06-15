@@ -18,22 +18,20 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% "%DKIMPORTS_DIR%/vc_redist/DKINSTALL.cmd"
 
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	if defined Windows_X86_Host		(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip")
-	if defined Windows_X86_64_Host	(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip")
-	if not defined PHP_SRC_DL		(%dk_call% dk_error "PHP_SRC_DL is invalid")
+	if defined Windows_X86_Host		(set "PHP_SRC_IMPORT=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip")
+	if defined Windows_X86_64_Host	(set "PHP_SRC_IMPORT=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip")
+	%dk_call% dk_assertVar PHP_SRC_IMPORT
 
-	%dk_call% dk_importVariables %PHP_SRC_DL% IMPORT_PATH %DKIMPORTS_DIR%\php-src
+	%dk_call% dk_importVariables %PHP_SRC_IMPORT% IMPORT_PATH %DKIMPORTS_DIR%\php-src
 
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	set "PHP_EXE=%PHP_SRC%/php.exe"
 
 	if exist "%PHP_EXE%" (%return%)
 
-	%dk_call% dk_download "%PHP_SRC_DL%"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%PHP_SRC_IMPORT_FILE%" "%PHP_SRC%"
+	%dk_call% dk_download "%PHP_SRC_IMPORT%"
+	%dk_call% dk_smartExtract "%dk_download%" "%PHP_SRC%"
 
-	if not exist "%PHP_EXE%" (%dk_call% dk_error "cannot find PHP_EXE:%PHP_EXE%")
+	%dk_call% dk_assertFile PHP_EXE
 %endfunction%
 
 

@@ -17,12 +17,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined Windows_Arm64_Host	(set "NOTEPADPP_IMPORT=%NOTEPADPP_Windows_Arm64_IMPORT%")
     if defined Windows_X86_Host		(set "NOTEPADPP_IMPORT=%NOTEPADPP_Windows_X86_IMPORT%")
     if defined Windows_X86_64_Host	(set "NOTEPADPP_IMPORT=%NOTEPADPP_Windows_X86_64_IMPORT%")
-	if not defined NOTEPADPP_IMPORT	(%dk_call% dk_error "NOTEPADPP_IMPORT is invalid")
+	%dk_call% dk_assertVar NOTEPADPP_IMPORT
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %NOTEPADPP_IMPORT% ROOT %DKTOOLS_DIR%
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"	
 	::%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%/%NOTEPADPP_FOLDER%"
 	%dk_call% dk_set NOTEPADPP_EXE "%NOTEPADPP%/notepad++.exe"
 	
@@ -31,9 +30,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo  
     %dk_call% dk_info "Installing notepad++ . . ."
     %dk_call% dk_download %NOTEPADPP_IMPORT%
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-    %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%NOTEPADPP_IMPORT_FILE%" "%NOTEPADPP%"
-	if NOT exist "%NOTEPADPP_EXE%" (%dk_call% dk_error "cannot find NOTEPADPP_EXE:%NOTEPADPP_EXE%")
+	%dk_call% dk_smartExtract "%dk_download%" "%NOTEPADPP%"
 	%dk_call% dk_assertPath NOTEPADPP_EXE
 	:installed
 	

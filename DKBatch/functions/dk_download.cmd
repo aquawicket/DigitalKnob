@@ -26,13 +26,20 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     if defined destination (%dk_call% dk_realpath "%destination%" destination)
   
     %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	if not defined destination (set "destination=%DKDOWNLOAD_DIR%/%dk_basename%")
+	if not defined destination (
+		set "destination=%DKDOWNLOAD_DIR%/%dk_basename%"
+	)
 	%dk_call% dk_assertVar destination
    
 	%dk_call% dk_isDirectory "%destination%" && set "destination=%destination%/%dk_basename%"
-    if exist "%destination%" (%dk_call% dk_info "%destination% already exist" & %return%)
+    if exist "%destination%" (
+		%dk_call% dk_info "%destination% already exist"
+		%return%
+	)
 
-	if "%dk_download_BACKUP_SERVER_TEST%" equ "1"  (set "url=%dk_download_BACKUP_SERVER%/%dk_basename%")
+	if "%dk_download_BACKUP_SERVER_TEST%" equ "1" (
+		set "url=%dk_download_BACKUP_SERVER%/%dk_basename%"
+	)
 	
 	::### Test that url exists, if not try dk_download_BACKUP_SERVER ###
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_warning "url:%url% NOT FOUND" && set "url=%dk_download_BACKUP_SERVER%/%dk_basename%" && %dk_call% dk_info "Trying Backup Server url:%url% . . ."
@@ -114,6 +121,9 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     if not exist "%destination%" (%dk_call% dk_error "failed to rename %destination%_DOWNLOADING")
    
     ::%dk_call% dk_log SUCCESS "Download complete"
+	endlocal & (
+		set "dk_download=%destination%"
+	)
 %endfunction%
 
 

@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined Windows_Arm64_Host	(set "NOTEPADPP_IMPORT=%NOTEPADPP_Windows_Arm64_IMPORT%")
     if defined Windows_X86_Host		(set "NOTEPADPP_IMPORT=%NOTEPADPP_Windows_X86_IMPORT%")
     if defined Windows_X86_64_Host	(set "NOTEPADPP_IMPORT=%NOTEPADPP_Windows_X86_64_IMPORT%")
-	if not defined NOTEPADPP_IMPORT	(%dk_call% dk_error "NOTEPADPP_IMPORT is invalid")
+	%dk_call% dk_assertVar NOTEPADPP_IMPORT
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %NOTEPADPP_IMPORT% ROOT %DKTOOLS_DIR%
