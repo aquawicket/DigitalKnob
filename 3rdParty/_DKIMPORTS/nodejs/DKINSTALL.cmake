@@ -12,16 +12,13 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
 # https://nodejs.org/dist/v14.16.1/node-v14.16.1-win-x86.zip
 # https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip
 
+dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-### BINARY DISTRIBUTIONS (PORTABLE) ###
-Linux_Arm64_Host_dk_set		(NODEJS_DL https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz)
-Windows_X86_Host_dk_set		(NODEJS_DL https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip)
-Windows_X86_64_Host_dk_set	(NODEJS_DL https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip)
+set(NODEJS_DL "${NodeJS_${Host_Tuple}_Import}")
 dk_assertVar(NODEJS_DL)
 
 dk_importVariables(${NODEJS_DL})

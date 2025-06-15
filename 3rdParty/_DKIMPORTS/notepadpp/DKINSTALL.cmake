@@ -15,13 +15,13 @@ include_guard()
 ############ notepadpp ############
 # https://notepad-plus-plus.org/
 # https://github.com/notepad-plus-plus.git
+
 dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-### BINARY DISTRIBUTIONS (PORTABLE) ###
-Windows_Arm64_Host_dk_set	(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip)
-Windows_X86_Host_dk_set		(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip)
-Windows_X86_64_Host_dk_set	(NOTEPADPP_IMPORT https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip)
+set(NOTEPADPP_IMPORT "${NotepadPP_${Host_Tuple}_Import}")
+dk_assertVar(NOTEPADPP_IMPORT)
+
 dk_importVariables(${NOTEPADPP_IMPORT})
 
 ### IMPORT ###

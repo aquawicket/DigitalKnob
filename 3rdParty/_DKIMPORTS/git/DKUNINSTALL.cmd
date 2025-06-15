@@ -25,9 +25,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
     %dk_call% dk_validate Host_Tuple	"%dk_call% dk_Host_Tuple"
 	set "GIT_IMPORT=!Git_%Host_Tuple%_Import!"
-    ::if defined Windows_Arm64_Host  (set "GIT_IMPORT=%GIT_WIN_ARM64_IMPORT%")
-    ::if defined Windows_X86_Host    (set "GIT_IMPORT=%GIT_WIN_X86_IMPORT%")
-    ::if defined Windows_X86_64_Host (set "GIT_IMPORT=%GIT_WIN_X86_64_IMPORT%")
     %dk_call% dk_assertVar GIT_IMPORT
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"

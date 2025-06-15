@@ -15,15 +15,15 @@ dk_getFileParams("$ENV{DKIMPORTS_DIR}/git/dkconfig.txt")
 
 ### GIT_IMPORT ###
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-if(Windows_X86_Host)
-	set(GIT_IMPORT "${GIT_WIN_X86_IMPORT}")
-endif()
-if(Windows_X86_64_Host)
-	set(GIT_IMPORT "${GIT_WIN_X86_64_IMPORT}")
-endif()
-if(NOT GIT_IMPORT)
-	dk_fatal("GIT_IMPORT is invalid!")
-endif()
+set(GIT_IMPORT "${Git_${Host_Tuple}_Import}")
+#if(Windows_X86_Host)
+#	set(GIT_IMPORT "${GIT_WIN_X86_IMPORT}")
+#endif()
+#if(Windows_X86_64_Host)
+#	set(GIT_IMPORT "${GIT_WIN_X86_64_IMPORT}")
+#endif()
+dk_assertVar(GIT_IMPORT)
+
 
 ### GIT variables ###
 #if(GIT_IMPORT)

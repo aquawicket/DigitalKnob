@@ -16,10 +16,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar GCC_C_COMPILER
 	%dk_call% dk_assertVar GCC_CXX_COMPILER
 	
-	
-	%endfunction%
 	::###### CMD INSTALL DISABLED (DEBUG) ####
-	::%dk_call% dk_set MSYS2_DL "https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe"
+	%endfunction%
+	
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	set "MSYS2_IMPORT=!Msys2_%Host_Tuple%_Import!"
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
