@@ -19,7 +19,6 @@ include_guard()
 
 
 ### INSTALL ###
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 dk_import		(${KEYLOGGER_IMPORT})

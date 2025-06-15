@@ -32,7 +32,6 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 endif()
 
 ###### CMAKE_IMPORT ######
-dk_validate			(DKIMPORTS_DIR 			"dk_DKIMPORTS_DIR()")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple 			"dk_Host_Tuple()")
 dk_assertVar		(CMAKE_WIN_X86_64_IMPORT)
@@ -48,7 +47,6 @@ dk_assertVar		(CMAKE_IMPORT)
 
 
 ###### UNINSTALL ######
-dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(DKTOOLS_DIR 		"dk_DKTOOLS_DIR()")
 dk_importVariables	(${CMAKE_IMPORT} NAME cmake ROOT ${DKTOOLS_DIR})

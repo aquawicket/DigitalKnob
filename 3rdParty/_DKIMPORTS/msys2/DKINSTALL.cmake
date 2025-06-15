@@ -24,8 +24,6 @@ if(NOT DEFINED Windows_Host)
 endif()
 
 ############ MSYS2 variables ############
-dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-message				("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple "dk_Host_Tuple()")
 dk_importVariables	("${Msys2_${Host_Tuple}_Import}")
@@ -49,6 +47,7 @@ dk_import("${Msys2_${Host_Tuple}_Import}")
 dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
 
 ### Save Pacman database, keys and cache to download directory for offline buiding ###
+#dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 #dk_copy("$ENV{DKIMPORTS_DIR}/msys2/pacman.conf" "${MSYS2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
 #dk_set				(MSYS2_DBPath		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
 #dk_set				(MSYS2_LogFile		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")

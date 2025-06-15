@@ -11,7 +11,6 @@ include_guard()
 # https://github.com/ovsky/ghost-open-toolbox
 
 ### INSTALL ###
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		("${GHOST_TOOLBOX_IMPORT}")
 

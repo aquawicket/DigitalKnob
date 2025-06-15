@@ -9,7 +9,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://sourceforge.net/projects/ventoy/files/v1.1.05/ventoy-1.1.05-windows.zip
 
 ### INSTALL ###
-dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple "dk_Host_Tuple()")
 dk_validate			(DKTOOLS_DIR "dk_DKTOOLS_DIR()")

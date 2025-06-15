@@ -22,7 +22,6 @@ dk_depend		(android-sdk)
 dk_mkdir		(${ANDROID_SDK}/build-tools)
 
 # 30.0.3
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 dk_validate		(Host_Tuple "dk_Host_Tuple()")

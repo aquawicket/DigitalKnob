@@ -17,7 +17,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ### IMPORT ###
 if(NOT EXISTS ${FILEZILLA_EXE})
-	dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	dk_load				(dk_getFileParams)
 	dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 	dk_import			(${FILEZILLA_IMPORT} NAME filezilla)

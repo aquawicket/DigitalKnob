@@ -1,2 +1,2 @@
-XZ_IMPORT=https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
-#XZ_IMPORT=https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz
+Xz_Import=https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
+#Xz_Import=https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz

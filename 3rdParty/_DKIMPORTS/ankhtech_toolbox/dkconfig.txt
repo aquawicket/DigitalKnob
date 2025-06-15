@@ -1,1 +1,4 @@
-ANKHTECH_TOOLBOX_IMPORT=https://www.morkoskhalaf.com/ankhtech/Toolbox/AT.Toolbox.txt
+Ankhtech_Toolbox_Import=https://www.morkoskhalaf.com/ankhtech/Toolbox/AT.Toolbox.txt
+Ankhtech_Toolbox_Wget_exe=https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/wget.exe
+Ankhtech_Toolbox_7z_exe=https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.exe
+Ankhtech_Toolbox_7z_dll=https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.dll

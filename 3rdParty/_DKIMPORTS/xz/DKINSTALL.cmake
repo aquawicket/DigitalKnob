@@ -21,7 +21,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 #dk_import(https://github.com/tukaani-project/xz.git)
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import("${XZ_IMPORT}")
+dk_import("${Xz_Import}")
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
 #dk_fileReplace("${XZ}/src/liblzma/common/common.h" "__declspec(dllexport)" "")
@@ -29,11 +29,11 @@ dk_import("${XZ_IMPORT}")
 
 ### autotools ###
 #dk_set(XZ_VERSION 5.2.5)
-#dk_set(XZ_IMPORT https://tukaani.org/xz/${XZ_FOLDER}.tar.gz)
+#dk_set(Xz_Import https://tukaani.org/xz/${XZ_FOLDER}.tar.gz)
 #dk_set(XZ_NAME xz-${XZ_VERSION})
 #dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
 #dk_set(XZ $ENV{DK3RDPARTY_DIR}/${XZ_FOLDER})
-#dk_import(${XZ_IMPORT} ${XZ})
+#dk_import(${Xz_Import} ${XZ})
 
 
 ### LINK ###

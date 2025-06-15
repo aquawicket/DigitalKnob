@@ -17,7 +17,6 @@ include_guard()
 # https://github.com/GiacomoLaw/Keylogger/archive/142eebd7dee0ac6067642804e80df4b4f375a7bd.zip
 
 ### UNINSTALL ###
-dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables	("${KEYLOGGER_IMPORT}" NAME keylogger)
 

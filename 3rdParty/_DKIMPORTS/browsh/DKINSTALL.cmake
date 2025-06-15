@@ -9,7 +9,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/browsh-org/browsh/releases/download/v1.8.0/browsh_1.8.0_windows_amd64.exe 
  
 ### INSTALL ### 
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()") 
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 dk_validate(dk_Host_Tuple "dk_Host_Tuple()")

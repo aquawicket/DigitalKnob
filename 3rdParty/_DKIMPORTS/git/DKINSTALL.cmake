@@ -10,7 +10,6 @@ include_guard()
 ############ git ############
 # https://git-scm.com
 # https://github.com/git-for-windows/git
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 ### IMPORT ###

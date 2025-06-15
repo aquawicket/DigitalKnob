@@ -107,6 +107,7 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/lunasvg-v2.4.1
 3rdParty/lz4-dev
 3rdParty/lzo-f2895503
+3rdParty/Microsoft-Activation-Scripts-master
 3rdParty/msys2-base-x86_64-20241208
 3rdParty/msys2-x86_64-20240727
 3rdParty/nasm-2.16.01-win64

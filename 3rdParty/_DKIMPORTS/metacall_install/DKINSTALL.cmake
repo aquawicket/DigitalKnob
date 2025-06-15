@@ -18,7 +18,6 @@ include_guard()
 
 
 ### INSTALL ###
-dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 #dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 set					(METACALL_INSTALL_DL "https://github.com/metacall/install/archive/fb799638.zip")
 dk_import			(${METACALL_INSTALL_DL})

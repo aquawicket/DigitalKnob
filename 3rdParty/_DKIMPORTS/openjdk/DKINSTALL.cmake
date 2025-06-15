@@ -25,7 +25,6 @@ include_guard()
 # https://gist.github.com/douglarek/bbda8cc23a562cb5d5798717d57bc9e9
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 if(Android_Host)

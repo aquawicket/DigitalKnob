@@ -11,7 +11,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://vector-of-bool.github.io/2017/01/21/cmrc.html
 
 ### INSTALL ###
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${CMAKERC_IMPORT} NAME CMakeRC)
 

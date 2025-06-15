@@ -12,7 +12,6 @@ include_guard()
 
 
 ### INSTALL ###
-dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 #dk_import		("https://unxutils.sourceforge.net/UnxUtils.zip")
 dk_import		("https://unxutils.sourceforge.net/UnxUpdates.zip")
 

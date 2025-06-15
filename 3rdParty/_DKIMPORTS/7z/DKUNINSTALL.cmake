@@ -9,7 +9,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://www.7-zip.org/a/7z2409-extra.7z
 
 ### UnINSTALL ###
-dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables	(${7Z_IMPORT} NAME 7z)
 dk_delete			("${7Z}")

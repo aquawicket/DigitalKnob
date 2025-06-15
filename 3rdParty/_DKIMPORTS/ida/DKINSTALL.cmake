@@ -17,7 +17,6 @@ include_guard()
 # https://out7.hex-rays.com/files/idafree84_windows.exe
 
 
-dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 dk_basename			(${IDA_IMPORT} IDA_IMPORT_FILE)

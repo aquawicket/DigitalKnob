@@ -82,7 +82,6 @@ include_guard()
 ### DEPEND ###
 dk_depend(android-sdk)
 
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 ###### INSTALL ######

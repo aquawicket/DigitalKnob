@@ -17,7 +17,6 @@ include_guard()
 # https://github.com/bkaradzic/bgfx/archive/f8b20616.zip
 # https://github.com/bkaradzic/bgfx/archive/refs/heads/master.zip
 #
-dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${BGFX_IMPORT})
 

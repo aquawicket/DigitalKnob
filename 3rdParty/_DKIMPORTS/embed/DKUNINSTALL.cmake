@@ -9,7 +9,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/MKlimenko/embed/archive/refs/heads/master.zip
 
 ### UnINSTALL ###
-dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables	(${EMBED_IMPORT} NAME embed)
 dk_delete			("${EMBED}")

@@ -19,7 +19,6 @@ dk_depend(android-sdk)
 
 # 3.18.1
 dk_validate		(Host_Tuple "dk_Host_Tuple()")
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows_Host)
 	dk_import	(${ANDROID_CMAKE_WIN_IMPORT} PATH ${ANDROID_SDK}/cmake)

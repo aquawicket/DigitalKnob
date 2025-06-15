@@ -9,7 +9,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/pbatard/rufus/releases/download/v4.7/rufus-4.7p.exe 
  
 ### INSTALL ### 
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 set(RUFUS_IMPORT "${Rufus_${Host_Truple}_Import}")

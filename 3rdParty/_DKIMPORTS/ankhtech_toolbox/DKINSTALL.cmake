@@ -9,10 +9,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://d9750.download-send.com/d/nryyw7au6cosj4l4onsfta7kzj7jhkkax5a2bclu466wflbbl4u3ovogbyivfspn3iwoq6gn/AT.Toolbox.zip
 
 ### INSTALL ###
-dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-
 
 dk_mkdir("${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Tweaks")
 dk_mkdir("${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Temp")
@@ -24,9 +22,7 @@ dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/wget.
 dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.exe" 			"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/7z.exe")
 dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.dll" 			"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/7z.dll")
 
-
 dk_fileReplace("${DKTOOLS_DIR}/Ankhtech_Toolbox/AT.Toolbox.bat" "otoupd=2" "otoupd=1")
-
 
 #dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/Tweaks.exe"						"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Tweaks.7z")
 #cd "${DKTOOLS_DIR}/Ankhtech_Toolbox"
