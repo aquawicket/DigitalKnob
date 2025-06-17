@@ -10,13 +10,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_getFileParams
 ::%setlocal%
-	%dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 1
 
 	set "_file_=%~1"
 
 	if "%dk_getFileParams_PRINT_VARIABLES%" equ "1" (
-		echo:
-		echo ### %_file_% Parameters ###
+		%dk_call% dk_debug "### %_file_% Parameters ###"
 	)
 	
 	::### Remove comments from line
@@ -27,19 +26,24 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set line=!line:~1!
 		rem echo line = !line!
 		for /f "delims== tokens=1,2" %%A in ("!line!") do (
-			set "Value=%%B"
-			set "Value=!Value:${=%%!"
-			set "Value=!Value:}=%%!"
+			set "var=%%~A"
+			%dk_call% dk_trim !var!
+			set "var=!dk_trim!"
+			
+			set "value=%%~B"
+			%dk_call% dk_trim !value!
+			set "value=!dk_trim!"
+			set "value=!Value:${=%%!"
+			set "value=!Value:}=%%!"
+			
+			set "!var!=!value!"
+			
 			if "%dk_getFileParams_PRINT_VARIABLES%" equ "1" (
-				echo %%A = '!Value!'
+				%dk_call% dk_debug "'!var!' = '%%!var!%%'"
 			)
-			set "%%A=!Value!"
 		)
 	)
 	
-	if "%dk_getFileParams_PRINT_VARIABLES%" equ "1" (
-		echo:
-	)
 %endfunction%
 
 

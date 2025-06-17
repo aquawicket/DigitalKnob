@@ -4,22 +4,32 @@
 ##################################################################################
 
 
+############ dk_getFileParams settings #########################################
+# [ -z "${dk_getAllFileParams_PRINT_VARIABLES}" ] && export dk_getFileParams_PRINT_VARIABLES=1
 ################################################################################
-# dk_getFileParams(filepath)
+# dk_getFileParams(<file>)
 #
-# todo: add optional 3rd parameter for output value
+#
 dk_getFileParams() {
     dk_debugFunc 1
     
-	for line in $(cat "$1"); do
-		IFS='=' read -r A B <<< "$line"
+	_file_="${1}"
+	
+	if [ "${dk_getFileParams_PRINT_VARIABLES-}" = "1" ];then
+		dk_call dk_debug "### ${_file_} Parameters ###"
+	fi
+	
+	# IFS= (or IFS='') prevents leading/trailing whitespace from being trimmed.
+	# -r prevents backslash escapes from being interpreted.
+	while IFS='' read -r line; do
+		#echo "line = ${line}"
+		IFS='= ' read -r A B <<< ${line%%#*} # read up to # using = and 'space' as delimiters
+		[ "${A}" = "" ] && continue # if A is empty, skip
+		[ "${B}" = "" ] && continue # if A is empty, skip
+		eval export ${A}=${B} # evaluate to expand any variables
 		
-		# if first character is #, skip
-		[ "${A:0:1}" = "#" ] && return
-
-		echo "$A = $B"
-		export "$A=$B"
-	done
+		[ "${dk_getFileParams_PRINT_VARIABLES-}" = "1" ] && dk_call dk_debug "'${A}' = '${!A}'"
+	done < "${_file_}"
 }
 
 
@@ -28,8 +38,8 @@ dk_getFileParams() {
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
     dk_debugFunc 0
-  
+	
+	dk_getFileParams_PRINT_VARIABLES=1
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
-    dk_call dk_getFileParams ${DKBRANCH_DIR}/dkconfig.txt
-	echo "dk_getAllFileParams_ENABLE = ${dk_getAllFileParams_ENABLE}"
+	dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
 }

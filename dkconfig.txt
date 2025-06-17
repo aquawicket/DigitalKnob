@@ -1,3 +1,4 @@
+DKUSERPROFILE  =  ${USERPROFILE}  # Test comments
 #dk_DEBUG=1
 #dk_call_PRINT_CALLS=1 
 #dk_call_PRINT_ENTRY=1
@@ -19,7 +20,7 @@
 #dk_exec_PRINT_STDERR=1
 #dk_exec_PRINT_EXITCODE=1
 dk_exit_PAUSE_ON_EXIT=1
-dk_exit_PAUSE_ON_ERROR=1
+dk_exit_PAUSE_ON_ERROR=1	#Test Comments
 #dk_getFileParams_PRINT_VARIABLES=1
 #dk_log_DEBUG_COLOR=${lblue}
 #dk_log_DEBUG_ENABLE=1

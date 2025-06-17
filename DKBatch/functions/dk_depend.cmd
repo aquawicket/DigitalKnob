@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%return%
 	)
 
-	%dk_call% dk_fatal "%DKIMPORTS%/%_plugin_%/DKINSTALL.cmd not found"
+	%dk_call% dk_fatal "%DKIMPORTS_DIR%/%_plugin_%/DKINSTALL.cmd not found"
 %endfunction%
 
 
