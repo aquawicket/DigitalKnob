@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
 	file(GLOB_RECURSE DK.cmake "/DK.cmake")
@@ -7,7 +8,8 @@ if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-#include_guard()
+include_guard()
+#########################################################################
 
 
 ################## dk_getFileParams settings ###################################
@@ -22,12 +24,11 @@ function(dk_getFileParams)
 	string(REGEX REPLACE "\n" ";" file_content_list "${file_content}")
 	
 	if("${dk_getFileParams_PRINT_VARIABLES}" EQUAL 1)
-		message("\n### ${ARGV0} Parameters ###")
+		dk_debug("### ${ARGV0} Parameters ###")
 	endif()
 				
 	# iterate through each line
 	foreach(line IN LISTS file_content_list)
-		
 		# remove comments - everything after # 
 		string(FIND "${line}" "#" comment)
 		if(comment GREATER -1)
@@ -36,19 +37,21 @@ function(dk_getFileParams)
 		
 		string(FIND "${line}" "=" pos)
 		if(pos GREATER -1)
-			string(SUBSTRING "${line}" 0 ${pos} Var)
+			string(SUBSTRING "${line}" 0 ${pos} var)
 			math(EXPR pos "${pos}+1" OUTPUT_FORMAT DECIMAL) 
-			string(SUBSTRING "${line}" ${pos} -1 Value)
-				set(${Var} "${Value}" PARENT_SCOPE)
+			string(SUBSTRING "${line}" ${pos} -1 value)
+			
+				# Evaluate var and value to expand any variables
+				cmake_language(EVAL CODE set(var ${var}))
+				cmake_language(EVAL CODE set(value ${value}))
+
+				set(${var} ${value})
+				set(${var} "${${var}}" PARENT_SCOPE)
 				if("${dk_getFileParams_PRINT_VARIABLES}" EQUAL 1)
-					message("${Var} = ${Value}")
+					dk_debug("${var} = ${${var}}")
 				endif()
 		endif()
 	endforeach()
-	
-	if("${dk_getFileParams_PRINT_VARIABLES}" EQUAL 1)
-		message(" ")
-	endif()
 endfunction()
 
 
@@ -58,7 +61,7 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
   
-	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
-    dk_getFileParams("$ENV{DKBRANCH_DIR}/dkconfig.txt")
-	dk_printVar(dk_getAllFileParams_ENABLE)
+	set(dk_getFileParams_PRINT_VARIABLES 1)
+	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
+    dk_getFileParams("${DKBRANCH_DIR}/dkconfig.txt")
 endfunction()
