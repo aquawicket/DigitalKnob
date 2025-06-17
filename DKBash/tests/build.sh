@@ -73,16 +73,17 @@ magenta="\033[35m"
 cyan="\033[36m"
 white="\033[37m"
 
-CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-i386.zip
-CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
-CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-arm64.zip
-CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz
-#CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
-CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
-CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
 
-GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/dk_download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
-GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
+CMake_Linux_Arm64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
+CMake_Linux_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
+#CMake_Mac10_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
+CMake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz
+CMake_Windows_Arm64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-arm64.zip
+CMake_Windows_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
+CMake_Windows_X86_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-i386.zip
+
+Git_Windows_X86_Import=https://github.com/git-for-windows/git/releases/dk_download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
+Git_Windows_X86_64_Import=https://github.com/git-for-windows/git/releases/dk_download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
 
 
 ##################################################################################
@@ -780,14 +781,14 @@ dk_installCmake() {
 	
 	######################################################################################################
 	if [ "${Host_Os}" 		= "Android" ]; 				then CMAKE_IMPORT=cmake;							fi
-	if [ "${Host_Tuple}" 	= "Windows_Arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
-	if [ "${Host_Tuple}" 	= "Windows_Arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
-	if [ "${Host_Tuple}" 	= "Windows_X86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
-	if [ "${Host_Tuple}"	= "Windows_X86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
-	if [ "${Host_Os}" 		= "Mac" ];					then CMAKE_IMPORT=$CMAKE_DL_MAC;					fi
-	if [ "${Host_Tuple}" 	= "Linux_X86_64" ];			then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
-	if [ "${Host_Tuple}" 	= "Linux_Arm64" ];			then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${Host_Tuple}" 	= "Raspberry_Arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${Host_Tuple}" 	= "Windows_Arm32" ];		then CMAKE_IMPORT=$CMake_Windows_Arm32_Import;				fi
+	if [ "${Host_Tuple}" 	= "Windows_Arm64" ];		then CMAKE_IMPORT=$CMake_Windows_Arm64_Import;				fi
+	if [ "${Host_Tuple}" 	= "Windows_X86" ];			then CMAKE_IMPORT=$CMake_Windows_X86_Import;				fi
+	if [ "${Host_Tuple}"	= "Windows_X86_64" ];		then CMAKE_IMPORT=$CMake_Windows_X86_Import_64;				fi
+	if [ "${Host_Os}" 		= "Mac" ];					then CMAKE_IMPORT=$CMake_Mac_X86_64_Import;					fi
+	if [ "${Host_Tuple}" 	= "Linux_X86_64" ];			then CMAKE_IMPORT=$CMake_Linux_X86_64_Import;			fi
+	if [ "${Host_Tuple}" 	= "Linux_Arm64" ];			then CMAKE_IMPORT=$CMake_Linux_Arm64_Import;			fi
+	if [ "${Host_Tuple}" 	= "Raspberry_Arm64" ];		then CMAKE_IMPORT=$CMake_Linux_Arm64_Import;			fi
 	if [ "${Target_Tuple}" 	= "Android_Arm32" ]; 		then CMAKE_IMPORT=cmake;							fi
 	if [ "${Target_Tuple}" 	= "Windows_Arm64_Clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
 	if [ "${Target_Tuple}" 	= "Windows_X86_Clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi

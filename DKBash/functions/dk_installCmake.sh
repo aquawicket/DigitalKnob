@@ -5,13 +5,13 @@
 
 
 
-CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
-CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
-CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz
-#CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
-CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip
-CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip
-CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
+CMake_Linux_Arm64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
+CMake_Linux_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
+CMake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz
+#CMake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
+CMake_Windows_Arm64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip
+CMake_Windows_X86_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip
+CMake_Windows_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
 ##################################################################################
 # dk_installCmake()
 #
@@ -22,14 +22,15 @@ dk_installCmake() {
 	dk_call dk_validate Host_Os "dk_call dk_Host_Os"	
 	######################################################################################################
 	#[ "${Host_Os}" = "Android" ]                		&& CMAKE_IMPORT=cmake
-	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm32" ]  	&& CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
-	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm64" ]  	&& CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
-	[ "${Host_Os}_${Host_Arch}" = "Windows_X86" ]    	&& CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
-	[ "${Host_Os}_${Host_Arch}" = "Windows_X86_64" ] 	&& CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
-	[ "${Host_Os}" = "mac" ]                     		&& CMAKE_IMPORT=${CMAKE_DL_MAC}
-	[ "${Host_Tuple}" = "Linux_X86_64" ]        		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
-	[ "${Host_Tuple}" = "Linux_Arm64" ]         		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
-	[ "${Host_Tuple}" = "Raspberry_Arm64" ]     		&& CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
+	[ "${Host_Tuple}" = "Linux_Arm64" ]         		&& CMAKE_IMPORT=${CMake_Linux_Arm64_Import}
+	[ "${Host_Tuple}" = "Raspberry_Arm64" ]     		&& CMAKE_IMPORT=${CMake_Linux_Arm64_Import}
+	[ "${Host_Tuple}" = "Linux_X86_64" ]        		&& CMAKE_IMPORT=${CMake_Linux_X86_64_Import}
+	[ "${Host_Os}" = "mac" ]                     		&& CMAKE_IMPORT=${CMake_Mac_X86_64_Import}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm32" ]  	&& CMAKE_IMPORT=${CMake_Windows_Arm32_Import}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm64" ]  	&& CMAKE_IMPORT=${CMake_Windows_Arm64_Import}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_X86" ]    	&& CMAKE_IMPORT=${CMake_Windows_X86_Import}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_X86_64" ] 	&& CMAKE_IMPORT=${CMake_Windows_X86_64_Import}
+
 	[ "${WSL_DISTRO_NAME-}" = "Alpine" ]		 		&& CMAKE_IMPORT=cmake
 	#[ "${Target_Tuple-}" = "Android_Arm32" ]			&& CMAKE_IMPORT=cmake
 	#[ "${Target_Tuple-}" = "Windows_Arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
