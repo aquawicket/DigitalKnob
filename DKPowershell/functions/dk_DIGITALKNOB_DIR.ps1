@@ -10,25 +10,25 @@ function Global:dk_DIGITALKNOB_DIR() {
 	
 	############ SET ############
 	if($($args[0])){  
-		$global:DIGITALKNOB_DIR = "$($args[0])" 
-		return 0
-	}
+		${env:DIGITALKNOB_DIR} = $($args[0])
 	
 	############ GET ############
-	dk_call dk_validate DKHOME_DIR  "dk_call dk_DKHOME_DIR"
-
-	### DIGITALKNOB_DIR ###
-	$global:DIGITALKNOB="DigitalKnob"
-	$global:DIGITALKNOB_DIR="${DKHOME_DIR}/${DIGITALKNOB}"
-	dk_call dk_mkdir $DIGITALKNOB_DIR
-
-#		### DKDOWNLOAD_DIR ###
-#		$global:DKDOWNLOAD_DIR = "${DIGITALKNOB_DIR}/download"
-#		dk_call dk_mkdir $DKDOWNLOAD_DIR
+	} else {
+		if(!(${env:DIGITALKNOB})){
+			${env:DIGITALKNOB}="DigitalKnob"
+		}
+		if(!(${env:DIGITALKNOB_DIR})){
+			${env:DIGITALKNOB_DIR}="$(dk_call dk_DKHOME_DIR)/${env:DIGITALKNOB}"
+		}
+	}
 	
-#		### DKTOOLS_DIR ###
-#		$global:DKTOOLS_DIR = "${DIGITALKNOB_DIR}/DKTools"
-#		dk_call dk_mkdir $DKTOOLS_DIR
+	############ FINALIZE ############
+#	if(!(Test-Path ${env:DIGITALKNOB_DIR})){ 
+#		dk_call dk_mkdir "${env:DIGITALKNOB_DIR}" 
+#	}
+
+#	dk_call dk_assertPath ${env:DIGITALKNOB_DIR}
+	return ${env:DIGITALKNOB_DIR}
 }
 
 
@@ -39,13 +39,11 @@ function Global:dk_DIGITALKNOB_DIR() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_echo
-	dk_call dk_echo "Test Getting DIGITALKNOB_DIR . . ."
-    dk_call dk_DIGITALKNOB_DIR
-    dk_call dk_printVar DIGITALKNOB_DIR
+	dk_call dk_echo;
+	dk_call dk_echo "Test Getting DIGITALKNOB_DIR . . .";
+    dk_call dk_echo "DIGITALKNOB_DIR = '$(dk_call dk_DIGITALKNOB_DIR)'";
 	
-	dk_call dk_echo
-	dk_call dk_echo "Test Setting DIGITALKNOB_DIR . . ."
-	dk_call dk_DIGITALKNOB_DIR "C:/DK"
-	dk_call dk_printVar DIGITALKNOB_DIR 
+	dk_call dk_echo;
+	dk_call dk_echo "Test Setting DIGITALKNOB_DIR . . .";
+	dk_call dk_echo "DIGITALKNOB_DIR = '$(dk_call dk_DIGITALKNOB_DIR 'C:/Digital Knob')'";
 }

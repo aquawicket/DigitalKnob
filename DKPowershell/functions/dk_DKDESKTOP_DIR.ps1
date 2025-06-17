@@ -10,17 +10,25 @@ function Global:dk_DKDESKTOP_DIR() {
 
 	############ SET ############
 	if($($args[0])){  
-		$global:DKDESKTOP_DIR = "$($args[0])" 
-		return 0
-	}
+		${env:DKDESKTOP_DIR} = $($args[0])
 	
 	############ GET ############
-	dk_call dk_validate DKHOME_DIR "dk_call dk_DKHOME_DIR" 
-	$global:DKDESKTOP_DIR = "${DKHOME_DIR}/Desktop" 
-	
-	if(!(Test-Path $DKDESKTOP_DIR)){ 
-		dk_call dk_mkdir "${DKDESKTOP_DIR}" 
-	}
+	} else {
+		if(!(${env:DKDESKTOP})){
+			${env:DKDESKTOP}="Desktop"
+		}
+		if(!(${env:DKDESKTOP_DIR})){
+			$env:DKDESKTOP_DIR = "$(dk_call dk_DKHOME_DIR)/${env:DKDESKTOP}"
+		}
+	}	
+
+	############ FINALIZE ############
+#	if(!(Test-Path $DKDESKTOP_DIR)){ 
+#		dk_call dk_mkdir "${DKDESKTOP_DIR}" 
+#	}
+
+#	dk_call dk_assertPath ${env:DKDESKTOP_DIR}
+	return ${env:DKDESKTOP_DIR}
 }
 
 
@@ -32,13 +40,11 @@ function Global:dk_DKDESKTOP_DIR() {
 function Global:DKTEST() {
     dk_debugFunc 0 
    
-	dk_call dk_echo
-	dk_call dk_echo "Test Getting DKDESKTOP_DIR . . ."
-	dk_call dk_DKDESKTOP_DIR
-	dk_call dk_printVar DKDESKTOP_DIR
+	dk_call dk_echo;
+	dk_call dk_echo "Test Getting DKDESKTOP_DIR . . .";
+    dk_call dk_echo "DKDESKTOP_DIR = '$(dk_call dk_DKDESKTOP_DIR)'";
 	
-	dk_call dk_echo
-	dk_call dk_echo "Test Setting DKDESKTOP_DIR . . ."
-	dk_call dk_DKDESKTOP_DIR "C:/Desktop"
-	dk_call dk_printVar DKDESKTOP_DIR 
+	dk_call dk_echo;
+	dk_call dk_echo "Test Setting DKDESKTOP_DIR . . .";
+	dk_call dk_echo "DKDESKTOP_DIR = '$(dk_call dk_DKDESKTOP_DIR 'C:/Desktop')'";
 }
