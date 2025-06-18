@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_basename){ $dk_basename = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_basename_ps1){ $dk_basename_ps1 = 1 } else{ return } #include guard
 
 ################################################################################
 # dk_basename(path) -> rtn_var

@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_extract){ $dk_extract = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_extract_ps1){ $dk_extract_ps1 = 1 } else{ return } #include guard
 
 ####################################################################
 # dk_extract(file, destination)

@@ -1,5 +1,5 @@
 . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1
-if(!$dk_timeout){ $dk_timeout = 1 } else{ return } #include guard
+if(!$dk_timeout_ps1){ $dk_timeout_ps1 = 1 } else{ return } #include guard
 
 ##################################################################################
 # dk_timeout(seconds)

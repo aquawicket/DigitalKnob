@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$Array_dk_splice){ $Array_dk_splice = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
+if(!$Array_dk_splice){ $Array_dk_splice_ps1 = 1 } else{ return } #include guard
 
 ################################################################################
 # Array:dk_splice(array, start, deleteCount, item1, item2, /* …, */ itemN)

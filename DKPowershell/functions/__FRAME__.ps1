@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-#if(!$__FRAME__){ $__FRAME__ = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
+#if(!$__FRAME___ps1){ $__FRAME___ps1 = 1 } else{ return } #include guard
 
 ##################################################################################
 # __FRAME__(frame)

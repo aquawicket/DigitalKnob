@@ -1,5 +1,5 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . './DK.ps1' }
-if(!$dk_assertPath){ $dk_assertPath = 1 } else{ return } #include guard
+if(!$dk_assertPath_ps1){ $dk_assertPath_ps1 = 1 } else{ return } #include guard
 
 ################################################################################
 # dk_assertPath(path)

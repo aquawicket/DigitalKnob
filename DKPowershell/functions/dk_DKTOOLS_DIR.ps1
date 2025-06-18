@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_DKTOOLS_DIR){ $dk_DKTOOLS_DIR = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_DKTOOLS_DIR_ps1){ $dk_DKTOOLS_DIR_ps1 = 1 } else{ return } #include guard
 
 ####################################################################
 # dk_DKTOOLS_DIR()

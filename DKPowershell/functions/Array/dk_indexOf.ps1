@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$Array_dk_indexOf){ $Array_dk_indexOf = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
+if(!$Array_dk_indexOf){ $Array_dk_indexOf_ps1 = 1 } else{ return } #include guard
 
 ################################################################################
 # Array:dk_indexOf(array, searchElement) -> rtn_val

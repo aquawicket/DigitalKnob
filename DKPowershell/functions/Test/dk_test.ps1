@@ -1,5 +1,5 @@
 . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1
-if(!$Test_dk_test){ $Test_dk_test = 1 } else{ return } #include guard
+if(!$Test_dk_test){ $Test_dk_test_ps1 = 1 } else{ return } #include guard
 
 ##################################################################################
 # Test/dk_test()

@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_callDKPowershell){ $dk_callDKPowershell = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_callDKPowershell_ps1){ $dk_callDKPowershell_ps1 = 1 } else{ return } #include guard
 
 ##################################################################################
 # dk_callDKPowershell(func) args

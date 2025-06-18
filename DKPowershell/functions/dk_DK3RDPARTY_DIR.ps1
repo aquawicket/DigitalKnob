@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_DK3RDPARTY_DIR){ $dk_DK3RDPARTY_DIR = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
+if(!$dk_DK3RDPARTY_DIR_ps1){ $dk_DK3RDPARTY_DIR_ps1 = 1 } else{ return } #include guard
 
 ###############################################################################
 # dk_DK3RDPARTY_DIR()
