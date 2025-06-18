@@ -43,6 +43,8 @@ function(dk_getFileParams)
 			
 				# Evaluate var and value to expand any variables
 				cmake_language(EVAL CODE set(var ${var}))
+				
+				string(REPLACE "\$" "\$ENV" value "${value}") # Channge ${variable} to $ENV{variable}
 				cmake_language(EVAL CODE set(value ${value}))
 
 				set(${var} ${value})

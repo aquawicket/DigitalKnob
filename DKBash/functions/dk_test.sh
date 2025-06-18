@@ -39,7 +39,7 @@ dk_test() {
 						echo "              DKSCRIPT_NAME = ${DKSCRIPT_NAME-}"
 						echo "               DKSCRIPT_EXT = ${DKSCRIPT_EXT-}"
 						echo "              DKSCRIPT_ARGS = ${DKSCRIPT_ARGS-}"
-						echo "                 DKHOME_DIR = $(dk_call dk_DKHOME_DIR)"
+						echo "                 DKHOME_DIR = $(dk_call DKHOME_DIR)"
 						echo "                DKCACHE_DIR = $(dk_call dk_DKCACHE_DIR)"
 						echo "              DKDESKTOP_DIR = $(dk_call dk_DKDESKTOP_DIR)"
 						echo "                DIGITALKNOB = ${DIGITALKNOB-}"

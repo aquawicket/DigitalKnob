@@ -17,7 +17,7 @@ dk_DKDESKTOP_DIR() {
 
 	############ GET ############
 	elif [ ! -e "${DKDESKTOP_DIR-}" ]; then
-		dk_call dk_validate DKHOME_DIR "dk_call dk_DKHOME_DIR" 
+		dk_call dk_validate DKHOME_DIR "dk_call DKHOME_DIR" 
 		export DKDESKTOP_DIR="${DKHOME_DIR}/Desktop"  
 	fi
 	

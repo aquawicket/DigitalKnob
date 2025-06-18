@@ -23,6 +23,7 @@ dk_getFileParams() {
 	# -r prevents backslash escapes from being interpreted.
 	while IFS='' read -r line; do
 		#echo "line = ${line}"
+		#dk_call dk_replaceAll "${line}" "\$ENV{" "\${" line
 		IFS='= ' read -r A B <<< ${line%%#*} # read up to # using = and 'space' as delimiters
 		[ "${A}" = "" ] && continue # if A is empty, skip
 		[ "${B}" = "" ] && continue # if A is empty, skip

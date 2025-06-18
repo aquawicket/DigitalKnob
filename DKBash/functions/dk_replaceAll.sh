@@ -30,7 +30,7 @@ dk_replaceAll() {
     done
 	
 	### return value ###
-	dk_call dk_printVar _replaceAll_
+	#dk_call dk_printVar _replaceAll_
 	[ ${#} -gt 3 ] && eval "${4}='${_replaceAll_}'" && return  # return value when using rtn_var parameter 
 	dk_return ${_replaceAll_}; return						  # return value when using command substitution
 	
