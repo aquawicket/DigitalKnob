@@ -2,7 +2,8 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 if(!$dk_getFileParams_ps1){ $dk_getFileParams_ps1 = 1 } else{ return } #include guard
 
 
-
+################################################################################
+# ${env:dk_getFileParams_PRINT_VARIABLES}=1
 ################################################################################
 # dk_getFileParams(filepath)
 #
@@ -10,6 +11,10 @@ function Global:dk_getFileParams() {
     dk_debugFunc 0
 	
 	${file} = $args[0]
+	
+	if(${env:dk_getFileParams_PRINT_VARIABLES} -eq 1){
+		dk_call dk_debug "### ${file} Parameters ###" 
+	}
 	
 	Get-Content ${file} | ForEach-Object {		
 		${line} = ${_}
@@ -21,13 +26,15 @@ function Global:dk_getFileParams() {
 			${line} = ${line}.replace('${','${env:')
 			#echo "line = ${line}"
 			${line} = ${line} -split '='
-			${var} = $($line[0]).Trim()
-			${value} = iex $($line[1]).Trim() # evauluate $value to expand any variables
+			${var} = $ExecutionContext.InvokeCommand.ExpandString($($line[0]).Trim()) # expand any variables in $var 
+			${value} = $ExecutionContext.InvokeCommand.ExpandString($($line[1]).Trim()) # expand any variables in $value 
 			
 			Set-Variable -Name "${var}" -Value "${value}" -Scope Global
 			
-			${value} = Get-Variable -Name (${var}) -ValueOnly
-			dk_call dk_debug "'${var}' = '${value}'"
+			if(${env:dk_getFileParams_PRINT_VARIABLES} -eq 1){
+				${value} = Get-Variable -Name (${var}) -ValueOnly
+				dk_call dk_debug "'${var}' = '${value}'"
+			}
 		}
 	}
 }
@@ -39,5 +46,14 @@ function Global:dk_getFileParams() {
 function Global:DKTEST() {
     dk_debugFunc 0
   
-    dk_call dk_getFileParams "$(dk_call dk_DKBRANCH_DIR)/dkconfig.txt"
+	${env:DKCACHE_DIR} = $(dk_call dk_DKCACHE_DIR)
+	dk_call dk_fileWrite "${env:DKCACHE_DIR}/dk_getFileParams_TEST.txt"		"Testing=dk_getFileParams.ps1"
+	dk_call dk_fileAppend "${env:DKCACHE_DIR}/dk_getFileParams_TEST.txt"	"varA=ValueOfA"
+	dk_call dk_fileAppend "${env:DKCACHE_DIR}/dk_getFileParams_TEST.txt"	"varB=ValueOfB 	# with trailing comment"
+	dk_call dk_fileAppend "${env:DKCACHE_DIR}/dk_getFileParams_TEST.txt"	" varC=ValueOfC "
+	dk_call dk_fileAppend "${env:DKCACHE_DIR}/dk_getFileParams_TEST.txt"	"varD = ValueOfD"
+	dk_call dk_fileAppend "${env:DKCACHE_DIR}/dk_getFileParams_TEST.txt"	"#varNONE=ValueOfNONE"
+	
+	${env:dk_getFileParams_PRINT_VARIABLES}=1
+    dk_call dk_getFileParams "${env:DKCACHE_DIR}/dk_getFileParams_TEST.txt"
 }

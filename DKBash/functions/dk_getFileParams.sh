@@ -40,7 +40,14 @@ dk_getFileParams() {
 DKTEST() {
     dk_debugFunc 0
 	
+	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
+	dk_call dk_fileWrite	"${DKCACHE_DIR}/dk_getFileParams_TEST.txt"		"Testing=dk_getFileParams.sh"
+	dk_call dk_fileAppend	"${DKCACHE_DIR}/dk_getFileParams_TEST.txt"		"varA=ValueOfA"
+	dk_call dk_fileAppend	"${DKCACHE_DIR}/dk_getFileParams_TEST.txt"		"varB=ValueOfB 	# with trailing comment"
+	dk_call dk_fileAppend	"${DKCACHE_DIR}/dk_getFileParams_TEST.txt"		" varC=ValueOfC "
+	dk_call dk_fileAppend	"${DKCACHE_DIR}/dk_getFileParams_TEST.txt"		"varD = ValueOfD"
+	dk_call dk_fileAppend	"${DKCACHE_DIR}/dk_getFileParams_TEST.txt"		"#varNONE=ValueOfNONE"
+	
 	dk_getFileParams_PRINT_VARIABLES=1
-	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
-	dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+	dk_call dk_getFileParams "${DKCACHE_DIR}/dk_getFileParams_TEST.txt"
 }
