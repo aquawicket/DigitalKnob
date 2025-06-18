@@ -106,6 +106,14 @@ goto main
 	"clear && echo You are in a UCRT64_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
+::###### WSL_DEBIAN ######
+:WSL_DEBIAN
+	%dk_call% dk_title "Digitalknob WSL_DEBIAN"
+	%dk_call% dk_validate WSL_EXE "%dk_call% dk_WSL_EXE"
+	"%WSL_EXE%" -d Debian --exec ^ 
+	"clear && echo You are in a WSL_DEBIAN environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
+%endfunction%
+
 ::###### Main ######
 :main
 	%dk_call% dk_echo "This will alernate between different shell environments"
@@ -122,4 +130,5 @@ goto main
 	call:MINGW32_BASH
 	call:MINGW64_BASH
 	call:UCRT64_BASH
+	call:WSL_DEBIAN
 %endfunction%

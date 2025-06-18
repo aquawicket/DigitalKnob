@@ -5,11 +5,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_callPowershell(function, arguments...)
+::# dk_callDKPowershell(function, arguments...)
 ::#
 ::#   Reference: https://stackoverflow.com/questions/34451444/how-to-get-a-returned-value-from-powershell-and-get-it-in-a-batch-file
 ::#
-:dk_callPowershell
+:dk_callDKPowershell
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 
@@ -38,7 +38,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set DKCOMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%
 	%dk_call% dk_exec "%DKCOMMAND%"
 	endlocal & (
-		set "dk_callPowershell=%dk_exec%"
+		set "dk_callDKPowershell=%dk_exec%"
 	)
 %endfunction%
 
@@ -52,5 +52,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_callDKPowershell dk_test "arg 1" "arg 2" "arg 3"
 	%dk_call% dk_echo
-	%dk_call% dk_echo "dk_callPowershell = %dk_callPowershell%"
+	%dk_call% dk_echo "dk_callDKPowershell = %dk_callDKPowershell%"
 %endfunction%

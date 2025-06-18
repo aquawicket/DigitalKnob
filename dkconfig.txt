@@ -14,7 +14,6 @@ dk_call_IGNORE=dk_debugFunc;dk_echo;
 #dk_callDKCpp_TARGET_ENV=cosmocc
 #dk_eval_DEBUG=1
 #dk_exec_PRINT_COMMAND=0
-#dk_exec_PRINT_ARGS=0
 #dk_exec_PRINT_STDOUT=0
 #dk_exec_PRINT_STDERR=0
 #dk_exec_PRINT_EXITCODE=0
