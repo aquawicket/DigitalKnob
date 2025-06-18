@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	::############ GET ############
-	%dk_call% dk_validatePath DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
+	%dk_call% dk_validatePath DKHOME_DIR "%dk_call% DKHOME_DIR"
 	set "DKDESKTOP_DIR=%DKHOME_DIR%/Desktop"
 
 %endfunction%
