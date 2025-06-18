@@ -60,11 +60,9 @@ DKTEST() {
  
 	dk_call dk_echo
 	dk_call dk_echo "Test Getting DKHOME_DIR . . ."
-    dk_call dk_DKHOME_DIR
-    dk_call dk_echo "DKHOME_DIR = ${DKHOME_DIR}"
+	dk_call dk_echo "DKHOME_DIR = $(dk_call dk_DKHOME_DIR)"
 	
 	dk_call dk_echo
 	dk_call dk_echo "Test Setting DKHOME_DIR . . ."
-	dk_call dk_DKHOME_DIR "/c/"
-	dk_call dk_echo "DKHOME_DIR = ${DKHOME_DIR}"
+	dk_call dk_echo "DKHOME_DIR = $(dk_call dk_DKHOME_DIR '/c/')"
 }

@@ -5,16 +5,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################### dk_exec SETTINGS #########################
-if not defined dk_exec_PRINT_COMMAND 	(set "dk_exec_PRINT_COMMAND=0"	) 	&:: dk_exec_command
-if not defined dk_exec_PRINT_ARGS	 	(set "dk_exec_PRINT_ARGS=0"		) 	&:: dk_exec_arg<N>
-if not defined dk_exec_PRINT_STDOUT		(set "dk_exec_PRINT_STDOUT=0"	)	&:: dk_exec_stdout[]
-if not defined dk_exec_PRINT_STDERR 	(set "dk_exec_PRINT_STDERR=0"	)	&:: dk_exec_stderr[]
-if not defined dk_exec_PRINT_EXITCODE 	(set "dk_exec_PRINT_EXITCODE=0"	)	&:: dk_exec_exitcode
+if not defined dk_exec_PRINT_COMMAND 	(set "dk_exec_PRINT_COMMAND=1"	) 	&:: dk_exec_command
+if not defined dk_exec_PRINT_STDOUT		(set "dk_exec_PRINT_STDOUT=1"	)	&:: dk_exec_stdout[]
+if not defined dk_exec_PRINT_STDERR 	(set "dk_exec_PRINT_STDERR=1"	)	&:: dk_exec_stderr[]
+if not defined dk_exec_PRINT_EXITCODE 	(set "dk_exec_PRINT_EXITCODE=1"	)	&:: dk_exec_exitcode
 ::####################################################################
 ::# dk_exec(<command> <ret:optional>)
 ::#
 ::#		reference: https://stackoverflow.com/a/5807218
 ::#
+::#		dk_exec_command	 - variable containing the command string
 ::#		dk_exec_stdout[] - an array containing the executable's output from stdout
 ::#		dk_exec_stderr[] - an array containing the exexutable's output fomr stderr
 ::#		dk_exec_exitcode - variable containng the exit status from the executable
@@ -32,25 +32,10 @@ if not defined dk_exec_PRINT_EXITCODE 	(set "dk_exec_PRINT_EXITCODE=0"	)	&:: dk_
 		goto :DeEscape
 	)
 	
-	::###### dk_exec_command ######
-	::set dk_exec_command=%_ARGS_%
-	
 	::###### dk_exec_PRINT_COMMAND ######
 	if "%dk_exec_PRINT_COMMAND%" equ "1" (
+		echo:
 		for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_command%clr%  > !dk_exec_command!"`) do (echo %%~G)
-	)
-
-	::###### dk_exec_PRINT_ARGS ######
-	if "%dk_exec_PRINT_ARGS%" equ "1" (
-		if "%~1" neq "" for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_arg1%clr%     > %1"`) do (echo %%~G)
-		if "%~2" neq "" for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_arg2%clr%     > %2"`) do (echo %%~G)
-		if "%~3" neq "" for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_arg3%clr%     > %3"`) do (echo %%~G)
-		if "%~4" neq "" for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_arg4%clr%     > %4"`) do (echo %%~G)
-		if "%~5" neq "" for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_arg5%clr%     > %5"`) do (echo %%~G)
-		if "%~6" neq "" for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_arg6%clr%     > %6"`) do (echo %%~G)
-		if "%~7" neq "" for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_arg7%clr%     > %7"`) do (echo %%~G)
-		if "%~8" neq "" for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_arg8%clr%     > %8"`) do (echo %%~G)
-		if "%~9" neq "" for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_arg9%clr%     > %9"`) do (echo %%~G)
 	)
 
 	::###### dk_exec_stdout[] ######

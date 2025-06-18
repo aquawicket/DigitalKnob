@@ -16,11 +16,12 @@ dk_DKTOOLS_DIR() {
 		export DKTOOLS_DIR="${1}" 
 
 	############ GET ############
-	elif [ ! -e "${DKTOOLS_DIR-}" ]; then
-		dk_call dk_validate DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR" 
-		export DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"  
+	else
+		[ -n "${DKTOOLS-}" ] 		|| export DKTOOLS="DKTools"
+		[ -n "${DKTOOLS_DIR-}" ] 	|| export DKTOOLS_DIR="$(dk_call dk_DIGITALKNOB_DIR)/DKTools"  
 	fi
 	
+	########## FINALIZE ############
 	if [ ! -e "${DKTOOLS_DIR}" ]; then
 		dk_call dk_mkdir "${DKTOOLS_DIR}" 
 	fi
@@ -37,13 +38,19 @@ dk_DKTOOLS_DIR() {
 DKTEST() {
     dk_debugFunc 0 
 	
-	dk_call dk_echo
-	dk_call dk_echo "Test Getting DKTOOLS_DIR . . ."
-    dk_call dk_DKTOOLS_DIR
-    dk_call dk_printVar DKTOOLS_DIR
+	# Using command substitution
+	dk_call dk_echo;
+	dk_call dk_echo "Test Getting DKTOOLS_DIR . . .";
+    dk_call dk_echo "DKTOOLS_DIR = '$(dk_call dk_DKTOOLS_DIR)'";
 	
-	dk_call dk_echo
-	dk_call dk_echo "Test Setting DKTOOLS_DIR . . ."
-	dk_call dk_DKTOOLS_DIR "/C/DK/DKTools"
-	dk_call dk_printVar DKTOOLS_DIR 
+	dk_call dk_echo;
+	dk_call dk_echo "Test Setting DKTOOLS_DIR . . .";
+	dk_call dk_echo "DKTOOLS_DIR = '$(dk_call dk_DKTOOLS_DIR '/c/Digital Knob/DKTools')'";
+	
+	# Using global variable
+	dk_call dk_DKTOOLS_DIR
+	dk_call dk_echo "DKTOOLS_DIR = '${DKTOOLS_DIR}'";
+	
+	dk_call dk_DKTOOLS_DIR "/c/Digital Knob/DKTools"
+	dk_call dk_echo "DKTOOLS_DIR = '${DKTOOLS_DIR}'";
 }

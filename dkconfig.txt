@@ -3,7 +3,7 @@
 #dk_call_PRINT_ENTRY=1
 #dk_call_PRINT_EXIT=1
 #dk_call_PRINT_SCOPE=1
-#dk_call_IGNORE=dk_debugFunc;dk_echo;
+dk_call_IGNORE=dk_debugFunc;dk_echo;
 #dk_embedBin_DELETE_CMD_ON_EXTRACT=1
 #dk_embedBin_OVERWRITE_OUTPUT=1
 #dk_callDKC_TARGET_OS=cosmocc
@@ -13,11 +13,11 @@
 #dk_callDKCpp_Target_Arch=cosmocc
 #dk_callDKCpp_TARGET_ENV=cosmocc
 #dk_eval_DEBUG=1
-#dk_exec_PRINT_COMMAND=1
-#dk_exec_PRINT_ARGS=1
-#dk_exec_PRINT_STDOUT=1
-#dk_exec_PRINT_STDERR=1
-#dk_exec_PRINT_EXITCODE=1
+#dk_exec_PRINT_COMMAND=0
+#dk_exec_PRINT_ARGS=0
+#dk_exec_PRINT_STDOUT=0
+#dk_exec_PRINT_STDERR=0
+#dk_exec_PRINT_EXITCODE=0
 dk_exit_PAUSE_ON_EXIT=1
 dk_exit_PAUSE_ON_ERROR=1	#Test Comments
 #dk_getFileParams_PRINT_VARIABLES=1

@@ -10,12 +10,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKINSTALL
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%\wsl\DKINSTALL.cmd"
+	%dk_call% dk_depend wsl
 	
-	%dk_call% dk_set DEBIAN_DL "https://wslstorestorage.blob.core.windows.net/wslblob/TheDebianProject.DebianGNULinux_1.12.2.0_neutral___76v4gfsz19hv4.AppxBundle"
-	%dk_call% dk_importVariables %DEBIAN_DL% IMPORT_PATH %DKIMPORTS_DIR%\wsl-debian ROOT %DKTOOLS_DIR%	
-	%dk_call% dk_download %DEBIAN_DL%
+	%dk_call% dk_set DEBIAN_IMPORT "https://wslstorestorage.blob.core.windows.net/wslblob/TheDebianProject.DebianGNULinux_1.12.2.0_neutral___76v4gfsz19hv4.AppxBundle"
+	
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+	%dk_call% dk_importVariables %DEBIAN_IMPORT% IMPORT_PATH %DKIMPORTS_DIR%/wsl-debian ROOT %DKTOOLS_DIR%	
+	%dk_call% dk_download %DEBIAN_IMPORT%
 	
 	%dk_call% dk_echo  
     %dk_call% dk_info "Installing WSL-Debian Linux . . ."

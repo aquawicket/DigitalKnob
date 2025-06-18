@@ -9,12 +9,21 @@
 #
 #
 dk_DKUSERNAME() {
-    dk_debugFunc 0
+    dk_debugFunc 0 1;
 
-	[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USER-}"
-	[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USERNAME-}"
-	[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${LOGNAME-}"
-	[ -n "${DKUSERNAME-}" ] || echo "DKUSERNAME is invalid"
+	############ SET ############
+	if [ -n "${1-}" ]; then  
+		export DKUSERNAME="${1}" ;
+
+	############ GET ############
+	else
+		[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USER-}";
+		[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USERNAME-}";
+		[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${LOGNAME-}";
+		[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="UNDEFINED";
+	fi
+	
+	builtin echo "${DKUSERNAME}";
 }
 
 
@@ -24,8 +33,13 @@ dk_DKUSERNAME() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-    dk_debugFunc 0
+    dk_debugFunc 0;
  
-    dk_call dk_DKUSERNAME
-    dk_call dk_printVar DKUSERNAME
+	dk_call dk_echo;
+	dk_call dk_echo "Test Getting DKUSERNAME . . .";
+    dk_call dk_echo "DKUSERNAME = '$(dk_call dk_DKUSERNAME)'";
+	
+	dk_call dk_echo;
+	dk_call dk_echo "Test Setting DKUSERNAME . . .";
+	dk_call dk_echo "DKUSERNAME = '$(dk_call dk_DKUSERNAME 'MyUsername')'";
 }
