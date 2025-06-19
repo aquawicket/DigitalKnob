@@ -12,8 +12,7 @@ include_guard()
 #########################################################################
 
 
-############ autoconf ############
+############### autoconf ###############
 # https://www.gnu.org/software/autoconf
-#
 
 dk_installPackage(autoconf)

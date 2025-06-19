@@ -12,8 +12,7 @@ include_guard()
 #########################################################################
 
 
-############ automake ############
+############### automake ###############
 # https://www.gnu.org/software/automake
-#
 
 dk_installPackage(automake)

@@ -14,6 +14,5 @@ include_guard()
 
 ############ av_foundation ############
 # https://developer.apple.com/documentation/AVFoundation?language=objc
-#
 
 dk_findLibrary(AVFoundation)
