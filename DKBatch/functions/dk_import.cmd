@@ -19,9 +19,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 ::#
-:dk_import url
+:dk_import
 %setlocal%
-	dk_debugFunc 1 99
+	%dk_call% dk_debugFunc 1 99
 	
 	%dk_call% dk_getParameter NO_HALT REMOVE
 	
