@@ -13,12 +13,6 @@ include_guard()
 
 
 ###### android-studio ######
-# https://developer.android.com/studio/archive
-# https://developer.android.com/studio#downloads
-#
-#	windows uninstall registry location
-#   HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Android Studio
-#
 
 ### DEPEND ###
 dk_depend(openjdk-8)
