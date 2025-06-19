@@ -13,7 +13,7 @@ include_guard()
 
 
 ##### android-sdk ######
-# https://androidsdkoffline.blogspot.com/
+# https://androidsdkoffline.blogspot.com
 
 #NOTE: it's actually building android gui apps that depend on java. So we can push these further up the dependencies list. 
 #dk_depend(openjdk)

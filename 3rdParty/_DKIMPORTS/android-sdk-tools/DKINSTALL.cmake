@@ -13,8 +13,6 @@ include_guard()
 
 
 ###### android-sdk-tools ######
-# https://developer.android.com/studio/releases/sdk-tools
-# https://androidsdkoffline.blogspot.com/p/android-sdk-tools.html
 
 dk_depend(android-sdk)
 dk_validate(Host_Tuple "dk_Host_Tuple()")

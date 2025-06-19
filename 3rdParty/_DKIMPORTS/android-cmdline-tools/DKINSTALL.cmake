@@ -25,31 +25,24 @@ include_guard()
 #endif()
 
 #dk_depend(openjdk-8)
-
+dk_validate(Host_Os "dk_Host_Os()")
 dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
 dk_set(ANDROID_SDK $ENV{DK3RDPARTY_DIR}/android-sdk)
 dk_mkdir(${ANDROID_SDK})
 dk_mkdir(${ANDROID_SDK}/cmdline-tools)
 
-# 7583922
+
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+
 if(Windows_Host)
-	dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
+	dk_import(${Android_Cmdline_Tools_Windows_Import} PATH ${ANDROID_SDK}/cmdline-tools/latest)
 elseif(Mac_Host)
-	dk_import(https://dl.google.com/android/repository/commandlinetools-mac-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
+	dk_import(${Android_Cmdline_Tools_Mac_Import} PATH ${ANDROID_SDK}/cmdline-tools/latest)
 elseif(Linux_Host)
-	dk_import(https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
+	dk_import(${Android_Cmdline_Tools_Linux_Impot} PATH ${ANDROID_SDK}/cmdline-tools/latest)
 endif()
 
-# 8512546
-#Windows_Host_dk_import(https://dl.google.com/android/repository/commandlinetools-win-8512546_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
-#Mac_Host_dk_import(https://dl.google.com/android/repository/commandlinetools-mac-8512546_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
-#Linux_Host_dk_import(https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
-
-
 dk_set(SDKMANAGER_BAT ${ANDROID_CMDLINE_TOOLS}/bin/sdkmanager.bat)
-
-
-
 
 
 
