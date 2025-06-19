@@ -12,7 +12,8 @@ include_guard()
 #########################################################################
 
 
-###### ant ######
+############ ant ############
+# https://github.com/apache/ant.git
 
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${ANT_IMPORT} NAME ant)

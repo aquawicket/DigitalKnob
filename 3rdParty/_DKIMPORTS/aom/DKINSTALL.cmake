@@ -15,7 +15,6 @@ include_guard()
 ############ aom ############
 # Alliance for Open Media
 # https://aomedia.googlesource.com/aom.git
-#
 
 ### DEPEND ###
 dk_depend			(nasm)

@@ -13,6 +13,7 @@ include_guard()
 
 
 ############ appkit ############
+# https://developer.apple.com/documentation/appkit?language=objc
 
 dk_validate(Host_Os ${Host_Os})
 if(NOT Mac_Host)

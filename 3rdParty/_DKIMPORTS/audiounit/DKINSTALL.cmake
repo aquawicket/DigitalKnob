@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-############ audiounit ############
+############################## audiounit ##############################
 # https://developer.apple.com/documentation/audiounit?language=objc
 
 dk_findLibrary(AudioUnit)

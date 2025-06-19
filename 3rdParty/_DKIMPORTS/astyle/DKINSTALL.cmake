@@ -12,7 +12,11 @@ include_guard()
 #########################################################################
 
 
-############ astyle ############
+###### astyle ######
+# http://astyle.sourceforge.net
+# https://sourceforge.net/projects/astyle/files/latest/download
+# https://managedway.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip
+# https://svn.code.sf.net/p/astyle/code/trunk astyle-code
 
 ### IMPORT ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")

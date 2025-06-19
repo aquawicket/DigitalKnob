@@ -12,7 +12,9 @@ include_guard()
 #########################################################################
 
 
-############ android ############
+############ libandroid ############
+# https://developer.android.com/ndk/guides/stable_apis#tracing
+
 dk_validate(Host_Tuple ${Host_Tuple})
 if(NOT Android)
 	dk_undepend(android)
@@ -21,6 +23,6 @@ endif()
 
 # not found on Android host devices the first time round. 
 # add hints to point to the library in the ndk
-
 dk_depend(android-ndk)
+
 dk_findLibrary(android)

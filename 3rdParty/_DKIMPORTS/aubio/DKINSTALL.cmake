@@ -12,8 +12,9 @@ include_guard()
 #########################################################################
 
 
-###### aubio ######
+############### aubio ###############
 # https://github.com/aubio/aubio.git
+# https://github.com/aubio/aubio/archive/152d6819b360c2e7b379ee3f373d444ab3df0895.zip
 
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import			(${AUBIO_IMPORT})
