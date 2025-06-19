@@ -13,10 +13,8 @@ include_guard()
 
 
 ############ appkit ############
-# https://developer.apple.com/documentation/appkit?language=objc
-#
 
-dk_validate(Host_Tuple ${Host_Tuple})
+dk_validate(Host_Os ${Host_Os})
 if(NOT Mac_Host)
 	dk_undepend(appkit)
 	dk_return()

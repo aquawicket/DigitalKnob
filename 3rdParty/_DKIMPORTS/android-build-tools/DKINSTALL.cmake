@@ -24,13 +24,13 @@ dk_mkdir		(${ANDROID_SDK}/build-tools)
 # 30.0.3
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
-dk_validate		(Host_Tuple "dk_Host_Tuple()")
+dk_validate		(Host_Os "dk_Host_Os()")
 if(Windows_Host)
-	dk_import	(${Android_Build_Tools_Windows_Import} PATH ${ANDROID_SDK}/build-tools/${Android_Build_Tools_Version})
+	dk_import	(${Android_Build_Tools_Windows_Import} PATH "${ANDROID_SDK}/build-tools/${Android_Build_Tools_Version}")
 elseif(Mac_Host)
-	dk_import	(${Android_Build_Tools_Mac_Import} PATH ${ANDROID_SDK}/build-tools/${Android_Build_Tools_Version})
+	dk_import	(${Android_Build_Tools_Mac_Import} PATH "${ANDROID_SDK}/build-tools/${Android_Build_Tools_Version}")
 elseif(Linux_Host OR Android_Host)
-    dk_import	(${Android_Build_Tools_Linux_Import} PATH ${ANDROID_SDK}/build-tools/${Android_Build_Tools_Version})
+    dk_import	(${Android_Build_Tools_Linux_Import} PATH "${ANDROID_SDK}/build-tools/${Android_Build_Tools_Version}")
 endif()
 
 # 31.0.0

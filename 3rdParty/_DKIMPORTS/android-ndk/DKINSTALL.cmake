@@ -20,9 +20,9 @@ dk_depend(android-sdk)
 
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
-dk_set(ANDROID_NDK "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
+dk_set(ANDROID_NDK "${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD}")
 
-dk_mkdir	("${ANDROID_SDK_DIR}/ndk")
+dk_mkdir	("${ANDROID_SDK}/ndk")
 if(Windows_Host)
 	dk_import		(${ANDROID_NDK_WIN_IMPORT} 		PATH "${ANDROID_NDK}" VERSION "${ANDROID_NDK_BUILD}" PATCH)
 elseif(Mac_Host)

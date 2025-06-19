@@ -20,27 +20,27 @@ include_guard()
 #dk_depend(openjdk-8)
 #dk_depend(android-cmdline-tools)
 
-dk_validate(Host_Tuple "dk_Host_Tuple()")
+dk_validate(Host_Os "dk_Host_Os()")
 #if(Android_Host)
 #	dk_set(ANDROID_SDK "$ENV{HOME}/DigitalKnob/3rdParty/android-sdk")
-#	dk_set(ANDROID_SDK_DIR "$ENV{HOME}/DigitalKnob/3rdParty/android-sdk")
+#	dk_set(ANDROID_SDK "$ENV{HOME}/DigitalKnob/3rdParty/android-sdk")
 #else()
 	dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
 	dk_set(ANDROID_SDK "$ENV{DK3RDPARTY_DIR}/android-sdk")
-	dk_set(ANDROID_SDK_DIR "$ENV{DK3RDPARTY_DIR}/android-sdk")
+	#dk_set(ANDROID_SDK_DIR "$ENV{DK3RDPARTY_DIR}/android-sdk")
 #endif()
 
 ### INSTALL ###
-if(NOT EXISTS ${ANDROID_SDK_DIR})
+if(NOT EXISTS ${ANDROID_SDK})
 	dk_info("Installing android-sdk")
-	dk_mkdir("${ANDROID_SDK_DIR}")
-	dk_patch(android-sdk "${ANDROID_SDK_DIR}")
+	dk_mkdir("${ANDROID_SDK}")
+	dk_patch(android-sdk "${ANDROID_SDK}")
 endif()
 
 # https://developer.android.com/tools/variables
 ###### ANDROID_HOME ######
 if(NOT DEFINED ENV{ANDROID_HOME})
-	set(ENV{ANDROID_HOME} "${ANDROID_SDK_DIR}")
+	set(ENV{ANDROID_HOME} "${ANDROID_SDK}")
 	if(Windows_Host)
 		dk_replaceAll("$ENV{ANDROID_HOME}" "/" "\\" ENV{ANDROID_HOME})
 		dk_validate(CMD_EXE "dk_CMD_EXE()")
@@ -74,7 +74,7 @@ endif()
 
 ###### VS_AndroidHome ######
 if(NOT DEFINED ENV{VS_AndroidHome})
-	set(ENV{VS_AndroidHome} "${ANDROID_SDK_DIR}")
+	set(ENV{VS_AndroidHome} "${ANDROID_SDK}")
 	if(Windows_Host)
 		dk_replaceAll("$ENV{VS_AndroidHome}" "/" "\\" ENV{VS_AndroidHome})
 		dk_validate(CMD_EXE "dk_CMD_EXE()")
@@ -85,7 +85,7 @@ endif()
 
 ### FIXME - temporarily disabled
 ###### SignLicenses ######
-#if(NOT EXISTS "${ANDROID_SDK_DIR}/licenses")
+#if(NOT EXISTS "${ANDROID_SDK}/licenses")
 if(0)
 	# FIXME:  more work to be done on killing tasks
 	#if(Windows_Host)

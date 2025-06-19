@@ -12,11 +12,7 @@ include_guard()
 #########################################################################
 
 
-###### astyle ######
-# http://astyle.sourceforge.net
-# https://sourceforge.net/projects/astyle/files/latest/download
-# https://managedway.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip
-# https://svn.code.sf.net/p/astyle/code/trunk astyle-code
+############ astyle ############
 
 ### IMPORT ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
@@ -24,7 +20,7 @@ dk_import			(${ASTYLE_IMPORT})
 
 ### LINK ###
 dk_validate			(Target_Tuple "dk_Target_Tuple()")
-dk_include			(${ASTYLE_DIR}/src)
+dk_include			(${ASTYLE}/src)
 
 if(Windows)
 	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyleLib.a)
@@ -36,11 +32,11 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${ASTYLE_DIR}
+dk_configure(${ASTYLE}
 	-DBUILD_JAVA_LIBS=OFF 		# "Build java library"   OFF
 	#-DBUILD_SHARED_LIBS=OFF 	# "Build shared library" OFF
 	#-DBUILD_STATIC_LIBS=ON		# "Build static library" OFF
 ) 	
 
 ### COMPILE ###
-dk_build(${ASTYLE_DIR})
+dk_build(${ASTYLE})
