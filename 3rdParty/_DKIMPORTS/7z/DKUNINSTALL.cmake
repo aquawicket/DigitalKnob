@@ -13,9 +13,9 @@ include_guard()
 
 
 ###### 7z ######
-# https://www.7-zip.org/a/7z2409-extra.7z
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${7Z_IMPORT} NAME 7z)
+dk_importVariables	(${7z_Import})
+dk_assertVar		(7Z)
 dk_delete			("${7Z}")

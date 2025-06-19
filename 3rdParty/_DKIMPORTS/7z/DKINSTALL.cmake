@@ -13,8 +13,6 @@ include_guard()
 
 
 ###### 7z ######
-# https://www.7-zip.org/a/7z2409-extra.7z
-#
 
 ### INSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")

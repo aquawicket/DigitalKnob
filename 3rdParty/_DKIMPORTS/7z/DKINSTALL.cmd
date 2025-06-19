@@ -4,23 +4,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-::####################################################################
-::# DKUNINSTALL
-::#
-:DKUNINSTALL
-%setlocal%
-	%dk_call% dk_debugFunc 0 
+::###### 7z ######
 
-	%dk_call% dk_cmakeEval "dk_load('%~dpn0')"
-%endfunction%
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-%setlocal%
-	%dk_call% dk_debugFunc 0 
-
-	call :DKUNINSTALL
-%endfunction%
+::### INSTALL ###
+%dk_call% dk_getFileParams	"%~dp0/dkconfig.txt"
+%dk_call% dk_import			%7z_Import%
+%dk_call% dk_assertVar 		7Z
+%dk_call% dk_set 7ZA_EXE	"%7Z%/7za.exe"
+%dk_call% dk_assertPath		7ZA_EXE
