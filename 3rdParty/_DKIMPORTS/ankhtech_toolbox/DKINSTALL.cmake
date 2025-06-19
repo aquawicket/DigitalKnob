@@ -24,12 +24,14 @@ dk_mkdir("${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Temp")
 dk_mkdir("${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Temp/Programs")
 dk_mkdir("${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Temp/Frameworks")
 dk_mkdir("${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Temp/Repacks")
-dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/AT.Toolbox.txt" 					"${DKTOOLS_DIR}/Ankhtech_Toolbox/AT.Toolbox.bat")
-dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/wget.exe" 		"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/wget.exe")
-dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.exe" 			"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/7z.exe")
-dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.dll" 			"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/7z.dll")
+dk_download(${Ankhtech_Toolbox_Import}		"${DKTOOLS_DIR}/Ankhtech_Toolbox/AT.Toolbox.bat")
+dk_download(${Ankhtech_Toolbox_Wget_exe}	"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/wget.exe")
+dk_download(${Ankhtech_Toolbox_7z_exe}		"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/7z.exe")
+dk_download(${Ankhtech_Toolbox_7z_dll} 		"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/7z.dll")
 
 dk_fileReplace("${DKTOOLS_DIR}/Ankhtech_Toolbox/AT.Toolbox.bat" "otoupd=2" "otoupd=1")
+
+dk_firewallAllow("Ankhtech_WGET" "${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Files/wget.exe")
 
 #dk_download("https://www.morkoskhalaf.com/ankhtech/Toolbox/Tweaks.exe"						"${DKTOOLS_DIR}/Ankhtech_Toolbox/ATToolbox/Tweaks.7z")
 #cd "${DKTOOLS_DIR}/Ankhtech_Toolbox"
