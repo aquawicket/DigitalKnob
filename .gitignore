@@ -59,6 +59,11 @@ DKCMAKE_PROJECT_VARIABLES.temp
 DKCMAKE_FLAG_VARIABLES.temp
 
 3rdParty/7z-2409-extra
+3rdParty/ant-146baef
+3rdParty/asio-f88ec156
+3rdParty/astyle-3.1_windows
+3rdParty/aubio-152d6819
+3rdParty/babel-.min
 3rdParty/Batch-Script-Collection-master
 3rdParty/Batch-Tools-Sys-master
 3rdParty/boost-1_78_0
