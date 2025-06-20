@@ -21,36 +21,41 @@ if(NOT Windows)
 endif()
 
 
-if(Windows_Arm_Msvc)
-	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/arm/bcrypt.lib")
-elseif(Windows_Arm64_Clang)
+# Clang
+if(Windows_Arm64_Clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_set(LIBBCRYPT_LIB "${MSYS2}/clangarm64/lib/libbcrypt.a")
-elseif(Windows_Arm64_Msvc)
-	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/arm64/bcrypt.lib")
 elseif(Windows_X86_Clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_set(LIBBCRYPT_LIB "${MSYS2}/clang32/lib/libbcrypt.a")
-elseif(Windows_X86_64)
-	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_set(LIBBCRYPT_LIB "${MSYS2}/clang64/lib/libbcrypt.a")
 elseif(Windows_X86_64_Clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_set(LIBBCRYPT_LIB "${MSYS2}/clang64/lib/libbcrypt.a")
+
+# Gcc
 elseif(Windows_X86_Gcc)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_set(LIBBCRYPT_LIB "${MSYS2}/mingw32/lib/libbcrypt.a")
-elseif(Windows_X86_Msvc)
-	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x86/bcrypt.lib")
 elseif(Windows_X86_64_Gcc)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_set(LIBBCRYPT_LIB "${MSYS2}/mingw64/lib/libbcrypt.a")
+
+# Msvc
+elseif(Windows_Arm32_Msvc)
+	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/arm/bcrypt.lib")
+elseif(Windows_Arm64_Msvc)
+	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/arm64/bcrypt.lib")
+elseif(Windows_X86_Msvc)
+	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x86/bcrypt.lib")
 elseif(Windows_X86_64_Msvc)
 	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x64/bcrypt.lib")
+	
+# Ucrt
 elseif(Windows_X86_64_Ucrt)
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_set(LIBBCRYPT_LIB "${MSYS2}/ucrt64/lib/libbcrypt.a")
+	dk_set(LIBBCRYPT_LIB "${MSYS2}/ucrt64/lib/libbcrypt.a")	
 endif()
+
 
 dk_assertPath(LIBBCRYPT_LIB)
 dk_lib(${LIBBCRYPT_LIB})
