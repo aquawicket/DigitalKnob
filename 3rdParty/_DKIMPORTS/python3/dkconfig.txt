@@ -1,3 +1,9 @@
+###### python3 ######
+# https://docs.python.org/3/using/windows.html
+# https://silentinstallhq.com/python-3-10-silent-install-how-to-guide/
+# https://wiki.termux.com/wiki/Python
+
+# 3.11.8
 Python3_Windows_Arm64_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-arm64.zip
 Python3_Windows_X86_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip
 Python3_Windows_X86_64_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip

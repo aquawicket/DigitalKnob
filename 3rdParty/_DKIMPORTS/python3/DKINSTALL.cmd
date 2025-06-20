@@ -13,6 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
+	
 	set "PYTHON3_IMPORT=!Python3_%Host_Tuple%_Import!"
 ::	if not defined PYTHON3_IMPORT	(set "PYTHON3_IMPORT=python3")
 	%dk_call% dk_assertVar PYTHON3_IMPORT

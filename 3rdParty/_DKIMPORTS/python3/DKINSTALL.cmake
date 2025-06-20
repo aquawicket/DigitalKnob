@@ -18,28 +18,16 @@ include_guard()
 # https://wiki.termux.com/wiki/Python
 
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 set(PYTHON3_IMPORT "${Python3_${Host_Tuple}_Import}")
 if(NOT PYTHON3_IMPORT)
 	set(PYTHON3_IMPORT python)
 endif()
-#if(Mac_X86_64_Host)
-#	set(PYTHON3_IMPORT ${Python3_Mac_X86_64_Import})
-#elseif(Windows_Arm64_Host)
-#	set(PYTHON3_IMPORT ${Python3_Windows_Arm64_Import})
-#elseif(Windows_X86_64_Host)
-#	set(PYTHON3_IMPORT ${Python3_Windows_X86_64_Import})
-#elseif(Windows_X86_Host)
-#	set(PYTHON3_IMPORT ${Python3_Windows_X86_Import})
-#else()
-#	set(PYTHON3_IMPORT python)
-#endif()
-
 	
 dk_isUrl(${PYTHON3_IMPORT})
 if(dk_isUrl)
 	dk_importVariables("${PYTHON3_IMPORT}")
+	dk_assertVar(PYTHON3)
 endif()
 
 if(Windows_Host)
@@ -75,7 +63,8 @@ dk_exportVars(PATH "$ENV{PATH}")
 ### 3RDPARTY LINK ###
 dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interpreter=${PYTHON3_EXE})
 
-dk_firewallAllow("Python3" "${PYTHON3_EXE}")
-
 dk_assertPath("${PYTHON3}")
 dk_assertPath("${PYTHON3_EXE}")
+dk_firewallAllow("PYTHON3_EXE" "${PYTHON3_EXE}")
+
+

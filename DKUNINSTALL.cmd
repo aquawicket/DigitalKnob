@@ -45,7 +45,7 @@ setlocal
 
 	::###### Backup DKBuilder.cmd to C:/ ######
 	echo ### Creating backup of DKBuilder.cmd ###
-	%dk_call% dk_copy "%DKBRANCH_DIR%/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%SystemDrive%/DKBuilder.cmd" OVERWRITE
+	%dk_call% dk_copy "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%SystemDrive%/DKBuilder.cmd" OVERWRITE
 
 	::###### Remove DK Pins ######
 	%dk_call% dk_quickAccessUnpin "%DIGITALKNOB_DIR%"
