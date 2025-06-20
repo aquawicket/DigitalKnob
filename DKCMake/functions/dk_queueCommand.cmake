@@ -30,7 +30,7 @@ function(dk_queueCommand)
 	dk_getParameterValue(OUTPUT_VARIABLE)
 	dk_getParameterValue(ERROR_VARIABLE)
 	
-	dk_command(${ARGV})
+	dk_exec(${ARGV})
 	
 	if(${RESULT_VARIABLE})
 		set(${RESULT_VARIABLE} ${${RESULT_VARIABLE}} PARENT_SCOPE)

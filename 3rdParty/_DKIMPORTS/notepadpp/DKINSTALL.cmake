@@ -37,8 +37,8 @@ dk_copy($ENV{DKIMPORTS_DIR}/notepadpp/dark_config.xml ${NOTEPADPP_DIR}/config.xm
 
 
 ### dk_installNotepadppContextMenu.cmd ###
-dk_command($ENV{DKIMPORTS_DIR}/notepadpp/dk_installNotepadppContextMenu.cmd)
+dk_exec($ENV{DKIMPORTS_DIR}/notepadpp/dk_installNotepadppContextMenu.cmd)
 
 
 ### dk_installNotepadppFileAssociations.cmd ###
-dk_command($ENV{DKIMPORTS_DIR}/notepadpp/dk_installNotepadppFileAssociations.cmd)
+dk_exec($ENV{DKIMPORTS_DIR}/notepadpp/dk_installNotepadppFileAssociations.cmd)

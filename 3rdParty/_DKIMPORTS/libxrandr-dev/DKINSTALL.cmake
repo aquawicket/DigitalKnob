@@ -20,7 +20,7 @@ endif()
 
 ### INSTALL ###
 if(TINYCORE)
-	#dk_command(tce-load -wi libXrandr-dev.tcz)
+	#dk_exec(tce-load -wi libXrandr-dev.tcz)
 	dk_installPackage(libXrandr-dev.tcz)
 else()
 	dk_installPackage(libxrandr-dev)

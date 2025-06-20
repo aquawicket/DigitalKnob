@@ -50,11 +50,11 @@ if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 
 	### Create the virtual image (10gb)
 	# C:/Users/Administrator/DigitalKnob/Development/3rdParty/qemu/qemu-img create -f qcow2 tinycore.img 10G
-	dk_command(${QEMU_IMG_EXE} create -f qcow2 tinycore.img 10G)
+	dk_exec(${QEMU_IMG_EXE} create -f qcow2 tinycore.img 10G)
 
 	### Launching the VM
 	# C:/Users/Administrator/DigitalKnob/Development/3rdParty/qemu/qemu-system-x86_64 -cdrom CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl
-	dk_command(${QEMU_SYSTEM_X86_64_EXE} -cdrom $ENV{DKDOWNLOAD_DIR}/CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl)
+	dk_exec(${QEMU_SYSTEM_X86_64_EXE} -cdrom $ENV{DKDOWNLOAD_DIR}/CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl)
 endif()
 
 dk_set(TINYCOURLINUX_launcher "${TINYCORELINUX}/LAUNCH.cmd")

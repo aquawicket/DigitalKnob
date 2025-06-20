@@ -30,26 +30,26 @@ dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Android_Host)
 	dk_installPackage(openjdk-17)
 		
-	dk_command(java --version)
+	dk_exec(java --version)
 endif()
 
 if(Linux_Host)
 	dk_installPackage(openjdk-11-jdk)
 	
-	dk_command(java --version)
+	dk_exec(java --version)
 endif()
 
 if(Mac_Host)
 	if(NOT EXISTS /Library/Java/JavaVirtualMachines/jdk-11.jdk)
 		dk_download(${OPENJDK_DL_MAC_X86_64} $ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
-		dk_command(tar xf $ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
+		dk_exec(tar xf $ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 		
 		dk_validate(SUDO_EXE "dk_depend(sudo)")
-		dk_command(${SUDO_EXE} mv $ENV{DKDOWNLOAD_DIR}/jdk-11.jdk /Library/Java/JavaVirtualMachines/)
+		dk_exec(${SUDO_EXE} mv $ENV{DKDOWNLOAD_DIR}/jdk-11.jdk /Library/Java/JavaVirtualMachines/)
 		dk_delete($ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 	endif()
 	
-	dk_command(java --version)
+	dk_exec(java --version)
 endif()
 
 if(Windows_Host)

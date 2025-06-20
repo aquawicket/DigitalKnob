@@ -38,7 +38,7 @@ function(dk_createWindowsIcon)
 	dk_replaceAll("${CONVERT_COMMAND}" "/" "\\" CONVERT_COMMAND)
 	dk_debug(${CONVERT_COMMAND})
 	#execute_process(COMMAND ${CONVERT_COMMAND})
-	dk_command(${CONVERT_COMMAND})
+	dk_exec(${CONVERT_COMMAND})
 endfunction()
 
 

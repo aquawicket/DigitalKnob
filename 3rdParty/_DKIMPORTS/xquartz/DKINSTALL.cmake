@@ -28,7 +28,7 @@ dk_depend(homebrew)
 
 ### INSTALL ###
 #if(NOT EXISTS ${XQUARTZ})
-	#dk_command(brew install --cask xquartz)
+	#dk_exec(brew install --cask xquartz)
 	dk_installPackage(xquartz)
 	dk_include(/opt/X11/include)
 #endif()

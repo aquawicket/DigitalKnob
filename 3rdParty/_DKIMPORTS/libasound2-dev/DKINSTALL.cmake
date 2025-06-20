@@ -29,7 +29,7 @@ dk_installPackage(libasound2-dev)
 
 ### Tiny Core Linux ###
 #if(TINYCORE)
-#	dk_command(tce-load -wi libasound2-dev)
+#	dk_exec(tce-load -wi libasound2-dev)
 #endif()
 
 ### LINK ###

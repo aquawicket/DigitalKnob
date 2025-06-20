@@ -151,7 +151,7 @@ endif()
 
 ### COMPILE ###
 if(Android_Arm32_Debug)
-	dk_command(${BOOST_DIR}/SetupAndroid.sh)
+	dk_exec(${BOOST_DIR}/SetupAndroid.sh)
 	dk_queueCommand(
 		#setx NDK_ROOT ${ANDROID_NDK} &&
 		${BOOST_DIR}/b2.exe

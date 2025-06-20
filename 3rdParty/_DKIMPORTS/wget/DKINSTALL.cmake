@@ -24,6 +24,6 @@ endif()
 
 ### Tiny Core Linux ###
 if(TINYCORE)
-	#dk_command(tce-load -wi wget)
+	#dk_exec(tce-load -wi wget)
 	dk_findProgram(WGET_EXE wget)
 endif()

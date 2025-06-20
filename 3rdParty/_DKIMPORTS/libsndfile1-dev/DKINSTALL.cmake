@@ -21,11 +21,11 @@ endif()
 
 ### INSTALL ###
 if(TINYCORE)
-	#dk_command(tce-load -wi libsndfile-dev.tcz)
+	#dk_exec(tce-load -wi libsndfile-dev.tcz)
 	dk_installPackage(libsndfile-dev.tcz)
 else()
 	#dk_depend(sudo)
-	#dk_command(${SUDO_EXE} apt -y install libsndfile1-dev)
+	#dk_exec(${SUDO_EXE} apt -y install libsndfile1-dev)
 	dk_installPackage(libsndfile1-dev)
 endif()
 

@@ -21,7 +21,7 @@ endif()
 
 ### INSTALL ###
 if(TINYCORE)
-	#dk_command(tce-load -wi libXtst-dev.tcz)
+	#dk_exec(tce-load -wi libXtst-dev.tcz)
 	dk_installPackage(libXtst-dev.tcz)
 else()
 	dk_installPackage(libxtst-dev)

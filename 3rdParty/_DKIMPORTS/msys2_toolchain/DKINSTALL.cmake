@@ -45,7 +45,7 @@ if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 	
 	### Create Bash Exports ###
 	dk_depend(cygpath)
-	dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_CYGPATH)
+	dk_exec(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_CYGPATH)
 	
 	dk_set(CLANG32_BIN		"export PATH=${MSYS2_CYGPATH}/clang32/bin:$PATH")
 	dk_set(CLANG64_BIN		"export PATH=${MSYS2_CYGPATH}/clang64/bin:$PATH")

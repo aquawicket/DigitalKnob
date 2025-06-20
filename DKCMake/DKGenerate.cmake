@@ -564,7 +564,7 @@ if(Android)
 	### Gradle Build ###
 	if(CMAKE_ANDROID_GUI)
 		#if(Windows_Host)
-		#	dk_command(${OPENJDK}/registerJDK.cmd)
+		#	dk_exec(${OPENJDK}/registerJDK.cmd)
 		#endif()
 		dk_depend(openjdk)
 		dk_depend(gradle)
@@ -1463,10 +1463,10 @@ endforeach()
 #dk_buildLog("\n")
 #dk_buildLog(" ### Dynamic libraries ###")
 #if(Linux OR Raspberry OR Android)
-#	dk_command(ldd >> ${Target_App_Dir}/${Target_Tuple}/DKBUILD.log)
+#	dk_exec(ldd >> ${Target_App_Dir}/${Target_Tuple}/DKBUILD.log)
 #elseif(Mac OR IOS)
 	# TODO
-	#dk_command(otool -L ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app)
+	#dk_exec(otool -L ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app)
 #elseif(Windows)	
 	# TODO
 	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe

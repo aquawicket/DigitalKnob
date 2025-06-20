@@ -25,5 +25,5 @@ dk_validate(Target_Config  "dk_Target_Config()")
 # TODO
 # sudo apt-get install ddd
 #dk_depend(sudo)
-#Linux_Host_dk_command(${SUDO_EXE} apt -y install ddd)
+#Linux_Host_dk_exec(${SUDO_EXE} apt -y install ddd)
 dk_installPackage(ddd)

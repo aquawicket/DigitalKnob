@@ -30,11 +30,11 @@ endif()
 
 	### INSTALL ###
 	if(TINYCORE)
-		#dk_command(tce-load -wi libXinerama-dev.tcz)
+		#dk_exec(tce-load -wi libXinerama-dev.tcz)
 		dk_installPackage(libXinerama-dev.tcz)
 	else()
 		#dk_depend(sudo)
-		#dk_command(${SUDO_EXE} apt -y install libxinerama-dev)
+		#dk_exec(${SUDO_EXE} apt -y install libxinerama-dev)
 		dk_installPackage(libxinerama-dev)
 	endif()
 #endif()

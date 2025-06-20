@@ -79,7 +79,7 @@ function(dk_installGit)
 	dk_assertPath(GIT_EXE)
 	dk_printVar(GIT_EXE)
 
-	dk_command(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
+	dk_exec(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
 	dk_set(GIT_VERSION ${GIT_VERSION})
 	dk_info(GIT_VERSION)
 endfunction()

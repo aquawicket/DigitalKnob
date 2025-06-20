@@ -38,10 +38,10 @@ if(CYGWIN)
 		dk_firewallAllow("Cygwin_Setup" "$ENV{DKDOWNLOAD_DIR}/setup-x86_64.exe")
 		
 		### Install Cygwin ###
-		dk_command("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" --quiet-mode --root ${CYGWIN_DIR})
+		dk_exec("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" --quiet-mode --root ${CYGWIN_DIR})
 		
 		### Install Packages ###
-		dk_command("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" -a x86_64 -d -q -P "tar,wget,gcc-core,gcc-g++,binutils,make,cmake,automake,autoconf,git,patch,unzip,flex,bison,gperf,help2man,libtool,gettext,libgmp10,libgmp-devel,libmpfr6,libmpfr-devel,libmpc3,libmpc-devel,libncurses-devel,libintl-devel")
+		dk_exec("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" -a x86_64 -d -q -P "tar,wget,gcc-core,gcc-g++,binutils,make,cmake,automake,autoconf,git,patch,unzip,flex,bison,gperf,help2man,libtool,gettext,libgmp10,libgmp-devel,libmpfr6,libmpfr-devel,libmpc3,libmpc-devel,libncurses-devel,libintl-devel")
 		
 		### Copy Setup exe to /bin ###
 		dk_copy("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" "${CYGWIN_DIR}/bin/${CYGWIN_IMPORT_FILE}")   # copy the installer to use as a package manager

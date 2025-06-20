@@ -12,6 +12,20 @@ include_guard()
 #########################################################################
 
 
+######################### dk_exec SETTINGS ##############################
+set(dk_exec_ECHO_OUTPUT			1)
+set(dk_exec_ECHO_ERROR			1)
+set(dk_exec_ECHO				STDOUT) 	# STDERR, STDOUT, NONE
+set(dk_exec_ERROR_IS_FATAL		ANY)		# ANY, LAST, NONE
+#set(dk_exec_ENCODING			NONE)		# NONE, AUTO, ANSI, OEM, UTF-8, UTF8
+
+set(dk_exec_PRINT_CALL			1) 			# dk_exec_call
+set(dk_exec_PRINT_COMMAND		1) 			# dk_exec_command
+set(dk_exec_PRINT_EXITCODES		1)			# dk_exec_exitcodes
+set(dk_exec_PRINT_EXITCODE 		1)			# dk_exec_exitcode
+set(dk_exec_PRINT_STDERR 		1)			# dk_exec_stderr[]
+set(dk_exec_PRINT_STDOUT		1)			# dk_exec_stdout[]
+set(dk_exec_PRINT_OUTPUT 		1)			# dk_exec
 #########################################################################
 # dk_exec(commands) NO_HALT NOECHO OUTPUT <output_variable>
 #
@@ -43,99 +57,63 @@ include_guard()
 function(dk_exec)
 	dk_debugFunc()
 	
-	set(cmd1 										${ARGV})
+	set(dk_exec_call 	${ARGV})
+	set(dk_exec_command	${ARGV})
+	
+	dk_getParameter(BASH_ENV REMOVE)
+	if(BASH_ENV)
+		dk_notice("#########################################################################")
+		dk_notice("dk_bashEnv SHOULD NOT BE USED!  take a look at how /_DKIMPORTS/openssl/DKINSTALL.cmake runs configure for Windows_X86_64_Clang from cmd.")
+		dk_notice("#########################################################################")
+		dk_pause()
+		return()
+	endif()
+	
 	dk_getParameterValues(COMMAND)
-	#list(REMOVE_ITEM cmd1 COMMAND)
-	
 	dk_getParameterValue(WORKING_DIRECTORY)
-	#list(REMOVE_ITEM cmd1 WORKING_DIRECTORY)
-	#list(REMOVE_ITEM cmd1 ${WORKING_DIRECTORY})
-	
 	dk_getParameterValue(TIMEOUT)
-	#list(REMOVE_ITEM cmd1 TIMEOUT)
-	#list(REMOVE_ITEM cmd1 ${TIMEOUT})
-	
 	dk_getParameterValue(RESULT_VARIABLE)
-	#list(REMOVE_ITEM cmd1 RESULT_VARIABLE)
-	#list(REMOVE_ITEM cmd1 ${RESULT_VARIABLE})
-	
 	dk_getParameterValue(RESULTS_VARIABLE)
-	#list(REMOVE_ITEM cmd1 RESULTS_VARIABLE)
-	#list(REMOVE_ITEM cmd1 ${RESULTS_VARIABLE})
-	
 	dk_getParameterValue(OUTPUT_VARIABLE)
-	#list(REMOVE_ITEM cmd1 OUTPUT_VARIABLE)
-	#list(REMOVE_ITEM cmd1 ${OUTPUT_VARIABLE})
-	
 	dk_getParameterValue(ERROR_VARIABLE)
-	#list(REMOVE_ITEM cmd1 ERROR_VARIABLE)
-	#list(REMOVE_ITEM cmd1 ${ERROR_VARIABLE})
-	
 	dk_getParameterValue(INPUT_FILE)
-	#list(REMOVE_ITEM cmd1 INPUT_FILE)
-	#list(REMOVE_ITEM cmd1 ${INPUT_FILE})
-	
 	dk_getParameterValue(OUTPUT_FILE)
-	#list(REMOVE_ITEM cmd1 OUTPUT_FILE)
-	#list(REMOVE_ITEM cmd1 ${OUTPUT_FILE})
-	
 	dk_getParameterValue(ERROR_FILE)
-	#list(REMOVE_ITEM cmd1 ERROR_FILE)
-	#list(REMOVE_ITEM cmd1 ${ERROR_FILE})
-	
 	dk_getParameter(OUTPUT_QUIET)
-	#list(REMOVE_ITEM cmd1 OUTPUT_QUIET)
-	
 	dk_getParameter(ERROR_QUIET)
-	#list(REMOVE_ITEM cmd1 ERROR_QUIET)
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
 		dk_getParameterValue(COMMAND_ECHO)
 	endif()
-	#list(REMOVE_ITEM cmd1 COMMAND_ECHO)
-	#list(REMOVE_ITEM cmd1 ${COMMAND_ECHO})
-	
 	dk_getParameter(OUTPUT_STRIP_TRAILING_WHITESPACE)
-	#list(REMOVE_ITEM cmd1 OUTPUT_STRIP_TRAILING_WHITESPACE)
-	
 	dk_getParameter(ERROR_STRIP_TRAILING_WHITESPACE)
-	#list(REMOVE_ITEM cmd1 ERROR_STRIP_TRAILING_WHITESPACE)
-	
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.8")
 		dk_getParameterValue(ENCODING)
 	endif()
-	#list(REMOVE_ITEM cmd1 ENCODING)
-	#list(REMOVE_ITEM cmd1 ${ENCODING})
-	
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")
 		dk_getParameter(ECHO_OUTPUT_VARIABLE)
 		dk_getParameter(ECHO_ERROR_VARIABLE)
 	endif()
-	#list(REMOVE_ITEM cmd1 ECHO_OUTPUT_VARIABLE)
-	#list(REMOVE_ITEM cmd1 ECHO_ERROR_VARIABLE)
-	
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.19")
 		dk_getParameterValue(COMMAND_ERROR_IS_FATAL)
 	endif()
-	#list(REMOVE_ITEM cmd1 COMMAND_ERROR_IS_FATAL)
-	#list(REMOVE_ITEM cmd1 ${COMMAND_ERROR_IS_FATAL})
 	
-	dk_getParameter(NO_HALT REMOVE)
-	#list(REMOVE_ITEM cmd1 NO_HALT)
-	
+	dk_getParameter(NO_HALT REMOVE)	
 	dk_getParameter(NOECHO  REMOVE)
-	#list(REMOVE_ITEM cmd1 NOECHO)
-
-
-
+	
+	dk_getParameter(NOMERGE REMOVE)
+	if(NOT NOMERGE)
+		dk_mergeFlags("${dk_exec_command}" dk_exec_command)
+	endif()
+	
 	if(NOT COMMAND)
-		list(INSERT ARGV 0 COMMAND)  # insert COMMAND if missing
+		list(INSERT dk_exec_command 0 COMMAND)  # insert COMMAND if missing
 	endif()
 	
 	if(WIN32)
 		dk_depend(cmd)
 		if(CMD_EXE)
-			if(NOT ARGV MATCHES "cmd;/c")		
-				list(INSERT ARGV 1 "cmd;/c") # add cmd /c if missing
+			if(NOT dk_exec_command MATCHES "cmd;/c")		
+				list(INSERT dk_exec_command 1 "cmd;/c") # add cmd /c if missing
 			endif()
 		endif()
 	endif()
@@ -149,158 +127,234 @@ function(dk_exec)
 		if(NOT PWD)
 			dk_chdir($ENV{DIGITALKNOB_DIR})
 		endif()
-		list(APPEND ARGV WORKING_DIRECTORY "${PWD}") # add WORKING_DIRECTORY if missing
+		list(APPEND dk_exec_command WORKING_DIRECTORY "${PWD}") # add WORKING_DIRECTORY if missing
 	endif()
 	
 	### TIMEOUT ###
 #	if(NOT TIMEOUT)
 #		set(TIMEOUT 5)
-#		list(APPEND ARGV TIMEOUT ${TIMEOUT})
+#		list(APPEND dk_exec_command TIMEOUT ${TIMEOUT})
 #	endif()
 	
 	### RESULT_VARIABLE ###
 	if(NOT RESULT_VARIABLE)
 		set(RESULT_VARIABLE result_variable)
-		list(APPEND ARGV RESULT_VARIABLE ${RESULT_VARIABLE})
+		list(APPEND dk_exec_command RESULT_VARIABLE ${RESULT_VARIABLE})
 	endif()
 	
 	### RESULTS_VARIABLE ###
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.10")
 		if(NOT RESULTS_VARIABLE)
 			set(RESULTS_VARIABLE results_variable)
-			list(APPEND ARGV RESULTS_VARIABLE ${RESULTS_VARIABLE})
+			list(APPEND dk_exec_command RESULTS_VARIABLE ${RESULTS_VARIABLE})
 		endif()
 	endif()
 	
 	### OUTPUT_VARIABLE ###
 	if(NOT OUTPUT_VARIABLE)
 		set(OUTPUT_VARIABLE output_variable)
-		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+		list(APPEND dk_exec_command OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	
 	### ERROR_VARIABLE ###
 	if(NOT ERROR_VARIABLE)
 		set(ERROR_VARIABLE error_variable)
-		list(APPEND ARGV ERROR_VARIABLE ${ERROR_VARIABLE})
+		list(APPEND dk_exec_command ERROR_VARIABLE ${ERROR_VARIABLE})
 	endif()
 	
 #	### INPUT_FILE ###
 #	if(NOT INPUT_FILE)
 #		set(INPUT_FILE input_file,txt)
-#		list(APPEND ARGV INPUT_FILE ${INPUT_FILE})
+#		list(APPEND dk_exec_command INPUT_FILE ${INPUT_FILE})
 #	endif()
 	
 #	### OUTPUT_FILE ###
 #	if(NOT OUTPUT_FILE)
 #		set(OUTPUT_FILE output_file.txt)
-#		list(APPEND ARGV OUTPUT_FILE ${OUTPUT_FILE})
+#		list(APPEND dk_exec_command OUTPUT_FILE ${OUTPUT_FILE})
 #	endif()
 	
 	### ERROR_FILE ###
 #	if(NOT ERROR_FILE)
 #		set(ERROR_FILE error_file.txt)
-#		list(APPEND ARGV ERROR_FILE ${ERROR_FILE})
+#		list(APPEND dk_exec_command ERROR_FILE ${ERROR_FILE})
 #	endif()
 	
 	### OUTPUT_QUIET ###
 #	if(NOT OUTPUT_QUIET)
-#		list(APPEND ARGV OUTPUT_QUIET)
+#		list(APPEND dk_exec_command OUTPUT_QUIET)
 #	endif()
 	
 	### ERROR_QUIET ###
 #	if(NOT ERROR_QUIET)
-#		list(APPEND ARGV ERROR_QUIET)
+#		list(APPEND dk_exec_command ERROR_QUIET)
 #	endif()
 	
-#	### COMMAND_ECHO ###
-#	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
-#		if(NOT COMMAND_ECHO)
-#			set(COMMAND_ECHO STDOUT)
-#			list(APPEND ARGV COMMAND_ECHO ${COMMAND_ECHO})
-#		endif()
-#	endif()
+	### COMMAND_ECHO ###
+	if("${dk_exec_ECHO}")
+		if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
+			if(NOT COMMAND_ECHO)
+				list(APPEND dk_exec_command COMMAND_ECHO ${dk_exec_ECHO})
+			endif()
+		else()
+			dk_error("COMMAND_ECHO requires CMake version 3.15+")
+		endif()
+	endif()
 	
 	### OUTPUT_STRIP_TRAILING_WHITESPACE ###
 	if(NOT OUTPUT_STRIP_TRAILING_WHITESPACE)
-		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
+		list(APPEND dk_exec_command OUTPUT_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
 	### ERROR_STRIP_TRAILING_WHITESPACE ###
 	if(NOT ERROR_STRIP_TRAILING_WHITESPACE)
-		list(APPEND ARGV ERROR_STRIP_TRAILING_WHITESPACE)
+		list(APPEND dk_exec_command ERROR_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
 	### ENCODING ###
-#	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.8")
-#		if(NOT ENCODING)
-#			list(APPEND ARGV ENCODING UTF-8)
-#		endif()
-#	endif()
+	if("${dk_exec_ENCODING}")
+		if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.8")
+			if(NOT ENCODING)
+				list(APPEND dk_exec_command ENCODING ${dk_exec_ENCODING})
+			endif()
+		else()
+			dk_error("ECHO_OUTPUT_VARIABLE requires CMake version 3.8+")
+		endif()
+	endif()
 	
 	### ECHO_OUTPUT_VARIABLE ###
-	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")
-		if(NOT ECHO_OUTPUT_VARIABLE)
-			list(APPEND ARGV ECHO_OUTPUT_VARIABLE)
+	if("${dk_exec_ECHO_OUTPUT}" EQUAL 1)
+		if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")
+			if(NOT ECHO_OUTPUT_VARIABLE)
+				list(APPEND dk_exec_command ECHO_OUTPUT_VARIABLE)
+			endif()
+		else()
+			dk_error("ECHO_OUTPUT_VARIABLE requires CMake version 3.18+")
 		endif()
 	endif()
 	
 	### ECHO_ERROR_VARIABLE ###
-	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")
-		if(NOT ECHO_ERROR_VARIABLE)
-			list(APPEND ARGV ECHO_ERROR_VARIABLE)
+	if("${dk_exec_ECHO_ERROR}" EQUAL 1)
+		if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")
+			if(NOT ECHO_ERROR_VARIABLE)
+				list(APPEND dk_exec_command ECHO_ERROR_VARIABLE)
+			endif()
+		else()
+			dk_error("ECHO_ERROR_VARIABLE requires CMake version 3.18+")
 		endif()
 	endif()
 	
 	### COMMAND_ERROR_IS_FATAL ###
-	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.19")
-		if(NOT COMMAND_ERROR_IS_FATAL)
-	#		list(APPEND ARGV COMMAND_ERROR_IS_FATAL ANY)
+	if("${dk_exec_ERROR_IS_FATAL}")
+		if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.19")
+			if(NOT COMMAND_ERROR_IS_FATAL)
+				list(APPEND dk_exec_command COMMAND_ERROR_IS_FATAL ${dk_exec_ERROR_IS_FATAL})
+			endif()
+		else()
+			dk_error("COMMAND_ERROR_IS_FATAL requires CMake version 3.19+")
 		endif()
 	endif()
 	
-	###################################################
 	
-	dk_reparseCmakeCommand(ARGV) # support longer command lines
+	###################################################################################################
 	
-#	if(NOT NOECHO)
-#		dk_replaceAll("${ARGV}"  ";"  " "  cmd1)	
-#		dk_echo("${lblue}command> ${lcyan}${cmd1}${clr}")
-#	endif()
-
-	dk_echo("${lblue}dk_exec> ${lcyan}${ARGV}${clr}")
-	execute_process(${ARGV})
+	dk_reparseCmakeCommand(dk_exec_command) # support longer command lines
+	
+	if("${dk_exec_PRINT_CALL}" EQUAL 1)
+		#if(NOT "${dk_exec_call}" STREQUAL "")
+			dk_echo("${lblue}dk_exec_call${clr}     = '${dk_exec_call}'")
+		#endif()
+	endif()
+	
+	if("${dk_exec_PRINT_COMMAND}" EQUAL 1)
+		#if(NOT "${dk_exec_command}" STREQUAL "")
+			dk_echo("${lblue}dk_exec_command${clr}  = '${dk_exec_command}'")
+		#endif()
+	endif()
+	
+	execute_process(${dk_exec_command})
 	
 #	if(NOT ${result_variable} EQUAL 0)
 		dk_sleep(1) # wait 1 second1 for the stdout to flush before printing
-		if(${RESULT_VARIABLE})
-			dk_info("${${RESULT_VARIABLE}}")
-		endif()
-		if(${RESULTS_VARIABLE})
-			dk_info("${${RESULTS_VARIABLE}}")
-		endif()
+#		if(${RESULT_VARIABLE})
+#			dk_info("${${RESULT_VARIABLE}}")
+#		endif()
+#		if(${RESULTS_VARIABLE})
+#			dk_info("${${RESULTS_VARIABLE}}")
+#		endif()
 #		if(${OUTPUT_VARIABLE})
 #			dk_info("${${OUTPUT_VARIABLE}}")
 #		endif()
-		if(${ERROR_VARIABLE})
-			dk_info("${${ERROR_VARIABLE}}")
-		endif()
-		if(${${RESULT_VARIABLE}})
-			dk_fatal("${${RESULT_VARIABLE}}" ${NO_HALT})
-		endif()
+#		if(${ERROR_VARIABLE})
+#			dk_info("${${ERROR_VARIABLE}}")
+#		endif()
+#		if(${${RESULT_VARIABLE}})
+#			dk_fatal("${${RESULT_VARIABLE}}" ${NO_HALT})
+#		endif()
 #	else()
 	
+	set(dk_exec_exitcode	${${RESULT_VARIABLE}})
+	set(dk_exec_exitcodes	${${RESULTS_VARIABLE}})
+	set(dk_exec_stderr		${${ERROR_VARIABLE}})
+	set(dk_exec_stdout		${${OUTPUT_VARIABLE}})	
+	### process the return value ###
+	string(FIND "${dk_exec_stdout}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
+	if(last_newline_pos GREATER -1)
+		string(SUBSTRING "${dk_exec_stdout}" ${last_newline_pos} -1 dk_exec) # Extract the last line
+	else()
+		set(dk_exec ${dk_exec_stdout})
+	endif()
+	string(STRIP "${dk_exec}" dk_exec)
+	
+	set(dk_exec_call		${dk_exec_call}			PARENT_SCOPE)
+	set(dk_exec_command		${dk_exec_command}		PARENT_SCOPE)
+	set(dk_exec_exitcode	${dk_exec_exitcode}		PARENT_SCOPE)
+	set(dk_exec_exitcodes	${dk_exec_exitcodes}	PARENT_SCOPE)
+	set(dk_exec_stderr		${dk_exec_stderr}		PARENT_SCOPE)
+	set(dk_exec_stdout		${dk_exec_stdout}		PARENT_SCOPE)
+	set(dk_exec				${dk_exec}				PARENT_SCOPE)
+	
 	if(${RESULT_VARIABLE})
-		set(${RESULT_VARIABLE}  ${${RESULT_VARIABLE}}  PARENT_SCOPE)
+		set(${RESULT_VARIABLE}  ${dk_exec_exitcode}		PARENT_SCOPE)
 	endif()
 	if(${RESULTS_VARIABLE})
-		set(${RESULTS_VARIABLE} ${${RESULTS_VARIABLE}} PARENT_SCOPE)
-	endif()
-	if(${OUTPUT_VARIABLE})
-		set(${OUTPUT_VARIABLE}  ${${OUTPUT_VARIABLE}}  PARENT_SCOPE)
-		set(dk_exec ${${OUTPUT_VARIABLE}}  PARENT_SCOPE)
+		set(${RESULTS_VARIABLE} ${dk_exec_exitcodes}	PARENT_SCOPE)
 	endif()
 	if(${ERROR_VARIABLE})
-		set(${ERROR_VARIABLE}   ${${ERROR_VARIABLE}}   PARENT_SCOPE)
+		set(${ERROR_VARIABLE}   ${dk_exec_stderr}		PARENT_SCOPE)
+	endif()
+	if(${OUTPUT_VARIABLE})
+		set(${OUTPUT_VARIABLE}  ${dk_exec_stdout}		PARENT_SCOPE)
+	endif()
+#	if(${OUTPUT})
+#		set(${OUTPUT}  			${dk_exec}				PARENT_SCOPE)
+#	endif()
+	
+	
+	if("${dk_exec_PRINT_EXITCODE}" EQUAL 1)
+		#if(NOT "${dk_exec_exitcode}" STREQUAL "")
+			dk_echo("${lblue}dk_exec_exitcode${clr} = '${dk_exec_exitcode}'")
+		#endif
+	endif()
+	if("${dk_exec_PRINT_EXITCODES}" EQUAL 1)
+		#if(NOT "${dk_exec_exitcodes}" STREQUAL "")
+			dk_echo("${lblue}dk_exec_exitcodes${clr} = '${dk_exec_exitcodes}'")
+		#endif()
+	endif()
+	if("${dk_exec_PRINT_STDERR}" EQUAL 1)
+		#if(NOT "${dk_exec_stderr}" STREQUAL "")
+			dk_echo("${lblue}dk_exec_stderr${clr}   = '${dk_exec_stderr}'")
+		#endif()
+	endif()
+	if("${dk_exec_PRINT_STDOUT}" EQUAL 1)
+		#if(NOT "${dk_exec_stdout}" STREQUAL "")
+			dk_echo("${lblue}dk_exec_stdout${clr}   = '${dk_exec_stdout}'")
+		#endif()
+	endif()
+	if("${dk_exec_PRINT_OUTPUT}" EQUAL 1)
+		#if(NOT "${dk_exec}" STREQUAL "")
+			dk_echo("${lblue}dk_exec${clr}          = '${dk_exec}'")
+		#endif()
 	endif()
 endfunction()
 
@@ -312,5 +366,17 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_exec(echo "Hello World" ERROR_VARIABLE test_error OUTPUT_VARIABLE test_output)
+#	dk_exec(echo "Hello World")
+#	dk_exec(dir)
+#	dk_exec(where curl)
+	dk_exec(where curl OUTPUT_VARIABLE CURL_EXE)
+	dk_echo("CURL_EXE          = ${CURL_EXE}")
+
+	dk_echo("dk_exec_call      = ${dk_exec_call}")
+	dk_echo("dk_exec_command   = ${dk_exec_command}")
+	dk_echo("dk_exec_exitcodes = ${dk_exec_exitcodes}")
+	dk_echo("dk_exec_exitcode  = ${dk_exec_exitcode}")
+	dk_echo("dk_exec_stderr    = ${dk_exec_stderr}")
+	dk_echo("dk_exec_stdout    = ${dk_exec_stdout}")
+	dk_echo("dk_exec           = ${dk_exec}")
 endfunction()

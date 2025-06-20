@@ -18,8 +18,9 @@ include_guard()
 # https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command
 # https://learn.microsoft.com/en-us/windows/wsl/install-manual
 
-
-#Windows_Host_dk_command(wsl --install)
+#if(Windows_Host)
+#	dk_exec(wsl --install)
+#endif()
 
 if(EXISTS "${WSL_EXE}")
 	dk_return()

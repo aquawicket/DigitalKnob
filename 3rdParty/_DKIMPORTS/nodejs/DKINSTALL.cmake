@@ -32,4 +32,4 @@ dk_set(NPM_EXE ${NODEJS_DIR}/npm.cmd)
 #dk_nativePath(${NODE_EXE} NODE_EXE_WINPATH)
 #dk_setEnv("PATH" "${NODEJS_DIR}")
 
-#dk_command(${NPM_EXE} install --save glob -g)
+#dk_exec(${NPM_EXE} install --save glob -g)

@@ -36,7 +36,7 @@ if(Linux OR Raspberry)
 	else()
 		### INSTALL ###
 		if(TINYCORE)
-			#dk_command(tce-load -wi libX11-dev.tcz)
+			#dk_exec(tce-load -wi libX11-dev.tcz)
 			dk_installPackage(libX11-dev.tcz)
 		else()
 			dk_installPackage(libx11-dev)
