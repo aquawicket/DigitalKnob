@@ -33,5 +33,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_firewallAllow("CMake-Gui" "C:/Users/Administrator/DigitalKnob/DKTools/cmake-3.29.5-windows-x86_64/bin/cmake-gui.exe")
+	dk_firewallAllow("CURL_EXE" "C:/Windows/System32/curl.exe")
 endfunction()

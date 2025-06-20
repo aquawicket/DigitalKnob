@@ -11,12 +11,11 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-if(NOT DEFINED dk_callDKBatch_PRINT_COMMAND)
-	dk_set(dk_callDKBatch_PRINT_COMMAND 0)
-endif()
-if(NOT DEFINED dk_callDKBatch_PRINT_OUTPUT)
-	dk_set(dk_callDKBatch_PRINT_OUTPUT 0)
-endif()
+#########################################################################
+#dk_set(dk_callDKBatch_PRINT_COMMAND 1)
+dk_set(dk_callDKBatch_PRINT_CALL 1)
+dk_set(dk_callDKBatch_PRINT_OUTPUT 1)
+dk_set(dk_callDKBatch_PRINT_RESULT 1)
 #########################################################################
 # dk_callDKBatch(<func>, <args...>)
 #
@@ -25,44 +24,51 @@ endif()
 function(dk_callDKBatch func)
 	dk_debugFunc(1 99)
 
-	#set(func "${ARGV0}")
 	set(args ${ARGN})
 	#dk_replaceAll("${args}" "(" "#40" args)
 	#dk_replaceAll("${args}" ")" "#41" args)
 
-	### get ALL_BUT_FIRST_ARGS ###
-	#set(ALL_BUT_FIRST_ARGS                  ${ARGN})
-	### get LAST_ARG ###
-	#list(GET ARGN -1 LAST_ARG)
+#	if("${dk_callDKBatch_PRINT_OUTPUT}" EQUAL 1)
+#		set(ECHO_OUTPUT_VARIABLE "ECHO_OUTPUT_VARIABLE")
+#	endif()
 
-	if(${dk_callDKBatch_PRINT_OUTPUT} EQUAL 1)
-		set(ECHO_OUTPUT_VARIABLE "ECHO_OUTPUT_VARIABLE")
-	endif()
-
-	### Call DKBatch function ###
 	dk_validate(CMD_EXE 					"dk_CMD_EXE()")
 	dk_validate(DKBATCH_FUNCTIONS_DIR_		"dk_DKBRANCH_DIR()")
-	set(DKBATCH_COMMAND ${CMD_EXE} /V:ON /c ${DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
+	set(dk_callDKBatch_COMMAND ${CMD_EXE} /V:ON /c ${DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
 
 	if("${dk_callDKBatch_PRINT_COMMAND}" EQUAL 1)
-		message("DKBATCH_COMMAND = '${DKBATCH_COMMAND}'")
+		dk_echo("${lblue}dk_callDKBatch_COMMAND${clr} = '${dk_callDKBatch_COMMAND}'")
+	endif()
+	if("${dk_callDKBatch_PRINT_CALL}" EQUAL 1)
+		set(dk_callDKBatch_CALL "${func}(${args})")
+		dk_echo("${lblue}dk_callDKBatch_CALL${clr} = '${dk_callDKBatch_CALL}'")
 	endif()
 
-	### FIXME ###
-	message("\n${DKBATCH_COMMAND}\n")
-	execute_process(COMMAND ${DKBATCH_COMMAND} OUTPUT_VARIABLE output_variable ECHO_OUTPUT_VARIABLE RESULT_VARIABLE result_variable WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
+	execute_process(COMMAND 
+		${dk_callDKBatch_COMMAND} 
+		OUTPUT_VARIABLE dk_callDKBatch_OUTPUT 
+		RESULT_VARIABLE dk_callDKBatch_RESULT 
+		WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" 
+		OUTPUT_STRIP_TRAILING_WHITESPACE
+	)
 	
 	### process the return value ###
-	string(FIND "${output_variable}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
+	string(FIND "${dk_callDKBatch_OUTPUT}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
 	if(last_newline_pos GREATER -1)
-		string(SUBSTRING "${output_variable}" ${last_newline_pos} -1 output_variable) # Extract the last line
+		string(SUBSTRING "${dk_callDKBatch_OUTPUT}" ${last_newline_pos} -1 dk_callDKBatch_OUTPUT) # Extract the last line
 	endif()
-	string(STRIP "${output_variable}" output_variable)
+	string(STRIP "${dk_callDKBatch_OUTPUT}" dk_callDKBatch_OUTPUT)
 
-	message("        command = ${DKBATCH_COMMAND}\n")
-	message("output_variable = ${output_variable}")
-	message("result_variable = ${result_variable}")
-	set(dk_callDKBatch "${output_variable}" PARENT_SCOPE)
+	if("${dk_callDKBatch_PRINT_RESULT}" EQUAL 1)
+		dk_echo("${lblue}dk_callDKBatch_RESULT${clr}  = '${dk_callDKBatch_RESULT}'")
+	endif()
+	if("${dk_callDKBatch_PRINT_OUTPUT}" EQUAL 1)
+		if(NOT "${dk_callDKBatch_OUTPUT}" STREQUAL "!${func}!")
+			dk_echo("${lblue}dk_callDKBatch_OUTPUT${clr}  = '${dk_callDKBatch_OUTPUT}'")
+		endif()
+	endif()
+	
+	set(dk_callDKBatch "${dk_callDKBatch_OUTPUT}" PARENT_SCOPE)
 endfunction()
 
 
@@ -74,12 +80,6 @@ endfunction()
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
 	dk_debugFunc(0)
-
-	#execute_process(COMMAND ${CMD_EXE} /c echo "Hello World" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE)
-	#dk_echo("output = ${output}")
-
-	#execute_process(COMMAND ${CMD_EXE} /V:ON /c "set /p input=& echo !input!" OUTPUT_VARIABLE input)
-	#dk_echo("input = ${input}")
 
 	dk_callDKBatch(dk_test "abc" "1 2 4")
 	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
@@ -97,7 +97,8 @@ function(DKTEST)
 	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 
 	#dk_callDKBatch(dk_firewallAllow "Edrum Monitor" "$ENV{SystemDrive}/ProgramFiles (x86)/Edrum Monitor/EdrumMon.exe")
+	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 
 	#dk_callDKBatch(dk_registryKeyExists rtn_var "HKEY_LOCAL_MACHINE/Software/Microsoft/Windows/CurrentVersion/Uninstall/QEMU")
-	#dk_echo("rtn_var = ${rtn_var}")
+	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 endfunction()

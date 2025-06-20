@@ -28,9 +28,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if "%dk_firewallAllow_WARNINGS%" equ "1" (
 			%dk_call% dk_notice "registry already contains a firewall rule for '%_file_%'"
 		)
-		rem exit /b 0
 		%return%
-	) || (echo not found)
+	)
 
 	%dk_call% dk_notice "Adding firewall allow rule for %_file_% . . ."
 	
