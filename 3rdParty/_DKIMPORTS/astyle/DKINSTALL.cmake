@@ -20,7 +20,7 @@ include_guard()
 
 ### IMPORT ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${ASTYLE_IMPORT})
+dk_import			(${astyle_IMPORT})
 
 ### LINK ###
 dk_validate			(Target_Tuple "dk_Target_Tuple()")

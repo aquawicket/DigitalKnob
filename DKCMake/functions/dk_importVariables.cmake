@@ -437,13 +437,13 @@ function(dk_importVariables)
 	##############################################
 	###### Print the current plugin to the window title bar ######
 	if(NOT DEFINED ENV{CURRENT_PLUGIN})
-		dk_envList(PLUGIN PUSH "${PLUGIN_IMPORT_NAME_UPPER}")
-		#dk_set(CURRENT_PLUGIN "${PLUGIN_IMPORT_NAME_UPPER}")
+		#dk_envList(PLUGIN PUSH "${PLUGIN_IMPORT_NAME_UPPER}")
+		dk_envList(PLUGIN PUSH "${PLUGIN_IMPORT_NAME}")
 	endif()
 	dk_set(CURRENT_PLUGIN "$ENV{CURRENT_PLUGIN}")
 	dk_assertVar(CURRENT_PLUGIN)
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(CURRENT_PLUGIN)	
+		dk_printVar(CURRENT_PLUGIN)
 	endif()
 	
 	message("############# ${CURRENT_PLUGIN}_VARIABLES #############")
