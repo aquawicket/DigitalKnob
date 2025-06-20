@@ -1,9 +1,3 @@
-########################################################################################
-# Remove these lines and rename all instaces of _TEMPLATE-APP_ to the name of your app
-dk_undepend(_TEMPLATE-APP_)
-dk_return()
-########################################################################################
-
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
@@ -18,19 +12,19 @@ include_guard()
 #########################################################################
 
 
-###### __app_name__ ######
-# http://www.app.com
-# http://www.app.com/downloads/app-1.0.exe
+###### TEMPLATE ######
+# http://www.TEMPLATE.com
 
 ### DEPENDS ###
 #dk_depend(depend_name)
 
 ### INSTALL ###
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${__APP_NAME__})
+dk_import		(${TEMPLATE})
 
 
-#											Single Config									MULTI_CONFIG
+#											Single Config										MULTI_CONFIG
+#----------------------------------------------------------------------------------------------------------------------------
 #	   Target_Config  =			                  Windows_X86_64/Debug								  Windows_X86_64
 #       Target_Build  =			                  Windows_X86_64/Debug								  Windows_X86_64/Debug
 #   MYLIB_CONFIG_DIR  =		....3rdParty/myLib-13/Windows_X86_64/Debug			....3rdParty/myLib-13/Windows_X86_64

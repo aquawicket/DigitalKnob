@@ -1,3 +1,6 @@
+############ TEMPLATE ############
+# http://www.TEMPLACE.com
+
 TEMPLATE_Android_Arm32_Import=
 TEMPLATE_Android_Arm64_Import=
 TEMPLATE_Android_X86_Import=

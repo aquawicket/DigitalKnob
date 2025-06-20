@@ -1,3 +1,0 @@
-### DKUNINSTALL.sh ###
-
-# TODO

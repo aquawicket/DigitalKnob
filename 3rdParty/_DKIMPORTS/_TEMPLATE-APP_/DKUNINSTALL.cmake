@@ -12,10 +12,10 @@ include_guard()
 #########################################################################
 
 
-###### ventoy ######
-# https://www.<PACKAGE_NAME>.com
+###### TEMPLATE ######
+# https://www.TEMPLATE.com
 
-### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${<PACKAGE_NAME>_IMPORT} NAME <package_name>)
-dk_delete			("${<PACKAGE_NAME>}")
+dk_importVariables	(${TEMPLATE_Iport})
+dk_assertVar		(TEMPLATE)
+dk_delete			("${TEMPLATE}")
