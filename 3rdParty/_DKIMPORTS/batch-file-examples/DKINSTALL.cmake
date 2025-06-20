@@ -13,8 +13,8 @@ include_guard()
 
 
 ###### batch-file-examples ######
-# https://github.com/Archive-projects/Batch-File-examples/archive/refs/heads/master.zip
+# https://github.com/Archive-projects/Batch-File-examples
 
 ### INSTALL ###
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${BATCH-FILE-EXAMPLES_IMPORT} NAME batch-file-examples)
+dk_import		(${batch-file-examples_IMPORT})

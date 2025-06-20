@@ -2,3 +2,4 @@
 # https://wiki.debian.org/Alien
 # Alien converts an RPM package file into a Debian package file or Alien can install an RPM file directly. 
 
+alien_Import=alien

@@ -16,5 +16,5 @@ include_guard()
 # https://github.com/apache/ant.git
 
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${ANT_IMPORT} NAME ant)
+dk_importVariables	(${ant_Import} NAME ant)
 dk_delete			("${ANT}")
