@@ -164,7 +164,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if "%DKSCRIPT_DIR:~-1%" equ "/"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%")
 	if not exist "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit -1)
 	
-	cd "%DKSCRIPT_DIR%"
+	::cd "%DKSCRIPT_DIR%"
 %endfunction%
 
 ::##################################################################################
@@ -198,9 +198,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if not defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
 	if defined DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
 ::	if defined DKSCRIPT_PATH		(call :readlink %DKSCRIPT_PATH% DKSCRIPT_PATH)
-	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist & exit /b -1)
-	
-	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
+	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist & pause & exit -1)
 %endfunction%
 
 ::##################################################################################
@@ -211,10 +209,9 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"			%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd')"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd')"
-	
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd" 		-o "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd" 				-o "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd" 	-o "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"
 %endfunction%
@@ -250,7 +247,6 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 		pause >nul
 	)
 	exit %exit_code%
-
 	::( >NUL reg delete HKCU/Console/DigitalKnob /f )
 %endfunction%
 

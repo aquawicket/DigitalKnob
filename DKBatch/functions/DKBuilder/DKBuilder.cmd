@@ -1,12 +1,9 @@
 @echo off
 
-::set "dk_firewallAllow_DISABLE=1"
-
 :MAIN
 setlocal enableDelayedExpansion
-if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
+if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 
-	set "ENABLE_dk_debug=1"
 	if not defined DIGITALKNOB (set "DIGITALKNOB=DigitalKnob")
 	if not defined DKBRANCH (set "DKBRANCH=Development")
 	if not defined HDK (set "HDK=https://raw.githubusercontent.com/aquawicket/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/DK.cmd")
@@ -14,11 +11,12 @@ if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
 	set "DK=%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
-	::###### TEMPORARY #######
+	::###### TEMPORARY for WinPE #######
 	if "%SystemDrive%" equ "X:" (
-		if not exist "%windir:\=/%/System32/curl.exe" 		(copy "C:\Windows\System32\curl.exe"		"%windir%\System32\curl.exe")
-		if not exist "%windir:\=/%/System32/certutil.exe" 	(copy "C:\Windows\System32\certutil.exe" 	"%windir%\System32\certutil.exe")
+		if not exist "%windir%\System32\curl.exe" 		(copy "C:\Windows\System32\curl.exe"		"%windir%\System32\curl.exe")
+		if not exist "%windir%\System32\certutil.exe" 	(copy "C:\Windows\System32\certutil.exe" 	"%windir%\System32\certutil.exe")
 	)
+	
 	::########################
 	set "CURL_EXE=%windir:\=/%/System32/curl.exe"
 	set "CERTUTIL_EXE=%windir:\=/%/System32/certutil.exe"
@@ -45,21 +43,21 @@ if "!Dummy!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 
 	::takeown /F %DKF% /R /D "Y"
 	%dk_call% DKBuilder/main.cmd
-exit /b %errorlevel%
+	
+::exit /b %errorlevel%
+%endfunction%
 
 
-:dk_registryContains
+:dk_registryContains regpath value
 setlocal enableDelayedExpansion
-	for /f "usebackq delims=" %%a in (`reg query %~1`) do (
-		set "str=%%a"
+	for /f "usebackq delims=" %%G in (`reg query %~1`) do (
+		set "str=%%G"
 		if "x!str:%~2=!x" neq "x!str!x" (exit /b 0)
 	)
     exit /b 1
 %endfunction%
 
-
-:dk_firewallAllow
-if "%dk_firewallAllow_DISABLE%" equ 1 (exit /b 0)
+:dk_firewallAllow name file
 setlocal enableDelayedExpansion
 	set "_name_=%~1"
 	set "_file_=%~2"
@@ -68,13 +66,7 @@ setlocal enableDelayedExpansion
 	netsh advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_:/=\%" enable=yes profile=any 1>nul 2>nul
 	netsh advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any 1>nul 2>nul
 	::###### Windows Firewall Control ######
-	if not exist "%WFC_EXE%" 	(set "WFC_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfc.exe")
-	if not exist "%WFCUI_EXE%" 	(set "WFCUI_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfcUI.exe")
-	if exist "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
-	if exist "%WFCUI_EXE%"		(set "WFC_APP=%WFCUI_EXE%")
-	if exist "%WFC_APP%"		(set cmnd="%WFC_APP%" -allow "%_file_:/=\%")
-	if not exist "%CMD_EXE%"	(set "CMD_EXE=%ComSpec%")
-	if not exist "%CMD_EXE%"	(%dk_call% dk_error "CMD_EXE is invalid")
-	::echo cmnd ^> "%CMD_EXE%" /c "%cmnd%"
-	"%CMD_EXE%" /c "%cmnd%"
+	if exist "%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe" (set "WFC_APP=%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe")
+	if exist "%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe" (set "WFC_APP=%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe")
+	if exist "%WFC_APP%" ("%ComSpec%" /c "%WFC_APP%" -allow "%_file_:/=\%")
 %endfunction%
