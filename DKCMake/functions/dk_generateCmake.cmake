@@ -112,9 +112,6 @@ function(dk_generateCmake plugin_name)
 	dk_if(Android			"dk_libRelease(${Plugin_Path}/${Target_Tuple}/${Release_Dir}/lib${plugin_name}.a)")
 	dk_if(Emscripten		"dk_libDebug(${Plugin_Path}/${Target_Tuple}/${Debug_Dir}/lib${plugin_name}.a)")
 	dk_if(Emscripten		"dk_libRelease(${Plugin_Path}/${Target_Tuple}/${Release_Dir}/lib${plugin_name}.a)")
-	if(REBUILD OR REBUILDALL)
-		dk_set(QUEUE_BUILD ON)
-	endif()
 
 	dk_verbose("dk_append(DKPLUGIN_LIST ${plugin_name})  #Add to list")
 	dk_append(DKPLUGIN_LIST ${plugin_name})  #Add to list

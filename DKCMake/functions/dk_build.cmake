@@ -40,10 +40,6 @@ function(dk_build path) #target NO_HALT
 		endif()
 	#endif()
 	
-	if(NOT QUEUE_BUILD)
-		dk_return()
-	endif()
-	
 	dk_getParameter(NO_HALT)
 
 	#dk_assertPath(${path})	

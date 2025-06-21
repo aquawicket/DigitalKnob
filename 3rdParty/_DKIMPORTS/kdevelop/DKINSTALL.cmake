@@ -25,5 +25,5 @@ endif()
 dk_import(https://download.kde.org/stable/kdevelop/5.6.1/bin/linux/KDevelop-5.6.1-x86_64.AppImage)
 
 ### INSTALL ###
-dk_queueCommand(chmod 777 ${KDEVELOP}/KDevelop-5.6.1-x86_64.AppImage)
-dk_queueCommand(${KDEVELOP}/KDevelop-5.6.1-x86_64.AppImage)
+dk_exec(chmod 777 ${KDEVELOP}/KDevelop-5.6.1-x86_64.AppImage)
+dk_exec(${KDEVELOP}/KDevelop-5.6.1-x86_64.AppImage)

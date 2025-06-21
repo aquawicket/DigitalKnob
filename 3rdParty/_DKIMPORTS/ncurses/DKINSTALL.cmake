@@ -36,10 +36,10 @@ dk_libDebug			(${NCURSES_DEBUG_DIR}/lib/libncurses.a)
 dk_libRelease		(${NCURSES_RELEASE_DIR}/lib/libncurses.a)
 
 
-#DEBUG_dk_chdir			(${NCURSES_DEBUG_DIR})
-#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-#RELEASE_dk_chdir		(${NCURSES_RELEASE_DIR})
-#RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-dk_configure			(${NCURSES})
+#DEBUG_dk_chdir		(${NCURSES_DEBUG_DIR})
+#DEBUG_dk_exec		(${DKCONFIGURE_BUILD})
+#RELEASE_dk_chdir	(${NCURSES_RELEASE_DIR})
+#RELEASE_dk_exec	(${DKCONFIGURE_BUILD})
+dk_configure		(${NCURSES})
 
-dk_build				(${NCURSES}) # ncurses)
+dk_build			(${NCURSES}) # ncurses)

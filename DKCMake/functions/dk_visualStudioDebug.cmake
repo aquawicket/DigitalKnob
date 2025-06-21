@@ -37,7 +37,7 @@ function(dk_visualStudioDebug path) #target #arch
 		dk_fatal("extension does not equal .sln")
 	endif()
 	
-	if(Debug AND QUEUE_BUILD)
+	if(Debug)
 		if(NOT EXISTS ${path}/${Target_Tuple}/${sln_file})
 			dk_fatal("CANNOT FIND: ${path}/${Target_Tuple}/${sln_file}" )
 		endif()

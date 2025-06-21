@@ -86,7 +86,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		
 		#### Execute the Cmake configure command ####
 		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
-		dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)
+		dk_exec(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		
 
@@ -105,10 +105,10 @@ function(dk_configure SOURCE_DIR) #ARGN
 		if(EXISTS ${SOURCE_DIR}/configure)
 			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 				dk_depend(bash)
-				dk_queueCommand(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}" OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)# ECHO_OUTPUT_VARIABLE)
+				dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}" OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)# ECHO_OUTPUT_VARIABLE)
 				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 			else()
-				dk_queueCommand(../../configure ${DKCONFIGURE_FLAGS} ${ARGN} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)# ECHO_OUTPUT_VARIABLE)
+				dk_exec(../../configure ${DKCONFIGURE_FLAGS} ${ARGN} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)# ECHO_OUTPUT_VARIABLE)
 				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 			endif()
 		else()
@@ -117,16 +117,16 @@ function(dk_configure SOURCE_DIR) #ARGN
 		
 	
 	###### configure with provided commands ######
-	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
+	# No Specific configure type. Just pass the arguments to dk_exec to run
 	else()
 		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
 		
 		#f(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
-		#	dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+		#	dk_exec(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 		#	dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		#else()
-			dk_queueCommand(${ARGN} OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+			dk_exec(${ARGN} OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		#endif()
 	endif()

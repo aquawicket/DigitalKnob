@@ -13,7 +13,6 @@ include_guard()
 
 
 ############ DKRestart ############
-dk_set(QUEUE_BUILD ON)
 dk_executable(DKRestart)
 
 if(Windows)

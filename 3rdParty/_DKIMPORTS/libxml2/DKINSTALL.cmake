@@ -81,7 +81,7 @@ dk_set(LIBXML2_CMAKE
 
 ### GENERATE ###
 #if(NOT EXISTS ${LIBXML2}/configure)
-#	dk_queueCommand(../../autogen.sh)
+#	dk_exec(../../autogen.sh)
 	#--with-c14n             Canonical XML 1.0 support (on)
 	#--with-catalog          XML Catalogs support (on)
 	#--with-debug            debugging module and shell (on)
@@ -125,7 +125,7 @@ dk_set(LIBXML2_CMAKE
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-##Apple_dk_queueCommand(${DKCONFIGURE_BUILD})
+##Apple_dk_exec(${DKCONFIGURE_BUILD})
 #Apple_dk_configure(${LIBXML2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
@@ -133,14 +133,14 @@ dk_set(LIBXML2_CMAKE
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-##Emscripten_dk_queueCommand(${DKCONFIGURE_BUILD})
+##Emscripten_dk_exec(${DKCONFIGURE_BUILD})
 #E#MSCRIPTEN_dk_configure(${LIBXML2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-##Linux_dk_queueCommand(${DKCONFIGURE_BUILD} --with-python=no)
+##Linux_dk_exec(${DKCONFIGURE_BUILD} --with-python=no)
 #Linux_dk_configure(${LIBXML2} 
 #	-DLIBXML2_WITH_PYTHON=OFF 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
@@ -148,14 +148,14 @@ dk_set(LIBXML2_CMAKE
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-##Raspberry_dk_queueCommand(${DKCONFIGURE_BUILD})
+##Raspberry_dk_exec(${DKCONFIGURE_BUILD})
 #Raspberry_dk_configure(${LIBXML2}
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
-#Windows_dk_queueCommand(${DKCONFIGURE_BUILD})
+#Windows_dk_exec(${DKCONFIGURE_BUILD})
 dk_configure(${LIBXML2} 
 	-DLIBXML2_WITH_C14N=ON					# Add the Canonicalization support ON
 	-DLIBXML2_WITH_CATALOG=ON				# Add the Catalog support ON

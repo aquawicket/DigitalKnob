@@ -55,10 +55,10 @@ dk_replaceAll("${DKCMAKE_BUILD}" "-std=c++1z" ""  DKCMAKE_BUILD)
 dk_replaceAll("${DKCMAKE_BUILD}" "  "         " " DKCMAKE_BUILD)
 
 if(MSVC)
-	#dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE})
+	#dk_exec(${DKCMAKE_BUILD} ${SDL_CMAKE})
 	dk_configure(${SMPEG2_DIR} ${SDL_CMAKE})
 else()
-	#dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} -DCMAKE_CXX_FLAGS=-Wno-narrowing)
+	#dk_exec(${DKCMAKE_BUILD} ${SDL_CMAKE} -DCMAKE_CXX_FLAGS=-Wno-narrowing)
 	dk_configure(${SMPEG2_DIR} ${SDL_CMAKE} -DCMAKE_CXX_FLAGS=-Wno-narrowing)
 endif()
 

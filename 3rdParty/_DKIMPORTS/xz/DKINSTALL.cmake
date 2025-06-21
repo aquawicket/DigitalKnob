@@ -133,35 +133,35 @@ Windows_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DL
 
 ### GENERATE / COMPILE ###
 Android_dk_chdir				(${XZ}/${Target_Tuple})
-Android_dk_queueCommand			(${DKCMAKE_BUILD} ${XZ})
+Android_dk_exec					(${DKCMAKE_BUILD} ${XZ})
 Android_dk_visualStudio			(${XZ} liblzma)
 
 dk_chdir						(${XZ})
-dk_queueCommand					(autoreconf -f -i)
+dk_exec							(autoreconf -f -i)
 		
 Unix_Debug_dk_chdir				(${XZ_DEBUG_DIR})
-Unix_Debug_dk_queueCommand		(${DKCONFIGURE_BUILD})
+Unix_Debug_dk_exec				(${DKCONFIGURE_BUILD})
 
 Unix_Release_dk_chdir			(${XZ_RELEASE_DIR})
-Unix_Release_dk_queueCommand	(${DKCONFIGURE_BUILD})
+Unix_Release_dk_exec			(${DKCONFIGURE_BUILD})
 
 Unix_dk_build					(${XZ})
 
 
-Windows_X86_Debug_dk_chdir			(${XZ_DEBUG_DIR})
-Windows_X86_Debug_dk_queueCommand	(${DKCONFIGURE_BUILD})
+Windows_X86_Debug_dk_chdir		(${XZ_DEBUG_DIR})
+Windows_X86_Debug_dk_exec		(${DKCONFIGURE_BUILD})
 
-Windows_X86_Release_dk_chdir		(${XZ_RELEASE_DIR})
-Windows_X86_Release_dk_queueCommand	(${DKCONFIGURE_BUILD})
+Windows_X86_Release_dk_chdir	(${XZ_RELEASE_DIR})
+Windows_X86_Release_dk_exec		(${DKCONFIGURE_BUILD})
 
-Windows_X86_dk_build				(${XZ})
+Windows_X86_dk_build			(${XZ})
 
 # look at xz/windows/build.bash for details
-Windows_X86_64_Debug_dk_chdir		(${XZ_DEBUG_DIR})
-Windows_X86_64_Debug_dk_queueCommand(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+Windows_X86_64_Debug_dk_chdir	(${XZ_DEBUG_DIR})
+Windows_X86_64_Debug_dk_exec(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
 Windows_X86_64_Release_dk_chdir		(${XZ_RELEASE_DIR})
-Windows_X86_64_Debug_dk_queueCommand(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+Windows_X86_64_Debug_dk_exec(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
 Windows_X86_64_dk_build				(${XZ})
 

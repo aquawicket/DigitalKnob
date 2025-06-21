@@ -30,6 +30,5 @@ dk_set(MACPORTS_DL https://github.com/macports/macports-base/releases/download/v
 if(NOT EXISTS $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
 	dk_download(${MACPORTS_DL} $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)		
 	dk_exec(chmod +x $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
-	dk_set(QUEUE_BUILD ON)
-	#Mac_dk_queueCommand($ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg) #FIXME
+	#Mac_dk_exec($ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg) #FIXME
 endif()

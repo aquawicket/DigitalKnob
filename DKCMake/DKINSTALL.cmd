@@ -10,7 +10,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
 	::###### run script ######
-	set cmnd="%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -P "%DKSCRIPT_PATH%"
+	set cmnd="%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -P "%DKSCRIPT_PATH%"
 	echo %cmnd%
 	%cmnd% & echo success || echo failed
 

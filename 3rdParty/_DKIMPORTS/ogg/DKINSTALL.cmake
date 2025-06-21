@@ -63,9 +63,9 @@ dk_configure(${OGG_DIR}
 
 #else()
 #	DEBUG_dk_chdir			(${OGG_DEBUG_DIR})
-#	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+#	DEBUG_dk_exec			(${DKCONFIGURE_BUILD})
 #	RELEASE_dk_chdir		(${OGG_RELEASE_DIR})
-#	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+#	RELEASE_dk_exec			(${DKCONFIGURE_BUILD})
 #endif()
 
 

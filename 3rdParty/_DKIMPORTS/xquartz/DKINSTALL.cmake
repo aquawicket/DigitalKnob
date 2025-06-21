@@ -51,6 +51,5 @@ dk_depend(homebrew)
 ### INSTALL ###
 #IF(NOT EXISTS ${XQUARTZ})
 #	dk_download(${XQUARTZ_DL} $ENV{DKDOWNLOAD_DIR}/${XQUARTZ_NAME}.dmg)
-#	dk_set(QUEUE_BUILD ON)
-#	Mac_dk_queueCommand($ENV{DKDOWNLOAD_DIR}/${XQUARTZ_NAME}.dmg)
+#	Mac_dk_exec($ENV{DKDOWNLOAD_DIR}/${XQUARTZ_NAME}.dmg)
 #ENDIF()

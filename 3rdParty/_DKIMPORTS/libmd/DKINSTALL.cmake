@@ -27,9 +27,9 @@ dk_depend(autotools)
 dk_import(https://github.com/guillemj/libmd/archive/refs/heads/main.zip)
 
 ### LINK ###
-dk_include			(${LIBMD}/include)
-Unix_dk_libDebug	(${LIBMD_DEBUG_DIR}/liblibmdd.a)
-Unix_dk_libRelease	(${LIBMD_RELEASE_DIR}/liblibmd.a)
+dk_include				(${LIBMD}/include)
+Unix_dk_libDebug		(${LIBMD_DEBUG_DIR}/liblibmdd.a)
+Unix_dk_libRelease		(${LIBMD_RELEASE_DIR}/liblibmd.a)
 Windows_dk_libDebug		(${LIBMD_DEBUG_DIR}/libmdd.lib)
 Windows_dk_libRelease	(${LIBMD_RELEASE_DIR}/libmd.lib)
 
@@ -40,17 +40,17 @@ dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD_DEBUG_DIR}/libmd.a)
 
 ### COMPILE ###
 if(Android)
-	Android_dk_ndk			(${LIBMD})
+	Android_dk_ndk		(${LIBMD})
 else()
-	DEBUG_dk_chdir			(${LIBMD})
-	DEBUG_dk_queueCommand	(aclocal)
+	DEBUG_dk_chdir		(${LIBMD})
+	DEBUG_dk_exec		(aclocal)
 	
-	#DEBUG_dk_chdir			(${LIBMD_DEBUG_DIR})
-	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-	#RELEASE_dk_chdir		(${LIBMD_RELEASE_DIR})
-	#RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-	dk_configure			(${LIBMD_DIR})
+	#DEBUG_dk_chdir		(${LIBMD_DEBUG_DIR})
+	#DEBUG_dk_exec		(${DKCONFIGURE_BUILD})
+	#RELEASE_dk_chdir	(${LIBMD_RELEASE_DIR})
+	#RELEASE_dk_exec	(${DKCONFIGURE_BUILD})
+	dk_configure		(${LIBMD_DIR})
 	
 	
-	dk_build				(${LIBMD_DIR})
+	dk_build			(${LIBMD_DIR})
 endif()

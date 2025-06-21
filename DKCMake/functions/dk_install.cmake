@@ -177,7 +177,6 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 
 	elseif(${FILETYPE} STREQUAL "Executable")
 		dk_chdir(${PLUGIN_DL_DIR})
-		dk_set(QUEUE_BUILD ON)
 		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}) # "dk_install():167")
 		
 		if(${PLUGIN_URL_EXTENSION} STREQUAL ".pkg")

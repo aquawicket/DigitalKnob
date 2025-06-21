@@ -21,10 +21,6 @@ include_guard()
 function(dk_queueCommand)
 	dk_debugFunc()
 	
-	if(NOT QUEUE_BUILD)
-		dk_return()
-	endif()
-	
 	dk_getParameterValue(RESULT_VARIABLE)
 	dk_getParameterValue(RESULTS_VARIABLE)
 	dk_getParameterValue(OUTPUT_VARIABLE)

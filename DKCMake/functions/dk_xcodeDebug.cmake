@@ -31,7 +31,7 @@ function(dk_xcodeDebug path)
 		dk_fatal("dk_xcodeDebug(${path}) path does not exist")
 	endif()
 	
-	if(Debug AND QUEUE_BUILD)
+	if(Debug)
 		if(${ARGC} GREATER 1)
 			dk_exec(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${path}/${Target_Tuple})
 		else()

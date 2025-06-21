@@ -28,7 +28,6 @@ endif()
 dk_depend(DKCef)
 dk_assets(DKCefChild)
 
-#dk_set(QUEUE_BUILD ON)
 dk_addToPluginList(DKCefChild)
 #dk_executable(DKCefChild)
 
@@ -54,10 +53,10 @@ if(Mac_X86_64)
 #		dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${AppName}.app/Contents/Frameworks/DKCefChild.app/Contents/MacOS/DKCefChild "${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${AppName}.app/Contents/Frameworks/DKCefChild.app/Contents/MacOS/${AppName} Helper")
 #		dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${AppName}.app/Contents/Frameworks/DKCefChild.app "${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
 #	endif()
-#	Mac_dk_queueCommand(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app/Contents/MacOS/${AppName} Helper")
+#	Mac_dk_exec(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app/Contents/MacOS/${AppName} Helper")
 #	
 #	FIXME - command does not work because app does not exist yet
-#	Mac_dk_queueCommand(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${AppName}.app/Contents/MacOS/${AppName}")
+#	Mac_dk_exec(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${AppName}.app/Contents/MacOS/${AppName}")
 endif()
 
 if(Linux)

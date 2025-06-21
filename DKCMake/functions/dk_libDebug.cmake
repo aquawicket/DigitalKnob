@@ -30,7 +30,6 @@ function(dk_libDebug lib_path)
 	dk_append(LIBLIST ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_echo("${lyellow}MISSING:${yellow} ${lib_path}${clr}")
-		dk_set(QUEUE_BUILD ON) 
 	endif()
 	
 	if(lib_path IN_LIST DEBUG_LIBS)

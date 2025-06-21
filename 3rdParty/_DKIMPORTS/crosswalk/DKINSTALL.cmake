@@ -24,5 +24,5 @@ dk_depend(nodejs)
 
 ### INSTALL ###
 if(Windows)
-	dk_queueCommand("npm install -g crosswalk-app-tools")
+	dk_exec("npm install -g crosswalk-app-tools")
 endif()
