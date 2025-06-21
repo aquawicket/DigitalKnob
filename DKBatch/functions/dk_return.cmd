@@ -4,7 +4,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-if not defined dk_return_PRINT (set "dk_return_PRINT=1")
+::if not defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
+if not defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
 if not defined dk_return (set "dk_return=dk_return")
 
 
@@ -72,10 +73,12 @@ if not defined dk_return (set "dk_return=dk_return")
 		set "LAST_ARGV=!__ARGV__!"
 		set "LAST_MESSAGE=%~2"
 	)
-	
-	if "%dk_return_PRINT%" equ "1" (
-		if "!LAST_STATUS!" equ "0"	echo "%green%!LAST_FUNC!(!LAST_ARGV!) exit:!LAST_STATUS! '!LAST_MESSAGE!' %clr%"
-		if "!LAST_STATUS!" neq "0"	echo "%red%!LAST_FUNC!(!LAST_ARGV!) ERROR:!LAST_STATUS! '!LAST_MESSAGE!' %clr%"
+
+	if "%dk_return_PRINT_SUCCESS%" equ "1" (
+		if "!LAST_STATUS!" equ "0"	echo "!LAST_FUNC!(!LAST_ARGV!) %green%!LAST_STATUS! '!LAST_MESSAGE!' %clr%"
+	) 
+	if "%dk_return_PRINT_ERRORS%" equ "1" (
+		if "!LAST_STATUS!" neq "0"	dk_error "!LAST_FUNC!(!LAST_ARGV!):!LAST_STATUS! '!LAST_MESSAGE!' %clr%"
 	)
 call exit /b %LAST_STATUS%
 
