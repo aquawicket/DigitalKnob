@@ -5,13 +5,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################### dk_exec SETTINGS #########################
+set "dk_exec_ECHO_OUTPUT=1"
+set "dk_exec_ECHO_ERROR=1"
+
 set "dk_exec_PRINT_CALL=1" 			&:: dk_exec_call
 ::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
 ::set "dk_exec_PRINT_EXITCODES=1"	&:: dk_exec_exitcodes
 ::set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
 ::set "dk_exec_PRINT_STDERR=1"		&:: dk_exec_stderr[]
 ::set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
-set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
+::set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 ::####################################################################
 ::# dk_exec(<command> <ret:optional>)
 ::#
@@ -28,11 +31,18 @@ set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 %setlocal%
 	::%dk_call% dk_debugFunc 1 99
 	
-	set dk_exec_command=%*
+	set dk_exec_call=%*
+	set dk_exec_command=%dk_exec_call%
 	:DeEscape
 	echo %dk_exec_command% | findstr /c:"^^" >nul && (
 		set dk_exec_command=%dk_exec_command:^^=^%
 		goto :DeEscape
+	)
+	
+	::###### dk_exec_PRINT_CALL ######
+	if "%dk_exec_PRINT_CALL%" equ "1" (
+		echo:
+		for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_call%clr%  > !dk_exec_call!"`) do (echo %%~G)
 	)
 	
 	::###### dk_exec_PRINT_COMMAND ######
@@ -50,8 +60,15 @@ set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 		if "!line!" equ "!line:ExItCoDe=!" (
 		
 			rem ###### dk_exec_stdout ######
-			set "dk_exec_stdout=!line!"
-			set "dk_exec_stdout[!i!]=!dk_exec_stdout!"
+			set "dk_exec_stdout=!dk_exec_stdout! !line!"
+			set "dk_exec_stderr=!dk_exec_stderr! !line!"
+			set "dk_exec_stdout[!i!]=!line!"
+			
+			
+			rem ###### dk_exec_ECHO_OUTPUT ######
+			if "%dk_exec_ECHO_OUTPUT%" equ "1" (
+				for /f "usebackq delims=" %%G in (`echo "!dk_exec_stdout!"`) do (echo %%~G)
+			)
 			
 			rem ###### dk_exec_PRINT_STDOUT ######
 			if "%dk_exec_PRINT_STDOUT%" equ "1" (
@@ -59,41 +76,54 @@ set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 			)
 			
 		) else (
+			rem ###### dk_exec_exitcodes ######
+			set /a "dk_exec_exitcodes=!line:ExItCoDe=!"
+			
 			rem ###### dk_exec_exitcode ######
 			set /a "dk_exec_exitcode=!line:ExItCoDe=!"
 		)
 		set /a "i+=1"
 	)
-		
+	
+	::###### Set the errorlevel ######
+	::%ComSpec% /c exit /b %dk_exec_exitcode%
+	
+	::###### TODO: dk_exec_PRINT_STDERR ######
+	if "%dk_exec_PRINT_STDERR%" equ "1" (
+		for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_stderr%clr% > !dk_exec_stderr!"`) do (echo %%~G)
+	)
+	
+	::###### dk_exec_PRINT_EXITCODES ######
+	if "%dk_exec_PRINT_EXITCODES%" equ "1" (
+		for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_exitcodes%clr% > !dk_exec_exitcodes!"`) do (echo %%~G)
+	)
+	
 	::###### dk_exec_PRINT_EXITCODE ######
 	if "%dk_exec_PRINT_EXITCODE%" equ "1" (
 		for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_exitcode%clr% > !dk_exec_exitcode!"`) do (echo %%~G)
 	)
 			
-	::###### TODO: dk_exec_PRINT_STDERR ######
-	::if "%dk_exec_PRINT_STDERR%" equ "1" (
-	::	echo dk_exec_stderr ^> !dk_exec_stderr!
-	::)
-
-	::###### NOTE: what is this doing, why is it needed? ######
-	%ComSpec% /c exit /b 0
-	
 	::###### dk_exec ######
-	set /a "last_output_line=i-2"
-	::set "dk_exec=!dk_exec_stdout[%last_output_line%]!"
 	set "dk_exec=!dk_exec_stdout!"
+	
+	::###### dk_exec_PRINT_OUTPUT ######
+	if "%dk_exec_PRINT_OUTPUT%" equ "1" (
+		for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec%clr% > !dk_exec!"`) do (echo %%~G)
+	)
 
 	::###### Return the array to the calling scope ######
 	set "dk_exec_SCOPE=1"
-	for /F "delims=" %%G in ('set dk_exec_stdout') do (
+	for /F "delims=" %%G in ('set dk_exec') do (
 		if defined dk_exec_SCOPE endlocal
-		set "dk_exec_command=%dk_exec_command%"
-		set "dk_exec=%dk_exec%"
-		set "dk_exec_exitcode=%dk_exec_exitcode%"
 		set "%%G"
 	)
-exit /b %dk_exec_exitcode%
-::%endfunction%
+	
+	if !dk_exec_exitcode! equ 0 (
+		call dk_return !dk_exec_exitcode! "!dk_exec!" & exit /b !dk_exec_exitcode!
+	) else (
+		call dk_return !dk_exec_exitcode! "!dk_exec_stderr!" & exit /b !dk_exec_exitcode!
+	)
+%endfunction%
 
 
 
@@ -113,22 +143,40 @@ exit /b %dk_exec_exitcode%
 ::	set myCommand=%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_evalDKC_TEMP.exe
 	
 ::	set myCommand=ver
+	set "dk_exec_ECHO_OUTPUT=1"
+	set "dk_exec_ECHO_ERROR=1"
+	set "dk_exec_PRINT_CALL=1"
 	set "dk_exec_PRINT_COMMAND=1"
-	set "dk_exec_PRINT_ARGS=1"
-	set "dk_exec_PRINT_STDOUT=1"
-	set "dk_exec_PRINT_STDERR=1"
+::	set "dk_exec_PRINT_EXITCODES=1"
 	set "dk_exec_PRINT_EXITCODE=1"
+::	set "dk_exec_PRINT_STDERR=1"
+::	set "dk_exec_PRINT_STDOUT=1"
+::	set "dk_exec_PRINT_OUTPUT=1"
 	
-	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
-	set "url=http://www.google.com/index.html"
-	set mycommand=%CURL_EXE% "%url%" -sI -o nul -w "%%%%%%%%{http_code}\n"
-::	echo myCommand = !myCommand!
+::	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
+::	set "url=http://www.google.com/index.html"
+::	set mycommand=%CURL_EXE% "%url%" -sI -o nul -w "%%%%%%%%{http_code}\n"
+
+	set mycommand=verxyz
 	
-	%dk_call% dk_exec !myCommand!
+	%dk_call% dk_exec !myCommand! 
+	echo dk_exec_errorlevel = %errorlevel%
+	
 	%dk_call% dk_echo
-	%dk_call% dk_echo "dk_exec_command = !dk_exec_command!"
-	%dk_call% dk_echo "dk_exec_stdout = !dk_exec_stdout!"
-	%dk_call% dk_echo "dk_exec = !dk_exec!"
-	%dk_call% dk_echo "dk_exec_exitcode = !dk_exec_exitcode!"
+::	%dk_call% dk_echo "dk_exec_call      = %dk_exec_call%"
+::	%dk_call% dk_echo "dk_exec_command   = %dk_exec_command%"
+::	%dk_call% dk_echo "dk_exec_exitcodes = %dk_exec_exitcodes%"
+::	%dk_call% dk_echo "dk_exec_exitcode  = %dk_exec_exitcode%"
+::	%dk_call% dk_echo "dk_exec_stderr    = %dk_exec_stderr%"
+::	%dk_call% dk_echo "dk_exec_stdout    = %dk_exec_stdout%"
+::	%dk_call% dk_echo "dk_exec           = %dk_exec%"
+	
+	%dk_call% dk_printVar dk_exec_call
+	%dk_call% dk_printVar dk_exec_command
+	%dk_call% dk_printVar dk_exec_exitcodes
+	%dk_call% dk_printVar dk_exec_exitcode
+	%dk_call% dk_printVar dk_exec_stderr
+	%dk_call% dk_printVar dk_exec_stdout
+	%dk_call% dk_printVar dk_exec
 
 %endfunction%

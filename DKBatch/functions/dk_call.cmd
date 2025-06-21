@@ -24,7 +24,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_error "use 'call' instead of 'dk_call' when calling :labels"
 	)
 
-
 	:: don't add these functions to the callstack, just call them
 	if "%~1" equ "init"					(call :%* & exit /b !errorlevel!)
 	if "%~1" equ "pushStack"			(call :%* & exit /b !errorlevel!)
@@ -47,9 +46,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	echo __FUNC__ = %__FUNC__%
 	
 	set dk_allButFirstArgs=%*
-	if defined dk_allButFirstArgs (set __ARGV__=!dk_allButFirstArgs:*%1=!)
-	::%dk_call% dk_allButFirstArgs %*
-::	echo dk_allButFirstArgs = %dk_allButFirstArgs%
+	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do (set __ARGV__=%%b)
 	
 	::TODO - use dk_getFileLine to add the file line to the stack entry
 	call :pushStack %*
@@ -83,6 +80,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%dk_call_PRINT_EXIT%" equ "1" (call :dk_call_PRINT_EXIT)
 
 	call :popStack
+
 exit /b %LAST_STATUS%
 
 
