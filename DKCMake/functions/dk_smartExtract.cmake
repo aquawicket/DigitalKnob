@@ -27,16 +27,16 @@ function(dk_smartExtract src dest)
     #set(dest ${ARGV2})
     
     dk_realpath("${src}" src_realpath)
-	dk_printVar(src_realpath)
+	dk_debug("src_realpath = ${src_realpath}")
     
     dk_dirname("${src_realpath}" src_dirname)
-	dk_printVar(src_dirname)
+	dk_debug("src_dirname = ${src_dirname}")
     
     dk_basename("${src_realpath}" src_basename)
-	dk_printVar(src_basename)
+	dk_debug("src_basename = ${src_basename}")
     
     dk_basename("${src_basename}" src_folder)
-	dk_printVar(src_folder)
+	dk_debug("src_folder = ${src_folder}")
 	
 	#if(EXTRACT_PATH)
 	#	dk_set(src_extractPath "${EXTRACT_PATH}/${src_basename}_EXTRACTED")
@@ -46,18 +46,16 @@ function(dk_smartExtract src dest)
 	#dk_printVar(src_extractPath)
     
     dk_realpath("${dest}" dest_realpath)
-	dk_printVar(dest_realpath)
+	dk_debug("dest_realpath = ${dest_realpath}")
     
     dk_dirname("${dest_realpath}" dest_dirname)
-	dk_printVar(dest_dirname)
+	dk_debug("dest_dirname = ${dest_dirname}")
 	
     dk_set(src_extractPath "${dest_dirname}/${src_basename}_EXTRACTED")
-	dk_printVar(src_extractPath)
+	dk_debug("src_extractPath = ${src_extractPath}")
 	
     dk_basename("${dest_realpath}" dest_folder)
-	dk_printVar(dest_folder)
-
-#  if not exist "${dest_realpath}" dk_mkdir "${dest_realpath}"
+	dk_debug("dest_folder = ${dest_folder}")
 
     dk_info("Extracting ${src_realpath}  to  ${src_extractPath}")
 	
@@ -72,14 +70,14 @@ function(dk_smartExtract src dest)
 	
     dk_arrayLength("${directories}")
 	set(dir_count ${dk_arrayLength})
-    dk_printVar(dir_count)
+    dk_debug("dir_count = ${dir_count}")
     
 	dk_getFiles("${src_extractPath}")
 	dk_printVar(dk_getFiles)
 	
     dk_arrayLength("${dk_getFiles}")
 	set(file_count ${dk_arrayLength})
-    dk_printVar(file_count)
+    dk_debug("file_count = ${file_count}")
 	
     if("${dir_count}" STREQUAL "1") 
 		dk_debug("dir_count EQUAL 1")

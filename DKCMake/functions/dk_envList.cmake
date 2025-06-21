@@ -73,14 +73,14 @@ function(dk_envList)
 #		endif()
 	endif()
 	
-#	dk_set(ENV{current_${NAME}} 	"${_current_}")		# lowercase
-	dk_set(ENV{CURRENT_${NAME}} 	"${_CURRENT_}")		# UPPERCASE
-#	dk_set(ENV{Current_${NAME}} 	"${_Current_}")		# Original
+#	dk_set(current_${NAME} 	"${_current_}")		# lowercase
+	dk_set(CURRENT_${NAME} 	"${_CURRENT_}")		# UPPERCASE
+#	dk_set(Current_${NAME} 	"${_Current_}")		# Original
 	
 	# copy local variable back to the environment variable
-#	dk_set(ENV{${NAME}_stack} 		"${_stack_}")  		# lowercase
-	dk_set(ENV{${NAME}_STACK} 		"${_STACK_}")  		# UPPERCASE
-#	dk_set(ENV{${NAME}_Stack} 		"${_Stack_}")  		# Original
+#	dk_set(${NAME}_stack 		"${_stack_}")  		# lowercase
+	dk_set(${NAME}_STACK 		"${_STACK_}")  		# UPPERCASE
+#	dk_set(${NAME}_Stack 		"${_Stack_}")  		# Original
 		
 	#message("ENV{CURRENT_${NAME}} 	= $ENV{CURRENT_${NAME}}")
 	#message("ENV{${NAME}_STACK}  	= $ENV{${NAME}_STACK}")
@@ -103,15 +103,39 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_envList(PLUGINS PUSH "ABC")
-	dk_envList(PLUGINS PUSH "123")	
-	dk_envList(PLUGINS PUSH "DEF")
-	dk_envList(PLUGINS PUSH "456")
+	dk_echo("\nPushing Stack . . .")
+	dk_echo("dk_envList(PLUGIN PUSH \"abc\")")
+	dk_envList(PLUGIN PUSH "abc")
+	dk_echo("CURRENT_PLUGIN} = ${CURRENT_PLUGIN}")
 	
-	dk_envList(PLUGINS POP)
-	dk_envList(PLUGINS POP)
-	dk_envList(PLUGINS POP)
-	dk_envList(PLUGINS POP)
-	dk_envList(PLUGINS POP)
+	dk_echo("dk_envList(PLUGIN PUSH \"123\")")
+	dk_envList(PLUGIN PUSH "123")
+	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo("dk_envList(PLUGIN PUSH \"def\")")
+	dk_envList(PLUGIN PUSH "def")
+	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo("dk_envList(PLUGIN PUSH \"456\")")
+	dk_envList(PLUGIN PUSH "456")
+	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo("\nPoping Stack . . .")
+	dk_echo("dk_envList(PLUGIN POP)")
+	dk_envList(PLUGIN POP)
+	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo("dk_envList(PLUGIN POP)")
+	dk_envList(PLUGIN POP)
+	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo("dk_envList(PLUGIN POP)")
+	dk_envList(PLUGIN POP)
+	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo("dk_envList(PLUGIN POP)")
+	dk_envList(PLUGIN POP)
+	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
 endfunction()
 
