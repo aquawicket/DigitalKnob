@@ -274,30 +274,13 @@ function(dk_exec)
 	
 	execute_process(${dk_exec_command})
 	
-#	if(NOT ${result_variable} EQUAL 0)
-		dk_sleep(1) # wait 1 second1 for the stdout to flush before printing
-#		if(${RESULT_VARIABLE})
-#			dk_info("${${RESULT_VARIABLE}}")
-#		endif()
-#		if(${RESULTS_VARIABLE})
-#			dk_info("${${RESULTS_VARIABLE}}")
-#		endif()
-#		if(${OUTPUT_VARIABLE})
-#			dk_info("${${OUTPUT_VARIABLE}}")
-#		endif()
-#		if(${ERROR_VARIABLE})
-#			dk_info("${${ERROR_VARIABLE}}")
-#		endif()
-#		if(${${RESULT_VARIABLE}})
-#			dk_fatal("${${RESULT_VARIABLE}}" ${NO_HALT})
-#		endif()
-#	else()
+	dk_sleep(1) # wait 1 second1 for the stdout to flush before printing
 	
 	set(dk_exec_exitcode	${${RESULT_VARIABLE}})
 	set(dk_exec_exitcodes	${${RESULTS_VARIABLE}})
 	set(dk_exec_stderr		${${ERROR_VARIABLE}})
 	set(dk_exec_stdout		${${OUTPUT_VARIABLE}})	
-	### process the return value ###
+	### process the return value (dk_exec) ###
 	string(FIND "${dk_exec_stdout}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
 	if(last_newline_pos GREATER -1)
 		string(SUBSTRING "${dk_exec_stdout}" ${last_newline_pos} -1 dk_exec) # Extract the last line
