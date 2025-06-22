@@ -13,7 +13,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_validate GIT_EXE		"%dk_call% dk_depend git"
 	%dk_call% dk_validate GIT_BASH_EXE  "%dk_call% dk_depend git"
-	%dk_call% dk_installContextMenu "GIT ADD" "%GIT_BASH_EXE%" "\"%GIT_EXE:/=\%\" add \"%%%%%%%%1\""
+	%dk_call% dk_installContextMenu "Git Add" "%GIT_BASH_EXE%" "\"%GIT_EXE:/=\%\" add \"%%%%%%%%1\""
+	%dk_call% dk_installContextMenu "Git Clean" "%GIT_BASH_EXE%" "\"%GIT_EXE:/=\%\" clean -d -x -f \"%%%%%%%%1\""
 	
 %endfunction%
 
