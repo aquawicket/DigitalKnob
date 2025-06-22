@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 set "dk_exec_ECHO_OUTPUT=1"
 set "dk_exec_ECHO_ERROR=1"
 
-set "dk_exec_PRINT_CALL=1" 			&:: dk_exec_call
+::set "dk_exec_PRINT_CALL=1" 		&:: dk_exec_call
 ::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
 ::set "dk_exec_PRINT_EXITCODES=1"	&:: dk_exec_exitcodes
 ::set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode

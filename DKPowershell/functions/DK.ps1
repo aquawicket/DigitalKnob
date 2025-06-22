@@ -2,14 +2,13 @@ if(${env:DK_PS1}){return;} else{ ${env:DK_PS1}=1; }	# include_guard
 
 ### Print Version Info ###
 Write-Host "";
-$DKSHELL = (Get-Process -Id $pid).Name;
-$DKSHELL_VERSION = $PSVersionTable.PSVersion.ToString();
-$DKSHELL_PATH = (get-command $DKSHELL).Path;
-$global:ESC = "$([char]27)"; 				# escape character
-Write-Host "${ESC}[44m ${ESC}[30m $DKSHELL Version $DKSHELL_VERSION ${ESC}[0m";
-Write-Host "DKSHELL_PATH = $DKSHELL_PATH";
-Write-Host "DKSCRIPT_PATH = $DKSCRIPT_PATH";
-Write-Host "'";
+${env:DKSHELL} = (Get-Process -Id $pid).Name;
+${env:DKSHELL_VERSION} = $PSVersionTable.PSVersion.ToString();
+${env:DKSHELL_PATH} = (get-command ${env:DKSHELL}).Path;
+if(!${global:ESC}){ ${global:ESC} = "$([char]27)"; }				# escape character
+Write-Host "${ESC}[44m ${ESC}[30m ${env:DKSHELL} Version ${env:DKSHELL_VERSION} ${ESC}[0m";
+Write-Host "DKSHELL_PATH = ${env:DKSHELL_PATH}";
+Write-Host "DKSCRIPT_PATH = ${env:DKSCRIPT_PATH}";
 
 
 #####################################################################
@@ -23,7 +22,7 @@ function DK() {
 	dk_init;
 	
 	###### Reload Main Script with powershell ######
-	# dk_reloadWithPowershell
+	# dk_reloadWithPowershell;
 	
 	############ Get DKPOWERSHELL variables ############
 	dk_DKPOWERSHELL_VARS;
@@ -35,60 +34,56 @@ function DK() {
 	dk_initFiles;
 	
 	############ Setup dk_callStack ############
-	#dk_setupCallstack
-	#call dk_callStack
-	#:dk_callStackReturn
+	#dk_setupCallstack;
+	#call dk_callStack;
+	#:dk_callStackReturn;
 	
 	############ Get DKSCRIPT variables ############
-	dk_DKSCRIPT_VARS
+	dk_DKSCRIPT_VARS;
 	
 	##### CD into the DKSCRIPT_DIR directory #####
-	#cd "${DKSCRIPT_DIR}"
+	#cd "${DKSCRIPT_DIR}";
 	
 	############ Set Options ############
-	#dk_setOptions
+	#dk_setOptions;
 	
 	
 	############ LOAD FUNCTION FILES ############
-	dk_source __TIME__
-	dk_source __FILE__
-	dk_source __LINE__
-	dk_source __FUNCTION__
-	dk_source __ARGC__
-	dk_source __ARGV__
-	dk_source __CALLER__
-	dk_source dk_debugFunc
-	dk_call dk_color 1
-	dk_call dk_logo
+	dk_source __TIME__;
+	dk_source __FILE__;
+	dk_source __LINE__;
+	dk_source __FUNCTION__;
+	dk_source __ARGC__;
+	dk_source __ARGV__;
+	dk_source __CALLER__;
+	dk_source dk_debugFunc;
+	dk_call dk_color 1;
+	dk_call dk_logo;
 	
-	if(Test-Path "${DKSCRIPT_DIR}/dkconfig.txt"){
-		dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
-	} elseif(Test-Path "${DKBRANCH_DIR}/dkconfig.txt"){
-		dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+	if(Test-Path "${env:DKSCRIPT_DIR}/dkconfig.txt"){
+		dk_call dk_getFileParams "${env:DKSCRIPT_DIR}/dkconfig.txt";
+	} elseif(Test-Path "${env:DKBRANCH_DIR}/dkconfig.txt"){
+		dk_call dk_getFileParams "${env:DKBRANCH_DIR}/dkconfig.txt";
 	}
-	#dk_source ${DKSCRIPT_PATH}
+	#dk_source ${env:DKSCRIPT_PATH}
 	
-	#Write-Output "env:PATH = $env:PATH"
-	#$env:PATH += ";${DKPOWERSHELL_FUNCTIONS_DIR}"
-	
-	#. DKPOWERSHELL_FUNCTIONS_DIR/dk_thisFunction
+	#Write-Output "env:PATH = ${env:PATH}"
+	#${env:PATH} += ";${env:DKPOWERSHELL_FUNCTIONS_DIR}"
 	
 	###### DKTEST MODE ######
-	if(!("${DKSCRIPT_EXT}" -eq ".ps1")){ return }
-	#if(!(dk_call dk_fileContains "function DKTEST()")){ return }
+	if("${env:DKSCRIPT_EXT}" -ne ".ps1"){ return; }
+	#if(!(dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()")){ return; }
 
-	Write-Output ""
-	Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
-	Write-Output ""
-	#$include_guard = $DKSCRIPT_NAME.Substring(0, $DKSCRIPT_NAME.lastIndexOf('.'))
-	#dk_unset $include_guard
-	. ${DKSCRIPT_PATH}
-	DKTEST
-	Write-Output ""
-	Write-Output "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}"
-	Write-Output ""
-	Read-Host -Prompt "Press Enter to exit" 
-	exit
+	dk_call dk_echo "";
+	dk_call dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}";
+	dk_call dk_echo  "";
+	. ${DKSCRIPT_PATH};
+	DKTEST;
+	dk_call dk_echo "";
+	dk_call dk_echo "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}";
+	dk_call dk_echo "";
+	dk_call dk_pause "Press Enter to exit";
+	dk_call dk_exit
 }
 
 

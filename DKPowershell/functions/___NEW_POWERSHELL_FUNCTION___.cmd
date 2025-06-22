@@ -1,0 +1,84 @@
+@echo off&::###### DK.cmd #########################################################################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+::#################################################################################################################################################
+
+
+::############################################################################
+::# ___NEW_POWERSHELL_FUNCTION___()
+::#
+::#
+:___NEW_POWERSHELL_FUNCTION___
+%setlocal%
+	%dk_call% dk_debugFunc 0
+
+	::### name the new function
+	%dk_call% dk_inputBox
+	set "FUNCTION=%dk_inputBox%"
+	set "FUNCTION_FILE=%FUNCTION%.ps1"
+	
+	if exist "%FUNCTION_FILE%" (
+		%dk_call% dk_notice "%FUNCTION_FILE% already exists"
+		goto :edit_textfile
+	)
+	
+	echo:if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . '/DK.ps1'; }>					"%FUNCTION_FILE%"
+	echo:if(!$%FUNCTION%_ps1){ $%FUNCTION%_ps1 = 1; } else{ return; } #include guard>>													"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:################################################################################>> 											"%FUNCTION_FILE%"
+	echo:# %FUNCTION%()>>																												"%FUNCTION_FILE%"
+	echo:#>> 																															"%FUNCTION_FILE%"
+	echo:#    Function description>>																									"%FUNCTION_FILE%"
+	echo:#>> 																															"%FUNCTION_FILE%"
+	echo:#    @arg1	- arg1 description>> 																								"%FUNCTION_FILE%"
+	echo:#>>																															"%FUNCTION_FILE%"
+	echo:function Global:%FUNCTION%() {>>																								"%FUNCTION_FILE%"
+	echo:	dk_debugFunc 0 99;>>																										"%FUNCTION_FILE%"
+	echo:>>																																"%FUNCTION_FILE%"
+	echo:>>	 																															"%FUNCTION_FILE%"
+	echo:}>> 																															"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:>> 																															"%FUNCTION_FILE%"
+	echo:###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####>> 													"%FUNCTION_FILE%"
+	echo:function Global:DKTEST() { >> 																									"%FUNCTION_FILE%"
+	echo:	dk_debugFunc 0;>>																											"%FUNCTION_FILE%"
+	echo:>>	 																															"%FUNCTION_FILE%"
+	echo:	dk_call %FUNCTION%;>>																										"%FUNCTION_FILE%"
+	echo:}>> 																															"%FUNCTION_FILE%"
+	
+	:edit_textfile
+	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_NOTEPADPP_EXE"
+	"%NOTEPADPP_EXE%" "%FUNCTION_FILE%"
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+%setlocal%
+	%dk_call% dk_debugFunc 0
+
+	%dk_call% ___NEW_POWERSHELL_FUNCTION___
+%endfunction%
