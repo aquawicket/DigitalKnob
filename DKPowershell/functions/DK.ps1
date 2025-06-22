@@ -1,15 +1,15 @@
-if(${env:DK_PS1}){return} else{ ${env:DK_PS1}=1 }	# include_guard
+if(${env:DK_PS1}){return;} else{ ${env:DK_PS1}=1; }	# include_guard
 
 ### Print Version Info ###
-Write-Host ""
-$DKSHELL = (Get-Process -Id $pid).Name
-$DKSHELL_VERSION = $PSVersionTable.PSVersion.ToString()
-$DKSHELL_PATH = (get-command $DKSHELL).Path
-$global:ESC = "$([char]27)" 				# escape character
-Write-Host "${ESC}[44m ${ESC}[30m $DKSHELL Version $DKSHELL_VERSION ${ESC}[0m"
-Write-Host "DKSHELL_PATH = $DKSHELL_PATH"
-Write-Host "DKSCRIPT_PATH = $DKSCRIPT_PATH"
-Write-Host "'"
+Write-Host "";
+$DKSHELL = (Get-Process -Id $pid).Name;
+$DKSHELL_VERSION = $PSVersionTable.PSVersion.ToString();
+$DKSHELL_PATH = (get-command $DKSHELL).Path;
+$global:ESC = "$([char]27)"; 				# escape character
+Write-Host "${ESC}[44m ${ESC}[30m $DKSHELL Version $DKSHELL_VERSION ${ESC}[0m";
+Write-Host "DKSHELL_PATH = $DKSHELL_PATH";
+Write-Host "DKSCRIPT_PATH = $DKSCRIPT_PATH";
+Write-Host "'";
 
 
 #####################################################################
@@ -20,19 +20,19 @@ Write-Host "'"
 function DK() {
 
 	###### Initialize Language specifics ######
-	dk_init
+	dk_init;
 	
 	###### Reload Main Script with powershell ######
 	# dk_reloadWithPowershell
 	
 	############ Get DKPOWERSHELL variables ############
-	dk_DKPOWERSHELL_VARS
+	dk_DKPOWERSHELL_VARS;
 	
 	############ Get DKHTTP variables ############
-	dk_DKHTTP_VARS
+	dk_DKHTTP_VARS;
 
 	############ get dk_source and dk_call ######
-	dk_initFiles
+	dk_initFiles;
 	
 	############ Setup dk_callStack ############
 	#dk_setupCallstack
@@ -98,26 +98,25 @@ function DK() {
 # dk_echo()
 #
 function dk_echo(){
-	$allArgs = $PsBoundParameters.Values + ${args} 
-	Write-Host $allArgs
+	Write-Host ${args};
 }
 
 ##################################################################################
 # dk_init()
 #
 function dk_init(){
-	Write-Host "Loading DKPowershell DigitalKnob . . ."
+	Write-Host "Loading DKPowershell DigitalKnob . . .";
 }
 
 ##################################################################################
 # dk_DKPOWERSHELL_VARS()
 #
 function dk_DKPOWERSHELL_VARS(){
-	$env:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
-	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
-	$global:DKPOWERSHELL_FUNCTIONS_DIR = ${DKPOWERSHELL_FUNCTIONS_DIR} -replace '\\', '/';
-	$global:DKPOWERSHELL_DIR = Split-Path -Parent ${DKPOWERSHELL_FUNCTIONS_DIR}
-	$global:DKPOWERSHELL_FUNCTIONS_DIR_ = "${DKPOWERSHELL_FUNCTIONS_DIR}/"
+	${env:DKPOWERSHELL_FUNCTIONS_DIR} 		= Split-Path -Parent ${PSCommandPath};
+	${global:DKPOWERSHELL_FUNCTIONS_DIR} 	= Split-Path -Parent ${PSCommandPath};
+	${global:DKPOWERSHELL_FUNCTIONS_DIR} 	= ${env:DKPOWERSHELL_FUNCTIONS_DIR} -replace '\\', '/';
+	${global:DKPOWERSHELL_DIR} 				= Split-Path -Parent ${env:DKPOWERSHELL_FUNCTIONS_DIR}
+	${global:DKPOWERSHELL_FUNCTIONS_DIR_} 	= "${env:DKPOWERSHELL_FUNCTIONS_DIR}/";
 }
 
 ##################################################################################

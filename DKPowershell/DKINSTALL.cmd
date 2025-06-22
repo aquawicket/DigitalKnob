@@ -10,13 +10,16 @@ if "%~1" equ "" (goto DKINSTALL)
 	:: "%ComSpec%"	path to cmd.exe
 	:: /V:ON		enable delayed expansion
 	:: /K			keep the window open at the CMD prompt.
-	%ComSpec% /V:ON /K call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	
+	::%ComSpec% /V:ON /c call %POWERSHELL_EXE% -Command "%DKSCRIPT_PATH%" && (echo returned TRUE) || (echo returned FALSE)
+	::%ComSpec% /V:ON /c call %POWERSHELL_EXE% -Command "%DKSCRIPT_PATH%"
+	%POWERSHELL_EXE% -Command "%DKSCRIPT_PATH%"
 
-	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 (
-		echo ERROR:%ERRORLEVEL%
-		pause
-	)
+	echo:
+	echo ###### DKPowershell Exit ######
+	echo errorlevel:%errorlevel%
+	echo:
+	if %errorlevel% neq 0 (pause)
 %endfunction%
 
 

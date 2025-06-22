@@ -2,11 +2,9 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 if(!$dk_color_ps1){ $dk_color_ps1 = 1 } else{ return } #include guard
 
 ##################################################################################
-# dk_color(on/off)
+# dk_color()
 #
 #	Enable / Disable console text and background coloring
-#
-#   on/off:  Default ON
 #
 #   https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 #   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
@@ -14,14 +12,13 @@ if(!$dk_color_ps1){ $dk_color_ps1 = 1 } else{ return } #include guard
 function Global:dk_color() {
 	dk_debugFunc 0 2
 
-	$global:dk_color_ENABLE = 1
-	if(Test-Path variable:args){
-		if(!(${args})){
-			dk_call dk_unset dk_color_ENABLE 
-		}
+	if(($args[0]) -eq "OFF"){
+		${global:dk_color_DISABLE} = 1;
+	} else {
+		dk_call dk_unset dk_color_DISABLE;
 	}
 	
-	if($dk_color_ENABLE){
+	if(${dk_color_DISABLE} -ne 1){
 		$global:ESC = "$([char]27)" 				# escape character
 		
 		# Attributes on
@@ -37,13 +34,13 @@ function Global:dk_color() {
 		$global:strike = "${ESC}[9m"				# Strike Through
 		
 		# Attributes off
-		#$global:20m = "${ESC}[20m"					# 20
-		#$global:21m = "${ESC}[21m"					# 21
+		#$global:20m = "${ESC}[20m"					#
+		#$global:21m = "${ESC}[21m"					#
 		$global:nobold = "${ESC}[22m"				# No bold/bright			- Removes brightness/intensity flag from foreground color
 		$global:noitalic = "${ESC}[23m"				# No Italic
 		$global:nounderline = "${ESC}[24m"			# No underline				- Removes underline
 		$global:noblink = "${ESC}[25m"				# No Blink
-		#$global:26m = "${ESC}[26m"					# 26
+		#$global:26m = "${ESC}[26m"					#
 		$global:nonegative = "${ESC}[27m"  			# Positive(No negative)		- Returns foreground/background to normal
 		$global:visible = "${ESC}[28m"				# Visible(No invisible)
 		$global:nostrike = "${ESC}[29m"				# No Strike Through
@@ -97,7 +94,6 @@ function Global:dk_color() {
 		
 		# Background RGB Colors
 		$global:bg_RGB = "${ESC}[48;2;"				# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
-		
 		
 		dk_call dk_echo "${blue}C${green}O${red}L${magenta}O${cyan}R ${blue}O${green}N${clr}"
 	}
@@ -168,10 +164,10 @@ function Global:dk_color() {
 		dk_call dk_unset RGB
 		dk_call dk_unset bg_RGB
 	
-		dk_call dk_echo "${clr} COLOR OFF"
+		dk_call dk_echo "${clr}COLOR OFF"
 	}
 }
-#dk_call dk_color 1
+
 
 
 
@@ -181,6 +177,8 @@ function Global:dk_color() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
+	dk_call dk_color "OFF"
+	dk_call dk_color "ON"
 	dk_call dk_echo ""
 	dk_call dk_echo "${black}${bg_lblack}           Styles            ${clr}"
 	dk_call dk_echo "`${clr}        ${clr} default ${clr}"
