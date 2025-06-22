@@ -88,7 +88,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
 		dk_exec(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
-		
+	endif()	
 
 	###### Configure with ../../configure ######
 	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${SOURCE_DIR}/configure) will return true.
@@ -97,7 +97,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	if(NOT "${configure_path}" STREQUAL "${SOURCE_DIR}/configure")
 		unset(configure_path)
 	endif()
-	elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${configure_path})
+	if(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${configure_path})
 		# Configure with Autotools	(single_config)
 		dk_info("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 		
