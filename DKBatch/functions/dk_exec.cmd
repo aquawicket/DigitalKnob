@@ -11,10 +11,10 @@ set "dk_exec_ECHO_ERROR=1"
 set "dk_exec_PRINT_CALL=1" 			&:: dk_exec_call
 ::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
 ::set "dk_exec_PRINT_EXITCODES=1"	&:: dk_exec_exitcodes
-::set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
+set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
 ::set "dk_exec_PRINT_STDERR=1"		&:: dk_exec_stderr[]
-::set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
-::set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
+set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
+set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 ::####################################################################
 ::# dk_exec(<command> <ret:optional>)
 ::#
@@ -123,10 +123,10 @@ set "dk_exec_PRINT_CALL=1" 			&:: dk_exec_call
 	)
 	
 	if !dk_exec_exitcode! equ 0 (
-		call dk_return !dk_exec_exitcode! "!dk_exec!" & exit /b !dk_exec_exitcode!
+		call dk_return !dk_exec_exitcode! !dk_exec! & exit /b !dk_exec_exitcode!
 	) else (
 		echo dk_exec_stderr = "!dk_exec_stderr!"
-		call dk_return !dk_exec_exitcode! "!dk_exec_stderr!" & exit /b !dk_exec_exitcode!
+		call dk_return !dk_exec_exitcode! !dk_exec_stderr! & exit /b !dk_exec_exitcode!
 	)
 %endfunction%
 
@@ -166,6 +166,7 @@ set "dk_exec_PRINT_CALL=1" 			&:: dk_exec_call
 	
 	%dk_call% dk_exec !myCommand! 
 	echo dk_exec_errorlevel = %errorlevel%
+	echo dk_exec_errorlevel = !errorlevel!
 	
 	%dk_call% dk_echo
 ::	%dk_call% dk_echo "dk_exec_call      = %dk_exec_call%"

@@ -16,25 +16,32 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	echo dk_callDKBatch %*
 	::%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
 	
-	::### All but first Args ###
-	::%dk_call% dk_allButFirstArgs %*
+	
 
-	set _ARGS_=%*
-	:DeEscape
-	echo %_ARGS_% | findstr /c:"^^" >nul && (
-		set _ARGS_=%_ARGS_:^^=^%
-		goto :DeEscape
-	)
+	set "_func_=%~1"
+	
+	::### All but first Args ###
+	%dk_call% dk_allButFirstArgs %*
+	for /f %%G in ("!dk_allButFirstArgs!") do (set dk_allButFirstArgs=%%~G)
+
+::	:DeEscape
+::	echo %_ARGS_% | findstr /c:"^^" >nul && (
+::		set _ARGS_=%_ARGS_:^^=^%
+::		goto :DeEscape
+::	)
 	
 	::############ DKBatch function call ############
 	::set DKCOMMAND=%CMD_EXE% /c (set "DK.cmd=") & (set "DKSCRIPT_PATH=%DKSCRIPT_PATH%") & (set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%") &
 	
-	echo %dk_call% dk_exec %_ARGS_%
-	%dk_call% dk_exec %_ARGS_%
-::	echo %dk_call% dk_exec %~1 !dk_allButFirstArgs!
-::	endlocal & (
-::		set "dk_callDKCmake=%dk_exec%"
-::	)
+::	echo %dk_call% dk_exec %_ARGS_%
+::	%dk_call% dk_exec %_ARGS_%
+
+
+	%dk_call% dk_exec %ComSpec% /c call "%DKBATCH_FUNCTIONS_DIR_%%_func_%.cmd" !dk_allButFirstArgs!
+	echo dk_exec = %dk_exec%
+	endlocal & (
+		set "dk_callDKCmake=%dk_exec%"
+	)
 %endfunction%
 
 
@@ -45,6 +52,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
+	%dk_call% dk_echo
+	%dk_call% dk_set myPath "%windir:\=/%/System32/test.v123.zip"
+	%dk_call% dk_callDKBatch dk_basename "%myPath%"
+	%dk_call% dk_echo "%myPath%: basename = %dk_callDKBatch%"
+
+%endfunction%
+
+	
+	::###### dk_setEx ######
 	::	                  ALL: " ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "
 	::                  VALID: "     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "
 	%dk_call% dk_setEx myVar   "     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "
@@ -52,6 +68,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo "%%myVar%%" = "%myVar%"
 	echo  ^^!myVar^^!  =  !myVar!
 
+	::###### dk_test ######
 ::	%dk_call% dk_callDKBatch dk_test "     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "
 ::	%dk_call% dk_callDKBatch dk_test " " "!" "#" "$" "%" "&" "'" "(" ")" "*" "+" "," "-" "." "/" ":" ";" "<" "=" ">" "?" "@" "[" "\" "]" "^" "_" "`" "{" "|" "}" "~"
 	%dk_call% dk_callDKBatch dk_test "     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "

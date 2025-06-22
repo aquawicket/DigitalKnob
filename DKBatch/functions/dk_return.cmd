@@ -1,10 +1,14 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+::@echo off&::###### DK.cmd #########################################################################################################################
+::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
+echo:
+if "%~1" neq "" (echo 1 = %~1)
+if "!errorlevel!" neq "" (echo errorlevel = !errorlevel!)
+if "!LAST_STATUS!" neq "" (echo LAST_STATUS = !LAST_STATUS!)
 
 
-::if not defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
+if not defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
 if not defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
 if not defined dk_return (set "dk_return=dk_return")
 
@@ -22,9 +26,10 @@ if not defined dk_return (set "dk_return=dk_return")
 ::#		dk_return  1 "error message"	error
 ::#
 :dk_return
-::%setlocal%
+%setlocal%
 
 	set "arg1=%~1"
+	set "arg2=%~2"
 	if defined %~1 (set "arg1=!%~1!")
 	if not defined arg1 (
 		goto :endNumCheck
@@ -37,55 +42,48 @@ if not defined dk_return (set "dk_return=dk_return")
 	:endNumCheck
 
 	::##### No Parameters ######
-	if "%~1" equ "" (
-		set "dk_return_PRINT=%dk_return_PRINT%"
-		set "LAST_STATUS=!errorlevel!"
-		set "LAST_FILE=!__FILENAME__!"
-		set "LAST_FUNC=!__FUNC__!"
-		set "LAST_ARGS=!__ARGV__!"
+	if not defined arg1 (
+
+		rem echo ##### No Parameters ######
+		set /a "LAST_STATUS=!errorlevel!"
+		rem set /a "LAST_STATUS=!dk_errorlevel!"  & set "dk_errorlevel="
 		set "LAST_MESSAGE=dk_return generic"
 	
 	rem ##### 1 Parameter ######
-	) else if "%~2" equ "" (
+	) else if not defined arg2 (
+
+		rem echo ##### 1 Parameter ######
 		if defined arg1IsNumber (
-			echo IS NUMBER
-			set "LAST_STATUS=%~1"
-			set "LAST_MESSAGE=dk_return generic"
+			set /a "LAST_STATUS=%~1"
+			set "LAST_MESSAGE=dk_return_generic"
 		) else (
-			echo IS NOT NUMBER
-			set "LAST_STATUS=!errorlevel!"
+			set /a "LAST_STATUS=!errorlevel!"
+			rem set /a "LAST_STATUS=!dk_errorlevel!" & set "dk_errorlevel="
 			set "LAST_MESSAGE=%~1"
 		)
-		echo LAST_STATUS = !LAST_STATUS!
-		echo LAST_MESSAGE = !LAST_MESSAGE!
-	
-		set "dk_return_PRINT=%dk_return_PRINT%"
-		set "LAST_FILE=!__FILENAME__!"
-		set "LAST_FUNC=!__FUNC__!"
-		set "LAST_ARGV=!__ARGV__!"
-	
+
 	rem ##### 2 Parameters ######
-	) else if "%~2" neq "" (
-		set "dk_return_PRINT=%dk_return_PRINT%"
-		set "LAST_STATUS=%~1"
-		set "LAST_FILE=!__FILENAME__!"
-		set "LAST_FUNC=!__FUNC__!"
-		set "LAST_ARGV=!__ARGV__!"
-		set "LAST_MESSAGE=%~2"
+	) else if defined arg2 (
+
+		rem echo ##### 2 Parameters ######
+		set /a "LAST_STATUS=%~1"
+		set "LAST_MESSAGE=### ERROR ###"
 	)
 
+	set "dk_return_PRINT=!dk_return_PRINT!"
+	set "LAST_FILE=!__FILENAME__!"
+	set "LAST_FUNC=!__FUNC__!"
+	set "LAST_ARGS=!__ARGV__!"
+		
+	rem if "!LAST_STATUS!" equ "0" (echo %green%LAST_STATUS:'!LAST_STATUS!' is '0'%clr%)
+	rem if "!LAST_STATUS!" neq "0" (echo %red%LAST_STATUS:'!LAST_STATUS!' NOT '0'%clr%)
+	echo "LAST_MESSAGE = !LAST_MESSAGE!"
+echo:82	
 	if "%dk_return_PRINT_SUCCESS%" equ "1" (
-		if "!LAST_STATUS!" equ "0"	echo "!LAST_FUNC!(!LAST_ARGV!) %green%!LAST_STATUS! '!LAST_MESSAGE!' %clr%"
+		if "!LAST_STATUS!" equ "0"	(echo "!LAST_FUNC!(!LAST_ARGV!) %green%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
 	) 
 	if "%dk_return_PRINT_ERRORS%" equ "1" (
-		if "!LAST_STATUS!" neq "0"	dk_error "!LAST_FUNC!(!LAST_ARGV!):!LAST_STATUS! '!LAST_MESSAGE!' %clr%"
+		if "!LAST_STATUS!" neq "0"	(echo "!LAST_FUNC!(!LAST_ARGV!):%red%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
 	)
-call exit /b %LAST_STATUS%
-
-:isNumber
-setlocal enableDelayedExpansion
-
-	SET number=%1
-	if 1%1 EQU +1%1 echo positive number
-	if %1==-%number:-=% echo negative number
-exit /b 0
+	
+exit /b !LAST_STATUS! & set "LAST_STATUS="

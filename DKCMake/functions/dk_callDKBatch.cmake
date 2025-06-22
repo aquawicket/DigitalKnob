@@ -12,10 +12,10 @@ include_guard()
 #########################################################################
 
 #########################################################################
-#dk_set(dk_callDKBatch_PRINT_COMMAND 1)
 dk_set(dk_callDKBatch_PRINT_CALL 1)
-dk_set(dk_callDKBatch_PRINT_OUTPUT 1)
+dk_set(dk_callDKBatch_PRINT_COMMAND 1)
 dk_set(dk_callDKBatch_PRINT_RESULT 1)
+dk_set(dk_callDKBatch_PRINT_OUTPUT 1)
 #########################################################################
 # dk_callDKBatch(<func>, <args...>)
 #
@@ -34,41 +34,30 @@ function(dk_callDKBatch func)
 
 	dk_validate(CMD_EXE 					"dk_CMD_EXE()")
 	dk_validate(DKBATCH_FUNCTIONS_DIR_		"dk_DKBRANCH_DIR()")
+	set(dk_callDKBatch_CALL "${func}(${args})")
 	set(dk_callDKBatch_COMMAND ${CMD_EXE} /V:ON /c ${DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
 
+	if("${dk_callDKBatch_PRINT_CALL}" EQUAL 1)
+		dk_echo("${lblue}dk_callDKBatch_CALL${clr} = '${dk_callDKBatch_CALL}'")
+	endif()
 	if("${dk_callDKBatch_PRINT_COMMAND}" EQUAL 1)
 		dk_echo("${lblue}dk_callDKBatch_COMMAND${clr} = '${dk_callDKBatch_COMMAND}'")
 	endif()
-	if("${dk_callDKBatch_PRINT_CALL}" EQUAL 1)
-		set(dk_callDKBatch_CALL "${func}(${args})")
-		dk_echo("${lblue}dk_callDKBatch_CALL${clr} = '${dk_callDKBatch_CALL}'")
-	endif()
 
-	execute_process(COMMAND 
-		${dk_callDKBatch_COMMAND} 
-		OUTPUT_VARIABLE dk_callDKBatch_OUTPUT 
-		RESULT_VARIABLE dk_callDKBatch_RESULT 
-		WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" 
-		OUTPUT_STRIP_TRAILING_WHITESPACE
-	)
+	dk_exec(${dk_callDKBatch_COMMAND} WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}")
 	
-	### process the return value ###
-	string(FIND "${dk_callDKBatch_OUTPUT}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
-	if(last_newline_pos GREATER -1)
-		string(SUBSTRING "${dk_callDKBatch_OUTPUT}" ${last_newline_pos} -1 dk_callDKBatch_OUTPUT) # Extract the last line
-	endif()
-	string(STRIP "${dk_callDKBatch_OUTPUT}" dk_callDKBatch_OUTPUT)
-
 	if("${dk_callDKBatch_PRINT_RESULT}" EQUAL 1)
-		dk_echo("${lblue}dk_callDKBatch_RESULT${clr}  = '${dk_callDKBatch_RESULT}'")
+		dk_echo("${lblue}dk_exec_exitcode${clr}  = '${dk_exec_exitcode}'")
 	endif()
 	if("${dk_callDKBatch_PRINT_OUTPUT}" EQUAL 1)
-		if(NOT "${dk_callDKBatch_OUTPUT}" STREQUAL "!${func}!")
-			dk_echo("${lblue}dk_callDKBatch_OUTPUT${clr}  = '${dk_callDKBatch_OUTPUT}'")
+		if(NOT "${dk_exec}" STREQUAL "!${func}!")
+			dk_echo("${lblue}dk_exec${clr}  = '${dk_exec}'")
 		endif()
 	endif()
 	
-	set(dk_callDKBatch "${dk_callDKBatch_OUTPUT}" PARENT_SCOPE)
+	if(NOT "${dk_exec}" STREQUAL "!${func}!")
+		set(dk_callDKBatch "${dk_exec}" PARENT_SCOPE)
+	endif()
 endfunction()
 
 
@@ -82,13 +71,19 @@ function(DKTEST)
 	dk_debugFunc(0)
 
 	dk_callDKBatch(dk_test "abc" "1 2 4")
-	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	if(dk_callDKBatch)
+		dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	endif()
 	
 	dk_callDKBatch(dk_urlExists "http://www.google.com/index.html")
-	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	if(dk_callDKBatch)
+		dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	endif()
 	
 	dk_callDKBatch(dk_urlExists "http://www.nonExistentURL/fjafjkasfjas;d")
-	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	if(dk_callDKBatch)
+		dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	endif()
 	
 	#dk_callDKBatch(dk_test "abc" "1 2 4")
 	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
