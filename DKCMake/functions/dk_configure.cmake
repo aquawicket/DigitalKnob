@@ -21,6 +21,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc()
 	
 	dk_assertPath(SOURCE_DIR)
+	dk_debug("SOURCE_DIR = ${SOURCE_DIR}")
 	
 	#if(NOT REBUILDALL)
 		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
@@ -43,11 +44,12 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_validate(Target_Config "dk_Target_Config()")
 	
 	dk_assertPath(${${CURRENT_PLUGIN}})
+	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_debug("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
 	
 	if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${Target_Config}")
 		dk_mkdir("${${CURRENT_PLUGIN}_CONFIG_DIR}")
-		#dk_assertPath("${${CURRENT_PLUGIN}}/${Target_Config}")
 	endif()
 	dk_assertPath("${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	
@@ -59,8 +61,6 @@ function(dk_configure SOURCE_DIR) #ARGN
 	
 	dk_chdir("${BINARY_DIR}")
 	# Configure with CMake		(multi_config / single_config)
-	
-	
 	
 	
 	###### Configure with CMAKE ######
@@ -153,5 +153,5 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_depend(zlib)
-	dk_configure(${ZLIB_DIR})
+	dk_configure(${ZLIB})
 endfunction()
