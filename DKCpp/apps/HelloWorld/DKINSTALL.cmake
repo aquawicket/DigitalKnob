@@ -41,7 +41,7 @@ endforeach()
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${Target_App_Dir}/CMakeLists.txt)
 
 dk_basename("${Target_App_Dir}")
-dk_set(CURRENT_PLUGIN		"${dk_basename}")
+dk_envList(PLUGIN PUSH "${dk_basename}")
 dk_set(${CURRENT_PLUGIN}	"${CMAKE_SOURCE_DIR}")
 
 dk_define(DKAPP)
