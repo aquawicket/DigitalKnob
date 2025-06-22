@@ -112,53 +112,76 @@ function dk_init(){
 # dk_DKPOWERSHELL_VARS()
 #
 function dk_DKPOWERSHELL_VARS(){
-	${env:DKPOWERSHELL_FUNCTIONS_DIR} 		= Split-Path -Parent ${PSCommandPath};
-	${global:DKPOWERSHELL_FUNCTIONS_DIR} 	= Split-Path -Parent ${PSCommandPath};
-	${global:DKPOWERSHELL_FUNCTIONS_DIR} 	= ${env:DKPOWERSHELL_FUNCTIONS_DIR} -replace '\\', '/';
-	${global:DKPOWERSHELL_DIR} 				= Split-Path -Parent ${env:DKPOWERSHELL_FUNCTIONS_DIR}
-	${global:DKPOWERSHELL_FUNCTIONS_DIR_} 	= "${env:DKPOWERSHELL_FUNCTIONS_DIR}/";
+	if(!${env:DKPOWERSHELL_FUNCTIONS_DIR}) 	{ ${env:DKPOWERSHELL_FUNCTIONS_DIR} 	= Split-Path -Parent ${PSCommandPath}; }
+	if(!${env:DKPOWERSHELL_FUNCTIONS_DIR})	{ ${env:DKPOWERSHELL_FUNCTIONS_DIR} 	= ${env:DKPOWERSHELL_FUNCTIONS_DIR} -replace '\\', '/'; }
+	if(!${env:DKPOWERSHELL_DIR})			{ ${env:DKPOWERSHELL_DIR} 				= Split-Path -Parent ${env:DKPOWERSHELL_FUNCTIONS_DIR}; }
+	if(!${env:DKPOWERSHELL_FUNCTIONS_DIR_})	{ ${env:DKPOWERSHELL_FUNCTIONS_DIR_}  	= "${env:DKPOWERSHELL_FUNCTIONS_DIR}/";}
+	
+	${global:DKPOWERSHELL_DIR} 				= ${env:DKPOWERSHELL_DIR};
+	${global:DKPOWERSHELL_FUNCTIONS_DIR} 	= ${env:DKPOWERSHELL_FUNCTIONS_DIR};
+	${global:DKPOWERSHELL_FUNCTIONS_DIR_} 	= ${env:DKPOWERSHELL_FUNCTIONS_DIR_};
 }
 
 ##################################################################################
 # dk_DKHTTP_VARS()
 #
 function dk_DKHTTP_VARS(){
-	$global:DKHTTP_DIGITALKNOB_DIR = "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
-	$global:DKHTTP_DKBRANCH_DIR = "$DKHTTP_DIGITALKNOB_DIR/Development"
-	$global:DKHTTP_DKPOWERSHELL_DIR = "$DKHTTP_DKBRANCH_DIR/DKPowershell"
-	$global:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = "$DKHTTP_DKPOWERSHELL_DIR/functions"
+	if(!${env:DKHTTP_DIGITALKNOB_DIR})				{ ${env:DKHTTP_DIGITALKNOB_DIR} 			= "https://raw.githubusercontent.com/aquawicket/DigitalKnob"; }
+	if(!${env:DKHTTP_DKBRANCH_DIR})					{ ${env:DKHTTP_DKBRANCH_DIR}				= "${env:DKHTTP_DIGITALKNOB_DIR}/Development"; }
+	if(!${env:DKHTTP_DKPOWERSHELL_DIR})				{ ${env:DKHTTP_DKPOWERSHELL_DIR}			= "${env:DKHTTP_DKBRANCH_DIR}/DKPowershell"; }
+	if(!${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR})	{ ${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}	= "${env:DKHTTP_DKPOWERSHELL_DIR}/functions"; }
+	
+	${global:DKHTTP_DIGITALKNOB_DIR} 			= ${env:DKHTTP_DIGITALKNOB_DIR};
+	${global:DKHTTP_DKBRANCH_DIR} 				= ${env:DKHTTP_DKBRANCH_DIR}; 
+	${global:DKHTTP_DKPOWERSHELL_DIR} 			= ${env:DKHTTP_DKPOWERSHELL_DIR}; 
+	${global:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR} = ${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR};
 }
 
 ##################################################################################
 # dk_initFiles
 #
 function dk_initFiles(){
-	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_source.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1" }
-	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1
-	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_call.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1" }
-	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1
+	if(!(Test-Path "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1")){ Invoke-WebRequest -URI "${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1" -OutFile "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1" }
+	. "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1";
+	if(!(Test-Path "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1")){ Invoke-WebRequest -URI "${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1" -OutFile "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1" }
+	. "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1";
 }
 
 ##################################################################################
 # dk_setupCallstack()
 #
 function dk_setupCallstack(){
-	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_callStack.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1" }
+	if(!(Test-Path "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1")){ Invoke-WebRequest -URI "${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1" -OutFile "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1" }
 }
 
 ##################################################################################
 # dk_DKSCRIPT_VARS()
 #
 function dk_DKSCRIPT_VARS(){
-	if(!${DKSCRIPT_PATH}){ $global:DKSCRIPT_PATH = Get-EntryPointAbsFilePath }
-	$global:DKSCRIPT_PATH = ${DKSCRIPT_PATH} -replace '\\', '/';
-	if(!(Test-Path ${DKSCRIPT_PATH})){ dk_call dk_echo "DKSCRIPT_PATH not found!"; exit } 
-	$global:DKSCRIPT_ARGS = ${args}
-	$global:DKSCRIPT_DIR = Split-Path -Parent ${DKSCRIPT_PATH}
-	$global:DKSCRIPT_DIR = ${DKSCRIPT_DIR} -replace '\\', '/';
-	if(!(Test-Path ${DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR not found!"; exit } 
-	$global:DKSCRIPT_NAME = Split-Path -Leaf ${DKSCRIPT_PATH}
-	if(!${DKSCRIPT_EXT}){ $global:DKSCRIPT_EXT = [System.IO.Path]::GetExtension("$DKSCRIPT_PATH") }
+	### DKSCRIPT_PATH ###
+	if(!${env:DKSCRIPT_PATH}){ ${env:DKSCRIPT_PATH} = Get-EntryPointAbsFilePath; }
+	${env:DKSCRIPT_PATH} = ${env:DKSCRIPT_PATH} -replace '\\', '/';
+	if(!(Test-Path ${env:DKSCRIPT_PATH})){ dk_call dk_echo "DKSCRIPT_PATH:'${env:DKSCRIPT_PATH}' not found!"; exit -1; } 
+	
+	### DKSCRIPT_ARGS ###
+	if(!${env:DKSCRIPT_ARGS}){ ${env:DKSCRIPT_ARGS} = ${args}; }
+	
+	### DKSCRIPT_DIR ###
+	if(!${env:DKSCRIPT_DIR}){ ${env:DKSCRIPT_DIR} = Split-Path -Parent "${env:DKSCRIPT_PATH}"; }
+	${env:DKSCRIPT_DIR} = ${env:DKSCRIPT_DIR} -replace '\\', '/';
+	if(!(Test-Path ${env:DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR:'${env:DKSCRIPT_DIR}' not found!"; exit -1; } 
+	
+	### DKSCRIPT_NAME ###
+	if(!${env:DKSCRIPT_NAME}){ ${env:DKSCRIPT_NAME} = Split-Path -Leaf "${env:DKSCRIPT_PATH}"; }
+	
+	### DKSCRIPT_EXT ###
+	if(!${env:DKSCRIPT_EXT}){ ${env:DKSCRIPT_EXT} = [System.IO.Path]::GetExtension("${env:DKSCRIPT_PATH}"); }
+	
+	${global:DKSCRIPT_PATH} = ${env:DKSCRIPT_PATH};
+	${global:DKSCRIPT_ARGS} = ${env:DKSCRIPT_ARGS};
+	${global:DKSCRIPT_DIR}	= ${env:DKSCRIPT_DIR};
+	${global:DKSCRIPT_NAME} = ${env:DKSCRIPT_NAME};
+	${global:DKSCRIPT_EXT} 	= ${env:DKSCRIPT_EXT};
 }
 
 ##################################################################################
