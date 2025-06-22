@@ -13,9 +13,9 @@ include_guard()
 
 
 ######################### dk_exec SETTINGS ##############################
-#dk_set(dk_exec_ECHO_OUTPUT		1)
-#dk_set(dk_exec_ECHO_ERROR		1)
-#dk_set(dk_exec_ECHO				STDOUT) 	# STDERR, STDOUT, NONE
+dk_set(dk_exec_ECHO_OUTPUT		1)
+dk_set(dk_exec_ECHO_ERROR		1)
+dk_set(dk_exec_ECHO				STDOUT) 	# STDERR, STDOUT, NONE
 dk_set(dk_exec_ERROR_IS_FATAL	ANY)		# ANY, LAST, NONE
 #dk_set(dk_exec_ENCODING		NONE)		# NONE, AUTO, ANSI, OEM, UTF-8, UTF8
 
