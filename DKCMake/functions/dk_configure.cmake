@@ -20,7 +20,6 @@ include_guard()
 function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc()
 	
-	dk_pause()
 	dk_assertPath(SOURCE_DIR)
 	
 	#if(NOT REBUILDALL)
