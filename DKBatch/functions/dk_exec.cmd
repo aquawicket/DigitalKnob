@@ -11,10 +11,10 @@ set "dk_exec_ECHO_ERROR=1"
 set "dk_exec_PRINT_CALL=1" 			&:: dk_exec_call
 ::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
 ::set "dk_exec_PRINT_EXITCODES=1"	&:: dk_exec_exitcodes
-set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
+::set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
 ::set "dk_exec_PRINT_STDERR=1"		&:: dk_exec_stderr[]
-set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
-set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
+::set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
+::set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 ::####################################################################
 ::# dk_exec(<command> <ret:optional>)
 ::#

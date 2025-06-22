@@ -2,13 +2,14 @@
 ::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 ::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
-echo:
-if "%~1" neq "" (echo 1 = %~1)
-if "!errorlevel!" neq "" (echo errorlevel = !errorlevel!)
-if "!LAST_STATUS!" neq "" (echo LAST_STATUS = !LAST_STATUS!)
+
+::echo:
+::if "%~1" neq "" (echo 1 = %~1)
+::if "!errorlevel!" neq "" (echo errorlevel = !errorlevel!)
+::if "!LAST_STATUS!" neq "" (echo LAST_STATUS = !LAST_STATUS!)
 
 
-if not defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
+::if not defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
 if not defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
 if not defined dk_return (set "dk_return=dk_return")
 
@@ -47,7 +48,7 @@ if not defined dk_return (set "dk_return=dk_return")
 		rem echo ##### No Parameters ######
 		set /a "LAST_STATUS=!errorlevel!"
 		rem set /a "LAST_STATUS=!dk_errorlevel!"  & set "dk_errorlevel="
-		set "LAST_MESSAGE=dk_return generic"
+		set "LAST_MESSAGE="
 	
 	rem ##### 1 Parameter ######
 	) else if not defined arg2 (
@@ -55,7 +56,7 @@ if not defined dk_return (set "dk_return=dk_return")
 		rem echo ##### 1 Parameter ######
 		if defined arg1IsNumber (
 			set /a "LAST_STATUS=%~1"
-			set "LAST_MESSAGE=dk_return_generic"
+			set "LAST_MESSAGE="
 		) else (
 			set /a "LAST_STATUS=!errorlevel!"
 			rem set /a "LAST_STATUS=!dk_errorlevel!" & set "dk_errorlevel="
@@ -67,7 +68,7 @@ if not defined dk_return (set "dk_return=dk_return")
 
 		rem echo ##### 2 Parameters ######
 		set /a "LAST_STATUS=%~1"
-		set "LAST_MESSAGE=### ERROR ###"
+		set "LAST_MESSAGE="
 	)
 
 	set "dk_return_PRINT=!dk_return_PRINT!"
@@ -77,8 +78,8 @@ if not defined dk_return (set "dk_return=dk_return")
 		
 	rem if "!LAST_STATUS!" equ "0" (echo %green%LAST_STATUS:'!LAST_STATUS!' is '0'%clr%)
 	rem if "!LAST_STATUS!" neq "0" (echo %red%LAST_STATUS:'!LAST_STATUS!' NOT '0'%clr%)
-	echo "LAST_MESSAGE = !LAST_MESSAGE!"
-echo:82	
+	rem echo "LAST_MESSAGE = !LAST_MESSAGE!"
+
 	if "%dk_return_PRINT_SUCCESS%" equ "1" (
 		if "!LAST_STATUS!" equ "0"	(echo "!LAST_FUNC!(!LAST_ARGV!) %green%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
 	) 
