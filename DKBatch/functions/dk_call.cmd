@@ -9,7 +9,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::set "dk_call_PRINT_ENTRY=1"
 ::set "dk_call_PRINT_EXIT=1"
 ::set "dk_call_PRINT_SCOPE=1"
-set "dk_call_STACK_TO_FILE=1"
+::set "dk_call_STACK_TO_FILE=1"
+set "dk_call_ENTRY_TO_FILE=1"
+set "dk_call_EXIT_TO_FILE=1"
 ::set "dk_call_IGNORE=dk_debugFunc;dk_echo;"
 ::####################################################################
 ::# dk_call(command args)
@@ -47,6 +49,7 @@ set "dk_call_STACK_TO_FILE=1"
 
 	::###### Print function entry ####
 	if "%dk_call_PRINT_ENTRY%" equ "1" (call :dk_call_PRINT_ENTRY)
+	if "%dk_call_ENTRY_TO_FILE%" equ "1" (call :dk_call_ENTRY_TO_FILE)
 	
 	if %LVL% lss 1 (exit /b !errorlevel!)
 
@@ -82,6 +85,7 @@ set "dk_call_STACK_TO_FILE=1"
 		
 		rem ###### Print function exit ######
 		if "%dk_call_PRINT_EXIT%" equ "1" (call :dk_call_PRINT_EXIT)
+		if "%dk_call_EXIT_TO_FILE%" equ "1" (call :dk_call_EXIT_TO_FILE)
 		set /a LVL-=1
 	)
 	
@@ -108,8 +112,6 @@ exit /b !errorlevel!
 ::#
 :dk_call_PRINT_ENTRY
 	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%return%)
-	if "%dk_call_PRINT_ENTRY%" neq "1" (%return%)
-	
 	if "%~1" neq "" (
 		set "_ent_=%~1"
 	) else (
@@ -129,8 +131,6 @@ exit /b !errorlevel!
 ::#
 :dk_call_PRINT_EXIT
 	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%return%)
-	if "%dk_call_PRINT_EXIT%" neq "1" (%return%)
-	
 	if "%~1" neq "" (
 		set "_ent_=%~1"
 	) else (
@@ -145,6 +145,45 @@ exit /b !errorlevel!
 	call :updateIndent %_lvl_%
 	if "!__STATUS__!" equ "0" (set STATUS=%green%!__STATUS__!:!__BOOL__!%clr%) else (set STATUS=%red%!__STATUS__!:!__BOOL__!%clr%)
 	echo %pad%  им!__STACK__%_ent_%!
+exit /b !errorlevel!
+
+::####################################################################
+::# :dk_call_ENTRY_TO_FILE
+::#
+:dk_call_ENTRY_TO_FILE
+	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%return%)
+	if "%~1" neq "" (
+		set "_ent_=%~1"
+	) else (
+		set "_ent_=%ENTRY%"
+	)
+	if "%~1" neq "" (
+		set "_lvl_=%~2"
+	) else (
+		set "_lvl_=%LVL%"
+	)
+	call :updateIndent %_lvl_%
+	echo %pad%%_lvl_%х!__STACK__%_ent_%!>> "%DKSCRIPT_NAME%.log"
+exit /b !errorlevel!
+
+::####################################################################
+::# :dk_call_EXIT_TO_FILE
+::#
+:dk_call_EXIT_TO_FILE
+	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%return%)
+	if "%~1" neq "" (
+		set "_ent_=%~1"
+	) else (
+		set "_ent_=%ENTRY%"
+	)
+	if "%~1" neq "" (
+		set "_lvl_=%~2"
+	) else (
+		set "_lvl_=%LVL%"
+	)
+	call :updateIndent %_lvl_%
+	if "!__STATUS__!" equ "0" (set STATUS=%green%!__STATUS__!:!__BOOL__!%clr%) else (set STATUS=%red%!__STATUS__!:!__BOOL__!%clr%)
+	echo %pad%  им!__STACK__%_ent_%! >> "%DKSCRIPT_NAME%.log"
 exit /b !errorlevel!
 
 ::####################################################################
@@ -226,6 +265,14 @@ exit /b !errorlevel!
 	if not defined pad (set "pad=%clr%")
 	if not defined indent (set "indent=   ")
 	
+	
+	
+	if "%dk_call_PRINT_ENTRY%" equ "1" (
+		for /l %%x in (1, 1, %ENTRY%) do (
+			call :dk_call_PRINT_ENTRY %%x %%x
+		)
+	)
+	
 	::###### Clear the stack log file ######
 	if "%dk_call_STACK_TO_FILE%" equ "1" (
 		echo: %DKSCRIPT_PATH% %DKSCRIPT_ARGS% - %date% %time%> "%DKSCRIPT_NAME%.log"
@@ -234,9 +281,9 @@ exit /b !errorlevel!
 		)	
 	)
 	
-	if "%dk_call_PRINT_ENTRY%" equ "1" (
+	if "%dk_call_ENTRY_TO_FILE%" equ "1" (
 		for /l %%x in (1, 1, %ENTRY%) do (
-			call :dk_call_PRINT_ENTRY %%x %%x
+			call :dk_call_ENTRY_TO_FILE %%x %%x
 		)
 	)
 	%dk_call% dk_color
