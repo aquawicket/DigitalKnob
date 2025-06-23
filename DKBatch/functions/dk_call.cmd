@@ -9,6 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::set "dk_call_PRINT_ENTRY=1"
 ::set "dk_call_PRINT_EXIT=1"
 ::set "dk_call_PRINT_SCOPE=1"
+set "dk_call_STACK_TO_FILE=1"
 ::set "dk_call_IGNORE=dk_debugFunc;dk_echo;"
 ::####################################################################
 ::# dk_call(command args)
@@ -61,7 +62,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	rem dk_call% dk_isCRLF "%__CMND__%" || %dk_call% dk_fileToCRLF "%__CMND__%"
 	::###### Entry ############################################################################################
-	rem if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
+	if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__:/=\% %__ARGV__% && (
 		set "__STATUS__=!errorlevel!"
@@ -173,15 +174,21 @@ exit /b !errorlevel!
 	(set /a LVL+=1)
 	(set /a ENTRY+=1)
 	call :setGlobal __STACK__%ENTRY% %*
+	
+	::echo %ENTRY%: !__STACK__%ENTRY%!
+	if "%dk_call_STACK_TO_FILE%" equ "1" (
+		echo %ENTRY%: !__STACK__%ENTRY%! >> "%DKSCRIPT_NAME%.log"
+	)
 exit /b !errorlevel!
 
 ::####################################################################
 ::# :setGlobal(name value)
 ::#
 :setGlobal
+setlocal enableDelayedExpansion
 	set dk_allButFirstArgs=%*
-	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set argv=%%b)
-	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
+	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set %~1=%%b)
+	::(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
 exit /b !errorlevel!
 
 ::####################################################################
@@ -219,17 +226,26 @@ exit /b !errorlevel!
 	if not defined pad (set "pad=%clr%")
 	if not defined indent (set "indent=   ")
 	
+	::###### Clear the stack log file ######
+	if "%dk_call_STACK_TO_FILE%" equ "1" (
+		echo: %DKSCRIPT_PATH% %DKSCRIPT_ARGS% - %date% %time%> "%DKSCRIPT_NAME%.log"
+		for /l %%x in (1, 1, %ENTRY%) do (
+			echo %%x: !__STACK__%%x! >> "%DKSCRIPT_NAME%.log"
+		)	
+	)
+	
 	if "%dk_call_PRINT_ENTRY%" equ "1" (
 		for /l %%x in (1, 1, %ENTRY%) do (
 			call :dk_call_PRINT_ENTRY %%x %%x
 		)
 	)
 	%dk_call% dk_color
+
 exit /b !errorlevel!
 
 
 
-
+	
 
 
 

@@ -309,6 +309,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 		dk_echo "%clr% COLOR OFF"
 	:USE_COLOR_endif
+exit /b !errorlevel!
 %endfunction%
 
 

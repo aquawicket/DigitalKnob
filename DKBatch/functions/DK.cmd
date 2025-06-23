@@ -298,9 +298,10 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# :setGlobal(name value)
 ::#
 :setGlobal
+setlocal enableDelayedExpansion
 	set dk_allButFirstArgs=%*
-	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set argv=%%~b)
-	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
+	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set %1=%%b)
+	:: (set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
 exit /b !errorlevel!
 
 ::####################################################################
