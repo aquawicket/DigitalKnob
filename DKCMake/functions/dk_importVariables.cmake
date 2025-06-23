@@ -13,7 +13,7 @@ include_guard()
 
 
 #if(NOT DEFINED dk_importVariables_DEBUG)
-#	set(dk_importVariables_DEBUG 1)
+	set(dk_importVariables_DEBUG 1)
 #endif()
 #########################################################################
 # dk_importVariables(PLUGIN_URL) BRANCH FOLDER NAME _PATH_ ROOT TAG VERSION
@@ -449,7 +449,7 @@ function(dk_importVariables)
 	message("############# ${CURRENT_PLUGIN}_VARIABLES #############")
 	if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_GIT_NAME_LOWER)
 		if(NOT "${PLUGIN_IMPORT_NAME_LOWER}" STREQUAL "${PLUGIN_GIT_NAME_LOWER}")
-			dk_warning("PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match ")
+			#dk_warning("PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match ")
 		endif()
 	endif()
 

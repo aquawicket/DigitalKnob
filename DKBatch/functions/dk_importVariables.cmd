@@ -134,7 +134,7 @@ rem ##############################################					#########################
 rem ### PLUGIN_URL
 	rem set "PLUGIN_URL="
 	rem set "PLUGIN_URL=%URL:\=/%"
-	%dk_call% dk_set PLUGIN_URL "%URL:\=/%"											&rem PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	set "PLUGIN_URL=%URL:\=/%"														&rem PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	rem %dk_call% dk_printVar PLUGIN_URL 										
 
 rem ### PLUGIN_URL_FILENAME
@@ -346,8 +346,7 @@ rem ##############################################
 	)
 
 rem ### CURRENT_PLUGIN
-	set "CURRENT_PLUGIN="
-	%dk_call% dk_set CURRENT_PLUGIN !PLUGIN_IMPORT_NAME_UPPER!
+	set "CURRENT_PLUGIN=!PLUGIN_IMPORT_NAME_UPPER!"
 	%dk_call% dk_convertToCIdentifier !CURRENT_PLUGIN! CURRENT_PLUGIN
 	if "!PLUGIN_IMPORT_NAME_UPPER!" neq "!CURRENT_PLUGIN!" (
 		%dk_call% dk_notice "!PLUGIN_IMPORT_NAME_UPPER! contains non-alphanumeric characters and is changed to !CURRENT_PLUGIN!"
@@ -355,40 +354,37 @@ rem ### CURRENT_PLUGIN
 	rem %dk_call% dk_printVar CURRENT_PLUGIN 									&rem CURRENT_PLUGIN			: ZLIB
 
 rem ### <PLUGIN>
-	set "!CURRENT_PLUGIN!="
-	%dk_call% dk_set !CURRENT_PLUGIN! !PLUGIN_INSTALL_PATH!
+	set "!CURRENT_PLUGIN!=!PLUGIN_INSTALL_PATH!"
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN!  								&rem ZLIB					: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	
 rem ### <PLUGIN>_DIR     ### DO NOT USE GIT_DIR ###
 	if "!CURRENT_PLUGIN!" neq "GIT" (
-		set "!CURRENT_PLUGIN!_DIR="
-		%dk_call% dk_set !CURRENT_PLUGIN!_DIR !PLUGIN_INSTALL_PATH!
+		set "!CURRENT_PLUGIN!_DIR=!PLUGIN_INSTALL_PATH!"
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DIR 							& rem ZLIB_DIR				: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	)
 
 rem ### <PLUGIN>_URL
-	set "!CURRENT_PLUGIN!_URL="
-	%dk_call% dk_set !CURRENT_PLUGIN!_URL !PLUGIN_URL!
+	set "!CURRENT_PLUGIN!_URL=!PLUGIN_URL!"
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_URL 								&rem ZLIB_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
 rem ### <PLUGIN>_IMPORT_FILE
 	set "!CURRENT_PLUGIN!_DK_FILE="
-	%dk_call% dk_set !CURRENT_PLUGIN!_IMPORT_FILE !PLUGIN_URL_FILENAME!
+	set "!CURRENT_PLUGIN!_IMPORT_FILE=!PLUGIN_URL_FILENAME!"
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_IMPORT_FILE 							&rem ZLIB_IMPORT_FILE 			: master.zip
 	
 rem ### <PLUGIN>_VERSION
 	set "!CURRENT_PLUGIN!_VERSION="
-	%dk_call% dk_set !CURRENT_PLUGIN!_VERSION !PLUGIN_INSTALL_VERSION!
+	set "!CURRENT_PLUGIN!_VERSION=!PLUGIN_INSTALL_VERSION!"
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_VERSION 							&rem ZLIB_VERSION  			: master
 
 rem ### <PLUGIN>_FOLDER
 	set "!CURRENT_PLUGIN!_FOLDER="
-	%dk_call% dk_set !CURRENT_PLUGIN!_FOLDER !PLUGIN_INSTALL_FOLDER!
+	set "!CURRENT_PLUGIN!_FOLDER=!PLUGIN_INSTALL_FOLDER!"
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_FOLDER 							&rem ZLIB_FOLDER			: zlib-master
 
 rem ### <PLUGIN>_IMPORT_NAME
 	set "!CURRENT_PLUGIN!_IMPORT_NAME="	
-	%dk_call% dk_set !CURRENT_PLUGIN!_IMPORT_NAME !PLUGIN_IMPORT_NAME_LOWER!
+	set "!CURRENT_PLUGIN!_IMPORT_NAME=!PLUGIN_IMPORT_NAME_LOWER!"
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_IMPORT_NAME                      &rem ZLIB_IMPORT_NAME		: zlib
 
 rem ### <PLUGIN>_BRANCH
@@ -401,7 +397,7 @@ rem ### <PLUGIN>_BRANCH
 rem ### <PLUGIN>_TAG
 	set "!CURRENT_PLUGIN!_TAG="
 	if defined PLUGIN_GIT_TAG (
-		%dk_call% dk_set !CURRENT_PLUGIN!_TAG !PLUGIN_GIT_TAG!
+		set "!CURRENT_PLUGIN!_TAG=!PLUGIN_GIT_TAG!"
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_TAG 							&rem ZLIB_TAG				:
     )
 	
@@ -413,35 +409,35 @@ rem #####################################################
 rem ### <PLUGIN>_TUPLE_DIR
 	set "!CURRENT_PLUGIN!_TUPLE_DIR="
 	if defined Target_Tuple (
-		%dk_call% dk_set !CURRENT_PLUGIN!_TUPLE_DIR "!PLUGIN_INSTALL_PATH!/!Target_Tuple!"
+		set "!CURRENT_PLUGIN!_TUPLE_DIR=!PLUGIN_INSTALL_PATH!/!Target_Tuple!"
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_TUPLE_DIR 					&rem ZLIB_TUPLE_DIR	: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	) 
 	
 rem ### <PLUGIN>_CONFIG_DIR
 	set "!CURRENT_PLUGIN!_CONFIG_DIR="
 	if defined CONFIG_PATH (
-		%dk_call% dk_set !CURRENT_PLUGIN!_CONFIG_DIR "!PLUGIN_INSTALL_PATH!/!CONFIG_PATH!"
+		set "!CURRENT_PLUGIN!_CONFIG_DIR=!PLUGIN_INSTALL_PATH!/!CONFIG_PATH!"
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_CONFIG_DIR 					&rem ZLIB_CONFIG_DIR	: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	) 
 	
 rem ### <PLUGIN>_BUILD_DIR
 	set "!CURRENT_PLUGIN!_BUILD_DIR="
 	if defined BUILD_PATH (
-		%dk_call% dk_set !CURRENT_PLUGIN!_BUILD_DIR "!PLUGIN_INSTALL_PATH!/!BUILD_PATH!"
+		set "!CURRENT_PLUGIN!_BUILD_DIR=!PLUGIN_INSTALL_PATH!/!BUILD_PATH!"
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_BUILD_DIR 					&rem ZLIB_BUILD_DIR	: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	) 
 	
 rem ### <PLUGIN>_DEBUG_DIR
 	set "!CURRENT_PLUGIN!_DEBUG_DIR="
 	if defined Debug_Dir (
-		%dk_call% dk_set !CURRENT_PLUGIN!_DEBUG_DIR "!PLUGIN_INSTALL_PATH!/!Target_Tuple!/!Debug_Dir!"
+		set "!CURRENT_PLUGIN!_DEBUG_DIR=!PLUGIN_INSTALL_PATH!/!Target_Tuple!/!Debug_Dir!"
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_DEBUG_DIR 					&rem ZLIB_DEBUG_DIR	: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	) 
 	
 rem ### <PLUGIN>_RELEASE_DIR
 	set "!CURRENT_PLUGIN!_RELEASE_DIR="
 	if defined Release_Dir (
-		%dk_call% dk_set !CURRENT_PLUGIN!_RELEASE_DIR "!PLUGIN_INSTALL_PATH!/!Target_Tuple!/!Release_Dir!"
+		set "!CURRENT_PLUGIN!_RELEASE_DIR=!PLUGIN_INSTALL_PATH!/!Target_Tuple!/!Release_Dir!"
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_RELEASE_DIR 					&rem ZLIB_RELEASE_DIR	: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	) 
 
