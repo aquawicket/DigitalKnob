@@ -24,6 +24,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "dk_basename=%dk_basename%"
 		if "%~2" neq "" (set "%~2=%dk_basename%")
 	)
+	
+	echo %dk_basename% >&3
 %endfunction%
 
 

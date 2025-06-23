@@ -28,7 +28,7 @@ if defined line goto.bat nextWord
 echo/> CON
 
 echo.bat Calling subroutine from second point
-call.bat :subroutine "Second time"
+call :subroutine "Second time"
 echo.bat Returned from subroutine
 
 rem Use exit /B to terminate the main program

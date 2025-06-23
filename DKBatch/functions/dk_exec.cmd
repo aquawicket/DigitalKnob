@@ -5,8 +5,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################### dk_exec SETTINGS #########################
-if not defined dk_exec_ECHO_OUTPUT (set "dk_exec_ECHO_OUTPUT=1")
-if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=1")
+if not defined dk_exec_ECHO_OUTPUT (set "dk_exec_ECHO_OUTPUT=0")
+if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=0")
 
 ::set "dk_exec_PRINT_CALL=1" 		&:: dk_exec_call
 ::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
@@ -146,11 +146,11 @@ if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=1")
 	%dk_call% dk_debugFunc 0
 
 ::	set "dk_exec_ECHO_OUTPUT=1"
-	set "dk_exec_ECHO_ERROR=1"
+::	set "dk_exec_ECHO_ERROR=1"
 ::	set "dk_exec_PRINT_CALL=1"
 ::	set "dk_exec_PRINT_COMMAND=1"
 ::	set "dk_exec_PRINT_EXITCODES=1"
-	set "dk_exec_PRINT_EXITCODE=1"
+::	set "dk_exec_PRINT_EXITCODE=1"
 ::	set "dk_exec_PRINT_STDERR=1"
 ::	set "dk_exec_PRINT_STDOUT=1"
 ::	set "dk_exec_PRINT_OUTPUT=1"

@@ -1,0 +1,85 @@
+@{' 2>nul&::'={\"<<BATCH_SCRIPT 2>/dev/null;#"}}[0]<#
+@echo off
+::########################## Batch Script Begin ##########################
+
+::### Print Batch Version Info ###
+if defined ComSpec (set "DKSHELL_PATH=%ComSpec:\=/%")
+for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL_NAME=%%~nZ")
+for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")
+set "DKSHELL_VERSION=%DKSHELL_VERSION:Version =%"
+set "ESC="
+echo %ESC%[42m %ESC%[30m %DKSHELL_NAME% %DKSHELL_VERSION% %ESC%[0m %DKSHELL_PATH%
+
+echo:
+set "DKSCRIPT_PATH=%~0"
+set "DKSCRIPT_ARGS=%*"
+echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
+echo DKSCRIPT_ARGS = %DKSCRIPT_ARGS%
+echo:
+
+pause
+
+::########################## Batch Script End ##########################
+exit /b 0
+goto: eof
+type con >nul
+BATCH_SCRIPT
+#>
+
+
+
+
+
+echo \" <<'POWERSHELL_SCRIPT' >/dev/null # " | Out-Null
+########################## PowerShell Script Begin ##########################
+
+### Print Powershell Version Info ###
+${DKSHELL} = (Get-Process -Id $pid).Name;
+${DKSHELL_VERSION} = $PSVersionTable.PSVersion.ToString();
+${DKSHELL_PATH} = (get-command ${DKSHELL}).Path;
+if(!${global:ESC}){ ${global:ESC} = "$([char]27)"; }				# escape character
+Write-Host "${ESC}[44m${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m ${DKSHELL_PATH}";
+
+Write-Host "";
+${DKSCRIPT_PATH} = "${PSCommandPath}";
+${DKSCRIPT_ARGS} = "";
+Write-Host "DKSCRIPT_PATH = ${DKSCRIPT_PATH}";
+Write-Host "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}";
+Write-Host "";
+
+Read-Host;
+
+
+########################## PowerShell Script End ##########################
+while ( ! $MyInvocation.MyCommand.Source ) { $input_line = Read-Host }
+exit
+<#
+POWERSHELL_SCRIPT
+
+
+
+
+
+set +o histexpand 2>/dev/null
+########################## Bash Script Begin ##########################
+
+### Print Bash Version Info ###
+export ESC=""  # escape character
+[ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
+export DKSHELL=$(basename ${DKSHELL_PATH})
+export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
+echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m ${DKSHELL_PATH}"
+
+echo ""
+DKSCRIPT_PATH=$0
+DKSCRIPT_ARGS=$*
+echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
+echo ""
+
+read -rp ''
+
+########################## Bash Script End ##########################
+case $- in *"i"*) cat /dev/stdin >/dev/null ;; esac
+exit
+#>
