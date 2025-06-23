@@ -10,12 +10,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_allButFirstArgs
 %setlocal%
-    %dk_call% dk_debugFunc 1 99
+    ::%dk_call% dk_debugFunc 1 99
 
 	set dk_allButFirstArgs=%*
-	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (
-		set dk_allButFirstArgs=%%b
+	echo all = %dk_allButFirstArgs%
+	echo ALL = !dk_allButFirstArgs!
+
+	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do (
+		endlocal & set dk_allButFirstArgs=%%b
 	)
+	echo all = %dk_allButFirstArgs%
+	echo ALL = !dk_allButFirstArgs!
 %endfunction%
 
 

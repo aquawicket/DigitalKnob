@@ -22,7 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_createShortcut "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/DigitalKnob.lnk"
 	)
 	
-	::%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"
+	%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"
 	
 	if not exist "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" (
 		%dk_call% dk_download "%DKHTTP_DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd"
