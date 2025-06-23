@@ -4,14 +4,16 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::TODO - switch to UNICODE code page
 ::chcp 65001 >NUL
 
-(set pushStack=call :pushStack %%~n0%%~0 %%*)
+
 
 ::####################################################################
 ::# DK(<DKSCRIPT_PATH>, <DKSCRIPT_ARGS>)
 ::#
 :DK
-	call :pushStack %~n0 %*
 ::%setlocal%
+	call :pushStack %~n0 %*
+	(set pushStack=call :pushStack %%~n0%%~0 %%*)
+
 	::if not exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 	
 	::### DKSHELL_PATH ###
@@ -71,7 +73,8 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	call :dk_initFiles
 	
 	::############### init dk_call ###############
-	call %DKBATCH_FUNCTIONS_DIR_:/=\%dk_call.cmd init
+	call dk_call init
+	::call %DKBATCH_FUNCTIONS_DIR_:/=\%dk_call.cmd init
 	
 	::############ load dkconfig.txt ############
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
@@ -85,7 +88,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::set "ENABLE_dk_elevate=1"
 	if "%ENABLE_dk_elevate%" neq "1" (goto skip_elevate)
 		net session >nul 2>&1
-		if %ERRORLEVEL% equ 0 (goto skip_elevate)
+		if %errorlevel% equ 0 (goto skip_elevate)
 		if "%2" equ "elevated" (set "elevated=1")
 		if not defined elevated (
 			set "elevated=1"
@@ -99,12 +102,13 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::%DK% dk_load %DKSCRIPT_PATH%
 
 	::###### DKTEST MODE ######
-	if "%DKSCRIPT_EXT%" neq ".cmd" (%return%)
-	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 0
+	if "%DKSCRIPT_EXT%" neq ".cmd" (%endfunction%)
+	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 1
 	echo:
 	echo:%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%
 	echo:
-	call :DKTEST
+	
+	call:DKTEST
 	echo:
 	echo:%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%
 	echo:
@@ -237,7 +241,8 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if defined RELOADED (exit /b -1)
 
 	echo "reloading with /v:on 'delayed expansion',  /k 'keep terminal open' . . . ."
-	set "LVL=0"
+	set "LVL="
+	set "ENTRY="
 	set "RELOADED=1"
 	set "DK.cmd="
 
@@ -293,8 +298,8 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# :setGlobal(name value)
 ::#
 :setGlobal
-	set argv=%*
-	if defined argv (set argv=!argv:*%1=!)
+	set dk_allButFirstArgs=%*
+	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set argv=%%~b)
 	(set %~1=%argv%)
 	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
 exit /b !errorlevel!
@@ -304,17 +309,18 @@ exit /b !errorlevel!
 ::#
 :pushStack
 	if not defined LVL (set /a "LVL=0")
+	if not defined LVL (set /a "ENTRY=0")
 	(set /a LVL+=1)
-	call :setGlobal __STACK__%LVL% %*
+	(set /a ENTRY+=1)
+	call :setGlobal __STACK__%ENTRY% %*
 exit /b !errorlevel!
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
+	%pushStack%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% %DKSCRIPT_PATH:/=\%
+	%DKSCRIPT_PATH:/=\%
 %endfunction%
-
-

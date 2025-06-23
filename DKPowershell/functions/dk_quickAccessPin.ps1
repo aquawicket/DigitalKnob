@@ -8,7 +8,7 @@ if(!$dk_quickAccessPin_ps1){ $dk_quickAccessPin_ps1 = 1 } else{ return } #includ
 function Global:dk_quickAccessPin() {
 	dk_debugFunc 0 99
 	
-	$path = $args[0];
+	$path = "$($args[0])";
 	$path = ${path} -replace '/', '\';
 	
 	$quickAccess = New-object -com shell.application;

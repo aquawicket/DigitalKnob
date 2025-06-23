@@ -4,8 +4,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-
-
 ::######################## dk_call settings ##########################
 ::set "dk_call_PRINT_CALLS=1"
 ::set "dk_call_PRINT_ENTRY=1"
@@ -48,10 +46,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### Print function entry ####
 	if "%dk_call_PRINT_ENTRY%" equ "1" (call :dk_call_PRINT_ENTRY)
-
+	
 	if %LVL% lss 1 (exit /b !errorlevel!)
 
-::##### Prepair ###########################################################################################
+	::##### Prepair ###########################################################################################
 	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
 	if not exist "%__CMND__%" (
@@ -61,99 +59,87 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
 	
-	::%dk_call% dk_isCRLF "%__CMND__%" || %dk_call% dk_fileToCRLF "%__CMND__%"
-::###### Entry ############################################################################################
-	if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
+	rem dk_call% dk_isCRLF "%__CMND__%" || %dk_call% dk_fileToCRLF "%__CMND__%"
+	::###### Entry ############################################################################################
+	rem if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__:/=\% %__ARGV__% && (
-		rem echo EXIT %LVL%_!__STACK__%LVL%!
-		call :setGlobal __STACK__%LVL% %lblack%!__STACK__%LVL%! status:!errorlevel!%clr%
-		set __STATUS__=!errorlevel!
-		set "LAST_BOOL=0"
+		set "__STATUS__=!errorlevel!"
+		set "__BOOL__=true"
+		rem call :setGlobal __STACK__%ENTRY% %lblack%!__STACK__%ENTRY%! %white%status:%green%!__STATUS__!:!__BOOL__!%clr%
+		
+		if "%dk_call_PRINT_EXIT%" equ "1" (call :dk_call_PRINT_EXIT)
+		set /a LVL-=1
 	) || (
-		rem echo EXIT %LVL%_!__STACK__%LVL%!
-		call :setGlobal __STACK__%LVL% %lblack%!__STACK__%LVL%! status:!errorlevel!%clr%
-		set __STATUS__=!errorlevel!
-		set "LAST_BOOL=1"
+		set "__STATUS__=!errorlevel!"
+		set "__BOOL__=false"
+		rem call :setGlobal __STACK__%ENTRY% %lblack%!__STACK__%ENTRY%! %white%status:%red%!__STATUS__!:!__BOOL__!%clr%
+		
+		rem ###### Print function exit ######
+		if "%dk_call_PRINT_EXIT%" equ "1" (call :dk_call_PRINT_EXIT)
+		set /a LVL-=1
 	)
-
-	
-	
-::###### Exit #############################################################################################
-
-	::###### Print function exit ######
-	if "%dk_call_PRINT_EXIT%" equ "1" (call :dk_call_PRINT_EXIT)
 	
 	::call :popStack
 
+::###### Exit #############################################################################################
 exit /b %__STATUS__%
 
 ::####################################################################
 ::# :updateIndent
 ::#
 :updateIndent
+	if "%~1" neq "" (
+		set "num=%~1"
+	) else (
+		set "num=%LVL%"
+	)
 	(set pad=)
-	(set padB=)
-	for /l %%x in (1, 1, %LVL%) do (set pad=!pad!%indent%)
-	for /l %%x in (1, 1, %LVL%) do (set padB=!padB!%indent%)
+	for /l %%x in (1, 1, %num%) do (set pad=!pad!%indent%)
 exit /b !errorlevel!
 
 ::####################################################################
 ::# :dk_call_PRINT_ENTRY
 ::#
 :dk_call_PRINT_ENTRY
-	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%endfunction%)
-	call :updateIndent
-
-::	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
-::	if "%_codepage_%" neq "65001" chcp 65001>nul
-::	echo %pad% !__FUNC__!(!__ARGV__!)
-
-	echo %pad%х !__FUNC__!(!__ARGV__!)
-
-::	echo %pad%%DEC%mq^> %ASCII%!__FUNC__!(!__ARGV__!)
+	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%return%)
+	if "%dk_call_PRINT_ENTRY%" neq "1" (%return%)
+	
+	if "%~1" neq "" (
+		set "_ent_=%~1"
+	) else (
+		set "_ent_=%ENTRY%"
+	)
+	if "%~1" neq "" (
+		set "_lvl_=%~2"
+	) else (
+		set "_lvl_=%LVL%"
+	)
+	call :updateIndent %_lvl_%
+	echo %pad%%_lvl_%х!__STACK__%_ent_%!
 exit /b !errorlevel!
 
 ::####################################################################
 ::# :dk_call_PRINT_EXIT
 ::#
 :dk_call_PRINT_EXIT
-	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%endfunction%)
-	call :updateIndent
-	if "!__STATUS__!" equ "0" (set STATUS=%green%!__STATUS__!%clr%) else (set STATUS=%red%!__STATUS__!%clr%)
-	echo %pad%им !__FUNC__!(!__ARGV__!):%STATUS%
-	echo %pad%
-::	echo %pad%%DEC%lqq %ASCII%!__FUNC__!(!__ARGV__!)
-::	echo %pad%v
-exit /b !errorlevel!
-
-::####################################################################
-::# :printConstantVariables
-::#
-:printConstantVariables
-	call :updateIndent
-	if defined dk_call			(echo %padB% dk_call		= %dk_call%)
-	if defined indent			(echo %padB% indent			= %indent%)
-	if defined pad				(echo %padB% pad			= %pad%)
-exit /b !errorlevel!
-
-::####################################################################
-::# :printStackVariables
-::#
-:printStackVariables
-	call :updateIndent
-	if defined LVL				(echo %padB% LVL  = %LVL%)
-	if defined __STACK__%LVL%	(echo %padB% __STACK__%LVL% = !__STACK__%LVL%!)
-exit /b !errorlevel!
-
-::####################################################################
-::# :printParentStackVariables
-::#
-:printParentStackVariables
-	(set /a PLVL=LVL-1)
-	call :updateIndent	
-	if defined PLVL				(echo %padB% PLVL  = %PLVL%)
-	if defined __STACK__%PLVL% 	(echo %padB% __STACK__%PLVL% = !__STACK__%PLVL%!)
+	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%return%)
+	if "%dk_call_PRINT_EXIT%" neq "1" (%return%)
+	
+	if "%~1" neq "" (
+		set "_ent_=%~1"
+	) else (
+		set "_ent_=%ENTRY%"
+	)
+	if "%~1" neq "" (
+		set "_lvl_=%~2"
+	) else (
+		set "_lvl_=%LVL%"
+	)
+	
+	call :updateIndent %_lvl_%
+	if "!__STATUS__!" equ "0" (set STATUS=%green%!__STATUS__!:!__BOOL__!%clr%) else (set STATUS=%red%!__STATUS__!:!__BOOL__!%clr%)
+	echo %pad%  им!__STACK__%_ent_%!
 exit /b !errorlevel!
 
 ::####################################################################
@@ -170,8 +156,8 @@ exit /b !errorlevel!
 ::# :popStack
 ::#
 :popStack
-	call :setGlobal __STACK__%LVL%
-	(set /a LVL-=1)
+	call :setGlobal __STACK__%ENTRY%
+	(set /a ENTRY-=1)
 exit /b !errorlevel!
 
 ::####################################################################
@@ -179,18 +165,18 @@ exit /b !errorlevel!
 ::#
 :pushStack 
 	if not defined LVL (set /a "LVL=0")
+	if not defined LVL (set /a "ENTRY=0")
 	(set /a LVL+=1)
-	call :setGlobal __STACK__%LVL% %*
-	::call :setGlobal __STACK__%LVL% %time% %*
+	(set /a ENTRY+=1)
+	call :setGlobal __STACK__%ENTRY% %*
 exit /b !errorlevel!
 
 ::####################################################################
 ::# :setGlobal(name value)
 ::#
 :setGlobal
-	::%dk_call% dk_allButFirstArgs %*
-	set argv=%*
-	if defined argv (set argv=!argv:*%1=!)
+	set dk_allButFirstArgs=%*
+	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set argv=%%b)
 	(set %~1=%argv%)
 	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
 exit /b !errorlevel!
@@ -200,14 +186,14 @@ exit /b !errorlevel!
 ::#
 :init
 	call :pushStack %~n0%~0 %*
-	set "setlocal=setlocal EnableDelayedExpansion
+	set "setlocal=setlocal EnableDelayedExpansion"
+	
 	::###### _SCOPE ######
 	if "%dk_call_PRINT_SCOPE%" equ "1" (
 		(set "_SCOPE_=DK")
 		(set /a "_SCOPE_LVL_=0")
 		echo SCOPE: !_SCOPE_LVL_!:!_SCOPE_!
 		(set "setlocal=setlocal EnableDelayedExpansion & (set _SCOPE_=^!__FUNC__^!) & (set /a _SCOPE_LVL_+=1) & echo SCOPE: ^!_SCOPE_LVL_^!:^!_SCOPE_^!")
-		rem set "setlocal=setlocal EnableDelayedExpansion & (set _SCOPE_=^!_SCOPE_^!-^!__FUNC__^!) & echo SCOPE: ^!_SCOPE_^!"
 	)
 
 	set "dk_call=call dk_call"
@@ -221,31 +207,36 @@ exit /b !errorlevel!
 	::set dk_time=(call echo %%time%%)
 	::set checkError=(if "!errorlevel!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
 
-::	set checkError=(if "!errorlevel!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
-
-::	set printerror=(echo errorlevel = ^^!errorlevel^^!)
 	set endfunction=(exit /b ^^!errorlevel^^!)
 	set return=(exit /b ^^!errorlevel^^!)
 
-::	set printerror=(echo errorlevel = ^^!errorlevel^^!)
-::	set endfunction=(call echo %%~n0:endfunction ^^!errorlevel^^! ^& exit /b ^^!errorlevel^^!)
-::	set return=(echo return ^^!errorlevel^^! ^& exit /b ^^!errorlevel^^!)
-
-::	set printerror=(echo errorlevel = ^^!errorlevel^^!)	
 ::	set endfunction=(call dk_return ^& exit /b ^^!errorlevel^^!)
 ::	set return=(call dk_return ^& exit /b ^^!errorlevel^^!)
 	
-::	set printerror=(call echo errorlevel = %%errorlevel%%)
-::	set endfunction=(call exit /b %%errorlevel%%)
-::	set return=(call exit /b %%errorlevel%%)
-
-::	if not defined ESC (set "ESC=")
-::	if not defined clr (set "clr=%ESC%[0m")
-	set "pad=%clr%"
-	set "padB=      "
-	set "indent=        "
+	if not defined pad (set "pad=%clr%")
+	if not defined indent (set "indent=   ")
+	
+	if "%dk_call_PRINT_ENTRY%" equ "1" (
+		for /l %%x in (1, 1, %ENTRY%) do (
+			call :dk_call_PRINT_ENTRY %%x %%x
+		)
+	)
 	%dk_call% dk_color
-%endfunction%
+exit /b !errorlevel!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
