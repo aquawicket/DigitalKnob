@@ -31,11 +31,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:: https://stackoverflow.com/a/4732316/688352
 	%dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command 'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser' 1>nul
 
-	::### ALL_BUT_FIRST ###
-	
+	::### ALL_BUT_FIRST ###	
 	%dk_call% dk_allButFirstArgs %*
-	echo all = %dk_allButFirstArgs%
-	echo ALL = !dk_allButFirstArgs!
 	
 	::############ DKPowershell function call ############
 	set DKCOMMAND=%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%
@@ -43,7 +40,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	endlocal & (
 		set "dk_callDKPowershell=%dk_exec%"
 	)
-	%dk_call% dk_stackTrace
 %endfunction%
 
 
