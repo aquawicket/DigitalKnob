@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_test(args)
 ::#
 :dk_test
-echo: & echo %bg_blue%-^> dk_test(%*)%clr%
+::echo: & echo %bg_blue%-^> dk_test(%*)%clr%
 %setlocal%
 	::%dk_call% dk_debugFunc 0 99
 
@@ -31,6 +31,7 @@ echo: & echo %bg_blue%-^> dk_test(%*)%clr%
 					(echo                ComSpec = %ComSpec%)
 					(echo:)
 					(echo             ###### DK variables ######)
+					(echo                 DK.cmd = %DK.cmd%)
 					(echo                   test = %test%)
 					(echo           DKSHELL_NAME = %DKSHELL_NAME%)
 					(echo           DKSHELL_PATH = %DKSHELL_PATH%)
@@ -79,14 +80,16 @@ echo: & echo %bg_blue%-^> dk_test(%*)%clr%
 					(echo             GLOBAL_VAR = %GLOBAL_VAR%)
 					
 	%dk_call% dk_stacktrace
-	
+
 	endlocal & (
 		set "dk_test=this A"
 		%dk_call% setReturn RETURN_VAR "return A"
 		%dk_call% setGlobal GLOBAL_VAR "global A"
 	)
 
+%endfunction%	
 	%dk_call% Test/dk_test "dk_test" "Test/dk_test"
+%endfunction%	
 	echo: & echo ### Test/dk_test return values ###
 	echo    dk_test = '%dk_test%'
 	echo RETURN_VAR = '%RETURN_VAR%'
@@ -111,7 +114,7 @@ echo %bg_blue%^<- dk_test(%*)%clr% & echo:
 :DKTEST
 %setlocal%
 	%dk_call% dk_debugFunc 0
-
+	
 	%dk_call% dk_test ":DKTEST" "dk_test" ":DKTEST" "1 2 3"
 	echo: & echo ### dk_test return values ###
 	echo    dk_test = '%dk_test%'

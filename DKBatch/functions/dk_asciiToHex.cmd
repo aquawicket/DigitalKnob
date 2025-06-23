@@ -30,8 +30,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if "%~2" neq "" (set "%~2=%dk_asciiToHex%")
 	)
 	
-::DEBUG	
-::	echo dk_asciiToHex %* = %dk_asciiToHex%
 %endfunction%
 
 

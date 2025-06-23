@@ -37,8 +37,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	%dk_call% dk_exec %_ARGS_%
 
 
-	%dk_call% dk_exec %ComSpec% /c call "%DKBATCH_FUNCTIONS_DIR_%%_func_%.cmd" !dk_allButFirstArgs!
-	echo dk_exec = %dk_exec%
+	%dk_call% dk_exec %ComSpec% /c call "%DKBATCH_FUNCTIONS_DIR_%%_func_%.cmd" %dk_allButFirstArgs%
 	endlocal & (
 		set "dk_callDKCmake=%dk_exec%"
 	)
@@ -55,7 +54,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "%windir:\=/%/System32/test.v123.zip"
 	%dk_call% dk_callDKBatch dk_basename "%myPath%"
-	%dk_call% dk_echo "%myPath%: basename = %dk_callDKBatch%"
+	%dk_call% dk_echo "%myPath%: basename = !dk_callDKBatch!"
 
 %endfunction%
 

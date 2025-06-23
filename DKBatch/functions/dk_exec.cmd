@@ -5,8 +5,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################### dk_exec SETTINGS #########################
-set "dk_exec_ECHO_OUTPUT=1"
-set "dk_exec_ECHO_ERROR=1"
+if not defined dk_exec_ECHO_OUTPUT (set "dk_exec_ECHO_OUTPUT=1")
+if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=1")
 
 ::set "dk_exec_PRINT_CALL=1" 		&:: dk_exec_call
 ::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
@@ -33,6 +33,11 @@ set "dk_exec_ECHO_ERROR=1"
 	
 	set dk_exec_call=%*
 	set dk_exec_command=%dk_exec_call%
+	set dk_exec_exitcodes=
+	set dk_exec_exitcode=
+	set dk_exec_stderr=
+	set dk_exec_stdout=
+	set dk_exec=
 	:DeEscape
 	echo %dk_exec_command% | findstr /c:"^^" >nul && (
 		set dk_exec_command=%dk_exec_command:^^=^%
@@ -140,35 +145,46 @@ set "dk_exec_ECHO_ERROR=1"
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-::	%dk_call% dk_validate ADB_EXE "%dk_call% ANDROID::dk_ADB_EXE"
-::	%dk_call% dk_set myCommand ""%ADB_EXE%" shell pm list packages" &::-f string
-
-::	%dk_call% dk_set myCommand ""%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three""
-	
-::	set myCommand=%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_evalDKC_TEMP.exe
-	
-::	set myCommand=ver
-	::set "dk_exec_ECHO_OUTPUT=1"
-	::set "dk_exec_ECHO_ERROR=1"
-	::set "dk_exec_PRINT_CALL=1"
-	::set "dk_exec_PRINT_COMMAND=1"
+::	set "dk_exec_ECHO_OUTPUT=1"
+	set "dk_exec_ECHO_ERROR=1"
+::	set "dk_exec_PRINT_CALL=1"
+::	set "dk_exec_PRINT_COMMAND=1"
 ::	set "dk_exec_PRINT_EXITCODES=1"
-	::set "dk_exec_PRINT_EXITCODE=1"
+	set "dk_exec_PRINT_EXITCODE=1"
 ::	set "dk_exec_PRINT_STDERR=1"
 ::	set "dk_exec_PRINT_STDOUT=1"
 ::	set "dk_exec_PRINT_OUTPUT=1"
+
+	%dk_call% dk_exec dk_testError.cmd
+::	pause
+	
+::	set "test=has value"
+::	%dk_call% dk_exec dk_test.cmd abc "d e f"
+::	pause
+	
+::	%dk_call% dk_exec ver
+::	pause
+
+::	%dk_call% dk_exec badCommand
+::	pause
 	
 ::	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
-::	set "url=http://www.google.com/index.html"
-::	set mycommand=%CURL_EXE% "%url%" -sI -o nul -w "%%%%%%%%{http_code}\n"
+::	%dk_call% dk_exec %CURL_EXE% "http://www.google.com/index.html" -sI -o nul -w "%%%%%%%%{http_code}\n"
+::	pause
+	
+::	%dk_call% dk_exec notepad.exe
+::	pause
+	
+::	%dk_call% dk_validate ADB_EXE "%dk_call% ANDROID::dk_ADB_EXE"
+::	%dk_call% dk_exec "%ADB_EXE%" shell pm list packages" &::-f string
 
-	set mycommand=verxyz
+::	%dk_call% dk_exec "%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three"
 	
-	%dk_call% dk_exec !myCommand! 
-	echo dk_exec_errorlevel = %errorlevel%
-	echo dk_exec_errorlevel = !errorlevel!
+::	%dk_call% dk_exec %USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_evalDKC_TEMP.exe
 	
-	%dk_call% dk_echo
+	
+
+
 ::	%dk_call% dk_echo "dk_exec_call      = %dk_exec_call%"
 ::	%dk_call% dk_echo "dk_exec_command   = %dk_exec_command%"
 ::	%dk_call% dk_echo "dk_exec_exitcodes = %dk_exec_exitcodes%"
@@ -176,13 +192,5 @@ set "dk_exec_ECHO_ERROR=1"
 ::	%dk_call% dk_echo "dk_exec_stderr    = %dk_exec_stderr%"
 ::	%dk_call% dk_echo "dk_exec_stdout    = %dk_exec_stdout%"
 ::	%dk_call% dk_echo "dk_exec           = %dk_exec%"
-	
-	%dk_call% dk_printVar dk_exec_call
-	%dk_call% dk_printVar dk_exec_command
-	%dk_call% dk_printVar dk_exec_exitcodes
-	%dk_call% dk_printVar dk_exec_exitcode
-	%dk_call% dk_printVar dk_exec_stderr
-	%dk_call% dk_printVar dk_exec_stdout
-	%dk_call% dk_printVar dk_exec
 
 %endfunction%

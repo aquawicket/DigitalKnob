@@ -101,13 +101,13 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_EXT%" neq ".cmd" (%return%)
 	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 0
-	%dk_call% dk_echo
-	%dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%"
-	%dk_call% dk_echo
-	call :DKTEST || %return%
-	%dk_call% dk_echo
-	%dk_call% dk_echo "%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%"
-	%dk_call% dk_echo
+	echo:
+	echo:%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%
+	echo:
+	call :DKTEST
+	echo:
+	echo:%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%
+	echo:
 	%dk_call% dk_exit %errorlevel%
 %endfunction%
 

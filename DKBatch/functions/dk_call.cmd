@@ -39,6 +39,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	(set __FILE__=%__FILE__:\=/%)
 	(set __FILENAME__=%~nx1)
 	(set __FUNC__=%~n1)
+	(set __STATUS__=0)
 	
 ::	echo __CMND__ = %__CMND__%
 ::	echo __FILE__ = %__FILE__%
@@ -71,9 +72,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__:/=\% %__ARGV__% && (
+		set __STATUS__=!errorlevel!
 		set "LAST_STATUS=!errorlevel!"
 		set "LAST_BOOL=0"
-	) || (set "LAST_STATUS=!errorlevel!" & set "LAST_BOOL=1")
+	) || (
+		set __STATUS__=!errorlevel!
+		set "LAST_STATUS=!errorlevel!" 
+		set "LAST_BOOL=1")
 ::###### Exit #############################################################################################
 
 	::###### Print function exit ######
@@ -81,7 +86,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	call :popStack
 
-exit /b %LAST_STATUS%
+exit /b %__STATUS__%
 
 
 
@@ -113,11 +118,25 @@ exit /b %LAST_STATUS%
 
 ::	set checkError=(if "!errorlevel!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
 
-::	set endfunction=exit /b !errorlevel!)
-::	set return=exit /b !errorlevel!)
+::	set printerror=(echo errorlevel = ^^!errorlevel^^!)
+	set endfunction=(exit /b ^^!errorlevel^^!)
+	set return=(exit /b ^^!errorlevel^^!)
+
+::	set printerror=(echo errorlevel = ^^!errorlevel^^!)
+::	set endfunction=(call echo %%~n0:endfunction ^^!errorlevel^^! ^& exit /b ^^!errorlevel^^!)
+::	set return=(echo return ^^!errorlevel^^! ^& exit /b ^^!errorlevel^^!)
+
+::	set printerror=(echo errorlevel = ^^!errorlevel^^!)	
+::	set endfunction=(call dk_return ^& exit /b ^^!errorlevel^^!)
+::	set return=(call dk_return ^& exit /b ^^!errorlevel^^!)
 	
-	set endfunction=(call dk_return^& exit /b ^!errorlevel^!)
-	set return=(call dk_return^& exit /b ^!errorlevel^!)
+::	set printerror=(call echo errorlevel = %%errorlevel%%)
+::	set endfunction=(call exit /b %%errorlevel%%)
+::	set return=(call exit /b %%errorlevel%%)
+
+
+
+
 
 	if not defined ESC (set "ESC=")
 	if not defined clr (set "clr=%ESC%[0m")
@@ -125,7 +144,7 @@ exit /b %LAST_STATUS%
 	set "pad=%clr%"
 	set "padB=      "
 	set "indent=        "
-exit /b !errorlevel!
+%endfunction%
 
 ::####################################################################
 ::# :updateIndent
@@ -159,9 +178,8 @@ exit /b !errorlevel!
 :dk_call_PRINT_EXIT
 	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" neq "X%dk_call_IGNORE%X" (%endfunction%)
 	call :updateIndent
-	::echo %pad% !__FUNC__!(!__ARGV__!)
-	::echo %pad%
-	echo %pad%им !__FUNC__!(!__ARGV__!)
+	if "!__STATUS__!" equ "0" (set STATUS=%green%!__STATUS__!%clr%) else (set STATUS=%red%!__STATUS__!%clr%)
+	echo %pad%им !__FUNC__!(!__ARGV__!):%STATUS%
 	echo %pad%
 ::	echo %pad%%DEC%lqq %ASCII%!__FUNC__!(!__ARGV__!)
 ::	echo %pad%v

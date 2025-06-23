@@ -8,6 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :: https://stackoverflow.com/a/34987886/688352
 :: https://stackoverflow.com/a/34987886
 
+set "ErrCode[9009]=File Not Found"
 set "ErrCode[1073750988]=Unbalanced parentheses"
 set "ErrCode[1073750989]=Missing operand"
 set "ErrCode[1073750990]=Syntax error"

@@ -38,35 +38,35 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "%windir:\=/%/System32/test.v123.zip"
 	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
 
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "TEST"
 	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
 
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
 	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
 
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "%windir:\=/%/System32/test.v123.zip"
 	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
 
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "TEST"
 	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
 
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
 	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
 	
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "https://aka.ms/vs/16/release/vc_redist.x64.exe"
 	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_echo "%myPath%: basename = %dk_basename%"
+	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
 %endfunction%
