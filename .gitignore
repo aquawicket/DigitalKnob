@@ -148,6 +148,7 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/vorbis-lib-1.3.7
 3rdParty/wavpack-2fbee4e
 3rdParty/wavpack-d9c4a35
+3rdParty/webview2_in_mingw-c003dd6e
 3rdParty/webview2_runtime-microsoftedgewebview2runtimeinstallerx64
 3rdParty/xz-5.4.6
 3rdParty/zlib*

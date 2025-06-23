@@ -1,0 +1,92 @@
+@echo off
+cls
+
+::### Print Batch Version Info ###
+if defined ComSpec (set "DKSHELL_PATH=%ComSpec:\=/%")
+for %%Z in ("%DKSHELL_PATH%") do (set.bat "DKSHELL_NAME=%%~nZ")
+for /f "tokens=2 delims=[]" %%v in ('ver') do (set.bat "DKSHELL_VERSION=%%v")
+set.bat "DKSHELL_VERSION=%DKSHELL_VERSION:Version =%"
+set.bat "ESC="
+echo.bat %ESC%[42m %ESC%[30m %DKSHELL_NAME% %DKSHELL_VERSION% %ESC%[0m %DKSHELL_PATH%
+
+rem DKBatch.txt: Simulate GOTO/CALL commands in a text file redirected to cmd.exe
+rem Antonio Perez Ayala
+
+rem Requires FilePointer.exe auxiliary program; download it from:
+rem http://www.dostips.com/forum/viewtopic.php?f=3&t=5552&p=34051#p34051
+
+
+rem Get the offsets of the labels in this DKBatch.txt file
+for /F "tokens=1,2 delims=:" %a in ('findstr /O "^:.*" ^< DKBatch.txt') do set "%b=%a"
+
+echo.bat
+echo.bat DigitalKnowb No Extension Batch 
+
+::###### comments ######
+rem ERROR ERROR ERROR ERROR
+:: ERROR ERROR ERROR ERROR
+echo Test line end comment &:: ERROR ERROR ERROR ERROR
+
+::###### echo ######
+echo.bat Testing echo.bat
+	echo.cmd Testing echo.cmd
+		>CON echo(Testing raw echo with CON redirection
+echo Testing echo DOES NOT WORK
+
+::###### set ######
+set "var1=abc"
+echo.bat var1 = %var1%
+set.bat "var2=123"
+echo.bat var2 = %var2%
+set.bat "var3=def"
+echo.bat var3 = !var3!
+set.bat
+<CON >CON set var4 = %var4%
+echo.bat var4 = %var4%
+echo test test test 
+
+
+
+::###### call ######
+call.bat :subroutineA "abc" "1 2 3"
+echo.bat Returned from :subroutineA
+echo.bat
+
+call.bat :subroutineB
+echo.bat Returned from :subroutineB
+echo.bat var1 = %var1%
+echo.bat var2 = %var2%
+echo.bat var3 = %var3%
+echo.bat
+
+
+
+
+
+
+EXIT 
+:subroutineA
+echo.bat --^^^> Greetings from the subroutine; my parameters are: %params%
+echo.bat --^^^> Returning to caller program
+rem Use goto.bat :EOF to return from a subroutine
+rem (if you use exit /B here, the main program is terminated)
+goto.bat :EOF
+
+:subroutineB
+
+	echo.bat inside :subroutineB
+	
+	set "var1=variable in the same context"
+	
+setlocal enableDelayedExpansion
+
+	set "var2=variable in setlocal context"
+	
+endlocal & (
+	set "var3=variable in endlocal block"
+)
+goto.bat :EOF
+
+
+
+::### NOTE: There must be a blank line at the end of the document
