@@ -22,8 +22,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		goto :edit_textfile
 	)
 	
+	setlocal disableDelayedExpansion
 	echo:if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . '/DK.ps1'; }>					"%FUNCTION_FILE%"
-	echo:if(!$%FUNCTION%_ps1){ $%FUNCTION%_ps1 = 1; } else{ return; } #include guard>>													"%FUNCTION_FILE%"
+	echo:if(^!$%FUNCTION%_ps1){ $%FUNCTION%_ps1 = 1; } else{ return; } #include guard>>													"%FUNCTION_FILE%"
 	echo:>> 																															"%FUNCTION_FILE%"
 	echo:>> 																															"%FUNCTION_FILE%"
 	echo:################################################################################>> 											"%FUNCTION_FILE%"
@@ -52,6 +53,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo:>>	 																															"%FUNCTION_FILE%"
 	echo:	dk_call %FUNCTION%;>>																										"%FUNCTION_FILE%"
 	echo:}>> 																															"%FUNCTION_FILE%"
+	endlocal
 	
 	:edit_textfile
 	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_NOTEPADPP_EXE"

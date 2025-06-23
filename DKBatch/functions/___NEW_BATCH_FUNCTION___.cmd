@@ -22,6 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		goto :edit_textfile
 	)
 	
+	setlocal disableDelayedExpansion
 	echo @echo off^&::########################################## DigitalKnob DKBatch ########################################################################>			"%FUNCTION_FILE%"
 	echo if not exist "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" for /F "tokens=*" %%%%G IN ('where /r "%%USERPROFILE%%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%%%~dpG")>>	"%FUNCTION_FILE%"
 	echo if not defined DK.cmd (call "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" "%%~0" %%*)>>																					"%FUNCTION_FILE%"
@@ -58,6 +59,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo 	%%dk_call%% %dk_inputBox%>>																																	"%FUNCTION_FILE%"
 	echo %%endfunction%%>>	 																																			"%FUNCTION_FILE%"
 	echo:>> 																																							"%FUNCTION_FILE%"
+	endlocal
 	
 	:edit_textfile
 	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_NOTEPADPP_EXE"

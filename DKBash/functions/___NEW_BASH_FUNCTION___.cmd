@@ -22,6 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		goto :edit_textfile
 	)
 	
+	setlocal disableDelayedExpansion
 	echo:#!/usr/bin/env bash>																	"%FUNCTION_FILE%"
 	echo:###### DK.sh #####################################################################>>	"%FUNCTION_FILE%"
 	echo:[ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*>>					"%FUNCTION_FILE%"
@@ -47,7 +48,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo:	dk_debugFunc 0>>																	"%FUNCTION_FILE%"
 	echo:}>>																					"%FUNCTION_FILE%"
 	echo:>>																						"%FUNCTION_FILE%"										
-
+	endlocal
 	
 	:edit_textfile
 	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_NOTEPADPP_EXE"

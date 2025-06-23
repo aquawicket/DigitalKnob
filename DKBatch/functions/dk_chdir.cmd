@@ -13,8 +13,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0 1
 
 	set "_directory_=%~1"
-	title %_directory_%
-	endlocal & cd "%_directory_:/=\%"
+	
+	endlocal & (
+		cd "%_directory_:/=\%"
+	)
 %endfunction%
 
 
