@@ -234,7 +234,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		::# Background RGB Colors
 		(set bg_RGB=%CSI%48;2;)				&:: %bg_RGB%150;100;50m			%CSI%38;2;150;100;50m
 
-		%dk_call% dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
+		call dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
 	goto USE_COLOR_endif	
 	:dk_color_DISABLE
 		::%dk_call% dk_unset ESC

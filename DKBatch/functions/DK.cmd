@@ -4,13 +4,16 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::TODO - switch to UNICODE code page
 ::chcp 65001 >NUL
 
+(set pushStack=call :pushStack %%~n0%%~0 %%*)
+
 ::####################################################################
 ::# DK(<DKSCRIPT_PATH>, <DKSCRIPT_ARGS>)
 ::#
 :DK
+	call :pushStack %~n0 %*
 ::%setlocal%
 	::if not exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
-
+	
 	::### DKSHELL_PATH ###
 	if defined ComSpec (set "DKSHELL_PATH=%ComSpec:\=/%")
 
@@ -86,13 +89,10 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 		if "%2" equ "elevated" (set "elevated=1")
 		if not defined elevated (
 			set "elevated=1"
-			call "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%
+			%dk_call% "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%
 		)
 	:skip_elevate
 
-	::############ LOAD FUNCTION FILES ############
-	::%dk_call% dk_source dk_debugFunc
-	%dk_call% dk_color
 	%dk_call% dk_logo
 
 	::%dk_call% dk_validateDK || set "RELOADED=" && call :dk_DKSCRIPT_PATH "%~1" %*
@@ -113,10 +113,13 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 
 
 
+
+
 ::##################################################################################
 ::# dk_DKHTTP_VARS
 ::#
 :dk_DKHTTP_VARS
+	%pushStack%
 	if not defined DKHTTP_DIGITALKNOB_DIR		(set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob")
 	if not defined DKHTTP_DKBRANCH_DIR			(set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development")
 	if not defined DKHTTP_DKBATCH_DIR			(set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch")
@@ -127,6 +130,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_DKCACHE_DIR
 ::#
 :dk_DKCACHE_DIR
+	%pushStack%
 	if not exist "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
 	if not exist "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
 	if exist "%DKCACHE_DIR%" (
@@ -140,6 +144,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_DKSCRIPT_EXT
 ::#
 :dk_DKSCRIPT_EXT
+	%pushStack%
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
 	if not defined DKSCRIPT_EXT		(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ")
 	if not defined DKSCRIPT_EXT		(echo DKSCRIPT_EXT:%DKSCRIPT_EXT% not defined & pause & exit -1)
@@ -149,6 +154,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_DKSCRIPT_NAME
 ::#
 :dk_DKSCRIPT_NAME
+	%pushStack%
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
 	if not defined DKSCRIPT_NAME	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ")
 	if not defined DKSCRIPT_NAME	(echo DKSCRIPT_NAME:%DKSCRIPT_NAME% not defined & pause & exit -1)
@@ -158,6 +164,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_DKSCRIPT_DIR
 ::#
 :dk_DKSCRIPT_DIR
+	%pushStack%
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
 	if not exist "%DKSCRIPT_DIR%"	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ")
 	if exist 	 "%DKSCRIPT_DIR%"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:\=/%")
@@ -171,6 +178,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_echo
 ::#
 :dk_echo
+	%pushStack%
 	echo %~1
 %endfunction%
 
@@ -178,6 +186,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_DKSCRIPT_FILE
 ::#
 :dk_DKSCRIPT_FILE
+	%push%
 	if not exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit -1)
 	if not defined DKSCRIPT_FILE	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_FILE=%%~nxZ")
 	if not defined DKSCRIPT_FILE	(echo DKSCRIPT_FILE:%DKSCRIPT_FILE% not defined & pause & exit -1)
@@ -187,6 +196,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_DKSCRIPT_ARGS
 ::#
 :dk_DKSCRIPT_ARGS
+	%pushStack%
 	if not defined DKSCRIPT_ARGS	(set DKSCRIPT_ARGS=%*)
 	if defined DKSCRIPT_ARGS		(call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%~1 =%%")
 %endfunction%
@@ -195,6 +205,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_DKSCRIPT_PATH
 ::#
 :dk_DKSCRIPT_PATH
+	%pushStack%
 	if not defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
 	if defined DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
 ::	if defined DKSCRIPT_PATH		(call :readlink %DKSCRIPT_PATH% DKSCRIPT_PATH)
@@ -205,6 +216,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_initFiles
 ::#
 :dk_initFiles
+	%pushStack%
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"			%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			%POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd')"
@@ -220,10 +232,12 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_reload
 ::#
 :dk_reload
+	%pushStack%
 	if "%DKSCRIPT_EXT%" neq ".cmd" (exit /b -1)
 	if defined RELOADED (exit /b -1)
 
 	echo "reloading with /v:on 'delayed expansion',  /k 'keep terminal open' . . . ."
+	set "LVL=0"
 	set "RELOADED=1"
 	set "DK.cmd="
 
@@ -254,6 +268,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::# dk_readlink
 ::#
 :dk_readlink
+	%pushStack%
 %setlocal%
 	%dk_call% dk_debugFunc 1 2
    
@@ -274,7 +289,24 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 
 
 
+::####################################################################
+::# :setGlobal(name value)
+::#
+:setGlobal
+	set argv=%*
+	if defined argv (set argv=!argv:*%1=!)
+	(set %~1=%argv%)
+	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
+exit /b !errorlevel!
 
+::####################################################################
+::# :pushStack()
+::#
+:pushStack
+	if not defined LVL (set /a "LVL=0")
+	(set /a LVL+=1)
+	call :setGlobal __STACK__%LVL% %*
+exit /b !errorlevel!
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
@@ -282,5 +314,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%DKSCRIPT_PATH:/=\%
+	%dk_call% %DKSCRIPT_PATH:/=\%
 %endfunction%
+
+

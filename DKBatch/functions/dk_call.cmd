@@ -39,12 +39,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	(set __FILE__=%__FILE__:\=/%)
 	(set __FILENAME__=%~nx1)
 	(set __FUNC__=%~n1)
-	(set __STATUS__=0)
-	
-::	echo __CMND__ = %__CMND__%
-::	echo __FILE__ = %__FILE__%
-::	echo __FILENAME__ = %__FILENAME__%
-::	echo __FUNC__ = %__FUNC__%
 	
 	set dk_allButFirstArgs=%*
 	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do (set __ARGV__=%%b)
@@ -72,79 +66,27 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
 
 	call %__CMND__:/=\% %__ARGV__% && (
+		rem echo EXIT %LVL%_!__STACK__%LVL%!
+		call :setGlobal __STACK__%LVL% %lblack%!__STACK__%LVL%! status:!errorlevel!%clr%
 		set __STATUS__=!errorlevel!
-		set "LAST_STATUS=!errorlevel!"
 		set "LAST_BOOL=0"
 	) || (
+		rem echo EXIT %LVL%_!__STACK__%LVL%!
+		call :setGlobal __STACK__%LVL% %lblack%!__STACK__%LVL%! status:!errorlevel!%clr%
 		set __STATUS__=!errorlevel!
-		set "LAST_STATUS=!errorlevel!" 
-		set "LAST_BOOL=1")
+		set "LAST_BOOL=1"
+	)
+
+	
+	
 ::###### Exit #############################################################################################
 
 	::###### Print function exit ######
 	if "%dk_call_PRINT_EXIT%" equ "1" (call :dk_call_PRINT_EXIT)
-
-	call :popStack
+	
+	::call :popStack
 
 exit /b %__STATUS__%
-
-
-
-
-::####################################################################
-::# :init
-::#
-:init
-	set "setlocal=setlocal EnableDelayedExpansion
-	::###### _SCOPE ######
-	if "%dk_call_PRINT_SCOPE%" equ "1" (
-		(set "_SCOPE_=DK")
-		(set /a "_SCOPE_LVL_=0")
-		echo SCOPE: !_SCOPE_LVL_!:!_SCOPE_!
-		(set "setlocal=setlocal EnableDelayedExpansion & (set _SCOPE_=^!__FUNC__^!) & (set /a _SCOPE_LVL_+=1) & echo SCOPE: ^!_SCOPE_LVL_^!:^!_SCOPE_^!")
-		rem set "setlocal=setlocal EnableDelayedExpansion & (set _SCOPE_=^!_SCOPE_^!-^!__FUNC__^!) & echo SCOPE: ^!_SCOPE_^!"
-	)
-
-	set "dk_call=call dk_call"
-	
-	set globalize=(for /F "delims=" %%a in ('set dk.') do ^
-		endlocal^
-		^& call set _line_=%%a^
-		^& call set %%_line_%%^
-		^& call set %%_line_:dk.gbl.=%%) 2^>nul
-
-	::set dk_time=(call echo %%time%%)
-	::set checkError=(if "!errorlevel!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
-
-::	set checkError=(if "!errorlevel!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
-
-::	set printerror=(echo errorlevel = ^^!errorlevel^^!)
-	set endfunction=(exit /b ^^!errorlevel^^!)
-	set return=(exit /b ^^!errorlevel^^!)
-
-::	set printerror=(echo errorlevel = ^^!errorlevel^^!)
-::	set endfunction=(call echo %%~n0:endfunction ^^!errorlevel^^! ^& exit /b ^^!errorlevel^^!)
-::	set return=(echo return ^^!errorlevel^^! ^& exit /b ^^!errorlevel^^!)
-
-::	set printerror=(echo errorlevel = ^^!errorlevel^^!)	
-::	set endfunction=(call dk_return ^& exit /b ^^!errorlevel^^!)
-::	set return=(call dk_return ^& exit /b ^^!errorlevel^^!)
-	
-::	set printerror=(call echo errorlevel = %%errorlevel%%)
-::	set endfunction=(call exit /b %%errorlevel%%)
-::	set return=(call exit /b %%errorlevel%%)
-
-
-
-
-
-	if not defined ESC (set "ESC=")
-	if not defined clr (set "clr=%ESC%[0m")
-	set /a "LVL=0"
-	set "pad=%clr%"
-	set "padB=      "
-	set "indent=        "
-%endfunction%
 
 ::####################################################################
 ::# :updateIndent
@@ -233,9 +175,10 @@ exit /b !errorlevel!
 exit /b !errorlevel!
 
 ::####################################################################
-::# :pushStack
+::# :pushStack(file args)
 ::#
-:pushStack file args
+:pushStack 
+	if not defined LVL (set /a "LVL=0")
 	(set /a LVL+=1)
 	call :setGlobal __STACK__%LVL% %*
 	::call :setGlobal __STACK__%LVL% %time% %*
@@ -252,7 +195,57 @@ exit /b !errorlevel!
 	(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
 exit /b !errorlevel!
 
+::####################################################################
+::# :init
+::#
+:init
+	call :pushStack %~n0%~0 %*
+	set "setlocal=setlocal EnableDelayedExpansion
+	::###### _SCOPE ######
+	if "%dk_call_PRINT_SCOPE%" equ "1" (
+		(set "_SCOPE_=DK")
+		(set /a "_SCOPE_LVL_=0")
+		echo SCOPE: !_SCOPE_LVL_!:!_SCOPE_!
+		(set "setlocal=setlocal EnableDelayedExpansion & (set _SCOPE_=^!__FUNC__^!) & (set /a _SCOPE_LVL_+=1) & echo SCOPE: ^!_SCOPE_LVL_^!:^!_SCOPE_^!")
+		rem set "setlocal=setlocal EnableDelayedExpansion & (set _SCOPE_=^!_SCOPE_^!-^!__FUNC__^!) & echo SCOPE: ^!_SCOPE_^!"
+	)
 
+	set "dk_call=call dk_call"
+	
+	set globalize=(for /F "delims=" %%a in ('set dk.') do ^
+		endlocal^
+		^& call set _line_=%%a^
+		^& call set %%_line_%%^
+		^& call set %%_line_:dk.gbl.=%%) 2^>nul
+
+	::set dk_time=(call echo %%time%%)
+	::set checkError=(if "!errorlevel!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
+
+::	set checkError=(if "!errorlevel!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")	
+
+::	set printerror=(echo errorlevel = ^^!errorlevel^^!)
+	set endfunction=(exit /b ^^!errorlevel^^!)
+	set return=(exit /b ^^!errorlevel^^!)
+
+::	set printerror=(echo errorlevel = ^^!errorlevel^^!)
+::	set endfunction=(call echo %%~n0:endfunction ^^!errorlevel^^! ^& exit /b ^^!errorlevel^^!)
+::	set return=(echo return ^^!errorlevel^^! ^& exit /b ^^!errorlevel^^!)
+
+::	set printerror=(echo errorlevel = ^^!errorlevel^^!)	
+::	set endfunction=(call dk_return ^& exit /b ^^!errorlevel^^!)
+::	set return=(call dk_return ^& exit /b ^^!errorlevel^^!)
+	
+::	set printerror=(call echo errorlevel = %%errorlevel%%)
+::	set endfunction=(call exit /b %%errorlevel%%)
+::	set return=(call exit /b %%errorlevel%%)
+
+::	if not defined ESC (set "ESC=")
+::	if not defined clr (set "clr=%ESC%[0m")
+	set "pad=%clr%"
+	set "padB=      "
+	set "indent=        "
+	%dk_call% dk_color
+%endfunction%
 
 
 
@@ -262,7 +255,7 @@ exit /b !errorlevel!
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_test
-%endfunction%
+exit /b !errorlevel!
 
 
 

@@ -37,6 +37,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     ::###### abort in not confirmed type code
     ::%dk_call% dk_confirm || (%return%)
-	%dk_call% dk_confirm || (dk_return)
+	%dk_call% dk_confirm || (%return%)
     echo "passed the confirmation, executing code after confirm"
 %endfunction%

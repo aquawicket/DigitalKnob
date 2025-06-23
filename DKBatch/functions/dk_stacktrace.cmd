@@ -33,5 +33,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
+	::###### Create test files ######
+	echo :dk_stacktrace_TEST_B>				dk_stacktrace_TEST_A.cmd
+	echo %%dk_call%% dk_stacktrace_TEST_B>>	dk_stacktrace_TEST_A.cmd
+	echo %%dk_call%% dk_stacktrace_TEST_C>>	dk_stacktrace_TEST_A.cmd
+	echo %%endfunction%%>>					dk_stacktrace_TEST_A.cmd
+	
+	echo echo dk_stacktrace_TEST_B.cmd>		dk_stacktrace_TEST_B.cmd
+	echo SYNTAX ERROR>>						dk_stacktrace_TEST_B.cmd
+	echo %%endfunction%%>>					dk_stacktrace_TEST_B.cmd
+	
+	
+	echo %%dk_call%% dk_stacktrace>			dk_stacktrace_TEST_C.cmd
+	echo %%endfunction%%>>					dk_stacktrace_TEST_C.cmd
+	
+	%dk_call%  dk_stacktrace_TEST_A
 	%dk_call% dk_stacktrace
 %endfunction%
+
