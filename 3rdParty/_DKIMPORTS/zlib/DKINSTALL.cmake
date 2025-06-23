@@ -20,7 +20,7 @@ include_guard()
 ### IMPORT ###
 dk_validate(Target_Config  "dk_Target_Config()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import(${Zlib_Import})
+dk_import(${ZLIB_IMPORT})
 
 ### DKBIN ###
 #set(ZLIB			 	"$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  	# C:/Users/Administrator/DigitalKnob/DKBIN/include/zlib
@@ -75,7 +75,7 @@ dk_append(ZLIB_CMAKE
 	"-DCMAKE_EXE_LINKER_FLAGS=${ZLIB_LIBRARY}")
 
 ### GENERATE ###
-dk_configure(${ZLIB} -DZLIB_BUILD_EXAMPLES=OFF -DUNIX=1 -DWIN32=0 NO_HALT)
+dk_configure(${ZLIB} -DZLIB_BUILD_EXAMPLES=OFF)# -DUNIX=1 -DWIN32=0)
 
 ### COMPILE ###
 dk_build(${ZLIB} zlibstatic)

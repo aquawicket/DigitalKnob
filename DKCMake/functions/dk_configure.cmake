@@ -88,6 +88,10 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
 		dk_exec(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+		
+		#### restore any altered flags ####
+		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
+		return()
 	endif()	
 
 	###### Configure with ../../configure ######
@@ -115,10 +119,21 @@ function(dk_configure SOURCE_DIR) #ARGN
 			dk_warning("No configure file found. It may need to be generated with autotools")
 		endif()
 		
+		#### restore any altered flags ####
+		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
+		if(Emscripten)
+			dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+		else()
+			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+		endif()
+		
+		return()
+	endif()
+		
 	
 	###### configure with provided commands ######
 	# No Specific configure type. Just pass the arguments to dk_exec to run
-	else()
+	#else()
 		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
 		
@@ -129,9 +144,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 			dk_exec(${ARGN} OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		#endif()
-	endif()
-	
-	
+	#endif()
 	
 	#### restore any altered flags ####
 	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
@@ -140,7 +153,6 @@ function(dk_configure SOURCE_DIR) #ARGN
 	else()
 		dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 	endif()
-	
 endfunction()
 
 

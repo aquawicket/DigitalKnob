@@ -18,6 +18,10 @@ Write-Host "DKSCRIPT_PATH = ${env:DKSCRIPT_PATH}";
 #
 function DK() {
 
+	# Error trap
+	# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_trap?view=powershell-7.4&WT.mc_id=M365-MVP-5000284
+	trap { 'DigitalKnob found an Error.' }
+	
 	###### Initialize Language specifics ######
 	dk_init;
 	
