@@ -28,7 +28,7 @@
 #ifndef DKApp_H
 #define DKApp_H
 
-# if defined(__has_include) && __has_include("DKPlugins.h")
+# if defined(__has_include) && __has_include("DKPlugins.h") // Is as DKAPP
 #	if __has_include("SDL_main.h")
 #		if !IOS && !ANDROID
 #			define SDL_MAIN_HANDLED

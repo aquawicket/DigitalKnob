@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
+/*
 #if HAVE_DKSDLWindow
 	#if !IOS && !ANDROID
 		#define SDL_MAIN_HANDLED
@@ -31,7 +31,7 @@
 		#include "SDL_main.h"
 	#endif
 #endif
-
+*/
 #include "DK/DKApp.h"
 #include "assets.h"
 
@@ -40,11 +40,13 @@ const char* BUILD_TIME = __TIME__;
 
 
 int main(int argc, char** argv){
+	/*
 	#if HAVE_DKSDLWindow
 		#if !IOS && !EMSCRIPTEN
 			SDL_SetMainReady();
 		#endif
 	#endif
+	*/
 	DKApp dkapp(argc, argv);
 	DKApp::Init();
 	DKApp::Loop();

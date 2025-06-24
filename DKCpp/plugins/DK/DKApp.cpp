@@ -30,13 +30,13 @@
 #include "DK/DKFile.h"
 
 //WARNING_DISABLE
-#if HAVE_backward_cpp
+# if defined(__has_include) && __has_include(<backward.hpp>)
 	//#include <backward.hpp>
 #endif
-#if HAVE_boxer
+# if defined(__has_include) && __has_include(<boxer/boxer.h>)
 	#include <boxer/boxer.h>
 #endif
-#if ANDROID && HAVE_sdl
+# if defined(__has_include) && __has_include(<SDL.h>) && ANDROID
 	#include <SDL.h>
 #endif
 //WARNING_ENABLE
@@ -75,10 +75,8 @@ DKApp::DKApp(_argc, _argv)
 */
 DKApp::DKApp(int _argc, char** _argv){
 	
-# if defined(__has_include) && __has_include("SDL_main.h")
-#	if !IOS && !EMSCRIPTEN
-		SDL_SetMainReady();
-#	endif
+# if defined(SDL_main_h_) && !IOS && !EMSCRIPTEN
+	SDL_SetMainReady();
 # endif
 	
 	DKDEBUGFUNC(_argc, _argv);
@@ -90,13 +88,13 @@ DKApp::DKApp(int _argc, char** _argv){
 
 	if (argc)
 		DKFile::exe_path = argv[0];
-	#if ANDROID
-		#if HAVE_sdl
+	#if defined(SDL_h_) && ANDROID
+		//#if HAVE_sdl
 			if (!SDL_AndroidGetExternalStorageState())
 				DKERROR("SDL_AndroidGetExternalStorageState(): failed");
 			const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
 			DKFile::exe_path = externalStoragePath;
-		#endif
+		//#endif
 	#endif
 	#if EMSCRIPTEN
 		DKFile::GetCurrentPath(DKFile::exe_path);
