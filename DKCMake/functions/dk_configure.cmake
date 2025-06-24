@@ -22,6 +22,8 @@ function(dk_configure SOURCE_DIR) #ARGN
 	
 	dk_assertPath(SOURCE_DIR)
 	dk_debug("SOURCE_DIR = ${SOURCE_DIR}")
+
+
 	
 	#if(NOT REBUILDALL)
 		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
@@ -56,6 +58,10 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	dk_assertVar(BINARY_DIR)
 	
+	#	if(REBUILDALL)
+		dk_clearCmakeCache(${BINARY_DIR})
+	#	endif()
+
 	dk_mkdir("${BINARY_DIR}")
 	dk_assertPath("${BINARY_DIR}")
 	
