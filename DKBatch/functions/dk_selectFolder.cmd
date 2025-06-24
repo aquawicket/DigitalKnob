@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1
 	
-	set "MSHTA_EXE=%systemroot:\=/%/system32/mshta.exe"
+	set "MSHTA_EXE=%systemroot:\=/%/System32/mshta.exe"
     %dk_call% dk_assertPath MSHTA_EXE
 	
     for /f "usebackq delims=" %%i in (
@@ -29,8 +29,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if "%~1" neq "" (set "%~1=%dk_selectFolder:\=/%")
 	)
 %endfunction%
-
-
 
 
 

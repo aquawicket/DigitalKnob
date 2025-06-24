@@ -1,0 +1,89 @@
+#DKColorPicker/DKColorPicker/.html
+{
+	position:absolute;
+	overflow:hidden;
+	width:325rem;
+	height:400rem;
+}
+
+#DKColorPickerBar
+{
+	position:absolute;
+	top:30rem;
+	left:10rem;
+}
+
+#DKColorHover
+{
+	position:absolute;
+	top:30rem;
+	left:50rem;
+}
+
+#DKColorSelected
+{
+	position:absolute;
+	top:295rem;
+	left:50rem;
+	width:80rem;
+	height:80rem;
+	background-color:rgb(1,1,1);
+}
+
+#DKColorPicker_R
+{
+	position:absolute;
+	top:295rem;
+	left:135rem;
+	color:black;
+}
+
+#DKColorR
+{
+	position:absolute;
+	top:295rem;
+	left:150rem;
+	width:50rem;
+	height:20rem;
+}
+
+#DKColorPicker_G
+{
+	position:absolute;
+	top:320rem;
+	left:135rem;
+}
+
+#DKColorG
+{
+	position:absolute;
+	top:320rem;
+	left:150rem;
+	width:50rem;
+	height:20rem;
+}
+
+#DKColorPicker_B
+{
+	position:absolute;
+	top:345rem;
+	left:135rem;
+}
+
+#DKColorB
+{
+	position:absolute;
+	top:345rem;
+	left:150rem;
+	width:50rem;
+	height:20rem;
+}
+
+#DKColorPickerOK
+{
+	position:absolute;
+	top:360rem;
+	left:230rem;
+	width:50rem;
+	height:23rem;
+}

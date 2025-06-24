@@ -4,6 +4,7 @@ var USE_FILESYSTEM = 0;
 var USE_NODEJS=0;
 
 
+
 //###### console.log ######
 (function(con){
 	'use strict';
@@ -110,8 +111,8 @@ if(!dk_valid("DKScriptEngine")){
 		var DKScriptEngine_Version = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
 	}
 }
-dk_assert("DKScriptEngine");
-dk_assert("DKScriptEngine_Version");
+//dk_assert("DKScriptEngine");
+///dk_assert("DKScriptEngine_Version");
 
 //############ globalThis ############
 if(!dk_valid("globalThis")){
@@ -128,6 +129,9 @@ if(!dk_valid("window")){
 	}());
 }
 dk_assert('window');
+
+//############ dk ############
+window.dk = new Object;
 
 //############ dk_call ############
 if(!dk_valid("dk_call")){
@@ -568,8 +572,12 @@ dk_assert('body_onload');
 //if(!dk_valid("WshShell"))			{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js"); 		}
 //if(!dk_valid("replaceAll"))		{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js"); 		}
 if(!dk_valid("dk_color"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js"); 		}
+if(!dk_valid("DKPlugin"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DKPlugin.js"); 		}
+if(!dk_valid("DKFile"))			    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKFile.js"); 		}
+if(!dk_valid("DKGui"))			    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKGui.js"); 		}
+if(!dk_valid("DKErrorHandler"))	    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKErrorHandler.js"); 		}
 //if(!dk_valid("dk_color"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(){}); }
-dk_assert('dk_color');
+//dk_assert('dk_color');
 
 
 //############ DKTEST ############
@@ -636,3 +644,102 @@ if(typeof ARGV !== "undefined"){
 */
 
 
+// dk.sendRequest()
+dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callback){
+//    required({
+//        httpMethod
+//    }, {
+//        url
+//    }, {
+//        dk_sendRequest_callback
+//    });
+    if (httpMethod){
+        switch (httpMethod){
+        case "GET":
+        case "POST":
+        case "PUT":
+        case "HEAD":
+        case "DELETE":
+        case "PATCH":
+        case "OPTIONS":
+        case "CONNECT":
+        case "TRACE":
+            break;
+        default:
+            return error("httpMethod '" + httpMethod + "' invalid", dk_sendRequest_callback(false));
+        }
+    }
+    if (dk_sendRequest_callback.length < 3)
+        return error("dk_sendRequest_callback requires 3 arguments (success, url, data)", dk_sendRequest_callback(false));
+
+    var xhr;
+    try {
+        !xhr && (xhr = new XMLHttpRequest());
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Msxml3.XMLHTTP"));
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP.6.0"));
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP.3.0"));
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP"));
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Microsoft.XMLHTTP"));
+    } catch (e){}
+    if (!xhr)
+        return error("Error creating xhr object", dk_sendRequest_callback(false));
+
+    //FIXME: duktape
+    //url = encodeURIComponent(url).replace(";", "%3B");
+    xhr.open(httpMethod, url, true);
+    //https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+    if (httpMethod === "POST" || httpMethod === "Put")
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.timeout = 20000;
+
+    //Possible error codes
+    //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
+    xhr.onabort = function xhr_onabort(event){
+        dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
+        //console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, xhr.responseText);
+    }
+    xhr.onerror = function xhr_onerror(event){
+        console.error && console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
+        //console.debug("XMLHttpRequest.onerror(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, xhr.responseText);
+    }
+    xhr.onload = function xhr_onload(event){
+        //console.debug("XMLHttpRequest.onload(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(true, url, xhr.responseText);
+    }
+    xhr.onloadend = function xhr_onloadend(event){//console.debug("XMLHttpRequest.onloadend(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    }
+    xhr.onloadstart = function xhr_onloadstart(event){//console.debug("XMLHttpRequest.onloadstart(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    }
+    xhr.onprogress = function xhr_onprogress(event){//console.debug("XMLHttpRequest.onprogress(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    }
+    xhr.onreadystatechange = function xhr_onreadystatechange(event){//console.log("XMLHttpRequest.onreadystatechange(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    /*
+        if (xhr.readyState === 4){
+            if (xhr.status >= 200 && xhr.status < 400 || !xhr.status)
+                dk_sendRequest_callback(true, url, xhr.responseText);
+            else
+                dk_sendRequest_callback(false, url, xhr.responseText);
+        }
+        */
+    }
+    xhr.ontimeout = function xhr_ontimeout(event){
+        dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
+        //console.debug("XMLHttpRequest.ontimeout(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, "ontimeout");
+    }
+
+    console.log("dk.sendRequest("+httpMethod+","+decodeURIComponent(url)+")")
+    xhr.send();
+}

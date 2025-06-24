@@ -1,0 +1,19 @@
+dkbutton {
+	display: block;
+	border-width: 2px;
+	border-color: red;
+	width: 100px;
+	height: 100px;
+	color: black;
+	background-color: yellow;
+}
+
+dkcustom {
+	display: block;
+	border-width: 2px;
+	border-color: red;
+	width: 100px;
+	height: 100px;
+	color: black;
+	background-color: blue;
+}

@@ -1,0 +1,40 @@
+#DKPaint/DKPaint/.html
+{
+	position:absolute;
+	overflow:hidden;
+	width:500px;
+	width:500rem;
+	height:400px;
+	height:400rem;
+}
+
+#DKPaint_Menubar
+{
+	position:absolute;
+	width:100%;
+	height:20px;
+	height:20rem;
+	background-color:rgb(220,220,220);
+}
+
+#DKPaint_File
+{
+	position:absolute;
+	top:2px;
+	top:2rem;
+	left:4px;
+	left:4rem;
+}
+
+#DKPaint_content
+{
+	position:absolute;
+	top:22px;
+	top:22rem;
+	left:2px;
+	left:2rem;
+	right:2px;
+	right:2rem;
+	bottom:2px;
+	bottom:2rem;
+}

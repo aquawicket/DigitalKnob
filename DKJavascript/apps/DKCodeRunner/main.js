@@ -7,7 +7,7 @@ function main(){
 
 		dk_source(DKJAVASCRIPT_DIR+"/apps/DKCodeRunner/DKCodeRunner.js", function(){
 			codeRunner = new DKCodeRunner;
-			dkconsole.create("0px","","0px","0px","","74%");
+			codeRunner.create("0px","","0px","0px","","74%");
 		});
 	});	
 }
