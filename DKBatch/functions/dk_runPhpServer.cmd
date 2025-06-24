@@ -9,7 +9,7 @@ if not defined dk_runPhpServer_DEFAULT_PATH (set dk_runPhpServer_DEFAULT_PATH=%C
 if not defined dk_runPhpServer_DEFAULT_PORT (set dk_runPhpServer_DEFAULT_PORT=80)
 if not defined dk_runPhpServer_DEFAULT_IP 	(set dk_runPhpServer_DEFAULT_IP=127.0.0.1)
 ::################################################################################
-::# dk_runPhpServer(path, port)
+::# dk_runPhpServer(root_path, port)
 ::#
 ::#
 :dk_runPhpServer
@@ -17,8 +17,8 @@ if not defined dk_runPhpServer_DEFAULT_IP 	(set dk_runPhpServer_DEFAULT_IP=127.0
 	
 	%dk_call% dk_depend php-src
 	
-	if "%~1" neq "" (set path=%~1) 	else (set path=%dk_runPhpServer_DEFAULT_PATH%)
-	if "%~2" neq "" (set port=%~2) 	else (set port=%dk_runPhpServer_DEFAULT_PORT%)
+	if "%~1" neq "" (set filepath=%~1) 	else (set filepath=%dk_runPhpServer_DEFAULT_PATH%)
+	if "%~2" neq "" (set port=%~2) 		else (set port=%dk_runPhpServer_DEFAULT_PORT%)
 	set "LOCAL_IP=%dk_runPhpServer_DEFAULT_IP%"
 	
 	%dk_call% dk_IpAddressLocal
@@ -37,10 +37,10 @@ if not defined dk_runPhpServer_DEFAULT_IP 	(set dk_runPhpServer_DEFAULT_IP=127.0
 	
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	cd %DKBRANCH_DIR%
-	TASKLIST | FINDSTR php_local.exe || start /min "" "%DKPHP_DIR%\php_local.exe" -S %LOCAL_IP%:%port% -t "%path%"
+	TASKLIST | FINDSTR php_local.exe || start /min "" "%DKPHP_DIR%\php_local.exe" -S %LOCAL_IP%:%port% -t "%filepath%"
 	
 	%dk_call% dk_todo "dk_runPhpServer.cmd: get local ip address"
-	TASKLIST | FINDSTR php_web.exe   || start /min "" "%DKPHP_DIR%\php_web.exe" -S %WEB_IP%:%port% -t "%path%"
+	TASKLIST | FINDSTR php_web.exe   || start /min "" "%DKPHP_DIR%\php_web.exe" -S %WEB_IP%:%port% -t "%filepath%"
 %endfunction%
 
 
@@ -53,5 +53,5 @@ if not defined dk_runPhpServer_DEFAULT_IP 	(set dk_runPhpServer_DEFAULT_IP=127.0
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_runPhpServer "%DKPHP_FUNCTIONS_DIR%" 5000
+	%dk_call% dk_runPhpServer "C:/Users/Administrator/DigitalKnob/Development/DKJavascript/functions2/" 2393
 %endfunction%
