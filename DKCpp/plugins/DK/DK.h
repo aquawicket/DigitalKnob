@@ -55,8 +55,11 @@
 #include "DK/DKUtil.h"
 #include "DK/DKApp.h"
 
-#if DKAPP
-	#include "DKPlugins.h"
+//#if DKAPP
+#ifdef __has_include
+#	if __has_include("DKPlugins.h")
+#		include "DKPlugins.h"
+#	endif
 #endif
 
 #endif

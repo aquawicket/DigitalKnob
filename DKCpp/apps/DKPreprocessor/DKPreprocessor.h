@@ -331,7 +331,7 @@
 #	define DKCPP_LANGUAGE_VERSION "UNKNOWN"
 #endif
 
-// BUILD_TYPE
+// Target_Type
 #if DEBUG
 #	define Target_Type "DEBUG"
 #else
