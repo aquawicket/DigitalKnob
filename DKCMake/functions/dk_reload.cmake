@@ -20,7 +20,7 @@ function(dk_reload)
 	dk_debugFunc()
 
 	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
-		dk_fatal("DKSCRIPT_PATH:$ENV{DKSCRIPT_PATH} does not exist")
+		dk_fatal("ENV{DKSCRIPT_PATH}:'$ENV{DKSCRIPT_PATH}' does not exist")
 		dk_return()
 	endif()
 	

@@ -36,7 +36,7 @@ macro(dk_if)
 
 	if(${arg0} ${arg1} ${arg2} ${arg3} ${arg4} ${arg5} ${arg6} ${arg7} ${arg8} ${arg9})
 		if(NOT COMMAND dk_eval)
-			include("${DKCMAKE_FUNCTIONS_DIR_}dk_eval.cmake")
+			include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_eval.cmake")
 		endif()
 		dk_eval("${code}")
 	else()

@@ -29,7 +29,7 @@ function(dk_DKTOOLS_DIR)
 		
 	else()
 		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-		dk_set(DKTOOLS_DIR "${DIGITALKNOB_DIR}/DKTools")
+		dk_set(DKTOOLS_DIR "$ENV{DIGITALKNOB_DIR}/DKTools")
 		
 	endif()
 

@@ -36,7 +36,7 @@ function(dk_DKBRANCH_DIR)
 		
 		# TODO: If the current folder matches the current branch set DKBRANCH, otherwise default to Development
 		# BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
-		if(EXISTS "${DIGITALKNOB_DIR}/${DKBRANCH}/.git")
+		if(EXISTS "$ENV{DIGITALKNOB_DIR}/${DKBRANCH}/.git")
 			dk_dirname(${CMAKE_CURRENT_LIST_DIR})
 			dk_basename("${dk_dirname}")
 			if("${BRANCH}" STREQUAL "${dk_basename}")
@@ -49,7 +49,7 @@ function(dk_DKBRANCH_DIR)
 	### DKBRANCH_DIR ###
 	if(NOT EXISTS "${DKBRANCH_DIR}")
 		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-		dk_set(DKBRANCH_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}")
+		dk_set(DKBRANCH_DIR "$ENV{DIGITALKNOB_DIR}/${DKBRANCH}")
 	endif()
 
 		### DK3RDPARTY ###
@@ -101,7 +101,7 @@ function(dk_DKBRANCH_DIR)
 			if(NOT EXISTS "${DKCMAKE_FUNCTIONS_DIR}") 
 				dk_set(DKCMAKE_FUNCTIONS_DIR "${DKCMAKE_DIR}/functions")
 			endif()
-			if(NOT EXISTS "${DKCMAKE_FUNCTIONS_DIR_}") 
+			if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}") 
 				dk_set(DKCMAKE_FUNCTIONS_DIR_ "${DKCMAKE_FUNCTIONS_DIR}/")
 			endif()
 

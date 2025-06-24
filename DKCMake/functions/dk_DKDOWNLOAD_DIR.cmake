@@ -28,7 +28,7 @@ function(dk_DKDOWNLOAD_DIR)
 	
 	else()
 		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-		dk_set(DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download")
+		dk_set(DKDOWNLOAD_DIR "$ENV{DIGITALKNOB_DIR}/download")
 	endif()
 	
 	###### FINALIZE ######

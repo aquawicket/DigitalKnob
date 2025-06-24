@@ -20,15 +20,15 @@ endif()
 
 
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_set.cmake")
-dk_set(DKCMAKE_FUNCTIONS_DIR "$ENV{DKCMAKE_FUNCTIONS_DIR}")
-dk_set(DKCMAKE_FUNCTIONS_DIR_ "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
+dk_set(ENV{DKCMAKE_FUNCTIONS_DIR} "$ENV{DKCMAKE_FUNCTIONS_DIR}")
+dk_set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
 dk_set(DK.cmake "${CMAKE_PARENT_LIST_FILE}")
 
 file(TO_CMAKE_PATH "$ENV{DKSCRIPT_PATH}" DKSCRIPT_PATH)
-if(NOT EXISTS "${DKSCRIPT_PATH}")
-	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}")
+if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
+	set(ENV{DKSCRIPT_PATH} "${CMAKE_PARENT_LIST_FILE}")
 endif()
-dk_set(DKSCRIPT_PATH "${DKSCRIPT_PATH}")
+dk_set(ENV{DKSCRIPT_PATH} "$ENV{DKSCRIPT_PATH}")
 
 
 ### Print Version Info ###
@@ -39,11 +39,11 @@ set(DKSHELL_PATH ${CMAKE_COMMAND})
 string(ASCII 27 ESC)
 message("${ESC}[46m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m")
 message("DKSHELL_PATH = ${DKSHELL_PATH}")
-message("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
+message("ENV{DKSCRIPT_PATH} = $ENV{DKSCRIPT_PATH}")
 message("")
 
 ############ dk_cmakePolicies ############
-include("${DKCMAKE_FUNCTIONS_DIR_}/dk_cmakePolicies.cmake")
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}/dk_cmakePolicies.cmake")
 dk_cmakePolicies()
 
 # Note: Using DK() as the function name will cause DK/DKINSTALL.cmake to fail in dk_load.cmake
@@ -69,7 +69,7 @@ function(DKINIT)
 	############ Get DKCMAKE variables ############
 	dk_DKCMAKE_VARS()
 	
-	include("${DKCMAKE_FUNCTIONS_DIR_}dk_load.cmake")
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_load.cmake")
 	dk_load("dk_fatal")
 	
 	############ Get DKHTTP variables ############
@@ -110,7 +110,7 @@ function(DKINIT)
 	dk_load(dk_watch)
 	dk_load(dk_messageBox)
 
-	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
 	if(EXISTS "$ENV{DKSCRIPT_DIR}/dkconfig.txt")
 		dk_load(dk_getFileParams)
 		if(COMMAND dk_getFileParams)
@@ -124,7 +124,7 @@ function(DKINIT)
 	endif()
 	###### DKTEST MODE ######
 #	if(ENABLE_DKTEST)
-#		message("DKSCRIPT_PATH = $ENV{DKSCRIPT_PATH}")
+#		message("ENV{DKSCRIPT_PATH} = $ENV{DKSCRIPT_PATH}")
 #		string(FIND "$ENV{DKSCRIPT_DIR}" "$ENV{DKCMAKE_FUNCTIONS_DIR}" isChildOf)
 #
 #		if(${isChildOf} GREATER -1)
@@ -210,7 +210,7 @@ endfunction()
 # dk_DKSCRIPT_VARS()
 #
 function(dk_DKSCRIPT_VARS)
-	###### DKSCRIPT_PATH ######
+	###### ENV{DKSCRIPT_PATH} ######
 	if(NOT EXISTS "$ENV{DKSCRIPT_PATH}")
 		set(ENV{DKSCRIPT_PATH} "${CMAKE_PARENT_LIST_FILE}")
 	endif()

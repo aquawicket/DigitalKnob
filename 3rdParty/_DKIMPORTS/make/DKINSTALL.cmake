@@ -12,16 +12,15 @@ include_guard()
 #########################################################################
 
 
-
 ############ make #############
 # https://packages.msys2.org/base/make
+
 if((NOT DKUPDATE) AND (EXISTS "${CMAKE_MAKE_PROGRAM}"))
-	dk_notice("CMAKE_MAKE_PROGRAM is already set")
+	dk_notice("CMAKE_MAKE_PROGRAM:'${CMAKE_MAKE_PROGRAM}' is already set.")
 	dk_return()
 endif()
 
 dk_validate(Target_Tuple "dk_Target_Tuple()")
-
 
 if(Android)
 	if(Windows_Host)
@@ -86,13 +85,15 @@ elseif(Windows_X86_Msvc)
 elseif(Windows_X86_64_Msvc)
 	dk_depend(visualstudio)
 	dk_set(CMAKE_MAKE_PROGRAM	${VS_MAKE_PROGRAM})
-	
 endif()
-
-
 
 if(NOT EXISTS "${CMAKE_MAKE_PROGRAM}")
 	dk_findProgram(CMAKE_MAKE_PROGRAM make)
+endif()
+
+if(NOT EXISTS "${CMAKE_MAKE_PROGRAM}")
+	dk_warning("Could not determine the make file to use. Attempting to just use 'make' and hope it's in the path envirnment.")
+	dk_set(CMAKE_MAKE_PROGRAM	make)
 endif()
 
 dk_assertPath(CMAKE_MAKE_PROGRAM)

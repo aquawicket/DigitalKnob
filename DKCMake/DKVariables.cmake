@@ -128,9 +128,9 @@ dk_echo("Target_Config:                  '${Target_Config}'")
 ## Set variables for paths
 ###############################################################
 dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-dk_echo("DIGITALKNOB_DIR:              '${DIGITALKNOB_DIR}'")
+dk_echo("DIGITALKNOB_DIR:              '$ENV{DIGITALKNOB_DIR}'")
 
-dk_chdir("${DIGITALKNOB_DIR}")
+dk_chdir("$ENV{DIGITALKNOB_DIR}")
 
 dk_set(CMAKE_SUPPRESS_REGENERATION 1)
 dk_echo("CMAKE_SUPPRESS_REGENERATION:  '${CMAKE_SUPPRESS_REGENERATION}'")
