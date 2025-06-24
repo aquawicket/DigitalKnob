@@ -28,7 +28,17 @@
 #ifndef DKApp_H
 #define DKApp_H
 
-#include "DK/DK.h"
+# if defined(__has_include) && __has_include("DKPlugins.h")
+#	if __has_include("SDL_main.h")
+#		if !IOS && !ANDROID
+#			define SDL_MAIN_HANDLED
+#		else
+#			include "SDL_main.h"
+#		endif
+#	endif
+# endif
+
+# include "DK/DK.h"
 
 extern const char* BUILD_DATE;
 extern const char* BUILD_TIME;

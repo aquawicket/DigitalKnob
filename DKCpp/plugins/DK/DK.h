@@ -56,10 +56,9 @@
 #include "DK/DKApp.h"
 
 //#if DKAPP
-#ifdef __has_include
-#	if __has_include("DKPlugins.h")
-#		include "DKPlugins.h"
-#	endif
-#endif
+
+# if defined(__has_include) && __has_include("DKPlugins.h")
+#	include "DKPlugins.h"
+# endif
 
 #endif

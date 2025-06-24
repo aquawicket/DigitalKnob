@@ -74,6 +74,13 @@ DKApp::DKApp(_argc, _argv)
 	_argv: (char**) The values of the arguments
 */
 DKApp::DKApp(int _argc, char** _argv){
+	
+# if defined(__has_include) && __has_include("SDL_main.h")
+#	if !IOS && !EMSCRIPTEN
+		SDL_SetMainReady();
+#	endif
+# endif
+	
 	DKDEBUGFUNC(_argc, _argv);
 	DKApp::argc = _argc;
 	DKApp::argv = _argv;

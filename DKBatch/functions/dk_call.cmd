@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::set "dk_call_STACK_TO_FILE=1"
 ::set "dk_call_ENTRY_TO_FILE=1"
 ::set "dk_call_EXIT_TO_FILE=1"
-::set "dk_call_IGNORE=dk_debugFunc;dk_echo;"
+set "dk_call_IGNORE=dk_debugFunc;dk_echo;"
 ::####################################################################
 ::# dk_call(command args)
 ::#
@@ -66,6 +66,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem dk_call% dk_isCRLF "%__CMND__%" || %dk_call% dk_fileToCRLF "%__CMND__%"
 	::###### Entry ############################################################################################
 	if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
+	
+	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" equ "X%dk_call_IGNORE%X" title DKBatch: %__FUNC__%(%__ARGV__%)
 
 	call %__CMND__:/=\% %__ARGV__% && (
 		set "__STATUS__=!errorlevel!"

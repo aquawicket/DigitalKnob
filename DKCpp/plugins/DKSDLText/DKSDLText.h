@@ -35,7 +35,7 @@
 #include "DKSDLWindow/DKSDLWindow.h"
 
 //WARNING_DISABLE
-#ifdef __has_include && __has_include("SDL_ttf.h")
+#if defined(__has_include) && __has_include("SDL_ttf.h")
 #	include "SDL_ttf.h"
 #else
 #	error "DKSDLText requires sdl_ttf library"

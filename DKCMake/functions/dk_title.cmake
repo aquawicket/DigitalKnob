@@ -19,9 +19,12 @@ include_guard()
 function(dk_title)
     dk_debugFunc(0 99)
  
-	dk_depend(cmd)
-	if(EXISTS "${CMD_EXE}")
-		dk_replaceAll("${CMD_EXE}" "/" "\\" CMD_EXE)
+	###### dk_callDKBatch ######
+#	dk_callDKBatch(dk_title ${ARGV})
+	
+	###### cmd direct #######
+	dk_CMD_EXE()
+	if(CMD_EXE)
 		execute_process(COMMAND ${CMD_EXE} /c "title ${ARGV}")
 	endif()
 endfunction()
@@ -40,5 +43,7 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
 
-    dk_title("............testing dk_title.......................")
+    dk_title("------------DKCMake: dk_title TEST 1 ..............")
+    dk_title("------------DKCMake: dk_title TEST 2 ..............")
+	dk_title("------------DKCMake: dk_title TEST 3 ..............")
 endfunction()
