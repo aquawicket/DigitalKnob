@@ -43,10 +43,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Getting DIGITALKNOB_DIR . . ."
 	%dk_call% dk_DIGITALKNOB_DIR
+	%dk_call% dk_echo "DIGITALKNOB = %DIGITALKNOB%"
 	%dk_call% dk_echo "DIGITALKNOB_DIR = %DIGITALKNOB_DIR%"
 	
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Setting DIGITALKNOB_DIR . . ."
 	%dk_call% dk_DIGITALKNOB_DIR "C:/DigitalKnob"
+	%dk_call% dk_echo "DIGITALKNOB = %DIGITALKNOB%"
 	%dk_call% dk_echo "DIGITALKNOB_DIR = %DIGITALKNOB_DIR%"
 %endfunction%

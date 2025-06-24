@@ -22,8 +22,9 @@ if(CYGWIN)
 		return()
 	endif()
 
-	dk_set(CYGWIN_DL https://www.cygwin.com/setup-x86_64.exe)
-	dk_importVariables(${CYGWIN_DL})
+	dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+	
+	dk_importVariables(${Cygwin_Windows_X86_64_Import})
 	dk_set(CYGWIN_EXE "${CYGWIN_DIR}/Cygwin.bat")
 
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")

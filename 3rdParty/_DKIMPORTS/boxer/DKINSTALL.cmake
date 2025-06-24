@@ -14,18 +14,21 @@ include_guard()
 
 ############ boxer ############
 # https://github.com/aaronmjacobs/Boxer.git
+
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(Android OR Raspberry)
 	dk_undepend(boxer)
 	dk_return()
 endif()
 
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+
 ### DEPEND ###
 dk_depend			(cocoa)
 dk_depend			(libgtk-3-dev)
 
 ### IMPORT ###
-dk_import			(https://github.com/aaronmjacobs/Boxer/archive/65e79c38.zip)
+dk_import			(${Boxer_Import})
 
 ### LINK ###
 dk_include			(${BOXER_DIR}/include)
