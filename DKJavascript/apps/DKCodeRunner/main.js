@@ -1,14 +1,13 @@
 //alert("DKCodeRunner")
 
 function main(){
-	dk_source(DKJAVASCRIPT_DIR+"/functions/DKHtmlConsole.js", function(){
+	dk_source(DKJAVASCRIPT_DIR+"/apps/DKHtmlConsole/DKHtmlConsole.js", function(){
 		dkconsole = new DKHtmlConsole;
 		dkconsole.create("","0px","0px","0px","","25%");
-		/*
-		dk_source(DKJAVASCRIPT_DIR+"/functions/DKCodeRunner.js", function(){
+
+		dk_source(DKJAVASCRIPT_DIR+"/apps/DKCodeRunner/DKCodeRunner.js", function(){
 			codeRunner = new DKCodeRunner;
-			codeRunner.init(window);
+			dkconsole.create("0px","","0px","0px","","74%");
 		});
-		*/
 	});	
 }
