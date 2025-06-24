@@ -9,12 +9,11 @@ include_guard()
 #message("####################################################\n")
 
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	message("setting DKCMAKE_FUNCTIONS_DIR_")
 	get_filename_component(DKCMAKE_FUNCTIONS_DIR ${CMAKE_CURRENT_LIST_DIR} REALPATH)
 	set(ENV{DKCMAKE_FUNCTIONS_DIR} "${DKCMAKE_FUNCTIONS_DIR}")
 	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
 	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-		message(FATAL_ERROR "ENV{DKCMAKE_FUNCTIONS_DIR_}:'$ENV{DKCMAKE_FUNCTIONS_DIR_}' does not exist")
+		message(FATAL_ERROR "ENV{DKCMAKE_FUNCTIONS_DIR_}:'$ENV{DKCMAKE_FUNCTIONS_DIR_}' not found")
 	endif()
 endif()
 
