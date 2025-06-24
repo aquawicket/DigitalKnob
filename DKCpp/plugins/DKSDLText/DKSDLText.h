@@ -23,9 +23,9 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifndef HAVE_sdl_ttf
-#	error "DKSDLText requires sdl_ttf library"
-#endif 
+//#ifndef HAVE_sdl_ttf
+//#	error "DKSDLText requires sdl_ttf library"
+//#endif 
 
 #pragma once
 #ifndef DKSDLText_H
@@ -35,7 +35,11 @@
 #include "DKSDLWindow/DKSDLWindow.h"
 
 //WARNING_DISABLE
-#include "SDL_ttf.h"
+#ifdef __has_include && __has_include("SDL_ttf.h")
+#	include "SDL_ttf.h"
+#else
+#	error "DKSDLText requires sdl_ttf library"
+#endif
 //WARNING_ENABLE
 
 
