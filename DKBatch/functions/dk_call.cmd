@@ -10,8 +10,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::set "dk_call_PRINT_EXIT=1"
 ::set "dk_call_PRINT_SCOPE=1"
 ::set "dk_call_STACK_TO_FILE=1"
-set "dk_call_ENTRY_TO_FILE=1"
-set "dk_call_EXIT_TO_FILE=1"
+::set "dk_call_ENTRY_TO_FILE=1"
+::set "dk_call_EXIT_TO_FILE=1"
 ::set "dk_call_IGNORE=dk_debugFunc;dk_echo;"
 ::####################################################################
 ::# dk_call(command args)
