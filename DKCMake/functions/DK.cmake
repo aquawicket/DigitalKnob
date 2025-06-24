@@ -177,8 +177,8 @@ endfunction()
 function(dk_DKCMAKE_VARS)
 	get_filename_component(DKCMAKE_DIR	"${CMAKE_CURRENT_LIST_DIR}" DIRECTORY)
 	set(ENV{DKCMAKE_DIR} 				"${DKCMAKE_DIR}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR}		"${DKCMAKE_DIR}/functions")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_}		"${DKCMAKE_FUNCTIONS_DIR}/")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR}		"$ENV{DKCMAKE_DIR}/functions")
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_}		"$ENV{DKCMAKE_FUNCTIONS_DIR}/")
 endfunction(dk_DKCMAKE_VARS)
 
 #########################################################################
@@ -263,6 +263,5 @@ function(dk_setVariables)
 	#	dk_set(ProgramFiles_x86 "${ProgramFiles_x86}")
 	#endif()
 endfunction()
-
 
 DKINIT()

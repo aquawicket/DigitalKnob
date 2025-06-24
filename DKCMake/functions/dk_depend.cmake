@@ -23,7 +23,7 @@ include_guard()
 #
 function(dk_depend plugin) #target
 	dk_debugFunc(1 2)
-	
+	message("############ dk_depend(${plugin}) ############")
 	if(plugin IN_LIST dk_disabled_list)
 		if(DISABLED_LIBS MATCHES "${plugin}")
 			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
