@@ -13,18 +13,27 @@ include_guard()
 
 
 #########################################################################
-# dk_build(Source_Dir, target) NO_HALT
+# dk_build(Source_Dir, target, NO_HALT)
 #
 #	TODO
 #
 #	Source_Dir 			- path to the library root 	 I.E. ${MyLibrary_Dir} 
 #	target (optional)	- The target name of the project to build
 #
-function(dk_build Source_Dir) #target NO_HALT
+function(dk_build)
 	dk_debugFunc()
 	
-	set(Source_Dir "${ARGV0}")
-	# TODO - get AllButFirstArgs here
+	if(ARGV0)
+		set(Source_Dir "${ARGV0}")
+	else()
+		set(Source_Dir "${${CURRENT_PLUGIN}}")
+	endif()
+	if(ARGV1)
+		set(target "${ARGV1}")
+	endif()
+	#dk_allButFirstArgs(${ARGV})
+	
+	
 	dk_assertPath(Source_Dir)
 	dk_assertPath(${CURRENT_PLUGIN})
 	dk_basename("${${CURRENT_PLUGIN}}")
@@ -36,6 +45,11 @@ function(dk_build Source_Dir) #target NO_HALT
 	if(NOT "${SOURCE_DIR_lower}" STREQUAL "${CURRENT_PLUGIN_lower}")
 		dk_error("dk_build(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
 	endif()
+	
+#	if(NOT DEFINED ENV{CURRENT_PLUGIN})
+#		dk_basename("${Source_Dir}")
+#		dk_envList(PLUGIN PUSH "${dk_basename}")
+#	endif()
 	
 	#if(NOT REBUILDALL)
 		foreach(lib ${$ENV{CURRENT_PLUGIN}_LIBS})
@@ -55,14 +69,7 @@ function(dk_build Source_Dir) #target NO_HALT
 	#endif()
 	
 	dk_getParameter(NO_HALT)
-
-	#dk_assertPath(${Source_Dir})	
-	set(target ${ARGN})
 	
-	if(NOT DEFINED ENV{CURRENT_PLUGIN})
-		dk_basename("${Source_Dir}")
-		dk_envList(PLUGIN PUSH "${dk_basename}")
-	endif()
 	# If we are in MULTI_CONFIG mode, we need to do a second pass to check for build files in SINGLE_CONFIG mode. Some libraries are
 	# still built in SINGLE_CONFIG mode event though the main project isn't 
 	#if(MULTI_CONFIG)

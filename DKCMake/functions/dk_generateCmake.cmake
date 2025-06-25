@@ -19,12 +19,16 @@ include_guard()
 #
 #	@Source_Dir	- TODO
 #
-function(dk_generateCmake Source_Dir)
-	dk_debugFunc()
+function(dk_generateCmake)
+	dk_debugFunc(1)
 	
-	#set(Source_Dir "${ARGV0}")
-	# TODO - get AllButFirstArgs here
-	#dk_getPathToPlugin(${Plugin_Name} Source_Dir)
+	if(ARGV0)
+		set(Source_Dir "${ARGV0}")
+	else()
+		set(Source_Dir "${${CURRENT_PLUGIN}}")
+	endif()
+	#dk_allButFirstArgs(${ARGV})
+	
 	dk_assertPath(Source_Dir)
 	dk_assertPath(${CURRENT_PLUGIN})
 	dk_basename("${${CURRENT_PLUGIN}}")

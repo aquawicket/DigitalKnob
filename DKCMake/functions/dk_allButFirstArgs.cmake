@@ -1,4 +1,4 @@
-#!/usr/bin/cmake -P
+#/usr/bin/cmake -P
 ### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
@@ -12,26 +12,29 @@ include_guard()
 #########################################################################
 
 
-dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
 
-############ DKUpdate ############
-dk_depend(DKCurl)
-dk_depend(DKArchive)
+#########################################################################
+# dk_allButFirstArgs(args)
+#
+#
+function(dk_allButFirstArgs arg1)
+    dk_debugFunc(1 99)
 
-if(HAVE_DKDuktape)
-	dk_depend(DKDuktape)
-else()
-	dk_disable(DKDuktape)
-endif()
+	set(dk_allButFirstArgs ${ARGN} PARENT_SCOPE)
+endfunction()
 
-if(HAVE_DKCef)
-	dk_depend(DKCef)
-else()
-	dk_disable(DKCef)
-endif()
 
-############ DKUpdate ############
-dk_generateCmake()
-dk_assets()
-dk_configure()
-dk_build()
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	DKTEST_B(one two three a b c)
+endfunction()
+
+function(DKTEST_B)
+	dk_allButFirstArgs(${ARGV})
+	message("dk_allButFirstArgs = ${dk_allButFirstArgs}")
+endfunction()

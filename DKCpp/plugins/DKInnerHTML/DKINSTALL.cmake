@@ -15,7 +15,7 @@ include_guard()
 dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
 
 ############ DKInnerHTML ############
-dk_generateCmake("${${CURRENT_PLUGIN}}")
-dk_assets("${${CURRENT_PLUGIN}}")
-dk_configure("${${CURRENT_PLUGIN}}")
-dk_build("${${CURRENT_PLUGIN}}")
+dk_generateCmake()
+dk_assets()
+dk_configure()
+dk_build()

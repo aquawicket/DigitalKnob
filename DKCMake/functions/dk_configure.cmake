@@ -13,16 +13,21 @@ include_guard()
 
 
 #########################################################################
-# dk_configure(Source_Dir) #ARGN
+# dk_configure(Source_Dir, args...)
 #
 #	@Source_Dir - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
 #				  If no Source_Dir is specified, ${${CURRENT_PLUGIN}} will be used
 #
-function(dk_configure Source_Dir) #ARGN
+function(dk_configure)
 	dk_debugFunc()
 	
-	set(Source_Dir "${ARGV0}")
-	# TODO - get AllButFirstArgs here
+	if(ARGV0)
+		set(Source_Dir "${ARGV0}")
+	else()
+		set(Source_Dir "${${CURRENT_PLUGIN}}")
+	endif()
+	dk_allButFirstArgs(${ARGV})
+	
 	dk_assertPath(Source_Dir)
 	dk_assertPath(${CURRENT_PLUGIN})
 	dk_basename("${${CURRENT_PLUGIN}}")
@@ -92,7 +97,7 @@ function(dk_configure Source_Dir) #ARGN
 		#### create thr Cmake configure command ###
 #		dk_assertPath(Source_Dir)
 #		dk_assertPath(BINARY_DIR)
-		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S" "${Source_Dir}" "-B" "${BINARY_DIR}")			
+		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Source_Dir}" "-B" "${BINARY_DIR}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		
 		#### Execute the Cmake configure command ####
@@ -119,14 +124,14 @@ function(dk_configure Source_Dir) #ARGN
 		# Configure with Autotools	(single_config)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 		
-		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
+		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
 		if(EXISTS "${Source_Dir}/configure")
 			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 				dk_depend(bash)
-				dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}")
+				dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}")
 				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
 			else()
-				dk_exec(../../configure ${DKCONFIGURE_FLAGS} ${ARGN})
+				dk_exec(../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs})
 				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
 			endif()
 		else()
@@ -149,13 +154,13 @@ function(dk_configure Source_Dir) #ARGN
 	# No Specific configure type. Just pass the arguments to dk_exec to run
 	#else()
 		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
-		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
+		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_allButFirstArgs}\n")
 		
 		#f(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
-		#	dk_exec(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+		#	dk_exec(${dk_allButFirstArgs} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 		#	dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		#else()
-			dk_exec(${ARGN}) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+			dk_exec(${dk_allButFirstArgs}) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
 		#endif()
 	#endif()
