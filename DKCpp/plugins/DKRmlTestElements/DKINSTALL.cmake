@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKRmlTestElements ############
 dk_depend(DKRml)
 #if(HAVE_DKDuktape)

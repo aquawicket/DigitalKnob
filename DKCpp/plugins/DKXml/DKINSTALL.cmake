@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKXml ############
 dk_depend(libxml2)
 dk_depend(pugixml)

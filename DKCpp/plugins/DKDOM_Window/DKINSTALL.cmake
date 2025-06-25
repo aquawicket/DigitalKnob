@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKDOM_Window ############
 dk_depend(uriparser)
 dk_depend(DKEventTarget)

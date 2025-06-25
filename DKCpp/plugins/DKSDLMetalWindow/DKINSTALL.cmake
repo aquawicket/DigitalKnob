@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKSDLMetalWindow ############
 dk_depend(sdl)
 dk_depend(DKWindow)

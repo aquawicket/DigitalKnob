@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKSDLWav ############
 dk_depend(DKAudio)
 dk_depend(DKSDLWindow)

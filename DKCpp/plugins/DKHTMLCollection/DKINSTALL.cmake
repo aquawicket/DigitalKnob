@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKHTMLCollection ############
 # [IDL] https://dom.spec.whatwg.org/#interface-htmlcollection
 # [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection

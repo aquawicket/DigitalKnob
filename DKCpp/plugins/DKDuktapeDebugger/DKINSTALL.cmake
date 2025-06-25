@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKDuktapeDebugger ############
 dk_info("DKDuktapeDebugger/DKINSTALL.cmake")
 dk_depend(DKDuktape)

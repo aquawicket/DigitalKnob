@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKPhp ############
 #dk_depend(php_binary)
 #dk_copy(${PHP_BINARY}/php.exe ${DKCPP_PLUGINS_DIR}/DKPhp/php.exe OVERWRITE)

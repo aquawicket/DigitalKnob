@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKDocument ############
 dk_depend(DKNode)
 dk_depend(DKNonElementParentNode)	# mixin

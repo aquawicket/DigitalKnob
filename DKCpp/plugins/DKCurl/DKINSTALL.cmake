@@ -14,7 +14,6 @@ include_guard()
 
 dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
 
-
 #dk_depend(openssl)
 dk_depend(curl)
 dk_depend(DKFile)

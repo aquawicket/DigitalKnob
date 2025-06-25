@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKVncClient ############
 #dk_depend(libvncserver-master)
 dk_depend(libvncserver)

@@ -12,5 +12,7 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKLogin ############
 dk_assets(DKLogin)

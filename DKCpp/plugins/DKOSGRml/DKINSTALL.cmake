@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKOSGRml ############
 dk_depend(DKRml)
 dk_depend(DKOSGWindow)

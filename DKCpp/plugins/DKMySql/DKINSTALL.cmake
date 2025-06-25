@@ -11,6 +11,9 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 dk_depend(DKAssets)
 dk_depend(DKCurl)
 if(HAVE_DKDuktape)

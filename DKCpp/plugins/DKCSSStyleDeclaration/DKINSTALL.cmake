@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKCSSStyleDeclaration ############
 # [IDL] https://drafts.csswg.org/cssom/#the-cssstyledeclaration-interface
 dk_depend(DKInterface)

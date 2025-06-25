@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKOSGManipulator ############
 dk_depend(DKOSGWindow)
 #dk_depend(openscenegraph osgManipulator)

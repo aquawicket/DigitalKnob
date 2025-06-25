@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKDebug ############
 #dk_depend(backward-cpp)
 dk_depend(stackwalker)

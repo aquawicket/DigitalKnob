@@ -12,6 +12,8 @@ include_guard()
 #########################################################################
 
 
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
 ############ DKUIEvent ############
 # [IDL] https://w3c.github.io/uievents/#idl-uievent
 # [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
