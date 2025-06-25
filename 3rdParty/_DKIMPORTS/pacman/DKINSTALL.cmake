@@ -34,7 +34,7 @@ if(NOT EXISTS "${MSYS2_GPGDir}")
 	dk_findProgram(BASH_EXE bash "${MSYS2}/usr/bin")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --init")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --populate msys2")
-	dk_killProcess("gpg-agent.exe")
+	dk_killProcess(gpg-agent.exe NO_HALT)
 endif()
 
 if(NOT EXISTS "${MSYS2_DBPath}/sync")

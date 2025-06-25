@@ -16,7 +16,7 @@ include_guard()
 dk_set(dk_exec_ECHO_OUTPUT		1)
 dk_set(dk_exec_ECHO_ERROR		1)
 dk_set(dk_exec_ECHO				STDOUT) 	# STDERR, STDOUT, NONE
-dk_set(dk_exec_ERROR_IS_FATAL	ANY)		# ANY, LAST, NONE
+dk_set(dk_exec_ERROR_IS_FATAL	NONE)		# ANY, LAST, NONE
 #dk_set(dk_exec_ENCODING		NONE)		# NONE, AUTO, ANSI, OEM, UTF-8, UTF8
 
 #dk_set(dk_exec_PRINT_CALL		1) 			# dk_exec_call
@@ -24,7 +24,7 @@ dk_set(dk_exec_ERROR_IS_FATAL	ANY)		# ANY, LAST, NONE
 #dk_set(dk_exec_PRINT_EXITCODES	1)			# dk_exec_exitcodes
 #dk_set(dk_exec_PRINT_EXITCODE 	1)			# dk_exec_exitcode
 #dk_set(dk_exec_PRINT_STDERR 	1)			# dk_exec_stderr[]
-#dk_set(dk_exec_PRINT_STDOUT		1)			# dk_exec_stdout[]
+#dk_set(dk_exec_PRINT_STDOUT	1)			# dk_exec_stdout[]
 #dk_set(dk_exec_PRINT_OUTPUT 	1)			# dk_exec
 #########################################################################
 # dk_exec(commands) NO_HALT NOECHO OUTPUT <output_variable>
@@ -99,24 +99,23 @@ function(dk_exec)
 	
 	dk_getParameter(NO_HALT REMOVE)	
 	dk_getParameter(NOECHO  REMOVE)
-	
-	dk_getParameter(NOMERGE REMOVE)
-	if(NOT NOMERGE)
-		dk_mergeFlags("${dk_exec_command}" dk_exec_command)
-	endif()
+#	dk_getParameter(NOMERGE REMOVE)
+#	if(NOT NOMERGE)
+#		dk_mergeFlags("${dk_exec_command}" dk_exec_command)
+#	endif()
 	
 	if(NOT COMMAND)
 		list(INSERT dk_exec_command 0 COMMAND)  # insert COMMAND if missing
 	endif()
 	
-	if(WIN32)
-		dk_depend(cmd)
-		if(CMD_EXE)
-			if(NOT dk_exec_command MATCHES "cmd;/c")		
-				list(INSERT dk_exec_command 1 "cmd;/c") # add cmd /c if missing
-			endif()
-		endif()
-	endif()
+#	if(WIN32)
+#		dk_depend(cmd)
+#		if(CMD_EXE)
+#			if(NOT dk_exec_command MATCHES "cmd;/c")		
+#				list(INSERT dk_exec_command 1 "cmd;/c") # add cmd /c if missing
+#			endif()
+#		endif()
+#	endif()
 	
 	### WORKING_DIRECTORY ###
 	# defaults to ${PWD} set by dk_chdir(directory)
@@ -258,7 +257,7 @@ function(dk_exec)
 	
 	###################################################################################################
 	
-	dk_reparseCmakeCommand(dk_exec_command) # support longer command lines
+#	dk_reparseCmakeCommand(dk_exec_command) # support longer command lines
 	
 	if("${dk_exec_PRINT_CALL}" EQUAL 1)
 		#if(NOT "${dk_exec_call}" STREQUAL "")

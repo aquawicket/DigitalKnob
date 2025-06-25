@@ -3,7 +3,7 @@ message("################### Windows_X86_64_Clang_Toolchain.cmake ##############
 message("#########################################################################")
 
 if(NOT Windows_Host)
-	dk_exit()
+	return()
 endif()
 
 dk_validate(MSYS2 "dk_depend(msys2)")

@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 1
     set "process=%~1"
 
-    %dk_call% dk_processIsRunning %process% || %return%
+    %dk_call% dk_processIsRunning %process% || exit /b 0
 
     tasklist /fi "imagename eq %process%" |find ":" >nul
     if errorlevel 1 taskkill /f /im "%process%

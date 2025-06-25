@@ -13,12 +13,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 2
 
     tasklist | find /i "%~1" > nul
-    if "%ERRORLEVEL%" equ "0" (
-		set "dk_processIsRunning=0"
-	) else (
-		set "dk_processIsRunning=1"
-	)
-	
+	set "dk_processIsRunning=%ERRORLEVEL%"
+
 	endlocal & (
 		set "dk_processIsRunning=%dk_processIsRunning%"
 		if "%~2" neq "" (set "%~2=%dk_processIsRunning%")

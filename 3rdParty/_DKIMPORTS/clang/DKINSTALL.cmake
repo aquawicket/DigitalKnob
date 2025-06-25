@@ -18,7 +18,7 @@ include_guard()
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate(Host_Tuple		"dk_Host_Tuple()")
 dk_validate(Target_Tuple	"dk_Target_Tuple()")
-dk_set(${Target_Tuple} 		1)
+#dk_set(${Target_Tuple} 		1)
 
 if(MSYSTEM)
 	dk_validate(MSYS2 "dk_depend(msys2)")
@@ -76,6 +76,6 @@ elseif(Windows_X86_64_Ucrt)
 endif()
 
 
-#	dk_replaceAll("${MSYS2}" 	"/" "\\" 	MSYS2_WIN)
+#	dk_replaceAll("${MSYS2}" 	"/" "\\" 		MSYS2_WIN)
 #	dk_replaceAll("${CLANG64_BIN}" 	"/" "\\" 	CLANG64_BIN_WIN)
 #	dk_replaceAll("${MSYS2_BIN}" 	"/" "\\"	MSYS2_BIN_WIN)
