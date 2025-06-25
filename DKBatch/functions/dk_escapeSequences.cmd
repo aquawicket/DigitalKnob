@@ -130,7 +130,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::%dk_call% dk_decimalToVariable RS  30
     ::%dk_call% dk_decimalToVariable US  31
 
-    %dk_call% dk_set clear      "%ESC%[2J"
+	::####### General ASCII Codes ######
+	set "BEL=?"		&:: Terminal bell
+	set "BS=?"  	&:: Backspace
+	set "HT=?"		&:: Horizontal TAB
+	set "LF=?"		&:: Linefeed (newline)
+	set "VT=?"		&:: Vertical TAB
+	set "FF=?"		&:: Formfeed (also: New page NP)
+	set "CR=?"		&:: Carriage return
+	set "ESC=?"		&:: Escape character
+	set "DEL=?"		&:: Delete character
+    
+	set "clear=%ESC%[2J"				&:: 	erase entire screen
 %endfunction%
 
 :ASCII_ADD

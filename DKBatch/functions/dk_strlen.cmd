@@ -5,22 +5,24 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_strlen(string_var rtn_var)
+::# dk_strlen(string_var)
 ::#
 ::#
 :dk_strlen
 %setlocal%
-	%dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 1 2
 
     set "s=#!%~1!"
-    set "len=0"
+    set "dk_strlen=0"
     for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
         if "!s:~%%N,1!" neq "" (
-            set /a "len+=%%N"
+            set /a "dk_strlen+=%%N"
             set "s=!s:~%%N!"
         )
     )
-    endlocal & set "%2=%len%"
+    endlocal & (
+		set "dk_strlen=%dk_strlen%"
+	)
 %endfunction%
 
 
@@ -34,8 +36,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_set str "some example string"
-    %dk_call% dk_strlen str length
-	%dk_call% dk_echo "%str%"
-    %dk_call% dk_echo "str is %length% characters long"
+    set "str=some example string"
+    %dk_call% dk_strlen str
+	%dk_call% dk_echo "dk_strlen = %dk_strlen%"
 %endfunction%

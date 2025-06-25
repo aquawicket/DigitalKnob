@@ -51,7 +51,6 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
 	
     ::###### Install Git Context Menu ######
     %dk_call% dk_depend git/contextMenu  
-	 
     if NOT exist "%GIT_EXE%" (%dk_call% dk_error "cannot find git")
 %endfunction%
 

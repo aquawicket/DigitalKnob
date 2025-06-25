@@ -35,9 +35,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	echo This is a normal echo commmand
-	%dk_call% dk_echoNNL
-	%dk_call% dk_echoNNL ""
-	%dk_call% dk_echoNNL "'dk_echoNNL test' "
-	%dk_call% dk_echoNNL "'dk_echoNNL %red%test %white%with %blue%color%clr%' "
+	echo:This is a normal echo commmand
+	%dk_call% dk_echoNNL "No "
+	%dk_call% dk_echoNNL "new "
+	%dk_call% dk_echoNNL "line "
+	%dk_call% dk_echoNNL "will "
+	%dk_call% dk_echoNNL "be "
+	%dk_call% dk_echoNNL "printed "
 %endfunction%

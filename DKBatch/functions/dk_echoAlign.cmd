@@ -48,7 +48,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         if "!DE!" neq "" for /l %%i in (1 1 %offsetnum%) do call set "offset=%%offset%% "
     )
 
-    echo %offset%%~2
+    echo:%offset%%~2
 %endfunction%
 
 
