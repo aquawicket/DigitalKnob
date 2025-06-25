@@ -65,8 +65,8 @@ if "%~1" equ "" (goto DKINSTALL)
 	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 
 	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 (
-		echo exit_code:%ERRORLEVEL%
+	if %errorlevel% neq 0 (
+		echo exit_code:%errorlevel%
 	)
 
 %endfunction%

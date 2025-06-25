@@ -10,13 +10,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::################################################################################
 ::# dk_exit(exit_code)
 ::#
+::#		Exit the process or script with an exit_ststus
 ::#
 :dk_exit
 %setlocal%
 	%dk_call% dk_debugFunc 0 1
 
 	if "%~1" neq "%exit_code%" 			(%dk_call% dk_set exit_code %~1)
-	if ERRORLEVEL 1 					(set "exit_code=%errorlevel%")
+	if errorlevel 1 					(set "exit_code=%errorlevel%")
     if "%errorlevel%" gtr "%exit_code%" (set "exit_code=%errorlevel%")
     if "%~1" gtr "%exit_code%" 			(set "exit_code=%~1")
    

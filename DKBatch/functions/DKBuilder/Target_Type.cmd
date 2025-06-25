@@ -23,8 +23,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 			
 		%dk_call% dk_echo
-		echo 1^) Debug
-		echo 2^) Release
+		echo 1^) Release
+		echo 2^) Debug
 		echo 3^) All
 		echo 4^) Go Back
 		echo 5^) Exit
@@ -35,8 +35,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_keyboardInput
 		rem %dk_call% dk_keyboardInputTimeout 1 60
 
-		if "!dk_keyboardInput!" equ "1" endlocal & (set "Target_Type=Debug"			& set "!Target_Type!=1"	& %return%)
-		if "!dk_keyboardInput!" equ "2" endlocal & (set "Target_Type=Release"		& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "1" endlocal & (set "Target_Type=Release"		& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "2" endlocal & (set "Target_Type=Debug"			& set "!Target_Type!=1"	& %return%)
 		if "!dk_keyboardInput!" equ "3" endlocal & (set "Target_Type=All"			& set "!Target_Type!=1"	& %return%)
 		if "!dk_keyboardInput!" equ "4" endlocal & (%dk_call% dk_unset Target_Env	& %return%)
 		if "!dk_keyboardInput!" equ "5" (%dk_call% dk_exit 0						& %return%)
