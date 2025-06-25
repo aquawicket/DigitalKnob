@@ -12,7 +12,9 @@ include_guard()
 #########################################################################
 
 
-############ DKArchive ############
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+
+
 dk_depend(libarchive)
 dk_depend(DKDuktape)
 #if(HAVE_DKDuktape)
@@ -23,12 +25,7 @@ if(HAVE_DKCef)
 endif()
 
 
-
-
-############ DKArchive ############
-dk_set(CURRENT_PLUGIN "DKArchive")
 dk_generateCmake(${CURRENT_PLUGIN})
-dk_assets("${CMAKE_CURRENT_LIST_DIR}")
-dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
-dk_configure(${CMAKE_CURRENT_LIST_DIR})
-dk_build(${CMAKE_CURRENT_LIST_DIR})
+dk_assets("${${CURRENT_PLUGIN}}")
+dk_configure("${${CURRENT_PLUGIN}}")
+dk_build("${${CURRENT_PLUGIN}}")

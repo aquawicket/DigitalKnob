@@ -23,7 +23,7 @@ function(dk_CMD_EXE)
 		dk_set(CMD_EXE "${ARGV0}")
 		
 	###### GET ######
-	elseif(EXIST ${CMD_EXE})	
+	elseif(CMD_EXE)	
 		#dk_set(CMD_EXE "$ENV{CMD_EXE}")
 	
 	else()

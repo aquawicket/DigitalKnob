@@ -19,9 +19,6 @@ include_guard()
 # https://github.com/openssl/openssl/issues/14131 # iOS & iOS-Simulator
 # https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
-#if(NOT DEFINED ENV{CURRENT_PLUGIN})
-#	dk_envList(PLUGIN PUSH "OPENSSL")
-#endif()
 
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(Windows_X86_Msvc)

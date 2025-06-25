@@ -48,7 +48,6 @@ function(dk_build path) #target NO_HALT
 	if(NOT DEFINED ENV{CURRENT_PLUGIN})
 		dk_basename("${path}")
 		dk_envList(PLUGIN PUSH "${dk_basename}")
-		#dk_set(CURRENT_PLUGIN "${dk_basename}")
 	endif()
 	# If we are in MULTI_CONFIG mode, we need to do a second pass to check for build files in SINGLE_CONFIG mode. Some libraries are
 	# still built in SINGLE_CONFIG mode event though the main project isn't 

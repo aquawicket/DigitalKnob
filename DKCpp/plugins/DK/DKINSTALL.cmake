@@ -11,8 +11,9 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-dk_validate(Target_Config  "dk_Target_Config()")
+dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
 
+dk_validate(Target_Config  "dk_Target_Config()")
 
 if(Android)
 	dk_depend(log)
@@ -60,13 +61,18 @@ dk_depend(backward-cpp)
 dk_depend(fmt)
 
 
-# TODO:  dk_configure and dk_build both use a path as a parameter.  However, dk_generateCmake and dk_assets only use a folder name of the plugin.
-# To make things more conformed and less restrictive, Lets change dk_generateCmake and dk_assets to also use a path as a parameter.
+
+
+# TODO:  dk_configure and dk_build both use a path as a parameter.  However, dk_generateCmake only uses a folder name of the plugin.
+# To make things more conformed and less restrictive, Lets change dk_generateCmake to also use a path as a parameter.
 # All 4 of those functions below should be able to take ("${CMAKE_CURRENT_LIST_DIR}") as the input parameter.
-############ DK ############
-dk_set(CURRENT_PLUGIN "DK")
+
+
 dk_generateCmake(${CURRENT_PLUGIN})
-dk_assets("${CMAKE_CURRENT_LIST_DIR}")
-dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
-dk_configure("${CMAKE_CURRENT_LIST_DIR}")
-dk_build("${CMAKE_CURRENT_LIST_DIR}")
+dk_assets("${${CURRENT_PLUGIN}}")
+dk_configure("${${CURRENT_PLUGIN}}")
+dk_build("${${CURRENT_PLUGIN}}")
+
+
+
+

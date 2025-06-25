@@ -26,7 +26,6 @@ endif()
 
 
 ############ DKWidget ############
-#dk_set(CURRENT_PLUGIN "DKWidget")
 #dk_generateCmake(${CURRENT_PLUGIN})
 #dk_assets("${CMAKE_CURRENT_LIST_DIR}")
 #dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")

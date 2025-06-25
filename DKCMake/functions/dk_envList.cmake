@@ -84,6 +84,8 @@ function(dk_envList)
 		
 	#message("ENV{CURRENT_${NAME}} 	= $ENV{CURRENT_${NAME}}")
 	#message("ENV{${NAME}_STACK}  	= $ENV{${NAME}_STACK}")
+	dk_debug("${${NAME}_STACK}")
+	dk_title("${${NAME}_STACK}")
 endfunction()
 
 

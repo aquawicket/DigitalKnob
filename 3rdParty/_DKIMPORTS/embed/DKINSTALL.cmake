@@ -34,7 +34,7 @@ else()
 endif()
 
 ### GENERATE ###
-dk_set(CURRENT_PLUGIN "EMBED")
+#dk_set(CURRENT_PLUGIN "EMBED")
 dk_configure(${EMBED} ${TBB_CMAKE}) # -fexperimental-library
 
 
