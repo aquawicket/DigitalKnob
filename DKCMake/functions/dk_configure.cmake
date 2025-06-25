@@ -21,10 +21,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc()
 	
 	dk_assertPath(SOURCE_DIR)
-	dk_debug("SOURCE_DIR = ${SOURCE_DIR}")
 
-
-	
 	#if(NOT REBUILDALL)
 		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
 			if(NOT DEFINED missing_libs)
@@ -32,8 +29,8 @@ function(dk_configure SOURCE_DIR) #ARGN
 			endif()
 			if(NOT EXISTS "${lib}")
 				set(missing_libs 1)
-			else()
-				dk_notice("${lib} already exists")
+			#else()
+			#	dk_notice("${lib} already exists")
 			endif()
 		endforeach()
 		if("${missing_libs}" EQUAL "0")
@@ -46,8 +43,8 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_validate(Target_Config "dk_Target_Config()")
 	
 	dk_assertPath(${${CURRENT_PLUGIN}})
-	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-	dk_debug("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
+#	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+#	dk_debug("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
 	
 	if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${Target_Config}")
