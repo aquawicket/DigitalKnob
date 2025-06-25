@@ -7,13 +7,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::################################################################################
 ::# dk_echo(message)
 ::#
-::#     Print a message to the console
+::#		Print a message to the console
 ::#
-::#     @msg    - The message to print
+::#		@msg - The message to print
 ::#
 :dk_echo
 ::setlocal disableDelayedExpansion
-    ::%dk_call% dk_debugFunc 0 1
+	::%dk_call% dk_debugFunc 0 1
 
     if "%~1" equ "" (echo: & exit /b 0)  
 	
@@ -26,7 +26,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	::set "message=%message:""="%"
-	for /f "delims=" %%G in (%message%) do (echo:%%~G)
+	::for /f "delims=" %%G in (%message%) do (echo:%%~G)
+	for /f "tokens=*" %%G in (%message%) do (echo:%%~G)
 ::	for /f "usebackq delims=" %%G in (`echo:%message%`) do (echo %%~G)
 %endfunction%
 
@@ -41,48 +42,55 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_debugFunc 0
 
 
-    echo This is a normal echo commmand
-    %dk_call% dk_echo
-    %dk_call% dk_echo ""
-    %dk_call% dk_echo "This is a dk_echo line"
-    %dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
+	echo This is a normal echo commmand
+	%dk_call% dk_echo
+	%dk_call% dk_echo ""
+	%dk_call% dk_echo "This is a dk_echo line"
+	%dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
 	
 	echo This is a normal echo commmand
-    %dk_call% dk_echo
-    %dk_call% dk_echo ""
-    %dk_call% dk_echo "This is a dk_echo line"
-    %dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
+	%dk_call% dk_echo
+	%dk_call% dk_echo ""
+	%dk_call% dk_echo "This is a dk_echo line"
+	%dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
 	
 	::############### Special Characters ###############
-                                 ::ALL: "   !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
-		                     ::INVALID: "   !"  %                           "
-		                       ::VALID: "     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
-							   
-::			                        echo:"    #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
-::             for /f "tokens=*" %%G in ("     #$ &'()*+,-./:;<=>?@[\]^_`{|}~") do (echo:%%~G)
-               for /f "delims=" %%G in ("     #$ &'()*+,-./:;<=>?@[\]^_`{|}~") do (echo:%%~G)
+								 ::ALL: "   !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+							 ::INVALID: "   !"  %                           "
+							   ::VALID: "     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
 
-					  ::###### dk_call w/ Valid Characters ######
+::									echo:"    #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
+::			  for /f "tokens=*" %%G in ("     #$ &'()*+,-./:;<=>?@[\]^_`{|}~") do (echo:%%~G)
+			   for /f "delims=" %%G in ("     #$ &'()*+,-./:;<=>?@[\]^_`{|}~") do (echo:%%~G)
+			   echo:
+
+					  echo:###### TEST_A - dk_call w/ Valid Characters ######
 					  %dk_call% dk_echo "     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
-						   
-					  ::###### dk_call w/ " ######
+					  echo:
+
+					  echo:###### TEST_B - dk_call w/ " ######
 					  %dk_call% dk_echo "   ""#$ &'()*+,-./:;<=>?@[\]^_`{|}~"
-						   
-					  ::###### dk_call /w % ######
+					  echo:
+
+					  echo:###### TEST_C - dk_call /w %% ######
 					  %dk_call% dk_echo "     #$%%%%%%%%&'()*+,-./:;<=>?@[\]^_`{|}~"
-						   
-						   ::###### call w/ ! (disableDelayedExpansion) ######
+					  echo:
+
 						   setlocal disableDelayedExpansion
+						   echo:###### TEST_D - call w/ ! (disableDelayedExpansion) ######
 					       call dk_echo "   ! #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
+						   echo:
 						   endlocal
-						   
-						   ::###### call w/ ! and " (disableDelayedExpansion) ######
+
 						   setlocal disableDelayedExpansion
+						   echo ###### TEST_E - call w/ ! and " (disableDelayedExpansion) ######
 					       call dk_echo "  !""#$ &'()*+,-./:;<=>?@[\]^_`{|}~"
+						   echo:
 						   endlocal 
-						   
-						   ::###### call w/ ! and " and % (disableDelayedExpansion) ######
+
 						   setlocal disableDelayedExpansion
+						   echo ###### TEST_F - call w/ ! and " and % (disableDelayedExpansion) ######
 					       call dk_echo "  !""#$%%%%&'()*+,-./:;<=>?@[\]^_`{|}~"
+						   echo:
 						   endlocal
 %endfunction%
