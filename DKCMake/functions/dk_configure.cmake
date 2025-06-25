@@ -13,14 +13,27 @@ include_guard()
 
 
 #########################################################################
-# dk_configure(SOURCE_DIR) #ARGN
+# dk_configure(Source_Dir) #ARGN
 #
-#	@SOURCE_DIR - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
+#	@Source_Dir - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
+#				  If no Source_Dir is specified, ${${CURRENT_PLUGIN}} will be used
 #
-function(dk_configure SOURCE_DIR) #ARGN
+function(dk_configure Source_Dir) #ARGN
 	dk_debugFunc()
 	
-	dk_assertPath(SOURCE_DIR)
+	set(Source_Dir "${ARGV0}")
+	# TODO - get AllButFirstArgs here
+	dk_assertPath(Source_Dir)
+	dk_assertPath(${CURRENT_PLUGIN})
+	dk_basename("${${CURRENT_PLUGIN}}")
+	set(Plugin_Name "${dk_basename}")
+	dk_toLower("${Source_Dir}")
+	set(SOURCE_DIR_lower "${dk_toLower}")
+	dk_toLower("${${CURRENT_PLUGIN}}")
+	set(CURRENT_PLUGIN_lower "${dk_toLower}")
+	if(NOT "${SOURCE_DIR_lower}" STREQUAL "${CURRENT_PLUGIN_lower}")
+		dk_error("dk_build(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+	endif()
 
 	#if(NOT REBUILDALL)
 		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
@@ -63,10 +76,10 @@ function(dk_configure SOURCE_DIR) #ARGN
 	
 	
 	###### Configure with CMAKE ######
-	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${SOURCE_DIR}/configure) will return true.
+	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Source_Dir}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
-	get_filename_component(cmakelists_path "${SOURCE_DIR}/CMakeLists.txt" REALPATH)
-	if(NOT "${cmakelists_path}" STREQUAL "${SOURCE_DIR}/CMakeLists.txt")
+	get_filename_component(cmakelists_path "${Source_Dir}/CMakeLists.txt" REALPATH)
+	if(NOT "${cmakelists_path}" STREQUAL "${Source_Dir}/CMakeLists.txt")
 		unset(cmakelists_path)
 	endif()
 	if(EXISTS ${cmakelists_path})
@@ -77,9 +90,9 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_validate(CMAKE_GENERATOR "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		
 		#### create thr Cmake configure command ###
-#		dk_assertPath(SOURCE_DIR)
+#		dk_assertPath(Source_Dir)
 #		dk_assertPath(BINARY_DIR)
-		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S" "${SOURCE_DIR}" "-B" "${BINARY_DIR}")			
+		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S" "${Source_Dir}" "-B" "${BINARY_DIR}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		
 		#### Execute the Cmake configure command ####
@@ -96,18 +109,18 @@ function(dk_configure SOURCE_DIR) #ARGN
 	endif()	
 
 	###### Configure with ../../configure ######
-	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${SOURCE_DIR}/configure) will return true.
+	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Source_Dir}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
-	get_filename_component(configure_path "${SOURCE_DIR}/configure" REALPATH)
-	if(NOT "${configure_path}" STREQUAL "${SOURCE_DIR}/configure")
+	get_filename_component(configure_path "${Source_Dir}/configure" REALPATH)
+	if(NOT "${configure_path}" STREQUAL "${Source_Dir}/configure")
 		unset(configure_path)
 	endif()
-	if(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${configure_path})
+	if(EXISTS ${Source_Dir}/configure.ac OR EXISTS ${configure_path})
 		# Configure with Autotools	(single_config)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 		
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
-		if(EXISTS "${SOURCE_DIR}/configure")
+		if(EXISTS "${Source_Dir}/configure")
 			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 				dk_depend(bash)
 				dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}")

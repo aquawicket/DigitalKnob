@@ -19,7 +19,7 @@ dk_depend(openframeworks)
 dk_depend(DKWindow)
 
 ############ DKOFWindow ############
-dk_generateCmake(${CURRENT_PLUGIN})
+dk_generateCmake("${${CURRENT_PLUGIN}}")
 dk_assets("${${CURRENT_PLUGIN}}")
 dk_configure("${${CURRENT_PLUGIN}}")
 dk_build("${${CURRENT_PLUGIN}}")

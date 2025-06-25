@@ -69,7 +69,7 @@ dk_depend(fmt)
 # All 4 of those functions below should be able to take ("${CMAKE_CURRENT_LIST_DIR}") as the input parameter.
 
 
-dk_generateCmake(${CURRENT_PLUGIN})
+dk_generateCmake("${${CURRENT_PLUGIN}}")
 dk_assets("${${CURRENT_PLUGIN}}")
 dk_configure("${${CURRENT_PLUGIN}}")
 dk_build("${${CURRENT_PLUGIN}}")

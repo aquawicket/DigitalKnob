@@ -13,29 +13,43 @@ include_guard()
 
 
 #########################################################################
-# dk_assets(path)
+# dk_assets(Source_Dir)
 #
 #	Add a library's files to the App's assets
 #
-#	@path - The path to the library or plugin who's assets we wish to include
+#	@Source_Dir - The path to the library or plugin who's assets we wish to include
 #
-function(dk_assets plugin)
+function(dk_assets Source_Dir)
 	dk_debugFunc(1)
 	
 	#if(NOT DKAPP)
-#		return()
+	#		return()
 	#endif()
 	
-	if(EXISTS "${plugin}")
-		set(Plugin_Path "${plugin}")
+	set(Source_Dir "${ARGV0}")
+	# TODO - get AllButFirstArgs here
+	dk_assertPath(Source_Dir)
+	dk_assertPath(${CURRENT_PLUGIN})
+	dk_basename("${${CURRENT_PLUGIN}}")
+	set(Plugin_Name "${dk_basename}")
+	dk_toLower("${Source_Dir}")
+	set(SOURCE_DIR_lower "${dk_toLower}")
+	dk_toLower("${${CURRENT_PLUGIN}}")
+	set(CURRENT_PLUGIN_lower "${dk_toLower}")
+	if(NOT "${SOURCE_DIR_lower}" STREQUAL "${CURRENT_PLUGIN_lower}")
+		dk_error("dk_build(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+	endif()
+	
+	if(EXISTS "${Source_Dir}")
+		set(Plugin_Path "${Source_Dir}")
 	else()
-		dk_getPathToPlugin(${plugin} Plugin_Path)
+		dk_getPathToPlugin(${Source_Dir} Plugin_Path)
 	endif()
 	
 	if(NOT Plugin_Path)
-		dk_fatal("${plugin} plugin not found")
+		dk_fatal("${Source_Dir} plugin not found")
 	endif()
-	dk_info("Importing ${plugin} assets...")
+	dk_info("Importing ${Source_Dir} assets...")
 	
 	set(ASSETS 
 		PATTERN *.TEMP EXCLUDE
