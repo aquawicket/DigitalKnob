@@ -42,6 +42,9 @@ setlocal
 	%dk_call% "%DKIMPORTS_DIR%/vs_coreeditorfonts/DKUNINSTALL.cmd"
 	%dk_call% "%DKIMPORTS_DIR%/windows-sdk/DKUNINSTALL.cmd"
 	::%dk_call% "%DKIMPORTS_DIR%/wsl/DKUNINSTALL.cmd"
+	
+	::###### Kill lingering processes ######
+	%dk_call% dk_killProcess gpg-agent.exe
 
 	::###### Backup DKBuilder.cmd to C:/ ######
 	echo ### Creating backup of DKBuilder.cmd ###
@@ -61,7 +64,7 @@ setlocal
 	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
 	%dk_call% dk_delete "%DKDESKTOP_DIR%/DigitalKnob.lnk"
 
-	::###### Delete DK Directories ######
+	::###### Delete DKCACHE_DIR ######
 	echo ### Deleting DKCACHE_DIR ###
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	%dk_call% dk_delete "%DKCACHE_DIR%"
@@ -72,7 +75,7 @@ setlocal
 	echo Do you want to delete the DigitalKnob folder ?
 	%dk_call% dk_confirm || (exit /b 0)
 	
-	::###### Create a deleter and run is in a new process and exit this script
+	::###### Create a deleter and run it in a new process and exit this script
 	echo ((goto) 2^>nul ^& cd "%SystemDrive%\" ^&^& rmdir /s /q "%DIGITALKNOB_DIR:/=\%") > "%TEMP%\delete_DK.cmd"
 	echo ((goto) 2^>nul ^& del "%TEMP%\delete_DK.cmd" ^& cmd /c exit /b 0) >> "%TEMP%\delete_DK.cmd"
 	start "" /MIN "%TEMP%\delete_DK.cmd" & exit

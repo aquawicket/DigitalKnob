@@ -32,7 +32,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
   
+	%dk_call% dk_killProcess gpg-agent.exe
+	
     start mspaint.exe
     %dk_call% dk_sleep 3
     %dk_call% dk_killProcess mspaint.exe
+	
 %endfunction%
