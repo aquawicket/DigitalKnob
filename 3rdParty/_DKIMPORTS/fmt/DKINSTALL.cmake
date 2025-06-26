@@ -22,7 +22,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 #dk_depend(python3)
 
 ### IMPORT ###
-dk_import(https://github.com/fmtlib/fmt/archive/fade652a.zip)
+dk_import(${fmt_IMPORT})
 
 ### INCLUDE/LINK ###
 dk_define(FMT_HEADER_ONLY)
