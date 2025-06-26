@@ -15,32 +15,26 @@ include_guard()
 #########################################################################
 # dk_generateCmake(Source_Dir)
 #
-#	TODO
+#	Generate a CMakeLists.txt for the given path
 #
 #	@Source_Dir	- TODO
 #
 function(dk_generateCmake)
-	#dk_debugFunc(0 1)
+	k_debugFunc(0 1)
 
+	dk_assertPath(${CURRENT_PLUGIN})
+	dk_basename("${${CURRENT_PLUGIN}}")
+	set(Plugin_Name "${dk_basename}")
+	
 	if(ARGV)
 		set(Source_Dir "${ARGV0}")
 	else()
 		set(Source_Dir "${${CURRENT_PLUGIN}}")
 	endif()
-	#if(ARGV)
-	#	dk_allButFirstArgs(${ARGV})
-	#endif()
-	
 	dk_assertPath(Source_Dir)
-	dk_assertPath(${CURRENT_PLUGIN})
-	dk_basename("${${CURRENT_PLUGIN}}")
-	set(Plugin_Name "${dk_basename}")
-	dk_toLower("${Source_Dir}")
-	set(SOURCE_DIR_lower "${dk_toLower}")
-	dk_toLower("${${CURRENT_PLUGIN}}")
-	set(CURRENT_PLUGIN_lower "${dk_toLower}")
-	if(NOT "${SOURCE_DIR_lower}" STREQUAL "${CURRENT_PLUGIN_lower}")
-		dk_error("dk_generateCmake(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+
+	if(NOT "${SOURCE_DIR}" STREQUAL "${${CURRENT_PLUGIN}}")
+		dk_notice("dk_generateCmake(): Source_Dir:${Source_Dir} != CURRENT_PLUGIN:${${CURRENT_PLUGIN}}")
 	endif()
 	
 	###### Create CmakeLists.txt file ######
@@ -140,5 +134,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_generateCmake()
 endfunction()

@@ -21,19 +21,23 @@ include_guard()
 function(dk_configure)
 	dk_debugFunc(0 99)
 	
+	###### CURRENT_PLUGIN ######
 	dk_assertPath(${CURRENT_PLUGIN})
 	dk_basename("${${CURRENT_PLUGIN}}")
 	set(Plugin_Name "${dk_basename}")
 	
+	###### Source_Dir ######
 	if(ARGV)
 		set(Source_Dir "${ARGV0}")
 	else()
 		set(Source_Dir "${${CURRENT_PLUGIN}}")
 	endif()
+	dk_assertPath(Source_Dir)
+	
+	###### dk_allButFirstArgs ######
 	if(ARGV)
 		dk_allButFirstArgs(${ARGV})
 	endif()
-	dk_assertPath(Source_Dir)
 	
 	if(NOT "${SOURCE_DIR}" STREQUAL "${${CURRENT_PLUGIN}}")
 		dk_notice("dk_configure(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
