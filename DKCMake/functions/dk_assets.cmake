@@ -42,7 +42,7 @@ function(dk_assets)
 	endif()	
 	dk_assertPath(Source_Dir)
 
-	if(NOT "${SOURCE_DIR}" STREQUAL "${${CURRENT_PLUGIN}}")
+	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
 		dk_notice("dk_assets(): Source_Dir:${Source_Dir} != CURRENT_PLUGIN:${${CURRENT_PLUGIN}}")
 	endif()
 	

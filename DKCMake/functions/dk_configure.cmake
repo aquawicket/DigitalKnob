@@ -39,7 +39,7 @@ function(dk_configure)
 		dk_allButFirstArgs(${ARGV})
 	endif()
 	
-	if(NOT "${SOURCE_DIR}" STREQUAL "${${CURRENT_PLUGIN}}")
+	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
 		dk_notice("dk_configure(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
 	endif()
 
