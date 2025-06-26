@@ -1,0 +1,11 @@
+###### libarchive ######
+# Multi-format archive and compression libraryMore actions
+#
+# https://libarchive.org/
+# https://github.com/libarchive/libarchive
+# https://packages.msys2.org/base/libarchive
+#
+# INSTALL TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executabletarget "bsdcat".
+# https://github.com/libarchive/libarchive/issues/1563
+
+libarchive_IMPORT=https://github.com/libarchive/libarchive/archive/6567375.zip
