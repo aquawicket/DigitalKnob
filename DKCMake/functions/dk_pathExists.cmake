@@ -13,8 +13,9 @@ include_guard()
 
 
 #########################################################################
-# dk_pathExists(path) rtn_var
+# dk_pathExists(path)
 #
+#	Check if a case sensitive path exists
 #
 function(dk_pathExists)
 	dk_debugFunc()

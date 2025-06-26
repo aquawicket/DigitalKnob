@@ -83,11 +83,8 @@ function(dk_configure)
 	###### Configure with CMAKE ######
 	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Source_Dir}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
-	get_filename_component(cmakelists_path "${Source_Dir}/CMakeLists.txt" REALPATH)
-	if(NOT "${cmakelists_path}" STREQUAL "${Source_Dir}/CMakeLists.txt")
-		unset(cmakelists_path)
-	endif()
-	if(EXISTS ${cmakelists_path})
+	dk_pathExists("${Source_Dir}/CMakeLists.txt")
+	if(dk_pathExists)
 		dk_info("###### Configuring ${CURRENT_PLUGIN} with CMake ######")
 		
 		dk_assertPath(${DKCMAKE_DIR})		
@@ -99,8 +96,6 @@ function(dk_configure)
 		dk_mergeFlags("${command_list}" command_list)		
 		
 		#### Execute the Cmake configure command ####
-		dk_sleep(3)
-		message("sleeping for 3 seconds before running cmake configure")
 		dk_exec(${command_list})
 		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
@@ -114,12 +109,15 @@ function(dk_configure)
 	###### Configure with ../../configure ######
 	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Source_Dir}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
-	get_filename_component(configure_path "${Source_Dir}/configure" REALPATH)
-	if(NOT "${configure_path}" STREQUAL "${Source_Dir}/configure")
-		unset(configure_path)
-	endif()
-	if(EXISTS ${Source_Dir}/configure.ac OR EXISTS ${configure_path})
 	
+	#get_filename_component(configure_path "${Source_Dir}/configure" REALPATH)
+	#if(NOT "${configure_path}" STREQUAL "${Source_Dir}/configure")
+	#	unset(configure_path)
+	#endif()
+	#if(EXISTS ${Source_Dir}/configure.ac OR EXISTS ${configure_path})
+	
+	dk_pathExists("${Source_Dir}/CMakeLists.txt")
+	if(dk_pathExists OR EXISTS ${Source_Dir}/configure.ac)
 		# Configure with Autotools	(single_config)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 		

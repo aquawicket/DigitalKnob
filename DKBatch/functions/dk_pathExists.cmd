@@ -7,6 +7,8 @@ set "dk_pathExists_CASE_SENSITIVE=1"
 ::####################################################################
 ::# dk_pathExists(>path> <rtn_var:Optional>)
 ::#
+::#		Check if a case sensitive path exists
+::#
 :dk_pathExists
 %setlocal%
     %dk_call% dk_debugFunc 1 2
@@ -27,7 +29,6 @@ set "dk_pathExists_CASE_SENSITIVE=1"
 		if "%~2" neq "" (set "%~2=%dk_pathExists%")
 	)
     
-	echo exit /b %dk_pathExists%
 	exit /b %dk_pathExists:false=1%
 %endfunction%
 
