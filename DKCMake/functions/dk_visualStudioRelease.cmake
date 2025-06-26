@@ -41,12 +41,12 @@ function(dk_visualStudioRelease)
 	###### Target ######
 	if(ARGV)
 		set(Target "${ARGV1}")
-	else()
+	endif()
 	
 	###### Arch ######
 	if(ARGV)
 		set(Arch "${ARGV2}")
-	else()
+	endif()
 	
 	dk_findFiles(${Source_Dir}/${Target_Tuple} *.sln sln_file)
 	dk_basename(${sln_file} sln_file)

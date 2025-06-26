@@ -27,6 +27,11 @@ function(dk_libRelease lib_path)
 		return()
 	endif()
 	
+	###### CURRENT_PLUGIN ######
+	dk_assertPath(${CURRENT_PLUGIN})
+	
+	
+	
 	dk_append(LIBLIST ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_echo("${lyellow}MISSING:${yellow} ${lib_path}${clr}")

@@ -35,7 +35,7 @@ function(dk_make)
 	###### Target ######
 	if(ARGV)
 		set(Target "${ARGV1}")
-	else()
+	endif()
 	
 	dk_depend(make)
 	dk_assertPath(CMAKE_MAKE_PROGRAM)
