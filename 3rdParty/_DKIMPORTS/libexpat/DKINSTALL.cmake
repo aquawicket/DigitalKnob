@@ -64,4 +64,4 @@ dk_configure(${LIBEXPAT_DIR}/expat
 
 
 ### COMPILE ###
-dk_build(${LIBEXPAT})
+dk_build()

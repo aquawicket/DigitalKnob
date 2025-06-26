@@ -61,4 +61,4 @@ else()
 endif()
 	
 ### COMPILE ###
-dk_build(${BZIP2})
+dk_build()

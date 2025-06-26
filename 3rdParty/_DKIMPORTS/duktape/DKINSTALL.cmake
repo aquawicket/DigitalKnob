@@ -67,7 +67,7 @@ if(NOT EXISTS ${DUKTAPE_DIR}/src/duktape.c)
 	#dk_exec(${NODE_EXE} ${DUKTAPE_DIR}/src-tools/index.js configure --output-directory ${DUKTAPE_DIR}/src --source-directory ${DUKTAPE_DIR}/src-input --config-directory ${DUKTAPE_DIR}/config)
 endif()
 
-dk_configure(${DUKTAPE_DIR})
+dk_configure()
 
 ### COMPILE ###
-dk_build(${DUKTAPE}) # duktape)
+dk_build()

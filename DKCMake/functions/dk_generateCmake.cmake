@@ -21,12 +21,7 @@ include_guard()
 #
 function(dk_generateCmake)
 	#dk_debugFunc(0 1)
-	message("ARGV = ${ARGV}")
-	message("ARGV0 = ${ARGV0}")
-	message("ARGV1 = ${ARGV1}")
-	message("ARGN = ${ARGN}")
-	message("ARGN0 = ${ARGN0}")
-	message("ARGN1 = ${ARGN1}")
+
 	if(ARGV)
 		set(Source_Dir "${ARGV0}")
 	else()

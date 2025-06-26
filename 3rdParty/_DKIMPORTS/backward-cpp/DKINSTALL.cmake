@@ -41,7 +41,7 @@ else()
 endif()
 
 ### GENERATE ###
-#dk_configure("${BACKWARD_CPP_DIR}")
+#dk_configure()
 
 ### COMPILE ###
-#dk_build("${BACKWARD_CPP_DIR}")
+#dk_build()
