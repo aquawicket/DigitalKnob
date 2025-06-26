@@ -17,7 +17,7 @@ include_guard()
 
 ### IMPORT ###
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		("${BACKWARD_CPP_IMPORT}")
+dk_import			("${BACKWARD_CPP_IMPORT}")
 
 ### LINK ###
 dk_include			("${BACKWARD_CPP_DIR}")
