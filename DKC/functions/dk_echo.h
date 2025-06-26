@@ -2,7 +2,7 @@
 #ifndef dk_echo_h
 #define dk_echo_h
 
-//#include "DK.h"
+#include "DK.h"
 
 //################################################################################
 //# dk_echo(message)
@@ -11,7 +11,7 @@
 #include <stdio.h>
 int v_dk_echo(const char* format, va_list args) {
 	return vprintf(format, args);
-}
+};
 
 int dk_echo(const char* format, ...) {
 	va_list args;

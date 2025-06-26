@@ -30,8 +30,8 @@
 
 #include "DK.h"
 #include "dk_exit.h"
+#include "dk_printTimestamp.h"
 #include <stdbool.h>
-#include <time.h>
 
 extern const char* BUILD_DATE;
 extern const char* BUILD_TIME;
@@ -55,7 +55,6 @@ extern const char* BUILD_TIME;
 	bool   dk_app_paused;
 	int    dk_app_argc;
 	char** dk_app_argv;
-	char*    dk_time;
 	
 	//TODO: https://en.cppreference.com/w/cpp/utility/program/exit
 	////////////////////
@@ -72,17 +71,7 @@ extern const char* BUILD_TIME;
 				loop_funcs[i]();
 		}
 		*/
-		time_t rawtime;
-		struct tm * timeinfo;
-		time (&rawtime);
-		timeinfo = localtime ( &rawtime );
-		//dk_echo("\r%s", asctime (timeinfo));
-		
-		dk_time = asctime (timeinfo);
-		dk_time[strlen(dk_time)-1] = '\0';
-		
-		dk_echo("\rTime: %s", dk_time);
-		fflush(stdout);
+		dk_printTimestamp();
 	};
 	
 
@@ -94,6 +83,7 @@ extern const char* BUILD_TIME;
 		}
 		//DKUtil_LimitFramerate();
 		dk_app_CallLoops(); //Call loop functions
+		return true;
 	};
 
 	////////////////////
