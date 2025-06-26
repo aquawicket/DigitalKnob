@@ -82,4 +82,4 @@ dk_set(VORBIS_CMAKE
 dk_configure(${VORBIS_DIR} ${OGG_CMAKE})
 
 ### BUILD ###
-dk_build(${VORBIS_DIR})
+dk_build()

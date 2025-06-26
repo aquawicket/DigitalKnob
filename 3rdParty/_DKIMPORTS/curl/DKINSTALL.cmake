@@ -417,7 +417,7 @@ endif()
 
 
 ### COMPILE ###
-dk_build(${CURL}) # libcurl)
+dk_build()
 
 
 # arm64

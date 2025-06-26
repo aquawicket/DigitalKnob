@@ -31,8 +31,8 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure(${GME})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${GME})
+dk_build()

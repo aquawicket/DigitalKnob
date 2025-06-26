@@ -39,8 +39,8 @@ Windows_dk_libRelease		(${JASPER}/${Target_Tuple}/src/libjasper/jasper.lib)
 
 
 ### GENERATE ###
-dk_configure(${JASPER_DIR})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${JASPER_DIR})
+dk_build()

@@ -38,8 +38,8 @@ dk_exec(${BASH_EXE} -c "${AUTORECONF} -f -i")
 
 
 ### GENERATE ###
-dk_configure(${MPG123})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${MPG123})
+dk_build()

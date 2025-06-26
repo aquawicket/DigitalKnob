@@ -29,4 +29,4 @@ dk_libRelease	(${X265_RELEASE_DIR}/libx265.a)
 dk_configure(${X265})
 
 ### COMPILE ###
-dk_build(${X265})
+dk_build()

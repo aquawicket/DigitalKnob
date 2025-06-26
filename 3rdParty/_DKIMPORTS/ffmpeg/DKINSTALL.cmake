@@ -147,7 +147,7 @@ Windows_X86_64_Debug_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --
 
 
 if(Debug)
-	dk_build(${FFMPEG_DIR})
+	dk_build()
 endif()
 
 
@@ -197,6 +197,6 @@ Windows_X86_64_Release_dk_configure	(${FFMPEG_DIR} --pkg-config-flags=--static -
 
 
 if(Release)
-	dk_build(${FFMPEG_DIR})
+	dk_build()
 endif()
 

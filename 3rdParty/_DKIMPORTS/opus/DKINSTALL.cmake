@@ -41,7 +41,7 @@ dk_set(OPUS_CMAKE -DOpusFile_INCLUDE_PATH=${OpusFile_INCLUDE_PATH}  -DOpusFile_L
 
 
 ### GENERATE ###
-dk_configure(${OPUS})
+dk_configure()
 
 ### COMPILE ###
-dk_build(${OPUS})
+dk_build()

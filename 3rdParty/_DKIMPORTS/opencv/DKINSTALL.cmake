@@ -538,7 +538,7 @@ Windows_X86_64_dk_configure	(${OPENCV_DIR} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BA
 
 
 ### COMPILE ###
-dk_build(${OPENCV_DIR})
+dk_build()
 #if(opencv_calib3d)
 #	dk_build(${OPENCV} opencv_calib3d)
 #endif()

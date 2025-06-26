@@ -63,7 +63,7 @@ endif()
 
 	
 ### GENERATE ###
-dk_configure(${FREETYPE})
+dk_configure()
 
 
 ### COMPILE ###

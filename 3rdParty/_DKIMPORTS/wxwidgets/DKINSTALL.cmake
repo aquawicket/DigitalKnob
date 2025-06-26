@@ -34,4 +34,4 @@ dk_configure(${WXWIDGETS_DIR})
 
 
 ### COMPILE ###
-dk_build(${WXWIDGETS_DIR})
+dk_build()

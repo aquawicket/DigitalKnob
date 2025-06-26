@@ -32,7 +32,7 @@ Windows_dk_libRelease	(${LIGHTTPD}/${Target_Tuple}/lib/${Release_Dir}/liblighttp
 
 
 ### GENERATE ###
-dk_configure(${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
+dk_configure() # -DLWS_WITH_SSL=OFF
 
 
 ### COMPILE ###

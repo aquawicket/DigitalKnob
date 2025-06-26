@@ -37,4 +37,4 @@ dk_libRelease	(${SIMPLE_GETCH}/getch/libgetch.a)
 ### COMPILE ###
 #DEBUG_dk_exec	(../../make)
 #RELEASE_dk_exec(../../make)
-dk_build(${SIMPLE_GETCH})
+dk_build()

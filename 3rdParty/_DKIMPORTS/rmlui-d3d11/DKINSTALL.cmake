@@ -31,8 +31,8 @@ Unix_dk_libRelease	(${RMLUI_D3D11_RELEASE_DIR}/librmlui-d3d11.a)
 
 
 ### GENERATE ###
-dk_configure(${RMLUI_D3D11})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${RMLUI_D3D11})
+dk_build()

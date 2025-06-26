@@ -33,7 +33,7 @@ endif()
 #dk_set(OPENBLAS_CMAKE ???) # TODO
 
 ### GENERATE ###
-dk_configure(${OPENBLAS})
+dk_configure()
 
 ### COMPILE ###
-dk_build(${OPENBLAS})
+dk_build()

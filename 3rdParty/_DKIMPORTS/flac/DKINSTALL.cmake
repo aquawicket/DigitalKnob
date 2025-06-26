@@ -81,5 +81,5 @@ dk_configure(${FLAC_DIR}
 
 
 ### BUILD ###
-dk_build(${FLAC_DIR})
+dk_build()
 

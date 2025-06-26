@@ -32,7 +32,7 @@ Windows_dk_libDebug			(${WASM3}/${Target_Tuple}/source/${Debug_Dir}/m3.lib)
 Windows_dk_libRelease		(${WASM3}/${Target_Tuple}/source/${Release_Dir}/m3.lib)
 
 ### GENERATE ###
-dk_configure(${WASM3})
+dk_configure()
 
 ### COMPILE ###
-dk_build(${WASM3})
+dk_build()

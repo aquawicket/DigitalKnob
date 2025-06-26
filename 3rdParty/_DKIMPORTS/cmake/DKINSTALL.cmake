@@ -186,7 +186,7 @@ if(COMPILE_CMAKE)
 			#-DCMake_IWYU_VERBOSE 					# "Run include-what-you-use in verbose mode" OFF
 		)
 			 
-		dk_build(${CMAKE})
+		dk_build()
 		
 		dk_return()
 	endif()

@@ -93,7 +93,7 @@ endif()
 
 ### COMPILE ###
 if(Android)
-	dk_ndk(${OPENAL_DIR}) 
+	dk_ndk()
 else()
 	dk_build(${OPENAL_DIR} OpenAL)
 endif()

@@ -46,4 +46,4 @@ dk_configure(${FFTW3_DIR}
 	-DDISABLE_FORTRAN=OFF) 			# "Disable Fortran wrapper routines" OFF
 
 ### COMPILE ###
-dk_build(${FFTW3_DIR})# fftw3)
+dk_build()

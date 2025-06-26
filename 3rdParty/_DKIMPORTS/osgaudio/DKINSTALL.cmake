@@ -92,4 +92,4 @@ Windows_dk_exec				(${OSGAUDIO_BUILD} "-DCMAKE_CXX_FLAGS=/I${OSGAUDIO}/include" 
 
 
 ### COMPILE ###
-dk_build(${OSGAUDIO})
+dk_build()

@@ -39,4 +39,4 @@ dk_configure(${EMBED} ${TBB_CMAKE}) # -fexperimental-library
 
 
 ### COMPILE ###
-dk_build(${EMBED})
+dk_build()

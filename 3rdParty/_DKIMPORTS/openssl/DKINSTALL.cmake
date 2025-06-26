@@ -201,7 +201,7 @@ endif()
 execute_process(COMMAND ${PERL_EXE} configdata.pm --dump WORKING_DIRECTORY ${OPENSSL_CONFIG_DIR})
 
 ### COMPILE ###
-dk_build(${OPENSSL})
+dk_build()
 
 
 

@@ -30,7 +30,7 @@ dk_include(${JSON}/include/nlohmann)
 #dk_set(JSON_TESTS ON)
 if(JSON_TESTS)
 	### GENERATE ###
-	dk_configure(${JSON_DIR})
+	dk_configure()
 
 	### COMPILE ###
 	dk_build(${JSON} json_unit)

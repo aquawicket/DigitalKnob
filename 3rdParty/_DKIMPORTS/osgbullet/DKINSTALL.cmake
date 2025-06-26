@@ -118,4 +118,4 @@ Windows_dk_configure			(${OSGBULLET} ${OPENSCENEGRAPH_CMAKE} ${OSGWORKS_CMAKE} -
 
 
 ### COMPILE ###
-dk_build(${OSGBULLET})
+dk_build()

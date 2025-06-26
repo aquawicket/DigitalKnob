@@ -32,8 +32,8 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure(${DENO})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${DENO})
+dk_build()

@@ -216,4 +216,4 @@ Windows_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAK
 
 
 ### COMPILE ###
-dk_build(${SFML})
+dk_build()

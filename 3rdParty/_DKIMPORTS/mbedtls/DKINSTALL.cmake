@@ -54,7 +54,7 @@ Windows_dk_set(MBEDTLS_CMAKE
 	-DMBEDTLS_X509_LIBRARY=${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedx509.lib)
 
 ### GENERATE ###
-dk_configure(${MBEDTLS})
+dk_configure()
 
 ### COMPILE ###
-dk_build(${MBEDTLS})
+dk_build()

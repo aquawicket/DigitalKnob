@@ -50,5 +50,5 @@ dk_configure(${LIBTORRENT} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${BOOS
 
 
 ### COMPILE ###
-dk_build(${LIBTORRENT})
+dk_build()
 #dk_build(${LIBTORRENT} torrent-rasterbar)

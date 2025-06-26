@@ -32,7 +32,7 @@ dk_import(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92db
 
 
 ### GENERATE ###
-#dk_configure(${DIFF_MATCH_PATCH_DIR})
+#dk_configure()
 
 
 ### COMPILE ###

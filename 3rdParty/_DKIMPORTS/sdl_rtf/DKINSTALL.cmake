@@ -51,4 +51,4 @@ dk_configure(${SDL_RTF} ${SDL_CMAKE})
 
 
 ### COMPILE ###
-dk_build(${SDL_RTF})
+dk_build()

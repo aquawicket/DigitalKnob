@@ -34,8 +34,8 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure(${CMAKERC})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${CMAKERC})
+dk_build()

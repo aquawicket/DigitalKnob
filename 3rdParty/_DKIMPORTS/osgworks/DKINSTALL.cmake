@@ -163,4 +163,4 @@ dk_configure(${OSGWORKS}
 
 
 ### COMPILE ###
-dk_build(${OSGWORKS})
+dk_build()

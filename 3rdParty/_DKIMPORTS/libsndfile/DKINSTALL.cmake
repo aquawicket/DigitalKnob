@@ -44,4 +44,4 @@ endif()
 dk_configure(${LIBSNDFILE} ${FLAC_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${OGG_CMAKE} ${OPUS_CMAKE} ${SPEEX_CMAKE} ${SQLITE_CMAKE} ${VORBIS_CMAKE})
 
 ### COMPILE ###
-dk_build(${LIBSNDFILE})
+dk_build()

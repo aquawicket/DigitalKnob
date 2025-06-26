@@ -49,8 +49,8 @@ dk_set(WAVPACK_CMAKE
 	
 	
 ### GENERATE ###
-dk_configure(${WAVPACK})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${WAVPACK})
+dk_build()

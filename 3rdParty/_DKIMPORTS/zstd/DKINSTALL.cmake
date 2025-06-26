@@ -70,4 +70,4 @@ dk_configure(${ZSTD_DIR}/build/cmake
 	-DZSTD_USE_STATIC_RUNTIME=ON)	# "LINK TO STATIC RUN-TIME LIBRARIES" OFF
 
 ### COMPILE ###
-dk_build(${ZSTD_DIR})
+dk_build()

@@ -200,7 +200,7 @@ dk_configure(
 
 ### COMPILE ###
 if(rmlui_all)
-	dk_build(${RMLUI})
+	dk_build()
 else()
 	if(rmlui_core)
 		dk_build(${RMLUI} rmlui_core)

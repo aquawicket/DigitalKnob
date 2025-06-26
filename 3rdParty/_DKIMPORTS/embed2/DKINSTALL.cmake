@@ -35,8 +35,8 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure(${EMBED})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${EMBED})
+dk_build()

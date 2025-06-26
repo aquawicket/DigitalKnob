@@ -106,7 +106,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${LIBICONV})
+dk_configure()
 
 
 ### COMPILE ###

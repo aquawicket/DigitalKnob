@@ -44,4 +44,4 @@ dk_configure(${LIBEVENT_DIR}
 
 
 ### COMPILE ###
-dk_build(${LIBEVENT})
+dk_build()

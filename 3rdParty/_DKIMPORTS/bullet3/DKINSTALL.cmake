@@ -269,7 +269,7 @@ dk_configure(${BULLET3_DIR}
 			-DUSE_SOFT_BODY_MULTI_BODY_DYNAMICS_WORLD=ON)
 
 ### COMPILE ###
-#dk_build(${BULLET3_DIR})
+#dk_build()
 if(Bullet3Collision)
 	dk_build(${BULLET3_DIR} Bullet3Collision)
 endif()

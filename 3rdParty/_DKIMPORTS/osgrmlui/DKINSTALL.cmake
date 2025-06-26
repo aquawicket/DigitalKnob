@@ -32,8 +32,8 @@ Windows_dk_libRelease	(${OSGRMLUI_RELEASE_DIR}/osgrmlui.lib)
 
 
 ### GENERATE ###
-dk_configure(${OSGRMLUI})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${OSGRMLUI})
+dk_build()

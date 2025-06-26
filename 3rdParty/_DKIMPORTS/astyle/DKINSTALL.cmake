@@ -43,4 +43,4 @@ dk_configure(${ASTYLE}
 ) 	
 
 ### COMPILE ###
-dk_build(${ASTYLE})
+dk_build()

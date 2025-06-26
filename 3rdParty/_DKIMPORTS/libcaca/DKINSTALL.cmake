@@ -30,7 +30,7 @@ Windows_dk_libDebug		(${LIBCACA_DEBUG_DIR}/libcacad.lib)
 Windows_dk_libRelease	(${LIBCACA_RELEASE_DIR}/libcaca.lib)
 
 ### GENERATE ####
-dk_configure(${LIBCACA_DIR})
+dk_configure()
 
 ### COMPILE ###
 dk_build(${LIBCACA} libcaca)

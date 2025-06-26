@@ -47,4 +47,4 @@ dk_configure(${SDL_NET} ${SDL_CMAKE})
 
 
 ### COMPILE ###
-dk_build(${SDL_NET})
+dk_build()

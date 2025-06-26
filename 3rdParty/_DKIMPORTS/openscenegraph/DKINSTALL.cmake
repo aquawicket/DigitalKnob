@@ -2662,7 +2662,7 @@ Windows_dk_configure(${OPENSCENEGRAPH}
 
 
 ### COMPILE ###
-dk_build(${OPENSCENEGRAPH})
+dk_build()
 
 # osgCore
 if(OpenThreads)

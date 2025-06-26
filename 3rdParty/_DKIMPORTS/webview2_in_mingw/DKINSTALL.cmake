@@ -37,7 +37,7 @@ set(WEBVIEW2LOADER_DLL		"${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll
 
 dk_configure(${WEBVIEW2_IN_MINGW} -DARCH=${ARCH})
 
-dk_build(${WEBVIEW2_IN_MINGW})
+dk_build()
 
 dk_copy(${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll ${WEBVIEW2_IN_MINGW_DEBUG_DIR}/WebView2Loader.dll)
 

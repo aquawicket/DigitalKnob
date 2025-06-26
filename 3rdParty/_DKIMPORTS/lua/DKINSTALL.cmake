@@ -42,7 +42,7 @@ Debug_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR2} 	-DLUA_LIBRARIES=
 Release_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR} 	-DLUA_LIBRARIES=${LUA_RELEASE_LIBRARY} )
 
 ### GENERATE ###
-dk_configure(${LUA})
+dk_configure()
 
 ### COMPILE ###
 dk_build(${LUA} lua)

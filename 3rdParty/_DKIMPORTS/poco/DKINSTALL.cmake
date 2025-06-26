@@ -272,7 +272,7 @@ else()
 endif()
 
 ### COMPILE ###
-dk_build(${POCO})
+dk_build()
 #if(PocoActiveRecord)
 #	dk_build(${POCO} PocoActiveRecord)
 #endif()

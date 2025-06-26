@@ -28,7 +28,7 @@ Windows_dk_libDebug		(${LIBJODYCODE_DEBUG_DIR}/libjodycode.lib)
 Windows_dk_libRelease	(${LIBJODYCODE_RELEASE_DIR}/libjodycode.lib)
 
 ### GENERATE ###
-dk_configure(${LIBJODYCODE_DIR})
+dk_configure()
 
 ### COMPILE ###
 dk_build(${LIBJODYCODE_DIR} libjodycode)

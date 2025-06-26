@@ -34,8 +34,8 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure(${METACALL})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${METACALL})
+dk_build()
