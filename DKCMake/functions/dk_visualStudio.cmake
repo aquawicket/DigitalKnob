@@ -13,7 +13,7 @@ include_guard()
 
 
 #########################################################################
-# dk_visualStudio(path sln_file)
+# dk_visualStudio(Source_Dir)
 #
 #	TODO
 #

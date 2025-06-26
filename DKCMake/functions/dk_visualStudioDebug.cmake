@@ -13,24 +13,22 @@ include_guard()
 
 
 #########################################################################
-# dk_visualStudioDebug(path) #target #arch
+# dk_visualStudioDebug(Source_Dir) #target #arch
 #
 #	TODO
 #
-#	@path		- TODO
+#	@Source_Dir		- TODO
 #
-function(dk_visualStudioDebug path) #target #arch
+function(dk_visualStudioDebug Source_Dir) #target #arch
 	dk_debugFunc()
 	
-	if(NOT MSVC) #if(NOT VISUAL_STUDIO)
+	if(NOT MSVC)
 		dk_return()
 	endif()
 	
-	if(NOT EXISTS ${path})
-		dk_fatal("dk_visualStudioDebug(${path}) path does not exist")
-	endif()
+	dk_assertPath(Source_Dir)
 	
-	dk_findFiles(${path}/${Target_Tuple} *.sln sln_file)
+	dk_findFiles(${Source_Dir}/${Target_Tuple} *.sln sln_file)
 	dk_basename(${sln_file} sln_file)
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
@@ -38,17 +36,17 @@ function(dk_visualStudioDebug path) #target #arch
 	endif()
 	
 	if(Debug)
-		if(NOT EXISTS ${path}/${Target_Tuple}/${sln_file})
-			dk_fatal("CANNOT FIND: ${path}/${Target_Tuple}/${sln_file}" )
+		if(NOT EXISTS ${Source_Dir}/${Target_Tuple}/${sln_file})
+			dk_fatal("CANNOT FIND: ${Source_Dir}/${Target_Tuple}/${sln_file}" )
 		endif()
 		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
+			set(EXECUTE_COMMAND ${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
 		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
+			set(EXECUTE_COMMAND ${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Tuple}/${sln_file} /p:Configuration=Debug)
+			set(EXECUTE_COMMAND ${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /p:Configuration=Debug)
 		endif()
-		dk_exec(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${Target_Tuple})
+		dk_exec(${EXECUTE_COMMAND} WORKING_DIRECTORY ${Source_Dir}/${Target_Tuple})
 	endif()
 endfunction()
 
