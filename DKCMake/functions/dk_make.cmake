@@ -13,29 +13,45 @@ include_guard()
 
 
 #########################################################################
-# dk_make(path lib)
+# dk_make(Source_Dir, Target)
 #
-#	TODO
+#	Run a Makefile for project if it exists in 'Source_Dir"
 #
-#	@path 				- TODO
-#	@lib (optional)		- TODO
+#	@Source_Dir - The location of the Makefile
+#	@Target (optional) - The target to build
 #
-function(dk_make path) #lib
-	dk_debugFunc()
+function(dk_make)
+	dk_debugFunc(0 2)
 	
-	dk_assertPath(${path})
+	###### CURRENT_PLUGIN ######
+	dk_assertPath(${CURRENT_PLUGIN})
+	dk_basename("${${CURRENT_PLUGIN}}")
+	set(Plugin_Name "${dk_basename}")
+	
+	###### Source_Dir ######
+	if(ARGV)
+		set(Source_Dir "${ARGV0}")
+	else()
+		set(Source_Dir "${${CURRENT_PLUGIN}}")
+	endif()
+	dk_assertPath(${Source_Dir})
+	
+	###### Target ######
+	if(${ARGC} GREATER 1)
+		set(Target "${ARGV1}")
+	endif()
 	
 	dk_depend(make)
-	dk_printVar(CMAKE_MAKE_PROGRAM)
+	dk_assertPath(CMAKE_MAKE_PROGRAM)
 	
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(Emscripten)
-		dk_fatal("No proper dk_make() implemented for Emscripten" NO_HALT)
+		dk_error("No proper dk_make() implemented for Emscripten" NO_HALT)
 		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
-		dk_chdir(${path}/${Target_Config})
+		dk_chdir(${Source_Dir}/${Target_Config})
 		
-		if(${ARGC} GREATER 1)
-			dk_exec(${EMMAKE} ${CMAKE_MAKE_PROGRAM} ${lib})
+		if(Target)
+			dk_exec(${EMMAKE} ${CMAKE_MAKE_PROGRAM} ${Target})
 		else()
 			dk_exec(${EMMAKE} ${CMAKE_MAKE_PROGRAM})
 		endif()
@@ -43,31 +59,30 @@ function(dk_make path) #lib
 		#DEBUG_dk_exec(${CMAKE_COMMAND} --build . --config Debug)
 		#RELEASE_dk_exec(${CMAKE_COMMAND} --build . --config Release)
 	else()
-		set(lib ${ARGV1})
-		#dk_chdir(${path}/${Target_Config})
+		#dk_chdir(${Source_Dir}/${Target_Config})
 		
 		if(XCODE)
-			if(${ARGC} GREATER 1)
-				dk_exec(make ${lib})
+			if(Target)
+				dk_exec(make ${Target})
 			else()
 				dk_exec(make)
 			endif()
 		else()
 			if(${ARGC} GREATER 1)
 				if(EXISTS ${PWD}/Makefile)
-					dk_exec(${CMAKE_MAKE_PROGRAM} ${lib} ECHO_OUTPUT_VARIABLE) # BASH_ENV)
-				elseif(EXISTS ${path}/Makefile)
-					dk_exec(${CMAKE_MAKE_PROGRAM} -C ${path} ${lib} ECHO_OUTPUT_VARIABLE)
+					dk_exec(${CMAKE_MAKE_PROGRAM} ${Target} ECHO_OUTPUT_VARIABLE) # BASH_ENV)
+				elseif(EXISTS ${Source_Dir}/Makefile)
+					dk_exec(${CMAKE_MAKE_PROGRAM} -C ${Source_Dir} ${Target} ECHO_OUTPUT_VARIABLE)
 				else()
-					dk_fatal("Could not locate a Makefile")
+					dk_error("Makefile not found")
 				endif()
 			else()
 				if(EXISTS ${PWD}/Makefile)
 					dk_exec(${CMAKE_MAKE_PROGRAM} ECHO_OUTPUT_VARIABLE) # BASH_ENV)
-				elseif(EXISTS ${path}/Makefile)
-					dk_exec(${CMAKE_MAKE_PROGRAM} -C ${path} ECHO_OUTPUT_VARIABLE)
+				elseif(EXISTS ${Source_Dir}/Makefile)
+					dk_exec(${CMAKE_MAKE_PROGRAM} -C ${Source_Dir} ECHO_OUTPUT_VARIABLE)
 				else()
-					dk_fatal("Could not locate a Makefile")
+					dk_error("Makefile not found")
 				endif()
 			endif()
 		endif()

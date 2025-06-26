@@ -13,46 +13,55 @@ include_guard()
 
 
 #########################################################################
-# dk_pathExists(path rtn_var)
+# dk_pathExists(path) rtn_var
 #
 #
-function(dk_pathExists path rtn_var)
+function(dk_pathExists)
 	dk_debugFunc()
 	
+	set(pathExists true)
 	
-	if(EXISTS "${path}")
-		set(pathExists 1)
-	else()
-		set(pathExists 0)
+	get_filename_component(realPath "${ARGV0}" REALPATH)
+	if(NOT "${realPath}" STREQUAL "${ARGV0}")
+		set(pathExists false)
+	endif()		
+	if(NOT EXISTS "${ARGV0}")
+		set(pathExists false)
 	endif()
 	
-	#dk_printVar(pathExists)
-	set(${rtn_var} ${pathExists} PARENT_SCOPE)
+	set(dk_pathExists ${pathExists} PARENT_SCOPE)
+	
+#	if(${ARGC} GREATER 1)
+#		set(${rtn_var} ${pathExists} PARENT_SCOPE)
+#	endif()
 endfunction()
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc()
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST) 
+	dk_debugFunc(0)
 	
-	
-	dk_pathExists("dk_debug.cmake" dk_pathExists_dk_debug_sh)
-	if(dk_pathExists_dk_debug_sh)
+	dk_pathExists("C:/Windows/System32")
+	if(dk_pathExists)
 		dk_info("The path exists")
 	else()
 		dk_info("The path does NOT exist")
 	endif()
 	
-	dk_pathExists("nofile.ext" dk_pathExists_nofile_ext)
-	if(dk_pathExists_nofile_ext)
+	dk_pathExists("C:/windows/system32")
+	if(dk_pathExists)
 		dk_info("The path exists")
 	else()
 		dk_info("The path does NOT exist")
 	endif()
 	
-	dk_pathExists("${PWD}" dk_pathExists_PWD)
-	if(dk_pathExists_PWD)
+	dk_pathExists("${PWD}")
+	if(dk_pathExists)
 		dk_info("The path exists")
 	else()
 		dk_info("The path does NOT exist")

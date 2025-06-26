@@ -21,6 +21,10 @@ include_guard()
 function(dk_configure)
 	dk_debugFunc(0 99)
 	
+	dk_assertPath(${CURRENT_PLUGIN})
+	dk_basename("${${CURRENT_PLUGIN}}")
+	set(Plugin_Name "${dk_basename}")
+	
 	if(ARGV)
 		set(Source_Dir "${ARGV0}")
 	else()
@@ -29,17 +33,10 @@ function(dk_configure)
 	if(ARGV)
 		dk_allButFirstArgs(${ARGV})
 	endif()
-	
 	dk_assertPath(Source_Dir)
-	dk_assertPath(${CURRENT_PLUGIN})
-	dk_basename("${${CURRENT_PLUGIN}}")
-	set(Plugin_Name "${dk_basename}")
-	dk_toLower("${Source_Dir}")
-	set(SOURCE_DIR_lower "${dk_toLower}")
-	dk_toLower("${${CURRENT_PLUGIN}}")
-	set(CURRENT_PLUGIN_lower "${dk_toLower}")
-	if(NOT "${SOURCE_DIR_lower}" STREQUAL "${CURRENT_PLUGIN_lower}")
-		dk_error("dk_configure(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+	
+	if(NOT "${SOURCE_DIR}" STREQUAL "${${CURRENT_PLUGIN}}")
+		dk_notice("dk_configure(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
 	endif()
 
 	#if(NOT REBUILDALL)
@@ -60,8 +57,6 @@ function(dk_configure)
 	dk_validate(Target_Type "dk_Target_Type()")
 	dk_validate(Target_Config "dk_Target_Config()")
 	
-	dk_assertPath(${${CURRENT_PLUGIN}})
-	
 	if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${Target_Config}")
 		dk_mkdir("${${CURRENT_PLUGIN}_CONFIG_DIR}")
@@ -77,11 +72,10 @@ function(dk_configure)
 
 	dk_mkdir("${BINARY_DIR}")
 	dk_assertPath("${BINARY_DIR}")
-	
 	dk_chdir("${BINARY_DIR}")
+	
+	
 	# Configure with CMake		(multi_config / single_config)
-	
-	
 	###### Configure with CMAKE ######
 	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Source_Dir}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
@@ -97,8 +91,6 @@ function(dk_configure)
 		dk_validate(CMAKE_GENERATOR "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		
 		#### create thr Cmake configure command ###
-#		dk_assertPath(Source_Dir)
-#		dk_assertPath(BINARY_DIR)
 		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Source_Dir}" "-B" "${BINARY_DIR}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		
@@ -123,6 +115,7 @@ function(dk_configure)
 		unset(configure_path)
 	endif()
 	if(EXISTS ${Source_Dir}/configure.ac OR EXISTS ${configure_path})
+	
 		# Configure with Autotools	(single_config)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 		
@@ -141,7 +134,6 @@ function(dk_configure)
 		endif()
 		
 		#### restore any altered flags ####
-		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
 		if(Emscripten)
 			dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
 		else()

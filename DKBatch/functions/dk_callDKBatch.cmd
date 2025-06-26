@@ -36,7 +36,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::	%dk_call% dk_exec %ComSpec% /c call "%DKBATCH_FUNCTIONS_DIR_%%_func_%.cmd" %dk_allButFirstArgs%
-	%dk_call% dk_exec %ComSpec% /c call %_func_% %dk_allButFirstArgs%
+	%dk_call% dk_exec %ComSpec% /c call %_func_% %dk_allButFirstArgs% ^& echo !_func_!
 	endlocal & (
 		set "dk_callDKCmake=%dk_exec%"
 	)
@@ -50,14 +50,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	::	set "dk_exec_ECHO_OUTPUT=1"
+	set "dk_exec_ECHO_OUTPUT=1"
 	set "dk_exec_ECHO_ERROR=1"
-::	set "dk_exec_PRINT_CALL=1"
-::	set "dk_exec_PRINT_COMMAND=1"
-::	set "dk_exec_PRINT_EXITCODES=1"
+	set "dk_exec_PRINT_CALL=1"
+	set "dk_exec_PRINT_COMMAND=1"
+	set "dk_exec_PRINT_EXITCODES=1"
 	set "dk_exec_PRINT_EXITCODE=1"
-::	set "dk_exec_PRINT_STDERR=1"
-::	set "dk_exec_PRINT_STDOUT=1"
+	set "dk_exec_PRINT_STDERR=1"
+	set "dk_exec_PRINT_STDOUT=1"
 	set "dk_exec_PRINT_OUTPUT=1"
 
 	%dk_call% dk_callDKBatch dk_basename "C:/Users/Administrator/DigitalKnob/Development"

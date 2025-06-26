@@ -5,15 +5,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################### dk_exec SETTINGS #########################
-::if not defined dk_exec_ECHO_OUTPUT (set "dk_exec_ECHO_OUTPUT=1")
-::if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=1")
+if not defined dk_exec_ECHO_OUTPUT (set "dk_exec_ECHO_OUTPUT=1")
+if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=1")
 ::set "dk_exec_PRINT_CALL=1" 		&:: dk_exec_call
 ::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
 ::set "dk_exec_PRINT_EXITCODES=1"	&:: dk_exec_exitcodes
 ::set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
 ::set "dk_exec_PRINT_STDERR=1"		&:: dk_exec_stderr[]
 ::set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
-::set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
+set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 ::####################################################################
 ::# dk_exec(<command> <ret:optional>)
 ::#
@@ -154,12 +154,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	set "dk_exec_PRINT_STDOUT=1"
 ::	set "dk_exec_PRINT_OUTPUT=1"
 
+	echo.
+	echo ###### calling dk_testError.cmd ######
 	%dk_call% dk_exec dk_testError.cmd
-::	pause
+	echo.
+	pause
 	
-::	set "test=has value"
-::	%dk_call% dk_exec dk_test.cmd abc "d e f"
-::	pause
+	set "test=has value"
+	%dk_call% dk_exec dk_test.cmd abc "d e f"
+	pause
 	
 ::	%dk_call% dk_exec ver
 ::	pause
