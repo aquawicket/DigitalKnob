@@ -503,7 +503,8 @@ int v_dk_log(int level, const char* format, va_list args) {
 	sprintf(message, "%s%s%s", level_color, message, clr);
 	
 	//###### ECHO MESSAGE ######
-	int ret = printf("%s", message);
+	//int ret = printf("%s", message);
+	int ret = dk_echo("%s", message);
 	
 	//###### TRACE ######
 	//todo

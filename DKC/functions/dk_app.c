@@ -43,10 +43,10 @@
 #endif
 //WARNING_ENABLE
 
-int    dk_app_argc;
-char** dk_app_argv;
-bool   dk_app_active = false;
-bool   dk_app_paused = false;
+//int    dk_app_argc;
+//char** dk_app_argv;
+//bool   dk_app_active = false;
+//bool   dk_app_paused = false;
 //std_vector<std_function<void()> > dk_app_loop_funcs;
 
 
@@ -75,14 +75,14 @@ dk_app_dk_app(_argc, _argv)
 	_argc: (int) The number of arguments provided
 	_argv: (char**) The values of the arguments
 */
-dk_app_dk_app(int _argc, char** _argv){
+/*
+int dk_app_dk_app(int _argc, char** _argv){
 	//DKDEBUGFUNC(_argc, _argv);
 	dk_app_argc = _argc;
 	dk_app_argv = _argv;
 	//DKUtil_SetMainThreadNow();
 
 	//DKPreprocessor_PrintPreprocessor();
-/*
 	if (argc)
 		//DKFile_exe_path = argv[0];
 	#if ANDROID
@@ -149,15 +149,18 @@ dk_app_dk_app(int _argc, char** _argv){
 	//}
 	DKClass_DKCreate("DKDuktape");
 	DKClass_DKCreate("DKDebug");
-*/	
 	return 0;
 }
+*/
 
+/*
 void dk_app_Init(){
 	//DKDEBUGFUNC();
 	dk_app_active = true;
 }
+*/
 
+/*
 #if EMSCRIPTEN
 EM_BOOL dk_app_EM_DoFrame(double time, void* userData){
 	if (paused){
@@ -169,7 +172,9 @@ EM_BOOL dk_app_EM_DoFrame(double time, void* userData){
 	return EM_TRUE; // Return true to keep the loop running.
 }
 #endif
+*/
 
+/*
 void dk_app_Loop(){
 	//DKDEBUGFUNC();
 #if EMSCRIPTEN
@@ -180,7 +185,9 @@ void dk_app_Loop(){
 		dk_app_DoFrame();
 #endif
 }
+*/
 
+/*
 void dk_app_DoFrame(){
 	if(dk_app_paused){ 
 		//DKUtil_Sleep(100);
@@ -189,23 +196,26 @@ void dk_app_DoFrame(){
 	//DKUtil_LimitFramerate();
 	dk_app_CallLoops(); //Call loop functions
 }
+*/
 
+/*
 void dk_app_CallLoops(){
-	/*
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
 		//if(active)
 			loop_funcs[i]();
 	}
-	*/
-}
 
+}
+*/
+
+/*
 void dk_app_Exit(){
 	//DKDEBUGFUNC();
 	dk_app_active = false;
 	//DKUtil_CallExit();
 	//dk_exit(0);
 }
-
+*/
 
 
 
@@ -226,6 +236,6 @@ void dk_app_Exit(){
 #include <stdio.h>
 int main(int argc, char** argv){
 	
-	return dk_app_dk_app(argc, argv);
+	return dk_app(argc, argv);
 }
 #endif

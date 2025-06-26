@@ -29,7 +29,9 @@
 #define dk_app_h
 
 #include "DK.h"
+#include "dk_exit.h"
 #include <stdbool.h>
+#include <time.h>
 
 extern const char* BUILD_DATE;
 extern const char* BUILD_TIME;
@@ -48,24 +50,83 @@ extern const char* BUILD_TIME;
 *	@returns    ::	void
 *	https://en.cppreference.com/w/cpp/language/main_function
 */
-	int dk_app_dk_app(int argc, char** argv);
-	static void dk_app_Init();
-	static void dk_app_Load(){};
-	static void dk_app_Loop();
-#if EMSCRIPTEN
-	static EM_BOOL EM_DoFrame(double time, void* userData);
-#endif
-	static void dk_app_DoFrame();
-	static void dk_app_CallLoops();
-	
-	//TODO: https://en.cppreference.com/w/cpp/utility/program/exit
-	static void dk_app_Exit();
 
 	bool   dk_app_active;
 	bool   dk_app_paused;
 	int    dk_app_argc;
 	char** dk_app_argv;
+	char*    dk_time;
+	
+	//TODO: https://en.cppreference.com/w/cpp/utility/program/exit
+	////////////////////
+	void dk_app_Exit() {
+		dk_app_active = false;
+		dk_exit(13);
+	};
+	
+	/////////////////////////
+	void dk_app_CallLoops() {
+		/*
+		for(unsigned int i = 0; i < loop_funcs.size(); ++i){
+			//if(active)
+				loop_funcs[i]();
+		}
+		*/
+		time_t rawtime;
+		struct tm * timeinfo;
+		time (&rawtime);
+		timeinfo = localtime ( &rawtime );
+		//dk_echo("\r%s", asctime (timeinfo));
+		
+		dk_time = asctime (timeinfo);
+		dk_time[strlen(dk_time)-1] = '\0';
+		
+		dk_echo("\rTime: %s", dk_time);
+		fflush(stdout);
+	};
+	
 
+	//////////////////////////////////////////////////
+	bool dk_app_DoFrame(double time, void* userData) {
+		if(dk_app_paused){ 
+			//DKUtil_Sleep(100);
+			return true;
+		}
+		//DKUtil_LimitFramerate();
+		dk_app_CallLoops(); //Call loop functions
+	};
+
+	////////////////////
+	void dk_app_Loop() {
+		while(dk_app_active){
+			#if EMSCRIPTEN
+				emscripten_request_animation_frame_loop(dk_app_DoFrame, 0);
+			#else
+				dk_app_DoFrame(0, 0);
+			#endif
+		}
+	};
+	
+	////////////////////
+	void dk_app_Init() {
+		dk_echo("Press Ctrl+C to end the program\n");
+		dk_app_active = true;
+	};
+	
+	////////////////////////////////////////////
+	int dk_app(int _argc, char** _argv) {
+		DK();
+		dk_app_argc = _argc;
+		dk_app_argv = _argv;
+		
+		dk_app_Init();
+		dk_app_Loop();
+		return 0;
+	};
+	
+	
+	
+	
 	/*
 	template<class T>
 	static void AppendLoopFunc(void (T::*func)(), T* instance){

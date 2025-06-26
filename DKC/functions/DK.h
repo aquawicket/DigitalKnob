@@ -37,8 +37,7 @@ char* DKC_FUNCTIONS_DIR_;
 //#include "dk_DIGITALKNOB_DIR.h"
 
 int DK() {
-	dk_echo("\x1B[104m \x1B[30m - %s %s \x1B[0m \n\n", DKCOMPILER, DKCOMPILER_VERSION);
-	return 0;
+	return dk_echo("\x1B[104m \x1B[30m - %s %s \x1B[0m \n\n", DKCOMPILER, DKCOMPILER_VERSION);
 }
 
 
