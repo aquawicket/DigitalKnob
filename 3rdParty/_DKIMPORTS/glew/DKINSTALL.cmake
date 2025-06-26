@@ -16,6 +16,8 @@ include_guard()
 # https://github.com/nigels-com/glew.git
 # http://glew.sourceforge.net
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+
 dk_validate(Target_Config  "dk_Target_Config()")
 if(IOS OR Iossim OR Android)
 	dk_disable(glew)
@@ -26,7 +28,7 @@ endif()
 dk_depend(libglu1-mesa-dev)
 
 ### IMPORT ###
-dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
+dk_import(${glew_IMPORT})
 dk_copy(${GLEW_DIR}/build/cmake ${GLEW_TUPLE_DIR}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
 
 ### LINK ###

@@ -12,10 +12,12 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+###### glfw ######
 # https://github.com/glfw/glfw.git
 # https://www.glfw.org/docs/latest/compile.html
 
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 #dk_depend(wayland)
@@ -23,22 +25,21 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 
 ### IMPORT ###
-dk_import(https://github.com/glfw/glfw/archive/b35641f4a3c62aa86a0b3c983d163bc0fe36026d.zip)
-#dk_import(https://github.com/glfw/glfw/archive/refs/heads/master.zip)
+dk_import(${glfw_IMPORT})
 
 
 ### LINK ###
-dk_include				(${GLFW_DIR}/include								GLFW_INCLUDE_DIR)
-dk_include				(${GLFW_CONFIG_DIR}/include/freetype2				GLFW_INCLUDE_DIR2)
+dk_include					(${GLFW_DIR}/include								GLFW_INCLUDE_DIR)
+dk_include					(${GLFW_CONFIG_DIR}/include/freetype2				GLFW_INCLUDE_DIR2)
 if(MSVC)
 	Windows_dk_libDebug		(${GLFW_CONFIG_DIR}/src/Debug/glfw3.lib				GLFW_LIBRARY_DEBUG)
 	Windows_dk_libRelease	(${GLFW_CONFIG_DIR}/src/Release/glfw3.lib			GLFW_LIBRARY_RELEASE)
 elseif(Mac)
-	dk_libDebug			(${GLFW_CONFIG_DIR}/src/${Debug_Dir}/libglfw3.a		GLFW_LIBRARY_DEBUG)
-	dk_libRelease		(${GLFW_CONFIG_DIR}/src/${Release_Dir}/libglfw3.a	GLFW_LIBRARY_RELEASE)
+	dk_libDebug				(${GLFW_CONFIG_DIR}/src/${Debug_Dir}/libglfw3.a		GLFW_LIBRARY_DEBUG)
+	dk_libRelease			(${GLFW_CONFIG_DIR}/src/${Release_Dir}/libglfw3.a	GLFW_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${GLFW_CONFIG_DIR}/src/libglfw3.a					GLFW_LIBRARY_DEBUG)
-	dk_libRelease		(${GLFW_CONFIG_DIR}/src/libglfw3.a					GLFW_LIBRARY_RELEASE)
+	dk_libDebug				(${GLFW_CONFIG_DIR}/src/libglfw3.a					GLFW_LIBRARY_DEBUG)
+	dk_libRelease			(${GLFW_CONFIG_DIR}/src/libglfw3.a					GLFW_LIBRARY_RELEASE)
 endif()
 
 

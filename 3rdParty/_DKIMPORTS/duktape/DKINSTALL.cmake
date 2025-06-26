@@ -30,7 +30,7 @@ dk_depend(pyyaml)
 
 
 ### IMPORT ###
-dk_import(https://github.com/aquawicket/duktape/archive/0701a46.zip PATCH) #NOTE: PATCH is for CMakeLists.txt
+dk_import(${duktape_IMPORT} PATCH) #NOTE: PATCH is for CMakeLists.txt
 
 ### LINK ###
 if(MSVC)

@@ -1,0 +1,6 @@
+###### glfw ######
+# https://github.com/glfw/glfw.git
+# https://www.glfw.org/docs/latest/compile.html
+
+glfw_IMPORT=https://github.com/glfw/glfw/archive/b35641f4.zip
+#glfw_IMPORT=https://github.com/glfw/glfw/archive/refs/heads/master.zip

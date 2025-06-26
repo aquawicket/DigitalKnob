@@ -29,6 +29,16 @@ function(dk_dependB plugin)
 	dk_append(init_list "${plugin}")
 	
 	dk_getPathToPlugin(${plugin} Plugin_Path)
+	
+	###### Load the dkconfig.txt file ######
+	if(EXISTS "${Plugin_Path}/dkconfig.txt")
+		dk_getFileParams("${Plugin_Path}/dkconfig.txt")
+		dk_success("Loaded ${Plugin_Path}/dkconfig.txt")
+	else()
+		dk_warning("${Plugin_Path}/dkconfig.txt NOT FOUND.")
+	endif()
+	
+	###### Load the DKINSTALL.cmake file ######
 	dk_load(${Plugin_Path}/DKINSTALL.cmake)
 	
 #	if(${ARGC} GREATER 1)

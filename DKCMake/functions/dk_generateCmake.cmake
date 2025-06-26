@@ -20,7 +20,7 @@ include_guard()
 #	@Source_Dir	- TODO
 #
 function(dk_generateCmake)
-	k_debugFunc(0 1)
+	dk_debugFunc(0 1)
 
 	dk_assertPath(${CURRENT_PLUGIN})
 	dk_basename("${${CURRENT_PLUGIN}}")
