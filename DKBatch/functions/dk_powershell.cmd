@@ -9,13 +9,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_powershell
-    if defined dk_powershell (echo dk_powershell blocked && %return%) else (set "dk_powershell=1")   &::disallow recursion for this function
+    ::if defined dk_powershell (echo dk_powershell blocked && %return%) else (set "dk_powershell=1")   &::disallow recursion for this function
 %setlocal%
-	%dk_call% dk_debugFunc 0 99
-
-	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
-	%dk_call% dk_assertPath POWERSHELL_EXE
-   
+	::%dk_call% dk_debugFunc 0 99
+	if "%~1" equ "" (%return%)
+	
+	set dk_powershell_command=%*
+	:DeEscape
+	echo %dk_powershell_command% | findstr /c:"^^" >nul && (
+		set dk_powershell_command=%dk_powershell_command:^^=^%
+		goto :DeEscape
+	)
+	
+::	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
+	set "POWERSHELL_EXE=powershell.exe"
+  
 ::    :: try pwsh.exe
 ::    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 ::    %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
@@ -37,18 +45,19 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::    %return%
      
 ::   :found
-    if "%~1" equ "" (%return%)
+    
 	
 	::###### run command ######
-	set DKPOWERSHELL_COMMAND="%POWERSHELL_EXE%" -Command %*
-	echo "DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%"
+	set DKPOWERSHELL_COMMAND=%POWERSHELL_EXE% -Command %dk_powershell_command%
+	::echo "DKPOWERSHELL_COMMAND = %DKPOWERSHELL_COMMAND%"
 	
-	call dk_exec "%DKPOWERSHELL_COMMAND%"
+	%dk_call% dk_exec %DKPOWERSHELL_COMMAND%
+	
 	endlocal & (
 		set "dk_powershell=%dk_exec%"
 	)
 	
-	(set "dk_powershell=")
+::	(set "dk_powershell=")
 %endfunction%
 
 
@@ -58,12 +67,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_powershell Write-Output 'dk_powershell TEST A';
+	echo ######################## TEST_A ########################
+	%dk_call% dk_powershell "Write-Output 'dk_powershell TEST A';"
+	echo:
 	
+	echo ######################## TEST_B ########################
 	%dk_call% dk_powershell "Write-Output 'dk_powershell TEST B';"
+	echo:
 	
-	setlocal disableDelayedExpansion & set "ps_command=${PSVAR}='this is a powershell variable'; Write-Output 'testing dk_powershell ${PSVAR}';" & setlocal enableDelayedExpansion
-
-    %dk_call% dk_powershell "!ps_command!"
-
+	echo ######################## TEST_C ########################
+	set "PSVAR=this is a powershell variable"
+    %dk_call% dk_powershell "Write-Output 'PSVAR = '${env:PSVAR};"
+	echo:
+	
 %endfunction%
