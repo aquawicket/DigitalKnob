@@ -13,43 +13,60 @@ include_guard()
 
 
 #########################################################################
-# dk_visualStudioRelease(path) #target #arch
+# dk_visualStudioRelease(Source_Dir, Target, Arch)
 #
-#	TODO
 #
-#	@path		- TODO
+#	@Source_Dir
+#	@Targer
+#	@Arch
 #
-function(dk_visualStudioRelease path) #target #arch
+function(dk_visualStudioRelease)
 	dk_debugFunc()
 	
-	if(NOT MSVC) #if(NOT VISUAL_STUDIO)
+	if(NOT MSVC)
 		dk_return()
 	endif()
 	
-	if(NOT EXISTS ${path})
-		dk_fatal("dk_visualStudioRelease(${path}) path does not exist")
-	endif()
+	###### CURRENT_PLUGIN ######
+	dk_assertPath(${CURRENT_PLUGIN})
 	
-	dk_findFiles(${path}/${Target_Tuple} *.sln sln_file)
+	###### Source_Dir ######
+	if(ARGV)
+		set(Source_Dir "${ARGV0}")
+	else()
+		set(Source_Dir "${${CURRENT_PLUGIN}}")
+	endif()
+	dk_assertPath(Source_Dir)
+
+	###### Target ######
+	if(ARGV)
+		set(Target "${ARGV1}")
+	else()
+	
+	###### Arch ######
+	if(ARGV)
+		set(Arch "${ARGV2}")
+	else()
+	
+	dk_findFiles(${Source_Dir}/${Target_Tuple} *.sln sln_file)
 	dk_basename(${sln_file} sln_file)
 	
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
-		dk_fatal("extension does not equal .sln")
+		dk_error("extension does not equal .sln")
 	endif()
 	
 	if(Release)
-		if(NOT EXISTS ${path}/${Target_Tuple}/${sln_file})
-			dk_fatal("CANNOT FIND: ${path}/${Target_Tuple}/${sln_file}")
+		if(NOT EXISTS ${Source_Dir}/${Target_Tuple}/${sln_file})
+			dk_fatal("${Source_Dir}/${Target_Tuple}/${sln_file} not found")
 		endif()
 		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
+			dk_exec(${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /t:${Target} /p:Configuration=Release /p:Platform=${Arch} WORKING_DIRECTORY ${Source_Dir}/${Target_Tuple})
 		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
+			dk_exec(${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /t:${Target} /p:Configuration=Release WORKING_DIRECTORY ${Source_Dir}/${Target_Tuple})
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${Target_Tuple}/${sln_file} /p:Configuration=Release)
+			dk_exec(${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /p:Configuration=Release WORKING_DIRECTORY ${Source_Dir}/${Target_Tuple})
 		endif()
-		dk_exec(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${Target_Tuple})
 	endif()
 endfunction()
 

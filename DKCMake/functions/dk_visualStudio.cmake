@@ -13,11 +13,7 @@ include_guard()
 
 
 #########################################################################
-# dk_visualStudio(Source_Dir)
-#
-#	TODO
-#
-#	@args	- TODO
+# dk_visualStudio(Source_Dir, Target, Arch)
 #
 function(dk_visualStudio)
 	dk_debugFunc()
@@ -36,5 +32,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_visualStudio()
 endfunction()

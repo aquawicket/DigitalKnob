@@ -13,20 +13,38 @@ include_guard()
 
 
 #########################################################################
-# dk_visualStudioDebug(Source_Dir) #target #arch
+# dk_visualStudioDebug(Source_Dir, Target, Arch)
 #
-#	TODO
 #
-#	@Source_Dir		- TODO
+#	@Source_Dir
 #
-function(dk_visualStudioDebug Source_Dir) #target #arch
+function(dk_visualStudioDebug)
 	dk_debugFunc()
 	
 	if(NOT MSVC)
 		dk_return()
 	endif()
 	
+	###### CURRENT_PLUGIN ######
+	dk_assertPath(${CURRENT_PLUGIN})
+	
+	###### Source_Dir ######
+	if(ARGV)
+		set(Source_Dir "${ARGV0}")
+	else()
+		set(Source_Dir "${${CURRENT_PLUGIN}}")
+	endif()
 	dk_assertPath(Source_Dir)
+	
+	###### Target ######
+	if(ARGV)
+		set(Target "${ARGV1}")
+	else()
+	
+	###### Arch ######
+	if(ARGV)
+		set(Arch "${ARGV2}")
+	else()
 	
 	dk_findFiles(${Source_Dir}/${Target_Tuple} *.sln sln_file)
 	dk_basename(${sln_file} sln_file)
@@ -37,16 +55,15 @@ function(dk_visualStudioDebug Source_Dir) #target #arch
 	
 	if(Debug)
 		if(NOT EXISTS ${Source_Dir}/${Target_Tuple}/${sln_file})
-			dk_fatal("CANNOT FIND: ${Source_Dir}/${Target_Tuple}/${sln_file}" )
+			dk_error("${Source_Dir}/${Target_Tuple}/${sln_file} not found")
 		endif()
 		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
+			dk_exec(${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /t:${Target} /p:Configuration=Debug /p:Platform=${Arch} WORKING_DIRECTORY ${Source_Dir}/${Target_Tuple})
 		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
+			dk_exec(${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /t:${Target} /p:Configuration=Debug WORKING_DIRECTORY ${Source_Dir}/${Target_Tuple})
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /p:Configuration=Debug)
+			dk_exec(${MSBUILD} ${Source_Dir}/${Target_Tuple}/${sln_file} /p:Configuration=Debug WORKING_DIRECTORY ${Source_Dir}/${Target_Tuple})
 		endif()
-		dk_exec(${EXECUTE_COMMAND} WORKING_DIRECTORY ${Source_Dir}/${Target_Tuple})
 	endif()
 endfunction()
 
