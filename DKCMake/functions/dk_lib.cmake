@@ -22,11 +22,6 @@ include_guard()
 function(dk_lib lib_path)
 	dk_debugFunc()
 	
-	###### CURRENT_PLUGIN ######
-	dk_assertPath(${CURRENT_PLUGIN})
-	
-	
-	
 	foreach(item ${ARGV})
 		dk_includes(LIBS "${item}")
 		if(dk_includes)

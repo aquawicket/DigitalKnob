@@ -30,22 +30,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	::%dk_call% dk_debugFunc 1 99
 	
-	%dk_call% dk_getParameter NO_ERROR &::REMOVE
-	
 	set dk_exec_call=%*
 	set dk_exec_command=%dk_exec_call%
-	(set dk_exec_exitcodes=)
-	(set dk_exec_exitcode=)
-	(set dk_exec_stderr=)
-	(set dk_exec_stdout=)
-	(set dk_exec=)
+	set dk_exec_exitcodes=
+	set dk_exec_exitcode=
+	set dk_exec_stderr=
+	set dk_exec_stdout=
+	set dk_exec=
 	:DeEscape
 	echo %dk_exec_command% | findstr /c:"^^" >nul && (
 		set dk_exec_command=%dk_exec_command:^^=^%
 		goto :DeEscape
 	)
-	
-	
 	
 	::###### dk_exec_PRINT_CALL ######
 	if "%dk_exec_PRINT_CALL%" equ "1" (
@@ -130,9 +126,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "%%G"
 	)
 	
-	if defined NO_ERROR (
-		exit /b 0
-	)
 	if !dk_exec_exitcode! equ 0 (
 		call dk_return !dk_exec_exitcode! !dk_exec! & exit /b !dk_exec_exitcode!
 	) else (

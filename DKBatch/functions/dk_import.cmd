@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 	
-	::%dk_call% dk_getParameter NO_HALT REMOVE  &:: TODO
+	%dk_call% dk_getParameter NO_HALT REMOVE
 	
 	%dk_call% dk_importVariables %url% %ARGN%
 	%dk_call% dk_assertVar CURRENT_PLUGIN

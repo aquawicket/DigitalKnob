@@ -18,7 +18,6 @@ include_guard()
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
 # https://curl.se/docs/install.html
 
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
@@ -34,11 +33,11 @@ dk_depend(zlib)
 dk_depend(zstd)
 
 ### IMPORT ###
-
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows)
-	dk_import	(${CURL_Windows_Import})
+	dk_import	(${CURL_WIN_DL})
 else()
-	dk_import	(${CURL_Unix_Import})
+	dk_import	(${CURL_UNIX_DL})
 endif()
 
 ### LINK ###

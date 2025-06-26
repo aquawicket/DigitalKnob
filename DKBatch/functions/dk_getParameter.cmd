@@ -3,6 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
+TODO: Complete me
 
 ::#########################################################################
 ::# dk_getParameter(name) REMOVE
@@ -30,18 +31,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#echo("dk_getParameterbARGN = %ARGN%"
 	
 	::###### PARGV - Parent Function args ######
-	::set "PARGC=0"
-	::set "PARGV="
-	
-	set args=%*
-	for /f "tokens=1*" %%a in ("!args!") do (
-		if "%%a" equ "%~1" (
-			rem echo %~1 paramater found
-			endlocal & (set "%~1=%~1")
-		)
-	)
-%return%
-	::#### CMAKE CODE 
+	set "PARGC=0"
+	set "PARGV="
 	foreach(arg IN LISTS ARGV)
 		math(EXPR PARGC "${PARGC} + 1" OUTPUT_FORMAT DECIMAL)
 		list(APPEND PARGV %arg})
