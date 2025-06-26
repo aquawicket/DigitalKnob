@@ -19,14 +19,16 @@ include_guard()
 #				  If no Source_Dir is specified, ${${CURRENT_PLUGIN}} will be used
 #
 function(dk_configure)
-	dk_debugFunc()
+	dk_debugFunc(0 99)
 	
-	if(ARGV0)
+	if(ARGV)
 		set(Source_Dir "${ARGV0}")
 	else()
 		set(Source_Dir "${${CURRENT_PLUGIN}}")
 	endif()
-	dk_allButFirstArgs(${ARGV})
+	if(ARGV)
+		dk_allButFirstArgs(${ARGV})
+	endif()
 	
 	dk_assertPath(Source_Dir)
 	dk_assertPath(${CURRENT_PLUGIN})
@@ -37,7 +39,7 @@ function(dk_configure)
 	dk_toLower("${${CURRENT_PLUGIN}}")
 	set(CURRENT_PLUGIN_lower "${dk_toLower}")
 	if(NOT "${SOURCE_DIR_lower}" STREQUAL "${CURRENT_PLUGIN_lower}")
-		dk_error("dk_build(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+		dk_error("dk_configure(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
 	endif()
 
 	#if(NOT REBUILDALL)

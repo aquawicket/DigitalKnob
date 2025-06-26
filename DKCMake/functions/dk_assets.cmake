@@ -20,18 +20,20 @@ include_guard()
 #	@Source_Dir - The path to the library or plugin who's assets we wish to include
 #
 function(dk_assets)
-	dk_debugFunc(1)
+	dk_debugFunc(0 1)
 	
 	#if(NOT DKAPP)
 	#		return()
 	#endif()
 	
-	if(ARGV0)
+	if(ARGV)
 		set(Source_Dir "${ARGV0}")
 	else()
 		set(Source_Dir "${${CURRENT_PLUGIN}}")
 	endif()
-	#dk_allButFirstArgs(${ARGV})
+	#if(ARGV)
+	#	dk_allButFirstArgs(${ARGV})
+	#endif()
 	
 	dk_assertPath(Source_Dir)
 	dk_assertPath(${CURRENT_PLUGIN})
@@ -42,7 +44,7 @@ function(dk_assets)
 	dk_toLower("${${CURRENT_PLUGIN}}")
 	set(CURRENT_PLUGIN_lower "${dk_toLower}")
 	if(NOT "${SOURCE_DIR_lower}" STREQUAL "${CURRENT_PLUGIN_lower}")
-		dk_error("dk_build(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+		dk_error("dk_assets(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
 	endif()
 	
 	if(EXISTS "${Source_Dir}")

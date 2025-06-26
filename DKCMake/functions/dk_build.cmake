@@ -21,17 +21,19 @@ include_guard()
 #	target (optional)	- The target name of the project to build
 #
 function(dk_build)
-	dk_debugFunc()
+	dk_debugFunc(0 99)
 	
-	if(ARGV0)
+	if(ARGV)
 		set(Source_Dir "${ARGV0}")
 	else()
 		set(Source_Dir "${${CURRENT_PLUGIN}}")
 	endif()
-	if(ARGV1)
+	if(ARGV)
 		set(target "${ARGV1}")
 	endif()
-	#dk_allButFirstArgs(${ARGV})
+	#if(ARGV)
+	#	dk_allButFirstArgs(${ARGV})
+	#endif()
 	
 	
 	dk_assertPath(Source_Dir)
