@@ -25,7 +25,7 @@ if(Windows_Host)
 endif()
 
 ### IMPORT LIBRARY ###
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 if(Android_Host)
 	dk_installPackage("${Imagemagick_Android_Import}")

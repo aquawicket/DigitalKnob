@@ -20,7 +20,7 @@ include_guard()
 
 
 ### INSTALL ###
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(Windows_X86_Host)

@@ -33,7 +33,7 @@ dk_depend(zlib)
 dk_depend(zstd)
 
 ### IMPORT ###
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows)
 	dk_import	(${CURL_WIN_DL})
 else()

@@ -16,5 +16,5 @@ include_guard()
 # https://github.com/Kerbalnut/Batch-Tools-SysAdmin/archive/refs/heads/master.zip
 
 ### INSTALL ###
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${BATCH-TOOLS-SYS_IMPORT} NAME Batch-Tools-Sys)

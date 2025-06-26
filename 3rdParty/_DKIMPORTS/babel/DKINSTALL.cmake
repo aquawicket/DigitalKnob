@@ -16,6 +16,6 @@ include_guard()
 # https://github.com/babel/babel.git
 # https://unpkg.com/@babel/standalone@7.14.4/babel.min.js
 
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${BABEL_IMPORT})
 

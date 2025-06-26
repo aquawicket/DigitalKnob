@@ -15,7 +15,7 @@ include_guard()
 ############ git ############
 # https://git-scm.com
 # https://github.com/git-for-windows/git
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 ### IMPORT ###
 dk_validate(Host_Tuple "dk_Host_Tuple()")

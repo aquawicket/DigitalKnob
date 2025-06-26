@@ -15,7 +15,7 @@ include_guard()
 # https://www.freetype.org/
 # https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz
 # https://github.com/freetype/freetype.git
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 ### DEPEND ###
 dk_depend(zlib)

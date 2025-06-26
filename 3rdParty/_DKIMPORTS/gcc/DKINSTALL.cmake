@@ -18,7 +18,7 @@ dk_validate(Host_Tuple			"dk_Host_Tuple()")
 dk_validate(Target_Tuple		"dk_Target_Tuple()")
 dk_set(${Target_Tuple}			1)
 
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(MSYSTEM)
 	dk_depend(msys2)
 endif()

@@ -22,7 +22,7 @@ if(CYGWIN)
 		return()
 	endif()
 
-	dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+	#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 	
 	dk_importVariables(${Cygwin_Windows_X86_64_Import})
 	dk_set(CYGWIN_EXE "${CYGWIN_DIR}/Cygwin.bat")

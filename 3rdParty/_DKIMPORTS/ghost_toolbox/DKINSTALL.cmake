@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/ovsky/ghost-open-toolbox
 
 ### INSTALL ###
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		("${GHOST_TOOLBOX_IMPORT}")
 
 dk_copy	("${DK3RDPARTY_DIR}/ghost_toolbox-b43ed1d2b3661eb1f76083330ba40e18bc9e36e8" "$ENV{SystemDrive}/Ghost Toolbox")

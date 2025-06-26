@@ -22,7 +22,7 @@ dk_depend		(android-sdk)
 dk_mkdir		(${ANDROID_SDK}/build-tools)
 
 # 30.0.3
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 dk_validate		(Host_Os "dk_Host_Os()")
 if(Windows_Host)

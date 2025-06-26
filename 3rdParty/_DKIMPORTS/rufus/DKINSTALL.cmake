@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/pbatard/rufus/releases/download/v4.7/rufus-4.7p.exe 
  
 ### INSTALL ### 
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 set(RUFUS_IMPORT "${Rufus_${Host_Truple}_Import}")
 

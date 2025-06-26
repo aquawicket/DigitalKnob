@@ -17,7 +17,7 @@ include_guard()
 # https://silentinstallhq.com/python-3-10-silent-install-how-to-guide/
 # https://wiki.termux.com/wiki/Python
 
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 set(PYTHON3_IMPORT "${Python3_${Host_Tuple}_Import}")
 if(NOT PYTHON3_IMPORT)

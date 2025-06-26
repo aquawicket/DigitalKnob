@@ -15,7 +15,7 @@ include_guard()
 # https://github.com/jmeubank/tdm-gcc
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 
 ### DOWNLOAD ###

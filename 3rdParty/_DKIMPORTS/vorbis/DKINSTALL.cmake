@@ -26,7 +26,7 @@ dk_depend(ogg)
 
 ### IMPORT ###
 #dk_import(https://github.com/xiph/vorbis.git)
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import("${VORBIS_DL}")
 
 ### LINK ###

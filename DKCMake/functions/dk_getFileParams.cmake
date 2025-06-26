@@ -42,10 +42,10 @@ function(dk_getFileParams)
 			string(SUBSTRING "${line}" ${pos} -1 value)
 			
 				# Evaluate var and value to expand any variables
-				cmake_language(EVAL CODE set(var ${var}))
+				cmake_language(EVAL CODE dk_set(var ${var}))
 				
 				string(REPLACE "\$" "\$ENV" value "${value}") # Channge ${variable} to $ENV{variable}
-				cmake_language(EVAL CODE set(value ${value}))
+				cmake_language(EVAL CODE dk_set(value ${value}))
 
 				set(${var} ${value})
 				set(${var} "${${var}}" PARENT_SCOPE)

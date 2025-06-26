@@ -28,7 +28,7 @@ dk_depend(pytest)
 dk_depend(msys2)
 
 ### IMPORT ###
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import(${Bzip2_Import})
 dk_assertVar(BZIP2)
 

@@ -17,7 +17,7 @@ include_guard()
 # https://github.com/MKlimenko/embed/archive/refs/heads/master.zip
 
 ### INSTALL ###
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${EMBED_IMPORT} NAME embed)
 
 dk_depend(tbb)

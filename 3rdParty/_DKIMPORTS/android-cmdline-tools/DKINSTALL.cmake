@@ -32,7 +32,7 @@ dk_mkdir(${ANDROID_SDK})
 dk_mkdir(${ANDROID_SDK}/cmdline-tools)
 
 
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 if(Windows_Host)
 	dk_import(${Android_Cmdline_Tools_Windows_Import} PATH ${ANDROID_SDK}/cmdline-tools/latest)

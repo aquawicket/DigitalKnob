@@ -20,7 +20,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 ### IMPORT ###
 
 #dk_import(https://github.com/tukaani-project/xz.git)
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import("${Xz_Import}")
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")

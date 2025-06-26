@@ -26,7 +26,7 @@ dk_depend(sdl)
 
 ### IMPORT ###
 #dk_import(https://github.com/libsdl-org/SDL_ttf.git BRANCH main PATCH) # SDL3
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import("${SDL_TTF_DL}" PATCH)
 
 

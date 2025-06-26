@@ -16,7 +16,7 @@ include_guard()
 
 dk_depend(android-sdk)
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows_Host)
 	dk_import		(${ANDROID_SDK_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/tools PATCH)
 elseif(Mac_Host)

@@ -22,7 +22,7 @@ include_guard()
 #
 
 ###### IMPORT ######
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple "dk_Host_Tuple()")
 if(Linux_Host)	
 	dk_set(PYTHON_IMPORT ${Python_Linux_Import})

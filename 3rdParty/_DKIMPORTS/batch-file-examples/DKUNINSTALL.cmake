@@ -16,6 +16,6 @@ include_guard()
 # https://github.com/Archive-projects/Batch-File-examples/archive/refs/heads/master.zip
 
 ### UnINSTALL ###
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${batch-file-examples_IMPORT})
 dk_delete		("${BATCH-FILE-EXAMPLES}")

@@ -21,7 +21,7 @@ if(EXISTS ${VSCODE_EXE})
 	return()
 endif()
 
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 ### DOWNLOAD ###

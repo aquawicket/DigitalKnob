@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/nigels-com/glew.git
 # http://glew.sourceforge.net
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(IOS OR Iossim OR Android)

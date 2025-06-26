@@ -16,5 +16,5 @@ include_guard()
 # https://github.com/W4RH4WK/Debloat-Windows-10/archive/refs/heads/master.zip
 
 ### INSTALL ###
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${Debloat_Windows_10_Import})
