@@ -78,4 +78,5 @@ if not defined dk_return (set "dk_return=dk_return")
 		if "!LAST_STATUS!" neq "0"	(echo "!LAST_FUNC!(!LAST_ARGV!):%red%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
 	)
 	
-exit /b !LAST_STATUS! & set "LAST_STATUS="
+::exit /b !LAST_STATUS! & set "LAST_STATUS="
+exit /b 0

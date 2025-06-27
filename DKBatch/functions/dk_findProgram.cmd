@@ -9,37 +9,39 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::
 :dk_findProgram
 %setlocal%
-	%dk_call% dk_debugFunc 2 9
-	
-	for /f "tokens=*" %%G in ("%~1") do set "_var_=%%~G"
+	::%dk_call% dk_debugFunc 2 9
+	echo:"dk_findProgram(%*)"
+echo 14
+	for /f "tokens=*" %%G in ("%~1") do (set _var_=%%~G)
 	::echo _var_ = %_var_%
-	
-	for /f "tokens=*" %%G in ("!%_var_%!") do set "_val_=%%~G"
+echo 17	
+	if defined %~1 for /f "tokens=*" %%G in ("!%~1!") do (set _val_=%%~G)
 	::echo _val_ = %_val_%
-	
+echo 20	
 	if exist "%_val_%" (
-		dk_return "dk_findProgram: %_var_% already set"
+		%return%
+		rem dk_return "dk_findProgram: %_var_% already set"
 	)
-
+echo 24
 	for /f "tokens=*" %%G in ("%~2") do set "_filename_=%%~G"
 	::echo _filename_ = %_filename_%
-	
+echo 27	
 	for /f "tokens=*" %%G in ("%~3") do set "_pattern_=%%~G"
-	
+echo 29	
 	set "_recursive_="
 	if defined _pattern_ (
 		set "_pattern_=%_pattern_:/=\%"
 		set "_recursive_=/R"
 	)
 	::echo _pattern_ = %_pattern_%
-	::echo _recursive_ = %_recursive_%
+	echo _recursive_ = %_recursive_%
 
-	%dk_call% dk_exec where %_recursive_% "%_pattern_%" "%_filename_%" 2>nul
+	%dk_call% dk_exec where %_recursive_% "%_pattern_%" %_filename_% 2>nul
+	set dk_findProgram=%dk_exec%
 	::echo dk_exec = %dk_exec%
 
 	if not exist "%dk_exec%" (
 		if "%~4" equ "NO_ERROR" (
-			%dk_call% dk_notice "42 NO_ERROR"
 			dk_return 0
 		) else if "%~4" equ "NO_HALT" (
 			dk_return 0 "%_filename_% not found"
@@ -50,15 +52,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::echo dk_exec = %dk_exec%
 
 
-	for %%G in ("%dk_exec%") do (set "dk_findProgram=%%~fG")   &:: get the real path
-	set "dk_findProgram=%dk_findProgram:\=/%"
-	if "%~4" neq "NO_ERROR" (
-		%dk_call% dk_assertPath "%dk_findProgram%"
-	)
+::	for %%G in ("%dk_exec%") do (set "dk_findProgram=%%~fG")   &:: get the real path
+::	set "dk_findProgram=%dk_findProgram:\=/%"
+::	if "%~4" neq "NO_ERROR" (
+::		%dk_call% dk_assertPath "%dk_findProgram%"
+::	)
 
 	endlocal & (
 		set "%~1=%dk_findProgram%"
 	)
+exit /b 0	
 %endfunction%
 
 
@@ -77,21 +80,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%" || %dk_call% dk_printLastError
-	%dk_call% dk_printVar PWSH_EXE
+	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_echo "PWSH_EXE = %PWSH_EXE%"
 
-	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%windir%\System32" || %dk_call% dk_printLastError
-	%dk_call% dk_printVar POWERSHELL_EXE
+	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%windir%\System32"
+	%dk_call% dk_echo "POWERSHELL_EXE = %POWERSHELL_EXE%"
 
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%windir:\=/%/System32" || %dk_call% dk_printLastError
-	%dk_call% dk_printVar CMD_EXE
+	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%windir:\=/%/System32"
+	%dk_call% dk_echo "CMD_EXE = %CMD_EXE%"
 
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe" || %dk_call% dk_printLastError
-	%dk_call% dk_printVar CMD_EXE
+	%dk_call% dk_findProgram CMD_EXE "cmd.exe"
+	%dk_call% dk_echo "CMD_EXE = %CMD_EXE%"
 	
-	%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%" || %dk_call% dk_printLastError
-	%dk_call% dk_printVar NOTEPADPP_EXE
+	%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%"
+	%dk_call% dk_echo "NOTEPADPP_EXE = %NOTEPADPP_EXE%"
 
-	%dk_call% dk_findProgram WSL_EXE "wsl.exe" "%windir:\=/%/System32" || %dk_call% dk_printLastError
-	%dk_call% dk_printVar WSL_EXE
+	%dk_call% dk_findProgram WSL_EXE "wsl.exe" "%windir:\=/%/System32" 
+	%dk_call% dk_echo "WSL_EXE = %WSL_EXE%"
 %endfunction%

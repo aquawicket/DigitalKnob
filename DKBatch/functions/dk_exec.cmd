@@ -57,8 +57,8 @@ if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=1")
 
 	::###### dk_exec_stdout[] ######
 	set /a "i=0"
-	for /f "usebackq delims=" %%G in (`call %dk_exec_command% 2^>^&1 ^& call echo !^^%~n4! ^& call echo ExItCoDe%%^^errorlevel%%`) do (
-	::for /f "usebackq delims=" %%G in (`call %dk_exec_command% 2^>^&1 ^& call echo ExItCoDe%%^^errorlevel%%`) do (
+	::for /f "usebackq delims=" %%G in (`call %dk_exec_command% 2^>^&1 ^& call echo !^^%~n4! ^& call echo ExItCoDe%%^^errorlevel%%`) do (
+	for /f "usebackq delims=" %%G in (`call %dk_exec_command% 2^>^&1 ^& call echo ExItCoDe%%^^errorlevel%%`) do (
 		set "line=%%G"
 		
 		rem ###### dk_exec_stdout ######

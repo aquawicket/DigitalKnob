@@ -1,0 +1,1 @@
+IR-RESCUE_IMPORT=https://github.com/diogo-fernan/ir-rescue/archive/refs/heads/master.zip
