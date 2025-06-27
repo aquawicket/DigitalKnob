@@ -13,9 +13,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_debugFunc 2 7
 
 	if "%~1" equ "" (set "text=chose a selection") 	else (set "text=%~1")
-	if "%~2" equ "" (set "caption=dk_messageBox") 		else (set "caption=%~2")
+	if "%~2" equ "" (set "caption=dk_messageBox") 	else (set "caption=%~2")
 	if "%~3" equ "" (set /a "flags=0") 				else (set /a "flags=%~3")
-	if "%~4" equ "" (set /a "timeout=0") 				else (set /a "timeout=%~4")
+	if "%~4" equ "" (set /a "timeout=0") 			else (set /a "timeout=%~4")
 	echo text = %text%
 	echo caption = %caption%
 	echo flags = %flags%

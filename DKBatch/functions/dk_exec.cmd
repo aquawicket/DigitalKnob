@@ -13,7 +13,7 @@ if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=1")
 ::set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
 ::set "dk_exec_PRINT_STDERR=1"		&:: dk_exec_stderr[]
 ::set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
-set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
+::set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 ::####################################################################
 ::# dk_exec(<command> <ret:optional>)
 ::#
