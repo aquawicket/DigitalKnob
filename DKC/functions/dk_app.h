@@ -31,14 +31,47 @@
 #include "DK.h"
 #include "dk_exit.h"
 #include "dk_printTimestamp.h"
-#include <stdbool.h>
+#include "dk_usleep.h"
+#include "frame_timer.h"
+
 
 extern const char* BUILD_DATE;
 extern const char* BUILD_TIME;
 
+/*
+#include <sys/time.h>
+bool GetTicks(double* ticks){
+	struct timespec ts;
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	*ticks = ((ts.tv_sec * 1000.0) + (ts.tv_nsec / 1000000.0));
+	return true;
+};
+
+double a=0;
+double b=0;
+double work_time=0;
+double delta_ms=0;
+double sleep_time=0;
+void LimitFramerate2(){
+ // Maintain designated frequency of 5 Hz (200 ms per frame)
+        GetTicks(&a);
+        work_time = a - b;
+
+        if(work_time < 200.0){
+            delta_ms = 200.0 - work_time;
+            dk_usleep(delta_ms * 1000.0);
+        }
+
+        GetTicks(&b);
+        sleep_time = b - a;
+
+        // Your code here
+
+        printf("now:%f work_time:%f sleep_time:%f\n", b, work_time,  sleep_time);
+}
 //class dk_app{
 //public:
-
+*/
 /**
 *	@function dk_app(argc, argv) - This is the entry point for DigitalKnob
 *
@@ -71,10 +104,10 @@ extern const char* BUILD_TIME;
 				loop_funcs[i]();
 		}
 		*/
-		dk_printTimestamp();
+		//dk_printTimestamp();
+		
 	};
 	
-
 	//////////////////////////////////////////////////
 	bool dk_app_DoFrame(double time, void* userData) {
 		if(dk_app_paused){ 
@@ -82,6 +115,9 @@ extern const char* BUILD_TIME;
 			return true;
 		}
 		//DKUtil_LimitFramerate();
+		//LimitFramerate2();
+		frame_timer();
+		
 		dk_app_CallLoops(); //Call loop functions
 		return true;
 	};
