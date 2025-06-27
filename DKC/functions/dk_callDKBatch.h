@@ -35,7 +35,7 @@ int dk_callDKBatch(char* func, char* args, char* rtn_var){
 	char DKBATCH_COMMAND[512];
 	//int err = sprintf(DKBATCH_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKBATCH_FUNCTIONS_DIR_=%s) & (set PATH=!DKBATCH_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKBATCH_FUNCTIONS_DIR_, func, args);
 	int err = sprintf(DKBATCH_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",CMD_EXE, DKBATCH_FUNCTIONS_DIR_, func, args);
-    dk_echo("%s\n", DKBATCH_COMMAND);
+    dk_echo("%s &echo %dk_test%\n", DKBATCH_COMMAND);
 	
 	FILE *fp;
 	char path[1035];

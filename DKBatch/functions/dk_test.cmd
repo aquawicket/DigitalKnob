@@ -82,7 +82,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_stacktrace
 
 	endlocal & (
-		set "dk_test=this A"
+		set "dk_test=this is return value A"
 		%dk_call% setReturn RETURN_VAR "return A"
 		%dk_call% setGlobal GLOBAL_VAR "global A"
 	)
