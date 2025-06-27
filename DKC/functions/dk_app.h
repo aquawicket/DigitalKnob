@@ -33,6 +33,7 @@
 #include "dk_printTimestamp.h"
 #include "dk_usleep.h"
 #include "frame_timer.h"
+#include "dk_keyboardEvent.h"
 
 
 extern const char* BUILD_DATE;
@@ -114,9 +115,16 @@ void LimitFramerate2(){
 			//DKUtil_Sleep(100);
 			return true;
 		}
-		//DKUtil_LimitFramerate();
-		//LimitFramerate2();
+
+		//###### Frame Limiter and FPS ######
 		frame_timer();
+		
+		//###### Keyboard Events ######
+		char key;
+		dk_keyboardEvent(&key);	
+		if(key == 27){
+			dk_exit(key);
+		}
 		
 		dk_app_CallLoops(); //Call loop functions
 		return true;
