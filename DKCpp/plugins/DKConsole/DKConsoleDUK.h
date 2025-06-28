@@ -1,6 +1,6 @@
 // [IDL] https://console.spec.whatwg.org/#console-namespace
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
-#if HAVE_DKDuktape 
+# if HAVE_DKDuktape || __has_include("duktape.h")
 
 #pragma once
 #ifndef DKConsoleDUK_H

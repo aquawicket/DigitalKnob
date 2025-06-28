@@ -50,13 +50,22 @@ DK(){
 	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
 	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="${DKHTTP_DKBASH_FUNCTIONS_DIR}/"
 
+###### DKHOME_DIR ######
+DKHOME_DIR(){
+	echo "######   DKHOME_DIR($*)  ######"
+	[ ! -e "${DKHOME_DIR-}" ] && [ -n "$(WSLPATH_EXE)" ] 	&& export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r')); 	# Windows subsystem for linux
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")); 	# Git for windows
+#	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD); 														# Android sdcard
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR="${HOME}";
+	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| (echo "DKHOME_DIR-NOTFOUND" & exit -1); 
+}
 	
 #	[ ! -e "${DKHOME_DIR-}" ] 				&& export DKHOME_DIR="${HOME}"
 #	[ ! -n "${DIGITALKNOB_DIR-}" ]			&& export DIGITALKNOB_DIR="${DKHOME_DIR}/DigitalKnob"
 #	[ ! -n "${DKBRANCH_DIR-}" ]				&& export DKBRANCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}"
 #	[ ! -n "${DKBASH_DIR-}" ]				&& export DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
 #	[ ! -n "${DKBASH_FUNCTIONS_DIR-}" ]		&& export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
-	[ ! -n "${DKBASH_FUNCTIONS_DIR-}" ]		&& export DKBASH_FUNCTIONS_DIR="${HOME}/DigitalKnob/Development/DKBash/functions"
+	[ ! -n "${DKBASH_FUNCTIONS_DIR-}" ]		&& export DKBASH_FUNCTIONS_DIR="$(DKHOME_DIR)/DigitalKnob/Development/DKBash/functions"
 	[ ! -n "${DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/"
 
 	

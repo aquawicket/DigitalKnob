@@ -28,36 +28,37 @@ dk_onError(){
 
 ###### SUDO_EXE ######
 SUDO_EXE(){
-	(command -v sudo) && export SUDO_EXE=$(command -v sudo) || echo "sudo-NOTFOUND" >&2
+	(command -v sudo) && export SUDO_EXE=$(command -v sudo) || echo "sudo-NOTFOUND"
 }
 
 ###### CMD_EXE ######
 CMD_EXE(){
-	(command -v cmd.exe) && export CMD_EXE=$(command -v cmd.exe) || echo "cmd.exe-NOTFOUND" >&2
+	(command -v cmd.exe) && export CMD_EXE=$(command -v cmd.exe) || echo "cmd.exe-NOTFOUND"
 }
 
 ###### CYGPATH_EXE ######
 CYGPATH_EXE(){
-	(command -v cygpath) && export CYGPATH_EXE=$(command -v cygpath) || echo "cygpath-NOTFOUND"  >&2
+	(command -v cygpath) && export CYGPATH_EXE=$(command -v cygpath) || echo "cygpath-NOTFOUND"
 }
 
 ###### WSLPATH_EXE ######
 WSLPATH_EXE(){
-	(command -v wslpath) && export WSLPATH_EXE=$(command -v wslpath) || echo "wslpath-NOTFOUND"  >&2
+	(command -v wslpath) && export WSLPATH_EXE=$(command -v wslpath) || echo "wslpath-NOTFOUND"
 }
 
 ###### WSLPATH_EXE ######
 ANDROID_SDCARD(){
-	(grep -o "/storage/....-...." /proc/mounts) && export ANDROID_SDCARD=$(grep -o "/storage/....-...." /proc/mounts) || echo "ANDROID_SDCARD() failed"  >&2
+	(grep -o "/storage/....-...." /proc/mounts) && export ANDROID_SDCARD=$(grep -o "/storage/....-...." /proc/mounts) || echo "ANDROID_SDCARD() failed"
 }
 
 ###### DKHOME_DIR ######
 DKHOME_DIR(){
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(WSLPATH_EXE)" ] 	&& export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r')) 	# Windows subsystem for linux
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")) 	# Git for windows
-#	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD) 															# Android sdcard
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR="${HOME}"
-	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| echo "DKHOME_DIR-NOTFOUND"  >&2
+	echo "######   DKHOME_DIR($*)  ######"
+	[ ! -e "${DKHOME_DIR-}" ] && [ -n "$(WSLPATH_EXE)" ] 	&& (export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r'))) 	# Windows subsystem for linux
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& (export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'"))) 	# Git for windows
+#	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD); 															# Android sdcard
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR="${HOME}";
+	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| (echo "DKHOME_DIR-NOTFOUND" & exit -1); 
 }
 
 ###### DKCACHE_DIR ######

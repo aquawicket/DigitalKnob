@@ -24,15 +24,15 @@ dk_set(ANDROID_NDK "${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD}")
 
 dk_mkdir	("${ANDROID_SDK}/ndk")
 if(Windows_Host)
-	dk_import		(${ANDROID_NDK_WIN_IMPORT} 		PATH "${ANDROID_NDK}" VERSION "${ANDROID_NDK_BUILD}" PATCH)
+	dk_import		(${ANDROID_NDK_WIN_IMPORT} 		_PATH_ "${ANDROID_NDK}" VERSION "${ANDROID_NDK_BUILD}" PATCH)
 elseif(Mac_Host)
-	dk_import		(${ANDROID_NDK_MAC_IMPORT} 		PATH "${ANDROID_NDK}" PATCH)
+	dk_import		(${ANDROID_NDK_MAC_IMPORT} 		_PATH_ "${ANDROID_NDK}" PATCH)
 elseif(Android_Host OR Linux_Arm64_Host)
-	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	PATH "${ANDROID_NDK}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage
+	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	_PATH_ "${ANDROID_NDK}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage
 elseif(Linux_Arm64_Host)
-	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	PATH "${ANDROID_NDK}")
+	dk_import		(${ANDROID_NDK_ANDROID_IMPORT} 	_PATH_ "${ANDROID_NDK}")
 elseif(Linux_Host)
-	dk_import		(${ANDROID_NDK_LINUX_IMPORT} 	PATH "${ANDROID_NDK}" PATCH)
+	dk_import		(${ANDROID_NDK_LINUX_IMPORT} 	_PATH_ "${ANDROID_NDK}" PATCH)
 endif()
 
 

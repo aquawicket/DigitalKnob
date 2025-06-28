@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#if HAVE_DKDuktape 
+# if HAVE_DKDuktape || __has_include("duktape.h")
 #pragma once
 #ifndef DKOcrJS_H
 #define DKOcrJS_H

@@ -47,7 +47,7 @@ endif()
 ### IMPORT ###
 if(NOT EXISTS ${VSCODE_EXE})
 	dk_mkdir	($ENV{DKTOOLS_DIR})
-	dk_import			(${VSCODE_IMPORT} PATH ${VSCODE})
+	dk_import			(${VSCODE_IMPORT} _PATH_ ${VSCODE})
 	dk_mkdir	(${VSCODE}/data)
 endif()
 

@@ -13,7 +13,7 @@ include_guard()
 
 
 ############ log ############
-#
+# https://source.android.com/docs/core/tests/debug/understanding-logging
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Android)

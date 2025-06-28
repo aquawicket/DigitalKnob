@@ -19,4 +19,4 @@ dk_depend(android-sdk)
 dk_mkdir(${ANDROID_SDK}/platforms)
 
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import(${ANDROID_PLATFORMS_DL} PATH ${ANDROID_SDK}/platforms/${ANDROID_PLATFORMS_FOLDER})
+dk_import(${ANDROID_PLATFORMS_DL} _PATH_ ${ANDROID_SDK}/platforms/${ANDROID_PLATFORMS_FOLDER})

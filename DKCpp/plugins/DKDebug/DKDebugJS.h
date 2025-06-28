@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#if HAVE_DKDuktape 
+# if HAVE_DKDuktape || __has_include("duktape.h")
 #if HAVE_stackwalker
 #pragma once
 #ifndef DKDebugJS_H

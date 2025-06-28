@@ -13,8 +13,8 @@ dk_call dk_getFileParams "${DKIMPORTS_DIR}/git/dkconfig.txt"
 
 #:: https://stackoverflow.com/a/67714373
 dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
-if [ -z "${GIT_CONFIG_SYSTEM-}" ] && export GIT_CONFIG_SYSTEM="${DKCACHE_DIR}/.gitSystem"
-if [ -z "${GIT_CONFIG_GLOBAL-}" ] && export GIT_CONFIG_GLOBAL="${DKCACHE_DIR}/.gitGlobal"
+[ -z "${GIT_CONFIG_SYSTEM-}" ] && export GIT_CONFIG_SYSTEM="${DKCACHE_DIR}/.gitSystem"
+[ -z "${GIT_CONFIG_GLOBAL-}" ] && export GIT_CONFIG_GLOBAL="${DKCACHE_DIR}/.gitGlobal"
 
 ####################################################################
 # DKINSTALL

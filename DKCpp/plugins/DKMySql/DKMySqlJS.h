@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#if HAVE_DKDuktape 
+# if HAVE_DKDuktape || __has_include("duktape.h")
 #pragma once
 #ifndef DKMySqlJS_H
 #define DKMySqlJS_H

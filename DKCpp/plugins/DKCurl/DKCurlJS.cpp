@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#if HAVE_DKDuktape 
+# if HAVE_DKDuktape || __has_include("duktape.h")
 #include "DKCurl/DKCurl.h"
 #include "DKCurl/DKCurlJS.h"
 //#if HAVE_DKThread

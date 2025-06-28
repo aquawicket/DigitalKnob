@@ -25,7 +25,7 @@
 */
 
 #if HAVE_DKRocket
-#if HAVE_DKDuktape 
+# if HAVE_DKDuktape || __has_include("duktape.h")
 #pragma once
 #ifndef DKWidgetJS_H
 #define DKWidgetJS_H

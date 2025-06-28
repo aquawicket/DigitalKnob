@@ -19,15 +19,14 @@ include_guard()
 
 dk_depend(android-sdk)
 
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows_Host)
-	dk_import(${ANDROID_PLATFORM_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/platform-tools)
+	dk_import(${ANDROID_PLATFORM_TOOLS_WIN_DL}		_PATH_ 	${ANDROID_SDK}/platform-tools)
 elseif(Mac_Host)
-	dk_import(${ANDROID_PLATFORM_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/platform-tools)
+	dk_import(${ANDROID_PLATFORM_TOOLS_MAC_DL}		_PATH_ 	${ANDROID_SDK}/platform-tools)
 elseif(Android_Host)
-	dk_import(${ANDROID_PLATFORM_TOOLS_ANDROID_DL} PATH ${ANDROID_SDK}/termux)
-	dk_copy(${ANDROID_SDK}/termux/build-tools ${ANDROID_SDK}/build-tools/30.0.3 OVERWRITE)		# copy termux/build-tools to android-sdk
-	dk_copy(${ANDROID_SDK}/termux/platform-tools ${ANDROID_SDK}/platform-tools OVERWRITE)		# copy termux/platform-tools to android-sdk
+	dk_import(${ANDROID_PLATFORM_TOOLS_ANDROID_DL}	_PATH_	${ANDROID_SDK}/termux)
+	dk_copy(${ANDROID_SDK}/termux/build-tools 				${ANDROID_SDK}/build-tools/30.0.3 OVERWRITE)	# copy termux/build-tools to android-sdk
+	dk_copy(${ANDROID_SDK}/termux/platform-tools 			${ANDROID_SDK}/platform-tools OVERWRITE)		# copy termux/platform-tools to android-sdk
 	
 	###### Fix for Android aapt2 (Termux) #######
 	# https://github.com/Hax4us/flutter_in_termux/issues/1#issuecomment-1245508442
@@ -58,18 +57,20 @@ elseif(Android_Host)
 		dk_pause()
 	endif()
 elseif(Linux_Host)
-	dk_import(${ANDROID_PLATFORM_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/platform-tools)
+	dk_import(${ANDROID_PLATFORM_TOOLS_LINUX_DL} _PATH_ ${ANDROID_SDK}/platform-tools)
 endif()
 
-dk_set(ADB_EXE "${ANDROID_SDK}/platform-tools/adb.exe")
+
+if(Windows_Host)
+	dk_set(ADB_EXE "${ANDROID_SDK}/platform-tools/adb.exe")
+	dk_assertPath(ADB_EXE)
+endif()
+
 # 34.0.3
-#Windows_Host_dk_import(https://dl.google.com/android/repository/platform-tools_r34.0.3-windows.zip PATH ${ANDROID_SDK}/platform-tools)
-#Mac_Host_dk_import(https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r34.0.3-darwin.zip PATH ${ANDROID_SDK}/platform-tools)
 #if(NOT Android_Host)
-#	Linux_Host_dk_import(https://dl.google.com/android/repository/platform-tools_r34.0.3-linux.zip PATH ${ANDROID_SDK}/platform-tools)
+	ANDROID_PLATFORM_TOOLS_LINUX_DL(https://dl.google.com/android/repository/platform-tools_r34.0.3-linux.zip _PATH_ ${ANDROID_SDK}/platform-tools)
 #else()
-	#Android_Host_dk_import(https://github.com/lzhiyong/android-sdk-tools/releases/download/34.0.3/android-sdk-tools-static-aarch64.zip PATH ${ANDROID_SDK}/termux)
+	#ANDROID_PLATFORM_TOOLS_ANDROID_DL(https://github.com/lzhiyong/android-sdk-tools/releases/download/34.0.3/android-sdk-tools-static-aarch64.zip _PATH_ ${ANDROID_SDK}/termux)
 	#dk_copy(${ANDROID_SDK}/termux/build-tools ${ANDROID_SDK}/build-tools/30.0.3)	# move termux/build-tools to android-sdk
 	#dk_copy(${ANDROID_SDK}/termux/platform-tools ${ANDROID_SDK}/platform-tools)	# move termux/platform-tools to android-sdk
 #endif()
-

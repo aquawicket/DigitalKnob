@@ -24,8 +24,7 @@
 * SOFTWARE.
 */
 
-//#if HAVE_DKDuktape
-# if defined(__has_include) && __has_include("duktape.h")
+# if HAVE_DKDuktape || __has_include("duktape.h")
 #pragma once
 #ifndef DKAssetsJS_H
 #define DKAssetsJS_H
