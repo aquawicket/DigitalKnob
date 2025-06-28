@@ -24,7 +24,8 @@
 * SOFTWARE.
 */
 
-#if HAVE_DKDuktape
+//#if HAVE_DKDuktape
+# if defined(__has_include) && __has_include("duktape.h")
 #pragma once
 #ifndef DKAssetsJS_H
 #define DKAssetsJS_H
@@ -45,5 +46,6 @@ public:
 
 REGISTER_OBJECT(DKAssetsJS, true)
 
-#endif //DKAssetsJS_H
-#endif //HAVE_DKDuktape
+#endif		//DKAssetsJS_H
+//#endif	//HAVE_DKDuktape
+#endif		//defined(__has_include) && __has_include("duktape.h") // Is as DKAPP

@@ -61,7 +61,7 @@ dk_set(PRINT_FUNCTION_NAMES 		0)	# print function call function names
 dk_set(PRINT_LINE_NUMBERS 			0)	# print function call file line numbers
 dk_set(PROJECT_INCLUDE_3RDPARTY		1)  # Include 3rdParty libraries in the app project
 dk_set(PROJECT_INCLUDE_DKPLUGINS	1)  # Include DKPlugin libraries in the app project
-dk_set(dk_color_ENABLE					1)	# colored text output
+dk_set(dk_color_ENABLE				1)	# colored text output
 
 
 
@@ -202,22 +202,25 @@ elseif(CMAKE_GENERATOR STREQUAL "NMake Makefiles")
 dk_echo("MSVC:                         '${MSVC}'")
 
 else()
-	dk_fatal("Could not determin Environment Variable")
+	if(NOT CMAKE_SCRIPT_MODE_FILE)
+		dk_fatal("Could not determin Environment Variable")
+	endif()
 endif()
 
-math(EXPR error "${GNU} + ${MSVC} + ${MINGW} + ${MSYS} + ${XCODE} - 1" OUTPUT_FORMAT DECIMAL)
-if(error)
-	dk_printVar(error)
-	dk_printVar(GNU)
-	dk_printVar(MSVC)
-	dk_printVar(MINGW)
-	dk_printVar(MSYS)
-	dk_printVar(XCODE)
+if(NOT CMAKE_SCRIPT_MODE_FILE)
+	math(EXPR error "${GNU} + ${MSVC} + ${MINGW} + ${MSYS} + ${XCODE} - 1" OUTPUT_FORMAT DECIMAL)
+	if(error)
+		dk_printVar(error)
+		dk_printVar(GNU)
+		dk_printVar(MSVC)
+		dk_printVar(MINGW)
+		dk_printVar(MSYS)
+		dk_printVar(XCODE)
 
-	dk_error("Either not enough, or too many compiler Flags are set")
-	dk_notice("FIXME: Cosmopolitan causes both GNU and MINGW flags to be set. we will let this error pass for now.")
+		dk_error("Either not enough, or too many compiler Flags are set")
+		dk_notice("FIXME: Cosmopolitan causes both GNU and MINGW flags to be set. we will let this error pass for now.")
+	endif()
 endif()
-
 #########################################################################
 ## Get variables for Build Type
 #########################################################################

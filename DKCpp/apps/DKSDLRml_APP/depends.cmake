@@ -1,4 +1,3 @@
-#dk_depend(imagemagick)
 #dk_depend(sdl)	#FIX for DK/DKAndroid.cpp, line:35
 dk_depend(DK)
 dk_depend(DKDuktape)

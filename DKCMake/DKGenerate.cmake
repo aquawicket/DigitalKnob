@@ -174,7 +174,9 @@ foreach(plugin ${dkdepend_list})
 	dk_assertPath("${Plugin_Path}")
 	dk_debug("${plugin}:Plugin_Path = ${Plugin_Path}")
 	
+	###############################################################################################
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKCpp/plugins
+	###############################################################################################
 	dk_depend(${plugin})
 	#if(NOT "${plugin}")
 	#	dk_error("${plugin} is invalid")
