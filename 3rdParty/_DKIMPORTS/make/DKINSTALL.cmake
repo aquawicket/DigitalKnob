@@ -87,7 +87,7 @@ elseif(Windows_X86_64_Msvc)
 	dk_set(CMAKE_MAKE_PROGRAM	${VS_MAKE_PROGRAM})
 endif()
 
-if(NOT EXISTS "${CMAKE_MAKE_PROGRAM}")
+if((NOT CMAKE_MAKE_PROGRAM) AND (NOT EXISTS "${CMAKE_MAKE_PROGRAM}"))
 	dk_findProgram(CMAKE_MAKE_PROGRAM make)
 endif()
 
@@ -96,4 +96,4 @@ if(NOT EXISTS "${CMAKE_MAKE_PROGRAM}")
 	dk_set(CMAKE_MAKE_PROGRAM	make)
 endif()
 
-dk_assertPath(CMAKE_MAKE_PROGRAM)
+dk_assertVar(CMAKE_MAKE_PROGRAM)

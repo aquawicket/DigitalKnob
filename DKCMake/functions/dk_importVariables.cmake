@@ -58,6 +58,9 @@ include_guard()
 function(dk_importVariables)
 	dk_debugFunc()
 	
+	###### Args ######
+	message("dk_importVariables(${ARGV})")
+	
 	# PLUGIN_URL								https://github.com/madler/zlib/archive/refs/heads/master.zip
 	dk_unset(PLUGIN_URL)
 	set(PLUGIN_URL ${ARGV0})	
@@ -89,7 +92,7 @@ function(dk_importVariables)
 	endif()
 	
 	dk_unset(NAME)
-	dk_getParameterValue(NAME)					# zlib
+	dk_getParameterValue(NAME REMOVE)					# zlib
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(NAME)
 	endif()
@@ -101,7 +104,7 @@ function(dk_importVariables)
 	endif()
 	
 	dk_unset(ROOT)
-	dk_getParameterValue(ROOT)					# C:/Users/name/DigitalKnob/Development/3rdParty
+	dk_getParameterValue(ROOT REMOVE)					# C:/Users/name/DigitalKnob/Development/3rdParty
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(ROOT)
 	endif()
@@ -118,6 +121,8 @@ function(dk_importVariables)
 		dk_printVar(VERSION)
 	endif()
 	
+	message("dk_importVariables(${ARGV})")
+	###### Args ######
 	
 ### POPULATE VARIABLES ###
 # PLUGIN_URL				- from ARGV0													  	: https://github.com/madler/zlib/archive/refs/heads/master.zip
@@ -197,7 +202,7 @@ function(dk_importVariables)
 	
 	# PLUGIN_URL_FILE													master
 	dk_unset(PLUGIN_URL_FILE)
-	dk_removeExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_FILE)				
+	dk_getFilename(${PLUGIN_URL_FILENAME} PLUGIN_URL_FILE)			
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(PLUGIN_URL_FILE)
 	endif()
@@ -377,7 +382,7 @@ function(dk_importVariables)
 		endif()
 	endif()
 	if(NOT PLUGIN_INSTALL_VERSION)
-		set(PLUGIN_INSTALL_VERSION "UNKNOWN")
+		#set(PLUGIN_INSTALL_VERSION "UNKNOWN")
 	endif()
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(PLUGIN_INSTALL_VERSION)
@@ -487,10 +492,12 @@ function(dk_importVariables)
 	endif()
 	
 	# <PLUGIN>_VERSION													# ZLIB_VERSION: master
+	if(PLUGIN_INSTALL_VERSION)
 	dk_unset(${CURRENT_PLUGIN}_VERSION)
 	dk_set(${CURRENT_PLUGIN}_VERSION ${PLUGIN_INSTALL_VERSION})
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(${CURRENT_PLUGIN}_VERSION)							
+	endif()
 	endif()
 	
 	# <PLUGIN>_FOLDER													# ZLIB_FOLDER: zlib-master	

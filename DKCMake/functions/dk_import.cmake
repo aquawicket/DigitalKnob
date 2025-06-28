@@ -27,13 +27,21 @@ include_guard()
 #
 #	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 #
-function(dk_import url)
+function(dk_import)
 	dk_debugFunc()
 	
+	###### Args ######
+	message("dk_import(ARGV=${ARGV})")
 	dk_getParameter(NO_HALT REMOVE)
+	dk_getParameter(PATCH)
+	message("dk_import(ARGV=${ARGV})")
+	set(url ${ARGV})
 	
-	message("dk_importVariables(${url} ${ARGN})")
-	dk_importVariables(${url} ${ARGN})
+	dk_importVariables(${ARGV})
+	###### Args ######
+	
+	
+	
 	dk_assertVar(ENV{CURRENT_PLUGIN})
 
 	if(NOT DKOFFLINE)
@@ -65,16 +73,10 @@ function(dk_import url)
 			
 		###### Import from Download File ######
 		else()
-			dk_printVar(ENV{CURRENT_PLUGIN})
-			dk_printVar($ENV{CURRENT_PLUGIN}_IMPORT_NAME)
-			dk_verbose("dk_install(${$ENV{CURRENT_PLUGIN}_IMPORT_NAME} ${ARGN})")
-			
-			dk_install($ENV{CURRENT_PLUGIN} ${ARGN} ${NO_HALT})
+			dk_install($ENV{CURRENT_PLUGIN} ${ARGV} ${NO_HALT})
 		endif()
 	endif()
 	
-	#dk_getParameter(PATCH ${ARGV})
-	dk_getParameter(PATCH)
 	if(PATCH)
 		dk_patch(${$ENV{CURRENT_PLUGIN}_IMPORT_NAME} ${$ENV{CURRENT_PLUGIN}_DIR})
 	endif()

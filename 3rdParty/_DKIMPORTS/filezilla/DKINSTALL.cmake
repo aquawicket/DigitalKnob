@@ -12,12 +12,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 
 ############ filezilla ############
 # https://filezilla-project.org/
-
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 #dk_set(FILEZILLA_EXE "$ENV{SystemDrive}\\Program Files\\FileZilla FTP Client\\filezilla.exe")
 
-### IMPORT ###
-if(NOT EXISTS ${FILEZILLA_EXE})
-	dk_load				(dk_getFileParams)
-	dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-	dk_import			(${FILEZILLA_IMPORT} NAME filezilla)
-endif()
+dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+dk_import("${FILEZILLA_IMPORT}" NAME "filezilla" ROOT "${DKTOOLS_DIR}" PATCH)

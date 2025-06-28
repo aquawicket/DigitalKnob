@@ -32,7 +32,21 @@ endif()
 #
 function(dk_download)
 	dk_debugFunc(1 3)
+	
+	###### Args ######
 	message("dk_download(${ARGV})")
+	
+	dk_getParameterValue(NAME REMOVE)
+	dk_echo("NAME = ${NAME}")
+	dk_getParameterValue(ROOT REMOVE)
+	dk_echo("ROOT = ${ROOT}")
+	dk_getParameter(NO_HALT REMOVE)
+	dk_echo("NO_HALT = ${NO_HALT}")
+	
+	message("dk_download(${ARGV})")
+	###### Args ######
+	
+	
 	
 	set(CMAKE_TLS_VERIFY=0)
 
@@ -50,8 +64,7 @@ function(dk_download)
 	endif()
 	dk_echo("dest_path = ${dest_path}")
 	
-	dk_getParameter(NO_HALT REMOVE)
-	dk_echo("NO_HALT = ${NO_HALT}")
+	
 	
 	# Setup all url variables
 	#if(NOT url)
@@ -68,10 +81,10 @@ function(dk_download)
 	dk_assertVar(url_filename)
 	#dk_printVar(url_filename)					# myFile.txt
 	
-	dk_getExtension(${url} url_ext)	
-	dk_assertVar(url_ext)
-	#dk_printVar(url_ext)						# .txt
 	
+	dk_getExtension(${url} url_ext)	
+	#dk_assertVar(url_ext)
+	#dk_printVar(url_ext)						# .txt    
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)
@@ -100,7 +113,7 @@ function(dk_download)
 	#dk_printVar(dest_filename)
 	
 	dk_getExtension(${dest_path} dest_ext)		# .txt
-	dk_assertVar(dest_ext)
+	#dk_assertVar(dest_ext)
 	#dk_printVar(dest_ext)
 	
 	if(EXISTS "${dest_path}")
