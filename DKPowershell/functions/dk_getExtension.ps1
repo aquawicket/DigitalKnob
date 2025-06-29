@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_getExtension_ps1){ $dk_getExtension_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_getExtension_ps1){ $dk_getExtension_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_getExtension(path) -> rtn_var
@@ -8,7 +8,7 @@ if(!$dk_getExtension_ps1){ $dk_getExtension_ps1 = 1 } else{ return } #include gu
 #   		   https://learn.microsoft.com/en-us/dotnet/api/system.io.path?view=netstandard-2.1
 #
 function Global:dk_getExtension ($path) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 
 	#$extension = Split-Path $path -Extension # PS6.0+
 	
@@ -36,10 +36,10 @@ function Global:dk_getExtension ($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$extension = dk_call dk_getExtension "/path/to/a/filename.txt"
 	
 	
-	dk_call dk_echo "extension = ${extension}"
+	dk_call dk_echo "extension = ${extension}\n";
 }

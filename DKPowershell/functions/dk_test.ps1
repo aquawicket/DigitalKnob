@@ -1,5 +1,5 @@
 . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1
-if(!$dk_test_ps1){ $dk_test_ps1 = 1 } else{ return } #include guard
+if(!$dk_test_ps1){ $dk_test_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_test()
@@ -115,7 +115,7 @@ function GLOBAL:dk_test($argA, $argB, $argC) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-    #dk_call dk_debugFunc 0
+    #dk_call dk_debugFunc 0;
 
     dk_call dk_test "123" "abc" "456" "def" "789" "g h i"
 	dk_call dk_echo ""

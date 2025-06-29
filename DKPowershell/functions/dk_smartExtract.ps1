@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_smartExtract_ps1){ $dk_smartExtract_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_smartExtract_ps1){ $dk_smartExtract_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_smartExtract(src, dest)
 #
 #
 function Global:dk_smartExtract($src, $dest) {
-	dk_debugFunc 2
+	dk_debugFunc 2;
 
 	$src_fullpath = dk_call dk_realpath $src
 	$src_dirname = dk_call dk_dirname $src_fullpath
@@ -57,7 +57,7 @@ function Global:dk_smartExtract($src, $dest) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	#dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
 	#dk_call dk_download "https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz"

@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_validate_ps1){ $dk_validate_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_validate_ps1){ $dk_validate_ps1 = 1; } else{ return; } #include guard
 
 ###############################################################################
 # dk_validate(variable, code)
@@ -8,7 +8,7 @@ if(!$dk_validate_ps1){ $dk_validate_ps1 = 1 } else{ return } #include guard
 #	@code	   - The code to run if the variable is invalid.
 #
 function Global:dk_validate($variable, $code) {
-	dk_debugFunc 2
+	dk_debugFunc 2;
 	
 	if($variable -and (Test-Path variable:$variable)){ return }
 	
@@ -25,7 +25,7 @@ function Global:dk_validate($variable, $code) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$myVarA="a valid variable"
 	dk_call dk_validate myVarA "fill_myVarA"

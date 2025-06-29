@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_enterManually_ps1){ $dk_enterManually_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_enterManually_ps1){ $dk_enterManually_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_enterManually()
 #
 #
 function Global:dk_enterManually() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
 	dk_call dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	
@@ -46,7 +46,7 @@ function Global:dk_enterManually() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_enterManually
 }

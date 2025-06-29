@@ -1,30 +1,30 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_Target_App_ps1){ $dk_Target_App_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_Target_App_ps1){ $dk_Target_App_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_Target_App()
 #
 #
 function Global:dk_Target_App() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_echo
-	dk_call dk_echo "${Target_App} ${Target_Tuple} ${Target_Type}"
+	dk_call dk_echo "\n";
+	dk_call dk_echo "${Target_App} ${Target_Tuple} ${Target_Type}\n";
 	
-	dk_call dk_echo
-    dk_call dk_echo " 1) HelloWorld"
-    dk_call dk_echo " 2) DKCore"
-    dk_call dk_echo " 3) DKJavascript"
-    dk_call dk_echo " 4) DKSDL"
-    dk_call dk_echo " 5) DKSDLRml"
-    dk_call dk_echo " 6) DKDomTest"
-    dk_call dk_echo " 7) DKTestAll"
-    dk_call dk_echo " 8) Enter Manually"
-    dk_call dk_echo " 9) Clear Screen"
-    dk_call dk_echo "10) Go Back"
-    dk_call dk_echo "11) Reload"
-	dk_call dk_echo "12) Exit"
-    dk_call dk_echo 
+	dk_call dk_echo "\n";
+    dk_call dk_echo " 1) HelloWorld\n";
+    dk_call dk_echo " 2) DKCore\n";
+    dk_call dk_echo " 3) DKJavascript\n";
+    dk_call dk_echo " 4) DKSDL\n";
+    dk_call dk_echo " 5) DKSDLRml\n";
+    dk_call dk_echo " 6) DKDomTest\n";
+    dk_call dk_echo " 7) DKTestAll\n";
+    dk_call dk_echo " 8) Enter Manually\n";
+    dk_call dk_echo " 9) Clear Screen\n";
+    dk_call dk_echo "10) Go Back\n";
+    dk_call dk_echo "11) Reload\n";
+	dk_call dk_echo "12) Exit\n";
+    dk_call dk_echo "\n";
 	
 	$input = Read-Host
 	    if($input -eq  "1"){ $global:Target_App = "HelloWorld" }
@@ -46,7 +46,7 @@ function Global:dk_Target_App() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_Target_App
+	dk_call dk_Target_App;
 }

@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_basename_ps1){ $dk_basename_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_basename_ps1){ $dk_basename_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # dk_basename(path) -> rtn_var
@@ -7,7 +7,7 @@ if(!$dk_basename_ps1){ $dk_basename_ps1 = 1 } else{ return } #include guard
 #    reference: https://stackoverflow.com/a/59739663/688352
 #
 function Global:dk_basename($path) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 
 	#$basename = (Get-Item $path).Basename 
 	#$basename = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).Basename    #Calls Resolve-Path but works for files that don't exist.
@@ -27,11 +27,11 @@ function Global:dk_basename($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	$basename = dk_call dk_basename "C:/Windows/System32/test.v123.zip"
-	dk_call dk_echo "basename = $basename"
+	$basename = dk_call dk_basename "C:/Windows/System32/test.v123.zip";
+	dk_call dk_echo "basename = $basename\n";
 	
-	$basename = dk_call dk_basename "TEST"
-	dk_call dk_echo "basename = $basename"
+	$basename = dk_call dk_basename "TEST";
+	dk_call dk_echo "basename = $basename\n";
 }

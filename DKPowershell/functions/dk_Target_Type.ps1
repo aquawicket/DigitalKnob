@@ -1,14 +1,14 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_Target_Type_ps1){ $dk_Target_Type_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_Target_Type_ps1){ $dk_Target_Type_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_Target_Type()
 #
 #
 function Global:dk_Target_Type() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
-	dk_call dk_echo
+	dk_call dk_echo "\n";
 	dk_call dk_echo "${Target_App} ${Target_Tuple} ${Target_Type}"
 	dk_call dk_echo	
     dk_call dk_echo " 1) Debug"
@@ -17,7 +17,7 @@ function Global:dk_Target_Type() {
 	dk_call dk_echo " 4) Clear Screen"
 	dk_call dk_echo " 5) Go Back"
 	dk_call dk_echo " 6) Exit"
-	dk_call dk_echo
+	dk_call dk_echo "\n";
 	
 	$input = Read-Host
 	    if(${input} -eq "1"){ $global:Target_Type = "Debug" }
@@ -33,7 +33,7 @@ function Global:dk_Target_Type() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_Target_Type
 }

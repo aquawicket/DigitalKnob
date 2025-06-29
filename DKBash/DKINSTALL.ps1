@@ -1,11 +1,11 @@
-#if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
+#if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
 if(!$installDKBash){ $installDKBash = 1 } else{ return }
 
 ####################################################################
 # dk_install()
 #
 #function Global:dk_install() {
-	#dk_debugFunc 0
+	#dk_debugFunc 0;
 
 	if(${args}.count -ne 0){ 
 		runBash ${args}

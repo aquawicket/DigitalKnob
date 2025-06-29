@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_gitCheckRemote_ps1){ $dk_gitCheckRemote_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_gitCheckRemote_ps1){ $dk_gitCheckRemote_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_gitCheckRemote()
 #
 #
 function Global:dk_gitCheckRemote() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
 	$ahead=0
 	$global:behind=0
@@ -25,7 +25,7 @@ function Global:dk_gitCheckRemote() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_gitCheckRemote
 }

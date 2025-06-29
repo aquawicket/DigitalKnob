@@ -1,14 +1,14 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_createCache_ps1){ $dk_createCache_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_createCache_ps1){ $dk_createCache_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_createCache()
 #
 #
 function Global:dk_createCache() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
-	dk_call dk_echo "creating DKBuilder.cache..."
+	dk_call dk_echo "creating DKBuilder.cache...\n"
 	
 	# write variable values line by line
 	echo "$Target_App">"${DKCACHE_DIR}/DKBuilder.cache"
@@ -22,7 +22,7 @@ function Global:dk_createCache() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_createCache
 }

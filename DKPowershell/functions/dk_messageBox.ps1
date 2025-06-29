@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_messageBox_ps1){ $dk_messageBox_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_messageBox_ps1){ $dk_messageBox_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_messageBox(text, caption, buttons, icon, defaultButton, options)
 #
 #
 function Global:dk_messageBox() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
 	${text} = $args[0];
 	${caption} = $args[1];
@@ -22,7 +22,7 @@ function Global:dk_messageBox() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
 ###### MessageBoxButtons ######	
 #	OK					0		The message box contains an OK button.

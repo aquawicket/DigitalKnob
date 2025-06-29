@@ -71,21 +71,21 @@ function DK() {
 	}
 	#dk_source ${env:DKSCRIPT_PATH}
 	
-	#Write-Output "env:PATH = ${env:PATH}"
-	#${env:PATH} += ";${env:DKPOWERSHELL_FUNCTIONS_DIR}"
+	#Write-Output "env:PATH = ${env:PATH}";
+	#${env:PATH} += ";${env:DKPOWERSHELL_FUNCTIONS_DIR}";
 	
 	###### DKTEST MODE ######
 	if("${env:DKSCRIPT_EXT}" -ne ".ps1"){ return; }
 	#if(!(dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()")){ return; }
 
-	dk_call dk_echo "";
-	dk_call dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}";
-	dk_call dk_echo  "";
+	dk_call dk_echo "\n";
+	dk_call dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}\n";
+	dk_call dk_echo  "\n";
 	. ${DKSCRIPT_PATH};
 	DKTEST;
-	dk_call dk_echo "";
-	dk_call dk_echo "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}";
-	dk_call dk_echo "";
+	dk_call dk_echo "\n";
+	dk_call dk_echo "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}\n";
+	dk_call dk_echo "\n";
 	dk_call dk_pause "Press Enter to exit";
 	dk_call dk_exit
 }
@@ -97,7 +97,7 @@ function DK() {
 # dk_echo()
 #
 function dk_echo(){
-	Write-Host ${args};
+	Write-Host -NoNewline ${args};
 }
 
 ##################################################################################
@@ -160,7 +160,7 @@ function dk_DKSCRIPT_VARS(){
 	### DKSCRIPT_PATH ###
 	if(!${env:DKSCRIPT_PATH}){ ${env:DKSCRIPT_PATH} = Get-EntryPointAbsFilePath; }
 	${env:DKSCRIPT_PATH} = ${env:DKSCRIPT_PATH} -replace '\\', '/';
-	if(!(Test-Path ${env:DKSCRIPT_PATH})){ dk_call dk_echo "DKSCRIPT_PATH:'${env:DKSCRIPT_PATH}' not found!"; exit -1; } 
+	if(!(Test-Path ${env:DKSCRIPT_PATH})){ dk_call dk_echo "DKSCRIPT_PATH:'${env:DKSCRIPT_PATH}' not found!\n"; exit -1; } 
 	
 	### DKSCRIPT_ARGS ###
 	if(!${env:DKSCRIPT_ARGS}){ ${env:DKSCRIPT_ARGS} = ${args}; }
@@ -168,7 +168,7 @@ function dk_DKSCRIPT_VARS(){
 	### DKSCRIPT_DIR ###
 	if(!${env:DKSCRIPT_DIR}){ ${env:DKSCRIPT_DIR} = Split-Path -Parent "${env:DKSCRIPT_PATH}"; }
 	${env:DKSCRIPT_DIR} = ${env:DKSCRIPT_DIR} -replace '\\', '/';
-	if(!(Test-Path ${env:DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR:'${env:DKSCRIPT_DIR}' not found!"; exit -1; } 
+	if(!(Test-Path ${env:DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR:'${env:DKSCRIPT_DIR}' not found!\n"; exit -1; } 
 	
 	### DKSCRIPT_NAME ###
 	if(!${env:DKSCRIPT_NAME}){ ${env:DKSCRIPT_NAME} = Split-Path -Leaf "${env:DKSCRIPT_PATH}"; }

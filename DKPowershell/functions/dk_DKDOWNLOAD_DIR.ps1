@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_DKDOWNLOAD_DIR_ps1){ $dk_DKDOWNLOAD_DIR_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_DKDOWNLOAD_DIR_ps1){ $dk_DKDOWNLOAD_DIR_ps1 = 1; } else{ return; } #include guard
 
 ####################################################################
 # dk_DKDOWNLOAD_DIR()
@@ -32,11 +32,11 @@ function Global:dk_DKDOWNLOAD_DIR() {
 function Global:DKTEST() {
     dk_debugFunc 0 
    
-	dk_call dk_echo;
-	dk_call dk_echo "Test Getting DKDOWNLOAD_DIR . . .";
-    dk_call dk_echo "DKDOWNLOAD_DIR = $(dk_DKDOWNLOAD_DIR)";
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Getting DKDOWNLOAD_DIR . . .\n";
+    dk_call dk_echo "DKDOWNLOAD_DIR = $(dk_DKDOWNLOAD_DIR)\n";
 	
-	dk_call dk_echo;
-	dk_call dk_echo "Test Setting DKDOWNLOAD_DIR . . .";
-	dk_call dk_echo "DKDOWNLOAD_DIR = $(dk_DKDOWNLOAD_DIR 'C:/DK/download')";
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Setting DKDOWNLOAD_DIR . . .\n";
+	dk_call dk_echo "DKDOWNLOAD_DIR = $(dk_DKDOWNLOAD_DIR 'C:/DK/download')\n";
 }

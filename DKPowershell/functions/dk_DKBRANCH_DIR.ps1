@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_DKBRANCH_DIR_ps1){ $dk_DKBRANCH_DIR_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_DKBRANCH_DIR_ps1){ $dk_DKBRANCH_DIR_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_DKBRANCH_DIR()
@@ -157,13 +157,13 @@ function Global:dk_DKBRANCH_DIR() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_echo;
-	dk_call dk_echo "Test Getting DKBRANCH_DIR . . .";
-    dk_call dk_echo "DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR)'";
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Getting DKBRANCH_DIR . . .\n";
+    dk_call dk_echo "DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR)'\n";
 	
-#	dk_call dk_echo;
-#	dk_call dk_echo "Test Setting DKBRANCH_DIR . . .";
-#	dk_call dk_echo "DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR 'C:/Digital Knob/Development')'";
+#	dk_call dk_echo "\n";
+#	dk_call dk_echo "Test Setting DKBRANCH_DIR . . .\n";
+#	dk_call dk_echo "DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR 'C:/Digital Knob/Development')'\n";
 }

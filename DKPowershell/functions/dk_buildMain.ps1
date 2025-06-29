@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_buildMain_ps1){ $dk_buildMain_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_buildMain_ps1){ $dk_buildMain_ps1 = 1; } else{ return; } #include guard
 
 ####################################################################
 # dk_buildMain()
 #
 #
 function Global:dk_buildMain() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
 	trap {
 		"Error found: $_"

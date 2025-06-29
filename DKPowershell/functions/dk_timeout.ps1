@@ -1,5 +1,5 @@
 . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1
-if(!$dk_timeout_ps1){ $dk_timeout_ps1 = 1 } else{ return } #include guard
+if(!$dk_timeout_ps1){ $dk_timeout_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_timeout(seconds)
@@ -38,7 +38,7 @@ function Global:dk_timeout() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_timeout
 	

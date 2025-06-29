@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_tray_ps1){ $dk_tray_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_tray_ps1){ $dk_tray_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_tray()
 #
 #
 function Global:dk_tray(){
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | out-null
 	$icon = [System.Drawing.Icon]::ExtractAssociatedIcon("C:/Windows/System32/mmc.exe")	
@@ -28,7 +28,7 @@ function Global:dk_tray(){
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_tray
 }

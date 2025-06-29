@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	setlocal disableDelayedExpansion
-	echo:if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . '/DK.ps1'; }>					"%FUNCTION_FILE%"
+	echo:if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . '${PSScriptRoot}/DK.ps1'; }>		"%FUNCTION_FILE%"
 	echo:if(^!$%FUNCTION%_ps1){ $%FUNCTION%_ps1 = 1; } else{ return; } #include guard>>													"%FUNCTION_FILE%"
 	echo:>> 																															"%FUNCTION_FILE%"
 	echo:>> 																															"%FUNCTION_FILE%"

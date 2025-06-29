@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$Array_dk_copyWithin){ $Array_dk_copyWithin_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$Array_dk_copyWithin){ $Array_dk_copyWithin_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # Array:dk_copyWithin(array, target, start, end)
@@ -21,7 +21,7 @@ function Global:Array:dk_copyWithin($array, $target, $start, $end) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call Array:dk_copyWithin array target start end
 }

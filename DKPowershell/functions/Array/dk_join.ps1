@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$Array_dk_join){ $Array_dk_join_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$Array_dk_join){ $Array_dk_join_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # Array:dk_join(array, separator) -> rtn_var
@@ -8,7 +8,7 @@ if(!$Array_dk_join){ $Array_dk_join_ps1 = 1 } else{ return } #include guard
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
 function Global:Array:dk_join($array, $separator) {
-	dk_debugFunc 2
+	dk_debugFunc 2;
 	
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 	# from variable name
 	else { $_array_ = $array }															# from variable
@@ -23,10 +23,10 @@ function Global:Array:dk_join($array, $separator) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
 	
-	$myString = dk_call Array:dk_join myArray ","
-	dk_call dk_info "myString = $myString"
+	$myString = dk_call Array:dk_join myArray ",";
+	dk_call dk_info "myString = $myString";
 }

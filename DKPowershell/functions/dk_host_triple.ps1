@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_Host_Tuple_ps1){ $dk_Host_Tuple_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_Host_Tuple_ps1){ $dk_Host_Tuple_ps1 = 1; } else{ return; } #include guard
 
 #####################################################################
 # dk_Host_Tuple()
 #
 #
 function Global:dk_Host_Tuple() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
 	###### Host_Os and <Host_Os>_Host ######
 	$global:Host_Os="Windows"
@@ -63,7 +63,7 @@ function Global:dk_Host_Tuple() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_Host_Tuple
 }

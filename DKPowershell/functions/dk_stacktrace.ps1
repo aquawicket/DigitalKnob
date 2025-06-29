@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_stacktrace_ps1){ $dk_stacktrace_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_stacktrace_ps1){ $dk_stacktrace_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_stacktrace()
 #
 #
 function Global:dk_stacktrace() {
-    dk_debugFunc 0
+    dk_debugFunc 0;
 
 	### VERSION 1 ###
 	$stack_size = $(Get-PSCallStack).count
@@ -67,7 +67,7 @@ function Global:dk_stacktrace() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_stacktrace
 }

@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_getFileParam_ps1){ $dk_getFileParam_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_getFileParam_ps1){ $dk_getFileParam_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # dk_getFileParam(file, var_name) value
 #
 # todo: add optional 3rd parameter for output value
 function Global:dk_getFileParam() {
-    dk_debugFunc 0
+    dk_debugFunc 0;
 	
 	$file = $args[0]
 	$var_name = $args[1]
@@ -32,7 +32,7 @@ function Global:dk_getFileParam() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST() {
-    dk_debugFunc 0
+    dk_debugFunc 0;
   
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
     $VERSION = $(dk_getFileParam ${DKIMPORTS_DIR}/git/version.txt VERSION)

@@ -1,21 +1,21 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_pickUpdate_ps1){ $dk_pickUpdate_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_pickUpdate_ps1){ $dk_pickUpdate_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_pickUpdate()
 #
 #
 function Global:dk_pickUpdate() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
 	dk_call dk_readCache _APP_ _tuple_ _TYPE_
 	dk_printVar $_APP_
 	dk_printVar $_tuple_
 	dk_printVar $_TYPE_
 	
-	dk_call dk_echo
+	dk_call dk_echo "\n";
 	dk_call dk_gitCheckRemote
-	dk_call dk_echo
+	dk_call dk_echo "\n";
 	
 	if($behind -lt 1){
 		if(${_APP_} -and ${_tuple_} -and ${_TYPE_}){
@@ -32,11 +32,11 @@ function Global:dk_pickUpdate() {
 		dk_call dk_echo " 9) Clear cmake cache and .tmp files"
 		dk_call dk_echo "10) Reload"
 		dk_call dk_echo "11) Exit"
-		dk_call dk_echo
+		dk_call dk_echo "\n";
 		dk_call dk_echo " Press Enter To Skip"
 	} else {
 		dk_call dk_warning "Your local repository is behind, please git update"
-		dk_call dk_echo
+		dk_call dk_echo "\n";
 		dk_call dk_echo "${red}" 
 		if(${_APP_} -and ${_tuple_} -and ${_TYPE_}){
 			dk_call dk_echo " 0) Repeat DKBuilder.cache [${_APP_} - ${_tuple_} - ${_TYPE_}]"
@@ -54,7 +54,7 @@ function Global:dk_pickUpdate() {
 		dk_call dk_echo " 9) Clear cmake cache and .tmp files"
 		dk_call dk_echo "10) Reload"
 		dk_call dk_echo "11) Exit"
-		dk_call dk_echo
+		dk_call dk_echo "\n";
 		dk_call dk_echo "Press Enter To Skip"
 		dk_call dk_echo "${clr}"
 	}
@@ -86,7 +86,7 @@ function Global:dk_pickUpdate() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_pickUpdate
 }

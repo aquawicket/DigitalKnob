@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_download_ps1){ $dk_download_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_download_ps1){ $dk_download_ps1 = 1; } else{ return; } #include guard
 
 ####################################################################
 # dk_download(url destination)
@@ -7,43 +7,43 @@ if(!$dk_download_ps1){ $dk_download_ps1 = 1 } else{ return } #include guard
 #   https://www.itprotoday.com/powershell/3-ways-download-file-powershell
 #
 function Global:dk_download($url, $destination) {
-	dk_debugFunc 1 2
-	echo "dk_download($url, $destination)"
+	dk_debugFunc 1 2;
+	dk_call dk_echo "dk_download($url, $destination)";
 	
-	${url_filename} = Split-Path ${url} -leaf
-	if(!(${url_filename})){ dk_call dk_error "url_filename invalid" }                                                                            
+	${url_filename} = Split-Path ${url} -leaf;
+	if(!(${url_filename})){ dk_call dk_error "url_filename invalid"; }                                                                            
 	
-	if($args[0]){ $destination = dk_call dk_realpath $args[0] }
+	if($args[0]){ $destination = dk_call dk_realpath $args[0]; }
 	if(!(${destination})){    
-		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-		$destination = "${DKDOWNLOAD_DIR}/${url_filename}"
+		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR";
+		$destination = "${DKDOWNLOAD_DIR}/${url_filename}";
 	}
-	if(!(${destination})){ dk_call dk_error "destination is invalid" }
+	if(!(${destination})){ dk_call dk_error "destination is invalid"; }
 	
-	if(Test-Path -Path "${destination}" -PathType Container){ $destination = "${destination}/${url_filename}" }
-	if(Test-Path "${destination}"){ dk_call dk_echo "${destination} already exist"; return }
+	if(Test-Path -Path "${destination}" -PathType Container){ $destination = "${destination}/${url_filename}"; }
+	if(Test-Path "${destination}"){ dk_call dk_echo "${destination} already exist\n"; return; }
 	
 	
-	dk_call dk_echo "Downloading ${url_filename} . . ."
+	dk_call dk_echo "Downloading ${url_filename} . . .\n";
 	
 	# make sure the destination parent directory exists
-	$destination_dir = dk_call dk_dirname "${destination}"
-	if(!(${destination_dir})){ dk_call dk_error "destination_dir is invalid" }
-	if(!(Test-Path "${destination_dir}")){ dk_call dk_mkdir "${destination_dir}" }
+	$destination_dir = dk_call dk_dirname "${destination}";
+	if(!(${destination_dir})){ dk_call dk_error "destination_dir is invalid"; }
+	if(!(Test-Path "${destination_dir}")){ dk_call dk_mkdir "${destination_dir}"; }
 	
 	# method 1
-	Invoke-WebRequest -URI ${url} -OutFile ${destination} #-SkipHttpErrorCheck
+	Invoke-WebRequest -URI ${url} -OutFile ${destination}; #-SkipHttpErrorCheck;
 	
 	# method 2
-	#(New-Object System.Net.WebClient).DownloadFile($url, $destination)
+	#(New-Object System.Net.WebClient).DownloadFile($url, $destination);
 	
 	# method 2 (extended)
-	#$WebClient = New-Object System.Net.WebClient
-	#$WebClient.UseDefaultCredentials = $true
-	#$WebClient.DownloadFile($url, $destination)
+	#$WebClient = New-Object System.Net.WebClient;
+	#$WebClient.UseDefaultCredentials = $true;
+	#$WebClient.DownloadFile($url, $destination);
 	
 	# method 3
-	#Start-BitsTransfer -Source $url -Destination $destination
+	#Start-BitsTransfer -Source $url -Destination $destination;
 	
 	
 }
@@ -51,9 +51,9 @@ function Global:dk_download($url, $destination) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1"
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "DKBuilder.ps1"
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "${DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1"
+	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1";
+	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "DKBuilder.ps1";
+	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "${DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1";
 }

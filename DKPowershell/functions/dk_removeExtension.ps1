@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_removeExtension_ps1){ $dk_removeExtension_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_removeExtension_ps1){ $dk_removeExtension_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_removeExtension(filepath) -> rtn_var
 #
 #
 function Global:dk_removeExtension($filepath) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 	
 	$removeExtension = $filepath.Substring(0, $filepath.lastIndexOf('.'))
 	dk_call dk_printVar removeExtension
@@ -25,7 +25,7 @@ function Global:dk_removeExtension($filepath) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$filepath="C:/test/test2/xfile.version.1.2.ext"
 	$name = dk_call dk_removeExtension $filepath

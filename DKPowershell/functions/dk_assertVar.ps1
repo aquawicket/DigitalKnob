@@ -1,19 +1,19 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_assertVar_ps1){ $dk_assertVar_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_assertVar_ps1){ $dk_assertVar_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_assertVar(expression)
 #
 #
 function Global:dk_assertVar($var) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 
 	if((${!var})){
-		return #${true}
+		return; #${true}
 	}
 	
-	dk_call dk_error "Assertion failed: $(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 1)($(__ARGV__ 1))"
-	return ${false}	
+	dk_call dk_error "Assertion failed: $(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 1)($(__ARGV__ 1))";
+	return ${false};
 }
 
 
@@ -21,34 +21,34 @@ function Global:dk_assertVar($var) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	$myVar = "string"
-	dk_call dk_info "dk_assertVar myVar" -and dk_call dk_assertVar myVar
-	#dk_call dk_info "dk_assertVar $myVar" -and dk_call dk_assertVar $myVar
-	#dk_call dk_info "dk_assertVar ${myVar}" -and dk_call dk_assertVar ${myVar}
+	$myVar = "string";
+	dk_call dk_info "dk_assertVar myVar" -and dk_call dk_assertVar myVar;
+	#dk_call dk_info "dk_assertVar $myVar" -and dk_call dk_assertVar $myVar;
+	#dk_call dk_info "dk_assertVar ${myVar}" -and dk_call dk_assertVar ${myVar};
 
-	$myVarB = 15
-	dk_call dk_info "dk_assertVar myVarB" -and dk_call dk_assertVar myVarB
-	#dk_call dk_info "dk_assertVar $myVarB" -and dk_call dk_assertVar $myVarB
-	#dk_call dk_info "dk_assertVar ${myVarB}" -and dk_call dk_assertVar ${myVarB}
+	$myVarB = 15;
+	dk_call dk_info "dk_assertVar myVarB" -and dk_call dk_assertVar myVarB;
+	#dk_call dk_info "dk_assertVar $myVarB" -and dk_call dk_assertVar $myVarB;
+	#dk_call dk_info "dk_assertVar ${myVarB}" -and dk_call dk_assertVar ${myVarB};
 
-	$myVarC = " "
-	dk_call dk_info "dk_assertVar myVarC" -and dk_call dk_assertVar myVarC
-	#dk_call dk_info "dk_assertVar $myVarC" -and dk_call dk_assertVar $myVarC
-	#dk_call dk_info "dk_assertVar ${myVarC}" -and dk_call dk_assertVar ${myVarC}
+	$myVarC = " ";
+	dk_call dk_info "dk_assertVar myVarC" -and dk_call dk_assertVar myVarC;
+	#dk_call dk_info "dk_assertVar $myVarC" -and dk_call dk_assertVar $myVarC;
+	#dk_call dk_info "dk_assertVar ${myVarC}" -and dk_call dk_assertVar ${myVarC};
 
-	$myVarD = ""
-	dk_call dk_info "dk_assertVar myVarD" -and dk_call dk_assertVar myVarD
-	#dk_call dk_info "dk_assertVar $myVarD" -and dk_call dk_assertVar $myVarD
-	#dk_call dk_info "dk_assertVar ${myVarD}" -and dk_call dk_assertVar ${myVarD}
+	$myVarD = "";
+	dk_call dk_info "dk_assertVar myVarD" -and dk_call dk_assertVar myVarD;
+	#dk_call dk_info "dk_assertVar $myVarD" -and dk_call dk_assertVar $myVarD;
+	#dk_call dk_info "dk_assertVar ${myVarD}" -and dk_call dk_assertVar ${myVarD};
 
-	$myVarE =
-	dk_call dk_assertVar myVarE
-	#dk_call dk_assertVar $myVarE
-	#dk_call dk_assertVar ${myVarE}
+	$myVarE =;
+	dk_call dk_assertVar myVarE;
+	#dk_call dk_assertVar $myVarE;
+	#dk_call dk_assertVar ${myVarE};
 
-	dk_call dk_assertVar noVar
-	#dk_call dk_assertVar $noVar
-	#dk_call dk_assertVar ${noVar}
+	dk_call dk_assertVar noVar;
+	#dk_call dk_assertVar $noVar;
+	#dk_call dk_assertVar ${noVar};
 }

@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_unset_ps1){ $dk_unset_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_unset_ps1){ $dk_unset_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_unset(variable)
 #
 #
 function Global:dk_unset($variable) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 
 	if(!(Test-Path variable:$variable)){ return }
 	Remove-Variable $variable -Scope Global
@@ -23,7 +23,7 @@ function Global:dk_unset($variable) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$global:myVar = "initial value assigned with dk_unset"
 	dk_call dk_echo "myVar = ${myVar}"

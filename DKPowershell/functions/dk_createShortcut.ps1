@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_createShortcut_ps1){ $dk_createShortcut_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_createShortcut_ps1){ $dk_createShortcut_ps1 = 1; } else{ return; } #include guard
 
 
 ##################################################################################
@@ -61,7 +61,7 @@ function Global:dk_createShortcut() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_createShortcut "C:/Users/Administrator/DigitalKnob" "C:/Users/Administrator/Desktop/DigitalKnob.lnk"
 	#dk_call dk_createShortcut "C:\Windows\System32\wsl.exe" "C:\Users\Administrator\Desktop\HelloWorld.lnk" "/mnt/c/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Linux_X86_64/Debug/HelloWorld_APP"

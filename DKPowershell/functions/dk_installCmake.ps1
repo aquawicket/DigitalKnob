@@ -1,11 +1,11 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_installCmake_ps1){ $dk_installCmake_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_installCmake_ps1){ $dk_installCmake_ps1 = 1; } else{ return; } #include guard
 
 ####################################################################
 # dk_installCmake()
 #
 function Global:dk_installCmake() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
 	dk_call dk_validate Host_Os "dk_call dk_Host_Os"
 	
@@ -18,29 +18,29 @@ function Global:dk_installCmake() {
     if("${Host_Os}_${Host_Arch}" -eq "Linux_X86_64")	{ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz" }
     if("${Host_Os}_${Host_Arch}" -eq "Linux_Arm64") 	{ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz" }
     
-    ${CMAKE_IMPORT_FILE} = dk_call dk_basename ${CMAKE_DL}
-	${CMAKE_FOLDER} = dk_call dk_removeExtension ${CMAKE_IMPORT_FILE}
-    #${CMAKE_FOLDER} = dk_call dk_convertToCIdentifier ${CMAKE_FOLDER} 
-    #${CMAKE_FOLDER} = dk_call dk_toLower ${CMAKE_FOLDER}
-	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-	$global:CMAKE_DIR = "$DKTOOLS_DIR/$CMAKE_FOLDER"
-    $global:CMAKE_EXE = "$CMAKE_DIR/bin/cmake.exe"
+    ${CMAKE_IMPORT_FILE} = dk_call dk_basename ${CMAKE_DL};
+	${CMAKE_FOLDER} = dk_call dk_removeExtension ${CMAKE_IMPORT_FILE};
+    #${CMAKE_FOLDER} = dk_call dk_convertToCIdentifier ${CMAKE_FOLDER}; 
+    #${CMAKE_FOLDER} = dk_call dk_toLower ${CMAKE_FOLDER};
+	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
+	$global:CMAKE_DIR = "$DKTOOLS_DIR/$CMAKE_FOLDER";
+    $global:CMAKE_EXE = "$CMAKE_DIR/bin/cmake.exe";
         
-    if(dk_call dk_pathExists ${CMAKE_EXE}){ return }
+    if(dk_call dk_pathExists ${CMAKE_EXE}){ return; }
        
-    dk_call dk_echo
-    dk_call dk_info "Installing CMake . . ."
-    dk_call dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}"
-	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}" "${CMAKE_DIR}"
+    dk_call dk_echo "\n";
+    dk_call dk_info "Installing CMake . . .\n";
+    dk_call dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}";
+	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}" "${CMAKE_DIR}";
     
-    if(!(dk_call dk_pathExists "${CMAKE_EXE}")){ dk_call dk_error "cannot find cmake" }
+    if(!(dk_call dk_pathExists "${CMAKE_EXE}")){ dk_call dk_error "cannot find cmake\n"; }
 }
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_installCmake
+	dk_call dk_installCmake;
 }

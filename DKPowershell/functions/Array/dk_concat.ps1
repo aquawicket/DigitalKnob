@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$Array_dk_concat){ $Array_dk_concat_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$Array_dk_concat){ $Array_dk_concat_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # Array:dk_concat(array, value1, value2, /* …, */ valueN)
@@ -23,7 +23,7 @@ function Global:Array:dk_concat($array, $value1) {
 
 
 function Global:DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call Array:dk_concat array value1
 }

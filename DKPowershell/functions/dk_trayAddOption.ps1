@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_trayAddOption_ps1){ $dk_trayAddOption_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_trayAddOption_ps1){ $dk_trayAddOption_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_tray()
@@ -26,7 +26,7 @@ function Global:dk_trayAddOption($trayContextMenu, $func, $text){
 
 
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$trayContextMenu = dk_call dk_tray
 	dk_call dk_trayAddOption $trayContextMenu onOption1 "Option 1"

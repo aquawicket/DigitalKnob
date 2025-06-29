@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_error_ps1){ $dk_error_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_error_ps1){ $dk_error_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # dk_error(message)
@@ -9,7 +9,7 @@ if(!$dk_error_ps1){ $dk_error_ps1 = 1 } else{ return } #include guard
 #    @message	- The message to print
 #
 function Global:dk_error($message) {
-	#dk_debugFunc 1
+	#dk_debugFunc 1;
 	
 	dk_call dk_log ERROR "$message"
 }

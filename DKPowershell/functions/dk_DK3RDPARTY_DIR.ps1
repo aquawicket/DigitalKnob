@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_DK3RDPARTY_DIR_ps1){ $dk_DK3RDPARTY_DIR_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_DK3RDPARTY_DIR_ps1){ $dk_DK3RDPARTY_DIR_ps1 = 1; } else{ return; } #include guard
 
 ###############################################################################
 # dk_DK3RDPARTY_DIR()
@@ -38,13 +38,13 @@ function Global:dk_DK3RDPARTY_DIR() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_echo;
-	dk_call dk_echo "Test Getting DK3RDPARTY_DIR . . .";
-    dk_call dk_echo "DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR)'";
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Getting DK3RDPARTY_DIR . . .\n";
+    dk_call dk_echo "DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR)'\n";
 	
-	dk_call dk_echo;
-	dk_call dk_echo "Test Setting DK3RDPARTY_DIR . . .";
-	dk_call dk_echo "DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR 'C:/Digital Knob/Development/3rdParty')'";
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Setting DK3RDPARTY_DIR . . .\n";
+	dk_call dk_echo "DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR 'C:/Digital Knob/Development/3rdParty')'\n";
 }

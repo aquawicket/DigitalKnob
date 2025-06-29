@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_installGit_ps1){ $dk_installGit_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_installGit_ps1){ $dk_installGit_ps1 = 1; } else{ return; } #include guard
 
 ####################################################################
 # dk_installGit()
 #
 #
 function Global:dk_installGit() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	${GIT_DL_WIN_X86}    = "https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-32-bit.7z.exe"
 	${GIT_DL_WIN_X86_64} = "https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe"
@@ -55,7 +55,7 @@ function Global:dk_installGit() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
     dk_call dk_installGit
 }

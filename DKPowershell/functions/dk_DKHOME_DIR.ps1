@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_DKHOME_DIR_ps1){ $dk_DKHOME_DIR_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_DKHOME_DIR_ps1){ $dk_DKHOME_DIR_ps1 = 1; } else{ return; } #include guard
 
 ####################################################################
 # dk_DKHOME_DIR()
@@ -33,13 +33,13 @@ function Global:dk_DKHOME_DIR() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_echo;
-	dk_call dk_echo "Test Getting DKHOME_DIR . . .";
-    dk_call dk_echo "DKHOME_DIR = '$(dk_call dk_DKHOME_DIR)'";
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Getting DKHOME_DIR . . .\n";
+    dk_call dk_echo "DKHOME_DIR = '$(dk_call dk_DKHOME_DIR)'\n";
 	
-	dk_call dk_echo;
-	dk_call dk_echo "Test Setting DKHOME_DIR . . .";
-	dk_call dk_echo "DKHOME_DIR = '$(dk_call dk_DKHOME_DIR 'C:/')'";
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Setting DKHOME_DIR . . .\n";
+	dk_call dk_echo "DKHOME_DIR = '$(dk_call dk_DKHOME_DIR 'C:/')'\n";
 }

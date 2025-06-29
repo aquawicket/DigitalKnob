@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_callDKBatch_ps1){ $dk_callDKBatch_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_callDKBatch_ps1){ $dk_callDKBatch_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_callDKBatch(func) args
@@ -37,7 +37,7 @@ function Global:dk_callDKBash() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	#dk_callDKBash dk_messageBox rtn_var "MessageBox Title" "Testing dk_messageBox"
 	#dk_debug "rtn_var = ${rtn_var}"

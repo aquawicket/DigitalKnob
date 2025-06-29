@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_gitCommit_ps1){ $dk_gitCommit_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_gitCommit_ps1){ $dk_gitCommit_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_gitCommit()
 #
 #
 function Global:dk_gitCommit() {	
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_gitDiffSummary
 	
@@ -16,53 +16,53 @@ function Global:dk_gitCommit() {
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	cd "${DKBRANCH_DIR}" #-or dk_call dk_error "cd \${DKBRANCH_DIR} failed!"
 	
-	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
+	dk_call dk_validate GIT_EXE "dk_call dk_installGit";
 	
 	if(!($STORE = $(dk_call ${GIT_EXE} config credential.helper))){
-		dk_call dk_errorStatus
+		dk_call dk_errorStatus;
 	}
 	if(!${STORE}){
 		dk_call ${GIT_EXE} config --global credential.helper store
-		dk_call dk_echo
-		dk_call dk_info "git credential.helper is now set to store"
-		dk_call dk_echo
+		dk_call dk_echo "\n";
+		dk_call dk_info "git credential.helper is now set to store\n";
+		dk_call dk_echo "\n";
 	}
 	
 	if(!($USER_EMAIL = $(dk_call ${GIT_EXE} config --global user.email))){
-		dk_call dk_errorStatus
+		dk_call dk_errorStatus;
 	}
 	if(!${USER_EMAIL}){
-		dk_call dk_echo
-		dk_call dk_info "please enter an email address"
-		$input = Read-Host
-		dk_call ${GIT_EXE} config --global user.email "${input}"
-		dk_call dk_echo
-		dk_call dk_info "git user.email '${input}' saved"
-		dk_call dk_echo
+		dk_call dk_echo "\n";
+		dk_call dk_info "please enter an email address\n";
+		$input = Read-Host;
+		dk_call ${GIT_EXE} config --global user.email "${input}";
+		dk_call dk_echo "\n";
+		dk_call dk_info "git user.email '${input}' saved\n";
+		dk_call dk_echo "\n";
 	}
 	if(!($USER_NAME = $(dk_call ${GIT_EXE} config --global user.name))){
 		dk_call dk_errorStatus
 	}
 	if(!${USER_NAME}){
-		dk_call dk_echo
-		dk_call dk_info "please enter a username"
+		dk_call dk_echo "\n";
+		dk_call dk_info "please enter a username\n";
 		$input = Read-Host
 		dk_call ${GIT_EXE} config --global user.name "${input}"
-		dk_call dk_echo
-		dk_call dk_info "git user.name '${input}' saved"
-		dk_call dk_echo
+		dk_call dk_echo "\n";
+		dk_call dk_info "git user.name '${input}' saved\n";
+		dk_call dk_echo "\n";
 	}
 	
 	if(!${message}){
-		$message = "git commit"
+		$message = "git commit";
 	}
 	
-	dk_call dk_echo
-	dk_call dk_info "git commit `"${message}`""
-	dk_call dk_confirm -or return 0
+	dk_call dk_echo "\n";
+	dk_call dk_info "git commit `"${message}`"\n";
+	dk_call dk_confirm -or return 0;
 	
-	dk_call ${GIT_EXE} commit -a -m "${message}"
-    dk_call ${GIT_EXE} push
+	dk_call ${GIT_EXE} commit -a -m "${message}";
+    dk_call ${GIT_EXE} push;
 }
 
 
@@ -75,7 +75,7 @@ function Global:dk_gitCommit() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_gitCommit
 }

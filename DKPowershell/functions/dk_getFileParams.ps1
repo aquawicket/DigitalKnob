@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_getFileParams_ps1){ $dk_getFileParams_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_getFileParams_ps1){ $dk_getFileParams_ps1 = 1; } else{ return; } #include guard
 
 
 ################################################################################
@@ -8,7 +8,7 @@ if(!$dk_getFileParams_ps1){ $dk_getFileParams_ps1 = 1 } else{ return } #include 
 # dk_getFileParams(filepath)
 #
 function Global:dk_getFileParams() {
-    dk_debugFunc 0
+    dk_debugFunc 0;
 	
 	${file} = $args[0]
 	
@@ -44,7 +44,7 @@ function Global:dk_getFileParams() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST() {
-    dk_debugFunc 0
+    dk_debugFunc 0;
   
 	${env:DKCACHE_DIR} = $(dk_call dk_DKCACHE_DIR)
 	dk_call dk_fileWrite "${env:DKCACHE_DIR}/dk_getFileParams_TEST.txt"		"Testing=dk_getFileParams.ps1"

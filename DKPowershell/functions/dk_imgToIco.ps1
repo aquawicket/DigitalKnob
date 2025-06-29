@@ -1,5 +1,5 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_imgToIco_ps1){ $dk_imgToIco_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_imgToIco_ps1){ $dk_imgToIco_ps1 = 1; } else{ return; } #include guard
 
 
 ################################################################################
@@ -213,7 +213,7 @@ function Global:dk_imgToIco() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$imgFile = "C:/Users/Administrator/DigitalKnob/Development/DKCpp/DKCpp/apps/DKCef/icons/icon.png"
 	$icoFile = "C:/Users/Administrator/DigitalKnob/Development/DKCpp/DKCpp/apps/DKCef/icons/icon.ico"

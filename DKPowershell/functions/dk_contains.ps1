@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_contains_ps1){ $dk_contains_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_contains_ps1){ $dk_contains_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_contains(str, substring)
 #
 #
 function Global:dk_contains($str, $substring) {
-	dk_debugFunc 2
+	dk_debugFunc 2;
 
 	if($str -like "*$substring*"){
 		return $true
@@ -20,11 +20,11 @@ function Global:dk_contains($str, $substring) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
-	if(dk_call dk_contains "1one1" "one"){ dk_call dk_echo "1one1 contains one" } 
-	else { dk_call dk_echo "1one1 does not contain one" }
+	if(dk_call dk_contains "1one1" "one"){ dk_call dk_echo "1one1 contains one\n" } 
+	else { dk_call dk_echo "1one1 does not contain one\n" }
 
-	if(dk_call dk_contains "2two2" "tow"){ dk_call dk_echo "2two2 contains tow" } 
-	else { dk_call dk_echo "2two2 does not contain tow"}
+	if(dk_call dk_contains "2two2" "tow"){ dk_call dk_echo "2two2 contains tow\n" } 
+	else { dk_call dk_echo "2two2 does not contain tow\n"}
 }

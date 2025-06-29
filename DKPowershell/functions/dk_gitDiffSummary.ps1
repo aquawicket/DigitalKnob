@@ -1,12 +1,12 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_gitDiffSummary_ps1){ $dk_gitDiffSummary_ps1 = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_gitDiffSummary_ps1){ $dk_gitDiffSummary_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # dk_gitDiffSummary()
 #
 #
 function Global:dk_gitDiffSummary() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
         
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
@@ -32,7 +32,7 @@ function Global:dk_gitDiffSummary() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_gitDiffSummary
 }
