@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%~1" equ "" (goto:eof)  
     set "_message_=%~1"
        
-    :: if msg starts and ends with quotes, remove the first and last characters
+    ::if msg starts and ends with quotes, remove the first and last characters
     ::%if_NDE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=%_message_:~1,-1%"
     ::%if_DE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
        

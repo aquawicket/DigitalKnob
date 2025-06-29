@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-
+set "dk_echo_NONEWLINE=1"
 ::################################################################################
 ::# dk_echo(message)
 ::#
@@ -25,14 +25,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		goto :DeEscape
 	)
 	
-	::set "message=%message:""="%"
-	::for /f "delims=" %%G in (%message%) do (echo:%%~G)
-	for /f "tokens=*" %%G in (%message%) do (echo:%%~G)
-::	for /f "usebackq delims=" %%G in (`echo:%message%`) do (echo %%~G)
+::	if "%dk_echo_NONEWLINE%" equ "1" (
+::		set "message=%message:\n=_NEWLINE_%"
+::	)
+	
+::	set "message=%message:""="%" && echo:%message%
+::	for /f %%G in (%message%) do (echo:%%~G)
+::	for /f "tokens=*" %%G in (%message%) do (echo:%%~G)
+	for /f "delims=" %%G in (%message%) do (echo:%%~G)
+::	for /f "usebackq delims=" %%G in (`echo:%message%`) do (echo:%%~G)
 %endfunction%
 
 
-::set "dk_echo=echo"
 
 
 
@@ -40,7 +44,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 %setlocal%
     %dk_call% dk_debugFunc 0
-
 
 	echo This is a normal echo commmand
 	%dk_call% dk_echo
@@ -58,23 +61,28 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 								 ::ALL: "   !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
 							 ::INVALID: "   !"  %                           "
 							   ::VALID: "     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
-
-::									echo:"    #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
-::			  for /f "tokens=*" %%G in ("     #$ &'()*+,-./:;<=>?@[\]^_`{|}~") do (echo:%%~G)
+							   
+			   ::setlocal disableDelayedExpansion
+			   echo(
+::								   echo:"   ! #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
+::			  for /f "tokens=*" %%G in ("   ! #$ &'()*+,-./:;<=>?@[\]^_`{|}~") do (echo:%%~G)
 			   for /f "delims=" %%G in ("     #$ &'()*+,-./:;<=>?@[\]^_`{|}~") do (echo:%%~G)
 			   echo:
+			   ::endlocal
 
 					  echo:###### TEST_A - dk_call w/ Valid Characters ######
 					  %dk_call% dk_echo "     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
 					  echo:
 
 					  echo:###### TEST_B - dk_call w/ " ######
-					  %dk_call% dk_echo "   ""#$ &'()*+,-./:;<=>?@[\]^_`{|}~"
+					  %dk_call% dk_echo "    ""#$ &'()*+,-./:;<=>?@[\]^_`{|}~"
 					  echo:
 
+					  ::setlocal disableDelayedExpansion
 					  echo:###### TEST_C - dk_call /w %% ######
 					  %dk_call% dk_echo "     #$%%%%%%%%&'()*+,-./:;<=>?@[\]^_`{|}~"
 					  echo:
+					  ::endlocal
 
 						   setlocal disableDelayedExpansion
 						   echo:###### TEST_D - call w/ ! (disableDelayedExpansion) ######

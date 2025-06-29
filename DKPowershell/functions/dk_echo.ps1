@@ -4,7 +4,7 @@ if(!$dk_echo_ps1){ $dk_echo_ps1 = 1; } else{ return; } #include guard
 ################################################################################
 # dk_echo_FILE=1
 # dk_echo_LINE=1
-${global:dk_echo_NONEWLINE}=1
+${global:dk_echo_NONEWLINE}=0
 ################################################################################
 # dk_echo(message)
 #
