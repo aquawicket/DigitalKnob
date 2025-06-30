@@ -17,5 +17,6 @@ include_guard()
 
 
 ### INSTALL ###
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${PE_EXPLORER_IMPORT} NAME PE_EXPLORER)
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+dk_import(${pe_explorer_Import} ROOT ${DKTOOLS_DIR})

@@ -31,9 +31,6 @@ if(Mac)
 	dk_import(${libpng_Mac_Import})
 else()
 	dk_import(${libpng_Import} PATCH)
-	dk_set(LIBPNG_MAJOR 1)
-	dk_set(LIBPNG_MINOR 6)
-	dk_set(LIBPNG_BUILD 35)
 endif()
 
 

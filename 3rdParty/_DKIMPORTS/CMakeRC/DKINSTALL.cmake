@@ -18,13 +18,20 @@ include_guard()
 # https://vector-of-bool.github.io/2017/01/21/cmrc.html
 
 ### INSTALL ###
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${CMAKERC_IMPORT} NAME CMakeRC)
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_import			(${CMAKERC_IMPORT} NAME CMakeRC)
 
-
+if(NOT CMAKE_SCRIPT_MODE_FILE)
+	include			(${CMAKERC}/CMakeRC.cmake)
+endif()
 
 ### LINK ###
-dk_include			(${CMAKERC}/include)
+if(Debug)
+	dk_include		(${CMAKERC_DEBUG_DIR}/_cmrc/include)
+endif()
+if(Release)
+	dk_include		(${CMAKERC_RELEASE_DIR}/_cmrc/include)
+endif()
 if(MSVC)
 	dk_libDebug		(${CMAKERC_DEBUG_DIR}/cmakerc.lib)
 	dk_libRelease	(${CMAKERC_RELEASE_DIR}/cmakerc.lib)
