@@ -2,8 +2,9 @@
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
+%setlocal%
 
-set "dk_echo_NONEWLINE=1"
+::set "dk_echo_NONEWLINE=1"
 ::################################################################################
 ::# dk_echo(message)
 ::#
@@ -24,16 +25,13 @@ set "dk_echo_NONEWLINE=1"
 		set message=%message:^^=^%
 		goto :DeEscape
 	)
-	
-::	if "%dk_echo_NONEWLINE%" equ "1" (
-::		set "message=%message:\n=_NEWLINE_%"
-::	)
-	
+
 ::	set "message=%message:""="%" && echo:%message%
 ::	for /f %%G in (%message%) do (echo:%%~G)
 ::	for /f "tokens=*" %%G in (%message%) do (echo:%%~G)
-	for /f "delims=" %%G in (%message%) do (echo:%%~G)
+	for /f "delims=" %%G in (%message%) do (echo %%~G)
 ::	for /f "usebackq delims=" %%G in (`echo:%message%`) do (echo:%%~G)
+
 %endfunction%
 
 
@@ -49,12 +47,7 @@ set "dk_echo_NONEWLINE=1"
 	%dk_call% dk_echo
 	%dk_call% dk_echo ""
 	%dk_call% dk_echo "This is a dk_echo line"
-	%dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
-	
-	echo This is a normal echo commmand
-	%dk_call% dk_echo
-	%dk_call% dk_echo ""
-	%dk_call% dk_echo "This is a dk_echo line"
+	%dk_call% dk_echo "This is a dk_echo line \nwith a new line"
 	%dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
 	
 	::############### Special Characters ###############
