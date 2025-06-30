@@ -12,9 +12,28 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
     %dk_call% dk_debugFunc 1 99
 
+	::### Method 1
 	set dk_allButFirstArgs=%*
 	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do (
-		endlocal & set dk_allButFirstArgs=%%b
+		set dk_allButFirstArgs=%%b
+	)
+	
+	::### Method 2
+::	set dk_allButFirstArgs=%*
+::	call set dk_allButFirstArgs=%%dk_allButFirstArgs:*%1 =%%
+
+	::### Method 3 - DEQUOTE
+::	shift
+::	set dk_allButFirstArgs=%~1
+::	:loop
+::	shift
+::	if [%1]==[] goto afterloop
+::	set dk_allButFirstArgs=%dk_allButFirstArgs% %~1
+::	goto loop
+::	:afterloop
+
+	endlocal & (
+		set dk_allButFirstArgs=%dk_allButFirstArgs%
 	)
 %endfunction%
 

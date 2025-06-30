@@ -19,6 +19,7 @@ macro(dk_eval)
 		message("${lblue}dk_eval> ${lcyan}${code}\n ${clr}")
 	endif()
 
+	
 	#dk_replaceAll("${code}"  ";"  "\n"  code)
 	#dk_replaceAll("${code}"  "'"  "\""  code)
 	
