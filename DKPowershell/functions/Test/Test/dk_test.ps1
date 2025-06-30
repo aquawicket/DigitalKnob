@@ -22,6 +22,7 @@ function GLOBAL:Test:Test:dk_test($argA, $argB, $argC) {
 	$all = [ordered]@{}
 	$all += ${PsBoundParameters};
 	if($unbound){ $all += ${unbound}; }
+	
 										  dk_call dk_echo "####################### Test/Test/dk_test.ps1 #################################";
 										  dk_call dk_echo ""
 										  dk_call dk_echo "      ####################### FUNCTIONS #######################";
@@ -113,16 +114,13 @@ function Global:DKTEST() {
 
     dk_call dk_test "123" "abc" "456" "def" "789" "g h i"
 	dk_call dk_echo ""
-	dk_call dk_echo "GLOBAL_VAR = ${GLOBAL_VAR}"
-	dk_call dk_echo "RETURN_VAR = ${RETURN_VAR}"
+	dk_call dk_echo "dk_test = ${dk_test}";
 	
 	dk_call Test:dk_test "from DKTEST()" "to Test/dk_test()"
 	dk_call dk_echo ""
-	dk_call dk_echo "GLOBAL_VAR = ${GLOBAL_VAR}"
-	dk_call dk_echo "RETURN_VAR = ${RETURN_VAR}"
+	dk_call dk_echo "dk_test = ${dk_test}";
 	
 	dk_call Test:Test:dk_test "from DKTEST()" "to Test/Test/dk_test()"
 	dk_call dk_echo ""
-	dk_call dk_echo "GLOBAL_VAR = ${GLOBAL_VAR}"
-	dk_call dk_echo "RETURN_VAR = ${RETURN_VAR}"
+	dk_call dk_echo "dk_test = ${dk_test}";
 }

@@ -55,4 +55,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_callDKPowershell dk_test "arg 1" "arg 2" "arg 3"
 	%dk_call% dk_echo
 	%dk_call% dk_echo "dk_callDKPowershell = %dk_callDKPowershell%"
+	
+	%dk_call% dk_callDKPowershell Test/dk_test "arg 1" "arg 2" "arg 3"
+	%dk_call% dk_echo
+	%dk_call% dk_echo "dk_callDKPowershell = %dk_callDKPowershell%"
+	
+	%dk_call% dk_callDKPowershell Test/Test/dk_test "arg 1" "arg 2" "arg 3"
+	%dk_call% dk_echo
+	%dk_call% dk_echo "dk_callDKPowershell = %dk_callDKPowershell%"
 %endfunction%

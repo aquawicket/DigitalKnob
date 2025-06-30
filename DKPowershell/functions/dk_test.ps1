@@ -22,6 +22,7 @@ function GLOBAL:dk_test($argA, $argB, $argC) {
 	$all = [ordered]@{}
 	$all += ${PsBoundParameters};
 	if($unbound){ $all += ${unbound}; }
+	
 										  dk_call dk_echo "####################### dk_test.ps1 #################################";
 										  dk_call dk_echo ""
 										  dk_call dk_echo "      ####################### FUNCTIONS #######################";
