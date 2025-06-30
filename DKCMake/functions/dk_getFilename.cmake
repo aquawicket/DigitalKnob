@@ -25,8 +25,11 @@ function(dk_getFilename)
 	dk_getArg(0 path)
 	dk_getArg(1 rtn_var)
 
-	get_filename_component(fullpath ${path} ABSOLUTE)
-	get_filename_component(dk_getFilename "${fullpath}" NAME_WE)
+	get_filename_component(absolute_path ${path} ABSOLUTE)
+	get_filename_component(dk_getFilename "${absolute_path}" NAME)
+
+	dk_getExtension(${dk_getFilename})
+	string(REPLACE "${dk_getExtension}" "" dk_getFilename "${dk_getFilename}")
 	
 	### return ###
 	set(dk_getFilename ${dk_getFilename} PARENT_SCOPE)
@@ -45,13 +48,29 @@ function(DKTEST)
 	
 	dk_echo("")
 	dk_getFilename("/path/to/a/filename.txt")
-	dk_info("basename of /path/to/a/filename.txt = ${dk_getFilename}")
+	dk_info("dk_getFilename of /path/to/a/filename.txt = ${dk_getFilename}")
+	
+	dk_echo("")
+	dk_getFilename("/path/to/a/filename.random")
+	dk_info("dk_getFilename of /path/to/a/filename.random = ${dk_getFilename}")
+	
+	dk_echo("")
+	dk_getFilename("C:/Windows/System32/filename.tar.gz")
+	dk_info("dk_getFilename of C:/Windows/System32/filename.tar.gz = ${dk_getFilename}")
+	
+	dk_echo("")
+	dk_getFilename("C:/Windows/System32/filename.7z.exe")
+	dk_info("dk_getFilename of C:/Windows/System32/filename.7z.exe = ${dk_getFilename}")
+	
+	dk_echo("")
+	dk_getFilename("/path/to/a/filename.v5.7.6.exe")
+	dk_info("dk_getFilename of /path/to/a/filename.v5.7.6.exe = ${dk_getFilename}")
 	
 	dk_echo("")
 	dk_getFilename("C:/Windows/System32")
-	dk_info("basename of C:/Windows/System32 = ${dk_getFilename}")
+	dk_info("dk_getFilename of C:/Windows/System32 = ${dk_getFilename}")
 	
 	dk_echo("")
-	dk_getFilename("C:/Windows/System32/" myBasename)
-	dk_info("basename of C:/Windows/System32/ = ${myBasename}")
+	dk_getFilename("C:/Windows/System32/")
+	dk_info("dk_getFilename of C:/Windows/System32/ = ${dk_getFilename}")
 endfunction()
