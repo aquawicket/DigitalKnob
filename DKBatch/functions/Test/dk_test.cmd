@@ -8,12 +8,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# Test/dk_test(args)
 ::#
 :Test/dk_test
-echo: & echo %bg_blue%-^> Test/dk_test(%*)%clr%
+::echo: & echo %bg_blue%-^> Test/dk_test(%*)%clr%
 %setlocal%
 	::%dk_call% dk_debugFunc 0 99
 	
+	set "Test/dk_test=Return value from Test/dk_test.cmd"
+	
 	echo ################# Test/dk_test.cmd ################
-						(echo            ###### cmd variables ######)
+					(echo           Test/dk_test = %Test/dk_test%)
+					(echo            ###### cmd variables ######)
 	if "%~0" neq ""	(echo                      0 = '%~0')
 					(echo                      * = '%*')
 	if "%~1" neq ""	(echo                      1 = '%~1')
@@ -31,7 +34,6 @@ echo: & echo %bg_blue%-^> Test/dk_test(%*)%clr%
 					(echo                ComSpec = '%ComSpec%')
 					(echo:)
 					(echo             ###### DK variables ######)
-					(echo                   test = '%test%')
 					(echo           DKSHELL_NAME = '%DKSHELL_NAME%')
 					(echo           DKSHELL_PATH = '%DKSHELL_PATH%')
 					(echo        DKSHELL_VERSION = '%DKSHELL_VERSION%')
@@ -73,31 +75,14 @@ echo: & echo %bg_blue%-^> Test/dk_test(%*)%clr%
 					(echo  DKBATCH_FUNCTIONS_DIR = '%DKBATCH_FUNCTIONS_DIR%')
 					(echo DKBATCH_FUNCTIONS_DIR_ = '%DKBATCH_FUNCTIONS_DIR_%')
 					(echo:)
-					(echo      ###### return values before being set ######)
-					(echo                dk_test = '%dk_test%')
-					(echo             RETURN_VAR = '%RETURN_VAR%')
-					(echo             GLOBAL_VAR = '%GLOBAL_VAR%')
-
-	%dk_call% dk_stacktrace
-
+					
+	%dk_call% Test/Test/dk_test "dk_test" "Test/Test/dk_test"
+	echo Test/Test/dk_test = 'Test/Test/%dk_test%'
+	
 	endlocal & (
-		set "dk_test=this B"
-		%dk_call% setReturn RETURN_VAR "return B"
-		%dk_call% setGlobal GLOBAL_VAR "global B"
+		set "Test/dk_test=%Test/dk_test%"
 	)
-
-	%dk_call% Test/Test/dk_test "dk_test" "Test/dk_test"
-	echo: & echo ### Test/Test/dk_test return values ###
-	echo    dk_test = '%dk_test%'
-	echo RETURN_VAR = '%RETURN_VAR%'
-	echo GLOBAL_VAR = '%GLOBAL_VAR%'
-
-::	echo: & echo ### Test/dk_test return values before end function ###
-::	echo              dk_test = '%dk_test%'
-::	echo           RETURN_VAR = '%RETURN_VAR%'
-::	echo           GLOBAL_VAR = '%GLOBAL_VAR%'
-
-echo %bg_blue%^<- Test/dk_test(%*)%clr% & echo:
+::echo %bg_blue%^<- Test/dk_test(%*)%clr% & echo:
 %endfunction%
 
 
