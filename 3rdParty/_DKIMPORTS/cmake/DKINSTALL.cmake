@@ -100,7 +100,7 @@ endif()
 
 ### VALIDATE ### (second check)
 if(NOT CMAKE_EXE)
-	dk_error("COULD NOT FIND CMAKE_EXE...   defaulting to CMAKE_COMMAND")
+	dk_warning("COULD NOT FIND CMAKE_EXE...   defaulting to CMAKE_COMMAND")
 	dk_set(CMAKE_EXE ${CMAKE_COMMAND})
 endif()
 
