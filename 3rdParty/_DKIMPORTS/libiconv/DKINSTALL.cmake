@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-############ libx11-dev ############
+############ libiconv ############
 # https://www.gnu.org/software/libiconv/
 # https://savannah.gnu.org/projects/libiconv
 # https://stackoverflow.com/a/57734435/688352
@@ -22,9 +22,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
-dk_import(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz PATCH)
-#dk_import(http://ftp.vim.org/ftp/gnu/libiconv/libiconv-1.14.tar.gz PATCH)
-
+dk_import(${libiconv_Import} PATCH)
 
 
 ### LINK ###

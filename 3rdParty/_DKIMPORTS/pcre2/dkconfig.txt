@@ -1,0 +1,4 @@
+############ pcre2 ############
+# https://github.com/PCRE2Project/pcre2.git
+
+pcre2_Import=https://github.com/PCRE2Project/pcre2/archive/7c215fa.zip

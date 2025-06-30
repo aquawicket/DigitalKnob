@@ -20,6 +20,7 @@ function(dk_basename)
 	dk_debugFunc(1 2)
 	message("dk_basename(${ARGV})")
 	set(path ${ARGV0})
+	set(rtn_var ${ARGV1})
 	#dk_getArg(0 path)
 	#dk_getArg(1 rtn_var)
 

@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
-dk_import(https://github.com/PCRE2Project/pcre2/archive/7c215fa.zip)
+dk_import(${pcre2_Import})
 
 
 
