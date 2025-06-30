@@ -5,15 +5,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::######################### dk_exec SETTINGS #########################
-if not defined dk_exec_ECHO_OUTPUT (set "dk_exec_ECHO_OUTPUT=1")
-if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=1")
+::if not defined dk_exec_ECHO_OUTPUT (set "dk_exec_ECHO_OUTPUT=1")
+::if not defined dk_exec_ECHO_ERROR (set "dk_exec_ECHO_ERROR=1")
 ::set "dk_exec_PRINT_CALL=1" 		&:: dk_exec_call
 set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
 ::set "dk_exec_PRINT_EXITCODES=1"	&:: dk_exec_exitcodes
 ::set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
 ::set "dk_exec_PRINT_STDERR=1"		&:: dk_exec_stderr[]
 ::set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
-::set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
+set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 ::####################################################################
 ::# dk_exec(<command> <ret:optional>)
 ::#
@@ -58,8 +58,12 @@ set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
 	::###### dk_exec_stdout[] ######
 	set /a "i=0"
 	::for /f "usebackq delims=" %%G in (`call %dk_exec_command% 2^>^&1 ^& call echo !^^%~n4! ^& call echo ExItCoDe%%^^errorlevel%%`) do (
-	for /f "usebackq delims=" %%G in (`call %dk_exec_command% 2^>^&1 ^& call echo ExItCoDe%%^^errorlevel%%`) do (
+	for /f "usebackq delims=" %%G in (`call %dk_exec_command% 2^>^&1 ^& if defined %~n1 call echo R_E_T_U_R_N%%^^%~n1%% ^& call echo ExItCoDe%%^^errorlevel%%`) do (
 		set "line=%%G"
+		
+		if "!line!" neq "!line:R_E_T_U_R_N=!" (
+			set "dk_exec=!line:R_E_T_U_R_N=!"
+		)
 		
 		rem ###### dk_exec_stdout ######
 		if "!line!" equ "!line:ExItCoDe=!" (
@@ -113,7 +117,9 @@ set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
 	)
 			
 	::###### dk_exec ######
-	set "dk_exec=!dk_exec_stdout!"
+	if "!dk_exec!" equ "" (
+		set "dk_exec=!dk_exec_stdout!"
+	)
 	
 	::###### dk_exec_PRINT_OUTPUT ######
 	if "%dk_exec_PRINT_OUTPUT%" equ "1" (
