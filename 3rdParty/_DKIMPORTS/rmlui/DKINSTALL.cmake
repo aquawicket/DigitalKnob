@@ -93,7 +93,7 @@ endif()
 
 
 ### IMPORT ###
-dk_import(https://github.com/mikke89/RmlUi/archive/a903d8f7.zip)
+dk_import(${rmlui_Import})
 
 
 ### PATCH ###

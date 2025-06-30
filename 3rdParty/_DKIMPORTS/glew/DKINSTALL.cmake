@@ -28,7 +28,7 @@ endif()
 dk_depend(libglu1-mesa-dev)
 
 ### IMPORT ###
-dk_import(${glew_IMPORT})
+dk_import(${glew_Import})
 dk_copy(${GLEW_DIR}/build/cmake ${GLEW_TUPLE_DIR}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
 
 ### LINK ###

@@ -20,7 +20,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
-dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/a927b489.zip)
+dk_import(${libjpeg_turbo_Import})
 
 ### LINK ###
 dk_include			(${LIBJPEG_TURBO_DIR}									LIBJPEG_TURBO_INCLUDE_DIR)

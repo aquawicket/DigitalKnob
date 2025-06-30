@@ -11,6 +11,10 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+
+############ tidy-html5 ############
+# https://github.com/htacg/tidy-html5.git
+
 dk_validate(Target_Config  "dk_Target_Config()")
 
 
@@ -19,7 +23,7 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
+dk_import(${tidy_html5_Import})
 
 
 ### PATCH FILES ###

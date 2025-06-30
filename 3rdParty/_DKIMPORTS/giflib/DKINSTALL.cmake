@@ -29,7 +29,7 @@ dk_depend(autotools)
 #dk_depend(gcc)
 
 ### IMPORT ###
-dk_import(https://github.com/nesbox/giflib/archive/1aa11b06.zip PATCH)
+dk_import(${giflib_Import} PATCH)
 
 set(GIFLIB_USE_CMAKE ON)
 if(GIFLIB_USE_CMAKE)

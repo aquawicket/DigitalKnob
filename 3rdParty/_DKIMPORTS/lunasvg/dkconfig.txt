@@ -1,0 +1,4 @@
+############ lunasvg ############
+# https://github.com/sammycage/lunasvg.git
+
+lunasvg_Import=https://github.com/sammycage/lunasvg/archive/refs/tags/v2.4.1.zip

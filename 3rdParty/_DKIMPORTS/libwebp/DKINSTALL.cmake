@@ -25,7 +25,7 @@ dk_depend(tiff)
 dk_depend(zlib)
 
 ### IMPORT ###
-dk_import(https://github.com/webmproject/libwebp/archive/84b118c9.zip)
+dk_import(${libwebp_Import})
 
 ### LINK ###
 dk_include					(${LIBWEBP_DIR}							LIBWEBP_INCLUDE_DIR)

@@ -21,7 +21,7 @@ dk_depend(freetype)
 dk_depend(python3)
 
 ### IMPORT ###
-dk_import(https://github.com/harfbuzz/harfbuzz/archive/c1c0e82e.zip)
+dk_import(${harfbuzz_Import})
 
 ### LINK ###
 dk_include			(${HARFBUZZ_DIR}/src						HARFBUZZ_INCLUDE_DIR)

@@ -1,0 +1,8 @@
+############ sdl ############
+# https://github.com/libsdl-org/SDL
+# https://www.libsdl.org/
+# https://www.libsdl.org/release/SDL2-2.0.18.zip
+# https://stackoverflow.com/a/57734435/688352		# _libiconv or _iconv undefined symbol on Mac OSX
+# https://github.com/libsdl-org/SDL/blob/53141a56b4520489ab64ad0ba2c49fbd1a456901/docs/README-cmake.md
+
+sdl_Import=https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip

@@ -25,7 +25,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 
 ### IMPORT ###
-dk_import(${glfw_IMPORT})
+dk_import(${glfw_Import})
 
 
 ### LINK ###

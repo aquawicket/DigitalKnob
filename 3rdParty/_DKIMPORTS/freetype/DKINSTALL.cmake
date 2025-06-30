@@ -22,7 +22,7 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(${freetype_IMPORT} PATCH)
+dk_import(${freetype_Import} PATCH)
 
 
 ### LINK ###

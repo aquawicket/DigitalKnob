@@ -12,12 +12,14 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ lunasvg ############
 # https://github.com/sammycage/lunasvg.git
 
-#dk_import(https://github.com/sammycage/lunasvg.git)
+dk_validate(Target_Config  "dk_Target_Config()")
+
+
 #dk_import(https://github.com/sammycage/lunasvg/archive/refs/heads/master.zip)
-dk_import(https://github.com/sammycage/lunasvg/archive/refs/tags/v2.4.1.zip)
+dk_import(${lunasvg_Import})
 
 dk_include			(${LUNASVG_DIR}/include					LUNASVG_INCLUDE_DIR)
 

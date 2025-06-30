@@ -12,13 +12,14 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ sdl ############
 # https://github.com/libsdl-org/SDL
 # https://www.libsdl.org/
 # https://www.libsdl.org/release/SDL2-2.0.18.zip
 # https://stackoverflow.com/a/57734435/688352		# _libiconv or _iconv undefined symbol on Mac OSX
 # https://github.com/libsdl-org/SDL/blob/53141a56b4520489ab64ad0ba2c49fbd1a456901/docs/README-cmake.md
 
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 if(Android)
@@ -82,7 +83,7 @@ if(Windows)
 endif()
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip)
+dk_import(${sdl_Import})
 dk_assertPath(SDL)
 #dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.30.9.zip)
 #dk_import(https://github.com/libsdl-org/SDL.git BRANCH main) # SDL3
