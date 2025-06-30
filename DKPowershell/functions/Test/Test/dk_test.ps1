@@ -1,4 +1,4 @@
-. ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}\..\..\DK.ps1; }
 if(!$Test_Test_dk_test){ $Test_Test_dk_test_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
@@ -11,9 +11,9 @@ function GLOBAL:Test:Test:dk_test($argA, $argB, $argC) {
 	$bound = ${PsBoundParameters};
 	
 	$n = 0;
-	$unbound = [ordered]@{}
 	foreach($value in $Args){
 		if(${value}){
+			if(!($unbound)){ $unbound = [ordered]@{}; }
 			$unbound.Add("unbound$n", "${value}");
 			$n++;
 		}
@@ -21,7 +21,7 @@ function GLOBAL:Test:Test:dk_test($argA, $argB, $argC) {
 	
 	$all = [ordered]@{}
 	$all += ${PsBoundParameters};
-	$all += ${unbound};
+	if($unbound){ $all += ${unbound}; }
 										  dk_call dk_echo "####################### Test/Test/dk_test.ps1 #################################";
 										  dk_call dk_echo ""
 										  dk_call dk_echo "      ####################### FUNCTIONS #######################";
@@ -38,47 +38,47 @@ function GLOBAL:Test:Test:dk_test($argA, $argB, $argC) {
 	if(${NONEXISTENT})					{ dk_call dk_echo "                NONEXISTENT = '${NONEXISTENT}'"                                       }
 	if(${NONEXISTENT[0]})   			{ dk_call dk_echo "             NONEXISTENT[0] = '$(NONEXISTENT[0])'"                                    }
                                           dk_call dk_echo ""
-	if(  ${bound}.Count)   				{ dk_call dk_echo "           bound.Count      = '$(${bound}.Count)'"                                    }
-	if(  ${bound}.Keys)       			{ dk_call dk_echo "           bound.Keys       = '$(${bound}.Keys)'"                                     }
-	if(  ${bound}.Values)       		{ dk_call dk_echo "           bound.Values     = '$(${bound}.Values)'"                                   }
-	if($(${bound}.Values)[0])       	{ dk_call dk_echo "           bound[0]         =  $($(${bound}.Keys)[0]):'$($(${bound}.Values)[0])'"     }
-	if($(${bound}.Values)[1])      		{ dk_call dk_echo "           bound[1]         =  $($(${bound}.Keys)[1]):'$($(${bound}.Values)[1])'"     }
-	if($(${bound}.Values)[2])     		{ dk_call dk_echo "           bound[2]         =  $($(${bound}.Keys)[2]):'$($(${bound}.Values)[2])'"     }
-	if($(${bound}.Values)[3])      		{ dk_call dk_echo "           bound[3]         =  $($(${bound}.Keys)[3]):'$($(${bound}.Values)[3])'"     }
-	if($(${bound}.Values)[4])      		{ dk_call dk_echo "           bound[4]         =  $($(${bound}.Keys)[4]):'$($(${bound}.Values)[4])'"     }
-	if($(${bound}.Values)[5])     		{ dk_call dk_echo "           bound[5]         =  $($(${bound}.Keys)[5]):'$($(${bound}.Values)[5])'"     }
-	if($(${bound}.Values)[6])     		{ dk_call dk_echo "           bound[6]         =  $($(${bound}.Keys)[6]):'$($(${bound}.Values)[6])'"     }
-	if($(${bound}.Values)[7])      		{ dk_call dk_echo "           bound[7]         =  $($(${bound}.Keys)[7]):'$($(${bound}.Values)[7])'"     }
-	if($(${bound}.Values)[8])     		{ dk_call dk_echo "           bound[8]         =  $($(${bound}.Keys)[8]):'$($(${bound}.Values)[8])'"     }
-	if($(${bound}.Values)[9])      		{ dk_call dk_echo "           bound[9]         =  $($(${bound}.Keys)[9]):'$($(${bound}.Values)[9])'"     }
+	if(${bound}.Count)   				{ dk_call dk_echo "           bound.Count      = '$(${bound}.Count)'"                                    }
+	if(${bound}.Keys)       			{ dk_call dk_echo "           bound.Keys       = '$(${bound}.Keys)'"                                     }
+	if(${bound}.Values)       			{ dk_call dk_echo "           bound.Values     = '$(${bound}.Values)'"                                   }
+	if(${bound}.Count -gt 0)    	  	{ dk_call dk_echo "           bound[0]         =  $($(${bound}.Keys)[0]):'$($(${bound}.Values)[0])'"     }
+	if(${bound}.Count -gt 1)     		{ dk_call dk_echo "           bound[1]         =  $($(${bound}.Keys)[1]):'$($(${bound}.Values)[1])'"     }
+	if(${bound}.Count -gt 2)    		{ dk_call dk_echo "           bound[2]         =  $($(${bound}.Keys)[2]):'$($(${bound}.Values)[2])'"     }
+	if(${bound}.Count -gt 3)     		{ dk_call dk_echo "           bound[3]         =  $($(${bound}.Keys)[3]):'$($(${bound}.Values)[3])'"     }
+	if(${bound}.Count -gt 4)     		{ dk_call dk_echo "           bound[4]         =  $($(${bound}.Keys)[4]):'$($(${bound}.Values)[4])'"     }
+	if(${bound}.Count -gt 5)    		{ dk_call dk_echo "           bound[5]         =  $($(${bound}.Keys)[5]):'$($(${bound}.Values)[5])'"     }
+	if(${bound}.Count -gt 6)    		{ dk_call dk_echo "           bound[6]         =  $($(${bound}.Keys)[6]):'$($(${bound}.Values)[6])'"     }
+	if(${bound}.Count -gt 7)     		{ dk_call dk_echo "           bound[7]         =  $($(${bound}.Keys)[7]):'$($(${bound}.Values)[7])'"     }
+	if(${bound}.Count -gt 8)    		{ dk_call dk_echo "           bound[8]         =  $($(${bound}.Keys)[8]):'$($(${bound}.Values)[8])'"     }
+	if(${bound}.Count -gt 9)     		{ dk_call dk_echo "           bound[9]         =  $($(${bound}.Keys)[9]):'$($(${bound}.Values)[9])'"     }
 										  dk_call dk_echo ""
-	if(  ${unbound}.Count)   			{ dk_call dk_echo "         unbound.Count      = '$(${unbound}.Count)'"                                  }
-	if(  ${unbound}.Keys)       		{ dk_call dk_echo "         unbound.Keys       = '$(${unbound}.Keys)'"                                   }
-	if(  ${unbound}.Values)       		{ dk_call dk_echo "         unbound.Values     = '$(${unbound}.Values)'"                                 }
-	if($(${unbound}.Values)[0])      	{ dk_call dk_echo "         unbound.Values[0]  =  $($(${unbound}.Keys)[0]):'$($(${unbound}.Values)[0])'" }
-	if($(${unbound}.Values)[1])      	{ dk_call dk_echo "         unbound.Values[1]  =  $($(${unbound}.Keys)[1]):'$($(${unbound}.Values)[1])'" }
-	if($(${unbound}.Values)[2])      	{ dk_call dk_echo "         unbound.Values[2]  =  $($(${unbound}.Keys)[2]):'$($(${unbound}.Values)[2])'" }
-	if($(${unbound}.Values)[3])      	{ dk_call dk_echo "         unbound.Values[3]  =  $($(${unbound}.Keys)[3]):'$($(${unbound}.Values)[3])'" }
-	if($(${unbound}.Values)[4])      	{ dk_call dk_echo "         unbound.Values[4]  =  $($(${unbound}.Keys)[4]):'$($(${unbound}.Values)[4])'" }
-	if($(${unbound}.Values)[5])      	{ dk_call dk_echo "         unbound.Values[5]  =  $($(${unbound}.Keys)[5]):'$($(${unbound}.Values)[5])'" }
-	if($(${unbound}.Values)[6])      	{ dk_call dk_echo "         unbound.Values[6]  =  $($(${unbound}.Keys)[6]):'$($(${unbound}.Values)[6])'" }
-	if($(${unbound}.Values)[7])      	{ dk_call dk_echo "         unbound.Values[7]  =  $($(${unbound}.Keys)[7]):'$($(${unbound}.Values)[7])'" }
-	if($(${unbound}.Values)[8])      	{ dk_call dk_echo "         unbound.Values[8]  =  $($(${unbound}.Keys)[8]):'$($(${unbound}.Values)[8])'" }
-	if($(${unbound}.Values)[9])      	{ dk_call dk_echo "         unbound.Values[9]  =  $($(${unbound}.Keys)[9]):'$($(${unbound}.Values)[9])'" }
+	if(${unbound}.Count)   				{ dk_call dk_echo "         unbound.Count      = '$(${unbound}.Count)'"                                  }
+	if(${unbound}.Keys)       			{ dk_call dk_echo "         unbound.Keys       = '$(${unbound}.Keys)'"                                   }
+	if(${unbound}.Values)       		{ dk_call dk_echo "         unbound.Values     = '$(${unbound}.Values)'"                                 }
+	if(${unbound}.Count -gt 0)      	{ dk_call dk_echo "         unbound.Values[0]  =  $($(${unbound}.Keys)[0]):'$($(${unbound}.Values)[0])'" }
+	if(${unbound}.Count -gt 1)      	{ dk_call dk_echo "         unbound.Values[1]  =  $($(${unbound}.Keys)[1]):'$($(${unbound}.Values)[1])'" }
+	if(${unbound}.Count -gt 2)      	{ dk_call dk_echo "         unbound.Values[2]  =  $($(${unbound}.Keys)[2]):'$($(${unbound}.Values)[2])'" }
+	if(${unbound}.Count -gt 3)      	{ dk_call dk_echo "         unbound.Values[3]  =  $($(${unbound}.Keys)[3]):'$($(${unbound}.Values)[3])'" }
+	if(${unbound}.Count -gt 4)      	{ dk_call dk_echo "         unbound.Values[4]  =  $($(${unbound}.Keys)[4]):'$($(${unbound}.Values)[4])'" }
+	if(${unbound}.Count -gt 5)      	{ dk_call dk_echo "         unbound.Values[5]  =  $($(${unbound}.Keys)[5]):'$($(${unbound}.Values)[5])'" }
+	if(${unbound}.Count -gt 6)      	{ dk_call dk_echo "         unbound.Values[6]  =  $($(${unbound}.Keys)[6]):'$($(${unbound}.Values)[6])'" }
+	if(${unbound}.Count -gt 7)      	{ dk_call dk_echo "         unbound.Values[7]  =  $($(${unbound}.Keys)[7]):'$($(${unbound}.Values)[7])'" }
+	if(${unbound}.Count -gt 8)      	{ dk_call dk_echo "         unbound.Values[8]  =  $($(${unbound}.Keys)[8]):'$($(${unbound}.Values)[8])'" }
+	if(${unbound}.Count -gt 9)      	{ dk_call dk_echo "         unbound.Values[9]  =  $($(${unbound}.Keys)[9]):'$($(${unbound}.Values)[9])'" }
 										  dk_call dk_echo ""
-	if(  ${all}.Count)   				{ dk_call dk_echo "             all.Count      = '$(${all}.Count)'"                                      }
-	if(  ${all}.Keys)       			{ dk_call dk_echo "             all.Keys       = '$(${all}.Keys)'"                                       }
-	if(  ${all}.Values)       			{ dk_call dk_echo "             all.Values     = '$(${all}.Values)'"                                     }
-	if($(${all}.Values)[0])      		{ dk_call dk_echo "             all.Values[0]  =  $($(${all}.Keys)[0]):'$($(${all}.Values)[0])'"         }
-	if($(${all}.Values)[1])      		{ dk_call dk_echo "             all.Values[1]  =  $($(${all}.Keys)[1]):'$($(${all}.Values)[1])'"         }
-	if($(${all}.Values)[2])      		{ dk_call dk_echo "             all.Values[2]  =  $($(${all}.Keys)[2]):'$($(${all}.Values)[2])'"         }
-	if($(${all}.Values)[3])      		{ dk_call dk_echo "             all.Values[3]  =  $($(${all}.Keys)[3]):'$($(${all}.Values)[3])'"         }
-	if($(${all}.Values)[4])      		{ dk_call dk_echo "             all.Values[4]  =  $($(${all}.Keys)[4]):'$($(${all}.Values)[4])'"         }
-	if($(${all}.Values)[5])      		{ dk_call dk_echo "             all.Values[5]  =  $($(${all}.Keys)[5]):'$($(${all}.Values)[5])'"         }
-	if($(${all}.Values)[6])      		{ dk_call dk_echo "             all.Values[6]  =  $($(${all}.Keys)[6]):'$($(${all}.Values)[6])'"         }
-	if($(${all}.Values)[7])      		{ dk_call dk_echo "             all.Values[7]  =  $($(${all}.Keys)[7]):'$($(${all}.Values)[7])'"         }
-	if($(${all}.Values)[8])      		{ dk_call dk_echo "             all.Values[8]  =  $($(${all}.Keys)[8]):'$($(${all}.Values)[8])'"         }
-	if($(${all}.Values)[9])      		{ dk_call dk_echo "             all.Values[9]  =  $($(${all}.Keys)[9]):'$($(${all}.Values)[9])'"         }
+	if(${all}.Count)   					{ dk_call dk_echo "             all.Count      = '$(${all}.Count)'"                                      }
+	if(${all}.Keys)       				{ dk_call dk_echo "             all.Keys       = '$(${all}.Keys)'"                                       }
+	if(${all}.Values)       			{ dk_call dk_echo "             all.Values     = '$(${all}.Values)'"                                     }
+	if(${all}.Count -gt 0)    			{ dk_call dk_echo "             all.Values[0]  =  $($(${all}.Keys)[0]):'$($(${all}.Values)[0])'"         }
+	if(${all}.Count -gt 1)      		{ dk_call dk_echo "             all.Values[1]  =  $($(${all}.Keys)[1]):'$($(${all}.Values)[1])'"         }
+	if(${all}.Count -gt 2)     			{ dk_call dk_echo "             all.Values[2]  =  $($(${all}.Keys)[2]):'$($(${all}.Values)[2])'"         }
+	if(${all}.Count -gt 3)				{ dk_call dk_echo "             all.Values[3]  =  $($(${all}.Keys)[3]):'$($(${all}.Values)[3])'"         }
+	if(${all}.Count -gt 4)     			{ dk_call dk_echo "             all.Values[4]  =  $($(${all}.Keys)[4]):'$($(${all}.Values)[4])'"         }
+	if(${all}.Count -gt 5)     			{ dk_call dk_echo "             all.Values[5]  =  $($(${all}.Keys)[5]):'$($(${all}.Values)[5])'"         }
+	if(${all}.Count -gt 6)     			{ dk_call dk_echo "             all.Values[6]  =  $($(${all}.Keys)[6]):'$($(${all}.Values)[6])'"         }
+	if(${all}.Count -gt 7)     			{ dk_call dk_echo "             all.Values[7]  =  $($(${all}.Keys)[7]):'$($(${all}.Values)[7])'"         }
+	if(${all}.Count -gt 8)     			{ dk_call dk_echo "             all.Values[8]  =  $($(${all}.Keys)[8]):'$($(${all}.Values)[8])'"         }
+	if(${all}.Count -gt 9)     			{ dk_call dk_echo "             all.Values[9]  =  $($(${all}.Keys)[9]):'$($(${all}.Values)[9])'"         }
 										  dk_call dk_echo ""
 	if(${DKSCRIPT_PATH})    			{ dk_call dk_echo "              DKSCRIPT_PATH = '${DKSCRIPT_PATH}'"                                     }
     if(${DKSCRIPT_DIR})    				{ dk_call dk_echo "               DKSCRIPT_DIR = '${DKSCRIPT_DIR}'"                                      }
@@ -99,15 +99,9 @@ function GLOBAL:Test:Test:dk_test($argA, $argB, $argC) {
     if(${DKPOWERSHELL_DIR})    			{ dk_call dk_echo "                 DKBASH_DIR = '${DKPOWERSHELL_DIR}'"                                  }
     if(${DKPOWERSHELL_FUNCTIONS_DIR}) 	{ dk_call dk_echo " DKPOWERSHELL_FUNCTIONS_DIR = '${DKPOWERSHELL_FUNCTIONS_DIR}'"                        }
     if(${DKPOWERSHELL_FUNCTIONS_DIR_})	{ dk_call dk_echo "DKPOWERSHELL_FUNCTIONS_DIR_ = '${DKPOWERSHELL_FUNCTIONS_DIR_}'"                       }
-    
-    #dk_call setGlobal GLOBAL_VAR "This is a global variable"
-	${global:GLOBAL_VAR}="This is a global variable"
-	#dk_call setReturn RETURN_VAR "This is a return variable"
-	${global:RETURN_VAR}="This is a return variable"
-	
-	                                      dk_call dk_echo ""
-	if(${GLOBAL_VAR})    				{ dk_call dk_echo "                 GLOBAL_VAR = ${GLOBAL_VAR}"                                          }
-	if(${GLOBAL_VAR})    				{ dk_call dk_echo "                 RETURN_VAR = ${RETURN_VAR}"                                          }
+
+	${global:dk_test}="Return string from Test/Test/dk_test.ps1";
+	return ${dk_test}; 
 }
 
 

@@ -37,7 +37,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::############ DKPowershell function call ############
 	::%dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%
 	
-	set DKCOMMAND=%POWERSHELL_EXE% -Command "$global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%"
+	set DKCOMMAND=%POWERSHELL_EXE% -Command "$global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%; Write-Host ${%~1};"
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKPowershell=%dk_exec%"
