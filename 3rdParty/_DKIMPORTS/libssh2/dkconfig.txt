@@ -1,0 +1,4 @@
+############ libssh2 ############
+# https://github.com/libssh2/libssh2.git
+
+libssh2_Import=https://github.com/libssh2/libssh2/archive/a8bc96c.zip

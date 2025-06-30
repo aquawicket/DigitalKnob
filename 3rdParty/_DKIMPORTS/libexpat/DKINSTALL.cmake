@@ -17,7 +17,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
-dk_import(https://github.com/libexpat/libexpat/archive/b70c8f5.zip)
+dk_import(${libexpat_Import})
 
 ### LINK ###
 dk_include			(${LIBEXPAT}/include				    	LIBEXPAT_INCLUDE_DIR)

@@ -1,0 +1,4 @@
+############ libexpat ############
+# https://github.com/libexpat/libexpat.git
+
+libexpat_Import=https://github.com/libexpat/libexpat/archive/b70c8f5.zip

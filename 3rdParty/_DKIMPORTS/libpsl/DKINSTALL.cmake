@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
-dk_import(https://github.com/rockdaboot/libpsl/archive/490bd6f.zip)
+dk_import(${libpsl_Import})
 
 
 

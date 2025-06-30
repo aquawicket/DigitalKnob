@@ -20,4 +20,4 @@ include_guard()
 # https://github.com/eyeseaevan/lzo-2.10.git
 dk_validate(Target_Config  "dk_Target_Config()")
 
-dk_import(https://github.com/SyntaxSnack/lzo-2.10/archive/f2895503.zip)
+dk_import(${lzo_Import})

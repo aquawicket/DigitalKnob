@@ -19,7 +19,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 #dk_import(https://github.com/lz4/lz4.git BRANCH dev)
-dk_import(https://github.com/lz4/lz4/archive/refs/heads/dev.zip)
+dk_import(${lz4_Import})
 
 
 # TODO

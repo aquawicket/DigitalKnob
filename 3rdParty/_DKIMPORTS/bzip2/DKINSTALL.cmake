@@ -13,13 +13,14 @@ include_guard()
 
 
 ############ bzip2 ############
-dk_validate(Host_Tuple "dk_Host_Tuple()")
 # https://www.sourceware.org/bzip2
 # https://gitlab.com/bzip2/bzip2
 # https://github.com/kiyolee/bzip2-win-build
 # https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
 # https://gitlab.com/bzip2/bzip2/-/archive/bzip2-1.0.8/bzip2-bzip2-1.0.8.zip
 # https://gist.github.com/DanAlbert/c7b6b2d93d4f6d672707803a6715095e			# Android COMPILE
+
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 
 ### DEPEND ###
 #dk_depend(libgcc)
@@ -28,8 +29,7 @@ dk_depend(pytest)
 dk_depend(msys2)
 
 ### IMPORT ###
-##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import(${Bzip2_Import})
+dk_import(${bzip2_Import})
 dk_assertVar(BZIP2)
 
 dk_include			(${BZIP2}/								BZIP2_INCLUDE_DIR)

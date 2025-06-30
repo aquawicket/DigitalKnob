@@ -29,7 +29,7 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/GNOME/libxml2/archive/refs/tags/v2.12.5.tar.gz)
+dk_import(${libxml2_Import})
 
 if(NOT EXISTS ${LIBXML2}/configure)
 	dk_depend(autoconf)

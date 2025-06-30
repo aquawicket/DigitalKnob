@@ -1,1 +1,4 @@
-BACKWARD_CPP_IMPORT=https://github.com/bombela/backward-cpp/archive/51f0700.zip
+############ backward-cpp ############
+# https://github.com/bombela/backward-cpp.git
+
+backward_cpp_Import=https://github.com/bombela/backward-cpp/archive/51f0700.zip

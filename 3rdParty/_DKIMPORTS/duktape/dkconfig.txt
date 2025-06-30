@@ -6,4 +6,4 @@
 # https://github.com/svaarala/duktape/archive/refs/heads/master.zip
 # https://wiki.duktape.org/projectsusingduktape
 
-duktape_IMPORT=https://github.com/aquawicket/duktape/archive/0701a46.zip
+duktape_Import=https://github.com/aquawicket/duktape/archive/0701a46.zip

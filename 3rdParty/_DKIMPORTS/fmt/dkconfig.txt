@@ -2,4 +2,4 @@
 # https://github.com/fmtlib/fmt.git
 # https://fmt.dev/latest/index.html
 
-fmt_IMPORT=https://github.com/fmtlib/fmt/archive/fade652a.zip
+fmt_Import=https://github.com/fmtlib/fmt/archive/fade652a.zip
