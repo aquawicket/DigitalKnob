@@ -15,4 +15,4 @@ include_guard()
 ############ core-js ############
 # https://github.com/zloirock/core-js.git
 
-dk_import(https://github.com/zloirock/core-js/archive/edb0539.zip)
+dk_import(${core_js_Import})

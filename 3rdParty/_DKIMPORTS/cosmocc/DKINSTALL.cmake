@@ -14,7 +14,7 @@ include_guard()
 ###### [cosmocc] ######
 # https://cosmo.zip
 
-dk_import(https://cosmo.zip/pub/cosmocc/cosmocc.zip)
+dk_import(${cosmocc_Import})
 
 #dk_set(COSMO		 							1)
 #dk_set(Cosmopolitan 							1)

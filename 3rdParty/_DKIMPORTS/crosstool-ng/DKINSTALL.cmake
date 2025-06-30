@@ -16,4 +16,4 @@ include_guard()
 ###### [crosstool-ng] ######
 # https://github.com/crosstool-ng/crosstool-ng
 
-dk_import(https://github.com/crosstool-ng/crosstool-ng/archive/32f288e.zip)
+dk_import(${crosstool_ng_Import})

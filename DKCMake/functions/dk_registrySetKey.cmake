@@ -24,14 +24,17 @@ include_guard()
 function(dk_registrySetKey key value data)
 	dk_debugFunc()
 
-	
+	dk_validate(Host_Os "dk_Host_Os()")
 	if(Windows_Host)
+		dk_validate(REG_EXE "dk_REG_EXE()")
 		dk_replaceAll(${key}  "/"  "\\"  key)
 		dk_replaceAll(${value}  "/"  "\\"  value)
 		dk_replaceAll(${data}  "/"  "\\"  data)
-		execute_process(COMMAND reg add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output ERROR_VARIABLE _output RESULT_VARIABLE _failed)
-		dk_verbose(output)
-		dk_verbose(_failed)
+		#execute_process(COMMAND reg add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output ERROR_VARIABLE _output RESULT_VARIABLE _failed)
+		dk_exec(${REG_EXE} add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output)
+		dk_verbose(dk_exec_output)
+	else()
+		dk_error("dk_registrySetKey() is only available on Windows_Host")
 	endif()
 endfunction()
 
@@ -42,5 +45,15 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	message("DKTEST")
+	
+	dk_set(dk_exec_PRINT_CALL		1) 			# dk_exec_call
+	dk_set(dk_exec_PRINT_COMMAND	1) 			# dk_exec_command
+	dk_set(dk_exec_PRINT_EXITCODES	1)			# dk_exec_exitcodes
+	dk_set(dk_exec_PRINT_EXITCODE 	1)			# dk_exec_exitcode
+	dk_set(dk_exec_PRINT_STDERR 	1)			# dk_exec_stderr[]
+	dk_set(dk_exec_PRINT_STDOUT		1)			# dk_exec_stdout[]
+	dk_set(dk_exec_PRINT_OUTPUT 	1)			# dk_exec
+
+	dk_registrySetKey("HKCU/aquawicket/test" "test value" "user data test")
 endfunction()

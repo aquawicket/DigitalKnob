@@ -23,10 +23,10 @@ if((NOT Windows_Host) OR (NOT Cosmopolitan))
 endif()
 
 
-dk_import(https://justine.lol/linux-compiler-on-windows/cross9.zip)
+dk_import(${cross9_Import})
 
-#dk_set(CROSS9_DL https://justine.lol/linux-compiler-on-windows/cross9.zip)
-#dk_importVariables(${CROSS9_DL})
+#dk_set(cross9_Import https://justine.lol/linux-compiler-on-windows/cross9.zip)
+#dk_importVariables(${cross9_Import})
 
 
 #if(NOT EXISTS ??)
@@ -34,7 +34,7 @@ dk_import(https://justine.lol/linux-compiler-on-windows/cross9.zip)
 #	dk_echo("Installing ${CROSS9_FOLDER}")
 	
 	### Download ###
-#	dk_download(${CROSS9_DL} $ENV{DKDOWNLOAD_DIR})
+#	dk_download(${cross9_Import} $ENV{DKDOWNLOAD_DIR})
 
 
 #endif()

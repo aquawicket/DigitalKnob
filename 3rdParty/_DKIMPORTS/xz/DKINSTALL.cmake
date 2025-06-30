@@ -12,16 +12,18 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ xz ############
 # https://github.com/tukaani-project/xz.git
 # https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz
 # https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
+
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 
 #dk_import(https://github.com/tukaani-project/xz.git)
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import("${Xz_Import}")
+dk_import("${xz_Import}")
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
 #dk_fileReplace("${XZ}/src/liblzma/common/common.h" "__declspec(dllexport)" "")
@@ -29,11 +31,11 @@ dk_import("${Xz_Import}")
 
 ### autotools ###
 #dk_set(XZ_VERSION 5.2.5)
-#dk_set(Xz_Import https://tukaani.org/xz/${XZ_FOLDER}.tar.gz)
+#dk_set(xz_Import https://tukaani.org/xz/${XZ_FOLDER}.tar.gz)
 #dk_set(XZ_NAME xz-${XZ_VERSION})
 #dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
 #dk_set(XZ $ENV{DK3RDPARTY_DIR}/${XZ_FOLDER})
-#dk_import(${Xz_Import} ${XZ})
+#dk_import(${xz_Import} ${XZ})
 
 
 ### LINK ###
@@ -160,9 +162,9 @@ Windows_X86_dk_build			(${XZ})
 Windows_X86_64_Debug_dk_chdir	(${XZ_DEBUG_DIR})
 Windows_X86_64_Debug_dk_exec(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
-Windows_X86_64_Release_dk_chdir		(${XZ_RELEASE_DIR})
+Windows_X86_64_Release_dk_chdir	(${XZ_RELEASE_DIR})
 Windows_X86_64_Debug_dk_exec(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
-Windows_X86_64_dk_build				(${XZ})
+Windows_X86_64_dk_build			(${XZ})
 
 #endif()

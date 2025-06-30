@@ -24,12 +24,12 @@ if(CYGWIN)
 
 	#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 	
-	dk_importVariables(${Cygwin_Windows_X86_64_Import})
-	dk_set(CYGWIN_EXE "${CYGWIN_DIR}/Cygwin.bat")
+	dk_importVariables(${cygwin_${Host_Tuple}_Import})
+	dk_set(CYGWIN_EXE "${CYGWIN}/Cygwin.bat")
 
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 
-	if(NOT EXISTS "${CYGWIN_DIR}/bin/${CYGWIN_IMPORT_FILE}")
+	if(NOT EXISTS "${CYGWIN}/bin/${CYGWIN_IMPORT_FILE}")
 		dk_echo("Installing ${CYGWIN_FOLDER}")
 		
 		### Download ###
@@ -39,13 +39,13 @@ if(CYGWIN)
 		dk_firewallAllow("Cygwin_Setup" "$ENV{DKDOWNLOAD_DIR}/setup-x86_64.exe")
 		
 		### Install Cygwin ###
-		dk_exec("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" --quiet-mode --root ${CYGWIN_DIR})
+		dk_exec("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" --quiet-mode --root ${CYGWIN})
 		
 		### Install Packages ###
 		dk_exec("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" -a x86_64 -d -q -P "tar,wget,gcc-core,gcc-g++,binutils,make,cmake,automake,autoconf,git,patch,unzip,flex,bison,gperf,help2man,libtool,gettext,libgmp10,libgmp-devel,libmpfr6,libmpfr-devel,libmpc3,libmpc-devel,libncurses-devel,libintl-devel")
 		
 		### Copy Setup exe to /bin ###
-		dk_copy("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" "${CYGWIN_DIR}/bin/${CYGWIN_IMPORT_FILE}")   # copy the installer to use as a package manager
+		dk_copy("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" "${CYGWIN}/bin/${CYGWIN_IMPORT_FILE}")   # copy the installer to use as a package manager
 	endif()	
 
 	#if(NOT EXISTS "???")
@@ -54,7 +54,7 @@ if(CYGWIN)
 	dk_validate(CMD_EXE "dk_CMD_EXE()")
 	dk_nativePath("${CMD_EXE}" CMD_EXE)
 	set(INSTALL_CROSSTOOL_CMD "$ENV{DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
-	execute_process(COMMAND ${CMD_EXE} /c "${INSTALL_CROSSTOOL_CMD}")
+	dk_exec(${CMD_EXE} /c "${INSTALL_CROSSTOOL_CMD}")
 	
 	#execute_process(COMMAND ${CYGWIN_EXE} & crosstool-ng-build.sh)
 	#endif	

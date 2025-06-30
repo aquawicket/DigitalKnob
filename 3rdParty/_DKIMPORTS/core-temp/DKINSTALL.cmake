@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-###### [core-temp] ######
+###### core-temp ######
 # https://www.alcpu.com/CoreTemp
 # https://www.alcpu.com/CoreTemp/Core-Temp-setup-v1.18.1.0.exe
 # https://www.alcpu.com/CoreTemp/CoreTemp32.zip
@@ -24,11 +24,11 @@ include_guard()
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(Windows_X86_Host)
-	dk_set	(CORE_TEMP_IMPORT   ${CORE_TEMP_WIN32_IMPORT})
+	dk_set	(CORE_TEMP_IMPORT   ${core_temp_Windows_X86_Import})
 elseif(Windows_X86_64_Host)
-	dk_set	(CORE_TEMP_IMPORT   ${CORE_TEMP_WIN64_IMPORT})
+	dk_set	(CORE_TEMP_IMPORT   ${core_temp_Windows_X86_64_Import})
 else()
-	dk_set	(CORE_TEMP_IMPORT   ${CORE_TEMP_EXE_IMPORT})
+	dk_set	(CORE_TEMP_IMPORT   ${core_temp_Setup_Import})
 endif()
 
 set(CORE_TEMP_EXE "${CORE_TEMP}/Core Temp.exe")

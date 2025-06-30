@@ -1,0 +1,4 @@
+###### cosmocc ######
+# https://cosmo.zip
+
+cosmocc_Import=https://cosmo.zip/pub/cosmocc/cosmocc.zip

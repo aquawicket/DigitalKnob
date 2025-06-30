@@ -19,6 +19,7 @@ include_guard()
 function(dk_test)
 	#dk_debugFunc()   
     
+	set(dk_test		"Value from dk_test)
     dk_echo( "################# Test/Test/dk_test.cmake #################")
     dk_echo( "                     ARGV0 = ${ARGV0}")
     dk_echo( "                     ARGV1 = ${ARGV1}")

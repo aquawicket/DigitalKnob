@@ -18,10 +18,14 @@ include_guard()
 function(dk_registryKeyExists)
     dk_debugFunc()
 	
-	dk_depend(cmd)
-	set(cmnd ${CMD_EXE} /c "reg.exe" query %~1)
-	execute_process(COMMAND echo ${cmnd} RESULT_VARIABLE result)
-	message("result = ${result}")
+	dk_validate(Host_Os "dk_Host_Os()")
+	if(Windows_Host)
+		dk_validate(REG_EXE "dk_REG_EXE()")
+		dk_exec(${REG_EXE} query ${ARGV0})
+		message("dk_exec = ${dk_exec}")
+	else()
+		dk_error("dk_registryKeyExists() is only available on Windows_Host")
+	endif()
 endfunction()
 
 
@@ -32,6 +36,14 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
     
+	dk_set(dk_exec_PRINT_CALL		1) 			# dk_exec_call
+	dk_set(dk_exec_PRINT_COMMAND	1) 			# dk_exec_command
+	dk_set(dk_exec_PRINT_EXITCODES	1)			# dk_exec_exitcodes
+	dk_set(dk_exec_PRINT_EXITCODE 	1)			# dk_exec_exitcode
+	dk_set(dk_exec_PRINT_STDERR 	1)			# dk_exec_stderr[]
+	dk_set(dk_exec_PRINT_STDOUT		1)			# dk_exec_stdout[]
+	dk_set(dk_exec_PRINT_OUTPUT 	1)			# dk_exec
+	
     #dk_registryKeyExists("HKEY_CURRENT_USER/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.txt")
     dk_registryKeyExists(HKEY_CURRENT_USER)
 	dk_registryKeyExists(HKEY_LOCAL_MACH)

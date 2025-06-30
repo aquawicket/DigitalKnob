@@ -33,8 +33,7 @@ function(dk_upxCompress)
 	dk_info("File size before UPX compression ${FILESIZE}")
 	
 	set(comand ${UPX_EXE} -9 -v --force ${path})
-	message("comand = ${comand}")
-	execute_process(COMMAND ${comand})
+	dk_exec(${comand})
 	
 	file(SIZE "${path}" FILESIZE)
 	dk_info("File size after UPX compression ${FILESIZE}")

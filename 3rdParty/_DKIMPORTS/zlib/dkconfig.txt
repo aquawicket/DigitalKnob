@@ -1,1 +1,6 @@
-ZLIB_IMPORT=https://github.com/madler/zlib/archive/d476828.zip
+############ zlib ############
+# https://github.com/madler/zlib.git
+# http://www.zlib.net
+# https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz
+
+zlib_Import=https://github.com/madler/zlib/archive/d476828.zip

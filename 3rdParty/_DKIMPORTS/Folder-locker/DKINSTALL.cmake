@@ -18,7 +18,7 @@ include_guard()
 
 ### INSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${FOLDER-LOCKER_IMPORT} NAME Folder-locker)
+dk_import			(${folder_locker_Import})
 dk_set(folderLocker.exe "${FOLDER-LOCKER}/BIN/folderLocker.exe")
 if(EXISTS ${folderLocker.exe})
 	dk_debug("folderLocker.exe already installed")

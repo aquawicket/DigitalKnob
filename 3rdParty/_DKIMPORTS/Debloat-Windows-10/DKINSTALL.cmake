@@ -17,4 +17,4 @@ include_guard()
 
 ### INSTALL ###
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${Debloat_Windows_10_Import})
+dk_import		(${debloat_windows_10_Import})

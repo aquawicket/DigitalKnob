@@ -21,8 +21,6 @@ if(NOT Windows_Host)
 	dk_return()
 endif()
 
-if(Windows_X86_Host)
-	dk_import	(https://www.dependencywalker.com/depends22_x86.zip)
-elseif(Windows_X86_64_Host)
-	dk_import	(https://www.dependencywalker.com/depends22_x64.zip)
-endif()
+
+dk_import(${dependencywalker_${Host_Tuple}_Import})
+

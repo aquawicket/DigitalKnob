@@ -1,0 +1,4 @@
+###### [crosstool-ng] ######
+# https://github.com/crosstool-ng/crosstool-ng
+
+crosstool_ng_Import=https://github.com/crosstool-ng/crosstool-ng/archive/32f288e.zip

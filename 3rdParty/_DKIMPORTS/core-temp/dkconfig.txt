@@ -1,3 +1,9 @@
-CORE_TEMP_EXE_IMPORT=https://www.alcpu.com/CoreTemp/Core-Temp-setup-v1.18.1.0.exe
-CORE_TEMP_WIN32_IMPORT=https://www.alcpu.com/CoreTemp/CoreTemp32.zip
-CORE_TEMP_WIN64_IMPORT=https://www.alcpu.com/CoreTemp/CoreTemp64.zip
+###### core-temp ######
+# https://www.alcpu.com/CoreTemp
+# https://www.alcpu.com/CoreTemp/Core-Temp-setup-v1.18.1.0.exe
+# https://www.alcpu.com/CoreTemp/CoreTemp32.zip
+# https://www.alcpu.com/CoreTemp/CoreTemp64.zip
+
+core_temp_Setup_Import=https://www.alcpu.com/CoreTemp/Core-Temp-setup-v1.18.1.0.exe
+core_temp_Windows_X86_Import=https://www.alcpu.com/CoreTemp/CoreTemp32.zip
+core_temp_Windows_X86_64_Import=https://www.alcpu.com/CoreTemp/CoreTemp64.zip

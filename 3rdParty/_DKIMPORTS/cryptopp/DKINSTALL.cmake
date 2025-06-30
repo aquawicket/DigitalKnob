@@ -12,10 +12,11 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ cryptopp ############
 # https://www.cryptopp.com/
 # https://github.com/weidai11/cryptopp
 
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 if(IOS OR Iossim)
@@ -26,12 +27,11 @@ endif()
 
 ### IMPORT ###
 if(Unix)
-	dk_import	(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
+	dk_import	(${cryptopp_Unix_Import} PATCH)
 elseif(MINGW)
-	dk_import	(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
+	dk_import	(${cryptopp_Unix_Import} PATCH)
 elseif(Windows)
-	dk_import	(https://github.com/weidai11/cryptopp/archive/60f81a77e0c9a0e7ffc1ca1bc438ddfa2e43b78e.zip)
-	#dk_import	(https://github.com/weidai11/cryptopp/archive/refs/heads/master.zip)
+	dk_import	(${cryptopp_Windows_Import})
 endif()
 
 

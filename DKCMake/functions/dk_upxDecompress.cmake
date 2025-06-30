@@ -33,8 +33,7 @@ function(dk_upxDecompress)
 	dk_info("File size before UPX decompression ${FILESIZE}")
 	
 	set(comand ${UPX_EXE} -d ${path})
-	message("comand = ${comand}")
-	execute_process(COMMAND ${comand})
+	dk_exec(${comand})
 	
 	file(SIZE "${path}" FILESIZE)
 	dk_info("File size after UPX decompression ${FILESIZE}")
