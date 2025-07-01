@@ -43,9 +43,7 @@ set "dk_gitUpdate_BACKUP=1"
 			"%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%"
 			"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
 			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
-			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %DKBRANCH% && echo checkout returned true || echo checkout returned false
-			
-			if "%ERRORLEVEL%" neq "0" (
+			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %DKBRANCH% || (
 				%dk_call% dk_echo "Remote has no '%DKBRANCH%' branch. Creating..."
 				"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %DKBRANCH% main
 				"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %DKBRANCH%
@@ -61,9 +59,7 @@ set "dk_gitUpdate_BACKUP=1"
 	::###### Update ######
 	"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
 	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
-	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %DKBRANCH% echo checkout returned true || echo checkout returned false
-			
-	if "%ERRORLEVEL%" neq "0" (
+	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %DKBRANCH% || (
 		%dk_call% dk_echo "Remote has no '%DKBRANCH%' branch. Creating..."
 		"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %DKBRANCH% main
 		"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %DKBRANCH%
