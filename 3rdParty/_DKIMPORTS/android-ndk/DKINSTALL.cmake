@@ -15,7 +15,6 @@ include_guard()
 ###### android-ndk ######
 #
 
-
 dk_depend(android-sdk)
 
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
@@ -140,7 +139,7 @@ dk_set(ANDROID_BASH					"export ANDROID_NDK_ROOT=${ANDROID_NDK_ROOT};"
 
 
 ###### Android TARGET ENVIRONMENT VARIABLES ######
-if(Android)
+#if(Android)
 	dk_setEnv						("AR"				"${ANDROID_AR}")
 	dk_setEnv						("CC" 				"${ANDROID_C_COMPILER}")
 	dk_setEnv						("CXX"				"${ANDROID_CXX_COMPILER}")
@@ -150,4 +149,4 @@ if(Android)
 	dk_setEnv						("ANDROID_NDK_ROOT" "${ANDROID_NDK_ROOT}")
 	dk_prependEnvPath				("${ANDROID_BIN}")
 	dk_prependEnvPath				("${ANDROID_INCLUDE}")
-endif()
+#endif()

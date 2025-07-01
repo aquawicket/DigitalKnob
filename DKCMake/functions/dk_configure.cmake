@@ -173,16 +173,40 @@ function(dk_configure)
 		dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 	endif()
 	
+######### TODO - revamp the variable system ##################################	
+#	
+#	 Old Variable            New Variable                    Value
+#	
+#	  ${PLUGIN}		  	  ${CURRENT_PLUGIN}					:LIBEXPAT
+#	${${PLUGIN}}		${${CURRENT_PLUGIN}}				:LIBEXPAT 				= C:/Users/Administrator/DigitalKnob/Development/3rdParty/libexpat-b70c8f5
+#						${${CURRENT_PLUGIN}_FOLDER}			:LIBEXPAT_FOLDER 		= libexpat-b70c8f5
+#     ${plugin}   		${${CURRENT_PLUGIN}_IMPORT_NAME}  	:LIBEXPAT_IMPORT_NAME 	= libexpat
+#     ${Plugin_Path}	${${CURRENT_PLUGIN}_IMPORT_PATH}    :LIBEXPAT_IMPORT_PATH 	= C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/libexpat
+#						CMAKE_INSTALL_PREFIX 										= C:/Users/Administrator/DigitalKnob/DKBIN
+
+	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_debug("plugin = ${plugin}")
+	#dk_debug("${plugin} = ${${plugin}}")
+	dk_debug("${PLUGIN} = ${${PLUGIN}}")
+	dk_debug("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
 	
+	dk_debug("${CURRENT_PLUGIN}_FOLDER = ${${CURRENT_PLUGIN}_FOLDER}")
 	
+	dk_debug("Plugin_Path = ${Plugin_Path}")
+	#dk_getPathToPlugin(${plugin} Plugin_Path)
+	dk_set(${CURRENT_PLUGIN}_IMPORT_PATH "${Plugin_Path}")
+	dk_debug("${CURRENT_PLUGIN}_IMPORT_PATH = ${${CURRENT_PLUGIN}_IMPORT_PATH}")
+	
+	dk_debug("${CURRENT_PLUGIN}_IMPORT_NAME = ${${CURRENT_PLUGIN}_IMPORT_NAME}")
+	dk_debug("CMAKE_INSTALL_PREFIX = ${CMAKE_INSTALL_PREFIX}")
 	
 	
 	# ADD THE 3rdParty library TO THE APP SOLUTION
 	if(PROJECT_INCLUDE_3RDPARTY)
 		if(NOT CMAKE_SCRIPT_MODE_FILE)
-			if(EXISTS "${${PLUGIN}}/CMakeLists.txt")
+			if(EXISTS "${${CURRENT_PLUGIN}}/CMakeLists.txt")
 				dk_debug("adding ${${plugin}} to the project solution")
-				add_subdirectory(${${PLUGIN}} ${${PLUGIN}}/${Target_Config})
+				add_subdirectory(${${CURRENT_PLUGIN}} ${${CURRENT_PLUGIN}}/${Target_Config})
 			endif()
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
