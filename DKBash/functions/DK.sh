@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #echo "DK() 0='${0}' 1='${1-}' *='${*}'"
-[ -n "${DK_SH-}" ] && return
-export DK_SH=1
+[ -n "${DK_SH-}" ] && return || export DK_SH=1
+echo "loaded DK.sh"
 
 if [ -z "${DKSCRIPT_PATH-}" ]; then
 	[ -e "${1-}" ] && DKSCRIPT_PATH="${1-}" || DKSCRIPT_PATH="${0}"
