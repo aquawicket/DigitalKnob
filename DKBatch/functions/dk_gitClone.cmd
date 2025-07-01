@@ -3,7 +3,7 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-::set "dk_gitClone_BACKUP=1"
+set "dk_gitClone_BACKUP=1"
 ::################################################################################
 ::# dk_gitClone(url, branch, dirctory)
 ::#
@@ -12,9 +12,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2 3
    
-	if not defined _URL_ set "_URL_=%~1"
-	if not defined DKBRANCH_DIR set "DKBRANCH_DIR=%~3"
-	if not exist "%DKBRANCH_DIR%" %dk_call% dk_mkdir "%DKBRANCH_DIR:/=\%"
+	if not defined _URL_ (set "_URL_=%~1")
+	if not defined DKBRANCH_DIR (set "DKBRANCH_DIR=%~3")
+	if not exist "%DKBRANCH_DIR%" (%dk_call% dk_mkdir "%DKBRANCH_DIR:/=\%")
 
 	::###### error if repository already exists
 	if exist "%DKBRANCH_DIR%/.git" (%dk_call% dk_error "'%DKBRANCH_DIR%/.git' repository already exists" & %return%)
@@ -32,7 +32,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::###### Clone if directory doesn't exist or is empty
 	if not exist "%DKBRANCH_DIR%" ("%GIT_EXE%" -C "%DKBRANCH_DIR%" clone "%_URL_%" "%DKBRANCH_DIR%" && %return%)
-	%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" && ("%GIT_EXE%" -C "%DKBRANCH_DIR%" clone %_URL_% "%DKBRANCH_DIR%" && %return%)
+	%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" && ("%GIT_EXE%" -C "%DKBRANCH_DIR%" clone %_URL_% "%DKBRANCH_DIR%" & %return%)
 	
 	::###### Fetch and checkout if directory already exists and is not empty
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" init -b %~2
