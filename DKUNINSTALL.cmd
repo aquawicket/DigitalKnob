@@ -34,13 +34,13 @@ setlocal
 	echo ############ Uninstall 3rdParty #############
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% "%DKIMPORTS_DIR%/git/contextMenu/DKUNINSTALL.cmd"
-	%dk_call% "%DKIMPORTS_DIR%/python/DKUNINSTALL.cmd"
-	%dk_call% "%DKIMPORTS_DIR%/python3/DKUNINSTALL.cmd"
-	%dk_call% "%DKIMPORTS_DIR%/tcc-rt/DKUNINSTALL.cmd"
-	%dk_call% "%DKIMPORTS_DIR%/vc_redist/DKUNINSTALL.cmd"
-	%dk_call% "%DKIMPORTS_DIR%/visualstudio/DKUNINSTALL.cmd"
-	%dk_call% "%DKIMPORTS_DIR%/vs_coreeditorfonts/DKUNINSTALL.cmd"
-	%dk_call% "%DKIMPORTS_DIR%/windows-sdk/DKUNINSTALL.cmd"
+::	%dk_call% "%DKIMPORTS_DIR%/python/DKUNINSTALL.cmd"
+::	%dk_call% "%DKIMPORTS_DIR%/python3/DKUNINSTALL.cmd"
+::	%dk_call% "%DKIMPORTS_DIR%/tcc-rt/DKUNINSTALL.cmd"
+::	%dk_call% "%DKIMPORTS_DIR%/vc_redist/DKUNINSTALL.cmd"
+::	%dk_call% "%DKIMPORTS_DIR%/visualstudio/DKUNINSTALL.cmd"
+::	%dk_call% "%DKIMPORTS_DIR%/vs_coreeditorfonts/DKUNINSTALL.cmd"
+::	%dk_call% "%DKIMPORTS_DIR%/windows-sdk/DKUNINSTALL.cmd"
 	::%dk_call% "%DKIMPORTS_DIR%/wsl/DKUNINSTALL.cmd"
 	
 	::###### Kill lingering processes ######
@@ -69,16 +69,18 @@ setlocal
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	%dk_call% dk_delete "%DKCACHE_DIR%"
 
-	::###### Deleting DIGITALKNOB_DIR ######
-	echo ### Deleting DIGITALKNOB_DIR ###
-	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	echo Do you want to delete the DigitalKnob folder ?
-	%dk_call% dk_confirm || (exit /b 0)
+::	::###### Deleting DIGITALKNOB_DIR ######
+::	echo ### Deleting DIGITALKNOB_DIR ###
+::	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+::	echo Do you want to delete the DigitalKnob folder ?
+::	%dk_call% dk_confirm || (exit /b 0)
+::	
+::	::###### Create a deleter and run it in a new process and exit this script
+::	echo ((goto) 2^>nul ^& cd "%SystemDrive%\" ^&^& rmdir /s /q "%DIGITALKNOB_DIR:/=\%") > "%TEMP%\delete_DK.cmd"
+::	echo ((goto) 2^>nul ^& del "%TEMP%\delete_DK.cmd" ^& cmd /c exit /b 0) >> "%TEMP%\delete_DK.cmd"
+::	start "" /MIN "%TEMP%\delete_DK.cmd" & exit
 	
-	::###### Create a deleter and run it in a new process and exit this script
-	echo ((goto) 2^>nul ^& cd "%SystemDrive%\" ^&^& rmdir /s /q "%DIGITALKNOB_DIR:/=\%") > "%TEMP%\delete_DK.cmd"
-	echo ((goto) 2^>nul ^& del "%TEMP%\delete_DK.cmd" ^& cmd /c exit /b 0) >> "%TEMP%\delete_DK.cmd"
-	start "" /MIN "%TEMP%\delete_DK.cmd" & exit
+	%dk_call% dk_deleteDigitalKnob
 %endfunction%
 
 
