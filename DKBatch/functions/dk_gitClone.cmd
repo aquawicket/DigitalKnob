@@ -19,10 +19,10 @@ set "dk_gitClone_BACKUP=1"
 	::###### error if repository already exists
 	if exist "%DKBRANCH_DIR%/.git" (%dk_call% dk_error "'%DKBRANCH_DIR%/.git' repository already exists" & %return%)
 		
-	::###### backup if local path already exists and is not empty
+	::###### backup if local path already exists
 	if "%dk_gitClone_BACKUP%" equ "1" (
 		%dk_call% dk_echo "Backing up %DKBRANCH_DIR% . . ."
-		%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" || (%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE)
+		%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
 		if not exist ("%DKBRANCH_DIR%_BACKUP" %dk_call% dk_fatal "dk_copy failed")
 	) else (
 		%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" || (%dk_call% dk_delete "%DKBRANCH_DIR%")
