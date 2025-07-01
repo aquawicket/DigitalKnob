@@ -34,7 +34,7 @@ dk_depend(zstd)
 #-- Could NOT find GLUT (missing: GLUT_glut_LIBRARY)
 
 ### IMPORT ###
-dk_import(https://gitlab.com/libtiff/libtiff/-/archive/685c7326/libtiff-685c7326.zip)
+dk_import(${tiff_Import})
 
 ### LINK ###
 dk_include					(${TIFF}/libtiff										TIFF_INCLUDE_DIR)

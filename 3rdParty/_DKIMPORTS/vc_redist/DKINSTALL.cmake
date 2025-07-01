@@ -32,11 +32,11 @@ dk_set(VCRUNTIME140_X86_DLL "$ENV{SystemDrive}/Windows/SysWOW64/vcruntime140.dll
 dk_set(VCRUNTIME140_X86_DEBUG_DLL "$ENV{SystemDrive}/Windows/SysWOW64/vcruntime140d.dll")
 ### INSTALL ###
 if((NOT EXISTS "${VCCOMP140_X86_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_DEBUG_DLL}"))
-	dk_basename(${VC_REDIST_X86_IMPORT} VC_REDIST_X86_IMPORT_FILE)
-	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_IMPORT_FILE}")
-	dk_download(${VC_REDIST_X86_IMPORT})
+	dk_basename(${vc_redist_Windows_X86_Import} vc_redist_Windows_X86_Import_FILE)
+	dk_info("Installing Visual C Redistributable - ${vc_redist_Windows_X86_Import_FILE}")
+	dk_download(${vc_redist_Windows_X86_Import})
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_exec($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_IMPORT_FILE} /install /quiet /norestart)
+	dk_exec($ENV{DKDOWNLOAD_DIR}/${vc_redist_Windows_X86_Import_FILE} /install /quiet /norestart)
 endif()
 
 
@@ -48,10 +48,10 @@ dk_set(VCRUNTIME140_X86_64_DLL "$ENV{SystemDrive}/Windows/System32/vcruntime140.
 dk_set(VCRUNTIME140_X86_64_DEBUG_DLL "$ENV{SystemDrive}/Windows/System32/vcruntime140d.dll")
 ### INSTALL ###
 if((NOT EXISTS "${VCCOMP140_X86_64_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_64_DEBUG_DLL}"))
-	dk_basename(${VC_REDIST_X86_64_IMPORT} VC_REDIST_X86_64_IMPORT_FILE)
-	dk_info("Installing Visual C Redistributable - ${VC_REDIST_X86_64_IMPORT_FILE}")
-	dk_download(${VC_REDIST_X86_64_IMPORT})
+	dk_basename(${vc_redist_Windows_X86_64_Import} vc_redist_Windows_X86_64_Import_FILE)
+	dk_info("Installing Visual C Redistributable - ${vc_redist_Windows_X86_64_Import_FILE}")
+	dk_download(${vc_redist_Windows_X86_64_Import})
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_exec($ENV{DKDOWNLOAD_DIR}/${VC_REDIST_X86_64_IMPORT_FILE} /install /quiet /norestart)
+	dk_exec($ENV{DKDOWNLOAD_DIR}/${vc_redist_Windows_X86_64_Import_FILE} /install /quiet /norestart)
 endif()
 
