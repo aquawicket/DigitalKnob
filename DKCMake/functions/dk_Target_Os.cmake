@@ -38,6 +38,9 @@ function(dk_Target_Os)
 		if(NOT Host_Os)
 			dk_Host_Os()
 		endif()
+		
+		### TODO: add cached option here ###
+		
 		dk_echo(" 1) ${Host_Os}")
 		dk_echo()
 		dk_echo(" 2) Android")
