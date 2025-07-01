@@ -17,6 +17,7 @@ include_guard()
 # https://www.php.net
 # https://windows.php.net/downloads/releases
 dk_validate(Host_Tuple "dk_Host_Tuple()")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 if(NOT Windows_Host)
 	dk_undepend(php-src)
@@ -24,20 +25,14 @@ if(NOT Windows_Host)
 endif()
 
 
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+
 
 
 ### DEPEND ###
 dk_depend(vc_redist) #for VCRUNTIME140.dll
 
 ### IMPORT ###
-#dk_import			(https://windows.php.net/downloads/releases/php-8.2.7-Win32-vs16-x86.zip)		# old
-#dk_import			(https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip)		# old
-#dk_import			(https://github.com/php/php-src.git)											# git
-#dk_import			(https://github.com/php/php-src/archive/refs/heads/master.zip)					# zip
-Unix_dk_import		(${PHP_SRC_UNIX})				# unix binary
-Windows_X86_dk_import   (${PHP_SRC_WIN_X86_DL})			# Windows_X86 binary
-Windows_X86_64_dk_import(${PHP_SRC_WIN_X86_64_DL})		# Windows_x86_64 binary
+dk_import(${php_src_${Host_Tuple}_Import})
 
 
 

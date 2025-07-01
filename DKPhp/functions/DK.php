@@ -16,15 +16,15 @@ function DK(){
 	}
 	
 	$DKSCRIPT_PATH = $argv[0];
-	$DKSCRIPT_DIR = dirname("${DKSCRIPT_PATH}");
-	$DKSCRIPT_FILE = basename("${DKSCRIPT_PATH}");
+	$DKSCRIPT_DIR = dirname("{$DKSCRIPT_PATH}");
+	$DKSCRIPT_FILE = basename("{$DKSCRIPT_PATH}");
 	$DKSCRIPT_NAME = pathinfo($DKSCRIPT_FILE, PATHINFO_FILENAME);
 	$DKSCRIPT_EXT =	".".pathinfo($DKSCRIPT_FILE, PATHINFO_EXTENSION);
-	#echo("DKSCRIPT_PATH = ${DKSCRIPT_PATH}\n");
-	#echo("DKSCRIPT_DIR = ${DKSCRIPT_DIR}\n");
-	#echo("DKSCRIPT_FILE = ${DKSCRIPT_FILE}\n");
-	#echo("DKSCRIPT_NAME = ${DKSCRIPT_NAME}\n");
-	#echo("DKSCRIPT_EXT = ${DKSCRIPT_EXT}\n");
+	#echo("DKSCRIPT_PATH = {$DKSCRIPT_PATH}\n");
+	#echo("DKSCRIPT_DIR = {$DKSCRIPT_DIR}\n");
+	#echo("DKSCRIPT_FILE = {$DKSCRIPT_FILE}\n");
+	#echo("DKSCRIPT_NAME = {$DKSCRIPT_NAME}\n");
+	#echo("DKSCRIPT_EXT = {$DKSCRIPT_EXT}\n");
 
 	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_color.php");
 	include_once("{$DKSCRIPT_PATH}");
@@ -48,9 +48,9 @@ function DK(){
 	#echo "USERPROFILE = $USERPROFILE\n";
 	
 	###### DKTEST MODE ######
-    //[ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
-	//dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || return 0
-	echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."###### DKTEST MODE ###### ${DKSCRIPT_FILE} ###### DKTEST MODE ######".$GLOBALS['clr']."\n\n");
+    //[ "{$DKSCRIPT_EXT}" = ".sh" ] || return 0
+	//dk_fileContains "{$DKSCRIPT_PATH}" "DKTEST()" || return 0
+	echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."###### DKTEST MODE ###### {$DKSCRIPT_FILE} ###### DKTEST MODE ######".$GLOBALS['clr']."\n\n");
 		DKTEST();
     echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."########################## END TEST ################################".$GLOBALS['clr']."\n\n");
 }

@@ -11,7 +11,7 @@ function dk_realpath(){
 
 	$argv = func_get_args();
 	$path = $argv[0];
-	echo "path = ${path}\n";
+	echo "path = {$path}\n";
 
 	echo realpath($path)."\n";
 	return realpath($path);
