@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
     %dk_call% dk_debugFunc 1 2
    
-	set "pathname=%1"
+	set "pathname=%~1"
     set "pathname=%pathname:"=%"
 	
     for %%A in ("%pathname%") do (set "dk_realpath=%%~fA")

@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
     %dk_call% dk_debugFunc 1 2
    
-    set dk_readlink=%1
+    set dk_readlink=%~1
 	::if not exist "%dk_readlink%" (%return%)
 	
     set dk_readlink=%dk_readlink:"=%
