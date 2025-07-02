@@ -22,6 +22,8 @@ include_guard()
 # http://www.[_lib_name_].com
 # https://github.com/organization/[_lib_name_]
 
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+
 ### DEPENDS ###
 #dk_depend(libname)
 

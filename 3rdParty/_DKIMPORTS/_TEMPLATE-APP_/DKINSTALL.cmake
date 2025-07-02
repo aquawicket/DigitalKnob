@@ -19,8 +19,9 @@ include_guard()
 #dk_depend(depend_name)
 
 ### INSTALL ###
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${TEMPLATE})
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_importVariables	(${TEMPLATE_Import})
+dk_import			(${TEMPLATE_Import})
 
 
 #											Single Config										MULTI_CONFIG

@@ -5,15 +5,29 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# DKUNINSTALL
+::# DKINSTALL
 ::#
-:DKUNINSTALL
+:DKINSTALL
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-    %dk_call% dk_cmakeEval "dk_load('%~dp0DKUNINSTALL.cmake')"
-%endfunction%
+	%dk_call% dk_getFileParams	"%~dp0/dkconfig.txt"
+	%dk_call% dk_basename "%~dp0" PLUGIN
 
+	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
+	set "%PLUGIN%_Import=!%PLUGIN%_%Host_Tuple%_Import!"
+	%dk_call% dk_assertVar %PLUGIN%_Import
+
+	%dk_call% dk_importVariables !%PLUGIN%_Import! IMPORT_PATH %DKIMPORTS_DIR%\%PLUGIN%
+	%dk_call% dk_assertVar %PLUGIN%
+
+	set "WEBSOCKETD_EXE=!%PLUGIN%!/websocketd.exe"
+	if exist "%WEBSOCKETD_EXE%" (%return%)
+
+	%dk_call% dk_download "!%PLUGIN%_Import!"
+	%dk_call% dk_smartExtract "%dk_download%" "!%PLUGIN%!"
+	::%dk_call% dk_assertFile WEBSOCKETD_EXE
+%endfunction%
 
 
 
@@ -22,6 +36,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 %setlocal%
 	%dk_call% dk_debugFunc 0
-	
-	call :DKUNINSTALL
+
+	%dk_call% DKINSTALL
 %endfunction%

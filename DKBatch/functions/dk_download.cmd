@@ -56,7 +56,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     :curl_dl
     ::if defined dk_download_DISABLE_curl (goto end_curl_dl)
 	if not defined dk_download_DISABLE_curl (
-		%dk_call% dk_validate CURL_EXE "dk_CURL_EXE"
+		%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
 		if not exist "%destination%_DOWNLOADING" (!CURL_EXE! --help %NO_OUTPUT% && !CURL_EXE! -L "%url%" -o "%destination%_DOWNLOADING")
 		%dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
 		if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")

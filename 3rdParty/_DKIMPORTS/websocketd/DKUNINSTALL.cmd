@@ -3,14 +3,11 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-%dk_call% dk_depend websocketd
-pause
 
-::websocketd --devconsole --port=8080 count.cmd
-::websocketd --devconsole --port=8080 C:\Users\Administrator\DigitalKnob\Development\DKBatch\functions\DKBuilder\DKBuilder.cmd
-websocketd --port=8080 --staticdir=. cmd
+::###### TEMPLATE ######
+%dk_call% dk_getFileParams		"%~dp0/dkconfig.txt"
+%dk_call% dk_importVariables	"%TEMPLATE_Import%"
+%dk_call% dk_assertVar 			TEMPLATE
 
-if %errorlevel% gtr 0 (
-	echo errorlevel = %errorlevel%
-	pause
-)
+%dk_call% dk_delete "%TEMPLATE%"
+

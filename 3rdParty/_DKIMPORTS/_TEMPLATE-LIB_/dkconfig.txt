@@ -1,5 +1,5 @@
 ############ TEMPLATE ############
-# http://www.TEMPLACE.com
+# http://www.TEMPLATE.com
 
 TEMPLATE_Android_Arm32_Import=
 TEMPLATE_Android_Arm64_Import=

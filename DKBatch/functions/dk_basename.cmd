@@ -17,6 +17,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	set "pathname=%~1"
 	set "pathname=%pathname:"=%"
+	
+	if "%pathname:~-1%" equ "/" (set "pathname=%pathname:~0,-1%")
+	if "%pathname:~-1%" equ "\" (set "pathname=%pathname:~0,-1%")
 
 	for %%A in ("%pathname%") do (set "dk_basename=%%~nxA")
 	
@@ -24,8 +27,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "dk_basename=%dk_basename%"
 		if "%~2" neq "" (set "%~2=%dk_basename%")
 	)
-	
-	::echo %dk_basename% >&3
 %endfunction%
 
 
@@ -37,6 +38,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
+	%dk_call% dk_echo
+	%dk_call% dk_set myPath "%~dp0"
+	%dk_call% dk_basename "%myPath%"
+	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
+	
 	%dk_call% dk_echo
 	%dk_call% dk_set myPath "%windir:\=/%/System32/test.v123.zip"
 	%dk_call% dk_basename "%myPath%"

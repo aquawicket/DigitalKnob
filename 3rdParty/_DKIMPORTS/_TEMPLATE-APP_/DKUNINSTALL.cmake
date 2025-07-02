@@ -16,6 +16,6 @@ include_guard()
 # https://www.TEMPLATE.com
 
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${TEMPLATE_Iport})
+dk_importVariables	(${TEMPLATE_Import})
 dk_assertVar		(TEMPLATE)
 dk_delete			("${TEMPLATE}")

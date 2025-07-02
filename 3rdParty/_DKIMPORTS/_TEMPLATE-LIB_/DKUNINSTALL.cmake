@@ -17,5 +17,6 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${<PACKAGE_NAME>_IMPORT} NAME <package_name>)
-dk_delete			("${<PACKAGE_NAME>}")
+
+dk_importVariables	(${<PACKAGE>_IMPORT})
+dk_delete			("${<PACKAGE>}")
