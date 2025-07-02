@@ -70,11 +70,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_delete "%DKCACHE_DIR%"
 
 	::###### Deleting DIGITALKNOB_DIR ######
-	::%dk_call% dk_deleteDigitalKnob
-		
-	::### TODO ###
-	:: Copy this script to another location, delete the digitalknob directory, restore the digitalknob directory, continue here in this script
-	
+	(
+		%dk_call% dk_deleteDigitalKnob
+		"%SystemDrive%/DKBuilder.cmd"
+	)
 
 %endfunction%
 
