@@ -25,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     :: Method 4 - using ping
     set /a "seconds=(%~1+1)"
-    ping 127.0.0.1 -n %seconds% >null
+    ping 127.0.0.1 -n %seconds% >nul
 %endfunction%
 
 
