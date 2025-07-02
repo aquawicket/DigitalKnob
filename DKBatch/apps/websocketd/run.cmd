@@ -3,14 +3,38 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-%dk_call% dk_depend websocketd
-pause
 
-::websocketd --devconsole --port=8080 count.cmd
-::websocketd --devconsole --port=8080 C:\Users\Administrator\DigitalKnob\Development\DKBatch\functions\DKBuilder\DKBuilder.cmd
-websocketd --port=8080 --staticdir=. cmd
+::####################################################################
+::# RUN
+::#
+:RUN
+%setlocal%
+	%dk_call% dk_debugFunc 0
+	
+	%dk_call% dk_validate WEBSOCKETD_EXE "%dk_call% dk_depend websocketd"
+	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
+	
+	::%WEBSOCKETD_EXE% --devconsole --port=8080 count.cmd
+	::%WEBSOCKETD_EXE% --devconsole --port=8080 C:\Users\Administrator\DigitalKnob\Development\DKBatch\functions\DKBuilder\DKBuilder.cmd
+	start C:/Users/Administrator/DigitalKnob/Development/DKBatch/apps/websocketd/console.html
+	::"%WEBSOCKETD_EXE%" --port=8080 --staticdir=%DIGITALKNOB_DIR:/=\% stdparser.cmd
+	"%WEBSOCKETD_EXE%" --port=8080 --staticdir=. stdparser.cmd
+%endfunction%
 
-if %errorlevel% gtr 0 (
-	echo errorlevel = %errorlevel%
-	pause
-)
+
+
+
+
+
+
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+%setlocal%
+	%dk_call% dk_debugFunc 0
+
+	%dk_call% RUN
+%endfunction%

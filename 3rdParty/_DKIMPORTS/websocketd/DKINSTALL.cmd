@@ -22,11 +22,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar %PLUGIN%
 
 	set "WEBSOCKETD_EXE=!%PLUGIN%!/websocketd.exe"
-	if exist "%WEBSOCKETD_EXE%" (%return%)
+	if exist "%WEBSOCKETD_EXE%" (goto:end)
 
 	%dk_call% dk_download "!%PLUGIN%_Import!"
 	%dk_call% dk_smartExtract "%dk_download%" "!%PLUGIN%!"
-	::%dk_call% dk_assertFile WEBSOCKETD_EXE
+	%dk_call% dk_assertFile WEBSOCKETD_EXE
+	
+	:end
+	endlocal & (
+		set "WEBSOCKETD_EXE=%WEBSOCKETD_EXE%"
+	)
 %endfunction%
 
 
