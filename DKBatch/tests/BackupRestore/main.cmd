@@ -1,5 +1,5 @@
 @echo off
-call "Backup Project\backup.cmd"
+call "BACKUP_RESTORE.cmd"
 
 echo:
 call "deleteSelf.cmd"
