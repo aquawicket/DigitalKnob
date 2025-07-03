@@ -16,7 +16,8 @@ function Global:dk_depend() {
 	
 	dk_call dk_DKIMPORTS_DIR;
 	if(Test-Path "${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1"){ 
-		dk_call "${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1";
+		echo "dk_depend dk_call ${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1;"
+		dk_call ${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1;
 		dk_call dk_success "found ${_plugin_}";
 		return;
 	}

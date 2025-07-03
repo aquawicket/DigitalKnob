@@ -9,7 +9,7 @@ function Global:dk_installGit() {
 	dk_debugFunc 0;
 	
 	dk_call dk_DKIMPORTS_DIR
-	if( !(Test-Path ${env:DKIMPORTS_DIR}/git/DKINSTALL.ps1) ){ 
+if( !(Test-Path ${env:DKIMPORTS_DIR}/git/DKINSTALL.ps1) ){ 
 		${DKHTTP_DKIMPORTS_DIR} = "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS"
 		dk_call dk_download "${DKHTTP_DKIMPORTS_DIR}/git/DKINSTALL.ps1"  "${env:DKIMPORTS_DIR}/git/DKINSTALL.ps1"
 	}

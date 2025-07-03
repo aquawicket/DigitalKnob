@@ -7,22 +7,23 @@ if(!$dk_call_ps1){ $dk_call_ps1 = 1; } else{ return; } #include guard
 #
 function Global:dk_call(){
 	#dk_debugFunc 1 9
-	$1, $2, $3, $4, $5, $6, $7, $8, $9 = ${args}
-	#Write-Host "dk_call(${args})"
+	$1, $2, $3, $4, $5, $6, $7, $8, $9 = ${args};
 	
+	#$comand = $1 -replace ":", "/"
+	#if("$comand" -match "dk_[a-zA-Z0-9]+"){
+		dk_source $1;
+	#}
 	
-	
-	#Write-Host @args
-	$comand = $1 -replace ":", "/"
-	#Write-Host "comand = $comand"
-	
-	if("$comand" -match "dk_[a-zA-Z0-9]+"){
-		dk_source $comand
+	if(Test-Path $1){
+		${func} = dk_call dk_basename $1;
+		${func} = dk_call dk_removeExtension ${func}
+	} else {
+		${func} = $1;
 	}
-
-	& $1 $2 $3 $4 $5 $6 $7 $8 $9
+	
+	#echo ${func} $2 $3 $4 $5 $6 $7 $8 $9
+	& ${func} $2 $3 $4 $5 $6 $7 $8 $9;
 	#Start-Process -WorkingDirectory $env:DKPOWERSHELL_FUNCTIONS_DIR -ArgumentList @args
-
 } 
 
 

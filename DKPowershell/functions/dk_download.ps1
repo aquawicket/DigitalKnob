@@ -15,8 +15,8 @@ function Global:dk_download($url, $destination) {
 	
 	if($args[0]){ $destination = dk_call dk_realpath $args[0]; }
 	if(!(${destination})){    
-		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR";
-		$destination = "${DKDOWNLOAD_DIR}/${url_filename}";
+		dk_DKDOWNLOAD_DIR;
+		$destination = "${env:DKDOWNLOAD_DIR}/${url_filename}";
 	}
 	if(!(${destination})){ dk_call dk_error "destination is invalid"; }
 	
@@ -55,5 +55,5 @@ function Global:DKTEST() {
 	
 	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1";
 	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "DKBuilder.ps1";
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "${DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1";
+	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "${env:DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1";
 }
