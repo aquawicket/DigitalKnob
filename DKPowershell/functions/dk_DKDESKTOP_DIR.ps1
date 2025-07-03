@@ -51,6 +51,6 @@ function Global:DKTEST() {
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting dk_DKDESKTOP_DIR . . .\n";
 	dk_call dk_DKDESKTOP_DIR "C:/Desktop"
-	dk_call dk_echo "env:dk_DKDESKTOP_DIR = ${env:dk_DKDESKTOP_DIR}"
+	dk_call dk_echo "env:DKDESKTOP_DIR = ${env:DKDESKTOP_DIR}"
 	dk_call dk_echo "dk_DKDESKTOP_DIR = '$(dk_call dk_DKDESKTOP_DIR 'C:/Desktop')'\n";
 }

@@ -43,14 +43,14 @@ function Global:DKTEST() {
 	###### GET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Getting DKIMPORTS_DIR . . .\n";
-	dk_call dk_DKDESKTOP_DIR
+	dk_call dk_DKIMPORTS_DIR
 	dk_call dk_echo "env:DKIMPORTS_DIR = ${env:DKIMPORTS_DIR}";
     dk_call dk_echo "dk_DKIMPORTS_DIR = '$(dk_call dk_DKIMPORTS_DIR)'\n";
 	
 	###### SET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting DKIMPORTS_DIR . . .\n";
-	dk_call dk_DKDESKTOP_DIR "C:/Digital Knob/3rdParty/_DKIMPORTS"
+	dk_call dk_DKIMPORTS_DIR "C:/Digital Knob/3rdParty/_DKIMPORTS"
 	dk_call dk_echo "env:DKIMPORTS_DIR = ${env:DKIMPORTS_DIR}"
 	dk_call dk_echo "dk_DKIMPORTS_DIR = '$(dk_call dk_DKIMPORTS_DIR 'C:/Digital Knob/3rdParty/_DKIMPORTS')'\n";
 }

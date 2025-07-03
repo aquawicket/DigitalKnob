@@ -51,6 +51,6 @@ function Global:DKTEST() {
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting dk_DIGITALKNOB_DIR . . .\n";
 	dk_call dk_DIGITALKNOB_DIR "C:/Digital Knob"
-	dk_call dk_echo "env:dk_DIGITALKNOB_DIR = ${env:dk_DIGITALKNOB_DIR}"
+	dk_call dk_echo "env:DIGITALKNOB_DIR = ${env:DIGITALKNOB_DIR}"
 	dk_call dk_echo "dk_DIGITALKNOB_DIR = '$(dk_call dk_DIGITALKNOB_DIR 'C:/Digital Knob')'\n";
 }

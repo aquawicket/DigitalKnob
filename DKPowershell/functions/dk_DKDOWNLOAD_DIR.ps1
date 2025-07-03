@@ -15,7 +15,7 @@ function Global:dk_DKDOWNLOAD_DIR() {
 	############ GET ############
 	} else {
 		if(!(${env:DKDOWNLOAD})){
-			${env:DKDOWNLOAD}="Desktop"
+			${env:DKDOWNLOAD}="download"
 		}
 		if(!(${env:DKDOWNLOAD_DIR})){
 			$env:DKDOWNLOAD_DIR = "$(dk_call dk_DIGITALKNOB_DIR)/${env:DKDOWNLOAD}"
@@ -51,6 +51,6 @@ function Global:DKTEST() {
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting dk_DKDOWNLOAD_DIR . . .\n";
 	dk_call dk_DKDOWNLOAD_DIR "C:/Digital Knob/download"
-	dk_call dk_echo "env:dk_DKDOWNLOAD_DIR = ${env:dk_DKDOWNLOAD_DIR}"
+	dk_call dk_echo "env:DKDOWNLOAD_DIR = ${env:DKDOWNLOAD_DIR}"
 	dk_call dk_echo "dk_DKDOWNLOAD_DIR = '$(dk_call dk_DKDOWNLOAD_DIR 'C:/Digital Knob/download')'\n";
 }

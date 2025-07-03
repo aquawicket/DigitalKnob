@@ -42,15 +42,15 @@ function Global:DKTEST() {
 	
 	###### GET ######
 	dk_call dk_echo "\n";
-	dk_call dk_echo "Test Getting DKCACHE_DIR . . .\n";
-	dk_call dk_DKDESKTOP_DIR
-	dk_call dk_echo "env:DKCACHE_DIR = ${env:DKCACHE_DIR}";
-    dk_call dk_echo "dk_DKCACHE_DIR = '$(dk_call dk_DKCACHE_DIR)'\n";
+	dk_call dk_echo "Test Getting DK3RDPARTY_DIR . . .\n";
+	dk_call dk_DK3RDPARTY_DIR
+	dk_call dk_echo "env:DK3RDPARTY_DIR = ${env:DK3RDPARTY_DIR}";
+    dk_call dk_echo "dk_DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR)'\n";
 	
 	###### SET ######
 	dk_call dk_echo "\n";
-	dk_call dk_echo "Test Setting DKCACHE_DIR . . .\n";
-	dk_call dk_DKDESKTOP_DIR "C:/Digital Knob/3rdParty"
-	dk_call dk_echo "env:DKCACHE_DIR = ${env:DKCACHE_DIR}"
-	dk_call dk_echo "dk_DKCACHE_DIR = '$(dk_call dk_DKCACHE_DIR 'C:/Digital Knob/3rdParty')'\n";
+	dk_call dk_echo "Test Setting DK3RDPARTY_DIR . . .\n";
+	dk_call dk_DK3RDPARTY_DIR "C:/Digital Knob/3rdParty"
+	dk_call dk_echo "env:DK3RDPARTY_DIR = ${env:DK3RDPARTY_DIR}"
+	dk_call dk_echo "dk_DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR 'C:/Digital Knob/3rdParty')'\n";
 }
