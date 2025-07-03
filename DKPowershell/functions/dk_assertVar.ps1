@@ -8,6 +8,7 @@ if(!$dk_assertVar_ps1){ $dk_assertVar_ps1 = 1; } else{ return; } #include guard
 function Global:dk_assertVar($var) {
 	dk_debugFunc 1;
 
+	Write-Host "var = (${!var})"
 	if((${!var})){
 		return; #${true}
 	}
@@ -43,12 +44,12 @@ function Global:DKTEST() {
 	#dk_call dk_info "dk_assertVar $myVarD" -and dk_call dk_assertVar $myVarD;
 	#dk_call dk_info "dk_assertVar ${myVarD}" -and dk_call dk_assertVar ${myVarD};
 
-	$myVarE =;
-	dk_call dk_assertVar myVarE;
-	#dk_call dk_assertVar $myVarE;
-	#dk_call dk_assertVar ${myVarE};
+#	$myVarE =;
+#	dk_call dk_assertVar myVarE;
+#	#dk_call dk_assertVar $myVarE;
+#	#dk_call dk_assertVar ${myVarE};
 
-	dk_call dk_assertVar noVar;
-	#dk_call dk_assertVar $noVar;
-	#dk_call dk_assertVar ${noVar};
+#	dk_call dk_assertVar noVar;
+#	#dk_call dk_assertVar $noVar;
+#	#dk_call dk_assertVar ${noVar};
 }

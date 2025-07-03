@@ -5,11 +5,15 @@ if(!$dk_set_ps1){ $dk_set_ps1 = 1; } else{ return; } #include guard
 # dk_set(variable value)
 #
 #
-function Global:dk_set($variable, $value) {
-	dk_debugFunc 2;
-
-	Set-Variable -Name $variable -Value $value -Scope Global
-	dk_call dk_printVar $variable
+function Global:dk_set() {
+	dk_debugFunc 0 2;
+	
+	$var = $($args[0]);
+	$val = $($args[1]);
+	Write-Host "'${var}' '${val}'"
+	
+	Set-Variable -Name ${$(var)} -Value ${$(val)} -Scope Global
+	Set-Item env:${var} ${val};
 }
 
 
@@ -32,4 +36,5 @@ function Global:DKTEST() {
 	
 	dk_call dk_set myVar "value assigned with dk_set"	
 	dk_call dk_info "myVar = ${myVar}"
+	dk_call dk_info "env:myVar = ${env:myVar}"
 }

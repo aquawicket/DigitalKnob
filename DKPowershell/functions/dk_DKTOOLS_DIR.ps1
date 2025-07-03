@@ -10,15 +10,15 @@ function Global:dk_DKTOOLS_DIR() {
 
 	############ SET ############
 	if($($args[0])){  
-	${env:DKTOOLS_DIR} = $($args[0])
+	dk_call dk_set DKTOOLS_DIR $($args[0])
 	
 	############ GET ############
 	} else {
 		if(!(${env:DKTOOLS})){
-			${env:DKTOOLS}="DKTools"
+			dk_call dk_set DKTOOLS "DKTools"
 		}
 		if(!(${env:DKTOOLS_DIR})){
-			${env:DKTOOLS_DIR} = "$(dk_call dk_DIGITALKNOB_DIR)/${env:DKTOOLS}"
+			dk_call dk_set DKTOOLS_DIR "$(dk_call dk_DIGITALKNOB_DIR)/${env:DKTOOLS}"
 		}
 	}
 	

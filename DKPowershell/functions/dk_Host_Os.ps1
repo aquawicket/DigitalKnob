@@ -22,6 +22,8 @@ function Global:dk_Host_Os() {
 	}
 	
 	${global:$(Host_Os)_Host} = 1;
+	dk_call dk_echo "${Host_Os}_Host = ${$(Host_Os)_Host}"
+
 }
 
 

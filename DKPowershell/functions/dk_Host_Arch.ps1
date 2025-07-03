@@ -15,17 +15,19 @@ function Global:dk_Host_Arch() {
 	###### SET ######
 	if($($args[0])){
 		${global:Host_Arch} = $($args[0]);
+		${env:Host_Arch} = $($args[0]);
 	
 	###### GET ######	
 	} else {
-		if("${env:PROCESSOR_ARCHITECTURE}" -eq "x86")	{	${global:Host_Arch}="X86";		}
-		if("${env:PROCESSOR_ARCHITECTURE}" -eq "AMD64")	{	${global:Host_Arch}="X86_64";	}
-		if("${env:PROCESSOR_ARCHITECTURE}" -eq "IA64")	{	${global:Host_Arch}="X86_64";	}
-		if("${env:PROCESSOR_ARCHITECTURE}" -eq "EM64T")	{	${global:Host_Arch}="X86_64";	}
-		if("${env:PROCESSOR_ARCHITECTURE}" -eq "ARM64")	{	${global:Host_Arch}="Arm64";	}
+		if("${env:PROCESSOR_ARCHITECTURE}" -eq "x86")	{	${global:Host_Arch} = "X86";	${env:Host_Arch} = "X86";		}
+		if("${env:PROCESSOR_ARCHITECTURE}" -eq "AMD64")	{	${global:Host_Arch} = "X86_64";	${env:Host_Arch} = "X86_64";	}
+		if("${env:PROCESSOR_ARCHITECTURE}" -eq "IA64")	{	${global:Host_Arch} = "X86_64";	${env:Host_Arch} = "X86_64";	}
+		if("${env:PROCESSOR_ARCHITECTURE}" -eq "EM64T")	{	${global:Host_Arch} = "X86_64";	${env:Host_Arch} = "X86_64";	}
+		if("${env:PROCESSOR_ARCHITECTURE}" -eq "ARM64")	{	${global:Host_Arch} = "Arm64";	${env:Host_Arch} = "Arm64";		}
 	}
-	
+
 	${global:$(Host_Arch)_Host} = 1;
+	${env:$(Host_Arch)_Host} = 1;
 }
 
 
@@ -41,11 +43,17 @@ function Global:DKTEST() {
 
 	###### GET ######
     dk_call dk_Host_Arch
+	dk_call dk_echo
 	dk_call dk_echo "Host_Arch = ${Host_Arch}"
+	dk_call dk_echo "env:Host_Arch = ${env:Host_Arch}"
 	dk_call dk_echo "${Host_Arch}_Host = ${$(Host_Arch)_Host}"
+	dk_call dk_echo "env:${Host_Arch}_Host = ${env:$(Host_Arch)_Host}"
 	
 	###### SET ######
 	dk_call dk_Host_Arch "I686"
+	dk_call dk_echo
 	dk_call dk_echo "Host_Arch = ${Host_Arch}"
+	dk_call dk_echo "env:Host_Arch = ${env:Host_Arch}"
 	dk_call dk_echo "${Host_Arch}_Host = ${$(Host_Arch)_Host}"
+	dk_call dk_echo "env:${Host_Arch}_Host = ${env:$(Host_Arch)_Host}"
 }
