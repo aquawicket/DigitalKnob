@@ -140,6 +140,7 @@ DKCMAKE_FLAG_VARIABLES.temp
 3rdParty/ventoy*
 3rdParty/vorbis*
 3rdParty/wavpack*
+3rdParty/websocketd*
 3rdParty/webview2_in_mingw*
 3rdParty/webview2_runtime*
 3rdParty/xz*
