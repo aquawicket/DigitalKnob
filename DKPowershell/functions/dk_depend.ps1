@@ -14,15 +14,15 @@ function Global:dk_depend() {
 
 	${_plugin_} = $($args[0]);
 	
-	dk_call dk_DKIMPORTS_DIR;
-	if(Test-Path "${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1"){ 
-		echo "dk_depend dk_call ${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1;"
-		dk_call ${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1;
+
+	if(Test-Path "$(dk_call dk_DKIMPORTS_DIR)/${_plugin_}/DKINSTALL.ps1"){ 
+		echo "dk_depend dk_call $(dk_call dk_DKIMPORTS_DIR)/${_plugin_}/DKINSTALL.ps1";
+		dk_call "$(dk_call dk_DKIMPORTS_DIR)/${_plugin_}/DKINSTALL.ps1";
 		dk_call dk_success "found ${_plugin_}";
 		return;
 	}
 
-	dk_call dk_fatal "${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1 not found";
+	dk_call dk_fatal "$(dk_call dk_DKIMPORTS_DIR)/${_plugin_}/DKINSTALL.ps1 not found";
 }
 
 
