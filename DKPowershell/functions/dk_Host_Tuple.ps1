@@ -15,6 +15,7 @@ function Global:dk_Host_Tuple() {
 	###### SET ######
 	if($($args[0])){
 		${global:Host_Tuple} = $($args[0]);
+		${env:Host_Tuple} = $($args[0]);
 	} 
 	
 	###### GET ######	
@@ -22,10 +23,13 @@ function Global:dk_Host_Tuple() {
 		if(!${Host_Os})		{	dk_call dk_Host_Os;		}
 		if(!${Host_Arch})	{	dk_call dk_Host_Arch;	}
 		${global:Host_Tuple} = "${Host_Os}_${Host_Arch}";
+		${env:Host_Tuple} = "${Host_Os}_${Host_Arch}";
 	}
 	
 	###### FINALIZE ######
-	New-Variable -Name "${Host_Tuple}" -Value 1 -Force;
+	#New-Variable -Name "${Host_Tuple}" -Value 1 -Force;
+	${global:$(Host_Tuple)_Host} = 1;
+	${env:$(Host_Tuple)_Host} = 1;
 }
 
 
@@ -41,11 +45,17 @@ function Global:DKTEST() {
 
 	###### GET ######
     dk_call dk_Host_Tuple
+	dk_call dk_echo
 	dk_call dk_echo "Host_Tuple = ${Host_Tuple}"
-	dk_call dk_echo "${Host_Tuple}_Host =  ${$(Host_Tuple)_Host}"
+	dk_call dk_echo "env:Host_Tuple = ${env:Host_Tuple}"
+	dk_call dk_echo "${Host_Tuple}_Host = ${$(Host_Tuple)_Host}"
+	dk_call dk_echo "env:${Host_Tuple}_Host = ${env:$(Host_Tuple)_Host}"
 	
 	###### SET ######
 	dk_call dk_Host_Tuple "Linux_I686"
+	dk_call dk_echo
 	dk_call dk_echo "Host_Tuple = ${Host_Tuple}"
-	dk_call dk_echo "${Host_Tuple}_Host =  ${$(Host_Tuple)_Host}"
+	dk_call dk_echo "env:Host_Tuple = ${env:Host_Tuple}"
+	dk_call dk_echo "${Host_Tuple}_Host = ${$(Host_Tuple)_Host}"
+	dk_call dk_echo "env:${Host_Tuple}_Host = ${env:$(Host_Tuple)_Host}"
 }
