@@ -12,16 +12,16 @@ if(!$dk_depend_ps1){ $dk_depend_ps1 = 1; } else{ return; } #include guard
 function Global:dk_depend() {
 	dk_debugFunc 0 99;
 
-	${_plugin_} = $($args[0])
+	${_plugin_} = $($args[0]);
 	
-	dk_call dk_DKIMPORTS_DIR
-	if(Test-Path "${DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.cmd"){ 
-		dk_call "${DKIMPORTS_DIR}/%_plugin_%/DKINSTALL.cmd"
-		dk_call dk_success "found ${_plugin_}"
-		return
+	dk_call dk_DKIMPORTS_DIR;
+	if(Test-Path "${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1"){ 
+		dk_call "${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1";
+		dk_call dk_success "found ${_plugin_}";
+		return;
 	}
 
-	dk_call dk_fatal "${DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.cmd not found"
+	dk_call dk_fatal "${env:DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.ps1 not found";
 }
 
 
