@@ -27,6 +27,7 @@ function Global:dk_DKHOME_DIR() {
 	${global:DKHOME_DIR} = ${global:DKHOME_DIR} -replace '\\', '/';
 	${env:DKHOME_DIR} = ${env:DKHOME_DIR} -replace '\\', '/';
 	
+	dk_call dk_assertPath ${global:DKHOME_DIR}
 	dk_call dk_assertPath ${env:DKHOME_DIR}
 	return ${env:DKHOME_DIR}
 }
@@ -57,6 +58,4 @@ function Global:DKTEST() {
 	dk_call dk_echo "DKHOME_DIR = ${DKHOME_DIR}"
 	dk_call dk_echo "env:DKHOME_DIR = ${env:DKHOME_DIR}"
 	dk_call dk_echo "dk_DKHOME_DIR = '$(dk_call dk_DKHOME_DIR 'C:/')'\n";
-	
-
 }

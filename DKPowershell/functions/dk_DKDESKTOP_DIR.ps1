@@ -9,13 +9,21 @@ function Global:dk_DKDESKTOP_DIR() {
     dk_debugFunc 0 1
 
 	############ SET ############
-	if($($args[0])){  
+	if($($args[0])){
+		${global:DKDESKTOP_DIR} = $($args[0]);
 		${env:DKDESKTOP_DIR} = $($args[0])
 	
 	############ GET ############
 	} else {
+		if(!(${global:DKDESKTOP})){
+			${global:DKDESKTOP}="Desktop"
+		}
 		if(!(${env:DKDESKTOP})){
 			${env:DKDESKTOP}="Desktop"
+		}
+		
+		if(!(${global:DKDESKTOP_DIR})){
+			$global:DKDESKTOP_DIR = "$(dk_call dk_DKHOME_DIR)/${global:DKDESKTOP}"
 		}
 		if(!(${env:DKDESKTOP_DIR})){
 			$env:DKDESKTOP_DIR = "$(dk_call dk_DKHOME_DIR)/${env:DKDESKTOP}"
@@ -23,11 +31,11 @@ function Global:dk_DKDESKTOP_DIR() {
 	}	
 
 	############ FINALIZE ############
-#	if(!(Test-Path $DKDESKTOP_DIR)){ 
-#		dk_call dk_mkdir "${DKDESKTOP_DIR}" 
-#	}
-
-#	dk_call dk_assertPath ${env:DKDESKTOP_DIR}
+	${global:DKDESKTOP_DIR} = ${global:DKDESKTOP_DIR} -replace '\\', '/';
+	${env:DKDESKTOP_DIR} = ${env:DKDESKTOP_DIR} -replace '\\', '/';
+	
+	#dk_call dk_assertPath ${global:DKDESKTOP_DIR}
+	#dk_call dk_assertPath ${env:DKDESKTOP_DIR}
 	return ${env:DKDESKTOP_DIR}
 }
 
@@ -40,11 +48,19 @@ function Global:dk_DKDESKTOP_DIR() {
 function Global:DKTEST() {
     dk_debugFunc 0 
    
+	###### GET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Getting DKDESKTOP_DIR . . .\n";
-    dk_call dk_echo "DKDESKTOP_DIR = '$(dk_call dk_DKDESKTOP_DIR)'\n";
+	dk_call dk_DKDESKTOP_DIR
+	dk_call dk_echo "DKDESKTOP_DIR = ${DKDESKTOP_DIR}";
+	dk_call dk_echo "env:DKDESKTOP_DIR = ${env:DKDESKTOP_DIR}";
+    dk_call dk_echo "dk_DKDESKTOP_DIR = '$(dk_call dk_DKDESKTOP_DIR)'\n";
 	
+	###### SET ######
 	dk_call dk_echo "\n";
-	dk_call dk_echo "Test Setting DKDESKTOP_DIR . . .\n";
-	dk_call dk_echo "DKDESKTOP_DIR = '$(dk_call dk_DKDESKTOP_DIR 'C:/Desktop')'\n";
+	dk_call dk_echo "Test Getting dk_DKDESKTOP_DIR . . .\n";
+	dk_call dk_DKDESKTOP_DIR "C:/Desktop"
+	dk_call dk_echo "dk_DKDESKTOP_DIR = ${dk_DKDESKTOP_DIR}"
+	dk_call dk_echo "env:dk_DKDESKTOP_DIR = ${env:dk_DKDESKTOP_DIR}"
+	dk_call dk_echo "dk_DKDESKTOP_DIR = '$(dk_call dk_DKDESKTOP_DIR 'C:/Desktop')'\n";
 }
