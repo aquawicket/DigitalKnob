@@ -18,7 +18,7 @@ function Global:dk_DKIMPORTS_DIR() {
 			${env:DKIMPORTS}="_DKIMPORTS"
 		}
 		if(!(${env:DKIMPORTS_DIR})){
-			${env:DKIMPORTS_DIR}="$(dk_call dk_DKBRANCH_DIR)/${env:DKIMPORTS}"
+			${env:DKIMPORTS_DIR}="$(dk_call dk_DK3RDPARTY_DIR)/${env:DKIMPORTS}"
 		}
 	}
 	

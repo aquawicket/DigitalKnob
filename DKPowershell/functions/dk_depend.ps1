@@ -1,0 +1,39 @@
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . '${PSScriptRoot}/DK.ps1'; }
+if(!$dk_depend_ps1){ $dk_depend_ps1 = 1; } else{ return; } #include guard
+
+
+################################################################################
+# dk_depend()
+#
+#    Function description
+#
+#    @arg1	- arg1 description
+#
+function Global:dk_depend() {
+	dk_debugFunc 0 99;
+
+	${_plugin_} = $($args[0])
+	
+	dk_call dk_DKIMPORTS_DIR
+	if(Test-Path "${DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.cmd"){ 
+		dk_call "${DKIMPORTS_DIR}/%_plugin_%/DKINSTALL.cmd"
+		dk_call dk_success "found ${_plugin_}"
+		return
+	}
+
+	dk_call dk_fatal "${DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.cmd not found"
+}
+
+
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0;
+
+	dk_call dk_depend;
+}
