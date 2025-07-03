@@ -159,11 +159,32 @@ function Global:dk_DKBRANCH_DIR() {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
+	###### GET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Getting DKBRANCH_DIR . . .\n";
-    dk_call dk_echo "DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR)'\n";
+	dk_call dk_DKBRANCH_DIR
+	dk_call dk_echo "env:DKBRANCH_DIR     = ${env:DKBRANCH_DIR}";
+	dk_call dk_echo "env:DK3RDPARTY_DIR   = ${env:DK3RDPARTY_DIR}";
+	dk_call dk_echo "env:DKIMPORTS_DIR    = ${env:DKIMPORTS_DIR}";
+	dk_call dk_echo "env:DKBASH_DIR       = ${env:DKBASH_DIR}";
+	dk_call dk_echo "env:DKBATCH_DIR      = ${env:DKBATCH_DIR}";
+	dk_call dk_echo "env:DKC_DIR          = ${env:DKC_DIR}";
+	dk_call dk_echo "env:DKCMAKE_DIR      = ${env:DKCMAKE_DIR}";
+	dk_call dk_echo "env:DKCPP_DIR        = ${env:DKCPP_DIR}";
+	dk_call dk_echo "env:DKCSHARP_DIR     = ${env:DKCSHARP_DIR}";
+	dk_call dk_echo "env:DKHTA_DIR        = ${env:DKHTA_DIR}";
+	dk_call dk_echo "env:DKJAVA_DIR       = ${env:DKJAVA_DIR}";
+	dk_call dk_echo "env:DKJAVASCRIPT_DIR = ${env:DKJAVASCRIPT_DIR}";
+	dk_call dk_echo "env:DKPHP_DIR        = ${env:DKPHP_DIR}";
+	dk_call dk_echo "env:DKPOWERSHELL_DIR = ${env:DKPOWERSHELL_DIR}";
+	dk_call dk_echo "env:DKPYTHON_DIR     = ${env:DKPYTHON_DIR}";
+	dk_call dk_echo "env:DKVB_DIR         = ${env:DKVB_DIR}";	
+    dk_call dk_echo "dk_DKBRANCH_DIR      = '$(dk_call dk_DKBRANCH_DIR)'\n";
 	
-#	dk_call dk_echo "\n";
-#	dk_call dk_echo "Test Setting DKBRANCH_DIR . . .\n";
-#	dk_call dk_echo "DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR 'C:/Digital Knob/Development')'\n";
+	###### SET ######
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Setting DKBRANCH_DIR . . .\n";
+	dk_call dk_DKBRANCH_DIR "C:/Digital Knob/Development"
+	dk_call dk_echo "env:DKBRANCH_DIR = ${env:DKBRANCH_DIR}"
+	dk_call dk_echo "dk_DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR 'C:/Digital Knob/Development')'\n";
 }

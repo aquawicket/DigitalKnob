@@ -10,17 +10,25 @@ function Global:dk_DKDOWNLOAD_DIR() {
 
 	############ SET ############
 	if($($args[0])){  
-		$env:DKDOWNLOAD_DIR = "$($args[0])" 
+		$env:DKDOWNLOAD_DIR = $($args[0])
 	
 	############ GET ############
 	} else {
-		dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR" 
-		${env:DKDOWNLOAD_DIR} = "${env:DIGITALKNOB_DIR}/download" 
-		
-		if(!(Test-Path $DKDOWNLOAD_DIR)){ 
-			dk_call dk_mkdir "${DKDOWNLOAD_DIR}" 
+		if(!(${env:DKDOWNLOAD})){
+			${env:DKDOWNLOAD}="Desktop"
+		}
+		if(!(${env:DKDOWNLOAD_DIR})){
+			$env:DKDOWNLOAD_DIR = "$(dk_call dk_DIGITALKNOB_DIR)/${env:DKDOWNLOAD}"
 		}
 	}
+	
+	############ FINALIZE ############
+	${env:DKDOWNLOAD_DIR} = ${env:DKDOWNLOAD_DIR} -replace '\\', '/';
+	
+	#if(!(Test-Path $DKDOWNLOAD_DIR)){ 
+	#	dk_call dk_mkdir "${DKDOWNLOAD_DIR}" 
+	#}
+	return ${env:DKDOWNLOAD_DIR}
 }
 
 
@@ -32,11 +40,17 @@ function Global:dk_DKDOWNLOAD_DIR() {
 function Global:DKTEST() {
     dk_debugFunc 0 
    
+	###### GET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Getting DKDOWNLOAD_DIR . . .\n";
-    dk_call dk_echo "DKDOWNLOAD_DIR = $(dk_DKDOWNLOAD_DIR)\n";
+	dk_call dk_DKDOWNLOAD_DIR
+	dk_call dk_echo "env:DKDOWNLOAD_DIR = ${env:DKDOWNLOAD_DIR}";
+    dk_call dk_echo "dk_DKDOWNLOAD_DIR = '$(dk_call dk_DKDOWNLOAD_DIR)'\n";
 	
+	###### SET ######
 	dk_call dk_echo "\n";
-	dk_call dk_echo "Test Setting DKDOWNLOAD_DIR . . .\n";
-	dk_call dk_echo "DKDOWNLOAD_DIR = $(dk_DKDOWNLOAD_DIR 'C:/DK/download')\n";
+	dk_call dk_echo "Test Setting dk_DKDOWNLOAD_DIR . . .\n";
+	dk_call dk_DKDOWNLOAD_DIR "C:/Digital Knob/download"
+	dk_call dk_echo "env:dk_DKDOWNLOAD_DIR = ${env:dk_DKDOWNLOAD_DIR}"
+	dk_call dk_echo "dk_DKDOWNLOAD_DIR = '$(dk_call dk_DKDOWNLOAD_DIR 'C:/Digital Knob/download')'\n";
 }

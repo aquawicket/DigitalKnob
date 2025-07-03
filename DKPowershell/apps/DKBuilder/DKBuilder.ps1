@@ -11,10 +11,26 @@ Write-Host "DKHOME = ${DKHOME}"
 if(!${DKHTTP})									{ ${DKHTTP} = "https://raw.githubusercontent.com/aquawicket" }
 Write-Host "DKHTTP = ${DKHTTP}"
 
+if(!${DKCACHE})									{ ${DKCACHE} = ".dk" }
+Write-Host "DKCACHE = ${DKCACHE}"
+if(!${DKCACHE_DIR})								{ ${DKCACHE_DIR} = "${DKHOME}/${DKCACHE}" }
+Write-Host "DKCACHE_DIR = ${DKCACHE_DIR}"
+
 if(!${DIGITALKNOB})								{ ${DIGITALKNOB} = "DigitalKnob" }
 Write-Host "DIGITALKNOB = ${DIGITALKNOB}"
 if(!${DIGITALKNOB_DIR})							{ ${DIGITALKNOB_DIR} = "${DKHOME}/${DIGITALKNOB}" }
 Write-Host "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}"
+
+if(!${DKTOOLS})									{ ${DKTOOLS} = "DKTools" }
+Write-Host "DKTOOLS = ${DKTOOLS}"
+if(!${DKTOOLS_DIR})								{ ${DKTOOLS_DIR} = "${DKHOME}/${DIGITALKNOB}/${DKTOOLS}" }
+Write-Host "DKTOOLS_DIR = ${DKTOOLS_DIR}"
+
+if(!${DKDOWNLOAD})								{ ${DKDOWNLOAD} = "download" }
+Write-Host "DKDOWNLOAD = ${DKDOWNLOAD}"
+if(!${DKDOWNLOAD_DIR})							{ ${DKDOWNLOAD_DIR} = "${DKHOME}/${DIGITALKNOB}/${DKDOWNLOAD}" }
+Write-Host "DKDOWNLOAD_DIR = ${DKDOWNLOAD_DIR}"
+
 if(!${DKHTTP_DIGITALKNOB_DIR})					{ ${DKHTTP_DIGITALKNOB_DIR} = "${DKHTTP}/${DIGITALKNOB}" }
 Write-Host "DKHTTP_DIGITALKNOB_DIR = ${DKHTTP_DIGITALKNOB_DIR}"
 if(!(Test-Path ${DIGITALKNOB_DIR}))				{ New-Item -Path ${DIGITALKNOB_DIR} -ItemType Directory }

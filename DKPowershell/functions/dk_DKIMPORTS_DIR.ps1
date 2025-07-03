@@ -10,17 +10,25 @@ function Global:dk_DKIMPORTS_DIR() {
 
 	############ SET ############
 	if($($args[0])){  
-		$global:DKIMPORTS_DIR = "$($args[0])" 
-		return 0
-	}
-	
+		${env:DKIMPORTS_DIR} = $($args[0]) 
+
 	############ GET ############
-	dk_call dk_validate DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR" 
-	$global:DKIMPORTS_DIR = "${DK3RDPARTY_DIR}/_DKIMPORTS" 
-	
-	if(!(Test-Path $DKIMPORTS_DIR)){ 
-		dk_call dk_mkdir "${DKIMPORTS_DIR}" 
+	} else {
+		if(!(${env:DKIMPORTS})){
+			${env:DKIMPORTS}="_DKIMPORTS"
+		}
+		if(!(${env:DKIMPORTS_DIR})){
+			${env:DKIMPORTS_DIR}="$(dk_call dk_DKBRANCH_DIR)/${env:DKIMPORTS}"
+		}
 	}
+	
+	############ FINALIZE ############
+	${env:DKIMPORTS_DIR} = ${env:DKIMPORTS_DIR} -replace '\\', '/';
+
+	#if(!(Test-Path $DKIMPORTS_DIR)){ 
+	#	dk_call dk_mkdir "${DKIMPORTS_DIR}" 
+	#}
+	return ${env:DKIMPORTS_DIR}
 }
 
 
@@ -30,15 +38,19 @@ function Global:dk_DKIMPORTS_DIR() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST() {
-    dk_debugFunc 0 
-   
+	dk_debugFunc 0;
+	
+	###### GET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Getting DKIMPORTS_DIR . . .\n";
-	dk_call dk_DKIMPORTS_DIR;
-	dk_call dk_printVar DKIMPORTS_DIR;
+	dk_call dk_DKDESKTOP_DIR
+	dk_call dk_echo "env:DKIMPORTS_DIR = ${env:DKIMPORTS_DIR}";
+    dk_call dk_echo "dk_DKIMPORTS_DIR = '$(dk_call dk_DKIMPORTS_DIR)'\n";
 	
+	###### SET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting DKIMPORTS_DIR . . .\n";
-	dk_call dk_DKIMPORTS_DIR "C:/DK/_DKIMPORTS";
-	dk_call dk_printVar DKIMPORTS_DIR;
+	dk_call dk_DKDESKTOP_DIR "C:/Digital Knob/3rdParty/_DKIMPORTS"
+	dk_call dk_echo "env:DKIMPORTS_DIR = ${env:DKIMPORTS_DIR}"
+	dk_call dk_echo "dk_DKIMPORTS_DIR = '$(dk_call dk_DKIMPORTS_DIR 'C:/Digital Knob/3rdParty/_DKIMPORTS')'\n";
 }

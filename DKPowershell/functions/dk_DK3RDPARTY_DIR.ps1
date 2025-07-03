@@ -23,11 +23,11 @@ function Global:dk_DK3RDPARTY_DIR() {
 	}
 	
 	############ FINALIZE ############
-#	if(!(Test-Path ${env:DK3RDPARTY_DIR})){ 
-#		dk_call dk_mkdir ${env:DK3RDPARTY_DIR}
-#	}
+	${env:DK3RDPARTY_DIR} = ${env:DK3RDPARTY_DIR} -replace '\\', '/';
 
-#	dk_call dk_assertPath ${env:DK3RDPARTY_DIR}
+	#if(!(Test-Path $DK3RDPARTY_DIR)){ 
+	#	dk_call dk_mkdir "${DK3RDPARTY_DIR}" 
+	#}
 	return ${env:DK3RDPARTY_DIR}
 }
 
@@ -40,11 +40,17 @@ function Global:dk_DK3RDPARTY_DIR() {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
+	###### GET ######
 	dk_call dk_echo "\n";
-	dk_call dk_echo "Test Getting DK3RDPARTY_DIR . . .\n";
-    dk_call dk_echo "DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR)'\n";
+	dk_call dk_echo "Test Getting DKCACHE_DIR . . .\n";
+	dk_call dk_DKDESKTOP_DIR
+	dk_call dk_echo "env:DKCACHE_DIR = ${env:DKCACHE_DIR}";
+    dk_call dk_echo "dk_DKCACHE_DIR = '$(dk_call dk_DKCACHE_DIR)'\n";
 	
+	###### SET ######
 	dk_call dk_echo "\n";
-	dk_call dk_echo "Test Setting DK3RDPARTY_DIR . . .\n";
-	dk_call dk_echo "DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR 'C:/Digital Knob/Development/3rdParty')'\n";
+	dk_call dk_echo "Test Setting DKCACHE_DIR . . .\n";
+	dk_call dk_DKDESKTOP_DIR "C:/Digital Knob/3rdParty"
+	dk_call dk_echo "env:DKCACHE_DIR = ${env:DKCACHE_DIR}"
+	dk_call dk_echo "dk_DKCACHE_DIR = '$(dk_call dk_DKCACHE_DIR 'C:/Digital Knob/3rdParty')'\n";
 }
