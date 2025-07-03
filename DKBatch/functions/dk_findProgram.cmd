@@ -32,7 +32,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::echo _pattern_ = %_pattern_%
 	echo _recursive_ = %_recursive_%
 
-	%dk_call% dk_exec where %_recursive_% "%_pattern_%" %_filename_% 2>nul
+	if defined _recursive_ (
+		%dk_call% dk_exec where %_recursive_% "%_pattern_%" %_filename_% 2>nul
+	) else (
+		%dk_call% dk_exec where %_filename_% 2>nul
+	)
 	set dk_findProgram=%dk_exec%
 	::echo dk_exec = %dk_exec%
 

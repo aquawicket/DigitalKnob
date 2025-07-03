@@ -18,7 +18,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%WEBSOCKETD_EXE% --devconsole --port=8080 C:\Users\Administrator\DigitalKnob\Development\DKBatch\functions\DKBuilder\DKBuilder.cmd
 	start C:/Users/Administrator/DigitalKnob/Development/DKBatch/apps/websocketd/console.html
 	::"%WEBSOCKETD_EXE%" --port=8080 --staticdir=%DIGITALKNOB_DIR:/=\% stdparser.cmd
-	"%WEBSOCKETD_EXE%" --port=8080 --staticdir=. stdparser.cmd
+	::"%WEBSOCKETD_EXE%" --port=8080 --staticdir=. stdparser.cmd
+	"%WEBSOCKETD_EXE%" --port=8080 cmd /V:ON
 %endfunction%
 
 

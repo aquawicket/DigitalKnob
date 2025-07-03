@@ -97,7 +97,18 @@ function DK() {
 # dk_echo()
 #
 function dk_echo(){
-	Write-Host -NoNewline ${args};
+	if(!($args[0])){
+		${message} = "\n";
+	} else {
+		${message} = "${args}";
+	}
+	if("${dk_echo_NONEWLINE}" -eq "1"){
+		${message} = ${message} -replace "\\n", "`n";
+		Write-Host -NoNewline "${message}";
+	} else {
+		${message} = ${message} -replace "\\n", "";
+		Write-Host "${message}";
+	}
 }
 
 ##################################################################################

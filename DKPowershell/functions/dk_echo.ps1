@@ -4,7 +4,7 @@ if(!$dk_echo_ps1){ $dk_echo_ps1 = 1; } else{ return; } #include guard
 ################################################################################
 # dk_echo_FILE=1
 # dk_echo_LINE=1
-${global:dk_echo_NONEWLINE}=0
+#${global:dk_echo_NONEWLINE}=1;
 ################################################################################
 # dk_echo(message)
 #
@@ -14,10 +14,7 @@ ${global:dk_echo_NONEWLINE}=0
 #
 function Global:dk_echo() {
 	dk_debugFunc 0 1;
-	
-	# https://stackoverflow.com/a/818118
-	# $allArgs = $PsBoundParameters.Values + ${args} 
-	
+
 	if(!($args[0])){
 		${message} = "\n";
 	} else {
