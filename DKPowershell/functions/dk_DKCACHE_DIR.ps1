@@ -9,20 +9,31 @@ function Global:dk_DKCACHE_DIR() {
     dk_debugFunc 0 1
 
 	############ SET ############
-	if($($args[0])){  
+	if($($args[0])){
+		#${global:DKCACHE_DIR} = $($args[0])
 		${env:DKCACHE_DIR} = $($args[0])
 	
 	############ GET ############
 	} else {
+		#if(!(${global:DKCACHE})){
+		#	${global:DKCACHE}=".dk"
+		#}
 		if(!(${env:DKCACHE})){
 			${env:DKCACHE}=".dk"
 		}
+		
+		#if(!(${global:DKCACHE_DIR})){
+		#	${global:DKCACHE_DIR} = "$(dk_call dk_DKHOME_DIR)/${global:DKCACHE}" 
+		#}
 		if(!(${env:DKCACHE_DIR})){
 			${env:DKCACHE_DIR} = "$(dk_call dk_DKHOME_DIR)/${env:DKCACHE}" 
 		}
 	}
 	
 	############ FINALIZE ############
+	#${global:DKCACHE_DIR} = ${global:DKCACHE_DIR} -replace '\\', '/';
+	${env:DKCACHE_DIR} = ${env:DKCACHE_DIR} -replace '\\', '/';
+	
 	if(!(Test-Path ${env:DKCACHE_DIR})){ 
 		dk_call dk_mkdir ${env:DKCACHE_DIR}
 	}
@@ -40,11 +51,19 @@ function Global:dk_DKCACHE_DIR() {
 function Global:DKTEST() {
     dk_debugFunc 0 
    
+	###### GET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Getting DKCACHE_DIR . . .\n";
-    dk_call dk_echo "DKCACHE_DIR = '$(dk_call dk_DKCACHE_DIR)'\n";
+	dk_call dk_DKDESKTOP_DIR
+	#dk_call dk_echo "DKCACHE_DIR = ${DKCACHE_DIR}";
+	dk_call dk_echo "env:DKCACHE_DIR = ${env:DKCACHE_DIR}";
+    dk_call dk_echo "dk_DKCACHE_DIR = '$(dk_call dk_DKCACHE_DIR)'\n";
 	
+	###### SET ######
 	dk_call dk_echo "\n";
-	dk_call dk_echo "Test Setting DKCACHE_DIR . . .\n";
-	dk_call dk_echo "DKCACHE_DIR = '$(dk_call dk_DKCACHE_DIR 'C:/.dk')'\n";
+	dk_call dk_echo "Test Getting DKCACHE_DIR . . .\n";
+	dk_call dk_DKDESKTOP_DIR "C:/.dk"
+	#dk_call dk_echo "DKCACHE_DIR = ${DKCACHE_DIR}"
+	dk_call dk_echo "env:DKCACHE_DIR = ${env:DKCACHE_DIR}"
+	dk_call dk_echo "dk_DKCACHE_DIR = '$(dk_call dk_DKCACHE_DIR 'C:/.dk')'\n";
 }
