@@ -10,16 +10,23 @@ function Global:dk_DKHOME_DIR() {
 
 	############ SET ############
 	if($($args[0])){  
-		${env:DKHOME_DIR} = $($args[0])
+		${global:DKHOME_DIR} = $($args[0]);
+		${env:DKHOME_DIR} = $($args[0]);
 	
 	############ GET ############
 	} else {
+		if(!(${global:DKHOME_DIR})){
+			${global:DKHOME_DIR} = ${env:USERPROFILE};
+		}
 		if(!(${env:DKHOME_DIR})){
-			${env:DKHOME_DIR} = ${env:USERPROFILE} -replace '\\', '/';
+			${env:DKHOME_DIR} = ${env:USERPROFILE};
 		}
 	}
 	
 	############ FINALIZE ############
+	${global:DKHOME_DIR} = ${global:DKHOME_DIR} -replace '\\', '/';
+	${env:DKHOME_DIR} = ${env:DKHOME_DIR} -replace '\\', '/';
+	
 	dk_call dk_assertPath ${env:DKHOME_DIR}
 	return ${env:DKHOME_DIR}
 }
@@ -35,11 +42,21 @@ function Global:dk_DKHOME_DIR() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
+	###### GET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Getting DKHOME_DIR . . .\n";
-    dk_call dk_echo "DKHOME_DIR = '$(dk_call dk_DKHOME_DIR)'\n";
+	dk_call dk_DKHOME_DIR
+	dk_call dk_echo "DKHOME_DIR = ${DKHOME_DIR}";
+	dk_call dk_echo "env:DKHOME_DIR = ${env:DKHOME_DIR}";
+    dk_call dk_echo "dk_DKHOME_DIR = '$(dk_call dk_DKHOME_DIR)'\n";
 	
+	###### SET ######
 	dk_call dk_echo "\n";
-	dk_call dk_echo "Test Setting DKHOME_DIR . . .\n";
-	dk_call dk_echo "DKHOME_DIR = '$(dk_call dk_DKHOME_DIR 'C:/')'\n";
+	dk_call dk_echo "Test Getting DKHOME_DIR . . .\n";
+	dk_call dk_DKHOME_DIR "C:/"
+	dk_call dk_echo "DKHOME_DIR = ${DKHOME_DIR}"
+	dk_call dk_echo "env:DKHOME_DIR = ${env:DKHOME_DIR}"
+	dk_call dk_echo "dk_DKHOME_DIR = '$(dk_call dk_DKHOME_DIR 'C:/')'\n";
+	
+
 }

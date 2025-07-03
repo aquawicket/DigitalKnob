@@ -5,7 +5,7 @@ if(!$dk_Host_Tuple_ps1){ $dk_Host_Tuple_ps1 = 1; } else{ return; } #include guar
 ################################################################################
 # dk_Host_Tuple()
 #
-#    Function description
+#    Get or Set the OS/Architecture Tuple of the Host System
 #
 #    @arg1	- arg1 description
 #
@@ -27,9 +27,10 @@ function Global:dk_Host_Tuple() {
 	}
 	
 	###### FINALIZE ######
-	#New-Variable -Name "${Host_Tuple}" -Value 1 -Force;
 	${global:$(Host_Tuple)_Host} = 1;
 	${env:$(Host_Tuple)_Host} = 1;
+	
+	return ${env:Host_Tuple}
 }
 
 
@@ -44,18 +45,22 @@ function Global:DKTEST() {
 	dk_debugFunc 0;
 
 	###### GET ######
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Getting Host_Tuple . . .\n";
     dk_call dk_Host_Tuple
-	dk_call dk_echo
 	dk_call dk_echo "Host_Tuple = ${Host_Tuple}"
 	dk_call dk_echo "env:Host_Tuple = ${env:Host_Tuple}"
 	dk_call dk_echo "${Host_Tuple}_Host = ${$(Host_Tuple)_Host}"
 	dk_call dk_echo "env:${Host_Tuple}_Host = ${env:$(Host_Tuple)_Host}"
+    dk_call dk_echo "dk_Host_Tuple = '$(dk_call dk_Host_Tuple)'\n";
 	
 	###### SET ######
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Setting Host_Tuple . . .\n";
 	dk_call dk_Host_Tuple "Linux_I686"
-	dk_call dk_echo
 	dk_call dk_echo "Host_Tuple = ${Host_Tuple}"
 	dk_call dk_echo "env:Host_Tuple = ${env:Host_Tuple}"
 	dk_call dk_echo "${Host_Tuple}_Host = ${$(Host_Tuple)_Host}"
 	dk_call dk_echo "env:${Host_Tuple}_Host = ${env:$(Host_Tuple)_Host}"
+    dk_call dk_echo "dk_Host_Tuple = '$(dk_call dk_Host_Tuple 'Linux_I686')'\n";
 }

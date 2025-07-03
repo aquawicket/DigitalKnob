@@ -5,9 +5,7 @@ if(!$dk_Host_Arch_ps1){ $dk_Host_Arch_ps1 = 1; } else{ return; } #include guard
 ################################################################################
 # dk_Host_Arch()
 #
-#    Function description
-#
-#    @arg1	- arg1 description
+#    Get or Set the architecture of the Host System
 #
 function Global:dk_Host_Arch() {
 	dk_debugFunc 0 99;
@@ -26,8 +24,11 @@ function Global:dk_Host_Arch() {
 		if("${env:PROCESSOR_ARCHITECTURE}" -eq "ARM64")	{	${global:Host_Arch} = "Arm64";	${env:Host_Arch} = "Arm64";		}
 	}
 
+	###### FINALIZE ######
 	${global:$(Host_Arch)_Host} = 1;
 	${env:$(Host_Arch)_Host} = 1;
+	
+	return ${env:Host_Arch}
 }
 
 
@@ -42,18 +43,22 @@ function Global:DKTEST() {
 	dk_debugFunc 0;
 
 	###### GET ######
-    dk_call dk_Host_Arch
 	dk_call dk_echo
+	dk_call dk_echo "Test Getting Host_Arch . . .\n";
+    dk_call dk_Host_Arch
 	dk_call dk_echo "Host_Arch = ${Host_Arch}"
 	dk_call dk_echo "env:Host_Arch = ${env:Host_Arch}"
 	dk_call dk_echo "${Host_Arch}_Host = ${$(Host_Arch)_Host}"
 	dk_call dk_echo "env:${Host_Arch}_Host = ${env:$(Host_Arch)_Host}"
+    dk_call dk_echo "dk_Host_Arch = '$(dk_call dk_Host_Arch)'\n";
 	
 	###### SET ######
-	dk_call dk_Host_Arch "I686"
 	dk_call dk_echo
+	dk_call dk_echo "Test Setting Host_Arch . . .\n";
+	dk_call dk_Host_Arch "I686"
 	dk_call dk_echo "Host_Arch = ${Host_Arch}"
 	dk_call dk_echo "env:Host_Arch = ${env:Host_Arch}"
 	dk_call dk_echo "${Host_Arch}_Host = ${$(Host_Arch)_Host}"
 	dk_call dk_echo "env:${Host_Arch}_Host = ${env:$(Host_Arch)_Host}"
+	dk_call dk_echo "dk_Host_Arch = '$(dk_call dk_Host_Arch I686)'\n";
 }
