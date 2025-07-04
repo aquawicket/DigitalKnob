@@ -36,7 +36,7 @@ function(dk_Target_Os)
 		
 		dk_echo()
 		if(NOT Host_Os)
-			dk_Host_Os()
+			dk_call(dk_Host_Os)
 		endif()
 		
 		### TODO: add cached option here ###
