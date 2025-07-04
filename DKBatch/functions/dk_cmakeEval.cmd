@@ -20,10 +20,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate CMAKE_EXE			"%dk_call% %DKIMPORTS_DIR%/cmake/DKINSTALL.cmd"
 	%dk_call% dk_assertPath CMAKE_EXE
 
-	::%dk_call% dk_set DKCOMMAND "%~1"
 	set DKCOMMAND=%~1
-	%dk_call% dk_set DKRETURN "%~2"
-	%dk_call% dk_set DKVARS "%~3"
+	if "%~2" neq "" (%dk_call% dk_set DKRETURN "%~2")
+	if "%~3" neq "" (%dk_call% dk_set DKVARS "%~3")
 	%dk_call% dk_set DK_EVAL "%DKCMAKE_DIR:\=/%/DKEval.cmake"
 
 	::### build CMAKE_ARGS ###

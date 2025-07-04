@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_source.cmake")
 #########################################################################
 # dk_call(func) args
 #

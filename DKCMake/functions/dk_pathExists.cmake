@@ -20,21 +20,20 @@ include_guard()
 function(dk_pathExists)
 	dk_debugFunc()
 	
-	set(pathExists true)
+	set(dk_pathExists true)
 	
 	get_filename_component(realPath "${ARGV0}" REALPATH)
 	if(NOT "${realPath}" STREQUAL "${ARGV0}")
-		set(pathExists false)
+		set(dk_pathExists false)
 	endif()		
 	if(NOT EXISTS "${ARGV0}")
-		set(pathExists false)
+		set(dk_pathExists false)
 	endif()
 	
-	set(dk_pathExists ${pathExists} PARENT_SCOPE)
-	
-#	if(${ARGC} GREATER 1)
-#		set(${rtn_var} ${pathExists} PARENT_SCOPE)
-#	endif()
+	set(dk_pathExists ${dk_pathExists} PARENT_SCOPE)
+	if(${ARGC} GREATER 1)
+		set(${ARGV1} ${dk_pathExists} PARENT_SCOPE)
+	endif()
 endfunction()
 
 

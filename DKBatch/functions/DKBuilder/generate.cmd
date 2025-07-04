@@ -129,8 +129,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not defined CMAKE_EXE (call "%DKIMPORTS_DIR%/cmake/DKINSTALL.cmd")
 
 	::###### Delete Cmake Cache files ######
-	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"
-
+	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"	
+	
 	::########### CMAKE Command ###################
 	echo "%CMAKE_EXE%" %CMAKE_ARGS%
 	%dk_call% "%CMAKE_EXE%" %CMAKE_ARGS% && (
@@ -139,6 +139,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_error "CMake Generation Failed"
 	)
 	::############################################
+	
+	
 
 	::###### IMPORT VARIABLES ######
 	%dk_call% dk_importVars

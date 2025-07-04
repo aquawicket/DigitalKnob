@@ -35,13 +35,13 @@ function(dk_Target_Tuple)
 		##### TODO:  Insert Cache options here ###
 		
 		if(NOT Target_Os)
-			dk_Target_Os()
+			dk_call(dk_Target_Os)
 		endif()
 		dk_assertVar(Target_Os)
 	
 		###### First Tuple ######
 		if(NOT Target_Arch)
-			dk_Target_Arch()
+			dk_call(dk_Target_Arch)
 		endif()
 		dk_assertVar(Target_Arch)
 		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}")
@@ -87,7 +87,7 @@ function(dk_Target_Tuple)
 		
 		###### Second Tuple ######
 		if(NOT Target_Env)
-			dk_Target_Env()
+			dk_call(dk_Target_Env)
 		endif()
 		dk_assertVar(Target_Env)		
 		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}_${Target_Env}")

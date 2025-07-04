@@ -86,8 +86,22 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if defined Target_Env	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Env_Cache=%Target_Env%")
 		if defined Target_Type	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Type_Cache=%Target_Type%")
 		
-		%dk_call% DKBuilder/generate
-		%dk_call% DKBuilder/buildApp
+		
+		::########### CMAKE Command ###################
+		%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
+		cd %DKCPP_APPS_DIR%/%Target_App%
+		%dk_call% dk_validate CMAKE_EXE "%dk_call% dk_depend cmake"
+		%dk_call% dk_cmakeEval "dk_load('%DKCPP_APPS_DIR:\=/%/%Target_App%/DKINSTALL.cmake')"
+		::%CMAKE_EXE% -P "%DKCPP_APPS_DIR:\=/%/%Target_App%/DKINSTALL.cmake"
+		
+		pause
+		exit
+		exit
+		exit
+		
+		
+		::%dk_call% DKBuilder/generate
+		::%dk_call% DKBuilder/buildApp
 
 		%dk_call% dk_unset pickUpdate
 		%dk_call% dk_unset Target_App

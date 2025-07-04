@@ -37,7 +37,7 @@ function(dk_configure)
 	
 	###### dk_allButFirstArgs ######
 	if(ARGV)
-		dk_allButFirstArgs(${ARGV})
+		dk_call(dk_allButFirstArgs ${ARGV})
 	endif()
 	
 	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
@@ -72,7 +72,7 @@ function(dk_configure)
 	dk_assertVar(BINARY_DIR)
 	
 	#	if(REBUILDALL)
-		dk_clearCmakeCache(${BINARY_DIR})
+		dk_call(dk_clearCmakeCache ${BINARY_DIR})
 	#	endif()
 
 	dk_mkdir("${BINARY_DIR}")
@@ -80,12 +80,18 @@ function(dk_configure)
 	dk_chdir("${BINARY_DIR}")
 	
 	
-	# Configure with CMake		(multi_config / single_config)
-	###### Configure with CMAKE ######
-	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Source_Dir}/configure) will return true.
+	
+	# This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Source_Dir}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
-	dk_pathExists("${Source_Dir}/CMakeLists.txt")
-	if(dk_pathExists)
+	dk_call(dk_pathExists "${Source_Dir}/CMakeLists.txt" CMakeLists.txt)
+	dk_pathExists("${Source_Dir}/configure"      configure)
+	dk_pathExists("${Source_Dir}/configure.ac"   configure.ac)
+	
+	
+	############ Configure with CMAKE ############
+	# Configure with CMake		(multi_config / single_config)
+	#
+	if(CMakeLists.txt)
 		dk_info("###### Configuring ${CURRENT_PLUGIN} with CMake ######")
 		
 		dk_assertPath(${DKCMAKE_DIR})		
@@ -104,55 +110,43 @@ function(dk_configure)
 		
 		#### restore any altered flags ####
 		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
-
-	else()	
-
-		###### Configure with ../../configure ######
-		# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Source_Dir}/configure) will return true.
-		# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
 		
-		#get_filename_component(configure_path "${Source_Dir}/configure" REALPATH)
-		#if(NOT "${configure_path}" STREQUAL "${Source_Dir}/configure")
-		#	unset(configure_path)
-		#endif()
-		#if(EXISTS ${Source_Dir}/configure.ac OR EXISTS ${configure_path})
-		
-		dk_pathExists("${Source_Dir}/configure")
-		if(dk_pathExists OR EXISTS ${Source_Dir}/configure.ac)
-			# Configure with Autotools	(single_config)
-			dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
+
+	############ Configure with ../../configure ############
+	#
+	elseif(configure OR configure.ac)
+		# Configure with Autotools	(single_config)
+		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 			
-			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
-			if(EXISTS "${Source_Dir}/configure")
-				if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
-					dk_depend(bash)
-					dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}")
-					dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
-				else()
-					dk_exec(../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs})
-					dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
-				endif()
+		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
+		if(EXISTS "${Source_Dir}/configure")
+			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
+				dk_depend(bash)
+				dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}")
+				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
 			else()
-				dk_warning("No configure file found. It may need to be generated with autotools")
+				dk_exec(../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs})
+				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
 			endif()
-			
-			#### restore any altered flags ####
-			if(Emscripten)
-				dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
-			else()
-				dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
-			endif()
-			
+		else()
+			dk_warning("No configure file found. It may need to be generated with autotools")
 		endif()
-	endif()
+			
+		#### restore any altered flags ####
+		if(Emscripten)
+			dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+		else()
+			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+		endif()
 		
-	
-	###### configure with provided commands ######
-	# No Specific configure type. Just pass the arguments to dk_exec to run
-	#else()
+		
+	############ configure with provided commands #############
+	# No Specific configure type. Just pass the arguments to dk_exec to run	
+	#
+	else()
 		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_allButFirstArgs}\n")
-		
+			
 		#f(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 		#	dk_exec(${dk_allButFirstArgs} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 		#	dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
@@ -162,8 +156,10 @@ function(dk_configure)
 			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
 			dk_unset(dk_allButFirstArgs)
 		endif()
-		#endif()
-	#endif()
+	endif()
+	
+	
+	
 	
 	#### restore any altered flags ####
 	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
