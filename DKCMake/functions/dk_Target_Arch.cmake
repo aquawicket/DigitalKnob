@@ -37,7 +37,7 @@ function(dk_Target_Arch)
 		
 		dk_echo()
 		if(NOT Host_Arch)
-			dk_Host_Arch()
+			dk_call(dk_Host_Arch)
 		endif()
 		dk_echo(" 1) ${Host_Arch}")
 		dk_echo(" 2) Arm32")

@@ -55,7 +55,7 @@ function(dk_Target_Os)
 		dk_echo("11) Exit")
 		dk_echo()
 		
-		dk_keyboardInput(input)
+		dk_call(dk_keyboardInput input)
 		if("${input}" EQUAL "0")
 			dk_set(Target_Os ${Target_Os_Cache})
 		elseif("${input}" EQUAL "1")
