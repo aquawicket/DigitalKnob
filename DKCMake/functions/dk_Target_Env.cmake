@@ -38,7 +38,7 @@ function(dk_Target_Env)
 		
 		dk_echo()
 		if(NOT Host_Env)
-			dk_Host_Env()
+			dk_call(dk_Host_Env)
 		endif()
 		dk_echo(" 1) ${Target_Env_Default}")
 		dk_echo()
