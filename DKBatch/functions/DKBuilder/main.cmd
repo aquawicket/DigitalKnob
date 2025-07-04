@@ -89,16 +89,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		
 		::########### CMAKE Command ###################
 		%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
-		cd %DKCPP_APPS_DIR%/%Target_App%
+		%dk_call% dk_chdir %DKCPP_APPS_DIR%/%Target_App%
 		%dk_call% dk_validate CMAKE_EXE "%dk_call% dk_depend cmake"
 		%dk_call% dk_cmakeEval "dk_load('%DKCPP_APPS_DIR:\=/%/%Target_App%/DKINSTALL.cmake')"
 		::%CMAKE_EXE% -P "%DKCPP_APPS_DIR:\=/%/%Target_App%/DKINSTALL.cmake"
-		
-		pause
-		exit
-		exit
-		exit
-		
 		
 		::%dk_call% DKBuilder/generate
 		::%dk_call% DKBuilder/buildApp

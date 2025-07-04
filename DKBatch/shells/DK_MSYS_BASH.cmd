@@ -9,7 +9,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 %dk_call% dk_validate MSYS2 "%dk_call% %DKIMPORTS_DIR%\msys2\DKINSTALL.cmd"
 set "PATH=%MSYS2%\usr\bin;%PATH%"
-cd %MSYS2%
+%dk_call% dk_chdir %MSYS2%
 
 %dk_call% dk_clearScreen
 %dk_call% dk_title "Digitalknob DK_MSYS_BASH"

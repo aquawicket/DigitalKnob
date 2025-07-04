@@ -36,7 +36,7 @@ if not defined dk_runPhpServer_DEFAULT_IP 	(set dk_runPhpServer_DEFAULT_IP=127.0
 	)
 	
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	cd %DKBRANCH_DIR%
+	%dk_call% dk_chdir %DKBRANCH_DIR%
 	TASKLIST | FINDSTR php_local.exe || start /min "" "%DKPHP_DIR%\php_local.exe" -S %LOCAL_IP%:%port% -t "%path%"
 	
 	%dk_call% dk_todo "dk_runPhpServer.cmd: get local ip address"

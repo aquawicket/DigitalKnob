@@ -23,12 +23,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::############ Windows_X86_64_Clang ##########
 	if "%Target_Tuple%"=="Windows_X86_64_Clang" (
 		%dk_call% dk_validate MSYS2 "%dk_call% %DKIMPORTS_DIR%\msys2\DKINSTALL.cmd"
-		cd %OPENSSL%\%Target_Tuple%\%Target_Type% && set PATH=%MSYS2%\clang64\bin;%MSYS2%\usr\bin;%MSYS2% & %USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/msys2-x86_64-20240727/usr/bin/perl ../../Configure no-shared --debug mingw64 CC=clang
+		%dk_call% dk_chdir %OPENSSL%\%Target_Tuple%\%Target_Type% && set PATH=%MSYS2%\clang64\bin;%MSYS2%\usr\bin;%MSYS2% & %USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/msys2-x86_64-20240727/usr/bin/perl ../../Configure no-shared --debug mingw64 CC=clang
 		%MSYS2%\usr\bin\perl configdata.pm --dump
 		%MSYS2%\clang64\bin\mingw32-make -C %OPENSSL%\Windows_X86_64_Clang\Debug
 	)
 	if "%Target_Tuple%"=="Windows_X86_Msvc" (
-		cd %OPENSSL%\%Target_Tuple%\%Target_Type% && set PATH=%NASM%; & %USERPROFILE%\DigitalKnob\Development\3rdParty\strawberry-perl-5.40.0.1-64bit-portable\perl\bin\perl.exe ../../Configure no-shared --debug VC-WIN32
+		%dk_call% dk_chdir %OPENSSL%\%Target_Tuple%\%Target_Type% && set PATH=%NASM%; & %USERPROFILE%\DigitalKnob\Development\3rdParty\strawberry-perl-5.40.0.1-64bit-portable\perl\bin\perl.exe ../../Configure no-shared --debug VC-WIN32
 		%USERPROFILE%\DigitalKnob\Development\3rdParty\strawberry-perl-5.40.0.1-64bit-portable\perl\bin\perl.exe configdata.pm --dump
 	)
 

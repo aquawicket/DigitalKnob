@@ -174,8 +174,6 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if exist 	 "%DKSCRIPT_DIR%"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:\=/%")
 	if "%DKSCRIPT_DIR:~-1%" equ "/"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%")
 	if not exist "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit -1)
-	
-	::cd "%DKSCRIPT_DIR%"
 %endfunction%
 
 ::##################################################################################

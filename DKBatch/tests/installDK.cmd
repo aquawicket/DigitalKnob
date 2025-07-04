@@ -31,7 +31,7 @@ call dk_load dk_exit
 %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 if NOT exist "%DKBRANCH_DIR%\.git" (
 	"%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
-	cd "%DKBRANCH_DIR%"
+	%dk_call% dk_chdir "%DKBRANCH_DIR%"
 	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout "%DKBRANCH%"
 	echo Digitalknob installation complete
 ) else (

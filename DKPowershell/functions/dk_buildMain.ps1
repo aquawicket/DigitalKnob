@@ -57,8 +57,15 @@ function Global:dk_buildMain() {
 		if(!${Target_Type})		{ dk_call dk_Target_Type;   continue; }
 		
 		dk_call dk_createCache
-		dk_call dk_generate	
-		dk_call dk_buildApp
+		
+		::########### CMAKE Command ###################
+		dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
+		dk_call dk_chdir ${DKCPP_APPS_DIR}/${Target_App}
+		dk_call dk_validate CMAKE_EXE "%dk_call% dk_depend cmake"
+		dk_call dk_cmakeEval "dk_load('${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake')"
+		
+		#dk_call dk_generate	
+		#dk_call dk_buildApp
 		
 		dk_call dk_unset UPDATE
 		dk_call dk_unset Target_App

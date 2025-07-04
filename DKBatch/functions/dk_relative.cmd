@@ -49,24 +49,23 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	echo:
-	
+	%dk_call% dk_echo
 	%dk_call% dk_set from_path "%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch/functions"
 	%dk_call% dk_set to_path "%USERPROFILE:\=/%/DigitalKnob"
 	%dk_call% dk_relative "%to_path%" "%from_path%"
 	%dk_call% dk_printVar dk_relative
-	cd %from_path%
-	echo CD = %CD:\=/%
-	cd %dk_relative%
-	echo CD = %CD:\=/%
+	%dk_call% dk_chdir %from_path%
+	%dk_call% dk_echo "CD = %CD:\=/%"
+	%dk_call% dk_chdir %dk_relative%
+	%dk_call% dk_echo "CD = %CD:\=/%"
 	
-	echo:
+	%dk_call% dk_echo
 	%dk_call% dk_set from_path "%USERPROFILE:\=/%/DigitalKnob"
 	%dk_call% dk_set to_path "%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch"
 	%dk_call% dk_relative "%to_path%" "%from_path%"
 	%dk_call% dk_printVar dk_relative
-	cd %from_path%
-	echo CD = %CD:\=/%
-	cd %dk_relative%
-	echo CD = %CD:\=/%
+	%dk_call% dk_chdir %from_path%
+	%dk_call% dk_echo "CD = %CD:\=/%"
+	%dk_call% dk_chdir %dk_relative%
+	%dk_call% dk_echo "CD = %CD:\=/%"
 %endfunction%
