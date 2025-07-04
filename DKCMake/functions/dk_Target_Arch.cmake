@@ -49,7 +49,7 @@ function(dk_Target_Arch)
 		dk_echo(" 8) Exit")
 		dk_echo()
 		
-		dk_keyboardInput(input)
+		dk_call(dk_keyboardInput input)
 		if("${input}" EQUAL "0")
 			dk_set(Target_Arch ${Target_Arch_Cache})
 		elseif("${input}" EQUAL "1")

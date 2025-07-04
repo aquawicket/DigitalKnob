@@ -40,6 +40,8 @@ function Global:dk_Target_App() {
 	elseif($dk_keyboardInput -eq "11"){ dk_call dk_reload; }
 	elseif($dk_keyboardInput -eq "12"){ dk_call dk_exit 0; }
 	else{ dk_call dk_warning "invalid selection"; }
+	
+	${env:Target_App} = ${Target_App};
 }
 
 

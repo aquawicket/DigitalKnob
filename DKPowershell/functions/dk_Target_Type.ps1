@@ -19,14 +19,18 @@ function Global:dk_Target_Type() {
 	dk_call dk_echo " 6) Exit"
 	dk_call dk_echo "\n";
 	
-	$input = Read-Host
-	    if(${input} -eq "1"){ $global:Target_Type = "Debug" }
-	elseif(${input} -eq "2"){ $global:Target_Type = "Release" }
-	elseif(${input} -eq "3"){ $global:Target_Type = "All" }
-	elseif(${input} -eq "4"){ dk_call dk_clearScreen }
-	elseif(${input} -eq "5"){ dk_call dk_unset Target_Tuple }
-	elseif(${input} -eq "6"){ dk_call dk_exit 0 }
-	else{ dk_call dk_warning "invalid selection" }
+	dk_call dk_keyboardInput;
+	    if(${dk_keyboardInput} -eq "1"){ $global:Target_Type = "Debug" }
+	elseif(${dk_keyboardInput} -eq "2"){ $global:Target_Type = "Release" }
+	elseif(${dk_keyboardInput} -eq "3"){ $global:Target_Type = "All" }
+	elseif(${dk_keyboardInput} -eq "4"){ dk_call dk_clearScreen }
+	elseif(${dk_keyboardInput} -eq "5"){ dk_call dk_unset Target_Tuple }
+	elseif(${dk_keyboardInput} -eq "6"){ dk_call dk_exit 0 }
+	else {
+		dk_call dk_unset Target_Type; 
+		dk_call dk_echo "${dk_keyboardInput}: invalid selection, please try again";
+		return;
+	}
 }
 
 
