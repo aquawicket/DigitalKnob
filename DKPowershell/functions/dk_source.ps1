@@ -33,6 +33,8 @@ if(!(Test-Path "${func}")){
 #	TO THIS ->	     https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKPowershell/functions/dk_color.ps1
 #	TO THIS ->		https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
 if(!(Test-Path "${func}")){ Write-Host "downloading ${func} . . ."; }
+${dirname} = Split-Path ${func} -Parent;
+if(!(Test-Path "${dirname}")){ dk_call dk_mkdir "${dirname}"; }
 if(!(Test-Path "${func}")){ Invoke-WebRequest -URI "${HTTPfunc}" -OutFile "${func}" -ErrorAction SilentlyContinue; }
 if(!(Test-Path "${func}")){ Write-Host "ERROR: Failed to download ${func}."; return; }	
 #############################################################################################################################
