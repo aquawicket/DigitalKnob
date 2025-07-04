@@ -24,7 +24,7 @@ function Global:dk_gitUpdate() {
 			if("${dk_gitUpdate_BACKUP}" -eq "1"){
 				dk_call dk_copy "${env:DKBRANCH_DIR}" "${env:DKBRANCH_DIR}_BACKUP" OVERWRITE;
 			}
-			dk_call dk_delete "${env:DKBRANCH_DIR}";
+			Remove-Item -Recurse -Force "${env:DKBRANCH_DIR}";
 			dk_call "${GIT_EXE}" clone ${_url_} "${env:DKBRANCH_DIR}";
 			dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} pull --all;
 			dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -- .;
