@@ -35,7 +35,17 @@ if(!(Test-Path "${func}")){
 if(!(Test-Path "${func}")){ Write-Host "downloading ${func} . . ."; }
 ${dirname} = Split-Path ${func} -Parent;
 if(!(Test-Path "${dirname}")){ New-Item -Path ${dirname} -ItemType Directory | Out-Null; }
-if(!(Test-Path "${func}")){ Invoke-WebRequest -URI "${HTTPfunc}" -OutFile "${func}" -ErrorAction SilentlyContinue; }
+if(!(Test-Path "${func}")){ 
+	try
+	{
+		Invoke-WebRequest -URI "${HTTPfunc}" -OutFile "${func}"; 
+	}
+	catch
+	{
+		Write-Output "Something threw an exception"
+		Write-Output $_
+	}
+}
 if(!(Test-Path "${func}")){ Write-Host "ERROR: Failed to download ${func}."; return; }	
 #############################################################################################################################
 
