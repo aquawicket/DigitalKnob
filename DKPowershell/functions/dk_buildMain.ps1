@@ -33,10 +33,14 @@ function Global:dk_buildMain() {
 	dk_call dk_installGit
 	dk_call dk_DKBRANCH_DIR
 	
-	if("${DKSCRIPT_DIR}" -ne "${DKBRANCH_DIR}"){
+	if(!(Test-Path "$(dk_call dk_DKDESKTOP_DIR)/DigitalKnob.lnk")){
+		dk_call dk_createShortcut "$(dk_call dk_DIGITALKNOB_DIR)" "$(dk_call dk_DKDESKTOP_DIR)/DigitalKnob.lnk"
+	}
+	
+	if("${DKSCRIPT_DIR}" -ne "${dk_call dk_DKBRANCH_DIR}"){
 		dk_call dk_warning "${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
 		dk_call dk_warning "${DKSCRIPT_NAME} path = ${DKSCRIPT_DIR}"
-		dk_call dk_warning "DKBRANCH_DIR path = ${DKBRANCH_DIR}"
+		dk_call dk_warning "DKBRANCH_DIR path = ${env:DKBRANCH_DIR}"
 	}
 	
 	$running=1
