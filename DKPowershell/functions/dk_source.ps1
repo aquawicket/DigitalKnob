@@ -43,6 +43,7 @@ if(!(Test-Path "${func}")){
 	catch
 	{
 		Write-Output "ERROR: dk_source.ps1:41 threw an exception"
+		Write-Output "File: ${HTTPfunc}"
 		Write-Output $_
 		Read-Host;
 	}
