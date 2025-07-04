@@ -18,7 +18,7 @@ function Global:dk_DKTOOLS_DIR() {
 			${env:DKTOOLS}="DKTools"
 		}
 		if(!(${env:DKTOOLS_DIR})){
-			${env:DKTOOLS_DIR} = "$(dk_call dk_DKHOME_DIR)/${env:DKTOOLS}" 
+			${env:DKTOOLS_DIR} = "$(dk_call dk_DIGITALKNOB_DIR)/${env:DKTOOLS}" 
 		}
 	}
 	

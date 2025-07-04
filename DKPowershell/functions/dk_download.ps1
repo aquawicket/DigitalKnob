@@ -32,7 +32,7 @@ function Global:dk_download($url, $destination) {
 	if(!(Test-Path "${destination_dir}")){ dk_call dk_mkdir "${destination_dir}"; }
 	
 	# method 1
-	Invoke-WebRequest -URI ${url} -OutFile ${destination}; #-SkipHttpErrorCheck;
+	Invoke-WebRequest -URI ${url} -OutFile ${destination} -ErrorAction SilentlyContinue; #-SkipHttpErrorCheck;
 	
 	# method 2
 	#(New-Object System.Net.WebClient).DownloadFile($url, $destination);

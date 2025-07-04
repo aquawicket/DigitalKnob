@@ -21,7 +21,7 @@ function Global:dk_call(){
 		${func} = $1;
 	}
 	
-	#echo ${func} $2 $3 $4 $5 $6 $7 $8 $9
+	#Write-Host "calling ${func} $2 $3 $4 $5 $6 $7 $8 $9";
 	& ${func} $2 $3 $4 $5 $6 $7 $8 $9;
 	#Start-Process -WorkingDirectory $env:DKPOWERSHELL_FUNCTIONS_DIR -ArgumentList @args
 } 

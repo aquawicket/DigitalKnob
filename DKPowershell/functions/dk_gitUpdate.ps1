@@ -17,11 +17,11 @@ function Global:dk_gitUpdate($url, $branch) {
 	}
 	
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
-	if(!(dk_call dk_pathExists "${DKBRANCH_DIR}/.git")){
+	if(!(dk_call dk_pathExists "${env:DKBRANCH_DIR}/.git")){
 		dk_call dk_printVar DKBRANCH_DIR
-		dk_call "${GIT_EXE}" clone "${url}" "${DKBRANCH_DIR}"
+		dk_call "${GIT_EXE}" clone "${url}" "${env:DKBRANCH_DIR}"
 	}
-	dk_call cd "${DKBRANCH_DIR}" #-or dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
+	dk_call cd "${env:DKBRANCH_DIR}" #-or dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
 	dk_call "${GIT_EXE}" pull --all
 	dk_call "${GIT_EXE}" checkout -- .
 	dk_call "${GIT_EXE}" checkout "${branch}"
@@ -32,7 +32,7 @@ function Global:dk_gitUpdate($url, $branch) {
 		dk_call "${GIT_EXE}" checkout -b "${branch}" main
 		dk_call "${GIT_EXE}" push --set-upstream origin "${branch}"
 	}
-	#dk_call chmod +x "${DKBRANCH_DIR}"/build
+	#dk_call chmod +x "${env:DKBRANCH_DIR}"/build
 }
 
 

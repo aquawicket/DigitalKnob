@@ -8,9 +8,10 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 function Global:DKINSTALL() {
 	dk_debugFunc 0;
 	
-	dk_call dk_getFileParams ${PSScriptRoot}/dkconfig.txt
+	dk_call dk_source "${PSScriptRoot}/dkconfig.txt";
+	dk_call dk_getFileParams ${PSScriptRoot}/dkconfig.txt;
 
-	dk_call dk_validate "Host_Tuple" "dk_call dk_Host_Tuple"
+	dk_call dk_validate "Host_Tuple" "dk_call dk_Host_Tuple";
     if(${Host_Arch} -eq "Arm32") { ${git_Import} = ${Git_Windows_Arm32_Import}; 	}
     if(${Host_Arch} -eq "Arm64") { ${git_Import} = ${Git_Windows_Arm64_Import}; 	}	
     if(${Host_Arch} -eq "X86")   { ${git_Import} = ${Git_Windows_X86_Import}; 		}
@@ -32,17 +33,16 @@ function Global:DKINSTALL() {
 	${global:PATCH_EXE} = "${GIT}/usr/bin/patch.exe";
 
     Write-Host "GIT_EXE = ${GIT_EXE}";   
-	if(!(Test-Path ${GIT_EXE})){ 
-		dk_call dk_echo "Git already installed at:${GIT_EXE}"
+	if(Test-Path ${GIT_EXE}){ 
+		dk_call dk_echo "Git already installed at:${GIT_EXE}";
 		return; 
 	}
         
     dk_call dk_info "";
     dk_call dk_info "Installing git . . .";
-    dk_call dk_DKDOWNLOAD_DIR;
-	dk_call dk_download ${git_Import} #$(dk_call dk_DKDOWNLOAD_DIR)/${GIT_IMPORT_FILE};
-	dk_call dk_info "${env:DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE} -y -o ${GIT}";
-	dk_call ${env:COMSPEC} /c "${env:DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" -y -o ${GIT};
+	dk_call dk_download "${git_Import}" "$(dk_call dk_DKDOWNLOAD_DIR)/${GIT_IMPORT_FILE}";
+	dk_call dk_info "$(dk_call dk_DKDOWNLOAD_DIR)/${GIT_IMPORT_FILE} -y -o ${GIT}";
+	dk_call ${env:COMSPEC} /c "$(dk_call dk_DKDOWNLOAD_DIR)/${GIT_IMPORT_FILE}" -y -o ${GIT};
 	   
     if(!(dk_call dk_pathExists ${GIT_EXE})){ dk_call dk_error "cannot find git"; }
 }

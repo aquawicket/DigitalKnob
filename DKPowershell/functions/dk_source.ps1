@@ -6,27 +6,44 @@ if(!$dk_source_ps1){ $dk_source_ps1 = 1; } else{ return; } #include guard
 #
 function Global:dk_source($func) {
 	#if(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1"){ dk_debugFunc 1 }
-	$all_args = $PsBoundParameters.Values + ${args}
-	#Write-Host "dk_source($all_args)"
 
 	if(!${func}){
 		Write-Host "ERROR: func:${func} is invalid";
 		return;
 	}
-	
-	# load if it's an existing full path file
-	if((${func}) -and (Test-Path "${func}")){
-		. "${func}"
-		return
+
+#############################################################################################################################
+#	FROM THIS ->                          											            			     dk_color
+#	FROM THIS ->                          C:\Users\Administrator\DigitalKnob\Development\3rdParty\_DKIMPORTS\git/dkconfig.txt
+if(!(Test-Path "${func}")){ 
+	${func} = ${func} -replace '\\', '/'; 
+#                                                                                                                dk_color
+#	                                      C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+	${func_noext} = ${func};
+	if(${func}.lastIndexOf('.') -gt 0){ ${func_noext} = ${func}.Substring(0, ${func}.lastIndexOf('.')); }
+	if("${func}" -eq "${func_noext}"){  ${func} = "${func}.ps1"; } 
+#                                                                                                                dk_color.ps1
+#	                                      C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+	if(! ("${func}" -Match "C:/Users/Administrator/DigitalKnob")){ ${func} = "C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/${func}"; }
+
+#	TO THIS ->		                       C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/dk_color.ps1
+#	TO THIS ->                            C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+	${HTTPfunc} = ${func} -replace 'C:/Users/Administrator', 'https://raw.githubusercontent.com/aquawicket';
+}	
+#	TO THIS ->	     https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKPowershell/functions/dk_color.ps1
+#	TO THIS ->		https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+if(!(Test-Path "${func}")){ Write-Host "downloading ${func} . . ."; }
+if(!(Test-Path "${func}")){ Invoke-WebRequest -URI "${HTTPfunc}" -OutFile "${func}" -ErrorAction SilentlyContinue; }
+if(!(Test-Path "${func}")){ Write-Host "ERROR: Failed to download ${func}."; return; }	
+#############################################################################################################################
+
+
+	if(Test-Path "${func}"){
+		if("${func}" -Match ".ps1"){
+			. "${func}";
+		}
+		return;
 	}
-	
-	#Write-Host "func = ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1";
-	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1")){ Write-Host "downloading ${func} . . ." }
-	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/${func}.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1" }
-	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1")){ Write-Host "ERROR: Failed to download ${func}."; return }
-	
-	#Write-Host "func = ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1";
-	. ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;
 }
 
 
@@ -35,6 +52,6 @@ function Global:dk_source($func) {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-	dk_source dk_info
-	dk_info "test message using dk_source to download it first"
+	dk_source dk_info;
+	dk_info "test message using dk_source to download it first";
 }
