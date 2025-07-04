@@ -6,20 +6,20 @@ if(!$dk_gitUpdate_ps1){ $dk_gitUpdate_ps1 = 1; } else{ return; } #include guard
 #
 #
 function Global:dk_gitUpdate() {
-	dk_debugFunc 2 3;
+	dk_debugFunc 0;
 	
 	${dk_gitUpdate_BACKUP} = 1;
 	if($($args[0])){ ${_url_} = $($args[0]); }    		else { ${_url_} = "https://github.com/aquawicket/DigitalKnob.git"; }
 	if($($args[1])){ ${env:DKBRANCH} = $($args[1]); } 	else { ${env:DKBRANCH} = "Development"; }
 	
 #	if(!($args[2] -eq "NO_CONFIRM")){
-#		dk_call dk_info "Git Update? Any local changes will be lost."
-#		if(!(dk_call dk_confirm)){ return 0 }
+#		dk_call dk_info "Git Update? Any local changes will be lost.";
+#		if(!(dk_call dk_confirm)){ return 0; }
 #	}
-	
+
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit";
-	if(!(dk_call dk_pathExists "${env:DKBRANCH_DIR}/.git")){
-		if(!(dk_call dk_pathExists "${env:DKBRANCH_DIR}")){
+	if( !(dk_call dk_pathExists "${env:DKBRANCH_DIR}/.git") ){
+		if( !(dk_call dk_pathExists "${env:DKBRANCH_DIR}") ){
 			###### Backup Branch directory and clone ######
 			if("${dk_gitUpdate_BACKUP}" -eq "1"){
 				dk_call dk_copy "${env:DKBRANCH_DIR}" "${env:DKBRANCH_DIR}_BACKUP" OVERWRITE;
@@ -28,11 +28,11 @@ function Global:dk_gitUpdate() {
 			dk_call "${GIT_EXE}" clone ${_url_} "${env:DKBRANCH_DIR}";
 			dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} pull --all;
 			dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -- .;
-			dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout ${env:DKBRANCH} || (
-				dk_call dk_echo "Remote has no '${env:DKBRANCH}' branch. Creating...";
-				dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -b ${env:DKBRANCH} main;
-				dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} push --set-upstream origin ${env:DKBRANCH};
-			)
+			dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout ${env:DKBRANCH}; # || {
+#				dk_call dk_echo "Remote has no '${env:DKBRANCH}' branch. Creating...";
+#				dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -b ${env:DKBRANCH} main;
+#				dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} push --set-upstream origin ${env:DKBRANCH};
+#			}
 			return;
 		}
 
@@ -45,13 +45,13 @@ function Global:dk_gitUpdate() {
 	dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -- .;
 	dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout ${env:DKBRANCH};
 	if( $? -eq "0" ){
-		dk_call dk_info "${env:DKBRANCH} branch selected"
+		dk_call dk_info "${env:DKBRANCH} branch selected";
 	} else {
-		dk_call dk_info "Remote has no ${env:DKBRANCH} branch. Creating..."
-		dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -b ${env:DKBRANCH} main
-		dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} push --set-upstream origin ${env:DKBRANCH}
+		dk_call dk_info "Remote has no ${env:DKBRANCH} branch. Creating...";
+		dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -b ${env:DKBRANCH} main;
+		dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} push --set-upstream origin ${env:DKBRANCH};
 	}
-	#dk_call chmod +x "${env:DKBRANCH_DIR}"/build
+	#dk_call chmod +x "${env:DKBRANCH_DIR}"/build;
 }
 
 
@@ -65,5 +65,5 @@ function Global:dk_gitUpdate() {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
+	dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development;
 }
