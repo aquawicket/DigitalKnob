@@ -42,8 +42,9 @@ if(!(Test-Path "${func}")){
 	}
 	catch
 	{
-		Write-Output "Something threw an exception"
+		Write-Output "ERROR: dk_source.ps1:41 threw an exception"
 		Write-Output $_
+		Read-Host;
 	}
 }
 if(!(Test-Path "${func}")){ Write-Host "ERROR: Failed to download ${func}."; return; }	
