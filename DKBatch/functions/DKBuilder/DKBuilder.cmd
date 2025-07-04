@@ -44,7 +44,6 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	::takeown /F %DKF% /R /D "Y"
 	%dk_call% DKBuilder/main.cmd
 	
-::exit /b %errorlevel%
 %endfunction%
 
 
