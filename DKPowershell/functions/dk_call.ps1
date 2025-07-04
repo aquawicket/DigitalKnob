@@ -14,11 +14,13 @@ function Global:dk_call(){
 		dk_source $1;
 	#}
 	
-	if(Test-Path $1){
-		${func} = dk_call dk_basename $1;
-		${func} = dk_call dk_removeExtension ${func}
-	} else {
-		${func} = $1;
+	${func} = $1;
+	
+	if(Test-Path ${func}){
+		if("${func}" -Match ".ps1"){
+			${func} = dk_call dk_basename ${func};
+			${func} = dk_call dk_removeExtension ${func}
+		}
 	}
 	
 	#Write-Host "calling ${func} $2 $3 $4 $5 $6 $7 $8 $9";
