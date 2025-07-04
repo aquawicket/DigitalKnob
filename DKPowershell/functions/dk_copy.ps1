@@ -16,10 +16,12 @@ function Global:dk_copy($from, $to) {
 	#$from = $args[0]
 	#$to = $args[1]
 	#$overwrite = $args[2]
-	if("$args[2]" = "OVERWRITE"){
-		$OVERWRITE = 1
-	} else { 
-		$OVERWRITE = 0 
+	if($($args[2])){
+#		if("$($args[2])" = "OVERWRITE"){
+			$OVERWRITE = 1
+#		} else { 
+#			$OVERWRITE = 0 
+#		}
 	}
 	
 	dk_call dk_info "Copying ${from} to ${to}"
@@ -29,7 +31,7 @@ function Global:dk_copy($from, $to) {
 		return $false
 	}
 	
-	if(dk_call dk_pathExists "${to}")){
+	if(dk_call dk_pathExists "${to}"){
 		if("${OVERWRITE}" -ne "1"){
 			dk_call dk_error "dk_copy Cannot copy file. Destiantion exists and OVERWRITE is not set"
 			return $false
@@ -42,12 +44,16 @@ function Global:dk_copy($from, $to) {
 	dk_call dk_mkdir "${_parent_dir_}"
 	
 	#cp -r "${from}" "${to}"
+	Copy-Item -Path "${from}" -Destination "${to}" -Recurse
 }
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-DKTEST() {
+function Global:DKTEST() {
 	dk_debugFunc 0;
+	
+	dk_call dk_copy "$(dk_call dk_DKBRANCH_DIR)" "$(dk_call dk_DKBRANCH_DIR)_BACKUP" OVERWRITE;
+	return;
 	
 	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
 	
