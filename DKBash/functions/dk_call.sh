@@ -10,6 +10,7 @@
 #
 dk_call(){
 	dk_debugFunc 1 99
+	#echo "dk_call($*)"
 	
 	if ! (command -v ${1} &>/dev/null); then
 		

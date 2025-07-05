@@ -10,11 +10,12 @@
 #
 dk_installGit() {
 	dk_debugFunc 0
+	#echo "dk_installGit($*)"
 	
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
-	if [ ! -e "${DKIMPORTS_DIR}/git/DKINSTALL.cmd" ]; then
+	if [ ! -e "${DKIMPORTS_DIR}/git/DKINSTALL.sh" ]; then
 		dk_call dk_validate DKHTTP_DKIMPORTS_DIR "export DKHTTP_DKIMPORTS_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS"
-		dk_call dk_download "${DKHTTP_DKIMPORTS_DIR}/git/DKINSTALL.cmd"  "${DKIMPORTS_DIR}/git/DKINSTALL.cmd"
+		dk_call dk_download "${DKHTTP_DKIMPORTS_DIR}/git/DKINSTALL.sh"  "${DKIMPORTS_DIR}/git/DKINSTALL.sh"
 	fi
 	dk_call dk_depend git
 	

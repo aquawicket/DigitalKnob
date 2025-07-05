@@ -11,18 +11,16 @@
 #  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
 #
 dk_depend() {
-	
-	_plugin_="$1"
+	#echo "dk_depend($*)"
 	
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
-	if [ -e "${DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.sh" ];then
-		. "${DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.sh"
-		
-		dk_call dk_success "found ${_plugin_}"
+	if [ -e "${DKIMPORTS_DIR}/${1}/DKINSTALL.sh" ]; then
+		dk_call dk_source "${DKIMPORTS_DIR}/${1}/DKINSTALL.sh"
+		dk_call DKINSTALL
 		return
 	fi
 
-	dk_call dk_fatal "${DKIMPORTS_DIR}/${_plugin_}/DKINSTALL.sh not found"
+	dk_call dk_fatal "${DKIMPORTS_DIR}/${1}/DKINSTALL.sh not found"
 }
 
 

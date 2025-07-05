@@ -21,7 +21,7 @@ dk_download() {
 	
 	url_filename=$(dk_call dk_basename ${url})
 
-	dk_call dk_printVar url_filename
+	echo "url_filename = ${url_filename}"
 	[ -z "${url_filename-}" ] && dk_call dk_error "url_filename invalid"
 	
 #	[ -n ${destination} ] && dk_call dk_realpath "${destination}" destination

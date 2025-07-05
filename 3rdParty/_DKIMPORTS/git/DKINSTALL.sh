@@ -20,14 +20,18 @@ dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
 # DKINSTALL
 #
 DKINSTALL() {
-	dk_call dk_debugFunc 0	
+	#dk_call dk_debugFunc 0	
+	#echo "DKINSTALL($*)"
 	
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
-	export GIT_IMPORT="${Git_${Host_Tuple}_Import}"
+
+	echo "Git_Windows_X86_64_Import = ${Git_Windows_X86_64_Import}"
+	GIT_IMPORT_VAR="Git_${Host_Tuple}_Import"
+	export GIT_IMPORT="${!GIT_IMPORT_VAR}"
     dk_call dk_assertVar GIT_IMPORT
   
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-	[ -z "${GIT}" ] && dk_call dk_importVariables ${GIT_IMPORT} NAME git ROOT ${DKTOOLS_DIR}
+	[ -z "${GIT-}" ] && dk_call dk_importVariables ${GIT_IMPORT} NAME git ROOT ${DKTOOLS_DIR}
 	dk_call dk_assertVar GIT
 	
 	# https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly

@@ -12,15 +12,18 @@
 #
 dk_validate() {
 	dk_debugFunc 2
-
+	#echo "dk_validate($*)"
+	
 	#_var_=${1}
 	#_code_=${2}
 	[ -n "${!1+x}" ] && return 0
 	
 	#echo "2 = ${2}"
 	
-	[ -e "${DKBASH_FUNCTIONS_DIR}/${2-}.sh" ] && dk_call dk_source ${2}
-	eval "${2}"
+	#[ -e "${DKBASH_FUNCTIONS_DIR}/${2-}.sh" ] && dk_call dk_source ${2}
+	
+	${2}
+	#eval "${2}"
 	
 	[ -n "${!1+x}" ] || dk_call dk_error "dk_call dk_validate(): ${1} is invalid"
 }
