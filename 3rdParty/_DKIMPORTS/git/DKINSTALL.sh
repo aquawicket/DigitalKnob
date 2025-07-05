@@ -31,7 +31,8 @@ DKINSTALL() {
     dk_call dk_assertVar GIT_IMPORT
   
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-	[ -z "${GIT-}" ] && dk_call dk_importVariables ${GIT_IMPORT} NAME git ROOT ${DKTOOLS_DIR}
+	#[ -z "${GIT-}" ] && dk_call dk_importVariables ${GIT_IMPORT} NAME git ROOT ${DKTOOLS_DIR}
+	[ -z "${GIT-}" ] && dk_call dk_importVariables ${GIT_IMPORT} ROOT ${DKTOOLS_DIR}
 	dk_call dk_assertVar GIT
 	
 	# https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly

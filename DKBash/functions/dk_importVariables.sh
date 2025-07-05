@@ -53,40 +53,40 @@ dk_importVariables() {
 
 	URL="${1}"
 	dk_call dk_assertVar URL 
-	#echo "URL = ${URL}"
+	echo "URL = ${URL}"
 	
 	IMPORT_PATH=""
 	dk_call dk_getParameterValue IMPORT_PATH 	"$@"		# /c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	#[ -n "${IMPORT_PATH}" ] && IMPORT_PATH=${IMPORT_PATH:\=/}
-	# echo "IMPORT_PATH = ${IMPORT_PATH}"
+	echo "IMPORT_PATH = ${IMPORT_PATH}"
 	
 	BRANCH=""
 	dk_call dk_getParameterValue BRANCH			"$@"		# master
-	# echo "BRANCH = ${BRANCH}"
+	echo "BRANCH = ${BRANCH}"
 	
 	FOLDER=""
 	dk_call dk_getParameterValue  FOLDER		"$@"     	# zlib-master
-	# echo "FOLDER = ${FOLDER}"
+	echo "FOLDER = ${FOLDER}"
 
 	NAME=""
 	dk_call dk_getParameterValue  NAME			"$@"     	# zlib
-	# echo "NAME = ${NAME}"
+	echo "NAME = ${NAME}"
 	
 	DIR=""
 	dk_call dk_getParameterValue  DIR			"$@"     	# C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	# echo "DIR = ${DIR}"
+	echo "DIR = ${DIR}"
 	
 	ROOT=""
 	dk_call dk_getParameterValue  ROOT			"$@"     	# C:/Users/Administrator/DigitalKnob/Development/3rdParty
-	# echo "ROOT = ${ROOT}"
+	echo "ROOT = ${ROOT}"
 	
 	TAG=""
 	dk_call dk_getParameterValue  TAG			"$@"     	# v1.3.1
-	# echo "TAG = ${TAG}"
+	echo "TAG = ${TAG}"
 	
 	VERSION=""
 	dk_call dk_getParameterValue  VERSION		"$@"     	# master
-	# echo "VERSION = ${VERSION}"
+	echo "VERSION = ${VERSION}"
 	
 	###### POPULATE VARIABLES ######
 	# PLUGIN_URL				- from arg:url														: https://github.com/madler/zlib/archive/refs/heads/master.zip
@@ -138,36 +138,36 @@ dk_importVariables() {
 	# set "PLUGIN_URL="
 	# set "PLUGIN_URL=${URL:\=/}"
 	dk_call dk_set PLUGIN_URL "${URL}"											# PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
-	# echo "PLUGIN_URL = ${PLUGIN_URL}" 
+	echo "PLUGIN_URL = ${PLUGIN_URL}" 
 	
 	### PLUGIN_URL_FILENAME
 	# PLUGIN_URL_FILENAME=""
 	PLUGIN_URL_FILENAME=$(dk_call dk_basename "${PLUGIN_URL}")					
-	# echo "PLUGIN_URL_FILENAME = ${PLUGIN_URL_FILENAME}" 									# PLUGIN_URL_FILENAME		: master.zip
+	echo "PLUGIN_URL_FILENAME = ${PLUGIN_URL_FILENAME}" 									# PLUGIN_URL_FILENAME		: master.zip
 	
 	### PLUGIN_URL_LIST
 	PLUGIN_URL_LIST=""
 	dk_call dk_replaceAll "${PLUGIN_URL}" "/" ";" PLUGIN_URL_LIST 					
-	# echo "PLUGIN_URL_LIST = ${PLUGIN_URL_LIST}" 										# PLUGIN_URL_LIST			: https:;github.com;madler;zlib;archive;refs;heads;master.zip
+	echo "PLUGIN_URL_LIST = ${PLUGIN_URL_LIST}" 										# PLUGIN_URL_LIST			: https:;github.com;madler;zlib;archive;refs;heads;master.zip
 	
 	### PLUGIN_GIT
 	PLUGIN_GIT=""
 	$(dk_call dk_includes "${PLUGIN_URL}" "https://github.com") && PLUGIN_GIT=1 || PLUGIN_GIT=0			
-	# echo "PLUGIN_GIT = ${PLUGIN_GIT}" 												# PLUGIN_GIT				: 1
+	echo "PLUGIN_GIT = ${PLUGIN_GIT}" 												# PLUGIN_GIT				: 1
 	
 	### PLUGIN_URL_EXTENSION
 	PLUGIN_URL_EXTENSION=""
 	dk_call dk_getExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_EXTENSION			
-	# echo "PLUGIN_URL_EXTENSION = ${PLUGIN_URL_EXTENSION}" 									# PLUGIN_URL_EXTENSION		: .zip
+	echo "PLUGIN_URL_EXTENSION = ${PLUGIN_URL_EXTENSION}" 									# PLUGIN_URL_EXTENSION		: .zip
 
 	### PLUGIN_URL_FILE
 	PLUGIN_URL_FILE=""
 	dk_call dk_removeExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_FILE			
-	# echo "PLUGIN_URL_FILE = ${PLUGIN_URL_FILE}" 										# PLUGIN_URL_FILE			: master
+	echo "PLUGIN_URL_FILE = ${PLUGIN_URL_FILE}" 										# PLUGIN_URL_FILE			: master
 
 	### PLUGIN_URL_NODE n 
 	dk_call dk_listToArray "${PLUGIN_URL_LIST}" PLUGIN_URL_ARRAY				# PLUGIN_URL_NODE n 		: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
-	# echo "PLUGIN_URL_ARRAY = ${PLUGIN_URL_ARRAY}"  
+	echo "PLUGIN_URL_ARRAY = ${PLUGIN_URL_ARRAY}"  
 	
 	### PLUGIN_URL_LENGTH
 	PLUGIN_URL_LENGTH=""
@@ -183,27 +183,27 @@ dk_importVariables() {
 	#######################################################
 	[ -n "${IMPORT_PATH}" ] || IMPORT_PATH="${PWD}"
 	#[ "${IMPORT_PATH:~-1}" = "/"] && IMPORT_PATH="${IMPORT_PATH:~0,-1}"
-	#echo "IMPORT_PATH = ${IMPORT_PATH}"
+	echo "IMPORT_PATH = ${IMPORT_PATH}"
 	
 	# PLUGIN_IMPORT
 	PLUGIN_IMPORT=""
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
 	$(dk_call dk_includes "${IMPORT_PATH}" "${DKIMPORTS_DIR}") && PLUGIN_IMPORT="1"
-	#echo "PLUGIN_IMPORT = ${PLUGIN_IMPORT}" 											# PLUGIN_IMPORT			 	: 1
+	echo "PLUGIN_IMPORT = ${PLUGIN_IMPORT}" 											# PLUGIN_IMPORT			 	: 1
 	
 	# PLUGIN_IMPORT_PATH
 	PLUGIN_IMPORT_PATH=""
 	PLUGIN_IMPORT_PATH="${IMPORT_PATH}"						
-	#echo "PLUGIN_IMPORT_PATH = ${PLUGIN_IMPORT_PATH}" 										# PLUGIN_IMPORT_PATH		: C:\Users\Administrator\DigitalKnob\Development\3rdParty\_DKIMPORTS\zlib
+	echo "PLUGIN_IMPORT_PATH = ${PLUGIN_IMPORT_PATH}" 										# PLUGIN_IMPORT_PATH		: C:\Users\Administrator\DigitalKnob\Development\3rdParty\_DKIMPORTS\zlib
 
 	# PLUGIN_IMPORT_NAME
 	PLUGIN_IMPORT_NAME=""
-	if [ -n "${NAME}" ]; then
+	if [ ! "${NAME}" = "" ]; then
 		PLUGIN_IMPORT_NAME="${NAME}"
 	else
 		PLUGIN_IMPORT_NAME=$(dk_call dk_basename "${PLUGIN_IMPORT_PATH}")
 	fi		
-	#echo "PLUGIN_IMPORT_NAME = ${PLUGIN_IMPORT_NAME}" 										# PLUGIN_IMPORT_NAME		: zlib
+	echo "PLUGIN_IMPORT_NAME = ${PLUGIN_IMPORT_NAME}" 										# PLUGIN_IMPORT_NAME		: zlib
 
 	### PLUGIN_IMPORT_NAME_LOWER ###
 	PLUGIN_IMPORT_NAME_LOWER=""
@@ -345,12 +345,12 @@ dk_importVariables() {
 	# <PLUGIN>_DIR
 	if [ ! "${PLUGIN_PREFIX}" = "GIT" ]; then	### DO NOT USE GIT_DIR ###
 		dk_call dk_set ${PLUGIN_PREFIX}_DIR "${PLUGIN_INSTALL_PATH}" 
-		echo "${PLUGIN_PREFIX}_DIR = ${${PLUGIN_PREFIX}_DIR}" 								# ZLIB_DIR					: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
+		# echo "${PLUGIN_PREFIX}_DIR = ${${PLUGIN_PREFIX}_DIR}"   !!! BAD SUBSTITUTION !!!		# ZLIB_DIR					: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	fi
 	
 	# <PLUGIN>_URL
 	dk_call dk_set ${PLUGIN_PREFIX}_URL "${PLUGIN_URL}" 
-	echo "${PLUGIN_PREFIX}_URL = ${${PLUGIN_PREFIX}_URL}" 									# ZLIB_URL					: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	# echo "${PLUGIN_PREFIX}_URL = ${}" 									# ZLIB_URL					: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
 	# <PLUGIN>_IMPORT_FILE
 	dk_call dk_set ${PLUGIN_PREFIX}_IMPORT_FILE "${PLUGIN_URL_FILENAME}" 
