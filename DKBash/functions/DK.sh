@@ -51,7 +51,7 @@ DK(){
 
 ###### DKHOME_DIR ######
 DKHOME_DIR(){
-	echo "######   DKHOME_DIR($*)  ######"
+	######   DKHOME_DIR()  ######
 	[ ! -e "${DKHOME_DIR-}" ] && [ -n "$(WSLPATH_EXE)" ] 	&& export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r')); 	# Windows subsystem for linux
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")); 	# Git for windows
 #	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD); 														# Android sdcard
@@ -118,10 +118,7 @@ DKHOME_DIR(){
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 		dk_call dk_echo
-		#dk_call dk_echo "${bg_RGB}20;20;20m"
 		dk_source "${DKSCRIPT_PATH}"
-		#dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
-		#dk_call dk_echo "${clr}"
 		DKTEST
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
