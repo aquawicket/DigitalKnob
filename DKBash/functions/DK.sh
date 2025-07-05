@@ -1,7 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/sh
 #echo "DK() 0='${0}' 1='${1-}' *='${*}'"
 [ -n "${DK_SH-}" ] && return || export DK_SH=1
-echo "loaded DK.sh"
 
 if [ -z "${DKSCRIPT_PATH-}" ]; then
 	[ -e "${1-}" ] && DKSCRIPT_PATH="${1-}" || DKSCRIPT_PATH="${0}"
@@ -145,8 +144,8 @@ dkreloadWithBash(){
 	echo "Reloading ${DKSCRIPT_PATH} with ${BASH_EXE} . . ."
 	unset DK_SH
 	export DKBASH_RELOADED=1
-	#[ -e "${DKSCRIPT_PATH}" ] && exec "${BASH_EXE}" "${DKSCRIPT_PATH}"
-	[ -e "${DKSCRIPT_PATH}" ] && exec /usr/bin/env bash "${DKSCRIPT_PATH}"
+	[ -e "${DKSCRIPT_PATH}" ] && exec "${BASH_EXE}" "${DKSCRIPT_PATH}";
+	#[ -e "${DKSCRIPT_PATH}" ] && exec /usr/bin/bash "${DKSCRIPT_PATH}"
 	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}'
 }
 

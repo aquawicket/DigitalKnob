@@ -8,6 +8,25 @@ if(!$dk_Target_App_ps1){ $dk_Target_App_ps1 = 1; } else{ return; } #include guar
 function Global:dk_Target_App() {
 	dk_debugFunc 0;
 	
+	### read DKBuilder.cache file ###
+	if(dk_call dk_pathExists "${DKCACHE_DIR}/DKBuilder.cache"){
+		dk_call dk_getFileParams "${DKCACHE_DIR}/DKBuilder.cache"
+	}
+	
+	### get a list of the directories in DKCpp/apps ###
+	dk_call dk_getDirectories "$(dk_call dk_DKBRANCH_DIR)/DKCpp/apps"
+	
+	    ::### rename the list elements to the folder basename and add a matching command ###
+    set /a "n=0"
+    :loop1
+        if not defined dk_getDirectories[%n%] goto endloop1
+        for %%Z in ("!dk_getDirectories[%n%]!") do set "dk_getDirectories[%n%]=%%~nxZ"
+        set "commands[%n%]=%dk_call% dk_set Target_App !dk_getDirectories[%n%]!"
+        set /a n+=1
+        goto loop1
+    :endloop1
+	
+	###############################################################################
 	dk_call dk_echo "\n";
 	dk_call dk_echo "${Target_App} ${Target_Tuple} ${Target_Type}\n";
 	

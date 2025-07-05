@@ -1,4 +1,6 @@
 @echo off
+::echo DKBash
+
 if "%~1" equ "" (goto DKINSTALL)
 
 :runDKBash
@@ -14,6 +16,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	set "DKSCRIPT_PATH=%~3"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:/=/c/%"
+	echo BASH_EXE = %BASH_EXE%
 
 	::###### run script ######
 	cmd /V:ON /k "%BASH_EXE%" -c %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
@@ -58,7 +61,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	::%~1
 	::ftype DKBash="%ComSpec%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
-	ftype DKBash="%CMD_EXE:/=\%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
+	ftype DKBash="%CMD_EXE:/=\%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" "^!f^!"
 	::ftype DKBash=%ComSpec% /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%BASH_EXE%" "%%1" %*
 	assoc .sh=DKBash
 	%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"

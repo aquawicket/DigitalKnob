@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::set "dk_call_STACK_TO_FILE=1"
 ::set "dk_call_ENTRY_TO_FILE=1"
 ::set "dk_call_EXIT_TO_FILE=1"
-set "dk_call_IGNORE=dk_debugFunc;dk_echo;"
+set "dk_call_IGNORE=dk_debugFunc"
 ::####################################################################
 ::# dk_call(command args)
 ::#
@@ -41,12 +41,14 @@ set "dk_call_IGNORE=dk_debugFunc;dk_echo;"
 	(set __FILENAME__=%~nx1)
 	(set __FUNC__=%~n1)
 	
+	if "!dk_call_IGNORE:%__FUNC__%=!" equ "%dk_call_IGNORE%" (set "__IGNORE__=1") else (set "__IGNORE__=")
+	
 	set dk_allButFirstArgs=%*
 	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do (set __ARGV__=%%b)
 	
 	::TODO - use dk_getFileLine to add the file line to the stack entry
 	call :pushStack %*
-
+	
 	::###### Print function entry ####
 	if "%dk_call_PRINT_ENTRY%" equ "1" (call :dk_call_PRINT_ENTRY)
 	if "%dk_call_ENTRY_TO_FILE%" equ "1" (call :dk_call_ENTRY_TO_FILE)
@@ -91,7 +93,7 @@ set "dk_call_IGNORE=dk_debugFunc;dk_echo;"
 		set /a LVL-=1
 	)
 	
-	::call :popStack
+	call :popStack
 
 ::###### Exit #############################################################################################
 exit /b %__STATUS__%
@@ -209,7 +211,7 @@ exit /b !errorlevel!
 ::####################################################################
 ::# :pushStack(file args)
 ::#
-:pushStack 
+:pushStack
 	if not defined LVL (set /a "LVL=0")
 	if not defined LVL (set /a "ENTRY=0")
 	(set /a LVL+=1)

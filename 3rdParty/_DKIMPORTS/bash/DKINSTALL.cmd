@@ -12,17 +12,19 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	
 	if exist "%BASH_EXE%" (%return%)
-		
-	::###### MSYS2 bash.exe ######
-	if not exist "%BASH_EXE%" (
-		%dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
-		set "BASH_EXE=!MSYS2!/usr/bin/bash.exe"
-	)
 	
 	::###### GIT bash.exe ######
 	if not exist "%BASH_EXE%" (
 		%dk_call% dk_validate GIT "%dk_call% dk_depend git"
-		set "BASH_EXE=!GIT!/bin/bash.exe"
+		set "GIT_BASH_EXE=!GIT!/bin/bash.exe"
+		set "BASH_EXE=!GIT_BASH_EXE!"
+	)
+	
+	::###### MSYS2 bash.exe ######
+	if not exist "%BASH_EXE%" (
+		%dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
+		set "MSYS2_BASH_EXE=!MSYS2!/usr/bin/bash.exe"
+		set "BASH_EXE=!MSYS2_BASH_EXE!"
 	)
 	
 	%dk_call% dk_assertPath BASH_EXE
