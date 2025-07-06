@@ -24,10 +24,10 @@ DKINSTALL() {
 		dk_call dk_toLower "${CMAKE_FOLDER}" CMAKE_FOLDER
 		
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-		[ "${Host_Os}" = "Windows" ]   && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
-		[ "${Host_Os}" = "Mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
-		[ "${Host_Os}" = "Linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
-		[ "${Host_Os}" = "Raspberry" ] && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${Host_Os}" = "Windows" ]   && export CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
+		[ "${Host_Os}" = "Mac" ]       && export CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
+		[ "${Host_Os}" = "Linux" ]     && export CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${Host_Os}" = "Raspberry" ] && export CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
 		[ -z ${CMAKE_EXE} ]            && dk_call dk_error "no cmake for this OS"
 		dk_call dk_printVar CMAKE_EXE
 		
