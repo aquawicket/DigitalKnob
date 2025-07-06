@@ -6,16 +6,16 @@
 
 
 #################################################################################
-# dk_getParameterValue(NAME)
+# dk_getParameterValue(_NAME_)
 #
 dk_getParameterValue() {
 
-	NAME="$1"
+	_NAME_="$1"
 	_value_=""
 	
 	for (( a=2; a<$(($# + 1)); a++ )); do
 		b=$(( a + 1 ))
-		if [ "$NAME" = "${!a-}" ]; then
+		if [ "$_NAME_" = "${!a-}" ]; then
 			[ "${!b-}" = "" ] && _value_="1" || _value_="${!b-}"
 		fi
 	done

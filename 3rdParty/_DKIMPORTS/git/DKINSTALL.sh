@@ -37,7 +37,7 @@ DKINSTALL() {
 	
 	# https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	############ DO NOT USE GIT_DIR ############
-	[ -n "${GIT_DIR}" ] && dk_call dk_fatal "ERROR: GIT_DIR should not be set."   # https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
+	[ -n "${GIT_DIR-}" ] && dk_call dk_fatal "ERROR: GIT_DIR should not be set."   # https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	############ DO NOT USE GIT_DIR ############
 	
     export GIT_EXE="${GIT}/bin/git.exe"

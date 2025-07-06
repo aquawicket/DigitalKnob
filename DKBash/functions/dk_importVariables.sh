@@ -53,41 +53,42 @@ dk_importVariables() {
 
 	URL="${1}"
 	dk_call dk_assertVar URL 
-	echo "URL = ${URL}"
 	
 	IMPORT_PATH=""
 	dk_call dk_getParameterValue IMPORT_PATH 	"$@"		# /c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
-	#[ -n "${IMPORT_PATH}" ] && IMPORT_PATH=${IMPORT_PATH:\=/}
-	echo "IMPORT_PATH = ${IMPORT_PATH}"
 	
 	BRANCH=""
 	dk_call dk_getParameterValue BRANCH			"$@"		# master
-	echo "BRANCH = ${BRANCH}"
 	
 	FOLDER=""
 	dk_call dk_getParameterValue  FOLDER		"$@"     	# zlib-master
-	echo "FOLDER = ${FOLDER}"
-
+	
 	NAME=""
 	dk_call dk_getParameterValue  NAME			"$@"     	# zlib
-	echo "NAME = ${NAME}"
-	
+		
 	DIR=""
 	dk_call dk_getParameterValue  DIR			"$@"     	# C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	echo "DIR = ${DIR}"
-	
+		
 	ROOT=""
 	dk_call dk_getParameterValue  ROOT			"$@"     	# C:/Users/Administrator/DigitalKnob/Development/3rdParty
-	echo "ROOT = ${ROOT}"
 	
 	TAG=""
 	dk_call dk_getParameterValue  TAG			"$@"     	# v1.3.1
-	echo "TAG = ${TAG}"
 	
 	VERSION=""
 	dk_call dk_getParameterValue  VERSION		"$@"     	# master
-	echo "VERSION = ${VERSION}"
 	
+	echo "0 = ${0}"
+	echo "URL = ${URL}"
+	echo "IMPORT_PATH = ${IMPORT_PATH}"
+	echo "BRANCH = ${BRANCH}"
+	echo "FOLDER = ${FOLDER}"
+	echo "NAME = ${NAME}"
+	echo "DIR = ${DIR}"
+	echo "ROOT = ${ROOT}"
+	echo "TAG = ${TAG}"
+	echo "VERSION = ${VERSION}"
+
 	###### POPULATE VARIABLES ######
 	# PLUGIN_URL				- from arg:url														: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	# PLUGIN_URL_LIST			- from PLUGIN_URL													: https:;github.com;madler;zlib;archive;refs;heads;master.zip
@@ -178,10 +179,13 @@ dk_importVariables() {
 
 
 
+
+
+	
 	#######################################################
 	############### PLUGIN_IMPORT VARIABLES ###############
 	#######################################################
-	[ -n "${IMPORT_PATH}" ] || IMPORT_PATH="${PWD}"
+	[ -n "${IMPORT_PATH}" ] || IMPORT_PATH="$(dk_call dk_dirname ${BASH_SOURCE[2]})"
 	#[ "${IMPORT_PATH:~-1}" = "/"] && IMPORT_PATH="${IMPORT_PATH:~0,-1}"
 	echo "IMPORT_PATH = ${IMPORT_PATH}"
 	
