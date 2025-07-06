@@ -1,8 +1,34 @@
-cmake_Windows_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
+############ cmake ############
+# https://cmake.org
+# https://github.com/Kitware/CMake
+# https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
+# https://developer.android.com/studio/projects/configure-cmake
+# https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
+# https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line 	# How to get latest version on ubuntu
+# https://github.com/Kitware/CMake/releases
+
 cmake_Linux_Arm64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
 cmake_Linux_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
-cmake_Mac10_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
+#cmake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
 cmake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz
 cmake_Windows_Arm64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip
 cmake_Windows_X86_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip
 cmake_Windows_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
+
+#	[ "${Host_Os}" = "Android" ]						&& cmake_Import=cmake
+#	[ "${WSL_DISTRO_NAME-}" = "${Alpine-}" ]			&& cmake_Import=cmake
+#	[ "${Host_Tuple}" = "Windows_Arm32" ]				&& cmake_Import=${cmake_Windows_Arm32_Import}
+#	[ "${Host_Tuple}" = "Windows_Arm64" ]				&& cmake_Import=${cmake_Windows_Arm64_Import}
+#	[ "${Host_Tuple}" = "Windows_X86" ]					&& cmake_Import=${cmake_Windows_X86_Import}
+#	[ "${Host_Os}_${Host_Arch}" = "Windows_X86_64" ]	&& cmake_Import=${cmake_Windows_X86_64_Import}
+#	[ "${Host_Os}" = "Mac" ]							&& cmake_Import=${cmake_Mac_10_Import}
+#	[ "${Host_Tuple}" = "Linux_X86_64" ]				&& cmake_Import=${cmake_Linux_X86_64_Import}
+#	[ "${Host_Tuple}" = "Linux_Arm64" ]					&& cmake_Import=${cmake_Linux_Arm64_Import}
+#	[ "${Host_Tuple}" = "Raspberry_Arm64" ]				&& cmake_Import=${cmake_Linux_Arm64_Import}
+#	[ "${Target_Tuple}" = "Android_Arm32" ]				&& cmake_Import=cmake
+#	[ "${Target_Tuple-}" = "Windows_Arm64_Clang" ]		&& cmake_Import=mingw-w64-clang-aarch64-cmake
+#	[ "${Target_Tuple-}" = "Windows_X86_Clang" ]		&& cmake_Import=mingw-w64-clang-i686-cmake
+#	[ "${Target_Tuple-}" = "Windows_X86_Gcc" ]			&& cmake_Import=mingw-w64-i686-cmake
+#	[ "${Target_Tuple-}" = "Windows_X86_64_Clang" ]		&& cmake_Import=mingw-w64-clang-x86_64-cmake
+#	[ "${Target_Tuple-}" = "Windows_x86_64_Gcc" ]		&& cmake_Import=mingw-w64-x86_64-cmake
+#	[ "${Target_Tuple-}" = "Windows_X86_64_Ucrt" ]		&& cmake_Import=mingw-w64-ucrt-x86_64-cmake

@@ -12,6 +12,8 @@ function Global:DKINSTALL() {
 	dk_call dk_getFileParams ${PSScriptRoot}/dkconfig.txt;
 
 	dk_call dk_validate "Host_Tuple" "dk_call dk_Host_Tuple";
+	#${git_Import} = ${git_${Host_Tuple}_Import};
+	
     if(${Host_Arch} -eq "Arm32") { ${git_Import} = ${Git_Windows_Arm32_Import}; 	}
     if(${Host_Arch} -eq "Arm64") { ${git_Import} = ${Git_Windows_Arm64_Import}; 	}	
     if(${Host_Arch} -eq "X86")   { ${git_Import} = ${Git_Windows_X86_Import}; 		}

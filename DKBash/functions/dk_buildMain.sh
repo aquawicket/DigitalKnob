@@ -95,20 +95,23 @@ dk_buildMain() {
 		
 		# save selections to DKBuilder.cache file
 		dk_call dk_validate DKCACHE_DIR "dk_DKCACHE_DIR"
-		dk_call dk_fileWrite "${DKCACHE_DIR}/DKBuilder.cache" "Target_App=${Target_App-}"
-		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Os=${Target_Os-}"
-		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Arch=${Target_Arch-}"
-		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Env=${Target_Env-}"
-		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Type=${Target_Type-}"
-		#dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Tuple=${Target_Tuple-}"
+		dk_call dk_fileWrite "${DKCACHE_DIR}/DKBuilder.cache" "Target_App_Cache=${Target_App-}"
+		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Os_Cache=${Target_Os-}"
+		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Arch_Cache=${Target_Arch-}"
+		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Env_Cache=${Target_Env-}"
+		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Type_Cache=${Target_Type-}"
 	
 		
 		############ CMAKE Command ###################
 		dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
 		dk_call dk_chdir ${DKCPP_APPS_DIR}/${Target_App}
-		dk_call dk_cmakeEval "dk_load('${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake')"
-		#dk_call dk_validate CMAKE_EXE "dk_call dk_depend cmake"
-		#${CMAKE_EXE} -P "%DKCPP_APPS_DIR:\=/%/%Target_App%/DKINSTALL.cmake"
+		#dk_call dk_cmakeEval "dk_load('${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake')"
+		dk_call dk_validate CMAKE_EXE "dk_call dk_depend cmake"
+		
+		echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+		export DKSCRIPT_PATH
+		echo "${CMAKE_EXE} -P ${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake"
+		${CMAKE_EXE} -P "${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake"
 		
 		#dk_call dk_generate	
 		#dk_call dk_buildApp
@@ -121,7 +124,6 @@ dk_buildMain() {
 		dk_call dk_unset Target_Arch
 		dk_call dk_unset Target_Env
 		dk_call dk_unset Target_Type
-		#dk_call dk_unset Target_Tuple
 	done
 }
 

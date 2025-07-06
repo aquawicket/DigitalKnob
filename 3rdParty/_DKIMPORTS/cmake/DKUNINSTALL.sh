@@ -16,27 +16,16 @@ DKUNINSTALL() {
 	########## kill cmake-gui.exe process #########
 	#dk_call dk_killProcess cmake-gui.exe
 	
-	dk_source dk_dirname
-	_dk_dirname=$(dk_call dk_dirname ${0})
-	dk_call dk_printVar _dk_dirname
-	
-	dk_call dk_getFileParams 		"${_dk_dirname}/dkconfig.txt"
-	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
-	[ "${Host_Tuple}" = "Linux_Arm64" ]		&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
-	[ "${Host_Tuple}" = "Linux_X86_64" ]	&& CMAKE_IMPORT=${CMAKE_LINUX_X86_64_IMPORT}
-	[ "${Host_Tuple}" = "Mac_X86_64" ]		&& CMAKE_IMPORT=${CMAKE_MAC_UNIVERSAL_IMPORT}
-	[ "${Host_Tuple}" = "Windows_Arm64" ]		&& CMAKE_IMPORT=${CMAKE_WIN_ARM64_IMPORT}
-	[ "${Host_Tuple}" = "Windows_X86_64" ]		&& CMAKE_IMPORT=${CMAKE_WIN_X86_64_IMPORT}
-	[ "${Host_Tuple}" = "Windows_X86" ]			&& CMAKE_IMPORT=${CMAKE_WIN_X86_IMPORT}
-	dk_call dk_assertVar CMAKE_IMPORT
-	
-	CMAKE_CURRENT_LIST_DIR="${_dk_dirname}"
+	dk_call dk_getFileParams "$(dk_call dk_dirname ${BASH_SOURCE[0]})/dkconfig.txt"
+	dk_call dk_validate Host_Tuple "dk_Host_Tuple"
+	cmake_Import="cmake_${Host_Tuple}_Import"
+	cmake_Import="${!cmake_Import}"
 	
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-	dk_call dk_importVariables ${CMAKE_IMPORT} NAME cmake ROOT ${DKTOOLS_DIR}
-	
+	dk_call dk_importVariables ${cmake_Import} ROOT ${DKTOOLS_DIR}
 	dk_call dk_assertVar CMAKE
-	dk_call dk_delete 	"${CMAKE}"	
+	
+	dk_call dk_delete "${CMAKE}"	
 }
 
 

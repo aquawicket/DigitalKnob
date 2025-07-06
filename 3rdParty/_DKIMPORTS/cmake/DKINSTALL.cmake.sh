@@ -8,7 +8,6 @@
 # DKINSTALL()
 #
 DKINSTALL() {
-	
 #	dk_call dk_debugFunc 0
 
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
@@ -27,7 +26,6 @@ DKINSTALL() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-
 #	dk_call dk_debugFunc 0
 	
 	DKINSTALL

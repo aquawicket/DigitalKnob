@@ -23,33 +23,24 @@ include_guard()
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
-	dk_set(CMAKE_IMPORT cmake)
+	dk_set(cmake_Import cmake)
 	if(NOT EXIST ${CMAKE_EXE})
-		dk_installPackage(${CMAKE_IMPORT})
+		dk_installPackage(${cmake_Import})
 		dk_findProgram(CMAKE_EXE cmake)
 	endif()
 
 endif()
 
-###### CMAKE_IMPORT ######
+###### cmake_Import ######
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple 			"dk_Host_Tuple()")
-dk_assertVar		(CMAKE_WIN_X86_64_IMPORT)
-dk_if				(Android_Host			"dk_set(CMAKE_IMPORT ${CMAKE_LINUX_AARCH64_IMPORT})")
-dk_if				(Linux_Arm64_Host		"dk_set(CMAKE_IMPORT ${CMAKE_LINUX_AARCH64_IMPORT})")
-dk_if				(Linux_X86_64_Host		"dk_set(CMAKE_IMPORT ${CMAKE_LINUX_X86_64_IMPORT})")
-dk_if				(Mac_Host				"dk_set(CMAKE_IMPORT ${CMAKE_MAC_10_IMPORT})")
-dk_if				(Windows_Arm64_Host		"dk_set(CMAKE_IMPORT ${CMAKE_WIN_ARM64_IMPORT})")
-dk_if				(Windows_X86_Host		"dk_set(CMAKE_IMPORT ${CMAKE_WIN_X86_IMPORT})")
-dk_if				(Windows_X86_64_Host	"dk_set(CMAKE_IMPORT ${CMAKE_WIN_X86_64_IMPORT})")
-dk_assertVar		(CMAKE_IMPORT)
-
-
+set					(cmake_Import "${CMake_${Host_Tuple}_Import}")
+dk_assertVar		(cmake_Import)
 
 ###### UNINSTALL ######
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(DKTOOLS_DIR 		"dk_DKTOOLS_DIR()")
-dk_importVariables	(${CMAKE_IMPORT} NAME cmake ROOT ${DKTOOLS_DIR})
+dk_importVariables	(${cmake_Import} NAME cmake ROOT ${DKTOOLS_DIR})
 
 message("CMAKE = $ENV{CMAKE}")
 dk_assertPath("$ENV{CMAKE}")

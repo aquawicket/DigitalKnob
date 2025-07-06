@@ -19,11 +19,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_getFileParams			"%~dp0/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple	"%dk_call% dk_Host_Tuple"
-	set "CMAKE_IMPORT=!CMake_%Host_Tuple%_Import!"
-	%dk_call% dk_assertVar				CMAKE_IMPORT
+	set "cmake_Import=!CMake_%Host_Tuple%_Import!"
+	%dk_call% dk_assertVar				cmake_Import
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_importVariables %CMAKE_IMPORT% NAME cmake ROOT %DKTOOLS_DIR%
+	%dk_call% dk_importVariables %cmake_Import% NAME cmake ROOT %DKTOOLS_DIR%
 	%dk_call% dk_assertVar CMAKE
 		
 	%dk_call% dk_notice "UnInstalling CMake . . ."

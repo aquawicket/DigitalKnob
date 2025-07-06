@@ -1,4 +1,6 @@
 #!/usr/bin/cmake -P
+message("ENV{DKSCRIPT_PATH} = $ENV{DKSCRIPT_PATH}")
+
 ### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
