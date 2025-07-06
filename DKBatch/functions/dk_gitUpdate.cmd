@@ -13,7 +13,7 @@ set "dk_gitUpdate_BACKUP=1"
 %setlocal%
 	%dk_call% dk_debugFunc 2 3
 
-    if "%~1" neq "" (set "_url_=%~1") else (set "_url_=https://github.com/aquawicket/DigitalKnob.git")
+    if "%~1" neq "" (set "_git_url_=%~1") else (set "_git_url_=https://github.com/aquawicket/DigitalKnob.git")
     if "%~2" neq "" (set "DKBRANCH=%~2") else (set "DKBRANCH=Development")
    
     ::if "%3" neq "NO_CONFIRM" (
@@ -40,7 +40,7 @@ set "dk_gitUpdate_BACKUP=1"
 				set "PATH=%DKBRANCH_DIR%_BACKUP/DKBatch/functions;%PATH%"
 			)
 			rd /s /q "%DKBRANCH_DIR%"
-			"%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%"
+			"%GIT_EXE%" clone %_git_url_% "%DKBRANCH_DIR%"
 			"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
 			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
 			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %DKBRANCH% || (
@@ -53,7 +53,7 @@ set "dk_gitUpdate_BACKUP=1"
 		rem ####################################################################
 		
 		rem ###### Clone into empty branch directory ######
-		"%GIT_EXE%" clone %_url_% "%DKBRANCH_DIR%"
+		"%GIT_EXE%" clone %_git_url_% "%DKBRANCH_DIR%"
 	)
 	
 	::###### Update ######
