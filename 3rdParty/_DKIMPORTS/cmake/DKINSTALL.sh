@@ -8,28 +8,32 @@
 #
 DKINSTALL() {
 #	dk_debugFunc 0
-
-	dk_call dk_getFileParams "$(dk_call dk_dirname $0)/dkconfig.txt"
-	dk_call dk_validate Host_Tuple "dk_Host_Tuple"
+	echo "__FILE__ = $(dk_call __FILE__)"
+	dk_call dk_getFileParams "$(dk_call dk_dirname ${BASH_SOURCE[0]})/dkconfig.txt"
+	
 	######################################################################################################
-	[ "${Host_Os}" = "Android" ]						&& CMAKE_IMPORT=cmake
-	[ "${WSL_DISTRO_NAME-}" = "${Alpine-}" ]			&& CMAKE_IMPORT=cmake
-	[ "${Host_Tuple}" = "Windows_Arm32" ]				&& CMAKE_IMPORT=${CMAKE_Windows_ARM32_IMPORT}
-	[ "${Host_Tuple}" = "Windows_Arm64" ]				&& CMAKE_IMPORT=${CMAKE_Windows_ARM64_IMPORT}
-	[ "${Host_Tuple}" = "Windows_X86" ]					&& C1MAKE_IMPORT=${CMAKE_Windows_X86_IMPORT}
-	[ "${Host_Os}_${Host_Arch}" = "Windows_X86_64" ]	&& CMAKE_IMPORT=${CMAKE_WIN_X86_64_IMPORT}
-	[ "${Host_Os}" = "Mac" ]							&& CMAKE_IMPORT=${CMAKE_MAC_10_IMPORT}
-	[ "${Host_Tuple}" = "Linux_X86_64" ]				&& CMAKE_IMPORT=${CMAKE_LINUX_X86_64_IMPORT}
-	[ "${Host_Tuple}" = "Linux_Arm64" ]					&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
-	[ "${Host_Tuple}" = "Raspberry_Arm64" ]				&& CMAKE_IMPORT=${CMAKE_LINUX_AARCH64_IMPORT}
+	dk_call dk_validate Host_Tuple "dk_Host_Tuple"
+	CMAKE_IMPORT="cmake_${Host_Tuple}_Import"
+	CMAKE_IMPORT="${!CMAKE_IMPORT}"
+
+#	[ "${Host_Os}" = "Android" ]						&& CMAKE_IMPORT=cmake
+#	[ "${WSL_DISTRO_NAME-}" = "${Alpine-}" ]			&& CMAKE_IMPORT=cmake
+#	[ "${Host_Tuple}" = "Windows_Arm32" ]				&& CMAKE_IMPORT=${cmake_Windows_Arm32_Import}
+#	[ "${Host_Tuple}" = "Windows_Arm64" ]				&& CMAKE_IMPORT=${cmake_Windows_Arm64_Import}
+#	[ "${Host_Tuple}" = "Windows_X86" ]					&& CMAKE_IMPORT=${cmake_Windows_X86_Import}
+#	[ "${Host_Os}_${Host_Arch}" = "Windows_X86_64" ]	&& CMAKE_IMPORT=${cmake_Windows_X86_64_Import}
+#	[ "${Host_Os}" = "Mac" ]							&& CMAKE_IMPORT=${cmake_Mac_10_Import}
+#	[ "${Host_Tuple}" = "Linux_X86_64" ]				&& CMAKE_IMPORT=${cmake_Linux_X86_64_Import}
+#	[ "${Host_Tuple}" = "Linux_Arm64" ]					&& CMAKE_IMPORT=${cmake_Linux_Arm64_Import}
+#	[ "${Host_Tuple}" = "Raspberry_Arm64" ]				&& CMAKE_IMPORT=${cmake_Linux_Arm64_Import}
 	
 	#[ "${Target_Tuple}" = "Android_Arm32" ]			&& CMAKE_IMPORT=cmake
-	[ "${Target_Tuple-}" = "Windows_Arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
-	[ "${Target_Tuple-}" = "Windows_X86_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	[ "${Target_Tuple-}" = "Windows_X86_Gcc" ]		&& CMAKE_IMPORT=mingw-w64-i686-cmake
-	[ "${Target_Tuple-}" = "Windows_X86_64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	[ "${Target_Tuple-}" = "Windows_x86_64_Gcc" ]		&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	[ "${Target_Tuple-}" = "Windows_X86_64_Ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+#	[ "${Target_Tuple-}" = "Windows_Arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+#	[ "${Target_Tuple-}" = "Windows_X86_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+#	[ "${Target_Tuple-}" = "Windows_X86_Gcc" ]			&& CMAKE_IMPORT=mingw-w64-i686-cmake
+#	[ "${Target_Tuple-}" = "Windows_X86_64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+#	[ "${Target_Tuple-}" = "Windows_x86_64_Gcc" ]		&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
+#	[ "${Target_Tuple-}" = "Windows_X86_64_Ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	dk_call dk_printVar CMAKE_IMPORT
 	
 	[ -z "${CMAKE_IMPORT}" ] && dk_call dk_error "CMAKE_IMPORT is invalid"

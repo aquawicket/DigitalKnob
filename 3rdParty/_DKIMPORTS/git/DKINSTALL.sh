@@ -25,7 +25,6 @@ DKINSTALL() {
 	
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
 
-	echo "Git_Windows_X86_64_Import = ${Git_Windows_X86_64_Import}"
 	GIT_IMPORT_VAR="Git_${Host_Tuple}_Import"
 	export GIT_IMPORT="${!GIT_IMPORT_VAR}"
     dk_call dk_assertVar GIT_IMPORT

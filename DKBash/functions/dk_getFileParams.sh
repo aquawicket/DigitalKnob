@@ -5,7 +5,7 @@
 
 
 ############ dk_getFileParams settings #########################################
-# [ -z "${dk_getAllFileParams_PRINT_VARIABLES}" ] && export dk_getFileParams_PRINT_VARIABLES=1
+[ -z "${dk_getFileParams_PRINT_VARIABLES-}" ] && export dk_getFileParams_PRINT_VARIABLES=1
 ################################################################################
 # dk_getFileParams(<file>)
 #
