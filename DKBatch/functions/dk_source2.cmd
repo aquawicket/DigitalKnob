@@ -51,8 +51,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not exist "%_fnc_%"  certutil.exe 1>nul 2>nul 	&& certutil.exe -urlcache -split -f "%_url_%" "%_fnc_%"
 	if exist "%_fnc_%" exit /b 0
 	
-	if not exist "%_fnc_%"	bitsadmin.exe /transfer /Download /priority Foreground "%_url_%" "%_fnc_%"
-	if exist "%_fnc_%" exit /b 0
+	::if not exist "%_fnc_%"	bitsadmin.exe /transfer /Download /priority Foreground "%_url_%" "%_fnc_%"
+	::if exist "%_fnc_%" exit /b 0
 	
 	::############ Final Check ############
 	if not exist "%_fnc_%"   echo ERROR   Failed to download %_fnc_%  &&  exit /b 13	
