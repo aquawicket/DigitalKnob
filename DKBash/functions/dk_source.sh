@@ -73,13 +73,11 @@ dk_source(){
 		# EXAMPLE RESULT	            https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
 	
 		###### DOWNLOAD ######
-		if [ ! -e "${_fnc_}" ]; then 
-			dirn=$(dirname "${_fnc_}")
-			[ ! -e "${dirn}" ] && mkdir -p ${dirn}
-			echo "downloading '${_url_}' -> '${_fnc_}'";
-			[ ! -e "${_fnc_}" ] && (command -v curl) && curl --silent -Lo "${_fnc_}" "${_url_}";
-			[ ! -e "${_fnc_}" ] && (command -v "wget") && wget -P "${_fnc_}" "${_url_}"
-		fi
+		dirn=$(dirname "${_fnc_}")
+		[ ! -e "${dirn}" ] && mkdir -p ${dirn}
+		echo "downloading '${_url_}' -> '${_fnc_}'";
+		[ ! -e "${_fnc_}" ] && (command -v curl) && curl --silent -Lo "${_fnc_}" "${_url_}";
+		[ ! -e "${_fnc_}" ] && (command -v "wget") && wget -P "${_fnc_}" "${_url_}"
 	fi
 	
 	############ Final Check ############
