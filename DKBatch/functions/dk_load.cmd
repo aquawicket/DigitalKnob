@@ -19,7 +19,6 @@ if exist "%~1" (goto:eof)
 %setlocal%
     ::%dk_call% dk_debugFunc 0
 
-
     %dk_call% dk_notice "dk_load is temporarily disabled. Use dk_call and dk_source to download, load and run functions."
     goto:eof
     ::%dk_call% dk_debugFunc
@@ -28,6 +27,10 @@ if exist "%~1" (goto:eof)
     %dk_call% dk_source dk_info
     %dk_call% dk_source dk_error
     %dk_call% dk_source dk_debugFunc
+	::%dk_call% dk_source2 dk_echo
+    ::%dk_call% dk_source2 dk_info
+    ::%dk_call% dk_source2 dk_error
+    ::%dk_call% dk_source2 dk_debugFunc
     %dk_call% dk_debugFunc 1
    
     if exist "%~1" (
@@ -42,6 +45,9 @@ if exist "%~1" (goto:eof)
     call dk_source dk_set
     call dk_source dk_realpath
     call dk_source dk_download
+	::call dk_source2 dk_set
+    ::call dk_source2 dk_realpath
+    ::call dk_source2 dk_download
     if not exist "%funcPath%" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName:.cmd=%.cmd" "%funcPath%"
     if not exist "%funcPath%" %dk_call% dk_error "ERROR: %funcPath%: file not found"
    

@@ -10,11 +10,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::if not defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem")
 ::if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal")
 
-::%dk_call% dk_source dk_convertToCIdentifier
-::%dk_call% dk_source dk_basename
-::%dk_call% dk_source dk_removeExtension
-::%dk_call% dk_source dk_toLower
-::%dk_call% dk_source dk_validate
 ::####################################################################
 ::# DKUNINSTALL
 ::#

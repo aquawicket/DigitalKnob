@@ -15,7 +15,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	if exist "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd" (
-		::%dk_call% dk_source "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
+		rem %dk_call% dk_source "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
+		rem %dk_call% dk_source2 "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
 		%dk_call% "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
 		%return%
 	)
@@ -38,7 +39,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 
 	%dk_call% dk_depend "git"
-	
 	
 %endfunction%
 
