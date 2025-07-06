@@ -76,9 +76,9 @@ dk_source(){
 		if [ ! -e "${_fnc_}" ]; then 
 			dirn=$(dirname "${_fnc_}")
 			[ ! -e "${dirn}" ] && mkdir -p ${dirn}
-			echo "downloading '${_fnc_}' . . .";
-			curl --silent -Lo "${_fnc_}" "${_url_}";
-			#wget -P "${dirn}" "${_url_}"
+			echo "downloading '${_url_}' -> '${_fnc_}'";
+			[ ! -e "${_fnc_}" ] && (command -v curl) && curl --silent -Lo "${_fnc_}" "${_url_}";
+			[ ! -e "${_fnc_}" ] && (command -v "wget") && wget -P "${_fnc_}" "${_url_}"
 		fi
 	fi
 	
