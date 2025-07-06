@@ -19,17 +19,17 @@ dk_buildMain() {
 	dk_call dk_validate DIGITALKNOB_DIR		"dk_call dk_DIGITALKNOB_DIR"
 	dk_call dk_validate DKBRANCH_DIR		"dk_call dk_DKBRANCH_DIR"
 	
-	if [ ! -e "${DKDESKTOP_DIR}/DigitalKnob" ]; then
-		if [ -e "${DKDESKTOP_DIR}" ]; then
-			dk_call dk_createSymlink "${DIGITALKNOB_DIR}" "${DKDESKTOP_DIR}/DigitalKnob"
-		fi
-	fi
+#	if [ ! -e "${DKDESKTOP_DIR}/DigitalKnob" ]; then
+#		if [ -e "${DKDESKTOP_DIR}" ]; then
+#			dk_call dk_createSymlink "${DIGITALKNOB_DIR}" "${DKDESKTOP_DIR}/DigitalKnob"
+#		fi
+#	fi
 	
-	if [ ! -e "${DKDESKTOP_DIR}/DKBuilder.sh" ]; then
-		if [ -e "${DKBRANCH_DIR}/DKBash/apps/DKBuilder/DKBuilder.sh" ]; then
-			dk_call dk_createSymlink "${DKBRANCH_DIR}/DKBash/apps/DKBuilder/DKBuilder.sh" "${DKDESKTOP_DIR}/DKBuilder.sh"
-		fi
-	fi
+#	if [ ! -e "${DKDESKTOP_DIR}/DKBuilder.sh" ]; then
+#		if [ -e "${DKBRANCH_DIR}/DKBash/apps/DKBuilder/DKBuilder.sh" ]; then
+#			dk_call dk_createSymlink "${DKBRANCH_DIR}/DKBash/apps/DKBuilder/DKBuilder.sh" "${DKDESKTOP_DIR}/DKBuilder.sh"
+#		fi
+#	fi
 	
 	#dk_call dk_quickAccessPin "${DIGITALKNOB_DIR}"
 	
@@ -105,10 +105,6 @@ dk_buildMain() {
 		############ CMAKE Command ###################
 		dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
 		dk_call dk_chdir ${DKCPP_APPS_DIR}/${Target_App}
-		#dk_call dk_cmakeEval "dk_load('${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake')"
-		dk_call dk_validate CMAKE_EXE "dk_call dk_depend cmake"
-		
-		echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 		export DKSCRIPT_PATH
 		echo "${CMAKE_EXE} -P ${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake"
 		${CMAKE_EXE} -P "${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake"
@@ -124,6 +120,7 @@ dk_buildMain() {
 		dk_call dk_unset Target_Arch
 		dk_call dk_unset Target_Env
 		dk_call dk_unset Target_Type
+		dk_call dk_unset Target_Tuple
 	done
 }
 

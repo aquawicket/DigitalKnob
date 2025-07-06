@@ -13,12 +13,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 
-	set "MSYS2_IMPORT=!Msys2_%Host_Tuple%_Import!"
+	set "msys2_Import=!msys2_%Host_Tuple%_Import!"
 
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	::%dk_call% dk_importVariables %MSYS2_IMPORT% IMPORT_PATH %DKIMPORTS_DIR%\msys2 ROOT %DK3RDPARTY_DIR%
-	%dk_call% dk_importVariables https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20241208.tar.xz NAME msys2
+	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	::%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
+	::%dk_call% dk_importVariables %msys2_Import% IMPORT_PATH %DKIMPORTS_DIR%\msys2 ROOT %DK3RDPARTY_DIR%
+	%dk_call% dk_importVariables %msys2_Import% NAME msys2
 	%dk_call% dk_assertVar MSYS2
 
 	set	"MSYS2_DBPath=%MSYS2%/var/lib/pacman"
@@ -37,7 +37,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist "%MSYS2%/msys2.exe" (%return%)
 	::############ Install ############
 	%dk_call% dk_info "Installing %MSYS2_FOLDER%"
-	%dk_call% dk_download %MSYS2_IMPORT%
+	%dk_call% dk_download %msys2_Import%
 	"%dk_download%" install --root "%MSYS2%" --confirm-command
 	
 	%dk_call% dk_assertPath MSYS2

@@ -10,11 +10,12 @@
 #
 dk_createSymlink() {
 	dk_debugFunc 2
+	echo "dk_createSymlink($*)"
 	
-	[ ! -e ${1} ] && dk_call dk_error "${1} does not exist" & return
-	[ -e ${2} ] && dk_call dk_error "${2} already exists" & return
+	[ ! -e ${1} ] && (dk_call dk_error "${1} does not exist"; return)
+	[ -e ${2} ] && (dk_call dk_error "${2} already exists"; return)
 	dk_call dk_basename ${2}
-	[ ! -e ${dk_basename} ] && dk_error "${dk_basename} not found" & return
+	[ ! -e ${dk_basename} ] && (dk_call dk_error "${dk_basename} not found" & return)
 	
 	LN_EXE=$(command -v ln)
 	${LN_EXE} -s ${1} ${2}
@@ -31,8 +32,8 @@ DKTEST() {
     dk_call dk_createSymlink "${DKHOME_DIR}/DigitalKnob" "${DKHOME_DIR}/Desktop/DigitalKnob"
 	
 	### Create a file symlink ###
-	dk_call dk_createSymlink "${DKHOME_DIR}/DigitalKnob/Development/DKBatch/apps/DKBuilder/DKBuilder.sh" "${DKHOME_DIR}/Desktop/DKBuilder.sh" &rem OVERWRITE
+	#dk_call dk_createSymlink "${DKHOME_DIR}/DigitalKnob/Development/DKBatch/apps/DKBuilder/DKBuilder.sh" "${DKHOME_DIR}/Desktop/DKBuilder.sh" # OVERWRITE
 	
 	### Test Non-Existent Error ###
-    dk_call dk_createSymlink "${DKHOME_DIR}/Non-Existent" "${DKHOME_DIR}/Desktop/Non-Existent" 
+    #dk_call dk_createSymlink "${DKHOME_DIR}/Non-Existent" "${DKHOME_DIR}/Desktop/Non-Existent" 
 }

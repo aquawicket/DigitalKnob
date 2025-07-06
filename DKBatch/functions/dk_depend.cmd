@@ -13,13 +13,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_depend
 ::%setlocal%
 	
-	set "_plugin_=%~1"
-	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if exist "%DKIMPORTS_DIR%/%_plugin_%/DKINSTALL.cmd" (
-		%dk_call% "%DKIMPORTS_DIR%/%_plugin_%/DKINSTALL.cmd"
-		
-		%dk_call% dk_success "found %_plugin_%"
+	if exist "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd" (
+		::%dk_call% dk_source "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
+		%dk_call% "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
 		%return%
 	)
 

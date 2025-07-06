@@ -3,7 +3,7 @@
 [ -n "${DK_SH-}" ] && return || export DK_SH=1
 
 if [ -z "${DKSCRIPT_PATH-}" ]; then
-	[ -e "${1-}" ] && DKSCRIPT_PATH="${1-}" || DKSCRIPT_PATH="${0}"
+	[ -e "${1-}" ] && export DKSCRIPT_PATH="${1-}" || export DKSCRIPT_PATH="${0}"
 fi
 #echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 
@@ -118,8 +118,7 @@ DKHOME_DIR(){
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 		dk_call dk_echo
-		#dk_source "${DKSCRIPT_PATH}"
-		. "${DKSCRIPT_PATH}"
+		dk_source "${DKSCRIPT_PATH}"
 		DKTEST
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
