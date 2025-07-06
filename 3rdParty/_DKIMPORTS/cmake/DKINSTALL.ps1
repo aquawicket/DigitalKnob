@@ -13,15 +13,14 @@ function Global:DKINSTALL() {
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";
 	${cmake_Import} = ${cmake_${Host_Tuple}_Import};
 	
-	
 #   if("${Host_Os}_${Host_Arch}" -eq "Windows_Arm32"    { ${cmake_Import} = "https://todo"; }
-#    if("${Host_Os}_${Host_Arch}" -eq "Windows_Arm64")   { ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip"; }
+#   if("${Host_Os}_${Host_Arch}" -eq "Windows_Arm64")   { ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip"; }
 #   if("${Host_Os}_${Host_Arch}" -eq "Windows_X86")     { ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip"; }
-#    if("${Host_Os}_${Host_Arch}" -eq "Windows_X86_64")  { ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip"; }
-#    if("$Host_Os" -eq "Mac")                        	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz"; }
+#   if("${Host_Os}_${Host_Arch}" -eq "Windows_X86_64")  { ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip"; }
+#   if("$Host_Os" -eq "Mac")                        	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz"; }
 #	if("$Host_Os" -eq "Mac")                        	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz"; }
-#    if("${Host_Os}_${Host_Arch}" -eq "Linux_X86_64")	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz"; }
-#    if("${Host_Os}_${Host_Arch}" -eq "Linux_Arm64") 	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"; }
+#   if("${Host_Os}_${Host_Arch}" -eq "Linux_X86_64")	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz"; }
+#   if("${Host_Os}_${Host_Arch}" -eq "Linux_Arm64") 	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"; }
     
     ${cmake_Import_FILE} = dk_call dk_basename ${cmake_Import}
 	${CMAKE_FOLDER} = dk_call dk_removeExtension ${cmake_Import_FILE}

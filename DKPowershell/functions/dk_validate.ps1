@@ -7,18 +7,18 @@ if(!$dk_validate_ps1){ $dk_validate_ps1 = 1; } else{ return; } #include guard
 #	@variable  - The name of a variable to test
 #	@code	   - The code to run if the variable is invalid.
 #
-function Global:dk_validate($variable, $code) {
+function Global:dk_validate(${variable}, ${code}) {
 	dk_debugFunc 2;
 	
-	if($variable -and (Test-Path variable:$variable)){ return }
+	if(${variable} -and (Test-Path variable:${variable})){ return; }
 	
-	if($code -and (Test-Path $code -PathType Leaf)){ dk_call dk_load $code }
+	if(${code} -and (Test-Path ${code} -PathType Leaf)){ dk_call dk_load ${code}; }
 	
 	#eval "${code}"
-	if($code){ Invoke-Expression $code }
-	if(!(Test-Path variable:$variable)){ dk_call dk_error "dk_validate(): $variable is invalid" }
+	if(${code}){ Invoke-Expression ${code} }
+	if(!(Test-Path variable:${variable})){ dk_call dk_error "dk_validate(): ${variable} is invalid" }
 	
-	dk_call dk_printVar $variable
+	dk_call dk_printVar ${variable}
 }
 
 
@@ -27,7 +27,7 @@ function Global:dk_validate($variable, $code) {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	$myVarA="a valid variable"
+	${myVarA}="a valid variable"
 	dk_call dk_validate myVarA "fill_myVarA"
 	dk_call dk_echo "myVarA = ${myVarA}"
 		
@@ -46,5 +46,5 @@ function Global:fill_myVarA() {
 }
 
 function Global:fill_myVarB() {
-	$myVarB="myVarB has a string value"
+	${myVarB}="myVarB has a string value"
 }

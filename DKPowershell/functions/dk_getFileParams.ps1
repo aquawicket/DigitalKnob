@@ -10,12 +10,17 @@ if(!$dk_getFileParams_ps1){ $dk_getFileParams_ps1 = 1; } else{ return; } #includ
 function Global:dk_getFileParams() {
     dk_debugFunc 0;
 	
-	${file} = $args[0]
+	${file} = $args[0];
+	if(!(Test-Path "${file}")){
+		return;
+	}
 	
 	if(${env:dk_getFileParams_PRINT_VARIABLES} -eq 1){
 		dk_call dk_debug "### ${file} Parameters ###" 
 	}
 	
+	Write-Host "file = ${file}";
+	if(!(${file})){ return; }
 	Get-Content ${file} | ForEach-Object {		
 		${line} = ${_}
 		if(${line}.IndexOf("#") -ge 0){

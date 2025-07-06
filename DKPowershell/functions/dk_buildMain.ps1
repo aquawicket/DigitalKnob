@@ -56,7 +56,7 @@ function Global:dk_buildMain() {
 		if(!${Target_Tuple})	{ dk_call dk_Target_Tuple;  continue; }
 		if(!${Target_Type})		{ dk_call dk_Target_Type;   continue; }
 		
-		dk_call dk_createCache;
+		#dk_call dk_createCache;
 		
 		########### CMAKE Command ###################
 		dk_call dk_chdir "$(dk_call dk_DKBRANCH_DIR)/DKCpp/apps/${Target_App}";

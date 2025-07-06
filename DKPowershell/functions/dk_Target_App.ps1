@@ -16,15 +16,15 @@ function Global:dk_Target_App() {
 	### get a list of the directories in DKCpp/apps ###
 	dk_call dk_getDirectories "$(dk_call dk_DKBRANCH_DIR)/DKCpp/apps"
 	
-	    ::### rename the list elements to the folder basename and add a matching command ###
-    set /a "n=0"
-    :loop1
-        if not defined dk_getDirectories[%n%] goto endloop1
-        for %%Z in ("!dk_getDirectories[%n%]!") do set "dk_getDirectories[%n%]=%%~nxZ"
-        set "commands[%n%]=%dk_call% dk_set Target_App !dk_getDirectories[%n%]!"
-        set /a n+=1
-        goto loop1
-    :endloop1
+#	### rename the list elements to the folder basename and add a matching command ###
+#   set /a "n=0"
+#    :loop1
+#        if not defined dk_getDirectories[%n%] goto endloop1
+#        for %%Z in ("!dk_getDirectories[%n%]!") do set "dk_getDirectories[%n%]=%%~nxZ"
+#        set "commands[%n%]=%dk_call% dk_set Target_App !dk_getDirectories[%n%]!"
+#        set /a n+=1
+#        goto loop1
+#    :endloop1
 	
 	###############################################################################
 	dk_call dk_echo "\n";
