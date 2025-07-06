@@ -118,7 +118,8 @@ DKHOME_DIR(){
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 		dk_call dk_echo
-		dk_source "${DKSCRIPT_PATH}"
+		#dk_source "${DKSCRIPT_PATH}"
+		. "${DKSCRIPT_PATH}"
 		DKTEST
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
