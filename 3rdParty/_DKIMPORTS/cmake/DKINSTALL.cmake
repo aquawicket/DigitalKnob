@@ -34,7 +34,7 @@ endif()
 ###### cmake_Import ######
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple 			"dk_Host_Tuple()")
-set					(cmake_Import "${CMake_${Host_Tuple}_Import}")
+dk_set				(cmake_Import "${CMake_${Host_Tuple}_Import}")
 dk_assertVar		(cmake_Import)
 dk_validate			(DKTOOLS_DIR 			"dk_DKTOOLS_DIR()")
 dk_importVariables	(${cmake_Import} NAME cmake ROOT ${DKTOOLS_DIR})
