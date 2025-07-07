@@ -59,7 +59,7 @@ set "dk_call_IGNORE=dk_debugFunc"
 	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
 	if not exist "%__CMND__%" (
-		call dk_source "%__CMND__%"
+		call %DKBATCH_FUNCTIONS_DIR_%dk_source.cmd "%__CMND__%"
 	)
 	
 	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
