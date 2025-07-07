@@ -3,12 +3,15 @@ if(!$dk_showFileLine_ps1){ $dk_showFileLine_ps1 = 1; } else{ return; } #include 
 
 if(!$MAX_LINES){ $global:MAX_LINES = 30 }
 ################################################################################
-# dk_showFileLine(filepath <match_string or line_num>)
+# dk_showFileLine(filepath, <match_string or line_num>)
 #
 #
 #
-function Global:dk_showFileLine($filepath, $goto) {
+function Global:dk_showFileLine() {
 	dk_debugFunc 2;
+
+	$filepath = $($args[0]);
+	$goto	  = $($args[1]);
 
 	$lineno = $goto
 #	[ -n "${lastErrorFile-}" ] && _errfile="${lastErrorFile}"  || _errfile="$1"

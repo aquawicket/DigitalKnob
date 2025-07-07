@@ -5,12 +5,11 @@ if(!$dk_convertToCIdentifier_ps1){ $dk_convertToCIdentifier_ps1 = 1; } else{ ret
 # dk_convertToCIdentifier(str) -> rtn_var
 #
 #
-function Global:dk_convertToCIdentifier( $str ) {
+function Global:dk_convertToCIdentifier() {
 	dk_debugFunc 1;
 
-	$cIdentifier = $str -replace '\W', '_';
-	dk_call dk_printVar cIdentifier
-	return $cIdentifier
+	$dk_convertToCIdentifier = $($args[0]) -replace '\W', '_';
+	return $dk_convertToCIdentifier
 }
 
 

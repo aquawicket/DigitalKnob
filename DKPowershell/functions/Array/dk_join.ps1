@@ -2,14 +2,16 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 if(!$Array_dk_join){ $Array_dk_join_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
-# Array:dk_join(array, separator) -> rtn_var
+# Array/dk_join(array, separator) -> rtn_var
 #
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_join
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
-function Global:Array:dk_join($array, $separator) {
+function Global:Array/dk_join() {
 	dk_debugFunc 2;
 	
+	$array = ${$args[0]};
+	$separator = $($args[1]);
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 	# from variable name
 	else { $_array_ = $array }															# from variable
 	
@@ -27,6 +29,6 @@ function Global:DKTEST() {
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
 	
-	$myString = dk_call Array:dk_join myArray ",";
+	$myString = dk_call Array/dk_join myArray ",";
 	dk_call dk_info "myString = $myString";
 }

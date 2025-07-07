@@ -9,7 +9,8 @@ function Global:dk_set() {
 	dk_debugFunc 0 2;
 	
 	$var = $($args[0]);
-	$val = $($args[1]);
+	${AllButFirstArgs} = ${args} | Select-Object -Skip 1;
+	$val = ${AllButFirstArgs};
 	Write-Host "'${var}' '${val}'"
 	
 	Set-Variable -Name ${$(var)} -Value ${$(val)} -Scope Global

@@ -5,8 +5,10 @@ if(!$dk_pathExists_ps1){ $dk_pathExists_ps1 = 1; } else{ return; } #include guar
 # dk_pathExists(filepath)
 #
 #
-function Global:dk_pathExists($filepath){
+function Global:dk_pathExists(){
 	dk_debugFunc 1;
+
+	$filepath = $($args[0]);
 
 	if(Test-Path $filepath){ $pathExists = $true } 
 	else { $pathExists = $false }

@@ -5,9 +5,12 @@ if(!$dk_smartExtract_ps1){ $dk_smartExtract_ps1 = 1; } else{ return; } #include 
 # dk_smartExtract(src, dest)
 #
 #
-function Global:dk_smartExtract($src, $dest) {
+function Global:dk_smartExtract() {
 	dk_debugFunc 2;
 
+	 $src = $($args[0]);
+	$dest = $($args[1]);
+	
 	$src_fullpath = dk_call dk_realpath $src
 	$src_dirname = dk_call dk_dirname $src_fullpath
 	$src_basename = dk_call dk_basename $src_fullpath

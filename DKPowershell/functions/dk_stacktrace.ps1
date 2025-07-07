@@ -13,10 +13,11 @@ function Global:dk_stacktrace() {
     $Global:Var = (Get-PSCallStack).Command
 	
     $Var | ForEach-Object {
+		#$(dk_call __FRAME__ $i)
 		$fileline = "[${i}] $(__FILE__ $i):$(__LINE__ $i):";
 		$args = "$(__ARGV__ $i)";
 		$args = $args.Trim();
-		$funcargs = "$(__FUNCTION__ $i)($args)";
+		$funcargs = "$(__FUNCTION__ $i)($(__ARGC__ $i): $args)";
 		$fileline = $fileline.PadRight(30,' ');
         dk_call dk_echo "$($fileline)$($funcargs)"
         $i++
@@ -65,8 +66,14 @@ function Global:dk_stacktrace() {
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST_1() {
+	dk_debugFunc 0 99;
+	
+	dk_call dk_stacktrace;
+}
+
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	dk_call dk_stacktrace
+	dk_call DKTEST_1 abc 123
 }

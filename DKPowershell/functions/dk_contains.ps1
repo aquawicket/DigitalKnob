@@ -5,13 +5,13 @@ if(!$dk_contains_ps1){ $dk_contains_ps1 = 1; } else{ return; } #include guard
 # dk_contains(str, substring)
 #
 #
-function Global:dk_contains($str, $substring) {
+function Global:dk_contains() {
 	dk_debugFunc 2;
 
-	if($str -like "*$substring*"){
-		return $true
+	if($($args[0]) -like "*$($args[1])*"){
+		return $true;
 	}
-	return $false
+	return $false;
 }
 
 
@@ -22,9 +22,17 @@ function Global:dk_contains($str, $substring) {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 
-	if(dk_call dk_contains "1one1" "one"){ dk_call dk_echo "1one1 contains one\n" } 
-	else { dk_call dk_echo "1one1 does not contain one\n" }
+	if(dk_call dk_contains "1one1" "one"){ 
+		dk_call dk_echo "1one1 contains one\n"; 
+	}
+	else { 
+		dk_call dk_echo "1one1 does not contain one\n"; 
+	}
 
-	if(dk_call dk_contains "2two2" "tow"){ dk_call dk_echo "2two2 contains tow\n" } 
-	else { dk_call dk_echo "2two2 does not contain tow\n"}
+	if(dk_call dk_contains "2two2" "tow"){ 
+		dk_call dk_echo "2two2 contains tow\n"; 
+	}
+	else { 
+		dk_call dk_echo "2two2 does not contain tow\n"; 
+	}
 }

@@ -14,7 +14,7 @@ function Global:dk_timeout() {
 	if(!$seconds){
 		$seconds = 10
 	}
-	dk_assertVar seconds
+	dk_call dk_assertVar seconds
 	
 #	Write-Host "Waiting for ${seconds} seconds, press a key to continue .."
 #	$counter = 0

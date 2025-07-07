@@ -5,7 +5,7 @@ if(!$Test_dk_test){ $Test_dk_test_ps1 = 1; } else{ return; } #include guard
 # Test/dk_test()
 #
 #
-function GLOBAL:Test:dk_test($argA, $argB, $argC) {
+function GLOBAL:Test/dk_test($argA, $argB, $argC) {
 	dk_call dk_debugFunc 0 99
 	
 	$bound = ${PsBoundParameters};
@@ -116,11 +116,11 @@ function Global:DKTEST() {
 	dk_call dk_echo ""
 	dk_call dk_echo "dk_test = ${dk_test}";
 	
-	dk_call Test:dk_test "from DKTEST()" "to Test/dk_test()"
+	dk_call Test/dk_test "from DKTEST()" "to Test/dk_test()"
 	dk_call dk_echo ""
 	dk_call dk_echo "dk_test = ${dk_test}";
 	
-	dk_call Test:Test:dk_test "from DKTEST()" "to Test/Test/dk_test()"
+	dk_call Test/Test/dk_test "from DKTEST()" "to Test/Test/dk_test()"
 	dk_call dk_echo ""
 	dk_call dk_echo "dk_test = ${dk_test}";
 }

@@ -10,18 +10,17 @@ if(!$dk_copy_ps1){ $dk_copy_ps1 = 1; } else{ return; } #include guard
 #	@to			- The destination path to copy to
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 #
-function Global:dk_copy($from, $to) {
+function Global:dk_copy() {
 	dk_debugFunc 2 3
 	
-	#$from = $args[0]
-	#$to = $args[1]
-	#$overwrite = $args[2]
-	if($($args[2])){
-#		if("$($args[2])" = "OVERWRITE"){
-			$OVERWRITE = 1
-#		} else { 
-#			$OVERWRITE = 0 
-#		}
+	$from = $($args[0]);
+	$to = $($args[1]);
+	$overwrite = $($args[2]);
+	
+	if($overwrite){
+		$OVERWRITE = 1
+	} else { 
+		$OVERWRITE = 0 
 	}
 	
 	dk_call dk_info "Copying ${from} to ${to}"
@@ -52,7 +51,7 @@ function Global:dk_copy($from, $to) {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	dk_call dk_copy "$(dk_call dk_DKBRANCH_DIR)" "$(dk_call dk_DKBRANCH_DIR)_BACKUP" OVERWRITE;
+	dk_call dk_copy "$(dk_call dk_DKBRANCH_DIR)"		"$(dk_call dk_DKBRANCH_DIR)_BACKUP"		"OVERWRITE";
 	return;
 	
 	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"

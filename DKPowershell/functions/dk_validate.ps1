@@ -7,8 +7,11 @@ if(!$dk_validate_ps1){ $dk_validate_ps1 = 1; } else{ return; } #include guard
 #	@variable  - The name of a variable to test
 #	@code	   - The code to run if the variable is invalid.
 #
-function Global:dk_validate(${variable}, ${code}) {
+function Global:dk_validate() {
 	dk_debugFunc 2;
+	
+	${variable} = $($args[0]);
+	${code} = $($args[1]);
 	
 	if(${variable} -and (Test-Path variable:${variable})){ return; }
 	

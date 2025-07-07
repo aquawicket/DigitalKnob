@@ -8,10 +8,10 @@ if(!$dk_success_ps1){ $dk_success_ps1 = 1; } else{ return; } #include guard
 #
 #    @message	- The message to print
 #
-function Global:dk_success($message){
+function Global:dk_success(${message}){
 	dk_debugFunc 1;
 	
-	dk_call dk_log SUCCESS "${message}"
+	dk_call dk_log SUCCESS "$($args[0])"
 }
 
 

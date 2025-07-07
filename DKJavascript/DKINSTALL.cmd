@@ -1,3 +1,5 @@
+:: https://en.wikipedia.org/wiki/JScript
+
 @echo off
 if "%~1" equ "" (goto:DKINSTALL)
 

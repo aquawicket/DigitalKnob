@@ -44,7 +44,6 @@ function Global:dk_debugFunc() {
 	if($(__FUNCTION__ 2) -eq "dk_printVar"){ return }
 	
 	$indent="${indent} "
-	#$indent="${indent} L "
 	
 	$global:ESC = "$([char]27)"
 	$global:cyan = "${ESC}[36m"

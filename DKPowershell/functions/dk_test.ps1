@@ -116,11 +116,11 @@ function Global:DKTEST() {
 	dk_call dk_echo ""
 	dk_call dk_echo "dk_test = ${dk_test}";
 	
-	dk_call Test:dk_test "from DKTEST()" "to Test/dk_test()"
+	dk_call Test/dk_test "from DKTEST()" "to Test/dk_test()"
 	dk_call dk_echo ""
 	dk_call dk_echo "dk_test = ${dk_test}";
 	
-	dk_call Test:Test:dk_test "from DKTEST()" "to Test/Test/dk_test()"
+	dk_call Test/Test/dk_test "from DKTEST()" "to Test/Test/dk_test()"
 	dk_call dk_echo ""
 	dk_call dk_echo "dk_test = ${dk_test}";
 }

@@ -16,7 +16,31 @@ function Global:dk_sleep_ms($milliseconds) {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-	$milliseconds = 3500;
+	$milliseconds = 3000;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 2000;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 1000;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 500;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 250;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 125;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 125;
 	dk_call dk_echo "sleeping for $milliseconds milliseconds"
 	dk_call dk_sleep_ms $milliseconds
 }

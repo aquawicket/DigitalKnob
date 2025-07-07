@@ -12,7 +12,6 @@ if(!$dk_setConsoleIcon_ps1){ $dk_setConsoleIcon_ps1 = 1; } else{ return; } #incl
 function Global:dk_setConsoleIcon() {
 	dk_debugFunc 0 99
 
-	# $all_args = $PsBoundParameters.Values + ${args};
 	# arg1 = $($args[0]);
 	# arg2 = $($args[1]);
 	

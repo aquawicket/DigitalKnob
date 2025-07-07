@@ -11,7 +11,9 @@ function Global:dk_source($func) {
 		Write-Host "ERROR: func:${func} is invalid";
 		return;
 	}
-
+	
+	#${func} = ${func} -replace "::", "/"; 
+	
 #############################################################################################################################
 #	FROM THIS ->                          											            			     dk_color
 #	FROM THIS ->                          C:\Users\Administrator\DigitalKnob\Development\3rdParty\_DKIMPORTS\git/dkconfig.txt

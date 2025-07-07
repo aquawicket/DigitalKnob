@@ -7,14 +7,19 @@ if(!$dk_call_ps1){ $dk_call_ps1 = 1; } else{ return; } #include guard
 #
 function Global:dk_call(){
 	#dk_debugFunc 1 9
-	$1, $2, $3, $4, $5, $6, $7, $8, $9 = ${args};
 	
-	#$comand = $1 -replace ":", "/"
+	${func} = $($args[0]);
+	${AllButFirstArgs} = ${args} | Select-Object -Skip 1;
+	
+	#${func} = ${func} -replace "::", "/"
 	#if("$comand" -match "dk_[a-zA-Z0-9]+"){
-		dk_source $1;
+		
 	#}
 	
-	${func} = $1;
+	if(!(Get-Command ${func} -errorAction SilentlyContinue)) {
+		dk_source ${func};
+	}
+	
 	
 	if(Test-Path ${func}){
 		if("${func}" -Match ".ps1"){
@@ -23,9 +28,14 @@ function Global:dk_call(){
 		}
 	}
 	
-	#Write-Host "calling ${func} $2 $3 $4 $5 $6 $7 $8 $9";
-	& ${func} $2 $3 $4 $5 $6 $7 $8 $9;
-	#Start-Process -WorkingDirectory $env:DKPOWERSHELL_FUNCTIONS_DIR -ArgumentList @args
+	#Write-Host "AllButFirstArgs = '${AllButFirstArgs}'"
+	if(!${func}){ return; }
+	if(${AllButFirstArgs}){
+		& ${func} ${AllButFirstArgs};
+	} else {
+		& ${func}
+	}
+	#Start-Process ${func} -WorkingDirectory $env:DKPOWERSHELL_FUNCTIONS_DIR -ArgumentList ${AllButFirstArgs};
 } 
 
 
