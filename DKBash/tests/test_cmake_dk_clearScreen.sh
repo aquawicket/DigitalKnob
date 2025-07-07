@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 . ../functions/DK
 
 dk_cmakeEval "dk_clearScreen()"

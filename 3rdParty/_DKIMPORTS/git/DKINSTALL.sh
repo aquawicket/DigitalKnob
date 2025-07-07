@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 ###### DK.sh #####################################################################
-[ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*
+[ -z "${DK_SH-}" ] && $(find "../../" -name "DK.sh" -print) "$0" $*
 ##################################################################################
 
 
@@ -26,7 +26,7 @@ DKINSTALL() {
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
 
 	git_Import_Var="git_${Host_Tuple}_Import"
-	export git_Import="${!git_Import_Var}"
+	export git_Import="${git_Import_Var}"
     dk_call dk_assertVar git_Import
   
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
@@ -48,9 +48,14 @@ DKINSTALL() {
 	###### INSTALL ######
     dk_call dk_echo 
     dk_call dk_info "Installing git . . ."
-	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-    dk_call dk_download ${git_Import}
-    "${DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" -y -o "${GIT}"
+	if dk_call dk_isUrl "${git_Import}"; then
+		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+		dk_call dk_download ${git_Import}
+		"${DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" -y -o "${GIT}"
+	else
+		dk_call dk_installPackage git
+		(command -v git) && export GIT_EXE=$(command -v git)
+	fi
 	
     ###### Install Git Context Menu ######
     #dk_call dk_depend git/contextMenu  

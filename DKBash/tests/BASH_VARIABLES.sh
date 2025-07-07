@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 . ../functions/DK.sh
 
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html

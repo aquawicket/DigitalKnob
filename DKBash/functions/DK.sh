@@ -1,5 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+echo "DK.sh"
 [ -z "${DK_SH-}" ] && export DK_SH=1 || return
+
+clear
+echo "SHLVL = ${SHLVL}"
+echo "DKBASH_RELOADED = ${DKBASH_RELOADED}"
 
 if [ -z "${DKSCRIPT_PATH-}" ]; then
 	[ -e "${1-}" ] && export DKSCRIPT_PATH="${1-}" #|| export DKSCRIPT_PATH="${0}"
@@ -34,7 +39,7 @@ DK(){
 	}
     
 	###### Reload Main Script with bash ######
-	dkreloadWithBash
+	[ -z "${DKBASH_RELOADED-}" ] && dkreloadWithBash
 	echo "left dkreloadWithBash"
 	#[ $# -eq 0 ] && dkreloadWithBash || dkreloadWithBash $*
 

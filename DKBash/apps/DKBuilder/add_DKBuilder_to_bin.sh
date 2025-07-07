@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 . ../functions/DK.sh
 
 dk_getFirstPath firstPath

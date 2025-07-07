@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 [ -z "${DK_SH-}" ] && . ../../../DKBash/functions/DK.sh
 
 # https://github.com/PowerShell/PowerShell/releases
