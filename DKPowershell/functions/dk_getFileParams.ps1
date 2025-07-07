@@ -3,7 +3,7 @@ if(!$dk_getFileParams_ps1){ $dk_getFileParams_ps1 = 1; } else{ return; } #includ
 
 
 ################################################################################
-# ${env:dk_getFileParams_PRINT_VARIABLES}=1
+${env:dk_getFileParams_PRINT_VARIABLES}=1
 ################################################################################
 # dk_getFileParams(filepath)
 #
@@ -11,15 +11,16 @@ function Global:dk_getFileParams() {
     dk_debugFunc 0;
 	
 	${file} = $args[0];
+	${file} = ${file} -replace "\\", "/";
 	if(!(Test-Path "${file}")){
 		return;
 	}
+	
 	
 	if(${env:dk_getFileParams_PRINT_VARIABLES} -eq 1){
 		dk_call dk_debug "### ${file} Parameters ###" 
 	}
 	
-	Write-Host "file = ${file}";
 	if(!(${file})){ return; }
 	Get-Content ${file} | ForEach-Object {		
 		${line} = ${_}

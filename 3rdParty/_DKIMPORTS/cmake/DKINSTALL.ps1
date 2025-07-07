@@ -11,7 +11,13 @@ function Global:DKINSTALL() {
 	dk_call dk_getFileParams ${PSScriptRoot}/dkconfig.txt;
 	
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";
-	${cmake_Import} = ${cmake_${Host_Tuple}_Import};
+	Write-Host "Host_Tuple = ${Host_Tuple}"
+	${cmake_Import} = ${cmake_$(Host_Tuple)_Import};
+	Write-Host "cmake_Windows_X86_64_Import = ${cmake_Windows_X86_64_Import}"
+	if("${Host_Tuple}" -eq "Windows_X86_64"){
+		${cmake_Import} = ${cmake_Windows_X86_64_Import};
+	}
+	Write-Host "cmake_Import = ${cmake_Import}"
 	
 #   if("${Host_Os}_${Host_Arch}" -eq "Windows_Arm32"    { ${cmake_Import} = "https://todo"; }
 #   if("${Host_Os}_${Host_Arch}" -eq "Windows_Arm64")   { ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip"; }
@@ -21,6 +27,7 @@ function Global:DKINSTALL() {
 #	if("$Host_Os" -eq "Mac")                        	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz"; }
 #   if("${Host_Os}_${Host_Arch}" -eq "Linux_X86_64")	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz"; }
 #   if("${Host_Os}_${Host_Arch}" -eq "Linux_Arm64") 	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"; }
+
     
     ${cmake_Import_FILE} = dk_call dk_basename ${cmake_Import}
 	${CMAKE_FOLDER} = dk_call dk_removeExtension ${cmake_Import_FILE}
