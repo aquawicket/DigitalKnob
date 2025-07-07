@@ -29,11 +29,11 @@ function Global:dk_smartExtract($src, $dest) {
 	
 	$directories = dk_call dk_getDirectories $src_extractPath
 	
-	$dir_count = dk_call dk_arrayLength directories
+	$dir_count = dk_call Array/dk_length directories
 	
 	$files = dk_call dk_getFiles $src_extractPath
 	
-	$file_count = dk_call dk_arrayLength files
+	$file_count = dk_call Array/dk_length files
 	
 	if($dir_count -eq 1){
 		if($file_count -eq 0){
