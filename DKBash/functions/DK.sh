@@ -6,7 +6,6 @@ if [ -z "${DKSCRIPT_PATH-}" ]; then
 fi
 
 
-
 ##################################################################################
 # DK()
 #
@@ -51,28 +50,31 @@ DK(){
 #	[ ! -n "${DKHTTP_DKBRANCH_DIR-}" ]			&& export DKHTTP_DKBRANCH_DIR="${DKHTTP_DIGITALKNOB_DIR}/${DKBRANCH}"
 #	[ ! -n "${DKHTTP_DKBASH_DIR-}" ]			&& export DKHTTP_DKBASH_DIR="${DKHTTP_DKBRANCH_DIR}/DKBash"
 #	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKBASH_DIR}/functions"
-	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
-	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="${DKHTTP_DKBASH_FUNCTIONS_DIR}/"
+	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions";
+	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="${DKHTTP_DKBASH_FUNCTIONS_DIR}/";
+	echo "DKHTTP_DKBASH_FUNCTIONS_DIR_ = ${DKHTTP_DKBASH_FUNCTIONS_DIR_}"
 
-###### DKHOME_DIR ######
-DKHOME_DIR(){
 	######   DKHOME_DIR()  ######
-	[ ! -e "${DKHOME_DIR-}" ] && (command -v cmd.exe && command -v wslpath)&>/dev/null && export DKHOME_DIR=$(wslpath -u $(cmd.exe /c echo "%USERPROFILE%" | tr -d '\r'));
-	[ ! -e "${DKHOME_DIR-}" ] && (command -v cmd.exe && command -v cygpath)&>/dev/null && export DKHOME_DIR=$(cygpath -u $(cmd.exe /c echo "%USERPROFILE%" | tr -d '\r'));
-#	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ]                            && export DKHOME_DIR=$(ANDROID_SDCARD); 	
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	                           && export DKHOME_DIR="${HOME}";
-	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}" || (echo "DKHOME_DIR-NOTFOUND" & exit ${BASH_LINENO[0]};) 
-}
+	(command -v wslpath) && (command -v cmd.exe) && export DKHOME_DIR=$(wslpath -u $(cmd.exe /c echo "%USERPROFILE%" | tr -d '\r'));
+	echo "DKHOME_DIR = ${DKHOME_DIR-}"
+	(command -v cmd.exe) && (command -v cygpath) && export DKHOME_DIR=$(cygpath -u $(cmd.exe "/c echo "%USERPROFILE%" | tr -d '\r'"));
+	echo "DKHOME_DIR = ${DKHOME_DIR-}"
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	           && export DKHOME_DIR="${HOME}";
+	echo "DKHOME_DIR = ${DKHOME_DIR-}"
+	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}" || (echo "DKHOME_DIR-NOTFOUND"; exit ${BASH_LINENO[0]};) 
+	echo "DKHOME_DIR = ${DKHOME_DIR-}"
 
-	[ ! -n "${DKBASH_FUNCTIONS_DIR-}" ]		&& export DKBASH_FUNCTIONS_DIR="$(DKHOME_DIR)/DigitalKnob/Development/DKBash/functions"
-	[ ! -n "${DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/"
+	[ ! -n "${DKBASH_FUNCTIONS_DIR-}" ]		&& export DKBASH_FUNCTIONS_DIR="${DKHOME_DIR}/DigitalKnob/Development/DKBash/functions";
+	[ ! -n "${DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/";
+	echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
 
 #   export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
 
 #	[ -e "${DKBASH_FUNCTIONS_DIR_}DK.sh" ] || (echo "ERROR: DKBASH_FUNCTIONS_DIR:'${DKBASH_FUNCTIONS_DIR}' is incorrect"; exit 1)
     [ ! -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] && dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR_}dk_source.sh ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
 	. ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
-
+	echo "loaded dk_source"
+	
     ############ LOAD FUNCTION FILES ############
 	#dk_source dk_callStack
     dk_source dk_return
@@ -141,6 +143,8 @@ dkreloadWithBash() {
 	#[ -e "${DKSCRIPT_PATH}" ] && exec /usr/bin/bash "${DKSCRIPT_PATH}";
 	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}';
 }
+
+
 
 ##################################################################################
 # dk_download(url, destination)
