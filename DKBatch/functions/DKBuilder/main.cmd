@@ -32,7 +32,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_createSymlink "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKDESKTOP_DIR%/DKBuilder.cmd"
 	)
 
-	::%dk_call% dk_assertPath DKSCRIPT_DIR
 	
 	%dk_call% dk_unset pickUpdate
 	%dk_call% dk_unset Target_App
@@ -90,9 +89,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		::########### CMAKE Command ###################
 		%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
 		%dk_call% dk_chdir %DKCPP_APPS_DIR%/%Target_App%
-		%dk_call% dk_cmakeEval "dk_load('%DKCPP_APPS_DIR:\=/%/%Target_App%/DKINSTALL.cmake')"
-		::%dk_call% dk_validate CMAKE_EXE "%dk_call% dk_depend cmake"
-		::%CMAKE_EXE% -P "%DKCPP_APPS_DIR:\=/%/%Target_App%/DKINSTALL.cmake"
+		%dk_call% dk_validate CMAKE_EXE "%dk_call% dk_depend cmake"
+		%CMAKE_EXE% -P "%DKCPP_APPS_DIR%/%Target_App%/DKINSTALL.cmake"
 		
 		::%dk_call% DKBuilder/generate
 		::%dk_call% DKBuilder/buildApp

@@ -15,17 +15,18 @@ include_guard()
 ############ git ############
 # https://git-scm.com
 # https://github.com/git-for-windows/git
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 ### IMPORT ###
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-set(GIT_IMPORT "${Git_${Host_Tuple}_Import}")
-dk_assertVar(GIT_IMPORT)
+set(git_Import "${git_${Host_Tuple}_Import}")
+dk_assertVar(git_Import)
 
 
 ### GIT variables ###
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-dk_importVariables(${GIT_IMPORT} ROOT $ENV{DKTOOLS_DIR})
+dk_importVariables(${git_Import} ROOT $ENV{DKTOOLS_DIR})
 
 
 ### First Check ###
@@ -42,7 +43,7 @@ endif()
 if(NOT GIT_EXE)
 	dk_debug(" Installing git . . . . ")
 	if(Windows_Host)
-		dk_download(${GIT_IMPORT} $ENV{DKDOWNLOAD_DIR})			
+		dk_download(${git_Import} $ENV{DKDOWNLOAD_DIR})			
 		dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" GIT_INSTALL_FILE)
 		dk_nativePath("${GIT}" GIT_INSTALL_PATH)
 		execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH} COMMAND_ECHO STDOUT)
@@ -107,7 +108,7 @@ dk_return()
 #		if(NOT EXISTS ${GIT_EXE})
 #			### INSTALL ###
 #			dk_info("Installing Git . . .")
-#			dk_download(${GIT_IMPORT} $ENV{DKDOWNLOAD_DIR})			
+#			dk_download(${git_Import} $ENV{DKDOWNLOAD_DIR})			
 #			dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" GIT_INSTALL_FILE)
 #			dk_nativePath("${GIT}" GIT_INSTALL_PATH)
 #			#dk_exec(${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})

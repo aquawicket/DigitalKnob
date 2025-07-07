@@ -25,13 +25,13 @@ DKINSTALL() {
 	
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
 
-	GIT_IMPORT_VAR="Git_${Host_Tuple}_Import"
-	export GIT_IMPORT="${!GIT_IMPORT_VAR}"
-    dk_call dk_assertVar GIT_IMPORT
+	git_Import_Var="git_${Host_Tuple}_Import"
+	export git_Import="${!git_Import_Var}"
+    dk_call dk_assertVar git_Import
   
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-	#[ -z "${GIT-}" ] && dk_call dk_importVariables ${GIT_IMPORT} NAME git ROOT ${DKTOOLS_DIR}
-	[ -z "${GIT-}" ] && dk_call dk_importVariables ${GIT_IMPORT} ROOT ${DKTOOLS_DIR}
+	#[ -z "${GIT-}" ] && dk_call dk_importVariables ${git_Import} NAME git ROOT ${DKTOOLS_DIR}
+	[ -z "${GIT-}" ] && dk_call dk_importVariables ${git_Import} ROOT ${DKTOOLS_DIR}
 	dk_call dk_assertVar GIT
 	
 	# https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
@@ -49,7 +49,7 @@ DKINSTALL() {
     dk_call dk_echo 
     dk_call dk_info "Installing git . . ."
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-    dk_call dk_download ${GIT_IMPORT}
+    dk_call dk_download ${git_Import}
     "${DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" -y -o "${GIT}"
 	
     ###### Install Git Context Menu ######

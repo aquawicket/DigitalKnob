@@ -62,7 +62,6 @@ function Global:dk_buildMain() {
 		dk_call dk_chdir "$(dk_call dk_DKBRANCH_DIR)/DKCpp/apps/${Target_App}";
 		dk_call dk_validate CMAKE_EXE "dk_call dk_depend cmake";
 		dk_call ${CMAKE_EXE} -P "$(dk_call dk_DKBRANCH_DIR)/DKCpp/apps/${Target_App}/DKINSTALL.cmake";
-		#dk_call dk_cmakeEval "dk_load('${dk_call dk_DKBRANCH_DIR}/DKCpp/apps/${Target_App}/DKINSTALL.cmake')";
 		
 		#dk_call dk_generate;	
 		#dk_call dk_buildApp;

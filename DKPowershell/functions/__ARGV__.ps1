@@ -13,13 +13,13 @@ function GLOBAL:__ARGV__($_FRAME_=1) {
 		#$_ARGV_.Add($($keyValue.Key))
 		$_ARGV_.Add($($keyValue.Value))
 	}
-	$unboundArguments = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.UnboundArguments
+	$unboundArguments = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.UnboundArguments;
 #	foreach($keyValue in $unboundArguments.GetEnumerator()) {
 #		#echo "$($keyValue.Key) = $($keyValue.Value)"
 #		#$_ARGV_.Add($($keyValue.Key))
 #		$_ARGV_.Add($($keyValue.Value))
 #	}
-	return $_ARGV_+$unboundArguments
+	return $_ARGV_+$unboundArguments;
 }
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
