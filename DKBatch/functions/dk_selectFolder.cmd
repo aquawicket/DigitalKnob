@@ -21,7 +21,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
     if not defined dk_selectFolder (
         %dk_call% dk_echo "no folder selected"
-        %dk_return%
+        %return%
     )
    
     endlocal & (

@@ -14,15 +14,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
     :: Method 1 - javascript (fastest)
     set /a "milliseconds=%~1"
-    cscript /nologo /e:javascript "%~f0" "%milliseconds%" %NO_STDERR% && %dk_return% || (call ) %NO_OUTPUT%
+    cscript /nologo /e:javascript "%~f0" "%milliseconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
    
     :: Method 2 - dk_powershell
     set /a "milliseconds=%~1"
-    %dk_call% dk_powershell "Start-Sleep -m %milliseconds%" %NO_STDERR% && %dk_return% || (call ) %NO_OUTPUT%
+    %dk_call% dk_powershell "Start-Sleep -m %milliseconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
    
 ::  :: Method 3 - powershell directly
 ::  set /a "milliseconds=%~1-300"
-::  %dk_call% %POWERSHELL_EXE% -Command "Start-Sleep -m %milliseconds%" %NO_STDERR% && %dk_return% || (call ) %NO_OUTPUT%
+::  %dk_call% %POWERSHELL_EXE% -Command "Start-Sleep -m %milliseconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
    
     :: Method 4 - using ping
     set /a "milliseconds=(%~1+1000)/1000"
