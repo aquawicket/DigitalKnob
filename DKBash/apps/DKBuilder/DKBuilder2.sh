@@ -5,9 +5,9 @@
 ###### DKHOME_DIR ######
 DKHOME_DIR(){
 	######   DKHOME_DIR($*)  ######
-#	[ ! -e "${DKHOME_DIR-}" ] && (command -v wslpath) && (command -v cmd.exe) && (export DKHOME_DIR=$(wslpath -u $(cmd /c echo "%USERPROFILE%" | tr -d '\r'))) 	# Windows subsystem for linux
-#	[ ! -e "${DKHOME_DIR-}" ] && (command -v cygpath) && (command -v cmd.exe) && (export DKHOME_DIR=$(cygpath -u $(cmd "/c echo %USERPROFILE% | tr -d '\r'"))) 	# Git for windows
-#	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD); 															# Android sdcard
+	[ ! -e "${DKHOME_DIR-}" ] && (command -v wslpath) && (command -v cmd.exe) && (export DKHOME_DIR=$(wslpath -u $(cmd /c echo "%USERPROFILE%" | tr -d '\r'))) 	# Windows subsystem for linux
+	[ ! -e "${DKHOME_DIR-}" ] && (command -v cygpath) && (command -v cmd.exe) && (export DKHOME_DIR=$(cygpath -u $(cmd "/c echo %USERPROFILE% | tr -d '\r'"))) 	# Git for windows
+	#[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD); 															# Android sdcard
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR="${HOME}";
 	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| (echo "DKHOME_DIR-NOTFOUND" & exit -1); 
 }
