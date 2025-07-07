@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::set /a _FRAME_+=1
 	
 	::echo "$(basename %BATCH_SOURCE[%_FRAME_%]%"
-	::call dk_return "$(basename %BATCH_SOURCE[%_FRAME_%]%"
+	::%dk_return% "$(basename %BATCH_SOURCE[%_FRAME_%]%"
 %endfunction%
 
 

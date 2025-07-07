@@ -10,10 +10,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_folderName
 %setlocal%
-	%dk_call% dk_debugFunc 2
-	set "path=%~1"
+	%dk_call% dk_debugFunc 1 2
 
-	for %%a in ("%path%") do for %%b in ("%%~dpa\.") do set "dk_folderName=%%~nxb"
+	for %%a in ("%~1") do for %%b in ("%%~dpa\.") do set "dk_folderName=%%~nxb"
 	
 	::### return ###
 	endlocal & (

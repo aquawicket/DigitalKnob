@@ -11,8 +11,8 @@
 
 ::if not defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
 if not defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
-if not defined dk_return (set "dk_return=dk_return")
-
+::if not defined dk_return (set "dk_return=dk_return")
+if not defined dk_return (set "dk_return=%dk_call% dk_return")
 
 ::################################################################################
 ::dk_return(exit_code, message)

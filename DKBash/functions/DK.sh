@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 #echo "DK() 0='${0}' 1='${1-}' *='${*}'"
 [ -n "${DK_SH-}" ] && return || export DK_SH=1
 

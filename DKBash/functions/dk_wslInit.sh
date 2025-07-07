@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 DKBASH_FUNCTIONS_DIR_="${PWD}/"
 [ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 

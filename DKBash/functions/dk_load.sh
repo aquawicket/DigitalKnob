@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #[ -n "${HAVE_dk_load}" ] && return || readonly HAVE_dk_load=1
 [ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
 

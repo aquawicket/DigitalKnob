@@ -40,7 +40,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if defined DKBATCH_FUNCTIONS_DIR_		(set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:\=/%")
 
 	::###### PATH ######
-	set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
+	::set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
 	
 	::###### _SCOPE ######
 	set "setlocal=setlocal EnableDelayedExpansion
@@ -73,8 +73,8 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	call :dk_initFiles
 	
 	::############### init dk_call ###############
-	call dk_call init
-	::call %DKBATCH_FUNCTIONS_DIR_:/=\%dk_call.cmd init
+	::call dk_call init
+	call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd init
 	
 	::############ load dkconfig.txt ############
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"

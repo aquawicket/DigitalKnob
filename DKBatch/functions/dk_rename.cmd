@@ -26,13 +26,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	if not exist "%_from_%" (
 		%dk_call% dk_error "dk_rename: %_from_% not found"
-		dk_return
+		%dk_return%
 	)
 	
 	if exist "%_to_%" (
 		if "%OVERWRITE%" neq "1" (
 			%dk_call% dk_error "dk_rename Cannot rename file. Destiantion already exists and OVERWRITE is not set"
-			dk_return
+			%dk_return%
 		)
 		%dk_call% dk_delete %_to_%
 	)

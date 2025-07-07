@@ -14,7 +14,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
     ::set /a _FRAME_+=1
 
-::  call dk_return "%FUNCNAME[%_FRAME_%]%"
+::  %dk_return% "%FUNCNAME[%_FRAME_%]%"
 %endfunction%
 
 
