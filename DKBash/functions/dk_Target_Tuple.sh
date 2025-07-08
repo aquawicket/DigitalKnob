@@ -21,6 +21,12 @@ dk_Target_Tuple() {
 		[ -z "${Target_Os-}" ] 		&& dk_call dk_Target_Os
 		[ -z "${Target_Arch-}" ]	&& dk_call dk_Target_Arch
 		[ -z "${Target_Env-}" ] 	&& dk_call dk_Target_Env
+		export Target_Tuple="${Target_Os}_${Target_Arch}"
+		export ${Target_Tuple}=1
+		export Target_Tuple="${Target_Arch}_${Target_Env}"
+		export ${Target_Tuple}=1
+		export Target_Tuple="${Target_Os}_${Target_Env}"
+		export ${Target_Tuple}=1
 		export Target_Tuple="${Target_Os}_${Target_Arch}_${Target_Env}"
 	fi
 	

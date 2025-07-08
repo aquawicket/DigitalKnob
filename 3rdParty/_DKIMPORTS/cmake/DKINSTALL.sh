@@ -18,7 +18,7 @@ DKINSTALL() {
 	echo "cmake_Import = ${cmake_Import}"
 	
 	echo "Target_Tuple = ${Target_Tuple}"
-	[ -n "${Linux}" ] && cmake_Import="${cmake_Linux_X86_64_Import}"
+	[ -n "${Linux_X86_64}" ] && cmake_Import="${cmake_Linux_X86_64_Import}"
 	
 	dk_call dk_assertVar cmake_Import
 

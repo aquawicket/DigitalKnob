@@ -100,6 +100,11 @@ dk_Host_Arch() {
 #		fi
 	fi
 	
+	[ "${Host_Arch}" = "arm32" ]  && Host_Arch="Arm32"
+	[ "${Host_Arch}" = "arm64" ]  && Host_Arch="Arm64"
+	[ "${Host_Arch}" = "x86" ]    && Host_Arch="X86"
+	[ "${Host_Arch}" = "x86_64" ] && Host_Arch="X86_64"
+	
 	#dk_call dk_printVar Host_Arch
 	export ${Host_Arch}_Host=1
 }
