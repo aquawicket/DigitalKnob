@@ -10,9 +10,13 @@ DKINSTALL() {
 #	dk_debugFunc 0
 
 	dk_call dk_getFileParams "$(dk_call dk_dirname ${BASH_SOURCE[0]})/dkconfig.txt"
+	echo "cmake_Linux_X86_64_Import = ${cmake_Linux_X86_64_Import}"
+	
 	dk_call dk_validate Host_Tuple "dk_Host_Tuple"
-	cmake_Import="cmake_${Host_Tuple}_Import"
-	cmake_Import="${!cmake_Import}"
+	cmake_ImportA="cmake_${Host_Tuple}_Import"
+	cmake_Import="${!cmake_ImportA}"
+	echo "cmake_Import = ${cmake_Import}"
+	
 	dk_call dk_assertVar cmake_Import
 
 	if dk_call dk_isUrl "${cmake_Import}"; then

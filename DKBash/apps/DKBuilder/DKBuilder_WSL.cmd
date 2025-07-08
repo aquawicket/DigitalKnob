@@ -1,4 +1,4 @@
-C:/Windows/System32/wsl.exe /mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_buildMain.sh
+C:/Windows/System32/wsl.exe /mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/apps/DKBuilder/DKBuilder.sh
 
 exit /b 0
 
