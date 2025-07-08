@@ -14,8 +14,11 @@ DKINSTALL() {
 	
 	dk_call dk_validate Host_Tuple "dk_Host_Tuple"
 	cmake_ImportA="cmake_${Host_Tuple}_Import"
-	cmake_Import="${!cmake_ImportA}"
+	cmake_Import="${cmake_ImportA}"  # for unknown reasons variable indirection isn't working on WSL here.  aka. ${!variable}
 	echo "cmake_Import = ${cmake_Import}"
+	
+	echo "Target_Tuple = ${Target_Tuple}"
+	[ -n "${Linux}" ] && cmake_Import="${cmake_Linux_X86_64_Import}"
 	
 	dk_call dk_assertVar cmake_Import
 
@@ -48,7 +51,7 @@ DKINSTALL() {
 		dk_call dk_smartExtract "${DKDOWNLOAD_DIR}"/"${cmake_Import_FILE}" "${DKTOOLS_DIR}"
 		dk_call dk_pathExists "${CMAKE_EXE}" || dk_call dk_error "cannot find cmake.exe"; return -1
 
-	else	# linux package
+	else	# Linux package
 		dk_call dk_info "Installing CMake from package managers"
 		
 		$(command -v cmake) && CMAKE_EXE=$(command -v cmake)

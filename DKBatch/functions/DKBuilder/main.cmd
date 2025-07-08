@@ -86,6 +86,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if defined Target_Type	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Type_Cache=%Target_Type%")
 		
 		
+		::### If we are on windows, we can build linux through WSL (Windows Subsystem fo Linux)
+		:: wslpath -u 
+		if "%Target_Os%" equ "Linux" (
+			set "WSL_EXE=C:/Windows/System32/wsl.exe"
+			set "DKBASH_APPS_DIR=/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/apps"
+			%WSL_EXE% %DKBASH_APPS_DIR%/DKBuilder/DKBuilder.sh
+			goto while_loop
+		)
+		
+		::### Pass the Target variables to CMake to take over
 		::########### CMAKE Command ###################
 		%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
 		%dk_call% dk_chdir %DKCPP_APPS_DIR%/%Target_App%

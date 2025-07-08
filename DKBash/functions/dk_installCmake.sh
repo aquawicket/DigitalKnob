@@ -25,7 +25,7 @@ dk_installCmake() {
 	[ "${Host_Tuple}" = "Linux_Arm64" ]         		&& CMAKE_IMPORT=${CMake_Linux_Arm64_Import}
 	[ "${Host_Tuple}" = "Raspberry_Arm64" ]     		&& CMAKE_IMPORT=${CMake_Linux_Arm64_Import}
 	[ "${Host_Tuple}" = "Linux_X86_64" ]        		&& CMAKE_IMPORT=${CMake_Linux_X86_64_Import}
-	[ "${Host_Os}" = "mac" ]                     		&& CMAKE_IMPORT=${CMake_Mac_X86_64_Import}
+	[ "${Host_Os}" = "Mac" ]                     		&& CMAKE_IMPORT=${CMake_Mac_X86_64_Import}
 	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm32" ]  	&& CMAKE_IMPORT=${CMake_Windows_Arm32_Import}
 	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm64" ]  	&& CMAKE_IMPORT=${CMake_Windows_Arm64_Import}
 	[ "${Host_Os}_${Host_Arch}" = "Windows_X86" ]    	&& CMAKE_IMPORT=${CMake_Windows_X86_Import}
@@ -73,7 +73,7 @@ dk_installCmake() {
         
 		dk_call dk_pathExists "${CMAKE_EXE}" || dk_call dk_error "cannot find cmake"
 
-	else	# linux package
+	else	# Linux package
 		dk_call dk_info "Installing CMake from package managers"
 		
 		export CMAKE_EXE="$(command -v cmake)" || $(true)

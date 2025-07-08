@@ -32,8 +32,8 @@ try() {
 #	<arch>    = arm, arm64, X86, X86_64, wasm32, wasm64
 #    <sub>    = i.e on ARM: v5, v6m, v7a, v7m, etc.
 #   <vendor>  = pc, apple
-#   <os>      = darwin, emscripten, ios, linux, macosx, win32, wasi
-#   <env>     = gnu, android, musl, msvc, simulator
+#   <os>      = darwin, emscripten, ios, Linux, macosx, win32, wasi
+#   <env>     = gnu, Android, musl, msvc, simulator
 #    <format> = coff, elf, wasm
 #
 #
@@ -173,7 +173,7 @@ dk_Host_Tuple() {
 		if dk_call dk_containsCI "$(try uname -o)" "GNU"; then
 			UNAME_ENV="-gnu"
 		elif dk_call dk_containsCI "$(try uname -o)" "Android"; then
-			UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
+			UNAME_ENV="-Android" #FIXME: need abi number I.E. -android24
 		else
 			UNAME_ENV="gcc" # Default
 		fi
@@ -195,17 +195,17 @@ dk_Host_Tuple() {
 	### Get the Host_Os ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	if dk_call dk_containsCI "${UNAME_a}" "Android"; then
-		Host_Os="android"
+		Host_Os="Android"
 	elif dk_call dk_containsCI "${UNAME_a}" "Darwin"; then
-		Host_Os="mac"
+		Host_Os="Mac"
 	elif dk_call dk_containsCI "${UNAME_a}" "raspberrypi"; then
 		Host_Os="Raspberry"
  	elif dk_call dk_containsCI "${UNAME_a}" "LiNuX"; then
-		Host_Os="linux"
+		Host_Os="Linux"
 	elif dk_call dk_containsCI "${UNAME_a}" "Msys"; then
-		Host_Os="win"
+		Host_Os="Windows"
 	elif dk_call dk_containsCI "${UNAME_a}" "Cygwin"; then
-		Host_Os="win"
+		Host_Os="Windows"
 	else
 		dk_call dk_error "Unsupported Host_Os: ${UNAME_a}"
 	fi
@@ -331,7 +331,7 @@ dk_Host_Tuple() {
 	#dk_call dk_printVar ${Host_Tuple}
 
 # OBSOLETE - remove me
-#	if [ "${Host_Os}" = "win" ]; then
+#	if [ "${Host_Os}" = "Windows" ]; then
 #		Host_Env=clang
 #		Host_Tuple=${Host_Tuple}_${Host_Env}
 #		#Host_Tuple=${Host_Arch}-${Host_Vendor}-${Host_Os}

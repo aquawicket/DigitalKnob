@@ -197,7 +197,7 @@ CYGPATH_EXE(){
 DKSCRIPT_VARS(){
 	#echo "DKSCRIPT_VARS()"
 	
-	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0}))	 	# Windows subsystem for linux
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0}))	 	# Windows subsystem for Linux
 	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}))		# Git for Windows	
 	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0})														# Default
     [ -e "${DKSCRIPT_PATH}" ]	 && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}" || (echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"; exit ${BASH_LINENO[0]};)    
@@ -256,7 +256,7 @@ dk_installPackage() {
 	
     (command -v ${1} &>/dev/null) && return $(true) 
     echo "installing ${1}. . ."
-    (command -v apk)           					&& ${SUDO_EXE} apk add ${1} && return				# Alpine Package Keeper (alpine linux)
+    (command -v apk)           					&& ${SUDO_EXE} apk add ${1} && return				# Alpine Package Keeper (alpine Linux)
 	(command -v apt-get)       					&& ${SUDO_EXE} apt-get -y install ${1} && return	# Apt-get (debian)
 	(command -v apt)           					&& ${SUDO_EXE} apt -y install ${1} && return		# Apt (debian)
 	(command -v brew)          					&& ${SUDO_EXE} brew install ${1} && return			# Homebrew (MacOS)
@@ -267,7 +267,7 @@ dk_installPackage() {
 	(command -v pkg &>/dev/null)           		&& ${SUDO_EXE} pkg install ${1} && return			# Termux
 	(command -v pacman &>/dev/null)        		&& ${SUDO_EXE} pacman -S ${1} && return				# Pacman
 	(command -v swupd &>/dev/null)         		&& ${SUDO_EXE} swupd bundle-add ${1} && return		# Swupd
-	(command -v tce-load &>/dev/null)      		&& ${SUDO_EXE} tce-load -wil ${1} && return 	   	# Tiny core linux
+	(command -v tce-load &>/dev/null)      		&& ${SUDO_EXE} tce-load -wil ${1} && return 	   	# Tiny core Linux
 	(command -v winget &>/dev/null)        		&& ${SUDO_EXE} winget install ${1} && return		# WinGet
 	(command -v xbps-install &>/dev/null)		&& ${SUDO_EXE} xbps-install ${1} && return			# Xbps
 	(command -v zypper &>/dev/null)				&& ${SUDO_EXE} zypper in ${1} && return				# Zypper

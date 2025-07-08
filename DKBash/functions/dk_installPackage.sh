@@ -25,7 +25,7 @@ dk_installPackage() {
 	dk_call dk_info "dk_installPackage() installing ${1}. . ."
 	
 	if (command -v apk); then
-		dk_run ${SUDO_EXE} apk add "${1}"					# Alpine Package Keeper (alpine linux)
+		dk_run ${SUDO_EXE} apk add "${1}"					# Alpine Package Keeper (alpine Linux)
 		return
 	elif (command -v apt-get); then
 		dk_run ${SUDO_EXE} apt-get -y install "${1}"		# Apt-get (debian)
@@ -59,7 +59,7 @@ dk_installPackage() {
 		dk_run ${SUDO_EXE} swupd bundle-add "${1}"			# Swupd
 		return
 	elif (command -v tce-load); then
-		dk_run ${SUDO_EXE} tce-load -wil "${1}"     		# Tiny core linux
+		dk_run ${SUDO_EXE} tce-load -wil "${1}"     		# Tiny core Linux
 		return
 	elif (command -v winget); then
 		dk_run ${SUDO_EXE} winget install "${1}"			# WinGet

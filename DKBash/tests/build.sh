@@ -816,13 +816,13 @@ dk_installCmake() {
 		dk_toLower CMAKE_FOLDER
 		dk_printVar CMAKE_FOLDER
 		
-		if [ "${Host_Os}" = "win" ]; then
+		if [ "${Host_Os}" = "Windows" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake.exe
 		elif [ "${Host_Os}" = "Mac" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
-		elif [ "${Host_Os}" = "linux" ]; then
+		elif [ "${Host_Os}" = "Linux" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
-		elif [ "${Host_Os}" = "raspberry" ]; then
+		elif [ "${Host_Os}" = "Raspberry" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
 		else
 			dk_error "no cmake for this OS"
@@ -840,7 +840,7 @@ dk_installCmake() {
 		
 		#if ! dk_pathExists ${CMAKE_EXE}; then error "cannot find cmake"; fi
 
-	else	# linux package
+	else	# Linux package
 		dk_info "Installing CMake from package managers"
 		
 		CMAKE_EXE=$(command -v cmake)
@@ -2251,16 +2251,16 @@ dk_Host_Tuple() {
 
 	### Get the Host_Os ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	if dk_contains "${UNAME_a}" "Android"; then			# android
-		Host_Os="android"
-	elif dk_contains "${UNAME_a}" "Darwin"; then			# Mac
+	if dk_contains "${UNAME_a}" "Android"; then			# Android
+		Host_Os="Android"
+	elif dk_contains "${UNAME_a}" "Darwin"; then		# Mac
 		Host_Os="Mac"
-	elif dk_contains "${UNAME_a}" "raspberrypi"; then	# raspberry
-		Host_Os="raspberry"
- 	elif dk_contains "${UNAME_a}" "Linux"; then			# linux
-		Host_Os="linux"
-	elif dk_contains "${UNAME_a}" "Msys"; then			# win
-		Host_Os="win"
+	elif dk_contains "${UNAME_a}" "raspberrypi"; then	# Raspberry
+		Host_Os="Raspberry"
+ 	elif dk_contains "${UNAME_a}" "Linux"; then			# Linux
+		Host_Os="Linux"
+	elif dk_contains "${UNAME_a}" "Msys"; then			# Windows
+		Host_Os="Windows"
 	else
 		dk_error "Unsupported Host_Os: ${UNAME_a}"
 	fi

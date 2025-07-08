@@ -127,7 +127,7 @@ function Global:dk_generate() {
 	}
 	
 	
-	::###### linux (WSL) ######
+	::###### Linux (WSL) ######
 	if($DK_SHELL){ $DKSCRIPT_DIR = $DKSCRIPT_DIR -replace "C:", "/mnt/c"; }
 	if($DK_SHELL){ $DKSCRIPT_DIR = $DKSCRIPT_DIR -replace '\\', '/'; }
 	if($DK_SHELL){ dk_call "C:\Windows\System32\wsl.exe" bash -c "export UPDATE=1 && export Target_App=${Target_App} && export Target_Tuple=${Target_Tuple} && export Target_Type=${Target_Type} && ${DKSCRIPT_DIR}/DKBuilder.sh && exit $(true)"; }

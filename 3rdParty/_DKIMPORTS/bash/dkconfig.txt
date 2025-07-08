@@ -4,7 +4,7 @@
 #	HOST		SHELL		BASH	Target_Os
 #----------------------------------------------------
 #	Android		termux		bash	Android
-#	linux		tinycore	bash	Android, Linux
+#	Linux		tinycore	bash	Android, Linux
 #	Linux		ubuntu		bash	Android, Linux
 #	Mac     	osx			bash	Mac, Ios, Iossim
 #	Raspbery	pi			bash	Raspbery
