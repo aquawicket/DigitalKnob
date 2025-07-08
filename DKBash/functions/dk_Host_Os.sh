@@ -101,6 +101,7 @@ dk_Host_Os() {
 #		fi
 	fi
 	
+	[ "${Host_Os}" = "linux" ] && Host_Os="Linux"
 	export ${Host_Os}_Host=1
 }
 
