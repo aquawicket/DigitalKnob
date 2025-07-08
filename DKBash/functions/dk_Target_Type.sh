@@ -14,8 +14,8 @@ dk_Target_Type() {
 	dk_call dk_echo
 	dk_echo "${Target_App-} ${Target_Tuple-} ${Target_Type-}"
 	dk_echo	
-    dk_echo " 1) Debug"
-	dk_echo " 2) Release"
+	dk_echo " 1) Release"
+    dk_echo " 2) Debug"
 	dk_echo " 3) All"
 	dk_echo " 4) Clear Screen"
 	dk_echo " 5) Go Back"
@@ -26,9 +26,9 @@ dk_Target_Type() {
 	dk_call dk_keyboardInputTimeout choice 1 60 
 	
 	if [ "${choice}" = "1" ]; then
-		Target_Type="Debug"
-	elif [ "${choice}" = "2" ]; then
 		Target_Type="Release"
+	elif [ "${choice}" = "2" ]; then
+		Target_Type="Debug"
 	elif [ "${choice}" = "3" ]; then
 		Target_Type="All"
 	elif [ "${choice}" = "4" ]; then

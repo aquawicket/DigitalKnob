@@ -11,8 +11,8 @@ function Global:dk_Target_Type() {
 	dk_call dk_echo "\n";
 	dk_call dk_echo "${Target_App} ${Target_Tuple} ${Target_Type}"
 	dk_call dk_echo	
-    dk_call dk_echo " 1) Debug"
-	dk_call dk_echo " 2) Release"
+	dk_call dk_echo " 1) Release" 
+	dk_call dk_echo " 2) Debug"
 	dk_call dk_echo " 3) All"
 	dk_call dk_echo " 4) Clear Screen"
 	dk_call dk_echo " 5) Go Back"
@@ -20,8 +20,8 @@ function Global:dk_Target_Type() {
 	dk_call dk_echo "\n";
 	
 	dk_call dk_keyboardInput;
-	    if(${dk_keyboardInput} -eq "1"){ ${global:Target_Type} = "Debug" }
-	elseif(${dk_keyboardInput} -eq "2"){ ${global:Target_Type} = "Release" }
+	    if(${dk_keyboardInput} -eq "1"){ ${global:Target_Type} = "Release" }
+	elseif(${dk_keyboardInput} -eq "2"){ ${global:Target_Type} = "Debug" }
 	elseif(${dk_keyboardInput} -eq "3"){ ${global:Target_Type} = "All" }
 	elseif(${dk_keyboardInput} -eq "4"){ dk_call dk_clearScreen }
 	elseif(${dk_keyboardInput} -eq "5"){ dk_call dk_unset Target_Type }
